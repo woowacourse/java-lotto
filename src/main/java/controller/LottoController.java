@@ -42,17 +42,6 @@ public class LottoController {
         }
     }
 
-    public static LottoResult calculateLottoResult(Tickets tickets,
-                                                   WinningLottoTicket winningLottoTicket) {
-        LottoResult lottoResult = new LottoResult();
-        lottoResult.calculateWinningCount(tickets, winningLottoTicket);
-        return lottoResult;
-    }
-
-    public static void calculateProfit(Money money, LottoResult lottoResult) {
-        lottoResult.calculateProfitPercent(money);
-    }
-
     public static ManualLottoTicketCount getManualLottoTicketCount(int allLottoTicketCount, int inputManualLottoCount) {
         try {
             ManualLottoTicketCount manualLottoTicketCount = new ManualLottoTicketCount(allLottoTicketCount,

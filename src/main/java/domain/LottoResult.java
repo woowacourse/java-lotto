@@ -10,8 +10,10 @@ public class LottoResult {
     private Map<PrizeType, Integer> prizeInfo;
     private ProfitPercent profitPercent;
 
-    public LottoResult() {
+    public LottoResult(LottoTickets lottoTickets, WinningLottoTicket winningLottoTicket, Money money) {
         initializePrizeInfo();
+        calculateWinningCount(lottoTickets, winningLottoTicket);
+        calculateProfitPercent(money);
     }
 
     private void initializePrizeInfo() {
@@ -23,7 +25,7 @@ public class LottoResult {
         this.prizeInfo.put(PrizeType.SIX, INITIAL_COUNT);
     }
 
-    public void calculateWinningCount(Tickets tickets, WinningLottoTicket winningLottoTicket) {
+    private void calculateWinningCount(Tickets tickets, WinningLottoTicket winningLottoTicket) {
         countWinningLottoNumber(tickets, winningLottoTicket);
     }
 
@@ -66,7 +68,7 @@ public class LottoResult {
         this.prizeInfo.put(prizeType, originalPrizeCount + 1);
     }
 
-    public void calculateProfitPercent(Money money) {
+    private void calculateProfitPercent(Money money) {
         int totalPrizeMoney = 0;
         for (PrizeType prizeType : PrizeType.values()) {
             totalPrizeMoney = totalPrizeMoney + prizeType.calculatePrizeMoney(getPrizeTypeValue(prizeType));

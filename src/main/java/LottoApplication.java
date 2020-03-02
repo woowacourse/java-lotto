@@ -22,8 +22,7 @@ public class LottoApplication {
                 InputViewer.inputWinningLottoTicketNumber());
         LottoController.getBonusBall(winningLottoTicket, InputViewer.inputBonusBallNumber());
 
-        LottoResult lottoResult = LottoController.calculateLottoResult(lottoTickets, winningLottoTicket);
-        LottoController.calculateProfit(money, lottoResult);
+        LottoResult lottoResult = new LottoResult(lottoTickets, winningLottoTicket, money);
         OutputViewer.printResult(lottoResult);
     }
 }
