@@ -23,7 +23,7 @@ public class Lottos {
 
     public Lottos addLottos(Lottos lottosToAdd) {
         this.lottos.addAll(lottosToAdd.getLottos());
-        return new Lottos(lottos);
+        return this;
     }
 
     public Set<LottoNumber> getLottoNumbers(int index) {
