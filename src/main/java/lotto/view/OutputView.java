@@ -38,6 +38,6 @@ public class OutputView {
     }
 
     public static void printProfit(Profit profit) {
-        System.out.println(String.format("총 수익률은 %d%%입니다.", profit.getProfitWithoutDecimalPoint()));
+        System.out.printf("총 수익률은 %d%%입니다.", profit.getProfitWithoutDecimalPoint());
     }
 }
