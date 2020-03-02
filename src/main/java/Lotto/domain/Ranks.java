@@ -29,6 +29,7 @@ public class Ranks {
     public long addAllRankReward() {
         return ranks.keySet()
                 .stream()
+                .filter(Objects::nonNull)
                 .mapToLong(rank -> ranks.get(rank) * rank.getRankReward())
                 .sum();
     }

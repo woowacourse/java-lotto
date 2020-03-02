@@ -4,10 +4,11 @@ import java.util.List;
 
 public class LottoConcat {
     public static Lottos concatLottos(Lottos autoLottos, Lottos manualLottos) {
-        List<Lotto> allLotto = autoLottos.getLottos();
-        if (manualLottos != null) {
-            allLotto.addAll(manualLottos.getLottos());
+        if (manualLottos == null) {
+            return autoLottos;
         }
-        return new Lottos(allLotto);
+        List<Lotto> allLottos = autoLottos.getLottos();
+        allLottos.addAll(manualLottos.getLottos());
+        return new Lottos(allLottos);
     }
 }

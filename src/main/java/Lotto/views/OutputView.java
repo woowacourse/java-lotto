@@ -2,7 +2,7 @@ package Lotto.views;
 
 import Lotto.domain.*;
 
-import java.util.Map;
+import java.util.Objects;
 
 public class OutputView {
     private static final String PURCHASED_LOTTO_MESSAGE = "수동으로 %d장, 자동으로 %d장을 구매했습니다.\n";
@@ -21,12 +21,17 @@ public class OutputView {
         if (manualLottos != null) {
             System.out.println(manualLottos.getLottosInOneLine());
         }
-        System.out.println(autoLottos.getLottosInOneLine());
+        if (autoLottos != null) {
+            System.out.println(autoLottos.getLottosInOneLine());
+        }
+        System.out.println();
     }
 
     public static void showStatistics(Ranks ranks) {
+        System.out.println("<<당첨 결과>>");
         ranks.getRanks().keySet()
                 .stream()
+                .filter(Objects::nonNull)
                 .sorted()
                 .forEach(rank -> System.out.printf(STATISTICS_FORMAT, rank.getHitCount(), printBonus(rank),
                         rank.getRankReward(), ranks.getRanks().get(rank), NEW_LINE));
