@@ -1,13 +1,14 @@
 package lotto.domain.ticket;
 
-import lotto.domain.random.MockLottoNumberGenerator;
-import lotto.domain.ticket.LottoTickets;
-import lotto.domain.ticket.LottoTicketsFactory;
+import lotto.domain.number.SerialLottoNumber;
+import lotto.domain.number.SerialLottoNumberFactory;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoTicketsFactoryTest {
 	@Test
@@ -16,12 +17,16 @@ public class LottoTicketsFactoryTest {
 		List<String> input = Arrays.asList("1,2,3,4,5,6",
 				"5,6,2,1,8,13",
 				"1,2,6,43,45,34");
+		ManualLottoTicketsFactory manualLottoTicketsFactory = new ManualLottoTicketsFactory(input);
 
 		// when
-		LottoTickets result = LottoTicketsFactory.of(input);
+		LottoTickets result = LottoTicketsFactory.of(manualLottoTicketsFactory);
 
 		// then
-		Assertions.assertThat(result).isEqualTo(LottoTicketsFactory.of(input));
+		List<SerialLottoNumber> expected = input.stream()
+				.map(SerialLottoNumberFactory::of)
+				.collect(Collectors.toList());
+		Assertions.assertThat(result).isEqualTo(new LottoTickets(expected));
 
 	}
 
@@ -29,14 +34,16 @@ public class LottoTicketsFactoryTest {
 	void createByRandom() {
 		// given
 		int input = 3;
-		MockLottoNumberGenerator given = new MockLottoNumberGenerator();
+		MockAutoLottoTicketsFactory autoLottoTicketsFactory = new MockAutoLottoTicketsFactory(input);
 
 		// when
-		LottoTickets result = LottoTicketsFactory.of(input, given);
+		LottoTickets result = LottoTicketsFactory.of(autoLottoTicketsFactory);
 
 		// then
 		String mockTicket = "1,2,3,4,5,6";
-		LottoTickets expected = LottoTicketsFactory.of(Arrays.asList(mockTicket, mockTicket, mockTicket));
-		Assertions.assertThat(result).isEqualTo(expected);
+		List<SerialLottoNumber> expected = Stream.of(mockTicket, mockTicket, mockTicket)
+				.map(SerialLottoNumberFactory::of)
+				.collect(Collectors.toList());
+		Assertions.assertThat(result).isEqualTo(new LottoTickets(expected));
 	}
 }

@@ -5,7 +5,7 @@ import lotto.domain.number.LottoNumber;
 import lotto.domain.number.SerialLottoNumber;
 import lotto.domain.number.SerialLottoNumberFactory;
 import lotto.domain.ticket.LottoTickets;
-import lotto.domain.ticket.LottoTicketsFactory;
+import lotto.domain.ticket.ManualLottoTicketsFactory;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -51,7 +51,7 @@ class LottoResultTest {
 		serialLottoNumbers.add("10,11,12,13,14,15");
 		serialLottoNumbers.add("16,17,18,19,20,21");
 		serialLottoNumbers.add("21,22,23,24,25,26");
-		LottoTickets lottoTickets = LottoTicketsFactory.of(serialLottoNumbers);
+		LottoTickets lottoTickets = new ManualLottoTicketsFactory(serialLottoNumbers).create();
 
 		// when
 		LottoResult lottoResult = LottoResult.of(winning, lottoTickets);

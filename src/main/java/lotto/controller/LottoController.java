@@ -5,11 +5,12 @@ import lotto.domain.money.TicketCount;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.SerialLottoNumber;
 import lotto.domain.number.SerialLottoNumberFactory;
-import lotto.domain.random.RandomLottoNumberGenerator;
 import lotto.domain.result.LottoResult;
+import lotto.domain.result.Winning;
+import lotto.domain.ticket.AutoLottoTicketsFactory;
 import lotto.domain.ticket.LottoTickets;
 import lotto.domain.ticket.LottoTicketsFactory;
-import lotto.domain.result.Winning;
+import lotto.domain.ticket.ManualLottoTicketsFactory;
 import lotto.exceptions.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -41,7 +42,7 @@ public class LottoController {
 
 		LottoTickets manualLottoTickets = validManualLottoTicket(ticketCount.getManualTicketCount());
 		LottoTickets autoLottoTickets
-				= LottoTicketsFactory.of(ticketCount.getAutoTicketCount(), new RandomLottoNumberGenerator());
+				= LottoTicketsFactory.of(new AutoLottoTicketsFactory(ticketCount.getAutoTicketCount()));
 
 		LottoTickets lottoTickets = LottoTickets.merge(manualLottoTickets, autoLottoTickets);
 
@@ -62,7 +63,9 @@ public class LottoController {
 
 	private static LottoTickets validManualLottoTicket(int manualTicketCount) {
 		try {
-			return LottoTicketsFactory.of(InputView.inputManualLottoTicket(manualTicketCount));
+			ManualLottoTicketsFactory manualLottoTicketsFactory
+					= new ManualLottoTicketsFactory(InputView.inputManualLottoTicket(manualTicketCount));
+			return LottoTicketsFactory.of(manualLottoTicketsFactory);
 		} catch (NumberFormatException | NotSixSizeException | LottoNumberIllegalException e) {
 			OutputView.printExceptionMessage(e.getMessage());
 			return validManualLottoTicket(manualTicketCount);
