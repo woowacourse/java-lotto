@@ -1,4 +1,5 @@
-import controller.LottoGame;
+package controller;
+
 import domain.*;
 import view.InputView;
 import view.OutputView;
@@ -10,9 +11,16 @@ public class LottoGameApplication {
         ManualCount manualCount = inputManualCountWithValidation(money);
         LottoCount lottoCount = new LottoCount(money.getLottoCount(), manualCount.getManualCount());
 
-        LottoGame lottoGame = new LottoGame(lottoCount);
-        lottoGame.calculateResults();
-        lottoGame.showResult(money);
+        Lottos lottos = LottosGenerator.generateTotal(lottoCount);
+        OutputView.printLottos(lottoCount, lottos);
+        WinningNumber winningNumber = inputWinningNumberWithValidation();
+        LottoGame lottoGame = new LottoGame(lottos, winningNumber);
+
+        LottoResult lottoResult = new LottoResult();
+        lottoGame.calculateResults(lottoResult);
+
+        OutputView.printResult(lottoResult);
+        OutputView.printProfitRatio(money.calculateProfitRatio(lottoResult));
     }
 
     private static Money inputPurchaseAmountWithValidation() {
@@ -30,6 +38,15 @@ public class LottoGameApplication {
         } catch (IllegalArgumentException e) {
             OutputView.printExceptionMessage(e);
             return inputManualCountWithValidation(money);
+        }
+    }
+
+    private static WinningNumber inputWinningNumberWithValidation() {
+        try {
+            return new WinningNumber(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
+        } catch (IllegalArgumentException | NullPointerException e) {
+            OutputView.printExceptionMessage(e);
+            return inputWinningNumberWithValidation();
         }
     }
 

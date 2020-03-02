@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoRankTest {
     @Test
-    @DisplayName("당첨번호 매칭 개수와 보너스 번 매칭여부로 로또 등수 확인")
+    @DisplayName("당첨번호 매칭 개수와 보너스 번호 매칭여부로 로또 등수 확인")
     void findLottoRankWithMatchingCount() {
         assertThat(LottoRank.findRank(6, false)).isEqualTo(LottoRank.FIRST);
         assertThat(LottoRank.findRank(5, true)).isEqualTo(LottoRank.SECOND);
