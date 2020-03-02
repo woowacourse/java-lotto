@@ -1,27 +1,32 @@
 package domain.numberscontainer;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/*
+ * 6개의 숫자로 이루어진 집합
+ */
 public class LottoNumbers {
     private static final int SIZE = 6;
+    public static final String LOTTO_NUMBER_SPLITTER = ",";
 
     protected final Set<LottoNumber> lottoNumbers;
 
     public LottoNumbers(Set<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = Collections.unmodifiableSet(lottoNumbers);
     }
 
     public LottoNumbers(String value) {
         Set<LottoNumber> lottoNumbers = toLottoNumbers(value);
         validateSize(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = Collections.unmodifiableSet(lottoNumbers);
     }
 
     private Set<LottoNumber> toLottoNumbers(String value) {
-        return Arrays.asList(value.split(",")).stream()
+        return Arrays.asList(value.split(LOTTO_NUMBER_SPLITTER)).stream()
                 .map(String::trim)
                 .mapToInt(Integer::parseInt)
                 .mapToObj(LottoNumber::get)

@@ -16,7 +16,7 @@ public class LottoApplication {
         OutputView.printTickets(tickets);
 
         final WinningNumbers winningNumbers = new WinningNumbers(InputView.enterLastWeekWinningNumbers(), Integer.parseInt(InputView.enterBonusNumber()));
-        final Map<LottoResult, Integer> result = LottoResultMachine.calculateResult(tickets, winningNumbers);
+        final LottoResult result = LottoResultMachine.calculateResult(tickets, winningNumbers);
         OutputView.printLottoResults(result);
         OutputView.printProfit(LottoProfit.ofProfit(result, money));
     }

@@ -11,11 +11,11 @@ public class LottoProfit {
         this.profit = profit;
     }
 
-    public static LottoProfit ofProfit(Map<LottoResult, Integer> lottoResults, Money money) {
+    public static LottoProfit ofProfit(LottoResult lottoResult, Money money) {
         long totalPrize = 0;
-        for (LottoResult result : lottoResults.keySet()) {
-            long prize = result.getPrize();
-            long matchCount = lottoResults.get(result);
+        for (LottoRank rank : lottoResult.keySet()) {
+            long prize = rank.getPrize();
+            long matchCount = lottoResult.count(rank);
             totalPrize += prize * matchCount;
         }
         return new LottoProfit(totalPrize / money.getValue() * TO_PERCENTAGE);

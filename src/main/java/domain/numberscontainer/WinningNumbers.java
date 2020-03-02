@@ -1,6 +1,6 @@
 package domain.numberscontainer;
 
-import domain.LottoResult;
+import domain.LottoRank;
 
 public class WinningNumbers extends LottoNumbers {
 
@@ -18,10 +18,10 @@ public class WinningNumbers extends LottoNumbers {
         }
     }
 
-    public LottoResult getLottoResult(Ticket ticket) {
+    public LottoRank getLottoRank(Ticket ticket) {
         int matchCount = findDuplicatedNumbers(ticket);
         boolean isBonus = ticket.contains(bonusNumber);
-        return LottoResult.findLottoResult(matchCount, isBonus);
+        return LottoRank.findLottoRank(matchCount, isBonus);
     }
 
     public int findDuplicatedNumbers(Ticket ticket) {

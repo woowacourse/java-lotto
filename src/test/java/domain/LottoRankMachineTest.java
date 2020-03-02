@@ -8,20 +8,20 @@ import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoResultMachineTest {
+public class LottoRankMachineTest {
     @Test
     @DisplayName("당첨 결과 계산")
     void test1() {
         Tickets tickets = Tickets.createTickets(6,6, createFixedNumbers());
         WinningNumbers winningNumbers = new WinningNumbers("3, 4, 5, 6, 7, 8", 9);
-        Map<LottoResult, Integer> lottoResults = LottoResultMachine.calculateResult(tickets, winningNumbers);
+        LottoResult lottoResult = LottoResultMachine.calculateResult(tickets, winningNumbers);
 
-        assertThat(lottoResults.get(LottoResult.FIRST)).isEqualTo(1);
-        assertThat(lottoResults.get(LottoResult.SECOND)).isEqualTo(1);
-        assertThat(lottoResults.get(LottoResult.THIRD)).isEqualTo(1);
-        assertThat(lottoResults.get(LottoResult.FOURTH)).isEqualTo(1);
-        assertThat(lottoResults.get(LottoResult.FIFTH)).isEqualTo(1);
-        assertThat(lottoResults.get(LottoResult.FAILED)).isEqualTo(1);
+        assertThat(lottoResult.count(LottoRank.FIRST)).isEqualTo(1);
+        assertThat(lottoResult.count(LottoRank.SECOND)).isEqualTo(1);
+        assertThat(lottoResult.count(LottoRank.THIRD)).isEqualTo(1);
+        assertThat(lottoResult.count(LottoRank.FOURTH)).isEqualTo(1);
+        assertThat(lottoResult.count(LottoRank.FIFTH)).isEqualTo(1);
+        assertThat(lottoResult.count(LottoRank.FAILED)).isEqualTo(1);
     }
 
     @Test
@@ -31,8 +31,8 @@ public class LottoResultMachineTest {
         Tickets tickets = Tickets.createTickets(6, 6, createFixedNumbers());
         WinningNumbers winningNumbers = new WinningNumbers("3, 4, 5, 6, 7, 8", 9);
 
-        Map<LottoResult, Integer> lottoResults = LottoResultMachine.calculateResult(tickets, winningNumbers);
-        LottoProfit profit = LottoProfit.ofProfit(lottoResults, money);
+        LottoResult lottoResult = LottoResultMachine.calculateResult(tickets, winningNumbers);
+        LottoProfit profit = LottoProfit.ofProfit(lottoResult, money);
         assertThat(profit.getValue()).isEqualTo(33859200);
     }
 

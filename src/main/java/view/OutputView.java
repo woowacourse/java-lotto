@@ -1,10 +1,9 @@
 package view;
 
 import domain.LottoProfit;
+import domain.LottoRank;
 import domain.LottoResult;
 import domain.numberscontainer.Tickets;
-
-import java.util.Map;
 
 public class OutputView {
     private static final String MANUAL_AND_RANDOM_TICKET_SIZE_MESSAGE = "수동으로 %d장, 자동으로 %d장을 구매했습니다.";
@@ -22,16 +21,16 @@ public class OutputView {
         System.out.println(tickets);
     }
 
-    public static void printLottoResults(Map<LottoResult, Integer> lottoResults) {
+    public static void printLottoResults(LottoResult lottoResults) {
         System.out.println(LOTTO_RESULT_TITLE + System.lineSeparator() + LOTTO_RESULT_SEPARATOR);
 
-        for (LottoResult result : LottoResult.values()) {
-            System.out.println(String.format(findProperFormat(result), result.getMatchCount(), result.getPrize(), convertNullToZero(lottoResults.get(result))));
+        for (LottoRank rank : LottoRank.values()) {
+            System.out.println(String.format(findProperFormat(rank), rank.getMatchCount(), rank.getPrize(), convertNullToZero(lottoResults.count(rank))));
         }
     }
 
-    private static String findProperFormat(LottoResult result) {
-        if (result == LottoResult.SECOND) {
+    private static String findProperFormat(LottoRank result) {
+        if (result == LottoRank.SECOND) {
             return LOTTO_RESULT_MESSAGE_FOR_BONUS;
         }
         return LOTTO_RESULT_MESSAGE;

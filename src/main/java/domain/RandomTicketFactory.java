@@ -17,7 +17,6 @@ public class RandomTicketFactory {
         List<LottoNumber> lottoNumbers = Arrays.asList(LottoNumber.values());
         Collections.shuffle(lottoNumbers);
 
-        return new LinkedHashSet<>(lottoNumbers.subList(FIRST_INDEX, SIXTH_INDEX));
+        return Collections.unmodifiableSet(new LinkedHashSet<>(lottoNumbers.subList(FIRST_INDEX, SIXTH_INDEX)));
     }
-
 }

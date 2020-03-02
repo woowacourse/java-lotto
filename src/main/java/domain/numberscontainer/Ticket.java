@@ -4,19 +4,15 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Ticket extends LottoNumbers {
-
     private static final String TICKET_DELIMITER = ", ";
     private static final String START_MARK = "[";
     private static final String END_MARK = "]";
 
-//    private final LottoNumbers lottoNumbers;
-
-    public Ticket(String lottoNumbers) {
-//        this.lottoNumbers = lottoNumbers;
+    public Ticket(Set<LottoNumber> lottoNumbers) {
         super(lottoNumbers);
     }
 
-    public Ticket(Set<LottoNumber> lottoNumbers) {
+    public Ticket(String lottoNumbers) {
         super(lottoNumbers);
     }
 
