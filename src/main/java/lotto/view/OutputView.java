@@ -3,7 +3,7 @@ package lotto.view;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.SerialLottoNumber;
 import lotto.domain.result.LottoResult;
-import lotto.domain.result.LottoTickets;
+import lotto.domain.ticket.LottoTickets;
 import lotto.domain.result.Rank;
 
 import java.util.Map;

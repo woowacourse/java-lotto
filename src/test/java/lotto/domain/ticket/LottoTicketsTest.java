@@ -1,8 +1,12 @@
-package lotto.domain.result;
+package lotto.domain.ticket;
 
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.SerialLottoNumber;
 import lotto.domain.number.SerialLottoNumberFactory;
+import lotto.domain.result.Rank;
+import lotto.domain.result.Winning;
+import lotto.domain.ticket.LottoTickets;
+import lotto.domain.ticket.LottoTicketsFactory;
 import lotto.util.ListBuilder;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

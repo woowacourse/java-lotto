@@ -4,6 +4,8 @@ import lotto.domain.money.Money;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.SerialLottoNumber;
 import lotto.domain.number.SerialLottoNumberFactory;
+import lotto.domain.ticket.LottoTickets;
+import lotto.domain.ticket.LottoTicketsFactory;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -42,14 +44,14 @@ class LottoResultTest {
 		LottoNumber bonusNumber = LottoNumber.of(8);
 		Winning winning = new Winning(winningNumbers, bonusNumber);
 
-		List<SerialLottoNumber> serialLottoNumbers = new ArrayList<>();
-		serialLottoNumbers.add(SerialLottoNumberFactory.of("1,2,3,4,5,6"));
-		serialLottoNumbers.add(SerialLottoNumberFactory.of("2,3,4,5,6,7"));
-		serialLottoNumbers.add(SerialLottoNumberFactory.of("3,4,5,6,7,8"));
-		serialLottoNumbers.add(SerialLottoNumberFactory.of("10,11,12,13,14,15"));
-		serialLottoNumbers.add(SerialLottoNumberFactory.of("16,17,18,19,20,21"));
-		serialLottoNumbers.add(SerialLottoNumberFactory.of("21,22,23,24,25,26"));
-		LottoTickets lottoTickets = new LottoTickets(serialLottoNumbers);
+		List<String> serialLottoNumbers = new ArrayList<>();
+		serialLottoNumbers.add("1,2,3,4,5,6");
+		serialLottoNumbers.add("2,3,4,5,6,7");
+		serialLottoNumbers.add("3,4,5,6,7,8");
+		serialLottoNumbers.add("10,11,12,13,14,15");
+		serialLottoNumbers.add("16,17,18,19,20,21");
+		serialLottoNumbers.add("21,22,23,24,25,26");
+		LottoTickets lottoTickets = LottoTicketsFactory.of(serialLottoNumbers);
 
 		// when
 		LottoResult lottoResult = LottoResult.of(winning, lottoTickets);

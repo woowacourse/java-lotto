@@ -1,6 +1,8 @@
-package lotto.domain.result;
+package lotto.domain.ticket;
 
 import lotto.domain.number.SerialLottoNumber;
+import lotto.domain.result.Rank;
+import lotto.domain.result.Winning;
 import lotto.util.ListBuilder;
 
 import java.util.*;

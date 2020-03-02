@@ -1,4 +1,4 @@
-package lotto.domain.result;
+package lotto.domain.ticket;
 
 import lotto.domain.number.SerialLottoNumber;
 import lotto.domain.number.SerialLottoNumberFactory;

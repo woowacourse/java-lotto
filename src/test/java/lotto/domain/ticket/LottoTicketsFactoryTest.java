@@ -1,8 +1,8 @@
-package lotto.domain.result;
+package lotto.domain.ticket;
 
-import lotto.domain.number.SerialLottoNumber;
-import lotto.domain.number.SerialLottoNumberFactory;
 import lotto.domain.random.MockLottoNumberGenerator;
+import lotto.domain.ticket.LottoTickets;
+import lotto.domain.ticket.LottoTicketsFactory;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
