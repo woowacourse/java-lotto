@@ -25,10 +25,5 @@ public class ManualCreationStrategy implements LottoCreationStrategy {
                     .collect(Collectors.toList())));
         }
         return new Lottos(result);
-//        for (int i = 0; i < lottoCount.getManualCount(); i++) {
-//            lottos.add(new Lotto(InputView.requestManualLotto().stream()
-//                    .map(Ball::valueOf)
-//                    .collect(Collectors.toList())));
-//        }
     }
 }

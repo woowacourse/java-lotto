@@ -22,16 +22,16 @@ public class Ball implements Comparable<Ball> {
         this.number = number;
     }
 
-    public static List<Ball> getShuffledLottoNumbers() {
-        List<Ball> balls = new ArrayList<>(BALL_CACHE.values());
-        Collections.shuffle(balls);
-        return Collections.unmodifiableList(balls);
-    }
-
     private void validate(int number) {
         if (number < MIN_NUMBER || MAX_NUMBER < number) {
             throw new InvalidInputException(String.format("%d 이상 %d 이하의 숫자만 가능합니다.", MIN_NUMBER, MAX_NUMBER));
         }
+    }
+
+    public static List<Ball> getShuffledLottoNumbers() {
+        List<Ball> balls = new ArrayList<>(BALL_CACHE.values());
+        Collections.shuffle(balls);
+        return Collections.unmodifiableList(balls);
     }
 
     public static Ball valueOf(int number) {
@@ -40,14 +40,6 @@ public class Ball implements Comparable<Ball> {
 
     public static Ball valueOf(String number) {
         return new Ball(Integer.parseInt(number));
-    }
-
-    public static List<Ball> generateAllBalls() {
-        List<Ball> result = new ArrayList<>();
-        for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
-            result.add(new Ball(i));
-        }
-        return result;
     }
 
     public int getNumber() {
