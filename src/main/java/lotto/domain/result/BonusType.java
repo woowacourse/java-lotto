@@ -4,8 +4,8 @@ import java.util.function.Function;
 
 public enum BonusType {
 	NO_MATTER(isBonusMatching -> true),
-	TRUE(isBonusMatching -> isBonusMatching),
-	FALSE(isBonusMatching -> !isBonusMatching);
+	TRUE(isBonusMatching -> isBonusMatching.equals(true)),
+	FALSE(isBonusMatching -> isBonusMatching.equals(false));
 
 	private Function<Boolean, Boolean> match;
 
