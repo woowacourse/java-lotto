@@ -1,6 +1,7 @@
 package domain.lottostore;
 
-import domain.Money;
+import domain.buyinginformation.BuyingInformation;
+import domain.buyinginformation.Money;
 import domain.lottonumbers.LottoTicket;
 import domain.lottonumbers.lottonumber.LottoNumber;
 
@@ -11,15 +12,15 @@ import java.util.Set;
 
 import static java.util.stream.Collectors.toSet;
 
-public class RandomLottoStore implements LottoStore<Money> {
+public class RandomBuyingStrategy implements BuyingStrategy<Money> {
 
     private static final Random random = new Random();
 
     @Override
     public List<LottoTicket> generateTickets(Money money) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        int numberOfTickets = money.getNumberOfTickets();
 
+        int numberOfTickets = money.getNumberOfTickets();
         for (int i = 0; i < numberOfTickets; i++) {
             Set<LottoNumber> newRandomLottoNumbers = parseNumbersToLottoNumbers(generateRandomNumbers());
             lottoTickets.add(new LottoTicket(newRandomLottoNumbers));

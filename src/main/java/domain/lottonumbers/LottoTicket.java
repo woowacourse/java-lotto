@@ -2,6 +2,7 @@ package domain.lottonumbers;
 
 import domain.lottonumbers.lottonumber.LottoNumber;
 
+import java.util.Objects;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -32,6 +33,14 @@ public class LottoTicket {
         return (int) this.lottoNumbers.stream()
                 .filter(comparingTicket::contains)
                 .count();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoTicket that = (LottoTicket) o;
+        return Objects.equals(lottoNumbers, that.lottoNumbers);
     }
 
     @Override

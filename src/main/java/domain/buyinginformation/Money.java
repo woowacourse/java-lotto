@@ -22,6 +22,10 @@ public class Money {
         return (int) this.money / TICKET_PRICE;
     }
 
+    public Money getRemainedMoney(int numberOfTickets) {
+        return new Money(money - numberOfTickets * TICKET_PRICE);
+    }
+
     /* 금액 제한 현실 반영 */
     private void validateMoneyRange(long money) {
         if (money < MIN_MONEY || money > MAX_MONEY) {

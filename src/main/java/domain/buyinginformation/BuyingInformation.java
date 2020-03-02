@@ -9,17 +9,13 @@ public class BuyingInformation {
     private Money buyingMoney;
     private List<LottoTicket> manualTickets;
 
-    BuyingInformation (Money buyingMoney) {
-        this(buyingMoney, null);
-    }
-
-    BuyingInformation (Money buyingMoney, List<LottoTicket> manualTickets) {
+    public BuyingInformation (Money buyingMoney, List<LottoTicket> manualTickets) {
         this.buyingMoney = buyingMoney;
         this.manualTickets = manualTickets;
     }
 
-    public Money getBuyingMoney() {
-        return buyingMoney;
+    public Money getMoneyAfterBuyingManualTickets() {
+        return buyingMoney.getRemainedMoney(manualTickets.size());
     }
 
     public List<LottoTicket> getManualTickets() {
