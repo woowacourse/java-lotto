@@ -2,7 +2,8 @@ package lotto.domain;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.EmptySource;
+import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -10,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(strings = {"1", "45"})
-    void validateNumber_정상적인_숫자일_때(String validNumber) {
+    void 정상적인_숫자일_때(String validNumber) {
         new LottoNumber(validNumber);
     }
 
@@ -39,10 +40,18 @@ public class LottoNumberTest {
     }
 
     @ParameterizedTest
-    @NullAndEmptySource
-    void validateEmpty_빈_문자_또는_NULL(String emptyValue) {
+    @EmptySource
+    void validateNumber_빈_문자를_입력했을_때(String emptyValue) {
         assertThatThrownBy(() -> new LottoNumber(emptyValue))
                 .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("정수로 입력하셔야 합니다.");
+    }
+
+    @ParameterizedTest
+    @NullSource
+    void validateNotNull_NULL을_입력했을_때(String nullValue) {
+        assertThatThrownBy(() -> new LottoNumber(nullValue))
+                .isInstanceOf(NullPointerException.class)
                 .hasMessage("로또 번호가 입력되지 않았습니다.");
     }
 }

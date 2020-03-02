@@ -1,10 +1,13 @@
 package lotto.domain;
 
-import lotto.generator.LottoGenerator;
+import lotto.generator.ManualLottoGenerator;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullSource;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -14,7 +17,8 @@ public class WinningLottoTest {
 
     @BeforeAll
     static void init() {
-        lotto =  LottoGenerator.create("1, 2, 3, 4, 5, 6");
+        List<String> lottoNumbers = Arrays.asList("1", "2", "3", "4", "5", "6");
+        lotto = ManualLottoGenerator.createLotto(lottoNumbers);
     }
 
     @Test
@@ -33,17 +37,17 @@ public class WinningLottoTest {
 
     @ParameterizedTest
     @NullSource
-    void validateEmpty_로또번호_NULL(Lotto emptyValue) {
-        assertThatThrownBy(() -> new WinningLotto(emptyValue, new LottoNumber(1)))
-                .isInstanceOf(IllegalArgumentException.class)
+    void validateNotNull_로또번호_NULL(Lotto nullValue) {
+        assertThatThrownBy(() -> new WinningLotto(nullValue, new LottoNumber(1)))
+                .isInstanceOf(NullPointerException.class)
                 .hasMessage("로또 번호가 입력되지 않았습니다.");
     }
 
     @ParameterizedTest
     @NullSource
-    void validateEmpty_보너스번호_NULL(LottoNumber emptyValue) {
-        assertThatThrownBy(() -> new WinningLotto(lotto, emptyValue))
-                .isInstanceOf(IllegalArgumentException.class)
+    void validateNotNull_보너스번호_NULL(LottoNumber nullValue) {
+        assertThatThrownBy(() -> new WinningLotto(lotto, nullValue))
+                .isInstanceOf(NullPointerException.class)
                 .hasMessage("보너스 번호가 입력되지 않았습니다.");
     }
 
@@ -58,7 +62,8 @@ public class WinningLottoTest {
     @Test
     void computeMatchCount_두_로또_사이에_일치하는_로또번호가_없을_때() {
         int expected = 0;
-        Lotto lotto = LottoGenerator.create("11, 12, 13, 14, 15, 16");
+        List<String> lottoNumbers = Arrays.asList("11", "12", "13", "14", "15", "16");
+        Lotto lotto = ManualLottoGenerator.createLotto(lottoNumbers);
         WinningLotto winningLotto = new WinningLotto(lotto, new LottoNumber("45"));
 
         assertThat(winningLotto.computeMatchCount(lotto) == expected);
