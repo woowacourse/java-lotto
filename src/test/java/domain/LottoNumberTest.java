@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoNumberTest {
     @Test
-    @DisplayName("옳은 입력으로 로또넘버 생성")
+    @DisplayName("1~45의 범위 안에서 로또넘버 생성")
     void rightInputTest() {
         LottoNumber lottoNumber = LottoNumber.of(1);
         assertThat(LottoNumber.of(1)).isEqualTo(lottoNumber);
@@ -19,7 +19,7 @@ public class LottoNumberTest {
     }
 
     @ParameterizedTest
-    @DisplayName("잘못된 입력으로 로또넘버 생성 시도 시에 Exception 처리")
+    @DisplayName("1~45의 범위 밖의 로또넘버 생성 시도 시에 Exception 처리")
     @ValueSource(ints = {0, 46, 1000})
     void wrongInputTest(int input) {
         assertThatThrownBy(() -> {
