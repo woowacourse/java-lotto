@@ -26,7 +26,8 @@ public class LottoResult {
     }
 
     private double getTotalPrize() {
-        return rankToCount.keySet().stream()
+        return rankToCount.keySet()
+                .stream()
                 .mapToLong(rank -> rank.getWinningMoneyByCount(rankToCount.get(rank)))
                 .sum();
     }

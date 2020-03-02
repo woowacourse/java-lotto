@@ -36,14 +36,14 @@ public class LottoTickets {
     }
 
     public LottoResult getLottoResults(WinningLotto winningLotto) {
-        Map<Rank, Integer> rankMap = Arrays.stream(Rank.values())
-                .collect(Collectors.toMap(Function.identity(), value -> 0));
+        Map<Rank, Integer> rankToCount = Arrays.stream(Rank.values())
+                .collect(Collectors.toMap(Function.identity(), rank -> 0));
 
         lottoTickets.stream()
                 .map(winningLotto::checkOutRank)
-                .forEach(rank -> rankMap.computeIfPresent(rank, (key, value) -> value + 1));
+                .forEach(rank -> rankToCount.computeIfPresent(rank, (key, value) -> value + 1));
 
-        return new LottoResult(rankMap);
+        return new LottoResult(rankToCount);
     }
 
     public List<String> getLottoTickets() {
