@@ -53,31 +53,31 @@ public class LottoController {
         }
     }
 
-    public static List<LottoTicket> concatManualTicketsWithAutoTickets(Tickets manualLottoTickets,
-                                                                       Tickets autoLottoTickets) {
-        List<LottoTicket> manualLottoTicketList = manualLottoTickets.getTickets();
-        List<LottoTicket> autoLottoTicketList = autoLottoTickets.getTickets();
-        List<LottoTicket> lottoTickets = Stream.concat(manualLottoTicketList.stream(), autoLottoTicketList.stream())
-                .collect(Collectors.toList());
-        return lottoTickets;
-    }
-
     public static LottoTickets getLottoTickets(int manualLottoTicketCounts, int autoLottoTicketCount) {
-        ManualLottoTickets manualLottoTickets = getManualLottoTickets(manualLottoTicketCounts);
-        AutoLottoTickets autoLottoTickets = (AutoLottoTickets) TicketsFactory.getTickets(autoLottoTicketCount);
+        Tickets manualLottoTickets = getManualLottoTickets(manualLottoTicketCounts);
+        Tickets autoLottoTickets = TicketsFactory.getTickets(autoLottoTicketCount);
         LottoTickets lottoTickets = new LottoTickets(
                 concatManualTicketsWithAutoTickets(manualLottoTickets, autoLottoTickets));
         return lottoTickets;
     }
 
-    private static ManualLottoTickets getManualLottoTickets(int manualLottoTicketCounts) {
+    private static Tickets getManualLottoTickets(int manualLottoTicketCounts) {
         try {
             List<String> manualLottoTicketsNumbers = InputViewer.inputManualLottoTicketNumber(manualLottoTicketCounts);
             Tickets manualLottoTickets = TicketsFactory.getTickets(manualLottoTicketsNumbers);
-            return (ManualLottoTickets) manualLottoTickets;
+            return manualLottoTickets;
         } catch (IllegalArgumentException e) {
             OutputViewer.printErrorMessage(e.getMessage());
             return getManualLottoTickets(manualLottoTicketCounts);
         }
+    }
+
+    private static List<LottoTicket> concatManualTicketsWithAutoTickets(Tickets manualLottoTickets,
+                                                                        Tickets autoLottoTickets) {
+        List<LottoTicket> manualLottoTicketList = manualLottoTickets.getTickets();
+        List<LottoTicket> autoLottoTicketList = autoLottoTickets.getTickets();
+        List<LottoTicket> lottoTickets = Stream.concat(manualLottoTicketList.stream(), autoLottoTicketList.stream())
+                .collect(Collectors.toList());
+        return lottoTickets;
     }
 }

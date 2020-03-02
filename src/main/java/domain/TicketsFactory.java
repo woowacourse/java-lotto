@@ -3,6 +3,9 @@ package domain;
 import java.util.List;
 
 public class TicketsFactory {
+    private TicketsFactory() {
+    }
+
     public static Tickets getTickets(Object object) {
         TicketsCreator ticketsCreator;
         if (object instanceof Integer) {

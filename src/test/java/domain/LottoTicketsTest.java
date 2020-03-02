@@ -5,28 +5,30 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class LottoTicketsTest {
-    @DisplayName("concat 을 통해 ManualLottoTickets 와 AutoLottoTickets 가 합쳐지는지 테스트")
+    @DisplayName("LottoController 를 이용해 LottoTickets 가 제대로 생성되는지 테스트")
     @Test
     void concatManualLottoTicketsWithAutoLottoTicketsTest() {
-        List<String> input = new ArrayList(Arrays.asList(
-                "1, 2, 3, 4, 5, 6",
-                "3, 4, 5, 6, 7, 8"
-        ));
-        ManualLottoTickets manualLottoTickets = new ManualLottoTickets(
-                ManualLottoTicketsGenerator.generateManualLottoTickets(input));
-        Money money = new Money(14000);
-        List<LottoTicket> autoLottoTicketList = AutoLottoTicketsGenerator.generateAutoLottoTickets(
-                money.getLottoTicketCount());
-        AutoLottoTickets autoLottoTickets = new AutoLottoTickets(autoLottoTicketList);
+        String numbers = "1, 2, 3, 4, 5, 6\n2, 3, 4, 5, 6, 7\n3, 4, 5, 6, 7, 8";
+        InputStream in = new ByteArrayInputStream(numbers.getBytes());
+        System.setIn(in);
 
-        LottoTickets lottoTickets = new LottoTickets(LottoController.concatManualTicketsWithAutoTickets(
-                manualLottoTickets, autoLottoTickets));
+        ManualLottoTickets manualLottoTickets = new ManualLottoTickets(
+                ManualLottoTicketsGenerator.generateManualLottoTickets(
+                        new ArrayList(Arrays.asList(
+                                "1, 2, 3, 4, 5, 6",
+                                "2, 3, 4, 5, 6, 7",
+                                "3, 4, 5, 6, 7, 8"
+                        ))
+                ));
+
+        LottoTickets lottoTickets = LottoController.getLottoTickets(3, 2);
+        Assertions.assertThat(lottoTickets.getTickets().size()).isEqualTo(5);
         Assertions.assertThat(lottoTickets.getTickets()).containsSequence(manualLottoTickets.getTickets());
-        Assertions.assertThat(lottoTickets.getTickets()).containsSequence(autoLottoTickets.getTickets());
     }
 }
