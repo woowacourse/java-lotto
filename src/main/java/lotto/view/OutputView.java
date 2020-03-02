@@ -12,6 +12,11 @@ public class OutputView {
 
     private OutputView() { /* prevent creating OutputView instance */ }
 
+    public static void printLottosInformation(LottoCount lottoCount, Lottos lottos) {
+        printLottoCount(lottoCount);
+        printLottos(lottos);
+    }
+
     public static void printLottoCount(LottoCount lottoCount) {
         System.out.println(
                 String.format("\n수동으로 %d장, 자동으로 %d장을 구매했습니다.", lottoCount.getManualCount(), lottoCount.getAutomaticCount()));

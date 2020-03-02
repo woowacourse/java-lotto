@@ -5,13 +5,13 @@ import lotto.exception.InvalidInputException;
 public class LottoCount {
     private static final int MINIMUM_COUNT = 0;
 
+    private final int totalCount;
     private final int manualCount;
-    private final int automaticCount;
 
     public LottoCount(int totalCount, int manualCount) {
         checkRange(totalCount, manualCount);
+        this.totalCount = totalCount;
         this.manualCount = manualCount;
-        this.automaticCount = totalCount - manualCount;
     }
 
     private void checkRange(int totalCount, int manualCount) {
@@ -28,6 +28,6 @@ public class LottoCount {
     }
 
     public int getAutomaticCount() {
-        return automaticCount;
+        return totalCount - manualCount;
     }
 }
