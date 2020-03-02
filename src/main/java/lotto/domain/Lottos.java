@@ -15,15 +15,15 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public List<Lotto> getLottos() {
-        return Collections.unmodifiableList(lottos);
-    }
-
-    public void addAll(List<Lotto> lottoBundle) {
-        this.lottos.addAll(lottoBundle);
+    public void concat(Lottos lottos) {
+        this.lottos.addAll(lottos.getLottos());
     }
 
     public void add(Lotto lotto) {
         this.lottos.add(lotto);
+    }
+
+    public List<Lotto> getLottos() {
+        return Collections.unmodifiableList(lottos);
     }
 }

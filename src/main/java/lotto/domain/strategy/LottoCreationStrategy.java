@@ -1,9 +1,7 @@
 package lotto.domain.strategy;
 
-import lotto.domain.Lotto;
-
-import java.util.List;
+import lotto.domain.Lottos;
 
 public interface LottoCreationStrategy {
-    public List<Lotto> create(int count);
+    public Lottos create();
 }

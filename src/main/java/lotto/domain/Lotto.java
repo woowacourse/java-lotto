@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 public class Lotto {
-    private static final int BALLS_COUNT = 6;
+    public static final int BALLS_COUNT = 6;
     private static final int WINNING_BALLS_COUNT = 6;
 
     private final List<Ball> balls;

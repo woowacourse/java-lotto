@@ -1,5 +1,6 @@
 package lotto.view;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -31,6 +32,14 @@ public class InputView {
         int lottoCount = scanner.nextInt();
         scanner.nextLine();
         return lottoCount;
+    }
+
+    public static List<List<String>> requestManualLottos(int count) {
+        List<List<String>> result = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            result.add(requestManualLotto());
+        }
+        return result;
     }
 
     public static List<String> requestManualLotto() {

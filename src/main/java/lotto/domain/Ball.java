@@ -7,11 +7,11 @@ import java.util.*;
 public class Ball implements Comparable<Ball> {
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
-    private static final Map<Integer, Ball> balls = new HashMap<>();
+    private static final Map<Integer, Ball> BALL_CACHE = new HashMap<>();
 
     static {
         for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
-            balls.put(i, new Ball(i));
+            BALL_CACHE.put(i, new Ball(i));
         }
     }
 
@@ -20,6 +20,12 @@ public class Ball implements Comparable<Ball> {
     public Ball(int number) {
         validate(number);
         this.number = number;
+    }
+
+    public static List<Ball> getShuffledLottoNumbers() {
+        List<Ball> balls = new ArrayList<>(BALL_CACHE.values());
+        Collections.shuffle(balls);
+        return Collections.unmodifiableList(balls);
     }
 
     private void validate(int number) {
