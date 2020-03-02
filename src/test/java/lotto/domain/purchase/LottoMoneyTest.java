@@ -95,4 +95,17 @@ public class LottoMoneyTest {
 		long expected = (winningLottoMoney / value) * 100;
 		assertThat(actual).isEqualTo(expected);
 	}
+
+	@Test
+	void measureWinningRate_AmountOfPurchaseLottoMoneyIsZero_ZeroWinningRate() {
+		long winningLottoMoney = 3_000_000;
+		long value = 0L;
+		LottoMoney lottoMoney = new LottoMoney(winningLottoMoney);
+		LottoMoney amountOfPurchaseLottoMoney = new LottoMoney(value);
+
+		long actual = lottoMoney.measureWinningRate(amountOfPurchaseLottoMoney);
+
+		long expected = 0;
+		assertThat(actual).isEqualTo(expected);
+	}
 }

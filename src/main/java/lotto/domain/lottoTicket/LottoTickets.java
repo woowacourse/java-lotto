@@ -33,10 +33,6 @@ public class LottoTickets {
 		return lottoTickets;
 	}
 
-	public int getLottoTicketsSize() {
-		return lottoTickets.size();
-	}
-
 	@Override
 	public boolean equals(Object object) {
 		if (this == object) {
