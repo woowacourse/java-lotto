@@ -10,20 +10,21 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoNumberTest {
-    @ParameterizedTest
+    @Test
     @DisplayName("옳은 입력으로 로또넘버 생성")
-    @ValueSource(ints = {1, 5, 45})
-    void rightInputTest(int input) {
-        LottoNumber lottoNumber = new LottoNumber(input);
-        assertThat(lottoNumber).isNotNull();
+    void rightInputTest() {
+        LottoNumber lottoNumber = LottoNumber.of(1);
+        assertThat(LottoNumber.of(1)).isEqualTo(lottoNumber);
+        assertThat(LottoNumber.of(1) == LottoNumber.of(1)).isTrue();
     }
 
     @ParameterizedTest
     @DisplayName("잘못된 입력으로 로또넘버 생성 시도 시에 Exception 처리")
     @ValueSource(ints = {0, 46, 1000})
     void wrongInputTest(int input) {
-        assertThatThrownBy(() -> new LottoNumber(input))
-                .isInstanceOf(IllegalArgumentException.class)
+        assertThatThrownBy(() -> {
+            LottoNumber.of(input);
+        }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("범위");
     }
 

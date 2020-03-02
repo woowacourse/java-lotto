@@ -22,7 +22,7 @@ public class NumberParser {
                 .map(String::trim)
                 .filter(t -> !t.isEmpty())
                 .map(NumberParser::validateInputIsNumber)
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
     }
 
