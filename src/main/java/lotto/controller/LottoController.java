@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.money.Money;
+import lotto.domain.money.TicketCount;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.SerialLottoNumber;
 import lotto.domain.number.SerialLottoNumberFactory;
@@ -36,28 +37,26 @@ public class LottoController {
 	}
 
 	private static LottoTickets createLottoTickets(Money purchaseMoney) {
-		int manualTicketCount = validManualTicketCount(purchaseMoney);
-		int autoTicketCount = purchaseMoney.totalTicketCount() - manualTicketCount;
+		TicketCount ticketCount = validTicketCount(purchaseMoney);
 
-		LottoTickets manualLottoTickets = validManualLottoTicket(manualTicketCount);
-		LottoTickets autoLottoTickets = LottoTicketsFactory.of(autoTicketCount, new RandomLottoNumberGenerator());
+		LottoTickets manualLottoTickets = validManualLottoTicket(ticketCount.getManualTicketCount());
+		LottoTickets autoLottoTickets
+				= LottoTicketsFactory.of(ticketCount.getAutoTicketCount(), new RandomLottoNumberGenerator());
 
 		LottoTickets lottoTickets = LottoTickets.merge(manualLottoTickets, autoLottoTickets);
 
-		OutputView.printLottoTicketsCount(manualTicketCount, autoTicketCount);
+		OutputView.printLottoTicketsCount(ticketCount.getManualTicketCount(), ticketCount.getAutoTicketCount());
 		OutputView.printLottoTickets(lottoTickets);
 
 		return lottoTickets;
 	}
 
-	private static int validManualTicketCount(Money purchaseMoney) {
+	private static TicketCount validTicketCount(Money purchaseMoney) {
 		try {
-			int manualTicketCount = InputView.inputManualTicketCount();
-			purchaseMoney.checkCanBuy(manualTicketCount);
-			return manualTicketCount;
+			return TicketCount.of(purchaseMoney.totalTicketCount(), InputView.inputManualTicketCount());
 		} catch (TicketCountIllegalException e) {
 			OutputView.printExceptionMessage(e.getMessage());
-			return validManualTicketCount(purchaseMoney);
+			return validTicketCount(purchaseMoney);
 		}
 	}
 

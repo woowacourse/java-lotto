@@ -32,12 +32,6 @@ public class Money {
 		}
 	}
 
-	public void checkCanBuy(int ticketCount) {
-		if (ticketCount < POSITIVE_THRESHOLD || ticketCount > totalTicketCount()) {
-			throw new TicketCountIllegalException();
-		}
-	}
-
 	public int totalTicketCount() {
 		return money / LOTTO_TICKET_PRICE;
 	}

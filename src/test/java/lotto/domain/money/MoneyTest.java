@@ -1,7 +1,6 @@
 package lotto.domain.money;
 
 import lotto.exceptions.MoneyIllegalException;
-import lotto.exceptions.TicketCountIllegalException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -43,21 +42,6 @@ class MoneyTest {
 		}).isInstanceOf(MoneyIllegalException.class)
 				.hasMessageMatching("-?[0-9]+는 적절하지 않은 금액입니다.\n" +
 						" - 0 이상의 1000의 배수로 입력해주세요.");
-	}
-
-	@ParameterizedTest
-	@CsvSource(value = {"5000,6", "0,1", "3000,10", "2000, -1"})
-	void checkCanBuy_NotPurchaseAvailable_ThrowException(int input, int given) {
-		// given
-		Money money = new Money(input);
-
-		// then
-		Assertions.assertThatThrownBy(() -> {
-			money.checkCanBuy(given);
-		}).isInstanceOf(TicketCountIllegalException.class)
-				.hasMessageMatching("구매한 금액 [0-9]+로 -?[0-9]+개의 티켓을 구매할 수 없습니다.\n" +
-						" - 티켓 갯수는 0 이상의 정수여야합니다.\n" +
-						" - 구매한 금액으로는 최대 [0-9]+개의 티켓을 구매하실 수 있습니다.");
 	}
 
 	@ParameterizedTest

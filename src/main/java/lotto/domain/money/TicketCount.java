@@ -26,6 +26,14 @@ public class TicketCount {
 		}
 	}
 
+	public int getManualTicketCount() {
+		return manualTicketCount;
+	}
+
+	public int getAutoTicketCount() {
+		return autoTicketCount;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
