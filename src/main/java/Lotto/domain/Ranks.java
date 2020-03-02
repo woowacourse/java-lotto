@@ -11,6 +11,13 @@ public class Ranks {
         lottos.getLottos().stream()
                 .map(t -> calculateSingleRank(t, winningNumber))
                 .forEach(this::incrementRanksCountIfExist);
+        putEmptyRanksZero();
+    }
+
+    private Rank calculateSingleRank(Lotto lotto, WinningNumber winningNumber) {
+        int hitCount = winningNumber.countHit(lotto);
+        boolean bonusNumberExist = winningNumber.hasBonusNumber(lotto);
+        return Rank.getRank(hitCount, bonusNumberExist);
     }
 
     private void incrementRanksCountIfExist(Rank t) {
@@ -22,10 +29,10 @@ public class Ranks {
         ranks.putIfAbsent(t, 1L);
     }
 
-    private Rank calculateSingleRank(Lotto lotto, WinningNumber winningNumber) {
-        int hitCount = winningNumber.countHit(lotto);
-        boolean bonusNumberExist = winningNumber.hasBonusNumber(lotto);
-        return Rank.getRank(hitCount, bonusNumberExist);
+    private void putEmptyRanksZero() {
+        for (Rank rank : Rank.values()) {
+            ranks.putIfAbsent(rank, 0L);
+        }
     }
 
     public long addAllRankReward() {
@@ -37,9 +44,6 @@ public class Ranks {
     }
 
     public Map<Rank, Long> getRanks() {
-        for (Rank rank : Rank.values()) {
-            ranks.putIfAbsent(rank, 0L);
-        }
         return ranks;
     }
 
