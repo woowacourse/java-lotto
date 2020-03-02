@@ -3,32 +3,43 @@ package domain;
 import view.InputView;
 import view.OutputView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LottoApplication {
     public static void run() {
         Money money = inputMoney();
-        ManualLottoTicketQuantity manualLottoTicketQuantity = inputManualLottoTicketCount(money);
+        LottoTicketCount lottoTicketCount = inputManualLottoTicketCount(money);
+        LottoTickets lottoTickets = buyLottoTickets(lottoTicketCount);
 
-        buyManualLottoTickets(money, manualLottoTicketQuantity);
-        LottoTickets lottoTickets = buyAutoLottoTickets(money, manualLottoTicketQuantity);
+        OutputView.printBuyTicketCount(lottoTicketCount);
+        OutputView.printLottoTickets(lottoTickets);
 
         LottoResults lottoResults = LottoManager.match(lottoTickets, inputWinningLottoTicket());
 
         OutputView.printWinningStatistics(lottoResults, money);
     }
 
-    public static void buyManualLottoTickets(Money money, ManualLottoTicketQuantity manualLottoTicketQuantity) {
-        InputView.inputManualLottoTicket(manualLottoTicketQuantity);
-        OutputView.printBuyTicketCount(money, manualLottoTicketQuantity);
+
+    public static List<String> readManualLottoTickets(ManualCount manualCount) {
+        InputView.printInputManualLottoTicket();
+
+        List<String> manualLottoTickets = new ArrayList<>();
+        for (int i = 0; i < manualCount.getManualCount(); i++) {
+            manualLottoTickets.add(InputView.inputManualLottoTicket());
+        }
+        return manualLottoTickets;
     }
 
-    public static LottoTickets buyAutoLottoTickets(Money money, ManualLottoTicketQuantity manualLottoTicketQuantity) {
-        LottoTickets lottoTickets = generateLottoTicketsByMoney(money, manualLottoTicketQuantity);
-        OutputView.printLottoTickets(lottoTickets);
+    public static LottoTickets buyLottoTickets(LottoTicketCount lottoTicketCount) {
+        ManualCount manualCount = lottoTicketCount.getManualCount();
+        AutoCount autoCount = lottoTicketCount.getAutoCount();
+
+        List<String> manualLottoTickets = readManualLottoTickets(manualCount);
+
+        LottoTickets lottoTickets = LottoManager.generateLottoTickets(manualLottoTickets, autoCount);
+
         return lottoTickets;
-    }
-
-    public static LottoTickets generateLottoTicketsByMoney(Money money, ManualLottoTicketQuantity manualLottoTicketQuantity) {
-        return new LottoTickets(LottoTicketsGenerator.generateAutoLottoTickets(manualLottoTicketQuantity.getAutoLottoTicketQuantity(money)));
     }
 
     public static Money inputMoney() {
@@ -39,7 +50,7 @@ public class LottoApplication {
         return new WinningLottoTicket(InputView.inputWinningNumber(), InputView.inputBonusNumber());
     }
 
-    public static ManualLottoTicketQuantity inputManualLottoTicketCount(Money money) {
-        return new ManualLottoTicketQuantity(money, InputView.inputBuyManualLottoTicketCount());
+    public static LottoTicketCount inputManualLottoTicketCount(Money money) {
+        return new LottoTicketCount(money, InputView.inputManualLottoTicketCount());
     }
 }

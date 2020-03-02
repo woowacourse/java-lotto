@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoNumberTest {
 
-    @DisplayName("Should_LottoNumber 유효성 통과_When_LottoNumber 생성")
+    @DisplayName("Should_LottoNumber 유효성 통과_When_LottoNumber 를 정수형으로 생성")
     @ParameterizedTest
     @ValueSource(ints = {0, 46})
     void LottoNumberConstructorTest(int input) {
@@ -17,7 +17,7 @@ public class LottoNumberTest {
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("Should_LottoNumber 유효성 통과_When_LottoNumber 가 bonusNumber 일 경우 생성")
+    @DisplayName("Should_LottoNumber 유효성 통과_When_LottoNumber 가 bonusNumber 일 경우(String으로 받았을 때) 생성")
     @ParameterizedTest
     @ValueSource(strings = {"0", "46", "", " ", "hello"})
     void LottoNumberConstructorTest(String input) {
