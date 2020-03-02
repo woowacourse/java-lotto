@@ -181,7 +181,7 @@
 
 ### 두번째 피드백 
 - [ ] LottoController 클래스 내 각 티켓 생성자의 반복문 중복을 제거하라.
-- [ ] TicketNumber 클래스 내 totalTicket 변수 제거.
+- [x] TicketNumber 클래스 내 totalTicket 변수 제거.
 - [ ] LottoTicket 클래스 내 lottoTicket의 Integer 값을 포장하라.
 - [ ] ManualTicket과 AutoTicket을 상속이 아닌 interface를 활용하라.
 - [ ] 테스트 코드 검토하라.
