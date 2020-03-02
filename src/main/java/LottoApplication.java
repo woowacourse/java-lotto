@@ -5,7 +5,6 @@ import domain.lottonumbers.WinningNumbers;
 import domain.lottonumbers.lottonumber.LottoNumber;
 import domain.lottostore.LottoStore;
 import domain.lottostore.ManualBuyingStrategy;
-import domain.lottostore.RandomBuyingStrategy;
 import domain.result.LottoResult;
 import view.InputView;
 import view.OutputView;

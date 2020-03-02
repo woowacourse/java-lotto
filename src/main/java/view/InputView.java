@@ -2,7 +2,6 @@ package view;
 
 import java.util.*;
 
-import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toSet;
 
 public class InputView {

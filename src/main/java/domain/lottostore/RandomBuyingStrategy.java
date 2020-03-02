@@ -1,6 +1,5 @@
 package domain.lottostore;
 
-import domain.buyinginformation.BuyingInformation;
 import domain.buyinginformation.Money;
 import domain.lottonumbers.LottoTicket;
 import domain.lottonumbers.lottonumber.LottoNumber;

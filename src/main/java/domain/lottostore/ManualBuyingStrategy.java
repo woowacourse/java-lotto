@@ -7,7 +7,7 @@ import domain.lottonumbers.LottoTicket;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManualBuyingStrategy implements BuyingStrategy<BuyingInformation>{
+public class ManualBuyingStrategy implements BuyingStrategy<BuyingInformation> {
 
     @Override
     public List<LottoTicket> generateTickets(BuyingInformation buyingInformation) {

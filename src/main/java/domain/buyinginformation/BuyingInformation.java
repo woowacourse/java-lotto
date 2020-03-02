@@ -9,7 +9,7 @@ public class BuyingInformation {
     private Money buyingMoney;
     private List<LottoTicket> manualTickets;
 
-    public BuyingInformation (Money buyingMoney, List<LottoTicket> manualTickets) {
+    public BuyingInformation(Money buyingMoney, List<LottoTicket> manualTickets) {
         this.buyingMoney = buyingMoney;
         this.manualTickets = manualTickets;
     }
