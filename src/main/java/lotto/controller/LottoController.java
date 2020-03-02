@@ -1,4 +1,4 @@
-package lotto;
+package lotto.controller;
 
 import lotto.domain.*;
 import lotto.view.InputView;
@@ -6,8 +6,8 @@ import lotto.view.OutputView;
 
 import java.util.stream.Collectors;
 
-public class LottoApplication {
-    public static void main(String[] args) {
+public class LottoController {
+    public void run() {
         PurchasePrice purchasePrice = new PurchasePrice(InputView.requestPurchasePrice());
         LottoCount lottoCount = new LottoCount(purchasePrice.calculateTotalLottoCount(), InputView.requestNumberOfManualLotto());
 
