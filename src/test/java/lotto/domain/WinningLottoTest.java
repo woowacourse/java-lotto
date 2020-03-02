@@ -27,7 +27,7 @@ class WinningLottoTest {
         LottoNumber bounusNumber = new LottoNumber(7);
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bounusNumber);
         //when & then
-        assertThat(winningLotto.match(lottos).getRanks()).contains(Rank.THIRD);
+        assertThat(winningLotto.match(lottos).getWinningRanks().keySet()).contains(Rank.THIRD);
     }
 
     @Test
@@ -46,6 +46,6 @@ class WinningLottoTest {
         LottoNumber bounusNumber = new LottoNumber(7);
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bounusNumber);
         //when & then
-        assertThat(winningLotto.match(lottos).getRanks()).isEmpty();
+        assertThat(winningLotto.match(lottos).getWinningRanks().keySet()).contains(Rank.NO_MATCH);
     }
 }

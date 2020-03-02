@@ -9,18 +9,15 @@ public enum Rank {
     SECOND(5, new Money(30_000_000)),
     THIRD(5, new Money(1_500_000)),
     FOURTH(4, new Money(50_000)),
-    FIFTH(3, new Money(5_000));
+    FIFTH(3, new Money(5_000)),
+    NO_MATCH(0, new Money(0));
 
-    private int matchNumber;
-    private Money winningMoney;
+    private final int matchNumber;
+    private final Money winningMoney;
 
     Rank(int matchNumber, Money winningMoney) {
         this.matchNumber = matchNumber;
         this.winningMoney = winningMoney;
-    }
-
-    static boolean isValid(int matchingNumber) {
-        return Arrays.stream(Rank.values()).anyMatch(rank -> rank.isSameMatchNumber(matchingNumber));
     }
 
     public int getMatchNumber() {
@@ -37,7 +34,7 @@ public enum Rank {
         }
 
         if (matchNumber < FIFTH.matchNumber) {
-            return null;
+            return NO_MATCH;
         }
 
         return Arrays.stream(Rank.values())

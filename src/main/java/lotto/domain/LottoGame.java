@@ -26,8 +26,7 @@ public class LottoGame {
     }
 
     private WinningRanks compareWithWinningNumbers(Lottos lottos, WinningLotto winningLotto) {
-        Ranks ranks = winningLotto.match(lottos);
-        return WinningRanksFactory.create(ranks);
+        return winningLotto.match(lottos);
     }
 
     private Lottos purchaseLottos(Money purchaseAmount, Money manualLottosAmount) {
