@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ManualLottosGenerator implements LottosGenerator {
-    private static final ManualLottoNumberGenerator manualLottoNumberGenerator = new ManualLottoNumberGenerator();
-
     private List<String> manualInputs;
 
     public ManualLottosGenerator(List<String> manualInputs) {
@@ -19,7 +17,7 @@ public class ManualLottosGenerator implements LottosGenerator {
     public Lottos generate() {
         if (manualInputs == null) return null;
         return new Lottos(manualInputs.stream()
-                .map(t -> new Lotto(manualLottoNumberGenerator.generate(t)))
+                .map(t -> new Lotto(NumberParser.parseIntoLottoNumbers(t)))
                 .collect(Collectors.toList()));
     }
 }
