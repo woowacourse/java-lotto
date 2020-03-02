@@ -36,7 +36,7 @@ public class LottoApplication {
 
     private static WinningLotto createWinningLotto() {
         Lotto winningLottoLine = Lotto.from(InputView.requestWinningLottoInput());
-        LottoNumber bonusNumber = LottoNumber.of(InputView.requestBonusNumberInput());
+        LottoNumber bonusNumber = LottoNumber.getInstance(InputView.requestBonusNumberInput());
         return new WinningLotto(winningLottoLine, bonusNumber);
     }
 

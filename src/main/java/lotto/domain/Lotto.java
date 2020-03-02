@@ -39,7 +39,7 @@ public class Lotto {
     private static List<LottoNumber> createLottoNumbers(String[] numbers) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (String number : numbers) {
-            lottoNumbers.add(LottoNumber.of(number.trim()));
+            lottoNumbers.add(LottoNumber.getInstance(number.trim()));
         }
         return lottoNumbers;
     }

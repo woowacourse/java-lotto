@@ -14,9 +14,13 @@ public class LottoFactory {
     private static Map<Integer, LottoNumber> createAllLottoNumbers() {
         Map<Integer, LottoNumber> allLottoNumbers = new HashMap<>();
         for (int number = MIN_VALUE; number <= MAX_VALUE; number++) {
-            allLottoNumbers.put(number, LottoNumber.of(number));
+            allLottoNumbers.put(number, LottoNumber.newInstance(number));
         }
         return allLottoNumbers;
+    }
+
+    public static LottoNumber pickLottoNumber(int value) {
+        return allLottoNumbers.get(value);
     }
 
     public static List<LottoNumber> createLottoNumbers() {
