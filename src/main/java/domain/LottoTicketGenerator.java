@@ -1,6 +1,6 @@
 package domain;
 
-import spark.utils.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,11 +9,14 @@ public class LottoTicketGenerator {
     private static final String DELIMITER = ", ";
 
     public static LottoTicket createLottoTicket(String input) {
+        validateNullOrBlank(input);
+
         List<LottoNumber> lottoTicket = new ArrayList<>();
-        for (String number : splitInputNumber(input)) {
-            validateBlank(number);
-            lottoTicket.add(LottoNumber.getLottoNumber(validateNumber(number)));
+
+        for (String inputNumber : splitInputNumber(input)) {
+            lottoTicket.add(LottoNumber.from(inputNumber));
         }
+
         return new LottoTicket(lottoTicket);
     }
 
@@ -21,17 +24,9 @@ public class LottoTicketGenerator {
         return input.split(DELIMITER);
     }
 
-    private static void validateBlank(String input) {
+    private static void validateNullOrBlank(String input) {
         if (StringUtils.isBlank(input)) {
-            throw new IllegalArgumentException("input값이 공백 또는 null입니다.");
-        }
-    }
-
-    private static int validateNumber(String input) {
-        try {
-            return Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("input값이 숫자가 아닙니다.");
+            throw new IllegalArgumentException(String.format("input값이 공백 또는 null입니다. 현재 input값은 %s 입니다.", input));
         }
     }
 }

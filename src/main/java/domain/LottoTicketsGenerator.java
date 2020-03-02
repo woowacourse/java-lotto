@@ -21,7 +21,7 @@ public class LottoTicketsGenerator {
 
     private static List<LottoNumber> createLottoNumbers() {
         return IntStream.rangeClosed(START_LOTTO_RANGE, END_LOTTO_RANGE)
-                .mapToObj(LottoNumber::getLottoNumber)
+                .mapToObj(LottoNumber::from)
                 .collect(Collectors.toList());
     }
 

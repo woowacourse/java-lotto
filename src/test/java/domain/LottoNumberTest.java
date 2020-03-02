@@ -13,7 +13,7 @@ public class LottoNumberTest {
     @ValueSource(ints = {0, 46})
     void LottoNumberConstructorTest(int input) {
         Assertions.assertThatThrownBy(() -> {
-            new LottoNumber(input);
+            LottoNumber.from(input);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -22,7 +22,7 @@ public class LottoNumberTest {
     @ValueSource(strings = {"0", "46", "", " ", "hello"})
     void LottoNumberConstructorTest(String input) {
         Assertions.assertThatThrownBy(() -> {
-            new LottoNumber(input);
+            LottoNumber.from(input);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -30,6 +30,6 @@ public class LottoNumberTest {
     @ParameterizedTest
     @CsvSource(value = {"1,1", "10,10", "43,43"})
     void getLottoNumberTest(int input, String expected) {
-        Assertions.assertThat(LottoNumber.getLottoNumber(input).toString()).isEqualTo(expected);
+        Assertions.assertThat(LottoNumber.from(input).toString()).isEqualTo(expected);
     }
 }

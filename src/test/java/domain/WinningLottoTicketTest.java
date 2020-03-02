@@ -35,18 +35,18 @@ public class WinningLottoTicketTest {
     @Test
     void isMatchBonusBallTest() {
         WinningLottoTicket winningLottoTicket = new WinningLottoTicket("1, 2, 3, 4, 5, 6", "7");
-        LottoTicket lottoTicket = new LottoTicket(IntStream.of(1, 2, 3, 4, 5, 7).mapToObj(LottoNumber::new).collect(Collectors.toList()));
+        LottoTicket lottoTicket = new LottoTicket(IntStream.of(1, 2, 3, 4, 5, 7).mapToObj(LottoNumber::from).collect(Collectors.toList()));
 
         Assertions.assertThat(winningLottoTicket.isMatchBonusNumber(lottoTicket)).isTrue();
     }
 
     private static Stream<Arguments> LottoTicketSetUp() {
         return Stream.of(
-                Arguments.of(IntStream.of(1, 2, 3, 4, 5, 6).mapToObj(LottoNumber::new).collect(Collectors.toList()), 6),
-                Arguments.of(IntStream.of(1, 2, 3, 4, 5, 7).mapToObj(LottoNumber::new).collect(Collectors.toList()), 5),
-                Arguments.of(IntStream.of(1, 2, 3, 4, 5, 8).mapToObj(LottoNumber::new).collect(Collectors.toList()), 5),
-                Arguments.of(IntStream.of(1, 2, 3, 4, 8, 9).mapToObj(LottoNumber::new).collect(Collectors.toList()), 4),
-                Arguments.of(IntStream.of(1, 2, 3, 8, 9, 10).mapToObj(LottoNumber::new).collect(Collectors.toList()), 3)
+                Arguments.of(IntStream.of(1, 2, 3, 4, 5, 6).mapToObj(LottoNumber::from).collect(Collectors.toList()), 6),
+                Arguments.of(IntStream.of(1, 2, 3, 4, 5, 7).mapToObj(LottoNumber::from).collect(Collectors.toList()), 5),
+                Arguments.of(IntStream.of(1, 2, 3, 4, 5, 8).mapToObj(LottoNumber::from).collect(Collectors.toList()), 5),
+                Arguments.of(IntStream.of(1, 2, 3, 4, 8, 9).mapToObj(LottoNumber::from).collect(Collectors.toList()), 4),
+                Arguments.of(IntStream.of(1, 2, 3, 8, 9, 10).mapToObj(LottoNumber::from).collect(Collectors.toList()), 3)
         );
     }
 

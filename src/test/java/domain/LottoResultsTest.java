@@ -17,11 +17,11 @@ public class LottoResultsTest {
 
     @BeforeEach
     void setUp() {
-        originalLottoTickets.add(new LottoTicket(IntStream.of(1, 2, 3, 12, 13, 14).mapToObj(LottoNumber::new).collect(Collectors.toList())));
-        originalLottoTickets.add(new LottoTicket(IntStream.of(1, 2, 3, 4, 13, 14).mapToObj(LottoNumber::new).collect(Collectors.toList())));
-        originalLottoTickets.add(new LottoTicket(IntStream.of(1, 2, 3, 4, 5, 14).mapToObj(LottoNumber::new).collect(Collectors.toList())));
-        originalLottoTickets.add(new LottoTicket(IntStream.of(1, 2, 3, 4, 5, 7).mapToObj(LottoNumber::new).collect(Collectors.toList())));
-        originalLottoTickets.add(new LottoTicket(IntStream.of(1, 2, 3, 4, 5, 6).mapToObj(LottoNumber::new).collect(Collectors.toList())));
+        originalLottoTickets.add(new LottoTicket(IntStream.of(1, 2, 3, 12, 13, 14).mapToObj(LottoNumber::from).collect(Collectors.toList())));
+        originalLottoTickets.add(new LottoTicket(IntStream.of(1, 2, 3, 4, 13, 14).mapToObj(LottoNumber::from).collect(Collectors.toList())));
+        originalLottoTickets.add(new LottoTicket(IntStream.of(1, 2, 3, 4, 5, 14).mapToObj(LottoNumber::from).collect(Collectors.toList())));
+        originalLottoTickets.add(new LottoTicket(IntStream.of(1, 2, 3, 4, 5, 7).mapToObj(LottoNumber::from).collect(Collectors.toList())));
+        originalLottoTickets.add(new LottoTicket(IntStream.of(1, 2, 3, 4, 5, 6).mapToObj(LottoNumber::from).collect(Collectors.toList())));
     }
 
     @DisplayName("Sholud_LottoResults 의 결과로 RankType만큼 카운트 증가_When_LottoResults 생성")

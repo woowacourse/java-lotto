@@ -15,9 +15,9 @@ import java.util.stream.Stream;
 public class LottoTicketTest {
     private static Stream<List<LottoNumber>> lottoTicketSetUp() {
         return Stream.of(
-                IntStream.of(1, 2, 3, 4, 5).mapToObj(LottoNumber::new).collect(Collectors.toList()),
-                IntStream.of(1, 2, 2, 3, 4, 5).mapToObj(LottoNumber::new).collect(Collectors.toList()),
-                IntStream.of(1, 2, 3, 4, 5, 6, 7).mapToObj(LottoNumber::new).collect(Collectors.toList())
+                IntStream.of(1, 2, 3, 4, 5).mapToObj(LottoNumber::from).collect(Collectors.toList()),
+                IntStream.of(1, 2, 2, 3, 4, 5).mapToObj(LottoNumber::from).collect(Collectors.toList()),
+                IntStream.of(1, 2, 3, 4, 5, 6, 7).mapToObj(LottoNumber::from).collect(Collectors.toList())
         );
     }
 
@@ -33,8 +33,8 @@ public class LottoTicketTest {
     @DisplayName("Should_true 반환_When_로또 티켓 안에 로또 번호가 있다면 ")
     @Test
     void containsLottoNumberTest() {
-        LottoTicket lottoTicket = new LottoTicket(IntStream.of(1, 2, 3, 4, 5, 7).mapToObj(LottoNumber::new).collect(Collectors.toList()));
-        LottoNumber lottoNumber = new LottoNumber(7);
+        LottoTicket lottoTicket = new LottoTicket(IntStream.of(1, 2, 3, 4, 5, 7).mapToObj(LottoNumber::from).collect(Collectors.toList()));
+        LottoNumber lottoNumber = LottoNumber.from(7);
 
         Assertions.assertThat(lottoTicket.containsLottoNumber(lottoNumber)).isTrue();
     }
