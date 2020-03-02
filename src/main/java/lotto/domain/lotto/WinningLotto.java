@@ -7,6 +7,7 @@ import lotto.domain.result.Rank;
 public class WinningLotto {
 
     private static final String DUPLICATE_LOTTO_NUMBERS_BONUS_NUMBER = "보너스 번호와 당첨 번호는 중복될 수 없습니다.";
+
     private LottoTicket winningLottoTicket;
     private LottoNumber bonusLottoNumber;
 
@@ -22,7 +23,7 @@ public class WinningLotto {
         }
     }
 
-    public Rank getRank(LottoTicket lottoTicket) {
+    public Rank checkOutRank(LottoTicket lottoTicket) {
         int countOfMatches = winningLottoTicket.countMatches(lottoTicket);
         boolean bonusMatches = lottoTicket.contains(bonusLottoNumber);
         return Rank.valueOf(countOfMatches, bonusMatches);

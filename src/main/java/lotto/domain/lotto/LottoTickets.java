@@ -2,8 +2,10 @@ package lotto.domain.lotto;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -16,7 +18,7 @@ public class LottoTickets {
     private List<LottoTicket> lottoTickets;
 
     private LottoTickets(List<LottoTicket> lottoTickets) {
-        this.lottoTickets = lottoTickets;
+        this.lottoTickets = Collections.unmodifiableList(lottoTickets);
     }
 
     public static LottoTickets publishLottoTickets(List<Set<Integer>> lottoTicketsNumbers) {
@@ -38,7 +40,7 @@ public class LottoTickets {
                 .collect(Collectors.toMap(Function.identity(), value -> 0));
 
         lottoTickets.stream()
-                .map(winningLotto::getRank)
+                .map(winningLotto::checkOutRank)
                 .forEach(rank -> rankMap.computeIfPresent(rank, (key, value) -> value + 1));
 
         return new LottoResult(rankMap);
@@ -48,5 +50,20 @@ public class LottoTickets {
         return lottoTickets.stream()
                 .map(LottoTicket::toString)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        LottoTickets that = (LottoTickets)o;
+        return Objects.equals(lottoTickets, that.lottoTickets);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoTickets);
     }
 }

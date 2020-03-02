@@ -2,13 +2,11 @@ package lotto.domain.lotto;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -41,7 +39,7 @@ class WinningLottoTest {
     @MethodSource("createRank")
     @DisplayName("WinningLotto는 lottoTicket을 받아서 rank를 반환")
     void testWinningLottoReturnRank(WinningLotto winningLotto, LottoTicket lottoTicket, Rank rank) {
-        assertThat(winningLotto.getRank(lottoTicket)).isEqualTo(rank);
+        assertThat(winningLotto.checkOutRank(lottoTicket)).isEqualTo(rank);
     }
 
     private static Stream<Arguments> createRank() {

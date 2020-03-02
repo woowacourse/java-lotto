@@ -10,17 +10,9 @@ import lotto.domain.count.Count;
 
 public class RandomNumbersFactory {
 
-    private static final List<Integer> LOTTO_NUMBERS;
+    private static List<Integer> LOTTO_NUMBERS = new ArrayList<>(LottoNumber.getLottoNumbers());
     private static final int START_INDEX = 0;
     private static final int LOTTO_SIZE = 6;
-
-    static {
-        LOTTO_NUMBERS = new ArrayList<>();
-
-        for (int i = LottoNumber.MINIMUM_LOTTO_NUMBER; i <= LottoNumber.MAXIMUM_LOTTO_NUMBER; i++) {
-            LOTTO_NUMBERS.add(i);
-        }
-    }
 
     public static List<Set<Integer>> publishAutoLottoTicketsNumbersFrom(Count count) {
         int countOfAutoLottoTickets = count.getAutoCounts();

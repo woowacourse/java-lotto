@@ -15,7 +15,7 @@ public enum Rank {
     MISS(0, 0);
 
     private static final Map<Integer, Rank> RANK_MATCHER_WITHOUT_BONUS;
-    private static String COUNT_OF_MATCHES_UNDER_ZERO_OR_OVER_SIX = "당첨 번호 일치 수는 0이상 6이하로만 가능합니다.";
+    private static final String COUNT_OF_MATCHES_UNDER_ZERO_OR_OVER_SIX = "당첨 번호 일치 수는 0이상 6이하로만 가능합니다.";
 
     static {
         RANK_MATCHER_WITHOUT_BONUS = new HashMap<>();
