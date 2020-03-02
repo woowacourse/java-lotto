@@ -13,16 +13,18 @@ public class OutputView {
 
     private OutputView() { /* prevent creating OutputView instance */ }
 
-    public static void printLottoCountAndLottos(Lottos lottos) {
+    public static void printLottoCountAndLottos(LottoCount lottoCount, Lottos lottos) {
         List<Lotto> lottoLines = lottos.get();
-        printLottoCount(lottoLines.size());
+        printLottoCount(lottoCount);
         for (Lotto lotto : lottoLines) {
             printLottoNumbers(lotto);
         }
     }
 
-    private static void printLottoCount(int lottoCount) {
-        System.out.println(String.format("%d개를 구매했습니다.", lottoCount));
+    private static void printLottoCount(LottoCount lottoCount) {
+        int manualLottoCount = lottoCount.getManualLottoCountValue();
+        int autoLottoCount = lottoCount.calculateAutoLottoCount();
+        System.out.println(String.format("수동으로 %d개, 자동으로 %d개를 구매했습니다.", manualLottoCount, autoLottoCount));
     }
 
     private static void printLottoNumbers(Lotto lotto) {

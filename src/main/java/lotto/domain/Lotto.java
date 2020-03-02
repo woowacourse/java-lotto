@@ -13,10 +13,10 @@ public class Lotto {
     }
 
     public static Lotto from(String[] numbers) {
-        validateEmptyValue(numbers);
+        validateNullAndEmptyValue(numbers);
         validateNumbersCount(numbers);
         List<LottoNumber> lottoNumbers = createLottoNumbers(numbers);
-        validateDuplicatedNumbers(lottoNumbers);
+        validateDuplicatedInNumbers(lottoNumbers);
         return new Lotto(lottoNumbers);
     }
 
@@ -24,7 +24,7 @@ public class Lotto {
         return new Lotto(LottoFactory.createLottoNumbers());
     }
 
-    private static void validateEmptyValue(String[] number) {
+    private static void validateNullAndEmptyValue(String[] number) {
         if (number == null || number.length == 0) {
             throw new RuntimeException("번호를 입력하지 않으셨습니다.");
         }
@@ -39,29 +39,33 @@ public class Lotto {
     private static List<LottoNumber> createLottoNumbers(String[] numbers) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (String number : numbers) {
-            lottoNumbers.add(LottoNumber.of(number.trim()));
+            lottoNumbers.add(LottoNumber.getInstance(number.trim()));
         }
         return lottoNumbers;
     }
 
-    private static void validateDuplicatedNumbers(List<LottoNumber> lottoNumbers) {
+    private static void validateDuplicatedInNumbers(List<LottoNumber> lottoNumbers) {
         Set<LottoNumber> numbers = new HashSet<>(lottoNumbers);
         if (numbers.size() != LOTTO_NUMBERS_COUNT) {
             throw new RuntimeException("중복된 숫자가 입력되었습니다.");
         }
     }
 
-    public MatchResult createResult(Lotto winningLotto, LottoNumber bonusNumber) {
-        int sameNumbersCount = countSameNumbers(winningLotto);
-        boolean containsBonusNumber = lottoNumbers.contains(bonusNumber);
-        return MatchResult.of(sameNumbersCount, containsBonusNumber);
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
-    public int countSameNumbers(Lotto winningLotto) {
-        Set<LottoNumber> numbers = new HashSet<>(this.lottoNumbers);
-        return (int) winningLotto.get().stream()
-                .filter(numbers::contains)
-                .count();
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 
     public List<LottoNumber> get() {

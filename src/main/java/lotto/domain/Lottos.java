@@ -1,36 +1,51 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+
+import static lotto.util.NullValidator.validateNull;
 
 public class Lottos {
-    private final List<Lotto> lottos;
+    private final List<Lotto> elements;
 
-    public Lottos(LottoMoney money) {
-        validateNull(money);
-        int lottoCount = money.calculateLottoCount();
-        this.lottos = IntStream.range(0, lottoCount)
-                .mapToObj(index -> Lotto.create())
-                .collect(Collectors.toList());
+    public Lottos(List<Lotto> elements) {
+        validateNull(elements);
+        this.elements = elements;
     }
 
-    private static void validateNull(LottoMoney money) {
-        if (money == null) {
-            throw new RuntimeException("null이 입력되었습니다.");
+    public static Lottos combineAll(List<Lottos> lottos) {
+        List<Lotto> totalElements = new ArrayList<>();
+        for (Lottos lottosElement : lottos) {
+            totalElements.addAll(lottosElement.elements);
         }
+        return new Lottos(totalElements);
     }
 
-    public MatchResults toMatchResults(Lotto winningLotto, LottoNumber bonusNumber) {
-        List<MatchResult> matchResults = lottos.stream()
-                .filter(lotto -> MatchResult.hasMatchCount(lotto.countSameNumbers(winningLotto)))
-                .map(lotto -> lotto.createResult(winningLotto, bonusNumber))
+    public MatchResults toMatchResults(WinningLotto winningLotto) {
+        List<MatchResult> matchResults = elements.stream()
+                .filter(winningLotto::hasMatchResult)
+                .map(winningLotto::createResult)
                 .collect(Collectors.toList());
         return new MatchResults(matchResults);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lottos lottos = (Lottos) o;
+        return Objects.equals(elements, lottos.elements);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(elements);
+    }
+
     public List<Lotto> get() {
-        return Collections.unmodifiableList(lottos);
+        return Collections.unmodifiableList(elements);
     }
 }

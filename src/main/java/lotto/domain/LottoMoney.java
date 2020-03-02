@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import static lotto.domain.NumberValidator.validateIfEmptyValueThenInvokeException;
-import static lotto.domain.NumberValidator.validateIfNotNumberThenInvokeException;
+import static lotto.util.NumberValidator.validateNullAndEmptyValue;
+import static lotto.util.NumberValidator.validateNumberFormat;
 
 public class LottoMoney {
     private static final int MONEY_PER_LOTTO = 1_000;
@@ -14,7 +14,7 @@ public class LottoMoney {
         this.value = Integer.parseInt(money);
     }
 
-    private static void validateIfSmallerThanMinMoneyThenInvokeException(String money, String message) {
+    private static void validateMinimumMoney(String money, String message) {
         int moneyValue = Integer.parseInt(money);
         if (moneyValue < MONEY_PER_LOTTO) {
             throw new RuntimeException(message);
@@ -22,9 +22,9 @@ public class LottoMoney {
     }
 
     private void validate(String money) {
-        validateIfEmptyValueThenInvokeException(money, "구입금액을 입력해 주세요.");
-        validateIfNotNumberThenInvokeException(money, "구입금액은 숫자만 입력 가능합니다.");
-        validateIfSmallerThanMinMoneyThenInvokeException(money, String.format("최소 %d원 이상 구매하셔야 합니다.", MONEY_PER_LOTTO));
+        validateNullAndEmptyValue(money, "구입금액을 입력해 주세요.");
+        validateNumberFormat(money, "구입금액은 숫자만 입력 가능합니다.");
+        validateMinimumMoney(money, String.format("최소 %d원 이상 구매하셔야 합니다.", MONEY_PER_LOTTO));
     }
 
     public int calculateLottoCount() {
