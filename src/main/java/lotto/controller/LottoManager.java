@@ -2,47 +2,63 @@ package lotto.controller;
 
 import lotto.domain.Buyer;
 import lotto.domain.Money;
-import lotto.domain.lottoTicket.Lotto;
+import lotto.domain.lottoTicket.LottoAmount;
 import lotto.domain.lottoTicket.LottoNumber;
 import lotto.domain.lottoTicket.WinningLotto;
 import lotto.domain.result.LottoResult;
-import lotto.domain.result.WinningValue;
 import lotto.util.ConvertInput;
+import lotto.view.InputView;
+import lotto.view.OutputView;
 
 import java.util.List;
-import java.util.Map;
 
 public class LottoManager {
-    private final Money money;
-    private final Buyer buyer;
-    private WinningLotto winningLotto;
-    private LottoResult lottoResult;
+    private static Money money;
+    private static Buyer buyer;
 
-    public LottoManager(int money) {
-        this.money = new Money(money);
-        this.buyer = new Buyer(this.money.calculateLottoTicketCount());
+    public static void run() {
+        purchaseLotto();
+        analyzeLotto();
     }
 
-    public void setWinningLotto(String numbers, int bonusNumber) {
-        List<LottoNumber> winningLottoNumbers = ConvertInput.convertLottoNumbers(numbers);
-        this.winningLotto = new WinningLotto(winningLottoNumbers, bonusNumber);
+    private static void purchaseLotto() {
+        int budget = InputView.inputMoney();
+        money = new Money(budget);
+
+        LottoAmount lottoAmount = calculateLottoAmount(money);
+        buyer = issueLottos(lottoAmount);
+
+        OutputView.printLottoAmount(lottoAmount);
+        OutputView.printLottoNumbers(buyer.getLottos());
     }
 
-    public Map<WinningValue, Integer> analyzeLotto() {
-        lottoResult = new LottoResult();
-        lottoResult.calculateLottoResult(buyer.getLottos(), winningLotto);
-        return lottoResult.getLottoResult();
+    private static LottoAmount calculateLottoAmount(Money money) {
+        int totalAmount = money.calculateTotalLottoAmount();
+        int manualAmount = InputView.inputManualLottoAmount();
+
+        return new LottoAmount(totalAmount, manualAmount);
     }
 
-    public int analyzeRewardRate() {
-        return lottoResult.calculateRewardRate(money.getMoney(), lottoResult.getLottoResult());
+    private static Buyer issueLottos(LottoAmount lottoAmount) {
+        List<String> manualLottoNumbers =
+                InputView.inputManualLottoNumbers(lottoAmount.getManualLottoAmount());
+
+        return new Buyer(manualLottoNumbers, lottoAmount);
     }
 
-    public int getLottoTicketCount() {
-        return money.calculateLottoTicketCount();
+    private static void analyzeLotto() {
+        WinningLotto winningLotto = readWinningLotto();
+        LottoResult lottoResult = new LottoResult(buyer, winningLotto);
+
+        OutputView.printLottoResults(lottoResult.getLottoResult());
+        OutputView.printRewardRate(lottoResult.calculateRewardRate(money.getMoney()));
     }
 
-    public List<Lotto> getLottos(){
-        return buyer.getLottos();
+    private static WinningLotto readWinningLotto() {
+        List<LottoNumber> winningLottoNumbers =
+                ConvertInput.convertLottoNumbers(InputView.inputWinningLottoNumbers());
+        int bonusNumber = InputView.inputBonusNumber();
+
+        return new WinningLotto(winningLottoNumbers, bonusNumber);
     }
 }

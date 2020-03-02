@@ -1,4 +1,4 @@
-package lotto.util;
+package lotto.exception;
 
 public class InvalidSizeLottoException extends RuntimeException {
     public InvalidSizeLottoException(int lottoSize) {

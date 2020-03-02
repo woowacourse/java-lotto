@@ -1,7 +1,7 @@
 package lotto.domain.lottoTicket;
 
-import lotto.util.DuplicationLottoException;
-import lotto.util.InvalidSizeLottoException;
+import lotto.exception.DuplicationLottoException;
+import lotto.exception.InvalidSizeLottoException;
 
 import java.util.LinkedHashSet;
 import java.util.List;

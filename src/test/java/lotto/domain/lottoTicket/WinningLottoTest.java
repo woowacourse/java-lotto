@@ -1,7 +1,7 @@
 package lotto.domain.lottoTicket;
 
+import lotto.exception.InvalidBonusNumberException;
 import lotto.util.ConvertInput;
-import lotto.util.InvalidBonusNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

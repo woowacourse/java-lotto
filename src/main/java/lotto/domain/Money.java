@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.util.InvalidMoneyException;
+import lotto.exception.InvalidMoneyException;
 
 public class Money {
     private static final int LOTTO_PRICE = 1000;
@@ -18,7 +18,7 @@ public class Money {
         }
     }
 
-    public int calculateLottoTicketCount() {
+    public int calculateTotalLottoAmount() {
         return money / LOTTO_PRICE;
     }
 

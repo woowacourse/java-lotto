@@ -1,4 +1,4 @@
-package lotto.util;
+package lotto.exception;
 
 public class InvalidMoneyException extends RuntimeException {
     public InvalidMoneyException(int money) {
