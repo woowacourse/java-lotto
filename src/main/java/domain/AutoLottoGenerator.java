@@ -1,15 +1,14 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class AutoLottoGenerator implements LottoTicketsGenerator {
-    private static final int START_LOTTO_RANGE = 1;
-    private static final int END_LOTTO_RANGE = 45;
-    private static final int LOTTO_SIZE = 6;
+    private static final int START_RANGE = 1;
+    private static final int END_RANGE = 45;
+    private static final int TICKET_SIZE = 6;
 
     private static final List<LottoNumber> shuffleLottoNumbers;
     private AutoCount autoCount;
@@ -23,7 +22,7 @@ public class AutoLottoGenerator implements LottoTicketsGenerator {
     }
 
     private static List<LottoNumber> createLottoNumbers() {
-        return IntStream.rangeClosed(START_LOTTO_RANGE, END_LOTTO_RANGE)
+        return IntStream.rangeClosed(START_RANGE, END_RANGE)
                 .mapToObj(LottoNumber::from)
                 .collect(Collectors.toList());
     }
@@ -34,7 +33,7 @@ public class AutoLottoGenerator implements LottoTicketsGenerator {
 
 
         return new LottoTicket(shuffleLottoNumbers.stream()
-                .limit(LOTTO_SIZE)
+                .limit(TICKET_SIZE)
                 .collect(Collectors.toList()));
     }
 

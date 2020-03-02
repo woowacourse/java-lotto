@@ -1,7 +1,7 @@
 package domain;
 
 public class LottoTicketCount {
-    private static final int LOTTO_TICKET_PRICE = 1_000;
+    private static final int TICKET_PRICE = 1_000;
 
     private final ManualCount manualCount;
     private final AutoCount autoCount;
@@ -13,13 +13,13 @@ public class LottoTicketCount {
     }
 
     private void validateMoneyRange(Money money, int manualBuyCount) {
-        if (money.getMoney() < manualBuyCount * LOTTO_TICKET_PRICE) {
+        if (money.getMoney() < manualBuyCount * TICKET_PRICE) {
             throw new IllegalArgumentException("구매하려고 하는 수동 티켓이 구입 금액보다 많습니다!");
         }
     }
 
     private int calculateAutoCount(Money money) {
-        return (money.getMoney() - (manualCount.getManualCount() * LOTTO_TICKET_PRICE)) / LOTTO_TICKET_PRICE;
+        return (money.getMoney() - (manualCount.getManualCount() * TICKET_PRICE)) / TICKET_PRICE;
     }
 
     public ManualCount getManualCount() {

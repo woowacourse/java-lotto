@@ -7,7 +7,7 @@ import java.util.Map;
 public class Money {
     private static final int PERCENT = 100;
     private static final int INIT_SUM_VALUE = 0;
-    private static final int LOTTO_TICKET_PRICE = 1_000;
+    private static final int TICKET_PRICE = 1_000;
 
     private int money;
 
@@ -39,7 +39,7 @@ public class Money {
     }
 
     private void validateMoneyRange(int money) {
-        if (money < LOTTO_TICKET_PRICE) {
+        if (money < TICKET_PRICE) {
             throw new IllegalArgumentException("input 값이 1000원보다 작습니다.");
         }
     }

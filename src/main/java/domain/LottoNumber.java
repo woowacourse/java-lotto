@@ -7,14 +7,14 @@ import java.util.*;
 import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    private static final int MIN_LOTTO_NUMBER_RANGE = 1;
-    private static final int MAX_LOTTO_NUMBER_RANGE = 45;
+    private static final int MIN_RANGE = 1;
+    private static final int MAX_RANGE = 45;
     private static final String MAKE_STR = "";
 
     private static final Map<Integer, LottoNumber> lottoNumberPool = new HashMap<>();
 
     static {
-        IntStream.rangeClosed(MIN_LOTTO_NUMBER_RANGE, MAX_LOTTO_NUMBER_RANGE)
+        IntStream.rangeClosed(MIN_RANGE, MAX_RANGE)
                 .forEach(number -> lottoNumberPool.put(number, createLottoNumber(number)));
     }
 
@@ -41,7 +41,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private static void validateLottoNumberRange(int number) {
-        if (number < MIN_LOTTO_NUMBER_RANGE || number > MAX_LOTTO_NUMBER_RANGE) {
+        if (number < MIN_RANGE || number > MAX_RANGE) {
             throw new IllegalArgumentException(String.format("범위를 벗어나는 로또 숫자입니다. 현재 숫자는 %d 입니다", number));
         }
     }
