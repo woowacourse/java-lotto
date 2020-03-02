@@ -45,21 +45,34 @@ public class ResultsTest {
     void calculateResultsTest_당첨되지_않았을_때() {
         Results results = new Results(new LottoTickets(Arrays.asList(notWinningUserLottoTicket)), winningLotto);
         results.calculateResults();
-        assertThat(results.getResults().get(0 + RESULT_BASE).getWinningInfo().name()).isEqualTo(WinningInfo.FAIL.name());
+        assertThat(results.getResults()
+                .get(0 + RESULT_BASE)
+                .getWinningInfo()
+                .name())
+                .isEqualTo(WinningInfo.FAIL.name());
     }
 
     @Test
     void calculateResultsTest_당첨이_존재할_때() {
         Results results = new Results(new LottoTickets(Arrays.asList(notWinningUserLottoTicket, secondWinningUserLottoTicket)), winningLotto);
         results.calculateResults();
-        assertThat(results.getResults().get(0 + RESULT_BASE).getWinningInfo().name()).isEqualTo(WinningInfo.FAIL.name());
-        assertThat(results.getResults().get(1 + RESULT_BASE).getWinningInfo().name()).isEqualTo(WinningInfo.SECOND.name());
+        assertThat(results.getResults()
+                .get(0 + RESULT_BASE)
+                .getWinningInfo()
+                .name())
+                .isEqualTo(WinningInfo.FAIL.name());
+        assertThat(results.getResults()
+                .get(1 + RESULT_BASE)
+                .getWinningInfo()
+                .name())
+                .isEqualTo(WinningInfo.SECOND.name());
     }
 
     @Test
     void getEarningRateTest() {
         Results results = new Results(new LottoTickets(Arrays.asList(notWinningUserLottoTicket, secondWinningUserLottoTicket)), winningLotto);
         results.calculateResults();
-        assertThat(results.getEarningRate()).isEqualTo(1500000);
+        assertThat(results.getEarningRate())
+                .isEqualTo(1500000);
     }
 }

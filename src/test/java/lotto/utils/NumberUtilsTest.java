@@ -11,7 +11,8 @@ public class NumberUtilsTest {
         String notNumberInput = "This is not number.";
         assertThatThrownBy(() -> NumberUtils.parseNumber(notNumberInput))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.NOT_NUMBER.getMessage());
+                .hasMessage(ErrorMessage.NOT_NUMBER
+                        .getMessage());
     }
 
     @Test

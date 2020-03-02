@@ -19,7 +19,8 @@ public class PaymentTest {
         String invalidMoney = "12100";
         assertThatThrownBy(() -> new Payment(invalidMoney))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.CAN_NOT_DIVIDE_BY_PRICE_UNIT.getMessage());
+                .hasMessage(ErrorMessage.CAN_NOT_DIVIDE_BY_PRICE_UNIT
+                        .getMessage());
     }
 
     @ParameterizedTest
@@ -27,7 +28,8 @@ public class PaymentTest {
     void validateUnderLottoPriceTest_로또_가격_미만으로_입력했을_때(String invalidMoney) {
         assertThatThrownBy(() -> new Payment(invalidMoney))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.CAN_NOT_DIVIDE_BY_PRICE_UNIT.getMessage());
+                .hasMessage(ErrorMessage.CAN_NOT_DIVIDE_BY_PRICE_UNIT
+                        .getMessage());
     }
 
     @ParameterizedTest
@@ -35,6 +37,7 @@ public class PaymentTest {
     void validateNumberTest_정수로_입력하지_않았을_때(String invalidMoney) {
         assertThatThrownBy(() -> new Payment(invalidMoney))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.NOT_NUMBER.getMessage());
+                .hasMessage(ErrorMessage.NOT_NUMBER
+                        .getMessage());
     }
 }

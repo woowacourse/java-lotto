@@ -36,7 +36,8 @@ public class WinningLottoTicketTest {
         LottoNumber invalidBonusNumber = new LottoNumber("6");
         assertThatThrownBy(() -> new WinningLottoTicket(winningNumbers, invalidBonusNumber))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.DUPLICATE_NUMBER.getMessage());
+                .hasMessage(ErrorMessage.DUPLICATE_NUMBER
+                        .getMessage());
     }
 
     @Test
@@ -59,6 +60,7 @@ public class WinningLottoTicketTest {
                 new LottoNumber("5"),
                 new LottoNumber("10")));
         LottoTicket userLottoTicket = new LottoTicket(userLottoNumbers);
-        assertThat(winningLotto.countMatchedNumber(userLottoTicket)).isEqualTo(5);
+        assertThat(winningLotto.countMatchedNumber(userLottoTicket))
+                .isEqualTo(5);
     }
 }

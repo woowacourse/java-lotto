@@ -17,6 +17,7 @@ public class LottoNumberTest {
     @Test
     void validateNumberScope_숫자가_범위보다_작을_때() {
         String invalidNumberUnderScope = "0";
+
         assertThatThrownBy(() -> new LottoNumber(invalidNumberUnderScope))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.OVER_SCOPE.getMessage());
@@ -25,6 +26,7 @@ public class LottoNumberTest {
     @Test
     void validateNumberScope_숫자가_범위보다_클_때() {
         String invalidNumberOverScope = "46";
+
         assertThatThrownBy(() -> new LottoNumber(invalidNumberOverScope))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.OVER_SCOPE.getMessage());

@@ -21,7 +21,8 @@ public class ManualPurchaseTest {
                 "31,32,33,34,35,36"
         ));
         ManualPurchase manualPurchase = new ManualPurchase(manualPurchaseCount, manualNumbers);
-        assertThat(manualPurchase.getManualPurchaseCount()).isEqualTo(4);
+        assertThat(manualPurchase.getManualPurchaseCount())
+                .isEqualTo(4);
     }
 
     @Test
@@ -53,6 +54,7 @@ public class ManualPurchaseTest {
         lottoTickets.add(new LottoTicket(secondLottoNumbers));
 
         ManualPurchase manualPurchase = new ManualPurchase(manualPurchaseCount, manualNumbers);
-        assertThat(manualPurchase.getManualTickets()).isEqualTo(lottoTickets);
+        assertThat(manualPurchase.getManualTickets())
+                .isEqualTo(lottoTickets);
     }
 }

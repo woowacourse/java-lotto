@@ -19,6 +19,7 @@ public class LottoTicketTest {
                 new LottoNumber("4"),
                 new LottoNumber("5"),
                 new LottoNumber("5")));
+
         assertThatThrownBy(() -> new LottoTicket(invalidNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.DUPLICATE_NUMBER.getMessage());
@@ -32,6 +33,7 @@ public class LottoTicketTest {
                 new LottoNumber("3"),
                 new LottoNumber("4"),
                 new LottoNumber("5")));
+
         assertThatThrownBy(() -> new LottoTicket(invalidNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.NUMBER_COUNT_NOT_SIX.getMessage());
@@ -46,6 +48,7 @@ public class LottoTicketTest {
                 new LottoNumber("4"),
                 new LottoNumber("5"),
                 new LottoNumber("45")));
+
         new LottoTicket(validNumbers);
     }
 
