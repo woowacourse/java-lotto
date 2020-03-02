@@ -7,6 +7,14 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoResultTest {
+    private String[] winningNumbers = {"1", "2", "3", "5", "4", "6"};
+    private String bonusNumber = "7";
+    private WinningNumber winningNumber = new WinningNumber(winningNumbers, bonusNumber);
+    private String[] inputLottoNumbers = {"1", "2", "3", "4", "5", "7"};
+    private LottoGenerator lottoGenerator = new ManualLottoGenerator(inputLottoNumbers);
+    private Lotto lotto = lottoGenerator.generateLotto();
+    private Lottos lottos = new Lottos();
+
     @Test
     @DisplayName("로또 결과의 초기값 0인지 확인")
     void initialValueOfLottoResultTest() {
@@ -19,16 +27,7 @@ public class LottoResultTest {
     @Test
     @DisplayName("로또 매칭 계산 후 당첨 결과 누적 테스트")
     void accumulateLottoResultAfterCountingWinningNumbersTest() {
-        String[] winningNumbers = {"1", "2", "3", "5", "4", "6"};
-        String bonusNumber = "7";
-        WinningNumber winningNumber = new WinningNumber(winningNumbers, bonusNumber);
-
-        String[] inputLottoNumbers = {"1", "2", "3", "4", "5", "7"};
-        LottoGenerator lottoGenerator = new ManualLottoGenerator(inputLottoNumbers);
-        Lotto lotto = lottoGenerator.generateLotto();
-        Lottos lottos = new Lottos();
         lottos.addLotto(lotto);
-
         LottoResult lottoResult = new LottoResult();
         lottoResult.countWinningLotto(lottos, winningNumber);
         assertThat(lottoResult.getRankCount(LottoRank.SECOND)).isEqualTo(1);
@@ -37,16 +36,7 @@ public class LottoResultTest {
     @Test
     @DisplayName("로또 결과 계산 이후 최종 수익 계산")
     void calculateTotalProfitUsingResultTest() {
-        String[] winningNumbers = {"1", "2", "3", "5", "4", "6"};
-        String bonusNumber = "7";
-        WinningNumber winningNumber = new WinningNumber(winningNumbers, bonusNumber);
-
-        String[] inputLottoNumbers = {"1", "2", "3", "4", "5", "7"};
-        LottoGenerator lottoGenerator = new ManualLottoGenerator(inputLottoNumbers);
-        Lotto lotto = lottoGenerator.generateLotto();
-        Lottos lottos = new Lottos();
         lottos.addLotto(lotto);
-
         LottoResult lottoResult = new LottoResult();
         lottoResult.countWinningLotto(lottos, winningNumber);
         int totalProfit = lottoResult.calculateTotalProfit();
