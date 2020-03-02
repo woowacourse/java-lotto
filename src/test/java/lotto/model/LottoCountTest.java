@@ -7,13 +7,13 @@ import lotto.exception.OverRangeException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class ManualCountTest {
+public class LottoCountTest {
 
     @Test
     @DisplayName("입력이 숫자인지 판단하는 테스트")
     void Should_Exception_isNotNumber() {
         assertThatThrownBy(() -> {
-            new ManualCount("q", 1);
+            new LottoCount(1, "q");
         }).isInstanceOf(NotNumberException.class)
             .hasMessage("숫자를 입력하세요.");
     }
@@ -23,9 +23,9 @@ public class ManualCountTest {
     void Should_Exception_isSmallerThanPayment() {
         assertThatThrownBy(() -> {
             Money money = new Money("10000");
-            ManualCount manualCount = new ManualCount("11",
-                money.getTicketCount() / Money.PAYMENT_UNIT);
+            LottoCount lottoCount = new LottoCount(
+                money.getTotalTicketCount(), "11");
         }).isInstanceOf(OverRangeException.class)
-            .hasMessage("수동으로 구매할 수 있는 수가 너무 큽니다.");
+            .hasMessage("범위를 초과하였습니다.");
     }
 }

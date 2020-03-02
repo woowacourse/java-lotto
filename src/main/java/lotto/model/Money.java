@@ -35,7 +35,7 @@ public class Money {
         }
     }
 
-    public int getTicketCount() {
+    public int getTotalTicketCount() {
         return money / PAYMENT_UNIT;
     }
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import lotto.exception.NotNumberException;
 import lotto.exception.NotSixNumbersException;
@@ -75,5 +76,22 @@ public class Ticket {
 
     public List<LottoNumber> getTicket() {
         return ticket;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Ticket ticket1 = (Ticket) o;
+        return Objects.equals(ticket, ticket1.ticket);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ticket);
     }
 }
