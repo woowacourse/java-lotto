@@ -31,9 +31,9 @@ public class WinningLottoTicket {
                 .anyMatch(bonusNumber::equals);
     }
 
-    public long countMatchedNumber(final WinningLottoTicket winningLotto, final LottoTicket userLottoTicket) {
+    public long countMatchedNumber(final LottoTicket userLottoTicket) {
         return userLottoTicket.getLottoNumbers().stream()
-                .filter(winningLotto::isMatched)
+                .filter(this::isMatched)
                 .count();
     }
 

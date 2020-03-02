@@ -16,7 +16,7 @@ public class LottoNumberTest {
 
     @Test
     void validateNumberScope_숫자가_범위보다_작을_때() {
-        String invalidNumberUnderScope = "-11";
+        String invalidNumberUnderScope = "0";
         assertThatThrownBy(() -> new LottoNumber(invalidNumberUnderScope))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.OVER_SCOPE.getMessage());
@@ -24,14 +24,14 @@ public class LottoNumberTest {
 
     @Test
     void validateNumberScope_숫자가_범위보다_클_때() {
-        String invalidNumberOverScope = "50";
+        String invalidNumberOverScope = "46";
         assertThatThrownBy(() -> new LottoNumber(invalidNumberOverScope))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.OVER_SCOPE.getMessage());
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"천원", "3.2"})
+    @ValueSource(strings = {"천원", "3.2","ten_dollar"})
     void validateNumber_정수로_입력하지_않았을_때(String invalidInputMoney) {
         assertThatThrownBy(() -> new LottoNumber(invalidInputMoney))
                 .isInstanceOf(IllegalArgumentException.class)
