@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Tickets {
-    private static final int MIN_TICKET_SIZE = 0;
+    public static final int MIN_TICKET_SIZE = 0;
     public static final int TICKET_PRICE = 1000;
 
     private final List<Ticket> tickets;
