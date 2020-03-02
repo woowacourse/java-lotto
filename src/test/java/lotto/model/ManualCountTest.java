@@ -11,7 +11,7 @@ public class ManualCountTest {
 
     @Test
     @DisplayName("입력이 숫자인지 판단하는 테스트")
-    void ManualNumber_Is_Number() {
+    void Should_Exception_isNotNumber() {
         assertThatThrownBy(() -> {
             new ManualCount("q", 1);
         }).isInstanceOf(NotNumberException.class)
@@ -20,7 +20,7 @@ public class ManualCountTest {
 
     @Test
     @DisplayName("최대값이 지불한 돈보다 큰지 판단하는 테스트")
-    void ManualNumber_Is_Maximum_Number() {
+    void Should_Exception_isSmallerThanPayment() {
         assertThatThrownBy(() -> {
             Money money = new Money("10000");
             ManualCount manualCount = new ManualCount("11",

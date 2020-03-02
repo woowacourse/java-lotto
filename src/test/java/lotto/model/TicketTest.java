@@ -14,7 +14,7 @@ public class TicketTest {
 
     @Test
     @DisplayName("6개가 입력됬는지 테스트")
-    void validateLottoNumbersLength() {
+    void Should_Exception_isNotLengthSix() {
         assertThatThrownBy(() -> {
             new Ticket("1, 3, 5, 7, 9, 11, 13");
         }).isInstanceOf(NotSixNumbersException.class)
@@ -23,7 +23,7 @@ public class TicketTest {
 
     @Test
     @DisplayName("티켓안에 중복된 숫자를 가지고 있는지 테스트")
-    void validateOverlap() {
+    void Should_Exception_Overlap() {
         assertThatThrownBy(() -> {
             new Ticket("1, 1, 5, 7, 9, 11");
         }).isInstanceOf(OverlapException.class)
@@ -32,7 +32,7 @@ public class TicketTest {
 
     @Test
     @DisplayName("숫자를 가지고 있는지 판단")
-    void isHasNumber() {
+    void Should_Exception_isHasNumber() {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int i = 1; i < 7; i++) {
             lottoNumbers.add(new LottoNumber(i));
