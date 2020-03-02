@@ -30,8 +30,8 @@ public class LottoTicket {
 		return new LottoTicket(concatenatedLottoTicket);
 	}
 
-	private void validate(List<Lotto> lottos) {
-		if (Objects.isNull(lottos)) {
+	private void validate(List<Lotto> lottoTicket) {
+		if (Objects.isNull(lottoTicket)) {
 			throw new IllegalArgumentException(INVALID_LOTTO_NUMBERS_SIZE_MESSAGE);
 		}
 	}

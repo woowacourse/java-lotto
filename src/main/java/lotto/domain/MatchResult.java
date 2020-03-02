@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import static lotto.domain.LottoGeneratable.LOTTO_PRICE;
+import static lotto.domain.LottoGenerative.LOTTO_PRICE;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -47,7 +47,7 @@ public class MatchResult {
 	private long calculateTotalPurchaseMoney() {
 		return matchResult.values()
 				.stream()
-				.mapToLong(purchaseCount -> purchaseCount * LOTTO_PRICE)
+				.mapToLong(LOTTO_PRICE::multiply)
 				.sum();
 	}
 

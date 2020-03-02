@@ -12,11 +12,11 @@ public class PurchaseMoney {
 	private static final String INVALID_PURCHASE_MONEY_MESSAGE = "잘못된 구입 금액을 입력하셨습니다.";
 	private static final String CAN_NOT_PAYABLE_MESSAGE = "지불할 수 없는 금액입니다.";
 
-	private long lottoMoney;
+	private long money;
 
-	public PurchaseMoney(long lottoMoney) {
-		validate(lottoMoney);
-		this.lottoMoney = lottoMoney;
+	public PurchaseMoney(long money) {
+		validate(money);
+		this.money = money;
 	}
 
 	private void validate(long lottoMoney) {
@@ -33,31 +33,35 @@ public class PurchaseMoney {
 		return lottoMoney < 0;
 	}
 
-	public boolean canPayable(long amount) {
-		return lottoMoney >= amount;
+	public boolean canPayable(PurchaseMoney payingMoney) {
+		return money >= payingMoney.money;
 	}
 
-	public boolean canNotPayable(long amount) {
-		return lottoMoney < amount;
+	public boolean canNotPayable(PurchaseMoney payingMoney) {
+		return money < payingMoney.money;
 	}
 
-	public void pay(long amount) {
-		if (!canPayable(amount)) {
+	public void pay(PurchaseMoney payingMoney) {
+		if (canNotPayable(payingMoney)) {
 			throw new IllegalArgumentException(CAN_NOT_PAYABLE_MESSAGE);
 		}
-		lottoMoney -= amount;
+		money -= payingMoney.money;
 	}
 
-	public long multiply(long count) {
-		return lottoMoney * count;
+	public long multiply(long number) {
+		return money * number;
+	}
+
+	public long divide(PurchaseMoney purchaseMoney) {
+		return money / purchaseMoney.money;
 	}
 
 	public long get() {
-		return lottoMoney;
+		return money;
 	}
 
 	@Override
 	public String toString() {
-		return String.valueOf(lottoMoney);
+		return String.valueOf(money);
 	}
 }

@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.domain.LottoTicket;
 import lotto.domain.MatchResult;
-import lotto.domain.PurchaseInformation;
+import lotto.domain.PurchaseCount;
 import lotto.util.TextUtil;
 
 /**
@@ -20,14 +20,11 @@ public class OutputView {
 	private OutputView() {
 	}
 
-	public static void printLottoTicket(PurchaseInformation purchaseInformation, LottoTicket lottoTicket) {
-		int manualCount = purchaseInformation.getManualCount();
-		int autoCount = lottoTicket.size() - manualCount;
-		System.out.printf(TOTAL_BUY_FORMAT_MESSAGE, manualCount, autoCount);
-		printLottoTicket(lottoTicket);
+	public static void printLottoPurchaseCount(PurchaseCount manualCount, PurchaseCount autoCount) {
+		System.out.printf(TOTAL_BUY_FORMAT_MESSAGE, manualCount.get(), autoCount.get());
 	}
 
-	private static void printLottoTicket(LottoTicket lottoTicket) {
+	public static void printLottoTicket(LottoTicket lottoTicket) {
 		System.out.println(TextUtil.generateLottoTicketText(lottoTicket));
 	}
 

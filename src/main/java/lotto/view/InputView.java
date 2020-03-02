@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import lotto.domain.PurchaseCount;
+
 /**
  * 입력 클래스
  *
@@ -32,13 +34,13 @@ public class InputView {
 		return Integer.parseInt(SCANNER.nextLine());
 	}
 
-	public static List<String> inputManualLottoTicketNumbers(int manualCount) {
+	public static List<String> inputManualLottoTicketNumbers(PurchaseCount manualCount) {
 		List<String> lottoTicketNumbers = new ArrayList<>();
-		if (manualCount == 0) {
+		if (manualCount.get() == 0) {
 			return lottoTicketNumbers;
 		}
 		System.out.println(MANUAL_LOTTO_TICKET_INPUT_GUIDE_MESSAGE);
-		for (int count = 0; count < manualCount; count++) {
+		for (long count = manualCount.get(); count > 0; count--) {
 			lottoTicketNumbers.add(SCANNER.nextLine());
 		}
 		return lottoTicketNumbers;

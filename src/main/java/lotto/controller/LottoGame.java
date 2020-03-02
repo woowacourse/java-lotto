@@ -4,6 +4,7 @@ import static lotto.view.InputView.inputBonusBall;
 import static lotto.view.InputView.inputLottoMoney;
 import static lotto.view.InputView.inputManualCount;
 import static lotto.view.InputView.inputManualLottoTicketNumbers;
+import static lotto.view.OutputView.printLottoPurchaseCount;
 import static lotto.view.OutputView.printLottoTicket;
 import static lotto.view.OutputView.printStatistics;
 import static lotto.view.OutputView.printTotalProfits;
@@ -11,11 +12,12 @@ import static lotto.view.OutputView.printTotalProfits;
 import java.util.List;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoGenerative;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.MatchResult;
-import lotto.domain.PurchaseInformation;
+import lotto.domain.PurchaseCount;
 import lotto.domain.PurchaseMoney;
 import lotto.domain.WinningLotto;
 import lotto.view.InputView;
@@ -29,24 +31,22 @@ import lotto.view.InputView;
  */
 public class LottoGame {
 	public void run() {
-		PurchaseInformation purchaseInformation = inputPurchaseInformation();
-		LottoTicket lottoTicket = purchaseLottoTicket(purchaseInformation);
-		printLottoTicket(purchaseInformation, lottoTicket);
+		PurchaseMoney purchaseMoney = new PurchaseMoney(inputLottoMoney());
+		PurchaseCount manualCount = new PurchaseCount(inputManualCount());
+		PurchaseCount autoCount = manualCount.calculateRestPurchaseCount(purchaseMoney);
+		printLottoPurchaseCount(manualCount, autoCount);
+
+		LottoTicket lottoTicket = purchaseLottoTicket(purchaseMoney, manualCount);
+		printLottoTicket(lottoTicket);
 
 		WinningLotto winningLotto = inputWinningLotto();
 		printMatchResult(lottoTicket, winningLotto);
 	}
 
-	private PurchaseInformation inputPurchaseInformation() {
-		PurchaseMoney purchaseMoney = new PurchaseMoney(inputLottoMoney());
-		int manualCount = inputManualCount();
-		return new PurchaseInformation(purchaseMoney, manualCount);
-	}
-
-	private LottoTicket purchaseLottoTicket(PurchaseInformation purchaseInformation) {
-		List<String> lottoTicketNumbers = inputManualLottoTicketNumbers(purchaseInformation.getManualCount());
-		LottoMachine lottoMachine = new LottoMachine(lottoTicketNumbers);
-		return lottoMachine.generate(purchaseInformation);
+	private LottoTicket purchaseLottoTicket(PurchaseMoney purchaseMoney, PurchaseCount manualCount) {
+		List<String> lottoTicketNumbers = inputManualLottoTicketNumbers(manualCount);
+		LottoGenerative lottoMachine = new LottoMachine(lottoTicketNumbers);
+		return lottoMachine.generate(purchaseMoney);
 	}
 
 	private WinningLotto inputWinningLotto() {

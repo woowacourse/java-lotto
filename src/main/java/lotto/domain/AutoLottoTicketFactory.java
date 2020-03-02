@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
  * @author K.S.KIM
  * @since 2020/02/19
  */
-public class AutoLottoTicketFactory implements LottoGeneratable {
+public class AutoLottoTicketFactory implements LottoGenerative {
 	private final Random random;
 
 	public AutoLottoTicketFactory() {
@@ -21,12 +21,12 @@ public class AutoLottoTicketFactory implements LottoGeneratable {
 
 	@Override
 	public LottoTicket generate(PurchaseMoney purchaseMoney) {
-		List<Lotto> lottos = new ArrayList<>();
+		List<Lotto> lottoTicket = new ArrayList<>();
 		while (purchaseMoney.canPayable(LOTTO_PRICE)) {
 			purchaseMoney.pay(LOTTO_PRICE);
-			lottos.add(generate());
+			lottoTicket.add(generate());
 		}
-		return new LottoTicket(lottos);
+		return new LottoTicket(lottoTicket);
 	}
 
 	private Lotto generate() {

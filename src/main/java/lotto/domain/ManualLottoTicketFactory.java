@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 로또 번호 수동 생성 클래스
@@ -10,29 +11,22 @@ import java.util.List;
  * @author K.S.KIM
  * @since 2020/02/27
  */
-public class ManualLottoTicketFactory implements LottoGeneratable {
-	private List<String> lottoTicketNumbers;
+public class ManualLottoTicketFactory implements LottoGenerative {
+	private final List<Lotto> lottoNumbers;
 
-	public ManualLottoTicketFactory(List<String> lottoTicketNumbers) {
-		this.lottoTicketNumbers = lottoTicketNumbers;
+	public ManualLottoTicketFactory(List<String> lottoNumbers) {
+		this.lottoNumbers = lottoNumbers.stream()
+				.map(Lotto::ofComma)
+				.collect(Collectors.toList());
 	}
 
 	@Override
 	public LottoTicket generate(PurchaseMoney purchaseMoney) {
 		List<Lotto> lottoTicket = new ArrayList<>();
-		for (String lottoNumber : lottoTicketNumbers) {
+		for (Lotto lotto : lottoNumbers) {
 			purchaseMoney.pay(LOTTO_PRICE);
-			lottoTicket.add(Lotto.ofComma(lottoNumber));
+			lottoTicket.add(lotto);
 		}
 		return new LottoTicket(lottoTicket);
-	}
-
-	boolean canNotPayable(PurchaseMoney lottoPurchaseMoney) {
-		long purchaseMoney = calculatePurchaseMoney();
-		return lottoPurchaseMoney.canNotPayable(purchaseMoney);
-	}
-
-	private long calculatePurchaseMoney() {
-		return lottoTicketNumbers.size() * LOTTO_PRICE;
 	}
 }

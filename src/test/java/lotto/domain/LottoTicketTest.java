@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -18,6 +19,12 @@ import org.junit.jupiter.api.Test;
  * @since 2020/02/19
  */
 public class LottoTicketTest {
+	@Test
+	@DisplayName("로또 티켓 생성자의 인자로 null을 넣은 경우 예외가 발생한다")
+	void constructor() {
+		assertThatThrownBy(() -> new LottoTicket(null)).isInstanceOf(IllegalArgumentException.class);
+	}
+
 	@Test
 	@DisplayName("우승 로또와 로또 티켓을 비교하여 각 순위별로 맞춘 로또의 개수를 계산한다")
 	void matchAll() {
