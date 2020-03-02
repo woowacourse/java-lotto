@@ -15,9 +15,9 @@ public enum RankType {
 
     private int number;
     private String printStr;
-    private Function<Integer, Integer> expression;
+    private Function<Long, Long> expression;
 
-    RankType(int number, String printStr, Function<Integer, Integer> expression) {
+    RankType(int number, String printStr, Function<Long, Long> expression) {
         this.number = number;
         this.printStr = printStr;
         this.expression = expression;
@@ -38,7 +38,7 @@ public enum RankType {
         return winningLottoTicket.isMatchBonusNumber(lottoTicket);
     }
 
-    public int calculate(int value) {
+    public long calculate(long value) {
         return expression.apply(value);
     }
 

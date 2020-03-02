@@ -53,6 +53,6 @@ public class Money {
     }
 
     public static long calculateProfit(Map<RankType, Integer> lottoResults, int money) {
-        return Math.round((calculateTotalWinningPrice(lottoResults) / money) * PERCENT);
+        return Math.round(calculateTotalWinningPrice(lottoResults) / money) * PERCENT;
     }
 }
