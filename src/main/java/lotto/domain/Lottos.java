@@ -9,6 +9,8 @@ public class Lottos {
 
     private List<Lotto> lottos;
 
+    public Lottos() { this.lottos = new ArrayList<>(); }
+
     public Lottos(List<Lotto> lottos) {
         this.lottos = new ArrayList(lottos);
     }

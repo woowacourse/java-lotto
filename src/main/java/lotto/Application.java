@@ -7,7 +7,6 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.List;
-import java.util.Optional;
 
 public class Application {
     public static void main(String args[]) {
@@ -22,19 +21,20 @@ public class Application {
     private static Lottos initUserLottos() {
         PaidPrice paidPrice = new PaidPrice(InputView.getPayment());
         LottoSize manualLottoSize = new LottoSize(paidPrice, InputView.getManualLottoSize());
-        LottoSize autoLottoSize = new LottoSize(paidPrice,
-                paidPrice.getTotalLottoSize() - manualLottoSize.getLottoSize());
+        List<List<String>> manualLottoNumbers = InputView.getManualLottoNumbers(manualLottoSize);
 
-        List<String> manualLottoNumbers = InputView.getManualLottoNumbers(manualLottoSize);
-        Lottos lottos = LottoGenerateManager.createLottos(manualLottoNumbers, autoLottoSize);
-        OutputView.printLottoSize(manualLottoSize, autoLottoSize);
+        BettingInfo bettingInfo = new BettingInfo(paidPrice, manualLottoSize, manualLottoNumbers);
+        LottoGenerateManager lottoGenerateManager = new LottoGenerateManager(bettingInfo);
+        Lottos lottos = lottoGenerateManager.createLottos();
+
+        OutputView.printLottoSize(bettingInfo.getManualLottoSize(), bettingInfo.getAutoLottoSize());
         OutputView.printLottosNumbers(lottos);
         return lottos;
     }
 
     private static WinningLotto initWinnerLotto() {
-        String winningNumber = InputView.getWinningLottoNumbers();
+        List<String> winningNumbers = InputView.getWinningLottoNumbers();
         String bonusNumber = InputView.getBonusNumber();
-        return LottoGenerateManager.createWinningLotto(winningNumber, bonusNumber);
+        return LottoGenerateManager.createWinningLotto(winningNumbers, bonusNumber);
     }
 }

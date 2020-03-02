@@ -8,15 +8,9 @@ import java.util.stream.Collectors;
 public class OutputView {
     public static final String SPLIT_DELIMETER = ",";
 
-    public static void printLottoSize(PaidPrice paidPrice) {
-        System.out.println(paidPrice.getTotalLottoSize() + "개를 구매했습니다");
-    }
-
-    public static void printLottoSize(LottoSize manualLottoSize, LottoSize autoLottoSize) {
+    public static void printLottoSize(int manaulLottoSize, int autoLottoSize) {
         String result = "수동으로 %s장, 자동으로 %s개를 구매했습니다.";
-        System.out.println(String.format(result,
-                manualLottoSize.getLottoSize(),
-                autoLottoSize.getLottoSize()));
+        System.out.println(String.format(result, manaulLottoSize, autoLottoSize));
     }
 
     public static void printLottosNumbers(Lottos lottos) {
@@ -35,7 +29,7 @@ public class OutputView {
     }
 
     public static void printWinningResults(ResultsDTO resultsDTO) {
-        for (WinningInfo winningInfo : WinningInfo.getValuesWithoutFail()){
+        for (WinningInfo winningInfo : WinningInfo.getValuesWithoutFail()) {
             int winningCount = resultsDTO.getMatchCount(winningInfo);
             printWinnigInfo(winningInfo);
             System.out.println(winningCount + "개");

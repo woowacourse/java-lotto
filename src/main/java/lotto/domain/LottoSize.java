@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LottoSize {
-    private static final String EMPTY_INPUT_MSG = "로또 번호가 입력되지 않았습니다.";
+    private static final String EMPTY_INPUT_MSG = "%s이(가) 입력되지 않았습니다.";
     private static final String NOT_NUMBER_MSG = "잘못된 숫자입니다.";
     private static final String NOT_VALIDATE_LOTTO_SIZE_MSG = "%s는 유효하지 않은 로또 개수입니다.";
 
@@ -20,10 +20,15 @@ public class LottoSize {
     }
 
     private void validateNotNull(PaidPrice paidPrice) {
-        Objects.requireNonNull(paidPrice, EMPTY_INPUT_MSG);
+        Objects.requireNonNull(paidPrice, String.format(EMPTY_INPUT_MSG, "구입 금액"));
+    }
+
+    private static void validateNotNull(String number) {
+        Objects.requireNonNull(number, String.format(EMPTY_INPUT_MSG, "로또 개수"));
     }
 
     private static int validateNumber(String number) {
+        validateNotNull(number);
         try {
             return Integer.parseInt(number);
         } catch (IllegalArgumentException e) {

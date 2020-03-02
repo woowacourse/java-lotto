@@ -5,37 +5,23 @@ import lotto.domain.*;
 import java.util.*;
 
 public class LottoGenerateManager {
-    public static Lottos createLottos(List<String> manualLottoNumbers, LottoSize autoLottoSize) {
-        Lottos manuaLottos = createManualLottos(manualLottoNumbers);
-        Lottos autoLottos = createRandomLottos(autoLottoSize);
-        return manuaLottos.addLottos(autoLottos);
+    private static final List<LottoGenerator> lottoGenerators = Arrays.asList(new ManualLottoGenerator(), new AutoLottoGenerator());
+    private final BettingInfo bettingInfo;
+
+    public LottoGenerateManager(BettingInfo bettingInfo) {
+        this.bettingInfo = bettingInfo;
     }
 
-    public static Lottos createRandomLottos(int lottoSize) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < lottoSize; i++) {
-            lottos.add(LottoGenerator.create());
+    public Lottos createLottos() {
+        Lottos lottos = new Lottos();
+        for (LottoGenerator lottoGenerator : lottoGenerators) {
+            lottos.addLottos(lottoGenerator.createLottos(this.bettingInfo));
         }
-        return new Lottos(lottos);
+        return lottos;
     }
 
-    public static Lottos createRandomLottos(LottoSize lottoSize) {
-        return createRandomLottos(lottoSize.getLottoSize());
-    }
-
-    public static Lottos createManualLottos(List<String> lottoNumbers) {
-        List<Lotto> lottos = new ArrayList<>();
-
-        int lottoSize = lottoNumbers.size();
-        for (int i = 0; i < lottoSize; i++) {
-            String lottoNumber = lottoNumbers.get(i);
-            lottos.add(LottoGenerator.create(lottoNumber));
-        }
-        return new Lottos(lottos);
-    }
-
-    public static WinningLotto createWinningLotto(String lottoNumbers, String bonusNumber) {
-        Lotto lotto = LottoGenerator.create(lottoNumbers);
+    public static WinningLotto createWinningLotto(List<String> lottoNumbers, String bonusNumber) {
+        Lotto lotto = ManualLottoGenerator.createLotto(lottoNumbers);
         return new WinningLotto(lotto, new LottoNumber(bonusNumber));
     }
 }

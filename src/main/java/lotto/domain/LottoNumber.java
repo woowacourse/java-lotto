@@ -1,8 +1,11 @@
 package lotto.domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
+    public static final Map<Integer, LottoNumber> lottoNumbers;
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 45;
     private static final String EMPTY_INPUT_MSG = "로또 번호가 입력되지 않았습니다.";
@@ -11,6 +14,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private int number;
 
+    static {
+        lottoNumbers = new HashMap<>();
+        for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
+            lottoNumbers.put(i, new LottoNumber(i));
+        }
+    }
     public LottoNumber(String number) {
         this(validateNumber(number));
     }

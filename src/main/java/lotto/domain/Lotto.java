@@ -2,6 +2,8 @@ package lotto.domain;
 
 import java.util.Objects;
 import java.util.Set;
+import java.util.List;
+import java.util.TreeSet;
 
 public class Lotto {
     private static final String EMPTY_INPUT_MSG = "로또 번호가 입력되지 않았습니다.";
@@ -14,6 +16,10 @@ public class Lotto {
         validateNotNull(lottoNumbers);
         validateDistinctNumbers(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public Lotto(List<LottoNumber> lottoNumbers) {
+        this(new TreeSet<>(lottoNumbers));
     }
 
     private void validateNotNull(Set<LottoNumber> lottoNumbers) {
