@@ -1,34 +1,52 @@
+import domain.buyinginformation.BuyingInformation;
 import domain.buyinginformation.Money;
 import domain.lottonumbers.LottoTicket;
 import domain.lottonumbers.WinningNumbers;
 import domain.lottonumbers.lottonumber.LottoNumber;
 import domain.lottostore.LottoStore;
+import domain.lottostore.ManualBuyingStrategy;
 import domain.lottostore.RandomBuyingStrategy;
 import domain.result.LottoResult;
 import view.InputView;
 import view.OutputView;
 
 import java.util.List;
+import java.util.Set;
 
-import static java.util.stream.Collectors.collectingAndThen;
-import static java.util.stream.Collectors.toSet;
+import static java.util.stream.Collectors.*;
 
 public class LottoApplication {
 
     public static void main(String[] args) {
-        Money money = enterMoney();
-        List<LottoTicket> randomTickets = LottoStore.generateTickets(new RandomBuyingStrategy(), money);
+        BuyingInformation buyingInformation = enterBuyingInformation();
+        List<LottoTicket> tickets = LottoStore.generateTickets(new ManualBuyingStrategy(), buyingInformation);
 
-        printTickets(randomTickets);
+        printTickets(tickets);
 
         WinningNumbers winningNumbers = enterWinningNumbers();
-        LottoResult lottoResult = LottoResult.confirmResult(randomTickets, winningNumbers);
+        LottoResult lottoResult = LottoResult.confirmResult(tickets, winningNumbers);
 
-        printResult(lottoResult, money);
+        printResult(lottoResult, buyingInformation.getBuyingMoney());
+    }
+
+    private static BuyingInformation enterBuyingInformation() {
+        return new BuyingInformation(enterMoney(), enterManualLottoTickets());
     }
 
     private static Money enterMoney() {
         return new Money(InputView.enterMoney());
+    }
+
+    private static List<LottoTicket> enterManualLottoTickets() {
+        return InputView.enterManualNumbers().stream()
+                .map(LottoApplication::parseNumbersToTicket)
+                .collect(toList());
+    }
+
+    private static LottoTicket parseNumbersToTicket(Set<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::new)
+                .collect(collectingAndThen(toSet(), LottoTicket::new));
     }
 
     private static void printTickets(List<LottoTicket> tickets) {
@@ -41,9 +59,7 @@ public class LottoApplication {
     }
 
     private static LottoTicket enterTicket() {
-        return InputView.enterLastWeekWinningNumbers().stream()
-                .map(LottoNumber::new)
-                .collect(collectingAndThen(toSet(), LottoTicket::new));
+        return parseNumbersToTicket(InputView.enterLastWeekWinningNumbers());
     }
 
     private static LottoNumber enterBonusNumber() {

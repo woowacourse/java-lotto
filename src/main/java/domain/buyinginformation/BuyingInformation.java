@@ -15,10 +15,14 @@ public class BuyingInformation {
     }
 
     public Money getMoneyAfterBuyingManualTickets() {
-        return buyingMoney.getRemainedMoney(manualTickets.size());
+        return this.buyingMoney.getRemainedMoney(this.manualTickets.size());
     }
 
     public List<LottoTicket> getManualTickets() {
-        return manualTickets;
+        return this.manualTickets;
+    }
+
+    public Money getBuyingMoney() {
+        return this.buyingMoney;
     }
 }
