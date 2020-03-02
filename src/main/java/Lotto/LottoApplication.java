@@ -1,9 +1,6 @@
 package Lotto;
 
 import Lotto.domain.*;
-import Lotto.utils.AutoLottosGenerator;
-import Lotto.utils.LottosGenerator;
-import Lotto.utils.ManualLottosGenerator;
 import Lotto.utils.NumberParser;
 import Lotto.views.InputView;
 import Lotto.views.OutputView;
@@ -16,15 +13,13 @@ public class LottoApplication {
         LottoCount manualLottoCount = new LottoCount(InputView.inputAsManualLottoCount());
         LottoCount autoLottoCount = new LottoCount(totalLottoCount.getLottoCount() - manualLottoCount.getLottoCount());
 
-        LottosGenerator manualLottosGenerator = new ManualLottosGenerator(InputView.inputAsManualLotto(manualLottoCount));
-        LottosGenerator autoLottosGenerator = new AutoLottosGenerator(autoLottoCount);
-        Lottos manualLottos = manualLottosGenerator.generate();
-        Lottos autoLottos = autoLottosGenerator.generate();
+        Lottos manualLottos = LottoManager.generateManualLottos(InputView.inputAsManualLotto(manualLottoCount));
+        Lottos autoLottos = LottoManager.generateAutoLottos(autoLottoCount);
 
         showPurchasedLottos(manualLottoCount, manualLottos, autoLottoCount, autoLottos);
         WinningNumber winningNumber = setWinningNumber();
 
-        Lottos allLottos = LottoConcat.concatLottos(autoLottos, manualLottos);
+        Lottos allLottos = LottoManager.concatLottos(autoLottos, manualLottos);
         showFinalResult(purchaseAmount, winningNumber, allLottos);
     }
 
