@@ -2,10 +2,8 @@ package view;
 
 import domain.LottoProfit;
 import domain.LottoResult;
-import domain.Tickets;
-import domain.numberscontainer.Ticket;
+import domain.numberscontainer.Tickets;
 
-import java.util.List;
 import java.util.Map;
 
 public class OutputView {
@@ -21,7 +19,7 @@ public class OutputView {
     }
 
     public static void printTickets(Tickets tickets) {
-        System.out.println(tickets.toString());
+        System.out.println(tickets);
     }
 
     public static void printLottoResults(Map<LottoResult, Integer> lottoResults) {

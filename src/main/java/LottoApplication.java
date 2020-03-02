@@ -3,7 +3,6 @@ import domain.numberscontainer.*;
 import view.InputView;
 import view.OutputView;
 
-import java.util.List;
 import java.util.Map;
 
 public class LottoApplication {

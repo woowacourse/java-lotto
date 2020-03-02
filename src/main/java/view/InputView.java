@@ -1,6 +1,6 @@
 package view;
 
-import domain.Tickets;
+import domain.numberscontainer.Tickets;
 
 import java.util.ArrayList;
 import java.util.List;

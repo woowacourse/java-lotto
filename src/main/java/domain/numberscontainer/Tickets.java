@@ -1,6 +1,7 @@
-package domain;
+package domain.numberscontainer;
 
-import domain.numberscontainer.Ticket;
+import domain.Money;
+import domain.RandomTicketFactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,7 +16,7 @@ public class Tickets {
     private final List<Ticket> tickets;
 
     private Tickets(List<Ticket> tickets) {
-        this.tickets = tickets;
+        this.tickets = Collections.unmodifiableList(tickets);
     }
 
     private static List<Ticket> createRandomTickets(int randomTicketSize) {

@@ -1,6 +1,6 @@
 package domain;
 
-import static domain.Tickets.TICKET_PRICE;
+import static domain.numberscontainer.Tickets.TICKET_PRICE;
 
 public class Money {
     private static final String NUMBER_REGEX = "^[0-9]+$";

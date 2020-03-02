@@ -16,7 +16,7 @@ public class WinningNumbersTest {
     void winningNumberConstructor() {
         assertThatThrownBy(() -> new WinningNumbers("1, 2, 3, 4, 5, 5", 7))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("6개의 숫자를 입력해주세요.");
+                .hasMessage("중복되지 않는 6개의 숫자를 입력해주세요.");
     }
 
     @ParameterizedTest
@@ -44,20 +44,4 @@ public class WinningNumbersTest {
         Ticket ticket = new Ticket("4, 5, 6, 7, 8, 9");
         assertThat((winningNumbers.findDuplicatedNumbers(ticket))).isEqualTo(3);
     }
-
-/*
-    @ParameterizedTest
-    @ValueSource(strings = {"3, 4, 5, 6, 7, 8", "3, 4, 5, 6, 7, 9", "3, 4, 5, 6, 7, 10", "3, 4, 5, 6, 7, 11", "3, 4, 5, 10, 11, 12", "10, 11, 12, 13, 14, 15"})
-    @DisplayName("1등 당첨 결과 확인")
-    void getLottoResultTest(String input) {
-        WinningNumbers winningNumbers = new WinningNumbers("3, 4, 5, 6, 7, 8", 9);
-
-        assertThat(winningNumbers.getLottoResult(new Ticket(input))).isEqualTo(LottoResult.FIRST);
-        assertThat(winningNumbers.getLottoResult(new Ticket(createLottoNumbersDto(3, 4, 5, 6, 7, 8)))).isEqualTo(LottoResult.FIRST);
-        assertThat(winningNumbers.getLottoResult(new Ticket(createLottoNumbersDto(3, 4, 5, 6, 7, 9)))).isEqualTo(LottoResult.SECOND);
-        assertThat(winningNumbers.getLottoResult(new Ticket(createLottoNumbersDto(3, 4, 5, 6, 7, 10)))).isEqualTo(LottoResult.THIRD);
-        assertThat(winningNumbers.getLottoResult(new Ticket(createLottoNumbersDto(3, 4, 5, 6, 10, 11)))).isEqualTo(LottoResult.FOURTH);
-        assertThat(winningNumbers.getLottoResult(new Ticket(createLottoNumbersDto(3, 4, 5, 10, 11, 12)))).isEqualTo(LottoResult.FIFTH);
-        assertThat(winningNumbers.getLottoResult(new Ticket(createLottoNumbersDto(10, 11, 12, 13, 14, 15)))).isEqualTo(LottoResult.FAILED);
-    }*/
 }
