@@ -7,7 +7,7 @@ public class LottoSize {
     private static final String NOT_NUMBER_MSG = "잘못된 숫자입니다.";
     private static final String NOT_VALIDATE_LOTTO_SIZE_MSG = "%s는 유효하지 않은 로또 개수입니다.";
 
-    private int lottoSize;
+    private final int lottoSize;
 
     public LottoSize(PaidPrice paidPrice, int lottoSize) {
         validateNotNull(paidPrice);

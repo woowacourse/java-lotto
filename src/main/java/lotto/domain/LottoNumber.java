@@ -1,8 +1,10 @@
 package lotto.domain;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     public static final Map<Integer, LottoNumber> lottoNumbers;
@@ -12,13 +14,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private static final String NOT_IN_SCOPE_NUMBERS_MSG = "로또 번호의 범위가 잘못되었습니다.";
     private static final String NOT_NUMBER_MSG = "정수로 입력하셔야 합니다.";
 
-    private int number;
+    private final int number;
 
     static {
-        lottoNumbers = new HashMap<>();
-        for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
-            lottoNumbers.put(i, new LottoNumber(i));
-        }
+        lottoNumbers = IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
+                .boxed()
+                .collect(Collectors.toMap(Function.identity(), LottoNumber::new));
     }
 
     public LottoNumber(String number) {

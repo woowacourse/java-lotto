@@ -12,9 +12,9 @@ public enum WinningInfo {
     SECOND(5, true, 30_000_000),
     FIRST(6, false, 2_000_000_000);
 
-    private int matchCount;
-    private boolean hasBonus;
-    private int winningPrice;
+    private final int matchCount;
+    private final boolean hasBonus;
+    private final int winningPrice;
 
     WinningInfo(int matchCount, boolean hasBonus, int winningPrice) {
         this.matchCount = matchCount;

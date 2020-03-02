@@ -8,7 +8,7 @@ public class PaidPrice {
     private static final String UNDER_LOTTO_PRICE_MSG = "%d원 이상으로 입력해야 합니다.";
     private static final String NOT_NUMBER_MSG = "정수로 입력하셔야 합니다.";
 
-    private int payment;
+    private final int payment;
 
     public PaidPrice(String inputMoney) {
         this(validateNumber(inputMoney));

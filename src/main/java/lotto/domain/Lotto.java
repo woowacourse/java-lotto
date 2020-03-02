@@ -8,9 +8,9 @@ import java.util.TreeSet;
 public class Lotto {
     private static final String EMPTY_INPUT_MSG = "로또 번호가 입력되지 않았습니다.";
     private static final String INVALIDATE_LOTTO_NUMBERS_ERROR_MSG = "로또 번호는 중복되지 않는 6개의 숫자여야 합니다.";
-    public static final int  LOTTO_NUMBERS_SIZE = 6;
+    public static final int LOTTO_NUMBERS_SIZE = 6;
 
-    private Set<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
     public Lotto(Set<LottoNumber> lottoNumbers) {
         validateNotNull(lottoNumbers);

@@ -7,8 +7,8 @@ public class WinningLotto {
     private static final String EMPTY_BONUS_MSG = "보너스 번호가 입력되지 않았습니다.";
     private static final String BONUS_NUMBER_ALREADY_EXIST_ERROR_MSG = "보너스 번호가 당첨번호와 중복됩니다.";
 
-    private Lotto lotto;
-    private LottoNumber bonusNumber;
+    private final Lotto lotto;
+    private final LottoNumber bonusNumber;
 
     public WinningLotto(Lotto lotto, LottoNumber bonusNumber) {
         validateNotNull(lotto, bonusNumber);

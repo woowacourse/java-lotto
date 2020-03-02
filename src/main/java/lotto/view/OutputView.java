@@ -2,11 +2,7 @@ package lotto.view;
 
 import lotto.domain.*;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
-
 public class OutputView {
-    public static final String SPLIT_DELIMETER = ",";
 
     public static void printLottoSize(int manaulLottoSize, int autoLottoSize) {
         String result = "수동으로 %s장, 자동으로 %s개를 구매했습니다.";

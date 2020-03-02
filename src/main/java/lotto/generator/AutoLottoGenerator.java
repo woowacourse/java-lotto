@@ -16,6 +16,7 @@ public class AutoLottoGenerator implements LottoGenerator {
         int lottoSize = bettingInfo.getAutoLottoSize();
         List<Lotto> lottos = new ArrayList<>();
         List<LottoNumber> lottoNumbers = new ArrayList(LottoNumber.lottoNumbers.values());
+
         for (int i = 0; i < lottoSize; i++) {
             Collections.shuffle(lottoNumbers);
             lottos.add(new Lotto(lottoNumbers.subList(0, Lotto.LOTTO_NUMBERS_SIZE)));
