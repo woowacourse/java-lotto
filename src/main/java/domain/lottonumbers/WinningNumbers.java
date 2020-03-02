@@ -3,13 +3,14 @@ package domain.lottonumbers;
 import domain.lottonumbers.lottonumber.LottoNumber;
 import domain.result.LottoRank;
 
-public class WinningNumbers extends LottoNumbers {
+public class WinningNumbers {
 
+    private final LottoTicket winningTicket;
     private final LottoNumber bonusNumber;
 
-    public WinningNumbers(WinningNumbersDto winningNumbersDto) {
-        super(winningNumbersDto.getLottoNumbers());
-        this.bonusNumber = winningNumbersDto.getBonusNumber();
+    public WinningNumbers(LottoTicket winningTicket, LottoNumber bonusNumber) {
+        this.winningTicket = winningTicket;
+        this.bonusNumber = bonusNumber;
     }
 
     public LottoRank findLottoRank(LottoTicket lottoTicket) {
@@ -19,9 +20,7 @@ public class WinningNumbers extends LottoNumbers {
         return LottoRank.valueOf(matchingNumber, hasBonus);
     }
 
-    private int findNumberOfMatchingNumbers(LottoNumbers comparingNumber) {
-        return (int) this.lottoNumbers.stream()
-                .filter(comparingNumber::contains)
-                .count();
+    private int findNumberOfMatchingNumbers(LottoTicket comparingTicket) {
+        return this.winningTicket.findDuplicatedNumbers(comparingTicket);
     }
 }

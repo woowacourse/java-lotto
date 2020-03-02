@@ -6,6 +6,7 @@ import java.util.stream.IntStream;
 import static java.util.stream.Collectors.toMap;
 
 public class LottoNumberRepository {
+
     static final Map<Integer, LottoNumber> cache;
 
     static {

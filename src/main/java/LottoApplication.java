@@ -1,12 +1,16 @@
 import domain.Money;
 import domain.lottonumbers.LottoTicket;
 import domain.lottonumbers.WinningNumbers;
+import domain.lottonumbers.lottonumber.LottoNumber;
 import domain.lottostore.RandomLottoStore;
 import domain.result.LottoResult;
 import view.InputView;
 import view.OutputView;
 
 import java.util.List;
+
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toSet;
 
 public class LottoApplication {
 
@@ -23,12 +27,7 @@ public class LottoApplication {
     }
 
     private static Money enterMoney() {
-        try {
-            return InputView.enterMoney();
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            throw e;
-        }
+        return new Money(InputView.enterMoney());
     }
 
     private static void printTickets(List<LottoTicket> tickets) {
@@ -37,12 +36,17 @@ public class LottoApplication {
     }
 
     private static WinningNumbers enterWinningNumbers() {
-        try {
-            return new WinningNumbers(InputView.enterWinningNumbers());
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            throw e;
-        }
+        return new WinningNumbers(enterTicket(), enterBonusNumber());
+    }
+
+    private static LottoTicket enterTicket() {
+        return InputView.enterLastWeekWinningNumbers().stream()
+                .map(LottoNumber::new)
+                .collect(collectingAndThen(toSet(), LottoTicket::new));
+    }
+
+    private static LottoNumber enterBonusNumber() {
+        return LottoNumber.of(InputView.enterBonusNumber());
     }
 
     private static void printResult(LottoResult lottoResult, Money money) {

@@ -1,9 +1,7 @@
 package domain.lottostore;
 
 import domain.Money;
-import domain.lottonumbers.LottoNumbers;
 import domain.lottonumbers.LottoTicket;
-import domain.lottonumbers.LottoTicketDto;
 import domain.lottonumbers.lottonumber.LottoNumber;
 
 import java.util.ArrayList;
@@ -23,17 +21,23 @@ public class RandomLottoStore implements LottoStore<Money> {
         int numberOfTickets = money.getNumberOfTickets();
 
         for (int i = 0; i < numberOfTickets; i++) {
-            LottoTicketDto randomDto = new LottoTicketDto(generateRandomLottoNumbers());
-            lottoTickets.add(new LottoTicket(randomDto));
+            Set<LottoNumber> newRandomLottoNumbers = parseNumbersToLottoNumbers(generateRandomNumbers());
+            lottoTickets.add(new LottoTicket(newRandomLottoNumbers));
         }
 
         return lottoTickets;
     }
 
-    private Set<Integer> generateRandomLottoNumbers() {
+    private Set<LottoNumber> parseNumbersToLottoNumbers(Set<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::of)
+                .collect(toSet());
+    }
+
+    private Set<Integer> generateRandomNumbers() {
         return random.ints(LottoNumber.MIN_BOUND, LottoNumber.MAX_BOUND + 1)
                 .distinct()
-                .limit(LottoNumbers.SIZE)
+                .limit(LottoTicket.SIZE)
                 .boxed()
                 .collect(toSet());
     }

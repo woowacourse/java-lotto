@@ -21,7 +21,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return LottoNumberRepository.cache.get(number);
     }
 
-    private static void validateNumber(int number) {
+    protected static void validateNumber(int number) {
         if (number < MIN_BOUND || number > MAX_BOUND) {
             throw new IllegalArgumentException("1부터 45까지의 숫자만 가능합니다.");
         }

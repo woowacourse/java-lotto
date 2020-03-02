@@ -1,12 +1,10 @@
 package view;
 
-import domain.lottonumbers.LottoNumbers;
 import domain.result.LottoRank;
 import domain.result.LottoResult;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class StringConverter {
 
