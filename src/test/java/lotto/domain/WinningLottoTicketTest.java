@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class WinningLottoTicketTest {
     @Test
-    void validateBonusNumber_보너스볼이_나오지_않은_숫자일_때() {
+    void validateBonusNumberTest_보너스볼이_나오지_않은_숫자일_때() {
         List<LottoNumber> winningNumbers = new ArrayList<LottoNumber>(Arrays.asList(
                 new LottoNumber("1"),
                 new LottoNumber("2"),
@@ -24,7 +24,7 @@ public class WinningLottoTicketTest {
     }
 
     @Test
-    void validateBonusNumber_보너스볼이_이미_나온_숫자일_때() {
+    void validateBonusNumberTest_보너스볼이_이미_나온_숫자일_때() {
         List<LottoNumber> winningNumbers = new ArrayList<LottoNumber>(Arrays.asList(
                 new LottoNumber("1"),
                 new LottoNumber("2"),

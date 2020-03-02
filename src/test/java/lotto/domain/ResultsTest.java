@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -43,14 +42,14 @@ public class ResultsTest {
 
 
     @Test
-    void calculateResults_당첨되지_않았을_때() {
+    void calculateResultsTest_당첨되지_않았을_때() {
         Results results = new Results(new LottoTickets(Arrays.asList(notWinningUserLottoTicket)), winningLotto);
         results.calculateResults();
         assertThat(results.getResults().get(0 + RESULT_BASE).getWinningInfo().name()).isEqualTo(WinningInfo.FAIL.name());
     }
 
     @Test
-    void calculateResults_당첨이_존재할_때() {
+    void calculateResultsTest_당첨이_존재할_때() {
         Results results = new Results(new LottoTickets(Arrays.asList(notWinningUserLottoTicket, secondWinningUserLottoTicket)), winningLotto);
         results.calculateResults();
         assertThat(results.getResults().get(0 + RESULT_BASE).getWinningInfo().name()).isEqualTo(WinningInfo.FAIL.name());
@@ -58,7 +57,7 @@ public class ResultsTest {
     }
 
     @Test
-    void getEarningRate() {
+    void getEarningRateTest() {
         Results results = new Results(new LottoTickets(Arrays.asList(notWinningUserLottoTicket, secondWinningUserLottoTicket)), winningLotto);
         results.calculateResults();
         assertThat(results.getEarningRate()).isEqualTo(1500000);
