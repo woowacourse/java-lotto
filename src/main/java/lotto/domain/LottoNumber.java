@@ -21,11 +21,15 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public static LottoNumber getInstance(String value) {
         validate(value);
-        return LottoNumber.getInstance(Integer.parseInt(value));
+        return getInstance(Integer.parseInt(value));
     }
 
     public static LottoNumber getInstance(int value) {
-        return LottoFactory.pickLottoNumber(value);
+        LottoNumber lottoNumber = LottoFactory.pickLottoNumber(value);
+        if (lottoNumber == null) {
+            throw new IllegalArgumentException(String.format("로또 번호의 범위(%d~%d)를 벗어났습니다.", MIN_VALUE, MAX_VALUE));
+        }
+        return lottoNumber;
     }
 
     private static void validate(String number) {
