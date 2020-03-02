@@ -19,7 +19,7 @@ public class LottoTickets {
 
 	private static List<SerialLottoNumber> mergeLottoTickets(final LottoTickets... someLottoTickets) {
 		return Arrays.stream(someLottoTickets)
-				.map(lottoTicket -> lottoTicket.lottoTickets)
+				.map(lottoTickets -> lottoTickets.lottoTickets)
 				.reduce(new ArrayList<>(), ListBuilder::merge);
 	}
 
