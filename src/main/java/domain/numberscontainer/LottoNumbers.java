@@ -16,6 +16,7 @@ public class LottoNumbers {
     protected final Set<LottoNumber> lottoNumbers;
 
     public LottoNumbers(Set<LottoNumber> lottoNumbers) {
+        validateSize(lottoNumbers);
         this.lottoNumbers = Collections.unmodifiableSet(lottoNumbers);
     }
 
@@ -37,5 +38,13 @@ public class LottoNumbers {
         if (lottoNumbers.size() != SIZE) {
             throw new IllegalArgumentException(String.format("중복되지 않는 %d개의 숫자를 입력해주세요.", SIZE));
         }
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
+    public Set<LottoNumber> get() {
+        return lottoNumbers;
     }
 }

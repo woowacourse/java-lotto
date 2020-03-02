@@ -2,12 +2,13 @@ package domain.numberscontainer;
 
 import domain.LottoRank;
 
-public class WinningNumbers extends LottoNumbers {
+public class WinningNumbers {
 
+    private LottoNumbers lottoNumbers;
     private final LottoNumber bonusNumber;
 
     public WinningNumbers(String lottoNumbers, int bonusNumber) {
-        super(lottoNumbers);
+        this.lottoNumbers = new LottoNumbers(lottoNumbers);
         validateBonusNumber(bonusNumber);
         this.bonusNumber = LottoNumber.get(bonusNumber);
     }
@@ -25,7 +26,7 @@ public class WinningNumbers extends LottoNumbers {
     }
 
     public int findDuplicatedNumbers(Ticket ticket) {
-        return (int) this.lottoNumbers.stream()
+        return (int) this.lottoNumbers.get().stream()
                 .filter(ticket::contains)
                 .count();
     }
