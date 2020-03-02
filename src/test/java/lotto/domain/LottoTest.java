@@ -46,7 +46,7 @@ public class LottoTest {
     @CsvSource(value = {"1:true", "6:true", "7:false"}, delimiter = ':')
     void containsTest(int input, boolean expected) {
         Lotto lotto = Lotto.from(new String[]{"1", "2", "3", "4", "5", "6"});
-        LottoNumber lottoNumber = LottoNumber.of(input);
+        LottoNumber lottoNumber = LottoNumber.getInstance(input);
         boolean result = lotto.contains(lottoNumber);
         assertThat(result).isEqualTo(expected);
     }

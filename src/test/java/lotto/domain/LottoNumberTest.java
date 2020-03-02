@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class LottoNumberTest {
 
     private static void assertInvokeExceptionWithMessageWhenCreateWinningNumbers(String input, String message) {
-        assertThatThrownBy(() -> LottoNumber.of(input))
+        assertThatThrownBy(() -> LottoNumber.getInstance(input))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessageEndingWith(message);
     }

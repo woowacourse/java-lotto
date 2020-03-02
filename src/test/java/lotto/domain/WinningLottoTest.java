@@ -17,7 +17,7 @@ public class WinningLottoTest {
     void validateDuplicatedNumberTest(int input) {
         String[] numbers = {"1", "2", "3", "4", "5", "6"};
         Lotto winningLottoLine = Lotto.from(numbers);
-        LottoNumber bonusNumber = LottoNumber.of(input);
+        LottoNumber bonusNumber = LottoNumber.getInstance(input);
 
         assertThatThrownBy(() -> new WinningLotto(winningLottoLine, bonusNumber))
                 .isInstanceOf(RuntimeException.class)
@@ -39,7 +39,7 @@ public class WinningLottoTest {
     void hasMatchResultTest(String input1, String input2, int input3, boolean expected) {
         Lotto lotto = Lotto.from(input1.split(LOTTO_NUMBERS_DELIMITER));
         Lotto winningLottoLine = Lotto.from(input2.split(LOTTO_NUMBERS_DELIMITER));
-        LottoNumber bonusNumber = LottoNumber.of(input3);
+        LottoNumber bonusNumber = LottoNumber.getInstance(input3);
         WinningLotto winningLotto = new WinningLotto(winningLottoLine, bonusNumber);
 
         boolean result = winningLotto.hasMatchResult(lotto);
@@ -58,7 +58,7 @@ public class WinningLottoTest {
     void createResultTest(String input1, String input2, String input3, int expected) {
         Lotto lotto = Lotto.from(input1.split(LOTTO_NUMBERS_DELIMITER));
         Lotto winningLottoLine = Lotto.from(input2.split(LOTTO_NUMBERS_DELIMITER));
-        LottoNumber bonusNumber = LottoNumber.of(input3);
+        LottoNumber bonusNumber = LottoNumber.getInstance(input3);
         WinningLotto winningLotto = new WinningLotto(winningLottoLine, bonusNumber);
 
         MatchResult matchResult = winningLotto.createResult(lotto);
