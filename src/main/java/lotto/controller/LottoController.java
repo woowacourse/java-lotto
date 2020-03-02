@@ -31,10 +31,13 @@ public class LottoController {
     private Customer createCustomer() {
         PurchaseInfo purchaseInfo = createPurchaseInfo();
 
-        ManualNumbersDTO manualNumbersDTO = InputView.inputManualNumbers(purchaseInfo.getNumberOfManualTickets());
-        List<List<Integer>> manualNumbers = manualNumbersDTO.getManualNumbers();
+        if (purchaseInfo.getNumberOfManualTickets() != 0) {
+            ManualNumbersDTO manualNumbersDTO = InputView.inputManualNumbers(purchaseInfo.getNumberOfManualTickets());
+            List<List<Integer>> manualNumbers = manualNumbersDTO.getManualNumbers();
+            return new Customer(purchaseInfo, manualNumbers);
+        }
 
-        return new Customer(purchaseInfo, manualNumbers);
+        return new Customer(purchaseInfo);
     }
 
     private PurchaseInfo createPurchaseInfo() {

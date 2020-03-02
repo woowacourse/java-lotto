@@ -1,6 +1,7 @@
 package lotto.domain.ticket;
 
 import lotto.domain.customer.Customer;
+import lotto.domain.customer.PurchaseInfo;
 import lotto.domain.ticket.ball.LottoBall;
 import lotto.util.NullOrEmptyValidator;
 
@@ -17,9 +18,10 @@ public class AutoLottoMachine implements LottoMachine {
     @Override
     public List<LottoTicket> buyTickets(Customer customer) {
         NullOrEmptyValidator.isNull(customer);
+        PurchaseInfo purchaseInfo = customer.getPurchaseInfo();
 
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < customer.getPurchaseInfo().getNumberOfLeftTickets(); i++) {
+        for (int i = 0; i < purchaseInfo.getNumberOfLeftTickets(); i++) {
             lottoTickets.add(createOneTicket());
         }
 
