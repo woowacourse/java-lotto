@@ -16,20 +16,10 @@ public class LottoResultTest {
     private Lottos lottos = new Lottos();
 
     @Test
-    @DisplayName("로또 결과의 초기값 0인지 확인")
-    void initialValueOfLottoResultTest() {
-        LottoResult lottoResult = new LottoResult();
-        for (LottoRank rank : LottoRank.values()) {
-            assertThat(lottoResult.getRankCount(rank)).isEqualTo(0);
-        }
-    }
-
-    @Test
     @DisplayName("로또 매칭 계산 후 당첨 결과 누적 테스트")
     void accumulateLottoResultAfterCountingWinningNumbersTest() {
         lottos.addLotto(lotto);
-        LottoResult lottoResult = new LottoResult();
-        lottoResult.countWinningLotto(lottos, winningNumber);
+        LottoResult lottoResult = new LottoResult(lottos, winningNumber);
         assertThat(lottoResult.getRankCount(LottoRank.SECOND)).isEqualTo(1);
     }
 
@@ -37,8 +27,7 @@ public class LottoResultTest {
     @DisplayName("로또 결과 계산 이후 최종 수익 계산")
     void calculateTotalProfitUsingResultTest() {
         lottos.addLotto(lotto);
-        LottoResult lottoResult = new LottoResult();
-        lottoResult.countWinningLotto(lottos, winningNumber);
+        LottoResult lottoResult = new LottoResult(lottos, winningNumber);
         int totalProfit = lottoResult.calculateTotalProfit();
         assertThat(totalProfit).isEqualTo(30_000_000);
     }

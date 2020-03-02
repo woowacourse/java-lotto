@@ -6,15 +6,18 @@ import view.OutputView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManualLottosGenerator implements LottosGenerator {
+public class LottoMachine {
+    private static final int START_INDEX = 0;
+    private List<Lotto> lottos = new ArrayList<>();
 
-    @Override
-    public List<Lotto> generateLottos(final LottoCount lottoCount) {
-        List<Lotto> lottos = new ArrayList<>();
+    public LottoMachine(final LottoCount lottoCount) {
         for (int index = START_INDEX; index < lottoCount.getManualCount(); index++) {
             inputManualNumbersWithValidation(lottos);
         }
-        return lottos;
+        LottoGenerator lottoGenerator = new AutoLottoGenerator();
+        for (int index = START_INDEX; index < lottoCount.getAutoCount(); index++) {
+            lottos.add(lottoGenerator.generateLotto());
+        }
     }
 
     private void inputManualNumbersWithValidation(final List<Lotto> lottos) {
@@ -25,5 +28,9 @@ public class ManualLottosGenerator implements LottosGenerator {
             OutputView.printExceptionMessage(e);
             inputManualNumbersWithValidation(lottos);
         }
+    }
+
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 }

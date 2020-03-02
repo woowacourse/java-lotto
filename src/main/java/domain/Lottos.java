@@ -11,11 +11,8 @@ public class Lottos {
     }
 
     public Lottos(final LottoCount lottoCount) {
-        LottosGenerator lottosGenerator = new ManualLottosGenerator();
-        lottos.addAll(lottosGenerator.generateLottos(lottoCount));
-
-        lottosGenerator = new AutoLottosGenerator();
-        lottos.addAll(lottosGenerator.generateLottos(lottoCount));
+        LottoMachine lottoMachine = new LottoMachine(lottoCount);
+        lottos = lottoMachine.getLottos();
     }
 
     public void addLotto(final Lotto lotto) {

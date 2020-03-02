@@ -56,8 +56,7 @@ public class MoneyTest {
         lottos.addLotto(lotto);
 
         Money money = new Money("1500");
-        LottoResult lottoResult = new LottoResult();
-        lottoResult.countWinningLotto(lottos, winningNumber);
+        LottoResult lottoResult = new LottoResult(lottos, winningNumber);
         int profitRatio = money.calculateProfitRatio(lottoResult);
         assertThat(profitRatio).isEqualTo(3_000_000);
     }
