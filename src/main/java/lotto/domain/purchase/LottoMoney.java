@@ -50,8 +50,8 @@ public class LottoMoney {
 		return (lottoMoney % UNIT) != 0L;
 	}
 
-	public PurchasingCount generatePurchasingLottoTicketCount() {
-		return new PurchasingCount((int)(lottoMoney / UNIT));
+	public int calculatePurchasableCountBy(long lottoPrice) {
+		return (int)(lottoMoney / lottoPrice);
 	}
 
 	public LottoMoney addBy(LottoMoney addedLottoMoney) {

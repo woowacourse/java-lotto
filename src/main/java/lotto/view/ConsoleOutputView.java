@@ -1,15 +1,12 @@
 package lotto.view;
 
-import java.util.List;
-
 import lotto.domain.lottoTicket.LottoTickets;
+import lotto.domain.purchase.TotalPurchasingCount;
 import lotto.domain.result.WinningResult;
 import lotto.util.StringUtil;
 
 public class ConsoleOutputView {
 
-	private static final int MANUAL_LOTTO_TICKETS_COUNT_INDEX = 0;
-	private static final int AUTO_LOTTO_TICKETS_COUNT_INDEX = 1;
 	private static final String INPUT_MANUAL_LOTTO_TICKETS_COUNT_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
 	private static final String PURCHASE_LOTTO_COMPLETE_MESSAGE = "수동으로 %d개, 자동으로 %d개를 구매했습니다.";
 	private static final String WINNING_RESULT_NOTICE_MESSAGE = "당첨 통계";
@@ -19,18 +16,14 @@ public class ConsoleOutputView {
 	private ConsoleOutputView() {
 	}
 
-	public static void printException(String exceptionMessage) {
-		System.out.println(exceptionMessage);
-	}
-
 	public static void printInputManualLottoTicket() {
 		System.out.println(INPUT_MANUAL_LOTTO_TICKETS_COUNT_MESSAGE);
 	}
 
-	public static void printPurchasedLottoTicketCount(List<Integer> manualAndAutoLottoTicketsCount) {
+	public static void printTotalPurchasingCount(TotalPurchasingCount totalPurchasingCount) {
 		System.out.println(String.format(PURCHASE_LOTTO_COMPLETE_MESSAGE,
-			manualAndAutoLottoTicketsCount.get(MANUAL_LOTTO_TICKETS_COUNT_INDEX),
-			manualAndAutoLottoTicketsCount.get(AUTO_LOTTO_TICKETS_COUNT_INDEX)));
+			totalPurchasingCount.getManualPurchasingCount().getPurchasingCount(),
+			totalPurchasingCount.getAutoPurchasingCount().getPurchasingCount()));
 	}
 
 	public static void printPurchasedLottoTickets(LottoTickets purchasedLottoTickets) {

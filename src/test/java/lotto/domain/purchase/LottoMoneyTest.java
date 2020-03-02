@@ -50,12 +50,10 @@ public class LottoMoneyTest {
 
 	@ParameterizedTest
 	@CsvSource(value = {"10000,10", "15000,15", "37000,37"})
-	void countPurchasingLottoTicket_ValidUnitLottoMoney_DivideByUnit(long value, int value1) {
+	void calculatePurchasableCountBy_ValidUnitLottoMoney_DivideByUnit(long value, int expected) {
 		LottoMoney lottoMoney = new LottoMoney(value);
 
-		PurchasingCount actual = lottoMoney.generatePurchasingLottoTicketCount();
-
-		PurchasingCount expected = new PurchasingCount(value1);
+		int actual = lottoMoney.calculatePurchasableCountBy(1_000L);
 
 		assertThat(actual).isEqualTo(expected);
 	}

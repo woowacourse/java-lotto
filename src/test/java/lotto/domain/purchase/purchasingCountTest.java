@@ -3,8 +3,11 @@ package lotto.domain.purchase;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class purchasingCountTest {
+
 	@Test
 	void PurchasingCount_InputPurchasingCount_GenerateInstance() {
 		int value = 10;
@@ -22,24 +25,18 @@ class purchasingCountTest {
 	}
 
 	@Test
-	void isOverBy_BiggerNumberThanPurchasingCount_ReturnTrue() {
-		PurchasingCount purchasingCount = new PurchasingCount(10);
-		int compareValue = 15;
+	void valueOf_InputPurchasingCount_ReturnInstance() {
+		String inputPurchasingCount = "5";
 
-		boolean actual = purchasingCount.isOverBy(compareValue);
-
-		assertThat(actual).isTrue();
+		assertThat(PurchasingCount.valueOf(inputPurchasingCount)).isInstanceOf(PurchasingCount.class);
 	}
 
-	@Test
-	void purchaseFor_ManualLottoTicketCount_MinusManualLottoTicketCount() {
-		int purchasingCountValue = 10;
-		PurchasingCount purchasingCount = new PurchasingCount(purchasingCountValue);
-		ManualLottoTicketCount manualLottoTicketCount = new ManualLottoTicketCount("5", purchasingCount);
-
-		purchasingCount.purchaseFor(manualLottoTicketCount);
-
-		assertThat(purchasingCount.getPurchasingCount()).isEqualTo(
-			purchasingCountValue - manualLottoTicketCount.getManualLottoTicketCount());
+	@ParameterizedTest
+	@ValueSource(strings = {"abc", "123.4"})
+	void parseToInt_NotIntegerInputPurchasingCount_InvalidPurchasingCountExceptionThrown(String value) {
+		assertThatThrownBy(() -> PurchasingCount.valueOf(value))
+			.isInstanceOf(InvalidPurchasingCountException.class)
+			.hasMessage(InvalidPurchasingCountException.NOT_INTEGER);
 	}
+
 }

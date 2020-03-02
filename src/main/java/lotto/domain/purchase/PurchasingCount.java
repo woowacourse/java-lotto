@@ -1,9 +1,8 @@
 package lotto.domain.purchase;
 
-import java.util.Iterator;
 import java.util.Objects;
 
-public class PurchasingCount implements Iterator<PurchasingCount> {
+public class PurchasingCount {
 
 	private int purchasingCount;
 
@@ -18,27 +17,20 @@ public class PurchasingCount implements Iterator<PurchasingCount> {
 		}
 	}
 
-	public boolean isOverBy(int comparePurchasingCount) {
-		return purchasingCount < comparePurchasingCount;
+	public static PurchasingCount valueOf(String inputPurchasingCount) {
+		return new PurchasingCount(parseToInt(inputPurchasingCount));
 	}
 
-	public void purchaseFor(ManualLottoTicketCount manualLottoTicketCount) {
-		purchasingCount -= manualLottoTicketCount.getManualLottoTicketCount();
+	private static int parseToInt(String inputPurchasingCount) {
+		try {
+			return Integer.parseInt(inputPurchasingCount);
+		} catch (NumberFormatException e) {
+			throw new InvalidPurchasingCountException(InvalidPurchasingCountException.NOT_INTEGER);
+		}
 	}
 
 	public int getPurchasingCount() {
 		return purchasingCount;
-	}
-
-	@Override
-	public boolean hasNext() {
-		return purchasingCount > 0;
-	}
-
-	@Override
-	public PurchasingCount next() {
-		purchasingCount--;
-		return this;
 	}
 
 	@Override
