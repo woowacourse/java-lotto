@@ -10,14 +10,16 @@ public class Ranks {
     public Ranks(WinningNumber winningNumber, Lottos lottos) {
         lottos.getLottos().stream()
                 .map(t -> calculateSingleRank(t, winningNumber))
-                .forEach(t -> {
-                    if (ranks.containsKey(t)) {
-                        Long val = ranks.get(t);
-                        val++;
-                        ranks.put(t, val);
-                    }
-                    ranks.putIfAbsent(t, 1L);
-                });
+                .forEach(this::incrementRanksCountIfExist);
+    }
+
+    private void incrementRanksCountIfExist(Rank t) {
+        if (ranks.containsKey(t)) {
+            Long val = ranks.get(t);
+            val++;
+            ranks.put(t, val);
+        }
+        ranks.putIfAbsent(t, 1L);
     }
 
     private Rank calculateSingleRank(Lotto lotto, WinningNumber winningNumber) {
