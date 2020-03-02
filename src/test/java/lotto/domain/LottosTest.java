@@ -22,6 +22,7 @@ public class LottosTest {
 
 	@Test
 	@DisplayName("로또가 없는 경우")
+	@SuppressWarnings("NonAsciiCharacters")
 	void constructor_로또가_없는_경우() {
 		assertThatExceptionOfType(InvalidLottosException.class).isThrownBy(() -> {
 			new Lottos(null);

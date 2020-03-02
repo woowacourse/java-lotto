@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.exception.InvalidLottoPurchaseMoneyException;
+import lotto.domain.exception.NotEnoughMoneyException;
 
 public class LottoPurchaseMoney {
 	private static final int LOTTO_PRICE = 1_000;
@@ -34,8 +35,14 @@ public class LottoPurchaseMoney {
 		return Integer.parseInt(lottoPurchaseMoney) < LOTTO_PRICE;
 	}
 
-	public int getBuyCount() {
-		return lottoPurchaseMoney / LOTTO_PRICE;
+	public LottoBuyCount getBuyCount(String manual)
+	{
+		int totalCount = lottoPurchaseMoney / LOTTO_PRICE;
+		int manualCount = Integer.parseInt(manual);
+		if (manualCount > totalCount) {
+			throw new NotEnoughMoneyException();
+		}
+		return new LottoBuyCount(manualCount, totalCount - manualCount);
 	}
 
 	public int getValue() {

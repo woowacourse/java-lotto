@@ -28,6 +28,10 @@ public class Lottos implements Iterable<Lotto> {
 				.collect(Collectors.collectingAndThen(Collectors.toList(), LottoResults::new));
 	}
 
+	public int getSize() {
+		return lottos.size();
+	}
+
 	@Override
 	public Iterator<Lotto> iterator() {
 		return lottos.iterator();
