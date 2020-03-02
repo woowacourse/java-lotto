@@ -31,7 +31,7 @@ public class LottoNumberTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"천원", "3.2","ten_dollar"})
+    @ValueSource(strings = {"천원", "3.2", "ten_dollar"})
     void validateNumber_정수로_입력하지_않았을_때(String invalidInputMoney) {
         assertThatThrownBy(() -> new LottoNumber(invalidInputMoney))
                 .isInstanceOf(IllegalArgumentException.class)
