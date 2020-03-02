@@ -23,8 +23,8 @@ public class OutputView {
         System.out.println("--------");
 
         for (RankType rankType : RankType.values()) {
-            System.out.println(rankType.getPrintStr() + String.format("%d", lottoResults.getLottoResults().get(rankType)) + "개");
+            System.out.println(rankType.print() + String.format("%d", lottoResults.getLottoResults().get(rankType)) + "개");
         }
-        System.out.println("총 수익률은 " + Money.getProfit(lottoResults.getLottoResults(), money.getMoney()) + "%입니다.");
+        System.out.println("총 수익률은 " + Money.calculateProfit(lottoResults.getLottoResults(), money.getMoney()) + "%입니다.");
     }
 }

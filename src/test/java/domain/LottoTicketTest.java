@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -36,6 +35,6 @@ public class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(IntStream.of(1, 2, 3, 4, 5, 7).mapToObj(LottoNumber::from).collect(Collectors.toList()));
         LottoNumber lottoNumber = LottoNumber.from(7);
 
-        Assertions.assertThat(lottoTicket.containsLottoNumber(lottoNumber)).isTrue();
+        Assertions.assertThat(lottoTicket.contains(lottoNumber)).isTrue();
     }
 }

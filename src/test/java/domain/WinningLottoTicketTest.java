@@ -56,6 +56,6 @@ public class WinningLottoTicketTest {
     void winningLottoCount(List<LottoNumber> originalLottoTicket, int expected) {
         LottoTicket lottoTicket = new LottoTicket(originalLottoTicket);
         WinningLottoTicket winningLottoTicket = new WinningLottoTicket("1, 2, 3, 4, 5, 6", "7");
-        Assertions.assertThat(winningLottoTicket.getCorrectCount(lottoTicket)).isEqualTo(expected);
+        Assertions.assertThat(winningLottoTicket.countMatchNumber(lottoTicket)).isEqualTo(expected);
     }
 }

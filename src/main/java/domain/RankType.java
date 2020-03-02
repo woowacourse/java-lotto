@@ -24,7 +24,7 @@ public enum RankType {
     }
 
     public static RankType of(LottoTicket lottoTicket, WinningLottoTicket winningLottoTicket) {
-        int correctCount = winningLottoTicket.getCorrectCount(lottoTicket);
+        int correctCount = winningLottoTicket.countMatchNumber(lottoTicket);
         if (correctCount == BONUS_NUMBER_MATCH_COUNT && isBonusCondition(lottoTicket, winningLottoTicket)) {
             return MATCH_FIVE_WITH_BONUS;
         }
@@ -42,7 +42,7 @@ public enum RankType {
         return expression.apply(value);
     }
 
-    public String getPrintStr() {
+    public String print() {
         return printStr;
     }
 }

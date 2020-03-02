@@ -32,6 +32,6 @@ public class MoneyTest {
 
         lottoResults.put(winningStr, winningCount);
 
-        Assertions.assertThat(Money.getProfit(lottoResults, money)).isEqualTo(expected);
+        Assertions.assertThat(Money.calculateProfit(lottoResults, money)).isEqualTo(expected);
     }
 }

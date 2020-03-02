@@ -15,18 +15,18 @@ public class WinningLottoTicket {
     }
 
     private void validateDuplicateBonusNumber(LottoTicket winningNumber, LottoNumber bonusNumber) {
-        if (winningNumber.containsLottoNumber(bonusNumber)) {
+        if (winningNumber.contains(bonusNumber)) {
             throw new IllegalArgumentException("중복된 보너스 숫자를 입력하였습니다.");
         }
     }
 
-    public int getCorrectCount(LottoTicket lottoTicket) {
+    public int countMatchNumber(LottoTicket lottoTicket) {
         return Math.toIntExact(lottoTicket.getLottoTicket().stream()
                 .filter(this.winningTicket.getLottoTicket()::contains)
                 .count());
     }
 
     public boolean isMatchBonusNumber(LottoTicket lottoTicket) {
-        return lottoTicket.containsLottoNumber(bonusNumber);
+        return lottoTicket.contains(bonusNumber);
     }
 }
