@@ -9,8 +9,8 @@ public class LottoGame {
         this.winningNumber = winningNumber;
     }
 
-    public void calculateResults(final LottoResult lottoResult) {
-        lottoResult.countWinningLotto(lottos, winningNumber);
+    public LottoResult calculateResults() {
+        return new LottoResult(lottos, winningNumber);
     }
 
 }

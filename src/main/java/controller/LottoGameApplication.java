@@ -15,9 +15,7 @@ public class LottoGameApplication {
         WinningNumber winningNumber = inputWinningNumberWithValidation();
         LottoGame lottoGame = new LottoGame(lottos, winningNumber);
 
-        LottoResult lottoResult = new LottoResult();
-        lottoGame.calculateResults(lottoResult);
-
+        LottoResult lottoResult = lottoGame.calculateResults();
         OutputView.printResult(lottoResult);
         OutputView.printProfitRatio(money.calculateProfitRatio(lottoResult));
     }

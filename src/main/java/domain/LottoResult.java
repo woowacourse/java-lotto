@@ -9,13 +9,14 @@ public class LottoResult {
     private static final int INITIAL_RESULT = 0;
     private final Map<LottoRank, Integer> result = new HashMap<>();
 
-    public LottoResult() {
+    public LottoResult(final Lottos lottos, final WinningNumber winningNumber) {
         for (LottoRank rank : LottoRank.values()) {
             result.put(rank, INITIAL_RESULT);
         }
+        countWinningLotto(lottos, winningNumber);
     }
 
-    public void countWinningLotto(final Lottos lottos, final WinningNumber winningNumber) {
+    private void countWinningLotto(final Lottos lottos, final WinningNumber winningNumber) {
         for (Lotto lotto : lottos.getLottos()) {
             addWinningRankCount(LottoRank
                     .findRank(winningNumber.countWinningMatch(lotto),
