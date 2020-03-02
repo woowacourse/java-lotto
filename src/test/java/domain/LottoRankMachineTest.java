@@ -1,6 +1,7 @@
 package domain;
 
 import domain.numberscontainer.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -9,11 +10,18 @@ import java.util.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoRankMachineTest {
+    private Tickets tickets;
+    private WinningNumbers winningNumbers;
+
+    @BeforeEach
+    void setUp() {
+        tickets = Tickets.createTickets(6,6, createFixedNumbers());
+        winningNumbers = new WinningNumbers("3, 4, 5, 6, 7, 8", 9);
+    }
+
     @Test
     @DisplayName("당첨 결과 계산")
     void test1() {
-        Tickets tickets = Tickets.createTickets(6,6, createFixedNumbers());
-        WinningNumbers winningNumbers = new WinningNumbers("3, 4, 5, 6, 7, 8", 9);
         LottoResult lottoResult = LottoResultMachine.calculateResult(tickets, winningNumbers);
 
         assertThat(lottoResult.count(LottoRank.FIRST)).isEqualTo(1);
@@ -28,9 +36,6 @@ public class LottoRankMachineTest {
     @DisplayName("수익률 계산")
     void test2() {
         Money money = new Money("6000");
-        Tickets tickets = Tickets.createTickets(6, 6, createFixedNumbers());
-        WinningNumbers winningNumbers = new WinningNumbers("3, 4, 5, 6, 7, 8", 9);
-
         LottoResult lottoResult = LottoResultMachine.calculateResult(tickets, winningNumbers);
         LottoProfit profit = LottoProfit.ofProfit(lottoResult, money);
         assertThat(profit.getValue()).isEqualTo(33859200);
