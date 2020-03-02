@@ -34,9 +34,9 @@ public class LottoGame {
 		PurchaseMoney purchaseMoney = new PurchaseMoney(inputLottoMoney());
 		PurchaseCount manualCount = new PurchaseCount(inputManualCount());
 		PurchaseCount autoCount = manualCount.calculateRestPurchaseCount(purchaseMoney);
-		printLottoPurchaseCount(manualCount, autoCount);
 
 		LottoTicket lottoTicket = purchaseLottoTicket(purchaseMoney, manualCount);
+		printLottoPurchaseCount(manualCount, autoCount);
 		printLottoTicket(lottoTicket);
 
 		WinningLotto winningLotto = inputWinningLotto();
