@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
  */
 public class LottoNumbers {
     private static final int SIZE = 6;
-    public static final String LOTTO_NUMBER_SPLITTER = ",";
+    private static final String LOTTO_NUMBER_SPLITTER = ",";
 
     protected final Set<LottoNumber> lottoNumbers;
 
