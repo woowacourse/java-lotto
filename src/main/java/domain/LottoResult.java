@@ -13,10 +13,19 @@ public class LottoResult {
     }
 
     public int count(LottoRank rank) {
+        if (result.get(rank) == null) {
+            return 0;
+        }
         return result.get(rank);
     }
 
-    public Set<LottoRank> keySet() {
-        return result.keySet();
+    public long getTotalPrize() {
+        long totalPrize = 0;
+        for (LottoRank rank : result.keySet()) {
+            long prize = rank.getPrize();
+            long matchCount = count(rank);
+            totalPrize += prize * matchCount;
+        }
+        return totalPrize;
     }
 }

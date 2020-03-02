@@ -21,11 +21,11 @@ public class OutputView {
         System.out.println(tickets);
     }
 
-    public static void printLottoResults(LottoResult lottoResults) {
+    public static void printLottoResults(LottoResult lottoResult) {
         System.out.println(LOTTO_RESULT_TITLE + System.lineSeparator() + LOTTO_RESULT_SEPARATOR);
 
         for (LottoRank rank : LottoRank.values()) {
-            System.out.println(String.format(findProperFormat(rank), rank.getMatchCount(), rank.getPrize(), convertNullToZero(lottoResults.count(rank))));
+            System.out.println(String.format(findProperFormat(rank), rank.getMatchCount(), rank.getPrize(), lottoResult.count(rank)));
         }
     }
 
@@ -34,13 +34,6 @@ public class OutputView {
             return LOTTO_RESULT_MESSAGE_FOR_BONUS;
         }
         return LOTTO_RESULT_MESSAGE;
-    }
-
-    private static int convertNullToZero(Integer number) {
-        if (number == null) {
-            return 0;
-        }
-        return number;
     }
 
     public static void printProfit(LottoProfit profit) {
