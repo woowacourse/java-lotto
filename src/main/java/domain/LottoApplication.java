@@ -7,24 +7,24 @@ public class LottoApplication {
     public static void run() {
         Money money = inputMoney();
         ManualLottoTicketQuantity manualLottoTicketQuantity = inputManualLottoTicketCount(money);
-        LottoTicketsCount(money, manualLottoTicketQuantity);
-        LottoTickets lottoTickets = generateLottoTicketsByMoney(money, manualLottoTicketQuantity);
-        LottoTicketsStatus(lottoTickets);
-        LottoTicketsResult(money, lottoTickets);
+
+        buyManualLottoTickets(money, manualLottoTicketQuantity);
+        LottoTickets lottoTickets = buyAutoLottoTickets(money, manualLottoTicketQuantity);
+
+        LottoResults lottoResults = LottoManager.match(lottoTickets, inputWinningLottoTicket());
+
+        OutputView.printWinningStatistics(lottoResults, money);
     }
 
-    public static void LottoTicketsResult(Money money, LottoTickets lottoTickets) {
-        OutputView.printWinningStatistics(LottoManager.match(lottoTickets, inputWinningLottoTicket()), money);
-    }
-
-    public static void LottoTicketsCount(Money money, ManualLottoTicketQuantity manualLottoTicketQuantity) {
+    public static void buyManualLottoTickets(Money money, ManualLottoTicketQuantity manualLottoTicketQuantity) {
         InputView.inputManualLottoTicket(manualLottoTicketQuantity);
         OutputView.printBuyTicketCount(money, manualLottoTicketQuantity);
     }
 
-    public static void LottoTicketsStatus(LottoTickets lottoTickets) {
+    public static LottoTickets buyAutoLottoTickets(Money money, ManualLottoTicketQuantity manualLottoTicketQuantity) {
+        LottoTickets lottoTickets = generateLottoTicketsByMoney(money, manualLottoTicketQuantity);
         OutputView.printLottoTickets(lottoTickets);
-
+        return lottoTickets;
     }
 
     public static LottoTickets generateLottoTicketsByMoney(Money money, ManualLottoTicketQuantity manualLottoTicketQuantity) {
