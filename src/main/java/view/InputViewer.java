@@ -42,10 +42,10 @@ public class InputViewer {
         }
     }
 
-    public static List<String> inputManualLottoTicketNumber(ManualLottoTicketCount manualLottoTicketCount) {
+    public static List<String> inputManualLottoTicketNumber(int manualLottoTicketCount) {
         List<String> manualLottoNumbers = new ArrayList<>();
         System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
-        for (int i = 0; i < manualLottoTicketCount.getManualLottoTicketCount(); i++) {
+        for (int i = 0; i < manualLottoTicketCount; i++) {
             String lottoNumber = scanner.nextLine();
             manualLottoNumbers.add(lottoNumber);
         }

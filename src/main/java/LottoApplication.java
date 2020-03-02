@@ -11,14 +11,9 @@ public class LottoApplication {
         ManualLottoTicketCount manualLottoTicketCount = LottoController.getManualLottoTicketCount(allLottoTicketCount,
                 InputViewer.inputManualLottoCount());
         int manualLottoTicketCounts = manualLottoTicketCount.getManualLottoTicketCount();
-        ManualLottoTickets manualLottoTickets = LottoController.getManualLottoTickets(manualLottoTicketCount);
-
         int autoLottoTicketCount = allLottoTicketCount - manualLottoTicketCounts;
-        AutoLottoTickets autoLottoTickets = new AutoLottoTickets(
-                AutoLottoTicketsGenerator.generateAutoLottoTickets(autoLottoTicketCount));
 
-        LottoTickets lottoTickets = new LottoTickets(
-                LottoController.concatManualTicketsWithAutoTickets(manualLottoTickets, autoLottoTickets));
+        LottoTickets lottoTickets = LottoController.getLottoTickets(manualLottoTicketCounts, autoLottoTicketCount);
 
         OutputViewer.printLottoTicketsCount(manualLottoTicketCounts, autoLottoTicketCount);
         OutputViewer.printLottoTickets(lottoTickets);
