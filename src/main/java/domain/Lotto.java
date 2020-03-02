@@ -8,16 +8,9 @@ public class Lotto {
 
     public Lotto(final List<LottoNumber> lotto) {
         checkLottoSizeSix(lotto.size());
-        checkLottoNumbersRightRange(lotto);
         checkDuplicatedLottoNumbers(lotto);
         Collections.sort(lotto);
         this.lotto = lotto;
-    }
-
-    private void checkLottoNumbersRightRange(final List<LottoNumber> lotto) {
-        for (LottoNumber number : lotto) {
-            LottoNumber.checkLottoNumberRange(number);
-        }
     }
 
     private void checkLottoSizeSix(final int size) {

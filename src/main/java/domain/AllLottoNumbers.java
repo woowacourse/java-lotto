@@ -20,6 +20,13 @@ public class AllLottoNumbers {
     }
 
     public static LottoNumber get(final int number) {
+        checkNumberValueNull(number);
         return allLottoNumbers.get(number);
+    }
+
+    private static void checkNumberValueNull(int number) {
+        if (!allLottoNumbersKeySet.contains(number)) {
+            throw new IllegalArgumentException("로또 번호는 1부터 45까지 수여야 합니다.");
+        }
     }
 }
