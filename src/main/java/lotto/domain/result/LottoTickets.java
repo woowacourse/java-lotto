@@ -28,6 +28,10 @@ public class LottoTickets {
 				.map(winning::findMatchingRank)
 				.collect(Collectors.toList());
 
+		return createRankToCount(ranks);
+	}
+
+	private Map<Rank, Integer> createRankToCount(final List<Rank> ranks) {
 		return Arrays.stream(Rank.values())
 				.collect(Collectors.toUnmodifiableMap(rank -> rank, rank -> Collections.frequency(ranks, rank)));
 	}
