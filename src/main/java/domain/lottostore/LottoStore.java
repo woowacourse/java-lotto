@@ -1,11 +1,13 @@
 package domain.lottostore;
 
+import domain.buyinginformation.BuyingInformation;
 import domain.lottonumbers.LottoTicket;
 
 import java.util.List;
 
-public interface LottoStore<T> {
+public class LottoStore {
 
-    public List<LottoTicket> generateTickets(T t);
-
+    public static List<LottoTicket> generateTickets(BuyingStrategy strategy, Object buyingInformation) {
+        return strategy.generateTickets(buyingInformation);
+    }
 }

@@ -1,4 +1,4 @@
-package domain;
+package domain.buyinginformation;
 
 public class Money {
 

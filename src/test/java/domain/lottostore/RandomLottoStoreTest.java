@@ -1,6 +1,6 @@
 package domain.lottostore;
 
-import domain.Money;
+import domain.buyinginformation.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,9 +12,8 @@ public class RandomLottoStoreTest {
     @Test
     @DisplayName("티켓들 생성 확인")
     void generateRandomTicket() {
-        RandomLottoStore randomLottoStore = new RandomLottoStore();
         Money money = new Money(10000);
 
-        assertThat(randomLottoStore.generateTickets(money).size()).isEqualTo(10);
+        assertThat(LottoStore.generateTickets(new RandomBuyingStrategy(), money).size()).isEqualTo(10);
     }
 }

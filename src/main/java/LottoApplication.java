@@ -1,8 +1,9 @@
-import domain.Money;
+import domain.buyinginformation.Money;
 import domain.lottonumbers.LottoTicket;
 import domain.lottonumbers.WinningNumbers;
 import domain.lottonumbers.lottonumber.LottoNumber;
-import domain.lottostore.RandomLottoStore;
+import domain.lottostore.LottoStore;
+import domain.lottostore.RandomBuyingStrategy;
 import domain.result.LottoResult;
 import view.InputView;
 import view.OutputView;
@@ -16,7 +17,7 @@ public class LottoApplication {
 
     public static void main(String[] args) {
         Money money = enterMoney();
-        List<LottoTicket> randomTickets = new RandomLottoStore().generateTickets(money);
+        List<LottoTicket> randomTickets = LottoStore.generateTickets(new RandomBuyingStrategy(), money);
 
         printTickets(randomTickets);
 

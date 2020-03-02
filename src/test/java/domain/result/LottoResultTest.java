@@ -1,6 +1,6 @@
 package domain.result;
 
-import domain.Money;
+import domain.buyinginformation.Money;
 import domain.lottonumbers.LottoTicket;
 import domain.lottonumbers.WinningNumbers;
 import domain.lottonumbers.lottonumber.LottoNumber;
@@ -9,9 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static java.util.stream.Collectors.*;
 import static org.assertj.core.api.Assertions.assertThat;

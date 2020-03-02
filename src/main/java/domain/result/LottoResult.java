@@ -1,6 +1,6 @@
 package domain.result;
 
-import domain.Money;
+import domain.buyinginformation.Money;
 import domain.lottonumbers.LottoTicket;
 import domain.lottonumbers.WinningNumbers;
 
