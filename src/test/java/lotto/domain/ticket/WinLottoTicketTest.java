@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -17,7 +18,6 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class WinLottoTicketTest {
-
     private static Stream<Arguments> numberProvider() {
         return Stream.of(
                 Arguments.of(new int[]{11, 12, 13, 18, 19, 20}, new LottoMatchResult(Rank.SIXTH)),
@@ -30,13 +30,19 @@ class WinLottoTicketTest {
                 Arguments.of(new int[]{1, 2, 3, 4, 5, 6}, new LottoMatchResult(Rank.FIRST)));
     }
 
+    private Set<LottoBall> aLottoBalls(int... numbers) {
+        return Arrays.stream(numbers)
+                .mapToObj(LottoBallFactory::getLottoBallByNumber)
+                .collect(Collectors.toSet());
+    }
+
     @DisplayName("우승 로또 티켓과 비교하기")
     @ParameterizedTest
     @MethodSource("numberProvider")
     void name(int[] numbers, LottoMatchResult expectedResult) {
         //given
-        Set<LottoBall> winBalls = aLottoBalls(1, 2, 3, 4, 5, 6);
-        WinLottoTicket winLottoTicket = new WinLottoTicket(new LottoTicket(winBalls), LottoBallFactory.getLottoBallByNumber(7));
+        List<Integer> winNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        WinLottoTicket winLottoTicket = new WinLottoTicket(winNumbers, 7);
 
         LottoTicket buyLottoTicket = new LottoTicket(aLottoBalls(numbers));
 
@@ -45,11 +51,5 @@ class WinLottoTicketTest {
 
         //then
         assertThat(lottoMatchResult).isEqualTo(expectedResult);
-    }
-
-    private Set<LottoBall> aLottoBalls(int... numbers) {
-        return Arrays.stream(numbers)
-                .mapToObj(LottoBallFactory::getLottoBallByNumber)
-                .collect(Collectors.toSet());
     }
 }
