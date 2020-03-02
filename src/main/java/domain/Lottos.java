@@ -5,14 +5,17 @@ import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
-    private List<Lotto> lottos;
+    private List<Lotto> lottos = new ArrayList<>();
 
     public Lottos() {
-        lottos = new ArrayList<>();
     }
 
-    public Lottos(final List<Lotto> lottos) {
-        this.lottos = lottos;
+    public Lottos(final LottoCount lottoCount) {
+        LottosGenerator lottosGenerator = new ManualLottosGenerator();
+        lottos.addAll(lottosGenerator.generateLottos(lottoCount));
+
+        lottosGenerator = new AutoLottosGenerator();
+        lottos.addAll(lottosGenerator.generateLottos(lottoCount));
     }
 
     public void addLotto(final Lotto lotto) {
