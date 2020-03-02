@@ -47,9 +47,13 @@ public class Money {
     private static double calculateTotalWinningPrice(Map<RankType, Integer> lottoResults) {
         double totalWinningPrice = INIT_SUM_VALUE;
         for (RankType rankType : lottoResults.keySet()) {
-            totalWinningPrice += rankType.calculate(lottoResults.get(rankType));
+            totalWinningPrice += calculate(rankType, lottoResults.get(rankType));
         }
         return totalWinningPrice;
+    }
+
+    private static long calculate(RankType rankType, int count) {
+        return rankType.getPrize() * count;
     }
 
     public static long calculateProfit(Map<RankType, Integer> lottoResults, int money) {

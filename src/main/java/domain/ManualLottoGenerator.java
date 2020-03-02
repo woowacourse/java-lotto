@@ -3,7 +3,7 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManualLottoGenerator implements LottoTicketsGenerator{
+public class ManualLottoGenerator implements LottoTicketsGenerator {
 
     List<String> manualLottoTickets;
 
@@ -14,7 +14,7 @@ public class ManualLottoGenerator implements LottoTicketsGenerator{
     private List<LottoTicket> createManualLottoTickets(List<String> manualLottoTickets) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
 
-        for(String manualLottoTicket : manualLottoTickets) {
+        for (String manualLottoTicket : manualLottoTickets) {
             lottoTickets.add(LottoTicketGenerator.createLottoTicket(manualLottoTicket));
         }
 
