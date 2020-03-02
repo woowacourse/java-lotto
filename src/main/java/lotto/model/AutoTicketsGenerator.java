@@ -8,6 +8,7 @@ import java.util.stream.IntStream;
 
 public class AutoTicketsGenerator implements TicketsGenerator {
 
+    @Override
     public List<Ticket> generate(int autoCount) {
         List<Ticket> tickets = new ArrayList<>();
         for (int i = 0; i < autoCount; i++) {
