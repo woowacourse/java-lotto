@@ -33,7 +33,11 @@ public class Money {
         return new Money(this.money + other.money);
     }
 
-    public int calculateQuotient(Money other) {
+    public int calculateAllTicketCount() {
+        return calculateQuotient(TICKET_PRICE);
+    }
+
+    private int calculateQuotient(Money other) {
         return this.money / other.money;
     }
 

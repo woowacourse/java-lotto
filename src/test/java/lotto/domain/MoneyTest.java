@@ -48,7 +48,7 @@ class MoneyTest {
         Money money = Money.of(14500);
         Money dividingMoney = Money.of(1000);
 
-        int actual = money.calculateQuotient(dividingMoney);
+        int actual = money.calculateAllTicketCount();
         int expected = 14;
 
         assertThat(actual).isEqualTo(expected);
