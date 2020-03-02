@@ -4,8 +4,6 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.List;
-
 public class LottoGame {
     private LottoGame() {
     }
@@ -25,10 +23,10 @@ public class LottoGame {
         WinningNumbers winningNumbers = InputView.inputWinningNumbers();
         LottoTickets allLottoTickets = LottoTickets.join(manualLottoTickets, autoLottoTickets);
 
-        List<Rank> ranks = winningNumbers.checkOutLottos(allLottoTickets);
-        Profit profit = new Profit(purchaseMoney, ranks);
+        Ranks ranks = winningNumbers.checkOutLottos(allLottoTickets);
+        Profit profit = ranks.calculateProfit(purchaseMoney);
 
-        OutputView.printResult(ranks);
+        OutputView.printRanks(ranks);
         OutputView.printProfit(profit);
     }
 }

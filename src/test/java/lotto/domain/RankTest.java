@@ -29,17 +29,6 @@ class RankTest {
         );
     }
 
-    @DisplayName("순위들의 당첨금액을 모두 더함")
-    @Test
-    void sumWinningMoney() {
-        List<Rank> ranks = Arrays.asList(Rank.FIFTH, Rank.SECOND, Rank.FOURTH);
-
-        Money actual = Rank.sumWinningMoney(ranks);
-        Money expected = Money.of(30055000);
-
-        assertThat(actual).isEqualTo(expected);
-    }
-
     @DisplayName("해당하는 Rank의 개수를 반환")
     @Test
     void getContainingCount() {

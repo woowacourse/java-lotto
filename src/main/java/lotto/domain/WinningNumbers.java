@@ -2,8 +2,6 @@ package lotto.domain;
 
 import lotto.exception.WinningNumbersException;
 
-import java.util.List;
-
 public class WinningNumbers {
     private final LottoTicket winningLottoTicket;
     private final LottoNumber bonusNumber;
@@ -20,7 +18,7 @@ public class WinningNumbers {
         }
     }
 
-    public List<Rank> checkOutLottos(LottoTickets lottoTickets) {
+    public Ranks checkOutLottos(LottoTickets lottoTickets) {
         return lottoTickets.checkOutLottos(winningLottoTicket, bonusNumber);
     }
 }

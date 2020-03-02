@@ -57,11 +57,13 @@ public class LottoTickets {
         return lottoTickets.size();
     }
 
-    public List<Rank> checkOutLottos(LottoTicket winningLottoTicket, LottoNumber bonusNumber) {
-        return lottoTickets.stream()
+    public Ranks checkOutLottos(LottoTicket winningLottoTicket, LottoNumber bonusNumber) {
+        List<Rank> ranks = lottoTickets.stream()
                 .map(lottoTicket -> lottoTicket.checkOut(winningLottoTicket, bonusNumber))
                 .filter(Rank::isValidRank)
                 .collect(Collectors.toList());
+
+        return Ranks.of(ranks);
     }
 
     public List<LottoTicket> getLottoTickets() {

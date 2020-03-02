@@ -11,7 +11,6 @@ public enum Rank {
     SECOND(5, 30_000_000),
     FIRST(6, 2_000_000_000);
 
-    private static final int DEFAULT_SUM = 0;
     private int matchedCount;
     private Money winningMoney;
 
@@ -29,14 +28,6 @@ public enum Rank {
 
     public boolean isValidRank() {
         return this != LOSE;
-    }
-
-    public static Money sumWinningMoney(List<Rank> ranks) {
-        Money totalWinningMoney = Money.of(DEFAULT_SUM);
-        for (Rank rank : ranks) {
-            totalWinningMoney = totalWinningMoney.plus(rank.winningMoney);
-        }
-        return totalWinningMoney;
     }
 
     public int getContainingCount(List<Rank> ranks) {

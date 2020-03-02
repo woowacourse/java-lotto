@@ -35,12 +35,11 @@ class WinningNumbersTest {
                 "1,2,3,4,5,6");
         LottoTickets lottoTickets = LottoTickets.ofManualLottoTickets(3, inputsForManualLottoTickets);
 
-        List<Rank> givenRanks = winningNumbers.checkOutLottos(lottoTickets);
-        List<Rank> expectedRanks = Arrays.asList(Rank.FIRST, Rank.THIRD, Rank.FIFTH);
+        Ranks givenRanks = winningNumbers.checkOutLottos(lottoTickets);
 
-        for (Rank givenRank : givenRanks) {
-            assertThat(expectedRanks).contains(givenRank);
-        }
+        assertThat(givenRanks.contains(Rank.FIRST)).isTrue();
+        assertThat(givenRanks.contains(Rank.THIRD)).isTrue();
+        assertThat(givenRanks.contains(Rank.FIFTH)).isTrue();
     }
 
     private static LottoTicket createLottoTicket(String numbers) {

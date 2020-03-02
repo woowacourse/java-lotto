@@ -2,8 +2,6 @@ package lotto.view;
 
 import lotto.domain.*;
 
-import java.util.List;
-
 public class OutputView {
     private OutputView() {
     }
@@ -25,15 +23,15 @@ public class OutputView {
         }
     }
 
-    public static void printResult(List<Rank> ranks) {
+    public static void printRanks(Ranks ranks) {
         System.out.println("당첨 통계");
         System.out.println("-------");
 
         for (Rank rank : Rank.values()) {
             int matchedCount = rank.getMatchedCount();
-            Money winningMoney = rank.getWinningMoney();
-            int containingCount = rank.getContainingCount(ranks);
-            System.out.printf("%d개 일치 (%d원) - %d개%n", matchedCount, winningMoney.getValue(), containingCount);
+            int winningMoney = rank.getWinningMoney().getValue();
+            int containingCount = ranks.frequency(rank);
+            System.out.printf("%d개 일치 (%d원) - %d개%n", matchedCount, winningMoney, containingCount);
         }
     }
 
