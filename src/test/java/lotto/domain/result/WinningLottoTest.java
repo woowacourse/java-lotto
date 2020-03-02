@@ -31,7 +31,7 @@ class WinningLottoTest {
 
 	@DisplayName("WinningLotto 생성자 매개변수에 올바른 Lotto와 bonusNumber가 들어오면 정상적으로 WinningLotto 객체 생성")
 	@Test
-	void constructor_validLottoAndBonus_createWinningLotto() {
+	void constructor_ValidLottoAndBonus_CreateWinningLotto() {
 		LottoNumber bonusNumber = LottoNumber.valueOf(10);
 
 		WinningLotto winningLotto = new WinningLotto(lotto, bonusNumber);

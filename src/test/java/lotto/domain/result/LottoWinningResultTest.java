@@ -57,7 +57,7 @@ class LottoWinningResultTest {
 
 	@DisplayName("LottoWinningResult 생성자에 구매한 로또들과 당첨 로또가 입력되었을 때 유효한 값일시 객체 생성 ")
 	@Test
-	void constructor_validRankCount_createLottoRankRecode() {
+	void constructor_ValidRankCount_CreateLottoRankRecode() {
 		assertThat(new LottoWinningResult(lottoTicket, winningLotto)).isInstanceOf(LottoWinningResult.class);
 	}
 

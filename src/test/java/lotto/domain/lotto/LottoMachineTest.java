@@ -28,14 +28,14 @@ class LottoMachineTest {
 		numberLinesOfManualLotto.add("7,8,9,10,11,12");
 	}
 
-	@DisplayName("생성자의 인자로 정상적인 금액과 수동 로또 개수가 들어오면 LottoMachine 객체 생성")
+	@DisplayName("생성자에 정상적인 금액과 수동 로또 개수가 들어오면 LottoMachine 객체 생성")
 	@ParameterizedTest
 	@CsvSource(value = {"2000:0", "2000:1", "2000:2"}, delimiter = ':')
 	void constructor_ValidMoneyAndManualLottoCount_CreateLottoMachine(String money, String countOfManualLotto) {
 		assertThat(new LottoMachine(money, countOfManualLotto)).isInstanceOf(LottoMachine.class);
 	}
 
-	@DisplayName("생성자의 인자로 비정상적인 금액과 정상적인 수동 로또 개수가 들어오면 InvalidLottoMoneyException 발생")
+	@DisplayName("생성자에 비정상적인 금액(문자,음수,0)과 정상적인 수동 로또 개수가 들어오면 InvalidLottoMoneyException 발생")
 	@ParameterizedTest
 	@CsvSource(value = {"cc:0", "-1:1", "0:2"}, delimiter = ':')
 	void constructor_InvalidMoneyAndValidManualLottoCount_ExceptionThrown(String money, String countOfManualLotto) {
@@ -43,7 +43,7 @@ class LottoMachineTest {
 			InvalidLottoMoneyException.class);
 	}
 
-	@DisplayName("생성자의 인자로 정상적인 금액과 비정상적인 수동 로또 개수가 들어오면 InvalidCountOfManualLottoTicketException 발생")
+	@DisplayName("생성자에 정상적인 금액과 비정상적인 수동 로또 개수(문자,음수,범위 밖)가 들어오면 InvalidCountOfManualLottoTicketException 발생")
 	@ParameterizedTest
 	@CsvSource(value = {"1000:s", "1000:-1", "1000:2"}, delimiter = ':')
 	void constructor_ValidMoneyAndInvalidManualLottoCount_ExceptionThrown(String money, String countOfManualLotto) {
@@ -51,7 +51,7 @@ class LottoMachineTest {
 			InvalidCountOfManualLottoTicketException.class);
 	}
 
-	@DisplayName("buyLottoTicket의 인수로 정상적인 수동로또번호가 들어왔을 때 전체 로또 티켓을 반환")
+	@DisplayName("buyLottoTicket의 인수로 정상적인 수동 로또 번호가 들어왔을 때 전체 로또 티켓을 반환")
 	@Test
 	void buyLottoTicket_ValidNumberLinesOfManualLotto_ReturnLottoTicket() {
 		LottoMachine lottoMachine = new LottoMachine("2000", "2");
@@ -90,7 +90,6 @@ class LottoMachineTest {
 	@Test
 	void needMoreManualNumber_DoNotNeedMoreInput_ReturnTrue() {
 		LottoMachine lottoMachine = new LottoMachine("3000", "3");
-
 		for (int i = 0; i < 3; i++) {
 			lottoMachine.needMoreManualNumber();
 		}
