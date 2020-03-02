@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -50,13 +49,6 @@ class MoneyTest {
 		assertThatThrownBy(() -> new Money("1001"))
 			.isInstanceOf(InvalidLottoMoneyException.class)
 			.hasMessage(InvalidLottoMoneyException.INVALID_UNIT);
-	}
-
-	@DisplayName("로또 금액이 들어오면 (구매하는) 전체 로또 장수를 반환")
-	@ParameterizedTest
-	@CsvSource(value = {"1000:1", "14000:14"}, delimiter = ':')
-	void calculateCountOfLotto_ValidUnit_ReturnCountOfLotto(int money, int countOfLotto) {
-		assertThat(new Money(money).calculateCountOfLotto(1000)).isEqualTo(countOfLotto);
 	}
 
 	@DisplayName("더한만큼의 돈을 반환하는 함수")

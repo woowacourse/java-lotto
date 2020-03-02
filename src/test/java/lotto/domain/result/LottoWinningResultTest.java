@@ -12,6 +12,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import lotto.domain.LottoMachine;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.number.LottoNumber;
 
@@ -21,35 +22,35 @@ class LottoWinningResultTest {
 
 	@BeforeAll
 	static void setUp() {
-		Set<LottoNumber> lottoNumbers = new HashSet<>(Arrays.asList(
-				LottoNumber.valueOf(1),
-				LottoNumber.valueOf(2),
-				LottoNumber.valueOf(3),
-				LottoNumber.valueOf(4),
-				LottoNumber.valueOf(5),
-				LottoNumber.valueOf(6)
+		Set<LottoNumber> firstRankLottoNumber = new HashSet<>(Arrays.asList(
+			LottoNumber.valueOf(1),
+			LottoNumber.valueOf(2),
+			LottoNumber.valueOf(3),
+			LottoNumber.valueOf(4),
+			LottoNumber.valueOf(5),
+			LottoNumber.valueOf(6)
 		));
-		Set<LottoNumber> lottoNumbers2 = new HashSet<>(Arrays.asList(
-				LottoNumber.valueOf(12),
-				LottoNumber.valueOf(23),
-				LottoNumber.valueOf(43),
-				LottoNumber.valueOf(14),
-				LottoNumber.valueOf(5),
-				LottoNumber.valueOf(21)
+		Set<LottoNumber> missRankLottoNumber = new HashSet<>(Arrays.asList(
+			LottoNumber.valueOf(12),
+			LottoNumber.valueOf(23),
+			LottoNumber.valueOf(43),
+			LottoNumber.valueOf(14),
+			LottoNumber.valueOf(5),
+			LottoNumber.valueOf(21)
 		));
 
-		Set<LottoNumber> lottoNumbers3 = new HashSet<>(Arrays.asList(
-				LottoNumber.valueOf(1),
-				LottoNumber.valueOf(2),
-				LottoNumber.valueOf(3),
-				LottoNumber.valueOf(4),
-				LottoNumber.valueOf(5),
-				LottoNumber.valueOf(6)
+		Set<LottoNumber> winningLottoNumber = new HashSet<>(Arrays.asList(
+			LottoNumber.valueOf(1),
+			LottoNumber.valueOf(2),
+			LottoNumber.valueOf(3),
+			LottoNumber.valueOf(4),
+			LottoNumber.valueOf(5),
+			LottoNumber.valueOf(6)
 		));
 		lottoTicket = new ArrayList<>(Arrays.asList(
-				new Lotto(lottoNumbers),
-				new Lotto(lottoNumbers2)));
-		Lotto lotto = new Lotto(lottoNumbers3);
+			new Lotto(firstRankLottoNumber),
+			new Lotto(missRankLottoNumber)));
+		Lotto lotto = new Lotto(winningLottoNumber);
 		LottoNumber bonusNumber = LottoNumber.valueOf(10);
 		winningLotto = new WinningLotto(lotto, bonusNumber);
 	}
@@ -58,5 +59,13 @@ class LottoWinningResultTest {
 	@Test
 	void constructor_validRankCount_createLottoRankRecode() {
 		assertThat(new LottoWinningResult(lottoTicket, winningLotto)).isInstanceOf(LottoWinningResult.class);
+	}
+
+	@DisplayName("calculateWinningRatio에 유효한 lottoMachine 객체가 들어오면 수익률 반환")
+	@Test
+	void calculateWinningRatio_ValidLottoMachine_ReturnWinningRatio() {
+		LottoWinningResult lottoWinningResult = new LottoWinningResult(lottoTicket, winningLotto);
+		LottoMachine lottoMachine = new LottoMachine("2000", "1");
+		assertThat(lottoWinningResult.calculateWinningRatio(lottoMachine)).isEqualTo(100000000);
 	}
 }

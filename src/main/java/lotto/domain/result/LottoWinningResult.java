@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import lotto.domain.LottoMachine;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.money.Money;
 
@@ -33,13 +34,13 @@ public class LottoWinningResult {
 		}
 	}
 
-	public int calculateWinningRatio(Money inputMoney) {
+	public int calculateWinningRatio(LottoMachine lottoMachine) {
 		Money totalWinningMoney = LottoRank.MISS.getWinningMoney();
 		for (Map.Entry<LottoRank, Integer> lottoEntry : lottoRankCount.entrySet()) {
 			totalWinningMoney = totalWinningMoney.add(
 				lottoEntry.getKey().getWinningMoney().multiply(lottoEntry.getValue()));
 		}
-		return totalWinningMoney.getWinningRate(inputMoney);
+		return totalWinningMoney.getWinningRate(lottoMachine.getMoney());
 	}
 
 	public Map<LottoRank, Integer> getLottoRankCount() {

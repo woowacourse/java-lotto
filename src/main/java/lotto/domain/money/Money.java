@@ -2,6 +2,8 @@ package lotto.domain.money;
 
 import java.util.Objects;
 
+import lotto.domain.LottoMachine;
+
 public class Money {
 	private static final long ZERO = 0;
 	private static final int PERCENT = 100;
@@ -45,13 +47,9 @@ public class Money {
 	}
 
 	private void validateUnit(long parsedMoney) {
-		if (parsedMoney % LottoPrice.UNIT != ZERO) {
+		if (parsedMoney % LottoMachine.LOTTO_PRICE != ZERO) {
 			throw new InvalidLottoMoneyException(InvalidLottoMoneyException.INVALID_UNIT);
 		}
-	}
-
-	int calculateCountOfLotto(int unit) {
-		return (int)(money / unit);
 	}
 
 	public long getMoney() {

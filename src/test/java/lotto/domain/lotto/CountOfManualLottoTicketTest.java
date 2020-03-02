@@ -28,20 +28,4 @@ class CountOfManualLottoTicketTest {
 		assertThatThrownBy(() -> new CountOfManualLottoTicket(rawCount, countOfAllLotto))
 			.isInstanceOf(InvalidCountOfManualLottoTicketException.class);
 	}
-
-	@DisplayName("수동 로또 티켓의 갯수가 양수일 때 isNotZero()를 호출하면 true 반환")
-	@Test
-	void isNotZero_isPositive_returnTrue() {
-		assertThat(new CountOfManualLottoTicket("3", 5).isNotZero()).isEqualTo(true);
-	}
-
-	@DisplayName("수동 로또 티켓의 갯수가 0개일 때 isNotZero()를 호출하면 false 반환")
-	@Test
-	void isNotZero_isZero_returnFalse() {
-		CountOfManualLottoTicket countOfManualLottoTicket = new CountOfManualLottoTicket("3", 5);
-		for (int i = 0; i < 3; i++) {
-			countOfManualLottoTicket.isNotZero();
-		}
-		assertThat(countOfManualLottoTicket.isNotZero()).isEqualTo(false);
-	}
 }

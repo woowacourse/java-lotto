@@ -3,25 +3,44 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import lotto.domain.lotto.CountOfManualLottoTicket;
 import lotto.domain.lotto.Generator.AutoLottoTicketGenerator;
 import lotto.domain.lotto.Generator.ManualLottoTicketGenerator;
 import lotto.domain.lotto.Lotto;
+import lotto.domain.money.Money;
 import lotto.domain.number.NumberLinesOfManualLotto;
 
 public class LottoMachine {
-	private static final int DEFAULT_COUNT = 0;
+	public static final int LOTTO_PRICE = 1_000;
+	private static final int LAST_COUNT = 0;
 
-	private static List<Lotto> allLottoTicket;
-	private static int countOfAutoLottoTicket;
+	private int countOfAllLotto;
+	private int countOfAutoLottoTicket;
+	private CountOfManualLottoTicket countOfManualLottoTicket;
+	private List<Lotto> allLottoTicket;
+	private int loopCountOfManualLotto;
+	private Money money;
 
-	static {
-		allLottoTicket = new ArrayList<>();
-		countOfAutoLottoTicket = DEFAULT_COUNT;
+	private LottoMachine() {
 	}
 
-	public static List<Lotto> buyLottoTicket(int countOfAllLotto, NumberLinesOfManualLotto manualLottoNumbers) {
+	public LottoMachine(String inputMoney, String inputCountOfManualLotto) {
+		allLottoTicket = new ArrayList<>();
+		money = new Money(inputMoney);
+
+		countOfAllLotto = calculateCountOfLotto(money);
+		countOfManualLottoTicket = new CountOfManualLottoTicket(inputCountOfManualLotto, countOfAllLotto);
+		countOfAutoLottoTicket = countOfAllLotto - countOfManualLottoTicket.getCountOfManualLotto();
+		loopCountOfManualLotto = countOfManualLottoTicket.getCountOfManualLotto();
+	}
+
+	private int calculateCountOfLotto(Money money) {
+		return (int)money.getMoney() / LOTTO_PRICE;
+	}
+
+	public List<Lotto> buyLottoTicket(NumberLinesOfManualLotto manualLottoNumbers) {
 		int countOfManualLottoTicket = manualLottoNumbers.size();
-		countOfAutoLottoTicket = calculateCountOfAutoLottoTicket(countOfAllLotto, countOfManualLottoTicket);
+		countOfAutoLottoTicket = countOfAllLotto - countOfManualLottoTicket;
 
 		ManualLottoTicketGenerator manualLottoTicketGenerator = new ManualLottoTicketGenerator(manualLottoNumbers);
 		AutoLottoTicketGenerator autoLottoTicketGenerator = new AutoLottoTicketGenerator(countOfAutoLottoTicket);
@@ -31,11 +50,23 @@ public class LottoMachine {
 		return allLottoTicket;
 	}
 
-	public static int calculateCountOfAutoLottoTicket(int countOfAllLotto, int countOfManualLottoTicket) {
-		return countOfAllLotto - countOfManualLottoTicket;
+	public boolean needMoreManualNumber() {
+		if (loopCountOfManualLotto <= LAST_COUNT) {
+			return false;
+		}
+		loopCountOfManualLotto--;
+		return true;
 	}
 
-	public static int getCountOfAutoLottoTicket() {
+	public int getCountOfAutoLottoTicket() {
 		return countOfAutoLottoTicket;
+	}
+
+	public int getCountOfManualLotto() {
+		return countOfManualLottoTicket.getCountOfManualLotto();
+	}
+
+	public Money getMoney() {
+		return money;
 	}
 }

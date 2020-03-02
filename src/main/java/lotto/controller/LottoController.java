@@ -6,11 +6,8 @@ import static lotto.view.ConsoleOutputView.*;
 import java.util.List;
 
 import lotto.domain.LottoMachine;
-import lotto.domain.lotto.CountOfManualLottoTicket;
 import lotto.domain.lotto.Generator.ManualLottoTicketGenerator;
 import lotto.domain.lotto.Lotto;
-import lotto.domain.money.LottoPrice;
-import lotto.domain.money.Money;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.NumberLinesOfManualLotto;
 import lotto.domain.result.LottoWinningResult;
@@ -18,30 +15,25 @@ import lotto.domain.result.WinningLotto;
 
 public class LottoController {
 	public void run() {
-		Money inputMoney = new Money(inputMoney());
-		int countOfAllLotto = LottoPrice.calculateCountOfLotto(inputMoney);
-		CountOfManualLottoTicket countOfManualLottoTicket = new CountOfManualLottoTicket(inputCountOfManualLotto(),
-			countOfAllLotto);
-		NumberLinesOfManualLotto numberLinesOfManualLotto = receiveManualLotto(countOfManualLottoTicket);
-
-		List<Lotto> lottoTicket = LottoMachine.buyLottoTicket(countOfAllLotto, numberLinesOfManualLotto);
-		printPurchaseCompleteMessage(countOfManualLottoTicket);
-		printPurchasedLotto(lottoTicket);
+		LottoMachine lottoMachine = new LottoMachine(inputMoney(), inputCountOfManualLotto());
+		List<Lotto> lottoTicket = lottoMachine.buyLottoTicket(receiveManualLottoNumber(lottoMachine));
+		printPurchaseCompleteMessage(lottoMachine);
+		printLottoTicket(lottoTicket);
 
 		LottoWinningResult winningResult = new LottoWinningResult(lottoTicket, receiveWinningLotto());
 		printWinningResult(winningResult.getLottoRankCount());
-		printWinningRatio(winningResult.calculateWinningRatio(inputMoney));
+		printWinningRatio(winningResult.calculateWinningRatio(lottoMachine));
 	}
 
-	private static NumberLinesOfManualLotto receiveManualLotto(CountOfManualLottoTicket countOfManualLottoTicket) {
+	private NumberLinesOfManualLotto receiveManualLottoNumber(LottoMachine lottoMachine) {
 		NumberLinesOfManualLotto numberLinesOfManualLotto = new NumberLinesOfManualLotto();
-		while (countOfManualLottoTicket.isNotZero()) {
+		while (lottoMachine.needMoreManualNumber()) {
 			numberLinesOfManualLotto.add(inputManualLottoNumber());
 		}
 		return numberLinesOfManualLotto;
 	}
 
-	private static WinningLotto receiveWinningLotto() {
+	private WinningLotto receiveWinningLotto() {
 		NumberLinesOfManualLotto numberLinesOfManualLotto = new NumberLinesOfManualLotto();
 		numberLinesOfManualLotto.add(inputWinningLottoNumber());
 		ManualLottoTicketGenerator manualLottoTicketGenerator = new ManualLottoTicketGenerator(
