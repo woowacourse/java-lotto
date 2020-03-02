@@ -1,15 +1,18 @@
 package lotto.domain.number;
 
-import lotto.domain.random.MockLottoNumberGenerator;
 import lotto.exceptions.NotSixSizeException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 public class SerialLottoNumberFactoryTest {
 	@Test
-	void createByInput() {
+	void ofString() {
 		// given
 		String input = "1,2, 3, 4,5, 6";
 
@@ -22,16 +25,17 @@ public class SerialLottoNumberFactoryTest {
 	}
 
 	@Test
-	void createByRandom() {
+	void ofSet() {
 		// given
-		MockLottoNumberGenerator given = new MockLottoNumberGenerator();
+		Set<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)
+				.map(LottoNumber::of)
+				.collect(Collectors.toSet());
 
 		// when
-		SerialLottoNumber result = SerialLottoNumberFactory.of(given);
+		SerialLottoNumber result = SerialLottoNumberFactory.of(lottoNumbers);
 
 		// then
-		String expected = "1,2,3,4,5,6";
-		Assertions.assertThat(result).isEqualTo(SerialLottoNumberFactory.of(expected));
+		Assertions.assertThat(result).isEqualTo(new SerialLottoNumber(lottoNumbers));
 	}
 
 	@ParameterizedTest

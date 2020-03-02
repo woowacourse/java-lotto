@@ -20,7 +20,7 @@ public class LottoTicketsFactory {
 	public static LottoTickets of(int autoTicketCount, RandomGenerator randomGenerator) {
 		List<SerialLottoNumber> lottoTickets = new ArrayList<>();
 		for (int i = 0; i < autoTicketCount; i++) {
-			lottoTickets.add(SerialLottoNumberFactory.of(randomGenerator));
+			lottoTickets.add(SerialLottoNumberFactory.of(randomGenerator.ofSixLottoNumber()));
 		}
 
 		return new LottoTickets(lottoTickets);
