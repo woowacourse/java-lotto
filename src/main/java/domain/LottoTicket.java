@@ -3,7 +3,7 @@ package domain;
 import java.util.*;
 
 public class LottoTicket {
-    private static final int MAX_LOTTO_TICKET_SIZE = 6;
+    private static final int MAX_SIZE = 6;
 
     private List<LottoNumber> lottoTicket;
 
@@ -26,8 +26,12 @@ public class LottoTicket {
     }
 
     private void validateLottoTicketSize(List<LottoNumber> lottoTicket) {
-        if (lottoTicket.size() != MAX_LOTTO_TICKET_SIZE) {
+        if (lottoTicket.size() != MAX_SIZE) {
             throw new IllegalArgumentException("로또 숫자의 개수가 잘못되었습니다.");
         }
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoTicket.contains(lottoNumber);
     }
 }

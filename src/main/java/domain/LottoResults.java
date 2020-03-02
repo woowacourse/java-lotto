@@ -9,9 +9,10 @@ public class LottoResults {
 
     private Map<RankType, Integer> lottoResults;
 
-    public LottoResults() {
+    public LottoResults(LottoTickets lottoTickets, WinningLottoTicket winningLottoTicket) {
         this.lottoResults = new HashMap<>();
         setUpLottoResults();
+        generateLottoResults(lottoTickets, winningLottoTicket);
     }
 
     private void setUpLottoResults() {
@@ -20,7 +21,12 @@ public class LottoResults {
         }
     }
 
-    public void putLottoResults(LottoTicket lottoTicket, WinningLottoTicket winningLottoTicket) {
+    private void generateLottoResults(LottoTickets lottoTickets, WinningLottoTicket winningLottoTicket) {
+        lottoTickets.getLottoTickets()
+                .forEach(lottoTicket -> putLottoResult(lottoTicket, winningLottoTicket));
+    }
+
+    private void putLottoResult(LottoTicket lottoTicket, WinningLottoTicket winningLottoTicket) {
         RankType rankType = RankType.of(lottoTicket, winningLottoTicket);
         lottoResults.put(rankType, lottoResults.get(rankType) + RANK_COUNT);
     }

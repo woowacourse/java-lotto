@@ -7,7 +7,7 @@ import java.util.Map;
 public class Money {
     private static final int PERCENT = 100;
     private static final int INIT_SUM_VALUE = 0;
-    private static final int MIN_MONEY = 1_000;
+    private static final int TICKET_PRICE = 1_000;
 
     private int money;
 
@@ -24,7 +24,7 @@ public class Money {
 
     private void validateNullOrEmpty(String input) {
         if (StringUtils.isBlank(input)) {
-            throw new IllegalArgumentException("input 값이 Null이거나 공백입니다.");
+            throw new IllegalArgumentException("input 값이 Null 이거나 공백입니다.");
         }
     }
 
@@ -39,25 +39,24 @@ public class Money {
     }
 
     private void validateMoneyRange(int money) {
-        if (money < MIN_MONEY) {
+        if (money < TICKET_PRICE) {
             throw new IllegalArgumentException("input 값이 1000원보다 작습니다.");
         }
     }
 
-    public int calculateLottoTicket() {
-        return this.money / MIN_MONEY;
-    }
-
-
-    private static double getTotalWinningPrice(Map<RankType, Integer> map) {
-        double sum = INIT_SUM_VALUE;
-        for (Map.Entry<RankType, Integer> entry : map.entrySet()) {
-            sum += entry.getKey().calculate(entry.getValue());
+    private static double calculateTotalWinningPrice(Map<RankType, Integer> lottoResults) {
+        double totalWinningPrice = INIT_SUM_VALUE;
+        for (RankType rankType : lottoResults.keySet()) {
+            totalWinningPrice += calculate(rankType, lottoResults.get(rankType));
         }
-        return sum;
+        return totalWinningPrice;
     }
 
-    public static long getProfit(Map<RankType, Integer> map, int money) {
-        return Math.round((getTotalWinningPrice(map) / money) * PERCENT);
+    private static long calculate(RankType rankType, int count) {
+        return rankType.getPrize() * count;
+    }
+
+    public static long calculateProfit(Map<RankType, Integer> lottoResults, int money) {
+        return Math.round(calculateTotalWinningPrice(lottoResults) / money) * PERCENT;
     }
 }

@@ -3,17 +3,43 @@ package domain;
 import view.InputView;
 import view.OutputView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LottoApplication {
     public static void run() {
         Money money = inputMoney();
-        LottoTickets lottoTickets = generateLottoTicketsByMoney(money);
-        OutputView.printBuyTicketCount(money.calculateLottoTicket());
-        OutputView.printLottoTickets(lottoTickets.getLottoTickets());
-        OutputView.printWinningStatistics(LottoManager.match(lottoTickets, inputWinningLottoTicket()).getLottoResults(), money.getMoney());
+        LottoTicketCount lottoTicketCount = inputManualLottoTicketCount(money);
+        LottoTickets lottoTickets = buyLottoTickets(lottoTicketCount);
+
+        OutputView.printBuyTicketCount(lottoTicketCount);
+        OutputView.printLottoTickets(lottoTickets);
+
+        LottoResults lottoResults = LottoManager.match(lottoTickets, inputWinningLottoTicket());
+
+        OutputView.printWinningStatistics(lottoResults, money);
     }
 
-    public static LottoTickets generateLottoTicketsByMoney(Money money) {
-        return new LottoTickets(LottoNumbersGenerator.generateLottoTickets(money.calculateLottoTicket()));
+
+    public static List<String> readManualLottoTickets(ManualCount manualCount) {
+        InputView.printInputManualLottoTicket();
+
+        List<String> manualLottoTickets = new ArrayList<>();
+        for (int i = 0; i < manualCount.getManualCount(); i++) {
+            manualLottoTickets.add(InputView.inputManualLottoTicket());
+        }
+        return manualLottoTickets;
+    }
+
+    public static LottoTickets buyLottoTickets(LottoTicketCount lottoTicketCount) {
+        ManualCount manualCount = lottoTicketCount.getManualCount();
+        AutoCount autoCount = lottoTicketCount.getAutoCount();
+
+        List<String> manualLottoTickets = readManualLottoTickets(manualCount);
+
+        LottoTickets lottoTickets = LottoManager.generateLottoTickets(manualLottoTickets, autoCount);
+
+        return lottoTickets;
     }
 
     public static Money inputMoney() {
@@ -22,5 +48,9 @@ public class LottoApplication {
 
     public static WinningLottoTicket inputWinningLottoTicket() {
         return new WinningLottoTicket(InputView.inputWinningNumber(), InputView.inputBonusNumber());
+    }
+
+    public static LottoTicketCount inputManualLottoTicketCount(Money money) {
+        return new LottoTicketCount(money, InputView.inputManualLottoTicketCount());
     }
 }

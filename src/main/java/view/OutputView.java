@@ -1,30 +1,38 @@
 package view;
 
-import domain.LottoTicket;
-import domain.Money;
-import domain.RankType;
-
-import java.util.List;
-import java.util.Map;
+import domain.*;
 
 public class OutputView {
-    public static void printBuyTicketCount(int number) {
-        System.out.println(String.format("%d", number) + "개를 구매했습니다.");
+    public static void printBuyTicketCount(LottoTicketCount lottoTicketCount) {
+        System.out.println(
+                String.format("수동으로 %d장, 자동으로 %d장을 구매했습니다.",
+                        lottoTicketCount.getManualCount().getManualCount(),
+                        lottoTicketCount.getAutoCount().getAutoCount()
+                )
+        );
     }
 
-    public static void printLottoTickets(List<LottoTicket> lottoTickets) {
-        lottoTickets.forEach(lottoTicket -> {
+    public static void printLottoTickets(LottoTickets lottoTickets) {
+        lottoTickets.getLottoTickets().forEach(lottoTicket -> {
             System.out.println(lottoTicket.getLottoTicket().toString());
         });
     }
 
-    public static void printWinningStatistics(Map<RankType, Integer> winningCountMap, int money) {
+    public static void printWinningStatistics(LottoResults lottoResults, Money money) {
         System.out.println("당첨 통계");
         System.out.println("--------");
 
         for (RankType rankType : RankType.values()) {
-            System.out.println(rankType.getPrintStr() + String.format("%d", winningCountMap.get(rankType)) + "개");
+            printWinningPrize(rankType, lottoResults);
         }
-        System.out.println("총 수익률은 " + Money.getProfit(winningCountMap, money) + "%입니다.");
+        System.out.println("총 수익률은 " + Money.calculateProfit(lottoResults.getLottoResults(), money.getMoney()) + "%입니다.");
+    }
+
+    public static void printWinningPrize(RankType rankType, LottoResults lottoResults) {
+        if (rankType == RankType.MATCH_FIVE_WITH_BONUS) {
+            System.out.println(String.format("%d개 일치, 보너스 볼 일치 (%d원) - %d개", rankType.getNumber(), rankType.getPrize(), lottoResults.getLottoResults().get(rankType)));
+            return;
+        }
+        System.out.println(String.format("%d개 일치 (%d원) - %d개", rankType.getNumber(), rankType.getPrize(), lottoResults.getLottoResults().get(rankType)));
     }
 }

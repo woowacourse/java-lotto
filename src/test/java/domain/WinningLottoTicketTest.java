@@ -13,7 +13,6 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class WinningLottoTicketTest {
-
     private static Stream<String> winningNumberSetUp() {
         return Stream.of(
                 "1, 2, 3, 4, 5, f",
@@ -36,27 +35,27 @@ public class WinningLottoTicketTest {
     @Test
     void isMatchBonusBallTest() {
         WinningLottoTicket winningLottoTicket = new WinningLottoTicket("1, 2, 3, 4, 5, 6", "7");
-        LottoTicket lottoTicket = new LottoTicket(IntStream.of(1, 2, 3, 4, 5, 7).mapToObj(LottoNumber::new).collect(Collectors.toList()));
+        LottoTicket lottoTicket = new LottoTicket(IntStream.of(1, 2, 3, 4, 5, 7).mapToObj(LottoNumber::from).collect(Collectors.toList()));
 
-        Assertions.assertThat(winningLottoTicket.isMatchBonusBall(lottoTicket)).isTrue();
+        Assertions.assertThat(winningLottoTicket.isMatchBonusNumber(lottoTicket)).isTrue();
     }
 
     private static Stream<Arguments> LottoTicketSetUp() {
         return Stream.of(
-                Arguments.of(IntStream.of(1, 2, 3, 4, 5, 6).mapToObj(LottoNumber::new).collect(Collectors.toList()), 6),
-                Arguments.of(IntStream.of(1, 2, 3, 4, 5, 7).mapToObj(LottoNumber::new).collect(Collectors.toList()), 5),
-                Arguments.of(IntStream.of(1, 2, 3, 4, 5, 8).mapToObj(LottoNumber::new).collect(Collectors.toList()), 5),
-                Arguments.of(IntStream.of(1, 2, 3, 4, 8, 9).mapToObj(LottoNumber::new).collect(Collectors.toList()), 4),
-                Arguments.of(IntStream.of(1, 2, 3, 8, 9, 10).mapToObj(LottoNumber::new).collect(Collectors.toList()), 3)
+                Arguments.of(IntStream.of(1, 2, 3, 4, 5, 6).mapToObj(LottoNumber::from).collect(Collectors.toList()), 6),
+                Arguments.of(IntStream.of(1, 2, 3, 4, 5, 7).mapToObj(LottoNumber::from).collect(Collectors.toList()), 5),
+                Arguments.of(IntStream.of(1, 2, 3, 4, 5, 8).mapToObj(LottoNumber::from).collect(Collectors.toList()), 5),
+                Arguments.of(IntStream.of(1, 2, 3, 4, 8, 9).mapToObj(LottoNumber::from).collect(Collectors.toList()), 4),
+                Arguments.of(IntStream.of(1, 2, 3, 8, 9, 10).mapToObj(LottoNumber::from).collect(Collectors.toList()), 3)
         );
     }
 
-    @DisplayName("당첨 복권 번호와 얼마나 맞는지 카운트해주는 메서드 테스트")
+    @DisplayName("Should_당첨 카운트(보너스 볼 포함)_When_로또 티켓과 당첨 복권이 주어졌을 때")
     @ParameterizedTest
     @MethodSource("LottoTicketSetUp")
     void winningLottoCount(List<LottoNumber> originalLottoTicket, int expected) {
         LottoTicket lottoTicket = new LottoTicket(originalLottoTicket);
         WinningLottoTicket winningLottoTicket = new WinningLottoTicket("1, 2, 3, 4, 5, 6", "7");
-        Assertions.assertThat(winningLottoTicket.getCorrectCount(lottoTicket)).isEqualTo(expected);
+        Assertions.assertThat(winningLottoTicket.countMatchNumber(lottoTicket)).isEqualTo(expected);
     }
 }
