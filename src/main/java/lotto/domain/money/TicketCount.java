@@ -6,9 +6,13 @@ public class TicketCount {
 	private final int manualTicketCount;
 	private final int autoTicketCount;
 
-	public TicketCount(int manualTicketCount, int autoTicketCount) {
+	TicketCount(int manualTicketCount, int autoTicketCount) {
 		this.manualTicketCount = manualTicketCount;
 		this.autoTicketCount = autoTicketCount;
+	}
+
+	public static TicketCount of(int totalTicketCount, int manualTicketCount) {
+		return new TicketCount(manualTicketCount, totalTicketCount - manualTicketCount);
 	}
 
 	@Override
