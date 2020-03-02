@@ -26,7 +26,7 @@ public class Ticket {
     }
 
     public Ticket(String input) {
-        List<LottoNumber> ticket = makeWinNumbers(splitInput(input));
+        List<LottoNumber> ticket = makeTickets(splitInput(input));
         validateLottoNumbersLength(ticket);
         validateOverlap(ticket);
         this.ticket = ticket;
@@ -49,7 +49,7 @@ public class Ticket {
         return Arrays.asList(winNumber.split(COMMA));
     }
 
-    private List<LottoNumber> makeWinNumbers(List<String> inputs) {
+    private List<LottoNumber> makeTickets(List<String> inputs) {
         List<LottoNumber> numbers = new ArrayList<>();
         for (String input : inputs) {
             numbers.add(new LottoNumber(validateNumberFormat(input)));
