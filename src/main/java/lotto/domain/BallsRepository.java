@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoGenerator {
+public class BallsRepository {
     private static final int NUMBER_COUNT_PER_LOTTO = 6;
     private static final List<Ball> allLottoBalls;
 

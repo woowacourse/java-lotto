@@ -2,13 +2,18 @@ package lotto.domain;
 
 import lotto.exception.InvalidInputException;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Ball implements Comparable<Ball> {
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
+    private static final Map<Integer, Ball> balls = new HashMap<>();
+
+    static {
+        for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
+            balls.put(i, new Ball(i));
+        }
+    }
 
     private final int number;
 
