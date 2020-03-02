@@ -20,7 +20,7 @@ public class LottoFactory {
     public static LottoTickets publishLottoTickets(PurchaseInfo purchaseInfo) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         for (LottoGenerator lottoGenerator : lottoGenerators) {
-            lottoTickets.addAll(lottoGenerator.generateLottoTickets(purchaseInfo));
+            lottoTickets.addAll(lottoGenerator.createLottoTickets(purchaseInfo));
         }
         return LottoTickets.from(lottoTickets);
     }

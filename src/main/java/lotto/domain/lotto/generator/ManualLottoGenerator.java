@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class ManualLottoGenerator implements LottoGenerator {
 
     @Override
-    public List<LottoTicket> generateLottoTickets(PurchaseInfo purchaseInfo) {
+    public List<LottoTicket> createLottoTickets(PurchaseInfo purchaseInfo) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
 
         for (String manualNumbersInput : purchaseInfo.getManualNumbersInputs()) {

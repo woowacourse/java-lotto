@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface LottoGenerator {
 
-    List<LottoTicket> generateLottoTickets(PurchaseInfo purchaseInfo);
+    List<LottoTicket> createLottoTickets(PurchaseInfo purchaseInfo);
 
 }

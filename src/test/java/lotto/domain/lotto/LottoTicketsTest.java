@@ -25,6 +25,5 @@ class LottoTicketsTest {
         LottoTickets lottoTickets = LottoTickets.from(lottoTicketList);
 
         assertThat(lottoTickets.getLottoTickets()).size().isEqualTo(1);
-
     }
 }
