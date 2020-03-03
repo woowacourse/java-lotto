@@ -2,7 +2,6 @@ package lotto.controller;
 
 import lotto.domain.*;
 import lotto.exception.UnderLottoUnitMoney;
-import lotto.utils.ValidationUtils;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 

@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.List;
-
 public class WinningTicket {
     private static final String DUPLICATE_LOTTO_BALL = "로또볼을 중복입력 하였습니다. 재입력 해주세요.";
 
@@ -9,7 +7,7 @@ public class WinningTicket {
     private final LottoTicket winningTicket;
 
     public WinningTicket(LottoTicket lottoTicket, LottoBall bonusBall) {
-        validateDuplicateNumber2(lottoTicket,bonusBall);
+        validateDuplicateNumber2(lottoTicket, bonusBall);
         this.winningTicket = lottoTicket;
         this.bonusBall = bonusBall;
     }
@@ -28,14 +26,9 @@ public class WinningTicket {
                         lottoBall.getLottoBall() == this.bonusBall.getLottoBall());
     }
 
-    private void validateDuplicateNumber(List<LottoBall> lottoTicket, LottoBall bonusBall) {
-        if (lottoTicket.contains(bonusBall)){
-            throw new IllegalArgumentException(DUPLICATE_LOTTO_BALL);
-        }
-    }
 
     private void validateDuplicateNumber2(LottoTicket lottoTicket, LottoBall bonusBall) {
-        if (lottoTicket.getLottoTicket().contains(bonusBall)){
+        if (lottoTicket.getLottoTicket().contains(bonusBall)) {
             throw new IllegalArgumentException(DUPLICATE_LOTTO_BALL);
         }
     }

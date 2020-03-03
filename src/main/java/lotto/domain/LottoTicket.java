@@ -35,11 +35,11 @@ public class LottoTicket {
         validateIllegalLottoNumberCount(ticketNumber);
     }
 
-    public static LottoTicket of(List<LottoBall> lottoTicket){
+    public static LottoTicket of(List<LottoBall> lottoTicket) {
         return new LottoTicket(lottoTicket);
     }
 
-    public static LottoTicket of(String lottoTicket){
+    public static LottoTicket of(String lottoTicket) {
         return new LottoTicket(lottoTicket);
     }
 
