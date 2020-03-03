@@ -38,27 +38,20 @@ public class LottoController {
         }
     }
 
+
     private WinningTicket getWinningTicket() {
         OutputView.printWinningTicket();
         LottoTicket lottoTicket = generateLottoTicket();
+        LottoBall lottoBall = new LottoBall(InputView.inputBonusBall());
 
         try {
-            return new WinningTicket(lottoTicket.getLottoTicket(), generateBonusBall(lottoTicket));
+            return new WinningTicket(lottoTicket.getLottoTicket(), lottoBall);
         } catch (RuntimeException e) {
             OutputView.printErrorMessage(e.getMessage());
             return getWinningTicket();
         }
     }
 
-    private LottoBall generateBonusBall(LottoTicket lottoTicket) {
-        LottoBall bonusBall = new LottoBall(InputView.inputBonusBall());
-
-        lottoTicket.getLottoTicket()
-                .forEach(winningLottoBall ->
-                ValidationUtils.validateDuplicateNumber(winningLottoBall.getLottoBall(),bonusBall.getLottoBall()));
-
-        return bonusBall;
-    }
 
     private LottoTicket generateLottoTicket() {
         try {
