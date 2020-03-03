@@ -7,7 +7,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -73,5 +75,20 @@ public class ResultsTest {
         results.calculateResults();
         assertThat(results.getEarningRate())
                 .isEqualTo(1500000);
+    }
+
+    @Test
+    @DisplayName("로또 결과 테스트")
+    void getSummaryTest() {
+        Results results = new Results(new LottoTickets(Arrays.asList(notWinningUserLottoTicket, secondWinningUserLottoTicket)), winningLotto);
+
+        Map<WinningInfo, Integer> manualSummary = new HashMap<>();
+        for (WinningInfo winningInfo : WinningInfo.values()) {
+            manualSummary.put(winningInfo, 1);
+        }
+        manualSummary.put(WinningInfo.SECOND, 2);
+        manualSummary.remove(WinningInfo.FAIL);
+
+        assertThat(results.getSummary()).isEqualTo(manualSummary);
     }
 }

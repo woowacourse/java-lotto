@@ -15,10 +15,10 @@ public class Results {
         this.winningLotto = winningLotto;
         this.userLottoTickets = lottoTickets.getLottoTickets();
         this.results = new ArrayList<>();
+        addBlankResults();
     }
 
     public void calculateResults() {
-        addBlankResults();
         for (LottoTicket userLottoTicket : userLottoTickets) {
             Result result = new Result();
             result.calculate(winningLotto, userLottoTicket);
