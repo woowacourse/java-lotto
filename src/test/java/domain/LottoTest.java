@@ -33,7 +33,7 @@ class LottoTest {
 
 	@ParameterizedTest
 	@MethodSource("createNumbersAndMessage")
-	void createTest(List<LottoNumber> numbers, String message) {
+	void createException(List<LottoNumber> numbers, String message) {
 		assertThatThrownBy(() -> {
 			new Lotto(numbers);
 		})

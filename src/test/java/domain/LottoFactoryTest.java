@@ -28,7 +28,7 @@ class LottoFactoryTest {
 	}
 
 	@Test
-	void createAutoLottos() {
+	void createAutoLottosException() {
 		// given
 		int amount = -1;
 		// then
@@ -40,7 +40,7 @@ class LottoFactoryTest {
 
 	@ParameterizedTest
 	@MethodSource("createSelfNumberAndMessage")
-	void createSelfLottos(List<String> numbers, String message) {
+	void createSelfLottosException(List<String> numbers, String message) {
 		assertThatThrownBy(() -> {
 			LottoFactory.createSelfLottos(numbers);
 		}).isInstanceOf(Exception.class)

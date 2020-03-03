@@ -21,7 +21,7 @@ class LottoAmountTest {
 
 	@ParameterizedTest
 	@MethodSource("createAmountAndMessage")
-	void createByException(Money purchaseMoney, int selfLottoAmount, String message) {
+	void createException(Money purchaseMoney, int selfLottoAmount, String message) {
 		assertThatThrownBy(() -> {
 			new LottoAmount(purchaseMoney, selfLottoAmount);
 		}).isInstanceOf(Exception.class)
@@ -32,6 +32,6 @@ class LottoAmountTest {
 	void calculateTotalLottoAmount() {
 		LottoAmount lottoAmount = new LottoAmount(new Money(50000), 5);
 		int expected = 50;
-		assertThat(lottoAmount.calculateTotalLottoAmount()).isEqualTo(50);
+		assertThat(lottoAmount.calculateTotalLottoAmount()).isEqualTo(expected);
 	}
 }
