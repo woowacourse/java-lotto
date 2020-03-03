@@ -26,14 +26,16 @@ class WinningNumbersTest {
     @DisplayName("로또티켓들을 당첨번호와 비교해서 해당 순위들을 반환")
     @Test
     void returnRanks() {
-        LottoTicket lottoTicket = createLottoTicket("1,2,3,4,5,6");
-        LottoNumber bonusNumber = new LottoNumber(7);
-        WinningNumbers winningNumbers = new WinningNumbers(lottoTicket, bonusNumber);
-
-        List<String> inputsForManualLottoTickets = Arrays.asList("1,2,3,10,11,12",
+        Money purchaseMoney = Money.ofPurchaseMoney(14000);
+        TicketCounts ticketCounts = TicketCounts.fromMoneyAndManualTicketCount(purchaseMoney, 3);
+        List<String> manualLottoNumbers = Arrays.asList("1,2,3,10,11,12",
                 "1,2,3,4,5,12",
                 "1,2,3,4,5,6");
-        LottoTickets lottoTickets = LottoTickets.ofManualLottoTickets(3, inputsForManualLottoTickets);
+        LottoTickets lottoTickets = LottoTickets.of(ticketCounts, manualLottoNumbers);
+
+        LottoTicket winningLottoTicket = createLottoTicket("1,2,3,4,5,6");
+        LottoNumber bonusNumber = new LottoNumber(7);
+        WinningNumbers winningNumbers = new WinningNumbers(winningLottoTicket, bonusNumber);
 
         Ranks givenRanks = winningNumbers.checkOutLottos(lottoTickets);
 

@@ -42,4 +42,8 @@ public class TicketCounts {
     public int getAutoTicketCount() {
         return autoTicketCount;
     }
+
+    public int getManualTicketCount() {
+        return manualTicketCount;
+    }
 }

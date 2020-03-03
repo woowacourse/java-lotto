@@ -11,31 +11,29 @@ public class ConsoleLottoApplication {
     }
 
     public static void main(String[] args) {
-        Money purchaseMoney = inputPurchaseMoney();
-        int manualTicketCount = inputManualLottoTicketCount();
-        LottoTickets manualLottoTickets = inputManualLottoTickets(manualTicketCount);
-        int autoTicketCount = purchaseMoney.calculateAllTicketCount() - manualTicketCount;
+        Money purchaseMoney = createPurchaseMoney();
+        int manualTicketCount = createManualLottoTicketCount();
+        TicketCounts ticketCounts = TicketCounts.fromMoneyAndManualTicketCount(purchaseMoney, manualTicketCount);
 
-        LottoTickets autoLottoTickets = LottoTickets.ofAutoLottoTickets(autoTicketCount);
-
-        OutputView.printLottos(manualLottoTickets, autoLottoTickets);
+        LottoTickets lottoTickets = createLottoTickets(ticketCounts);
+        OutputView.printLottos(ticketCounts, lottoTickets);
 
         WinningNumbers winningNumbers = inputWinningNumbers();
-        LottoTickets allLottoTickets = LottoTickets.join(manualLottoTickets, autoLottoTickets);
 
-        Ranks ranks = winningNumbers.checkOutLottos(allLottoTickets);
+        Ranks ranks = winningNumbers.checkOutLottos(lottoTickets);
         Profit profit = ranks.calculateProfit(purchaseMoney);
 
         OutputView.printRanks(ranks);
         OutputView.printProfit(profit);
     }
 
-    private static Money inputPurchaseMoney() {
+
+    private static Money createPurchaseMoney() {
         try {
             return generateMoneyFromInput();
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
-            return inputPurchaseMoney();
+            return createPurchaseMoney();
         }
     }
 
@@ -45,22 +43,31 @@ public class ConsoleLottoApplication {
         return Money.ofPurchaseMoney(valueForPurchaseMoney);
     }
 
-    private static int inputManualLottoTicketCount() {
+    private static int createManualLottoTicketCount() {
         try {
             return InputView.inputManualLottoTicketCount();
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
-            return inputManualLottoTicketCount();
+            return createManualLottoTicketCount();
         }
     }
 
-    private static LottoTickets inputManualLottoTickets(int manualTicketCount) {
+    private static LottoTickets createLottoTickets(TicketCounts ticketCounts) {
         try {
-            List<String> inputsForNumbers = InputView.inputManualLottoNumbers(manualTicketCount);
-            return LottoTickets.ofManualLottoTickets(manualTicketCount, inputsForNumbers);
+            List<String> manualLottoNumbers = inputManualLottoNumbers(ticketCounts.getManualTicketCount());
+            return LottoTickets.of(ticketCounts, manualLottoNumbers);
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
-            return inputManualLottoTickets(manualTicketCount);
+            return createLottoTickets(ticketCounts);
+        }
+    }
+
+    private static List<String> inputManualLottoNumbers(int manualTicketCount) {
+        try {
+            return InputView.inputManualLottoNumbers(manualTicketCount);
+        } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
+            return inputManualLottoNumbers(manualTicketCount);
         }
     }
 

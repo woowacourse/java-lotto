@@ -20,7 +20,13 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
-    public static LottoTickets ofAutoLottoTickets(int autoTicketCount) {
+    public static LottoTickets of(TicketCounts ticketCounts, List<String> manualLottoNumbers) {
+        LottoTickets autoLottoTickets = LottoTickets.ofAutoLottoTickets(ticketCounts.getAutoTicketCount());
+        LottoTickets manualLottoTickets = LottoTickets.ofManualLottoTickets(ticketCounts.getManualTicketCount(), manualLottoNumbers);
+        return LottoTickets.join(autoLottoTickets, manualLottoTickets);
+    }
+
+    private static LottoTickets ofAutoLottoTickets(int autoTicketCount) {
         List<LottoTicket> autoLottoTicket = Stream.generate(LottoTickets::createAutoLottoTicket)
                 .limit(autoTicketCount)
                 .collect(toList());
@@ -34,7 +40,7 @@ public class LottoTickets {
         return LottoTicket.fromSixNumbers(subNumbers);
     }
 
-    public static LottoTickets ofManualLottoTickets(int manualTicketCount, List<String> inputsForNumbers) {
+    private static LottoTickets ofManualLottoTickets(int manualTicketCount, List<String> inputsForNumbers) {
         if (manualTicketCount != inputsForNumbers.size()) {
             throw new LottoTicketsException("수동으로 구매할 로또 티켓의 개수와 로또 번호의 개수가 일치하지 않습니다.");
         }
@@ -45,7 +51,7 @@ public class LottoTickets {
         return new LottoTickets(manualLottoTicket);
     }
 
-    public static LottoTickets join(LottoTickets manualLottoTickets, LottoTickets autoLottoTickets) {
+    private static LottoTickets join(LottoTickets manualLottoTickets, LottoTickets autoLottoTickets) {
         List<LottoTicket> allLottoTickets = new ArrayList<>();
         allLottoTickets.addAll(manualLottoTickets.lottoTickets);
         allLottoTickets.addAll(autoLottoTickets.lottoTickets);
