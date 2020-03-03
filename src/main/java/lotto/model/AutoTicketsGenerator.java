@@ -9,9 +9,9 @@ import java.util.stream.IntStream;
 public class AutoTicketsGenerator implements TicketsGenerator {
 
     @Override
-    public List<Ticket> generate(int autoCount) {
+    public List<Ticket> generate(LottoCount lottoCount) {
         List<Ticket> tickets = new ArrayList<>();
-        for (int i = 0; i < autoCount; i++) {
+        for (int i = 0; i < lottoCount.getAutoTicketCount(); i++) {
             tickets.add(new Ticket(createAutoTicket()));
         }
         return tickets;

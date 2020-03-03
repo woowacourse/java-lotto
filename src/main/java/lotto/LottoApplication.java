@@ -1,18 +1,17 @@
 package lotto;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import lotto.controller.LottoManager;
-import lotto.model.LottoMerge;
+import lotto.model.LottoMaker;
 import lotto.model.LottoResult;
 import lotto.model.LottoCount;
-import lotto.model.ManualTicketsGenerator;
 import lotto.model.Money;
 import lotto.model.RankType;
 import lotto.model.Ticket;
 import lotto.model.Tickets;
-import lotto.model.AutoTicketsGenerator;
 import lotto.model.WinLottoNumbers;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -34,39 +33,36 @@ public class LottoApplication {
 
     private static Money getMoney() {
         OutputView.printInputMoney();
-        return new Money(InputView.inputMoney());
+        return new Money(InputView.input());
     }
 
     private static LottoCount getManualNumber(int ticketCount) {
         OutputView.printInputManualNumber();
-        return new LottoCount(ticketCount, InputView.inputManualCount());
+        return new LottoCount(ticketCount, InputView.input());
     }
 
     private static List<Ticket> getTickets(LottoCount lottoCount) {
-        List<Ticket> tickets = LottoMerge
-            .merge(getManualTickets(lottoCount), getAutoTickets(lottoCount));
+        OutputView.printInputManualLottoNumber();
+        List<Ticket> tickets = LottoMaker.create(getInputManualTicket(lottoCount), lottoCount);
         OutputView.printHowManyTicketsPurchase(lottoCount.getManualTicketCount(),
             lottoCount.getAutoTicketCount());
         OutputView.printAutoNumbers(tickets);
         return tickets;
     }
 
-    private static List<Ticket> getManualTickets(LottoCount lottoCount) {
-        OutputView.printInputManualLottoNumber();
-        ManualTicketsGenerator manualTicketsGenerator = new ManualTicketsGenerator();
-        return manualTicketsGenerator.generate(lottoCount.getManualTicketCount());
-    }
-
-    private static List<Ticket> getAutoTickets(LottoCount lottoCount) {
-        AutoTicketsGenerator autoTicketsGenerator = new AutoTicketsGenerator();
-        return autoTicketsGenerator.generate(lottoCount.getAutoTicketCount());
+    private static List<String> getInputManualTicket(LottoCount lottoCount) {
+        List<String> manualTickets = new ArrayList<>();
+        for (int i = 0; i < lottoCount.getManualTicketCount(); i++) {
+            manualTickets.add(InputView.input());
+        }
+        return manualTickets;
     }
 
     private static WinLottoNumbers getWinNumbersAndBonusBallNumber() {
         OutputView.printInputWinNumber();
-        String winNumber = InputView.inputWinNumbers();
+        String winNumber = InputView.input();
         OutputView.printInputBonusNumber();
-        String bonusBallNumber = InputView.inputBonusBall();
+        String bonusBallNumber = InputView.input();
         return new WinLottoNumbers(winNumber, bonusBallNumber);
     }
 
