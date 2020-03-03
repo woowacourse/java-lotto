@@ -22,6 +22,10 @@ public class Ball implements Comparable<Ball> {
         this.number = number;
     }
 
+    public Ball(String number) {
+        this(Integer.parseInt(number));
+    }
+
     private void validate(int number) {
         if (number < MIN_NUMBER || MAX_NUMBER < number) {
             throw new InvalidInputException(String.format("%d 이상 %d 이하의 숫자만 가능합니다.", MIN_NUMBER, MAX_NUMBER));
@@ -35,15 +39,20 @@ public class Ball implements Comparable<Ball> {
     }
 
     public static Ball valueOf(int number) {
-        return new Ball(number);
+        return BALL_CACHE.get(number);
     }
 
     public static Ball valueOf(String number) {
-        return new Ball(Integer.parseInt(number));
+        return BALL_CACHE.get(Integer.parseInt(number));
     }
 
     public int getNumber() {
         return number;
+    }
+
+    @Override
+    public String toString() {
+        return Integer.toString(number);
     }
 
     @Override

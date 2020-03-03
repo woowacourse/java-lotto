@@ -11,36 +11,25 @@ public class Results {
 
     private final Map<MatchResult, Integer> lottoResults;
 
-    Results(Map<MatchResult, Integer> lottoResults) {
+    private Results(Map<MatchResult, Integer> lottoResults) {
         this.lottoResults = lottoResults;
     }
 
-    public static Results createMatchResults(Lottos lottos, WinningLotto winningLotto) {
-        Map<MatchResult, Integer> matchResults = setUpMatchResults();
+    public static Results createMatchResults(Lottos lottos, WinningNumbers winningNumbers) {
+        Map<MatchResult, Integer> matchResults = setUp();
         for (Lotto lotto : lottos.getLottos()) {
-            MatchResult lottoMatchResult = findMatchResult(lotto, winningLotto);
-            updateMatchResults(matchResults, lottoMatchResult);
+            updateMatchResults(matchResults, lotto.findMatchResult(winningNumbers));
         }
         return new Results(matchResults);
     }
 
-    private static Map<MatchResult, Integer> setUpMatchResults() {
+    private static Map<MatchResult, Integer> setUp() {
         Map<MatchResult, Integer> matchResults = new HashMap<>();
         MatchResult[] results = MatchResult.values();
         for (MatchResult result : results) {
             matchResults.put(result, INITIAL_COUNT);
         }
         return matchResults;
-    }
-
-    public static MatchResult findMatchResult(Lotto lotto, WinningLotto winningLotto) {
-        int sameNumberCount = lotto.countsOfDuplicates(winningLotto.getWinningBalls());
-        boolean isBonus = isFiveMatchWithBonusBall(sameNumberCount, lotto, winningLotto.getBonusBall());
-        return MatchResult.of(sameNumberCount, isBonus);
-    }
-
-    private static boolean isFiveMatchWithBonusBall(int sameNumberCount, Lotto lotto, BonusBall bonusBall) {
-        return sameNumberCount == MatchResult.FIVE_MATCH.getMatchCount() && bonusBall.hasIncluded(lotto.getBalls());
     }
 
     private static void updateMatchResults(Map<MatchResult, Integer> matchResults, MatchResult lottoMatchResult) {

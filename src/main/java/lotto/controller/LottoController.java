@@ -12,28 +12,28 @@ public class LottoController {
         PurchasePrice purchasePrice = new PurchasePrice(InputView.requestPurchasePrice());
         LottoCount lottoCount =
                 new LottoCount(purchasePrice.calculateTotalLottoCount(), InputView.requestNumberOfManualLotto());
-        Lottos lottos = createManualLottos(lottoCount);
-        lottos.concat(createAutomaticLottos(lottoCount));
+        Lottos lottos = createManualLottos(lottoCount.getManualCount());
+        lottos.concat(createAutomaticLottos(lottoCount.getAutomaticCount()));
 
         OutputView.printLottosInformation(lottoCount, lottos);
 
-        WinningLotto winningLotto =
-                new WinningLotto(InputView.requestWinningNumbers(), InputView.requestBonusNumber());
+        WinningNumbers winningNumbers =
+                new WinningNumbers(InputView.requestWinningLotto(), InputView.requestBonusNumber());
 
-        Results results = Results.createMatchResults(lottos, winningLotto);
+        Results results = Results.createMatchResults(lottos, winningNumbers);
         OutputView.printLottoResult(results, purchasePrice);
     }
 
-    private Lottos createManualLottos(LottoCount lottoCount) {
+    private Lottos createManualLottos(int count) {
         OutputView.requestManualLottoMessage();
         LottoCreationStrategy manualCreationStrategy =
-                new ManualCreationStrategy(InputView.requestManualLottos(lottoCount.getManualCount()));
+                new ManualCreationStrategy(InputView.requestManualLottos(count));
         return manualCreationStrategy.create();
     }
 
-    private Lottos createAutomaticLottos(LottoCount lottoCount) {
+    private Lottos createAutomaticLottos(int count) {
         LottoCreationStrategy automaticCreationStrategy =
-                new AutomaticCreationStrategy(lottoCount.getAutomaticCount());
+                new AutomaticCreationStrategy(count);
         return automaticCreationStrategy.create();
     }
 }
