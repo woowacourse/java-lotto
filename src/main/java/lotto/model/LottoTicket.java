@@ -15,7 +15,6 @@ public class LottoTicket {
         this.lottoTicket = lottoTicket;
     }
 
-
     private void checkLottoLength(List<LottoNumber> inputs) {
         if (inputs.size() != LOTTO_NUMBER_LENGTH) {
             throw new NotSixNumbersException(LOTTO_NUMBER_EXCEPTION_MESSAGE);

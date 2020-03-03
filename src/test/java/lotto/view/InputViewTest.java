@@ -20,6 +20,7 @@ public class InputViewTest {
     }
 
     @Test
+    @DisplayName("당첨 번호가 빈 문자열")
     void isEmptyString() {
         String winNumber2 = "";
 
