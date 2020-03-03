@@ -24,10 +24,10 @@ public class GameResult {
 	}
 
 	public Money calculateResultMoney() {
-		return new Money(prizeMoneyCalculation());
+		return new Money(calculatePrizeMoney());
 	}
 
-	private double prizeMoneyCalculation() {
+	private double calculatePrizeMoney() {
 		return ranks.keySet()
 			.stream()
 			.mapToDouble(rank -> rank.totalMoneyByRank(ranks.get(rank)))

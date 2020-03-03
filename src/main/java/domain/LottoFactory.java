@@ -22,7 +22,7 @@ public class LottoFactory {
 	}
 
 	public static List<Lotto> createAutoLottos(int amount) {
-		amountValidate(amount);
+		validateAmonut(amount);
 		List<Lotto> lottos = new ArrayList<>();
 		for (int i = 0; i < amount; i++) {
 			lottos.add(drawAutoLotto());
@@ -46,7 +46,7 @@ public class LottoFactory {
 	}
 
 	//todo : exception 변경필요
-	private static void amountValidate(int amount) {
+	private static void validateAmonut(int amount) {
 		if (amount < 0) {
 			throw new LackOfMoneyException();
 		}

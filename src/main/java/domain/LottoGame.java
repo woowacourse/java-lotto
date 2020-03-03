@@ -20,7 +20,7 @@ public class LottoGame {
 	private LottoNumber bonusNumber;
 
 	public LottoGame(Money purchaseMoney, int selfNumberLottoAmount) {
-		amountValidate(purchaseMoney, selfNumberLottoAmount);
+		validateAmount(purchaseMoney, selfNumberLottoAmount);
 		this.selfNumberLottoAmount = selfNumberLottoAmount;
 		this.autoNumberLottoAmount = (int)(purchaseMoney.division(LOTTO_PRICE) - selfNumberLottoAmount);
 		this.lottos = new ArrayList<>();
@@ -31,7 +31,7 @@ public class LottoGame {
 		lottos.addAll(selfLottos);
 	}
 
-	private void amountValidate(Money purchaseMoney, int selfNumberLottoAmount) {
+	private void validateAmount(Money purchaseMoney, int selfNumberLottoAmount) {
 		int selfLottosPrice = selfNumberLottoAmount * LOTTO_PRICE;
 		if (purchaseMoney.isLessThan(selfLottosPrice)) {
 			throw new LackOfMoneyException();
@@ -48,7 +48,7 @@ public class LottoGame {
 	}
 
 	public void play(List<Integer> inputSixNumbers, int inputBonusNumber) {
-		duplicationValidate(inputSixNumbers, inputBonusNumber);
+		validateDuplication(inputSixNumbers, inputBonusNumber);
 		winningNumbers = new Lotto(inputSixNumbers
 			.stream()
 			.map(LottoNumber::createNumber)
@@ -56,7 +56,7 @@ public class LottoGame {
 		bonusNumber = LottoNumber.createNumber(inputBonusNumber);
 	}
 
-	private void duplicationValidate(List<Integer> inputSixNumbers, int inputBonusNumber) {
+	private void validateDuplication(List<Integer> inputSixNumbers, int inputBonusNumber) {
 		if (inputSixNumbers.contains(inputBonusNumber)) {
 			throw new LottoNumberDuplicateException();
 		}

@@ -1,12 +1,10 @@
 package domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import exception.LottoLengthException;
 import exception.LottoNumberDuplicateException;
@@ -17,18 +15,18 @@ public class Lotto {
 	private final Set<LottoNumber> numbers;
 
 	public Lotto(List<LottoNumber> numbers) {
-		lengthValidate(numbers);
+		validateLength(numbers);
 		this.numbers = new HashSet<>(numbers);
-		duplicationValidate(this.numbers);
+		validateDuplication(this.numbers);
 	}
 
-	private void lengthValidate(List<LottoNumber> numbers) {
+	private void validateLength(List<LottoNumber> numbers) {
 		if (numbers.size() != LOTTO_LENGTH) {
 			throw new LottoLengthException();
 		}
 	}
 
-	private void duplicationValidate(Set<LottoNumber> numbers) {
+	private void validateDuplication(Set<LottoNumber> numbers) {
 		if (numbers.size() != LOTTO_LENGTH) {
 			throw new LottoNumberDuplicateException();
 		}
