@@ -7,7 +7,7 @@ public class WinningTicket {
     private final LottoTicket winningTicket;
 
     public WinningTicket(LottoTicket lottoTicket, LottoBall bonusBall) {
-        validateDuplicateNumber2(lottoTicket, bonusBall);
+        validateDuplicateNumber(lottoTicket, bonusBall);
         this.winningTicket = lottoTicket;
         this.bonusBall = bonusBall;
     }
@@ -27,7 +27,7 @@ public class WinningTicket {
     }
 
 
-    private void validateDuplicateNumber2(LottoTicket lottoTicket, LottoBall bonusBall) {
+    private void validateDuplicateNumber(LottoTicket lottoTicket, LottoBall bonusBall) {
         if (lottoTicket.getLottoTicket().contains(bonusBall)) {
             throw new IllegalArgumentException(DUPLICATE_LOTTO_BALL);
         }
