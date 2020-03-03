@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import domain.LottoAmount;
+
 public class InputView {
 	private static final Scanner scanner = new Scanner(System.in);
 	private static final String DELIMITER = ", ";
@@ -17,10 +19,10 @@ public class InputView {
 		return Double.parseDouble(input);
 	}
 
-	public static List<String> inputSelfNumbers(int amount) {
+	public static List<String> inputSelfNumbers(LottoAmount lottoAmount) {
 		System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 		List<String> numbers = new ArrayList<>();
-		for (int i = 0; i < amount; i++) {
+		for (int i = 0; i < lottoAmount.getSelfLottoAmount(); i++) {
 			String input = scanner.nextLine();
 			validate(input);
 			numbers.add(input);

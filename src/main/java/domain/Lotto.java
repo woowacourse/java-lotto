@@ -42,14 +42,14 @@ public class Lotto {
 		return numbers.contains(lottoNumber);
 	}
 
-	public Rank compare(Lotto winningLotto, LottoNumber bonusNumber) {
-		int count = (int)this.numbers.stream()
-			.filter(winningLotto.numbers::contains)
+	public Rank compare(WinningLotto winningLotto) {
+		int matchCount = (int)this.numbers.stream()
+			.filter(winningLotto::isNumberMatch)
 			.count();
 
 		boolean bonusNumberMatch = numbers.stream()
-			.anyMatch(lottoNumber -> lottoNumber == bonusNumber);
+			.anyMatch(winningLotto::isBonusMatch);
 
-		return Rank.of(count, bonusNumberMatch);
+		return Rank.of(matchCount, bonusNumberMatch);
 	}
 }
