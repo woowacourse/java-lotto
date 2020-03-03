@@ -1,10 +1,13 @@
 package lotto.domain.lotto;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
+import lotto.domain.lotto.Generator.ManualLottoTicketGenerator;
 import lotto.domain.number.LottoNumber;
 
 public class Lotto {
@@ -16,6 +19,14 @@ public class Lotto {
 		validateNull(lottoNumbers);
 		validateSize(lottoNumbers);
 		this.lottoNumbers = new TreeSet<>(lottoNumbers);
+	}
+
+	public static Lotto of(String input) {
+		return new Lotto(Arrays.stream(input.split(ManualLottoTicketGenerator.DELIMITER))
+			.map(String::trim)
+			.map(Integer::parseInt)
+			.map(LottoNumber::valueOf)
+			.collect(Collectors.toSet()));
 	}
 
 	private void validateNull(Set<LottoNumber> lottoNumbers) {

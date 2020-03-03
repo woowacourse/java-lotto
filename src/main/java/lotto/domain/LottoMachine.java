@@ -21,9 +21,6 @@ public class LottoMachine {
 	private int loopCountOfManualLotto;
 	private Money money;
 
-	private LottoMachine() {
-	}
-
 	public LottoMachine(String inputMoney, String inputCountOfManualLotto) {
 		allLottoTicket = new ArrayList<>();
 		money = new Money(inputMoney);

@@ -38,21 +38,10 @@ class LottoWinningResultTest {
 			LottoNumber.valueOf(5),
 			LottoNumber.valueOf(21)
 		));
-
-		Set<LottoNumber> winningLottoNumber = new HashSet<>(Arrays.asList(
-			LottoNumber.valueOf(1),
-			LottoNumber.valueOf(2),
-			LottoNumber.valueOf(3),
-			LottoNumber.valueOf(4),
-			LottoNumber.valueOf(5),
-			LottoNumber.valueOf(6)
-		));
 		lottoTicket = new ArrayList<>(Arrays.asList(
 			new Lotto(firstRankLottoNumber),
 			new Lotto(missRankLottoNumber)));
-		Lotto lotto = new Lotto(winningLottoNumber);
-		LottoNumber bonusNumber = LottoNumber.valueOf(10);
-		winningLotto = new WinningLotto(lotto, bonusNumber);
+		winningLotto = new WinningLotto("1,2,3,4,5,6", "10");
 	}
 
 	@DisplayName("LottoWinningResult 생성자에 구매한 로또들과 당첨 로또가 입력되었을 때 유효한 값일시 객체 생성 ")
