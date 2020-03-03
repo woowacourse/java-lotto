@@ -7,6 +7,7 @@ import java.util.Objects;
 public class LottoResult {
     private static final int RESULT_INCREMENT = 1;
     private static final int INITIAL_RESULT = 0;
+
     private final Map<LottoRank, Integer> result = new HashMap<>();
 
     public LottoResult(final Lottos lottos, final WinningNumber winningNumber) {

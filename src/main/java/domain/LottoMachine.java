@@ -8,9 +8,12 @@ import java.util.List;
 
 public class LottoMachine {
     private static final int START_INDEX = 0;
-    private List<Lotto> lottos = new ArrayList<>();
 
-    public LottoMachine(final LottoCount lottoCount) {
+    private LottoMachine() {
+    }
+
+    public static Lottos createLottos(LottoCount lottoCount) {
+        List<Lotto> lottos = new ArrayList<>();
         for (int index = START_INDEX; index < lottoCount.getManualCount(); index++) {
             inputManualNumbersWithValidation(lottos);
         }
@@ -18,9 +21,10 @@ public class LottoMachine {
         for (int index = START_INDEX; index < lottoCount.getAutoCount(); index++) {
             lottos.add(lottoGenerator.generateLotto());
         }
+        return new Lottos(lottos);
     }
 
-    private void inputManualNumbersWithValidation(final List<Lotto> lottos) {
+    private static void inputManualNumbersWithValidation(final List<Lotto> lottos) {
         try {
             LottoGenerator lottoGenerator = new ManualLottoGenerator(InputView.inputManualLottoNumbers());
             lottos.add(lottoGenerator.generateLotto());
@@ -28,9 +32,5 @@ public class LottoMachine {
             OutputView.printExceptionMessage(e);
             inputManualNumbersWithValidation(lottos);
         }
-    }
-
-    public List<Lotto> getLottos() {
-        return lottos;
     }
 }

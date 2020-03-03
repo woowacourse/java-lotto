@@ -10,9 +10,8 @@ public class Lottos {
     public Lottos() {
     }
 
-    public Lottos(final LottoCount lottoCount) {
-        LottoMachine lottoMachine = new LottoMachine(lottoCount);
-        lottos = lottoMachine.getLottos();
+    public Lottos(final List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
     public void addLotto(final Lotto lotto) {

@@ -10,7 +10,7 @@ public class LottoGameApplication {
         Money money = inputPurchaseAmountWithValidation();
         LottoCount lottoCount = inputLottoCountWithValidation(money);
 
-        Lottos lottos = new Lottos(lottoCount);
+        Lottos lottos = LottoMachine.createLottos(lottoCount);
         OutputView.printLottos(lottoCount, lottos);
         WinningNumber winningNumber = inputWinningNumberWithValidation();
         LottoGame lottoGame = new LottoGame(lottos, winningNumber);
