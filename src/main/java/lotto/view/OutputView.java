@@ -17,7 +17,7 @@ public class OutputView {
 
 	public static void printLottos(LottoDtos lottoDtos) {
 		for (LottoDto lotto : lottoDtos.getLottoDtos()) {
-			System.out.println(lotto.toString());
+			System.out.println(lotto);
 		}
 	}
 
