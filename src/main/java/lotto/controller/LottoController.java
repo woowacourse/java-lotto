@@ -67,10 +67,11 @@ public class LottoController {
 
 	private static Lotto readLottoNumber() {
 		try {
-			return new Lotto(InputUtil.inputLottoNumber().stream()
-					.map(Integer::parseInt)
-					.map(LottoMachine.getInstance()::pickBall)
-					.collect(Collectors.toList()));
+			return new Lotto(LottoMachine.getInstance()
+					.pickDedicatedBalls(InputUtil.inputLottoNumber()
+							.stream()
+							.map(Integer::parseInt)
+							.collect(Collectors.toList())));
 		} catch (LottoException | IOException e) {
 			OutputView.printExceptionMessage(e);
 			return readLottoNumber();
