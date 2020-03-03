@@ -13,9 +13,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class LottoTest {
-
 	private final static Lotto lotto = new Lotto(intsToLottoNumbers(1, 2, 3, 4, 5, 6));
-	;
 
 	private static List<LottoNumber> intsToLottoNumbers(int... numbers) {
 		return Arrays.stream(numbers)
@@ -54,9 +52,10 @@ class LottoTest {
 	@Test
 	void compare() {
 		// given
-		Lotto winningLotto = new Lotto(intsToLottoNumbers(1, 2, 3, 4, 5, 7));
-		LottoNumber bonusNumber = LottoNumber.createNumber(6);
+
+		WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 7),
+			6);
 		// then
-		assertThat(lotto.compare(winningLotto, bonusNumber)).isEqualTo(Rank.SECOND);
+		assertThat(lotto.compare(winningLotto)).isEqualTo(Rank.SECOND);
 	}
 }
