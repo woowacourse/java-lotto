@@ -20,7 +20,7 @@ public class BettingInfo {
         this.paidPrice =paidPrice;
         this.manualLottoSize = manualLottoSize;
         this.manualLottoNumbers = manualLottoNumbers;
-        this.autoLottoSize = getOtherTypeLottoSize(paidPrice, manualLottoSize);
+        this.autoLottoSize = createOtherTypeLottoSize(paidPrice, manualLottoSize);
     }
 
     private void validateNotNull(PaidPrice paidPrice, LottoSize manualLottoSize, List<List<String>> manualLottoNumbers) {
@@ -28,7 +28,7 @@ public class BettingInfo {
         Objects.requireNonNull(manualLottoSize, String.format(EMPTY_INPUT_MSG, "수동 로또 개수"));
         Objects.requireNonNull(manualLottoNumbers, String.format(EMPTY_INPUT_MSG, "수동 로또 번호"));
 
-        LottoSize autoLottoSize = getOtherTypeLottoSize(paidPrice, manualLottoSize);
+        LottoSize autoLottoSize = createOtherTypeLottoSize(paidPrice, manualLottoSize);
         Objects.requireNonNull(autoLottoSize, String.format(EMPTY_INPUT_MSG, "자동 로또 개수"));
     }
 
@@ -39,7 +39,7 @@ public class BettingInfo {
         }
     }
 
-    private LottoSize getOtherTypeLottoSize(PaidPrice paidPrice, LottoSize lottoSize) {
+    private LottoSize createOtherTypeLottoSize(PaidPrice paidPrice, LottoSize lottoSize) {
         int otherTypeLottoSize = paidPrice.getTotalLottoSize() - lottoSize.getLottoSize();
         return new LottoSize(paidPrice, otherTypeLottoSize);
     }
