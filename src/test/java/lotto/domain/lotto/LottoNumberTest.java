@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoNumberTest {
@@ -16,14 +17,15 @@ class LottoNumberTest {
     @DisplayName("LottoNumber를 생성하는 테스트")
     void createLottoNumber() {
         int expected = 3;
-        LottoNumber lottoNumber = new LottoNumber(expected);
+        LottoNumber lottoNumber = LottoNumber.from(expected);
+        assertThat(lottoNumber).isEqualTo(lottoNumber);
     }
 
     @ParameterizedTest
     @ValueSource(ints = {NUMBER_UNDER_MINIMUM, NUMBER_OVER_MAXIMUM})
     @DisplayName("LottoNumber가 가능한 숫자가 아니면 예외 발생")
     void createLottoNumberWithWrongNumberThrowsException(int number) {
-        assertThatThrownBy(() -> new LottoNumber(number))
+        assertThatThrownBy(() -> LottoNumber.from(number))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

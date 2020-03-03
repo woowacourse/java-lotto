@@ -49,6 +49,10 @@ public enum Rank {
         }
     }
 
+    public long multiply(int count) {
+        return winningMoney * count;
+    }
+
     public boolean isNot(Rank rank) {
         return this != rank;
     }

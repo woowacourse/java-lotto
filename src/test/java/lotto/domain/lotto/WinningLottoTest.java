@@ -7,9 +7,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,22 +20,27 @@ class WinningLottoTest {
     @Test
     @DisplayName("winningLotto는 LottoTicket과 LottoNumber로 생성")
     void createWinningLotto() {
-        Set<Integer> numbers = Arrays.stream(new int[]{1, 2, 3, 4, 5, 6}).boxed().collect(Collectors.toSet());
-        LottoTicket lottoTicket = LottoTicketFactory.publishLottoTicketFrom(numbers);
-        LottoNumber bonusNumber = LottoTicketFactory.publishLottoNumberFrom(7);
-        WinningLotto winningLotto = new WinningLotto(lottoTicket, bonusNumber);
+        Set<LottoNumber> numbers = IntStream.rangeClosed(1, 6)
+                .mapToObj(LottoNumber::from)
+                .collect(Collectors.toSet());
+        LottoTicket lottoTicket = LottoTicket.from(numbers);
+        LottoNumber bonusNumber = LottoNumber.from(7);
+        WinningLotto winningLotto = WinningLotto.from(lottoTicket, bonusNumber);
 
-        assertThat(winningLotto);
+        assertThat(winningLotto).isNotNull()
+                .isInstanceOf(WinningLotto.class);
     }
 
     @Test
     @DisplayName("winningLotto 생성시 bonus 번호가 lottoTicket에 있으면 예외 발생")
     void lottoTicketHasBonusNumberThrowsExeption() {
-        Set<Integer> numbers = Arrays.stream(new int[]{1, 2, 3, 4, 5, 6}).boxed().collect(Collectors.toSet());
-        LottoTicket lottoTicket = LottoTicketFactory.publishLottoTicketFrom(numbers);
-        LottoNumber bonusNumber = LottoTicketFactory.publishLottoNumberFrom(6);
+        Set<LottoNumber> numbers = IntStream.rangeClosed(1, 6)
+                .mapToObj(LottoNumber::from)
+                .collect(Collectors.toSet());
+        LottoTicket lottoTicket = LottoTicket.from(numbers);
+        LottoNumber bonusNumber = LottoNumber.from(6);
 
-        assertThatThrownBy(() -> new WinningLotto(lottoTicket, bonusNumber))
+        assertThatThrownBy(() -> WinningLotto.from(lottoTicket, bonusNumber))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -47,25 +52,37 @@ class WinningLottoTest {
     }
 
     private static Stream<Arguments> createRank() {
-        Set<Integer> numbers = Arrays.stream(new int[]{1, 2, 3, 4, 5, 6}).boxed().collect(Collectors.toSet());
-        LottoTicket lottoTicket = LottoTicketFactory.publishLottoTicketFrom(numbers);
-        LottoNumber bonusNumber = LottoTicketFactory.publishLottoNumberFrom(7);
-        WinningLotto winningLotto = new WinningLotto(lottoTicket, bonusNumber);
+        Set<LottoNumber> numbers = IntStream.rangeClosed(2, 7)
+                .mapToObj(LottoNumber::from)
+                .collect(Collectors.toSet());
+        LottoTicket lottoTicket = LottoTicket.from(numbers);
+        LottoNumber bonusNumber = LottoNumber.from(1);
+        WinningLotto winningLotto = WinningLotto.from(lottoTicket, bonusNumber);
 
-        Set<Integer> secondNumbers = Arrays.stream(new int[]{1, 2, 3, 4, 5, 7}).boxed().collect(Collectors.toSet());
-        LottoTicket secondLottoTicket = LottoTicketFactory.publishLottoTicketFrom(secondNumbers);
+        Set<LottoNumber> secondNumbers = IntStream.rangeClosed(1, 6)
+                .mapToObj(LottoNumber::from)
+                .collect(Collectors.toSet());
+        LottoTicket secondLottoTicket = LottoTicket.from(secondNumbers);
 
-        Set<Integer> thirdNumbers = Arrays.stream(new int[]{2, 3, 4, 5, 6, 8}).boxed().collect(Collectors.toSet());
-        LottoTicket thirdLottoTicket = LottoTicketFactory.publishLottoTicketFrom(thirdNumbers);
+        Set<LottoNumber> thirdNumbers = IntStream.rangeClosed(3, 8)
+                .mapToObj(LottoNumber::from)
+                .collect(Collectors.toSet());
+        LottoTicket thirdLottoTicket = LottoTicket.from(thirdNumbers);
 
-        Set<Integer> fourthNumbers = Arrays.stream(new int[]{3, 4, 5, 6, 7, 8}).boxed().collect(Collectors.toSet());
-        LottoTicket fourthLottoTicket = LottoTicketFactory.publishLottoTicketFrom(fourthNumbers);
+        Set<LottoNumber> fourthNumbers = IntStream.rangeClosed(4, 9)
+                .mapToObj(LottoNumber::from)
+                .collect(Collectors.toSet());
+        LottoTicket fourthLottoTicket = LottoTicket.from(fourthNumbers);
 
-        Set<Integer> fifthNumbers = Arrays.stream(new int[]{4, 5, 6, 7, 8, 9}).boxed().collect(Collectors.toSet());
-        LottoTicket fifthLottoTicket = LottoTicketFactory.publishLottoTicketFrom(fifthNumbers);
+        Set<LottoNumber> fifthNumbers = IntStream.rangeClosed(5, 10)
+                .mapToObj(LottoNumber::from)
+                .collect(Collectors.toSet());
+        LottoTicket fifthLottoTicket = LottoTicket.from(fifthNumbers);
 
-        Set<Integer> missNumbers = Arrays.stream(new int[]{5, 6, 7, 8, 9, 10}).boxed().collect(Collectors.toSet());
-        LottoTicket missLottoTicket = LottoTicketFactory.publishLottoTicketFrom(missNumbers);
+        Set<LottoNumber> missNumbers = IntStream.rangeClosed(6, 11)
+                .mapToObj(LottoNumber::from)
+                .collect(Collectors.toSet());
+        LottoTicket missLottoTicket = LottoTicket.from(missNumbers);
 
         return Stream.of(
                 Arguments.of(winningLotto, missLottoTicket, Rank.MISS),
