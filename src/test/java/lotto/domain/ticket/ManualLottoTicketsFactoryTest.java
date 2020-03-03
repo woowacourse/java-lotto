@@ -1,7 +1,6 @@
 package lotto.domain.ticket;
 
 import lotto.domain.number.SerialLottoNumber;
-import lotto.domain.number.SerialLottoNumber;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +19,7 @@ class ManualLottoTicketsFactoryTest {
 				= ManualLottoTicketsFactory.of(lottoTicketsInput);
 
 		// when
-		LottoTickets result = manualLottoTicketsFactory.create();
+		LottoTickets result = LottoTickets.of(manualLottoTicketsFactory);
 
 		// then
 		List<SerialLottoNumber> expected = lottoTicketsInput.stream()

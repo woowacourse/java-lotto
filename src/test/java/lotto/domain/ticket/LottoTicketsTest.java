@@ -111,11 +111,11 @@ class LottoTicketsTest {
 				"2,3,4,5,6,7",
 				"5,6,7,8,9,10",
 				"11,12,13,14,15,16");
-		LottoTickets input1 = ManualLottoTicketsFactory.of(given1).create();
+		LottoTickets input1 = LottoTickets.of(ManualLottoTicketsFactory.of(given1));
 		List<String> given2 = Arrays.asList("4,5,6,7,8,9",
 				"11,12,15,16,17,18",
 				"45,44,43,42,41,40");
-		LottoTickets input2 = ManualLottoTicketsFactory.of(given2).create();
+		LottoTickets input2 = LottoTickets.of(ManualLottoTicketsFactory.of(given2));
 
 		// when
 		LottoTickets result = LottoTickets.merge(input1, input2);

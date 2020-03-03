@@ -15,8 +15,8 @@ public class LottoTickets {
 		this.lottoTickets = Collections.unmodifiableList(lottoTickets);
 	}
 
-	public static LottoTickets of(TicketGenerator ticketGenerator) {
-		return ticketGenerator.create();
+	public static LottoTickets of(TicketsGenerator ticketsGenerator) {
+		return new LottoTickets(ticketsGenerator.create());
 	}
 
 	public static LottoTickets merge(final LottoTickets... someLottoTickets) {

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class AutoLottoTicketsFactory implements TicketGenerator {
+public class AutoLottoTicketsFactory implements TicketsGenerator {
 	private static final int ZERO = 0;
 	private static final int SIX = 6;
 
@@ -26,14 +26,14 @@ public class AutoLottoTicketsFactory implements TicketGenerator {
 	}
 
 	@Override
-	public LottoTickets create() {
+	public List<SerialLottoNumber> create() {
 		List<SerialLottoNumber> lottoTickets = new ArrayList<>();
 
 		for (int i = 0; i < autoTicketsCount; i++) {
 			lottoTickets.add(createRandomLottoTicket());
 		}
 
-		return new LottoTickets(lottoTickets);
+		return lottoTickets;
 	}
 
 	private SerialLottoNumber createRandomLottoTicket() {

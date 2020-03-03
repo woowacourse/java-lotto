@@ -5,7 +5,7 @@ import lotto.domain.number.SerialLottoNumber;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ManualLottoTicketsFactory implements TicketGenerator {
+public class ManualLottoTicketsFactory implements TicketsGenerator {
 	private final List<String> lottoTicketsInput;
 
 	private ManualLottoTicketsFactory(final List<String> lottoTicketsInput) {
@@ -17,11 +17,9 @@ public class ManualLottoTicketsFactory implements TicketGenerator {
 	}
 
 	@Override
-	public LottoTickets create() {
-		List<SerialLottoNumber> lottoTickets = lottoTicketsInput.stream()
+	public List<SerialLottoNumber> create() {
+		return lottoTicketsInput.stream()
 				.map(SerialLottoNumber::of)
 				.collect(Collectors.toUnmodifiableList());
-
-		return new LottoTickets(lottoTickets);
 	}
 }

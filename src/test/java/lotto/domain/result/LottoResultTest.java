@@ -3,7 +3,6 @@ package lotto.domain.result;
 import lotto.domain.money.Money;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.SerialLottoNumber;
-import lotto.domain.number.SerialLottoNumber;
 import lotto.domain.ticket.LottoTickets;
 import lotto.domain.ticket.ManualLottoTicketsFactory;
 import org.assertj.core.api.Assertions;
@@ -51,7 +50,7 @@ class LottoResultTest {
 		serialLottoNumbers.add("10,11,12,13,14,15");
 		serialLottoNumbers.add("16,17,18,19,20,21");
 		serialLottoNumbers.add("21,22,23,24,25,26");
-		LottoTickets lottoTickets = ManualLottoTicketsFactory.of(serialLottoNumbers).create();
+		LottoTickets lottoTickets = LottoTickets.of(ManualLottoTicketsFactory.of(serialLottoNumbers));
 
 		// when
 		LottoResult lottoResult = LottoResult.of(winning, lottoTickets);

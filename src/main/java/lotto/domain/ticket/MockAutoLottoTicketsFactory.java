@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class MockAutoLottoTicketsFactory implements TicketGenerator {
+public class MockAutoLottoTicketsFactory implements TicketsGenerator {
 	private static final int ZERO = 0;
 	private static final int SIX = 6;
 
@@ -25,14 +25,14 @@ public class MockAutoLottoTicketsFactory implements TicketGenerator {
 	}
 
 	@Override
-	public LottoTickets create() {
+	public List<SerialLottoNumber> create() {
 		List<SerialLottoNumber> lottoTickets = new ArrayList<>();
 
 		for (int i = 0; i < autoTicketsCount; i++) {
 			lottoTickets.add(createMockRandomLottoTicket());
 		}
 
-		return new LottoTickets(lottoTickets);
+		return lottoTickets;
 	}
 
 	private SerialLottoNumber createMockRandomLottoTicket() {
