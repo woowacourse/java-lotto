@@ -2,7 +2,6 @@ package lotto.view;
 
 import lotto.domain.*;
 
-import java.util.List;
 import java.util.Map;
 
 import static java.util.stream.Collectors.joining;
@@ -30,10 +29,7 @@ public class OutputView {
     }
 
     public static void printLottos(Lottos lottos) {
-        List<Lotto> lottoLines = lottos.getLottos();
-        for (Lotto lotto : lottoLines) {
-            printLottoNumbers(lotto);
-        }
+        lottos.stream().forEach(OutputView::printLottoNumbers);
     }
 
     private static void printLottoNumbers(Lotto lotto) {
@@ -45,7 +41,7 @@ public class OutputView {
 
     public static void printLottoResult(Results results, PurchasePrice purchasePrice) {
         printHead();
-        printMatchResults(results.getLottoResults());
+        printMatchResults(results.getResults());
         printEarningRate(results.calculateEarningRate(purchasePrice));
     }
 

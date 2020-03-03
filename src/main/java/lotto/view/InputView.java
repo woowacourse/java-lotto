@@ -34,6 +34,13 @@ public class InputView {
         return result;
     }
 
+    public static List<String> requestManualLotto() {
+        String input = scanner.nextLine();
+        return Arrays.stream(input.split(COMMA))
+                .map(String::trim)
+                .collect(Collectors.toList());
+    }
+
     public static String requestWinningLotto() {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
         String winningLotto = scanner.nextLine();
@@ -46,12 +53,5 @@ public class InputView {
     public static String requestBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         return scanner.nextLine();
-    }
-
-    public static List<String> requestManualLotto() {
-        String input = scanner.nextLine();
-        return Arrays.stream(input.split(COMMA))
-                .map(String::trim)
-                .collect(Collectors.toList());
     }
 }

@@ -35,7 +35,7 @@ public class Lotto {
 
     private void checkCount(List<Ball> balls) {
         if (balls.size() != BALLS_COUNT) {
-            throw new InvalidInputException(String.format("당첨 번호는 %d개만 가능합니다.", BALLS_COUNT));
+            throw new InvalidInputException(String.format("로또 내부의 번호 개수는 %d개만 가능합니다.", BALLS_COUNT));
         }
     }
 
@@ -75,5 +75,4 @@ public class Lotto {
     public List<Ball> getBalls() {
         return Collections.unmodifiableList(balls);
     }
-
 }
