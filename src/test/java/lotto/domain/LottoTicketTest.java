@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.domain.errors.ErrorMessage;
 import lotto.generator.NumberGenerator;
 import lotto.generator.UserInputNumberGenerator;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -11,7 +12,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTicketTest {
     @Test
-    void validateDistinctNumberTest_중복숫자가_있을_때() {
+    @DisplayName("중복숫자가 있을 때")
+    void validateDistinctNumberTest_exist_number() {
         NumberGenerator numberGenerator = new UserInputNumberGenerator();
         List<LottoNumber> invalidNumbers = numberGenerator.generateNumbers("1,2,3,4,5,5");
         assertThatThrownBy(() -> new LottoTicket(invalidNumbers))
@@ -20,7 +22,8 @@ public class LottoTicketTest {
     }
 
     @Test
-    void validateNumberCountTest_로또_숫자가_6개가_아닐_때() {
+    @DisplayName("로또 숫자가 6개가 아닐 때")
+    void validateNumberCountTest_lotto_number_not_six() {
         NumberGenerator numberGenerator = new UserInputNumberGenerator();
         List<LottoNumber> invalidNumbers = numberGenerator.generateNumbers("1,2,3,4,5");
 
@@ -30,7 +33,8 @@ public class LottoTicketTest {
     }
 
     @Test
-    void validateDistinctNumberTest_올바른_로또_숫자일_때() {
+    @DisplayName("올바른 로또 숫자일 때")
+    void validateDistinctNumberTest_right_number() {
         NumberGenerator numberGenerator = new UserInputNumberGenerator();
         List<LottoNumber> validNumbers = numberGenerator.generateNumbers("1,2,3,4,5,45");
 

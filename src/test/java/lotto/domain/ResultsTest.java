@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.generator.NumberGenerator;
 import lotto.generator.UserInputNumberGenerator;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -37,7 +38,8 @@ public class ResultsTest {
     }
 
     @Test
-    void calculateResultsTest_당첨되지_않았을_때() {
+    @DisplayName("당첨되지 않았을 때")
+    void calculateResultsTest_no_winning() {
         Results results = new Results(new LottoTickets(Arrays.asList(notWinningUserLottoTicket)), winningLotto);
         results.calculateResults();
         assertThat(results.getResults()
@@ -48,7 +50,8 @@ public class ResultsTest {
     }
 
     @Test
-    void calculateResultsTest_당첨이_존재할_때() {
+    @DisplayName("당첨이_존재할_때")
+    void calculateResultsTest_exist_winning() {
         Results results = new Results(new LottoTickets(Arrays.asList(notWinningUserLottoTicket, secondWinningUserLottoTicket)), winningLotto);
         results.calculateResults();
         assertThat(results.getResults()
@@ -64,6 +67,7 @@ public class ResultsTest {
     }
 
     @Test
+    @DisplayName("수익률 함수 테스트")
     void getEarningRateTest() {
         Results results = new Results(new LottoTickets(Arrays.asList(notWinningUserLottoTicket, secondWinningUserLottoTicket)), winningLotto);
         results.calculateResults();

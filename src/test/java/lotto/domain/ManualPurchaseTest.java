@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.generator.NumberGenerator;
 import lotto.generator.UserInputNumberGenerator;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ManualPurchaseTest {
     @Test
+    @DisplayName("수동구매 카운트 테스트")
     void getManualPurchaseCountTest() {
         Payment payment = new Payment("4000");
         String purchaseCount = "4";
@@ -28,6 +30,7 @@ public class ManualPurchaseTest {
     }
 
     @Test
+    @DisplayName("수동구매 티켓 리스트 테스트")
     void getManualTicketsTest() {
         NumberGenerator numberGenerator = new UserInputNumberGenerator();
         Payment payment = new Payment("2000");
