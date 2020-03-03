@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.exception.NotNumberException;
 import lotto.exception.NullOrEmptyException;
+import lotto.model.LottoNumber;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,19 +24,18 @@ public class InputView {
         return payment;
     }
 
-    public static int inputBonusBall() {
+    public static LottoNumber inputBonusBall() {
         String input = scanner.nextLine();
         checkNullOrEmptyInput(input);
         checkNumberFormat(input);
-        return Integer.parseInt(input);
+        return new LottoNumber(Integer.parseInt(input));
     }
 
     // 수동
-    public static List<Integer> inputLottoTicket() {
+    public static List<LottoNumber> inputLottoTicket() {
         String input = scanner.nextLine();
         checkNullOrEmptyInput(input);
-        List<Integer> lottoTicket = makeNumbers(splitInput(input));
-        return lottoTicket;
+        return makeNumbers(splitInput(input));
     }
 
     public static int inputManualCount() {
@@ -45,11 +45,10 @@ public class InputView {
         return Integer.parseInt(input);
     }
 
-    public static List<Integer> inputWinNumber() {
+    public static List<LottoNumber> inputWinNumber() {
         String inputs = scanner.nextLine();
         checkNullOrEmptyInput(inputs);
-        List<Integer> winningNumbers = makeNumbers(splitInput(inputs));
-        return winningNumbers;
+        return makeNumbers(splitInput(inputs));
     }
 
     public static void checkNullOrEmptyInput(String input) {
@@ -62,12 +61,12 @@ public class InputView {
         return Arrays.asList(numbers.split(","));
     }
 
-    public static List<Integer> makeNumbers(List<String> inputs) {
-        List<Integer> numbers = new ArrayList<>();
+    public static List<LottoNumber> makeNumbers(List<String> inputs) {
+        List<LottoNumber> numbers = new ArrayList<>();
         for (String input : inputs) {
             input = input.trim();
             checkNumberFormat(input);
-            int number = Integer.parseInt(input);
+            LottoNumber number = new LottoNumber(Integer.parseInt(input));
             numbers.add(number);
         }
         return numbers;

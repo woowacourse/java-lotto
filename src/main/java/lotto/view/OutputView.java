@@ -26,10 +26,6 @@ public class OutputView {
         System.out.println(INPUT_MESSAGE);
     }
 
-    public static void printLottoCount(int count) {
-        System.out.println(count + LOTTO_COUNT_MESSAGE);
-    }
-
     public static void printAutoNumbers(LottoTickets lottoTickets) {
         for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
             System.out.println(lottoTicket.getLottoTicket());

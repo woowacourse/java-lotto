@@ -180,8 +180,8 @@
 - [x] LottoTicket 클래스에서 자동, 수동 생성 클래스를 나누어 생성하라.
 
 ### 두번째 피드백 
-- [ ] LottoController 클래스 내 각 티켓 생성자의 반복문 중복을 제거하라.
+- [x] LottoController 클래스 내 각 티켓 생성자의 반복문 중복을 제거하라.
 - [x] TicketNumber 클래스 내 totalTicket 변수 제거.
-- [ ] LottoTicket 클래스 내 lottoTicket의 Integer 값을 포장하라.
-- [ ] ManualTicket과 AutoTicket을 상속이 아닌 interface를 활용하라.
+- [x] LottoTicket 클래스 내 lottoTicket의 Integer 값을 포장하라.
+- [x] ManualTicket과 AutoTicket을 상속이 아닌 interface를 활용하라.
 - [ ] 테스트 코드 검토하라.
