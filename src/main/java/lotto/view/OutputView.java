@@ -6,20 +6,10 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void printLottos(LottoTickets lottoTickets) {
-        System.out.printf("%d개를 구매했습니다.", lottoTickets.size());
+    public static void printLottos(TicketCounts ticketCounts, LottoTickets lottoTickets) {
+        System.out.printf("수동으로 %d개, 자동으로 %d개를 구매했습니다.", ticketCounts.getManualTicketCount(), ticketCounts.getAutoTicketCount());
         for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
             System.out.println(lottoTicket.getNumbers());
-        }
-    }
-
-    public static void printLottos(LottoTickets manualLottoTickets, LottoTickets randomLottoTickets) {
-        System.out.printf("수동으로 %d개, 자동으로 %d개를 구매했습니다.", manualLottoTickets.size(), randomLottoTickets.size());
-        for (LottoTicket manualLottoTicket : manualLottoTickets.getLottoTickets()) {
-            System.out.println(manualLottoTicket.getNumbers());
-        }
-        for (LottoTicket randomLottoTicket : randomLottoTickets.getLottoTickets()) {
-            System.out.println(randomLottoTicket.getNumbers());
         }
     }
 
@@ -27,7 +17,7 @@ public class OutputView {
         System.out.println("당첨 통계");
         System.out.println("-------");
 
-        for (Rank rank : Rank.values()) {
+        for (Rank rank : Rank.validValues()) {
             int matchedCount = rank.getMatchedCount();
             int winningMoney = rank.getWinningMoney().getValue();
             int containingCount = ranks.frequency(rank);

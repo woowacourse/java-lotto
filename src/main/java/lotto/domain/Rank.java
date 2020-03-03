@@ -1,7 +1,11 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
 
 public enum Rank {
     LOSE(-1, 0),
@@ -28,6 +32,12 @@ public enum Rank {
 
     public boolean isValidRank() {
         return this != LOSE;
+    }
+
+    public static List<Rank> validValues() {
+        return Arrays.stream(values())
+                .filter(Rank::isValidRank)
+                .collect(collectingAndThen(toList(), Collections::unmodifiableList));
     }
 
     public int getContainingCount(List<Rank> ranks) {
