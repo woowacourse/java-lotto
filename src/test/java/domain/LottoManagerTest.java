@@ -15,8 +15,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-class LottoGameTest {
-	private static LottoGame lottoGame;
+class LottoManagerTest {
+	private static LottoManager lottoManager;
 
 	private static Lotto createLotto(int... numbers) {
 		return new Lotto(Arrays.stream(numbers)
@@ -33,7 +33,7 @@ class LottoGameTest {
 
 	@BeforeAll
 	static void beforeAll() {
-		lottoGame = new LottoGame(
+		lottoManager = new LottoManager(
 			new Lottos(createLottos(), new ArrayList<>()),
 			new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7)
 		);
@@ -60,7 +60,7 @@ class LottoGameTest {
 	@MethodSource("createRankAndCount")
 	void addRanks(Rank rank, int expected) {
 		Map<Rank, Integer> ranks = new HashMap<>();
-		lottoGame.addRanks(ranks);
+		lottoManager.addRanks(ranks);
 		assertThat(ranks.getOrDefault(rank, 0)).isEqualTo(expected);
 	}
 }

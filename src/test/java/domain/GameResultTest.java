@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 class GameResultTest {
 
 	private static GameResult gameResult;
-	private static LottoGame lottoGame;
+	private static LottoManager lottoManager;
 
 	private static Lotto createLotto(int... numbers) {
 		return new Lotto(Arrays.stream(numbers)
@@ -30,11 +30,11 @@ class GameResultTest {
 
 	@BeforeAll
 	static void beforeAll() {
-		lottoGame = new LottoGame(
+		lottoManager = new LottoManager(
 			new Lottos(createLottos(), new ArrayList<>()),
 			new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7)
 		);
-		gameResult = GameResult.create(lottoGame);
+		gameResult = GameResult.create(lottoManager);
 	}
 
 	@Test

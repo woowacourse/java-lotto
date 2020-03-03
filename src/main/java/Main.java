@@ -4,7 +4,7 @@ import domain.GameResult;
 import domain.Lotto;
 import domain.LottoAmount;
 import domain.LottoFactory;
-import domain.LottoGame;
+import domain.LottoManager;
 import domain.Lottos;
 import domain.Money;
 import domain.WinningLotto;
@@ -21,8 +21,8 @@ public class Main {
 		OutputView.printLottos(lottos);
 
 		WinningLotto winningLotto = new WinningLotto(InputView.inputSixNumbers(), InputView.inputBonusNumber());
-		LottoGame lottoGame = new LottoGame(lottos, winningLotto);
-		GameResult gameResult = GameResult.create(lottoGame);
+		LottoManager lottoManager = new LottoManager(lottos, winningLotto);
+		GameResult gameResult = GameResult.create(lottoManager);
 
 		OutputView.printStatistics(gameResult, purchaseMoney);
 	}

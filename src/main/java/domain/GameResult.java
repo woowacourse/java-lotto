@@ -12,9 +12,9 @@ public class GameResult {
 		this.ranks = ranks;
 	}
 
-	public static GameResult create(LottoGame lottoGame) {
+	public static GameResult create(LottoManager lottoManager) {
 		Map<Rank, Integer> ranks = new HashMap<>();
-		lottoGame.addRanks(ranks);
+		lottoManager.addRanks(ranks);
 		return new GameResult(ranks);
 	}
 

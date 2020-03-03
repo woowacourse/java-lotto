@@ -11,11 +11,11 @@ import exception.InvalidLottoAmountException;
 public class LottoFactory {
 	public static final int ZERO_AMOUNT = 0;
 	public static final String DELIMITER = ", ";
-	private static final List<LottoNumber> numbers = new ArrayList<>();
 	private static final int LOTTO_LENGTH_FRONT = 0;
 	private static final int LOTTO_LENGTH = 6;
 	private static final int LOTTO_NUMBER_FRONT = 1;
 	private static final int LOTTO_NUMBER_RANGE = 45;
+	private static final List<LottoNumber> numbers = new ArrayList<>();
 
 	static {
 		for (int i = LOTTO_NUMBER_FRONT; i <= LOTTO_NUMBER_RANGE; i++) {

@@ -2,13 +2,13 @@ package domain;
 
 import java.util.Map;
 
-public class LottoGame {
+public class LottoManager {
 	private static final int DEFAULT_VALUE = 0;
 	private static final int COUNT = 1;
 	private final WinningLotto winningLotto;
 	private final Lottos lottos;
 
-	public LottoGame(Lottos lottos, WinningLotto winningLotto) {
+	public LottoManager(Lottos lottos, WinningLotto winningLotto) {
 		this.winningLotto = winningLotto;
 		this.lottos = lottos;
 	}

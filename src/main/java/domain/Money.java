@@ -48,5 +48,4 @@ public class Money implements Comparable<Money> {
 	public double getMoney() {
 		return money;
 	}
-
 }

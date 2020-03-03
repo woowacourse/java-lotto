@@ -25,7 +25,6 @@ public enum Rank {
 		if (count == FIVE_MATCHED && bonusNumberMatch) {
 			return Rank.SECOND;
 		}
-
 		return Arrays.stream(values())
 			.filter(rank -> rank.matchedCount == count)
 			.findFirst()
