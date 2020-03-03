@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.Map;
+import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -49,6 +51,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
                 || lottoNumber > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException(NOT_IN_SCOPE_NUMBERS_MSG);
         }
+    }
+
+    public static List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers.values()
+                .stream()
+                .collect(Collectors.toList());
     }
 
     public static LottoNumber valueOf(String number) {
