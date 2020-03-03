@@ -25,10 +25,6 @@ public class Money implements Comparable<Money> {
 		return money * other;
 	}
 
-	public Money minus(double other) {
-		return new Money(money - other);
-	}
-
 	@Override
 	public int compareTo(Money other) {
 		return (int)(this.money - other.money);

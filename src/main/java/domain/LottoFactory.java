@@ -6,9 +6,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import exception.LackOfMoneyException;
+import exception.InvalidLottoAmountException;
 
 public class LottoFactory {
+	public static final int ZERO_AMOUNT = 0;
+	public static final String DELIMITER = ", ";
 	private static final List<LottoNumber> numbers = new ArrayList<>();
 	private static final int LOTTO_LENGTH_FRONT = 0;
 	private static final int LOTTO_LENGTH = 6;
@@ -22,7 +24,7 @@ public class LottoFactory {
 	}
 
 	public static List<Lotto> createAutoLottos(int amount) {
-		validateAmonut(amount);
+		validateAmount(amount);
 		List<Lotto> lottos = new ArrayList<>();
 		for (int i = 0; i < amount; i++) {
 			lottos.add(drawAutoLotto());
@@ -30,7 +32,6 @@ public class LottoFactory {
 		return lottos;
 	}
 
-	// todo : 예외 추가필요
 	public static List<Lotto> createSelfLottos(List<String> inputSelfNumbers) {
 		List<Lotto> lottos = new ArrayList<>();
 		for (String numbers : inputSelfNumbers) {
@@ -40,15 +41,14 @@ public class LottoFactory {
 	}
 
 	private static Lotto numbersToLotto(String numbers) {
-		return new Lotto(Arrays.stream(numbers.split(", "))
+		return new Lotto(Arrays.stream(numbers.split(DELIMITER))
 			.map(LottoNumber::createNumber)
 			.collect(Collectors.toList()));
 	}
 
-	//todo : exception 변경필요
-	private static void validateAmonut(int amount) {
-		if (amount < 0) {
-			throw new LackOfMoneyException();
+	private static void validateAmount(int amount) {
+		if (amount < ZERO_AMOUNT) {
+			throw new InvalidLottoAmountException(InvalidLottoAmountException.NEGATIVE_NUMBER);
 		}
 	}
 
@@ -57,5 +57,4 @@ public class LottoFactory {
 		ArrayList<LottoNumber> subNumbers = new ArrayList<>(numbers.subList(LOTTO_LENGTH_FRONT, LOTTO_LENGTH));
 		return new Lotto(subNumbers);
 	}
-
 }
