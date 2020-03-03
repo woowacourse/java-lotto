@@ -12,7 +12,7 @@ public class LottoTicket {
 
     protected final List<LottoBall> lottoTicket;
 
-    public LottoTicket(List<LottoBall> lottoTicket) {
+    protected LottoTicket(List<LottoBall> lottoTicket) {
         validateAutoTicket(lottoTicket.size());
         this.lottoTicket = Collections.unmodifiableList(lottoTicket);
     }
@@ -21,7 +21,7 @@ public class LottoTicket {
         ValidationUtils.validateLottoTicketSize(size);
     }
 
-    public LottoTicket(String inputTicketNumber) {
+    protected LottoTicket(String inputTicketNumber) {
         String[] ticketNumber = StringUtils.parseString(inputTicketNumber);
         validateManualLottoTicket(ticketNumber);
 
@@ -30,6 +30,14 @@ public class LottoTicket {
                         .map(ball -> LottoBalls.findLottoBall(StringUtils.stringToInt(ball)))
                         .collect(Collectors.toList())
         );
+    }
+
+    public static LottoTicket of(List<LottoBall> lottoTicket){
+        return new LottoTicket(lottoTicket);
+    }
+
+    public static LottoTicket of(String lottoTicket){
+        return new LottoTicket(lottoTicket);
     }
 
     private void validateManualLottoTicket(String[] ticketNumber) {

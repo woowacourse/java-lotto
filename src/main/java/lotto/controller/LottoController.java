@@ -62,7 +62,7 @@ public class LottoController {
 
     private LottoTicket generateLottoTicket() {
         try {
-            return new LottoTicket(InputView.inputLottoTicket());
+            return LottoTicket.of(InputView.inputLottoTicket());
         } catch (RuntimeException e) {
             OutputView.printErrorMessage(e.getMessage());
             return generateLottoTicket();
@@ -75,7 +75,7 @@ public class LottoController {
         OutputView.printLottoTicketCount(manualLottoTicketCount, allLottoTicketCount);
         for (int i = 0; i < allLottoTicketCount.getTicketCount(); i++) {
             LottoBalls.shuffle();
-            lottoTickets.insertLottoTicket(new LottoTicket(LottoBalls.generateLottoTicket()));
+            lottoTickets.insertLottoTicket(LottoTicket.of(LottoBalls.generateLottoTicket()));
         }
     }
 
