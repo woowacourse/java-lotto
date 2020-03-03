@@ -6,15 +6,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoMachine {
-	private static final int MAX_LOTTO_NUMBER = 45;
-	private static final int MIN_LOTTO_NUMBER = 1;
-	public static final String LOTTO_NUMBER_OUTOF_BOUNDS = "범위를 벗어난 로또 숫자입니다.";
 
 	private final List<LottoNumber> lottoNumbers;
 
 	private LottoMachine() {
 		lottoNumbers = new ArrayList<>();
-		for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
+		for (int i = LottoNumber.MIN; i <= LottoNumber.MAX; i++) {
 			lottoNumbers.add(new LottoNumber(i));
 		}
 	}
@@ -50,7 +47,7 @@ public class LottoMachine {
 		return lottoNumbers.stream()
 				.filter(l -> l.isEqualTo(number))
 				.findFirst()
-				.orElseThrow(() -> new IllegalArgumentException(LOTTO_NUMBER_OUTOF_BOUNDS));
+				.orElseThrow(() -> new IllegalArgumentException(LottoNumber.LOTTO_NUMBER_OUTOF_BOUND));
 	}
 
 	private static class LottoMachineSingletonHolder {

@@ -1,9 +1,9 @@
 package lotto.domain;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    public static final String LOTTO_NUMBER_OUTOF_BOUND = "범위를 벗어난 로또 숫자입니다.";
     public static final int MIN = 1;
     public static final int MAX = 45;
+    public static final String LOTTO_NUMBER_OUTOF_BOUND = "범위를 벗어난 로또 숫자입니다.";
 
     private final int lottoNumber;
 
