@@ -16,7 +16,8 @@ public class LottoController {
 	public static void run() {
 		try {
 			Money purchaseMoney = Money.of(InputView.inputPurchaseMoney());
-			TicketCount ticketCount = TicketCount.of(purchaseMoney.totalTicketCount(), InputView.inputManualTicketCount());
+			TicketCount ticketCount =
+					TicketCount.of(purchaseMoney.totalTicketCount(), InputView.inputManualTicketCount());
 
 			LottoTickets lottoTickets = createLottoTickets(ticketCount);
 
@@ -33,13 +34,11 @@ public class LottoController {
 	private static LottoTickets createLottoTickets(TicketCount ticketCount) {
 		ManualLottoTicketsFactory manualLottoTicketsFactory
 				= ManualLottoTicketsFactory.of(InputView.inputManualLottoTicket(ticketCount.getManualTicketCount()));
-		LottoTickets manualLottoTickets = LottoTickets.of(manualLottoTicketsFactory);
 
 		AutoLottoTicketsFactory autoLottoTicketsFactory
 				= AutoLottoTicketsFactory.of(ticketCount.getAutoTicketCount());
-		LottoTickets autoLottoTickets = LottoTickets.of(autoLottoTicketsFactory);
 
-		LottoTickets lottoTickets = LottoTickets.merge(manualLottoTickets, autoLottoTickets);
+		LottoTickets lottoTickets = LottoTickets.of(manualLottoTicketsFactory, autoLottoTicketsFactory);
 
 		OutputView.printLottoTicketsCount(ticketCount.getManualTicketCount(), ticketCount.getAutoTicketCount());
 		OutputView.printLottoTickets(lottoTickets);

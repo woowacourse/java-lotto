@@ -3,7 +3,6 @@ package lotto.domain.ticket;
 import lotto.domain.number.SerialLottoNumber;
 import lotto.domain.result.Rank;
 import lotto.domain.result.Winning;
-import lotto.util.ListBuilder;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -15,18 +14,13 @@ public class LottoTickets {
 		this.lottoTickets = Collections.unmodifiableList(lottoTickets);
 	}
 
-	public static LottoTickets of(TicketsGenerator ticketsGenerator) {
-		return new LottoTickets(ticketsGenerator.create());
-	}
-
-	public static LottoTickets merge(final LottoTickets... someLottoTickets) {
-		return new LottoTickets(mergeLottoTickets(someLottoTickets));
-	}
-
-	private static List<SerialLottoNumber> mergeLottoTickets(final LottoTickets... someLottoTickets) {
-		return Arrays.stream(someLottoTickets)
-				.map(lottoTickets -> lottoTickets.lottoTickets)
-				.reduce(new ArrayList<>(), ListBuilder::merge);
+	public static LottoTickets of(TicketsGenerator... ticketsGenerators) {
+		List<SerialLottoNumber> lottoTickets = new ArrayList<>();
+		for (TicketsGenerator ticketsGenerator : ticketsGenerators) {
+			lottoTickets.addAll(ticketsGenerator.create());
+		}
+		
+		return new LottoTickets(lottoTickets);
 	}
 
 	public Map<Rank, Integer> findResult(Winning winning) {

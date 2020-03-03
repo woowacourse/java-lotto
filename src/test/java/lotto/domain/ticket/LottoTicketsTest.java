@@ -4,7 +4,6 @@ import lotto.domain.number.LottoNumber;
 import lotto.domain.number.SerialLottoNumber;
 import lotto.domain.result.Rank;
 import lotto.domain.result.Winning;
-import lotto.util.ListBuilder;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -105,24 +104,26 @@ class LottoTicketsTest {
 	}
 
 	@Test
-	void merge() {
+	void ofManyTicketGenerator() {
 		// given
 		List<String> given1 = Arrays.asList("1,2,3,4,5,6",
 				"2,3,4,5,6,7",
 				"5,6,7,8,9,10",
 				"11,12,13,14,15,16");
-		LottoTickets input1 = LottoTickets.of(ManualLottoTicketsFactory.of(given1));
 		List<String> given2 = Arrays.asList("4,5,6,7,8,9",
 				"11,12,15,16,17,18",
 				"45,44,43,42,41,40");
-		LottoTickets input2 = LottoTickets.of(ManualLottoTicketsFactory.of(given2));
 
 		// when
-		LottoTickets result = LottoTickets.merge(input1, input2);
+		LottoTickets result
+				= LottoTickets.of(ManualLottoTicketsFactory.of(given1), ManualLottoTicketsFactory.of(given2));
 
 		// then
-		LottoTickets expected =
-				LottoTickets.of(ManualLottoTicketsFactory.of(ListBuilder.merge(given1, given2)));
+		List<String> expectedInput = new ArrayList<>();
+		expectedInput.addAll(given1);
+		expectedInput.addAll(given2);
+
+		LottoTickets expected = LottoTickets.of(ManualLottoTicketsFactory.of(expectedInput));
 		Assertions.assertThat(result).isEqualTo(expected);
 	}
 }
