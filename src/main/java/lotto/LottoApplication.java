@@ -1,8 +1,6 @@
 package lotto;
 
 import lotto.controller.LottoGame;
-import lotto.domain.AutoLottoTicketFactory;
-import lotto.domain.LottoGeneratable;
 import lotto.view.OutputView;
 
 /**
@@ -15,8 +13,7 @@ import lotto.view.OutputView;
 public class LottoApplication {
 	public static void main(String[] args) {
 		try {
-			LottoGeneratable lottoTicketFactory = new AutoLottoTicketFactory();
-			LottoGame lottoGame = new LottoGame(lottoTicketFactory);
+			LottoGame lottoGame = new LottoGame();
 			lottoGame.run();
 		} catch (Exception e) {
 			OutputView.printError(e.getMessage());

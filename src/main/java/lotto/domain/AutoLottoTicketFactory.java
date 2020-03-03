@@ -12,21 +12,25 @@ import java.util.stream.Collectors;
  * @author K.S.KIM
  * @since 2020/02/19
  */
-public class AutoLottoTicketFactory implements LottoGeneratable {
-	private static final Random RANDOM = new Random();
+public class AutoLottoTicketFactory implements LottoGenerative {
+	private final Random random;
+
+	public AutoLottoTicketFactory() {
+		this.random = new Random();
+	}
 
 	@Override
-	public LottoTicket generate(LottoPurchaseMoney lottoPurchaseMoney) {
-		List<Lotto> lottos = new ArrayList<>();
-		while (lottoPurchaseMoney.hasBalance()) {
-			lottoPurchaseMoney.pay();
-			lottos.add(generate());
+	public LottoTicket generate(PurchaseMoney purchaseMoney) {
+		List<Lotto> lottoTicket = new ArrayList<>();
+		while (purchaseMoney.canPayable(LOTTO_PRICE)) {
+			purchaseMoney.pay(LOTTO_PRICE);
+			lottoTicket.add(generate());
 		}
-		return new LottoTicket(lottos);
+		return new LottoTicket(lottoTicket);
 	}
 
 	private Lotto generate() {
-		return RANDOM.ints(LottoNumber.MIN_VALUE, LottoNumber.MAX_VALUE + 1)
+		return random.ints(LottoNumber.MIN_VALUE, LottoNumber.MAX_VALUE + 1)
 				.distinct()
 				.limit(Lotto.SIZE)
 				.mapToObj(LottoNumber::of)

@@ -1,6 +1,7 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 /**
  * 선택한 로또 하나를 테스트하는 클래스
@@ -39,7 +41,7 @@ public class LottoTest {
 	}
 
 	@Test
-	@DisplayName("로또 번호 여섯 개를 받아서 로또 클래스를 생성한다")
+	@DisplayName("로또 번호 여섯 개를 받아서 로또 인스턴스를 생성한다")
 	void constructor() {
 		List<LottoNumber> lottoNumbers = Arrays.asList(LottoNumber.of(1),
 				LottoNumber.of(2),
@@ -85,6 +87,13 @@ public class LottoTest {
 				LottoNumber.of(44),
 				LottoNumber.of(45)));
 		assertThat(lotto).isEqualTo(expected);
+	}
+
+	@ParameterizedTest
+	@DisplayName("로또 숫자를 콤마 단위로 구분한 문자열로 받아 생성한다")
+	@ValueSource(strings = {"1, 2, 3, 4, 5, 6", "1,2,3,4,5,6", "  1, 2, 3,4,    5,  6   "})
+	void ofComma(String lottoNumbers) {
+		assertThat(Lotto.ofComma(lottoNumbers)).isInstanceOf(Lotto.class);
 	}
 
 	@Test

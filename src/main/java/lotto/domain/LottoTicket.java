@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
@@ -19,11 +21,17 @@ public class LottoTicket {
 
 	public LottoTicket(List<Lotto> lottoTicket) {
 		validate(lottoTicket);
-		this.lottoTicket = lottoTicket;
+		this.lottoTicket = Collections.unmodifiableList(lottoTicket);
 	}
 
-	private void validate(List<Lotto> lottos) {
-		if (Objects.isNull(lottos) || lottos.isEmpty()) {
+	public LottoTicket concat(LottoTicket concatTargetTicket) {
+		List<Lotto> concatenatedLottoTicket = new ArrayList<>(this.lottoTicket);
+		concatenatedLottoTicket.addAll(concatTargetTicket.lottoTicket);
+		return new LottoTicket(concatenatedLottoTicket);
+	}
+
+	private void validate(List<Lotto> lottoTicket) {
+		if (Objects.isNull(lottoTicket)) {
 			throw new IllegalArgumentException(INVALID_LOTTO_NUMBERS_SIZE_MESSAGE);
 		}
 	}

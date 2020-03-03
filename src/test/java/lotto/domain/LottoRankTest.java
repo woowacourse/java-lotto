@@ -1,6 +1,9 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -35,5 +38,17 @@ public class LottoRankTest {
 	@DisplayName("로또 번호가 1등 ~ 5등 사이의 조건과 일치하지 않는 경우 MISS이다")
 	void of_Miss() {
 		assertThat(LottoRank.of(MatchCount.of(2), true)).isEqualTo(LottoRank.MISS);
+	}
+
+	@Test
+	@DisplayName("로또 순위를 역순으로 반환한다")
+	void valuesAsReverse() {
+		List<LottoRank> expect = Arrays.asList(LottoRank.MISS,
+				LottoRank.FIFTH,
+				LottoRank.FOURTH,
+				LottoRank.THIRD,
+				LottoRank.SECOND,
+				LottoRank.FIRST);
+		assertThat(LottoRank.valuesAsReverse()).isEqualTo(expect);
 	}
 }

@@ -1,6 +1,7 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,6 +39,19 @@ public class MatchResultTest {
 		statistics.put(LottoRank.FIFTH, 2L);
 		statistics.put(LottoRank.MISS, 5L);
 		assertThat(new MatchResult(statistics)).isInstanceOf(MatchResult.class);
+	}
+
+	@Test
+	@DisplayName("생성자에 null 값을 입력한 경우 예외가 발생한다.")
+	void constructor_isNull() {
+		assertThatThrownBy(() -> new MatchResult(null)).isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@Test
+	@DisplayName("생성자에 빈 map을 입력한 경우 예외가 발생한다.")
+	void constructor_isEmpty() {
+		Map<LottoRank, Long> statistics = new HashMap<>();
+		assertThatThrownBy(() -> new MatchResult(statistics)).isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@Test
