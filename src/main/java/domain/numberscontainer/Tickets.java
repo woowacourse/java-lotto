@@ -51,7 +51,7 @@ public class Tickets {
         }
     }
 
-    public static int getTotalTicketSize(Money money) {
+    public static int size(Money money) {
         return money.getValue() / TICKET_PRICE;
     }
 

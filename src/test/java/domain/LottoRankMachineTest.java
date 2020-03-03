@@ -37,7 +37,7 @@ public class LottoRankMachineTest {
     void test2() {
         Money money = new Money("6000");
         LottoResult lottoResult = LottoResultMachine.calculateResult(tickets, winningNumbers);
-        LottoProfit profit = LottoProfit.ofProfit(lottoResult, money);
+        LottoProfit profit = LottoProfit.of(lottoResult, money);
         assertThat(profit.getValue()).isEqualTo(33859200);
     }
 

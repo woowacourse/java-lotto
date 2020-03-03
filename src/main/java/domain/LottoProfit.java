@@ -11,7 +11,7 @@ public class LottoProfit {
         this.profit = profit;
     }
 
-    public static LottoProfit ofProfit(LottoResult lottoResult, Money money) {
+    public static LottoProfit of(LottoResult lottoResult, Money money) {
         return new LottoProfit(lottoResult.getTotalPrize() / money.getValue() * TO_PERCENTAGE);
     }
 
