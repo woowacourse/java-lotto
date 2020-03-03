@@ -31,7 +31,6 @@ class LottoFactoryTest {
 	void createAutoLottos() {
 		// given
 		int amount = -1;
-		// when
 		// then
 		assertThatThrownBy(() -> {
 			LottoFactory.createAutoLottos(amount);
