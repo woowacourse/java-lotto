@@ -1,45 +1,40 @@
 package lotto.domain;
 
+import lotto.generator.NumberGenerator;
+import lotto.generator.UserInputNumberGenerator;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ResultsTest {
-    private static final String[] WINNING_LOTTO_NUMBERS = {"1", "2", "3", "4", "5", "6"};
     private static final String BONUS_NUMBER = "7";
     private static final int RESULT_BASE = 6;
-    List<LottoNumber> winningNumbers = new ArrayList<LottoNumber>(Arrays.asList(
-            new LottoNumber(WINNING_LOTTO_NUMBERS[0]),
-            new LottoNumber(WINNING_LOTTO_NUMBERS[1]),
-            new LottoNumber(WINNING_LOTTO_NUMBERS[2]),
-            new LottoNumber(WINNING_LOTTO_NUMBERS[3]),
-            new LottoNumber(WINNING_LOTTO_NUMBERS[4]),
-            new LottoNumber(WINNING_LOTTO_NUMBERS[5])));
-    LottoNumber bonusNumber = new LottoNumber(BONUS_NUMBER);
-    WinningLottoTicket winningLotto = new WinningLottoTicket(winningNumbers, bonusNumber);
+    NumberGenerator numberGenerator;
+    List<LottoNumber> winningNumbers;
+    LottoNumber bonusNumber;
+    WinningLottoTicket winningLotto;
+    List<LottoNumber> notWinningUserLottoNumbers;
+    LottoTicket notWinningUserLottoTicket;
+    List<LottoNumber> secondWinningUserLottoNumbers;
+    LottoTicket secondWinningUserLottoTicket;
 
-    List<LottoNumber> notWinningUserLottoNumbers = new ArrayList<LottoNumber>(Arrays.asList(
-            new LottoNumber("7"),
-            new LottoNumber("8"),
-            new LottoNumber("9"),
-            new LottoNumber("10"),
-            new LottoNumber("11"),
-            new LottoNumber("12")));
-    LottoTicket notWinningUserLottoTicket = new LottoTicket(notWinningUserLottoNumbers);
+    @BeforeEach
+    void init() {
+        numberGenerator = new UserInputNumberGenerator();
+        winningNumbers = numberGenerator.generateNumbers("1,2,3,4,5,6");
+        bonusNumber = new LottoNumber(BONUS_NUMBER);
+        winningLotto = new WinningLottoTicket(winningNumbers, bonusNumber);
 
-    List<LottoNumber> secondWinningUserLottoNumbers = new ArrayList<LottoNumber>(Arrays.asList(
-            new LottoNumber(WINNING_LOTTO_NUMBERS[0]),
-            new LottoNumber(WINNING_LOTTO_NUMBERS[1]),
-            new LottoNumber(WINNING_LOTTO_NUMBERS[2]),
-            new LottoNumber(WINNING_LOTTO_NUMBERS[3]),
-            new LottoNumber(WINNING_LOTTO_NUMBERS[4]),
-            new LottoNumber(BONUS_NUMBER)));
-    LottoTicket secondWinningUserLottoTicket = new LottoTicket(secondWinningUserLottoNumbers);
+        notWinningUserLottoNumbers = numberGenerator.generateNumbers("7,8,9,10,11,12");
+        notWinningUserLottoTicket = new LottoTicket(notWinningUserLottoNumbers);
 
+        secondWinningUserLottoNumbers = numberGenerator.generateNumbers("1,2,3,4,5,7");
+        secondWinningUserLottoTicket = new LottoTicket(secondWinningUserLottoNumbers);
+    }
 
     @Test
     void calculateResultsTest_당첨되지_않았을_때() {

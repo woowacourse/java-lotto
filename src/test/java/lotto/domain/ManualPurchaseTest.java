@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.generator.NumberGenerator;
+import lotto.generator.UserInputNumberGenerator;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -27,6 +29,7 @@ public class ManualPurchaseTest {
 
     @Test
     void getManualTicketsTest() {
+        NumberGenerator numberGenerator = new UserInputNumberGenerator();
         Payment payment = new Payment("2000");
         String purchaseCount = "2";
         ManualPurchaseCount manualPurchaseCount = new ManualPurchaseCount(purchaseCount, payment);
@@ -35,20 +38,8 @@ public class ManualPurchaseTest {
                 "11,12,13,14,15,16"
         ));
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        List<LottoNumber> firstLottoNumbers = new ArrayList<>(Arrays.asList(
-                new LottoNumber("1"),
-                new LottoNumber("2"),
-                new LottoNumber("3"),
-                new LottoNumber("4"),
-                new LottoNumber("5"),
-                new LottoNumber("6")));
-        List<LottoNumber> secondLottoNumbers = new ArrayList<>(Arrays.asList(
-                new LottoNumber("11"),
-                new LottoNumber("12"),
-                new LottoNumber("13"),
-                new LottoNumber("14"),
-                new LottoNumber("15"),
-                new LottoNumber("16")));
+        List<LottoNumber> firstLottoNumbers = numberGenerator.generateNumbers("1,2,3,4,5,6");
+        List<LottoNumber> secondLottoNumbers = numberGenerator.generateNumbers("11,12,13,14,15,16");
 
         lottoTickets.add(new LottoTicket(firstLottoNumbers));
         lottoTickets.add(new LottoTicket(secondLottoNumbers));
