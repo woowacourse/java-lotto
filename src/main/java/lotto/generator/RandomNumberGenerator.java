@@ -1,6 +1,7 @@
-package lotto.utils;
+package lotto.generator;
 
 import lotto.domain.LottoNumber;
+import lotto.factory.LottoNumberFactory;
 
 import java.util.Collections;
 import java.util.List;
@@ -20,7 +21,7 @@ public class RandomNumberGenerator implements NumberGenerator {
     }
 
     @Override
-    public List<LottoNumber> generateNumbers(String Input) {
-        return null;
+    public List<LottoNumber> generateNumbers(final String Input) {
+        return Collections.emptyList();
     }
 }

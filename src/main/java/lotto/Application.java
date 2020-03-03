@@ -1,22 +1,53 @@
 package lotto;
 
 import lotto.domain.*;
-import lotto.utils.LottoFactory;
-import lotto.utils.NumberGenerator;
-import lotto.utils.UserInputNumberGenerator;
+import lotto.factory.LottoFactory;
+import lotto.generator.NumberGenerator;
+import lotto.generator.UserInputNumberGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
+
+import java.util.Collections;
+import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
         final Payment payment = generatePayment();
         OutputView.printLottoCount(payment);
 
-        final LottoTickets lottoTickets = LottoFactory.createLottoList(payment);
+        final ManualPurchase manualPurchase = generateManualPurchase(generateManualPurchaseCount(payment));
+        final LottoTickets lottoTickets = LottoFactory.createLottoList(manualPurchase.getManualPurchaseCount(), payment);
+        lottoTickets.addTickets(manualPurchase.getManualTickets());
         OutputView.printLottoList(lottoTickets);
 
         final WinningLottoTicket winningLotto = generateWinningLotto();
         OutputView.printResults(new Results(lottoTickets, winningLotto));
+    }
+
+    private static ManualPurchase generateManualPurchase(final ManualPurchaseCount manualPurchaseCount) {
+        try {
+            final List<String> manualLottoInput = getManualInput(manualPurchaseCount);
+            return new ManualPurchase(manualPurchaseCount, manualLottoInput);
+        } catch (IllegalArgumentException exception) {
+            OutputView.printErrorMessage(exception);
+            return generateManualPurchase(manualPurchaseCount);
+        }
+    }
+
+    private static ManualPurchaseCount generateManualPurchaseCount(final Payment payment) {
+        try {
+            return new ManualPurchaseCount(InputView.getManualCount(), payment);
+        } catch (IllegalArgumentException exception) {
+            OutputView.printErrorMessage(exception);
+            return generateManualPurchaseCount(payment);
+        }
+    }
+
+    private static List<String> getManualInput(final ManualPurchaseCount manualPurchaseCount) {
+        if (manualPurchaseCount.getPurchasedCount() > 0) {
+            return InputView.getManualLottoNumbers(manualPurchaseCount);
+        }
+        return Collections.emptyList();
     }
 
     private static Payment generatePayment() {
@@ -29,12 +60,12 @@ public class Application {
     }
 
     private static WinningLottoTicket generateWinningLotto() {
-        NumberGenerator numberGenerator = new UserInputNumberGenerator();
-        String WinningLottoInput = InputView.getWinningLottoNumber();
-        String bonusNumberInput = InputView.getBonusNumber();
-
         try {
-            return new WinningLottoTicket(numberGenerator.generateNumbers(WinningLottoInput), new LottoNumber(bonusNumberInput));
+            NumberGenerator numberGenerator = new UserInputNumberGenerator();
+            String winningLottoInput = InputView.getWinningLottoNumber();
+            String bonusNumberInput = InputView.getBonusNumber();
+
+            return new WinningLottoTicket(numberGenerator.generateNumbers(winningLottoInput), new LottoNumber(bonusNumberInput));
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception);
             return generateWinningLotto();

@@ -8,19 +8,18 @@ import java.util.Objects;
 public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
-
     private int number;
 
-    public LottoNumber(String number) {
+    public LottoNumber(final String number) {
         this(NumberUtils.parseNumber(number));
     }
 
-    public LottoNumber(int number) {
+    public LottoNumber(final int number) {
         validateNumberScope(number);
         this.number = number;
     }
 
-    private void validateNumberScope(int lottoNumber) {
+    public void validateNumberScope(final int lottoNumber) {
         if (lottoNumber < MIN_LOTTO_NUMBER
                 || lottoNumber > MAX_LOTTO_NUMBER) {
             ErrorMessage nowErrorMessage = ErrorMessage.OVER_SCOPE;

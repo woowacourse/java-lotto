@@ -6,7 +6,7 @@ public class NumberUtils {
     private NumberUtils() {
     }
 
-    public static int parseNumber(String number) {
+    public static int parseNumber(final String number) {
         try {
             return Integer.parseInt(number);
         } catch (NumberFormatException e) {
