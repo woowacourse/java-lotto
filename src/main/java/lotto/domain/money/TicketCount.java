@@ -11,18 +11,18 @@ public class TicketCount {
 	private final int autoTicketCount;
 
 	private TicketCount(int manualTicketCount, int autoTicketCount) {
+		checkTicketCountPositive(manualTicketCount, autoTicketCount);
+
 		this.manualTicketCount = manualTicketCount;
 		this.autoTicketCount = autoTicketCount;
 	}
 
 	public static TicketCount of(int totalTicketCount, int manualTicketCount) {
-		checkCanBuy(totalTicketCount, manualTicketCount);
-
 		return new TicketCount(manualTicketCount, totalTicketCount - manualTicketCount);
 	}
 
-	private static void checkCanBuy(int totalTicketCount, int manualTicketCount) {
-		if (totalTicketCount < manualTicketCount || totalTicketCount < POSITIVE_THRESHOLD || manualTicketCount < POSITIVE_THRESHOLD) {
+	private static void checkTicketCountPositive(int manualTicketCount, int autoTicketCount) {
+		if (manualTicketCount < POSITIVE_THRESHOLD || autoTicketCount < POSITIVE_THRESHOLD) {
 			throw new TicketCountIllegalException();
 		}
 	}
