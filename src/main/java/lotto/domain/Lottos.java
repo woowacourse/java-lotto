@@ -7,10 +7,6 @@ import java.util.stream.Stream;
 public class Lottos {
     private final List<Lotto> lottos;
 
-//    public Lottos() {
-//        this.lottos = new ArrayList<Lotto>();
-//    }
-
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }

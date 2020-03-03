@@ -31,9 +31,6 @@ public class Results {
     }
 
     private static void updateMatchResults(Map<MatchResult, Integer> matchResults, MatchResult matchResult) {
-//        if (matchResult == null) {
-//            return;
-//        }
         int matchCount = matchResults.get(matchResult);
         matchResults.put(matchResult, ++matchCount);
     }
