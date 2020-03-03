@@ -8,7 +8,6 @@ public class BettingInfo {
     private static final String INCORRECT_MANUAL_LOTTO_NO_SIZE = "수동 로또 번호 개수가 잘못되었습니다.";
     private static final String INCORRECT_MANUAL_LOTTO_NO_INDEX= "수동 로또 번호에 잘못된 접근입니다.";
 
-    private final PaidPrice paidPrice;
     private final LottoSize autoLottoSize;
     private final LottoSize manualLottoSize;
     private final List<List<String>> manualLottoNumbers;
@@ -17,7 +16,6 @@ public class BettingInfo {
         validateNotNull(paidPrice, manualLottoSize, manualLottoNumbers);
         validateManualLotto(manualLottoSize, manualLottoNumbers);
 
-        this.paidPrice =paidPrice;
         this.manualLottoSize = manualLottoSize;
         this.manualLottoNumbers = manualLottoNumbers;
         this.autoLottoSize = createOtherTypeLottoSize(paidPrice, manualLottoSize);
