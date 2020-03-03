@@ -45,7 +45,7 @@ public class LottoController {
         LottoBall lottoBall = new LottoBall(InputView.inputBonusBall());
 
         try {
-            return new WinningTicket(lottoTicket.getLottoTicket(), lottoBall);
+            return new WinningTicket(lottoTicket, lottoBall);
         } catch (RuntimeException e) {
             OutputView.printErrorMessage(e.getMessage());
             return getWinningTicket();

@@ -13,14 +13,10 @@ public class LottoTicket {
     protected final List<LottoBall> lottoTicket;
 
     protected LottoTicket(List<LottoBall> lottoTicket) {
-//        validateAutoTicket(lottoTicket);
+        validateIllegalLottoNumberCount(lottoTicket);
         this.lottoTicket = Collections.unmodifiableList(lottoTicket);
     }
 
-
-//    private void validateAutoTicket(List<LottoBall> lottoTicket) {
-//        validateIllegalLottoNumberCount(lottoTicket);
-//    }
 
     protected LottoTicket(String inputTicketNumber) {
         String[] ticketNumber = StringUtils.parseString(inputTicketNumber);
@@ -33,18 +29,18 @@ public class LottoTicket {
         );
     }
 
+    private void validateManualLottoTicket(String[] ticketNumber) {
+        ValidationUtils.validateIntegerNumberFormat(ticketNumber);
+        ValidationUtils.validatePositiveNumber(ticketNumber);
+        validateIllegalLottoNumberCount(ticketNumber);
+    }
+
     public static LottoTicket of(List<LottoBall> lottoTicket){
         return new LottoTicket(lottoTicket);
     }
 
     public static LottoTicket of(String lottoTicket){
         return new LottoTicket(lottoTicket);
-    }
-
-    private void validateManualLottoTicket(String[] ticketNumber) {
-        ValidationUtils.validateIntegerNumberFormat(ticketNumber);
-        ValidationUtils.validatePositiveNumber(ticketNumber);
-        validateIllegalLottoNumberCount(ticketNumber);
     }
 
     public List<LottoBall> getLottoTicket() {
@@ -59,11 +55,11 @@ public class LottoTicket {
         }
     }
 
-//    private static void validateIllegalLottoNumberCount(List<LottoBall> lottoTicket) {
-//        Set<LottoBall> compare = new HashSet<>(lottoTicket);
-//
-//        if (compare.size() != LOTTO_TICKET_SIZE) {
-//            throw new IllegalArgumentException(ILLEGAL_LOTTO_BALL);
-//        }
-//    }
+    private static void validateIllegalLottoNumberCount(List<LottoBall> lottoTicket) {
+        Set<LottoBall> compare = new HashSet<>(lottoTicket);
+
+        if (compare.size() != LOTTO_TICKET_SIZE) {
+            throw new IllegalArgumentException(ILLEGAL_LOTTO_BALL);
+        }
+    }
 }

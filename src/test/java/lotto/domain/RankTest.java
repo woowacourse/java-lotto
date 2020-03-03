@@ -29,7 +29,7 @@ class RankTest {
         lottoTickets.insertLottoTicket(new LottoTicket("1,2,3,4,5,6"));
         lottoTickets.insertLottoTicket(new LottoTicket("1,2,3,4,5,6"));
 
-        WinningTicket winningTicket = new WinningTicket(winningTicketInput.getLottoTicket(),bonusBall);
+        WinningTicket winningTicket = new WinningTicket(winningTicketInput,bonusBall);
 
         assertThat(Rank.calculateEachRankCount(winningTicket,lottoTickets).get(Rank.FIRST)).isEqualTo(3);
     }

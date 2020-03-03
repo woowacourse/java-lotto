@@ -15,7 +15,7 @@ class WinningTicketTest {
         LottoTicket lottoTicket = new LottoTicket("1,2,3,4,5,6");
         LottoBall lottoBall = new LottoBall("6");
 
-        WinningTicket winningTicket = new WinningTicket(lottoTicket.getLottoTicket(),lottoBall);
+        WinningTicket winningTicket = new WinningTicket(lottoTicket,lottoBall);
 
         Assertions.assertThat(winningTicket.hitLottoBall(lottoTicket)).isEqualTo(6);
     }
@@ -26,7 +26,7 @@ class WinningTicketTest {
         LottoTicket lottoTicket = new LottoTicket("1,2,3,4,5,6");
         LottoBall lottoBall = new LottoBall("6");
 
-        WinningTicket winningTicket = new WinningTicket(lottoTicket.getLottoTicket(),lottoBall);
+        WinningTicket winningTicket = new WinningTicket(lottoTicket,lottoBall);
 
         Assertions.assertThat(winningTicket.hitBonusBall(lottoTicket)).isTrue();
     }
@@ -37,7 +37,7 @@ class WinningTicketTest {
         LottoTicket lottoTicket = new LottoTicket("1,2,3,4,5,6");
         LottoBall lottoBall = new LottoBall("7");
 
-        WinningTicket winningTicket = new WinningTicket(lottoTicket.getLottoTicket(),lottoBall);
+        WinningTicket winningTicket = new WinningTicket(lottoTicket,lottoBall);
 
         Assertions.assertThat(winningTicket.hitBonusBall(lottoTicket)).isFalse();
     }
