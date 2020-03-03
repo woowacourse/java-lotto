@@ -23,7 +23,14 @@ class RanksTest {
         assertThat(actual).isEqualTo(expected);
     }
 
+    @DisplayName("Ranks안에 해당하는 Rank의 개수를 반환")
     @Test
     void frequency() {
+        List<Rank> ranksValues = Arrays.asList(Rank.FIFTH, Rank.FOURTH, Rank.FIFTH);
+        Ranks ranks = Ranks.of(ranksValues);
+
+        Rank findingRank = Rank.FIFTH;
+
+        assertThat(ranks.frequency(findingRank)).isEqualTo(2);
     }
 }

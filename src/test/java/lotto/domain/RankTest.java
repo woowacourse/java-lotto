@@ -39,4 +39,14 @@ class RankTest {
 
         assertThat(actual).isEqualTo(expected);
     }
+
+    @DisplayName("Rank.LOSE를 제외한 Rank들을 반환")
+    @Test
+    void validValues() {
+        List<Rank> validRanks = Rank.validValues();
+        List<Rank> containingRanks = Arrays.asList(Rank.FIRST, Rank.SECOND, Rank.THIRD, Rank.FOURTH, Rank.FIFTH);
+
+        assertThat(validRanks.containsAll(containingRanks)).isTrue();
+        assertThat(validRanks.contains(Rank.LOSE)).isFalse();
+    }
 }
