@@ -11,12 +11,12 @@ import java.util.Map;
 public class LottoController {
     public void play() {
         Money money = generateMoney();
-        LottoTicketCount autoTicketLottoTicketCount = new LottoTicketCount(money.generateLottoTicketCount());
-        LottoTicketCount manualTicketLottoTicketCount = generateManualTicketCount(autoTicketLottoTicketCount);
+        LottoTicketCount allLottoTicketCount = new LottoTicketCount(money.generateLottoTicketCount());
+        LottoTicketCount manualLottoTicketCount = generateManualTicketCount(allLottoTicketCount);
 
         LottoTickets lottoTickets = new LottoTickets();
-        generateManualTicket(manualTicketLottoTicketCount,lottoTickets);
-        generateAutoTicket(autoTicketLottoTicketCount, manualTicketLottoTicketCount,lottoTickets);
+        generateManualTicket(manualLottoTicketCount,lottoTickets);
+        generateAutoTicket(allLottoTicketCount, manualLottoTicketCount,lottoTickets);
         OutputView.printLottoTicketAndChangeMoney(money.changeMoney(),lottoTickets);
 
         Map<Rank,Long> eachRankCount = Rank.calculateEachRankCount(getWinningTicket(),lottoTickets);
@@ -69,11 +69,11 @@ public class LottoController {
         }
     }
 
-    private void generateAutoTicket(LottoTicketCount autoLottoTicketCount, LottoTicketCount manualLottoTicketCount
+    private void generateAutoTicket(LottoTicketCount allLottoTicketCount, LottoTicketCount manualLottoTicketCount
             ,LottoTickets lottoTickets) {
-        autoLottoTicketCount.calculateAutoTicketCount(manualLottoTicketCount);
-        OutputView.printLottoTicketCount(manualLottoTicketCount, autoLottoTicketCount);
-        for (int i = 0; i < autoLottoTicketCount.getTicketCount(); i++) {
+        allLottoTicketCount.calculateAutoTicketCount(manualLottoTicketCount);
+        OutputView.printLottoTicketCount(manualLottoTicketCount, allLottoTicketCount);
+        for (int i = 0; i < allLottoTicketCount.getTicketCount(); i++) {
             LottoBalls.shuffle();
             lottoTickets.insertLottoTicket(new LottoTicket(LottoBalls.generateLottoTicket()));
         }
