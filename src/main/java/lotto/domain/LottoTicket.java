@@ -12,7 +12,6 @@ public class LottoTicket {
 
     protected final List<LottoBall> lottoTicket;
 
-    //자동생성
     public LottoTicket(List<LottoBall> lottoTicket) {
         validateAutoTicket(lottoTicket.size());
         this.lottoTicket = Collections.unmodifiableList(lottoTicket);
@@ -22,7 +21,6 @@ public class LottoTicket {
         ValidationUtils.validateLottoTicketSize(size);
     }
 
-    //수동생성
     public LottoTicket(String inputTicketNumber) {
         String[] ticketNumber = StringUtils.parseString(inputTicketNumber);
         validateManualLottoTicket(ticketNumber);

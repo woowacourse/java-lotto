@@ -42,14 +42,16 @@ public class OutputView {
     }
 
     public static void printLottoTicketAndChangeMoney(String changeMoney,LottoTickets lottoTickets) {
+        printLottoTicket(lottoTickets);
+        System.out.printf("거스름돈은 %s원 입니다.\n", changeMoney);
+    }
 
+    private static void printLottoTicket(LottoTickets lottoTickets) {
         lottoTickets.getLottoTickets()
                 .forEach(lottoTicket -> System.out.println(lottoTicket.getLottoTicket()
                         .stream()
                         .map(LottoBall::getLottoBall)
                         .collect(Collectors.toList())));
-
-        System.out.printf("거스름돈은 %s원 입니다.\n", changeMoney);
     }
 
     public static void printWinningTicket() {
