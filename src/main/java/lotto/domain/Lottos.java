@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.dto.LottoDtos;
+import lotto.dto.LottosDto;
 import lotto.exception.LottosException;
 
 import java.util.List;
@@ -21,8 +21,8 @@ public class Lottos {
 		}
 	}
 
-	public LottoDtos makeLottoDtos() {
-		return new LottoDtos(lottos.stream()
+	public LottosDto makeLottoDtos() {
+		return new LottosDto(lottos.stream()
 				.map(Lotto::makeLottoDto)
 				.collect(Collectors.toList()));
 	}

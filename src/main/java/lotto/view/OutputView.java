@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.domain.WinningPrize;
 import lotto.dto.LottoDto;
-import lotto.dto.LottoDtos;
+import lotto.dto.LottosDto;
 
 import java.util.Map;
 
@@ -15,8 +15,8 @@ public class OutputView {
 		System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다.\n", manualLottoCount, autoLottoCount);
 	}
 
-	public static void printLottos(LottoDtos lottoDtos) {
-		for (LottoDto lotto : lottoDtos.getLottoDtos()) {
+	public static void printLottos(LottosDto lottosDto) {
+		for (LottoDto lotto : lottosDto.getLottosDto()) {
 			System.out.println(lotto);
 		}
 	}
