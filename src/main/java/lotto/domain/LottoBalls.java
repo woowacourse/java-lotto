@@ -41,7 +41,7 @@ public class LottoBalls {
 
     public static LottoBall findLottoBall(int findLottoBall) {
         return LOTTO_BALLS.stream()
-                .filter(Ball -> Ball.getLottoBall() == findLottoBall)
+                .filter(ball -> ball.getLottoBall() == findLottoBall)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(OUT_OF_RANGE_LOTTO_BALL));
     }

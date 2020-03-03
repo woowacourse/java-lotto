@@ -29,11 +29,11 @@ public enum Rank {
         Map<Rank, Long> eachRankCount = new HashMap<>();
         List<Rank> lottoTicketRank = generateTicketRank(winningTicket,lottoTickets);
 
-        for (Rank r : values()) {
+        for (Rank rank : values()) {
             long rankCount = lottoTicketRank.stream()
-                    .filter(lottoTicket -> lottoTicket == r && lottoTicket != Rank.NO_RANK)
+                    .filter(lottoTicket -> lottoTicket == rank && lottoTicket != Rank.NO_RANK)
                     .count();
-            eachRankCount.put(r, rankCount);
+            eachRankCount.put(rank, rankCount);
         }
         return eachRankCount;
     }
