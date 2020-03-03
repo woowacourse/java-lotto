@@ -1,46 +1,44 @@
 package lotto.domain;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
-public class LottoTicketTest {
+class LottoTicketTest {
     @Test
-    @DisplayName("로또 티켓에 로또 볼이 비어있을 경우 테스트")
-    void throw_empty_lotto_ball_test() {
-        List<LottoBall> lottoTicket = new ArrayList<>();
-
-        assertThatThrownBy(() -> new LottoTicket(lottoTicket))
-                .isInstanceOf(NullPointerException.class);
+    @DisplayName("수동으로 티켓 생성할 경우 테스트")
+    void generate_lotto_manual_ticket() {
+        String input = "1,2,3,4,5,6";
+        Assertions.assertThatCode(()->new LottoTicket(input)).doesNotThrowAnyException();
+    }
+    @Test
+    @DisplayName("수동으로 티켓 생성할 경우 중복될경우 오류 테스트")
+    void throw_generate_lotto_manual_ticket_duplicate() {
+        String input = "1,2,3,4,6,6";
+        Assertions.assertThatThrownBy(()->new LottoTicket(input)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    @DisplayName("로또 티켓이 제대로 생성되었을 경우 테스트")
-    void not_empty_lotto_ball_test() {
-        List<LottoBall> lottoTicket = IntStream.rangeClosed(1, 6)
-                .mapToObj(LottoBall::new)
-                .collect(Collectors.toList());
-
-        assertThatCode(() -> new LottoTicket(lottoTicket))
-                .doesNotThrowAnyException();
+    @DisplayName("수동으로 티켓 생성할 경우 로또볼 범위 오류 테스트")
+    void throw_generate_lotto_manual_ticket_out_of_range() {
+        String input = "1,2,3,4,6,46";
+        Assertions.assertThatThrownBy(()->new LottoTicket(input)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    @DisplayName("로또 티켓에 로또 볼이 범위가 벗어날 경 비어있을 경우 테스트")
-    void throw_out_of_range_lotto_ball_test() {
+    @DisplayName("수동으로 티켓 생성할 경우 로또볼의 개수 오류 테스트")
+    void throw_validate_lotto_ball_count_test(){
+        String input = "1,2,3,4,5";
+        Assertions.assertThatThrownBy(()->new LottoTicket(input)).isInstanceOf(IllegalArgumentException.class);
+    }
 
-        assertThatThrownBy(() -> {
-            List<LottoBall> lottoTicket = IntStream.rangeClosed(1, 7)
-                    .mapToObj(LottoBall::new)
-                    .collect(Collectors.toList());
-            new LottoTicket(lottoTicket);
-        }).isInstanceOf(IllegalArgumentException.class);
+    @Test
+    @DisplayName("수동으로 티켓 생성할 경우 로또볼의 개수 오류 테스트")
+    void validate_lotto_ball_count_test(){
+        String input = "1,2,3,4,5,6";
+        Assertions.assertThatCode(()->new LottoTicket(input)).doesNotThrowAnyException();
     }
 }

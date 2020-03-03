@@ -4,39 +4,41 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
-public class WinningTicketTest {
+class WinningTicketTest {
 
     @Test
-    void 로또번호와_당첨결과_비교() {
-        int[] value = {1, 2, 3, 4, 5, 6};
-        List<LottoBall> winningBallValues = Arrays.stream(value).mapToObj(LottoBall::new).collect(Collectors.toList());
-        WinningTicket winningTicket = new WinningTicket(winningBallValues, 7);
+    @DisplayName("몇개 맞추는지 test")
+    void hitLottoBallTest() {
+        LottoTicket lottoTicket = new LottoTicket("1,2,3,4,5,6");
+        LottoBall lottoBall = new LottoBall("6");
 
-        LottoTicket lottoTicket = new LottoTicket(winningBallValues);
+        WinningTicket winningTicket = new WinningTicket(lottoTicket,lottoBall);
 
-        Assertions.assertThat(winningTicket.hitLottoBalls(lottoTicket)).isEqualTo(6);
+        Assertions.assertThat(winningTicket.hitLottoBall(lottoTicket)).isEqualTo(6);
     }
 
     @Test
-    @DisplayName("보너스번호가 있는경우 테스트")
-    void present_bonus_balls() {
-        int bonusBall = 10;
-        int[] winningBallInputs = {3, 4, 5, 6, 7, 8};
-        int[] lottoTicketNumbers = {3, 4, 5, 6, 7, 10};
+    @DisplayName("보너스볼을 판별하는지 테스")
+    void hitBonusBall() {
+        LottoTicket lottoTicket = new LottoTicket("1,2,3,4,5,6");
+        LottoBall lottoBall = new LottoBall("6");
 
-        List<LottoBall> winningBallValues = Arrays.stream(winningBallInputs)
-                .mapToObj(LottoBallFactory::findByLottoBall)
-                .collect(Collectors.toList());
-        List<LottoBall> lottoTicket = Arrays.stream(lottoTicketNumbers)
-                .mapToObj(LottoBallFactory::findByLottoBall)
-                .collect(Collectors.toList());
+        WinningTicket winningTicket = new WinningTicket(lottoTicket,lottoBall);
 
-        WinningTicket winningTicket = new WinningTicket(winningBallValues, bonusBall);
+        Assertions.assertThat(winningTicket.hitBonusBall(lottoTicket)).isTrue();
+    }
 
-        Assertions.assertThat(winningTicket.hitBonusBall(new LottoTicket(lottoTicket))).isTrue();
+    @Test
+    @DisplayName("보너스볼을 판별하는지 테스")
+    void false_hitBonusBall() {
+        LottoTicket lottoTicket = new LottoTicket("1,2,3,4,5,6");
+        LottoBall lottoBall = new LottoBall("7");
+
+        WinningTicket winningTicket = new WinningTicket(lottoTicket,lottoBall);
+
+        Assertions.assertThat(winningTicket.hitBonusBall(lottoTicket)).isFalse();
     }
 }

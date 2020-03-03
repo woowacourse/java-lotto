@@ -1,49 +1,55 @@
 package lotto.domain;
 
-import lotto.util.ValidateWinningTicketUtils;
+import lotto.utils.StringUtils;
+import lotto.utils.ValidationUtils;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
-    private static final String DELIMITER = ",";
+
+    private static final String ILLEGAL_LOTTO_BALL = "로또볼을 잘못 입력하였습니다. 재입력 해주세요.";
     private static final int LOTTO_TICKET_SIZE = 6;
-    private static final String LOTTO_TICKET_EMPTY_EXCEPTION = "로또 티켓에 로또볼이 비었습니다. 다시 드리겠습니다.";
-    private static final String LOTTO_TICKET_OUT_OF_RANGE = "로또 티켓이 7장이상 발급되었습니다.";
+    protected final List<LottoBall> lottoTicket;
 
-    private final List<LottoBall> lottoTicket;
-
-    public LottoTicket(List<LottoBall> lottoTicket) {
-        if (lottoTicket.isEmpty()) {
-            throw new NullPointerException(LOTTO_TICKET_EMPTY_EXCEPTION);
-        }
-        if (lottoTicket.size() != LOTTO_TICKET_SIZE) {
-            throw new IllegalArgumentException(LOTTO_TICKET_OUT_OF_RANGE);
-        }
-        this.lottoTicket = lottoTicket;
+    private LottoTicket(List<LottoBall> lottoTicket) {
+        validateIllegalLottoNumberCount(lottoTicket);
+        this.lottoTicket = Collections.unmodifiableList(lottoTicket);
     }
 
-    public LottoTicket(String inputValue){
-        String[] winningBalls = inputValue.split(DELIMITER);
 
-        ValidateWinningTicketUtils.validateWinningBallsNumber(winningBalls);
-        ValidateWinningTicketUtils.validateWinningBallsLength(winningBalls);
-        ValidateWinningTicketUtils.validateDuplicatedWinningBalls(winningBalls);
-
-        this.lottoTicket = generateWinningLottoTicket(winningBalls);
-        Collections.sort(this.lottoTicket);
+    public static LottoTicket of(List<LottoBall> lottoTicket) {
+        return new LottoTicket(lottoTicket);
     }
 
-    private List<LottoBall> generateWinningLottoTicket(String[] winningBalls) {
-        return Arrays.stream(winningBalls)
-                .map(Integer::parseInt)
-                .map(LottoBallFactory::findByLottoBall)
-                .collect(Collectors.toList());
+    public static LottoTicket of(String inputLottoTicketNumber) {
+        String[] ticketNumber = StringUtils.parseString(inputLottoTicketNumber);
+        validateManualLottoTicket(ticketNumber);
+
+        List<LottoBall> lottoTicket = Collections.unmodifiableList(
+                Arrays.stream(ticketNumber)
+                        .map(ball -> LottoBalls.findLottoBall(StringUtils.stringToInt(ball)))
+                        .collect(Collectors.toList())
+        );
+
+        return of(lottoTicket);
+    }
+
+    private static void validateManualLottoTicket(String[] ticketNumber) {
+        ValidationUtils.validateIntegerNumberFormat(ticketNumber);
+        ValidationUtils.validatePositiveNumber(ticketNumber);
     }
 
     public List<LottoBall> getLottoTicket() {
         return Collections.unmodifiableList(lottoTicket);
+    }
+
+
+    private static void validateIllegalLottoNumberCount(List<LottoBall> lottoTicket) {
+        Set<LottoBall> compare = new HashSet<>(lottoTicket);
+
+        if (compare.size() != LOTTO_TICKET_SIZE) {
+            throw new IllegalArgumentException(ILLEGAL_LOTTO_BALL);
+        }
     }
 }

@@ -1,69 +1,99 @@
 package lotto.controller;
 
 import lotto.domain.*;
+import lotto.exception.UnderLottoUnitMoney;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 
 public class LottoController {
-
-    private PurchaseAmount purchaseAmount;
-
     public void play() {
-        startInputPurchaseAmount();
-        generateLottoTickets();
-        WinningTicket winningTicket = generateWinningBalls();
-        List<WinningRank> winningRanks = generateWinningRank(winningTicket);
+        Money money = generateMoney();
+        LottoTicketCount allLottoTicketCount = new LottoTicketCount(money.generateLottoTicketCount());
+        LottoTicketCount manualLottoTicketCount = generateManualTicketCount(allLottoTicketCount);
 
-        EarningRate earningRate = new EarningRate(winningRanks, purchaseAmount);
-        OutputView.printResultAllOfRank(winningRanks, earningRate);
-        OutputView.printEarningRate(earningRate);
+        LottoTickets lottoTickets = new LottoTickets();
+        generateManualTicket(manualLottoTicketCount,lottoTickets);
+        generateAutoTicket(allLottoTicketCount, manualLottoTicketCount,lottoTickets);
+        OutputView.printLottoTicketAndChangeMoney(money.changeMoney(),lottoTickets);
+
+        Map<Rank,Long> eachRankCount = Rank.calculateEachRankCount(getWinningTicket(),lottoTickets);
+        result(money, eachRankCount);
     }
 
-    private WinningTicket generateWinningBalls() {
+    private void result(Money money, Map<Rank, Long> eachRankCount) {
         try {
-            List<LottoBall> winningBallsInput = InputView.InputWinningTicket();
-            int bonusBall = InputView.InputBonusBall();
-            return new WinningTicket(winningBallsInput, bonusBall);
+            OutputView.printResult(eachRankCount,EarningRate.calculateEarningRate(eachRankCount,money));
+        }catch (RuntimeException e){
+            OutputView.printErrorMessage(e.getMessage());
+        }
+    }
+
+    private void generateManualTicket(LottoTicketCount manualTicketLottoTicketCount,LottoTickets lottoTickets) {
+        OutputView.printInputManualLottoTicket(manualTicketLottoTicketCount.getTicketCount());
+        for (int i = 0; i < manualTicketLottoTicketCount.getTicketCount(); i++) {
+            lottoTickets.insertLottoTicket(generateLottoTicket());
+        }
+    }
+
+
+    private WinningTicket getWinningTicket() {
+        OutputView.printWinningTicket();
+        LottoTicket lottoTicket = generateLottoTicket();
+        LottoBall lottoBall = new LottoBall(InputView.inputBonusBall());
+
+        try {
+            return new WinningTicket(lottoTicket, lottoBall);
         } catch (RuntimeException e) {
             OutputView.printErrorMessage(e.getMessage());
-            return generateWinningBalls();
+            return getWinningTicket();
         }
     }
 
-    private void generateLottoTickets() {
-        for (int i = 0; i < purchaseAmount.lottoTicket(); i++) {
-            LottoBallFactory.shuffle();
-            LottoTickets.insertLottoTicket(generateLottoTicket());
-        }
-        OutputView.printLottoTicket();
-    }
-
-    private void startInputPurchaseAmount() {
-        OutputView.printStartGuide();
-        purchaseAmount = InputView.inputPurchaseAmount();
-        OutputView.printLottePieces(purchaseAmount.lottoTicket());
-        OutputView.printChangeMoney(purchaseAmount.giveChangeMoney());
-    }
 
     private LottoTicket generateLottoTicket() {
-        List<LottoBall> lottoTicket = LottoBallFactory.generateLottoTicket();
-
-        return new LottoTicket(lottoTicket);
+        try {
+            return LottoTicket.of(InputView.inputLottoTicket());
+        } catch (RuntimeException e) {
+            OutputView.printErrorMessage(e.getMessage());
+            return generateLottoTicket();
+        }
     }
 
-    private List<WinningRank> generateWinningRank(WinningTicket winningTicket) {
-        int correctNumber;
-        boolean isBonusNumber;
-        List<WinningRank> winningRanks = new ArrayList<>();
-        List<LottoTicket> lottoTickets = LottoTickets.getLottoTickets();
-        for (LottoTicket lottoTicket : lottoTickets) {
-            correctNumber = winningTicket.hitLottoBalls(lottoTicket);
-            isBonusNumber = winningTicket.hitBonusBall(lottoTicket);
-            winningRanks.add(WinningRank.determineRank(correctNumber, isBonusNumber));
+    private void generateAutoTicket(LottoTicketCount allLottoTicketCount, LottoTicketCount manualLottoTicketCount
+            ,LottoTickets lottoTickets) {
+        allLottoTicketCount.calculateAutoTicketCount(manualLottoTicketCount);
+        OutputView.printLottoTicketCount(manualLottoTicketCount, allLottoTicketCount);
+        for (int i = 0; i < allLottoTicketCount.getTicketCount(); i++) {
+            LottoBalls.shuffle();
+            lottoTickets.insertLottoTicket(LottoTicket.of(LottoBalls.generateLottoTicket()));
         }
-        return winningRanks;
+    }
+
+    private Money generateMoney() {
+        String inputMoney = InputView.inputMoney();
+
+        try {
+            return new Money(inputMoney);
+        } catch (UnderLottoUnitMoney e) {
+            OutputView.printErrorMessage(e.getMessage());
+            OutputView.printChangeMoney(inputMoney);
+        } catch (RuntimeException e) {
+            OutputView.printErrorMessage(e.getMessage());
+        }
+        return generateMoney();
+    }
+
+    private LottoTicketCount generateManualTicketCount(LottoTicketCount allTicketLottoTicketCount) {
+        try {
+            LottoTicketCount manualTicketLottoTicketCount = new LottoTicketCount(InputView.inputManualLottoCount());
+
+            manualTicketLottoTicketCount.validateOverTicketCount(allTicketLottoTicketCount);
+            return manualTicketLottoTicketCount;
+        } catch (RuntimeException e) {
+            OutputView.printErrorMessage(e.getMessage());
+            return generateManualTicketCount(allTicketLottoTicketCount);
+        }
     }
 }
