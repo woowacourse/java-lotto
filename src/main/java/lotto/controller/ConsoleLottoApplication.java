@@ -13,11 +13,9 @@ public class ConsoleLottoApplication {
     public static void main(String[] args) {
         Money purchaseMoney = inputPurchaseMoney();
         int manualTicketCount = inputManualLottoTicketCount();
-        TicketCounts ticketCounts = TicketCounts.fromMoneyAndManualTicketCount(purchaseMoney, manualTicketCount);
-
         LottoTickets manualLottoTickets = inputManualLottoTickets(manualTicketCount);
+        int autoTicketCount = purchaseMoney.calculateAllTicketCount() - manualTicketCount;
 
-        int autoTicketCount = ticketCounts.getAutoTicketCount();
         LottoTickets autoLottoTickets = LottoTickets.ofAutoLottoTickets(autoTicketCount);
 
         OutputView.printLottos(manualLottoTickets, autoLottoTickets);
