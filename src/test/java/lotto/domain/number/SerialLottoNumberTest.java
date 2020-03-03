@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -18,44 +19,58 @@ class SerialLottoNumberTest {
 	}
 
 	@Test
-	void SerialLottoNumbers() {
+	void ofString() {
 		// given
-		Stream<Integer> input = Stream.of(2, 1, 4, 5, 3, 6);
-		Set<LottoNumber> given = intStreamToLottoNumberSet(input);
+		String input = "1,2, 3, 4,5, 6";
 
 		// when
-		SerialLottoNumber result = new SerialLottoNumber(given);
+		SerialLottoNumber result = SerialLottoNumber.of(input);
 
 		// then
-		Set<LottoNumber> expected = intStreamToLottoNumberSet(Stream.of(1, 2, 3, 4, 5, 6));
-		Assertions.assertThat(result).isEqualTo(new SerialLottoNumber(expected));
+		String expected = "3,4, 5, 1, 2,6";
+		Assertions.assertThat(result).isEqualTo(SerialLottoNumber.of(expected));
+	}
+
+	@Test
+	void ofSet() {
+		// given
+		Set<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)
+				.map(LottoNumber::of)
+				.collect(Collectors.toSet());
+
+		// when
+		SerialLottoNumber result = SerialLottoNumber.of(lottoNumbers);
+
+		// then
+		Assertions.assertThat(result).isEqualTo(SerialLottoNumber.of(lottoNumbers));
 	}
 
 	@ParameterizedTest
-	@MethodSource("generateNotSixSizeInput")
-	void SerialLottoNumbers_NotSizeSize_ThrowException(Stream<Integer> input) {
-		// given
-		Set<LottoNumber> given = intStreamToLottoNumberSet(input);
-
+	@ValueSource(strings = {"1", "1,2,3,4,5", "1,2,3,4,5,6,7", ",,,"})
+	void create_NotSizeSix_ThrowException(String input) {
 		// then
 		Assertions.assertThatThrownBy(() -> {
 			// when
-			new SerialLottoNumber(given);
+			SerialLottoNumber.of(input);
 		}).isInstanceOf(NotSixSizeException.class)
 				.hasMessageContaining("의 사이즈가 6이 아닙니다.");
 	}
 
-	static Stream<Arguments> generateNotSixSizeInput() {
-		return Stream.of(Arguments.of(Stream.of()),
-				Arguments.of(Stream.of(1, 2, 3, 4, 5)),
-				Arguments.of(Stream.of(1, 2, 3, 4, 5, 6, 7)));
+	@ParameterizedTest
+	@ValueSource(strings = {"", "12.3,3,4", "-1,5,aa"})
+	void create_InputNotInteger_ThrowException(String input) {
+		// then
+		Assertions.assertThatThrownBy(() -> {
+			// when
+			SerialLottoNumber.of(input);
+		}).isInstanceOf(NumberFormatException.class);
 	}
 
 	@ParameterizedTest
 	@MethodSource("generateContainInput")
 	void contains(Stream<Integer> given, int input, boolean expected) {
 		// given
-		SerialLottoNumber lottoTicket = new SerialLottoNumber(intStreamToLottoNumberSet(given));
+		SerialLottoNumber lottoTicket = SerialLottoNumber.of(intStreamToLottoNumberSet(given));
 
 		// when
 		boolean result = lottoTicket.contains(LottoNumber.of(input));
@@ -73,8 +88,8 @@ class SerialLottoNumberTest {
 	@MethodSource("generateMatchingInput")
 	void countMatchingNumber(Stream<Integer> winningNumbersInput, Stream<Integer> ticketInput, int expected) {
 		// given
-		SerialLottoNumber winningNumbers = new SerialLottoNumber(intStreamToLottoNumberSet(winningNumbersInput));
-		SerialLottoNumber ticket = new SerialLottoNumber(intStreamToLottoNumberSet(ticketInput));
+		SerialLottoNumber winningNumbers = SerialLottoNumber.of(intStreamToLottoNumberSet(winningNumbersInput));
+		SerialLottoNumber ticket = SerialLottoNumber.of(intStreamToLottoNumberSet(ticketInput));
 
 		// when
 		int result = winningNumbers.countMatchingNumber(ticket);

@@ -2,7 +2,6 @@ package lotto.domain.ticket;
 
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.SerialLottoNumber;
-import lotto.domain.number.SerialLottoNumberFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +20,10 @@ public class MockAutoLottoTicketsFactory implements TicketGenerator {
 		this.allLottoNumbers = new ArrayList<>(LottoNumber.allLottoNumbers());
 	}
 
+	public static MockAutoLottoTicketsFactory of(int autoTicketsCount) {
+		return new MockAutoLottoTicketsFactory(autoTicketsCount);
+	}
+
 	@Override
 	public LottoTickets create() {
 		List<SerialLottoNumber> lottoTickets = new ArrayList<>();
@@ -37,6 +40,6 @@ public class MockAutoLottoTicketsFactory implements TicketGenerator {
 				.stream()
 				.collect(Collectors.toUnmodifiableSet());
 
-		return SerialLottoNumberFactory.of(lottoNumbers);
+		return SerialLottoNumber.of(lottoNumbers);
 	}
 }

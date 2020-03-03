@@ -10,11 +10,15 @@ public class Winning {
 	private final SerialLottoNumber winningNumbers;
 	private final LottoNumber bonusNumber;
 
-	public Winning(final SerialLottoNumber winningNumbers, final LottoNumber bonusNumber) {
+	private Winning(final SerialLottoNumber winningNumbers, final LottoNumber bonusNumber) {
 		checkDuplicateLottoNumber(winningNumbers, bonusNumber);
 
 		this.winningNumbers = winningNumbers;
 		this.bonusNumber = bonusNumber;
+	}
+
+	public static Winning of(final SerialLottoNumber winningNumbers, final LottoNumber bonusNumber) {
+		return new Winning(winningNumbers, bonusNumber);
 	}
 
 	private void checkDuplicateLottoNumber(SerialLottoNumber winningNumbers, LottoNumber bonusNumber) {

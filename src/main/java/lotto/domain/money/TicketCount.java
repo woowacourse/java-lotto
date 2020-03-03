@@ -6,10 +6,11 @@ import java.util.Objects;
 
 public class TicketCount {
 	private static final int POSITIVE_THRESHOLD = 0;
+
 	private final int manualTicketCount;
 	private final int autoTicketCount;
 
-	TicketCount(int manualTicketCount, int autoTicketCount) {
+	private TicketCount(int manualTicketCount, int autoTicketCount) {
 		this.manualTicketCount = manualTicketCount;
 		this.autoTicketCount = autoTicketCount;
 	}

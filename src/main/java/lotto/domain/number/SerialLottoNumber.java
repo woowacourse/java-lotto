@@ -1,21 +1,36 @@
 package lotto.domain.number;
 
 import lotto.exceptions.NotSixSizeException;
+import lotto.util.StringParser;
 
 import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class SerialLottoNumber {
 	private static final int SERIAL_SIZE = 6;
 
 	private final Set<LottoNumber> lottoNumbers;
 
-	SerialLottoNumber(final Set<LottoNumber> lottoNumbers) {
+	private SerialLottoNumber(final Set<LottoNumber> lottoNumbers) {
 		checkIsValidSize(lottoNumbers);
 
 		this.lottoNumbers = Collections.unmodifiableSet(new TreeSet<>(lottoNumbers));
+	}
+
+	public static SerialLottoNumber of(final Set<LottoNumber> lottoNumbers) {
+		return new SerialLottoNumber(lottoNumbers);
+	}
+
+	public static SerialLottoNumber of(String input) {
+		Set<LottoNumber> lottoNumbers = StringParser.parseIntegerList(input)
+				.stream()
+				.map(LottoNumber::of)
+				.collect(Collectors.toSet());
+
+		return of(lottoNumbers);
 	}
 
 	private void checkIsValidSize(Set<LottoNumber> lottoNumbers) {

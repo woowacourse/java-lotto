@@ -3,7 +3,7 @@ package lotto.domain.result;
 import lotto.domain.money.Money;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.SerialLottoNumber;
-import lotto.domain.number.SerialLottoNumberFactory;
+import lotto.domain.number.SerialLottoNumber;
 import lotto.domain.ticket.LottoTickets;
 import lotto.domain.ticket.ManualLottoTicketsFactory;
 import org.assertj.core.api.Assertions;
@@ -40,9 +40,9 @@ class LottoResultTest {
 	@Test
 	void of() {
 		// given
-		SerialLottoNumber winningNumbers = SerialLottoNumberFactory.of("2,3,4,5,6,7");
+		SerialLottoNumber winningNumbers = SerialLottoNumber.of("2,3,4,5,6,7");
 		LottoNumber bonusNumber = LottoNumber.of(8);
-		Winning winning = new Winning(winningNumbers, bonusNumber);
+		Winning winning = Winning.of(winningNumbers, bonusNumber);
 
 		List<String> serialLottoNumbers = new ArrayList<>();
 		serialLottoNumbers.add("1,2,3,4,5,6");
@@ -51,7 +51,7 @@ class LottoResultTest {
 		serialLottoNumbers.add("10,11,12,13,14,15");
 		serialLottoNumbers.add("16,17,18,19,20,21");
 		serialLottoNumbers.add("21,22,23,24,25,26");
-		LottoTickets lottoTickets = new ManualLottoTicketsFactory(serialLottoNumbers).create();
+		LottoTickets lottoTickets = ManualLottoTicketsFactory.of(serialLottoNumbers).create();
 
 		// when
 		LottoResult lottoResult = LottoResult.of(winning, lottoTickets);
@@ -65,7 +65,7 @@ class LottoResultTest {
 	@CsvSource(value = {"1157500000, 200"})
 	void calculateProfitRate(int moneyInput, double expected) {
 		// given
-		Money money = new Money(moneyInput);
+		Money money = Money.of(moneyInput);
 		LottoResult lottoResult = new LottoResult(rankToCount);
 
 		// when

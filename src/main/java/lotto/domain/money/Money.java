@@ -13,11 +13,15 @@ public class Money {
 
 	private final int money;
 
-	public Money(final int money) {
+	private Money(final int money) {
 		checkIsPositive(money);
 		checkIsMultipleOfOneThousand(money);
 
 		this.money = money;
+	}
+
+	public static Money of(final int money) {
+		return new Money(money);
 	}
 
 	private void checkIsPositive(int money) {

@@ -9,15 +9,15 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class MoneyTest {
 	@Test
-	void Money() {
+	void of() {
 		// given
 		int input = 1000;
 
 		// when
-		Money money = new Money(input);
+		Money money = Money.of(input);
 
 		// then
-		Assertions.assertThat(money).isEqualTo(new Money(1000));
+		Assertions.assertThat(money).isEqualTo(Money.of(1000));
 	}
 
 	@ParameterizedTest
@@ -26,7 +26,7 @@ class MoneyTest {
 		// then
 		Assertions.assertThatThrownBy(() -> {
 			// when
-			new Money(input);
+			Money.of(input);
 		}).isInstanceOf(MoneyIllegalException.class)
 				.hasMessageMatching("-?[0-9]+는 적절하지 않은 금액입니다.\n" +
 						" - 0 이상의 1000의 배수로 입력해주세요.");
@@ -38,7 +38,7 @@ class MoneyTest {
 		// then
 		Assertions.assertThatThrownBy(() -> {
 			// when
-			new Money(input);
+			Money.of(input);
 		}).isInstanceOf(MoneyIllegalException.class)
 				.hasMessageMatching("-?[0-9]+는 적절하지 않은 금액입니다.\n" +
 						" - 0 이상의 1000의 배수로 입력해주세요.");
@@ -48,7 +48,7 @@ class MoneyTest {
 	@CsvSource(value = {"0,0", "1000,1", "10000,10"})
 	void totalTicketCount(int input, int expected) {
 		// given
-		Money money = new Money(input);
+		Money money = Money.of(input);
 
 		// when
 		int result = money.totalTicketCount();
@@ -61,7 +61,7 @@ class MoneyTest {
 	@CsvSource(value = {"1000,10000,1000", "2000,1000,50", "3000,900,30", "4000,4000,100"})
 	void calculateProfitRate(int money, double totalProfit, double expected) {
 		// given
-		Money given = new Money(money);
+		Money given = Money.of(money);
 
 		// when
 		double result = given.calculateProfitRate(totalProfit);

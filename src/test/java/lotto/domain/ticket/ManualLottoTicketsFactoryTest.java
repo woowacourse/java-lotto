@@ -1,7 +1,7 @@
 package lotto.domain.ticket;
 
 import lotto.domain.number.SerialLottoNumber;
-import lotto.domain.number.SerialLottoNumberFactory;
+import lotto.domain.number.SerialLottoNumber;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -17,14 +17,14 @@ class ManualLottoTicketsFactoryTest {
 				"3,4,5,6,7,8",
 				"43,42,1,3,36,24");
 		ManualLottoTicketsFactory manualLottoTicketsFactory
-				= new ManualLottoTicketsFactory(lottoTicketsInput);
+				= ManualLottoTicketsFactory.of(lottoTicketsInput);
 
 		// when
 		LottoTickets result = manualLottoTicketsFactory.create();
 
 		// then
 		List<SerialLottoNumber> expected = lottoTicketsInput.stream()
-				.map(SerialLottoNumberFactory::of)
+				.map(SerialLottoNumber::of)
 				.collect(Collectors.toList());
 		Assertions.assertThat(result).isEqualTo(new LottoTickets(expected));
 	}

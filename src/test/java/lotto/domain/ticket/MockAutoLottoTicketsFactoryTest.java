@@ -1,7 +1,7 @@
 package lotto.domain.ticket;
 
 import lotto.domain.number.SerialLottoNumber;
-import lotto.domain.number.SerialLottoNumberFactory;
+import lotto.domain.number.SerialLottoNumber;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +14,7 @@ class MockAutoLottoTicketsFactoryTest {
 	void create() {
 		// given
 		int autoTicketCount = 3;
-		MockAutoLottoTicketsFactory autoLottoTicketsFactory = new MockAutoLottoTicketsFactory(autoTicketCount);
+		MockAutoLottoTicketsFactory autoLottoTicketsFactory = MockAutoLottoTicketsFactory.of(autoTicketCount);
 
 		// when
 		LottoTickets result = autoLottoTicketsFactory.create();
@@ -22,7 +22,7 @@ class MockAutoLottoTicketsFactoryTest {
 		// then
 		String expectedString = "1,2,3,4,5,6";
 		List<SerialLottoNumber> expected = Stream.of(expectedString, expectedString, expectedString)
-				.map(SerialLottoNumberFactory::of)
+				.map(SerialLottoNumber::of)
 				.collect(Collectors.toList());
 		Assertions.assertThat(result).isEqualTo(new LottoTickets(expected));
 	}

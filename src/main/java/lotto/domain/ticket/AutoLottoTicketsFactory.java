@@ -2,9 +2,11 @@ package lotto.domain.ticket;
 
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.SerialLottoNumber;
-import lotto.domain.number.SerialLottoNumberFactory;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class AutoLottoTicketsFactory implements TicketGenerator {
@@ -14,9 +16,13 @@ public class AutoLottoTicketsFactory implements TicketGenerator {
 	private final int autoTicketsCount;
 	private final List<LottoNumber> allLottoNumbers;
 
-	public AutoLottoTicketsFactory(int autoTicketsCount) {
+	private AutoLottoTicketsFactory(final int autoTicketsCount) {
 		this.autoTicketsCount = autoTicketsCount;
 		this.allLottoNumbers = new ArrayList<>(LottoNumber.allLottoNumbers());
+	}
+
+	public static AutoLottoTicketsFactory of(final int autoTicketsCount) {
+		return new AutoLottoTicketsFactory(autoTicketsCount);
 	}
 
 	@Override
@@ -36,6 +42,6 @@ public class AutoLottoTicketsFactory implements TicketGenerator {
 				.stream()
 				.collect(Collectors.toUnmodifiableSet());
 
-		return SerialLottoNumberFactory.of(lottoNumbers);
+		return SerialLottoNumber.of(lottoNumbers);
 	}
 }
