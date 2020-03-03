@@ -3,43 +3,35 @@ package lotto.controller;
 import static lotto.view.ConsoleInputView.*;
 import static lotto.view.ConsoleOutputView.*;
 
+import java.util.List;
+
+import lotto.domain.LottoMachine;
 import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoParser;
-import lotto.domain.lotto.Lottos;
-import lotto.domain.lotto.LottosGenerator;
-import lotto.domain.lottomoney.InvalidLottoMoneyException;
-import lotto.domain.lottomoney.LottoMoney;
-import lotto.domain.lottonumber.LottoNumber;
+import lotto.domain.number.NumberLinesOfManualLotto;
 import lotto.domain.result.LottoWinningResult;
 import lotto.domain.result.WinningLotto;
 
 public class LottoController {
 	public void run() {
-		LottoMoney inputLottoMoney = receiveInputMoney();
-		int numberOfLotto = inputLottoMoney.calculateNumberOfLotto();
-		printPurchaseCompleteMessage(numberOfLotto);
+		LottoMachine lottoMachine = new LottoMachine(inputMoney(), inputCountOfManualLotto());
+		List<Lotto> lottoTicket = lottoMachine.buyLottoTicket(receiveManualLottoNumber(lottoMachine));
+		printPurchaseCompleteMessage(lottoMachine);
+		printLottoTicket(lottoTicket);
 
-		Lottos lottos = LottosGenerator.generate(numberOfLotto);
-		printPurchasedLotto(lottos);
-
-		WinningLotto winningLotto = receiveWinningLotto();
-		LottoWinningResult winningResult = new LottoWinningResult(lottos, winningLotto);
+		LottoWinningResult winningResult = new LottoWinningResult(lottoTicket, receiveWinningLotto());
 		printWinningResult(winningResult.getLottoRankCount());
-		printWinningRatio(winningResult.calculateWinningRatio(inputLottoMoney));
+		printWinningRatio(winningResult.calculateWinningRatio(lottoMachine));
 	}
 
-	private static LottoMoney receiveInputMoney() {
-		try {
-			return new LottoMoney(inputMoney());
-		} catch (InvalidLottoMoneyException ime) {
-			printExceptionMessage(ime.getMessage());
-			return receiveInputMoney();
+	private NumberLinesOfManualLotto receiveManualLottoNumber(LottoMachine lottoMachine) {
+		NumberLinesOfManualLotto numberLinesOfManualLotto = new NumberLinesOfManualLotto();
+		while (lottoMachine.needMoreManualNumber()) {
+			numberLinesOfManualLotto.add(inputManualLottoNumber());
 		}
+		return numberLinesOfManualLotto;
 	}
 
-	private static WinningLotto receiveWinningLotto() {
-		Lotto inputWinningLotto = new Lotto(LottoParser.parser(inputWinningLottoNumber()));
-		LottoNumber inputBonusNumber = LottoNumber.valueOf(inputBonusLottoNumber());
-		return new WinningLotto(inputWinningLotto, inputBonusNumber);
+	private WinningLotto receiveWinningLotto() {
+		return new WinningLotto(inputWinningLottoNumber(), inputBonusLottoNumber());
 	}
 }

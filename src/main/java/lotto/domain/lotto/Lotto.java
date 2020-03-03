@@ -1,13 +1,17 @@
 package lotto.domain.lotto;
 
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
-import lotto.domain.lottonumber.LottoNumber;
+import lotto.domain.lotto.Generator.ManualLottoTicketGenerator;
+import lotto.domain.number.LottoNumber;
 
 public class Lotto {
-	static final int CORRECT_SIZE = 6;
+	public static final int CORRECT_SIZE = 6;
 
 	private final Set<LottoNumber> lottoNumbers;
 
@@ -17,8 +21,16 @@ public class Lotto {
 		this.lottoNumbers = new TreeSet<>(lottoNumbers);
 	}
 
+	public static Lotto of(String input) {
+		return new Lotto(Arrays.stream(input.split(ManualLottoTicketGenerator.DELIMITER))
+			.map(String::trim)
+			.map(Integer::parseInt)
+			.map(LottoNumber::valueOf)
+			.collect(Collectors.toSet()));
+	}
+
 	private void validateNull(Set<LottoNumber> lottoNumbers) {
-		if (null == lottoNumbers) {
+		if (Objects.isNull(lottoNumbers)) {
 			throw new InvalidLottoException(InvalidLottoException.NULL);
 		}
 	}
@@ -41,5 +53,20 @@ public class Lotto {
 
 	public Set<LottoNumber> getLottoNumbers() {
 		return lottoNumbers;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Lotto lotto = (Lotto)o;
+		return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(lottoNumbers);
 	}
 }

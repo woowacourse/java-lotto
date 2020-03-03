@@ -11,10 +11,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullSource;
 
-import lotto.domain.lottonumber.LottoNumber;
+import lotto.domain.number.LottoNumber;
 
 class LottoTest {
-	@DisplayName("lotto 생성자에 lottonumber List 입력이 들어올 때 객체 생성")
+	@DisplayName("lotto 생성자에 number List 입력이 들어올 때 객체 생성")
 	@Test
 	void constructor_NumberList_CreateLotto() {
 		Set<LottoNumber> lottoNumbers = new HashSet<>(Arrays.asList(
@@ -28,7 +28,7 @@ class LottoTest {
 		assertThat(new Lotto(lottoNumbers)).isInstanceOf(Lotto.class);
 	}
 
-	@DisplayName("lotto 생성자에 null 입력이 들어올 때 InvalidLottoException 발생")
+	@DisplayName("생성자에 null 입력이 들어올 때 InvalidLottoException 발생")
 	@ParameterizedTest
 	@NullSource
 	void validateNull_NullNumberList_ExceptionThrown(Set<LottoNumber> lottoNumbers) {
@@ -37,7 +37,7 @@ class LottoTest {
 			.hasMessage(InvalidLottoException.NULL);
 	}
 
-	@DisplayName("lotto 생성자에 사이즈가 올바르지 않은 List 입력이 들어올 때 InvalidLottoException 발생")
+	@DisplayName("생성자에 사이즈가 올바르지 않은 List 입력이 들어올 때 InvalidLottoException 발생")
 	@Test
 	void validateSize_NullNumberList_ExceptionThrown() {
 		Set<LottoNumber> lottoNumbers = new HashSet<>(5);

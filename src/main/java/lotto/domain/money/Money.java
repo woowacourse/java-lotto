@@ -1,20 +1,21 @@
-package lotto.domain.lottomoney;
+package lotto.domain.money;
 
 import java.util.Objects;
 
-public class LottoMoney {
+import lotto.domain.LottoMachine;
+
+public class Money {
 	private static final long ZERO = 0;
-	private static final long LOTTO_PRICE = 1_000;
 	private static final int PERCENT = 100;
 
 	private final long money;
 
-	public LottoMoney(String money) {
-		this.money = validate(money);
+	public Money(long money) {
+		this.money = money;
 	}
 
-	public LottoMoney(long money) {
-		this.money = money;
+	public Money(String money) {
+		this.money = validate(money);
 	}
 
 	private long validate(String money) {
@@ -46,25 +47,28 @@ public class LottoMoney {
 	}
 
 	private void validateUnit(long parsedMoney) {
-		if (parsedMoney % LOTTO_PRICE != ZERO) {
+		if (parsedMoney % LottoMachine.LOTTO_PRICE != ZERO) {
 			throw new InvalidLottoMoneyException(InvalidLottoMoneyException.INVALID_UNIT);
 		}
-	}
-
-	public int calculateNumberOfLotto() {
-		return (int) (money / LOTTO_PRICE);
 	}
 
 	public long getMoney() {
 		return money;
 	}
 
-	public LottoMoney add(LottoMoney addedLottoMoney) {
-		return new LottoMoney(this.money + addedLottoMoney.money);
+	public Money add(Money addedMoney) {
+		return new Money(this.money + addedMoney.money);
 	}
 
-	public LottoMoney multiply(int multiplyCount) {
-		return new LottoMoney(this.money * multiplyCount);
+	public Money multiply(int multiplyCount) {
+		return new Money(this.money * multiplyCount);
+	}
+
+	public int getWinningRate(Money inputMoney) {
+		if (inputMoney.money == 0) {
+			return 0;
+		}
+		return (int)((this.money * PERCENT) / inputMoney.money);
 	}
 
 	@Override
@@ -75,19 +79,12 @@ public class LottoMoney {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		LottoMoney that = (LottoMoney) o;
+		Money that = (Money)o;
 		return money == that.money;
 	}
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(money);
-	}
-
-	public int getWinningRate(LottoMoney inputLottoMoney) {
-		if (inputLottoMoney.money == 0) {
-			return 0;
-		}
-		return (int) ((this.money * PERCENT) / inputLottoMoney.money);
 	}
 }

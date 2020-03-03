@@ -1,15 +1,16 @@
 package lotto.view;
 
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import lotto.domain.LottoMachine;
 import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.Lottos;
-import lotto.domain.lottonumber.LottoNumber;
+import lotto.domain.number.LottoNumber;
 import lotto.domain.result.LottoRank;
 
 public class ConsoleOutputView {
-	private static final String PURCHASE_COMPLETE_MESSAGE = "%d개를 구매했습니다.\n";
+	private static final String PURCHASE_COMPLETE_MESSAGE = "수동으로 %d장, 자동으로 %d장을 구매했습니다.\n";
 	private static final String DELIMITER = ",";
 	private static final String STATISTICS_NOTICE_MESSAGE = "당첨 통계";
 	private static final String SEPARATION_LINE = "---------";
@@ -20,16 +21,13 @@ public class ConsoleOutputView {
 	private ConsoleOutputView() {
 	}
 
-	public static void printExceptionMessage(String exceptionMessage) {
-		System.out.println(exceptionMessage);
+	public static void printPurchaseCompleteMessage(LottoMachine lottoMachine) {
+		System.out.printf(PURCHASE_COMPLETE_MESSAGE, lottoMachine.getCountOfManualLotto(),
+			lottoMachine.getCountOfAutoLottoTicket());
 	}
 
-	public static void printPurchaseCompleteMessage(int numberOfLotto) {
-		System.out.printf(PURCHASE_COMPLETE_MESSAGE, numberOfLotto);
-	}
-
-	public static void printPurchasedLotto(Lottos lottos) {
-		for (Lotto lotto : lottos) {
+	public static void printLottoTicket(List<Lotto> lottoTicket) {
+		for (Lotto lotto : lottoTicket) {
 			String lottoNumber = lotto.getLottoNumbers().stream()
 				.map(LottoNumber::getNumber)
 				.map(Object::toString)
