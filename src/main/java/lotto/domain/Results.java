@@ -11,7 +11,7 @@ public class Results {
 
     private final Map<MatchResult, Integer> results;
 
-    private Results(Map<MatchResult, Integer> results) {
+    Results(Map<MatchResult, Integer> results) {
         this.results = results;
     }
 

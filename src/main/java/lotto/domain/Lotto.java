@@ -16,7 +16,7 @@ public class Lotto {
     public Lotto(String winningLotto) {
         this(Arrays.stream(winningLotto.split(COMMA))
                 .map(String::trim)
-                .map(Ball::valueOf)
+                .map(Ball::new)
                 .collect(Collectors.toList()));
     }
 

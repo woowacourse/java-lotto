@@ -23,7 +23,16 @@ public class Ball implements Comparable<Ball> {
     }
 
     public Ball(String number) {
-        this(Integer.parseInt(number));
+        this(Integer.parseInt(checkType(number)));
+    }
+
+    private static String checkType(String number) {
+        try {
+            Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            throw new InvalidInputException("숫자만 입력하시기 바랍니다.");
+        }
+        return number;
     }
 
     private void validate(int number) {

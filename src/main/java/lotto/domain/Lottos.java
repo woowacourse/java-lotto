@@ -23,7 +23,7 @@ public class Lottos {
         this.lottos.addAll(lottos.getLottos());
     }
 
-    private List<Lotto> getLottos() {
+    public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
     }
 }

@@ -17,9 +17,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoResultTest {
     private static Lottos lottos;
-    private static WinningBalls winningBalls;
-    private static BonusBall bonusBall;
-    private static WinningLotto winningLotto;
+    private static Lotto winningLotto;
+    private static Ball bonusBall;
+    private static WinningNumbers winningNumbers;
     private static Map<MatchResult, Integer> matchResults;
     private static Results expectedMatchResults;
 
@@ -49,9 +49,9 @@ public class LottoResultTest {
         List<Lotto> lottoBundle = Arrays.asList(new Lotto(balls1), new Lotto(balls2), new Lotto(balls3), new Lotto(balls4), new Lotto(balls5));
         lottos = new Lottos(lottoBundle);
 
-        winningBalls = new WinningBalls("1,2,3,4,5,6");
-        bonusBall = new BonusBall("7", winningBalls);
-        winningLotto = new WinningLotto("1,2,3,4,5,6", "7");
+        winningLotto = new Lotto("1,2,3,4,5,6");
+        bonusBall = new Ball("7");
+        winningNumbers = new WinningNumbers("1,2,3,4,5,6", "7");
 
         matchResults = new HashMap<>();
         matchResults.put(MatchResult.THREE_MATCH, 1);
@@ -68,13 +68,13 @@ public class LottoResultTest {
     @ParameterizedTest
     @MethodSource("lottosProvider")
     void findMatchResultTest(Lotto lotto, MatchResult expectedMatchResult) {
-        assertThat(Results.findMatchResult(lotto, winningLotto)).isEqualTo(expectedMatchResult);
+        assertThat(lotto.findMatchResult(winningNumbers)).isEqualTo(expectedMatchResult);
     }
 
     @DisplayName("생성된 로또들과 당첨번호를 비교했을 때 올바른 당첨 결과를 반환하는지 확인")
     @Test
     void createMatchResultsTest() {
-        Results matchResults = Results.createMatchResults(lottos, winningLotto);
+        Results matchResults = Results.createMatchResults(lottos, winningNumbers);
         assertThat(matchResults).isEqualTo(expectedMatchResults);
     }
 
