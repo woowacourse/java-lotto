@@ -50,4 +50,18 @@ public class MoneyTest {
             money.validateManualLottoMoney(6, TICKET_PRICE);
         }).isInstanceOf(PurchaseMoneyLackException.class);
     }
+
+    @Test
+    @SuppressWarnings("NonAsciiCharacters")
+    void 로또_금액_차감_가능_확인() {
+        Money money = new Money(1000, TICKET_PRICE);
+        assertThat(money.isSubtractable(TICKET_PRICE)).isTrue();
+    }
+
+    @Test
+    @SuppressWarnings("NonAsciiCharacters")
+    void 로또_금액_차감_불가능_확인() {
+        Money money = new Money(1000, TICKET_PRICE);
+        assertThat(money.isSubtractable(1001)).isFalse();
+    }
 }

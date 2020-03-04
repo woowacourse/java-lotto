@@ -51,5 +51,9 @@ public class Money {
     public int hashCode() {
         return Objects.hash(money);
     }
+
+    public boolean isSubtractable(int value) {
+        return money - value >= 0;
+    }
 }
 
