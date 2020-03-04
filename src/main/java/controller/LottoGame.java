@@ -4,18 +4,16 @@ import domain.*;
 import view.InputView;
 import view.OutputView;
 
-public class LottoGameApplication {
-
-    public static void main(String[] args) {
+public class LottoGame {
+    public void play() {
         Money money = inputPurchaseAmountWithValidation();
         LottoCount lottoCount = inputLottoCountWithValidation(money);
 
         Lottos lottos = LottoMachine.createLottos(lottoCount);
         OutputView.printLottos(lottoCount, lottos);
         WinningNumber winningNumber = inputWinningNumberWithValidation();
-        LottoGame lottoGame = new LottoGame(lottos, winningNumber);
 
-        LottoResult lottoResult = lottoGame.calculateResults();
+        LottoResult lottoResult = new LottoResult(lottos, winningNumber);
         OutputView.printResult(lottoResult);
         OutputView.printProfitRatio(money.calculateProfitRatio(lottoResult));
     }
@@ -46,5 +44,4 @@ public class LottoGameApplication {
             return inputWinningNumberWithValidation();
         }
     }
-
 }
