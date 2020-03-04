@@ -22,17 +22,24 @@ public class LottoController {
         }
     }
 
-    public static WinningLottoTicket getWinningLottoTicket(String winningLottoNumbers) {
+    public static WinningLottoTicket getWinningLottoTicket() {
+        WinningLottoTicket winningLottoTicket = getWinningLottoTicketNumbers(
+                InputViewer.inputWinningLottoTicketNumber());
+        getBonusBall(winningLottoTicket, InputViewer.inputBonusBallNumber());
+        return winningLottoTicket;
+    }
+
+    private static WinningLottoTicket getWinningLottoTicketNumbers(String winningLottoNumbers) {
         try {
             WinningLottoTicket winningLottoTicket = new WinningLottoTicket(winningLottoNumbers);
             return winningLottoTicket;
         } catch (IllegalArgumentException e) {
             OutputViewer.printErrorMessage(e.getMessage());
-            return getWinningLottoTicket(InputViewer.inputWinningLottoTicketNumber());
+            return getWinningLottoTicketNumbers(InputViewer.inputWinningLottoTicketNumber());
         }
     }
 
-    public static void getBonusBall(WinningLottoTicket winningLottoTicket, int bonusNumber) {
+    private static void getBonusBall(WinningLottoTicket winningLottoTicket, int bonusNumber) {
         try {
             LottoNumber bonusBall = new LottoNumber(bonusNumber);
             winningLottoTicket.initializeBonusBall(bonusBall);

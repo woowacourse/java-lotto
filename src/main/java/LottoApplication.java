@@ -18,9 +18,7 @@ public class LottoApplication {
         OutputViewer.printLottoTicketsCount(manualLottoTicketCounts, autoLottoTicketCount);
         OutputViewer.printLottoTickets(lottoTickets);
 
-        WinningLottoTicket winningLottoTicket = LottoController.getWinningLottoTicket(
-                InputViewer.inputWinningLottoTicketNumber());
-        LottoController.getBonusBall(winningLottoTicket, InputViewer.inputBonusBallNumber());
+        WinningLottoTicket winningLottoTicket = LottoController.getWinningLottoTicket();
 
         LottoResult lottoResult = new LottoResult(lottoTickets, winningLottoTicket, money);
         OutputViewer.printResult(lottoResult);
