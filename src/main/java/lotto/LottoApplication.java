@@ -6,7 +6,6 @@ import lotto.domain.Ball;
 import lotto.domain.Lotto;
 import lotto.domain.LottoCount;
 import lotto.domain.Lottos;
-import lotto.domain.LottosFactory;
 import lotto.domain.Money;
 import lotto.domain.TotalResult;
 import lotto.domain.WinningLotto;
@@ -28,7 +27,7 @@ public class LottoApplication {
         List<String> rawManualLottos = getRawManualLottos(count);
         OutputView.printLottoCount(count);
 
-        Lottos lottos = LottosFactory.createLottos(rawManualLottos, count);
+        Lottos lottos = Lottos.createLottos(rawManualLottos, count);
         OutputView.printLottos(lottos);
 
         WinningLotto winningLotto = getWinningLotto();

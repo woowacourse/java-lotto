@@ -27,7 +27,7 @@ public class WinningLottoTest {
         rawLottos.add("1, 2, 3, 4, 5, 6");
         rawLottos.add("1, 2, 3, 4, 5, 6");
         LottoCount lottoCount = new LottoCount(2, 2);
-        Lottos lottos = LottosFactory.createLottos(rawLottos, lottoCount);
+        Lottos lottos = Lottos.createLottos(rawLottos, lottoCount);
 
         Lotto lotto = Lotto.of("1, 2, 3, 4, 5, 6");
         Ball ball = Ball.of(7);
