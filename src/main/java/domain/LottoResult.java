@@ -1,42 +1,31 @@
 package domain;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Set;
 
-public enum LottoResult {
-    FIRST(2_000_000_000, 6),
-    SECOND(30_000_000, 5),
-    THIRD(1_500_000, 5),
-    FOURTH(50_000, 4),
-    FIFTH(5_000, 3),
-    FAILED(0, 0);
+public class LottoResult {
 
-    private final int prize;
-    private final int matchCount;
+    private Map<LottoRank, Integer> result;
 
-    LottoResult(int prize, int matchCount) {
-        this.prize = prize;
-        this.matchCount = matchCount;
+    public LottoResult(Map<LottoRank, Integer> result) {
+        this.result = Collections.unmodifiableMap(result);
     }
 
-    public static LottoResult findLottoResult(int matchCount, boolean isBonus) {
-        List<LottoResult> lottoResults = Arrays.asList(LottoResult.values());
-        LottoResult lottoResult = lottoResults.stream()
-                .filter(result -> result.matchCount == matchCount)
-                .findFirst()
-                .orElse(FAILED);
-
-        if (lottoResult == SECOND && !isBonus) {
-            return THIRD;
+    public int count(LottoRank rank) {
+        if (result.get(rank) == null) {
+            return 0;
         }
-        return lottoResult;
+        return result.get(rank);
     }
 
-    public int getPrize() {
-        return prize;
-    }
-
-    public int getMatchCount() {
-        return matchCount;
+    public long getTotalPrize() {
+        long totalPrize = 0;
+        for (LottoRank rank : result.keySet()) {
+            long prize = rank.getPrize();
+            long matchCount = count(rank);
+            totalPrize += prize * matchCount;
+        }
+        return totalPrize;
     }
 }

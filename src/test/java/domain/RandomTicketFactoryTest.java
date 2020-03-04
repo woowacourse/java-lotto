@@ -1,4 +1,4 @@
-package strategy;
+package domain;
 
 import domain.RandomTicketFactory;
 import org.junit.jupiter.api.DisplayName;
@@ -12,7 +12,7 @@ class RandomTicketFactoryTest {
     @Test
     @DisplayName("랜덤 티켓 생성")
     void generateRandomTicket() {
-        assertThatCode(() -> RandomTicketFactory.createTicket())
+        assertThatCode(RandomTicketFactory::createTicket)
                 .doesNotThrowAnyException();
     }
 }

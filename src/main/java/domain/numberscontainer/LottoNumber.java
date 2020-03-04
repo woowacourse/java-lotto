@@ -56,7 +56,7 @@ public enum LottoNumber {
         this.number = number;
     }
 
-    public static LottoNumber getLottoNumber(int number) {
+    public static LottoNumber get(int number) {
         List<LottoNumber> lottoNumbers = Arrays.asList(LottoNumber.values());
 
         return lottoNumbers.stream()
