@@ -19,7 +19,6 @@ public class LottoMain {
 
         LottoResult lottoResult = new LottoResult();
         lottoResult.analyzeRank(lotto.getIssuedLottoTicket(),winningLotto);
-        OutputView.printLottoResults(lottoResult.getLottoResult());
-        OutputView.printRewardRate(lottoResult.calculateRewardRate(money.getMoney()));
+        OutputView.printLottoResults(lottoResult.getLottoResult());OutputView.printRewardRate(lottoResult.calculateRewardRate(money.getMoney()));
     }
 }
