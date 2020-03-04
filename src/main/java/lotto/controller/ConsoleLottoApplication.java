@@ -18,7 +18,7 @@ public class ConsoleLottoApplication {
         LottoTickets lottoTickets = createLottoTickets(ticketCounts);
         OutputView.printLottos(ticketCounts, lottoTickets);
 
-        WinningNumbers winningNumbers = inputWinningNumbers();
+        WinningNumbers winningNumbers = createWinningNumbers();
 
         Ranks ranks = winningNumbers.checkOutLottos(lottoTickets);
         Profit profit = ranks.calculateProfit(purchaseMoney);
@@ -56,18 +56,18 @@ public class ConsoleLottoApplication {
         }
     }
 
-    private static WinningNumbers inputWinningNumbers() {
+    private static WinningNumbers createWinningNumbers() {
         try {
             return new WinningNumbers(inputWinningLottoTicket(), inputBonusNumber());
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
-            return inputWinningNumbers();
+            return createWinningNumbers();
         }
     }
 
     private static LottoTicket inputWinningLottoTicket() {
         try {
-            return LottoTicket.createManualTicket(InputView.inputSixNumbers());
+            return LottoTicket.createManualTicket(InputView.inputWinningLottoTicket());
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
             return inputWinningLottoTicket();
@@ -76,16 +76,11 @@ public class ConsoleLottoApplication {
 
     private static LottoNumber inputBonusNumber() {
         try {
-            return generateBonusNumberFromInput();
+            int inputForBonusNumber = Integer.parseInt(InputView.inputBonusNumber());
+            return LottoNumber.valueOf(inputForBonusNumber);
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
             return inputBonusNumber();
         }
-    }
-
-    private static LottoNumber generateBonusNumberFromInput() {
-        String inputForBonusNumber = InputView.inputBonusNumber();
-        int valueForBonusNumber = Integer.parseInt(inputForBonusNumber);
-        return new LottoNumber(valueForBonusNumber);
     }
 }

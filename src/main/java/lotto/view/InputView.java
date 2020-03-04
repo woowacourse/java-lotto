@@ -29,7 +29,7 @@ public class InputView {
                 .collect(toList());
     }
 
-    public static String inputSixNumbers() {
+    public static String inputWinningLottoTicket() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return scanner.nextLine();
     }

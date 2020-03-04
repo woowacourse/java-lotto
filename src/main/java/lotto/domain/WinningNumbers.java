@@ -8,6 +8,7 @@ public class WinningNumbers {
 
     public WinningNumbers(LottoTicket winningLottoTicket, LottoNumber bonusNumber) {
         validateDuplication(winningLottoTicket, bonusNumber);
+
         this.winningLottoTicket = winningLottoTicket;
         this.bonusNumber = bonusNumber;
     }
