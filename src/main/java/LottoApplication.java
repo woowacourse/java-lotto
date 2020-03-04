@@ -1,11 +1,11 @@
+import domain.buyingstrategy.BuyingStrategy;
+import domain.buyingstrategy.ManualBuyingStrategy;
+import domain.buyingstrategy.RandomBuyingStrategy;
 import domain.buyingstrategy.buyinginformation.BuyingInformation;
 import domain.buyingstrategy.buyinginformation.Money;
 import domain.lottonumbers.LottoTicket;
 import domain.lottonumbers.WinningNumbers;
 import domain.lottonumbers.lottonumber.LottoNumber;
-import domain.buyingstrategy.BuyingStrategy;
-import domain.buyingstrategy.ManualBuyingStrategy;
-import domain.buyingstrategy.RandomBuyingStrategy;
 import domain.result.LottoResult;
 import view.InputView;
 import view.OutputView;

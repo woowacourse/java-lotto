@@ -8,5 +8,6 @@ import java.util.List;
 public interface BuyingStrategy {
 
     public boolean isAvailable(BuyingInformation buyingInformation);
+
     public List<LottoTicket> generateTickets(BuyingInformation buyingInformation);
 }
