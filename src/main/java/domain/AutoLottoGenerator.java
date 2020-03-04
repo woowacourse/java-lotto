@@ -1,6 +1,5 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -10,12 +9,12 @@ public class AutoLottoGenerator implements LottoGenerator {
 
     @Override
     public Lotto generateLotto() {
-        List<Integer> lottoNumbers = new ArrayList<>(AllLottoNumbers.getLottoNumbersKeySet());
+        List<Integer> lottoNumbers = LottoNumber.getAllLottoNumbers();
         Collections.shuffle(lottoNumbers);
         return new Lotto(
                 lottoNumbers.stream()
                         .limit(LOTTO_SIZE)
-                        .map(AllLottoNumbers::get)
+                        .map(LottoNumber::newLottoNumber)
                         .collect(toList())
         );
     }

@@ -14,7 +14,7 @@ public class WinningNumber {
         LottoGenerator lottoGenerator = new ManualLottoGenerator(winningNumbers);
         this.winningNumbers = lottoGenerator.generateLotto();
         checkLottoNumberRange(bonusNumber);
-        this.bonusNumber = AllLottoNumbers.get(bonusNumber);
+        this.bonusNumber = LottoNumber.newLottoNumber(bonusNumber);
         checkDuplicatedLottoNumber();
     }
 

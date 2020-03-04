@@ -7,10 +7,10 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoResultTest {
-    private String[] winningNumbers = {"1", "2", "3", "5", "4", "6"};
-    private String bonusNumber = "7";
+    private int[] winningNumbers = {1, 2, 3, 4, 5, 6};
+    private int bonusNumber = 7;
     private WinningNumber winningNumber = new WinningNumber(winningNumbers, bonusNumber);
-    private String[] inputLottoNumbers = {"1", "2", "3", "4", "5", "7"};
+    private int[] inputLottoNumbers = {1, 2, 3, 4, 5, 7};
     private LottoGenerator lottoGenerator = new ManualLottoGenerator(inputLottoNumbers);
     private Lotto lotto = lottoGenerator.generateLotto();
     private Lottos lottos = new Lottos();

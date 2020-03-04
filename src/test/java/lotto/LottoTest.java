@@ -16,11 +16,11 @@ public class LottoTest {
     void checkLottoSizeSixTest() {
         assertThatThrownBy(() -> {
             List<LottoNumber> lotto = new ArrayList<>();
-            lotto.add(new LottoNumber(1));
-            lotto.add(new LottoNumber(1));
-            lotto.add(new LottoNumber(2));
-            lotto.add(new LottoNumber(3));
-            lotto.add(new LottoNumber(4));
+            lotto.add(LottoNumber.newLottoNumber(1));
+            lotto.add(LottoNumber.newLottoNumber(2));
+            lotto.add(LottoNumber.newLottoNumber(3));
+            lotto.add(LottoNumber.newLottoNumber(4));
+            lotto.add(LottoNumber.newLottoNumber(5));
             new Lotto(lotto);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또의 번호는 6개의 숫자로 이루어져 있어야 합니다.");
@@ -31,12 +31,12 @@ public class LottoTest {
     void checkDuplicatedNumberTest() {
         assertThatThrownBy(() -> {
             List<LottoNumber> lotto = new ArrayList<>();
-            lotto.add(new LottoNumber(1));
-            lotto.add(new LottoNumber(1));
-            lotto.add(new LottoNumber(2));
-            lotto.add(new LottoNumber(3));
-            lotto.add(new LottoNumber(4));
-            lotto.add(new LottoNumber(5));
+            lotto.add(LottoNumber.newLottoNumber(1));
+            lotto.add(LottoNumber.newLottoNumber(1));
+            lotto.add(LottoNumber.newLottoNumber(2));
+            lotto.add(LottoNumber.newLottoNumber(3));
+            lotto.add(LottoNumber.newLottoNumber(4));
+            lotto.add(LottoNumber.newLottoNumber(5));
             new Lotto(lotto);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("중복된 로또 번호가 입력되었습니다.");
@@ -47,12 +47,12 @@ public class LottoTest {
     void checkLottoNumberRangeTest() {
         assertThatThrownBy(() -> {
             List<LottoNumber> lotto = new ArrayList<>();
-            lotto.add(new LottoNumber(0));
-            lotto.add(new LottoNumber(1));
-            lotto.add(new LottoNumber(2));
-            lotto.add(new LottoNumber(3));
-            lotto.add(new LottoNumber(4));
-            lotto.add(new LottoNumber(5));
+            lotto.add(LottoNumber.newLottoNumber(0));
+            lotto.add(LottoNumber.newLottoNumber(1));
+            lotto.add(LottoNumber.newLottoNumber(2));
+            lotto.add(LottoNumber.newLottoNumber(3));
+            lotto.add(LottoNumber.newLottoNumber(4));
+            lotto.add(LottoNumber.newLottoNumber(5));
             new Lotto(lotto);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 숫자 범위를 넘어섰습니다.");

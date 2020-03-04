@@ -14,7 +14,7 @@ public class ManualLottoGenerator implements LottoGenerator {
     @Override
     public Lotto generateLotto() {
         return new Lotto(Arrays.stream(manualLotto)
-                .mapToObj(AllLottoNumbers::get)
+                .mapToObj(LottoNumber::newLottoNumber)
                 .collect(toList()));
     }
 }

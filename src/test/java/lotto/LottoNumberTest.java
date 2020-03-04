@@ -2,11 +2,9 @@ package lotto;
 
 import domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoNumberTest {
@@ -15,14 +13,8 @@ public class LottoNumberTest {
     @ValueSource(ints = {0, 46})
     void checkLottoRangeTest(int number) {
         assertThatThrownBy(() -> {
-            new LottoNumber(number);
+            LottoNumber.newLottoNumber(number);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 숫자 범위를 넘어섰습니다.");
-    }
-
-    @Test
-    @DisplayName("String 숫자로 로또 넘버 생성 확인 및 equals 동치 확인")
-    void createLottoNumberWithStringNumberTest() {
-        assertThat(new LottoNumber(1)).isEqualTo(new LottoNumber(1));
     }
 }
