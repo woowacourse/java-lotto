@@ -6,9 +6,18 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoCountTest {
+	@ParameterizedTest
+	@CsvSource(value = {"1000,0,1", "100000,10,90"})
+	@DisplayName("로또를 정상적으로 구매햘 경우 장 수 검사")
+	void checkManualAmountError(int lottoMoney, int manualAmount, int autoAmount) {
+		assertThat(new LottoCount(lottoMoney, manualAmount).getAutoLottoCount()).isEqualTo(autoAmount);
+		assertThat(new LottoCount(lottoMoney, manualAmount).getManualLottoCount()).isEqualTo(manualAmount);
+	}
+
 	@ParameterizedTest
 	@ValueSource(ints = {1500, 4310, 3404, 7146, 10200})
 	@DisplayName("천원 단위가 아닌 경우")
@@ -25,6 +34,15 @@ public class LottoCountTest {
 		assertThatThrownBy(() -> new LottoCount(value, 0))
 				.isInstanceOf(LottoCountException.class)
 				.hasMessageContaining("부족합니다");
+	}
+
+	@ParameterizedTest
+	@CsvSource(value = {"1000,-1", "100000, -100"})
+	@DisplayName("수동 구매 갯수가 전체 구매 가능한 장수를 초과하는 경우")
+	void checkManualAmountError(int lottoMoney, int manualAmount) {
+		assertThatThrownBy(() -> new LottoCount(lottoMoney, manualAmount))
+				.isInstanceOf(LottoCountException.class)
+				.hasMessageContaining("장수가 올바르지 않습니다");
 	}
 
 	@ParameterizedTest
