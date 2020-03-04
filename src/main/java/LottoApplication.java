@@ -1,14 +1,16 @@
-import domain.buyinginformation.BuyingInformation;
-import domain.buyinginformation.Money;
+import domain.buyingstrategy.buyinginformation.BuyingInformation;
+import domain.buyingstrategy.buyinginformation.Money;
 import domain.lottonumbers.LottoTicket;
 import domain.lottonumbers.WinningNumbers;
 import domain.lottonumbers.lottonumber.LottoNumber;
-import domain.lottostore.LottoStore;
-import domain.lottostore.ManualBuyingStrategy;
+import domain.buyingstrategy.BuyingStrategy;
+import domain.buyingstrategy.ManualBuyingStrategy;
+import domain.buyingstrategy.RandomBuyingStrategy;
 import domain.result.LottoResult;
 import view.InputView;
 import view.OutputView;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -18,7 +20,7 @@ public class LottoApplication {
 
     public static void main(String[] args) {
         BuyingInformation buyingInformation = enterBuyingInformation();
-        List<LottoTicket> tickets = LottoStore.generateTickets(new ManualBuyingStrategy(), buyingInformation);
+        List<LottoTicket> tickets = buyLottoTickets(buyingInformation);
 
         printTickets(tickets);
 
@@ -46,6 +48,16 @@ public class LottoApplication {
         return numbers.stream()
                 .map(LottoNumber::new)
                 .collect(collectingAndThen(toSet(), LottoTicket::new));
+    }
+
+    private static List<LottoTicket> buyLottoTickets(BuyingInformation buyingInformation) {
+        List<BuyingStrategy> buyingStrategies = Arrays.asList(new ManualBuyingStrategy(), new RandomBuyingStrategy());
+
+        return buyingStrategies.stream()
+                .filter(strategy -> strategy.isAvailable(buyingInformation))
+                .map(strategy -> strategy.generateTickets(buyingInformation))
+                .flatMap(List::stream)
+                .collect(toList());
     }
 
     private static void printTickets(List<LottoTicket> tickets) {

@@ -1,12 +1,13 @@
-package domain.lottostore;
+package domain.buyingstrategy;
 
-import domain.buyinginformation.BuyingInformation;
-import domain.buyinginformation.Money;
+import domain.buyingstrategy.buyinginformation.BuyingInformation;
+import domain.buyingstrategy.buyinginformation.Money;
 import domain.lottonumbers.LottoTicket;
 import domain.lottonumbers.lottonumber.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,15 +15,15 @@ import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toSet;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("로또 가게 테스트")
-public class LottoStoreTest {
+@DisplayName("로또 구매 테스트")
+public class BuyingStrategyTest {
 
     @Test
     @DisplayName("랜덤 티켓들 생성 확인")
     void generateRandomTicket() {
-        Money money = new Money(10000);
+        BuyingInformation buyingInformation = new BuyingInformation(new Money(10000), new ArrayList<>());
 
-        assertThat(LottoStore.generateTickets(new RandomBuyingStrategy(), money).size()).isEqualTo(10);
+        assertThat(new RandomBuyingStrategy().generateTickets(buyingInformation).size()).isEqualTo(10);
     }
 
     @Test
@@ -30,9 +31,9 @@ public class LottoStoreTest {
     void generateManualTickets() {
         BuyingInformation buyingInformation = new BuyingInformation(new Money(10000), generateLottoTickets());
 
-        List<LottoTicket> lottoTickets = LottoStore.generateTickets(new ManualBuyingStrategy(), buyingInformation);
+        List<LottoTicket> lottoTickets = new ManualBuyingStrategy().generateTickets(buyingInformation);
 
-        assertThat(lottoTickets.size()).isEqualTo(10);
+        assertThat(lottoTickets.size()).isEqualTo(2);
         assertThat(lottoTickets.contains(generateLottoTicket(1, 2, 3, 4, 5, 6))).isTrue();
         assertThat(lottoTickets.contains(generateLottoTicket(11, 12, 13, 14, 15, 16))).isTrue();
     }

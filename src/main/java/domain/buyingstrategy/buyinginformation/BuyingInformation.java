@@ -1,4 +1,4 @@
-package domain.buyinginformation;
+package domain.buyingstrategy.buyinginformation;
 
 import domain.lottonumbers.LottoTicket;
 

@@ -1,6 +1,7 @@
 package domain.lottonumbers;
 
 import domain.lottonumbers.lottonumber.LottoNumber;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -14,9 +15,11 @@ import static java.util.stream.Collectors.toSet;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
+@DisplayName("로또 티켓 테스트")
 class LottoTicketTest {
 
     @Test
+    @DisplayName("가지고 있는 숫자 확인")
     void contains() {
         LottoTicket myTicket = generateLottoTicket(1,2,3,4,5,6);
 
@@ -26,6 +29,7 @@ class LottoTicketTest {
     }
 
     @Test
+    @DisplayName("다른 티켓과 중복되는 숫자 개수 확인")
     void findDuplicatedNumbers() {
         LottoTicket myTicket = generateLottoTicket(1,2,3,4,5,6);
         LottoTicket comparingTicket = generateLottoTicket(4,5,6,7,8,9);
