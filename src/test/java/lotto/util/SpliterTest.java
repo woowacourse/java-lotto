@@ -18,13 +18,13 @@ public class SpliterTest {
         result.add(1);
         result.add(2);
         result.add(3);
-        assertThat(Spliter.splitInput("1,2 ,3")).isEqualTo(result);
+        assertThat(Splitter.splitInput("1,2 ,3")).isEqualTo(result);
     }
 
     @Test
     @DisplayName("숫자 외 입력 예외처리 테스트")
     void splitAndCheckInteger() {
-        assertThatThrownBy(() -> Spliter.splitInput("d,3,2"))
+        assertThatThrownBy(() -> Splitter.splitInput("d,3,2"))
                 .isInstanceOf(NumberFormatException.class);
     }
 }

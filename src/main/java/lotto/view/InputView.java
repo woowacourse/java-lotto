@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.util.Spliter;
+import lotto.util.Splitter;
 
 import java.util.List;
 import java.util.Scanner;
@@ -16,32 +16,33 @@ public class InputView {
     private static final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해주세요.";
 
 
-    public static int inputManualTicketNumber(){
+    public static int inputManualTicketNumber() {
         System.out.println(INPUT_MANUAL_LOTTO_COUNT_MESSAGE);
         return inputNumber();
     }
 
-    public static int inputMoney(){
+    public static int inputMoney() {
         System.out.println(INPUT_MONEY_MESSAGE);
         return inputNumber();
     }
 
-    public static int inputBonus(){
+    public static int inputBonus() {
         System.out.println(INPUT_BONUS_NUMBER_MESSAGE);
         return inputNumber();
     }
 
-    private static int inputNumber(){
+    private static int inputNumber() {
         int number;
-        try{
+        try {
             number = Integer.parseInt(SCANNER.nextLine());
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new NumberFormatException(INTEGER_INPUT_ERROR_MESSAGE);
         }
+        System.out.println();
         return number;
     }
 
-    public static List<Integer> inputWinningLottoNumbers(){
+    public static List<Integer> inputWinningLottoNumbers() {
         System.out.println(INPUT_WINNING_LOTTO_NUMBER_MESSAGE);
         return inputLottoNumbers();
     }
@@ -53,6 +54,7 @@ public class InputView {
 
     private static List<Integer> inputLottoNumbers() {
         String input = SCANNER.nextLine();
-        return Spliter.splitInput(input);
+        System.out.println();
+        return Splitter.splitInput(input);
     }
 }

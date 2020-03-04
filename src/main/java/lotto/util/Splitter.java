@@ -3,7 +3,7 @@ package lotto.util;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Spliter {
+public class Splitter {
 
     private static final String COMMA = ",";
     private static final String BLANK = "";
@@ -13,15 +13,14 @@ public class Spliter {
     public static List<Integer> splitInput(String input) {
         input = removeBlank(input);
         String[] splitedInput = input.split(COMMA);
-        List<Integer> resultInput = toResultInput(splitedInput);
-        return resultInput;
+        return toResultInput(splitedInput);
     }
 
     private static List<Integer> toResultInput(String[] splitedInput) {
         List<Integer> result = new ArrayList<>();
         try {
-            for (int i = 0; i < splitedInput.length; i++) {
-                result.add(Integer.parseInt(splitedInput[i]));
+            for (String input : splitedInput) {
+                result.add(Integer.parseInt(input));
             }
         } catch (NumberFormatException e) {
             throw new NumberFormatException(NUMBER_INPUT_ERROR_MESSAGE);

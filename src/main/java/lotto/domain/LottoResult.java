@@ -5,7 +5,6 @@ import java.util.*;
 public class LottoResult {
 
     private static final int RATE = 100;
-
     private Map<WinningValue, Integer> lottoResult = new LinkedHashMap<>();
 
     public LottoResult() {
@@ -13,7 +12,7 @@ public class LottoResult {
                 .forEach(winningValue -> this.lottoResult.put(winningValue, 0));
     }
 
-    int calculateRewardRate(int money) {
+    public int calculateRewardRate(int money) {
         return this.lottoResult.entrySet()
                 .stream()
                 .mapToInt(result ->
@@ -22,7 +21,7 @@ public class LottoResult {
                 .sum() / money * RATE;
     }
 
-    void analyzeRank(Set<LottoTicket> lottoTickets,WinningLotto winningLotto){
+    public void analyzeRank(Set<LottoTicket> lottoTickets, WinningLotto winningLotto) {
         lottoTickets.stream()
                 .map(lotto -> countHit(lotto, winningLotto))
                 .forEach(this::putWinningResult);
