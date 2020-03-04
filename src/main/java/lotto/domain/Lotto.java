@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private static final String BALL_COUNT_EXCEPTION_MESSAGE = "로또 볼의 갯수가 적절하지 않습니다.";
+    private static final String BALL_COUNT_EXCEPTION_MESSAGE = "로또 볼의 개수가 적절하지 않습니다.";
     private static final String SPLIT_DELIMITER = ", ";
     static final int BALL_COUNT = 6;
 

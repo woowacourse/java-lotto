@@ -35,7 +35,9 @@ public class InputView {
     public static int inputManualLottoCount() {
         try {
             System.out.println(INPUT_MANUAL_COUNT_MESSAGE);
-            return SCANNER.nextInt();
+            int manualLottoCount = SCANNER.nextInt();
+            SCANNER.nextLine();
+            return manualLottoCount;
         } catch (InputMismatchException e) {
             throw new InputMismatchException(INVALID_INPUT_MANUAL_LOTTO_COUNT_EXCEPTION_MESSAGE);
         }

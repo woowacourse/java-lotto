@@ -20,7 +20,7 @@ public class LottosFactory {
         List<Lotto> lottos = new ArrayList<>();
         int lottoCount = manualLotto.size();
         for (int index = 0; index < lottoCount; index++) {
-            lottos.add(LottoFactory.createManual(manualLotto.get(index)));
+            lottos.add(Lotto.of(manualLotto.get(index)));
         }
         return lottos;
     }

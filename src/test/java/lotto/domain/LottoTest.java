@@ -20,7 +20,7 @@ public class LottoTest {
         Set<Ball> balls = new HashSet<>(Arrays
             .asList(Ball.of(1), Ball.of(2), Ball.of(3), Ball.of(4), Ball.of(5)));
         assertThatThrownBy(() -> new Lotto(balls)).isInstanceOf(IllegalArgumentException.class)
-            .hasMessageContaining("로또 볼의 갯수가 적절하지 않습니다.");
+            .hasMessageContaining("로또 볼의 개수가 적절하지 않습니다.");
     }
 
     @DisplayName("보내준 볼을 로또에서 가지고 있는지 확인")
@@ -55,15 +55,26 @@ public class LottoTest {
         assertThat(lottoData).containsExactly("1", "2", "3", "4", "5", "6");
     }
 
-    @DisplayName("로또 수동으로 생성 확인")
-    @Test
-    void constructByRawNumber() {
-        Lotto lotto = Lotto.of("1, 2, 3, 4, 5, 6");
-        assertThat(lotto.contains(Ball.of(1)));
-        assertThat(lotto.contains(Ball.of(2)));
-        assertThat(lotto.contains(Ball.of(3)));
-        assertThat(lotto.contains(Ball.of(4)));
-        assertThat(lotto.contains(Ball.of(5)));
-        assertThat(lotto.contains(Ball.of(6)));
+    @DisplayName("수동 로또 생성 테스트")
+    @ParameterizedTest
+    @CsvSource(value = {"1, 2, 3, 4, 5, 6", "43, 23, 36, 12, 10, 05"})
+    void makeLotto(int one, int two, int three, int four, int five, int six) {
+        Lotto lotto = Lotto
+            .of(one + ", " + two + ", " + three + ", " + four + ", " + five + ", " + six);
+        assertThat(lotto.contains(Ball.of(one))).isTrue();
+        assertThat(lotto.contains(Ball.of(two))).isTrue();
+        assertThat(lotto.contains(Ball.of(three))).isTrue();
+        assertThat(lotto.contains(Ball.of(four))).isTrue();
+        assertThat(lotto.contains(Ball.of(five))).isTrue();
+        assertThat(lotto.contains(Ball.of(six))).isTrue();
+    }
+
+    @DisplayName("수동 로또 생성 실패 - 개수 초과")
+    @ParameterizedTest
+    @CsvSource(value = {"1, 2, 3, 4, 5, 6, 7", "1, 2, 3, 4, 5"})
+    void differentCount(String string) {
+        assertThatThrownBy(() -> Lotto.of(string))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("개수");
     }
 }
