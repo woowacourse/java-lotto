@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class Money {
     private static final int MIN_PURCHASE_MONEY = 1_000;
-    public static final Money TICKET_PRICE = Money.of(1_000);
+    public static final Money TICKET_PRICE = Money.valueOf(1_000);
 
     private final int money;
 
@@ -14,16 +14,16 @@ public class Money {
         this.money = money;
     }
 
-    public static Money of(int winningMoney) {
-        return new Money(winningMoney);
+    public static Money valueOf(int money) {
+        return new Money(money);
     }
 
-    public static Money ofPurchaseMoney(int moneyValue) {
-        validateMoneyRange(moneyValue);
-        return new Money(moneyValue);
+    public static Money createPurchaseMoney(int purchaseMoney) {
+        validateMoneyIsSufficient(purchaseMoney);
+        return new Money(purchaseMoney);
     }
 
-    private static void validateMoneyRange(int moneyValue) {
+    private static void validateMoneyIsSufficient(int moneyValue) {
         if (moneyValue < MIN_PURCHASE_MONEY) {
             throw new MoneyException();
         }

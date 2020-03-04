@@ -12,7 +12,7 @@ class LottoTicketsTest {
     @DisplayName("LottoTicket 객체를 생성")
     @Test
     void of() {
-        Money purchaseMoney = Money.ofPurchaseMoney(14000);
+        Money purchaseMoney = Money.createPurchaseMoney(14000);
         TicketCounts ticketCounts = TicketCounts.fromMoneyAndManualTicketCount(purchaseMoney, 3);
         List<String> manualLottoNumbers = Arrays.asList("1,2,3,4,5,6", "2,4,6,8,10,12", "3, 5, 15, 20, 30, 45");
         assertThat(LottoTickets.of(ticketCounts, manualLottoNumbers)).isNotNull();
@@ -21,7 +21,7 @@ class LottoTicketsTest {
     @DisplayName("LottoTickets가 가진 LottoTicket의 개수를 반환")
     @Test
     void size() {
-        Money purchaseMoney = Money.ofPurchaseMoney(14000);
+        Money purchaseMoney = Money.createPurchaseMoney(14000);
         TicketCounts ticketCounts = TicketCounts.fromMoneyAndManualTicketCount(purchaseMoney, 3);
         List<String> manualLottoNumbers = Arrays.asList("1,2,3,4,5,6", "2,4,6,8,10,12", "3, 5, 15, 20, 30, 45");
         LottoTickets lottoTickets = LottoTickets.of(ticketCounts, manualLottoNumbers);
@@ -32,7 +32,7 @@ class LottoTicketsTest {
     @DisplayName("LottoTickets의 당첨결과를 Ranks로 반환")
     @Test
     void checkOutLottos() {
-        Money purchaseMoney = Money.ofPurchaseMoney(14000);
+        Money purchaseMoney = Money.createPurchaseMoney(14000);
         TicketCounts ticketCounts = TicketCounts.fromMoneyAndManualTicketCount(purchaseMoney, 3);
         List<String> manualLottoNumbers = Arrays.asList("1,2,3,4,5,6", "2,4,6,8,10,12", "3, 5, 15, 20, 30, 45");
         LottoTickets lottoTickets = LottoTickets.of(ticketCounts, manualLottoNumbers);

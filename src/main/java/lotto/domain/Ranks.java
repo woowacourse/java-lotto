@@ -23,7 +23,7 @@ public class Ranks {
     }
 
     private Money sumWinningMoney() {
-        Money totalWinningMoney = Money.of(DEFAULT_SUM);
+        Money totalWinningMoney = Money.valueOf(DEFAULT_SUM);
         for (Rank rank : ranks) {
             totalWinningMoney = totalWinningMoney.plus(rank.getWinningMoney());
         }

@@ -26,7 +26,7 @@ class WinningNumbersTest {
     @DisplayName("로또티켓들을 당첨번호와 비교해서 해당 순위들을 반환")
     @Test
     void returnRanks() {
-        Money purchaseMoney = Money.ofPurchaseMoney(14000);
+        Money purchaseMoney = Money.createPurchaseMoney(14000);
         TicketCounts ticketCounts = TicketCounts.fromMoneyAndManualTicketCount(purchaseMoney, 3);
         List<String> manualLottoNumbers = Arrays.asList("1,2,3,10,11,12",
                 "1,2,3,4,5,12",

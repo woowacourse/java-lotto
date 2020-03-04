@@ -20,7 +20,7 @@ public enum Rank {
 
     Rank(int matchedCount, int winningMoney) {
         this.matchedCount = matchedCount;
-        this.winningMoney = Money.of(winningMoney);
+        this.winningMoney = Money.valueOf(winningMoney);
     }
 
     public static Rank of(int count) {

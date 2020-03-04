@@ -12,7 +12,7 @@ class RanksTest {
     @DisplayName("구입금액과 당첨결과들을 통해서 수익률을 계산")
     @Test
     void calculateProfit() {
-        Money purchaseMoney = Money.ofPurchaseMoney(14000);
+        Money purchaseMoney = Money.createPurchaseMoney(14000);
         List<Rank> ranksValues = Arrays.asList(Rank.FIFTH, Rank.FOURTH);
         Ranks ranks = Ranks.of(ranksValues);
 

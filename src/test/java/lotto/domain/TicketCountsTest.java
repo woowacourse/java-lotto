@@ -11,7 +11,7 @@ class TicketCountsTest {
     @Test
     void validateCountIsGreaterThanMax() {
         assertThatThrownBy(() -> {
-            TicketCounts.fromMoneyAndManualTicketCount(Money.ofPurchaseMoney(14000), 15);
+            TicketCounts.fromMoneyAndManualTicketCount(Money.createPurchaseMoney(14000), 15);
         }).isInstanceOf(TicketCountsException.class)
                 .hasMessage("구매 가능한 로또 티켓의 수를 초과하였습니다.");
     }
@@ -20,7 +20,7 @@ class TicketCountsTest {
     @Test
     void validateCountIsGreaterThanMin() {
         assertThatThrownBy(() -> {
-            TicketCounts.fromMoneyAndManualTicketCount(Money.ofPurchaseMoney(14000), 0);
+            TicketCounts.fromMoneyAndManualTicketCount(Money.createPurchaseMoney(14000), 0);
         }).isInstanceOf(TicketCountsException.class)
                 .hasMessage("구매할 로또 티켓의 수는 양수이어야 합니다.");
     }
