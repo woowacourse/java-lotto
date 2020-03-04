@@ -18,4 +18,13 @@ public class LottoNumbersTest {
 
         Assertions.assertThat(LottoNumbers.getInstance()).containsSequence(expected);
     }
+
+    @DisplayName("입력한 숫자에 맞는 로또 넘버를 반환하는지 테스트")
+    @Test
+    void getLottoNumberTest() {
+        LottoNumber input = new LottoNumber(1);
+        LottoNumber expected = LottoNumbers.getLottoNumber(1);
+
+        Assertions.assertThat(input).isEqualTo(expected);
+    }
 }

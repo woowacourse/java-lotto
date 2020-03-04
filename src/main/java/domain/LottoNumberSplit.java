@@ -22,7 +22,8 @@ public class LottoNumberSplit {
 
     private static void getLottoNumber(String[] numbers, List<LottoNumber> lottoNumbers) {
         for (int i = 0; i < numbers.length; i++) {
-            lottoNumbers.add(new LottoNumber(Integer.parseInt(numbers[i].trim())));
+            int lottoNumber = Integer.parseInt(numbers[i].trim());
+            lottoNumbers.add(LottoNumbers.getLottoNumber(lottoNumber));
         }
     }
 }

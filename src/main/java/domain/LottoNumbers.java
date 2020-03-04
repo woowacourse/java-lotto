@@ -20,6 +20,13 @@ public class LottoNumbers {
         Collections.shuffle(lottoNumbers);
     }
 
+    public static LottoNumber getLottoNumber(int number) {
+        return lottoNumbers.stream()
+                .filter(ln -> ln.isSameLottoNumber(number))
+                .findFirst()
+                .orElseThrow(() -> new NumberFormatException());
+    }
+
     public static List<LottoNumber> getInstance() {
         return lottoNumbers;
     }

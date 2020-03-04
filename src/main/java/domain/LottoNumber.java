@@ -19,6 +19,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
     }
 
+    public boolean isSameLottoNumber(int number) {
+        return this.lottoNumber == number;
+    }
+
     @Override
     public int compareTo(LottoNumber compare) {
         if (this.lottoNumber < compare.lottoNumber) {
