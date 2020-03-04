@@ -26,7 +26,7 @@ public class Lottos implements Iterable<Lotto> {
     private static List<Lotto> createManualLottos(List<String> manualLotto, LottoCount count) {
         count.validManualLottoCount(manualLotto);
         List<Lotto> lottos = manualLotto.stream()
-            .map(rawManualLotto -> Lotto.of(rawManualLotto))
+            .map(Lotto::of)
             .collect(Collectors.toList());
         return lottos;
     }
