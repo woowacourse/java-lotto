@@ -10,7 +10,7 @@ public class LottoNumberTest {
 
     @Test
     @DisplayName("범위 밖의 숫자 입력시 오류")
-    void validate() {
+    void Should_Exception_LottoNumberSmallerThanOne() {
         assertThatThrownBy(() -> {
             new LottoNumber(0);
         }).isInstanceOf(OverRangeException.class)
