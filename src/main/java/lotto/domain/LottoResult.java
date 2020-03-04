@@ -22,7 +22,7 @@ public class LottoResult {
                 .sum() / money * RATE;
     }
 
-    public void analyzeRank(Set<LottoTicket> lottoTickets,WinningLotto winningLotto){
+    public void analyzeRank(Set<LottoTicket> lottoTickets, WinningLotto winningLotto) {
         lottoTickets.stream()
                 .map(lotto -> countHit(lotto, winningLotto))
                 .forEach(this::putWinningResult);

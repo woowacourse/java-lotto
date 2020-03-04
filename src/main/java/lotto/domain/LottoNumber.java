@@ -8,7 +8,7 @@ public class LottoNumber {
     private static final int MIN_LOTTO_NUMBER = 1;
     private final int lottoNumber;
 
-    public LottoNumber(int lottoNumber) {
+    LottoNumber(int lottoNumber) {
         validateLottoNumber(lottoNumber);
         this.lottoNumber = lottoNumber;
     }

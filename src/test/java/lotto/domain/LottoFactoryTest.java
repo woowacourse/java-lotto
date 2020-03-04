@@ -20,7 +20,7 @@ public class LottoFactoryTest {
 
     @Test
     @DisplayName("입력된 수동 번호를 로또 번호로 생성")
-    void createManualLottoNumbers(){
+    void createManualLottoNumbers() {
         List<Integer> lottoNumbers = new ArrayList<>();
         lottoNumbers.add(1);
         lottoNumbers.add(2);

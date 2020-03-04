@@ -21,7 +21,7 @@ public enum WinningValue {
         this.reward = reward;
     }
 
-    public static WinningValue valueOf(int hitCount, boolean hitBonus) {
+    static WinningValue valueOf(int hitCount, boolean hitBonus) {
         if (hitCount == SECOND.hitCount && hitBonus) return SECOND;
         return Arrays.stream(WinningValue.values())
                 .filter(winningValue -> winningValue.hitCount == hitCount)

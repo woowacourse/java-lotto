@@ -1,18 +1,16 @@
 package lotto.domain;
 
-import lotto.util.Spliter;
+import lotto.util.Splitter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -33,12 +31,12 @@ public class LottoResultTest {
     }
 
     @BeforeEach
-    void setLottoTicket(){
-        lottoTickets.add(new LottoTicket(LottoFactory.createManualLottoNumbers(Spliter.splitInput("1,2,3,4,5,6"))));
-        lottoTickets.add(new LottoTicket(LottoFactory.createManualLottoNumbers(Spliter.splitInput("1,2,3,4,5,7"))));
-        lottoTickets.add(new LottoTicket(LottoFactory.createManualLottoNumbers(Spliter.splitInput("1,2,3,4,5,8"))));
-        lottoTickets.add(new LottoTicket(LottoFactory.createManualLottoNumbers(Spliter.splitInput("1,2,3,7,8,9"))));
-        lottoTickets.add(new LottoTicket(LottoFactory.createManualLottoNumbers(Spliter.splitInput("1,21,11,12,13,14"))));
+    void setLottoTicket() {
+        lottoTickets.add(new LottoTicket(LottoFactory.createManualLottoNumbers(Splitter.splitInput("1,2,3,4,5,6"))));
+        lottoTickets.add(new LottoTicket(LottoFactory.createManualLottoNumbers(Splitter.splitInput("1,2,3,4,5,7"))));
+        lottoTickets.add(new LottoTicket(LottoFactory.createManualLottoNumbers(Splitter.splitInput("1,2,3,4,5,8"))));
+        lottoTickets.add(new LottoTicket(LottoFactory.createManualLottoNumbers(Splitter.splitInput("1,2,3,7,8,9"))));
+        lottoTickets.add(new LottoTicket(LottoFactory.createManualLottoNumbers(Splitter.splitInput("1,21,11,12,13,14"))));
     }
 
     @ParameterizedTest
@@ -52,7 +50,7 @@ public class LottoResultTest {
 
     @Test
     @DisplayName("수익률 계산")
-    void calculateRewardRate(){
+    void calculateRewardRate() {
         WinningLotto winningLotto = new WinningLotto(LottoFactory.createManualLottoNumbers(lottoNumbers), 7);
         lottoResult.analyzeRank(lottoTickets, winningLotto);
         assertThat(lottoResult.calculateRewardRate(5000)).isEqualTo(40630100);

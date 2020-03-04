@@ -23,7 +23,7 @@ public class LottoFactory {
         return LottoFactoryHolder.instance;
     }
 
-    public static Set<LottoNumber> createRandomLottoNumbers() {
+    static Set<LottoNumber> createRandomLottoNumbers() {
         Set<LottoNumber> lotto = new HashSet<>();
         Collections.shuffle(lottoNumbers);
         for (int i = 0; i < LOTTO_LENGTH; i++) {

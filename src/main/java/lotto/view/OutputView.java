@@ -4,7 +4,10 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.WinningValue;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Set;
 
 public class OutputView {
     private static final String WINNING_ANALYSIS_MESSAGE = "당첨 통계\n" + "---------";
@@ -46,6 +49,6 @@ public class OutputView {
     }
 
     public static void printRewardRate(int rewardRate) {
-        System.out.println(String.format(REWARD_RATE_MESSAGE,rewardRate) + PERCENT_MESSAGE);
+        System.out.println(String.format(REWARD_RATE_MESSAGE, rewardRate) + PERCENT_MESSAGE);
     }
 }
