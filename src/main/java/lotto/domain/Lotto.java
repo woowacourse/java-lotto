@@ -10,6 +10,7 @@ public class Lotto {
 
     private static final String BALL_COUNT_EXCEPTION_MESSAGE = "로또 볼의 개수가 적절하지 않습니다.";
     private static final String SPLIT_DELIMITER = ", ";
+    private static final int BALL_COUNT_ZERO = 0;
     static final int BALL_COUNT = 6;
 
     private final Set<Ball> balls;
@@ -32,6 +33,14 @@ public class Lotto {
             balls.add(Ball.of(Integer.parseInt(number)));
         }
         return new Lotto(balls);
+    }
+
+    public static Lotto newAutoLotto() {
+        List<Ball> balls = Ball.getBalls();
+        Collections.shuffle(balls);
+
+        Set<Ball> randomBalls = new HashSet<>(balls.subList(BALL_COUNT_ZERO, BALL_COUNT));
+        return new Lotto(randomBalls);
     }
 
     public boolean contains(Ball ball) {

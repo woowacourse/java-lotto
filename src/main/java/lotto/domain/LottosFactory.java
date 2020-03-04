@@ -37,7 +37,7 @@ public class LottosFactory {
         List<Lotto> lottos = new ArrayList<>();
         int lottoCount = count.getAutoLottoCount();
         for (int i = 0; i < lottoCount; i++) {
-            lottos.add(LottoFactory.createRandom());
+            lottos.add(Lotto.newAutoLotto());
         }
         return lottos;
     }
