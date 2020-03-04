@@ -44,10 +44,6 @@ public class LottoCount {
         }
     }
 
-    public Money getBuyMoney(int lottoPrice) {
-        return new Money(lottoCount * lottoPrice);
-    }
-
     public void validManualLottoCount(List<String> manualLotto) {
         if (manualLotto.size() != manualLottoCount) {
             throw new IllegalArgumentException(
@@ -55,16 +51,20 @@ public class LottoCount {
         }
     }
 
-    public int getManualLottoCount() {
-        return manualLottoCount;
+    public boolean hasManualLottoCount() {
+        return manualLottoCount != 0;
+    }
+
+    public Money getBuyMoney(int lottoPrice) {
+        return new Money(lottoCount * lottoPrice);
     }
 
     public int getAutoLottoCount() {
         return lottoCount - manualLottoCount;
     }
 
-    public boolean hasManualLottoCount() {
-        return manualLottoCount != 0;
+    public int getManualLottoCount() {
+        return manualLottoCount;
     }
 
     @Override

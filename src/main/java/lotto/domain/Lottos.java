@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lottos implements Iterable<Lotto> {
 
@@ -24,11 +25,9 @@ public class Lottos implements Iterable<Lotto> {
 
     private static List<Lotto> createManualLottos(List<String> manualLotto, LottoCount count) {
         count.validManualLottoCount(manualLotto);
-        List<Lotto> lottos = new ArrayList<>();
-        int lottoCount = manualLotto.size();
-        for (int index = 0; index < lottoCount; index++) {
-            lottos.add(Lotto.of(manualLotto.get(index)));
-        }
+        List<Lotto> lottos = manualLotto.stream()
+            .map(rawManualLotto -> Lotto.of(rawManualLotto))
+            .collect(Collectors.toList());
         return lottos;
     }
 
