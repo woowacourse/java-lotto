@@ -11,7 +11,6 @@ public enum LottoRank {
     FOURTH(4, 50000),
     FIFTH(3, 5000);
 
-    private static final int INITIAL_NUMBER = 0;
     private final int rank;
     private final int prize;
 
@@ -46,13 +45,5 @@ public enum LottoRank {
 
     public static boolean checkNoPrize(int count) {
         return count < FIFTH.rank;
-    }
-
-    public static Map<LottoRank, Integer> makeLottoResult() {
-        Map<LottoRank, Integer> lottoResult = new HashMap<>();
-        for (LottoRank lottoRank : LottoRank.values()) {
-            lottoResult.put(lottoRank, INITIAL_NUMBER);
-        }
-        return lottoResult;
     }
 }

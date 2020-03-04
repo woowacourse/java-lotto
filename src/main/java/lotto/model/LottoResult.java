@@ -1,13 +1,17 @@
 package lotto.model;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class LottoResult {
+    private static final int INITIAL_NUMBER = 0;
     private final int WINNING_COUNT = 1;
-    private Map<LottoRank, Integer> lottoResult;
+    private Map<LottoRank, Integer> lottoResult = new HashMap<>();
 
     public LottoResult() {
-        this.lottoResult = LottoRank.makeLottoResult();
+        for (LottoRank lottoRank : LottoRank.values()) {
+            this.lottoResult.put(lottoRank, INITIAL_NUMBER);
+        }
     }
 
     public void checkCount(LottoTicket lottoTicket, WinNumber winNumber, BonusBall bonusBall) {
