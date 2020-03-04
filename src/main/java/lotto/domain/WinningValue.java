@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public enum WinningValue {
 
-    ZERO(0, 0, ""),
+    ZERO(-1, 0, "당첨되지 않음"),
     FIFTH(3, 5000, "3개 일치"),
     FORTH(4, 50000, "4개 일치"),
     THIRD(5, 1500000, "5개 일치"),
