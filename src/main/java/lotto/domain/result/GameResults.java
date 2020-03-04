@@ -1,5 +1,8 @@
 package lotto.domain.result;
 
+import lotto.domain.number.LottoRoundsGenerator;
+
+import java.util.Collections;
 import java.util.List;
 
 public class GameResults {
@@ -23,10 +26,13 @@ public class GameResults {
                 .sum();
     }
 
-    // TODO : 게임 결과의 이익만 추출하도록 변경해보자!
-    public double calculateYield(Money money) {
-        double purchaseMoney = money.getMoney();
+    public double calculateYield() {
+        double purchaseMoney = gameResults.size() * LottoRoundsGenerator.LOTTO_PRICE;
         double benefit = calculateBenefit();
         return (benefit / purchaseMoney) * MULTIPLE_PERCENTAGE;
+    }
+
+    public List<GameResult> getGameResults() {
+        return Collections.unmodifiableList(gameResults);
     }
 }

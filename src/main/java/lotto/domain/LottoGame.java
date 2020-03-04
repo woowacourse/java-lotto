@@ -20,7 +20,7 @@ public class LottoGame {
         return lottoRounds.calculateGameResult(winnngNumbers);
     }
 
-    public static double calculateYield(Money money, GameResults gameResults) {
-        return gameResults.calculateYield(money);
+    public static double calculateYield(GameResults gameResults) {
+        return gameResults.calculateYield();
     }
 }
