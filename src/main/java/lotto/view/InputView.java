@@ -38,6 +38,7 @@ public class InputView {
         }catch (NumberFormatException e){
             throw new NumberFormatException(INTEGER_INPUT_ERROR_MESSAGE);
         }
+        System.out.println();
         return number;
     }
 
@@ -53,6 +54,7 @@ public class InputView {
 
     private static List<Integer> inputLottoNumbers() {
         String input = SCANNER.nextLine();
+        System.out.println();
         return Spliter.splitInput(input);
     }
 }
