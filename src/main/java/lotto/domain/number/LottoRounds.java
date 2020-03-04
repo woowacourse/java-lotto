@@ -35,7 +35,7 @@ public class LottoRounds {
         return new GameResults(gameResults);
     }
 
-    public LottoRounds combineLottoRounds(LottoRounds anotherLottoRounds) {
+    public LottoRounds combine(LottoRounds anotherLottoRounds) {
         List<LottoRound> combinedLottoRounds = new ArrayList<>();
         combinedLottoRounds.addAll(allLottoNumbers);
         combinedLottoRounds.addAll(anotherLottoRounds.allLottoNumbers);

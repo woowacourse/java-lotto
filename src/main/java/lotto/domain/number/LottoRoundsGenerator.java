@@ -23,6 +23,6 @@ public class LottoRoundsGenerator implements LottoRoundsGenerable {
     public LottoRounds generate(Money money) {
         LottoRounds manualLottoRounds = manualLottoRoundsGenertor.generate(money);
         LottoRounds autoLottoRounds = autoLottoRoundsGenerator.generate(money);
-        return manualLottoRounds.combineLottoRounds(autoLottoRounds);
+        return manualLottoRounds.combine(autoLottoRounds);
     }
 }

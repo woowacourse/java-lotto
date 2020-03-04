@@ -1,6 +1,7 @@
 package lotto.domain.number;
 
 import lotto.domain.result.GameResult;
+import lotto.domain.result.GameResults;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +13,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoRoundsTest {
-
     private static LottoRounds lottoRounds;
 
     @BeforeEach
@@ -91,15 +91,15 @@ class LottoRoundsTest {
         WinningNumbers winningNumbers = new WinningNumbers(winningNumberArguments, LottoNumber.of(30));
 
         // when
-        List<GameResult> gameResults = lottoRounds.calculateGameResult(winningNumbers);
+        GameResults gameResults = lottoRounds.calculateGameResult(winningNumbers);
         List<GameResult> expected = new ArrayList<>();
         expected.add(GameResult.FIRST_RANK);
         expected.add(GameResult.SECOND_RANK);
         expected.add(GameResult.THIRD_RANK);
         expected.add(GameResult.NO_RANK);
         // then
-        assertThat(gameResults).hasSize(4);
-        assertThat(gameResults).isEqualTo(expected);
+        assertThat(gameResults.getGameResults()).hasSize(4);
+        assertThat(gameResults.getGameResults()).isEqualTo(expected);
     }
 
     @Test
@@ -140,7 +140,7 @@ class LottoRoundsTest {
         LottoRounds anotherLottoRounds = new LottoRounds(anotherLottoRoundArguments);
 
         // when
-        LottoRounds combinedLottoRounds = lottoRounds.combineLottoRounds(anotherLottoRounds);
+        LottoRounds combinedLottoRounds = lottoRounds.combine(anotherLottoRounds);
 
         // then
         assertThat(combinedLottoRounds.getAllLottoNumbers()).contains(anotherLottoRound1);
