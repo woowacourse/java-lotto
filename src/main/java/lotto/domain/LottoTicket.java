@@ -25,13 +25,10 @@ public class LottoTicket {
     }
 
     public int countSameNumbers(LottoTicket lottoTicketToCompare) {
-        int hitCount = 0;
-        for (LottoNumber lottoNumber : lottoTicketToCompare.getLottoTicket()) {
-            if (this.lottoTicket.contains(lottoNumber)) {
-                hitCount++;
-            }
-        }
-        return hitCount;
+        return (int) this.lottoTicket.stream()
+                .filter(lottoNumber -> lottoTicketToCompare.getLottoTicket()
+                        .contains(lottoNumber))
+                .count();
     }
 
     public Set<LottoNumber> getLottoTicket() {
