@@ -7,9 +7,6 @@ import java.util.List;
 
 public class Lottos implements Iterable<Lotto> {
 
-    private static final String INVALID_MANUAL_LOTTOS_COUNT
-        = "수동 로또 개수(%d)와 정보 개수(%d)가 일치하지 않습니다.";
-
     private final List<Lotto> lottos;
     private final LottoCount lottoCount;
 
@@ -26,21 +23,13 @@ public class Lottos implements Iterable<Lotto> {
     }
 
     private static List<Lotto> createManualLottos(List<String> manualLotto, LottoCount count) {
-        validManualLottoSize(manualLotto, count);
+        count.validManualLottoCount(manualLotto);
         List<Lotto> lottos = new ArrayList<>();
         int lottoCount = manualLotto.size();
         for (int index = 0; index < lottoCount; index++) {
             lottos.add(Lotto.of(manualLotto.get(index)));
         }
         return lottos;
-    }
-
-    private static void validManualLottoSize(List<String> manualLotto, LottoCount count) {
-        if (manualLotto.size() != count.getManualLottoCount()) {
-            throw new IllegalArgumentException(String
-                .format(INVALID_MANUAL_LOTTOS_COUNT, manualLotto.size(),
-                    count.getManualLottoCount()));
-        }
     }
 
     private static List<Lotto> createRandomLottos(LottoCount count) {
@@ -52,16 +41,12 @@ public class Lottos implements Iterable<Lotto> {
         return lottos;
     }
 
-    public boolean isSameCount(int count) {
-        return lottos.size() == count;
+    public LottoCount getCount() {
+        return lottoCount;
     }
 
     @Override
     public Iterator<Lotto> iterator() {
         return lottos.iterator();
-    }
-
-    public LottoCount getCount() {
-        return lottoCount;
     }
 }

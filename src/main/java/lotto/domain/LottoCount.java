@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.List;
 import java.util.Objects;
 
 public class LottoCount {
@@ -10,6 +11,8 @@ public class LottoCount {
         = "로또 구입 갯수는 최소 %d개 이상";
     private static final String INVALID_MAXIMUM_MANUAL_LOTTO_COUNT_EXCEPTION_MESSAGE
         = "수동 로또 갯수(%d)는 구매하려는 갯수(%d)보다 많을 수 없습니다.";
+    private static final String INVALID_MANUAL_LOTTOS_COUNT
+        = "수동 로또 개수(%d)와 정보 개수(%d)가 일치하지 않습니다.";
 
     private final int manualLottoCount;
     private final int lottoCount;
@@ -41,8 +44,15 @@ public class LottoCount {
         }
     }
 
-    public int getLottoCount() {
-        return lottoCount;
+    public Money getBuyMoney(int lottoPrice) {
+        return new Money(lottoCount * lottoPrice);
+    }
+
+    public void validManualLottoCount(List<String> manualLotto) {
+        if (manualLotto.size() != manualLottoCount) {
+            throw new IllegalArgumentException(
+                String.format(INVALID_MANUAL_LOTTOS_COUNT, manualLotto.size(), manualLottoCount));
+        }
     }
 
     public int getManualLottoCount() {
