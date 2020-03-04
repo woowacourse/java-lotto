@@ -6,6 +6,7 @@ public class WinningNumber {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int WINNING_MATCH_COUNT_FOR_SECOND_AND_THIRD = 5;
+
     private Lotto winningNumbers;
     private LottoNumber bonusNumber;
 

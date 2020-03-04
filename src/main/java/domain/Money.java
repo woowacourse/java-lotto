@@ -4,6 +4,7 @@ public class Money {
     private static final int LOTTO_PRICE = 1_000;
     private static final int NEGATIVE_CRITERIA_POINT = 0;
     private static final int PERCENTAGE = 100;
+
     private int purchaseAmount;
 
     public Money(final String inputPurchaseAmount) {
