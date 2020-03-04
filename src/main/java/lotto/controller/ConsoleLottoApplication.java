@@ -48,20 +48,11 @@ public class ConsoleLottoApplication {
 
     private static LottoTickets createLottoTickets(TicketCounts ticketCounts) {
         try {
-            List<String> manualLottoNumbers = inputManualLottoNumbers(ticketCounts.getManualTicketCount());
-            return LottoTickets.of(ticketCounts, manualLottoNumbers);
+            List<String> manualLottoNumbers = InputView.inputManualLottoNumbers(ticketCounts.getManualTicketCount());
+            return LottoTickets.from(ticketCounts, manualLottoNumbers);
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
             return createLottoTickets(ticketCounts);
-        }
-    }
-
-    private static List<String> inputManualLottoNumbers(int manualTicketCount) {
-        try {
-            return InputView.inputManualLottoNumbers(manualTicketCount);
-        } catch (IllegalArgumentException e) {
-            System.err.println(e.getMessage());
-            return inputManualLottoNumbers(manualTicketCount);
         }
     }
 
@@ -76,7 +67,7 @@ public class ConsoleLottoApplication {
 
     private static LottoTicket inputWinningLottoTicket() {
         try {
-            return LottoTicket.fromInput(InputView.inputSixNumbers());
+            return LottoTicket.createManualTicket(InputView.inputSixNumbers());
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
             return inputWinningLottoTicket();

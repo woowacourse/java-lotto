@@ -15,7 +15,7 @@ class LottoTicketsTest {
         Money purchaseMoney = Money.createPurchaseMoney(14000);
         TicketCounts ticketCounts = TicketCounts.from(purchaseMoney, 3);
         List<String> manualLottoNumbers = Arrays.asList("1,2,3,4,5,6", "2,4,6,8,10,12", "3, 5, 15, 20, 30, 45");
-        assertThat(LottoTickets.of(ticketCounts, manualLottoNumbers)).isNotNull();
+        assertThat(LottoTickets.from(ticketCounts, manualLottoNumbers)).isNotNull();
     }
 
     @DisplayName("LottoTickets가 가진 LottoTicket의 개수를 반환")
@@ -24,7 +24,7 @@ class LottoTicketsTest {
         Money purchaseMoney = Money.createPurchaseMoney(14000);
         TicketCounts ticketCounts = TicketCounts.from(purchaseMoney, 3);
         List<String> manualLottoNumbers = Arrays.asList("1,2,3,4,5,6", "2,4,6,8,10,12", "3, 5, 15, 20, 30, 45");
-        LottoTickets lottoTickets = LottoTickets.of(ticketCounts, manualLottoNumbers);
+        LottoTickets lottoTickets = LottoTickets.from(ticketCounts, manualLottoNumbers);
 
         assertThat(lottoTickets.size()).isEqualTo(purchaseMoney.calculateAllTicketCount());
     }
@@ -35,7 +35,7 @@ class LottoTicketsTest {
         Money purchaseMoney = Money.createPurchaseMoney(14000);
         TicketCounts ticketCounts = TicketCounts.from(purchaseMoney, 3);
         List<String> manualLottoNumbers = Arrays.asList("1,2,3,4,5,6", "2,4,6,8,10,12", "3, 5, 15, 20, 30, 45");
-        LottoTickets lottoTickets = LottoTickets.of(ticketCounts, manualLottoNumbers);
+        LottoTickets lottoTickets = LottoTickets.from(ticketCounts, manualLottoNumbers);
 
         LottoTicket winningLottoTicket = LottoTicket.fromInput("1,2,3,4,5,6");
         LottoNumber bonusNumber = new LottoNumber(7);

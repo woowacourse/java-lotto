@@ -2,34 +2,24 @@ package lotto.domain;
 
 import lotto.exception.LottoTicketException;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
-    private static final int COUNT_FOR_SECOND_RANK = 5;
+    private static final int SUBLIST_FROM_INDEX = 0;
+    private static final int SUBLIST_TO_INDEX = 6;
     private static final int LOTTO_SIZE = 6;
     private static final String DELIMITER = ",";
+    private static final int COUNT_FOR_SECOND_RANK = 5;
 
     private final List<LottoNumber> numbers;
 
     private LottoTicket(List<LottoNumber> numbers) {
         this.numbers = numbers;
-    }
 
-    public static LottoTicket fromSixNumbers(List<LottoNumber> numbers) {
-        validate(numbers);
-        Collections.sort(numbers);
-        return new LottoTicket(numbers);
-    }
-
-    public static LottoTicket fromInput(String input) {
-        List<LottoNumber> numbers = generateSixNumbersFromInput(input);
-        return fromSixNumbers(numbers);
-    }
-
-    private static void validate(List<LottoNumber> numbers) {
         validateNumbersCount(numbers);
         validateNumbersDuplication(numbers);
     }
@@ -56,12 +46,22 @@ public class LottoTicket {
                 .count();
     }
 
-    private static List<LottoNumber> generateSixNumbersFromInput(String inputForNumbers) {
-        return Arrays.stream(inputForNumbers.split(DELIMITER))
+    public static LottoTicket createAutoTicket() {
+        List<LottoNumber> copiedNumbers = new ArrayList<>(LottoNumber.values());
+        Collections.shuffle(copiedNumbers);
+        List<LottoNumber> subNumbers = copiedNumbers.subList(SUBLIST_FROM_INDEX, SUBLIST_TO_INDEX);
+
+        return new LottoTicket(subNumbers);
+    }
+
+    public static LottoTicket createManualTicket(String unsplitNumbers) {
+        List<LottoNumber> numbers = Arrays.stream(unsplitNumbers.split(DELIMITER))
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
+
+        return new LottoTicket(numbers);
     }
 
     public Rank checkOut(LottoTicket winningLottoTicket, LottoNumber bonusNumber) {

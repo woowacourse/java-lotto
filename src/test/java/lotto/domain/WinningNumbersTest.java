@@ -31,7 +31,7 @@ class WinningNumbersTest {
         List<String> manualLottoNumbers = Arrays.asList("1,2,3,10,11,12",
                 "1,2,3,4,5,12",
                 "1,2,3,4,5,6");
-        LottoTickets lottoTickets = LottoTickets.of(ticketCounts, manualLottoNumbers);
+        LottoTickets lottoTickets = LottoTickets.from(ticketCounts, manualLottoNumbers);
 
         LottoTicket winningLottoTicket = createLottoTicket("1,2,3,4,5,6");
         LottoNumber bonusNumber = new LottoNumber(7);
