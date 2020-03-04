@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AutoLottoRoundsGenerator implements LottoRoundsGenerable {
-
     @Override
     public LottoRounds generate(Money money) {
         List<LottoRound> autoLottos = new ArrayList<>();
