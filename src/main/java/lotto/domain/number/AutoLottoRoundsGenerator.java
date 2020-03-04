@@ -11,8 +11,8 @@ public class AutoLottoRoundsGenerator implements LottoRoundsGenerable {
     @Override
     public LottoRounds generate(Money money) {
         List<LottoRound> autoLottos = new ArrayList<>();
-        while (money.isSubtractable(LottoMachine.LOTTO_PRICE)) {
-            money.subtract(LottoMachine.LOTTO_PRICE);
+        while (money.isSubtractable(LottoRoundsGenerator.LOTTO_PRICE)) {
+            money.subtract(LottoRoundsGenerator.LOTTO_PRICE);
             RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
             List<LottoNumber> randomNumbers = randomNumberGenerator.generateNumbers();
             autoLottos.add(new LottoRound(randomNumbers));

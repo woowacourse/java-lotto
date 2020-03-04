@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.domain.LottoGame;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.LottoRound;
 import lotto.domain.number.LottoRounds;
@@ -31,8 +30,7 @@ public class OutputView {
         System.out.println(money.devide(1000) + PURCHASE_NUMBER_POSTFIX);
     }
 
-    public static void printAllLottoNumbers(LottoGame lottoGame) {
-        LottoRounds lottoRounds = lottoGame.getLottoRounds();
+    public static void printAllLottoNumbers(LottoRounds lottoRounds) {
         List<LottoRound> allLottoRoundList = lottoRounds.getAllLottoNumbers();
         for (LottoRound anAllLottoRoundList : allLottoRoundList) {
             printLottoNumbers(anAllLottoRoundList);

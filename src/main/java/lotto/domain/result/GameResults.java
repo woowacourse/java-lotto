@@ -23,6 +23,7 @@ public class GameResults {
                 .sum();
     }
 
+    // TODO : 게임 결과의 이익만 추출하도록 변경해보자!
     public double calculateYield(Money money) {
         double purchaseMoney = money.getMoney();
         double benefit = calculateBenefit();

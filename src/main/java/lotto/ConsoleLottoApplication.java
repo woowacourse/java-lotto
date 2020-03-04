@@ -5,6 +5,7 @@ import lotto.domain.exception.DuplicateLottoNumberException;
 import lotto.domain.exception.LottoNumberSizeException;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.LottoRound;
+import lotto.domain.number.LottoRounds;
 import lotto.domain.number.WinningNumbers;
 import lotto.domain.result.GameResults;
 import lotto.domain.result.Money;
@@ -18,13 +19,14 @@ public class ConsoleLottoApplication {
         Money money = InputView.inputPurchaseMoney();
 
         List<LottoRound> manualLottos = InputView.inputManualLottoRounds(money);
-        LottoGame lottoGame = LottoGame.initialize(money, manualLottos);
-        OutputView.printPurchaseNumber(money, manualLottos);
-        OutputView.printAllLottoNumbers(lottoGame);
+        LottoRounds lottoRounds = LottoGame.createLottoRounds(money, manualLottos);
 
-        GameResults gameResults = lottoGame.calculateResult(inputWinningNumbers());
+        OutputView.printPurchaseNumber(money, manualLottos);
+        OutputView.printAllLottoNumbers(lottoRounds);
+
+        GameResults gameResults = LottoGame.calculateResult(lottoRounds, inputWinningNumbers());
         OutputView.printGameResults(gameResults);
-        OutputView.printYield(lottoGame.calculateYield(gameResults));
+        OutputView.printYield(LottoGame.calculateYield(money, gameResults));
     }
 
     private static WinningNumbers inputWinningNumbers() {

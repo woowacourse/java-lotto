@@ -13,7 +13,7 @@ public class ManualLottoRoundsGenertor implements LottoRoundsGenerable {
 
     @Override
     public LottoRounds generate(Money money) {
-        int manualLottoPrice = LottoMachine.LOTTO_PRICE * manualLottoRounds.size();
+        int manualLottoPrice = LottoRoundsGenerator.LOTTO_PRICE * manualLottoRounds.size();
         if (money.isSubtractable(manualLottoPrice)) {
             money.subtract(manualLottoPrice);
         }

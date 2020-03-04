@@ -1,6 +1,7 @@
 package lotto.domain.number;
 
 import lotto.domain.result.GameResult;
+import lotto.domain.result.GameResults;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,16 +24,15 @@ public class LottoRounds {
         }
     }
 
-    public List<GameResult> calculateGameResult(WinningNumbers winningNumbers) {
-        List<GameResult> gameResultList = new ArrayList<>();
-        for (int i = 0; i < allLottoNumbers.size(); i++) {
-            LottoRound presentLottoRound = allLottoNumbers.get(i);
+    public GameResults calculateGameResult(WinningNumbers winningNumbers) {
+        List<GameResult> gameResults = new ArrayList<>();
+        for (LottoRound presentLottoRound : allLottoNumbers) {
             int correctNumber = winningNumbers.calculateCollectNumberCount(presentLottoRound);
             boolean isCorrectBonusNumber = winningNumbers.hasBonusNumber(presentLottoRound);
             GameResult gameResult = GameResult.calculateRank(correctNumber, isCorrectBonusNumber);
-            gameResultList.add(gameResult);
+            gameResults.add(gameResult);
         }
-        return gameResultList;
+        return new GameResults(gameResults);
     }
 
     public LottoRounds combineLottoRounds(LottoRounds anotherLottoRounds) {
