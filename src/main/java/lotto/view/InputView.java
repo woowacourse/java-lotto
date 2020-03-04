@@ -36,7 +36,6 @@ public class InputView {
     }
 
     public static List<LottoRound> inputManualLottoRounds(Money money) {
-        System.out.println(INPUT_MANUAL_LOTTO_ROUNDS_HEADER);
         int manualLottoSize = inputManualLottoSize(money);
         List<LottoRound> lottoRounds = new ArrayList<>();
         for (int i = 0; i < manualLottoSize; i++) {
@@ -48,11 +47,13 @@ public class InputView {
 
     private static int inputManualLottoSize(Money money) {
         try {
+            System.out.println(INPUT_MANUAL_LOTTO_ROUNDS_HEADER);
             String input = SCANNER.nextLine();
             int manualLottoSize = Integer.parseInt(input);
-            money.validateManualLottoMoney(manualLottoSize);
+            money.validateManualLottoMoney(manualLottoSize, 1000);
             return manualLottoSize;
         } catch (NumberFormatException | PurchaseMoneyLackException e) {
+            System.out.println(e.getMessage());
             return inputManualLottoSize(money);
         }
     }

@@ -28,27 +28,26 @@ public class MoneyTest {
 
     @Test
     @SuppressWarnings("NonAsciiCharacters")
-    void calculateRound_테스트() {
+    void 나누기_테스트() {
         Money money = new Money(9400, TICKET_PRICE);
-        Assertions.assertThat(money.calculateRound())
+        Assertions.assertThat(money.devide(TICKET_PRICE))
                 .isEqualTo(9);
     }
 
     @Test
     @SuppressWarnings("NonAsciiCharacters")
-    void 수동_로또_구매_금액_부족할_경우() {
+    void 한_라운드마다_로또_티켓만큼의_값을_제거() {
         Money money = new Money(5000, TICKET_PRICE);
-        assertThatThrownBy(() -> {
-            money.validateManualLottoMoney(6);
-        }).isInstanceOf(PurchaseMoneyLackException.class);
+        money.subtract(TICKET_PRICE);
+        assertThat(money).extracting("money").isEqualTo(4000.0);
     }
 
     @Test
     @SuppressWarnings("NonAsciiCharacters")
-    void 한_라운드마다_로또_티켓만큼의_값을_제거() {
-        double ticketPrice = 1000;
-        Money money = new Money(5000, TICKET_PRICE);
-        money.subtract(ticketPrice);
-        assertThat(money).extracting("money").isEqualTo(4000.0);
+    void 수동_로또_구매_금액_비교() {
+        assertThatThrownBy(() -> {
+            Money money = new Money(5000, TICKET_PRICE);
+            money.validateManualLottoMoney(6, TICKET_PRICE);
+        }).isInstanceOf(PurchaseMoneyLackException.class);
     }
 }

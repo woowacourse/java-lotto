@@ -27,8 +27,8 @@ public class OutputView {
         int manualLottoSize = manualLottos.size();
         System.out.printf(PURCHASE_NUMBER_NOTICE
                 , manualLottos.size()
-                , money.calculateRound() - manualLottoSize);
-        System.out.println(money.calculateRound() + PURCHASE_NUMBER_POSTFIX);
+                , money.devide(1000) - manualLottoSize);
+        System.out.println(money.devide(1000) + PURCHASE_NUMBER_POSTFIX);
     }
 
     public static void printAllLottoNumbers(LottoGame lottoGame) {

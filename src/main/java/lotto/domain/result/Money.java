@@ -5,8 +5,8 @@ import lotto.domain.exception.PurchaseMoneyLackException;
 import java.util.Objects;
 
 public class Money {
-    static final int TICKET_PRICE = 1_000;
     private static final String INVALID_PURCHASE_NUMBER_EXCEPTION_MESSAGE = "최소 구매 금액 이하의 입력이 들어왔습니다.";
+    private static final String INVALID_PURCAHSE_MANUAL_LOTTO_EXCEPTION_MESSAGE = "금액이 부족합니다.";
 
     private double money;
 
@@ -21,14 +21,10 @@ public class Money {
         }
     }
 
-    public void validateManualLottoMoney(int manualLottoSize) {
-        if (calculateRound() < manualLottoSize) {
-            throw new PurchaseMoneyLackException(INVALID_PURCHASE_NUMBER_EXCEPTION_MESSAGE);
+    public void validateManualLottoMoney(int manualLottoSize, int lottoPrice) {
+        if (money < manualLottoSize * lottoPrice) {
+            throw new PurchaseMoneyLackException(INVALID_PURCAHSE_MANUAL_LOTTO_EXCEPTION_MESSAGE);
         }
-    }
-
-    public int calculateRound() {
-        return (int) money / TICKET_PRICE;
     }
 
     public int devide(int value) {
