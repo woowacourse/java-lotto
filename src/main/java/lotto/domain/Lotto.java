@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
+import lotto.util.Money;
 import lotto.util.RandomUtils;
 
 /**
@@ -19,7 +20,7 @@ import lotto.util.RandomUtils;
  */
 public class Lotto {
 	public static final int LOTTO_LENGTH = 6;
-	public static final int LOTTO_PRICE = 1_000;
+	public static final Money LOTTO_PRICE = new Money(1_000);
 
 	protected final List<LottoNumber> lottoNumbers;
 

@@ -1,8 +1,9 @@
-package lotto.domain;
+package lotto.util;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import lotto.util.Money;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullSource;
@@ -27,5 +28,11 @@ public class MoneyTest {
 		assertThatThrownBy(() -> {
 			new Money(nullInput);
 		}).isInstanceOf(NullPointerException.class);
+	}
+
+	@Test
+	void Money_두_금액_비교() {
+		assertThat(new Money(2000).isLessThen(new Money(1234)))
+			.isEqualTo(false);
 	}
 }

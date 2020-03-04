@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import lotto.util.Money;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,16 +28,13 @@ public class ResultStatisticTest {
 		LottoNumber bonus = LottoNumber.of(7);
 		winningInformation = new WinningInformation(winningLotto, bonus);
 
-		List<Lotto> tempLottos = new ArrayList<>();
-
 		List<Integer> lottoNumbersFistPrize = Arrays.asList(1, 2, 3, 4, 5, 6);
 		List<Integer> lottoNumbersForthPrize = Arrays.asList(1, 2, 3, 4, 8, 9);
 		List<Integer> lottoNumbersSixthPrize = Arrays.asList(10, 11, 12, 13, 8, 9);
 
-		tempLottos.add(Lotto.createLottoManual(lottoNumbersFistPrize));
-		tempLottos.add(Lotto.createLottoManual(lottoNumbersForthPrize));
-		tempLottos.add(Lotto.createLottoManual(lottoNumbersSixthPrize));
-		lottos = new Lottos(tempLottos);
+		lottos = Lottos.createLottos(new LottoCount(new LottoMoney(3_000), 3),
+			Arrays.asList(lottoNumbersFistPrize, lottoNumbersForthPrize, lottoNumbersSixthPrize)
+		);
 	}
 
 	@Test

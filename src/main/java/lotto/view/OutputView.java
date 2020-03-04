@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
+import lotto.domain.LottoMoney;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
-import lotto.domain.Money;
+import lotto.util.Money;
 import lotto.domain.Rank;
 import lotto.domain.ResultStatistic;
 
@@ -37,7 +38,7 @@ public class OutputView {
         printPurchasedLottos(0, autoLottosNo, lottos);
     }
 
-    public static void printPurchasedLottos(int manualLottosNo, int autoLottosNo, Lottos lottos) {
+    public static void printPurchasedLottos(long manualLottosNo, long autoLottosNo, Lottos lottos) {
         System.out.printf(PURCHASED_LOTTO_NUMBER_IS, manualLottosNo, autoLottosNo);
 
         List<String> purchasedLottos = new ArrayList<>();

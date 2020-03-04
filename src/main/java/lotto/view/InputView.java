@@ -36,7 +36,7 @@ public class InputView {
 	}
 
 
-	public static List<List<Integer>> getManualLottos(int manualLottoAmount) {
+	public static List<List<Integer>> getManualLottos(long manualLottoAmount) {
 		List<List<Integer>> lottos = new ArrayList<>();
 
 		OutputView.askEnterManualLottos();
