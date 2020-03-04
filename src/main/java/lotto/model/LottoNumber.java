@@ -18,21 +18,21 @@ public class LottoNumber {
     }
 
     private LottoNumber(int number) {
-        checkLottoNumberRange(number);
         this.lottoNumber = number;
     }
 
-    private void checkLottoNumberRange(int number) {
+    private static void checkLottoNumberRange(int number) {
         if (number < FIRST_LOTTO_NUMBER || number > LAST_LOTTO_NUMBER) {
             throw new OverRangeException(OVER_LOTTO_NUMBER_RANGE_EXCEPTION_MESSAGE);
         }
     }
 
-    public static LottoNumber lottoNumber (int number) {
+    public static LottoNumber lottoNumber(int number) {
+        checkLottoNumberRange(number);
         return lottoNumbers.get(number);
     }
 
-    public static List<LottoNumber> allLottoNumbers () {
+    public static List<LottoNumber> allLottoNumbers() {
         List<LottoNumber> allLottoNumbers = new ArrayList<>();
         for (int number : lottoNumbers.keySet()) {
             allLottoNumbers.add(lottoNumbers.get(number));

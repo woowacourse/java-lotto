@@ -5,16 +5,24 @@ import lotto.exception.OverRangeException;
 import java.util.List;
 
 public class TicketInformation {
-    public static final String OVER_RANGE_EXCEPTION_MESSAGE = "금액의 한도를 초과하였습니다.";
+    private static final String OVER_RANGE_EXCEPTION_MESSAGE = "금액의 한도를 초과하였습니다.";
+    private static final String MANUAL_TICKETS_NULL_POINTER_EXCEPTION_MESSAGE = "수동 로또가 null 값입니다.";
     private int manualTicketCount;
     private int autoTicketCount;
     private List<LottoTicket> manualTickets;
 
     public TicketInformation(int totalTicket, int manualTicketCount, List<LottoTicket> manualTickets) {
         checkOverPay(totalTicket, manualTicketCount);
+        checkNullManualTickets(manualTickets);
         this.manualTicketCount = manualTicketCount;
         this.autoTicketCount = totalTicket - manualTicketCount;
         this.manualTickets = manualTickets;
+    }
+
+    private void checkNullManualTickets(List<LottoTicket> manualTickets) {
+        if (manualTickets == null) {
+            throw new NullPointerException(MANUAL_TICKETS_NULL_POINTER_EXCEPTION_MESSAGE);
+        }
     }
 
     public void checkOverPay(int totalTicket, int manualTicket) {

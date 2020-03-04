@@ -7,6 +7,7 @@ import java.util.List;
 public class LottoTickets {
     private List<LottoTicket> lottoTickets;
     private static final List<LottoGenerator> lottoGenerators = Arrays.asList(new AutoTicket(), new ManualTicket());
+
     public LottoTickets() {
         lottoTickets = new ArrayList<>();
     }

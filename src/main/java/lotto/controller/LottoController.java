@@ -30,7 +30,8 @@ public class LottoController {
     public void makeLottoTickets() {
         OutputView.printInputManualCount();
         int manualTicketCount = InputView.inputManualCount();
-        OutputView.printTicketCount(manualTicketCount, payment.countTickets() - manualTicketCount);
+        int autoTicketCount = payment.countTickets() - manualTicketCount;
+        OutputView.printTicketCount(manualTicketCount, autoTicketCount);
         OutputView.printInputManualTicket();
         List<LottoTicket> manualTickets = new ArrayList<>();
         for (int count = 0; count < manualTicketCount; count++) {
