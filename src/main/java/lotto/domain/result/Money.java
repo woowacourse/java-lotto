@@ -35,6 +35,10 @@ public class Money {
         this.money -= ticketPrice;
     }
 
+    public boolean isSubtractable(int value) {
+        return money - value >= 0;
+    }
+
     public double getMoney() {
         return money;
     }
@@ -50,10 +54,6 @@ public class Money {
     @Override
     public int hashCode() {
         return Objects.hash(money);
-    }
-
-    public boolean isSubtractable(int value) {
-        return money - value >= 0;
     }
 }
 

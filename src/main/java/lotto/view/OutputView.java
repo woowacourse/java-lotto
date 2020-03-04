@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.LottoRound;
 import lotto.domain.number.LottoRounds;
+import lotto.domain.number.LottoRoundsGenerator;
 import lotto.domain.result.GameResult;
 import lotto.domain.result.GameResults;
 import lotto.domain.result.Money;
@@ -26,8 +27,8 @@ public class OutputView {
         int manualLottoSize = manualLottos.size();
         System.out.printf(PURCHASE_NUMBER_NOTICE
                 , manualLottos.size()
-                , money.devide(1000) - manualLottoSize);
-        System.out.println(money.devide(1000) + PURCHASE_NUMBER_POSTFIX);
+                , money.devide(LottoRoundsGenerator.LOTTO_PRICE) - manualLottoSize);
+        System.out.println(money.devide(LottoRoundsGenerator.LOTTO_PRICE) + PURCHASE_NUMBER_POSTFIX);
     }
 
     public static void printAllLottoNumbers(LottoRounds lottoRounds) {

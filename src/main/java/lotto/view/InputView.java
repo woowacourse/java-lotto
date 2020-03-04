@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.domain.exception.PurchaseMoneyLackException;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.LottoRound;
+import lotto.domain.number.LottoRoundsGenerator;
 import lotto.domain.result.Money;
 
 import java.util.*;
@@ -25,7 +26,7 @@ public class InputView {
         try {
             System.out.println(INPUT_MONEY_MESSAGE);
             String input = SCANNER.nextLine();
-            return new Money(Integer.parseInt(input), 1000);
+            return new Money(Integer.parseInt(input), LottoRoundsGenerator.LOTTO_PRICE);
         } catch (NumberFormatException e) {
             System.out.println(INVALID_INTEGER_MESSAGE);
             return inputPurchaseMoney();
@@ -50,7 +51,7 @@ public class InputView {
             System.out.println(INPUT_MANUAL_LOTTO_ROUNDS_HEADER);
             String input = SCANNER.nextLine();
             int manualLottoSize = Integer.parseInt(input);
-            money.validateManualLottoMoney(manualLottoSize, 1000);
+            money.validateManualLottoMoney(manualLottoSize, LottoRoundsGenerator.LOTTO_PRICE);
             return manualLottoSize;
         } catch (NumberFormatException | PurchaseMoneyLackException e) {
             System.out.println(e.getMessage());

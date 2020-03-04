@@ -26,7 +26,7 @@ public class ConsoleLottoApplication {
 
         GameResults gameResults = LottoGame.calculateResult(lottoRounds, inputWinningNumbers());
         OutputView.printGameResults(gameResults);
-        OutputView.printYield(LottoGame.calculateYield(money, gameResults));
+        OutputView.printYield(LottoGame.calculateYield(gameResults));
     }
 
     private static WinningNumbers inputWinningNumbers() {
