@@ -4,6 +4,7 @@ public class LottoTicketCount {
 
     private static final int LOTTO_PRICE = 1000;
     private static final String NEGATIVE_NUMBER_ERROR_MESSAGE = "0 이상의 수만 입력 가능합니다.";
+    private static final int MIN_COUNT = 0;
     private int manualCount;
     private int autoCount;
 
@@ -14,7 +15,7 @@ public class LottoTicketCount {
     }
 
     private void validateCount(int manualCount) {
-        if(manualCount<0){
+        if (manualCount < MIN_COUNT) {
             throw new IllegalArgumentException(NEGATIVE_NUMBER_ERROR_MESSAGE);
         }
     }

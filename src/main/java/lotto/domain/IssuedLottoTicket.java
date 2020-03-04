@@ -10,7 +10,6 @@ public class IssuedLottoTicket {
     private Set<LottoTicket> issuedLottoTicket;
 
     public IssuedLottoTicket(int autoLottoTicketCounts, int manualLottoTicketCounts) {
-        LottoFactory.getInstance();
         this.issuedLottoTicket = new HashSet<>();
         issueManualLottoTicket(manualLottoTicketCounts);
         issueAutoLottoTicket(autoLottoTicketCounts);
