@@ -15,7 +15,7 @@ public class Lotto {
 
     private final Set<Ball> balls;
 
-    public Lotto(Set<Ball> balls) {
+    private Lotto(Set<Ball> balls) {
         validateBallCount(balls);
         this.balls = Collections.unmodifiableSet(new HashSet<>(balls));
     }
@@ -26,8 +26,8 @@ public class Lotto {
         }
     }
 
-    public static Lotto of(String rawWinningLotto) {
-        String[] numbers = rawWinningLotto.split(SPLIT_DELIMITER);
+    public static Lotto of(String rawLotto) {
+        String[] numbers = rawLotto.split(SPLIT_DELIMITER);
         Set<Ball> balls = new HashSet<>();
         for (String number : numbers) {
             balls.add(Ball.of(Integer.parseInt(number)));
