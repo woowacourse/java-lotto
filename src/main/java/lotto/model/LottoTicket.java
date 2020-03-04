@@ -8,12 +8,20 @@ import java.util.List;
 public class LottoTicket {
     private static final int FIRST_INDEX = 0;
     private static final int LOTTO_NUMBER_LENGTH = 6;
-    private final String LOTTO_NUMBER_EXCEPTION_MESSAGE = "6개의 숫자를 입력하셔야 합니다.";
+    private static final String LOTTO_TICKET_NULL_POINTER_EXCEPTION_MESSAGE = "로또의 번호가 null입니다.";
+    private static final String LOTTO_NUMBER_EXCEPTION_MESSAGE = "6개의 숫자를 입력하셔야 합니다.";
     private List<LottoNumber> lottoTicket;
 
     public LottoTicket(List<LottoNumber> lottoTicket) {
+        checkNullLottoTicket(lottoTicket);
         checkLottoLength(lottoTicket);
         this.lottoTicket = lottoTicket;
+    }
+
+    private void checkNullLottoTicket(List<LottoNumber> lottoTicket) {
+        if (lottoTicket == null) {
+            throw new NullPointerException(LOTTO_TICKET_NULL_POINTER_EXCEPTION_MESSAGE);
+        }
     }
 
     private void checkLottoLength(List<LottoNumber> inputs) {

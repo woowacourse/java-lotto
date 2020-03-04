@@ -7,8 +7,15 @@ public class BonusBall {
     private LottoNumber bonusball;
 
     public BonusBall(WinNumber winNumber, LottoNumber bonusNumber) {
+        checkNullWinNumber(winNumber);
         checkContainsWinNumber(winNumber, bonusNumber);
         bonusball = bonusNumber;
+    }
+
+    private void checkNullWinNumber(WinNumber winNumber) {
+        if (winNumber == null) {
+            throw new NullPointerException("당첨 번호의 값이 null 입니다.");
+        }
     }
 
     private void checkContainsWinNumber(WinNumber winNumber, LottoNumber bonusNumber) {
