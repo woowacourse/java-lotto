@@ -47,7 +47,7 @@ public class LottoMachine {
 		return lottoNumbers.stream()
 				.filter(l -> l.isEqualTo(number))
 				.findFirst()
-				.orElseThrow(() -> new IllegalArgumentException(LottoNumber.LOTTO_NUMBER_OUTOF_BOUND));
+				.orElseThrow(() -> new IllegalArgumentException("범위를 벗어난 로또 숫자입니다."));
 	}
 
 	private static class LottoMachineSingletonHolder {
