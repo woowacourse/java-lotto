@@ -27,7 +27,7 @@ class WinningNumbersTest {
     @Test
     void returnRanks() {
         Money purchaseMoney = Money.createPurchaseMoney(14000);
-        TicketCounts ticketCounts = TicketCounts.fromMoneyAndManualTicketCount(purchaseMoney, 3);
+        TicketCounts ticketCounts = TicketCounts.from(purchaseMoney, 3);
         List<String> manualLottoNumbers = Arrays.asList("1,2,3,10,11,12",
                 "1,2,3,4,5,12",
                 "1,2,3,4,5,6");

@@ -12,8 +12,8 @@ public class ConsoleLottoApplication {
 
     public static void main(String[] args) {
         Money purchaseMoney = createPurchaseMoney();
-        int manualTicketCount = inputManualLottoCount();
-        TicketCounts ticketCounts = TicketCounts.fromMoneyAndManualTicketCount(purchaseMoney, manualTicketCount);
+        int manualTicketCount = inputManualTicketCount();
+        TicketCounts ticketCounts = TicketCounts.from(purchaseMoney, manualTicketCount);
 
         LottoTickets lottoTickets = createLottoTickets(ticketCounts);
         OutputView.printLottos(ticketCounts, lottoTickets);
@@ -37,12 +37,12 @@ public class ConsoleLottoApplication {
         }
     }
 
-    private static int inputManualLottoCount() {
+    private static int inputManualTicketCount() {
         try {
-            return Integer.parseInt(InputView.inputManualLottoTicketCount());
+            return Integer.parseInt(InputView.inputManualTicketCount());
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
-            return inputManualLottoCount();
+            return inputManualTicketCount();
         }
     }
 
