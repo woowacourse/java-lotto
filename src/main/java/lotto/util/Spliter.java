@@ -1,7 +1,6 @@
 package lotto.util;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Spliter {
@@ -24,8 +23,7 @@ public class Spliter {
             for (int i = 0; i < splitedInput.length; i++) {
                 result.add(Integer.parseInt(splitedInput[i]));
             }
-        }
-        catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new NumberFormatException(NUMBER_INPUT_ERROR_MESSAGE);
         }
         return result;
