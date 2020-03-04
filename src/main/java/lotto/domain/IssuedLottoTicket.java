@@ -9,9 +9,8 @@ public class IssuedLottoTicket {
 
     private Set<LottoTicket> issuedLottoTicket;
 
-    public IssuedLottoTicket(int allLottoTicketCounts, int manualLottoTicketCounts) {
+    public IssuedLottoTicket(int autoLottoTicketCounts, int manualLottoTicketCounts) {
         this.issuedLottoTicket = new HashSet<>();
-        int autoLottoTicketCounts = allLottoTicketCounts - manualLottoTicketCounts;
         issueManualLottoTicket(manualLottoTicketCounts);
         issueAutoLottoTicket(autoLottoTicketCounts);
     }
