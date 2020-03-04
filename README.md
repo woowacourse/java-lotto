@@ -185,3 +185,18 @@
 - [x] LottoTicket 클래스 내 lottoTicket의 Integer 값을 포장하라.
 - [x] ManualTicket과 AutoTicket을 상속이 아닌 interface를 활용하라.
 - [x] 테스트 코드 검토하라.
+
+### 세번째 피드백
+- [ ] 피드백 요청 전에 테스트 코드를 실행하라.
+- [ ] 로또 번호 범위를 관리하는 주체를 확인하라.
+- [ ] 로또 번호 자릿수를 관리하는 주체를 확인하라.
+- [ ] 불필요한 지역 변수 생성을 제거하라.
+- [ ] BonusBall의 checkContainsWinNumber 메소드에서 winNumber의 null 체크를 하라.
+- [ ] 인터페이스명을 변경하라.
+- [ ] LottoResult에서 LottoRank.values()를 활용하라.
+- [ ] LottoTicket의 checkLottoLength 메소드에서 inputs의 null 체크를 하라.
+- [ ] LottoTickets의 combineTickets 메소드에서 중복 코드를 제거하라.
+- [ ] LottoTickets에서 LottoGenerator를 생성하여 combineTickets 메서드를 수정하지 않도록 개선하라.
+- [ ] ManualTicket에서 InputView를 제거하라.
+- [ ] ManualTicket에서 createManualTicket 메서드를 제거하라.
+- [ ] LottoNumber에서 매번 새로운 LottoNumber를 생성하지 말고 미리 생성하여 사용하라.

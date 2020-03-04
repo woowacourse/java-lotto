@@ -1,11 +1,13 @@
 package lotto.model;
 
+import lotto.exception.OverRangeException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LottoNumberTest {
@@ -15,6 +17,18 @@ public class LottoNumberTest {
     private LottoNumber four = new LottoNumber(4);
     private LottoNumber five = new LottoNumber(5);
     private LottoNumber six = new LottoNumber(6);
+
+    @Test
+    @DisplayName("숫자가 1 ~ 45 범위를 초과할 경우")
+    void checkLottoNumberRange() {
+        assertThatThrownBy(() -> {
+            new LottoNumber(0);
+        }).isInstanceOf(OverRangeException.class);
+
+        assertThatThrownBy(() -> {
+            new LottoNumber(46);
+        }).isInstanceOf(OverRangeException.class);
+    }
 
     @Test
     @DisplayName("정렬되는지 확인")
