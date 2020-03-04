@@ -24,23 +24,23 @@ public class LottoMachine {
 		List<Lotto> lottos = new ArrayList<>();
 
 		for (int i = 0; i < lottoCount.getAutoLottoCount(); i++) {
-			lottos.add(new Lotto(pickRandomBalls()));
+			lottos.add(pickRandomBalls());
 		}
 		return lottos;
 	}
 
-	private List<LottoNumber> pickRandomBalls() {
+	private Lotto pickRandomBalls() {
 		Collections.shuffle(lottoNumbers);
-		return lottoNumbers.stream()
+		return new Lotto(lottoNumbers.stream()
 				.limit(Lotto.SIZE)
 				.sorted()
-				.collect(Collectors.toList());
+				.collect(Collectors.toList()));
 	}
 
-	public List<LottoNumber> pickDedicatedBalls(List<Integer> LottoNumbers) {
-		return LottoNumbers.stream()
+	public Lotto pickDedicatedBalls(List<Integer> LottoNumbers) {
+		return new Lotto(LottoNumbers.stream()
 				.map(this::pickBall)
-				.collect(Collectors.toList());
+				.collect(Collectors.toList()));
 	}
 
 	public LottoNumber pickBall(int number) {
