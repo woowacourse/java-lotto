@@ -4,11 +4,22 @@ import java.util.*;
 
 public class LottoResult {
 
+    private static final int RATE = 100;
+
     private Map<WinningValue, Integer> lottoResult = new LinkedHashMap<>();
 
     public LottoResult() {
         Arrays.stream(WinningValue.values())
                 .forEach(winningValue -> this.lottoResult.put(winningValue, 0));
+    }
+
+    int calculateRewardRate(int money) {
+        return this.lottoResult.entrySet()
+                .stream()
+                .mapToInt(result ->
+                        result.getKey().getReward()
+                                * result.getValue())
+                .sum() / money * RATE;
     }
 
     void analyzeRank(Set<LottoTicket> lottoTickets,WinningLotto winningLotto){
