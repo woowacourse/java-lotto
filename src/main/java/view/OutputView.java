@@ -106,8 +106,8 @@ public class OutputView {
         System.out.printf(PROFIT_RATIO_GUIDE_MESSAGE, profitRatio);
     }
 
-    public static void printExceptionMessage(final RuntimeException e) {
-        System.out.println(e.getMessage());
+    public static void printExceptionMessage(final String message) {
+        System.out.println(message);
         System.out.println(REQUEST_RE_ENTER_MESSAGE);
     }
 }

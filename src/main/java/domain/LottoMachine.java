@@ -29,7 +29,7 @@ public class LottoMachine {
             LottoGenerator lottoGenerator = new ManualLottoGenerator(InputView.inputManualLottoNumbers());
             lottos.add(lottoGenerator.generateLotto());
         } catch (IllegalArgumentException | NullPointerException e) {
-            OutputView.printExceptionMessage(e);
+            OutputView.printExceptionMessage(e.getMessage());
             inputManualNumbersWithValidation(lottos);
         }
     }

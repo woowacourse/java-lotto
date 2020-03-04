@@ -12,7 +12,7 @@ public class InputView {
         try {
             return inputIntegerValueWithValidation();
         } catch (NumberFormatException e) {
-            OutputView.printExceptionMessage(e);
+            OutputView.printExceptionMessage(e.getMessage());
             return inputPurchaseAmount();
         }
     }
@@ -22,7 +22,7 @@ public class InputView {
         try {
             return inputIntegerValueWithValidation();
         } catch (NumberFormatException e) {
-            OutputView.printExceptionMessage(e);
+            OutputView.printExceptionMessage(e.getMessage());
             return inputManualCount();
         }
     }
@@ -32,7 +32,7 @@ public class InputView {
         try {
             return inputIntegerArrayWithValidation();
         } catch (NumberFormatException e) {
-            OutputView.printExceptionMessage(e);
+            OutputView.printExceptionMessage(e.getMessage());
             return inputManualLottoNumbers();
         }
     }
@@ -42,7 +42,7 @@ public class InputView {
         try {
             return inputIntegerArrayWithValidation();
         } catch (NumberFormatException e) {
-            OutputView.printExceptionMessage(e);
+            OutputView.printExceptionMessage(e.getMessage());
             return inputWinningNumbers();
         }
     }
@@ -63,7 +63,7 @@ public class InputView {
         try {
             return inputIntegerValueWithValidation();
         } catch (NumberFormatException e) {
-            OutputView.printExceptionMessage(e);
+            OutputView.printExceptionMessage(e.getMessage());
             return inputBonusNumber();
         }
     }

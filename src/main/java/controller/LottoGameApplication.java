@@ -24,7 +24,7 @@ public class LottoGameApplication {
         try {
             return new LottoCount(money.getLottoCount(), InputView.inputManualCount());
         } catch (IllegalArgumentException | NullPointerException e) {
-            OutputView.printExceptionMessage(e);
+            OutputView.printExceptionMessage(e.getMessage());
             return inputLottoCountWithValidation(money);
         }
     }
@@ -33,7 +33,7 @@ public class LottoGameApplication {
         try {
             return new Money(InputView.inputPurchaseAmount());
         } catch (IllegalArgumentException | NullPointerException e) {
-            OutputView.printExceptionMessage(e);
+            OutputView.printExceptionMessage(e.getMessage());
             return inputPurchaseAmountWithValidation();
         }
     }
@@ -42,7 +42,7 @@ public class LottoGameApplication {
         try {
             return new WinningNumber(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
         } catch (IllegalArgumentException | NullPointerException e) {
-            OutputView.printExceptionMessage(e);
+            OutputView.printExceptionMessage(e.getMessage());
             return inputWinningNumberWithValidation();
         }
     }
