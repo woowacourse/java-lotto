@@ -20,6 +20,7 @@ public class LottoResultTest {
 
     List<Integer> lottoNumbers = new ArrayList<>();
     Set<LottoTicket> lottoTickets = new HashSet<>();
+    LottoResult lottoResult = new LottoResult();
 
     @BeforeEach
     void setUp() {
@@ -45,9 +46,16 @@ public class LottoResultTest {
     @DisplayName("맞은 번호 개수에 따른 등수 계산")
     void analyzeRank(WinningValue rank) {
         WinningLotto winningLotto = new WinningLotto(LottoFactory.createManualLottoNumbers(lottoNumbers), 7);
-        LottoResult lottoResult = new LottoResult();
         lottoResult.analyzeRank(lottoTickets, winningLotto);
         assertThat(lottoResult.getLottoResult().get(rank)).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("수익률 계산")
+    void calculateRewardRate(){
+        WinningLotto winningLotto = new WinningLotto(LottoFactory.createManualLottoNumbers(lottoNumbers), 7);
+        lottoResult.analyzeRank(lottoTickets, winningLotto);
+        assertThat(lottoResult.calculateRewardRate(5000)).isEqualTo(40630100);
     }
 
 }
