@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -7,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 
 public class WinningLottoTest {
@@ -29,5 +30,17 @@ public class WinningLottoTest {
     void validateBonusNumberDuplication() {
         assertThatThrownBy(() -> new WinningLotto(LottoFactory.createManualLottoNumbers(lottoNumbers), 1))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("보너스볼인지 확인하는 테스트")
+    void isEqualToBonus(){
+        WinningLotto winningLotto = new WinningLotto(LottoFactory.createManualLottoNumbers(lottoNumbers), 7);
+        LottoTicket lottoTicket1 = new LottoTicket(LottoFactory.createManualLottoNumbers(lottoNumbers));
+        lottoNumbers.remove(1);
+        lottoNumbers.add(7);
+        LottoTicket lottoTicket2 = new LottoTicket(LottoFactory.createManualLottoNumbers(lottoNumbers));
+        assertThat(winningLotto.isEqualToBonus(lottoTicket1.getLottoTicket())).isFalse();
+        assertThat(winningLotto.isEqualToBonus(lottoTicket2.getLottoTicket())).isTrue();
     }
 }

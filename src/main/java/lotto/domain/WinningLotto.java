@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.Set;
 
 public class WinningLotto {
@@ -21,4 +22,11 @@ public class WinningLotto {
         }
     }
 
+    public boolean isEqualToBonus(Set<LottoNumber> numbers){
+        return numbers.contains(this.bonusNumber);
+    }
+
+    public LottoTicket getWinningLottoNumber() {
+        return winningLottoNumber;
+    }
 }
