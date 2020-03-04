@@ -21,9 +21,9 @@ public enum Rank {
     }
 
     public static Rank getRank(int numberOfMatch, boolean isBonus) {
-         return Arrays.stream(values())
+        return Arrays.stream(values())
                 .filter(rank -> rank.matchingNumbers == numberOfMatch)
-                .filter(rank->rank.checkBonus(isBonus))
+                .filter(rank -> rank.checkBonus(isBonus))
                 .findFirst()
                 .orElse(DEFAULT);
     }
@@ -47,10 +47,7 @@ public enum Rank {
         return true;
     }
 
-    public boolean isBonus(){
-        if(this==BONUS){
-            return true;
-        }
-        return false;
+    public boolean isBonus() {
+        return this == BONUS;
     }
 }

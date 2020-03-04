@@ -3,6 +3,7 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
@@ -47,5 +48,17 @@ class LottoFactoryTest {
     void makeLottosTest() {
         Lottos lottos = LottoFactory.create(3);
         assertThat(lottos.getSize()).isEqualTo(3);
+
+    }
+
+    @Test
+    void makeManualLottosTest(){
+        List<String> manual = Arrays.asList("1,2,3,4,5,6", "3,4,5,6,7,8");
+        Lottos lottos = LottoFactory.create(manual, 10);
+        Lotto firstLotto = LottoFactory.create("1,2,3,4,5,6");
+        Lotto secondLotto = LottoFactory.create("3,4,5,6,7,8");
+        Iterator<Lotto> lottoIterator = lottos.iterator();
+        assertThat(lottoIterator.next().compare(firstLotto)).isEqualTo(6);
+        assertThat(lottoIterator.next().compare(secondLotto)).isEqualTo(6);
     }
 }

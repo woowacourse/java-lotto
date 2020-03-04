@@ -10,8 +10,8 @@ import lotto.domain.result.GameResult;
 import lotto.domain.result.Rank;
 
 public class OutputView {
-    public static void printPieces(int parseToPiece) {
-        System.out.println(parseToPiece + "개를 구매했습니다.");
+    public static void printPieces(int manualCount, int autoCount) {
+        System.out.println("수동으로 " +manualCount+ "장, 자동으로 "+autoCount+"개를 구매했습니다.");
     }
 
     public static void printLottos(Lottos lottos) {

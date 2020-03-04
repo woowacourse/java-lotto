@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
+import lotto.exception.EmptyInputException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -32,22 +33,22 @@ public class NumberTest {
     @DisplayName("수를 문자열로 입력하는 경우")
     void numberFormatTest(String value) {
         assertThatThrownBy(() -> new Number(value))
-                .isInstanceOf(InvalidNumberException.class)
-                .hasMessageMatching("문자는 사용이 불가능합니다.");
+                .isInstanceOf(NumberFormatException.class)
+                .hasMessageMatching("문자열은 사용할 수 없습니다.");
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"", "   "})
     void 공백_테스트(String value) {
         assertThatThrownBy(() -> new Number(value))
-                .isInstanceOf(InvalidNumberException.class)
-                .hasMessageMatching("공백은 사용이 불가능합니다.");
+                .isInstanceOf(EmptyInputException.class)
+                .hasMessageMatching("공백은 사용할 수 없습니다.");
     }
 
     @Test
     void NULL_테스트() {
         assertThatThrownBy(() -> new Number(null))
-                .isInstanceOf(InvalidNumberException.class)
-                .hasMessageMatching("Null문자열은 사용이 불가능합니다.");
+                .isInstanceOf(NullPointerException.class)
+                .hasMessageMatching("널문자는 사용할 수 없습니다.");
     }
 }
