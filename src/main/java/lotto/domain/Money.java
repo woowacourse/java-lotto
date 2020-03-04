@@ -23,8 +23,8 @@ public class Money {
         return new Money(purchaseMoney);
     }
 
-    private static void validateMoneyIsSufficient(int moneyValue) {
-        if (moneyValue < MIN_PURCHASE_MONEY) {
+    private static void validateMoneyIsSufficient(int purchaseMoney) {
+        if (purchaseMoney < MIN_PURCHASE_MONEY) {
             throw new MoneyException();
         }
     }
