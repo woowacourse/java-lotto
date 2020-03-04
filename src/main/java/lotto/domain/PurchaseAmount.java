@@ -16,7 +16,7 @@ public class PurchaseAmount {
         this.manualLottoAmount = manualLottoAmount;
     }
 
-    private static void validatePurchaseMoney(int randomLottoAmount, int manualLottoAmount) {
+    private void validatePurchaseMoney(int randomLottoAmount, int manualLottoAmount) {
         if (randomLottoAmount + manualLottoAmount < MINIMUM_AMOUNT) {
             throw new OutOfRangeException(OUT_OF_RANGE_PURCHASE_MONEY_EXCEPTION_MESSAGE);
         }
