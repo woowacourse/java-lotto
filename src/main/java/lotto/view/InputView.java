@@ -25,7 +25,7 @@ public class InputView {
         try {
             System.out.println(INPUT_MONEY_MESSAGE);
             String input = SCANNER.nextLine();
-            return new Money(Integer.parseInt(input));
+            return new Money(Integer.parseInt(input), 1000);
         } catch (NumberFormatException e) {
             System.out.println(INVALID_INTEGER_MESSAGE);
             return inputPurchaseMoney();

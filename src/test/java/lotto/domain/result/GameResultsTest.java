@@ -9,6 +9,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class GameResultsTest {
+    private static final int TICKET_PRICE = 1000;
     private final List<GameResult> results = new ArrayList<>();
 
     @BeforeEach
@@ -53,7 +54,7 @@ public class GameResultsTest {
     @SuppressWarnings("NonAsciiCharacters")
     void 수익률_계산() {
         // given
-        Money money = new Money(7000);
+        Money money = new Money(7000, TICKET_PRICE);
         GameResult round1 = GameResult.FIRST_RANK; // 2000000000
         GameResult round2 = GameResult.FIFTH_RANK; // 5000
         GameResult round3 = GameResult.SECOND_RANK; // 30000000
@@ -75,6 +76,6 @@ public class GameResultsTest {
         double result = gameResults.calculateYield(money);
         double sumOfBenefit = 6030005000.0;
         // then
-        assertThat(result).isEqualTo((sumOfBenefit / (7 * Money.TICKET_PRICE)) * GameResults.MULTIPLE_PERCENTAGE);
+        assertThat(result).isEqualTo((sumOfBenefit / (7 * TICKET_PRICE)) * GameResults.MULTIPLE_PERCENTAGE);
     }
 }

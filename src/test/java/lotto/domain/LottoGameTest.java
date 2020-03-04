@@ -14,10 +14,12 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoGameTest {
+    static final int TICKET_PRICE = 1_000;
+
     @Test
     @SuppressWarnings("NonAsciiCharacters")
     void 로또게임생성() {
-        Money money = new Money(10000);
+        Money money = new Money(10000, TICKET_PRICE);
         List<LottoNumber> manualLottoRound1 = new ArrayList<>();
         manualLottoRound1.add(LottoNumber.of(1));
         manualLottoRound1.add(LottoNumber.of(2));
@@ -50,13 +52,13 @@ class LottoGameTest {
         LottoGame result = LottoGame.initialize(money, manualLottos);
 
         assertThat(result).isInstanceOf(LottoGame.class);
-        assertThat(result).extracting("money").isEqualTo(new Money(10000));
+        assertThat(result).extracting("money").isEqualTo(new Money(10000, TICKET_PRICE));
     }
 
     @Test
     @SuppressWarnings("NonAsciiCharacters")
     void 로또_결과_생성() {
-        LottoGame lottoGame = LottoGame.initialize(new Money(3000), Collections.emptyList());
+        LottoGame lottoGame = LottoGame.initialize(new Money(3000, TICKET_PRICE), Collections.emptyList());
         List<LottoNumber> winningNumberArguments = new ArrayList<>();
         winningNumberArguments.add(LottoNumber.of(1));
         winningNumberArguments.add(LottoNumber.of(2));

@@ -10,13 +10,13 @@ public class Money {
 
     private double money;
 
-    public Money(double money) {
-        validateMinimumMoney(money);
+    public Money(double money, int lowerBound) {
+        validateMinimumMoney(money, lowerBound);
         this.money = money;
     }
 
-    private void validateMinimumMoney(double money) {
-        if (money < TICKET_PRICE) {
+    private void validateMinimumMoney(double money, int lowerBound) {
+        if (money < lowerBound) {
             throw new PurchaseMoneyLackException(INVALID_PURCHASE_NUMBER_EXCEPTION_MESSAGE);
         }
     }
@@ -29,6 +29,14 @@ public class Money {
 
     public int calculateRound() {
         return (int) money / TICKET_PRICE;
+    }
+
+    public int devide(int value) {
+        return (int) money / value;
+    }
+
+    public void subtract(double ticketPrice) {
+        this.money -= ticketPrice;
     }
 
     public double getMoney() {
@@ -46,10 +54,6 @@ public class Money {
     @Override
     public int hashCode() {
         return Objects.hash(money);
-    }
-
-    public void subtract(double ticketPrice) {
-        this.money -= ticketPrice;
     }
 }
 

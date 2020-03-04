@@ -9,9 +9,11 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoRoundsGeneratorTest {
+    static final int TICKET_PRICE = 1_000;
+
     @Test
     void 로또_생성_test() {
-        Money money = new Money(5000);
+        Money money = new Money(5000, TICKET_PRICE);
 
         List<LottoNumber> manualLottoRound1 = new ArrayList<>();
         manualLottoRound1.add(LottoNumber.of(1));

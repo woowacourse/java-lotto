@@ -10,10 +10,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class MoneyTest {
+    private static final int TICKET_PRICE = 1000;
     @Test
     @SuppressWarnings("NonAsciiCharacters")
     void 생성자테스트() {
-        assertThat(new Money(1000)).isInstanceOf(Money.class);
+        assertThat(new Money(1000, TICKET_PRICE)).isInstanceOf(Money.class);
     }
 
     @ParameterizedTest
@@ -21,14 +22,14 @@ public class MoneyTest {
     @ValueSource(ints = {999, 0})
     void 최소_구매_금액보다_작은_입력의_생성자가_실행될_경우(int value) {
         Assertions.assertThatThrownBy(() -> {
-            Money money = new Money(value);
+            Money money = new Money(value, TICKET_PRICE);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     @SuppressWarnings("NonAsciiCharacters")
     void calculateRound_테스트() {
-        Money money = new Money(9400);
+        Money money = new Money(9400, TICKET_PRICE);
         Assertions.assertThat(money.calculateRound())
                 .isEqualTo(9);
     }
@@ -36,7 +37,7 @@ public class MoneyTest {
     @Test
     @SuppressWarnings("NonAsciiCharacters")
     void 수동_로또_구매_금액_부족할_경우() {
-        Money money = new Money(5000);
+        Money money = new Money(5000, TICKET_PRICE);
         assertThatThrownBy(() -> {
             money.validateManualLottoMoney(6);
         }).isInstanceOf(PurchaseMoneyLackException.class);
@@ -46,7 +47,7 @@ public class MoneyTest {
     @SuppressWarnings("NonAsciiCharacters")
     void 한_라운드마다_로또_티켓만큼의_값을_제거() {
         double ticketPrice = 1000;
-        Money money = new Money(5000);
+        Money money = new Money(5000, TICKET_PRICE);
         money.subtract(ticketPrice);
         assertThat(money).extracting("money").isEqualTo(4000.0);
     }
