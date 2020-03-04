@@ -12,11 +12,4 @@ public class LottosDto {
 	public List<LottoDto> getLottosDto() {
 		return lottosDto;
 	}
-
-	@Override
-	public String toString() {
-		return lottosDto.stream()
-				.map(LottoDto::toString)
-				.toString();
-	}
 }

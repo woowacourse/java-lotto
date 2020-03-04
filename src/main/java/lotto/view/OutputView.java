@@ -1,7 +1,6 @@
 package lotto.view;
 
 import lotto.domain.WinningPrize;
-import lotto.dto.LottoDto;
 import lotto.dto.LottosDto;
 
 import java.util.Map;
@@ -16,9 +15,7 @@ public class OutputView {
 	}
 
 	public static void printLottos(LottosDto lottosDto) {
-		for (LottoDto lotto : lottosDto.getLottosDto()) {
-			System.out.println(lotto);
-		}
+		lottosDto.getLottosDto().forEach(System.out::println);
 	}
 
 	public static void printWrongBonusNumberInput() {

@@ -16,7 +16,7 @@ public class LottoController {
 	public static void run() {
 		Lottos lottos = buyLottos();
 
-		OutputView.printLottos(lottos.makeLottoDtos());
+		OutputView.printLottos(lottos.makeLottosDto());
 		List<WinningPrize> winningPrizes = lottos.findAllLottoPrizes(readWinningNumber());
 
 		LottoResult lottoResult = new LottoResult(winningPrizes);

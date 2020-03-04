@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.dto.LottosDto;
 import lotto.exception.LottosException;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -12,7 +13,7 @@ public class Lottos {
 
 	public Lottos(final List<Lotto> lottos) {
 		validateNullAndEmpty(lottos);
-		this.lottos = lottos;
+		this.lottos = Collections.unmodifiableList(lottos);
 	}
 
 	private void validateNullAndEmpty(List<Lotto> lottos) {
@@ -21,7 +22,7 @@ public class Lottos {
 		}
 	}
 
-	public LottosDto makeLottoDtos() {
+	public LottosDto makeLottosDto() {
 		return new LottosDto(lottos.stream()
 				.map(Lotto::makeLottoDto)
 				.collect(Collectors.toList()));
