@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.util.Spliter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -26,6 +27,14 @@ public class LottoTicketTest {
                 .doesNotThrowAnyException();
         assertThatThrownBy(() -> new LottoTicket(LottoFactory.createManualLottoNumbers(lottoNumbers)))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("두 로또를 비교해 맞은 개수 반환 테스트")
+    void countSameNumbers() {
+        LottoTicket lotto = new LottoTicket(LottoFactory.createManualLottoNumbers(Spliter.splitInput("1,2,3,4,5,6")));
+        LottoTicket lottoToCompare = new LottoTicket(LottoFactory.createManualLottoNumbers(Spliter.splitInput("1,2,3,4,10,8")));
+        assertThat(lotto.countSameNumbers(lottoToCompare)).isEqualTo(4);
     }
 
 }
