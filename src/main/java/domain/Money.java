@@ -7,32 +7,23 @@ public class Money {
 
     private int purchaseAmount;
 
-    public Money(final String inputPurchaseAmount) {
-        checkNotNumber(inputPurchaseAmount);
-        this.purchaseAmount = Integer.parseInt(inputPurchaseAmount);
-        checkNegativeAmount();
-        checkUnderLottoPrice();
+    public Money(final int purchaseAmount) {
+        checkNegativeAmount(purchaseAmount);
+        checkUnderLottoPrice(purchaseAmount);
+        this.purchaseAmount = purchaseAmount;
     }
 
     public int calculateProfitRatio(final LottoResult lottoResult) {
         return lottoResult.calculateTotalProfit() / (getLottoCount() * LOTTO_PRICE) * PERCENTAGE;
     }
 
-    private void checkUnderLottoPrice() {
+    private void checkUnderLottoPrice(final int purchaseAmount) {
         if (purchaseAmount < LOTTO_PRICE) {
             throw new IllegalArgumentException("로또 한장 가격보다 낮은 금액을 입력하셨습니다.");
         }
     }
 
-    private void checkNotNumber(final String inputMoney) {
-        try {
-            Integer.parseInt(inputMoney);
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("구매 금액은 숫자여야합니다.");
-        }
-    }
-
-    private void checkNegativeAmount() {
+    private void checkNegativeAmount(final int purchaseAmount) {
         if (purchaseAmount < NEGATIVE_CRITERIA_POINT) {
             throw new IllegalArgumentException("구매 금액은 음수일 수 없습니다.");
         }

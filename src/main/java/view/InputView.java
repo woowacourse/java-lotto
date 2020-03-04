@@ -1,35 +1,79 @@
 package view;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class InputView {
-    private static final Scanner scanner = new Scanner(System.in);
+    private static final Scanner SCANNER = new Scanner(System.in);
     private static final String COMMA = ",";
 
-    public static String inputPurchaseAmount() {
+    public static int inputPurchaseAmount() {
         OutputView.printInputPurchaseAmountMessage();
-        return scanner.nextLine();
+        try {
+            return inputIntegerValueWithValidation();
+        } catch (NumberFormatException e) {
+            OutputView.printExceptionMessage(e);
+            return inputPurchaseAmount();
+        }
     }
 
-    public static String inputManualCount() {
+    public static int inputManualCount() {
         OutputView.printInputManualCountMessage();
-        return scanner.nextLine();
+        try {
+            return inputIntegerValueWithValidation();
+        } catch (NumberFormatException e) {
+            OutputView.printExceptionMessage(e);
+            return inputManualCount();
+        }
     }
 
-    public static String[] inputManualLottoNumbers() {
+    public static int[] inputManualLottoNumbers() {
         OutputView.printInputManualLottoNumbersMessage();
-        return scanner.nextLine()
-                .split(COMMA);
+        try {
+            return inputIntegerArrayWithValidation();
+        } catch (NumberFormatException e) {
+            OutputView.printExceptionMessage(e);
+            return inputManualLottoNumbers();
+        }
     }
 
-    public static String[] inputWinningNumbers() {
+    public static int[] inputWinningNumbers() {
         OutputView.printInputWinningNumbersMessage();
-        return scanner.nextLine()
-                .split(COMMA);
+        try {
+            return inputIntegerArrayWithValidation();
+        } catch (NumberFormatException e) {
+            OutputView.printExceptionMessage(e);
+            return inputWinningNumbers();
+        }
     }
 
-    public static String inputBonusNumber() {
+    private static int[] inputIntegerArrayWithValidation() {
+        try {
+            return Arrays.stream(SCANNER.nextLine().split(COMMA))
+                    .map(String::trim)
+                    .mapToInt(Integer::parseInt)
+                    .toArray();
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("숫자만 입력할 수 있습니다.");
+        }
+    }
+
+    public static int inputBonusNumber() {
         OutputView.printInputBonusNumberMessage();
-        return scanner.nextLine();
+        try {
+            return inputIntegerValueWithValidation();
+        } catch (NumberFormatException e) {
+            OutputView.printExceptionMessage(e);
+            return inputBonusNumber();
+        }
+    }
+
+    private static int inputIntegerValueWithValidation() {
+        try {
+            String trimmedInput = SCANNER.nextLine().trim();
+            return Integer.parseInt(trimmedInput);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("숫자만 입력할 수 있습니다.");
+        }
     }
 }

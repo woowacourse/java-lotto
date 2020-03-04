@@ -10,14 +10,11 @@ public class WinningNumber {
     private Lotto winningNumbers;
     private LottoNumber bonusNumber;
 
-    public WinningNumber(final String[] winningNumbers, String bonusNumber) {
+    public WinningNumber(final int[] winningNumbers, int bonusNumber) {
         LottoGenerator lottoGenerator = new ManualLottoGenerator(winningNumbers);
         this.winningNumbers = lottoGenerator.generateLotto();
-        checkNotNumber(bonusNumber);
-        bonusNumber = bonusNumber.trim();
-        int bonusIntegerValue = Integer.parseInt(bonusNumber);
-        checkLottoNumberRange(bonusIntegerValue);
-        this.bonusNumber = AllLottoNumbers.get(bonusIntegerValue);
+        checkLottoNumberRange(bonusNumber);
+        this.bonusNumber = AllLottoNumbers.get(bonusNumber);
         checkDuplicatedLottoNumber();
     }
 

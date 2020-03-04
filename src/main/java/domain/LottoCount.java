@@ -1,16 +1,12 @@
 package domain;
 
-import java.util.Objects;
-
 public class LottoCount {
     private static final int NEGATIVE_CRITERIA_POINT = 0;
     private int manualCount;
     private int autoCount;
 
-    public LottoCount(final int lottoCount, final String inputManualCount) {
-        Objects.requireNonNull(inputManualCount);
-        checkNotNumber(inputManualCount);
-        this.manualCount = Integer.parseInt(inputManualCount);
+    public LottoCount(final int lottoCount, final int manualCount) {
+        this.manualCount = manualCount;
         checkManualAvailableRange(lottoCount);
         this.autoCount = lottoCount - manualCount;
     }
@@ -23,15 +19,6 @@ public class LottoCount {
 
     private boolean isManualAvailableRange(final int lottoCount) {
         return manualCount < NEGATIVE_CRITERIA_POINT || manualCount > lottoCount;
-    }
-
-    private void checkNotNumber(final String number) {
-        Objects.requireNonNull(number);
-        try {
-            Integer.parseInt(number);
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(String.format("문자는 입력될 수 없습니다. 현재 입력 : %s ", number));
-        }
     }
 
     public int getAutoCount() {

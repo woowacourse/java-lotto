@@ -5,22 +5,16 @@ import java.util.Arrays;
 import static java.util.stream.Collectors.toList;
 
 public class ManualLottoGenerator implements LottoGenerator {
-    private String[] manualLotto;
+    private int[] manualLotto;
 
-    public ManualLottoGenerator(final String[] manualLotto) {
+    public ManualLottoGenerator(final int[] manualLotto) {
         this.manualLotto = manualLotto;
     }
 
     @Override
     public Lotto generateLotto() {
-        try {
-            return new Lotto(Arrays.stream(manualLotto)
-                    .map(String::trim)
-                    .mapToInt(Integer::parseInt)
-                    .mapToObj(AllLottoNumbers::get)
-                    .collect(toList()));
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException("로또 넘버는 숫자여야 합니다.");
-        }
+        return new Lotto(Arrays.stream(manualLotto)
+                .mapToObj(AllLottoNumbers::get)
+                .collect(toList()));
     }
 }

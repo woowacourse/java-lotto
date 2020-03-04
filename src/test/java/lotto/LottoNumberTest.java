@@ -21,17 +21,8 @@ public class LottoNumberTest {
     }
 
     @Test
-    @DisplayName("로또 번호가 숫자가 아닌경우 예외 발생 확인")
-    void checkNotNumberTest() {
-        assertThatThrownBy(() -> {
-            new LottoNumber("a");
-        }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(String.format("로또 넘버는 숫자여야 합니다. 입력한 문자 : %s", "a"));
-    }
-
-    @Test
     @DisplayName("String 숫자로 로또 넘버 생성 확인 및 equals 동치 확인")
     void createLottoNumberWithStringNumberTest() {
-        assertThat(new LottoNumber("1")).isEqualTo(new LottoNumber(1));
+        assertThat(new LottoNumber(1)).isEqualTo(new LottoNumber(1));
     }
 }
