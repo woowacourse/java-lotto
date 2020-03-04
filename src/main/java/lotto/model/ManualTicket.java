@@ -10,13 +10,8 @@ public class ManualTicket implements LottoGenerator {
     public List<LottoTicket> generate(TicketNumber ticketNumber) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         for (int i = 0; i < ticketNumber.getManualTicket(); i++) {
-            lottoTickets.add(createManualTicket(InputView.inputLottoTicket()));
+            lottoTickets.add(new LottoTicket(InputView.inputLottoTicket()));
         }
         return lottoTickets;
-    }
-
-    public LottoTicket createManualTicket(List<LottoNumber> manualTicket) {
-        LottoTicket lottoTicket = new LottoTicket(manualTicket);
-        return lottoTicket;
     }
 }
