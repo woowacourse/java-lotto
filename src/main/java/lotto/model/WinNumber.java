@@ -5,8 +5,8 @@ import java.util.List;
 public class WinNumber {
     private LottoTicket winNumbers;
 
-    public WinNumber(List<LottoNumber> winningNumbers) {
-        this.winNumbers = new LottoTicket(winningNumbers);
+    public WinNumber(LottoTicket winNumbers) {
+        this.winNumbers = winNumbers;
     }
 
     public boolean contains(LottoNumber lottoNumber) {

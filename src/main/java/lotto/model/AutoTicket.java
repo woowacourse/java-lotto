@@ -7,9 +7,9 @@ import java.util.List;
 public class AutoTicket implements LottoGenerator {
 
     @Override
-    public List<LottoTicket> generate(TicketNumber ticketNumber) {
+    public List<LottoTicket> generate(TicketInformation ticketInformation) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < ticketNumber.getAutoTicket(); i++) {
+        for (int i = 0; i < ticketInformation.getAutoTicketCount(); i++) {
             lottoTickets.add(createAutoTicket());
         }
         return lottoTickets;

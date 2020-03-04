@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.exception.NotNumberException;
 import lotto.exception.NullOrEmptyException;
 import lotto.model.LottoNumber;
+import lotto.model.LottoTicket;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,7 +33,7 @@ public class InputView {
     }
 
     // 수동
-    public static List<LottoNumber> inputLottoTicket() {
+    public static LottoTicket inputLottoTicket() {
         String input = scanner.nextLine();
         checkNullOrEmptyInput(input);
         return makeNumbers(splitInput(input));
@@ -45,7 +46,7 @@ public class InputView {
         return Integer.parseInt(input);
     }
 
-    public static List<LottoNumber> inputWinNumber() {
+    public static LottoTicket inputWinNumber() {
         String inputs = scanner.nextLine();
         checkNullOrEmptyInput(inputs);
         return makeNumbers(splitInput(inputs));
@@ -61,7 +62,7 @@ public class InputView {
         return Arrays.asList(numbers.split(","));
     }
 
-    public static List<LottoNumber> makeNumbers(List<String> inputs) {
+    public static LottoTicket makeNumbers(List<String> inputs) {
         List<LottoNumber> numbers = new ArrayList<>();
         for (String input : inputs) {
             input = input.trim();
@@ -69,7 +70,7 @@ public class InputView {
             LottoNumber number = LottoNumber.lottoNumber(Integer.parseInt(input));
             numbers.add(number);
         }
-        return numbers;
+        return new LottoTicket(numbers);
     }
 
     public static void checkNumberFormat(String input) {

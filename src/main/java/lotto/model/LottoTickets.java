@@ -10,11 +10,11 @@ public class LottoTickets {
         lottoTickets = new ArrayList<>();
     }
 
-    public void combineTickets(TicketNumber ticketNumber) {
+    public void combineTickets(TicketInformation ticketInformation) {
         ManualTicket manualTicket = new ManualTicket();
-        lottoTickets.addAll(manualTicket.generate(ticketNumber));
+        lottoTickets.addAll(manualTicket.generate(ticketInformation));
         AutoTicket autoTicket = new AutoTicket();
-        lottoTickets.addAll(autoTicket.generate(ticketNumber));
+        lottoTickets.addAll(autoTicket.generate(ticketInformation));
     }
 
     public List<LottoTicket> getLottoTickets() {

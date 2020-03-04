@@ -197,6 +197,6 @@
 - [ ] LottoTicket의 checkLottoLength 메소드에서 inputs의 null 체크를 하라.
 - [ ] LottoTickets의 combineTickets 메소드에서 중복 코드를 제거하라.
 - [ ] LottoTickets에서 LottoGenerator를 생성하여 combineTickets 메서드를 수정하지 않도록 개선하라.
-- [ ] ManualTicket에서 InputView를 제거하라.
+- [x] ManualTicket에서 InputView를 제거하라.
 - [x] ManualTicket에서 createManualTicket 메서드를 제거하라.
-- [ ] LottoNumber에서 매번 새로운 LottoNumber를 생성하지 말고 미리 생성하여 사용하라.
+- [x] LottoNumber에서 매번 새로운 LottoNumber를 생성하지 말고 미리 생성하여 사용하라.

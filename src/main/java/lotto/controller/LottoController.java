@@ -1,8 +1,12 @@
 package lotto.controller;
 
+import jdk.internal.util.xml.impl.Input;
 import lotto.model.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LottoController {
     private Payment payment;
@@ -25,10 +29,15 @@ public class LottoController {
 
     public void makeLottoTickets() {
         OutputView.printInputManualCount();
-        TicketNumber ticketNumber = new TicketNumber(payment.countTickets(), InputView.inputManualCount());
-        OutputView.printTicketCount(ticketNumber.getManualTicket(), ticketNumber.getAutoTicket());
+        int manualTicketCount = InputView.inputManualCount();
+        OutputView.printTicketCount(manualTicketCount, payment.countTickets() - manualTicketCount);
         OutputView.printInputManualTicket();
-        lottoTickets.combineTickets(ticketNumber);
+        List<LottoTicket> manualTickets = new ArrayList<>();
+        for (int count = 0; count < manualTicketCount; count++) {
+            manualTickets.add(InputView.inputLottoTicket());
+        }
+        TicketInformation ticketInformation = new TicketInformation(payment.countTickets(), manualTicketCount, manualTickets);
+        lottoTickets.combineTickets(ticketInformation);
     }
 
     public void lottoGame() {
