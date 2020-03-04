@@ -1,64 +1,55 @@
 package lotto.controller;
 
-import lotto.domain.*;
-import lotto.exceptions.LottoTicketIllegalArgumentException;
-import lotto.exceptions.PurchaseMoneyIllegalArgumentException;
-import lotto.exceptions.WinningLottoNumbersIllegalArgumentException;
+import lotto.domain.money.Money;
+import lotto.domain.money.TicketCount;
+import lotto.domain.number.LottoNumber;
+import lotto.domain.number.SerialLottoNumber;
+import lotto.domain.result.LottoResult;
+import lotto.domain.result.Winning;
+import lotto.domain.ticket.AutoLottoTicketsFactory;
+import lotto.domain.ticket.LottoTickets;
+import lotto.domain.ticket.ManualLottoTicketsFactory;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
 	public static void run() {
-		PurchaseMoney purchaseMoney = createPurchaseMoney();
-		OutputView.printPurchasedLottoTicketsCount(purchaseMoney);
-
-		RandomLottoTicketFactory randomLottoTicketFactory =
-				new RandomLottoTicketFactory(new RandomLottoNumbersGenerator());
-		PurchasedLottoTickets purchasedLottoTickets
-				= PurchasedLottoTicketsFactory.of(purchaseMoney, randomLottoTicketFactory);
-		OutputView.printPurchasedLottoTickets(purchasedLottoTickets);
-
-		WinningInformation winningInformation = createWinningInformation();
-
-		LottoResult lottoResult = LottoResult.of(purchasedLottoTickets, winningInformation);
-		OutputView.printLottoResult(lottoResult);
-
-		OutputView.printEarningRate(lottoResult.calculateEarningRate(purchaseMoney));
-	}
-
-	private static WinningInformation createWinningInformation() {
 		try {
-			return new WinningInformation(createWinningNumbers(), createBonusNumber());
-		} catch (WinningLottoNumbersIllegalArgumentException e) {
-			OutputView.printWarningMessage(e.getMessage());
-			return createWinningInformation();
+			Money purchaseMoney = Money.of(InputView.inputPurchaseMoney());
+			TicketCount ticketCount =
+					TicketCount.of(purchaseMoney.totalTicketCount(), InputView.inputManualTicketCount());
+
+			LottoTickets lottoTickets = createLottoTickets(ticketCount);
+
+			Winning winning = createWinning();
+
+			LottoResult lottoResult = LottoResult.of(winning, lottoTickets);
+			OutputView.printLottoResult(lottoResult);
+			OutputView.printProfitRate(lottoResult.calculateProfitRate(purchaseMoney));
+		} catch (IllegalArgumentException e) {
+			OutputView.printExceptionMessage(e.getMessage());
 		}
 	}
 
-	private static PurchaseMoney createPurchaseMoney() {
-		try {
-			return new PurchaseMoney(InputView.inputPurchaseMoney());
-		} catch (PurchaseMoneyIllegalArgumentException e) {
-			OutputView.printWarningMessage(e.getMessage());
-			return createPurchaseMoney();
-		}
+	private static LottoTickets createLottoTickets(TicketCount ticketCount) {
+		ManualLottoTicketsFactory manualLottoTicketsFactory
+				= ManualLottoTicketsFactory.of(InputView.inputManualLottoTicket(ticketCount.getManualTicketCount()));
+
+		AutoLottoTicketsFactory autoLottoTicketsFactory
+				= AutoLottoTicketsFactory.of(ticketCount.getAutoTicketCount());
+
+		LottoTickets lottoTickets = LottoTickets.of(manualLottoTicketsFactory, autoLottoTicketsFactory);
+
+		OutputView.printLottoTicketsCount(ticketCount.getManualTicketCount(), ticketCount.getAutoTicketCount());
+		OutputView.printLottoTickets(lottoTickets);
+
+		return lottoTickets;
 	}
 
-	private static SerialLottoNumber createWinningNumbers() {
-		try {
-			return WinningLottoNumbersFactory.createWinningLottoNumbers(InputView.inputWinningNumbers());
-		} catch (NumberFormatException | LottoTicketIllegalArgumentException e) {
-			OutputView.printWarningMessage(e.getMessage());
-			return createWinningNumbers();
-		}
-	}
+	private static Winning createWinning() {
+		SerialLottoNumber winningNumbers = SerialLottoNumber.of(InputView.inputWinningNumbers());
+		LottoNumber bonusNumber = LottoNumber.of(InputView.inputBonusNumber());
 
-	private static LottoNumber createBonusNumber() {
-		try {
-			return AllLottoNumbers.getLottoNumber(InputView.inputBonusNumber());
-		} catch (LottoTicketIllegalArgumentException e) {
-			OutputView.printWarningMessage(e.getMessage());
-			return createBonusNumber();
-		}
+		return Winning.of(winningNumbers, bonusNumber);
 	}
 }
