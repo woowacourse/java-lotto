@@ -1,20 +1,20 @@
 package lotto.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class LottoTickets {
     private List<LottoTicket> lottoTickets;
-
+    private static final List<LottoGenerator> lottoGenerators = Arrays.asList(new AutoTicket(), new ManualTicket());
     public LottoTickets() {
         lottoTickets = new ArrayList<>();
     }
 
     public void combineTickets(TicketInformation ticketInformation) {
-        ManualTicket manualTicket = new ManualTicket();
-        lottoTickets.addAll(manualTicket.generate(ticketInformation));
-        AutoTicket autoTicket = new AutoTicket();
-        lottoTickets.addAll(autoTicket.generate(ticketInformation));
+        for (LottoGenerator lotto : lottoGenerators) {
+            lottoTickets.addAll(lotto.generate(ticketInformation));
+        }
     }
 
     public List<LottoTicket> getLottoTickets() {
