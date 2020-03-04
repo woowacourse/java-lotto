@@ -3,14 +3,14 @@ package lotto.controller;
 import lotto.domain.*;
 import lotto.exception.LottoException;
 import lotto.exception.WinningLottoException;
-import lotto.utils.InputUtil;
+import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static lotto.utils.InputUtil.inputLottoNumber;
+import static lotto.view.InputView.inputLottoNumber;
 
 public class LottoController {
 	public static void run() {
@@ -27,7 +27,7 @@ public class LottoController {
 
 	private static Lottos buyLottos() {
 		try {
-			LottoCount lottoCount = new LottoCount(InputUtil.inputMoney(), InputUtil.inputManualLottoCount());
+			LottoCount lottoCount = new LottoCount(InputView.inputMoney(), InputView.inputManualLottoCount());
 			List<Lotto> lottos = new ArrayList<>();
 			lottos.addAll(buyManualLottos(lottoCount));
 			lottos.addAll(LottoMachine.getInstance().makeRandomLottos(lottoCount));
@@ -60,7 +60,7 @@ public class LottoController {
 
 	private static LottoNumber readBonusNumber() {
 		try {
-			return LottoMachine.getInstance().pickBall(InputUtil.inputBonusNumber());
+			return LottoMachine.getInstance().pickBall(InputView.inputBonusNumber());
 		} catch (NumberFormatException | IOException e) {
 			OutputView.printWrongBonusNumberInput();
 			return readBonusNumber();

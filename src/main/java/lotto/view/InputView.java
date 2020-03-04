@@ -1,6 +1,4 @@
-package lotto.utils;
-
-import lotto.view.OutputView;
+package lotto.view;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class InputUtil {
+public class InputView {
 	private static final int SPLIT_LIMIT = -1;
 	private static final String SPLIT_DELIMITER = ",";
 	private static final String EMPTY = "";
