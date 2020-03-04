@@ -30,8 +30,7 @@ public class ConsoleLottoApplication {
     }
 
     private static PurchaseLottos makePurchaseLottos(PurchaseAmount purchaseAmount) {
-        List<Lotto> purchaseLottos = new ArrayList<>();
-        purchaseLottos = InputView.inputManualLotto(purchaseAmount.getManualLottoAmount());
+        List<Lotto> purchaseLottos = InputView.inputManualLotto(purchaseAmount.getManualLottoAmount());
 
         RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
         for (int i = 0; i < purchaseAmount.getRandomLottoAmount(); i++) {
