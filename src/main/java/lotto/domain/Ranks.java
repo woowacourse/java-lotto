@@ -12,14 +12,13 @@ public class Ranks {
         this.ranks = ranks;
     }
 
-    public static Ranks of(List<Rank> ranks) {
+    public static Ranks valueOf(List<Rank> ranks) {
         Collections.sort(ranks);
         return new Ranks(ranks);
     }
 
-    public Profit calculateProfit(Money purchaseMoney) {
-        double profitValue = sumWinningMoney().calculatePercentage(purchaseMoney);
-        return Profit.of(profitValue);
+    public double calculateProfit(Money purchaseMoney) {
+        return sumWinningMoney().calculatePercentage(purchaseMoney);
     }
 
     private Money sumWinningMoney() {

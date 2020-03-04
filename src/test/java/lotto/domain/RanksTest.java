@@ -14,7 +14,7 @@ class RanksTest {
     void calculateProfit() {
         Money purchaseMoney = Money.createPurchaseMoney(14000);
         List<Rank> ranksValues = Arrays.asList(Rank.FIFTH, Rank.FOURTH);
-        Ranks ranks = Ranks.of(ranksValues);
+        Ranks ranks = Ranks.valueOf(ranksValues);
 
 
         Profit actual = ranks.calculateProfit(purchaseMoney);
@@ -27,7 +27,7 @@ class RanksTest {
     @Test
     void frequency() {
         List<Rank> ranksValues = Arrays.asList(Rank.FIFTH, Rank.FOURTH, Rank.FIFTH);
-        Ranks ranks = Ranks.of(ranksValues);
+        Ranks ranks = Ranks.valueOf(ranksValues);
 
         Rank findingRank = Rank.FIFTH;
 

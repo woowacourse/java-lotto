@@ -21,7 +21,7 @@ public class ConsoleLottoApplication {
         WinningNumbers winningNumbers = createWinningNumbers();
 
         Ranks ranks = winningNumbers.checkOutLottos(lottoTickets);
-        Profit profit = ranks.calculateProfit(purchaseMoney);
+        double profit = ranks.calculateProfit(purchaseMoney);
 
         OutputView.printRanks(ranks);
         OutputView.printProfit(profit);

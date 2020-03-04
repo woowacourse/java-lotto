@@ -23,20 +23,20 @@ public enum Rank {
         this.winningMoney = Money.valueOf(winningMoney);
     }
 
-    public static Rank of(int count) {
+    public static Rank from(int count) {
         return Arrays.stream(values())
                 .filter(rank -> rank.matchedCount == count)
                 .findFirst()
                 .orElse(LOSE);
     }
 
-    public boolean isValidRank() {
+    public boolean isWinningRank() {
         return this != LOSE;
     }
 
-    public static List<Rank> validValues() {
+    public static List<Rank> winningValues() {
         return Arrays.stream(values())
-                .filter(Rank::isValidRank)
+                .filter(Rank::isWinningRank)
                 .collect(collectingAndThen(toList(), Collections::unmodifiableList));
     }
 

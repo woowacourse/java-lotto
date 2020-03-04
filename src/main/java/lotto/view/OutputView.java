@@ -17,7 +17,7 @@ public class OutputView {
         System.out.println("당첨 통계");
         System.out.println("-------");
 
-        for (Rank rank : Rank.validValues()) {
+        for (Rank rank : Rank.winningValues()) {
             int matchedCount = rank.getMatchedCount();
             int winningMoney = rank.getWinningMoney().getValue();
             int containingCount = ranks.frequency(rank);
@@ -25,7 +25,7 @@ public class OutputView {
         }
     }
 
-    public static void printProfit(Profit profit) {
-        System.out.printf("총 수익률은 %d%%입니다.", profit.getProfitWithoutDecimalPoint());
+    public static void printProfit(double profit) {
+        System.out.printf("총 수익률은 %d%%입니다.", (int)profit);
     }
 }

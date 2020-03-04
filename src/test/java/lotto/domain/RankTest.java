@@ -17,7 +17,7 @@ class RankTest {
     @ParameterizedTest
     @MethodSource("createCountAndRank")
     void returnRank(int count, Rank expected) {
-        assertThat(Rank.of(count)).isEqualTo(expected);
+        assertThat(Rank.from(count)).isEqualTo(expected);
     }
 
     private static Stream<Arguments> createCountAndRank() {
@@ -43,7 +43,7 @@ class RankTest {
     @DisplayName("Rank.LOSE를 제외한 Rank들을 반환")
     @Test
     void validValues() {
-        List<Rank> validRanks = Rank.validValues();
+        List<Rank> validRanks = Rank.winningValues();
         List<Rank> containingRanks = Arrays.asList(Rank.FIRST, Rank.SECOND, Rank.THIRD, Rank.FOURTH, Rank.FIFTH);
 
         assertThat(validRanks.containsAll(containingRanks)).isTrue();

@@ -73,7 +73,7 @@ public class LottoTicket {
             return Rank.SECOND;
         }
 
-        return Rank.of(count);
+        return Rank.from(count);
     }
 
     public boolean contains(LottoNumber bonusNumber) {

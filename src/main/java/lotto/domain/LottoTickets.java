@@ -45,10 +45,10 @@ public class LottoTickets {
     public Ranks checkOutLottos(LottoTicket winningLottoTicket, LottoNumber bonusNumber) {
         List<Rank> ranks = lottoTickets.stream()
                 .map(lottoTicket -> lottoTicket.checkOut(winningLottoTicket, bonusNumber))
-                .filter(Rank::isValidRank)
+                .filter(Rank::isWinningRank)
                 .collect(Collectors.toList());
 
-        return Ranks.of(ranks);
+        return Ranks.valueOf(ranks);
     }
 
     public List<LottoTicket> getLottoTickets() {
