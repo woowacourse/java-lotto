@@ -13,7 +13,7 @@ class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 45})
     void inRange(int number) {
-        assertThat(new LottoNumber(number)).isNotNull();
+        assertThat(LottoNumber.valueOf(number)).isNotNull();
     }
 
     @DisplayName("로또숫자가 범위를 벗어날 경우 예외 발생")
@@ -21,7 +21,7 @@ class LottoNumberTest {
     @ValueSource(ints = {0, 46})
     void outOfRange(int number) {
         assertThatThrownBy(() -> {
-            new LottoNumber(number);
+            LottoNumber.valueOf(number);
         }).isInstanceOf(LottoNumberException.class)
                 .hasMessage("로또 숫자는 1~45사이어야 합니다.");
     }

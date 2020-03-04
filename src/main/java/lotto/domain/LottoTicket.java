@@ -58,7 +58,7 @@ public class LottoTicket {
         List<LottoNumber> numbers = Arrays.stream(unsplitNumbers.split(DELIMITER))
                 .map(String::trim)
                 .map(Integer::parseInt)
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
 
         return new LottoTicket(numbers);

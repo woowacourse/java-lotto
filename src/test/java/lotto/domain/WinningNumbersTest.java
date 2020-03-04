@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,8 +15,8 @@ class WinningNumbersTest {
     @Test
     void duplicatedWinningNumbers() {
         Assertions.assertThatThrownBy(() -> {
-            LottoTicket lottoTicket = createLottoTicket("1,2,3,4,5,6");
-            LottoNumber bonusNumber = new LottoNumber(6);
+            LottoTicket lottoTicket = LottoTicket.createManualTicket("1,2,3,4,5,6");
+            LottoNumber bonusNumber = LottoNumber.valueOf(6);
             new WinningNumbers(lottoTicket, bonusNumber);
         }).isInstanceOf(WinningNumbersException.class)
                 .hasMessage("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
@@ -33,8 +32,8 @@ class WinningNumbersTest {
                 "1,2,3,4,5,6");
         LottoTickets lottoTickets = LottoTickets.from(ticketCounts, manualLottoNumbers);
 
-        LottoTicket winningLottoTicket = createLottoTicket("1,2,3,4,5,6");
-        LottoNumber bonusNumber = new LottoNumber(7);
+        LottoTicket winningLottoTicket = LottoTicket.createManualTicket("1,2,3,4,5,6");
+        LottoNumber bonusNumber = LottoNumber.valueOf(7);
         WinningNumbers winningNumbers = new WinningNumbers(winningLottoTicket, bonusNumber);
 
         Ranks givenRanks = winningNumbers.checkOutLottos(lottoTickets);
@@ -42,13 +41,5 @@ class WinningNumbersTest {
         assertThat(givenRanks.contains(Rank.FIRST)).isTrue();
         assertThat(givenRanks.contains(Rank.THIRD)).isTrue();
         assertThat(givenRanks.contains(Rank.FIFTH)).isTrue();
-    }
-
-    private static LottoTicket createLottoTicket(String numbers) {
-        List<LottoNumber> lottoNumbers = Arrays.stream(numbers.split(","))
-                .map(Integer::parseInt)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
-        return LottoTicket.fromSixNumbers(lottoNumbers);
     }
 }

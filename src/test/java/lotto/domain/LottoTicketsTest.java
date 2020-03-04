@@ -37,8 +37,8 @@ class LottoTicketsTest {
         List<String> manualLottoNumbers = Arrays.asList("1,2,3,4,5,6", "2,4,6,8,10,12", "3, 5, 15, 20, 30, 45");
         LottoTickets lottoTickets = LottoTickets.from(ticketCounts, manualLottoNumbers);
 
-        LottoTicket winningLottoTicket = LottoTicket.fromInput("1,2,3,4,5,6");
-        LottoNumber bonusNumber = new LottoNumber(7);
+        LottoTicket winningLottoTicket = LottoTicket.createManualTicket("1,2,3,4,5,6");
+        LottoNumber bonusNumber = LottoNumber.valueOf(7);
 
         Ranks ranks = lottoTickets.checkOutLottos(winningLottoTicket, bonusNumber);
 

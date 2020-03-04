@@ -5,7 +5,7 @@ import lotto.exception.LottoNumberException;
 import java.util.*;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    private static Map<Integer, LottoNumber> numbers;
+    private static Map<Integer, LottoNumber> numbers = new HashMap<>();
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
 
@@ -19,7 +19,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private final int number;
 
-    public LottoNumber(int number) {
+    private LottoNumber(int number) {
         this.number = number;
     }
 

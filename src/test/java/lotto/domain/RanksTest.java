@@ -17,8 +17,8 @@ class RanksTest {
         Ranks ranks = Ranks.valueOf(ranksValues);
 
 
-        Profit actual = ranks.calculateProfit(purchaseMoney);
-        Profit expected = Profit.of((double)55000/14000*100);
+        double actual = ranks.calculateProfit(purchaseMoney);
+        double expected = (double) 55000 / 14000 * 100;
 
         assertThat(actual).isEqualTo(expected);
     }
