@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.model.LottoRank;
 import lotto.model.LottoTicket;
 import lotto.model.LottoTickets;
+import lotto.model.Payment;
 
 public class OutputView {
 
@@ -64,7 +65,7 @@ public class OutputView {
         System.out.println(INPUT_MANUAL_TICKET_MESSAGE);
     }
 
-    public static void printTicketCount(int manualTicketCount, int autoTicketCount) {
-        System.out.println(MANUAL_TICKET_MESSAGE + manualTicketCount + AUTO_TICKET_MESSAGE + autoTicketCount + LOTTO_COUNT_MESSAGE);
+    public static void printTicketCount(int manualTicketCount, Payment payment) {
+        System.out.println(MANUAL_TICKET_MESSAGE + manualTicketCount + AUTO_TICKET_MESSAGE + (payment.countTickets() - manualTicketCount) + LOTTO_COUNT_MESSAGE);
     }
 }

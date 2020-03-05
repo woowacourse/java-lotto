@@ -11,11 +11,11 @@ public class TicketInformation {
     private int autoTicketCount;
     private List<LottoTicket> manualTickets;
 
-    public TicketInformation(int totalTicket, int manualTicketCount, List<LottoTicket> manualTickets) {
-        checkOverPay(totalTicket, manualTicketCount);
+    public TicketInformation(Payment payment, int manualTicketCount, List<LottoTicket> manualTickets) {
+        checkOverPay(payment.countTickets(), manualTicketCount);
         checkNullManualTickets(manualTickets);
         this.manualTicketCount = manualTicketCount;
-        this.autoTicketCount = totalTicket - manualTicketCount;
+        this.autoTicketCount = payment.countTickets() - manualTicketCount;
         this.manualTickets = manualTickets;
     }
 
