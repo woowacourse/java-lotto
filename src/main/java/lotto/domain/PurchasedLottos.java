@@ -8,20 +8,28 @@ import java.util.stream.Collectors;
 public class PurchasedLottos {
 	private final List<Lotto> purchasedLottos;
 
-	public PurchasedLottos(final List<Lotto> purchasedLottos) {
+	private PurchasedLottos(final List<Lotto> purchasedLottos) {
 		this.purchasedLottos = Collections.unmodifiableList(purchasedLottos);
 	}
 
 	public static PurchasedLottos of(LottoMoney lottoMoney,
 									 LottoFactory LottoFactory) {
-		List<Lotto> purchasedSerialLottoNumbers = new ArrayList<>();
+		List<Lotto> purchasedLotto = new ArrayList<>();
 
 		int count = lottoMoney.countPurchasedTickets();
 		for (int i = 0; i < count; i++) {
-			purchasedSerialLottoNumbers.add(LottoFactory.createSerialLottoNumber());
+			purchasedLotto.add(LottoFactory.createSerialLottoNumber());
 		}
 
-		return new PurchasedLottos(purchasedSerialLottoNumbers);
+		return new PurchasedLottos(purchasedLotto);
+	}
+
+	public static PurchasedLottos of(List<String> inputs) {
+		List<Lotto> purchasedLotto = inputs.stream()
+				.map(Lotto::of)
+				.collect(Collectors.toUnmodifiableList());
+
+		return new PurchasedLottos(purchasedLotto);
 	}
 
 	public List<Lotto> getPurchasedLottos() {

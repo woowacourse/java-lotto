@@ -4,32 +4,29 @@ import lotto.domain.SerialLottoNumberFactory.TestLottoFactory;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 class PurchasedLottosTest {
 	@Test
-	void PurchasedSerialLottoNumbers() {
+	void of_Strings() {
 		// given
-		List<Lotto> purchasedSerialLottoNumbers = new ArrayList<>();
-		int[][] input = {{1, 10, 3, 11, 5, 6}, {5, 10, 45, 3, 17, 2}, {4, 7, 13, 19, 22, 37}};
-		for (int[] element : input) {
-			Lotto serialLottoNumber = Lotto.of(element);
-			purchasedSerialLottoNumbers.add(serialLottoNumber);
-		}
+		List<String> input = Arrays.asList("1, 10, 3, 11, 5, 6", "5, 10, 45, 3, 17, 2", "4, 7, 13, 19, 22, 37");
 
 		// when
-		PurchasedLottos result = new PurchasedLottos(purchasedSerialLottoNumbers);
+		PurchasedLottos result = PurchasedLottos.of(input);
 
 		// then
+		List<Lotto> expected = input.stream()
+				.map(Lotto::of)
+				.collect(Collectors.toUnmodifiableList());
+
 		Assertions.assertThat(result.getPurchasedLottos())
-				.isEqualTo(purchasedSerialLottoNumbers);
+				.isEqualTo(expected);
 	}
 
 	@Test
-	void of() {
+	void of_PurchasedLottosAndWinningLotto() {
 		// when
 		WinningLotto winningLotto
 				= new WinningLotto(Lotto.of("1,2,3,4,5,6"), LottoNumber.of(7));
@@ -53,37 +50,31 @@ class PurchasedLottosTest {
 	@Test
 	void add() {
 		// given
-		List<Lotto> serialLottoNumbers = new ArrayList<>();
-		serialLottoNumbers.add(Lotto.of("1,2,3,4,5,6"));
-		serialLottoNumbers.add(Lotto.of("7,2,3,4,5,6"));
-		serialLottoNumbers.add(Lotto.of("1,7,3,4,5,6"));
-		serialLottoNumbers.add(Lotto.of("1,2,7,4,5,6"));
-
-		List<Lotto> serialLottoNumbers2 = new ArrayList<>();
-		serialLottoNumbers2.add(Lotto.of("1,2,3,4,7,6"));
-		serialLottoNumbers2.add(Lotto.of("1,2,3,4,5,7"));
-
 		PurchasedLottos purchasedLottos
-				= new PurchasedLottos(serialLottoNumbers);
+				= PurchasedLottos.of(Arrays.asList(
+				"1,2,3,4,5,6",
+				"7,2,3,4,5,6",
+				"1,7,3,4,5,6",
+				"1,2,7,4,5,6"));
 
 		PurchasedLottos purchasedLottos2
-				= new PurchasedLottos(serialLottoNumbers2);
+				= PurchasedLottos.of(Arrays.asList(
+				"1,2,3,4,7,6",
+				"1,2,3,4,5,7"));
 
 		// when
 		PurchasedLottos result
 				= purchasedLottos.addAll(purchasedLottos2);
 
 		// then
-		List<Lotto> serialLottoNumbers3 = new ArrayList<>();
-		serialLottoNumbers3.add(Lotto.of("1,2,3,4,5,6"));
-		serialLottoNumbers3.add(Lotto.of("7,2,3,4,5,6"));
-		serialLottoNumbers3.add(Lotto.of("1,7,3,4,5,6"));
-		serialLottoNumbers3.add(Lotto.of("1,2,7,4,5,6"));
-		serialLottoNumbers3.add(Lotto.of("1,2,3,4,7,6"));
-		serialLottoNumbers3.add(Lotto.of("1,2,3,4,5,7"));
-
 		PurchasedLottos expected
-				= new PurchasedLottos(serialLottoNumbers3);
+				= PurchasedLottos.of(Arrays.asList(
+				"1,2,3,4,5,6",
+				"7,2,3,4,5,6",
+				"1,7,3,4,5,6",
+				"1,2,7,4,5,6",
+				"1,2,3,4,7,6",
+				"1,2,3,4,5,7"));
 
 		Assertions.assertThat(result)
 				.isEqualTo(expected);

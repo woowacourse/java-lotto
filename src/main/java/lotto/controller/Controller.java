@@ -95,31 +95,17 @@ public class Controller {
 	private static PurchasedLottos purchaseManualLotto(
 			LottoMoney manualTicketMoney) {
 
-		List<Lotto> serialLottoNumbers = new ArrayList<>();
+		List<String> serialLottoNumbers = new ArrayList<>();
 		OutputView.printInputManualLottoNumbersMessage();
 		for (int i = 0; i < manualTicketMoney.countPurchasedTickets(); i++) {
 			serialLottoNumbers.add(prepareManualSerialLottoNumber());
 		}
 
-		return new PurchasedLottos(serialLottoNumbers);
+		return PurchasedLottos.of(serialLottoNumbers);
 	}
 
-	private static Lotto prepareManualSerialLottoNumber() {
-		Lotto serialLottoNumber;
-		do {
-			String input = InputView.inputManualLottoNumbers();
-			serialLottoNumber = prepareManualSerialLottoNumberIfValid(input);
-		} while (serialLottoNumber == null);
-		return serialLottoNumber;
-	}
-
-	private static Lotto prepareManualSerialLottoNumberIfValid(String input) {
-		try {
-			return Lotto.of(input);
-		} catch (LottoIllegalArgumentException | LottoNumberIllegalArgumentException e) {
-			OutputView.printWarningMessage(e.getMessage());
-			return null;
-		}
+	private static String prepareManualSerialLottoNumber() {
+		return InputView.inputManualLottoNumbers();
 	}
 
 	private static PurchasedLottos purchaseAutoLotto(
