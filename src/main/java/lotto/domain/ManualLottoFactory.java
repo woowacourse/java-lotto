@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 public class ManualLottoFactory {
     public static Lotto create(List<Integer> values) {
-        return new Lotto(values.stream().map(LottoNumber::create).collect(
+        return new Lotto(values.stream().map(LottoNumber::of).collect(
             Collectors.toSet()));
     }
 }

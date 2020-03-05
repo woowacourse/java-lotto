@@ -21,7 +21,7 @@ class LottoTest {
     void createWithValidLottoNumbers() {
         //given
         Set<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)
-            .map(LottoNumber::create)
+            .map(LottoNumber::of)
             .collect(Collectors.toSet());
 
         assertThat(new Lotto(lottoNumbers)).isNotNull();
@@ -32,7 +32,7 @@ class LottoTest {
     void createWithInvalidLottoNumbers() {
         //given
         Set<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5)
-            .map(LottoNumber::create)
+            .map(LottoNumber::of)
             .collect(Collectors.toSet());
 
         assertThatThrownBy(() -> new Lotto(lottoNumbers))
@@ -46,13 +46,13 @@ class LottoTest {
     void matchLottoNumber(int value, boolean expected) {
         //given
         Set<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)
-            .map(LottoNumber::create)
+            .map(LottoNumber::of)
             .collect(Collectors.toSet());
 
         //when
         Lotto lotto = new Lotto(lottoNumbers);
         //then
-        assertThat(lotto.contains(LottoNumber.create(value))).isEqualTo(expected);
+        assertThat(lotto.contains(LottoNumber.of(value))).isEqualTo(expected);
     }
 
     private static Stream<Arguments> provideMatchOrNoneMatchLottoNumber() {

@@ -32,7 +32,7 @@ class LottosGeneratorTest {
         //given
         Money money = new Money(1000);
         Lotto lotto = new Lotto(
-            Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::create).collect(Collectors.toSet()));
+            Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::of).collect(Collectors.toSet()));
 
         Set<Lotto> lottoSet = new HashSet<>(Arrays.asList(lotto));
         //when

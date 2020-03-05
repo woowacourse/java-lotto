@@ -45,13 +45,13 @@ public class InputView {
     private static Set<LottoNumber> inputLastWeekWinningNumbers() {
         System.out.println("지난주 당첨번호을 입력해주세요");
         String input = scanner.nextLine();
-        return StringUtils.parseWithDelimiter(input).stream().map(LottoNumber::create).collect(
+        return StringUtils.parseWithDelimiter(input).stream().map(LottoNumber::of).collect(
             Collectors.toSet());
     }
 
     private static LottoNumber inputBonusNumber() {
         System.out.println("보너스볼을 입력해주세요");
-        return LottoNumber.create(StringUtils.parseInt(scanner.nextLine()));
+        return LottoNumber.of(StringUtils.parseInt(scanner.nextLine()));
     }
 
 }

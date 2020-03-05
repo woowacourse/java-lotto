@@ -18,16 +18,16 @@ class WinningLottoTest {
     void match() {
         //given
         Set<LottoNumber> winningNumbers = Stream.of(1, 2, 3, 4, 5, 6)
-            .map(LottoNumber::create)
+            .map(LottoNumber::of)
             .collect(Collectors.toSet());
         Lotto lotto = new Lotto(new HashSet<>(
             Stream.of(1, 2, 3, 4, 5, 40)
-                .map(LottoNumber::create)
+                .map(LottoNumber::of)
                 .collect(Collectors.toSet())));
         Set<Lotto> lottoSet = new HashSet<>(Arrays.asList(lotto));
 
         Lottos lottos = new Lottos(lottoSet);
-        LottoNumber bounusNumber = LottoNumber.create(7);
+        LottoNumber bounusNumber = LottoNumber.of(7);
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bounusNumber);
         //when & then
         assertThat(winningLotto.match(lottos).getWinningRanks().keySet()).contains(Rank.THIRD);
@@ -38,16 +38,16 @@ class WinningLottoTest {
     void matchNone() {
         //given
         Set<LottoNumber> winningNumbers = Stream.of(1, 2, 3, 4, 5, 6)
-            .map(LottoNumber::create).collect(Collectors.toSet());
+            .map(LottoNumber::of).collect(Collectors.toSet());
         Lotto lotto = new Lotto(new HashSet<>(
             Stream.of(8, 9, 10, 4, 5, 40)
-                .map(LottoNumber::create)
+                .map(LottoNumber::of)
                 .collect(Collectors.toSet())));
 
         Set<Lotto> lottoSet = new HashSet<>(Arrays.asList(lotto));
 
         Lottos lottos = new Lottos(lottoSet);
-        LottoNumber bounusNumber = LottoNumber.create(7);
+        LottoNumber bounusNumber = LottoNumber.of(7);
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bounusNumber);
         //when & then
         assertThat(winningLotto.match(lottos).getWinningRanks().keySet()).contains(Rank.NO_MATCH);
