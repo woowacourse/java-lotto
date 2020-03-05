@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class PaymentTest {
@@ -28,5 +29,12 @@ public class PaymentTest {
             new Payment(9999);
         }).isInstanceOf(NotMultipleOfThousandException.class)
                 .hasMessage("천 단위로 입력하세요.");
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1000, 1", "10000, 10", "33000, 33", "58000, 58"})
+    @DisplayName("금액에 맞는 티켓 갯수 반환")
+    void countTickets(int payment, int count) {
+        assertThat(new Payment(payment).countTickets()).isEqualTo(count);
     }
 }

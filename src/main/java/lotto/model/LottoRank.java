@@ -1,8 +1,6 @@
 package lotto.model;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 public enum LottoRank {
     FIRST(6, 2000000000),

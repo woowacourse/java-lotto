@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import jdk.internal.util.xml.impl.Input;
 import lotto.model.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
