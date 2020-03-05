@@ -9,7 +9,7 @@ public class LottoNumber {
     static final int MIN = 1;
     private int value;
 
-    public LottoNumber(int value) {
+    private LottoNumber(int value) {
         validateValue(value);
         this.value = value;
     }
@@ -18,6 +18,10 @@ public class LottoNumber {
         if (value < MIN || MAX < value) {
             throw new InvalidLottoNumberException("유효하지 않은 로또 번호입니다");
         }
+    }
+
+    public static LottoNumber create(int value) {
+        return new LottoNumber(value);
     }
 
     @Override

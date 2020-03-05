@@ -5,6 +5,8 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -29,9 +31,9 @@ class LottosGeneratorTest {
     void LottoTicketToPrice() {
         //given
         Money money = new Money(1000);
-        Lotto lotto = new Lotto(new HashSet<>(
-            Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                new LottoNumber(5), new LottoNumber(6))));
+        Lotto lotto = new Lotto(
+            Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::create).collect(Collectors.toSet()));
+
         Set<Lotto> lottoSet = new HashSet<>(Arrays.asList(lotto));
         //when
         Lottos lottos = new Lottos(lottoSet);

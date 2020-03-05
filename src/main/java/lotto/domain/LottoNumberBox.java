@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 class LottoNumberBox {
     static List<LottoNumber> create() {
         return IntStream.rangeClosed(LottoNumber.MIN, LottoNumber.MAX)
-            .mapToObj(LottoNumber::new)
+            .mapToObj(LottoNumber::create)
             .collect(Collectors.toList());
     }
 }

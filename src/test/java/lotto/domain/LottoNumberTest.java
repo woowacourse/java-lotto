@@ -14,14 +14,14 @@ class LottoNumberTest {
     @ValueSource(ints = {1, 45})
     @DisplayName("값이 정상 범위에 있을 때 로또 번호 생성")
     void constructWithValidValue(int value) {
-        assertThat(new LottoNumber(value)).isNotNull();
+        assertThat(LottoNumber.create(value)).isNotNull();
     }
 
     @ParameterizedTest
     @ValueSource(ints = {0, 46})
     @DisplayName("값이 비정상 범위에 있을 때 로또 번호 생성")
     void constructWithInvalidValue(int value) {
-        assertThatThrownBy(() -> new LottoNumber(value))
+        assertThatThrownBy(() -> LottoNumber.create(value))
             .isInstanceOf(InvalidLottoNumberException.class)
             .hasMessage("유효하지 않은 로또 번호입니다");
     }
