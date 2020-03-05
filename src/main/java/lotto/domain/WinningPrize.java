@@ -11,7 +11,7 @@ public enum WinningPrize {
 	FIRST(6, 2_000_000_000, "1등");
 
 	private int matchCount;
-	private int prize;
+	private long prize;
 	private String description;
 
 	WinningPrize(int matchCount, int prize, String description) {
@@ -25,12 +25,12 @@ public enum WinningPrize {
 			return SECOND;
 		}
 		return Arrays.stream(values())
-			.filter(prize -> prize.matchCount == matchCount)
-			.findFirst()
-			.orElse(NO_PRIZE);
+				.filter(prize -> prize.matchCount == matchCount)
+				.findFirst()
+				.orElse(NO_PRIZE);
 	}
 
-	public int getPrize() {
+	public long getPrize() {
 		return prize;
 	}
 

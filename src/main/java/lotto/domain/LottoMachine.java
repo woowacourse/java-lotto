@@ -3,49 +3,54 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoMachine {
-	private static final int MAX_LOTTO_NUMBER = 45;
-	private static final int MIN_LOTTO_NUMBER = 1;
 
-	private final List<Integer> lottoBalls;
+	private final List<LottoNumber> lottoNumbers;
 
-	public LottoMachine() {
-		lottoBalls = new ArrayList<>();
-		for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
-			lottoBalls.add(i);
+	private LottoMachine() {
+		lottoNumbers = new ArrayList<>();
+		for (int i = LottoNumber.MIN; i <= LottoNumber.MAX; i++) {
+			lottoNumbers.add(new LottoNumber(i));
 		}
+	}
+
+	public static LottoMachine getInstance() {
+		return LottoMachineSingletonHolder.instance;
 	}
 
 	public List<Lotto> makeRandomLottos(LottoCount lottoCount) {
 		List<Lotto> lottos = new ArrayList<>();
 
-		for (int i = 0; i < lottoCount.getLottoCount(); i++) {
-			lottos.add(new Lotto(pickRandomBalls()));
+		for (int i = 0; i < lottoCount.getAutoLottoCount(); i++) {
+			lottos.add(pickRandomBalls());
 		}
 		return lottos;
 	}
 
-	private List<Integer> pickRandomBalls() {
-		Collections.shuffle(lottoBalls);
-		return lottoBalls.stream()
-				.limit(6)
+	private Lotto pickRandomBalls() {
+		Collections.shuffle(lottoNumbers);
+		return new Lotto(lottoNumbers.stream()
+				.limit(Lotto.SIZE)
 				.sorted()
-				.collect(Collectors.toList());
+				.collect(Collectors.toList()));
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		LottoMachine that = (LottoMachine) o;
-		return Objects.equals(lottoBalls, that.lottoBalls);
+	public Lotto pickDedicatedBalls(List<Integer> LottoNumbers) {
+		return new Lotto(LottoNumbers.stream()
+				.map(this::pickBall)
+				.collect(Collectors.toList()));
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(lottoBalls);
+	public LottoNumber pickBall(int number) {
+		return lottoNumbers.stream()
+				.filter(l -> l.isEqualTo(number))
+				.findFirst()
+				.orElseThrow(() -> new IllegalArgumentException("범위를 벗어난 로또 숫자입니다."));
+	}
+
+	private static class LottoMachineSingletonHolder {
+		private static final LottoMachine instance = new LottoMachine();
 	}
 }

@@ -16,7 +16,7 @@ public class LottoResult {
         return winningInformation;
     }
 
-    public long calculateEarningRate() {
+    public double calculateEarningRate() {
         long totalEarning = 0;
         int totalCount = 0;
 
@@ -24,7 +24,7 @@ public class LottoResult {
             totalCount += winningInformation.get(winningPrize);
             totalEarning += (winningPrize.getPrize() * winningInformation.get(winningPrize));
         }
-        return totalEarning / (totalCount * 10);
+        return ((double) totalEarning / (totalCount * 1000)) * 100;
     }
 
     public Map<WinningPrize, Integer> getWinningInformation() {

@@ -1,100 +1,55 @@
 package lotto.domain;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
+import lotto.exception.WinningLottoException;
+
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class WinningLotto {
-	private static final int LOTTO_SIZE = 6;
-	private static final int MIN_LOTTO_NUMBER = 1;
-	private static final int MAX_LOTTO_NUMBER = 45;
+    public static final String NULL_OR_EMPTY_VALUE_ERROR = "널이나 빈 값이 들어올 수 없습니다.";
+    public static final String DUPLICATE_BONUSBALL_NUMBER = "중복된 보너스 번호가 있습니다.";
 
-	private final List<Integer> winningNumber;
-	private final int bonusNumber;
+    private final Lotto winningLotto;
+    private final LottoNumber bonusNumber;
 
-	public WinningLotto(final List<String> winningNumber, final int bonusNumber) {
-		validateWinningNumber(winningNumber);
-		this.winningNumber = winningNumber.stream()
-				.map(Integer::parseInt)
-				.collect(Collectors.toList());
+    public WinningLotto(final Lotto winningLotto, final LottoNumber bonusNumber) {
+        validateNullAndEmpty(winningLotto);
+        this.winningLotto = winningLotto;
 
-		validateBonusNumber(bonusNumber);
-		this.bonusNumber = bonusNumber;
-	}
+        validateBonusDuplicate(bonusNumber);
+        this.bonusNumber = bonusNumber;
+    }
 
-	private void validateWinningNumber(List<String> winningNumber) {
-		validateNullAndEmpty(winningNumber);
-		validateNumberAmount(winningNumber);
-		validateDuplicate(winningNumber);
-		validateRange(winningNumber);
-	}
+    private void validateNullAndEmpty(Lotto winningLotto) {
+        if (winningLotto == null) {
+            throw new WinningLottoException(NULL_OR_EMPTY_VALUE_ERROR);
+        }
+    }
 
-	private void validateNullAndEmpty(List<String> winningNumber) {
-		if (winningNumber == null || winningNumber.isEmpty()) {
-			throw new IllegalArgumentException("널이나 빈 값이 들어올 수 없습니다.");
-		}
-	}
+    private void validateBonusDuplicate(LottoNumber bonusNumber) {
+        if (winningLotto.contains(bonusNumber)) {
+            throw new WinningLottoException(DUPLICATE_BONUSBALL_NUMBER);
+        }
+    }
 
-	private void validateNumberAmount(List<String> winningNumber) {
-		if (winningNumber.size() != LOTTO_SIZE) {
-			throw new IllegalArgumentException(String.format("로또 변호는 %s개여야 합니다.", LOTTO_SIZE));
-		}
-	}
+    public Lotto getWinningLotto() {
+        return winningLotto;
+    }
 
-	private void validateDuplicate(List<String> winningNumber) {
-		if (winningNumber.size() != new HashSet<>(winningNumber).size()) {
-			throw new IllegalArgumentException("중복된 번호가 있습니다.");
-		}
-	}
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
+    }
 
-	private void validateRange(List<String> winningNumber) {
-		winningNumber.stream()
-				.mapToInt(Integer::parseInt)
-				.filter(number -> number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER)
-				.findFirst()
-				.ifPresent(x -> {
-					throw new IllegalArgumentException("범위를 벗어난 번호가 포함되어 있습니다.");
-				});
-	}
-
-	private void validateBonusNumber(int bonusNumber) {
-		validateBonusDuplicate(bonusNumber);
-		validateBonusRange(bonusNumber);
-	}
-
-	private void validateBonusDuplicate(int bonusNumber) {
-		if (winningNumber.stream().anyMatch(number -> number == bonusNumber)) {
-			throw new IllegalArgumentException("중복된 보너스 번호가 있습니다.");
-		}
-	}
-
-	private void validateBonusRange(int bonusNumber) {
-		if (bonusNumber < MIN_LOTTO_NUMBER || bonusNumber > MAX_LOTTO_NUMBER) {
-			throw new IllegalArgumentException("보너스 번호가 범위를 벗어날 수 없습니다.");
-		}
-	}
-
-	public List<Integer> getWinningNumber() {
-		return Collections.unmodifiableList(winningNumber);
-	}
-
-	public int getBonusNumber() {
-		return bonusNumber;
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		WinningLotto that = (WinningLotto) o;
-		return bonusNumber == that.bonusNumber &&
-				Objects.equals(winningNumber, that.winningNumber);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WinningLotto that = (WinningLotto) o;
+        return bonusNumber == that.bonusNumber &&
+                Objects.equals(winningLotto, that.winningLotto);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(winningNumber, bonusNumber);
-	}
+        return Objects.hash(winningLotto, bonusNumber);
+    }
 }

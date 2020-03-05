@@ -2,67 +2,77 @@ package lotto.controller;
 
 import lotto.domain.*;
 import lotto.exception.LottoException;
-import lotto.utils.InputUtil;
+import lotto.exception.WinningLottoException;
+import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+
+import static lotto.view.InputView.inputLottoNumber;
 
 public class LottoController {
 	public static void run() {
 		Lottos lottos = buyLottos();
-		OutputView.printLottos(lottos.makeLottoDtos());
-		List<WinningPrize> winningPrizes = lottos.findAllLottoPrizes(receiveWinningNumber());
+
+		OutputView.printLottos(lottos.makeLottosDto());
+		List<WinningPrize> winningPrizes = lottos.findAllLottoPrizes(readWinningNumber());
+
 		LottoResult lottoResult = new LottoResult(winningPrizes);
+
 		OutputView.printLottoResult(lottoResult.getWinningInformation());
 		OutputView.printEarningRate(lottoResult.calculateEarningRate());
 	}
 
-	private static int readBonusNumber() {
+	private static Lottos buyLottos() {
 		try {
-			return InputUtil.inputBonusNumber();
+			LottoCount lottoCount = new LottoCount(InputView.inputMoney(), InputView.inputManualLottoCount());
+			List<Lotto> lottos = new ArrayList<>();
+			lottos.addAll(buyManualLottos(lottoCount));
+			lottos.addAll(LottoMachine.getInstance().makeRandomLottos(lottoCount));
+			OutputView.printLottoCount(lottoCount.getManualLottoCount(), lottoCount.getAutoLottoCount());
+			return new Lottos(lottos);
+		} catch (Exception e) {
+			OutputView.printExceptionMessage(e);
+			return buyLottos();
+		}
+	}
+
+	private static List<Lotto> buyManualLottos(LottoCount lottoCount) {
+		List<Lotto> manualLottos = new ArrayList<>();
+		OutputView.printManualInputGuide();
+		for (int i = 0; i < lottoCount.getManualLottoCount(); i++) {
+			manualLottos.add(generateLotto(inputLottoNumber()));
+		}
+		return manualLottos;
+	}
+
+	private static Lotto generateLotto(List<Integer> lottoNumber) {
+		try {
+			return LottoMachine.getInstance()
+					.pickDedicatedBalls(lottoNumber);
+		} catch (LottoException e) {
+			OutputView.printExceptionMessage(e);
+			return generateLotto(inputLottoNumber());
+		}
+	}
+
+	private static LottoNumber readBonusNumber() {
+		try {
+			return LottoMachine.getInstance().pickBall(InputView.inputBonusNumber());
 		} catch (NumberFormatException | IOException e) {
 			OutputView.printWrongBonusNumberInput();
 			return readBonusNumber();
 		}
 	}
 
-	private static Lottos buyLottos() {
+	private static WinningLotto readWinningNumber() {
 		try {
-			LottoMachine lottoMachine = new LottoMachine();
-			LottoCount lottoCount = new LottoCount(readMoney());
-
-			OutputView.printLottoCount(lottoCount.getLottoCount());
-			return new Lottos(lottoMachine.makeRandomLottos(lottoCount));
-		} catch (IllegalArgumentException | LottoException e) {
+			OutputView.printWinningNumberInputGuide();
+			return new WinningLotto(generateLotto(inputLottoNumber()), readBonusNumber());
+		} catch (IllegalArgumentException | LottoException | WinningLottoException e) {
 			OutputView.printExceptionMessage(e);
-			return buyLottos();
-		}
-	}
-
-	public static int readMoney() {
-		try {
-			return InputUtil.inputMoney();
-		} catch (NumberFormatException | IOException e) {
-			OutputView.printWrongMoneyInput();
-			return readMoney();
-		}
-	}
-
-	public static WinningLotto receiveWinningNumber() {
-		try {
-			return new WinningLotto(readWinningNumber(), readBonusNumber());
-		} catch (IllegalArgumentException e) {
-			OutputView.printExceptionMessage(e);
-			return receiveWinningNumber();
-		}
-	}
-
-	public static List<String> readWinningNumber() {
-		try {
-			return InputUtil.inputWinningNumber();
-		} catch (IOException e) {
-			e.printStackTrace();
 			return readWinningNumber();
 		}
 	}
