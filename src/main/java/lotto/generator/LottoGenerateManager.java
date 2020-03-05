@@ -22,6 +22,6 @@ public class LottoGenerateManager {
 
     public static WinningLotto createWinningLotto(List<String> lottoNumbers, String bonusNumber) {
         Lotto lotto = ManualLottoGenerator.createLotto(lottoNumbers);
-        return new WinningLotto(lotto, new LottoNumber(bonusNumber));
+        return new WinningLotto(lotto, LottoNumber.valueOf(bonusNumber));
     }
 }
