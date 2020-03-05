@@ -2,21 +2,21 @@ package lotto.domain;
 
 import java.util.Arrays;
 
-import lotto.exception.InvalidRankException;
-
 public enum Rank {
-    FIRST(6, new Money(2_000_000_000)),
-    SECOND(5, new Money(30_000_000)),
-    THIRD(5, new Money(1_500_000)),
-    FOURTH(4, new Money(50_000)),
-    FIFTH(3, new Money(5_000)),
-    NO_MATCH(0, new Money(0));
+    FIRST(6, BonusNumber.DEFAULT, new Money(2_000_000_000)),
+    SECOND(5, BonusNumber.TRUE, new Money(30_000_000)),
+    THIRD(5, BonusNumber.FALSE, new Money(1_500_000)),
+    FOURTH(4, BonusNumber.DEFAULT, new Money(50_000)),
+    FIFTH(3, BonusNumber.DEFAULT, new Money(5_000)),
+    NO_MATCH(0, BonusNumber.DEFAULT, new Money(0));
 
     private final int matchNumber;
+    private final BonusNumber bonusNumber;
     private final Money winningMoney;
 
-    Rank(int matchNumber, Money winningMoney) {
+    Rank(int matchNumber, BonusNumber bonusNumber, Money winningMoney) {
         this.matchNumber = matchNumber;
+        this.bonusNumber = bonusNumber;
         this.winningMoney = winningMoney;
     }
 
@@ -28,20 +28,12 @@ public enum Rank {
         return winningMoney;
     }
 
-    public static Rank valueOf(int matchNumber, boolean matchBonusBall) {
-        if (SECOND.isSameMatchNumber(matchNumber) && matchBonusBall) {
-            return SECOND;
-        }
-
-        if (matchNumber < FIFTH.matchNumber) {
-            return NO_MATCH;
-        }
-
+    public static Rank valueOf(int matchNumber, boolean matchBonusNumber) {
         return Arrays.stream(Rank.values())
-            .filter(rank -> !SECOND.equals(rank))
             .filter(rank -> rank.isSameMatchNumber(matchNumber))
-            .findAny()
-            .orElseThrow(() -> new InvalidRankException("당첨된 갯수에 해당하는 순위가 없습니다."));
+            .filter(rank -> rank.bonusNumber.match(matchBonusNumber))
+            .findFirst()
+            .orElse(NO_MATCH);
     }
 
     private boolean isSameMatchNumber(int matchNumber) {

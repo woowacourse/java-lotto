@@ -38,12 +38,11 @@ class RankTest {
     @DisplayName("당첨된 갯수에 해당하는 순위가 없음")
     void valueOfWithInvalidMatchNumber() {
         //given
-        // 8는 순위에 해당되지 않는 숫자입니다.
+        // 8은 순위에 해당되지 않는 숫자입니다.
         int invalidWinningNumber = 8;
 
         //when & then
-        assertThatThrownBy(() -> Rank.valueOf(invalidWinningNumber, true)).isInstanceOf(
-            InvalidRankException.class);
+        assertThat(Rank.valueOf(invalidWinningNumber, true)).isEqualTo(Rank.NO_MATCH);
     }
 
     @ParameterizedTest
