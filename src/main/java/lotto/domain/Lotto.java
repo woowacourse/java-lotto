@@ -8,13 +8,14 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private static final String BALL_COUNT_EXCEPTION_MESSAGE = "로또 볼의 갯수가 적절하지 않습니다.";
+    private static final String BALL_COUNT_EXCEPTION_MESSAGE = "로또 볼의 개수가 적절하지 않습니다.";
     private static final String SPLIT_DELIMITER = ", ";
-    static final int BALL_COUNT = 6;
+    private static final int BALL_COUNT_ZERO = 0;
+    private static final int BALL_COUNT = 6;
 
     private final Set<Ball> balls;
 
-    public Lotto(Set<Ball> balls) {
+    private Lotto(Set<Ball> balls) {
         validateBallCount(balls);
         this.balls = Collections.unmodifiableSet(new HashSet<>(balls));
     }
@@ -25,13 +26,25 @@ public class Lotto {
         }
     }
 
-    public static Lotto of(String rawWinningLotto) {
-        String[] numbers = rawWinningLotto.split(SPLIT_DELIMITER);
+    public static Lotto of(String rawLotto) {
+        String[] numbers = rawLotto.split(SPLIT_DELIMITER);
         Set<Ball> balls = new HashSet<>();
         for (String number : numbers) {
             balls.add(Ball.of(Integer.parseInt(number)));
         }
         return new Lotto(balls);
+    }
+
+    public static Lotto newAutoLotto() {
+        List<Ball> balls = Ball.getBalls();
+        Collections.shuffle(balls);
+
+        Set<Ball> randomBalls = new HashSet<>(balls.subList(BALL_COUNT_ZERO, BALL_COUNT));
+        return new Lotto(randomBalls);
+    }
+
+    public static boolean moreThanBallCount(int matchCount) {
+        return matchCount > BALL_COUNT;
     }
 
     public boolean contains(Ball ball) {

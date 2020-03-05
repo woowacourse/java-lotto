@@ -10,7 +10,7 @@ import lotto.domain.TotalResult;
 public class OutputView {
 
     private static final String STATISTICS_MESSAGE = "\n당첨 통계\n---------";
-    private static final String LOTTO_COUNT_MESSAGE = "%d개를 구매했습니다.\n";
+    private static final String LOTTO_COUNT_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     private static final String TOTAL_PROFIT_MESSAGE = "총 수익률은 %d%% 입니다.";
     private static final String BONUS_BALL_MESSAGE = ", 보너스 볼 일치";
     private static final String TOTAL_PRIZE_AND_COUNT_MESSAGE = " (%d원) - %d개\n";
@@ -20,7 +20,8 @@ public class OutputView {
     }
 
     public static void printLottoCount(LottoCount count) {
-        System.out.printf(LOTTO_COUNT_MESSAGE, count.getLottoCount());
+        System.out
+            .printf(LOTTO_COUNT_MESSAGE, count.getManualLottoCount(), count.getAutoLottoCount());
     }
 
     public static void printLottos(Lottos lottos) {

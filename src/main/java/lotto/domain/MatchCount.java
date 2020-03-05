@@ -10,7 +10,7 @@ public class MatchCount {
     private final int matchCount;
 
     public MatchCount(int matchCount) {
-        if (matchCount < MINIMUM_MATCH_COUNT || matchCount > Lotto.BALL_COUNT) {
+        if (matchCount < MINIMUM_MATCH_COUNT || Lotto.moreThanBallCount(matchCount)) {
             throw new IllegalArgumentException(INVALID_MATCH_COUNT_EXCEPTION_MESSAGE);
         }
         this.matchCount = matchCount;

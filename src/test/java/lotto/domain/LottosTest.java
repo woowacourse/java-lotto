@@ -2,24 +2,45 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottosTest {
 
-    @DisplayName("개수를 넣었을 때 개수만큼 로또를 생성해줌")
-    @Test
-    void makeLottos() {
-        Set<Ball> balls = new HashSet<>(Arrays
-            .asList(Ball.of(1), Ball.of(2), Ball.of(3), Ball.of(4), Ball.of(5), Ball.of(6)));
-        Lotto firstLotto = new Lotto(balls);
-        Lotto secondLotto = new Lotto(balls);
-
-        Lottos lottos = new Lottos(Arrays.asList(firstLotto, secondLotto));
-        assertThat(lottos.isSameCount(2)).isTrue();
+    @DisplayName("랜덤 로또 개수 확인")
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3, 4, 5})
+    void makeAutoLottos(int count) {
+        List<String> strings = new ArrayList<>();
+        Lottos autoLottos = Lottos.createLottos(strings, new LottoCount(count));
+        assertThat(autoLottos.getCount()).isEqualTo(new LottoCount(count));
     }
 
+    @DisplayName("수동 로또 생성")
+    @Test
+    void makeManualLottos() {
+        List<String> strings = new ArrayList<>();
+        strings.add("1, 2, 3, 4, 5, 6");
+        strings.add("22, 3, 4, 5, 6, 7");
+        LottoCount lottoCount = new LottoCount(2, 2);
+        Lottos manualLotto = Lottos.createLottos(strings, lottoCount);
+        assertThat(manualLotto.getCount())
+            .isEqualTo(lottoCount);
+    }
+
+    @DisplayName("자동 수동 로또 생성")
+    @Test
+    void makeLottos() {
+        List<String> strings = new ArrayList<>();
+        strings.add("1, 2, 3, 4, 5, 6");
+        strings.add("2, 3, 4, 5, 6, 7");
+        LottoCount lottoCount = new LottoCount(4, 2);
+        Lottos manualLotto = Lottos.createLottos(strings, lottoCount);
+        assertThat(manualLotto.getCount())
+            .isEqualTo(lottoCount);
+    }
 }

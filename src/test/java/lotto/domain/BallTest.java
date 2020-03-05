@@ -25,5 +25,6 @@ class BallTest {
         Ball firstBall = Ball.of(firstBallNo);
         Ball secondBall = Ball.of(secondBallNo);
         assertThat(firstBall.equals(secondBall)).isEqualTo(expected);
+        assertThat(firstBall == secondBall).isEqualTo(expected);
     }
 }
