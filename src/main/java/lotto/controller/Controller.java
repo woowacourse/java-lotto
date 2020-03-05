@@ -93,18 +93,36 @@ public class Controller {
 	}
 
 	private static PurchasedLottos purchaseManualLotto(
-			LottoMoney manualTicketMoney) {
-
-		List<String> serialLottoNumbers = new ArrayList<>();
+			LottoMoney manualLottoMoney) {
 		OutputView.printInputManualLottoNumbersMessage();
-		for (int i = 0; i < manualTicketMoney.countPurchasedTickets(); i++) {
-			serialLottoNumbers.add(prepareManualSerialLottoNumber());
+
+		PurchasedLottos purchasedLottos = PurchasedLottos.emptyPurchasedLottos();
+		for (int i = 0; i < manualLottoMoney.countPurchasedTickets(); i++) {
+			addOnePurchasedManualLottos(purchasedLottos);
 		}
 
-		return PurchasedLottos.of(serialLottoNumbers);
+		return purchasedLottos;
 	}
 
-	private static String prepareManualSerialLottoNumber() {
+	private static void addOnePurchasedManualLottos(
+			PurchasedLottos purchasedLottos) {
+		while (!addOnePurchasedManualLottosIfValid(purchasedLottos)) {
+			/* 의도적으로 비움 */
+		}
+	}
+
+	private static boolean addOnePurchasedManualLottosIfValid(
+			PurchasedLottos purchasedLottos) {
+		try {
+			purchasedLottos.add(prepareManualLottoNumber());
+			return true;
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+	}
+
+	private static String prepareManualLottoNumber() {
 		return InputView.inputManualLottoNumbers();
 	}
 

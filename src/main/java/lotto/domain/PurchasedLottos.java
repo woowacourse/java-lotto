@@ -9,7 +9,7 @@ public class PurchasedLottos {
 	private final List<Lotto> purchasedLottos;
 
 	private PurchasedLottos(final List<Lotto> purchasedLottos) {
-		this.purchasedLottos = Collections.unmodifiableList(purchasedLottos);
+		this.purchasedLottos = purchasedLottos;
 	}
 
 	public static PurchasedLottos of(LottoMoney lottoMoney,
@@ -32,6 +32,11 @@ public class PurchasedLottos {
 		return new PurchasedLottos(purchasedLotto);
 	}
 
+	public static PurchasedLottos emptyPurchasedLottos() {
+		List<Lotto> lottos = new ArrayList<>();
+		return new PurchasedLottos(lottos);
+	}
+
 	public List<Lotto> getPurchasedLottos() {
 		return Collections.unmodifiableList(purchasedLottos);
 	}
@@ -40,6 +45,10 @@ public class PurchasedLottos {
 		return purchasedLottos.stream()
 				.map(winningLotto::findMatchingWinningTypeWith)
 				.collect(Collectors.toUnmodifiableList());
+	}
+
+	public void add(String lotto) {
+		purchasedLottos.add(Lotto.of(lotto));
 	}
 
 	public PurchasedLottos addAll(PurchasedLottos other) {
