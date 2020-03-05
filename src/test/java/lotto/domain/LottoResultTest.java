@@ -12,7 +12,7 @@ public class LottoResultTest {
 	void of() {
 		// given
 		PurchasedLottos purchasedLottos
-				= PurchasedLottos.of(new LottoMoney(14000),
+				= PurchasedLottos.of(LottoMoney.of(14000),
 				new TestLottoFactory());
 
 		WinningLotto winningLotto

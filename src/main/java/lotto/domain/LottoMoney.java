@@ -11,16 +11,20 @@ public class LottoMoney {
 
 	private final int purchaseMoney;
 
-	public LottoMoney(final int purchaseMoney) {
+	private LottoMoney(final int purchaseMoney) {
 		checkIsLessThanZero(purchaseMoney);
 		checkIsMultipleOfThousand(purchaseMoney);
 
 		this.purchaseMoney = purchaseMoney;
 	}
 
-	public static LottoMoney of(final int lottoCount) {
+	public static LottoMoney of(final int purchaseMoney) {
+		return new LottoMoney(purchaseMoney);
+	}
+
+	public static LottoMoney ofLottoCount(final int count) {
 		try {
-			return new LottoMoney(LOTTO_PRICE * lottoCount);
+			return new LottoMoney(LOTTO_PRICE * count);
 		} catch (LottoMoneyIllegalArgumentException e) {
 			throw new PurchaseManualLottoIllegalArgumentException();
 		}

@@ -9,81 +9,81 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoMoneyTest {
 	@Test
-	void PurchaseMoney() {
+	void of() {
 		// given
 		int input = 1000;
 
 		// when
-		LottoMoney lottoMoney = new LottoMoney(1000);
+		LottoMoney lottoMoney = LottoMoney.of(input);
 
 		// then
 		Assertions.assertThat(lottoMoney.getPurchaseMoney())
-				.isEqualTo(1000);
+				.isEqualTo(input);
 	}
 
 	@ParameterizedTest
 	@ValueSource(ints = {-1, -5, Integer.MIN_VALUE})
-	void PurchaseMoney_LessThanZero_ShouldThrowException(int input) {
+	void of_LessThanZero_ShouldThrowException(int input) {
 		// then
 		Assertions.assertThatThrownBy(() -> {
 			// when
-			new LottoMoney(input);
+			LottoMoney.of(input);
 		}).isInstanceOf(LottoMoneyIllegalArgumentException.class)
 				.hasMessageMatching("-?[0-9]+" + LottoMoneyIllegalArgumentException.MESSAGE);
 	}
 
 	@ParameterizedTest
 	@ValueSource(ints = {1, 999, 1001, 1500, 2010, 1000100, Integer.MAX_VALUE})
-	void PurchaseMoney_NotMultipleOfThousand_ShouldThrowException(int input) {
+	void of_NotMultipleOfThousand_ShouldThrowException(int input) {
 		// then
 		Assertions.assertThatThrownBy(() -> {
 			// when
-			new LottoMoney(input);
+			LottoMoney.of(input);
 		}).isInstanceOf(LottoMoneyIllegalArgumentException.class)
 				.hasMessageMatching("-?[0-9]+" + LottoMoneyIllegalArgumentException.MESSAGE);
+	}
+
+	@Test
+	void ofLottoCount() {
+		// given
+		int input = 10;
+
+		// when
+		LottoMoney result = LottoMoney.ofLottoCount(input);
+
+		// then
+		LottoMoney expected = LottoMoney.of(input * LottoMoney.LOTTO_PRICE);
+		Assertions.assertThat(result)
+				.isEqualTo(expected);
 	}
 
 	@ParameterizedTest
 	@CsvSource(value = {"10000,10000", "10000,9000", "10000,0"})
 	void subtractByTicketNumber(int amount, int input) {
 		// given
-		LottoMoney lottoMoney = new LottoMoney(amount);
+		LottoMoney lottoMoney = LottoMoney.of(amount);
 
 		// when
-		LottoMoney other = new LottoMoney(input);
+		LottoMoney other = LottoMoney.of(input);
 		LottoMoney result = lottoMoney.subtract(other);
 
 		// then
 		Assertions.assertThat(result)
-				.isEqualTo(new LottoMoney(amount - input));
+				.isEqualTo(LottoMoney.of(amount - input));
 	}
 
 	@Test
 	void subtractByTicketNumber_BiggerThanPurchaseMoney_ShouldThrowException() {
 		// given
 		int amount = 10000;
-		LottoMoney lottoMoney = new LottoMoney(amount);
+		LottoMoney lottoMoney = LottoMoney.of(amount);
 
 		// then
 		Assertions.assertThatThrownBy(() -> {
 			// when
-			LottoMoney other = new LottoMoney(11000);
+			LottoMoney other = LottoMoney.of(11000);
 			LottoMoney result = lottoMoney.subtract(other);
 		});
-	}
-
-	@Test
-	void of() {
-		// given
-		int input = 10;
-
-		// when
-		LottoMoney result = LottoMoney.of(input);
-
-		// then
-		LottoMoney expected = new LottoMoney(input * LottoMoney.LOTTO_PRICE);
-		Assertions.assertThat(result)
-				.isEqualTo(expected);
 	}
 
 }

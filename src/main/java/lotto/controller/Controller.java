@@ -6,9 +6,6 @@ import lotto.exceptions.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Controller {
 	public static void run() {
 		LottoMoney lottoMoney = prepareLotto();
@@ -76,7 +73,7 @@ public class Controller {
 		}
 
 		try {
-			return LottoMoney.of(manualTicketNumber);
+			return LottoMoney.ofLottoCount(manualTicketNumber);
 		} catch (PurchaseManualLottoIllegalArgumentException e) {
 			OutputView.printWarningMessage(e.getMessage());
 			return null;
@@ -168,7 +165,7 @@ public class Controller {
 
 	private static LottoMoney createPurchaseMoneyIfValid() {
 		try {
-			return new LottoMoney(InputView.inputPurchaseMoney());
+			return LottoMoney.of(InputView.inputPurchaseMoney());
 		} catch (LottoMoneyIllegalArgumentException e) {
 			OutputView.printWarningMessage(e.getMessage());
 			return null;

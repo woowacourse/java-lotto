@@ -32,7 +32,7 @@ class PurchasedLottosTest {
 				= new WinningLotto(Lotto.of("1,2,3,4,5,6"), LottoNumber.of(7));
 
 		PurchasedLottos purchasedLottos = PurchasedLottos.of(
-				new LottoMoney(14000), new TestLottoFactory());
+				LottoMoney.of(14000), new TestLottoFactory());
 
 		LottoResult result = LottoResult.of(purchasedLottos, winningLotto);
 
