@@ -9,7 +9,7 @@ public class LottoResult {
 
 	private final Map<WinningType, Integer> lottoResult;
 
-	public LottoResult(final Map<WinningType, Integer> lottoResult) {
+	private LottoResult(final Map<WinningType, Integer> lottoResult) {
 		this.lottoResult = lottoResult;
 	}
 
