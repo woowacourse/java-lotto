@@ -147,7 +147,7 @@ public class Controller {
 
 	private static WinningLotto createWinningLottoNumbersIfValid() {
 		try {
-			return new WinningLotto(createWinningNumber(), createBonusNumber());
+			return WinningLotto.of(createWinningNumber(), createBonusNumber());
 		} catch (WinningLottoIllegalArgumentException e) {
 			OutputView.printWarningMessage(e.getMessage());
 			return null;

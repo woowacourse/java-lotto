@@ -3,7 +3,6 @@ package lotto.domain.SerialLottoNumberFactory;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lotto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractLottoFactory implements LottoFactory {
@@ -13,7 +12,7 @@ public abstract class AbstractLottoFactory implements LottoFactory {
 	private final List<LottoNumber> allLottoNumbers;
 
 	AbstractLottoFactory() {
-		allLottoNumbers = new ArrayList<>(LottoNumber.getAll());
+		allLottoNumbers = LottoNumber.allList();
 	}
 
 	protected List<LottoNumber> getAllLottoNumbers() {
@@ -21,5 +20,5 @@ public abstract class AbstractLottoFactory implements LottoFactory {
 	}
 
 	@Override
-	public abstract Lotto createSerialLottoNumber();
+	public abstract Lotto createLotto();
 }

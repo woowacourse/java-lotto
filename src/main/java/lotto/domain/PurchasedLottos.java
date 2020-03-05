@@ -18,7 +18,7 @@ public class PurchasedLottos {
 
 		int count = lottoMoney.countPurchasedTickets();
 		for (int i = 0; i < count; i++) {
-			purchasedLotto.add(LottoFactory.createSerialLottoNumber());
+			purchasedLotto.add(LottoFactory.createLotto());
 		}
 
 		return new PurchasedLottos(purchasedLotto);

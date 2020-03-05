@@ -28,7 +28,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 		return cachedLottoNumbers.get(lottoNumber);
 	}
 
-	public static List<LottoNumber> getAll() {
+	public static List<LottoNumber> allList() {
 		return new ArrayList<>(cachedLottoNumbers.values());
 	}
 
