@@ -18,7 +18,7 @@ public class LottoMoney {
 		this.purchaseMoney = purchaseMoney;
 	}
 
-	public static LottoMoney of(int lottoCount) {
+	public static LottoMoney of(final int lottoCount) {
 		try {
 			return new LottoMoney(LOTTO_PRICE * lottoCount);
 		} catch (LottoMoneyIllegalArgumentException e) {

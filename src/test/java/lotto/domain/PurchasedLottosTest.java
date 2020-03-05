@@ -4,8 +4,10 @@ import lotto.domain.SerialLottoNumberFactory.TestLottoFactory;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 class PurchasedLottosTest {
 	@Test
@@ -14,10 +16,7 @@ class PurchasedLottosTest {
 		List<Lotto> purchasedSerialLottoNumbers = new ArrayList<>();
 		int[][] input = {{1, 10, 3, 11, 5, 6}, {5, 10, 45, 3, 17, 2}, {4, 7, 13, 19, 22, 37}};
 		for (int[] element : input) {
-			List<Integer> lottoNumbers = Arrays.stream(element)
-					.boxed()
-					.collect(Collectors.toUnmodifiableList());
-			Lotto serialLottoNumber = Lotto.of(lottoNumbers);
+			Lotto serialLottoNumber = Lotto.of(element);
 			purchasedSerialLottoNumbers.add(serialLottoNumber);
 		}
 

@@ -11,7 +11,7 @@ public class Lotto {
 
 	private final List<LottoNumber> lottoNumbers;
 
-	public Lotto(final List<LottoNumber> lottoNumbers) {
+	private Lotto(final List<LottoNumber> lottoNumbers) {
 		checkIsSizeSix(lottoNumbers);
 		checkIsDuplicated(lottoNumbers);
 
@@ -32,12 +32,17 @@ public class Lotto {
 		return new Lotto(lottoNumbers);
 	}
 
-	public static Lotto of(List<Integer> input) {
-		List<LottoNumber> lottoNumbers = input.stream()
+	public static Lotto of(int... input) {
+		List<LottoNumber> lottoNumbers = Arrays.stream(input)
+				.boxed()
 				.map(LottoNumber::of)
 				.collect(Collectors.toUnmodifiableList());
 
 		return new Lotto(lottoNumbers);
+	}
+
+	public static Lotto of(final List<LottoNumber> input) {
+		return new Lotto(input);
 	}
 
 	private void checkIsDuplicated(List<LottoNumber> lottoNumbers) {

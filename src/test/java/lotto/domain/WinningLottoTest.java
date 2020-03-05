@@ -7,8 +7,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Stream;
 
 public class WinningLottoTest {
@@ -28,8 +26,7 @@ public class WinningLottoTest {
 	@Test
 	void WinningLottoNumbers_WinningNumbersContainsBonusNumber_ShouldThrowException() {
 		// given
-		List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-		Lotto winningLottoNumbers = Lotto.of(lottoNumbers);
+		Lotto winningLottoNumbers = Lotto.of(1, 2, 3, 4, 5, 6);
 		LottoNumber bonus = LottoNumber.of(6);
 
 		// then
@@ -43,10 +40,9 @@ public class WinningLottoTest {
 
 	@ParameterizedTest
 	@MethodSource("generateCountMatchingLottoNumbersInput")
-	void countMatchingLottoNumbers(List<Integer> input, WinningType expected) {
+	void countMatchingLottoNumbers(int[] input, WinningType expected) {
 		// given
-		List<Integer> winning = Arrays.asList(1, 2, 3, 4, 5, 6);
-		Lotto winningNumbers = Lotto.of(winning);
+		Lotto winningNumbers = Lotto.of(1, 2, 3, 4, 5, 6);
 		LottoNumber bonus = LottoNumber.of(7);
 		WinningLotto winningLotto = new WinningLotto(winningNumbers, bonus);
 
@@ -61,12 +57,12 @@ public class WinningLottoTest {
 	}
 
 	static Stream<Arguments> generateCountMatchingLottoNumbersInput() {
-		return Stream.of(Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), WinningType.FIRST_PLACE),
-				Arguments.of(Arrays.asList(1, 2, 4, 5, 6, 7), WinningType.SECOND_PLACE),
-				Arguments.of(Arrays.asList(1, 2, 4, 5, 6, 45), WinningType.THIRD_PLACE),
-				Arguments.of(Arrays.asList(2, 3, 4, 5, 7, 44), WinningType.FOURTH_PLACE),
-				Arguments.of(Arrays.asList(3, 5, 6, 11, 14, 23), WinningType.FIFTH_PLACE),
-				Arguments.of(Arrays.asList(2, 3, 34, 45, 7, 37), WinningType.NONE),
-				Arguments.of(Arrays.asList(8, 9, 10, 11, 12, 13), WinningType.NONE));
+		return Stream.of(Arguments.of(new int[]{1, 2, 3, 4, 5, 6}, WinningType.FIRST_PLACE),
+				Arguments.of(new int[]{1, 2, 4, 5, 6, 7}, WinningType.SECOND_PLACE),
+				Arguments.of(new int[]{1, 2, 4, 5, 6, 45}, WinningType.THIRD_PLACE),
+				Arguments.of(new int[]{2, 3, 4, 5, 7, 44}, WinningType.FOURTH_PLACE),
+				Arguments.of(new int[]{3, 5, 6, 11, 14, 23}, WinningType.FIFTH_PLACE),
+				Arguments.of(new int[]{2, 3, 34, 45, 7, 37}, WinningType.NONE),
+				Arguments.of(new int[]{8, 9, 10, 11, 12, 13}, WinningType.NONE));
 	}
 }

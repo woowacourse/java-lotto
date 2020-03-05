@@ -14,10 +14,9 @@ import java.util.stream.Stream;
 
 public class LottoTest {
 	@Test
-	void SerialLottoNumber() {
-		// given
-		List<Integer> input = Arrays.asList(1, 10, 3, 11, 5, 6);
-		Lotto serialLottoNumber = Lotto.of(input);
+	void Lotto() {
+		// when
+		Lotto lotto = Lotto.of(1, 10, 3, 11, 5, 6);
 
 		// then
 		int[] sortedInput = {1, 3, 5, 6, 10, 11};
@@ -25,22 +24,17 @@ public class LottoTest {
 				.mapToObj(LottoNumber::of)
 				.collect(Collectors.toList());
 
-		Assertions.assertThat(serialLottoNumber.getLottoNumbers())
+		Assertions.assertThat(lotto.getLottoNumbers())
 				.isEqualTo(expected);
 	}
 
 	@ParameterizedTest
 	@MethodSource("generateNotSizeSixInput")
-	void SerialLottoNumber_NotSizeSix_ShouldThrowException(int[] input) {
-		// given
-		List<Integer> lottoNumbers = Arrays.stream(input)
-				.boxed()
-				.collect(Collectors.toUnmodifiableList());
-
+	void Lotto_NotSizeSix_ShouldThrowException(int[] input) {
 		// then
 		Assertions.assertThatThrownBy(() -> {
 			// when
-			Lotto.of(lottoNumbers);
+			Lotto.of(input);
 		}).isInstanceOf(LottoIllegalArgumentException.class)
 				.hasMessageMatching(LottoIllegalArgumentException.MESSAGE);
 	}
@@ -53,16 +47,11 @@ public class LottoTest {
 	@ParameterizedTest
 	@MethodSource("generateDuplicatedInput")
 	void SerialLottoNumber_DuplicatedNumbers_ShouldThrowException(int[] input) {
-		// given
-		List<Integer> lottoNumbers = Arrays.stream(input)
-				.boxed()
-				.collect(Collectors.toUnmodifiableList());
-
 		// then
 		Assertions.assertThatThrownBy(() -> {
 
 			// when
-			Lotto.of(lottoNumbers);
+			Lotto.of(input);
 		}).isInstanceOf(LottoIllegalArgumentException.class)
 				.hasMessageMatching(LottoIllegalArgumentException.MESSAGE);
 	}
@@ -82,21 +71,18 @@ public class LottoTest {
 		Lotto result = Lotto.of(input);
 
 		//then
-		Lotto expected = Lotto.of(Arrays.asList(1, 3, 4, 5, 6, 45));
+		Lotto expected = Lotto.of(1, 3, 4, 5, 6, 45);
 		Assertions.assertThat(result)
 				.isEqualTo(expected);
 	}
 
 	@Test
-	void of_Integers() {
-		// given
-		List<Integer> input = Arrays.asList(1, 45, 3, 4, 5, 6);
-
+	void of_Ints() {
 		// when
-		Lotto result = Lotto.of(input);
+		Lotto result = Lotto.of(1, 45, 3, 4, 5, 6);
 
 		//then
-		Lotto expected = Lotto.of(Arrays.asList(1, 3, 4, 5, 6, 45));
+		Lotto expected = Lotto.of(1, 3, 4, 5, 6, 45);
 		Assertions.assertThat(result)
 				.isEqualTo(expected);
 	}
