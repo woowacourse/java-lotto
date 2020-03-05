@@ -103,9 +103,10 @@ public class Controller {
 
 	private static void addOnePurchasedManualLottos(
 			PurchasedLottos purchasedLottos) {
-		while (!addOnePurchasedManualLottosIfValid(purchasedLottos)) {
-			/* 의도적으로 비움 */
-		}
+		boolean isSucceeded;
+		do {
+			isSucceeded = addOnePurchasedManualLottosIfValid(purchasedLottos);
+		} while(!isSucceeded);
 	}
 
 	private static boolean addOnePurchasedManualLottosIfValid(
