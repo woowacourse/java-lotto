@@ -2,6 +2,8 @@ package lotto.domain;
 
 import java.util.Objects;
 
+import lotto.exception.InvalidMoneyException;
+
 public class Money {
     private static final int PRICE = 1_000;
     private static final int PERCENT = 100;
@@ -18,13 +20,17 @@ public class Money {
     }
 
     private void validateMoney(int value) {
-        if (value <= ZERO) {
-            throw new IllegalArgumentException("음수는 입력할 수 없습니다");
+        if (value < ZERO) {
+            throw new InvalidMoneyException("음수는 입력할 수 없습니다");
         }
     }
 
     int toLottosSize() {
         return this.value / PRICE;
+    }
+
+    int toLottosSizeExcept(Money manualLottosAmount) {
+        return (this.value - (manualLottosAmount.value * PRICE)) / PRICE;
     }
 
     Money add(Money money) {

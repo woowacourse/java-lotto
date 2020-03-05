@@ -8,14 +8,20 @@ import lotto.domain.*;
 
 public class OutputView {
 
-    public static void printLottosSize(int lottosSize) {
-        System.out.println(String.format("%d개를 구매했습니다.", lottosSize));
+    public static void printLottosSize(int manualLottosSize, int autoLottosSize) {
+        System.out.println(String.format("수동으로 %d, 자동으로 %d개를 구매했습니다.", manualLottosSize, autoLottosSize));
     }
 
-    public static void printLotto(Lotto lotto) {
+    public static void printLottos(Lottos lottos) {
+        for (Lotto lotto : lottos.getLottos()) {
+            printLotto(lotto);
+        }
+    }
+
+    private static void printLotto(Lotto lotto) {
         List<String> stringifiedLottoNumbers = lotto.getLottoNumbers().stream()
-                .map(LottoNumber::toString)
-                .collect(Collectors.toList());
+            .map(LottoNumber::toString)
+            .collect(Collectors.toList());
 
         System.out.println("[" + String.join(",", stringifiedLottoNumbers) + "]");
     }
@@ -34,8 +40,8 @@ public class OutputView {
         Map<Rank, Integer> winningResults = winningRanks.getWinningRanks();
         for (Rank rank : winningResults.keySet()) {
             System.out.println(
-                    String.format("%d개 일치(%d원)- %d개", rank.getMatchNumber(), rank.calculateWinningMoney().getValue(),
-                            winningResults.get(rank)));
+                String.format("%d개 일치(%d원)- %d개", rank.getMatchNumber(), rank.calculateWinningMoney().getValue(),
+                    winningResults.get(rank)));
         }
     }
 }

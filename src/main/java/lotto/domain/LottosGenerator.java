@@ -8,7 +8,7 @@ import java.util.Set;
 public class LottosGenerator {
     private static final int ONE = 1;
     private static final int LOTTO_NUMBER_SIZE = 6;
-    private static List<LottoNumber> lottoNumbersInBox = LottoNumberBox.create();
+    private static List<LottoNumber> lottoNumbersInBox = LottoNumber.createLottoNumberBox();
     private final LottoNumberShuffler lottoNumberShuffler;
 
     public LottosGenerator(LottoNumberShuffler lottoNumberShuffler) {

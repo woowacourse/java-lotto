@@ -1,10 +1,12 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,17 +17,39 @@ class WinningLottoTest {
     @DisplayName("당첨 로또와 로또 비교")
     void match() {
         //given
-        Set<LottoNumber> winningNumbers = new HashSet<>(
-            Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                new LottoNumber(5), new LottoNumber(6)));
-        Set<LottoNumber> lottoNumbers = new HashSet<>(
-            Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                new LottoNumber(5), new LottoNumber(40)));
+        Set<LottoNumber> winningNumbers = Stream.of(1, 2, 3, 4, 5, 6)
+            .map(LottoNumber::of)
+            .collect(Collectors.toSet());
+        Lotto lotto = new Lotto(new HashSet<>(
+            Stream.of(1, 2, 3, 4, 5, 40)
+                .map(LottoNumber::of)
+                .collect(Collectors.toSet())));
+        Set<Lotto> lottoSet = new HashSet<>(Arrays.asList(lotto));
 
-        Lotto lotto = new Lotto(lottoNumbers);
-        LottoNumber bounusNumber = new LottoNumber(7);
+        Lottos lottos = new Lottos(lottoSet);
+        LottoNumber bounusNumber = LottoNumber.of(7);
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bounusNumber);
         //when & then
-        assertThat(winningLotto.match(lotto)).isEqualTo(Rank.THIRD);
+        assertThat(winningLotto.match(lottos).getWinningRanks().keySet()).contains(Rank.THIRD);
+    }
+
+    @Test
+    @DisplayName("당첨로또가 없는 경우")
+    void matchNone() {
+        //given
+        Set<LottoNumber> winningNumbers = Stream.of(1, 2, 3, 4, 5, 6)
+            .map(LottoNumber::of).collect(Collectors.toSet());
+        Lotto lotto = new Lotto(new HashSet<>(
+            Stream.of(8, 9, 10, 4, 5, 40)
+                .map(LottoNumber::of)
+                .collect(Collectors.toSet())));
+
+        Set<Lotto> lottoSet = new HashSet<>(Arrays.asList(lotto));
+
+        Lottos lottos = new Lottos(lottoSet);
+        LottoNumber bounusNumber = LottoNumber.of(7);
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bounusNumber);
+        //when & then
+        assertThat(winningLotto.match(lottos).getWinningRanks().keySet()).contains(Rank.NO_MATCH);
     }
 }

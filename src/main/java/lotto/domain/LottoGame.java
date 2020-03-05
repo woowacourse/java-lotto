@@ -11,49 +11,42 @@ public class LottoGame {
     }
 
     public void play() {
-        Money purchaseAmount = inputPurchaseAmount();
-        Lottos lottos = purchaseLottos(purchaseAmount);
-        Result result = produceResult(lottos, purchaseAmount);
-        OutputView.printResult(result);
+        Money purchaseAmount = InputView.inputPurchaseAmount();
+        Money manualLottosAmount = InputView.inputManualLottoAmount();
 
+        Lottos lottos = purchaseLottos(purchaseAmount, manualLottosAmount);
+        Result result = produceResult(lottos);
+        OutputView.printResult(result);
     }
 
-    private Result produceResult(Lottos lottos, Money purchaseMoney) {
+    private Result produceResult(Lottos lottos) {
         WinningLotto winningLotto = InputView.inputWinningLotto();
         WinningRanks winningRanks = compareWithWinningNumbers(lottos, winningLotto);
-        return new Result(winningRanks, purchaseMoney);
+        return new Result(winningRanks, lottos.toPrice());
     }
 
     private WinningRanks compareWithWinningNumbers(Lottos lottos, WinningLotto winningLotto) {
-        Ranks ranks = new Ranks();
-        //todo: 함수를 더 간결하게 정리
-        for (Lotto lotto : lottos.getLottos()) {
-            Rank rank = winningLotto.match(lotto);
-            ranks.add(rank);
-        }
-        return WinningRanksFactory.create(ranks);
+        return winningLotto.match(lottos);
     }
 
-    private Lottos purchaseLottos(Money purchaseAmount) {
-        return generateLottos(purchaseAmount.toLottosSize());
+    private Lottos purchaseLottos(Money purchaseAmount, Money manualLottosAmount) {
+        Lottos manualLottos = generateManualLottos(purchaseAmount, manualLottosAmount);
+        Lottos autoLottos = generateAutoLottos(purchaseAmount.toLottosSizeExcept(manualLottosAmount));
+        return manualLottos.add(autoLottos);
     }
 
-    private Lottos generateLottos(int lottosSize) {
+    private Lottos generateManualLottos(Money purchaseAmount, Money manualLottosAmount) {
+        Lottos manualLottos = InputView.inputManualLottos(manualLottosAmount);
+        OutputView.printLottosSize(manualLottosAmount.getValue(),
+            purchaseAmount.toLottosSizeExcept(manualLottosAmount));
+        OutputView.printLottos(manualLottos);
+        return manualLottos;
+    }
+
+    private Lottos generateAutoLottos(int lottosSize) {
         Lottos lottos = lottosGenerator.generate(lottosSize);
-        printLottos(lottos);
+        OutputView.printLottos(lottos);
         return lottos;
-    }
-
-    private void printLottos(Lottos lottos) {
-        for (Lotto lotto : lottos.getLottos()) {
-            OutputView.printLotto(lotto);
-        }
-    }
-
-    private Money inputPurchaseAmount() {
-        Money purchaseAmount = InputView.inputPurchaseAmount();
-        OutputView.printLottosSize(purchaseAmount.toLottosSize());
-        return purchaseAmount;
     }
 
 }
