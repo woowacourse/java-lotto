@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class AutoTicket implements LottoGenerator {
+    private static final int FIRST_INDEX = 0;
 
     @Override
     public List<LottoTicket> generate(TicketInformation ticketInformation) {
@@ -18,6 +19,8 @@ public class AutoTicket implements LottoGenerator {
     public LottoTicket createAutoTicket() {
         List<LottoNumber> autoTicket = LottoNumber.allLottoNumbers();
         Collections.shuffle(autoTicket);
-        return LottoTicket.makeAutoTicket(autoTicket);
+        autoTicket = autoTicket.subList(FIRST_INDEX, LottoTicket.LOTTO_NUMBER_LENGTH);
+        LottoNumber.sortLottoNumber(autoTicket);
+        return new LottoTicket(autoTicket);
     }
 }

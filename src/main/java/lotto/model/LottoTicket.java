@@ -6,10 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTicket {
-    private static final int FIRST_INDEX = 0;
-    private static final int LOTTO_NUMBER_LENGTH = 6;
     private static final String LOTTO_TICKET_NULL_POINTER_EXCEPTION_MESSAGE = "로또의 번호가 null입니다.";
     private static final String LOTTO_NUMBER_EXCEPTION_MESSAGE = "6개의 숫자를 입력하셔야 합니다.";
+    public static final int LOTTO_NUMBER_LENGTH = 6;
     private List<LottoNumber> lottoTicket;
 
     public LottoTicket(List<LottoNumber> lottoTicket) {
@@ -28,12 +27,6 @@ public class LottoTicket {
         if (inputs.size() != LOTTO_NUMBER_LENGTH) {
             throw new NotSixNumbersException(LOTTO_NUMBER_EXCEPTION_MESSAGE);
         }
-    }
-
-    public static LottoTicket makeAutoTicket(List<LottoNumber> autoTicket) {
-        List<LottoNumber> autoNumbers = autoTicket.subList(FIRST_INDEX, LOTTO_NUMBER_LENGTH);
-        LottoNumber.sortLottoNumber(autoNumbers);
-        return new LottoTicket(autoNumbers);
     }
 
     public List<Integer> getLottoTicket() {

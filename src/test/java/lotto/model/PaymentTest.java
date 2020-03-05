@@ -1,7 +1,6 @@
 package lotto.model;
 
 import lotto.exception.NotMultipleOfThousandException;
-import lotto.exception.NotNumberException;
 import lotto.exception.OverRangeException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,7 +18,7 @@ public class PaymentTest {
         assertThatThrownBy(() -> {
             new Payment(value);
         }).isInstanceOf(OverRangeException.class)
-        .hasMessage("범위를 벗어났습니다.");
+                .hasMessage("범위를 벗어났습니다.");
     }
 
     @Test

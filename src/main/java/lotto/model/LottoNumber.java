@@ -45,7 +45,6 @@ public class LottoNumber {
         lottoTicket.sort(Comparator.comparingInt(lottoNumber -> lottoNumber.lottoNumber));
     }
 
-
     public int getLottoNumber() {
         return lottoNumber;
     }

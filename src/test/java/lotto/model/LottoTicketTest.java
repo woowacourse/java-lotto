@@ -31,13 +31,13 @@ public class LottoTicketTest {
             List<LottoNumber> lottoTicket = Arrays.asList(one, two, three, four, five);
             new LottoTicket(lottoTicket);
         }).isInstanceOf(NotSixNumbersException.class)
-        .hasMessage("6개의 숫자를 입력하셔야 합니다.");
+                .hasMessage("6개의 숫자를 입력하셔야 합니다.");
 
         assertThatThrownBy(() -> {
             List<LottoNumber> lottoTicket = Arrays.asList(one, two, three, four, five, six, seven);
             new LottoTicket(lottoTicket);
         }).isInstanceOf(NotSixNumbersException.class)
-        .hasMessage("6개의 숫자를 입력하셔야 합니다.");
+                .hasMessage("6개의 숫자를 입력하셔야 합니다.");
     }
 
     @Test
@@ -46,7 +46,7 @@ public class LottoTicketTest {
         assertThatThrownBy(() -> {
             new LottoTicket(null);
         }).isInstanceOf(NullPointerException.class)
-        .hasMessage("로또의 번호가 null입니다.");
+                .hasMessage("로또의 번호가 null입니다.");
     }
 
     @Test

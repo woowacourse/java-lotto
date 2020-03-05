@@ -31,10 +31,6 @@ public class TicketInformation {
         }
     }
 
-    public int getManualTicketCount() {
-        return manualTicketCount;
-    }
-
     public int getAutoTicketCount() {
         return autoTicketCount;
     }

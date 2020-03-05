@@ -38,5 +38,4 @@ public class InputViewTest {
         }).isInstanceOf(NotNumberException.class)
                 .hasMessage("숫자를 입력하세요.");
     }
-
 }

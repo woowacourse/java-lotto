@@ -21,7 +21,7 @@ public class BonusBallTest {
         assertThatThrownBy(() -> {
             new BonusBall(null, LottoNumber.valueOf(1));
         }).isInstanceOf(NullPointerException.class)
-        .hasMessage("당첨 번호의 값이 null 입니다.");
+                .hasMessage("당첨 번호의 값이 null 입니다.");
     }
 
     @Test
@@ -30,6 +30,6 @@ public class BonusBallTest {
         assertThatThrownBy(() -> {
             new BonusBall(winNumber, LottoNumber.valueOf(1));
         }).isInstanceOf(OverlapWinNumberException.class)
-        .hasMessage("당첨번호와 중복되는 숫자가 있습니다.");
+                .hasMessage("당첨번호와 중복되는 숫자가 있습니다.");
     }
 }

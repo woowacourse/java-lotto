@@ -207,7 +207,7 @@
 - [x] LottoNumber 클래스의 lottoNumber 메서드를 valueOf 혹은 of로 변경하라.
 - [x] LottoTicket 클래스의 makeAutoTicket 메서드의 파라미터를 덮어씌우지 마라.
 - [x] TicketInformationTest에서 자동, 수동 구매햇을 때 getAutoTicketCount 메서드의 테스트를 하라.
-- [ ] LottoTicket 클래스의 makeAutoTicket 메서드를 자동 로또 티켓 클래스로 옮겨라.
+- [x] LottoTicket 클래스의 makeAutoTicket 메서드를 자동 로또 티켓 클래스로 옮겨라.
 - [x] LottoRank 클래스의 prizeResult, of, checkNoPrize 메서드 테스트 추가
 - [x] LottoResult 클래스의 checkCount 메서드 테스트 추가
 - [x] LottoTickets 클래스의 combineTickets, matchLottoResult 메서드 테스트 추가

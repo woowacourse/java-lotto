@@ -28,7 +28,7 @@ public class TicketInformationTest {
         assertThatThrownBy(() -> {
             TicketInformation ticketInformation = new TicketInformation(payment, 12, lottoTickets);
         }).isInstanceOf(OverRangeException.class)
-        .hasMessage("금액의 한도를 초과하였습니다.");
+                .hasMessage("금액의 한도를 초과하였습니다.");
     }
 
     @Test
