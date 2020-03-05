@@ -1,7 +1,5 @@
 package lotto.view;
 
-import java.util.Map;
-
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
@@ -12,11 +10,23 @@ public class OutputView {
         System.out.println("구입금액을 입력해 주세요.");
     }
 
-    public static void ticketAmountInstruction(Money money) {
-        if (money.change() != 0) {
+    public static void changeInstruction(Money money) {
+        if (money.change() != 0)
             System.out.println("거스름돈은 " + money.change() + "원입니다.");
-        }
-        System.out.println(money.calculateTicketQuantity() + "개를 구매했습니다.");
+    }
+
+    public static void inputManualQuantityInstruction() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+    }
+
+    public static void inputManualNumbersInstruction(int manualQuantity) {
+        if (manualQuantity != 0)
+            System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+    }
+
+    public static void ticketAmountInstruction(Money money, int manualQuantity) {
+        System.out.println(
+            "수동으로 " + manualQuantity + "장, 자동으로 " + (money.calculateTicketQuantity() - manualQuantity) + "개를 구매했습니다.");
     }
 
     public static void lottoTicketList(LottoTickets lottoTickets) {
@@ -32,18 +42,17 @@ public class OutputView {
     }
 
     public static void prizeStatistics(LottoResult lottoResult) {
-        Map<Rank, Integer> results = lottoResult.getResult();
         String sb = "\n당첨 통계\n---------\n"
-            + prizeStatistic(results, Rank.FOURTH)
-            + prizeStatistic(results, Rank.THIRD)
-            + prizeStatistic(results, Rank.SECOND)
-            + prizeStatistic(results, Rank.BONUS)
-            + prizeStatistic(results, Rank.FIRST);
+            + prizeStatistic(lottoResult, Rank.FOURTH)
+            + prizeStatistic(lottoResult, Rank.THIRD)
+            + prizeStatistic(lottoResult, Rank.SECOND)
+            + prizeStatistic(lottoResult, Rank.BONUS)
+            + prizeStatistic(lottoResult, Rank.FIRST);
         System.out.print(sb);
     }
 
-    private static String prizeStatistic(Map<Rank, Integer> results, Rank rank) {
-        return format(rank) + results.getOrDefault(rank, 0) + "개\n";
+    private static String prizeStatistic(LottoResult lottoResult, Rank rank) {
+        return format(rank) + lottoResult.countSpecificRank(rank) + "개\n";
     }
 
     private static String format(Rank rank) {

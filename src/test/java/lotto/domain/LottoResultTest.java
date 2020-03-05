@@ -31,7 +31,7 @@ class LottoResultTest {
     @Test
     @DisplayName("수익률이 정상적으로 계산되는지")
     void calculateRate() {
-        LottoResult lottoResult = lottoTickets.match(LottoTicketTest.WINNING_TICKET);
+        LottoResult lottoResult = lottoTickets.getMatchedResult(LottoTicketTest.WINNING_TICKET);
         assertThat(lottoResult.calculateRate(Money.create("5000"))).isEqualTo("100.00");
     }
 }

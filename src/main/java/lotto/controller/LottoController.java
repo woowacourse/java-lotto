@@ -1,5 +1,7 @@
 package lotto.controller;
 
+import java.util.List;
+
 import lotto.domain.LottoResult;
 import lotto.domain.LottoRule.LottoBalls;
 import lotto.domain.LottoRule.LottoNumber;
@@ -9,6 +11,7 @@ import lotto.domain.Money;
 import lotto.domain.WinningTicket;
 import lotto.exceptions.InvalidLottoNumberException;
 import lotto.exceptions.InvalidLottoTicketException;
+import lotto.exceptions.InvalidManualQuantityException;
 import lotto.exceptions.InvalidMoneyException;
 import lotto.exceptions.InvalidWinningTicketException;
 import lotto.view.InputView;
@@ -18,12 +21,26 @@ public class LottoController {
 
     public static void run() {
         Money money = getMoney();
-        LottoTickets lottoTickets = getLottoTickets(money);
+        int manualQuantity = getManualQuantity(money);
+        LottoTickets manualTickets = getManualTickets(manualQuantity);
+        LottoTickets lottoTickets = getLottoTickets(money, manualTickets);
+
         LottoTicket winningNumbers = getWinningNumbers();
         WinningTicket winningTicket = getWinningTicketWithBonusNumber(winningNumbers);
-        LottoResult lottoResult = lottoTickets.match(winningTicket);
+        LottoResult lottoResult = lottoTickets.getMatchedResult(winningTicket);
         OutputView.prizeStatistics(lottoResult);
         OutputView.profitRate(lottoResult.calculateRate(money));
+    }
+
+    private static LottoTickets getManualTickets(int manualQuantity) {
+        try {
+            OutputView.inputManualNumbersInstruction(manualQuantity);
+            List<String[]> manualNumbers = InputView.getManualNumbers(manualQuantity);
+            return LottoTickets.createManualTickets(manualNumbers);
+        } catch (InvalidLottoTicketException | InvalidLottoNumberException e) {
+            OutputView.errorMessage(e.getMessage());
+            return getManualTickets(manualQuantity);
+        }
     }
 
     private static WinningTicket getWinningTicketWithBonusNumber(LottoTicket winningLotto) {
@@ -47,11 +64,22 @@ public class LottoController {
         }
     }
 
-    private static LottoTickets getLottoTickets(Money money) {
-        OutputView.ticketAmountInstruction(money);
-        LottoTickets lottoTickets = LottoTickets.createLottoTickets(money);
+    private static LottoTickets getLottoTickets(Money money, LottoTickets manualTickets) {
+        OutputView.ticketAmountInstruction(money, manualTickets.getLottoTicketsSize());
+        LottoTickets lottoTickets = LottoTickets.createAutoAndAdd(money, manualTickets);
         OutputView.lottoTicketList(lottoTickets);
         return lottoTickets;
+    }
+
+    private static int getManualQuantity(Money money) {
+        try {
+            OutputView.changeInstruction(money);
+            OutputView.inputManualQuantityInstruction();
+            return money.getValidatedManualQuantity(InputView.getManualQuantity());
+        } catch (InvalidManualQuantityException e) {
+            OutputView.errorMessage(e.getMessage());
+            return getManualQuantity(money);
+        }
     }
 
     private static Money getMoney() {

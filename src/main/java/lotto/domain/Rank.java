@@ -18,11 +18,15 @@ public enum Rank {
         this.prizeAmount = prizeAmount;
     }
 
-    public static Rank find(int matchCount) {
-        return Arrays.stream(Rank.values())
+    public static Rank find(int matchCount, boolean hasBonusNumber) {
+        Rank rankFound = Arrays.stream(Rank.values())
             .filter(rank -> rank.matchCount == matchCount)
             .findFirst()
             .orElse(NONE);
+        if (rankFound.equals(SECOND) && hasBonusNumber) {
+            return BONUS;
+        }
+        return rankFound;
     }
 
     public int getPrize() {
@@ -32,5 +36,4 @@ public enum Rank {
     public int getMatchCount() {
         return matchCount;
     }
-
 }

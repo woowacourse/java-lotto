@@ -13,15 +13,24 @@ public class LottoTickets {
         this.lottoTickets = Collections.unmodifiableList(lottoTickets);
     }
 
-    public static LottoTickets createLottoTickets(Money money) {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < money.calculateTicketQuantity(); i++) {
+    public static LottoTickets createManualTickets(List<String[]> manualNumbersInput) {
+        List<LottoTicket> manualTickets = new ArrayList<>();
+        for (String[] manualNumber : manualNumbersInput) {
+            manualTickets.add(new LottoTicket(manualNumber));
+        }
+        return new LottoTickets(manualTickets);
+    }
+
+    public static LottoTickets createAutoAndAdd(Money money, LottoTickets manualTickets) {
+        List<LottoTicket> lottoTickets = new ArrayList<>(manualTickets.lottoTickets);
+        int autoTicketsQuantity = money.calculateTicketQuantity() - manualTickets.getLottoTicketsSize();
+        for (int i = 0; i < autoTicketsQuantity; i++) {
             lottoTickets.add(LottoTicket.create());
         }
         return new LottoTickets(lottoTickets);
     }
 
-    public LottoResult match(WinningTicket winningTicket) {
+    public LottoResult getMatchedResult(WinningTicket winningTicket) {
         LottoResult lottoResult = new LottoResult();
         for (LottoTicket lottoTicket : lottoTickets) {
             Rank rank = winningTicket.match(lottoTicket);
@@ -30,8 +39,8 @@ public class LottoTickets {
         return lottoResult;
     }
 
-    List<LottoTicket> getLottoTickets() {
-        return lottoTickets;
+    public int getLottoTicketsSize() {
+        return lottoTickets.size();
     }
 
     @Override
