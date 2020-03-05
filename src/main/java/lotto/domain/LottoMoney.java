@@ -8,8 +8,16 @@ import java.util.Objects;
 public class LottoMoney {
 	public static final int POSITIVE_THRESHOLD = 0;
 	public static final int LOTTO_PRICE = 1000;
+	public static final int INVALID_VALUE = -1;
 
 	private final int purchaseMoney;
+
+	/**
+	 * for invalid instance
+	 */
+	private LottoMoney() {
+		purchaseMoney = INVALID_VALUE;
+	}
 
 	private LottoMoney(final int purchaseMoney) {
 		checkIsLessThanZero(purchaseMoney);
@@ -28,6 +36,14 @@ public class LottoMoney {
 		} catch (LottoMoneyIllegalArgumentException e) {
 			throw new PurchaseManualLottoIllegalArgumentException();
 		}
+	}
+
+	public static LottoMoney invalidInstance() {
+		return new LottoMoney();
+	}
+
+	public boolean isInvalidInstance() {
+		return purchaseMoney == INVALID_VALUE;
 	}
 
 	private void checkIsMultipleOfThousand(int purchaseMoney) {

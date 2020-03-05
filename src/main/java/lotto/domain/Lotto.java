@@ -11,6 +11,13 @@ public class Lotto {
 
 	private final List<LottoNumber> lottoNumbers;
 
+	/**
+	 * for invalid Lotto instance
+	 */
+	private Lotto() {
+		lottoNumbers = new ArrayList<>();
+	}
+
 	private Lotto(final List<LottoNumber> lottoNumbers) {
 		checkIsSizeSix(lottoNumbers);
 		checkIsDuplicated(lottoNumbers);
@@ -43,6 +50,14 @@ public class Lotto {
 
 	public static Lotto of(final List<LottoNumber> input) {
 		return new Lotto(input);
+	}
+
+	public static Lotto invalidInstance() {
+		return new Lotto();
+	}
+
+	public boolean isInvalidInstance() {
+		return lottoNumbers.isEmpty();
 	}
 
 	private void checkIsDuplicated(List<LottoNumber> lottoNumbers) {
