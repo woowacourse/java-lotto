@@ -31,9 +31,9 @@ public class LottoTicket {
     }
 
     public static LottoTicket makeAutoTicket(List<LottoNumber> autoTicket) {
-        autoTicket = autoTicket.subList(FIRST_INDEX, LOTTO_NUMBER_LENGTH);
-        LottoNumber.sortLottoNumber(autoTicket);
-        return new LottoTicket(autoTicket);
+        List<LottoNumber> autoNumbers = autoTicket.subList(FIRST_INDEX, LOTTO_NUMBER_LENGTH);
+        LottoNumber.sortLottoNumber(autoNumbers);
+        return new LottoTicket(autoNumbers);
     }
 
     public List<Integer> getLottoTicket() {
