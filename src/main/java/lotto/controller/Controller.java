@@ -9,7 +9,7 @@ import lotto.view.OutputView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottoController {
+public class Controller {
 	public static void run() {
 		PurchaseMoney purchaseMoney = prepareLotto();
 

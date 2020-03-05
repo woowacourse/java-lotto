@@ -1,6 +1,5 @@
 package lotto.domain.SerialLottoNumberFactory;
 
-import lotto.domain.AllLottoNumbers;
 import lotto.domain.LottoNumber;
 import lotto.domain.SerialLottoNumber;
 
@@ -14,7 +13,7 @@ public abstract class AbstractSerialLottoNumberFactory implements SerialLottoNum
 	private final List<LottoNumber> allLottoNumbers;
 
 	AbstractSerialLottoNumberFactory() {
-		allLottoNumbers = new ArrayList<>(AllLottoNumbers.getAll());
+		allLottoNumbers = new ArrayList<>(LottoNumber.getAll());
 	}
 
 	protected List<LottoNumber> getAllLottoNumbers() {
