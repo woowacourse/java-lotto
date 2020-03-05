@@ -200,7 +200,7 @@ public class Controller {
 
 	private static LottoNumber createBonusNumberIfValid() {
 		try {
-			return new LottoNumber(InputView.inputBonusNumber());
+			return LottoNumber.of(InputView.inputBonusNumber());
 		} catch (LottoNumberIllegalArgumentException e) {
 			OutputView.printWarningMessage(e.getMessage());
 			return null;

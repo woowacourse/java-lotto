@@ -18,7 +18,7 @@ public class SerialLottoNumberTest {
 		// given
 		int[] input = {1, 10, 3, 11, 5, 6};
 		List<LottoNumber> lottoNumbers = Arrays.stream(input)
-				.mapToObj(LottoNumber::new)
+				.mapToObj(LottoNumber::of)
 				.collect(Collectors.toList());
 
 		// when
@@ -27,7 +27,7 @@ public class SerialLottoNumberTest {
 		// then
 		int[] sortedInput = {1, 3, 5, 6, 10, 11};
 		List<LottoNumber> expected = Arrays.stream(sortedInput)
-				.mapToObj(LottoNumber::new)
+				.mapToObj(LottoNumber::of)
 				.collect(Collectors.toList());
 
 		Assertions.assertThat(serialLottoNumber.getLottoNumbers())
@@ -39,7 +39,7 @@ public class SerialLottoNumberTest {
 	void SerialLottoNumber_NotSizeSix_ShouldThrowException(int[] input) {
 		// given
 		List<LottoNumber> lottoNumbers = Arrays.stream(input)
-				.mapToObj(LottoNumber::new)
+				.mapToObj(LottoNumber::of)
 				.collect(Collectors.toList());
 
 		// then
@@ -61,7 +61,7 @@ public class SerialLottoNumberTest {
 	void SerialLottoNumber_DuplicatedNumbers_ShouldThrowException(int[] input) {
 		// given
 		List<LottoNumber> lottoNumbers = Arrays.stream(input)
-				.mapToObj(LottoNumber::new)
+				.mapToObj(LottoNumber::of)
 				.collect(Collectors.toList());
 
 		// then
@@ -89,7 +89,7 @@ public class SerialLottoNumberTest {
 
 		//then
 		SerialLottoNumber expected = new SerialLottoNumber(Stream.of(1, 3, 4, 5, 6, 45)
-				.map(LottoNumber::new)
+				.map(LottoNumber::of)
 				.collect(Collectors.toUnmodifiableList()));
 		Assertions.assertThat(result)
 				.isEqualTo(expected);

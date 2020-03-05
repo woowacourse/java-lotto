@@ -17,10 +17,10 @@ public class WinningLottoNumbersTest {
 	void WinningLottoNumbers() {
 		// given
 		List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)
-				.map(LottoNumber::new)
+				.map(LottoNumber::of)
 				.collect(Collectors.toUnmodifiableList());
 		SerialLottoNumber winningLottoNumbers = new SerialLottoNumber(lottoNumbers);
-		LottoNumber bonus = new LottoNumber(7);
+		LottoNumber bonus = LottoNumber.of(7);
 
 		// when
 		WinningLottoNumbers result = new WinningLottoNumbers(winningLottoNumbers, bonus);
@@ -37,10 +37,10 @@ public class WinningLottoNumbersTest {
 	void WinningLottoNumbers_WinningNumbersContainsBonusNumber_ShouldThrowException() {
 		// given
 		List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)
-				.map(LottoNumber::new)
+				.map(LottoNumber::of)
 				.collect(Collectors.toUnmodifiableList());
 		SerialLottoNumber winningLottoNumbers = new SerialLottoNumber(lottoNumbers);
-		LottoNumber bonus = new LottoNumber(6);
+		LottoNumber bonus = LottoNumber.of(6);
 
 		// then
 		Assertions.assertThatThrownBy(() -> {
@@ -56,14 +56,14 @@ public class WinningLottoNumbersTest {
 	void countMatchingLottoNumbers(List<Integer> input, WinningType expected) {
 		// given
 		List<LottoNumber> winning = Stream.of(1, 2, 3, 4, 5, 6)
-				.map(LottoNumber::new)
+				.map(LottoNumber::of)
 				.collect(Collectors.toUnmodifiableList());
 		SerialLottoNumber winningNumbers = new SerialLottoNumber(winning);
-		LottoNumber bonus = new LottoNumber(7);
+		LottoNumber bonus = LottoNumber.of(7);
 		WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(winningNumbers, bonus);
 
 		List<LottoNumber> lottoNumbers = input.stream()
-				.map(LottoNumber::new)
+				.map(LottoNumber::of)
 				.collect(Collectors.toUnmodifiableList());
 		SerialLottoNumber serialLottoNumber = new SerialLottoNumber(lottoNumbers);
 

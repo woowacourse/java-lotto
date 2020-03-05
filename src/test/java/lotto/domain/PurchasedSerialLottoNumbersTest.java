@@ -15,7 +15,7 @@ class PurchasedSerialLottoNumbersTest {
 		int[][] input = {{1, 10, 3, 11, 5, 6}, {5, 10, 45, 3, 17, 2}, {4, 7, 13, 19, 22, 37}};
 		for (int[] element : input) {
 			List<LottoNumber> lottoNumbers = Arrays.stream(element)
-					.mapToObj(LottoNumber::new)
+					.mapToObj(LottoNumber::of)
 					.collect(Collectors.toList());
 			SerialLottoNumber serialLottoNumber = new SerialLottoNumber(lottoNumbers);
 			purchasedSerialLottoNumbers.add(serialLottoNumber);
@@ -33,7 +33,7 @@ class PurchasedSerialLottoNumbersTest {
 	void of() {
 		// when
 		WinningLottoNumbers winningLottoNumbers
-				= new WinningLottoNumbers(SerialLottoNumber.of("1,2,3,4,5,6"), new LottoNumber(7));
+				= new WinningLottoNumbers(SerialLottoNumber.of("1,2,3,4,5,6"), LottoNumber.of(7));
 
 		PurchasedSerialLottoNumbers purchasedSerialLottoNumbers = PurchasedSerialLottoNumbers.of(
 				new PurchaseMoney(14000), new TestSerialLottoNumberFactory());

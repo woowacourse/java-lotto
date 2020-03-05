@@ -26,7 +26,7 @@ public class SerialLottoNumber {
 	public static SerialLottoNumber of(String input) {
 		List<Integer> integers = StringParser.stringToIntegerList(input);
 		List<LottoNumber> lottoNumbers = integers.stream()
-				.map(LottoNumber::new)
+				.map(LottoNumber::of)
 				.collect(Collectors.toUnmodifiableList());
 
 		return new SerialLottoNumber(lottoNumbers);

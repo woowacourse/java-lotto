@@ -10,14 +10,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 class LottoNumberTest {
+	@Test
+	void of() {
+		// given
+		int input = 7;
+
+		// when
+		LottoNumber lottoNumber = LottoNumber.of(input);
+
+		// then
+		Assertions.assertThat(lottoNumber.getLottoNumber())
+				.isEqualTo(input);
+		Assertions.assertThat(lottoNumber == LottoNumber.of(input))
+				.isTrue();
+	}
+
 	@ParameterizedTest
 	@ValueSource(ints = {0, 61, -1})
-	void Number_LessThanOneOrMoreThanSixty_ShouldThrowException(int input) {
+	void of_LessThanOneOrMoreThanSixty_ShouldThrowException(int input) {
 		// then
 		Assertions.assertThatThrownBy(() -> {
 
 			// when
-			LottoNumber lottoNumber = new LottoNumber(input);
+			LottoNumber lottoNumber = LottoNumber.of(input);
 		}).isInstanceOf(LottoNumberIllegalArgumentException.class)
 				.hasMessageMatching("-?[0-9]+" + LottoNumberIllegalArgumentException.MESSAGE);
 	}
@@ -30,7 +45,7 @@ class LottoNumberTest {
 		// then
 		List<LottoNumber> expected = new ArrayList<>();
 		for (int i = 1; i <= 45; i++) {
-			expected.add(new LottoNumber(i));
+			expected.add(LottoNumber.of(i));
 		}
 
 		Assertions.assertThat(allLottoNumbers)

@@ -18,19 +18,28 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
 	private final int lottoNumber;
 
-	public LottoNumber(final int lottoNumber) throws LottoNumberIllegalArgumentException {
+	private LottoNumber(final int lottoNumber) {
 		checkIsWithinRange(lottoNumber);
 		this.lottoNumber = lottoNumber;
+	}
+
+	public static LottoNumber of(final int lottoNumber) {
+		checkIsWithinRange(lottoNumber);
+		return cachedLottoNumbers.get(lottoNumber);
 	}
 
 	public static List<LottoNumber> getAll() {
 		return new ArrayList<>(cachedLottoNumbers.values());
 	}
 
-	private void checkIsWithinRange(int number) {
+	private static void checkIsWithinRange(int number) {
 		if (number < MIN || number > MAX) {
 			throw new LottoNumberIllegalArgumentException(number);
 		}
+	}
+
+	public int getLottoNumber() {
+		return lottoNumber;
 	}
 
 	@Override
