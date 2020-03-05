@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import lotto.exceptions.PurchaseManualTicketIllegalArgumentException;
-import lotto.exceptions.PurchaseMoneyIllegalArgumentException;
+import lotto.exceptions.PurchaseManualLottoIllegalArgumentException;
+import lotto.exceptions.LottoMoneyIllegalArgumentException;
 
 import java.util.Objects;
 
@@ -18,31 +18,31 @@ public class LottoMoney {
 		this.purchaseMoney = purchaseMoney;
 	}
 
-	public static LottoMoney of(int CountOfSerialLottoNumber) {
+	public static LottoMoney of(int lottoCount) {
 		try {
-			return new LottoMoney(LOTTO_PRICE * CountOfSerialLottoNumber);
-		} catch (PurchaseMoneyIllegalArgumentException e) {
-			throw new PurchaseManualTicketIllegalArgumentException();
+			return new LottoMoney(LOTTO_PRICE * lottoCount);
+		} catch (LottoMoneyIllegalArgumentException e) {
+			throw new PurchaseManualLottoIllegalArgumentException();
 		}
 	}
 
 	private void checkIsMultipleOfThousand(int purchaseMoney) {
 		if (purchaseMoney % LOTTO_PRICE != 0) {
-			throw new PurchaseMoneyIllegalArgumentException(purchaseMoney);
+			throw new LottoMoneyIllegalArgumentException(purchaseMoney);
 		}
 	}
 
 	private void checkIsLessThanZero(int purchaseMoney) {
 		if (purchaseMoney < POSITIVE_THRESHOLD) {
-			throw new PurchaseMoneyIllegalArgumentException(purchaseMoney);
+			throw new LottoMoneyIllegalArgumentException(purchaseMoney);
 		}
 	}
 
 	public LottoMoney subtract(LottoMoney other) {
 		try {
 			return new LottoMoney(purchaseMoney - other.purchaseMoney);
-		} catch (PurchaseMoneyIllegalArgumentException e) {
-			throw new PurchaseManualTicketIllegalArgumentException();
+		} catch (LottoMoneyIllegalArgumentException e) {
+			throw new PurchaseManualLottoIllegalArgumentException();
 		}
 	}
 

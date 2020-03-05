@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.exceptions.WinningLottoNumbersIllegalArgumentException;
+import lotto.exceptions.WinningLottoIllegalArgumentException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -14,19 +14,14 @@ import java.util.stream.Stream;
 public class WinningLottoTest {
 	@Test
 	void WinningLottoNumbers() {
-		// given
-		List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-		Lotto winningLottoNumbers = Lotto.of(lottoNumbers);
-		LottoNumber bonus = LottoNumber.of(7);
-
 		// when
-		WinningLotto result = new WinningLotto(winningLottoNumbers, bonus);
+		WinningLotto result = new WinningLotto(Lotto.of("1, 2, 3, 4, 5, 6"), LottoNumber.of(7));
 
 		// then
 		Assertions.assertThat(result.getWinningLottoNumbers())
-				.isEqualTo(winningLottoNumbers);
+				.isEqualTo(Lotto.of("1, 2, 3, 4, 5, 6"));
 		Assertions.assertThat(result.getBonus())
-				.isEqualTo(bonus);
+				.isEqualTo(LottoNumber.of(7));
 	}
 
 
@@ -42,8 +37,8 @@ public class WinningLottoTest {
 
 			// when
 			new WinningLotto(winningLottoNumbers, bonus);
-		}).isInstanceOf(WinningLottoNumbersIllegalArgumentException.class)
-				.hasMessageMatching(WinningLottoNumbersIllegalArgumentException.MESSAGE);
+		}).isInstanceOf(WinningLottoIllegalArgumentException.class)
+				.hasMessageMatching(WinningLottoIllegalArgumentException.MESSAGE);
 	}
 
 	@ParameterizedTest

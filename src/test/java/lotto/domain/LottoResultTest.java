@@ -59,10 +59,9 @@ public class LottoResultTest {
 		PurchasedLottos purchasedLottos
 				= PurchasedLottos.of(new LottoMoney(14000),
 				new TestLottoFactory());
-		Lotto serialLottoNumber = Lotto.of("1, 2, 3, 4, 5, 6");
-		LottoNumber bonusNumber = LottoNumber.of(7);
+
 		WinningLotto winningLotto
-				= new WinningLotto(serialLottoNumber, bonusNumber);
+				= new WinningLotto(Lotto.of("1, 2, 3, 4, 5, 6"), LottoNumber.of(7));
 
 		// when
 		LottoResult result = LottoResult.of(purchasedLottos, winningLotto);

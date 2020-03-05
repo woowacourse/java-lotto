@@ -41,7 +41,7 @@ public class Controller {
 
 		try {
 			return lottoMoney.subtract(manualTicketMoney);
-		} catch (PurchaseManualTicketIllegalArgumentException e) {
+		} catch (PurchaseManualLottoIllegalArgumentException e) {
 			return null;
 		}
 	}
@@ -77,7 +77,7 @@ public class Controller {
 
 		try {
 			return LottoMoney.of(manualTicketNumber);
-		} catch (PurchaseManualTicketIllegalArgumentException e) {
+		} catch (PurchaseManualLottoIllegalArgumentException e) {
 			OutputView.printWarningMessage(e.getMessage());
 			return null;
 		}
@@ -147,7 +147,7 @@ public class Controller {
 	private static WinningLotto createWinningLottoNumbersIfValid() {
 		try {
 			return new WinningLotto(createWinningNumber(), createBonusNumber());
-		} catch (WinningLottoNumbersIllegalArgumentException e) {
+		} catch (WinningLottoIllegalArgumentException e) {
 			OutputView.printWarningMessage(e.getMessage());
 			return null;
 		}
@@ -165,7 +165,7 @@ public class Controller {
 	private static LottoMoney createPurchaseMoneyIfValid() {
 		try {
 			return new LottoMoney(InputView.inputPurchaseMoney());
-		} catch (PurchaseMoneyIllegalArgumentException e) {
+		} catch (LottoMoneyIllegalArgumentException e) {
 			OutputView.printWarningMessage(e.getMessage());
 			return null;
 		}
