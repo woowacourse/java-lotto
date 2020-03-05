@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.exceptions.SerialLottoNumberIllegalArgumentException;
+import lotto.exceptions.LottoIllegalArgumentException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -41,8 +41,8 @@ public class LottoTest {
 		Assertions.assertThatThrownBy(() -> {
 			// when
 			Lotto.of(lottoNumbers);
-		}).isInstanceOf(SerialLottoNumberIllegalArgumentException.class)
-				.hasMessageMatching(SerialLottoNumberIllegalArgumentException.MESSAGE);
+		}).isInstanceOf(LottoIllegalArgumentException.class)
+				.hasMessageMatching(LottoIllegalArgumentException.MESSAGE);
 	}
 
 	static Stream<Arguments> generateNotSizeSixInput() {
@@ -63,8 +63,8 @@ public class LottoTest {
 
 			// when
 			Lotto.of(lottoNumbers);
-		}).isInstanceOf(SerialLottoNumberIllegalArgumentException.class)
-				.hasMessageMatching(SerialLottoNumberIllegalArgumentException.MESSAGE);
+		}).isInstanceOf(LottoIllegalArgumentException.class)
+				.hasMessageMatching(LottoIllegalArgumentException.MESSAGE);
 	}
 
 	static Stream<Arguments> generateDuplicatedInput() {

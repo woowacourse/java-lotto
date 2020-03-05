@@ -13,11 +13,11 @@ public class LottoResult {
 		this.lottoResult = lottoResult;
 	}
 
-	public static LottoResult of(PurchasedSerialLottoNumbers purchasedSerialLottoNumbers,
-								 WinningLottoNumbers winningLottoNumbers) {
+	public static LottoResult of(PurchasedLottos purchasedLottos,
+								 WinningLotto winningLotto) {
 		Map<WinningType, Integer> lottoResult = createDefaultMap();
 		List<WinningType> winningTypes =
-				purchasedSerialLottoNumbers.findMatchingWinningTypesWith(winningLottoNumbers);
+				purchasedLottos.findMatchingWinningTypesWith(winningLotto);
 
 		lottoResult.replaceAll((key, value) -> Collections.frequency(winningTypes, key));
 
@@ -32,13 +32,13 @@ public class LottoResult {
 		return lottoResult;
 	}
 
-	public double calculateEarningPercentage(PurchaseMoney purchaseMoney) {
+	public double calculateEarningPercentage(LottoMoney lottoMoney) {
 		double totalEarning = 0;
 		for (WinningType winningType : lottoResult.keySet()) {
 			totalEarning += winningType.calculateEarning(lottoResult.get(winningType));
 		}
 
-		return purchaseMoney.divideBy(totalEarning) * PERCENT_MULTIPLIER;
+		return lottoMoney.divideBy(totalEarning) * PERCENT_MULTIPLIER;
 	}
 
 	public Map<WinningType, Integer> getLottoResult() {

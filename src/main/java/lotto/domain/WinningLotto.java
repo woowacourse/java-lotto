@@ -4,11 +4,11 @@ import lotto.exceptions.WinningLottoNumbersIllegalArgumentException;
 
 import java.util.Objects;
 
-public class WinningLottoNumbers {
+public class WinningLotto {
 	private final Lotto winningLottoNumbers;
 	private final LottoNumber bonus;
 
-	public WinningLottoNumbers(final Lotto winningLottoNumbers, final LottoNumber bonus) {
+	public WinningLotto(final Lotto winningLottoNumbers, final LottoNumber bonus) {
 		checkWinningNumbersContainsBonus(winningLottoNumbers, bonus);
 
 		this.winningLottoNumbers = winningLottoNumbers;
@@ -40,7 +40,7 @@ public class WinningLottoNumbers {
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
-		WinningLottoNumbers that = (WinningLottoNumbers) o;
+		WinningLotto that = (WinningLotto) o;
 		return Objects.equals(winningLottoNumbers, that.winningLottoNumbers) &&
 				Objects.equals(bonus, that.bonus);
 	}

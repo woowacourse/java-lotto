@@ -6,13 +6,13 @@ import lotto.domain.Lotto;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractSerialLottoNumberFactory implements SerialLottoNumberFactory {
+public abstract class AbstractLottoFactory implements LottoFactory {
 	protected static final int ZERO_INDEX = 0;
 	protected static final int SIX_INDEX = 6;
 
 	private final List<LottoNumber> allLottoNumbers;
 
-	AbstractSerialLottoNumberFactory() {
+	AbstractLottoFactory() {
 		allLottoNumbers = new ArrayList<>(LottoNumber.getAll());
 	}
 

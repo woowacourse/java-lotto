@@ -9,10 +9,9 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class WinningLottoNumbersTest {
+public class WinningLottoTest {
 	@Test
 	void WinningLottoNumbers() {
 		// given
@@ -21,7 +20,7 @@ public class WinningLottoNumbersTest {
 		LottoNumber bonus = LottoNumber.of(7);
 
 		// when
-		WinningLottoNumbers result = new WinningLottoNumbers(winningLottoNumbers, bonus);
+		WinningLotto result = new WinningLotto(winningLottoNumbers, bonus);
 
 		// then
 		Assertions.assertThat(result.getWinningLottoNumbers())
@@ -42,7 +41,7 @@ public class WinningLottoNumbersTest {
 		Assertions.assertThatThrownBy(() -> {
 
 			// when
-			new WinningLottoNumbers(winningLottoNumbers, bonus);
+			new WinningLotto(winningLottoNumbers, bonus);
 		}).isInstanceOf(WinningLottoNumbersIllegalArgumentException.class)
 				.hasMessageMatching(WinningLottoNumbersIllegalArgumentException.MESSAGE);
 	}
@@ -54,12 +53,12 @@ public class WinningLottoNumbersTest {
 		List<Integer> winning = Arrays.asList(1, 2, 3, 4, 5, 6);
 		Lotto winningNumbers = Lotto.of(winning);
 		LottoNumber bonus = LottoNumber.of(7);
-		WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(winningNumbers, bonus);
+		WinningLotto winningLotto = new WinningLotto(winningNumbers, bonus);
 
 		Lotto serialLottoNumber = Lotto.of(input);
 
 		// when
-		WinningType winningType = winningLottoNumbers.findMatchingWinningTypeWith(serialLottoNumber);
+		WinningType winningType = winningLotto.findMatchingWinningTypeWith(serialLottoNumber);
 
 		// then
 		Assertions.assertThat(winningType)

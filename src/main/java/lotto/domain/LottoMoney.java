@@ -5,22 +5,22 @@ import lotto.exceptions.PurchaseMoneyIllegalArgumentException;
 
 import java.util.Objects;
 
-public class PurchaseMoney {
+public class LottoMoney {
 	public static final int POSITIVE_THRESHOLD = 0;
 	public static final int LOTTO_PRICE = 1000;
 
 	private final int purchaseMoney;
 
-	public PurchaseMoney(final int purchaseMoney) {
+	public LottoMoney(final int purchaseMoney) {
 		checkIsLessThanZero(purchaseMoney);
 		checkIsMultipleOfThousand(purchaseMoney);
 
 		this.purchaseMoney = purchaseMoney;
 	}
 
-	public static PurchaseMoney of(int CountOfSerialLottoNumber) {
+	public static LottoMoney of(int CountOfSerialLottoNumber) {
 		try {
-			return new PurchaseMoney(LOTTO_PRICE * CountOfSerialLottoNumber);
+			return new LottoMoney(LOTTO_PRICE * CountOfSerialLottoNumber);
 		} catch (PurchaseMoneyIllegalArgumentException e) {
 			throw new PurchaseManualTicketIllegalArgumentException();
 		}
@@ -38,9 +38,9 @@ public class PurchaseMoney {
 		}
 	}
 
-	public PurchaseMoney subtract(PurchaseMoney other) {
+	public LottoMoney subtract(LottoMoney other) {
 		try {
-			return new PurchaseMoney(purchaseMoney - other.purchaseMoney);
+			return new LottoMoney(purchaseMoney - other.purchaseMoney);
 		} catch (PurchaseMoneyIllegalArgumentException e) {
 			throw new PurchaseManualTicketIllegalArgumentException();
 		}
@@ -66,7 +66,7 @@ public class PurchaseMoney {
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
-		PurchaseMoney that = (PurchaseMoney) o;
+		LottoMoney that = (LottoMoney) o;
 		return purchaseMoney == that.purchaseMoney;
 	}
 

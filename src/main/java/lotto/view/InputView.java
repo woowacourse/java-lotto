@@ -1,8 +1,5 @@
 package lotto.view;
 
-import lotto.domain.PurchaseMoney;
-
-import java.util.List;
 import java.util.Scanner;
 
 public class InputView {

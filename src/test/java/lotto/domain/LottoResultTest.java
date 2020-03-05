@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.SerialLottoNumberFactory.TestSerialLottoNumberFactory;
+import lotto.domain.SerialLottoNumberFactory.TestLottoFactory;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -38,9 +38,9 @@ public class LottoResultTest {
 
 		// when
 		int lottoNum = 1000 * (1 + 1 + 3 + 10 + 30 + 10000);
-		PurchaseMoney purchaseMoney = new PurchaseMoney(lottoNum);
+		LottoMoney lottoMoney = new LottoMoney(lottoNum);
 		double result =
-				lottoResult.calculateEarningPercentage(new PurchaseMoney(lottoNum));
+				lottoResult.calculateEarningPercentage(new LottoMoney(lottoNum));
 
 		// then
 		int prizeMoney = WinningType.FIRST_PLACE.getWinningAmount()
@@ -48,7 +48,7 @@ public class LottoResultTest {
 				+ WinningType.THIRD_PLACE.getWinningAmount() * 3
 				+ WinningType.FOURTH_PLACE.getWinningAmount() * 10
 				+ WinningType.FIFTH_PLACE.getWinningAmount() * 30;
-		double expected = (double) prizeMoney / purchaseMoney.getPurchaseMoney() * 100;
+		double expected = (double) prizeMoney / lottoMoney.getPurchaseMoney() * 100;
 		Assertions.assertThat(result)
 				.isEqualTo(expected);
 	}
@@ -56,16 +56,16 @@ public class LottoResultTest {
 	@Test
 	void of() {
 		// given
-		PurchasedSerialLottoNumbers purchasedSerialLottoNumbers
-				= PurchasedSerialLottoNumbers.of(new PurchaseMoney(14000),
-				new TestSerialLottoNumberFactory());
+		PurchasedLottos purchasedLottos
+				= PurchasedLottos.of(new LottoMoney(14000),
+				new TestLottoFactory());
 		Lotto serialLottoNumber = Lotto.of("1, 2, 3, 4, 5, 6");
 		LottoNumber bonusNumber = LottoNumber.of(7);
-		WinningLottoNumbers winningLottoNumbers
-				= new WinningLottoNumbers(serialLottoNumber, bonusNumber);
+		WinningLotto winningLotto
+				= new WinningLotto(serialLottoNumber, bonusNumber);
 
 		// when
-		LottoResult result = LottoResult.of(purchasedSerialLottoNumbers, winningLottoNumbers);
+		LottoResult result = LottoResult.of(purchasedLottos, winningLotto);
 
 		// then
 		Assertions.assertThat(result.getLottoResult().get(WinningType.FIRST_PLACE))

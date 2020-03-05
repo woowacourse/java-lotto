@@ -2,7 +2,7 @@ package lotto.domain.SerialLottoNumberFactory;
 
 import lotto.domain.Lotto;
 
-public class TestSerialLottoNumberFactory extends AbstractSerialLottoNumberFactory {
+public class TestLottoFactory extends AbstractLottoFactory {
 
 	@Override
 	public Lotto createSerialLottoNumber() {
