@@ -8,8 +8,9 @@ public class LottoNumber {
     private static final int FIRST_LOTTO_NUMBER = 1;
     private static final int LAST_LOTTO_NUMBER = 45;
     private static final String OVER_LOTTO_NUMBER_RANGE_EXCEPTION_MESSAGE = "1 ~ 45 범위를 벗어났습니다.";
-    private int lottoNumber;
     private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
+
+    private int lottoNumber;
 
     static {
         for (int number = FIRST_LOTTO_NUMBER; number < LAST_LOTTO_NUMBER; number++) {
@@ -27,7 +28,7 @@ public class LottoNumber {
         }
     }
 
-    public static LottoNumber lottoNumber(int number) {
+    public static LottoNumber valueOf(int number) {
         checkLottoNumberRange(number);
         return lottoNumbers.get(number);
     }

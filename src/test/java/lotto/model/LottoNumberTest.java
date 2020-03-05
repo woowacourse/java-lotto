@@ -11,22 +11,22 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LottoNumberTest {
-    private LottoNumber one = LottoNumber.lottoNumber(1);
-    private LottoNumber two = LottoNumber.lottoNumber(2);
-    private LottoNumber three = LottoNumber.lottoNumber(3);
-    private LottoNumber four = LottoNumber.lottoNumber(4);
-    private LottoNumber five = LottoNumber.lottoNumber(5);
-    private LottoNumber six = LottoNumber.lottoNumber(6);
+    private LottoNumber one = LottoNumber.valueOf(1);
+    private LottoNumber two = LottoNumber.valueOf(2);
+    private LottoNumber three = LottoNumber.valueOf(3);
+    private LottoNumber four = LottoNumber.valueOf(4);
+    private LottoNumber five = LottoNumber.valueOf(5);
+    private LottoNumber six = LottoNumber.valueOf(6);
 
     @Test
     @DisplayName("숫자가 1 ~ 45 범위를 초과할 경우")
     void checkLottoNumberRange() {
         assertThatThrownBy(() -> {
-            LottoNumber.lottoNumber(0);
+            LottoNumber.valueOf(0);
         }).isInstanceOf(OverRangeException.class);
 
         assertThatThrownBy(() -> {
-            LottoNumber.lottoNumber(46);
+            LottoNumber.valueOf(46);
         }).isInstanceOf(OverRangeException.class);
     }
 

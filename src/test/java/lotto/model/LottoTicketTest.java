@@ -1,7 +1,6 @@
 package lotto.model;
 
 import lotto.exception.NotSixNumbersException;
-import lotto.exception.OverRangeException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,13 +10,13 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTicketTest {
-    private LottoNumber one = LottoNumber.lottoNumber(1);
-    private LottoNumber two = LottoNumber.lottoNumber(2);
-    private LottoNumber three = LottoNumber.lottoNumber(3);
-    private LottoNumber four = LottoNumber.lottoNumber(4);
-    private LottoNumber five = LottoNumber.lottoNumber(5);
-    private LottoNumber six = LottoNumber.lottoNumber(6);
-    private LottoNumber seven = LottoNumber.lottoNumber(7);
+    private LottoNumber one = LottoNumber.valueOf(1);
+    private LottoNumber two = LottoNumber.valueOf(2);
+    private LottoNumber three = LottoNumber.valueOf(3);
+    private LottoNumber four = LottoNumber.valueOf(4);
+    private LottoNumber five = LottoNumber.valueOf(5);
+    private LottoNumber six = LottoNumber.valueOf(6);
+    private LottoNumber seven = LottoNumber.valueOf(7);
 
     @Test
     @DisplayName("로또 티켓의 숫자가 6개가 아닌 경우")

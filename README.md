@@ -203,8 +203,8 @@
 
 ### 네번째 피드백 
 - [x] LottoController 클래스의 makeLottoTickets 메서드 리팩토링하라.
-- [ ] static 변수를 인스턴스 변수 위로 작성해야 한다.
-- [ ] LottoNumber 클래스의 lottoNumber 메서드를 valueOf 혹은 of로 변경하라.
+- [x] static 변수를 인스턴스 변수 위로 작성해야 한다.
+- [x] LottoNumber 클래스의 lottoNumber 메서드를 valueOf 혹은 of로 변경하라.
 - [ ] LottoTicket 클래스의 makeAutoTicket 메서드의 파라미터를 덮어씌우지 마라.
 - [ ] TicketInformationTest에서 자동, 수동 구매햇을 때 getAutoTicketCount 메서드의 테스트를 하라.
 - [ ] LottoTicket 클래스의 makeAutoTicket 메서드를 자동 로또 티켓 클래스로 옮겨라.

@@ -29,7 +29,7 @@ public class InputView {
         String input = scanner.nextLine();
         checkNullOrEmptyInput(input);
         checkNumberFormat(input);
-        return LottoNumber.lottoNumber(Integer.parseInt(input));
+        return LottoNumber.valueOf(Integer.parseInt(input));
     }
 
     // 수동
@@ -67,7 +67,7 @@ public class InputView {
         for (String input : inputs) {
             input = input.trim();
             checkNumberFormat(input);
-            LottoNumber number = LottoNumber.lottoNumber(Integer.parseInt(input));
+            LottoNumber number = LottoNumber.valueOf(Integer.parseInt(input));
             numbers.add(number);
         }
         return new LottoTicket(numbers);

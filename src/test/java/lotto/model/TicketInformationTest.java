@@ -12,12 +12,12 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class TicketInformationTest {
     private List<LottoTicket> lottoTickets = Arrays.asList(
             new LottoTicket(Arrays.asList(
-                    LottoNumber.lottoNumber(1),
-                    LottoNumber.lottoNumber(2),
-                    LottoNumber.lottoNumber(3),
-                    LottoNumber.lottoNumber(4),
-                    LottoNumber.lottoNumber(5),
-                    LottoNumber.lottoNumber(6))));
+                    LottoNumber.valueOf(1),
+                    LottoNumber.valueOf(2),
+                    LottoNumber.valueOf(3),
+                    LottoNumber.valueOf(4),
+                    LottoNumber.valueOf(5),
+                    LottoNumber.valueOf(6))));
     @Test
     @DisplayName("수동 로또 구매 가능한 갯수를 초과했을 때")
     void checkOverPay() {
