@@ -1,8 +1,8 @@
 package lotto.domain;
 
 public class ResultsDTO {
-    private MatchResults matchResults;
-    private long earningRate;
+    private final MatchResults matchResults;
+    private final long earningRate;
 
     public ResultsDTO(MatchResults matchResults, long earningRate) {
         this.matchResults = matchResults;

@@ -9,7 +9,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ResultCalculatorTest {
     MatchResults getResult() {
-        Lotto lotto = new LottoSelectedGenerator("1,2,3,4,5,6").create();
+        List<String> lottoNumbers = Arrays.asList("1", "2", "3", "4", "5", "6");
+        Lotto lotto = ManualLottoGenerator.createLotto(lottoNumbers);
 
         LottoNumber bonusNumber = new LottoNumber(7);
         WinningLotto winningLotto = new WinningLotto(lotto, bonusNumber);

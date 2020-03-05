@@ -1,7 +1,8 @@
 package lotto.generator;
 
-import lotto.domain.Lotto;
+import lotto.domain.BettingInfo;
+import lotto.domain.Lottos;
 
 public interface LottoGenerator {
-    abstract Lotto create();
+    Lottos createLottos(BettingInfo bettingInfo);
 }

@@ -5,18 +5,23 @@ import lotto.domain.*;
 import java.util.*;
 
 public class LottoGenerateManager {
+    private static final List<LottoGenerator> lottoGenerators = Arrays.asList(new ManualLottoGenerator(), new AutoLottoGenerator());
+    private final BettingInfo bettingInfo;
 
-    public static Lottos createLottos(PaidPrice paidPrice, LottoGenerator lottoGenerator) {
-        List<Lotto> lottos = new ArrayList<>();
-        int lottoCount = paidPrice.getLottoCount();
-        for (int i = 0; i < lottoCount; i++) {
-            lottos.add(lottoGenerator.create());
-        }
-        return new Lottos(lottos);
+    public LottoGenerateManager(BettingInfo bettingInfo) {
+        this.bettingInfo = bettingInfo;
     }
 
-    public static WinningLotto createWinningLotto(LottoGenerator lottoGenerator, String bonusNumber) {
-        Lotto lotto = lottoGenerator.create();
-        return new WinningLotto(lotto, new LottoNumber(bonusNumber));
+    public Lottos createLottos() {
+        Lottos lottos = new Lottos();
+        for (LottoGenerator lottoGenerator : lottoGenerators) {
+            lottos.addLottos(lottoGenerator.createLottos(this.bettingInfo));
+        }
+        return lottos;
+    }
+
+    public static WinningLotto createWinningLotto(List<String> lottoNumbers, String bonusNumber) {
+        Lotto lotto = ManualLottoGenerator.createLotto(lottoNumbers);
+        return new WinningLotto(lotto, LottoNumber.valueOf(bonusNumber));
     }
 }

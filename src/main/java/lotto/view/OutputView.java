@@ -3,16 +3,16 @@ package lotto.view;
 import lotto.domain.*;
 
 public class OutputView {
-    public static final String SPLIT_DELIMETER = ",";
 
-    public static void printLottoCount(PaidPrice paidPrice) {
-        System.out.println(paidPrice.getLottoCount() + "개를 구매했습니다");
+    public static void printLottoSize(int manaulLottoSize, int autoLottoSize) {
+        String result = "수동으로 %s장, 자동으로 %s개를 구매했습니다.";
+        System.out.println(String.format(result, manaulLottoSize, autoLottoSize));
     }
 
     public static void printLottosNumbers(Lottos lottos) {
         int lottosLength = lottos.getLottos().size();
         for (int i = 0; i < lottosLength; i++) {
-            System.out.println(lottos.getLottos().get(i).getLottoNumbers());
+            System.out.println(lottos.getLottoNumbers(i));
         }
     }
 
@@ -25,13 +25,10 @@ public class OutputView {
     }
 
     public static void printWinningResults(ResultsDTO resultsDTO) {
-        for (WinningInfo winningInfo : WinningInfo.values()) {
-            if (winningInfo == WinningInfo.FAIL) {
-                continue;
-            }
+        for (WinningInfo winningInfo : WinningInfo.getValuesWithoutFail()) {
             int winningCount = resultsDTO.getMatchCount(winningInfo);
             printWinnigInfo(winningInfo);
-            System.out.println(winningCount+"개");
+            System.out.println(winningCount + "개");
         }
     }
 
