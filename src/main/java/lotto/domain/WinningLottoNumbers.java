@@ -5,30 +5,30 @@ import lotto.exceptions.WinningLottoNumbersIllegalArgumentException;
 import java.util.Objects;
 
 public class WinningLottoNumbers {
-	private final SerialLottoNumber winningLottoNumbers;
+	private final Lotto winningLottoNumbers;
 	private final LottoNumber bonus;
 
-	public WinningLottoNumbers(final SerialLottoNumber winningLottoNumbers, final LottoNumber bonus) {
+	public WinningLottoNumbers(final Lotto winningLottoNumbers, final LottoNumber bonus) {
 		checkWinningNumbersContainsBonus(winningLottoNumbers, bonus);
 
 		this.winningLottoNumbers = winningLottoNumbers;
 		this.bonus = bonus;
 	}
 
-	private void checkWinningNumbersContainsBonus(SerialLottoNumber winningLottoNumbers, LottoNumber bonus) {
+	private void checkWinningNumbersContainsBonus(Lotto winningLottoNumbers, LottoNumber bonus) {
 		if (winningLottoNumbers.contains(bonus)) {
 			throw new WinningLottoNumbersIllegalArgumentException();
 		}
 	}
 
-	public WinningType findMatchingWinningTypeWith(SerialLottoNumber serialLottoNumber) {
+	public WinningType findMatchingWinningTypeWith(Lotto serialLottoNumber) {
 		int sameNumberCount = serialLottoNumber.countMatching(winningLottoNumbers);
 		boolean isContainsBonus = serialLottoNumber.contains(bonus);
 
 		return WinningType.getWinningType(sameNumberCount, isContainsBonus);
 	}
 
-	public SerialLottoNumber getWinningLottoNumbers() {
+	public Lotto getWinningLottoNumbers() {
 		return winningLottoNumbers;
 	}
 

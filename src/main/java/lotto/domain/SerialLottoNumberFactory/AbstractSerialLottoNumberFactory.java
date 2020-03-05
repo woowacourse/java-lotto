@@ -1,7 +1,7 @@
 package lotto.domain.SerialLottoNumberFactory;
 
 import lotto.domain.LottoNumber;
-import lotto.domain.SerialLottoNumber;
+import lotto.domain.Lotto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,5 +21,5 @@ public abstract class AbstractSerialLottoNumberFactory implements SerialLottoNum
 	}
 
 	@Override
-	public abstract SerialLottoNumber createSerialLottoNumber();
+	public abstract Lotto createSerialLottoNumber();
 }

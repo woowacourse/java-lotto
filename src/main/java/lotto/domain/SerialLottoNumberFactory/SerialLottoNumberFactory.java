@@ -1,7 +1,7 @@
 package lotto.domain.SerialLottoNumberFactory;
 
-import lotto.domain.SerialLottoNumber;
+import lotto.domain.Lotto;
 
 public interface SerialLottoNumberFactory {
-	SerialLottoNumber createSerialLottoNumber();
+	Lotto createSerialLottoNumber();
 }

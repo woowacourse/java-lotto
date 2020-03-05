@@ -6,12 +6,12 @@ import lotto.utils.StringParser;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class SerialLottoNumber {
+public class Lotto {
 	public static final int LOTTO_TICKET_SIZE = 6;
 
 	private final List<LottoNumber> lottoNumbers;
 
-	public SerialLottoNumber(final List<LottoNumber> lottoNumbers) throws SerialLottoNumberIllegalArgumentException {
+	public Lotto(final List<LottoNumber> lottoNumbers) {
 		checkIsSizeSix(lottoNumbers);
 		checkIsDuplicated(lottoNumbers);
 
@@ -23,13 +23,21 @@ public class SerialLottoNumber {
 	/**
 	 * @param input 예시) "1,2,3,4,5,6"
 	 */
-	public static SerialLottoNumber of(String input) {
+	public static Lotto of(String input) {
 		List<Integer> integers = StringParser.stringToIntegerList(input);
 		List<LottoNumber> lottoNumbers = integers.stream()
 				.map(LottoNumber::of)
 				.collect(Collectors.toUnmodifiableList());
 
-		return new SerialLottoNumber(lottoNumbers);
+		return new Lotto(lottoNumbers);
+	}
+
+	public static Lotto of(List<Integer> input) {
+		List<LottoNumber> lottoNumbers = input.stream()
+				.map(LottoNumber::of)
+				.collect(Collectors.toUnmodifiableList());
+
+		return new Lotto(lottoNumbers);
 	}
 
 	private void checkIsDuplicated(List<LottoNumber> lottoNumbers) {
@@ -49,7 +57,7 @@ public class SerialLottoNumber {
 		return lottoNumbers.contains(lottoNumber);
 	}
 
-	public int countMatching(SerialLottoNumber winningLottoNumbers) {
+	public int countMatching(Lotto winningLottoNumbers) {
 		return (int) lottoNumbers.stream()
 				.filter(winningLottoNumbers::contains)
 				.count();
@@ -63,7 +71,7 @@ public class SerialLottoNumber {
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
-		SerialLottoNumber that = (SerialLottoNumber) o;
+		Lotto that = (Lotto) o;
 		return Objects.equals(lottoNumbers, that.lottoNumbers);
 	}
 

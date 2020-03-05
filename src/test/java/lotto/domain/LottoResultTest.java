@@ -59,7 +59,7 @@ public class LottoResultTest {
 		PurchasedSerialLottoNumbers purchasedSerialLottoNumbers
 				= PurchasedSerialLottoNumbers.of(new PurchaseMoney(14000),
 				new TestSerialLottoNumberFactory());
-		SerialLottoNumber serialLottoNumber = SerialLottoNumber.of("1, 2, 3, 4, 5, 6");
+		Lotto serialLottoNumber = Lotto.of("1, 2, 3, 4, 5, 6");
 		LottoNumber bonusNumber = LottoNumber.of(7);
 		WinningLottoNumbers winningLottoNumbers
 				= new WinningLottoNumbers(serialLottoNumber, bonusNumber);

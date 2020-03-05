@@ -1,11 +1,11 @@
 package lotto.domain.SerialLottoNumberFactory;
 
-import lotto.domain.SerialLottoNumber;
+import lotto.domain.Lotto;
 
 public class TestSerialLottoNumberFactory extends AbstractSerialLottoNumberFactory {
 
 	@Override
-	public SerialLottoNumber createSerialLottoNumber() {
-		return new SerialLottoNumber(super.getAllLottoNumbers().subList(ZERO_INDEX, SIX_INDEX));
+	public Lotto createSerialLottoNumber() {
+		return new Lotto(super.getAllLottoNumbers().subList(ZERO_INDEX, SIX_INDEX));
 	}
 }

@@ -95,7 +95,7 @@ public class Controller {
 	private static PurchasedSerialLottoNumbers purchaseManualLotto(
 			PurchaseMoney manualTicketMoney) {
 
-		List<SerialLottoNumber> serialLottoNumbers = new ArrayList<>();
+		List<Lotto> serialLottoNumbers = new ArrayList<>();
 		OutputView.printInputManualLottoNumbersMessage();
 		for (int i = 0; i < manualTicketMoney.countPurchasedTickets(); i++) {
 			serialLottoNumbers.add(prepareManualSerialLottoNumber());
@@ -104,8 +104,8 @@ public class Controller {
 		return new PurchasedSerialLottoNumbers(serialLottoNumbers);
 	}
 
-	private static SerialLottoNumber prepareManualSerialLottoNumber() {
-		SerialLottoNumber serialLottoNumber;
+	private static Lotto prepareManualSerialLottoNumber() {
+		Lotto serialLottoNumber;
 		do {
 			String input = InputView.inputManualLottoNumbers();
 			serialLottoNumber = prepareManualSerialLottoNumberIfValid(input);
@@ -113,9 +113,9 @@ public class Controller {
 		return serialLottoNumber;
 	}
 
-	private static SerialLottoNumber prepareManualSerialLottoNumberIfValid(String input) {
+	private static Lotto prepareManualSerialLottoNumberIfValid(String input) {
 		try {
-			return SerialLottoNumber.of(input);
+			return Lotto.of(input);
 		} catch (SerialLottoNumberIllegalArgumentException | LottoNumberIllegalArgumentException e) {
 			OutputView.printWarningMessage(e.getMessage());
 			return null;
@@ -171,8 +171,8 @@ public class Controller {
 		}
 	}
 
-	private static SerialLottoNumber createWinningNumber() {
-		SerialLottoNumber winningNumber;
+	private static Lotto createWinningNumber() {
+		Lotto winningNumber;
 		do {
 			winningNumber = createWinningNumbersIfValid();
 		} while (winningNumber == null);
@@ -180,9 +180,9 @@ public class Controller {
 		return winningNumber;
 	}
 
-	private static SerialLottoNumber createWinningNumbersIfValid() {
+	private static Lotto createWinningNumbersIfValid() {
 		try {
-			return SerialLottoNumber.of(InputView.inputWinningNumbers());
+			return Lotto.of(InputView.inputWinningNumbers());
 		} catch (IllegalArgumentException e) {
 			OutputView.printWarningMessage(e.getMessage());
 			return null;

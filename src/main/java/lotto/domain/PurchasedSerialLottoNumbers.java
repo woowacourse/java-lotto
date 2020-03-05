@@ -6,15 +6,15 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class PurchasedSerialLottoNumbers {
-	private final List<SerialLottoNumber> purchasedSerialLottoNumbers;
+	private final List<Lotto> purchasedSerialLottoNumbers;
 
-	public PurchasedSerialLottoNumbers(final List<SerialLottoNumber> purchasedSerialLottoNumbers) {
+	public PurchasedSerialLottoNumbers(final List<Lotto> purchasedSerialLottoNumbers) {
 		this.purchasedSerialLottoNumbers = Collections.unmodifiableList(purchasedSerialLottoNumbers);
 	}
 
 	public static PurchasedSerialLottoNumbers of(PurchaseMoney purchaseMoney,
 												 SerialLottoNumberFactory SerialLottoNumberFactory) {
-		List<SerialLottoNumber> purchasedSerialLottoNumbers = new ArrayList<>();
+		List<Lotto> purchasedSerialLottoNumbers = new ArrayList<>();
 
 		int count = purchaseMoney.countPurchasedTickets();
 		for (int i = 0; i < count; i++) {
@@ -24,7 +24,7 @@ public class PurchasedSerialLottoNumbers {
 		return new PurchasedSerialLottoNumbers(purchasedSerialLottoNumbers);
 	}
 
-	public List<SerialLottoNumber> getPurchasedSerialLottoNumbers() {
+	public List<Lotto> getPurchasedSerialLottoNumbers() {
 		return Collections.unmodifiableList(purchasedSerialLottoNumbers);
 	}
 
@@ -35,7 +35,7 @@ public class PurchasedSerialLottoNumbers {
 	}
 
 	public PurchasedSerialLottoNumbers addAll(PurchasedSerialLottoNumbers other) {
-		List<SerialLottoNumber> serialLottoNumbers = new ArrayList<>(purchasedSerialLottoNumbers);
+		List<Lotto> serialLottoNumbers = new ArrayList<>(purchasedSerialLottoNumbers);
 		serialLottoNumbers.addAll(other.purchasedSerialLottoNumbers);
 
 		return new PurchasedSerialLottoNumbers(serialLottoNumbers);

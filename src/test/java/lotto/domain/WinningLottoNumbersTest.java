@@ -16,10 +16,8 @@ public class WinningLottoNumbersTest {
 	@Test
 	void WinningLottoNumbers() {
 		// given
-		List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)
-				.map(LottoNumber::of)
-				.collect(Collectors.toUnmodifiableList());
-		SerialLottoNumber winningLottoNumbers = new SerialLottoNumber(lottoNumbers);
+		List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+		Lotto winningLottoNumbers = Lotto.of(lottoNumbers);
 		LottoNumber bonus = LottoNumber.of(7);
 
 		// when
@@ -36,10 +34,8 @@ public class WinningLottoNumbersTest {
 	@Test
 	void WinningLottoNumbers_WinningNumbersContainsBonusNumber_ShouldThrowException() {
 		// given
-		List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)
-				.map(LottoNumber::of)
-				.collect(Collectors.toUnmodifiableList());
-		SerialLottoNumber winningLottoNumbers = new SerialLottoNumber(lottoNumbers);
+		List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+		Lotto winningLottoNumbers = Lotto.of(lottoNumbers);
 		LottoNumber bonus = LottoNumber.of(6);
 
 		// then
@@ -55,17 +51,12 @@ public class WinningLottoNumbersTest {
 	@MethodSource("generateCountMatchingLottoNumbersInput")
 	void countMatchingLottoNumbers(List<Integer> input, WinningType expected) {
 		// given
-		List<LottoNumber> winning = Stream.of(1, 2, 3, 4, 5, 6)
-				.map(LottoNumber::of)
-				.collect(Collectors.toUnmodifiableList());
-		SerialLottoNumber winningNumbers = new SerialLottoNumber(winning);
+		List<Integer> winning = Arrays.asList(1, 2, 3, 4, 5, 6);
+		Lotto winningNumbers = Lotto.of(winning);
 		LottoNumber bonus = LottoNumber.of(7);
 		WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(winningNumbers, bonus);
 
-		List<LottoNumber> lottoNumbers = input.stream()
-				.map(LottoNumber::of)
-				.collect(Collectors.toUnmodifiableList());
-		SerialLottoNumber serialLottoNumber = new SerialLottoNumber(lottoNumbers);
+		Lotto serialLottoNumber = Lotto.of(input);
 
 		// when
 		WinningType winningType = winningLottoNumbers.findMatchingWinningTypeWith(serialLottoNumber);

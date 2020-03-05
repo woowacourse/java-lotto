@@ -12,17 +12,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class SerialLottoNumberTest {
+public class LottoTest {
 	@Test
 	void SerialLottoNumber() {
 		// given
-		int[] input = {1, 10, 3, 11, 5, 6};
-		List<LottoNumber> lottoNumbers = Arrays.stream(input)
-				.mapToObj(LottoNumber::of)
-				.collect(Collectors.toList());
-
-		// when
-		SerialLottoNumber serialLottoNumber = new SerialLottoNumber(lottoNumbers);
+		List<Integer> input = Arrays.asList(1, 10, 3, 11, 5, 6);
+		Lotto serialLottoNumber = Lotto.of(input);
 
 		// then
 		int[] sortedInput = {1, 3, 5, 6, 10, 11};
@@ -38,15 +33,14 @@ public class SerialLottoNumberTest {
 	@MethodSource("generateNotSizeSixInput")
 	void SerialLottoNumber_NotSizeSix_ShouldThrowException(int[] input) {
 		// given
-		List<LottoNumber> lottoNumbers = Arrays.stream(input)
-				.mapToObj(LottoNumber::of)
-				.collect(Collectors.toList());
+		List<Integer> lottoNumbers = Arrays.stream(input)
+				.boxed()
+				.collect(Collectors.toUnmodifiableList());
 
 		// then
 		Assertions.assertThatThrownBy(() -> {
-
 			// when
-			new SerialLottoNumber(lottoNumbers);
+			Lotto.of(lottoNumbers);
 		}).isInstanceOf(SerialLottoNumberIllegalArgumentException.class)
 				.hasMessageMatching(SerialLottoNumberIllegalArgumentException.MESSAGE);
 	}
@@ -60,15 +54,15 @@ public class SerialLottoNumberTest {
 	@MethodSource("generateDuplicatedInput")
 	void SerialLottoNumber_DuplicatedNumbers_ShouldThrowException(int[] input) {
 		// given
-		List<LottoNumber> lottoNumbers = Arrays.stream(input)
-				.mapToObj(LottoNumber::of)
-				.collect(Collectors.toList());
+		List<Integer> lottoNumbers = Arrays.stream(input)
+				.boxed()
+				.collect(Collectors.toUnmodifiableList());
 
 		// then
 		Assertions.assertThatThrownBy(() -> {
 
 			// when
-			new SerialLottoNumber(lottoNumbers);
+			Lotto.of(lottoNumbers);
 		}).isInstanceOf(SerialLottoNumberIllegalArgumentException.class)
 				.hasMessageMatching(SerialLottoNumberIllegalArgumentException.MESSAGE);
 	}
@@ -80,17 +74,29 @@ public class SerialLottoNumberTest {
 	}
 
 	@Test
-	void of() {
+	void of_String() {
 		// given
 		String input = "1, 45, 3, 4, 5, 6";
 
 		// when
-		SerialLottoNumber result = SerialLottoNumber.of(input);
+		Lotto result = Lotto.of(input);
 
 		//then
-		SerialLottoNumber expected = new SerialLottoNumber(Stream.of(1, 3, 4, 5, 6, 45)
-				.map(LottoNumber::of)
-				.collect(Collectors.toUnmodifiableList()));
+		Lotto expected = Lotto.of(Arrays.asList(1, 3, 4, 5, 6, 45));
+		Assertions.assertThat(result)
+				.isEqualTo(expected);
+	}
+
+	@Test
+	void of_Integers() {
+		// given
+		List<Integer> input = Arrays.asList(1, 45, 3, 4, 5, 6);
+
+		// when
+		Lotto result = Lotto.of(input);
+
+		//then
+		Lotto expected = Lotto.of(Arrays.asList(1, 3, 4, 5, 6, 45));
 		Assertions.assertThat(result)
 				.isEqualTo(expected);
 	}

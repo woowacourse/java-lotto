@@ -1,13 +1,13 @@
 package lotto.domain.SerialLottoNumberFactory;
 
-import lotto.domain.SerialLottoNumber;
+import lotto.domain.Lotto;
 
 import java.util.Collections;
 
 public class AutoSerialLottoNumberFactory extends AbstractSerialLottoNumberFactory {
 	@Override
-	public SerialLottoNumber createSerialLottoNumber() {
+	public Lotto createSerialLottoNumber() {
 		Collections.shuffle(super.getAllLottoNumbers());
-		return new SerialLottoNumber(super.getAllLottoNumbers().subList(ZERO_INDEX, SIX_INDEX));
+		return new Lotto(super.getAllLottoNumbers().subList(ZERO_INDEX, SIX_INDEX));
 	}
 }
