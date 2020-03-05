@@ -24,7 +24,7 @@ public enum LottoRank {
     public static LottoRank of(int matchNumber, boolean hasBonusNumber) {
         return Arrays.stream(LottoRank.values())
                 .filter(rank -> rank.isSameMatchCount(matchNumber))
-                .filter(rank -> !rank.equals(SECOND) || hasBonusNumber) // 2등 확인 로직
+                .filter(rank -> !rank.equals(SECOND) || hasBonusNumber)
                 .findFirst()
                 .orElse(null);
     }
@@ -32,7 +32,6 @@ public enum LottoRank {
     private boolean isSameMatchCount(int matchNumber) {
         return this.rank == matchNumber;
     }
-
 
     public int getRank() {
         return rank;
@@ -44,9 +43,5 @@ public enum LottoRank {
 
     public static boolean checkNoPrize(int count) {
         return count < FIFTH.rank;
-    }
-
-    public static boolean checkThirdWinner(int count) {
-        return count == THIRD.rank;
     }
 }

@@ -2,6 +2,8 @@ package lotto.view;
 
 import lotto.exception.NotNumberException;
 import lotto.exception.NullOrEmptyException;
+import lotto.model.LottoNumber;
+import lotto.model.LottoTicket;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,26 +25,31 @@ public class InputView {
         return payment;
     }
 
-    public static int inputBonusBall() {
+    public static LottoNumber inputBonusBall() {
+        String input = scanner.nextLine();
+        checkNullOrEmptyInput(input);
+        checkNumberFormat(input);
+        return LottoNumber.valueOf(Integer.parseInt(input));
+    }
+
+    // 수동
+    public static LottoTicket inputLottoTicket() {
+        String input = scanner.nextLine();
+        checkNullOrEmptyInput(input);
+        return makeNumbers(splitInput(input));
+    }
+
+    public static int inputManualCount() {
         String input = scanner.nextLine();
         checkNullOrEmptyInput(input);
         checkNumberFormat(input);
         return Integer.parseInt(input);
     }
 
-    // 수동
-    public static List<Integer> inputLottoTicket() {
-        String input = scanner.nextLine();
-        checkNullOrEmptyInput(input);
-        List<Integer> lottoTicket = makeNumbers(splitInput(input));
-        return lottoTicket;
-    }
-
-    public static List<Integer> inputWinNumber() {
+    public static LottoTicket inputWinNumber() {
         String inputs = scanner.nextLine();
         checkNullOrEmptyInput(inputs);
-        List<Integer> winningNumbers = makeNumbers(splitInput(inputs));
-        return winningNumbers;
+        return makeNumbers(splitInput(inputs));
     }
 
     public static void checkNullOrEmptyInput(String input) {
@@ -55,15 +62,15 @@ public class InputView {
         return Arrays.asList(numbers.split(","));
     }
 
-    public static List<Integer> makeNumbers(List<String> inputs) {
-        List<Integer> numbers = new ArrayList<>();
+    public static LottoTicket makeNumbers(List<String> inputs) {
+        List<LottoNumber> numbers = new ArrayList<>();
         for (String input : inputs) {
             input = input.trim();
             checkNumberFormat(input);
-            int number = Integer.parseInt(input);
+            LottoNumber number = LottoNumber.valueOf(Integer.parseInt(input));
             numbers.add(number);
         }
-        return numbers;
+        return new LottoTicket(numbers);
     }
 
     public static void checkNumberFormat(String input) {

@@ -4,6 +4,9 @@ import lotto.model.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LottoController {
     private Payment payment;
     private LottoResult lottoResult;
@@ -14,9 +17,8 @@ public class LottoController {
     public LottoController() {
         OutputView.printinput();
         payment = new Payment(InputView.inputPayment());
-        OutputView.printLottoCount(payment.getPayment());
-        lottoResult = new LottoResult();
-        lottoTickets = new LottoTickets(payment.countLottoTickets());
+        lottoTickets = new LottoTickets();
+        makeLottoTickets();
         OutputView.printAutoNumbers(lottoTickets);
         OutputView.printInputWinNumber();
         winNumber = new WinNumber(InputView.inputWinNumber());
@@ -24,10 +26,21 @@ public class LottoController {
         bonusBall = new BonusBall(winNumber, InputView.inputBonusBall());
     }
 
-    public void lottoGame() {
-        for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
-            lottoResult.checkCount(lottoTicket, winNumber, bonusBall);
+    private void makeLottoTickets() {
+        OutputView.printInputManualCount();
+        int manualTicketCount = InputView.inputManualCount();
+        OutputView.printTicketCount(manualTicketCount, payment);
+        OutputView.printInputManualTicket();
+        List<LottoTicket> manualTickets = new ArrayList<>();
+        for (int count = 0; count < manualTicketCount; count++) {
+            manualTickets.add(InputView.inputLottoTicket());
         }
+        TicketInformation ticketInformation = new TicketInformation(payment, manualTicketCount, manualTickets);
+        lottoTickets.combineTickets(ticketInformation);
+    }
+
+    public void lottoGame() {
+        lottoResult = lottoTickets.matchLottoResult(winNumber, bonusBall);
         OutputView.printResult();
         printCorrectResults();
         OutputView.printYield(YieldMoney.countYieldMoney(payment, Prize.sumPrize(lottoResult)));

@@ -115,3 +115,103 @@
 - [x] Prize 클래스 내 sumPrize 메서드 구조를 for문으로 변경하라.
 - [x] YieldMoney 클래스 내 countYieldMoney 메서드 인자명을 간략화하지마라.
 - [x] AutoNumber 클래스 내 멤버변수를 LottoNumbers로 변경하라.
+
+### 세번째 피드백
+- [x] LottoController 클래스 내 lottoTicket 생성자 변경.
+- [x] LottoResult 클래스 내 초기화에 사용하는 Map을 LottoRank로 이동.
+
+## 2단계 - 수동 구매
+
+### 기능 요구사항
+- 현재 로또 생성기는 자동 생성 기능만 제공한다. 사용자가 수동으로 추첨 번호를 입력할 수 있도록 해야 한다.
+- 입력한 금액, 자동 생성 숫자, 수동 생성 번호를 입력하도록 해야 한다.
+
+### 프로그래밍 요구사항
+- 예외가 발생하는 부분에 대해 자바 Exception을 적용해 예외처리한다.
+- 사용자가 입력한 값에 대한 예외 처리를 철저히 한다.
+```
+구입금액을 입력해 주세요.
+14000
+
+수동으로 구매할 로또 수를 입력해 주세요.
+3
+
+수동으로 구매할 번호를 입력해 주세요.
+8, 21, 23, 41, 42, 43
+3, 5, 11, 16, 32, 38
+7, 11, 16, 35, 36, 44
+
+수동으로 3장, 자동으로 11개를 구매했습니다.
+[8, 21, 23, 41, 42, 43]
+[3, 5, 11, 16, 32, 38]
+[7, 11, 16, 35, 36, 44]
+[1, 8, 11, 31, 41, 42]
+[13, 14, 16, 38, 42, 45]
+[7, 11, 30, 40, 42, 43]
+[2, 13, 22, 32, 38, 45]
+[23, 25, 33, 36, 39, 41]
+[1, 3, 5, 14, 22, 45]
+[5, 9, 38, 41, 43, 44]
+[2, 8, 9, 18, 19, 21]
+[13, 14, 18, 21, 23, 35]
+[17, 21, 29, 37, 42, 45]
+[3, 8, 27, 30, 35, 44]
+
+지난 주 당첨 번호를 입력해 주세요.
+1, 2, 3, 4, 5, 6
+보너스 볼을 입력해 주세요.
+7
+
+당첨 통계
+---------
+3개 일치 (5000원)- 1개
+4개 일치 (50000원)- 0개
+5개 일치 (1500000원)- 0개
+5개 일치, 보너스 볼 일치(30000000원) - 0개
+6개 일치 (2000000000원)- 0개
+총 수익률은 30%입니다.
+```
+
+## 코드 리뷰
+### 첫번째 피드백
+- [x] LottoController 클래스 내 ticketNumber를 지역 변수로 둬라.
+- [x] WinNumber 클래스의 LottoTicket 상속을 조합으로 변경하라.
+- [x] Payment 클래스의 countAutoTickets() 메서드 명을 변경하라.
+- [x] LottoTicket 클래스에서 자동, 수동 생성 클래스를 나누어 생성하라.
+
+### 두번째 피드백 
+- [x] LottoController 클래스 내 각 티켓 생성자의 반복문 중복을 제거하라.
+- [x] TicketNumber 클래스 내 totalTicket 변수 제거.
+- [x] LottoTicket 클래스 내 lottoTicket의 Integer 값을 포장하라.
+- [x] ManualTicket과 AutoTicket을 상속이 아닌 interface를 활용하라.
+- [x] 테스트 코드 검토하라.
+
+### 세번째 피드백
+- [x] 피드백 요청 전에 테스트 코드를 실행하라.
+- [x] 로또 번호 범위를 관리하는 주체를 확인하라.
+- [x] 로또 번호 자릿수를 관리하는 주체를 확인하라.
+- [x] 불필요한 지역 변수 생성을 제거하라.
+- [x] BonusBall의 checkContainsWinNumber 메소드에서 winNumber의 null 체크를 하라.
+- [ ] 인터페이스명을 변경하라.
+- [x] LottoResult에서 LottoRank.values()를 활용하라.
+- [x] LottoTicket의 checkLottoLength 메소드에서 inputs의 null 체크를 하라.
+- [x] LottoTickets의 combineTickets 메소드에서 중복 코드를 제거하라.
+- [x] LottoTickets에서 LottoGenerator를 생성하여 combineTickets 메서드를 수정하지 않도록 개선하라.
+- [x] ManualTicket에서 InputView를 제거하라.
+- [x] ManualTicket에서 createManualTicket 메서드를 제거하라.
+- [x] LottoNumber에서 매번 새로운 LottoNumber를 생성하지 말고 미리 생성하여 사용하라.
+
+### 네번째 피드백 
+- [x] LottoController 클래스의 makeLottoTickets 메서드 리팩토링하라.
+- [x] static 변수를 인스턴스 변수 위로 작성해야 한다.
+- [x] LottoNumber 클래스의 lottoNumber 메서드를 valueOf 혹은 of로 변경하라.
+- [x] LottoTicket 클래스의 makeAutoTicket 메서드의 파라미터를 덮어씌우지 마라.
+- [x] TicketInformationTest에서 자동, 수동 구매햇을 때 getAutoTicketCount 메서드의 테스트를 하라.
+- [x] LottoTicket 클래스의 makeAutoTicket 메서드를 자동 로또 티켓 클래스로 옮겨라.
+- [x] LottoRank 클래스의 prizeResult, of, checkNoPrize 메서드 테스트 추가
+- [x] LottoResult 클래스의 checkCount 메서드 테스트 추가
+- [x] LottoTickets 클래스의 combineTickets, matchLottoResult 메서드 테스트 추가
+- [x] LottoTicket 클래스의 matchNumber, matchesWithBonusBall, matchesWithNumber 메서드 테스트 추가
+- [x] Payment 클래스의 countTickets 메서드 테스트 추가
+- [x] Prize 클래스의 sumPrize 메서드 테스트 추가
+- [x] WinNumber 클래스의 contains 메서드 테스트 추가
