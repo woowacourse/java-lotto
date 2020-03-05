@@ -51,4 +51,30 @@ class LottoNumberTest {
 		Assertions.assertThat(allLottoNumbers)
 				.isEqualTo(expected);
 	}
+
+	@Test
+	void isInvalidInstance_ShouldReturnTrue() {
+		// given
+		LottoNumber given = LottoNumber.invalidInstance();
+
+		// when
+		boolean result = given.isInvalidInstance();
+
+		// then
+		Assertions.assertThat(result)
+				.isTrue();
+	}
+
+	@Test
+	void isInvalidInstance_ShouldReturnFalse() {
+		// given
+		LottoNumber given = LottoNumber.of(45);
+
+		// when
+		boolean result = given.isInvalidInstance();
+
+		// then
+		Assertions.assertThat(result)
+				.isFalse();
+	}
 }
