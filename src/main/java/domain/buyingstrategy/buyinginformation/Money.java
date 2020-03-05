@@ -1,4 +1,4 @@
-package domain;
+package domain.buyingstrategy.buyinginformation;
 
 public class Money {
 
@@ -20,6 +20,10 @@ public class Money {
 
     public int getNumberOfTickets() {
         return (int) this.money / TICKET_PRICE;
+    }
+
+    public Money getRemainedMoney(int numberOfTickets) {
+        return new Money(money - numberOfTickets * TICKET_PRICE);
     }
 
     /* 금액 제한 현실 반영 */

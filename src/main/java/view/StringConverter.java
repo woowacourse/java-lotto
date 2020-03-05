@@ -1,22 +1,14 @@
 package view;
 
-import domain.lottonumber.LottoNumbers;
 import domain.result.LottoRank;
 import domain.result.LottoResult;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class StringConverter {
 
     private static final int START_INDEX_EXCEPT_NO_WIN = 1;
-
-    public static String convertLottoNumbers(LottoNumbers lottoNumbers) {
-        return lottoNumbers.getValue().stream()
-                .map(lottoNumber -> Integer.toString(lottoNumber.getValue()))
-                .collect(Collectors.joining(", ", "[", "]"));
-    }
 
     public static String convertLottoResults(LottoResult lottoResult) {
         StringBuilder stringBuilder = new StringBuilder();
