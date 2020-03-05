@@ -1,6 +1,7 @@
 package lotto;
 
 import domain.*;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -8,10 +9,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottosTest {
 
     @Test
-    void 구매금액으로_로또더미의_사이즈_확인(){
-        Money amount = new Money("10800");
-        int lottoCount = amount.getCount();
-        Lottos lottos = new Lottos(lottoCount);
-        assertThat(lottos.getDummySize()).isEqualTo(10);
+    @DisplayName("수동으로 로또 번호 입력시 정상적으로 Lottos 에 추가되는지 확인")
+    void addLottoWithManualStringArrayInputTest() {
+        int[] inputLottoNumbers = {1, 2, 3, 4, 5, 6};
+        LottoGenerator lottoGenerator = new ManualLottoGenerator(inputLottoNumbers);
+        Lotto lotto = lottoGenerator.generateLotto();
+
+        Lottos lottos = new Lottos();
+        lottos.addLotto(lotto);
+        assertThat(lottos.getLottos().size()).isEqualTo(1);
     }
 }

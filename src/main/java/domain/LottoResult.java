@@ -2,38 +2,43 @@ package domain;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class LottoResult {
-    private static final Map<LottoRank, Integer> result = new HashMap<>();
-    public static final int INITIAL_PROFIT = 0;
-    public static final int RESULT_INCREMENT = 1;
-    public static final int INITIAL_RESULT = 0;
+    private static final int RESULT_INCREMENT = 1;
+    private static final int INITIAL_RESULT = 0;
 
-    public LottoResult() {
+    private final Map<LottoRank, Integer> result = new HashMap<>();
+
+    public LottoResult(final Lottos lottos, final WinningNumber winningNumber) {
         for (LottoRank rank : LottoRank.values()) {
             result.put(rank, INITIAL_RESULT);
         }
+        countWinningLotto(lottos, winningNumber);
     }
 
-    public void addWinningRankCount(final LottoRank rank) {
-        if (rank != null){
-            result.put(rank, result.get(rank) + RESULT_INCREMENT);
+    private void countWinningLotto(final Lottos lottos, final WinningNumber winningNumber) {
+        for (Lotto lotto : lottos.getLottos()) {
+            addWinningRankCount(LottoRank
+                    .findRank(winningNumber.countWinningMatch(lotto),
+                            winningNumber.isBonusMatch(lotto))
+            );
         }
     }
 
-    public int calculateProfit() {
-        int profit = INITIAL_PROFIT;
-        for (LottoRank rank : result.keySet()) {
-            profit += rank.getWinningMoney() * result.get(rank);
-        }
-        return profit;
+    private void addWinningRankCount(final LottoRank rank) {
+        result.put(rank, result.get(rank) + RESULT_INCREMENT);
     }
 
-    public int getSize() {
-        return result.size();
+    public int calculateTotalProfit() {
+        return result.keySet()
+                .stream()
+                .mapToInt(rank -> rank.getWinningMoney() * getRankCount(rank))
+                .sum();
     }
 
-    public int getCount(final LottoRank rank) {
+    public int getRankCount(final LottoRank rank) {
+        Objects.requireNonNull(rank);
         return result.get(rank);
     }
 }

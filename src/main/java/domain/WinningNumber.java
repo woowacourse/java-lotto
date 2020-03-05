@@ -1,50 +1,51 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 public class WinningNumber {
-    private final Lotto winningNumbers;
-    private final LottoNumber bonusNumber;
+    private static final int MIN_LOTTO_NUMBER = 1;
+    private static final int MAX_LOTTO_NUMBER = 45;
+    private static final int WINNING_MATCH_COUNT_FOR_SECOND_AND_THIRD = 5;
 
-    public WinningNumber(String[] numbers, String bonusNumber) {
-        List<LottoNumber> winningNumbers = new ArrayList<>();
-        for (String number : numbers) {
-            winningNumbers.add(new LottoNumber(number));
-        }
-        this.winningNumbers = new Lotto(winningNumbers);
-        this.bonusNumber = new LottoNumber(bonusNumber);
+    private Lotto winningNumbers;
+    private LottoNumber bonusNumber;
+
+    public WinningNumber(final int[] winningNumbers, int bonusNumber) {
+        LottoGenerator lottoGenerator = new ManualLottoGenerator(winningNumbers);
+        this.winningNumbers = lottoGenerator.generateLotto();
+        checkLottoNumberRange(bonusNumber);
+        this.bonusNumber = LottoNumber.newLottoNumber(bonusNumber);
         checkDuplicatedLottoNumber();
     }
 
-    public LottoResult countWinningLotto(final Lottos lottos) {
-        LottoResult lottoResult = new LottoResult();
-        for (Lotto lotto : lottos.getLottos()){
-            LottoRank rank = LottoRank.findRank(countWinningMatch(lotto), isBonusMatch(lotto));
-            lottoResult.addWinningRankCount(rank);
-        }
-        return lottoResult;
+    public int countWinningMatch(final Lotto targetLotto) {
+        Objects.requireNonNull(targetLotto);
+        return winningNumbers.countMatchNumbers(targetLotto);
     }
 
-    private int countWinningMatch(final Lotto myLotto) {
-        checkLottoNull(myLotto);
-        return winningNumbers.countMatchNumbers(myLotto);
-    }
-
-    private boolean isBonusMatch(final Lotto myLotto) {
-        checkLottoNull(myLotto);
-        return myLotto.contains(bonusNumber);
-    }
-
-    private void checkLottoNull(final Lotto myLotto) {
-        if (myLotto == null) {
-            throw new NullPointerException("비교할 로또가 없습니다.");
-        }
+    public boolean isBonusMatch(final Lotto targetLotto) {
+        Objects.requireNonNull(targetLotto);
+        return countWinningMatch(targetLotto) == WINNING_MATCH_COUNT_FOR_SECOND_AND_THIRD
+                && targetLotto.contains(bonusNumber);
     }
 
     private void checkDuplicatedLottoNumber() {
         if (winningNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException("당첨 번호와 보너스 번호는 중복될 수 없습니다.");
+        }
+    }
+
+    private void checkLottoNumberRange(final int bonusIntegerValue) {
+        if (bonusIntegerValue < MIN_LOTTO_NUMBER || bonusIntegerValue > MAX_LOTTO_NUMBER) {
+            throw new IllegalArgumentException("로또 번호는 1부터 45까지 수여야 합니다.");
+        }
+    }
+
+    private void checkNotNumber(final String number) {
+        try {
+            Integer.parseInt(number);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(String.format("보너스 넘버는 숫자여야 합니다. 입력한 문자 : %s", number));
         }
     }
 }

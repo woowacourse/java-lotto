@@ -1,52 +1,43 @@
 package domain;
 
 import java.util.Arrays;
+import java.util.function.Predicate;
 
 public enum LottoRank {
-    FIRST(6, false, 2_000_000_000, "6개 일치(2000000000원) - "),
-    SECOND(5, true, 30_000_000, "5개 일치, 보너스볼 일치(30000000원) - "),
-    THIRD(5, false, 1_500_000, "5개 일치(1500000원) - "),
-    FOURTH(4, false, 50_000, "4개 일치(50000원) - "),
-    FIFTH(3, false, 5_000, "3개 일치(5000원) - ");
+    FIRST(6, false, 2_000_000_000),
+    SECOND(5, true, 30_000_000),
+    THIRD(5, false, 1_500_000),
+    FOURTH(4, false, 50_000),
+    FIFTH(3, false, 5_000),
+    NONE(0, false, 0);
 
-    public static final int WINNING_MATCH_COUNT_FOR_SECOND_AND_THIRD = 5;
-    private int winningMatchCount;
-    private boolean isBonusMatch;
-    private int winningMoney;
-    private String resultMessage;
+    private final int winningMatchCount;
+    private final boolean isBooleanMatch;
+    private final int winningMoney;
 
-    LottoRank(int winningMatchCount, boolean isBonusMatch, int winningMoney, String resultMessage){
+    LottoRank(int winningMatchCount, boolean isBooleanMatch, int winningMoney) {
         this.winningMatchCount = winningMatchCount;
-        this.isBonusMatch = isBonusMatch;
+        this.isBooleanMatch = isBooleanMatch;
         this.winningMoney = winningMoney;
-        this.resultMessage = resultMessage;
     }
 
-    public static LottoRank findRank(final int winningMatchCount, final boolean bonusMatchCount) {
-            return Arrays.stream(LottoRank.values())
-                    .filter(result -> isRankSecondOrThird(bonusMatchCount, result) || isRankOneOrFourthOrFifth(result))
-                    .filter(result -> isWinningMatchCountSame(winningMatchCount, result))
-                    .findFirst()
-                    .orElse(null);
+    public static LottoRank findRank(final int winningMatchCount, final boolean isBooleanMatch) {
+        return Arrays.stream(LottoRank.values())
+                .filter(getLottoRankPredicate(winningMatchCount, isBooleanMatch))
+                .findFirst()
+                .orElse(NONE);
     }
 
-    private static boolean isWinningMatchCountSame(int winningMatchCount, LottoRank result) {
-        return result.winningMatchCount == winningMatchCount;
+    private static Predicate<LottoRank> getLottoRankPredicate(int winningMatchCount, boolean isBooleanMatch) {
+        return result -> result.winningMatchCount == winningMatchCount && result.isBooleanMatch == isBooleanMatch;
     }
 
-    private static boolean isRankOneOrFourthOrFifth(LottoRank result) {
-        return !result.isBonusMatch;
+
+    public int getWinningMatchCount() {
+        return winningMatchCount;
     }
 
-    private static boolean isRankSecondOrThird(boolean bonusMatchCount, LottoRank result) {
-        return isWinningMatchCountSame(WINNING_MATCH_COUNT_FOR_SECOND_AND_THIRD, result) && result.isBonusMatch == bonusMatchCount;
-    }
-
-    public String getResultMessage(){
-        return resultMessage;
-    }
-
-    public int getWinningMoney(){
+    public int getWinningMoney() {
         return winningMoney;
     }
 }

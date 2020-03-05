@@ -5,67 +5,109 @@ import domain.*;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class OutputView {
-    public static final String NEW_LINE = System.lineSeparator();
-    public static final java.lang.String COMMA = ", ";
-    public static final int LAST_COMMA_REMOVER = 2;
+    private static final String NEW_LINE = System.lineSeparator();
+    private static final String COMMA = ", ";
+    private static final String PREFIX = "[";
+    private static final String SUFFIX = "]";
+    private static final String COUNT_UNIT = "개";
+    private static final String DASHES = "------------";
+    private static final String RESULT_MESSAGE = "개 일치(%d원) - ";
+    private static final String RESULT_MESSAGE_FOR_SECOND = "개 일치, 보너스 볼 일치(%d원) - ";
+    private static final String INPUT_AMOUNT_GUIDE_MESSAGE = "구매금액을 입력해 주세요";
+    private static final String INPUT_MANUAL_COUNT_GUIDE_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String INPUT_MANUAL_LOTTO_NUMBER_GUIDE_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
+    private static final String PURCHASE_COUNT_RESULT_MESSAGE = "수동으로 %d장 자동으로 %d개를 구매했습니다.";
+    private static final String INPUT_WINNING_NUMBERS_GUIDE_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String INPUT_BONUS_NUMBER_GUIDE_MESSAGE = "보너스 볼을 입력해 주세요.";
+    private static final String RESULT_HEADING_MESSAGE = "당첨 통계";
+    private static final String PROFIT_RATIO_GUIDE_MESSAGE = "총 수익률은 %d%%입니다.";
+    private static final String REQUEST_RE_ENTER_MESSAGE = "다시 입력해 주세요.";
 
     public static void printInputPurchaseAmountMessage() {
-        System.out.println("구매금액을 입력해 주세요");
+        System.out.println(INPUT_AMOUNT_GUIDE_MESSAGE);
     }
 
-    public static void printPurchaseCountMessage(final int calculateCount) {
-        System.out.printf("%d개를 구매했습니다." + NEW_LINE, calculateCount);
+    public static void printInputManualCountMessage() {
+        System.out.println(NEW_LINE + INPUT_MANUAL_COUNT_GUIDE_MESSAGE);
     }
 
-    public static void printLottos(final Lottos lottos) {
-        for (Lotto eachLotto : lottos.getLottos()){
-            printEachLotto(eachLotto);
-        }
+    public static void printInputManualLottoNumbersMessage() {
+        System.out.println(NEW_LINE + INPUT_MANUAL_LOTTO_NUMBER_GUIDE_MESSAGE);
+    }
+
+    public static void printLottos(final LottoCount lottoCount, final Lottos lottos) {
+        printLottoCountMessage(lottoCount);
+        lottos.getLottos()
+                .forEach(OutputView::printEachLotto);
+    }
+
+    private static void printLottoCountMessage(final LottoCount lottoCount) {
+        System.out.println(NEW_LINE + String.format(PURCHASE_COUNT_RESULT_MESSAGE,
+                lottoCount.getManualCount(), lottoCount.getAutoCount()));
     }
 
     private static void printEachLotto(final Lotto eachLotto) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[");
-        List<LottoNumber> lotto = eachLotto.getLotto();
-        for (LottoNumber number : lotto){
-            stringBuilder.append(number)
-                            .append(COMMA);
-        }
-        stringBuilder.setLength(stringBuilder.length()- LAST_COMMA_REMOVER);
-        stringBuilder.append("]");
-        System.out.println(stringBuilder);
+        String lotto = eachLotto.getLotto()
+                .stream()
+                .map(LottoNumber::toString)
+                .collect(Collectors.joining(COMMA, PREFIX, SUFFIX));
+        System.out.println(lotto);
     }
 
     public static void printInputWinningNumbersMessage() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        System.out.println(NEW_LINE + INPUT_WINNING_NUMBERS_GUIDE_MESSAGE);
     }
 
     public static void printInputBonusNumberMessage() {
-        System.out.println("보너스 볼을 입력해 주세요.");
+        System.out.println(INPUT_BONUS_NUMBER_GUIDE_MESSAGE);
     }
 
     public static void printResult(final LottoResult lottoResult) {
-        System.out.println("당첨 통계" + NEW_LINE + "------------");
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(NEW_LINE)
+                .append(RESULT_HEADING_MESSAGE)
+                .append(NEW_LINE)
+                .append(DASHES)
+                .append(NEW_LINE);
+        printResultDetail(lottoResult, stringBuilder);
+    }
 
+    private static void printResultDetail(final LottoResult lottoResult, final StringBuilder stringBuilder) {
         List<LottoRank> keys = Arrays.asList(LottoRank.values());
         Collections.reverse(keys);
-        for (LottoRank rank : keys){
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append(rank.getResultMessage())
-                        .append(lottoResult.getCount(rank))
-                        .append("개");
-            System.out.println(stringBuilder);
+        for (LottoRank rank : keys) {
+            resultMessageExceptNoneRank(lottoResult, stringBuilder, rank);
+        }
+        System.out.println(stringBuilder);
+    }
+
+    private static void resultMessageExceptNoneRank(LottoResult lottoResult, StringBuilder stringBuilder, LottoRank rank) {
+        if (rank != LottoRank.NONE){
+            stringBuilder.append(rank.getWinningMatchCount());
+            resultMessageByRank(stringBuilder, rank);
+            stringBuilder.append(lottoResult.getRankCount(rank))
+                    .append(COUNT_UNIT)
+                    .append(NEW_LINE);
         }
     }
 
-    public static void printProfitRatio(final int profitRatio) {
-        System.out.printf("총 수익률은 %d%%입니다.", profitRatio);
+    private static void resultMessageByRank(final StringBuilder stringBuilder, final LottoRank rank) {
+        if (rank == LottoRank.SECOND) {
+            stringBuilder.append(String.format(RESULT_MESSAGE_FOR_SECOND, rank.getWinningMoney()));
+            return;
+        }
+        stringBuilder.append(String.format(RESULT_MESSAGE, rank.getWinningMoney()));
     }
 
-    public static void printExceptionMessage(RuntimeException e) {
-        System.out.println(e.getMessage());
-        System.out.println("다시 입력해 주세요.");
+    public static void printProfitRatio(final int profitRatio) {
+        System.out.printf(PROFIT_RATIO_GUIDE_MESSAGE, profitRatio);
+    }
+
+    public static void printExceptionMessage(final String message) {
+        System.out.println(message);
+        System.out.println(REQUEST_RE_ENTER_MESSAGE);
     }
 }
