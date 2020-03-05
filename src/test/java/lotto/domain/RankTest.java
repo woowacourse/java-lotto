@@ -17,7 +17,7 @@ class RankTest {
     @ParameterizedTest
     @MethodSource("createCountAndRank")
     void returnRank(int count, Rank expected) {
-        assertThat(Rank.of(count)).isEqualTo(expected);
+        assertThat(Rank.from(count)).isEqualTo(expected);
     }
 
     private static Stream<Arguments> createCountAndRank() {
@@ -29,17 +29,6 @@ class RankTest {
         );
     }
 
-    @DisplayName("순위들의 당첨금액을 모두 더함")
-    @Test
-    void sumWinningMoney() {
-        List<Rank> ranks = Arrays.asList(Rank.FIFTH, Rank.SECOND, Rank.FOURTH);
-
-        Money actual = Rank.sumWinningMoney(ranks);
-        Money expected = Money.of(30055000);
-
-        assertThat(actual).isEqualTo(expected);
-    }
-
     @DisplayName("해당하는 Rank의 개수를 반환")
     @Test
     void getContainingCount() {
@@ -49,5 +38,15 @@ class RankTest {
         int expected = 3;
 
         assertThat(actual).isEqualTo(expected);
+    }
+
+    @DisplayName("Rank.LOSE를 제외한 Rank들을 반환")
+    @Test
+    void validValues() {
+        List<Rank> validRanks = Rank.winningValues();
+        List<Rank> containingRanks = Arrays.asList(Rank.FIRST, Rank.SECOND, Rank.THIRD, Rank.FOURTH, Rank.FIFTH);
+
+        assertThat(validRanks.containsAll(containingRanks)).isTrue();
+        assertThat(validRanks.contains(Rank.LOSE)).isFalse();
     }
 }

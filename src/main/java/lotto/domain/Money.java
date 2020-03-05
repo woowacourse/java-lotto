@@ -6,6 +6,7 @@ import java.util.Objects;
 
 public class Money {
     private static final int MIN_PURCHASE_MONEY = 1_000;
+    public static final Money TICKET_PRICE = Money.valueOf(1_000);
 
     private final int money;
 
@@ -13,35 +14,35 @@ public class Money {
         this.money = money;
     }
 
-    public static Money of(int winningMoney) {
-        return new Money(winningMoney);
+    public static Money valueOf(int money) {
+        return new Money(money);
     }
 
-    public static Money createPurchaseMoney(int moneyValue) {
-        validateMoneyRange(moneyValue);
-        return new Money(moneyValue);
+    public static Money createPurchaseMoney(int purchaseMoney) {
+        validateMoneyIsSufficient(purchaseMoney);
+        return new Money(purchaseMoney);
     }
 
-    private static void validateMoneyRange(int moneyValue) {
-        if (isUnderMinPurchaseMoney(moneyValue)) {
-            throw new MoneyException("구매금액은 1000원 이상이어야 합니다.");
+    private static void validateMoneyIsSufficient(int purchaseMoney) {
+        if (purchaseMoney < MIN_PURCHASE_MONEY) {
+            throw new MoneyException();
         }
-    }
-
-    private static boolean isUnderMinPurchaseMoney(int moneyValue) {
-        return moneyValue < MIN_PURCHASE_MONEY;
     }
 
     public Money plus(Money other) {
         return new Money(this.money + other.money);
     }
 
-    public int calculateQuotient(Money other) {
+    public int calculateAllTicketCount() {
+        return calculateQuotient(TICKET_PRICE);
+    }
+
+    private int calculateQuotient(Money other) {
         return this.money / other.money;
     }
 
-    public int calculatePercentage(Money other) {
-        return (int) ((double) this.money / other.money * 100);
+    public double calculatePercentage(Money other) {
+        return (double) this.money / other.money * 100;
     }
 
     public int getValue() {

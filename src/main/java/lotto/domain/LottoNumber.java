@@ -2,34 +2,40 @@ package lotto.domain;
 
 import lotto.exception.LottoNumberException;
 
-import java.util.Objects;
+import java.util.*;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    private static final int MAX_NUMBER = 45;
+    private static Map<Integer, LottoNumber> numbers = new HashMap<>();
     private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 45;
+
+    static {
+        for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
+            numbers.put(i, new LottoNumber(i));
+        }
+
+        numbers = Collections.unmodifiableMap(numbers);
+    }
+
     private final int number;
 
-    public LottoNumber(int number) {
-        validateNumberRange(number);
+    private LottoNumber(int number) {
         this.number = number;
     }
 
-    private static void validateNumberRange(int number) {
-        if (isOutOfRange(number)) {
-            throw new LottoNumberException("로또 숫자는 1~45사이어야 합니다.");
+    public static LottoNumber valueOf(int number) {
+        LottoNumber lottoNumber = numbers.get(number);
+
+        if (lottoNumber == null) {
+            throw new LottoNumberException();
         }
+
+        return lottoNumber;
     }
 
-    private static boolean isOutOfRange(int number) {
-        return isLessThanMin(number) || isGreaterThanMax(number);
-    }
+    public static List<LottoNumber> values() {
+        return new ArrayList<>(numbers.values());
 
-    private static boolean isGreaterThanMax(int number) {
-        return number > MAX_NUMBER;
-    }
-
-    private static boolean isLessThanMin(int number) {
-        return number < MIN_NUMBER;
     }
 
     @Override
