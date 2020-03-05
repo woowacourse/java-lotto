@@ -5,7 +5,7 @@ import lotto.domain.Lotto;
 public class TestLottoFactory extends AbstractLottoFactory {
 
 	@Override
-	public Lotto createSerialLottoNumber() {
+	public Lotto createLotto() {
 		return Lotto.of(super.getAllLottoNumbers().subList(ZERO_INDEX, SIX_INDEX));
 	}
 }

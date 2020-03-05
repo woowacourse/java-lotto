@@ -29,7 +29,7 @@ class PurchasedLottosTest {
 	void of_PurchasedLottosAndWinningLotto() {
 		// when
 		WinningLotto winningLotto
-				= new WinningLotto(Lotto.of("1,2,3,4,5,6"), LottoNumber.of(7));
+				= WinningLotto.of(Lotto.of("1,2,3,4,5,6"), LottoNumber.of(7));
 
 		PurchasedLottos purchasedLottos = PurchasedLottos.of(
 				LottoMoney.of(14000), new TestLottoFactory());

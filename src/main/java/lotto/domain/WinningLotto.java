@@ -8,11 +8,15 @@ public class WinningLotto {
 	private final Lotto winningLottoNumbers;
 	private final LottoNumber bonus;
 
-	public WinningLotto(final Lotto winningLottoNumbers, final LottoNumber bonus) {
+	private WinningLotto(final Lotto winningLottoNumbers, final LottoNumber bonus) {
 		checkWinningNumbersContainsBonus(winningLottoNumbers, bonus);
 
 		this.winningLottoNumbers = winningLottoNumbers;
 		this.bonus = bonus;
+	}
+
+	public static WinningLotto of(final Lotto winningLottoNumbers, final LottoNumber bonus) {
+		return new WinningLotto(winningLottoNumbers, bonus);
 	}
 
 	private void checkWinningNumbersContainsBonus(Lotto winningLottoNumbers, LottoNumber bonus) {

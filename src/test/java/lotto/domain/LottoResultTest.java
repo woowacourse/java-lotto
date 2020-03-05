@@ -16,7 +16,7 @@ public class LottoResultTest {
 				new TestLottoFactory());
 
 		WinningLotto winningLotto
-				= new WinningLotto(Lotto.of("1, 2, 3, 4, 5, 6"), LottoNumber.of(7));
+				= WinningLotto.of(Lotto.of("1, 2, 3, 4, 5, 6"), LottoNumber.of(7));
 
 		// when
 		LottoResult result = LottoResult.of(purchasedLottos, winningLotto);
