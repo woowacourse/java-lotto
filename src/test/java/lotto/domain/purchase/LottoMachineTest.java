@@ -5,34 +5,55 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import lotto.domain.lottoNumber.LottoNumberCache;
 import lotto.domain.lottoTicket.LottoTickets;
+import lotto.domain.strategy.AutoLottoTicketsGenerator;
+import lotto.domain.strategy.LottoTicketsGenerator;
+import lotto.domain.strategy.ManualLottoTicketsGenerator;
 
 class LottoMachineTest {
 
-	@Test
-	void LottoMachine_InputManualLottoTickets_GenerateInstance() {
+	private List<LottoTicketsGenerator> lottoTicketsGenerators;
+
+	@BeforeEach
+	void setUp() {
 		List<String> inputLottoTickets = Arrays.asList(
 			"1, 2, 3, 4, 5, 6",
 			"2, 3, 4, 5, 6, 7",
 			"3, 4, 5, 6, 7, 8"
 		);
-		assertThat(new LottoMachine(inputLottoTickets)).isInstanceOf(LottoMachine.class);
+
+		lottoTicketsGenerators = Arrays.asList(
+			new ManualLottoTicketsGenerator(inputLottoTickets),
+			new AutoLottoTicketsGenerator(LottoNumberCache.values()));
+	}
+
+	@Test
+	void LottoMachine_LottoTicketGenerators_GenerateInstance() {
+		assertThat(new LottoMachine(lottoTicketsGenerators)).isInstanceOf(LottoMachine.class);
 	}
 
 	@Test
 	void purchaseLottoTickets_TotalPurchasingCount_GenerateLottoTickets() {
-		LottoMoney lottoMoney = new LottoMoney(15_000);
-		TotalPurchasingCount totalPurchasingCount = TotalPurchasingCount.from("3", lottoMoney);
-		List<String> inputLottoTickets = Arrays.asList(
-			"1, 2, 3, 4, 5, 6",
-			"2, 3, 4, 5, 6, 7",
-			"3, 4, 5, 6, 7, 8"
-		);
-		LottoMachine lottoMachine = new LottoMachine(inputLottoTickets);
+		PurchasingCount totalPurchasingCount = new PurchasingCount(10);
+
+		LottoMachine lottoMachine = new LottoMachine(lottoTicketsGenerators);
 
 		assertThat(lottoMachine.purchaseLottoTickets(totalPurchasingCount)).isInstanceOf(LottoTickets.class);
+	}
+
+	@Test
+	void purchaseLottoTickets_InvalidTotalPurchasingCount_InvalidPurchasingCountExceptionThrown() {
+		PurchasingCount totalPurchasingCount = new PurchasingCount(0);
+
+		LottoMachine lottoMachine = new LottoMachine(lottoTicketsGenerators);
+
+		assertThatThrownBy(() -> lottoMachine.purchaseLottoTickets(totalPurchasingCount))
+			.isInstanceOf(InvalidPurchasingCountException.class)
+			.hasMessage(InvalidPurchasingCountException.INVALID);
 	}
 
 }

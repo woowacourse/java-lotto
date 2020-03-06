@@ -4,6 +4,8 @@ import java.util.Objects;
 
 public class PurchasingCount {
 
+	private static final int PURCHASING_UNIT = 1;
+
 	private int purchasingCount;
 
 	public PurchasingCount(int purchasingCount) {
@@ -27,6 +29,26 @@ public class PurchasingCount {
 		} catch (NumberFormatException e) {
 			throw new InvalidPurchasingCountException(InvalidPurchasingCountException.NOT_INTEGER);
 		}
+	}
+
+	public PurchasingCount subtract(PurchasingCount manualPurchasingCount) {
+		if (isImpossible(manualPurchasingCount)) {
+			throw new InvalidPurchasingCountException(InvalidPurchasingCountException.MANUAL_OVER);
+		}
+		return new PurchasingCount(this.purchasingCount - manualPurchasingCount.purchasingCount);
+	}
+
+	private boolean isImpossible(PurchasingCount manualPurchasingCount) {
+		return this.purchasingCount < manualPurchasingCount.purchasingCount;
+	}
+
+	public void buyLottoTicket() {
+		purchasingCount = purchasingCount - PURCHASING_UNIT;
+		validate(purchasingCount);
+	}
+
+	public boolean isAvailableForPurchase() {
+		return purchasingCount > 0;
 	}
 
 	public int getPurchasingCount() {
@@ -54,5 +76,4 @@ public class PurchasingCount {
 	public String toString() {
 		return Integer.toString(purchasingCount);
 	}
-
 }

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.IntStream;
 
 import lotto.domain.lottoNumber.LottoNumber;
 import lotto.domain.lottoTicket.LottoTicket;
@@ -23,9 +22,13 @@ public class AutoLottoTicketsGenerator implements LottoTicketsGenerator {
 
 	@Override
 	public LottoTickets generate(PurchasingCount purchasingCount) {
-		return IntStream.range(0, purchasingCount.getPurchasingCount())
-			.mapToObj(e -> generate())
-			.collect(collectingAndThen(toList(), LottoTickets::new));
+		List<LottoTicket> lottoTickets = new ArrayList<>();
+
+		while (purchasingCount.isAvailableForPurchase()) {
+			purchasingCount.buyLottoTicket();
+			lottoTickets.add(generate());
+		}
+		return new LottoTickets(lottoTickets);
 	}
 
 	private LottoTicket generate() {

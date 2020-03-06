@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.lottoTicket.LottoTickets;
-import lotto.domain.purchase.TotalPurchasingCount;
+import lotto.domain.purchase.PurchasingCount;
 import lotto.domain.result.WinningResult;
 import lotto.util.StringUtil;
 
@@ -20,10 +20,11 @@ public class ConsoleOutputView {
 		System.out.println(INPUT_MANUAL_LOTTO_TICKETS_COUNT_MESSAGE);
 	}
 
-	public static void printTotalPurchasingCount(TotalPurchasingCount totalPurchasingCount) {
+	public static void printTotalPurchasingCount(PurchasingCount manualPurchasingCount,
+		PurchasingCount autoPurchasingCount) {
 		System.out.println(String.format(PURCHASE_LOTTO_COMPLETE_MESSAGE,
-			totalPurchasingCount.getManualPurchasingCount().getPurchasingCount(),
-			totalPurchasingCount.getAutoPurchasingCount().getPurchasingCount()));
+			manualPurchasingCount.getPurchasingCount(),
+			autoPurchasingCount.getPurchasingCount()));
 	}
 
 	public static void printPurchasedLottoTickets(LottoTickets purchasedLottoTickets) {

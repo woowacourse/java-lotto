@@ -1,9 +1,7 @@
 package lotto.domain.strategy;
 
-import static java.util.stream.Collectors.*;
-
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 
 import lotto.domain.lottoTicket.LottoTicket;
 import lotto.domain.lottoTicket.LottoTickets;
@@ -19,10 +17,13 @@ public class ManualLottoTicketsGenerator implements LottoTicketsGenerator {
 
 	@Override
 	public LottoTickets generate(PurchasingCount purchasingCount) {
-		return IntStream.range(0, purchasingCount.getPurchasingCount())
-			.mapToObj(inputManualLottoTickets::get)
-			.map(LottoTicket::valueOf)
-			.collect(collectingAndThen(toList(), LottoTickets::new));
+		List<LottoTicket> lottoTickets = new ArrayList<>();
+
+		for (String inputLottoTicket : inputManualLottoTickets) {
+			purchasingCount.buyLottoTicket();
+			lottoTickets.add(LottoTicket.valueOf(inputLottoTicket));
+		}
+		return new LottoTickets(lottoTickets);
 	}
 
 }
