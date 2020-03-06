@@ -1,9 +1,11 @@
 package lotto.domain;
 
-import lotto.domain.SerialLottoNumberFactory.LottoFactory;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class PurchasedLottos {
 	private final List<Lotto> purchasedLottos;
@@ -12,29 +14,16 @@ public class PurchasedLottos {
 		this.purchasedLottos = purchasedLottos;
 	}
 
-	public static PurchasedLottos of(LottoMoney lottoMoney,
-									 LottoFactory LottoFactory) {
-		List<Lotto> purchasedLotto = new ArrayList<>();
-
-		int count = lottoMoney.countPurchasedTickets();
-		for (int i = 0; i < count; i++) {
-			purchasedLotto.add(LottoFactory.createLotto());
-		}
-
-		return new PurchasedLottos(purchasedLotto);
-	}
-
-	public static PurchasedLottos of(List<String> inputs) {
-		List<Lotto> purchasedLotto = inputs.stream()
+	public static PurchasedLottos of(String... inputs) {
+		List<Lotto> purchasedLotto = Stream.of(inputs)
 				.map(Lotto::of)
 				.collect(Collectors.toUnmodifiableList());
 
 		return new PurchasedLottos(purchasedLotto);
 	}
 
-	public static PurchasedLottos empty() {
-		List<Lotto> lottos = new ArrayList<>();
-		return new PurchasedLottos(lottos);
+	public static PurchasedLottos of(List<Lotto> inputs) {
+		return new PurchasedLottos(inputs);
 	}
 
 	public List<Lotto> getPurchasedLottos() {
@@ -47,11 +36,7 @@ public class PurchasedLottos {
 				.collect(Collectors.toUnmodifiableList());
 	}
 
-	public void add(String lotto) {
-		purchasedLottos.add(Lotto.of(lotto));
-	}
-
-	public PurchasedLottos addAll(PurchasedLottos other) {
+	public PurchasedLottos add(PurchasedLottos other) {
 		List<Lotto> serialLottoNumbers = new ArrayList<>(purchasedLottos);
 		serialLottoNumbers.addAll(other.purchasedLottos);
 

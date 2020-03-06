@@ -1,29 +1,27 @@
-package lotto.domain.SerialLottoNumberFactory;
+package lotto.domain.Factory;
 
-import lotto.domain.LottoNumber;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class AbstractLottoFactory implements LottoFactory {
+public class AutoLottoFactory {
 	protected static final int ZERO_INDEX = 0;
 	protected static final int SIX_INDEX = 6;
 
-	private final List<LottoNumber> allLottoNumbers;
+	private static final List<LottoNumber> allLottoNumbers;
 
-	AbstractLottoFactory() {
+	static  {
 		allLottoNumbers = new ArrayList<>();
 		for (int i = LottoNumber.MIN; i <= LottoNumber.MAX; i++) {
 			allLottoNumbers.add(LottoNumber.of(i));
 		}
 	}
 
-	protected List<LottoNumber> getAllLottoNumbers() {
-		return allLottoNumbers;
+	public static Lotto create() {
+		Collections.shuffle(allLottoNumbers);
+		return Lotto.of(allLottoNumbers.subList(ZERO_INDEX, SIX_INDEX));
 	}
-
-	@Override
-	public abstract Lotto createLotto();
 }

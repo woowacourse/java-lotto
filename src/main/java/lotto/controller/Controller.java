@@ -1,8 +1,13 @@
 package lotto.controller;
 
+import lotto.domain.Factory.AutoLottosFactory;
+import lotto.domain.Factory.LottosFactory;
+import lotto.domain.Factory.ManualLottosFactory;
 import lotto.domain.*;
-import lotto.domain.SerialLottoNumberFactory.AutoLottoFactory;
-import lotto.exceptions.*;
+import lotto.exceptions.LottoMoneyIllegalArgumentException;
+import lotto.exceptions.LottoNumberIllegalArgumentException;
+import lotto.exceptions.PurchaseManualLottoIllegalArgumentException;
+import lotto.exceptions.WinningLottoIllegalArgumentException;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -44,11 +49,15 @@ public class Controller {
 
 	private static PurchasedLottos purchaseSerialLottoNumber(
 			LottoMoney manualTicketMoney, LottoMoney autoTicketMoney) {
+		OutputView.printInputManualLottoNumbersMessage();
 
-		PurchasedLottos manualTickets = purchaseManualLotto(manualTicketMoney);
-		PurchasedLottos autoSerialLottoNumber = purchaseAutoLotto(autoTicketMoney);
+		PurchasedLottos manualTickets = purchaseLotto(manualTicketMoney,
+				new ManualLottosFactory());
+		PurchasedLottos autoSerialLottoNumber = purchaseLotto(autoTicketMoney,
+				new AutoLottosFactory());
+
 		OutputView.printPurchasedSerialLottoNumber(manualTickets, autoSerialLottoNumber);
-		return manualTickets.addAll(autoSerialLottoNumber);
+		return manualTickets.add(autoSerialLottoNumber);
 	}
 
 	private static LottoMoney createManualTicketMoney(
@@ -88,46 +97,11 @@ public class Controller {
 		OutputView.printEarningRate(lottoResult.calculateEarningPercentage(lottoMoney));
 	}
 
-	private static PurchasedLottos purchaseManualLotto(
-			LottoMoney manualLottoMoney) {
-		OutputView.printInputManualLottoNumbersMessage();
+	private static PurchasedLottos purchaseLotto(
+			LottoMoney manualLottoMoney, LottosFactory lottosFactory) {
 
-		PurchasedLottos purchasedLottos = PurchasedLottos.empty();
-		for (int i = 0; i < manualLottoMoney.countPurchasedTickets(); i++) {
-			addOnePurchasedManualLottos(purchasedLottos);
-		}
-
-		return purchasedLottos;
-	}
-
-	private static void addOnePurchasedManualLottos(
-			PurchasedLottos purchasedLottos) {
-		boolean isSucceeded;
-		do {
-			isSucceeded = addOnePurchasedManualLottosIfValid(purchasedLottos);
-		} while(!isSucceeded);
-	}
-
-	private static boolean addOnePurchasedManualLottosIfValid(
-			PurchasedLottos purchasedLottos) {
-		try {
-			purchasedLottos.add(prepareManualLottoNumber());
-			return true;
-		} catch (IllegalArgumentException e) {
-			System.out.println(e.getMessage());
-			return false;
-		}
-	}
-
-	private static String prepareManualLottoNumber() {
-		return InputView.inputManualLottoNumbers();
-	}
-
-	private static PurchasedLottos purchaseAutoLotto(
-			LottoMoney lottoMoney) {
-
-		return PurchasedLottos.of(lottoMoney,
-				new AutoLottoFactory());
+		return PurchasedLottos.of(
+				lottosFactory.create(manualLottoMoney));
 	}
 
 	private static LottoMoney prepareLotto() {
