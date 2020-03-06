@@ -93,7 +93,7 @@ public class Controller {
 			LottoMoney manualLottoMoney) {
 		OutputView.printInputManualLottoNumbersMessage();
 
-		PurchasedLottos purchasedLottos = PurchasedLottos.emptyPurchasedLottos();
+		PurchasedLottos purchasedLottos = PurchasedLottos.empty();
 		for (int i = 0; i < manualLottoMoney.countPurchasedTickets(); i++) {
 			addOnePurchasedManualLottos(purchasedLottos);
 		}

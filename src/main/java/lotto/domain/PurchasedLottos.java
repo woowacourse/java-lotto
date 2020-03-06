@@ -32,7 +32,7 @@ public class PurchasedLottos {
 		return new PurchasedLottos(purchasedLotto);
 	}
 
-	public static PurchasedLottos emptyPurchasedLottos() {
+	public static PurchasedLottos empty() {
 		List<Lotto> lottos = new ArrayList<>();
 		return new PurchasedLottos(lottos);
 	}
