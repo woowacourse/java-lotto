@@ -38,21 +38,6 @@ class LottoNumberTest {
 	}
 
 	@Test
-	void getAll() {
-		// when
-		List<LottoNumber> allLottoNumbers = LottoNumber.allList();
-
-		// then
-		List<LottoNumber> expected = new ArrayList<>();
-		for (int i = 1; i <= 45; i++) {
-			expected.add(LottoNumber.of(i));
-		}
-
-		Assertions.assertThat(allLottoNumbers)
-				.isEqualTo(expected);
-	}
-
-	@Test
 	void isInvalidInstance_ShouldReturnTrue() {
 		// given
 		LottoNumber given = LottoNumber.invalidInstance();

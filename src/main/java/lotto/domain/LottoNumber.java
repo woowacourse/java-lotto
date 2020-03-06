@@ -5,8 +5,8 @@ import lotto.exceptions.LottoNumberIllegalArgumentException;
 import java.util.*;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-	private static final int MIN = 1;
-	private static final int MAX = 45;
+	public static final int MIN = 1;
+	public static final int MAX = 45;
 	private static final int INVALID_VALUE = -1;
 	private static final Map<Integer, LottoNumber> cachedLottoNumbers;
 
