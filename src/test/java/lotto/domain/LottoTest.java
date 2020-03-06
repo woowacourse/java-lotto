@@ -87,29 +87,4 @@ public class LottoTest {
 				.isEqualTo(expected);
 	}
 
-	@Test
-	void isInvalidInstance_ShouldReturnTrue() {
-		// given
-		Lotto given = Lotto.invalidInstance();
-
-		// when
-		boolean result = given.isInvalidInstance();
-
-		// then
-		Assertions.assertThat(result)
-				.isTrue();
-	}
-
-	@Test
-	void isInvalidInstance_ShouldReturnFalse() {
-		// given
-		Lotto given = Lotto.of(1, 2, 3, 4, 5, 6);
-
-		// when
-		boolean result = given.isInvalidInstance();
-
-		// then
-		Assertions.assertThat(result)
-				.isFalse();
-	}
 }

@@ -7,7 +7,6 @@ import java.util.*;
 public class LottoNumber implements Comparable<LottoNumber> {
 	public static final int MIN = 1;
 	public static final int MAX = 45;
-	private static final int INVALID_VALUE = -1;
 	private static final Map<Integer, LottoNumber> cachedLottoNumbers;
 
 	static {
@@ -19,10 +18,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
 	private final int lottoNumber;
 
-	private LottoNumber() {
-		lottoNumber = INVALID_VALUE;
-	}
-
 	private LottoNumber(final int lottoNumber) {
 		checkIsWithinRange(lottoNumber);
 		this.lottoNumber = lottoNumber;
@@ -33,22 +28,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
 		return cachedLottoNumbers.get(lottoNumber);
 	}
 
-	public static LottoNumber invalidInstance() {
-		return new LottoNumber();
-	}
-
-	public static List<LottoNumber> allList() {
-		return new ArrayList<>(cachedLottoNumbers.values());
-	}
-
 	private static void checkIsWithinRange(int number) {
 		if (number < MIN || number > MAX) {
 			throw new LottoNumberIllegalArgumentException(number);
 		}
-	}
-
-	public boolean isInvalidInstance() {
-		return lottoNumber == INVALID_VALUE;
 	}
 
 	public int getLottoNumber() {

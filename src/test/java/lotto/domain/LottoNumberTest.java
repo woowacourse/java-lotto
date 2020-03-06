@@ -6,9 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.ArrayList;
-import java.util.List;
-
 class LottoNumberTest {
 	@Test
 	void of() {
@@ -37,29 +34,4 @@ class LottoNumberTest {
 				.hasMessageMatching("-?[0-9]+" + LottoNumberIllegalArgumentException.MESSAGE);
 	}
 
-	@Test
-	void isInvalidInstance_ShouldReturnTrue() {
-		// given
-		LottoNumber given = LottoNumber.invalidInstance();
-
-		// when
-		boolean result = given.isInvalidInstance();
-
-		// then
-		Assertions.assertThat(result)
-				.isTrue();
-	}
-
-	@Test
-	void isInvalidInstance_ShouldReturnFalse() {
-		// given
-		LottoNumber given = LottoNumber.of(45);
-
-		// when
-		boolean result = given.isInvalidInstance();
-
-		// then
-		Assertions.assertThat(result)
-				.isFalse();
-	}
 }

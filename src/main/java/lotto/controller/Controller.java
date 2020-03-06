@@ -29,17 +29,16 @@ public class Controller {
 		do {
 			autoTicketMoney = createAutoTicketMoneyIfValid(
 					lottoMoney, manualTicketMoney);
-		} while (autoTicketMoney.isInvalidInstance());
+		} while (autoTicketMoney == null);
 		return autoTicketMoney;
 	}
 
 	private static LottoMoney createAutoTicketMoneyIfValid(
 			LottoMoney lottoMoney, LottoMoney manualTicketMoney) {
-
 		try {
 			return lottoMoney.subtract(manualTicketMoney);
 		} catch (PurchaseManualLottoIllegalArgumentException e) {
-			return LottoMoney.invalidInstance();
+			return null;
 		}
 	}
 
@@ -58,7 +57,7 @@ public class Controller {
 		LottoMoney manualTicketMoney;
 		do {
 			manualTicketMoney = createManualTicketMoneyIfValid(lottoMoney);
-		} while (manualTicketMoney.isInvalidInstance());
+		} while (manualTicketMoney == null);
 		return manualTicketMoney;
 	}
 
@@ -69,14 +68,14 @@ public class Controller {
 
 		if (lottoMoney.canNotPurchase(manualTicketNumber)) {
 			OutputView.printWhenManualMoneyIsMoreThanTotalMoney();
-			return LottoMoney.invalidInstance();
+			return null;
 		}
 
 		try {
 			return LottoMoney.ofLottoCount(manualTicketNumber);
 		} catch (PurchaseManualLottoIllegalArgumentException e) {
 			OutputView.printWarningMessage(e.getMessage());
-			return LottoMoney.invalidInstance();
+			return null;
 		}
 	}
 
@@ -141,7 +140,7 @@ public class Controller {
 		WinningLotto winningLotto;
 		do {
 			winningLotto = createWinningLottoNumbersIfValid();
-		} while (winningLotto.isInvalidInstance());
+		} while (winningLotto == null);
 
 		return winningLotto;
 	}
@@ -151,7 +150,7 @@ public class Controller {
 			return WinningLotto.of(createWinningNumber(), createBonusNumber());
 		} catch (WinningLottoIllegalArgumentException e) {
 			OutputView.printWarningMessage(e.getMessage());
-			return WinningLotto.invalidInstance();
+			return null;
 		}
 	}
 
@@ -159,7 +158,7 @@ public class Controller {
 		LottoMoney lottoMoney;
 		do {
 			lottoMoney = createPurchaseMoneyIfValid();
-		} while (lottoMoney.isInvalidInstance());
+		} while (lottoMoney == null);
 
 		return lottoMoney;
 	}
@@ -169,7 +168,7 @@ public class Controller {
 			return LottoMoney.of(InputView.inputPurchaseMoney());
 		} catch (LottoMoneyIllegalArgumentException e) {
 			OutputView.printWarningMessage(e.getMessage());
-			return LottoMoney.invalidInstance();
+			return null;
 		}
 	}
 
@@ -177,7 +176,7 @@ public class Controller {
 		Lotto winningNumber;
 		do {
 			winningNumber = createWinningNumbersIfValid();
-		} while (winningNumber.isInvalidInstance());
+		} while (winningNumber == null);
 
 		return winningNumber;
 	}
@@ -187,7 +186,7 @@ public class Controller {
 			return Lotto.of(InputView.inputWinningNumbers());
 		} catch (IllegalArgumentException e) {
 			OutputView.printWarningMessage(e.getMessage());
-			return Lotto.invalidInstance();
+			return null;
 		}
 	}
 
@@ -195,7 +194,7 @@ public class Controller {
 		LottoNumber bonusNumber;
 		do {
 			bonusNumber = createBonusNumberIfValid();
-		} while (bonusNumber.isInvalidInstance());
+		} while (bonusNumber == null);
 
 		return bonusNumber;
 	}
@@ -205,7 +204,7 @@ public class Controller {
 			return LottoNumber.of(InputView.inputBonusNumber());
 		} catch (LottoNumberIllegalArgumentException e) {
 			OutputView.printWarningMessage(e.getMessage());
-			return LottoNumber.invalidInstance();
+			return null;
 		}
 	}
 }

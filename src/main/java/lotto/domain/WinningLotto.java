@@ -8,14 +8,6 @@ public class WinningLotto {
 	private final Lotto winningLottoNumbers;
 	private final LottoNumber bonus;
 
-	/**
-	 * for invalid instance
-	 */
-	private WinningLotto() {
-		winningLottoNumbers = Lotto.invalidInstance();
-		bonus = LottoNumber.invalidInstance();
-	}
-
 	private WinningLotto(final Lotto winningLottoNumbers, final LottoNumber bonus) {
 		checkWinningNumbersContainsBonus(winningLottoNumbers, bonus);
 
@@ -25,15 +17,6 @@ public class WinningLotto {
 
 	public static WinningLotto of(final Lotto winningLottoNumbers, final LottoNumber bonus) {
 		return new WinningLotto(winningLottoNumbers, bonus);
-	}
-
-	public static WinningLotto invalidInstance() {
-		return new WinningLotto();
-	}
-
-	public boolean isInvalidInstance() {
-		return winningLottoNumbers.isInvalidInstance() ||
-				bonus.isInvalidInstance();
 	}
 
 	private void checkWinningNumbersContainsBonus(Lotto winningLottoNumbers, LottoNumber bonus) {

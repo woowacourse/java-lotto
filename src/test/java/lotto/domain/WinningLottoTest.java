@@ -66,29 +66,4 @@ public class WinningLottoTest {
 				Arguments.of(new int[]{8, 9, 10, 11, 12, 13}, WinningType.NONE));
 	}
 
-	@Test
-	void isInvalidInstance_ShouldReturnTrue() {
-		// given
-		WinningLotto given = WinningLotto.invalidInstance();
-
-		// when
-		boolean result = given.isInvalidInstance();
-
-		// then
-		Assertions.assertThat(result)
-				.isTrue();
-	}
-
-	@Test
-	void isInvalidInstance_ShouldReturnFalse() {
-		// given
-		WinningLotto given = WinningLotto.of(Lotto.of(1, 2, 3, 4, 5, 6), LottoNumber.of(7));
-
-		// when
-		boolean result = given.isInvalidInstance();
-
-		// then
-		Assertions.assertThat(result)
-				.isFalse();
-	}
 }

@@ -4,9 +4,6 @@ import lotto.domain.SerialLottoNumberFactory.TestLottoFactory;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class LottoResultTest {
 	@Test
 	void of() {

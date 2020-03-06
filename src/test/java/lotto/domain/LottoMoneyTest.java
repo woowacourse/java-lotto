@@ -86,29 +86,4 @@ public class LottoMoneyTest {
 		});
 	}
 
-	@Test
-	void isInvalidInstance_ShouldReturnTrue() {
-		// given
-		LottoMoney given = LottoMoney.invalidInstance();
-
-		// when
-		boolean result = given.isInvalidInstance();
-
-		// then
-		Assertions.assertThat(result)
-				.isTrue();
-	}
-
-	@Test
-	void isInvalidInstance_ShouldReturnFalse() {
-		// given
-		LottoMoney given = LottoMoney.of(1000);
-
-		// when
-		boolean result = given.isInvalidInstance();
-
-		// then
-		Assertions.assertThat(result)
-				.isFalse();
-	}
 }
