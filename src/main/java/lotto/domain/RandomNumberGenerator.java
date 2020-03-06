@@ -8,15 +8,15 @@ import java.util.List;
 public class RandomNumberGenerator {
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int MIN_LOTTO_NUMBER = 1;
-    private List<Integer> numberPool = new ArrayList<>();
+    private static List<Integer> numberPool = new ArrayList<>();
 
-    private void makeNumberPool() {
+    private static void makeNumberPool() {
         for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
             numberPool.add(i);
         }
     }
 
-    public List<Integer> generateNumbers() {
+    public static List<Integer> generateNumbers() {
         if (numberPool.isEmpty()) {
             makeNumberPool();
         }
