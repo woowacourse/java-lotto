@@ -21,7 +21,7 @@ public class ManualLottosFactory implements LottosFactory {
 
 	private Lotto createOneManualLottoIfValid() {
 		try {
-			return Lotto.of(InputView.inputManualLottoNumbers());
+			return Lotto.of(InputView.inputNextLine());
 		} catch (LottoIllegalArgumentException | LottoNumberIllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			return null;

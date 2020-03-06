@@ -29,7 +29,7 @@ public class InputView {
 		return scanner.nextLine();
 	}
 
-	public static String inputManualLottoNumbers() {
+	public static String inputNextLine() {
 		return scanner.nextLine();
 	}
 
