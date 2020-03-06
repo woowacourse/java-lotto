@@ -99,7 +99,6 @@ public class Controller {
 
 	private static PurchasedLottos purchaseLotto(
 			LottoMoney manualLottoMoney, LottosFactory lottosFactory) {
-
 		return lottosFactory.create(manualLottoMoney);
 	}
 

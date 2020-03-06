@@ -4,6 +4,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoMoney;
 import lotto.domain.PurchasedLottos;
 import lotto.exceptions.LottoIllegalArgumentException;
+import lotto.exceptions.LottoNumberIllegalArgumentException;
 import lotto.view.InputView;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class ManualLottosFactory implements LottosFactory {
 	private Lotto createOneManualLottoIfValid() {
 		try {
 			return Lotto.of(InputView.inputManualLottoNumbers());
-		} catch (LottoIllegalArgumentException e) {
+		} catch (LottoIllegalArgumentException | LottoNumberIllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			return null;
 		}
