@@ -18,7 +18,8 @@ public class ConsoleLottoApplication {
 
     private static void lottoGame() {
         PurchaseAmount purchaseAmount = InputView.inputPurchaseAmount();
-        PurchaseLottos purchaseLottos = makePurchaseLottos(purchaseAmount);
+        List<Lotto> manualLottos = InputView.inputManualLotto(purchaseAmount.getManualLottoAmount());
+        PurchaseLottos purchaseLottos = PurchaseLottos.makePurchaseLottos(manualLottos, purchaseAmount.getRandomLottoAmount());
         OutputView.printPurchaseNumber(purchaseAmount);
         OutputView.printPurchaseLottoNumbers(purchaseLottos);
 
@@ -27,16 +28,5 @@ public class ConsoleLottoApplication {
         result.calculateRank(purchaseLottos, winningNumbers);
 
         OutputView.printResult(purchaseAmount, result);
-    }
-
-    private static PurchaseLottos makePurchaseLottos(PurchaseAmount purchaseAmount) {
-        List<Lotto> purchaseLottos = InputView.inputManualLotto(purchaseAmount.getManualLottoAmount());
-
-        for (int i = 0; i < purchaseAmount.getRandomLottoAmount(); i++) {
-            List<Integer> randomNumbers = RandomNumberGenerator.generateNumbers();
-            purchaseLottos.add(new Lotto(randomNumbers));
-        }
-
-        return new PurchaseLottos(purchaseLottos);
     }
 }

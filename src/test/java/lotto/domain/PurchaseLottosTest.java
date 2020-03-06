@@ -28,7 +28,7 @@ public class PurchaseLottosTest {
     @Test
     @DisplayName("정상 입력 생성자 테스트")
     void purchaseLottos() {
-        Assertions.assertThat(new PurchaseLottos(inputLottoNumbers))
+        Assertions.assertThat(PurchaseLottos.makePurchaseLottos(inputLottoNumbers, 0))
                 .isInstanceOf(PurchaseLottos.class);
     }
 
@@ -36,7 +36,7 @@ public class PurchaseLottosTest {
     @DisplayName("빈 입력이 들어간 경우")
     void purchaseLottos_empty() {
         Assertions.assertThatThrownBy(() -> {
-            new PurchaseLottos(new ArrayList<>());
+            PurchaseLottos.makePurchaseLottos(new ArrayList<>(), 0);
         }).isInstanceOf(EmptyOrNullException.class)
                 .hasMessage("Null or empty input to PurchaseLottos.");
     }
@@ -45,7 +45,7 @@ public class PurchaseLottosTest {
     @DisplayName("null이 들어간 경우")
     void purchaseLottos_null() {
         Assertions.assertThatThrownBy(() -> {
-            new PurchaseLottos(null);
+            PurchaseLottos.makePurchaseLottos(null,0);
         }).isInstanceOf(EmptyOrNullException.class)
                 .hasMessage("Null or empty input to PurchaseLottos.");
     }

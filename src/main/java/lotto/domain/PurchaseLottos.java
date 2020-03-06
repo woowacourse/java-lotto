@@ -11,9 +11,17 @@ public class PurchaseLottos {
 
     private final List<Lotto> purchaseLottos;
 
-    public PurchaseLottos(List<Lotto> purchaseLottos) {
+    private PurchaseLottos(List<Lotto> purchaseLottos) {
         validateEmptyOrNull(purchaseLottos);
         this.purchaseLottos = purchaseLottos;
+    }
+
+    public static PurchaseLottos makePurchaseLottos(List<Lotto> purchaseLottos, int randomLottoAmount) {
+        for (int i = 0; i < randomLottoAmount; i++) {
+            List<Integer> randomNumbers = RandomNumberGenerator.generateNumbers();
+            purchaseLottos.add(new Lotto(randomNumbers));
+        }
+        return new PurchaseLottos(purchaseLottos);
     }
 
     private void validateEmptyOrNull(List<Lotto> purchaseLottos) {

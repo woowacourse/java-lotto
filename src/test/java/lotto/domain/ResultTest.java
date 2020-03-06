@@ -31,7 +31,7 @@ public class ResultTest {
         Result result = new Result();
         PurchaseAmount purchaseAmount = new PurchaseAmount(1,0);
         Lotto lotto = new Lotto(inputNumbers);
-        PurchaseLottos purchaseLottos = new PurchaseLottos(Arrays.asList(lotto));
+        PurchaseLottos purchaseLottos = PurchaseLottos.makePurchaseLottos(Arrays.asList(lotto), 0);
         WinningRule winningRule = new WinningRule(inputNumbers,7);
         result.calculateRank(purchaseLottos,winningRule);
         assertThat(result.calculateEarningRate(purchaseAmount)).isEqualTo(199999900);
