@@ -14,6 +14,7 @@ import lotto.domain.lottoNumber.LottoNumberCache;
 import lotto.domain.result.MatchCount;
 
 class LottoTicketTest {
+
 	@Test
 	void LottoTicket_ValidLottoNumbers_GenerateInstance() {
 		List<LottoNumber> value = LottoNumberCache.asLottoNumber(1, 2, 3, 4, 5, 6);
@@ -82,4 +83,5 @@ class LottoTicketTest {
 		MatchCount expected = new MatchCount(4);
 		assertThat(actual).isEqualTo(expected);
 	}
+
 }

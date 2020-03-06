@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoNumberTest {
+
 	@ParameterizedTest
 	@ValueSource(ints = {1, 45})
 	void LottoNumber_ValidLottoNumber_GenerateInstance(int value) {
@@ -46,4 +47,5 @@ class LottoNumberTest {
 		int expected = Integer.compare(value1, value2);
 		assertThat(actual).isEqualTo(expected);
 	}
+
 }

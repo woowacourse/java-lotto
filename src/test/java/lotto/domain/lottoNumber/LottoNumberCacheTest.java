@@ -10,6 +10,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoNumberCacheTest {
+
 	@ParameterizedTest
 	@ValueSource(ints = {1, 45})
 	void generate_ValidNumber_ReturnLottoNumberInstanceFromCache(int value) {
@@ -40,4 +41,5 @@ class LottoNumberCacheTest {
 			.isInstanceOf(InvalidLottoNumberException.class)
 			.hasMessage(InvalidLottoNumberException.OUT_OF_BOUND_LOTTO_NUMBER);
 	}
+
 }

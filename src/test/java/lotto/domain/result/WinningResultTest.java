@@ -13,6 +13,7 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 import lotto.domain.purchase.LottoMoney;
 
 class WinningResultTest {
+
 	@Test
 	void WinningResult_MapOfLottoRankAndLottoRankCount_GenerateInstance() {
 		Map<LottoRank, Long> value = new TreeMap<>(Collections.reverseOrder());
@@ -52,4 +53,5 @@ class WinningResultTest {
 		int expected = 15_000;
 		assertThat(actual).isEqualTo(expected);
 	}
+
 }

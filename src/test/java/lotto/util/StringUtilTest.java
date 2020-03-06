@@ -10,6 +10,7 @@ import lotto.domain.lottoTicket.LottoTicket;
 import lotto.domain.result.LottoRank;
 
 class StringUtilTest {
+
 	@Test
 	void joiningLottoNumbersAt_LottoTicket_JoiningLottoTicketAndWrappingPrefixAndSuffix() {
 		LottoTicket value = LottoTicket.valueOf("1, 2, 3, 4, 5, 6");
@@ -50,4 +51,5 @@ class StringUtilTest {
 			value);
 		assertThat(actual).isEqualTo(expected);
 	}
+
 }

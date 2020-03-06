@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoMoneyTest {
+
 	@ParameterizedTest
 	@ValueSource(longs = {1_000, 3_000, 5_000, 15_000})
 	void LottoMoney_validInputNumber_generateInstance(long value) {
@@ -108,4 +109,5 @@ public class LottoMoneyTest {
 		long expected = 0;
 		assertThat(actual).isEqualTo(expected);
 	}
+
 }

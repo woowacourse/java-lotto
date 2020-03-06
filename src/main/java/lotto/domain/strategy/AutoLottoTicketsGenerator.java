@@ -1,4 +1,4 @@
-package lotto.domain.lottoTicket;
+package lotto.domain.strategy;
 
 import static java.util.stream.Collectors.*;
 
@@ -9,13 +9,15 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 import lotto.domain.lottoNumber.LottoNumber;
+import lotto.domain.lottoTicket.LottoTicket;
+import lotto.domain.lottoTicket.LottoTickets;
 import lotto.domain.purchase.PurchasingCount;
 
-public class AutoLottoTicketsFactory implements LottoTicketsGeneratable {
+public class AutoLottoTicketsGenerator implements LottoTicketsGenerator {
 
 	private final List<LottoNumber> lottoNumbers;
 
-	public AutoLottoTicketsFactory(Collection<LottoNumber> lottoNumbers) {
+	public AutoLottoTicketsGenerator(Collection<LottoNumber> lottoNumbers) {
 		this.lottoNumbers = new ArrayList<>(lottoNumbers);
 	}
 

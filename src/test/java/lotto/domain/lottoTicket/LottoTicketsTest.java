@@ -11,6 +11,7 @@ import lotto.domain.result.WinningLotto;
 import lotto.domain.result.WinningResult;
 
 class LottoTicketsTest {
+
 	@Test
 	void produceWinningResultBy_WinningLotto_ReturnWinningResultByThisAndWinningLottoTicket() {
 		LottoTickets lottoTickets = new LottoTickets(Arrays.asList(LottoTicket.valueOf("1, 2, 3, 4, 5, 6")));
@@ -33,4 +34,5 @@ class LottoTicketsTest {
 		));
 		assertThat(actual).isEqualTo(expected);
 	}
+
 }

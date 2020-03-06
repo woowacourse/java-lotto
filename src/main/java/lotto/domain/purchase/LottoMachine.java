@@ -3,19 +3,19 @@ package lotto.domain.purchase;
 import java.util.List;
 
 import lotto.domain.lottoNumber.LottoNumberCache;
-import lotto.domain.lottoTicket.AutoLottoTicketsFactory;
 import lotto.domain.lottoTicket.LottoTickets;
-import lotto.domain.lottoTicket.LottoTicketsGeneratable;
-import lotto.domain.lottoTicket.ManualLottoTicketsFactory;
+import lotto.domain.strategy.AutoLottoTicketsGenerator;
+import lotto.domain.strategy.LottoTicketsGenerator;
+import lotto.domain.strategy.ManualLottoTicketsGenerator;
 
 public class LottoMachine {
 
-	private final LottoTicketsGeneratable manualLottoTicketFactory;
-	private final LottoTicketsGeneratable autoLottoTicketFactory;
+	private final LottoTicketsGenerator manualLottoTicketFactory;
+	private final LottoTicketsGenerator autoLottoTicketFactory;
 
 	public LottoMachine(List<String> inputManualLottoTickets) {
-		this.manualLottoTicketFactory = new ManualLottoTicketsFactory(inputManualLottoTickets);
-		this.autoLottoTicketFactory = new AutoLottoTicketsFactory(LottoNumberCache.values());
+		this.manualLottoTicketFactory = new ManualLottoTicketsGenerator(inputManualLottoTickets);
+		this.autoLottoTicketFactory = new AutoLottoTicketsGenerator(LottoNumberCache.values());
 	}
 
 	public LottoTickets purchaseLottoTickets(TotalPurchasingCount totalPurchasingCount) {

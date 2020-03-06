@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import lotto.domain.purchase.LottoMoney;
 
 class LottoRankTest {
+
 	@Test
 	void of_WithinRankMatchCountAndHasBonusNumber_ReturnInstance() {
 		MatchCount matchCount = new MatchCount(5);
@@ -42,4 +43,5 @@ class LottoRankTest {
 		LottoMoney expected = new LottoMoney(winningLottoMoney * lottoRankCount);
 		assertThat(actual).isEqualTo(expected);
 	}
+
 }

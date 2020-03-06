@@ -8,6 +8,7 @@ import lotto.domain.lottoNumber.LottoNumber;
 import lotto.domain.lottoTicket.LottoTicket;
 
 class WinningLottoTest {
+
 	@Test
 	void WinningLotto_ValidWinningLottoTicketAndBonusLottoNumber_GenerateInstance() {
 		LottoTicket winningLottoTicket = LottoTicket.valueOf("4, 5, 6, 7, 8, 9");
@@ -38,4 +39,5 @@ class WinningLottoTest {
 		LottoRank expected = LottoRank.SECOND;
 		assertThat(actual).isEqualTo(expected);
 	}
+
 }

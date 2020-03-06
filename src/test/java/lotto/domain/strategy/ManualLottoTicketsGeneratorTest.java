@@ -1,4 +1,4 @@
-package lotto.domain.lottoTicket;
+package lotto.domain.strategy;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -7,12 +7,14 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import lotto.domain.lottoTicket.LottoTickets;
 import lotto.domain.purchase.LottoMoney;
 import lotto.domain.purchase.TotalPurchasingCount;
 
-class ManualLottoTicketsFactoryTest {
+class ManualLottoTicketsGeneratorTest {
+
 	@Test
-	void generate_InputLottoTickets_GenerateLottoTicketList() {
+	void generate_InputLottoTickets_GenerateLottoTicketsInstance() {
 		LottoMoney lottoMoney = new LottoMoney(15_000);
 		TotalPurchasingCount totalPurchasingCount = TotalPurchasingCount.from("3", lottoMoney);
 		List<String> inputLottoTickets = Arrays.asList(
@@ -20,9 +22,10 @@ class ManualLottoTicketsFactoryTest {
 			"2, 3, 4, 5, 6, 7",
 			"3, 4, 5, 6, 7, 8"
 		);
-		LottoTicketsGeneratable lottoTicketsFactory = new ManualLottoTicketsFactory(inputLottoTickets);
+		LottoTicketsGenerator lottoTicketsFactory = new ManualLottoTicketsGenerator(inputLottoTickets);
 
 		assertThat(lottoTicketsFactory.generate(totalPurchasingCount.getManualPurchasingCount()))
 			.isInstanceOf(LottoTickets.class);
 	}
+
 }

@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class MatchCountTest {
+
 	@ParameterizedTest
 	@ValueSource(ints = {0, 6})
 	void valueOf_WithinRankMatchCount_ReturnInstance(int value) {
@@ -19,4 +20,5 @@ class MatchCountTest {
 			.isInstanceOf(InvalidMatchCountException.class)
 			.hasMessage(InvalidMatchCountException.OUT_OF_BOUND);
 	}
+
 }
