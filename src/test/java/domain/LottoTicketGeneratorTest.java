@@ -9,20 +9,20 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class ManualLottoTicketGeneratorTest {
+public class LottoTicketGeneratorTest {
     @DisplayName("수동으로 입력한 잘못된 문자열에 대해 로또 티켓 생성시 예외 출력 테스트")
     @ParameterizedTest
     @ValueSource(strings = {"", "1, 2, 3, 4, 5, f", "1, 2, 3, 4, 5     , ", "0, 2, 3, 4, 5, 46"})
     void generateManualLottoTicketWithInvalidInputTest(String input) {
         Assertions.assertThatThrownBy(() -> {
-            ManualLottoTicketGenerator.generateManualLottoTicket(input);
+            LottoTicketGenerator.generateManualLottoTicket(input);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("수동으로 입력한 올바른 로또 번호에 대해 로또 티켓 생성 테스트")
     @Test
     void generateManualLottoTicketWithValidInputTest() {
-        LottoTicket lottoTicket = ManualLottoTicketGenerator.generateManualLottoTicket("1, 2, 3, 4, 5, 6");
+        LottoTicket lottoTicket = LottoTicketGenerator.generateManualLottoTicket("1, 2, 3, 4, 5, 6");
 
         Assertions.assertThat(lottoTicket).isEqualTo(new LottoTicket(
                 new ArrayList(Arrays.asList(
@@ -34,5 +34,14 @@ public class ManualLottoTicketGeneratorTest {
                         new LottoNumber(6)
                 ))
         ));
+    }
+
+    @DisplayName("자동으로 생성된 두 LottoTicket 이 다른 티켓인지 테스트")
+    @Test
+    void equalsTest() {
+        LottoTicket input = LottoTicketGenerator.generateAutoLottoTicket();
+
+        LottoTicket expected = LottoTicketGenerator.generateAutoLottoTicket();
+        Assertions.assertThat(input).isNotEqualTo(expected);
     }
 }

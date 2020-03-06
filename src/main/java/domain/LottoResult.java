@@ -25,12 +25,12 @@ public class LottoResult {
         this.prizeInfo.put(PrizeType.SIX, INITIAL_COUNT);
     }
 
-    private void calculateWinningCount(Tickets tickets, WinningLottoTicket winningLottoTicket) {
-        countWinningLottoNumber(tickets, winningLottoTicket);
+    private void calculateWinningCount(LottoTickets lottoTickets, WinningLottoTicket winningLottoTicket) {
+        countWinningLottoNumber(lottoTickets, winningLottoTicket);
     }
 
-    private void countWinningLottoNumber(Tickets tickets, WinningLottoTicket winningLottoTicket) {
-        for (LottoTicket lottoTicket : tickets.getTickets()) {
+    private void countWinningLottoNumber(LottoTickets lottoTickets, WinningLottoTicket winningLottoTicket) {
+        for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
             PrizeType prizeType = compareNumberWithWinningLottoNumber(lottoTicket, winningLottoTicket);
             addPrizeInfoValue(prizeType);
         }

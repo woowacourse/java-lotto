@@ -17,8 +17,8 @@ public class LottoResultTest {
     @BeforeEach
     private void setUp() {
         money = new Money(14000);
-        AutoLottoTickets autoLottoTickets = LottoTicketsFixture.getAutoLottoTickets();
-        lottoTickets = new LottoTickets(autoLottoTickets.getTickets());
+        LottoTickets autoLottoTickets = LottoTicketsFixture.getAutoLottoTickets();
+        lottoTickets = new LottoTickets(autoLottoTickets.getLottoTickets());
         LottoTicket lottoTicket = new LottoTicket(new ArrayList(
                 Arrays.asList(
                         new LottoNumber(1),

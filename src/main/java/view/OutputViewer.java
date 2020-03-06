@@ -20,8 +20,8 @@ public class OutputViewer {
         System.out.println(sb.toString());
     }
 
-    public static void printLottoTickets(Tickets lottoTickets) {
-        for (LottoTicket lottoTicket : lottoTickets.getTickets()) {
+    public static void printLottoTickets(LottoTickets lottoTickets) {
+        for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
             StringBuilder sb = new StringBuilder();
             String ticketNumbers = String.join(", ", lottoTicket.lottoTicketNumberToString());
             sb.append("[");

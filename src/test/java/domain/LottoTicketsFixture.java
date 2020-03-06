@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class LottoTicketsFixture {
-    private static AutoLottoTickets autoLottoTickets;
+    private static LottoTickets autoLottoTickets;
 
     static {
         List<LottoTicket> lottoTicketList = new ArrayList<>();
@@ -58,10 +58,10 @@ public class LottoTicketsFixture {
                 new LottoNumber(8),
                 new LottoNumber(9),
                 new LottoNumber(10)))));
-        autoLottoTickets = new AutoLottoTickets(lottoTicketList);
+        autoLottoTickets = new LottoTickets(lottoTicketList);
     }
 
-    public static AutoLottoTickets getAutoLottoTickets() {
+    public static LottoTickets getAutoLottoTickets() {
         return autoLottoTickets;
     }
 }
