@@ -23,29 +23,36 @@ public class LottoController {
     }
 
     public static WinningLottoTicket getWinningLottoTicket() {
-        WinningLottoTicket winningLottoTicket = getWinningLottoTicketNumbers(
-                InputViewer.inputWinningLottoTicketNumber());
-        getBonusBall(winningLottoTicket, InputViewer.inputBonusBallNumber());
-        return winningLottoTicket;
-    }
-
-    private static WinningLottoTicket getWinningLottoTicketNumbers(String winningLottoNumbers) {
         try {
-            WinningLottoTicket winningLottoTicket = new WinningLottoTicket(winningLottoNumbers);
-            return winningLottoTicket;
+            LottoTicket winningLottoTicket = getWinningLottoTicketNumbers();
+            LottoNumber bonusBall = getBonusBall();
+            return new WinningLottoTicket(winningLottoTicket, bonusBall);
         } catch (IllegalArgumentException e) {
             OutputViewer.printErrorMessage(e.getMessage());
-            return getWinningLottoTicketNumbers(InputViewer.inputWinningLottoTicketNumber());
+            return getWinningLottoTicket();
         }
     }
 
-    private static void getBonusBall(WinningLottoTicket winningLottoTicket, int bonusNumber) {
+    private static LottoTicket getWinningLottoTicketNumbers() {
         try {
-            LottoNumber bonusBall = new LottoNumber(bonusNumber);
-            winningLottoTicket.initializeBonusBall(bonusBall);
+            String lottoNumber = InputViewer.inputWinningLottoTicketNumber();
+            List<LottoNumber> lottoNumbers = LottoNumberSplit.initializeLottoNumbers(lottoNumber);
+            LottoTicket winningLottoTicket = new LottoTicket(lottoNumbers);
+            return winningLottoTicket;
         } catch (IllegalArgumentException e) {
             OutputViewer.printErrorMessage(e.getMessage());
-            getBonusBall(winningLottoTicket, InputViewer.inputBonusBallNumber());
+            return getWinningLottoTicketNumbers();
+        }
+    }
+
+    private static LottoNumber getBonusBall() {
+        try {
+            int bonusNumber = InputViewer.inputBonusBallNumber();
+            LottoNumber bonusBall = LottoNumbers.getLottoNumber(bonusNumber);
+            return bonusBall;
+        } catch (IllegalArgumentException e) {
+            OutputViewer.printErrorMessage(e.getMessage());
+            return getBonusBall();
         }
     }
 

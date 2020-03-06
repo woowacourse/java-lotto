@@ -1,7 +1,5 @@
 package view;
 
-import domain.ManualLottoTicketCount;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -29,7 +27,12 @@ public class InputViewer {
 
     public static int inputBonusBallNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return scanner.nextInt();
+        try {
+            return Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            OutputViewer.printErrorMessage("숫자를 입력해주세요.");
+            return inputBonusBallNumber();
+        }
     }
 
     public static int inputManualLottoCount() {

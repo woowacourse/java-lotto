@@ -1,29 +1,21 @@
 package domain;
 
-import spark.utils.StringUtils;
 import java.util.List;
 
 public class WinningLottoTicket {
     private LottoTicket winningLottoTicket;
     private LottoNumber bonusBall;
 
-    public WinningLottoTicket(String input) {
-        validateBlank(input);
-        List<LottoNumber> lottoNumbers = LottoNumberSplit.initializeLottoNumbers(input);
-        this.winningLottoTicket = new LottoTicket(lottoNumbers);
+    public WinningLottoTicket(LottoTicket lottoTicket, LottoNumber bonusBall) {
+        this.winningLottoTicket = lottoTicket;
+        initializeBonusBall(bonusBall);
     }
 
-    private void validateBlank(String input) {
-        if (StringUtils.isBlank(input)) {
-            throw new IllegalArgumentException("입력값이 없습니다.");
-        }
-    }
-
-    public void initializeBonusBall(LottoNumber bonusNumber) {
-        if (this.winningLottoTicket.containLottoNumber(bonusNumber)) {
+    private void initializeBonusBall(LottoNumber bonusBall) {
+        if (this.winningLottoTicket.containLottoNumber(bonusBall)) {
             throw new IllegalArgumentException("보너스 로또 숫자는 당첨 숫자와 중복될 수 없습니다.");
         }
-        this.bonusBall = bonusNumber;
+        this.bonusBall = bonusBall;
     }
 
     public List<LottoNumber> getWinningLottoTicket() {
