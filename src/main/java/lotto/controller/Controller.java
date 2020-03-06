@@ -15,73 +15,73 @@ public class Controller {
 	public static void run() {
 		LottoMoney lottoMoney = prepareLotto();
 
-		LottoMoney manualTicketMoney = createManualTicketMoney(lottoMoney);
-		LottoMoney autoTicketMoney
-				= createAutoTicketMoney(lottoMoney, manualTicketMoney);
+		LottoMoney manualLottoMoney = prepareManualLottoMoney(lottoMoney);
+		LottoMoney autoLottoMoney
+				= prepareAutoLottoMoney(lottoMoney, manualLottoMoney);
 
 		PurchasedLottos purchasedLottos
-				= purchaseSerialLottoNumber(manualTicketMoney, autoTicketMoney);
+				= purchaseLottos(manualLottoMoney, autoLottoMoney);
 
-		WinningLotto winningLotto = createWinningLottoNumbers();
+		WinningLotto winningLotto = prepareWinningLotto();
 
 		produceLottoResult(lottoMoney, purchasedLottos, winningLotto);
 	}
 
-	private static LottoMoney createAutoTicketMoney(
-			LottoMoney lottoMoney, LottoMoney manualTicketMoney) {
+	private static LottoMoney prepareAutoLottoMoney(
+			LottoMoney lottoMoney, LottoMoney manualLottoMoney) {
 
-		LottoMoney autoTicketMoney;
+		LottoMoney autoLottoMoney;
 		do {
-			autoTicketMoney = createAutoTicketMoneyIfValid(
-					lottoMoney, manualTicketMoney);
-		} while (autoTicketMoney == null);
-		return autoTicketMoney;
+			autoLottoMoney = prepareAutoLottoIfValid(
+					lottoMoney, manualLottoMoney);
+		} while (autoLottoMoney == null);
+		return autoLottoMoney;
 	}
 
-	private static LottoMoney createAutoTicketMoneyIfValid(
-			LottoMoney lottoMoney, LottoMoney manualTicketMoney) {
+	private static LottoMoney prepareAutoLottoIfValid(
+			LottoMoney lottoMoney, LottoMoney manualLottoMoney) {
 		try {
-			return lottoMoney.subtract(manualTicketMoney);
+			return lottoMoney.subtract(manualLottoMoney);
 		} catch (PurchaseManualLottoIllegalArgumentException e) {
 			return null;
 		}
 	}
 
-	private static PurchasedLottos purchaseSerialLottoNumber(
-			LottoMoney manualTicketMoney, LottoMoney autoTicketMoney) {
+	private static PurchasedLottos purchaseLottos(
+			LottoMoney manualLottoMoney, LottoMoney autoLottoMoney) {
 		OutputView.printInputManualLottoNumbersMessage();
 
-		PurchasedLottos manualTickets = purchaseLotto(manualTicketMoney,
+		PurchasedLottos manualPurchasedLottos = purchaseLotto(manualLottoMoney,
 				new ManualLottosFactory());
-		PurchasedLottos autoSerialLottoNumber = purchaseLotto(autoTicketMoney,
+		PurchasedLottos autoPurchasedLottos = purchaseLotto(autoLottoMoney,
 				new AutoLottosFactory());
 
-		OutputView.printPurchasedSerialLottoNumber(manualTickets, autoSerialLottoNumber);
-		return manualTickets.add(autoSerialLottoNumber);
+		OutputView.printPurchasedLottos(manualPurchasedLottos, autoPurchasedLottos);
+		return manualPurchasedLottos.add(autoPurchasedLottos);
 	}
 
-	private static LottoMoney createManualTicketMoney(
+	private static LottoMoney prepareManualLottoMoney(
 			LottoMoney lottoMoney) {
 
-		LottoMoney manualTicketMoney;
+		LottoMoney manualLottoMoney;
 		do {
-			manualTicketMoney = createManualTicketMoneyIfValid(lottoMoney);
-		} while (manualTicketMoney == null);
-		return manualTicketMoney;
+			manualLottoMoney = prepareManualLottoMoneyIfValid(lottoMoney);
+		} while (manualLottoMoney == null);
+		return manualLottoMoney;
 	}
 
-	private static LottoMoney createManualTicketMoneyIfValid(
+	private static LottoMoney prepareManualLottoMoneyIfValid(
 			LottoMoney lottoMoney) {
 
-		int manualTicketNumber = InputView.inputManualTicketNumber();
+		int manualLottoNumber = InputView.inputManualLottoNumber();
 
-		if (lottoMoney.canNotPurchase(manualTicketNumber)) {
+		if (lottoMoney.canNotPurchase(manualLottoNumber)) {
 			OutputView.printWhenManualMoneyIsMoreThanTotalMoney();
 			return null;
 		}
 
 		try {
-			return LottoMoney.ofLottoCount(manualTicketNumber);
+			return LottoMoney.ofLottoCount(manualLottoNumber);
 		} catch (PurchaseManualLottoIllegalArgumentException e) {
 			OutputView.printWarningMessage(e.getMessage());
 			return null;
@@ -105,39 +105,21 @@ public class Controller {
 	}
 
 	private static LottoMoney prepareLotto() {
-		LottoMoney lottoMoney = createPurchaseMoney();
-		OutputView.printCountOfPurchasedSerialLottoNumber(lottoMoney);
+		LottoMoney lottoMoney = prepareLottoMoney();
+		OutputView.printCountOfPurchasedLottos(lottoMoney);
 		return lottoMoney;
 	}
 
-	private static WinningLotto createWinningLottoNumbers() {
-		WinningLotto winningLotto;
-		do {
-			winningLotto = createWinningLottoNumbersIfValid();
-		} while (winningLotto == null);
-
-		return winningLotto;
-	}
-
-	private static WinningLotto createWinningLottoNumbersIfValid() {
-		try {
-			return WinningLotto.of(createWinningNumber(), createBonusNumber());
-		} catch (WinningLottoIllegalArgumentException e) {
-			OutputView.printWarningMessage(e.getMessage());
-			return null;
-		}
-	}
-
-	private static LottoMoney createPurchaseMoney() {
+	private static LottoMoney prepareLottoMoney() {
 		LottoMoney lottoMoney;
 		do {
-			lottoMoney = createPurchaseMoneyIfValid();
+			lottoMoney = prepareLottoMoneyIfValid();
 		} while (lottoMoney == null);
 
 		return lottoMoney;
 	}
 
-	private static LottoMoney createPurchaseMoneyIfValid() {
+	private static LottoMoney prepareLottoMoneyIfValid() {
 		try {
 			return LottoMoney.of(InputView.inputPurchaseMoney());
 		} catch (LottoMoneyIllegalArgumentException e) {
@@ -146,16 +128,34 @@ public class Controller {
 		}
 	}
 
-	private static Lotto createWinningNumber() {
+	private static WinningLotto prepareWinningLotto() {
+		WinningLotto winningLotto;
+		do {
+			winningLotto = prepareWinningLottoIfValid();
+		} while (winningLotto == null);
+
+		return winningLotto;
+	}
+
+	private static WinningLotto prepareWinningLottoIfValid() {
+		try {
+			return WinningLotto.of(prepareWinningNumbers(), prepareBonusNumber());
+		} catch (WinningLottoIllegalArgumentException e) {
+			OutputView.printWarningMessage(e.getMessage());
+			return null;
+		}
+	}
+
+	private static Lotto prepareWinningNumbers() {
 		Lotto winningNumber;
 		do {
-			winningNumber = createWinningNumbersIfValid();
+			winningNumber = prepareWinningNumbersIfValid();
 		} while (winningNumber == null);
 
 		return winningNumber;
 	}
 
-	private static Lotto createWinningNumbersIfValid() {
+	private static Lotto prepareWinningNumbersIfValid() {
 		try {
 			return Lotto.of(InputView.inputWinningNumbers());
 		} catch (IllegalArgumentException e) {
@@ -164,16 +164,16 @@ public class Controller {
 		}
 	}
 
-	private static LottoNumber createBonusNumber() {
+	private static LottoNumber prepareBonusNumber() {
 		LottoNumber bonusNumber;
 		do {
-			bonusNumber = createBonusNumberIfValid();
+			bonusNumber = prepareBonusNumberIfValid();
 		} while (bonusNumber == null);
 
 		return bonusNumber;
 	}
 
-	private static LottoNumber createBonusNumberIfValid() {
+	private static LottoNumber prepareBonusNumberIfValid() {
 		try {
 			return LottoNumber.of(InputView.inputBonusNumber());
 		} catch (LottoNumberIllegalArgumentException e) {

@@ -51,7 +51,7 @@ public class InputView {
 		}
 	}
 
-	public static int inputManualTicketNumber() {
+	public static int inputManualLottoNumber() {
 		int manualTicketNumber;
 		do {
 			manualTicketNumber = inputManualTicketNumberIfValid();
