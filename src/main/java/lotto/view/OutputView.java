@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.domain.LottoResult;
 import lotto.domain.LottoMoney;
-import lotto.domain.PurchasedLottos;
+import lotto.domain.Lottos;
 import lotto.domain.WinningType;
 
 public class OutputView {
@@ -16,17 +16,17 @@ public class OutputView {
 		System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 	}
 
-	public static void printCountOfPurchasedLottos(LottoMoney lottoMoney) {
+	public static void printCountOfLottos(LottoMoney lottoMoney) {
 		System.out.println(lottoMoney.countPurchasedTickets() + "개를 구매했습니다.");
 	}
 
-	public static void printPurchasedLottos(
-			PurchasedLottos manual, PurchasedLottos auto) {
+	public static void printLottos(
+			Lottos manual, Lottos auto) {
 
 		System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다.\n",
 				manual.size(), auto.size());
-		manual.getPurchasedLottos().forEach(System.out::println);
-		auto.getPurchasedLottos().forEach(System.out::println);
+		manual.getLottos().forEach(System.out::println);
+		auto.getLottos().forEach(System.out::println);
 	}
 
 	public static void printLottoResult(LottoResult lottoResult) {

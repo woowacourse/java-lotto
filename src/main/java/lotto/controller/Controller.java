@@ -19,12 +19,12 @@ public class Controller {
 		LottoMoney autoLottoMoney
 				= prepareAutoLottoMoney(lottoMoney, manualLottoMoney);
 
-		PurchasedLottos purchasedLottos
+		Lottos lottos
 				= purchaseLottos(manualLottoMoney, autoLottoMoney);
 
 		WinningLotto winningLotto = prepareWinningLotto();
 
-		produceLottoResult(lottoMoney, purchasedLottos, winningLotto);
+		produceLottoResult(lottoMoney, lottos, winningLotto);
 	}
 
 	private static LottoMoney prepareAutoLottoMoney(
@@ -47,17 +47,17 @@ public class Controller {
 		}
 	}
 
-	private static PurchasedLottos purchaseLottos(
+	private static Lottos purchaseLottos(
 			LottoMoney manualLottoMoney, LottoMoney autoLottoMoney) {
 		OutputView.printInputManualLottoNumbersMessage();
 
-		PurchasedLottos manualPurchasedLottos = purchaseLotto(manualLottoMoney,
+		Lottos manualLottos = purchaseLotto(manualLottoMoney,
 				new ManualLottosFactory());
-		PurchasedLottos autoPurchasedLottos = purchaseLotto(autoLottoMoney,
+		Lottos autoLottos = purchaseLotto(autoLottoMoney,
 				new AutoLottosFactory());
 
-		OutputView.printPurchasedLottos(manualPurchasedLottos, autoPurchasedLottos);
-		return manualPurchasedLottos.add(autoPurchasedLottos);
+		OutputView.printLottos(manualLottos, autoLottos);
+		return manualLottos.add(autoLottos);
 	}
 
 	private static LottoMoney prepareManualLottoMoney(
@@ -90,21 +90,21 @@ public class Controller {
 
 	private static void produceLottoResult(
 			LottoMoney lottoMoney,
-			PurchasedLottos purchasedLottos,
+			Lottos lottos,
 			WinningLotto winningLotto) {
-		LottoResult lottoResult = LottoResult.of(purchasedLottos, winningLotto);
+		LottoResult lottoResult = LottoResult.of(lottos, winningLotto);
 		OutputView.printLottoResult(lottoResult);
 		OutputView.printEarningRate(lottoResult.calculateEarningPercentage(lottoMoney));
 	}
 
-	private static PurchasedLottos purchaseLotto(
+	private static Lottos purchaseLotto(
 			LottoMoney manualLottoMoney, LottosFactory lottosFactory) {
 		return lottosFactory.create(manualLottoMoney);
 	}
 
 	private static LottoMoney prepareLotto() {
 		LottoMoney lottoMoney = prepareLottoMoney();
-		OutputView.printCountOfPurchasedLottos(lottoMoney);
+		OutputView.printCountOfLottos(lottoMoney);
 		return lottoMoney;
 	}
 

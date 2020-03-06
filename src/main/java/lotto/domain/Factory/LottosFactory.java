@@ -1,8 +1,8 @@
 package lotto.domain.Factory;
 
 import lotto.domain.LottoMoney;
-import lotto.domain.PurchasedLottos;
+import lotto.domain.Lottos;
 
 public interface LottosFactory {
-	PurchasedLottos create(LottoMoney lottoMoney);
+	Lottos create(LottoMoney lottoMoney);
 }
