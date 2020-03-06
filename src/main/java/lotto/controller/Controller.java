@@ -4,10 +4,7 @@ import lotto.domain.Factory.AutoLottosFactory;
 import lotto.domain.Factory.LottosFactory;
 import lotto.domain.Factory.ManualLottosFactory;
 import lotto.domain.*;
-import lotto.exceptions.LottoMoneyIllegalArgumentException;
-import lotto.exceptions.LottoNumberIllegalArgumentException;
-import lotto.exceptions.PurchaseManualLottoIllegalArgumentException;
-import lotto.exceptions.WinningLottoIllegalArgumentException;
+import lotto.exceptions.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -137,44 +134,10 @@ public class Controller {
 
 	private static WinningLotto prepareWinningLottoIfValid() {
 		try {
-			return WinningLotto.of(prepareWinningNumbers(), prepareBonusNumber());
-		} catch (WinningLottoIllegalArgumentException e) {
-			OutputView.printWarningMessage(e.getMessage());
-			return null;
-		}
-	}
-
-	private static Lotto prepareWinningNumbers() {
-		Lotto winningNumber;
-		do {
-			winningNumber = prepareWinningNumbersIfValid();
-		} while (winningNumber == null);
-
-		return winningNumber;
-	}
-
-	private static Lotto prepareWinningNumbersIfValid() {
-		try {
-			return Lotto.of(InputView.inputWinningNumbers());
-		} catch (IllegalArgumentException e) {
-			OutputView.printWarningMessage(e.getMessage());
-			return null;
-		}
-	}
-
-	private static LottoNumber prepareBonusNumber() {
-		LottoNumber bonusNumber;
-		do {
-			bonusNumber = prepareBonusNumberIfValid();
-		} while (bonusNumber == null);
-
-		return bonusNumber;
-	}
-
-	private static LottoNumber prepareBonusNumberIfValid() {
-		try {
-			return LottoNumber.of(InputView.inputBonusNumber());
-		} catch (LottoNumberIllegalArgumentException e) {
+			return WinningLotto.of(InputView.inputWinningNumbers(),
+					InputView.inputBonusNumber());
+		} catch (WinningLottoIllegalArgumentException | LottoIllegalArgumentException |
+				LottoNumberIllegalArgumentException e) {
 			OutputView.printWarningMessage(e.getMessage());
 			return null;
 		}

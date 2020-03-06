@@ -13,7 +13,7 @@ public class WinningLottoTest {
 	@Test
 	void WinningLottoNumbers() {
 		// when
-		WinningLotto result = WinningLotto.of(Lotto.of("1, 2, 3, 4, 5, 6"), LottoNumber.of(7));
+		WinningLotto result = WinningLotto.of("1, 2, 3, 4, 5, 6", 7);
 
 		// then
 		Assertions.assertThat(result.getWinningLottoNumbers())
@@ -25,15 +25,11 @@ public class WinningLottoTest {
 
 	@Test
 	void WinningLottoNumbers_WinningNumbersContainsBonusNumber_ShouldThrowException() {
-		// given
-		Lotto winningLottoNumbers = Lotto.of(1, 2, 3, 4, 5, 6);
-		LottoNumber bonus = LottoNumber.of(6);
-
 		// then
 		Assertions.assertThatThrownBy(() -> {
 
 			// when
-			WinningLotto.of(winningLottoNumbers, bonus);
+			WinningLotto.of("1,2,3,4,5,6", 6);
 		}).isInstanceOf(WinningLottoIllegalArgumentException.class)
 				.hasMessageMatching(WinningLottoIllegalArgumentException.MESSAGE);
 	}
@@ -42,9 +38,7 @@ public class WinningLottoTest {
 	@MethodSource("generateCountMatchingLottoNumbersInput")
 	void countMatchingLottoNumbers(int[] input, WinningType expected) {
 		// given
-		Lotto winningNumbers = Lotto.of(1, 2, 3, 4, 5, 6);
-		LottoNumber bonus = LottoNumber.of(7);
-		WinningLotto winningLotto = WinningLotto.of(winningNumbers, bonus);
+		WinningLotto winningLotto = WinningLotto.of("1,2,3,4,5,6", 7);
 
 		Lotto serialLottoNumber = Lotto.of(input);
 

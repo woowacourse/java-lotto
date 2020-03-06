@@ -15,10 +15,6 @@ public class WinningLotto {
 		this.bonus = bonus;
 	}
 
-	public static WinningLotto of(final Lotto winningLottoNumbers, final LottoNumber bonus) {
-		return new WinningLotto(winningLottoNumbers, bonus);
-	}
-
 	public static WinningLotto of(final String winningLottoNumbers, final int bonusNumber) {
 		Lotto lotto = Lotto.of(winningLottoNumbers);
 		LottoNumber lottoNumber = LottoNumber.of(bonusNumber);
