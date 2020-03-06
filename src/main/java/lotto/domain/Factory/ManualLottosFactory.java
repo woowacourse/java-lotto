@@ -2,6 +2,7 @@ package lotto.domain.Factory;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoMoney;
+import lotto.domain.PurchasedLottos;
 import lotto.exceptions.LottoIllegalArgumentException;
 import lotto.view.InputView;
 
@@ -27,11 +28,11 @@ public class ManualLottosFactory implements LottosFactory {
 	}
 
 	@Override
-	public List<Lotto> create(LottoMoney lottoMoney) {
+	public PurchasedLottos create(LottoMoney lottoMoney) {
 		List<Lotto> manualLottos = new ArrayList<>();
 		for (int i = 0; i < lottoMoney.countPurchasedTickets(); i++) {
 			manualLottos.add(createOneManualLotto());
 		}
-		return manualLottos;
+		return PurchasedLottos.of(manualLottos);
 	}
 }

@@ -1,10 +1,8 @@
 package lotto.domain.Factory;
 
-import lotto.domain.Lotto;
 import lotto.domain.LottoMoney;
-
-import java.util.List;
+import lotto.domain.PurchasedLottos;
 
 public interface LottosFactory {
-	List<Lotto> create(LottoMoney lottoMoney);
+	PurchasedLottos create(LottoMoney lottoMoney);
 }

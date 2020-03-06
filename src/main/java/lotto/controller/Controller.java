@@ -100,8 +100,7 @@ public class Controller {
 	private static PurchasedLottos purchaseLotto(
 			LottoMoney manualLottoMoney, LottosFactory lottosFactory) {
 
-		return PurchasedLottos.of(
-				lottosFactory.create(manualLottoMoney));
+		return lottosFactory.create(manualLottoMoney);
 	}
 
 	private static LottoMoney prepareLotto() {
