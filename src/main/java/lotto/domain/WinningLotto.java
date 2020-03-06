@@ -19,6 +19,12 @@ public class WinningLotto {
 		return new WinningLotto(winningLottoNumbers, bonus);
 	}
 
+	public static WinningLotto of(final String winningLottoNumbers, final int bonusNumber) {
+		Lotto lotto = Lotto.of(winningLottoNumbers);
+		LottoNumber lottoNumber = LottoNumber.of(bonusNumber);
+		return new WinningLotto(lotto, lottoNumber);
+	}
+
 	private void checkWinningNumbersContainsBonus(Lotto winningLottoNumbers, LottoNumber bonus) {
 		if (winningLottoNumbers.contains(bonus)) {
 			throw new WinningLottoIllegalArgumentException();
