@@ -42,9 +42,8 @@ public class InputView {
     }
 
     public static WinningRule inputWinningNumbers() {
-        List<Integer> winningNumbers;
         System.out.println(INPUT_WINNING_NUMBER_MESSAGE);
-        winningNumbers = inputLotto();
+        List<Integer> winningNumbers = inputLotto();
         System.out.println(INPUT_BONUS_BALL_MESSAGE);
         int bonusBall = SCANNER.nextInt();
         return new WinningRule(winningNumbers, bonusBall);
