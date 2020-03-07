@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.exceptions.LottoNumberIllegalArgumentException;
+import lotto.exceptions.LottoNumberException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -30,8 +30,8 @@ class LottoNumberTest {
 
 			// when
 			LottoNumber lottoNumber = LottoNumber.of(input);
-		}).isInstanceOf(LottoNumberIllegalArgumentException.class)
-				.hasMessageMatching("-?[0-9]+" + LottoNumberIllegalArgumentException.MESSAGE);
+		}).isInstanceOf(LottoNumberException.class)
+				.hasMessageMatching("-?[0-9]+" + LottoNumberException.MESSAGE);
 	}
 
 }

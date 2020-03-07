@@ -8,6 +8,9 @@ import lotto.exceptions.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Controller {
 	public static void run() {
 		LottoMoney lottoMoney = prepareLotto();
@@ -39,7 +42,7 @@ public class Controller {
 			LottoMoney lottoMoney, LottoMoney manualLottoMoney) {
 		try {
 			return lottoMoney.subtract(manualLottoMoney);
-		} catch (PurchaseManualLottoIllegalArgumentException e) {
+		} catch (PurchaseManualLottosException e) {
 			return null;
 		}
 	}
@@ -48,13 +51,42 @@ public class Controller {
 			LottoMoney manualLottoMoney, LottoMoney autoLottoMoney) {
 		OutputView.printInputManualLottoNumbersMessage();
 
-		Lottos manualLottos = purchaseLotto(manualLottoMoney,
-				new ManualLottosFactory());
-		Lottos autoLottos = purchaseLotto(autoLottoMoney,
-				new AutoLottosFactory());
+		ManualLottosFactory manualLottosFactory = createManualLottosFactory(manualLottoMoney);
+
+		Lottos manualLottos = purchaseLotto(
+				manualLottosFactory);
+		Lottos autoLottos = purchaseLotto(
+				AutoLottosFactory.of(autoLottoMoney));
 
 		OutputView.printLottos(manualLottos, autoLottos);
 		return manualLottos.add(autoLottos);
+	}
+
+	private static ManualLottosFactory createManualLottosFactory(LottoMoney manualLottoMoney) {
+		ManualLottosFactory manualLottosFactory;
+		do {
+			manualLottosFactory = createManualLottosFactoryIfValid(manualLottoMoney);
+		} while (manualLottosFactory == null);
+		return manualLottosFactory;
+	}
+
+	private static ManualLottosFactory createManualLottosFactoryIfValid(LottoMoney manualLottoMoney) {
+		try {
+			List<String> manualInputs = new ArrayList<>();
+			prepareManualInputs(manualLottoMoney, manualInputs);
+
+			return ManualLottosFactory.of(manualInputs, manualLottoMoney);
+		} catch (ManualLottosFactoryException | LottoException |
+				LottoNumberException e) {
+			OutputView.printWarningMessage(e.getMessage());
+			return null;
+		}
+	}
+
+	private static void prepareManualInputs(LottoMoney manualLottoMoney, List<String> manualInputs) {
+		for (int i = 0; i < manualLottoMoney.countPurchasedTickets(); i++) {
+			manualInputs.add(InputView.inputNextLine());
+		}
 	}
 
 	private static LottoMoney prepareManualLottoMoney(
@@ -69,7 +101,6 @@ public class Controller {
 
 	private static LottoMoney prepareManualLottoMoneyIfValid(
 			LottoMoney lottoMoney) {
-
 		int manualLottoNumber = InputView.inputManualLottoNumber();
 
 		if (lottoMoney.canNotPurchase(manualLottoNumber)) {
@@ -79,7 +110,7 @@ public class Controller {
 
 		try {
 			return LottoMoney.ofLottoCount(manualLottoNumber);
-		} catch (PurchaseManualLottoIllegalArgumentException e) {
+		} catch (PurchaseManualLottosException e) {
 			OutputView.printWarningMessage(e.getMessage());
 			return null;
 		}
@@ -95,8 +126,8 @@ public class Controller {
 	}
 
 	private static Lottos purchaseLotto(
-			LottoMoney manualLottoMoney, LottosFactory lottosFactory) {
-		return lottosFactory.create(manualLottoMoney);
+			LottosFactory lottosFactory) {
+		return lottosFactory.create();
 	}
 
 	private static LottoMoney prepareLotto() {
@@ -117,7 +148,7 @@ public class Controller {
 	private static LottoMoney prepareLottoMoneyIfValid() {
 		try {
 			return LottoMoney.of(InputView.inputPurchaseMoney());
-		} catch (LottoMoneyIllegalArgumentException e) {
+		} catch (LottoMoneyException e) {
 			OutputView.printWarningMessage(e.getMessage());
 			return null;
 		}
@@ -136,8 +167,8 @@ public class Controller {
 		try {
 			return WinningLotto.of(InputView.inputWinningNumbers(),
 					InputView.inputBonusNumber());
-		} catch (WinningLottoIllegalArgumentException | LottoIllegalArgumentException |
-				LottoNumberIllegalArgumentException e) {
+		} catch (WinningLottoException | LottoException |
+				LottoNumberException e) {
 			OutputView.printWarningMessage(e.getMessage());
 			return null;
 		}

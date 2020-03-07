@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.exceptions.LottoIllegalArgumentException;
+import lotto.exceptions.LottoException;
 import lotto.utils.StringParser;
 
 import java.util.*;
@@ -48,13 +48,13 @@ public class Lotto {
 	private void checkIsDuplicated(List<LottoNumber> lottoNumbers) {
 		Set<LottoNumber> distinctLottoNumbers = new HashSet<>(lottoNumbers);
 		if (distinctLottoNumbers.size() != lottoNumbers.size()) {
-			throw new LottoIllegalArgumentException();
+			throw new LottoException();
 		}
 	}
 
 	private void checkIsSizeSix(List<LottoNumber> lottoNumbers) {
 		if (lottoNumbers.size() != LOTTO_TICKET_SIZE) {
-			throw new LottoIllegalArgumentException();
+			throw new LottoException();
 		}
 	}
 

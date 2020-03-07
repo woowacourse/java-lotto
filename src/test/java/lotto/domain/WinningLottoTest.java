@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.exceptions.WinningLottoIllegalArgumentException;
+import lotto.exceptions.WinningLottoException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -30,8 +30,8 @@ public class WinningLottoTest {
 
 			// when
 			WinningLotto.of("1,2,3,4,5,6", 6);
-		}).isInstanceOf(WinningLottoIllegalArgumentException.class)
-				.hasMessageMatching(WinningLottoIllegalArgumentException.MESSAGE);
+		}).isInstanceOf(WinningLottoException.class)
+				.hasMessageMatching(WinningLottoException.MESSAGE);
 	}
 
 	@ParameterizedTest

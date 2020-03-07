@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.exceptions.LottoMoneyIllegalArgumentException;
+import lotto.exceptions.LottoMoneyException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -28,8 +28,8 @@ public class LottoMoneyTest {
 		Assertions.assertThatThrownBy(() -> {
 			// when
 			LottoMoney.of(input);
-		}).isInstanceOf(LottoMoneyIllegalArgumentException.class)
-				.hasMessageMatching("-?[0-9]+" + LottoMoneyIllegalArgumentException.MESSAGE);
+		}).isInstanceOf(LottoMoneyException.class)
+				.hasMessageMatching("-?[0-9]+" + LottoMoneyException.MESSAGE);
 	}
 
 	@ParameterizedTest
@@ -39,8 +39,8 @@ public class LottoMoneyTest {
 		Assertions.assertThatThrownBy(() -> {
 			// when
 			LottoMoney.of(input);
-		}).isInstanceOf(LottoMoneyIllegalArgumentException.class)
-				.hasMessageMatching("-?[0-9]+" + LottoMoneyIllegalArgumentException.MESSAGE);
+		}).isInstanceOf(LottoMoneyException.class)
+				.hasMessageMatching("-?[0-9]+" + LottoMoneyException.MESSAGE);
 	}
 
 	@Test

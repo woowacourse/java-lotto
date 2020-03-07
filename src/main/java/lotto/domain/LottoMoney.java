@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import lotto.exceptions.PurchaseManualLottoIllegalArgumentException;
-import lotto.exceptions.LottoMoneyIllegalArgumentException;
+import lotto.exceptions.PurchaseManualLottosException;
+import lotto.exceptions.LottoMoneyException;
 
 import java.util.Objects;
 
@@ -25,28 +25,28 @@ public class LottoMoney {
 	public static LottoMoney ofLottoCount(final int count) {
 		try {
 			return new LottoMoney(LOTTO_PRICE * count);
-		} catch (LottoMoneyIllegalArgumentException e) {
-			throw new PurchaseManualLottoIllegalArgumentException();
+		} catch (LottoMoneyException e) {
+			throw new PurchaseManualLottosException();
 		}
 	}
 
 	private void checkIsMultipleOfThousand(int purchaseMoney) {
 		if (purchaseMoney % LOTTO_PRICE != 0) {
-			throw new LottoMoneyIllegalArgumentException(purchaseMoney);
+			throw new LottoMoneyException(purchaseMoney);
 		}
 	}
 
 	private void checkIsLessThanZero(int purchaseMoney) {
 		if (purchaseMoney < POSITIVE_THRESHOLD) {
-			throw new LottoMoneyIllegalArgumentException(purchaseMoney);
+			throw new LottoMoneyException(purchaseMoney);
 		}
 	}
 
 	public LottoMoney subtract(LottoMoney other) {
 		try {
 			return new LottoMoney(purchaseMoney - other.purchaseMoney);
-		} catch (LottoMoneyIllegalArgumentException e) {
-			throw new PurchaseManualLottoIllegalArgumentException();
+		} catch (LottoMoneyException e) {
+			throw new PurchaseManualLottosException();
 		}
 	}
 

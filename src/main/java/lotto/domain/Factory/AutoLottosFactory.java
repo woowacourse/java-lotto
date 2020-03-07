@@ -8,13 +8,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AutoLottosFactory implements LottosFactory {
+	private final Lottos lottos;
 
-	@Override
-	public Lottos create(LottoMoney lottoMoney) {
+	private AutoLottosFactory(final Lottos lottos) {
+		this.lottos = lottos;
+	}
+
+	public static AutoLottosFactory of(LottoMoney lottoMoney) {
 		List<Lotto> autoLottos = new ArrayList<>();
 		for (int i = 0; i < lottoMoney.countPurchasedTickets(); i++) {
 			autoLottos.add(AutoLottoFactory.create());
 		}
-		return Lottos.of(autoLottos);
+		return new AutoLottosFactory(Lottos.of(autoLottos));
+	}
+
+	@Override
+	public Lottos create() {
+		return lottos;
 	}
 }

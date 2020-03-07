@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.exceptions.LottoNumberIllegalArgumentException;
+import lotto.exceptions.LottoNumberException;
 
 import java.util.*;
 
@@ -30,7 +30,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
 	private static void checkIsWithinRange(int number) {
 		if (number < MIN || number > MAX) {
-			throw new LottoNumberIllegalArgumentException(number);
+			throw new LottoNumberException(number);
 		}
 	}
 

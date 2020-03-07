@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.exceptions.WinningLottoIllegalArgumentException;
+import lotto.exceptions.WinningLottoException;
 
 import java.util.Objects;
 
@@ -23,7 +23,7 @@ public class WinningLotto {
 
 	private void checkWinningNumbersContainsBonus(Lotto winningLottoNumbers, LottoNumber bonus) {
 		if (winningLottoNumbers.contains(bonus)) {
-			throw new WinningLottoIllegalArgumentException();
+			throw new WinningLottoException();
 		}
 	}
 
