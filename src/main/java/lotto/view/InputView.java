@@ -1,14 +1,6 @@
 package lotto.view;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.Money;
+import java.util.*;
 import lotto.utils.StringUtils;
 
 public class InputView {
@@ -18,19 +10,17 @@ public class InputView {
     private static final String REQUEST_FOR_PURCHASE_AMOUNT = "구입금액을 입력해주세요";
 
 
-    public static Money inputPurchaseAmount() {
+    public static int inputPurchaseAmount() {
         System.out.println(REQUEST_FOR_PURCHASE_AMOUNT);
         try {
-            return new Money(StringUtils.parseInt(scanner.nextLine()));
+            return StringUtils.parseInt(scanner.nextLine());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자가 아닌 문자를 입력하였습니다.");
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(e.getMessage());
         }
 
     }
 
-    public static Lotto inputLastWeekWinningNumbers() {
+    public static List<Integer> inputLastWeekWinningNumbers() {
         System.out.println("지난주 당첨번호을 입력해주세요.");
         try {
             String input = scanner.nextLine();
@@ -38,7 +28,7 @@ public class InputView {
             if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
                 throw new IllegalArgumentException(String.format("로또 번호의 개수는 %d개여야 합니다.", LOTTO_NUMBERS_SIZE));
             }
-            return Lotto.createWinningLotto(lottoNumbers);
+            return lottoNumbers;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자가 아닌 문자를 입력하였습니다.");
         }
@@ -62,12 +52,12 @@ public class InputView {
         }
     }
 
-    public static List<Set<LottoNumber>> inputManualLottos(int numberToBuy) {
+    public static List<Set<Integer>> inputManualLottos(int numberToBuy) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        List<Set<LottoNumber>> lottoNumbersBasket = new ArrayList<>();
+        List<Set<Integer>> lottoNumbersBasket = new ArrayList<>();
         try {
             for (int i = 0; i < numberToBuy; i++) {
-                Set<LottoNumber> lottoNumbers = StringUtils.parseWithDelimiter(scanner.nextLine()).stream().map(LottoNumber::new).collect(Collectors.toSet());
+                Set<Integer> lottoNumbers = new HashSet<>(StringUtils.parseWithDelimiter(scanner.nextLine()));
                 if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
                     throw new IllegalArgumentException(String.format("로또 번호의 개수는 %d개여야 합니다.", LOTTO_NUMBERS_SIZE));
                 }
@@ -81,11 +71,10 @@ public class InputView {
 
     }
 
-    public static LottoNumber inputBonusNumber() {
+    public static int inputBonusNumber() {
         System.out.println("보너스볼을 입력해주세요");
         try {
-
-            return new LottoNumber(StringUtils.parseInt(scanner.nextLine()));
+            return StringUtils.parseInt(scanner.nextLine());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자가 아닌 문자를 입력하였습니다.");
         } catch (IllegalArgumentException e) {

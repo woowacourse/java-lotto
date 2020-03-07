@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -19,7 +20,8 @@ public class LottoGame {
     }
 
     private Money inputPurchaseAmount() {
-        return execute(InputView::inputPurchaseAmount);
+        Integer purchaseAmount = execute(InputView::inputPurchaseAmount);
+        return new Money(purchaseAmount);
     }
 
     private List<Lotto> purchaseLottos(Money purchaseAmount) {
@@ -40,7 +42,14 @@ public class LottoGame {
     }
 
     private List<Set<LottoNumber>> inputLottoNumbersBasket(int numberToBuyManually) {
-        return execute(() -> InputView.inputManualLottos(numberToBuyManually));
+        List<Set<LottoNumber>> lottoNumbersBasket = new ArrayList<>();
+        List<Set<Integer>> rawlottoNumbersBasket = execute(() -> InputView.inputManualLottos(numberToBuyManually));
+        for (Set<Integer> rawlottoNumbers : rawlottoNumbersBasket) {
+            Set<LottoNumber> lottoNumbers = rawlottoNumbers.stream().map(LottoNumber::new).collect(Collectors.toSet());
+            lottoNumbersBasket.add(lottoNumbers);
+        }
+
+        return lottoNumbersBasket;
     }
 
     private List<Lotto> generateLottosAutomatically(int lottosSize) {
@@ -59,11 +68,13 @@ public class LottoGame {
     }
 
     private Lotto inputWinningLotto() {
-        return execute(InputView::inputLastWeekWinningNumbers);
+        List<Integer> winningNumbers = execute(InputView::inputLastWeekWinningNumbers);
+        return Lotto.createWinningLotto(winningNumbers);
     }
 
     private LottoNumber inputBonusNumber() {
-        return execute(InputView::inputBonusNumber);
+        int bonusNumber = execute(InputView::inputBonusNumber);
+        return new LottoNumber(bonusNumber);
     }
 
     private WinningRanks compareWithWinningNumbers(List<Lotto> lottos, Lotto winningLotto, LottoNumber bonusNumber) {
