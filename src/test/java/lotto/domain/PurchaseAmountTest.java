@@ -12,16 +12,15 @@ public class PurchaseAmountTest {
     @Test
     @DisplayName("정상 입력 테스트")
     void calculate() {
-        Assertions.assertThat(PurchaseAmount.calculate(2000))
+        Assertions.assertThat(new PurchaseAmount(2, 0))
                 .isInstanceOf(PurchaseAmount.class);
     }
 
     @ParameterizedTest
     @DisplayName("최소 구매 금액보다 작은 입력이 들어온_경우 calculate 테스트")
-    @ValueSource(ints = {999, 0})
+    @ValueSource(ints = {0, -1})
     void calcuate_less(int value) {
-        Assertions.assertThatThrownBy(() -> PurchaseAmount.calculate(value))
-                .isInstanceOf(OutOfRangeException.class)
-                .hasMessage("Input money out of range (minimum - 1000).");
+        Assertions.assertThatThrownBy(() -> new PurchaseAmount(value, 0))
+                .isInstanceOf(OutOfRangeException.class);
     }
 }

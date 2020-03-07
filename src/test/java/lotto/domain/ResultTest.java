@@ -29,9 +29,9 @@ public class ResultTest {
     @DisplayName("수익률 계산 테스트")
     void calculateEarningRate() {
         Result result = new Result();
-        PurchaseAmount purchaseAmount = PurchaseAmount.calculate(1000);
+        PurchaseAmount purchaseAmount = new PurchaseAmount(1,0);
         Lotto lotto = new Lotto(inputNumbers);
-        PurchaseLottos purchaseLottos = new PurchaseLottos(Arrays.asList(lotto));
+        PurchaseLottos purchaseLottos = PurchaseLottos.makePurchaseLottos(Arrays.asList(lotto), 0);
         WinningRule winningRule = new WinningRule(inputNumbers,7);
         result.calculateRank(purchaseLottos,winningRule);
         assertThat(result.calculateEarningRate(purchaseAmount)).isEqualTo(199999900);
