@@ -80,7 +80,6 @@ public class LottoGame {
     }
 
     private <T> T execute(LottoLogic<T> lottoLogic) {
-        LottoService<T> lottoService = new LottoService<>(lottoLogic);
-        return lottoService.executeOrRepeatWithException();
+        return LottoLogicExecutor.executeOrRepeatWithException(lottoLogic);
     }
 }
