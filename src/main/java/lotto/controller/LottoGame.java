@@ -1,4 +1,5 @@
 package lotto.controller;
+
 import java.util.List;
 import java.util.Set;
 
@@ -7,32 +8,36 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoGame {
-    private NonPlayerCharacter nonPlayerCharacter;
-    private Player player;
-
-    public LottoGame(NonPlayerCharacter nonPlayerCharacter, Player player) {
-        this.nonPlayerCharacter = nonPlayerCharacter;
-        this.player = player;
-    }
 
     public void play() {
+        Money purchaseAmount = inputPurchaseAmount();
+        List<Lotto> lottosManual = purchaseLottosManually(purchaseAmount);
+        List<Lotto> lottosAutomatic = Player.purchaseLottosAutomatically(purchaseAmount, lottosManual.size());
+        OutputView.printLottos(lottosManual, lottosAutomatic);
+        Result result = produceResult(purchaseAmount, lottosManual, lottosAutomatic);
+        OutputView.printResult(result);
+    }
 
-        int inputPurchaseAmount = LottoLogicExecutor.executeOrRepeatWithException(InputView::inputPurchaseAmount);
-        Money purchaseAmount = nonPlayerCharacter.translateToMoney(inputPurchaseAmount);
+    private Money inputPurchaseAmount() {
+        int input = LottoLogicExecutor.executeOrRepeatWithException(InputView::inputPurchaseAmount);
+        return NonPlayerCharacter.translateToMoney(input);
+    }
 
+    private List<Lotto> purchaseLottosManually(Money purchaseAmount) {
         int numberToBuyLottoManually = LottoLogicExecutor.executeOrRepeatWithException(() -> InputView.inputNumberToBuyManually(purchaseAmount.toLottosSize()));
         List<Set<Integer>> numbersBasket = LottoLogicExecutor.executeOrRepeatWithException(() -> InputView.inputnumbersBasketManually(numberToBuyLottoManually));
-        List<Set<LottoNumber>> lottoNumbersBasket = nonPlayerCharacter.translateToLottoNumbersBasket(numbersBasket);
+        List<Set<LottoNumber>> lottoNumbersBasket = NonPlayerCharacter.translateToLottoNumbersBasket(numbersBasket);
+        return Player.purchaseLottosManually(lottoNumbersBasket);
+    }
 
-
-        List<Lotto> lottosManual = player.purchaseLottosManually(lottoNumbersBasket);
-        List<Lotto> lottosAutomatic = player.purchaseLottosAutomatically(purchaseAmount, lottosManual.size());
-        OutputView.printLottos(lottosManual, lottosAutomatic);
-
-        List<Integer> winningNumbers = LottoLogicExecutor.executeOrRepeatWithException(InputView::inputLastWeekWinningNumbers);
-        Lotto winningLotto = nonPlayerCharacter.declareWinningLotto(winningNumbers);
+    private Result produceResult(Money purchaseAmount, List<Lotto> lottosManual, List<Lotto> lottosAutomatic) {
+        Lotto winningLotto = declareWinningLotto();
         int bonusNumber = LottoLogicExecutor.executeOrRepeatWithException(InputView::inputBonusNumber);
-        Result result = nonPlayerCharacter.judgeResult(lottosManual,lottosAutomatic, winningLotto, bonusNumber, purchaseAmount);
-        OutputView.printResult(result);
+        return NonPlayerCharacter.judgeResult(lottosManual, lottosAutomatic, winningLotto, bonusNumber, purchaseAmount);
+    }
+
+    private Lotto declareWinningLotto() {
+        List<Integer> winningNumbers = LottoLogicExecutor.executeOrRepeatWithException(InputView::inputLastWeekWinningNumbers);
+        return NonPlayerCharacter.declareWinningLotto(winningNumbers);
     }
 }
