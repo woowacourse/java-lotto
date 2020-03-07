@@ -17,10 +17,4 @@ public enum BonusRequirement {
 		return satisfyExpression.apply(bonus);
 	}
 
-	@Override
-	public String toString() {
-		return "BonusRequirement{" +
-				"satisfyExpression=" + satisfyExpression +
-				'}';
-	}
 }
