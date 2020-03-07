@@ -12,11 +12,7 @@ public class InputView {
 
     public static int inputPurchaseAmount() {
         System.out.println(REQUEST_FOR_PURCHASE_AMOUNT);
-        try {
-            return StringUtils.parseInt(scanner.nextLine());
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자가 아닌 문자를 입력하였습니다.");
-        }
+        return inputNumber();
 
     }
 
@@ -73,13 +69,18 @@ public class InputView {
 
     public static int inputBonusNumber() {
         System.out.println("보너스볼을 입력해주세요");
+        return inputNumber();
+    }
+
+    private static int inputNumber() {
         try {
-            return StringUtils.parseInt(scanner.nextLine());
+            int bonusNumber = StringUtils.parseInt(scanner.nextLine());
+            if (bonusNumber <= 0) {
+                throw new IllegalArgumentException("음수는 입력할 수 없습니다");
+            }
+            return bonusNumber;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자가 아닌 문자를 입력하였습니다.");
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(e.getMessage());
         }
-
     }
 }
