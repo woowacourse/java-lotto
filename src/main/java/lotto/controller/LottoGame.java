@@ -11,8 +11,8 @@ public class LottoGame {
 
     public void play() {
         Money purchaseAmount = inputPurchaseAmount();
-        List<Lotto> lottosManual = purchaseLottosManually(purchaseAmount);
-        List<Lotto> lottosAutomatic = Player.purchaseLottosAutomatically(purchaseAmount, lottosManual.size());
+        Lottos lottosManual = purchaseLottosManually(purchaseAmount);
+        Lottos lottosAutomatic = Player.purchaseLottosAutomatically(purchaseAmount, lottosManual.size());
         OutputView.printLottos(lottosManual, lottosAutomatic);
         Result result = produceResult(purchaseAmount, lottosManual, lottosAutomatic);
         OutputView.printResult(result);
@@ -23,14 +23,14 @@ public class LottoGame {
         return NonPlayerCharacter.translateToMoney(input);
     }
 
-    private List<Lotto> purchaseLottosManually(Money purchaseAmount) {
+    private Lottos purchaseLottosManually(Money purchaseAmount) {
         int numberToBuyLottoManually = LottoLogicExecutor.executeOrRepeatWithException(() -> InputView.inputNumberToBuyManually(purchaseAmount.toLottosSize()));
         List<Set<Integer>> numbersBasket = LottoLogicExecutor.executeOrRepeatWithException(() -> InputView.inputnumbersBasketManually(numberToBuyLottoManually));
         List<Set<LottoNumber>> lottoNumbersBasket = NonPlayerCharacter.translateToLottoNumbersBasket(numbersBasket);
         return Player.purchaseLottosManually(lottoNumbersBasket);
     }
 
-    private Result produceResult(Money purchaseAmount, List<Lotto> lottosManual, List<Lotto> lottosAutomatic) {
+    private Result produceResult(Money purchaseAmount, Lottos lottosManual, Lottos lottosAutomatic) {
         Lotto winningLotto = declareWinningLotto();
         int bonusNumber = LottoLogicExecutor.executeOrRepeatWithException(InputView::inputBonusNumber);
         return NonPlayerCharacter.judgeResult(lottosManual, lottosAutomatic, winningLotto, bonusNumber, purchaseAmount);

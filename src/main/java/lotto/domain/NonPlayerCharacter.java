@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
 
 public class NonPlayerCharacter {
 
@@ -21,8 +21,8 @@ public class NonPlayerCharacter {
         return lottoNumbersBasket;
     }
 
-    public static Result judgeResult(List<Lotto> lottosManual, List<Lotto> lottosAutomatic, Lotto winningLotto, int bonusNumber, Money purchaseAmount) {
-        Lottos lottos = new Lottos(Stream.concat(lottosManual.stream(), lottosAutomatic.stream()).collect(Collectors.toList()));
+    public static Result judgeResult(Lottos lottosManual, Lottos lottosAutomatic, Lotto winningLotto, int bonusNumber, Money purchaseAmount) {
+        Lottos lottos = lottosManual.concat(lottosAutomatic);
         WinningRanks winningRanks = lottos.produceWinningRanks(winningLotto, new LottoNumber(bonusNumber));
         return new Result(winningRanks, purchaseAmount);
     }

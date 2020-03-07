@@ -11,13 +11,13 @@ class LottosGenerator {
     private static final int LOTTO_NUMBER_SIZE = 6;
     private static final int ONE = 1;
 
-    static List<Lotto> generateAutomatically(int lottosSize) {
+    static Lottos generateAutomatically(int lottosSize) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottosSize; i++) {
             Set<LottoNumber> lottoNumbers = generateLottoNumbersAutomatically();
             lottos.add(new Lotto(lottoNumbers));
         }
-        return lottos;
+        return new Lottos(lottos);
     }
 
     private static Set<LottoNumber> generateLottoNumbersAutomatically() {
@@ -26,11 +26,11 @@ class LottosGenerator {
                 Collections.unmodifiableCollection(lottoNumbersInBox.subList(ONE, ONE + LOTTO_NUMBER_SIZE)));
     }
 
-    static List<Lotto> generateManually(List<Set<LottoNumber>> lottoNumbersBasket) {
+    static Lottos generateManually(List<Set<LottoNumber>> lottoNumbersBasket) {
         List<Lotto> lottos = new ArrayList<>();
         for (Set<LottoNumber> lottoNumbers : lottoNumbersBasket) {
             lottos.add(new Lotto(lottoNumbers));
         }
-        return lottos;
+        return new Lottos(lottos);
     }
 }
