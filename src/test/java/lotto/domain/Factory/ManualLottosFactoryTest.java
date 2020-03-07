@@ -19,7 +19,8 @@ class ManualLottosFactoryTest {
 		int money = 2000;
 
 		// when
-		ManualLottosFactory manualLottosFactory = ManualLottosFactory.of(LottoMoney.of(money), inputs);
+		ManualLottosFactory manualLottosFactory = ManualLottosFactory.of(
+				LottoMoney.of(money), Arrays.asList(inputs));
 
 		// then
 		Assertions.assertThat(manualLottosFactory.create())
@@ -34,7 +35,7 @@ class ManualLottosFactoryTest {
 
 		// then
 		Assertions.assertThatThrownBy(() -> {
-			ManualLottosFactory.of(LottoMoney.of(money), inputs);
+			ManualLottosFactory.of(LottoMoney.of(money), Arrays.asList(inputs));
 		}).isInstanceOf(ManualLottosFactoryException.class);
 	}
 }

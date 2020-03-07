@@ -6,7 +6,6 @@ import lotto.domain.Lottos;
 import lotto.exceptions.ManualLottosFactoryException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ManualLottosFactory implements LottosFactory {
@@ -14,10 +13,6 @@ public class ManualLottosFactory implements LottosFactory {
 
 	private ManualLottosFactory(Lottos lottos) {
 		this.lottos = lottos;
-	}
-
-	public static ManualLottosFactory of(LottoMoney lottoMoney, String... strings) {
-		return of(lottoMoney, Arrays.asList(strings));
 	}
 
 	public static ManualLottosFactory of(LottoMoney lottoMoney, List<String> strings) {
