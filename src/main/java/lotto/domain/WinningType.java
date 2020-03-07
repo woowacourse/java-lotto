@@ -49,4 +49,13 @@ public enum WinningType {
 	public int getWinningAmount() {
 		return winningAmount;
 	}
+
+	@Override
+	public String toString() {
+		return "WinningType{" +
+				"sameNumberCount=" + sameNumberCount +
+				", bonusRequirement=" + bonusRequirement +
+				", winningAmount=" + winningAmount +
+				'}';
+	}
 }

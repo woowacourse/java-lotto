@@ -65,4 +65,11 @@ public class LottoResult {
 	public int hashCode() {
 		return Objects.hash(lottoResult);
 	}
+
+	@Override
+	public String toString() {
+		return "LottoResult{" +
+				"lottoResult=" + lottoResult +
+				'}';
+	}
 }

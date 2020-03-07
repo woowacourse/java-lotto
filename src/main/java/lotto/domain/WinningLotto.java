@@ -55,4 +55,12 @@ public class WinningLotto {
 	public int hashCode() {
 		return Objects.hash(winningLottoNumbers, bonus);
 	}
+
+	@Override
+	public String toString() {
+		return "WinningLotto{" +
+				"winningLottoNumbers=" + winningLottoNumbers +
+				", bonus=" + bonus +
+				'}';
+	}
 }

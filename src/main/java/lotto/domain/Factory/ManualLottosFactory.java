@@ -7,6 +7,7 @@ import lotto.exceptions.ManualLottosFactoryException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ManualLottosFactory implements LottosFactory {
 	private final Lottos lottos;
@@ -36,4 +37,23 @@ public class ManualLottosFactory implements LottosFactory {
 		return lottos;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		ManualLottosFactory that = (ManualLottosFactory) o;
+		return Objects.equals(lottos, that.lottos);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(lottos);
+	}
+
+	@Override
+	public String toString() {
+		return "ManualLottosFactory{" +
+				"lottos=" + lottos +
+				'}';
+	}
 }

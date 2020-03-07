@@ -16,4 +16,11 @@ public enum BonusRequirement {
 	public boolean isSatisfiedBy(boolean bonus) {
 		return satisfyExpression.apply(bonus);
 	}
+
+	@Override
+	public String toString() {
+		return "BonusRequirement{" +
+				"satisfyExpression=" + satisfyExpression +
+				'}';
+	}
 }

@@ -6,6 +6,7 @@ import lotto.domain.Lottos;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class AutoLottosFactory implements LottosFactory {
 	private final Lottos lottos;
@@ -25,5 +26,25 @@ public class AutoLottosFactory implements LottosFactory {
 	@Override
 	public Lottos create() {
 		return lottos;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		AutoLottosFactory that = (AutoLottosFactory) o;
+		return Objects.equals(lottos, that.lottos);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(lottos);
+	}
+
+	@Override
+	public String toString() {
+		return "AutoLottosFactory{" +
+				"lottos=" + lottos +
+				'}';
 	}
 }
