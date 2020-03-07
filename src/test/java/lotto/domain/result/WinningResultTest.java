@@ -10,10 +10,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
-import lotto.domain.lottoMoney.LottoMoney;
-import lotto.domain.lottoRank.LottoRank;
+import lotto.domain.purchase.LottoMoney;
 
 class WinningResultTest {
+
 	@Test
 	void WinningResult_MapOfLottoRankAndLottoRankCount_GenerateInstance() {
 		Map<LottoRank, Long> value = new TreeMap<>(Collections.reverseOrder());
@@ -46,11 +46,12 @@ class WinningResultTest {
 		Map<LottoRank, Long> value = new TreeMap<>(Collections.reverseOrder());
 		value.put(LottoRank.THIRD, 1L);
 		WinningResult winningResult = new WinningResult(value);
-		LottoMoney lottoMoney = new LottoMoney(10_000L);
+		LottoMoney lottoMoney = new LottoMoney(10_000);
 
-		long actual = winningResult.calculateWinningRate(lottoMoney);
+		int actual = winningResult.calculateWinningRate(lottoMoney);
 
-		long expected = 15_000L;
+		int expected = 15_000;
 		assertThat(actual).isEqualTo(expected);
 	}
+
 }

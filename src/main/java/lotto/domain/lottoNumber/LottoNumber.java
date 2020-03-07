@@ -3,25 +3,20 @@ package lotto.domain.lottoNumber;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
+
 	public static final int MIN_LOTTO_NUMBER = 1;
 	public static final int MAX_LOTTO_NUMBER = 45;
 
 	private final int lottoNumber;
 
-	public LottoNumber(int lottoNumber) {
+	LottoNumber(int lottoNumber) {
 		validate(lottoNumber);
 		this.lottoNumber = lottoNumber;
 	}
 
-	private void validate(int number) {
-		if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
-			throw new InvalidLottoNumberException(InvalidLottoNumberException.OUT_OF_BOUND_LOTTO_NUMBER);
-		}
-	}
-
 	public static LottoNumber valueOf(int number) {
 		if (number >= MIN_LOTTO_NUMBER && number <= MAX_LOTTO_NUMBER) {
-			return LottoNumberFactory.generate(number);
+			return LottoNumberCache.asLottoNumber(number);
 		}
 		return new LottoNumber(number);
 	}
@@ -38,8 +33,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
 		}
 	}
 
-	public int getLottoNumber() {
-		return lottoNumber;
+	private void validate(int number) {
+		if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
+			throw new InvalidLottoNumberException(InvalidLottoNumberException.OUT_OF_BOUND_LOTTO_NUMBER);
+		}
 	}
 
 	@Override
@@ -63,4 +60,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
 	public int hashCode() {
 		return Objects.hash(lottoNumber);
 	}
+
+	@Override
+	public String toString() {
+		return Integer.toString(lottoNumber);
+	}
+
 }

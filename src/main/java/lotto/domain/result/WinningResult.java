@@ -5,10 +5,10 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
 
-import lotto.domain.lottoMoney.LottoMoney;
-import lotto.domain.lottoRank.LottoRank;
+import lotto.domain.purchase.LottoMoney;
 
 public class WinningResult {
+
 	private final Map<LottoRank, Long> winningResult = new TreeMap<>(Collections.reverseOrder());
 
 	public WinningResult(Map<LottoRank, Long> winningResult) {
@@ -31,24 +31,23 @@ public class WinningResult {
 		return winningResult;
 	}
 
-	public long calculateWinningRate(LottoMoney lottoMoney) {
+	public int calculateWinningRate(LottoMoney lottoMoney) {
 		LottoMoney totalLottoMoney = calculateTotalWinningLottoMoney();
 		return totalLottoMoney.measureWinningRate(lottoMoney);
 	}
 
 	private LottoMoney calculateTotalWinningLottoMoney() {
-		LottoMoney totalLottoMoney = LottoMoney.ZERO;
-
-		for (Map.Entry<LottoRank, Long> entry : winningResult.entrySet()) {
-			LottoRank lottoRank = entry.getKey();
-			Long lottoRankCount = entry.getValue();
-
-			totalLottoMoney = totalLottoMoney.addBy(lottoRank.calculateWinningLottoMoneyBy(lottoRankCount));
-		}
-		return totalLottoMoney;
+		return winningResult.entrySet().stream()
+			.map(entry -> {
+				LottoRank lottoRank = entry.getKey();
+				long lottoRankCount = entry.getValue();
+				return lottoRank.calculateWinningLottoMoneyBy((int)lottoRankCount);
+			})
+			.reduce(LottoMoney.ZERO, LottoMoney::addBy);
 	}
 
 	public Map<LottoRank, Long> getWinningResult() {
 		return winningResult;
 	}
+
 }

@@ -10,13 +10,14 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import lotto.domain.lottoNumber.LottoNumber;
-import lotto.domain.lottoNumber.LottoNumberFactory;
-import lotto.domain.lottoRank.MatchCount;
+import lotto.domain.lottoNumber.LottoNumberCache;
+import lotto.domain.result.MatchCount;
 
 class LottoTicketTest {
+
 	@Test
 	void LottoTicket_ValidLottoNumbers_GenerateInstance() {
-		List<LottoNumber> value = LottoNumberFactory.generate(1, 2, 3, 4, 5, 6);
+		List<LottoNumber> value = LottoNumberCache.asLottoNumber(1, 2, 3, 4, 5, 6);
 
 		assertThat(new LottoTicket(value)).isInstanceOf(LottoTicket.class);
 	}
@@ -31,7 +32,7 @@ class LottoTicketTest {
 
 	@Test
 	void validateSize_InvalidSizeOfLottoNumbers_InvalidLottoTicketExceptionThrown() {
-		List<LottoNumber> value = LottoNumberFactory.generate(1, 2, 3, 4, 5);
+		List<LottoNumber> value = LottoNumberCache.asLottoNumber(1, 2, 3, 4, 5);
 
 		assertThatThrownBy(() -> new LottoTicket(value))
 			.isInstanceOf(InvalidLottoTicketException.class)
@@ -40,7 +41,7 @@ class LottoTicketTest {
 
 	@Test
 	void validateDuplication_DuplicateExistLottoNumbers_InvalidLottoTicketExceptionThrown() {
-		List<LottoNumber> value = LottoNumberFactory.generate(1, 2, 3, 4, 5, 5);
+		List<LottoNumber> value = LottoNumberCache.asLottoNumber(1, 2, 3, 4, 5, 5);
 
 		assertThatThrownBy(() -> new LottoTicket(value))
 			.isInstanceOf(InvalidLottoTicketException.class)
@@ -58,7 +59,7 @@ class LottoTicketTest {
 	@ValueSource(ints = {1, 2, 3, 4, 5, 6})
 	void contains_ContainedLottoNumber_ReturnTrue(int value) {
 		LottoNumber lottoNumber = LottoNumber.valueOf(value);
-		List<LottoNumber> lottoNumbers = LottoNumberFactory.generate(1, 2, 3, 4, 5, 6);
+		List<LottoNumber> lottoNumbers = LottoNumberCache.asLottoNumber(1, 2, 3, 4, 5, 6);
 
 		assertThat(lottoNumbers.contains(lottoNumber)).isTrue();
 	}
@@ -67,7 +68,7 @@ class LottoTicketTest {
 	@ValueSource(ints = {7, 8, 9})
 	void contains_NotContainedLottoNumber_ReturnFalse(int value) {
 		LottoNumber lottoNumber = LottoNumber.valueOf(value);
-		List<LottoNumber> lottoNumbers = LottoNumberFactory.generate(1, 2, 3, 4, 5, 6);
+		List<LottoNumber> lottoNumbers = LottoNumberCache.asLottoNumber(1, 2, 3, 4, 5, 6);
 
 		assertThat(lottoNumbers.contains(lottoNumber)).isFalse();
 	}
@@ -82,4 +83,5 @@ class LottoTicketTest {
 		MatchCount expected = new MatchCount(4);
 		assertThat(actual).isEqualTo(expected);
 	}
+
 }
