@@ -1,9 +1,7 @@
 package lotto.domain;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Lotto {
     private Set<LottoNumber> lottoNumbers;
@@ -16,12 +14,6 @@ public class Lotto {
 
     public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
-    }
-
-    public static Lotto createWinningLotto(List<Integer> winningNumbers) {
-        return new Lotto(winningNumbers.stream()
-            .map(LottoNumber::new)
-            .collect(Collectors.toSet()));
     }
 
     int matchWinningNumbers(Lotto winningLotto) {

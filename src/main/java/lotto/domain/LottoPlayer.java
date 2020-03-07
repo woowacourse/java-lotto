@@ -1,5 +1,14 @@
 package lotto.domain;
 
-public class LottoPlayer {
+import java.util.List;
+import java.util.Set;
 
+public class LottoPlayer {
+    public static Lottos purchaseLottosManually(List<Set<LottoNumber>> lottoNumbersBasket) {
+        return LottosGenerator.generateManually(lottoNumbersBasket);
+    }
+
+    public static Lottos purchaseLottosAutomatically(Money purchaseAmount, int lottosManualSize) {
+        return LottosGenerator.generateAutomatically(purchaseAmount.toLottosSize() - lottosManualSize);
+    }
 }
