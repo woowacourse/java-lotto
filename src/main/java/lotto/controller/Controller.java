@@ -75,7 +75,7 @@ public class Controller {
 			List<String> manualInputs = new ArrayList<>();
 			prepareManualInputs(manualLottoMoney, manualInputs);
 
-			return ManualLottosFactory.of(manualInputs, manualLottoMoney);
+			return ManualLottosFactory.of(manualLottoMoney, manualInputs);
 		} catch (ManualLottosFactoryException | LottoException |
 				LottoNumberException e) {
 			OutputView.printWarningMessage(e.getMessage());

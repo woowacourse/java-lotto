@@ -6,6 +6,7 @@ import lotto.domain.Lottos;
 import lotto.exceptions.ManualLottosFactoryException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ManualLottosFactory implements LottosFactory {
@@ -15,8 +16,12 @@ public class ManualLottosFactory implements LottosFactory {
 		this.lottos = lottos;
 	}
 
-	public static ManualLottosFactory of(List<String> strings, LottoMoney lottoMoney) {
-		checkLottosSizeIsValid(strings, lottoMoney);
+	public static ManualLottosFactory of(LottoMoney lottoMoney, String... strings) {
+		return of(lottoMoney, Arrays.asList(strings));
+	}
+
+	public static ManualLottosFactory of(LottoMoney lottoMoney, List<String> strings) {
+		checkLottosSizeIsValid(lottoMoney, strings);
 
 		List<Lotto> manualLottos = new ArrayList<>();
 		for (String string : strings) {
@@ -25,7 +30,7 @@ public class ManualLottosFactory implements LottosFactory {
 		return new ManualLottosFactory(Lottos.of(manualLottos));
 	}
 
-	private static void checkLottosSizeIsValid(List<String> strings, LottoMoney lottoMoney) {
+	private static void checkLottosSizeIsValid(LottoMoney lottoMoney, List<String> strings) {
 		if (lottoMoney.canNotPurchase(strings.size())) {
 			throw new ManualLottosFactoryException();
 		}
@@ -35,4 +40,5 @@ public class ManualLottosFactory implements LottosFactory {
 	public Lottos create() {
 		return lottos;
 	}
+
 }
