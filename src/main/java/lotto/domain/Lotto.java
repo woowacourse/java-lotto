@@ -32,15 +32,6 @@ public class Lotto {
 		return new Lotto(lottoNumbers);
 	}
 
-	public static Lotto of(int... input) {
-		List<LottoNumber> lottoNumbers = Arrays.stream(input)
-				.boxed()
-				.map(LottoNumber::of)
-				.collect(Collectors.toUnmodifiableList());
-
-		return new Lotto(lottoNumbers);
-	}
-
 	public static Lotto of(final List<LottoNumber> input) {
 		return new Lotto(input);
 	}

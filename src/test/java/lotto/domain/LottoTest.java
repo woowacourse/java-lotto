@@ -4,8 +4,7 @@ import lotto.exceptions.LottoException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,13 +14,16 @@ import java.util.stream.Stream;
 public class LottoTest {
 	@Test
 	void Lotto() {
+		// given
+		String input = "1, 10, 3, 11, 5, 6";
+
 		// when
-		Lotto lotto = Lotto.of(1, 10, 3, 11, 5, 6);
+		Lotto lotto = Lotto.of(input);
 
 		// then
-		int[] sortedInput = {1, 3, 5, 6, 10, 11};
-		List<LottoNumber> expected = Arrays.stream(sortedInput)
-				.mapToObj(LottoNumber::of)
+		List<Integer> sortedInput = Arrays.asList(1, 3, 5, 6, 10, 11);
+		List<LottoNumber> expected = sortedInput.stream()
+				.map(LottoNumber::of)
 				.collect(Collectors.toList());
 
 		Assertions.assertThat(lotto.getLottoNumbers())
@@ -29,24 +31,19 @@ public class LottoTest {
 	}
 
 	@ParameterizedTest
-	@MethodSource("generateNotSizeSixInput")
-	void Lotto_NotSizeSix_ShouldThrowException(int[] input) {
+	@ValueSource(strings = {"1,2,3,4,5", "1,2,3,4,5,6,7"})
+	void Lotto_NotSizeSix_ShouldThrowException(String input) {
 		// then
 		Assertions.assertThatThrownBy(() -> {
 			// when
 			Lotto.of(input);
 		}).isInstanceOf(LottoException.class)
 				.hasMessageMatching(LottoException.MESSAGE);
-	}
-
-	static Stream<Arguments> generateNotSizeSixInput() {
-		return Stream.of(Arguments.of(new int[]{1, 2, 3, 4, 5}),
-				Arguments.of(new int[]{1, 2, 3, 4, 5, 6, 7}));
 	}
 
 	@ParameterizedTest
-	@MethodSource("generateDuplicatedInput")
-	void SerialLottoNumber_DuplicatedNumbers_ShouldThrowException(int[] input) {
+	@ValueSource(strings = {"1,2,3,4,4,5", "1,3,2,3,4,3", "1,2,3,1,2,3"})
+	void SerialLottoNumber_DuplicatedNumbers_ShouldThrowException(String input) {
 		// then
 		Assertions.assertThatThrownBy(() -> {
 
@@ -56,35 +53,18 @@ public class LottoTest {
 				.hasMessageMatching(LottoException.MESSAGE);
 	}
 
-	static Stream<Arguments> generateDuplicatedInput() {
-		return Stream.of(Arguments.of(new int[]{1, 2, 3, 4, 4, 5}),
-				Arguments.of(new int[]{1, 3, 2, 3, 4, 3}),
-				Arguments.of(new int[]{1, 2, 3, 1, 2, 3}));
-	}
-
 	@Test
-	void of_String() {
+	void getLottoNumbers() {
 		// given
 		String input = "1, 45, 3, 4, 5, 6";
 
 		// when
-		Lotto result = Lotto.of(input);
+		List<LottoNumber> result = Lotto.of(input).getLottoNumbers();
 
 		//then
-		Lotto expected = Lotto.of(1, 3, 4, 5, 6, 45);
-		Assertions.assertThat(result)
-				.isEqualTo(expected);
+		List<LottoNumber> expected = Stream.of(1, 3, 4, 5, 6, 45)
+				.map(LottoNumber::of)
+				.collect(Collectors.toUnmodifiableList());
+		Assertions.assertThat(result).isEqualTo(expected);
 	}
-
-	@Test
-	void of_Ints() {
-		// when
-		Lotto result = Lotto.of(1, 45, 3, 4, 5, 6);
-
-		//then
-		Lotto expected = Lotto.of(1, 3, 4, 5, 6, 45);
-		Assertions.assertThat(result)
-				.isEqualTo(expected);
-	}
-
 }

@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.exceptions.WinningLottoException;
+import lotto.utils.StringParser;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -36,7 +37,7 @@ public class WinningLottoTest {
 
 	@ParameterizedTest
 	@MethodSource("generateCountMatchingLottoNumbersInput")
-	void countMatchingLottoNumbers(int[] input, WinningType expected) {
+	void countMatchingLottoNumbers(String input, WinningType expected) {
 		// given
 		WinningLotto winningLotto = WinningLotto.of("1,2,3,4,5,6", 7);
 
@@ -51,13 +52,13 @@ public class WinningLottoTest {
 	}
 
 	static Stream<Arguments> generateCountMatchingLottoNumbersInput() {
-		return Stream.of(Arguments.of(new int[]{1, 2, 3, 4, 5, 6}, WinningType.FIRST_PLACE),
-				Arguments.of(new int[]{1, 2, 4, 5, 6, 7}, WinningType.SECOND_PLACE),
-				Arguments.of(new int[]{1, 2, 4, 5, 6, 45}, WinningType.THIRD_PLACE),
-				Arguments.of(new int[]{2, 3, 4, 5, 7, 44}, WinningType.FOURTH_PLACE),
-				Arguments.of(new int[]{3, 5, 6, 11, 14, 23}, WinningType.FIFTH_PLACE),
-				Arguments.of(new int[]{2, 3, 34, 45, 7, 37}, WinningType.NONE),
-				Arguments.of(new int[]{8, 9, 10, 11, 12, 13}, WinningType.NONE));
+		return Stream.of(Arguments.of("1, 2, 3, 4, 5, 6", WinningType.FIRST_PLACE),
+				Arguments.of("1, 2, 4, 5, 6, 7", WinningType.SECOND_PLACE),
+				Arguments.of("1, 2, 4, 5, 6, 45", WinningType.THIRD_PLACE),
+				Arguments.of("2, 3, 4, 5, 7, 44", WinningType.FOURTH_PLACE),
+				Arguments.of("3, 5, 6, 11, 14, 23", WinningType.FIFTH_PLACE),
+				Arguments.of("2, 3, 34, 45, 7, 37", WinningType.NONE),
+				Arguments.of("8, 9, 10, 11, 12, 13", WinningType.NONE));
 	}
 
 }

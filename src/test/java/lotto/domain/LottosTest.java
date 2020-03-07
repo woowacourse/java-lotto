@@ -9,50 +9,36 @@ import java.util.stream.Stream;
 
 class LottosTest {
 	@Test
-	void of_Strings() {
-		// given
-		String[] input = {"1, 10, 3, 11, 5, 6", "5, 10, 45, 3, 17, 2", "4, 7, 13, 19, 22, 37"};
-
-		// when
-		Lottos result = Lottos.of(input);
-
-		// then
-		List<Lotto> expected = Stream.of(input)
-				.map(Lotto::of)
-				.collect(Collectors.toUnmodifiableList());
-
-		Assertions.assertThat(result.getLottos())
-				.isEqualTo(expected);
-	}
-
-	@Test
 	void add() {
 		// given
-		Lottos lottos
-				= Lottos.of(
+		List<String> input1 = Arrays.asList(
 				"1,2,3,4,5,6",
 				"7,2,3,4,5,6",
 				"1,7,3,4,5,6",
 				"1,2,7,4,5,6");
-
-		Lottos lottos2
-				= Lottos.of(
+		List<String> input2 = Arrays.asList(
 				"1,2,3,4,7,6",
 				"1,2,3,4,5,7");
+
+		Lottos lottos1 = Lottos.of(input1.stream()
+				.map(Lotto::of)
+				.collect(Collectors.toUnmodifiableList()));
+		Lottos lottos2 = Lottos.of(input2.stream()
+				.map(Lotto::of)
+				.collect(Collectors.toUnmodifiableList()));
 
 		// when
 		Lottos result
-				= lottos.add(lottos2);
+				= lottos1.add(lottos2);
 
 		// then
-		Lottos expected
-				= Lottos.of(
-				"1,2,3,4,5,6",
-				"7,2,3,4,5,6",
-				"1,7,3,4,5,6",
-				"1,2,7,4,5,6",
-				"1,2,3,4,7,6",
-				"1,2,3,4,5,7");
+		List<String> merged = new ArrayList<>();
+		merged.addAll(input1);
+		merged.addAll(input2);
+
+		Lottos expected = Lottos.of(merged.stream()
+				.map(Lotto::of)
+				.collect(Collectors.toUnmodifiableList()));
 
 		Assertions.assertThat(result)
 				.isEqualTo(expected);

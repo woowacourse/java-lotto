@@ -14,14 +14,6 @@ public class Lottos {
 		this.lottos = lottos;
 	}
 
-	public static Lottos of(String... inputs) {
-		List<Lotto> purchasedLotto = Stream.of(inputs)
-				.map(Lotto::of)
-				.collect(Collectors.toUnmodifiableList());
-
-		return new Lottos(purchasedLotto);
-	}
-
 	public static Lottos of(List<Lotto> inputs) {
 		return new Lottos(inputs);
 	}
