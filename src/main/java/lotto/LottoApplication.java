@@ -1,10 +1,14 @@
 package lotto;
 
-import lotto.domain.LottoGame;
+import lotto.controller.LottoGame;
+import lotto.domain.NonPlayerCharacter;
+import lotto.domain.Player;
 
 public class LottoApplication {
     public static void main(String[] args) {
-        LottoGame lottoGame = new LottoGame();
+        NonPlayerCharacter nonPlayerCharacter = new NonPlayerCharacter();
+        Player player = new Player();
+        LottoGame lottoGame = new LottoGame(nonPlayerCharacter, player);
         try {
             lottoGame.play();
         } catch (RuntimeException e) {

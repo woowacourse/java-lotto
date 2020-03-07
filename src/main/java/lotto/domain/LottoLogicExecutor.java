@@ -2,9 +2,9 @@ package lotto.domain;
 
 import lotto.view.OutputView;
 
-class LottoLogicExecutor {
+public class LottoLogicExecutor {
 
-    static <T> T executeOrRepeatWithException(LottoLogic<T> lottoLogic) {
+    public static <T> T executeOrRepeatWithException(LottoLogic<T> lottoLogic) {
         try {
             return lottoLogic.work();
         } catch (IllegalArgumentException e) {

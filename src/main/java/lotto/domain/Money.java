@@ -16,7 +16,7 @@ public class Money {
         this.value = value;
     }
 
-    int toLottosSize() {
+    public int toLottosSize() {
         return this.value / PRICE;
     }
 

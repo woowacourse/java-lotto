@@ -1,5 +1,5 @@
 package lotto.domain;
 
-interface LottoLogic<V> {
+public interface LottoLogic<V> {
     V work();
 }

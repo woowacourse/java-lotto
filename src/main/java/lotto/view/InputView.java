@@ -34,7 +34,7 @@ public class InputView {
         }
     }
 
-    public static Integer inputNumberToBuyManually(Integer lottosSize) {
+    public static int inputNumberToBuyManually(Integer lottosSize) {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         try {
             int numberToBuyManually = StringUtils.parseInt(scanner.nextLine());
@@ -52,7 +52,7 @@ public class InputView {
         }
     }
 
-    public static List<Set<Integer>> inputManualLottos(int numberToBuy) {
+    public static List<Set<Integer>> inputnumbersBasketManually(int numberToBuy) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         List<Set<Integer>> lottoNumbersBasket = new ArrayList<>();
         try {
