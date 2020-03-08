@@ -42,7 +42,7 @@ public class Controller {
 			LottoMoney lottoMoney, LottoMoney manualLottoMoney) {
 		try {
 			return lottoMoney.subtract(manualLottoMoney);
-		} catch (PurchaseManualLottosException e) {
+		} catch (PurchaseLottoMoneyException e) {
 			return null;
 		}
 	}
@@ -110,7 +110,7 @@ public class Controller {
 
 		try {
 			return LottoMoney.ofLottoCount(manualLottoNumber);
-		} catch (PurchaseManualLottosException e) {
+		} catch (PurchaseLottoMoneyException e) {
 			OutputView.printWarningMessage(e.getMessage());
 			return null;
 		}

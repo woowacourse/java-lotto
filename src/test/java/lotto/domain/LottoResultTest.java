@@ -10,11 +10,11 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LottoResultTest {
-
 	@Test
 	void calculateEarningPercentage() {
 		// given
-		List<String> input = Arrays.asList("1,2,3,4,5,6",
+		List<String> input = Arrays.asList(
+				"1,2,3,4,5,6",
 				"1,2,3,4,5,7",
 				"8,9,10,11,12,13");
 

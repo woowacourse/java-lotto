@@ -11,7 +11,6 @@ class WinningTypeTest {
 			"5,true,SECOND_PLACE", "6,false,FIRST_PLACE", "6,true,FIRST_PLACE",
 			"2,false,NONE", "0,false,NONE"})
 	void getWinningType(int sameNumberCount, boolean bonus, String expected) {
-
 		// when
 		WinningType result = WinningType.getWinningType(sameNumberCount, bonus);
 

@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.exceptions.PurchaseManualLottosException;
+import lotto.exceptions.PurchaseLottoMoneyException;
 import lotto.exceptions.LottoMoneyException;
 
 import java.util.Objects;
@@ -26,7 +26,7 @@ public class LottoMoney {
 		try {
 			return new LottoMoney(LOTTO_PRICE * count);
 		} catch (LottoMoneyException e) {
-			throw new PurchaseManualLottosException();
+			throw new PurchaseLottoMoneyException();
 		}
 	}
 
@@ -46,7 +46,7 @@ public class LottoMoney {
 		try {
 			return new LottoMoney(purchaseMoney - other.purchaseMoney);
 		} catch (LottoMoneyException e) {
-			throw new PurchaseManualLottosException();
+			throw new PurchaseLottoMoneyException();
 		}
 	}
 
