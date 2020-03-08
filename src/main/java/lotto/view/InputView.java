@@ -29,6 +29,10 @@ public class InputView {
 		return scanner.nextLine();
 	}
 
+	public static String inputNextLine() {
+		return scanner.nextLine();
+	}
+
 	public static int inputBonusNumber() {
 		int bonusNumber;
 		do {
@@ -43,7 +47,25 @@ public class InputView {
 		try {
 			return Integer.parseInt(scanner.nextLine());
 		} catch (NumberFormatException e) {
-			return inputBonusNumber();
+			return INVALID_NUMBER;
+		}
+	}
+
+	public static int inputManualLottoNumber() {
+		int manualTicketNumber;
+		do {
+			manualTicketNumber = inputManualTicketNumberIfValid();
+		} while (manualTicketNumber == INVALID_NUMBER);
+
+		return manualTicketNumber;
+	}
+
+	private static int inputManualTicketNumberIfValid() {
+		System.out.println("수동으로 구매할 로또 수를 입력해주세요.");
+		try {
+			return Integer.parseInt(scanner.nextLine());
+		} catch (NumberFormatException e) {
+			return INVALID_NUMBER;
 		}
 	}
 }

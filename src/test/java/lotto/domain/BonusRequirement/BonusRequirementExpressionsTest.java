@@ -5,7 +5,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 class BonusRequirementExpressionsTest {
-
 	@ParameterizedTest
 	@CsvSource(value = {"true,true", "false,true"})
 	void isSatisfiedWhenNoMatter(boolean input, boolean expected) {

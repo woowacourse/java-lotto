@@ -9,15 +9,15 @@ public class LottoResult {
 
 	private final Map<WinningType, Integer> lottoResult;
 
-	public LottoResult(final Map<WinningType, Integer> lottoResult) {
+	private LottoResult(final Map<WinningType, Integer> lottoResult) {
 		this.lottoResult = lottoResult;
 	}
 
-	public static LottoResult of(PurchasedLottoTickets purchasedLottoTickets,
-								 WinningLottoNumbers winningLottoNumbers) {
+	public static LottoResult of(Lottos lottos,
+								 WinningLotto winningLotto) {
 		Map<WinningType, Integer> lottoResult = createDefaultMap();
 		List<WinningType> winningTypes =
-				purchasedLottoTickets.findMatchingWinningTypesWith(winningLottoNumbers);
+				lottos.findMatchingWinningTypesWith(winningLotto);
 
 		lottoResult.replaceAll((key, value) -> Collections.frequency(winningTypes, key));
 
@@ -32,13 +32,13 @@ public class LottoResult {
 		return lottoResult;
 	}
 
-	public double calculateEarningPercentage(PurchaseMoney purchaseMoney) {
+	public double calculateEarningPercentage(LottoMoney lottoMoney) {
 		double totalEarning = 0;
 		for (WinningType winningType : lottoResult.keySet()) {
 			totalEarning += winningType.calculateEarning(lottoResult.get(winningType));
 		}
 
-		return purchaseMoney.divideBy(totalEarning) * PERCENT_MULTIPLIER;
+		return lottoMoney.divideBy(totalEarning) * PERCENT_MULTIPLIER;
 	}
 
 	public Map<WinningType, Integer> getLottoResult() {
@@ -64,5 +64,12 @@ public class LottoResult {
 	@Override
 	public int hashCode() {
 		return Objects.hash(lottoResult);
+	}
+
+	@Override
+	public String toString() {
+		return "LottoResult{" +
+				"lottoResult=" + lottoResult +
+				'}';
 	}
 }

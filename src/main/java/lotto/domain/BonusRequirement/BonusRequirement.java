@@ -16,4 +16,5 @@ public enum BonusRequirement {
 	public boolean isSatisfiedBy(boolean bonus) {
 		return satisfyExpression.apply(bonus);
 	}
+
 }

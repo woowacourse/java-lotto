@@ -1,24 +1,41 @@
 package lotto.domain;
 
-import lotto.exceptions.LottoNumberIllegalArgumentException;
+import lotto.exceptions.LottoNumberException;
 
-import java.util.Objects;
+import java.util.*;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-	private static final int MIN = 1;
-	private static final int MAX = 45;
+	public static final int MIN = 1;
+	public static final int MAX = 45;
+	private static final Map<Integer, LottoNumber> cachedLottoNumbers;
+
+	static {
+		cachedLottoNumbers = new HashMap<>();
+		for (int i = MIN; i <= MAX; i++) {
+			cachedLottoNumbers.put(i, new LottoNumber(i));
+		}
+	}
 
 	private final int lottoNumber;
 
-	public LottoNumber(final int lottoNumber) throws LottoNumberIllegalArgumentException {
+	private LottoNumber(final int lottoNumber) {
 		checkIsWithinRange(lottoNumber);
 		this.lottoNumber = lottoNumber;
 	}
 
-	private void checkIsWithinRange(int number) {
+	public static LottoNumber of(final int lottoNumber) {
+		checkIsWithinRange(lottoNumber);
+		return cachedLottoNumbers.get(lottoNumber);
+	}
+
+	private static void checkIsWithinRange(int number) {
 		if (number < MIN || number > MAX) {
-			throw new LottoNumberIllegalArgumentException(number);
+			throw new LottoNumberException(number);
 		}
+	}
+
+	public int getLottoNumber() {
+		return lottoNumber;
 	}
 
 	@Override
