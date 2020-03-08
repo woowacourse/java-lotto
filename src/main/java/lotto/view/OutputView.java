@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoResult;
-import lotto.domain.LottoMoney;
-import lotto.domain.Lottos;
-import lotto.domain.WinningType;
+import lotto.domain.*;
 
 public class OutputView {
 	private static final String NEW_LINE = System.lineSeparator();
@@ -25,8 +22,10 @@ public class OutputView {
 
 		System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다.\n",
 				manual.size(), auto.size());
-		manual.getLottos().forEach(System.out::println);
-		auto.getLottos().forEach(System.out::println);
+		manual.getLottos().stream()
+				.map(Lotto::sorted).forEach(System.out::println);
+		auto.getLottos().stream()
+				.map(Lotto::sorted).forEach(System.out::println);
 	}
 
 	public static void printLottoResult(LottoResult lottoResult) {
