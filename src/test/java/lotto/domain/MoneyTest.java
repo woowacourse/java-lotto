@@ -53,4 +53,22 @@ class MoneyTest {
         //when & then
         assertThat(totalWinningMoney.toEarningRate(purchaseAmount)).isEqualTo(35);
     }
+
+    @Test
+    @DisplayName("더하기")
+    void add() {
+        Money first = new Money(100);
+        Money second = new Money(300);
+
+        assertThat(first.add(second)).isEqualTo(new Money(400));
+    }
+
+    @Test
+    @DisplayName("곱하기")
+    void multiply() {
+        Money first = new Money(100);
+        int size = 3;
+
+        assertThat(first.multiply(size)).isEqualTo(new Money(300));
+    }
 }

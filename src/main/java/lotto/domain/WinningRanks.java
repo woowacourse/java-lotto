@@ -37,4 +37,16 @@ public class WinningRanks {
         return totalWinningMoney;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WinningRanks that = (WinningRanks) o;
+        return Objects.equals(winningRanks, that.winningRanks);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(winningRanks);
+    }
 }

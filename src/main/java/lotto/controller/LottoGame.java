@@ -13,7 +13,7 @@ public class LottoGame {
     public void play() {
         Money purchaseAmount = inputPurchaseAmount();
         Lottos lottosManual = purchaseLottosManually(purchaseAmount);
-        Lottos lottosAutomatic = LottoPlayer.purchaseLottosAutomatically(purchaseAmount, lottosManual.size());
+        Lottos lottosAutomatic = LottosGenerator.generateAutomatically(purchaseAmount.toLottosSize() - lottosManual.size());
         OutputView.printLottos(lottosManual, lottosAutomatic);
         Result result = produceResult(purchaseAmount, lottosManual, lottosAutomatic);
         OutputView.printResult(result);
@@ -28,7 +28,7 @@ public class LottoGame {
         int numberToBuyLottoManually = InputViewExceptionHandler.handle(() -> InputView.inputNumberToBuyManually(purchaseAmount.toLottosSize()));
         List<Set<Integer>> numbersBasket = InputViewExceptionHandler.handle(() -> InputView.inputnumbersBasketManually(numberToBuyLottoManually));
         List<Set<LottoNumber>> lottoNumbersBasket = NonPlayerCharacter.translateToLottoNumbersBasket(numbersBasket);
-        return LottoPlayer.purchaseLottosManually(lottoNumbersBasket);
+        return LottosGenerator.generateManually(lottoNumbersBasket);
     }
 
     private Result produceResult(Money purchaseAmount, Lottos lottosManual, Lottos lottosAutomatic) {
