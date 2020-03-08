@@ -1,14 +1,18 @@
 package lotto.domain;
 
 import lotto.exceptions.LottoException;
+import lotto.utils.StringParser;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -20,9 +24,9 @@ public class LottoTest {
 		Lotto lotto = Lotto.of(input);
 
 		// then
-		List<LottoNumber> expected = sorted.stream()
+		Set<LottoNumber> expected = sorted.stream()
 				.map(LottoNumber::of)
-				.collect(Collectors.toList());
+				.collect(Collectors.toUnmodifiableSet());
 
 		Assertions.assertThat(lotto.getLottoNumbers())
 				.isEqualTo(expected);
@@ -59,5 +63,22 @@ public class LottoTest {
 			Lotto.of(input);
 		}).isInstanceOf(LottoException.class)
 				.hasMessageMatching(LottoException.MESSAGE);
+	}
+
+	@ParameterizedTest
+	@ValueSource(strings = {"6,5,4,3,2,1", "1,45,2,43,3,42", "1,2,3,45,34,23"})
+	void sorted(String input) {
+		// when
+		Lotto lotto = Lotto.of(input);
+		List<LottoNumber> result = lotto.sorted();
+
+		// then
+		List<LottoNumber> expected = StringParser.stringToIntegerList(input).stream()
+				.sorted()
+				.map(LottoNumber::of)
+				.collect(Collectors.toUnmodifiableList());
+
+		Assertions.assertThat(result)
+				.isEqualTo(expected);
 	}
 }

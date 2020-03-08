@@ -9,15 +9,12 @@ import java.util.stream.Collectors;
 public class Lotto {
 	public static final int LOTTO_TICKET_SIZE = 6;
 
-	private final List<LottoNumber> lottoNumbers;
+	private final Set<LottoNumber> lottoNumbers;
 
-	private Lotto(final List<LottoNumber> lottoNumbers) {
+	private Lotto(final Set<LottoNumber> lottoNumbers) {
 		checkIsSizeSix(lottoNumbers);
-		checkIsDuplicated(lottoNumbers);
 
-		this.lottoNumbers = lottoNumbers.stream()
-				.sorted(LottoNumber::compareTo)
-				.collect(Collectors.toUnmodifiableList());
+		this.lottoNumbers = lottoNumbers;
 	}
 
 	/**
@@ -25,25 +22,19 @@ public class Lotto {
 	 */
 	public static Lotto of(String input) {
 		List<Integer> integers = StringParser.stringToIntegerList(input);
-		List<LottoNumber> lottoNumbers = integers.stream()
+		Set<LottoNumber> lottoNumbers = integers.stream()
 				.map(LottoNumber::of)
-				.collect(Collectors.toUnmodifiableList());
+				.collect(Collectors.toUnmodifiableSet());
 
 		return new Lotto(lottoNumbers);
 	}
 
 	public static Lotto of(final List<LottoNumber> input) {
-		return new Lotto(input);
+		return new Lotto(input.stream()
+				.collect(Collectors.toUnmodifiableSet()));
 	}
 
-	private void checkIsDuplicated(List<LottoNumber> lottoNumbers) {
-		Set<LottoNumber> distinctLottoNumbers = new HashSet<>(lottoNumbers);
-		if (distinctLottoNumbers.size() != lottoNumbers.size()) {
-			throw new LottoException();
-		}
-	}
-
-	private void checkIsSizeSix(List<LottoNumber> lottoNumbers) {
+	private void checkIsSizeSix(Set<LottoNumber> lottoNumbers) {
 		if (lottoNumbers.size() != LOTTO_TICKET_SIZE) {
 			throw new LottoException();
 		}
@@ -59,8 +50,14 @@ public class Lotto {
 				.count();
 	}
 
-	public List<LottoNumber> getLottoNumbers() {
-		return Collections.unmodifiableList(lottoNumbers);
+	public List<LottoNumber> sorted() {
+		return lottoNumbers.stream()
+				.sorted()
+				.collect(Collectors.toUnmodifiableList());
+	}
+
+	public Set<LottoNumber> getLottoNumbers() {
+		return Collections.unmodifiableSet(lottoNumbers);
 	}
 
 	@Override
