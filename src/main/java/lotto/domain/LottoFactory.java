@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.view.InputView;
+
 import java.util.*;
 
 public class LottoFactory {
@@ -21,6 +23,18 @@ public class LottoFactory {
 
     public static LottoFactory getInstance() {
         return LottoFactoryHolder.instance;
+    }
+
+    static Set<LottoTicket> createLottoNumbers(int autoLottoTicketCounts, int manualLottoTicketCounts) {
+        Set<LottoTicket> lottoTickets = new HashSet<>();
+        for (int i = 0; i < autoLottoTicketCounts; i++) {
+            lottoTickets.add(new LottoTicket(LottoFactory.createRandomLottoNumbers()));
+        }
+        for (int i = 0; i < manualLottoTicketCounts; i++) {
+            Set<LottoNumber> manualLottoNumbers = LottoFactory.createManualLottoNumbers(InputView.inputManualLottoNumbers());
+            lottoTickets.add(new LottoTicket(manualLottoNumbers));
+        }
+        return lottoTickets;
     }
 
     static Set<LottoNumber> createRandomLottoNumbers() {
