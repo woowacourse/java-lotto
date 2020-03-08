@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Objects;
 
 public class Money {
+    static final String NEGATIVE_NOT_ALLOWED_ERROR = "음수는 입력할 수 없습니다";
     private static final int PRICE = 1_000;
     private static final int PERCENT = 100;
     private final int value;
@@ -16,14 +17,8 @@ public class Money {
         this.value = value;
     }
 
-    int toLottosSize() {
+    public int toLottosSize() {
         return this.value / PRICE;
-    }
-
-    private void validateMoney(int value) {
-        if (value <= 0) {
-            throw new IllegalArgumentException("음수는 입력할 수 없습니다");
-        }
     }
 
     Money add(Money money) {
@@ -32,6 +27,10 @@ public class Money {
 
     Money multiply(int size) {
         return new Money(this.value * size);
+    }
+
+    int toEarningRate(Money purchaseAmount) {
+        return (int) (((double) value / purchaseAmount.value) * PERCENT);
     }
 
     public int getValue() {
@@ -44,7 +43,7 @@ public class Money {
             return true;
         if (!(o instanceof Money))
             return false;
-        Money money = (Money)o;
+        Money money = (Money) o;
         return value == money.value;
     }
 
@@ -53,7 +52,9 @@ public class Money {
         return Objects.hash(value);
     }
 
-    int toEarningRate(Money purchaseAmount) {
-        return (int)(((double)value / purchaseAmount.value) * PERCENT);
+    private void validateMoney(int value) {
+        if (value <= 0) {
+             throw new IllegalArgumentException(NEGATIVE_NOT_ALLOWED_ERROR);
+        }
     }
 }

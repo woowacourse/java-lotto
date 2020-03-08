@@ -23,7 +23,7 @@ class MoneyTest {
         //when & then
         assertThatThrownBy(() -> new Money(value))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("음수는 입력할 수 없습니다");
+            .hasMessage(Money.NEGATIVE_NOT_ALLOWED_ERROR);
     }
 
     @Test
@@ -52,5 +52,23 @@ class MoneyTest {
         Money totalWinningMoney = new Money(5_000);
         //when & then
         assertThat(totalWinningMoney.toEarningRate(purchaseAmount)).isEqualTo(35);
+    }
+
+    @Test
+    @DisplayName("더하기")
+    void add() {
+        Money first = new Money(100);
+        Money second = new Money(300);
+
+        assertThat(first.add(second)).isEqualTo(new Money(400));
+    }
+
+    @Test
+    @DisplayName("곱하기")
+    void multiply() {
+        Money first = new Money(100);
+        int size = 3;
+
+        assertThat(first.multiply(size)).isEqualTo(new Money(300));
     }
 }

@@ -34,7 +34,7 @@ class LottoTest {
 
         assertThatThrownBy(() -> new Lotto(lottoNumbers))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("로또 번호의 개수는 6개여야 합니다");
+            .hasMessage(Lotto.LOTTO_NUMBERS_SIZE_ERROR);
     }
 
     @Test

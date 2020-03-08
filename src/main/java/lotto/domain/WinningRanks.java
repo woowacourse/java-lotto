@@ -1,12 +1,10 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class WinningRanks {
     private static final int WINNING_AMOUNT = 1;
-    // todo: 이게 무슨 의미인 지 조금 더 명확하면 좋겠다.
     private static final int DEFAULT_WINNING_TICKET_SIZE = 0;
     private Map<Rank, Integer> winningRanks;
 
@@ -21,7 +19,7 @@ public class WinningRanks {
     /* winningTicketSize은 각 Rank별 당첨된 티켓 수를 의미한다. */
     Map<Rank, Integer> addWinningRanks(Rank rank) {
         Integer winningTicketSize = winningRanks.get(rank);
-        if (winningTicketSize == null) {
+        if (Objects.isNull(winningTicketSize)) {
             winningTicketSize = DEFAULT_WINNING_TICKET_SIZE;
         }
 
@@ -39,4 +37,16 @@ public class WinningRanks {
         return totalWinningMoney;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WinningRanks that = (WinningRanks) o;
+        return Objects.equals(winningRanks, that.winningRanks);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(winningRanks);
+    }
 }

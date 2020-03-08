@@ -8,21 +8,29 @@ import java.util.Set;
 
 public class LottosGenerator {
     private static final List<LottoNumber> lottoNumbersInBox = LottoNumberBox.get();
-    static final int LOTTO_NUMBER_SIZE = 6;
+    private static final int LOTTO_NUMBER_SIZE = 6;
     private static final int ONE = 1;
 
-    static List<Lotto> generate(int lottosSize) {
+    public static Lottos generateAutomatically(int lottosSize) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottosSize; i++) {
-            Set<LottoNumber> lottoNumbers = generateLottoNumbers();
+            Set<LottoNumber> lottoNumbers = generateLottoNumbersAutomatically();
             lottos.add(new Lotto(lottoNumbers));
         }
-        return lottos;
+        return new Lottos(lottos);
     }
 
-    private static Set<LottoNumber> generateLottoNumbers() {
+    public static Lottos generateManually(List<Set<LottoNumber>> lottoNumbersBasket) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (Set<LottoNumber> lottoNumbers : lottoNumbersBasket) {
+            lottos.add(new Lotto(lottoNumbers));
+        }
+        return new Lottos(lottos);
+    }
+
+    private static Set<LottoNumber> generateLottoNumbersAutomatically() {
         Collections.shuffle(lottoNumbersInBox);
         return new HashSet<>(
-            Collections.unmodifiableCollection(lottoNumbersInBox.subList(ONE, ONE + LOTTO_NUMBER_SIZE)));
+                Collections.unmodifiableCollection(lottoNumbersInBox.subList(ONE, ONE + LOTTO_NUMBER_SIZE)));
     }
 }
