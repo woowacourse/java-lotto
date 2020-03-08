@@ -23,7 +23,7 @@ class MoneyTest {
         //when & then
         assertThatThrownBy(() -> new Money(value))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("음수는 입력할 수 없습니다");
+            .hasMessage(Money.NEGATIVE_NOT_ALLOWED_ERROR);
     }
 
     @Test

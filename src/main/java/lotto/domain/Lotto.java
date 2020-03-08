@@ -6,6 +6,7 @@ import java.util.Set;
 public class Lotto {
     private Set<LottoNumber> lottoNumbers;
     private static final int LOTTO_NUMBER_SIZE = 6;
+    static final String LOTTO_NUMBERS_SIZE_ERROR = String.format("로또 번호의 개수는 %d개여야 합니다", LOTTO_NUMBER_SIZE);
 
     Lotto(Set<LottoNumber> lottoNumbers) {
         validateLottoNumbers(lottoNumbers);
@@ -41,7 +42,7 @@ public class Lotto {
 
     private void validateLottoNumbers(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException(String.format("로또 번호의 개수는 %d개여야 합니다", LOTTO_NUMBER_SIZE));
+            throw new IllegalArgumentException(LOTTO_NUMBERS_SIZE_ERROR);
         }
     }
 }

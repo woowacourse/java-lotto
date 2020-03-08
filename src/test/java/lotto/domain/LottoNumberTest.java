@@ -21,6 +21,6 @@ class LottoNumberTest {
     void constructWithInvalidValue(int value) {
         assertThatThrownBy(() -> new LottoNumber(value))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("유효하지 않은 로또 번호입니다");
+            .hasMessage(LottoNumber.INVALID_LOTTO_NUMBER_ERROR);
     }
 }

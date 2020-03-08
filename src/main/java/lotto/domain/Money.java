@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Objects;
 
 public class Money {
+    static final String NEGATIVE_NOT_ALLOWED_ERROR = "음수는 입력할 수 없습니다";
     private static final int PRICE = 1_000;
     private static final int PERCENT = 100;
     private final int value;
@@ -53,7 +54,7 @@ public class Money {
 
     private void validateMoney(int value) {
         if (value <= 0) {
-             throw new IllegalArgumentException("음수는 입력할 수 없습니다");
+             throw new IllegalArgumentException(NEGATIVE_NOT_ALLOWED_ERROR);
         }
     }
 }

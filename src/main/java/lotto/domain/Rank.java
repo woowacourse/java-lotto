@@ -9,6 +9,7 @@ public enum Rank {
     FOURTH(4, new Money(50_000)),
     FIFTH(3, new Money(5_000));
 
+    static final String RANK_NOT_FOUND_ERROR = "당첨된 갯수에 해당하는 순위가 없습니다.";
     private int matchNumber;
     private Money winningMoney;
 
@@ -38,7 +39,7 @@ public enum Rank {
             .filter(rank -> !SECOND.equals(rank))
             .filter(rank -> rank.isSameMatchNumber(matchNumber))
             .findAny()
-            .orElseThrow(() -> new IllegalArgumentException("당첨된 갯수에 해당하는 순위가 없습니다."));
+            .orElseThrow(() -> new IllegalArgumentException(RANK_NOT_FOUND_ERROR));
     }
 
     private boolean isSameMatchNumber(int matchNumber) {
