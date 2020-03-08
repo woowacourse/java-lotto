@@ -9,7 +9,6 @@ import lotto.view.InputViewExceptionHandler;
 import lotto.view.OutputView;
 
 public class LottoGame {
-
     public void play() {
         Money purchaseAmount = inputPurchaseAmount();
         Lottos lottosManual = purchaseLottosManually(purchaseAmount);

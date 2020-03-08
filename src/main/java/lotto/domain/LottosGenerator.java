@@ -20,17 +20,17 @@ public class LottosGenerator {
         return new Lottos(lottos);
     }
 
-    private static Set<LottoNumber> generateLottoNumbersAutomatically() {
-        Collections.shuffle(lottoNumbersInBox);
-        return new HashSet<>(
-                Collections.unmodifiableCollection(lottoNumbersInBox.subList(ONE, ONE + LOTTO_NUMBER_SIZE)));
-    }
-
     public static Lottos generateManually(List<Set<LottoNumber>> lottoNumbersBasket) {
         List<Lotto> lottos = new ArrayList<>();
         for (Set<LottoNumber> lottoNumbers : lottoNumbersBasket) {
             lottos.add(new Lotto(lottoNumbers));
         }
         return new Lottos(lottos);
+    }
+
+    private static Set<LottoNumber> generateLottoNumbersAutomatically() {
+        Collections.shuffle(lottoNumbersInBox);
+        return new HashSet<>(
+                Collections.unmodifiableCollection(lottoNumbersInBox.subList(ONE, ONE + LOTTO_NUMBER_SIZE)));
     }
 }
