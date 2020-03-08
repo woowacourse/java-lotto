@@ -23,17 +23,21 @@ public class LottoTicketTest {
         lottoNumbers.add(3);
         lottoNumbers.add(4);
         lottoNumbers.add(5);
-        assertThatCode(() -> new LottoTicket(LottoFactory.createRandomLottoNumbers()))
+        RandomLottoGenerator randomLottoGenerator = new RandomLottoGenerator();
+        ManualLottoGenerator manualLottoGenerator = new ManualLottoGenerator(lottoNumbers);
+        assertThatCode(() -> new LottoTicket(randomLottoGenerator.generateNumbers()))
                 .doesNotThrowAnyException();
-        assertThatThrownBy(() -> new LottoTicket(LottoFactory.createManualLottoNumbers(lottoNumbers)))
+        assertThatThrownBy(() -> new LottoTicket(manualLottoGenerator.generateNumbers()))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     @DisplayName("두 로또를 비교해 맞은 개수 반환 테스트")
     void countSameNumbers() {
-        LottoTicket lotto = new LottoTicket(LottoFactory.createManualLottoNumbers(Splitter.splitInput("1,2,3,4,5,6")));
-        LottoTicket lottoToCompare = new LottoTicket(LottoFactory.createManualLottoNumbers(Splitter.splitInput("1,2,3,4,10,8")));
+        ManualLottoGenerator manualLottoGenerator1 = new ManualLottoGenerator(Splitter.splitInput("1,2,3,4,5,6"));
+        ManualLottoGenerator manualLottoGenerator2 = new ManualLottoGenerator(Splitter.splitInput("1,2,3,4,10,8"));
+        LottoTicket lotto = new LottoTicket(manualLottoGenerator1.generateNumbers());
+        LottoTicket lottoToCompare = new LottoTicket(manualLottoGenerator2.generateNumbers());
         assertThat(lotto.countSameNumbers(lottoToCompare)).isEqualTo(4);
     }
 

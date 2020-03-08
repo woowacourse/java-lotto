@@ -31,7 +31,7 @@ public class InputView {
         return inputNumber();
     }
 
-    private static int inputNumber() {
+    static int inputNumber() {
         int number;
         try {
             number = Integer.parseInt(SCANNER.nextLine());
@@ -42,17 +42,15 @@ public class InputView {
         return number;
     }
 
-    public static List<Integer> inputWinningLottoNumbers() {
+    public static void inputWinningLottoNumbers() {
         System.out.println(INPUT_WINNING_LOTTO_NUMBER_MESSAGE);
-        return inputLottoNumbers();
     }
 
-    public static List<Integer> inputManualLottoNumbers() {
+    public static void inputManualLottoNumbers() {
         System.out.println(INPUT_MANUAL_LOTTO_NUMBER_MESSAGE);
-        return inputLottoNumbers();
     }
 
-    private static List<Integer> inputLottoNumbers() {
+    public static List<Integer> inputLottoNumbers() {
         String input = SCANNER.nextLine();
         System.out.println();
         return Splitter.splitInput(input);

@@ -32,18 +32,25 @@ public class LottoResultTest {
 
     @BeforeEach
     void setLottoTicket() {
-        lottoTickets.add(new LottoTicket(LottoFactory.createManualLottoNumbers(Splitter.splitInput("1,2,3,4,5,6"))));
-        lottoTickets.add(new LottoTicket(LottoFactory.createManualLottoNumbers(Splitter.splitInput("1,2,3,4,5,7"))));
-        lottoTickets.add(new LottoTicket(LottoFactory.createManualLottoNumbers(Splitter.splitInput("1,2,3,4,5,8"))));
-        lottoTickets.add(new LottoTicket(LottoFactory.createManualLottoNumbers(Splitter.splitInput("1,2,3,7,8,9"))));
-        lottoTickets.add(new LottoTicket(LottoFactory.createManualLottoNumbers(Splitter.splitInput("1,21,11,12,13,14"))));
+        String[] inputs = new String[]{"1,2,3,4,5,6", "1,2,3,4,5,7", "1,2,3,4,5,8", "1,2,3,7,8,9", "1,21,11,12,13,14"};
+        for (String input : inputs) {
+            ManualLottoGenerator manualLottoGenerator = new ManualLottoGenerator(Splitter.splitInput(input));
+            lottoTickets.add(new LottoTicket(manualLottoGenerator.generateNumbers()));
+        }
+//        ManualLottoGenerator manualLottoGenerator = new ManualLottoGenerator(Splitter.splitInput("1,2,3,4,5,6"));
+//        lottoTickets.add(new LottoTicket()LottoGenerator.createManualLottoNumbers(Splitter.splitInput("1,2,3,4,5,6"))));
+//        lottoTickets.add(new LottoTicket(LottoGenerator.createManualLottoNumbers(Splitter.splitInput("1,2,3,4,5,7"))));
+//        lottoTickets.add(new LottoTicket(LottoGenerator.createManualLottoNumbers(Splitter.splitInput("1,2,3,4,5,8"))));
+//        lottoTickets.add(new LottoTicket(LottoGenerator.createManualLottoNumbers(Splitter.splitInput("1,2,3,7,8,9"))));
+//        lottoTickets.add(new LottoTicket(LottoGenerator.createManualLottoNumbers(Splitter.splitInput("1,21,11,12,13,14"))));
     }
 
     @ParameterizedTest
     @CsvSource(value = {"'FIRST'", "SECOND", "THIRD", "FIFTH", "ZERO"})
     @DisplayName("맞은 번호 개수에 따른 등수 계산")
     void analyzeRank(WinningValue rank) {
-        WinningLotto winningLotto = new WinningLotto(LottoFactory.createManualLottoNumbers(lottoNumbers), 7);
+        ManualLottoGenerator manualLottoGenerator = new ManualLottoGenerator(lottoNumbers);
+        WinningLotto winningLotto = new WinningLotto(manualLottoGenerator.generateNumbers(), 7);
         lottoResult.analyzeRank(lottoTickets, winningLotto);
         assertThat(lottoResult.getLottoResult().get(rank)).isEqualTo(1);
     }
@@ -51,7 +58,8 @@ public class LottoResultTest {
     @Test
     @DisplayName("수익률 계산")
     void calculateRewardRate() {
-        WinningLotto winningLotto = new WinningLotto(LottoFactory.createManualLottoNumbers(lottoNumbers), 7);
+        ManualLottoGenerator manualLottoGenerator = new ManualLottoGenerator(lottoNumbers);
+        WinningLotto winningLotto = new WinningLotto(manualLottoGenerator.generateNumbers(), 7);
         lottoResult.analyzeRank(lottoTickets, winningLotto);
         assertThat(lottoResult.calculateRewardRate(5000)).isEqualTo(40630100);
     }

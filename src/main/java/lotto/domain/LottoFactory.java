@@ -2,14 +2,17 @@ package lotto.domain;
 
 import lotto.view.InputView;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class LottoFactory {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
-    private static final int LOTTO_LENGTH = 6;
 
     private static List<LottoNumber> lottoNumbers = new ArrayList<>();
+    private static final RandomLottoGenerator randomLottoGenerator = new RandomLottoGenerator();
 
     private LottoFactory() {
         for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
@@ -25,34 +28,21 @@ public class LottoFactory {
         return LottoFactoryHolder.instance;
     }
 
-    static Set<LottoTicket> createLottoNumbers(int autoLottoTicketCounts, int manualLottoTicketCounts) {
+    public static Set<LottoTicket> createLottoNumbers(int autoLottoTicketCounts, int manualLottoTicketCounts) {
         Set<LottoTicket> lottoTickets = new HashSet<>();
         for (int i = 0; i < autoLottoTicketCounts; i++) {
-            lottoTickets.add(new LottoTicket(LottoFactory.createRandomLottoNumbers()));
+            lottoTickets.add(new LottoTicket(randomLottoGenerator.generateNumbers()));
         }
         for (int i = 0; i < manualLottoTicketCounts; i++) {
-            Set<LottoNumber> manualLottoNumbers = LottoFactory.createManualLottoNumbers(InputView.inputManualLottoNumbers());
+            InputView.inputManualLottoNumbers();
+            ManualLottoGenerator manualLottoGenerator = new ManualLottoGenerator(InputView.inputLottoNumbers());
+            Set<LottoNumber> manualLottoNumbers = manualLottoGenerator.generateNumbers();
             lottoTickets.add(new LottoTicket(manualLottoNumbers));
         }
         return lottoTickets;
     }
 
-    static Set<LottoNumber> createRandomLottoNumbers() {
-        Set<LottoNumber> lotto = new HashSet<>();
-        Collections.shuffle(lottoNumbers);
-        for (int i = 0; i < LOTTO_LENGTH; i++) {
-            lotto.add(lottoNumbers.get(i));
-        }
-        return lotto;
-    }
-
-    public static Set<LottoNumber> createManualLottoNumbers(List<Integer> manualLottoNumbers) {
-        Set<Integer> duplicationManualLottoNumbers = new HashSet<>(manualLottoNumbers);
-        Set<LottoNumber> lotto = new HashSet<>();
-
-        for (Integer duplicationManualLottoNumber : duplicationManualLottoNumbers) {
-            lotto.add(new LottoNumber(duplicationManualLottoNumber));
-        }
-        return lotto;
+    static List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 }

@@ -25,7 +25,9 @@ public class LottoController {
     }
 
     private void drawLotto() {
-        WinningLotto winningLotto = new WinningLotto(LottoFactory.createManualLottoNumbers(InputView.inputWinningLottoNumbers()), InputView.inputBonus());
+        InputView.inputWinningLottoNumbers();
+        ManualLottoGenerator manualLottoGenerator = new ManualLottoGenerator(InputView.inputLottoNumbers());
+        WinningLotto winningLotto = new WinningLotto(manualLottoGenerator.generateNumbers(), InputView.inputBonus());
         this.lottoResult.analyzeRank(this.lotto.getIssuedLottoTicket(), winningLotto);
     }
 
