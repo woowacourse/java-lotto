@@ -3,14 +3,17 @@ package domain;
 import java.util.HashMap;
 import java.util.Map;
 
-public class WinningCalculator {
+public class LottoResult {
     private static final int INITIAL_COUNT = 0;
     private static final int HAS_BONUS = 5;
 
     private Map<PrizeType, Integer> prizeInfo;
+    private ProfitPercent profitPercent;
 
-    public WinningCalculator() {
+    public LottoResult(LottoTickets lottoTickets, WinningLottoTicket winningLottoTicket, Money money) {
         initializePrizeInfo();
+        calculateWinningCount(lottoTickets, winningLottoTicket);
+        calculateProfitPercent(money);
     }
 
     private void initializePrizeInfo() {
@@ -22,7 +25,7 @@ public class WinningCalculator {
         this.prizeInfo.put(PrizeType.SIX, INITIAL_COUNT);
     }
 
-    public void calculateWinningCount(LottoTickets lottoTickets, WinningLottoTicket winningLottoTicket) {
+    private void calculateWinningCount(LottoTickets lottoTickets, WinningLottoTicket winningLottoTicket) {
         countWinningLottoNumber(lottoTickets, winningLottoTicket);
     }
 
@@ -65,7 +68,19 @@ public class WinningCalculator {
         this.prizeInfo.put(prizeType, originalPrizeCount + 1);
     }
 
+    private void calculateProfitPercent(Money money) {
+        int totalPrizeMoney = 0;
+        for (PrizeType prizeType : PrizeType.values()) {
+            totalPrizeMoney = totalPrizeMoney + prizeType.calculatePrizeMoney(getPrizeTypeValue(prizeType));
+        }
+        this.profitPercent = new ProfitPercent(money, totalPrizeMoney);
+    }
+
     public int getPrizeTypeValue(PrizeType prizeType) {
         return this.prizeInfo.get(prizeType);
+    }
+
+    public int getProfitPercent() {
+        return this.profitPercent.getProfitPercent();
     }
 }

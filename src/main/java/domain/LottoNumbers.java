@@ -8,7 +8,7 @@ public class LottoNumbers {
     private static final int MAX_LOTTO_NUMBER = 45;
 
     private static List<LottoNumber> lottoNumbers;
-    
+
     static {
         lottoNumbers = new ArrayList<>();
         for (int i = 1; i <= MAX_LOTTO_NUMBER; i++) {
@@ -18,6 +18,13 @@ public class LottoNumbers {
 
     public static void shuffleLottoNumbers() {
         Collections.shuffle(lottoNumbers);
+    }
+
+    public static LottoNumber getLottoNumber(int number) {
+        return lottoNumbers.stream()
+                .filter(ln -> ln.isSameLottoNumber(number))
+                .findFirst()
+                .orElseThrow(() -> new NumberFormatException());
     }
 
     public static List<LottoNumber> getInstance() {

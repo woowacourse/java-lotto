@@ -6,18 +6,21 @@ import view.OutputViewer;
 public class LottoApplication {
     public static void main(String[] args) {
         Money money = LottoController.getMoney(InputViewer.inputMoney());
-        OutputViewer.printLottoTicketsCount(money);
+        int allLottoTicketCount = money.getLottoTicketCount();
 
-        LottoTickets lottoTickets = new LottoTickets(LottoTicketsGenerator.generateLottoTickets(
-                money.getLottoTicketCount()));
+        ManualLottoTicketCount manualLottoTicketCount = LottoController.getManualLottoTicketCount(allLottoTicketCount,
+                InputViewer.inputManualLottoCount());
+        int manualLottoTicketCounts = manualLottoTicketCount.getManualLottoTicketCount();
+        int autoLottoTicketCount = allLottoTicketCount - manualLottoTicketCounts;
+
+        LottoTickets lottoTickets = LottoController.getLottoTickets(manualLottoTicketCounts, autoLottoTicketCount);
+
+        OutputViewer.printLottoTicketsCount(manualLottoTicketCounts, autoLottoTicketCount);
         OutputViewer.printLottoTickets(lottoTickets);
 
-        WinningLottoTicket winningLottoTicket = LottoController.getWinningLottoTicket(
-                InputViewer.inputWinningLottoTicketNumber());
-        LottoController.getBonusBall(winningLottoTicket, InputViewer.inputBonusBallNumber());
+        WinningLottoTicket winningLottoTicket = LottoController.getWinningLottoTicket();
 
-        WinningCalculator winningCalculator = LottoController.calculateWinningLottoTicket(lottoTickets,
-                winningLottoTicket);
-        OutputViewer.printResult(money, winningCalculator);
+        LottoResult lottoResult = new LottoResult(lottoTickets, winningLottoTicket, money);
+        OutputViewer.printResult(lottoResult);
     }
 }

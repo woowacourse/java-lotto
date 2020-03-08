@@ -5,18 +5,30 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoNumbersTest {
-    @DisplayName("shuffle 기능 테스트")
+    @DisplayName("static 으로 생성한 숫자 풀의 유효성 검증")
     @Test
-    void shuffleLottoNumbersTest() {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
+    void validateLottoNumbersTest() {
+        List<LottoNumber> input = LottoNumbers.getInstance();
+        Collections.sort(input);
+
+        List<LottoNumber> expected = new ArrayList<>();
         for (int i = 1; i <= 45; i++) {
-            lottoNumbers.add(new LottoNumber(i));
+            expected.add(new LottoNumber(i));
         }
-        LottoNumbers.shuffleLottoNumbers();
-        boolean expected = lottoNumbers != LottoNumbers.getInstance();
-        Assertions.assertThat(expected).isTrue();
+
+        Assertions.assertThat(LottoNumbers.getInstance()).containsSequence(expected);
+    }
+
+    @DisplayName("입력한 숫자에 맞는 로또 넘버를 반환하는지 테스트")
+    @Test
+    void getLottoNumberTest() {
+        LottoNumber input = new LottoNumber(1);
+        LottoNumber expected = LottoNumbers.getLottoNumber(1);
+
+        Assertions.assertThat(input).isEqualTo(expected);
     }
 }

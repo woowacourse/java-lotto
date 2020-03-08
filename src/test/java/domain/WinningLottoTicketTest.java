@@ -1,27 +1,46 @@
 package domain;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class WinningLottoTicketTest {
-    @DisplayName("WinningLottoTicket 생성자에 잘못된 값을 넣은 경우 테스트")
-    @ParameterizedTest
-    @ValueSource(strings = {"", "1, 2, 3, 4, 5, f", "1, 2, 3, 4, 5     , ", "0, 2, 3, 4, 5, 46"})
-    void WinningLottoTicketConstructorWithInvalidInput(String input) {
+    private LottoTicket winningLottoTicket;
+
+    @BeforeEach
+    private void setUp() {
+        winningLottoTicket = new LottoTicket(new ArrayList(
+                Arrays.asList(
+                        new LottoNumber(1),
+                        new LottoNumber(2),
+                        new LottoNumber(3),
+                        new LottoNumber(4),
+                        new LottoNumber(5),
+                        new LottoNumber(6)
+                )
+        ));
+    }
+
+    @DisplayName("중복된 보너스 번호를 넣었을 때 예외 출력 테스트")
+    @Test
+    void WinningLottoTicketConstructorWithInvalidInput() {
+        LottoNumber bonusBall = LottoNumbers.getLottoNumber(6);
+
         Assertions.assertThatThrownBy(() -> {
-            new WinningLottoTicket(input);
+            new WinningLottoTicket(winningLottoTicket, bonusBall);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("BonusBall 초기화 테스트")
+    @DisplayName("WinningLottoTicket 에 정상적인 값을 넣었을 때 생성자 테스트")
     @Test
     void initializeBonusBallTest() {
-        WinningLottoTicket winningLottoTicket = new WinningLottoTicket("1, 2, 3, 4, 5, 6");
-        Assertions.assertThatThrownBy(() -> {
-            winningLottoTicket.initializeBonusBall(new LottoNumber(5));
-        }).isInstanceOf(IllegalArgumentException.class);
+        LottoNumber bonusBall = LottoNumbers.getLottoNumber(7);
+
+        Assertions.assertThat(new WinningLottoTicket(winningLottoTicket, bonusBall)).isInstanceOf(
+                WinningLottoTicket.class);
     }
 }

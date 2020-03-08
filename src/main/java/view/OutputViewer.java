@@ -10,9 +10,12 @@ public class OutputViewer {
         System.out.println(message);
     }
 
-    public static void printLottoTicketsCount(Money money) {
+    public static void printLottoTicketsCount(int manualLottoTicketCounts, int autoLottoTicketCount) {
         StringBuilder sb = new StringBuilder();
-        sb.append(money.toString());
+        sb.append("\n수동으로 ");
+        sb.append(Integer.toString(manualLottoTicketCounts));
+        sb.append("장, 자동으로 ");
+        sb.append(Integer.toString(autoLottoTicketCount));
         sb.append("개를 구매했습니다.");
         System.out.println(sb.toString());
     }
@@ -26,20 +29,19 @@ public class OutputViewer {
             sb.append("]");
             System.out.println(sb.toString());
         }
-        System.out.println();
     }
 
-    private static void printWinningResult(WinningCalculator winningCalculator) {
+    private static void printWinningResult(LottoResult lottoResult) {
         System.out.println();
         System.out.println("당첨 통계\n---------");
         for (PrizeType prizeType : PrizeType.values()) {
-            String winningResult = prizeType.getResultString(winningCalculator.getPrizeTypeValue(prizeType));
+            String winningResult = prizeType.getResultString(lottoResult.getPrizeTypeValue(prizeType));
             System.out.println(winningResult);
         }
     }
 
-    private static void printProfitPercent(Money money, WinningCalculator winningCalculator) {
-        String profitPercent = Integer.toString(ProfitCalculator.calculateProfit(money, winningCalculator));
+    private static void printProfitPercent(LottoResult lottoResult) {
+        String profitPercent = Integer.toString(lottoResult.getProfitPercent());
         StringBuilder sb = new StringBuilder();
         sb.append("총 수익률은 ");
         sb.append(profitPercent);
@@ -47,8 +49,8 @@ public class OutputViewer {
         System.out.println(sb.toString());
     }
 
-    public static void printResult(Money money, WinningCalculator winningCalculator) {
-        printWinningResult(winningCalculator);
-        printProfitPercent(money, winningCalculator);
+    public static void printResult(LottoResult lottoResult) {
+        printWinningResult(lottoResult);
+        printProfitPercent(lottoResult);
     }
 }
