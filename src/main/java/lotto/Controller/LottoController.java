@@ -6,9 +6,7 @@ import lotto.view.OutputView;
 
 public class LottoController {
     private Money money;
-    private LottoTicketCount ticketCount;
     private IssuedLottoTicket lotto;
-    private WinningLotto winningLotto;
     private LottoResult lottoResult = new LottoResult();
 
     public LottoController() {
@@ -16,25 +14,25 @@ public class LottoController {
     }
 
     public void run() {
-        buyLotto();
 
-        OutputView.printPurchaseCount(ticketCount.getAutoCount(), ticketCount.getManualCount());
-        OutputView.printLottoNumbers(lotto.getIssuedLottoTicket());
+        OutputView.printPurchaseCount(buyLotto());
+        OutputView.printLottoNumbers(this.lotto.getIssuedLottoTicket());
 
         drawLotto();
 
-        OutputView.printLottoResults(lottoResult.getLottoResult());
-        OutputView.printRewardRate(lottoResult.calculateRewardRate(money.getMoney()));
+        OutputView.printLottoResults(this.lottoResult.getLottoResult());
+        OutputView.printRewardRate(this.lottoResult.calculateRewardRate(this.money.getMoney()));
     }
 
     private void drawLotto() {
-        winningLotto = new WinningLotto(LottoFactory.createManualLottoNumbers(InputView.inputWinningLottoNumbers()), InputView.inputBonus());
-        lottoResult.analyzeRank(lotto.getIssuedLottoTicket(), winningLotto);
+        WinningLotto winningLotto = new WinningLotto(LottoFactory.createManualLottoNumbers(InputView.inputWinningLottoNumbers()), InputView.inputBonus());
+        this.lottoResult.analyzeRank(this.lotto.getIssuedLottoTicket(), winningLotto);
     }
 
-    private void buyLotto() {
-        money = new Money(InputView.inputMoney());
-        ticketCount = new LottoTicketCount(money.getMoney(), InputView.inputManualTicketNumber());
-        lotto = new IssuedLottoTicket(ticketCount.getAutoCount(), ticketCount.getManualCount());       //수동 구매 번호도 입력
+    private LottoTicketCount buyLotto() {
+        this.money = new Money(InputView.inputMoney());
+        LottoTicketCount ticketCount = new LottoTicketCount(this.money.getMoney(), InputView.inputManualTicketNumber());
+        this.lotto = new IssuedLottoTicket(ticketCount.getAutoCount(), ticketCount.getManualCount());       //수동 구매 번호도 입력
+        return ticketCount;
     }
 }

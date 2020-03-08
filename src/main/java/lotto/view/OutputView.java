@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoTicketCount;
 import lotto.domain.WinningValue;
 
 import java.util.ArrayList;
@@ -16,8 +17,9 @@ public class OutputView {
     private static final String REWARD_RATE_MESSAGE = "총 수익률은 %d";
     private static final String PERCENT_MESSAGE = "% 입니다.";
 
-    public static void printPurchaseCount(int autoCount, int manualCount) {
-        System.out.println(String.format(LOTTO_TICKET_BOUGHT_INFORMATION_MESSAGE, manualCount, autoCount));
+    public static void printPurchaseCount(LottoTicketCount lottoTicketCount) {
+        System.out.println(String
+                .format(LOTTO_TICKET_BOUGHT_INFORMATION_MESSAGE, lottoTicketCount.getManualCount(), lottoTicketCount.getAutoCount()));
     }
 
     public static void printLottoNumbers(Set<LottoTicket> lottoTickets) {
