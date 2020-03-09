@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.HashMap;
 import java.util.Map;
+import lotto.util.Money;
 
 /**
  * ResultStatistic 클래스

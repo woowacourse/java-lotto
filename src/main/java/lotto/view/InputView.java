@@ -1,5 +1,7 @@
 package lotto.view;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import lotto.util.StringUtils;
@@ -22,6 +24,27 @@ public class InputView {
         } catch (NumberFormatException e) {
             throw new NumberFormatException("금액은 정수여야 합니다.");
         }
+	}
+
+	public static int getManualLottoAmount() {
+		OutputView.askEnterManualLottoAmount();
+		try {
+			return Integer.parseInt(SCANNER.nextLine());
+		} catch (NumberFormatException e) {
+			throw new NumberFormatException("수동입력할 로또의 갯수는 정수여야 합니다.");
+		}
+	}
+
+
+	public static List<List<Integer>> getManualLottos(long manualLottoAmount) {
+		List<List<Integer>> lottos = new ArrayList<>();
+
+		OutputView.askEnterManualLottos();
+
+		for (int i = 0; i < manualLottoAmount; i++) {
+			lottos.add(StringUtils.splitIntoIntList(SCANNER.nextLine()));
+		}
+		return Collections.unmodifiableList(lottos);
 	}
 
 	public static List<Integer> getWinningLotto() {
