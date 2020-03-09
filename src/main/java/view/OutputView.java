@@ -5,7 +5,8 @@ import java.util.StringJoiner;
 
 import domain.GameResult;
 import domain.Lotto;
-import domain.LottoGame;
+import domain.LottoAmount;
+import domain.Lottos;
 import domain.Money;
 import domain.Rank;
 
@@ -14,9 +15,8 @@ public class OutputView {
 	private static final String PREFIX = "[";
 	private static final String SUFFIX = "]";
 
-	public static void printLottos(LottoGame lottoGame) {
-		List<Lotto> lottos = lottoGame.getLottos();
-		System.out.println(String.format("%d개를 구매했습니다.", lottos.size()));
+	public static void printLottos(Lottos lottoTickets) {
+		List<Lotto> lottos = lottoTickets.getLottos();
 		for (Lotto lotto : lottos) {
 			StringJoiner stringJoiner = new StringJoiner(DELIMITER, PREFIX, SUFFIX);
 			lotto.getNumbers()
@@ -32,15 +32,18 @@ public class OutputView {
 	public static void printStatistics(GameResult gameResult, Money purchaseMoney) {
 		System.out.println("당첨 통계");
 		System.out.println("-------");
-
 		for (Rank rank : Rank.values()) {
-			int matchedCount = rank.getMatchedCount();
+			String matchedCount = rank.getMessage();
 			Money winningMoney = rank.getWinningMoney();
 			int containingCount = gameResult.numberOfRank(rank);
 			System.out.println(
-				String.format("%d개 일치 (%.0f원) - %d개", matchedCount, winningMoney.getMoney(), containingCount));
+				String.format("%s (%.0f원) - %d개", matchedCount, winningMoney.getMoney(), containingCount));
 		}
-
 		System.out.println(String.format("총 수익률은 %.0f%%입니다.", gameResult.calculateProfit(purchaseMoney)));
+	}
+
+	public static void printAmount(LottoAmount lottoAmount) {
+		System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", lottoAmount.getSelfLottoAmount(),
+			lottoAmount.getAutoLottoAmount()));
 	}
 }

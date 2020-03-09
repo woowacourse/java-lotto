@@ -26,7 +26,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 	}
 
 	public static LottoNumber createNumber(int number) {
-		validate(number);
+		validateNumberRange(number);
 		return lottoNumbers.get(number - EXTRA_INDEX);
 	}
 
@@ -35,7 +35,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 		return createNumber(number);
 	}
 
-	private static void validate(int number) {
+	private static void validateNumberRange(int number) {
 		if (number < LOTTO_MINIMUM_NUMBER || number > LOTTO_MAXIMUM_NUMBER) {
 			throw new LottoNumberRangeException();
 		}

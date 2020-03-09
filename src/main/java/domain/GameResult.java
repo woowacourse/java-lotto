@@ -12,9 +12,9 @@ public class GameResult {
 		this.ranks = ranks;
 	}
 
-	public static GameResult create(LottoGame lottoGame) {
+	public static GameResult create(LottoManager lottoManager) {
 		Map<Rank, Integer> ranks = new HashMap<>();
-		lottoGame.addRanks(ranks);
+		lottoManager.addRanks(ranks);
 		return new GameResult(ranks);
 	}
 
@@ -24,10 +24,10 @@ public class GameResult {
 	}
 
 	public Money calculateResultMoney() {
-		return new Money(prizeMoneyCalculation());
+		return new Money(calculatePrizeMoney());
 	}
 
-	private double prizeMoneyCalculation() {
+	private double calculatePrizeMoney() {
 		return ranks.keySet()
 			.stream()
 			.mapToDouble(rank -> rank.totalMoneyByRank(ranks.get(rank)))

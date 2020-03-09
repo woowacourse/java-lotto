@@ -1,23 +1,36 @@
+import java.util.List;
+
 import domain.GameResult;
-import domain.LottoGame;
+import domain.Lotto;
+import domain.LottoAmount;
+import domain.LottoFactory;
+import domain.LottoManager;
+import domain.Lottos;
 import domain.Money;
+import domain.WinningLotto;
 import view.InputView;
 import view.OutputView;
 
 public class Main {
 	public static void main(String[] args) {
-		try {
-			Money purchaseMoney = new Money(InputView.inputPurchaseMoney());
-			LottoGame lottoGame = new LottoGame(purchaseMoney);
-			OutputView.printLottos(lottoGame);
+		Money purchaseMoney = new Money(InputView.inputPurchaseMoney());
+		LottoAmount lottoAmount = new LottoAmount(purchaseMoney, InputView.inputSelfNumberLottoAmount());
+		Lottos lottos = drawLottos(lottoAmount);
 
-			lottoGame.play(InputView.inputSixNumbers(),
-				InputView.inputBonusNumber());
-			GameResult gameResult = GameResult.create(lottoGame);
+		OutputView.printAmount(lottoAmount);
+		OutputView.printLottos(lottos);
 
-			OutputView.printStatistics(gameResult, purchaseMoney);
-		} catch (Exception e) {
-			OutputView.printErrorMessage(e.getMessage());
-		}
+		WinningLotto winningLotto = new WinningLotto(InputView.inputSixNumbers(), InputView.inputBonusNumber());
+		LottoManager lottoManager = new LottoManager(lottos, winningLotto);
+		GameResult gameResult = GameResult.create(lottoManager);
+
+		OutputView.printStatistics(gameResult, purchaseMoney);
+	}
+
+	private static Lottos drawLottos(LottoAmount lottoAmount) {
+		int autoLottoAmount = lottoAmount.getAutoLottoAmount();
+		List<Lotto> selfLottos = LottoFactory.createSelfLottos(InputView.inputSelfNumbers(lottoAmount));
+		List<Lotto> autoLottos = LottoFactory.createAutoLottos(autoLottoAmount);
+		return new Lottos(selfLottos, autoLottos);
 	}
 }

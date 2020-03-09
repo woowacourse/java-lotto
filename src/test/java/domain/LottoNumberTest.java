@@ -11,7 +11,7 @@ class LottoNumberTest {
 
 	@ParameterizedTest
 	@ValueSource(ints = {0, 46, 100})
-	void rangeValidate(int number) {
+	void createException(int number) {
 		assertThatThrownBy(() -> {
 			LottoNumber.createNumber(number);
 		}).isInstanceOf(LottoNumberRangeException.class)
