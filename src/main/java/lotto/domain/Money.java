@@ -1,9 +1,8 @@
 package lotto.domain;
 
 public class Money {
-    private static final int LOTTO_PRICE = 1_000;
-    private static final String LACK_OF_MONEY_MESSAGE = "돈이 부족해 로또를 살 수 없습니다.";
 
+    private static final int MIN_MONEY = 1000;
     private int money;
 
     public Money(int money) {
@@ -11,14 +10,10 @@ public class Money {
         this.money = money;
     }
 
-    void validateMoney(int money) {
-        if (money < LOTTO_PRICE) {
-            throw new IllegalArgumentException(LACK_OF_MONEY_MESSAGE);
+    private void validateMoney(int money) {
+        if (money < MIN_MONEY) {
+            throw new IllegalArgumentException("금액이 부족해 로또를 구매할 수 없습니다.");
         }
-    }
-
-    public int calculateLottoTicketCount() {
-        return money / LOTTO_PRICE;
     }
 
     public int getMoney() {

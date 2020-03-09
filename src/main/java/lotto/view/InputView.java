@@ -1,38 +1,58 @@
 package lotto.view;
 
-import java.util.InputMismatchException;
+import lotto.util.Splitter;
+
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
-    private static final String MONEY_INPUT_MESSAGE = "구입금액을 입력해주세요.";
-    private static final String INPUT_ERROR_MESSAGE = "문자가 입력되었습니다. 숫자를 입력해주세요.";
-    private static final String WINNING_LOTTO_NUMBER_INPUT_MESSAGE = "당첨번호를 입력해주세요.";
-    private static final String BONUS_NUMBER_INPUT_MESSAGE = "보너스 번호를 입력해주세요.";
 
     private static final Scanner SCANNER = new Scanner(System.in);
+    private static final String INPUT_MANUAL_LOTTO_NUMBER_MESSAGE = "수동으로 구매할 번호를 입력해주세요.";
+    private static final String INPUT_MONEY_MESSAGE = "구입금액을 입력해주세요.";
+    private static final String INPUT_MANUAL_LOTTO_COUNT_MESSAGE = "수동으로 구매할 로또 개수를 입력해주세요.";
+    private static final String INTEGER_INPUT_ERROR_MESSAGE = "공백을 포함한 문자가 입력되었습니다. 숫자만 입력해주세요.";
+    private static final String INPUT_WINNING_LOTTO_NUMBER_MESSAGE = "당첨 번호를 입력해주세요.";
+    private static final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해주세요.";
+
+
+    public static int inputManualTicketNumber() {
+        System.out.println(INPUT_MANUAL_LOTTO_COUNT_MESSAGE);
+        return inputNumber();
+    }
 
     public static int inputMoney() {
-        System.out.println(MONEY_INPUT_MESSAGE);
+        System.out.println(INPUT_MONEY_MESSAGE);
+        return inputNumber();
+    }
+
+    public static int inputBonus() {
+        System.out.println(INPUT_BONUS_NUMBER_MESSAGE);
+        return inputNumber();
+    }
+
+    static int inputNumber() {
+        int number;
         try {
-            return Integer.parseInt(SCANNER.nextLine());
+            number = Integer.parseInt(SCANNER.nextLine());
         } catch (NumberFormatException e) {
-            System.out.println(INPUT_ERROR_MESSAGE);
-            return inputMoney();
+            throw new NumberFormatException(INTEGER_INPUT_ERROR_MESSAGE);
         }
+        System.out.println();
+        return number;
     }
 
-    public static String inputWinningLottoNumbers() {
-        System.out.println(WINNING_LOTTO_NUMBER_INPUT_MESSAGE);
-        return SCANNER.nextLine();
+    public static void inputWinningLottoNumbers() {
+        System.out.println(INPUT_WINNING_LOTTO_NUMBER_MESSAGE);
     }
 
-    public static int inputBonusNumber() {
-        System.out.println(BONUS_NUMBER_INPUT_MESSAGE);
-        try {
-            return Integer.parseInt(SCANNER.nextLine());
-        } catch (InputMismatchException e) {
-            System.out.println(INPUT_ERROR_MESSAGE);
-            return inputBonusNumber();
-        }
+    public static void inputManualLottoNumbers() {
+        System.out.println(INPUT_MANUAL_LOTTO_NUMBER_MESSAGE);
+    }
+
+    public static List<Integer> inputLottoNumbers() {
+        String input = SCANNER.nextLine();
+        System.out.println();
+        return Splitter.splitInput(input);
     }
 }
