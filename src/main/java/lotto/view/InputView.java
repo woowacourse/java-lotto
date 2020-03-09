@@ -2,11 +2,11 @@ package lotto.view;
 
 import lotto.domain.exception.PurchaseMoneyLackException;
 import lotto.domain.number.LottoNumber;
+import lotto.domain.number.LottoRound;
+import lotto.domain.number.LottoRoundsGenerator;
 import lotto.domain.result.Money;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class InputView {
@@ -16,15 +16,17 @@ public class InputView {
     private static final String INPUT_WINNING_NUMBER_HEADER = "지난 주 당첨 번호를 입력해 주세요. \n당첨 번호 사이에 , 를 넣어주세요!";
     private static final String INPUT_BONUS_NUMBER_HEADER = "보너스 볼을 입력해 주세요.";
     private static final String NUMBER_FORMAT_MISMATCH_EXCEPTION_PREFIX_MESSAGE = "숫자를 입력해주세요.";
-    public static final String DELIMITER = ",";
+    static final String DELIMITER = ",";
     private static final String BLANK = " ";
     private static final String NO_BLANK = "";
+    private static final String INPUT_MANUAL_LOTTO_ELEMENTS_HEADER = "수동으로 구매할 번호를 입력해 주세요.";
+    private static final String INPUT_MANUAL_LOTTO_ROUNDS_HEADER = "수동으로 구매할 로또 수를 입력해 주세요.";
 
     public static Money inputPurchaseMoney() {
         try {
             System.out.println(INPUT_MONEY_MESSAGE);
             String input = SCANNER.nextLine();
-            return new Money(Integer.parseInt(input));
+            return new Money(Integer.parseInt(input), LottoRoundsGenerator.LOTTO_PRICE);
         } catch (NumberFormatException e) {
             System.out.println(INVALID_INTEGER_MESSAGE);
             return inputPurchaseMoney();
@@ -34,17 +36,54 @@ public class InputView {
         }
     }
 
-    public static List<LottoNumber> inputWinningNumbers() {
+    public static List<LottoRound> inputManualLottoRounds(Money money) {
+        int manualLottoSize = inputManualLottoSize(money);
+        List<LottoRound> lottoRounds = new ArrayList<>();
+        for (int i = 0; i < manualLottoSize; i++) {
+            LottoRound lottoRound = new LottoRound(inputManualLottoNumbers());
+            lottoRounds.add(lottoRound);
+        }
+        return Collections.unmodifiableList(lottoRounds);
+    }
+
+    private static int inputManualLottoSize(Money money) {
         try {
-            System.out.println(INPUT_WINNING_NUMBER_HEADER);
-            return Arrays.stream(deleteBlankAndSplit(SCANNER.nextLine()))
-                    .map(Integer::parseInt)
-                    .map(LottoNumber::of)
-                    .collect(Collectors.toList());
+            System.out.println(INPUT_MANUAL_LOTTO_ROUNDS_HEADER);
+            String input = SCANNER.nextLine();
+            int manualLottoSize = Integer.parseInt(input);
+            money.validateManualLottoMoney(manualLottoSize, LottoRoundsGenerator.LOTTO_PRICE);
+            return manualLottoSize;
+        } catch (NumberFormatException | PurchaseMoneyLackException e) {
+            System.out.println(e.getMessage());
+            return inputManualLottoSize(money);
+        }
+    }
+
+    private static List<LottoNumber> inputManualLottoNumbers() {
+        try {
+            System.out.println(INPUT_MANUAL_LOTTO_ELEMENTS_HEADER);
+            return inputLottoNumbers();
         } catch (NumberFormatException e) {
             System.out.println(NUMBER_FORMAT_MISMATCH_EXCEPTION_PREFIX_MESSAGE);
-            return inputWinningNumbers();
+            return inputManualLottoNumbers();
         }
+    }
+
+    public static List<LottoNumber> inputWinningLottoNumbers() {
+        try {
+            System.out.println(INPUT_WINNING_NUMBER_HEADER);
+            return inputLottoNumbers();
+        } catch (NumberFormatException e) {
+            System.out.println(NUMBER_FORMAT_MISMATCH_EXCEPTION_PREFIX_MESSAGE);
+            return inputWinningLottoNumbers();
+        }
+    }
+
+    private static List<LottoNumber> inputLottoNumbers() {
+        return Arrays.stream(deleteBlankAndSplit(SCANNER.nextLine()))
+                .map(Integer::parseInt)
+                .map(LottoNumber::of)
+                .collect(Collectors.toList());
     }
 
     public static LottoNumber inputBonusNumber() {

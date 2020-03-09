@@ -1,6 +1,8 @@
 package lotto.domain.number;
 
 import lotto.domain.result.GameResult;
+import lotto.domain.result.GameResults;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -11,32 +13,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoRoundsTest {
-    @Test
-    void 생성자에_Null_입력() {
-        assertThatThrownBy(() -> {
-            LottoRounds lottoRounds = new LottoRounds(null);
-        }).isInstanceOf(NullPointerException.class);
-    }
+    private static LottoRounds lottoRounds;
 
-    @Test
-    void 생성자에_empty_list_입력() {
-        assertThatThrownBy(() -> {
-            LottoRounds lottoRounds = new LottoRounds(Collections.emptyList());
-        }).isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
-    void 게임_결과_계산_및_출력() {
-        // given
-        List<LottoNumber> winningNumberArguments = new ArrayList(); // winningNumbers : 1,2,3,4,5,6
-        winningNumberArguments.add(LottoNumber.of(1));              // bonusNumber = 30
-        winningNumberArguments.add(LottoNumber.of(2));
-        winningNumberArguments.add(LottoNumber.of(3));
-        winningNumberArguments.add(LottoNumber.of(4));
-        winningNumberArguments.add(LottoNumber.of(5));
-        winningNumberArguments.add(LottoNumber.of(6));
-        WinningNumbers winningNumbers = new WinningNumbers(winningNumberArguments, LottoNumber.of(30));
-
+    @BeforeEach
+    void initialize() {
         List<LottoNumber> lottoRoundArguments1 = new ArrayList(); // lottoRound1 : 1,2,3,4,5,6
         lottoRoundArguments1.add(LottoNumber.of(1));
         lottoRoundArguments1.add(LottoNumber.of(2));
@@ -79,16 +59,93 @@ class LottoRoundsTest {
         lottoRoundArguments.add(lottoRound3);
         lottoRoundArguments.add(lottoRound4);
 
-        LottoRounds lottoRounds = new LottoRounds(lottoRoundArguments);
+        lottoRounds = new LottoRounds(lottoRoundArguments);
+    }
+    @Test
+    @SuppressWarnings("NonAsciiCharacters")
+    void 생성자에_Null_입력() {
+        assertThatThrownBy(() -> {
+            LottoRounds lottoRounds = new LottoRounds(null);
+        }).isInstanceOf(NullPointerException.class);
+    }
+
+    @Test
+    @SuppressWarnings("NonAsciiCharacters")
+    void 생성자에_empty_list_입력() {
+        assertThatThrownBy(() -> {
+            LottoRounds lottoRounds = new LottoRounds(Collections.emptyList());
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @SuppressWarnings("NonAsciiCharacters")
+    void 게임_결과_계산_및_출력() {
+        // given
+        List<LottoNumber> winningNumberArguments = new ArrayList(); // winningNumbers : 1,2,3,4,5,6
+        winningNumberArguments.add(LottoNumber.of(1));              // bonusNumber = 30
+        winningNumberArguments.add(LottoNumber.of(2));
+        winningNumberArguments.add(LottoNumber.of(3));
+        winningNumberArguments.add(LottoNumber.of(4));
+        winningNumberArguments.add(LottoNumber.of(5));
+        winningNumberArguments.add(LottoNumber.of(6));
+        WinningNumbers winningNumbers = new WinningNumbers(winningNumberArguments, LottoNumber.of(30));
+
         // when
-        List<GameResult> gameResults = lottoRounds.calculateGameResult(winningNumbers);
+        GameResults gameResults = lottoRounds.calculateGameResult(winningNumbers);
         List<GameResult> expected = new ArrayList<>();
         expected.add(GameResult.FIRST_RANK);
         expected.add(GameResult.SECOND_RANK);
         expected.add(GameResult.THIRD_RANK);
         expected.add(GameResult.NO_RANK);
         // then
-        assertThat(gameResults).hasSize(4);
-        assertThat(gameResults).isEqualTo(expected);
+        assertThat(gameResults.getGameResults()).hasSize(4);
+        assertThat(gameResults.getGameResults()).isEqualTo(expected);
+    }
+
+    @Test
+    void LottoRounds_합치기() {
+        // given
+        List<LottoNumber> anotherLottoRoundArguments1 = new ArrayList(); // lottoRound1 : 1,2,3,4,5,6
+        anotherLottoRoundArguments1.add(LottoNumber.of(1));
+        anotherLottoRoundArguments1.add(LottoNumber.of(2));
+        anotherLottoRoundArguments1.add(LottoNumber.of(3));
+        anotherLottoRoundArguments1.add(LottoNumber.of(4));
+        anotherLottoRoundArguments1.add(LottoNumber.of(5));
+        anotherLottoRoundArguments1.add(LottoNumber.of(6));
+        LottoRound anotherLottoRound1 = new LottoRound(anotherLottoRoundArguments1);
+
+        List<LottoNumber> anotherLottoRoundArguments2 = new ArrayList(); // lottoRound1 : 30,2,3,4,5,6
+        anotherLottoRoundArguments2.add(LottoNumber.of(30));
+        anotherLottoRoundArguments2.add(LottoNumber.of(2));
+        anotherLottoRoundArguments2.add(LottoNumber.of(3));
+        anotherLottoRoundArguments2.add(LottoNumber.of(4));
+        anotherLottoRoundArguments2.add(LottoNumber.of(5));
+        anotherLottoRoundArguments2.add(LottoNumber.of(6));
+        LottoRound anotherLottoRound2 = new LottoRound(anotherLottoRoundArguments2);
+
+        List<LottoNumber> anotherLottoRoundArguments3 = new ArrayList(); // lottoRound1 : 45,2,3,4,5,6
+        anotherLottoRoundArguments3.add(LottoNumber.of(45));
+        anotherLottoRoundArguments3.add(LottoNumber.of(2));
+        anotherLottoRoundArguments3.add(LottoNumber.of(3));
+        anotherLottoRoundArguments3.add(LottoNumber.of(4));
+        anotherLottoRoundArguments3.add(LottoNumber.of(5));
+        anotherLottoRoundArguments3.add(LottoNumber.of(6));
+        LottoRound anotherLottoRound3 = new LottoRound(anotherLottoRoundArguments3);
+
+        List<LottoRound> anotherLottoRoundArguments = new ArrayList<>();
+        anotherLottoRoundArguments.add(anotherLottoRound1);
+        anotherLottoRoundArguments.add(anotherLottoRound2);
+        anotherLottoRoundArguments.add(anotherLottoRound3);
+
+        LottoRounds anotherLottoRounds = new LottoRounds(anotherLottoRoundArguments);
+
+        // when
+        LottoRounds combinedLottoRounds = lottoRounds.combine(anotherLottoRounds);
+
+        // then
+        assertThat(combinedLottoRounds.getAllLottoNumbers()).contains(anotherLottoRound1);
+        assertThat(combinedLottoRounds.getAllLottoNumbers()).contains(anotherLottoRound2);
+        assertThat(combinedLottoRounds.getAllLottoNumbers()).contains(anotherLottoRound3);
+        assertThat(combinedLottoRounds.getAllLottoNumbers()).hasSize(7);
     }
 }

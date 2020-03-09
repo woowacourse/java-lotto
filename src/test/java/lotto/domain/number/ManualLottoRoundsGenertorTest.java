@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoRoundsGeneratorTest {
+class ManualLottoRoundsGenertorTest {
     private static final List<LottoRound> manualLottos = new ArrayList<>();
     private static LottoRound manualLottoRound1;
     private static LottoRound manualLottoRound2;
@@ -50,22 +50,14 @@ public class LottoRoundsGeneratorTest {
     }
 
     @Test
-    void 생성자() {
-        assertThat(LottoRoundsGenerator.createConfiguratedLottoRoundsGenerator(manualLottos))
-                .isInstanceOf(LottoRoundsGenerator.class);
-    }
-
-    @Test
-    void 로또_생성_test() {
+    void generate() {
         Money money = new Money(5000, LottoRoundsGenerator.LOTTO_PRICE);
-        LottoRoundsGenerator lottoRoundsGenerator =
-                LottoRoundsGenerator.createConfiguratedLottoRoundsGenerator(manualLottos);
-        LottoRounds result = lottoRoundsGenerator.generate(money);
+        ManualLottoRoundsGenertor manualLottoRoundsGenerator = new ManualLottoRoundsGenertor(manualLottos);
+        LottoRounds result = manualLottoRoundsGenerator.generate(money);
         assertThat(result.getAllLottoNumbers()).contains(
                 manualLottoRound1,
                 manualLottoRound2,
                 manualLottoRound3
         );
-        assertThat(result.getAllLottoNumbers()).hasSize(5);
     }
 }

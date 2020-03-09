@@ -5,31 +5,42 @@ import lotto.domain.exception.PurchaseMoneyLackException;
 import java.util.Objects;
 
 public class Money {
-    public static final int MULTIPLE_PERCENTAGE = 100;
-    public static final int TICKET_PRICE = 1_000;
     private static final String INVALID_PURCHASE_NUMBER_EXCEPTION_MESSAGE = "최소 구매 금액 이하의 입력이 들어왔습니다.";
+    private static final String INVALID_PURCAHSE_MANUAL_LOTTO_EXCEPTION_MESSAGE = "금액이 부족합니다.";
 
-    private final double money;
+    private double money;
 
-    public Money(double money) {
-        validateMoney(money);
+    public Money(double money, int lowerBound) {
+        validateMinimumMoney(money, lowerBound);
         this.money = money;
     }
 
-    private void validateMoney(double money) {
-        if (money < TICKET_PRICE) {
+    private void validateMinimumMoney(double money, int lowerBound) {
+        if (money < lowerBound) {
             throw new PurchaseMoneyLackException(INVALID_PURCHASE_NUMBER_EXCEPTION_MESSAGE);
         }
     }
 
-    public int calculateRound() {
-        return (int) money / TICKET_PRICE;
+    public void validateManualLottoMoney(int manualLottoSize, int lottoPrice) {
+        if (money < manualLottoSize * lottoPrice) {
+            throw new PurchaseMoneyLackException(INVALID_PURCAHSE_MANUAL_LOTTO_EXCEPTION_MESSAGE);
+        }
     }
 
-    public double calculateYield(GameResults gameResults) {
-        double purchaseMoney = money;
-        double benefit = gameResults.calculateBenefit();
-        return (benefit / purchaseMoney) * MULTIPLE_PERCENTAGE;
+    public int devide(int value) {
+        return (int) money / value;
+    }
+
+    public void subtract(double ticketPrice) {
+        this.money -= ticketPrice;
+    }
+
+    public boolean isSubtractable(int value) {
+        return money - value >= 0;
+    }
+
+    public double getMoney() {
+        return money;
     }
 
     @Override

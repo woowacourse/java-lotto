@@ -3,11 +3,7 @@ package lotto.domain.random;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.LottoRound;
 
-import java.util.List;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Collections;
-import java.util.ArrayList;
+import java.util.*;
 
 public class RandomNumberGenerator {
     private final List<LottoNumber> lottoNumberPool = new LinkedList<>();
@@ -18,7 +14,7 @@ public class RandomNumberGenerator {
         Collections.shuffle(lottoNumberPool);
     }
 
-    public LottoNumber generate() {
+    LottoNumber generate() {
         return lottoNumberPool.remove(0);
     }
 

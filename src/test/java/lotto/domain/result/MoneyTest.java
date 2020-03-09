@@ -1,20 +1,20 @@
 package lotto.domain.result;
 
+import lotto.domain.exception.PurchaseMoneyLackException;
+import lotto.domain.number.LottoRoundsGenerator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class MoneyTest {
     @Test
     @SuppressWarnings("NonAsciiCharacters")
     void 생성자테스트() {
-        assertThat(new Money(1000)).isInstanceOf(Money.class);
+        assertThat(new Money(1000, LottoRoundsGenerator.LOTTO_PRICE)).isInstanceOf(Money.class);
     }
 
     @ParameterizedTest
@@ -22,44 +22,46 @@ public class MoneyTest {
     @ValueSource(ints = {999, 0})
     void 최소_구매_금액보다_작은_입력의_생성자가_실행될_경우(int value) {
         Assertions.assertThatThrownBy(() -> {
-            Money money = new Money(value);
+            Money money = new Money(value, LottoRoundsGenerator.LOTTO_PRICE);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     @SuppressWarnings("NonAsciiCharacters")
-    void 수익률_계산하기() {
-        Money money = new Money(7000);
-        // given
-        GameResult round1 = GameResult.FIRST_RANK; // 2000000000
-        GameResult round2 = GameResult.FIFTH_RANK; // 5000
-        GameResult round3 = GameResult.SECOND_RANK; // 30000000
-        GameResult round4 = GameResult.FIRST_RANK;// 2000000000
-        GameResult round5 = GameResult.NO_RANK; // 0
-        GameResult round6 = GameResult.NO_RANK; // 0
-        GameResult round7 = GameResult.FIRST_RANK;// 6030005000
-
-        List<GameResult> rounds = new ArrayList<>();
-        rounds.add(round1);
-        rounds.add(round2);
-        rounds.add(round3);
-        rounds.add(round4);
-        rounds.add(round5);
-        rounds.add(round6);
-        rounds.add(round7);
-        GameResults gameResults = new GameResults(rounds);
-        // when
-        double result = money.calculateYield(gameResults);
-        double sumOfBenefit = 6030005000.0;
-        // then
-        assertThat(result).isEqualTo((sumOfBenefit / (7 * Money.TICKET_PRICE)) * Money.MULTIPLE_PERCENTAGE);
+    void 나누기_테스트() {
+        Money money = new Money(9400, LottoRoundsGenerator.LOTTO_PRICE);
+        Assertions.assertThat(money.devide(LottoRoundsGenerator.LOTTO_PRICE))
+                .isEqualTo(9);
     }
 
     @Test
     @SuppressWarnings("NonAsciiCharacters")
-    void calculateRound_테스트() {
-        Money money = new Money(9400);
-        Assertions.assertThat(money.calculateRound())
-                .isEqualTo(9);
+    void 한_라운드마다_로또_티켓만큼의_값을_제거() {
+        Money money = new Money(5000, LottoRoundsGenerator.LOTTO_PRICE);
+        money.subtract(LottoRoundsGenerator.LOTTO_PRICE);
+        assertThat(money).extracting("money").isEqualTo(4000.0);
+    }
+
+    @Test
+    @SuppressWarnings("NonAsciiCharacters")
+    void 수동_로또_구매_금액_비교() {
+        assertThatThrownBy(() -> {
+            Money money = new Money(5000, LottoRoundsGenerator.LOTTO_PRICE);
+            money.validateManualLottoMoney(6, LottoRoundsGenerator.LOTTO_PRICE);
+        }).isInstanceOf(PurchaseMoneyLackException.class);
+    }
+
+    @Test
+    @SuppressWarnings("NonAsciiCharacters")
+    void 로또_금액_차감_가능_확인() {
+        Money money = new Money(1000, LottoRoundsGenerator.LOTTO_PRICE);
+        assertThat(money.isSubtractable(LottoRoundsGenerator.LOTTO_PRICE)).isTrue();
+    }
+
+    @Test
+    @SuppressWarnings("NonAsciiCharacters")
+    void 로또_금액_차감_불가능_확인() {
+        Money money = new Money(1000, LottoRoundsGenerator.LOTTO_PRICE);
+        assertThat(money.isSubtractable(1001)).isFalse();
     }
 }
