@@ -6,6 +6,8 @@ public class LottoController {
     public void startLotto() {
         lottos = new Lottos(LottoView.requestMoney());
         LottoView.buyLotto(lottos.getCount());
+        lottos.generateLottos();
+        LottoView.printLottos(lottos);
     }
 
 }
