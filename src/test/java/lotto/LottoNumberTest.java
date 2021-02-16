@@ -16,7 +16,7 @@ public class LottoNumberTest {
     }
 
     @Test
-    @DisplayName("로또 숫자는 1~45 사이의 숫자여야 한다.")
+    @DisplayName("로또 숫자는 1~45 사이의 숫자여야한다.")
     public void validateNumberTest() {
         assertThatThrownBy(() -> {
             new LottoNumber(46);
