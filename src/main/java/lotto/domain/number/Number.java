@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Number {
 
-    private int value;
+    private final int value;
 
     public Number(int value) {
         this.value = value;
