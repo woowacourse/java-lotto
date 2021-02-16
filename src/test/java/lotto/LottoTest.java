@@ -41,7 +41,7 @@ public class LottoTest {
     }
 
     @ParameterizedTest
-    @DisplayName("보너스볼 포함 여부 확")
+    @DisplayName("보너스볼 포함 여부 확인")
     @CsvSource(value = {"1:true", "7:false"}, delimiter = ':')
     void containBonusNumber(int input, boolean expected) {
         Lotto init = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
