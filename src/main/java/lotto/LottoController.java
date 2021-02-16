@@ -7,6 +7,7 @@ public class LottoController {
 
     public void generateLottos() {
         lottos = new Lottos(LottoView.requestMoney());
+        LottoView.buyLotto(lottos.getCount());
     }
 
 }
