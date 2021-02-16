@@ -9,6 +9,7 @@ public class Lotto {
     private static final int LENGTH = 6;
     private static final int NUMBER_MIN = 1;
     private static final int NUMBER_MAX = 45;
+    private static final int PRICE = 1000;
 
     private final List<Integer> lottoNumbers;
 
@@ -17,12 +18,15 @@ public class Lotto {
         this.lottoNumbers = new ArrayList(lottoNumbers);
     }
 
+    public static int calculateLottoNumber(Money money) {
+        return money.divide(PRICE);
+    }
+
     private void validateLottoNumbers(List<Integer> lottoNumbers) {
         validateDuplicatedLottoNumbers(lottoNumbers);
         validateLottoNumbersLength(lottoNumbers);
         validateLottoNumbersInRange(lottoNumbers);
     }
-
 
     private void validateDuplicatedLottoNumbers(List<Integer> lottoNumbers) {
         Set<Integer> distinctLottoNumbers = new HashSet(lottoNumbers);

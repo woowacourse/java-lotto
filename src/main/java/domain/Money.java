@@ -15,4 +15,12 @@ public class Money {
             throw new IllegalArgumentException("구입 금액은 0이상이어야 합니다.");
         }
     }
+
+    public int divide(int value) {
+        if (value <= 0) {
+            throw new IllegalArgumentException("0이하의 값으로 나눌 수 없습니다.");
+        }
+
+        return this.value / value;
+    }
 }

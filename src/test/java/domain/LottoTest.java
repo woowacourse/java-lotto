@@ -53,7 +53,7 @@ class LottoTest {
 
     @DisplayName("Lotto 번호가 유효 범위의 숫자가 아닌 경우")
     @Test
-    void generateWithLottoNumbersNotInRange(){
+    void generateWithLottoNumbersNotInRange() {
         //given
         List<Integer> lottoNumbers = Arrays.asList(1, -1, 3, 4, 5, 6);
 
@@ -61,4 +61,16 @@ class LottoTest {
         assertThatThrownBy(() -> new Lotto(lottoNumbers)).isInstanceOf(IllegalArgumentException.class);
     }
 
+    @DisplayName("구입금액에 따라 Lotto 개수를 반환하는 기능")
+    @Test
+    void calculateLottoNumber() {
+        //given
+        Money money = new Money(1_000);
+
+        //when
+        int lottoNumber = Lotto.calculateLottoNumber(money);
+
+        //then
+        assertThat(lottoNumber).isEqualTo(1);
+    }
 }
