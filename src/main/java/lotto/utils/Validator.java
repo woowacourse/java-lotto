@@ -13,6 +13,8 @@ public class Validator {
     private static final int LOTTO_TICKET_SIZE = 6;
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 49;
+    public static final Pattern NUMBER_PATTERN = Pattern.compile("^[0-9]*$");
+    public static final int MINIMUM_MONEY = 1000;
 
     private Validator() {
 
@@ -54,13 +56,13 @@ public class Validator {
 
     private static void validateMinimumMoney(String input) {
         int value = Integer.parseInt(input);
-        if (value < 1000) {
+        if (value < MINIMUM_MONEY) {
             throw new IllegalMoney();
         }
     }
 
     private static void validateNumberFormat(String input) {
-        if (!Pattern.compile("^[0-9]*$").matcher(input).matches()) {
+        if (!NUMBER_PATTERN.matcher(input).matches()) {
             throw new IllegalMoney();
         }
     }
