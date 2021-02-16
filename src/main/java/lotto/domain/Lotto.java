@@ -25,4 +25,14 @@ public class Lotto {
         .count();
     return count != lottoNumbers.size();
   }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+
+    for (int i = 0; i < lottoNumbers.size(); i++) {
+      sb.append(i + ": " + lottoNumbers.get(i).get() + "\n");
+    }
+    return sb.toString();
+  }
 }
