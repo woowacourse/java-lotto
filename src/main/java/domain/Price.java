@@ -14,36 +14,36 @@ public class Price {
 
     private final int value;
 
-    private Price(int value) {
+    private Price(final int value) {
         this.value = value;
     }
 
-    private Price(String value) {
+    private Price(final String value) {
         this.value = Integer.parseInt(value);
     }
 
-    public static Price valueOf(String value) {
+    public static Price valueOf(final String value) {
         validate(value);
         return new Price(value);
     }
 
-    private static void validate(String value) {
+    private static void validate(final String value) {
         validateNotNull(value);
         validateNumeric(value);
 
-        int number = Integer.parseInt(value);
+        final int number = Integer.parseInt(value);
         validatePositiveInteger(number);
         validateRange(number);
         validateDivisible(number);
     }
 
-    private static void validateRange(int value) {
+    private static void validateRange(final int value) {
         if (value < MIN_PRICE || value > MAX_PRICE) {
             throw new IllegalArgumentException(OUT_OF_LIMIT_ERROR);
         }
     }
 
-    private static void validateNumeric(String value) {
+    private static void validateNumeric(final String value) {
         try {
             Integer.parseInt(value);
         } catch (NumberFormatException e) {
@@ -51,19 +51,19 @@ public class Price {
         }
     }
 
-    private static void validateNotNull(String value) {
+    private static void validateNotNull(final String value) {
         if (value == null) {
             throw new IllegalArgumentException(NULL_ERROR);
         }
     }
 
-    private static void validatePositiveInteger(int value) {
+    private static void validatePositiveInteger(final int value) {
         if (value <= ZERO) {
             throw new IllegalArgumentException(NOT_POSITIVE_INT_ERROR);
         }
     }
 
-    private static void validateDivisible(int value) {
+    private static void validateDivisible(final int value) {
         if (value % MIN_PRICE != ZERO) {
             throw new IllegalArgumentException(NOT_DIVISIBLE_ERROR);
         }
