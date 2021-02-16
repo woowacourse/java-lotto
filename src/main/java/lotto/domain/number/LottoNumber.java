@@ -19,4 +19,9 @@ public class LottoNumber extends Number{
             throw new IllegalArgumentException("범위 밖의 로또 번호 입니다.");
         }
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
+    }
 }

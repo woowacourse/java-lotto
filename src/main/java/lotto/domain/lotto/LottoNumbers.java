@@ -1,6 +1,7 @@
 package lotto.domain.lotto;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import lotto.domain.number.LottoNumber;
 
 public class LottoNumbers {
@@ -26,5 +27,10 @@ public class LottoNumbers {
         if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("로또 넘버가 6개가 아닙니다.");
         }
+    }
+
+    @Override
+    public String toString() {
+        return String.join("-", lottoNumbers.stream().map(LottoNumber::toString).collect(Collectors.toList()));
     }
 }
