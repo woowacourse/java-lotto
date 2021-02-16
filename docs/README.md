@@ -6,6 +6,8 @@
 - 구입한 로또 개수만큼 로또 번호를 생성한다.
     - 로또 구입은 1000원 단위로 이루어진다. 
     - 랜덤으로 숫자 6개를 생성한다.
+      
+    - 로또 번호는 중복이면 안된다.
     - 로또 번호 범위는 1부터 45까지다.
 - 지난 주 당첨 번호를 입력 받는다.
     - 로또 번호 범위는 1부터 45까지다.
@@ -21,8 +23,9 @@
 ## 도메인
 - Money
 - LottoNumberFactory
-- LottoNumber
-- LottoNumbers
+- LottoNumber 
+- LottoNumbers 
+- BuyingResult 
 - Rule
 - LottoResult
 - Rank
