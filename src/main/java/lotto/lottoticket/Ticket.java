@@ -17,7 +17,18 @@ public class Ticket {
         for (Integer number : values) {
             checkNumberInRange(number);
         }
+        checkDuplicatedNumber(values);
         return values;
+    }
+
+    private void checkDuplicatedNumber(List<Integer> values) {
+        boolean duplicated = values.stream()
+                .distinct()
+                .count() != values.size();
+
+        if (duplicated) {
+            throw new IllegalArgumentException("중복되는 숫자가 생성되었습니다.");
+        }
     }
 
     private void checkNumberInRange(Integer number) {
