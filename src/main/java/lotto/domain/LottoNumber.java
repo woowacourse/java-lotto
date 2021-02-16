@@ -6,7 +6,7 @@ public class LottoNumber {
     private static final int MIN_RANGE = 1;
     private static final int MAX_RANGE = 45;
 
-    private int number;
+    private final int number;
 
     public LottoNumber(int number) {
         validateNumberRange(number);
