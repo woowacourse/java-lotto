@@ -38,6 +38,7 @@
 ### to-do List
 - [x] 각 number를 LottoNumber로 포장
   - [x] [유효성 체크] 숫자 범위
+- [ ] LottoSupplier 상수 간소화
 
 ---
 ### Commit Convention
