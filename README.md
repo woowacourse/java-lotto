@@ -34,12 +34,12 @@
 - 규칙 5: 줄여쓰지 않는다(축약 금지).
 - 규칙 8: 일급 콜렉션을 쓴다.
 
-
-
 ---
-
 ## TO-DO LIST
-- Lotto 객체 생
-- LottoNumber 포장성
+- Lottos 객체 생성
+- 구입 금액이 1000원 단위로 떨어지지 않으면 거스름돈을 준다.
 
 ## DONE
+- Lotto 객체 생성
+- lotto.domain.LottoNumber 포장
+- 구입 금액 객체 생성
