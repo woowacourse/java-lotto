@@ -23,4 +23,8 @@ public class LottoTicket {
                 .collect(Collectors.toList());
         return new LottoTicket(lottoNumbers);
     }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
 }

@@ -31,4 +31,15 @@ class LottoTicketTest {
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 티켓은 중복되지 않은 6자리의 숫자로 구성되어야 합니다.");
     }
+
+    @DisplayName("로또 티켓이 정상적으로 발급될 경우")
+    @Test
+    void makeLottoTicket() {
+        LottoTicket lottoTicket = LottoTicket.generateTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        List<LottoNumber> lottoNumbers = lottoTicket.getLottoNumbers();
+
+        assertThat(lottoNumbers).contains(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
+                new LottoNumber(5), new LottoNumber(6));
+    }
 }
