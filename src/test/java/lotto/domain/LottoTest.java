@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.utils.RandomUtils;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -13,5 +14,14 @@ public class LottoTest {
         List<Integer> randomValues = Arrays.asList(new Integer[]{8, 21, 23, 41, 42, 43});
         Lotto lotto = new Lotto(randomValues);
         assertThat(lotto).isEqualTo(new Lotto(randomValues));
+    }
+
+    @Test
+    void 랜덤_숫자_생성() {
+        RandomUtils.generate(1, 45);
+        for (int i = 0; i < 10; i++) {
+            Lotto lotto = new Lotto(RandomUtils.makeNumbers());
+            System.out.println(lotto.toString());
+        }
     }
 }
