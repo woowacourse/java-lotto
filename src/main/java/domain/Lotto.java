@@ -1,14 +1,11 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Lotto {
-    private static final int LENGTH = 6;
-    private static final int NUMBER_MIN = 1;
-    private static final int NUMBER_MAX = 45;
+    protected static final int LENGTH = 6;
+    protected static final int NUMBER_MIN = 1;
+    protected static final int NUMBER_MAX = 45;
     private static final int PRICE = 1000;
 
     private final List<Integer> lottoNumbers;
@@ -51,5 +48,18 @@ public class Lotto {
         if (lottoNumber < NUMBER_MIN || NUMBER_MAX < lottoNumber) {
             throw new IllegalArgumentException("로또 숫자 범위 외 숫자입니다.");
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 }
