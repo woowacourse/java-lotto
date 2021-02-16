@@ -12,7 +12,7 @@ public class PayOutTest {
 
     @Test
     @DisplayName("숫자를 입력 받는다.")
-    void inputNumber() {
+    void inputPayOutNumber() {
         PayOut payOut = new PayOut(10000);
         assertThat(payOut.equals(10000)).isTrue();
 
@@ -22,7 +22,7 @@ public class PayOutTest {
 
     @Test
     @DisplayName("음수를 입력하면 예")
-    void negativeNumber() {
+    void inputNegativePayOutNumber() {
         assertThatIllegalArgumentException().isThrownBy(
             () -> new PayOut(-1)
         ).withMessage("입력값이 음수 입니다.");
