@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.as;
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -30,13 +28,6 @@ public class LottoTicketTest {
             )
         )
             .doesNotThrowAnyException();
-    }
-
-    @DisplayName("셔플된 로또 티켓 정상 생성 테스트")
-    @Test
-    void Should_SizeEqualToSix_When_CreatedWithoutConstructorParameter() {
-        LottoTicket lottoTicket = new LottoTicket();
-        assertThat(lottoTicket.getLottoTicketNumbers().size()).isEqualTo(6);
     }
 
     @DisplayName("유효하지 않은 사이즈의 로또 티켓 테스트")

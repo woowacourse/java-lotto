@@ -16,4 +16,12 @@ public class WinningLottoNumbers {
             throw new IllegalArgumentException("보너스 번호는 당첨 번호에 포함되지 않아야 합니다.");
         }
     }
+
+    public LottoTicket getWinningTicket() {
+        return winningTicket;
+    }
+
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
+    }
 }

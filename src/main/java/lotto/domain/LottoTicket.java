@@ -7,22 +7,9 @@ import java.util.List;
 import java.util.Set;
 
 public class LottoTicket {
-    private static final int ZERO = 0;
     private static final int SIZE = 6;
-    private static final List<LottoNumber> allNumbers = new ArrayList<>();
 
     private final List<LottoNumber> numbers;
-
-    static {
-        for (int i = LottoNumber.MINIMUM; i <= LottoNumber.MAXIMUM; i++) {
-            allNumbers.add(new LottoNumber(i));
-        }
-    }
-
-    public LottoTicket() {
-        Collections.shuffle(allNumbers);
-        this.numbers = new ArrayList<>(allNumbers.subList(ZERO, SIZE));
-    }
 
     public LottoTicket(List<LottoNumber> lottoNumbers) {
         validateSize(lottoNumbers);
