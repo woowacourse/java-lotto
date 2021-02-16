@@ -24,9 +24,9 @@ class WinningLottoTicketTest {
 
     @DisplayName("당첨 번호 비교 결과 테스트")
     @ParameterizedTest
-    @CsvSource({"1,2,3,8,9,10,5등!", "1,2,3,4,8,9,4등!", "1,2,3,4,5,8,3등!", "1,2,3,4,5,7,2등!", "1,2,3,4,5,6,1등!","7,8,9,10,11,12,꽝.."})
+    @CsvSource({"1,2,3,8,9,10,FIFTH", "1,2,3,4,8,9,FOURTH", "1,2,3,4,5,8,THIRD", "1,2,3,4,5,7,SECOND", "1,2,3,4,5,6,FIRST","7,8,9,10,11,12,LOSING"})
     void 당첨_번호_비교_결과_테스트(int first, int second, int third, int fourth, int fifth, int sixth,
-        String expectedResult) {
+        Prize expectedResult) {
         List<Integer> lottoNumbers = Arrays.asList(first, second, third, fourth, fifth, sixth);
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 

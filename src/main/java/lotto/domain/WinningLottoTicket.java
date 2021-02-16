@@ -23,7 +23,7 @@ public class WinningLottoTicket extends LottoTicket {
         }
     }
 
-    public String compareNumbers(LottoTicket lottoTicket) {
+    public Prize compareNumbers(LottoTicket lottoTicket) {
         long winningCount = lottoTicket.list().stream()
             .filter(lottoNumber -> this.list().contains(lottoNumber))
             .count();
@@ -34,27 +34,27 @@ public class WinningLottoTicket extends LottoTicket {
         return getResult(winningCount, isBonus);
     }
 
-    public String getResult(long winningCount, boolean isBonus) {
+    public Prize getResult(long winningCount, boolean isBonus) {
         if (winningCount == 3) {
-            return "5등!";
+            return Prize.FIFTH;
         }
 
         if (winningCount == 4) {
-            return "4등!";
+            return Prize.FOURTH;
         }
 
         if (winningCount == 5 && isBonus) {
-            return "2등!";
+            return Prize.SECOND;
         }
 
         if (winningCount == 5) {
-            return "3등!";
+            return Prize.THIRD;
         }
 
         if (winningCount == 6) {
-            return "1등!";
+            return Prize.FIRST;
         }
 
-        return "꽝..";
+        return Prize.LOSING;
     }
 }
