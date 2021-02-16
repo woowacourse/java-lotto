@@ -8,4 +8,12 @@ public class Money {
         Validator.validateMoneyValue(input);
         this.value = Integer.parseInt(input);
     }
+
+    public Money(int input) {
+        this.value = input;
+    }
+
+    public int getValue() {
+        return value;
+    }
 }
