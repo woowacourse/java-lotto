@@ -43,6 +43,7 @@ public class Lottos {
     }
 
     public void generateLottos() {
+        LottoGenerator lottoGenerator = new LottoGenerator();
         for (int i=0; i < count; i++) {
             Lotto generatedLotto = new Lotto(lottoGenerator.generateLottoNums());
             lottos.add(generatedLotto.getLotto());
