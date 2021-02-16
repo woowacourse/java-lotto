@@ -1,10 +1,10 @@
-package lotto.domain.number;
+package lotto.domain.lotto;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import java.util.Arrays;
+import lotto.domain.number.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.Test;
 
 public class LottoNumbersTest {
