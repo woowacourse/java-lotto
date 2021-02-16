@@ -23,4 +23,8 @@ public class LottoSeller {
     }
     return lottoGroup;
   }
+
+  public static int lottoPrice() {
+    return LOTTO_PRICE;
+  }
 }

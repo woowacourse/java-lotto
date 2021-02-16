@@ -11,6 +11,7 @@ public enum LottoRank {
   NONE(0, 0);
 
   private static final int MIN_MATCH = 3;
+  private static final String MESSAGE_FORM = "%d개 일치 (%d원)- %개";
 
   private final int matchCount;
   private final int winningMoney;
@@ -35,7 +36,12 @@ public enum LottoRank {
         .orElseThrow(() -> new IllegalStateException("값이 잘못되었습니다."));
   }
 
-  public int getWinningMoney() {
+  public int winningMoney() {
     return winningMoney;
   }
+
+  public String message(int count) {
+    return String.format(MESSAGE_FORM, matchCount, winningMoney, count);
+  }
+
 }
