@@ -35,26 +35,6 @@ public class WinningLottoTicket extends LottoTicket {
     }
 
     public Prize getResult(long winningCount, boolean isBonus) {
-        if (winningCount == 3) {
-            return Prize.FIFTH;
-        }
-
-        if (winningCount == 4) {
-            return Prize.FOURTH;
-        }
-
-        if (winningCount == 5 && isBonus) {
-            return Prize.SECOND;
-        }
-
-        if (winningCount == 5) {
-            return Prize.THIRD;
-        }
-
-        if (winningCount == 6) {
-            return Prize.FIRST;
-        }
-
-        return Prize.LOSING;
+       return Prize.findByMatchCount((int)winningCount,isBonus);
     }
 }
