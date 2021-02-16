@@ -4,9 +4,9 @@ import java.util.Objects;
 import java.util.Set;
 
 public class Lotto {
-    private Set<Integer> lottoNumbers;
+    private Set<LottoNumber> lottoNumbers;
 
-    public Lotto(Set<Integer> lottoNumbers) {
+    public Lotto(Set<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
