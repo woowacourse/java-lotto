@@ -48,4 +48,8 @@ public class Lottos {
             lottos.add(generatedLotto.getLotto());
         }
     }
+
+    public ArrayList<ArrayList<Integer>> getLottos() {
+        return this.lottos;
+    }
 }
