@@ -1,9 +1,12 @@
 package lotto;
 
+import java.util.ArrayList;
+
 public class Lottos {
 
     private int money;
     private int count;
+    ArrayList<ArrayList<Integer>> lottos = new ArrayList<>();
 
     public Lottos(String input) {
         int money = changeToInt(input);
