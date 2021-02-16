@@ -1,13 +1,24 @@
 package lotto;
 
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class LottoTicket {
-    private final List<LottoNumber> lottoNumbers;
+    private static final int VALID_NUMBER_COUNT = 6;
+    private static final String COUNT_ERROR_MESSAGE = "숫자는 6개여야 합니다.";
 
-    public LottoTicket(List<LottoNumber> lottoNumbers) {
+    private final Set<LottoNumber> lottoNumbers;
+
+    public LottoTicket(Set<LottoNumber> lottoNumbers) {
+        validateCount(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public void validateCount(Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() == VALID_NUMBER_COUNT) {
+            return;
+        }
+        throw new RuntimeException(COUNT_ERROR_MESSAGE);
     }
 
     @Override
