@@ -3,6 +3,14 @@ package domain;
 import java.util.Objects;
 
 public class Price {
+    private static final int ZERO = 0;
+    private static final int MIN_PRICE = 1000;
+    private static final int MAX_PRICE = 1_000_000;
+    private static final String OUT_OF_LIMIT_ERROR = "범위를 벗어났습니다.";
+    private static final String NOT_INT_ERROR = "정수가 아닙니다.";
+    private static final String NULL_ERROR = "null 이 입력되었습니다.";
+    private static final String NOT_POSITIVE_INT_ERROR = "양의 정수가 아닙니다.";
+    private static final String NOT_DIVISIBLE_ERROR = "1000원 단위 금액이 아닙니다.";
 
     private final int value;
 
@@ -30,8 +38,8 @@ public class Price {
     }
 
     private static void validateRange(int value) {
-        if (value < 1000 || value > 1000000) { //TODO const 포장
-            throw new IllegalArgumentException("범위를 벗어났습니다.");
+        if (value < MIN_PRICE || value > MAX_PRICE) {
+            throw new IllegalArgumentException(OUT_OF_LIMIT_ERROR);
         }
     }
 
@@ -39,25 +47,25 @@ public class Price {
         try {
             Integer.parseInt(value);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("정수가 아닙니다.");
+            throw new IllegalArgumentException(NOT_INT_ERROR);
         }
     }
 
     private static void validateNotNull(String value) {
         if (value == null) {
-            throw new IllegalArgumentException("null 이 입력되었습니다.");
+            throw new IllegalArgumentException(NULL_ERROR);
         }
     }
 
     private static void validatePositiveInteger(int value) {
-        if (value <= 0) {
-            throw new IllegalArgumentException("양의 정수가 아닙니다.");
+        if (value <= ZERO) {
+            throw new IllegalArgumentException(NOT_POSITIVE_INT_ERROR);
         }
     }
 
     private static void validateDivisible(int value) {
-        if (value % 1000 != 0) {
-            throw new IllegalArgumentException("1000원 단위 금액이 아닙니다.");
+        if (value % MIN_PRICE != ZERO) {
+            throw new IllegalArgumentException(NOT_DIVISIBLE_ERROR);
         }
     }
 
