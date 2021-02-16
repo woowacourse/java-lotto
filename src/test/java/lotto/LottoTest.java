@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoTest {
 
@@ -46,5 +47,15 @@ public class LottoTest {
         int actual = init.countCommonValue(lotto);
         assertThat(actual).isEqualTo(expected);
     }
+
+    @ParameterizedTest
+    @DisplayName("보너스볼 포함 여부 확인")
+    @CsvSource(value = {"1:true", "7:false"}, delimiter = ':')
+    void containBonusNumber(int input, boolean expected) {
+        Lotto init = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        boolean actual = init.containNumber(input);
+        assertThat(actual).isEqualTo(expected);
+    }
+
 
 }

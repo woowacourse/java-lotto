@@ -44,4 +44,8 @@ public class Lotto {
         set.addAll(lotto.numbers);
         return totalCount - set.size();
     }
+
+    public boolean containNumber(final int input) {
+        return numbers.contains(input);
+    }
 }
