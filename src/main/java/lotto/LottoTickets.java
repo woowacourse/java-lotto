@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class LottoTickets {
+
     private final List<LottoTicket> lottoTickets;
 
     public LottoTickets(List<LottoTicket> lottoTickets) {

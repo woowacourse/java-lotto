@@ -3,6 +3,7 @@ package lotto;
 import java.util.*;
 
 public class LottoTicket {
+
     private static final int VALID_NUMBER_COUNT = 6;
     private static final String COUNT_ERROR_MESSAGE = "숫자는 6개여야 합니다.";
     private static final String DUPLICATE_ERROR_MESSAGE = "중복된 숫자가 존재합니다.";

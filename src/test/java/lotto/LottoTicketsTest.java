@@ -13,7 +13,7 @@ public class LottoTicketsTest {
     public LottoTickets lottoTickets;
 
     @BeforeEach
-    public void initLottoTickets(){
+    public void initLottoTickets() {
         List<LottoNumber> lottoNumbers1 = Arrays.asList(
                 new LottoNumber(1),
                 new LottoNumber(2),

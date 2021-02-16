@@ -3,6 +3,7 @@ package lotto;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
+
     private static final int MIN_NUMBER_RANGE = 1;
     private static final int MAX_NUMBER_RANGE = 45;
     private static final String RANGE_ERROR_MESSAGE = "숫자는 1~45 사이의 숫자여야한다.";
