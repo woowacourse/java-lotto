@@ -1,8 +1,5 @@
 package lotto.domain;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.List;
 import lotto.util.LottoGenerator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,6 +25,7 @@ class LottoSellerTest {
   @ParameterizedTest
   @ValueSource(ints = {500, -100})
   void createLotto_notEnoughMoney(int price) {
-    Assertions.assertThatThrownBy(() -> lottoSeller.sellLotto(price)).isInstanceOf(IllegalArgumentException.class);
+    Assertions.assertThatThrownBy(() -> lottoSeller.sellLotto(price))
+        .isInstanceOf(IllegalArgumentException.class);
   }
 }

@@ -21,11 +21,11 @@ public enum LottoRank {
   }
 
   public static LottoRank of(int matchCount, boolean bonusMatch) {
-    if(matchCount < MIN_MATCH) {
+    if (matchCount < MIN_MATCH) {
       return NONE;
     }
 
-    if(THIRD.matchCount == matchCount && !bonusMatch) {
+    if (THIRD.matchCount == matchCount && !bonusMatch) {
       return THIRD;
     }
 
