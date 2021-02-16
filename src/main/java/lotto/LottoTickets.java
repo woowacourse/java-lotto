@@ -12,6 +12,10 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
+    public List<LottoTicket> getLottoTickets() {
+        return this.lottoTickets;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
