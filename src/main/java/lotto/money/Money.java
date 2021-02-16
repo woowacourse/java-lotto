@@ -5,7 +5,7 @@ import java.util.Objects;
 public class Money {
     private static final int MINIMUM_PRICE = 1000;
 
-    private int money;
+    private final int money;
 
     public Money(String money) {
         this.money = validate(money);
@@ -25,6 +25,10 @@ public class Money {
 
     private int validateNumber(String money) {
         return Integer.parseInt(money);
+    }
+
+    public int divideMoney(int unit) {
+        return this.money / unit;
     }
 
 

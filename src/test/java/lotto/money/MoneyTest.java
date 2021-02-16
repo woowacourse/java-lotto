@@ -36,6 +36,5 @@ public class MoneyTest {
         assertThatThrownBy(()->
                 new Money("-1")
         ).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("1000원 이상의 금액이 필요합니다.");
-        
     }
 }
