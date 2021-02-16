@@ -25,8 +25,8 @@
   - [X] matchCount, bonusMatch 를 이용해 등수를 가져오는 것 구현
       
 - WinningLotto
-    - [ ] 당첨 번호 입력
-    - [ ] 보너스 볼
+    - [X] 당첨 번호 입력
+    - [X] 보너스 볼
     
 - LottoResult
     - 손님이 산 로또에서 당첨 통계를 갖고 있는 객체

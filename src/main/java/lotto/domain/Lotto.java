@@ -18,6 +18,17 @@ public class Lotto {
     this.lottoNumbers = lottoNumbers;
   }
 
+  public boolean contains(LottoNumber lottoNumber) {
+    return lottoNumbers.contains(lottoNumber);
+  }
+
+  public int matchCount(Lotto lotto) {
+    return (int) lottoNumbers
+        .stream()
+        .filter(lotto::contains)
+        .count();
+  }
+
   private boolean isDuplicated(List<LottoNumber> lottoNumbers) {
     long count = lottoNumbers.stream()
         .mapToInt(LottoNumber::get)
