@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoNumber {
@@ -26,5 +27,26 @@ public class LottoNumber {
     return Arrays.stream(numbers)
         .mapToObj(LottoNumber::new)
         .collect(Collectors.toList());
+  }
+
+  public int get() {
+    return number;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    LottoNumber that = (LottoNumber) o;
+    return number == that.number;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(number);
   }
 }

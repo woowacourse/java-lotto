@@ -1,20 +1,45 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.util.Arrays;
-import lotto.domain.Lotto;
+import java.util.List;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LottoTest {
 
-  @Test
-  void createLotto() {
-    Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
+  private List<LottoNumber> validLottoNumbers;
 
-    assertThat(lotto)
-        .isEqualTo(new Lotto(Arrays.asList(1,2,3,4,5,6)));
+  @BeforeEach
+  void setUp() {
+    validLottoNumbers = LottoNumber.asList(1, 2, 3, 4, 5, 6);
   }
 
+  @Test
+  @DisplayName("로또 생성 : 성공")
+  void createLottoWithValidSize() {
+    Lotto lotto = new Lotto(validLottoNumbers);
+    Assertions.assertThat(lotto).isNotNull();
+  }
 
+  @Test
+  @DisplayName("로또 생성 : 사이즈 미만으로 실패")
+  void createLottoWithUnderSize() {
+    Assertions.assertThatThrownBy(() -> new Lotto(LottoNumber.asList(1, 2, 3)))
+        .isInstanceOf(IllegalArgumentException.class);
+  }
+
+  @Test
+  @DisplayName("로또 생성 : 사이즈 초과로 실패")
+  void createLottoWithOverSize() {
+    Assertions.assertThatThrownBy(() -> new Lotto(LottoNumber.asList(1, 2, 3, 4, 5, 6, 7)))
+        .isInstanceOf(IllegalArgumentException.class);
+  }
+
+  @Test
+  @DisplayName("로또 생성 : 번호 중복으로 실패")
+  void createLottoWithDuplicateNumber() {
+    Assertions.assertThatThrownBy(() -> new Lotto(LottoNumber.asList(1, 2, 3, 4, 6, 6)))
+        .isInstanceOf(IllegalArgumentException.class);
+  }
 }

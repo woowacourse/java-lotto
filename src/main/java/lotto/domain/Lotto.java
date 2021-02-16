@@ -4,9 +4,25 @@ import java.util.List;
 
 public class Lotto {
 
-  private final List<Integer> lottoNumbers;
+  private static final int LOTTO_NUMBERS_SIZE = 6;
+  private final List<LottoNumber> lottoNumbers;
 
-  public Lotto(List<Integer> lottoNumbers) {
+  public Lotto(List<LottoNumber> lottoNumbers) {
+    if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
+      throw new IllegalArgumentException();
+    }
+    if (isDuplicated(lottoNumbers)) {
+      throw new IllegalArgumentException();
+    }
+
     this.lottoNumbers = lottoNumbers;
+  }
+
+  private boolean isDuplicated(List<LottoNumber> lottoNumbers) {
+    long count = lottoNumbers.stream()
+        .mapToInt(LottoNumber::get)
+        .distinct()
+        .count();
+    return count != lottoNumbers.size();
   }
 }
