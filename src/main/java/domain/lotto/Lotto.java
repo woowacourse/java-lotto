@@ -33,7 +33,7 @@ public class Lotto {
 
     private void validateNumber(final List<Integer> lottoNumbers) {
         boolean isBetweenNumber = lottoNumbers.stream()
-                .allMatch(number -> isBetweenNumber(number));
+                .allMatch(this::isBetweenNumber);
         if (!isBetweenNumber) {
             throw new IllegalArgumentException("1~45 사이의 번호만 허용합니다.");
         }
