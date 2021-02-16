@@ -1,4 +1,19 @@
-import static org.junit.jupiter.api.Assertions.*;
+package lotto;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.Arrays;
+import org.junit.jupiter.api.Test;
+
 class LottoTest {
-  
+
+  @Test
+  void createLotto() {
+    Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
+
+    assertThat(lotto)
+        .isEqualTo(new Lotto(Arrays.asList(1,2,3,4,5,6)));
+  }
+
+
 }
