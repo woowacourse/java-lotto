@@ -29,4 +29,15 @@ class PurchasingPriceTest {
 
         assertThat(value).isEqualTo(1000);
     }
+
+    @DisplayName("입력 금액을 통해 구매 가능한 로또 티켓 개수를 계산한다")
+    @Test
+    void calculateLottoTicketCounts() {
+        int price = 3987;
+        PurchasingPrice purchasingPrice = new PurchasingPrice(price);
+
+        int purchasableLottoTicketCounts = purchasingPrice.calculateLottoTicketCounts();
+
+        assertThat(purchasableLottoTicketCounts).isEqualTo(3987 / 1000);
+    }
 }

@@ -13,6 +13,10 @@ public class PurchasingPrice {
         this.purchasingPrice = purchasingPrice;
     }
 
+    public int calculateLottoTicketCounts() {
+        return purchasingPrice / MINIMUM_TICKET_PRICE;
+    }
+
     public int getPurchasingPrice() {
         return purchasingPrice;
     }
