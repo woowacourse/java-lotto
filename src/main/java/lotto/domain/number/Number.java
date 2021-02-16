@@ -19,7 +19,7 @@ public class Number {
         try {
             Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자가 아닙니다.");
+            throw new IllegalArgumentException("입력이 숫자가 아니거나 범위를 벗어났습니다.");
         }
     }
 
