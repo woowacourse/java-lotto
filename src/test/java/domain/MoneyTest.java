@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class MoneyTest {
 
@@ -18,5 +19,17 @@ class MoneyTest {
 
         //then
         assertThat(money).isNotNull();
+    }
+
+    @DisplayName("Money 값으로 음수가 입력되는 경우")
+    @Test
+    void generateMoneyWithNegativeValue() {
+        //given
+        int moneyValue = -1;
+
+        //when //then
+        assertThatThrownBy(() -> {
+            new Money(moneyValue);
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 }
