@@ -12,16 +12,16 @@ public class LottoSeller {
     this.lottoGenerator = lottoGenerator;
   }
 
-  public List<Lotto> sellLotto(int price) {
+  public LottoGroup sellLotto(int price) {
     int count = price / LOTTO_PRICE;
     if(count < 1) {
       throw new IllegalArgumentException();
     }
 
-    List<Lotto> lottos = new ArrayList<>();
+    LottoGroup lottoGroup = new LottoGroup();
     for (int i = 0; i < count; i++) {
-      lottos.add(lottoGenerator.generate());
+      lottoGroup.addLotto(lottoGenerator.generate());
     }
-    return lottos;
+    return lottoGroup;
   }
 }

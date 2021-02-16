@@ -21,7 +21,7 @@ class LottoSellerTest {
 
   @Test
   void createLotto_enoughMoney() {
-    List<Lotto> lottoGroup = lottoSeller.sellLotto(2000);
+    LottoGroup lottoGroup = lottoSeller.sellLotto(2000);
     Assertions.assertThat(lottoGroup.size()).isEqualTo(2);
   }
 
