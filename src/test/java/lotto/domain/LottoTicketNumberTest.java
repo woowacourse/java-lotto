@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class LottoNumberTest {
+class LottoTicketNumberTest {
 
     @DisplayName("숫자는 1이상 45이하여야 한다.")
     @Test

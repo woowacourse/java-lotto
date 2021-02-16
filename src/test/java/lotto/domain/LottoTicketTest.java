@@ -8,7 +8,7 @@ import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LottoTest {
+public class LottoTicketTest {
 
     @Test
     @DisplayName("로또 생성하기")
@@ -21,7 +21,7 @@ public class LottoTest {
         LottoNumber lotto6 = new LottoNumber(6);
 
         Set<LottoNumber> lottoNumbers = new HashSet<>(Arrays.asList(lotto1,lotto2,lotto3,lotto4,lotto5,lotto6));
-        Lotto lotto = new Lotto(lottoNumbers);
-        assertThat(lotto).isEqualTo(new Lotto(lottoNumbers));
+        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+        assertThat(lottoTicket).isEqualTo(new LottoTicket(lottoNumbers));
     }
 }

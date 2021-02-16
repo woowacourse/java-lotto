@@ -3,10 +3,10 @@ package lotto.domain;
 import java.util.Objects;
 import java.util.Set;
 
-public class Lotto {
-    private Set<LottoNumber> lottoNumbers;
+public class LottoTicket {
+    private final Set<LottoNumber> lottoNumbers;
 
-    public Lotto(Set<LottoNumber> lottoNumbers) {
+    public LottoTicket(final Set<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -18,8 +18,8 @@ public class Lotto {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Lotto lotto = (Lotto) o;
-        return lottoNumbers.equals(lotto.lottoNumbers);
+        LottoTicket lottoTicket = (LottoTicket) o;
+        return lottoNumbers.equals(lottoTicket.lottoNumbers);
     }
 
     @Override
