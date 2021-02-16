@@ -13,4 +13,8 @@ public class LottoNumber {
         }
         this.lottoNumber = lottoNumber;
     }
+
+    public int getLottoNumber() {
+        return lottoNumber;
+    }
 }
