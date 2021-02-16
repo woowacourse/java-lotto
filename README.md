@@ -22,7 +22,6 @@
 - [x] 6자리 로또 번호를 갖는다.
 - [x] 유효성 체크
     - 숫자 개수
-    - 숫자 범위
     - 중복된 숫자 여부
 
 ### LottoSupplier
@@ -37,7 +36,8 @@
 
 ---
 ### to-do List
-- 각 number를 LottoNumber로 포장
+- [x] 각 number를 LottoNumber로 포장
+  - [x] [유효성 체크] 숫자 범위
 
 ---
 ### Commit Convention

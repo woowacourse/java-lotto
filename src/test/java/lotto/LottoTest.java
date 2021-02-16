@@ -7,7 +7,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoTest {
 
@@ -18,13 +17,6 @@ public class LottoTest {
             .isInstanceOf(IllegalArgumentException.class).hasMessageContaining("잘못된 개수");
         assertThatThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6, 7)))
             .isInstanceOf(IllegalArgumentException.class).hasMessageContaining("잘못된 개수");
-    }
-
-    @Test
-    @DisplayName("범위 초과 로또 번호")
-    void generateOutRangeLotto() {
-        assertThatThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5, 46)))
-            .isInstanceOf(IllegalArgumentException.class).hasMessageContaining("범위가 초과");
     }
 
     @Test
@@ -49,13 +41,12 @@ public class LottoTest {
     }
 
     @ParameterizedTest
-    @DisplayName("보너스볼 포함 여부 확인")
+    @DisplayName("보너스볼 포함 여부 확")
     @CsvSource(value = {"1:true", "7:false"}, delimiter = ':')
     void containBonusNumber(int input, boolean expected) {
         Lotto init = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        boolean actual = init.containNumber(input);
+        LottoNumber inputLottoNumber = new LottoNumber(input);
+        boolean actual = init.containNumber(inputLottoNumber);
         assertThat(actual).isEqualTo(expected);
     }
-
-
 }

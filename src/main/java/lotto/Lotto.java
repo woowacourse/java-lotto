@@ -1,38 +1,38 @@
 package lotto;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private static final int LOTTO_MIN_NUMBER = 1;
-    private static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_NUMBER_COUNT = 6;
-    private final List<Integer> numbers;
+    private final List<LottoNumber> numbers;
 
     public Lotto(final List<Integer> numbers) {
+        this(numbers.stream().map(LottoNumber::new).collect(Collectors.toList()),true);
+    }
+
+    /*
+    List<Integer> List<LottoNumber>를 동시에 사용했을 때, Erase~~ 에러를 띄웁니다.
+    기존에는 static createByName(List<Integer> numbers)와 같은 방식으로 구현을 진행했었는데요,
+    JDK HashSet 의 생성자에 경우 dummy 를 추가하는 방식으로 생성자 오버로딩을 구현해서 이런식으로 구현해봤습니다.
+    현업에서는 어떻게 사용되는지 궁금합니다!
+     */
+    public Lotto(final List<LottoNumber> numbers, boolean dummy) {
         validateNumberCount(numbers);
-        validateLottoRange(numbers);
         validateDistinct(numbers);
         this.numbers = numbers;
     }
 
-    private void validateNumberCount(final List<Integer> numbers) {
+    private void validateNumberCount(final List<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("잘못된 개수의 입력입니다.");
         }
     }
 
-    private void validateLottoRange(final List<Integer> numbers) {
-        if (numbers.stream()
-            .anyMatch(number -> number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER)) {
-            throw new IllegalArgumentException("범위가 초과된 숫자 입력입니다.");
-        }
-    }
-
-    private void validateDistinct(final List<Integer> numbers) {
+    private void validateDistinct(final List<LottoNumber> numbers) {
         if (numbers.stream().distinct().count() != numbers.size()) {
             throw new IllegalArgumentException("중복된 숫자 입력입니다.");
         }
@@ -40,12 +40,12 @@ public class Lotto {
 
     public int countCommonValue(final Lotto lotto) {
         int totalCount = numbers.size() + lotto.numbers.size();
-        Set<Integer> set = new HashSet<>(numbers);
+        Set<LottoNumber> set = new HashSet<>(numbers);
         set.addAll(lotto.numbers);
         return totalCount - set.size();
     }
 
-    public boolean containNumber(final int input) {
+    public boolean containNumber(final LottoNumber input) {
         return numbers.contains(input);
     }
 }
