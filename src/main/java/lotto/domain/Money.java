@@ -1,7 +1,11 @@
 package lotto.domain;
 
-public class Money {
-    public Money(String input) {
+import lotto.utils.Validator;
 
+public class Money {
+    private final int value;
+    public Money(String input) {
+        Validator.validateMoneyValue(input);
+        this.value = Integer.parseInt(input);
     }
 }

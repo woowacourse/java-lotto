@@ -3,9 +3,11 @@ package lotto.utils;
 import lotto.exception.IllegalLottoTicketDuplicateNumber;
 import lotto.exception.IllegalLottoTicketNumbers;
 import lotto.exception.IllegalLottoTicketSizeError;
+import lotto.exception.IllegalMoney;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class Validator {
     private static final int LOTTO_TICKET_SIZE = 6;
@@ -43,5 +45,23 @@ public class Validator {
     private static boolean isValidNumberRange(List<Integer> numbers) {
         return numbers.stream()
                 .anyMatch(number -> number < MIN_NUMBER || number > MAX_NUMBER);
+    }
+
+    public static void validateMoneyValue(String input) {
+        validateNumberFormat(input);
+        validateMinimumMoney(input);
+    }
+
+    private static void validateMinimumMoney(String input) {
+        int value = Integer.parseInt(input);
+        if (value < 1000) {
+            throw new IllegalMoney();
+        }
+    }
+
+    private static void validateNumberFormat(String input) {
+        if (!Pattern.compile("^[0-9]*$").matcher(input).matches()) {
+            throw new IllegalMoney();
+        }
     }
 }
