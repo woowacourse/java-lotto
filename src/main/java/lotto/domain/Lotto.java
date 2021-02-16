@@ -21,4 +21,15 @@ public class Lotto {
     public int hashCode() {
         return Objects.hash(numbers);
     }
+
+    @Override
+    public String toString() {
+        StringBuilder output = new StringBuilder();
+        output.append("<");
+        for (int i=0; i<numbers.size(); i++) {
+            output.append(String.valueOf(numbers.get(i)) + ", ");
+        }
+        output.append(">");
+        return output.toString();
+    }
 }
