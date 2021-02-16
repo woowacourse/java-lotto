@@ -1,10 +1,13 @@
 package lotto;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Set;
+import java.util.HashSet;
 
 public class Lotto {
-    ArrayList<Integer> nums = new ArrayList<>();
+    private static final String NUMBER_COUNT_ERROR = "[ERROR] 6개의 숫자를 입력해주세요";
+    private static final String NUMBER_DUPLICATE_ERROR = "[ERROR] 숫자는 중복될 수 없습니다";
+    private static final String NUMBER_RANGE_ERROR = "[ERROR] 1 ~ 45 사이의 숫자를 입력해주세요";
     ArrayList<Integer> lotto;
 
     public Lotto() {

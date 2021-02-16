@@ -44,7 +44,7 @@ public class Lottos {
 
     public void generateLottos() {
         for (int i=0; i < count; i++) {
-            Lotto generatedLotto = new Lotto();
+            Lotto generatedLotto = new Lotto(lottoGenerator.generateLottoNums());
             lottos.add(generatedLotto.getLotto());
         }
     }
