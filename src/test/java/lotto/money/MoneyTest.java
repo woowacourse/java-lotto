@@ -21,4 +21,21 @@ public class MoneyTest {
             new Money("*1223")
         ).isInstanceOf(NumberFormatException.class);
     }
+
+    @Test
+    @DisplayName("최소 구입 금액 확인")
+    void minimumAmount() {
+        assertThatThrownBy(()->
+                new Money("900")
+        ).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("1000원 이상의 금액이 필요합니다.");
+    }
+
+    @Test
+    @DisplayName("음수인 경우 예외")
+    void negativeAmount() {
+        assertThatThrownBy(()->
+                new Money("-1")
+        ).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("1000원 이상의 금액이 필요합니다.");
+        
+    }
 }
