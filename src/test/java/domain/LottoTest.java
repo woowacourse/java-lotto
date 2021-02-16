@@ -50,4 +50,15 @@ class LottoTest {
     private static Stream<List<Integer>> generateIfLottoNumbersLengthNotSatisfied() {
         return Stream.of(Arrays.asList(1, 2, 3, 4, 5), Arrays.asList(1, 2, 3, 4, 5, 6, 7));
     }
+
+    @DisplayName("Lotto 번호가 유효 범위의 숫자가 아닌 경우")
+    @Test
+    void generateWithLottoNumbersNotInRange(){
+        //given
+        List<Integer> lottoNumbers = Arrays.asList(1, -1, 3, 4, 5, 6);
+
+        //when //then
+        assertThatThrownBy(() -> new Lotto(lottoNumbers)).isInstanceOf(IllegalArgumentException.class);
+    }
+
 }
