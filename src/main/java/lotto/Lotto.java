@@ -1,6 +1,9 @@
 package lotto;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Lotto {
 
@@ -33,5 +36,12 @@ public class Lotto {
         if (numbers.stream().distinct().count() != numbers.size()) {
             throw new IllegalArgumentException("중복된 숫자 입력입니다.");
         }
+    }
+
+    public int countCommonValue(final Lotto lotto) {
+        int totalCount = numbers.size() + lotto.numbers.size();
+        Set<Integer> set = new HashSet<>(numbers);
+        set.addAll(lotto.numbers);
+        return totalCount - set.size();
     }
 }
