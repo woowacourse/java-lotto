@@ -7,7 +7,7 @@ public class Number {
     protected final int value;
 
     public Number(int value) {
-        this.value = value;
+        this(String.valueOf(value));
     }
 
     public Number(String input) {
