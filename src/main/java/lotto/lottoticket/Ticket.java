@@ -3,8 +3,7 @@ package lotto.lottoticket;
 import java.util.List;
 import java.util.Objects;
 
-import static lotto.lottoticket.RandomNumbersGenerator.MAXIMUM_NUMBER;
-import static lotto.lottoticket.RandomNumbersGenerator.MINIMUM_NUMBER;
+import static lotto.lottoticket.RandomNumbersGenerator.*;
 
 public class Ticket {
     private final List<Integer> numbers;
@@ -14,11 +13,18 @@ public class Ticket {
     }
 
     private List<Integer> validate(List<Integer> values) {
+        checkSizeOfNumbers(values);
         for (Integer number : values) {
             checkNumberInRange(number);
         }
         checkDuplicatedNumber(values);
         return values;
+    }
+
+    private void checkSizeOfNumbers(List<Integer> values) {
+        if (values.size() != NUMBER_COUNT_IN_LOTTO) {
+            throw new IllegalArgumentException("숫자는 6개여야 합니다.");
+        }
     }
 
     private void checkDuplicatedNumber(List<Integer> values) {

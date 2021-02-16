@@ -8,7 +8,7 @@ import java.util.List;
 public class RandomNumbersGenerator implements NumbersGenerator {
     public static final int MINIMUM_NUMBER = 1;
     public static final int MAXIMUM_NUMBER = 45;
-    private static final int NUMBER_COUNT_IN_LOTTO = 6;
+    public static final int NUMBER_COUNT_IN_LOTTO = 6;
 
     @Override
     public List<Integer> generate() {

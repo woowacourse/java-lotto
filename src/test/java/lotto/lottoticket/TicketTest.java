@@ -36,4 +36,14 @@ public class TicketTest {
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("중복되는 숫자가 생성되었습니다.");
     }
+
+    @Test
+    @DisplayName("로또 숫자 개수 확인")
+    void checkSizeOfNumbers() {
+        NumbersGenerator numbersGenerator = () -> Arrays.asList(1, 2, 3, 4, 5);
+        assertThatThrownBy(()->
+                new Ticket(numbersGenerator)
+        ).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("숫자는 6개여야 합니다.");
+    }
 }
