@@ -2,6 +2,7 @@ package lotto;
 
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottosTest {
@@ -34,5 +35,12 @@ public class LottosTest {
             new Lottos(falseMoney);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(MONEY_UNIT_ERROR);
+    }
+
+    @Test
+    void 구입개수_확인() {
+        String money = "14000";
+        Lottos lottos = new Lottos(money);
+        assertThat(lottos.getCount()).isEqualTo(14);
     }
 }
