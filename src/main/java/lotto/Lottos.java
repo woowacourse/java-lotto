@@ -38,4 +38,11 @@ public class Lottos {
     public int getCount() {
         return count;
     }
+
+    public void generateLottos() {
+        for (int i=0; i < count; i++) {
+            Lotto generatedLotto = new Lotto();
+            lottos.add(generatedLotto.getLotto());
+        }
+    }
 }
