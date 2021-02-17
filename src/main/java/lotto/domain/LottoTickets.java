@@ -30,4 +30,8 @@ public class LottoTickets {
                 .collect(Collectors.groupingBy(lottoRank -> lottoRank, Collectors.counting()));
         return new LottoStatistics(statistics);
     }
+
+    public List<LottoTicket> getLottoTicket() {
+        return Collections.unmodifiableList(lottoTickets);
+    }
 }
