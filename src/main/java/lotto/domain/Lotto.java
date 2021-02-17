@@ -27,7 +27,7 @@ public class Lotto {
         StringBuilder output = new StringBuilder();
         output.append("<");
         for (int i=0; i<numbers.size(); i++) {
-            output.append(String.valueOf(numbers.get(i)) + ", ");
+            output.append(numbers.get(i) + ", ");
         }
         output.append(">");
         return output.toString();

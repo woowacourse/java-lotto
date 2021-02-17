@@ -7,9 +7,8 @@
 - 로또 구입 금액을 입력 & 구매한 로또 개수 출력
   - Money 
   - Lotto
-  - Lotto Machine
   - Winning Number
-  - Statistic
+  - LottoResults
     
 - 1000당 1장으로 최대 발급 가능한 로또를 구매 
 - 로또 번호 랜덤 생성
