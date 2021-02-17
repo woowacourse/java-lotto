@@ -12,8 +12,8 @@ public class PayOut {
     }
 
     private void validateNegative(int value) {
-        if (value < 0) {
-            throw new IllegalArgumentException("입력값이 음수 입니다.");
+        if (value <= 0) {
+            throw new IllegalArgumentException("입력값이 양수가 아닙니다.");
         }
     }
 
