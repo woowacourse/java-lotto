@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Lotto {
 
+    public static final int LOTTO_POSSESSION_NUMBER = 6;
     private final List<Integer> numbers;
 
     public Lotto() {
@@ -47,6 +48,6 @@ public class Lotto {
     }
 
     private boolean isFirstRank(int count, int bonusNumber) {
-        return count == 6 && !numbers.contains(bonusNumber);
+        return count == LOTTO_POSSESSION_NUMBER && !numbers.contains(bonusNumber);
     }
 }
