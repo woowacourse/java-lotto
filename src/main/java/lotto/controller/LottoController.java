@@ -5,24 +5,27 @@ import lotto.domain.AutoLottoMachine;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoTicket;
 import lotto.view.InputView;
+import lotto.view.OutputView;
 
 public class LottoController {
     private final InputView inputView;
+    private final OutputView outputView;
     private LottoMachine lottoMachine;
 
-    public LottoController(InputView inputView) {
+    public LottoController(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
+        this.outputView = outputView;
     }
 
     public void start() {
         lottoMachine = new AutoLottoMachine();
-        int lottoMoney = inputView.inputDecimal();
+        int lottoMoney = inputView.takeLottoMoney();
 
         int numberOfTickets = lottoMoney / 1000;
         List<LottoTicket> lottoTickets = lottoMachine.createTickets(numberOfTickets);
-        System.out.printf("%d장 발권되었습니다.", lottoTickets.size());
+        outputView.printTicketsSize(lottoTickets.size());
 
-        List<Integer> winningNumbers = inputView.inputToIntegerList();
-        int bonusNumber = inputView.inputDecimal();
+        List<Integer> winningNumbers = inputView.inputWinningNumbers();
+        int bonusNumber = inputView.takeBonusNumber();
     }
 }
