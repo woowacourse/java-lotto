@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
@@ -49,5 +50,9 @@ public class Lotto {
 
     private boolean isFirstRank(int count, int bonusNumber) {
         return count == LOTTO_POSSESSION_NUMBER && !numbers.contains(bonusNumber);
+    }
+
+    public List<Integer> getNumbers() {
+        return Collections.unmodifiableList(numbers);
     }
 }
