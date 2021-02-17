@@ -18,7 +18,7 @@ public enum Rank {
         this.money = money;
     }
 
-    public Rank of(int count, boolean bonus) {
+    public static Rank of(int count, boolean bonus) {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.isSameAs(count))
                 .filter(rank -> !rank.equals(SECOND) || bonus)
