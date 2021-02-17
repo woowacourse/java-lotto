@@ -4,10 +4,19 @@ import java.util.Objects;
 
 public class Money {
 
-    private int money;
+    private static final String SHORT_MONEY_MESSAGE = "1000원 이상 입력해주세요.";
 
-    public Money(int money) {
+    private final int money;
+
+    public Money(final int money) {
+        validateBudgetMoney(money);
         this.money = money;
+    }
+
+    private void validateBudgetMoney(int money) {
+        if (money < 1000) {
+            throw new IllegalArgumentException(SHORT_MONEY_MESSAGE);
+        }
     }
 
     @Override

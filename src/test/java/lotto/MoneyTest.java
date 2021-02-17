@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class MoneyTest {
 
@@ -12,5 +13,14 @@ public class MoneyTest {
     public void createMoney() {
         Money money = new Money(1000);
         assertThat(money).isEqualTo(new Money(1000));
+    }
+
+    @Test
+    @DisplayName("1000원 미만은 받을 수 없다.")
+    public void notEnoughBudgetTest() {
+        assertThatThrownBy(() -> {
+           new Money(500);
+        }).isInstanceOf(IllegalArgumentException.class)
+        .hasMessage("1000원 이상 입력해주세요.");
     }
 }
