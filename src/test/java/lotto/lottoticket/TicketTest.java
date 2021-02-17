@@ -24,7 +24,7 @@ public class TicketTest {
         assertThatThrownBy(()->
                 new Ticket(numbersGenerator)
         ).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("옳지 않은 숫자가 생성되었습니다.");
+                .hasMessageContaining("숫자는 1부터 45사이여야 합니다.");
     }
 
     @Test
@@ -34,7 +34,7 @@ public class TicketTest {
         assertThatThrownBy(()->
                 new Ticket(numbersGenerator)
         ).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("중복되는 숫자가 생성되었습니다.");
+                .hasMessageContaining("중복되는 숫자가 존재합니다.");
     }
 
     @Test
@@ -44,6 +44,6 @@ public class TicketTest {
         assertThatThrownBy(()->
                 new Ticket(numbersGenerator)
         ).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("숫자는 6개여야 합니다.");
+                .hasMessageContaining("숫자는 여섯개여야 합니다.");
     }
 }

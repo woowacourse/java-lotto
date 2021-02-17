@@ -54,6 +54,6 @@ public class WinnerTicketTest {
     void checkDuplicated() {
         assertThatThrownBy(() -> new WinnerTicket("1,1,2,3,4,5"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("중복된 입력입니다.");
+                .hasMessage("중복되는 숫자가 존재합니다.");
     }
 }
