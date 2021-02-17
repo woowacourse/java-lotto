@@ -27,6 +27,7 @@
     * 전체 구매 금액 대비 수익금액의 비율(수익률)을 계산한다.
  * (추가)
   * 로또 번호 싱글톤 적용
+  * (가능하다면) 반복문을 스트림으로 바꿔보자
     
 ## 프로그래밍 요구 사항
 
@@ -47,6 +48,7 @@
 * LottoNumber
 * LottoTicket
   * 당첨번호 //추후 수정
+* LottoTickets  
 * LottoResult(Statistics) //추후 수정
 
 ## View
