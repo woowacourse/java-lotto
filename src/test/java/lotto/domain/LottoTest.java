@@ -15,7 +15,7 @@ public class LottoTest {
     public static final List<Integer> WINNING_NUMBERS = Arrays.asList(1, 2, 3, 4, 5, 6);
     public static final int BONUS_NUMBER = 7;
 
-    private static Stream<Arguments> provideWinningNumberAndBonusNumber() {
+    private static Stream<Arguments> provideLottoNumbersAndRank() {
         return Stream.of(
             Arguments.of(Arrays.asList(2, 4, 8, 9, 13, 25), "NONE"),
             Arguments.of(Arrays.asList(2, 4, 6, 8, 13, 25), "FIFTH"),
@@ -26,7 +26,7 @@ public class LottoTest {
 
     @ParameterizedTest
     @DisplayName("로또 매칭 확인")
-    @MethodSource("provideWinningNumberAndBonusNumber")
+    @MethodSource("provideLottoNumbersAndRank")
     void test(List<Integer> lottoNumbers, String lottoRank) {
         Lotto lotto = new Lotto(lottoNumbers);
         LottoRank rank = lotto.getLottoRank(WINNING_NUMBERS, BONUS_NUMBER);
