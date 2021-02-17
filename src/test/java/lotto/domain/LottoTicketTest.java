@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -73,6 +74,30 @@ class LottoTicketTest {
 
         assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
             .isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    @DisplayName("성공 - 문자열로 LottoTicket 생성")
+    void generate_by_string() {
+        assertThatCode(() -> {
+            LottoTicket lottoTicket1 = new LottoTicket("1,2,3,4,5,6");
+        }).doesNotThrowAnyException();
+    }
+
+    @Test
+    @DisplayName("성공 - 문자열로 LottoTicket 생성")
+    void generate_by_string2() {
+        LottoTicket lottoTicket1 = new LottoTicket("1,2,3,4,5,6");
+        List<LottoNumber> lottoNumbers = Arrays.asList(
+            new LottoNumber(1),
+            new LottoNumber(2),
+            new LottoNumber(3),
+            new LottoNumber(4),
+            new LottoNumber(5),
+            new LottoNumber(6)
+        );
+
+        assertThat(lottoTicket1.getLottoNumbers()).isEqualTo(lottoNumbers);
     }
 
 }
