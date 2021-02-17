@@ -6,11 +6,11 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoFactory {
-    private static final List<Integer> CANDIDATES_NUMBERS;
+    private static final List<LottoNumber> CANDIDATES_NUMBERS;
 
     static {
         CANDIDATES_NUMBERS = IntStream.rangeClosed(LottoNumber.NUMBER_MIN, LottoNumber.NUMBER_MAX)
-                .mapToObj(Integer::new)
+                .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 
@@ -24,7 +24,7 @@ public class LottoFactory {
     }
 
     private static Lotto generate(ShuffleStrategy strategy) {
-        List<Integer> shuffled = strategy.shuffle(CANDIDATES_NUMBERS);
+        List<LottoNumber> shuffled = strategy.shuffle(CANDIDATES_NUMBERS);
         return new Lotto(shuffled.subList(0, Lotto.LENGTH));
     }
 }

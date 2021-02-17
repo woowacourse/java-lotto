@@ -1,6 +1,7 @@
 package view;
 
 import domain.Lotto;
+import domain.LottoNumber;
 import domain.Money;
 import domain.WinningLotto;
 
@@ -26,8 +27,9 @@ public class InputView {
     private static Lotto inputLotto() {
         System.out.println("지난 주 당첨 로또를 입력해주세요.");
         String input = SCANNER.nextLine();
-        List<Integer> lottoNumbers = Arrays.stream(input.split(","))
+        List<LottoNumber> lottoNumbers = Arrays.stream(input.split(","))
                 .map(Integer::parseInt)
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
 
         return new Lotto(lottoNumbers);

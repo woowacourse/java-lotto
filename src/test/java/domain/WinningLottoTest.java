@@ -3,11 +3,7 @@ package domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class WinningLottoTest {
 
@@ -15,7 +11,7 @@ class WinningLottoTest {
     @Test
     void generate() {
         // given
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto lotto = new Lotto(new int[]{1, 2, 3, 4, 5, 6});
         int bonusBall = 7;
 
         // when

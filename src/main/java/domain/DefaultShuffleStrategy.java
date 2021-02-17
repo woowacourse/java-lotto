@@ -7,8 +7,8 @@ import java.util.List;
 public class DefaultShuffleStrategy implements ShuffleStrategy {
 
     @Override
-    public List<Integer> shuffle(List<Integer> lottoNumbers) {
-        List<Integer> numbers = new ArrayList<>(lottoNumbers);
+    public List<LottoNumber> shuffle(List<LottoNumber> lottoNumbers) {
+        List<LottoNumber> numbers = new ArrayList<>(lottoNumbers);
         Collections.shuffle(numbers);
         return numbers;
     }
