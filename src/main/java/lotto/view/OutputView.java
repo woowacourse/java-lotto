@@ -40,13 +40,14 @@ public class OutputView {
     }
 
     private static void resultStatistic(PrizeType prizeType, int count) {
-        if (prizeType != PrizeType.NO_PRIZE) {
+        if (prizeType == PrizeType.NO_PRIZE) {
             return;
         }
         if (prizeType == PrizeType.SECOND_PRIZE) {
-            System.out.println(prizeType.getMatchCount() + "개 일치," + " 보너스 볼 일치(" + prizeType.getPrizeMoney() + "원)- " + count + "개");
+            System.out.println(prizeType.getMatchCount() + "개 일치," + " 보너스 볼 일치(" + prizeType.getPrizeMoney().getValue() + "원)- " + count + "개");
+            return;
         }
-        System.out.println(prizeType.getMatchCount() + "개 일치...(" + prizeType.getPrizeMoney() + ")- " + count + "개");
+        System.out.println(prizeType.getMatchCount() + "개 일치(" + prizeType.getPrizeMoney().getValue() + "원)- " + count + "개");
     }
 
     public static void printProfitRate(LottoResult lottoResult, Money money) {
