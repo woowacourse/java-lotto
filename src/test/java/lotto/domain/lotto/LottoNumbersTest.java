@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 import java.util.Arrays;
 import lotto.domain.number.LottoNumber;
+import lotto.domain.number.Number;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,12 +16,12 @@ public class LottoNumbersTest {
         assertThatIllegalArgumentException().isThrownBy(
             () -> new LottoNumbers(
                 Arrays.asList(
-                    new LottoNumber(1),
-                    new LottoNumber(1),
-                    new LottoNumber(2),
-                    new LottoNumber(3),
-                    new LottoNumber(4),
-                    new LottoNumber(5)
+                    new LottoNumber(new Number(1)),
+                    new LottoNumber(new Number(1)),
+                    new LottoNumber(new Number(2)),
+                    new LottoNumber(new Number(3)),
+                    new LottoNumber(new Number(4)),
+                    new LottoNumber(new Number(5))
                 ))).withMessage("로또 넘버에 중복이 있습니다.");
     }
 
@@ -30,11 +31,11 @@ public class LottoNumbersTest {
         assertThatIllegalArgumentException().isThrownBy(
             () -> new LottoNumbers(
                 Arrays.asList(
-                    new LottoNumber(1),
-                    new LottoNumber(45),
-                    new LottoNumber(2),
-                    new LottoNumber(3),
-                    new LottoNumber(4)
+                    new LottoNumber(new Number(1)),
+                    new LottoNumber(new Number(45)),
+                    new LottoNumber(new Number(2)),
+                    new LottoNumber(new Number(3)),
+                    new LottoNumber(new Number(4))
                 ))).withMessage("로또 넘버가 6개가 아닙니다.");
     }
 }

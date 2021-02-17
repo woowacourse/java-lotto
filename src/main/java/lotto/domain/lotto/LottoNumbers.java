@@ -1,5 +1,6 @@
 package lotto.domain.lotto;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.number.LottoNumber;
@@ -29,8 +30,13 @@ public class LottoNumbers {
         }
     }
 
+    public List<LottoNumber> getLottoNumbers() {
+        return Collections.unmodifiableList(lottoNumbers);
+    }
+
     @Override
     public String toString() {
-        return String.join("-", lottoNumbers.stream().map(LottoNumber::toString).collect(Collectors.toList()));
+        return String.join("-",
+            lottoNumbers.stream().map(LottoNumber::toString).collect(Collectors.toList()));
     }
 }

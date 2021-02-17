@@ -3,7 +3,9 @@ package lotto.domain.lotto;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 import lotto.domain.number.LottoNumber;
+import lotto.domain.number.Number;
 
 public class LottoGenerator {
 
@@ -18,7 +20,7 @@ public class LottoGenerator {
 
         for (int i = LOTTO_NUMBER_MINIMUM; i <= LOTTO_NUMBER_MAXIMUM; i++) {
             lottoNumbers.add(
-                new LottoNumber(i)
+                new LottoNumber(new Number(i))
             );
         }
     }

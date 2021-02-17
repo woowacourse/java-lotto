@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Number {
 
-    protected final int value;
+    private final int value;
 
     public Number(int value) {
         this(String.valueOf(value));
@@ -21,6 +21,15 @@ public class Number {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("입력이 숫자가 아니거나 범위를 벗어났습니다.");
         }
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    @Override
+    public Number clone() {
+        return new Number(value);
     }
 
     @Override

@@ -1,10 +1,12 @@
 package lotto.domain.lotto;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoGroup {
+
     private final List<LottoNumbers> lotties;
 
     public LottoGroup(List<LottoNumbers> lotties) {
@@ -13,6 +15,10 @@ public class LottoGroup {
 
     public int getCount() {
         return lotties.size();
+    }
+
+    public List<LottoNumbers> getLotties() {
+        return Collections.unmodifiableList(lotties);
     }
 
     @Override

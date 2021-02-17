@@ -1,27 +1,49 @@
 package lotto.domain.number;
 
-public class LottoNumber extends Number{
+import java.util.Objects;
 
-    private static int NUMBER_MINIMUM = 1;
-    private static int NUMBER_MAXIMUM = 45;
+public class LottoNumber {
 
-    public LottoNumber(String value) {
-        super(value);
-        validateRange();
+    private static final int NUMBER_MINIMUM = 1;
+    private static final int NUMBER_MAXIMUM = 45;
+
+    private final Number number;
+
+    public LottoNumber(Number number) {
+        validateRange(number);
+        this.number = number;
     }
 
-    public LottoNumber(int value) {
-        this(String.valueOf(value));
-    }
-
-    private void validateRange() {
-        if (value < NUMBER_MINIMUM || value > NUMBER_MAXIMUM) {
+    private void validateRange(Number number) {
+        if (number.getValue() < NUMBER_MINIMUM || number.getValue() > NUMBER_MAXIMUM) {
             throw new IllegalArgumentException("범위 밖의 로또 번호 입니다.");
         }
     }
 
+    public Number getNumber() {
+        return number.clone();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoNumber that = (LottoNumber) o;
+        return Objects.equals(number, that.number);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
+    }
+
     @Override
     public String toString() {
-        return String.valueOf(value);
+        return String.valueOf(number.getValue());
     }
+
 }
