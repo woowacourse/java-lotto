@@ -5,13 +5,13 @@ public class Money {
     private int value;
 
     public Money(final int value) {
-        validateNonNegativeInt(value);
+        validatePositiveInt(value);
         this.value = value;
     }
 
-    private void validateNonNegativeInt(final int value) {
-        if (value < 0) {
-            throw new IllegalArgumentException("돈은 음의 정수면 안됩니다.");
+    private void validatePositiveInt(final int value) {
+        if (value <= 0) {
+            throw new IllegalArgumentException("돈은 양의 정수여야 합니다.");
         }
     }
 
