@@ -31,8 +31,8 @@ class LottoTicketsTest {
         LottoTickets lottoTickets = LottoTickets.generateLottoTickets(3, lottoNumberGenerator);
         WinningLottoTicket winningLottoTicket = WinningLottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 7), 6);
 
-        Map<LottoRank, Long> map = lottoTickets.getStatistics(winningLottoTicket);
+        LottoStatistics lottoStatistics = lottoTickets.getStatistics(winningLottoTicket);
 
-        assertThat(map.get(LottoRank.SECOND)).isEqualTo(3);
+        assertThat(lottoStatistics.getCount(LottoRank.SECOND)).isEqualTo(3);
     }
 }

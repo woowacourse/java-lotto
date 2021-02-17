@@ -24,9 +24,10 @@ public class LottoTickets {
         return lottoTickets.size();
     }
 
-    public Map<LottoRank, Long> getStatistics(WinningLottoTicket winningLottoTicket) {
-        return lottoTickets.stream()
+    public LottoStatistics getStatistics(WinningLottoTicket winningLottoTicket) {
+        Map<LottoRank, Long> statistics = lottoTickets.stream()
                 .map(lottoTicket -> winningLottoTicket.compareNumbers(lottoTicket))
                 .collect(Collectors.groupingBy(lottoRank -> lottoRank, Collectors.counting()));
+        return new LottoStatistics(statistics);
     }
 }
