@@ -32,11 +32,11 @@
 ### Non TDD
 - [x] InputView.java 사용자 입력을 받는다.
 - [ ] OutputView.java
-    - [ ] 유저에게 얼마 구할건지 물어본다.
-    - [ ] 로또 번호를 출력한다.
-    - [ ] 당첨 번호를 출력한다. (보너스 번호까지)
+    - [x] 유저에게 얼마 구할건지 물어본다.
+    - [x] 로또 번호를 출력한다.
+    - [x] 당첨 번호 입력문구를 출력한다. (보너스 번호까지)
     - [ ] 당첨 통계를 출력한다.
-- [ ] LottoController 입력받은 내용을 LottoService에게 전달하고 결과를 OutputView에게 넘겨준다.
+- [ ] LottoController
 
 
 ```
