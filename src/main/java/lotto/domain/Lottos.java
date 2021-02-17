@@ -17,6 +17,16 @@ public class Lottos {
         this.lottos = createLottos();
     }
 
+    public List<Result> getResults(List<Integer> winningNumbers, int bonusNumber) {
+        List<Result> results = new ArrayList<>();
+        for (Lotto lotto : lottos) {
+            int matches = lotto.countMatchingNumbers(winningNumbers);
+            boolean bonusMatch = lotto.isBonusMatch(bonusNumber);
+            results.add(Result.getResult(matches, bonusMatch));
+        }
+        return results;
+    }
+
     private List<Lotto> createLottos() {
         LottoNumber lottoNumber = new LottoNumber();
         List<Lotto> newLottos = new ArrayList<>();
@@ -24,30 +34,6 @@ public class Lottos {
             newLottos.add(new Lotto(lottoNumber.make()));
         }
         return newLottos;
-    }
-
-    public List<Result> getResults(List<Integer> winningNumbers, int bonusNumber) {
-        List<Result> results = new ArrayList<>();
-        for (Lotto lotto : lottos) {
-            int matches = lotto.countMatchingNumbers(winningNumbers);
-            boolean bonusMatch = lotto.isBonusMatch(bonusNumber);
-
-            if (matches == Result.SECOND.getCount() && bonusMatch) {
-                results.add(Result.SECOND);
-                continue;
-            }
-
-            for (Result result : Result.values()){
-                if(matches == result.getCount()){
-                    results.add(result);
-                }
-            }
-
-            if (matches < Result.FIFTH.getCount()) {
-                results.add(Result.NONE);
-            }
-        }
-        return results;
     }
 
     public int getNumberOfLotto() {
