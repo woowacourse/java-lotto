@@ -6,6 +6,7 @@ import lotto.domain.FixedTicketFactory;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
+import lotto.domain.WinningResult;
 import lotto.utils.ValidateUtils;
 import lotto.domain.Money;
 import lotto.view.InputView;
@@ -35,5 +36,7 @@ public class LottoController {
         LottoNumber bonusBall = new LottoNumber(ValidateUtils.parseInt(inputView.inputValue()));
 
         List<Integer> hitCounts = lottoTickets.checkHitCount(winningTicket);
+        int TotalReward = WinningResult.calculateTotalReward(hitCounts);
+
     }
 }

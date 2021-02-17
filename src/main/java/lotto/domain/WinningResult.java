@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.List;
+
 public enum WinningResult {
     THREE(3, 5000, "3개 일치"),
     FOUR(4, 50000, "4개 일치"),
@@ -15,6 +18,20 @@ public enum WinningResult {
         this.hitCount = hitCount;
         this.reward = reward;
         this.message = message;
+    }
+
+    public static int calculateTotalReward(List<Integer> hitCounts){
+        return hitCounts.stream()
+            .mapToInt(hitCount -> findReward(hitCount))
+            .sum();
+    }
+
+    private static int findReward(Integer count) {
+        return Arrays.stream(values())
+            .filter(value -> count.equals(value.hitCount))
+            .findFirst()
+            .get()
+            .reward;
     }
 
     @Override
