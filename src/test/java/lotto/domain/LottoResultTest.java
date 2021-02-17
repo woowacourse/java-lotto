@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.view.OutputView;
 import org.junit.jupiter.api.Test;
 
 class LottoResultTest {
@@ -8,8 +9,12 @@ class LottoResultTest {
   void test() {
     LottoResult lottoResult = new LottoResult();
     lottoResult.add(LottoRank.FIFTH);
-    lottoResult.add(LottoRank.NONE);
-    lottoResult.add(LottoRank.NONE);
+    lottoResult.add(LottoRank.FIFTH);
+    lottoResult.add(LottoRank.FIFTH);
+    lottoResult.add(LottoRank.FIFTH);
+    lottoResult.add(LottoRank.FIFTH);
+
     System.out.println(lottoResult.winningProfit());
+    OutputView.printLottoResult(lottoResult);
   }
 }

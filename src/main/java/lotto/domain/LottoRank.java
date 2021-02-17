@@ -3,15 +3,15 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum LottoRank {
-  FIRST(6, 2_000_000_000),
-  SECOND(5, 30_000_000),
-  THIRD(5, 1_500_000),
-  FOURTH(4, 50_000),
+  NONE(0, 0),
   FIFTH(3, 5_000),
-  NONE(0, 0);
+  FOURTH(4, 50_000),
+  THIRD(5, 1_500_000),
+  SECOND(5, 30_000_000),
+  FIRST(6, 2_000_000_000);
 
   private static final int MIN_MATCH = 3;
-  private static final String MESSAGE_FORM = "%d개 일치 (%d원)- %개";
+  private static final String MESSAGE_FORM = "%d개 일치%s(%d원) - %d개";
 
   private final int matchCount;
   private final int winningMoney;
@@ -41,7 +41,10 @@ public enum LottoRank {
   }
 
   public String message(int count) {
-    return String.format(MESSAGE_FORM, matchCount, winningMoney, count);
+    if (this == SECOND) {
+      return String.format(MESSAGE_FORM, matchCount, ", 보너스 볼 일치", winningMoney, count);
+    }
+    return String.format(MESSAGE_FORM, matchCount, "", winningMoney, count);
   }
 
 }
