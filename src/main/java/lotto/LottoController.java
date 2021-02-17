@@ -19,10 +19,8 @@ public class LottoController {
 
     private ArrayList<Integer> changeToArrayList() {
         String numberInput = LottoView.requestWinningNumber();
-        List<String> parsedNumbers = Arrays.stream(numberInput.split(DELIMITER, -1))
+        List<Integer> winningNumbers = Arrays.stream(numberInput.split(DELIMITER, -1))
                     .map(String::trim)
-                    .collect(Collectors.toList());
-        List<Integer> winningNumbers = parsedNumbers.stream()
                     .map(Integer::parseInt)
                     .collect(Collectors.toList());
         ArrayList<Integer> winningNums = new ArrayList<Integer>();
