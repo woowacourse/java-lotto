@@ -1,6 +1,7 @@
 package lotto.lottoticket;
 
 import lotto.lottogame.LottoCount;
+import lotto.ranking.Ranking;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,19 @@ public class Tickets {
             lottoCount = lottoCount.decreaseOne();
             tickets.add(new Ticket(numbersGenerator));
         }
+    }
+
+    public List<Ranking> makeResult(WinnerTicket winnerTicket, BonusBall bonusBall) {
+        List<Ranking> result = new ArrayList<>();
+        for (Ticket ticket : tickets) {
+            int matchCount = winnerTicket.findMatchCount(ticket);
+            boolean bonus = false;
+            if (matchCount == 5) {
+                bonus = ticket.hasContainBonus(bonusBall);
+            }
+            result.add(Ranking.makePrice(matchCount, bonus));
+        }
+        return result;
     }
 
     public List<Ticket> getTickets() {

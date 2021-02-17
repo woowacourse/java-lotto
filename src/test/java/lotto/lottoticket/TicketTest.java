@@ -7,6 +7,7 @@ import java.util.Arrays;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TicketTest {
     @Test
@@ -45,5 +46,14 @@ public class TicketTest {
                 new Ticket(numbersGenerator)
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("숫자는 여섯개여야 합니다.");
+    }
+
+    @Test
+    @DisplayName("보너스볼 포함 확인")
+    void checkContainBonusBall() {
+        BonusBall bonusBall = new BonusBall("6", new WinnerTicket(("1, 2, 3, 4, 5, 8")));
+        NumbersGenerator numbersGenerator = () -> Arrays.asList(1, 2, 3, 4, 5, 6);
+        Ticket ticket = new Ticket(numbersGenerator);
+        assertTrue(ticket.hasContainBonus(bonusBall));
     }
 }

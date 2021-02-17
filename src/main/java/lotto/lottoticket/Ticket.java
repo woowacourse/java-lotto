@@ -29,6 +29,7 @@ public class Ticket {
         return ZERO;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -40,5 +41,14 @@ public class Ticket {
     @Override
     public int hashCode() {
         return Objects.hash(numbers);
+    }
+
+    public boolean hasContainBonus(BonusBall bonusBall) {
+        for(Integer number : numbers) {
+            if(bonusBall.isSameThan(number)){
+                return true;
+            }
+        }
+        return false;
     }
 }

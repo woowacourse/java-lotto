@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BonusBallTest {
     @Test
@@ -37,5 +39,13 @@ public class BonusBallTest {
         assertThatThrownBy(() -> new BonusBall("6", new WinnerTicket("1, 2, 3, 4, 5, 6")))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("중복된 숫자가 존재합니다.");
+    }
+
+    @Test
+    @DisplayName("보너스볼 포함 확인")
+    void checkContainBonusBall() {
+        BonusBall bonusBall = new BonusBall("15", new WinnerTicket("1, 2, 3, 4, 5, 6"));
+        assertTrue(bonusBall.isSameThan(15));
+        assertFalse(bonusBall.isSameThan(5));
     }
 }

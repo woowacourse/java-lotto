@@ -14,6 +14,10 @@ public class BonusBall {
         this.bonusBall = number;
     }
 
+    public boolean isSameThan(int number) {
+        return this.bonusBall == number;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

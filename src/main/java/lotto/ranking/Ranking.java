@@ -25,7 +25,7 @@ public enum Ranking {
         return Arrays.stream(values())
                 .filter(n -> n.matchCount == match && n!=SECOND)
                 .findFirst()
-                .orElseThrow(()-> new IllegalArgumentException("존재하지 않습니다."));
+                .orElse(NOTHING);
     }
 
 }
