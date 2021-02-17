@@ -14,7 +14,7 @@ public class LottoTicketFactory {
         }
     }
 
-    public LottoTickets buyLottoTickets(Money money) {
+    public List<LottoTicket> buyLottoTickets(Money money) {
         int length = (int) money.getValue() / 1000;
         List<LottoTicket> lottoTickets = new ArrayList<>();
         for (int i = 0; i < length; i++) {
@@ -22,6 +22,6 @@ public class LottoTicketFactory {
             List<LottoNumber> lottoNumbers = lottoNumberRange.subList(0, 6);
             lottoTickets.add(new LottoTicket(lottoNumbers));
         }
-        return new LottoTickets(lottoTickets);
+        return lottoTickets;
     }
 }

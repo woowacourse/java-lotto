@@ -11,4 +11,12 @@ public class WinningLotto {
         this.winningTicket = new LottoTicket(winningTicket.lottoTicket());
         this.bonusNumber = new LottoNumber(bonusNumber.toString());
     }
+
+    public LottoTicket getWinningTicket() {
+        return winningTicket;
+    }
+
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
+    }
 }

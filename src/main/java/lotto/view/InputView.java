@@ -13,13 +13,20 @@ public class InputView {
     private InputView() {
     }
 
+    public static String inputMoney() {
+        OutputView.printInputMoneyMessage();
+        return SCANNER.nextLine();
+    }
+
     public static List<String> inputWinningNumbers() {
+        OutputView.printInputWinningNumbers();
         return Arrays.asList(SCANNER.nextLine()
                 .replace(BLANK, REPLACEMENT)
                 .split(DELIMITER));
     }
 
     public static String inputBonusNumber() {
+        OutputView.printInputBonusNumberMessage();
         return SCANNER.nextLine();
     }
 }

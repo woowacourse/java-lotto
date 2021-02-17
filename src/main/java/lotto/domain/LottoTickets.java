@@ -13,11 +13,11 @@ public class LottoTickets {
         return Collections.unmodifiableList(lottoTickets);
     }
 
-    public List<PrizeType> checkWinningTickets(List<LottoNumber> winningNumbers, LottoNumber bonusBall) {
+    public List<PrizeType> checkWinningTickets(WinningLotto winningLotto) {
         List<PrizeType> winningTickets = new ArrayList<>();
         for (LottoTicket lottoTicket : this.lottoTickets) {
-            winningTickets.add(PrizeType.getPrizeType(lottoTicket.getMatchingCount(winningNumbers),
-                    lottoTicket.isMatchingBonusNumber(bonusBall)));
+            winningTickets.add(PrizeType.getPrizeType(lottoTicket.getMatchingCount(winningLotto.getWinningTicket().lottoTicket()),
+                    lottoTicket.isMatchingBonusNumber(winningLotto.getBonusNumber())));
         }
         return winningTickets;
     }
