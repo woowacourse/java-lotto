@@ -1,6 +1,7 @@
 package domain.lotto;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -49,5 +50,10 @@ public class LottoNumbers {
     public boolean containNumber(final BonusNumber bonusNumber) {
         return lottoNumbers.stream()
                 .anyMatch(lottoNumber -> bonusNumber.isSameNumber(lottoNumber));
+    }
+
+    public List<LottoNumber> getLottoNumbers() {
+        List<LottoNumber> copy = new ArrayList<>(this.lottoNumbers);
+        return Collections.unmodifiableList(copy);
     }
 }

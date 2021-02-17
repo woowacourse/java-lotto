@@ -7,9 +7,12 @@ import domain.lotto.Lottos;
 import util.RandomLottoUtil;
 import view.LottoGameScreen;
 import view.dto.LottoCountResponseDto;
+import view.dto.LottoNumbersDto;
+import view.dto.LottoResponseDto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoGameMachine {
     private static final Budget LOTTO_COST = Budget.amounts(1000);
@@ -24,7 +27,14 @@ public class LottoGameMachine {
         LottoCount lottoCount = calculateLottoCount();
         LottoGameScreen lottoGameScreen = new LottoGameScreen();
         lottoGameScreen.showLottoCount(new LottoCountResponseDto(lottoCount.getLottoCount()));
+
         Lottos lottos = makeLottos(lottoCount);
+        List<Lotto> lottoGroup = lottos.getLottos();
+        List<LottoResponseDto> lottoResponseDtos = lottoGroup.stream().map(lotto -> (new LottoResponseDto(lotto))).collect(Collectors.toList());
+
+        List<LottoNumbersDto> lottoNumbersDtos = lottoResponseDtos.stream().map(lottoResponseDto -> lottoResponseDto.getLottoNumbersDto()).collect(Collectors.toList());
+        lottoNumbersDtos.stream().forEach(lottoNumberDto ->  lottoGameScreen.showLottoStatus(lottoNumberDto));
+
     }
 
     private Lottos makeLottos(final LottoCount lottoCount) {
