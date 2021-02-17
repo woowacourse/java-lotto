@@ -53,5 +53,4 @@ public class LottoNumber {
     public String toString() {
         return String.valueOf(number.toInt());
     }
-
 }

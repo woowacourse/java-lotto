@@ -17,7 +17,7 @@ public class WinningStatistics {
     private final double yield;
 
     public WinningStatistics(Map<Integer, Long> gameResult, PayOut payOut) {
-        this.rankings = IntStream.rangeClosed(1, Rank.values().length)
+        this.rankings = IntStream.range(1, Rank.values().length)
             .boxed()
             .map(key -> Rank.createRanking(key, gameResult.getOrDefault(key, 0L)))
             .sorted(comparingInt(Ranking::getRank))

@@ -60,9 +60,10 @@ public class WinningNumber {
     public WinningStatistics getResult(LottoGroup lottoGroup, PayOut payOut) {
         Map<Integer, Long> result = lottoGroup.getLotties().stream()
             .map(this::getRank)
+            .filter(rank -> Rank.FAIL.getRank() != rank)
             .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
-        IntStream.rangeClosed(1, Rank.values().length)
+        IntStream.range(1, Rank.values().length)
             .filter(rank -> !result.containsKey(rank))
             .forEach(rank -> result.put(rank, 0L));
 

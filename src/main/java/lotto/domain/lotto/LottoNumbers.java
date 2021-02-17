@@ -1,8 +1,9 @@
 package lotto.domain.lotto;
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 import lotto.domain.number.LottoNumber;
 
 public class LottoNumbers {
@@ -34,6 +35,10 @@ public class LottoNumbers {
         return (int) this.lottoNumbers.stream().filter(lottoNumbers::contains).count();
     }
 
+    public List<Integer> toIntegerList() {
+        return lottoNumbers.stream().map(LottoNumber::toInt).collect(toList());
+    }
+
     public boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
@@ -58,6 +63,6 @@ public class LottoNumbers {
     @Override
     public String toString() {
         return String.join("-",
-            lottoNumbers.stream().map(LottoNumber::toString).collect(Collectors.toList()));
+            lottoNumbers.stream().map(LottoNumber::toString).collect(toList()));
     }
 }
