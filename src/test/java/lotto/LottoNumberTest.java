@@ -1,7 +1,7 @@
 package lotto;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -28,6 +28,6 @@ public class LottoNumberTest {
         ThrowingCallable throwingCallable = () -> LottoNumber.from(lottoNum);
 
         // then
-        assertThatThrownBy(throwingCallable).isInstanceOf(IllegalArgumentException.class);
+        assertThatIllegalArgumentException().isThrownBy(throwingCallable);
     }
 }

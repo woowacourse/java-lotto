@@ -9,6 +9,8 @@ public class RandomNumberGenerator implements LottoNumberGenerator {
 
     private static final int MIN_LOTTO_NUM = 1;
     private static final int MAX_LOTTO_NUM = 45;
+    private static final int LOTTO_LENGTH = 6;
+
 
     private static final List<Integer> NUMBERS
         = IntStream.rangeClosed(MIN_LOTTO_NUM, MAX_LOTTO_NUM)
@@ -20,7 +22,7 @@ public class RandomNumberGenerator implements LottoNumberGenerator {
         Collections.shuffle(NUMBERS);
 
         return NUMBERS.stream()
-                      .limit(6)
+                      .limit(LOTTO_LENGTH)
                       .collect(Collectors.toList());
     }
 }
