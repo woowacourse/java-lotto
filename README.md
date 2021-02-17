@@ -45,6 +45,7 @@
 - [x] 각 number를 LottoNumber로 포장
   - [x] [유효성 체크] 숫자 범위
 - [ ] LottoSupplier 상수 간소화
+- [x] 보너스 볼은 지난 주 당첨 번호에 있는 숫자와 겹치면 안 됨.
 
 ---
 ### Commit Convention
