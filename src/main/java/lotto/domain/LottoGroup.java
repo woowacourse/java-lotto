@@ -6,7 +6,7 @@ import java.util.List;
 
 public class LottoGroup {
 
-  private List<Lotto> lottoList;
+  private final List<Lotto> lottoList;
 
   public LottoGroup() {
     this.lottoList = new ArrayList<>();
