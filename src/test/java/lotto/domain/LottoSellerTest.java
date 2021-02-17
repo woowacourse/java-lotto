@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.util.LottoGenerator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,7 +12,7 @@ class LottoSellerTest {
 
   @BeforeEach
   void setUp() {
-    lottoSeller = new LottoSeller(new LottoGenerator());
+    lottoSeller = new LottoSeller();
   }
 
   @Test

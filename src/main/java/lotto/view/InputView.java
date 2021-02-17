@@ -25,7 +25,7 @@ public class InputView {
   public static LottoGroup lottoGroup() {
     try {
       int money = money();
-      LottoSeller lottoSeller = new LottoSeller(new LottoGenerator());
+      LottoSeller lottoSeller = new LottoSeller();
       return lottoSeller.sellLotto(money);
     } catch (RuntimeException e) {
       return lottoGroup();
@@ -58,12 +58,11 @@ public class InputView {
     try {
       OutputView.printMessage(INPUT_WINNING_NUMBER_MESSAGE);
       String winningNumbers = SCAN.nextLine();
-      LottoGenerator lottoGenerator = new LottoGenerator();
       int[] numbers = Arrays
           .stream(winningNumbers.trim().split(","))
           .mapToInt(Integer::parseInt)
           .toArray();
-      return lottoGenerator.generate(numbers);
+      return LottoGenerator.generate(numbers);
     } catch (RuntimeException e) {
       System.out.println("예외가 발생했습니다!");
       return winningNumbers();

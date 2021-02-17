@@ -17,7 +17,7 @@ class WinningLottoTest {
 
   @BeforeEach
   void setUp() {
-    lotto = new LottoGenerator().generate(1, 2, 3, 4, 5, 6);
+    lotto = LottoGenerator.generate(1, 2, 3, 4, 5, 6);
     bonusNumber = LottoNumber.of(7);
   }
 
@@ -31,7 +31,7 @@ class WinningLottoTest {
   void checkRankWithInputLotto(String numbers, LottoRank expectedRank) {
     WinningLotto winningLotto = new WinningLotto(lotto, this.bonusNumber);
     int[] lottoNumbers = Arrays.stream(numbers.split(",")).mapToInt(Integer::parseInt).toArray();
-    LottoRank rank = winningLotto.matchRank(new LottoGenerator().generate(lottoNumbers));
+    LottoRank rank = winningLotto.matchRank(LottoGenerator.generate(lottoNumbers));
     assertThat(rank).isEqualTo(expectedRank);
   }
 }

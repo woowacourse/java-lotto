@@ -9,11 +9,13 @@ import lotto.domain.LottoNumber;
 
 public class LottoGenerator {
 
-  public Lotto generate() {
+  private LottoGenerator() { }
+
+  public static Lotto generate() {
     return new Lotto(createRandomNumber());
   }
 
-  private List<LottoNumber> createRandomNumber() {
+  private static List<LottoNumber> createRandomNumber() {
     Random random = new Random();
     return Stream.generate(() -> random
         .nextInt(45) + 1)
@@ -23,7 +25,7 @@ public class LottoGenerator {
         .collect(Collectors.toList());
   }
 
-  public Lotto generate(int... number) {
+  public static Lotto generate(int... number) {
     return new Lotto(LottoNumber.asList(number));
   }
 }
