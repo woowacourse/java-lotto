@@ -41,9 +41,9 @@ public enum Rank {
     }
 
     public static Rank getRank(int matchedNumber, boolean hasBonusNumber) {
-        return Arrays.stream(Rank.values())
-            .filter(rank -> rank.matchedNumber == matchedNumber)
-            .filter(rank -> rank.hasBonusNumber == hasBonusNumber)
+        return stream(Rank.values())
+            .filter(rank -> (rank.matchedNumber == matchedNumber
+                && (!rank.hasBonusNumber || hasBonusNumber)))
             .findAny()
             .orElse(Rank.FAIL);
     }
