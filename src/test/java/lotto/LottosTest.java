@@ -43,4 +43,12 @@ public class LottosTest {
         Lottos lottos = new Lottos(money);
         assertThat(lottos.getCount()).isEqualTo(14);
     }
+
+    @Test
+    void 당첨번호가_포함되어있는지_확인() {
+        
+
+
+    }
 }
+

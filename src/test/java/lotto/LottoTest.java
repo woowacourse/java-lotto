@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
@@ -37,5 +38,12 @@ public class LottoTest {
             new Lotto(nums);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(NUMBER_RANGE_ERROR);
+    }
+
+    @Test
+    void 당첨번호가_몇개있는지_확인() {
+        Lotto generatedLotto = new Lotto(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        ArrayList<Integer> winningLotto = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 8, 9));
+        assertThat(generatedLotto.howManyWins(winningLotto)).isEqualTo(4);
     }
 }
