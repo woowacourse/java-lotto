@@ -1,7 +1,6 @@
 package lotto;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.NoSuchElementException;
 
 public enum Rating {
@@ -14,7 +13,6 @@ public enum Rating {
 
     private int matchCount;
     private int reward;
-    // private int count = 0;
 
     Rating(int matchCount, int reward) {
         this.matchCount = matchCount;
@@ -41,10 +39,5 @@ public enum Rating {
     public int getReward() {
         return reward;
     }
-    //    public void plusCount(){
-//        this.count++;
-//    }
 
-    // Rating rating = Rating.getRating(6,false)
-    // rating.plusCount();
 }
