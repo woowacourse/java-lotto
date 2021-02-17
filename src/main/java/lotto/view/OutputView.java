@@ -29,7 +29,11 @@ public class OutputView {
         printSplitLine();
     }
 
-    public static void printSplitLine() {
+    public static void printProfit(float profit) {
+        System.out.println(String.format("총 수익률은 %.2f입니다.", profit));
+    }
+
+    private static void printSplitLine() {
         System.out.println("---------");
     }
 

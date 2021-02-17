@@ -16,6 +16,10 @@ public class Money {
         return this.money / MIN_MONEY_UNIT;
     }
 
+    public float getProfit(int totalReward) {
+        return (float) totalReward / (float) money;
+    }
+
     private void validateMoneyLimit(final int money) {
         if (money < MIN_MONEY_UNIT) {
             throw new IllegalArgumentException("입력 금액은 1000원 이상이어야 합니다.");

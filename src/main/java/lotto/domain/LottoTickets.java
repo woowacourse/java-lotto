@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoTickets {
@@ -15,10 +16,11 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
-    public List<Integer> checkHitCount(LottoTicket winningTicket) {
-        List<Integer> winningCount = new ArrayList<>();
+    public List<Integer> checkHitCount(LottoTicket winningTicket, LottoNumber bonusBall) {
+        List<Integer> winningCount = new ArrayList<>(Collections.nCopies(8, 0));
         for (LottoTicket lottoTicket : lottoTickets) {
-            winningCount.add(lottoTicket.compareNumbers(winningTicket));
+            int hitCount = lottoTicket.compareNumbers(winningTicket, bonusBall);
+            winningCount.set(hitCount, winningCount.get(hitCount) + 1);
         }
         return winningCount;
     }

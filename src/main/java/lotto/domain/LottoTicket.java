@@ -3,21 +3,16 @@ package lotto.domain;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class LottoTicket {
+    private static final int CHECK_HIT_COUNT_HAS_BONUS = 5;
+    private static final int BONUS = 7;
+
     private final Set<LottoNumber> lottoNumbers;
 
     public LottoTicket(final Set<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
-
-//    public LottoTicket(final Set<Integer> lottoNumbers) {
-//        this.lottoNumbers = lottoNumbers
-//            .stream()
-//            .map(LottoNumber::new)
-//            .collect(Collectors.toSet());
-//    }
 
     public Set<Integer> getLottoNumbers() {
         Set<Integer> numbers = new HashSet<>();
@@ -25,10 +20,14 @@ public class LottoTicket {
         return numbers;
     }
 
-    public int compareNumbers(LottoTicket winningTicket) {
+    public int compareNumbers(LottoTicket winningTicket, LottoNumber bonusBall) {
         Set<LottoNumber> hitLottoNumbers = new HashSet<>();
         hitLottoNumbers.addAll(lottoNumbers);
         hitLottoNumbers.retainAll(winningTicket.lottoNumbers);
+
+        if (hitLottoNumbers.size() == CHECK_HIT_COUNT_HAS_BONUS && lottoNumbers.contains(bonusBall)) {
+            return BONUS;
+        }
         return hitLottoNumbers.size();
     }
 
