@@ -14,7 +14,7 @@ public class LottoTicketTest {
     @DisplayName("유효한 값이면 객체 생성 성공")
     @Test
     void valueOf_validInput_success() {
-        final List<LottoNumber> lottoNumbers = getValidLottoNumbers();
+        final List<LottoNumber> lottoNumbers = getValidNumbers();
 
         assertThatCode(() -> LottoTicket.valueOf(lottoNumbers))
                 .doesNotThrowAnyException();
@@ -28,6 +28,8 @@ public class LottoTicketTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> LottoTicket.valueOf(lottoNumbers))
                 .withMessageContaining("중복");
+        assertThatCode(() -> LottoTicket.valueOf(lottoNumbers))
+                .doesNotThrowAnyException();
     }
 
     @DisplayName("객체 생성 실패 : 숫자가 6개가 아닌 경우")
@@ -46,7 +48,13 @@ public class LottoTicketTest {
         );
     }
 
-    private List<LottoNumber> getValidLottoNumbers() {
+    @DisplayName("6개의 숫자를 가진 로또 티켓 객체 생성")
+    @Test
+    void generate_success() {
+
+    }
+
+    private List<LottoNumber> getValidNumbers() {
         return Arrays.asList(
                 LottoNumber.valueOf(1),
                 LottoNumber.valueOf(6),
