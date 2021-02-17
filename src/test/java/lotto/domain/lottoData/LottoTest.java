@@ -36,4 +36,11 @@ public class LottoTest {
         WinningLotto winningLotto = new WinningLotto(numbers, bonus);
         assertThat(lotto.match(winningLotto.values())).isEqualTo(matchCount);
     }
+
+    @Test
+    void 보너스가_포함되었는지_테스트() {
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7));
+        WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6", "7");
+        assertThat(lotto.containsBonus(winningLotto)).isTrue();
+    }
 }

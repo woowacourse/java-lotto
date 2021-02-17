@@ -15,6 +15,10 @@ public class Money {
         this.money = Integer.parseInt(money);
     }
 
+    public int getMoney() {
+        return this.money;
+    }
+
     public int lottoQuantity() {
         return this.money / LOTTO_PRICE;
     }

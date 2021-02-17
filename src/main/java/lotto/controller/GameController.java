@@ -2,7 +2,6 @@ package lotto.controller;
 
 import lotto.View.InputView;
 import lotto.View.OutputView;
-import lotto.domain.Rank;
 import lotto.domain.lottoData.Lotto;
 import lotto.domain.lottoData.LottoGenerator;
 import lotto.domain.lottoData.Lottos;
@@ -11,7 +10,6 @@ import lotto.domain.lottoData.WinningLotto;
 import lotto.domain.stats.LottoResults;
 
 import java.util.List;
-import java.util.Map;
 
 public class GameController {
     private static final int LOTTO_MIN = 1;
@@ -29,8 +27,8 @@ public class GameController {
         OutputView.printResult(matchLottos());
     }
 
-    private Map<Rank, Integer> matchLottos() {
-        return lottos.matchCount(inputWinningLotto());
+    private LottoResults matchLottos() {
+        return lottos.findMatchLottos(inputWinningLotto(), money);
     }
 
     private WinningLotto inputWinningLotto() {
@@ -38,7 +36,6 @@ public class GameController {
         String bonusNumber = InputView.inputBonusNumber();
         return new WinningLotto(numbers, bonusNumber);
     }
-
 
     private void buyLotto() {
         int quantity = money.lottoQuantity();

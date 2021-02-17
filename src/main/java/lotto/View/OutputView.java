@@ -4,8 +4,6 @@ import lotto.domain.Rank;
 import lotto.domain.lottoData.Lotto;
 import lotto.domain.stats.LottoResults;
 
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -29,11 +27,16 @@ public class OutputView {
                 .collect(Collectors.joining(", ", "[", "]"));
     }
 
-    public static void printResult(Map<Rank, Integer> results) {
+    public static void printResult(LottoResults results) {     // LottoResults
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        for (Map.Entry<Rank, Integer> elem : results.entrySet()) {
+        Map<Rank, Integer> statistics = results.values();
+        for (Map.Entry<Rank, Integer> elem : statistics.entrySet()) {
+            if (elem.getKey().getCount()==5 && elem.getKey().getMoney()==30000000) {
+                System.out.printf("%d개 일치, 보너스 볼 일치 (%d원)- %d개\n", elem.getKey().getCount(), elem.getKey().getMoney(), elem.getValue());
+                continue;
+            }
             System.out.printf("%d개 일치 (%d원)- %d개\n", elem.getKey().getCount(), elem.getKey().getMoney(), elem.getValue());
         }
 

@@ -21,9 +21,10 @@ public enum Rank {
     public static Rank of(int count, boolean bonus) {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.isSameAs(count))
-                .filter(rank -> !rank.equals(SECOND) || bonus)
+                .filter(rank -> !rank.equals(THIRD) || !bonus)
                 .findFirst()
                 .orElse(NOT_FOUNT);
+
     }
 
     private boolean isSameAs(int count) {
@@ -34,7 +35,7 @@ public enum Rank {
         return count;
     }
 
-    public Object getMoney() {
+    public int getMoney() {
         return money;
     }
 
