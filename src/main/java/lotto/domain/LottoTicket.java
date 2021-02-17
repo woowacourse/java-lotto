@@ -45,6 +45,10 @@ public class LottoTicket {
         throw new RuntimeException(COUNT_ERROR_MESSAGE);
     }
 
+    public boolean isEmpty() {
+        return lottoNumbers.isEmpty();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

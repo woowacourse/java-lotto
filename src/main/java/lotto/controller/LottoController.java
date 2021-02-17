@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import com.sun.tools.internal.ws.wsdl.document.Output;
 import lotto.domain.*;
 import lotto.service.LottoTicketService;
 import lotto.view.InputView;
@@ -9,6 +8,7 @@ import lotto.view.OutputView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoController {
@@ -32,7 +32,7 @@ public class LottoController {
                 Arrays.stream(InputView.getUserInput().split(DELIMITER))
                         .map(String::trim)
                         .map(Integer::parseInt)
-                        .map(lottoNumber -> new LottoNumber(lottoNumber))
+                        .map(LottoNumber::new)
                         .collect(Collectors.toList());
 
         LottoWinnerTicket lottoWinnerTicket = new LottoWinnerTicket(lottoWinnerNumbers);

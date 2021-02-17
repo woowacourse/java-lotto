@@ -2,6 +2,8 @@ package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullSource;
 
 import java.util.Arrays;
 import java.util.List;
@@ -38,6 +40,15 @@ public class LottoWinnerTest {
 
         assertThat(new LottoWinner(lottoWinnerTicket, lottoWinnerBonusNumber))
                 .isEqualTo(new LottoWinner(expectedLottoWinnerTicket, expectedLottoWinnerBonusNumber));
+    }
+
+    @ParameterizedTest(name = "Null은 생성자의 매개변수로 허용하지 않는다.")
+    @NullSource
+    public void nullNotAllowedTest(LottoWinnerTicket lottoWinnerTicket) {
+        LottoWinnerBonusNumber lottoWinnerBonusNumber = new LottoWinnerBonusNumber(1);
+        assertThatThrownBy(() -> {
+            new LottoWinner(lottoWinnerTicket, lottoWinnerBonusNumber);
+        }).isInstanceOf(NullPointerException.class).hasMessage("null 값은 허용하지 않습니다.");
     }
 
     @Test

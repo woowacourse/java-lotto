@@ -49,7 +49,7 @@ public class LottoTicketsTest {
         ));
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "Null은 생성자의 매개변수로 허용하지 않는다.")
     @NullSource
     public void nullParameterTest(List<LottoTicket> lottoTickets) {
         assertThatThrownBy(() -> {
@@ -57,7 +57,7 @@ public class LottoTicketsTest {
         }).isInstanceOf(NullPointerException.class).hasMessage("null 값은 허용하지 않습니다.");
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "빈값은 생성자의 매개변수로 허용하지 않는다.")
     @EmptySource
     public void emptyParameterTest(List<LottoTicket> lottoTickets) {
         assertThatThrownBy(() -> {

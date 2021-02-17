@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EmptySource;
+import org.junit.jupiter.params.provider.NullSource;
 
 import java.util.Arrays;
 import java.util.List;
@@ -37,15 +38,15 @@ public class LottoTicketTest {
         assertThat(lottoTicket).isEqualTo(new LottoTicket(lottoNumbers2));
     }
 
-    @Test
-    @DisplayName("Null 또는 빈 객체는 허용하지 않는다.")
-    public void nullNotAllowedTest() {
+    @ParameterizedTest(name = "Null은 생성자의 매개변수로 허용하지 않는다.")
+    @NullSource
+    public void nullNotAllowedTest(List<LottoNumber> lottoNumbers) {
         assertThatThrownBy(() -> {
-            new LottoTicket(null);
+            new LottoTicket(lottoNumbers);
         }).isInstanceOf(NullPointerException.class).hasMessage("null값은 허용하지 않습니다.");
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "빈값을 생성자의 매개변수로 허용하지 않는다.")
     @EmptySource
     public void emptyParameterTest(List<LottoNumber> lottoNumbers) {
         assertThatThrownBy(() -> {
