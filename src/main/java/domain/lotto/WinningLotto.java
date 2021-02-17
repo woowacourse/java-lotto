@@ -11,7 +11,7 @@ public class WinningLotto {
     }
 
     private void validateWinningLotto(final LottoNumbers lottoNumbers, final BonusNumber bonusNumber) {
-        if(lottoNumbers.containNumber(bonusNumber)) {
+        if (lottoNumbers.containNumber(bonusNumber)) {
             throw new IllegalArgumentException();
         }
     }

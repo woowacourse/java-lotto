@@ -30,6 +30,6 @@ public class LottoNumbersTest {
     @Test
     void LottoNumbers_중복_예외_테스트() {
         assertThatThrownBy(() -> LottoNumbers.generate(Arrays.asList(1, 2, 2, 2, 2, 2)))
-            .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

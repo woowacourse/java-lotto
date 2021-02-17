@@ -35,7 +35,7 @@ public class LottoNumbers {
     private void validateDuplicate(final List<LottoNumber> lottoNumbers) {
         boolean isUnique = lottoNumbers.stream()
                 .allMatch(new HashSet<>()::add);
-        if(!isUnique) {
+        if (!isUnique) {
             throw new IllegalArgumentException();
         }
     }
@@ -46,7 +46,7 @@ public class LottoNumbers {
         }
     }
 
-    public boolean containNumber(BonusNumber bonusNumber) {
+    public boolean containNumber(final BonusNumber bonusNumber) {
         return lottoNumbers.stream()
                 .anyMatch(lottoNumber -> bonusNumber.isSameNumber(lottoNumber));
     }

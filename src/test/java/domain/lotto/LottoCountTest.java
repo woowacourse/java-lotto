@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoCountTest {
@@ -16,13 +16,8 @@ class LottoCountTest {
     @DisplayName("LottoCount 정상 생성된다.")
     @Test
     void LottoCount_생성_테스트() {
-        //given
-        LottoCount lottoCount = LottoCount.of(DUMMY_BUDGET);
-
-        //when
-
-        //then
-        assertThat(lottoCount.getLottoCount()).isEqualTo(10);
+        assertThatCode(() -> LottoCount.of(DUMMY_BUDGET))
+                .doesNotThrowAnyException();
     }
 
     @DisplayName("LottoCount가 0일시 에러 출력한다.")
