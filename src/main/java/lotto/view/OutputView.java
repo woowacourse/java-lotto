@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 
@@ -17,7 +16,25 @@ public class OutputView {
         lottoTickets.toList().forEach(OutputView::printTicket);
     }
 
+    public static void printBonusNumber() {
+        System.out.println("보너스 볼을 입력해주세요.");
+    }
+
+    public static void printWinningNumbers() {
+        System.out.println("지난 주 당첨 번호를 입력해주세요.");
+    }
+
+    public static void printWinningResultTitle() {
+        System.out.println("당첨 통계");
+        printSplitLine();
+    }
+
+    public static void printSplitLine() {
+        System.out.println("---------");
+    }
+
     private static void printTicket(LottoTicket lottoTicket) {
         System.out.println(lottoTicket.getLottoNumbers());
     }
+
 }

@@ -15,6 +15,14 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
+    public List<Integer> checkHitCount(LottoTicket winningTicket) {
+        List<Integer> winningCount = new ArrayList<>();
+        for (LottoTicket lottoTicket : lottoTickets) {
+            winningCount.add(lottoTicket.compareNumbers(winningTicket));
+        }
+        return winningCount;
+    }
+
     public List<LottoTicket> toList() {
         return new ArrayList<>(lottoTickets);
     }
