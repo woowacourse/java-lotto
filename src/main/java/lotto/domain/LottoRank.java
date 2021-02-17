@@ -3,20 +3,34 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum LottoRank {
-    FIRST(7), SECOND(6),
-    THIRD(5), FOURTH(4),
-    FIFTH(3), NONE(0);
+    FIFTH(3, 5_000), FOURTH(4, 50_000),
+    THIRD(5, 1_500_000), SECOND(5.5, 30_000_000),
+    FIRST(6, 200_000_000), NONE(0, 0);
 
-    int matchingCount;
+    double matchingCount;
+    int prizeMoney;
 
-    LottoRank(int matchingCount) {
+    LottoRank(double matchingCount, int prizeMoney) {
         this.matchingCount = matchingCount;
+        this.prizeMoney = prizeMoney;
     }
 
-    public static LottoRank getRank(int matchingCount) {
-        return Arrays.stream(LottoRank.values())
-            .filter(rank -> rank.matchingCount == matchingCount)
+    public static LottoRank getRank(double matchingCount) {
+        return Arrays.stream(values())
+            .filter(element -> element.isSameMatchingCount(matchingCount))
             .findAny()
-            .orElseThrow(RuntimeException::new);
+            .orElse(NONE);
+    }
+
+    private boolean isSameMatchingCount(double matchingCount) {
+        return this.matchingCount == matchingCount;
+    }
+
+    public int getPrizeMoney() {
+        return this.prizeMoney;
+    }
+
+    public double getMatchingCount() {
+        return this.matchingCount;
     }
 }
