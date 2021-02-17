@@ -22,7 +22,11 @@ public class RandomTicketFactory {
 
     private RandomTicketFactory() {}
 
-    public static Set<LottoNumber> shuffle() {
+    public static LottoTicket makeTicket(){
+        return new LottoTicket(makeLottoNumbers());
+    }
+
+    private static Set<LottoNumber> makeLottoNumbers() {
         List<Integer> numbers = new ArrayList(lottoNumberFactory.keySet());
         Set<LottoNumber> ticketNumbers = new HashSet();
         Collections.shuffle(numbers);
