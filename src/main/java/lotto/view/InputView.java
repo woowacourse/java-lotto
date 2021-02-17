@@ -35,6 +35,7 @@ public class InputView {
 
         System.out.println("보너스 볼을 입력해 주세요.");
         String bonusNumberInput = scanner.nextLine();
+        System.out.println();
 
         LottoNumber bonusNumber = new LottoNumber(Integer.parseInt(bonusNumberInput));
 

@@ -20,6 +20,7 @@ public class OutputView {
                 + "]"
             );
         }
+        System.out.println();
     }
 
     public static void printResult(Map<LottoMatchType, Integer> result, int purchasePrice) {
@@ -31,9 +32,9 @@ public class OutputView {
         for (LottoMatchType lottoMatchType : LottoMatchType.values()) {
             totalPrize += lottoMatchType.getPrizeMoney() * result.get(lottoMatchType);
             System.out.printf(lottoMatchType.getMatchCountMessage() + "\n",
-                lottoMatchType.getCountMatchedNumbers());
+                result.get(lottoMatchType));
         }
         double profit = (double) totalPrize / (double) purchasePrice;
-        System.out.printf("총 수익률은 %f입니다.\n", profit);
+        System.out.printf("총 수익률은 %.2f입니다.\n", profit);
     }
 }
