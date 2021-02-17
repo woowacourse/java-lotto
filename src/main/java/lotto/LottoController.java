@@ -1,9 +1,14 @@
 package lotto;
 
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+
 public class LottoController {
     private static Lottos lottos;
     private static WinningLotto winningLotto;
     private static ArrayList<Rank> wins = new ArrayList<>();
+    private static Map<Rank, Integer> countByRank = new HashMap<>();
 
     public void startLotto() {
         lottos = new Lottos(LottoView.requestMoney());
