@@ -1,9 +1,6 @@
 package lotto.utils;
 
-import lotto.exception.IllegalLottoTicketDuplicateNumber;
-import lotto.exception.IllegalLottoTicketNumbers;
-import lotto.exception.IllegalLottoTicketSizeError;
-import lotto.exception.IllegalMoney;
+import lotto.exception.*;
 
 import java.util.HashSet;
 import java.util.List;
@@ -21,49 +18,40 @@ public class Validator {
     }
 
     public static void validateLottoNumbers(List<Integer> numbers) {
-        validateLottoSize(numbers);
-        validateDuplicateNumber(numbers);
-        validateLottoNumbersRange(numbers);
-    }
-
-    private static void validateDuplicateNumber(List<Integer> numbers) {
-        if (new HashSet<>(numbers).size() != numbers.size()) {
-            throw new IllegalLottoTicketDuplicateNumber();
+        if (isInvalidateLottoSize(numbers) || isDuplicateNumber(numbers)) {
+            throw new IllegalLottoNumbers();
         }
-    }
-
-    private static void validateLottoSize(List<Integer> numbers) {
-        if (numbers.size() < LOTTO_TICKET_SIZE) {
-            throw new IllegalLottoTicketSizeError();
-        }
-    }
-
-    private static void validateLottoNumbersRange(List<Integer> numbers) {
-        if (isValidNumberRange(numbers)) {
-            throw new IllegalLottoTicketNumbers();
-        }
-    }
-
-    private static boolean isValidNumberRange(List<Integer> numbers) {
-        return numbers.stream()
-                .anyMatch(number -> number < MIN_NUMBER || number > MAX_NUMBER);
     }
 
     public static void validateMoneyValue(String input) {
-        validateNumberFormat(input);
-        validateMinimumMoney(input);
-    }
-
-    private static void validateMinimumMoney(String input) {
-        int value = Integer.parseInt(input);
-        if (value < MINIMUM_MONEY) {
+        if (isInvalidNumberFormat(input) || isLessThanMinimumMoney(input)) {
             throw new IllegalMoney();
         }
     }
 
-    private static void validateNumberFormat(String input) {
-        if (!NUMBER_PATTERN.matcher(input).matches()) {
-            throw new IllegalMoney();
-        }
+    public static void validateLottoNumber(String input) {
+        if (isInvalidNumberFormat(input) || isInvalidLottoNumberRange(input)) {
+            throw new IllegalLottoNumber();
+        };
+    }
+
+    private static boolean isDuplicateNumber(List<Integer> numbers) {
+        return new HashSet<>(numbers).size() != numbers.size();
+    }
+
+    private static boolean isInvalidateLottoSize(List<Integer> numbers) {
+        return numbers.size() < LOTTO_TICKET_SIZE;
+    }
+
+    private static boolean isInvalidLottoNumberRange(String input) {
+        return Integer.parseInt(input) < MIN_NUMBER || Integer.parseInt(input) > MAX_NUMBER;
+    }
+
+    private static boolean isLessThanMinimumMoney(String input) {
+        return Integer.parseInt(input) < MINIMUM_MONEY;
+    }
+
+    private static boolean isInvalidNumberFormat(String input) {
+        return !NUMBER_PATTERN.matcher(input).matches();
     }
 }

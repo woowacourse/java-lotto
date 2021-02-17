@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import lotto.exception.IllegalLottoTicketDuplicateNumber;
-import lotto.exception.IllegalLottoTicketNumbers;
-import lotto.exception.IllegalLottoTicketSizeError;
+import lotto.exception.IllegalLottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -27,7 +25,7 @@ public class LottoTicketTest {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 5);
         assertThatThrownBy(() -> {
             LottoTicket lottoTicket = new LottoTicket(numbers);
-        }).isInstanceOf(IllegalLottoTicketSizeError.class);
+        }).isInstanceOf(IllegalLottoNumbers.class);
     }
 
     @Test
@@ -36,15 +34,6 @@ public class LottoTicketTest {
         List<Integer> numbers = Arrays.asList(1, 1, 2, 2, 4, 4, 5);
         assertThatThrownBy(() -> {
             LottoTicket lottoTicket = new LottoTicket(numbers);
-        }).isInstanceOf(IllegalLottoTicketDuplicateNumber.class);
-    }
-
-    @Test
-    @DisplayName("매개변수로 넘어온 리스트 값이 1~49의 숫자인지 검사")
-    void validateNumbers() {
-        List<Integer> numbers = Arrays.asList(1, -3, 80, 90, -1, 0, 3);
-        assertThatThrownBy(()->{
-            LottoTicket lottoTicket = new LottoTicket(numbers);
-        }).isInstanceOf(IllegalLottoTicketNumbers.class);
+        }).isInstanceOf(IllegalLottoNumbers.class);
     }
 }
