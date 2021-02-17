@@ -12,13 +12,13 @@ public class LottoManager {
     }
 
     public void buyLotto(final int money) {
-        int ticket = calculateMoneyToTicket(money);
-        List<Lotto> lottos = generateLottoByTicket(ticket);
+        Ticket ticket = new Ticket(new Money(money));
+        List<Lotto> lottos = generateLottoByTicket(ticket.getCount());
     }
 
-    public List<Lotto> generateLottoByTicket(final int ticket) {
+    public List<Lotto> generateLottoByTicket(final int ticketCount) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < ticket; i++) {
+        for (int i = 0; i < ticketCount; i++) {
             lottos.add(new Lotto(generator.get()));
         }
         return lottos;
