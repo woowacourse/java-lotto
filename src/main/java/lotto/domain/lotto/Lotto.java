@@ -15,6 +15,13 @@ public class Lotto {
         this.numbers = numbers;
     }
 
+    public static Lotto generatedBy(List<Integer> numbers) {
+        List<LottoNumber> lottoNumbers = numbers.stream()
+            .map(number -> LottoNumber.valueOf(number))
+            .collect(Collectors.toList());
+        return Lotto.generatedBy(() -> lottoNumbers);
+    }
+
     public static Lotto generatedBy(LottoGenerator lottoGenerator) {
         List<LottoNumber> lottoNumbers = lottoGenerator.generateLottoNumbers();
         validateLotto(lottoNumbers);
