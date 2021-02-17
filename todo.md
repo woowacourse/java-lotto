@@ -1,6 +1,7 @@
 #ToDo
 @DisplayName
 메서드 순서
+LottoGenerator 리팩토링
 #Done
 Lotto 클래스의 MatchCount, Contains 메서드 테스트
 필요없는 import제거

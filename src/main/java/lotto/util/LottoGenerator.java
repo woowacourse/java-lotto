@@ -9,7 +9,8 @@ import lotto.domain.LottoNumber;
 
 public class LottoGenerator {
 
-  private LottoGenerator() { }
+  private LottoGenerator() {
+  }
 
   public static Lotto generate() {
     return new Lotto(createRandomNumber());

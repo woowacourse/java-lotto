@@ -6,23 +6,21 @@ import lotto.domain.LottoResult;
 
 public class OutputView {
 
-  // ~개를 구매했습니다.  OutputView o
-  private static final String BUY_FORM = "%d개를 구매했습니다.";
   private static final String LOTTO_FORM = "[%s]\n";
   private static final String RESULT_MESSAGE = "당첨 통계";
   private static final String BOUNDARY = "---------";
   private static final String PROFIT_FORM = "총 수익률은 %.1f%%입니다.\n";
 
-  public static void printMessage(String message) {
+  public static void printMessage(final String message) {
     System.out.println(message);
   }
 
-  public static void printBoughtLotto(LottoGroup lottoGroup) {
+  public static void printBoughtLotto(final LottoGroup lottoGroup) {
     lottoGroup.lottoGroup()
         .forEach(lotto -> System.out.printf(LOTTO_FORM, lotto));
   }
 
-  public static void printLottoResult(LottoResult lottoResult) {
+  public static void printLottoResult(final LottoResult lottoResult) {
     System.out.println(RESULT_MESSAGE);
     System.out.println(BOUNDARY);
 
