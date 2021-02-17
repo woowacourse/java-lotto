@@ -1,9 +1,13 @@
 package lotto.domain.lotto;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.Number;
 
@@ -24,8 +28,9 @@ public class WinningNumber {
         this.bonusNumber = extractedBonusNumber;
     }
 
-    private void validateDuplicateBonusNumberWithLottoNumbers(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
-        if(lottoNumbers.contains(bonusNumber)) {
+    private void validateDuplicateBonusNumberWithLottoNumbers(LottoNumbers lottoNumbers,
+        LottoNumber bonusNumber) {
+        if (lottoNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException("보너스 번호는 로또 번호와 달라야 합니다.");
         }
     }
@@ -69,5 +74,27 @@ public class WinningNumber {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
+    }
+
+    private int getRank(LottoNumbers lottoNumbers) {
+        return Rank.getRank(
+            this.lottoNumbers.getMatchCount(lottoNumbers),
+            lottoNumbers.contains(bonusNumber)
+        ).getRank();
+    }
+
+
+    public Map<Integer, Long> getResult(LottoGroup lottoGroup) {
+        Map<Integer, Long> result = lottoGroup.getLotties().stream()
+            .map(this::getRank)
+            .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+        for (int i = 1; i <= Rank.values().length; i++) {
+            if (!result.containsKey(i)) {
+                result.put(i, 0L);
+            }
+        }
+
+        return result;
     }
 }

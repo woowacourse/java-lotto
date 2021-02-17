@@ -35,6 +35,10 @@ public class LottoNumbers {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
+    public int getMatchCount(LottoNumbers lottoNumbers) {
+        return (int) this.lottoNumbers.stream().filter(lottoNumbers::contains).count();
+    }
+
     public boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
