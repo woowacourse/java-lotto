@@ -18,11 +18,11 @@ public class Lottos {
         generateLottoGroup();
     }
 
-    public static int findWinningMoney(Map<Rank, Integer> countByRank) {
-        int winningMoney = 0;
+    public static int findEarning(Map<Rank, Integer> countByRank) {
+        int earning = 0;
         for (Map.Entry<Rank, Integer> singleCount : countByRank.entrySet())
-            winningMoney += singleCount.getKey().getPrize() * singleCount.getValue();
-        return winningMoney;
+            earning += singleCount.getKey().getPrize() * singleCount.getValue();
+        return earning;
     }
 
     private int changeToInt(String input) {
