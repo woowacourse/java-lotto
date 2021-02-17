@@ -24,4 +24,8 @@ public class Lotto {
     public static int calculateLottoNumber(Money money) {
         return money.divide(PRICE);
     }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
 }

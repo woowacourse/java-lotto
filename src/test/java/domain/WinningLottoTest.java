@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class WinningLottoTest {
 
@@ -20,5 +21,18 @@ class WinningLottoTest {
 
         // then
         assertThat(winningLotto).isNotNull();
+    }
+
+    @DisplayName("우승 로또의 당첨번호안에 보너스볼이 포함되는 경우")
+    @Test
+    void generateWithLottoNumbersContainBonusBall() {
+        //given
+        Lotto lotto = new Lotto(new int[]{1, 2, 3, 4, 5, 6});
+        LottoNumber bonusBall = new LottoNumber(6);
+
+        //when //then
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new WinningLotto(lotto, bonusBall));
+
     }
 }
