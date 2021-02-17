@@ -21,6 +21,10 @@ public class LottoTicket {
         return Collections.unmodifiableList(this.numbers);
     }
 
+    public boolean hasBonusNumber(LottoNumber lottoNumber) {
+        return numbers.contains(lottoNumber);
+    }
+
     private void validateSize(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != SIZE) {
             throw new IllegalArgumentException("로또 번호 개수는 6개여야 합니다.");
