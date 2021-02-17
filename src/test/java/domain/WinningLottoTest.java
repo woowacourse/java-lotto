@@ -1,19 +1,27 @@
 package domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 class WinningLottoTest {
 
+    private Lotto lotto;
+
+    @BeforeEach
+    void setUp() {
+        lotto = new Lotto(new int[]{1, 2, 3, 4, 5, 6});
+    }
+
     @DisplayName("우승 로또를 생성하는 기능")
     @Test
     void generate() {
         // given
-        Lotto lotto = new Lotto(new int[]{1, 2, 3, 4, 5, 6});
-
         LottoNumber bonusBall = new LottoNumber(7);
 
         // when
@@ -27,7 +35,6 @@ class WinningLottoTest {
     @Test
     void generateWithLottoNumbersContainBonusBall() {
         //given
-        Lotto lotto = new Lotto(new int[]{1, 2, 3, 4, 5, 6});
         LottoNumber bonusBall = new LottoNumber(6);
 
         //when //then
@@ -40,7 +47,6 @@ class WinningLottoTest {
     @Test
     void findMatchCount() {
         //given
-        Lotto lotto = new Lotto(new int[]{1, 2, 3, 4, 5, 6});
         LottoNumber bonusBall = new LottoNumber(7);
         WinningLotto winningLotto = new WinningLotto(lotto, bonusBall);
 
@@ -51,5 +57,24 @@ class WinningLottoTest {
 
         // then
         assertThat(matchCount).isEqualTo(6);
+    }
+
+    @DisplayName("보너스볼과 일치하는 숫자가 있는지 파악하는 기능")
+    @ParameterizedTest
+    @CsvSource(value = {
+            "7:false", "8:true"
+    }, delimiter = ':')
+    void isBonusBallMatch(int bonusBallValue, boolean result) {
+        //given
+        LottoNumber bonusBall = new LottoNumber(bonusBallValue);
+        WinningLotto winningLotto = new WinningLotto(lotto, bonusBall);
+
+        Lotto targetLotto = new Lotto(new int[]{1, 2, 3, 4, 5, 8});
+
+        // when
+        boolean matched = winningLotto.isBonusBallMatch(targetLotto);
+
+        // then
+        assertThat(matched).isEqualTo(result);
     }
 }
