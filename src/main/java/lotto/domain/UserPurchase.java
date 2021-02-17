@@ -2,10 +2,12 @@ package lotto.domain;
 
 public class UserPurchase {
     private static final int ONE_TICKET_PRICE = 1000;
+    private final int purchasePrice;
     private final int numberOfTicket;
 
     public UserPurchase(int purchasePrice) {
         validateExactlyDividedByOneTicketPrice(purchasePrice);
+        this.purchasePrice = purchasePrice;
         this.numberOfTicket = purchasePrice / ONE_TICKET_PRICE;
     }
 
@@ -17,5 +19,9 @@ public class UserPurchase {
 
     public int getNumberOfTicket() {
         return this.numberOfTicket;
+    }
+
+    public int getPurchasePrice() {
+        return this.purchasePrice;
     }
 }

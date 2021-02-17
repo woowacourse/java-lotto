@@ -18,6 +18,10 @@ public class LottoNumber {
         this.isBonusNumber = isBonusNumber;
     }
 
+    public int getNumber() {
+        return this.number;
+    }
+
     private void validateRange(int value) {
         if (value < MINIMUM || MAXIMUM < value) {
             throw new IllegalArgumentException("로또 번호는 1이상, 45이하여야 합니다.");
