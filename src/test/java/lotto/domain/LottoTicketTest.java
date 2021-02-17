@@ -4,7 +4,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
+
 import java.util.*;
 
 import java.util.Arrays;
@@ -57,5 +60,16 @@ class LottoTicketTest {
         int targetMatchCounts = lottoTicket.compare(winningTicket);
 
         assertThat(targetMatchCounts).isEqualTo(matchCounts);
+    }
+
+    @DisplayName("로또 티켓이 특정 볼 번호를 가지고 있는지 확인")
+    @ParameterizedTest
+    @CsvSource({"1,true", "2,false"})
+    void contains(int ballNumber, boolean target) {
+        LottoTicket lottoTicket = LottoTicket.generateTicket(Arrays.asList(1, 9, 3, 4, 5, 6));
+
+        boolean isContainingBonusNumber = lottoTicket.contains(new LottoNumber(ballNumber));
+
+        assertThat(isContainingBonusNumber).isEqualTo(target);
     }
 }

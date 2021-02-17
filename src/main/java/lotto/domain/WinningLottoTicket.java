@@ -24,8 +24,7 @@ public class WinningLottoTicket {
 
     public LottoRank compareNumbers(LottoTicket lottoTicket) {
         int matchCounts = this.lottoTicket.compare(lottoTicket);
-        //boolean isBonusBall = lottoTicket.hasBonusBall(bonusBallNumber);
-        //return LottoRank.of(matchCounts, isBonusBall);
-        return null;
+        boolean isBonusBall = lottoTicket.contains(bonusBallNumber);
+        return LottoRank.of(matchCounts, isBonusBall);
     }
 }
