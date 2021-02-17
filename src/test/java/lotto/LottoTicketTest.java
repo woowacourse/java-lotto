@@ -36,6 +36,14 @@ public class LottoTicketTest {
     }
 
     @Test
+    @DisplayName("Null 또는 빈 객체는 허용하지 않는다.")
+    public void nullNotAllowedTest() {
+        assertThatThrownBy(() -> {
+            new LottoTicket(null);
+        }).isInstanceOf(NullPointerException.class).hasMessage("null값은 허용하지 않습니다.");
+    }
+
+    @Test
     @DisplayName("중복된 숫자가 있는지 검사")
     public void duplicateNumberTest() {
         List<LottoNumber> lottoNumbers = Arrays.asList(
