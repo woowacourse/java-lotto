@@ -9,15 +9,34 @@ import lotto.domain.number.Number;
 
 public class WinningNumber {
 
-    private LottoNumbers lottoNumbers;
+    private final LottoNumbers lottoNumbers;
+    private final LottoNumber bonusNumber;
 
-    public WinningNumber(String value) {
-        List<String> parsedValue = Arrays.asList(value.split(",", -1));
-        lottoNumbers = new LottoNumbers(
-            parsedValue.stream()
+    public WinningNumber(String lottoNumber, String bonusNumber) {
+        validateBonusNumberFormat(bonusNumber);
+        this.bonusNumber = new LottoNumber(new Number(bonusNumber));
+
+        lottoNumbers = getLottoNumbersFromStringLottoNumberList(getSplitLottoNumber(lottoNumber));
+    }
+
+    private List<String> getSplitLottoNumber(String lottoNumber) {
+        return Arrays.asList(lottoNumber.split(",", -1));
+    }
+
+    private LottoNumbers getLottoNumbersFromStringLottoNumberList(List<String> splitLottoNumber) {
+        return new LottoNumbers(
+            splitLottoNumber.stream()
                 .map(v -> new LottoNumber(new Number(v.trim())))
                 .collect(Collectors.toList())
         );
+    }
+
+    private void validateBonusNumberFormat(String input) {
+        try {
+            Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("보너스 볼의 하나의 숫자로 이루어져야 합니다.");
+        }
     }
 
     public LottoNumbers getLottoNumbers() {
