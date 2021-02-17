@@ -34,7 +34,7 @@ public class InputView {
 
     private static int validateNaturalNumber(String purchasePriceInput) {
         if (!purchasePriceInput.matches(NUMERIC_REGULAR_EXPRESSION)) {
-            throw new IllegalArgumentException("숫자를 입력해주세요.");
+            throw new IllegalArgumentException("자연수를 입력해주세요.");
         }
         return Integer.parseInt(purchasePriceInput);
     }
@@ -58,7 +58,8 @@ public class InputView {
     private static LottoNumber getBonusNumberInput() {
         InputPrinter.printBonusNumberInputGuideMessage();
         String bonusNumberInput = scanner.nextLine();
+        int bonusNumber = validateNaturalNumber(bonusNumberInput);
         InputPrinter.printNewLine();
-        return new LottoNumber(Integer.parseInt(bonusNumberInput));
+        return new LottoNumber(bonusNumber);
     }
 }
