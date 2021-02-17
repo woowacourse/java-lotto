@@ -6,7 +6,7 @@ public class Lottos {
 
     private int money;
     private int count;
-    ArrayList<Lotto> lottos = new ArrayList<>();
+    ArrayList<Lotto> lottoGroup = new ArrayList<>();
 
     public Lottos(String input) {
         int money = changeToInt(input);
@@ -14,6 +14,7 @@ public class Lottos {
         validateUnit(money);
         this.money = money;
         this.count = this.money / 1000;
+        generateLottoGroup();
     }
 
     private int changeToInt(String input) {
@@ -42,15 +43,15 @@ public class Lottos {
         return count;
     }
 
-    public void generateLottos() {
+    public void generateLottoGroup() {
         LottoGenerator lottoGenerator = new LottoGenerator();
         for (int i=0; i < count; i++) {
             Lotto generatedLotto = new Lotto(lottoGenerator.generateLottoNums());
-            lottos.add(generatedLotto);
+            lottoGroup.add(generatedLotto);
         }
     }
 
-    public ArrayList<Lotto> getLottos() {
-        return this.lottos;
+    public ArrayList<Lotto> getLottoGroup() {
+        return this.lottoGroup;
     }
 }

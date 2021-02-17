@@ -18,9 +18,9 @@ public class LottoView {
     }
 
     public static void printLottos(Lottos lottos) {
-        ArrayList<Lotto> lottoGroup = lottos.getLottos();
+        ArrayList<Lotto> lottoGroup = lottos.getLottoGroup();
         for (int i = 0; i < lottos.getCount(); i++)
-            System.out.print(lottoGroup.get(i).getLotto()+"\n");
+            System.out.print(lottoGroup.get(i).getLottoNumbers()+"\n");
     }
 
     public static String requestWinningNumber() {

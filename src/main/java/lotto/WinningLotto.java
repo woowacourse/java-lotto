@@ -50,4 +50,12 @@ public class WinningLotto {
             throw new IllegalArgumentException("[ERROR] 보너스볼 숫자는 당첨번호와 중복될 수 없습니다");
         }
     }
+
+    public Lotto getLotto() {
+        return this.lotto;
+    }
+
+    public int getBonusBall() {
+        return this.bonusBall;
+    }
 }

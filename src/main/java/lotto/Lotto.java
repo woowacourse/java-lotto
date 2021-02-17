@@ -8,17 +8,17 @@ public class Lotto {
     private static final String NUMBER_COUNT_ERROR = "[ERROR] 6개의 숫자를 입력해주세요";
     private static final String NUMBER_DUPLICATE_ERROR = "[ERROR] 숫자는 중복될 수 없습니다";
     private static final String NUMBER_RANGE_ERROR = "[ERROR] 1 ~ 45 사이의 숫자를 입력해주세요";
-    ArrayList<Integer> lotto;
+    ArrayList<Integer> lottoNumbers;
 
     public Lotto(ArrayList<Integer> nums) {
         validateCount(nums);
         validateDuplicate(nums);
         validateNumsRange(nums);
-        this.lotto = nums;
+        this.lottoNumbers = nums;
     }
 
-    public ArrayList<Integer> getLotto() {
-        return this.lotto;
+    public ArrayList<Integer> getLottoNumbers() {
+        return this.lottoNumbers;
     }
 
     private void validateCount(ArrayList<Integer> nums) {
@@ -44,11 +44,11 @@ public class Lotto {
     }
 
     public boolean isContainNum(int number) {
-        return lotto.contains(number);
+        return lottoNumbers.contains(number);
     }
 
     public int howManyWins(ArrayList<Integer> winningLotto) {
-        ArrayList<Integer> wins = new ArrayList<>(lotto);
+        ArrayList<Integer> wins = new ArrayList<>(lottoNumbers);
         wins.retainAll(winningLotto);
         return wins.size();
     }
