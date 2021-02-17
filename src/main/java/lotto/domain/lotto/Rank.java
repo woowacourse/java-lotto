@@ -4,6 +4,7 @@ import static java.util.Arrays.stream;
 
 import java.util.Arrays;
 import java.util.function.Function;
+
 import lotto.domain.rank.Ranking;
 
 public enum Rank {
@@ -12,7 +13,7 @@ public enum Rank {
     THIRD(3, 5, false, 1500000),
     FOURTH(4, 4, false, 50000),
     FIFTH(5, 3, false, 5000),
-    FAIL(-1,-1,false, 0);
+    FAIL(-1, -1, false, 0);
 
     private final int rank;
     private final int matchedNumber;
@@ -32,17 +33,23 @@ public enum Rank {
 
     public static Ranking createRanking(int rank, Long count) {
         return stream(Rank.values())
-            .filter(r -> r.rank == rank)
-            .findFirst()
-            .orElseThrow(() -> new IllegalArgumentException("매칭되는 등수가 없습니다."))
-            .ranking.apply(count);
+                .filter(r -> r.rank == rank)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("매칭되는 등수가 없습니다."))
+                .ranking.apply(count);
     }
 
     public static Rank getRank(int matchedNumber, boolean hasBonusNumber) {
         return Arrays.stream(Rank.values())
-            .filter(rank -> rank.matchedNumber == matchedNumber)
-            .filter(rank -> rank.hasBonusNumber == hasBonusNumber)
-            .findAny()
-            .orElse(Rank.FAIL);
+                .filter(rank -> rankConditionFilter(rank, matchedNumber, hasBonusNumber))
+                .findAny()
+                .orElse(Rank.FAIL);
+    }
+
+    private static boolean rankConditionFilter(Rank rank,
+                                               int matchedNumber,
+                                               boolean hasBonusNumber) {
+        return rank.hasBonusNumber && hasBonusNumber && rank.matchedNumber == matchedNumber ||
+                !rank.hasBonusNumber && rank.matchedNumber == matchedNumber;
     }
 }
