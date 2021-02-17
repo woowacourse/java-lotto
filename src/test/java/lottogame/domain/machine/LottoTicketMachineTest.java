@@ -1,7 +1,8 @@
-package lottogame.domain;
+package lottogame.domain.machine;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import lottogame.domain.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

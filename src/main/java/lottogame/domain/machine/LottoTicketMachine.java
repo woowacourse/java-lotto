@@ -1,4 +1,8 @@
-package lottogame.domain;
+package lottogame.domain.machine;
+
+import lottogame.domain.Money;
+import lottogame.domain.ticket.LottoTicket;
+import lottogame.domain.ticket.LottoTickets;
 
 public class LottoTicketMachine {
 
