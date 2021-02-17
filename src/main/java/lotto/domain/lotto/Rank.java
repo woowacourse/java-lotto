@@ -17,14 +17,12 @@ public enum Rank {
     private final int rank;
     private final int matchedNumber;
     private final boolean hasBonusNumber;
-    private final int winnings;
     private final Function<Long, Ranking> ranking;
 
     Rank(int rank, int matchedNumber, boolean hasBonusNumber, int winnings) {
         this.rank = rank;
         this.matchedNumber = matchedNumber;
         this.hasBonusNumber = hasBonusNumber;
-        this.winnings = winnings;
         this.ranking = count -> new Ranking(rank, winnings, count, matchedNumber, hasBonusNumber);
     }
 
@@ -36,7 +34,7 @@ public enum Rank {
         return stream(Rank.values())
             .filter(r -> r.rank == rank)
             .findFirst()
-            .orElseThrow(() -> new IllegalArgumentException("매칭되는 등수가 없습니다.1"))
+            .orElseThrow(() -> new IllegalArgumentException("매칭되는 등수가 없습니다."))
             .ranking.apply(count);
     }
 
