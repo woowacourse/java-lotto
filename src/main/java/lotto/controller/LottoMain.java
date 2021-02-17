@@ -12,6 +12,8 @@ public class LottoMain {
 //        OutputView.printPurchasedLottoTickets(purchasedLottoTickets);
 //
 //        WinningLottoNumbers winningLottoNumbers = InputView.getWinningLottoNumbers();
-//        OutputView(lottoMachine.getLottoResult(purchasedLottoTickets, winningLottoNumbers));
+//
+//        LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
+//        OutputView(lottoComparator.getResult(purchasedLottoTickets));
     }
 }
