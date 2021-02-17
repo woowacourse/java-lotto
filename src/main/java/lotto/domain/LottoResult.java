@@ -7,31 +7,34 @@ import java.util.Map;
 
 public class LottoResult {
 
-  private Map<LottoRank, Integer> rankMatch;
+  private static final int INIT_COUNT = 0;
+  private static final int COUNTING_NUMBER = 1;
+  private static final int RATE = 100;
+  private final Map<LottoRank, Integer> rankMatch;
 
   public LottoResult() {
     this.rankMatch = new EnumMap<>(LottoRank.class);
     initRankMatch();
   }
 
-  public void initRankMatch() {
+  private void initRankMatch() {
     Arrays.stream(LottoRank.values())
-        .forEach(rank -> rankMatch.put(rank, 0));
+        .forEach(rank -> rankMatch.put(rank, INIT_COUNT));
   }
 
-  public void add(LottoRank lottoRank) {
-    rankMatch.put(lottoRank, rankMatch.get(lottoRank) + 1);
+  public void add(final LottoRank lottoRank) {
+    rankMatch.put(lottoRank, rankMatch.get(lottoRank) + COUNTING_NUMBER);
   }
 
   public double winningProfit() {
-    return Math.round((double) totalWinningAmount() / totalPrice() * 100);
+    return Math.round((double) totalWinningAmount() / totalPrice() * RATE);
   }
 
   private Long totalPrice() {
     long count = rankMatch
         .values()
         .stream()
-        .reduce(0, Integer::sum);
+        .reduce(INIT_COUNT, Integer::sum);
     return count * LottoSeller.lottoPrice();
   }
 
