@@ -51,8 +51,7 @@ public class LottoComparator {
             .count();
     }
 
-    private void addResult(int countMatchedNumbers,
-        LottoTicket purchasedOneLottoTicket) {
+    private void addResult(int countMatchedNumbers, LottoTicket purchasedOneLottoTicket) {
 
         List<LottoMatchType> lottoMatchTypes = getLottoMatchType(countMatchedNumbers);
         if (lottoMatchTypes.size() == EMPTY_SIZE) {
