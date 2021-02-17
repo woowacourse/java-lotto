@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
@@ -16,7 +13,27 @@ public class LottoTickets {
         return Collections.unmodifiableList(lottoTickets);
     }
 
-    public Map<Integer, Integer> checkWinningTickets(List<Integer> winningNumbers, int bonusBall) {
-        return null;
+    public Map<PrizeType, Integer> checkWinningTickets(List<Integer> winningNumbers, int bonusBall) {
+        Map<PrizeType, Integer> winningTickets = new HashMap<>();
+        for (PrizeType prizeType : PrizeType.values()) {
+            winningTickets.put(prizeType, getTicketPrizeTypeCount(winningNumbers, bonusBall, prizeType));
+        }
+        return winningTickets;
     }
+
+    private int getTicketPrizeTypeCount(List<Integer> numbers, int bonusBall, PrizeType prizeType) {
+        int count = 0;
+        for (LottoTicket lottoTicket : lottoTickets) {
+            count += addPrize(lottoTicket.getMatchingCount(numbers, bonusBall), prizeType);
+        }
+        return count;
+    }
+
+    private int addPrize(double matchingCount, PrizeType prizeType) {
+        if (prizeType.isEqualToMatchCount(matchingCount)) {
+            return 1;
+        }
+        return 0;
+    }
+
 }
