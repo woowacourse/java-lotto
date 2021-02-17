@@ -2,13 +2,18 @@ package lotto.controller;
 
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Scanner;
 import lotto.domain.LottoRank;
+import lotto.viewer.InputView;
 
 public class LottoStore {
 
     public static final int LOTTO_PRICE = 1000;
+    private final InputView inputView;
 
     public LottoStore() {
+        Scanner scanner = new Scanner(System.in);
+        inputView = new InputView(scanner);
     }
 
     public double calculateProfitRate(Map<String, Integer> exampleLottosResult, int lottoPiece) {
