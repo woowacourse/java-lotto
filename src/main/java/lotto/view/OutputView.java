@@ -1,11 +1,10 @@
 package lotto.view;
 
-import java.util.List;
 import java.util.stream.Collectors;
-import lotto.domain.Lotto;
-import lotto.domain.LottoRepository;
-import lotto.domain.LottoStats;
-import lotto.domain.Money;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoRepository;
+import lotto.domain.statistics.LottoStatistics;
+import lotto.domain.primitive.Money;
 
 public class OutputView {
 
@@ -39,14 +38,14 @@ public class OutputView {
         log.append("]").append(ENTER);
     }
 
-    public static void printWinningStats(LottoStats lottoStats, int money) {
-        printWinningDetail(lottoStats);
-        printEarningRate(lottoStats.getEarningRate(new Money(money)));
+    public static void printWinningStats(LottoStatistics lottoStatistics, int money) {
+        printWinningDetail(lottoStatistics);
+        printEarningRate(lottoStatistics.getEarningRate(new Money(money)));
     }
 
-    private static void printWinningDetail(LottoStats lottoStats) {
+    private static void printWinningDetail(LottoStatistics lottoStatistics) {
         System.out.println(WINNING_DETAIL_HEADER);
-        System.out.print(lottoStats.getWinningDetail());
+        System.out.print(lottoStatistics.getWinningDetail());
     }
 
     private static void printEarningRate(int rate) {

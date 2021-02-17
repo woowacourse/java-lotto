@@ -1,6 +1,12 @@
 package lotto.domain;
 
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoRepository;
 import lotto.domain.lottomachine.LottoMachine;
+import lotto.domain.primitive.Ticket;
+import lotto.domain.rating.Rating;
+import lotto.domain.rating.RatingInfo;
+import lotto.domain.statistics.WinningLotto;
 
 public class LottoManager {
 

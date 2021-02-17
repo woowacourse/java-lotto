@@ -1,13 +1,13 @@
 package lotto;
 
-import lotto.domain.Lotto;
+import lotto.domain.lotto.Lotto;
 import lotto.domain.LottoManager;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoStats;
-import lotto.domain.Money;
-import lotto.domain.RatingInfo;
-import lotto.domain.Ticket;
-import lotto.domain.WinningLotto;
+import lotto.domain.primitive.LottoNumber;
+import lotto.domain.statistics.LottoStatistics;
+import lotto.domain.primitive.Money;
+import lotto.domain.rating.RatingInfo;
+import lotto.domain.primitive.Ticket;
+import lotto.domain.statistics.WinningLotto;
 import lotto.domain.lottomachine.RandomLottoMachine;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -23,7 +23,7 @@ public class Application {
 
         WinningLotto winningLotto = buyWinningLotto();
         RatingInfo ratingInfo = lottoManager.scratchLotto(winningLotto);
-        OutputView.printWinningStats(new LottoStats(ratingInfo), ticket.getPrice());
+        OutputView.printWinningStats(new LottoStatistics(ratingInfo), ticket.getPrice());
     }
 
     public static Ticket buyLotto() {

@@ -1,4 +1,7 @@
-package lotto.domain;
+package lotto.domain.statistics;
+
+import lotto.domain.lotto.Lotto;
+import lotto.domain.primitive.LottoNumber;
 
 public class WinningLotto {
 
