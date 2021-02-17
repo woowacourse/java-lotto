@@ -20,7 +20,7 @@ public class InputView {
     public static int getInputMoney() {
         try {
             OutputView.getMessage(INPUT_MONEY_MESSAGE);
-            String input = scanner.nextLine();
+            String input = scanner.nextLine().trim();
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(INPUT_MONEY_ERROR_MESSAGE);
@@ -30,8 +30,9 @@ public class InputView {
     public static List<Integer> getWinningNumbers() {
         try {
             OutputView.getMessage(INPUT_WINNING_NUMBER_MESSAGE);
-            String input = scanner.nextLine();
+            String input = scanner.nextLine().trim();
             return Arrays.stream(input.split(NUMBER_DELIMITER))
+                .map(String::trim)
                 .map(Integer::new)
                 .collect(Collectors.toList());
         } catch (NumberFormatException e) {
@@ -42,7 +43,7 @@ public class InputView {
     public static int getBonusBall() {
         try {
             OutputView.getMessage(INPUT_BONUS_BALL_MESSAGE);
-            String input = scanner.nextLine();
+            String input = scanner.nextLine().trim();
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(INPUT_MONEY_ERROR_MESSAGE);
