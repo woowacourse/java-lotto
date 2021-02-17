@@ -34,7 +34,5 @@ class LottoTicketsTest {
         Map<LottoRank, Long> map = lottoTickets.getStatistics(winningLottoTicket);
 
         assertThat(map.get(LottoRank.SECOND)).isEqualTo(3);
-
-
     }
 }
