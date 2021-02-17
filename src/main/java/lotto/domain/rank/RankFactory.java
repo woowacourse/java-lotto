@@ -16,20 +16,20 @@ public enum RankFactory {
     private final int rank;
     private final int matchedNumber;
     private final boolean hasBonusNumber;
-    private final Function<Long, Ranking> ranking;
+    private final Function<Long, Rank> ranking;
 
     RankFactory(int rank, int matchedNumber, boolean hasBonusNumber, int winnings) {
         this.rank = rank;
         this.matchedNumber = matchedNumber;
         this.hasBonusNumber = hasBonusNumber;
-        this.ranking = count -> new Ranking(rank, winnings, count, matchedNumber, hasBonusNumber);
+        this.ranking = count -> new Rank(rank, winnings, count, matchedNumber, hasBonusNumber);
     }
 
     public int getRank() {
         return rank;
     }
 
-    public static Ranking createRanking(int rank, Long count) {
+    public static Rank createRanking(int rank, Long count) {
         return stream(RankFactory.values())
                 .filter(r -> r.rank == rank)
                 .findFirst()

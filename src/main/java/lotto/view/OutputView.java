@@ -6,7 +6,7 @@ import java.util.List;
 import lotto.domain.lotto.LottoGroup;
 import lotto.domain.lotto.LottoNumbers;
 import lotto.domain.lotto.WinningStatistics;
-import lotto.domain.rank.Ranking;
+import lotto.domain.rank.Rank;
 
 public class OutputView {
     private static final String PAYOUT = "구입금액을 입력해 주세요";
@@ -55,13 +55,13 @@ public class OutputView {
         System.out.printf(STATISTICS_YIELD_FORMAT, winningStatistics.getYield());
     }
 
-    private static void printStatisticsAccordingToBonus(Ranking ranking) {
+    private static void printStatisticsAccordingToBonus(Rank rank) {
         String format = STATISTICS_NONE_BONUS_FORMAT;
 
-        if(ranking.getBonus()) {
+        if(rank.getBonus()) {
            format = STATISTICS_BONUS_FORMAT;
         }
 
-        System.out.printf(format, ranking.getMatchingCount(), ranking.getWinnings(), ranking.getCount());
+        System.out.printf(format, rank.getMatchingCount(), rank.getWinnings(), rank.getCount());
     }
 }

@@ -9,7 +9,7 @@ import java.util.List;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.Number;
 import lotto.domain.number.PayOut;
-import lotto.domain.rank.Ranking;
+import lotto.domain.rank.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -89,7 +89,7 @@ public class WinningNumberTest {
         ));
         WinningStatistics result = winningNumber.getResult(lottoGroup, new PayOut(1000));
 
-        List<Long> actual = result.getRankings().stream().map(Ranking::getCount).collect(toList());
+        List<Long> actual = result.getRankings().stream().map(Rank::getCount).collect(toList());
 
         assertThat(expected).isEqualTo(actual);
     }

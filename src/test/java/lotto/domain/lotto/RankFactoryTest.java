@@ -1,7 +1,7 @@
 package lotto.domain.lotto;
 
 import lotto.domain.rank.RankFactory;
-import lotto.domain.rank.Ranking;
+import lotto.domain.rank.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +13,7 @@ public class RankFactoryTest {
     @DisplayName("등수에 맞는 랭킹 객체를 반환한다.")
     void createRanking_getRankOfIntRankingInput() {
         for(int i=1; i<=5; i++) {
-            Ranking rank = RankFactory.createRanking(i, 1L);
+            Rank rank = RankFactory.createRanking(i, 1L);
             assertThat(i ).isEqualTo(rank.getRank());
         }
     }
