@@ -54,7 +54,20 @@ public class InputView {
         }
     }
 
-    public static int bonusNumber() {
-        return 0;
+    public static int bonusNumber(Scanner scanner, List<Integer> numbers) {
+        System.out.println("보너스 볼을 입력해 주세요");
+        String input = scanner.nextLine();
+        if(!input.chars().allMatch(Character::isDigit)){
+            throw new IllegalArgumentException("보너스 번호는 숫자여야 합니다.");
+        }
+
+        if(Integer.parseInt(input) < 1 || Integer.parseInt(input) > 45){
+            throw new IllegalArgumentException("1~45사이의 숫자를 입력해주세요");
+        }
+
+        if(numbers.contains(Integer.parseInt(input))){
+            throw new IllegalArgumentException("당첨 번호와 중복일 수 없습니다.");
+        }
+        return Integer.parseInt(input);
     }
 }

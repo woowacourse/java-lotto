@@ -19,7 +19,7 @@ public class Application {
         OutputView.showLottos(lottos);
 
         List<Integer> winningNumbers = InputView.winningNumbers(scanner);
-        int bonusNumber = InputView.bonusNumber();
+        int bonusNumber = InputView.bonusNumber(scanner, winningNumbers);
 
         List<Result> results = lottos.getResults(winningNumbers, bonusNumber);
         OutputView.result(results);
