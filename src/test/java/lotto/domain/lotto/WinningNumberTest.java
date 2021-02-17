@@ -1,13 +1,17 @@
 package lotto.domain.lotto;
 
+import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.Number;
+import lotto.domain.number.PayOut;
+import lotto.domain.rank.Ranking;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -18,15 +22,15 @@ public class WinningNumberTest {
     void getWinningNumber() {
         WinningNumber winningNumber = new WinningNumber("1, 2, 3, 4, 5, 6", "7");
         LottoNumbers expected = new LottoNumbers(
-                Arrays.asList(
-                    new LottoNumber(new Number(1)),
-                    new LottoNumber(new Number(2)),
-                    new LottoNumber(new Number(3)),
-                    new LottoNumber(new Number(4)),
-                    new LottoNumber(new Number(5)),
-                    new LottoNumber(new Number(6))
-                )
-            );
+            Arrays.asList(
+                new LottoNumber(new Number(1)),
+                new LottoNumber(new Number(2)),
+                new LottoNumber(new Number(3)),
+                new LottoNumber(new Number(4)),
+                new LottoNumber(new Number(5)),
+                new LottoNumber(new Number(6))
+            )
+        );
 
         assertThat(expected).isEqualTo(winningNumber.getLottoNumbers());
     }
@@ -51,13 +55,7 @@ public class WinningNumberTest {
     @DisplayName("등수 계산을 반환")
     void getStatistics() {
         WinningNumber winningNumber = new WinningNumber("1, 2, 3, 4, 5, 6", "7");
-        Map<Integer, Integer> expected = new HashMap<>();
-        expected.put(1, 1);
-        expected.put(2, 1);
-        expected.put(3, 1);
-        expected.put(4, 0);
-        expected.put(5, 0);
-
+        List<Long> expected = Arrays.asList(1L, 1L, 1L, 0L, 0L);
 
         LottoGroup lottoGroup = new LottoGroup(Arrays.asList(
             new LottoNumbers(
@@ -91,11 +89,10 @@ public class WinningNumberTest {
                 )
             )
         ));
-        Map<Integer, Long> result = winningNumber.getResult(lottoGroup);
+        WinningStatistics result = winningNumber.getResult(lottoGroup, new PayOut(new Number(0)));
 
-        for(Integer key :  result.keySet()) {
-            long count = result.get(key);
-            assertThat(expected.get(key)).isEqualTo(count);
-        }
+        List<Long> actual = result.getRankings().stream().map(Ranking::getCount).collect(toList());
+
+        assertThat(expected).isEqualTo(actual);
     }
 }

@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.Number;
+import lotto.domain.number.PayOut;
 
 public class WinningNumber {
 
@@ -28,23 +29,16 @@ public class WinningNumber {
         this.bonusNumber = extractedBonusNumber;
     }
 
-    private void validateDuplicateBonusNumberWithLottoNumbers(LottoNumbers lottoNumbers,
-        LottoNumber bonusNumber) {
-        if (lottoNumbers.contains(bonusNumber)) {
-            throw new IllegalArgumentException("보너스 번호는 로또 번호와 달라야 합니다.");
-        }
-    }
-
-    private List<String> getSplitLottoNumber(String lottoNumber) {
-        return Arrays.asList(lottoNumber.split(",", -1));
-    }
-
     private LottoNumbers getLottoNumbersFromStringLottoNumberList(List<String> splitLottoNumber) {
         return new LottoNumbers(
             splitLottoNumber.stream()
                 .map(v -> new LottoNumber(new Number(v.trim())))
                 .collect(Collectors.toList())
         );
+    }
+
+    private List<String> getSplitLottoNumber(String lottoNumber) {
+        return Arrays.asList(lottoNumber.split(",", -1));
     }
 
     private void validateBonusNumberFormat(String input) {
@@ -55,8 +49,36 @@ public class WinningNumber {
         }
     }
 
+    private void validateDuplicateBonusNumberWithLottoNumbers(LottoNumbers lottoNumbers,
+        LottoNumber bonusNumber) {
+        if (lottoNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 번호는 로또 번호와 달라야 합니다.");
+        }
+    }
+
     public LottoNumbers getLottoNumbers() {
         return lottoNumbers;
+    }
+
+    public WinningStatistics getResult(LottoGroup lottoGroup, PayOut payOut) {
+        Map<Integer, Long> result = lottoGroup.getLotties().stream()
+            .map(this::getRank)
+            .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+        for (int i = 1; i <= Rank.values().length; i++) {
+            if (!result.containsKey(i)) {
+                result.put(i, 0L);
+            }
+        }
+
+        return new WinningStatistics(result, payOut);
+    }
+
+    private int getRank(LottoNumbers lottoNumbers) {
+        return Rank.getRank(
+            this.lottoNumbers.getMatchCount(lottoNumbers),
+            lottoNumbers.contains(bonusNumber)
+        ).getRank();
     }
 
     @Override
@@ -74,27 +96,5 @@ public class WinningNumber {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
-    }
-
-    private int getRank(LottoNumbers lottoNumbers) {
-        return Rank.getRank(
-            this.lottoNumbers.getMatchCount(lottoNumbers),
-            lottoNumbers.contains(bonusNumber)
-        ).getRank();
-    }
-
-
-    public Map<Integer, Long> getResult(LottoGroup lottoGroup) {
-        Map<Integer, Long> result = lottoGroup.getLotties().stream()
-            .map(this::getRank)
-            .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-
-        for (int i = 1; i <= Rank.values().length; i++) {
-            if (!result.containsKey(i)) {
-                result.put(i, 0L);
-            }
-        }
-
-        return result;
     }
 }
