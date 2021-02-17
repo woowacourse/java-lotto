@@ -13,7 +13,7 @@ public class Lotto {
     private static final int MIN_BOUND = 1;
     private static final int MAX_BOUND = 45;
 
-    private final List<Integer> lottoNumbers;
+    protected final List<Integer> lottoNumbers;
 
     public Lotto(List<Integer> numbers) {
         validates(numbers);
@@ -37,6 +37,10 @@ public class Lotto {
         if (value < MIN_BOUND || value > MAX_BOUND) {
             throw new InvalidLottoNumberException();
         }
+    }
+
+    public boolean isMatchNumber(int number) {
+        return lottoNumbers.contains(number);
     }
 
     @Override

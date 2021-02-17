@@ -21,6 +21,14 @@ public class WinningLotto extends Lotto {
         }
     }
 
+    public Reword match(Lotto lotto) {
+        int count = (int) lottoNumbers.stream()
+            .filter(lotto::isMatchNumber)
+            .count();
+
+        return Reword.valueOf(count, lotto.isMatchNumber(bonusNumber));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
