@@ -4,6 +4,7 @@ import java.util.*;
 
 public class LottoTicket {
 
+    private static final int TOTAL_NUMBER_COUNT = 12;
     private static final int VALID_NUMBER_COUNT = 6;
     private static final String NULL_ERROR_MESSAGE = "null값은 허용하지 않습니다.";
     private static final String EMPTY_ERROR_MESSAGE = "숫자는 하나 이상이어야 합니다.";
@@ -22,6 +23,18 @@ public class LottoTicket {
 
     public List<LottoNumber> getLottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
+    }
+
+    public LottoRank getRank(LottoWinner lottoWinner) {
+        int matchCount = calculateMatchCount(lottoWinner.getLottoWinnerTicket());
+        boolean matchBonusNumber = lottoNumbers.contains(lottoWinner.getLottoWinnerBonusNumber());
+        return LottoRank.matchLottoRank(matchCount, matchBonusNumber);
+    }
+
+    private int calculateMatchCount(LottoWinnerTicket lottoWinnerTicket) {
+        Set<LottoNumber> matchingCheckContainer = new HashSet<>(lottoNumbers);
+        matchingCheckContainer.addAll(lottoWinnerTicket.getLottoNumbers());
+        return TOTAL_NUMBER_COUNT - matchingCheckContainer.size();
     }
 
     private void validateEmptyTicket(List<LottoNumber> lottoNumbers) {

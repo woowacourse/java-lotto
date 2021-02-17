@@ -29,6 +29,7 @@
 - [x] LottoRank.java 로또 등수와 보상을 모아놓은 enum
     - [x] FIRST_PLACE(당첨 횟수, 200000000000)
     - [x] 2등,3등,4등,5등 까지 동일하게 한다.
+- [x] LottoResultStatistic.java 로또 당첨 결과를 가진다.
 ### Non TDD
 - [x] InputView.java 사용자 입력을 받는다.
 - [ ] OutputView.java

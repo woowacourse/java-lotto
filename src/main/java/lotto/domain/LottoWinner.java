@@ -29,6 +29,14 @@ public class LottoWinner {
         Objects.requireNonNull(lottoWinnerBonusNumber, NULL_ERROR_MESSAGE);
     }
 
+    public LottoWinnerTicket getLottoWinnerTicket() {
+        return lottoWinnerTicket;
+    }
+
+    public LottoWinnerBonusNumber getLottoWinnerBonusNumber() {
+        return lottoWinnerBonusNumber;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
