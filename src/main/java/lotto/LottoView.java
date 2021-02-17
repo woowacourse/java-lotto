@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class LottoView {
 
     private static final Scanner SCANNER = new Scanner(System.in);
-    public static final String INPUT_MONEY_MESSAGE = "구입금액을 입력해주세요";
+    private static final String INPUT_MONEY_MESSAGE = "구입금액을 입력해주세요";
 
     public static String requestMoney() {
         System.out.println(INPUT_MONEY_MESSAGE);
@@ -31,5 +31,14 @@ public class LottoView {
     public static String requestBonusBallNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         return SCANNER.nextLine();
+    }
+
+    public static void displayResultMessage() {
+        System.out.println("\n당첨 통계\n----------");
+//        displayResult(rank);
+    }
+
+    public static void displayResult(Rank rank, int count) {
+        System.out.println(rank + Integer.toString(count) + "개");
     }
 }
