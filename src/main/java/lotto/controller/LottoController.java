@@ -21,5 +21,8 @@ public class LottoController {
         int numberOfTickets = lottoMoney / 1000;
         List<LottoTicket> lottoTickets = lottoMachine.createTickets(numberOfTickets);
         System.out.printf("%d장 발권되었습니다.", lottoTickets.size());
+
+        List<Integer> winningNumbers = inputView.inputToIntegerList();
+        int bonusNumber = inputView.inputDecimal();
     }
 }
