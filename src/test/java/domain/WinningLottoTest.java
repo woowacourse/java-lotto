@@ -35,4 +35,21 @@ class WinningLottoTest {
                 .isThrownBy(() -> new WinningLotto(lotto, bonusBall));
 
     }
+
+    @DisplayName("당첨번호와 일치하는 숫자의 개수를 파악하는 기능")
+    @Test
+    void findMatchCount() {
+        //given
+        Lotto lotto = new Lotto(new int[]{1, 2, 3, 4, 5, 6});
+        LottoNumber bonusBall = new LottoNumber(7);
+        WinningLotto winningLotto = new WinningLotto(lotto, bonusBall);
+
+        Lotto targetLotto = new Lotto(new int[]{1, 2, 3, 4, 5, 6});
+
+        // when
+        int matchCount = winningLotto.findMatchCount(targetLotto);
+
+        // then
+        assertThat(matchCount).isEqualTo(6);
+    }
 }

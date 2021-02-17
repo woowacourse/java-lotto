@@ -28,4 +28,8 @@ public class Lotto {
     public boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
+
+    public int findMatchCount(Lotto targetLotto) {
+        return this.lottoNumbers.findMatchCount(targetLotto.lottoNumbers);
+    }
 }
