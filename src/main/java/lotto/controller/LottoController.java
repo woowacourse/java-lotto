@@ -33,6 +33,5 @@ public class LottoController {
         int bonusNumber = inputView.takeBonusNumber();
         WinningLottoTicket winningLottoTicket = new WinningLottoTicket(winningNumbers, bonusNumber);
 
-        LottoResult lottoResult = new LottoResult(lottoTickets, winningLottoTicket);
     }
 }
