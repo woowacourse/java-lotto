@@ -19,27 +19,7 @@
 - 당첨 통계를 출력한다.
   - [x] 당첨 내역
   - [x] 수익률
-
-### LottoManager
-- [x] 구입금액에 따른 복권 개수를 구한다.
-- [x] 복권의 개수만큼 로또 번호를 생성한다.
-
-### Lotto
-- [x] 6자리 로또 번호를 갖는다.
-- [x] 유효성 체크
-    - 숫자 개수
-    - 중복된 숫자 여부
-
-### LottoSupplier
-- [x] 로또 번호를 생성한다.
-
-### WinningNumber
-- 지난 주 당첨 번호.
-- 보너스 볼.
-
-### WinningCalculator
-- 통계를 구한다.
-
+  
 ---
 ### to-do List
 - [x] 각 number를 LottoNumber로 포장
