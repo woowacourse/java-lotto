@@ -40,5 +40,14 @@ public class MoneyTest {
 
         assertThat(numberOfLotto).isEqualTo(13);
     }
+
+    @DisplayName("수익률 계산")
+    @Test
+    void 수익률_계산(){
+        Money money = new Money("1000");
+        int profit = 10000;
+
+        assertThat(money.calculateProfit(profit)).isEqualTo(10);
+    }
 }
 

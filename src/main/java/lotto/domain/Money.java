@@ -28,6 +28,10 @@ public class Money {
         return money / 1000;
     }
 
+    public float calculateProfit(int profit) {
+        return profit/money;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
