@@ -8,7 +8,7 @@ public class InputView {
 
     private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-    public String getUserInput() throws IOException {
+    public static String getUserInput() {
         try {
             return br.readLine();
         } catch (IOException ie) {
