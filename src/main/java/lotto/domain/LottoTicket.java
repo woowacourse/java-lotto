@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -8,6 +9,12 @@ public class LottoTicket {
 
     public LottoTicket(final Set<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public Set<Integer> getLottoNumbers() {
+        Set<Integer> numbers = new HashSet<>();
+        lottoNumbers.forEach(lottoNumber -> numbers.add(lottoNumber.getNumber()));
+        return numbers;
     }
 
     @Override

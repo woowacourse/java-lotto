@@ -7,4 +7,8 @@ public class LottoNumber {
     LottoNumber(final int number) {
         this.number = number;
     }
+
+    public Integer getNumber() {
+        return number;
+    }
 }
