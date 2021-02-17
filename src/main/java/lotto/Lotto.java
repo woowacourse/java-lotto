@@ -46,4 +46,10 @@ public class Lotto {
     public boolean isContainNum(int number) {
         return lotto.contains(number);
     }
+
+    public int howManyWins(ArrayList<Integer> winningLotto) {
+        ArrayList<Integer> wins = new ArrayList<>(lotto);
+        wins.retainAll(winningLotto);
+        return wins.size();
+    }
 }

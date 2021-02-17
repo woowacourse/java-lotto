@@ -15,6 +15,7 @@ public class LottoController {
         LottoView.buyLotto(lottos.getCount());
         lottos.generateLottos();
         LottoView.printLottos(lottos);
+        makeWinningLotto();
     }
 
     public void makeWinningLotto() {
