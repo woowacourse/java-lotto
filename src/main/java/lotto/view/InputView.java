@@ -8,37 +8,57 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.UserPurchase;
 import lotto.domain.WinningLottoNumbers;
+import lotto.view.printer.InputPrinter;
 
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
+    private static final String NUMERIC_REGULAR_EXPRESSION = "\\d+";
+    private static final String LOTTO_NUMBER_DELIMITER = ", ";
 
     private InputView() {
     }
 
     public static UserPurchase getUserPurchase() {
-        System.out.println("구입금액을 입력해 주세요.");
+        InputPrinter.printPurchasePriceInputGuideMessage();
         String purchasePriceInput = scanner.nextLine();
-
-        int purchasePrice = Integer.parseInt(purchasePriceInput);
+        int purchasePrice = validateNaturalNumber(purchasePriceInput);
         return new UserPurchase(purchasePrice);
     }
 
     public static WinningLottoNumbers getWinningLottoNumbers() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String winningNumbersInput = scanner.nextLine();
+        List<LottoNumber> lottoNumbers = getWinningLottoNumbersInput();
+        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+        LottoNumber bonusNumber = getBonusNumberInput();
+        return new WinningLottoNumbers(lottoTicket, bonusNumber);
+    }
 
-        List<LottoNumber> lottoNumbers = Arrays.stream(winningNumbersInput.split(", "))
+    private static int validateNaturalNumber(String purchasePriceInput) {
+        if (!purchasePriceInput.matches(NUMERIC_REGULAR_EXPRESSION)) {
+            throw new IllegalArgumentException("숫자를 입력해주세요.");
+        }
+        return Integer.parseInt(purchasePriceInput);
+    }
+
+    private static List<LottoNumber> getWinningLottoNumbersInput() {
+        InputPrinter.printWinnerLottoNumbersInputGuideMessage();
+        String winningNumbersInput = scanner.nextLine();
+        validateAllNaturalNumbers(winningNumbersInput);
+        return Arrays.stream(winningNumbersInput.split(LOTTO_NUMBER_DELIMITER))
             .map(inputNumber -> new LottoNumber(Integer.parseInt(inputNumber)))
             .collect(Collectors.toList());
+    }
 
-        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+    private static void validateAllNaturalNumbers(String winningNumbersInput) {
+        if(!Arrays.stream(winningNumbersInput.split(LOTTO_NUMBER_DELIMITER))
+            .allMatch(name -> name.matches(NUMERIC_REGULAR_EXPRESSION))) {
+            throw new IllegalArgumentException("올바르지 않은 입력입니다.");
+        }
+    }
 
-        System.out.println("보너스 볼을 입력해 주세요.");
+    private static LottoNumber getBonusNumberInput() {
+        InputPrinter.printBonusNumberInputGuideMessage();
         String bonusNumberInput = scanner.nextLine();
-        System.out.println();
-
-        LottoNumber bonusNumber = new LottoNumber(Integer.parseInt(bonusNumberInput));
-
-        return new WinningLottoNumbers(lottoTicket, bonusNumber);
+        InputPrinter.printNewLine();
+        return new LottoNumber(Integer.parseInt(bonusNumberInput));
     }
 }

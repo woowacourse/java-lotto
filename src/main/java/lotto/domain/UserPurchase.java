@@ -2,6 +2,7 @@ package lotto.domain;
 
 public class UserPurchase {
     private static final int ONE_TICKET_PRICE = 1000;
+    private static final int ZERO = 0;
     private final int purchasePrice;
     private final int numberOfTicket;
 
@@ -12,7 +13,7 @@ public class UserPurchase {
     }
 
     private void validateExactlyDividedByOneTicketPrice(int purchasePrice) {
-        if (purchasePrice % ONE_TICKET_PRICE != 0) {
+        if (purchasePrice <= ZERO || purchasePrice % ONE_TICKET_PRICE != ZERO) {
             throw new IllegalArgumentException("구입 금액은 1000원 단위여야 합니다.");
         }
     }
