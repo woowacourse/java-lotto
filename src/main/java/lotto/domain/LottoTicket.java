@@ -7,9 +7,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import javafx.print.Collation;
 
 public class LottoTicket {
+    public static final int PRICE = 1000;
     private static final int SIZE_OF_LOTTO_NUMBERS = 6;
 
     private List<LottoNumber> lottoNumbers;
