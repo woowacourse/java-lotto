@@ -13,7 +13,7 @@ import lotto.view.printer.InputPrinter;
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
     private static final String NUMERIC_REGULAR_EXPRESSION = "\\d+";
-    private static final String LOTTO_NUMBER_DELIMITER = ", ";
+    public static final String LOTTO_NUMBER_DELIMITER = ", ";
 
     private InputView() {
     }

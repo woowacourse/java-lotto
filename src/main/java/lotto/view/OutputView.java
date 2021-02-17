@@ -1,40 +1,34 @@
 package lotto.view;
 
 import java.util.Map;
-import java.util.stream.Collectors;
 import lotto.domain.LottoMatchType;
 import lotto.domain.LottoTicket;
 import lotto.domain.PurchasedLottoTickets;
+import lotto.view.printer.InputPrinter;
+import lotto.view.printer.OutputPrinter;
 
 public class OutputView {
     private OutputView() {
     }
 
     public static void printPurchasedLottoTickets(PurchasedLottoTickets purchasedLottoTickets) {
-        System.out.printf("%d개를 구매했습니다.\n", purchasedLottoTickets.getTickets().size());
+        OutputPrinter.printCompletedPurchaseGuideMessage(purchasedLottoTickets.getTickets().size());
         for (LottoTicket lottoTicket : purchasedLottoTickets.getTickets()) {
-            System.out.println("[" +
-                lottoTicket.getLottoTicketNumbers().stream()
-                    .map(lottoNumber -> Integer.toString(lottoNumber.getNumber()))
-                    .collect(Collectors.joining(", "))
-                + "]"
-            );
+            OutputPrinter.printLottoTicketNumbers(lottoTicket);
         }
-        System.out.println();
+        InputPrinter.printNewLine();
     }
 
     public static void printResult(Map<LottoMatchType, Integer> result, int purchasePrice) {
-        System.out.println("당첨 통계");
-        System.out.println("---------");
-
+        OutputPrinter.printResultTitleMessage();
         int totalPrize = 0;
 
         for (LottoMatchType lottoMatchType : LottoMatchType.values()) {
             totalPrize += lottoMatchType.getPrizeMoney() * result.get(lottoMatchType);
-            System.out.printf(lottoMatchType.getMatchCountMessage() + "\n",
-                result.get(lottoMatchType));
+            OutputPrinter.printEachNumberMatchedCountMessage(lottoMatchType, result);
         }
+
         double profit = (double) totalPrize / (double) purchasePrice;
-        System.out.printf("총 수익률은 %.2f입니다.\n", profit);
+        OutputPrinter.printProfitMessage(profit);
     }
 }
