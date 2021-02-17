@@ -20,6 +20,7 @@ public class LottoTicketFactory {
         for (int i = 0; i < length; i++) {
             Collections.shuffle(lottoNumberRange);
             List<LottoNumber> lottoNumbers = lottoNumberRange.subList(0, 6);
+            Collections.sort(lottoNumbers);
             lottoTickets.add(new LottoTicket(lottoNumbers));
         }
         return lottoTickets;
