@@ -20,6 +20,7 @@
 - [x] LottoWinnerBonusNumber.java 로또 당첨 보너스 번호를 가진다.
     - [x] 예외 : 로또 당첨번호 6개와 중복이 되지 않아야 한다.
     - [x] 예외 : 숫자는 1 ~ 45 사이의 숫자여야한다.
+- [x] LottoTicketService.java 로또 티켓을 생성한다.
 - [ ] WinStatistics.java 정보가 맞는지 확인한다.
     - [ ] FIRST_PLACE(200000000000, 당첨 횟수)
     - [ ] 2등,3등,4등,5등 까지 동일하게 한다.

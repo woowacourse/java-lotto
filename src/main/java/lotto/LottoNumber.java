@@ -35,7 +35,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         throw new IllegalArgumentException(RANGE_ERROR_MESSAGE);
     }
 
-    public List<LottoNumber> getCache() {
+    public static List<LottoNumber> getCache() {
         return new ArrayList<>(CACHE);
     }
 
