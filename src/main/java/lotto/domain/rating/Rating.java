@@ -14,12 +14,12 @@ public enum Rating {
     private int matchCount;
     private int reward;
 
-    Rating(int matchCount, int reward) {
+    Rating(final int matchCount, final int reward) {
         this.matchCount = matchCount;
         this.reward = reward;
     }
 
-    public static Rating getRating(int matchCount, boolean containBonusBall) {
+    public static Rating getRating(final int matchCount, final boolean containBonusBall) {
         if (matchCount == THIRD.matchCount && !containBonusBall) {
             return THIRD;
         }

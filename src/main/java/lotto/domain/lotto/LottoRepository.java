@@ -3,10 +3,10 @@ package lotto.domain.lotto;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import lotto.domain.lotto.Lotto;
 import lotto.domain.lottomachine.LottoMachine;
 
 public class LottoRepository {
+
     private final List<Lotto> lottos = new ArrayList<>();
 
     public void generateLottoByTicket(final LottoMachine lottoMachine, final int ticketCount) {

@@ -25,7 +25,7 @@ public class Lotto {
     JDK HashSet 의 생성자에 경우 dummy 를 추가하는 방식으로 생성자 오버로딩을 구현해서 이런식으로 구현해봤습니다.
     현업에서는 어떻게 사용되는지 궁금합니다!
      */
-    public Lotto(final List<LottoNumber> numbers, boolean dummy) {
+    public Lotto(final List<LottoNumber> numbers, final boolean dummy) {
         validateNumberCount(numbers);
         validateDistinct(numbers);
         this.numbers = numbers;

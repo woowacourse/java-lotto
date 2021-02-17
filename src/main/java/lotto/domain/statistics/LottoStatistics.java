@@ -5,6 +5,7 @@ import lotto.domain.rating.Rating;
 import lotto.domain.rating.RatingInfo;
 
 public class LottoStatistics {
+
     private static final String ENTER = System.lineSeparator();
     private static final String PRINT_FORMAT = "%d개 일치 (%d원) - %d개" + ENTER;
     private static final String SECOND_PRINT_FORMAT = "%d개 일치, 보너스 볼 일치 (%d원) - %d개" + ENTER;
@@ -25,7 +26,7 @@ public class LottoStatistics {
         return log.toString();
     }
 
-    public String ratingToString(final Rating rating, int count) {
+    public String ratingToString(final Rating rating, final int count) {
         if (rating == Rating.SECOND) {
             return String
                 .format(SECOND_PRINT_FORMAT, rating.getMatchCount(), rating.getReward(), count);
@@ -34,7 +35,7 @@ public class LottoStatistics {
             .format(PRINT_FORMAT, rating.getMatchCount(), rating.getReward(), count);
     }
 
-    public int getEarningRate(Money money) {
+    public int getEarningRate(final Money money) {
         return totalSum() / money.getValue();
     }
 

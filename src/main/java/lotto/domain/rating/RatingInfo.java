@@ -13,11 +13,11 @@ public class RatingInfo {
         }
     }
 
-    public void update(Rating rating) {
+    public void update(final Rating rating) {
         ratings.put(rating, ratings.get(rating) + 1);
     }
 
-    public int get(Rating rating) {
+    public int get(final Rating rating) {
         return ratings.get(rating);
     }
 }
