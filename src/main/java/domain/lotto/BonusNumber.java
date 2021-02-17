@@ -3,8 +3,12 @@ package domain.lotto;
 public class BonusNumber {
     private final LottoNumber lottoNumber;
 
-    public BonusNumber(final LottoNumber lottoNumber) {
+    private BonusNumber(final LottoNumber lottoNumber) {
         this.lottoNumber = lottoNumber;
+    }
+
+    public static BonusNumber of(final int value) {
+        return new BonusNumber(new LottoNumber(value));
     }
 
     public boolean isSameNumber(final LottoNumber lottoNumber) {

@@ -10,7 +10,7 @@ class BonusNumberTest {
     @DisplayName("BonusNumber정상 생성 테스트")
     @Test
     void BonusNumber_생성된다() {
-        assertThatCode(() -> new BonusNumber(new LottoNumber(4)))
+        assertThatCode(() -> BonusNumber.of(4))
                 .doesNotThrowAnyException();
     }
 }
