@@ -21,4 +21,11 @@ public class WinningLottoTicket {
         LottoNumber bonusLottoNumber = new LottoNumber(bonusBallNumber);
         return new WinningLottoTicket(lottoTicket, bonusLottoNumber);
     }
+
+    public LottoRank compareNumbers(LottoTicket lottoTicket) {
+        int matchCounts = this.lottoTicket.compare(lottoTicket);
+        //boolean isBonusBall = lottoTicket.hasBonusBall(bonusBallNumber);
+        //return LottoRank.of(matchCounts, isBonusBall);
+        return null;
+    }
 }

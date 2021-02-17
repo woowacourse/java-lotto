@@ -33,4 +33,14 @@ public class LottoTicket {
     public List<LottoNumber> getLottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }
+
+    public int compare(LottoTicket winningTicket) {
+        return (int) this.lottoNumbers.stream()
+                .filter(lottoNumber -> winningTicket.contains(lottoNumber))
+                .count();
+    }
+
+    private boolean contains(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
+    }
 }

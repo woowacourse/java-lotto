@@ -52,4 +52,13 @@ class WinningLottoTicketTest {
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 티켓은 중복되지 않은 6자리의 숫자로 구성되어야 합니다.");
     }
+
+    @DisplayName("로또 티켓과 당첨 번호를 비교하여 순위를 반환한다.")
+    @Test
+    void compareLottoTicketNumbers() {
+        LottoTicket lottoTicket = LottoTicket.generateTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinningLottoTicket winningLottoTicket = WinningLottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 7), 6);
+
+        assertThat(winningLottoTicket.compareNumbers(lottoTicket)).isEqualTo(LottoRank.SECOND);
+    }
 }

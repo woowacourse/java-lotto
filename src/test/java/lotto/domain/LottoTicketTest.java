@@ -12,7 +12,6 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoTicketTest {
 
@@ -20,6 +19,11 @@ class LottoTicketTest {
         return Stream.of(Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7),
                 Arrays.asList(1, 2, 3, 4, 5),
                 Arrays.asList(1, 3, 3, 4, 5, 6)));
+    }
+
+    private static Stream<Arguments> getTicketNumbers() {
+        return Stream.of(Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), 6),
+                Arguments.of(Arrays.asList(4, 5, 6, 7, 8, 9), 3));
     }
 
     @DisplayName("로또 티켓 발급에 필요한 로또 번호는 중복되지 않은 6자리 숫자이다")
@@ -41,5 +45,17 @@ class LottoTicketTest {
 
         assertThat(lottoNumbers).contains(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
                 new LottoNumber(5), new LottoNumber(6));
+    }
+
+    @DisplayName("로또 티켓과 당첨 번호를 비교하여 일치하는 개수를 반환한다.")
+    @ParameterizedTest
+    @MethodSource("getTicketNumbers")
+    void compareLottoTickets(List<Integer> numbers, int matchCounts) {
+        LottoTicket lottoTicket = LottoTicket.generateTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoTicket winningTicket = LottoTicket.generateTicket(numbers);
+
+        int targetMatchCounts = lottoTicket.compare(winningTicket);
+
+        assertThat(targetMatchCounts).isEqualTo(matchCounts);
     }
 }
