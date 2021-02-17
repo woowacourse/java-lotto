@@ -24,6 +24,6 @@ public class MoneyTest {
     @DisplayName("음수가 입력된 경우 예외를 발생시킨다.")
     @Test
     public void validatePositiveNumber() {
-        assertThatThrownBy(() -> new Money("-1")).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Money("-1")).isInstanceOf(InvalidNumberRangeException.class);
     }
 }

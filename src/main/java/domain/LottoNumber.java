@@ -25,7 +25,7 @@ public class LottoNumber {
 
     private void validateNumberRange(int number) {
         if (number < MIN_NUMBER_RANGE || number > MAX_NUMBER_RANGE) {
-            throw new InvalidNumberRangeException();
+            throw new InvalidNumberRangeException("로또 번호는 1~45 사이로 입력해주세요.");
         }
     }
 

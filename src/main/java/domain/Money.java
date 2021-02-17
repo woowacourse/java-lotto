@@ -24,7 +24,7 @@ public class Money {
 
     private void validatePositiveNumber(int input) {
         if (input < ZERO) {
-            throw new IllegalArgumentException("양수만 입력해주세요.");
+            throw new InvalidNumberRangeException("양수만 입력해주세요.");
         }
     }
 
