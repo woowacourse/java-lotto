@@ -1,13 +1,11 @@
 package lotto.domain.lotto;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.Number;
 import lotto.domain.number.PayOut;
@@ -29,12 +27,10 @@ public class WinningNumber {
         this.bonusNumber = extractedBonusNumber;
     }
 
-    private LottoNumbers getLottoNumbersFromStringLottoNumberList(List<String> splitLottoNumber) {
-        return new LottoNumbers(
-            splitLottoNumber.stream()
-                .map(v -> new LottoNumber(new Number(v.trim())))
-                .collect(Collectors.toList())
-        );
+    private LottoNumbers getLottoNumbersFromStringLottoNumberList(List<String> lottoNumbers) {
+        return new LottoNumbers(lottoNumbers.stream()
+            .map(lottoNumber -> new LottoNumber(new Number(lottoNumber.trim())))
+            .collect(Collectors.toList()));
     }
 
     private List<String> getSplitLottoNumber(String lottoNumber) {

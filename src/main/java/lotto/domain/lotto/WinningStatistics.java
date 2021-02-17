@@ -13,7 +13,8 @@ import lotto.domain.rank.Ranking;
 
 public class WinningStatistics {
 
-    private List<Ranking> rankings;
+    private final List<Ranking> rankings;
+    private final double yield;
 
     public WinningStatistics(Map<Integer, Long> gameResult, PayOut payOut) {
         this.rankings = IntStream.rangeClosed(1, Rank.values().length)
@@ -21,9 +22,17 @@ public class WinningStatistics {
             .map(key -> Rank.createRanking(key, gameResult.getOrDefault(key, 0L)))
             .sorted(comparingInt(Ranking::getRank))
             .collect(toList());
+
+        this.yield = rankings.stream()
+            .mapToDouble(r -> r.getWinnings() * r.getCount())
+            .sum() / payOut.getPayOut().getValue();
     }
 
     public List<Ranking> getRankings() {
         return Collections.unmodifiableList(rankings);
+    }
+
+    public double getYield() {
+        return yield;
     }
 }
