@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoTickets {
 
@@ -21,5 +22,11 @@ public class LottoTickets {
 
     public int size() {
         return lottoTickets.size();
+    }
+
+    public Map<LottoRank, Long> getStatistics(WinningLottoTicket winningLottoTicket) {
+        return lottoTickets.stream()
+                .map(lottoTicket -> winningLottoTicket.compareNumbers(lottoTicket))
+                .collect(Collectors.groupingBy(lottoRank -> lottoRank, Collectors.counting()));
     }
 }
