@@ -32,4 +32,28 @@ public class WinnerTicketTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("잘못된 입력입니다.");
     }
+
+    @Test
+    @DisplayName("숫자의 범위가 1부터 45사이의 수가 아닌 경우")
+    void checkNumberInRange() {
+        assertThatThrownBy(() -> new WinnerTicket("1,2,3,4,5,46"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("숫자는 1부터 45사이여야 합니다.");
+    }
+
+    @Test
+    @DisplayName("숫자가 6개가 아닌 경우")
+    void checkNumbersSize() {
+        assertThatThrownBy(() -> new WinnerTicket("1,2,3,4,5"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("숫자는 여섯개여야 합니다.");
+    }
+
+    @Test
+    @DisplayName("숫자가 중복되는 경우")
+    void checkDuplicated() {
+        assertThatThrownBy(() -> new WinnerTicket("1,1,2,3,4,5"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("중복된 입력입니다.");
+    }
 }
