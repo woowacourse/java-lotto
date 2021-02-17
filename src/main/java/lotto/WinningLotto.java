@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 
 public class WinningLotto {
     private static final String DELIMITER = ",";
-    Lotto lotto;
-    int bonusBall;
+    private static Lotto lotto;
+    private static int bonusBall;
 
     public WinningLotto(String winningInput, String bonusBallInput) {
         generateWinningLotto(winningInput);
