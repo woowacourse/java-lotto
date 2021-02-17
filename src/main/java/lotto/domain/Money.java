@@ -12,6 +12,10 @@ public class Money {
         this.money = money;
     }
 
+    public int getTicketCount() {
+        return this.money / MIN_MONEY_UNIT;
+    }
+
     private void validateMoneyLimit(final int money) {
         if (money < MIN_MONEY_UNIT) {
             throw new IllegalArgumentException("입력 금액은 1000원 이상이어야 합니다.");
