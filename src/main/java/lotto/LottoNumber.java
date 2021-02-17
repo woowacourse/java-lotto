@@ -8,7 +8,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MAX_NUMBER_RANGE = 45;
     private static final String RANGE_ERROR_MESSAGE = "숫자는 1~45 사이의 숫자여야한다.";
 
-    private final int number;
+    public final int number;
 
     public LottoNumber(int number) {
         validateRange(number);
@@ -22,12 +22,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
         throw new IllegalArgumentException(RANGE_ERROR_MESSAGE);
     }
 
-    @Override
+    @Override //equals 함부로 쓰면 안된다고 했는데, 우리팀의 경우 상속 받은 것들 비교를 제대로 못해줘서 디버깅 한참 걸림. 다른예시좀?
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        LottoNumber that = (LottoNumber) o;
-        return number == that.number;
+        return number == ((LottoNumber) o).number;
     }
 
     @Override
