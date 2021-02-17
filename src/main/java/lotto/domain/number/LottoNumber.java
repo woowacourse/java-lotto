@@ -14,14 +14,22 @@ public class LottoNumber {
         this.number = number;
     }
 
+    public LottoNumber(int number) {
+        this(new Number(number));
+    }
+
+    public LottoNumber(String number) {
+        this(new Number(number));
+    }
+
     private void validateRange(Number number) {
-        if (number.getValue() < NUMBER_MINIMUM || number.getValue() > NUMBER_MAXIMUM) {
+        if (number.toInt() < NUMBER_MINIMUM || number.toInt() > NUMBER_MAXIMUM) {
             throw new IllegalArgumentException("범위 밖의 로또 번호 입니다.");
         }
     }
 
-    public Number getNumber() {
-        return number.clone();
+    public int toInt() {
+        return number.toInt();
     }
 
     @Override
@@ -43,7 +51,7 @@ public class LottoNumber {
 
     @Override
     public String toString() {
-        return String.valueOf(number.getValue());
+        return String.valueOf(number.toInt());
     }
 
 }

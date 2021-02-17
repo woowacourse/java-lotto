@@ -23,7 +23,7 @@ public class Number {
         }
     }
 
-    public int getValue() {
+    public int toInt() {
         return value;
     }
 

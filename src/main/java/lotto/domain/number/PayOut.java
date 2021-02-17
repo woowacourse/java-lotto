@@ -5,10 +5,17 @@ public class PayOut {
     private static final int GAME_PRICE = 1000;
     private final Number payOut;
 
-
     public PayOut(Number number) {
-        validateNegative(number.getValue());
+        validateNegative(number.toInt());
         this.payOut = number;
+    }
+
+    public PayOut(int number) {
+        this(new Number(number));
+    }
+
+    public PayOut(String number) {
+        this(new Number(number));
     }
 
     private void validateNegative(int value) {
@@ -18,10 +25,10 @@ public class PayOut {
     }
 
     public int getGameCount() {
-        return payOut.getValue() / GAME_PRICE;
+        return payOut.toInt() / GAME_PRICE;
     }
 
-    public Number getPayOut() {
-        return payOut.clone();
+    public int toInt() {
+        return payOut.toInt();
     }
 }

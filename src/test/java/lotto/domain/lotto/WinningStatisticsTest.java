@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.withPrecision;
 
 import java.util.Arrays;
-import java.util.Map;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.Number;
 import lotto.domain.number.PayOut;
@@ -49,7 +48,7 @@ public class WinningStatisticsTest {
                 )
             )
         ));
-        WinningStatistics result = winningNumber.getResult(lottoGroup, new PayOut(new Number(3000)));
+        WinningStatistics result = winningNumber.getResult(lottoGroup, new PayOut(3000));
         assertThat(2031500000D / 3000D).isEqualTo(result.getYield(), withPrecision(2d));
     }
 }

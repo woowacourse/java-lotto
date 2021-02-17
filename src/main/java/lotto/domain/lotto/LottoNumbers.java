@@ -1,6 +1,5 @@
 package lotto.domain.lotto;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -29,10 +28,6 @@ public class LottoNumbers {
         if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("로또 넘버가 6개가 아닙니다.");
         }
-    }
-
-    public List<LottoNumber> getLottoNumbers() {
-        return Collections.unmodifiableList(lottoNumbers);
     }
 
     public int getMatchCount(LottoNumbers lottoNumbers) {

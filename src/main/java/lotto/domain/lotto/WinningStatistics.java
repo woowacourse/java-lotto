@@ -25,7 +25,7 @@ public class WinningStatistics {
 
         this.yield = rankings.stream()
             .mapToDouble(r -> r.getWinnings() * r.getCount())
-            .sum() / payOut.getPayOut().getValue();
+            .sum() / payOut.toInt();
     }
 
     public List<Ranking> getRankings() {

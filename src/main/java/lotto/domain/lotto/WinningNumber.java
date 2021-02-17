@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.Number;
 import lotto.domain.number.PayOut;
@@ -61,11 +62,9 @@ public class WinningNumber {
             .map(this::getRank)
             .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
-        for (int i = 1; i <= Rank.values().length; i++) {
-            if (!result.containsKey(i)) {
-                result.put(i, 0L);
-            }
-        }
+        IntStream.rangeClosed(1, Rank.values().length)
+            .filter(rank -> !result.containsKey(rank))
+            .forEach(rank -> result.put(rank, 0L));
 
         return new WinningStatistics(result, payOut);
     }

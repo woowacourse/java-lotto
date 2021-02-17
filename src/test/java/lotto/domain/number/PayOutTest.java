@@ -13,11 +13,11 @@ public class PayOutTest {
     @Test
     @DisplayName("숫자를 입력 받는다.")
     void inputPayOutNumber() {
-        PayOut payOut = new PayOut(new Number(10000));
-        assertThat(payOut.getPayOut().equals(new Number(10000))).isTrue();
+        PayOut payOut = new PayOut(10000);
+        assertThat(payOut.toInt()).isEqualTo(10000);
 
-        payOut = new PayOut(new Number("10000"));
-        assertThat(payOut.getPayOut().equals(new Number(10000))).isTrue();
+        payOut = new PayOut("10000");
+        assertThat(payOut.toInt()).isEqualTo(10000);
     }
 
     @Test
@@ -36,7 +36,7 @@ public class PayOutTest {
     @DisplayName("입력 금액에 따른 게임 횟수를 반환한다.")
     @CsvSource(value = {"14000:14", "11231:11", "1:0", "10101:10"}, delimiter = ':')
     void getGameCount(int input, int expected) {
-        PayOut payOut = new PayOut(new Number(input));
+        PayOut payOut = new PayOut(input);
         assertThat(payOut.getGameCount()).isEqualTo(expected);
     }
 }

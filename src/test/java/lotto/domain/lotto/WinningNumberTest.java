@@ -5,9 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.Number;
 import lotto.domain.number.PayOut;
@@ -22,15 +20,15 @@ public class WinningNumberTest {
     void getWinningNumber() {
         WinningNumber winningNumber = new WinningNumber("1, 2, 3, 4, 5, 6", "7");
         LottoNumbers expected = new LottoNumbers(
-                Arrays.asList(
-                    new LottoNumber(new Number(1)),
-                    new LottoNumber(new Number(2)),
-                    new LottoNumber(new Number(3)),
-                    new LottoNumber(new Number(4)),
-                    new LottoNumber(new Number(5)),
-                    new LottoNumber(new Number(6))
-                )
-            );
+            Arrays.asList(
+                new LottoNumber(new Number(1)),
+                new LottoNumber(new Number(2)),
+                new LottoNumber(new Number(3)),
+                new LottoNumber(new Number(4)),
+                new LottoNumber(new Number(5)),
+                new LottoNumber(new Number(6))
+            )
+        );
 
         assertThat(expected).isEqualTo(winningNumber.getLottoNumbers());
     }
@@ -55,7 +53,7 @@ public class WinningNumberTest {
     @DisplayName("등수 계산을 반환")
     void getStatistics() {
         WinningNumber winningNumber = new WinningNumber("1, 2, 3, 4, 5, 6", "7");
-        List<Long> expected = Arrays.asList(1L,1L,1L,0L,0L);
+        List<Long> expected = Arrays.asList(1L, 1L, 1L, 0L, 0L);
 
         LottoGroup lottoGroup = new LottoGroup(Arrays.asList(
             new LottoNumbers(
@@ -89,7 +87,7 @@ public class WinningNumberTest {
                 )
             )
         ));
-        WinningStatistics result = winningNumber.getResult(lottoGroup, new PayOut(new Number(1000)));
+        WinningStatistics result = winningNumber.getResult(lottoGroup, new PayOut(1000));
 
         List<Long> actual = result.getRankings().stream().map(Ranking::getCount).collect(toList());
 
