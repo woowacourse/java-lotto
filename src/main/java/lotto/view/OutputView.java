@@ -28,8 +28,8 @@ public class OutputView {
         System.out.println(String.valueOf(lottoCount).concat(LOTTO_COUNT_FORMAT));
     }
 
-    public static void boughtLotties(LottoGroup lottoGroup) {
-        lottoGroup.getLotties().forEach(OutputView::printLottoNumbers);
+    public static void boughtLottos(LottoGroup lottoGroup) {
+        lottoGroup.getLottos().forEach(OutputView::printLottoNumbers);
     }
 
     private static void printLottoNumbers(LottoNumbers lottoNumbers) {

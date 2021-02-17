@@ -11,6 +11,6 @@ public class LottoGeneratorTest {
     @DisplayName("로또 그룹 생성")
     void generateLottoGroup() {
         LottoGenerator lottoGenerator = new LottoGenerator();
-        assertThat(lottoGenerator.generateLotties(3).getCount()).isEqualTo(3);
+        assertThat(lottoGenerator.generateLottos(3).getCount()).isEqualTo(3);
     }
 }

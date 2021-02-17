@@ -11,17 +11,19 @@ public class LottoController {
     private static final LottoGenerator lottoGenerator = new LottoGenerator();
 
     public static void run() {
-        PayOut payOut = payOut();
+        PayOut payOut = getPayOutFromUser();
 
-        LottoGroup lottoGroup = buyLotto(payOut);
+        LottoGroup lottoGroup = createLottosAccordingToTheAmount(payOut);
 
-        WinningNumber winningNumber =
-            new WinningNumber(inputLastWeekLottoNumber(), inputBonusNumber());
+        WinningNumber winningNumber = new WinningNumber(
+                getLastWeekLottoNumberFromUser(),
+                getBonusNumberFromUser()
+        );
 
-        calculateStatistics(winningNumber, lottoGroup, payOut);
+        lottoResultAnalysisAndPrint(winningNumber, lottoGroup, payOut);
     }
 
-    private static PayOut payOut() {
+    private static PayOut getPayOutFromUser() {
         OutputView.payout();
 
         PayOut payOut = new PayOut(InputView.getStringInputFromUser());
@@ -31,29 +33,29 @@ public class LottoController {
         return payOut;
     }
 
-    private static LottoGroup buyLotto(PayOut payOut) {
-        LottoGroup lottoGroup = lottoGenerator.generateLotties(payOut.getGameCount());
-        OutputView.boughtLotties(lottoGroup);
+    private static LottoGroup createLottosAccordingToTheAmount(PayOut payOut) {
+        LottoGroup lottoGroup = lottoGenerator.generateLottos(payOut.getGameCount());
+        OutputView.boughtLottos(lottoGroup);
 
         return lottoGroup;
     }
 
-    private static String inputLastWeekLottoNumber() {
+    private static String getLastWeekLottoNumberFromUser() {
         OutputView.lastWeekLottoNumber();
 
         return InputView.getStringInputFromUser();
     }
 
-    private static String inputBonusNumber() {
+    private static String getBonusNumberFromUser() {
         OutputView.bonusNumber();
 
         return InputView.getStringInputFromUser();
     }
 
-    private static void calculateStatistics(
-        WinningNumber winningNumber,
-        LottoGroup lottoGroup,
-        PayOut payOut) {
+    private static void lottoResultAnalysisAndPrint(
+            WinningNumber winningNumber,
+            LottoGroup lottoGroup,
+            PayOut payOut) {
         OutputView.statistics(winningNumber.getResult(lottoGroup, payOut));
     }
 }

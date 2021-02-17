@@ -7,23 +7,23 @@ import java.util.stream.Collectors;
 
 public class LottoGroup {
 
-    private final List<LottoNumbers> lotties;
+    private final List<LottoNumbers> lottos;
 
-    public LottoGroup(List<LottoNumbers> lotties) {
-        this.lotties = new ArrayList<>(lotties);
+    public LottoGroup(List<LottoNumbers> lottos) {
+        this.lottos = new ArrayList<>(lottos);
     }
 
     public int getCount() {
-        return lotties.size();
+        return lottos.size();
     }
 
-    public List<LottoNumbers> getLotties() {
-        return Collections.unmodifiableList(lotties);
+    public List<LottoNumbers> getLottos() {
+        return Collections.unmodifiableList(lottos);
     }
 
     @Override
     public String toString() {
-        return String.join(System.lineSeparator(), lotties.stream()
+        return String.join(System.lineSeparator(), lottos.stream()
             .map(LottoNumbers::toString).collect(Collectors.toList()));
     }
 }

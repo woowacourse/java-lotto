@@ -1,5 +1,7 @@
 package lotto.domain.rank;
 
+import java.util.Objects;
+
 public class Rank {
     private final int rank;
     private final int winnings;
@@ -33,5 +35,22 @@ public class Rank {
 
     public boolean getBonus() {
         return bonus;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Rank rank1 = (Rank) o;
+        return rank == rank1.rank &&
+                winnings == rank1.winnings &&
+                count == rank1.count &&
+                matchingCount == rank1.matchingCount &&
+                bonus == rank1.bonus;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(rank, winnings, count, matchingCount, bonus);
     }
 }

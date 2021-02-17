@@ -58,8 +58,8 @@ public class WinningNumber {
         return lottoNumbers;
     }
 
-    public WinningStatistics getResult(LottoGroup lottoGroup, PayOut payOut) {
-        Map<Integer, Long> result = lottoGroup.getLotties().stream()
+    public WinningStatistics analysingLottos(LottoGroup lottoGroup, PayOut payOut) {
+        Map<Integer, Long> result = lottoGroup.getLottos().stream()
             .map(this::getRank)
             .filter(rank -> RankFactory.FAIL.getRank() != rank)
             .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));

@@ -25,15 +25,15 @@ public class LottoGenerator {
         }
     }
 
-    public LottoGroup generateLotties(int count) {
-        List<LottoNumbers> lotties = new ArrayList();
+    public LottoGroup generateLottos(int count) {
+        List<LottoNumbers> lottos = new ArrayList();
 
         for (int i = 0; i < count; i++) {
             LottoNumbers lottoNumbers = new LottoNumbers(generateRandomLottoNumber());
-            lotties.add(lottoNumbers);
+            lottos.add(lottoNumbers);
         }
 
-        return new LottoGroup(lotties);
+        return new LottoGroup(lottos);
     }
 
     private List<LottoNumber> generateRandomLottoNumber() {
