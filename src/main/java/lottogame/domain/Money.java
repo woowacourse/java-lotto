@@ -2,17 +2,24 @@ package lottogame.domain;
 
 public class Money {
 
-    public static final int MIN_AMOUNT = 1000;
-    private final int value;
+    private int value;
 
-    public Money(final String abc) {
-        this.value = Integer.parseInt(abc);
-        validateMinAmount(value);
+    public Money(final String money) {
+        this.value = Integer.parseInt(money);
+        isPositive(this.value);
     }
 
-    private void validateMinAmount(final int value) {
-        if (value < MIN_AMOUNT) {
-            throw new IllegalArgumentException("구입 금액은 1000원 이상이여야 합니다.");
+    public void use(final int price) {
+        this.value -= price;
+    }
+
+    public int getValue() {
+        return this.value;
+    }
+
+    private void isPositive(final int value) {
+        if (value < 0) {
+            throw new IllegalArgumentException("돈 입력은 양수이여야 합니다.");
         }
     }
 }
