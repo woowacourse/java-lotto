@@ -1,9 +1,11 @@
 package lotto;
 
+import java.util.ArrayList;
+
 public class LottoController {
     private static Lottos lottos;
     private static WinningLotto winningLotto;
-    private static ArrayList<Integer> wins = new ArrayList<Integer>(Arrays.asList(0, 0, 0, 0, 0));
+    private static ArrayList<Rank> wins = new ArrayList<>();
 
     public void startLotto() {
         lottos = new Lottos(LottoView.requestMoney());
@@ -23,6 +25,15 @@ public class LottoController {
         for (Lotto lotto : lottoGroup) {
             Rank rank = winningLotto.findRank(lotto);
             wins.add(rank);
+        }
+    }
+
+    public static void drawResult() {
+        LottoView.displayResultMessage();
+        for (int i = 1; i < Rank.values().length; i++) {
+            Rank rank = Rank.values()[i];
+            int rankCount = (int) wins.stream().filter(win -> win == rank).count();
+            LottoView.displayResult(rank, rankCount);
         }
     }
 }

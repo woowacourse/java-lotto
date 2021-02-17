@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class WinningLotto {
     private static final String DELIMITER = ",";
-    private static Lotto lotto;
+    private static Lotto winLotto;
     private static int bonusBall;
 
     public WinningLotto(String winningInput, String bonusBallInput) {
@@ -29,7 +29,7 @@ public class WinningLotto {
         List<Integer> winningNumbers = changeToList(numberInput);
         ArrayList<Integer> winningNums = new ArrayList<Integer>();
         winningNums.addAll(winningNumbers);
-        this.lotto = new Lotto(winningNums);
+        this.winLotto = new Lotto(winningNums);
     }
 
     private void validateBonusBallType(String input) {
@@ -46,16 +46,25 @@ public class WinningLotto {
     }
 
     private void validateDuplicate() {
-        if (lotto.isContainNum(bonusBall)) {
+        if (winLotto.isContainNum(bonusBall)) {
             throw new IllegalArgumentException("[ERROR] 보너스볼 숫자는 당첨번호와 중복될 수 없습니다");
         }
     }
 
-    public Lotto getLotto() {
-        return this.lotto;
+    public Rank findRank(Lotto lotto) {
+        int match = howManyWins(lotto);
+        boolean bonusMatch = hasBonusBall(lotto);
+        Rank rank = Rank.makeRankByMatch(match, bonusMatch);
+        return rank;
     }
 
-    public int getBonusBall() {
-        return this.bonusBall;
+    public int howManyWins(Lotto lotto) {
+        ArrayList<Integer> wins = new ArrayList<>(winLotto.getLottoNumbers());
+        wins.retainAll(lotto.getLottoNumbers());
+        return wins.size();
+    }
+
+    public boolean hasBonusBall(Lotto lotto) {
+        return lotto.isContainNum(bonusBall);
     }
 }
