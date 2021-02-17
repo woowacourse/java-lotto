@@ -1,9 +1,9 @@
 package lotto.controller;
 
-import lotto.domain.ticketresult.LottoComparator;
 import lotto.domain.ticketgenerator.LottoMachine;
 import lotto.domain.ticketpurchase.PurchasedLottoTickets;
 import lotto.domain.ticketpurchase.UserPurchase;
+import lotto.domain.ticketresult.LottoComparator;
 import lotto.domain.ticketresult.WinningLottoNumbers;
 import lotto.view.InputView;
 import lotto.view.OutputView;

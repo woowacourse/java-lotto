@@ -11,8 +11,6 @@ import java.util.Arrays;
 import java.util.Map;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
-import lotto.domain.ticketresult.LottoComparator;
-import lotto.domain.ticketresult.WinningLottoNumbers;
 import lotto.domain.ticketpurchase.PurchasedLottoTickets;
 import lotto.type.LottoMatchType;
 import org.assertj.core.api.Assertions;

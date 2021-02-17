@@ -2,9 +2,9 @@ package lotto.view;
 
 import java.util.List;
 import java.util.Map;
-import lotto.type.LottoMatchType;
 import lotto.domain.LottoTicket;
 import lotto.domain.ticketpurchase.PurchasedLottoTickets;
+import lotto.type.LottoMatchType;
 import lotto.view.printer.InputPrinter;
 import lotto.view.printer.OutputPrinter;
 

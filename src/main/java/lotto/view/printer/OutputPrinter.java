@@ -4,8 +4,8 @@ import static lotto.view.InputView.LOTTO_NUMBER_DELIMITER;
 
 import java.util.Map;
 import java.util.stream.Collectors;
-import lotto.type.LottoMatchType;
 import lotto.domain.LottoTicket;
+import lotto.type.LottoMatchType;
 
 public class OutputPrinter {
     private static final String START_BRACKET = "[";
