@@ -25,4 +25,5 @@
 
 ## 리팩토링 예정 대상
 
-* Money::divide - 메서드명 
+* Money::divide - 메서드명
+* BonusBall의 예외 처리 -> Wrapper 클래스 정의하기
