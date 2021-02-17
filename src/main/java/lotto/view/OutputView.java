@@ -25,16 +25,24 @@ public class OutputView {
             .sorted(Comparator.comparing(Prize::getRank))
             .sorted(Comparator.reverseOrder())
             .forEach(prize ->
-                System.out.printf(String.format(findFormat(prize.getRank()), prize.getMatchCount(),
-                    prize.getPrizeMoney(), resultMap.get(prize)))
+                System.out.println(makeWinningResultMessage(prize,resultMap))
             );
     }
 
-    public String findFormat(int rank) {
-        if (Prize.SECOND.getRank() == rank) {
-            return "%d개 일치, 보너스 볼 일치(%d원) - %d개\n";
+    public String makeWinningResultMessage(Prize prize, Map<Prize, Long> resultMap) {
+        Long winningCount = resultMap.get(prize);
+        if (winningCount == null) {
+            winningCount = 0L;
         }
-        return "%d개 일치(%d원) - %d개\n";
+        return String.format(findFormat(prize), prize.getMatchCount(), prize.getPrizeMoney(),
+            winningCount);
+    }
+
+    public String findFormat(Prize prize) {
+        if (Prize.SECOND == prize) {
+            return "%d개 일치, 보너스 볼 일치(%d원) - %d개";
+        }
+        return "%d개 일치(%d원) - %d개";
     }
 
     public void printProfitRatio(int purchaseMoney, Long prizeMoney) {
