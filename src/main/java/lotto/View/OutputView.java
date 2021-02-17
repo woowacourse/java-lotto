@@ -40,18 +40,6 @@ public class OutputView {
             System.out.printf("%d개 일치 (%d원)- %d개\n", elem.getKey().getCount(), elem.getKey().getMoney(), elem.getValue());
         }
 
-//        System.out.printf("4개 일치 (50000원)- %d개\n", results.values().stream()
-//                .filter(value -> value.values().equals(Rank.FOURTH))
-//                .count());
-//        System.out.printf("5개 일치 (1500000원)- %d개\n", results.values().stream()
-//                .filter(value -> value.values().equals(Rank.THIRD))
-//                .count());
-//        System.out.printf("5개 일치, 보너스 볼 일치(30000000원) %d개\n", results.values().stream()
-//                .filter(value -> value.values().equals(Rank.SECOND))
-//                .count());
-//        System.out.printf("6개 일치 (2000000000원) %d개\n", results.values()
-//                .stream()
-//                .filter(value -> value.values().equals(Rank.FIRST))
-//                .count());
+        System.out.printf("총 수익률은 %f입니다.\n", results.getProfit());
     }
 }

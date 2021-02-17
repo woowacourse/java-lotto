@@ -31,4 +31,11 @@ class MoneyTest {
         Money money = new Money(input);
         assertEquals(expected, money.lottoQuantity());
     }
+
+    @Test
+    void name() {
+        for (Rank rank : Rank.values()) {
+            System.out.println(rank.name());
+        }
+    }
 }
