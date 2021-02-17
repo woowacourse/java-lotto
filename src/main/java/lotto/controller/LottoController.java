@@ -1,7 +1,10 @@
 package lotto.controller;
 
+import com.sun.tools.internal.ws.wsdl.document.Output;
 import java.util.List;
-import java.util.stream.Stream;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import lotto.domain.AutoLottoMachine;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoResult;
@@ -14,6 +17,7 @@ import lotto.view.OutputView;
 public class LottoController {
     private final InputView inputView;
     private final OutputView outputView;
+
     private LottoMachine lottoMachine;
 
     public LottoController(InputView inputView, OutputView outputView) {
@@ -33,5 +37,15 @@ public class LottoController {
         int bonusNumber = inputView.takeBonusNumber();
         WinningLottoTicket winningLottoTicket = new WinningLottoTicket(winningNumbers, bonusNumber);
 
+        LottoResult lottoResult = new LottoResult(
+            calculateLottoResult(lottoTickets, winningLottoTicket));
+        outputView.printLottoResult(lottoResult, lottoMoney);
+    }
+
+    private Map<Prize, Long> calculateLottoResult(List<LottoTicket> lottoTickets,
+        WinningLottoTicket winningLottoTicket) {
+        return lottoTickets.stream()
+            .map(winningLottoTicket::compareNumbers)
+            .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 }
