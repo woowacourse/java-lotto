@@ -22,15 +22,15 @@ public class WinningNumberTest {
     void getWinningNumber() {
         WinningNumber winningNumber = new WinningNumber("1, 2, 3, 4, 5, 6", "7");
         LottoNumbers expected = new LottoNumbers(
-            Arrays.asList(
-                new LottoNumber(new Number(1)),
-                new LottoNumber(new Number(2)),
-                new LottoNumber(new Number(3)),
-                new LottoNumber(new Number(4)),
-                new LottoNumber(new Number(5)),
-                new LottoNumber(new Number(6))
-            )
-        );
+                Arrays.asList(
+                    new LottoNumber(new Number(1)),
+                    new LottoNumber(new Number(2)),
+                    new LottoNumber(new Number(3)),
+                    new LottoNumber(new Number(4)),
+                    new LottoNumber(new Number(5)),
+                    new LottoNumber(new Number(6))
+                )
+            );
 
         assertThat(expected).isEqualTo(winningNumber.getLottoNumbers());
     }
@@ -55,7 +55,7 @@ public class WinningNumberTest {
     @DisplayName("등수 계산을 반환")
     void getStatistics() {
         WinningNumber winningNumber = new WinningNumber("1, 2, 3, 4, 5, 6", "7");
-        List<Long> expected = Arrays.asList(1L, 1L, 1L, 0L, 0L);
+        List<Long> expected = Arrays.asList(1L,1L,1L,0L,0L);
 
         LottoGroup lottoGroup = new LottoGroup(Arrays.asList(
             new LottoNumbers(
