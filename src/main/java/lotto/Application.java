@@ -16,9 +16,9 @@ public class Application {
         String input = InputView.takeMoneyInput(scanner);
         Money money = new Money(input);
         Lottos lottos = new Lottos(money.calculateNumberOfLotto());
-        OutputView.lottosResult(lottos);
+        OutputView.showLottos(lottos);
 
-        List<Integer> winningNumbers = InputView.winningNumbers();
+        List<Integer> winningNumbers = InputView.winningNumbers(scanner);
         int bonusNumber = InputView.bonusNumber();
 
         List<Result> results = lottos.getResults(winningNumbers, bonusNumber);
