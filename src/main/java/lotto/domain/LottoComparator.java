@@ -53,8 +53,7 @@ public class LottoComparator {
     }
 
     private void addResult(int countMatchedNumbers, LottoTicket purchasedOneLottoTicket) {
-
-        List<LottoMatchType> lottoMatchTypes = getLottoMatchType(countMatchedNumbers);
+        List<LottoMatchType> lottoMatchTypes = LottoMatchType.getLottoMatchType(countMatchedNumbers);
         if (lottoMatchTypes.size() == EMPTY_SIZE) {
             return;
         }
@@ -63,13 +62,6 @@ public class LottoComparator {
             return;
         }
         handleOtherMatchTypes(lottoMatchTypes);
-    }
-
-    private List<LottoMatchType> getLottoMatchType(int countMatchedNumbers) {
-        return Arrays.stream(LottoMatchType.values())
-            .filter(
-                lottoMatchType -> lottoMatchType.getCountMatchedNumbers() == countMatchedNumbers)
-            .collect(Collectors.toList());
     }
 
     private void handleFiveMatchType(LottoTicket purchasedOneLottoTicket) {

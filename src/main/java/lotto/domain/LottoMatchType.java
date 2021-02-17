@@ -1,5 +1,9 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public enum LottoMatchType {
     THREE_MATCH(3, 5000,
         "3개 일치 (5000원) - %d개"),
@@ -33,5 +37,12 @@ public enum LottoMatchType {
 
     public String getMatchCountMessage() {
         return matchCountMessage;
+    }
+
+    public static List<LottoMatchType> getLottoMatchType(int countMatchedNumbers) {
+        return Arrays.stream(LottoMatchType.values())
+            .filter(
+                lottoMatchType -> lottoMatchType.getCountMatchedNumbers() == countMatchedNumbers)
+            .collect(Collectors.toList());
     }
 }
