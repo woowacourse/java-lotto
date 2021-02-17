@@ -5,18 +5,18 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class BonusBallTest {
+class LottoNumberTest {
 
-    @DisplayName("BonusBall를 생성하는 기능")
+    @DisplayName("LottoNumber를 생성하는 기능")
     @Test
     void generate() {
         //given
         int bonusBallValue = 7;
 
         //when
-        BonusBall bonusBall = new BonusBall(bonusBallValue);
+        LottoNumber lottoNumber = new LottoNumber(bonusBallValue);
 
         //then
-        assertThat(bonusBall).isNotNull();
+        assertThat(lottoNumber).isNotNull();
     }
 }
