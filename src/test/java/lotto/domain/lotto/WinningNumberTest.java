@@ -36,4 +36,12 @@ public class WinningNumberTest {
             () -> new WinningNumber("1,2,3,4,5,6", "1, 3")
         ).withMessage("보너스 볼의 하나의 숫자로 이루어져야 합니다.");
     }
+
+    @Test
+    @DisplayName("보너스 번호가 당첨 번호와 중복이 되는 경우 예외")
+    void duplicateBonusNumberWithLottoNumbers() {
+        assertThatIllegalArgumentException().isThrownBy(
+            () -> new WinningNumber("1,2,3,4,5,6", "3")
+        ).withMessage("보너스 번호는 로또 번호와 달라야 합니다.");
+    }
 }
