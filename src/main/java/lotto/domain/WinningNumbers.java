@@ -1,7 +1,8 @@
 package lotto.domain;
 
 public class WinningNumbers {
-    LottoTicket lottoTicket;
+    private final LottoTicket lottoTicket;
+    private final LottoNumber bonusBall;
 
     public WinningNumbers(String lottoNumbersValue, String bonusBallValue) {
         LottoTicket lottoTicket = new LottoTicket(lottoNumbersValue);
@@ -12,16 +13,17 @@ public class WinningNumbers {
         }
 
         this.lottoTicket = lottoTicket;
+        this.bonusBall = bonusBall;
     }
 
     public int countMatches(LottoTicket lottoTicket) {
         return (int) lottoTicket.getUnmodifiableList().stream()
-            .filter(lottoNumber -> this.lottoTicket.contains(lottoNumber))
+            .filter(this.lottoTicket::contains)
             .count();
     }
 
     public Rank getRank(LottoTicket lottoTicket) {
-        return Rank.FIRST_PLACE;
+        return Rank.getInstance(countMatches(lottoTicket), lottoTicket.contains(bonusBall));
     }
 
 }

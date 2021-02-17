@@ -108,7 +108,7 @@ class WinningNumbersTest {
     @DisplayName("3등 랭크 반환")
     void getRank3() {
         WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6", "7");
-        LottoTicket lottoTicket = new LottoTicket("1,2,3,4,11,12");
+        LottoTicket lottoTicket = new LottoTicket("1,2,3,4,5,12");
 
         assertThat(winningNumbers.getRank(lottoTicket)).isEqualTo(Rank.THIRD_PLACE);
     }
@@ -117,7 +117,7 @@ class WinningNumbersTest {
     @DisplayName("4등 랭크 반환")
     void getRank4() {
         WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6", "7");
-        LottoTicket lottoTicket = new LottoTicket("1,2,3,11,12,13");
+        LottoTicket lottoTicket = new LottoTicket("1,2,3,4,12,13");
 
         assertThat(winningNumbers.getRank(lottoTicket)).isEqualTo(Rank.FOURTH_PLACE);
     }
@@ -126,7 +126,7 @@ class WinningNumbersTest {
     @DisplayName("5등 랭크 반환")
     void getRank5() {
         WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6", "7");
-        LottoTicket lottoTicket = new LottoTicket("1,2,11,12,13,14");
+        LottoTicket lottoTicket = new LottoTicket("1,2,3,12,13,14");
 
         assertThat(winningNumbers.getRank(lottoTicket)).isEqualTo(Rank.FIFTH_PLACE);
     }
