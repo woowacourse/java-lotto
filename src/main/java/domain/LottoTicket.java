@@ -43,4 +43,8 @@ public class LottoTicket {
             throw new IllegalArgumentException("숫자는 6개를 입력해주세요.");
         }
     }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
 }
