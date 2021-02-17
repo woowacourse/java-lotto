@@ -10,15 +10,13 @@ import lotto.view.OutputView;
 
 public class LottoMain {
     public static void main(String[] args) {
-        UserPurchase userPurchase = getUserPurchaseInput();
         LottoMachine lottoMachine = new LottoMachine();
-
-        PurchasedLottoTickets purchasedLottoTickets = lottoMachine
-            .purchaseLottoTicket(userPurchase);
+        UserPurchase userPurchase = getUserPurchaseInput();
+        PurchasedLottoTickets purchasedLottoTickets
+            = lottoMachine.purchaseLottoTicket(userPurchase);
         OutputView.printPurchasedLottoTickets(purchasedLottoTickets);
 
         WinningLottoNumbers winningLottoNumbers = getWinningLottoNumbersInput();
-
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
         OutputView.printResult(lottoComparator.getLottoResult(purchasedLottoTickets),
             userPurchase.getPurchasePrice());
