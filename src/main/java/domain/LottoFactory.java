@@ -9,7 +9,7 @@ public class LottoFactory {
     private static final List<Integer> CANDIDATES_NUMBERS;
 
     static {
-        CANDIDATES_NUMBERS = IntStream.rangeClosed(Lotto.NUMBER_MIN, Lotto.NUMBER_MAX)
+        CANDIDATES_NUMBERS = IntStream.rangeClosed(LottoNumber.NUMBER_MIN, LottoNumber.NUMBER_MAX)
                 .mapToObj(Integer::new)
                 .collect(Collectors.toList());
     }

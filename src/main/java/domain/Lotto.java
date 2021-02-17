@@ -4,8 +4,6 @@ import java.util.*;
 
 public class Lotto {
     protected static final int LENGTH = 6;
-    protected static final int NUMBER_MIN = 1;
-    protected static final int NUMBER_MAX = 45;
     private static final int PRICE = 1000;
 
     private final List<Integer> lottoNumbers;
@@ -22,7 +20,6 @@ public class Lotto {
     private void validateLottoNumbers(List<Integer> lottoNumbers) {
         validateDuplicatedLottoNumbers(lottoNumbers);
         validateLottoNumbersLength(lottoNumbers);
-        validateLottoNumbersInRange(lottoNumbers);
     }
 
     private void validateDuplicatedLottoNumbers(List<Integer> lottoNumbers) {
@@ -35,18 +32,6 @@ public class Lotto {
     private void validateLottoNumbersLength(List<Integer> lottoNumbers) {
         if (lottoNumbers.size() != LENGTH) {
             throw new IllegalArgumentException("로또 번호의 개수는 6자리입니다.");
-        }
-    }
-
-    private void validateLottoNumbersInRange(List<Integer> lottoNumbers) {
-        for (int lottoNumber : lottoNumbers) {
-            validateLottoNumberInRange(lottoNumber);
-        }
-    }
-
-    private void validateLottoNumberInRange(int lottoNumber) {
-        if (lottoNumber < NUMBER_MIN || NUMBER_MAX < lottoNumber) {
-            throw new IllegalArgumentException("로또 숫자 범위 외 숫자입니다.");
         }
     }
 

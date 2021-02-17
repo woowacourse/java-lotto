@@ -3,7 +3,6 @@ package domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
@@ -49,16 +48,6 @@ class LottoTest {
 
     private static Stream<List<Integer>> generateIfLottoNumbersLengthNotSatisfied() {
         return Stream.of(Arrays.asList(1, 2, 3, 4, 5), Arrays.asList(1, 2, 3, 4, 5, 6, 7));
-    }
-
-    @DisplayName("Lotto 번호가 유효 범위의 숫자가 아닌 경우")
-    @Test
-    void generateWithLottoNumbersNotInRange() {
-        //given
-        List<Integer> lottoNumbers = Arrays.asList(1, -1, 3, 4, 5, 6);
-
-        //when //then
-        assertThatThrownBy(() -> new Lotto(lottoNumbers)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("구입금액에 따라 Lotto 개수를 반환하는 기능")
