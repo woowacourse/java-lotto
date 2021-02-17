@@ -16,6 +16,6 @@ public class PrizeMoneyTest {
     void prizeMoneyCreate() {
         Statistics statistics = new Statistics(Arrays.asList(Ranking.FIRST, Ranking.FORTH, Ranking.FORTH, Ranking.FORTH));
         PrizeMoney prizeMoney = new PrizeMoney();
-        assertThat(prizeMoney.totalPrize(statistics)).isEqualTo(2000_150_000);
+        assertThat(prizeMoney.totalPrize(statistics)).isEqualTo(2_000_150_000);
     }
 }

@@ -6,6 +6,7 @@ import java.util.Objects;
 
 public class Money {
     private static final int MINIMUM_PRICE = 1000;
+    private static final int SECOND_DECIMAL_POINT_MAKER = 100;
 
     private final int money;
 
@@ -29,6 +30,10 @@ public class Money {
         return this.money / unit;
     }
 
+    public String calculateProfit(int totalMoney) {
+        double profit = Math.floor((double) totalMoney / money * SECOND_DECIMAL_POINT_MAKER) / SECOND_DECIMAL_POINT_MAKER;
+        return Double.toString(profit);
+    }
 
     @Override
     public boolean equals(Object o) {

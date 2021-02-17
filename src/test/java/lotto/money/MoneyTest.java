@@ -1,7 +1,13 @@
 package lotto.money;
 
+import lotto.ranking.Ranking;
+import lotto.ranking.Statistics;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
@@ -37,5 +43,19 @@ public class MoneyTest {
         assertThatThrownBy(()->
                 new Money("-1")
         ).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("1000원 이상의 금액이 필요합니다.");
+    }
+
+    @Test
+    @DisplayName("수익률 계산")
+    void calculateProfit() {
+        Money money = new Money("14000");
+        PrizeMoney prizeMoney = new PrizeMoney();
+        List<Ranking> rankings = new ArrayList<>();
+        rankings.add(Ranking.FIFTH);
+        for(int i = 0; i < money.divideMoney(1000) - 1; i++) {
+            rankings.add(Ranking.NOTHING);
+        }
+        int totalMoney = prizeMoney.totalPrize(new Statistics(rankings));
+        assertThat(money.calculateProfit(totalMoney)).isEqualTo("0.35");
     }
 }
