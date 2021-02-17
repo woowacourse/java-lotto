@@ -24,6 +24,13 @@ public class LottoTicketTest {
         ))).isTrue();
     }
 
+    @DisplayName("LottoNumberRepository를 이용해 랜덤하게 로또 티켓을 생성한다.")
+    @Test
+    public void createRandomLottoTicketTest() {
+        LottoTicket lottoTicket = LottoTicket.of(LottoNumberRepository.shuffleLottoNumbers());
+        assertThat(lottoTicket).isInstanceOf(LottoTicket.class);
+    }
+
     @DisplayName("중복된 번호를 입력할 경우 예외를 발생시킨다.")
     @Test
     public void validLottoTicketTest() {

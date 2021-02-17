@@ -17,6 +17,10 @@ public class LottoTicket {
         return Collections.unmodifiableList(this.lottoNumbers);
     }
 
+    public static LottoTicket of(List<LottoNumber> shuffleLottoNumbers) {
+        return new LottoTicket(shuffleLottoNumbers);
+    }
+
     public static LottoTicket valueOf(List<String> lottoNumbers) {
         isValidNumberCount(lottoNumbers);
         List<LottoNumber> lottoNumbersList = new ArrayList<>();
