@@ -37,6 +37,20 @@ class WinningNumbersTest {
     }
 
     @Test
+    @DisplayName("실패 - 보너스볼이 1개가 아닌 경우")
+    void generate_duplicated_case4() {
+        assertThatThrownBy(() -> new WinningNumbers("1,2,3,4,5,6", "7,8"))
+            .isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    @DisplayName("실패 - 보너스볼 값이 1~45 사이가 아닌 경우")
+    void generate_duplicated_case5() {
+        assertThatThrownBy(() -> new WinningNumbers("1,2,3,4,5,6", "46"))
+            .isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
     @DisplayName("일치하는 갯수 체크 - 6")
     void count_same_numbers1() {
         WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6", "7");

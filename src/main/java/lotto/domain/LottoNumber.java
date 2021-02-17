@@ -16,11 +16,15 @@ public class LottoNumber {
     }
 
     public LottoNumber(String numberValue) {
+        this(convertToLottoNumber(numberValue));
+    }
+
+    private static int convertToLottoNumber(String numberValue) {
+        numberValue = numberValue.trim();
         if (!Pattern.matches(IS_NUMBER, numberValue)) {
             throw new RuntimeException();
         }
-
-        number = Integer.parseInt(numberValue);
+        return Integer.parseInt(numberValue);
     }
 
     public int getNumber() {
