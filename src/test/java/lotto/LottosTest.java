@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -49,7 +51,10 @@ public class LottosTest {
 
     @Test
     void 당첨금액_계산() {
-
+        Map<Rank, Integer> sampleCount = new HashMap<>();
+        sampleCount.put(Rank.FIFTH, 1);
+        int winningMoney = Lottos.findWinningMoney(sampleCount);
+        assertThat(winningMoney).isEqualTo(5000);
     }
 }
 
