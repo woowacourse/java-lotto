@@ -1,3 +1,5 @@
+package lottogame.domain;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.HashSet;
@@ -6,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottoTicketTest {
+
     @Test
     @DisplayName("뽑힌 LottoNumber가 6개인지")
     void issueLottoTicket() {
@@ -18,7 +21,7 @@ public class LottoTicketTest {
 
     @Test
     @DisplayName("뽑힌 LottoNumber에 중복이 없는지")
-    void issueLottoTicketDuplicate(){
+    void issueLottoTicketDuplicate() {
         LottoTicket lottoTicket = new LottoTicket();
         lottoTicket.issue();
         Set<LottoNumber> lottoNumberSet = new HashSet<>(lottoTicket.getLottoNumbers());

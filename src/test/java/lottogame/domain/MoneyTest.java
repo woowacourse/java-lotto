@@ -1,3 +1,5 @@
+package lottogame.domain;
+
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;

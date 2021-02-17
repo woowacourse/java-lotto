@@ -1,3 +1,5 @@
+package lottogame.domain;
+
 public class Money {
 
     public static final int MIN_AMOUNT = 1000;
