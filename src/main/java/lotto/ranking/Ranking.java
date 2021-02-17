@@ -27,5 +27,7 @@ public enum Ranking {
                 .findFirst()
                 .orElse(NOTHING);
     }
-
+    public int calculatePrize(int rankingCount) {
+        return this.price * rankingCount;
+    }
 }
