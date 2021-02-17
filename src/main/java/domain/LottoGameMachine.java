@@ -30,11 +30,16 @@ public class LottoGameMachine {
 
         Lottos lottos = makeLottos(lottoCount);
         List<Lotto> lottoGroup = lottos.getLottos();
-        List<LottoResponseDto> lottoResponseDtos = lottoGroup.stream().map(lotto -> (new LottoResponseDto(lotto))).collect(Collectors.toList());
 
-        List<LottoNumbersDto> lottoNumbersDtos = lottoResponseDtos.stream().map(lottoResponseDto -> lottoResponseDto.getLottoNumbersDto()).collect(Collectors.toList());
-        lottoNumbersDtos.stream().forEach(lottoNumberDto ->  lottoGameScreen.showLottoStatus(lottoNumberDto));
+        List<LottoResponseDto> lottoResponseDtos = makeLottoResponseDtos(lottoGroup);
+        lottoGameScreen.showAllLottoStatus(lottoResponseDtos);
+    }
 
+    private List<LottoResponseDto> makeLottoResponseDtos(final List<Lotto> lottoGroup) {
+        List<LottoResponseDto> lottoResponseDtos = lottoGroup.stream()
+                .map(lotto -> (new LottoResponseDto(lotto)))
+                .collect(Collectors.toList());
+        return lottoResponseDtos;
     }
 
     private Lottos makeLottos(final LottoCount lottoCount) {
