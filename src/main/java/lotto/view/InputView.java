@@ -6,6 +6,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoGroup;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoSeller;
+import lotto.domain.Money;
 import lotto.domain.WinningLotto;
 import lotto.exception.LottoException;
 import lotto.util.LottoGenerator;
@@ -19,7 +20,7 @@ public class InputView {
 
   public static LottoGroup lottoGroup() {
     try {
-      int money = money();
+      Money money = money();
       LottoSeller lottoSeller = new LottoSeller();
       return lottoSeller.sellLotto(money);
     } catch (LottoException e) {
@@ -28,11 +29,11 @@ public class InputView {
     }
   }
 
-  public static int money() {
+  public static Money money() {
     try {
       OutputView.printMessage(INPUT_MONEY_MESSAGE);
       int money = Integer.parseInt(SCAN.nextLine());
-      return money;
+      return Money.of(money);
     } catch (NumberFormatException e) {
       OutputView.printMessage("숫자를 입력해주세요.");
       return money();

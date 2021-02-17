@@ -3,6 +3,7 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
+import lotto.exception.LottoNumberException;
 import org.junit.jupiter.api.Test;
 
 class LottoNumberTest {
@@ -17,10 +18,10 @@ class LottoNumberTest {
   @Test
   void createFail() {
     // 음수 또는 45 가 넘어갈 떄
-    assertThatThrownBy(() -> LottoNumber.of(60)).isInstanceOf(IllegalArgumentException.class);
-    assertThatThrownBy(() -> LottoNumber.of(-1)).isInstanceOf(IllegalArgumentException.class);
+    assertThatThrownBy(() -> LottoNumber.of(60)).isInstanceOf(LottoNumberException.class);
+    assertThatThrownBy(() -> LottoNumber.of(-1)).isInstanceOf(LottoNumberException.class);
     assertThatThrownBy(() -> LottoNumber.asList(-1, 1, 2, 3, 4, 5))
-        .isInstanceOf(IllegalArgumentException.class);
+        .isInstanceOf(LottoNumberException.class);
   }
 
 

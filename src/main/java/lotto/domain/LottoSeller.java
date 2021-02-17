@@ -8,8 +8,8 @@ public class LottoSeller {
   private static final int LOTTO_PRICE = 1000;
   private static final int MIN_COUNT = 1;
 
-  public LottoGroup sellLotto(int price) {
-    int count = price / LOTTO_PRICE;
+  public LottoGroup sellLotto(Money money) {
+    int count = money.divide(LOTTO_PRICE);
     if (count < MIN_COUNT) {
       throw new LottoPriceException("가격이 부족합니다.");
     }

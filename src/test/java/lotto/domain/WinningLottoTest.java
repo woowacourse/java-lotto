@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
+import lotto.exception.LottoNumberException;
 import lotto.util.LottoGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,7 +24,8 @@ class WinningLottoTest {
 
   @Test
   void checkDuplicateWinningNumberWithBonusNumber() {
-    assertThatThrownBy(() -> new WinningLotto(lotto, LottoNumber.of(6))).isInstanceOf(IllegalArgumentException.class);
+    assertThatThrownBy(() -> new WinningLotto(lotto, LottoNumber.of(6))).isInstanceOf(
+        LottoNumberException.class);
   }
 
   @ParameterizedTest

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.LottoPriceException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,14 +18,14 @@ class LottoSellerTest {
 
   @Test
   void createLotto_enoughMoney() {
-    LottoGroup lottoGroup = lottoSeller.sellLotto(2000);
+    LottoGroup lottoGroup = lottoSeller.sellLotto(Money.of(2000));
     Assertions.assertThat(lottoGroup.size()).isEqualTo(2);
   }
 
   @ParameterizedTest
   @ValueSource(ints = {500, -100})
   void createLotto_notEnoughMoney(int price) {
-    Assertions.assertThatThrownBy(() -> lottoSeller.sellLotto(price))
-        .isInstanceOf(IllegalArgumentException.class);
+    Assertions.assertThatThrownBy(() -> lottoSeller.sellLotto(Money.of(price)))
+        .isInstanceOf(LottoPriceException.class);
   }
 }
