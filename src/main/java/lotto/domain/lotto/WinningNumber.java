@@ -10,6 +10,7 @@ import java.util.stream.IntStream;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.Number;
 import lotto.domain.number.PayOut;
+import lotto.domain.rank.RankFactory;
 
 public class WinningNumber {
 
@@ -60,10 +61,10 @@ public class WinningNumber {
     public WinningStatistics getResult(LottoGroup lottoGroup, PayOut payOut) {
         Map<Integer, Long> result = lottoGroup.getLotties().stream()
             .map(this::getRank)
-            .filter(rank -> Rank.FAIL.getRank() != rank)
+            .filter(rank -> RankFactory.FAIL.getRank() != rank)
             .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
-        IntStream.range(1, Rank.values().length)
+        IntStream.range(1, RankFactory.values().length)
             .filter(rank -> !result.containsKey(rank))
             .forEach(rank -> result.put(rank, 0L));
 
@@ -71,7 +72,7 @@ public class WinningNumber {
     }
 
     private int getRank(LottoNumbers lottoNumbers) {
-        return Rank.getRank(
+        return RankFactory.getRank(
             this.lottoNumbers.getMatchCount(lottoNumbers),
             lottoNumbers.contains(bonusNumber)
         ).getRank();

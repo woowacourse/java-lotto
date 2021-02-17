@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.stream.IntStream;
 
 import lotto.domain.number.PayOut;
+import lotto.domain.rank.RankFactory;
 import lotto.domain.rank.Ranking;
 
 public class WinningStatistics {
@@ -17,9 +18,9 @@ public class WinningStatistics {
     private final double yield;
 
     public WinningStatistics(Map<Integer, Long> gameResult, PayOut payOut) {
-        this.rankings = IntStream.range(1, Rank.values().length)
+        this.rankings = IntStream.range(1, RankFactory.values().length)
             .boxed()
-            .map(key -> Rank.createRanking(key, gameResult.getOrDefault(key, 0L)))
+            .map(key -> RankFactory.createRanking(key, gameResult.getOrDefault(key, 0L)))
             .sorted(comparingInt(Ranking::getRank))
             .collect(toList());
 

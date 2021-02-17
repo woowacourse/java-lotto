@@ -1,13 +1,11 @@
-package lotto.domain.lotto;
+package lotto.domain.rank;
 
 import static java.util.Arrays.stream;
 
 import java.util.Arrays;
 import java.util.function.Function;
 
-import lotto.domain.rank.Ranking;
-
-public enum Rank {
+public enum RankFactory {
     FIRST(1, 6, false, 2000000000),
     SECOND(2, 5, true, 30000000),
     THIRD(3, 5, false, 1500000),
@@ -20,7 +18,7 @@ public enum Rank {
     private final boolean hasBonusNumber;
     private final Function<Long, Ranking> ranking;
 
-    Rank(int rank, int matchedNumber, boolean hasBonusNumber, int winnings) {
+    RankFactory(int rank, int matchedNumber, boolean hasBonusNumber, int winnings) {
         this.rank = rank;
         this.matchedNumber = matchedNumber;
         this.hasBonusNumber = hasBonusNumber;
@@ -32,24 +30,24 @@ public enum Rank {
     }
 
     public static Ranking createRanking(int rank, Long count) {
-        return stream(Rank.values())
+        return stream(RankFactory.values())
                 .filter(r -> r.rank == rank)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("매칭되는 등수가 없습니다."))
                 .ranking.apply(count);
     }
 
-    public static Rank getRank(int matchedNumber, boolean hasBonusNumber) {
-        return Arrays.stream(Rank.values())
-                .filter(rank -> rankConditionFilter(rank, matchedNumber, hasBonusNumber))
+    public static RankFactory getRank(int matchedNumber, boolean hasBonusNumber) {
+        return Arrays.stream(RankFactory.values())
+                .filter(rankFactory -> rankConditionFilter(rankFactory, matchedNumber, hasBonusNumber))
                 .findAny()
-                .orElse(Rank.FAIL);
+                .orElse(RankFactory.FAIL);
     }
 
-    private static boolean rankConditionFilter(Rank rank,
+    private static boolean rankConditionFilter(RankFactory rankFactory,
                                                int matchedNumber,
                                                boolean hasBonusNumber) {
-        return rank.hasBonusNumber && hasBonusNumber && rank.matchedNumber == matchedNumber ||
-                !rank.hasBonusNumber && rank.matchedNumber == matchedNumber;
+        return rankFactory.hasBonusNumber && hasBonusNumber && rankFactory.matchedNumber == matchedNumber ||
+                !rankFactory.hasBonusNumber && rankFactory.matchedNumber == matchedNumber;
     }
 }
