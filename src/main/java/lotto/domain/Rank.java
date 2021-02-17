@@ -18,8 +18,12 @@ public enum Rank {
         this.reward = reward;
     }
 
-    private int getCountOfMatch() {
+    public int getCountOfMatch() {
         return this.countOfMatch;
+    }
+
+    public int getReward() {
+        return reward;
     }
 
     public static Rank rankOf(int countOfMatch, boolean bonusNumber) {
@@ -30,6 +34,10 @@ public enum Rank {
                 .filter(rank -> rank.matchCount(countOfMatch))
                 .findFirst()
                 .orElse(NOTHING);
+    }
+
+    public boolean matchRank(Rank rank) {
+        return this.reward == rank.reward;
     }
 
     private boolean matchCount(int countOfMatch) {
