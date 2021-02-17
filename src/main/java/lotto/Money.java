@@ -15,7 +15,7 @@ public class Money {
         }
     }
 
-    public int getMoney() {
+    public int getValue() {
         return value;
     }
 }

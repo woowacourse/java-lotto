@@ -5,8 +5,8 @@ public class Ticket {
     private int count;
 
     public Ticket(Money money) {
-        validateThousands(money.getMoney());
-        this.count = money.getMoney() / TICKET_PRICE;
+        validateThousands(money.getValue());
+        this.count = money.getValue() / TICKET_PRICE;
     }
 
     private void validateThousands(final int value) {
