@@ -17,7 +17,7 @@ public class LottoWinner {
 
     public void validateIfWinnerBonusNumberInWinnerTicket
             (LottoWinnerTicket lottoWinnerTicket, LottoWinnerBonusNumber lottoWinnerBonusNumber) {
-        if (lottoWinnerTicket.getLottoNumbers().contains(lottoWinnerBonusNumber)) {
+        if (lottoWinnerTicket.isContain(lottoWinnerBonusNumber)) {
             throw new IllegalArgumentException(DUPLICATE_ERROR_MESSAGE);
         }
     }
