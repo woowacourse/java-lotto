@@ -14,11 +14,11 @@ public class WinningLotto extends Lotto {
 
     public WinningLotto(final List<Integer> numbers, final int bonusNumber) {
         super(numbers);
-        validate(numbers, bonusNumber);
+        validateBonusNumber(numbers, bonusNumber);
         this.bonusNumber = bonusNumber;
     }
 
-    private void validate(final List<Integer> values, int value) {
+    private void validateBonusNumber(final List<Integer> values, int value) {
         if (value < MIN_BOUND || value > MAX_BOUND) {
             throw new InvalidLottoNumberException();
         }
