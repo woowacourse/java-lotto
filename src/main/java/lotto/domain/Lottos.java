@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,19 +20,19 @@ public class Lottos {
         }
     }
 
-    public Map<String, Integer> getStatistics(List<Integer> winningNumbers, int bonusNumber) {
-        Map<String, Integer> getStatistics = setUpStatistics();
+    public Map<LottoRank, Integer> getStatistics(List<Integer> winningNumbers, int bonusNumber) {
+        Map<LottoRank, Integer> getStatistics = setUpStatistics();
         for (Lotto lotto : lottoBunch) {
-            String rankName = lotto.getLottoRank(winningNumbers, bonusNumber).name();
-            getStatistics.replace(rankName, getStatistics.get(rankName) + 1);
+            LottoRank targetRank = lotto.getLottoRank(winningNumbers, bonusNumber);
+            getStatistics.replace(targetRank, getStatistics.get(targetRank) + 1);
         }
         return getStatistics;
     }
 
-    private Map<String, Integer> setUpStatistics() {
-        Map<String, Integer> setUpStatistics = new HashMap<>();
+    private Map<LottoRank, Integer> setUpStatistics() {
+        Map<LottoRank, Integer> setUpStatistics = new LinkedHashMap<>();
         for (LottoRank singleLottoRank : LottoRank.values()) {
-            setUpStatistics.put(singleLottoRank.name(), 0);
+            setUpStatistics.put(singleLottoRank, 0);
         }
         return setUpStatistics;
     }

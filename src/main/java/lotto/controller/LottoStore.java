@@ -26,7 +26,7 @@ public class LottoStore {
         Lottos lottos = buyLotto();
         List<Integer> winningNumbers = inputView.inputWinningNumbers();
         int bonusNumber = inputView.inputBonusNumber();
-        Map<String, Integer> lottoResultStatistics = lottos.getStatistics(winningNumbers, bonusNumber);
+        Map<LottoRank, Integer> lottoResultStatistics = lottos.getStatistics(winningNumbers, bonusNumber);
         printLottoResult(lottoResultStatistics, lottos);
     }
 
@@ -37,15 +37,15 @@ public class LottoStore {
         return purchasedLottos;
     }
 
-    public void printLottoResult(Map<String, Integer> lottoResultStatistics, Lottos lottos) {
+    public void printLottoResult(Map<LottoRank, Integer> lottoResultStatistics, Lottos lottos) {
         double profitRate = calculateProfitRate(lottoResultStatistics, lottos.getSize());
         outputView.printLottoStatistics(lottoResultStatistics, profitRate);
     }
 
-    public double calculateProfitRate(Map<String, Integer> exampleLottosResult, int lottoPiece) {
+    public double calculateProfitRate(Map<LottoRank, Integer> exampleLottosResult, int lottoPiece) {
         double sum = 0;
-        for (Entry<String, Integer> keyValue : exampleLottosResult.entrySet()) {
-            sum += LottoRank.tranlateRankToPrizeMoney(keyValue.getKey()) * keyValue.getValue();
+        for (Entry<LottoRank, Integer> keyValue : exampleLottosResult.entrySet()) {
+            sum += keyValue.getKey().getPrizeMoney() * keyValue.getValue();
         }
         double investCapital = lottoPiece * LOTTO_PRICE;
         double rawProfitRate = sum / investCapital;
