@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
@@ -55,5 +57,14 @@ public class WinnerTicketTest {
         assertThatThrownBy(() -> new WinnerTicket("1,1,2,3,4,5"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("중복되는 숫자가 존재합니다.");
+    }
+
+    @Test
+    @DisplayName("당첨 결과 확인")
+    void checkResult() {
+        WinnerTicket winnerTicket = new WinnerTicket("1,2,3,4,5,6");
+        NumbersGenerator numbersGenerator = () -> Arrays.asList(1,2,3,4,5,6);
+        Ticket ticket = new Ticket(numbersGenerator);
+        assertThat(winnerTicket.findMatchCount(ticket)).isEqualTo(6);
     }
 }

@@ -14,5 +14,4 @@ public class TicketsTest {
         Tickets tickets = new Tickets(new LottoCount(new Money("20000")), new RandomNumbersGenerator());
         assertThat(tickets.getTickets().size()).isEqualTo(20);
     }
-
 }

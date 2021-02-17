@@ -3,6 +3,9 @@ package lotto.lottoticket;
 import java.util.List;
 import java.util.Objects;
 
+import static lotto.lottogame.LottoCount.ONE_COUNT;
+import static lotto.lottogame.LottoCount.ZERO;
+
 public class Ticket {
     private final List<Integer> numbers;
 
@@ -17,6 +20,13 @@ public class Ticket {
         }
         TicketValidation.validateDuplicated(values);
         return values;
+    }
+
+    public int hasSameNumber(Integer number) {
+        if(numbers.contains(number)){
+            return ONE_COUNT;
+        }
+        return ZERO;
     }
 
     @Override

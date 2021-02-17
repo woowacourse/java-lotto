@@ -5,9 +5,9 @@ import lotto.money.Money;
 import java.util.Objects;
 
 public class LottoCount {
+    public static final int ZERO = 0;
+    public static final int ONE_COUNT = 1;
     private static final int LOTTO_PRICE = 1000;
-    private static final int ZERO = 0;
-    private static final int ONE_COUNT = 1;
 
     private final int lottoCount;
 

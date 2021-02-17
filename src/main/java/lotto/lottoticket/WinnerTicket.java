@@ -28,6 +28,14 @@ public class WinnerTicket {
         return this.winnerTicket.contains(number);
     }
 
+    public int findMatchCount(Ticket ticket) {
+        int matchCount = 0;
+        for(Integer number : winnerTicket){
+            matchCount += ticket.hasSameNumber(number);
+        }
+        return matchCount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
