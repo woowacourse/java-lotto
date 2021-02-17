@@ -18,7 +18,9 @@ public class WinningLottoTicket extends LottoTicket {
             .anyMatch(winningNumber -> winningNumber.equals(bonusLottoNumber));
 
         if (isDuplicated) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(
+                String.format("보너스 번호가 당첨 번호와 중복되었습니다. 중복된 번호 : %d", bonusNumber)
+            );
         }
     }
 

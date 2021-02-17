@@ -15,8 +15,8 @@ public class AutoLottoTicketFactory implements LottoTicketFactory {
     private List<Integer> generateRandomNumbers() {
         Set<Integer> randoms = new HashSet<>();
 
-        while (randoms.size() < 6) {
-            randoms.add(RandomUtil.generateRandomNumber(1, 45));
+        while (randoms.size() < LottoTicket.SIZE_OF_LOTTO_NUMBERS) {
+            randoms.add(RandomUtil.generateRandomNumber(LottoNumber.MIN_RANGE, LottoNumber.MAX_RANGE));
         }
 
         return new ArrayList<>(randoms);

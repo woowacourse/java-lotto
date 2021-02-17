@@ -7,29 +7,32 @@ import java.util.stream.Collectors;
 
 public class InputView {
     private static final String COMMA = ",";
+
     private final Scanner scanner;
 
     public InputView(Scanner scanner) {
         this.scanner = scanner;
     }
 
-    // todo : 예외처리 메세지 작성 후 try catch 해줄 것
     public int takeLottoMoney() {
         System.out.println("구입 금액을 입력해주세요.");
-        return inputDecimal();
+        try {
+            return inputDecimal();
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("구입 금액은 숫자여야 합니다.");
+        }
     }
 
-    public List<Integer> inputWinningNumbers(){
+    public List<Integer> inputWinningNumbers() {
         System.out.println("지난주 당첨번호를 입력해주세요.");
         return inputToIntegerList();
     }
 
-    public int takeBonusNumber(){
+    public int takeBonusNumber() {
         System.out.println("보너스 번호를 입력해주세요.");
         return inputDecimal();
     }
 
-    //todo: 예외처리 메세지 작성시 try catch 추가
     private int inputDecimal() {
         return Integer.parseInt(scanner.nextLine());
     }
@@ -48,7 +51,7 @@ public class InputView {
                 .boxed()
                 .collect(Collectors.toList());
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("숫자가 아닌 문자가 포함되어 있습니다.");
         }
     }
 }

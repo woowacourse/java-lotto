@@ -7,6 +7,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
+    public static final int SIZE_OF_LOTTO_NUMBERS = 6;
+
     private final List<LottoNumber> lottoNumbers;
 
     public LottoTicket(List<Integer> numbers) {
@@ -18,15 +20,17 @@ public class LottoTicket {
     }
 
     private void validateLottoNumberCount(List<Integer> numbers) {
-        if (numbers.size() != 6) {
-            throw new IllegalArgumentException();
+        if (numbers.size() != SIZE_OF_LOTTO_NUMBERS) {
+            throw new IllegalArgumentException(
+                String.format("로또 번호는 %d개여야 합니다. 현재 개수 : %d", SIZE_OF_LOTTO_NUMBERS, numbers.size())
+            );
         }
     }
 
     private void validateDuplicatedLottoNumbers(List<Integer> numbers) {
         Set<Integer> duplicateCheck = new HashSet<>(numbers);
         if (numbers.size() != duplicateCheck.size()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("로또 번호가 중복되었습니다.");
         }
     }
 
