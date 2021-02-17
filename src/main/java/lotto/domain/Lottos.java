@@ -4,10 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
+    private final int count;
     private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
+    }
+
+    private List<Lotto> createLottos() {
+        LottoNumber lottoNumber = new LottoNumber();
+        List<Lotto> newLottos = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            newLottos.add(new Lotto(lottoNumber.make()));
+        }
+        return newLottos;
     }
 
     public List<Result> getResults(List<Integer> winningNumbers, int bonusNumber) {

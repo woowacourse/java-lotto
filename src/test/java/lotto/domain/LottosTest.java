@@ -28,4 +28,12 @@ public class LottosTest {
 
         assertThat(results).isEqualTo(expectedResults);
     }
+
+    @DisplayName("로또들을 만들어 주는 테스트")
+    @Test
+    void makeLottos() {
+        Lottos lottos1 = new Lottos(3);
+
+        assertThat(lottos1.getNumberOfLotto()).isEqualTo(3);
+    }
 }

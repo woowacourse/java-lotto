@@ -31,4 +31,14 @@ public class MoneyTest {
             new Money("999");
         }).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("금액 따라 로또 갯수 산출 하는지")
+    @Test
+    void calculateNumberOfLotto() {
+        Money money = new Money("13500");
+        int numberOfLotto = money.calculateNumberOfLotto();
+
+        assertThat(numberOfLotto).isEqualTo(13);
+    }
 }
+
