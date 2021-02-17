@@ -21,7 +21,9 @@ public class Application {
         List<Integer> winningNumbers = InputView.winningNumbers(scanner);
         int bonusNumber = InputView.bonusNumber(scanner, winningNumbers);
 
+        // TODO:
+        //  Result에서 총 수익 계산하는 로직
         List<Result> results = lottos.getResults(winningNumbers, bonusNumber);
-        OutputView.result(results);
+        OutputView.result(results, money.calculateProfit(0));
     }
 }

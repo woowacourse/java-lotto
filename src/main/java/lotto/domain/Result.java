@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public enum Result {
     FIRST(6,2000000000),
@@ -14,6 +12,14 @@ public enum Result {
 
     private final int count;
     private final int prize;
+
+    public int getCount() {
+        return count;
+    }
+
+    public int getPrize() {
+        return prize;
+    }
 
     Result(int count, int prize) {
         this.count = count;
@@ -28,11 +34,18 @@ public enum Result {
                 .orElse(NONE);
     }
 
-    public int getCount() {
-        return count;
-    }
 
-    public int getPrize() {
-        return prize;
+    public static List<Integer> getStatistics(List<Result> results) {
+        Map<Result, Integer> statistics = new LinkedHashMap<>();
+        for (Result result : values()) {
+            statistics.put(result, 0);
+        }
+
+        for (Result result : results) {
+            statistics.put(result, statistics.get(result) + 1);
+        }
+        List<Integer> firstToFifth = new ArrayList(statistics.values()).subList(0,5);
+        Collections.reverse(firstToFifth);
+        return firstToFifth;
     }
 }
