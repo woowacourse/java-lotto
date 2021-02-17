@@ -8,7 +8,13 @@ public class Lottos {
     private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
+        this.count = lottos.size();
         this.lottos = lottos;
+    }
+
+    public Lottos(int count) {
+        this.count = count;
+        this.lottos = createLottos();
     }
 
     private List<Lotto> createLottos() {
@@ -42,5 +48,9 @@ public class Lottos {
             }
         }
         return results;
+    }
+
+    public int getNumberOfLotto() {
+        return lottos.size();
     }
 }
