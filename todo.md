@@ -1,6 +1,4 @@
 # todo
-- LottoMatchType is2ndPrize() 삭제
-- LottoNumber implements Comparable 한 다음에 LottoTicket에서 오름차순으로 sort하기
 - LottoMatchType 관련 함수 LottoMatchType 클래스 내부로 이동.
   
 - PurchasedLottoTickets size() 디미터 법칙 적용. (OutputView.printPurchasedLottoTickets)
@@ -22,3 +20,5 @@
 - 지난 주 당첨 번호를 입력해 주세요. 위에 한 줄 띄우기.
 - InputView 보너스번호인지 세팅.
 - OutputView 출력 포장.
+- LottoMatchType is2ndPrize() 삭제
+- LottoNumber implements Comparable 한 다음에 LottoTicket에서 오름차순으로 sort하기

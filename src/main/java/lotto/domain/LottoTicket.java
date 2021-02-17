@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -14,6 +15,7 @@ public class LottoTicket {
     public LottoTicket(List<LottoNumber> lottoNumbers) {
         validateSize(lottoNumbers);
         validateNotDuplicate(lottoNumbers);
+        lottoNumbers.sort(Comparator.comparingInt(LottoNumber::getNumber));
         this.numbers = new ArrayList<>(lottoNumbers);
     }
 
