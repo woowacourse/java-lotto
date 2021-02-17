@@ -33,7 +33,8 @@ public class OutputPrinter {
         System.out.println("---------");
     }
 
-    public static void printEachNumberMatchedCountMessage(LottoMatchType lottoMatchType, Map<LottoMatchType, Integer> result) {
+    public static void printEachNumberMatchedCountMessage(LottoMatchType lottoMatchType,
+        Map<LottoMatchType, Integer> result) {
         System.out.printf(lottoMatchType.getMatchCountMessage() + NEW_LINE,
             result.get(lottoMatchType));
     }
