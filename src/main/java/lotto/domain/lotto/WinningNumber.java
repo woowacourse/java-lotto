@@ -13,10 +13,21 @@ public class WinningNumber {
     private final LottoNumber bonusNumber;
 
     public WinningNumber(String lottoNumber, String bonusNumber) {
-        validateBonusNumberFormat(bonusNumber);
-        this.bonusNumber = new LottoNumber(new Number(bonusNumber));
+        LottoNumbers extractedLottoNumbers =
+            getLottoNumbersFromStringLottoNumberList(getSplitLottoNumber(lottoNumber));
 
-        lottoNumbers = getLottoNumbersFromStringLottoNumberList(getSplitLottoNumber(lottoNumber));
+        validateBonusNumberFormat(bonusNumber);
+        LottoNumber extractedBonusNumber = new LottoNumber(new Number(bonusNumber));
+        validateDuplicateBonusNumberWithLottoNumbers(extractedLottoNumbers, extractedBonusNumber);
+
+        this.lottoNumbers = extractedLottoNumbers;
+        this.bonusNumber = extractedBonusNumber;
+    }
+
+    private void validateDuplicateBonusNumberWithLottoNumbers(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
+        if(lottoNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 번호는 로또 번호와 달라야 합니다.");
+        }
     }
 
     private List<String> getSplitLottoNumber(String lottoNumber) {
