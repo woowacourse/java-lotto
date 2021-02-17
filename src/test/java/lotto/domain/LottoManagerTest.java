@@ -3,9 +3,7 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
-import lotto.domain.Lotto;
-import lotto.domain.LottoManager;
-import lotto.domain.LottoSupplier;
+import lotto.domain.lottomachine.RandomLottoMachine;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,7 +14,7 @@ public class LottoManagerTest {
 
     @BeforeEach
     void setup() {
-        lottoManager = new LottoManager(new LottoSupplier());
+        lottoManager = new LottoManager(new RandomLottoMachine());
     }
 
     @Test

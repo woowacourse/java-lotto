@@ -9,13 +9,14 @@ import lotto.domain.Money;
 import lotto.domain.RatingInfo;
 import lotto.domain.Ticket;
 import lotto.domain.WinningLotto;
+import lotto.domain.lottomachine.RandomLottoMachine;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class Application {
 
     public static void main(String[] args) {
-        LottoManager lottoManager = new LottoManager(new LottoSupplier());
+        LottoManager lottoManager = new LottoManager(new RandomLottoMachine());
         Ticket ticket = buyLotto();
 
         OutputView.printBuyLotto(ticket.getCount());
