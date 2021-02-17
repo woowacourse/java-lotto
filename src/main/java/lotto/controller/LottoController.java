@@ -1,18 +1,21 @@
 package lotto.controller;
 
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
-import lotto.domain.Money;
+import com.sun.tools.internal.ws.wsdl.document.Output;
+import lotto.domain.*;
 import lotto.service.LottoTicketService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoController {
 
-    public void lottoStart(){
+    private static final String DELIMITER = ",";
+
+    public void lottoStart() {
         OutputView.askHowMuchToBuy();
         Money money = new Money(Integer.parseInt(InputView.getUserInput()));
         OutputView.howMuchBought(money.lottoCount());
@@ -23,16 +26,24 @@ public class LottoController {
         }
         LottoTickets lottoTickets = new LottoTickets(lottoTicketGroup);
         OutputView.printTickets(lottoTickets);
+        OutputView.askWinnerLottoTicket();
+
+        List<LottoNumber> lottoWinnerNumbers =
+                Arrays.stream(InputView.getUserInput().split(DELIMITER))
+                        .map(String::trim)
+                        .map(Integer::parseInt)
+                        .map(lottoNumber -> new LottoNumber(lottoNumber))
+                        .collect(Collectors.toList());
+
+        LottoWinnerTicket lottoWinnerTicket = new LottoWinnerTicket(lottoWinnerNumbers);
+        LottoWinnerBonusNumber lottoWinnerBonusNumber = new LottoWinnerBonusNumber(Integer.parseInt(InputView.getUserInput()));
+        LottoWinner lottoWinner = new LottoWinner(lottoWinnerTicket, lottoWinnerBonusNumber);
+
+        OutputView.printRewardResultBoard();
+
     }
 }
 
-//        지난 주 당첨 번호를 입력해 주세요.
-//        1, 2, 3, 4, 5, 6
-//        보너스 볼을 입력해 주세요.
-//        7
-//
-//        당첨 통계
-//        ---------
 //        3개 일치 (5000원)- 1개
 //        4개 일치 (50000원)- 0개
 //        5개 일치 (1500000원)- 0개

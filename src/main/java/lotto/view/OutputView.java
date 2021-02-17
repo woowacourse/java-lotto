@@ -46,4 +46,10 @@ public class OutputView {
     public static void askWinnerLottoTicket() {
         System.out.println(ASK_WINNER_LOTTO_TICKET);
     }
+
+    public static void printRewardResultBoard(){
+        System.out.println(NEW_LINE);
+        System.out.println(REWARD_RESULT_BOARD);
+        System.out.println(RESULT_LINE);
+    }
 }
