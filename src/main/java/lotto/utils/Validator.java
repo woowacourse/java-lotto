@@ -1,6 +1,7 @@
 package lotto.utils;
 
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
 import lotto.exception.*;
 
 import java.util.HashSet;
@@ -54,5 +55,11 @@ public class Validator {
 
     private static boolean isInvalidNumberFormat(String input) {
         return !NUMBER_PATTERN.matcher(input).matches();
+    }
+
+    public static void validateWinningLotto(LottoTicket winningTicket, LottoNumber bonusNumber) {
+        if(winningTicket.isContainLottoNumber(bonusNumber)){
+            throw new IllegalWinningLotto();
+        }
     }
 }

@@ -27,4 +27,8 @@ public class LottoTicket {
     public boolean isMatchingBonusNumber(LottoNumber bonusBall) {
         return lottoTicket.contains(bonusBall);
     }
+
+    public boolean isContainLottoNumber(LottoNumber lottoNumber){
+        return lottoTicket.contains(lottoNumber);
+    }
 }
