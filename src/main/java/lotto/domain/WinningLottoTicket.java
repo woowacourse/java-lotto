@@ -1,15 +1,15 @@
 package lotto.domain;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class WinningLottoTicket extends LottoTicket {
+public class WinningLottoTicket {
     private static final String DUPLICATION_NUMBER = "보너스 볼 번호는 당첨 번호와 중복될 수 없습니다.";
 
+    private final LottoTicket lottoTicket;
     private final LottoNumber bonusBallNumber;
 
-    private WinningLottoTicket(List<LottoNumber> lottoNumbers, LottoNumber bonusBallNumber) {
-        super(lottoNumbers);
+    private WinningLottoTicket(LottoTicket lottoTicket, LottoNumber bonusBallNumber) {
+        this.lottoTicket = lottoTicket;
         this.bonusBallNumber = bonusBallNumber;
     }
 
@@ -17,10 +17,8 @@ public class WinningLottoTicket extends LottoTicket {
         if (winningNumbers.contains(bonusBallNumber)) {
             throw new IllegalArgumentException(DUPLICATION_NUMBER);
         }
-        List<LottoNumber> winningLottoNumber = winningNumbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
+        LottoTicket lottoTicket = LottoTicket.generateTicket(winningNumbers);
         LottoNumber bonusLottoNumber = new LottoNumber(bonusBallNumber);
-        return new WinningLottoTicket(winningLottoNumber, bonusLottoNumber);
+        return new WinningLottoTicket(lottoTicket, bonusLottoNumber);
     }
 }
