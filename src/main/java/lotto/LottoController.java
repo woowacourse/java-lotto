@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 public class LottoController {
     private static final String DELIMITER = ",";
     private static Lottos lottos;
+    private static WinningLotto winningLotto;
 
     public void startLotto() {
         lottos = new Lottos(LottoView.requestMoney());
@@ -19,6 +20,6 @@ public class LottoController {
     public void makeWinningLotto() {
         String winningInput = LottoView.requestWinningNumber();
         String bonusInput = LottoView.requestBonusBallNumber();
-        WinningLotto winningLotto = new WinningLotto(winningInput, bonusInput);
+        winningLotto = new WinningLotto(winningInput, bonusInput);
     }
 }

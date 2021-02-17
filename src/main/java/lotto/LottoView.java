@@ -18,15 +18,9 @@ public class LottoView {
     }
 
     public static void printLottos(Lottos lottos) {
-        ArrayList<ArrayList<Integer>> lotto = lottos.getLottos();
-        for (int i = 0; i < lottos.getCount(); i++) {
-            System.out.print("[");
-            for (int j = 0; j < 5; j++) {
-                System.out.print(lotto.get(i).get(j)+", ");
-            }
-            System.out.print(lotto.get(i).get(5));
-            System.out.print("]\n");
-        }
+        ArrayList<Lotto> lottoGroup = lottos.getLottos();
+        for (int i = 0; i < lottos.getCount(); i++)
+            System.out.print(lottoGroup.get(i).getLotto()+"\n");
     }
 
     public static String requestWinningNumber() {
