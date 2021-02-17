@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -14,7 +16,7 @@ public class Lotto {
     if (isDuplicated(lottoNumbers)) {
       throw new IllegalArgumentException();
     }
-
+    Collections.sort(lottoNumbers);
     this.lottoNumbers = lottoNumbers;
   }
 
@@ -39,11 +41,8 @@ public class Lotto {
 
   @Override
   public String toString() {
-    StringBuilder sb = new StringBuilder();
-
-    for (int i = 0; i < lottoNumbers.size(); i++) {
-      sb.append(i + ": " + lottoNumbers.get(i).get() + "\n");
-    }
-    return sb.toString();
+    return lottoNumbers.stream()
+        .map(LottoNumber::toString)
+        .collect(Collectors.joining(", "));
   }
 }

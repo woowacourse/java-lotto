@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoGroup {
@@ -17,5 +18,9 @@ public class LottoGroup {
 
   public int size() {
     return lottoList.size();
+  }
+
+  public List<Lotto> lottoGroup() {
+    return Collections.unmodifiableList(lottoList);
   }
 }
