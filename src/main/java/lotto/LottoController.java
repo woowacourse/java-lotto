@@ -17,14 +17,9 @@ public class LottoController {
         Lotto winLotto = new Lotto(changeToArrayList());
     }
 
-    private ArrayList<Integer> changeToArrayList() {
-        String numberInput = LottoView.requestWinningNumber();
-        List<Integer> winningNumbers = Arrays.stream(numberInput.split(DELIMITER, -1))
-                    .map(String::trim)
-                    .map(Integer::parseInt)
-                    .collect(Collectors.toList());
-        ArrayList<Integer> winningNums = new ArrayList<Integer>();
-        winningNums.addAll(winningNumbers);
-        return winningNums;
+    public void makeWinningLotto() {
+        String winningInput = LottoView.requestWinningNumber();
+        String bonusInput = LottoView.requestBonusBallNumber();
+        WinningLotto winningLotto = new WinningLotto(winningInput, bonusInput);
     }
 }
