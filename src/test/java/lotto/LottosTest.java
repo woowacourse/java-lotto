@@ -54,5 +54,13 @@ public class LottosTest {
         int earning = Lottos.findEarning(sampleCount);
         assertThat(earning).isEqualTo(5000);
     }
+
+    @Test
+    void 수익률_계산() {
+        int money = 14000;
+        int earning = 5000;
+        double earningRate = Lottos.findEarningRate();
+        assertThat(earningRate).isEqualTo(0.35);
+    }
 }
 
