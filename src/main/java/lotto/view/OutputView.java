@@ -3,6 +3,7 @@ package lotto.view;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
+import lotto.domain.LottoRepository;
 import lotto.domain.LottoStats;
 import lotto.domain.Money;
 
@@ -21,9 +22,9 @@ public class OutputView {
         System.out.printf(BUY_LOTTO_MESSAGE, count);
     }
 
-    public static void printLottoResults(List<Lotto> lottos) {
+    public static void printLottoResults(LottoRepository lottoRepository) {
         StringBuilder log = new StringBuilder();
-        for (Lotto lotto : lottos) {
+        for (Lotto lotto : lottoRepository.toList()) {
             printLottoResult(log, lotto);
         }
         log.append(ENTER);

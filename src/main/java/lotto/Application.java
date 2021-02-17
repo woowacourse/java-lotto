@@ -4,7 +4,6 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoManager;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoStats;
-import lotto.domain.LottoSupplier;
 import lotto.domain.Money;
 import lotto.domain.RatingInfo;
 import lotto.domain.Ticket;
@@ -37,6 +36,7 @@ public class Application {
     }
 
     public static Ticket tryBuyLotto() {
+
         int money = InputView.getInputMoney();
         return new Ticket(new Money(money));
     }
