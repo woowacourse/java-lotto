@@ -39,7 +39,7 @@ public class Lotto {
         }
     }
 
-    public boolean isMatchNumber(int number) {
+    public boolean isContainsNumber(int number) {
         return lottoNumbers.contains(number);
     }
 

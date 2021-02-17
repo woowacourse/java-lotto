@@ -23,10 +23,10 @@ public class WinningLotto extends Lotto {
 
     public Reword match(Lotto lotto) {
         int count = (int) lottoNumbers.stream()
-            .filter(lotto::isMatchNumber)
+            .filter(lotto::isContainsNumber)
             .count();
 
-        return Reword.valueOf(count, lotto.isMatchNumber(bonusNumber));
+        return Reword.valueOf(count, lotto.isContainsNumber(bonusNumber));
     }
 
     @Override
