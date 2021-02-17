@@ -18,21 +18,13 @@ public class LottoTicket {
         return Collections.unmodifiableList(lottoTicket);
     }
 
-    public double getMatchingCount(List<LottoNumber> numbers, LottoNumber bonusBall) {
-        int matchingCount = getMatchingNumbersCount(numbers);
-        if (matchingCount == 5 && isMatchingBonusNumber(bonusBall)){
-            return matchingCount + 0.5;
-        }
-        return matchingCount;
-    }
-
-    private int getMatchingNumbersCount(List<LottoNumber> numbers) {
+    public int getMatchingCount(List<LottoNumber> numbers) {
         return (int) numbers.stream()
                 .filter(this.lottoTicket::contains)
                 .count();
     }
 
-    private boolean isMatchingBonusNumber(LottoNumber bonusBall) {
+    public boolean isMatchingBonusNumber(LottoNumber bonusBall) {
         return lottoTicket.contains(bonusBall);
     }
 }

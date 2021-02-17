@@ -13,34 +13,27 @@ public class LottoTickets {
         return Collections.unmodifiableList(lottoTickets);
     }
 
-    public Map<PrizeType, Integer> checkWinningTickets(List<LottoNumber> winningNumbers, LottoNumber bonusBall) {
-        Map<PrizeType, Integer> winningTickets = new HashMap<>();
-        for (PrizeType prizeType : PrizeType.values()) {
-            winningTickets.put(prizeType, getTicketPrizeTypeCount(winningNumbers, bonusBall, prizeType));
+    public List<PrizeType> checkWinningTickets(List<LottoNumber> winningNumbers, LottoNumber bonusBall) {
+        List<PrizeType> winningTickets = new ArrayList<>();
+        for (LottoTicket lottoTicket : this.lottoTickets) {
+            winningTickets.add(PrizeType.getPrizeType(lottoTicket.getMatchingCount(winningNumbers),
+                    lottoTicket.isMatchingBonusNumber(bonusBall)));
         }
         return winningTickets;
     }
 
-    private int getTicketPrizeTypeCount(List<LottoNumber> numbers, LottoNumber bonusBall, PrizeType prizeType) {
-        int count = 0;
-        for (LottoTicket lottoTicket : lottoTickets) {
-            count += addPrize(lottoTicket.getMatchingCount(numbers, bonusBall), prizeType);
-        }
-        return count;
-    }
-
-    private int addPrize(double matchingCount, PrizeType prizeType) {
-        if (prizeType.isEqualToMatchCount(matchingCount)) {
-            return 1;
-        }
-        return 0;
-    }
-
-    public double calculateProfitRate(Money money, Map<PrizeType, Integer> result) {
-        int moneySum = 0;
-        for (PrizeType prizeType : result.keySet()) {
-            moneySum += prizeType.getPrizeMoney().getValue() * result.get(prizeType);
-        }
-        return (double) moneySum / money.getValue();
-    }
+//    private int getTicketPrizeTypeCount(List<LottoNumber> numbers, LottoNumber bonusBall, PrizeType prizeType) {
+//        int count = 0;
+//        for (LottoTicket lottoTicket : lottoTickets) {
+//            count += addPrize(lottoTicket.getMatchingCount(numbers, bonusBall), prizeType);
+//        }
+//        return count;
+//    }
+//
+//    private int addPrize(double matchingCount, PrizeType prizeType) {
+//        if (prizeType.isEqualToMatchCount(matchingCount)) {
+//            return 1;
+//        }
+//        return 0;
+//    }
 }
