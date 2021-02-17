@@ -32,15 +32,15 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return number;
     }
 
+    public static List<LottoNumber> getCache() {
+        return new ArrayList<>(CACHE);
+    }
+
     private void validateRange(int number) {
         if (number >= MIN_NUMBER_RANGE && number <= MAX_NUMBER_RANGE) {
             return;
         }
         throw new IllegalArgumentException(RANGE_ERROR_MESSAGE);
-    }
-
-    public static List<LottoNumber> getCache() {
-        return new ArrayList<>(CACHE);
     }
 
     @Override //equals 함부로 쓰면 안된다고 했는데, 우리팀의 경우 상속 받은 것들 비교를 제대로 못해줘서 디버깅 한참 걸림. 다른예시좀?

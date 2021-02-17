@@ -46,6 +46,7 @@ public class LottoWinnerTest {
     @NullSource
     public void nullNotAllowedTest(LottoWinnerTicket lottoWinnerTicket) {
         LottoWinnerBonusNumber lottoWinnerBonusNumber = new LottoWinnerBonusNumber(1);
+
         assertThatThrownBy(() -> {
             new LottoWinner(lottoWinnerTicket, lottoWinnerBonusNumber);
         }).isInstanceOf(NullPointerException.class).hasMessage("null 값은 허용하지 않습니다.");

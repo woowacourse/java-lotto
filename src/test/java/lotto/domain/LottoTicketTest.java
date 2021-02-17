@@ -33,25 +33,23 @@ public class LottoTicketTest {
                 new LottoNumber(5),
                 new LottoNumber(45)
         );
-
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers1);
+
         assertThat(lottoTicket).isEqualTo(new LottoTicket(lottoNumbers2));
     }
 
     @ParameterizedTest(name = "Null은 생성자의 매개변수로 허용하지 않는다.")
     @NullSource
     public void nullNotAllowedTest(List<LottoNumber> lottoNumbers) {
-        assertThatThrownBy(() -> {
-            new LottoTicket(lottoNumbers);
-        }).isInstanceOf(NullPointerException.class).hasMessage("null값은 허용하지 않습니다.");
+        assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
+                .isInstanceOf(NullPointerException.class).hasMessage("null값은 허용하지 않습니다.");
     }
 
     @ParameterizedTest(name = "빈값을 생성자의 매개변수로 허용하지 않는다.")
     @EmptySource
     public void emptyParameterTest(List<LottoNumber> lottoNumbers) {
-        assertThatThrownBy(() -> {
-            new LottoTicket(lottoNumbers);
-        }).isInstanceOf(IllegalArgumentException.class).hasMessage("숫자는 하나 이상이어야 합니다.");
+        assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
+                .isInstanceOf(IllegalArgumentException.class).hasMessage("숫자는 하나 이상이어야 합니다.");
     }
 
     @Test
@@ -65,6 +63,7 @@ public class LottoTicketTest {
                 new LottoNumber(5),
                 new LottoNumber(5)
         );
+
         assertThatThrownBy(() -> {
             new LottoTicket(lottoNumbers);
         }).isInstanceOf(RuntimeException.class);
@@ -82,6 +81,7 @@ public class LottoTicketTest {
                 new LottoNumber(6),
                 new LottoNumber(45)
         );
+
         assertThatThrownBy(() -> {
             new LottoTicket(lottoNumbers);
         }).isInstanceOf(RuntimeException.class);
@@ -97,6 +97,7 @@ public class LottoTicketTest {
                 new LottoNumber(4),
                 new LottoNumber(5)
         );
+
         assertThatThrownBy(() -> {
             new LottoTicket(lottoNumbers);
         }).isInstanceOf(RuntimeException.class);
@@ -114,6 +115,7 @@ public class LottoTicketTest {
                 new LottoNumber(44)
         );
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+
         assertThat(lottoTicket.getLottoNumbers()).isEqualTo(Arrays.asList(
                 new LottoNumber(1),
                 new LottoNumber(2),

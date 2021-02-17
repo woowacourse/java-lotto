@@ -30,8 +30,8 @@ public class LottoWinnerTicketTest {
                 new LottoNumber(5),
                 new LottoNumber(45)
         );
-
         LottoWinnerTicket lottoWinnerTicket = new LottoWinnerTicket(lottoWinnerNumbers1);
+
         assertThat(lottoWinnerTicket).isEqualTo(new LottoWinnerTicket(lottoWinnerNumbers2));
     }
 
@@ -46,6 +46,7 @@ public class LottoWinnerTicketTest {
                 new LottoNumber(5),
                 new LottoNumber(5)
         );
+
         assertThatThrownBy(() -> {
             new LottoWinnerTicket(lottoWinnerNumbers);
         }).isInstanceOf(RuntimeException.class);
@@ -63,6 +64,7 @@ public class LottoWinnerTicketTest {
                 new LottoNumber(6),
                 new LottoNumber(45)
         );
+
         assertThatThrownBy(() -> {
             new LottoWinnerTicket(lottoWinnerNumbers);
         }).isInstanceOf(RuntimeException.class);
@@ -78,6 +80,7 @@ public class LottoWinnerTicketTest {
                 new LottoNumber(4),
                 new LottoNumber(5)
         );
+
         assertThatThrownBy(() -> {
             new LottoWinnerTicket(lottoWinnerNumbers);
         }).isInstanceOf(RuntimeException.class);

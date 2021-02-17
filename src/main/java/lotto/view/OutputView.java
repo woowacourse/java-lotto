@@ -1,8 +1,8 @@
 package lotto.view;
 
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoTickets;
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 
 import java.util.stream.Collectors;
 
@@ -47,7 +47,7 @@ public class OutputView {
         System.out.println(ASK_WINNER_LOTTO_TICKET);
     }
 
-    public static void printRewardResultBoard(){
+    public static void printRewardResultBoard() {
         System.out.println(NEW_LINE);
         System.out.println(REWARD_RESULT_BOARD);
         System.out.println(RESULT_LINE);

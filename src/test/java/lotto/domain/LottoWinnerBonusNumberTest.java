@@ -11,6 +11,7 @@ public class LottoWinnerBonusNumberTest {
     @DisplayName("보너스 숫자를 생성한다.")
     public void createNumberTest() {
         LottoWinnerBonusNumber number = new LottoWinnerBonusNumber(5);
+
         assertThat(number).isEqualTo(new LottoWinnerBonusNumber(5));
     }
 
