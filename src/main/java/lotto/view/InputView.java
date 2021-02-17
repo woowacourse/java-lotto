@@ -18,4 +18,8 @@ public class InputView {
                 .replace(BLANK, REPLACEMENT)
                 .split(DELIMITER));
     }
+
+    public static String inputBonusNumber() {
+        return SCANNER.nextLine();
+    }
 }
