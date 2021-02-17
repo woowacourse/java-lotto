@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.LottoStats;
+import lotto.domain.Money;
 
 public class OutputView {
 
@@ -37,12 +38,17 @@ public class OutputView {
         log.append("]").append(ENTER);
     }
 
-    public static void printWinningDetail(LottoStats lottoStats) {
+    public static void printWinningStats(LottoStats lottoStats, int money) {
+        printWinningDetail(lottoStats);
+        printEarningRate(lottoStats.getEarningRate(new Money(money)));
+    }
+
+    private static void printWinningDetail(LottoStats lottoStats) {
         System.out.println(WINNING_DETAIL_HEADER);
         System.out.print(lottoStats.getWinningDetail());
     }
 
-    public static void printEarningRate(int rate) {
+    private static void printEarningRate(int rate) {
         System.out.printf(TOTAL_EARNING_RATE_MESSAGE, rate);
     }
 }

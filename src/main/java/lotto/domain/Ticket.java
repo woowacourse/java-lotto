@@ -18,4 +18,8 @@ public class Ticket {
     public int getCount() {
         return count;
     }
+
+    public int getPrice() {
+        return TICKET_PRICE * count;
+    }
 }
