@@ -5,11 +5,12 @@ import java.util.Scanner;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGroup;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoSeller;
 import lotto.domain.Money;
 import lotto.domain.WinningLotto;
 import lotto.exception.LottoException;
 import lotto.util.LottoGenerator;
+import lotto.util.LottoSeller;
+import lotto.util.RandomLottoStrategy;
 
 public class InputView {
 
@@ -18,14 +19,14 @@ public class InputView {
   private static final String INPUT_WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
   private static final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
 
-  public static LottoGroup lottoGroup() {
+  public static LottoGroup randomLottoGroup() {
     try {
       Money money = money();
       LottoSeller lottoSeller = new LottoSeller();
-      return lottoSeller.sellLotto(money);
+      return lottoSeller.sellLotto(money, new RandomLottoStrategy());
     } catch (LottoException e) {
       OutputView.printMessage(e.getMessage());
-      return lottoGroup();
+      return randomLottoGroup();
     }
   }
 
@@ -56,11 +57,13 @@ public class InputView {
     try {
       OutputView.printMessage(INPUT_WINNING_NUMBER_MESSAGE);
       String winningNumbers = SCAN.nextLine();
+
       int[] numbers = Arrays
           .stream(winningNumbers.trim().split(","))
           .mapToInt(Integer::parseInt)
           .toArray();
-      return LottoGenerator.generate(numbers);
+
+      return LottoGenerator.generate(() -> LottoNumber.asList(numbers));
     } catch (LottoException e) {
       OutputView.printMessage(e.getMessage());
       return winningNumbers();

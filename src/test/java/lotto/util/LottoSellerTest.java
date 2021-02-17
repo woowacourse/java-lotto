@@ -1,5 +1,7 @@
-package lotto.domain;
+package lotto.util;
 
+import lotto.domain.LottoGroup;
+import lotto.domain.Money;
 import lotto.exception.LottoPriceException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,13 +16,13 @@ class LottoSellerTest {
 
   @BeforeEach
   void setUp() {
-    lottoSeller = new LottoSeller();
+    this.lottoSeller = new LottoSeller();
   }
 
   @Test
   @DisplayName("로또 생성 성공")
   void createLotto_enoughMoney() {
-    LottoGroup lottoGroup = lottoSeller.sellLotto(Money.of(2000));
+    LottoGroup lottoGroup = lottoSeller.sellLotto(Money.of(2000), new RandomLottoStrategy());
     Assertions.assertThat(lottoGroup.size()).isEqualTo(2);
   }
 
@@ -28,7 +30,8 @@ class LottoSellerTest {
   @DisplayName("로또 생성 실패 - 음수 또는 부족한 돈")
   @ValueSource(ints = {500, -100})
   void createLotto_notEnoughMoney(int price) {
-    Assertions.assertThatThrownBy(() -> lottoSeller.sellLotto(Money.of(price)))
+    Assertions
+        .assertThatThrownBy(() -> lottoSeller.sellLotto(Money.of(price), new RandomLottoStrategy()))
         .isInstanceOf(LottoPriceException.class);
   }
 }

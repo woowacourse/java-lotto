@@ -1,5 +1,6 @@
-package lotto.domain;
+package lotto.util;
 
+import lotto.domain.LottoRank;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

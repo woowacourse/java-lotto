@@ -1,15 +1,14 @@
-package lotto;
+package lotto.util;
 
 import lotto.domain.LottoGroup;
-import lotto.domain.LottoResult;
 import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoManager {
 
-  public static LottoGroup createLotto() {
-    LottoGroup lottoGroup = InputView.lottoGroup();
+  public static LottoGroup createRandomLotto() {
+    LottoGroup lottoGroup = InputView.randomLottoGroup();
     OutputView.printBoughtLotto(lottoGroup);
 
     return lottoGroup;

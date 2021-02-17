@@ -1,9 +1,10 @@
-package lotto.domain;
+package lotto.util;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
+import lotto.domain.LottoRank;
 
 public class LottoResult {
 

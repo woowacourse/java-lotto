@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.domain.LottoGroup;
 import lotto.domain.LottoRank;
-import lotto.domain.LottoResult;
+import lotto.util.LottoResult;
 
 public class OutputView {
 

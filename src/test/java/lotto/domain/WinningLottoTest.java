@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import lotto.exception.LottoNumberException;
-import lotto.util.LottoGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,7 +18,7 @@ class WinningLottoTest {
 
   @BeforeEach
   void setUp() {
-    lotto = LottoGenerator.generate(1, 2, 3, 4, 5, 6);
+    this.lotto = new Lotto(LottoNumber.asList(1, 2, 3, 4, 5, 6));
     bonusNumber = LottoNumber.of(7);
   }
 
@@ -32,11 +31,12 @@ class WinningLottoTest {
 
   @ParameterizedTest
   @DisplayName("로또 번호를 입력 시 나오는 랭크 확인 테스트")
-  @CsvSource(value = {"1,2,3,4,5,6:FIRST", "1,2,3,4,5,7:SECOND", "1,2,3,4,5,33:THIRD"}, delimiter = ':')
+  @CsvSource(value = {"1,2,3,4,5,6:FIRST", "1,2,3,4,5,7:SECOND",
+      "1,2,3,4,5,33:THIRD"}, delimiter = ':')
   void checkRankWithInputLotto(String numbers, LottoRank expectedRank) {
     WinningLotto winningLotto = new WinningLotto(lotto, this.bonusNumber);
     int[] lottoNumbers = Arrays.stream(numbers.split(",")).mapToInt(Integer::parseInt).toArray();
-    LottoRank rank = winningLotto.matchRank(LottoGenerator.generate(lottoNumbers));
+    LottoRank rank = winningLotto.matchRank(new Lotto(LottoNumber.asList(lottoNumbers)));
     assertThat(rank).isEqualTo(expectedRank);
   }
 }
