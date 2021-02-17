@@ -1,7 +1,4 @@
 # todo
-- LottoMatchType 관련 함수 LottoMatchType 클래스 내부로 이동.
-  
-- PurchasedLottoTickets size() 디미터 법칙 적용. (OutputView.printPurchasedLottoTickets)
 - LottoMain 각 함수 10줄 미만 리팩토링
   
 - 패키지 정리 (메인 패키지, 테스트 패키지)
@@ -21,4 +18,6 @@
 - InputView 보너스번호인지 세팅.
 - OutputView 출력 포장.
 - LottoMatchType is2ndPrize() 삭제
-- LottoNumber implements Comparable 한 다음에 LottoTicket에서 오름차순으로 sort하기
+- LottoNumber implements Comparable 한 다음에 LottoTicket에서 오름차순으로 sort하기.
+- LottoMatchType 관련 함수 LottoMatchType 클래스 내부로 이동.
+- PurchasedLottoTickets size() 디미터 법칙 적용. (OutputView.printPurchasedLottoTickets()).

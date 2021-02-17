@@ -1,5 +1,6 @@
 package lotto.view;
 
+import java.util.List;
 import java.util.Map;
 import lotto.domain.LottoMatchType;
 import lotto.domain.LottoTicket;
@@ -12,8 +13,9 @@ public class OutputView {
     }
 
     public static void printPurchasedLottoTickets(PurchasedLottoTickets purchasedLottoTickets) {
-        OutputPrinter.printCompletedPurchaseGuideMessage(purchasedLottoTickets.getTickets().size());
-        for (LottoTicket lottoTicket : purchasedLottoTickets.getTickets()) {
+        List<LottoTicket> lottoTickets = purchasedLottoTickets.getTickets();
+        OutputPrinter.printCompletedPurchaseGuideMessage(lottoTickets.size());
+        for (LottoTicket lottoTicket : lottoTickets) {
             OutputPrinter.printLottoTicketNumbers(lottoTicket);
         }
         InputPrinter.printNewLine();
