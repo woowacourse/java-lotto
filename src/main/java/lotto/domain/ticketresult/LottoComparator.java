@@ -11,11 +11,9 @@ import lotto.domain.ticketpurchase.PurchasedLottoTickets;
 import lotto.type.LottoMatchType;
 
 public class LottoComparator {
-    private static final int DEFAULT_COUNT = 0;
+    private static final int ZERO = 0;
     private static final int ONE_COUNT = 1;
-    private static final int EMPTY_SIZE = 0;
     private static final int FIVE_MATCHED_SIZE = 2;
-    private static final int FIRST_INDEX = 0;
 
     private final WinningLottoNumbers winningLottoNumbers;
     private final Map<LottoMatchType, Integer> lottoResult;
@@ -28,7 +26,7 @@ public class LottoComparator {
 
     private void initializeLottoResult() {
         for (LottoMatchType lottoMatchType : LottoMatchType.values()) {
-            lottoResult.put(lottoMatchType, DEFAULT_COUNT);
+            lottoResult.put(lottoMatchType, ZERO);
         }
     }
 
@@ -56,7 +54,7 @@ public class LottoComparator {
     private void addResult(int countMatchedNumbers, LottoTicket purchasedOneLottoTicket) {
         List<LottoMatchType> lottoMatchTypes = LottoMatchType
             .getLottoMatchType(countMatchedNumbers);
-        if (lottoMatchTypes.size() == EMPTY_SIZE) {
+        if (lottoMatchTypes.size() == ZERO) {
             return;
         }
         if (lottoMatchTypes.size() == FIVE_MATCHED_SIZE) {
@@ -77,7 +75,7 @@ public class LottoComparator {
     }
 
     private void handleOtherMatchTypes(List<LottoMatchType> lottoMatchTypes) {
-        LottoMatchType lottoMatchType = lottoMatchTypes.get(FIRST_INDEX);
+        LottoMatchType lottoMatchType = lottoMatchTypes.get(ZERO);
         Integer currentMatchedNumbersCount = lottoResult.get(lottoMatchType);
         lottoResult.put(lottoMatchType, currentMatchedNumbersCount + ONE_COUNT);
     }
