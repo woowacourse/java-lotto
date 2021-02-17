@@ -6,11 +6,25 @@ import java.util.Objects;
 
 public class LottoCount {
     private static final int LOTTO_PRICE = 1000;
+    private static final int ZERO = 0;
+    private static final int ONE_COUNT = 1;
 
     private final int lottoCount;
 
     public LottoCount(Money money) {
         this.lottoCount = money.divideMoney(LOTTO_PRICE);
+    }
+
+    private LottoCount(int lottoCount) {
+        this.lottoCount = lottoCount;
+    }
+
+    public boolean isGreaterThanZero() {
+        return this.lottoCount > ZERO;
+    }
+
+    public LottoCount decreaseOne() {
+        return new LottoCount(lottoCount - ONE_COUNT);
     }
 
     @Override
