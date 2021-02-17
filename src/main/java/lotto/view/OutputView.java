@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoResult;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
-import lotto.domain.PrizeType;
+import lotto.domain.*;
 
 public class OutputView {
     private OutputView() {
@@ -29,5 +26,9 @@ public class OutputView {
             System.out.println(prizeType.getMatchCount() + "개 일치," + " 보너스 볼 일치(" + prizeType.getPrizeMoney() + "원)- " + count + "개");
         }
         System.out.println(prizeType.getMatchCount() + "개 일치...(" + prizeType.getPrizeMoney() + ")- " + count + "개");
+    }
+
+    public static void printProfitRate(LottoResult lottoResult, Money money) {
+        System.out.println("총 수익률은 " + lottoResult.calculateProfitRate(money) + "입니다.");
     }
 }
