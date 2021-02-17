@@ -1,5 +1,7 @@
 package lotto.money;
 
+import lotto.lottoticket.TicketValidation;
+
 import java.util.Objects;
 
 public class Money {
@@ -12,7 +14,7 @@ public class Money {
     }
 
     private int validate(String money) {
-        int value = validateNumber(money);
+        int value = TicketValidation.validateNumber(money);
         checkMinimum(value);
         return value;
     }
@@ -21,10 +23,6 @@ public class Money {
         if (value < MINIMUM_PRICE) {
             throw new IllegalArgumentException("[error] 1000원 이상의 금액이 필요합니다.");
         }
-    }
-
-    private int validateNumber(String money) {
-        return Integer.parseInt(money);
     }
 
     public int divideMoney(int unit) {

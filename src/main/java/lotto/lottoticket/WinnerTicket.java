@@ -11,23 +11,21 @@ public class WinnerTicket {
         this.winnerTicket = splitNumbers(numbers);
     }
 
-    private List<Integer> splitNumbers(String numbers){
-        List<Integer> value = new ArrayList<>();
-        for (String number : numbers.split(",")){
-            number = number.replace(" ", "");
-            value.add(validateNumbers(number));
+    private List<Integer> splitNumbers(String values){
+        List<Integer> numbers = new ArrayList<>();
+        for (String value : values.split(",")){
+            value = value.replace(" ", "");
+            int number = TicketValidation.validateNumber(value);
+            TicketValidation.validateNumberInRange(number);
+            numbers.add(number);
         }
-        TicketValidation.validateSize(value);
-        TicketValidation.validateDuplicated(value);
-        return value;
+        TicketValidation.validateSize(numbers);
+        TicketValidation.validateDuplicated(numbers);
+        return numbers;
     }
 
-    private Integer validateNumbers(String number) {
-        try {
-            return TicketValidation.validateNumberInRange(Integer.parseInt(number));
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("잘못된 입력입니다.");
-        }
+    public boolean isSameNumber(int number) {
+        return this.winnerTicket.contains(number);
     }
 
     @Override

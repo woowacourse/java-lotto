@@ -18,8 +18,9 @@ public class MoneyTest {
     @DisplayName("숫자가 아닌 경우 예외")
     void moneyNotNumber() {
         assertThatThrownBy(() ->
-            new Money("*1223")
-        ).isInstanceOf(NumberFormatException.class);
+            new Money("*1223"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("잘못된 입력입니다.");
     }
 
     @Test

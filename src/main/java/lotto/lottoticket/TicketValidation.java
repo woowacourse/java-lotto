@@ -15,6 +15,14 @@ public class TicketValidation {
         }
     }
 
+    public static Integer validateNumber(String number) {
+        try {
+            return Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("잘못된 입력입니다.");
+        }
+    }
+
     public static void validateSize(List<Integer> value) {
         if (value.size() != NUMBER_COUNT_IN_LOTTO) {
             throw new IllegalArgumentException("숫자는 여섯개여야 합니다.");
