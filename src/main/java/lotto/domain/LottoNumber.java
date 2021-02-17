@@ -28,6 +28,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
+    public int getNumber() {
+        return number;
+    }
+
     private void validateRange(int number) {
         if (number >= MIN_NUMBER_RANGE && number <= MAX_NUMBER_RANGE) {
             return;
