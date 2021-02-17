@@ -10,15 +10,15 @@ public enum Rank {
     FIFTH(3, new Money("5000")),
     NOTHING(0, new Money("0"));
 
-    int count;
+    long count;
     Money reward;
 
-    Rank(int count, Money reward) {
+    Rank(long count, Money reward) {
         this.count = count;
         this.reward = reward;
     }
 
-    public static Rank from(int count, boolean bonusBallMatch) {
+    public static Rank from(long count, boolean bonusBallMatch) {
         if (bonusBallMatch) {
             return Rank.SECOND;
         }
@@ -28,7 +28,7 @@ public enum Rank {
                 .orElse(NOTHING);
     }
 
-    public int getCount() {
+    public long getCount() {
         return this.count;
     }
 
