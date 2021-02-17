@@ -12,6 +12,9 @@ public class OutputView {
     private static final String BUY_LOTTO_MESSAGE = "%d개를 구매했습니다." + ENTER;
     private static final String WINNING_DETAIL_HEADER = ENTER + "당첨 통계" + ENTER + "---------";
     private static final String TOTAL_EARNING_RATE_MESSAGE = "총 수익률은 %d입니다.";
+    private static final String NUMBER_DELIMITER = ",";
+    private static final String LOTTO_RESULT_OPEN = "[";
+    private static final String LOTTO_RESULT_CLOSE = "]";
 
     public static void getMessage(String message) {
         System.out.println(message);
@@ -31,11 +34,11 @@ public class OutputView {
     }
 
     public static void printLottoResult(StringBuilder log, Lotto lotto) {
-        log.append("[");
+        log.append(LOTTO_RESULT_OPEN);
         String body = lotto.getNumbers().stream().map(String::valueOf)
-            .collect(Collectors.joining(","));
+            .collect(Collectors.joining(NUMBER_DELIMITER));
         log.append(body);
-        log.append("]").append(ENTER);
+        log.append(LOTTO_RESULT_CLOSE).append(ENTER);
     }
 
     public static void printWinningStats(LottoStatistics lottoStatistics, int money) {

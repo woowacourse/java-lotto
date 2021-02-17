@@ -1,7 +1,9 @@
 package lotto.domain.primitive;
 
 public class Ticket {
+
     private static final int TICKET_PRICE = 1000;
+    private static final String TICKET_FORMAT_ERROR_MESSAGE = "돈은 %d원 단위여야 합니다.";
     private int count;
 
     public Ticket(Money money) {
@@ -11,7 +13,7 @@ public class Ticket {
 
     private void validateThousands(final int value) {
         if (value % TICKET_PRICE != 0) {
-            throw new IllegalArgumentException(String.format("돈은 %d원 단위여야 합니다.", TICKET_PRICE));
+            throw new IllegalArgumentException(String.format(TICKET_FORMAT_ERROR_MESSAGE, TICKET_PRICE));
         }
     }
 
