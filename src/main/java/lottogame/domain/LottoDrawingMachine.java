@@ -22,4 +22,8 @@ public class LottoDrawingMachine {
             throw new IllegalArgumentException("잘못된 당첨번호 입력입니다.");
         }
     }
+
+    public LottoNumber bonusDrawing(final String drawingNumber) {
+        return new LottoNumber(drawingNumber);
+    }
 }

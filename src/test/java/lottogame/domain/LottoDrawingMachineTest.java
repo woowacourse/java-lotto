@@ -1,5 +1,6 @@
 package lottogame.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
@@ -49,5 +50,13 @@ public class LottoDrawingMachineTest {
         assertThatThrownBy(
             () -> new LottoDrawingMachine().drawing(",")
         ).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("보너스 번호 생성")
+    void drawingBonus() {
+        LottoNumber bonusNumber = new LottoDrawingMachine().bonusDrawing("3");
+        assertThat(bonusNumber).isEqualTo(new LottoDrawingMachine().bonusDrawing("3"));
+        assertThat(bonusNumber).isEqualTo(new LottoNumber("3"));
     }
 }
