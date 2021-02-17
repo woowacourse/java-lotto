@@ -26,9 +26,9 @@
     - [x] 6자리의 랜덤 숫자로 로또 티켓을 생성한다.
 - [x] Money.java 로또 구매 금액을 가진다.
   - [x] 예외 : 1000원 미만은 가질 수 없다.
-- [ ] WinStatistics.java 정보가 맞는지 확인한다.
-    - [ ] FIRST_PLACE(200000000000, 당첨 횟수)
-    - [ ] 2등,3등,4등,5등 까지 동일하게 한다.
+- [x] LottoRank.java 로또 등수와 보상을 모아놓은 enum
+    - [x] FIRST_PLACE(당첨 횟수, 200000000000)
+    - [x] 2등,3등,4등,5등 까지 동일하게 한다.
 ### Non TDD
 - [ ] InputView.java 구매 금액을 입력 받는다.
 - [ ] OutputView.java
