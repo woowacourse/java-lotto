@@ -1,16 +1,13 @@
 package lotto.controller;
 
-import com.sun.tools.internal.ws.wsdl.document.Output;
+import static java.util.stream.Collectors.*;
+
 import java.util.List;
-import java.util.Map;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 import lotto.domain.AutoLottoMachine;
-import lotto.domain.AutoLottoTicketFactory;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
-import lotto.domain.Prize;
 import lotto.domain.WinningLottoTicket;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -28,26 +25,36 @@ public class LottoController {
 
     public void start() {
         lottoMachine = new AutoLottoMachine();
-        int lottoMoney = inputView.takeLottoMoney();
+        int lottoPurchaseMoney = inputView.takeLottoMoney();
 
-        int numberOfTickets = lottoMoney / 1000;
-        List<LottoTicket> lottoTickets = lottoMachine.createTickets(numberOfTickets);
-        outputView.printTicketsSize(lottoTickets.size());
-        outputView.printAllLottoTickets(lottoTickets);
+        List<LottoTicket> lottoTickets = buyLottoTicket(lottoPurchaseMoney);
 
-        List<Integer> winningNumbers = inputView.inputWinningNumbers();
-        int bonusNumber = inputView.takeBonusNumber();
-        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(winningNumbers, bonusNumber);
+        WinningLottoTicket winningLottoTicket = createWinningLotto();
 
-        LottoResult lottoResult = new LottoResult(
-            calculateLottoResult(lottoTickets, winningLottoTicket));
-        outputView.printLottoResult(lottoResult, lottoMoney);
+        LottoResult lottoResult = calculateLottoResult(lottoTickets, winningLottoTicket);
+
+        outputView.printLottoResult(lottoResult, lottoPurchaseMoney);
     }
 
-    private Map<Prize, Long> calculateLottoResult(List<LottoTicket> lottoTickets,
+    private List<LottoTicket> buyLottoTicket(int lottoPurchaseMoney) {
+        List<LottoTicket> lottoTickets = lottoMachine.createTicketsByMoney(lottoPurchaseMoney);
+        outputView.printTicketsSize(lottoTickets.size());
+        outputView.printAllLottoTickets(lottoTickets);
+        return lottoTickets;
+    }
+
+    private WinningLottoTicket createWinningLotto() {
+        List<Integer> winningNumbers = inputView.inputWinningNumbers();
+        int bonusNumber = inputView.takeBonusNumber();
+        return new WinningLottoTicket(winningNumbers, bonusNumber);
+    }
+
+    private LottoResult calculateLottoResult(List<LottoTicket> lottoTickets,
         WinningLottoTicket winningLottoTicket) {
         return lottoTickets.stream()
             .map(winningLottoTicket::compareNumbers)
-            .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+            .collect(collectingAndThen(
+                groupingBy(Function.identity(), counting()),
+                LottoResult::new));
     }
 }
