@@ -12,6 +12,10 @@ public class Lottos {
         this.lottos = lottos;
     }
 
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
+
     public Lottos(int count) {
         this.count = count;
         this.lottos = createLottos();
