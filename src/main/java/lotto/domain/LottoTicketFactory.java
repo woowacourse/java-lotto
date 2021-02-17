@@ -4,18 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTicketFactory {
-    private final Money money;
     private final List<Integer> lottoNumberRange;
 
-    public LottoTicketFactory(Money money) {
-        this.money = new Money(money.getValue());
+    public LottoTicketFactory() {
         this.lottoNumberRange = new ArrayList<>();
         for (int i = 1; i < 50; i++) {
             this.lottoNumberRange.add(i);
         }
     }
 
-    public LottoTickets buyLottoTickets() {
+    public LottoTickets buyLottoTickets(Money money) {
         int length = money.getValue() / 1000;
         List<LottoTicket> lottoTickets = new ArrayList<>();
         for (int i = 0; i < length; i++) {
