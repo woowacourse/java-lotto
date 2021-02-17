@@ -6,8 +6,8 @@ import java.util.Map.Entry;
 import java.util.Scanner;
 import lotto.domain.LottoRank;
 import lotto.domain.Lottos;
-import lotto.viewer.InputView;
-import lotto.viewer.OutputView;
+import lotto.view.InputView;
+import lotto.view.OutputView;
 
 public class LottoStore {
 
