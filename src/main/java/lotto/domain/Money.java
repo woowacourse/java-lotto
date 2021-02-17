@@ -5,6 +5,7 @@ import java.util.Objects;
 public class Money {
 
     private static final String SHORT_MONEY_MESSAGE = "1000원 이상 입력해주세요.";
+    private static final int LOTTO_PRICE = 1000;
 
     private final int money;
 
@@ -13,8 +14,12 @@ public class Money {
         this.money = money;
     }
 
+    public int lottoCount(){
+        return money / LOTTO_PRICE;
+    }
+
     private void validateBudgetMoney(int money) {
-        if (money < 1000) {
+        if (money < LOTTO_PRICE) {
             throw new IllegalArgumentException(SHORT_MONEY_MESSAGE);
         }
     }
