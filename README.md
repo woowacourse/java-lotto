@@ -30,7 +30,7 @@
     - [x] FIRST_PLACE(당첨 횟수, 200000000000)
     - [x] 2등,3등,4등,5등 까지 동일하게 한다.
 ### Non TDD
-- [ ] InputView.java 구매 금액을 입력 받는다.
+- [x] InputView.java 구매 금액을 입력 받는다.
 - [ ] OutputView.java
     - [ ] 유저에게 얼마 구할건지 물어본다.
     - [ ] 로또 번호를 출력한다.
