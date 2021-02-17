@@ -97,7 +97,7 @@ class LottoTicketTest {
             new LottoNumber(6)
         );
 
-        assertThat(lottoTicket1.getLottoNumbers()).isEqualTo(lottoNumbers);
+        assertThat(lottoTicket1.getUnmodifiableList()).isEqualTo(lottoNumbers);
     }
 
 }

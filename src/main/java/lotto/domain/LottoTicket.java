@@ -2,10 +2,12 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import javafx.print.Collation;
 
 public class LottoTicket {
     private static final int SIZE_OF_LOTTO_NUMBERS = 6;
@@ -35,8 +37,12 @@ public class LottoTicket {
             .collect(Collectors.toList());
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+    public boolean contains(LottoNumber bonusBall) {
+        return lottoNumbers.contains(bonusBall);
+    }
+
+    public List<LottoNumber> getUnmodifiableList() {
+        return Collections.unmodifiableList(lottoNumbers);
     }
 
 }
