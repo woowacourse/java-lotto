@@ -2,11 +2,13 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import lotto.domain.number.LottoNumber;
+import lotto.domain.number.LottoNumberFactory;
 
 public class LottoTicket {
     public static final int SIZE_OF_LOTTO_NUMBERS = 6;
@@ -17,7 +19,8 @@ public class LottoTicket {
         validateLottoNumberCount(numbers);
         validateDuplicatedLottoNumbers(numbers);
 
-        this.lottoNumbers = numbers.stream().map(LottoNumber::new)
+        this.lottoNumbers = numbers.stream().map(LottoNumberFactory::getInstance)
+            .sorted(Comparator.naturalOrder())
             .collect(Collectors.toList());
     }
 
@@ -42,7 +45,6 @@ public class LottoTicket {
 
     //todo : Dto 생성?
     public String printLottoTicket() {
-        Collections.sort(lottoNumbers);
         return Arrays.toString(lottoNumbers.toArray());
     }
 }

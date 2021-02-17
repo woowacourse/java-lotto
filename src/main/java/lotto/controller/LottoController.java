@@ -25,8 +25,9 @@ public class LottoController {
 
     public void start() {
         lottoMachine = new AutoLottoMachine();
-        int lottoPurchaseMoney = inputView.takeLottoMoney();
 
+        int lottoPurchaseMoney = inputView.takeLottoMoney();
+        //todo : lottoTickets 일급 콜렉션 생성
         List<LottoTicket> lottoTickets = buyLottoTicket(lottoPurchaseMoney);
 
         WinningLottoTicket winningLottoTicket = createWinningLotto();

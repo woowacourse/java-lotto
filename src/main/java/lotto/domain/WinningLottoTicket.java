@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import java.util.List;
+import lotto.domain.number.LottoNumber;
+import lotto.domain.number.LottoNumberFactory;
 
 public class WinningLottoTicket extends LottoTicket {
     private final LottoNumber bonusNumber;
@@ -8,11 +10,11 @@ public class WinningLottoTicket extends LottoTicket {
     public WinningLottoTicket(List<Integer> winningNumber, int bonusNumber) {
         super(winningNumber);
         validateDuplicatedBonusNumber(bonusNumber);
-        this.bonusNumber = new LottoNumber(bonusNumber);
+        this.bonusNumber = LottoNumberFactory.getInstance(bonusNumber);
     }
 
     private void validateDuplicatedBonusNumber(int bonusNumber) {
-        LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
+        LottoNumber bonusLottoNumber = LottoNumberFactory.getInstance(bonusNumber);
 
         boolean isDuplicated = this.list().stream()
             .anyMatch(winningNumber -> winningNumber.equals(bonusLottoNumber));
@@ -24,6 +26,7 @@ public class WinningLottoTicket extends LottoTicket {
         }
     }
 
+    //todo : 더 적절한 변수명을 찾을지
     public Prize compareNumbers(LottoTicket lottoTicket) {
         long winningCount = lottoTicket.list().stream()
             .filter(lottoNumber -> this.list().contains(lottoNumber))
