@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import lotto.domain.AutoLottoMachine;
+import lotto.domain.AutoLottoTicketFactory;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
@@ -30,7 +31,6 @@ public class LottoController {
         int lottoMoney = inputView.takeLottoMoney();
 
         int numberOfTickets = lottoMoney / 1000;
-
         List<LottoTicket> lottoTickets = lottoMachine.createTickets(numberOfTickets);
         outputView.printTicketsSize(lottoTickets.size());
         outputView.printAllLottoTickets(lottoTickets);

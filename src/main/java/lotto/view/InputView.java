@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class InputView {
     private static final String COMMA = ",";
@@ -40,8 +41,9 @@ public class InputView {
     private List<Integer> inputToIntegerList() {
         String input = scanner.nextLine();
         List<String> splitNumbers = Arrays.asList(input.split(COMMA));
+        List<String> trimNumbers = splitNumbers.stream().map(String::trim).collect(Collectors.toList());
 
-        return stringsToIntegers(splitNumbers);
+        return stringsToIntegers(trimNumbers);
     }
 
     private List<Integer> stringsToIntegers(List<String> strings) {
