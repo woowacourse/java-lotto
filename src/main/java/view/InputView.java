@@ -1,9 +1,6 @@
 package view;
 
-import domain.Lotto;
-import domain.LottoNumber;
-import domain.Money;
-import domain.WinningLotto;
+import domain.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,7 +29,7 @@ public class InputView {
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
 
-        return new Lotto(lottoNumbers);
+        return new Lotto(new LottoNumbers(lottoNumbers));
     }
 
     private static int inputBonusBall() {

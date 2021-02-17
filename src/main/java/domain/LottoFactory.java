@@ -25,6 +25,7 @@ public class LottoFactory {
 
     private static Lotto generate(ShuffleStrategy strategy) {
         List<LottoNumber> shuffled = strategy.shuffle(CANDIDATES_NUMBERS);
-        return new Lotto(shuffled.subList(0, Lotto.LENGTH));
+        LottoNumbers lottoNumbers = new LottoNumbers(shuffled.subList(0, LottoNumbers.LENGTH));
+        return new Lotto(lottoNumbers);
     }
 }

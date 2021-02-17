@@ -2,29 +2,14 @@ package domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTest {
-
-    private static Stream<List<LottoNumber>> generateIfLottoNumberLengthNotSatisfied() {
-        return Stream.of(parseToLottoNumberList(Arrays.asList(1, 2, 3, 4, 5))
-                , parseToLottoNumberList(Arrays.asList(1, 2, 3, 4, 5, 6, 7)));
-    }
-
-    private static List<LottoNumber> parseToLottoNumberList(List<Integer> numbers) {
-        return numbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
-    }
 
     @DisplayName("Lotto를 생성하는 기능")
     @Test
@@ -35,29 +20,10 @@ class LottoTest {
                 .collect(Collectors.toList());
 
         //when
-        Lotto lotto = new Lotto(lottoNumbers);
+        Lotto lotto = new Lotto(new LottoNumbers(lottoNumbers));
 
         //then
         assertThat(lotto).isNotNull();
-    }
-
-    @DisplayName("Lotto 번호에 중복이 있는 경우")
-    @Test
-    void generateWithDuplicatedLottoNumbers() {
-        //given
-        List<LottoNumber> lottoNumbers = parseToLottoNumberList(Arrays.asList(1, 1, 3, 4, 5, 6));
-
-        //when //then
-        assertThatThrownBy(() -> new Lotto(lottoNumbers)).isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @DisplayName("Lotto 번호의 길이가 6이 아닌 경우")
-    @ParameterizedTest
-    @MethodSource
-    void generateIfLottoNumberLengthNotSatisfied(List<LottoNumber> input) {
-        //when //then
-        assertThatThrownBy(() -> new Lotto(input)).isInstanceOf(IllegalArgumentException.class);
-
     }
 
     @DisplayName("구입금액에 따라 Lotto 개수를 반환하는 기능")
