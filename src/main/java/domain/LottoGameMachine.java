@@ -32,7 +32,8 @@ public class LottoGameMachine {
     }
 
     private LottoCount calculateLottoCount() {
-        Budget lottoCount = budget.divide(LOTTO_COST);
+        int lottoCount = budget.intQuotient(LOTTO_COST);
+        System.out.println("lottoCount = " + lottoCount);
         return LottoCount.of(lottoCount);
     }
 }

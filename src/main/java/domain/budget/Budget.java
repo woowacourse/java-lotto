@@ -29,6 +29,10 @@ public class Budget {
         return new Budget(this.amount.divide(amount.amount));
     }
 
+    public int intQuotient(Budget amount) {
+        return this.amount.divide(amount.amount).intValue();
+    }
+
     public int getIntValue() {
         return amount.intValue();
     }
