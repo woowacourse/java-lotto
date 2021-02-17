@@ -1,4 +1,7 @@
-package lotto;
+package lotto.service;
+
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
 
 import java.util.Collections;
 import java.util.List;
