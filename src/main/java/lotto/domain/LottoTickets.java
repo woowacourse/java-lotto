@@ -36,7 +36,11 @@ public class LottoTickets {
         return 0;
     }
 
-    public double calculateProfitRate(Money money, Map<PrizeType, Integer> result){
-        return 1015000.0;
+    public double calculateProfitRate(Money money, Map<PrizeType, Integer> result) {
+        int moneySum = 0;
+        for (PrizeType prizeType : result.keySet()) {
+            moneySum += prizeType.getPrizeMoney().getValue() * result.get(prizeType);
+        }
+        return (double) moneySum / money.getValue();
     }
 }

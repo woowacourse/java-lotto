@@ -3,17 +3,17 @@ package lotto.domain;
 import lotto.utils.Validator;
 
 public class Money {
-    private final int value;
+    private final long value;
     public Money(String input) {
         Validator.validateMoneyValue(input);
-        this.value = Integer.parseInt(input);
+        this.value = Long.parseLong(input);
     }
 
-    public Money(int input) {
+    public Money(long input) {
         this.value = input;
     }
 
-    public int getValue() {
+    public long getValue() {
         return value;
     }
 }
