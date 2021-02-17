@@ -11,19 +11,29 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LottoStatisticsTest {
 
-    private Map<LottoRank, Long> statisticsMap;
+    private LottoStatistics lottoStatistics;
 
     @BeforeEach
     void setUp() {
-        statisticsMap = new HashMap<>();
+        Map<LottoRank, Long> statisticsMap = new HashMap<>();
         statisticsMap.put(LottoRank.FIRST, 1L);
+        lottoStatistics = new LottoStatistics(statisticsMap);
     }
 
     @DisplayName("로또 통계에서 각 순위별 당첨 티켓 개수를 가져온다. 없는 경우 0을 반환한다.")
     @Test
     void getCounts() {
-        LottoStatistics lottoStatistics = new LottoStatistics(statisticsMap);
         assertThat(lottoStatistics.getCount(LottoRank.FIRST)).isEqualTo(1);
         assertThat(lottoStatistics.getCount(LottoRank.SECOND)).isEqualTo(0);
+    }
+
+    @DisplayName("구매 금액과 비교해 수익률을 계산한다.")
+    @Test
+    void calculateYield() {
+        PurchasingPrice purchasingPrice = new PurchasingPrice(35477);
+
+        double yield = lottoStatistics.calculateYield(purchasingPrice);
+
+        assertThat(yield).isEqualTo(((double)2000000000) / 35477);
     }
 }

@@ -30,4 +30,8 @@ public enum LottoRank {
                 .findFirst()
                 .orElseGet(() -> MISS);
     }
+
+    public int getPrizeMoney() {
+        return prizeMoney;
+    }
 }
