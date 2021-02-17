@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.view.OutputView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,7 +22,6 @@ class LottoResultTest {
     @Test
     @DisplayName("해당 당첨 티켓이 몇개 있는 지 확인하는 기능")
     void getCountByPrizeType() {
-
         assertThat(lottoResult.getCountByPrizeType(PrizeType.FIRST_PRIZE)).isEqualTo(2);
     }
 

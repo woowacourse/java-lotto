@@ -23,7 +23,7 @@ public enum PrizeType {
         return prizeMoney;
     }
 
-    public double getMatchCount(){
+    public int getMatchCount(){
         return matchCount;
     }
 
