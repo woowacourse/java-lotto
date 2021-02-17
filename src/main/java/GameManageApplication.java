@@ -6,7 +6,7 @@ public class GameManageApplication {
 
     public void run() {
         LottoGameMachine lottoGameMachine = lottoGameManageInitialize();
-        lottoGameMachine.on();
+        lottoGameMachine.gameStart();
     }
 
     private LottoGameMachine lottoGameManageInitialize() {

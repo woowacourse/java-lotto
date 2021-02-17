@@ -3,7 +3,6 @@ package domain.lotto;
 import domain.budget.Budget;
 
 public class LottoCount {
-    private static final Budget LOTTO_COST = Budget.amounts(1000);
     private static final int ZERO = 0;
 
     private final int lottoCount;
@@ -18,8 +17,7 @@ public class LottoCount {
     }
 
     public static LottoCount of(Budget budget) {
-        Budget lottoCount = budget.divide(LOTTO_COST);
-        return new LottoCount(lottoCount.getIntValue());
+        return new LottoCount(budget.getIntValue());
     }
 
     private void validateLottoCount(int lottoCount) {

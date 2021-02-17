@@ -21,7 +21,7 @@ public class Budget {
             throw new IllegalArgumentException("자연수만 입력 가능합니다.");
         }
         if (money.intValue() < ZERO) {
-            throw new IllegalArgumentException("자연수만 입력 가능합니다.");
+            throw new IllegalArgumentException("1000원 이상의 수만 가능합니다.");
         }
     }
 
