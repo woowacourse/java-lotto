@@ -9,7 +9,7 @@ public class InputView {
 
     private static Scanner scanner = new Scanner(System.in);
     private static final String INPUT_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
-    private static final String INPUT_MONEY_ERROR_MESSAGE = "구입금액은 숫자여야 합니다.";
+    private static final String INPUT_INTEGER_ERROR_MESSAGE = "입력은 숫자여야 합니다.";
     private static final String INPUT_WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String NUMBER_DELIMITER = ",";
     private static final String INPUT_BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
@@ -23,7 +23,7 @@ public class InputView {
             String input = scanner.nextLine().trim();
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(INPUT_MONEY_ERROR_MESSAGE);
+            throw new IllegalArgumentException(INPUT_INTEGER_ERROR_MESSAGE);
         }
     }
 
@@ -36,7 +36,7 @@ public class InputView {
                 .map(Integer::new)
                 .collect(Collectors.toList());
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(INPUT_MONEY_ERROR_MESSAGE);
+            throw new IllegalArgumentException(INPUT_INTEGER_ERROR_MESSAGE);
         }
     }
 
@@ -46,7 +46,7 @@ public class InputView {
             String input = scanner.nextLine().trim();
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(INPUT_MONEY_ERROR_MESSAGE);
+            throw new IllegalArgumentException(INPUT_INTEGER_ERROR_MESSAGE);
         }
     }
 }
