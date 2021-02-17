@@ -45,4 +45,9 @@ public class LottoNumbers {
             throw new IllegalArgumentException("6개의 로또 번호가 필요합니다.");
         }
     }
+
+    public boolean containNumber(BonusNumber bonusNumber) {
+        return lottoNumbers.stream()
+                .anyMatch(lottoNumber -> bonusNumber.isSameNumber(lottoNumber));
+    }
 }
