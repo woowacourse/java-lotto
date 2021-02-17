@@ -1,5 +1,8 @@
 package lotto;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
@@ -8,7 +11,17 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MAX_NUMBER_RANGE = 45;
     private static final String RANGE_ERROR_MESSAGE = "숫자는 1~45 사이의 숫자여야한다.";
 
-    public final int number;
+    private static final List<LottoNumber> CACHE;
+
+    private final int number;
+
+    static {
+        List<LottoNumber> cacheNumbers = new ArrayList<>();
+        for (int i = MIN_NUMBER_RANGE; i < MAX_NUMBER_RANGE; i++) {
+            cacheNumbers.add(new LottoNumber(i));
+        }
+        CACHE = Collections.unmodifiableList(cacheNumbers);
+    }
 
     public LottoNumber(int number) {
         validateRange(number);
@@ -20,6 +33,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
             return;
         }
         throw new IllegalArgumentException(RANGE_ERROR_MESSAGE);
+    }
+
+    public List<LottoNumber> getCache() {
+        return new ArrayList<>(CACHE);
     }
 
     @Override //equals 함부로 쓰면 안된다고 했는데, 우리팀의 경우 상속 받은 것들 비교를 제대로 못해줘서 디버깅 한참 걸림. 다른예시좀?
