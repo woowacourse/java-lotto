@@ -22,12 +22,4 @@ public class LottoManagerTest {
         List<Lotto> lottos = lottoManager.generateLottoByTicket(5);
         assertThat(lottos.size()).isEqualTo(5);
     }
-
-    @Test
-    void calculateMoneyToTicket() {
-        int expected = 10;
-        int actual = lottoManager.calculateMoneyToTicket(10000);
-        assertThat(actual).isEqualTo(expected);
-    }
-
 }
