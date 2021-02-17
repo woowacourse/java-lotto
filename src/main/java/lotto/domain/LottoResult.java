@@ -21,7 +21,6 @@ public class LottoResult {
 
   public void initRankMatch() {
     Arrays.stream(LottoRank.values())
-        .filter(rank -> rank != LottoRank.NONE)
         .forEach(rank -> rankMatch.put(rank, 0));
   }
 

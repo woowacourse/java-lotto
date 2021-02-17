@@ -3,7 +3,9 @@ package lotto.view;
 import java.util.Arrays;
 import java.util.Scanner;
 import lotto.domain.Lotto;
+import lotto.domain.LottoGroup;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoSeller;
 import lotto.domain.WinningLotto;
 import lotto.util.LottoGenerator;
 
@@ -19,6 +21,16 @@ public class InputView {
   // 지난 주 당첨 번호를 입력해주세요.
   // 보너스 볼을 입력해주세요.
   // 당첨 통계  OutputView
+
+  public static LottoGroup lottoGroup() {
+    try {
+      int money = money();
+      LottoSeller lottoSeller = new LottoSeller(new LottoGenerator());
+      return lottoSeller.sellLotto(money);
+    } catch (RuntimeException e) {
+      return lottoGroup();
+    }
+  }
 
   public static int money() {
     try {

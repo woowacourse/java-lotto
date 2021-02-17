@@ -1,7 +1,7 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
 import lotto.domain.LottoGroup;
+import lotto.domain.LottoRank;
 import lotto.domain.LottoResult;
 
 public class OutputView {
@@ -27,7 +27,10 @@ public class OutputView {
     System.out.println(BOUNDARY);
 
     lottoResult.rankMatch()
-        .forEach((key, value) -> System.out.println(key.message(value)));
+        .entrySet()
+        .stream()
+        .filter(entrySet -> entrySet.getKey() != LottoRank.NONE)
+        .forEach(entrySet -> System.out.println(entrySet.getKey().message(entrySet.getValue())));
     System.out.printf(PROFIT_FORM, lottoResult.winningProfit());
   }
 }

@@ -26,8 +26,8 @@ public enum LottoRank {
       return NONE;
     }
 
-    if (THIRD.matchCount == matchCount && !bonusMatch) {
-      return THIRD;
+    if (SECOND.matchCount == matchCount && bonusMatch) {
+      return SECOND;
     }
 
     return Arrays.stream(values())
