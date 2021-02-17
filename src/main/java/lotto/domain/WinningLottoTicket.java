@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.List;
 
 public class WinningLottoTicket extends LottoTicket {
-
     private final LottoNumber bonusNumber;
 
     public WinningLottoTicket(List<Integer> winningNumber, int bonusNumber) {
@@ -35,6 +34,6 @@ public class WinningLottoTicket extends LottoTicket {
     }
 
     public Prize getResult(long winningCount, boolean isBonus) {
-       return Prize.findByMatchCount((int)winningCount,isBonus);
+        return Prize.findByMatchCount((int) winningCount, isBonus);
     }
 }
