@@ -10,6 +10,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottoTicketTest {
+
     private Set<LottoNumber> lottoNumbers;
 
     @BeforeEach
@@ -20,7 +21,7 @@ public class LottoTicketTest {
         LottoNumber lotto4 = new LottoNumber(4);
         LottoNumber lotto5 = new LottoNumber(5);
         LottoNumber lotto6 = new LottoNumber(6);
-        lottoNumbers = new HashSet<>(Arrays.asList(lotto1,lotto2,lotto3,lotto4,lotto5,lotto6));
+        lottoNumbers = new HashSet<>(Arrays.asList(lotto1, lotto2, lotto3, lotto4, lotto5, lotto6));
     }
 
     @Test

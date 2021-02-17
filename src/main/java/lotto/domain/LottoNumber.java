@@ -1,4 +1,3 @@
-
 package lotto.domain;
 
 import lotto.utils.ValidateUtils;

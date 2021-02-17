@@ -1,6 +1,7 @@
 package lotto.utils;
 
 public class ValidateUtils {
+
     public static int parseInt(final String input) {
         try {
             return Integer.parseInt(input);

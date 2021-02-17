@@ -4,13 +4,12 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
-import lotto.utils.ValidateUtils;
 
 public class InputView {
 
     private final Scanner scanner;
 
-    public InputView(Scanner scanner){
+    public InputView(Scanner scanner) {
         this.scanner = scanner;
     }
 

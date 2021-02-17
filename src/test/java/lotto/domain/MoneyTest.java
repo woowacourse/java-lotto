@@ -19,9 +19,9 @@ public class MoneyTest {
     @Test
     void checkMoney() {
         assertThatIllegalArgumentException()
-            .isThrownBy(()-> new Money(0));
+            .isThrownBy(() -> new Money(0));
 
         assertThatIllegalArgumentException()
-            .isThrownBy(()-> new Money(999));
+            .isThrownBy(() -> new Money(999));
     }
 }

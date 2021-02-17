@@ -5,6 +5,7 @@ import java.util.Objects;
 import java.util.Set;
 
 public class LottoTicket {
+
     private static final int CHECK_HIT_COUNT_HAS_BONUS = 5;
     private static final int BONUS = 6;
     private static final int ALL_SAME = 7;
@@ -26,7 +27,8 @@ public class LottoTicket {
         hitLottoNumbers.addAll(lottoNumbers);
         hitLottoNumbers.retainAll(winningTicket.lottoNumbers);
 
-        if (hitLottoNumbers.size() == CHECK_HIT_COUNT_HAS_BONUS && lottoNumbers.contains(bonusBall)) {
+        if (hitLottoNumbers.size() == CHECK_HIT_COUNT_HAS_BONUS && lottoNumbers
+            .contains(bonusBall)) {
             return BONUS;
         }
 

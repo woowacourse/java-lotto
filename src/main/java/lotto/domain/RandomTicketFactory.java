@@ -20,9 +20,10 @@ public class RandomTicketFactory {
         }
     }
 
-    private RandomTicketFactory() {}
+    private RandomTicketFactory() {
+    }
 
-    public static LottoTicket makeTicket(){
+    public static LottoTicket makeTicket() {
         return new LottoTicket(makeLottoNumbers());
     }
 

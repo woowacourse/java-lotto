@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Objects;
 
 public class Money {
+
     private static final int MIN_MONEY_UNIT = 1000;
 
     private final int money;

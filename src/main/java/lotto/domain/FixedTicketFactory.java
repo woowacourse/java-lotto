@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 public class FixedTicketFactory {
 
-    public static LottoTicket makeTicket(Set<String> lottoNumbers){
+    public static LottoTicket makeTicket(Set<String> lottoNumbers) {
         return new LottoTicket(getFixedLottoNumbers(lottoNumbers));
     }
 

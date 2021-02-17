@@ -37,6 +37,10 @@
 ---
 ## TO-DO LIST
 - 거스름돈을 준다. (옵션)
+- TDD 추가
+- 예외 처리 커스텀 클래스
+- 보너스 리팩토링
+- 포장할 원시값이 있을까?
 
 ## DONE- Lotto 객체 생성
 - lottoTicket.domain.LottoNumber 포장
