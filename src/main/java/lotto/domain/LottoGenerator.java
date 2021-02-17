@@ -1,15 +1,23 @@
-package lotto.utils;
+package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class RandomUtils {
+public class LottoGenerator {
     private static List<Integer> numbers;
 
+    public static List<Lotto> makeLottos(int amount) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i=0; i<amount; i++) {
+            lottos.add(new Lotto(makeNumbers()));
+        }
+        return lottos;
+    }
+
     public static List<Integer> makeNumbers() {
-//        generate(minValue, maxValue);
         Collections.shuffle(numbers);
         return numbers.subList(0, 6);
     }
@@ -19,8 +27,4 @@ public class RandomUtils {
                 .boxed()
                 .collect(Collectors.toList());
     }
-
-//    RandomUtils.generate(); -- lottos 생성자에서 한번 불러일으키고,
-//
-//    Lotto lotto = new Lotto(RandomUtils.makeNumbers()); -- 그 뒤론 그냥 이렇게
 }

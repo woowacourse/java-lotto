@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.utils.RandomUtils;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -18,9 +17,9 @@ public class LottoTest {
 
     @Test
     void 랜덤_숫자_생성() {
-        RandomUtils.generate(1, 45);
+        LottoGenerator.generate(1, 45);
         for (int i = 0; i < 10; i++) {
-            Lotto lotto = new Lotto(RandomUtils.makeNumbers());
+            Lotto lotto = new Lotto(LottoGenerator.makeNumbers());
             System.out.println(lotto.toString());
         }
     }
