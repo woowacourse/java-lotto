@@ -1,6 +1,4 @@
 # todo
-- 클래스다이어그램 필드, 메소드 동기화
-- 클래스다이어그램 의존성 확인.
 
 
 # done
@@ -19,3 +17,5 @@
 - PurchasedLottoTickets size() 디미터 법칙 적용. (OutputView.printPurchasedLottoTickets()).
 - LottoMain 각 함수 10줄 미만 리팩토링.
 - 패키지 정리 (메인 패키지, 테스트 패키지).
+- 클래스다이어그램 필드, 메소드 동기화
+- 클래스다이어그램 의존성 확인.
