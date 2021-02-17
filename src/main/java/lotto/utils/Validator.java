@@ -1,5 +1,6 @@
 package lotto.utils;
 
+import lotto.domain.LottoNumber;
 import lotto.exception.*;
 
 import java.util.HashSet;
@@ -17,7 +18,7 @@ public class Validator {
 
     }
 
-    public static void validateLottoNumbers(List<Integer> numbers) {
+    public static void validateLottoNumbers(List<LottoNumber> numbers) {
         if (isInvalidateLottoSize(numbers) || isDuplicateNumber(numbers)) {
             throw new IllegalLottoNumbers();
         }
@@ -35,12 +36,12 @@ public class Validator {
         };
     }
 
-    private static boolean isDuplicateNumber(List<Integer> numbers) {
+    private static boolean isDuplicateNumber(List<LottoNumber> numbers) {
         return new HashSet<>(numbers).size() != numbers.size();
     }
 
-    private static boolean isInvalidateLottoSize(List<Integer> numbers) {
-        return numbers.size() < LOTTO_TICKET_SIZE;
+    private static boolean isInvalidateLottoSize(List<LottoNumber> numbers) {
+        return numbers.size() != LOTTO_TICKET_SIZE;
     }
 
     private static boolean isInvalidLottoNumberRange(String input) {

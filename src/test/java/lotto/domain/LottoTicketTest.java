@@ -12,17 +12,30 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTicketTest {
     @Test
-    @DisplayName("로또 티켓 생성 시 숫자가 6개인지 확인")
+    @DisplayName("매개변수로 넘어온 리스트의 길이가 6을 넘을 경우")
     void checkMemberNames() {
-        List<Integer> numbers = Arrays.asList(1, 4, 5, 8, 10, 9, 40);
-        LottoTicket lottoTicket = new LottoTicket(numbers);
-        assertThat(lottoTicket.lottoTicket().size()).isEqualTo(6);
+        List<LottoNumber> numbers = Arrays.asList(
+                new LottoNumber("1"),
+                new LottoNumber("4"),
+                new LottoNumber("5"),
+                new LottoNumber("8"),
+                new LottoNumber("10"),
+                new LottoNumber("9"),
+                new LottoNumber("40"));
+        assertThatThrownBy(() -> {
+            LottoTicket lottoTicket = new LottoTicket(numbers);
+        }).isInstanceOf(IllegalLottoNumbers.class);
     }
 
     @Test
     @DisplayName("매개변수로 넘어온 리스트의 길이가 6이 되지 않는 경우")
     void wrongArgumentCreate() {
-        List<Integer> numbers = Arrays.asList(1, 2, 3, 5);
+        List<LottoNumber> numbers = Arrays.asList(
+                new LottoNumber("1"),
+                new LottoNumber("4"),
+                new LottoNumber("5"),
+                new LottoNumber("8"),
+                new LottoNumber("10"));
         assertThatThrownBy(() -> {
             LottoTicket lottoTicket = new LottoTicket(numbers);
         }).isInstanceOf(IllegalLottoNumbers.class);
@@ -31,7 +44,13 @@ public class LottoTicketTest {
     @Test
     @DisplayName("매개변수로 넘어온 리스트 안에 중복되는 수가 있는 검사")
     void duplicateNumbers() {
-        List<Integer> numbers = Arrays.asList(1, 1, 2, 2, 4, 4, 5);
+        List<LottoNumber> numbers = Arrays.asList(
+                new LottoNumber("1"),
+                new LottoNumber("4"),
+                new LottoNumber("8"),
+                new LottoNumber("8"),
+                new LottoNumber("8"),
+                new LottoNumber("10"));
         assertThatThrownBy(() -> {
             LottoTicket lottoTicket = new LottoTicket(numbers);
         }).isInstanceOf(IllegalLottoNumbers.class);

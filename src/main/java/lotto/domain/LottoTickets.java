@@ -13,7 +13,7 @@ public class LottoTickets {
         return Collections.unmodifiableList(lottoTickets);
     }
 
-    public Map<PrizeType, Integer> checkWinningTickets(List<Integer> winningNumbers, int bonusBall) {
+    public Map<PrizeType, Integer> checkWinningTickets(List<LottoNumber> winningNumbers, LottoNumber bonusBall) {
         Map<PrizeType, Integer> winningTickets = new HashMap<>();
         for (PrizeType prizeType : PrizeType.values()) {
             winningTickets.put(prizeType, getTicketPrizeTypeCount(winningNumbers, bonusBall, prizeType));
@@ -21,7 +21,7 @@ public class LottoTickets {
         return winningTickets;
     }
 
-    private int getTicketPrizeTypeCount(List<Integer> numbers, int bonusBall, PrizeType prizeType) {
+    private int getTicketPrizeTypeCount(List<LottoNumber> numbers, LottoNumber bonusBall, PrizeType prizeType) {
         int count = 0;
         for (LottoTicket lottoTicket : lottoTickets) {
             count += addPrize(lottoTicket.getMatchingCount(numbers, bonusBall), prizeType);
