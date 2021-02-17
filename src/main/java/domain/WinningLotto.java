@@ -3,9 +3,9 @@ package domain;
 public class WinningLotto {
 
     private final Lotto lotto;
-    private final int bonusBall;
+    private final LottoNumber bonusBall;
 
-    public WinningLotto(final Lotto lotto, int bonusBall) {
+    public WinningLotto(Lotto lotto, LottoNumber bonusBall) {
         this.lotto = lotto;
         this.bonusBall = bonusBall;
     }
