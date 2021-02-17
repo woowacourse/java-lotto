@@ -42,6 +42,10 @@ public class WinningLotto {
         }
     }
 
+    public Integer getBonusBall() {
+        return new Integer(this.bonusNumber);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -53,5 +57,9 @@ public class WinningLotto {
     @Override
     public int hashCode() {
         return Objects.hash(lotto, bonusNumber);
+    }
+
+    public Lotto values() {
+        return lotto;
     }
 }

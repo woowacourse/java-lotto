@@ -25,4 +25,18 @@ public class Lotto {
     public int hashCode() {
         return Objects.hash(numbers);
     }
+
+    public int match(Lotto winningLotto) {
+        return (int) numbers.stream()
+                .filter(number -> winningLotto.contains(number))
+                .count();
+    }
+
+    public boolean contains(int number) {
+        return numbers.contains(number);
+    }
+
+    public boolean containsBonus(WinningLotto winningLotto) {
+        return numbers.contains(winningLotto.getBonusBall());
+    }
 }
