@@ -11,7 +11,6 @@ public class LottoTicketsTest {
     @DisplayName("LottoTicket 삽입 테스트")
     void lottoTicketsAddTest() {
         LottoTicket lottoTicket1 = new LottoTicket();
-        lottoTicket1.issue();
 
         LottoTickets lottoTickets = new LottoTickets();
         lottoTickets.add(lottoTicket1);

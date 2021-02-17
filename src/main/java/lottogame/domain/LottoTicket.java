@@ -11,7 +11,7 @@ public class LottoTicket {
 
     private final LottoNumbers lottoNumbers = new LottoNumbers();
 
-    public void issue() {
+    public LottoTicket() {
         for (int number : getShuffledNumbers(new ArrayList<>())) {
             lottoNumbers.add(new LottoNumber(number + ""));
         }
