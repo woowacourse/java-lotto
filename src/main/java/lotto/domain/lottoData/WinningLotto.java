@@ -11,14 +11,16 @@ public class WinningLotto {
     private static final String DELIMITER = ", ";
     private static final Pattern NUMBER_PATTERN =
             Pattern.compile("^\\d{1,2},\\s\\d{1,2},\\s\\d{1,2},\\s\\d{1,2},\\s\\d{1,2},\\s\\d{1,2}$");
+    private static final Pattern BONUS_NUMBER_PATTERN = Pattern.compile("^[0-9]*$");
     private final Lotto lotto;
     private final int bonusNumber;
 
-    public WinningLotto(String numbers, int bonusNumber) {
+    public WinningLotto(String numbers, String bonusNumber) {
         List<Integer> lotto = split(numbers);
-        isDuplicate(lotto, bonusNumber);
+        validateBonusNumber(bonusNumber);
+        this.bonusNumber = Integer.parseInt(bonusNumber);
+        isDuplicate(lotto, this.bonusNumber);
         this.lotto = new Lotto(lotto);    // 당첨 번호 로또 생성
-        this.bonusNumber = bonusNumber;
     }
 
     private List<Integer> split(String numbers) {
@@ -27,6 +29,12 @@ public class WinningLotto {
         return Arrays.stream(lotto)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
+    }
+
+    private void validateBonusNumber(String bonusNumber) {
+        if (!BONUS_NUMBER_PATTERN.matcher(bonusNumber).matches()) {
+            throw new InvalidWinningLottoException();
+        }
     }
 
     private void validateInput(String numbers) {

@@ -3,11 +3,11 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum Rank {
-    FIRST(6, 2000000000),
-    SECOND(5, 30000000),
-    THIRD(5, 1500000),
-    FOURTH(4, 50000),
     FIFTH(3, 5000),
+    FOURTH(4, 50000),
+    THIRD(5, 1500000),
+    SECOND(5, 30000000),
+    FIRST(6, 2000000000),
     NOT_FOUNT(0, 0);
 
     private int count;
@@ -28,5 +28,17 @@ public enum Rank {
 
     private boolean isSameAs(int count) {
         return this.count == count;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public Object getMoney() {
+        return money;
+    }
+
+    public boolean isNotFound() {
+        return this.equals(NOT_FOUNT);
     }
 }
