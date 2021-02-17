@@ -10,35 +10,25 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public List<Results> getResults(List<Integer> winningNumbers, int bonusNumber) {
-        List<Results> results = new ArrayList<>();
+    public List<Result> getResults(List<Integer> winningNumbers, int bonusNumber) {
+        List<Result> results = new ArrayList<>();
         for (Lotto lotto : lottos) {
             int matches = lotto.countMatchingNumbers(winningNumbers);
             boolean bonusMatch = lotto.isBonusMatch(bonusNumber);
 
-            if (matches == 6) {
-                results.add(Results.FIRST);
+            if (matches == Result.SECOND.getCount() && bonusMatch) {
+                results.add(Result.SECOND);
                 continue;
             }
-            if (matches == 5 && bonusMatch) {
-                results.add(Results.SECOND);
-                continue;
+
+            for (Result result : Result.values()){
+                if(matches == result.getCount()){
+                    results.add(result);
+                }
             }
-            if (matches == 5 && !bonusMatch) {
-                results.add(Results.THIRD);
-                continue;
-            }
-            if (matches == 4) {
-                results.add(Results.FOURTH);
-                continue;
-            }
-            if (matches == 3) {
-                results.add(Results.FIFTH);
-                continue;
-            }
-            if (matches < 3) {
-                results.add(Results.NONE);
-                continue;
+
+            if (matches < Result.FIFTH.getCount()) {
+                results.add(Result.NONE);
             }
         }
         return results;
