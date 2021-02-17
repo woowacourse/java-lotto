@@ -34,4 +34,8 @@ public enum Rank {
             return matchCount + "개 일치, 보너스 볼 일치 (" + prize + "원) - ";
         return matchCount + "개 일치 (" + prize + "원) - ";
     }
+
+    public int getPrize() {
+        return this.prize;
+    }
 }
