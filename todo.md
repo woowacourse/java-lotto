@@ -4,7 +4,6 @@
 - PurchasedLottoTickets size() 디미터 법칙 적용.
 - InputView 보너스번호인지 세팅.
 - 지난 주 당첨 번호를 입력해 주세요. 위에 한 줄 띄우기.
-- LottoComparator의 getLottoResult List<LottoTicket> -> PurchasedLottoTickets
 
 
 # done
@@ -13,3 +12,4 @@
 - LottoGenerator.generatePurchasedTickets() 에서 List<LottoTicket> -> PurchasedLottoTickets로 변경.
 - LottoGenerator 생성자 수정.
 - LottoComparator 함수 수정.
+- LottoComparator의 getLottoResult List<LottoTicket> -> PurchasedLottoTickets.

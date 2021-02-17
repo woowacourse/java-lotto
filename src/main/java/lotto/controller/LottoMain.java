@@ -13,12 +13,14 @@ public class LottoMain {
         UserPurchase userPurchase = InputView.getUserPurchase();
         LottoMachine lottoMachine = new LottoMachine();
 
-        PurchasedLottoTickets purchasedLottoTickets = lottoMachine.purchaseLottoTicket(userPurchase);
+        PurchasedLottoTickets purchasedLottoTickets = lottoMachine
+            .purchaseLottoTicket(userPurchase);
         OutputView.printPurchasedLottoTickets(purchasedLottoTickets);
 
         WinningLottoNumbers winningLottoNumbers = InputView.getWinningLottoNumbers();
 
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
-        OutputView.printResult(lottoComparator.getLottoResult(purchasedLottoTickets), userPurchase.getPurchasePrice());
+        OutputView.printResult(lottoComparator.getLottoResult(purchasedLottoTickets),
+            userPurchase.getPurchasePrice());
     }
 }

@@ -7,9 +7,7 @@ import static lotto.domain.LottoMatchType.FOUR_MATCH;
 import static lotto.domain.LottoMatchType.SIX_MATCH;
 import static lotto.domain.LottoMatchType.THREE_MATCH;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -46,7 +44,7 @@ public class LottoComparatorTest {
             new LottoNumber(5),
             new LottoNumber(6)
         ));
-        List<LottoTicket> purchasedLottoTickets = new ArrayList<>();
+        PurchasedLottoTickets purchasedLottoTickets = new PurchasedLottoTickets();
         purchasedLottoTickets.add(purchasedLottoTicket);
 
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
@@ -72,7 +70,7 @@ public class LottoComparatorTest {
             new LottoNumber(5),
             new LottoNumber(7)
         ));
-        List<LottoTicket> purchasedLottoTickets = new ArrayList<>();
+        PurchasedLottoTickets purchasedLottoTickets = new PurchasedLottoTickets();
         purchasedLottoTickets.add(purchasedLottoTicket);
 
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
@@ -98,7 +96,7 @@ public class LottoComparatorTest {
             new LottoNumber(5),
             new LottoNumber(10)
         ));
-        List<LottoTicket> purchasedLottoTickets = new ArrayList<>();
+        PurchasedLottoTickets purchasedLottoTickets = new PurchasedLottoTickets();
         purchasedLottoTickets.add(purchasedLottoTicket);
 
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
@@ -124,7 +122,7 @@ public class LottoComparatorTest {
             new LottoNumber(9),
             new LottoNumber(10)
         ));
-        List<LottoTicket> purchasedLottoTickets = new ArrayList<>();
+        PurchasedLottoTickets purchasedLottoTickets = new PurchasedLottoTickets();
         purchasedLottoTickets.add(purchasedLottoTicket);
 
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
@@ -150,7 +148,7 @@ public class LottoComparatorTest {
             new LottoNumber(9),
             new LottoNumber(10)
         ));
-        List<LottoTicket> purchasedLottoTickets = new ArrayList<>();
+        PurchasedLottoTickets purchasedLottoTickets = new PurchasedLottoTickets();
         purchasedLottoTickets.add(purchasedLottoTicket);
 
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);

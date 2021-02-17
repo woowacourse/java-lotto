@@ -30,7 +30,8 @@ public class OutputView {
 
         for (LottoMatchType lottoMatchType : LottoMatchType.values()) {
             totalPrize += lottoMatchType.getPrizeMoney() * result.get(lottoMatchType);
-            System.out.printf(lottoMatchType.getMatchCountMessage() + "\n", lottoMatchType.getCountMatchedNumbers());
+            System.out.printf(lottoMatchType.getMatchCountMessage() + "\n",
+                lottoMatchType.getCountMatchedNumbers());
         }
         double profit = (double) totalPrize / (double) purchasePrice;
         System.out.printf("총 수익률은 %f입니다.\n", profit);

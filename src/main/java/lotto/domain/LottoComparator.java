@@ -31,8 +31,9 @@ public class LottoComparator {
         }
     }
 
-    public Map<LottoMatchType, Integer> getLottoResult(List<LottoTicket> purchasedLottoTickets) {
-        for (LottoTicket purchasedOneLottoTicket : purchasedLottoTickets) {
+    public Map<LottoMatchType, Integer> getLottoResult(
+        PurchasedLottoTickets purchasedLottoTickets) {
+        for (LottoTicket purchasedOneLottoTicket : purchasedLottoTickets.getTickets()) {
             int countMatchedNumbers
                 = getEachLottoResult(purchasedOneLottoTicket,
                 winningLottoNumbers.getWinningTicket());

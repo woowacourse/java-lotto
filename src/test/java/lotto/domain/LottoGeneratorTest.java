@@ -1,11 +1,6 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import java.util.Arrays;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 
 public class LottoGeneratorTest {
     private final LottoTicket lottoTicket = new LottoTicket(
