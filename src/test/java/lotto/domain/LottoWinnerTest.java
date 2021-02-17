@@ -27,19 +27,7 @@ public class LottoWinnerTest {
         LottoWinnerTicket lottoWinnerTicket = new LottoWinnerTicket(lottoWinnerNumbers);
         LottoWinnerBonusNumber lottoWinnerBonusNumber = new LottoWinnerBonusNumber(9);
 
-        List<LottoNumber> expectedLottoWinnerNumbers = Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(45)
-        );
-        LottoWinnerTicket expectedLottoWinnerTicket = new LottoWinnerTicket(expectedLottoWinnerNumbers);
-        LottoWinnerBonusNumber expectedLottoWinnerBonusNumber = new LottoWinnerBonusNumber(9);
-
-        assertThat(new LottoWinner(lottoWinnerTicket, lottoWinnerBonusNumber))
-                .isEqualTo(new LottoWinner(expectedLottoWinnerTicket, expectedLottoWinnerBonusNumber));
+        assertThat(new LottoWinner(lottoWinnerTicket, lottoWinnerBonusNumber)).isInstanceOf(LottoWinner.class);
     }
 
     @ParameterizedTest(name = "Null은 생성자의 매개변수로 허용하지 않는다.")

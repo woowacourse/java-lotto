@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.service.LottoTicketService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -25,17 +26,8 @@ public class LottoTicketTest {
                 new LottoNumber(5),
                 new LottoNumber(45)
         );
-        List<LottoNumber> lottoNumbers2 = Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(45)
-        );
-        LottoTicket lottoTicket = new LottoTicket(lottoNumbers1);
 
-        assertThat(lottoTicket).isEqualTo(new LottoTicket(lottoNumbers2));
+        assertThat(new LottoTicket(lottoNumbers1)).isInstanceOf(LottoTicket.class);
     }
 
     @ParameterizedTest(name = "Null은 생성자의 매개변수로 허용하지 않는다.")
@@ -103,26 +95,15 @@ public class LottoTicketTest {
         }).isInstanceOf(RuntimeException.class);
     }
 
-    @Test
+    @Test // 정렬 테스트는 어떻게 하는게 좋을까요?
     @DisplayName("로또 티켓 생성시 입력받은 List가 잘 정렬 되있는지 검사")
     public void lottoTicketSortTest() {
-        List<LottoNumber> lottoNumbers = Arrays.asList(
-                new LottoNumber(3),
-                new LottoNumber(2),
-                new LottoNumber(5),
-                new LottoNumber(4),
-                new LottoNumber(1),
-                new LottoNumber(44)
-        );
-        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+        LottoTicket lottoTicket = LottoTicketService.createLottoTicket();
 
-        assertThat(lottoTicket.getLottoNumbers()).isEqualTo(Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(44)
-        ));
+        int number = 0;
+        for (LottoNumber lottoNumber : lottoTicket.getLottoNumbers()) {
+            assertThat(lottoNumber.getNumber() > number).isTrue();
+            number = lottoNumber.getNumber();
+        }
     }
 }

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.service.LottoTicketService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,34 +19,10 @@ public class LottoTicketsTest {
 
     @BeforeEach
     public void initLottoTickets() {
-        List<LottoNumber> lottoNumbers1 = Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(45)
-        );
-        List<LottoNumber> lottoNumbers2 = Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(45)
-        );
-        List<LottoNumber> lottoNumbers3 = Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(45)
-        );
         lottoTickets = new LottoTickets(Arrays.asList(
-                new LottoTicket(lottoNumbers1),
-                new LottoTicket(lottoNumbers2),
-                new LottoTicket(lottoNumbers3)
+                LottoTicketService.createLottoTicket(),
+                LottoTicketService.createLottoTicket(),
+                LottoTicketService.createLottoTicket()
         ));
     }
 
@@ -69,37 +46,7 @@ public class LottoTicketsTest {
     @Test  //이 코드를 좀 더 깔끔하게 쓰는법 혹시 없을까요?
     @DisplayName("구매한 여러장의 로또 티켓들을 가진 객체를 생성한다.")
     public void createLottoTicketsTest() {
-        List<LottoNumber> expectedLottoNumbers1 = Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(45)
-        );
-        List<LottoNumber> expectedLottoNumbers2 = Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(45)
-        );
-        List<LottoNumber> expectedLottoNumbers3 = Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(45)
-        );
-        LottoTickets expectedLottoTickets = new LottoTickets(Arrays.asList(
-                new LottoTicket(expectedLottoNumbers1),
-                new LottoTicket(expectedLottoNumbers2),
-                new LottoTicket(expectedLottoNumbers3)
-        ));
-
-        assertThat(lottoTickets).isEqualTo(expectedLottoTickets);
+        assertThat(lottoTickets).isInstanceOf(LottoTickets.class);
     }
 
     @Test

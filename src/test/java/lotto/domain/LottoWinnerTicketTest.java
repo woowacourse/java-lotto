@@ -14,7 +14,7 @@ public class LottoWinnerTicketTest {
     @Test
     @DisplayName("로또 티켓을 생성한다.")
     public void createLottoTicketTest() {
-        List<LottoNumber> lottoWinnerNumbers1 = Arrays.asList(
+        List<LottoNumber> lottoWinnerNumbers = Arrays.asList(
                 new LottoNumber(1),
                 new LottoNumber(2),
                 new LottoNumber(3),
@@ -22,17 +22,8 @@ public class LottoWinnerTicketTest {
                 new LottoNumber(5),
                 new LottoNumber(45)
         );
-        List<LottoNumber> lottoWinnerNumbers2 = Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(45)
-        );
-        LottoWinnerTicket lottoWinnerTicket = new LottoWinnerTicket(lottoWinnerNumbers1);
 
-        assertThat(lottoWinnerTicket).isEqualTo(new LottoWinnerTicket(lottoWinnerNumbers2));
+        assertThat(new LottoWinnerTicket(lottoWinnerNumbers)).isInstanceOf(LottoWinnerTicket.class);
     }
 
     @Test
