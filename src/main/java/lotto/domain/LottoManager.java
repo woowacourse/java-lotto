@@ -13,17 +13,17 @@ public class LottoManager {
         this.generator = generator;
     }
 
-    public void buyLotto(final int money) {
-        Ticket ticket = new Ticket(new Money(money));
-        lottos = generateLottoByTicket(ticket.getCount());
+    public List<Lotto> buyLotto(final Ticket ticket) {
+        return lottos = generateLottoByTicket(ticket.getCount());
     }
 
-    public void scratchLotto(WinningLotto winningLotto) {
+    public RatingInfo scratchLotto(WinningLotto winningLotto) {
         for (Lotto lotto : lottos) {
             int match = winningLotto.compareLottoNumber(lotto);
             boolean hasBonusBall = winningLotto.compareBonusBall(lotto);
             ratingInfo.update(Rating.getRating(match,hasBonusBall));
         }
+        return ratingInfo;
     }
 
     public List<Lotto> generateLottoByTicket(final int ticketCount) {
