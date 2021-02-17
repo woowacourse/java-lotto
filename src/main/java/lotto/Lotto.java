@@ -42,4 +42,8 @@ public class Lotto {
         if (number < 1 || number > 45)
             throw new IllegalArgumentException(NUMBER_RANGE_ERROR);
     }
+
+    public boolean isContainNum(int number) {
+        return lotto.contains(number);
+    }
 }

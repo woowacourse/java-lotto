@@ -14,7 +14,6 @@ public class LottoController {
         LottoView.buyLotto(lottos.getCount());
         lottos.generateLottos();
         LottoView.printLottos(lottos);
-        Lotto winLotto = new Lotto(changeToArrayList());
     }
 
     public void makeWinningLotto() {
