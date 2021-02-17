@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -36,5 +38,11 @@ public class LottoTicket {
 
     public List<LottoNumber> list() {
         return new ArrayList<>(lottoNumbers);
+    }
+
+    //todo : Dto 생성?
+    public String printLottoTicket() {
+        Collections.sort(lottoNumbers);
+        return Arrays.toString(lottoNumbers.toArray());
     }
 }

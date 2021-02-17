@@ -30,8 +30,10 @@ public class LottoController {
         int lottoMoney = inputView.takeLottoMoney();
 
         int numberOfTickets = lottoMoney / 1000;
+
         List<LottoTicket> lottoTickets = lottoMachine.createTickets(numberOfTickets);
         outputView.printTicketsSize(lottoTickets.size());
+        outputView.printAllLottoTickets(lottoTickets);
 
         List<Integer> winningNumbers = inputView.inputWinningNumbers();
         int bonusNumber = inputView.takeBonusNumber();
