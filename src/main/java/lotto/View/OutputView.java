@@ -1,14 +1,12 @@
 package lotto.View;
 
-import lotto.domain.Lotto;
+import lotto.domain.lottoData.Lotto;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class OutputView {
-    public static void askMoney() {
-
-    }
+    private OutputView() { }
 
     public static void showLottoQuantity(int quantity) {
         System.out.printf("%d개를 구매했습니다.\n", quantity);

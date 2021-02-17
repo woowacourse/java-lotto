@@ -2,9 +2,9 @@ package lotto.controller;
 
 import lotto.View.InputView;
 import lotto.View.OutputView;
-import lotto.domain.Lotto;
-import lotto.domain.LottoGenerator;
-import lotto.domain.Lottos;
+import lotto.domain.lottoData.Lotto;
+import lotto.domain.lottoData.LottoGenerator;
+import lotto.domain.lottoData.Lottos;
 import lotto.domain.Money;
 
 import java.util.List;
