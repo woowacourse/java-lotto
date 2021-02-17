@@ -1,10 +1,13 @@
 package lotto.viewer;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class InputView {
+
+    public static final String DELIMITER = ", ";
     final Scanner scanner;
 
     public InputView(Scanner scanner) {
@@ -16,11 +19,13 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public Object inputWinningNumbers() {
+    public List<Integer> inputWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요");
+        scanner.next();
         String rawWinningNumbers = scanner.nextLine();
-        String[] splittedWinningNumbers = rawWinningNumbers.split(",");
+        String[] splittedWinningNumbers = rawWinningNumbers.split(DELIMITER);
         return Arrays.stream(splittedWinningNumbers)
+            .map(String::trim)
             .map(Integer::parseInt)
             .collect(Collectors.toList());
     }

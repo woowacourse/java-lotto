@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,10 +20,6 @@ public class Lottos {
         }
     }
 
-    public int getSize() {
-        return lottoBunch.size();
-    }
-
     public Map<String, Integer> getStatistics(List<Integer> winningNumbers, int bonusNumber) {
         Map<String, Integer> getStatistics = setUpStatistics();
         for (Lotto lotto : lottoBunch) {
@@ -38,5 +35,13 @@ public class Lottos {
             setUpStatistics.put(singleLottoRank.name(), 0);
         }
         return setUpStatistics;
+    }
+
+    public List<Lotto> getLottoBunch() {
+        return Collections.unmodifiableList(lottoBunch);
+    }
+
+    public int getSize() {
+        return lottoBunch.size();
     }
 }
