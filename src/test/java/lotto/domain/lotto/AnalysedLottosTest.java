@@ -10,7 +10,7 @@ import lotto.domain.number.PayOut;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class WinningStatisticsTest {
+public class AnalysedLottosTest {
 
     @Test
     @DisplayName("수익률 계산")
@@ -48,7 +48,7 @@ public class WinningStatisticsTest {
                 )
             )
         ));
-        WinningStatistics result = winningNumber.getResult(lottoGroup, new PayOut(3000));
+        AnalysedLottos result = winningNumber.analysingLottos(lottoGroup, new PayOut(3000));
         assertThat(2031500000D / 3000D).isEqualTo(result.getYield(), withPrecision(2d));
     }
 }

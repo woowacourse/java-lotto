@@ -5,7 +5,7 @@ import static java.util.stream.Collectors.toList;
 import java.util.List;
 import lotto.domain.lotto.LottoGroup;
 import lotto.domain.lotto.LottoNumbers;
-import lotto.domain.lotto.WinningStatistics;
+import lotto.domain.lotto.AnalysedLottos;
 import lotto.domain.rank.Rank;
 
 public class OutputView {
@@ -48,11 +48,11 @@ public class OutputView {
         System.out.println(BONUS_NUMBER);
     }
 
-    public static void statistics(WinningStatistics winningStatistics){
+    public static void statistics(AnalysedLottos analysedLottos){
         System.out.println(WINNING_STATISTICS);
         System.out.println(LINE);
-        winningStatistics.getRankings().forEach(OutputView::printStatisticsAccordingToBonus);
-        System.out.printf(STATISTICS_YIELD_FORMAT, winningStatistics.getYield());
+        analysedLottos.getRankings().forEach(OutputView::printStatisticsAccordingToBonus);
+        System.out.printf(STATISTICS_YIELD_FORMAT, analysedLottos.getYield());
     }
 
     private static void printStatisticsAccordingToBonus(Rank rank) {

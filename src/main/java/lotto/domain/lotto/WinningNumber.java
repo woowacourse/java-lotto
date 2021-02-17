@@ -58,17 +58,17 @@ public class WinningNumber {
         return lottoNumbers;
     }
 
-    public WinningStatistics analysingLottos(LottoGroup lottoGroup, PayOut payOut) {
-        Map<Integer, Long> result = lottoGroup.getLottos().stream()
+    public AnalysedLottos analysingLottos(LottoGroup lottoGroup, PayOut payOut) {
+        Map<Integer, Long> rankAndCount = lottoGroup.getLottos().stream()
             .map(this::getRank)
             .filter(rank -> RankFactory.FAIL.getRank() != rank)
             .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
         IntStream.range(1, RankFactory.values().length)
-            .filter(rank -> !result.containsKey(rank))
-            .forEach(rank -> result.put(rank, 0L));
+            .filter(rank -> !rankAndCount.containsKey(rank))
+            .forEach(rank -> rankAndCount.put(rank, 0L));
 
-        return new WinningStatistics(result, payOut);
+        return new AnalysedLottos(rankAndCount, payOut);
     }
 
     private int getRank(LottoNumbers lottoNumbers) {

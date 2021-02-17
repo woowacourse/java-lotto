@@ -3,6 +3,7 @@ package lotto.controller;
 import lotto.domain.lotto.LottoGenerator;
 import lotto.domain.lotto.LottoGroup;
 import lotto.domain.lotto.WinningNumber;
+import lotto.domain.lotto.AnalysedLottos;
 import lotto.domain.number.PayOut;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -56,6 +57,7 @@ public class LottoController {
             WinningNumber winningNumber,
             LottoGroup lottoGroup,
             PayOut payOut) {
-        OutputView.statistics(winningNumber.getResult(lottoGroup, payOut));
+        AnalysedLottos analysedLottos = winningNumber.analysingLottos(lottoGroup, payOut);
+        OutputView.statistics(analysedLottos);
     }
 }

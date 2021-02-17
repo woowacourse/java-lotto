@@ -12,12 +12,12 @@ import lotto.domain.number.PayOut;
 import lotto.domain.rank.RankFactory;
 import lotto.domain.rank.Rank;
 
-public class WinningStatistics {
+public class AnalysedLottos {
 
     private final List<Rank> ranks;
     private final double yield;
 
-    public WinningStatistics(Map<Integer, Long> gameResult, PayOut payOut) {
+    public AnalysedLottos(Map<Integer, Long> gameResult, PayOut payOut) {
         this.ranks = IntStream.range(1, RankFactory.values().length)
             .boxed()
             .map(key -> RankFactory.createRanking(key, gameResult.getOrDefault(key, 0L)))

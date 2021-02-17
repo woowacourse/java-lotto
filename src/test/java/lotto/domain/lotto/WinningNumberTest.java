@@ -87,7 +87,7 @@ public class WinningNumberTest {
                 )
             )
         ));
-        WinningStatistics result = winningNumber.getResult(lottoGroup, new PayOut(1000));
+        AnalysedLottos result = winningNumber.analysingLottos(lottoGroup, new PayOut(1000));
 
         List<Long> actual = result.getRankings().stream().map(Rank::getCount).collect(toList());
 
