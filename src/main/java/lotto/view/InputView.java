@@ -7,6 +7,7 @@ import lotto.domain.LottoGroup;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoSeller;
 import lotto.domain.WinningLotto;
+import lotto.exception.LottoException;
 import lotto.util.LottoGenerator;
 
 public class InputView {
@@ -16,18 +17,13 @@ public class InputView {
   private static final String INPUT_WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
   private static final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
 
-  // 구입금액을 입력해 주세요. o
-  // ~개를 구매했습니다.  OutputView o
-  // 지난 주 당첨 번호를 입력해주세요.
-  // 보너스 볼을 입력해주세요.
-  // 당첨 통계  OutputView
-
   public static LottoGroup lottoGroup() {
     try {
       int money = money();
       LottoSeller lottoSeller = new LottoSeller();
       return lottoSeller.sellLotto(money);
-    } catch (RuntimeException e) {
+    } catch (LottoException e) {
+      OutputView.printMessage(e.getMessage());
       return lottoGroup();
     }
   }
@@ -40,7 +36,8 @@ public class InputView {
     } catch (NumberFormatException e) {
       OutputView.printMessage("숫자를 입력해주세요.");
       return money();
-    } catch (RuntimeException e) {
+    } catch (LottoException e) {
+      OutputView.printMessage(e.getMessage());
       return money();
     }
   }
@@ -48,8 +45,8 @@ public class InputView {
   public static WinningLotto winningLotto() {
     try {
       return new WinningLotto(winningNumbers(), bonusNumber());
-    } catch (RuntimeException e) {
-      System.out.println("예외가 발생했습니다!");
+    } catch (LottoException e) {
+      OutputView.printMessage(e.getMessage());
       return winningLotto();
     }
   }
@@ -63,8 +60,11 @@ public class InputView {
           .mapToInt(Integer::parseInt)
           .toArray();
       return LottoGenerator.generate(numbers);
-    } catch (RuntimeException e) {
-      System.out.println("예외가 발생했습니다!");
+    } catch (LottoException e) {
+      OutputView.printMessage(e.getMessage());
+      return winningNumbers();
+    } catch (NumberFormatException e) {
+      OutputView.printMessage("숫자를 입력해주세요.");
       return winningNumbers();
     }
   }
@@ -73,8 +73,8 @@ public class InputView {
     try {
       OutputView.printMessage(INPUT_BONUS_NUMBER_MESSAGE);
       return LottoNumber.of(Integer.parseInt(SCAN.nextLine()));
-    } catch (RuntimeException e) {
-      System.out.println("예외가 발생했습니다!");
+    } catch (LottoException e) {
+      OutputView.printMessage(e.getMessage());
       return bonusNumber();
     }
   }

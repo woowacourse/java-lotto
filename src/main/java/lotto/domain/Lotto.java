@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.exception.LottoNumberException;
 
 public class Lotto {
 
@@ -11,10 +12,10 @@ public class Lotto {
 
   public Lotto(List<LottoNumber> lottoNumbers) {
     if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
-      throw new IllegalArgumentException();
+      throw new LottoNumberException("총 6 개의 숫자가 필요합니다.");
     }
     if (isDuplicated(lottoNumbers)) {
-      throw new IllegalArgumentException();
+      throw new LottoNumberException("중복된 숫자가 입력이 되었습니다.");
     }
     Collections.sort(lottoNumbers);
     this.lottoNumbers = lottoNumbers;

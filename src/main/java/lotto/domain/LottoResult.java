@@ -8,11 +8,6 @@ import java.util.Map;
 public class LottoResult {
 
   private Map<LottoRank, Integer> rankMatch;
-  // 기능을 완료하려면 몇 개가 일치한지 카운트가 되야된다.
-  // 가격만 구할 수 있는 기능만 존재
-  // Map 기능을 사용해야 하지 않을까 생각이 듭니다.
-  // Map Rank - count
-  // Rank - 0을 셋팅해줘야될 것 같아요.
 
   public LottoResult() {
     this.rankMatch = new EnumMap<>(LottoRank.class);

@@ -4,17 +4,19 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import lotto.exception.LottoNumberException;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
   private static final int MIN_SIZE = 1;
   private static final int MAX_SIZE = 45;
+  private static final String ERROR_MESSAGE_FORM = "숫자는 %d에서 %d 사이로 입력해야합니다.";
 
   private final int number;
 
   private LottoNumber(int number) {
     if (number < MIN_SIZE || number > MAX_SIZE) {
-      throw new IllegalArgumentException();
+      throw new LottoNumberException(String.format(ERROR_MESSAGE_FORM, MIN_SIZE, MAX_SIZE));
     }
     this.number = number;
   }

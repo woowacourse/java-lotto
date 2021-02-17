@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import lotto.exception.LottoException;
 
 public enum LottoRank {
   NONE(0, 0),
@@ -33,7 +34,7 @@ public enum LottoRank {
     return Arrays.stream(values())
         .filter(value -> value.matchCount == matchCount)
         .findFirst()
-        .orElseThrow(() -> new IllegalStateException("값이 잘못되었습니다."));
+        .orElseThrow(() -> new LottoException("값이 잘못되었습니다."));
   }
 
   public int winningMoney() {
