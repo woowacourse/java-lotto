@@ -3,6 +3,7 @@ package domain;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
 
@@ -15,17 +16,19 @@ public class LottoTicket {
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
-    public static LottoTicket valueOf(final List<LottoNumber> lottoNumbers) {
-        return new LottoTicket(lottoNumbers);
+    public static LottoTicket valueOf(final List<Integer> numbers) {
+        return new LottoTicket(generateLottoNumbers(numbers));
+    }
+
+    private static List<LottoNumber> generateLottoNumbers(final List<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toList());
     }
 
     private static void validate(final List<LottoNumber> lottoNumbers) {
         validateDuplicateNumbers(lottoNumbers);
         validateIncorrectSize(lottoNumbers);
-    }
-
-    public static int getLottoTicketSize() {
-        return LOTTO_TICKET_SIZE;
     }
 
     private static void validateDuplicateNumbers(final List<LottoNumber> lottoNumbers) {
@@ -38,5 +41,9 @@ public class LottoTicket {
         if (lottoNumbers.size() != LOTTO_TICKET_SIZE) {
             throw new IllegalArgumentException("로또 숫자의 개수가 6이 아닙니다.");
         }
+    }
+
+    public static int getLottoTicketSize() {
+        return LOTTO_TICKET_SIZE;
     }
 }

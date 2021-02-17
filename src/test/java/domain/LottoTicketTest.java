@@ -14,7 +14,7 @@ public class LottoTicketTest {
     @DisplayName("유효한 값이면 객체 생성 성공")
     @Test
     void valueOf_validInput_success() {
-        final List<LottoNumber> lottoNumbers = getValidNumbers();
+        final List<Integer> lottoNumbers = getValidNumbers();
 
         assertThatCode(() -> LottoTicket.valueOf(lottoNumbers))
                 .doesNotThrowAnyException();
@@ -23,20 +23,18 @@ public class LottoTicketTest {
     @DisplayName("객체 생성 실패 : 중복된 번호")
     @Test
     void valueOf_duplicateNumber_exceptionThrown() {
-        final List<LottoNumber> lottoNumbers = getDuplicateNumbers();
+        final List<Integer> lottoNumbers = getDuplicateNumbers();
 
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> LottoTicket.valueOf(lottoNumbers))
                 .withMessageContaining("중복");
-        assertThatCode(() -> LottoTicket.valueOf(lottoNumbers))
-                .doesNotThrowAnyException();
     }
 
     @DisplayName("객체 생성 실패 : 숫자가 6개가 아닌 경우")
     @Test
     void valueOf_incorrectSize_exceptionThrown() {
-        final List<LottoNumber> fewerLottoNumbers = getFewerNumbers();
-        final List<LottoNumber> moreLottoNumbers = getMoreNumbers();
+        final List<Integer> fewerLottoNumbers = getFewerNumbers();
+        final List<Integer> moreLottoNumbers = getMoreNumbers();
 
         assertAll(
                 () -> assertThatIllegalArgumentException()
@@ -54,47 +52,19 @@ public class LottoTicketTest {
 
     }
 
-    private List<LottoNumber> getValidNumbers() {
-        return Arrays.asList(
-                LottoNumber.valueOf(1),
-                LottoNumber.valueOf(6),
-                LottoNumber.valueOf(23),
-                LottoNumber.valueOf(40),
-                LottoNumber.valueOf(30),
-                LottoNumber.valueOf(35)
-        );
+    private List<Integer> getValidNumbers() {
+        return Arrays.asList(1, 6, 23, 40, 30, 35);
     }
 
-    private List<LottoNumber> getDuplicateNumbers() {
-        return Arrays.asList(
-                LottoNumber.valueOf(1),
-                LottoNumber.valueOf(1),
-                LottoNumber.valueOf(5),
-                LottoNumber.valueOf(10),
-                LottoNumber.valueOf(13),
-                LottoNumber.valueOf(20)
-        );
+    private List<Integer> getDuplicateNumbers() {
+        return Arrays.asList(1, 1, 5, 10, 13, 29);
     }
 
-    private List<LottoNumber> getFewerNumbers() {
-        return Arrays.asList(
-                LottoNumber.valueOf(1),
-                LottoNumber.valueOf(5),
-                LottoNumber.valueOf(10),
-                LottoNumber.valueOf(13),
-                LottoNumber.valueOf(20)
-        );
+    private List<Integer> getFewerNumbers() {
+        return Arrays.asList(1, 5, 10, 13, 20);
     }
 
-    private List<LottoNumber> getMoreNumbers() {
-        return Arrays.asList(
-                LottoNumber.valueOf(1),
-                LottoNumber.valueOf(3),
-                LottoNumber.valueOf(5),
-                LottoNumber.valueOf(10),
-                LottoNumber.valueOf(13),
-                LottoNumber.valueOf(20),
-                LottoNumber.valueOf(30)
-        );
+    private List<Integer> getMoreNumbers() {
+        return Arrays.asList(1, 3, 5, 10, 13, 20, 30);
     }
 }
