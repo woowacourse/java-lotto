@@ -3,25 +3,19 @@ package lotto.domain;
 import java.util.List;
 import java.util.Objects;
 import lotto.exception.DuplicateLottoNumberException;
-import lotto.exception.InvalidLottoNumberException;
 
 public class WinningLotto extends Lotto {
-
-    private static final int MIN_BOUND = 1;
-    private static final int MAX_BOUND = 45;
 
     private final int bonusNumber;
 
     public WinningLotto(final List<Integer> numbers, final int bonusNumber) {
         super(numbers);
+        validateBoundNumber(bonusNumber);
         validateBonusNumber(numbers, bonusNumber);
         this.bonusNumber = bonusNumber;
     }
 
     private void validateBonusNumber(final List<Integer> values, int value) {
-        if (value < MIN_BOUND || value > MAX_BOUND) {
-            throw new InvalidLottoNumberException();
-        }
         if (values.contains(value)) {
             throw new DuplicateLottoNumberException();
         }
