@@ -28,19 +28,19 @@ public class LottosTest {
 
     private static Stream<Arguments> provideLottosResult() {
         return Stream.of(
-            Arguments.of(new Lotto(Arrays.asList(2, 4, 8, 9, 13, 25)), "NONE"),
-            Arguments.of(new Lotto(Arrays.asList(2, 4, 6, 8, 13, 25)), "FIFTH"),
-            Arguments.of(new Lotto(Arrays.asList(2, 4, 6, 1, 7, 3)), "SECOND"),
-            Arguments.of(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), "FIRST")
+            Arguments.of(new Lotto(Arrays.asList(2, 4, 8, 9, 13, 25)), LottoRank.NONE),
+            Arguments.of(new Lotto(Arrays.asList(2, 4, 6, 8, 13, 25)), LottoRank.FIFTH),
+            Arguments.of(new Lotto(Arrays.asList(2, 4, 6, 1, 7, 3)), LottoRank.SECOND),
+            Arguments.of(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoRank.FIRST)
         );
     }
 
     @ParameterizedTest
     @DisplayName("당첨 통계 결과 수합")
     @MethodSource("provideLottosResult")
-    void lottosResult(Lotto exampleLotto, String exampleRank) {
+    void lottosResult(Lotto exampleLotto, LottoRank exampleRank) {
         Lottos exampleLottos = new Lottos(Collections.singletonList(exampleLotto));
-        Map<String, Integer> exampleLottosResult =
+        Map<LottoRank, Integer> exampleLottosResult =
             exampleLottos.getStatistics(WINNING_NUMBERS, BONUS_NUMBER);
         int value = exampleLottosResult.get(exampleRank);
         assertThat(value).isEqualTo(1);
