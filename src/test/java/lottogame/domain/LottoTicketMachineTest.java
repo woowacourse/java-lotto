@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 public class LottoTicketMachineTest {
     @Test
     @DisplayName("구입 금액에 해당하는 만큼 로또 티켓 발급")
-    void lottoMachineInsertMoney(){
+    void lottoTicketMachineInsertMoney(){
         LottoTicketMachine lottoTicketMachine = new LottoTicketMachine();
         assertThat(lottoTicketMachine.buyTickets(new Money("999")).toList().size()).isEqualTo(0);
         assertThat(lottoTicketMachine.buyTickets(new Money("1000")).toList().size()).isEqualTo(1);
