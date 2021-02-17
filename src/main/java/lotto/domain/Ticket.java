@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 public class Ticket {
     private static final int TICKET_PRICE = 1000;

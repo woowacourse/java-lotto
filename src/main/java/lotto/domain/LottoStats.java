@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 public class LottoStats {
     private static final String ENTER = System.lineSeparator();
