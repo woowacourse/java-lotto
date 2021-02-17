@@ -1,13 +1,14 @@
-package lotto.domain;
+package lotto.domain.ticketresult;
 
-import static lotto.domain.LottoMatchType.FIVE_AND_BONUS_MATCH;
-import static lotto.domain.LottoMatchType.FIVE_MATCH;
+import static lotto.type.LottoMatchType.FIVE_AND_BONUS_MATCH;
+import static lotto.type.LottoMatchType.FIVE_MATCH;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+import lotto.domain.LottoTicket;
+import lotto.domain.ticketpurchase.PurchasedLottoTickets;
+import lotto.type.LottoMatchType;
 
 public class LottoComparator {
     private static final int DEFAULT_COUNT = 0;
@@ -53,7 +54,8 @@ public class LottoComparator {
     }
 
     private void addResult(int countMatchedNumbers, LottoTicket purchasedOneLottoTicket) {
-        List<LottoMatchType> lottoMatchTypes = LottoMatchType.getLottoMatchType(countMatchedNumbers);
+        List<LottoMatchType> lottoMatchTypes = LottoMatchType
+            .getLottoMatchType(countMatchedNumbers);
         if (lottoMatchTypes.size() == EMPTY_SIZE) {
             return;
         }

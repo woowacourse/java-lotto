@@ -4,7 +4,7 @@ import static lotto.view.InputView.LOTTO_NUMBER_DELIMITER;
 
 import java.util.Map;
 import java.util.stream.Collectors;
-import lotto.domain.LottoMatchType;
+import lotto.type.LottoMatchType;
 import lotto.domain.LottoTicket;
 
 public class OutputPrinter {

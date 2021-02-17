@@ -1,9 +1,12 @@
-package lotto.domain;
+package lotto.domain.ticketresult;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
+import lotto.domain.ticketresult.WinningLottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

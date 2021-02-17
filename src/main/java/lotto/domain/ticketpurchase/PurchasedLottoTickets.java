@@ -1,8 +1,9 @@
-package lotto.domain;
+package lotto.domain.ticketpurchase;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import lotto.domain.LottoTicket;
 
 public class PurchasedLottoTickets {
     private final List<LottoTicket> tickets;

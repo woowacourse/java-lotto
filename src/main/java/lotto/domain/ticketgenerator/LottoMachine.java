@@ -1,4 +1,7 @@
-package lotto.domain;
+package lotto.domain.ticketgenerator;
+
+import lotto.domain.ticketpurchase.PurchasedLottoTickets;
+import lotto.domain.ticketpurchase.UserPurchase;
 
 public class LottoMachine {
     private final LottoGenerator lottoGenerator;

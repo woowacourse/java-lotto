@@ -1,10 +1,13 @@
-package lotto.domain;
+package lotto.domain.ticketpurchase;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.List;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
+import lotto.domain.ticketpurchase.PurchasedLottoTickets;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

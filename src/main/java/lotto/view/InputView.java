@@ -6,8 +6,8 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
-import lotto.domain.UserPurchase;
-import lotto.domain.WinningLottoNumbers;
+import lotto.domain.ticketpurchase.UserPurchase;
+import lotto.domain.ticketresult.WinningLottoNumbers;
 import lotto.view.printer.InputPrinter;
 
 public class InputView {
@@ -49,7 +49,7 @@ public class InputView {
     }
 
     private static void validateAllNaturalNumbers(String winningNumbersInput) {
-        if(!Arrays.stream(winningNumbersInput.split(LOTTO_NUMBER_DELIMITER))
+        if (!Arrays.stream(winningNumbersInput.split(LOTTO_NUMBER_DELIMITER))
             .allMatch(name -> name.matches(NUMERIC_REGULAR_EXPRESSION))) {
             throw new IllegalArgumentException("올바르지 않은 입력입니다.");
         }

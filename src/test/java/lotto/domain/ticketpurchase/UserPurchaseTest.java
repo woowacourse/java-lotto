@@ -1,8 +1,9 @@
-package lotto.domain;
+package lotto.domain.ticketpurchase;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 
+import lotto.domain.ticketpurchase.UserPurchase;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

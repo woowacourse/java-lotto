@@ -1,4 +1,7 @@
-package lotto.domain;
+package lotto.domain.ticketresult;
+
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
 
 public class WinningLottoNumbers {
     private final LottoTicket winningTicket;

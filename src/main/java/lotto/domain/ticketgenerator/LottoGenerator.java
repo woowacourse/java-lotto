@@ -1,8 +1,11 @@
-package lotto.domain;
+package lotto.domain.ticketgenerator;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
+import lotto.domain.ticketpurchase.PurchasedLottoTickets;
 
 public class LottoGenerator {
     private static final int ZERO = 0;

@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.ticketpurchase;
 
 public class UserPurchase {
     private static final int ONE_TICKET_PRICE = 1000;

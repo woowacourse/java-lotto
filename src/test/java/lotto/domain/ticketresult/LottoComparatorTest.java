@@ -1,14 +1,20 @@
-package lotto.domain;
+package lotto.domain.ticketresult;
 
 
-import static lotto.domain.LottoMatchType.FIVE_AND_BONUS_MATCH;
-import static lotto.domain.LottoMatchType.FIVE_MATCH;
-import static lotto.domain.LottoMatchType.FOUR_MATCH;
-import static lotto.domain.LottoMatchType.SIX_MATCH;
-import static lotto.domain.LottoMatchType.THREE_MATCH;
+import static lotto.type.LottoMatchType.FIVE_AND_BONUS_MATCH;
+import static lotto.type.LottoMatchType.FIVE_MATCH;
+import static lotto.type.LottoMatchType.FOUR_MATCH;
+import static lotto.type.LottoMatchType.SIX_MATCH;
+import static lotto.type.LottoMatchType.THREE_MATCH;
 
 import java.util.Arrays;
 import java.util.Map;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
+import lotto.domain.ticketresult.LottoComparator;
+import lotto.domain.ticketresult.WinningLottoNumbers;
+import lotto.domain.ticketpurchase.PurchasedLottoTickets;
+import lotto.type.LottoMatchType;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
