@@ -19,7 +19,9 @@ public class LottoGenerator {
 
     public static List<Integer> makeNumbers() {
         Collections.shuffle(numbers);
-        return new ArrayList<>(numbers.subList(0, 6));
+        List<Integer> selectNumber = numbers.subList(0, 6);
+        Collections.sort(selectNumber);
+        return new ArrayList<>(selectNumber);
     }
 
     public static void generate(int minValue, int maxValue) {
