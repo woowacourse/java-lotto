@@ -36,13 +36,10 @@ public class LottoController {
         LottoNumber bonusBall = new LottoNumber(ValidateUtils.parseInt(inputView.inputValue()));
 
         List<Integer> hitCounts = lottoTickets.checkHitCount(winningTicket, bonusBall);
-        for (int i = 0; i < hitCounts.size(); i++) {
-            System.out.println(hitCounts.get(i));
-        }
         int totalReward = WinningResult.calculateTotalReward(hitCounts);
 
         OutputView.printWinningResultTitle();
         OutputView.printProfit(money.getProfit(totalReward));
-        System.out.println(WinningResult.toString(3));
+        System.out.println(WinningResult.toString(hitCounts));
     }
 }
