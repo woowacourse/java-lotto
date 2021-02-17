@@ -9,6 +9,11 @@ import lotto.domain.LottoNumber;
 
 public class LottoGenerator {
 
+  private static final int MAX_BOUND = 45;
+  private static final int BASE_BOUND = 1;
+  private static final int LOTTO_SIZE = 6;
+  private static final Random RANDOM = new Random();
+
   private LottoGenerator() {
   }
 
@@ -17,11 +22,10 @@ public class LottoGenerator {
   }
 
   private static List<LottoNumber> createRandomNumber() {
-    Random random = new Random();
-    return Stream.generate(() -> random
-        .nextInt(45) + 1)
+    return Stream.generate(() -> RANDOM
+        .nextInt(MAX_BOUND) + BASE_BOUND)
         .distinct()
-        .limit(6)
+        .limit(LOTTO_SIZE)
         .map(LottoNumber::of)
         .collect(Collectors.toList());
   }
