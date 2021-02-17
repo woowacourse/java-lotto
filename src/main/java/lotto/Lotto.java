@@ -15,13 +15,17 @@ public class Lotto {
     }
 
     public static Lotto fromGenerator(LottoNumberGenerator generator) {
-        List<Integer> numbers = generator.generateNumbers();
+        return fromNumbers(generator.generateNumbers());
+    }
 
-        if (!matchesLength(numbers.size())) {
+    public static Lotto fromNumbers(List<Integer> numbers) {
+        Set<LottoNumber> lottoNumbers = mapIntToLottoNumber(numbers);
+
+        if (!matchesLength(lottoNumbers.size())) {
             throw new IllegalArgumentException();
         }
 
-        return new Lotto(mapIntToLottoNumber(numbers));
+        return new Lotto(lottoNumbers);
     }
 
     private static boolean matchesLength(int size) {
@@ -32,5 +36,13 @@ public class Lotto {
         return numbers.stream()
                       .map(LottoNumber::from)
                       .collect(Collectors.toSet());
+    }
+
+    public boolean contains(LottoNumber number) {
+        return lottoNumbers.contains(number);
+    }
+
+    public long findMatchingCount(Lotto lotto) {
+        return this.lottoNumbers.stream().filter(lotto::contains).count();
     }
 }
