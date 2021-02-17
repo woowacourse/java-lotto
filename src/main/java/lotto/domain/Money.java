@@ -15,14 +15,14 @@ public class Money {
         this.money = Integer.parseInt(money);
     }
 
+    public int lottoQuantity() {
+        return this.money / LOTTO_PRICE;
+    }
+
     private void validate(String money) {
         if (!pattern.matcher(money).matches()) {
             throw new InvalidMoneyException();
         }
-    }
-
-    public int lottoQuantity() {
-        return this.money / LOTTO_PRICE;
     }
 
     @Override

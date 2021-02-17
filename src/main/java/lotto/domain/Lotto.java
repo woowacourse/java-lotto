@@ -9,6 +9,10 @@ public class Lotto {
         numbers = values;
     }
 
+    public List<Integer> values() {
+        return Collections.unmodifiableList(numbers);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -20,16 +24,5 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hash(numbers);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder output = new StringBuilder();
-        output.append("<");
-        for (int i=0; i<numbers.size(); i++) {
-            output.append(numbers.get(i) + ", ");
-        }
-        output.append(">");
-        return output.toString();
     }
 }

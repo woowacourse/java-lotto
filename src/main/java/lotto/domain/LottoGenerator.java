@@ -11,7 +11,7 @@ public class LottoGenerator {
 
     public static List<Lotto> makeLottos(int amount) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i=0; i<amount; i++) {
+        for (int i = 0; i < amount; i++) {
             lottos.add(new Lotto(makeNumbers()));
         }
         return lottos;
@@ -19,7 +19,7 @@ public class LottoGenerator {
 
     public static List<Integer> makeNumbers() {
         Collections.shuffle(numbers);
-        return numbers.subList(0, 6);
+        return new ArrayList<>(numbers.subList(0, 6));
     }
 
     public static void generate(int minValue, int maxValue) {
