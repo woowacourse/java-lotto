@@ -1,7 +1,5 @@
 package lotto;
 
-import java.util.ArrayList;
-
 public class LottoController {
     private static Lottos lottos;
     private static WinningLotto winningLotto;
@@ -30,10 +28,16 @@ public class LottoController {
 
     public static void drawResult() {
         LottoView.displayResultMessage();
+        countEachRank();
+        countByRank.forEach((rank, rankCount) ->
+            LottoView.displayResult(rank, rankCount));
+    }
+
+    private static void countEachRank() {
         for (int i = 1; i < Rank.values().length; i++) {
             Rank rank = Rank.values()[i];
             int rankCount = (int) wins.stream().filter(win -> win == rank).count();
-            LottoView.displayResult(rank, rankCount);
+            countByRank.put(rank, rankCount);
         }
     }
 }
