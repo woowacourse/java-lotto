@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.view.OutputView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -62,6 +63,7 @@ class LottoTicketsTest {
     void calculateProfitRate() {
         Money money = new Money(2000);
         double profitRate = lottoTickets.calculateProfitRate(money, result);
+        OutputView.printLottoTickets(lottoTickets);
         assertThat(profitRate).isEqualTo(1015000.0);
     }
 }
