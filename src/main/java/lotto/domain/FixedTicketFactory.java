@@ -2,10 +2,15 @@ package lotto.domain;
 
 import java.util.Set;
 import java.util.stream.Collectors;
+import lotto.exception.LottoCustomException;
 
 public class FixedTicketFactory {
+    private static final int EXACT_SIZE = 6;
 
     public static LottoTicket makeTicket(Set<String> lottoNumbers) {
+        if(!isProperSize(lottoNumbers)){
+            throw new LottoCustomException("당첨번호는 6개여야 합니다.");
+        }
         return new LottoTicket(getFixedLottoNumbers(lottoNumbers));
     }
 
@@ -14,5 +19,9 @@ public class FixedTicketFactory {
             .stream()
             .map(LottoNumber::new)
             .collect(Collectors.toSet());
+    }
+
+    private static boolean isProperSize(Set<String> lottoNumbers) {
+        return lottoNumbers.size() == EXACT_SIZE;
     }
 }

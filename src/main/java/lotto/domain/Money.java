@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Objects;
+import lotto.exception.LottoCustomException;
 
 public class Money {
 
@@ -23,7 +24,7 @@ public class Money {
 
     private void validateMoneyLimit(final int money) {
         if (money < MIN_MONEY_UNIT) {
-            throw new IllegalArgumentException("입력 금액은 1000원 이상이어야 합니다.");
+            throw new LottoCustomException("입력 금액은 1000원 이상이어야 합니다.");
         }
     }
 

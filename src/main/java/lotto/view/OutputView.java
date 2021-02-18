@@ -5,6 +5,8 @@ import lotto.domain.LottoTickets;
 
 public class OutputView {
 
+    public static final void printErrorMessage(String message) { System.out.println(message); }
+
     public static final void printMoneyMessage() {
         System.out.println("구입금액을 입력해 주세요.");
     }
