@@ -65,10 +65,6 @@ public class OutputView {
                 .forEach(entry -> printEachStatistics(entry));
     }
 
-    public static void printFinalResult(int earning) {
-        System.out.printf(FINAL_RESULT, earning);
-    }
-
     private static void printEachStatistics(Map.Entry<LottoRank, Integer> entry) {
         if (entry.getKey().equals(LottoRank.SECOND_PLACE)) {
             System.out.printf((EACH_RESULT_WITH_BONUS) + NEW_LINE, entry.getKey().getMatches(),
@@ -77,5 +73,9 @@ public class OutputView {
         }
         System.out.printf((EACH_RESULT) + NEW_LINE, entry.getKey().getMatches(),
                 entry.getKey().getReward(), entry.getValue());
+    }
+
+    public static void printFinalResult(LottoResultStatistics lottoResultStatistics, Money money) {
+        System.out.printf(FINAL_RESULT, lottoResultStatistics.calculateEarning(money));
     }
 }

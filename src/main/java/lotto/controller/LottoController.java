@@ -46,6 +46,6 @@ public class LottoController {
                 LottoResultStatistics.getResultStatistics(lottoTickets, lottoWinner);
         OutputView.printStatistics(lottoResultStatistics);
 
-        OutputView.printFinalResult(30);
+        OutputView.printFinalResult(lottoResultStatistics, money);
     }
 }
