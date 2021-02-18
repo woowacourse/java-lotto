@@ -2,9 +2,9 @@ package lotto.domain;
 
 public class Money {
 
-    private int money;
+    private final int money;
 
-    public Money(String money){
+    public Money(String money) {
         validateNumber(money);
         validateMoneyLowerThan1000(money);
         this.money = Integer.parseInt(money);
@@ -29,7 +29,7 @@ public class Money {
     }
 
     public float calculateProfitRate(float profit) {
-        return profit/money;
+        return profit / money;
     }
 
     @Override

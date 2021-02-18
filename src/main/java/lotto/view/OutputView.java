@@ -11,8 +11,8 @@ import java.util.List;
 public class OutputView {
     public static void showLottos(Lottos lottos) {
         System.out.printf("%d개를 구매했습니다.\n", lottos.getNumberOfLotto());
-        for(Lotto lotto : lottos.getLottos()){
-            System.out.println(lotto.getNumbers());
+        for (Lotto lotto : lottos.getLottos()) {
+            System.out.println(lotto.getLottoSummary());
         }
     }
 
@@ -25,8 +25,8 @@ public class OutputView {
         String[] bonus = new String[5];
         Arrays.fill(bonus, " ");
         bonus[3] = ", 보너스 볼 일치";
-        for (int i = 1; i < Result.values().length ; i++) {
-            System.out.printf("%d개 일치%s(%d원)- %d개\n", values.get(i).getCount(),bonus[i-1], values.get(i).getPrize(), statistics.get(i-1));
+        for (int i = 1; i < Result.values().length; i++) {
+            System.out.printf("%d개 일치%s(%d원)- %d개\n", values.get(i).getCount(), bonus[i - 1], values.get(i).getPrize(), statistics.get(i - 1));
         }
         System.out.printf("총 수익률은 %.2f입니다.\n", profit);
     }

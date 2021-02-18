@@ -18,7 +18,7 @@ public class LottoTest {
 
     @BeforeEach
     void setUp() {
-        lottoNumbers= Arrays.asList(1, 2, 3, 20, 21, 40);
+        lottoNumbers = Arrays.asList(1, 2, 3, 20, 21, 40);
         lotto = new Lotto(lottoNumbers);
     }
 
@@ -32,7 +32,7 @@ public class LottoTest {
     }
 
     @Test
-    void bonusMatch(){
+    void bonusMatch() {
         int bonusNumber = 20;
         boolean match = lotto.isBonusMatch(bonusNumber);
 

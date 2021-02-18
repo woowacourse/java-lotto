@@ -12,19 +12,21 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public List<Lotto> getLottos() {
-        return lottos;
-    }
-
     public Lottos(int count) {
         this.count = count;
         this.lottos = createLottos();
     }
 
-    public List<Result> getResults(List<Integer> winningNumbers, int bonusNumber) {
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
+
+    public List<Result> getResults(WinningLotto winningLotto) {
+        List<Integer> winningLottoNumbers = winningLotto.getWinningLottoNumbers();
+        int bonusNumber = winningLotto.getBonusNumber();
         List<Result> results = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            int matches = lotto.countMatchingNumbers(winningNumbers);
+            int matches = lotto.countMatchingNumbers(winningLottoNumbers);
             boolean bonusMatch = lotto.isBonusMatch(bonusNumber);
             results.add(Result.getResult(matches, bonusMatch));
         }
@@ -32,10 +34,10 @@ public class Lottos {
     }
 
     private List<Lotto> createLottos() {
-        LottoNumber lottoNumber = new LottoNumber();
+        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
         List<Lotto> newLottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            newLottos.add(new Lotto(lottoNumber.make()));
+            newLottos.add(new Lotto(lottoNumberGenerator.make()));
         }
         return newLottos;
     }

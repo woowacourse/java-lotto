@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.Result;
+import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -18,12 +19,12 @@ public class Application {
         Lottos lottos = new Lottos(money.calculateNumberOfLotto());
         OutputView.showLottos(lottos);
 
-        List<Integer> winningNumbers = InputView.winningNumbers(scanner);
-        int bonusNumber = InputView.bonusNumber(scanner, winningNumbers);
+        WinningLotto winningLotto = new WinningLotto(
+                InputView.takeWinningNumbersInput(scanner),
+                InputView.takeBonusNumberInput(scanner)
+        );
 
-        // TODO:
-        //  Result에서 총 수익 계산하는 로직
-        List<Result> results = lottos.getResults(winningNumbers, bonusNumber);
+        List<Result> results = lottos.getResults(winningLotto);
         OutputView.result(results, money.calculateProfitRate(Result.calculateProfit(results)));
     }
 }

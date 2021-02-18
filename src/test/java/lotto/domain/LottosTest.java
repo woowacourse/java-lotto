@@ -23,7 +23,7 @@ public class LottosTest {
     void testEntireLottoMatching() {
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         int bonusNumber = 20;
-        List<Result> results = lottos.getResults(winningNumbers, bonusNumber);
+        List<Result> results = lottos.getResults(new WinningLotto(winningNumbers, bonusNumber));
 
         List<Result> expectedResults = Arrays.asList(Result.FIFTH, Result.NONE);
 

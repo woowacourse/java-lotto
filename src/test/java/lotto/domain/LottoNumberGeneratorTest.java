@@ -5,13 +5,12 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
-class LottoNumberTest {
+class LottoNumberGeneratorTest {
     @Test
-    void check_six(){
-        LottoNumber lottoNumber = new LottoNumber();
-        List<Integer> lottoNumbers = lottoNumber.make();
+    void check_six() {
+        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
+        List<Integer> lottoNumbers = lottoNumberGenerator.make();
 
         assertThat(lottoNumbers.size()).isEqualTo(6);
     }
