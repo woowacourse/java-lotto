@@ -46,10 +46,10 @@ public class OutputView {
     private static void printStatisticsMessage(LottoRank lottoRank, LottoStatistics lottoStatistics) {
         if (lottoRank == LottoRank.SECOND) {
             System.out.printf(LOTTO_STATISTICS_BONUS_BALL_MESSAGE, lottoRank.getMatchCounts(), lottoRank.getPrizeMoney(),
-                    lottoStatistics.getCounts(lottoRank));
+                    lottoStatistics.getCountsByRank(lottoRank));
             return;
         }
         System.out.printf(LOTTO_STATISTICS_MESSAGE, lottoRank.getMatchCounts(), lottoRank.getPrizeMoney(),
-                lottoStatistics.getCounts(lottoRank));
+                lottoStatistics.getCountsByRank(lottoRank));
     }
 }

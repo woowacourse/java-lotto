@@ -17,7 +17,8 @@ class LottoTicketsTest {
         WinningLottoTicket winningLottoTicket = WinningLottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 7), 6);
 
         LottoStatistics lottoStatistics = lottoTickets.getStatistics(winningLottoTicket);
+        int secondPrizeTicketCounts = (int) lottoStatistics.getCountsByRank(LottoRank.SECOND);
 
-        assertThat(lottoStatistics.getCounts(LottoRank.SECOND)).isEqualTo(3);
+        assertThat(secondPrizeTicketCounts).isEqualTo(3);
     }
 }

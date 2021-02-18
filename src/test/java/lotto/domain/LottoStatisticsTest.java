@@ -4,7 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,8 +23,8 @@ class LottoStatisticsTest {
     @DisplayName("로또 통계에서 각 순위별 당첨 티켓 개수를 가져온다. 없는 경우 0을 반환한다.")
     @Test
     void getCounts() {
-        assertThat(lottoStatistics.getCounts(LottoRank.FIRST)).isEqualTo(1);
-        assertThat(lottoStatistics.getCounts(LottoRank.SECOND)).isEqualTo(0);
+        assertThat(lottoStatistics.getCountsByRank(LottoRank.FIRST)).isEqualTo(1);
+        assertThat(lottoStatistics.getCountsByRank(LottoRank.SECOND)).isZero();
     }
 
     @DisplayName("구매 금액과 비교해 수익률을 계산한다.")
@@ -33,6 +34,6 @@ class LottoStatisticsTest {
 
         double yield = lottoStatistics.calculateYield(purchasingPrice);
 
-        assertThat(yield).isEqualTo(((double)2000000000) / 35477);
+        assertThat(yield).isEqualTo(((double) 2000000000) / 35477);
     }
 }
