@@ -25,5 +25,14 @@ public class OutputView {
                 .collect(Collectors.toList());
             System.out.println(lottoValues.toString());
         }
+        System.out.println();
+    }
+
+    public static void printWinningLottoGuideMessage() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+    }
+
+    public static void printWinningLottoBonusGuideMessage() {
+        System.out.println("보너스 볼을 입력해 주세요.");
     }
 }

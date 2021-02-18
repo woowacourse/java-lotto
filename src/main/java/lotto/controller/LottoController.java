@@ -3,8 +3,11 @@ package lotto.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 import lotto.domain.Money;
+import lotto.domain.WinningLotto;
 import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.lottogenerator.RandomLottoGenerator;
 import lotto.exception.LessThanLottoPriceException;
@@ -24,9 +27,10 @@ public class LottoController {
         Money purchaseAmount = inputPurchaseAmount();
         Lottos purchasedLottos = buyLotto(purchaseAmount);
         OutputView.printLottos(purchasedLottos);
-        // Lottos 구매한_로또들 = LottoStore.buyLotto(Money);
-        // WinningLotto 당첨_번호 = inputWinningLotto();
 
+        Lotto winningLottoNumber = inputWinningLotto();
+        int bonus = inputWinningBonus();
+        WinningLotto winningLotto = new WinningLotto(winningLottoNumber, bonus);
         // LottoResult 로또_결과 = Lottos.match(당첨_번호);
         // 로또 결과 출력
     }
@@ -34,7 +38,7 @@ public class LottoController {
     private Money inputPurchaseAmount() {
         try {
             OutputView.printPurchaseAmountGuideMessage();
-            int purchaseAmountValue = Integer.parseInt(inputView.inputPurchaseAmount());
+            int purchaseAmountValue = Integer.parseInt(inputView.inputValue());
             InputValidationUtils.validatePurchaseAmount(purchaseAmountValue);
             return Money.priceOf(purchaseAmountValue);
         } catch (Exception e) {
@@ -53,6 +57,32 @@ public class LottoController {
             availableLotto.add(Lotto.generatedBy(new RandomLottoGenerator()));
         }
         return new Lottos(availableLotto);
+    }
+
+    private Lotto inputWinningLotto() {
+        try {
+            OutputView.printWinningLottoGuideMessage();
+            List<Integer> winningLottoNumbers = inputView.inputWinningLottoNumbers()
+                .stream()
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+            return Lotto.of(winningLottoNumbers);
+        } catch (Exception e) {
+            OutputView.printExceptionMessage(e);
+            return inputWinningLotto();
+        }
+    }
+
+    private int inputWinningBonus() {
+        try {
+            OutputView.printWinningLottoBonusGuideMessage();
+            int bonusValue = Integer.parseInt(inputView.inputValue());
+            InputValidationUtils.validateWinningBonus(bonusValue);
+            return bonusValue;
+        } catch (Exception e) {
+            OutputView.printExceptionMessage(e);
+            return inputWinningBonus();
+        }
     }
 }
 

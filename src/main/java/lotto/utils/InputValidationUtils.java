@@ -9,4 +9,10 @@ public class InputValidationUtils {
             throw new LessThanLottoPriceException();
         }
     }
+
+    public static void validateWinningBonus(int value) {
+        if (value <= 0 || value > 45) {
+            throw new IllegalArgumentException("보너스 번호는 1부터 45사이의 값이어야 합니다.");
+        }
+    }
 }
