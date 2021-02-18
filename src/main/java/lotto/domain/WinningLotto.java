@@ -19,7 +19,7 @@ public class WinningLotto {
 
     private void validateBonusNumber(Lotto lotto, LottoNumber bonusNumber) {
         if (lotto.containNumber(bonusNumber)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("보너스 번호는 로또 번호와 중복될 수 없습니다.");
         }
     }
 
