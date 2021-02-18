@@ -39,7 +39,7 @@ public class Rewords {
         return LottoCalculator.divide(money, profit);
     }
 
-    public int matchCount(final Reword reword) {
+    private int matchCount(final Reword reword) {
         return (int) rewords.stream()
             .filter(value -> value == reword)
             .count();
