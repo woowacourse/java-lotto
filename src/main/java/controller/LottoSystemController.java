@@ -4,27 +4,43 @@ import domain.LottoSystem;
 import domain.Ranking;
 import domain.WinningNumbers;
 import domain.WinningResult;
+import java.util.Arrays;
 import view.InputView;
 import view.OutputView;
 
 public class LottoSystemController {
 
+    LottoSystem lottoSystem;
+    WinningResult winningResult;
+
     public void run() {
-        LottoSystem lottoSystem = LottoSystem.init(InputView.receivePrice());
+        buyLottoTickets();
+        decideWinningNumbers();
+        calculateResult();
+    }
+
+    private void buyLottoTickets() {
+        lottoSystem = LottoSystem.init(InputView.receivePrice());
         OutputView.printNumberOfTickets(lottoSystem.getLottoQuantity());
 
         OutputView.printLottoTickets(lottoSystem.getLottoTickets());
+    }
 
-        WinningResult winningResult = lottoSystem.getWinningResult(
+    private void decideWinningNumbers() {
+        winningResult = lottoSystem.getWinningResult(
                 WinningNumbers.valueOf(
                         InputView.receiveWinningNumbers(),
                         InputView.receiveBonusNumber()
                 ));
+    }
 
+    private void calculateResult() {
         OutputView.printRankResultTitle();
-        for (Ranking ranking : Ranking.values()) {
-            OutputView.printIndividualRankResult(winningResult.countNumberOfRank(ranking));
-        }
+        Arrays.stream(Ranking.values())
+                .filter(ranking -> ranking != Ranking.NOTHING)
+                        .forEach(ranking -> OutputView.printIndividualRankResult(
+                                winningResult.countNumberOfRank(ranking),
+                                ranking));
 
         OutputView.printTotalProfitRate(winningResult.getProfitRate());
     }
