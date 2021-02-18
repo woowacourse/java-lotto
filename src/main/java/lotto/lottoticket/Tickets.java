@@ -22,7 +22,7 @@ public class Tickets {
         List<Ranking> result = new ArrayList<>();
         for (Ticket ticket : tickets) {
             int matchCount = winnerTicket.findMatchCount(ticket);
-            boolean bonus = ticket.hasContainBonus(bonusBall);
+            boolean bonus = ticket.containsBonusBall(bonusBall);
             result.add(Ranking.makePrice(matchCount, bonus));
         }
         return result;

@@ -24,14 +24,14 @@ public class Ticket {
         return values;
     }
 
-    public int hasSameNumber(Integer number) {
+    public int countWithContaining(Integer number) {
         if (numbers.contains(number)) {
             return ONE_COUNT;
         }
         return ZERO;
     }
 
-    public boolean hasContainBonus(BonusBall bonusBall) {
+    public boolean containsBonusBall(BonusBall bonusBall) {
         return numbers.stream()
                 .anyMatch(bonusBall::isSameThan);
     }

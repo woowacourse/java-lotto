@@ -40,7 +40,7 @@ public class WinnerTicket {
     public int findMatchCount(Ticket ticket) {
         int matchCount = 0;
         for (Integer number : winnerTicket) {
-            matchCount += ticket.hasSameNumber(number);
+            matchCount += ticket.countWithContaining(number);
         }
         return matchCount;
     }

@@ -56,6 +56,6 @@ public class TicketTest {
         BonusBall bonusBall = new BonusBall("6", new WinnerTicket(("1, 2, 3, 4, 5, 8")));
         NumbersGenerator numbersGenerator = () -> Arrays.asList(1, 2, 3, 4, 5, 6);
         Ticket ticket = new Ticket(numbersGenerator);
-        assertTrue(ticket.hasContainBonus(bonusBall));
+        assertTrue(ticket.containsBonusBall(bonusBall));
     }
 }

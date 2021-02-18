@@ -9,10 +9,12 @@ public class TicketValidation {
     public static final String ERROR_MESSAGE_INVALID_INPUT = "잘못된 입력입니다.";
     public static final String ERROR_MESSAGE_INVALID_SIZE = "숫자는 6개여야 합니다.";
     public static final String ERROR_MESSAGE_INVALID_RANGE = "숫자는 1부터 45사이여야 합니다.";
+    private static final String SPACE = " ";
+    private static final String NON_SPACE = "";
 
     public static Integer validateNumber(String value) {
         try {
-            value = value.replace(" ", "");
+            value = value.replace(SPACE, NON_SPACE);
             return Integer.parseInt(value);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ERROR_MESSAGE_INVALID_INPUT);
