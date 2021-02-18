@@ -16,8 +16,4 @@ public class InputView {
     public String inputValue() {
         return scanner.nextLine();
     }
-
-    public Set<String> inputWinningNumbers() {
-        return new HashSet<String>(Arrays.asList(inputValue().split(",")));
-    }
 }

@@ -15,36 +15,36 @@ public enum WinningResult {
     FIRST(7, 2000000000, "6개 일치");
 
     private final int hitCount;
-    private final int reward;
+    private final int winnings;
     private final String message;
 
-    WinningResult(int hitCount, int reward, String message) {
+    WinningResult(int hitCount, int winnings, String message) {
         this.hitCount = hitCount;
-        this.reward = reward;
+        this.winnings = winnings;
         this.message = message;
     }
 
-    public static int calculateTotalReward(List<Integer> hitCounts) {
+    public static int calculateWinnings(List<Integer> hitCounts) {
         int totalReward = 0;
         for (int i = FIFTH.hitCount; i <= FIRST.hitCount; i++) {
-            totalReward += hitCounts.get(i) * findReward(i);
+            totalReward += hitCounts.get(i) * getWinnings(i);
         }
         return totalReward;
     }
 
-    private static int findReward(int count) {
+    private static int getWinnings(int count) {
         return Arrays.stream(values())
                 .filter(value -> count == value.hitCount)
                 .findFirst()
                 .get()
-                .reward;
+                .winnings;
     }
 
     public static String toString(List<Integer> hitCounts) {
         StringBuilder stringBuilder = new StringBuilder();
         IntStream.rangeClosed(FIFTH.hitCount, FIRST.hitCount).forEach(index -> {
             WinningResult winningResult = find(index);
-            stringBuilder.append(winningResult.message + " (" + winningResult.reward + ")원 - " +
+            stringBuilder.append(winningResult.message + " (" + winningResult.winnings + ")원 - " +
                     hitCounts.get(index) + "개" + System.lineSeparator());
 
         });

@@ -1,7 +1,7 @@
 package lotto.controller;
 
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
+
 import lotto.domain.ticketfactory.FixedTicketFactory;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
@@ -23,10 +23,10 @@ public class LottoController {
 
     public void run() {
         Money money = inputMoney();
-        LottoTickets lottoTickets = buyTickets(money);
+        LottoTickets lottoTickets = buyLottoTickets(money);
 
-        LottoTicket winningTicket = inputWinningNumbers();
-        LottoNumber bonusBall = inputBonus(winningTicket);
+        LottoTicket winningTicket = makeWinningTicket();
+        LottoNumber bonusBall = makeBonusNumber(winningTicket);
 
         showResult(money, lottoTickets, winningTicket, bonusBall);
     }
@@ -43,24 +43,29 @@ public class LottoController {
         }
     }
 
-    private LottoTickets buyTickets(Money money) {
+    private LottoTickets buyLottoTickets(Money money) {
         LottoTickets lottoTickets = new LottoTickets();
         lottoTickets.makeTicketByCount(money.getTicketCount());
         OutputView.printAllTickets(lottoTickets);
         return lottoTickets;
     }
 
-    private LottoTicket inputWinningNumbers() {
+    private LottoTicket makeWinningTicket() {
         try {
             OutputView.printWinningNumbers();
-            return FixedTicketFactory.makeTicket(inputView.inputWinningNumbers());
+            return FixedTicketFactory
+                    .makeTicket(splitWinningNumbers(inputView.inputValue()));
         } catch (LottoCustomException e) {
             OutputView.printErrorMessage(e.getMessage());
-            return inputWinningNumbers();
+            return makeWinningTicket();
         }
     }
 
-    private LottoNumber inputBonus(LottoTicket winningTicket) {
+    private Set<String> splitWinningNumbers(String winningNumbers) {
+        return new HashSet<>(Arrays.asList(winningNumbers.split(",")));
+    }
+
+    private LottoNumber makeBonusNumber(LottoTicket winningTicket) {
         try {
             OutputView.printBonusNumber();
             LottoNumber bonusBall = new LottoNumber(ValidateUtils.parseInt(inputView.inputValue()));
@@ -68,17 +73,17 @@ public class LottoController {
             return bonusBall;
         } catch (LottoCustomException e) {
             OutputView.printErrorMessage(e.getMessage());
-            return inputBonus(winningTicket);
+            return makeBonusNumber(winningTicket);
         }
     }
 
-    private void showResult(Money money, LottoTickets lottoTickets, LottoTicket winningTicket,
-        LottoNumber bonusBall) {
+    private void showResult(Money money,
+                            LottoTickets lottoTickets,
+                            LottoTicket winningTicket,
+                            LottoNumber bonusBall) {
         List<Integer> hitCounts = lottoTickets.checkHitCount(winningTicket, bonusBall);
-        int totalReward = WinningResult.calculateTotalReward(hitCounts);
-
-        OutputView.printWinningResultTitle();
-        OutputView.printProfit(money.getProfit(totalReward));
-        System.out.println(WinningResult.toString(hitCounts));
+        int totalReward = WinningResult.calculateWinnings(hitCounts);
+        OutputView.printTotalWinningResult(money.getProfit(totalReward),
+                WinningResult.toString(hitCounts));
     }
 }

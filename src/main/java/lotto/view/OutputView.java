@@ -5,11 +5,13 @@ import lotto.domain.LottoTickets;
 
 public class OutputView {
 
-    public static final void printErrorMessage(String message) {
+    private OutputView() {}
+
+    public static void printErrorMessage(String message) {
         System.out.println(message);
     }
 
-    public static final void printMoneyMessage() {
+    public static void printMoneyMessage() {
         System.out.println("구입금액을 입력해 주세요.");
     }
 
@@ -29,9 +31,11 @@ public class OutputView {
         System.out.println("지난 주 당첨 번호를 입력해주세요.");
     }
 
-    public static void printWinningResultTitle() {
+    public static void printTotalWinningResult(float profit, String winningResult) {
         System.out.println("당첨 통계");
         printSplitLine();
+        printProfit(profit);
+        System.out.println(winningResult);
     }
 
     public static void printProfit(float profit) {
