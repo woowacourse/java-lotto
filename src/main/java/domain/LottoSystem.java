@@ -7,15 +7,14 @@ public class LottoSystem {
     private final Price price;
     private final List<LottoTicket> lottoTickets;
 
-    private LottoSystem(final Price price, final WinningNumbers winningNumbers) {
+    private LottoSystem(final Price price) {
         this.price = price;
         LottoMachine lottoMachine = LottoMachine.valueOf(price);
         this.lottoTickets = lottoMachine.generateLottoTickets();
     }
 
-    public static LottoSystem init(final String price, final List<Integer> winningNumbers,
-            final int bonusNumber) {
-        return new LottoSystem(Price.valueOf(price), WinningNumbers.valueOf(winningNumbers, bonusNumber));
+    public static LottoSystem init(final String price) {
+        return new LottoSystem(Price.valueOf(price));
     }
 
     public List<LottoTicket> getLottoTickets() {

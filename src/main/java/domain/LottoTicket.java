@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -62,5 +63,9 @@ public class LottoTicket {
 
     public boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
+    }
+
+    public List<LottoNumber> toList() {
+        return Collections.unmodifiableList(lottoNumbers);
     }
 }
