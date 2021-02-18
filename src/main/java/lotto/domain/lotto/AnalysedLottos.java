@@ -3,6 +3,7 @@ package lotto.domain.lotto;
 import static java.util.Comparator.comparingInt;
 import static java.util.stream.Collectors.toList;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -17,9 +18,8 @@ public class AnalysedLottos {
     private final List<Rank> ranks;
     private final double yield;
 
-    public AnalysedLottos(Map<Integer, Long> gameResult, PayOut payOut) {
-        this.ranks = IntStream.range(1, RankFactory.values().length)
-            .boxed()
+    public AnalysedLottos(Map<RankFactory, Long> gameResult, PayOut payOut) {
+        this.ranks = Arrays.stream(RankFactory.values())
             .map(key -> RankFactory.createRanking(key, gameResult.getOrDefault(key, 0L)))
             .sorted(comparingInt(Rank::getRank))
             .collect(toList());

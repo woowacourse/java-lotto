@@ -59,23 +59,23 @@ public class WinningNumber {
     }
 
     public AnalysedLottos analysingLottos(LottoGroup lottoGroup, PayOut payOut) {
-        Map<Integer, Long> rankAndCount = lottoGroup.getLottos().stream()
+        Map<RankFactory, Long> rankAndCount = lottoGroup.getLottos().stream()
             .map(this::getRank)
-            .filter(rank -> RankFactory.FAIL.getRank() != rank)
+            .filter(rank -> !rank.equals(RankFactory.FAIL))
             .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
-        IntStream.range(1, RankFactory.values().length)
-            .filter(rank -> !rankAndCount.containsKey(rank))
-            .forEach(rank -> rankAndCount.put(rank, 0L));
+        Arrays.stream(RankFactory.values())
+                .filter(rank -> !rank.equals(RankFactory.FAIL) && !rankAndCount.containsKey(rank))
+                .forEach(rank -> rankAndCount.put(rank, 0L));
 
         return new AnalysedLottos(rankAndCount, payOut);
     }
 
-    private int getRank(LottoNumbers lottoNumbers) {
+    private RankFactory getRank(LottoNumbers lottoNumbers) {
         return RankFactory.getRank(
             this.lottoNumbers.getMatchCount(lottoNumbers),
             lottoNumbers.contains(bonusNumber)
-        ).getRank();
+        );
     }
 
     @Override

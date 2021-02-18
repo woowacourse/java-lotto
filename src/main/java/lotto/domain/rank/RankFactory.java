@@ -25,13 +25,13 @@ public enum RankFactory {
         this.ranking = count -> new Rank(rank, winnings, count, matchedNumber, hasBonusNumber);
     }
 
-    public int getRank() {
-        return rank;
+    public boolean isSameRank(int rank) {
+        return this.equals(rank);
     }
 
-    public static Rank createRanking(int rank, Long count) {
+    public static Rank createRanking(RankFactory rank, Long count) {
         return stream(RankFactory.values())
-                .filter(r -> r.rank == rank)
+                .filter(r -> r.equals(rank))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("매칭되는 등수가 없습니다."))
                 .ranking.apply(count);
