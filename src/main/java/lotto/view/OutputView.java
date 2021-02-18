@@ -13,7 +13,11 @@ public class OutputView {
     public static final String PROFIT_RATE_EXPRESSION = "총 수익률은 %.2f입니다.";
     public static final String PURCHASE_PIECE_EXPRESSION = "%d를 구매하였습니다.";
 
-    public void printPurchasedLottos(Lottos lottos) {
+    public static void printInputMessage(String message) {
+        System.out.println(message);
+    }
+
+    public static void printPurchasedLottos(Lottos lottos) {
         List <Lotto> lottoBunch = lottos.getLottoBunch() ;
         System.out.printf(PURCHASE_PIECE_EXPRESSION + System.lineSeparator(), lottoBunch.size());
         for (Lotto lotto : lottoBunch) {
@@ -22,7 +26,7 @@ public class OutputView {
         System.out.println();
     }
 
-    public void printLottoStatistics(Map<LottoRank, Integer> statistics, double profitRate) {
+    public static void printLottoStatistics(Map<LottoRank, Integer> statistics, double profitRate) {
         System.out.println("당첨 통계");
         System.out.println("---------");
         for (LottoRank key : statistics.keySet()) {
@@ -31,7 +35,7 @@ public class OutputView {
         System.out.printf(PROFIT_RATE_EXPRESSION + System.lineSeparator(), profitRate);
     }
     
-    private void printSingleResult(LottoRank key, int value) {
+    private static void printSingleResult(LottoRank key, int value) {
         if (key.equals(LottoRank.NONE)) {
             return;
         }

@@ -13,33 +13,24 @@ public class LottoStore {
 
     public static final int LOTTO_PRICE = 1000;
 
-    private final InputView inputView;
-    private final OutputView outputView;
-
-    public LottoStore() {
-        Scanner scanner = new Scanner(System.in);
-        inputView = new InputView(scanner);
-        outputView = new OutputView();
-    }
-
     public void process() {
         Lottos lottos = buyLotto();
-        List<Integer> winningNumbers = inputView.inputWinningNumbers();
-        int bonusNumber = inputView.inputBonusNumber();
+        List<Integer> winningNumbers = InputView.inputWinningNumbers();
+        int bonusNumber = InputView.inputBonusNumber();
         Map<LottoRank, Integer> lottoResultStatistics = lottos.getStatistics(winningNumbers, bonusNumber);
         printLottoResult(lottoResultStatistics, lottos);
     }
 
     public Lottos buyLotto() {
-        int possessedMoney = inputView.purchaseMoney();
+        int possessedMoney = InputView.inputMoney();
         Lottos purchasedLottos = new Lottos(calculateAffordableLottoPieces(possessedMoney));
-        outputView.printPurchasedLottos(purchasedLottos);
+        OutputView.printPurchasedLottos(purchasedLottos);
         return purchasedLottos;
     }
 
     public void printLottoResult(Map<LottoRank, Integer> lottoResultStatistics, Lottos lottos) {
         double profitRate = calculateProfitRate(lottoResultStatistics, lottos.getSize());
-        outputView.printLottoStatistics(lottoResultStatistics, profitRate);
+        OutputView.printLottoStatistics(lottoResultStatistics, profitRate);
     }
 
     public double calculateProfitRate(Map<LottoRank, Integer> exampleLottosResult, int lottoPiece) {
