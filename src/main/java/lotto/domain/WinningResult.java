@@ -13,6 +13,7 @@ public enum WinningResult {
     FIRST_PRIZE(7, 2000000000, "6개 일치");
 
     private static final String WINNING_INFO_MESSAGE = "%s (%d)원 - %d개\n";
+
     private final int hitCount;
     private final int winnings;
     private final String message;

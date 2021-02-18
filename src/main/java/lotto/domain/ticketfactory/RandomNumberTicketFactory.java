@@ -12,6 +12,7 @@ public class RandomNumberTicketFactory {
     private static final int LOTTO_NUMBER_MIN_LIMIT = 1;
     private static final int MIN_LOTTO_SIZE = 0;
     private static final int MAX_LOTTO_SIZE = 6;
+
     private static Map<Integer, LottoNumber> lottoNumberFactory = new HashMap<>();
 
     static {

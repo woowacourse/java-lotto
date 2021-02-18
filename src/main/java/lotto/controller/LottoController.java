@@ -13,10 +13,11 @@ import java.util.stream.Collectors;
 public class LottoController {
     private static final int EXIST = 1;
     private static final String SEPARATOR = ",";
+
     private final InputView inputView;
 
-    public LottoController(final Scanner scanner) {
-        inputView = new InputView(scanner);
+    public LottoController() {
+        inputView = new InputView();
     }
 
     public void run() {
