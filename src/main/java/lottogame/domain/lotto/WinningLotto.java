@@ -20,7 +20,7 @@ public class WinningLotto {
         validateBonusNumber(bonusNumber);
         this.bonusNumber = Integer.parseInt(bonusNumber);
         isDuplicate(lotto, this.bonusNumber);
-        this.lotto = new Lotto(lotto);    // 당첨 번호 로또 생성
+        this.lotto = new Lotto(lotto);
     }
 
     private List<Integer> split(String numbers) {
@@ -31,14 +31,14 @@ public class WinningLotto {
                 .collect(Collectors.toList());
     }
 
-    private void validateBonusNumber(String bonusNumber) {
-        if (!BONUS_NUMBER_PATTERN.matcher(bonusNumber).matches()) {
+    private void validateInput(String numbers) {
+        if (!NUMBER_PATTERN.matcher(numbers).matches()) {
             throw new InvalidWinningLottoException();
         }
     }
 
-    private void validateInput(String numbers) {
-        if (!NUMBER_PATTERN.matcher(numbers).matches()) {
+    private void validateBonusNumber(String bonusNumber) {
+        if (!BONUS_NUMBER_PATTERN.matcher(bonusNumber).matches()) {
             throw new InvalidWinningLottoException();
         }
     }
@@ -50,8 +50,8 @@ public class WinningLotto {
         }
     }
 
-    public Integer getBonusBall() {
-        return new Integer(this.bonusNumber);
+    public int getBonusBall() {
+        return this.bonusNumber;
     }
 
     public Lotto values() {
