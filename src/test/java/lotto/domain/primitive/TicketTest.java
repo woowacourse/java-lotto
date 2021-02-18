@@ -10,9 +10,9 @@ import org.junit.jupiter.api.Test;
 public class TicketTest {
 
     @Test
-    @DisplayName("티켓 가격 단위 확인")
-    void validateTicketPrice() {
-        assertThatThrownBy(() -> new Ticket(new Money(12345)))
-            .isInstanceOf(IllegalArgumentException.class).hasMessageContaining("원 단위");
+    @DisplayName("티켓을 구매 못하는 경우 확인")
+    void validateMinimumTicketPrice() {
+        assertThatThrownBy(() -> new Ticket(new Money(900)))
+            .isInstanceOf(IllegalArgumentException.class).hasMessageContaining("원 이상");
     }
 }
