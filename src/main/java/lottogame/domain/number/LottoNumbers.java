@@ -24,7 +24,6 @@ public class LottoNumbers {
         return lottoNumbers.contains(lottoNumber);
     }
 
-
     public List<LottoNumber> toList() {
         return Collections.unmodifiableList(new ArrayList<>(this.lottoNumbers));
     }

@@ -19,7 +19,7 @@ public class LottoNumberTest {
 
     @Test
     @DisplayName("LottoNumber를 -1로 생성하려 했을 때")
-    void lottoNumberValueIsNegativeNumber(){
+    void lottoNumberValueIsNegativeNumber() {
         String value = "-1";
         assertThatThrownBy(() -> {
             LottoNumber lottoNumber = new LottoNumber(value);
