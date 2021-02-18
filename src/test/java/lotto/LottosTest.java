@@ -51,8 +51,8 @@ public class LottosTest {
     void 당첨금액_계산() {
         Map<Rank, Integer> sampleCount = new HashMap<>();
         sampleCount.put(Rank.FIFTH, 1);
-        int earning = Lottos.findEarning(sampleCount);
-        assertThat(earning).isEqualTo(5000);
+        Lottos.findEarning(sampleCount);
+        assertThat(Lottos.getEarning()).isEqualTo(5000);
     }
 
     @Test
