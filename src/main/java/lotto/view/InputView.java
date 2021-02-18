@@ -17,7 +17,7 @@ public class InputView {
         try {
             return new Money(money);
         } catch (Exception e) {
-            OutputView.printError(e);
+            OutputView.printError(e.getMessage());
             return askMoney();
         }
     }
@@ -28,7 +28,7 @@ public class InputView {
         try {
             return makeWinningLottoNumbers(input);
         } catch (Exception e) {
-            OutputView.printError(e);
+            OutputView.printError(e.getMessage());
             return askLastWinningLottoNumber();
         }
     }
@@ -47,7 +47,7 @@ public class InputView {
         try {
             return new LottoNumber(bonusNumber);
         } catch (Exception e) {
-            OutputView.printError(e);
+            OutputView.printError(e.getMessage());
             return askBonusNumber();
         }
     }

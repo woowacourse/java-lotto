@@ -14,7 +14,7 @@ public class OutputView {
     public static final String RANK_BONUS_FORM = "%d개 일치, 보너스 볼 일치(%d원)- %d개" + System.lineSeparator();
 
 
-    public static void printMessage(final Object message) {
+    public static void printMessage(final String message) {
         System.out.println(message);
     }
 
@@ -22,14 +22,17 @@ public class OutputView {
         System.out.printf(format, message);
     }
 
-    public static void printError(Exception e) {
-        printMessage(System.lineSeparator() + e.getMessage() + System.lineSeparator());
+    public static void printError(String errorMessage) {
+        printMessage(System.lineSeparator() + errorMessage + System.lineSeparator());
     }
 
     public static void printEachLotto(final Lottos lottos) {
-        printMessageByFormat(LOTTO_PURCHASE_FORM, lottos.lottos().size());
-        lottos.lottos().forEach(OutputView::printOneLotto);
+        lottos.toList().forEach(OutputView::printOneLotto);
         System.out.println();
+    }
+
+    public static void printTotalNumberOfLotto(Lottos lottos) {
+        printMessageByFormat(LOTTO_PURCHASE_FORM, lottos.toList().size());
     }
 
     private static void printOneLotto(Lotto lotto) {

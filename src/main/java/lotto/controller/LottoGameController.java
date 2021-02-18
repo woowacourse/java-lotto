@@ -20,7 +20,10 @@ public class LottoGameController {
     private Lottos buyAutoLotto() {
         Money money = InputView.askMoney();
         Lottos lottos = lottoGame.buyLottos(money);
+
+        OutputView.printTotalNumberOfLotto(lottos);
         OutputView.printEachLotto(lottos);
+
         return lottos;
     }
 
@@ -28,7 +31,7 @@ public class LottoGameController {
         try {
             return new WinningLotto(winningLotto, bonusNumber);
         } catch (Exception e) {
-            OutputView.printError(e);
+            OutputView.printError(e.getMessage());
             bonusNumber = InputView.askBonusNumber();
             return makeWinningLotto(winningLotto, bonusNumber);
         }
@@ -38,7 +41,7 @@ public class LottoGameController {
         try {
             return new Lotto(InputView.askLastWinningLottoNumber());
         } catch (Exception e) {
-            OutputView.printError(e);
+            OutputView.printError(e.getMessage());
             return lastWinningLotto();
         }
     }
