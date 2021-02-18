@@ -16,7 +16,7 @@ public class LottoResult {
             .sum();
     }
 
-    public Map<Prize, Long> getLottoResult() {
-        return new HashMap<>(lottoResult);
+    public Long get(Prize prize){
+        return lottoResult.get(prize);
     }
 }

@@ -29,22 +29,22 @@ public class OutputView {
     public void printLottoResult(LottoResult lottoResult, int purchaseMoney) {
         System.out.println(WINNING_STATISTICS);
         System.out.println(DASHES);
-        printWinningResult(lottoResult.getLottoResult());
+        printWinningResult(lottoResult);
         printProfitRatio(purchaseMoney, lottoResult.calculatePrizeMoney());
     }
 
-    public void printWinningResult(Map<Prize, Long> resultMap) {
+    public void printWinningResult(LottoResult lottoResult) {
         Arrays.stream(Prize.values())
                 .filter(prize -> prize != Prize.LOSING)
                 .sorted(Comparator.comparing(Prize::getRank))
                 .sorted(Comparator.reverseOrder())
                 .forEach(prize ->
-                        System.out.println(makeWinningResultMessage(prize, resultMap))
+                        System.out.println(makeWinningResultMessage(prize, lottoResult))
                 );
     }
 
-    public String makeWinningResultMessage(Prize prize, Map<Prize, Long> resultMap) {
-        Long winningCount = resultMap.get(prize);
+    public String makeWinningResultMessage(Prize prize, LottoResult lottoResult) {
+        Long winningCount = lottoResult.get(prize);
         if (winningCount == null) {
             winningCount = 0L;
         }
