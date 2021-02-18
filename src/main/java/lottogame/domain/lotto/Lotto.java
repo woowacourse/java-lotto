@@ -1,5 +1,7 @@
 package lottogame.domain.lotto;
 
+import lottogame.utils.InvalidWinningLottoException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -8,6 +10,12 @@ public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> values) {
+        values.stream()
+                .filter(value -> !LottoGenerator.validNumber(value))
+                .findAny()
+                .ifPresent(value -> {
+                    throw new InvalidWinningLottoException();
+                });
         numbers = values;
     }
 

@@ -1,5 +1,6 @@
 package lottogame.domain.lotto;
 
+import lottogame.utils.InvalidBonusBallNumberException;
 import lottogame.utils.InvalidWinningLottoException;
 import lottogame.utils.RedundantNumbersException;
 
@@ -37,6 +38,17 @@ public class WinningLotto {
     }
 
     private void validateBonusNumber(String bonusNumber) {
+        validateBonusNumberInput(bonusNumber);
+        validRangeBonusNumber(bonusNumber);
+    }
+
+    private void validRangeBonusNumber(String bonusNumber) {
+        if (!LottoGenerator.validNumber(Integer.parseInt(bonusNumber))) {
+            throw new InvalidBonusBallNumberException();
+        }
+    }
+
+    private void validateBonusNumberInput(String bonusNumber) {
         if (!BONUS_NUMBER_PATTERN.matcher(bonusNumber).matches()) {
             throw new InvalidWinningLottoException();
         }

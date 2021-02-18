@@ -34,4 +34,8 @@ public class LottoGenerator {
                 .boxed()
                 .collect(Collectors.toList());
     }
+
+    public static boolean validNumber(int number) {
+        return number >= LOTTO_MIN && number <= LOTTO_MAX;
+    }
 }
