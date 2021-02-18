@@ -1,13 +1,14 @@
 package lotto.controller;
 
+import lotto.domain.LottoRank;
+import lotto.domain.Lottos;
+import lotto.domain.Money;
+import lotto.view.InputView;
+import lotto.view.OutputView;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Scanner;
-import lotto.domain.LottoRank;
-import lotto.domain.Lottos;
-import lotto.view.InputView;
-import lotto.view.OutputView;
 
 public class LottoStore {
 
@@ -22,8 +23,8 @@ public class LottoStore {
     }
 
     public Lottos buyLotto() {
-        int possessedMoney = InputView.inputMoney();
-        Lottos purchasedLottos = new Lottos(calculateAffordableLottoPieces(possessedMoney));
+        Money money = new Money(InputView.inputMoney());
+        Lottos purchasedLottos = new Lottos(calculateAffordableLottoPieces(money));
         OutputView.printPurchasedLottos(purchasedLottos);
         return purchasedLottos;
     }
@@ -43,8 +44,8 @@ public class LottoStore {
         return Math.round(rawProfitRate * 100) / 100.00;
     }
 
-    public int calculateAffordableLottoPieces(int money) {
-        return money / LOTTO_PRICE;
+    public int calculateAffordableLottoPieces(Money money) {
+        return money.getAffordableLottoPieces(LOTTO_PRICE);
     }
 
 }

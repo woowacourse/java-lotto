@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 import lotto.domain.Lotto;
 import lotto.domain.LottoRank;
 import lotto.domain.Lottos;
+import lotto.domain.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -32,10 +33,10 @@ public class LottoStoreTest {
 
     @ParameterizedTest
     @DisplayName("구입가능한 로또 매수 계산")
-    @CsvSource(value = {"14000,14", "10200,10", "500,0", "0,0"})
+    @CsvSource(value = {"14000,14", "10200,10", "500,0"})
     void calculateAffordableLottoPiecesTest(int money, int expectedLottoPieces) {
         LottoStore lottoStore = new LottoStore();
-        int calculatedLottoPieces = lottoStore.calculateAffordableLottoPieces(money);
+        int calculatedLottoPieces = lottoStore.calculateAffordableLottoPieces(new Money(money));
         assertThat(calculatedLottoPieces).isEqualTo(expectedLottoPieces);
     }
 
