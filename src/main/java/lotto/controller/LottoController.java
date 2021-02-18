@@ -4,18 +4,17 @@ import static java.util.stream.Collectors.*;
 
 import java.util.List;
 import java.util.function.Function;
-import lotto.domain.AutoLottoMachine;
-import lotto.domain.LottoMachine;
+import lotto.domain.machine.AutoLottoMachine;
+import lotto.domain.machine.LottoMachine;
 import lotto.domain.LottoResult;
-import lotto.domain.LottoTickets;
-import lotto.domain.WinningLottoTicket;
+import lotto.domain.ticket.LottoTickets;
+import lotto.domain.ticket.WinningLottoTicket;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
     private final InputView inputView;
     private final OutputView outputView;
-
     private LottoMachine lottoMachine;
 
     public LottoController(InputView inputView, OutputView outputView) {
@@ -27,7 +26,7 @@ public class LottoController {
         lottoMachine = new AutoLottoMachine();
 
         int lottoPurchaseMoney = inputView.takeLottoMoney();
-        //todo : lottoTickets 일급 콜렉션 생성
+
         LottoTickets lottoTickets = buyLottoTicket(lottoPurchaseMoney);
 
         WinningLottoTicket winningLottoTicket = createWinningLotto();

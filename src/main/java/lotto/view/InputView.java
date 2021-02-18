@@ -4,10 +4,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class InputView {
     private static final String COMMA = ",";
+    private static final String REQUEST_INPUT_MONEY_MSG = "구입 금액을 입력해주세요.";
+    private static final String MONEY_MUST_BE_DIGIT_MSG = "구입 금액은 숫자여야 합니다.";
+    private static final String REQUEST_INPUT_WINNING_NUMBERS_MSG = "지난주 당첨번호를 입력해주세요.";
+    private static final String REQUEST_BONUS_NUMBER_MSG = "보너스 번호를 입력해주세요.";
+    private static final String MUST_BE_DIGIT_ERROR_MSG = "숫자가 아닌 문자가 포함되어 있습니다.";
 
     private final Scanner scanner;
 
@@ -16,21 +20,21 @@ public class InputView {
     }
 
     public int takeLottoMoney() {
-        System.out.println("구입 금액을 입력해주세요.");
+        System.out.println(REQUEST_INPUT_MONEY_MSG);
         try {
             return inputDecimal();
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("구입 금액은 숫자여야 합니다.");
+            throw new IllegalArgumentException(MONEY_MUST_BE_DIGIT_MSG);
         }
     }
 
     public List<Integer> inputWinningNumbers() {
-        System.out.println("지난주 당첨번호를 입력해주세요.");
+        System.out.println(REQUEST_INPUT_WINNING_NUMBERS_MSG);
         return inputToIntegerList();
     }
 
     public int takeBonusNumber() {
-        System.out.println("보너스 번호를 입력해주세요.");
+        System.out.println(REQUEST_BONUS_NUMBER_MSG);
         return inputDecimal();
     }
 
@@ -49,11 +53,11 @@ public class InputView {
     private List<Integer> stringsToIntegers(List<String> strings) {
         try {
             return strings.stream()
-                .mapToInt(Integer::parseInt)
-                .boxed()
-                .collect(Collectors.toList());
+                    .mapToInt(Integer::parseInt)
+                    .boxed()
+                    .collect(Collectors.toList());
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자가 아닌 문자가 포함되어 있습니다.");
+            throw new IllegalArgumentException(MUST_BE_DIGIT_ERROR_MSG);
         }
     }
 }

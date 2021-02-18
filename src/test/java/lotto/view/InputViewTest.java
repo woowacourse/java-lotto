@@ -1,11 +1,12 @@
 package lotto.view;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
 import java.util.Scanner;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class InputViewTest {
     @DisplayName("입력받은 값이 숫자가 아니면 예외처리")
