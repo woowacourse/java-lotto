@@ -28,12 +28,8 @@ public class Money {
         return money / 1000;
     }
 
-    public float calculateProfit(int profit) {
+    public float calculateProfitRate(float profit) {
         return profit/money;
-    }
-
-    public int getMoney() {
-        return money;
     }
 
     @Override

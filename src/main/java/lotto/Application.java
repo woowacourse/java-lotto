@@ -24,6 +24,6 @@ public class Application {
         // TODO:
         //  Result에서 총 수익 계산하는 로직
         List<Result> results = lottos.getResults(winningNumbers, bonusNumber);
-        OutputView.result(results, money.calculateProfit(0));
+        OutputView.result(results, money.calculateProfitRate(Result.calculateProfit(results)));
     }
 }

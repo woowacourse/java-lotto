@@ -35,4 +35,21 @@ public class ResultTest {
         List<Integer> stats = Result.getStatistics(results);
         assertThat(stats).isEqualTo(Arrays.asList(1,0,0,1,0));
     }
+
+    @DisplayName("총 수익을 계산")
+    @Test
+    void calculateTotalProfit() {
+        List<Integer> winningNumbers = Arrays.asList(1,2,3,4,5,6);
+        int bonusNumber = 20;
+
+        Lotto lotto1 = new Lotto(Arrays.asList(1, 2, 3, 20, 21, 40)); // FIFTH
+        Lotto lotto2 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 20)); // SECOND
+        Lotto lotto3 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 20)); // SECOND
+        Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3));
+
+        List<Result> results = lottos.getResults(winningNumbers, bonusNumber);
+
+        float profit = Result.calculateProfit(results);
+        assertThat(profit).isEqualTo(60_005_000);
+    }
 }

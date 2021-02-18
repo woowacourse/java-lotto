@@ -3,11 +3,11 @@ package lotto.domain;
 import java.util.*;
 
 public enum Result {
-    FIRST(6,2000000000),
-    SECOND(5,30000000),
-    THIRD(5,1500000),
-    FOURTH(4,50000),
-    FIFTH(3,5000),
+    FIRST(6,2_000_000_000),
+    SECOND(5,30_000_000),
+    THIRD(5,1_500_000),
+    FOURTH(4,50_000),
+    FIFTH(3,5_000),
     NONE(0,0);
 
     private final int count;
@@ -34,7 +34,6 @@ public enum Result {
                 .orElse(NONE);
     }
 
-
     public static List<Integer> getStatistics(List<Result> results) {
         Map<Result, Integer> statistics = new LinkedHashMap<>();
         for (Result result : values()) {
@@ -47,5 +46,11 @@ public enum Result {
         List<Integer> firstToFifth = new ArrayList(statistics.values()).subList(0,5);
         Collections.reverse(firstToFifth);
         return firstToFifth;
+    }
+
+    public static float calculateProfit(List<Result> results) {
+        return (float) results.stream()
+                .map(Result::getPrize)
+                .reduce(0, (a, b) -> a + b);
     }
 }
