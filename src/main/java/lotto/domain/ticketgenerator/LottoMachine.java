@@ -11,6 +11,6 @@ public class LottoMachine {
     }
 
     public PurchasedLottoTickets purchaseLottoTicket(UserPurchase userPurchase) {
-        return lottoGenerator.generatePurchasedTickets(userPurchase.getNumberOfTicket());
+        return lottoGenerator.generatePurchasedTickets(userPurchase.getNumberOfTickets());
     }
 }

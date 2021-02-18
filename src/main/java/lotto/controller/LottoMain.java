@@ -13,13 +13,8 @@ public class LottoMain {
         LottoMachine lottoMachine = new LottoMachine();
         UserPurchase userPurchase = getUserPurchaseInput();
         PurchasedLottoTickets purchasedLottoTickets
-            = lottoMachine.purchaseLottoTicket(userPurchase);
-        OutputView.printPurchasedLottoTickets(purchasedLottoTickets);
-
-        WinningLottoNumbers winningLottoNumbers = getWinningLottoNumbersInput();
-        LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
-        OutputView.printResult(lottoComparator.getLottoResult(purchasedLottoTickets),
-            userPurchase.getPurchasePrice());
+            = purchaseLottoTickets(lottoMachine, userPurchase);
+        checkLottoResult(userPurchase, purchasedLottoTickets);
     }
 
     private static UserPurchase getUserPurchaseInput() {
@@ -29,6 +24,22 @@ public class LottoMain {
             System.out.println(e.getMessage());
             return getUserPurchaseInput();
         }
+    }
+
+    private static PurchasedLottoTickets purchaseLottoTickets(LottoMachine lottoMachine,
+        UserPurchase userPurchase) {
+        PurchasedLottoTickets purchasedLottoTickets
+            = lottoMachine.purchaseLottoTicket(userPurchase);
+        OutputView.printPurchasedLottoTickets(purchasedLottoTickets);
+        return purchasedLottoTickets;
+    }
+
+    private static void checkLottoResult(UserPurchase userPurchase,
+        PurchasedLottoTickets purchasedLottoTickets) {
+        WinningLottoNumbers winningLottoNumbers = getWinningLottoNumbersInput();
+        LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
+        OutputView.printResult(lottoComparator.getLottoResult(purchasedLottoTickets),
+            userPurchase.getPurchasePrice());
     }
 
     private static WinningLottoNumbers getWinningLottoNumbersInput() {

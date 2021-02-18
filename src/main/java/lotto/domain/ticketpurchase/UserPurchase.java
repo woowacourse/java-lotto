@@ -5,16 +5,16 @@ public class UserPurchase {
     private static final int ZERO = 0;
 
     private final int purchasePrice;
-    private final int numberOfTicket;
+    private final int numberOfTickets;
 
     public UserPurchase(int purchasePrice) {
         validateExactlyDividedByOneTicketPrice(purchasePrice);
         this.purchasePrice = purchasePrice;
-        this.numberOfTicket = purchasePrice / ONE_TICKET_PRICE;
+        this.numberOfTickets = purchasePrice / ONE_TICKET_PRICE;
     }
 
-    public int getNumberOfTicket() {
-        return this.numberOfTicket;
+    public int getNumberOfTickets() {
+        return this.numberOfTickets;
     }
 
     public int getPurchasePrice() {

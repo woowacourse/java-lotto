@@ -29,6 +29,6 @@ public class UserPurchaseTest {
     @Test
     void Should_ReturnNumberOfTickets_When_ExactlyDividedByThousand() {
         UserPurchase userPurchase = new UserPurchase(21000);
-        assertThat(userPurchase.getNumberOfTicket()).isEqualTo(21);
+        assertThat(userPurchase.getNumberOfTickets()).isEqualTo(21);
     }
 }

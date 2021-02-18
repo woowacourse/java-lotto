@@ -9,7 +9,7 @@ import lotto.domain.ticketpurchase.PurchasedLottoTickets;
 
 public class LottoGenerator {
     private static final int ZERO = 0;
-    private static final int SIZE = 6;
+    private static final int LOTTO_NUMBERS_SIZE = 6;
     private final List<LottoNumber> allNumbers;
 
     public LottoGenerator() {
@@ -19,12 +19,13 @@ public class LottoGenerator {
         }
     }
 
-    public PurchasedLottoTickets generatePurchasedTickets(int numberOfTicket) {
+    public PurchasedLottoTickets generatePurchasedTickets(int numberOfTickets) {
         PurchasedLottoTickets purchasedLottoTickets = new PurchasedLottoTickets();
-        for (int i = 0; i < numberOfTicket; i++) {
+        for (int i = 0; i < numberOfTickets; i++) {
             Collections.shuffle(allNumbers);
-            purchasedLottoTickets
-                .add(new LottoTicket(new ArrayList<>(allNumbers.subList(ZERO, SIZE))));
+            LottoTicket newLottoTicket
+                = new LottoTicket(allNumbers.subList(ZERO, LOTTO_NUMBERS_SIZE));
+            purchasedLottoTickets.add(newLottoTicket);
         }
         return purchasedLottoTickets;
     }
