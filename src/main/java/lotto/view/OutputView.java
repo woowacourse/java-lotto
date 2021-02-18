@@ -30,9 +30,11 @@ public class OutputView {
                     .collect(Collectors.joining(", ", "[", "]"));
             System.out.println(numbers);
         }
+        System.out.println();
     }
 
     public static void printLottoResult(LottoStatistics lottoStatistics, PurchasingPrice purchasingPrice) {
+        System.out.println();
         System.out.println(RESULT_MESSAGE);
         System.out.println(HYPHENS);
         Arrays.stream(LottoRank.values())
