@@ -1,4 +1,4 @@
-package lotto.domain.lotto;
+package lotto.domain;
 
 import java.util.Objects;
 
@@ -24,6 +24,17 @@ public class Money {
 
     public Money minus(int price) {
         return Money.priceOf(this.price - price);
+    }
+
+    public boolean isLessThan(int price) {
+        if (this.price < price) {
+            return true;
+        }
+        return false;
+    }
+
+    public int getPrice() {
+        return price;
     }
 
     @Override
