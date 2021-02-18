@@ -45,4 +45,8 @@ public enum Ranking {
                 .findFirst()
                 .orElse(NOTHING);
     }
+
+    public int getMoney() {
+        return money;
+    }
 }

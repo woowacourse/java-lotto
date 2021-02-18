@@ -21,5 +21,4 @@ public class LottoMachineTest {
         LottoMachine lottoMachine = LottoMachine.valueOf(Price.valueOf("14000"));
         assertThat(lottoMachine.generateLottoTickets().size()).isEqualTo(14);
     }
-    //
 }
