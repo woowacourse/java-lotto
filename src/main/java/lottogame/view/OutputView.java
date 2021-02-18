@@ -29,10 +29,10 @@ public class OutputView {
     }
 
     public static void printResult(LottoResults results) {
-        System.out.println("당첨 통계");
+        System.out.println("\n당첨 통계");
         System.out.println("---------");
         printSummary(results);
-        System.out.printf("총 수익률은 %f입니다.\n", results.getProfit());
+        System.out.printf("총 수익률은 %.2f입니다.\n", results.getProfit());
     }
 
     private static void printSummary(LottoResults results) {
