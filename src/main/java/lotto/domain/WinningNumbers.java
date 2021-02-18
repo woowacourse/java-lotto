@@ -17,15 +17,15 @@ public class WinningNumbers {
         this.bonusBall = bonusBall;
     }
 
-    //Todo :  private 수정해야함
-    public int countMatches(LottoTicket lottoTicket) {
-        return (int) lottoTicket.getUnmodifiableList().stream()
-                .filter(this.lottoTicket::contains)
-                .count();
-    }
-
     public Rank getRank(LottoTicket lottoTicket) {
         return Rank.getInstance(countMatches(lottoTicket), lottoTicket.contains(bonusBall));
+    }
+
+    //Todo :  private 수정해야함
+    public int countMatches(LottoTicket lottoTicket) {
+        return (int) lottoTicket.toUnmodifiableList().stream()
+                .filter(this.lottoTicket::contains)
+                .count();
     }
 
 }

@@ -71,13 +71,13 @@ class LottoNumberTest {
     void getNumber() {
         LottoNumber lottoNumber = new LottoNumber(1);
 
-        assertThat(lottoNumber.getNumber()).isEqualTo(1);
+        assertThat(lottoNumber.toInt()).isEqualTo(1);
     }
 
     @Test
     void getNumber2() {
         LottoNumber lottoNumber = new LottoNumber(2);
 
-        assertThat(lottoNumber.getNumber()).isEqualTo(2);
+        assertThat(lottoNumber.toInt()).isEqualTo(2);
     }
 }

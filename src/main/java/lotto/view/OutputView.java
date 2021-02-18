@@ -53,8 +53,8 @@ public class OutputView {
     public static void printTickets(List<LottoTicket> lottoTickets) {
         System.out.printf("%d개를 구매했습니다.\n", lottoTickets.size());
         for (LottoTicket lottoTicket : lottoTickets) {
-            String numbers = lottoTicket.getUnmodifiableList().stream()
-                    .map(lottoNumber -> Integer.toString(lottoNumber.getNumber()))
+            String numbers = lottoTicket.toUnmodifiableList().stream()
+                    .map(lottoNumber -> Integer.toString(lottoNumber.toInt()))
                     .collect(Collectors.joining(", "));
             System.out.println("[" + numbers + "]");
         }

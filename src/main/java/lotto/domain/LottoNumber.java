@@ -4,12 +4,15 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class LottoNumber {
-    private static final String IS_NUMBER = "\\d+";
+
+    private static final Pattern DIGIT_PATTERN = Pattern.compile("\\d+");
+    public static final int MINIMUM_VALUE = 1;
+    public static final int MAXIMUM_VALUE = 45;
 
     private final int number;
 
     public LottoNumber(int number) {
-        if (number < 1 || 45 < number) {
+        if (number < MINIMUM_VALUE || MAXIMUM_VALUE < number) {
             throw new RuntimeException();
         }
         this.number = number;
@@ -21,13 +24,14 @@ public class LottoNumber {
 
     private static int convertToLottoNumber(String numberValue) {
         numberValue = numberValue.trim();
-        if (!Pattern.matches(IS_NUMBER, numberValue)) {
+
+        if (!DIGIT_PATTERN.matcher(numberValue).matches()) {
             throw new RuntimeException();
         }
         return Integer.parseInt(numberValue);
     }
 
-    public int getNumber() {
+    public int toInt() {
         return number;
     }
 
@@ -47,5 +51,4 @@ public class LottoNumber {
     public int hashCode() {
         return Objects.hash(number);
     }
-
 }

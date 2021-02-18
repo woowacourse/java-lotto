@@ -42,8 +42,7 @@ public class LottoTicket {
         return lottoNumbers.contains(bonusBall);
     }
 
-    public List<LottoNumber> getUnmodifiableList() {
+    public List<LottoNumber> toUnmodifiableList() {
         return Collections.unmodifiableList(lottoNumbers);
     }
-
 }
