@@ -14,9 +14,10 @@ public class LottoNumber {
         this.number = number;
     }
 
-    LottoNumber(final String number) {
+    public LottoNumber(final String number) {
         this(ValidateUtils.parseInt(number));
     }
+
 
     private boolean isNotProperRange(int number) {
         return !(number >= 1 && number <= 45);

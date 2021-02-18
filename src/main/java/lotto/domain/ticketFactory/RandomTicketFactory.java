@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.ticketFactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
 
 public class RandomTicketFactory {
 

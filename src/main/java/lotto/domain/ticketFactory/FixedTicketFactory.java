@@ -1,7 +1,9 @@
-package lotto.domain;
+package lotto.domain.ticketFactory;
 
 import java.util.Set;
 import java.util.stream.Collectors;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
 import lotto.exception.LottoCustomException;
 
 public class FixedTicketFactory {
