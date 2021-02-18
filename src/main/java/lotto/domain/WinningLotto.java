@@ -7,11 +7,11 @@ public class WinningLotto {
     public static final double SECOND_RANK_MATCH_COUNT = 5.5;
 
     private final Lotto winningLotto;
-    private final int bonusNumber;
+    private final BonusBall bonusBall;
 
-    public WinningLotto(Lotto winningLotto, int bonusNumber) {
+    public WinningLotto(Lotto winningLotto, BonusBall bonusBall) {
         this.winningLotto = winningLotto;
-        this.bonusNumber = bonusNumber;
+        this.bonusBall = bonusBall;
     }
 
     public LottoRank getLottoResult(Lotto lotto) {
@@ -30,7 +30,7 @@ public class WinningLotto {
     }
 
     private boolean isSecondRank(long count, Lotto lotto) {
-        return count == LOTTO_POSSESSION_NUMBER && lotto.getNumbers().contains(bonusNumber);
+        return count == LOTTO_POSSESSION_NUMBER && lotto.isContainBonusBall(bonusBall);
     }
 
     private long getCount(Lotto lotto) {
@@ -39,7 +39,7 @@ public class WinningLotto {
         long matchCount = generalLottoNumbers.stream()
                 .filter(winningNumbers::contains)
                 .count();
-        if (generalLottoNumbers.contains(bonusNumber)) {
+        if (generalLottoNumbers.contains(bonusBall.getBonusNumber())) {
             matchCount++;
         }
         return matchCount;

@@ -13,9 +13,15 @@ public class LottoStore {
 
     public void process() {
         Lottos lottos = buyLotto();
-        WinningLotto winningLotto = new WinningLotto(new Lotto(InputView.inputWinningNumbers()), InputView.inputBonusNumber());
+        WinningLotto winningLotto = decideWinningLotto();
         Map<LottoRank, Integer> lottoResultStatistics = lottos.getStatistics(winningLotto);
         printLottoResult(lottoResultStatistics, lottos);
+    }
+
+    private WinningLotto decideWinningLotto() {
+        Lotto winningLotto = new Lotto(InputView.inputWinningNumbers());
+        BonusBall bonusBall = new BonusBall(InputView.inputBonusNumber(), winningLotto);
+        return new WinningLotto(winningLotto, bonusBall);
     }
 
     public Lottos buyLotto() {

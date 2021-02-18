@@ -11,7 +11,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
 
-    private static final WinningLotto winningLotto = new WinningLotto(new Lotto("1,2,3,4,5,6"), 7);
+    private static final Lotto lotto = new Lotto("1,2,3,4,5,6");
+    private static final BonusBall bonusBall = new BonusBall(7, lotto);
+    private static final WinningLotto winningLotto = new WinningLotto(lotto, bonusBall);
 
     private static Stream<Arguments> provideLottoNumbersAndRank() {
         return Stream.of(

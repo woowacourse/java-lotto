@@ -46,6 +46,9 @@ public class Lotto {
         }
     }
 
+    public boolean isContainBonusBall(BonusBall bonusBall) {
+        return numbers.contains(bonusBall.getBonusNumber());
+    }
 
     public List<Integer> getNumbers() {
         return Collections.unmodifiableList(numbers);
