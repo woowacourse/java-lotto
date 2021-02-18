@@ -3,20 +3,19 @@ package lotto.domain.result;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.math.BigInteger;
-import java.util.Arrays;
-import lotto.domain.lotto.LottoTicket;
-import lotto.domain.lotto.WinningNumbers;
+import java.util.HashMap;
+import java.util.Map;
+import lotto.domain.lotto.Rank;
 import org.junit.jupiter.api.Test;
 
 class ResultTest {
 
     @Test
     void getEarningRate() {
-        Result result = new Result(
-                new WinningNumbers("1,2,3,4,5,6", "7"),
-                Arrays.asList(new LottoTicket("1,2,3,4,5,6")),
-                BigInteger.valueOf(1000)
-        );
+        Map<Rank, Integer> resultMap = new HashMap<>();
+        resultMap.put(Rank.FIRST_PLACE, 1);
+
+        Result result = new Result(resultMap, BigInteger.valueOf(1000));
 
         assertThat(result.getEarningRate()).isEqualTo(BigInteger.valueOf(200_000_000));
     }
