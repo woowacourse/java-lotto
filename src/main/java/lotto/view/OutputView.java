@@ -28,8 +28,8 @@ public class OutputView {
     }
 
     public static void printLottoTicket(LottoTicket lottoTicket) {
+        System.out.println(lottoTicket.getLottoLineSize() + "개를 구매했습니다.");
         for (LottoLine line : lottoTicket.getLottoLines()) {
-
             List<String> lottoNumbers = line.getValues().stream().sorted()
                 .map(lottoNumber -> String.valueOf(lottoNumber.getValue()))
                 .collect(Collectors.toList());

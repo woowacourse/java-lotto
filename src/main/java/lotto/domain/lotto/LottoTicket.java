@@ -34,4 +34,9 @@ public class LottoTicket {
     public List<LottoLine> getLottoLines() {
         return lottoLines;
     }
+
+    public int getLottoLineSize() {
+        return lottoLines.size();
+    }
+
 }
