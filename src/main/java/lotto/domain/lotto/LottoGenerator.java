@@ -1,5 +1,6 @@
 package lotto.domain.lotto;
 
+import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
 
 import java.util.ArrayList;
@@ -7,6 +8,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 import lotto.domain.number.LottoNumber;
 
 public class LottoGenerator {
@@ -30,14 +32,10 @@ public class LottoGenerator {
     }
 
     public LottoTicket newLottoTicket(int count) {
-        List<LottoNumbers> lottos = new ArrayList();
-
-        for (int i = 0; i < count; i++) {
-            LottoNumbers lottoNumbers = new LottoNumbers(generateRandomLottoNumber());
-            lottos.add(lottoNumbers);
-        }
-
-        return new LottoTicket(lottos);
+        return Stream.generate(this::generateRandomLottoNumber)
+            .limit(count)
+            .map(LottoNumbers::new)
+            .collect(collectingAndThen(toList(), LottoTicket::new));
     }
 
     private List<LottoNumber> generateRandomLottoNumber() {
