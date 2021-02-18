@@ -24,7 +24,7 @@ public class LottoTicketService {
         return new LottoBoughtTicket(
                 lottoNumbers
                         .stream()
-                        .limit(6)
+                        .limit(VALID_NUMBER_COUNT)
                         .sorted()
                         .collect(Collectors.toList()));
     }
