@@ -10,12 +10,28 @@ public class Money {
     private static final int THOUSAND = 1000;
     private static int money;
     private static int earning;
-    
+
     public Money(String input) {
         int inputMoney = changeToInt(input);
         validateRange(inputMoney);
         validateUnit(inputMoney);
-        this.money = inputMoney;
+        money = inputMoney;
+    }
+
+    public static String findEarningRate() {
+        double earningRate = (double) earning / (double) money;
+        return String.format(FORMAT, earningRate);
+    }
+
+    public static void findEarning(Map<Rank, Integer> countByRank) {
+        int sumOfPrize = 0;
+        for (Map.Entry<Rank, Integer> singleCount : countByRank.entrySet())
+            sumOfPrize += singleCount.getKey().getPrize() * singleCount.getValue();
+        earning = sumOfPrize;
+    }
+
+    public static int getEarning() {
+        return earning;
     }
 
     private int changeToInt(String input) {
@@ -39,22 +55,6 @@ public class Money {
     }
 
     public int count() {
-        return this.money / THOUSAND;
-    }
-
-    public static String findEarningRate() {
-        double earningRate = (double) earning / (double) money;
-        return String.format(FORMAT, earningRate);
-    }
-
-    public static void findEarning(Map<Rank, Integer> countByRank) {
-        int sumOfPrize = 0;
-        for (Map.Entry<Rank, Integer> singleCount : countByRank.entrySet())
-            sumOfPrize += singleCount.getKey().getPrize() * singleCount.getValue();
-        earning = sumOfPrize;
-    }
-
-    public static int getEarning() {
-        return earning;
+        return money / THOUSAND;
     }
 }

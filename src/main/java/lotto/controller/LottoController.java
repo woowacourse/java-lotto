@@ -11,17 +11,10 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class LottoController {
-    private static Lottos lottos;
-    private static WinningLotto winningLotto;
     private static final ArrayList<Rank> wins = new ArrayList<>();
     private static final Map<Rank, Integer> countByRank = new TreeMap<>();
-
-    public static void drawResult() {
-        LottoView.displayResultMessage();
-        countEachRank();
-        countByRank.forEach((rank, rankCount) ->
-            LottoView.displayResult(rank, rankCount));
-    }
+    private static Lottos lottos;
+    private static WinningLotto winningLotto;
 
     private static void countEachRank() {
         for (int i = 1; i < Rank.values().length; i++) {
@@ -29,6 +22,13 @@ public class LottoController {
             int rankCount = (int) wins.stream().filter(win -> win == rank).count();
             countByRank.put(rank, rankCount);
         }
+    }
+
+    public static void drawResult() {
+        LottoView.displayResultMessage();
+        countEachRank();
+        countByRank.forEach((rank, rankCount) ->
+                LottoView.displayResult(rank, rankCount));
     }
 
     public void startLotto() {

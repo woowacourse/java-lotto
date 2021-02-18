@@ -10,14 +10,14 @@ public class Lottos {
     ArrayList<Lotto> lottoGroup = new ArrayList<>();
 
     public Lottos(String input) {
-        this.money = new Money(input);
+        money = new Money(input);
         count = money.count();
         generateLottoGroup();
     }
 
     public static String findResult(Map<Rank, Integer> countByRank) {
-        money.findEarning(countByRank);
-        return money.findEarningRate();
+        Money.findEarning(countByRank);
+        return Money.findEarningRate();
     }
 
     public void generateLottoGroup() {
