@@ -1,7 +1,7 @@
 package domain;
 
 public class WinningNumber {
-    private static final String ERROR_DUPLICATED_NUMBER = "보너스 볼은 당첨 번호와 중복될 수 없습니다.";
+    private static final String ERROR_DUPLICATED_NUMBER = "[ERROR] 보너스 볼은 당첨 번호와 중복될 수 없습니다.";
 
     private final LottoTicket winningNumbers;
     private final LottoNumber bonusBall;

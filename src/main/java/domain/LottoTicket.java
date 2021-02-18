@@ -6,8 +6,8 @@ import java.util.List;
 
 public class LottoTicket {
     private static final int TOTAL_LOTTO_NUMBER_COUNT = 6;
-    private static final String ERROR_INVALID_DUPLICATION_NUMBER = "로또 번호는 중복되어선 안됩니다.";
-    private static final String ERROR_INVALID_NUMBER_COUNT = "숫자는 6개를 입력해주세요.";
+    private static final String ERROR_INVALID_DUPLICATION_NUMBER = "[ERROR] 로또 번호는 중복되어선 안됩니다.";
+    private static final String ERROR_INVALID_NUMBER_COUNT = "[ERROR] 숫자는 6개를 입력해주세요.";
 
     private final List<LottoNumber> lottoNumbers;
 
