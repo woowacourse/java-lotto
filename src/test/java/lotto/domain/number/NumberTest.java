@@ -12,7 +12,7 @@ public class NumberTest {
     @DisplayName("숫자가 아닌 경우")
     void inputNoNumber() {
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> new Number("abc"))
+            .isThrownBy(() -> Number.valueOf("abc"))
             .withMessageContaining("입력이 숫자가 아니거나");
     }
 
@@ -20,17 +20,17 @@ public class NumberTest {
     @DisplayName("Integer 범위 밖인 경우")
     void inputOutOfInteger() {
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> new Number("9876543211324"))
+            .isThrownBy(() -> Number.valueOf("9876543211324"))
             .withMessageContaining("범위를 벗어났습니다.");
     }
 
     @Test
     @DisplayName("정상적인 숫자 생성")
     void inputNormal() {
-        Number number = new Number(1);
+        Number number = Number.valueOf(1);
         assertThat(number.equals(1)).isTrue();
 
-        Number numberByString = new Number("1");
+        Number numberByString = Number.valueOf("1");
         assertThat(numberByString.equals(1)).isTrue();
     }
 }

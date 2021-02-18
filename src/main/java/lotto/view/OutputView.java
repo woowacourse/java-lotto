@@ -29,7 +29,7 @@ public class OutputView {
     }
 
     public static void boughtLotties(LottoGroup lottoGroup) {
-        lottoGroup.getLotties().forEach(OutputView::printLottoNumbers);
+        lottoGroup.getLottos().forEach(OutputView::printLottoNumbers);
     }
 
     private static void printLottoNumbers(LottoNumbers lottoNumbers) {

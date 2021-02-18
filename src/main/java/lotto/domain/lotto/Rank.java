@@ -2,7 +2,6 @@ package lotto.domain.lotto;
 
 import static java.util.Arrays.stream;
 
-import java.util.Arrays;
 import java.util.function.Function;
 import lotto.domain.rank.Ranking;
 

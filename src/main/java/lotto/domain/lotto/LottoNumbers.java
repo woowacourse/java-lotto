@@ -2,8 +2,10 @@ package lotto.domain.lotto;
 
 import static java.util.stream.Collectors.toList;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import lotto.domain.number.LottoNumber;
 
 public class LottoNumbers {
@@ -17,6 +19,20 @@ public class LottoNumbers {
         validateLottoNumberCount(lottoNumbers);
 
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public static LottoNumbers valueOf(String unparsedLottoNumbers) {
+        return getLottoNumbersFromStringLottoNumberList(getSplitLottoNumber(unparsedLottoNumbers));
+    }
+
+    private static LottoNumbers getLottoNumbersFromStringLottoNumberList(List<String> lottoNumbers) {
+        return new LottoNumbers(lottoNumbers.stream()
+            .map(lottoNumber -> LottoNumber.valueOf(lottoNumber.trim()))
+            .collect(Collectors.toList()));
+    }
+
+    private static List<String> getSplitLottoNumber(String lottoNumber) {
+        return Arrays.asList(lottoNumber.split(",", -1));
     }
 
     private void validateDuplicate(List<LottoNumber> lottoNumbers) {

@@ -8,7 +8,7 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
-    private static final LottoGenerator lottoGenerator = new LottoGenerator();
+    private static final LottoGenerator lottoGenerator = LottoGenerator.getInstance();
 
     public static void run() {
         PayOut payOut = payOut();
@@ -16,7 +16,7 @@ public class LottoController {
         LottoGroup lottoGroup = buyLotto(payOut);
 
         WinningNumber winningNumber =
-            new WinningNumber(inputLastWeekLottoNumber(), inputBonusNumber());
+            WinningNumber.valueOf(inputLastWeekLottoNumber(), inputBonusNumber());
 
         calculateStatistics(winningNumber, lottoGroup, payOut);
     }
@@ -24,7 +24,7 @@ public class LottoController {
     private static PayOut payOut() {
         OutputView.payout();
 
-        PayOut payOut = new PayOut(InputView.getStringInputFromUser());
+        PayOut payOut = PayOut.valueOf(InputView.getStringInputFromUser());
 
         OutputView.payOuted(payOut.getGameCount());
 

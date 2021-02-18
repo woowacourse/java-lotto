@@ -3,37 +3,38 @@ package lotto.domain.lotto;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import lotto.domain.number.LottoNumber;
-import lotto.domain.number.Number;
 
 public class LottoGenerator {
 
+    private static final LottoGenerator LOTTO_GENERATOR = new LottoGenerator();
     private static final int LOTTO_NUMBER_MINIMUM = 1;
     private static final int LOTTO_NUMBER_MAXIMUM = 45;
     private static final int LOTTO_COUNT_MAXIMUM = 6;
 
     private final List<LottoNumber> lottoNumbers;
 
-    public LottoGenerator() {
+    private LottoGenerator() {
         lottoNumbers = new ArrayList<>();
 
         for (int i = LOTTO_NUMBER_MINIMUM; i <= LOTTO_NUMBER_MAXIMUM; i++) {
-            lottoNumbers.add(
-                new LottoNumber(new Number(i))
-            );
+            lottoNumbers.add(LottoNumber.valueOf(i));
         }
     }
 
+    public static LottoGenerator getInstance() {
+        return LOTTO_GENERATOR;
+    }
+
     public LottoGroup generateLotties(int count) {
-        List<LottoNumbers> lotties = new ArrayList();
+        List<LottoNumbers> lottos = new ArrayList();
 
         for (int i = 0; i < count; i++) {
             LottoNumbers lottoNumbers = new LottoNumbers(generateRandomLottoNumber());
-            lotties.add(lottoNumbers);
+            lottos.add(lottoNumbers);
         }
 
-        return new LottoGroup(lotties);
+        return new LottoGroup(lottos);
     }
 
     private List<LottoNumber> generateRandomLottoNumber() {

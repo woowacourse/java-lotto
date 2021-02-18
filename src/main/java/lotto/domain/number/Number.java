@@ -4,23 +4,35 @@ import java.util.Objects;
 
 public class Number {
 
+    private static final Number ZERO = new Number(0);
     private final int value;
 
-    public Number(int value) {
-        this(String.valueOf(value));
+    private Number(int value) {
+        this.value = value;
     }
 
-    public Number(String input) {
+    public static Number valueOf(int input) {
+        if (input == 0) {
+            return ZERO;
+        }
+        return new Number(input);
+    }
+
+    public static Number valueOf(String input) {
         validateNumeric(input);
-        this.value = Integer.parseInt(input);
+        return new Number(Integer.parseInt(input));
     }
 
-    private void validateNumeric(String input) {
+    private static void validateNumeric(String input) {
         try {
             Integer.parseInt(input);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("입력이 숫자가 아니거나 범위를 벗어났습니다.");
         }
+    }
+
+    public boolean isBiggerThan(Number target)  {
+        return value > target.value;
     }
 
     public int toInt() {

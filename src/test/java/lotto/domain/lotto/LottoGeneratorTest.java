@@ -10,7 +10,7 @@ public class LottoGeneratorTest {
     @Test
     @DisplayName("로또 그룹 생성")
     void generateLottoGroup() {
-        LottoGenerator lottoGenerator = new LottoGenerator();
+        LottoGenerator lottoGenerator = LottoGenerator.getInstance();
         assertThat(lottoGenerator.generateLotties(3).getCount()).isEqualTo(3);
     }
 }

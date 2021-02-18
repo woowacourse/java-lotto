@@ -5,21 +5,17 @@ public class PayOut {
     private static final int GAME_PRICE = 1000;
     private final Number payOut;
 
-    public PayOut(Number number) {
-        validateNegative(number.toInt());
+    private PayOut(Number number) {
+        validateNegative(number);
         this.payOut = number;
     }
 
-    public PayOut(int number) {
-        this(new Number(number));
+    public static PayOut valueOf(String number) {
+        return new PayOut(Number.valueOf(number));
     }
 
-    public PayOut(String number) {
-        this(new Number(number));
-    }
-
-    private void validateNegative(int value) {
-        if (value <= 0) {
+    private static void validateNegative(Number number) {
+        if (!number.isBiggerThan(Number.valueOf(0))) {
             throw new IllegalArgumentException("입력값이 양수가 아닙니다.");
         }
     }

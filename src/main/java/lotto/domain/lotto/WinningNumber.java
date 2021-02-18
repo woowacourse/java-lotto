@@ -1,14 +1,11 @@
 package lotto.domain.lotto;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.domain.number.LottoNumber;
-import lotto.domain.number.Number;
 import lotto.domain.number.PayOut;
 
 public class WinningNumber {
@@ -16,38 +13,21 @@ public class WinningNumber {
     private final LottoNumbers lottoNumbers;
     private final LottoNumber bonusNumber;
 
-    public WinningNumber(String lottoNumber, String bonusNumber) {
-        LottoNumbers extractedLottoNumbers =
-            getLottoNumbersFromStringLottoNumberList(getSplitLottoNumber(lottoNumber));
-
-        validateBonusNumberFormat(bonusNumber);
-        LottoNumber extractedBonusNumber = new LottoNumber(new Number(bonusNumber));
-        validateDuplicateBonusNumberWithLottoNumbers(extractedLottoNumbers, extractedBonusNumber);
-
-        this.lottoNumbers = extractedLottoNumbers;
-        this.bonusNumber = extractedBonusNumber;
+    private WinningNumber(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
+        this.lottoNumbers = lottoNumbers;
+        this.bonusNumber = bonusNumber;
     }
 
-    private LottoNumbers getLottoNumbersFromStringLottoNumberList(List<String> lottoNumbers) {
-        return new LottoNumbers(lottoNumbers.stream()
-            .map(lottoNumber -> new LottoNumber(new Number(lottoNumber.trim())))
-            .collect(Collectors.toList()));
+    public static WinningNumber valueOf(String unparsedLottoNumbers, String unparsedBonusNumber) {
+        LottoNumbers parsedLottoNumbers = LottoNumbers.valueOf(unparsedLottoNumbers);
+        LottoNumber parsedBonusNumber = LottoNumber.valueOf(unparsedBonusNumber);
+
+        validateDuplication(parsedLottoNumbers, parsedBonusNumber);
+
+        return new WinningNumber(parsedLottoNumbers, parsedBonusNumber);
     }
 
-    private List<String> getSplitLottoNumber(String lottoNumber) {
-        return Arrays.asList(lottoNumber.split(",", -1));
-    }
-
-    private void validateBonusNumberFormat(String input) {
-        try {
-            Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("보너스 볼의 하나의 숫자로 이루어져야 합니다.");
-        }
-    }
-
-    private void validateDuplicateBonusNumberWithLottoNumbers(LottoNumbers lottoNumbers,
-        LottoNumber bonusNumber) {
+    private static void validateDuplication(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
         if (lottoNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException("보너스 번호는 로또 번호와 달라야 합니다.");
         }
@@ -58,7 +38,7 @@ public class WinningNumber {
     }
 
     public WinningStatistics getResult(LottoGroup lottoGroup, PayOut payOut) {
-        Map<Integer, Long> result = lottoGroup.getLotties().stream()
+        Map<Integer, Long> result = lottoGroup.getLottos().stream()
             .map(this::getRank)
             .filter(rank -> Rank.FAIL.getRank() != rank)
             .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));

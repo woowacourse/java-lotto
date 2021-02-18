@@ -4,26 +4,26 @@ import java.util.Objects;
 
 public class LottoNumber {
 
-    private static final int NUMBER_MINIMUM = 1;
-    private static final int NUMBER_MAXIMUM = 45;
+    private static final Number NUMBER_MINIMUM = Number.valueOf(1);
+    private static final Number NUMBER_MAXIMUM = Number.valueOf(45);
 
     private final Number number;
 
-    public LottoNumber(Number number) {
+    private LottoNumber(Number number) {
         validateRange(number);
         this.number = number;
     }
 
-    public LottoNumber(int number) {
-        this(new Number(number));
+    public static LottoNumber valueOf(int number) {
+        return new LottoNumber(Number.valueOf(number));
     }
 
-    public LottoNumber(String number) {
-        this(new Number(number));
+    public static LottoNumber valueOf(String number) {
+        return new LottoNumber(Number.valueOf(number));
     }
 
-    private void validateRange(Number number) {
-        if (number.toInt() < NUMBER_MINIMUM || number.toInt() > NUMBER_MAXIMUM) {
+    private static void validateRange(Number number) {
+        if (NUMBER_MINIMUM.isBiggerThan(number) || number.isBiggerThan(NUMBER_MAXIMUM)) {
             throw new IllegalArgumentException("범위 밖의 로또 번호 입니다.");
         }
     }
