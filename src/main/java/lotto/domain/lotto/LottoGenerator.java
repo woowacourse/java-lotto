@@ -16,7 +16,7 @@ public class LottoGenerator {
     private static final LottoGenerator LOTTO_GENERATOR = new LottoGenerator();
     private static final int LOTTO_NUMBER_MINIMUM = 1;
     private static final int LOTTO_NUMBER_MAXIMUM = 45;
-    private static final int LOTTO_COUNT_MAXIMUM = 6;
+    private static final int LOTTO_NUMBER_COUNT = 6;
 
     private final List<LottoNumber> lottoNumbers;
 
@@ -41,8 +41,9 @@ public class LottoGenerator {
     private List<LottoNumber> generateRandomLottoNumber() {
         Collections.shuffle(lottoNumbers);
 
-        return new ArrayList<>(lottoNumbers.subList(0, LOTTO_COUNT_MAXIMUM))
+        return new ArrayList<>(lottoNumbers)
             .stream()
+            .limit(LOTTO_NUMBER_COUNT)
             .sorted(Comparator.comparingInt(LottoNumber::toInt))
             .collect(toList());
     }
