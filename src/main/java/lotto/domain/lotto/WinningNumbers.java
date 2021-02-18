@@ -43,11 +43,7 @@ public class WinningNumbers {
             .filter(rank -> Rank.FAIL != rank)
             .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
-        Rank.toList().stream()
-            .filter(rank -> !statistics.containsKey(rank))
-            .forEach(rank -> statistics.put(rank, 0L));
-
-        return new WinningStatistics(statistics, payOut);
+        return new WinningStatistics(fillUnrankedCount(statistics), payOut);
     }
 
     private Rank getRank(LottoNumbers lottoNumbers) {
@@ -55,6 +51,14 @@ public class WinningNumbers {
             this.lottoNumbers.getMatchCount(lottoNumbers),
             lottoNumbers.contains(bonusNumber)
         );
+    }
+
+    private Map<Rank, Long> fillUnrankedCount(Map<Rank, Long> statistics) {
+        Rank.toList().stream()
+            .filter(rank -> !statistics.containsKey(rank))
+            .forEach(rank -> statistics.put(rank, 0L));
+
+        return statistics;
     }
 
     @Override

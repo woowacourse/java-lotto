@@ -2,6 +2,7 @@ package lotto.domain.lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.withPrecision;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -54,10 +55,14 @@ public class WinningNumbersTest {
             LottoNumbers.valueOf("1,2,3,4,5,34"),
             LottoNumbers.valueOf("1,2,3,4,5,7")
         ));
-        WinningStatistics result = winningNumbers.getResult(lottoTicket, PayOut.valueOf("1000"));
+        WinningStatistics result = winningNumbers.getResult(lottoTicket, PayOut.valueOf("3000"));
 
         Map<Rank, Long> actual = result.toMap();
+        int expectedTotalWinnings =
+            Rank.FIRST.getWinnings() + Rank.SECOND.getWinnings() + Rank.THIRD.getWinnings();
 
         assertThat(expected).isEqualTo(actual);
+        assertThat(expectedTotalWinnings / 3000D)
+            .isEqualTo(result.getYield(), withPrecision(2d));
     }
 }

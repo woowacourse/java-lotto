@@ -15,7 +15,7 @@ public class OutputView {
     private static final String LOTTO_COUNT_FORMAT = "개를 구매했습니다.";
     private static final String LAST_WEEK_LOTTO_NUMBER = "\n지난 주 당첨 번호를 입력해 주세요";
     private static final String BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
-    private static final String WINNING_STATISTICS = "\n당첨 동계";
+    private static final String WINNING_STATISTICS = "\n당첨 통계";
     private static final String LINE = "---------";
     private static final String STATISTICS_NONE_BONUS_FORMAT = "%d개 일치 (%d원)- %d개\n";
     private static final String STATISTICS_BONUS_FORMAT = "%d개 일치, 보너스 볼 일치(%d원)- %d개\n";

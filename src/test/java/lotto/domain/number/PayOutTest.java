@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class PayOutTest {
 
@@ -17,15 +18,12 @@ public class PayOutTest {
         assertThat(payOut.toInt()).isEqualTo(10000);
     }
 
-    @Test
+    @ParameterizedTest
     @DisplayName("음수를 입력하면 예외")
-    void inputNegativeOrZeroPayOutNumber() {
+    @ValueSource(strings = {"-1", "0"})
+    void inputNegativeOrZeroPayOutNumber(String input) {
         assertThatIllegalArgumentException().isThrownBy(
-            () -> PayOut.valueOf("-1")
-        ).withMessage("입력값이 양수가 아닙니다.");
-
-        assertThatIllegalArgumentException().isThrownBy(
-            () -> PayOut.valueOf("0")
+            () -> PayOut.valueOf(input)
         ).withMessage("입력값이 양수가 아닙니다.");
     }
 
