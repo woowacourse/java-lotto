@@ -26,5 +26,4 @@ class InputViewTest {
 
         assertThatThrownBy(inputView::inputWinningNumbers).isExactlyInstanceOf(IllegalArgumentException.class);
     }
-
 }
