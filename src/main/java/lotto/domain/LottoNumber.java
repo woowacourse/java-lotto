@@ -23,6 +23,7 @@ public class LottoNumber {
 
     private static int convertToLottoNumber(String numberValue) {
         numberValue = numberValue.trim();
+        //todo 도메인 객체가 외부의 유틸 클래스에 의존
         StringValidator.validateIsDigit(numberValue);
         return Integer.parseInt(numberValue);
     }

@@ -1,34 +1,33 @@
 package lotto.domain;
 
-import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.function.BiFunction;
 
 public enum Rank {
-    FIRST_PLACE(BigDecimal.valueOf(2000000000), (val, isBonus) -> val == 6),
-    SEC0ND_PLACE(BigDecimal.valueOf(30000000), (val, isBonus) -> val == 5 && isBonus),
-    THIRD_PLACE(BigDecimal.valueOf(1500000), (val, isBonus) -> val == 5 && !isBonus),
-    FOURTH_PLACE(BigDecimal.valueOf(50000), (val, isBonus) -> val == 4),
-    FIFTH_PLACE(BigDecimal.valueOf(5000), (val, isBonus) -> val == 3),
-    UNRANKED(BigDecimal.valueOf(0), (val, isBonus) -> val < 3);
+    FIRST_PLACE(BigInteger.valueOf(2_000_000_000), (val, isBonus) -> val == 6),
+    SEC0ND_PLACE(BigInteger.valueOf(30_000_000), (val, isBonus) -> val == 5 && isBonus),
+    THIRD_PLACE(BigInteger.valueOf(1_500_000), (val, isBonus) -> val == 5 && !isBonus),
+    FOURTH_PLACE(BigInteger.valueOf(50_000), (val, isBonus) -> val == 4),
+    FIFTH_PLACE(BigInteger.valueOf(5_000), (val, isBonus) -> val == 3),
+    UNRANKED(BigInteger.valueOf(0), (val, isBonus) -> val < 3);
 
-    private final BiFunction<Integer, Boolean, Boolean> expression;
-    private final BigDecimal prize;
+    private final BiFunction<Integer, Boolean, Boolean> biFunction;
+    private final BigInteger prize;
 
-    Rank(BigDecimal prize, BiFunction<Integer, Boolean, Boolean> expression) {
+    Rank(BigInteger prize, BiFunction<Integer, Boolean, Boolean> biFunction) {
+        this.biFunction = biFunction;
         this.prize = prize;
-        this.expression = expression;
     }
 
     public static Rank getInstance(int val, boolean isBonus) {
         return Arrays.stream(Rank.values())
-                .filter(rank -> rank.expression.apply(val, isBonus))
+                .filter(rank -> rank.biFunction.apply(val, isBonus))
                 .findFirst()
-                .orElse(UNRANKED);
+                .orElseThrow(() -> new RuntimeException(""));
     }
 
-    public BigDecimal getPrize() {
+    public BigInteger getPrize() {
         return this.prize;
     }
-
 }

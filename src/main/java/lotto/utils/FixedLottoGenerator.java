@@ -17,5 +17,4 @@ public class FixedLottoGenerator implements LottoGenerator {
                 new LottoNumber(6)
         ));
     }
-
 }

@@ -24,5 +24,4 @@ public class LottoApplication {
 
         OutputView.printResult(result);
     }
-
 }

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -11,6 +12,7 @@ public class Machine {
     private final int money;
 
     public Machine(String moneyValue) {
+        //todo 도메인 객체가 외부의 유틸 클래스에 의존
         StringValidator.validateIsDigit(moneyValue);
         money = Integer.parseInt(moneyValue);
     }
@@ -29,6 +31,6 @@ public class Machine {
             List<LottoTicket> lottoTickets) {
         WinningNumbers winningNumbers = new WinningNumbers(winningNumbersValue, bonusBallValue);
 
-        return new Result(winningNumbers, lottoTickets, money);
+        return new Result(winningNumbers, lottoTickets, BigInteger.valueOf(money));
     }
 }

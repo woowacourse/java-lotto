@@ -10,13 +10,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 class RankTest {
 
-    @ParameterizedTest
-    @DisplayName("Rank 테스트")
-    @MethodSource("ranks")
-    void getInstance(int val, boolean isBonus, Rank expectedRank) {
-        assertThat(Rank.getInstance(val, isBonus)).isEqualTo(expectedRank);
-    }
-
     static Stream<Arguments> ranks() {
         return Stream.of(
                 Arguments.of(6, false, Rank.FIRST_PLACE),
@@ -32,4 +25,10 @@ class RankTest {
         );
     }
 
+    @ParameterizedTest
+    @DisplayName("Rank 테스트")
+    @MethodSource("ranks")
+    void getInstance(int val, boolean isBonus, Rank expectedRank) {
+        assertThat(Rank.getInstance(val, isBonus)).isEqualTo(expectedRank);
+    }
 }
