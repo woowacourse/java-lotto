@@ -1,10 +1,10 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LottoNumberTest {
 
@@ -19,9 +19,9 @@ public class LottoNumberTest {
     @Test
     void checkNumberInProperRange() {
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> new LottoNumber(0));
+                .isThrownBy(() -> new LottoNumber(0));
 
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> new LottoNumber(46));
+                .isThrownBy(() -> new LottoNumber(46));
     }
 }

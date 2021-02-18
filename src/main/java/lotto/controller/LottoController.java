@@ -1,17 +1,13 @@
 package lotto.controller;
 
-import java.util.*;
-
+import lotto.domain.*;
 import lotto.domain.ticketfactory.FixedNumberTicketFactory;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
-import lotto.domain.Money;
-import lotto.domain.WinningResult;
 import lotto.exception.LottoCustomException;
 import lotto.utils.ValidateUtils;
 import lotto.view.InputView;
 import lotto.view.OutputView;
+
+import java.util.*;
 
 public class LottoController {
     private static final int EXIST = 1;
@@ -40,7 +36,7 @@ public class LottoController {
     }
 
     private Money inputMoney() {
-        try{
+        try {
             OutputView.printMoneyMessage();
             Money money = new Money(ValidateUtils.parseInt(inputView.inputValue()));
             OutputView.printTicketCountMessage(money.getTicketCount());

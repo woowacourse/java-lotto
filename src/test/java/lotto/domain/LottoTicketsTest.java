@@ -1,12 +1,13 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTicketsTest {
 
@@ -22,14 +23,14 @@ public class LottoTicketsTest {
         LottoNumber lotto7 = new LottoNumber(7);
 
         Set<LottoNumber> lottoNumbers = new HashSet<>(
-            Arrays.asList(lotto1, lotto2, lotto3, lotto4, lotto5, lotto6));
+                Arrays.asList(lotto1, lotto2, lotto3, lotto4, lotto5, lotto6));
         Set<LottoNumber> lottoNumbers2 = new HashSet<>(
-            Arrays.asList(lotto1, lotto2, lotto3, lotto4, lotto5, lotto7));
+                Arrays.asList(lotto1, lotto2, lotto3, lotto4, lotto5, lotto7));
         LottoTickets lottoTickets = new LottoTickets(Arrays.asList
-            (new LottoTicket(lottoNumbers),
-                new LottoTicket(lottoNumbers2)));
+                (new LottoTicket(lottoNumbers),
+                        new LottoTicket(lottoNumbers2)));
 
         assertThat(lottoTickets.toList())
-            .contains(new LottoTicket(lottoNumbers), new LottoTicket(lottoNumbers2));
+                .contains(new LottoTicket(lottoNumbers), new LottoTicket(lottoNumbers2));
     }
 }

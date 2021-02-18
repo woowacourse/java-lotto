@@ -10,7 +10,8 @@ import java.util.stream.Collectors;
 public class FixedNumberTicketFactory {
     private static final int EXACT_SIZE = 6;
 
-    private FixedNumberTicketFactory() {}
+    private FixedNumberTicketFactory() {
+    }
 
     public static LottoTicket makeTicket(Set<String> lottoNumbers) {
         if (!hasExactSize(lottoNumbers)) {

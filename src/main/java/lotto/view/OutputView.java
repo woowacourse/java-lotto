@@ -5,7 +5,8 @@ import lotto.domain.LottoTickets;
 
 public class OutputView {
 
-    private OutputView() {}
+    private OutputView() {
+    }
 
     public static void printErrorMessage(String message) {
         System.out.println(message);

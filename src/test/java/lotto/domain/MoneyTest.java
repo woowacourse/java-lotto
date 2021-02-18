@@ -1,10 +1,10 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class MoneyTest {
 
@@ -19,9 +19,9 @@ public class MoneyTest {
     @Test
     void checkMoney() {
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> new Money(0));
+                .isThrownBy(() -> new Money(0));
 
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> new Money(999));
+                .isThrownBy(() -> new Money(999));
     }
 }
