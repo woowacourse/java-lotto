@@ -10,10 +10,14 @@ public class LottoNumber {
     private final int lottoNumber;
 
     public LottoNumber(int lottoNumber) {
+        validateNumber(lottoNumber);
+        this.lottoNumber = lottoNumber;
+    }
+
+    private void validateNumber(int lottoNumber) {
         if (lottoNumber > MAXIMUM_NUMBER || lottoNumber < MINIMUM_NUMBER) {
             throw new IllegalArgumentException(NUMBER_RANGE_ERROR);
         }
-        this.lottoNumber = lottoNumber;
     }
 
     public int getLottoNumber() {
