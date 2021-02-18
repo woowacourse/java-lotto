@@ -18,11 +18,15 @@ public class WinningLotto {
         }
     }
 
-    public int findMatchCount(Lotto targetLotto) {
+    public LottoRank match(Lotto targetLotto) {
+        return LottoRank.isMatch(findMatchCount(targetLotto), isBonusBallMatch(targetLotto));
+    }
+
+    private int findMatchCount(Lotto targetLotto) { //todo: private 변경 !
         return lotto.findMatchCount(targetLotto);
     }
 
-    public boolean isBonusBallMatch(Lotto targetLotto) {
+    private boolean isBonusBallMatch(Lotto targetLotto) {
         return targetLotto.contains(bonusBall);
     }
 }

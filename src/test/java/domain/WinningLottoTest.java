@@ -53,28 +53,9 @@ class WinningLottoTest {
         Lotto targetLotto = new Lotto(new int[]{1, 2, 3, 4, 5, 6});
 
         // when
-        int matchCount = winningLotto.findMatchCount(targetLotto);
+        LottoRank lottoRank = winningLotto.match(targetLotto);
 
         // then
-        assertThat(matchCount).isEqualTo(6);
-    }
-
-    @DisplayName("보너스볼과 일치하는 숫자가 있는지 파악하는 기능")
-    @ParameterizedTest
-    @CsvSource(value = {
-            "7:false", "8:true"
-    }, delimiter = ':')
-    void isBonusBallMatch(int bonusBallValue, boolean result) {
-        //given
-        LottoNumber bonusBall = new LottoNumber(bonusBallValue);
-        WinningLotto winningLotto = new WinningLotto(lotto, bonusBall);
-
-        Lotto targetLotto = new Lotto(new int[]{1, 2, 3, 4, 5, 8});
-
-        // when
-        boolean matched = winningLotto.isBonusBallMatch(targetLotto);
-
-        // then
-        assertThat(matched).isEqualTo(result);
+        assertThat(lottoRank).isEqualTo(LottoRank.FIRST);
     }
 }
