@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.LottoNumber;
 import lotto.exception.LottoCustomException;
 
 import java.util.Arrays;
@@ -29,18 +30,19 @@ public class InputView {
         return parseInt(scanner.nextLine());
     }
 
-    public Set<Integer> inputWinningTicket() {
-        return splitWinningNumbers(scanner.nextLine());
+    public Set<LottoNumber> inputWinningTicket() {
+        return splitAndWrap(scanner.nextLine());
     }
 
     public int inputBonusNumber() {
         return parseInt(scanner.nextLine());
     }
 
-    private Set<Integer> splitWinningNumbers(String winningNumbers) {
+    private Set<LottoNumber> splitAndWrap(String winningNumbers) {
         return Arrays.stream(winningNumbers.split(SEPARATOR))
                 .map(String::trim)
                 .map(InputView::parseInt)
+                .map(LottoNumber::new)
                 .collect(Collectors.toSet());
     }
 }
