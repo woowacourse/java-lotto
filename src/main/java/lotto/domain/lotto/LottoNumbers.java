@@ -1,16 +1,17 @@
 package lotto.domain.lotto;
 
+import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 import lotto.domain.number.LottoNumber;
 
 public class LottoNumbers {
 
     private static final int LOTTO_NUMBER_COUNT = 6;
+    private static final String LOTTO_NUMBER_SEPARATOR = ",";
 
     private final List<LottoNumber> lottoNumbers;
 
@@ -26,13 +27,13 @@ public class LottoNumbers {
     }
 
     private static LottoNumbers getLottoNumbersFromStringList(List<String> lottoNumbers) {
-        return new LottoNumbers(lottoNumbers.stream()
+        return lottoNumbers.stream()
             .map(lottoNumber -> LottoNumber.valueOf(lottoNumber.trim()))
-            .collect(Collectors.toList()));
+            .collect(collectingAndThen(toList(), LottoNumbers::new));
     }
 
     private static List<String> splitLottoNumber(String lottoNumber) {
-        return Arrays.asList(lottoNumber.split(",", -1));
+        return Arrays.asList(lottoNumber.split(LOTTO_NUMBER_SEPARATOR, -1));
     }
 
     private void validateDuplicate(List<LottoNumber> lottoNumbers) {
@@ -48,11 +49,15 @@ public class LottoNumbers {
     }
 
     public int getMatchCount(LottoNumbers lottoNumbers) {
-        return (int) this.lottoNumbers.stream().filter(lottoNumbers::contains).count();
+        return (int) this.lottoNumbers.stream()
+            .filter(lottoNumbers::contains)
+            .count();
     }
 
     public List<Integer> toIntegerList() {
-        return lottoNumbers.stream().map(LottoNumber::toInt).collect(toList());
+        return lottoNumbers.stream()
+            .map(LottoNumber::toInt)
+            .collect(toList());
     }
 
     public boolean contains(LottoNumber lottoNumber) {
