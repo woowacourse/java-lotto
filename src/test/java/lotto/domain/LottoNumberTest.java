@@ -7,7 +7,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoNumberTest {
 
@@ -16,7 +15,7 @@ class LottoNumberTest {
     @ValueSource(ints = {0, 46})
     void cannotMake(int number) {
         assertThatCode(() -> {
-            new LottoNumber(number);
+            LottoNumber.from(number);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 번호 범위가 벗어났습니다.");
     }
@@ -25,8 +24,19 @@ class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 5, 45})
     void makeLottoNumber(int number) {
-        LottoNumber lottoNumber = new LottoNumber(number);
+        LottoNumber lottoNumber = LottoNumber.from(number);
 
-        assertThat(lottoNumber.getLottoNumber()).isEqualTo(number);
+        int value = lottoNumber.getNumber();
+
+        assertThat(value).isEqualTo(number);
+    }
+
+    @DisplayName("로또 번호는 싱글톤 객체이다")
+    @Test
+    void isSingleton() {
+        LottoNumber lottoNumber = LottoNumber.from(1);
+        LottoNumber target = LottoNumber.from(1);
+
+        assertThat(lottoNumber).isEqualTo(target);
     }
 }

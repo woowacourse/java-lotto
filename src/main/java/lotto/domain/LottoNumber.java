@@ -1,39 +1,32 @@
 package lotto.domain;
 
-import java.util.Objects;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LottoNumber {
+    private static final Map<Integer, LottoNumber> CACHE = new HashMap<>();
     private static final int MINIMUM_NUMBER = 1;
     private static final int MAXIMUM_NUMBER = 45;
     private static final String NUMBER_RANGE_ERROR = "로또 번호 범위가 벗어났습니다.";
 
-    private final int lottoNumber;
+    private final int number;
 
-    public LottoNumber(int lottoNumber) {
-        validateNumber(lottoNumber);
-        this.lottoNumber = lottoNumber;
+    private LottoNumber(int number) {
+        validateNumber(number);
+        this.number = number;
     }
 
     private void validateNumber(int lottoNumber) {
-        if (lottoNumber > MAXIMUM_NUMBER || lottoNumber < MINIMUM_NUMBER) {
+        if (lottoNumber < MINIMUM_NUMBER || lottoNumber > MAXIMUM_NUMBER) {
             throw new IllegalArgumentException(NUMBER_RANGE_ERROR);
         }
     }
 
-    public int getLottoNumber() {
-        return lottoNumber;
+    public static LottoNumber from(int number) {
+        return CACHE.computeIfAbsent(number, LottoNumber::new);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        LottoNumber that = (LottoNumber) o;
-        return lottoNumber == that.lottoNumber;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(lottoNumber);
+    public int getNumber() {
+        return number;
     }
 }

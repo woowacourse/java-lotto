@@ -26,7 +26,7 @@ public class OutputView {
         for (LottoTicket lottoTicket : lottoTicketGroup) {
             String numbers = lottoTicket.getLottoNumbers()
                     .stream()
-                    .map(lottoNumber -> String.valueOf(lottoNumber.getLottoNumber()))
+                    .map(lottoNumber -> String.valueOf(lottoNumber.getNumber()))
                     .collect(Collectors.joining(", ", "[", "]"));
             System.out.println(numbers);
         }

@@ -45,8 +45,8 @@ class LottoTicketTest {
 
         List<LottoNumber> lottoNumbers = lottoTicket.getLottoNumbers();
 
-        assertThat(lottoNumbers).contains(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                new LottoNumber(5), new LottoNumber(6));
+        assertThat(lottoNumbers).contains(LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3),
+                LottoNumber.from(4),LottoNumber.from(5), LottoNumber.from(6));
     }
 
     @DisplayName("로또 티켓과 당첨 번호를 비교하여 일치하는 개수를 반환한다.")
@@ -67,7 +67,7 @@ class LottoTicketTest {
     void contains(int ballNumber, boolean target) {
         LottoTicket lottoTicket = LottoTicket.generateTicket(Arrays.asList(1, 9, 3, 4, 5, 6));
 
-        boolean isContainingBonusNumber = lottoTicket.contains(new LottoNumber(ballNumber));
+        boolean isContainingBonusNumber = lottoTicket.contains(LottoNumber.from(ballNumber));
 
         assertThat(isContainingBonusNumber).isEqualTo(target);
     }
