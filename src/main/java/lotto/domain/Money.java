@@ -16,9 +16,15 @@ public class Money {
     }
 
     private void validateMoney(String money) {
-        validateNumber(money);
         validateEmpty(money);
+        validateNumber(money);
         validatePrice(money);
+    }
+
+    private void validateEmpty(String money) {
+        if (money.isEmpty()) {
+            throw new IllegalArgumentException("빈 값은 입력할 수 없습니다.");
+        }
     }
 
     private void validateNumber(String money) {
@@ -26,12 +32,6 @@ public class Money {
             Integer.parseInt(money);
         } catch (NumberFormatException e) {
             throw new NumberFormatException("숫자만 입력 가능합니다.");
-        }
-    }
-
-    private void validateEmpty(String money) {
-        if (money.isEmpty()) {
-            throw new IllegalArgumentException("빈 값은 입력할 수 없습니다.");
         }
     }
 
