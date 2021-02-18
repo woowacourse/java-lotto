@@ -10,21 +10,21 @@ import java.util.Set;
 public class LottoTicket {
     private static final int SIZE = 6;
 
-    private final List<LottoNumber> numbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public LottoTicket(List<LottoNumber> lottoNumbers) {
         validateSize(lottoNumbers);
         validateNotDuplicate(lottoNumbers);
-        lottoNumbers.sort(Comparator.comparingInt(LottoNumber::getNumber));
-        this.numbers = new ArrayList<>(lottoNumbers);
+        this.lottoNumbers = new ArrayList<>(lottoNumbers);
+        this.lottoNumbers.sort(Comparator.comparingInt(LottoNumber::getNumber));
     }
 
     public List<LottoNumber> getLottoTicketNumbers() {
-        return Collections.unmodifiableList(this.numbers);
+        return Collections.unmodifiableList(this.lottoNumbers);
     }
 
     public boolean hasBonusNumber(LottoNumber lottoNumber) {
-        return numbers.contains(lottoNumber);
+        return lottoNumbers.contains(lottoNumber);
     }
 
     private void validateSize(List<LottoNumber> lottoNumbers) {
