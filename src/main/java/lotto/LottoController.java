@@ -6,7 +6,7 @@ public class LottoController {
     private static Lottos lottos;
     private static WinningLotto winningLotto;
     private static ArrayList<Rank> wins = new ArrayList<>();
-    private static Map<Rank, Integer> countByRank = new HashMap<>();
+    private static Map<Rank, Integer> countByRank = new TreeMap<>();
 
     public void startLotto() {
         lottos = new Lottos(LottoView.requestMoney());

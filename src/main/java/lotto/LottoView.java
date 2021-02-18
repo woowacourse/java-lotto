@@ -41,4 +41,8 @@ public class LottoView {
     public static void displayResult(Rank rank, int count) {
         System.out.println(rank + Integer.toString(count) + "개");
     }
+
+    public static void displayEarningRate(String earningRate) {
+        System.out.println("총 수익률은 " + earningRate + "입니다.");
+    }
 }
