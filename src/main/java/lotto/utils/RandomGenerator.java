@@ -29,4 +29,9 @@ public class RandomGenerator implements LottoGenerator {
 
         return new Lotto(lottoNumbers);
     }
+
+    @Override
+    public Lotto generateWinningLottoNumber() {
+        return null;
+    }
 }

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.utils.LottoGenerator;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,16 +21,25 @@ public class LottoGameResultTest {
         lottoGameResult.add(Rank.rankOf(0, false));
     }
 
-    @Test
     @DisplayName("랭크 별 개수 테스트")
+    @Test
     void testAdd() {
         assertThat(lottoGameResult.countByRank(Rank.FOURTH)).isEqualTo(1);
         assertThat(lottoGameResult.countByRank(Rank.NOTHING)).isEqualTo(3);
     }
 
+
+    @DisplayName("수익률 계산 테스트")
     @Test
-    @DisplayName("수익률 테스트")
-    void testProfit() {
-        assertThat(lottoGameResult.calculateProfit()).isEqualTo(11);
+    void testCalculateProfit() {
+        Money money = new Money("1000");
+        LottoGenerator fixedGenerator = new FixedGenerator();
+        Lottos lottos = new Lottos(fixedGenerator, money);
+        WinningLotto winningLotto = new WinningLotto(fixedGenerator.generateWinningLottoNumber(), 1);
+
+        LottoGame lottoGame = new LottoGame();
+        double profit = lottoGame.compareWithWinningLotto(lottos, winningLotto).calculateProfit();
+
+        assertThat(profit).isEqualTo(30000);
     }
 }
