@@ -45,10 +45,10 @@ public enum Result {
         return statistics;
     }
 
-    public static float calculateProfit(List<Result> results) {
-        return (float) results.stream()
+    public static int calculateProfit(List<Result> results) {
+        return results.stream()
                 .map(Result::getPrize)
-                .reduce(0, (a, b) -> a + b);
+                .reduce(0, Integer::sum);
     }
 
     public int getCount() {
