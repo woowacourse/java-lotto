@@ -3,7 +3,7 @@ package domain.lotto;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import java.util.Arrays;
-import lotto.domain.Rank;
+import lotto.domain.lotto.utils.Rank;
 import lotto.domain.lotto.LottoResult;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

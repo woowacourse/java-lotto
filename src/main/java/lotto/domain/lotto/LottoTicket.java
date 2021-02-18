@@ -2,7 +2,7 @@ package lotto.domain.lotto;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.domain.Rank;
+import lotto.domain.lotto.utils.Rank;
 
 public class LottoTicket {
 

@@ -10,7 +10,7 @@ import static lotto.view.OutputMessages.OUTPUT_WIN_STATISTICS_MESSAGES;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.domain.Rank;
+import lotto.domain.lotto.utils.Rank;
 import lotto.domain.lotto.LottoLine;
 import lotto.domain.lotto.LottoResult;
 import lotto.domain.lotto.LottoTicket;

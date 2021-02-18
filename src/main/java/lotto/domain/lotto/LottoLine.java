@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import lotto.domain.Rank;
+import lotto.domain.lotto.utils.Rank;
 import lotto.view.ErrorMessages;
 
 public class LottoLine {
