@@ -3,12 +3,12 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class Lottos {
+public class LottoGroup {
     private static Money money;
     private static int count;
     private final ArrayList<Lotto> lottoGroup = new ArrayList<>();
 
-    public Lottos(String input) {
+    public LottoGroup(String input) {
         money = new Money(input);
         count = money.count();
         generateLottoGroup();

@@ -1,7 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.Lotto;
-import lotto.domain.Lottos;
+import lotto.domain.LottoGroup;
 import lotto.domain.Rank;
 import lotto.domain.WinningLotto;
 import lotto.view.LottoView;
@@ -13,7 +13,7 @@ import java.util.TreeMap;
 public class LottoController {
     private static final ArrayList<Rank> wins = new ArrayList<>();
     private static final Map<Rank, Integer> countByRank = new TreeMap<>();
-    private static Lottos lottos;
+    private static LottoGroup lottoGroup;
     private static WinningLotto winningLotto;
 
     private static void countEachRank() {
@@ -32,16 +32,16 @@ public class LottoController {
     }
 
     public void startLotto() {
-        lottos = new Lottos(LottoView.requestMoney());
-        LottoView.buyLotto(lottos.getCount());
-        LottoView.printLottos(lottos);
+        lottoGroup = new LottoGroup(LottoView.requestMoney());
+        LottoView.buyLotto(lottoGroup.getCount());
+        LottoView.printLottos(lottoGroup);
         makeWinningLotto();
     }
 
     public void endLotto() {
         drawLotto();
         drawResult();
-        LottoView.displayEarningRate(Lottos.findResult(countByRank));
+        LottoView.displayEarningRate(LottoGroup.findResult(countByRank));
     }
 
     private void makeWinningLotto() {
@@ -51,7 +51,7 @@ public class LottoController {
     }
 
     private void drawLotto() {
-        ArrayList<Lotto> lottoGroup = lottos.getLottoGroup();
+        ArrayList<Lotto> lottoGroup = LottoController.lottoGroup.getLottoGroup();
         for (Lotto lotto : lottoGroup) {
             Rank rank = winningLotto.findRank(lotto);
             wins.add(rank);
