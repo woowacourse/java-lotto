@@ -34,11 +34,11 @@ public class LottoController {
         String values = Screen.getLottoNumbers();
 
         List<Integer> numbers = Arrays.stream(values.split(REGEX))
-            .mapToInt(Integer::parseInt)
+            .mapToInt(ParserUtils::tryParseInt)
             .boxed()
             .collect(Collectors.toList());
 
-        int bonusNumber = Integer.parseInt(Screen.getBonusBallNumber());
+        int bonusNumber = ParserUtils.tryParseInt(Screen.getBonusBallNumber());
 
         return new WinningLotto(numbers, bonusNumber);
     }
