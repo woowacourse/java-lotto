@@ -4,6 +4,7 @@ import lotto.exception.LottoCustomException;
 import lotto.utils.ValidateUtils;
 
 public class LottoNumber {
+
     public static final int LOTTO_NUMBER_MAX_LIMIT = 44;
     public static final int LOTTO_NUMBER_MIN_LIMIT = 1;
     public static final String NOT_PROPER_RANGE_NUMBERS_ERROR_MESSAGE = "로또 번호는 1-45사이의 숫자이어야 합니다.";
@@ -11,7 +12,7 @@ public class LottoNumber {
     private final int number;
 
     public LottoNumber(final int number) {
-        if(isNotProperRange(number)){
+        if (isNotProperRange(number)) {
             throw new LottoCustomException(NOT_PROPER_RANGE_NUMBERS_ERROR_MESSAGE);
         }
         this.number = number;

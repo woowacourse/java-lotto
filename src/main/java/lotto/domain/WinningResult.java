@@ -40,7 +40,7 @@ public enum WinningResult {
         return Arrays.stream(values())
             .filter(value -> count == value.hitCount)
             .findFirst()
-            .orElseThrow(()->new LottoCustomException(NO_REWARD_ERROR_MESSAGE))
+            .orElseThrow(() -> new LottoCustomException(NO_REWARD_ERROR_MESSAGE))
             .reward;
     }
 
@@ -59,6 +59,6 @@ public enum WinningResult {
         return Arrays.stream(values())
             .filter(value -> count == value.hitCount)
             .findFirst()
-            .orElseThrow(()->new LottoCustomException(NO_RESULT_ERROR_MESSAGE));
+            .orElseThrow(() -> new LottoCustomException(NO_RESULT_ERROR_MESSAGE));
     }
 }

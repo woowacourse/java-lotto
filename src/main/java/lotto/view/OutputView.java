@@ -13,7 +13,9 @@ public class OutputView {
     public static final String SHOW_TOTAL_YIELD_MESSAGE = "총 수익률은 %.2f입니다.";
     public static final String SPLIT_LINE = "---------";
 
-    public static void printErrorMessage(Exception exception) { System.out.println(exception.getMessage()); }
+    public static void printErrorMessage(Exception exception) {
+        System.out.println(exception.getMessage());
+    }
 
     public static void printMoneyMessage() {
         System.out.println(INPUT_MONEY_MESSAGE);
@@ -49,7 +51,7 @@ public class OutputView {
     }
 
     public static void printProfit(float profit) {
-        System.out.printf(SHOW_TOTAL_YIELD_MESSAGE+System.lineSeparator(), profit);
+        System.out.printf(SHOW_TOTAL_YIELD_MESSAGE + System.lineSeparator(), profit);
     }
 
 }

@@ -7,6 +7,7 @@ import java.util.Set;
 import lotto.utils.ValidateUtils;
 
 public class InputView {
+
     public static final String SPLITTER = ",";
 
     private final Scanner scanner;

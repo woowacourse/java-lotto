@@ -7,10 +7,10 @@ import lotto.exception.LottoCustomException;
 
 public class LottoTicket {
 
+    public static final String DUPLICATE_NUMBERS_BY_BONUSBALL_ERROR_MESSAGE = "보너스 볼은 지난 주 당첨번호와 중복될 수 없습니다.";
     private static final int CHECK_HIT_COUNT_HAS_BONUS = 5;
     private static final int SECOND = 6;
     private static final int FIRST = 7;
-    public static final String DUPLICATE_NUMBERS_BY_BONUSBALL_ERROR_MESSAGE = "보너스 볼은 지난 주 당첨번호와 중복될 수 없습니다.";
 
     private final Set<LottoNumber> lottoNumbers;
 

@@ -2,18 +2,18 @@ package lotto.controller;
 
 import java.util.List;
 import java.util.Scanner;
-import lotto.domain.ticketFactory.FixedTicketFactory;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
 import lotto.domain.WinningResult;
+import lotto.domain.ticketFactory.FixedTicketFactory;
 import lotto.exception.LottoCustomException;
-import lotto.utils.ValidateUtils;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
+
     final InputView inputView;
 
     public LottoController(final Scanner scanner) {
@@ -31,7 +31,7 @@ public class LottoController {
     }
 
     private Money inputMoney() {
-        try{
+        try {
             OutputView.printMoneyMessage();
             Money money = new Money(inputView.inputValue());
             OutputView.printTicketCountMessage(money.countTickets());

@@ -6,6 +6,7 @@ import java.util.List;
 import lotto.domain.ticketFactory.RandomTicketFactory;
 
 public class LottoTickets {
+
     public static final int NUMBER_OF_WINNING_TYPE = 8;
 
     private final List<LottoTicket> lottoTickets;
@@ -25,7 +26,8 @@ public class LottoTickets {
     }
 
     public List<Integer> checkHitCount(LottoTicket winningTicket, LottoNumber bonusBall) {
-        List<Integer> winningCount = new ArrayList<>(Collections.nCopies(NUMBER_OF_WINNING_TYPE, 0));
+        List<Integer> winningCount = new ArrayList<>(
+            Collections.nCopies(NUMBER_OF_WINNING_TYPE, 0));
         for (LottoTicket lottoTicket : lottoTickets) {
             int hitCount = lottoTicket.compareNumbers(winningTicket, bonusBall);
             winningCount.set(hitCount, winningCount.get(hitCount) + 1);

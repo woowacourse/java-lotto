@@ -11,6 +11,7 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 
 public class RandomTicketFactory {
+
     public static final int LOTTO_NUMBER_MAX_LIMIT = 44;
     public static final int LOTTO_NUMBER_MIN_LIMIT = 1;
     public static Map<Integer, LottoNumber> lottoNumberFactory = new HashMap<>();
@@ -21,8 +22,7 @@ public class RandomTicketFactory {
         }
     }
 
-    private RandomTicketFactory() {
-    }
+    private RandomTicketFactory() { }
 
     public static LottoTicket makeTicket() {
         return new LottoTicket(makeLottoNumbers());

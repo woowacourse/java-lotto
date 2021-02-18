@@ -4,9 +4,9 @@ import java.util.Objects;
 import lotto.exception.LottoCustomException;
 
 public class Money {
-    private static final int MIN_MONEY_UNIT = 1000;
-    public static final String MONEY_LESS_THAN_MIN_MONEY_ERROR_MESSAGE = "입력 금액은 1000원 이상이어야 합니다.";
 
+    public static final String MONEY_LESS_THAN_MIN_MONEY_ERROR_MESSAGE = "입력 금액은 1000원 이상이어야 합니다.";
+    private static final int MIN_MONEY_UNIT = 1000;
     private final int money;
 
     public Money(int money) {
