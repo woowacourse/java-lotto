@@ -11,6 +11,9 @@ public class LottoGenerator {
     private static final int LOTTO_MAX = 45;
     private static List<Integer> numbers;
 
+    private LottoGenerator() {
+    }
+
     public static List<Lotto> makeLottos(int amount) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < amount; i++) {
