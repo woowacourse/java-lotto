@@ -16,31 +16,31 @@ public class Lotto {
 
     protected final List<Integer> lottoNumbers;
 
-    public Lotto(List<Integer> numbers) {
+    public Lotto(final List<Integer> numbers) {
         validates(numbers);
         this.lottoNumbers = new ArrayList<>(numbers);
     }
 
-    private void validates(List<Integer> values) {
+    private void validates(final List<Integer> values) {
         validateDuplicatedNumber(values);
         for (int value : values) {
             validateBoundNumber(value);
         }
     }
 
-    private void validateDuplicatedNumber(List<Integer> values) {
+    private void validateDuplicatedNumber(final List<Integer> values) {
         if (new HashSet<>(values).size() != LOTTO_SIZE) {
             throw new DuplicateLottoNumberException();
         }
     }
 
-    protected void validateBoundNumber(int value) {
+    protected void validateBoundNumber(final int value) {
         if (value < MIN_BOUND || value > MAX_BOUND) {
             throw new InvalidLottoNumberException();
         }
     }
 
-    public boolean isContainsNumber(int number) {
+    public boolean isContainsNumber(final int number) {
         return lottoNumbers.contains(number);
     }
 

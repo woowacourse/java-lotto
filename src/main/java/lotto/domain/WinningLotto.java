@@ -21,7 +21,7 @@ public class WinningLotto extends Lotto {
         }
     }
 
-    public Reword match(Lotto lotto) {
+    public Reword match(final Lotto lotto) {
         int count = (int) lottoNumbers.stream()
             .filter(lotto::isContainsNumber)
             .count();

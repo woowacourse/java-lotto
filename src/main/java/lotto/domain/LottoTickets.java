@@ -18,11 +18,11 @@ public class LottoTickets {
 
     private final List<Lotto> lottoTickets;
 
-    public LottoTickets(int count) {
+    public LottoTickets(final int count) {
         this(count, ALL_LOTTO_NUMBERS);
     }
 
-    public LottoTickets(int count, List<Integer> values) {
+    public LottoTickets(final int count, final List<Integer> values) {
         lottoTickets = createLottoTickets(count, values);
     }
 
@@ -39,7 +39,7 @@ public class LottoTickets {
         return Collections.unmodifiableList(lottoTickets);
     }
 
-    public Rewords getResult(WinningLotto winningLotto) {
+    public Rewords getResult(final WinningLotto winningLotto) {
         List<Reword> rewords = new ArrayList<>();
         for (Lotto lotto : lottoTickets) {
             rewords.add(winningLotto.match(lotto));

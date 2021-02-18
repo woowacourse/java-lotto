@@ -11,10 +11,10 @@ public enum Reword {
     FIFTH(3, 5_000),
     NONE(0, 0);
 
-    private int hitCount;
-    private int winningMoney;
+    private final int hitCount;
+    private final int winningMoney;
 
-    Reword(int hitCount, int winningMoney) {
+    Reword(final int hitCount, final int winningMoney) {
         this.hitCount = hitCount;
         this.winningMoney = winningMoney;
     }
@@ -27,7 +27,7 @@ public enum Reword {
         return winningMoney;
     }
 
-    public static Reword valueOf(int hitCount, boolean isHitBonus) {
+    public static Reword valueOf(final int hitCount, final boolean isHitBonus) {
         validateHitCount(hitCount);
 
         if (hitCount == SECOND.hitCount && isHitBonus) {
@@ -46,11 +46,11 @@ public enum Reword {
         return NONE;
     }
 
-    private boolean matchHitCount(int hitCount) {
+    private boolean matchHitCount(final int hitCount) {
         return hitCount == this.hitCount;
     }
 
-    private static void validateHitCount(int value) {
+    private static void validateHitCount(final int value) {
         if (value < NONE.hitCount || value > FIRST.hitCount) {
             throw new InvalidLottoHitCountException();
         }

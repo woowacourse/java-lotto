@@ -17,7 +17,7 @@ public class LottoController {
     private final WinningLotto winningLotto;
     private final int buyMoney;
 
-    public LottoController(String value) {
+    public LottoController(final String value) {
         this.buyMoney = Integer.parseInt(value);
         lottoTickets = new LottoTickets(this.buyMoney / 1000);
         OutputView.printBuyLottoCountMessage(this.buyMoney / 1000);

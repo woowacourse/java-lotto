@@ -7,7 +7,7 @@ public class Rewords {
 
     private final List<Reword> rewords;
 
-    public Rewords(List<Reword> rewords) {
+    public Rewords(final List<Reword> rewords) {
         this.rewords = new ArrayList<>(rewords);
     }
 
@@ -31,7 +31,7 @@ public class Rewords {
         return matchCount(Reword.FIFTH);
     }
 
-    public double profit(int money) {
+    public double profit(final int money) {
         long profit = rewords.stream()
             .mapToInt(Reword::getWinningMoney)
             .sum();
@@ -39,7 +39,7 @@ public class Rewords {
         return LottoCalculator.divide(money, profit);
     }
 
-    public int matchCount(Reword reword) {
+    public int matchCount(final Reword reword) {
         return (int) rewords.stream()
             .filter(value -> value == reword)
             .count();
