@@ -30,10 +30,7 @@ public class Lotto {
         return this.lottoNumbers.findMatchCount(targetLotto.lottoNumbers);
     }
 
-    @Override
-    public String toString() {
-        return "[" +
-                lottoNumbers +
-                ']';
+    public LottoNumbers getValue() {
+        return lottoNumbers;
     }
 }

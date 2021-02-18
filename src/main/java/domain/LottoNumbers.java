@@ -61,4 +61,8 @@ public class LottoNumbers {
                 .map(LottoNumber::toString)
                 .collect(Collectors.joining(","));
     }
+
+    public List<LottoNumber> getValues() {
+        return new ArrayList<>(lottoNumbers);
+    }
 }

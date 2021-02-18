@@ -1,17 +1,16 @@
 package view;
 
-import domain.Lotto;
-import domain.LottoRank;
-import domain.LottoResults;
-import domain.Lottos;
+import domain.*;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class OutputView {
 
-    private static final String format = "%d개 일치 (%d원)- %d개" + System.lineSeparator();
+    private static final String RESULT_FORMAT = "%d개 일치 (%d원)- %d개" + System.lineSeparator();
 
     private OutputView() {
     }
@@ -20,10 +19,24 @@ public class OutputView {
         System.out.println(numberOfLotto + "개를 구매했습니다.");
     }
 
-    public static void printAllLottos(Lottos boughtLottos) {
-        for (Lotto lotto : boughtLottos.getLottos()) {
-            System.out.println(lotto);
+    public static void printAllLottos(Lottos lottos) {
+        List<Lotto> lottosValues = lottos.getLottos();
+        for (Lotto lotto : lottosValues) {
+            printLotto(lotto);
         }
+    }
+
+    private static void printLotto(Lotto lotto) {
+        LottoNumbers lottoNumbers = lotto.getValue();
+        printLottoNumbers(lottoNumbers);
+    }
+
+    private static void printLottoNumbers(LottoNumbers lottoNumbers) {
+        List<LottoNumber> lottoNumbersValues = lottoNumbers.getValues();
+        List<Integer> lotto = lottoNumbersValues.stream()
+                .map(LottoNumber::getValue)
+                .collect(Collectors.toList());
+        System.out.println(lotto);
     }
 
     public static void printResults(LottoResults results) {
@@ -37,7 +50,8 @@ public class OutputView {
     }
 
     private static void printResult(Map<LottoRank, Long> resultsValues, LottoRank lottoRank) {
-        System.out.printf(format, lottoRank.getCorrectCnt(), lottoRank.getPrize().getValue(), resultsValues.get(lottoRank));
+        System.out.printf(RESULT_FORMAT, lottoRank.getCorrectCnt(),
+                lottoRank.getPrize().getValue(), resultsValues.get(lottoRank));
     }
 
     public static void printEarningRate(double earningRate) {
