@@ -16,6 +16,7 @@ public class LottoGame {
         for (Lotto lotto : lottos.toList()) {
             lottoGameResult.add(winningLotto.findRank(lotto));
         }
+
         return lottoGameResult;
     }
 }

@@ -45,6 +45,7 @@ public class LottoGameResult {
                 .stream()
                 .mapToInt(num -> num)
                 .sum();
+
         return numberOfTotalLotto * Money.PRICE_OF_LOTTO;
     }
 }
