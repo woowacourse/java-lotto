@@ -1,9 +1,9 @@
 package lotto.view;
 
 import java.util.List;
-import java.util.Map;
 import lotto.domain.LottoTicket;
 import lotto.domain.ticketpurchase.PurchasedLottoTickets;
+import lotto.domain.ticketresult.LottoResult;
 import lotto.type.LottoMatchType;
 import lotto.view.printer.InputPrinter;
 import lotto.view.printer.OutputPrinter;
@@ -21,16 +21,15 @@ public class OutputView {
         InputPrinter.printNewLine();
     }
 
-    public static void printResult(Map<LottoMatchType, Integer> result, int purchasePrice) {
+    public static void printResult(LottoResult lottoResult, int purchasePrice) {
         OutputPrinter.printResultTitleMessage();
         int totalPrize = 0;
-
         for (LottoMatchType lottoMatchType : LottoMatchType.values()) {
-            totalPrize += lottoMatchType.getPrizeMoney() * result.get(lottoMatchType);
-            OutputPrinter.printEachNumberMatchedCountMessage(lottoMatchType, result);
+            int countOfMatchedNumbers
+                = lottoResult.getCountOfMatchedNumbersOfSpecificType(lottoMatchType);
+            totalPrize += lottoMatchType.getPrizeMoney() * countOfMatchedNumbers;
+            OutputPrinter.printEachNumberMatchedCountMessage(lottoMatchType, countOfMatchedNumbers);
         }
-
-        double profit = (double) totalPrize / (double) purchasePrice;
-        OutputPrinter.printProfitMessage(profit);
+        OutputPrinter.printProfitMessage((double) totalPrize / (double) purchasePrice);
     }
 }

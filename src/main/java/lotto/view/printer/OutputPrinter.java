@@ -2,7 +2,6 @@ package lotto.view.printer;
 
 import static lotto.view.InputView.LOTTO_NUMBER_DELIMITER;
 
-import java.util.Map;
 import java.util.stream.Collectors;
 import lotto.domain.LottoTicket;
 import lotto.type.LottoMatchType;
@@ -34,9 +33,8 @@ public class OutputPrinter {
     }
 
     public static void printEachNumberMatchedCountMessage(LottoMatchType lottoMatchType,
-        Map<LottoMatchType, Integer> result) {
-        System.out.printf(lottoMatchType.getMatchCountMessage() + NEW_LINE,
-            result.get(lottoMatchType));
+        int countOfMatchedNumbers) {
+        System.out.printf(lottoMatchType.getMatchCountMessage() + NEW_LINE, countOfMatchedNumbers);
     }
 
     public static void printProfitMessage(double profit) {

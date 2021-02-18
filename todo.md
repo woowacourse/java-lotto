@@ -1,5 +1,4 @@
 # todo
-- lottoResult 일급컬렉션으로 포장.
 
 # done
 - LottoTicket 에서 allNumbers, shuffle 분리. 일급컬렉션으로.
@@ -20,3 +19,4 @@
 - 클래스다이어그램 필드, 메소드 동기화
 - 클래스다이어그램 의존성 확인.
 - 로또티켓 정렬되는지 테스트.
+- lottoResult 일급컬렉션으로 포장.
