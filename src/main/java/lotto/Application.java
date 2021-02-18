@@ -1,8 +1,6 @@
 package lotto;
 
-import java.util.Arrays;
 import lotto.controller.LottoController;
-import lotto.view.OutputView;
 import lotto.view.Screen;
 
 public class Application {
@@ -12,6 +10,5 @@ public class Application {
         String money = Screen.getInputMoney();
         LottoController lottoController = new LottoController(money);
         lottoController.run();
-
     }
 }
