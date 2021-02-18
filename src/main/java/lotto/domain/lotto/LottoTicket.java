@@ -1,5 +1,7 @@
 package lotto.domain.lotto;
 
+import static lotto.view.messages.ErrorMessages.LOTTO_PURCHASE_PRICE_ERROR;
+
 import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.lotto.utils.Rank;
@@ -12,7 +14,7 @@ public class LottoTicket {
     public LottoTicket(int money) {
         int lottoLineCount = money / 1000;
         if (money < 0 || lottoLineCount <= 0) {
-            throw new IllegalArgumentException("[Error] 로또 구입 금액은 1,000원 이상 입니다.(로또 1개 당 1,000원)");
+            throw new IllegalArgumentException(LOTTO_PURCHASE_PRICE_ERROR.getMessage());
         }
         List<LottoLine> lottoLines = new ArrayList<>();
         for (int i = 0; i < lottoLineCount; i++) {

@@ -1,5 +1,6 @@
 package domain.lotto;
 
+import static lotto.view.messages.ErrorMessages.LOTTO_PURCHASE_PRICE_ERROR;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import lotto.domain.lotto.LottoTicket;
@@ -13,7 +14,7 @@ public class LottoTicketTest {
     public void lotto_ticket_make_test() {
         assertThatThrownBy(() -> new LottoTicket(-1))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessageContaining("[Error] 로또 구입 금액은 1,000원 이상 입니다.(로또 1개 당 1,000원)");
+            .hasMessageContaining(LOTTO_PURCHASE_PRICE_ERROR.getMessage());
     }
 
 }

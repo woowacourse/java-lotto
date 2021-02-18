@@ -1,5 +1,6 @@
 package domain.lotto;
 
+import static lotto.view.messages.ErrorMessages.LOTTO_NUMBER_RANGE_ERROR;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import lotto.domain.lotto.LottoNumber;
@@ -13,7 +14,7 @@ public class LottoNumberTest {
     public void check_car_name_exception() {
         assertThatThrownBy(() -> new LottoNumber(46))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessageContaining("[ERROR] 로또 번호는 1부터 45까지 숫자입니다.");
+            .hasMessageContaining(LOTTO_NUMBER_RANGE_ERROR.getMessage());
     }
 
 }

@@ -2,6 +2,7 @@ package lotto.domain.lotto;
 
 import static lotto.domain.lotto.utils.LottoAttributes.LOTTO_NUMBER_END;
 import static lotto.domain.lotto.utils.LottoAttributes.LOTTO_NUMBER_START;
+import static lotto.view.messages.ErrorMessages.LOTTO_NUMBER_RANGE_ERROR;
 
 import java.util.Objects;
 
@@ -11,7 +12,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public LottoNumber(int value) {
         if (value < LOTTO_NUMBER_START || value > LOTTO_NUMBER_END) {
-            throw new IllegalArgumentException("[ERROR] 로또 번호는 1부터 45까지 숫자입니다.");
+            throw new IllegalArgumentException(LOTTO_NUMBER_RANGE_ERROR.getMessage());
         }
         this.value = value;
     }
