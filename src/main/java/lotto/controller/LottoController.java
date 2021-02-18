@@ -26,7 +26,7 @@ public class LottoController {
         LottoTickets lottoTickets = buyTickets(money);
 
         LottoTicket winningTicket = inputWinningNumbers();
-        LottoNumber bonusBall = inputBonus();
+        LottoNumber bonusBall = inputBonus(winningTicket);
 
         showResult(money, lottoTickets, winningTicket, bonusBall);
     }
@@ -60,13 +60,15 @@ public class LottoController {
         }
     }
 
-    private LottoNumber inputBonus() {
+    private LottoNumber inputBonus(LottoTicket winningTicket) {
         try {
             OutputView.printBonusNumber();
-            return new LottoNumber(ValidateUtils.parseInt(inputView.inputValue()));
+            LottoNumber bonusBall = new LottoNumber(ValidateUtils.parseInt(inputView.inputValue()));
+            winningTicket.checkDuplicateNumber(bonusBall);
+            return bonusBall;
         } catch (LottoCustomException e) {
             OutputView.printErrorMessage(e.getMessage());
-            return inputBonus();
+            return inputBonus(winningTicket);
         }
     }
 

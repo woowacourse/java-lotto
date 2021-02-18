@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import lotto.exception.LottoCustomException;
 
 public class LottoTicket {
 
@@ -36,6 +37,12 @@ public class LottoTicket {
             return ALL_SAME;
         }
         return hitLottoNumbers.size();
+    }
+
+    public void checkDuplicateNumber(LottoNumber bonusBall) {
+        if (lottoNumbers.contains(bonusBall)) {
+            throw new LottoCustomException("보너스 볼은 지난 주 당첨번호와 중복될 수 없습니다.");
+        }
     }
 
     @Override
