@@ -36,9 +36,8 @@ public class LottoResultStatistics {
             totalReward += this.lottoResult.get(lottoRank) * lottoRank.getReward();
         }
         double paidMoney = money.getMoney();
-        int result = (int) (((totalReward - paidMoney) / paidMoney) * EARNING_RATE);
 
-        return result;
+        return (int) (((totalReward - paidMoney) / paidMoney) * EARNING_RATE);
     }
 
     public Map<LottoRank, Integer> getLottoResult() {
