@@ -1,9 +1,7 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.Money;
-import lotto.domain.WinningLotto;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,25 +14,41 @@ public class InputView {
     public static Money askMoney() {
         OutputView.printMessage("구입 금액을 입력해 주세요.");
         String money = scanner.nextLine();
-
-        return new Money(money);
+        try {
+            return new Money(money);
+        } catch (Exception e) {
+            OutputView.printError(e);
+            return askMoney();
+        }
     }
 
-    public static WinningLotto askLastWinningLotto() {
+    public static List<LottoNumber> askLastWinningLottoNumber() {
         OutputView.printMessage("지난 주 당첨 번호를 입력해 주세요.");
         String input = scanner.nextLine();
-
-        List<String> splitNumbers = Arrays.asList(input.split(", "));
-        List<LottoNumber> LastLottoNumbers = splitNumbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
-
-        return new WinningLotto(new Lotto(LastLottoNumbers), askBonusNumber());
+        try {
+            return makeWinningLottoNumbers(input);
+        } catch (Exception e) {
+            OutputView.printError(e);
+            return askLastWinningLottoNumber();
+        }
     }
 
-    private static LottoNumber askBonusNumber() {
+    private static List<LottoNumber> makeWinningLottoNumbers(String input) {
+        List<String> splitNumbers = Arrays.asList(input.split(","));
+        return splitNumbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+    }
+
+
+    public static LottoNumber askBonusNumber() {
         OutputView.printMessage("보너스 볼을 입력해 주세요.");
         String bonusNumber = scanner.nextLine();
-        return new LottoNumber(bonusNumber);
+        try {
+            return new LottoNumber(bonusNumber);
+        } catch (Exception e) {
+            OutputView.printError(e);
+            return askBonusNumber();
+        }
     }
 }
