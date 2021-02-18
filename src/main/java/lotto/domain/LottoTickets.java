@@ -22,7 +22,7 @@ public class LottoTickets {
     public void putLottoResult(Map<LottoRank, Integer> lottoResult, LottoWinner lottoWinner) {
         lottoTickets
                 .forEach(lottoTicket -> {
-                    LottoBoughtTicket lottoBoughtTicket = (LottoBoughtTicket)lottoTicket;
+                    LottoBoughtTicket lottoBoughtTicket = (LottoBoughtTicket) lottoTicket;
                     LottoRank rank = lottoBoughtTicket.getRank(lottoWinner);
                     lottoResult.put(rank, lottoResult.get(rank) + INCREMENT_COUNT_ONE);
                 });

@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class LottoBoughtTicket extends LottoTicket{
+public class LottoBoughtTicket extends LottoTicket {
 
     private static final int TOTAL_NUMBER_COUNT = 12;
 
