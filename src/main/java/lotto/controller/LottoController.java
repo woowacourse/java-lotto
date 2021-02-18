@@ -16,6 +16,7 @@ import lotto.view.OutputView;
 
 public class LottoController {
 
+    public static final String REGEX = ", ";
     private final InputView inputView;
 
     public LottoController(Scanner scanner) {
@@ -74,7 +75,7 @@ public class LottoController {
         String winningNumbers = inputView.inputWinningNumbers();
         List<Integer> lottoNumbers = Arrays
             .stream(winningNumbers
-                .split(", "))
+                .split(REGEX))
             .map(Integer::parseInt)
             .collect(Collectors.toList());
         return lottoNumbers;
