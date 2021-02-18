@@ -11,6 +11,7 @@ public class LottoController {
     public void lottoStart() {
         Money money = initMoney();
         LottoTickets lottoTickets = initLottoTickets(money);
+
         LottoWinnerTicket lottoWinnerTicket = initLottoWinnerTicket();
         LottoWinnerBonusNumber lottoWinnerBonusNumber = initLottoWinnerBonusNumber(lottoWinnerTicket);
         LottoWinner lottoWinner = new LottoWinner(lottoWinnerTicket, lottoWinnerBonusNumber);
