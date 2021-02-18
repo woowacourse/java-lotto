@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import lotto.exception.InvalidLottoHitCountException;
 
 public enum Reword {
@@ -30,20 +31,21 @@ public enum Reword {
     public static Reword valueOf(final int hitCount, final boolean isHitBonus) {
         validateHitCount(hitCount);
 
-        if (hitCount == SECOND.hitCount && isHitBonus) {
-            return SECOND;
-        }
-        if (hitCount == THIRD.hitCount && !isHitBonus) {
-            return THIRD;
+        if (hitCount == SECOND.hitCount) {
+            return checkBonusReword(isHitBonus);
         }
 
-        for (Reword reword : values()) {
-            if (reword.matchHitCount(hitCount)) {
-                return reword;
-            }
-        }
+        return Arrays.stream(values())
+            .filter(reword -> reword.matchHitCount(hitCount))
+            .findFirst()
+            .orElse(Reword.NONE);
+    }
 
-        return NONE;
+    private static Reword checkBonusReword(final boolean isHitBonus) {
+        if (isHitBonus) {
+            return Reword.SECOND;
+        }
+        return Reword.THIRD;
     }
 
     private boolean matchHitCount(final int hitCount) {
