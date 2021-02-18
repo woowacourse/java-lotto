@@ -3,6 +3,7 @@ package lotto.domain.ticketresult;
 import static lotto.type.LottoMatchType.FIVE_AND_BONUS_MATCH;
 import static lotto.type.LottoMatchType.FIVE_MATCH;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +39,7 @@ public class LottoComparator {
                 winningLottoNumbers.getWinningTicket());
             addResult(countMatchedNumbers, purchasedOneLottoTicket);
         }
-        return lottoResult;
+        return Collections.unmodifiableMap(new HashMap<>(lottoResult));
     }
 
     private int getEachLottoResult(LottoTicket purchasedOneLottoTicket,
