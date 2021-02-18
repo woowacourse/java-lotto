@@ -28,4 +28,12 @@ public class OutputView {
                 .collect(Collectors.toList()));
         }
     }
+
+    public static void inputWinningNumber() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+    }
+
+    public static void inputBonus() {
+        System.out.println("보너스 번호를 입력해 주세요.");
+    }
 }

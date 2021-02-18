@@ -4,11 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.List;
 import lotto.Money;
 import lotto.domain.lotto.lottogenerator.RandomLottoGenerator;
-import lotto.domain.lotto.LottoStore;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
@@ -48,7 +45,7 @@ public class LottoTest {
     void 로또_구매_수량_테스트() {
         Money money = new Money("14990");
         LottoStore lottoStore = new LottoStore();
-        Lottos lottos = lottoStore.buyLotto(money);
+        Lottos lottos = lottoStore.buyLottos(money);
 
         assertThat(lottos.getNumLotto()).isEqualTo(14);
     }
