@@ -1,6 +1,9 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.EnumMap;
+import java.util.Map;
 
 public class LottoGameResult {
     private final Map<Rank, Integer> ranks;
@@ -19,17 +22,29 @@ public class LottoGameResult {
         ranks.put(rank, ranks.get(rank) + 1);
     }
 
-    public double totalReward() {
+    public Map<Rank, Integer> ranks() {
+        return Collections.unmodifiableMap(ranks);
+    }
+
+    public int countByRank(Rank rank) {
+        return ranks.get(rank);
+    }
+
+    public double calculateProfit() {
+        return totalReward() / calculateTotalPrice();
+    }
+
+    private double totalReward() {
         return ranks.entrySet().stream()
                 .mapToDouble(rank -> rank.getKey().getReward() * rank.getValue())
                 .sum();
     }
 
-    public double calculateProfit(int totalPrice) {
-        return totalReward() / totalPrice;
-    }
-
-    public int countByRank(Rank rank) {
-        return ranks.get(rank);
+    private int calculateTotalPrice() {
+        int numberOfTotalLotto = ranks.values()
+                .stream()
+                .mapToInt(num -> num)
+                .sum();
+        return numberOfTotalLotto * Money.PRICE_OF_LOTTO;
     }
 }

@@ -28,14 +28,8 @@ public class LottoGameResultTest {
     }
 
     @Test
-    @DisplayName("로또 당첨에 따른 총 상금 테스트")
-    void testTotalReward() {
-        assertThat(lottoGameResult.totalReward()).isEqualTo(55000);
-    }
-
-    @Test
     @DisplayName("수익률 테스트")
     void testProfit() {
-        assertThat(lottoGameResult.calculateProfit(5000)).isEqualTo(11);
+        assertThat(lottoGameResult.calculateProfit()).isEqualTo(11);
     }
 }
