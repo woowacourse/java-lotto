@@ -16,12 +16,12 @@ public class WinningLottoTest {
 
     @BeforeAll
     static void beforeAll() {
-        LottoNumber number1 = new LottoNumber(1);
-        LottoNumber number2 = new LottoNumber(2);
-        LottoNumber number3 = new LottoNumber(3);
-        LottoNumber number4 = new LottoNumber(4);
-        LottoNumber number5 = new LottoNumber(5);
-        LottoNumber number6 = new LottoNumber(6);
+        LottoNumber number1 = new LottoNumber("1");
+        LottoNumber number2 = new LottoNumber("2");
+        LottoNumber number3 = new LottoNumber("3");
+        LottoNumber number4 = new LottoNumber("4");
+        LottoNumber number5 = new LottoNumber("5");
+        LottoNumber number6 = new LottoNumber("6");
         List<LottoNumber> lottoNumbers = Arrays.asList(number1, number2, number3, number4, number5, number6);
         Lotto = new Lotto(lottoNumbers);
     }
@@ -29,14 +29,14 @@ public class WinningLottoTest {
     @Test
     @DisplayName("당첨 번호와 보너스 번호가 중복되는 경우 테스트")
     void name() {
-        LottoNumber bonusNumber = new LottoNumber(2);
+        LottoNumber bonusNumber = new LottoNumber("2");
         assertThatIllegalArgumentException().isThrownBy(() -> new WinningLotto(Lotto, bonusNumber));
     }
 
     @Test
     @DisplayName("당첨 번호와 보너스 번호가 제대로 들어갔는지 테스트")
     void name2() {
-        LottoNumber bonusNumber = new LottoNumber(7);
+        LottoNumber bonusNumber = new LottoNumber("7");
         WinningLotto winningLotto = new WinningLotto(Lotto, bonusNumber);
         assertThat(winningLotto.toString()).isEqualTo(Lotto.toString() + ", " + bonusNumber.toString());
     }
@@ -44,7 +44,7 @@ public class WinningLottoTest {
     @Test
     @DisplayName("당첨 숫자에 따른 등수 테스트")
     void testSeekRank() {
-        LottoNumber bonusNumber = new LottoNumber(8);
+        LottoNumber bonusNumber = new LottoNumber("8");
         WinningLotto winningLotto = new WinningLotto(Lotto, bonusNumber);
         assertThat(winningLotto.findRank(Lotto)).isEqualTo(Rank.FIRST);
     }
