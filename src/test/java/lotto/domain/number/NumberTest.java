@@ -28,9 +28,9 @@ public class NumberTest {
     @DisplayName("정상적인 숫자 생성")
     void inputNormal() {
         Number number = Number.valueOf(1);
-        assertThat(number.equals(1)).isTrue();
+        assertThat(number.toInt()).isEqualTo(1);
 
-        Number numberByString = Number.valueOf("1");
-        assertThat(numberByString.equals(1)).isTrue();
+        number = Number.valueOf("1");
+        assertThat(number.toInt()).isEqualTo(1);
     }
 }

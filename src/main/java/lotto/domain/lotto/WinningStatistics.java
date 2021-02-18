@@ -3,6 +3,7 @@ package lotto.domain.lotto;
 import static java.util.Comparator.comparingInt;
 import static java.util.stream.Collectors.toList;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +29,7 @@ public class WinningStatistics {
     }
 
     public List<Ranking> getRankings() {
-        return Collections.unmodifiableList(rankings);
+        return new ArrayList<>(rankings);
     }
 
     public double getYield() {

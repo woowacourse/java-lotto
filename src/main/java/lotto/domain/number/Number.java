@@ -5,6 +5,7 @@ import java.util.Objects;
 public class Number {
 
     private static final Number ZERO = new Number(0);
+
     private final int value;
 
     private Number(int value) {
@@ -40,11 +41,6 @@ public class Number {
     }
 
     @Override
-    public Number clone() {
-        return new Number(value);
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -54,10 +50,6 @@ public class Number {
         }
         Number number = (Number) o;
         return value == number.value;
-    }
-
-    public boolean equals(int value) {
-        return this.value == value;
     }
 
     @Override

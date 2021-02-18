@@ -13,13 +13,13 @@ public class WinningStatisticsTest {
     @Test
     @DisplayName("수익률 계산")
     void getYield() {
-        WinningNumber winningNumber = WinningNumber.valueOf("1, 2, 3, 4, 5, 6", "7");
-        LottoGroup lottoGroup = new LottoGroup(Arrays.asList(
+        WinningNumbers winningNumbers = WinningNumbers.valueOf("1, 2, 3, 4, 5, 6", "7");
+        LottoTicket lottoTicket = new LottoTicket(Arrays.asList(
             LottoNumbers.valueOf("1,2,3,4,5,6"),
             LottoNumbers.valueOf("1,2,3,4,5,34"),
             LottoNumbers.valueOf("1,2,3,4,5,7")
         ));
-        WinningStatistics result = winningNumber.getResult(lottoGroup, PayOut.valueOf("3000"));
+        WinningStatistics result = winningNumbers.getResult(lottoTicket, PayOut.valueOf("3000"));
         assertThat(2031500000D / 3000D).isEqualTo(result.getYield(), withPrecision(2d));
     }
 }

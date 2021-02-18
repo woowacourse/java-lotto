@@ -15,16 +15,16 @@ public enum Rank {
 
     private final int rank;
     private final int matchedNumber;
-    private final boolean hasBonusNumber;
+    private final boolean bonusNumber;
     private final int winnings;
     private final Function<Long, Ranking> ranking;
 
-    Rank(int rank, int matchedNumber, boolean hasBonusNumber, int winnings) {
+    Rank(int rank, int matchedNumber, boolean bonusNumber, int winnings) {
         this.rank = rank;
         this.matchedNumber = matchedNumber;
-        this.hasBonusNumber = hasBonusNumber;
+        this.bonusNumber = bonusNumber;
         this.winnings = winnings;
-        this.ranking = count -> new Ranking(rank, winnings, count, matchedNumber, hasBonusNumber);
+        this.ranking = count -> new Ranking(rank, winnings, count, matchedNumber, bonusNumber);
     }
 
     public int getRank() {
@@ -39,10 +39,10 @@ public enum Rank {
             .ranking.apply(count);
     }
 
-    public static Rank getRank(int matchedNumber, boolean hasBonusNumber) {
+    public static Rank getRank(int matchedNumber, boolean bonusNumber) {
         return stream(Rank.values())
             .filter(rank -> (rank.matchedNumber == matchedNumber
-                && (!rank.hasBonusNumber || hasBonusNumber)))
+                && (!rank.bonusNumber || bonusNumber)))
             .findAny()
             .orElse(Rank.FAIL);
     }

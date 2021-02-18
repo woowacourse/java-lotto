@@ -8,23 +8,23 @@ import java.util.stream.IntStream;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.PayOut;
 
-public class WinningNumber {
+public class WinningNumbers {
 
     private final LottoNumbers lottoNumbers;
     private final LottoNumber bonusNumber;
 
-    private WinningNumber(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
+    private WinningNumbers(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
         this.lottoNumbers = lottoNumbers;
         this.bonusNumber = bonusNumber;
     }
 
-    public static WinningNumber valueOf(String unparsedLottoNumbers, String unparsedBonusNumber) {
+    public static WinningNumbers valueOf(String unparsedLottoNumbers, String unparsedBonusNumber) {
         LottoNumbers parsedLottoNumbers = LottoNumbers.valueOf(unparsedLottoNumbers);
         LottoNumber parsedBonusNumber = LottoNumber.valueOf(unparsedBonusNumber);
 
         validateDuplication(parsedLottoNumbers, parsedBonusNumber);
 
-        return new WinningNumber(parsedLottoNumbers, parsedBonusNumber);
+        return new WinningNumbers(parsedLottoNumbers, parsedBonusNumber);
     }
 
     private static void validateDuplication(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
@@ -37,8 +37,8 @@ public class WinningNumber {
         return lottoNumbers;
     }
 
-    public WinningStatistics getResult(LottoGroup lottoGroup, PayOut payOut) {
-        Map<Integer, Long> result = lottoGroup.getLottos().stream()
+    public WinningStatistics getResult(LottoTicket lottoTicket, PayOut payOut) {
+        Map<Integer, Long> result = lottoTicket.toLottoNumbersList().stream()
             .map(this::getRank)
             .filter(rank -> Rank.FAIL.getRank() != rank)
             .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
@@ -65,7 +65,7 @@ public class WinningNumber {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        WinningNumber that = (WinningNumber) o;
+        WinningNumbers that = (WinningNumbers) o;
         return Objects.equals(lottoNumbers, that.lottoNumbers);
     }
 

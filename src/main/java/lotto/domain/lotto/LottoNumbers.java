@@ -22,16 +22,16 @@ public class LottoNumbers {
     }
 
     public static LottoNumbers valueOf(String unparsedLottoNumbers) {
-        return getLottoNumbersFromStringLottoNumberList(getSplitLottoNumber(unparsedLottoNumbers));
+        return getLottoNumbersFromStringList(splitLottoNumber(unparsedLottoNumbers));
     }
 
-    private static LottoNumbers getLottoNumbersFromStringLottoNumberList(List<String> lottoNumbers) {
+    private static LottoNumbers getLottoNumbersFromStringList(List<String> lottoNumbers) {
         return new LottoNumbers(lottoNumbers.stream()
             .map(lottoNumber -> LottoNumber.valueOf(lottoNumber.trim()))
             .collect(Collectors.toList()));
     }
 
-    private static List<String> getSplitLottoNumber(String lottoNumber) {
+    private static List<String> splitLottoNumber(String lottoNumber) {
         return Arrays.asList(lottoNumber.split(",", -1));
     }
 
@@ -74,11 +74,5 @@ public class LottoNumbers {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
-    }
-
-    @Override
-    public String toString() {
-        return String.join("-",
-            lottoNumbers.stream().map(LottoNumber::toString).collect(toList()));
     }
 }

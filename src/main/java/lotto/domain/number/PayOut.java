@@ -3,11 +3,12 @@ package lotto.domain.number;
 public class PayOut {
 
     private static final int GAME_PRICE = 1000;
-    private final Number payOut;
+
+    private final Number number;
 
     private PayOut(Number number) {
         validateNegative(number);
-        this.payOut = number;
+        this.number = number;
     }
 
     public static PayOut valueOf(String number) {
@@ -21,10 +22,10 @@ public class PayOut {
     }
 
     public int getGameCount() {
-        return payOut.toInt() / GAME_PRICE;
+        return number.toInt() / GAME_PRICE;
     }
 
     public int toInt() {
-        return payOut.toInt();
+        return number.toInt();
     }
 }

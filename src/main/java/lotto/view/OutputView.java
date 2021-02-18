@@ -3,7 +3,7 @@ package lotto.view;
 import static java.util.stream.Collectors.toList;
 
 import java.util.List;
-import lotto.domain.lotto.LottoGroup;
+import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.LottoNumbers;
 import lotto.domain.lotto.WinningStatistics;
 import lotto.domain.rank.Ranking;
@@ -28,8 +28,8 @@ public class OutputView {
         System.out.println(String.valueOf(lottoCount).concat(LOTTO_COUNT_FORMAT));
     }
 
-    public static void boughtLotties(LottoGroup lottoGroup) {
-        lottoGroup.getLottos().forEach(OutputView::printLottoNumbers);
+    public static void boughtLotties(LottoTicket lottoTicket) {
+        lottoTicket.toLottoNumbersList().forEach(OutputView::printLottoNumbers);
     }
 
     private static void printLottoNumbers(LottoNumbers lottoNumbers) {

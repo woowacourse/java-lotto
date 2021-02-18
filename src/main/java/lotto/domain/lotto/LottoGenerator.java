@@ -1,10 +1,12 @@
 package lotto.domain.lotto;
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import lotto.domain.number.LottoNumber;
 
 public class LottoGenerator {
@@ -17,18 +19,17 @@ public class LottoGenerator {
     private final List<LottoNumber> lottoNumbers;
 
     private LottoGenerator() {
-        lottoNumbers = new ArrayList<>();
-
-        for (int i = LOTTO_NUMBER_MINIMUM; i <= LOTTO_NUMBER_MAXIMUM; i++) {
-            lottoNumbers.add(LottoNumber.valueOf(i));
-        }
+        lottoNumbers = IntStream
+            .rangeClosed(LOTTO_NUMBER_MINIMUM, LOTTO_NUMBER_MAXIMUM)
+            .mapToObj(LottoNumber::valueOf)
+            .collect(toList());
     }
 
     public static LottoGenerator getInstance() {
         return LOTTO_GENERATOR;
     }
 
-    public LottoGroup generateLotties(int count) {
+    public LottoTicket newLottoTicket(int count) {
         List<LottoNumbers> lottos = new ArrayList();
 
         for (int i = 0; i < count; i++) {
@@ -36,7 +37,7 @@ public class LottoGenerator {
             lottos.add(lottoNumbers);
         }
 
-        return new LottoGroup(lottos);
+        return new LottoTicket(lottos);
     }
 
     private List<LottoNumber> generateRandomLottoNumber() {
@@ -45,6 +46,6 @@ public class LottoGenerator {
         return new ArrayList<>(lottoNumbers.subList(0, LOTTO_COUNT_MAXIMUM))
             .stream()
             .sorted(Comparator.comparingInt(LottoNumber::toInt))
-            .collect(Collectors.toList());
+            .collect(toList());
     }
 }
