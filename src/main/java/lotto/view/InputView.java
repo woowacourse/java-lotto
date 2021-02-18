@@ -5,6 +5,9 @@ import java.util.Scanner;
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
 
+    private InputView() {
+    }
+
     public static String getMoneyInput() {
         System.out.println("구입금액을 입력해 주세요.");
         return scanner.nextLine();
@@ -18,6 +21,10 @@ public class InputView {
     public static String getBonusBallInput() {
         System.out.println("보너스 볼을 입력해 주세요.");
         return scanner.nextLine();
+    }
+
+    public static void closeScanner() {
+        scanner.close();
     }
 
 }

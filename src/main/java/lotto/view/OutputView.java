@@ -2,7 +2,6 @@ package lotto.view;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import lotto.domain.LottoTicket;
 import lotto.domain.Rank;
@@ -13,20 +12,23 @@ public class OutputView {
     }
 
     public static void printResult(Result result) {
-        Map<Rank, Integer> resultMap = result.getResultMap();
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        Arrays.stream(Rank.values())
-            .filter(rank -> !Rank.UNRANKED.equals(rank))
-            .forEach(rank -> {
-                String message = getMessage(rank);
-                System.out.printf("%s (%s원)- %d개%n",
-                    message, rank.getPrize().toString(), resultMap.getOrDefault(rank, 0));
-            });
+        showResults(result);
 
         System.out.printf("총 수익률은 %s%%입니다.%n", result.getEarningRate());
+    }
+
+    private static void showResults(Result result) {
+        Arrays.stream(Rank.values())
+            .filter(rank -> !Rank.UNRANKED.equals(rank))
+            .forEach(rank -> System.out.printf("%s (%s원)- %d개%n",
+                getMessage(rank),
+                rank.getPrize().toString(),
+                result.getResultMap().getOrDefault(rank, 0))
+            );
     }
 
     private static String getMessage(Rank rank) {
@@ -51,10 +53,12 @@ public class OutputView {
 
     public static void printTickets(List<LottoTicket> lottoTickets) {
         System.out.printf("%d개를 구매했습니다.\n", lottoTickets.size());
+
         for (LottoTicket lottoTicket : lottoTickets) {
             String numbers = lottoTicket.getUnmodifiableList().stream()
                 .map(lottoNumber -> Integer.toString(lottoNumber.getNumber()))
                 .collect(Collectors.joining(", "));
+
             System.out.println("[" + numbers + "]");
         }
         System.out.println();
