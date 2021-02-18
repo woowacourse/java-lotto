@@ -9,6 +9,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private final int number;
 
     public LottoNumber(String number) {
+        number = number.trim();
         validateLottoNumber(number);
         this.number = Integer.parseInt(number);
     }
@@ -18,14 +19,14 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private void validateLottoNumber(String number) {
-        validateNumber(number);
         validateEmpty(number);
+        validateNumber(number);
         validateNumberBound(number);
     }
 
     private void validateNumber(String number) {
         try {
-            Integer.parseInt(number);
+            Integer.parseInt(number.trim());
         } catch (NumberFormatException e) {
             throw new NumberFormatException("숫자만 입력 가능합니다.");
         }
