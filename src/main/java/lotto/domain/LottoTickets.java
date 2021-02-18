@@ -14,7 +14,7 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
-    public static LottoTickets generateLottoTickets(int lottoTicketCounts, LottoNumberGenerator lottoNumberGenerator) {
+    public static LottoTickets generateAutomatic(int lottoTicketCounts, LottoNumberGenerator lottoNumberGenerator) {
         List<LottoTicket> lottoTickets = Stream.generate(() -> LottoTicket.from(lottoNumberGenerator.generate()))
                 .limit(lottoTicketCounts)
                 .collect(Collectors.toList());
