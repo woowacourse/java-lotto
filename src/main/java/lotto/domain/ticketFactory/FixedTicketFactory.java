@@ -23,7 +23,7 @@ public class FixedTicketFactory {
     public static Set<LottoNumber> getFixedLottoNumbers(Set<String> lottoNumbers) {
         return lottoNumbers
             .stream()
-            .map(LottoNumber::new)
+            .map(number -> new LottoNumber(number.trim()))
             .collect(Collectors.toSet());
     }
 
