@@ -29,10 +29,10 @@ public class LottoStatistics {
     public String ratingToString(final Rating rating, final int count) {
         if (rating == Rating.SECOND) {
             return String
-                .format(SECOND_PRINT_FORMAT, rating.getMatchCount(), rating.getReward(), count);
+                    .format(SECOND_PRINT_FORMAT, rating.getMatchCount(), rating.getReward(), count);
         }
         return String
-            .format(PRINT_FORMAT, rating.getMatchCount(), rating.getReward(), count);
+                .format(PRINT_FORMAT, rating.getMatchCount(), rating.getReward(), count);
     }
 
     public double getEarningRate(final Money money) {

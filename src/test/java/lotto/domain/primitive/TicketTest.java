@@ -1,11 +1,9 @@
 package lotto.domain.primitive;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
-import lotto.domain.primitive.Money;
-import lotto.domain.primitive.Ticket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class TicketTest {
 
@@ -13,6 +11,7 @@ public class TicketTest {
     @DisplayName("티켓을 구매 못하는 경우 확인")
     void validateMinimumTicketPrice() {
         assertThatThrownBy(() -> new Ticket(new Money(900)))
-            .isInstanceOf(IllegalArgumentException.class).hasMessageContaining("원 이상");
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("원 이상");
     }
 }

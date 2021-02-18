@@ -1,9 +1,10 @@
 package lotto.domain.lotto;
 
+import lotto.domain.lottomachine.LottoMachine;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import lotto.domain.lottomachine.LottoMachine;
 
 public class LottoRepository {
 

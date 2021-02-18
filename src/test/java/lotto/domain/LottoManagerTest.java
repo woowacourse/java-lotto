@@ -1,9 +1,5 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.*;
-
-import java.util.List;
-import java.util.Arrays;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoRepository;
 import lotto.domain.primitive.LottoNumber;
@@ -15,6 +11,11 @@ import lotto.domain.statistics.WinningLotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoManagerTest {
 
@@ -37,8 +38,12 @@ public class LottoManagerTest {
         LottoRepository lottoRepositoryByLottoManager = lottoManager.buyLotto(ticket);
 
         for (int i = 0; i < count; i++) {
-            List<Integer> expected = lottoRepository.toList().get(i).getNumbers();
-            List<Integer> actual = lottoRepositoryByLottoManager.toList().get(i).getNumbers();
+            List<Integer> expected = lottoRepository.toList()
+                                                    .get(i)
+                                                    .getNumbers();
+            List<Integer> actual = lottoRepositoryByLottoManager.toList()
+                                                                .get(i)
+                                                                .getNumbers();
             assertThat(actual).isEqualTo(expected);
         }
     }
@@ -50,7 +55,7 @@ public class LottoManagerTest {
 
         lottoManager.buyLotto(ticket);
         WinningLotto winningLotto = new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-            new LottoNumber(7));
+                new LottoNumber(7));
         RatingInfo ratingInfo = lottoManager.scratchLotto(winningLotto);
 
         assertThat(ratingInfo.get(Rating.FIRST)).isEqualTo(2);

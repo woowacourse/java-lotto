@@ -1,12 +1,9 @@
 package lotto.domain.lotto;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 import lotto.domain.primitive.LottoNumber;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -16,7 +13,9 @@ public class Lotto {
     private final List<LottoNumber> numbers;
 
     public Lotto(final List<Integer> numbers) {
-        this(numbers.stream().map(LottoNumber::new).collect(Collectors.toList()), true);
+        this(numbers.stream()
+                    .map(LottoNumber::new)
+                    .collect(Collectors.toList()), true);
     }
 
     /*
@@ -38,7 +37,9 @@ public class Lotto {
     }
 
     private void validateDistinct(final List<LottoNumber> numbers) {
-        if (numbers.stream().distinct().count() != numbers.size()) {
+        if (numbers.stream()
+                   .distinct()
+                   .count() != numbers.size()) {
             throw new IllegalArgumentException(DUPLICATE_NUMBER_ERROR_MESSAGE);
         }
     }
@@ -57,8 +58,8 @@ public class Lotto {
     public List<Integer> getNumbers() {
         List<LottoNumber> copyNumbers = new ArrayList<>(numbers);
         return Collections.unmodifiableList(copyNumbers.stream()
-            .map(LottoNumber::getNumber)
-            .sorted()
-            .collect(Collectors.toList()));
+                                                       .map(LottoNumber::getNumber)
+                                                       .sorted()
+                                                       .collect(Collectors.toList()));
     }
 }

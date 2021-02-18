@@ -1,13 +1,13 @@
 package lotto.domain.statistics;
 
-import static org.assertj.core.api.Assertions.*;
-
-import java.util.Arrays;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.primitive.LottoNumber;
-import lotto.domain.statistics.WinningLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class WinningLottoTest {
 
@@ -17,6 +17,7 @@ public class WinningLottoTest {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumber bonusBall = new LottoNumber(6);
         assertThatThrownBy(() -> new WinningLotto(lotto, bonusBall))
-            .isInstanceOf(IllegalArgumentException.class).hasMessageContaining("중복된");
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("중복된");
     }
 }

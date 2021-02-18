@@ -1,13 +1,13 @@
 package lotto.domain.lotto;
 
-import static org.assertj.core.api.Assertions.*;
-
-import java.util.Arrays;
-import java.util.List;
-import lotto.domain.lotto.LottoRepository;
 import lotto.domain.lottomachine.RandomLottoMachine;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoRepositoryTest {
 
@@ -16,7 +16,8 @@ public class LottoRepositoryTest {
     void generateLottoByTicket() {
         LottoRepository lottoRepository = new LottoRepository();
         lottoRepository.generateLottoByTicket(new RandomLottoMachine(), 5);
-        assertThat(lottoRepository.toList().size()).isEqualTo(5);
+        assertThat(lottoRepository.toList()
+                                  .size()).isEqualTo(5);
     }
 
     @Test
@@ -25,7 +26,9 @@ public class LottoRepositoryTest {
         List<Integer> expected = Arrays.asList(1, 2, 3, 4, 5, 6);
         LottoRepository lottoRepository = new LottoRepository();
         lottoRepository.generateLottoByTicket(() -> expected, 5);
-        assertThat(lottoRepository.toList().get(0).getNumbers()).isEqualTo(expected);
+        assertThat(lottoRepository.toList()
+                                  .get(0)
+                                  .getNumbers()).isEqualTo(expected);
     }
 
 }

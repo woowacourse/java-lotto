@@ -28,8 +28,10 @@ public enum Rating {
             return MISS;
         }
 
-        return Arrays.stream(values()).filter(rating -> rating.matchCount == matchCount).findAny()
-            .orElseThrow(NoSuchElementException::new);
+        return Arrays.stream(values())
+                     .filter(rating -> rating.matchCount == matchCount)
+                     .findAny()
+                     .orElseThrow(NoSuchElementException::new);
     }
 
     public int getMatchCount() {

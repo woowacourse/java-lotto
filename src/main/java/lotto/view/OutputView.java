@@ -1,10 +1,11 @@
 package lotto.view;
 
-import java.util.stream.Collectors;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoRepository;
-import lotto.domain.statistics.LottoStatistics;
 import lotto.domain.primitive.Money;
+import lotto.domain.statistics.LottoStatistics;
+
+import java.util.stream.Collectors;
 
 public class OutputView {
 
@@ -35,10 +36,13 @@ public class OutputView {
 
     public static void printLottoResult(StringBuilder log, Lotto lotto) {
         log.append(LOTTO_RESULT_OPEN);
-        String body = lotto.getNumbers().stream().map(String::valueOf)
-            .collect(Collectors.joining(NUMBER_DELIMITER));
+        String body = lotto.getNumbers()
+                           .stream()
+                           .map(String::valueOf)
+                           .collect(Collectors.joining(NUMBER_DELIMITER));
         log.append(body);
-        log.append(LOTTO_RESULT_CLOSE).append(ENTER);
+        log.append(LOTTO_RESULT_CLOSE)
+           .append(ENTER);
     }
 
     public static void printWinningStats(LottoStatistics lottoStatistics, int money) {

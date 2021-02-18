@@ -14,7 +14,7 @@ public class Ticket {
     private void validateMinimumTicketPrice(final Money money) {
         if (money.getValue() < TICKET_PRICE) {
             throw new IllegalArgumentException(
-                String.format(TICKET_MINIMUM_PRICE_ERROR_MESSAGE, TICKET_PRICE));
+                    String.format(TICKET_MINIMUM_PRICE_ERROR_MESSAGE, TICKET_PRICE));
         }
     }
 
