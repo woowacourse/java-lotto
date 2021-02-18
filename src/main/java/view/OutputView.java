@@ -15,6 +15,7 @@ public class OutputView {
     private static final String MESSAGE_STATISTICS = "당첨 통계\n--------\n";
     private static final String STATISTICS_FORMAT = "%d개 일치 (%d원)- %d개";
     private static final String STATISTICS_BONUS_FORMAT = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
+    private static final String MESSAGE_PROFIT_FORMAT = "총 수익률은 %.2f입니다.";
 
     private static OutputView instance;
 
@@ -61,5 +62,9 @@ public class OutputView {
             return;
         }
         System.out.printf((STATISTICS_FORMAT) + "%n", rank.getCount(), rank.getReward().toLong(), count);
+    }
+
+    public void printProfit(Profit profit) {
+        System.out.printf((MESSAGE_PROFIT_FORMAT) + "%n", profit.toDouble());
     }
 }

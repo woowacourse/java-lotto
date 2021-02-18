@@ -35,4 +35,9 @@ public enum Rank {
     public Money getReward() {
         return this.reward;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Count: %d, Money: %d", this.count, this.getReward().toLong());
+    }
 }
