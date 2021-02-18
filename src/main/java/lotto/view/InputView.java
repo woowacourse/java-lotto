@@ -1,11 +1,14 @@
 package lotto.view;
 
+import static lotto.view.messages.InputMessages.BONUS_BALL_INPUT_REQUEST;
+import static lotto.view.messages.InputMessages.PURCHASE_MONEY_INPUT_REQUEST;
+import static lotto.view.messages.InputMessages.WINNING_LOTTO_LINE_INPUT_REQUEST;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import lotto.domain.lotto.LottoLine;
 import lotto.domain.lotto.LottoNumber;
-import lotto.view.messages.InputMessages;
 
 public class InputView {
 
@@ -13,7 +16,7 @@ public class InputView {
 
     public static int getMoney() {
         try {
-            System.out.println(InputMessages.REQUEST_PURCHASE_MONEY.getMessage());
+            System.out.println(PURCHASE_MONEY_INPUT_REQUEST.getMessage());
             return Integer.parseInt(scanner.nextLine());
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -23,7 +26,7 @@ public class InputView {
 
     public static LottoLine getLottoLine() {
         try {
-            System.out.println(InputMessages.REQUEST_LAST_WIN_LOTTO_NUMBERS.getMessage());
+            System.out.println(WINNING_LOTTO_LINE_INPUT_REQUEST.getMessage());
             String inputValue = scanner.nextLine();
             List<LottoNumber> lottoNumbers = parseLottoNumber(inputValue);
             return new LottoLine(lottoNumbers);
@@ -33,7 +36,7 @@ public class InputView {
         }
     }
 
-    private static List<LottoNumber> parseLottoNumber(String inputValue){
+    private static List<LottoNumber> parseLottoNumber(String inputValue) {
         String[] parsedInputValue = inputValue.replace(" ", "").split(",");
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (String s : parsedInputValue) {
@@ -44,7 +47,7 @@ public class InputView {
 
     public static LottoNumber getBonusLottoNumber() {
         try {
-            System.out.println(InputMessages.REQUEST_LAST_WIN_BONUS_BALL.getMessage());
+            System.out.println(BONUS_BALL_INPUT_REQUEST.getMessage());
             int inputValue = Integer.parseInt(scanner.nextLine());
             return new LottoNumber(inputValue);
         } catch (Exception e) {
