@@ -12,13 +12,11 @@ import lotto.domain.stats.LottoResults;
 import java.util.List;
 
 public class GameController {
-    private static final int LOTTO_MIN = 1;
-    private static final int LOTTO_MAX = 45;
     private static Money money;
     private static Lottos lottos;
 
     public GameController() {
-        LottoGenerator.generate(LOTTO_MIN, LOTTO_MAX);
+        LottoGenerator.generate();
     }
 
     public void run() {

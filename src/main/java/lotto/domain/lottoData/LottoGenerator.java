@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoGenerator {
+    private static final int LOTTO_MIN = 1;
+    private static final int LOTTO_MAX = 45;
     private static List<Integer> numbers;
 
     public static List<Lotto> makeLottos(int amount) {
@@ -24,8 +26,8 @@ public class LottoGenerator {
         return new ArrayList<>(selectNumber);
     }
 
-    public static void generate(int minValue, int maxValue) {
-        numbers = IntStream.range(minValue, maxValue)
+    public static void generate() {
+        numbers = IntStream.range(LOTTO_MIN, LOTTO_MAX)
                 .boxed()
                 .collect(Collectors.toList());
     }

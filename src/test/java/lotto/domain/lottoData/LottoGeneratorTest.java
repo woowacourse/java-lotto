@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoGeneratorTest {
     @BeforeEach
     void setUp() {
-        LottoGenerator.generate(1, 45);
+        LottoGenerator.generate();
     }
 
     @Test

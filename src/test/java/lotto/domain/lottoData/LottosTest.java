@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottosTest {
     @Test
     void 객체_생성() {
-        LottoGenerator.generate(1, 45);
+        LottoGenerator.generate();
 
         List<Lotto> lottoGroup = new ArrayList<>();
         lottoGroup.add(new Lotto(LottoGenerator.makeNumbers()));

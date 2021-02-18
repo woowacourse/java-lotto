@@ -24,15 +24,6 @@ public class LottoTest {
         assertThat(lotto).isEqualTo(new Lotto(Arrays.asList(new Integer[]{8, 21, 23, 41, 42, 43})));
     }
 
-//    @Test // 나중에 고칠것
-//    void 랜덤_숫자_생성() {
-//        LottoGenerator.generate(1, 45);
-//        for (int i = 0; i < 10; i++) {
-//            Lotto lotto = new Lotto(LottoGenerator.makeNumbers());
-//            System.out.println(lotto.toString());
-//        }
-//    }
-
     @ParameterizedTest
     @CsvSource(value = {"8, 21, 23, 41, 42, 43:7:6",
             "3, 5, 11, 16, 32, 38:8:0",
