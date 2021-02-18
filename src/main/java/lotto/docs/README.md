@@ -46,9 +46,12 @@
 * PurchasingPrice 
 * LottoNumber
 * LottoTicket
-  * 당첨번호 //추후 수정
 * LottoTickets  
-* LottoResult(Statistics) //추후 수정
+* LottoStatistics
+* WinningLottoTicket
+* LottoRank
+* LottoNumberGenerator
+* RandomLottoNumberGenerator
 
 ## View
 
