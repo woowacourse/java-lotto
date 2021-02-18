@@ -54,13 +54,23 @@ public class LottoResultStatisticsTest {
                 Arrays.asList(
                         new LottoNumber(1),
                         new LottoNumber(2),
+                        new LottoNumber(3),
+                        new LottoNumber(4),
+                        new LottoNumber(5),
+                        new LottoNumber(8)
+                )
+        );
+        LottoTicket lottoTicket4 = new LottoTicket(
+                Arrays.asList(
+                        new LottoNumber(1),
+                        new LottoNumber(2),
                         new LottoNumber(9),
                         new LottoNumber(10),
                         new LottoNumber(43),
                         new LottoNumber(44)
                 )
         );
-        lottoTickets = new LottoTickets(Arrays.asList(lottoTicket1, lottoTicket2, lottoTicket3));
+        lottoTickets = new LottoTickets(Arrays.asList(lottoTicket1, lottoTicket2, lottoTicket3, lottoTicket4));
     }
 
     @Test
@@ -80,7 +90,7 @@ public class LottoResultStatisticsTest {
 
         assertThat(result.get(LottoRank.FIRST_PLACE)).isEqualTo(1);
         assertThat(result.get(LottoRank.SECOND_PLACE)).isEqualTo(1);
-        assertThat(result.get(LottoRank.THIRD_PLACE)).isEqualTo(0);
+        assertThat(result.get(LottoRank.THIRD_PLACE)).isEqualTo(1);
         assertThat(result.get(LottoRank.FOURTH_PLACE)).isEqualTo(0);
         assertThat(result.get(LottoRank.FIFTH_PLACE)).isEqualTo(0);
         assertThat(result.get(LottoRank.SIXTH_PLACE)).isEqualTo(1);
@@ -94,6 +104,6 @@ public class LottoResultStatisticsTest {
         int earningPercentage =
                 LottoResultStatistics.calculateResultStatistics(lottoTickets, lottoWinner).calculateEarning(money);
 
-        assertThat(earningPercentage).isEqualTo(67666566);
+        assertThat(earningPercentage).isEqualTo(67716566);
     }
 }
