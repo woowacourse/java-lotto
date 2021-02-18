@@ -1,31 +1,29 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import lotto.exception.DuplicateLottoNumberException;
-import lotto.exception.InvalidLottoNumberException;
 
 public class Lotto {
 
     private static final int LOTTO_SIZE = 6;
-    private static final int MIN_BOUND = 1;
-    private static final int MAX_BOUND = 45;
 
-    protected final List<Integer> lottoNumbers;
+    protected final List<LottoNumber> lottoNumbers;
 
     public Lotto(final List<Integer> numbers) {
-        validates(numbers);
-        this.lottoNumbers = new ArrayList<>(numbers);
+        validateDuplicatedNumber(numbers);
+        this.lottoNumbers = numberToLottoNumbers(numbers);
     }
 
-    private void validates(final List<Integer> values) {
-        validateDuplicatedNumber(values);
-        for (int value : values) {
-            validateBoundNumber(value);
+    private List<LottoNumber> numberToLottoNumbers(List<Integer> numbers) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (int number : numbers) {
+            lottoNumbers.add(new LottoNumber(number));
         }
+        return lottoNumbers;
     }
 
     private void validateDuplicatedNumber(final List<Integer> values) {
@@ -34,18 +32,15 @@ public class Lotto {
         }
     }
 
-    protected void validateBoundNumber(final int value) {
-        if (value < MIN_BOUND || value > MAX_BOUND) {
-            throw new InvalidLottoNumberException();
-        }
-    }
-
-    public boolean isContainsNumber(final int number) {
-        return lottoNumbers.contains(number);
+    public boolean isContainsNumber(final LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
     public List<Integer> getLottoNumbers() {
-        return Collections.unmodifiableList(lottoNumbers);
+        return lottoNumbers.stream()
+            .mapToInt(LottoNumber::getLottoNumber)
+            .boxed()
+            .collect(Collectors.toList());
     }
 
     @Override
