@@ -15,11 +15,11 @@ public class LottoResultTest {
     public void find_wanted_number_of_rank() {
         LottoResult lottoResult = new LottoResult(
             Arrays.asList(Rank.FIFTH, Rank.FIFTH, Rank.FIFTH, Rank.SECOND));
-        assertThat(lottoResult.findNumberOfRank(Rank.FIRST)).isEqualTo(0);
-        assertThat(lottoResult.findNumberOfRank(Rank.SECOND)).isEqualTo(1);
-        assertThat(lottoResult.findNumberOfRank(Rank.THIRD)).isEqualTo(0);
-        assertThat(lottoResult.findNumberOfRank(Rank.FOURTH)).isEqualTo(0);
-        assertThat(lottoResult.findNumberOfRank(Rank.FIFTH)).isEqualTo(3);
+        assertThat(lottoResult.getNumberOfRank(Rank.FIRST)).isEqualTo(0);
+        assertThat(lottoResult.getNumberOfRank(Rank.SECOND)).isEqualTo(1);
+        assertThat(lottoResult.getNumberOfRank(Rank.THIRD)).isEqualTo(0);
+        assertThat(lottoResult.getNumberOfRank(Rank.FOURTH)).isEqualTo(0);
+        assertThat(lottoResult.getNumberOfRank(Rank.FIFTH)).isEqualTo(3);
     }
 
     @Test

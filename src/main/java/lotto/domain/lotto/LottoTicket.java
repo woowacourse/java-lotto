@@ -6,7 +6,7 @@ import lotto.domain.Rank;
 
 public class LottoTicket {
 
-    private static final RandomLottoGenerator randomLottoGenerator = new RandomLottoGenerator();
+    private static final LottoLineGenerator randomLottoGenerator = new LottoLineGenerator();
     private final List<LottoLine> lottoLines;
 
     public LottoTicket(int money) {
@@ -16,7 +16,7 @@ public class LottoTicket {
         }
         List<LottoLine> lottoLines = new ArrayList<>();
         for (int i = 0; i < lottoLineCount; i++) {
-            lottoLines.add(new LottoLine(randomLottoGenerator.createLottoLine()));
+            lottoLines.add(randomLottoGenerator.createLottoLine());
         }
         this.lottoLines = lottoLines;
     }

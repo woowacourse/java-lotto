@@ -8,24 +8,25 @@ import lotto.domain.Rank;
 
 public class LottoResult {
 
-    private final List<Rank> rankList;
+    private final List<Rank> ranks;
 
-    public LottoResult(List<Rank> rankList) {
-        this.rankList = rankList;
+    public LottoResult(List<Rank> ranks) {
+        this.ranks = ranks;
     }
 
-    public int findNumberOfRank(Rank wantedRank) {
-        long count = rankList.stream().filter(rank -> rank.equals(wantedRank)).count();
+    public int getNumberOfRank(Rank rank) {
+        long count = ranks.stream().filter(it -> it.equals(rank)).count();
         return (int) count;
     }
 
     public float calculateProfitRate() {
         float totalWinMoney = Arrays.stream(Rank.values())
-            .mapToInt(rank -> findNumberOfRank(rank) * rank.getMoney()).sum();
-        return totalWinMoney / getPurchaseTotalMoney();
+            .mapToInt(rank -> getNumberOfRank(rank) * rank.getMoney()).sum();
+        return totalWinMoney / getPurchaseMoney();
     }
 
-    private int getPurchaseTotalMoney() {
-        return rankList.size() * PRICE_EACH_LOTTO;
+    private int getPurchaseMoney() {
+        return ranks.size() * PRICE_EACH_LOTTO;
     }
+
 }
