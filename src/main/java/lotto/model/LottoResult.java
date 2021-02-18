@@ -24,6 +24,10 @@ public class LottoResult {
         totalPurchaseAmount += 1000;
     }
 
+    public int findNumOfMatchByKey(LottoRank lottoRank) {
+        return result.get(lottoRank);
+    }
+
     public Map<LottoRank, Integer> getResult() {
         return result;
     }
