@@ -49,4 +49,13 @@ public class LottoTest {
 
         assertThat(lottos.getNumLotto()).isEqualTo(14);
     }
+
+    @Test
+    void 에러_메세지_출력_테스트() {
+        try {
+            throw new IllegalArgumentException("thisError");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
