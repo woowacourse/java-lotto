@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -47,8 +46,7 @@ class LottosTest {
         LottoResults results = lottos.getLottoResults(winningLotto);
 
         //then
-//        assertThat(results).hasSize(6);
-//        assertThat(results.get(LottoRank.FIRST)).isEqualTo(1L);
-//        assertThat(results.get(LottoRank.MISS)).isEqualTo(2L);
+        assertThat(results.getValues().get(LottoRank.FIRST)).isEqualTo(1L);
+        assertThat(results.getValues().get(LottoRank.MISS)).isEqualTo(2L);
     }
 }
