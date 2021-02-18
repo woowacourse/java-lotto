@@ -1,9 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoRank;
-import lotto.domain.Lottos;
-import lotto.domain.Money;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -18,10 +15,8 @@ public class LottoStore {
 
     public void process() {
         Lottos lottos = buyLotto();
-        List<Integer> winningNumbers = new ArrayList<>();
-        new Lotto(InputView.inputWinningNumbers());
-        int bonusNumber = InputView.inputBonusNumber();
-        Map<LottoRank, Integer> lottoResultStatistics = lottos.getStatistics(winningNumbers, bonusNumber);
+        WinningLotto winningLotto = new WinningLotto(new Lotto(InputView.inputWinningNumbers()), InputView.inputBonusNumber());
+        Map<LottoRank, Integer> lottoResultStatistics = lottos.getStatistics(winningLotto);
         printLottoResult(lottoResultStatistics, lottos);
     }
 

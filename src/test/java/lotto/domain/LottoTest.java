@@ -13,8 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
 
-    public static final List<Integer> WINNING_NUMBERS = Arrays.asList(1, 2, 3, 4, 5, 6);
-    public static final int BONUS_NUMBER = 7;
+    private static final WinningLotto winningLotto = new WinningLotto(new Lotto("1,2,3,4,5,6"), 7);
 
     private static Stream<Arguments> provideLottoNumbersAndRank() {
         return Stream.of(
@@ -30,7 +29,7 @@ public class LottoTest {
     @MethodSource("provideLottoNumbersAndRank")
     void test(String lottoNumbers, String lottoRank) {
         Lotto lotto = new Lotto(lottoNumbers);
-        LottoRank rank = lotto.getLottoRank(WINNING_NUMBERS, BONUS_NUMBER);
+        LottoRank rank = winningLotto.getLottoResult(lotto);
         assertThat(rank.name()).isEqualTo(lottoRank);
     }
 }

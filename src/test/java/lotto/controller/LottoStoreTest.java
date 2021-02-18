@@ -5,10 +5,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
-import lotto.domain.Lotto;
-import lotto.domain.LottoRank;
-import lotto.domain.Lottos;
-import lotto.domain.Money;
+
+import lotto.domain.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -18,9 +16,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import static org.assertj.core.api.Assertions.*;
 
 public class LottoStoreTest {
-
-    public static final List<Integer> WINNING_NUMBERS = Arrays.asList(1, 2, 3, 4, 5, 6);
-    public static final int BONUS_NUMBER = 7;
+    private static final WinningLotto winningLotto = new WinningLotto(new Lotto("1,2,3,4,5,6"), 7);
 
     private static Stream<Arguments> provideLottosResult() {
         return Stream.of(
@@ -46,7 +42,7 @@ public class LottoStoreTest {
     void lottoProfitCalculateTest(Lotto exampleLotto, double profitRate) {
         Lottos exampleLottos = new Lottos(Collections.singletonList(exampleLotto));
         Map<LottoRank, Integer> exampleLottosResult =
-            exampleLottos.getStatistics(WINNING_NUMBERS, BONUS_NUMBER);
+            exampleLottos.getStatistics(winningLotto);
         double value = new LottoStore().calculateProfitRate(exampleLottosResult, 1);
         assertThat(value).isEqualTo(profitRate);
     }

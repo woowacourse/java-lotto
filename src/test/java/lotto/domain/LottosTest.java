@@ -15,8 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottosTest {
 
-    public static final List<Integer> WINNING_NUMBERS = Arrays.asList(1, 2, 3, 4, 5, 6);
-    public static final int BONUS_NUMBER = 7;
+    private static final WinningLotto winningLotto = new WinningLotto(new Lotto("1,2,3,4,5,6"), 7);
 
     @Test
     @DisplayName("구입한 로또 매수만큼 로또 생성")
@@ -41,7 +40,7 @@ public class LottosTest {
     void lottosResult(Lotto exampleLotto, LottoRank exampleRank) {
         Lottos exampleLottos = new Lottos(Collections.singletonList(exampleLotto));
         Map<LottoRank, Integer> exampleLottosResult =
-            exampleLottos.getStatistics(WINNING_NUMBERS, BONUS_NUMBER);
+            exampleLottos.getStatistics(winningLotto);
         int value = exampleLottosResult.get(exampleRank);
         assertThat(value).isEqualTo(1);
     }
