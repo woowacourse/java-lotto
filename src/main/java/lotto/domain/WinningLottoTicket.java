@@ -14,12 +14,16 @@ public class WinningLottoTicket {
     }
 
     public static WinningLottoTicket of(List<Integer> winningNumbers, int bonusBallNumber) {
-        if (winningNumbers.contains(bonusBallNumber)) {
-            throw new IllegalArgumentException(DUPLICATION_NUMBER);
-        }
+        validateDuplicateNumbers(winningNumbers, bonusBallNumber);
         LottoTicket lottoTicket = LottoTicket.generateTicket(winningNumbers);
         LottoNumber bonusLottoNumber = new LottoNumber(bonusBallNumber);
         return new WinningLottoTicket(lottoTicket, bonusLottoNumber);
+    }
+
+    private static void validateDuplicateNumbers(List<Integer> winningNumbers, int bonusBallNumber) {
+        if (winningNumbers.contains(bonusBallNumber)) {
+            throw new IllegalArgumentException(DUPLICATION_NUMBER);
+        }
     }
 
     public LottoRank compareNumbers(LottoTicket lottoTicket) {
