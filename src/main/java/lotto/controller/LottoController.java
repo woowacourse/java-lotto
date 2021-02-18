@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class LottoController {
+
     private static final ArrayList<Rank> wins = new ArrayList<>();
     private static final Map<Rank, Integer> countByRank = new TreeMap<>();
     private static LottoGroup lottoGroup;
@@ -28,7 +29,7 @@ public class LottoController {
         LottoView.displayResultMessage();
         countEachRank();
         countByRank.forEach((rank, rankCount) ->
-                LottoView.displayResult(rank, rankCount));
+            LottoView.displayResult(rank, rankCount));
     }
 
     public void startLotto() {

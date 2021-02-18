@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class LottoView {
+
     private static final Scanner SCANNER = new Scanner(System.in);
     private static final String INPUT_MONEY_MESSAGE = "구입금액을 입력해주세요";
     private static final String LOTTO_COUNT_MESSAGE = "개를 구매했습니다.";
@@ -29,8 +30,9 @@ public class LottoView {
 
     public static void printLottoGroup(LottoGroup LottoGroup) {
         ArrayList<Lotto> lottoGroup = LottoGroup.getLottoGroup();
-        for (int i = 0; i < LottoGroup.getCount(); i++)
+        for (int i = 0; i < LottoGroup.getCount(); i++) {
             System.out.print(lottoGroup.get(i).getLotto() + CHANGE_LINE);
+        }
     }
 
     public static String requestWinningNumber() {

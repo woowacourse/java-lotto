@@ -20,11 +20,12 @@ public enum Rank {
 
     public static Rank makeRankByMatch(int match, boolean bonusMatch) {
         Rank rank = Arrays.stream(Rank.values())
-                .filter(singleRank -> singleRank.matchCount == match)
-                .findFirst()
-                .orElse(LOSE);
-        if (match == 5 && bonusMatch)
+            .filter(singleRank -> singleRank.matchCount == match)
+            .findFirst()
+            .orElse(LOSE);
+        if (match == 5 && bonusMatch) {
             rank = SECOND;
+        }
         return rank;
     }
 
@@ -34,8 +35,9 @@ public enum Rank {
 
     @Override
     public String toString() {
-        if (this == SECOND)
+        if (this == SECOND) {
             return matchCount + "개 일치, 보너스 볼 일치 (" + prize + "원) - ";
+        }
         return matchCount + "개 일치 (" + prize + "원) - ";
     }
 }

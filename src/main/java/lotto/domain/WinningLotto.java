@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class WinningLotto {
+
     private static final String DELIMITER = ",";
     private static Lotto winLotto;
     private static BonusBall bonusBall;
@@ -23,9 +24,9 @@ public class WinningLotto {
 
     private List<Integer> changeToList(String numberInput) {
         return Arrays.stream(numberInput.split(DELIMITER))
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+            .map(String::trim)
+            .map(Integer::parseInt)
+            .collect(Collectors.toList());
     }
 
     private ArrayList<Integer> generateWinningLotto(String numberInput) {
