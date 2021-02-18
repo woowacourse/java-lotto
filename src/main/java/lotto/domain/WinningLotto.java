@@ -40,7 +40,7 @@ public class WinningLotto extends Lotto {
             return false;
         }
         WinningLotto that = (WinningLotto) o;
-        return bonusNumber == that.bonusNumber;
+        return Objects.equals(bonusNumber, that.bonusNumber);
     }
 
     @Override
