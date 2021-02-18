@@ -21,7 +21,7 @@ public class Lotto {
                 .collect(Collectors.toList())));
     }
 
-    public static long calculateLottoNumber(Money money) {
+    public static int calculateLottoNumber(Money money) {
         return money.divide(PRICE);
     }
 
@@ -31,5 +31,12 @@ public class Lotto {
 
     public int findMatchCount(Lotto targetLotto) {
         return this.lottoNumbers.findMatchCount(targetLotto.lottoNumbers);
+    }
+
+    @Override
+    public String toString() {
+        return "[" +
+                lottoNumbers +
+                ']';
     }
 }

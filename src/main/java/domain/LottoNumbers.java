@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
     protected static final int LENGTH = 6;
@@ -9,6 +10,7 @@ public class LottoNumbers {
 
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
         validateLottoNumbers(lottoNumbers);
+        Collections.sort(lottoNumbers);
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
@@ -51,5 +53,12 @@ public class LottoNumbers {
         return (int) this.lottoNumbers.stream()
                 .filter(lottoNumbers::contains)
                 .count();
+    }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.stream()
+                .map(LottoNumber::toString)
+                .collect(Collectors.joining(","));
     }
 }

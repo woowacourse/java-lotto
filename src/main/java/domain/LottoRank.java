@@ -10,7 +10,7 @@ public enum LottoRank {
     FIFTH(3, 5_000),
     MISS(0, 0);
 
-    private final long correctCnt;
+    private final int correctCnt;
     private final Money prize;
 
     LottoRank(int correctCnt, long prize) {
@@ -43,5 +43,9 @@ public enum LottoRank {
 
     public Money getPrize() {
         return prize;
+    }
+
+    public int getCorrectCnt() {
+        return correctCnt;
     }
 }

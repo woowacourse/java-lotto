@@ -11,7 +11,7 @@ public class Lottos {
         this.lottos = new ArrayList<>(lottos);
     }
 
-    public Map<LottoRank, Long> getLottoResults(WinningLotto winningLotto) {
+    public LottoResults getLottoResults(WinningLotto winningLotto) {
         Map<LottoRank, Long> results = lottos.stream()
                 .map(winningLotto::match)
                 .collect(Collectors.groupingBy(lottoRank -> lottoRank, Collectors.counting()));
@@ -19,6 +19,10 @@ public class Lottos {
         Arrays.stream(LottoRank.values())
                 .filter(lottoRank -> !results.containsKey(lottoRank))
                 .forEach(lottoRank -> results.put(lottoRank, 0L));
-        return results;
+        return new LottoResults(results);
+    }
+
+    public List<Lotto> getLottos() {
+        return new ArrayList<>(lottos);
     }
 }

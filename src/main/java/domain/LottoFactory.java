@@ -14,13 +14,13 @@ public class LottoFactory {
                 .collect(Collectors.toList());
     }
 
-    public static List<Lotto> generates(ShuffleStrategy strategy, int lottoCount) {
+    public static Lottos generates(ShuffleStrategy strategy, int lottoCount) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
             lottos.add(generate(strategy));
         }
 
-        return lottos;
+        return new Lottos(lottos);
     }
 
     private static Lotto generate(ShuffleStrategy strategy) {

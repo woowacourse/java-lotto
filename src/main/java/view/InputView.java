@@ -11,6 +11,9 @@ public class InputView {
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
+    private InputView() {
+    }
+
     public static Money inputPurchaseMoney() {
         System.out.println("구입금액을 입력해 주세요.");
         int money = SCANNER.nextInt();
@@ -23,8 +26,10 @@ public class InputView {
 
     private static Lotto inputLotto() {
         System.out.println("지난 주 당첨 로또를 입력해주세요.");
+        SCANNER.nextLine();
         String input = SCANNER.nextLine();
         List<LottoNumber> lottoNumbers = Arrays.stream(input.split(","))
+                .map(String::trim)
                 .map(Integer::parseInt)
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());

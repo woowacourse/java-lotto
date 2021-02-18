@@ -18,12 +18,12 @@ public class Money {
         }
     }
 
-    public long divide(long value) {
+    public int divide(long value) {
         if (value <= ZERO) {
             throw new IllegalArgumentException("0이하의 값으로 나눌 수 없습니다.");
         }
 
-        return this.value / value;
+        return (int) (this.value / value);
     }
 
     public double calculateEarningRate(Money usedMoney) {
@@ -50,5 +50,9 @@ public class Money {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    public long getValue() {
+        return value;
     }
 }

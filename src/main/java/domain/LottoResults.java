@@ -20,4 +20,8 @@ public class LottoResults {
 
         return total;
     }
+
+    public Map<LottoRank, Long> getValues() {
+        return new HashMap<>(lottoResults);
+    }
 }

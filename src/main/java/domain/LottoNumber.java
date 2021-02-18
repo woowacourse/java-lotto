@@ -1,8 +1,9 @@
 package domain;
 
+import java.util.Collections;
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     protected static final int NUMBER_MIN = 1;
     protected static final int NUMBER_MAX = 45;
 
@@ -30,5 +31,15 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    @Override
+    public String toString() {
+        return Integer.toString(value);
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return this.value - o.value;
     }
 }
