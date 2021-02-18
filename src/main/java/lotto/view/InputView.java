@@ -32,5 +32,5 @@ public class InputView {
         int number = Integer.parseInt(scanner.nextLine());
         return number;
     }
-    
+
 }
