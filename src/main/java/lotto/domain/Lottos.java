@@ -24,10 +24,6 @@ public class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
-    public int calculateTotalPrice() {
-        return lottos.size() * Money.PRICE_OF_LOTTO;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -39,12 +35,5 @@ public class Lottos {
     @Override
     public int hashCode() {
         return Objects.hash(lottos);
-    }
-
-    @Override
-    public String toString() {
-        return "Lottos{" +
-                "lottos=" + lottos +
-                '}';
     }
 }
