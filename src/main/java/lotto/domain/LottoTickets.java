@@ -28,7 +28,7 @@ public class LottoTickets {
         return new LottoStatistics(statistics);
     }
 
-    public List<LottoTicket> getLottoTicket() {
+    public List<LottoTicket> getLottoTickets() {
         return Collections.unmodifiableList(lottoTickets);
     }
 }

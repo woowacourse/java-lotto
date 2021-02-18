@@ -22,7 +22,7 @@ public class LottoStatistics {
         for (LottoRank lottoRank : lottoRanks) {
             priceTotal += lottoRank.getPrizeMoney() * statisticsMap.get(lottoRank);
         }
-        int denominator = purchasingPrice.getPurchasingPrice();
+        int denominator = purchasingPrice.getPrice();
         return (((double) priceTotal) / denominator);
     }
 }

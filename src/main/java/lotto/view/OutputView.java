@@ -15,14 +15,15 @@ public class OutputView {
     private static final String LOTTO_STATISTICS_BONUS_BALL_MESSAGE = "%d개 일치, 보너스 볼 일치(%d원)- %d개\n";
     private static final String YIELD_MESSAGE = "총 수익률은 %.2f입니다.\n";
 
-    private OutputView() {}
+    private OutputView() {
+    }
 
     public static void printLottoCountMessage(int lottoCounts) {
         System.out.printf(PURCHASE_LOTTO_MESSAGE, lottoCounts);
     }
 
     public static void printLottoTicketNumbers(LottoTickets lottoTickets) {
-        List<LottoTicket> lottoTicketGroup = lottoTickets.getLottoTicket();
+        List<LottoTicket> lottoTicketGroup = lottoTickets.getLottoTickets();
         for (LottoTicket lottoTicket : lottoTicketGroup) {
             String numbers = lottoTicket.getLottoNumbers()
                     .stream()
