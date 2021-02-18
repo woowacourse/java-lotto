@@ -24,11 +24,6 @@ public enum Rank {
                 .filter(rank -> !rank.equals(THIRD) || !bonus)
                 .findFirst()
                 .orElse(NOT_FOUND);
-
-    }
-
-    private boolean isSameAs(int count) {
-        return this.count == count;
     }
 
     public int getCount() {
@@ -37,6 +32,10 @@ public enum Rank {
 
     public int getMoney() {
         return money;
+    }
+
+    private boolean isSameAs(int count) {
+        return this.count == count;
     }
 
     public boolean isNotFound() {

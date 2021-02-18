@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
-    final List<Integer> numbers;
+    private final List<Integer> numbers;
 
     public Lotto(List<Integer> values) {
         numbers = values;

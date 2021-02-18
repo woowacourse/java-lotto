@@ -16,15 +16,24 @@ public class LottoResultTest {
     Lottos lottos;
     List<Integer> values;
 
-    public LottoResultTest() {
+    @Test
+    void testCase1() {
         List<Lotto> list = new ArrayList<>();
-//        testCase1(list);
-        testCase2(list);
+        values = Arrays.asList(1, 2, 3, 4, 45, 44);     // 50000
+        list.add(new Lotto(values));
+        values = Arrays.asList(1, 2, 3, 43, 44, 45);    // 5000
+        list.add(new Lotto(values));
+        values = Arrays.asList(1, 2, 3, 4, 5, 7);       // 30000000
+        list.add(new Lotto(values));
+        values = Arrays.asList(1, 2, 3, 4, 5, 44);      // 1500000
+        list.add(new Lotto(values));
         lottos = new Lottos(list);
+        OutputView.printResult(lottos.findMatchLottos(winningLotto, new Money("4000")));
     }
 
-    private void testCase2(List<Lotto> list) {
-        list.clear();
+    @Test
+    void testCase2() {
+        List<Lotto> list = new ArrayList<>();
         values = Arrays.asList(8, 21, 23, 41, 42, 43);
         list.add(new Lotto(values));
         values = Arrays.asList(3, 5, 11, 16, 32, 38);
@@ -53,21 +62,7 @@ public class LottoResultTest {
         list.add(new Lotto(values));
         values = Arrays.asList(3, 8, 27, 30, 35, 44);
         list.add(new Lotto(values));
-    }
-
-    private void testCase1(List<Lotto> list) {
-        values = Arrays.asList(1, 2, 3, 4, 45, 44);     // 50000
-        list.add(new Lotto(values));
-        values = Arrays.asList(1, 2, 3, 43, 44, 45);    // 5000
-        list.add(new Lotto(values));
-        values = Arrays.asList(1, 2, 3, 4, 5, 7);   // 30000000
-        list.add(new Lotto(values));
-        values = Arrays.asList(1, 2, 3, 4, 5, 44);  // 1500000
-        list.add(new Lotto(values));
-    }
-
-    @Test
-    void 출력_테스트() {
+        lottos = new Lottos(list);
         OutputView.printResult(lottos.findMatchLottos(winningLotto, new Money("14000")));
     }
 }

@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 public class Money {
     private final int money;
     private static final int LOTTO_PRICE = 1000;
-    private static final Pattern pattern = Pattern.compile("^[0-9]*$");
+    private static final Pattern NUMBER_PATTERN = Pattern.compile("^[0-9]*$");
 
     public Money(String money) {
         validate(money);
@@ -24,7 +24,7 @@ public class Money {
     }
 
     private void validate(String money) {
-        if (!pattern.matcher(money).matches()) {
+        if (!NUMBER_PATTERN.matcher(money).matches()) {
             throw new InvalidMoneyException();
         }
     }

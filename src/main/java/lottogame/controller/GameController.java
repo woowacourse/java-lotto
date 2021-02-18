@@ -25,14 +25,8 @@ public class GameController {
         OutputView.printResult(matchLottos());
     }
 
-    private LottoResults matchLottos() {
-        return lottos.findMatchLottos(inputWinningLotto(), money);
-    }
-
-    private WinningLotto inputWinningLotto() {
-        String numbers = InputView.inputWinningLottoNumbers();
-        String bonusNumber = InputView.inputBonusNumber();
-        return new WinningLotto(numbers, bonusNumber);
+    private void inputMoney() {
+        money = new Money(InputView.inputMoney());
     }
 
     private void buyLotto() {
@@ -47,7 +41,13 @@ public class GameController {
         OutputView.showLottos(lottos.values());
     }
 
-    private void inputMoney() {
-        money = new Money(InputView.inputMoney());
+    private LottoResults matchLottos() {
+        return lottos.findMatchLottos(inputWinningLotto(), money);
+    }
+
+    private WinningLotto inputWinningLotto() {
+        String numbers = InputView.inputWinningLottoNumbers();
+        String bonusNumber = InputView.inputBonusNumber();
+        return new WinningLotto(numbers, bonusNumber);
     }
 }
