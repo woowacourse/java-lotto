@@ -1,8 +1,9 @@
 package lottogame.domain.machine;
 
-import java.util.HashSet;
 import lottogame.domain.number.LottoNumber;
 import lottogame.domain.number.LottoNumbers;
+
+import java.util.HashSet;
 
 public class LottoWinningDrawingMachine {
 

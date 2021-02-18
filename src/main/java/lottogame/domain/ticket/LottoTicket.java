@@ -1,10 +1,11 @@
 package lottogame.domain.ticket;
 
+import lottogame.domain.number.LottoNumber;
+import lottogame.domain.number.LottoNumbers;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import lottogame.domain.number.LottoNumber;
-import lottogame.domain.number.LottoNumbers;
 
 public class LottoTicket {
 

@@ -1,10 +1,5 @@
 package lottogame.domain;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import lottogame.domain.machine.LottoTicketMachine;
 import lottogame.domain.machine.LottoWinningDrawingMachine;
 import lottogame.domain.machine.LottoWinningMachine;
@@ -13,6 +8,12 @@ import lottogame.domain.number.LottoNumbers;
 import lottogame.domain.ticket.LottoTicket;
 import lottogame.domain.ticket.LottoTicketResult;
 import lottogame.domain.ticket.LottoTickets;
+
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class LottoGame {
 

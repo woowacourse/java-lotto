@@ -19,7 +19,7 @@ public class LottoGameController {
 
     public void drawWinningNumber() {
         lottoGame
-            .drawWinningNumber(InputView.getWinningNumbersInput(), InputView.getBonusNumberInput());
+                .drawWinningNumber(InputView.getWinningNumbersInput(), InputView.getBonusNumberInput());
     }
 
     public void printLottoTickets() {

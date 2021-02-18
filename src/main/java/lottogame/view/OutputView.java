@@ -1,13 +1,14 @@
 package lottogame.view;
 
+import lottogame.domain.Rank;
+import lottogame.domain.ticket.LottoTicket;
+import lottogame.domain.ticket.LottoTickets;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
-import lottogame.domain.Rank;
-import lottogame.domain.ticket.LottoTicket;
-import lottogame.domain.ticket.LottoTickets;
 
 public class OutputView {
 
@@ -24,9 +25,9 @@ public class OutputView {
 
     public static void printLottoNumbers(final LottoTicket lottoTicket) {
         List<String> lottoNumbers = lottoTicket.getLottoNumbers()
-            .stream()
-            .map(lottoNumber -> Integer.toString(lottoNumber.getValue()))
-            .collect(Collectors.toCollection(ArrayList::new));
+                .stream()
+                .map(lottoNumber -> Integer.toString(lottoNumber.getValue()))
+                .collect(Collectors.toCollection(ArrayList::new));
 
         System.out.println("[" + String.join(", ", lottoNumbers) + "]");
     }

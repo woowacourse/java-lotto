@@ -16,9 +16,9 @@ public class LottoWinningMachine {
 
     public int countMatchedWinningNumber(final LottoTicket lottoTicket) {
         return (int) lottoTicket.getLottoNumbers()
-            .stream()
-            .filter(winningNumbers::contains)
-            .count();
+                .stream()
+                .filter(winningNumbers::contains)
+                .count();
     }
 
     public boolean isMatchBonusNumber(final LottoTicket lottoTicket) {
