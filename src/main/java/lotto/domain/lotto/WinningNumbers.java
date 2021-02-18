@@ -4,9 +4,9 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.PayOut;
+import lotto.domain.rank.Rank;
 
 public class WinningNumbers {
 
@@ -38,23 +38,23 @@ public class WinningNumbers {
     }
 
     public WinningStatistics getResult(LottoTicket lottoTicket, PayOut payOut) {
-        Map<Integer, Long> result = lottoTicket.toLottoNumbersList().stream()
+        Map<Rank, Long> statistics = lottoTicket.toLottoNumbersList().stream()
             .map(this::getRank)
-            .filter(rank -> Rank.FAIL.getRank() != rank)
+            .filter(rank -> Rank.FAIL != rank)
             .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
-        IntStream.range(1, Rank.values().length)
-            .filter(rank -> !result.containsKey(rank))
-            .forEach(rank -> result.put(rank, 0L));
+        Rank.toList().stream()
+            .filter(rank -> !statistics.containsKey(rank))
+            .forEach(rank -> statistics.put(rank, 0L));
 
-        return new WinningStatistics(result, payOut);
+        return new WinningStatistics(statistics, payOut);
     }
 
-    private int getRank(LottoNumbers lottoNumbers) {
+    private Rank getRank(LottoNumbers lottoNumbers) {
         return Rank.getRank(
             this.lottoNumbers.getMatchCount(lottoNumbers),
             lottoNumbers.contains(bonusNumber)
-        ).getRank();
+        );
     }
 
     @Override

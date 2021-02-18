@@ -1,35 +1,23 @@
 package lotto.domain.lotto;
 
-import static java.util.Comparator.comparingInt;
-import static java.util.stream.Collectors.toList;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.IntStream;
 import lotto.domain.number.PayOut;
-import lotto.domain.rank.Ranking;
+import lotto.domain.rank.Rank;
+import lotto.domain.rank.Ranks;
 
 public class WinningStatistics {
 
-    private final List<Ranking> rankings;
+    private final Ranks ranks;
     private final double yield;
 
-    public WinningStatistics(Map<Integer, Long> gameResult, PayOut payOut) {
-        this.rankings = IntStream.range(1, Rank.values().length)
-            .boxed()
-            .map(key -> Rank.createRanking(key, gameResult.getOrDefault(key, 0L)))
-            .sorted(comparingInt(Ranking::getRank))
-            .collect(toList());
+    public WinningStatistics(Map<Rank, Long> gameResult, PayOut payOut) {
+        this.ranks = new Ranks(gameResult);
 
-        this.yield = rankings.stream()
-            .mapToDouble(r -> r.getWinnings() * r.getCount())
-            .sum() / payOut.toInt();
+        this.yield = ranks.getWinningPrice() / payOut.toInt();
     }
 
-    public List<Ranking> getRankings() {
-        return new ArrayList<>(rankings);
+    public Map<Rank, Long> toMap() {
+        return ranks.toMap();
     }
 
     public double getYield() {

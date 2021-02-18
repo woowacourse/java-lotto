@@ -32,7 +32,7 @@ public class Number {
         }
     }
 
-    public boolean isBiggerThan(Number target)  {
+    public boolean isBiggerThan(Number target) {
         return value > target.value;
     }
 

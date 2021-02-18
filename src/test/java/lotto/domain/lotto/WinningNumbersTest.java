@@ -1,13 +1,13 @@
 package lotto.domain.lotto;
 
-import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import lotto.domain.number.PayOut;
-import lotto.domain.rank.Ranking;
+import lotto.domain.rank.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -42,7 +42,12 @@ public class WinningNumbersTest {
     @DisplayName("등수 계산을 반환")
     void getStatistics() {
         WinningNumbers winningNumbers = WinningNumbers.valueOf("1, 2, 3, 4, 5, 6", "7");
-        List<Long> expected = Arrays.asList(1L, 1L, 1L, 0L, 0L);
+        Map<Rank, Long> expected = new HashMap<>();
+        expected.put(Rank.FIRST, 1L);
+        expected.put(Rank.SECOND, 1L);
+        expected.put(Rank.THIRD, 1L);
+        expected.put(Rank.FOURTH, 0L);
+        expected.put(Rank.FIFTH, 0L);
 
         LottoTicket lottoTicket = new LottoTicket(Arrays.asList(
             LottoNumbers.valueOf("1,2,3,4,5,6"),
@@ -51,7 +56,7 @@ public class WinningNumbersTest {
         ));
         WinningStatistics result = winningNumbers.getResult(lottoTicket, PayOut.valueOf("1000"));
 
-        List<Long> actual = result.getRankings().stream().map(Ranking::getCount).collect(toList());
+        Map<Rank, Long> actual = result.toMap();
 
         assertThat(expected).isEqualTo(actual);
     }

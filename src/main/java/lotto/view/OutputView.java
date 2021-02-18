@@ -3,17 +3,19 @@ package lotto.view;
 import static java.util.stream.Collectors.toList;
 
 import java.util.List;
-import lotto.domain.lotto.LottoTicket;
+import java.util.Map;
 import lotto.domain.lotto.LottoNumbers;
+import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.WinningStatistics;
-import lotto.domain.rank.Ranking;
+import lotto.domain.rank.Rank;
 
 public class OutputView {
+
     private static final String PAYOUT = "구입금액을 입력해 주세요";
     private static final String LOTTO_COUNT_FORMAT = "개를 구매했습니다.";
     private static final String LAST_WEEK_LOTTO_NUMBER = "\n지난 주 당첨 번호를 입력해 주세요";
     private static final String BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
-    private static final String WINNING_STATISTICS ="\n당첨 동계";
+    private static final String WINNING_STATISTICS = "\n당첨 동계";
     private static final String LINE = "---------";
     private static final String STATISTICS_NONE_BONUS_FORMAT = "%d개 일치 (%d원)- %d개\n";
     private static final String STATISTICS_BONUS_FORMAT = "%d개 일치, 보너스 볼 일치(%d원)- %d개\n";
@@ -48,20 +50,23 @@ public class OutputView {
         System.out.println(BONUS_NUMBER);
     }
 
-    public static void statistics(WinningStatistics winningStatistics){
+    public static void statistics(WinningStatistics winningStatistics) {
         System.out.println(WINNING_STATISTICS);
         System.out.println(LINE);
-        winningStatistics.getRankings().forEach(OutputView::printStatisticsAccordingToBonus);
+        Map<Rank, Long> gameResult = winningStatistics.toMap();
+
+        Rank.toList().stream()
+            .forEach(rank -> printStatisticsAccordingToBonus(rank, gameResult.get(rank)));
         System.out.printf(STATISTICS_YIELD_FORMAT, winningStatistics.getYield());
     }
 
-    private static void printStatisticsAccordingToBonus(Ranking ranking) {
+    private static void printStatisticsAccordingToBonus(Rank rank, Long count) {
         String format = STATISTICS_NONE_BONUS_FORMAT;
 
-        if(ranking.getBonus()) {
-           format = STATISTICS_BONUS_FORMAT;
+        if (rank.isBonusNumber()) {
+            format = STATISTICS_BONUS_FORMAT;
         }
 
-        System.out.printf(format, ranking.getMatchingCount(), ranking.getWinnings(), ranking.getCount());
+        System.out.printf(format, rank.getMatchedNumber(), rank.getWinnings(), count);
     }
 }
