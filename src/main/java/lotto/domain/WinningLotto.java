@@ -30,17 +30,11 @@ public class WinningLotto extends Lotto {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        if (!super.equals(o)) {
-            return false;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
         WinningLotto that = (WinningLotto) o;
-        return bonusNumber == that.bonusNumber;
+        return Objects.equals(bonusNumber, that.bonusNumber);
     }
 
     @Override
