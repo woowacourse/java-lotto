@@ -4,7 +4,7 @@ import java.util.HashSet;
 import lottogame.domain.number.LottoNumber;
 import lottogame.domain.number.LottoNumbers;
 
-public class LottoDrawingMachine {
+public class LottoWinningDrawingMachine {
 
     public static final int DRAWING_COUNT = 6;
     public static final String DELIMITER = ", ";
