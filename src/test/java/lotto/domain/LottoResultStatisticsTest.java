@@ -85,4 +85,15 @@ public class LottoResultStatisticsTest {
         assertThat(result.get(LottoRank.FIFTH_PLACE)).isEqualTo(0);
         assertThat(result.get(LottoRank.SIXTH_PLACE)).isEqualTo(1);
     }
+
+    @Test
+    @DisplayName("수익률 계산한다.")
+    public void calculateEarningTest() {
+        Money money = new Money(3000);
+
+        int earningPercentage =
+                LottoResultStatistics.getResultStatistics(lottoTickets, lottoWinner).calculateEarning(money);
+
+        assertThat(earningPercentage).isEqualTo(67666566);
+    }
 }
