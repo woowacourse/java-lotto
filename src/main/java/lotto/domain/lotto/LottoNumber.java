@@ -1,12 +1,13 @@
 package lotto.domain.lotto;
 
 import java.util.Objects;
-import lotto.utils.StringValidator;
+import java.util.regex.Pattern;
 
 public class LottoNumber {
 
     public static final int MINIMUM_VALUE = 1;
     public static final int MAXIMUM_VALUE = 45;
+    private static final Pattern NUMERIC_PATTERN = Pattern.compile("\\d+");
 
     private final int number;
 
@@ -23,9 +24,14 @@ public class LottoNumber {
 
     private static int convertToLottoNumber(String numberValue) {
         numberValue = numberValue.trim();
-        //todo 도메인 객체가 외부의 유틸 클래스에 의존
-        StringValidator.validateIsDigit(numberValue);
+        validateNumeric(numberValue);
         return Integer.parseInt(numberValue);
+    }
+
+    public static void validateNumeric(String input) {
+        if (!NUMERIC_PATTERN.matcher(input).matches()) {
+            throw new IllegalArgumentException();
+        }
     }
 
     public int toInt() {

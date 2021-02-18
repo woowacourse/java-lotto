@@ -37,5 +37,4 @@ public class LottoMatcher {
         }
         return resultMap;
     }
-
 }
