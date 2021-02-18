@@ -12,6 +12,7 @@ public enum WinningResult {
     SECOND_PRIZE(6, 30000000, "5개 일치, 보너스 볼 일치"),
     FIRST_PRIZE(7, 2000000000, "6개 일치");
 
+    private static final String WINNING_INFO_MESSAGE = "%s (%d)원 - %d개\n";
     private final int hitCount;
     private final int winnings;
     private final String message;
@@ -39,13 +40,17 @@ public enum WinningResult {
     }
 
     public static String toString(List<Integer> hitCounts) {
-        StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder winningInfo = new StringBuilder();
         IntStream.rangeClosed(FIFTH_PRIZE.hitCount, FIRST_PRIZE.hitCount).forEach(index -> {
             WinningResult winningResult = getWinningResult(index);
-            stringBuilder.append(winningResult.message + " (" + winningResult.winnings + ")원 - " +
-                    hitCounts.get(index) + "개" + System.lineSeparator());
+            winningInfo.append(String.format(
+                    WINNING_INFO_MESSAGE,
+                    winningResult.message,
+                    winningResult.winnings,
+                    hitCounts.get(index)
+            ));
         });
-        return stringBuilder.toString();
+        return winningInfo.toString();
     }
 
     private static WinningResult getWinningResult(int count) {
