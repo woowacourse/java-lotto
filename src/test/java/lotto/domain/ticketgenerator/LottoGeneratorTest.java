@@ -1,19 +1,21 @@
 package lotto.domain.ticketgenerator;
 
-import java.util.Arrays;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
+import static org.assertj.core.api.Assertions.*;
+
+import lotto.domain.ticketpurchase.PurchasedLottoTickets;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 public class LottoGeneratorTest {
-    private final LottoTicket lottoTicket = new LottoTicket(
-        Arrays.asList(
-            new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(4),
-            new LottoNumber(5),
-            new LottoNumber(6)
-        )
-    );
+    @DisplayName("매개변수로 받은 개수만큼 로또 티켓 구입 테스트")
+    @Test
+    void Should_Return_PurchasedLottoTicketsWithExactNumberOfTickets_When_Purchase() {
+        LottoGenerator lottoGenerator = new LottoGenerator();
+        int numberOfTickets = 5;
 
+        PurchasedLottoTickets purchasedLottoTickets
+            = lottoGenerator.generatePurchasedTickets(numberOfTickets);
+
+        assertThat(purchasedLottoTickets.getTickets().size()).isEqualTo(numberOfTickets);
+    }
 }
