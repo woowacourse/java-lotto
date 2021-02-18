@@ -2,6 +2,7 @@ package lotto.view;
 
 import java.util.Scanner;
 import lotto.Money;
+
 public class InputView {
 
     private final Scanner scanner;

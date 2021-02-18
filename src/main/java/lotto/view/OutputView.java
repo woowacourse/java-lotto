@@ -1,16 +1,14 @@
 package lotto.view;
 
-import java.util.Scanner;
-import lotto.Money;
 import lotto.domain.lotto.Lottos;
-import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoNumber;
 
 public class OutputView {
 
-    public static void numPurchasedLotto(Integer numLotto){
+    public static void numPurchasedLotto(Integer numLotto) {
         System.out.println(numLotto + "개를 구매했습니다.");
-    };
+    }
+
+    ;
 
     public static void inputMoney() {
         System.out.println("구입금액을 입력해 주세요.");

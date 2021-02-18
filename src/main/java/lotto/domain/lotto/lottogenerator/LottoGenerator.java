@@ -5,5 +5,6 @@ import lotto.domain.lotto.LottoNumber;
 
 @FunctionalInterface
 public interface LottoGenerator {
+
     List<LottoNumber> generateLottoNumbers();
 }
