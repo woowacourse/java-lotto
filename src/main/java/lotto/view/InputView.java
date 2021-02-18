@@ -30,7 +30,7 @@ public class InputView {
         return parseInt(scanner.nextLine());
     }
 
-    public Set<LottoNumber> inputWinningTicket() {
+    public Set<LottoNumber> inputWinningNumbers() {
         return splitAndWrap(scanner.nextLine());
     }
 
