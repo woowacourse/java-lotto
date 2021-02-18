@@ -18,7 +18,7 @@ public class LottoController {
 
         OutputView.printRewardResultBoard();
         LottoResultStatistics lottoResultStatistics =
-                LottoResultStatistics.getResultStatistics(lottoTickets, lottoWinner);
+                LottoResultStatistics.calculateResultStatistics(lottoTickets, lottoWinner);
         OutputView.printStatistics(lottoResultStatistics);
         OutputView.printFinalResult(lottoResultStatistics, money);
     }

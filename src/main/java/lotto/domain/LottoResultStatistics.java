@@ -12,7 +12,7 @@ public class LottoResultStatistics {
         this.lottoResult = lottoResult;
     }
 
-    public static LottoResultStatistics getResultStatistics(
+    public static LottoResultStatistics calculateResultStatistics(
             final LottoTickets lottoTickets, final LottoWinner lottoWinner) {
         Map<LottoRank, Integer> lottoResult = setLottoResult();
 
