@@ -1,10 +1,11 @@
 package lotto.domain.lotto;
 
-import static lotto.utils.Config.PRICE_EACH_LOTTO;
+
+import static lotto.domain.lotto.utils.LottoAttributes.LOTTO_LINE_PRICE;
 
 import java.util.Arrays;
 import java.util.List;
-import lotto.domain.Rank;
+import lotto.domain.lotto.utils.Rank;
 
 public class LottoResult {
 
@@ -26,7 +27,7 @@ public class LottoResult {
     }
 
     private int getPurchaseMoney() {
-        return ranks.size() * PRICE_EACH_LOTTO;
+        return ranks.size() * LOTTO_LINE_PRICE;
     }
 
 }

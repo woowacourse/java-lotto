@@ -1,7 +1,7 @@
 package lotto.domain.lotto;
 
-import static lotto.utils.Config.END;
-import static lotto.utils.Config.START;
+import static lotto.domain.lotto.utils.LottoAttributes.LOTTO_NUMBER_END;
+import static lotto.domain.lotto.utils.LottoAttributes.LOTTO_NUMBER_START;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,7 +12,7 @@ public class LottoLineGenerator {
     private static final List<LottoNumber> lottoNumbers = new ArrayList<>();
 
     public LottoLineGenerator() {
-        for (int i = START; i <= END; i++) {
+        for (int i = LOTTO_NUMBER_START; i <= LOTTO_NUMBER_END; i++) {
             lottoNumbers.add(new LottoNumber(i));
         }
     }
@@ -23,4 +23,5 @@ public class LottoLineGenerator {
         Collections.sort(picked);
         return new LottoLine(picked);
     }
+
 }
