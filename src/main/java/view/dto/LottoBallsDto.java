@@ -4,14 +4,14 @@ import domain.ball.LottoBall;
 
 import java.util.List;
 
-public class LottoNumbersDto {
+public class LottoBallsDto {
     private final List<LottoBall> lottoBalls;
 
-    public LottoNumbersDto(List<LottoBall> lottoBalls) {
+    public LottoBallsDto(List<LottoBall> lottoBalls) {
         this.lottoBalls = lottoBalls;
     }
 
-    public List<LottoBall> getLottoNumbers() {
+    public List<LottoBall> getLottoBalls() {
         return lottoBalls;
     }
 }

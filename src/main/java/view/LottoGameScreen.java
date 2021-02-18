@@ -28,23 +28,23 @@ public class LottoGameScreen {
     }
 
     public void showAllLottoStatus(final List<LottoResponseDto> lottoResponseDtos) {
-        List<LottoNumbersDto> lottoNumbersDtos = lottoResponseDtos.stream()
+        List<LottoBallsDto> lottoBallsDtos = lottoResponseDtos.stream()
                 .map(lottoResponseDto -> lottoResponseDto.getLottoNumbersDto())
                 .collect(Collectors.toList());
 
-        lottoNumbersDtos.stream()
-                .forEach(lottoNumberDto -> showLottoStatus(lottoNumberDto));
+        lottoBallsDtos.stream()
+                .forEach(lottoBallDto -> showLottoStatus(lottoBallDto));
     }
 
-    private void showLottoStatus(final LottoNumbersDto lottoNumbersDto) {
-        List<LottoBall> lottoBalls = lottoNumbersDto.getLottoNumbers();
+    private void showLottoStatus(final LottoBallsDto lottoBallsDto) {
+        List<LottoBall> lottoBalls = lottoBallsDto.getLottoBalls();
         String lottoStatus = makeSingleLottoStatus(lottoBalls);
         OutputUtil.printMessage(lottoStatus);
     }
 
     private String makeSingleLottoStatus(final List<LottoBall> lottoBalls) {
         List<String> status = lottoBalls.stream()
-                .map(lottoNumber -> String.valueOf(lottoNumber.getValue()))
+                .map(lottoBall -> String.valueOf(lottoBall.getValue()))
                 .collect(Collectors.toList());
         return LOTTO_PREFIX + String.join(DELIMITER, status) + LOTTO_POSTFIX;
     }

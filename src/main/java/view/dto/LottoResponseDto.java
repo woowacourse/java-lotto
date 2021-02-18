@@ -3,13 +3,13 @@ package view.dto;
 import domain.lotto.Lotto;
 
 public class LottoResponseDto {
-    private final LottoNumbersDto lottoNumbersDto;
+    private final LottoBallsDto lottoBallsDto;
 
     public LottoResponseDto(Lotto lotto) {
-        this.lottoNumbersDto = new LottoNumbersDto(lotto.findLottoNumbers());
+        this.lottoBallsDto = new LottoBallsDto(lotto.findLottoNumbers());
     }
 
-    public LottoNumbersDto getLottoNumbersDto() {
-        return lottoNumbersDto;
+    public LottoBallsDto getLottoNumbersDto() {
+        return lottoBallsDto;
     }
 }
