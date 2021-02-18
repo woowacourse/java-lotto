@@ -33,5 +33,4 @@ public class TicketFactory {
     public LottoTicket makeTicket(Set<LottoNumber> lottoNumbers) {
         return new LottoTicket(lottoNumbers);
     }
-
 }
