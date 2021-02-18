@@ -21,15 +21,13 @@ public class OutputView {
         InputPrinter.printNewLine();
     }
 
-    public static void printResult(LottoResult lottoResult, int purchasePrice) {
+    public static void printResult(LottoResult lottoResult) {
         OutputPrinter.printResultTitleMessage();
-        int totalPrize = 0;
         for (LottoMatchType lottoMatchType : LottoMatchType.values()) {
             int countOfMatchedNumbers
                 = lottoResult.getCountOfMatchedNumbersOfSpecificType(lottoMatchType);
-            totalPrize += lottoMatchType.getPrizeMoney() * countOfMatchedNumbers;
             OutputPrinter.printEachNumberMatchedCountMessage(lottoMatchType, countOfMatchedNumbers);
         }
-        OutputPrinter.printProfitMessage((double) totalPrize / (double) purchasePrice);
+        OutputPrinter.printProfitMessage(lottoResult.getProfit());
     }
 }
