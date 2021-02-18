@@ -31,15 +31,6 @@ public class LottoStoreTest {
     }
 
     @ParameterizedTest
-    @DisplayName("구입가능한 로또 매수 계산")
-    @CsvSource(value = {"14000,14", "10200,10", "500,0", "0,0"})
-    void calculateAffordableLottoPiecesTest(int money, int expectedLottoPieces) {
-        LottoStore lottoStore = new LottoStore();
-        int calculatedLottoPieces = lottoStore.calculateAffordableLottoPieces(money);
-        assertThat(calculatedLottoPieces).isEqualTo(expectedLottoPieces);
-    }
-
-    @ParameterizedTest
     @DisplayName("총 수익률 계산")
     @MethodSource("provideLottosResult")
     void lottoProfitCalculateTest(Lotto exampleLotto, double profitRate) {

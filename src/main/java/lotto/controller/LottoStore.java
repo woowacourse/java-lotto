@@ -6,12 +6,13 @@ import java.util.Map.Entry;
 import java.util.Scanner;
 import lotto.domain.LottoRank;
 import lotto.domain.Lottos;
+import lotto.domain.Money;
 import lotto.viewer.InputView;
 import lotto.viewer.OutputView;
 
 public class LottoStore {
 
-    public static final int LOTTO_PRICE = 1000;
+    private final static int LOTTO_PRICE = 1000;
 
     private final InputView inputView;
     private final OutputView outputView;
@@ -31,8 +32,9 @@ public class LottoStore {
     }
 
     public Lottos buyLotto() {
-        int possessedMoney = inputView.purchaseMoney();
-        Lottos purchasedLottos = new Lottos(calculateAffordableLottoPieces(possessedMoney));
+        int receivedMoney = inputView.purchaseMoney();
+        Money possessedMoney =new Money(receivedMoney);
+        Lottos purchasedLottos = new Lottos(possessedMoney.getLottoPieces(LOTTO_PRICE));
         outputView.printPurchasedLottos(purchasedLottos);
         return purchasedLottos;
     }
@@ -51,9 +53,4 @@ public class LottoStore {
         double rawProfitRate = sum / investCapital;
         return Math.round(rawProfitRate * 100) / 100.00;
     }
-
-    public int calculateAffordableLottoPieces(int money) {
-        return money / LOTTO_PRICE;
-    }
-
 }
