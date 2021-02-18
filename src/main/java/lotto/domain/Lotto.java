@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -43,6 +44,10 @@ public class Lotto {
         return lottoNumbers.contains(number);
     }
 
+    public List<Integer> getLottoNumbers() {
+        return Collections.unmodifiableList(lottoNumbers);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -59,4 +64,6 @@ public class Lotto {
     public int hashCode() {
         return Objects.hash(lottoNumbers);
     }
+
+
 }
