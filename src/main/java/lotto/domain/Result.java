@@ -10,6 +10,11 @@ public enum Result {
     FIFTH(3, 5_000),
     NONE(0, 0);
 
+    public static final int STATISTICS_INITIAL_VALUE = 0;
+    public static final int RESULT_START_INDEX = 0;
+    public static final int RESULT_END_INDEX = 5;
+    public static final int SECOND_INDEX = 5;
+
     private final int count;
     private final int prize;
 
@@ -29,7 +34,7 @@ public enum Result {
     public static List<Integer> getStatistics(List<Result> results) {
         Map<Result, Integer> statistics = createStatistics(results);
 
-        List<Integer> firstToFifth = new ArrayList(statistics.values()).subList(0, 5);
+        List<Integer> firstToFifth = new ArrayList(statistics.values()).subList(RESULT_START_INDEX, RESULT_END_INDEX);
         Collections.reverse(firstToFifth);
         return firstToFifth;
     }
@@ -37,7 +42,7 @@ public enum Result {
     private static Map<Result, Integer> createStatistics(List<Result> results) {
         Map<Result, Integer> statistics = new LinkedHashMap<>();
         for (Result result : values()) {
-            statistics.put(result, 0);
+            statistics.put(result, STATISTICS_INITIAL_VALUE);
         }
         for (Result result : results) {
             statistics.put(result, statistics.get(result) + 1);

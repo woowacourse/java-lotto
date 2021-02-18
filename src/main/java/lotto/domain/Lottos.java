@@ -24,6 +24,10 @@ public class Lottos {
     public List<Result> getResults(WinningLotto winningLotto) {
         List<Integer> winningLottoNumbers = winningLotto.getWinningLottoNumbers();
         int bonusNumber = winningLotto.getBonusNumber();
+        return collectCorrespondingResults(winningLottoNumbers, bonusNumber);
+    }
+
+    private List<Result> collectCorrespondingResults(List<Integer> winningLottoNumbers, int bonusNumber) {
         List<Result> results = new ArrayList<>();
         for (Lotto lotto : lottos) {
             int matches = lotto.countMatchingNumbers(winningLottoNumbers);
