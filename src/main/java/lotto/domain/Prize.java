@@ -19,26 +19,22 @@ public enum Prize {
         this.matchCount = matchCount;
     }
 
-    public Money getPrizeMoney() {
-        return prizeMoney;
-    }
-
-    public int getMatchCount(){
-        return matchCount;
-    }
-
-    public boolean isEqualToMatchCount(double matchCount) {
-        return this.matchCount == matchCount;
+    public static Prize getPrizeType(int matchCount, boolean isBonusBall) {
+        if (isMatchCountEqualsPivot(matchCount) && isBonusBall) {
+            return SECOND_PRIZE;
+        }
+        return Arrays.stream(values()).filter(s -> s.matchCount == matchCount).findFirst().orElse(NO_PRIZE);
     }
 
     private static boolean isMatchCountEqualsPivot(int matchCount) {
         return matchCount == BONUS_CHECK_PIVOT;
     }
 
-    public static Prize getPrizeType(int matchCount, boolean isBonusBall){
-        if(isMatchCountEqualsPivot(matchCount) && isBonusBall){
-            return SECOND_PRIZE;
-        }
-        return Arrays.stream(values()).filter(s->s.matchCount == matchCount).findFirst().orElse(NO_PRIZE);
+    public Money getPrizeMoney() {
+        return prizeMoney;
+    }
+
+    public int getMatchCount() {
+        return matchCount;
     }
 }

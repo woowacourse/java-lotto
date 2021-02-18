@@ -1,6 +1,8 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
@@ -21,19 +23,4 @@ public class LottoTickets {
         }
         return winningTickets;
     }
-
-//    private int getTicketPrizeTypeCount(List<LottoNumber> numbers, LottoNumber bonusBall, PrizeType prizeType) {
-//        int count = 0;
-//        for (LottoTicket lottoTicket : lottoTickets) {
-//            count += addPrize(lottoTicket.getMatchingCount(numbers, bonusBall), prizeType);
-//        }
-//        return count;
-//    }
-//
-//    private int addPrize(double matchingCount, PrizeType prizeType) {
-//        if (prizeType.isEqualToMatchCount(matchingCount)) {
-//            return 1;
-//        }
-//        return 0;
-//    }
 }

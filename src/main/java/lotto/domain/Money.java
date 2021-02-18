@@ -4,6 +4,7 @@ import lotto.utils.Validator;
 
 public class Money {
     private final long value;
+
     public Money(String input) {
         Validator.validateMoneyValue(input);
         this.value = Long.parseLong(input);
