@@ -1,7 +1,9 @@
+package domain.lotto;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTicketFactory;
+import lotto.domain.lotto.LottoTicket;
+import lotto.domain.lotto.LottoTicketFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

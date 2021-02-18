@@ -1,11 +1,12 @@
+package domain.lotto;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import java.util.Arrays;
 import java.util.List;
-import lotto.domain.LottoLine;
-import lotto.domain.LottoNumber;
+import lotto.domain.lotto.LottoLine;
+import lotto.domain.lotto.LottoNumber;
 import lotto.domain.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

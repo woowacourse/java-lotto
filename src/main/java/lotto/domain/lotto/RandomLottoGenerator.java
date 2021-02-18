@@ -1,4 +1,6 @@
-package lotto.domain;
+package lotto.domain.lotto;
+
+import static lotto.utils.Validation.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
