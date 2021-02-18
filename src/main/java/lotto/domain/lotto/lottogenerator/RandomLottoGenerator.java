@@ -1,14 +1,13 @@
 package lotto.domain.lotto.lottogenerator;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import lotto.domain.lotto.LottoNumber;
 
 public class RandomLottoGenerator implements LottoGenerator {
+
     @Override
     public List<LottoNumber> generateLottoNumbers() {
         List<LottoNumber> lottoNumbers = getShuffledLottoAllNumbers()
@@ -22,7 +21,7 @@ public class RandomLottoGenerator implements LottoGenerator {
 
     private List<Integer> getShuffledLottoAllNumbers() {
         List<Integer> lottoAllNumbers = new ArrayList<>();
-        for (int i = 1; i < 45; i++) {
+        for (int i = LottoNumber.MIN_LOTTO_LIMIT; i < LottoNumber.MAX_LOTTO_LIMIT; i++) {
             lottoAllNumbers.add(i);
         }
         Collections.shuffle(lottoAllNumbers);
