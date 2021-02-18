@@ -95,7 +95,7 @@ public class LottoTicketTest {
         }).isInstanceOf(RuntimeException.class);
     }
 
-    @Test // 정렬 테스트는 어떻게 하는게 좋을까요?
+    @Test
     @DisplayName("로또 티켓 생성시 입력받은 List가 잘 정렬 되있는지 검사")
     public void lottoTicketSortTest() {
         LottoTicket lottoTicket = LottoTicketService.createLottoTicket();

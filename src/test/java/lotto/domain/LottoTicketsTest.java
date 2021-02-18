@@ -42,8 +42,7 @@ public class LottoTicketsTest {
         }).isInstanceOf(IllegalArgumentException.class).hasMessage("로또는 한장 이상 구매해야 합니다.");
     }
 
-
-    @Test  //이 코드를 좀 더 깔끔하게 쓰는법 혹시 없을까요?
+    @Test
     @DisplayName("구매한 여러장의 로또 티켓들을 가진 객체를 생성한다.")
     public void createLottoTicketsTest() {
         assertThat(lottoTickets).isInstanceOf(LottoTickets.class);
