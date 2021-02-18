@@ -7,7 +7,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    public static final String DELIMITER = ",";
+    public final String DELIMITER = ",";
 
     private final List<Integer> numbers;
 
@@ -23,6 +23,23 @@ public class Lotto {
         this.numbers = new ArrayList<>(lottoNumbers);
     }
 
+
+    private static void NullCheckNumbers(String inputNumbers) {
+        if (inputNumbers == null) {
+            throw new LottoNumberCountException();
+        }
+    }
+
+    private static List<Integer> convertInputLottoNumbersToInteger(String[] splittedNumbers) {
+        try {
+            return Arrays.stream(splittedNumbers)
+                    .map(String::trim)
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            throw new LottoNumberCountException();
+        }
+    }
 
     private static void validateLottoNumbers(List<Integer> lottoNumbers) {
         validateLottoNumbersScope(lottoNumbers);
@@ -42,25 +59,16 @@ public class Lotto {
         }
     }
 
-    private static List<Integer> convertInputLottoNumbersToInteger(String[] splittedNumbers) {
-        try {
-            return Arrays.stream(splittedNumbers)
-                    .map(String::trim)
-                    .map(Integer::parseInt)
-                    .collect(Collectors.toList());
-        } catch (Exception e) {
-            throw new LottoNumberCountException();
-        }
+    public boolean isContainNumber(int number) {
+        return numbers.contains(number);
     }
 
-    private static void NullCheckNumbers(String inputNumbers) {
-        if (inputNumbers == null) {
-            throw new LottoNumberCountException();
-        }
-    }
+    public long compareOtherLottoMatchCount(Lotto otherLotto) {
+        List<Integer> otherLottoNumbers = otherLotto.getNumbers();
 
-    public boolean isContainBonusBall(BonusBall bonusBall) {
-        return numbers.contains(bonusBall.getBonusNumber());
+        return otherLottoNumbers.stream()
+                .filter(this.numbers::contains)
+                .count();
     }
 
     public List<Integer> getNumbers() {

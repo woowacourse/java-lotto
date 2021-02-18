@@ -30,18 +30,16 @@ public class WinningLotto {
     }
 
     private boolean isSecondRank(long count, Lotto lotto) {
-        return count == LOTTO_POSSESSION_NUMBER && lotto.isContainBonusBall(bonusBall);
+        return count == LOTTO_POSSESSION_NUMBER && lotto.isContainNumber(bonusBall.getBonusNumber());
     }
 
     private long getCount(Lotto lotto) {
-        List<Integer> winningNumbers = winningLotto.getNumbers();
-        List<Integer> generalLottoNumbers = lotto.getNumbers();
-        long matchCount = generalLottoNumbers.stream()
-                .filter(winningNumbers::contains)
-                .count();
-        if (generalLottoNumbers.contains(bonusBall.getBonusNumber())) {
+        long matchCount = winningLotto.compareOtherLottoMatchCount(lotto);
+
+        if (lotto.isContainNumber(bonusBall.getBonusNumber())) {
             matchCount++;
         }
+
         return matchCount;
     }
 }

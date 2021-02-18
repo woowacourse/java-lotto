@@ -4,7 +4,7 @@ import lotto.exception.BonusBallDuplicatedException;
 import lotto.exception.BonusBallScopeException;
 
 public class BonusBall {
-    int bonusNumber;
+    final int bonusNumber;
 
     public BonusBall(int bonusNumber, Lotto lotto) {
         validateBonusNumber(bonusNumber, lotto);
@@ -16,15 +16,15 @@ public class BonusBall {
         validateBonusNumberScope(bonusNumber);
     }
 
-    private void validateBonusNumberScope(int bonusNumber) {
-        if (bonusNumber <= 0 || bonusNumber > 45) {
-            throw new BonusBallScopeException();
+    private void validateBonusNumberDuplicated(int bonusNumber, Lotto lotto) {
+        if (lotto.isContainNumber(bonusNumber)) {
+            throw new BonusBallDuplicatedException();
         }
     }
 
-    private void validateBonusNumberDuplicated(int bonusNumber, Lotto lotto) {
-        if (lotto.getNumbers().contains(bonusNumber)) {
-            throw new BonusBallDuplicatedException();
+    private void validateBonusNumberScope(int bonusNumber) {
+        if (bonusNumber <= 0 || bonusNumber > 45) {
+            throw new BonusBallScopeException();
         }
     }
 

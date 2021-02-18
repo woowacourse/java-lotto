@@ -1,9 +1,9 @@
 package lotto.domain;
 
+import lotto.controller.LottoStore;
 import lotto.exception.MoneyException;
 
 public class Money {
-    public static final int LOTTO_PRICE = 1000;
     private final int money;
 
     public Money(int money) {
@@ -12,12 +12,12 @@ public class Money {
     }
 
     private void validateMoneyValue(int money) {
-        if (money < LOTTO_PRICE) {
+        if (money < LottoStore.LOTTO_PRICE) {
             throw new MoneyException();
         }
     }
 
     public int getAffordableLottoTickets() {
-        return money / LOTTO_PRICE;
+        return money / LottoStore.LOTTO_PRICE;
     }
 }

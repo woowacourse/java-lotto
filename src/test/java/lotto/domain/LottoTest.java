@@ -18,7 +18,7 @@ public class LottoTest {
     @DisplayName("보너스 볼 포함하는 경우")
     void bonusBallDuplicated() {
         Lotto lotto = new Lotto("11,12,13,14,15,16");
-        assertEquals(lotto.isContainBonusBall(new BonusBall(11, winningLotto)), true);
+        assertEquals(lotto.isContainNumber(11), true);
     }
 
     @ParameterizedTest
