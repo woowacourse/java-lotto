@@ -1,10 +1,11 @@
 package lotto.view;
 
 import java.util.Arrays;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
-import lotto.utils.ValidateUtils;
+import java.util.stream.Collectors;
+import lotto.exception.LottoCustomException;
+import lotto.utils.RefineUtils;
 
 public class InputView {
 
@@ -17,10 +18,13 @@ public class InputView {
     }
 
     public int inputValue() {
-        return ValidateUtils.parseInt(scanner.nextLine());
+        return RefineUtils.refineIntegerValue(scanner.nextLine());
     }
 
-    public Set<String> inputWinningNumbers() {
-        return new HashSet<>(Arrays.asList(scanner.nextLine().split(SPLITTER)));
+    public List<Integer> inputNumbers() {
+            return Arrays.stream(scanner.nextLine()
+                .split(SPLITTER))
+                .map(RefineUtils::refineIntegerValue)
+                .collect(Collectors.toList());
     }
 }

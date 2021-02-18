@@ -3,10 +3,8 @@ package lotto.domain.ticketFactory;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 import lotto.domain.LottoNumber;
 import lotto.exception.LottoCustomException;
-import lotto.utils.ValidateUtils;
 
 public class FixedNumbersGenerator implements NumbersGenerator {
 
@@ -15,10 +13,8 @@ public class FixedNumbersGenerator implements NumbersGenerator {
 
     private final Set<Integer> fixedLottoNumbers;
 
-    public FixedNumbersGenerator(List<String> fixedLottoNumbers) {
-        this.fixedLottoNumbers = fixedLottoNumbers.stream()
-            .map(ValidateUtils::parseInt)
-            .collect(Collectors.toSet());
+    public FixedNumbersGenerator(List<Integer> fixedLottoNumbers) {
+        this.fixedLottoNumbers = new HashSet<>(fixedLottoNumbers);
     }
 
     @Override

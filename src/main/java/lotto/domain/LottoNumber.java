@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import lotto.exception.LottoCustomException;
-import lotto.utils.ValidateUtils;
 
 public class LottoNumber {
 
@@ -17,11 +16,6 @@ public class LottoNumber {
         }
         this.number = number;
     }
-
-    public LottoNumber(final String number) {
-        this(ValidateUtils.parseInt(number));
-    }
-
 
     private boolean isNotProperRange(int number) {
         return !(number >= LOTTO_NUMBER_MIN_LIMIT && number <= LOTTO_NUMBER_MAX_LIMIT);

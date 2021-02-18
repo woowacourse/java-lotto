@@ -57,7 +57,7 @@ public class LottoController {
     private LottoTicket inputWinningNumbers() {
         try {
             OutputView.printWinningNumbers();
-            FixedNumbersGenerator fixedNumbersGenerator = new FixedNumbersGenerator(inputView.inputWinningNumbers());
+            FixedNumbersGenerator fixedNumbersGenerator = new FixedNumbersGenerator(inputView.inputNumbers());
             return ticketFactory.makeTicket(fixedNumbersGenerator.generateNumbers());
         } catch (LottoCustomException exception) {
             OutputView.printErrorMessage(exception);
