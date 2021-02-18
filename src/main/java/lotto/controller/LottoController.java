@@ -1,7 +1,6 @@
 package lotto.controller;
 
 import java.util.List;
-import lotto.domain.Money;
 import lotto.domain.Rank;
 import lotto.domain.lotto.LottoLine;
 import lotto.domain.lotto.LottoNumber;
@@ -13,8 +12,7 @@ import lotto.view.OutputView;
 public class LottoController {
 
     public void run() {
-        Money money = InputView.getMoney();
-        LottoTicket lottoTicket = new LottoTicket(money.getValue());
+        LottoTicket lottoTicket = new LottoTicket(InputView.getMoney());
         OutputView.printLottoTicket(lottoTicket);
 
         LottoLine winningLottoLine = InputView.getLottoLine();

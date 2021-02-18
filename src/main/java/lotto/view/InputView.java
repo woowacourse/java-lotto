@@ -3,7 +3,6 @@ package lotto.view;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import lotto.domain.Money;
 import lotto.domain.lotto.LottoLine;
 import lotto.domain.lotto.LottoNumber;
 
@@ -11,11 +10,10 @@ public class InputView {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static Money getMoney() {
+    public static int getMoney() {
         try {
             System.out.println(InputViewMessages.REQUEST_PURCHASE_MONEY.getMessage());
-            int inputValue = Integer.parseInt(scanner.nextLine());
-            return new Money(inputValue);
+            return Integer.parseInt(scanner.nextLine());
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return getMoney();
