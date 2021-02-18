@@ -8,12 +8,17 @@ public class BonusBall {
     private final int bonusBall;
 
     public BonusBall(String value, WinnerTicket winnerTicket) {
-        int number = TicketValidation.validateNumber(value);
-        TicketValidation.validateNumberInRange(number);
+        int number = validateNumber(value);
         if (winnerTicket.containsSameNumber(number)) {
             throw new IllegalArgumentException(ERROR_MESSAGE_DUPLICATED);
         }
         this.bonusBall = number;
+    }
+
+    private int validateNumber(String value) {
+        int number = TicketValidation.validateNumber(value);
+        TicketValidation.validateNumberInRange(number);
+        return number;
     }
 
     public boolean isSameThan(int number) {

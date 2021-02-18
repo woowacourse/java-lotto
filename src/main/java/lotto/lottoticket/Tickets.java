@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Tickets {
-    private static final int SECOND_MATCH_COUNT = 5;
-
     private final List<Ticket> tickets;
 
     public Tickets(LottoCount lottoCount, NumbersGenerator numbersGenerator) {

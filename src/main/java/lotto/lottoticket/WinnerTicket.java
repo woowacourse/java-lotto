@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class WinnerTicket {
+    private static final String COMMA_DELIMITER = ",";
+
     private final List<Integer> winnerTicket;
 
     public WinnerTicket(String numbers) {
@@ -13,12 +15,19 @@ public class WinnerTicket {
 
     private List<Integer> splitNumbers(String values) {
         List<Integer> numbers = new ArrayList<>();
-        for (String value : values.split(",")) {
-            value = value.replace(" ", "");
-            int number = TicketValidation.validateNumber(value);
-            TicketValidation.validateNumberInRange(number);
-            numbers.add(number);
+        for (String value : values.split(COMMA_DELIMITER)) {
+            numbers.add(validateNumber(value));
         }
+        return validateNumbers(numbers);
+    }
+
+    private int validateNumber(String value) {
+        int number = TicketValidation.validateNumber(value);
+        TicketValidation.validateNumberInRange(number);
+        return number;
+    }
+
+    private List<Integer> validateNumbers(List<Integer> numbers) {
         TicketValidation.validateSize(numbers);
         TicketValidation.validateDuplicated(numbers);
         return numbers;
