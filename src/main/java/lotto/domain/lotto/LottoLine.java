@@ -33,5 +33,9 @@ public class LottoLine {
         return Collections.unmodifiableList(
                 new ArrayList<>(value));
     }
+
+    public boolean containNumber(LottoNumber number) {
+        return value.contains(number);
+    }
 }
 

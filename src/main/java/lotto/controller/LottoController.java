@@ -12,15 +12,16 @@ import lotto.domain.lotto.LottoTicketFactory;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import static lotto.view.ErrorMessages.ERROR_BONUS_LOTTO_NUMBER_DUPLICATED;
+
 public class LottoController {
 
     public void run() {
         try {
             LottoTicket lottoTicket = getLottoTicket();
+
             OutputView.printLottoTicket(lottoTicket);
-            LottoResult lottoResult = checkLottoTicket(lottoTicket, new LottoLine(InputView.getLottoLine()),
-                    new LottoNumber(InputView.getBonusLottoNumber()));
-            OutputView.printResult(lottoResult);
+            OutputView.printResult(getLottoResult(lottoTicket));
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -31,11 +32,21 @@ public class LottoController {
         return LottoTicketFactory.createLottoTicket(money.getValue());
     }
 
+    private LottoResult getLottoResult(LottoTicket lottoTicket) {
+        LottoLine lottoLine = new LottoLine(InputView.getLottoLine());
+        LottoNumber bonusLottoNumber = new LottoNumber(InputView.getBonusLottoNumber());
+
+        if (lottoLine.containNumber(bonusLottoNumber)) {
+            throw new IllegalArgumentException(ERROR_BONUS_LOTTO_NUMBER_DUPLICATED.getMessage());
+        }
+
+        return checkLottoTicket(lottoTicket, lottoLine, bonusLottoNumber);
+    }
+
     private LottoResult checkLottoTicket(LottoTicket lottoTicket, LottoLine winLottoLine,
                                          LottoNumber bonusBallNumber) {
         List<Rank> rankList = lottoTicket
                 .matchLottoLines(winLottoLine.getValues(), bonusBallNumber);
         return new LottoResult(rankList);
     }
-
 }
