@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -18,6 +19,6 @@ public class RandomLottoNumberGenerator implements LottoNumberGenerator {
         Collections.shuffle(NUMBERS);
         List<Integer> numbers = NUMBERS.subList(FROM_INDEX, TO_INDEX);
         numbers.sort(Comparator.naturalOrder());
-        return numbers;
+        return new ArrayList<>(numbers);
     }
 }

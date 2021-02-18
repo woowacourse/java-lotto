@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.EnumMap;
 import java.util.Map;
 
 public class LottoStatistics {
@@ -8,7 +9,7 @@ public class LottoStatistics {
     private final Map<LottoRank, Long> statisticsMap;
 
     public LottoStatistics(Map<LottoRank, Long> statisticsMap) {
-        this.statisticsMap = statisticsMap;
+        this.statisticsMap = new EnumMap<>(statisticsMap);
     }
 
     public long getTicketCountsByRank(LottoRank lottoRank) {
