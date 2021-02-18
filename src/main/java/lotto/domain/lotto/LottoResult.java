@@ -6,6 +6,7 @@ import java.util.Map;
 
 public class LottoResult {
 
+    public static final int RATE = 100;
     private final Map<LottoRank, Integer> rank;
 
     public LottoResult() {
@@ -30,13 +31,12 @@ public class LottoResult {
     }
 
     public double getProfitRate() {
-        return Math.floor((double) winningPrice() / purchasePrice() * 100) / 100;
-//        System.out.println(Math.floor((double)5000/(double)14000 * 100)/100);
+        return Math.floor((double) winningPrice() / purchasePrice() * RATE) / RATE;
     }
 
     private Long purchasePrice() {
         long numLotto = rank.values().stream().reduce(0, Integer::sum);
-        return numLotto * 1000;
+        return numLotto * LottoStore.LOTTO_PRICE;
     }
 
     private Long winningPrice() {
