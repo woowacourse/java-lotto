@@ -2,6 +2,8 @@ package lotto.domain;
 
 import lotto.exception.LottoCustomException;
 
+import static java.lang.String.format;
+
 public class LottoNumber {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
@@ -10,7 +12,7 @@ public class LottoNumber {
 
     public LottoNumber(final int number) {
         if (isNumberNotInRange(number)) {
-            throw new LottoCustomException(String.format(
+            throw new LottoCustomException(format(
                     "로또 번호는 %d-%d사이의 숫자이어야 합니다",
                     MIN_LOTTO_NUMBER,
                     MAX_LOTTO_NUMBER));

@@ -29,7 +29,7 @@ public class InputView {
         return parseInt(scanner.nextLine());
     }
 
-    public Set<String> inputWinningTicket() {
+    public Set<Integer> inputWinningTicket() {
         return splitWinningNumbers(scanner.nextLine());
     }
 
@@ -37,9 +37,10 @@ public class InputView {
         return parseInt(scanner.nextLine());
     }
 
-    private Set<String> splitWinningNumbers(String winningNumbers) {
+    private Set<Integer> splitWinningNumbers(String winningNumbers) {
         return Arrays.stream(winningNumbers.split(SEPARATOR))
                 .map(String::trim)
+                .map(InputView::parseInt)
                 .collect(Collectors.toSet());
     }
 }

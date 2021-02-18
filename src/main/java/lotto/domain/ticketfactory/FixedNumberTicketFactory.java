@@ -13,21 +13,21 @@ public class FixedNumberTicketFactory {
     private FixedNumberTicketFactory() {
     }
 
-    public static LottoTicket makeTicket(Set<String> lottoNumbers) {
+    public static LottoTicket makeTicket(Set<Integer> lottoNumbers) {
         if (!hasExactSize(lottoNumbers)) {
             throw new LottoCustomException("당첨번호는 서로 다른 숫자 6개이어야 합니다.");
         }
         return new LottoTicket(getFixedLottoNumbers(lottoNumbers));
     }
 
-    public static Set<LottoNumber> getFixedLottoNumbers(Set<String> lottoNumbers) {
+    public static Set<LottoNumber> getFixedLottoNumbers(Set<Integer> lottoNumbers) {
         return lottoNumbers
                 .stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet());
     }
 
-    private static boolean hasExactSize(Set<String> lottoNumbers) {
+    private static boolean hasExactSize(Set<Integer> lottoNumbers) {
         return lottoNumbers.size() == EXACT_SIZE;
     }
 }
