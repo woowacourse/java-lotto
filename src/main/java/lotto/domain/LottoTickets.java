@@ -1,9 +1,10 @@
 package lotto.domain;
 
+import lotto.domain.ticketfactory.RandomTicketFactory;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import lotto.domain.ticketfactory.RandomTicketFactory;
 
 public class LottoTickets {
 

@@ -1,9 +1,10 @@
 package lotto.domain;
 
+import lotto.exception.LottoCustomException;
+
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-import lotto.exception.LottoCustomException;
 
 public class LottoTicket {
 
@@ -29,7 +30,7 @@ public class LottoTicket {
         hitLottoNumbers.retainAll(winningTicket.lottoNumbers);
 
         if (hitLottoNumbers.size() == CHECK_HIT_COUNT_HAS_BONUS && lottoNumbers
-            .contains(bonusBall)) {
+                .contains(bonusBall)) {
             return SECOND;
         }
 

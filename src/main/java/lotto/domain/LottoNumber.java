@@ -8,7 +8,7 @@ public class LottoNumber {
     private final int number;
 
     public LottoNumber(final int number) {
-        if(isNotProperRange(number)){
+        if (isNotProperRange(number)) {
             throw new LottoCustomException("로또 번호는 1-45사이의 숫자이어야 합니다");
         }
         this.number = number;

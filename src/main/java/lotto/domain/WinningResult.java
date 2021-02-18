@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
-import lotto.exception.LottoCustomException;
 
 public enum WinningResult {
     EIGHTH(0, 0, ""),
@@ -15,9 +14,9 @@ public enum WinningResult {
     SECOND(6, 30000000, "5개 일치, 보너스 볼 일치"),
     FIRST(7, 2000000000, "6개 일치");
 
-    private int hitCount;
-    private int reward;
-    private String message;
+    private final int hitCount;
+    private final int reward;
+    private final String message;
 
     WinningResult(int hitCount, int reward, String message) {
         this.hitCount = hitCount;
@@ -35,10 +34,10 @@ public enum WinningResult {
 
     private static int findReward(int count) {
         return Arrays.stream(values())
-            .filter(value -> count == value.hitCount)
-            .findFirst()
-            .get()
-            .reward;
+                .filter(value -> count == value.hitCount)
+                .findFirst()
+                .get()
+                .reward;
     }
 
     public static String toString(List<Integer> hitCounts) {
@@ -46,7 +45,7 @@ public enum WinningResult {
         IntStream.rangeClosed(FIFTH.hitCount, FIRST.hitCount).forEach(index -> {
             WinningResult winningResult = find(index);
             stringBuilder.append(winningResult.message + " (" + winningResult.reward + ")원 - " +
-                hitCounts.get(index) + "개" + System.lineSeparator());
+                    hitCounts.get(index) + "개" + System.lineSeparator());
 
         });
         return stringBuilder.toString();
@@ -54,8 +53,8 @@ public enum WinningResult {
 
     private static WinningResult find(int count) {
         return Arrays.stream(values())
-            .filter(value -> count == value.hitCount)
-            .findFirst()
-            .get();
+                .filter(value -> count == value.hitCount)
+                .findFirst()
+                .get();
     }
 }

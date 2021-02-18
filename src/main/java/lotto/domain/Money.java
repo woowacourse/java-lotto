@@ -1,7 +1,8 @@
 package lotto.domain;
 
-import java.util.Objects;
 import lotto.exception.LottoCustomException;
+
+import java.util.Objects;
 
 public class Money {
 
