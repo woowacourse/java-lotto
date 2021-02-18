@@ -18,7 +18,7 @@ public class LottoTicketMachine {
         return lottoTickets;
     }
 
-    private boolean isCanBuyTicket(final Money money){
+    private boolean isCanBuyTicket(final Money money) {
         return money.getValue() >= TICKET_PRICE;
     }
 }
