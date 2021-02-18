@@ -1,9 +1,7 @@
 package domain;
 
 import domain.budget.Budget;
-import domain.lotto.Lotto;
-import domain.lotto.LottoCount;
-import domain.lotto.Lottos;
+import domain.lotto.*;
 import util.RandomLottoUtil;
 import view.LottoGameScreen;
 import view.dto.LottoCountResponseDto;
@@ -17,7 +15,6 @@ public class LottoGameMachine {
     private static final Budget LOTTO_COST = Budget.amounts(1000);
 
     private final Budget budget;
-    private Lottos lottos;
 
     public LottoGameMachine(final Budget budget) {
         this.budget = budget;
@@ -28,7 +25,7 @@ public class LottoGameMachine {
         LottoGameScreen lottoGameScreen = new LottoGameScreen();
         lottoGameScreen.showLottoCount(new LottoCountResponseDto(lottoCount.getLottoCount()));
 
-        lottos = makeLottos(lottoCount);
+        Lottos lottos = makeLottos(lottoCount);
         List<Lotto> lottoGroup = lottos.getLottos();
 
         List<LottoResponseDto> lottoResponseDtos = makeLottoResponseDtos(lottoGroup);
@@ -53,5 +50,12 @@ public class LottoGameMachine {
     private LottoCount calculateLottoCount() {
         int lottoCount = budget.intQuotient(LOTTO_COST);
         return LottoCount.of(lottoCount);
+    }
+
+    public void findWinnings(String winningLottoText, String bonusLotto) {
+        LottoNumbers lottoNumbers = new LottoNumbers(winningLottoText);
+        BonusNumber bonusNumber = BonusNumber.of(LottoNumber.of(bonusLotto));
+
+        WinningLotto winningLotto = new WinningLotto(lottoNumbers, bonusNumber);
     }
 }

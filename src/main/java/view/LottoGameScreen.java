@@ -14,6 +14,8 @@ public class LottoGameScreen {
     public static final String LOTTO_PREFIX = "[";
     public static final String LOTTO_POSTFIX = "]";
     public static final String DELIMITER = ", ";
+    public static final String WINNING_LOTTO_CONFIRMATION = "\n지난 주 당첨 번호를 입력해 주세요.";
+    public static final String BONUS_LOTTO_CONFIRMATION = "보너스 볼을 입력해 주세요.";
 
     public void showLottoCount(final LottoCountResponseDto lottoCountResponseDto) {
         OutputUtil.printMessage(String.format(BUY_STATUS, lottoCountResponseDto.getLottoCount()));
@@ -41,5 +43,12 @@ public class LottoGameScreen {
         return LOTTO_PREFIX + String.join(DELIMITER, status) + LOTTO_POSTFIX;
     }
 
+    public void confirmWinningLotto() {
+        OutputUtil.printMessage(WINNING_LOTTO_CONFIRMATION);
+    }
+
+    public void confirmBonusLotto() {
+        OutputUtil.printMessage(BONUS_LOTTO_CONFIRMATION);
+    }
 }
 

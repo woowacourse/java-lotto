@@ -1,7 +1,6 @@
 import domain.LottoGameMachine;
 import domain.budget.Budget;
 import util.InputUtil;
-import util.OutputUtil;
 import view.LottoGameScreen;
 import view.MainScreen;
 
@@ -18,6 +17,12 @@ public class GameManageApplication {
     public void run() {
         LottoGameMachine lottoGameMachine = lottoGameManageInitialize();
         lottoGameMachine.gameStart();
+        lottoGameScreen.confirmWinningLotto();
+        String winningLotto = InputUtil.nextLine();
+
+        lottoGameScreen.confirmBonusLotto();
+        String bonusLotto = InputUtil.nextLine();
+        lottoGameMachine.findWinnings(winningLotto, bonusLotto);
     }
 
     private LottoGameMachine lottoGameManageInitialize() {

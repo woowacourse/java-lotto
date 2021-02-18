@@ -10,6 +10,7 @@ public class LottoNumbersDto {
     public LottoNumbersDto(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
+
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }

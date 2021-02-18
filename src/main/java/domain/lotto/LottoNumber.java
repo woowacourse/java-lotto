@@ -13,6 +13,15 @@ public class LottoNumber {
         this.value = value;
     }
 
+    public static LottoNumber of(final String value) {
+        try {
+            int intValue = Integer.parseInt(value);
+            return new LottoNumber(intValue);
+        } catch (NumberFormatException numberFormatException) {
+            throw new IllegalArgumentException("1~45 사이의 번호만 허용합니다.");
+        }
+    }
+
     private void validateNumber(final int value) {
         if (!isBetweenNumber(value)) {
             throw new IllegalArgumentException("1~45 사이의 번호만 허용합니다.");

@@ -7,6 +7,11 @@ public class BonusNumber {
         this.lottoNumber = lottoNumber;
     }
 
+    public static BonusNumber of(final LottoNumber lottoNumber) {
+        return new BonusNumber(lottoNumber);
+    }
+
+
     public static BonusNumber of(final int value) {
         return new BonusNumber(new LottoNumber(value));
     }

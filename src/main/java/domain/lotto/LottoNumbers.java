@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 
 public class LottoNumbers {
     private static final int LOTTO_NUMBERS_SIZE = 6;
+    private static final int SPLIT_THRESHOLD = -1;
+    private static final String DELIMITER = ", ";
 
     private final List<LottoNumber> lottoNumbers;
 
@@ -15,6 +17,16 @@ public class LottoNumbers {
         List<LottoNumber> copy = new ArrayList<>(lottoNumbers);
         validateLottoNumbers(copy);
         this.lottoNumbers = copy;
+    }
+
+    public LottoNumbers(final String lottoNumbers) {
+        String[] temp = lottoNumbers.split(DELIMITER, SPLIT_THRESHOLD);
+        List<LottoNumber> tempLottoNumbers = new ArrayList<>();
+        for (int i = 0; i < temp.length; i++) {
+            tempLottoNumbers.add(LottoNumber.of(temp[i]));
+        }
+        validateLottoNumbers(tempLottoNumbers);
+        this.lottoNumbers = tempLottoNumbers;
     }
 
     public static LottoNumbers of(final List<LottoNumber> lottoNumbers) {
@@ -37,7 +49,7 @@ public class LottoNumbers {
         boolean isUnique = lottoNumbers.stream()
                 .allMatch(new HashSet<>()::add);
         if (!isUnique) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("로또 번호에 중복된 값이 있습니다. 다시 입력해주세요.");
         }
     }
 
