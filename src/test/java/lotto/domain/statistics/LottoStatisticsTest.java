@@ -42,7 +42,7 @@ class LottoStatisticsTest {
 
     @Test
     void getEarningRate() {
-        int actual = lottoStatistics.getEarningRate(new Money(5000));
+        double actual = lottoStatistics.getEarningRate(new Money(5000));
         assertThat(actual).isEqualTo(0);
     }
 

@@ -35,12 +35,12 @@ public class LottoStatistics {
             .format(PRINT_FORMAT, rating.getMatchCount(), rating.getReward(), count);
     }
 
-    public int getEarningRate(final Money money) {
+    public double getEarningRate(final Money money) {
         return totalSum() / money.getValue();
     }
 
-    public int totalSum() {
-        int sum = 0;
+    public double totalSum() {
+        double sum = 0;
         for (Rating rating : Rating.values()) {
             if (rating == Rating.MISS) {
                 break;

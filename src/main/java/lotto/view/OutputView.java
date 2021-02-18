@@ -11,7 +11,7 @@ public class OutputView {
     private static final String ENTER = System.lineSeparator();
     private static final String BUY_LOTTO_MESSAGE = "%d개를 구매했습니다." + ENTER;
     private static final String WINNING_DETAIL_HEADER = ENTER + "당첨 통계" + ENTER + "---------";
-    private static final String TOTAL_EARNING_RATE_MESSAGE = "총 수익률은 %d입니다.";
+    private static final String TOTAL_EARNING_RATE_MESSAGE = "총 수익률은 %.2f입니다.";
     private static final String NUMBER_DELIMITER = ",";
     private static final String LOTTO_RESULT_OPEN = "[";
     private static final String LOTTO_RESULT_CLOSE = "]";
@@ -51,7 +51,7 @@ public class OutputView {
         System.out.print(lottoStatistics.getWinningDetail());
     }
 
-    private static void printEarningRate(int rate) {
+    private static void printEarningRate(double rate) {
         System.out.printf(TOTAL_EARNING_RATE_MESSAGE, rate);
     }
 }
