@@ -7,7 +7,8 @@ public enum OutputMessages {
     OUTPUT_THIRD_RESULT_FORMAT("5개 일치 (1500000원)- %d개"),
     OUTPUT_SECOND_RESULT_FORMAT("5개 일치, 보너스 볼 일치 (30000000원)- %d개"),
     OUTPUT_FIRST_RESULT_FORMAT("6개 일치 (2000000000원)- %d개"),
-    OUTPUT_PROFIT_RESULT_FORMAT("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+    OUTPUT_PROFIT_RESULT_FORMAT("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)"),
+    OUTPUT_PURCHASE_NUMBER_OF_LOTTO_MESSAGES("%d개를 구매했습니다.");
 
 
     private final String message;
