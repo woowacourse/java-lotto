@@ -27,4 +27,13 @@ public class Statistics {
     public Map<Rank, Integer> result() {
         return Collections.unmodifiableMap(lottoStatistics);
     }
+
+    public Money getReward() {
+        long total = 0;
+        for (Rank rank : Rank.values()) {
+            long count = lottoStatistics.get(rank);
+            total += count * rank.getReward().toInteger();
+        }
+        return new Money(Long.toString(total));
+    }
 }

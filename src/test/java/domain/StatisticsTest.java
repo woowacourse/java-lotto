@@ -43,4 +43,12 @@ public class StatisticsTest {
             }
         });
     }
+
+    @DisplayName("상금을 계산한다.")
+    @Test
+    public void calculateRewardTest() {
+        Statistics statistics = new Statistics(winningNumber, lottoTickets);
+        Money reward = statistics.getReward();
+        assertThat(reward.toInteger()).isEqualTo(2_060_000_000);
+    }
 }

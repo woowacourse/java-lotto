@@ -15,6 +15,8 @@ public class LottoController {
         outputView.newLine();
         WinningNumber winningNumber = createWinningNumber();
         outputView.newLine();
+        Statistics statistics = new Statistics(winningNumber, lottoTickets);
+        Profit profit = new Profit(budget, statistics.getReward());
     }
 
     private WinningNumber createWinningNumber() {
