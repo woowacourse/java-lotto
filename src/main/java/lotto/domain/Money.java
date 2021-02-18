@@ -5,7 +5,7 @@ import lotto.exception.LottoCustomException;
 import java.util.Objects;
 
 public class Money {
-
+    private static final int ZERO = 0;
     private static final int MONEY_UNIT = 1000;
 
     private final int money;
@@ -21,6 +21,10 @@ public class Money {
 
     public float getProfit(int totalReward) {
         return (float) totalReward / (float) money;
+    }
+
+    public boolean hasChange() {
+        return money % MONEY_UNIT != ZERO;
     }
 
     public int getChange() {

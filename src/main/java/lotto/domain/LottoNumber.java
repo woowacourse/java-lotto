@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import lotto.exception.LottoCustomException;
-import lotto.utils.ValidateUtils;
 
 public class LottoNumber {
     private static final int MIN_LOTTO_NUMBER = 1;
@@ -10,21 +9,20 @@ public class LottoNumber {
     private final int number;
 
     public LottoNumber(final int number) {
-        if (isNumberNotIRange(number)) {
-            throw new LottoCustomException("로또 번호는 1-45사이의 숫자이어야 합니다");
+        if (isNumberNotInRange(number)) {
+            throw new LottoCustomException(String.format(
+                    "로또 번호는 %d-%d사이의 숫자이어야 합니다",
+                    MIN_LOTTO_NUMBER,
+                    MAX_LOTTO_NUMBER));
         }
         this.number = number;
-    }
-
-    public LottoNumber(final String number) {
-        this(ValidateUtils.parseInt(number));
     }
 
     public Integer getNumber() {
         return number;
     }
 
-    private boolean isNumberNotIRange(int number) {
+    private boolean isNumberNotInRange(int number) {
         return number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER;
     }
 
