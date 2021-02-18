@@ -22,8 +22,7 @@ public class WinningNumbers {
         }
     }
 
-    //Todo :  private 수정해야함
-    public int countMatches(LottoTicket lottoTicket) {
+    private int countMatches(LottoTicket lottoTicket) {
         return (int) lottoTicket.getUnmodifiableList().stream()
             .filter(this.lottoTicket::contains)
             .count();

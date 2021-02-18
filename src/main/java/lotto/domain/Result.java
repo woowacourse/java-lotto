@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import lotto.utils.FixedLottoGenerator;
 import lotto.utils.LottoGenerator;
 
 public class Result {

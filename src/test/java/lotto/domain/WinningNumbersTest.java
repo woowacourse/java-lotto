@@ -51,42 +51,6 @@ class WinningNumbersTest {
     }
 
     @Test
-    @DisplayName("일치하는 갯수 체크 - 6")
-    void count_same_numbers1() {
-        WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6", "7");
-        LottoTicket lottoTicket = new LottoTicket("1,2,3,4,5,6");
-
-        assertThat(winningNumbers.countMatches(lottoTicket)).isEqualTo(6);
-    }
-
-    @Test
-    @DisplayName("일치하는 갯수 체크 - 5")
-    void count_same_numbers2() {
-        WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6", "7");
-        LottoTicket lottoTicket = new LottoTicket("1,2,3,4,5,8");
-
-        assertThat(winningNumbers.countMatches(lottoTicket)).isEqualTo(5);
-    }
-
-    @Test
-    @DisplayName("일치하는 갯수 체크 - 0")
-    void count_same_numbers3() {
-        WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6", "7");
-        LottoTicket lottoTicket = new LottoTicket("11,12,13,14,15,16");
-
-        assertThat(winningNumbers.countMatches(lottoTicket)).isEqualTo(0);
-    }
-
-    @Test
-    @DisplayName("일치하는 갯수 체크 - 6")
-    void count_same_numbers4() {
-        WinningNumbers winningNumbers = new WinningNumbers("3,2,1,6,5,4", "7");
-        LottoTicket lottoTicket = new LottoTicket("1,2,3,4,5,6");
-
-        assertThat(winningNumbers.countMatches(lottoTicket)).isEqualTo(6);
-    }
-
-    @Test
     @DisplayName("1등 랭크 반환")
     void getRank1() {
         WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6", "7");
@@ -94,6 +58,16 @@ class WinningNumbersTest {
 
         assertThat(winningNumbers.getRank(lottoTicket)).isEqualTo(Rank.FIRST_PLACE);
     }
+
+    @Test
+    @DisplayName("1등 - 순서 일정하지 않을 경우 랭크 반환")
+    void count_same_numbers4() {
+        WinningNumbers winningNumbers = new WinningNumbers("3,2,1,6,5,4", "7");
+        LottoTicket lottoTicket = new LottoTicket("1,2,3,4,5,6");
+
+        assertThat(winningNumbers.getRank(lottoTicket)).isEqualTo(Rank.FIRST_PLACE);
+    }
+
 
     @Test
     @DisplayName("2등 랭크 반환")
