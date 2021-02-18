@@ -1,6 +1,6 @@
 package lotto.domain.ticketgenerator;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import lotto.domain.ticketpurchase.PurchasedLottoTickets;
 import org.junit.jupiter.api.DisplayName;
