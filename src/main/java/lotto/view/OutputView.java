@@ -9,10 +9,11 @@ import java.util.Map;
 
 public class OutputView {
 
-    public static final String REGULAR_RESULT_EXPRESSION = "%d개 일치, (%d원) - %d개";
-    public static final String BONUS_RESULT_EXPRESSION = "5개 일치, 보너스볼일치(%d원) - %d개";
-    public static final String PROFIT_RATE_EXPRESSION = "총 수익률은 %.2f입니다.";
+    public static final String REGULAR_RESULT_EXPRESSION = "%d개 일치, (%d원) - %d개" + System.lineSeparator();
+    public static final String BONUS_RESULT_EXPRESSION = "5개 일치, 보너스볼일치(%d원) - %d개" + System.lineSeparator();
+    public static final String PROFIT_RATE_EXPRESSION = "총 수익률은 %.2f입니다." + System.lineSeparator();
     public static final String PURCHASED_LOTTO_COUNT_ALARM = "%d를 구매하였습니다." + System.lineSeparator();
+    public static final String LOTTO_STATISTICS_PREFIX = "당첨 통계" + System.lineSeparator() + "---------";
 
     public static void printInputMessage(String message) {
         System.out.println(message);
@@ -28,24 +29,21 @@ public class OutputView {
     }
 
     public static void printLottoStatistics(Map<LottoRank, Integer> statistics, double profitRate) {
-        System.out.println("당첨 통계");
-        System.out.println("---------");
-        for (LottoRank key : statistics.keySet()) {
-            printSingleResult(key, statistics.get(key));
+        System.out.println(LOTTO_STATISTICS_PREFIX);
+        for (LottoRank rank : statistics.keySet()) {
+            printSingleResult(rank, statistics.get(rank));
         }
-        System.out.printf(PROFIT_RATE_EXPRESSION + System.lineSeparator(), profitRate);
+        System.out.printf(PROFIT_RATE_EXPRESSION, profitRate);
     }
 
-    private static void printSingleResult(LottoRank key, int value) {
-        if (key.equals(LottoRank.NONE)) {
+    private static void printSingleResult(LottoRank rank, int rankCount) {
+        if (rank.equals(LottoRank.NONE)) {
             return;
         }
-        if (key.equals(LottoRank.SECOND)) {
-            System.out.printf(BONUS_RESULT_EXPRESSION + System.lineSeparator(),
-                    key.getPrizeMoney(), value);
+        if (rank.equals(LottoRank.SECOND)) {
+            System.out.printf(BONUS_RESULT_EXPRESSION, rank.getPrizeMoney(), rankCount);
             return;
         }
-        System.out.printf(REGULAR_RESULT_EXPRESSION + System.lineSeparator(),
-                (int) key.getMatchingCount(), key.getPrizeMoney(), value);
+        System.out.printf(REGULAR_RESULT_EXPRESSION, (int) rank.getMatchingCount(), rank.getPrizeMoney(), rankCount);
     }
 }

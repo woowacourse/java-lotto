@@ -32,18 +32,17 @@ public class LottoStore {
         OutputView.printLottoStatistics(lottoResultStatistics, profitRate);
     }
 
-    public double calculateProfitRate(Map<LottoRank, Integer> exampleLottosResult, int lottoTicket) {
+    public double calculateProfitRate(Map<LottoRank, Integer> lottoResultStatistics, int purchasedLottoCount) {
         double sum = 0;
-        for (Entry<LottoRank, Integer> keyValue : exampleLottosResult.entrySet()) {
+        for (Entry<LottoRank, Integer> keyValue : lottoResultStatistics.entrySet()) {
             sum += keyValue.getKey().getPrizeMoney() * keyValue.getValue();
         }
-        double investCapital = lottoTicket * LOTTO_PRICE;
-        double rawProfitRate = sum / investCapital;
+        double initialCapital = purchasedLottoCount * LOTTO_PRICE;
+        double rawProfitRate = sum / initialCapital;
         return Math.round(rawProfitRate * 100) / 100.00;
     }
 
     public int calculateAffordableLottoTickets(Money money) {
         return money.getAffordableLottoTickets(LOTTO_PRICE);
     }
-
 }
