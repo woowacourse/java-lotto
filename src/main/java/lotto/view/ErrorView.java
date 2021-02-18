@@ -10,4 +10,8 @@ public class ErrorView {
     public static void printIllegalMoneyErrorMessage() {
         System.out.println(ERROR_PREFIX + "구입 금액을 잘못 입력 하셨습니다.");
     }
+
+    public static void printIllegalWinningLottoMessage() {
+        System.out.println(ERROR_PREFIX + "당첨 번호와 보너스 번호가 중복 됩니다.");
+    }
 }
