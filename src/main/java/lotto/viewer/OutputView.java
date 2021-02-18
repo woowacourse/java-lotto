@@ -8,10 +8,10 @@ import lotto.domain.Lottos;
 
 public class OutputView {
 
-    public static final String REGULAR_RESULT_EXPRESSION = "%d개 일치, (%d원) - %d개";
-    public static final String BONUS_RESULT_EXPRESSION = "5개 일치, 보너스볼일치(%d원) - %d개";
-    public static final String PROFIT_RATE_EXPRESSION = "총 수익률은 %.2f입니다.";
-    public static final String PURCHASE_PIECE_EXPRESSION = "%d를 구매하였습니다.";
+    private static final String REGULAR_RESULT_EXPRESSION = "%d개 일치, (%d원) - %d개";
+    private static final String BONUS_RESULT_EXPRESSION = "5개 일치, 보너스볼일치(%d원) - %d개";
+    private static final String PROFIT_RATE_EXPRESSION = "총 수익률은 %.2f입니다.";
+    private static final String PURCHASE_PIECE_EXPRESSION = "%d를 구매하였습니다.";
 
     public void printPurchasedLottos(Lottos lottos) {
         List <Lotto> lottoBunch = lottos.getLottoBunch() ;

@@ -10,12 +10,14 @@ public class LottoAnnouncement {
 
     private static final int UPPER_LIMIT = 45;
     private static final int LOWER_LIMIT = 1;
+    private static final int LOTTO_POSESSION_SIZE = 6;
 
     private final List<Integer> winners;
     private final int bonusNumber;
 
     public LottoAnnouncement(List<Integer> winners, int bonusNumber) {
         winners.forEach(this::checkValidNumber);
+        checkProperSize(winners);
         checkValidNumber(bonusNumber);
         checkOverlapped(winners, bonusNumber);
         this.winners = winners;
@@ -42,6 +44,12 @@ public class LottoAnnouncement {
 
         if (overlappedCount != 0) {
             throw new LottoAnnouncementException("보너스 번호가 중복되었습니다.");
+        }
+    }
+
+    private void checkProperSize(List<Integer> winners) {
+        if (winners.size() != LOTTO_POSESSION_SIZE) {
+            throw new LottoAnnouncementException("로또 번호의 갯수가 기준과 다릅니다.");
         }
     }
 

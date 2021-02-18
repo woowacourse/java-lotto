@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Scanner;
@@ -8,35 +7,37 @@ import lotto.domain.LottoAnnouncement;
 import lotto.domain.LottoRank;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
-import lotto.viewer.InputView;
+import lotto.viewer.AnnouncementInputView;
+import lotto.viewer.MoneyInputView;
 import lotto.viewer.OutputView;
 
 public class LottoStore {
 
     private final static int LOTTO_PRICE = 1000;
+    private static final int DECIMAL_TRIM_NUMERATOR = 100;
+    private static final double DECIMAL_TRIM_DENOMINATOR = 100.00;
 
-    private final InputView inputView;
+    private final MoneyInputView moneyInputView;
+    private final AnnouncementInputView announcementInputView;
     private final OutputView outputView;
 
     public LottoStore() {
         Scanner scanner = new Scanner(System.in);
-        inputView = new InputView(scanner);
+        moneyInputView = new MoneyInputView(scanner);
+        announcementInputView = new AnnouncementInputView(scanner);
         outputView = new OutputView();
     }
 
     public void process() {
         Lottos lottos = buyLotto();
-        List<Integer> winningNumbers = inputView.inputWinningNumbers();
-        int bonusNumber = inputView.inputBonusNumber();
-        LottoAnnouncement lottoAnnouncement = new LottoAnnouncement(winningNumbers, bonusNumber);
+        LottoAnnouncement lottoAnnouncement = announcementInputView.inputAnnouncement();
         Map<LottoRank, Integer> lottoResultStatistics = lottos.getStatistics(lottoAnnouncement);
         printLottoResult(lottoResultStatistics, lottos);
     }
 
     public Lottos buyLotto() {
-        int receivedMoney = inputView.purchaseMoney();
-        Money possessedMoney =new Money(receivedMoney);
-        Lottos purchasedLottos = new Lottos(possessedMoney.getLottoPieces(LOTTO_PRICE));
+        Money possessedMoney = moneyInputView.purchaseMoney();
+        Lottos purchasedLottos = new Lottos(possessedMoney.getLottoPieces());
         outputView.printPurchasedLottos(purchasedLottos);
         return purchasedLottos;
     }
@@ -46,13 +47,13 @@ public class LottoStore {
         outputView.printLottoStatistics(lottoResultStatistics, profitRate);
     }
 
-    public double calculateProfitRate(Map<LottoRank, Integer> exampleLottosResult, int lottoPiece) {
+    public double calculateProfitRate(Map<LottoRank, Integer> lottosResult, int lottoPiece) {
         double sum = 0;
-        for (Entry<LottoRank, Integer> keyValue : exampleLottosResult.entrySet()) {
+        for (Entry<LottoRank, Integer> keyValue : lottosResult.entrySet()) {
             sum += keyValue.getKey().getPrizeMoney() * keyValue.getValue();
         }
         double investCapital = lottoPiece * LOTTO_PRICE;
         double rawProfitRate = sum / investCapital;
-        return Math.round(rawProfitRate * 100) / 100.00;
+        return Math.round(rawProfitRate * DECIMAL_TRIM_NUMERATOR) / DECIMAL_TRIM_DENOMINATOR;
     }
 }
