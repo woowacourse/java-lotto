@@ -1,5 +1,7 @@
 package domain.lotto;
 
+import domain.ball.BonusBall;
+import domain.ball.LottoBalls;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,14 +15,14 @@ public class WinningLottoTest {
     @DisplayName("WinningLotto 정상 생성된다.")
     @Test
     void winningLotto_생성_테스트() {
-        assertThatCode(() -> new WinningLotto(LottoNumbers.generate(Arrays.asList(1, 2, 3, 4, 5, 6)), BonusNumber.of(7)))
+        assertThatCode(() -> new WinningLotto(LottoBalls.generate(Arrays.asList(1, 2, 3, 4, 5, 6)), BonusBall.of(7)))
                 .doesNotThrowAnyException();
     }
 
     @DisplayName("WinningLotto내 LottoNumbers와 BonusNumber 중복 검사")
     @Test
     void winningLotto_중복_테스트() {
-        assertThatThrownBy(() -> new WinningLotto(LottoNumbers.generate(Arrays.asList(1, 2, 3, 4, 5, 6)), BonusNumber.of(6)))
+        assertThatThrownBy(() -> new WinningLotto(LottoBalls.generate(Arrays.asList(1, 2, 3, 4, 5, 6)), BonusBall.of(6)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

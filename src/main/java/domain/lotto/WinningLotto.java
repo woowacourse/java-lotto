@@ -1,24 +1,26 @@
 package domain.lotto;
 
+import domain.ball.BonusBall;
+import domain.ball.LottoBalls;
 import domain.result.LottoRank;
 
 public class WinningLotto {
-    private final LottoNumbers lottoNumbers;
-    private final BonusNumber bonusNumber;
+    private final LottoBalls lottoBalls;
+    private final BonusBall bonusBall;
 
-    public WinningLotto(final LottoNumbers lottoNumbers, final BonusNumber bonusNumber) {
-        validateWinningLotto(lottoNumbers, bonusNumber);
-        this.lottoNumbers = lottoNumbers;
-        this.bonusNumber = bonusNumber;
+    public WinningLotto(final LottoBalls lottoBalls, final BonusBall bonusBall) {
+        validateWinningLotto(lottoBalls, bonusBall);
+        this.lottoBalls = lottoBalls;
+        this.bonusBall = bonusBall;
     }
 
-    private void validateWinningLotto(final LottoNumbers lottoNumbers, final BonusNumber bonusNumber) {
-        if (lottoNumbers.containNumber(bonusNumber)) {
+    private void validateWinningLotto(final LottoBalls lottoBalls, final BonusBall bonusBall) {
+        if (lottoBalls.containNumber(bonusBall)) {
             throw new IllegalArgumentException("중복된 값이 있습니다. 다시 입력해주세요 ");
         }
     }
 
-    public LottoRank winningMatchCount(LottoNumbers lottoNumbers) {
-        return lottoNumbers.matchCount(this.lottoNumbers, bonusNumber);
+    public LottoRank winningMatchCount(LottoBalls lottoBalls) {
+        return lottoBalls.matchCount(this.lottoBalls, bonusBall);
     }
 }

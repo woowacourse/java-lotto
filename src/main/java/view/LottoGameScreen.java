@@ -1,7 +1,6 @@
 package view;
 
-import domain.budget.Budget;
-import domain.lotto.LottoNumber;
+import domain.ball.LottoBall;
 import domain.result.LottoRank;
 import util.OutputUtil;
 import view.dto.*;
@@ -38,13 +37,13 @@ public class LottoGameScreen {
     }
 
     private void showLottoStatus(final LottoNumbersDto lottoNumbersDto) {
-        List<LottoNumber> lottoNumbers = lottoNumbersDto.getLottoNumbers();
-        String lottoStatus = makeSingleLottoStatus(lottoNumbers);
+        List<LottoBall> lottoBalls = lottoNumbersDto.getLottoNumbers();
+        String lottoStatus = makeSingleLottoStatus(lottoBalls);
         OutputUtil.printMessage(lottoStatus);
     }
 
-    private String makeSingleLottoStatus(final List<LottoNumber> lottoNumbers) {
-        List<String> status = lottoNumbers.stream()
+    private String makeSingleLottoStatus(final List<LottoBall> lottoBalls) {
+        List<String> status = lottoBalls.stream()
                 .map(lottoNumber -> String.valueOf(lottoNumber.getValue()))
                 .collect(Collectors.toList());
         return LOTTO_PREFIX + String.join(DELIMITER, status) + LOTTO_POSTFIX;

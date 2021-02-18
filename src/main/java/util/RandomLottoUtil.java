@@ -1,7 +1,7 @@
 package util;
 
-import domain.lotto.LottoNumber;
-import domain.lotto.LottoNumbers;
+import domain.ball.LottoBall;
+import domain.ball.LottoBalls;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,11 +13,11 @@ public class RandomLottoUtil {
     private RandomLottoUtil() {
     }
 
-    public static LottoNumbers generateLottoNumbers() {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
+    public static LottoBalls generateLottoNumbers() {
+        List<LottoBall> lottoBalls = new ArrayList<>();
         IntStream intStream = new Random().ints(1, 46);
         intStream.distinct().limit(6).sorted()
-                .forEach(i -> lottoNumbers.add(new LottoNumber(i)));
-        return LottoNumbers.of(lottoNumbers);
+                .forEach(i -> lottoBalls.add(new LottoBall(i)));
+        return LottoBalls.of(lottoBalls);
     }
 }

@@ -1,7 +1,13 @@
 package domain;
 
+import domain.ball.BonusBall;
+import domain.ball.LottoBall;
+import domain.ball.LottoBalls;
 import domain.budget.Budget;
-import domain.lotto.*;
+import domain.lotto.Lotto;
+import domain.lotto.LottoCount;
+import domain.lotto.Lottos;
+import domain.lotto.WinningLotto;
 import domain.result.LottoRank;
 import domain.result.Result;
 import util.InputUtil;
@@ -69,10 +75,10 @@ public class LottoGameMachine {
         lottoGameScreen.confirmBonusLotto();
         String bonusLotto = InputUtil.nextLine();
 
-        LottoNumbers lottoNumbers = new LottoNumbers(winningLottoText);
-        BonusNumber bonusNumber = BonusNumber.of(LottoNumber.of(bonusLotto));
+        LottoBalls lottoBalls = new LottoBalls(winningLottoText);
+        BonusBall bonusBall = BonusBall.of(LottoBall.of(bonusLotto));
 
-        return new WinningLotto(lottoNumbers, bonusNumber);
+        return new WinningLotto(lottoBalls, bonusBall);
     }
 
     public void lottoDraw(Lottos lottos, WinningLotto winnings) {

@@ -1,23 +1,25 @@
 package domain.lotto;
 
+import domain.ball.LottoBall;
+import domain.ball.LottoBalls;
 import domain.result.LottoRank;
 
 import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
-    private final LottoNumbers lottoNumbers;
+    private final LottoBalls lottoBalls;
 
-    public Lotto(final LottoNumbers lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+    public Lotto(final LottoBalls lottoBalls) {
+        this.lottoBalls = lottoBalls;
     }
 
-    public List<LottoNumber> findLottoNumbers() {
-        List<LottoNumber> lottoNumbers = this.lottoNumbers.getLottoNumbers();
-        return Collections.unmodifiableList(lottoNumbers);
+    public List<LottoBall> findLottoNumbers() {
+        List<LottoBall> lottoBalls = this.lottoBalls.getLottoNumbers();
+        return Collections.unmodifiableList(lottoBalls);
     }
 
     public LottoRank findMatchesNumber(WinningLotto winningLotto) {
-        return winningLotto.winningMatchCount(lottoNumbers);
+        return winningLotto.winningMatchCount(lottoBalls);
     }
 }

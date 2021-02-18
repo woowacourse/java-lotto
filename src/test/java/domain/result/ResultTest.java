@@ -1,6 +1,10 @@
 package domain.result;
 
-import domain.lotto.*;
+import domain.ball.BonusBall;
+import domain.ball.LottoBalls;
+import domain.lotto.Lotto;
+import domain.lotto.Lottos;
+import domain.lotto.WinningLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +19,7 @@ class ResultTest {
     @Test
     void Result_객체_정상_생성된다() {
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        Lottos lottos = new Lottos(Collections.singletonList(new Lotto(LottoNumbers.generate(lottoNumbers))));
+        Lottos lottos = new Lottos(Collections.singletonList(new Lotto(LottoBalls.generate(lottoNumbers))));
         assertThatCode(() -> new Result(lottos))
                 .doesNotThrowAnyException();
     }
@@ -24,10 +28,10 @@ class ResultTest {
     @Test
     void Result_결과를_반환한다() {
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        Lottos lottos = new Lottos(Collections.singletonList(new Lotto(LottoNumbers.generate(lottoNumbers))));
+        Lottos lottos = new Lottos(Collections.singletonList(new Lotto(LottoBalls.generate(lottoNumbers))));
 
         Result result = new Result(lottos);
-        WinningLotto winningLotto = new WinningLotto(LottoNumbers.generate(Arrays.asList(1, 2, 3, 4, 5, 6)), BonusNumber.of(7));
+        WinningLotto winningLotto = new WinningLotto(LottoBalls.generate(Arrays.asList(1, 2, 3, 4, 5, 6)), BonusBall.of(7));
         Map<LottoRank, Integer> results = result.findMatches(winningLotto);
 
         assertThat(results.get(LottoRank.SIX_MATCHES)).isEqualTo(1);
@@ -39,12 +43,12 @@ class ResultTest {
         List<Integer> lottoNumbers1 = Arrays.asList(1, 2, 3, 4, 5, 6);
         List<Integer> lottoNumbers2 = Arrays.asList(1, 2, 3, 4, 5, 8);
         List<Lotto> lottos = new ArrayList<Lotto>();
-        lottos.add(new Lotto(LottoNumbers.generate(lottoNumbers1)));
-        lottos.add(new Lotto(LottoNumbers.generate(lottoNumbers2)));
+        lottos.add(new Lotto(LottoBalls.generate(lottoNumbers1)));
+        lottos.add(new Lotto(LottoBalls.generate(lottoNumbers2)));
         Lottos multipleLottos = new Lottos(lottos);
 
         Result result = new Result(multipleLottos);
-        WinningLotto winningLotto = new WinningLotto(LottoNumbers.generate(Arrays.asList(1, 2, 3, 4, 5, 6)), BonusNumber.of(7));
+        WinningLotto winningLotto = new WinningLotto(LottoBalls.generate(Arrays.asList(1, 2, 3, 4, 5, 6)), BonusBall.of(7));
 
         Map<LottoRank, Integer> results = result.findMatches(winningLotto);
 
@@ -57,11 +61,11 @@ class ResultTest {
     void Result_로또_보너스볼_테스() {
         List<Integer> lottoNumbers1 = Arrays.asList(1, 2, 3, 4, 5, 7);
         List<Lotto> lottos = new ArrayList<>();
-        lottos.add(new Lotto(LottoNumbers.generate(lottoNumbers1)));
+        lottos.add(new Lotto(LottoBalls.generate(lottoNumbers1)));
 
         Lottos lottoBundle = new Lottos(lottos);
         Result result = new Result(lottoBundle);
-        WinningLotto winningLotto = new WinningLotto(LottoNumbers.generate(Arrays.asList(1, 2, 3, 4, 5, 6)), BonusNumber.of(7));
+        WinningLotto winningLotto = new WinningLotto(LottoBalls.generate(Arrays.asList(1, 2, 3, 4, 5, 6)), BonusBall.of(7));
         Map<LottoRank, Integer> results = result.findMatches(winningLotto);
 
         assertThat(results.get(LottoRank.FIVE_AND_BONUS_MATCHES)).isEqualTo(1);

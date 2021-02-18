@@ -1,22 +1,22 @@
-package domain.lotto;
+package domain.ball;
 
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoBall {
     private static final int MIN_LOTTO_VALUE = 1;
     private static final int MAX_LOTTO_VALUE = 45;
 
     private final int value;
 
-    public LottoNumber(final int value) {
+    public LottoBall(final int value) {
         validateNumber(value);
         this.value = value;
     }
 
-    public static LottoNumber of(final String value) {
+    public static LottoBall of(final String value) {
         try {
             int intValue = Integer.parseInt(value);
-            return new LottoNumber(intValue);
+            return new LottoBall(intValue);
         } catch (NumberFormatException numberFormatException) {
             throw new IllegalArgumentException("1~45 사이의 번호만 허용합니다.");
         }
@@ -40,7 +40,7 @@ public class LottoNumber {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoNumber that = (LottoNumber) o;
+        LottoBall that = (LottoBall) o;
         return value == that.value;
     }
 
