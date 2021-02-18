@@ -8,20 +8,20 @@ import java.util.Objects;
 public class PrizeMoney {
     private final int prizeMoney;
 
-    public PrizeMoney(Statistics statistics){
+    public PrizeMoney(Statistics statistics) {
         this.prizeMoney = totalPrize(statistics);
     }
 
     private int totalPrize(Statistics statistics) {
         int prize = 0;
-        for(Ranking ranking : Ranking.values()) {
+        for (Ranking ranking : Ranking.values()) {
             prize += ranking.calculatePrize(statistics.findRankingCount(ranking));
         }
         return prize;
     }
 
     public Double calculateProfit(Money money) {
-        return money.calculateProfit(prizeMoney);
+        return money.divideByMoney(prizeMoney);
     }
 
     @Override

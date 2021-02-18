@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class BonusBallTest {
     @Test
     @DisplayName("보너스 볼 생성")
-    void bonusBallCreate(){
+    void bonusBallCreate() {
         BonusBall bonusBall = new BonusBall("10", new WinnerTicket("1, 2, 3, 4, 5, 6"));
         assertThat(bonusBall).isEqualTo(new BonusBall("10", new WinnerTicket("1, 2, 3, 4, 5, 6")));
     }

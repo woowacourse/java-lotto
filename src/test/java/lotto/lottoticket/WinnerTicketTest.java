@@ -65,7 +65,7 @@ public class WinnerTicketTest {
     @DisplayName("당첨 결과 확인")
     void checkResult() {
         WinnerTicket winnerTicket = new WinnerTicket("1,2,3,4,5,6");
-        NumbersGenerator numbersGenerator = () -> Arrays.asList(1,2,3,4,5,6);
+        NumbersGenerator numbersGenerator = () -> Arrays.asList(1, 2, 3, 4, 5, 6);
         Ticket ticket = new Ticket(numbersGenerator);
         assertThat(winnerTicket.findMatchCount(ticket)).isEqualTo(6);
     }

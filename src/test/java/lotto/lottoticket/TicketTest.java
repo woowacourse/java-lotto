@@ -15,7 +15,7 @@ public class TicketTest {
     @Test
     @DisplayName("로또 티켓 생성")
     void ticketCreate() {
-        NumbersGenerator numbersGenerator = () -> Arrays.asList(1,2,3,4,5,6);
+        NumbersGenerator numbersGenerator = () -> Arrays.asList(1, 2, 3, 4, 5, 6);
         Ticket ticket = new Ticket(numbersGenerator);
         assertThat(ticket).isEqualTo(new Ticket(numbersGenerator));
     }
@@ -24,7 +24,7 @@ public class TicketTest {
     @DisplayName("1부터 45사이 숫자인지 확인")
     void checkNumberInRange() {
         NumbersGenerator numbersGenerator = () -> Arrays.asList(1, 46, 2, 3, 4, 5);
-        assertThatThrownBy(()->
+        assertThatThrownBy(() ->
                 new Ticket(numbersGenerator)
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ERROR_MESSAGE_INVALID_RANGE);
@@ -34,7 +34,7 @@ public class TicketTest {
     @DisplayName("로또 숫자 중복 확인")
     void checkDuplicatedNumber() {
         NumbersGenerator numbersGenerator = () -> Arrays.asList(1, 1, 2, 3, 4, 5);
-        assertThatThrownBy(()->
+        assertThatThrownBy(() ->
                 new Ticket(numbersGenerator)
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ERROR_MESSAGE_DUPLICATED);
@@ -44,7 +44,7 @@ public class TicketTest {
     @DisplayName("로또 숫자 개수 확인")
     void checkSizeOfNumbers() {
         NumbersGenerator numbersGenerator = () -> Arrays.asList(1, 2, 3, 4, 5);
-        assertThatThrownBy(()->
+        assertThatThrownBy(() ->
                 new Ticket(numbersGenerator)
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ERROR_MESSAGE_INVALID_SIZE);

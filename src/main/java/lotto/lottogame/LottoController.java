@@ -17,8 +17,11 @@ public class LottoController {
         Tickets tickets = generateTickets(lottoCount);
         WinnerTicket winnerTicket = generateWinnerTicket();
         BonusBall bonusBall = generateBonusBall(winnerTicket);
-        Statistics statistics = generateStatistics(tickets, winnerTicket, bonusBall);
-        makeResult(money, statistics);
+
+        Statistics statistics = new Statistics(tickets.makeResult(winnerTicket, bonusBall));
+        OutputView.noticeStatistics(statistics);
+        PrizeMoney prizeMoney = new PrizeMoney(statistics);
+        OutputView.showProfit(prizeMoney.calculateProfit(money));
     }
 
     private Money generateMoney() {
@@ -66,16 +69,5 @@ public class LottoController {
             OutputView.printError(e);
             return generateBonusBall(winnerTicket);
         }
-    }
-
-    private Statistics generateStatistics(Tickets tickets, WinnerTicket winnerTicket, BonusBall bonusBall) {
-        Statistics statistics = new Statistics(tickets.makeResult(winnerTicket, bonusBall));
-        OutputView.noticeStatistics(statistics);
-        return statistics;
-    }
-
-    private void makeResult(Money money, Statistics statistics) {
-        PrizeMoney prizeMoney = new PrizeMoney(statistics);
-        OutputView.showProfit(prizeMoney.calculateProfit(money));
     }
 }

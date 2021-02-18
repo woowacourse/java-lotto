@@ -6,7 +6,6 @@ import java.util.Objects;
 
 public class Money {
     public static final String ERROR_MESSAGE_MINIMUM_MONEY = "1000원 이상의 금액이 필요합니다.";
-
     private static final int MINIMUM_PRICE = 1000;
     private static final int SECOND_DECIMAL_POINT_MAKER = 100;
 
@@ -32,7 +31,7 @@ public class Money {
         return this.money / unit;
     }
 
-    public Double calculateProfit(int totalMoney) {
+    public Double divideByMoney(int totalMoney) {
         return Math.floor((double) totalMoney / money * SECOND_DECIMAL_POINT_MAKER) / SECOND_DECIMAL_POINT_MAKER;
     }
 

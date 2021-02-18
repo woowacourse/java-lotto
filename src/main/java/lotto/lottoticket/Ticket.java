@@ -17,18 +17,23 @@ public class Ticket {
 
     private List<Integer> validate(List<Integer> values) {
         TicketValidation.validateSize(values);
+        TicketValidation.validateDuplicated(values);
         for (Integer number : values) {
             TicketValidation.validateNumberInRange(number);
         }
-        TicketValidation.validateDuplicated(values);
         return values;
     }
 
     public int hasSameNumber(Integer number) {
-        if(numbers.contains(number)){
+        if (numbers.contains(number)) {
             return ONE_COUNT;
         }
         return ZERO;
+    }
+
+    public boolean hasContainBonus(BonusBall bonusBall) {
+        return numbers.stream()
+                .anyMatch(bonusBall::isSameThan);
     }
 
     public List<Integer> getTicket() {
@@ -46,14 +51,5 @@ public class Ticket {
     @Override
     public int hashCode() {
         return Objects.hash(numbers);
-    }
-
-    public boolean hasContainBonus(BonusBall bonusBall) {
-        for(Integer number : numbers) {
-            if(bonusBall.isSameThan(number)){
-                return true;
-            }
-        }
-        return false;
     }
 }

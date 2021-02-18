@@ -7,13 +7,13 @@ import java.util.Objects;
 public class WinnerTicket {
     private final List<Integer> winnerTicket;
 
-    public WinnerTicket(String numbers){
+    public WinnerTicket(String numbers) {
         this.winnerTicket = splitNumbers(numbers);
     }
 
-    private List<Integer> splitNumbers(String values){
+    private List<Integer> splitNumbers(String values) {
         List<Integer> numbers = new ArrayList<>();
-        for (String value : values.split(",")){
+        for (String value : values.split(",")) {
             value = value.replace(" ", "");
             int number = TicketValidation.validateNumber(value);
             TicketValidation.validateNumberInRange(number);
@@ -24,13 +24,13 @@ public class WinnerTicket {
         return numbers;
     }
 
-    public boolean isSameNumber(int number) {
+    public boolean containsSameNumber(int number) {
         return this.winnerTicket.contains(number);
     }
 
     public int findMatchCount(Ticket ticket) {
         int matchCount = 0;
-        for(Integer number : winnerTicket){
+        for (Integer number : winnerTicket) {
             matchCount += ticket.hasSameNumber(number);
         }
         return matchCount;

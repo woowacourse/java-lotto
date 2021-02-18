@@ -19,7 +19,7 @@ public class RandomNumbersGenerator implements NumbersGenerator {
     public List<Integer> generate() {
         List<Integer> randomNumbers = new ArrayList<>();
         Collections.shuffle(NUMBERS_IN_RANGE);
-        for (int i = 0; i < NUMBER_COUNT_IN_LOTTO; i++){
+        for (int i = 0; i < NUMBER_COUNT_IN_LOTTO; i++) {
             randomNumbers.add(NUMBERS_IN_RANGE.get(i));
         }
         Collections.sort(randomNumbers);

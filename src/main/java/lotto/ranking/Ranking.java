@@ -18,13 +18,14 @@ public enum Ranking {
         this.price = price;
     }
 
-    public static Ranking makePrice(int match, boolean bonusMatch) {
-        if(match == SECOND.matchCount && bonusMatch){
+    public static Ranking makePrice(int count, boolean bonusMatch) {
+        if (count == SECOND.matchCount && bonusMatch) {
             return SECOND;
         }
         return Arrays.stream(values())
-                .filter(n -> n.matchCount == match && n!=SECOND)
-                .findFirst()
+                .filter(ranking -> ranking.matchCount == count)
+                .filter(ranking -> !ranking.equals(SECOND))
+                .findAny()
                 .orElse(NOTHING);
     }
 

@@ -7,10 +7,10 @@ import static lotto.lottoticket.TicketValidation.ERROR_MESSAGE_DUPLICATED;
 public class BonusBall {
     private final int bonusBall;
 
-    public BonusBall(String value, WinnerTicket winnerTicket){
+    public BonusBall(String value, WinnerTicket winnerTicket) {
         int number = TicketValidation.validateNumber(value);
         TicketValidation.validateNumberInRange(number);
-        if(winnerTicket.isSameNumber(number)){
+        if (winnerTicket.containsSameNumber(number)) {
             throw new IllegalArgumentException(ERROR_MESSAGE_DUPLICATED);
         }
         this.bonusBall = number;
