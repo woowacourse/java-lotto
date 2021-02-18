@@ -36,7 +36,7 @@ class PurchasingPriceTest {
         int price = 3987;
         PurchasingPrice purchasingPrice = new PurchasingPrice(price);
 
-        int purchasableLottoTicketCounts = purchasingPrice.calculateLottoTicketCounts();
+        int purchasableLottoTicketCounts = purchasingPrice.calculatePurchasableTicketCounts();
 
         assertThat(purchasableLottoTicketCounts).isEqualTo(3987 / 1000);
     }

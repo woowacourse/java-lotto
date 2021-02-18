@@ -7,13 +7,17 @@ public class PurchasingPrice {
     private final int purchasingPrice;
 
     public PurchasingPrice(int purchasingPrice) {
-        if (purchasingPrice < MINIMUM_TICKET_PRICE) {
-            throw new IllegalArgumentException(INVALID_TICKET_PRICE);
-        }
+        validatePrice(purchasingPrice);
         this.purchasingPrice = purchasingPrice;
     }
 
-    public int calculateLottoTicketCounts() {
+    private void validatePrice(int purchasingPrice) {
+        if (purchasingPrice < MINIMUM_TICKET_PRICE) {
+            throw new IllegalArgumentException(INVALID_TICKET_PRICE);
+        }
+    }
+
+    public int calculatePurchasableTicketCounts() {
         return purchasingPrice / MINIMUM_TICKET_PRICE;
     }
 
