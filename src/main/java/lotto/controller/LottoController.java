@@ -34,7 +34,7 @@ public class LottoController {
         //보너스 번호 체크
         Integer bonusNumber = createBonusNUmber();
 
-        WinningLotto winningLotto = new WinningLotto(Lotto.generatedBy(winningNumbers),
+        WinningLotto winningLotto = WinningLotto.generatedBy(Lotto.generatedBy(winningNumbers),
             LottoNumber.valueOf(bonusNumber));
     }
 
