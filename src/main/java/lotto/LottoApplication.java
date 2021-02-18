@@ -1,9 +1,9 @@
 package lotto;
 
 import java.util.List;
-import lotto.domain.LottoTicket;
 import lotto.domain.Machine;
-import lotto.domain.Result;
+import lotto.domain.lotto.LottoTicket;
+import lotto.domain.result.Result;
 import lotto.utils.RandomLottoGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;

@@ -1,8 +1,8 @@
 package lotto.utils;
 
 import java.util.Arrays;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
+import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.LottoTicket;
 
 public class FixedLottoGenerator implements LottoGenerator {
 

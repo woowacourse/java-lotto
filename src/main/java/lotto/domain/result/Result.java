@@ -1,9 +1,12 @@
-package lotto.domain;
+package lotto.domain.result;
 
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lotto.domain.lotto.LottoTicket;
+import lotto.domain.lotto.Rank;
+import lotto.domain.lotto.WinningNumbers;
 
 public class Result {
 
@@ -21,7 +24,8 @@ public class Result {
         this.earningRate = new EarningRate(getTotalPrize(), paymentAmount);
     }
 
-    private static Map<Rank, Integer> getResultMap(WinningNumbers winningNumbers, List<LottoTicket> lottoTickets) {
+    private static Map<Rank, Integer> getResultMap(WinningNumbers winningNumbers,
+            List<LottoTicket> lottoTickets) {
         Map<Rank, Integer> resultMap;
         resultMap = new HashMap<>();
 

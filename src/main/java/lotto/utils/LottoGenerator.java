@@ -1,6 +1,6 @@
 package lotto.utils;
 
-import lotto.domain.LottoTicket;
+import lotto.domain.lotto.LottoTicket;
 
 public interface LottoGenerator {
 

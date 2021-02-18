@@ -1,9 +1,11 @@
-package lotto.domain;
+package lotto.domain.result;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.math.BigInteger;
 import java.util.Arrays;
+import lotto.domain.lotto.LottoTicket;
+import lotto.domain.lotto.WinningNumbers;
 import org.junit.jupiter.api.Test;
 
 class ResultTest {

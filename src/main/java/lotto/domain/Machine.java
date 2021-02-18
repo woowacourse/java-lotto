@@ -4,6 +4,9 @@ import java.math.BigInteger;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import lotto.domain.lotto.LottoTicket;
+import lotto.domain.lotto.WinningNumbers;
+import lotto.domain.result.Result;
 import lotto.utils.LottoGenerator;
 import lotto.utils.StringValidator;
 

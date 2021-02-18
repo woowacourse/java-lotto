@@ -4,8 +4,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
+import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.LottoTicket;
 
 public class RandomLottoGenerator implements LottoGenerator {
 

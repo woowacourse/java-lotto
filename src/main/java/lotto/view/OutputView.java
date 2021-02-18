@@ -4,9 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import lotto.domain.LottoTicket;
-import lotto.domain.Rank;
-import lotto.domain.Result;
+import lotto.domain.lotto.LottoTicket;
+import lotto.domain.lotto.Rank;
+import lotto.domain.result.Result;
 
 public class OutputView {
 
