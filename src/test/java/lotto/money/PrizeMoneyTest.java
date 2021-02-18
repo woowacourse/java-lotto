@@ -24,6 +24,6 @@ public class PrizeMoneyTest {
     void calculatePrizeMoney() {
         Statistics statistics = new Statistics(Arrays.asList(Ranking.FIFTH, Ranking.NOTHING, Ranking.NOTHING, Ranking.NOTHING));
         PrizeMoney prizeMoney = new PrizeMoney(statistics);
-        assertThat(prizeMoney.calculateProfit(new Money("14000"))).isEqualTo("0.35");
+        assertThat(prizeMoney.calculateProfit(new Money("14000"))).isEqualTo(0.35);
     }
 }

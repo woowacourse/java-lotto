@@ -75,7 +75,7 @@ public class OutputView {
         System.out.printf(RANKING_RESULT_FORMAT, ranking.getMatchCount(), ranking.getPrice(), result.get(ranking));
     }
 
-    public static void showProfit(String calculateProfit) {
+    public static void showProfit(Double calculateProfit) {
         System.out.printf(TOTAL_PROFIT_FORMAT, calculateProfit);
         System.out.println();
     }
