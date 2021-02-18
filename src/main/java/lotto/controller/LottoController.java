@@ -12,7 +12,7 @@ import lotto.view.OutputView;
 public class LottoController {
 
     public void run() {
-        LottoTicket lottoTicket = new LottoTicket(InputView.getMoney());
+        LottoTicket lottoTicket = InputView.getLottoTicket();
         OutputView.printLottoTicket(lottoTicket);
 
         LottoLine winningLottoLine = InputView.getLottoLine();

@@ -9,18 +9,20 @@ import java.util.List;
 import java.util.Scanner;
 import lotto.domain.lotto.LottoLine;
 import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.LottoTicket;
 
 public class InputView {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static int getMoney() {
+    public static LottoTicket getLottoTicket() {
         try {
             System.out.println(PURCHASE_MONEY_INPUT_REQUEST.getMessage());
-            return Integer.parseInt(scanner.nextLine());
+            int inputValue = Integer.parseInt(scanner.nextLine());
+            return new LottoTicket(inputValue);
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return getMoney();
+            return getLottoTicket();
         }
     }
 
