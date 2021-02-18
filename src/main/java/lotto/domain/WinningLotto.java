@@ -11,10 +11,8 @@ public class WinningLotto {
     private static BonusBall bonusBall;
 
     public WinningLotto(String winningInput, String bonusBallInput) {
-        generateWinningLotto(winningInput);
-        validateBonusBallType(bonusBallInput);
-        validateBonusBallRange();
-        validateDuplicate();
+        winLotto = new Lotto(generateWinningLotto(winningInput));
+        bonusBall = new BonusBall(winLotto, bonusBallInput);
     }
 
     public static int howManyWins(Lotto lotto) {
@@ -31,7 +29,7 @@ public class WinningLotto {
         return winningNumbers;
     }
 
-    private void generateWinningLotto(String numberInput) {
+    private ArrayList<Integer> generateWinningLotto(String numberInput) {
         List<Integer> winningNumbers = changeToList(numberInput);
         ArrayList<Integer> winningNums = new ArrayList<Integer>();
         winningNums.addAll(winningNumbers);
@@ -40,7 +38,7 @@ public class WinningLotto {
 
     public Rank findRank(Lotto lotto) {
         int match = howManyWins(lotto);
-        boolean bonusMatch = hasBonusBall(lotto);
+        boolean bonusMatch = bonusBall.hasBonusBall(lotto);
         Rank rank = Rank.makeRankByMatch(match, bonusMatch);
         return rank;
     }

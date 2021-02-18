@@ -15,14 +15,6 @@ public class WinningLottoTest {
         assertThat(WinningLotto.howManyWins(generatedLotto)).isEqualTo(4);
     }
 
-    @Test
-    void 보너스볼_맞는지_확인() {
-        WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6", "7");
-        ArrayList<Integer> numbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 7));
-        Lotto lotto = new Lotto(numbers);
-        boolean expected = winningLotto.hasBonusBall(lotto);
-        assertThat(expected).isEqualTo(true);
-    }
 
     @Test
     void 몇등에_당첨인지_확인() {
