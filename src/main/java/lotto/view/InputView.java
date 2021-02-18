@@ -53,7 +53,7 @@ public class InputView {
             int inputValue = Integer.parseInt(scanner.nextLine());
             return new LottoNumber(inputValue);
         } catch (Exception e) {
-            System.out.printf(e.getMessage());
+            System.out.println(e.getMessage());
             return getBonusLottoNumber();
         }
     }
