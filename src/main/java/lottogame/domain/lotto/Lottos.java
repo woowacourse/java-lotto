@@ -17,7 +17,7 @@ public class Lottos {
     }
 
     public List<Lotto> values() {
-        return Collections.unmodifiableList(lottos);
+        return new ArrayList<>(lottos);
     }
 
     public LottoResults findMatchLottos(WinningLotto winningLotto, Money money) {
