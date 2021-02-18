@@ -2,7 +2,9 @@ package lotto.domain.lotto;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 import lotto.domain.number.LottoNumber;
 
 public class LottoGenerator {
@@ -40,6 +42,9 @@ public class LottoGenerator {
     private List<LottoNumber> generateRandomLottoNumber() {
         Collections.shuffle(lottoNumbers);
 
-        return new ArrayList<>(lottoNumbers.subList(0, LOTTO_COUNT_MAXIMUM));
+        return new ArrayList<>(lottoNumbers.subList(0, LOTTO_COUNT_MAXIMUM))
+            .stream()
+            .sorted(Comparator.comparingInt(LottoNumber::toInt))
+            .collect(Collectors.toList());
     }
 }
