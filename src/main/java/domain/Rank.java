@@ -10,6 +10,8 @@ public enum Rank {
     FIFTH(3, new Money("5000")),
     NOTHING(0, new Money("0"));
 
+    private static final long FIVE = 5;
+
     long count;
     Money reward;
 
@@ -19,7 +21,7 @@ public enum Rank {
     }
 
     public static Rank from(long count, boolean bonusBallMatch) {
-        if (bonusBallMatch) {
+        if (bonusBallMatch && count == FIVE) {
             return Rank.SECOND;
         }
         return Arrays.stream(Rank.values())
