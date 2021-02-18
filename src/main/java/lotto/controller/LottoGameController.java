@@ -52,6 +52,7 @@ public class LottoGameController {
 
     private void showGameResult(Lottos lottos, WinningLotto lastWinningLotto) {
         LottoGameResult lottoGameResult = lottoGame.compareWithWinningLotto(lottos, lastWinningLotto);
+
         OutputView.printLottoGameResult(lottoGameResult);
     }
 }
