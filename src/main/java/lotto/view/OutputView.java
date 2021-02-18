@@ -29,8 +29,7 @@ public class OutputView {
 
     public static void printTickets(LottoTickets lottoTickets) {
         lottoTickets.getLottoTickets()
-                .stream()
-                .forEach(lottoTicket -> printTicket(lottoTicket));
+                .forEach(OutputView::printTicket);
         System.out.print(NEW_LINE);
     }
 
