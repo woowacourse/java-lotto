@@ -19,6 +19,7 @@ public class LottosTest {
         lottos = new Lottos(Arrays.asList(lotto1, lotto2));
     }
 
+    @DisplayName("로또 당첨결과 확인")
     @Test
     void testEntireLottoMatching() {
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
@@ -28,13 +29,5 @@ public class LottosTest {
         List<Result> expectedResults = Arrays.asList(Result.FIFTH, Result.NONE);
 
         assertThat(results).isEqualTo(expectedResults);
-    }
-
-    @DisplayName("로또들을 만들어 주는 테스트")
-    @Test
-    void makeLottos() {
-        Lottos lottos1 = new Lottos(3);
-
-        assertThat(lottos1.getNumberOfLotto()).isEqualTo(3);
     }
 }

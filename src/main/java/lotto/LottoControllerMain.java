@@ -1,8 +1,6 @@
 package lotto;
 
-import lotto.domain.Lottos;
-import lotto.domain.Money;
-import lotto.domain.Result;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -10,9 +8,10 @@ import java.util.List;
 
 public class LottoControllerMain {
     public static void main(String[] args) {
-        Money money = new Money(InputView.takeMoneyInput());
-        Lottos lottos = new Lottos(money.calculateNumberOfLotto());
-        OutputView.showLottos(lottos);
+        Money money = new Money(InputView.inputMoney());
+        Lottos lottos = new Lottos(money.buyLotto());
+
+        OutputView.showBuyLotto(lottos.getLottos());
 
         List<Integer> winningNumbers = InputView.winningNumbers();
         int bonusNumber = InputView.bonusNumber(winningNumbers);

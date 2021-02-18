@@ -24,7 +24,7 @@ public class ResultTest {
     @DisplayName("결과 값을 통계 리스트로 반환")
     @Test
     void resultStatistics() {
-        List<Integer> winningNumbers = Arrays.asList(1,2,3,4,5,6);
+        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         int bonusNumber = 20;
 
         Lotto lotto1 = new Lotto(Arrays.asList(1, 2, 3, 20, 21, 40)); // FIFTH
@@ -33,13 +33,13 @@ public class ResultTest {
 
         List<Result> results = lottos.getResults(winningNumbers, bonusNumber);
         List<Integer> stats = Result.getStatistics(results);
-        assertThat(stats).isEqualTo(Arrays.asList(1,0,0,1,0));
+        assertThat(stats).isEqualTo(Arrays.asList(1, 0, 0, 1, 0));
     }
 
     @DisplayName("총 수익을 계산")
     @Test
     void calculateTotalProfit() {
-        List<Integer> winningNumbers = Arrays.asList(1,2,3,4,5,6);
+        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         int bonusNumber = 20;
 
         Lotto lotto1 = new Lotto(Arrays.asList(1, 2, 3, 20, 21, 40)); // FIFTH

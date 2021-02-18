@@ -10,7 +10,7 @@ public class MoneyTest {
 
     @DisplayName("올바른 입력값 확인")
     @Test
-    void is_number(){
+    void is_number() {
         Money money = new Money("1000");
 
         assertThat(money).isEqualTo(new Money("1000"));
@@ -36,14 +36,14 @@ public class MoneyTest {
     @Test
     void calculateNumberOfLotto() {
         Money money = new Money("13500");
-        int numberOfLotto = money.calculateNumberOfLotto();
+        int numberOfLotto = money.countBuyLotto();
 
         assertThat(numberOfLotto).isEqualTo(13);
     }
 
     @DisplayName("수익률 계산")
     @Test
-    void 수익률_계산(){
+    void 수익률_계산() {
         Money money = new Money("1000");
         int profit = 10000;
 

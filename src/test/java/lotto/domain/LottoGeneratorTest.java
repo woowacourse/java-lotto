@@ -1,17 +1,16 @@
 package lotto.domain;
 
+import lotto.util.LottoGenerator;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
-class LottoNumberTest {
+class LottoGeneratorTest {
     @Test
-    void check_six(){
-        LottoNumber lottoNumber = new LottoNumber();
-        List<Integer> lottoNumbers = lottoNumber.make();
+    void check_six() {
+        List<Integer> lottoNumbers = LottoGenerator.make();
 
         assertThat(lottoNumbers.size()).isEqualTo(6);
     }

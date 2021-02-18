@@ -1,35 +1,44 @@
 package lotto.domain;
 
+import lotto.util.LottoGenerator;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Money {
+    private static final int LOTTO_PRICE = 1000;
 
     private int money;
 
-    public Money(String money){
+    public Money(String money) {
         validateNumber(money);
-        validateMoneyLowerThan1000(money);
         this.money = Integer.parseInt(money);
     }
 
-    private void validateNumber(String money) {
-        try {
-            Integer.parseInt(money);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("금액은 정수만 입력 가능합니다");
+    public List<Lotto> buyLotto(){
+        int count = countBuyLotto();
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            lottos.add(new Lotto(LottoGenerator.make()));
         }
+        return lottos;
     }
 
-    private void validateMoneyLowerThan1000(String money) {
-        if (Integer.parseInt(money) < 1000) {
-            throw new IllegalArgumentException("1000원 이상의 금액만 입력 가능합니다.");
-        }
-    }
-
-    public int calculateNumberOfLotto() {
-        return money / 1000;
+    public int countBuyLotto() {
+        return money / LOTTO_PRICE;
     }
 
     public float calculateProfitRate(float profit) {
-        return profit/money;
+        return profit / money;
+    }
+
+    private void validateNumber(String money) {
+        if (!money.chars().allMatch(Character::isDigit)) {
+            throw new IllegalArgumentException("금액은 정수만 입력 가능합니다");
+        }
+        if (Integer.parseInt(money) < 1000) {
+            throw new IllegalArgumentException("1000원 이상의 금액만 입력 가능합니다.");
+        }
     }
 
     @Override
