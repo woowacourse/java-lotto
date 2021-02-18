@@ -1,12 +1,6 @@
 package lotto.view;
 
-import lotto.exception.WinningNumberException;
-
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class InputView {
     public static final Scanner scanner = new Scanner(System.in);

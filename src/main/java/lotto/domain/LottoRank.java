@@ -17,9 +17,9 @@ public enum LottoRank {
 
     public static LottoRank getRank(double matchingCount) {
         return Arrays.stream(values())
-            .filter(element -> element.isSameMatchingCount(matchingCount))
-            .findAny()
-            .orElse(NONE);
+                .filter(element -> element.isSameMatchingCount(matchingCount))
+                .findAny()
+                .orElse(NONE);
     }
 
     private boolean isSameMatchingCount(double matchingCount) {

@@ -11,7 +11,7 @@ public class Money {
     }
 
     private void validateMoneyValue(int money) {
-        if (money <= 0) {
+        if (money < 1000) {
             throw new MoneyException();
         }
     }

@@ -9,10 +9,10 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class MoneyTest {
 
     @Test
-    @DisplayName("Money 0원 이하 생성")
+    @DisplayName("Money 1000원 미만 생성")
     void moneyCreate() {
         assertThatThrownBy(() -> {
-            new Money(0);
+            new Money(999);
         }).isInstanceOf(MoneyException.class);
     }
 }
