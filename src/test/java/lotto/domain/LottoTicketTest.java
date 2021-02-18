@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import java.util.List;
+import lotto.utils.CustomException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -22,9 +23,8 @@ class LottoTicketTest {
             new LottoNumber(6)
         );
 
-        assertThatCode(() -> {
-            LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
-        }).doesNotThrowAnyException();
+        assertThatCode(() ->  new LottoTicket(lottoNumbers))
+            .doesNotThrowAnyException();
     }
 
 
@@ -38,9 +38,8 @@ class LottoTicketTest {
             new LottoNumber(4)
         );
 
-        assertThatThrownBy(() -> {
-            LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
-        }).isInstanceOf(RuntimeException.class);
+        assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
+            .isInstanceOf(CustomException.class);
     }
 
     @Test
@@ -57,7 +56,7 @@ class LottoTicketTest {
         );
 
         assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
-            .isInstanceOf(RuntimeException.class);
+            .isInstanceOf(CustomException.class);
     }
 
     @Test
@@ -73,15 +72,14 @@ class LottoTicketTest {
         );
 
         assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
-            .isInstanceOf(RuntimeException.class);
+            .isInstanceOf(CustomException.class);
     }
 
     @Test
     @DisplayName("성공 - 문자열로 LottoTicket 생성")
     void generate_by_string() {
-        assertThatCode(() -> {
-            LottoTicket lottoTicket1 = new LottoTicket("1,2,3,4,5,6");
-        }).doesNotThrowAnyException();
+        assertThatCode(() ->  new LottoTicket("1,2,3,4,5,6"))
+            .doesNotThrowAnyException();
     }
 
     @Test

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
+import lotto.utils.CustomException;
 
 public class LottoTicket {
     public static final int PRICE = 1000;
@@ -16,16 +18,25 @@ public class LottoTicket {
     private List<LottoNumber> lottoNumbers;
 
     public LottoTicket(List<LottoNumber> lottoNumbers) {
+        List<LottoNumber> numbers = new ArrayList<>(lottoNumbers);
+
+        validateSize(numbers);
+        validateDuplication(numbers);
+
+        this.lottoNumbers = numbers;
+    }
+
+    private void validateDuplication(List<LottoNumber> lottoNumbers) {
+        Set<LottoNumber> numbers = new HashSet<>(lottoNumbers);
+        if (numbers.size() != lottoNumbers.size()) {
+            throw new CustomException("로또 숫자에 중복된 값이 있습니다.");
+        }
+    }
+
+    private void validateSize(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != SIZE_OF_LOTTO_NUMBERS) {
-            throw new RuntimeException();
+            throw new CustomException("로또 티켓의 사이즈는 " + SIZE_OF_LOTTO_NUMBERS+ "개 입니다.");
         }
-
-        Set<LottoNumber> set = new HashSet<>(lottoNumbers);
-        if (set.size() != lottoNumbers.size()) {
-            throw new RuntimeException();
-        }
-
-        this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
     public LottoTicket(String lottoNumbersValue) {

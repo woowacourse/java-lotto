@@ -2,23 +2,15 @@ package lotto.domain;
 
 import java.util.regex.Pattern;
 import java.util.List;
+import lotto.utils.CustomException;
 import lotto.utils.RandomLottoGenerator;
 
 public class Machine {
-    private static final String IS_NUMBER = "\\d+";
-
     private final LottoTickets lottoTickets;
 
     public Machine(String moneyValue) {
-        validateIsNumber(moneyValue);
-        final int money = Integer.parseInt(moneyValue);
-        this.lottoTickets = new LottoTickets( money / LottoTicket.PRICE, new RandomLottoGenerator());
-    }
-
-    private void validateIsNumber(String moneyValue) {
-        if (!Pattern.matches(IS_NUMBER, moneyValue)) {
-            throw new RuntimeException();
-        }
+        final Money money = new Money(moneyValue);
+        this.lottoTickets = new LottoTickets( money.getPossibleTicketCount(), new RandomLottoGenerator());
     }
 
     public List<LottoTicket> getTickets(){

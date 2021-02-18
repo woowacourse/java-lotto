@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 class RankTest {
 
     @ParameterizedTest
-    @DisplayName("Rank 테스트")
+    @DisplayName("Rank 반환 테스트")
     @MethodSource("ranks")
     void getInstance1(int val, boolean isBonus, Rank expectedRank) {
         assertThat(Rank.getInstance(val, isBonus)).isEqualTo(expectedRank);
