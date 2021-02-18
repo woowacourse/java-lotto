@@ -18,32 +18,35 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public Set<Integer> getLottoNumbers() {
-        Set<Integer> numbers = new HashSet<>();
-        lottoNumbers.forEach(lottoNumber -> numbers.add(lottoNumber.getNumber()));
-        return numbers;
-    }
-
     public int compareNumbers(LottoTicket winningTicket, LottoNumber bonusBall) {
-        Set<LottoNumber> hitLottoNumbers = new HashSet<>();
-        hitLottoNumbers.addAll(lottoNumbers);
-        hitLottoNumbers.retainAll(winningTicket.lottoNumbers);
+        Set<LottoNumber> hitLottoNumbers = collectHits(winningTicket);
 
         if (hitLottoNumbers.size() == CHECK_HIT_COUNT_HAS_BONUS && lottoNumbers
             .contains(bonusBall)) {
             return SECOND;
         }
-
         if (hitLottoNumbers.size() == FIRST) {
             return FIRST;
         }
         return hitLottoNumbers.size();
     }
 
+    private Set<LottoNumber> collectHits(LottoTicket winningTicket) {
+        Set<LottoNumber> hitLottoNumbers = new HashSet<>(lottoNumbers);
+        hitLottoNumbers.retainAll(winningTicket.lottoNumbers);
+        return hitLottoNumbers;
+    }
+
     public void checkDuplicateNumber(LottoNumber bonusBall) {
         if (lottoNumbers.contains(bonusBall)) {
             throw new LottoCustomException(DUPLICATE_NUMBERS_BY_BONUSBALL_ERROR_MESSAGE);
         }
+    }
+
+    public Set<Integer> getLottoNumbers() {
+        Set<Integer> numbers = new HashSet<>();
+        lottoNumbers.forEach(lottoNumber -> numbers.add(lottoNumber.getNumber()));
+        return numbers;
     }
 
     @Override

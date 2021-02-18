@@ -17,9 +17,10 @@ public enum WinningResult {
 
     public static final String NO_REWARD_ERROR_MESSAGE = "해당 등수에 해당하는 보상이 존재하지 않습니다.";
     public static final String NO_RESULT_ERROR_MESSAGE = "해당하는 결과값을 찾을 수 없습니다.";
-    private int hitCount;
-    private int reward;
-    private String message;
+
+    private final int hitCount;
+    private final int reward;
+    private final String message;
 
     WinningResult(int hitCount, int reward, String message) {
         this.hitCount = hitCount;

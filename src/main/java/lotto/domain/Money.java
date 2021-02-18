@@ -4,7 +4,6 @@ import java.util.Objects;
 import lotto.exception.LottoCustomException;
 
 public class Money {
-
     private static final int MIN_MONEY_UNIT = 1000;
     public static final String MONEY_LESS_THAN_MIN_MONEY_ERROR_MESSAGE = "입력 금액은 1000원 이상이어야 합니다.";
 
@@ -15,18 +14,18 @@ public class Money {
         this.money = money;
     }
 
-    public int getTicketCount() {
-        return this.money / MIN_MONEY_UNIT;
-    }
-
-    public float getProfit(int totalReward) {
-        return (float) totalReward / (float) money;
-    }
-
     private void validateMoneyLimit(final int money) {
         if (money < MIN_MONEY_UNIT) {
             throw new LottoCustomException(MONEY_LESS_THAN_MIN_MONEY_ERROR_MESSAGE);
         }
+    }
+
+    public int countTickets() {
+        return this.money / MIN_MONEY_UNIT;
+    }
+
+    public float calculateProfit(int totalReward) {
+        return (float) totalReward / (float) money;
     }
 
     @Override

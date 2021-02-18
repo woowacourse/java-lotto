@@ -14,7 +14,6 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
-
     final InputView inputView;
 
     public LottoController(final Scanner scanner) {
@@ -34,8 +33,8 @@ public class LottoController {
     private Money inputMoney() {
         try{
             OutputView.printMoneyMessage();
-            Money money = new Money(ValidateUtils.parseInt(inputView.inputValue()));
-            OutputView.printTicketCountMessage(money.getTicketCount());
+            Money money = new Money(inputView.inputValue());
+            OutputView.printTicketCountMessage(money.countTickets());
             return money;
         } catch (LottoCustomException exception) {
             OutputView.printErrorMessage(exception);
@@ -45,7 +44,7 @@ public class LottoController {
 
     private LottoTickets buyTickets(Money money) {
         LottoTickets lottoTickets = new LottoTickets();
-        lottoTickets.makeTicketByCount(money.getTicketCount());
+        lottoTickets.makeTicketByCount(money.countTickets());
         OutputView.printAllTickets(lottoTickets);
         return lottoTickets;
     }
@@ -63,7 +62,7 @@ public class LottoController {
     private LottoNumber inputBonus(LottoTicket winningTicket) {
         try {
             OutputView.printBonusNumber();
-            LottoNumber bonusBall = new LottoNumber(ValidateUtils.parseInt(inputView.inputValue()));
+            LottoNumber bonusBall = new LottoNumber(inputView.inputValue());
             winningTicket.checkDuplicateNumber(bonusBall);
             return bonusBall;
         } catch (LottoCustomException exception) {
@@ -78,7 +77,7 @@ public class LottoController {
         int totalReward = WinningResult.calculateTotalReward(hitCounts);
 
         OutputView.printWinningResultTitle();
-        OutputView.printProfit(money.getProfit(totalReward));
+        OutputView.printProfit(money.calculateProfit(totalReward));
         System.out.println(WinningResult.toString(hitCounts));
     }
 }

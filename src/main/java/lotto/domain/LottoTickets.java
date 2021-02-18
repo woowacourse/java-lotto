@@ -6,8 +6,8 @@ import java.util.List;
 import lotto.domain.ticketFactory.RandomTicketFactory;
 
 public class LottoTickets {
-
     public static final int NUMBER_OF_WINNING_TYPE = 8;
+
     private final List<LottoTicket> lottoTickets;
 
     public LottoTickets() {
@@ -16,6 +16,12 @@ public class LottoTickets {
 
     public LottoTickets(List<LottoTicket> lottoTickets) {
         this.lottoTickets = lottoTickets;
+    }
+
+    public void makeTicketByCount(int counts) {
+        for (int i = 0; i < counts; i++) {
+            lottoTickets.add(RandomTicketFactory.makeTicket());
+        }
     }
 
     public List<Integer> checkHitCount(LottoTicket winningTicket, LottoNumber bonusBall) {
@@ -29,11 +35,5 @@ public class LottoTickets {
 
     public List<LottoTicket> toList() {
         return new ArrayList<>(lottoTickets);
-    }
-
-    public void makeTicketByCount(int counts) {
-        for (int i = 0; i < counts; i++) {
-            lottoTickets.add(RandomTicketFactory.makeTicket());
-        }
     }
 }
