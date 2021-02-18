@@ -20,10 +20,10 @@ public class LottoController {
     private final Payment payment;
 
     public LottoController(final String value) {
-        this.payment = new Payment(ParserUtils.tryParseInt(value));
+        payment = new Payment(ParserUtils.tryParseInt(value));
         lottoTickets = new LottoTickets(payment.count());
         showLottoTickets();
-        this.winningLotto = createWinningLotto();
+        winningLotto = createWinningLotto();
     }
 
     public void run() {
@@ -32,19 +32,24 @@ public class LottoController {
 
     private WinningLotto createWinningLotto() {
         String values = Screen.getLottoNumbers();
+
         List<Integer> numbers = Arrays.stream(values.split(REGEX))
             .mapToInt(Integer::parseInt)
             .boxed()
             .collect(Collectors.toList());
+
         int bonusNumber = Integer.parseInt(Screen.getBonusBallNumber());
+
         return new WinningLotto(numbers, bonusNumber);
     }
 
     private void showLottoTickets() {
         OutputView.printBuyLottoCountMessage(payment.count());
+
         for (Lotto lotto : lottoTickets.getLottoTickets()) {
             OutputView.printLottoMessage(lotto.getLottoNumbers());
         }
+
         OutputView.printNewLineMessage();
     }
 }

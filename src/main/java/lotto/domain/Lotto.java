@@ -15,14 +15,16 @@ public class Lotto {
 
     public Lotto(final List<Integer> numbers) {
         validateDuplicatedNumber(numbers);
-        this.lottoNumbers = numberToLottoNumbers(numbers);
+        lottoNumbers = numberToLottoNumbers(numbers);
     }
 
     private List<LottoNumber> numberToLottoNumbers(List<Integer> numbers) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
+
         for (int number : numbers) {
             lottoNumbers.add(new LottoNumber(number));
         }
+
         return lottoNumbers;
     }
 

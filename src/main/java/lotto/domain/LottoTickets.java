@@ -28,10 +28,12 @@ public class LottoTickets {
 
     private List<Lotto> createLottoTickets(final int value, final List<Integer> values) {
         List<Lotto> lottoTickets = new ArrayList<>();
+
         for (int i = 0; i < value; i++) {
             lottoTickets
                 .add(new Lotto(RandomUtils.generateRandomNumbers(values, LOTTO_SIZE)));
         }
+
         return lottoTickets;
     }
 
@@ -41,9 +43,11 @@ public class LottoTickets {
 
     public Rewords getResult(final WinningLotto winningLotto) {
         List<Reword> rewords = new ArrayList<>();
+
         for (Lotto lotto : lottoTickets) {
             rewords.add(winningLotto.match(lotto));
         }
+
         return new Rewords(rewords);
     }
 
