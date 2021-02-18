@@ -5,10 +5,17 @@ import java.math.BigInteger;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
+import lotto.utils.FixedLottoGenerator;
+import lotto.utils.LottoGenerator;
 
 public class Result {
     private final Map<Rank, Integer> resultMap;
     private final BigInteger earningRate;
+
+    public Result(String winningNumbers, String bonusBall, int ticketCount, LottoGenerator lottoGenerator){
+        this(new WinningNumbers(winningNumbers, bonusBall), new LottoTickets(ticketCount, lottoGenerator));
+    }
 
     public Result(WinningNumbers winningNumbers, LottoTickets lottoTickets) {
         this.resultMap = new HashMap<>();
@@ -46,6 +53,24 @@ public class Result {
 
     public BigInteger getEarningRate() {
         return earningRate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Result result = (Result) o;
+        return Objects.equals(resultMap, result.resultMap) && Objects
+            .equals(earningRate, result.earningRate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(resultMap, earningRate);
     }
 
 }

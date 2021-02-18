@@ -1,19 +1,17 @@
 package lotto.domain;
 
-import java.util.regex.Pattern;
 import java.util.List;
-import lotto.utils.CustomException;
-import lotto.utils.RandomLottoGenerator;
+import lotto.utils.LottoGenerator;
 
 public class Machine {
     private final LottoTickets lottoTickets;
 
-    public Machine(String moneyValue) {
+    public Machine(String moneyValue, LottoGenerator lottoGenerator) {
         final Money money = new Money(moneyValue);
-        this.lottoTickets = new LottoTickets( money.getPossibleTicketCount(), new RandomLottoGenerator());
+        this.lottoTickets = new LottoTickets(money.getPossibleTicketCount(), lottoGenerator);
     }
 
-    public List<LottoTicket> getTickets(){
+    public List<LottoTicket> getTickets() {
         return lottoTickets.getLottoTickets();
     }
 
