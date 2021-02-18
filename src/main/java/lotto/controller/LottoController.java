@@ -16,25 +16,10 @@ public class LottoController {
     private static Lottos lottos;
     private static WinningLotto winningLotto;
 
-    private static void countEachRank() {
-        for (int i = 1; i < Rank.values().length; i++) {
-            Rank rank = Rank.values()[i];
-            int rankCount = (int) wins.stream().filter(win -> win == rank).count();
-            countByRank.put(rank, rankCount);
-        }
-    }
-
-    private static void drawResult() {
-        LottoView.displayResultMessage();
-        countEachRank();
-        countByRank.forEach((rank, rankCount) ->
-                LottoView.displayResult(rank, rankCount));
-    }
-
     public void startLotto() {
         lottos = new Lottos(LottoView.requestMoney());
-        LottoView.buyLotto(lottos.getCount());
-        LottoView.printLottos(lottos);
+        LottoView.displayLottoCount(lottos.getCount());
+        LottoView.displayLottoGroup(lottos);
         makeWinningLotto();
     }
 
@@ -55,6 +40,21 @@ public class LottoController {
         for (Lotto lotto : lottoGroup) {
             Rank rank = winningLotto.findRank(lotto);
             wins.add(rank);
+        }
+    }
+
+    private static void drawResult() {
+        LottoView.displayResultMessage();
+        countEachRank();
+        countByRank.forEach((rank, rankCount) ->
+                LottoView.displayResult(rank, rankCount));
+    }
+
+    private static void countEachRank() {
+        for (int i = 1; i < Rank.values().length; i++) {
+            Rank rank = Rank.values()[i];
+            int rankCount = (int) wins.stream().filter(win -> win == rank).count();
+            countByRank.put(rank, rankCount);
         }
     }
 }

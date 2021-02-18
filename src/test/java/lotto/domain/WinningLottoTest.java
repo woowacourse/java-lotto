@@ -12,7 +12,7 @@ public class WinningLottoTest {
     void 당첨번호가_몇개있는지_확인() {
         Lotto generatedLotto = new Lotto(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
         WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 8, 9", "10");
-        assertThat(WinningLotto.howManyWins(generatedLotto)).isEqualTo(4);
+        assertThat(winningLotto.howManyWins(generatedLotto)).isEqualTo(4);
     }
 
     @Test

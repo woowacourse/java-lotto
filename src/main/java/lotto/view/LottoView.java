@@ -23,11 +23,11 @@ public class LottoView {
         return SCANNER.nextLine();
     }
 
-    public static void buyLotto(int count) {
+    public static void displayLottoCount(int count) {
         System.out.println(count + LOTTO_COUNT_MESSAGE);
     }
 
-    public static void printLottos(Lottos lottos) {
+    public static void displayLottoGroup(Lottos lottos) {
         ArrayList<Lotto> lottoGroup = lottos.getLottoGroup();
         for (int i = 0; i < lottos.getCount(); i++)
             System.out.print(lottoGroup.get(i).getLottoNumbers() + CHANGE_LINE);
