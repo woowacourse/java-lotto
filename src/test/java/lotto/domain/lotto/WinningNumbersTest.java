@@ -49,6 +49,8 @@ public class WinningNumbersTest {
         expected.put(Rank.THIRD, 1L);
         expected.put(Rank.FOURTH, 0L);
         expected.put(Rank.FIFTH, 0L);
+        int expectedTotalWinnings =
+            Rank.FIRST.getWinnings() + Rank.SECOND.getWinnings() + Rank.THIRD.getWinnings();
 
         LottoTicket lottoTicket = new LottoTicket(Arrays.asList(
             LottoNumbers.valueOf("1,2,3,4,5,6"),
@@ -58,8 +60,6 @@ public class WinningNumbersTest {
         WinningStatistics result = winningNumbers.getResult(lottoTicket, PayOut.valueOf("3000"));
 
         Map<Rank, Long> actual = result.toMap();
-        int expectedTotalWinnings =
-            Rank.FIRST.getWinnings() + Rank.SECOND.getWinnings() + Rank.THIRD.getWinnings();
 
         assertThat(expected).isEqualTo(actual);
         assertThat(expectedTotalWinnings / 3000D)
