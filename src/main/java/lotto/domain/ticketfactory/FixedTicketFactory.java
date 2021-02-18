@@ -1,4 +1,4 @@
-package lotto.domain.ticketFactory;
+package lotto.domain.ticketfactory;
 
 import java.util.Set;
 import java.util.stream.Collectors;

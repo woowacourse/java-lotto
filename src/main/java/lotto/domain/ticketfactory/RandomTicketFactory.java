@@ -1,4 +1,4 @@
-package lotto.domain.ticketFactory;
+package lotto.domain.ticketfactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
