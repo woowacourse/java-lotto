@@ -12,12 +12,12 @@ import lotto.domain.LottoTicket;
 
 public class RandomTicketFactory {
 
-    public static final int LOTTO_NUMBER_MAX_LIMIT = 45;
+    public static final int LOTTO_NUMBER_MAX_LIMIT = 44;
     public static final int LOTTO_NUMBER_MIN_LIMIT = 1;
     public static Map<Integer, LottoNumber> lottoNumberFactory = new HashMap<>();
 
     static {
-        for (int i = LOTTO_NUMBER_MIN_LIMIT; i < LOTTO_NUMBER_MAX_LIMIT; i++) {
+        for (int i = LOTTO_NUMBER_MIN_LIMIT; i <= LOTTO_NUMBER_MAX_LIMIT; i++) {
             lottoNumberFactory.put(i, new LottoNumber(i));
         }
     }

@@ -15,6 +15,8 @@ public enum WinningResult {
     SECOND(6, 30000000, "5개 일치, 보너스 볼 일치"),
     FIRST(7, 2000000000, "6개 일치");
 
+    public static final String NO_REWARD_ERROR_MESSAGE = "해당 등수에 해당하는 보상이 존재하지 않습니다.";
+    public static final String NO_RESULT_ERROR_MESSAGE = "해당하는 결과값을 찾을 수 없습니다.";
     private int hitCount;
     private int reward;
     private String message;
@@ -37,7 +39,7 @@ public enum WinningResult {
         return Arrays.stream(values())
             .filter(value -> count == value.hitCount)
             .findFirst()
-            .get()
+            .orElseThrow(()->new LottoCustomException(NO_REWARD_ERROR_MESSAGE))
             .reward;
     }
 
@@ -56,6 +58,6 @@ public enum WinningResult {
         return Arrays.stream(values())
             .filter(value -> count == value.hitCount)
             .findFirst()
-            .get();
+            .orElseThrow(()->new LottoCustomException(NO_RESULT_ERROR_MESSAGE));
     }
 }

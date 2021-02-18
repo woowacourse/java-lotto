@@ -37,8 +37,8 @@ public class LottoController {
             Money money = new Money(ValidateUtils.parseInt(inputView.inputValue()));
             OutputView.printTicketCountMessage(money.getTicketCount());
             return money;
-        } catch (LottoCustomException e) {
-            OutputView.printErrorMessage(e.getMessage());
+        } catch (LottoCustomException exception) {
+            OutputView.printErrorMessage(exception);
             return inputMoney();
         }
     }
@@ -54,8 +54,8 @@ public class LottoController {
         try {
             OutputView.printWinningNumbers();
             return FixedTicketFactory.makeTicket(inputView.inputWinningNumbers());
-        } catch (LottoCustomException e) {
-            OutputView.printErrorMessage(e.getMessage());
+        } catch (LottoCustomException exception) {
+            OutputView.printErrorMessage(exception);
             return inputWinningNumbers();
         }
     }
@@ -66,8 +66,8 @@ public class LottoController {
             LottoNumber bonusBall = new LottoNumber(ValidateUtils.parseInt(inputView.inputValue()));
             winningTicket.checkDuplicateNumber(bonusBall);
             return bonusBall;
-        } catch (LottoCustomException e) {
-            OutputView.printErrorMessage(e.getMessage());
+        } catch (LottoCustomException exception) {
+            OutputView.printErrorMessage(exception);
             return inputBonus(winningTicket);
         }
     }
