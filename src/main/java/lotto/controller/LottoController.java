@@ -32,12 +32,10 @@ public class LottoController {
 
     private WinningLotto createWinningLotto() {
         String values = Screen.getLottoNumbers();
-
         List<Integer> numbers = Arrays.stream(values.split(REGEX))
             .mapToInt(ParserUtils::tryParseInt)
             .boxed()
             .collect(Collectors.toList());
-
         int bonusNumber = ParserUtils.tryParseInt(Screen.getBonusBallNumber());
 
         return new WinningLotto(numbers, bonusNumber);

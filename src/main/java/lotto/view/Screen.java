@@ -14,8 +14,11 @@ public class Screen {
 
     public static String getBonusBallNumber() {
         OutputView.printInputBonusBallMessage();
+
         String value = InputView.getInputLine();
+
         OutputView.printNewLineMessage();
+
         return value;
     }
 }
