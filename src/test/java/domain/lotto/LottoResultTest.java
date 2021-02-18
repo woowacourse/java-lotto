@@ -30,8 +30,7 @@ public class LottoResultTest {
                 Rank.NO_MATCH, Rank.NO_MATCH, Rank.NO_MATCH, Rank.NO_MATCH, Rank.NO_MATCH,
                 Rank.NO_MATCH, Rank.NO_MATCH,
                 Rank.NO_MATCH, Rank.NO_MATCH, Rank.NO_MATCH, Rank.NO_MATCH));
-        double profitRate = lottoResult.calculateProfitRate(14000);
+        double profitRate = lottoResult.calculateProfitRate();
         assertThat(profitRate).isEqualTo(5000 / 14000f);
-
     }
 }
