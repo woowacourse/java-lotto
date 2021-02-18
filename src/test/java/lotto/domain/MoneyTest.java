@@ -42,11 +42,10 @@ public class MoneyTest {
 
     @DisplayName("수익률 계산")
     @Test
-    void 수익률_계산() {
+    void calculateProfitRate() {
         Money money = new Money("1000");
         int profit = 10000;
 
         assertThat(money.calculateProfitRate(profit)).isEqualTo(10);
     }
 }
-
