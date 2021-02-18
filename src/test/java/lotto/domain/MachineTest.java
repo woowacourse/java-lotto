@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import lotto.utils.FixedLottoGenerator;
 import org.junit.jupiter.api.Test;
@@ -14,7 +14,7 @@ class MachineTest {
         Machine machine = new Machine("4000");
 
         assertThat(machine.buyTickets(new FixedLottoGenerator()))
-            .size().isEqualTo(4);
+                .size().isEqualTo(4);
     }
 
     @Test

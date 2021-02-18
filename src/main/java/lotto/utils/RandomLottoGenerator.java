@@ -8,6 +8,7 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 
 public class RandomLottoGenerator implements LottoGenerator {
+
     public static final int MAXIMUM_BOUND = 45;
 
     private final Random random = new Random();
@@ -18,7 +19,7 @@ public class RandomLottoGenerator implements LottoGenerator {
         while (numbers.size() != LottoTicket.SIZE_OF_LOTTO_NUMBERS) {
             numbers.add(getRandomLottoNumber());
         }
-        return new LottoTicket (new ArrayList<>(numbers));
+        return new LottoTicket(new ArrayList<>(numbers));
     }
 
     private LottoNumber getRandomLottoNumber() {

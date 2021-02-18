@@ -1,6 +1,7 @@
 package lotto.domain;
 
 public class WinningNumbers {
+
     private final LottoTicket lottoTicket;
     private final LottoNumber bonusBall;
 
@@ -15,11 +16,12 @@ public class WinningNumbers {
         this.lottoTicket = lottoTicket;
         this.bonusBall = bonusBall;
     }
+
     //Todo :  private 수정해야함
     public int countMatches(LottoTicket lottoTicket) {
         return (int) lottoTicket.getUnmodifiableList().stream()
-            .filter(this.lottoTicket::contains)
-            .count();
+                .filter(this.lottoTicket::contains)
+                .count();
     }
 
     public Rank getRank(LottoTicket lottoTicket) {

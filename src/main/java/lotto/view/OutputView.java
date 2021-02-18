@@ -9,6 +9,7 @@ import lotto.domain.Rank;
 import lotto.domain.Result;
 
 public class OutputView {
+
     private OutputView() {
     }
 
@@ -19,12 +20,12 @@ public class OutputView {
         System.out.println("---------");
 
         Arrays.stream(Rank.values())
-            .filter(rank -> !Rank.UNRANKED.equals(rank))
-            .forEach(rank -> {
-                String message = getMessage(rank);
-                System.out.printf("%s (%s원)- %d개%n",
-                    message, rank.getPrize().toString(), resultMap.getOrDefault(rank, 0));
-            });
+                .filter(rank -> !Rank.UNRANKED.equals(rank))
+                .forEach(rank -> {
+                    String message = getMessage(rank);
+                    System.out.printf("%s (%s원)- %d개%n",
+                            message, rank.getPrize().toString(), resultMap.getOrDefault(rank, 0));
+                });
 
         System.out.printf("총 수익률은 %s%%입니다.%n", result.getEarningRate());
     }
@@ -53,8 +54,8 @@ public class OutputView {
         System.out.printf("%d개를 구매했습니다.\n", lottoTickets.size());
         for (LottoTicket lottoTicket : lottoTickets) {
             String numbers = lottoTicket.getUnmodifiableList().stream()
-                .map(lottoNumber -> Integer.toString(lottoNumber.getNumber()))
-                .collect(Collectors.joining(", "));
+                    .map(lottoNumber -> Integer.toString(lottoNumber.getNumber()))
+                    .collect(Collectors.joining(", "));
             System.out.println("[" + numbers + "]");
         }
         System.out.println();

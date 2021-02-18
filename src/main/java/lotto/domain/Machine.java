@@ -1,11 +1,12 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.regex.Pattern;
 import java.util.List;
+import java.util.regex.Pattern;
 import lotto.utils.LottoGenerator;
 
 public class Machine {
+
     private static final String IS_NUMBER = "\\d+";
     private final int money;
 
@@ -28,7 +29,8 @@ public class Machine {
         return lottoTickets;
     }
 
-    public Result getResult(String winningNumbersValue, String bonusBallValue, List<LottoTicket> lottoTickets) {
+    public Result getResult(String winningNumbersValue, String bonusBallValue,
+            List<LottoTicket> lottoTickets) {
         WinningNumbers winningNumbers = new WinningNumbers(winningNumbersValue, bonusBallValue);
 
         return new Result(winningNumbers, lottoTickets, money);

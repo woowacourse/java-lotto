@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Result {
+
     private final Map<Rank, Integer> resultMap;
     private final BigInteger earningRate;
 
@@ -21,12 +22,13 @@ public class Result {
 
         for (Map.Entry<Rank, Integer> result : resultMap.entrySet()) {
             prizePerRank = prizePerRank
-                .add(result.getKey().getPrize().multiply(BigDecimal.valueOf(result.getValue())));
+                    .add(result.getKey().getPrize()
+                            .multiply(BigDecimal.valueOf(result.getValue())));
         }
 
         this.earningRate = (prizePerRank
-            .divide(BigDecimal.valueOf(buyPrice), 2, BigDecimal.ROUND_CEILING))
-            .multiply(BigDecimal.valueOf(100)).toBigInteger();
+                .divide(BigDecimal.valueOf(buyPrice), 2, BigDecimal.ROUND_CEILING))
+                .multiply(BigDecimal.valueOf(100)).toBigInteger();
     }
 
     public Map<Rank, Integer> getResultMap() {

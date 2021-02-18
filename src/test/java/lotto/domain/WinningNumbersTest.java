@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class WinningNumbersTest {
+
     @Test
     void generate_winning_numbers() {
         assertThatCode(() -> {
@@ -19,35 +20,35 @@ class WinningNumbersTest {
     @DisplayName("실패 - 보너스볼과 로또넘버가 중복되는 경우")
     void generate_duplicated_case() {
         assertThatThrownBy(() -> new WinningNumbers("1,2,3,4,5,6", "6"))
-            .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(RuntimeException.class);
     }
 
     @Test
     @DisplayName("실패 - 보너스볼이 숫자가 아닌경우")
     void generate_duplicated_case2() {
         assertThatThrownBy(() -> new WinningNumbers("1,2,3,4,5,6", "s"))
-            .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(RuntimeException.class);
     }
 
     @Test
     @DisplayName("실패 - 로또넘버가 6개가 아닌 경우")
     void generate_duplicated_case3() {
         assertThatThrownBy(() -> new WinningNumbers("1,2,3,4,5", "6"))
-            .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(RuntimeException.class);
     }
 
     @Test
     @DisplayName("실패 - 보너스볼이 1개가 아닌 경우")
     void generate_duplicated_case4() {
         assertThatThrownBy(() -> new WinningNumbers("1,2,3,4,5,6", "7,8"))
-            .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(RuntimeException.class);
     }
 
     @Test
     @DisplayName("실패 - 보너스볼 값이 1~45 사이가 아닌 경우")
     void generate_duplicated_case5() {
         assertThatThrownBy(() -> new WinningNumbers("1,2,3,4,5,6", "46"))
-            .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(RuntimeException.class);
     }
 
     @Test
