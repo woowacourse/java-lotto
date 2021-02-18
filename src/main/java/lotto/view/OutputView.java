@@ -46,11 +46,11 @@ public class OutputView {
     }
 
     public static void printProfit(float profit) {
-        System.out.println(String.format("총 수익률은 %.2f입니다.", profit));
+        System.out.printf("총 수익률은 %.2f입니다.%n", profit);
     }
 
-    public static void printGiveChange(int change) {
-        System.out.println(String.format("거스름돈 %d원은 자선 단체에 기부되었습니다 😃", change));
+    public static void printAboutChange(int change) {
+        System.out.printf("거스름돈 %d원은 자선 단체에 기부되었습니다 \uD83D\uDE03%n", change);
     }
 
     private static void printSplitLine() {
