@@ -1,12 +1,12 @@
-package lotto.lottoticket;
+package lotto.ticket;
 
-import lotto.lottoticket.ticketnumber.NumbersGenerator;
+import lotto.ticket.strategy.NumbersGenerator;
 
 import java.util.List;
 import java.util.Objects;
 
-import static lotto.lottogame.LottoCount.ONE_COUNT;
-import static lotto.lottogame.LottoCount.ZERO;
+import static lotto.game.LottoCount.ONE_COUNT;
+import static lotto.game.LottoCount.ZERO;
 
 public class Ticket {
     private final List<Number> numbers;

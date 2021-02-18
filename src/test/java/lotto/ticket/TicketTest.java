@@ -1,12 +1,12 @@
-package lotto.lottoticket;
+package lotto.ticket;
 
-import lotto.lottoticket.ticketnumber.NumbersGenerator;
+import lotto.ticket.strategy.NumbersGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import static lotto.lottoticket.TicketValidation.*;
+import static lotto.ticket.TicketValidation.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertTrue;

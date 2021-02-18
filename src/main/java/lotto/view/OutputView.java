@@ -1,8 +1,8 @@
 package lotto.view;
 
-import lotto.lottogame.LottoCount;
-import lotto.lottoticket.Ticket;
-import lotto.lottoticket.Tickets;
+import lotto.game.LottoCount;
+import lotto.ticket.Ticket;
+import lotto.ticket.Tickets;
 import lotto.ranking.Ranking;
 import lotto.ranking.Statistics;
 

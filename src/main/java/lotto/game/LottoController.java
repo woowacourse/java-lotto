@@ -1,9 +1,9 @@
-package lotto.lottogame;
+package lotto.game;
 
-import lotto.lottoticket.BonusBall;
-import lotto.lottoticket.Tickets;
-import lotto.lottoticket.WinnerTicket;
-import lotto.lottoticket.ticketnumber.RandomNumbersGenerator;
+import lotto.ticket.BonusBall;
+import lotto.ticket.Tickets;
+import lotto.ticket.WinnerTicket;
+import lotto.ticket.strategy.RandomNumbersGenerator;
 import lotto.money.Money;
 import lotto.money.PrizeMoney;
 import lotto.ranking.Statistics;

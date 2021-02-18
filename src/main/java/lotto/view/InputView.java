@@ -1,7 +1,7 @@
 package lotto.view;
 
-import lotto.lottoticket.BonusBall;
-import lotto.lottoticket.WinnerTicket;
+import lotto.ticket.BonusBall;
+import lotto.ticket.WinnerTicket;
 import lotto.money.Money;
 
 import java.util.Scanner;

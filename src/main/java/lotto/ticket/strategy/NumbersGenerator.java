@@ -1,6 +1,6 @@
-package lotto.lottoticket.ticketnumber;
+package lotto.ticket.strategy;
 
-import lotto.lottoticket.Number;
+import lotto.ticket.Number;
 
 import java.util.List;
 

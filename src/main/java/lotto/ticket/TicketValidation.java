@@ -1,8 +1,8 @@
-package lotto.lottoticket;
+package lotto.ticket;
 
 import java.util.List;
 
-import static lotto.lottoticket.ticketnumber.RandomNumbersGenerator.*;
+import static lotto.ticket.strategy.RandomNumbersGenerator.*;
 
 public class TicketValidation {
     public static final String ERROR_MESSAGE_DUPLICATED = "중복되는 숫자가 존재합니다.";

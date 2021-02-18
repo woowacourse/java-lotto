@@ -1,6 +1,6 @@
 package lotto.money;
 
-import lotto.lottoticket.TicketValidation;
+import lotto.ticket.TicketValidation;
 
 import java.util.Objects;
 

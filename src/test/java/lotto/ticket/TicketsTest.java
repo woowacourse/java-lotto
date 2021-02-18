@@ -1,7 +1,7 @@
-package lotto.lottoticket;
+package lotto.ticket;
 
-import lotto.lottogame.LottoCount;
-import lotto.lottoticket.ticketnumber.RandomNumbersGenerator;
+import lotto.game.LottoCount;
+import lotto.ticket.strategy.RandomNumbersGenerator;
 import lotto.money.Money;
 import lotto.ranking.Ranking;
 import org.junit.jupiter.api.DisplayName;
