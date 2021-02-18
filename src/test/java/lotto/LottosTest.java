@@ -59,8 +59,8 @@ public class LottosTest {
     void 수익률_계산() {
         int money = 14000;
         int earning = 5000;
-        double earningRate = Lottos.findEarningRate();
-        assertThat(earningRate).isEqualTo(0.35);
+        String earningRate = Lottos.findEarningRate(money, earning);
+        assertThat(earningRate).isEqualTo("0.36");
     }
 }
 
