@@ -1,9 +1,10 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.List;
 
 public enum Prize {
-    NO_PRIZE(new Money(0), 0),
+    NO_PRIZE(Money.ZERO, 0),
     FIFTH_PRIZE(new Money(5000), 3),
     FOURTH_PRIZE(new Money(50000), 4),
     THIRD_PRIZE(new Money(1500000), 5),
@@ -23,11 +24,30 @@ public enum Prize {
         if (isMatchCountEqualsPivot(matchCount) && isBonusBall) {
             return SECOND_PRIZE;
         }
-        return Arrays.stream(values()).filter(s -> s.matchCount == matchCount).findFirst().orElse(NO_PRIZE);
+        return Arrays.stream(values())
+                .filter(s -> s.matchCount == matchCount)
+                .findFirst()
+                .orElse(NO_PRIZE);
     }
 
     private static boolean isMatchCountEqualsPivot(int matchCount) {
         return matchCount == BONUS_CHECK_PIVOT;
+    }
+
+    public static double calculatePrizeMoneySum(List<Prize> lottoResults, Money money) {
+        Money moneySum = Money.ZERO;
+        for (Prize prize : Prize.values()) {
+            Money perPrizeMoneySum = prize.prizeMoney
+                    .multiple(getCountByPrizeType(lottoResults, prize));
+            moneySum = moneySum.plus(perPrizeMoneySum);
+        }
+        return moneySum.getRate(money);
+    }
+
+    public static int getCountByPrizeType(List<Prize> lottoResults, Prize prize) {
+        return (int) lottoResults.stream()
+                .filter(p -> p.equals(prize))
+                .count();
     }
 
     public Money getPrizeMoney() {

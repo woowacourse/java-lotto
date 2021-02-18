@@ -11,16 +11,10 @@ public class LottoResult {
     }
 
     public double calculateProfitRate(Money money) {
-        double moneySum = 0;
-        for (Prize prize : Prize.values()) {
-            moneySum += prize.getPrizeMoney().getValue() * getCountByPrizeType(prize);
-        }
-        return moneySum / money.getValue();
+        return Prize.calculatePrizeMoneySum(lottoResults, money);
     }
 
-    public int getCountByPrizeType(Prize prize) {
-        return (int) lottoResults.stream()
-                .filter(p -> p.equals(prize))
-                .count();
+    public int getCountPerPrizeType(Prize prize) {
+        return Prize.getCountByPrizeType(lottoResults,prize);
     }
 }

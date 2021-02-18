@@ -22,7 +22,7 @@ class LottoResultTest {
     @Test
     @DisplayName("해당 당첨 티켓이 몇개 있는 지 확인하는 기능")
     void getCountByPrizeType() {
-        assertThat(lottoResult.getCountByPrizeType(Prize.FIRST_PRIZE)).isEqualTo(2);
+        assertThat(lottoResult.getCountPerPrizeType(Prize.FIRST_PRIZE)).isEqualTo(2);
     }
 
     @Test

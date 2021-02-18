@@ -35,7 +35,7 @@ public class OutputView {
         System.out.println("\n당첨 통계");
         System.out.println(DIVIDER);
         for (Prize prize : Prize.values()) {
-            resultStatistic(prize, lottoResult.getCountByPrizeType(prize));
+            resultStatistic(prize, lottoResult.getCountPerPrizeType(prize));
         }
     }
 
