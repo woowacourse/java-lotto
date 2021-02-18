@@ -78,4 +78,8 @@ public class OutputView {
         final String profitRateMessageSkeleton = "총 수익률은 %.2f 입니다.";
         System.out.println(String.format(profitRateMessageSkeleton, lottoResult.getProfitRate()));
     }
+
+    public static void errorPrint(Exception error) {
+        System.out.println(error.getMessage());
+    }
 }

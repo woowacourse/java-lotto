@@ -23,28 +23,34 @@ public class LottoController {
     }
 
     public void play() {
-        OutputView.inputMoney();
-        Money money = inputView.inputMoney();
-        LottoStore lottoStore = new LottoStore();
-        Lottos purchasedLottos = lottoStore.buyLottos(money);
-        OutputView.numPurchasedLotto(purchasedLottos.getNumLotto());
-        OutputView.lottosPrint(purchasedLottos);
+        try {
+            OutputView.inputMoney();
+            Money money = inputView.inputMoney();
+            LottoStore lottoStore = new LottoStore();
+            Lottos purchasedLottos = lottoStore.buyLottos(money);
+            OutputView.numPurchasedLotto(purchasedLottos.getNumLotto());
+            OutputView.lottosPrint(purchasedLottos);
 
-        List<Integer> winningNumbers = createWinningNumbers();
-        Integer bonusNumber = createBonusNUmber();
+            List<Integer> winningNumbers = createWinningNumbers();
+            Integer bonusNumber = createBonusNUmber();
 
-        WinningLotto winningLotto = WinningLotto.generatedBy(Lotto.generatedBy(winningNumbers),
-            LottoNumber.valueOf(bonusNumber));
+            WinningLotto winningLotto = WinningLotto.generatedBy(Lotto.generatedBy(winningNumbers),
+                LottoNumber.valueOf(bonusNumber));
 
-        LottoResult lottoResult = new LottoResult();
+            LottoResult lottoResult = new LottoResult();
 
-        for (Lotto lotto : purchasedLottos.getLottos()) {
-            lottoResult.add(lotto, winningLotto);
+            for (Lotto lotto : purchasedLottos.getLottos()) {
+                lottoResult.add(lotto, winningLotto);
+            }
+
+            OutputView.totalWinning();
+            OutputView.numMatchPrint(lottoResult);
+            OutputView.profitRatePrint(lottoResult);
+        } catch (Exception error) {
+            OutputView.errorPrint(error);
+            play();
         }
 
-        OutputView.totalWinning();
-        OutputView.numMatchPrint(lottoResult);
-        OutputView.profitRatePrint(lottoResult);
     }
 
 
