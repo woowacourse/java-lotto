@@ -24,7 +24,7 @@ public class LottoController {
         }
     }
 
-    public static void drawResult() {
+    private static void drawResult() {
         LottoView.displayResultMessage();
         countEachRank();
         countByRank.forEach((rank, rankCount) ->

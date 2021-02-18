@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class LottoView {
-
     private static final Scanner SCANNER = new Scanner(System.in);
     private static final String INPUT_MONEY_MESSAGE = "구입금액을 입력해주세요";
     private static final String LOTTO_COUNT_MESSAGE = "개를 구매했습니다.";
@@ -16,6 +15,8 @@ public class LottoView {
     private static final String BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String RESULT_TITLE_MESSAGE = "\n당첨 통계\n----------";
     private static final String CHANGE_LINE = "\n";
+    private static final String AMOUNT = "개";
+    private static final String EARNING_RATE_MESSAGE = "총 수익률은 %s입니다.";
 
     public static String requestMoney() {
         System.out.println(INPUT_MONEY_MESSAGE);

@@ -15,7 +15,6 @@ public class WinningLottoTest {
         assertThat(WinningLotto.howManyWins(generatedLotto)).isEqualTo(4);
     }
 
-
     @Test
     void 몇등에_당첨인지_확인() {
         WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6", "7");

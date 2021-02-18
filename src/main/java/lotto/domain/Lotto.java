@@ -8,7 +8,10 @@ public class Lotto {
     private static final String NUMBER_COUNT_ERROR = "[ERROR] 6개의 숫자를 입력해주세요";
     private static final String NUMBER_DUPLICATE_ERROR = "[ERROR] 숫자는 중복될 수 없습니다";
     private static final String NUMBER_RANGE_ERROR = "[ERROR] 1 ~ 45 사이의 숫자를 입력해주세요";
-    ArrayList<Integer> lottoNumbers;
+    private static final int MAXIMUM_NUMBER = 45;
+    private static final int MINIMUM_NUMBER = 1;
+    private static final int LOTTO_NUMBER_LIMIT = 6;
+    private final ArrayList<Integer> lottoNumbers;
 
     public Lotto(ArrayList<Integer> nums) {
         validateCount(nums);
@@ -22,7 +25,7 @@ public class Lotto {
     }
 
     private void validateCount(ArrayList<Integer> nums) {
-        if (nums.size() != 6)
+        if (nums.size() != LOTTO_NUMBER_LIMIT)
             throw new IllegalArgumentException(NUMBER_COUNT_ERROR);
     }
 
@@ -39,7 +42,7 @@ public class Lotto {
     }
 
     private void validateNumRange(int number) {
-        if (number < 1 || number > 45)
+        if (number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER)
             throw new IllegalArgumentException(NUMBER_RANGE_ERROR);
     }
 

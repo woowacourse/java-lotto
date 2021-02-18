@@ -22,7 +22,7 @@ public class WinningLotto {
     }
 
     private List<Integer> changeToList(String numberInput) {
-        List<Integer> winningNumbers = Arrays.stream(numberInput.split(DELIMITER, -1))
+        List<Integer> winningNumbers = Arrays.stream(numberInput.split(DELIMITER))
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
@@ -31,7 +31,7 @@ public class WinningLotto {
 
     private ArrayList<Integer> generateWinningLotto(String numberInput) {
         List<Integer> winningNumbers = changeToList(numberInput);
-        ArrayList<Integer> winningNums = new ArrayList<Integer>();
+        ArrayList<Integer> winningNums = new ArrayList<>();
         winningNums.addAll(winningNumbers);
         return winningNums;
     }
@@ -42,5 +42,4 @@ public class WinningLotto {
         Rank rank = Rank.makeRankByMatch(match, bonusMatch);
         return rank;
     }
-
 }

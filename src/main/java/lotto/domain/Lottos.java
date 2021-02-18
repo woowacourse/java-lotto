@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class Lottos {
-
     private static Money money;
     private static int count;
-    ArrayList<Lotto> lottoGroup = new ArrayList<>();
+    private final ArrayList<Lotto> lottoGroup = new ArrayList<>();
 
     public Lottos(String input) {
         money = new Money(input);
