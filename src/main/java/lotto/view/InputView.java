@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 import lotto.domain.lotto.LottoLine;
 import lotto.domain.lotto.LottoNumber;
-import lotto.view.messages.InputViewMessages;
+import lotto.view.messages.InputMessages;
 
 public class InputView {
 
@@ -13,7 +13,7 @@ public class InputView {
 
     public static int getMoney() {
         try {
-            System.out.println(InputViewMessages.REQUEST_PURCHASE_MONEY.getMessage());
+            System.out.println(InputMessages.REQUEST_PURCHASE_MONEY.getMessage());
             return Integer.parseInt(scanner.nextLine());
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -23,7 +23,7 @@ public class InputView {
 
     public static LottoLine getLottoLine() {
         try {
-            System.out.println(InputViewMessages.REQUEST_LAST_WIN_LOTTO_NUMBERS.getMessage());
+            System.out.println(InputMessages.REQUEST_LAST_WIN_LOTTO_NUMBERS.getMessage());
             String inputValue = scanner.nextLine();
             List<LottoNumber> lottoNumbers = parseLottoNumber(inputValue);
             return new LottoLine(lottoNumbers);
@@ -44,7 +44,7 @@ public class InputView {
 
     public static LottoNumber getBonusLottoNumber() {
         try {
-            System.out.println(InputViewMessages.REQUEST_LAST_WIN_BONUS_BALL.getMessage());
+            System.out.println(InputMessages.REQUEST_LAST_WIN_BONUS_BALL.getMessage());
             int inputValue = Integer.parseInt(scanner.nextLine());
             return new LottoNumber(inputValue);
         } catch (Exception e) {
