@@ -7,7 +7,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoTickets {
-
+    private static final int TICKET_SIZE = 8;
+    private static final int INITIAL_HIT_COUNT = 0;
     private final List<LottoTicket> lottoTickets;
 
     public LottoTickets() {
@@ -19,7 +20,7 @@ public class LottoTickets {
     }
 
     public List<Integer> checkHitCount(LottoTicket winningTicket, LottoNumber bonusBall) {
-        List<Integer> winningCount = new ArrayList<>(Collections.nCopies(8, 0));
+        List<Integer> winningCount = new ArrayList<>(Collections.nCopies(TICKET_SIZE, INITIAL_HIT_COUNT));
         for (LottoTicket lottoTicket : lottoTickets) {
             int hitCount = lottoTicket.compareNumbers(winningTicket, bonusBall);
             winningCount.set(hitCount, winningCount.get(hitCount) + 1);
