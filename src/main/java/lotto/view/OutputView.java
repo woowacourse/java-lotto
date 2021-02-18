@@ -6,10 +6,13 @@ import java.util.stream.Collectors;
 
 public class OutputView {
 
-    public static final String LOTTO_FORMAT = "[%s]" + System.lineSeparator();
+    public static final String LOTTO_PURCHASE_FORM = "%d개를 구매했습니다." + System.lineSeparator();
     public static final String LOTTO_DELIMITER = ", ";
-    public static final String RANK_FORMAT = "%d개 일치 (%d원)- %d개";
-    public static final String PROFIT_FORM = "총 수익률은 %f2 입니다.";
+    public static final String LOTTO_FORM = "[%s]" + System.lineSeparator();
+    public static final String PROFIT_FORM = "총 수익률은 %.2f 입니다." + System.lineSeparator();
+    public static final String RANK_FORM = "%d개 일치 (%d원)- %d개" + System.lineSeparator();
+    public static final String RANK_BONUS_FORM = "%d개 일치, 보너스 볼 일치(%d원)- %d개" + System.lineSeparator();
+
 
     public static void printMessage(final Object message) {
         System.out.println(message);
@@ -20,23 +23,25 @@ public class OutputView {
     }
 
     public static void printError(Exception e) {
-        printMessage(e.getMessage());
+        printMessage(System.lineSeparator() + e.getMessage() + System.lineSeparator());
     }
 
     public static void printEachLotto(final Lottos lottos) {
+        printMessageByFormat(LOTTO_PURCHASE_FORM, lottos.lottos().size());
         lottos.lottos().forEach(OutputView::printOneLotto);
+        System.out.println();
     }
 
     private static void printOneLotto(Lotto lotto) {
         String joinLottoNumber = lotto.lotto().stream()
                 .map(LottoNumber::toString)
                 .collect(Collectors.joining(LOTTO_DELIMITER));
-        printMessageByFormat(LOTTO_FORMAT, joinLottoNumber);
+        printMessageByFormat(LOTTO_FORM, joinLottoNumber);
     }
 
 
     public static void printLottoGameResult(final LottoGameResult lottoGameResult) {
-        printMessage("당첨 통계");
+        printMessage(System.lineSeparator() + "당첨 통계");
         printMessage("--------");
         printRankResult(lottoGameResult);
         printMessageByFormat(PROFIT_FORM, lottoGameResult.calculateProfit());
@@ -47,7 +52,7 @@ public class OutputView {
                 .entrySet()
                 .stream()
                 .filter(entry -> entry.getKey() != Rank.NOTHING)
-                .forEach(entry -> printMessageByFormat(RANK_FORMAT,
+                .forEach(entry -> printMessageByFormat(RANK_FORM,
                         entry.getKey().getCountOfMatch(),
                         entry.getKey().getReward(),
                         entry.getValue()));
