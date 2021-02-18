@@ -10,7 +10,27 @@ public class TicketValidation {
     public static final String ERROR_MESSAGE_INVALID_SIZE = "숫자는 6개여야 합니다.";
     public static final String ERROR_MESSAGE_INVALID_RANGE = "숫자는 1부터 45사이여야 합니다.";
 
-    public static void validateDuplicated(List<Integer> value) {
+    public static Integer validateNumber(String number) {
+        try {
+            return Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_INVALID_INPUT);
+        }
+    }
+
+    public static void validateNumberInRange(int number) {
+        if (number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_INVALID_RANGE);
+        }
+    }
+
+    public static void validateSize(List<Number> value) {
+        if (value.size() != NUMBER_COUNT_IN_LOTTO) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_INVALID_SIZE);
+        }
+    }
+
+    public static void validateDuplicated(List<Number> value) {
         boolean duplicated = value.stream()
                 .distinct()
                 .count() != value.size();
@@ -20,23 +40,9 @@ public class TicketValidation {
         }
     }
 
-    public static Integer validateNumber(String number) {
-        try {
-            return Integer.parseInt(number);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_INVALID_INPUT);
-        }
-    }
-
-    public static void validateSize(List<Integer> value) {
-        if (value.size() != NUMBER_COUNT_IN_LOTTO) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_INVALID_SIZE);
-        }
-    }
-
-    public static void validateNumberInRange(int number) {
-        if (number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_INVALID_RANGE);
+    public static void validateSameNumber(Number number, WinnerTicket winnerTicket) {
+        if (winnerTicket.isSameNumber(number)) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_DUPLICATED);
         }
     }
 }

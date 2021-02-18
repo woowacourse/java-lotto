@@ -24,13 +24,18 @@ public class Tickets {
         List<Ranking> result = new ArrayList<>();
         for (Ticket ticket : tickets) {
             int matchCount = winnerTicket.findMatchCount(ticket);
-            boolean bonus = false;
-            if (matchCount == SECOND_MATCH_COUNT) {
-                bonus = ticket.hasContainBonus(bonusBall);
-            }
+            boolean bonus = isBonus(bonusBall, ticket, matchCount);
             result.add(Ranking.makePrice(matchCount, bonus));
         }
         return result;
+    }
+
+    private boolean isBonus(BonusBall bonusBall, Ticket ticket, int matchCount) {
+        boolean bonus = false;
+        if (matchCount == SECOND_MATCH_COUNT) {
+            bonus = ticket.hasContainBonus(bonusBall);
+        }
+        return bonus;
     }
 
     public List<Ticket> getTickets() {

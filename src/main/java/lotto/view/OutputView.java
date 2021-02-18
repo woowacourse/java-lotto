@@ -59,16 +59,16 @@ public class OutputView {
         Map<Ranking, Integer> result = statistics.getStatistics();
         List<Ranking> rankings = Arrays.asList(Ranking.values());
         Collections.reverse(rankings);
-        for(Ranking ranking : rankings){
+        for (Ranking ranking : rankings) {
             printEachRanking(result, ranking);
         }
     }
 
     private static void printEachRanking(Map<Ranking, Integer> result, Ranking ranking) {
-        if(ranking.equals(Ranking.NOTHING)){
+        if (ranking.equals(Ranking.NOTHING)) {
             return;
         }
-        if(ranking.equals(Ranking.SECOND)){
+        if (ranking.equals(Ranking.SECOND)) {
             System.out.printf(RANKING_SECOND_RESULT_FORMAT, ranking.getMatchCount(), ranking.getPrice(), result.get(ranking));
             return;
         }

@@ -8,12 +8,12 @@ import java.util.Objects;
 public class PrizeMoney {
     private int prizeMoney;
 
-    public PrizeMoney(Statistics statistics){
+    public PrizeMoney(Statistics statistics) {
         this.prizeMoney = totalPrize(statistics);
     }
 
     private int totalPrize(Statistics statistics) {
-        for(Ranking ranking : Ranking.values()) {
+        for (Ranking ranking : Ranking.values()) {
             prizeMoney += ranking.calculatePrize(statistics.findRankingCount(ranking));
         }
         return prizeMoney;

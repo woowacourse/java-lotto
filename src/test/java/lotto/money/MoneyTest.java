@@ -20,7 +20,7 @@ public class MoneyTest {
     @DisplayName("숫자가 아닌 경우 예외")
     void moneyNotNumber() {
         assertThatThrownBy(() ->
-            new Money("*1223"))
+                new Money("*1223"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ERROR_MESSAGE_INVALID_INPUT);
     }
@@ -28,7 +28,7 @@ public class MoneyTest {
     @Test
     @DisplayName("최소 구입 금액 확인")
     void minimumAmount() {
-        assertThatThrownBy(()->
+        assertThatThrownBy(() ->
                 new Money("900")
         ).isInstanceOf(IllegalArgumentException.class).hasMessageContaining(ERROR_MESSAGE_MINIMUM_MONEY);
     }
@@ -36,7 +36,7 @@ public class MoneyTest {
     @Test
     @DisplayName("음수인 경우 예외")
     void negativeAmount() {
-        assertThatThrownBy(()->
+        assertThatThrownBy(() ->
                 new Money("-1")
         ).isInstanceOf(IllegalArgumentException.class).hasMessageContaining(ERROR_MESSAGE_MINIMUM_MONEY);
     }

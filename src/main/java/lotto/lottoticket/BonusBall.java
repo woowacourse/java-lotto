@@ -2,30 +2,25 @@ package lotto.lottoticket;
 
 import java.util.Objects;
 
-import static lotto.lottoticket.TicketValidation.ERROR_MESSAGE_DUPLICATED;
-
 public class BonusBall {
-    private final int bonusBall;
+    private final Number bonusBall;
 
-    public BonusBall(String value, WinnerTicket winnerTicket){
-        int number = TicketValidation.validateNumber(value);
-        TicketValidation.validateNumberInRange(number);
-        if(winnerTicket.isSameNumber(number)){
-            throw new IllegalArgumentException(ERROR_MESSAGE_DUPLICATED);
-        }
+    public BonusBall(String value, WinnerTicket winnerTicket) {
+        Number number = new Number(value);
+        TicketValidation.validateSameNumber(number, winnerTicket);
         this.bonusBall = number;
     }
 
-    public boolean isSameThan(int number) {
-        return this.bonusBall == number;
+    public boolean isSameThan(Number number) {
+        return bonusBall.equals(number);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        BonusBall bonusBall1 = (BonusBall) o;
-        return Objects.equals(bonusBall, bonusBall1.bonusBall);
+        BonusBall ball = (BonusBall) o;
+        return Objects.equals(bonusBall, ball.bonusBall);
     }
 
     @Override

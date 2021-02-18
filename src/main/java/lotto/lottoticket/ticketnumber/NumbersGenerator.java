@@ -1,8 +1,10 @@
 package lotto.lottoticket.ticketnumber;
 
+import lotto.lottoticket.Number;
+
 import java.util.List;
 
 public interface NumbersGenerator {
-    List<Integer> generate();
+    List<Number> generate();
 }
 

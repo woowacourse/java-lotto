@@ -9,29 +9,56 @@ import static lotto.lottogame.LottoCount.ONE_COUNT;
 import static lotto.lottogame.LottoCount.ZERO;
 
 public class Ticket {
-    private final List<Integer> numbers;
+    private final List<Number> numbers;
 
     public Ticket(NumbersGenerator numbersGenerator) {
         this.numbers = validate(numbersGenerator.generate());
     }
 
-    private List<Integer> validate(List<Integer> values) {
+    public Ticket(List<Number> numbers) {
+        this.numbers = validate(numbers);
+    }
+
+    private List<Number> validate(List<Number> values) {
         TicketValidation.validateSize(values);
-        for (Integer number : values) {
-            TicketValidation.validateNumberInRange(number);
-        }
         TicketValidation.validateDuplicated(values);
         return values;
     }
 
-    public int hasSameNumber(Integer number) {
-        if(numbers.contains(number)){
+    public int hasSameNumber(Number number) {
+        if (numbers.contains(number)) {
             return ONE_COUNT;
         }
         return ZERO;
     }
 
-    public List<Integer> getTicket() {
+    public boolean hasContainBonus(BonusBall bonusBall) {
+        for (Number number : numbers) {
+            if (bonusBall.isSameThan(number)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean contains(Number value) {
+        for (Number number : numbers) {
+            if (number.equals(value)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int hasSameNumberCount(Ticket winnerTicket) {
+        int matchCount = 0;
+        for (Number number : numbers) {
+            matchCount += winnerTicket.hasSameNumber(number);
+        }
+        return matchCount;
+    }
+
+    public List<Number> getTicket() {
         return numbers;
     }
 
@@ -46,14 +73,5 @@ public class Ticket {
     @Override
     public int hashCode() {
         return Objects.hash(numbers);
-    }
-
-    public boolean hasContainBonus(BonusBall bonusBall) {
-        for(Integer number : numbers) {
-            if(bonusBall.isSameThan(number)){
-                return true;
-            }
-        }
-        return false;
     }
 }

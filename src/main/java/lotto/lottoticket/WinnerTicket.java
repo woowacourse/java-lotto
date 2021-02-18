@@ -1,39 +1,31 @@
 package lotto.lottoticket;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class WinnerTicket {
-    private final List<Integer> winnerTicket;
+    private final Ticket winnerTicket;
 
-    public WinnerTicket(String numbers){
+    public WinnerTicket(String numbers) {
         this.winnerTicket = splitNumbers(numbers);
     }
 
-    private List<Integer> splitNumbers(String values){
-        List<Integer> numbers = new ArrayList<>();
-        for (String value : values.split(",")){
-            value = value.replace(" ", "");
-            int number = TicketValidation.validateNumber(value);
-            TicketValidation.validateNumberInRange(number);
-            numbers.add(number);
-        }
-        TicketValidation.validateSize(numbers);
-        TicketValidation.validateDuplicated(numbers);
-        return numbers;
+    private Ticket splitNumbers(String values) {
+        List<Number> numbers = Stream.of(values.split(","))
+                .map(s -> s.replaceAll(" ", ""))
+                .map(Number::new)
+                .collect(Collectors.toList());
+        return new Ticket((numbers));
     }
 
-    public boolean isSameNumber(int number) {
-        return this.winnerTicket.contains(number);
+    public boolean isSameNumber(Number number) {
+        return winnerTicket.contains(number);
     }
 
     public int findMatchCount(Ticket ticket) {
-        int matchCount = 0;
-        for(Integer number : winnerTicket){
-            matchCount += ticket.hasSameNumber(number);
-        }
-        return matchCount;
+        return ticket.hasSameNumberCount(winnerTicket);
     }
 
     @Override
