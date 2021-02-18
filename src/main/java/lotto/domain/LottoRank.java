@@ -11,8 +11,8 @@ public enum LottoRank {
     FIFTH_PLACE(new Integer(3), 5000),
     SIXTH_PLACE(new Integer(0), 0);
 
-    private int matches;
-    private int reward;
+    private final int matches;
+    private final int reward;
 
     LottoRank(int matches, int reward) {
         this.matches = matches;
