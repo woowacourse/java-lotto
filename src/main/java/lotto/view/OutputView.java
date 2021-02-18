@@ -36,7 +36,7 @@ public class OutputView {
     }
 
     private static void printOneLotto(Lotto lotto) {
-        String joinLottoNumber = lotto.lotto().stream()
+        String joinLottoNumber = lotto.toList().stream()
                 .map(LottoNumber::toString)
                 .collect(Collectors.joining(LOTTO_DELIMITER));
         printMessageByFormat(LOTTO_FORM, joinLottoNumber);

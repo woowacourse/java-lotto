@@ -1,25 +1,26 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
     public static final int LOTTO_NUMBER_SIZE = 6;
-    private final List<LottoNumber> lottoNumbers = new ArrayList<>();
-
-    public Lotto() {
-    }
+    private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         validateNumberSize(lottoNumbers);
         validateDuplicate(lottoNumbers);
-        this.lottoNumbers.addAll(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
     }
 
-    public List<LottoNumber> lotto() {
+//    public Lotto(List<Integer> numbers) {
+//        this(numbers.stream()
+//                .map(LottoNumber::new)
+//                .collect(Collectors.toList()));
+//    }
+
+    public List<LottoNumber> toList() {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
@@ -40,12 +41,10 @@ public class Lotto {
     }
 
     private void validateDuplicate(List<LottoNumber> lottoNumbers) {
-        int numberAfterDistinct = (int) lottoNumbers.stream()
-                .mapToInt(LottoNumber::getNumber)
-                .distinct()
-                .count();
-        if (numberAfterDistinct != LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException("중복된 번호가 있습니다.");
+        Set<LottoNumber> lottoNumberSet = new HashSet<>(lottoNumbers);
+
+        if (lottoNumberSet.size() != lottoNumbers.size()) {
+            throw new IllegalArgumentException("중복된 번호가 존재합니다.");
         }
     }
 
