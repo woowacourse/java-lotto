@@ -7,6 +7,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoTickets;
 import lotto.domain.Payment;
 import lotto.domain.WinningLotto;
+import lotto.utils.ParseUtils;
 import lotto.view.OutputView;
 import lotto.view.Screen;
 
@@ -19,10 +20,10 @@ public class LottoController {
     private final Payment payment;
 
     public LottoController(final String value) {
-        this.payment = new Payment(Integer.parseInt(value));
+        payment = new Payment(ParseUtils.parseInt(value));
         lottoTickets = new LottoTickets(payment.count());
         showLottoTickets();
-        this.winningLotto = createWinningLotto();
+        winningLotto = createWinningLotto();
     }
 
     public void run() {
@@ -35,7 +36,7 @@ public class LottoController {
             .mapToInt(Integer::parseInt)
             .boxed()
             .collect(Collectors.toList());
-        int bonusNumber = Integer.parseInt(Screen.getBonusBallNumber());
+        int bonusNumber = ParseUtils.parseInt(Screen.getBonusBallNumber());
         return new WinningLotto(numbers, bonusNumber);
     }
 
