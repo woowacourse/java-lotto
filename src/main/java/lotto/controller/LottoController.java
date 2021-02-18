@@ -24,33 +24,48 @@ public class LottoController {
 
     public void play() {
         try {
-            OutputView.inputMoney();
-            Money money = inputView.inputMoney();
-            LottoStore lottoStore = new LottoStore();
-            Lottos purchasedLottos = lottoStore.buyLottos(money);
-            OutputView.numPurchasedLotto(purchasedLottos.getNumLotto());
-            OutputView.lottosPrint(purchasedLottos);
-
-            List<Integer> winningNumbers = createWinningNumbers();
-            Integer bonusNumber = createBonusNUmber();
-
-            WinningLotto winningLotto = WinningLotto.generatedBy(Lotto.generatedBy(winningNumbers),
-                LottoNumber.valueOf(bonusNumber));
-
-            LottoResult lottoResult = new LottoResult();
-
-            for (Lotto lotto : purchasedLottos.getLottos()) {
-                lottoResult.add(lotto, winningLotto);
-            }
-
-            OutputView.totalWinning();
-            OutputView.numMatchPrint(lottoResult);
-            OutputView.profitRatePrint(lottoResult);
+            Lottos purchasedLottos = createLottos();
+            WinningLotto winningLotto = createWinningLotto();
+            compareLotto(purchasedLottos, winningLotto);
         } catch (Exception error) {
             OutputView.errorPrint(error);
             play();
         }
+    }
 
+    private WinningLotto createWinningLotto() {
+        List<Integer> winningNumbers = createWinningNumbers();
+        Integer bonusNumber = createBonusNUmber();
+        return WinningLotto.generatedBy(Lotto.generatedBy(winningNumbers),
+            LottoNumber.valueOf(bonusNumber));
+    }
+
+    private void compareLotto(Lottos purchasedLottos, WinningLotto winningLotto) {
+        LottoResult lottoResult = new LottoResult();
+        for (Lotto lotto : purchasedLottos.getLottos()) {
+            lottoResult.add(lotto, winningLotto);
+        }
+
+        OutputView.totalWinning();
+        OutputView.numMatchPrint(lottoResult);
+        OutputView.profitRatePrint(lottoResult);
+    }
+
+    private Lottos createLottos() {
+        Money money = startMoney();
+        LottoStore lottoStore = new LottoStore();
+        Lottos purchasedLottos = lottoStore.buyLottos(money);
+
+        OutputView.numPurchasedLotto(purchasedLottos.getNumLotto());
+        OutputView.lottosPrint(purchasedLottos);
+
+        return purchasedLottos;
+
+    }
+
+    private Money startMoney() {
+        OutputView.inputMoney();
+        return inputView.inputMoney();
     }
 
 
