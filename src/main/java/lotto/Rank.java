@@ -6,26 +6,32 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public enum Rank {
-    FIRST(6,  2_000_000_000),
-    SECOND(6,  30_000_000),
-    THIRD(5,  1_500_000),
-    FOURTH(4,  50_000),
-    FIFTH(3,  5_000),
-    NOTHING(0,  0);
+    FIRST(6,  2_000_000_000L),
+    SECOND(6,  30_000_000L),
+    THIRD(5,  1_500_000L),
+    FOURTH(4,  50_000L),
+    FIFTH(3,  5_000L),
+    NOTHING(0,  0L);
 
     private final int matchCount;
-    private final int reward;
+    private final long reward;
 
-    Rank(int matchCount, int reward) {
+    Rank(int matchCount, long reward) {
         this.matchCount = matchCount;
         this.reward = reward;
     }
 
-    public static Map<Rank, Long> match(Lottos lottos, WinningLotto winningLotto) {
+    public long getReward() {
+        return reward;
+    }
+
+    public static LottoStatisticResult match(Lottos lottos, WinningLotto winningLotto) {
         List<Lotto> lottoGroup = lottos.getLottos();
 
-        return lottoGroup.stream()
+        Map<Rank, Long> rankCount =  lottoGroup.stream()
                          .collect(Collectors.groupingBy(winningLotto::match, Collectors.counting()));
+
+        return new LottoStatisticResult(rankCount);
     }
 
     public static Rank getRankByMatchCount(long matchCount, boolean requiredBonus) {

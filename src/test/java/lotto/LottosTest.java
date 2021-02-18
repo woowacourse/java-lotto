@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottosTest {
@@ -24,5 +25,4 @@ public class LottosTest {
         // then
         assertThatCode(throwingCallable).doesNotThrowAnyException();
     }
-
 }
