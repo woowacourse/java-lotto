@@ -4,6 +4,7 @@ import static lotto.utils.Config.PRICE_EACH_LOTTO;
 
 import java.util.Arrays;
 import java.util.List;
+
 import lotto.domain.Rank;
 
 public class LottoResult {
@@ -21,7 +22,7 @@ public class LottoResult {
 
     public float calculateProfitRate() {
         float totalWinMoney = Arrays.stream(Rank.values())
-            .mapToInt(rank -> findNumberOfRank(rank) * rank.getMoney()).sum();
+                .mapToInt(rank -> findNumberOfRank(rank) * rank.getMoney()).sum();
         return totalWinMoney / getPurchaseTotalMoney();
     }
 

@@ -8,8 +8,8 @@ public class Money {
         if (!isNumeric(moneyInput)) {
             throw new IllegalArgumentException();
         }
-        int money = Integer.parseInt(moneyInput);
 
+        int money = Integer.parseInt(moneyInput);
         if (money < 0) {
             throw new IllegalArgumentException();
         }

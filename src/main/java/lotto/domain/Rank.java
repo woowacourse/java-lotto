@@ -13,24 +13,24 @@ public enum Rank {
     private int matchCount;
     private int money;
 
-    Rank(int matchCount, int money){
+    Rank(int matchCount, int money) {
         this.matchCount = matchCount;
         this.money = money;
     }
 
-    public static Rank check(int matchCount, boolean hasBonusNumber){
+    public static Rank check(int matchCount, boolean hasBonusNumber) {
         return Arrays.stream(Rank.values())
-            .filter(rank -> rank.isSameMatchCount(matchCount))
-            .filter(rank -> !rank.equals(SECOND) || hasBonusNumber)
-            .findFirst()
-            .orElse(NO_MATCH);
+                .filter(rank -> rank.isSameMatchCount(matchCount))
+                .filter(rank -> !rank.equals(SECOND) || hasBonusNumber)
+                .findFirst()
+                .orElse(NO_MATCH);
     }
 
-    private boolean isSameMatchCount(int matchCount){
+    private boolean isSameMatchCount(int matchCount) {
         return this.matchCount == matchCount;
     }
 
-    public int getMoney(){
+    public int getMoney() {
         return money;
     }
 

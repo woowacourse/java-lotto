@@ -4,6 +4,7 @@ import static lotto.utils.Config.END;
 import static lotto.utils.Config.START;
 
 import java.util.Objects;
+
 import lotto.utils.Validation;
 import lotto.view.ErrorMessages;
 
@@ -29,7 +30,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private void validateLottoNumberRange(int lottoNumber) {
         if (lottoNumber < START || lottoNumber > END) {
             throw new IllegalArgumentException(
-                ErrorMessages.ERROR_LOTTO_NUMBER_OUT_OF_BOUND.getMessage());
+                    ErrorMessages.ERROR_LOTTO_NUMBER_OUT_OF_BOUND.getMessage());
         }
     }
 

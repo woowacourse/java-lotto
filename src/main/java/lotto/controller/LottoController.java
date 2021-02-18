@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import java.util.List;
+
 import lotto.domain.Money;
 import lotto.domain.Rank;
 import lotto.domain.lotto.LottoLine;
@@ -18,7 +19,7 @@ public class LottoController {
             LottoTicket lottoTicket = getLottoTicket();
             OutputView.printLottoTicket(lottoTicket);
             LottoResult lottoResult = checkLottoTicket(lottoTicket, new LottoLine(InputView.getLottoLine()),
-                new LottoNumber(InputView.getBonusLottoNumber()));
+                    new LottoNumber(InputView.getBonusLottoNumber()));
             OutputView.printResult(lottoResult);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -31,9 +32,9 @@ public class LottoController {
     }
 
     private LottoResult checkLottoTicket(LottoTicket lottoTicket, LottoLine winLottoLine,
-        LottoNumber bonusBallNumber) {
+                                         LottoNumber bonusBallNumber) {
         List<Rank> rankList = lottoTicket
-            .matchLottoLines(winLottoLine.getValues(), bonusBallNumber);
+                .matchLottoLines(winLottoLine.getValues(), bonusBallNumber);
         return new LottoResult(rankList);
     }
 
