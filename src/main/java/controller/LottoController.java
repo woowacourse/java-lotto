@@ -1,8 +1,6 @@
 package controller;
 
-import domain.LottoPurchase;
-import domain.LottoTickets;
-import domain.Money;
+import domain.*;
 import view.InputView;
 import view.OutputView;
 
@@ -14,6 +12,20 @@ public class LottoController {
         Money budget = createBudgetMoney();
         LottoTickets lottoTickets = LottoPurchase.buy(budget);
         outputView.printLottoTicket(lottoTickets);
+        outputView.newLine();
+        WinningNumber winningNumber = createWinningNumber();
+        outputView.newLine();
+    }
+
+    private WinningNumber createWinningNumber() {
+        try {
+            LottoTicket winningNumbers = LottoTicket.valueOf(inputView.scanWinningNumber());
+            LottoNumber bonusBall = new LottoNumber(inputView.scanBonusBall());
+            return new WinningNumber(winningNumbers, bonusBall);
+        } catch (RuntimeException e) {
+            outputView.printError(e);
+            return createWinningNumber();
+        }
     }
 
     private Money createBudgetMoney() {

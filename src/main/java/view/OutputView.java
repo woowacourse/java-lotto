@@ -32,4 +32,8 @@ public class OutputView {
             System.out.println(LEFT_BRACKET + numbers + RIGHT_BRACKET);
         }
     }
+
+    public void newLine() {
+        System.out.println();
+    }
 }
