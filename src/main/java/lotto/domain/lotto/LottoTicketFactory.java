@@ -1,5 +1,7 @@
 package lotto.domain.lotto;
 
+import static lotto.utils.Config.PRICE_EACH_LOTTO;
+
 import java.util.ArrayList;
 import lotto.view.ErrorMessages;
 

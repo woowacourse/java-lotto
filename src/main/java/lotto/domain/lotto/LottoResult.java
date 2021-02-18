@@ -1,5 +1,7 @@
 package lotto.domain.lotto;
 
+import static lotto.utils.Config.PRICE_EACH_LOTTO;
+
 import java.util.Arrays;
 import java.util.List;
 import lotto.domain.Rank;
@@ -17,9 +19,13 @@ public class LottoResult {
         return (int) count;
     }
 
-    public float calculateProfitRate(int totalPurchaseMoney) {
+    public float calculateProfitRate() {
         float totalWinMoney = Arrays.stream(Rank.values())
             .mapToInt(rank -> findNumberOfRank(rank) * rank.getMoney()).sum();
-        return totalWinMoney / totalPurchaseMoney;
+        return totalWinMoney / getPurchaseTotalMoney();
+    }
+
+    private int getPurchaseTotalMoney() {
+        return rankList.size() * PRICE_EACH_LOTTO;
     }
 }

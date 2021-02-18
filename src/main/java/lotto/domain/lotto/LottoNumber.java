@@ -1,5 +1,8 @@
 package lotto.domain.lotto;
 
+import static lotto.utils.Config.END;
+import static lotto.utils.Config.START;
+
 import java.util.Objects;
 import lotto.utils.Validation;
 import lotto.view.ErrorMessages;
