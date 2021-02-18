@@ -8,6 +8,7 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoController {
     private static final int EXIST = 1;
@@ -66,7 +67,12 @@ public class LottoController {
     }
 
     private Set<String> splitWinningNumbers(String winningNumbers) {
-        return new HashSet<>(Arrays.asList(winningNumbers.split(SEPARATOR)));
+        return new HashSet<>(
+                Arrays.asList(winningNumbers.split(SEPARATOR))
+                .stream()
+                .map(String::trim)
+                .collect(Collectors.toList())
+        );
     }
 
     private LottoNumber makeBonusNumber(LottoTicket winningTicket) {
