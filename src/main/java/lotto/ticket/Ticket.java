@@ -2,6 +2,8 @@ package lotto.ticket;
 
 import lotto.ticket.strategy.NumbersGenerator;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,11 +14,11 @@ public class Ticket {
     private final List<Number> numbers;
 
     public Ticket(NumbersGenerator numbersGenerator) {
-        this.numbers = validate(numbersGenerator.generate());
+        this.numbers = new ArrayList<>(validate(numbersGenerator.generate()));
     }
 
     public Ticket(List<Number> numbers) {
-        this.numbers = validate(numbers);
+        this.numbers = new ArrayList<>(validate(numbers));
     }
 
     private List<Number> validate(List<Number> values) {
@@ -59,7 +61,7 @@ public class Ticket {
     }
 
     public List<Number> getTicket() {
-        return numbers;
+        return Collections.unmodifiableList(numbers);
     }
 
     @Override

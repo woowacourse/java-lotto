@@ -5,6 +5,7 @@ import lotto.ticket.strategy.NumbersGenerator;
 import lotto.ranking.Ranking;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Tickets {
@@ -39,6 +40,6 @@ public class Tickets {
     }
 
     public List<Ticket> getTickets() {
-        return this.tickets;
+        return Collections.unmodifiableList(this.tickets);
     }
 }

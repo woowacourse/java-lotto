@@ -1,5 +1,6 @@
 package lotto.ranking;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +34,6 @@ public class Statistics {
     }
 
     public Map<Ranking, Integer> getStatistics() {
-        return statistics;
+        return Collections.unmodifiableMap(statistics);
     }
 }

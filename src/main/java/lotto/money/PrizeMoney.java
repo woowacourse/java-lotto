@@ -6,17 +6,18 @@ import lotto.ranking.Statistics;
 import java.util.Objects;
 
 public class PrizeMoney {
-    private int prizeMoney;
+    private final int prizeMoney;
 
     public PrizeMoney(Statistics statistics) {
         this.prizeMoney = totalPrize(statistics);
     }
 
     private int totalPrize(Statistics statistics) {
+        int prize = 0;
         for (Ranking ranking : Ranking.values()) {
-            prizeMoney += ranking.calculatePrize(statistics.findRankingCount(ranking));
+            prize += ranking.calculatePrize(statistics.findRankingCount(ranking));
         }
-        return prizeMoney;
+        return prize;
     }
 
     public String calculateProfit(Money money) {
