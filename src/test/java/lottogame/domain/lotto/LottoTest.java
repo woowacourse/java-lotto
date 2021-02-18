@@ -10,7 +10,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoTest {
+class LottoTest {
     private Lotto lotto;
 
     @BeforeEach

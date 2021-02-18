@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class WinningLottoTest {
+class WinningLottoTest {
     @Test
     void 객체_생성() {
         WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6", "7");

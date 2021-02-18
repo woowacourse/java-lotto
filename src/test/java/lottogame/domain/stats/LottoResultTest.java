@@ -11,10 +11,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class LottoResultTest {
-    WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6", "7");
-    Lottos lottos;
-    List<Integer> values;
+class LottoResultTest {
+    private WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6", "7");
+    private Lottos lottos;
+    private List<Integer> values;
 
     @Test
     void testCase1() {

@@ -7,7 +7,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoGeneratorTest {
+class LottoGeneratorTest {
     @BeforeEach
     void setUp() {
         LottoGenerator.generate();

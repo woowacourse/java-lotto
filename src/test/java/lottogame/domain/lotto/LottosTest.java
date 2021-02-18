@@ -7,7 +7,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottosTest {
+class LottosTest {
     @Test
     void 객체_생성() {
         LottoGenerator.generate();
