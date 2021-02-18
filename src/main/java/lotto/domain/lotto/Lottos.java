@@ -1,8 +1,8 @@
 package lotto.domain.lotto;
 
 import java.util.List;
-import lotto.model.LottoResult;
 import lotto.domain.WinningLotto;
+import lotto.model.LottoResult;
 
 public class Lottos {
 

@@ -1,8 +1,6 @@
 package lotto.model;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -23,7 +21,7 @@ public class LottoResult {
             int num = result.get(lottoRank);
             result.put(lottoRank, num + 1);
         }
-        totalPurchaseAmount+=1000;
+        totalPurchaseAmount += 1000;
     }
 
     public Map<LottoRank, Integer> getResult() {
