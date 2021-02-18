@@ -16,7 +16,7 @@ public class Money {
         }
     }
 
-    public int getAffordableLottoPieces(int lottoPrice) {
+    public int getAffordableLottoTickets(int lottoPrice) {
         return money / lottoPrice;
     }
 }

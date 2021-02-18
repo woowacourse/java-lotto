@@ -24,7 +24,7 @@ public class LottoStore {
 
     public Lottos buyLotto() {
         Money money = new Money(InputView.inputMoney());
-        Lottos purchasedLottos = new Lottos(calculateAffordableLottoPieces(money));
+        Lottos purchasedLottos = new Lottos(calculateAffordableLottoTickets(money));
         OutputView.printPurchasedLottos(purchasedLottos);
         return purchasedLottos;
     }
@@ -34,18 +34,18 @@ public class LottoStore {
         OutputView.printLottoStatistics(lottoResultStatistics, profitRate);
     }
 
-    public double calculateProfitRate(Map<LottoRank, Integer> exampleLottosResult, int lottoPiece) {
+    public double calculateProfitRate(Map<LottoRank, Integer> exampleLottosResult, int lottoTicket) {
         double sum = 0;
         for (Entry<LottoRank, Integer> keyValue : exampleLottosResult.entrySet()) {
             sum += keyValue.getKey().getPrizeMoney() * keyValue.getValue();
         }
-        double investCapital = lottoPiece * LOTTO_PRICE;
+        double investCapital = lottoTicket * LOTTO_PRICE;
         double rawProfitRate = sum / investCapital;
         return Math.round(rawProfitRate * 100) / 100.00;
     }
 
-    public int calculateAffordableLottoPieces(Money money) {
-        return money.getAffordableLottoPieces(LOTTO_PRICE);
+    public int calculateAffordableLottoTickets(Money money) {
+        return money.getAffordableLottoTickets(LOTTO_PRICE);
     }
 
 }

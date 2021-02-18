@@ -6,7 +6,6 @@ import java.util.List;
 
 public class Lotto {
 
-
     public static final int LOTTO_POSSESSION_NUMBER = 6;
     public static final double BONUS_MATCHING_COUNT = 5.5;
     private final List<Integer> numbers;
@@ -28,7 +27,7 @@ public class Lotto {
 
     private double getMatchingCount(List<Integer> winningNumbers, int bonusNumber) {
         List<Integer> integratedWinningNumbers =
-            getIntegratedWinningNumbers(winningNumbers, bonusNumber);
+                getIntegratedWinningNumbers(winningNumbers, bonusNumber);
         int count = getCount(integratedWinningNumbers);
 
         if (isSecondRank(count, bonusNumber)) {
@@ -39,7 +38,7 @@ public class Lotto {
     }
 
     private List<Integer> getIntegratedWinningNumbers(List<Integer> winningNumbers,
-        int bonusNumber) {
+                                                      int bonusNumber) {
         List<Integer> integratedWinningNumbers = new ArrayList<>(winningNumbers);
         integratedWinningNumbers.add(bonusNumber);
         return integratedWinningNumbers;
@@ -47,8 +46,8 @@ public class Lotto {
 
     private int getCount(List<Integer> integratedWinningNumbers) {
         return (int) numbers.stream()
-            .filter(integratedWinningNumbers::contains)
-            .count();
+                .filter(integratedWinningNumbers::contains)
+                .count();
     }
 
     private boolean isSecondRank(int count, int bonusNumber) {

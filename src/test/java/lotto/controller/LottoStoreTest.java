@@ -34,10 +34,10 @@ public class LottoStoreTest {
     @ParameterizedTest
     @DisplayName("구입가능한 로또 매수 계산")
     @CsvSource(value = {"14000,14", "10200,10", "500,0"})
-    void calculateAffordableLottoPiecesTest(int money, int expectedLottoPieces) {
+    void calculateAffordableLottoTicketsTest(int money, int expectedLottoTickets) {
         LottoStore lottoStore = new LottoStore();
-        int calculatedLottoPieces = lottoStore.calculateAffordableLottoPieces(new Money(money));
-        assertThat(calculatedLottoPieces).isEqualTo(expectedLottoPieces);
+        int calculatedLottoTickets = lottoStore.calculateAffordableLottoTickets(new Money(money));
+        assertThat(calculatedLottoTickets).isEqualTo(expectedLottoTickets);
     }
 
     @ParameterizedTest
