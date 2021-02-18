@@ -64,4 +64,11 @@ public class OutputView {
         System.out.println();
     }
 
+    public static void printRestart() {
+        System.out.println();
+        System.out.println("-----");
+        System.out.println("프로그램을 다시 시작합니다.");
+        System.out.println("-----");
+    }
+
 }
