@@ -29,9 +29,9 @@ public class LottoTicket {
         }
     }
 
-    public int getMatchCounts(LottoTicket winningTicket) {
+    public int getMatchCounts(LottoTicket lottoTicket) {
         return (int) lottoNumbers.stream()
-                .filter(winningTicket::contains)
+                .filter(lottoTicket::contains)
                 .count();
     }
 

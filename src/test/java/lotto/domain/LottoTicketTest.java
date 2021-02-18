@@ -7,9 +7,8 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.*;
-
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -46,7 +45,7 @@ class LottoTicketTest {
         List<LottoNumber> lottoNumbers = lottoTicket.getLottoNumbers();
 
         assertThat(lottoNumbers).contains(LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3),
-                LottoNumber.from(4),LottoNumber.from(5), LottoNumber.from(6));
+                LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6));
     }
 
     @DisplayName("로또 티켓과 당첨 번호를 비교하여 일치하는 개수를 반환한다.")
