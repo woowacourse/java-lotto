@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class LottoTicketFactory {
     public static final int MIN_LOTTO_NUMBER = 1;
@@ -15,9 +16,8 @@ public class LottoTicketFactory {
 
     public LottoTicketFactory() {
         this.lottoNumberRange = new ArrayList<>();
-        for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
-            this.lottoNumberRange.add(new LottoNumber(Integer.toString(i)));
-        }
+        IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
+                .forEach(number -> lottoNumberRange.add(new LottoNumber(Integer.toString(number))));
     }
 
     public List<LottoTicket> buyLottoTickets(Money money) {
