@@ -1,10 +1,8 @@
 package lotto.domain.lotto;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class WinningLotto {
 
+    public static final String DUPLICATION_BONUS_BALL_ERROR = "중복된 보너스 볼 값입니다.";
     private final Lotto lotto;
     private final LottoNumber bonus;
 
@@ -24,7 +22,7 @@ public class WinningLotto {
 
     private static void validateBonus(Lotto lotto, LottoNumber bonus) {
         if (lotto.getNumbers().contains(bonus)) {
-            throw new IllegalArgumentException("중복된 보너스 볼 값입니다.");
+            throw new IllegalArgumentException(DUPLICATION_BONUS_BALL_ERROR);
         }
     }
 

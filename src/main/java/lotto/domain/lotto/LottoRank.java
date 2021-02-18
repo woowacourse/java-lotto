@@ -13,6 +13,7 @@ public enum LottoRank {
     FIRST(6, 2_000_000_000),
     ;
 
+    public static final String INVALID_VALUE_ERROR_MESSAGE = "잘못된 값입니다.";
     private final int numMatch;
     private final int winningMoney;
 
@@ -26,7 +27,7 @@ public enum LottoRank {
             return SECOND;
         }
         return Arrays.stream(values()).filter(value -> value.numMatch == numMatch).findFirst()
-            .orElseThrow(() -> new IllegalArgumentException("잘못된 값입니다."));
+            .orElseThrow(() -> new IllegalArgumentException(INVALID_VALUE_ERROR_MESSAGE));
     }
 
     public int getWinningMoney() {

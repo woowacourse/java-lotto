@@ -7,6 +7,7 @@ public class LottoNumber {
     public static final int MAX_LOTTO_LIMIT = 45;
     public static final int MIN_LOTTO_LIMIT = 1;
     public static final int NUM_LOTTO_LIMIT = 6;
+    public static final String LOTTO_RANGE_ERROR_MESSAGE = "로또 범위 내의 값을 입력하여 주세요.";
     private final int value;
 
     private LottoNumber(int value) {
@@ -21,7 +22,7 @@ public class LottoNumber {
     private static void validateLottoNumber(int value) {
         if (value < MIN_LOTTO_LIMIT || value > MAX_LOTTO_LIMIT) {
             throw new IllegalArgumentException(
-                "로또 범위 내의 값을 입력하여 주세요.");
+                LOTTO_RANGE_ERROR_MESSAGE);
         }
     }
 

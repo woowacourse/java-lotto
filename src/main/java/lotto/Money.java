@@ -1,6 +1,9 @@
 package lotto;
 
 public class Money {
+
+    public static final String POSITIVE_ERROR_MESSAGE = "음수는 불가능합니다.";
+    public static final String SPACE_ERROR_MESSAGE = "공백은 불가능합니다.";
     private int price;
 
     public Money(String price) {
@@ -10,8 +13,8 @@ public class Money {
     }
 
     private void validPositive(String price) {
-        if (Integer.parseInt(price)<0){
-            throw new IllegalArgumentException("Positive Error");
+        if (Integer.parseInt(price) < 0) {
+            throw new IllegalArgumentException(POSITIVE_ERROR_MESSAGE);
         }
     }
 
@@ -19,7 +22,7 @@ public class Money {
         try {
             Integer.parseInt(price);
         } catch (Exception error) {
-            throw new IllegalArgumentException("Space Error");
+            throw new IllegalArgumentException(SPACE_ERROR_MESSAGE);
         }
     }
 
