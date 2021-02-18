@@ -17,9 +17,9 @@ public class OutputView {
     private static final String INFORM_RESULT_AND_BONUS_MSG_FORMAT = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
     private static final String INFORM_RESULT_MSG_FORMAT = "%d개 일치(%d원) - %d개";
     private static final String INFORM_PROFIT_RATIO_MSG_FORMAT = "총 수익률은 %d%%입니다.";
-    public static final String COMMA = ",";
-    public static final String TICKET_PREFIX = "[";
-    public static final String TICKET_SUFFIX = "]";
+    private static final String COMMA = ",";
+    private static final String TICKET_PREFIX = "[";
+    private static final String TICKET_SUFFIX = "]";
 
     public void printTicketsSize(int size) {
         System.out.printf(INFORM_SIZE_MSG, size);
