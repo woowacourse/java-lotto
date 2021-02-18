@@ -8,18 +8,39 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MAX_NUMBER_OF_LOTTO = 45;
     private final int number;
 
-    public LottoNumber(int number) {
+    public LottoNumber(String number) {
+        validateLottoNumber(number);
+        this.number = Integer.parseInt(number);
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    private void validateLottoNumber(String number) {
         validateNumber(number);
-        this.number = number;
+        validateEmpty(number);
+        validateNumberBound(number);
     }
 
-    private int getNumber() {
-        return this.number;
+    private void validateNumber(String number) {
+        try {
+            Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("숫자만 입력 가능합니다.");
+        }
     }
 
-    private void validateNumber(int number) {
-        if (number < MIN_NUMBER_OF_LOTTO || number > MAX_NUMBER_OF_LOTTO) {
-            throw new IllegalArgumentException();
+    private void validateEmpty(String number) {
+        if (number.isEmpty()) {
+            throw new IllegalArgumentException("빈 값은 입력할 수 없습니다.");
+        }
+    }
+
+    private void validateNumberBound(String number) {
+        if (Integer.parseInt(number) < MIN_NUMBER_OF_LOTTO
+                || Integer.parseInt(number) > MAX_NUMBER_OF_LOTTO) {
+            throw new IllegalArgumentException("1~45 사이의 정수만 입력 가능합니다.");
         }
     }
 
