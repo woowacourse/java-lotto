@@ -29,7 +29,7 @@ public class LottoController {
         OutputView.printWinningStats(new LottoStatistics(ratingInfo), ticket.getPrice());
     }
 
-    public Ticket buyLotto() {
+    private Ticket buyLotto() {
         try {
             return tryBuyLotto();
         } catch (IllegalArgumentException e) {
@@ -38,13 +38,13 @@ public class LottoController {
         }
     }
 
-    public Ticket tryBuyLotto() {
+    private Ticket tryBuyLotto() {
         OutputView.getMessage(INPUT_MONEY_MESSAGE);
         int money = InputView.getInt();
         return new Ticket(new Money(money));
     }
 
-    public WinningLotto buyWinningLotto() {
+    private WinningLotto buyWinningLotto() {
         try {
             return tryBuyWinningLotto();
         } catch (IllegalArgumentException e) {
@@ -53,7 +53,7 @@ public class LottoController {
         }
     }
 
-    public WinningLotto tryBuyWinningLotto() {
+    private WinningLotto tryBuyWinningLotto() {
         Lotto lotto = new Lotto(InputView.getWinningNumbers());
         OutputView.getMessage(INPUT_BONUS_BALL_MESSAGE);
         LottoNumber bonusNumber = new LottoNumber(InputView.getInt());
