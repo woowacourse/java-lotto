@@ -5,6 +5,8 @@ import java.util.regex.Pattern;
 import lotto.utils.CustomException;
 
 public class LottoNumber {
+    public static final int MINIMUM_NUMBER = 1;
+    public static final int MAXIMUM_NUMBER = 45;
     private static final String IS_NUMBER = "\\d+";
 
     private final int number;
@@ -32,7 +34,7 @@ public class LottoNumber {
     }
 
     private void validateNumberRange(int number) {
-        if (number < 1 || 45 < number) {
+        if (number < MINIMUM_NUMBER || MAXIMUM_NUMBER < number) {
             throw new CustomException("로또 넘버는 1~45 사이 정수이어야 합니다.");
         }
     }

@@ -8,8 +8,6 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 
 public class RandomLottoGenerator implements LottoGenerator {
-    public static final int MAXIMUM_BOUND = 45;
-
     private final Random random = new Random();
 
     @Override
@@ -22,7 +20,7 @@ public class RandomLottoGenerator implements LottoGenerator {
     }
 
     private LottoNumber getRandomLottoNumber() {
-        return new LottoNumber(random.nextInt(MAXIMUM_BOUND) + 1);
+        return new LottoNumber(random.nextInt(LottoNumber.MAXIMUM_NUMBER) + 1);
     }
 
 }
