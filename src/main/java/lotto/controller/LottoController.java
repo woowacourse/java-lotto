@@ -44,6 +44,7 @@ public class LottoController {
 
         OutputView.totalWinning();
         OutputView.numMatchPrint(lottoResult);
+        OutputView.profitRatePrint(lottoResult);
     }
 
 

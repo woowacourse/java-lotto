@@ -73,4 +73,9 @@ public class OutputView {
             , entrySet.getKey().getWinningMoney()
             , entrySet.getValue()));
     }
+
+    public static void profitRatePrint(LottoResult lottoResult) {
+        final String profitRateMessageSkeleton = "총 수익률은 %.2f 입니다.";
+        System.out.println(String.format(profitRateMessageSkeleton, lottoResult.getProfitRate()));
+    }
 }
