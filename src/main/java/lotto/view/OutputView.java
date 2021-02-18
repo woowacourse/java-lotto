@@ -22,6 +22,11 @@ public class OutputView {
 
     public static void printAllTickets(LottoTickets lottoTickets) {
         lottoTickets.toList().forEach(OutputView::printTicket);
+        printNewLine();
+    }
+
+    public static void printNewLine() {
+        System.out.println();
     }
 
     public static void printBonusNumber() {
@@ -33,6 +38,7 @@ public class OutputView {
     }
 
     public static void printTotalWinningResult(float profit, String winningResult) {
+        printNewLine();
         System.out.println("당첨 통계");
         printSplitLine();
         printProfit(profit);

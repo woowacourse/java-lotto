@@ -44,7 +44,6 @@ public enum WinningResult {
             WinningResult winningResult = getWinningResult(index);
             stringBuilder.append(winningResult.message + " (" + winningResult.winnings + ")원 - " +
                     hitCounts.get(index) + "개" + System.lineSeparator());
-
         });
         return stringBuilder.toString();
     }
