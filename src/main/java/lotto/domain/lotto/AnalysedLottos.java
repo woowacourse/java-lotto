@@ -20,13 +20,14 @@ public class AnalysedLottos {
 
     public AnalysedLottos(Map<RankFactory, Long> gameResult, PayOut payOut) {
         this.ranks = Arrays.stream(RankFactory.values())
-            .map(key -> RankFactory.createRanking(key, gameResult.getOrDefault(key, 0L)))
-            .sorted(comparingInt(Rank::getRank))
-            .collect(toList());
+                .filter(rank -> !rank.equals(RankFactory.FAIL))
+                .map(key -> RankFactory.createRanking(key, gameResult.getOrDefault(key, 0L)))
+                .sorted(comparingInt(Rank::getRank))
+                .collect(toList());
 
         this.yield = ranks.stream()
-            .mapToDouble(r -> r.getWinnings() * r.getCount())
-            .sum() / payOut.toInt();
+                .mapToDouble(r -> r.getWinnings() * r.getCount())
+                .sum() / payOut.toInt();
     }
 
     public List<Rank> getRankings() {

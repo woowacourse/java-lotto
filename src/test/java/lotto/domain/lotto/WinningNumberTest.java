@@ -91,6 +91,6 @@ public class WinningNumberTest {
 
         List<Long> actual = result.getRankings().stream().map(Rank::getCount).collect(toList());
 
-        assertThat(expected).isEqualTo(actual);
+        assertThat(actual).isEqualTo(expected);
     }
 }

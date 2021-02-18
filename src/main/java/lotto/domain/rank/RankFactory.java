@@ -26,7 +26,7 @@ public enum RankFactory {
     }
 
     public boolean isSameRank(int rank) {
-        return this.equals(rank);
+        return this.rank == rank;
     }
 
     public static Rank createRanking(RankFactory rank, Long count) {
