@@ -2,15 +2,14 @@ package lotto.controller;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import lotto.Money;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.LottoResult;
-import lotto.domain.lotto.Lottos;
 import lotto.domain.lotto.LottoStore;
+import lotto.domain.lotto.Lottos;
 import lotto.domain.lotto.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -38,10 +37,12 @@ public class LottoController {
             LottoNumber.valueOf(bonusNumber));
 
         LottoResult lottoResult = new LottoResult();
-        // 결과 체크
-        for(Lotto lotto:purchasedLottos.getLottos()){
+
+        for (Lotto lotto : purchasedLottos.getLottos()) {
             lottoResult.add(lotto, winningLotto);
         }
+        System.out.println(lottoResult.getResult());
+        System.out.println(lottoResult.getProfitRate());
     }
 
 

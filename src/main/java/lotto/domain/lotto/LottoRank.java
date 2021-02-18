@@ -29,4 +29,8 @@ public enum LottoRank {
         return Arrays.stream(values()).filter(value -> value.numMatch == numMatch).findFirst()
             .orElseThrow(() -> new IllegalArgumentException("잘못된 값입니다."));
     }
+
+    public int getWinningMoney() {
+        return winningMoney;
+    }
 }

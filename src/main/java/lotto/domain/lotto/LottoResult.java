@@ -1,7 +1,5 @@
 package lotto.domain.lotto;
 
-import static lotto.domain.lotto.LottoRank.checkRank;
-
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.Map;
@@ -31,5 +29,21 @@ public class LottoResult {
         return LottoRank.checkRank(count, bonus);
     }
 
+    public double getProfitRate() {
+        return Math.floor((double) winningPrice() / purchasePrice() * 100) / 100;
+//        System.out.println(Math.floor((double)5000/(double)14000 * 100)/100);
+    }
+
+    private Long purchasePrice() {
+        long numLotto = rank.values().stream().reduce(0, Integer::sum);
+        return numLotto * 1000;
+    }
+
+    private Long winningPrice() {
+        return rank.entrySet()
+            .stream()
+            .mapToLong(entrySet -> (long) entrySet.getKey().getWinningMoney() * entrySet.getValue())
+            .sum();
+    }
 
 }
