@@ -1,9 +1,12 @@
 package lotto.domain.lotto;
 
+import static lotto.domain.lotto.utils.LottoAttributes.LOTTO_LINE_PRICE;
 import static lotto.view.messages.ErrorMessages.LOTTO_PURCHASE_PRICE_ERROR;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import lotto.domain.lotto.utils.Rank;
 
 public class LottoTicket {
@@ -12,29 +15,28 @@ public class LottoTicket {
     private final List<LottoLine> lottoLines;
 
     public LottoTicket(int money) {
-        int lottoLineCount = money / 1000;
+        int lottoLineCount = money / LOTTO_LINE_PRICE;
         if (money < 0 || lottoLineCount <= 0) {
             throw new IllegalArgumentException(LOTTO_PURCHASE_PRICE_ERROR.getMessage());
         }
-        List<LottoLine> lottoLines = new ArrayList<>();
-        for (int i = 0; i < lottoLineCount; i++) {
-            lottoLines.add(randomLottoGenerator.createLottoLine());
-        }
-        this.lottoLines = lottoLines;
+        this.lottoLines = makeLottoLines(lottoLineCount);
     }
 
-    public List<Rank> matchLottoLines(List<LottoNumber> answerLottoNumbers,
-        LottoNumber bonusNumber) {
-        List<Rank> ranks = new ArrayList<>();
-        for (LottoLine lottoLine : lottoLines) {
-            ranks.add(lottoLine
-                .matchLottoNumbers(lottoLine.getValues(), bonusNumber, answerLottoNumbers));
+    private List<LottoLine> makeLottoLines(int count) {
+        List<LottoLine> lottoLines = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            lottoLines.add(randomLottoGenerator.createLottoLine());
         }
-        return ranks;
+        return lottoLines;
+    }
+
+    public List<Rank> checkLottoLines(LottoLine answerLottoLine, LottoNumber bonusNumber) {
+        return lottoLines.stream().map(it -> it.checkLottoLine(answerLottoLine, bonusNumber))
+            .collect(Collectors.toList());
     }
 
     public List<LottoLine> getLottoLines() {
-        return lottoLines;
+        return Collections.unmodifiableList(lottoLines);
     }
 
     public int getLottoLineSize() {

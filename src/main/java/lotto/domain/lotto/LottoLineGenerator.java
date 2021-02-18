@@ -20,7 +20,6 @@ public class LottoLineGenerator {
     public LottoLine createLottoLine() {
         Collections.shuffle(lottoNumbers);
         List<LottoNumber> picked = lottoNumbers.subList(0, 6);
-        Collections.sort(picked);
         return new LottoLine(picked);
     }
 

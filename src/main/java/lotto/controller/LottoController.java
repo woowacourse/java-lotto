@@ -17,7 +17,7 @@ public class LottoController {
 
         LottoLine winningLottoLine = InputView.getLottoLine();
         LottoNumber bonusLottoNumber = InputView.getBonusLottoNumber();
-        List<Rank> ranks = lottoTicket.matchLottoLines(winningLottoLine.getValues(), bonusLottoNumber);
+        List<Rank> ranks = lottoTicket.checkLottoLines(winningLottoLine, bonusLottoNumber);
         OutputView.printLottoResult(new LottoResult(ranks));
     }
 

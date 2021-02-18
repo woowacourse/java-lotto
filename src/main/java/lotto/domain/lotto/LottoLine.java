@@ -1,5 +1,6 @@
 package lotto.domain.lotto;
 
+import static lotto.domain.lotto.utils.LottoAttributes.LOTTO_NUMBER_COUNT;
 import static lotto.view.messages.ErrorMessages.LOTTO_LINE_NUMBER_COUNT_DUPLICATE_ERROR;
 
 import java.util.ArrayList;
@@ -11,26 +12,30 @@ import lotto.domain.lotto.utils.Rank;
 
 public class LottoLine {
 
-    private final Set<LottoNumber> value;
+    private final List<LottoNumber> lottoNumbers;
 
     public LottoLine(List<LottoNumber> lottoNumbers) {
         Set<LottoNumber> set = new HashSet<>(lottoNumbers);
-        if (set.size() != 6) {
+        if (set.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(LOTTO_LINE_NUMBER_COUNT_DUPLICATE_ERROR.getMessage());
         }
-        value = set;
+        this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
-    public Rank matchLottoNumbers(List<LottoNumber> lottoNumbers, LottoNumber bonusNumber,
-        List<LottoNumber> answerLottoNumbers) {
-        int matchCount = (int) lottoNumbers.stream().filter(answerLottoNumbers::contains).count();
-        boolean hasBonusNumber = answerLottoNumbers.contains(bonusNumber);
+    public Rank checkLottoLine(LottoLine answerLottoLine, LottoNumber bonusNumber) {
+        int matchCount = (int) getMatchCount(answerLottoLine);
+        boolean hasBonusNumber = lottoNumbers.contains(bonusNumber);
         return Rank.check(matchCount, hasBonusNumber);
     }
 
-    public List<LottoNumber> getValues() {
-        return Collections.unmodifiableList(
-            new ArrayList<>(value));
+    private long getMatchCount(LottoLine lottoLine) {
+        List<LottoNumber> lottoNumbers = lottoLine.getLottoNumbers();
+        return lottoNumbers.stream().filter(this.lottoNumbers::contains).count();
     }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return Collections.unmodifiableList(lottoNumbers);
+    }
+
 }
 

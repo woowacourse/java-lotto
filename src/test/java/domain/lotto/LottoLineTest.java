@@ -55,7 +55,10 @@ public class LottoLineTest {
         List<LottoNumber> answerLottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
             new LottoNumber(12), new LottoNumber(13), new LottoNumber(14));
 
+        LottoNumber bonusLottoNumber =  new LottoNumber(3);
+
         LottoLine lottoLine = new LottoLine(lottoNumbers);
-        assertThat(lottoLine.matchLottoNumbers(lottoNumbers, new LottoNumber(3), answerLottoNumbers)).isEqualTo(Rank.FIFTH);
+        assertThat(lottoLine.checkLottoLine(new LottoLine(answerLottoNumbers), bonusLottoNumber)).isEqualTo(Rank.FIFTH);
+
     }
 }
