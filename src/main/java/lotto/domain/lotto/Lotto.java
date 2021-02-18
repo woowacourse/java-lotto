@@ -3,7 +3,7 @@ package lotto.domain.lotto;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.domain.lotto.lottogenerator.LottoGenerator;
+import lotto.domain.lottogenerator.LottoGenerator;
 
 public class Lotto {
 
@@ -13,7 +13,7 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public static Lotto generatedBy(List<Integer> numbers) {
+    public static Lotto of(List<Integer> numbers) {
         List<LottoNumber> lottoNumbers = numbers.stream()
             .map(number -> LottoNumber.valueOf(number))
             .collect(Collectors.toList());
