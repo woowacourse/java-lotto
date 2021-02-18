@@ -21,7 +21,7 @@ public class Lotto {
                 .collect(Collectors.toList())));
     }
 
-    public static int calculateLottoNumber(Money money) {
+    public static long calculateLottoNumber(Money money) {
         return money.divide(PRICE);
     }
 

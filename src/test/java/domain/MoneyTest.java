@@ -39,10 +39,10 @@ class MoneyTest {
     @Test
     void divide() {
         //given
-        Money money = new Money(1_000);
+        Money money = new Money(1_000L);
 
         //when
-        int number = money.divide(1_000);
+        long number = money.divide(1_000L);
 
         //then
         assertThat(number).isEqualTo(1);
@@ -50,15 +50,43 @@ class MoneyTest {
 
     @DisplayName("구입금액을 0이나 음수로 나눈 값을 반환하는 기능")
     @ParameterizedTest
-    @ValueSource(ints = {
+    @ValueSource(longs = {
             0, -1, -2, -3
     })
-    void divide(int value) {
+    void divide(long value) {
         //given
         Money money = new Money(1_000);
 
         //when //then
         assertThatThrownBy(() -> money.divide(value))
                 .isExactlyInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("돈을 더하는 기능을 테스트한다")
+    @Test
+    void add() {
+        //given
+        Money firstMoney = new Money(1L);
+        Money secondMoney = new Money(2L);
+
+        //when
+        Money sumMoney = firstMoney.add(secondMoney);
+
+        //then
+        assertThat(sumMoney).isEqualTo(new Money(3L));
+    }
+
+    @DisplayName("돈을 곱하는 기능")
+    @Test
+    void multiply() {
+        //given
+        Money money = new Money(2L);
+        long multipliedNumber = 3L;
+
+        //when
+        Money result = money.multiply(multipliedNumber);
+
+        //then
+        assertThat(result).isEqualTo(new Money(6L));
     }
 }

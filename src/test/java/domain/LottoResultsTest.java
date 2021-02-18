@@ -24,4 +24,20 @@ class LottoResultsTest {
         //then
         assertThat(lottoResults).isNotNull();
     }
+
+    @DisplayName("총 당첨금액을 반환하는 기능")
+    @Test
+    void getTotalWinningMoney() {
+        //given
+        Map<LottoRank, Long> results = new HashMap<>();
+        results.put(LottoRank.FIRST, 1L);
+        results.put(LottoRank.SECOND, 4L);
+        LottoResults lottoResults = new LottoResults(results);
+
+        //when
+        Money totalMoney = lottoResults.getTotalWinningMoney();
+
+        //then
+        assertThat(totalMoney).isEqualTo(new Money(2_120_000_000));
+    }
 }

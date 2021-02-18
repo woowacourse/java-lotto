@@ -10,10 +10,10 @@ public enum LottoRank {
     FIFTH(3, 5_000),
     MISS(0, 0);
 
-    private final int correctCnt;
+    private final long correctCnt;
     private final Money prize;
 
-    LottoRank(int correctCnt, int prize) {
+    LottoRank(int correctCnt, long prize) {
         this.correctCnt = correctCnt;
         this.prize = new Money(prize);
     }
@@ -39,5 +39,9 @@ public enum LottoRank {
 
     private boolean matchCount(int countOfMatch) {
         return this.correctCnt == countOfMatch;
+    }
+
+    public Money getPrize() {
+        return prize;
     }
 }

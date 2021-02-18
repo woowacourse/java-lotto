@@ -10,4 +10,14 @@ public class LottoResults {
     public LottoResults(final Map<LottoRank, Long> results) {
         lottoResults = new HashMap<>(results);
     }
+
+    public Money getTotalWinningMoney() {
+        Money total = new Money(0);
+        for (LottoRank lottoRank : lottoResults.keySet()) {
+            Money money = lottoRank.getPrize().multiply(lottoResults.get(lottoRank));
+            total = total.add(money);
+        }
+
+        return total;
+    }
 }

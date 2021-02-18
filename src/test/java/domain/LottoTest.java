@@ -33,7 +33,7 @@ class LottoTest {
         Money money = new Money(1_000);
 
         //when
-        int lottoNumber = Lotto.calculateLottoNumber(money);
+        long lottoNumber = Lotto.calculateLottoNumber(money);
 
         //then
         assertThat(lottoNumber).isEqualTo(1);
