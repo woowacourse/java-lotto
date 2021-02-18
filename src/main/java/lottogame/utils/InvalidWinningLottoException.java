@@ -1,4 +1,4 @@
-package lotto.utils;
+package lottogame.utils;
 
 public class InvalidWinningLottoException extends RuntimeException {
     public InvalidWinningLottoException() {

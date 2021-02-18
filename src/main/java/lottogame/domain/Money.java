@@ -1,6 +1,6 @@
-package lotto.domain;
+package lottogame.domain;
 
-import lotto.utils.InvalidMoneyException;
+import lottogame.utils.InvalidMoneyException;
 
 import java.util.Objects;
 import java.util.regex.Pattern;

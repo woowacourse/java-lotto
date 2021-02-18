@@ -1,6 +1,6 @@
-package lotto.domain;
+package lottogame.domain;
 
-import lotto.utils.InvalidMoneyException;
+import lottogame.utils.InvalidMoneyException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -18,7 +18,7 @@ class MoneyTest {
     }
 
     @ParameterizedTest
-    @ValueSource (strings = {"4가", "-1000", "-기나"})
+    @ValueSource(strings = {"4가", "-1000", "-기나"})
     void 잘못된_금액_입력(String input) {
         assertThatThrownBy(() -> {
             new Money(input);

@@ -1,8 +1,8 @@
-package lotto.domain.lottoData;
+package lottogame.domain.lotto;
 
-import lotto.domain.Money;
-import lotto.domain.stats.LottoResult;
-import lotto.domain.stats.LottoResults;
+import lottogame.domain.Money;
+import lottogame.domain.stats.LottoResult;
+import lottogame.domain.stats.LottoResults;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -1,19 +1,19 @@
-package lotto.controller;
+package lottogame.controller;
 
-import lotto.View.InputView;
-import lotto.View.OutputView;
-import lotto.domain.lottoData.Lotto;
-import lotto.domain.lottoData.LottoGenerator;
-import lotto.domain.lottoData.Lottos;
-import lotto.domain.Money;
-import lotto.domain.lottoData.WinningLotto;
-import lotto.domain.stats.LottoResults;
+import lottogame.view.InputView;
+import lottogame.view.OutputView;
+import lottogame.domain.lotto.Lotto;
+import lottogame.domain.lotto.LottoGenerator;
+import lottogame.domain.lotto.Lottos;
+import lottogame.domain.Money;
+import lottogame.domain.lotto.WinningLotto;
+import lottogame.domain.stats.LottoResults;
 
 import java.util.List;
 
 public class GameController {
-    private static Money money;
-    private static Lottos lottos;
+    private Money money;
+    private Lottos lottos;
 
     public GameController() {
         LottoGenerator.generate();

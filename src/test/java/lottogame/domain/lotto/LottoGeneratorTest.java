@@ -1,4 +1,4 @@
-package lotto.domain.lottoData;
+package lottogame.domain.lotto;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

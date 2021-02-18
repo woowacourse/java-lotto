@@ -1,6 +1,6 @@
-package lotto.domain.lottoData;
+package lottogame.domain.lotto;
 
-import lotto.utils.RedundantNumbersException;
+import lottogame.utils.RedundantNumbersException;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

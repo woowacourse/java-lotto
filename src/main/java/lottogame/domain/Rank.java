@@ -1,4 +1,4 @@
-package lotto.domain;
+package lottogame.domain;
 
 import java.util.Arrays;
 
@@ -8,7 +8,7 @@ public enum Rank {
     THIRD(5, 1500000),
     SECOND(5, 30000000),
     FIRST(6, 2000000000),
-    NOT_FOUNT(0, 0);
+    NOT_FOUND(0, 0);
 
     private int count;
     private int money;
@@ -23,7 +23,7 @@ public enum Rank {
                 .filter(rank -> rank.isSameAs(count))
                 .filter(rank -> !rank.equals(THIRD) || !bonus)
                 .findFirst()
-                .orElse(NOT_FOUNT);
+                .orElse(NOT_FOUND);
 
     }
 
@@ -40,6 +40,6 @@ public enum Rank {
     }
 
     public boolean isNotFound() {
-        return this.equals(NOT_FOUNT);
+        return this.equals(NOT_FOUND);
     }
 }

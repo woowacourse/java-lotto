@@ -1,7 +1,7 @@
-package lotto.domain.lottoData;
+package lottogame.domain.lotto;
 
-import lotto.utils.InvalidWinningLottoException;
-import lotto.utils.RedundantNumbersException;
+import lottogame.utils.InvalidWinningLottoException;
+import lottogame.utils.RedundantNumbersException;
 
 import java.util.*;
 import java.util.regex.Pattern;

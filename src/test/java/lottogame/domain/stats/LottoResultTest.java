@@ -1,10 +1,10 @@
-package lotto.domain.stats;
+package lottogame.domain.stats;
 
-import lotto.View.OutputView;
-import lotto.domain.Money;
-import lotto.domain.lottoData.Lotto;
-import lotto.domain.lottoData.Lottos;
-import lotto.domain.lottoData.WinningLotto;
+import lottogame.view.OutputView;
+import lottogame.domain.Money;
+import lottogame.domain.lotto.Lotto;
+import lottogame.domain.lotto.Lottos;
+import lottogame.domain.lotto.WinningLotto;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

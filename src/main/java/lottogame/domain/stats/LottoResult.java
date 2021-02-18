@@ -1,6 +1,6 @@
-package lotto.domain.stats;
+package lottogame.domain.stats;
 
-import lotto.domain.Rank;
+import lottogame.domain.Rank;
 
 public class LottoResult {
     private Rank rank;

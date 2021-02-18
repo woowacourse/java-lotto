@@ -1,7 +1,7 @@
-package lotto.domain.stats;
+package lottogame.domain.stats;
 
-import lotto.domain.Money;
-import lotto.domain.Rank;
+import lottogame.domain.Money;
+import lottogame.domain.Rank;
 
 import java.util.*;
 
