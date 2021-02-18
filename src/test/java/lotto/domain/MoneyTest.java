@@ -7,7 +7,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class MoneyTest {
-
     @DisplayName("올바른 입력값 확인")
     @Test
     void is_number() {

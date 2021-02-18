@@ -3,7 +3,11 @@ package lotto.domain;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static lotto.domain.LottoNumberGenerator.MAXIMUM_CANDIDATE_NUMBER;
+import static lotto.domain.LottoNumberGenerator.MINIMUM_CANDIDATE_NUMBER;
+
 public class WinningLotto {
+    public static final int NORMAL_LOTTO_NUMBERS_LENGTH = 6;
     private static final String NON_NUMERIC_ERROR = "숫자만 입력 가능합니다.";
     private static final String NOT_SIX_NUMBERS_ERROR = "당첨 번호는 총 6개 이어야 합니다.";
     private static final String NUMBER_OUT_OF_BOUNDS_ERROR = "1 에서 45 사이의 숫자만 입력해주세요.";
@@ -55,20 +59,20 @@ public class WinningLotto {
     }
 
     private void validateSixNumbers(String[] numbers) {
-        if (numbers.length != 6) {
+        if (numbers.length != NORMAL_LOTTO_NUMBERS_LENGTH) {
             throw new IllegalArgumentException(NOT_SIX_NUMBERS_ERROR);
         }
     }
 
     private void validateNumberBetween1to45(String number) {
-        if (Integer.parseInt(number) < 1 && 45 < Integer.parseInt(number)) {
+        if (Integer.parseInt(number) < MINIMUM_CANDIDATE_NUMBER && MAXIMUM_CANDIDATE_NUMBER < Integer.parseInt(number)) {
             throw new IllegalArgumentException(NUMBER_OUT_OF_BOUNDS_ERROR);
         }
     }
 
     private void validateDuplicates(String[] numbers) {
         Set<String> numberGroup = new HashSet<>(Arrays.asList(numbers));
-        if (numberGroup.size() != 6) {
+        if (numberGroup.size() != NORMAL_LOTTO_NUMBERS_LENGTH) {
             throw new IllegalArgumentException(DUPLICATE_ERROR);
         }
     }

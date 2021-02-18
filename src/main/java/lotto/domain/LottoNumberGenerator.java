@@ -5,9 +5,10 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoNumberGenerator {
+    public static final int MINIMUM_CANDIDATE_NUMBER = 1;
+    public static final int MAXIMUM_CANDIDATE_NUMBER = 45;
     private static final int START_INDEX = 0;
     private static final int END_INDEX = 6;
-    private static final int MAXIMUM_CANDIDATE_NUMBER = 45;
 
     public LottoNumberGenerator() {
     }
@@ -23,7 +24,7 @@ public class LottoNumberGenerator {
 
     private List<Integer> createCandidates() {
         List<Integer> numbers = new ArrayList<>();
-        for (int i = 1; i <= MAXIMUM_CANDIDATE_NUMBER; i++) {
+        for (int i = MINIMUM_CANDIDATE_NUMBER; i <= MAXIMUM_CANDIDATE_NUMBER; i++) {
             numbers.add(i);
         }
         return numbers;

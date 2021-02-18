@@ -10,6 +10,9 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottosTest {
+    /*TODO:
+    *  생성자 관련 테스트 추가 (예외 처리)*/
+
     @DisplayName("가지고 있는 로또와 당첨번호를 비교해서 결과를 제대로 반환 하는지")
     @Test
     void testEntireLottoMatching() {
