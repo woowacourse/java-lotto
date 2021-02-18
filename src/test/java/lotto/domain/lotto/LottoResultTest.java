@@ -3,6 +3,7 @@ package lotto.domain.lotto;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
+import lotto.view.OutputView;
 import org.junit.jupiter.api.Test;
 
 public class LottoResultTest {
@@ -66,7 +67,12 @@ public class LottoResultTest {
 
     @Test
     void 수익률_내림_테스트() {
-//        return Math.round((double) winningPrice() / purchasePrice());
         System.out.println(Math.floor((double) 5000 / 14000 * 100) / 100);
+    }
+
+    @Test
+    void 출력_문구_테스트() {
+        LottoResult lottoResult = new LottoResult();
+        OutputView.numMatchPrint(lottoResult);
     }
 }

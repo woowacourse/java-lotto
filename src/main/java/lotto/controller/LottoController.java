@@ -41,8 +41,9 @@ public class LottoController {
         for (Lotto lotto : purchasedLottos.getLottos()) {
             lottoResult.add(lotto, winningLotto);
         }
-        System.out.println(lottoResult.getResult());
-        System.out.println(lottoResult.getProfitRate());
+
+        OutputView.totalWinning();
+        OutputView.numMatchPrint(lottoResult);
     }
 
 

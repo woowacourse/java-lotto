@@ -1,16 +1,17 @@
 package lotto.view;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
-import java.util.regex.Pattern;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
-import lotto.Money;
-import lotto.domain.lotto.Lottos;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.LottoRank;
+import lotto.domain.lotto.LottoResult;
+import lotto.domain.lotto.Lottos;
 
 public class OutputView {
+
+    private String messageSkeleton;
+    public static final String RESULT_MESSAGE_SKELETON = "%d개 일치%s(%d원) - %d개";
 
     public static void numPurchasedLotto(Integer numLotto) {
         System.out.println(numLotto + "개를 구매했습니다.");
@@ -35,5 +36,41 @@ public class OutputView {
 
     public static void inputBonus() {
         System.out.println("보너스 번호를 입력해 주세요.");
+    }
+
+    public static void totalWinning() {
+        System.out.println("당첨 통계");
+        System.out.println("---------");
+    }
+
+    public static void numMatchPrint(LottoResult lottoResult) {
+        for (Entry<LottoRank, Integer> entrySet : lottoResult.getRank().entrySet()) {
+            printResult(entrySet);
+        }
+
+    }
+
+    private static void printResult(Entry<LottoRank, Integer> entrySet) {
+
+        if (entrySet.getKey().getWinningMoney() == 0) {
+            return;
+        }
+        if (entrySet.getKey() == LottoRank.SECOND) {
+            bonusPrint(entrySet);
+            return;
+        }
+        System.out.println(String.format(RESULT_MESSAGE_SKELETON
+            , entrySet.getKey().getNumMatch()
+            , ""
+            , entrySet.getKey().getWinningMoney()
+            , entrySet.getValue()));
+    }
+
+    private static void bonusPrint(Entry<LottoRank, Integer> entrySet) {
+        System.out.println(String.format(RESULT_MESSAGE_SKELETON
+            , entrySet.getKey().getNumMatch()
+            , ", 보너스 볼 일치"
+            , entrySet.getKey().getWinningMoney()
+            , entrySet.getValue()));
     }
 }

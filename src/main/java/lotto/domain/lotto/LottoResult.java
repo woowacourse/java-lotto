@@ -46,4 +46,7 @@ public class LottoResult {
             .sum();
     }
 
+    public Map<LottoRank, Integer> getRank() {
+        return this.rank;
+    }
 }
