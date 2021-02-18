@@ -4,6 +4,13 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Statistics.java
+ * 당첨 통계(구입한 모든 로또 티켓에 대한 등수 통계) 클래스
+ *
+ * @author Kimun Kim, github.com/tributetothemoon
+ * @author Daeun Lee, github.com/da-nyee
+ */
 public class Statistics {
     private static final Integer ZERO = 0;
 

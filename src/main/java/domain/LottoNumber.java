@@ -2,6 +2,13 @@ package domain;
 
 import java.util.Objects;
 
+/**
+ * LottoNumber.java
+ * 로또 번호 1자리를 뜻하는 클래스
+ *
+ * @author Kimun Kim, github.com/tributetothemoon스
+ * @author Daeun Lee, github.com/da-nyee
+ */
 public class LottoNumber {
     private static final int MIN_NUMBER_RANGE = 1;
     private static final int MAX_NUMBER_RANGE = 45;

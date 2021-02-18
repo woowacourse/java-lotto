@@ -2,6 +2,13 @@ package domain;
 
 import java.util.Arrays;
 
+/**
+ * Rank.java
+ * 로또 등수를 정의한 enum 클래스
+ *
+ * @author Kimun Kim, github.com/tributetothemoon스
+ * @author Daeun Lee, github.com/da-nyee
+ */
 public enum Rank {
     FIRST(6, new Money("2000000000")),
     SECOND(5, new Money("30000000")),

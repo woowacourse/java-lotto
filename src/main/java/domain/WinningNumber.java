@@ -1,5 +1,12 @@
 package domain;
 
+/**
+ * WinningNumber.java
+ * 당첨 번호 클래스
+ *
+ * @author Kimun Kim, github.com/tributetothemoon
+ * @author Daeun Lee, github.com/da-nyee
+ */
 public class WinningNumber {
     private static final String ERROR_DUPLICATED_NUMBER = "[ERROR] 보너스 볼은 당첨 번호와 중복될 수 없습니다.";
 

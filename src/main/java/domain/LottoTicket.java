@@ -4,6 +4,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * LottoTicket.java
+ * 한 장의 로또 티켓 클래스
+ *
+ * @author Kimun Kim, github.com/tributetothemoon스
+ * @author Daeun Lee, github.com/da-nyee
+ */
 public class LottoTicket {
     private static final int TOTAL_LOTTO_NUMBER_COUNT = 6;
     private static final String ERROR_INVALID_DUPLICATION_NUMBER = "[ERROR] 로또 번호는 중복되어선 안됩니다.";
