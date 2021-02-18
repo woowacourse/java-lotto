@@ -1,25 +1,26 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
 
 public class LottoResultStatistics {
     private static final int EARNING_RATE = 100;
 
-    private Map<LottoRank, Integer> lottoResult;
+    private final Map<LottoRank, Integer> lottoResult;
 
-    private LottoResultStatistics(Map<LottoRank, Integer> lottoResult) {
+    private LottoResultStatistics(final Map<LottoRank, Integer> lottoResult) {
         this.lottoResult = lottoResult;
     }
 
     public static LottoResultStatistics calculateResultStatistics(
             final LottoTickets lottoTickets, final LottoWinner lottoWinner) {
         Map<LottoRank, Integer> lottoResult = setLottoResult();
-
-        for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
-            LottoRank rank = lottoTicket.getRank(lottoWinner);
-            lottoResult.put(rank, lottoResult.get(rank) + 1);
-        }
+        lottoTickets.getLottoTickets()
+                .forEach(lottoTicket -> {
+                    LottoRank rank = lottoTicket.getRank(lottoWinner);
+                    lottoResult.put(rank, lottoResult.get(rank) + 1);
+                });
         return new LottoResultStatistics(lottoResult);
     }
 
@@ -32,7 +33,7 @@ public class LottoResultStatistics {
         return lottoResult;
     }
 
-    public int calculateEarning(Money money) {
+    public int calculateEarning(final Money money) {
         int totalReward = 0;
 
         for (LottoRank lottoRank : LottoRank.values()) {
