@@ -4,33 +4,16 @@ import static lotto.utils.Config.END;
 import static lotto.utils.Config.START;
 
 import java.util.Objects;
-import lotto.utils.Validation;
-import lotto.view.ErrorMessages;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
     private final int value;
 
-    public LottoNumber(String number) {
-        if (!Validation.isNumeric(number)) {
-            throw new IllegalArgumentException();
+    public LottoNumber(int value) {
+        if (value < START || value > END) {
+            throw new IllegalArgumentException("[ERROR] 로또 번호는 1부터 45까지 숫자입니다.");
         }
-
-        int lottoNumber = Integer.parseInt(number);
-        validateLottoNumberRange(lottoNumber);
-        this.value = lottoNumber;
-    }
-
-    public LottoNumber(int lottoNumber) {
-        validateLottoNumberRange(lottoNumber);
-        this.value = lottoNumber;
-    }
-
-    private void validateLottoNumberRange(int lottoNumber) {
-        if (lottoNumber < START || lottoNumber > END) {
-            throw new IllegalArgumentException(
-                ErrorMessages.ERROR_LOTTO_NUMBER_OUT_OF_BOUND.getMessage());
-        }
+        this.value = value;
     }
 
     public int getValue() {
