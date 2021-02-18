@@ -1,55 +1,50 @@
 package lotto.controller;
 
-import static java.util.stream.Collectors.*;
-
-import java.util.List;
-import java.util.function.Function;
-import lotto.domain.machine.AutoLottoMachine;
-import lotto.domain.machine.LottoMachine;
 import lotto.domain.LottoResult;
+import lotto.domain.machine.LottoMachine;
 import lotto.domain.ticket.LottoTickets;
 import lotto.domain.ticket.WinningLottoTicket;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.List;
+import java.util.function.Function;
+
+import static java.util.stream.Collectors.*;
+
 public class LottoController {
     private final InputView inputView;
     private final OutputView outputView;
-    private LottoMachine lottoMachine;
+    private final LottoMachine lottoMachine;
 
-    public LottoController(InputView inputView, OutputView outputView) {
+    public LottoController(InputView inputView, OutputView outputView, LottoMachine lottoMachine) {
         this.inputView = inputView;
         this.outputView = outputView;
+        this.lottoMachine = lottoMachine;
     }
 
-    public void start() {
-        lottoMachine = new AutoLottoMachine();
+    public void start(){
+        LottoTickets lottoTickets = buyLottoTicket(inputView.takeLottoMoney());
 
-        int lottoPurchaseMoney = inputView.takeLottoMoney();
+        WinningLottoTicket winningLotto = createWinningLotto(inputView.inputWinningNumbers(), inputView.takeBonusNumber());
 
-        LottoTickets lottoTickets = buyLottoTicket(lottoPurchaseMoney);
+        LottoResult lottoResult = calculateLottoResult(lottoTickets, winningLotto);
 
-        WinningLottoTicket winningLottoTicket = createWinningLotto();
-
-        LottoResult lottoResult = calculateLottoResult(lottoTickets, winningLottoTicket);
-
-        outputView.printLottoResult(lottoResult, lottoPurchaseMoney);
+        outputView.printLottoResult(lottoResult);
     }
 
-    private LottoTickets buyLottoTicket(int lottoPurchaseMoney) {
+    public LottoTickets buyLottoTicket(int lottoPurchaseMoney) {
         LottoTickets lottoTickets = lottoMachine.createTicketsByMoney(lottoPurchaseMoney);
         outputView.printTicketsSize(lottoTickets.size());
         outputView.printAllLottoTickets(lottoTickets);
         return lottoTickets;
     }
 
-    private WinningLottoTicket createWinningLotto() {
-        List<Integer> winningNumbers = inputView.inputWinningNumbers();
-        int bonusNumber = inputView.takeBonusNumber();
+    public WinningLottoTicket createWinningLotto(List<Integer> winningNumbers, int bonusNumber) {
         return new WinningLottoTicket(winningNumbers, bonusNumber);
     }
 
-    private LottoResult calculateLottoResult(LottoTickets lottoTickets,
+    public LottoResult calculateLottoResult(LottoTickets lottoTickets,
         WinningLottoTicket winningLottoTicket) {
         return lottoTickets.list().stream()
             .map(winningLottoTicket::compareNumbers)
