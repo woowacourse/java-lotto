@@ -1,11 +1,12 @@
 package lotto.domain;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class WinningLotto {
     public static final int NORMAL_LOTTO_NUMBERS_LENGTH = 6;
-    public static final String NON_NUMERIC_ERROR = "숫자만 입력 가능합니다.";
     public static final String NOT_SIX_NUMBERS_ERROR = "당첨 번호는 총 6개 이어야 합니다.";
     public static final String DUPLICATE_ERROR = "중복되는 번호는 안됩니다.";
 
@@ -19,21 +20,6 @@ public class WinningLotto {
 
         validateDuplicatesWithWinningNumbers(bonusNumber);
         this.bonusNumber = bonusNumber;
-    }
-
-//    public WinningLotto(String[] winningNumbers, LottoNumber bonusNumber) {
-//        validateNumbers(winningNumbers);
-//        this.winningLottoNumbers = createWinningLotto(winningNumbers);
-//
-////        validateBonusNumber(bonusNumber);
-//        this.bonusNumber = bonusNumber;
-//    }
-
-    private List<LottoNumber> createWinningLotto(String[] numbers) {
-        return Arrays.stream(numbers)
-                .map(Integer::parseInt)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
     }
 
     private void validateSixNumbers(List<LottoNumber> numbers) {

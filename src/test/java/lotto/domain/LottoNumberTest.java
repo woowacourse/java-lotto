@@ -9,12 +9,6 @@ import java.util.List;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class LottoNumberTest {
-    @DisplayName("로또 번호가 1에서 45 사이인지 검증 하는지")
-    @Test
-    void LottoNumber_numberOutOfBounds_throwError() {
-        assertThatThrownBy(() -> new LottoNumber(49)).isInstanceOf(IllegalArgumentException.class);
-    }
-
     public static List<LottoNumber> createCustomLottoNumbers(String customNumbers) {
         String[] numbers = customNumbers.split(", ");
         List<LottoNumber> winningNumbers = Arrays.asList(
@@ -25,5 +19,11 @@ public class LottoNumberTest {
                 new LottoNumber(numbers[4]),
                 new LottoNumber(numbers[5]));
         return winningNumbers;
+    }
+
+    @DisplayName("로또 번호가 1에서 45 사이인지 검증 하는지")
+    @Test
+    void LottoNumber_numberOutOfBounds_throwError() {
+        assertThatThrownBy(() -> new LottoNumber(49)).isInstanceOf(IllegalArgumentException.class);
     }
 }
