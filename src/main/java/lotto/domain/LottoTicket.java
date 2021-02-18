@@ -8,8 +8,8 @@ import lotto.exception.LottoCustomException;
 public class LottoTicket {
 
     private static final int CHECK_HIT_COUNT_HAS_BONUS = 5;
-    private static final int BONUS = 6;
-    private static final int ALL_SAME = 7;
+    private static final int SECOND = 6;
+    private static final int FIRST = 7;
 
     private final Set<LottoNumber> lottoNumbers;
 
@@ -30,11 +30,11 @@ public class LottoTicket {
 
         if (hitLottoNumbers.size() == CHECK_HIT_COUNT_HAS_BONUS && lottoNumbers
             .contains(bonusBall)) {
-            return BONUS;
+            return SECOND;
         }
 
-        if (hitLottoNumbers.size() == ALL_SAME) {
-            return ALL_SAME;
+        if (hitLottoNumbers.size() == FIRST) {
+            return FIRST;
         }
         return hitLottoNumbers.size();
     }
