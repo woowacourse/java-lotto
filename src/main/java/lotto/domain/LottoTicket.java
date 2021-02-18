@@ -13,47 +13,51 @@ public class LottoTicket {
 
     private final List<LottoNumber> lottoNumbers;
 
-    public LottoTicket(List<LottoNumber> lottoNumbers) {
+    public LottoTicket(final List<LottoNumber> lottoNumbers) {
         Objects.requireNonNull(lottoNumbers, NULL_ERROR_MESSAGE);
-        validateEmptyTicket(lottoNumbers);
-        validateCount(lottoNumbers);
-        validateDuplicate(lottoNumbers);
+        validateLottoTicket(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return Collections.unmodifiableList(lottoNumbers);
-    }
-
-    public LottoRank getRank(LottoWinner lottoWinner) {
+    public LottoRank getRank(final LottoWinner lottoWinner) {
         int matchCount = calculateMatchCount(lottoWinner.getLottoWinnerTicket());
         boolean matchBonusNumber = lottoNumbers.contains(lottoWinner.getLottoWinnerBonusNumber());
         return LottoRank.matchLottoRank(matchCount, matchBonusNumber);
     }
 
-    private int calculateMatchCount(LottoWinnerTicket lottoWinnerTicket) {
+    private int calculateMatchCount(final LottoWinnerTicket lottoWinnerTicket) {
         Set<LottoNumber> matchingCheckContainer = new HashSet<>(lottoNumbers);
         matchingCheckContainer.addAll(lottoWinnerTicket.getLottoNumbers());
         return TOTAL_NUMBER_COUNT - matchingCheckContainer.size();
     }
 
-    private void validateEmptyTicket(List<LottoNumber> lottoNumbers) {
+    private void validateLottoTicket(final List<LottoNumber> lottoNumbers) {
+        validateEmptyTicket(lottoNumbers);
+        validateCount(lottoNumbers);
+        validateDuplicate(lottoNumbers);
+    }
+
+    private void validateEmptyTicket(final List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.isEmpty()) {
             throw new IllegalArgumentException(EMPTY_ERROR_MESSAGE);
         }
     }
 
-    private void validateDuplicate(List<LottoNumber> lottoNumbers) {
+    private void validateDuplicate(final List<LottoNumber> lottoNumbers) {
         Set<LottoNumber> uniqueLottoNumbers = new HashSet<>(lottoNumbers);
         if (uniqueLottoNumbers.size() != lottoNumbers.size()) {
             throw new IllegalArgumentException(DUPLICATE_ERROR_MESSAGE);
         }
     }
 
-    private void validateCount(List<LottoNumber> lottoNumbers) {
+    private void validateCount(final List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() == VALID_NUMBER_COUNT) {
             return;
         }
         throw new RuntimeException(COUNT_ERROR_MESSAGE);
+    }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return Collections.unmodifiableList(lottoNumbers);
     }
 }
