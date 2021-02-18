@@ -6,6 +6,7 @@ import java.util.TreeMap;
 
 public class LottoResultStatistics {
     private static final int EARNING_RATE = 100;
+    private static final int DEFAULT_COUNT = 0;
 
     private final Map<LottoRank, Integer> lottoResult;
 
@@ -23,7 +24,7 @@ public class LottoResultStatistics {
     public static Map<LottoRank, Integer> setLottoResult() {
         Map<LottoRank, Integer> lottoResult = new TreeMap<>(LottoRank.matchCountComparator);
         Arrays.stream(LottoRank.values())
-                .forEach(value -> lottoResult.put(value, 0));
+                .forEach(value -> lottoResult.put(value, DEFAULT_COUNT));
 
         return lottoResult;
     }
