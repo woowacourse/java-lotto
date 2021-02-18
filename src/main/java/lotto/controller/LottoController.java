@@ -2,11 +2,13 @@ package lotto.controller;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import lotto.Money;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.LottoResult;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.lotto.LottoStore;
 import lotto.domain.lotto.WinningLotto;
@@ -29,14 +31,19 @@ public class LottoController {
         OutputView.numPurchasedLotto(purchasedLottos.getNumLotto());
         OutputView.lottosPrint(purchasedLottos);
 
-        //당첨 번호 체크
         List<Integer> winningNumbers = createWinningNumbers();
-        //보너스 번호 체크
         Integer bonusNumber = createBonusNUmber();
 
         WinningLotto winningLotto = WinningLotto.generatedBy(Lotto.generatedBy(winningNumbers),
             LottoNumber.valueOf(bonusNumber));
+
+        LottoResult lottoResult = new LottoResult();
+        // 결과 체크
+        for(Lotto lotto:purchasedLottos.getLottos()){
+            lottoResult.add(lotto, winningLotto);
+        }
     }
+
 
     private List<Integer> createWinningNumbers() {
         OutputView.inputWinningNumber();

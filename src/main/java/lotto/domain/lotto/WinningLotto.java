@@ -23,7 +23,7 @@ public class WinningLotto {
     }
 
     private static void validateBonus(Lotto lotto, LottoNumber bonus) {
-        if (lotto.getNumbers().contains(bonus)){
+        if (lotto.getNumbers().contains(bonus)) {
             throw new IllegalArgumentException("중복된 보너스 볼 값입니다.");
         }
     }
@@ -32,4 +32,7 @@ public class WinningLotto {
         return this.lotto;
     }
 
+    public LottoNumber getBonus() {
+        return this.bonus;
+    }
 }

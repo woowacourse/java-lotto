@@ -26,4 +26,19 @@ public class LottoResultTest {
 
         assertThat(count).isEqualTo(2);
     }
+
+    @Test
+    void 로또_당첨_카운팅_테스트() {
+        Lotto testLotto = Lotto.generatedBy(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinningLotto winningLotto = WinningLotto.generatedBy(testLotto, LottoNumber.valueOf(10));
+
+        LottoResult lottoResult = new LottoResult();
+        LottoRank lottorank = lottoResult.findRank(6,true);
+        lottoResult.add(testLotto, winningLotto);
+        assertThat(lottoResult.getResult().get(lottorank)).isEqualTo(1);
+
+        lottoResult.add(testLotto, winningLotto);
+        assertThat(lottoResult.getResult().get(lottorank)).isEqualTo(2);
+
+    }
 }

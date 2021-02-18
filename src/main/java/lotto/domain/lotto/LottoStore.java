@@ -19,4 +19,7 @@ public class LottoStore {
     public Lotto buyLotto() {
         return Lotto.generatedBy(new RandomLottoGenerator());
     }
+
+
+
 }
