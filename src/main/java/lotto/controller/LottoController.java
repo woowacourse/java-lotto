@@ -2,7 +2,7 @@ package lotto.controller;
 
 import java.util.*;
 
-import lotto.domain.ticketfactory.FixedTicketFactory;
+import lotto.domain.ticketfactory.FixedNumberTicketFactory;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
@@ -14,8 +14,9 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
-
-    final InputView inputView;
+    private static final int EXIST = 1;
+    private static final String SEPARATOR = ",";
+    private final InputView inputView;
 
     public LottoController(final Scanner scanner) {
         inputView = new InputView(scanner);
@@ -29,6 +30,13 @@ public class LottoController {
         LottoNumber bonusBall = makeBonusNumber(winningTicket);
 
         showResult(money, lottoTickets, winningTicket, bonusBall);
+        ifChangeExist(money);
+    }
+
+    private void ifChangeExist(Money money) {
+        if (money.getChange() >= EXIST) {
+            OutputView.printGiveChange(money.getChange());
+        }
     }
 
     private Money inputMoney() {
@@ -53,7 +61,7 @@ public class LottoController {
     private LottoTicket makeWinningTicket() {
         try {
             OutputView.printWinningNumbers();
-            return FixedTicketFactory
+            return FixedNumberTicketFactory
                     .makeTicket(splitWinningNumbers(inputView.inputValue()));
         } catch (LottoCustomException e) {
             OutputView.printErrorMessage(e.getMessage());
@@ -62,7 +70,7 @@ public class LottoController {
     }
 
     private Set<String> splitWinningNumbers(String winningNumbers) {
-        return new HashSet<>(Arrays.asList(winningNumbers.split(",")));
+        return new HashSet<>(Arrays.asList(winningNumbers.split(SEPARATOR)));
     }
 
     private LottoNumber makeBonusNumber(LottoTicket winningTicket) {

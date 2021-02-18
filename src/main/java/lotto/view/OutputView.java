@@ -42,6 +42,10 @@ public class OutputView {
         System.out.println(String.format("총 수익률은 %.2f입니다.", profit));
     }
 
+    public static void printGiveChange(int change) {
+        System.out.println(String.format("거스름돈 %d원은 자선 단체에 기부되었습니다 😃", change));
+    }
+
     private static void printSplitLine() {
         System.out.println("---------");
     }
