@@ -34,7 +34,7 @@ public class LottoTest {
     @Test
     void bonusMatch() {
         int bonusNumber = 20;
-        boolean match = lotto.isBonusMatch(bonusNumber);
+        boolean match = lotto.hasBonusNumber(bonusNumber);
 
         assertTrue(match);
     }

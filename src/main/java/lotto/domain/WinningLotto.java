@@ -37,12 +37,6 @@ public class WinningLotto {
         validateDuplicatesWithWinningNumbers(bonusNumber);
     }
 
-    private void validateDuplicatesWithWinningNumbers(String number) {
-        if (winningLottoNumbers.contains(Integer.parseInt(number))) {
-            throw new IllegalArgumentException();
-        }
-    }
-
     private void validateNumbers(String[] numbers) {
         for (String number : numbers) {
             validateNumeric(number);
@@ -76,6 +70,12 @@ public class WinningLotto {
         Set<String> numberGroup = new HashSet<>(Arrays.asList(numbers));
         if (numberGroup.size() != 6) {
             throw new IllegalArgumentException(DUPLICATE_ERROR);
+        }
+    }
+
+    private void validateDuplicatesWithWinningNumbers(String number) {
+        if (winningLottoNumbers.contains(Integer.parseInt(number))) {
+            throw new IllegalArgumentException();
         }
     }
 

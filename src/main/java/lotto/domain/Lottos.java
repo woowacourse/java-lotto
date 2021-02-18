@@ -27,7 +27,7 @@ public class Lottos {
         List<Result> results = new ArrayList<>();
         for (Lotto lotto : lottos) {
             int matches = lotto.countMatchingNumbers(winningLottoNumbers);
-            boolean bonusMatch = lotto.isBonusMatch(bonusNumber);
+            boolean bonusMatch = lotto.hasBonusNumber(bonusNumber);
             results.add(Result.getResult(matches, bonusMatch));
         }
         return results;

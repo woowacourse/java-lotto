@@ -47,7 +47,7 @@ public enum Result {
 
     public static int calculateProfit(List<Result> results) {
         return results.stream()
-                .map(Result::getPrize)
+                .map(result -> result.prize)
                 .reduce(0, Integer::sum);
     }
 
