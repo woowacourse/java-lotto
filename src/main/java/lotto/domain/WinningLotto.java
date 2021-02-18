@@ -6,13 +6,12 @@ import lotto.exception.DuplicateLottoNumberException;
 
 public class WinningLotto extends Lotto {
 
-    private final int bonusNumber;
+    private final LottoNumber bonusNumber;
 
     public WinningLotto(final List<Integer> numbers, final int bonusNumber) {
         super(numbers);
-        validateBoundNumber(bonusNumber);
         validateBonusNumber(numbers, bonusNumber);
-        this.bonusNumber = bonusNumber;
+        this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
     private void validateBonusNumber(final List<Integer> values, int value) {
