@@ -7,7 +7,9 @@ import static lotto.type.LottoMatchType.FOUR_MATCH;
 import static lotto.type.LottoMatchType.SIX_MATCH;
 import static lotto.type.LottoMatchType.THREE_MATCH;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
@@ -48,8 +50,9 @@ public class LottoComparatorTest {
             new LottoNumber(5),
             new LottoNumber(6)
         ));
-        PurchasedLottoTickets purchasedLottoTickets = new PurchasedLottoTickets();
-        purchasedLottoTickets.add(purchasedLottoTicket);
+
+        List<LottoTicket> lottoTickets = new ArrayList<>(Arrays.asList(purchasedLottoTicket));
+        PurchasedLottoTickets purchasedLottoTickets = new PurchasedLottoTickets(lottoTickets);
 
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
         Map<LottoMatchType, Integer> lottoResult
@@ -74,8 +77,9 @@ public class LottoComparatorTest {
             new LottoNumber(5),
             new LottoNumber(7)
         ));
-        PurchasedLottoTickets purchasedLottoTickets = new PurchasedLottoTickets();
-        purchasedLottoTickets.add(purchasedLottoTicket);
+
+        List<LottoTicket> lottoTickets = new ArrayList<>(Arrays.asList(purchasedLottoTicket));
+        PurchasedLottoTickets purchasedLottoTickets = new PurchasedLottoTickets(lottoTickets);
 
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
         Map<LottoMatchType, Integer> lottoResult
@@ -100,8 +104,9 @@ public class LottoComparatorTest {
             new LottoNumber(5),
             new LottoNumber(10)
         ));
-        PurchasedLottoTickets purchasedLottoTickets = new PurchasedLottoTickets();
-        purchasedLottoTickets.add(purchasedLottoTicket);
+
+        List<LottoTicket> lottoTickets = new ArrayList<>(Arrays.asList(purchasedLottoTicket));
+        PurchasedLottoTickets purchasedLottoTickets = new PurchasedLottoTickets(lottoTickets);
 
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
         Map<LottoMatchType, Integer> lottoResult
@@ -126,8 +131,9 @@ public class LottoComparatorTest {
             new LottoNumber(9),
             new LottoNumber(10)
         ));
-        PurchasedLottoTickets purchasedLottoTickets = new PurchasedLottoTickets();
-        purchasedLottoTickets.add(purchasedLottoTicket);
+
+        List<LottoTicket> lottoTickets = new ArrayList<>(Arrays.asList(purchasedLottoTicket));
+        PurchasedLottoTickets purchasedLottoTickets = new PurchasedLottoTickets(lottoTickets);
 
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
         Map<LottoMatchType, Integer> lottoResult
@@ -152,8 +158,9 @@ public class LottoComparatorTest {
             new LottoNumber(9),
             new LottoNumber(10)
         ));
-        PurchasedLottoTickets purchasedLottoTickets = new PurchasedLottoTickets();
-        purchasedLottoTickets.add(purchasedLottoTicket);
+
+        List<LottoTicket> lottoTickets = new ArrayList<>(Arrays.asList(purchasedLottoTicket));
+        PurchasedLottoTickets purchasedLottoTickets = new PurchasedLottoTickets(lottoTickets);
 
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
         Map<LottoMatchType, Integer> lottoResult

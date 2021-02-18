@@ -8,12 +8,8 @@ import lotto.domain.LottoTicket;
 public class PurchasedLottoTickets {
     private final List<LottoTicket> tickets;
 
-    public PurchasedLottoTickets() {
-        this.tickets = new ArrayList<>();
-    }
-
-    public void add(LottoTicket lottoTicket) {
-        tickets.add(lottoTicket);
+    public PurchasedLottoTickets(List<LottoTicket> lottoTickets) {
+        this.tickets = new ArrayList<>(lottoTickets);
     }
 
     public List<LottoTicket> getTickets() {

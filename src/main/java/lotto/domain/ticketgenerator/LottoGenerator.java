@@ -20,12 +20,12 @@ public class LottoGenerator {
     }
 
     public PurchasedLottoTickets generatePurchasedTickets(int numberOfTicket) {
-        PurchasedLottoTickets purchasedLottoTickets = new PurchasedLottoTickets();
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+
         for (int i = 0; i < numberOfTicket; i++) {
             Collections.shuffle(allNumbers);
-            purchasedLottoTickets
-                .add(new LottoTicket(new ArrayList<>(allNumbers.subList(ZERO, SIZE))));
+            lottoTickets.add(new LottoTicket(new ArrayList<>(allNumbers.subList(ZERO, SIZE))));
         }
-        return purchasedLottoTickets;
+        return new PurchasedLottoTickets(lottoTickets);
     }
 }

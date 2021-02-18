@@ -4,6 +4,7 @@ package lotto.domain.ticketpurchase;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
@@ -25,9 +26,8 @@ public class PurchasedLottoTicketsTest {
         LottoTicket lottoTicket1 = new LottoTicket(lottoNumbers);
         LottoTicket lottoTicket2 = new LottoTicket(lottoNumbers);
 
-        PurchasedLottoTickets purchasedLottoTickets = new PurchasedLottoTickets();
-        purchasedLottoTickets.add(lottoTicket1);
-        purchasedLottoTickets.add(lottoTicket2);
+        List<LottoTicket> lottoTickets = new ArrayList<>(Arrays.asList(lottoTicket1, lottoTicket2));
+        PurchasedLottoTickets purchasedLottoTickets = new PurchasedLottoTickets(lottoTickets);
 
         assertThat(purchasedLottoTickets.getTickets().size()).isEqualTo(2);
     }
