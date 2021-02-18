@@ -28,18 +28,18 @@ public class LottoNumberTest {
     @DisplayName("45를 초과한 수가 입력될 경 예외를 발생시킨다.")
     @Test
     public void validateNumberRangeTest() {
-        assertThatThrownBy( () -> new LottoNumber("46")).isInstanceOf(InvalidNumberRangeException.class);
+        assertThatThrownBy( () -> new LottoNumber("46")).isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("음수가 입력된 경우 예외를 발생시킨다.")
     @Test
     public void validateNegativeNumberRangeTest() {
-        assertThatThrownBy( () -> new LottoNumber("-1")).isInstanceOf(InvalidNumberRangeException.class);
+        assertThatThrownBy( () -> new LottoNumber("-1")).isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("숫자가 아닌 경우 예외를 발생시킨다.")
     @Test
     public void validateNumberTest() {
-        assertThatThrownBy( () -> new LottoNumber("a")).isInstanceOf(InvalidInputException.class);
+        assertThatThrownBy( () -> new LottoNumber("a")).isInstanceOf(IllegalArgumentException.class);
     }
 }

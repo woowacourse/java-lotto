@@ -18,12 +18,12 @@ public class MoneyTest {
     @DisplayName("숫자가 아닌 인자를 생성자에 넘길 경우 예외를 발생시킨다.")
     @Test
     public void validateMoneyFormatTest() {
-        assertThatThrownBy(() -> new Money("a")).isInstanceOf(InvalidInputException.class);
+        assertThatThrownBy(() -> new Money("a")).isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("음수가 입력된 경우 예외를 발생시킨다.")
     @Test
     public void validatePositiveNumber() {
-        assertThatThrownBy(() -> new Money("-1")).isInstanceOf(InvalidNumberRangeException.class);
+        assertThatThrownBy(() -> new Money("-1")).isInstanceOf(IllegalArgumentException.class);
     }
 }
