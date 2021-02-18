@@ -7,22 +7,24 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    public final String DELIMITER = ",";
-
+    public static final String DELIMITER = ",";
     private final List<Integer> numbers;
 
-    public Lotto() {
-        numbers = new ArrayList<>(LottoGenerator.generateNumbers());
+    private Lotto(List<Integer> numbers) {
+        this.numbers = new ArrayList<>(numbers);
     }
 
-    public Lotto(String inputNumbers) {
+    public static Lotto from(List<Integer> numbers) {
+        return new Lotto(numbers);
+    }
+
+    public static Lotto from(String inputNumbers) {
         NullCheckNumbers(inputNumbers);
         String[] splittedNumbers = inputNumbers.split(DELIMITER);
         List<Integer> lottoNumbers = convertInputLottoNumbersToInteger(splittedNumbers);
         validateLottoNumbers(lottoNumbers);
-        this.numbers = new ArrayList<>(lottoNumbers);
+        return new Lotto(new ArrayList<>(lottoNumbers));
     }
-
 
     private static void NullCheckNumbers(String inputNumbers) {
         if (inputNumbers == null) {

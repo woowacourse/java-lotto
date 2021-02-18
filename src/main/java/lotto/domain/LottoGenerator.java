@@ -15,10 +15,10 @@ public class LottoGenerator {
         }
     }
 
-    public static List<Integer> generateNumbers() {
+    public static Lotto createLotto() {
         Collections.shuffle(candidateNumbers);
         Set<Integer> lottoNumbers =
                 new TreeSet<>(candidateNumbers.subList(0, LOTTO_POSSESSION_NUMBER));
-        return new ArrayList<>(lottoNumbers);
+        return Lotto.from(new ArrayList<>(lottoNumbers));
     }
 }

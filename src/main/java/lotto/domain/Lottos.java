@@ -12,7 +12,7 @@ public class Lottos {
 
     public Lottos(int purchasedLottoCount) {
         for (int i = 0; i < purchasedLottoCount; i++) {
-            lottoBunch.add(new Lotto());
+            lottoBunch.add(LottoGenerator.createLotto());
         }
     }
 

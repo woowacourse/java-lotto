@@ -25,7 +25,7 @@ public class LottoStore {
     }
 
     private WinningLotto decideWinningLotto() {
-        Lotto winningLotto = new Lotto(InputView.inputWinningNumbers());
+        Lotto winningLotto = Lotto.from(InputView.inputWinningNumbers());
         BonusBall bonusBall = new BonusBall(InputView.inputBonusNumber(), winningLotto);
         return new WinningLotto(winningLotto, bonusBall);
     }
