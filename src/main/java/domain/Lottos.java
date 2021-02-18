@@ -1,7 +1,6 @@
 package domain;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Lottos {
 
@@ -12,13 +11,14 @@ public class Lottos {
     }
 
     public LottoResults getLottoResults(WinningLotto winningLotto) {
-        Map<LottoRank, Long> results = lottos.stream()
-                .map(winningLotto::match)
-                .collect(Collectors.groupingBy(lottoRank -> lottoRank, Collectors.counting()));
-
-        Arrays.stream(LottoRank.values())
-                .filter(lottoRank -> !results.containsKey(lottoRank))
-                .forEach(lottoRank -> results.put(lottoRank, 0L));
+        Map<LottoRank, Long> results = new HashMap<>();
+        for (LottoRank rank : LottoRank.values()) {
+            results.put(rank, 0L);
+        }
+        for (Lotto lotto : lottos) {
+            LottoRank rank = winningLotto.match(lotto);
+            results.put(rank, results.get(rank) + 1);
+        }
         return new LottoResults(results);
     }
 

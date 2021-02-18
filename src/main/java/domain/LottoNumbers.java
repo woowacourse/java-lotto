@@ -32,6 +32,16 @@ public class LottoNumbers {
         }
     }
 
+    public int findMatchCount(LottoNumbers lottoNumbers) {
+        return (int) this.lottoNumbers.stream()
+                .filter(lottoNumbers::contains)
+                .count();
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -43,16 +53,6 @@ public class LottoNumbers {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
-    }
-
-    public boolean contains(LottoNumber lottoNumber) {
-        return this.lottoNumbers.contains(lottoNumber);
-    }
-
-    public int findMatchCount(LottoNumbers lottoNumbers) {
-        return (int) this.lottoNumbers.stream()
-                .filter(lottoNumbers::contains)
-                .count();
     }
 
     @Override

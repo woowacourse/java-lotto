@@ -26,8 +26,8 @@ public class Money {
         return (int) (this.value / value);
     }
 
-    public double calculateEarningRate(Money usedMoney) {
-        double something = this.value / (double) usedMoney.value;
+    public double calculateEarningRate(Money used) {
+        double something = this.value / (double) used.value;
         return (long) (something * 100) / 100.0;
     }
 

@@ -7,21 +7,20 @@ import view.OutputView;
 public class LottoController {
 
     public static void main(String[] args) {
-        Money purchaseMoney = InputView.inputPurchaseMoney();
+        Money amount = InputView.inputPurchaseMoney();
 
-        int numberOfLotto = Lotto.calculateLottoNumber(purchaseMoney);
-        OutputView.printNumberOfPurchaseLotto(numberOfLotto);
+        int lottoCount = Lotto.ableToBuyWith(amount);
+        OutputView.printNumberOfPurchaseLotto(lottoCount);
 
-        Lottos boughtLottos = LottoFactory.generates(new DefaultShuffleStrategy(), numberOfLotto);
-        OutputView.printAllLottos(boughtLottos);
+        Lottos purchased = LottoFactory.generates(new DefaultShuffleStrategy(), lottoCount);
+        OutputView.printAllLottos(purchased);
 
         WinningLotto winningLotto = InputView.inputWinningLotto();
-        LottoResults results = boughtLottos.getLottoResults(winningLotto);
-
+        LottoResults results = purchased.getLottoResults(winningLotto);
         OutputView.printResults(results);
 
-        Money earningMoney = results.getTotalWinningMoney();
-        double earningRate = earningMoney.calculateEarningRate(purchaseMoney);
+        Money revenue = results.getTotalWinningMoney();
+        double earningRate = revenue.calculateEarningRate(amount);
         OutputView.printEarningRate(earningRate);
     }
 }
