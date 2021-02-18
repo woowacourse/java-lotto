@@ -1,13 +1,12 @@
 package view;
 
+import domain.budget.Budget;
 import domain.lotto.LottoNumber;
 import domain.result.LottoRank;
 import util.OutputUtil;
-import view.dto.DrawResultDto;
-import view.dto.LottoCountResponseDto;
-import view.dto.LottoNumbersDto;
-import view.dto.LottoResponseDto;
+import view.dto.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -22,6 +21,7 @@ public class LottoGameScreen {
     public static final String RESULT = "당첨통계";
     public static final String LINE = "----------";
     public static final String STRING_FORMATTER = "%s개 일치 (%d원)- ";
+    public static final String REVENUE_RESULT_FORMATTER = "총 수익률은 %.2f입니다.";
 
 
     public void showLottoCount(final LottoCountResponseDto lottoCountResponseDto) {
@@ -99,6 +99,11 @@ public class LottoGameScreen {
             return 0;
         }
         return count;
+    }
+
+    public void showRevenueResult(RevenueDto revenueDto) {
+        BigDecimal revenue = revenueDto.getRevenueDto();
+        OutputUtil.printMessage(String.format(REVENUE_RESULT_FORMATTER, revenue.doubleValue()));
     }
 }
 

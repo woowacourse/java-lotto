@@ -6,7 +6,6 @@ public class InputUtil {
     private static final Scanner SCANNER = new Scanner(System.in);
 
     private InputUtil() {
-
     }
 
     public static String nextLine() {

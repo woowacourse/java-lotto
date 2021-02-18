@@ -10,7 +10,9 @@ import view.LottoGameScreen;
 import view.dto.DrawResultDto;
 import view.dto.LottoCountResponseDto;
 import view.dto.LottoResponseDto;
+import view.dto.RevenueDto;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -77,5 +79,17 @@ public class LottoGameMachine {
         Result result = new Result(lottos);
         Map<LottoRank, Integer> matches = result.findMatches(winnings);
         lottoGameScreen.showDrawResult(new DrawResultDto(matches));
+        Budget price = Budget.amounts(0);
+
+        List<Budget> budgets = matches.entrySet().stream()
+                .map(match -> match.getKey())
+                .map(lottoRank -> lottoRank.getBudget())
+                .collect(Collectors.toList());
+        for (Budget budget : budgets) {
+            price = price.add(budget);
+        }
+
+        BigDecimal revenue = price.getRevenue(budget);
+        lottoGameScreen.showRevenueResult(new RevenueDto(revenue));
     }
 }

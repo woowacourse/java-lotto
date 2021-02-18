@@ -25,15 +25,19 @@ public class Budget {
         }
     }
 
-    public Budget divide(Budget amount) {
-        return new Budget(this.amount.divide(amount.amount));
-    }
-
     public int intQuotient(Budget amount) {
         return this.amount.divide(amount.amount).intValue();
     }
 
+    public BigDecimal getRevenue(Budget originalBudget) {
+        return this.amount.divide(originalBudget.amount);
+    }
+
     public int getIntValue() {
         return amount.intValue();
+    }
+
+    public Budget add(Budget added) {
+        return new Budget(this.amount.add(added.amount));
     }
 }

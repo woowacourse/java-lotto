@@ -1,6 +1,5 @@
 package view.dto;
 
-
 import domain.lotto.Lotto;
 
 public class LottoResponseDto {

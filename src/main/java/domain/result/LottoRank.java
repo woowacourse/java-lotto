@@ -40,11 +40,7 @@ public enum LottoRank {
         return this.matches == matches;
     }
 
-    private boolean checkBonus(boolean isBonus) {
-        return this.isBonus == isBonus;
-    }
-
-    public String makeSentence() {
-        return String.format(STRING_FORMATTER, matches, budget.getIntValue());
+    public Budget getBudget() {
+        return budget;
     }
 }

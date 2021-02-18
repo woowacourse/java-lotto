@@ -18,6 +18,7 @@ class BonusNumberTest {
     @DisplayName("BonusNumber isSameNumber 테스트")
     @Test
     void BonusNumber_isSameNumber_테스트() {
-        assertThat(BonusNumber.of(5).isSameNumber(new LottoNumber(5))).isTrue();
+        assertThat(BonusNumber.of(5)
+                .isSameNumber(new LottoNumber(5))).isTrue();
     }
 }
