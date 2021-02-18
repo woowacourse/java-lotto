@@ -21,7 +21,7 @@ public class RandomLottoGenerator implements LottoGenerator {
 
     private List<Integer> getShuffledLottoAllNumbers() {
         List<Integer> lottoAllNumbers = new ArrayList<>();
-        for (int i = 1; i < 45; i++) {
+        for (int i = LottoNumber.MIN + 1; i < LottoNumber.MAX; i++) {
             lottoAllNumbers.add(i);
         }
         Collections.shuffle(lottoAllNumbers);

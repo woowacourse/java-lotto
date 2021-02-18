@@ -3,6 +3,7 @@ package lotto.model;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import lotto.domain.lotto.Lotto;
 
 public class LottoResult {
 
@@ -21,7 +22,7 @@ public class LottoResult {
             int num = result.get(lottoRank);
             result.put(lottoRank, num + 1);
         }
-        totalPurchaseAmount += 1000;
+        totalPurchaseAmount += Lotto.PRICE;
     }
 
     public int findNumOfMatchByKey(LottoRank lottoRank) {

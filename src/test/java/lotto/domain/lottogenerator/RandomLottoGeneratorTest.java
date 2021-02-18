@@ -3,6 +3,7 @@ package lotto.domain.lottogenerator;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
+import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -20,7 +21,7 @@ class RandomLottoGeneratorTest {
     @DisplayName("랜덤으로 생성된 번호들은 6개여야 한다.")
     @Test
     void 번호_길이_테스트() {
-        assertThat(lottoNumbers.size()).isEqualTo(6);
+        assertThat(lottoNumbers.size()).isEqualTo(Lotto.LENGTH);
     }
 
     @DisplayName("랜덤으로 생성된 번호들은 서로 중복되면 안된다.")

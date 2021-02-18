@@ -21,7 +21,7 @@ public class LottoNumberTest {
     @DisplayName("로또 번호는 1부터 45사이의 값이어야 한다.")
     @Test
     void 유효성_검사() {
-        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.valueOf(-1));
-        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.valueOf(46));
+        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.valueOf(LottoNumber.MIN-1));
+        assertThatIllegalArgumentException().isThrownBy(() -> LottoNumber.valueOf(LottoNumber.MAX+1));
     }
 }
