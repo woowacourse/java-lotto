@@ -19,6 +19,11 @@ public class Lottos {
         generateLottoGroup();
     }
 
+    public static String findResult(Map<Rank, Integer> countByRank) {
+        findEarning(countByRank);
+        return findEarningRate(money, earning);
+    }
+
     public static void findEarning(Map<Rank, Integer> countByRank) {
         int sumOfPrize = 0;
         for (Map.Entry<Rank, Integer> singleCount : countByRank.entrySet())

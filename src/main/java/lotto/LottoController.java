@@ -1,8 +1,6 @@
 package lotto;
 
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.*;
 
 public class LottoController {
     private static Lottos lottos;
@@ -17,13 +15,19 @@ public class LottoController {
         makeWinningLotto();
     }
 
-    public void makeWinningLotto() {
+    public void endLotto() {
+        drawLotto();
+        drawResult();
+        LottoView.displayEarningRate(lottos.findResult(countByRank));
+    }
+
+    private void makeWinningLotto() {
         String winningInput = LottoView.requestWinningNumber();
         String bonusInput = LottoView.requestBonusBallNumber();
         winningLotto = new WinningLotto(winningInput, bonusInput);
     }
 
-    public void drawLotto() {
+    private void drawLotto() {
         ArrayList<Lotto> lottoGroup = lottos.getLottoGroup();
         for (Lotto lotto : lottoGroup) {
             Rank rank = winningLotto.findRank(lotto);
