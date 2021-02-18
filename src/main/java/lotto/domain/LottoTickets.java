@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.ticketfactory.RandomTicketFactory;
+import lotto.domain.ticketfactory.RandomNumberTicketFactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,7 +33,7 @@ public class LottoTickets {
 
     public void makeTicketByCount(int counts) {
         for (int i = 0; i < counts; i++) {
-            lottoTickets.add(RandomTicketFactory.makeTicket());
+            lottoTickets.add(RandomNumberTicketFactory.makeTicket());
         }
     }
 }
