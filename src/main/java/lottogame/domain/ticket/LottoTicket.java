@@ -21,7 +21,10 @@ public class LottoTicket {
 
     private List<Integer> getShuffledNumbers(List<Integer> numbers) {
         Collections.shuffle(initNumbers(numbers));
-        return numbers.subList(0, 6);
+
+        List<Integer> shuffledNumbers = numbers.subList(0, 6);
+        Collections.sort(shuffledNumbers);
+        return shuffledNumbers;
     }
 
     public List<Integer> initNumbers(List<Integer> numbers) {
