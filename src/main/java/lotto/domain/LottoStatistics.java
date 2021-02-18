@@ -11,7 +11,7 @@ public class LottoStatistics {
         this.statisticsMap = statisticsMap;
     }
 
-    public long getCountsByRank(LottoRank lottoRank) {
+    public long getTicketCountsByRank(LottoRank lottoRank) {
         return statisticsMap.computeIfAbsent(lottoRank, key -> ZERO);
     }
 

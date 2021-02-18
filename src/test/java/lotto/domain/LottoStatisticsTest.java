@@ -23,8 +23,8 @@ class LottoStatisticsTest {
     @DisplayName("로또 통계에서 각 순위별 당첨 티켓 개수를 가져온다. 없는 경우 0을 반환한다.")
     @Test
     void getCounts() {
-        assertThat(lottoStatistics.getCountsByRank(LottoRank.FIRST_PRIZE)).isEqualTo(1);
-        assertThat(lottoStatistics.getCountsByRank(LottoRank.SECOND_PRIZE)).isZero();
+        assertThat(lottoStatistics.getTicketCountsByRank(LottoRank.FIRST_PRIZE)).isEqualTo(1);
+        assertThat(lottoStatistics.getTicketCountsByRank(LottoRank.SECOND_PRIZE)).isZero();
     }
 
     @DisplayName("구매 금액과 비교해 수익률을 계산한다.")
