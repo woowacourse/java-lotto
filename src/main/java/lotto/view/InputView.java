@@ -9,7 +9,7 @@ public class InputView {
 
     private static final Scanner scanner = new Scanner(System.in);
     private static final String INPUT_WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
-    private static final String INPUT_INTEGER_ERROR_MESSAGE = "입력은 숫자여야 합니다.";
+    private static final String INPUT_INTEGER_ERROR_MESSAGE = "입력은 정수여야 합니다.";
     private static final String NUMBER_DELIMITER = ",";
 
     private InputView() {
