@@ -2,14 +2,14 @@ package lotto.domain;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.Map;
 
 public class LottoGameResult {
     private final Map<Rank, Integer> ranks;
 
     public LottoGameResult() {
-        ranks = new EnumMap<>(Rank.class);
+        ranks = new HashMap<>();
         initEnumMap();
     }
 
@@ -36,7 +36,7 @@ public class LottoGameResult {
 
     private double totalReward() {
         return ranks.entrySet().stream()
-                .mapToDouble(rank -> rank.getKey().getReward() * rank.getValue())
+                .mapToDouble(entry -> entry.getKey().getReward() * entry.getValue())
                 .sum();
     }
 
