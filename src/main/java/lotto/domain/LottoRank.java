@@ -14,12 +14,12 @@ public enum LottoRank {
     private final int matches;
     private final int reward;
 
-    LottoRank(int matches, int reward) {
+    LottoRank(final int matches, final int reward) {
         this.matches = matches;
         this.reward = reward;
     }
 
-    public static LottoRank matchLottoRank(int matchCount, boolean matchBonusNumber) {
+    public static LottoRank matchLottoRank(final int matchCount, final boolean matchBonusNumber) {
         if (matchCount < 3) {
             return SIXTH_PLACE;
         }
