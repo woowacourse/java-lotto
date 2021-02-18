@@ -38,8 +38,8 @@ public class LottoTicket {
                 .collect(Collectors.toList());
     }
 
-    public boolean contains(LottoNumber bonusBall) {
-        return lottoNumbers.contains(bonusBall);
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
     public List<LottoNumber> toUnmodifiableList() {
