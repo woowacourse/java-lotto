@@ -8,7 +8,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static lotto.domain.Result.*;
+import static lotto.domain.Result.RESULT_END_INDEX;
+import static lotto.domain.Result.SECOND_INDEX;
 
 public class OutputView {
     public static void showLottos(Lottos lottos) {

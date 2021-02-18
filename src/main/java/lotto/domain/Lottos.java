@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
@@ -17,8 +18,13 @@ public class Lottos {
         this.lottos = createLottos();
     }
 
-    public List<Lotto> getLottos() {
-        return lottos;
+    private List<Lotto> createLottos() {
+        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
+        List<Lotto> newLottos = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            newLottos.add(new Lotto(lottoNumberGenerator.make()));
+        }
+        return newLottos;
     }
 
     public List<Result> getResults(WinningLotto winningLotto) {
@@ -37,13 +43,8 @@ public class Lottos {
         return results;
     }
 
-    private List<Lotto> createLottos() {
-        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
-        List<Lotto> newLottos = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            newLottos.add(new Lotto(lottoNumberGenerator.make()));
-        }
-        return newLottos;
+    public List<Lotto> getLottos() {
+        return Collections.unmodifiableList(lottos);
     }
 
     public int getNumberOfLotto() {
