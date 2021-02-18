@@ -1,6 +1,7 @@
 package lotto.lottoticket;
 
 import lotto.lottogame.LottoCount;
+import lotto.lottoticket.ticketnumber.NumbersGenerator;
 import lotto.ranking.Ranking;
 
 import java.util.ArrayList;

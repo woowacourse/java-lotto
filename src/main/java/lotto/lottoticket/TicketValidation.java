@@ -2,7 +2,7 @@ package lotto.lottoticket;
 
 import java.util.List;
 
-import static lotto.lottoticket.RandomNumbersGenerator.*;
+import static lotto.lottoticket.ticketnumber.RandomNumbersGenerator.*;
 
 public class TicketValidation {
     public static void validateDuplicated(List<Integer> value) {

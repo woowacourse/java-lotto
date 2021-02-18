@@ -1,5 +1,7 @@
 package lotto.lottoticket;
 
+import lotto.lottoticket.ticketnumber.NumbersGenerator;
+
 import java.util.List;
 import java.util.Objects;
 
