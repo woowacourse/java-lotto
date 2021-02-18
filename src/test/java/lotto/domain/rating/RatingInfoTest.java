@@ -2,12 +2,11 @@ package lotto.domain.rating;
 
 import static org.assertj.core.api.Assertions.*;
 
-import lotto.domain.rating.Rating;
-import lotto.domain.rating.RatingInfo;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class RatingInfoTest {
+
     @Test
     @DisplayName("등수 정보 업데이트")
     void updateRatingInfo() {

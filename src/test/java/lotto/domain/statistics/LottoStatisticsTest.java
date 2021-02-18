@@ -5,11 +5,11 @@ import static org.assertj.core.api.Assertions.*;
 import lotto.domain.primitive.Money;
 import lotto.domain.rating.Rating;
 import lotto.domain.rating.RatingInfo;
-import lotto.domain.statistics.LottoStatistics;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class LottoStatisticsTest {
+
     private static final String ENTER = System.lineSeparator();
     RatingInfo ratingInfo;
     LottoStatistics lottoStatistics;

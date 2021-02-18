@@ -2,7 +2,6 @@ package lotto.domain.primitive;
 
 import static org.assertj.core.api.Assertions.*;
 
-import lotto.domain.primitive.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
