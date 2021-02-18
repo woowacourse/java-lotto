@@ -14,6 +14,7 @@ public class OutputView {
         for (Lotto lotto : lottos.getLottos()) {
             System.out.println(lotto.getLottoSummary());
         }
+        System.out.println();
     }
 
     public static void result(List<Result> results, float profit) {
@@ -22,12 +23,17 @@ public class OutputView {
         List<Integer> statistics = Result.getStatistics(results);
         List<Result> values = Arrays.asList(Result.values());
         Collections.reverse(values);
+        String[] additionalExplanation = getAdditionalExplanation();
+        for (int i = 1; i < Result.values().length; i++) {
+            System.out.printf("%d개 일치%s(%d원)- %d개\n", values.get(i).getCount(), additionalExplanation[i - 1], values.get(i).getPrize(), statistics.get(i - 1));
+        }
+        System.out.printf("총 수익률은 %.2f입니다.\n", profit);
+    }
+
+    private static String[] getAdditionalExplanation() {
         String[] bonus = new String[5];
         Arrays.fill(bonus, " ");
         bonus[3] = ", 보너스 볼 일치";
-        for (int i = 1; i < Result.values().length; i++) {
-            System.out.printf("%d개 일치%s(%d원)- %d개\n", values.get(i).getCount(), bonus[i - 1], values.get(i).getPrize(), statistics.get(i - 1));
-        }
-        System.out.printf("총 수익률은 %.2f입니다.\n", profit);
+        return bonus;
     }
 }
