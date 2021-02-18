@@ -68,4 +68,14 @@ public class LottoNumbers {
         List<LottoNumber> copy = new ArrayList<>(this.lottoNumbers);
         return Collections.unmodifiableList(copy);
     }
+
+    public int matchCount(LottoNumbers winningLottoNumbers, BonusNumber bonusNumber) {
+        return (int) this.lottoNumbers.stream()
+                .filter(lottoNumber -> winningLottoNumbers.contains(lottoNumber))
+                .count();
+    }
+
+    private boolean contains(LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
+    }
 }

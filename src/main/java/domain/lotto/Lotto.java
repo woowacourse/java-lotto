@@ -14,5 +14,8 @@ public class Lotto {
         List<LottoNumber> lottoNumbers = this.lottoNumbers.getLottoNumbers();
         return Collections.unmodifiableList(lottoNumbers);
     }
-}
 
+    public int findMatchesNumber(WinningLotto winningLotto) {
+        return winningLotto.winningMatchCount(lottoNumbers);
+    }
+}
