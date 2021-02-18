@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -15,21 +16,15 @@ public class LottoResultStatistics {
     public static LottoResultStatistics calculateResultStatistics(
             final LottoTickets lottoTickets, final LottoWinner lottoWinner) {
         Map<LottoRank, Integer> lottoResult = setLottoResult();
-        lottoTickets.getLottoTickets()
-                .forEach(lottoTicket -> {
-                    LottoBoughtTicket lottoBoughtTicket = (LottoBoughtTicket)lottoTicket;
-                    LottoRank rank = lottoBoughtTicket.getRank(lottoWinner);
-                    lottoResult.put(rank, lottoResult.get(rank) + 1);
-                });
+        lottoTickets.putLottoResult(lottoResult, lottoWinner);
         return new LottoResultStatistics(lottoResult);
     }
 
     public static Map<LottoRank, Integer> setLottoResult() {
         Map<LottoRank, Integer> lottoResult = new TreeMap<>(LottoRank.matchCountComparator);
+        Arrays.stream(LottoRank.values())
+                .forEach(value -> lottoResult.put(value, 0));
 
-        for (LottoRank value : LottoRank.values()) {
-            lottoResult.put(value, 0);
-        }
         return lottoResult;
     }
 

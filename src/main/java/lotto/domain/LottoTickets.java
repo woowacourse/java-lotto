@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class LottoTickets {
@@ -15,6 +16,15 @@ public class LottoTickets {
         Objects.requireNonNull(lottoTickets, NULL_ERROR_MESSAGE);
         validateEmptyTickets(lottoTickets);
         this.lottoTickets = lottoTickets;
+    }
+
+    public void putLottoResult(Map<LottoRank, Integer> lottoResult, LottoWinner lottoWinner) {
+        lottoTickets
+                .forEach(lottoTicket -> {
+                    LottoBoughtTicket lottoBoughtTicket = (LottoBoughtTicket)lottoTicket;
+                    LottoRank rank = lottoBoughtTicket.getRank(lottoWinner);
+                    lottoResult.put(rank, lottoResult.get(rank) + 1);
+                });
     }
 
     public List<LottoTicket> getLottoTickets() {
