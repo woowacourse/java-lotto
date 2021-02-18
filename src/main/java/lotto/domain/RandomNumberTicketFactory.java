@@ -1,7 +1,4 @@
-package lotto.domain.ticketfactory;
-
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
+package lotto.domain;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -28,7 +25,7 @@ public class RandomNumberTicketFactory {
     }
 
     private static Set<LottoNumber> makeLottoNumbers() {
-        List<Integer> numbers = new ArrayList(lottoNumberFactory.keySet());
+        List<Integer> numbers = new ArrayList<>(lottoNumberFactory.keySet());
         Set<LottoNumber> ticketNumbers;
         Collections.shuffle(numbers);
         ticketNumbers = IntStream.range(MIN_LOTTO_SIZE, MAX_LOTTO_SIZE)
