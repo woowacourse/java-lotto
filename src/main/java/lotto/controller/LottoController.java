@@ -35,11 +35,16 @@ public class LottoController {
                         .collect(Collectors.toList());
 
         LottoWinnerTicket lottoWinnerTicket = new LottoWinnerTicket(lottoWinnerNumbers);
-        LottoWinnerBonusNumber lottoWinnerBonusNumber = new LottoWinnerBonusNumber(Integer.parseInt(InputView.getUserInput()));
+
+        OutputView.askWinnerBonusNumber();
+        LottoWinnerBonusNumber lottoWinnerBonusNumber =
+                new LottoWinnerBonusNumber(Integer.parseInt(InputView.getUserInput()));
         LottoWinner lottoWinner = new LottoWinner(lottoWinnerTicket, lottoWinnerBonusNumber);
 
         OutputView.printRewardResultBoard();
-
+        LottoResultStatistics lottoResultStatistics =
+                LottoResultStatistics.getResultStatistics(lottoTickets, lottoWinner);
+        OutputView.printStatistics(lottoResultStatistics);
     }
 }
 

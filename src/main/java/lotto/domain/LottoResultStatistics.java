@@ -1,7 +1,6 @@
 package lotto.domain;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class LottoResultStatistics {
 
@@ -24,7 +23,7 @@ public class LottoResultStatistics {
     }
 
     public static Map<LottoRank, Integer> setLottoResult() {
-        Map<LottoRank, Integer> lottoResult = new HashMap<>();
+        Map<LottoRank, Integer> lottoResult = new TreeMap<>(LottoRank.matchCountComparator);
 
         for (LottoRank value : LottoRank.values()) {
             lottoResult.put(value, 0);

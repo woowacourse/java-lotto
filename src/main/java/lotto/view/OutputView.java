@@ -1,9 +1,8 @@
 package lotto.view;
 
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
+import lotto.domain.*;
 
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class OutputView {
@@ -47,9 +46,31 @@ public class OutputView {
         System.out.println(ASK_WINNER_LOTTO_TICKET);
     }
 
+    public static void askWinnerBonusNumber() {
+        System.out.println(ASK_WINNER_BONUS_NUMBER);
+    }
+
     public static void printRewardResultBoard() {
         System.out.println(NEW_LINE);
         System.out.println(REWARD_RESULT_BOARD);
         System.out.println(RESULT_LINE);
     }
+
+    public static void printStatistics(LottoResultStatistics resultStatistics) {
+        Map<LottoRank, Integer> lottoResult = resultStatistics.getLottoResult();
+        lottoResult.entrySet()
+                .stream()
+                .filter(entry -> !entry.getKey().equals(LottoRank.SIXTH_PLACE))
+                .forEach(entry -> System.out.println(
+                        String.format(EACH_RESULT, entry.getKey().getMatches(),
+                                entry.getKey().getReward(), entry.getValue())));
+    }
+
+//        3개 일치 (5000원)- 1개
+//        4개 일치 (50000원)- 0개
+//        5개 일치 (1500000원)- 0개
+//        5개 일치, 보너스 볼 일치(30000000원) - 0개
+//        6개 일치 (2000000000원)- 0개
+//        총 수익률은 30%입니다.
+//        ```
 }

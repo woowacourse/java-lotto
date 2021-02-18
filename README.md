@@ -30,6 +30,7 @@
     - [x] FIRST_PLACE(당첨 횟수, 200000000000)
     - [x] 2등,3등,4등,5등 까지 동일하게 한다.
 - [x] LottoResultStatistic.java 로또 당첨 결과를 가진다.
+    - [ ] 로또 수익률을 계산한다.
 ### Non TDD
 - [x] InputView.java 사용자 입력을 받는다.
 - [ ] OutputView.java
