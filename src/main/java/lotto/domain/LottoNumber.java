@@ -1,15 +1,35 @@
 package lotto.domain;
 
-import lotto.utils.Validator;
+import lotto.exception.IllegalLottoNumberException;
 
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class LottoNumber implements Comparable<LottoNumber> {
+    public static final Pattern NUMBER_PATTERN = Pattern.compile("^[0-9]*$");
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 49;
+
     private final int value;
 
     public LottoNumber(String input) {
-        Validator.validateLottoNumber(input);
+        validateLottoNumber(input);
         this.value = Integer.parseInt(input);
+    }
+
+    private void validateLottoNumber(String input) {
+        if (isInvalidNumberFormat(input) || isInvalidLottoNumberRange(input)) {
+            throw new IllegalLottoNumberException();
+        }
+    }
+
+    private boolean isInvalidNumberFormat(String input) {
+        return !NUMBER_PATTERN.matcher(input).matches();
+    }
+
+
+    private boolean isInvalidLottoNumberRange(String input) {
+        return Integer.parseInt(input) < MIN_NUMBER || Integer.parseInt(input) > MAX_NUMBER;
     }
 
     private int getValue() {

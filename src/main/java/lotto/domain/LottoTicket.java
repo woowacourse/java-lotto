@@ -1,17 +1,34 @@
 package lotto.domain;
 
-import lotto.utils.Validator;
+import lotto.exception.IllegalLottoNumbersException;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 public class LottoTicket {
+    private static final int LOTTO_TICKET_SIZE = 6;
+
     private final List<LottoNumber> lottoTicket;
 
     public LottoTicket(List<LottoNumber> numbers) {
-        Validator.validateLottoNumbers(numbers);
+        validateLottoNumbers(numbers);
         this.lottoTicket = new ArrayList<>(numbers);
+    }
+
+    private void validateLottoNumbers(List<LottoNumber> numbers) {
+        if (isInvalidateLottoSize(numbers) || isDuplicateNumber(numbers)) {
+            throw new IllegalLottoNumbersException();
+        }
+    }
+
+    private boolean isInvalidateLottoSize(List<LottoNumber> numbers) {
+        return numbers.size() != LOTTO_TICKET_SIZE;
+    }
+
+    private boolean isDuplicateNumber(List<LottoNumber> numbers) {
+        return new HashSet<>(numbers).size() != numbers.size();
     }
 
     public List<LottoNumber> lottoTicket() {
