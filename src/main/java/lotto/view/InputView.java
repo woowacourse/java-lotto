@@ -1,7 +1,6 @@
 package lotto.view;
 
 import java.util.Scanner;
-import lotto.Money;
 
 public class InputView {
 
@@ -11,7 +10,7 @@ public class InputView {
         this.scanner = scanner;
     }
 
-    public Money inputMoney() {
-        return new Money(scanner.nextLine());
+    public String inputPurchaseAmount() {
+        return scanner.nextLine().trim();
     }
 }
