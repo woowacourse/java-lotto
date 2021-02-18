@@ -31,7 +31,7 @@ public class LottoController {
 
     private WinningLotto createWinningLotto() {
         String values = Screen.getLottoNumbers();
-        List<Integer> numbers = Arrays.asList(values.split(REGEX)).stream()
+        List<Integer> numbers = Arrays.stream(values.split(REGEX))
             .mapToInt(Integer::parseInt)
             .boxed()
             .collect(Collectors.toList());
