@@ -6,13 +6,13 @@ import java.util.stream.Collectors;
 
 public class RandomUtils {
 
-    public static final List<Integer> generateRandomNumbers(
+    public static List<Integer> generateRandomNumbers(
         List<Integer> allBoundOfNumbers, int needCount) {
         Collections.shuffle(allBoundOfNumbers);
 
         return allBoundOfNumbers.stream()
-            .limit(needCount)
-            .sorted()
-            .collect(Collectors.toList());
+                .limit(needCount)
+                .sorted()
+                .collect(Collectors.toList());
     }
 }
