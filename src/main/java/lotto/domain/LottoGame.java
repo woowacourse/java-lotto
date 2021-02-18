@@ -12,4 +12,12 @@ public class LottoGame {
         }
         return lottos;
     }
+
+    public LottoGameResult compareWithWinningLotto(Lottos lottos, WinningLotto winningLotto) {
+        LottoGameResult lottoGameResult = new LottoGameResult();
+        for (Lotto lotto : lottos.lottos()) {
+            lottoGameResult.add(winningLotto.findRank(lotto));
+        }
+        return lottoGameResult;
+    }
 }
