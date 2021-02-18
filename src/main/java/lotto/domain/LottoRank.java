@@ -7,8 +7,8 @@ public enum LottoRank {
     THIRD(5, 1_500_000), SECOND(5.5, 30_000_000),
     FIRST(6, 200_000_000), NONE(0, 0);
 
-    double matchingCount;
-    int prizeMoney;
+    private final double matchingCount;
+    private final int prizeMoney;
 
     LottoRank(double matchingCount, int prizeMoney) {
         this.matchingCount = matchingCount;

@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.List;
-
 public class WinningLotto {
     public static final int LOTTO_POSSESSION_NUMBER = 6;
     public static final double SECOND_RANK_MATCH_COUNT = 5.5;

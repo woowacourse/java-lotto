@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.controller.LottoStore;
 import lotto.exception.MoneyException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
