@@ -7,6 +7,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoTickets;
 import lotto.domain.Payment;
 import lotto.domain.WinningLotto;
+import lotto.utils.ParserUtils;
 import lotto.view.OutputView;
 import lotto.view.Screen;
 
@@ -19,7 +20,7 @@ public class LottoController {
     private final Payment payment;
 
     public LottoController(final String value) {
-        this.payment = new Payment(Integer.parseInt(value));
+        this.payment = new Payment(ParserUtils.tryParseInt(value));
         lottoTickets = new LottoTickets(payment.count());
         showLottoTickets();
         this.winningLotto = createWinningLotto();
