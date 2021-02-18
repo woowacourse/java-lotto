@@ -36,8 +36,3 @@
   * 추상 클래스를 상속하면 상수를 공유할 수 있어,
 * Money.calculate : 인스턴스 메소드 VS 클래스 메소드
 
-## 리팩토링 예정 대상
-
-* Money::divide - 메서드명
-* BonusBall의 예외 처리 -> Wrapper 클래스 정의하기
-
