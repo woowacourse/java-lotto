@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 import java.util.List;
+import lotto.utils.LottoGenerator;
 
 public class Machine {
     private static final String IS_NUMBER = "\\d+";
@@ -15,15 +16,14 @@ public class Machine {
         money = Integer.parseInt(moneyValue);
     }
 
-    public List<LottoTicket> buyTickets() {
+    public List<LottoTicket> buyTickets(LottoGenerator lottoGenerator) {
         int ticketCount;
         List<LottoTicket> lottoTickets = new ArrayList<>();
 
         ticketCount = money / LottoTicket.PRICE;
 
         for (int i = 0; i < ticketCount; i++) {
-            // TODO 랜덤으로 변경
-            lottoTickets.add(new LottoTicket("1,2,3,4,5,6"));
+            lottoTickets.add(lottoGenerator.generateLottoTicket());
         }
         return lottoTickets;
     }
