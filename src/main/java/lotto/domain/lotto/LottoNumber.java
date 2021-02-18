@@ -1,17 +1,15 @@
 package lotto.domain.lotto;
 
-import static lotto.utils.Validation.END;
-import static lotto.utils.Validation.START;
-
 import java.util.Objects;
 import lotto.utils.Validation;
+import lotto.view.ErrorMessages;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
     private final int value;
 
     public LottoNumber(String number) {
-        if (Validation.isNumeric(number)) {
+        if (!Validation.isNumeric(number)) {
             throw new IllegalArgumentException();
         }
 
@@ -27,7 +25,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private void validateLottoNumberRange(int lottoNumber) {
         if (lottoNumber < START || lottoNumber > END) {
-            throw new IllegalArgumentException("[Error] 로또 번호는 1부터 45까지 입니다.");
+            throw new IllegalArgumentException(
+                ErrorMessages.ERROR_LOTTO_NUMBER_OUT_OF_BOUND.getMessage());
         }
     }
 
