@@ -16,30 +16,27 @@ public class WinningLotto {
     }
 
     public static int howManyWins(Lotto lotto) {
-        ArrayList<Integer> wins = new ArrayList<>(winLotto.getLottoNumbers());
-        wins.retainAll(lotto.getLottoNumbers());
+        ArrayList<Integer> wins = new ArrayList<>(winLotto.getLotto());
+        wins.retainAll(lotto.getLotto());
         return wins.size();
     }
 
     private List<Integer> changeToList(String numberInput) {
-        List<Integer> winningNumbers = Arrays.stream(numberInput.split(DELIMITER))
+        return Arrays.stream(numberInput.split(DELIMITER))
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
-        return winningNumbers;
     }
 
     private ArrayList<Integer> generateWinningLotto(String numberInput) {
         List<Integer> winningNumbers = changeToList(numberInput);
-        ArrayList<Integer> winningNums = new ArrayList<>();
-        winningNums.addAll(winningNumbers);
+        ArrayList<Integer> winningNums = new ArrayList<>(winningNumbers);
         return winningNums;
     }
 
     public Rank findRank(Lotto lotto) {
         int match = howManyWins(lotto);
         boolean bonusMatch = bonusBall.hasBonusBall(lotto);
-        Rank rank = Rank.makeRankByMatch(match, bonusMatch);
-        return rank;
+        return Rank.makeRankByMatch(match, bonusMatch);
     }
 }
