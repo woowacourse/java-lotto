@@ -14,6 +14,9 @@ public class OutputView {
     private static final String LOTTO_STATISTICS_MESSAGE = "%d개 일치 (%d원)- %d개\n";
     private static final String LOTTO_STATISTICS_BONUS_BALL_MESSAGE = "%d개 일치, 보너스 볼 일치(%d원)- %d개\n";
     private static final String YIELD_MESSAGE = "총 수익률은 %.2f입니다.\n";
+    private static final String DELIMITER = ", ";
+    private static final String PREFIX = "[";
+    private static final String SUFFIX = "]";
 
     private OutputView() {}
 
@@ -27,7 +30,7 @@ public class OutputView {
             String numbers = lottoTicket.getLottoNumbers()
                     .stream()
                     .map(lottoNumber -> String.valueOf(lottoNumber.getLottoNumber()))
-                    .collect(Collectors.joining(", ", "[", "]"));
+                    .collect(Collectors.joining(DELIMITER, PREFIX, SUFFIX));
             System.out.println(numbers);
         }
         System.out.println();
@@ -45,12 +48,13 @@ public class OutputView {
     }
 
     private static void printStatisticsMessage(LottoRank lottoRank, LottoStatistics lottoStatistics) {
+        int matchCounts = lottoRank.getMatchCounts();
+        int prizeMoney = lottoRank.getPrizeMoney();
+        long winningCounts = lottoStatistics.getCounts(lottoRank);
         if (lottoRank == LottoRank.SECOND) {
-            System.out.printf(LOTTO_STATISTICS_BONUS_BALL_MESSAGE, lottoRank.getMatchCounts(), lottoRank.getPrizeMoney(),
-                    lottoStatistics.getCounts(lottoRank));
+            System.out.printf(LOTTO_STATISTICS_BONUS_BALL_MESSAGE, matchCounts, prizeMoney, winningCounts);
             return;
         }
-        System.out.printf(LOTTO_STATISTICS_MESSAGE, lottoRank.getMatchCounts(), lottoRank.getPrizeMoney(),
-                lottoStatistics.getCounts(lottoRank));
+        System.out.printf(LOTTO_STATISTICS_MESSAGE, matchCounts, prizeMoney, winningCounts);
     }
 }
