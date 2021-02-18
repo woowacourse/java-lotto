@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
-import lotto.domain.Lottos;
+import lotto.domain.LottoGroup;
 import lotto.domain.Rank;
 
 import java.util.ArrayList;
@@ -27,10 +27,10 @@ public class LottoView {
         System.out.println(count + LOTTO_COUNT_MESSAGE);
     }
 
-    public static void printLottos(Lottos lottos) {
-        ArrayList<Lotto> lottoGroup = lottos.getLottoGroup();
-        for (int i = 0; i < lottos.getCount(); i++)
-            System.out.print(lottoGroup.get(i).getLottoNumbers() + CHANGE_LINE);
+    public static void printLottoGroup(LottoGroup LottoGroup) {
+        ArrayList<Lotto> lottoGroup = LottoGroup.getLottoGroup();
+        for (int i = 0; i < LottoGroup.getCount(); i++)
+            System.out.print(lottoGroup.get(i).getLotto() + CHANGE_LINE);
     }
 
     public static String requestWinningNumber() {

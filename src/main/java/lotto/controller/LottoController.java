@@ -34,7 +34,7 @@ public class LottoController {
     public void startLotto() {
         lottoGroup = new LottoGroup(LottoView.requestMoney());
         LottoView.buyLotto(lottoGroup.getCount());
-        LottoView.printLottos(lottoGroup);
+        LottoView.printLottoGroup(lottoGroup);
         makeWinningLotto();
     }
 
