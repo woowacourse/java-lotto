@@ -11,7 +11,7 @@ public class LottoMachine {
 
     private final Price price;
 
-    public LottoMachine(final Price price) {
+    private LottoMachine(final Price price) {
         this.price = price;
     }
 
@@ -21,7 +21,7 @@ public class LottoMachine {
 
     public List<LottoTicket> generateLottoTickets() {
         final List<LottoTicket> lottoTickets = new ArrayList<>();
-        final int lottoTicketQuantity = getLottoTicketQuantity(price);
+        final int lottoTicketQuantity = getLottoTicketQuantity();
         for (int i = 0; i < lottoTicketQuantity; i++) {
             lottoTickets.add(LottoTicket.valueOf(
                     RandomLottoNumberGenerator.generate(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)));
@@ -29,7 +29,7 @@ public class LottoMachine {
         return lottoTickets;
     }
 
-    private int getLottoTicketQuantity(final Price price) {
+    public int getLottoTicketQuantity() {
         return price.getValue() / LOTTO_TICKET_PRICE;
     }
 }
