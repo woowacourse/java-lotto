@@ -23,6 +23,7 @@
 - Money : 숫자형태의 돈
 - LottoNumber : 한 자리 로또 번호
 - LottoLine : 6자리 로또 번호
+  - 숫자 몇개 맞췄는지 판별
 - Lotto : 사용자가 구매한 로또
   - 총 수익률 계산하기
 - Rank
