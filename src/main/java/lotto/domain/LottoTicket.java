@@ -13,7 +13,7 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static LottoTicket generateTicket(List<Integer> numbers) {
+    public static LottoTicket from(List<Integer> numbers) {
         validateNumbers(numbers);
         List<LottoNumber> lottoNumbers = numbers.stream()
                 .map(LottoNumber::from)
@@ -22,25 +22,24 @@ public class LottoTicket {
     }
 
     private static void validateNumbers(List<Integer> numbers) {
-        Set<Integer> distinctNumbers = new HashSet<>(numbers);
         int numberCounts = numbers.size();
-        int distinctNumberCounts = distinctNumbers.size();
+        int distinctNumberCounts = new HashSet<>(numbers).size();
         if (numberCounts != VALID_LOTTO_NUMBER_COUNTS || numberCounts != distinctNumberCounts) {
             throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_COUNTS);
         }
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return Collections.unmodifiableList(lottoNumbers);
-    }
-
     public int getMatchCounts(LottoTicket winningTicket) {
-        return (int) this.lottoNumbers.stream()
-                .filter(lottoNumber -> winningTicket.contains(lottoNumber))
+        return (int) lottoNumbers.stream()
+                .filter(winningTicket::contains)
                 .count();
     }
 
     public boolean contains(LottoNumber lottoNumber) {
-        return this.lottoNumbers.contains(lottoNumber);
+        return lottoNumbers.contains(lottoNumber);
+    }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return Collections.unmodifiableList(lottoNumbers);
     }
 }

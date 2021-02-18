@@ -56,7 +56,7 @@ class WinningLottoTicketTest {
     @DisplayName("로또 티켓과 당첨 번호를 비교하여 순위를 반환한다.")
     @Test
     void compareLottoTicketNumbers() {
-        LottoTicket lottoTicket = LottoTicket.generateTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoTicket lottoTicket = LottoTicket.from(Arrays.asList(1, 2, 3, 4, 5, 6));
         WinningLottoTicket winningLottoTicket = WinningLottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 7), 6);
 
         assertThat(winningLottoTicket.compareNumbers(lottoTicket)).isEqualTo(LottoRank.SECOND);

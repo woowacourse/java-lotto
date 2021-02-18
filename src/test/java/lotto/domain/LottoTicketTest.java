@@ -23,7 +23,7 @@ class LottoTicketTest {
                 Arrays.asList(1, 3, 3, 4, 5, 6)));
     }
 
-    private static Stream<Arguments> getTicketNumbers() {
+    private static Stream<Arguments> getLottoNumbers() {
         return Stream.of(Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), 6),
                 Arguments.of(Arrays.asList(4, 5, 6, 7, 8, 9), 3));
     }
@@ -33,7 +33,7 @@ class LottoTicketTest {
     @MethodSource("getInvalidLottoNumbers")
     void wrongLottoNumberCounts(List<Integer> numbers) {
         assertThatCode(() -> {
-            LottoTicket.generateTicket(numbers);
+            LottoTicket.from(numbers);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 티켓은 중복되지 않은 6자리의 숫자로 구성되어야 합니다.");
     }
@@ -41,7 +41,7 @@ class LottoTicketTest {
     @DisplayName("로또 티켓이 정상적으로 발급될 경우")
     @Test
     void makeLottoTicket() {
-        LottoTicket lottoTicket = LottoTicket.generateTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoTicket lottoTicket = LottoTicket.from(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         List<LottoNumber> lottoNumbers = lottoTicket.getLottoNumbers();
 
@@ -51,10 +51,10 @@ class LottoTicketTest {
 
     @DisplayName("로또 티켓과 당첨 번호를 비교하여 일치하는 개수를 반환한다.")
     @ParameterizedTest
-    @MethodSource("getTicketNumbers")
+    @MethodSource("getLottoNumbers")
     void compareLottoTickets(List<Integer> numbers, int matchCounts) {
-        LottoTicket lottoTicket = LottoTicket.generateTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoTicket winningTicket = LottoTicket.generateTicket(numbers);
+        LottoTicket lottoTicket = LottoTicket.from(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoTicket winningTicket = LottoTicket.from(numbers);
 
         int targetMatchCounts = lottoTicket.getMatchCounts(winningTicket);
 
@@ -65,7 +65,7 @@ class LottoTicketTest {
     @ParameterizedTest
     @CsvSource({"1,true", "2,false"})
     void contains(int ballNumber, boolean target) {
-        LottoTicket lottoTicket = LottoTicket.generateTicket(Arrays.asList(1, 9, 3, 4, 5, 6));
+        LottoTicket lottoTicket = LottoTicket.from(Arrays.asList(1, 9, 3, 4, 5, 6));
 
         boolean isContainingBonusNumber = lottoTicket.contains(LottoNumber.from(ballNumber));
 

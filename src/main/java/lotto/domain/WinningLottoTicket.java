@@ -17,7 +17,7 @@ public class WinningLottoTicket {
         if (winningNumbers.contains(bonusBallNumber)) {
             throw new IllegalArgumentException(DUPLICATION_NUMBER);
         }
-        LottoTicket lottoTicket = LottoTicket.generateTicket(winningNumbers);
+        LottoTicket lottoTicket = LottoTicket.from(winningNumbers);
         LottoNumber bonusLottoNumber = LottoNumber.from(bonusBallNumber);
         return new WinningLottoTicket(lottoTicket, bonusLottoNumber);
     }
