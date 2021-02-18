@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Money {
     private static final String ERROR_INVALID_INPUT_FORMAT = "금액은 숫자만 입력해주세요.";
-    private static final String ERROR_NEGETIVE_NUMBER = "양수만 입력해주세요.";
+    private static final String ERROR_NEGATIVE_NUMBER = "양수만 입력해주세요.";
     private static final String LONG_REGULAR_EXPRESSION = "^-?[0-9]+$";
     private static final long ZERO = 0;
 
@@ -26,7 +26,7 @@ public class Money {
 
     private void validatePositiveNumber(long input) {
         if (input < ZERO) {
-            throw new IllegalArgumentException(ERROR_NEGETIVE_NUMBER);
+            throw new IllegalArgumentException(ERROR_NEGATIVE_NUMBER);
         }
     }
 
