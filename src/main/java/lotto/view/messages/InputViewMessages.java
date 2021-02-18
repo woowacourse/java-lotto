@@ -1,4 +1,4 @@
-package lotto.view;
+package lotto.view.messages;
 
 public enum InputViewMessages {
     REQUEST_PURCHASE_MONEY("구입금액을 입력해주세요."),

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 import lotto.domain.lotto.LottoLine;
 import lotto.domain.lotto.LottoNumber;
+import lotto.view.messages.InputViewMessages;
 
 public class InputView {
 

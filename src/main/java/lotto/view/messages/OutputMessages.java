@@ -1,4 +1,4 @@
-package lotto.view;
+package lotto.view.messages;
 
 public enum OutputMessages {
 
