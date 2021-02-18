@@ -7,13 +7,9 @@ import org.junit.jupiter.api.Test;
 
 class MachineTest {
 
-    //금액입력
-
     @Test
     void buyTickets() {
-        Machine machine = new Machine("4000");
-
-        assertThat(machine.buyTickets(new FixedLottoGenerator()))
+        assertThat(new Machine("4000").getTickets())
             .size().isEqualTo(4);
     }
 

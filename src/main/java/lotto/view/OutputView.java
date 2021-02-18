@@ -14,7 +14,7 @@ public class OutputView {
 
     public static void printResult(Result result) {
         Map<Rank, Integer> resultMap = result.getResultMap();
-
+        System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
 

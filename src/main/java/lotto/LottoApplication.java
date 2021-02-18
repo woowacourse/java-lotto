@@ -4,7 +4,6 @@ import java.util.List;
 import lotto.domain.LottoTicket;
 import lotto.domain.Machine;
 import lotto.domain.Result;
-import lotto.utils.RandomLottoGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 import spark.ModelAndView;
@@ -20,13 +19,11 @@ public class LottoApplication {
         String moneyValue = InputView.getMoneyInput();
         Machine machine = new Machine(moneyValue);
 
-        List<LottoTicket> lottoTickets = machine.buyTickets(new RandomLottoGenerator());
-
-        OutputView.printTickets(lottoTickets);
+        OutputView.printTickets(machine.getTickets());
 
         String winnerNumbersValue = InputView.getWinningNumbersInput();
         String bonusBallValue = InputView.getBonusBallInput();
-        Result result = machine.getResult(winnerNumbersValue, bonusBallValue, lottoTickets);
+        Result result = machine.getResult(winnerNumbersValue, bonusBallValue);
 
         OutputView.printResult(result);
     }
