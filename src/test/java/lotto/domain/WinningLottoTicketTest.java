@@ -62,6 +62,6 @@ class WinningLottoTicketTest {
 
         LottoRank result = winningLottoTicket.compareNumbers(lottoTicket);
 
-        assertThat(result).isEqualTo(LottoRank.SECOND);
+        assertThat(result).isEqualTo(LottoRank.SECOND_PRIZE);
     }
 }

@@ -44,7 +44,7 @@ public class OutputView {
     }
 
     private static void printStatisticsMessage(LottoRank lottoRank, LottoStatistics lottoStatistics) {
-        if (lottoRank == LottoRank.SECOND) {
+        if (lottoRank == LottoRank.SECOND_PRIZE) {
             System.out.printf(LOTTO_STATISTICS_BONUS_BALL_MESSAGE, lottoRank.getMatchCounts(), lottoRank.getPrizeMoney(),
                     lottoStatistics.getCountsByRank(lottoRank));
             return;

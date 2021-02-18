@@ -12,13 +12,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoRankTest {
 
     private static Stream<Arguments> getRanks() {
-        return Stream.of(Arguments.of(6, false, LottoRank.FIRST),
-                Arguments.of(5, true, LottoRank.SECOND),
-                Arguments.of(5, false, LottoRank.THIRD),
-                Arguments.of(4, false, LottoRank.FOURTH),
-                Arguments.of(4, true, LottoRank.FOURTH),
-                Arguments.of(3, false, LottoRank.FIFTH),
-                Arguments.of(3, true, LottoRank.FIFTH),
+        return Stream.of(Arguments.of(6, false, LottoRank.FIRST_PRIZE),
+                Arguments.of(5, true, LottoRank.SECOND_PRIZE),
+                Arguments.of(5, false, LottoRank.THIRD_PRIZE),
+                Arguments.of(4, false, LottoRank.FOURTH_PRIZE),
+                Arguments.of(4, true, LottoRank.FOURTH_PRIZE),
+                Arguments.of(3, false, LottoRank.FIFTH_PRIZE),
+                Arguments.of(3, true, LottoRank.FIFTH_PRIZE),
                 Arguments.of(2, true, LottoRank.MISS),
                 Arguments.of(0, false, LottoRank.MISS));
     }
@@ -27,6 +27,8 @@ class LottoRankTest {
     @ParameterizedTest
     @MethodSource("getRanks")
     void getLottoRank(int matchCounts, boolean isBonusBall, LottoRank rank) {
-        assertThat(LottoRank.of(matchCounts, isBonusBall)).isEqualTo(rank);
+        LottoRank value = LottoRank.of(matchCounts, isBonusBall);
+
+        assertThat(value).isEqualTo(rank);
     }
 }
