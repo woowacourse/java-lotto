@@ -34,20 +34,20 @@ public class OutputView {
     public static void printResultStatistic(LottoResult lottoResult) {
         System.out.println("\n당첨 통계");
         System.out.println(DIVIDER);
-        for (PrizeType prizeType : PrizeType.values()) {
-            resultStatistic(prizeType, lottoResult.getCountByPrizeType(prizeType));
+        for (Prize prize : Prize.values()) {
+            resultStatistic(prize, lottoResult.getCountByPrizeType(prize));
         }
     }
 
-    private static void resultStatistic(PrizeType prizeType, int count) {
-        if (prizeType == PrizeType.NO_PRIZE) {
+    private static void resultStatistic(Prize prize, int count) {
+        if (prize == Prize.NO_PRIZE) {
             return;
         }
-        if (prizeType == PrizeType.SECOND_PRIZE) {
-            System.out.println(prizeType.getMatchCount() + "개 일치," + " 보너스 볼 일치(" + prizeType.getPrizeMoney().getValue() + "원)- " + count + "개");
+        if (prize == Prize.SECOND_PRIZE) {
+            System.out.println(prize.getMatchCount() + "개 일치," + " 보너스 볼 일치(" + prize.getPrizeMoney().getValue() + "원)- " + count + "개");
             return;
         }
-        System.out.println(prizeType.getMatchCount() + "개 일치(" + prizeType.getPrizeMoney().getValue() + "원)- " + count + "개");
+        System.out.println(prize.getMatchCount() + "개 일치(" + prize.getPrizeMoney().getValue() + "원)- " + count + "개");
     }
 
     public static void printProfitRate(LottoResult lottoResult, Money money) {

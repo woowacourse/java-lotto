@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.Arrays;
 
-public enum PrizeType {
+public enum Prize {
     NO_PRIZE(new Money(0), 0),
     FIFTH_PRIZE(new Money(5000), 3),
     FOURTH_PRIZE(new Money(50000), 4),
@@ -14,7 +14,7 @@ public enum PrizeType {
     private Money prizeMoney;
     private int matchCount;
 
-    PrizeType(Money prizeMoney, int matchCount) {
+    Prize(Money prizeMoney, int matchCount) {
         this.prizeMoney = prizeMoney;
         this.matchCount = matchCount;
     }
@@ -35,7 +35,7 @@ public enum PrizeType {
         return matchCount == BONUS_CHECK_PIVOT;
     }
 
-    public static PrizeType getPrizeType(int matchCount, boolean isBonusBall){
+    public static Prize getPrizeType(int matchCount, boolean isBonusBall){
         if(isMatchCountEqualsPivot(matchCount) && isBonusBall){
             return SECOND_PRIZE;
         }

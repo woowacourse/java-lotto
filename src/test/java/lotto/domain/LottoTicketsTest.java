@@ -1,13 +1,11 @@
 package lotto.domain;
 
-import lotto.view.OutputView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -17,7 +15,7 @@ class LottoTicketsTest {
     private LottoTickets lottoTickets ;
     private List<LottoNumber> winningNumbers;
     private LottoNumber bonusBall;
-    private List<PrizeType> result;
+    private List<Prize> result;
 
     @BeforeEach
     void init() {
@@ -54,7 +52,7 @@ class LottoTicketsTest {
     @Test
     @DisplayName("당첨 티켓 분류")
     void checkWinningTicket() {
-        assertThat(result.get(0)).isEqualTo(PrizeType.FIRST_PRIZE);
-        assertThat(result.get(1)).isEqualTo(PrizeType.SECOND_PRIZE);
+        assertThat(result.get(0)).isEqualTo(Prize.FIRST_PRIZE);
+        assertThat(result.get(1)).isEqualTo(Prize.SECOND_PRIZE);
     }
 }

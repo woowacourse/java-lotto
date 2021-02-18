@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.exception.IllegalLottoNumber;
+import lotto.exception.IllegalLottoNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -16,7 +16,7 @@ public class LottoNumberTest {
     void validateNumbers(String input) {
         assertThatThrownBy(()->{
             LottoNumber lottoNumber = new LottoNumber(input);
-        }).isInstanceOf(IllegalLottoNumber.class);
+        }).isInstanceOf(IllegalLottoNumberException.class);
     }
 
     @Test

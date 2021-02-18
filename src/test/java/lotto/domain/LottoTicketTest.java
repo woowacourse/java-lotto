@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.exception.IllegalLottoNumbers;
+import lotto.exception.IllegalLottoNumbersException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +24,7 @@ public class LottoTicketTest {
                 new LottoNumber("40"));
         assertThatThrownBy(() -> {
             LottoTicket lottoTicket = new LottoTicket(numbers);
-        }).isInstanceOf(IllegalLottoNumbers.class);
+        }).isInstanceOf(IllegalLottoNumbersException.class);
     }
 
     @Test
@@ -38,7 +38,7 @@ public class LottoTicketTest {
                 new LottoNumber("10"));
         assertThatThrownBy(() -> {
             LottoTicket lottoTicket = new LottoTicket(numbers);
-        }).isInstanceOf(IllegalLottoNumbers.class);
+        }).isInstanceOf(IllegalLottoNumbersException.class);
     }
 
     @Test
@@ -53,6 +53,6 @@ public class LottoTicketTest {
                 new LottoNumber("10"));
         assertThatThrownBy(() -> {
             LottoTicket lottoTicket = new LottoTicket(numbers);
-        }).isInstanceOf(IllegalLottoNumbers.class);
+        }).isInstanceOf(IllegalLottoNumbersException.class);
     }
 }

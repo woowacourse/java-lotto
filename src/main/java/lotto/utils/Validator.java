@@ -21,19 +21,19 @@ public class Validator {
 
     public static void validateLottoNumbers(List<LottoNumber> numbers) {
         if (isInvalidateLottoSize(numbers) || isDuplicateNumber(numbers)) {
-            throw new IllegalLottoNumbers();
+            throw new IllegalLottoNumbersException();
         }
     }
 
     public static void validateMoneyValue(String input) {
         if (isInvalidNumberFormat(input) || isLessThanMinimumMoney(input)) {
-            throw new IllegalMoney();
+            throw new IllegalMoneyException();
         }
     }
 
     public static void validateLottoNumber(String input) {
         if (isInvalidNumberFormat(input) || isInvalidLottoNumberRange(input)) {
-            throw new IllegalLottoNumber();
+            throw new IllegalLottoNumberException();
         };
     }
 
@@ -59,7 +59,7 @@ public class Validator {
 
     public static void validateWinningLotto(LottoTicket winningTicket, LottoNumber bonusNumber) {
         if(winningTicket.isContainLottoNumber(bonusNumber)){
-            throw new IllegalWinningLotto();
+            throw new IllegalWinningLottoException();
         }
     }
 }

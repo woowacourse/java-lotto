@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.exception.IllegalMoney;
+import lotto.exception.IllegalMoneyException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -14,6 +14,6 @@ public class MoneyTest {
     void isValidMoney(String input) {
         assertThatThrownBy(() -> {
             Money money = new Money(input);
-        }).isInstanceOf(IllegalMoney.class);
+        }).isInstanceOf(IllegalMoneyException.class);
     }
 }

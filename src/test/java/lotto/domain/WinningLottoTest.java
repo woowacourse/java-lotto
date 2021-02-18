@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.exception.IllegalWinningLotto;
+import lotto.exception.IllegalWinningLottoException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +8,6 @@ import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 class WinningLottoTest {
 
@@ -25,6 +24,6 @@ class WinningLottoTest {
         LottoNumber bonusNumber = new LottoNumber("3");
         assertThatThrownBy(() -> {
             WinningLotto winningLotto = new WinningLotto(winningTicket, bonusNumber);
-        }).isInstanceOf(IllegalWinningLotto.class);
+        }).isInstanceOf(IllegalWinningLottoException.class);
     }
 }

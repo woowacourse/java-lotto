@@ -4,23 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoResult {
-    private final List<PrizeType> lottoResults;
+    private final List<Prize> lottoResults;
 
-    public LottoResult(List<PrizeType> lottoResults) {
+    public LottoResult(List<Prize> lottoResults) {
         this.lottoResults = new ArrayList<>(lottoResults);
     }
 
     public double calculateProfitRate(Money money) {
         double moneySum = 0;
-        for (PrizeType prizeType : PrizeType.values()) {
-            moneySum += prizeType.getPrizeMoney().getValue() * getCountByPrizeType(prizeType);
+        for (Prize prize : Prize.values()) {
+            moneySum += prize.getPrizeMoney().getValue() * getCountByPrizeType(prize);
         }
         return moneySum / money.getValue();
     }
 
-    public int getCountByPrizeType(PrizeType prizeType) {
+    public int getCountByPrizeType(Prize prize) {
         return (int) lottoResults.stream()
-                .filter(p -> p.equals(prizeType))
+                .filter(p -> p.equals(prize))
                 .count();
     }
 }
