@@ -49,4 +49,3 @@ public class MoneyTest {
         assertThat(money.calculateProfitRate(profit)).isEqualTo(10);
     }
 }
-
