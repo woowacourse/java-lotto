@@ -21,7 +21,7 @@ public class LottoResultStatistics {
         return new LottoResultStatistics(lottoResult);
     }
 
-    public static Map<LottoRank, Integer> setLottoResult() {
+    private static Map<LottoRank, Integer> setLottoResult() {
         Map<LottoRank, Integer> lottoResult = new TreeMap<>(LottoRank.matchCountComparator);
         Arrays.stream(LottoRank.values())
                 .forEach(value -> lottoResult.put(value, DEFAULT_COUNT));
