@@ -21,7 +21,6 @@ public class InputView {
         String[] splitLottoNumbersInput = lottoNumbersInput.replace(" ", "").split(",");
         ArrayList<LottoNumber> lottoNumberList = new ArrayList();
 
-        System.out.println(splitLottoNumbersInput.length);
         for (int i = 0; i < splitLottoNumbersInput.length; i++) {
             lottoNumberList.add(new LottoNumber(splitLottoNumbersInput[i]));
         }
