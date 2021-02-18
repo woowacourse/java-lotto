@@ -23,7 +23,7 @@ class LottoFactoryTest {
         int lottoCount = 3;
 
         //when
-        List<Lotto> lottos = LottoFactory.generates(lottoNumbers -> numbers, lottoCount);
+        Lottos lottos = LottoFactory.generates(lottoNumbers -> numbers, lottoCount);
 
         //then
         assertThat(lottos).isNotNull();
