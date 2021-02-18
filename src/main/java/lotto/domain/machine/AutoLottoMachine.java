@@ -8,9 +8,10 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class AutoLottoMachine implements LottoMachine {
+    public static final int LOTTO_PRICE = 1000;
+
     private static final String INDIVISIBLE_MONEY_ERROR_MSG_FORMAT = "로또는 %d원 단위로 구매해야 있습니다. 입력금액 : %d";
     private static final String MONEY_MUST_BE_POSITIVE_ERROR_MSG_FORMAT = "금액은 양수여야 합니다. 입력금액 : %d";
-    private static final int LOTTO_PRICE = 1000;
 
     private final LottoTicketFactory lottoTicketFactory = new AutoLottoTicketFactory();
 

@@ -7,6 +7,7 @@ import lotto.domain.ticket.LottoTickets;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class OutputView {
@@ -36,11 +37,11 @@ public class OutputView {
                 .collect(Collectors.joining(COMMA, TICKET_PREFIX, TICKET_SUFFIX));
     }
 
-    public void printLottoResult(LottoResult lottoResult, int purchaseMoney) {
+    public void printLottoResult(LottoResult lottoResult) {
         System.out.println(WINNING_STATISTICS);
         System.out.println(DASHES);
         printWinningResult(lottoResult);
-        printProfitRatio(purchaseMoney, lottoResult.calculatePrizeMoney());
+        printProfitRatio(lottoResult.calculateProfitPercent());
     }
 
     public void printWinningResult(LottoResult lottoResult) {
@@ -54,12 +55,10 @@ public class OutputView {
     }
 
     public String makeWinningResultMessage(Prize prize, LottoResult lottoResult) {
-        Long winningCount = lottoResult.get(prize);
-        if (winningCount == null) {
-            winningCount = 0L;
-        }
+        Optional<Long> winningCount = lottoResult.get(prize);
+
         return String.format(findFormat(prize), prize.getMatchCount(), prize.getPrizeMoney(),
-                winningCount);
+                winningCount.orElse(0L));
     }
 
     public String findFormat(Prize prize) {
@@ -69,7 +68,7 @@ public class OutputView {
         return INFORM_RESULT_MSG_FORMAT;
     }
 
-    public void printProfitRatio(int purchaseMoney, Long prizeMoney) {
-        System.out.printf(INFORM_PROFIT_RATIO_MSG_FORMAT, (prizeMoney * 100) / purchaseMoney);
+    public void printProfitRatio(long profitPercentage) {
+        System.out.printf(INFORM_PROFIT_RATIO_MSG_FORMAT, profitPercentage);
     }
 }
