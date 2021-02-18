@@ -12,7 +12,7 @@ public class LottoNumber {
 
     public LottoNumber(final int value) {
         validate(value);
-        this.number = value;
+        number = value;
     }
 
     private void validate(final int value) {

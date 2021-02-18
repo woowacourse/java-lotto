@@ -11,7 +11,7 @@ public class Payment {
 
     public Payment(final int value) {
         validate(value);
-        this.money = convertPaymentAmount(value);
+        money = convertPaymentAmount(value);
     }
 
     private void validate(final int value) {
