@@ -62,7 +62,7 @@ public class OutputView {
         lottoResult.entrySet()
                 .stream()
                 .filter(entry -> !entry.getKey().equals(LottoRank.SIXTH_PLACE))
-                .forEach(entry -> printEachStatistics(entry));
+                .forEach(OutputView::printEachStatistics);
     }
 
     private static void printEachStatistics(Map.Entry<LottoRank, Integer> entry) {
