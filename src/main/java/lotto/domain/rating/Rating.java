@@ -11,6 +11,7 @@ public enum Rating {
     FIFTH(3, 5000),
     MISS(0, 0);
 
+    private static final String NONE_RATING_ERROR_MESSAGE = "[Error] 존재하지 않는 Rating 객체";
     private int matchCount;
     private int reward;
 
@@ -29,7 +30,7 @@ public enum Rating {
         }
 
         return Arrays.stream(values()).filter(rating -> rating.matchCount == matchCount).findAny()
-            .orElseThrow(NoSuchElementException::new);
+            .orElseThrow(() -> new NoSuchElementException(NONE_RATING_ERROR_MESSAGE));
     }
 
     public int getMatchCount() {
