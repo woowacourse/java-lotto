@@ -12,8 +12,10 @@ public class Result {
     private final Map<Rank, Integer> resultMap;
     private final BigInteger earningRate;
 
-    public Result(String winningNumbers, String bonusBall, int ticketCount, LottoGenerator lottoGenerator){
-        this(new WinningNumbers(winningNumbers, bonusBall), new LottoTickets(ticketCount, lottoGenerator));
+    public Result(String winningNumbers, String bonusBall, int ticketCount,
+        LottoGenerator lottoGenerator) {
+        this(new WinningNumbers(winningNumbers, bonusBall),
+            new LottoTickets(ticketCount, lottoGenerator));
     }
 
     public Result(WinningNumbers winningNumbers, LottoTickets lottoTickets) {
@@ -22,7 +24,7 @@ public class Result {
         setResultMap(winningNumbers, lottoTickets);
         BigDecimal prizePerRank = getTotalPrizePerRank();
 
-        this.earningRate = getEarningRate(lottoTickets.size()*LottoTicket.PRICE, prizePerRank);
+        this.earningRate = getEarningRate(lottoTickets.size() * LottoTicket.PRICE, prizePerRank);
     }
 
     private BigInteger getEarningRate(int buyPrice, BigDecimal prizePerRank) {
@@ -34,7 +36,8 @@ public class Result {
     private BigDecimal getTotalPrizePerRank() {
         BigDecimal prizePerRank = BigDecimal.ZERO;
         for (Map.Entry<Rank, Integer> result : resultMap.entrySet()) {
-            prizePerRank = result.getKey().getPrize().multiply(BigDecimal.valueOf(result.getValue()));
+            prizePerRank = result.getKey().getPrize()
+                .multiply(BigDecimal.valueOf(result.getValue()));
         }
         return prizePerRank;
     }

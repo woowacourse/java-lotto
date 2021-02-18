@@ -18,7 +18,7 @@ public class RandomLottoGenerator implements LottoGenerator {
         while (numbers.size() != LottoTicket.SIZE_OF_LOTTO_NUMBERS) {
             numbers.add(getRandomLottoNumber());
         }
-        return new LottoTicket (new ArrayList<>(numbers));
+        return new LottoTicket(new ArrayList<>(numbers));
     }
 
     private LottoNumber getRandomLottoNumber() {

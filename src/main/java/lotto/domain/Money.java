@@ -20,8 +20,8 @@ public class Money {
         }
     }
 
-    public int getPossibleTicketCount(){
-        return money.intValue()/LottoTicket.PRICE;
+    public int getPossibleTicketCount() {
+        return money.intValue() / LottoTicket.PRICE;
     }
 
 }

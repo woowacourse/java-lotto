@@ -23,7 +23,7 @@ class LottoTicketTest {
             new LottoNumber(6)
         );
 
-        assertThatCode(() ->  new LottoTicket(lottoNumbers))
+        assertThatCode(() -> new LottoTicket(lottoNumbers))
             .doesNotThrowAnyException();
     }
 
@@ -78,7 +78,7 @@ class LottoTicketTest {
     @Test
     @DisplayName("성공 - 문자열로 LottoTicket 생성")
     void generate_by_string() {
-        assertThatCode(() ->  new LottoTicket("1,2,3,4,5,6"))
+        assertThatCode(() -> new LottoTicket("1,2,3,4,5,6"))
             .doesNotThrowAnyException();
     }
 

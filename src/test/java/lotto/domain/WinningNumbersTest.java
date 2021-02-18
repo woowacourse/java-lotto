@@ -113,4 +113,5 @@ class WinningNumbersTest {
 
         assertThat(winningNumbers.getRank(lottoTicket)).isEqualTo(Rank.UNRANKED);
     }
+
 }

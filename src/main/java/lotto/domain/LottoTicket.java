@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -15,7 +14,7 @@ public class LottoTicket {
     public static final int PRICE = 1000;
     public static final int SIZE_OF_LOTTO_NUMBERS = 6;
 
-    private List<LottoNumber> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public LottoTicket(List<LottoNumber> lottoNumbers) {
         List<LottoNumber> numbers = new ArrayList<>(lottoNumbers);
@@ -35,7 +34,7 @@ public class LottoTicket {
 
     private void validateSize(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != SIZE_OF_LOTTO_NUMBERS) {
-            throw new CustomException("로또 티켓의 사이즈는 " + SIZE_OF_LOTTO_NUMBERS+ "개 입니다.");
+            throw new CustomException("로또 티켓의 사이즈는 " + SIZE_OF_LOTTO_NUMBERS + "개 입니다.");
         }
     }
 

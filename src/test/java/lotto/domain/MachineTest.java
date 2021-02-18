@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import lotto.utils.FixedLottoGenerator;
 import org.junit.jupiter.api.DisplayName;
@@ -27,7 +27,7 @@ class MachineTest {
         Result result = new Result("1,2,3,4,5,6", "7", 3, new FixedLottoGenerator());
         Machine machine = new Machine("3000", new FixedLottoGenerator());
 
-        assertThat(machine.getResult("1,2,3,4,5,6","7")).isEqualTo(result);
+        assertThat(machine.getResult("1,2,3,4,5,6", "7")).isEqualTo(result);
     }
 
 }

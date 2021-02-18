@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.function.BiFunction;
 
 public enum Rank {
-    FIRST_PLACE(BigDecimal.valueOf(2000000000),  (val, isBonus) -> val == 6),
+    FIRST_PLACE(BigDecimal.valueOf(2000000000), (val, isBonus) -> val == 6),
     SEC0ND_PLACE(BigDecimal.valueOf(30000000), (val, isBonus) -> val == 5 && isBonus),
     THIRD_PLACE(BigDecimal.valueOf(1500000), (val, isBonus) -> val == 5 && !isBonus),
     FOURTH_PLACE(BigDecimal.valueOf(50000), (val, isBonus) -> val == 4),

@@ -1,9 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import lotto.utils.FixedLottoGenerator;
@@ -19,7 +17,6 @@ class LottoTicketsTest {
             new FixedLottoGenerator().generateLottoTicket(),
             new FixedLottoGenerator().generateLottoTicket(),
             new FixedLottoGenerator().generateLottoTicket());
-
 
         assertThat(new LottoTickets(3, new FixedLottoGenerator()).getLottoTickets())
             .isEqualTo(lottoTickets);
