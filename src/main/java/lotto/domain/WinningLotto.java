@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,12 +29,12 @@ public class WinningLotto {
         List<Integer> winningNumbers = changeToList(numberInput);
         ArrayList<Integer> winningNums = new ArrayList<Integer>();
         winningNums.addAll(winningNumbers);
-        this.winLotto = new Lotto(winningNums);
+        winLotto = new Lotto(winningNums);
     }
 
     private void validateBonusBallType(String input) {
         try {
-            this.bonusBall = Integer.parseInt(input);
+            bonusBall = Integer.parseInt(input);
         } catch (Exception e) {
             throw new IllegalArgumentException("[ERROR] 숫자만 입력할 수 있습니다");
         }

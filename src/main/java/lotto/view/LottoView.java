@@ -1,4 +1,8 @@
-package lotto;
+package lotto.view;
+
+import lotto.domain.Lotto;
+import lotto.domain.Lottos;
+import lotto.domain.Rank;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -20,7 +24,7 @@ public class LottoView {
     public static void printLottos(Lottos lottos) {
         ArrayList<Lotto> lottoGroup = lottos.getLottoGroup();
         for (int i = 0; i < lottos.getCount(); i++)
-            System.out.print(lottoGroup.get(i).getLottoNumbers()+"\n");
+            System.out.print(lottoGroup.get(i).getLottoNumbers() + "\n");
     }
 
     public static String requestWinningNumber() {
