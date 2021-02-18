@@ -27,4 +27,8 @@ public class LottoTicket {
         }
         return ranks;
     }
+
+    public List<LottoLine> getLottoLines() {
+        return lottoLines;
+    }
 }
