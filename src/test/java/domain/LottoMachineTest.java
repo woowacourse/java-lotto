@@ -15,6 +15,7 @@ public class LottoMachineTest {
                 .doesNotThrowAnyException();
     }
 
+    @DisplayName("로또 티켓 생성")
     @Test
     void generateLottoTickets_success() {
         LottoMachine lottoMachine = LottoMachine.valueOf(Price.valueOf("14000"));
