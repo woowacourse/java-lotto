@@ -6,21 +6,33 @@ import java.util.List;
 
 public class Machine {
     private static final String IS_NUMBER = "\\d+";
+    private final int money;
 
-    public List<LottoTicket> buyTickets(String moneyValue) {
+    public Machine(String moneyValue) {
         if (!Pattern.matches(IS_NUMBER, moneyValue)) {
             throw new RuntimeException();
         }
-        int money = Integer.parseInt(moneyValue);
-        int ticketCount = money / LottoTicket.PRICE;
+        money = Integer.parseInt(moneyValue);
+    }
 
+    public List<LottoTicket> buyTickets() {
+        int ticketCount;
         List<LottoTicket> lottoTickets = new ArrayList<>();
+
+        ticketCount = money / LottoTicket.PRICE;
+
         for (int i = 0; i < ticketCount; i++) {
+            // TODO 랜덤으로 변경
             lottoTickets.add(new LottoTicket("1,2,3,4,5,6"));
         }
         return lottoTickets;
     }
 
+    public Result getResult(String winningNumbersValue, String bonusBallValue, List<LottoTicket> lottoTickets) {
+        WinningNumbers winningNumbers = new WinningNumbers(winningNumbersValue, bonusBallValue);
+
+        return new Result(winningNumbers, lottoTickets, money);
+    }
     // 금액입력받아서
 
     // 로또 머신에게 발행 -> 로또티켓 리스트를 돌려줌 :List로 보관

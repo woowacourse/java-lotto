@@ -1,33 +1,35 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Result {
     private final Map<Rank, Integer> resultMap;
-    private final int earningRate;
+    private final BigDecimal earningRate;
 
     public Result(WinningNumbers winningNumbers, List<LottoTicket> lottoTickets, int buyPrice) {
+        BigDecimal prizePerRank = BigDecimal.ZERO;
         resultMap = new HashMap<>();
+
         for (LottoTicket lottoTicket : lottoTickets) {
             Rank rank = winningNumbers.getRank(lottoTicket);
             resultMap.put(rank, resultMap.getOrDefault(rank, 0) + 1);
         }
 
-        int prizePerRank = 0;
         for (Map.Entry<Rank, Integer> result : resultMap.entrySet()) {
-            prizePerRank += result.getKey().getPrize() * result.getValue();
+            prizePerRank = prizePerRank.add(result.getKey().getPrize().multiply(BigDecimal.valueOf(result.getValue())));
         }
 
-        this.earningRate = prizePerRank / buyPrice * 100;
+        this.earningRate = (prizePerRank.divide(BigDecimal.valueOf(buyPrice))).multiply(BigDecimal.valueOf(100));
     }
 
     public Map<Rank, Integer> getResultMap() {
         return resultMap;
     }
 
-    public int getEarningRate() {
+    public BigDecimal getEarningRate() {
         return earningRate;
     }
 

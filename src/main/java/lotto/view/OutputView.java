@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.Rank;
 import lotto.domain.Result;
@@ -23,10 +22,11 @@ public class OutputView {
             .filter(rank -> !Rank.UNRANKED.equals(rank))
             .forEach(rank -> {
                 String message = getMessage(rank);
-                System.out.printf("%s (%d원)- %d개%n", message, rank.getPrize(), resultMap.get(rank));
+                System.out.printf("%s (%s원)- %d개%n",
+                    message, rank.getPrize().toString(), resultMap.getOrDefault(rank, 0));
             });
 
-        System.out.printf("총 수익률은 %d%%입니다.%n", result.getEarningRate());
+        System.out.printf("총 수익률은 %s%%입니다.%n", result.getEarningRate());
     }
 
     private static String getMessage(Rank rank) {
