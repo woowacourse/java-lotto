@@ -12,7 +12,6 @@ public class WinningStatistics {
 
     public WinningStatistics(Map<Rank, Long> gameResult, PayOut payOut) {
         this.ranks = new Ranks(gameResult);
-
         this.yield = ranks.getWinningPrice() / payOut.toInt();
     }
 
