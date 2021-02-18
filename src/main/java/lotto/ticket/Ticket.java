@@ -51,7 +51,7 @@ public class Ticket {
     }
 
     public int hasSameNumberCount(Ticket winnerTicket) {
-        int matchCount = 0;
+        int matchCount = ZERO;
         for (Number number : numbers) {
             matchCount += winnerTicket.hasSameNumber(number);
         }

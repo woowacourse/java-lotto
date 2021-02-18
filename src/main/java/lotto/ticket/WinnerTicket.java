@@ -6,6 +6,10 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class WinnerTicket {
+    private static final String DELIMITER = ",";
+    private static final String SPACE = " ";
+    private static final String EMPTY = "";
+
     private final Ticket winnerTicket;
 
     public WinnerTicket(String numbers) {
@@ -13,8 +17,8 @@ public class WinnerTicket {
     }
 
     private Ticket splitNumbers(String values) {
-        List<Number> numbers = Stream.of(values.split(","))
-                .map(s -> s.replaceAll(" ", ""))
+        List<Number> numbers = Stream.of(values.split(DELIMITER))
+                .map(s -> s.replaceAll(SPACE, EMPTY))
                 .map(Number::new)
                 .collect(Collectors.toList());
         return new Ticket((numbers));

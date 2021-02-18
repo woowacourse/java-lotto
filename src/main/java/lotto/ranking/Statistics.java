@@ -4,17 +4,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static lotto.game.LottoCount.ZERO;
+
 public class Statistics {
+    private static final int STATISTIC_CAPACITY = 6;
+
     private final Map<Ranking, Integer> statistics;
 
     public Statistics(List<Ranking> rankings) {
-        statistics = new HashMap<>(6);
-        statistics.put(Ranking.FIRST, 0);
-        statistics.put(Ranking.SECOND, 0);
-        statistics.put(Ranking.THIRD, 0);
-        statistics.put(Ranking.FORTH, 0);
-        statistics.put(Ranking.FIFTH, 0);
-        statistics.put(Ranking.NOTHING, 0);
+        statistics = new HashMap<>(STATISTIC_CAPACITY);
+        statistics.put(Ranking.FIRST, ZERO);
+        statistics.put(Ranking.SECOND, ZERO);
+        statistics.put(Ranking.THIRD, ZERO);
+        statistics.put(Ranking.FORTH, ZERO);
+        statistics.put(Ranking.FIFTH, ZERO);
+        statistics.put(Ranking.NOTHING, ZERO);
         calculateStatistics(rankings);
     }
 
