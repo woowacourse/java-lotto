@@ -2,6 +2,7 @@ package lotto.view;
 
 import static java.util.stream.Collectors.toList;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import lotto.domain.lotto.LottoNumbers;
@@ -56,6 +57,7 @@ public class OutputView {
         Map<Rank, Long> gameResult = winningStatistics.toMap();
 
         Rank.toList().stream()
+            .sorted(Comparator.comparingInt(Rank::getWinnings))
             .forEach(rank -> printStatisticsAccordingToBonus(rank, gameResult.get(rank)));
         System.out.printf(STATISTICS_YIELD_FORMAT, winningStatistics.getYield());
     }
