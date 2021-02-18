@@ -1,7 +1,10 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoTickets {
 
@@ -12,21 +15,15 @@ public class LottoTickets {
     }
 
     public static LottoTickets generateLottoTickets(int lottoTicketCounts, LottoNumberGenerator lottoNumberGenerator) {
-        List<LottoTicket> lottoTicketGroup = new ArrayList<>();
-        for (int i = 0; i < lottoTicketCounts; i++) {
-            LottoTicket lottoTicket = LottoTicket.from(lottoNumberGenerator.generate());
-            lottoTicketGroup.add(lottoTicket);
-        }
-        return new LottoTickets(lottoTicketGroup);
-    }
-
-    public int size() {
-        return lottoTickets.size();
+        List<LottoTicket> lottoTickets = Stream.generate(() -> LottoTicket.from(lottoNumberGenerator.generate()))
+                .limit(lottoTicketCounts)
+                .collect(Collectors.toList());
+        return new LottoTickets(lottoTickets);
     }
 
     public LottoStatistics getStatistics(WinningLottoTicket winningLottoTicket) {
         Map<LottoRank, Long> statistics = lottoTickets.stream()
-                .map(lottoTicket -> winningLottoTicket.compareNumbers(lottoTicket))
+                .map(winningLottoTicket::compareNumbers)
                 .collect(Collectors.groupingBy(lottoRank -> lottoRank, Collectors.counting()));
         return new LottoStatistics(statistics);
     }
