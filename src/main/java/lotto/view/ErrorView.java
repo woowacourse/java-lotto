@@ -20,6 +20,6 @@ public class ErrorView {
     }
 
     public static void printIllegalLottoNumbersMessage() {
-        System.out.println(ERROR_PREFIX + "로또 티켓 내 번호가 중복됩니다.");
+        System.out.println(ERROR_PREFIX + "로또 티켓 내 번호들을 잘못 입력하셨습니다.");
     }
 }
