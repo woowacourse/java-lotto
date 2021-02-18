@@ -26,6 +26,7 @@ class LottoNumberTest {
     @ValueSource(ints = {1, 5, 45})
     void makeLottoNumber(int number) {
         LottoNumber lottoNumber = new LottoNumber(number);
+
         assertThat(lottoNumber.getLottoNumber()).isEqualTo(number);
     }
 }

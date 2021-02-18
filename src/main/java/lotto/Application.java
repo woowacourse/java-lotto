@@ -13,12 +13,10 @@ public class Application {
         OutputView.printLottoCountMessage(lottoTicketCounts);
         LottoTickets lottoTickets = LottoTickets.generateLottoTickets(lottoTicketCounts, new RandomLottoNumberGenerator());
         OutputView.printLottoTicketNumbers(lottoTickets);
-
         List<Integer> winningTicketNumbers = InputView.inputWinningTicketNumbers();
         int bonusBallNumber = InputView.inputBonusBallNumber();
         WinningLottoTicket winningLottoTicket = WinningLottoTicket.of(winningTicketNumbers, bonusBallNumber);
         LottoStatistics lottoStatistics = lottoTickets.getStatistics(winningLottoTicket);
-
         OutputView.printLottoResult(lottoStatistics, purchasingPrice);
     }
 }

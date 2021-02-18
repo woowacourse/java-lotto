@@ -16,7 +16,9 @@ class LottoTicketsTest {
         PurchasingPrice purchasingPrice = new PurchasingPrice(3000);
         int lottoTicketCounts = purchasingPrice.calculatePurchasableTicketCounts();
         LottoNumberGenerator randomLottoNumberGenerator = new RandomLottoNumberGenerator();
+
         LottoTickets lottoTickets = LottoTickets.generateLottoTickets(lottoTicketCounts, randomLottoNumberGenerator);
+
         assertThat(lottoTickets.size()).isEqualTo(3);
     }
 
