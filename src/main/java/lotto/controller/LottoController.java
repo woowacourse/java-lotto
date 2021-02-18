@@ -14,20 +14,23 @@ import lotto.view.OutputView;
 
 public class LottoController {
 
-    final InputView inputView;
+    private final InputView inputView;
+
+    private Money money;
+    private LottoTickets lottoTickets;
 
     public LottoController(final Scanner scanner) {
         inputView = new InputView(scanner);
     }
 
     public void run() {
-        Money money = inputMoney();
-        LottoTickets lottoTickets = buyTickets(money);
+        money = inputMoney();
+        lottoTickets = buyTickets();
 
         LottoTicket winningTicket = inputWinningNumbers();
         LottoNumber bonusBall = inputBonus(winningTicket);
 
-        showResult(money, lottoTickets, winningTicket, bonusBall);
+        showResult(winningTicket, bonusBall);
     }
 
     private Money inputMoney() {
@@ -42,8 +45,8 @@ public class LottoController {
         }
     }
 
-    private LottoTickets buyTickets(Money money) {
-        LottoTickets lottoTickets = new LottoTickets();
+    private LottoTickets buyTickets() {
+        lottoTickets = new LottoTickets();
         lottoTickets.makeTicketByCount(money.countTickets());
         OutputView.printAllTickets(lottoTickets);
         return lottoTickets;
@@ -71,13 +74,11 @@ public class LottoController {
         }
     }
 
-    private void showResult(Money money, LottoTickets lottoTickets, LottoTicket winningTicket,
-        LottoNumber bonusBall) {
+    private void showResult(LottoTicket winningTicket, LottoNumber bonusBall) {
         List<Integer> hitCounts = lottoTickets.checkHitCount(winningTicket, bonusBall);
         int totalReward = WinningResult.calculateTotalReward(hitCounts);
 
         OutputView.printWinningResultTitle();
-        OutputView.printProfit(money.calculateProfit(totalReward));
-        System.out.println(WinningResult.toString(hitCounts));
+        OutputView.printProfit(money.calculateProfit(totalReward),hitCounts);
     }
 }

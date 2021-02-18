@@ -21,6 +21,6 @@ public class InputView {
     }
 
     public Set<String> inputWinningNumbers() {
-        return new HashSet<String>(Arrays.asList(scanner.nextLine().split(SPLITTER)));
+        return new HashSet<>(Arrays.asList(scanner.nextLine().split(SPLITTER)));
     }
 }
