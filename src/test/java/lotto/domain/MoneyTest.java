@@ -49,7 +49,7 @@ public class MoneyTest {
         Money.findEarning(sampleCount);
         assertThat(Money.getEarning()).isEqualTo(5000);
 
-        String earningRate = Money.findEarningRate();
+        String earningRate = money.findEarningRate();
         assertThat(earningRate).isEqualTo("0.36");
     }
 }
