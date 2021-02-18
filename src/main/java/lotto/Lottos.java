@@ -5,8 +5,9 @@ import java.util.Map;
 
 public class Lottos {
 
-    private int money;
-    private int count;
+    private static int money;
+    private static int count;
+    private static int earning;
     ArrayList<Lotto> lottoGroup = new ArrayList<>();
 
     public Lottos(String input) {
@@ -18,11 +19,11 @@ public class Lottos {
         generateLottoGroup();
     }
 
-    public static int findEarning(Map<Rank, Integer> countByRank) {
-        int earning = 0;
+    public static void findEarning(Map<Rank, Integer> countByRank) {
+        int sumOfPrize = 0;
         for (Map.Entry<Rank, Integer> singleCount : countByRank.entrySet())
-            earning += singleCount.getKey().getPrize() * singleCount.getValue();
-        return earning;
+            sumOfPrize += singleCount.getKey().getPrize() * singleCount.getValue();
+        earning = sumOfPrize;
     }
 
     private int changeToInt(String input) {
@@ -45,16 +46,20 @@ public class Lottos {
             throw new IllegalArgumentException("[ERROR] 금액을 1000단위로 입력해주세요");
     }
 
-    public int getCount() {
-        return count;
-    }
-
     public void generateLottoGroup() {
         LottoGenerator lottoGenerator = new LottoGenerator();
         for (int i=0; i < count; i++) {
             Lotto generatedLotto = new Lotto(lottoGenerator.generateLottoNums());
             lottoGroup.add(generatedLotto);
         }
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public static int getEarning() {
+        return earning;
     }
 
     public ArrayList<Lotto> getLottoGroup() {
