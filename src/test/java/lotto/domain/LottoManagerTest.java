@@ -28,6 +28,7 @@ public class LottoManagerTest {
     }
 
     @Test
+    @DisplayName("로또 구매 결과 확인")
     void buyLottoCheck() {
         int count = 14;
         lottoRepository.generateLottoByTicket(() -> Arrays.asList(1, 2, 3, 4, 5, 6), count);
