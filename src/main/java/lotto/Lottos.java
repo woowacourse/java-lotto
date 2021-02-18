@@ -26,6 +26,11 @@ public class Lottos {
         earning = sumOfPrize;
     }
 
+    public static String findEarningRate(int money, int earning) {
+        double earningRate = (double) earning / (double) money;
+        return String.format("%.2f", earningRate);
+    }
+
     private int changeToInt(String input) {
         int money;
         try {
