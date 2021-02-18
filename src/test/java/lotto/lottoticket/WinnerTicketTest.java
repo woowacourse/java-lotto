@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 
+import static lotto.lottoticket.TicketValidation.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
@@ -25,7 +26,7 @@ public class WinnerTicketTest {
     void checkWrongDelimiter(String value) {
         assertThatThrownBy(() -> new WinnerTicket(value))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("잘못된 입력입니다.");
+                .hasMessage(ERROR_MESSAGE_INVALID_INPUT);
     }
 
     @Test
@@ -33,7 +34,7 @@ public class WinnerTicketTest {
     void checkNotNumber() {
         assertThatThrownBy(() -> new WinnerTicket("1,2,3,4,d"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("잘못된 입력입니다.");
+                .hasMessage(ERROR_MESSAGE_INVALID_INPUT);
     }
 
     @Test
@@ -41,7 +42,7 @@ public class WinnerTicketTest {
     void checkNumberInRange() {
         assertThatThrownBy(() -> new WinnerTicket("1,2,3,4,5,46"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("숫자는 1부터 45사이여야 합니다.");
+                .hasMessage(ERROR_MESSAGE_INVALID_RANGE);
     }
 
     @Test
@@ -49,7 +50,7 @@ public class WinnerTicketTest {
     void checkNumbersSize() {
         assertThatThrownBy(() -> new WinnerTicket("1,2,3,4,5"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("숫자는 여섯개여야 합니다.");
+                .hasMessage(ERROR_MESSAGE_INVALID_SIZE);
     }
 
     @Test
@@ -57,7 +58,7 @@ public class WinnerTicketTest {
     void checkDuplicated() {
         assertThatThrownBy(() -> new WinnerTicket("1,1,2,3,4,5"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("중복되는 숫자가 존재합니다.");
+                .hasMessage(ERROR_MESSAGE_DUPLICATED);
     }
 
     @Test

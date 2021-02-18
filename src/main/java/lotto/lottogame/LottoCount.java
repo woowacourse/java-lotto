@@ -27,6 +27,10 @@ public class LottoCount {
         return new LottoCount(lottoCount - ONE_COUNT);
     }
 
+    public int getLottoCount() {
+        return lottoCount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

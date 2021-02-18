@@ -3,6 +3,7 @@ package lotto.lottoticket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static lotto.lottoticket.TicketValidation.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -22,7 +23,7 @@ public class BonusBallTest {
         assertThatThrownBy(() ->
                 new BonusBall("*", new WinnerTicket("1, 2, 3, 4, 5, 6")))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("잘못된 입력입니다.");
+                .hasMessage(ERROR_MESSAGE_INVALID_INPUT);
     }
 
     @Test
@@ -30,7 +31,7 @@ public class BonusBallTest {
     void checkNumberInRange() {
         assertThatThrownBy(() -> new BonusBall("46", new WinnerTicket("1, 2, 3, 4, 5, 6")))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("숫자는 1부터 45사이여야 합니다.");
+                .hasMessage(ERROR_MESSAGE_INVALID_RANGE);
     }
 
     @Test
@@ -38,7 +39,7 @@ public class BonusBallTest {
     void checkDuplicated() {
         assertThatThrownBy(() -> new BonusBall("6", new WinnerTicket("1, 2, 3, 4, 5, 6")))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("중복된 숫자가 존재합니다.");
+                .hasMessage(ERROR_MESSAGE_DUPLICATED);
     }
 
     @Test

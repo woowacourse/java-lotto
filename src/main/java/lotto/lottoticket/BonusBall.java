@@ -2,6 +2,8 @@ package lotto.lottoticket;
 
 import java.util.Objects;
 
+import static lotto.lottoticket.TicketValidation.ERROR_MESSAGE_DUPLICATED;
+
 public class BonusBall {
     private final int bonusBall;
 
@@ -9,7 +11,7 @@ public class BonusBall {
         int number = TicketValidation.validateNumber(value);
         TicketValidation.validateNumberInRange(number);
         if(winnerTicket.isSameNumber(number)){
-            throw new IllegalArgumentException("중복된 숫자가 존재합니다.");
+            throw new IllegalArgumentException(ERROR_MESSAGE_DUPLICATED);
         }
         this.bonusBall = number;
     }

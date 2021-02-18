@@ -15,7 +15,15 @@ public class PrizeMoneyTest {
     @DisplayName("당첨 금액 생성 확인")
     void prizeMoneyCreate() {
         Statistics statistics = new Statistics(Arrays.asList(Ranking.FIRST, Ranking.FORTH, Ranking.FORTH, Ranking.FORTH));
-        PrizeMoney prizeMoney = new PrizeMoney();
-        assertThat(prizeMoney.totalPrize(statistics)).isEqualTo(2_000_150_000);
+        PrizeMoney prizeMoney = new PrizeMoney(statistics);
+        assertThat(prizeMoney).isEqualTo(new PrizeMoney(statistics));
+    }
+
+    @Test
+    @DisplayName("수익률 계산 확인")
+    void calculatePrizeMoney() {
+        Statistics statistics = new Statistics(Arrays.asList(Ranking.FIFTH, Ranking.NOTHING, Ranking.NOTHING, Ranking.NOTHING));
+        PrizeMoney prizeMoney = new PrizeMoney(statistics);
+        assertThat(prizeMoney.calculateProfit(new Money("14000"))).isEqualTo("0.35");
     }
 }

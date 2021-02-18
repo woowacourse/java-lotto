@@ -1,14 +1,10 @@
 package lotto.money;
 
-import lotto.ranking.Ranking;
-import lotto.ranking.Statistics;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
+import static lotto.lottoticket.TicketValidation.ERROR_MESSAGE_INVALID_INPUT;
+import static lotto.money.Money.ERROR_MESSAGE_MINIMUM_MONEY;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
@@ -26,7 +22,7 @@ public class MoneyTest {
         assertThatThrownBy(() ->
             new Money("*1223"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("잘못된 입력입니다.");
+                .hasMessage(ERROR_MESSAGE_INVALID_INPUT);
     }
 
     @Test
@@ -34,7 +30,7 @@ public class MoneyTest {
     void minimumAmount() {
         assertThatThrownBy(()->
                 new Money("900")
-        ).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("1000원 이상의 금액이 필요합니다.");
+        ).isInstanceOf(IllegalArgumentException.class).hasMessageContaining(ERROR_MESSAGE_MINIMUM_MONEY);
     }
 
     @Test
@@ -42,20 +38,13 @@ public class MoneyTest {
     void negativeAmount() {
         assertThatThrownBy(()->
                 new Money("-1")
-        ).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("1000원 이상의 금액이 필요합니다.");
+        ).isInstanceOf(IllegalArgumentException.class).hasMessageContaining(ERROR_MESSAGE_MINIMUM_MONEY);
     }
 
     @Test
     @DisplayName("수익률 계산")
     void calculateProfit() {
         Money money = new Money("14000");
-        PrizeMoney prizeMoney = new PrizeMoney();
-        List<Ranking> rankings = new ArrayList<>();
-        rankings.add(Ranking.FIFTH);
-        for(int i = 0; i < money.divideMoney(1000) - 1; i++) {
-            rankings.add(Ranking.NOTHING);
-        }
-        int totalMoney = prizeMoney.totalPrize(new Statistics(rankings));
-        assertThat(money.calculateProfit(totalMoney)).isEqualTo("0.35");
+        assertThat(money.calculateProfit(5000)).isEqualTo("0.35");
     }
 }

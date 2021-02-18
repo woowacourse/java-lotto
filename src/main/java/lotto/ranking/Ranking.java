@@ -27,7 +27,16 @@ public enum Ranking {
                 .findFirst()
                 .orElse(NOTHING);
     }
+
     public int calculatePrize(int rankingCount) {
         return this.price * rankingCount;
+    }
+
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public int getPrice() {
+        return price;
     }
 }

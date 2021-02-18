@@ -22,7 +22,7 @@ public class RandomNumbersGenerator implements NumbersGenerator {
         for (int i = 0; i < NUMBER_COUNT_IN_LOTTO; i++){
             randomNumbers.add(NUMBERS_IN_RANGE.get(i));
         }
-
+        Collections.sort(randomNumbers);
         return randomNumbers;
     }
 }

@@ -5,6 +5,8 @@ import lotto.lottoticket.TicketValidation;
 import java.util.Objects;
 
 public class Money {
+    public static final String ERROR_MESSAGE_MINIMUM_MONEY = "1000원 이상의 금액이 필요합니다.";
+
     private static final int MINIMUM_PRICE = 1000;
     private static final int SECOND_DECIMAL_POINT_MAKER = 100;
 
@@ -22,7 +24,7 @@ public class Money {
 
     private void checkMinimum(int value) {
         if (value < MINIMUM_PRICE) {
-            throw new IllegalArgumentException("[error] 1000원 이상의 금액이 필요합니다.");
+            throw new IllegalArgumentException(ERROR_MESSAGE_MINIMUM_MONEY);
         }
     }
 
@@ -43,8 +45,8 @@ public class Money {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Money money1 = (Money) o;
-        return money == money1.money;
+        Money that = (Money) o;
+        return money == that.money;
     }
 
     @Override

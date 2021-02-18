@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
+import static lotto.lottoticket.TicketValidation.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -26,7 +27,7 @@ public class TicketTest {
         assertThatThrownBy(()->
                 new Ticket(numbersGenerator)
         ).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("숫자는 1부터 45사이여야 합니다.");
+                .hasMessageContaining(ERROR_MESSAGE_INVALID_RANGE);
     }
 
     @Test
@@ -36,7 +37,7 @@ public class TicketTest {
         assertThatThrownBy(()->
                 new Ticket(numbersGenerator)
         ).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("중복되는 숫자가 존재합니다.");
+                .hasMessageContaining(ERROR_MESSAGE_DUPLICATED);
     }
 
     @Test
@@ -46,7 +47,7 @@ public class TicketTest {
         assertThatThrownBy(()->
                 new Ticket(numbersGenerator)
         ).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("숫자는 여섯개여야 합니다.");
+                .hasMessageContaining(ERROR_MESSAGE_INVALID_SIZE);
     }
 
     @Test

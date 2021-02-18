@@ -15,7 +15,10 @@ public class Statistics {
         statistics.put(Ranking.FORTH, 0);
         statistics.put(Ranking.FIFTH, 0);
         statistics.put(Ranking.NOTHING, 0);
+        calculateStatistics(rankings);
+    }
 
+    private void calculateStatistics(List<Ranking> rankings) {
         for (Ranking ranking : rankings) {
             statistics.computeIfPresent(ranking, (Ranking key, Integer value) -> ++value);
         }
@@ -23,5 +26,9 @@ public class Statistics {
 
     public int findRankingCount(Ranking ranking) {
         return statistics.get(ranking);
+    }
+
+    public Map<Ranking, Integer> getStatistics() {
+        return statistics;
     }
 }

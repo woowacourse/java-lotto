@@ -31,6 +31,9 @@ public class Ticket {
         return ZERO;
     }
 
+    public List<Integer> getTicket() {
+        return numbers;
+    }
 
     @Override
     public boolean equals(Object o) {
