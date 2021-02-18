@@ -7,7 +7,7 @@ import java.util.Objects;
 public class LottoCount {
     public static final int ZERO = 0;
     public static final int ONE_COUNT = 1;
-    private static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1000;
 
     private final int lottoCount;
 

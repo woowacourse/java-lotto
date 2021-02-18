@@ -4,9 +4,10 @@ import lotto.lottoticket.TicketValidation;
 
 import java.util.Objects;
 
+import static lotto.lottogame.LottoCount.LOTTO_PRICE;
+
 public class Money {
     public static final String ERROR_MESSAGE_MINIMUM_MONEY = "1000원 이상의 금액이 필요합니다.";
-    private static final int MINIMUM_PRICE = 1000;
     private static final int SECOND_DECIMAL_POINT_MAKER = 100;
 
     private final int money;
@@ -22,7 +23,7 @@ public class Money {
     }
 
     private void checkMinimum(int value) {
-        if (value < MINIMUM_PRICE) {
+        if (value < LOTTO_PRICE) {
             throw new IllegalArgumentException(ERROR_MESSAGE_MINIMUM_MONEY);
         }
     }
