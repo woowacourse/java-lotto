@@ -24,10 +24,10 @@ public class LottoStoreTest {
 
     private static Stream<Arguments> provideLottosResult() {
         return Stream.of(
-            Arguments.of(new Lotto(Arrays.asList(2, 4, 8, 9, 13, 25)), 0.00),
-            Arguments.of(new Lotto(Arrays.asList(2, 4, 6, 8, 13, 25)), 5.00),
-            Arguments.of(new Lotto(Arrays.asList(2, 4, 6, 1, 7, 3)), 30000.00),
-            Arguments.of(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), 200000.00)
+            Arguments.of(new Lotto("2, 4, 8, 9, 13, 25"), 0.00),
+            Arguments.of(new Lotto("2, 4, 6, 8, 13, 25"), 5.00),
+            Arguments.of(new Lotto("2, 4, 6, 1, 7, 3"), 30000.00),
+            Arguments.of(new Lotto("1, 2, 3, 4, 5, 6"), 200000.00)
         );
     }
 

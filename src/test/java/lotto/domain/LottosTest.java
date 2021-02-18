@@ -28,10 +28,10 @@ public class LottosTest {
 
     private static Stream<Arguments> provideLottosResult() {
         return Stream.of(
-            Arguments.of(new Lotto(Arrays.asList(2, 4, 8, 9, 13, 25)), LottoRank.NONE),
-            Arguments.of(new Lotto(Arrays.asList(2, 4, 6, 8, 13, 25)), LottoRank.FIFTH),
-            Arguments.of(new Lotto(Arrays.asList(2, 4, 6, 1, 7, 3)), LottoRank.SECOND),
-            Arguments.of(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoRank.FIRST)
+            Arguments.of(new Lotto("2,4,8,9,13,25"), LottoRank.NONE),
+            Arguments.of(new Lotto("2,4,7,9,13,25"), LottoRank.FIFTH),
+            Arguments.of(new Lotto("2,4,6,1,7,3"), LottoRank.SECOND),
+            Arguments.of(new Lotto("1,2,3,4,5,6"), LottoRank.FIRST)
         );
     }
 
