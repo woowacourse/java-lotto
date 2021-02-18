@@ -29,7 +29,8 @@ public class LottoTest {
     @MethodSource("provideLottoNumbersAndRank")
     void test(List<Integer> lottoNumbers, String lottoRank) {
         Lotto lotto = new Lotto(lottoNumbers);
-        LottoRank rank = lotto.getLottoRank(WINNING_NUMBERS, BONUS_NUMBER);
+        LottoAnnouncement lottoAnnouncement = new LottoAnnouncement(WINNING_NUMBERS, BONUS_NUMBER);
+        LottoRank rank = lotto.getLottoRank(lottoAnnouncement);
         assertThat(rank.name()).isEqualTo(lottoRank);
     }
 }

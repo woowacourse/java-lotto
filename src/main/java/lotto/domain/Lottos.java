@@ -20,10 +20,10 @@ public class Lottos {
         }
     }
 
-    public Map<LottoRank, Integer> getStatistics(List<Integer> winningNumbers, int bonusNumber) {
+    public Map<LottoRank, Integer> getStatistics(LottoAnnouncement lottoAnnouncement) {
         Map<LottoRank, Integer> getStatistics = setUpStatistics();
         for (Lotto lotto : lottoBunch) {
-            LottoRank targetRank = lotto.getLottoRank(winningNumbers, bonusNumber);
+            LottoRank targetRank = lotto.getLottoRank(lottoAnnouncement);
             getStatistics.replace(targetRank, getStatistics.get(targetRank) + 1);
         }
         return getStatistics;

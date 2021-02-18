@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 import lotto.domain.Lotto;
+import lotto.domain.LottoAnnouncement;
 import lotto.domain.LottoRank;
 import lotto.domain.Lottos;
 import org.junit.jupiter.api.DisplayName;
@@ -35,8 +36,9 @@ public class LottoStoreTest {
     @MethodSource("provideLottosResult")
     void lottoProfitCalculateTest(Lotto exampleLotto, double profitRate) {
         Lottos exampleLottos = new Lottos(Collections.singletonList(exampleLotto));
+        LottoAnnouncement lottoAnnouncement = new LottoAnnouncement(WINNING_NUMBERS, BONUS_NUMBER);
         Map<LottoRank, Integer> exampleLottosResult =
-            exampleLottos.getStatistics(WINNING_NUMBERS, BONUS_NUMBER);
+            exampleLottos.getStatistics(lottoAnnouncement);
         double value = new LottoStore().calculateProfitRate(exampleLottosResult, 1);
         assertThat(value).isEqualTo(profitRate);
     }

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Scanner;
+import lotto.domain.LottoAnnouncement;
 import lotto.domain.LottoRank;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
@@ -27,7 +28,8 @@ public class LottoStore {
         Lottos lottos = buyLotto();
         List<Integer> winningNumbers = inputView.inputWinningNumbers();
         int bonusNumber = inputView.inputBonusNumber();
-        Map<LottoRank, Integer> lottoResultStatistics = lottos.getStatistics(winningNumbers, bonusNumber);
+        LottoAnnouncement lottoAnnouncement = new LottoAnnouncement(winningNumbers, bonusNumber);
+        Map<LottoRank, Integer> lottoResultStatistics = lottos.getStatistics(lottoAnnouncement);
         printLottoResult(lottoResultStatistics, lottos);
     }
 

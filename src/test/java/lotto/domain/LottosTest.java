@@ -40,8 +40,9 @@ public class LottosTest {
     @MethodSource("provideLottosResult")
     void lottosResult(Lotto exampleLotto, LottoRank exampleRank) {
         Lottos exampleLottos = new Lottos(Collections.singletonList(exampleLotto));
+        LottoAnnouncement lottoAnnouncement = new LottoAnnouncement(WINNING_NUMBERS, BONUS_NUMBER);
         Map<LottoRank, Integer> exampleLottosResult =
-            exampleLottos.getStatistics(WINNING_NUMBERS, BONUS_NUMBER);
+            exampleLottos.getStatistics(lottoAnnouncement);
         int value = exampleLottosResult.get(exampleRank);
         assertThat(value).isEqualTo(1);
     }

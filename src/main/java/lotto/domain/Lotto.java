@@ -18,25 +18,25 @@ public class Lotto {
         numbers = new ArrayList<>(selectedNumber);
     }
 
-    public LottoRank getLottoRank(List<Integer> winningNumbers, int bonusNumber) {
-        double count = getMatchingCount(winningNumbers, bonusNumber);
+    public LottoRank getLottoRank(LottoAnnouncement lottoAnnouncement) {
+        double count = getMatchingCount(lottoAnnouncement);
 
         return LottoRank.getRank(count);
     }
 
-    private double getMatchingCount(List<Integer> winningNumbers, int bonusNumber) {
-        List<Integer> integratedWinningNumbers =
-            getIntegratedWinningNumbers(winningNumbers, bonusNumber);
-        int count = getCount(integratedWinningNumbers);
+    private double getMatchingCount(LottoAnnouncement lottoAnnouncement) {
+        List <Integer> winningNumbers = lottoAnnouncement.getWinners();
+        int bonusNumber = lottoAnnouncement.getBonusNumber();
+        List<Integer> combinedWinningNumbers = getCombinedWinNumbers(winningNumbers, bonusNumber);
+        int count = getCount(combinedWinningNumbers);
 
         if (isSecondRank(count, bonusNumber)) {
             return BONUS_MATCHING_COUNT;
         }
-
         return count;
     }
 
-    private List<Integer> getIntegratedWinningNumbers(List<Integer> winningNumbers,
+    private List<Integer> getCombinedWinNumbers(List<Integer> winningNumbers,
         int bonusNumber) {
         List<Integer> integratedWinningNumbers = new ArrayList<>(winningNumbers);
         integratedWinningNumbers.add(bonusNumber);
