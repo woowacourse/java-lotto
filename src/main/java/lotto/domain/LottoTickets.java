@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import lotto.domain.ticketFactory.RandomTicketFactory;
 
 public class LottoTickets {
 
@@ -16,13 +15,11 @@ public class LottoTickets {
     }
 
     public LottoTickets(List<LottoTicket> lottoTickets) {
-        this.lottoTickets = lottoTickets;
+        this.lottoTickets = new ArrayList<>(lottoTickets);
     }
 
-    public void makeTicketByCount(int counts) {
-        for (int i = 0; i < counts; i++) {
-            lottoTickets.add(RandomTicketFactory.makeTicket());
-        }
+    public void addTicket(LottoTicket lottoTicket) {
+        lottoTickets.add(lottoTicket);
     }
 
     public List<Integer> checkHitCount(LottoTicket winningTicket, LottoNumber bonusBall) {
