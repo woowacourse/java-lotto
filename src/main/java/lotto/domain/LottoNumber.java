@@ -9,6 +9,26 @@ public class LottoNumber {
 
     private final int lottoNum;
 
+    public static LottoNumber fromStringLottoNumber(String lottoNum) {
+        lottoNum = lottoNum.trim();
+
+        if (!isInteger(lottoNum)) {
+            throw new IllegalArgumentException("1~45의 숫자만 입력해야 합니다.");
+        }
+
+        return from(Integer.parseInt(lottoNum));
+    }
+
+    private static boolean isInteger(String input) {
+        try {
+            Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+
+        return true;
+    }
+
     public static LottoNumber from(int lottoNum) {
         if (!isInRange(lottoNum)) {
             throw new IllegalArgumentException("1~45의 숫자만 입력해야 합니다.");
@@ -17,12 +37,16 @@ public class LottoNumber {
         return new LottoNumber(lottoNum);
     }
 
+    public static boolean isInRange(int lottoNum) {
+        return lottoNum >= MIN_LOTTO_NUM && lottoNum <= MAX_LOTTO_NUM;
+    }
+
     private LottoNumber(int lottoNum) {
         this.lottoNum = lottoNum;
     }
 
-    public static boolean isInRange(int lottoNum) {
-        return lottoNum >= MIN_LOTTO_NUM && lottoNum <= MAX_LOTTO_NUM;
+    public int getLottoNum() {
+        return lottoNum;
     }
 
     @Override

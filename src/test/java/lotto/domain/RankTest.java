@@ -18,18 +18,6 @@ public class RankTest {
 
     private static final List<Lotto> LOTTO_GROUP = new ArrayList<>();
 
-    @ParameterizedTest
-    @MethodSource("generateLottoStaticResult")
-    @DisplayName("당첨 확인 테스트")
-    void match_1stLotto_1stRank(LottoStatisticResult result, Rank rank) {
-
-        // when
-        Long count = result.get(rank);
-
-        // then
-        assertThat(count).isEqualTo(1L);
-    }
-
     private static Stream<Arguments> generateLottoStaticResult() {
         LottoStatisticResult firstRankResult = generateLottoStatisticResult(
             Lotto.fromNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
@@ -61,5 +49,17 @@ public class RankTest {
         Lottos lottos = new Lottos(LOTTO_GROUP);
 
         return Rank.match(lottos, WINNING_LOTTO);
+    }
+
+    @ParameterizedTest
+    @MethodSource("generateLottoStaticResult")
+    @DisplayName("당첨 확인 테스트")
+    void match_1stLotto_1stRank(LottoStatisticResult result, Rank rank) {
+
+        // when
+        Long count = result.get(rank);
+
+        // then
+        assertThat(count).isEqualTo(1L);
     }
 }

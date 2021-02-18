@@ -16,6 +16,10 @@ public class WinningLotto {
         return new WinningLotto(Lotto.fromNumbers(numbers), LottoNumber.from(bonusNumber));
     }
 
+    public static WinningLotto of(List<Integer> numbers, LottoNumber bonusNumber) {
+        return new WinningLotto(Lotto.fromNumbers(numbers), bonusNumber);
+    }
+
     public Lotto getLotto() {
         return lotto;
     }

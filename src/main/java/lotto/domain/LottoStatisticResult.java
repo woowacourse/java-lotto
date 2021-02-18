@@ -7,13 +7,14 @@ public class LottoStatisticResult {
     private final Map<Rank, Long> rankCount;
 
     private static final int LOTTO_PAY = 1000;
+    private static final long NO_COUNT = 0L;
 
     public LottoStatisticResult(Map<Rank, Long> rankCount) {
         this.rankCount = rankCount;
     }
 
     public Long get(Rank rank) {
-        return rankCount.get(rank);
+        return rankCount.getOrDefault(rank, NO_COUNT);
     }
 
     public double calculateIncomeRate() {
