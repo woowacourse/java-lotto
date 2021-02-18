@@ -21,7 +21,7 @@ public class LottoWinningMachine {
             .count();
     }
 
-    public boolean isMatchBonusNumber(final LottoNumber lottoNumber){
-        return bonusNumber.equals(lottoNumber);
+    public boolean isMatchBonusNumber(final LottoTicket lottoTicket){
+        return lottoTicket.getLottoNumbers().contains(bonusNumber);
     }
 }

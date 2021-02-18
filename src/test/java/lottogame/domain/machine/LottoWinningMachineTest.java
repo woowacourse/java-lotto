@@ -29,7 +29,6 @@ public class LottoWinningMachineTest {
     @Test
     @DisplayName("로또 당첨 번호와 티켓 번호 비교 결과가 올바른지")
     void validMatchResult() {
-
         LottoTicket lottoTicket = new LottoTicket() {
             @Override
             public List<LottoNumber> getLottoNumbers() {
@@ -49,7 +48,19 @@ public class LottoWinningMachineTest {
     @Test
     @DisplayName("보너스 번호 일치 확인")
     void checkBonusLottoNumber() {
-        assertThat(lottoWinningMachine.isMatchBonusNumber(new LottoNumber("7"))).isTrue();
-        assertThat(lottoWinningMachine.isMatchBonusNumber(new LottoNumber("6"))).isFalse();
+        LottoTicket lottoTicket = new LottoTicket() {
+            @Override
+            public List<LottoNumber> getLottoNumbers() {
+                LottoNumbers drawingNumbers = new LottoNumbers();
+
+                for (int i = 1; i <= 5; ++i) {
+                    drawingNumbers.add(new LottoNumber(i + ""));
+                }
+                drawingNumbers.add(new LottoNumber("7"));
+                return drawingNumbers.toList();
+            }
+        };
+
+        assertThat(lottoWinningMachine.isMatchBonusNumber(lottoTicket)).isTrue();
     }
 }
