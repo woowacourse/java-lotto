@@ -39,11 +39,15 @@ public class OutputView {
         for (Map.Entry<Rank, Integer> statistic : results.values().entrySet()) {
             Rank rank = statistic.getKey();
             int price = statistic.getValue();
-            if (rank.isSecond()) {
-                System.out.printf("%d개 일치, 보너스 볼 일치 (%d원)- %d개\n", rank.getCount(), rank.getMoney(), price);
-                continue;
-            }
-            System.out.printf("%d개 일치 (%d원)- %d개\n", rank.getCount(), rank.getMoney(), price);
+            printRank(rank, price);
         }
+    }
+
+    private static void printRank(Rank rank, int price) {
+        if (rank.isSecond()) {
+            System.out.printf("%d개 일치, 보너스 볼 일치 (%d원)- %d개\n", rank.getCount(), rank.getMoney(), price);
+            return;
+        }
+        System.out.printf("%d개 일치 (%d원)- %d개\n", rank.getCount(), rank.getMoney(), price);
     }
 }
