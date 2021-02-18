@@ -7,6 +7,7 @@ import lotto.domain.LottoAnnouncement;
 import lotto.domain.LottoRank;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
+import lotto.controller.generator.LottoAutoGenerator;
 import lotto.viewer.AnnouncementInputView;
 import lotto.viewer.MoneyInputView;
 import lotto.viewer.OutputView;
@@ -37,7 +38,8 @@ public class LottoStore {
 
     public Lottos buyLotto() {
         Money possessedMoney = moneyInputView.purchaseMoney();
-        Lottos purchasedLottos = new Lottos(possessedMoney.getLottoPieces());
+        LottoAutoGenerator lottoAutoGenerator = new LottoAutoGenerator();
+        Lottos purchasedLottos = new Lottos(lottoAutoGenerator, possessedMoney.getLottoPieces());
         outputView.printPurchasedLottos(purchasedLottos);
         return purchasedLottos;
     }

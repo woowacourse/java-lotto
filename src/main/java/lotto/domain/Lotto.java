@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import lotto.controller.generator.LottoGenerator;
 
 public class Lotto {
 
@@ -10,8 +11,8 @@ public class Lotto {
     public static final double BONUS_MATCHING_COUNT = 5.5;
     private final List<Integer> numbers;
 
-    public Lotto() {
-        numbers = new ArrayList<>(LottoGenerator.generateNumbers());
+    public Lotto(LottoGenerator lottoGenerator) {
+        numbers = new ArrayList<>(lottoGenerator.generateNumbers());
     }
 
     public Lotto(List<Integer> selectedNumber) {

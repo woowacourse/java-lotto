@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.controller.generator;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class LottoGenerator {
+public class LottoAutoGenerator implements LottoGenerator {
 
     private static final List<Integer> candidateNumbers = new ArrayList<>();
 
@@ -20,7 +20,8 @@ public class LottoGenerator {
         }
     }
 
-    public static List<Integer> generateNumbers() {
+    @Override
+    public List<Integer> generateNumbers() {
         Collections.shuffle(candidateNumbers);
         Set<Integer> lottoNumbers =
             new TreeSet<>(candidateNumbers.subList(0, LOTTO_POSSESSION_NUMBER));

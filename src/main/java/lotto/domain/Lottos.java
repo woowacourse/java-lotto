@@ -5,18 +5,15 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import lotto.controller.generator.LottoGenerator;
 
 public class Lottos {
 
     private final List<Lotto> lottoBunch = new ArrayList<>();
 
-    public Lottos(List<Lotto> purchasedLottos) {
-        lottoBunch.addAll(purchasedLottos);
-    }
-
-    public Lottos(int purchasedLottoCount) {
+    public Lottos(LottoGenerator lottoGenerator, int purchasedLottoCount) {
         for (int i = 0; i < purchasedLottoCount; i++) {
-            lottoBunch.add(new Lotto());
+            lottoBunch.add(new Lotto(lottoGenerator));
         }
     }
 
