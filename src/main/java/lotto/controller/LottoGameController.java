@@ -4,6 +4,8 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.List;
+
 public class LottoGameController {
 
     private final LottoGame lottoGame = new LottoGame();
@@ -11,8 +13,10 @@ public class LottoGameController {
     public void run() {
         Lottos lottos = buyAutoLotto();
 
-        WinningLotto lastWinningLotto =
-                makeWinningLotto(lastWinningLotto(), InputView.askBonusNumber());
+        Lotto winningLotto = askWinningLottoNumbers();
+        LottoNumber bonusNumber = InputView.askBonusNumber();
+
+        WinningLotto lastWinningLotto = makeWinningLotto(winningLotto, bonusNumber);
 
         showGameResult(lottos, lastWinningLotto);
     }
@@ -32,17 +36,17 @@ public class LottoGameController {
             return new WinningLotto(winningLotto, bonusNumber);
         } catch (Exception e) {
             OutputView.printError(e.getMessage());
-            bonusNumber = InputView.askBonusNumber();
-            return makeWinningLotto(winningLotto, bonusNumber);
+            return makeWinningLotto(winningLotto, InputView.askBonusNumber());
         }
     }
 
-    private Lotto lastWinningLotto() {
+    private Lotto askWinningLottoNumbers() {
         try {
-            return new Lotto(InputView.askLastWinningLottoNumber());
+            List<LottoNumber> winningNumbers = InputView.askLastWinningLottoNumber();
+            return new Lotto(winningNumbers);
         } catch (Exception e) {
             OutputView.printError(e.getMessage());
-            return lastWinningLotto();
+            return askWinningLottoNumbers();
         }
     }
 
