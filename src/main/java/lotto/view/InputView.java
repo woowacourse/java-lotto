@@ -10,7 +10,7 @@ public class InputView {
 
     public static String getUserInput() {
         try {
-            return br.readLine();
+            return br.readLine().trim();
         } catch (IOException ie) {
             getUserInput();
         }

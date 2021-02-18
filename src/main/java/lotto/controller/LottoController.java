@@ -2,50 +2,63 @@ package lotto.controller;
 
 import lotto.domain.*;
 import lotto.service.LottoTicketService;
+import lotto.service.LottoTicketsService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class LottoController {
 
-    private static final String DELIMITER = ",";
-
     public void lottoStart() {
-        OutputView.askHowMuchToBuy();
-        Money money = new Money(Integer.parseInt(InputView.getUserInput()));
-        OutputView.howMuchBought(money.lottoCount());
-
-        List<LottoTicket> lottoTicketGroup = new ArrayList<>();
-        for (int i = 0; i < money.lottoCount(); i++) {
-            lottoTicketGroup.add(LottoTicketService.createLottoTicket());
-        }
-        LottoTickets lottoTickets = new LottoTickets(lottoTicketGroup);
-        OutputView.printTickets(lottoTickets);
-        OutputView.askWinnerLottoTicket();
-
-        List<LottoNumber> lottoWinnerNumbers =
-                Arrays.stream(InputView.getUserInput().split(DELIMITER))
-                        .map(String::trim)
-                        .map(Integer::parseInt)
-                        .map(LottoNumber::new)
-                        .collect(Collectors.toList());
-
-        LottoWinnerTicket lottoWinnerTicket = new LottoWinnerTicket(lottoWinnerNumbers);
-
-        OutputView.askWinnerBonusNumber();
-        LottoWinnerBonusNumber lottoWinnerBonusNumber =
-                new LottoWinnerBonusNumber(Integer.parseInt(InputView.getUserInput()));
+        Money money = initMoney();
+        LottoTickets lottoTickets = initLottoTickets(money);
+        LottoWinnerTicket lottoWinnerTicket = initLottoWinnerTicket();
+        LottoWinnerBonusNumber lottoWinnerBonusNumber = initLottoWinnerBonusNumber(lottoWinnerTicket);
         LottoWinner lottoWinner = new LottoWinner(lottoWinnerTicket, lottoWinnerBonusNumber);
 
         OutputView.printRewardResultBoard();
         LottoResultStatistics lottoResultStatistics =
                 LottoResultStatistics.getResultStatistics(lottoTickets, lottoWinner);
         OutputView.printStatistics(lottoResultStatistics);
-
         OutputView.printFinalResult(lottoResultStatistics, money);
+    }
+
+    private Money initMoney() {
+        Money money;
+        try {
+            OutputView.askHowMuchToBuy();
+            money = new Money(InputView.getUserInput());
+        } catch (NullPointerException | IllegalArgumentException e) {
+            OutputView.printErrorMessage(e);
+            return initMoney();
+        }
+        OutputView.howMuchBought(money.lottoCount());
+        return money;
+    }
+
+    private LottoTickets initLottoTickets(Money money) {
+        LottoTickets lottoTickets = LottoTicketsService.createLottoTickets(money);
+        OutputView.printTickets(lottoTickets);
+        return lottoTickets;
+    }
+
+    private LottoWinnerTicket initLottoWinnerTicket() {
+        OutputView.askWinnerLottoTicket();
+        try {
+            return LottoTicketService.createLottoWinnerTicket(InputView.getUserInput());
+        } catch (NullPointerException | IllegalArgumentException e) {
+            OutputView.printErrorMessage(e);
+            return initLottoWinnerTicket();
+        }
+    }
+
+    private LottoWinnerBonusNumber initLottoWinnerBonusNumber(LottoWinnerTicket lottoWinnerTicket) {
+        OutputView.askWinnerBonusNumber();
+        try {
+
+            return new LottoWinnerBonusNumber(Integer.parseInt(InputView.getUserInput()));
+        } catch (NullPointerException | IllegalArgumentException e) {
+            OutputView.printErrorMessage(e);
+            return initLottoWinnerBonusNumber(lottoWinnerTicket);
+        }
     }
 }

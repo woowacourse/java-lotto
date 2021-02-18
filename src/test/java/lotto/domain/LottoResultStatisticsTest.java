@@ -89,7 +89,7 @@ public class LottoResultStatisticsTest {
     @Test
     @DisplayName("수익률 계산한다.")
     public void calculateEarningTest() {
-        Money money = new Money(3000);
+        Money money = new Money("3000");
 
         int earningPercentage =
                 LottoResultStatistics.getResultStatistics(lottoTickets, lottoWinner).calculateEarning(money);

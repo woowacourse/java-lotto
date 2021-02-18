@@ -5,17 +5,28 @@ import java.util.Objects;
 public class Money {
 
     private static final String SHORT_MONEY_MESSAGE = "1000원 이상 입력해주세요.";
+    private static final String NUMBER_FORMAT_ERROR_MESSAGE = "입력금액은 숫자여야합니다.";
     private static final int LOTTO_PRICE = 1000;
 
     private final int money;
 
-    public Money(final int money) {
-        validateBudgetMoney(money);
-        this.money = money;
+    public Money(final String money) {
+        Objects.requireNonNull(money);
+        int integerMoney = parseInt(money);
+        validateBudgetMoney(integerMoney);
+        this.money = integerMoney;
     }
 
     public int lottoCount() {
-        return money / LOTTO_PRICE;
+        return this.money / LOTTO_PRICE;
+    }
+
+    private int parseInt(String money) {
+        try {
+            return Integer.parseInt(money);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException(NUMBER_FORMAT_ERROR_MESSAGE);
+        }
     }
 
     private void validateBudgetMoney(int money) {
@@ -25,7 +36,7 @@ public class Money {
     }
 
     public int getMoney() {
-        return money;
+        return this.money;
     }
 
     @Override

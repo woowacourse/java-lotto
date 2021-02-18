@@ -11,9 +11,9 @@ public class MoneyTest {
     @Test
     @DisplayName("정상적으로 생성된다")
     public void createMoney() {
-        Money money = new Money(1000);
+        Money money = new Money("1000");
 
-        assertThat(money).isEqualTo(new Money(1000));
+        assertThat(money).isEqualTo(new Money("1000"));
     }
 
     @Test
@@ -21,7 +21,7 @@ public class MoneyTest {
     public void notEnoughBudgetTest() {
 
         assertThatThrownBy(() -> {
-            new Money(500);
+            new Money("500");
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("1000원 이상 입력해주세요.");
     }

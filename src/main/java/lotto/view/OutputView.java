@@ -78,4 +78,8 @@ public class OutputView {
     public static void printFinalResult(LottoResultStatistics lottoResultStatistics, Money money) {
         System.out.printf(FINAL_RESULT, lottoResultStatistics.calculateEarning(money));
     }
+
+    public static void printErrorMessage(Exception e) {
+        System.out.println(e.getMessage());
+    }
 }
