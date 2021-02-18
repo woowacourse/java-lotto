@@ -43,7 +43,7 @@ public class LottoTicket {
         return new ArrayList<>(lottoNumbers);
     }
 
-    //todo : Dto 생성?
+    //todo : 방안 1) 전달용 객체 생성 2) list getter 메소드 활용해서 outputView에서 동일한 작업
     public String printLottoTicket() {
         return Arrays.toString(lottoNumbers.toArray());
     }

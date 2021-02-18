@@ -9,14 +9,14 @@ public class AutoLottoMachine implements LottoMachine {
     private static final int LOTTO_PRICE = 1000;
 
     @Override
-    public List<LottoTicket> createTickets(int numberOfTickets) {
+    public LottoTickets createTickets(int numberOfTickets) {
         return IntStream.range(0, numberOfTickets)
             .mapToObj(i -> lottoTicketFactory.createLottoTicket())
-            .collect(Collectors.toList());
+            .collect(Collectors.collectingAndThen(Collectors.toList(), LottoTickets::new));
     }
 
     @Override
-    public List<LottoTicket> createTicketsByMoney(int purchaseMoney) {
+    public LottoTickets createTicketsByMoney(int purchaseMoney) {
         validateNegativeDigit(purchaseMoney);
         validateNoExtraMoney(purchaseMoney);
 

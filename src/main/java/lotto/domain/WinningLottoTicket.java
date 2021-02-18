@@ -26,7 +26,6 @@ public class WinningLottoTicket extends LottoTicket {
         }
     }
 
-    //todo : 더 적절한 변수명을 찾을지
     public Prize compareNumbers(LottoTicket lottoTicket) {
         long winningCount = lottoTicket.list().stream()
             .filter(lottoNumber -> this.list().contains(lottoNumber))

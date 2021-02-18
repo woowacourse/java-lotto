@@ -17,7 +17,7 @@ class AutoLottoMachineTest {
     void 목표에_맞추어_티켓을_생성한다(){
         int numberOfTickets = 5;
 
-        List<LottoTicket> tickets = autoLottoMachine.createTickets(5);
+        LottoTickets tickets = autoLottoMachine.createTickets(5);
 
         assertThat(tickets.size()).isEqualTo(numberOfTickets);
     }
@@ -28,7 +28,7 @@ class AutoLottoMachineTest {
         int numberOfTickets = 5;
         int purchaseMoney = 5000;
 
-        List<LottoTicket> tickets = autoLottoMachine.createTicketsByMoney(purchaseMoney);
+        LottoTickets tickets = autoLottoMachine.createTicketsByMoney(purchaseMoney);
 
         assertThat(tickets.size()).isEqualTo(numberOfTickets);
     }

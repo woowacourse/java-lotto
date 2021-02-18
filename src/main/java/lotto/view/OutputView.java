@@ -2,10 +2,9 @@ package lotto.view;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
 import java.util.Map;
 import lotto.domain.LottoResult;
-import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 import lotto.domain.Prize;
 
 public class OutputView {
@@ -13,10 +12,10 @@ public class OutputView {
         System.out.printf("%d개를 구매했습니다.\n", size);
     }
 
-    public void printAllLottoTickets(List<LottoTicket> lottoTickets) {
-        lottoTickets.forEach(lottoTicket ->  {
-            System.out.println(lottoTicket.printLottoTicket());
-        });
+    public void printAllLottoTickets(LottoTickets lottoTickets) {
+        lottoTickets.list().forEach(lottoTicket ->
+            System.out.println(lottoTicket.printLottoTicket())
+        );
     }
 
     public void printLottoResult(LottoResult lottoResult, int purchaseMoney) {
@@ -32,7 +31,7 @@ public class OutputView {
             .sorted(Comparator.comparing(Prize::getRank))
             .sorted(Comparator.reverseOrder())
             .forEach(prize ->
-                System.out.println(makeWinningResultMessage(prize,resultMap))
+                System.out.println(makeWinningResultMessage(prize, resultMap))
             );
     }
 
