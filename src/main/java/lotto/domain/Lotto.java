@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.List;
 import java.util.Set;
@@ -43,6 +43,8 @@ public class Lotto {
     }
 
     public long findMatchingCount(Lotto lotto) {
-        return this.lottoNumbers.stream().filter(lotto::contains).count();
+        return this.lottoNumbers.stream()
+                                .filter(lotto::contains)
+                                .count();
     }
 }

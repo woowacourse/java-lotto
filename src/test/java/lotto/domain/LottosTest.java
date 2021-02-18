@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
 
@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottosTest {

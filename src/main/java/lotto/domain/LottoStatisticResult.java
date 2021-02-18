@@ -1,8 +1,9 @@
-package lotto;
+package lotto.domain;
 
 import java.util.Map;
 
 public class LottoStatisticResult {
+
     private final Map<Rank, Long> rankCount;
 
     private static final int LOTTO_PAY = 1000;
@@ -21,7 +22,10 @@ public class LottoStatisticResult {
                                   .mapToLong(rank -> rankCount.get(rank) * rank.getReward())
                                   .sum();
 
-        long payCount = rankCount.values().stream().mapToLong(t -> t).sum();
+        long payCount = rankCount.values()
+                                 .stream()
+                                 .mapToLong(t -> t)
+                                 .sum();
 
         return (double) rewardSum / (payCount * LOTTO_PAY);
     }

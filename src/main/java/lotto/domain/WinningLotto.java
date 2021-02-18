@@ -1,8 +1,9 @@
-package lotto;
+package lotto.domain;
 
 import java.util.List;
 
 public class WinningLotto {
+
     private final Lotto lotto;
     private final LottoNumber bonusNumber;
 

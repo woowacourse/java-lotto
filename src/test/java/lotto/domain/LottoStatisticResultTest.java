@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -8,6 +8,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 public class LottoStatisticResultTest {
+
     private static final WinningLotto WINNING_LOTTO
         = WinningLotto.of(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 
@@ -44,6 +45,6 @@ public class LottoStatisticResultTest {
         double incomeRate = result.calculateIncomeRate();
 
         // then
-        assertThat(incomeRate).isEqualTo((double)55000 / 3000);
+        assertThat(incomeRate).isEqualTo((double) 55000 / 3000);
     }
 }
