@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import lotto.domain.Money;
+import lotto.model.LottoResult;
+import lotto.model.Money;
 import lotto.domain.WinningLotto;
 import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.lottogenerator.RandomLottoGenerator;
 import lotto.exception.LessThanLottoPriceException;
@@ -31,8 +31,8 @@ public class LottoController {
         Lotto winningLottoNumber = inputWinningLotto();
         int bonus = inputWinningBonus();
         WinningLotto winningLotto = new WinningLotto(winningLottoNumber, bonus);
-        // LottoResult 로또_결과 = Lottos.match(당첨_번호);
-        // 로또 결과 출력
+        LottoResult lottoResult = purchasedLottos.match(winningLotto);
+        OutputView.printLottoResult(lottoResult);
     }
 
     private Money inputPurchaseAmount() {
