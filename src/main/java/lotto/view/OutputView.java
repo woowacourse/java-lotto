@@ -12,6 +12,8 @@ import static lotto.domain.Result.RESULT_END_INDEX;
 import static lotto.domain.Result.SECOND_INDEX;
 
 public class OutputView {
+    public static final int NUMBER_OF_RESULTS_TO_PRINT = 5;
+
     public static void showLottos(Lottos lottos) {
         System.out.printf("%d개를 구매했습니다.\n", lottos.getNumberOfLotto());
         for (Lotto lotto : lottos.getLottos()) {
@@ -26,8 +28,8 @@ public class OutputView {
         List<Integer> statistics = Result.getStatistics(results);
         List<Result> fifthToFirst = getResultFromFifthToFirst();
         String[] additionalExplanation = getAdditionalExplanation();
-        for (int i = 1; i < Result.values().length; i++) {
-            System.out.printf("%d개 일치%s(%d원)- %d개\n", fifthToFirst.get(i).getCount(), additionalExplanation[i - 1], fifthToFirst.get(i).getPrize(), statistics.get(i - 1));
+        for (int i = 0; i < Result.values().length - 1; i++) {
+            System.out.printf("%d개 일치%s(%d원)- %d개\n", fifthToFirst.get(i).getCount(), additionalExplanation[i], fifthToFirst.get(i).getPrize(), statistics.get(i));
         }
         System.out.printf("총 수익률은 %.2f입니다.\n", profit);
     }
@@ -39,7 +41,7 @@ public class OutputView {
     }
 
     private static String[] getAdditionalExplanation() {
-        String[] bonus = new String[RESULT_END_INDEX];
+        String[] bonus = new String[NUMBER_OF_RESULTS_TO_PRINT];
         Arrays.fill(bonus, " ");
         bonus[SECOND_INDEX] = ", 보너스 볼 일치";
         return bonus;

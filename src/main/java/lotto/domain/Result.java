@@ -12,8 +12,7 @@ public enum Result {
 
     public static final int STATISTICS_INITIAL_VALUE = 0;
     public static final int RESULT_START_INDEX = 0;
-    public static final int RESULT_END_INDEX = 5;
-    public static final int SECOND_INDEX = 5;
+    public static final int SECOND_INDEX = 3;
 
     private final int count;
     private final int prize;

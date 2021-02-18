@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static lotto.domain.LottoNumberTest.createCustomLottoNumbers;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ResultTest {
@@ -21,11 +22,12 @@ public class ResultTest {
     @DisplayName("결과 값을 통계 리스트로 반환")
     @Test
     void resultStatistics() {
-        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        int bonusNumber = 20;
+        List<LottoNumber> winningNumbers = createCustomLottoNumbers("1, 2, 3, 4, 5, 6");
+        LottoNumber bonusNumber = new LottoNumber(20);
 
-        Lotto lotto1 = new Lotto(Arrays.asList(1, 2, 3, 20, 21, 40)); // FIFTH
-        Lotto lotto2 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 20)); // SECOND
+
+        Lotto lotto1 = new Lotto(createCustomLottoNumbers("1, 2, 3, 20, 21, 40")); // FIFTH
+        Lotto lotto2 = new Lotto(createCustomLottoNumbers("1, 2, 3, 4, 5, 20")); // SECOND
         Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2));
 
         List<Result> results = lottos.getResults(new WinningLotto(winningNumbers, bonusNumber));
@@ -36,12 +38,12 @@ public class ResultTest {
     @DisplayName("총 수익을 계산")
     @Test
     void calculateTotalProfit() {
-        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        int bonusNumber = 20;
+        List<LottoNumber> winningNumbers = createCustomLottoNumbers("1, 2, 3, 4, 5, 6");
+        LottoNumber bonusNumber = new LottoNumber(20);
 
-        Lotto lotto1 = new Lotto(Arrays.asList(1, 2, 3, 20, 21, 40)); // FIFTH
-        Lotto lotto2 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 20)); // SECOND
-        Lotto lotto3 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 20)); // SECOND
+        Lotto lotto1 = new Lotto(createCustomLottoNumbers("1, 2, 3, 20, 21, 40")); // FIFTH
+        Lotto lotto2 = new Lotto(createCustomLottoNumbers("1, 2, 3, 4, 5, 20")); // SECOND
+        Lotto lotto3 = new Lotto(createCustomLottoNumbers("1, 2, 3, 4, 5, 20")); // SECOND
         Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3));
 
         List<Result> results = lottos.getResults(new WinningLotto(winningNumbers, bonusNumber));

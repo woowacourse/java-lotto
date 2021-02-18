@@ -6,25 +6,24 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static lotto.domain.LottoNumberTest.createCustomLottoNumbers;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LottoTest {
     private Lotto lotto;
-    private List<Integer> lottoNumbers;
 
     @BeforeEach
     void setUp() {
-        lottoNumbers = Arrays.asList(1, 2, 3, 20, 21, 40);
-        lotto = new Lotto(lottoNumbers);
+        lotto = new Lotto(createCustomLottoNumbers("1, 2, 3, 20, 21, 40"));
     }
 
     /*TODO:
-    *  생성자 관련 테스트 추가 (예외 처리)*/
+     *  생성자 관련 테스트 추가 (예외 처리)*/
 
     @Test
     void countNumberOfMatch() {
-        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<LottoNumber> winningNumbers = createCustomLottoNumbers("1, 2, 3, 4, 5, 6");
 
         int matches = lotto.countMatchingNumbers(winningNumbers);
 

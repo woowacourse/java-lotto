@@ -1,14 +1,13 @@
 package lotto;
 
-import lotto.domain.Lottos;
-import lotto.domain.Money;
-import lotto.domain.Result;
-import lotto.domain.WinningLotto;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.List;
 import java.util.Scanner;
+
+import static lotto.domain.LottoNumber.convertStringsToLottoNumbers;
 
 public class Application {
     public static void main(String[] args) {
@@ -20,8 +19,8 @@ public class Application {
         OutputView.showLottos(lottos);
 
         WinningLotto winningLotto = new WinningLotto(
-                InputView.takeWinningNumbersInput(scanner),
-                InputView.takeBonusNumberInput(scanner)
+                convertStringsToLottoNumbers(InputView.takeWinningNumbersInput(scanner)),
+                new LottoNumber(InputView.takeBonusNumberInput(scanner))
         );
 
         List<Result> results = lottos.getResults(winningLotto);

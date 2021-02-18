@@ -13,13 +13,21 @@ public class LottoNumberGenerator {
     public LottoNumberGenerator() {
     }
 
-    public List<Integer> make() {
-        List<Integer> numbers = createCandidates();
-        Collections.shuffle(numbers);
-        List<Integer> lottoNumber = numbers.subList(START_INDEX, END_INDEX);
-        Collections.sort(lottoNumber);
+    public List<LottoNumber> createLotto() {
+        List<Integer> candidateNumbers = createCandidates();
+        Collections.shuffle(candidateNumbers);
+        List<Integer> numbers = candidateNumbers.subList(START_INDEX, END_INDEX);
+        Collections.sort(numbers);
 
-        return lottoNumber;
+        return createLottoNumbers(numbers);
+    }
+
+    private List<LottoNumber> createLottoNumbers(List<Integer> numbers) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (Integer number : numbers) {
+            lottoNumbers.add(new LottoNumber(number));
+        }
+        return lottoNumbers;
     }
 
     private List<Integer> createCandidates() {

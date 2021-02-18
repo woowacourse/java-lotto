@@ -22,18 +22,18 @@ public class Lottos {
         LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
         List<Lotto> newLottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            newLottos.add(new Lotto(lottoNumberGenerator.make()));
+            newLottos.add(new Lotto(lottoNumberGenerator.createLotto()));
         }
         return newLottos;
     }
 
     public List<Result> getResults(WinningLotto winningLotto) {
-        List<Integer> winningLottoNumbers = winningLotto.getWinningLottoNumbers();
-        int bonusNumber = winningLotto.getBonusNumber();
+        List<LottoNumber> winningLottoNumbers = winningLotto.getWinningLottoNumbers();
+        int bonusNumber = winningLotto.getBonusNumberAsInt();
         return collectCorrespondingResults(winningLottoNumbers, bonusNumber);
     }
 
-    private List<Result> collectCorrespondingResults(List<Integer> winningLottoNumbers, int bonusNumber) {
+    private List<Result> collectCorrespondingResults(List<LottoNumber> winningLottoNumbers, int bonusNumber) {
         List<Result> results = new ArrayList<>();
         for (Lotto lotto : lottos) {
             int matches = lotto.countMatchingNumbers(winningLottoNumbers);

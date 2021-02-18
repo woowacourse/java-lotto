@@ -10,7 +10,7 @@ class LottoNumberGeneratorTest {
     @Test
     void check_six() {
         LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
-        List<Integer> lottoNumbers = lottoNumberGenerator.make();
+        List<LottoNumber> lottoNumbers = lottoNumberGenerator.createLotto();
 
         assertThat(lottoNumbers.size()).isEqualTo(6);
     }
