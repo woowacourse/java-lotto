@@ -30,7 +30,7 @@ public class LottoResultStatisticsTest {
 
         lottoWinner = new LottoWinner(lottoWinnerTicket, lottoWinnerBonusNumber);
 
-        LottoTicket lottoTicket1 = new LottoTicket(
+        LottoBoughtTicket lottoTicket1 = new LottoBoughtTicket(
                 Arrays.asList(
                         new LottoNumber(1),
                         new LottoNumber(2),
@@ -40,7 +40,7 @@ public class LottoResultStatisticsTest {
                         new LottoNumber(6)
                 )
         );
-        LottoTicket lottoTicket2 = new LottoTicket(
+        LottoBoughtTicket lottoTicket2 = new LottoBoughtTicket(
                 Arrays.asList(
                         new LottoNumber(1),
                         new LottoNumber(2),
@@ -50,7 +50,7 @@ public class LottoResultStatisticsTest {
                         new LottoNumber(7)
                 )
         );
-        LottoTicket lottoTicket3 = new LottoTicket(
+        LottoBoughtTicket lottoTicket3 = new LottoBoughtTicket(
                 Arrays.asList(
                         new LottoNumber(1),
                         new LottoNumber(2),
@@ -60,7 +60,7 @@ public class LottoResultStatisticsTest {
                         new LottoNumber(8)
                 )
         );
-        LottoTicket lottoTicket4 = new LottoTicket(
+        LottoBoughtTicket lottoTicket4 = new LottoBoughtTicket(
                 Arrays.asList(
                         new LottoNumber(1),
                         new LottoNumber(2),

@@ -17,7 +17,8 @@ public class LottoResultStatistics {
         Map<LottoRank, Integer> lottoResult = setLottoResult();
         lottoTickets.getLottoTickets()
                 .forEach(lottoTicket -> {
-                    LottoRank rank = lottoTicket.getRank(lottoWinner);
+                    LottoBoughtTicket lottoBoughtTicket = (LottoBoughtTicket)lottoTicket;
+                    LottoRank rank = lottoBoughtTicket.getRank(lottoWinner);
                     lottoResult.put(rank, lottoResult.get(rank) + 1);
                 });
         return new LottoResultStatistics(lottoResult);

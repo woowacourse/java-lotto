@@ -1,7 +1,7 @@
 package lotto.service;
 
+import lotto.domain.LottoBoughtTicket;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
 import lotto.domain.LottoWinnerTicket;
 
 import java.util.Arrays;
@@ -18,10 +18,10 @@ public class LottoTicketService {
     private LottoTicketService() {
     }
 
-    public static LottoTicket createLottoTicket() {
+    public static LottoBoughtTicket createLottoTicket() {
         List<LottoNumber> lottoNumbers = LottoNumber.getCache();
         Collections.shuffle(lottoNumbers);
-        return new LottoTicket(
+        return new LottoBoughtTicket(
                 lottoNumbers
                         .stream()
                         .limit(6)
