@@ -19,13 +19,9 @@ public class Lotto {
     }
 
     private List<LottoNumber> numberToLottoNumbers(List<Integer> numbers) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-
-        for (int number : numbers) {
-            lottoNumbers.add(new LottoNumber(number));
-        }
-
-        return lottoNumbers;
+        return numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
     private void validateDuplicatedNumber(final List<Integer> values) {
