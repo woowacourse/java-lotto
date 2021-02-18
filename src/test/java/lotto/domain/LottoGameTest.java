@@ -13,6 +13,6 @@ public class LottoGameTest {
         LottoGame lottoGame = new LottoGame();
         Money money = new Money("1000");
         Lottos lottos = lottoGame.buyLottos(money);
-        assertThat(lottos.lottos().size()).isEqualTo(1);
+        assertThat(lottos.toList().size()).isEqualTo(1);
     }
 }

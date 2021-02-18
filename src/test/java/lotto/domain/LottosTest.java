@@ -1,19 +1,23 @@
 package lotto.domain;
 
+import lotto.utils.LottoGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottosTest {
 
+
+    @DisplayName("LottoGenerator를 이용한 Lottos 생성 테스트")
     @Test
-    @DisplayName("Lotto 추가 테스트")
-    void testAdd() {
-        Lottos lottos = new Lottos(Arrays.asList(new Lotto(), new Lotto()));
-        lottos.add(new Lotto());
-        assertThat(lottos.lottos().size()).isEqualTo(3);
+    void testCreateLottos() {
+        LottoGenerator fixedGenerator = new FixedGenerator();
+        Money purchaseMoney = new Money("1000");
+
+        Lottos lottos = new Lottos(fixedGenerator, purchaseMoney);
+        Lotto fixedLotto = fixedGenerator.generate();
+
+        assertThat(lottos.toList().get(0)).isEqualTo(fixedLotto);
     }
 }
