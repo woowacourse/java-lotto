@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class Result {
     private final Map<Rank, Integer> resultMap;
-    private final double earningRate;
+    private final int earningRate;
 
     public Result(WinningNumbers winningNumbers, List<LottoTicket> lottoTickets, int buyPrice) {
         resultMap = new HashMap<>();
@@ -15,19 +15,19 @@ public class Result {
             resultMap.put(rank, resultMap.getOrDefault(rank, 0) + 1);
         }
 
-        double prizePerRank = 0;
+        int prizePerRank = 0;
         for (Map.Entry<Rank, Integer> result : resultMap.entrySet()) {
             prizePerRank += result.getKey().getPrize() * result.getValue();
         }
 
-        this.earningRate = prizePerRank / buyPrice;
+        this.earningRate = prizePerRank / buyPrice * 100;
     }
 
     public Map<Rank, Integer> getResultMap() {
         return resultMap;
     }
 
-    public double getEarningRate() {
+    public int getEarningRate() {
         return earningRate;
     }
 

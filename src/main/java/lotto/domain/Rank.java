@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.function.BiFunction;
 
 public enum Rank {
-    FIRST_PLACE(2000000000, (val, isBonus) -> val == 6),
+    FIRST_PLACE(2000000000,  (val, isBonus) -> val == 6),
     SEC0ND_PLACE(30000000, (val, isBonus) -> val == 5 && isBonus),
     THIRD_PLACE(1500000, (val, isBonus) -> val == 5 && !isBonus),
     FOURTH_PLACE(50000, (val, isBonus) -> val == 4),

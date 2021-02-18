@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.Result;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
