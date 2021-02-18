@@ -4,8 +4,6 @@ import java.util.Objects;
 
 public class Number {
 
-    private static final Number ZERO = new Number(0);
-
     private final int value;
 
     private Number(int value) {
@@ -13,9 +11,6 @@ public class Number {
     }
 
     public static Number valueOf(int input) {
-        if (input == 0) {
-            return ZERO;
-        }
         return new Number(input);
     }
 
@@ -32,8 +27,8 @@ public class Number {
         }
     }
 
-    public boolean isBiggerThan(Number target) {
-        return value > target.value;
+    public boolean isBiggerThan(int target) {
+        return value > target;
     }
 
     public int toInt() {

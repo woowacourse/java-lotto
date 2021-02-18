@@ -2,6 +2,7 @@ package lotto.domain.number;
 
 public class PayOut {
 
+    private static final int PAYOUT_MINIMUM = 0;
     private static final int GAME_PRICE = 1000;
 
     private final Number number;
@@ -16,7 +17,7 @@ public class PayOut {
     }
 
     private static void validateNegative(Number number) {
-        if (!number.isBiggerThan(Number.valueOf(0))) {
+        if (!number.isBiggerThan(PAYOUT_MINIMUM)) {
             throw new IllegalArgumentException("입력값이 양수가 아닙니다.");
         }
     }
