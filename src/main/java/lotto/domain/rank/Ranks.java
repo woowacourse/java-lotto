@@ -1,18 +1,18 @@
-package lotto.domain.lotto;
+package lotto.domain.rank;
 
 
 import static lotto.domain.lotto.utils.LottoAttributes.LOTTO_LINE_PRICE;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import lotto.domain.lotto.utils.Rank;
 
-public class LottoResult {
+public class Ranks {
 
     private final List<Rank> ranks;
 
-    public LottoResult(List<Rank> ranks) {
-        this.ranks = ranks;
+    public Ranks(List<Rank> ranks) {
+        this.ranks = new ArrayList<>(ranks);
     }
 
     public int getNumberOfRank(Rank rank) {

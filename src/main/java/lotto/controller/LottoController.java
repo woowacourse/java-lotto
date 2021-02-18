@@ -1,11 +1,9 @@
 package lotto.controller;
 
-import java.util.List;
-import lotto.domain.lotto.utils.Rank;
 import lotto.domain.lotto.LottoLine;
 import lotto.domain.lotto.LottoNumber;
-import lotto.domain.lotto.LottoResult;
 import lotto.domain.lotto.LottoTicket;
+import lotto.domain.rank.Ranks;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -17,8 +15,8 @@ public class LottoController {
 
         LottoLine winningLottoLine = InputView.getLottoLine();
         LottoNumber bonusLottoNumber = InputView.getBonusLottoNumber();
-        List<Rank> ranks = lottoTicket.checkLottoLines(winningLottoLine, bonusLottoNumber);
-        OutputView.printLottoResult(new LottoResult(ranks));
+        Ranks ranks = new Ranks(lottoTicket.checkLottoLines(winningLottoLine, bonusLottoNumber));
+        OutputView.printLottoResult(ranks);
     }
 
 }

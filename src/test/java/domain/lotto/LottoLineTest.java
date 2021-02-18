@@ -5,7 +5,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import java.util.Arrays;
 import java.util.List;
-import lotto.domain.lotto.utils.Rank;
+import lotto.domain.rank.Rank;
 import lotto.domain.lotto.LottoLine;
 import lotto.domain.lotto.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
@@ -59,6 +59,5 @@ public class LottoLineTest {
 
         LottoLine lottoLine = new LottoLine(lottoNumbers);
         assertThat(lottoLine.checkLottoLine(new LottoLine(answerLottoNumbers), bonusLottoNumber)).isEqualTo(Rank.FIFTH);
-
     }
 }

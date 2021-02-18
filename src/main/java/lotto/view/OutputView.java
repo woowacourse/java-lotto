@@ -11,13 +11,13 @@ import static lotto.view.messages.OutputMessages.WINNING_LOTTO_LINE_STATISTICS;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.lotto.LottoLine;
-import lotto.domain.lotto.LottoResult;
+import lotto.domain.rank.Ranks;
 import lotto.domain.lotto.LottoTicket;
-import lotto.domain.lotto.utils.Rank;
+import lotto.domain.rank.Rank;
 
 public class OutputView {
 
-    public static void printLottoResult(LottoResult lottoResult) {
+    public static void printLottoResult(Ranks lottoResult) {
         System.out.println(WINNING_LOTTO_LINE_STATISTICS.getMessage());
         System.out.printf(FIFTH_PLACE_RESULT_FORMAT.getMessage(), lottoResult.getNumberOfRank(Rank.FIFTH));
         System.out.printf(FORTH_PLACE_RESULT_FORMAT.getMessage(), lottoResult.getNumberOfRank(Rank.FOURTH));

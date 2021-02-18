@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import lotto.domain.lotto.utils.Rank;
+import lotto.domain.rank.Rank;
 
 public class LottoLine {
 
@@ -38,4 +38,3 @@ public class LottoLine {
     }
 
 }
-
