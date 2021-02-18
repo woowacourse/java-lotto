@@ -3,9 +3,12 @@ package lotto.domain.lotto;
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import lotto.domain.number.LottoNumber;
 
 public class LottoNumbers {
@@ -19,7 +22,9 @@ public class LottoNumbers {
         validateDuplicate(lottoNumbers);
         validateLottoNumberCount(lottoNumbers);
 
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = new ArrayList<>(lottoNumbers).stream()
+            .sorted(Comparator.comparingInt(LottoNumber::toInt))
+            .collect(Collectors.toList());
     }
 
     public static LottoNumbers valueOf(String unparsedLottoNumbers) {

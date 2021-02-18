@@ -44,7 +44,6 @@ public class LottoGenerator {
         return new ArrayList<>(lottoNumbers)
             .stream()
             .limit(LOTTO_NUMBER_COUNT)
-            .sorted(Comparator.comparingInt(LottoNumber::toInt))
             .collect(toList());
     }
 }
