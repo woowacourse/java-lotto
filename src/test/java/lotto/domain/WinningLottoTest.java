@@ -11,15 +11,6 @@ import org.junit.jupiter.api.Test;
 
 public class WinningLottoTest {
 
-    @DisplayName("WinningLotto 생성 테스트")
-    @Test
-    void create() {
-        WinningLotto winningLotto
-            = new WinningLotto(Arrays.asList(1, 3, 5, 7, 9, 11), 45);
-        assertThat(winningLotto)
-            .isEqualTo(new WinningLotto(Arrays.asList(1, 3, 5, 7, 9, 11), 45));
-    }
-
     @DisplayName("보너스 번호 에러테스트")
     @Test
     void boundException() {
