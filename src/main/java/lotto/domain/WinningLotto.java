@@ -3,15 +3,15 @@ package lotto.domain;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static lotto.domain.LottoNumber.NUMBER_OUT_OF_BOUNDS_ERROR;
 import static lotto.domain.LottoNumberGenerator.MAXIMUM_CANDIDATE_NUMBER;
 import static lotto.domain.LottoNumberGenerator.MINIMUM_CANDIDATE_NUMBER;
 
 public class WinningLotto {
     public static final int NORMAL_LOTTO_NUMBERS_LENGTH = 6;
-    private static final String NON_NUMERIC_ERROR = "숫자만 입력 가능합니다.";
-    private static final String NOT_SIX_NUMBERS_ERROR = "당첨 번호는 총 6개 이어야 합니다.";
-    private static final String NUMBER_OUT_OF_BOUNDS_ERROR = "1 에서 45 사이의 숫자만 입력해주세요.";
-    private static final String DUPLICATE_ERROR = "중복되는 번호는 안됩니다.";
+    public static final String NON_NUMERIC_ERROR = "숫자만 입력 가능합니다.";
+    public static final String NOT_SIX_NUMBERS_ERROR = "당첨 번호는 총 6개 이어야 합니다.";
+    public static final String DUPLICATE_ERROR = "중복되는 번호는 안됩니다.";
 
     private final List<Integer> winningLottoNumbers;
     private final int bonusNumber;
@@ -65,7 +65,7 @@ public class WinningLotto {
     }
 
     private void validateNumberBetween1to45(String number) {
-        if (Integer.parseInt(number) < MINIMUM_CANDIDATE_NUMBER && MAXIMUM_CANDIDATE_NUMBER < Integer.parseInt(number)) {
+        if (Integer.parseInt(number) < MINIMUM_CANDIDATE_NUMBER || MAXIMUM_CANDIDATE_NUMBER < Integer.parseInt(number)) {
             throw new IllegalArgumentException(NUMBER_OUT_OF_BOUNDS_ERROR);
         }
     }
