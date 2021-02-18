@@ -7,7 +7,7 @@ public class LottoGame {
     public Lottos buyLottos(Money money) {
         LottoGenerator lottoGenerator = new LottoGenerator();
         Lottos lottos = new Lottos();
-        for (int i = 0; i < money.countLotto(); i++) {
+        for (int i = 0; i < money.toNumberOfPurchaseLotto(); i++) {
             lottos.add(lottoGenerator.generate());
         }
         return lottos;

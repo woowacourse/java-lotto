@@ -3,8 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.*;
 
 public class MoneyTest {
 
@@ -12,20 +11,24 @@ public class MoneyTest {
     @Test
     void testCountLotto() {
         Money money = new Money("1000");
-        assertThat(money.countLotto()).isEqualTo(1);
+        assertThat(money.toNumberOfPurchaseLotto()).isEqualTo(1);
     }
 
     @Test
     @DisplayName("Money 예외사항들 테스트")
     void testValidateMoney() {
         String wrongMoney1 = "";
-        String wrongMoney2 = "숫자";
+        String wrongMoney2 = null;
+        String wrongMoney3 = "숫자";
         String wrongMoney4 = "999";
 
-        assertThatIllegalArgumentException()
+        assertThatNullPointerException()
                 .isThrownBy(() -> new Money(wrongMoney1));
-        assertThatIllegalArgumentException()
+        assertThatNullPointerException()
                 .isThrownBy(() -> new Money(wrongMoney2));
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new Money(wrongMoney3));
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new Money(wrongMoney4));
     }

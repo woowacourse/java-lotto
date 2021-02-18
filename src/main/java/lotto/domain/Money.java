@@ -11,10 +11,6 @@ public class Money {
         this.money = Integer.parseInt(money);
     }
 
-    public int countLotto() {
-        return money / PRICE_OF_LOTTO;
-    }
-
     private void validateMoney(String money) {
         validateEmpty(money);
         validateNumber(money);
@@ -23,7 +19,7 @@ public class Money {
 
     private void validateEmpty(String money) {
         if (money.isEmpty()) {
-            throw new IllegalArgumentException("빈 값은 입력할 수 없습니다.");
+            throw new NullPointerException("빈 값은 입력할 수 없습니다.");
         }
     }
 
@@ -37,7 +33,11 @@ public class Money {
 
     private void validatePrice(String money) {
         if (Integer.parseInt(money) < PRICE_OF_LOTTO) {
-            throw new IllegalArgumentException("로또를 구매에는 최소 1000원 이상의 금액이 필요합니다.");
+            throw new IllegalArgumentException("로또를 구매하기 위해 최소 1000원 이상의 금액이 필요합니다.");
         }
+    }
+
+    public int toNumberOfPurchaseLotto() {
+        return money / PRICE_OF_LOTTO;
     }
 }
