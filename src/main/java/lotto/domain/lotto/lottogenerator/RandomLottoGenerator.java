@@ -13,7 +13,7 @@ public class RandomLottoGenerator implements LottoGenerator {
         List<LottoNumber> lottoNumbers = getShuffledLottoAllNumbers()
             .stream()
             .map(number -> LottoNumber.valueOf(number))
-            .limit(6)
+            .limit(LottoNumber.NUM_LOTTO_LIMIT)
             .collect(Collectors.toList());
         lottoNumbers.sort((n1, n2) -> Integer.compare(n1.getValue(), n2.getValue()));
         return lottoNumbers;

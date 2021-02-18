@@ -6,6 +6,7 @@ public class LottoNumber {
 
     public static final int MAX_LOTTO_LIMIT = 45;
     public static final int MIN_LOTTO_LIMIT = 1;
+    public static final int NUM_LOTTO_LIMIT = 6;
     private final int value;
 
     private LottoNumber(int value) {

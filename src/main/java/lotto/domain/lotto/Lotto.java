@@ -1,8 +1,6 @@
 package lotto.domain.lotto;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.lotto.lottogenerator.LottoGenerator;
@@ -34,7 +32,7 @@ public class Lotto {
     }
 
     private static void validateLottoLength(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != 6) {
+        if (lottoNumbers.size() != LottoNumber.NUM_LOTTO_LIMIT) {
             throw new IllegalArgumentException("로또 번호는 6개의 숫자로 이루어져야 합니다.");
         }
     }
