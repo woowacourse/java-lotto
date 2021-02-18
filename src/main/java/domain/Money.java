@@ -27,16 +27,16 @@ public class Money {
     }
 
     public double calculateEarningRate(Money usedMoney) {
-        double something = this.value / (double) usedMoney.value;
-        return (long) (something * 100) / 100.0;
+        double earningRate = this.value / (double) usedMoney.value;
+        return (long) (earningRate * 100) / 100.0;
     }
 
     public Money multiply(long multiplier) {
         return new Money(value * multiplier);
     }
 
-    public Money add(Money targetMoney) {
-        return new Money(value + targetMoney.value);
+    public Money add(Money money) {
+        return new Money(value + money.value);
     }
 
     @Override
