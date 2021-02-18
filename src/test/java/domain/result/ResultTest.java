@@ -6,7 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 
 class ResultTest {
 
@@ -28,7 +29,7 @@ class ResultTest {
         Result result = new Result(lottos);
         WinningLotto winningLotto = new WinningLotto(LottoNumbers.generate(Arrays.asList(1, 2, 3, 4, 5, 6)), BonusNumber.of(7));
 
-        Map<LottoRank, Integer> results =  result.findMatches(winningLotto);
+        Map<LottoRank, Integer> results = result.findMatches(winningLotto);
 
         assertThat(results.get(LottoRank.SIX_MATCHES)).isEqualTo(1);
     }
@@ -46,7 +47,7 @@ class ResultTest {
         Result result = new Result(multipleLottos);
         WinningLotto winningLotto = new WinningLotto(LottoNumbers.generate(Arrays.asList(1, 2, 3, 4, 5, 6)), BonusNumber.of(7));
 
-        Map<LottoRank, Integer> results =  result.findMatches(winningLotto);
+        Map<LottoRank, Integer> results = result.findMatches(winningLotto);
 
         assertThat(results.get(LottoRank.SIX_MATCHES)).isEqualTo(1);
         assertThat(results.get(LottoRank.FIVE_MATCHES)).isEqualTo(1);
@@ -66,7 +67,7 @@ class ResultTest {
 
         WinningLotto winningLotto = new WinningLotto(LottoNumbers.generate(Arrays.asList(1, 2, 3, 4, 5, 6)), BonusNumber.of(7));
 
-        Map<LottoRank, Integer> results =  result.findMatches(winningLotto);
+        Map<LottoRank, Integer> results = result.findMatches(winningLotto);
 
         assertThat(results.get(LottoRank.FIVE_AND_BONUS_MATCHES)).isEqualTo(1);
     }

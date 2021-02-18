@@ -2,25 +2,32 @@ package domain;
 
 import domain.budget.Budget;
 import domain.lotto.*;
+import domain.result.LottoRank;
+import domain.result.Result;
+import util.InputUtil;
 import util.RandomLottoUtil;
 import view.LottoGameScreen;
+import view.dto.DrawResultDto;
 import view.dto.LottoCountResponseDto;
 import view.dto.LottoResponseDto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoGameMachine {
     private static final Budget LOTTO_COST = Budget.amounts(1000);
 
     private final Budget budget;
+    private final LottoGameScreen lottoGameScreen;
 
-    public LottoGameMachine(final Budget budget) {
+    public LottoGameMachine(final Budget budget, LottoGameScreen lottoGameScreen) {
         this.budget = budget;
+        this.lottoGameScreen = lottoGameScreen;
     }
 
-    public void gameStart() {
+    public Lottos makeLottos() {
         LottoCount lottoCount = calculateLottoCount();
         LottoGameScreen lottoGameScreen = new LottoGameScreen();
         lottoGameScreen.showLottoCount(new LottoCountResponseDto(lottoCount.getLottoCount()));
@@ -30,6 +37,7 @@ public class LottoGameMachine {
 
         List<LottoResponseDto> lottoResponseDtos = makeLottoResponseDtos(lottoGroup);
         lottoGameScreen.showAllLottoStatus(lottoResponseDtos);
+        return lottos;
     }
 
     private List<LottoResponseDto> makeLottoResponseDtos(final List<Lotto> lottoGroup) {
@@ -52,10 +60,22 @@ public class LottoGameMachine {
         return LottoCount.of(lottoCount);
     }
 
-    public void findWinnings(String winningLottoText, String bonusLotto) {
+    public WinningLotto findWinnings() {
+        lottoGameScreen.confirmWinningLotto();
+        String winningLottoText = InputUtil.nextLine();
+
+        lottoGameScreen.confirmBonusLotto();
+        String bonusLotto = InputUtil.nextLine();
+
         LottoNumbers lottoNumbers = new LottoNumbers(winningLottoText);
         BonusNumber bonusNumber = BonusNumber.of(LottoNumber.of(bonusLotto));
 
-        WinningLotto winningLotto = new WinningLotto(lottoNumbers, bonusNumber);
+        return new WinningLotto(lottoNumbers, bonusNumber);
+    }
+
+    public void lottoDraw(Lottos lottos, WinningLotto winnings) {
+        Result result = new Result(lottos);
+        Map<LottoRank, Integer> matches = result.findMatches(winnings);
+        lottoGameScreen.showDrawResult(new DrawResultDto(matches));
     }
 }
