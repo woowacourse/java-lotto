@@ -21,14 +21,22 @@ public enum LottoRank {
     }
 
     public static LottoRank of(int matchCounts, boolean isBonusBall) {
-        if (isBonusBall && matchCounts == SECOND.matchCounts) {
+        if (isSecond(matchCounts, isBonusBall)) {
             return SECOND;
         }
         return Arrays.stream(LottoRank.values())
                 .filter(lottoRank -> lottoRank != LottoRank.SECOND)
-                .filter(lottoRank -> lottoRank.matchCounts == matchCounts)
+                .filter(lottoRank -> lottoRank.matches(matchCounts))
                 .findFirst()
                 .orElseGet(() -> MISS);
+    }
+
+    private static boolean isSecond(int matchCounts, boolean isBonusBall) {
+        return isBonusBall && matchCounts == SECOND.matchCounts;
+    }
+
+    private boolean matches(int matchCounts) {
+        return this.matchCounts == matchCounts;
     }
 
     public int getPrizeMoney() {
