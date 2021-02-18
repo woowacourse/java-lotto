@@ -54,7 +54,7 @@ public class LottoTicket {
         if (lottoNumbers.size() == VALID_NUMBER_COUNT) {
             return;
         }
-        throw new RuntimeException(COUNT_ERROR_MESSAGE);
+        throw new IllegalArgumentException(COUNT_ERROR_MESSAGE);
     }
 
     public List<LottoNumber> getLottoNumbers() {
