@@ -20,7 +20,6 @@ public class LottoResultStatistics {
             LottoRank rank = lottoTicket.getRank(lottoWinner);
             lottoResult.put(rank, lottoResult.get(rank) + 1);
         }
-
         return new LottoResultStatistics(lottoResult);
     }
 
@@ -30,7 +29,6 @@ public class LottoResultStatistics {
         for (LottoRank value : LottoRank.values()) {
             lottoResult.put(value, 0);
         }
-
         return lottoResult;
     }
 
@@ -41,7 +39,6 @@ public class LottoResultStatistics {
             totalReward += this.lottoResult.get(lottoRank) * lottoRank.getReward();
         }
         double paidMoney = money.getMoney();
-
         int result = (int) (((totalReward - paidMoney) / paidMoney) * EARNING_RATE);
 
         return result;
