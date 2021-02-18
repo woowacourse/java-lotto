@@ -11,8 +11,7 @@ public class RankTest {
     @DisplayName("랭크 테스트")
     void testRankOf() {
         int countOfMatch = 5;
-        boolean bonusNumber = true;
 
-        assertThat(Rank.rankOf(countOfMatch, bonusNumber)).isEqualTo(Rank.SECOND);
+        assertThat(Rank.rankOf(countOfMatch, true)).isEqualTo(Rank.SECOND);
     }
 }

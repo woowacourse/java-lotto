@@ -20,15 +20,12 @@ public class MoneyTest {
     void testValidateMoney() {
         String wrongMoney1 = "";
         String wrongMoney2 = "숫자";
-        String wrongMoney3 = null;
         String wrongMoney4 = "999";
 
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new Money(wrongMoney1));
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new Money(wrongMoney2));
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Money(wrongMoney3));
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new Money(wrongMoney4));
     }
