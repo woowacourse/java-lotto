@@ -27,15 +27,17 @@ public class InputView {
     }
 
     private static int receiveNumber(final String message) {
-        String userInput = receiveInput(message);
-        validateNull(userInput);
-        return createNumber(userInput);
+        return createNumber(receiveInputNotNull(message));
     }
 
     private static List<Integer> receiveNumbers(final String message) {
+        return createNumbers(receiveInputNotNull(message));
+    }
+
+    private static String receiveInputNotNull(final String message) {
         String userInput = receiveInput(message);
         validateNull(userInput);
-        return createNumbers(userInput);
+        return userInput;
     }
 
     private static void validateNull(final String userInput) {
