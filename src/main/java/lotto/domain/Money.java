@@ -17,7 +17,7 @@ public class Money {
         this.money = integerMoney;
     }
 
-    public int lottoCount() {
+    public int getLottoCount() {
         return this.money / LOTTO_PRICE;
     }
 

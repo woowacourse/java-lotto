@@ -17,6 +17,14 @@ public class MoneyTest {
     }
 
     @Test
+    @DisplayName("구매금액을 기준으로 로또티켓 구매 숫자를 반환")
+    public void getLottoCountTest() {
+        Money money = new Money("5000");
+
+        assertThat(money.getLottoCount()).isEqualTo(5);
+    }
+
+    @Test
     @DisplayName("1000원 미만은 받을 수 없다.")
     public void notEnoughBudgetTest() {
 

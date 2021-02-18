@@ -15,7 +15,7 @@ public class LottoTicketsService {
 
     public static LottoTickets createLottoTickets(Money money) {
         List<LottoTicket> lottoTicketGroup = new ArrayList<>();
-        IntStream.range(0, money.lottoCount())
+        IntStream.range(0, money.getLottoCount())
                 .forEach(i -> lottoTicketGroup.add(LottoTicketService.createLottoTicket()));
         return new LottoTickets(lottoTicketGroup);
     }

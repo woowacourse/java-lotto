@@ -32,7 +32,7 @@ public class LottoController {
             OutputView.printErrorMessage(e);
             return initMoney();
         }
-        OutputView.howMuchBought(money.lottoCount());
+        OutputView.howMuchBought(money.getLottoCount());
         return money;
     }
 
