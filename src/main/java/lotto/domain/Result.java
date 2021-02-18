@@ -27,17 +27,22 @@ public enum Result {
     }
 
     public static List<Integer> getStatistics(List<Result> results) {
+        Map<Result, Integer> statistics = createStatistics(results);
+
+        List<Integer> firstToFifth = new ArrayList(statistics.values()).subList(0, 5);
+        Collections.reverse(firstToFifth);
+        return firstToFifth;
+    }
+
+    private static Map<Result, Integer> createStatistics(List<Result> results) {
         Map<Result, Integer> statistics = new LinkedHashMap<>();
         for (Result result : values()) {
             statistics.put(result, 0);
         }
-
         for (Result result : results) {
             statistics.put(result, statistics.get(result) + 1);
         }
-        List<Integer> firstToFifth = new ArrayList(statistics.values()).subList(0, 5);
-        Collections.reverse(firstToFifth);
-        return firstToFifth;
+        return statistics;
     }
 
     public static float calculateProfit(List<Result> results) {
