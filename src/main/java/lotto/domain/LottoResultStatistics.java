@@ -42,7 +42,7 @@ public class LottoResultStatistics {
         }
         double paidMoney = money.getMoney();
 
-        int result = (int)(((totalReward - paidMoney) / paidMoney) * EARNING_RATE);
+        int result = (int) (((totalReward - paidMoney) / paidMoney) * EARNING_RATE);
 
         return result;
     }
