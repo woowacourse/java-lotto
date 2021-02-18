@@ -4,20 +4,22 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-public class RandomTicketFactory {
-
-    public static final int LOTTO_NUMBER_MAX_LIMIT = 45;
-    public static final int LOTTO_NUMBER_MIN_LIMIT = 1;
-    public static Map<Integer, LottoNumber> lottoNumberFactory = new HashMap<>();
+public class RandomNumberTicketFactory {
+    private static final int LOTTO_NUMBER_MAX_LIMIT = 45;
+    private static final int LOTTO_NUMBER_MIN_LIMIT = 1;
+    private static final int MIN_LOTTO_SIZE = 0;
+    private static final int MAX_LOTTO_SIZE = 6;
+    private static Map<Integer, LottoNumber> lottoNumberFactory = new HashMap<>();
 
     static {
-        for (int i = LOTTO_NUMBER_MIN_LIMIT; i < LOTTO_NUMBER_MAX_LIMIT; i++) {
-            lottoNumberFactory.put(i, new LottoNumber(i));
-        }
+        IntStream.rangeClosed(LOTTO_NUMBER_MIN_LIMIT, LOTTO_NUMBER_MAX_LIMIT)
+                .forEach(number -> lottoNumberFactory.put(number, new LottoNumber(number)));
     }
 
-    private RandomTicketFactory() {
+    private RandomNumberTicketFactory() {
     }
 
     public static LottoTicket makeTicket() {
@@ -26,11 +28,11 @@ public class RandomTicketFactory {
 
     private static Set<LottoNumber> makeLottoNumbers() {
         List<Integer> numbers = new ArrayList(lottoNumberFactory.keySet());
-        Set<LottoNumber> ticketNumbers = new HashSet();
+        Set<LottoNumber> ticketNumbers;
         Collections.shuffle(numbers);
-        for (int i = 0; i < 6; i++) {
-            ticketNumbers.add(lottoNumberFactory.get(numbers.get(i)));
-        }
+        ticketNumbers = IntStream.range(MIN_LOTTO_SIZE, MAX_LOTTO_SIZE)
+                .mapToObj(i -> lottoNumberFactory.get(numbers.get(i)))
+                .collect(Collectors.toSet());
         return ticketNumbers;
     }
 
