@@ -4,29 +4,15 @@ public class Money {
 
     private final int value;
 
-    public Money(String moneyInput) {
-        if (!isNumeric(moneyInput)) {
-            throw new IllegalArgumentException();
+    public Money(int value) {
+        if (value < 0) {
+            throw new IllegalArgumentException("[Error] 돈은 0보다 커야 합니다.");
         }
-        int money = Integer.parseInt(moneyInput);
-
-        if (money < 0) {
-            throw new IllegalArgumentException();
-        }
-
-        value = money;
+        this.value = value;
     }
 
     public int getValue() {
         return value;
     }
 
-    private Boolean isNumeric(String value) {
-        try {
-            Integer.parseInt(value);
-        } catch (NumberFormatException numberFormatException) {
-            return false;
-        }
-        return true;
-    }
 }
