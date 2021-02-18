@@ -21,6 +21,7 @@ public class LottoNumberRepository {
 
     public static List<LottoNumber> shuffleLottoNumbers() {
         Collections.shuffle(lottoNumbers);
-        return Collections.unmodifiableList(lottoNumbers.subList(MINIMUM_RANGE, MAXIMUM_RANGE));
+        List<LottoNumber> splitLottoNumbers = new ArrayList<>(lottoNumbers.subList(MINIMUM_RANGE, MAXIMUM_RANGE));
+        return Collections.unmodifiableList(splitLottoNumbers);
     }
 }
