@@ -19,15 +19,20 @@ public class Money {
     }
 
     public long divide(long value) {
-        if (value <= 0) {
+        if (value <= ZERO) {
             throw new IllegalArgumentException("0이하의 값으로 나눌 수 없습니다.");
         }
 
         return this.value / value;
     }
 
-    public Money multiply(long aLong) {
-        return new Money(value * aLong);
+    public double calculateEarningRate(Money usedMoney) {
+        double something = this.value / (double) usedMoney.value;
+        return (long) (something * 100) / 100.0;
+    }
+
+    public Money multiply(long multiplier) {
+        return new Money(value * multiplier);
     }
 
     public Money add(Money targetMoney) {

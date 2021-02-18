@@ -89,4 +89,18 @@ class MoneyTest {
         //then
         assertThat(result).isEqualTo(new Money(6L));
     }
+
+    @DisplayName("수익율을 계산하는 기능")
+    @Test
+    void calculateEarningRate() {
+        //given
+        Money usedMoney = new Money(14_000L);
+        Money winningMoney = new Money(5_000L);
+
+        //when
+        double earningRate = winningMoney.calculateEarningRate(usedMoney);
+
+        //then
+        assertThat(earningRate).isEqualTo(0.35D);
+    }
 }
