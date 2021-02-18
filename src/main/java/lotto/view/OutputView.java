@@ -2,11 +2,12 @@ package lotto.view;
 
 import lotto.domain.LottoResult;
 import lotto.domain.Prize;
+import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTickets;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Map;
+import java.util.stream.Collectors;
 
 public class OutputView {
     private static final String INFORM_SIZE_MSG = "%d개를 구매했습니다.\n";
@@ -15,6 +16,9 @@ public class OutputView {
     private static final String INFORM_RESULT_AND_BONUS_MSG_FORMAT = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
     private static final String INFORM_RESULT_MSG_FORMAT = "%d개 일치(%d원) - %d개";
     private static final String INFORM_PROFIT_RATIO_MSG_FORMAT = "총 수익률은 %d%%입니다.";
+    public static final String COMMA = ",";
+    public static final String TICKET_PREFIX = "[";
+    public static final String TICKET_SUFFIX = "]";
 
     public void printTicketsSize(int size) {
         System.out.printf(INFORM_SIZE_MSG, size);
@@ -22,8 +26,14 @@ public class OutputView {
 
     public void printAllLottoTickets(LottoTickets lottoTickets) {
         lottoTickets.list().forEach(lottoTicket ->
-                System.out.println(lottoTicket.printLottoTicket())
+                System.out.println(makeEachLottoTicketToString(lottoTicket))
         );
+    }
+
+    private String makeEachLottoTicketToString(LottoTicket lottoTicket){
+        return lottoTicket.list().stream()
+                .map(Object::toString)
+                .collect(Collectors.joining(COMMA, TICKET_PREFIX, TICKET_SUFFIX));
     }
 
     public void printLottoResult(LottoResult lottoResult, int purchaseMoney) {
