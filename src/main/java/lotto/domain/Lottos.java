@@ -9,6 +9,9 @@ public class Lottos {
 
     private final List<Lotto> lottos = new ArrayList<>();
 
+    public Lottos() {
+    }
+
     public Lottos(List<Lotto> lottos) {
         this.lottos.addAll(lottos);
     }
@@ -19,6 +22,10 @@ public class Lottos {
 
     public List<Lotto> lottos() {
         return Collections.unmodifiableList(lottos);
+    }
+
+    public int calculateTotalPrice() {
+        return lottos.size() * Money.PRICE_OF_LOTTO;
     }
 
     @Override
