@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.utils.LottoGenerator;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -9,18 +11,17 @@ public class Lottos {
 
     private final List<Lotto> lottos = new ArrayList<>();
 
-    public Lottos() {
+    public Lottos(LottoGenerator lottoGenerator, Money money) {
+        makeRandomLottos(lottoGenerator, money);
     }
 
-    public Lottos(List<Lotto> lottos) {
-        this.lottos.addAll(lottos);
+    private void makeRandomLottos(LottoGenerator lottoGenerator, Money money) {
+        for (int i = 0; i < money.toNumberOfPurchaseLotto(); i++) {
+            lottos.add(lottoGenerator.generate());
+        }
     }
 
-    public void add(Lotto lotto) {
-        this.lottos.add(lotto);
-    }
-
-    public List<Lotto> lottos() {
+    public List<Lotto> toList() {
         return Collections.unmodifiableList(lottos);
     }
 
