@@ -3,7 +3,13 @@ package lotto.view;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 
+import java.util.List;
+
 public class OutputView {
+    private static final String WINNING_INFO_MESSAGE = "%s (%s)원 - %s개\n";
+    private static final int MESSAGE = 0;
+    private static final int WINNINGS = 1;
+    private static final int COUNTS = 2;
 
     private OutputView() {
     }
@@ -37,12 +43,12 @@ public class OutputView {
         System.out.println("지난 주 당첨 번호를 입력해주세요.");
     }
 
-    public static void printTotalWinningResult(float profit, String winningResult) {
+    public static void printTotalWinningResult(float profit, List<List<String>> winningResult) {
         printNewLine();
         System.out.println("당첨 통계");
         printSplitLine();
         printProfit(profit);
-        System.out.println(winningResult);
+        printWinningResult(winningResult);
     }
 
     public static void printProfit(float profit) {
@@ -61,4 +67,12 @@ public class OutputView {
         System.out.println(lottoTicket.getLottoNumbers());
     }
 
+    private static void printWinningResult(List<List<String>> winningResult) {
+        for (List<String> strings : winningResult) {
+            System.out.printf(WINNING_INFO_MESSAGE,
+                    strings.get(MESSAGE),
+                    strings.get(WINNINGS),
+                    strings.get(COUNTS));
+        }
+    }
 }

@@ -76,7 +76,7 @@ public class LottoController {
         List<Integer> hitCounts = lottoTickets.checkHitCount(winningTicket, bonusBall);
         int totalReward = WinningResult.calculateWinnings(hitCounts);
         OutputView.printTotalWinningResult(money.getProfit(totalReward),
-                WinningResult.toString(hitCounts));
+                WinningResult.getWinningResult(hitCounts));
     }
 
     private void manageChange(Money money) {

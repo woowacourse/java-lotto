@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -11,8 +12,6 @@ public enum WinningResult {
     THIRD_PRIZE(5, 1500000, "5개 일치"),
     SECOND_PRIZE(6, 30_000_000, "5개 일치, 보너스 볼 일치"),
     FIRST_PRIZE(7, 2_000_000_000, "6개 일치");
-
-    private static final String WINNING_INFO_MESSAGE = "%s (%d)원 - %d개\n";
 
     private final int hitCount;
     private final int winnings;
@@ -27,37 +26,35 @@ public enum WinningResult {
     public static int calculateWinnings(List<Integer> hitCounts) {
         int totalReward = 0;
         for (int i = FIFTH_PRIZE.hitCount; i <= FIRST_PRIZE.hitCount; i++) {
-            totalReward += hitCounts.get(i) * getWinnings(i);
+            totalReward += hitCounts.get(i) * getWinningsByCount(i);
         }
         return totalReward;
     }
 
-    private static int getWinnings(int count) {
+    public static List<List<String>> getWinningResult(List<Integer> hitCounts) {
+        List<List<String>> winningResult = new ArrayList<>();
+        for (int i = FIFTH_PRIZE.hitCount; i <= FIRST_PRIZE.hitCount; i++) {
+            WinningResult result = getEachWinningResult(i);
+            winningResult.add(Arrays.asList(
+                    result.message,
+                    Integer.toString(result.winnings),
+                    Integer.toString(hitCounts.get(i))));
+        }
+        return winningResult;
+    }
+
+    private static WinningResult getEachWinningResult(int count) {
+        return Arrays.stream(values())
+                .filter(value -> count == value.hitCount)
+                .findFirst()
+                .get();
+    }
+
+    private static int getWinningsByCount(int count) {
         return Arrays.stream(values())
                 .filter(value -> count == value.hitCount)
                 .findFirst()
                 .get()
                 .winnings;
-    }
-
-    public static String toString(List<Integer> hitCounts) {
-        StringBuilder winningInfo = new StringBuilder();
-        IntStream.rangeClosed(FIFTH_PRIZE.hitCount, FIRST_PRIZE.hitCount).forEach(index -> {
-            WinningResult winningResult = getWinningResult(index);
-            winningInfo.append(String.format(
-                    WINNING_INFO_MESSAGE,
-                    winningResult.message,
-                    winningResult.winnings,
-                    hitCounts.get(index)
-            ));
-        });
-        return winningInfo.toString();
-    }
-
-    private static WinningResult getWinningResult(int count) {
-        return Arrays.stream(values())
-                .filter(value -> count == value.hitCount)
-                .findFirst()
-                .get();
     }
 }
