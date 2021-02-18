@@ -1,15 +1,18 @@
 package lotto.view;
 
+import lotto.domain.LottoProfit;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
+import lotto.domain.WinningResult;
 
-import java.util.List;
+import java.util.Map;
 
 public class OutputView {
-    private static final String WINNING_INFO_MESSAGE = "%s (%s)원 - %s개\n";
-    private static final int MESSAGE = 0;
-    private static final int WINNINGS = 1;
-    private static final int COUNTS = 2;
+    private static final String WINNING_INFO_MESSAGE = "%s (%s)원 - %s개";
+    private static final int FAILED = 0;
+//    private static final int MESSAGE = 0;
+//    private static final int WINNINGS = 1;
+//    private static final int COUNTS = 2;
 
     private OutputView() {
     }
@@ -22,7 +25,7 @@ public class OutputView {
         System.out.println("구입금액을 입력해 주세요.");
     }
 
-    public static void printTicketCountMessage(int counts) {
+    public static void printNumberOfTickets(int counts) {
         System.out.println(counts + "개를 구매했습니다.");
     }
 
@@ -35,27 +38,30 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printBonusNumber() {
+    public static void printBonusNumberTitle() {
         System.out.println("보너스 볼을 입력해주세요.");
     }
 
-    public static void printWinningNumbers() {
+    public static void printWinningNumbersTitle() {
         System.out.println("지난 주 당첨 번호를 입력해주세요.");
     }
 
-    public static void printTotalWinningResult(float profit, List<List<String>> winningResult) {
-        printNewLine();
+    public static void printTotalWinningResult(Map<WinningResult, Integer> winningResult) {
         System.out.println("당첨 통계");
         printSplitLine();
-        printProfit(profit);
-        printWinningResult(winningResult);
+
+        for (WinningResult result : WinningResult.values()) {
+            printWinningResult(result, winningResult);
+        }
     }
 
-    public static void printProfit(float profit) {
-        System.out.printf("총 수익률은 %.2f입니다.%n", profit);
+    public static void printProfit(LottoProfit profit) {
+        printNewLine();
+        System.out.printf("총 수익률은 %.2f입니다.%n", profit.getProfit());
     }
 
     public static void printAboutChange(int change) {
+        printNewLine();
         System.out.printf("거스름돈 %d원은 자선 단체에 기부되었습니다 \uD83D\uDE03%n", change);
     }
 
@@ -67,12 +73,17 @@ public class OutputView {
         System.out.println(lottoTicket.getLottoNumbers());
     }
 
-    private static void printWinningResult(List<List<String>> winningResult) {
-        for (List<String> strings : winningResult) {
-            System.out.printf(WINNING_INFO_MESSAGE,
-                    strings.get(MESSAGE),
-                    strings.get(WINNINGS),
-                    strings.get(COUNTS));
+    private static void printWinningResult(WinningResult result, Map<WinningResult, Integer> winningResult) {
+        if (result.getHitCount() == FAILED) {
+            return;
         }
+        System.out.println(String.format(WINNING_INFO_MESSAGE, result.getMessage(), result.getWinnings(), convertNullToZero(winningResult.get(result))));
+    }
+
+    private static int convertNullToZero(Integer number) {
+        if (number == null) {
+            return 0;
+        }
+        return number;
     }
 }

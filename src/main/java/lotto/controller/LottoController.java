@@ -1,12 +1,12 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.domain.ticketfactory.FixedNumberTicketFactory;
 import lotto.exception.LottoCustomException;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class LottoController {
 
@@ -20,10 +20,11 @@ public class LottoController {
         Money money = inputMoney();
         LottoTickets lottoTickets = buyLottoTickets(money);
 
-        LottoTicket winningTicket = makeWinningTicket();
-        LottoNumber bonusBall = makeBonusNumber(winningTicket);
+        WinningTicket winningTicket = makeWinningTicket();
+        Map<WinningResult, Integer> result = LottoResultMachine.confirmResult(lottoTickets, winningTicket);
 
-        showResult(money, lottoTickets, winningTicket, bonusBall);
+        OutputView.printProfit(LottoProfit.ofProfit(result, money));
+        OutputView.printTotalWinningResult(result);
         manageChange(money);
     }
 
@@ -31,7 +32,7 @@ public class LottoController {
         try {
             OutputView.printMoneyMessage();
             Money money = new Money(inputView.inputMoney());
-            OutputView.printTicketCountMessage(money.getTicketCount());
+            OutputView.printNumberOfTickets(money.getTicketCount());
             return money;
         } catch (LottoCustomException e) {
             OutputView.printErrorMessage(e.getMessage());
@@ -46,37 +47,17 @@ public class LottoController {
         return lottoTickets;
     }
 
-    private LottoTicket makeWinningTicket() {
+    private WinningTicket makeWinningTicket() {
         try {
-            OutputView.printWinningNumbers();
-            return FixedNumberTicketFactory
-                    .makeTicket(inputView.inputWinningTicket());
+            OutputView.printWinningNumbersTitle();
+            Set<LottoNumber> winningNumbers = inputView.inputWinningNumbers();
+            OutputView.printBonusNumberTitle();
+            LottoNumber bonusNumber = new LottoNumber(inputView.inputBonusNumber());
+            return new WinningTicket(winningNumbers, bonusNumber);
         } catch (LottoCustomException e) {
             OutputView.printErrorMessage(e.getMessage());
             return makeWinningTicket();
         }
-    }
-
-    private LottoNumber makeBonusNumber(LottoTicket winningTicket) {
-        try {
-            OutputView.printBonusNumber();
-            LottoNumber bonusBall = new LottoNumber(inputView.inputBonusNumber());
-            winningTicket.checkDuplicateNumber(bonusBall);
-            return bonusBall;
-        } catch (LottoCustomException e) {
-            OutputView.printErrorMessage(e.getMessage());
-            return makeBonusNumber(winningTicket);
-        }
-    }
-
-    private void showResult(Money money,
-                            LottoTickets lottoTickets,
-                            LottoTicket winningTicket,
-                            LottoNumber bonusBall) {
-        List<Integer> hitCounts = lottoTickets.checkHitCount(winningTicket, bonusBall);
-        int totalReward = WinningResult.calculateWinnings(hitCounts);
-        OutputView.printTotalWinningResult(money.getProfit(totalReward),
-                WinningResult.getWinningResult(hitCounts));
     }
 
     private void manageChange(Money money) {

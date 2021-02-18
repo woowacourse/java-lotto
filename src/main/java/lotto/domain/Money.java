@@ -19,16 +19,16 @@ public class Money {
         return this.money / MONEY_UNIT;
     }
 
-    public float getProfit(int totalReward) {
-        return (float) totalReward / (float) money;
-    }
-
     public boolean hasChange() {
         return money % MONEY_UNIT != ZERO;
     }
 
     public int getChange() {
         return money % MONEY_UNIT;
+    }
+
+    public int getMoney() {
+        return money;
     }
 
     private void validateMoneyLimit(final int money) {
