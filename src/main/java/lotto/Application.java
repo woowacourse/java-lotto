@@ -10,9 +10,10 @@ public class Application {
     public static void main(String[] args) {
         PurchasingPrice purchasingPrice = new PurchasingPrice(InputView.inputPurchasingPrice());
         int lottoTicketCounts = purchasingPrice.calculatePurchasableTicketCounts();
-        OutputView.printLottoCountMessage(lottoTicketCounts);
         LottoTickets lottoTickets = LottoTickets.generateLottoTickets(lottoTicketCounts, new RandomLottoNumberGenerator());
+        OutputView.printLottoCountMessage(lottoTicketCounts);
         OutputView.printLottoTicketNumbers(lottoTickets);
+
         List<Integer> winningTicketNumbers = InputView.inputWinningTicketNumbers();
         int bonusBallNumber = InputView.inputBonusBallNumber();
         WinningLottoTicket winningLottoTicket = WinningLottoTicket.of(winningTicketNumbers, bonusBallNumber);
