@@ -14,17 +14,26 @@ import lotto.view.OutputView;
 public class LottoController {
 
     public void run() {
+        try {
+            LottoTicket lottoTicket = getLottoTicket();
+            OutputView.printLottoTicket(lottoTicket);
+            LottoResult lottoResult = checkLottoTicket(lottoTicket, new LottoLine(InputView.getLottoLine()),
+                new LottoNumber(InputView.getBonusLottoNumber()));
+            OutputView.printResult(lottoResult);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private LottoTicket getLottoTicket() {
         Money money = new Money(InputView.getMoney());
-        LottoLine winLottoLine = new LottoLine(InputView.getLottoLine());
-        LottoNumber bonusBallNumber = new LottoNumber(InputView.getBonusLottoNumber());
-        LottoResult lottoResult = checkLottoTicket(LottoTicketFactory.createLottoTicket(money.getValue()), winLottoLine,
-            bonusBallNumber);
-        OutputView.printResult(lottoResult);
+        return LottoTicketFactory.createLottoTicket(money.getValue());
     }
 
     private LottoResult checkLottoTicket(LottoTicket lottoTicket, LottoLine winLottoLine,
         LottoNumber bonusBallNumber) {
-        List<Rank> rankList = lottoTicket.matchLottoLines(winLottoLine.getValues(), bonusBallNumber);
+        List<Rank> rankList = lottoTicket
+            .matchLottoLines(winLottoLine.getValues(), bonusBallNumber);
         return new LottoResult(rankList);
     }
 
