@@ -49,6 +49,6 @@ public class StatisticsTest {
     public void calculateRewardTest() {
         Statistics statistics = new Statistics(winningNumber, lottoTickets);
         Money reward = statistics.getReward();
-        assertThat(reward.toInteger()).isEqualTo(2_060_000_000);
+        assertThat(reward.toLong()).isEqualTo(2_060_000_000);
     }
 }

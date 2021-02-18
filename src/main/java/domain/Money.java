@@ -3,32 +3,32 @@ package domain;
 import java.util.Objects;
 
 public class Money {
-    private static final String INTEGER_REGULAR_EXPRESSION = "^-?[0-9]+$";
-    private static final int ZERO = 0;
+    private static final String LONG_REGULAR_EXPRESSION = "^-?[0-9]+$";
+    private static final long ZERO = 0;
 
-    private final int money;
+    private final long money;
 
     public Money(String input) {
         validateInputFormat(input);
-        int money = Integer.parseInt(input);
+        long money = Long.parseLong(input);
         validatePositiveNumber(money);
         this.money = money;
     }
 
     private void validateInputFormat(String input) {
-        if (input.matches(INTEGER_REGULAR_EXPRESSION)) {
+        if (input.matches(LONG_REGULAR_EXPRESSION)) {
             return;
         }
         throw new InvalidInputException();
     }
 
-    private void validatePositiveNumber(int input) {
+    private void validatePositiveNumber(long input) {
         if (input < ZERO) {
             throw new InvalidNumberRangeException("양수만 입력해주세요.");
         }
     }
 
-    public int toInteger() {
+    public long toLong() {
         return money;
     }
 

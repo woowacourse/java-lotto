@@ -32,7 +32,7 @@ public class Statistics {
         long total = 0;
         for (Rank rank : Rank.values()) {
             long count = lottoStatistics.get(rank);
-            total += count * rank.getReward().toInteger();
+            total += count * rank.getReward().toLong();
         }
         return new Money(Long.toString(total));
     }
