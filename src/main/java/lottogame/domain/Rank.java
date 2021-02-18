@@ -42,4 +42,8 @@ public enum Rank {
     public boolean isNotFound() {
         return this.equals(NOT_FOUND);
     }
+
+    public boolean isSecond() {
+        return this.equals(SECOND);
+    }
 }

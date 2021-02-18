@@ -5,7 +5,6 @@ import lottogame.domain.stats.LottoResult;
 import lottogame.domain.stats.LottoResults;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Lottos {

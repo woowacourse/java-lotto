@@ -28,19 +28,22 @@ public class OutputView {
                 .collect(Collectors.joining(", ", "[", "]"));
     }
 
-    public static void printResult(LottoResults results) {     // LottoResults
+    public static void printResult(LottoResults results) {
         System.out.println("당첨 통계");
         System.out.println("---------");
+        printSummary(results);
+        System.out.printf("총 수익률은 %f입니다.\n", results.getProfit());
+    }
 
-        Map<Rank, Integer> statistics = results.values();
-        for (Map.Entry<Rank, Integer> elem : statistics.entrySet()) {
-            if (elem.getKey().getCount() == 5 && elem.getKey().getMoney() == 30000000) {
-                System.out.printf("%d개 일치, 보너스 볼 일치 (%d원)- %d개\n", elem.getKey().getCount(), elem.getKey().getMoney(), elem.getValue());
+    private static void printSummary(LottoResults results) {
+        for (Map.Entry<Rank, Integer> statistic : results.values().entrySet()) {
+            Rank rank = statistic.getKey();
+            int price = statistic.getValue();
+            if (rank.isSecond()) {
+                System.out.printf("%d개 일치, 보너스 볼 일치 (%d원)- %d개\n", rank.getCount(), rank.getMoney(), price);
                 continue;
             }
-            System.out.printf("%d개 일치 (%d원)- %d개\n", elem.getKey().getCount(), elem.getKey().getMoney(), elem.getValue());
+            System.out.printf("%d개 일치 (%d원)- %d개\n", rank.getCount(), rank.getMoney(), price);
         }
-
-        System.out.printf("총 수익률은 %f입니다.\n", results.getProfit());
     }
 }
