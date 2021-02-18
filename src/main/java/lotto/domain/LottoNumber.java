@@ -1,11 +1,10 @@
 package lotto.domain;
 
 import java.util.Objects;
-import java.util.regex.Pattern;
+import lotto.utils.StringValidator;
 
 public class LottoNumber {
 
-    private static final Pattern DIGIT_PATTERN = Pattern.compile("\\d+");
     public static final int MINIMUM_VALUE = 1;
     public static final int MAXIMUM_VALUE = 45;
 
@@ -24,10 +23,7 @@ public class LottoNumber {
 
     private static int convertToLottoNumber(String numberValue) {
         numberValue = numberValue.trim();
-
-        if (!DIGIT_PATTERN.matcher(numberValue).matches()) {
-            throw new RuntimeException();
-        }
+        StringValidator.validateIsDigit(numberValue);
         return Integer.parseInt(numberValue);
     }
 

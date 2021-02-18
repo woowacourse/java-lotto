@@ -18,14 +18,14 @@ public class WinningNumbers {
     }
 
     public Rank getRank(LottoTicket lottoTicket) {
-        return Rank.getInstance(countMatches(lottoTicket), lottoTicket.contains(bonusBall));
+        return Rank.getInstance(
+                countMatches(lottoTicket),
+                lottoTicket.contains(bonusBall));
     }
 
-    //Todo :  private 수정해야함
-    public int countMatches(LottoTicket lottoTicket) {
+    private int countMatches(LottoTicket lottoTicket) {
         return (int) lottoTicket.toUnmodifiableList().stream()
                 .filter(this.lottoTicket::contains)
                 .count();
     }
-
 }

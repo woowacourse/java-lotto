@@ -2,18 +2,20 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 import lotto.utils.LottoGenerator;
+import lotto.utils.StringValidator;
 
+// 금액입력받아서
+// 로또 머신에게 발행 -> 로또티켓 리스트를 돌려줌 :List로 보관
+// Enum 이랑 비교해서 결과를 파악함
+// 로또 티켓을 사고 -> 우승얼마나했는지
+// 결과 알려줌???
 public class Machine {
 
-    private static final String IS_NUMBER = "\\d+";
     private final int money;
 
     public Machine(String moneyValue) {
-        if (!Pattern.matches(IS_NUMBER, moneyValue)) {
-            throw new RuntimeException();
-        }
+        StringValidator.validateIsDigit(moneyValue);
         money = Integer.parseInt(moneyValue);
     }
 
@@ -21,12 +23,16 @@ public class Machine {
         int ticketCount;
         List<LottoTicket> lottoTickets = new ArrayList<>();
 
-        ticketCount = money / LottoTicket.PRICE;
+        ticketCount = getTicketCount();
 
         for (int i = 0; i < ticketCount; i++) {
             lottoTickets.add(lottoGenerator.generateLottoTicket());
         }
         return lottoTickets;
+    }
+
+    private int getTicketCount() {
+        return money / LottoTicket.PRICE;
     }
 
     public Result getResult(String winningNumbersValue, String bonusBallValue,
@@ -35,13 +41,4 @@ public class Machine {
 
         return new Result(winningNumbers, lottoTickets, money);
     }
-    // 금액입력받아서
-
-    // 로또 머신에게 발행 -> 로또티켓 리스트를 돌려줌 :List로 보관
-
-    // Enum 이랑 비교해서 결과를 파악함
-
-    // 로또 티켓을 사고 -> 우승얼마나했는지
-
-    // 결과 알려줌???
 }

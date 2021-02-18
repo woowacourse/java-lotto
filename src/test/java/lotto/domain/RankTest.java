@@ -13,7 +13,7 @@ class RankTest {
     @ParameterizedTest
     @DisplayName("Rank 테스트")
     @MethodSource("ranks")
-    void getInstance1(int val, boolean isBonus, Rank expectedRank) {
+    void getInstance(int val, boolean isBonus, Rank expectedRank) {
         assertThat(Rank.getInstance(val, isBonus)).isEqualTo(expectedRank);
     }
 

@@ -13,7 +13,7 @@ public class LottoTicket {
     public static final int PRICE = 1000;
     public static final int SIZE_OF_LOTTO_NUMBERS = 6;
 
-    private List<LottoNumber> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public LottoTicket(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != SIZE_OF_LOTTO_NUMBERS) {
