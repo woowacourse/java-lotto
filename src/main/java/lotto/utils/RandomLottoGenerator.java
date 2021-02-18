@@ -1,29 +1,26 @@
 package lotto.utils;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 
 public class RandomLottoGenerator implements LottoGenerator {
 
-    public static final int MAXIMUM_BOUND = 45;
-
-    private final Random random = new Random();
+    private static final List<LottoNumber> LOTTO_NUMBERS = IntStream
+            .rangeClosed(LottoNumber.MINIMUM_VALUE, LottoNumber.MAXIMUM_VALUE)
+            .boxed().map(LottoNumber::new)
+            .collect(Collectors.toList());
 
     @Override
     public LottoTicket generateLottoTicket() {
-        Set<LottoNumber> numbers = new HashSet<>();
-        while (numbers.size() != LottoTicket.SIZE_OF_LOTTO_NUMBERS) {
-            numbers.add(getRandomLottoNumber());
-        }
-        return new LottoTicket(new ArrayList<>(numbers));
+        return new LottoTicket(getShuffledLottoNumbers());
     }
 
-    private LottoNumber getRandomLottoNumber() {
-        return new LottoNumber(random.nextInt(MAXIMUM_BOUND) + 1);
+    private List<LottoNumber> getShuffledLottoNumbers() {
+        Collections.shuffle(LOTTO_NUMBERS);
+        return LOTTO_NUMBERS.subList(0, LottoTicket.SIZE_OF_LOTTO_NUMBERS);
     }
-
 }
