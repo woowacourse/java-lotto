@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -29,5 +30,13 @@ public class WinningNumbers {
         if (numbers.size() != WINNING_TICKET_SIZE + BONUS_NUMBER_SIZE) {
             throw new IllegalArgumentException("당첨 번호에 보너스 번호가 포함되어 있습니다.");
         }
+    }
+
+    public List<Ranking> getRankings(final List<LottoTicket> lottoTickets) {
+        List<Ranking> rankings = new ArrayList<>();
+        for (LottoTicket lottoTicket : lottoTickets) {
+            rankings.add(lottoTicket.checkRanking(winningTicket, bonusNumber));
+        }
+        return rankings;
     }
 }

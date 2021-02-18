@@ -49,4 +49,18 @@ public class LottoTicket {
     public static int getLottoTicketSize() {
         return LOTTO_TICKET_SIZE;
     }
+
+    public Ranking checkRanking(final LottoTicket winningTicket, LottoNumber bonusNumber) {
+        int matching = (int) lottoNumbers.stream()
+                .filter(number -> winningTicket.contains(number))
+                .count();
+
+        boolean bonusMatching = contains(bonusNumber);
+
+        return Ranking.select(matching, bonusMatching);
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
 }
