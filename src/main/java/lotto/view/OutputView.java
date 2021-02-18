@@ -10,9 +10,6 @@ import java.util.Map;
 public class OutputView {
     private static final String WINNING_INFO_MESSAGE = "%s (%s)원 - %s개";
     private static final int FAILED = 0;
-//    private static final int MESSAGE = 0;
-//    private static final int WINNINGS = 1;
-//    private static final int COUNTS = 2;
 
     private OutputView() {
     }
