@@ -33,9 +33,9 @@ class LottoTest {
         Money money = new Money(1_000);
 
         //when
-        long lottoNumber = Lotto.ableToBuyWith(money);
+        long lottoCount = Lotto.getNumberOfAvailablePurchases(money);
 
         //then
-        assertThat(lottoNumber).isEqualTo(1);
+        assertThat(lottoCount).isEqualTo(1);
     }
 }

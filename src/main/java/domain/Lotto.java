@@ -1,9 +1,6 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -21,7 +18,7 @@ public class Lotto {
                 .collect(Collectors.toList())));
     }
 
-    public static int ableToBuyWith(Money money) {
+    public static int getNumberOfAvailablePurchases(Money money) {
         return money.divide(PRICE);
     }
 
@@ -30,7 +27,7 @@ public class Lotto {
     }
 
     public int findMatchCount(Lotto targetLotto) {
-        return this.lottoNumbers.findMatchCount(targetLotto.lottoNumbers);
+        return lottoNumbers.findMatchCount(targetLotto.lottoNumbers);
     }
 
     @Override

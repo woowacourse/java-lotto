@@ -15,17 +15,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoNumbersTest {
 
-    private static Stream<List<LottoNumber>> generateIfLottoNumberLengthNotSatisfied() {
-        return Stream.of(parseToLottoNumberList(Arrays.asList(1, 2, 3, 4, 5))
-                , parseToLottoNumberList(Arrays.asList(1, 2, 3, 4, 5, 6, 7)));
-    }
-
-    private static List<LottoNumber> parseToLottoNumberList(List<Integer> numbers) {
-        return numbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
-    }
-
     @DisplayName("Lottonumbers를 생성하는 기능")
     @Test
     void generate() {
@@ -51,9 +40,20 @@ class LottoNumbersTest {
         assertThatThrownBy(() -> new LottoNumbers(lottoNumbers)).isInstanceOf(IllegalArgumentException.class);
     }
 
+    private static Stream<List<LottoNumber>> numbersLengthNotSatisfied() {
+        return Stream.of(parseToLottoNumberList(Arrays.asList(1, 2, 3, 4, 5))
+                , parseToLottoNumberList(Arrays.asList(1, 2, 3, 4, 5, 6, 7)));
+    }
+
+    private static List<LottoNumber> parseToLottoNumberList(List<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+    }
+
     @DisplayName("LottoNumbers 길이가 6이 아닌 경우")
     @ParameterizedTest
-    @MethodSource
+    @MethodSource("numbersLengthNotSatisfied")
     void generateIfLottoNumberLengthNotSatisfied(List<LottoNumber> input) {
         //when //then
         assertThatThrownBy(() -> new LottoNumbers(input)).isInstanceOf(IllegalArgumentException.class);

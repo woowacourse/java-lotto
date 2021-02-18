@@ -16,11 +16,11 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void printNumberOfPurchaseLotto(int numberOfLotto) {
+    public static void printNumberOfPurchasedLotto(int numberOfLotto) {
         System.out.println(numberOfLotto + "개를 구매했습니다.");
     }
 
-    public static void printAllLottos(Lottos boughtLottos) {
+    public static void printAllLottoList(Lottos boughtLottos) {
         for (Lotto lotto : boughtLottos.getLottos()) {
             System.out.println(lotto);
         }
@@ -37,7 +37,7 @@ public class OutputView {
     }
 
     private static void printResult(Map<LottoRank, Long> resultsValues, LottoRank lottoRank) {
-        System.out.printf(format, lottoRank.getCorrectCnt(), lottoRank.getPrize().getValue(), resultsValues.get(lottoRank));
+        System.out.printf(format, lottoRank.getMatchCount(), lottoRank.getPrize().getValue(), resultsValues.get(lottoRank));
     }
 
     public static void printEarningRate(double earningRate) {

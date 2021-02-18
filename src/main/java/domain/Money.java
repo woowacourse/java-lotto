@@ -12,9 +12,18 @@ public class Money {
         this.value = value;
     }
 
+    /*
+     XXX :: 인스턴스 메소드 vs 클래스 메소드로 정의 (ex, revenue.calculateEarningRate(used))
+      Money.add(Money one, Money two);
+     */
+    public static double calculateEarningRate(Money revenue, Money used) {
+        double earningRate = revenue.value / (double) used.value;
+        return (long) (earningRate * 100) / 100.0;
+    }
+
     private void validateMoney(long value) {
         if (value < ZERO) {
-            throw new IllegalArgumentException("구입 금액은 0이상이어야 합니다.");
+            throw new IllegalArgumentException("금액은 0이상이어야 합니다.");
         }
     }
 
@@ -26,17 +35,16 @@ public class Money {
         return (int) (this.value / value);
     }
 
-    public double calculateEarningRate(Money used) {
-        double something = this.value / (double) used.value;
-        return (long) (something * 100) / 100.0;
-    }
-
     public Money multiply(long multiplier) {
         return new Money(value * multiplier);
     }
 
     public Money add(Money targetMoney) {
         return new Money(value + targetMoney.value);
+    }
+
+    public long getValue() {
+        return value;
     }
 
     @Override
@@ -50,9 +58,5 @@ public class Money {
     @Override
     public int hashCode() {
         return Objects.hash(value);
-    }
-
-    public long getValue() {
-        return value;
     }
 }

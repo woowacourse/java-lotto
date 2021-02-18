@@ -9,18 +9,18 @@ public class LottoController {
     public static void main(String[] args) {
         Money amount = InputView.inputPurchaseMoney();
 
-        int lottoCount = Lotto.ableToBuyWith(amount);
-        OutputView.printNumberOfPurchaseLotto(lottoCount);
+        int lottoCount = Lotto.getNumberOfAvailablePurchases(amount);
+        OutputView.printNumberOfPurchasedLotto(lottoCount);
 
-        Lottos purchased = LottoFactory.generates(new DefaultShuffleStrategy(), lottoCount);
-        OutputView.printAllLottos(purchased);
+        Lottos lottos = LottoFactory.generates(new DefaultShuffleStrategy(), lottoCount);
+        OutputView.printAllLottoList(lottos);
 
         WinningLotto winningLotto = InputView.inputWinningLotto();
-        LottoResults results = purchased.getLottoResults(winningLotto);
+        LottoResults results = lottos.getLottoResults(winningLotto);
         OutputView.printResults(results);
 
         Money revenue = results.getTotalWinningMoney();
-        double earningRate = revenue.calculateEarningRate(amount);
+        double earningRate = Money.calculateEarningRate(revenue, amount);
         OutputView.printEarningRate(earningRate);
     }
 }

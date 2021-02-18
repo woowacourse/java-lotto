@@ -26,6 +26,7 @@ public class InputView {
 
     private static Lotto inputLotto() {
         System.out.println("지난 주 당첨 로또를 입력해주세요.");
+
         String input = SCANNER.nextLine();
         List<LottoNumber> lottoNumbers = Arrays.stream(input.split(","))
                 .map(Integer::parseInt)

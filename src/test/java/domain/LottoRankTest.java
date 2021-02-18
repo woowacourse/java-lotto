@@ -15,9 +15,9 @@ class LottoRankTest {
     }, delimiter = ':')
     void isMatch(int correctCnt, boolean isBonusMatch, LottoRank result) {
         //when
-        LottoRank lottoRank = LottoRank.isMatch(correctCnt, isBonusMatch);
+        LottoRank lottoRank = LottoRank.valueOf(correctCnt, isBonusMatch);
 
         //then
-        assertThat(lottoRank == result).isTrue();
+        assertThat(lottoRank).isEqualTo(result);
     }
 }

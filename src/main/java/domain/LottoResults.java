@@ -14,8 +14,10 @@ public class LottoResults {
     public Money getTotalWinningMoney() {
         Money total = new Money(0);
         for (LottoRank lottoRank : lottoResults.keySet()) {
-            Money money = lottoRank.getPrize().multiply(lottoResults.get(lottoRank));
-            total = total.add(money);
+            Money prize = lottoRank.getPrize();
+            long count = lottoResults.get(lottoRank);
+
+            total = total.add(prize.multiply(count));
         }
 
         return total;

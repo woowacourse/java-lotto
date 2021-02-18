@@ -18,13 +18,13 @@ public enum LottoRank {
         this.prize = new Money(prize);
     }
 
-    public static LottoRank isMatch(int correctCnt, boolean isBonusMatch) {
-        if (SECOND.matchCount(correctCnt) || THIRD.matchCount(correctCnt)) {
+    public static LottoRank valueOf(int matchCnt, boolean isBonusMatch) {
+        if (SECOND.matchCount(matchCnt) || THIRD.matchCount(matchCnt)) {
             return determineSecondOrThird(isBonusMatch);
         }
 
         return Arrays.stream(LottoRank.values())
-                .filter(lottoRank -> lottoRank.matchCount(correctCnt))
+                .filter(lottoRank -> lottoRank.matchCount(matchCnt))
                 .findAny()
                 .orElse(MISS);
     }
@@ -45,7 +45,7 @@ public enum LottoRank {
         return prize;
     }
 
-    public int getCorrectCnt() {
+    public int getMatchCount() {
         return correctCnt;
     }
 }
