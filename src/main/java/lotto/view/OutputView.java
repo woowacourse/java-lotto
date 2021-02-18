@@ -16,8 +16,8 @@ public class OutputView {
     private static final String WINNING_STATISTICS = "당첨 통계";
     private static final String CONTOUR = "---------";
     private static final String THREE_MATCHES = "3개 일치 (5000원)- %d";
-    private static final String FIVE_MATCHES_WITH_BONUS_NUMBER = "5개 일치 (1500000원)- %d";
-    private static final String FIVE_MATCHES = "5개 일치, 보너스 볼 일치 (30000000원)- %d";
+    private static final String FIVE_MATCHES = "5개 일치 (1500000원)- %d";
+    private static final String FIVE_MATCHES_WITH_BONUS_NUMBER = "5개 일치, 보너스 볼 일치 (30000000원)- %d";
     private static final String SIX_MATCHES = "6개 일치 (2000000000원)- %d";
     private static final String TOTAL_PROFIT = "총 수익률은 %.2f 입니다.";
     private static final String FOUR_MATCHES = "4개 일치 (50000원)- %d";
@@ -56,7 +56,7 @@ public class OutputView {
         System.out.println(CONTOUR);
         System.out.println(String.format(THREE_MATCHES, rewords.getFifth()));
         System.out.println(String.format(FOUR_MATCHES, rewords.getFourth()));
-        System.out.println(String.format(FIVE_MATCHES ,rewords.getThird()));
+        System.out.println(String.format(FIVE_MATCHES, rewords.getThird()));
         System.out.println(String.format(FIVE_MATCHES_WITH_BONUS_NUMBER, rewords.getSecond()));
         System.out.println(String.format(SIX_MATCHES, rewords.getFirst()));
         System.out.println(String.format(TOTAL_PROFIT, rewords.profit(money)));
