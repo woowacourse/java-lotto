@@ -1,4 +1,4 @@
-package domain;
+package domain.lotto.util;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
