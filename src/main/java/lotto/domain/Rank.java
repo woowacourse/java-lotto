@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum Rank {
+
     NOTHING(0, 0),
     FIFTH(3, 5_000),
     FOURTH(4, 50_000),
@@ -10,10 +11,11 @@ public enum Rank {
     SECOND(5, 30_000_000),
     FIRST(6, 2_000_000_000);
 
-    private int countOfMatch;
-    private int reward;
     public static final String RANK_BONUS_FORM = "%d개 일치, 보너스 볼 일치(%d원)- %d개" + System.lineSeparator();
     public static final String RANK_FORM = "%d개 일치 (%d원)- %d개" + System.lineSeparator();
+
+    private int countOfMatch;
+    private int reward;
 
     Rank(int countOfMatch, int reward) {
         this.countOfMatch = countOfMatch;
