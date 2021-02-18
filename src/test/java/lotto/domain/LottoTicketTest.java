@@ -6,7 +6,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.*;
 
@@ -57,7 +56,7 @@ class LottoTicketTest {
         LottoTicket lottoTicket = LottoTicket.generateTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoTicket winningTicket = LottoTicket.generateTicket(numbers);
 
-        int targetMatchCounts = lottoTicket.compare(winningTicket);
+        int targetMatchCounts = lottoTicket.getMatchCounts(winningTicket);
 
         assertThat(targetMatchCounts).isEqualTo(matchCounts);
     }

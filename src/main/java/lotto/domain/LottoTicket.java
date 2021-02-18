@@ -34,7 +34,7 @@ public class LottoTicket {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
-    public int compare(LottoTicket winningTicket) {
+    public int getMatchCounts(LottoTicket winningTicket) {
         return (int) this.lottoNumbers.stream()
                 .filter(lottoNumber -> winningTicket.contains(lottoNumber))
                 .count();
