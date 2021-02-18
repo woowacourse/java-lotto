@@ -22,6 +22,7 @@ public class Lottos {
     }
 
     public List<Lotto> toList() {
+
         return Collections.unmodifiableList(lottos);
     }
 
