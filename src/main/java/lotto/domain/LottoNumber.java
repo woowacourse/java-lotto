@@ -16,14 +16,14 @@ public class LottoNumber {
         this.number = number;
     }
 
+    public static LottoNumber from(int number) {
+        return CACHE.computeIfAbsent(number, LottoNumber::new);
+    }
+
     private void validateNumber(int lottoNumber) {
         if (lottoNumber < MINIMUM_NUMBER || lottoNumber > MAXIMUM_NUMBER) {
             throw new IllegalArgumentException(NUMBER_RANGE_ERROR);
         }
-    }
-
-    public static LottoNumber from(int number) {
-        return CACHE.computeIfAbsent(number, LottoNumber::new);
     }
 
     public int getNumber() {
