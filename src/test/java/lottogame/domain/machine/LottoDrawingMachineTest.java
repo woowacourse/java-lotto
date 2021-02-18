@@ -60,4 +60,13 @@ public class LottoDrawingMachineTest {
         assertThat(bonusNumber).isEqualTo(new LottoDrawingMachine().bonusDrawing("3"));
         assertThat(bonusNumber).isEqualTo(new LottoNumber("3"));
     }
+
+    @Test
+    @DisplayName("보너스 번호 생성시 당첨 번호가 중복될 때")
+    void bonusNumberDuplicationCheck() {
+        LottoDrawingMachine lottoDrawingMachine = new LottoDrawingMachine();
+        lottoDrawingMachine.drawing("1, 2, 3, 4, 5, 6");
+        assertThatThrownBy(() -> lottoDrawingMachine.bonusDrawing("6"))
+            .isInstanceOf(IllegalArgumentException.class);
+    }
 }

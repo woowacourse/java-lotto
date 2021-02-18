@@ -1,6 +1,7 @@
 package lottogame.domain.number;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoNumbers {
@@ -19,7 +20,12 @@ public class LottoNumbers {
         lottoNumbers.add(lottoNumber);
     }
 
+    public boolean contains(final LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
+
     public List<LottoNumber> toList() {
-        return new ArrayList<>(this.lottoNumbers);
+        return Collections.unmodifiableList(new ArrayList<>(this.lottoNumbers));
     }
 }
