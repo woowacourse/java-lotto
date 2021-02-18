@@ -11,8 +11,8 @@ public class Application {
         PurchasingPrice purchasingPrice = new PurchasingPrice(InputView.inputPurchasingPrice());
         int lottoTicketCounts = purchasingPrice.calculatePurchasableTicketCounts();
         LottoTickets lottoTickets = LottoTickets.generateAutomatic(lottoTicketCounts, new RandomLottoNumberGenerator());
-        OutputView.printLottoCountMessage(lottoTicketCounts);
-        OutputView.printLottoTicketNumbers(lottoTickets);
+        OutputView.printPurchasedLottoTicketCounts(lottoTicketCounts);
+        OutputView.printAllLottoTicketNumbers(lottoTickets);
 
         List<Integer> winningTicketNumbers = InputView.inputWinningTicketNumbers();
         int bonusBallNumber = InputView.inputBonusBallNumber();
