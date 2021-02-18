@@ -1,7 +1,7 @@
 package domain;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 public class LottoPurchase {
     private final static int PRICE = 1000;
