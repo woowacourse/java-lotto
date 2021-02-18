@@ -9,6 +9,8 @@ public class InputView {
     private static final String MESSAGE_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String MESSAGE_BONUS_BALL = "보너스 볼을 입력해 주세요.";
     private static final String COMMA = ",";
+    private static final String ERROR_INVALID_BLANK = "[ERROR] 값을 입력해주세요.";
+    private static final String ERROR_INVALID_DELIMITER = "[ERROR] 구분자는 , 로 입력해주세요.";
 
     private static InputView instance;
 
@@ -29,7 +31,7 @@ public class InputView {
         System.out.println(MESSAGE_BUDGET);
         String inputString = deleteWhiteSpaces(scanner.nextLine());
         if (inputString.equals("")) {
-            System.out.println("값을 입력해주세요.");
+            System.out.println(ERROR_INVALID_BLANK);
             return scanBudget();
         }
         return inputString;
@@ -41,7 +43,7 @@ public class InputView {
         if (inputString.contains(COMMA)) {
             return Arrays.asList(inputString.split(COMMA));
         }
-        System.out.println("구분자는 , 로 입력해주세요.");
+        System.out.println(ERROR_INVALID_DELIMITER);
         return scanWinningNumber();
     }
 
@@ -49,7 +51,7 @@ public class InputView {
         System.out.println(MESSAGE_BONUS_BALL);
         String inputString = deleteWhiteSpaces(scanner.nextLine());
         if (inputString.equals("")) {
-            System.out.println("값을 입력해주세요.");
+            System.out.println(ERROR_INVALID_BLANK);
             return scanBonusBall();
         }
         return inputString;
