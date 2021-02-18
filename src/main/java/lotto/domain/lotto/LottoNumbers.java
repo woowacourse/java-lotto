@@ -3,12 +3,11 @@ package lotto.domain.lotto;
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
+import java.util.Set;
 import lotto.domain.number.LottoNumber;
 
 public class LottoNumbers {
@@ -16,15 +15,16 @@ public class LottoNumbers {
     private static final int LOTTO_NUMBER_COUNT = 6;
     private static final String LOTTO_NUMBER_SEPARATOR = ",";
 
-    private final List<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(List<LottoNumber> lottoNumbers) {
-        validateDuplicate(lottoNumbers);
+    private LottoNumbers(Set<LottoNumber> lottoNumbers) {
         validateLottoNumberCount(lottoNumbers);
+        this.lottoNumbers = new HashSet<>(lottoNumbers);
+    }
 
-        this.lottoNumbers = new ArrayList<>(lottoNumbers).stream()
-            .sorted(Comparator.comparingInt(LottoNumber::toInt))
-            .collect(Collectors.toList());
+    public static LottoNumbers valueOf(List<LottoNumber> lottoNumbers) {
+        validateDuplicate(lottoNumbers);
+        return new LottoNumbers(new HashSet<>(lottoNumbers));
     }
 
     public static LottoNumbers valueOf(String unparsedLottoNumbers) {
@@ -34,20 +34,20 @@ public class LottoNumbers {
     private static LottoNumbers getLottoNumbersFromStringList(List<String> lottoNumbers) {
         return lottoNumbers.stream()
             .map(lottoNumber -> LottoNumber.valueOf(lottoNumber.trim()))
-            .collect(collectingAndThen(toList(), LottoNumbers::new));
+            .collect(collectingAndThen(toList(), LottoNumbers::valueOf));
     }
 
     private static List<String> splitLottoNumber(String lottoNumber) {
         return Arrays.asList(lottoNumber.split(LOTTO_NUMBER_SEPARATOR, -1));
     }
 
-    private void validateDuplicate(List<LottoNumber> lottoNumbers) {
+    private static void validateDuplicate(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.stream().distinct().count() != lottoNumbers.size()) {
             throw new IllegalArgumentException("로또 넘버에 중복이 있습니다.");
         }
     }
 
-    private void validateLottoNumberCount(List<LottoNumber> lottoNumbers) {
+    private static void validateLottoNumberCount(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("로또 넘버가 6개가 아닙니다.");
         }

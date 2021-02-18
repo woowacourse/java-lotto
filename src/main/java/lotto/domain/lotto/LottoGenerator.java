@@ -34,14 +34,14 @@ public class LottoGenerator {
     public LottoTicket newLottoTicket(int count) {
         return Stream.generate(this::generateRandomLottoNumber)
             .limit(count)
-            .map(LottoNumbers::new)
+            .map(LottoNumbers::valueOf)
             .collect(collectingAndThen(toList(), LottoTicket::new));
     }
 
     private List<LottoNumber> generateRandomLottoNumber() {
         Collections.shuffle(lottoNumbers);
 
-        return new ArrayList<>(lottoNumbers)
+        return lottoNumbers
             .stream()
             .limit(LOTTO_NUMBER_COUNT)
             .collect(toList());
