@@ -20,6 +20,8 @@ public class LottoWinningMachine {
             .filter(winningNumbers::contains)
             .count();
     }
-    
 
+    public boolean isMatchBonusNumber(final LottoNumber lottoNumber){
+        return bonusNumber.equals(lottoNumber);
+    }
 }
