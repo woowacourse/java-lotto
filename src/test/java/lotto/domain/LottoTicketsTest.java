@@ -5,12 +5,8 @@ import org.junit.jupiter.api.Test;
 
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoTicketsTest {
 
@@ -33,6 +29,6 @@ class LottoTicketsTest {
 
         LottoStatistics lottoStatistics = lottoTickets.getStatistics(winningLottoTicket);
 
-        assertThat(lottoStatistics.getCount(LottoRank.SECOND)).isEqualTo(3);
+        assertThat(lottoStatistics.getCounts(LottoRank.SECOND)).isEqualTo(3);
     }
 }
