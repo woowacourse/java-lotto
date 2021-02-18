@@ -1,5 +1,7 @@
 package domain.lotto;
 
+import domain.result.LottoRank;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -69,10 +71,15 @@ public class LottoNumbers {
         return Collections.unmodifiableList(copy);
     }
 
-    public int matchCount(LottoNumbers winningLottoNumbers, BonusNumber bonusNumber) {
-        return (int) this.lottoNumbers.stream()
-                .filter(lottoNumber -> winningLottoNumbers.contains(lottoNumber))
+    public LottoRank matchCount(LottoNumbers lottoNumbers, BonusNumber bonusNumber) {
+        int count = (int) this.lottoNumbers.stream()
+                .filter(lottoNumber -> lottoNumbers.contains(lottoNumber))
                 .count();
+
+        boolean containBonus = this.lottoNumbers.stream()
+                .anyMatch(lottoNumber -> bonusNumber.isSameNumber(lottoNumber));
+
+        return LottoRank.findByBonusWithMatches(containBonus, count);
     }
 
     private boolean contains(LottoNumber lottoNumber) {

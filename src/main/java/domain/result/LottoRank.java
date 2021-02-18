@@ -20,16 +20,19 @@ public enum LottoRank {
         this.isBonus = isBonus;
     }
 
-    public int getMatches() {
-        return matches;
-    }
-
-    public static LottoRank findByMatches(int matches) {
-        return Arrays.stream(values()).filter(lottoRank -> lottoRank.isSameMatches(matches))
-                .findFirst().orElse(NONE_MATCHES);
+    public static LottoRank findByBonusWithMatches(boolean containBonus, int matches) {
+        if (!containBonus || matches != 5) {
+            return Arrays.stream(values()).filter(lottoRank -> lottoRank.isSameMatches(matches))
+                    .findFirst().orElse(NONE_MATCHES);
+        }
+        return FIVE_AND_BONUS_MATCHES;
     }
 
     private boolean isSameMatches(int matches) {
         return this.matches == matches;
+    }
+
+    private boolean checkBonus(boolean isBonus) {
+        return this.isBonus == isBonus;
     }
 }

@@ -1,5 +1,7 @@
 package domain.lotto;
 
+import domain.result.LottoRank;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -15,7 +17,7 @@ public class Lotto {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
-    public int findMatchesNumber(WinningLotto winningLotto) {
+    public LottoRank findMatchesNumber(WinningLotto winningLotto) {
         return winningLotto.winningMatchCount(lottoNumbers);
     }
 }

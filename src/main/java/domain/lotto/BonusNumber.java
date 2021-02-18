@@ -11,7 +11,6 @@ public class BonusNumber {
         return new BonusNumber(lottoNumber);
     }
 
-
     public static BonusNumber of(final int value) {
         return new BonusNumber(new LottoNumber(value));
     }

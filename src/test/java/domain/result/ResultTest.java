@@ -51,4 +51,23 @@ class ResultTest {
         assertThat(results.get(LottoRank.SIX_MATCHES)).isEqualTo(1);
         assertThat(results.get(LottoRank.FIVE_MATCHES)).isEqualTo(1);
     }
+
+
+    @DisplayName("5개의 볼, 보너스 볼이 맞을 때 2등 당첨된다.")
+    @Test
+    void Result_로또_보너스볼_테스() {
+        List<Integer> lottoNumbers1 = Arrays.asList(1, 2, 3, 4, 5, 7);
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.add(new Lotto(LottoNumbers.generate(lottoNumbers1)));
+
+        Lottos lottoBundle = new Lottos(lottos);
+
+        Result result = new Result(lottoBundle);
+
+        WinningLotto winningLotto = new WinningLotto(LottoNumbers.generate(Arrays.asList(1, 2, 3, 4, 5, 6)), BonusNumber.of(7));
+
+        Map<LottoRank, Integer> results =  result.findMatches(winningLotto);
+
+        assertThat(results.get(LottoRank.FIVE_AND_BONUS_MATCHES)).isEqualTo(1);
+    }
 }
