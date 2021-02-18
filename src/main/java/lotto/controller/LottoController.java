@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.LottoTickets;
+import lotto.domain.Payment;
 import lotto.domain.WinningLotto;
 import lotto.view.OutputView;
 import lotto.view.Screen;
@@ -15,18 +16,17 @@ public class LottoController {
 
     private final LottoTickets lottoTickets;
     private final WinningLotto winningLotto;
-    private final int buyMoney;
+    private final Payment payment;
 
     public LottoController(final String value) {
-        this.buyMoney = Integer.parseInt(value);
-        lottoTickets = new LottoTickets(this.buyMoney / 1000);
-        OutputView.printBuyLottoCountMessage(this.buyMoney / 1000);
+        this.payment = new Payment(Integer.parseInt(value));
+        lottoTickets = new LottoTickets(payment.count());
         showLottoTickets();
         this.winningLotto = createWinningLotto();
     }
 
     public void run() {
-        OutputView.printResultMessage(lottoTickets.getResult(winningLotto), buyMoney);
+        OutputView.printResultMessage(lottoTickets.getResult(winningLotto), payment.getPayment());
     }
 
     private WinningLotto createWinningLotto() {
@@ -40,6 +40,7 @@ public class LottoController {
     }
 
     private void showLottoTickets() {
+        OutputView.printBuyLottoCountMessage(payment.count());
         for (Lotto lotto : lottoTickets.getLottoTickets()) {
             OutputView.printLottoMessage(lotto.getLottoNumbers());
         }
