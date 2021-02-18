@@ -1,7 +1,5 @@
 ## undo
- * 하나의 Lotto 생성
- * 구매한 n장의 Lotto에 대해 Rank 책정
- * 수익률 구하기
+
 
 ## doing
 
@@ -14,3 +12,6 @@
  * Rank 객체 생성
  * Money 원시값 포장
  * 구매할 Lotto 개수 구하기
+ * 하나의 Lotto 생성
+ * 구매한 n장의 Lotto에 대해 Rank 책정
+ * 수익률 구하기 
