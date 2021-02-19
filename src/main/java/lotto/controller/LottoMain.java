@@ -14,7 +14,9 @@ public class LottoMain {
         UserPurchase userPurchase = getUserPurchaseInput();
         PurchasedLottoTickets purchasedLottoTickets
             = purchaseLottoTickets(lottoMachine, userPurchase);
-        checkLottoResult(purchasedLottoTickets, userPurchase);
+        WinningLottoNumbers winningLottoNumbers = getWinningLottoNumbersInput();
+        LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers, userPurchase);
+        OutputView.printResult(lottoComparator.getLottoResult(purchasedLottoTickets));
     }
 
     private static UserPurchase getUserPurchaseInput() {
@@ -34,12 +36,6 @@ public class LottoMain {
         return purchasedLottoTickets;
     }
 
-    private static void checkLottoResult(PurchasedLottoTickets purchasedLottoTickets,
-        UserPurchase userPurchase) {
-        WinningLottoNumbers winningLottoNumbers = getWinningLottoNumbersInput();
-        LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers, userPurchase);
-        OutputView.printResult(lottoComparator.getLottoResult(purchasedLottoTickets));
-    }
 
     private static WinningLottoNumbers getWinningLottoNumbersInput() {
         try {
