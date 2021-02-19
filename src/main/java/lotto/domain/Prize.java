@@ -3,11 +3,11 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum Prize {
-    FIRST(1, 2000000000, 6, false),
-    SECOND(2, 30000000, 5, true),
-    THIRD(3, 1500000, 5, false),
-    FOURTH(4, 50000, 4, false),
-    FIFTH(5, 5000, 3, false),
+    FIRST(1, 2_000_000_000, 6, false),
+    SECOND(2, 30_000_000, 5, true),
+    THIRD(3, 1_500_000, 5, false),
+    FOURTH(4, 50_000, 4, false),
+    FIFTH(5, 5_000, 3, false),
     LOSING(-1, 0, -1, false);
 
     private final int rank;
