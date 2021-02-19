@@ -18,9 +18,9 @@ public class LottoMachine {
     }
 
     public Lottos purchase() {
-        int purchasedCount = inputView.readPaymentAmount().getPayCount();
-        Lottos lottos = Lottos.makeLottos(purchasedCount);
-        outputView.printPurchasedLottos(purchasedCount, lottos);
+        int purchaseCount = inputView.readPaymentAmount().getPurchaseCount();
+        Lottos lottos = Lottos.makeLottos(purchaseCount);
+        outputView.printPurchaseLottos(purchaseCount, lottos);
     
         return lottos;
     }
