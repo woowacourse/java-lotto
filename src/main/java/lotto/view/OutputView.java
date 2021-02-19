@@ -1,6 +1,7 @@
 package lotto.view;
 
-import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.WinningBoard;
@@ -52,9 +53,21 @@ public class OutputView {
         System.out.println(SPLIT_LINE);
     }
 
-    public static void printProfit(float profit, List<Integer> hitCounts) {
+    public static void printProfit(float profit, Map<WinningBoard,Integer> result) {
         System.out.printf(SHOW_TOTAL_YIELD_MESSAGE + System.lineSeparator(), profit);
-        System.out.println(WinningBoard.toString(hitCounts));
+        result.entrySet().forEach(OutputView::printLottoResult);
+    }
+
+    private static void printLottoResult(Entry<WinningBoard, Integer> result) {
+        if(!result.getKey().equals(WinningBoard.ZERO)) {
+            String resultMessage = result.getKey().getMessage()
+                + " ("
+                + result.getKey().getReward()
+                + ")원 - "
+                + result.getValue()
+                +"개";
+            System.out.println(resultMessage);
+        }
     }
 
 }
