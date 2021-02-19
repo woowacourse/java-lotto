@@ -19,7 +19,7 @@ public class LottoTickets {
         List<Prize> winningTickets = new ArrayList<>();
         for (LottoTicket lottoTicket : this.lottoTickets) {
             winningTickets.add(Prize.getPrizeType(lottoTicket.getMatchingCount(winningLotto.getWinningTicket().lottoTicket()),
-                    lottoTicket.isMatchingBonusNumber(winningLotto.getBonusNumber())));
+                    lottoTicket.isContainLottoNumber(winningLotto.getBonusNumber())));
         }
         return new LottoResult(winningTickets);
     }
