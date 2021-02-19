@@ -20,13 +20,13 @@ public class LottoTicketFactory {
         }
     }
 
-    public List<LottoTicket> buyLottoTickets(Money money) {
+    public LottoTickets buyLottoTickets(Money money) {
         int length = (int) money.getValue() / LOTTO_PRICE;
         List<LottoTicket> lottoTickets = new ArrayList<>();
         for (int i = 0; i < length; i++) {
             lottoTickets.add(new LottoTicket(createLottoTicketByRange()));
         }
-        return lottoTickets;
+        return new LottoTickets(lottoTickets);
     }
 
     private List<LottoNumber> createLottoTicketByRange() {

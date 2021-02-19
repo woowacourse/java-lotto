@@ -17,7 +17,7 @@ public class LottoController {
 
     private LottoTickets getLottoTickets(Money money) {
         LottoTicketFactory lottoTicketFactory = new LottoTicketFactory();
-        return new LottoTickets(lottoTicketFactory.buyLottoTickets(money));
+        return lottoTicketFactory.buyLottoTickets(money);
     }
 
     private LottoTicket getWinningTicket(LottoTickets lottoTickets) {
