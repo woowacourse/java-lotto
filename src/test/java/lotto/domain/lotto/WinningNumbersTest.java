@@ -16,15 +16,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 public class WinningNumbersTest {
 
     @Test
-    @DisplayName(",를 기준으로 당첨번호를 입력받는다.")
-    void valueOf() {
-        WinningNumbers winningNumbers = WinningNumbers.valueOf("1, 2, 3, 4, 5, 6", "7");
-        LottoNumbers expected = LottoNumbers.valueOf("1,2,3,4,5,6");
-
-        assertThat(expected).isEqualTo(winningNumbers.getLottoNumbers());
-    }
-
-    @Test
     @DisplayName("당첨 번호에 중복이 있는 경우 예외")
     void valueOfDuplicatedNumber() {
         assertThatIllegalArgumentException().isThrownBy(

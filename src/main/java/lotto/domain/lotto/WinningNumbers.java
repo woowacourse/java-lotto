@@ -36,10 +36,6 @@ public class WinningNumbers {
         return this.lottoNumbers.getMatchCount(lottoNumbers);
     }
 
-    public LottoNumbers getLottoNumbers() {
-        return lottoNumbers;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
