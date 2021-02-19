@@ -14,6 +14,7 @@ import static org.assertj.core.api.Assertions.*;
 public class LottoTest {
     
     @Test
+    @DisplayName("로또 생성 테스트")
     void init() {
         // given
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
@@ -26,6 +27,7 @@ public class LottoTest {
     }
     
     @Test
+    @DisplayName("만약 로또 길이가 주어진 조건보다 짧다면 예외 발생")
     void init_NotMatchLength_ExceptionThrown() {
         // given
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
@@ -37,7 +39,7 @@ public class LottoTest {
         assertThatIllegalArgumentException().isThrownBy(throwingCallable);
     }
     
-    @ParameterizedTest
+    @ParameterizedTest(name = "로또가 주어진 숫자를 포함는지 테스트")
     @CsvSource(value = {"1:true", "7:false"}, delimiter = ':')
     void containsTest(int lottoNum, boolean expected) {
         // given
