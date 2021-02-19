@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 public class LottoGenerator {
     private static final int LOTTO_MIN = 1;
     private static final int LOTTO_MAX = 45;
-    private static List<Integer> numbers;
+    private static List<Integer> randomNumbers;
 
     private LottoGenerator() {
     }
@@ -23,14 +23,14 @@ public class LottoGenerator {
     }
 
     public static List<Integer> makeNumbers() {
-        Collections.shuffle(numbers);
-        List<Integer> selectNumber = numbers.subList(0, 6);
+        Collections.shuffle(randomNumbers);
+        List<Integer> selectNumber = randomNumbers.subList(0, 6);
         Collections.sort(selectNumber);
         return new ArrayList<>(selectNumber);
     }
 
     public static void generate() {
-        numbers = IntStream.range(LOTTO_MIN, LOTTO_MAX)
+        randomNumbers = IntStream.range(LOTTO_MIN, LOTTO_MAX)
                 .boxed()
                 .collect(Collectors.toList());
     }
