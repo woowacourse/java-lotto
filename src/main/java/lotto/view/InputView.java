@@ -20,5 +20,4 @@ public class InputView {
         System.out.println("보너스 볼을 입력해 주세요.");
         return scanner.nextLine();
     }
-
 }

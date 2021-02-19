@@ -19,15 +19,25 @@ public class OutputView {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
+        printResultMap(resultMap);
+
+        System.out.printf("총 수익률은 %s%%입니다.%n", result.getEarningRate());
+    }
+
+    private static void printResultMap(Map<Rank, Integer> resultMap) {
         Arrays.stream(Rank.values())
                 .filter(rank -> !Rank.UNRANKED.equals(rank))
                 .forEach(rank -> {
                     String message = getMessage(rank);
-                    System.out.printf("%s (%s원)- %d개%n",
-                            message, rank.getPrize().toString(), resultMap.getOrDefault(rank, 0));
+                    extracted(resultMap, rank, message);
                 });
+    }
 
-        System.out.printf("총 수익률은 %s%%입니다.%n", result.getEarningRate());
+    private static void extracted(Map<Rank, Integer> resultMap, Rank rank, String message) {
+        String prize = rank.getPrize().toString();
+        Integer matchCount = resultMap.getOrDefault(rank, 0);
+
+        System.out.printf("%s (%s원)- %d개%n", message, prize, matchCount);
     }
 
     private static String getMessage(Rank rank) {
@@ -51,14 +61,23 @@ public class OutputView {
     }
 
     public static void printTickets(List<LottoTicket> lottoTickets) {
-        System.out.printf("%d개를 구매했습니다.\n", lottoTickets.size());
+        printLottoTicketCount(lottoTickets.size());
+
         for (LottoTicket lottoTicket : lottoTickets) {
-            String numbers = lottoTicket.toUnmodifiableList().stream()
-                    .map(lottoNumber -> Integer.toString(lottoNumber.toInt()))
-                    .collect(Collectors.joining(", "));
-            System.out.println("[" + numbers + "]");
+            printLottoTicket(lottoTicket);
         }
+
         System.out.println();
     }
 
+    private static void printLottoTicket(LottoTicket lottoTicket) {
+        String numbers = lottoTicket.toUnmodifiableList().stream()
+                .map(lottoNumber -> Integer.toString(lottoNumber.toInt()))
+                .collect(Collectors.joining(", "));
+        System.out.println("[" + numbers + "]");
+    }
+
+    private static void printLottoTicketCount(int lottoTicketCount) {
+        System.out.printf("%d개를 구매했습니다.\n", lottoTicketCount);
+    }
 }
