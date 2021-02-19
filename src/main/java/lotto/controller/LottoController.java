@@ -1,7 +1,7 @@
 package lotto.controller;
 
-import lotto.domain.lotto.RandomLottoGenerator;
 import lotto.domain.lotto.LottoTicket;
+import lotto.domain.lotto.RandomLottoGenerator;
 import lotto.domain.lotto.WinningNumbers;
 import lotto.domain.lotto.WinningStatistics;
 import lotto.domain.number.Payout;
