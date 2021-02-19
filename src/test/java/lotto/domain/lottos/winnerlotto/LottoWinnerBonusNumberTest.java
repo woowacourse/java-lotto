@@ -1,8 +1,6 @@
 package lotto.domain.lottos.winnerlotto;
 
-import lotto.domain.lottos.winnerlotto.LottoWinnerTicket;
 import lotto.domain.lottos.LottoNumber;
-import lotto.domain.lottos.winnerlotto.LottoWinnerBonusNumber;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
