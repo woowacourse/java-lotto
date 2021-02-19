@@ -7,8 +7,6 @@ import lotto.domain.LottoTicket;
 import lotto.type.LottoMatchType;
 
 public class OutputPrinter {
-    private static final String START_BRACKET = "[";
-    private static final String END_BRACKET = "]";
     private static final String NEW_LINE = "\n";
 
     private OutputPrinter() {
@@ -19,11 +17,11 @@ public class OutputPrinter {
     }
 
     public static void printLottoTicketNumbers(LottoTicket lottoTicket) {
-        System.out.println(START_BRACKET +
+        System.out.println("[" +
             lottoTicket.getLottoTicketNumbers().stream()
                 .map(lottoNumber -> Integer.toString(lottoNumber.getNumber()))
                 .collect(Collectors.joining(LOTTO_NUMBER_DELIMITER))
-            + END_BRACKET
+            + "]"
         );
     }
 
