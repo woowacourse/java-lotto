@@ -3,67 +3,58 @@ package lotto.domain.lotto;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class LottoTicketTest {
 
-    @Test
-    @DisplayName("실패 - 로또 숫자 범위 미만")
-    void generate_not_six_numbers() {
-        List<LottoNumber> lottoNumbers = Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4)
-        );
-
+    @ParameterizedTest
+    @DisplayName("잘못된 입력값 생성 불가")
+    @MethodSource("invalidList_testcase")
+    void fail_invalidList(List<LottoNumber> lottoNumbers) {
         assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
                 .isInstanceOf(RuntimeException.class);
     }
 
-    @Test
-    @DisplayName("실패 - 로또 숫자 범위 초과")
-    void generate_not_six_numbers1() {
-        List<LottoNumber> lottoNumbers = Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6),
-                new LottoNumber(7)
+    private static Stream<Arguments> invalidList_testcase() {
+        return Stream.of(
+                Arguments.of(Collections.emptyList()),
+                Arguments.of(makeLottoNumber(1, 2, 3, 4, 5)),
+                Arguments.of(makeLottoNumber(1, 2, 3, 4, 5, 6, 7)),
+                Arguments.of(makeLottoNumber(1, 2, 3, 4, 5, 5))
         );
-
-        assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
-                .isInstanceOf(RuntimeException.class);
     }
 
-    @Test
-    @DisplayName("실패 - 중복되는 로또 숫자 존재")
-    void fail_duplicatedNumber() {
-        List<LottoNumber> lottoNumbers = Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(5)
-        );
-
-        assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
-                .isInstanceOf(RuntimeException.class);
+    @ParameterizedTest
+    @DisplayName("수정 불가 리스트로 반환")
+    @MethodSource("testcase")
+    void toUnmodifiableList(ThrowingCallable throwingCallable) {
+        assertThatThrownBy(throwingCallable)
+                .isInstanceOf(UnsupportedOperationException.class);
     }
 
-    @Test
-    void toUnmodifiableList() {
+    private static Stream<Arguments> testcase() {
         List<LottoNumber> lottoNumbers = new LottoTicket("1,2,3,4,5,6").toUnmodifiableList();
-        LottoNumber lottoNumber = new LottoNumber(45);
+        LottoNumber lottoNumber = new LottoNumber(7);
 
-        assertThatThrownBy(() -> lottoNumbers.add(lottoNumber))
-                .isInstanceOf(UnsupportedOperationException.class);
-        assertThatThrownBy(() -> lottoNumbers.remove(lottoNumber))
-                .isInstanceOf(UnsupportedOperationException.class);
+        return Stream.of(
+                Arguments.of((ThrowingCallable) () -> lottoNumbers.add(lottoNumber)),
+                Arguments.of((ThrowingCallable) () -> lottoNumbers.remove(lottoNumber)),
+                Arguments.of((ThrowingCallable) () -> lottoNumbers.set(0,lottoNumber)),
+                Arguments.of((ThrowingCallable) () -> lottoNumbers.clear())
+        );
+    }
+
+    private static List<LottoNumber> makeLottoNumber(int... ints) {
+        return Arrays.stream(ints).boxed()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 }
