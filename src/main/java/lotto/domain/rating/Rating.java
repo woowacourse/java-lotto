@@ -1,41 +1,33 @@
 package lotto.domain.rating;
 
-import java.util.Arrays;
-import java.util.NoSuchElementException;
-
 public enum Rating {
-    FIRST(6, 2000000000),
-    SECOND(5, 30000000),
-    THIRD(5, 1500000),
-    FOURTH(4, 50000),
-    FIFTH(3, 5000),
-    MISS(0, 0);
+    FIRST(2_000_000_000, new LottoResult(6, false)),
+    SECOND(30_000_000, new LottoResult(5, true)),
+    THIRD(1_500_000, new LottoResult(5, false)),
+    FOURTH(50_000, new LottoResult(4, false)),
+    FIFTH(5_000, new LottoResult(3, false)),
+    MISS(0, new LottoResult(0,false));
 
-    private int matchCount;
-    private int reward;
+    private final LottoResult lottoResult;
+    private final int reward;
 
-    Rating(final int matchCount, final int reward) {
-        this.matchCount = matchCount;
+    Rating(final int reward, final LottoResult lottoResult) {
+        this.lottoResult = lottoResult;
         this.reward = reward;
     }
 
     public static Rating getRating(final int matchCount, final boolean containBonusBall) {
-        if (matchCount == THIRD.matchCount && !containBonusBall) {
-            return THIRD;
+        LottoResult lottoResult = new LottoResult(matchCount,containBonusBall);
+        for (Rating rating: values()) {
+            if (rating.lottoResult.equals(lottoResult)){
+                return rating;
+            }
         }
-
-        if (matchCount < FIFTH.matchCount) {
-            return MISS;
-        }
-
-        return Arrays.stream(values())
-                     .filter(rating -> rating.matchCount == matchCount)
-                     .findAny()
-                     .orElseThrow(NoSuchElementException::new);
+        return MISS;
     }
 
-    public int getMatchCount() {
-        return matchCount;
+    public LottoResult getLottoResult() {
+        return lottoResult;
     }
 
     public int getReward() {

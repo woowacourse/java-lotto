@@ -1,22 +1,24 @@
 package lotto.domain.statistics;
 
 import lotto.domain.primitive.Money;
+import lotto.domain.rating.LottoResult;
 import lotto.domain.rating.Rating;
 import lotto.domain.rating.RatingCounter;
 
 public class LottoStatistics {
 
     private static final String ENTER = System.lineSeparator();
-    private static final String PRINT_FORMAT = "%d개 일치 (%d원) - %d개" + ENTER;
-    private static final String SECOND_PRINT_FORMAT = "%d개 일치, 보너스 볼 일치 (%d원) - %d개" + ENTER;
-    private RatingInfo ratingInfo;
-    private final StringBuilder log = new StringBuilder();
+    private static final String START_PRINT_FORMAT = "%d개 일치";
+    private static final String HAS_BONUS_BALL = ", 보너스 볼 일치";
+    private static final String END_PRINT_FORMAT = " (%d원) - %d개" + ENTER;
+    private final RatingCounter ratingCounter;
 
     public LottoStatistics(final RatingCounter ratingCounter) {
         this.ratingCounter = ratingCounter;
     }
 
     public String getWinningDetail() {
+        StringBuilder log = new StringBuilder();
         for (Rating rating : Rating.values()) {
             if (rating == Rating.MISS) {
                 break;
@@ -27,12 +29,14 @@ public class LottoStatistics {
     }
 
     public String ratingToString(final Rating rating, final int count) {
-        if (rating == Rating.SECOND) {
-            return String
-                    .format(SECOND_PRINT_FORMAT, rating.getMatchCount(), rating.getReward(), count);
+        LottoResult lottoResult = rating.getLottoResult();
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(String.format(START_PRINT_FORMAT,lottoResult.getMatchedCount()));
+        if (lottoResult.isSecond()) {
+            stringBuilder.append(HAS_BONUS_BALL);
         }
-        return String
-                .format(PRINT_FORMAT, rating.getMatchCount(), rating.getReward(), count);
+        stringBuilder.append(String.format(END_PRINT_FORMAT,rating.getReward(),count));
+        return stringBuilder.toString();
     }
 
     public double getEarningRate(final Money money) {
