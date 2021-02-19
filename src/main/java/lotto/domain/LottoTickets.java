@@ -17,20 +17,24 @@ public class LottoTickets {
     private final List<Lotto> lottoTickets;
 
     public LottoTickets(final int count) {
-        this(count, ALL_LOTTO_NUMBERS);
+        this(count, ALL_LOTTO_NUMBERS, null);
     }
 
-    public LottoTickets(final int count, final List<Integer> values) {
-        lottoTickets = createLottoTickets(count, values);
+    public LottoTickets(final int autoPurchaseCount, final List<Lotto> lottoTickets) {
+        this(autoPurchaseCount, ALL_LOTTO_NUMBERS, lottoTickets);
     }
 
-    private List<Lotto> createLottoTickets(final int value, final List<Integer> values) {
+    public LottoTickets(final int count, final List<Integer> auto, final List<Lotto> manual) {
+        lottoTickets = createLottoTickets(count, auto, manual);
+    }
+
+    private List<Lotto> createLottoTickets(final int autoCount, final List<Integer> auto, final List<Lotto> manual) {
         List<Lotto> lottoTickets = new ArrayList<>();
 
-        for (int i = 0; i < value; i++) {
-            lottoTickets
-                .add(new Lotto(RandomUtils.generateRandomNumbers(values, LOTTO_SIZE)));
+        for (int i = 0; i < autoCount; i++) {
+            lottoTickets.add(new Lotto(RandomUtils.generateRandomNumbers(auto, LOTTO_SIZE)));
         }
+        lottoTickets.addAll(manual);
 
         return Collections.unmodifiableList(lottoTickets);
     }
@@ -51,12 +55,8 @@ public class LottoTickets {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         LottoTickets that = (LottoTickets) o;
         return Objects.equals(lottoTickets, that.lottoTickets);
     }
