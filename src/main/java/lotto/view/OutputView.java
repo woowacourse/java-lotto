@@ -61,12 +61,10 @@ public class OutputView {
     }
 
     private static void printStatisticsAccordingToBonus(Rank rank) {
-        String format = STATISTICS_NONE_BONUS_FORMAT;
+        System.out.printf(STATISTICS_NONE_BONUS_FORMAT, rank.getMatchingCount(), rank.getWinnings(), rank.getCount());
 
         if (rank.hasBonus()) {
-            format = STATISTICS_BONUS_FORMAT;
+            System.out.printf(STATISTICS_BONUS_FORMAT, rank.getMatchingCount(), rank.getWinnings(), rank.getCount());
         }
-
-        System.out.printf(format, rank.getMatchingCount(), rank.getWinnings(), rank.getCount());
     }
 }
