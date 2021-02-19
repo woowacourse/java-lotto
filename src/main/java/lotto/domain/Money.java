@@ -36,7 +36,10 @@ public class Money {
     }
 
     public Money plus(Money money) {
-        return new Money(this.value + money.getValue());
+        if (money.value == 0) {
+            return this;
+        }
+        return new Money(money.value + this.value);
     }
 
     public Money multiple(int number) {
