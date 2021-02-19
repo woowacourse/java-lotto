@@ -56,7 +56,7 @@ public class RankTest {
     @ParameterizedTest
     @MethodSource("generateLottoStaticResult")
     @DisplayName("당첨 확인 테스트")
-    void match_1stLotto_1stRank(LottoStatisticResult result, Rank rank) {
+    void searchRankTest(LottoStatisticResult result, Rank rank) {
         
         // when
         Long count = result.get(rank);
