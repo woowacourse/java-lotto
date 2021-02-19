@@ -43,7 +43,6 @@ public class OutputView {
     public static void printResult() {
         System.out.println("당첨 통계");
         System.out.println(CONTOUR);
-
     }
 
     public static void printReword(int hitCount, long reword, long profit) {
