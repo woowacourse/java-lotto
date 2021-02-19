@@ -15,10 +15,6 @@ public class WinningTicketAndBonusNumber {
         this.bonusNumber = bonusNumber;
     }
 
-    public LottoNumber getBonusNumber() {
-        return bonusNumber;
-    }
-
     private void validateWinningTicketNotContainsBonusNumber(LottoTicket winningTicket, LottoNumber bonusNumber) {
         if (winningTicket.contains(bonusNumber)) {
             throw new IllegalArgumentException("보너스 번호는 당첨 번호에 포함되지 않아야 합니다.");
