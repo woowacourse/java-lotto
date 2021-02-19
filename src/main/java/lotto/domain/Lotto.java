@@ -3,10 +3,7 @@ package lotto.domain;
 import lotto.exception.DuplicateLottoNumberException;
 import lotto.exception.InvalidLottoNumberCountException;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -22,6 +19,7 @@ public class Lotto {
 
     private List<LottoNumber> numberToLottoNumbers(List<Integer> numbers) {
         return Collections.unmodifiableList(numbers.stream()
+                .sorted()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList()));
     }
