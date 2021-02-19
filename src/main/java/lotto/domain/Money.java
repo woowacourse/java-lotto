@@ -42,12 +42,12 @@ public class Money {
         return new Money(money.value + this.value);
     }
 
-    public Money multiple(int number) {
-        return new Money(this.value * number);
+    public Money multiple(int count) {
+        return new Money(this.value * count);
     }
 
-    public double getProfitRate(int ticketCount) {
-        return this.value / (LOTTO_PRICE * ticketCount);
+    public double getProfitRate(int count) {
+        return this.value / (LOTTO_PRICE * count);
     }
 
     public long getValue() {
