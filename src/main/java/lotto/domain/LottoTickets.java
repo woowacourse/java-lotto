@@ -9,7 +9,7 @@ public class LottoTickets {
 
     private static final String NULL_ERROR_MESSAGE = "null 값은 허용하지 않습니다.";
     private static final String EMPTY_ERROR_MESSAGE = "로또는 한장 이상 구매해야 합니다.";
-    private static final int INCREMENT_COUNT_ONE = 1;
+    private static final int INCREMENT_COUNT = 1;
 
     private final List<LottoTicket> lottoTickets;
 
@@ -20,11 +20,10 @@ public class LottoTickets {
     }
 
     public void putLottoResult(Map<LottoRank, Integer> lottoResult, LottoWinner lottoWinner) {
-        lottoTickets
-                .forEach(lottoTicket -> {
+        lottoTickets.forEach(lottoTicket -> {
                     LottoBoughtTicket lottoBoughtTicket = (LottoBoughtTicket) lottoTicket;
                     LottoRank rank = lottoBoughtTicket.getRank(lottoWinner);
-                    lottoResult.put(rank, lottoResult.get(rank) + INCREMENT_COUNT_ONE);
+                    lottoResult.put(rank, lottoResult.getOrDefault(rank, 0) + INCREMENT_COUNT);
                 });
     }
 
