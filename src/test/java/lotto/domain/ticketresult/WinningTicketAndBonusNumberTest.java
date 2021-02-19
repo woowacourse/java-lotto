@@ -6,20 +6,26 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import java.util.Arrays;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class WinningTicketAndBonusNumberTest {
-    private final LottoTicket lottoTicket = new LottoTicket(
-        Arrays.asList(
-            new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(4),
-            new LottoNumber(5),
-            new LottoNumber(6)
-        )
-    );
+    private LottoTicket lottoTicket;
+
+    @BeforeEach
+    void setUp() {
+        lottoTicket = new LottoTicket(
+            Arrays.asList(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6)
+            )
+        );
+    }
 
     @DisplayName("우승 로또 번호 정상 생성")
     @Test

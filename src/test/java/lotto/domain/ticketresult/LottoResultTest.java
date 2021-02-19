@@ -18,9 +18,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottoResultTest {
-    private WinningTicketAndBonusNumber winningLottoNumbers;
     private static final int PURCHASE_PRICE = 10000;
-    private final UserPurchase userPurchase = new UserPurchase(PURCHASE_PRICE);
+
+    private WinningTicketAndBonusNumber winningLottoNumbers;
+    private UserPurchase userPurchase;
 
     @BeforeEach
     void setWinningLottoNumbers() {
@@ -36,6 +37,7 @@ public class LottoResultTest {
         );
         LottoNumber bonusNumber = new LottoNumber(7, true);
         winningLottoNumbers = new WinningTicketAndBonusNumber(winnerTicket, bonusNumber);
+        userPurchase = new UserPurchase(PURCHASE_PRICE);
     }
 
     @DisplayName("1등 당첨 - 6개 일치")

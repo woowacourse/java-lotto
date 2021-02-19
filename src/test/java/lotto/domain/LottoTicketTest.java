@@ -9,19 +9,25 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottoTicketTest {
-    private final List<LottoNumber> lottoNumbers = new ArrayList<>(
-        Arrays.asList(
-            new LottoNumber(5),
-            new LottoNumber(4),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(6),
-            new LottoNumber(1)
-        ));
+    private List<LottoNumber> lottoNumbers;
+
+    @BeforeEach
+    void setUp() {
+        lottoNumbers = new ArrayList<>(
+            Arrays.asList(
+                new LottoNumber(5),
+                new LottoNumber(4),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(6),
+                new LottoNumber(1)
+            ));
+    }
 
     @DisplayName("로또 티켓 정상 생성 테스트")
     @Test

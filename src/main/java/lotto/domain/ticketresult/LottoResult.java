@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
-import lotto.domain.ticketpurchase.LottoTickets;
 import lotto.domain.ticketpurchase.UserPurchase;
 import lotto.type.LottoMatchType;
 

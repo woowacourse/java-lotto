@@ -14,7 +14,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottoMatchTypeTest {
-
     @DisplayName("일치하는 번호가 3개일 때 THREE_MATCH 반환")
     @Test
     void Should_Return_THREE_MATCH_When_ThreeNumbersMatched() {

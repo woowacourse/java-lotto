@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 
 
 public class UserPurchaseTest {
-
     @DisplayName("구입 금액이 1000원 단위일 시 정상")
     @Test
     void Should_Not_ThrowException_When_PurchasePriceExactlyDividedByThousand() {

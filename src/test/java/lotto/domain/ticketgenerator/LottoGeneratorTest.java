@@ -14,8 +14,7 @@ public class LottoGeneratorTest {
         UserPurchase userPurchase = new UserPurchase(10_000);
         LottoGenerator lottoGenerator = new LottoGenerator();
 
-        LottoTickets lottoTickets
-            = lottoGenerator.purchaseTickets(userPurchase);
+        LottoTickets lottoTickets = lottoGenerator.purchaseTickets(userPurchase);
 
         assertThat(lottoTickets.getTickets().size()).isEqualTo(10);
     }
