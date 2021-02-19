@@ -4,7 +4,6 @@ import com.google.common.primitives.Ints;
 
 import java.util.List;
 
-
 public class Lotto {
     private final List<Integer> lottoNumbers;
 

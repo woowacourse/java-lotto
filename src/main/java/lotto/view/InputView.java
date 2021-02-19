@@ -15,9 +15,8 @@ public class InputView {
 
     public static String inputMoney() {
         System.out.println("구입금액을 입력해 주세요.");
-        String money = scanner.nextLine();
 
-        return money;
+        return scanner.nextLine();
     }
 
     public static List<Integer> winningNumbers() {

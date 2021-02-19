@@ -12,6 +12,7 @@ public class LottoGenerator {
 
     private LottoGenerator() {
     }
+
     public static List<Integer> make() {
         List<Integer> numbers = Stream.iterate(1, n -> n + 1)
                 .limit(MAXIMUM_CANDIDATE_NUMBER)
