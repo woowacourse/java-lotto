@@ -39,8 +39,18 @@ public class WinningLottoTest {
     @DisplayName("당첨 등수 반환 테스트")
     @Test
     void match() {
-        Reword reword = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7)
-            .match(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)));
-        assertThat(reword).isEqualTo(Reword.SECOND);
+        Reword rewordThird = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7)
+            .match(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 8)));
+        Reword rewordSecond = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7)
+                .match(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)));
+        Reword rewordFirst = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7)
+                .match(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        Reword rewordNone = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7)
+                .match(new Lotto(Arrays.asList(11, 12, 31, 41, 5, 7)));
+
+        assertThat(rewordThird).isEqualTo(Reword.THIRD);
+        assertThat(rewordSecond).isEqualTo(Reword.SECOND);
+        assertThat(rewordFirst).isEqualTo(Reword.FIRST);
+        assertThat(rewordNone).isEqualTo(Reword.NONE);
     }
 }
