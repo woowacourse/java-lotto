@@ -34,16 +34,6 @@ public enum Prize {
         return matchCount == BONUS_CHECK_PIVOT;
     }
 
-    public static double calculatePrizeMoneySum(List<Prize> lottoResults) {
-        Money profit = Money.ZERO;
-        for (Prize prize : Prize.values()) {
-            Money perPrizeProfitSum = prize.prizeMoney
-                    .multiple(getCountByPrizeType(lottoResults, prize));
-            profit = profit.plus(perPrizeProfitSum);
-        }
-        return profit.getProfitRate(lottoResults.size());
-    }
-
     public static int getCountByPrizeType(List<Prize> lottoResults, Prize prize) {
         return (int) lottoResults.stream()
                 .filter(p -> p.equals(prize))

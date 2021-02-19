@@ -38,6 +38,8 @@ public class LottoController {
 
     private void showResult(LottoResult lottoResult) {
         OutputView.printResultStatistic(lottoResult);
-        OutputView.printProfitRate(lottoResult.calculateProfitRate());
+        Money totalProfit = lottoResult.getTotalProfit();
+        double profitRate = totalProfit.divide(lottoResult.lottoResult().size());
+        OutputView.printProfitRate(profitRate);
     }
 }

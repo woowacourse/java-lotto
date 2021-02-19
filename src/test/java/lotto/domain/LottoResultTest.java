@@ -26,8 +26,8 @@ class LottoResultTest {
     }
 
     @Test
-    @DisplayName("수익률 계산 확인")
+    @DisplayName("수익금 계산 확인")
     void calculateProfitRate() {
-        assertThat(lottoResult.calculateProfitRate()).isEqualTo(1000000.0);
+        assertThat(lottoResult.getTotalProfit().getValue()).isEqualTo(4000000000L);
     }
 }

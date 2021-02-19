@@ -1,14 +1,14 @@
 package lotto.domain;
 
+import lotto.exception.IllegalDivisorCountException;
 import lotto.exception.IllegalMoneyException;
 
 import java.util.regex.Pattern;
 
 public class Money {
-    public static final Pattern NUMBER_PATTERN = Pattern.compile("^[0-9]*$");
     public static final Money ZERO = new Money(0);
     public static final int LOTTO_PRICE = 1000;
-
+    private static final Pattern NUMBER_PATTERN = Pattern.compile("^[0-9]*$");
 
     private final long value;
 
@@ -46,7 +46,10 @@ public class Money {
         return new Money(this.value * count);
     }
 
-    public double getProfitRate(int count) {
+    public double divide(int count) {
+        if (count <= 0) {
+            throw new IllegalDivisorCountException();
+        }
         return this.value / (LOTTO_PRICE * count);
     }
 

@@ -15,11 +15,15 @@ public class LottoResult {
         return Collections.unmodifiableList(lottoResults);
     }
 
-    public double calculateProfitRate() {
-        return Prize.calculatePrizeMoneySum(lottoResults);
-    }
-
     public int getCountPerPrizeType(Prize prize) {
         return Prize.getCountByPrizeType(lottoResults, prize);
+    }
+
+    public Money getTotalProfit() {
+        Money totalProfit = Money.ZERO;
+        for (Prize prize : lottoResults) {
+            totalProfit = totalProfit.plus(prize.getPrizeMoney());
+        }
+        return totalProfit;
     }
 }
