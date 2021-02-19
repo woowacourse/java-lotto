@@ -13,12 +13,21 @@ import lotto.view.OutputView;
 public class LottoApplication {
 
     public static void main(String[] args) {
-        Money money = Money.valueOf(InputView.getMoneyInput());
+        Money money = getMoneyByInput();
         List<LottoTicket> lottoTickets = getLottoTicketsByMoney(money);
         OutputView.printTickets(lottoTickets);
 
         Result result = getMatchedLottoResult(money, lottoTickets);
         OutputView.printResult(result);
+    }
+
+    private static Money getMoneyByInput() {
+        try {
+            return Money.valueOf(InputView.getMoneyInput());
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+            return getMoneyByInput();
+        }
     }
 
     private static List<LottoTicket> getLottoTicketsByMoney(Money money) {
@@ -27,11 +36,14 @@ public class LottoApplication {
     }
 
     private static Result getMatchedLottoResult(Money money, List<LottoTicket> lottoTickets) {
-        LottoMatcher lottoMatcher = new LottoMatcher(
-                InputView.getWinningNumbersInput(),
-                InputView.getBonusBallInput(),
-                lottoTickets, money);
+        try {
+            LottoMatcher lottoMatcher = new LottoMatcher(InputView.getWinningNumbersInput(),
+                    InputView.getBonusBallInput(), lottoTickets, money);
 
-        return lottoMatcher.getResult();
+            return lottoMatcher.getResult();
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+            return getMatchedLottoResult(money, lottoTickets);
+        }
     }
 }

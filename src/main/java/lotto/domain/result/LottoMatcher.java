@@ -1,5 +1,6 @@
 package lotto.domain.result;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +20,7 @@ public class LottoMatcher {
             List<LottoTicket> lottoTickets, Money paymentAmount) {
         this.winningNumbers = new WinningNumbers(winningNumbersValue, bonusBallValue);
         this.bonusBallValue = bonusBallValue;
-        this.lottoTickets = lottoTickets;
+        this.lottoTickets = new ArrayList<>(lottoTickets);
         this.paymentAmount = paymentAmount;
     }
 
@@ -28,8 +29,7 @@ public class LottoMatcher {
     }
 
     private Map<Rank, Integer> getResultMap() {
-        Map<Rank, Integer> resultMap;
-        resultMap = new HashMap<>();
+        Map<Rank, Integer> resultMap = new HashMap<>();
 
         for (LottoTicket lottoTicket : lottoTickets) {
             Rank rank = winningNumbers.getRank(lottoTicket);
