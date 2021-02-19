@@ -32,11 +32,11 @@ public class LottoTickets {
                 .add(new Lotto(RandomUtils.generateRandomNumbers(values, LOTTO_SIZE)));
         }
 
-        return lottoTickets;
+        return Collections.unmodifiableList(lottoTickets);
     }
 
     public List<Lotto> getLottoTickets() {
-        return Collections.unmodifiableList(lottoTickets);
+        return lottoTickets;
     }
 
     public Rewords createRewords(final WinningLotto winningLotto) {

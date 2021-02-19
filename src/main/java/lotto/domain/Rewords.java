@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.EnumMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Rewords {
 
@@ -24,7 +21,7 @@ public class Rewords {
             rewordMap.put(reword, rewordMap.get(reword) + 1);
         }
 
-        return rewordMap;
+        return Collections.unmodifiableMap(rewordMap);
     }
 
     public int countOfReword(final Reword reword) {

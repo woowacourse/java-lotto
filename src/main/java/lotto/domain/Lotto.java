@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.exception.DuplicateLottoNumberException;
 import lotto.exception.InvalidLottoNumberCountException;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -20,9 +21,9 @@ public class Lotto {
     }
 
     private List<LottoNumber> numberToLottoNumbers(List<Integer> numbers) {
-        return numbers.stream()
+        return Collections.unmodifiableList(numbers.stream()
                 .map(LottoNumber::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
     private void validateDuplicatedNumber(final List<Integer> values) {
