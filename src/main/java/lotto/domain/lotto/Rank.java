@@ -26,11 +26,11 @@ public enum Rank {
         this.prize = prize;
     }
 
-    public static Rank getInstance(int val, boolean isBonus) {
+    public static Rank getInstance(int matchesCount, boolean isBonusBallMatches) {
         return Arrays.stream(Rank.values())
-                .filter(rank -> rank.biFunction.apply(val, isBonus))
+                .filter(rank -> rank.biFunction.apply(matchesCount, isBonusBallMatches))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("")); //todo 커스텀 예외
+                .orElseThrow(() -> new RuntimeException("당첨금을 계산할 수 없습니다."));
     }
 
     public BigInteger getPrize() {
