@@ -1,6 +1,7 @@
 package lotto.domain.lotto;
 
 import java.math.BigInteger;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class Money {
@@ -23,7 +24,24 @@ public class Money {
 
     public static void validateNumeric(String input) {
         if (!NUMERIC_PATTERN.matcher(input).matches()) {
-            throw new IllegalArgumentException();
+            throw new NumberFormatException("구입금액은 0 이상의 정수여야합니다.");
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Money money = (Money) o;
+        return Objects.equals(amount, money.amount);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(amount);
     }
 }
