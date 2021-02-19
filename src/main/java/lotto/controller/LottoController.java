@@ -6,7 +6,8 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
-import lotto.domain.WinningResult;
+import lotto.domain.WinningBoard;
+import lotto.domain.WinningLotto;
 import lotto.domain.ticketFactory.FixedNumbersGenerator;
 import lotto.domain.ticketFactory.TicketFactory;
 import lotto.exception.LottoCustomException;
@@ -30,10 +31,7 @@ public class LottoController {
         money = inputMoney();
         lottoTickets = buyTickets();
 
-        LottoTicket winningTicket = inputWinningNumbers();
-        LottoNumber bonusBall = inputBonus(winningTicket);
-
-        showResult(winningTicket, bonusBall);
+        showResult(new WinningLotto(inputWinningNumbers(),inputBonus()));
     }
 
     private Money inputMoney() {
@@ -65,21 +63,19 @@ public class LottoController {
         }
     }
 
-    private LottoNumber inputBonus(LottoTicket winningTicket) {
+    private LottoNumber inputBonus() {
         try {
             OutputView.printBonusNumber();
-            LottoNumber bonusBall = new LottoNumber(inputView.inputValue());
-            winningTicket.checkDuplicateNumber(bonusBall);
-            return bonusBall;
+            return new LottoNumber(inputView.inputValue());
         } catch (LottoCustomException exception) {
             OutputView.printErrorMessage(exception);
-            return inputBonus(winningTicket);
+            return inputBonus();
         }
     }
 
-    private void showResult(LottoTicket winningTicket, LottoNumber bonusBall) {
-        List<Integer> hitCounts = lottoTickets.checkHitCount(winningTicket, bonusBall);
-        int totalReward = WinningResult.calculateTotalReward(hitCounts);
+    private void showResult(WinningLotto winningLotto) {
+        List<Integer> hitCounts = lottoTickets.checkHitCount(winningLotto);
+        int totalReward = WinningBoard.calculateTotalReward(hitCounts);
 
         OutputView.printWinningResultTitle();
         OutputView.printProfit(money.calculateProfit(totalReward),hitCounts);

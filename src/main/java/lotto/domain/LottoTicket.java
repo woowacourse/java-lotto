@@ -3,11 +3,10 @@ package lotto.domain;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-import lotto.exception.LottoCustomException;
 
 public class LottoTicket {
 
-    public static final String DUPLICATE_NUMBERS_BY_BONUSBALL_ERROR_MESSAGE = "보너스 볼은 지난 주 당첨번호와 중복될 수 없습니다.";
+
     private static final int CHECK_HIT_COUNT_HAS_BONUS = 5;
     private static final int SECOND = 6;
     private static final int FIRST = 7;
@@ -18,29 +17,26 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public int compareNumbers(LottoTicket winningTicket, LottoNumber bonusBall) {
-        Set<LottoNumber> hitLottoNumbers = collectHits(winningTicket);
+    public int compareNumbers(WinningLotto winningLotto) {
+        int hits = countHits(winningLotto.getNumbers());
 
-        if (hitLottoNumbers.size() == CHECK_HIT_COUNT_HAS_BONUS && lottoNumbers
-            .contains(bonusBall)) {
+        if (hits == CHECK_HIT_COUNT_HAS_BONUS && winningLotto.hasBonus(this)) {
             return SECOND;
         }
-        if (hitLottoNumbers.size() == FIRST) {
+        if (hits == SECOND) {
             return FIRST;
         }
+        return hits;
+    }
+
+    private int countHits(LottoTicket winningTicket) {
+        Set<LottoNumber> hitLottoNumbers = new HashSet<>(lottoNumbers);
+        hitLottoNumbers.retainAll(winningTicket.lottoNumbers);
         return hitLottoNumbers.size();
     }
 
-    private Set<LottoNumber> collectHits(LottoTicket winningTicket) {
-        Set<LottoNumber> hitLottoNumbers = new HashSet<>(lottoNumbers);
-        hitLottoNumbers.retainAll(winningTicket.lottoNumbers);
-        return hitLottoNumbers;
-    }
-
-    public void checkDuplicateNumber(LottoNumber bonusBall) {
-        if (lottoNumbers.contains(bonusBall)) {
-            throw new LottoCustomException(DUPLICATE_NUMBERS_BY_BONUSBALL_ERROR_MESSAGE);
-        }
+    public boolean hasNumber(LottoNumber number) {
+        return lottoNumbers.contains(number);
     }
 
     public Set<Integer> getLottoNumbers() {

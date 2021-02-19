@@ -22,11 +22,11 @@ public class LottoTickets {
         lottoTickets.add(lottoTicket);
     }
 
-    public List<Integer> checkHitCount(LottoTicket winningTicket, LottoNumber bonusBall) {
+    public List<Integer> checkHitCount(WinningLotto winningLotto) {
         List<Integer> winningCount = new ArrayList<>(
             Collections.nCopies(NUMBER_OF_WINNING_TYPE, 0));
         for (LottoTicket lottoTicket : lottoTickets) {
-            int hitCount = lottoTicket.compareNumbers(winningTicket, bonusBall);
+            int hitCount = lottoTicket.compareNumbers(winningLotto);
             winningCount.set(hitCount, winningCount.get(hitCount) + 1);
         }
         return winningCount;

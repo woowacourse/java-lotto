@@ -3,7 +3,7 @@ package lotto.view;
 import java.util.List;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
-import lotto.domain.WinningResult;
+import lotto.domain.WinningBoard;
 
 public class OutputView {
 
@@ -54,7 +54,7 @@ public class OutputView {
 
     public static void printProfit(float profit, List<Integer> hitCounts) {
         System.out.printf(SHOW_TOTAL_YIELD_MESSAGE + System.lineSeparator(), profit);
-        System.out.println(WinningResult.toString(hitCounts));
+        System.out.println(WinningBoard.toString(hitCounts));
     }
 
 }
