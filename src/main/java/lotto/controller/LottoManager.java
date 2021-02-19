@@ -1,6 +1,7 @@
-package lotto.util;
+package lotto.controller;
 
 import lotto.domain.LottoGroup;
+import lotto.domain.LottoResult;
 import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;

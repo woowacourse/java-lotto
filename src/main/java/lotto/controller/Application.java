@@ -1,8 +1,7 @@
-package lotto;
+package lotto.controller;
 
 import lotto.domain.LottoGroup;
 import lotto.domain.WinningLotto;
-import lotto.util.LottoManager;
 
 public class Application {
 

@@ -2,12 +2,10 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 import lotto.exception.LottoNumberException;
 
 public class Lotto {
 
-  private static final String JOIN_DELIMITER = ", ";
   private static final int LOTTO_NUMBERS_SIZE = 6;
   private final List<LottoNumber> lottoNumbers;
 
@@ -45,10 +43,7 @@ public class Lotto {
         .count();
   }
 
-  @Override
-  public String toString() {
-    return lottoNumbers.stream()
-        .map(LottoNumber::toString)
-        .collect(Collectors.joining(JOIN_DELIMITER));
+  public List<LottoNumber> lottoNumbers() {
+    return Collections.unmodifiableList(lottoNumbers);
   }
 }

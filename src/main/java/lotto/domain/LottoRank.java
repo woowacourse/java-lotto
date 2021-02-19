@@ -12,7 +12,6 @@ public enum LottoRank {
   FIRST(6, 2_000_000_000);
 
   private static final int MIN_MATCH = 3;
-  private static final String MESSAGE_FORM = "%d개 일치%s(%d원) - %d개";
 
   private final int matchCount;
   private final int winningMoney;
@@ -41,11 +40,7 @@ public enum LottoRank {
     return winningMoney;
   }
 
-  public String message(int count) {
-    if (this == SECOND) {
-      return String.format(MESSAGE_FORM, matchCount, ", 보너스 볼 일치", winningMoney, count);
-    }
-    return String.format(MESSAGE_FORM, matchCount, "", winningMoney, count);
+  public int matchCount() {
+    return matchCount;
   }
-
 }
