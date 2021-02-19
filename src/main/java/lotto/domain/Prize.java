@@ -34,12 +34,6 @@ public enum Prize {
         return matchCount == BONUS_CHECK_PIVOT;
     }
 
-    public static int getCountByPrizeType(List<Prize> lottoResults, Prize prize) {
-        return (int) lottoResults.stream()
-                .filter(p -> p.equals(prize))
-                .count();
-    }
-
     public Money getPrizeMoney() {
         return prizeMoney;
     }

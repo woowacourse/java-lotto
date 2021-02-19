@@ -16,7 +16,9 @@ public class LottoResult {
     }
 
     public int getCountPerPrizeType(Prize prize) {
-        return Prize.getCountByPrizeType(lottoResults, prize);
+        return (int) lottoResults.stream()
+                .filter(it -> it == prize)
+                .count();
     }
 
     public Money getTotalProfit() {
