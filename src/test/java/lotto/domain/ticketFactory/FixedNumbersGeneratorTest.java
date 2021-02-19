@@ -16,7 +16,7 @@ public class FixedNumbersGeneratorTest {
     @DisplayName("로또 번호를 생성했을 때, 서로 다른 6개 번호로 구성된 티켓이 반환되어야한다.")
     @Test
     void makeTicket() {
-        List<Integer> lottoNumbers = new ArrayList<>(Arrays.asList(1,2,3,4,5,6));
+        List<Integer> lottoNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         FixedNumbersGenerator fixedNumbersGenerator = new FixedNumbersGenerator(lottoNumbers);
         LottoTicket lottoTicket = new LottoTicket(fixedNumbersGenerator.generateNumbers());
 

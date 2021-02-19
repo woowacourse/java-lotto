@@ -23,7 +23,7 @@ public class FixedNumbersGenerator implements NumbersGenerator {
             throw new LottoCustomException(NOT_DUPLICATE_NUMBERS_ERROR_MESSAGE);
         }
         Set<LottoNumber> lottoNumbers = new HashSet<>();
-        fixedLottoNumbers.forEach(number->lottoNumbers.add(new LottoNumber(number)));
+        fixedLottoNumbers.forEach(number -> lottoNumbers.add(new LottoNumber(number)));
         return lottoNumbers;
     }
 

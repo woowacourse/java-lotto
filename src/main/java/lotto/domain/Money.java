@@ -6,7 +6,8 @@ import lotto.exception.LottoCustomException;
 public class Money {
 
     public static final String MONEY_LESS_THAN_MIN_MONEY_ERROR_MESSAGE = "입력 금액은 1000원 이상이어야 합니다.";
-    private static final int MIN_MONEY_UNIT = 1000;
+    private static final int MIN_MONEY_UNIT = 1_000;
+
     private final int money;
 
     public Money(int money) {

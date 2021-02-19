@@ -30,8 +30,8 @@ public class LottoController {
     public void run() {
         money = inputMoney();
         lottoTickets = buyTickets();
-
-        showResult(new WinningLotto(inputWinningNumbers(),inputBonus()));
+        WinningLotto winningLotto = inputWinningLotto();
+        showResult(winningLotto);
     }
 
     private Money inputMoney() {
@@ -52,10 +52,17 @@ public class LottoController {
         return lottoTickets;
     }
 
+    private WinningLotto inputWinningLotto() {
+        LottoTicket lottoTicket = inputWinningNumbers();
+        LottoNumber bonus = inputBonus(lottoTicket);
+        return new WinningLotto(lottoTicket, bonus);
+    }
+
     private LottoTicket inputWinningNumbers() {
         try {
             OutputView.printWinningNumbers();
-            FixedNumbersGenerator fixedNumbersGenerator = new FixedNumbersGenerator(inputView.inputNumbers());
+            FixedNumbersGenerator fixedNumbersGenerator = new FixedNumbersGenerator(
+                inputView.inputNumbers());
             return ticketFactory.makeTicket(fixedNumbersGenerator.generateNumbers());
         } catch (LottoCustomException exception) {
             OutputView.printErrorMessage(exception);
@@ -63,20 +70,29 @@ public class LottoController {
         }
     }
 
-    private LottoNumber inputBonus() {
+    private LottoNumber inputBonus(LottoTicket lottoTicket) {
         try {
             OutputView.printBonusNumber();
-            return new LottoNumber(inputView.inputValue());
+            LottoNumber bonusNumber = new LottoNumber(inputView.inputValue());
+            validateDuplicate(lottoTicket, bonusNumber);
+            return bonusNumber;
         } catch (LottoCustomException exception) {
             OutputView.printErrorMessage(exception);
-            return inputBonus();
+            return inputBonus(lottoTicket);
+        }
+    }
+
+    private void validateDuplicate(LottoTicket lottoTicket, LottoNumber bonusNumber) {
+        if (lottoTicket.hasNumber(bonusNumber)) {
+            throw new LottoCustomException("보너스 볼은 지난 주 당첨번호와 중복될 수 없습니다.");
         }
     }
 
     private void showResult(WinningLotto winningLotto) {
-        lottoResult.checkWinnings(lottoTickets,winningLotto);
+        lottoResult.checkWinnings(lottoTickets, winningLotto);
 
         OutputView.printWinningResultTitle();
-        OutputView.printProfit(money.calculateProfit(lottoResult.calculateTotalReward()),lottoResult.getResults());
+        OutputView.printProfit(money.calculateProfit(lottoResult.calculateTotalReward()),
+            lottoResult.getResults());
     }
 }

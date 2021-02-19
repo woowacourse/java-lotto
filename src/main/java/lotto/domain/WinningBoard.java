@@ -21,18 +21,20 @@ public enum WinningBoard {
     }
 
     public static WinningBoard findWinnings(int hits, boolean hitBonus) {
-        if(hits==SECOND.hitCount && hitBonus) return SECOND;
+        if (hits == SECOND.hitCount && hitBonus) {
+            return SECOND;
+        }
         return Stream.of(values())
             .filter(value -> hits == value.hitCount)
             .findFirst()
             .orElse(ZERO);
     }
 
-    public int getReward(){
+    public int getReward() {
         return reward;
     }
 
-    public String getMessage(){
+    public String getMessage() {
         return message;
     }
 }

@@ -16,7 +16,7 @@ public class WinningLotto {
     }
 
     private void validateDuplicate(LottoNumber bonusBall) {
-        if(winningTicket.hasNumber(bonusBall)){
+        if (winningTicket.hasNumber(bonusBall)) {
             throw new LottoCustomException(DUPLICATE_NUMBERS_BY_BONUS_BALL_ERROR_MESSAGE);
         }
     }

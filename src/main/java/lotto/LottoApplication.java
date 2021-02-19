@@ -1,6 +1,5 @@
 package lotto;
 
-import java.util.Scanner;
 import lotto.controller.LottoController;
 
 public class LottoApplication {

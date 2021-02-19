@@ -15,6 +15,7 @@ public class OutputView {
     public static final String SHOW_REWARD_STATE_MESSAGE = "당첨 통계";
     public static final String SHOW_TOTAL_YIELD_MESSAGE = "총 수익률은 %.2f입니다.";
     public static final String SPLIT_LINE = "---------";
+    public static final String RESULT_FORMAT_MESSAGE = "%s (%d) - %d개";
 
     public static void printErrorMessage(Exception exception) {
         System.out.println(exception.getMessage());
@@ -53,20 +54,15 @@ public class OutputView {
         System.out.println(SPLIT_LINE);
     }
 
-    public static void printProfit(float profit, Map<WinningBoard,Integer> result) {
+    public static void printProfit(float profit, Map<WinningBoard, Integer> result) {
         System.out.printf(SHOW_TOTAL_YIELD_MESSAGE + System.lineSeparator(), profit);
         result.entrySet().forEach(OutputView::printLottoResult);
     }
 
     private static void printLottoResult(Entry<WinningBoard, Integer> result) {
-        if(!result.getKey().equals(WinningBoard.ZERO)) {
-            String resultMessage = result.getKey().getMessage()
-                + " ("
-                + result.getKey().getReward()
-                + ")원 - "
-                + result.getValue()
-                +"개";
-            System.out.println(resultMessage);
+        if (!result.getKey().equals(WinningBoard.ZERO)) {
+            System.out.printf(RESULT_FORMAT_MESSAGE + System.lineSeparator(),
+                result.getKey().getMessage(), result.getKey().getReward(), result.getValue());
         }
     }
 
