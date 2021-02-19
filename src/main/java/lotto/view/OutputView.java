@@ -51,18 +51,19 @@ public class OutputView {
         System.out.println(ASK_WINNER_BONUS_NUMBER);
     }
 
-    public static void printRewardResultBoard() {
-        System.out.print(NEW_LINE);
-        System.out.println(REWARD_RESULT_BOARD);
-        System.out.println(RESULT_LINE);
-    }
-
-    public static void printStatistics(LottoResultStatistics resultStatistics) {
+    public static void printRewardResultBoard(LottoResultStatistics resultStatistics) {
+        printRewardResultBoardTitle();
         Map<LottoRank, Integer> lottoResult = resultStatistics.getLottoResult();
         lottoResult.entrySet()
                 .stream()
                 .filter(entry -> !entry.getKey().equals(LottoRank.SIXTH_PLACE))
                 .forEach(OutputView::printEachStatistics);
+    }
+
+    private static void printRewardResultBoardTitle() {
+        System.out.print(NEW_LINE);
+        System.out.println(REWARD_RESULT_BOARD);
+        System.out.println(RESULT_LINE);
     }
 
     private static void printEachStatistics(Map.Entry<LottoRank, Integer> entry) {

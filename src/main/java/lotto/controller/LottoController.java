@@ -16,10 +16,9 @@ public class LottoController {
         LottoWinnerBonusNumber lottoWinnerBonusNumber = initLottoWinnerBonusNumber(lottoWinnerTicket);
         LottoWinner lottoWinner = new LottoWinner(lottoWinnerTicket, lottoWinnerBonusNumber);
 
-        OutputView.printRewardResultBoard();
         LottoResultStatistics lottoResultStatistics =
                 LottoResultStatistics.calculateResultStatistics(lottoTickets, lottoWinner);
-        OutputView.printStatistics(lottoResultStatistics);
+        OutputView.printRewardResultBoard(lottoResultStatistics);
         OutputView.printFinalResult(lottoResultStatistics, money);
     }
 
