@@ -40,14 +40,17 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printResultMessage(final Rewords rewords, final int money) {
+    public static void printResult() {
         System.out.println("당첨 통계");
         System.out.println(CONTOUR);
-        System.out.printf("3개 일치 (5000원)- %d%n", rewords.getFifth());
-        System.out.printf("4개 일치 (50000원)- %d%n", rewords.getFourth());
-        System.out.printf("5개 일치 (1500000원)- %d%n", rewords.getThird());
-        System.out.printf("5개 일치, 보너스 볼 일치 (30000000원)- %d%n", rewords.getSecond());
-        System.out.printf("6개 일치 (2000000000원)- %d%n", rewords.getFirst());
+
+    }
+
+    public static void printReword(int hitCount, long reword, long profit) {
+        System.out.printf("%d개 일치 (%d원)- %d%n", hitCount, reword, profit);
+    }
+
+    public static void printProfit(final Rewords rewords, final int money) {
         System.out.printf("총 수익률은 %.2f 입니다.%n", rewords.profit(money));
     }
 }

@@ -2,10 +2,7 @@ package lotto.domain;
 
 import lotto.utils.RandomUtils;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -42,7 +39,7 @@ public class LottoTickets {
         return Collections.unmodifiableList(lottoTickets);
     }
 
-    public Rewords getResult(final WinningLotto winningLotto) {
+    public Rewords createRewords(final WinningLotto winningLotto) {
         List<Reword> rewords = new ArrayList<>();
 
         for (Lotto lotto : lottoTickets) {

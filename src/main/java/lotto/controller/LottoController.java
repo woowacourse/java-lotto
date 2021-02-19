@@ -1,9 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoTickets;
-import lotto.domain.Payment;
-import lotto.domain.WinningLotto;
+import lotto.domain.*;
 import lotto.exception.IllegalTypeException;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -22,8 +19,9 @@ public class LottoController {
             Payment payment = new Payment(Integer.parseInt(InputView.inputMoney()));
             LottoTickets lottoTickets = new LottoTickets(payment.count());
             showLottoTickets(payment, lottoTickets);
+
             WinningLotto winningLotto = createWinningLotto();
-            OutputView.printResultMessage(lottoTickets.getResult(winningLotto), payment.getPayment());
+            showResult(lottoTickets, winningLotto, payment);
         }
         catch (NumberFormatException e) {
             throw new IllegalTypeException();
@@ -49,5 +47,15 @@ public class LottoController {
         }
 
         OutputView.printNewLineMessage();
+    }
+
+    private void showResult(final LottoTickets lottoTickets, final WinningLotto winningLotto, final Payment payment) {
+        Rewords rewords = lottoTickets.createRewords(winningLotto);
+
+        OutputView.printResult();
+        for (Reword reword : Reword.values()) {
+            OutputView.printReword(reword.getHitCount(), reword.getWinningMoney(), rewords.countOfReword(reword));
+        }
+        OutputView.printProfit(rewords, payment.getPayment());
     }
 }
