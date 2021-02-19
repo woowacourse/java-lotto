@@ -15,7 +15,7 @@ public class LottoControllerMain {
 
         OutputView.showBuyLotto(lottos.getLottos());
 
-        List<Result> results = lottos.getResults(
+        List<Result> results = lottos.checkLottoResults(
                 new WinningNumber(InputView.winningNumbers()),
                 new BonusNumber(InputView.bonusNumber())
         );

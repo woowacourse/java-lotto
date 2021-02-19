@@ -23,15 +23,7 @@ public enum Result {
         this.prize = prize;
     }
 
-    public int getCount() {
-        return count;
-    }
-
-    public int getPrize() {
-        return prize;
-    }
-
-    public static Result getResult(int matchCount, boolean bonusMatch) {
+    public static Result decisionLottoRank(int matchCount, boolean bonusMatch) {
         return Arrays.stream(values())
                 .filter(result -> result.count == matchCount)
                 .filter(result -> !SECOND.equals(result) || bonusMatch)
@@ -42,7 +34,7 @@ public enum Result {
     public static List<Integer> getStatistics(List<Result> results) {
         Map<Result, Integer> statistics = new LinkedHashMap<>();
         initStatistics(statistics);
-        checkResult(results,statistics);
+        checkResult(results, statistics);
 
         List<Integer> firstToFifth = new ArrayList(statistics.values()).subList(FIRST_INDEX, FIFTH_INDEX);
         Collections.reverse(firstToFifth);
@@ -65,5 +57,13 @@ public enum Result {
         return (float) results.stream()
                 .map(Result::getPrize)
                 .reduce(0, (a, b) -> a + b);
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public int getPrize() {
+        return prize;
     }
 }

@@ -8,14 +8,14 @@ import java.util.List;
 public class Money {
     private static final int LOTTO_PRICE = 1000;
 
-    private int money;
+    private final int money;
 
     public Money(String money) {
         validateNumber(money);
         this.money = Integer.parseInt(money);
     }
 
-    public List<Lotto> buyLotto(){
+    public List<Lotto> buyLotto() {
         int count = countBuyLotto();
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {

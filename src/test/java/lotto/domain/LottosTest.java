@@ -22,7 +22,7 @@ public class LottosTest {
     @DisplayName("로또 당첨결과 확인")
     @Test
     void testEntireLottoMatching() {
-        List<Result> results = lottos.getResults(
+        List<Result> results = lottos.checkLottoResults(
                 new WinningNumber("1, 2, 3, 4, 5, 6"),
                 new BonusNumber("20")
         );

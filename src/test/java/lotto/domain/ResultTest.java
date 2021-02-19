@@ -16,18 +16,14 @@ public class ResultTest {
         int matchCount = 0;
         boolean bonusMatch = true;
 
-        assertThat(Result.getResult(matchCount, bonusMatch)).isEqualTo(Result.NONE);
+        assertThat(Result.decisionLottoRank(matchCount, bonusMatch)).isEqualTo(Result.NONE);
     }
 
     @DisplayName("결과 값을 통계 리스트로 반환")
     @Test
     void resultStatistics() {
-        Lotto lotto1 = new Lotto(Arrays.asList(1, 2, 3, 20, 21, 40)); // FIFTH
-        Lotto lotto2 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 20)); // SECOND
-        Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2));
+        List<Integer> stats = Result.getStatistics(Arrays.asList(Result.SECOND, Result.FIFTH));
 
-        List<Result> results = lottos.getResults(new WinningNumber("1, 2, 3, 4, 5, 6"), new BonusNumber("20"));
-        List<Integer> stats = Result.getStatistics(results);
         assertThat(stats).isEqualTo(Arrays.asList(1, 0, 0, 1, 0));
     }
 
@@ -39,7 +35,7 @@ public class ResultTest {
         Lotto lotto3 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 20)); // SECOND
         Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3));
 
-        List<Result> results = lottos.getResults(new WinningNumber("1, 2, 3, 4, 5, 6"), new BonusNumber("20"));
+        List<Result> results = lottos.checkLottoResults(new WinningNumber("1, 2, 3, 4, 5, 6"), new BonusNumber("20"));
 
         float profit = Result.calculateProfit(results);
         assertThat(profit).isEqualTo(60_005_000);
