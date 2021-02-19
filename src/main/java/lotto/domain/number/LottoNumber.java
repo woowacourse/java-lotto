@@ -23,13 +23,13 @@ public class LottoNumber {
     }
 
     private void validateRange(Number number) {
-        if (number.toInt() < NUMBER_MINIMUM || number.toInt() > NUMBER_MAXIMUM) {
+        if (number.getValueAsInt() < NUMBER_MINIMUM || number.getValueAsInt() > NUMBER_MAXIMUM) {
             throw new IllegalArgumentException("범위 밖의 로또 번호 입니다.");
         }
     }
 
-    public int toInt() {
-        return number.toInt();
+    public int getValueAsInt() {
+        return number.getValueAsInt();
     }
 
     @Override
@@ -51,6 +51,6 @@ public class LottoNumber {
 
     @Override
     public String toString() {
-        return String.valueOf(number.toInt());
+        return String.valueOf(number.getValueAsInt());
     }
 }

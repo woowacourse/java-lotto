@@ -6,7 +6,7 @@ public class PayOut {
     private final Number payOut;
 
     public PayOut(Number number) {
-        validateNegative(number.toInt());
+        validateNegative(number.getValueAsInt());
         this.payOut = number;
     }
 
@@ -25,10 +25,10 @@ public class PayOut {
     }
 
     public int getGameCount() {
-        return payOut.toInt() / GAME_PRICE;
+        return payOut.getValueAsInt() / GAME_PRICE;
     }
 
-    public int toInt() {
-        return payOut.toInt();
+    public int getValueAsInt() {
+        return payOut.getValueAsInt();
     }
 }

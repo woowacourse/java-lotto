@@ -14,10 +14,10 @@ public class PayOutTest {
     @DisplayName("숫자를 입력 받는다.")
     void inputPayOutNumber() {
         PayOut payOut = new PayOut(10000);
-        assertThat(payOut.toInt()).isEqualTo(10000);
+        assertThat(payOut.getValueAsInt()).isEqualTo(10000);
 
         payOut = new PayOut("10000");
-        assertThat(payOut.toInt()).isEqualTo(10000);
+        assertThat(payOut.getValueAsInt()).isEqualTo(10000);
     }
 
     @Test

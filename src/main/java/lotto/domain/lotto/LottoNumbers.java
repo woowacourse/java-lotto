@@ -36,7 +36,7 @@ public class LottoNumbers {
     }
 
     public List<Integer> toIntegerList() {
-        return lottoNumbers.stream().map(LottoNumber::toInt).collect(toList());
+        return lottoNumbers.stream().map(LottoNumber::getValueAsInt).collect(toList());
     }
 
     public boolean contains(LottoNumber lottoNumber) {
