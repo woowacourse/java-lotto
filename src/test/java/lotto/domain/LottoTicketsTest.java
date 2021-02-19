@@ -24,12 +24,12 @@ public class LottoTicketsTest {
     @DisplayName("같은 번호가 생성되었는지 테스트")
     @Test
     void numberSort() {
-        Lotto lotto = new Lotto(Arrays.asList(2, 4, 6, 5, 3, 1));
+        Lotto lotto = new Lotto(Arrays.asList(2, 45, 6, 5, 3, 1));
         List<Lotto> manualLotto = Collections.singletonList(lotto);
         LottoTickets lottoTickets = new LottoTickets(0, manualLotto);
         List<Lotto> expectedLottoTickets = new ArrayList<>();
 
-        expectedLottoTickets.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        expectedLottoTickets.add(new Lotto(Arrays.asList(1, 2, 3, 45, 5, 6)));
         assertThat(lottoTickets.getLottoTickets()).isEqualTo(expectedLottoTickets);
     }
 }

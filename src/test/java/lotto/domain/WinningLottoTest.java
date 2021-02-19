@@ -19,9 +19,9 @@ public class WinningLottoTest {
     @Test
     void create() {
         WinningLotto winningLotto
-            = new WinningLotto(Arrays.asList(1, 3, 5, 7, 9, 11), 45);
+            = new WinningLotto(Arrays.asList(1, 3, 5, 7, 9, 45), 44);
         assertThat(winningLotto)
-            .isEqualTo(new WinningLotto(Arrays.asList(1, 3, 5, 7, 9, 11), 45));
+            .isEqualTo(new WinningLotto(Arrays.asList(1, 3, 5, 7, 9, 45), 44));
     }
 
     @DisplayName("보너스 번호 에러테스트")
@@ -36,7 +36,7 @@ public class WinningLottoTest {
     @Test
     void duplicateException() {
         assertThatThrownBy(() -> {
-            new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 1);
+            new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 45), 1);
         }).isInstanceOf(DuplicateLottoNumberException.class);
     }
 
