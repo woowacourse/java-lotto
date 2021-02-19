@@ -1,6 +1,6 @@
 package lotto.domain;
 
-public class PayAmount {
+public class PaymentAmount {
 
     private static final int LOTTO_PAY = 1000;
     private static final int MIN_PAY_AMOUNT = 0;
@@ -8,11 +8,11 @@ public class PayAmount {
 
     private final int payAmount;
 
-    private PayAmount(int payAmount) {
+    private PaymentAmount(int payAmount) {
         this.payAmount = payAmount;
     }
 
-    public static PayAmount from(String payAmount) {
+    public static PaymentAmount from(String payAmount) {
         if (!isInteger(payAmount)) {
             throw new IllegalArgumentException();
         }
@@ -22,7 +22,7 @@ public class PayAmount {
             throw new IllegalArgumentException();
         }
 
-        return new PayAmount(pay);
+        return new PaymentAmount(pay);
     }
 
     private static boolean isInteger(String input) {

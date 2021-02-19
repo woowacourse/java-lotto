@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import lotto.domain.LottoNumber;
-import lotto.domain.PayAmount;
+import lotto.domain.PaymentAmount;
 
 public class InputView {
 
@@ -20,9 +20,9 @@ public class InputView {
         scanner = new Scanner(System.in);
     }
 
-    public PayAmount readPayAmount() {
+    public PaymentAmount readPaymentAmount() {
         String input = read(PAY_AMOUNT_QUESTION);
-        return PayAmount.from(input);
+        return PaymentAmount.from(input);
     }
 
     public List<Integer> readWinningLotto() {
