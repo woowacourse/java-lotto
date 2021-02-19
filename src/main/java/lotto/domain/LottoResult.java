@@ -2,7 +2,7 @@ package lotto.domain;
 
 import lotto.domain.machine.AutoLottoMachine;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -10,7 +10,7 @@ public class LottoResult {
     private final Map<Prize, Long> lottoResult;
 
     public LottoResult(Map<Prize, Long> lottoResult) {
-        this.lottoResult = new HashMap<>(lottoResult);
+        this.lottoResult = new EnumMap<>(lottoResult);
     }
 
     public long calculatePrizeMoney() {
