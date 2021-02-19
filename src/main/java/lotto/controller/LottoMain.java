@@ -12,8 +12,7 @@ public class LottoMain {
     public static void main(String[] args) {
         LottoMachine lottoMachine = new LottoMachine();
         UserPurchase userPurchase = getUserPurchaseInput();
-        PurchasedLottoTickets purchasedLottoTickets
-            = purchaseLottoTickets(lottoMachine, userPurchase);
+        PurchasedLottoTickets purchasedLottoTickets = purchaseLottoTickets(lottoMachine, userPurchase);
         WinningLottoNumbers winningLottoNumbers = getWinningLottoNumbersInput();
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers, userPurchase);
         OutputView.printResult(lottoComparator.getLottoResult(purchasedLottoTickets));
