@@ -33,25 +33,25 @@ public enum Rank {
     private static Rank searchRank(long matchCount, boolean hasBonusNumber) {
         return Arrays.stream(Rank.values())
                      .filter(rank -> hasSameMatchCount(rank, matchCount))
-                     .map(rank -> mapIfMatchCountIsFirstRank(rank, hasBonusNumber))
+                     .map(rank -> mapIfMatchCountIsFive(rank, hasBonusNumber))
                      .findFirst()
                      .orElse(Rank.NOTHING);
     }
     
-    private static Rank mapIfMatchCountIsFirstRank(Rank rank, boolean hasBonusNumber) {
+    private static boolean hasSameMatchCount(Rank rank, long matchCount) {
+        return rank.matchCount == matchCount;
+    }
+    
+    private static Rank mapIfMatchCountIsFive(Rank rank, boolean hasBonusNumber) {
         if (hasSameMatchCount(Rank.FIRST, rank.matchCount) && hasBonusNumber) {
             return SECOND;
         }
-    
+        
         if (hasSameMatchCount(Rank.SECOND, rank.matchCount)) {
             return THIRD;
         }
         
         return rank;
-    }
-    
-    private static boolean hasSameMatchCount(Rank rank, long matchCount) {
-        return rank.matchCount == matchCount;
     }
     
     public static int compareMatchCount(Rank preRank, Rank postRank) {

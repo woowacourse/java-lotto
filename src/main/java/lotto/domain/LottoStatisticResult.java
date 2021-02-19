@@ -19,16 +19,20 @@ public class LottoStatisticResult {
     }
     
     public double calculateIncomeRate() {
-        long rewardSum = rankCount.keySet()
-                                  .stream()
-                                  .mapToLong(rank -> rankCount.get(rank) * rank.getReward())
-                                  .sum();
-        
-        long payCount = rankCount.values()
-                                 .stream()
-                                 .mapToLong(t -> t)
-                                 .sum();
-        
-        return (double) rewardSum / (payCount * LOTTO_PAY);
+        return (double) calculateTotalReward() / (calculatePurchaseCount() * LOTTO_PAY);
+    }
+    
+    private long calculatePurchaseCount() {
+        return rankCount.values()
+                        .stream()
+                        .mapToLong(t -> t)
+                        .sum();
+    }
+    
+    private long calculateTotalReward() {
+        return rankCount.keySet()
+                        .stream()
+                        .mapToLong(rank -> rankCount.get(rank) * rank.getReward())
+                        .sum();
     }
 }
