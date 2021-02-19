@@ -1,7 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.ticketgenerator.LottoGenerator;
-import lotto.domain.ticketpurchase.PurchasedLottoTickets;
+import lotto.domain.ticketpurchase.LottoTickets;
 import lotto.domain.ticketpurchase.UserPurchase;
 import lotto.domain.ticketresult.LottoComparator;
 import lotto.domain.ticketresult.WinningLottoNumbers;
@@ -12,7 +12,7 @@ public class LottoMain {
     public static void main(String[] args) {
         UserPurchase userPurchase = getUserPurchaseInput();
         LottoGenerator lottoGenerator = new LottoGenerator();
-        PurchasedLottoTickets purchasedLottoTickets = lottoGenerator.generatePurchasedTickets(userPurchase);
+        LottoTickets purchasedLottoTickets = lottoGenerator.generatePurchasedTickets(userPurchase);
         OutputView.printPurchasedLottoTickets(purchasedLottoTickets);
         WinningLottoNumbers winningLottoNumbers = getWinningLottoNumbersInput();
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers, userPurchase);

@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
-import lotto.domain.ticketpurchase.PurchasedLottoTickets;
+import lotto.domain.ticketpurchase.LottoTickets;
 import lotto.domain.ticketpurchase.UserPurchase;
 
 public class LottoGenerator {
@@ -20,8 +20,8 @@ public class LottoGenerator {
         }
     }
 
-    public PurchasedLottoTickets generatePurchasedTickets(UserPurchase userPurchase) {
-        PurchasedLottoTickets purchasedLottoTickets = new PurchasedLottoTickets();
+    public LottoTickets generatePurchasedTickets(UserPurchase userPurchase) {
+        LottoTickets purchasedLottoTickets = new LottoTickets();
         for (int i = 0; i < userPurchase.getNumberOfTickets(); i++) {
             Collections.shuffle(allNumbers);
             LottoTicket newLottoTicket

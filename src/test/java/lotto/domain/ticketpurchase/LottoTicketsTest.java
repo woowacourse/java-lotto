@@ -10,7 +10,7 @@ import lotto.domain.LottoTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class PurchasedLottoTicketsTest {
+public class LottoTicketsTest {
     @DisplayName("로또 티켓 추가 및 꺼내기 테스트")
     @Test
     void Should_ReturnLottoTickets_When_AddedLottoTickets() {
@@ -25,7 +25,7 @@ public class PurchasedLottoTicketsTest {
         LottoTicket lottoTicket1 = new LottoTicket(lottoNumbers);
         LottoTicket lottoTicket2 = new LottoTicket(lottoNumbers);
 
-        PurchasedLottoTickets purchasedLottoTickets = new PurchasedLottoTickets();
+        LottoTickets purchasedLottoTickets = new LottoTickets();
         purchasedLottoTickets.add(lottoTicket1);
         purchasedLottoTickets.add(lottoTicket2);
 

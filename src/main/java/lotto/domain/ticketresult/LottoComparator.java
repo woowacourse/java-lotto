@@ -1,7 +1,7 @@
 package lotto.domain.ticketresult;
 
 import lotto.domain.LottoTicket;
-import lotto.domain.ticketpurchase.PurchasedLottoTickets;
+import lotto.domain.ticketpurchase.LottoTickets;
 import lotto.domain.ticketpurchase.UserPurchase;
 
 public class LottoComparator {
@@ -12,7 +12,7 @@ public class LottoComparator {
     }
 
     public LottoResult getLottoResult(
-        PurchasedLottoTickets purchasedLottoTickets) {
+        LottoTickets purchasedLottoTickets) {
         for (LottoTicket purchasedOneLottoTicket : purchasedLottoTickets.getTickets()) {
             lottoResult.applyOneTicketResult(purchasedOneLottoTicket);
         }

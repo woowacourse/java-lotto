@@ -2,7 +2,7 @@ package lotto.domain.ticketgenerator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import lotto.domain.ticketpurchase.PurchasedLottoTickets;
+import lotto.domain.ticketpurchase.LottoTickets;
 import lotto.domain.ticketpurchase.UserPurchase;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,7 +14,7 @@ public class LottoGeneratorTest {
         UserPurchase userPurchase = new UserPurchase(10_000);
         LottoGenerator lottoGenerator = new LottoGenerator();
 
-        PurchasedLottoTickets purchasedLottoTickets
+        LottoTickets purchasedLottoTickets
             = lottoGenerator.generatePurchasedTickets(userPurchase);
 
         assertThat(purchasedLottoTickets.getTickets().size()).isEqualTo(10);

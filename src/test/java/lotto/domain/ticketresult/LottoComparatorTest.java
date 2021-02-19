@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.Arrays;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
-import lotto.domain.ticketpurchase.PurchasedLottoTickets;
+import lotto.domain.ticketpurchase.LottoTickets;
 import lotto.domain.ticketpurchase.UserPurchase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -49,7 +49,7 @@ public class LottoComparatorTest {
             new LottoNumber(5),
             new LottoNumber(6)
         ));
-        PurchasedLottoTickets purchasedLottoTickets = new PurchasedLottoTickets();
+        LottoTickets purchasedLottoTickets = new LottoTickets();
         purchasedLottoTickets.add(purchasedLottoTicket);
 
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers, userPurchase);
@@ -82,7 +82,7 @@ public class LottoComparatorTest {
             new LottoNumber(5),
             new LottoNumber(7)
         ));
-        PurchasedLottoTickets purchasedLottoTickets = new PurchasedLottoTickets();
+        LottoTickets purchasedLottoTickets = new LottoTickets();
         purchasedLottoTickets.add(purchasedLottoTicket);
 
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers, userPurchase);
@@ -115,7 +115,7 @@ public class LottoComparatorTest {
             new LottoNumber(5),
             new LottoNumber(10)
         ));
-        PurchasedLottoTickets purchasedLottoTickets = new PurchasedLottoTickets();
+        LottoTickets purchasedLottoTickets = new LottoTickets();
         purchasedLottoTickets.add(purchasedLottoTicket);
 
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers, userPurchase);
@@ -148,7 +148,7 @@ public class LottoComparatorTest {
             new LottoNumber(9),
             new LottoNumber(10)
         ));
-        PurchasedLottoTickets purchasedLottoTickets = new PurchasedLottoTickets();
+        LottoTickets purchasedLottoTickets = new LottoTickets();
         purchasedLottoTickets.add(purchasedLottoTicket);
 
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers, userPurchase);
@@ -181,7 +181,7 @@ public class LottoComparatorTest {
             new LottoNumber(9),
             new LottoNumber(10)
         ));
-        PurchasedLottoTickets purchasedLottoTickets = new PurchasedLottoTickets();
+        LottoTickets purchasedLottoTickets = new LottoTickets();
         purchasedLottoTickets.add(purchasedLottoTicket);
 
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers, userPurchase);
@@ -221,7 +221,7 @@ public class LottoComparatorTest {
             new LottoNumber(9),
             new LottoNumber(10)
         ));
-        PurchasedLottoTickets purchasedLottoTickets = new PurchasedLottoTickets();
+        LottoTickets purchasedLottoTickets = new LottoTickets();
         purchasedLottoTickets.add(secondPrizeWinningTicket);
         purchasedLottoTickets.add(fourthPrizeWinningTicket);
 
