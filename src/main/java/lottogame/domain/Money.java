@@ -15,6 +15,10 @@ public class Money {
         }
     }
 
+    public boolean isCanBuyAmount(final int amount) {
+        return this.value >= amount;
+    }
+
     public void spent(final int value) {
         this.value -= value;
     }
