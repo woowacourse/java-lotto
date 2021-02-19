@@ -1,12 +1,13 @@
 package lotto.domain;
 
+import lotto.utils.RandomUtils;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import lotto.utils.RandomUtils;
 
 public class LottoTickets {
 

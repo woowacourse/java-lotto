@@ -1,7 +1,8 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import lotto.exception.InvalidLottoHitCountException;
+
+import java.util.Arrays;
 
 public enum Reword {
 

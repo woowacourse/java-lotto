@@ -1,11 +1,11 @@
 package lotto.domain;
 
-import java.util.ArrayList;
+import lotto.exception.DuplicateLottoNumberException;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import lotto.exception.DuplicateLottoNumberException;
 
 public class Lotto {
 

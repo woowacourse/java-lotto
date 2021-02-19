@@ -1,8 +1,9 @@
 package lotto.domain;
 
+import lotto.exception.DuplicateLottoNumberException;
+
 import java.util.List;
 import java.util.Objects;
-import lotto.exception.DuplicateLottoNumberException;
 
 public class WinningLotto extends Lotto {
 
