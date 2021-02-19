@@ -1,8 +1,8 @@
 package lotto.service;
 
-import lotto.domain.lottoticket.LottoBoughtTicket;
-import lotto.domain.number.LottoNumber;
-import lotto.domain.winnerlotto.LottoWinnerTicket;
+import lotto.domain.lottos.LottoBoughtTicket;
+import lotto.domain.lottos.LottoNumber;
+import lotto.domain.lottos.winnerlotto.LottoWinnerTicket;
 
 import java.util.Arrays;
 import java.util.Collections;
