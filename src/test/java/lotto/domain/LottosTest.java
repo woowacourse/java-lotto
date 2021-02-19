@@ -22,9 +22,10 @@ public class LottosTest {
     @DisplayName("로또 당첨결과 확인")
     @Test
     void testEntireLottoMatching() {
-        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        int bonusNumber = 20;
-        List<Result> results = lottos.getResults(winningNumbers, bonusNumber);
+        List<Result> results = lottos.getResults(
+                new WinningNumber("1, 2, 3, 4, 5, 6"),
+                new BonusNumber("20")
+        );
 
         List<Result> expectedResults = Arrays.asList(Result.FIFTH, Result.NONE);
 

@@ -22,7 +22,8 @@ public class Lotto {
         }
     }
 
-    public int matchingCount(List<Integer> numbers) {
+    public int matchingCount(WinningNumber winningNumber) {
+        List<Integer> numbers = winningNumber.getWinningNumber();
         return (int) numbers.stream()
                 .filter(lottoNumbers::contains)
                 .count();

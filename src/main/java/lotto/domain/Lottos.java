@@ -14,10 +14,10 @@ public class Lottos {
         return lottos;
     }
 
-    public List<Result> getResults(List<Integer> winningNumbers, BonusNumber bonusNumber) {
+    public List<Result> getResults(WinningNumber winningNumber, BonusNumber bonusNumber) {
         List<Result> results = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            results.add(Result.getResult(lotto.matchingCount(winningNumbers),
+            results.add(Result.getResult(lotto.matchingCount(winningNumber),
                     lotto.isBonusMatch(bonusNumber.getBonus())));
         }
         return results;
