@@ -14,11 +14,11 @@ public class LottoController {
     }
 
     public void run() {
-        Money money = new Money(InputView.inputMoney());
-        LottoTickets lottoTickets = lottoTicketFactory.buyLottoTickets(money);
+        Money purchaseMoney = new Money(InputView.inputMoney());
+        LottoTickets lottoTickets = lottoTicketFactory.buyLottoTickets(purchaseMoney);
         LottoTicket winningTicket = getWinningTicket(lottoTickets);
         LottoResult lottoResult = getLottoResult(lottoTickets, winningTicket);
-        showResult(lottoResult, money);
+        showResult(lottoResult, purchaseMoney);
     }
 
     private LottoTicket getWinningTicket(LottoTickets lottoTickets) {
