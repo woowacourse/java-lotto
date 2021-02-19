@@ -1,12 +1,7 @@
 package lotto.domain.lotto;
 
-import java.util.Map;
 import java.util.Objects;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 import lotto.domain.number.LottoNumber;
-import lotto.domain.number.PayOut;
-import lotto.domain.rank.Rank;
 
 public class WinningNumbers {
 
@@ -33,32 +28,16 @@ public class WinningNumbers {
         }
     }
 
+    public int getMatchCount(LottoNumbers lottoNumbers) {
+        return this.lottoNumbers.getMatchCount(lottoNumbers);
+    }
+
+    public boolean hasBonusNumber(LottoNumbers lottoNumbers) {
+        return lottoNumbers.contains(bonusNumber);
+    }
+
     public LottoNumbers getLottoNumbers() {
         return lottoNumbers;
-    }
-
-    public WinningStatistics getResult(LottoTicket lottoTicket, PayOut payOut) {
-        Map<Rank, Long> statistics = lottoTicket.toLottoNumbersList().stream()
-            .map(this::getRank)
-            .filter(rank -> Rank.FAIL != rank)
-            .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-
-        return new WinningStatistics(fillUnrankedCount(statistics), payOut);
-    }
-
-    private Rank getRank(LottoNumbers lottoNumbers) {
-        return Rank.getRank(
-            this.lottoNumbers.getMatchCount(lottoNumbers),
-            lottoNumbers.contains(bonusNumber)
-        );
-    }
-
-    private Map<Rank, Long> fillUnrankedCount(Map<Rank, Long> statistics) {
-        Rank.getAllPossibleRanks().stream()
-            .filter(rank -> !statistics.containsKey(rank))
-            .forEach(rank -> statistics.put(rank, 0L));
-
-        return statistics;
     }
 
     @Override

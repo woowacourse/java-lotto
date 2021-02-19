@@ -13,7 +13,7 @@ public class Ranks {
 
     public Long getWinningPrice() {
         return Rank.getAllPossibleRanks().stream()
-            .mapToLong(rank -> rank.getWinnings() * ranks.get(rank))
+            .mapToLong(rank -> rank.getWinnings() * ranks.getOrDefault(rank, 0L))
             .sum();
     }
 

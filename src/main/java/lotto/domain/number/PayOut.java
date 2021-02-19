@@ -22,6 +22,10 @@ public class PayOut {
         }
     }
 
+    public static int getGamePrice() {
+        return GAME_PRICE;
+    }
+
     public int getGameCount() {
         return number.unbox() / GAME_PRICE;
     }

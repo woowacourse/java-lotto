@@ -7,7 +7,6 @@ import static org.assertj.core.api.Assertions.withPrecision;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import lotto.domain.number.PayOut;
 import lotto.domain.rank.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -57,7 +56,7 @@ public class WinningNumbersTest {
             LottoNumbers.valueOf("1,2,3,4,5,34"),
             LottoNumbers.valueOf("1,2,3,4,5,7")
         ));
-        WinningStatistics result = winningNumbers.getResult(lottoTicket, PayOut.valueOf("3000"));
+        WinningStatistics result = new WinningStatistics(lottoTicket, winningNumbers);
 
         Map<Rank, Long> actual = result.unbox();
 

@@ -3,6 +3,7 @@ package lotto.controller;
 import lotto.domain.lotto.LottoGenerator;
 import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.WinningNumbers;
+import lotto.domain.lotto.WinningStatistics;
 import lotto.domain.number.PayOut;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -17,7 +18,7 @@ public class LottoController {
         WinningNumbers winningNumbers =
             WinningNumbers.valueOf(inputLastWeekLottoNumber(), inputBonusNumber());
 
-        calculateStatistics(winningNumbers, lottoTicket, payOut);
+        calculateStatistics(winningNumbers, lottoTicket);
     }
 
     private static PayOut payOut() {
@@ -49,8 +50,7 @@ public class LottoController {
         return InputView.getStringInputFromUser();
     }
 
-    private static void calculateStatistics(WinningNumbers winningNumbers, LottoTicket lottoTicket,
-        PayOut payOut) {
-        OutputView.statistics(winningNumbers.getResult(lottoTicket, payOut));
+    private static void calculateStatistics(WinningNumbers winningNumbers, LottoTicket lottoTicket) {
+        OutputView.statistics(new WinningStatistics(lottoTicket, winningNumbers));
     }
 }

@@ -1,6 +1,8 @@
 package lotto.domain.lotto;
 
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import lotto.domain.number.PayOut;
 import lotto.domain.rank.Rank;
 import lotto.domain.rank.Ranks;
@@ -10,9 +12,28 @@ public class WinningStatistics {
     private final Ranks ranks;
     private final double yield;
 
-    public WinningStatistics(Map<Rank, Long> gameResult, PayOut payOut) {
-        this.ranks = new Ranks(gameResult);
-        this.yield = ranks.getWinningPrice() / payOut.unbox();
+    public WinningStatistics(LottoTicket lottoTicket, WinningNumbers winningNumbers) {
+        this.ranks = new Ranks(lottoTicket.toLottoNumbersList().stream()
+            .map(lottoNumbers -> getRank(winningNumbers, lottoNumbers))
+            .collect(Collectors.collectingAndThen(
+                Collectors.groupingBy(Function.identity(), Collectors.counting()), this::fillUnrankedCount)));
+
+        this.yield = ranks.getWinningPrice() / lottoTicket.getCount() / PayOut.getGamePrice();
+    }
+
+    private Rank getRank(WinningNumbers winningNumbers, LottoNumbers lottoNumbers) {
+        return Rank.getRank(
+            winningNumbers.getMatchCount(lottoNumbers),
+            winningNumbers.hasBonusNumber(lottoNumbers)
+        );
+    }
+
+    private Map<Rank, Long> fillUnrankedCount(Map<Rank, Long> statistics) {
+        Rank.getAllPossibleRanks().stream()
+            .filter(rank -> !statistics.containsKey(rank))
+            .forEach(rank -> statistics.put(rank, 0L));
+
+        return statistics;
     }
 
     public Map<Rank, Long> unbox() {
