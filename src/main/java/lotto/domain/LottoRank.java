@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.Comparator;
 
 public enum LottoRank {
     FIRST_PLACE(6, 2_000_000_000),
@@ -20,24 +19,19 @@ public enum LottoRank {
     }
 
     public static LottoRank matchLottoRank(final int matchCount, final boolean matchBonusNumber) {
-        if (matchCount != 5) {
-            return Arrays.stream(LottoRank.values())
-                    .filter(value -> value.matches == matchCount)
-                    .findFirst()
-                    .orElse(SIXTH_PLACE);
-        }
-
-        if (matchBonusNumber) {
-            return SECOND_PLACE;
-        }
-        return THIRD_PLACE;
+        return Arrays.stream(LottoRank.values())
+                .filter(rank -> isMatchRank(rank, matchCount, matchBonusNumber))
+                .findFirst()
+                .orElse(SIXTH_PLACE);
     }
 
-    public static Comparator<LottoRank> matchCountComparator = new Comparator<LottoRank>() {
-        public int compare(LottoRank rank1, LottoRank rank2) {
-            return rank1.getReward() - rank2.getReward();
+    private static boolean isMatchRank(LottoRank rank, int matchCount, boolean matchBonusNumber) {
+        if (matchCount == 5 && SECOND_PLACE.equals(rank)) {
+            return matchBonusNumber;
         }
-    };
+
+        return matchCount == rank.matches;
+    }
 
     public int getMatches() {
         return matches;
