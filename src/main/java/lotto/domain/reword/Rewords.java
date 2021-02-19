@@ -1,9 +1,6 @@
 package lotto.domain.reword;
 
-import java.util.Collections;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Rewords {
 
@@ -28,11 +25,11 @@ public class Rewords {
     }
 
     public int countOfReword(final Reword reword) {
-        if (rewords.get(reword) != null) {
-            return rewords.get(reword);
+        if (Objects.isNull(rewords.get(reword))) {
+            return EMPTY_REWORD;
         }
 
-        return EMPTY_REWORD;
+        return rewords.get(reword);
     }
 
     public double profit(final int money) {
