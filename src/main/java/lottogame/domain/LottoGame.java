@@ -22,6 +22,9 @@ public class LottoGame {
     private LottoNumber drawnBonusNumber;
     private LottoWinningMachine lottoWinningMachine;
 
+    public LottoGame() {
+    }
+
     public void buyTickets(final Money money) {
         this.initMoney = new Money(Integer.toString(money.getValue()));
         this.lottoTickets = new LottoTicketMachine().buyTickets(money);
@@ -33,7 +36,7 @@ public class LottoGame {
         this.drawnBonusNumber = lottoWinningDrawingMachine.bonusDrawing(bonusNumber);
     }
 
-    public LottoTickets getBroughtTickets() {
+    public LottoTickets getBoughtTickets() {
         return lottoTickets;
     }
 

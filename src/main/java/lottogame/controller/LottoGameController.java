@@ -23,7 +23,7 @@ public class LottoGameController {
     }
 
     public void printLottoTickets() {
-        OutputView.printLottoTickets(lottoGame.getBroughtTickets());
+        OutputView.printLottoTickets(lottoGame.getBoughtTickets());
     }
 
     public void printLottoGameResult() {

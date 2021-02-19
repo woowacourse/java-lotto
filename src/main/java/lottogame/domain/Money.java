@@ -6,20 +6,20 @@ public class Money {
 
     public Money(final String money) {
         this.value = Integer.parseInt(money);
-        isPositive(this.value);
+        validateNegative(this.value);
     }
 
-    public void use(final int price) {
-        this.value -= price;
+    private void validateNegative(final int value) {
+        if (value < 0) {
+            throw new IllegalArgumentException("돈 입력은 양수이여야 합니다.");
+        }
+    }
+
+    public void spent(final int value) {
+        this.value -= value;
     }
 
     public int getValue() {
         return this.value;
-    }
-
-    private void isPositive(final int value) {
-        if (value < 0) {
-            throw new IllegalArgumentException("돈 입력은 양수이여야 합니다.");
-        }
     }
 }

@@ -10,10 +10,9 @@ public class LottoTicketMachine {
 
     public LottoTickets buyTickets(final Money money) {
         LottoTickets lottoTickets = new LottoTickets();
-
         while (isCanBuyTicket(money)) {
             lottoTickets.add(new LottoTicket());
-            money.use(TICKET_PRICE);
+            money.spent(TICKET_PRICE);
         }
         return lottoTickets;
     }
