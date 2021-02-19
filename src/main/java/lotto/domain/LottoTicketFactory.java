@@ -10,7 +10,7 @@ import static lotto.domain.LottoTicket.LOTTO_TICKET_SIZE;
 import static lotto.domain.Money.LOTTO_PRICE;
 
 public class LottoTicketFactory {
-    public static final int START_INDEX = 0;
+    private static final int START_INDEX = 0;
 
     private final List<LottoNumber> lottoNumberRange;
 
