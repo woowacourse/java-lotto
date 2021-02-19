@@ -20,7 +20,7 @@ public class PaymentAmount {
         }
         
         int payment = Integer.parseInt(paymentAmount);
-        if (!isZeroOrPositive(payment) || !isMultipleOfLottoPay(payment)) {
+        if (!isZeroOrPositive(payment) || !isMultipleOfLottoPayment(payment)) {
             throw new IllegalArgumentException();
         }
         
@@ -41,7 +41,7 @@ public class PaymentAmount {
         return value >= MIN_PAYMENT_AMOUNT;
     }
     
-    private static boolean isMultipleOfLottoPay(int value) {
+    private static boolean isMultipleOfLottoPayment(int value) {
         return value % LOTTO_PAYMENT == ZERO_REMAINDER;
     }
     
