@@ -42,6 +42,10 @@ public class Rewords {
             profit += (long) key.getWinningMoney() * rewords.get(key);
         }
 
-        return LottoCalculator.divide(money, profit);
+        return divide(money, profit);
+    }
+
+    private double divide(final long money, final long winningMoney) {
+        return (double) winningMoney / (double) money;
     }
 }
