@@ -29,9 +29,9 @@ public enum RankFactory {
         return this.rank == rank;
     }
 
-    public static Rank createRanking(RankFactory rank, Long count) {
+    public static Rank createRanking(RankFactory expectedRank, Long count) {
         return stream(RankFactory.values())
-                .filter(r -> r.equals(rank))
+                .filter(rank -> rank.equals(expectedRank))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("매칭되는 등수가 없습니다."))
                 .ranking.apply(count);
