@@ -19,22 +19,29 @@ public class RankTest {
     private static final List<Lotto> LOTTO_GROUP = new ArrayList<>();
     
     private static Stream<Arguments> generateLottoStaticResult() {
-        LottoStatisticResult firstRankResult = generateLottoStatisticResult(Lotto.fromNumbers(Arrays.asList(1, 2, 3,
-                4, 5, 6)));
-        LottoStatisticResult secondRankResult = generateLottoStatisticResult(Lotto.fromNumbers(Arrays.asList(1, 2, 3,
-                4, 5, 7)));
-        LottoStatisticResult thirdRankResult = generateLottoStatisticResult(Lotto.fromNumbers(Arrays.asList(1, 2, 3,
-                4, 5, 45)));
-        LottoStatisticResult fourthRankResult = generateLottoStatisticResult(Lotto.fromNumbers(Arrays.asList(1, 2, 3,
-                4, 44, 45)));
-        LottoStatisticResult fifthRankResult = generateLottoStatisticResult(Lotto.fromNumbers(Arrays.asList(1, 2, 3,
-                43, 44, 45)));
-        LottoStatisticResult nothingRankResult = generateLottoStatisticResult(Lotto.fromNumbers(Arrays.asList(1, 2,
-                42, 43, 44, 45)));
+        LottoStatisticResult firstRankResult =
+                generateLottoStatisticResult(Lotto.fromNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
         
-        return Stream.of(Arguments.of(firstRankResult, Rank.FIRST), Arguments.of(secondRankResult, Rank.SECOND),
+        LottoStatisticResult secondRankResult
+                = generateLottoStatisticResult(Lotto.fromNumbers(Arrays.asList(1, 2, 3, 4, 5, 7)));
+        
+        LottoStatisticResult thirdRankResult
+                = generateLottoStatisticResult(Lotto.fromNumbers(Arrays.asList(1, 2, 3, 4, 5, 45)));
+        
+        LottoStatisticResult fourthRankResult
+                = generateLottoStatisticResult(Lotto.fromNumbers(Arrays.asList(1, 2, 3, 4, 44, 45)));
+        
+        LottoStatisticResult fifthRankResult
+                = generateLottoStatisticResult(Lotto.fromNumbers(Arrays.asList(1, 2, 3, 43, 44, 45)));
+        LottoStatisticResult nothingRankResult
+                
+                = generateLottoStatisticResult(Lotto.fromNumbers(Arrays.asList(1, 2, 42, 43, 44, 45)));
+        
+        return Stream.of(
+                Arguments.of(firstRankResult, Rank.FIRST), Arguments.of(secondRankResult, Rank.SECOND),
                 Arguments.of(thirdRankResult, Rank.THIRD), Arguments.of(fourthRankResult, Rank.FOURTH),
-                Arguments.of(fifthRankResult, Rank.FIFTH), Arguments.of(nothingRankResult, Rank.NOTHING));
+                Arguments.of(fifthRankResult, Rank.FIFTH), Arguments.of(nothingRankResult, Rank.NOTHING)
+        );
     }
     
     private static LottoStatisticResult generateLottoStatisticResult(Lotto lotto) {
@@ -53,7 +60,7 @@ public class RankTest {
         
         // when
         Long count = result.get(rank);
-        
+    
         // then
         assertThat(count).isEqualTo(1L);
     }

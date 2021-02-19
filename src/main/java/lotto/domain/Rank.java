@@ -42,9 +42,9 @@ public enum Rank {
         if (hasSameMatchCount(Rank.FIRST, rank.matchCount) && hasBonusNumber) {
             return SECOND;
         }
-        
-        if (hasSameMatchCount(Rank.FIRST, rank.matchCount)) {
-            return FIRST;
+    
+        if (hasSameMatchCount(Rank.SECOND, rank.matchCount)) {
+            return THIRD;
         }
         
         return rank;
