@@ -10,7 +10,14 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 class RankTest {
 
-    static Stream<Arguments> ranks() {
+    @ParameterizedTest
+    @DisplayName("Rank 테스트")
+    @MethodSource("getInstance_testcase")
+    void getInstance(int numberMatchCount, boolean isBonusBallMatches, Rank expectedRank) {
+        assertThat(Rank.getInstance(numberMatchCount, isBonusBallMatches)).isEqualTo(expectedRank);
+    }
+
+    static Stream<Arguments> getInstance_testcase() {
         return Stream.of(
                 Arguments.of(6, false, Rank.FIRST_PLACE),
                 Arguments.of(6, true, Rank.FIRST_PLACE),
@@ -23,12 +30,5 @@ class RankTest {
                 Arguments.of(2, false, Rank.UNRANKED),
                 Arguments.of(0, false, Rank.UNRANKED)
         );
-    }
-
-    @ParameterizedTest
-    @DisplayName("Rank 테스트")
-    @MethodSource("ranks")
-    void getInstance(int val, boolean isBonus, Rank expectedRank) {
-        assertThat(Rank.getInstance(val, isBonus)).isEqualTo(expectedRank);
     }
 }
