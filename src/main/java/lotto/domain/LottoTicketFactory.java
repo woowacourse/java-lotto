@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 
 public class LottoTicketFactory {
     public static final int MIN_LOTTO_NUMBER = 1;
-    public static final int MAX_LOTTO_NUMBER = 49;
+    public static final int MAX_LOTTO_NUMBER = 45;
     public static final int LOTTO_PRICE = 1000;
     public static final int START_INDEX = 0;
     public static final int LOTTO_TICKET_SIZE = 6;
