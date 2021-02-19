@@ -18,28 +18,28 @@ public class InputView {
     private InputView() {
     }
 
-    public static UserPurchase getUserPurchase() throws IllegalArgumentException {
+    public static UserPurchase getUserPurchase() {
         InputPrinter.printPurchasePriceInputGuideMessage();
         String purchasePriceInput = scanner.nextLine();
         int purchasePrice = validateNaturalNumber(purchasePriceInput);
         return new UserPurchase(purchasePrice);
     }
 
-    private static int validateNaturalNumber(String purchasePriceInput) throws IllegalArgumentException {
+    private static int validateNaturalNumber(String purchasePriceInput) {
         if (!purchasePriceInput.matches(NUMERIC_REGULAR_EXPRESSION)) {
             throw new IllegalArgumentException("자연수를 입력해주세요.");
         }
         return Integer.parseInt(purchasePriceInput);
     }
 
-    public static WinningTicketAndBonusNumber getWinningLottoNumbers() throws IllegalArgumentException {
+    public static WinningTicketAndBonusNumber getWinningLottoNumbers() {
         List<LottoNumber> lottoNumbers = getWinningLottoNumbersInput();
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
         LottoNumber bonusNumber = getBonusNumberInput();
         return new WinningTicketAndBonusNumber(lottoTicket, bonusNumber);
     }
 
-    private static List<LottoNumber> getWinningLottoNumbersInput() throws IllegalArgumentException {
+    private static List<LottoNumber> getWinningLottoNumbersInput() {
         InputPrinter.printWinnerLottoNumbersInputGuideMessage();
         String winningNumbersInput = scanner.nextLine();
         validateAllNaturalNumbers(winningNumbersInput);
@@ -48,14 +48,14 @@ public class InputView {
             .collect(Collectors.toList());
     }
 
-    private static void validateAllNaturalNumbers(String winningNumbersInput) throws IllegalArgumentException {
+    private static void validateAllNaturalNumbers(String winningNumbersInput) {
         if (!Arrays.stream(winningNumbersInput.split(LOTTO_NUMBER_DELIMITER))
             .allMatch(name -> name.matches(NUMERIC_REGULAR_EXPRESSION))) {
             throw new IllegalArgumentException("올바르지 않은 입력입니다.");
         }
     }
 
-    private static LottoNumber getBonusNumberInput() throws IllegalArgumentException {
+    private static LottoNumber getBonusNumberInput() {
         InputPrinter.printBonusNumberInputGuideMessage();
         String bonusNumberInput = scanner.nextLine();
         int bonusNumber = validateNaturalNumber(bonusNumberInput);

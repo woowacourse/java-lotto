@@ -9,17 +9,17 @@ public class LottoNumber {
     private final int number;
     private final boolean isBonusNumber;
 
-    public LottoNumber(int number) throws IllegalArgumentException {
+    public LottoNumber(int number) {
         this(number, false);
     }
 
-    public LottoNumber(int number, boolean isBonusNumber) throws IllegalArgumentException {
+    public LottoNumber(int number, boolean isBonusNumber) {
         this.number = number;
         this.isBonusNumber = isBonusNumber;
         validateRange(number);
     }
 
-    private void validateRange(int number) throws IllegalArgumentException {
+    private void validateRange(int number) {
         if (number < MINIMUM || MAXIMUM < number) {
             throw new IllegalArgumentException("로또 번호는 1이상, 45이하여야 합니다.");
         }
