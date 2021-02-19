@@ -46,7 +46,7 @@ class LottoTicketsTest {
                 new LottoNumber("7"));
 
         bonusBall = new LottoNumber("8");
-        result = lottoTickets.checkWinningTickets(new WinningLotto(new LottoTicket(winningNumbers), bonusBall));
+        result = lottoTickets.checkPrizesByWinningTickets(new WinningLotto(new LottoTicket(winningNumbers), bonusBall));
     }
 
     @Test

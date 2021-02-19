@@ -15,7 +15,7 @@ public class LottoTickets {
         return Collections.unmodifiableList(lottoTickets);
     }
 
-    public List<Prize> checkWinningTickets(WinningLotto winningLotto) {
+    public List<Prize> checkPrizesByWinningTickets(WinningLotto winningLotto) {
         List<Prize> winningTickets = new ArrayList<>();
         for (LottoTicket lottoTicket : this.lottoTickets) {
             winningTickets.add(Prize.getPrizeType(lottoTicket.getMatchingCount(winningLotto.getWinningTicket().lottoTicket()),

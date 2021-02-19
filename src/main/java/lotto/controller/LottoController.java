@@ -33,7 +33,7 @@ public class LottoController {
     private LottoResult getLottoResult(LottoTickets lottoTickets, LottoTicket winningTicket) {
         LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());
         WinningLotto winningLotto = new WinningLotto(winningTicket, bonusNumber);
-        return new LottoResult(lottoTickets.checkWinningTickets(winningLotto));
+        return new LottoResult(lottoTickets.checkPrizesByWinningTickets(winningLotto));
     }
 
     private void showResult(LottoResult lottoResult, Money money) {
