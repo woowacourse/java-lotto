@@ -60,7 +60,7 @@ public class LottoTest {
         // given
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         Lotto lotto = Lotto.fromGenerator(new FixedNumberGenerator(numbers));
-    
+        
         List<Integer> numberGroup = Arrays.asList(1, 2, 3, 4, 5, 7);
         Lotto lottoGroup = Lotto.fromGenerator(new FixedNumberGenerator(numberGroup));
         

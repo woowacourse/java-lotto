@@ -32,7 +32,7 @@ public class InputView {
     
     public List<Integer> readWinningLotto() {
         String input = read(WINNING_LOTTO_NUMBER_QUESTION);
-    
+        
         return Arrays.stream(input.split(DELIMITER))
                      .map(number -> LottoNumber.fromStringLottoNumber(number)
                                                .getLottoNum())

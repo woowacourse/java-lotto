@@ -17,7 +17,8 @@ class PaymentAmountTest {
         String paymentAmount = "14000";
         
         // when
-        int payment = PaymentAmount.from(paymentAmount).getPurchaseCount();
+        int payment = PaymentAmount.from(paymentAmount)
+                                   .getPurchaseCount();
         
         // then
         assertThat(payment).isEqualTo(14);

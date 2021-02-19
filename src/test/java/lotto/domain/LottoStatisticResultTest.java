@@ -19,21 +19,9 @@ public class LottoStatisticResultTest {
     
     private static final List<Lotto> LOTTO_GROUP = new ArrayList<>();
     
-    @ParameterizedTest
-    @MethodSource("generateLottoStaticResult")
-    @DisplayName("당첨 확인 테스트")
-    void searchRankTest(LottoStatisticResult result, Rank rank) {
-        
-        // when
-        Long count = result.get(rank);
-        
-        // then
-        assertThat(count).isEqualTo(1L);
-    }
-    
     private static Stream<Arguments> generateLottoStaticResult() {
-        LottoStatisticResult firstRankResult =
-                generateLottoStatisticResult(Lotto.fromNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        LottoStatisticResult firstRankResult
+                = generateLottoStatisticResult(Lotto.fromNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
         
         LottoStatisticResult secondRankResult
                 = generateLottoStatisticResult(Lotto.fromNumbers(Arrays.asList(1, 2, 3, 4, 5, 7)));
@@ -46,8 +34,8 @@ public class LottoStatisticResultTest {
         
         LottoStatisticResult fifthRankResult
                 = generateLottoStatisticResult(Lotto.fromNumbers(Arrays.asList(1, 2, 3, 43, 44, 45)));
+        
         LottoStatisticResult nothingRankResult
-                
                 = generateLottoStatisticResult(Lotto.fromNumbers(Arrays.asList(1, 2, 42, 43, 44, 45)));
         
         return Stream.of(
@@ -64,6 +52,18 @@ public class LottoStatisticResultTest {
         Lottos lottos = new Lottos(LOTTO_GROUP);
         
         return lottos.retrieveResults(WINNING_LOTTO);
+    }
+    
+    @ParameterizedTest
+    @MethodSource("generateLottoStaticResult")
+    @DisplayName("당첨 확인 테스트")
+    void searchRankTest(LottoStatisticResult result, Rank rank) {
+        
+        // when
+        Long count = result.get(rank);
+        
+        // then
+        assertThat(count).isEqualTo(1L);
     }
     
     @Test
