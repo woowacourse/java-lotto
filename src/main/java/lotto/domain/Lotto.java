@@ -31,7 +31,6 @@ public class Lotto {
         return lottoNumbers.contains(bonusNumber);
     }
 
-
     public List<Integer> getLottoNumbers() {
         return lottoNumbers;
     }

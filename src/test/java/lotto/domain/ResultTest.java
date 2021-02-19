@@ -19,14 +19,6 @@ public class ResultTest {
         assertThat(Result.decisionLottoRank(matchCount, bonusMatch)).isEqualTo(Result.NONE);
     }
 
-    @DisplayName("결과 값을 통계 리스트로 반환")
-    @Test
-    void resultStatistics() {
-        List<Integer> stats = Result.getStatistics(Arrays.asList(Result.SECOND, Result.FIFTH));
-
-        assertThat(stats).isEqualTo(Arrays.asList(1, 0, 0, 1, 0));
-    }
-
     @DisplayName("총 수익을 계산")
     @Test
     void calculateTotalProfit() {

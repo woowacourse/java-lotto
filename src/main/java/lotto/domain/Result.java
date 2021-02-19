@@ -35,22 +35,6 @@ public enum Result {
                 .orElse(NONE);
     }
 
-    public static List<Integer> getStatistics(List<Result> results) {
-        Map<Result,Integer> statistics = Arrays.stream(Result.values())
-                .collect(Collectors.toMap(Function.identity(), value -> 0,(key1,key2) -> key1,LinkedHashMap::new));
-        checkResult(results, statistics);
-
-        List<Integer> firstToFifth = new ArrayList(statistics.values()).subList(FIRST_INDEX, FIFTH_INDEX);
-        Collections.reverse(firstToFifth);
-        return firstToFifth;
-    }
-
-    private static void checkResult(List<Result> results, Map<Result, Integer> statistics) {
-        for (Result result : results) {
-            statistics.put(result, statistics.get(result) + 1);
-        }
-    }
-
     public static float calculateProfit(List<Result> results) {
         return (float) results.stream()
                 .map(Result::getPrize)
@@ -58,8 +42,7 @@ public enum Result {
     }
 
     public static List<Result> getResultValues() {
-        List<Result> values = Arrays.asList(Result.values());
-        Collections.reverse(values);
+        List<Result> values = Arrays.asList(Result.FIFTH, Result.FOURTH, Result.THIRD, Result.SECOND,Result.FIRST);
         return values;
     }
 

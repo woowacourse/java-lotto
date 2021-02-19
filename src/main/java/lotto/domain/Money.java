@@ -1,10 +1,5 @@
 package lotto.domain;
 
-import lotto.util.LottoGenerator;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class Money {
     private static final int LOTTO_PRICE = 1000;
 
@@ -13,15 +8,6 @@ public class Money {
     public Money(String money) {
         validateNumber(money);
         this.money = Integer.parseInt(money);
-    }
-
-    public List<Lotto> buyLotto() {
-        int count = countBuyLotto();
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            lottos.add(new Lotto(LottoGenerator.make()));
-        }
-        return lottos;
     }
 
     public int countBuyLotto() {
