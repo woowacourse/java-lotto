@@ -1,8 +1,8 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class LottoResultStatistics {
     private static final int EARNING_RATE = 100;
@@ -22,10 +22,9 @@ public class LottoResultStatistics {
     }
 
     private static Map<LottoRank, Integer> setLottoResult() {
-        Map<LottoRank, Integer> lottoResult = new TreeMap<>(LottoRank.matchCountComparator);
+        Map<LottoRank, Integer> lottoResult = new EnumMap<>(LottoRank.class);
         Arrays.stream(LottoRank.values())
                 .forEach(value -> lottoResult.put(value, DEFAULT_COUNT));
-
         return lottoResult;
     }
 
@@ -40,6 +39,6 @@ public class LottoResultStatistics {
     }
 
     public Map<LottoRank, Integer> getLottoResult() {
-        return lottoResult;
+        return this.lottoResult;
     }
 }
