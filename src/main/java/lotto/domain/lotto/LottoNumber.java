@@ -13,7 +13,7 @@ public class LottoNumber {
 
     public LottoNumber(int number) {
         if (number < MINIMUM_VALUE || MAXIMUM_VALUE < number) {
-            throw new RuntimeException();
+            throw new IllegalArgumentException("로또의 번호는 1이상 45이하의 정수여야 합니다.");
         }
         this.number = number;
     }
@@ -30,7 +30,7 @@ public class LottoNumber {
 
     private static void validateNumeric(String input) {
         if (!NUMERIC_PATTERN.matcher(input).matches()) {
-            throw new IllegalArgumentException();
+            throw new NumberFormatException("로또의 번호는 1이상 45이하의 정수여야 합니다.");
         }
     }
 
