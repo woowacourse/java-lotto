@@ -6,23 +6,25 @@ import java.util.stream.Collectors;
 
 public enum Result {
 
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 30_000_000),
-    THIRD(5, 1_500_000),
-    FOURTH(4, 50_000),
-    FIFTH(3, 5_000),
-    NONE(0, 0);
+    FIRST(6, 2_000_000_000, " "),
+    SECOND(5, 30_000_000, ", 보너스 볼 일치"),
+    THIRD(5, 1_500_000, " "),
+    FOURTH(4, 50_000," "),
+    FIFTH(3, 5_000, " "),
+    NONE(0, 0, " ");
 
     private static final int FIRST_INDEX = 0;
     private static final int FIFTH_INDEX = 5;
 
     private final int count;
     private final int prize;
+    private final String bonus;
 
 
-    Result(int count, int prize) {
+    Result(int count, int prize, String bonus) {
         this.count = count;
         this.prize = prize;
+        this.bonus = bonus;
     }
 
     public static Result decisionLottoRank(int matchCount, boolean bonusMatch) {
@@ -55,11 +57,22 @@ public enum Result {
                 .reduce(0, (a, b) -> a + b);
     }
 
+    public static List<Result> getResultValues() {
+        List<Result> values = Arrays.asList(Result.values());
+        Collections.reverse(values);
+        return values;
+    }
+
+
     public int getCount() {
         return count;
     }
 
     public int getPrize() {
         return prize;
+    }
+
+    public String getBonus() {
+        return bonus;
     }
 }

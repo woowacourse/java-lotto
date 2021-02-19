@@ -19,7 +19,10 @@ public class LottoControllerMain {
                 new WinningNumber(InputView.winningNumbers()),
                 new BonusNumber(InputView.bonusNumber())
         );
-        OutputView.result(results, money.calculateProfitRate(Result.calculateProfit(results)));
+
+        OutputView.resultMessage();
+        OutputView.result(Result.getResultValues(), new Statistics(results));
+        OutputView.showTotalProfit(money.calculateProfitRate(Result.calculateProfit(results)));
     }
 
     public static List<Lotto> buyLotto(int count){
