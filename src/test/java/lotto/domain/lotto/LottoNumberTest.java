@@ -11,9 +11,7 @@ class LottoNumberTest {
 
     @Test
     void generate_valid() {
-        assertThatCode(() -> {
-            LottoNumber lottoNumber = new LottoNumber(1);
-        }).doesNotThrowAnyException();
+        assertThatCode(() -> new LottoNumber(1)).doesNotThrowAnyException();
     }
 
     @Test
@@ -30,40 +28,40 @@ class LottoNumberTest {
 
     @Test
     void generate_valid_number() {
-        assertThatCode(() -> new LottoNumber("1"))
+        assertThatCode(() -> LottoNumber.valueOf("1"))
                 .doesNotThrowAnyException();
     }
 
     @Test
     @DisplayName("앞에 공백 있는 숫자")
     void generate_valid_number2() {
-        assertThatCode(() -> new LottoNumber(" 1"))
+        assertThatCode(() -> LottoNumber.valueOf(" 1"))
                 .doesNotThrowAnyException();
     }
 
     @Test
     @DisplayName("뒤에 공백 있는 숫자")
     void generate_valid_number3() {
-        assertThatCode(() -> new LottoNumber("1 "))
+        assertThatCode(() -> LottoNumber.valueOf("1 "))
                 .doesNotThrowAnyException();
     }
 
     @Test
     @DisplayName("숫자 사이에 공백 있는 경우")
     void generate_valid_number4() {
-        assertThatThrownBy(() -> new LottoNumber("1 2"))
+        assertThatThrownBy(() -> LottoNumber.valueOf("1 2"))
                 .isInstanceOf(RuntimeException.class);
     }
 
     @Test
     void generate_valid_not_int() {
-        assertThatThrownBy(() -> new LottoNumber("0.1"))
+        assertThatThrownBy(() -> LottoNumber.valueOf("0.1"))
                 .isInstanceOf(RuntimeException.class);
     }
 
     @Test
     void generate_invalid_not_number() {
-        assertThatThrownBy(() -> new LottoNumber("word"))
+        assertThatThrownBy(() -> LottoNumber.valueOf("word"))
                 .isInstanceOf(RuntimeException.class);
     }
 

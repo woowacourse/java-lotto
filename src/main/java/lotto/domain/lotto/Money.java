@@ -18,14 +18,14 @@ public class Money {
         return new Money(new BigInteger(amountValue));
     }
 
-    public BigInteger toBigInteger() {
-        return amount;
-    }
-
-    public static void validateNumeric(String input) {
+    private static void validateNumeric(String input) {
         if (!NUMERIC_PATTERN.matcher(input).matches()) {
             throw new NumberFormatException("구입금액은 0 이상의 정수여야합니다.");
         }
+    }
+
+    public BigInteger toBigInteger() {
+        return amount;
     }
 
     @Override

@@ -7,7 +7,7 @@ public class WinningNumbers {
 
     public WinningNumbers(String lottoNumbersValue, String bonusBallValue) {
         LottoTicket lottoTicket = new LottoTicket(lottoNumbersValue);
-        LottoNumber bonusBall = new LottoNumber(bonusBallValue);
+        LottoNumber bonusBall = LottoNumber.valueOf(bonusBallValue);
 
         if (lottoTicket.contains(bonusBall)) {
             throw new RuntimeException();

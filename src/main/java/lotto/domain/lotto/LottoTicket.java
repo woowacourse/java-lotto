@@ -32,9 +32,9 @@ public class LottoTicket {
         this(covertToLottoNumbers(lottoNumbersValue));
     }
 
-    private static List<LottoNumber> covertToLottoNumbers(String s) {
-        return Arrays.stream(s.split(","))
-                .map(LottoNumber::new)
+    private static List<LottoNumber> covertToLottoNumbers(String lottoNumbersValue) {
+        return Arrays.stream(lottoNumbersValue.split(","))
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
     }
 

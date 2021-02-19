@@ -18,17 +18,16 @@ public class LottoNumber {
         this.number = number;
     }
 
-    public LottoNumber(String numberValue) {
-        this(convertToLottoNumber(numberValue));
+    private LottoNumber(String numberValue) {
+        this(Integer.parseInt(numberValue));
     }
 
-    private static int convertToLottoNumber(String numberValue) {
-        numberValue = numberValue.trim();
+    public static LottoNumber valueOf(String numberValue) {
         validateNumeric(numberValue);
-        return Integer.parseInt(numberValue);
+        return new LottoNumber(numberValue);
     }
 
-    public static void validateNumeric(String input) {
+    private static void validateNumeric(String input) {
         if (!NUMERIC_PATTERN.matcher(input).matches()) {
             throw new IllegalArgumentException();
         }
