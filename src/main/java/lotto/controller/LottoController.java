@@ -16,27 +16,24 @@ public class LottoController {
     public void run() {
         Money inputMoney = new Money(InputView.inputMoney());
         LottoTickets lottoTickets = lottoTicketFactory.buyLottoTickets(inputMoney);
-        LottoTicket winningTicket = getWinningTicket(lottoTickets);
-        LottoResult lottoResult = getLottoResult(lottoTickets, winningTicket);
-        showResult(lottoResult);
+        WinningLotto winningLotto = getWinningLotto(lottoTickets);
+        showResult(lottoTickets, winningLotto);
     }
 
-    private LottoTicket getWinningTicket(LottoTickets lottoTickets) {
+    private WinningLotto getWinningLotto(LottoTickets lottoTickets) {
         OutputView.printLottoTicketsCount(lottoTickets);
         OutputView.printLottoTickets(lottoTickets);
-        return new LottoTicket(
-                InputView.inputWinningNumbers().stream()
+        LottoTicket winningTicket = new LottoTicket(
+                InputView.inputWinningNumbers()
+                        .stream()
                         .map(LottoNumber::new)
                         .collect(Collectors.toList()));
-    }
-
-    private LottoResult getLottoResult(LottoTickets lottoTickets, LottoTicket winningTicket) {
         LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());
-        WinningLotto winningLotto = new WinningLotto(winningTicket, bonusNumber);
-        return lottoTickets.checkPrizesByWinningTickets(winningLotto);
+        return new WinningLotto(winningTicket, bonusNumber);
     }
 
-    private void showResult(LottoResult lottoResult) {
+    private void showResult(LottoTickets lottoTickets, WinningLotto winningLotto) {
+        LottoResult lottoResult = lottoTickets.checkPrizesByWinningTickets(winningLotto);
         OutputView.printResultStatistic(lottoResult);
         Money totalProfit = lottoResult.getTotalProfit();
         double profitRate = totalProfit.divide(lottoResult.lottoResult().size());
