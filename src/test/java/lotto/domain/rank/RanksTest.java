@@ -2,8 +2,10 @@ package lotto.domain.rank;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
+import lotto.domain.lotto.LottoNumbers;
+import lotto.domain.lotto.LottoTicket;
+import lotto.domain.lotto.WinningNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,10 +14,16 @@ public class RanksTest {
     @Test
     @DisplayName("총 획득 상금 계산")
     void getTotalWinnings() {
-        Map<Rank, Long> statistics = new HashMap<>();
-        Rank.getAllPossibleRanks().stream()
-            .forEach(rank -> statistics.put(rank, 1L));
-        Ranks ranks = new Ranks(statistics);
+        WinningNumbers winningNumbers = WinningNumbers.valueOf("1, 2, 3, 4, 5, 6", "7");
+        LottoTicket lottoTicket = new LottoTicket(Arrays.asList(
+            LottoNumbers.valueOf("1,2,3,4,5,6"),
+            LottoNumbers.valueOf("1,2,3,4,5,7"),
+            LottoNumbers.valueOf("1,2,3,4,5,34"),
+            LottoNumbers.valueOf("1,2,3,4,11,12"),
+            LottoNumbers.valueOf("1,2,3,11,12,13")
+        ));
+
+        Ranks ranks = Ranks.valueOf(lottoTicket, winningNumbers);
 
         Long expected = Rank.getAllPossibleRanks().stream()
             .mapToLong(Rank::getWinnings)
