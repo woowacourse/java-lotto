@@ -20,7 +20,7 @@ public class LottoTickets {
     }
 
     public void putLottoResult(Map<LottoRank, Integer> lottoResult, LottoWinner lottoWinner) {
-        lottoTickets.forEach(lottoTicket -> {
+        this.lottoTickets.forEach(lottoTicket -> {
                     LottoBoughtTicket lottoBoughtTicket = (LottoBoughtTicket) lottoTicket;
                     LottoRank rank = lottoBoughtTicket.getRank(lottoWinner);
                     lottoResult.put(rank, lottoResult.getOrDefault(rank, 0) + INCREMENT_COUNT);
@@ -28,7 +28,7 @@ public class LottoTickets {
     }
 
     public List<LottoTicket> getLottoTickets() {
-        return Collections.unmodifiableList(lottoTickets);
+        return Collections.unmodifiableList(this.lottoTickets);
     }
 
     private void validateEmptyTickets(final List<LottoTicket> lottoTickets) {
