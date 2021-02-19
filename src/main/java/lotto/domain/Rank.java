@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -58,5 +59,18 @@ public enum Rank {
 
     private static boolean isSameMatchCount(Rank rank, long matchCount) {
         return rank.matchCount == matchCount;
+    }
+    
+    public int getMatchCount() {
+        return matchCount;
+    }
+    
+    
+    public static int compareMatchCount(Rank preRank, Rank postRank) {
+        return preRank.matchCount - postRank.matchCount;
+    }
+    
+    public static int compareReward(Rank preRank, Rank postRank) {
+        return (int) (preRank.reward - postRank.reward);
     }
 }
