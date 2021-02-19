@@ -19,7 +19,7 @@ public class Payout {
         try {
             return Integer.parseInt(amount);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("입력이 숫자가 아니거나 범위를 벗어났습니다.");
+            throw new IllegalArgumentException("입력이 숫자가 아니거나 Integer 범위를 벗어났습니다.");
         }
     }
 

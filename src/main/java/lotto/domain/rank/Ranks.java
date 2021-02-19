@@ -11,7 +11,7 @@ public class Ranks {
         this.ranks = new HashMap<>(ranks);
     }
 
-    public Long getWinningPrice() {
+    public Long getTotalWinnings() {
         return Rank.getAllPossibleRanks().stream()
             .mapToLong(rank -> rank.getWinnings() * ranks.getOrDefault(rank, 0L))
             .sum();

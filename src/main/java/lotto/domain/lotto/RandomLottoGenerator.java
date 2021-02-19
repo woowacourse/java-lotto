@@ -5,18 +5,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.number.LottoNumber;
 
-public class LottoGenerator {
+public class RandomLottoGenerator {
 
-    private static final LottoGenerator LOTTO_GENERATOR = new LottoGenerator();
+    private static final RandomLottoGenerator RANDOM_LOTTO_GENERATOR = new RandomLottoGenerator();
 
     private final List<LottoNumber> lottoNumbers;
 
-    private LottoGenerator() {
+    private RandomLottoGenerator() {
         lottoNumbers = LottoNumber.getAllLottoNumbers();
     }
 
-    public static LottoGenerator getInstance() {
-        return LOTTO_GENERATOR;
+    public static RandomLottoGenerator getInstance() {
+        return RANDOM_LOTTO_GENERATOR;
     }
 
     public LottoNumbers nextLottoNumbers() {

@@ -1,6 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.lotto.LottoGenerator;
+import lotto.domain.lotto.RandomLottoGenerator;
 import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.WinningNumbers;
 import lotto.domain.lotto.WinningStatistics;
@@ -10,7 +10,7 @@ import lotto.view.OutputView;
 
 public class LottoController {
 
-    private static final LottoGenerator LOTTO_GENERATOR = LottoGenerator.getInstance();
+    private static final RandomLottoGenerator LOTTO_GENERATOR = RandomLottoGenerator.getInstance();
 
     public static void run() {
         Payout payout = inputPayout();

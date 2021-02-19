@@ -32,7 +32,7 @@ public class OutputView {
     }
 
     public static void boughtLotties(LottoTicket lottoTicket) {
-        lottoTicket.toLottoNumbersList().forEach(OutputView::printLottoNumbers);
+        lottoTicket.unwrap().forEach(OutputView::printLottoNumbers);
     }
 
     private static void printLottoNumbers(LottoNumbers lottoNumbers) {

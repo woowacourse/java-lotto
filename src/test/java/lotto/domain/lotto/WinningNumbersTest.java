@@ -10,12 +10,14 @@ import java.util.Map;
 import lotto.domain.rank.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class WinningNumbersTest {
 
     @Test
     @DisplayName(",를 기준으로 당첨번호를 입력받는다.")
-    void getWinningNumber() {
+    void valueOf() {
         WinningNumbers winningNumbers = WinningNumbers.valueOf("1, 2, 3, 4, 5, 6", "7");
         LottoNumbers expected = LottoNumbers.valueOf("1,2,3,4,5,6");
 
@@ -23,8 +25,16 @@ public class WinningNumbersTest {
     }
 
     @Test
-    @DisplayName("하나의 숫자가 아닌 경우 예외")
-    void getBonusNumberFromStringInput() {
+    @DisplayName("당첨 번호에 중복이 있는 경우 예외")
+    void valueOfDuplicatedNumber() {
+        assertThatIllegalArgumentException().isThrownBy(
+            () -> WinningNumbers.valueOf("1,2,3,4,5,1", "1, 3")
+        ).withMessage("로또 넘버에 중복이 있습니다.");
+    }
+
+    @Test
+    @DisplayName("비정상적인 보너스 번호 입력인 경우 예외")
+    void valueOfInvalidBonusNumber() {
         assertThatIllegalArgumentException().isThrownBy(
             () -> WinningNumbers.valueOf("1,2,3,4,5,6", "1, 3")
         ).withMessage("불가능한 로또 번호입니다.");
@@ -63,5 +73,27 @@ public class WinningNumbersTest {
         assertThat(expected).isEqualTo(actual);
         assertThat(expectedTotalWinnings / 3000D)
             .isEqualTo(result.getYield(), withPrecision(2d));
+    }
+
+    @Test
+    @DisplayName("보너스 번호 확인 테스트")
+    void hasBonusNumber() {
+        WinningNumbers winningNumbers = WinningNumbers.valueOf("1,2,3,4,5,6", "7");
+
+        LottoNumbers lottoNumbers = LottoNumbers.valueOf("1,2,3,4,5,6");
+        assertThat(winningNumbers.hasBonusNumber(lottoNumbers)).isFalse();
+
+        lottoNumbers = LottoNumbers.valueOf("7,1,2,3,4,5");
+        assertThat(winningNumbers.hasBonusNumber(lottoNumbers)).isTrue();
+    }
+
+    @ParameterizedTest
+    @DisplayName("당첨 번호 일치 개수")
+    @CsvSource(value = {"1,2,3,4,5,6:6", "7,2,3,4,8,9:3", "7,8,9,10,11,12:0"}, delimiter = ':')
+    void getMatchCount(String input, int expected) {
+        WinningNumbers winningNumbers = WinningNumbers.valueOf("1,2,3,4,5,6", "7");
+        LottoNumbers lottoNumbers = LottoNumbers.valueOf(input);
+
+        assertThat(winningNumbers.getMatchCount(lottoNumbers)).isEqualTo(expected);
     }
 }

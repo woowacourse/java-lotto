@@ -12,13 +12,13 @@ public class WinningStatistics {
     private final double yield;
 
     public WinningStatistics(LottoTicket lottoTicket, WinningNumbers winningNumbers) {
-        this.ranks = new Ranks(lottoTicket.toLottoNumbersList().stream()
+        this.ranks = new Ranks(lottoTicket.unwrap().stream()
             .map(lottoNumbers -> getRank(winningNumbers, lottoNumbers))
             .collect(Collectors.collectingAndThen(
                 Collectors.groupingBy(Function.identity(), Collectors.counting()),
                 this::fillUnrankedCount)));
 
-        this.yield = (double) ranks.getWinningPrice() / lottoTicket.getTotalLottoPrice();
+        this.yield = (double) ranks.getTotalWinnings() / lottoTicket.getTotalLottoPrice();
     }
 
     private Rank getRank(WinningNumbers winningNumbers, LottoNumbers lottoNumbers) {

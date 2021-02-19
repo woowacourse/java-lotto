@@ -14,17 +14,26 @@ public class PayoutTest {
     @Test
     @DisplayName("숫자를 입력 받는다.")
     void inputPayOutNumber() {
-        Payout payout = Payout.valueOf("10000");
-        assertThat(payout.getAmount()).isEqualTo(10000);
+        Payout payout = Payout.valueOf("2147483647");
+        assertThat(payout.getAmount()).isEqualTo(2147483647);
     }
 
     @ParameterizedTest
-    @DisplayName("음수를 입력하면 예외")
+    @DisplayName("양수가 아닌 수를 예외")
     @ValueSource(strings = {"-1", "0"})
     void inputNegativeOrZeroPayOutNumber(String input) {
         assertThatIllegalArgumentException().isThrownBy(
             () -> Payout.valueOf(input)
         ).withMessage("입력값이 양수가 아닙니다.");
+    }
+
+    @ParameterizedTest
+    @DisplayName("Integer 로 받을 수 없는 입력일 경우 예외")
+    @ValueSource(strings = {"ab", "2147483648"})
+    void inputString(String input) {
+        assertThatIllegalArgumentException().isThrownBy(
+            () -> Payout.valueOf(input)
+        ).withMessage("입력이 숫자가 아니거나 Integer 범위를 벗어났습니다.");
     }
 
     @ParameterizedTest

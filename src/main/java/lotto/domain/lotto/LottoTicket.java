@@ -17,10 +17,14 @@ public class LottoTicket {
         this.lottoTicket = new ArrayList<>(lottoTicket);
     }
 
-    public static LottoTicket valueOf(Payout payout, LottoGenerator lottoGenerator) {
-        return Stream.generate(lottoGenerator::nextLottoNumbers)
+    public static LottoTicket valueOf(Payout payout, RandomLottoGenerator randomLottoGenerator) {
+        return Stream.generate(randomLottoGenerator::nextLottoNumbers)
             .limit(payout.getNumberOfStuff(LOTTO_PRICE))
             .collect(collectingAndThen(toList(), LottoTicket::new));
+    }
+
+    public List<LottoNumbers> unwrap() {
+        return new ArrayList<>(lottoTicket);
     }
 
     public int getCount() {
@@ -29,9 +33,5 @@ public class LottoTicket {
 
     public int getTotalLottoPrice() {
         return lottoTicket.size() * LOTTO_PRICE;
-    }
-
-    public List<LottoNumbers> toLottoNumbersList() {
-        return new ArrayList<>(lottoTicket);
     }
 }

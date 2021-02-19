@@ -23,10 +23,6 @@ public enum Rank {
         this.winnings = winnings;
     }
 
-    public boolean isBonusNumber() {
-        return bonusNumber;
-    }
-
     public static List<Rank> getAllPossibleRanks() {
         return stream(Rank.values())
             .filter(rank -> rank != Rank.FAIL)
@@ -39,6 +35,10 @@ public enum Rank {
                 rank -> (rank.matchedNumber == matchedNumber && (!rank.bonusNumber || bonusNumber)))
             .findAny()
             .orElse(Rank.FAIL);
+    }
+
+    public boolean isBonusNumber() {
+        return bonusNumber;
     }
 
     public int getWinnings() {

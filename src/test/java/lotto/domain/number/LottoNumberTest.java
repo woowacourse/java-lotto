@@ -21,8 +21,8 @@ public class LottoNumberTest {
     }
 
     @ParameterizedTest
-    @DisplayName("범위 밖의 로또 번호 생성시 예외")
-    @ValueSource(strings = {"-1", "0", "46"})
+    @DisplayName("불가능한 로또 번호 생성시 예외")
+    @ValueSource(strings = {"-1", "0", "46", "a", "abc"})
     void inputInvalidRangeStringLottoNumber(String input) {
         assertThatIllegalArgumentException()
             .isThrownBy(() -> LottoNumber.valueOf(input))
