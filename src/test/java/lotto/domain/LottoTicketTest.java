@@ -19,12 +19,12 @@ class LottoTicketTest {
         LottoTicket testLottoNumbers = new LottoTicket(randomNumbers);
 
         assertThat(testLottoNumbers.list())
-                .containsExactly(LottoNumberFactory.getInstance(1),
-                        LottoNumberFactory.getInstance(2),
-                        LottoNumberFactory.getInstance(3),
-                        LottoNumberFactory.getInstance(4),
-                        LottoNumberFactory.getInstance(5),
-                        LottoNumberFactory.getInstance(6));
+                .containsExactly(LottoNumberFactory.of(1),
+                        LottoNumberFactory.of(2),
+                        LottoNumberFactory.of(3),
+                        LottoNumberFactory.of(4),
+                        LottoNumberFactory.of(5),
+                        LottoNumberFactory.of(6));
     }
 
     @DisplayName("예외 처리 : 로또 번호 리스트의 개수가 6개가 아닐 경우")

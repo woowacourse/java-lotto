@@ -14,11 +14,11 @@ public class WinningLottoTicket {
     public WinningLottoTicket(List<Integer> winningNumber, int bonusNumber) {
         winningLottoTicket = new LottoTicket(winningNumber);
         validateDuplicatedBonusNumber(bonusNumber);
-        this.bonusNumber = LottoNumberFactory.getInstance(bonusNumber);
+        this.bonusNumber = LottoNumberFactory.of(bonusNumber);
     }
 
     private void validateDuplicatedBonusNumber(int bonusNumber) {
-        LottoNumber bonusLottoNumber = LottoNumberFactory.getInstance(bonusNumber);
+        LottoNumber bonusLottoNumber = LottoNumberFactory.of(bonusNumber);
 
         boolean isDuplicated = winningLottoTicket.list().stream()
                 .anyMatch(winningNumber -> winningNumber.equals(bonusLottoNumber));

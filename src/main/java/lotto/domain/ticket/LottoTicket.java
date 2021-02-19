@@ -22,7 +22,7 @@ public class LottoTicket {
         validateLottoNumberCount(numbers);
         validateDuplicatedLottoNumbers(numbers);
 
-        this.lottoNumbers = numbers.stream().map(LottoNumberFactory::getInstance)
+        this.lottoNumbers = numbers.stream().map(LottoNumberFactory::of)
                 .sorted(Comparator.naturalOrder())
                 .collect(Collectors.toList());
     }

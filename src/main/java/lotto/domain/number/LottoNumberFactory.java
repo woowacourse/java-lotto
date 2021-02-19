@@ -16,7 +16,7 @@ public class LottoNumberFactory {
     private LottoNumberFactory() {
     }
 
-    public static LottoNumber getInstance(int lottoNumber) {
+    public static LottoNumber of(int lottoNumber) {
         return lottoNumbers.stream()
                 .filter(ball -> ball.equals(LottoNumber.createLottoNumber(lottoNumber)))
                 .findFirst()
