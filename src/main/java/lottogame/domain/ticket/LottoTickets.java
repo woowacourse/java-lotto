@@ -6,17 +6,21 @@ import java.util.List;
 
 public class LottoTickets {
 
-    List<LottoTicket> lottoTickets = new ArrayList<>();
+    private final List<LottoTicket> lottoTickets;
+
+    public LottoTickets() {
+        this.lottoTickets = new ArrayList<>();
+    }
 
     public void add(final LottoTicket lottoTicket) {
-        lottoTickets.add(lottoTicket);
+        this.lottoTickets.add(lottoTicket);
     }
 
     public List<LottoTicket> toList() {
-        return Collections.unmodifiableList(lottoTickets);
+        return Collections.unmodifiableList(this.lottoTickets);
     }
 
     public int getTicketsCount() {
-        return lottoTickets.size();
+        return this.lottoTickets.size();
     }
 }
