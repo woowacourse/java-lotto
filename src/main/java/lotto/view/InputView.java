@@ -31,12 +31,8 @@ public class InputView {
     }
     
     public List<Integer> readWinningLotto() {
-        return readWinningLottoExceptBonusNumber();
-    }
-    
-    private List<Integer> readWinningLottoExceptBonusNumber() {
         String input = read(WINNING_LOTTO_NUMBER_QUESTION);
-        
+    
         return Arrays.stream(input.split(DELIMITER))
                      .map(number -> LottoNumber.fromStringLottoNumber(number)
                                                .getLottoNum())
