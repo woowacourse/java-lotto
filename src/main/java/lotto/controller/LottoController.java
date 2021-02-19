@@ -4,7 +4,7 @@ import lotto.domain.lotto.LottoGenerator;
 import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.WinningNumbers;
 import lotto.domain.lotto.WinningStatistics;
-import lotto.domain.number.PayOut;
+import lotto.domain.number.Payout;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -13,26 +13,24 @@ public class LottoController {
     private static final LottoGenerator LOTTO_GENERATOR = LottoGenerator.getInstance();
 
     public static void run() {
-        PayOut payOut = payOut();
-        LottoTicket lottoTicket = buyLotto(payOut);
+        Payout payout = inputPayout();
+        LottoTicket lottoTicket = buyLotto(payout);
         WinningNumbers winningNumbers =
             WinningNumbers.valueOf(inputLastWeekLottoNumber(), inputBonusNumber());
 
         calculateStatistics(winningNumbers, lottoTicket);
     }
 
-    private static PayOut payOut() {
+    private static Payout inputPayout() {
         OutputView.payout();
-
-        PayOut payOut = PayOut.valueOf(InputView.getStringInputFromUser());
-
-        OutputView.payOuted(payOut.getGameCount());
+        Payout payOut = Payout.valueOf(InputView.getStringInputFromUser());
 
         return payOut;
     }
 
-    private static LottoTicket buyLotto(PayOut payOut) {
-        LottoTicket lottoTicket = LOTTO_GENERATOR.newLottoTicket(payOut.getGameCount());
+    private static LottoTicket buyLotto(Payout payout) {
+        LottoTicket lottoTicket = LottoTicket.valueOf(payout, LOTTO_GENERATOR);
+        OutputView.payOuted(lottoTicket.getCount());
         OutputView.boughtLotties(lottoTicket);
 
         return lottoTicket;
@@ -50,7 +48,8 @@ public class LottoController {
         return InputView.getStringInputFromUser();
     }
 
-    private static void calculateStatistics(WinningNumbers winningNumbers, LottoTicket lottoTicket) {
+    private static void calculateStatistics(WinningNumbers winningNumbers,
+        LottoTicket lottoTicket) {
         OutputView.statistics(new WinningStatistics(lottoTicket, winningNumbers));
     }
 }

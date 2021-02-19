@@ -36,7 +36,7 @@ public class OutputView {
     }
 
     private static void printLottoNumbers(LottoNumbers lottoNumbers) {
-        List<String> convertedLottoNumbers = lottoNumbers.unbox().stream()
+        List<String> convertedLottoNumbers = lottoNumbers.unwrap().stream()
             .map(String::valueOf)
             .collect(toList());
 
@@ -54,7 +54,7 @@ public class OutputView {
     public static void statistics(WinningStatistics winningStatistics) {
         System.out.println(WINNING_STATISTICS);
         System.out.println(LINE);
-        Map<Rank, Long> gameResult = winningStatistics.unbox();
+        Map<Rank, Long> gameResult = winningStatistics.unwrap();
 
         Rank.getAllPossibleRanks().stream()
             .sorted(Comparator.comparingInt(Rank::getWinnings))

@@ -2,7 +2,6 @@ package lotto.domain.rank;
 
 import static java.util.Arrays.stream;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,20 +23,12 @@ public enum Rank {
         this.winnings = winnings;
     }
 
-    public int getWinnings() {
-        return winnings;
-    }
-
-    public int getMatchedNumber() {
-        return matchedNumber;
-    }
-
     public boolean isBonusNumber() {
         return bonusNumber;
     }
 
     public static List<Rank> getAllPossibleRanks() {
-        return Arrays.asList(Rank.values()).stream()
+        return stream(Rank.values())
             .filter(rank -> rank != Rank.FAIL)
             .collect(Collectors.toList());
     }
@@ -48,5 +39,13 @@ public enum Rank {
                 rank -> (rank.matchedNumber == matchedNumber && (!rank.bonusNumber || bonusNumber)))
             .findAny()
             .orElse(Rank.FAIL);
+    }
+
+    public int getWinnings() {
+        return winnings;
+    }
+
+    public int getMatchedNumber() {
+        return matchedNumber;
     }
 }

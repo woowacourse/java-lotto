@@ -1,47 +1,47 @@
 package lotto.domain.number;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumber {
 
-    private static final int NUMBER_START_EXCLUSIVE = 0;
-    private static final int NUMBER_END_INCLUSIVE = 45;
-    private static final List<LottoNumber> LOTTO_NUMBERS_CACHE;
+    private static final int LOTTO_NUMBER_MIN = 1;
+    private static final int LOTTO_NUMBER_MAX = 45;
+    private static final Map<String, LottoNumber> LOTTO_NUMBERS_POOL;
 
-    private final Number number;
+    private final int number;
 
     static {
-        LOTTO_NUMBERS_CACHE = IntStream.rangeClosed(NUMBER_START_EXCLUSIVE, NUMBER_END_INCLUSIVE)
-            .mapToObj(Number::valueOf)
-            .map(LottoNumber::new)
-            .collect(Collectors.toList());
+        LOTTO_NUMBERS_POOL = IntStream.rangeClosed(LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX)
+            .boxed()
+            .collect(Collectors.toMap(String::valueOf, LottoNumber::new));
     }
 
-    private LottoNumber(Number number) {
+    private LottoNumber(int number) {
         this.number = number;
     }
 
-    public static LottoNumber valueOf(int number) {
-        validateRange(Number.valueOf(number));
-        return LOTTO_NUMBERS_CACHE.get(number);
-    }
-
     public static LottoNumber valueOf(String number) {
-        validateRange(Number.valueOf(number));
-        return new LottoNumber(Number.valueOf(number));
+        validateRange(number);
+        return LOTTO_NUMBERS_POOL.get(number);
     }
 
-    private static void validateRange(Number number) {
-        if (!number.isBiggerThan(NUMBER_START_EXCLUSIVE) || number.isBiggerThan(NUMBER_END_INCLUSIVE)) {
-            throw new IllegalArgumentException("범위 밖의 로또 번호 입니다.");
+    private static void validateRange(String number) {
+        if (!LOTTO_NUMBERS_POOL.containsKey(number)) {
+            throw new IllegalArgumentException("불가능한 로또 번호입니다.");
         }
     }
 
-    public int unbox() {
-        return number.unbox();
+    public static List<LottoNumber> getAllLottoNumbers() {
+        return new ArrayList<>(LOTTO_NUMBERS_POOL.values());
+    }
+
+    public int unwrap() {
+        return number;
     }
 
     @Override
@@ -59,10 +59,5 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(number);
-    }
-
-    @Override
-    public String toString() {
-        return String.valueOf(number.unbox());
     }
 }

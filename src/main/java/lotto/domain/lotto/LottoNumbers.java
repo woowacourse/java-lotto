@@ -17,18 +17,22 @@ public class LottoNumbers {
 
     private final Set<LottoNumber> lottoNumbers;
 
-    private LottoNumbers(Set<LottoNumber> lottoNumbers) {
+    public LottoNumbers(Set<LottoNumber> lottoNumbers) {
         validateLottoNumberCount(lottoNumbers);
         this.lottoNumbers = new HashSet<>(lottoNumbers);
     }
 
     public static LottoNumbers valueOf(List<LottoNumber> lottoNumbers) {
-        validateDuplicate(lottoNumbers);
+        validateDuplication(lottoNumbers);
         return new LottoNumbers(new HashSet<>(lottoNumbers));
     }
 
     public static LottoNumbers valueOf(String unparsedLottoNumbers) {
         return getLottoNumbersFromStringList(splitLottoNumber(unparsedLottoNumbers));
+    }
+
+    private static List<String> splitLottoNumber(String lottoNumber) {
+        return Arrays.asList(lottoNumber.split(LOTTO_NUMBER_SEPARATOR, -1));
     }
 
     private static LottoNumbers getLottoNumbersFromStringList(List<String> lottoNumbers) {
@@ -37,11 +41,7 @@ public class LottoNumbers {
             .collect(collectingAndThen(toList(), LottoNumbers::valueOf));
     }
 
-    private static List<String> splitLottoNumber(String lottoNumber) {
-        return Arrays.asList(lottoNumber.split(LOTTO_NUMBER_SEPARATOR, -1));
-    }
-
-    private static void validateDuplicate(List<LottoNumber> lottoNumbers) {
+    private static void validateDuplication(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.stream().distinct().count() != lottoNumbers.size()) {
             throw new IllegalArgumentException("로또 넘버에 중복이 있습니다.");
         }
@@ -53,20 +53,24 @@ public class LottoNumbers {
         }
     }
 
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
     public int getMatchCount(LottoNumbers lottoNumbers) {
         return (int) this.lottoNumbers.stream()
             .filter(lottoNumbers::contains)
             .count();
     }
 
-    public List<Integer> unbox() {
+    public List<Integer> unwrap() {
         return lottoNumbers.stream()
-            .map(LottoNumber::unbox)
+            .map(LottoNumber::unwrap)
             .collect(toList());
     }
 
-    public boolean contains(LottoNumber lottoNumber) {
-        return lottoNumbers.contains(lottoNumber);
+    public static int getLottoNumberCount() {
+        return LOTTO_NUMBER_COUNT;
     }
 
     @Override

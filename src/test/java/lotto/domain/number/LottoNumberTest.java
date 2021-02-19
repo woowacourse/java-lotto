@@ -13,28 +13,19 @@ public class LottoNumberTest {
     @Test
     @DisplayName("정상적인 로또 번호 생성")
     void inputLottoNumber() {
-        LottoNumber lottoNumber = LottoNumber.valueOf(1);
-        assertThat(lottoNumber.unbox()).isEqualTo(1);
+        LottoNumber lottoNumber = LottoNumber.valueOf("1");
+        assertThat(lottoNumber.unwrap()).isEqualTo(1);
 
-        lottoNumber = LottoNumber.valueOf(45);
-        assertThat(lottoNumber.unbox()).isEqualTo(45);
+        lottoNumber = LottoNumber.valueOf("45");
+        assertThat(lottoNumber.unwrap()).isEqualTo(45);
     }
 
     @ParameterizedTest
-    @DisplayName("범위 밖의 로또 번호 생성시 예외 (정수)")
-    @ValueSource(ints = {-1, 0, 46})
-    void inputInvalidRangeIntegerLottoNumber(int input) {
-        assertThatIllegalArgumentException()
-            .isThrownBy(() -> LottoNumber.valueOf(input))
-            .withMessage("범위 밖의 로또 번호 입니다.");
-    }
-
-    @ParameterizedTest
-    @DisplayName("범위 밖의 로또 번호 생성시 예외 (문자열)")
+    @DisplayName("범위 밖의 로또 번호 생성시 예외")
     @ValueSource(strings = {"-1", "0", "46"})
     void inputInvalidRangeStringLottoNumber(String input) {
         assertThatIllegalArgumentException()
             .isThrownBy(() -> LottoNumber.valueOf(input))
-            .withMessage("범위 밖의 로또 번호 입니다.");
+            .withMessage("불가능한 로또 번호입니다.");
     }
 }

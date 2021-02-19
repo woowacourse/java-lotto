@@ -3,7 +3,6 @@ package lotto.domain.lotto;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import lotto.domain.number.PayOut;
 import lotto.domain.rank.Rank;
 import lotto.domain.rank.Ranks;
 
@@ -16,9 +15,10 @@ public class WinningStatistics {
         this.ranks = new Ranks(lottoTicket.toLottoNumbersList().stream()
             .map(lottoNumbers -> getRank(winningNumbers, lottoNumbers))
             .collect(Collectors.collectingAndThen(
-                Collectors.groupingBy(Function.identity(), Collectors.counting()), this::fillUnrankedCount)));
+                Collectors.groupingBy(Function.identity(), Collectors.counting()),
+                this::fillUnrankedCount)));
 
-        this.yield = ranks.getWinningPrice() / lottoTicket.getCount() / PayOut.getGamePrice();
+        this.yield = (double) ranks.getWinningPrice() / lottoTicket.getTotalLottoPrice();
     }
 
     private Rank getRank(WinningNumbers winningNumbers, LottoNumbers lottoNumbers) {
@@ -36,8 +36,8 @@ public class WinningStatistics {
         return statistics;
     }
 
-    public Map<Rank, Long> unbox() {
-        return ranks.unbox();
+    public Map<Rank, Long> unwrap() {
+        return ranks.unwrap();
     }
 
     public double getYield() {

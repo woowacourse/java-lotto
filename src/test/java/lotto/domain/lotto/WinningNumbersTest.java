@@ -27,7 +27,7 @@ public class WinningNumbersTest {
     void getBonusNumberFromStringInput() {
         assertThatIllegalArgumentException().isThrownBy(
             () -> WinningNumbers.valueOf("1,2,3,4,5,6", "1, 3")
-        ).withMessage("입력이 숫자가 아니거나 범위를 벗어났습니다.");
+        ).withMessage("불가능한 로또 번호입니다.");
     }
 
     @Test
@@ -58,7 +58,7 @@ public class WinningNumbersTest {
         ));
         WinningStatistics result = new WinningStatistics(lottoTicket, winningNumbers);
 
-        Map<Rank, Long> actual = result.unbox();
+        Map<Rank, Long> actual = result.unwrap();
 
         assertThat(expected).isEqualTo(actual);
         assertThat(expectedTotalWinnings / 3000D)

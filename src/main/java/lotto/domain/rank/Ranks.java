@@ -17,7 +17,7 @@ public class Ranks {
             .sum();
     }
 
-    public Map<Rank, Long> unbox() {
+    public Map<Rank, Long> unwrap() {
         return new HashMap<>(ranks);
     }
 }

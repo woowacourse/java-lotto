@@ -28,12 +28,12 @@ public class WinningNumbers {
         }
     }
 
-    public int getMatchCount(LottoNumbers lottoNumbers) {
-        return this.lottoNumbers.getMatchCount(lottoNumbers);
-    }
-
     public boolean hasBonusNumber(LottoNumbers lottoNumbers) {
         return lottoNumbers.contains(bonusNumber);
+    }
+
+    public int getMatchCount(LottoNumbers lottoNumbers) {
+        return this.lottoNumbers.getMatchCount(lottoNumbers);
     }
 
     public LottoNumbers getLottoNumbers() {
