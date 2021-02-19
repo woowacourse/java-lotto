@@ -20,9 +20,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
     static {
         CACHE = Collections.unmodifiableList(
                 IntStream.range(MIN_NUMBER_RANGE, MAX_NUMBER_RANGE)
-                .boxed()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList()));
+                        .boxed()
+                        .map(LottoNumber::new)
+                        .collect(Collectors.toList()));
     }
 
     public LottoNumber(int number) {

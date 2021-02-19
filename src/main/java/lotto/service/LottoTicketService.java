@@ -22,10 +22,10 @@ public class LottoTicketService {
         List<LottoNumber> lottoNumbers = LottoNumber.getCache();
         Collections.shuffle(lottoNumbers);
         return lottoNumbers
-                        .stream()
-                        .limit(LOTTO_NUMBER_SIZE)
-                        .sorted()
-                        .collect(Collectors.collectingAndThen(Collectors.toList(), LottoBoughtTicket::new));
+                .stream()
+                .limit(LOTTO_NUMBER_SIZE)
+                .sorted()
+                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoBoughtTicket::new));
     }
 
     public static LottoWinnerTicket createLottoWinnerTicket(String input) {
