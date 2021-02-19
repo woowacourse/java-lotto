@@ -23,8 +23,8 @@ public class LottoTickets {
         this(count, ALL_LOTTO_NUMBERS, null);
     }
 
-    public LottoTickets(final int autoPurchaseCount, final List<Lotto> lottoTickets) {
-        this(autoPurchaseCount, ALL_LOTTO_NUMBERS, lottoTickets);
+    public LottoTickets(final int autoPurchaseCount, final List<Lotto> manual) {
+        this(autoPurchaseCount, ALL_LOTTO_NUMBERS, manual);
     }
 
     public LottoTickets(final int count, final List<Integer> auto, final List<Lotto> manual) {
@@ -45,10 +45,6 @@ public class LottoTickets {
         return Collections.unmodifiableList(lottoTickets);
     }
 
-    public List<Lotto> getLottoTickets() {
-        return lottoTickets;
-    }
-
     public Rewords createRewords(final WinningLotto winningLotto) {
         List<Reword> rewords = new ArrayList<>();
 
@@ -57,6 +53,10 @@ public class LottoTickets {
         }
 
         return new Rewords(rewords);
+    }
+
+    public List<Lotto> getLottoTickets() {
+        return lottoTickets;
     }
 
     @Override
