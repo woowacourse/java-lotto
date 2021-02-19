@@ -22,14 +22,15 @@ public class OutputView {
         System.out.println(ASK_HOW_MUCH_TO_BUY);
     }
 
-    public static void howMuchBought(int count) {
-        System.out.printf(HOW_MUCH_BOUGHT, count);
+    public static void printTickets(LottoTickets lottoTickets, int count) {
+        howMuchBought(count);
+        lottoTickets.getLottoTickets()
+                .forEach(OutputView::printTicket);
         System.out.print(NEW_LINE);
     }
 
-    public static void printTickets(LottoTickets lottoTickets) {
-        lottoTickets.getLottoTickets()
-                .forEach(OutputView::printTicket);
+    private static void howMuchBought(int count) {
+        System.out.printf(HOW_MUCH_BOUGHT, count);
         System.out.print(NEW_LINE);
     }
 
