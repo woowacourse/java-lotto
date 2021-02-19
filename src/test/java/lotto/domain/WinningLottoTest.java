@@ -16,7 +16,7 @@ public class WinningLottoTest {
     void init() {
         // given
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        int bonusNumber = 45;
+        LottoNumber bonusNumber = LottoNumber.from(45);
         
         // when
         ThrowingCallable throwingCallable = () -> WinningLotto.of(numbers, bonusNumber);

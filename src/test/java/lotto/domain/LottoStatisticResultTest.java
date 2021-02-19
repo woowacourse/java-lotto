@@ -15,7 +15,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoStatisticResultTest {
     
-    private static final WinningLotto WINNING_LOTTO = WinningLotto.of(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+    private static final WinningLotto WINNING_LOTTO
+            = WinningLotto.of(Arrays.asList(1, 2, 3, 4, 5, 6),LottoNumber.from(7));
     
     private static final List<Lotto> LOTTO_GROUP = new ArrayList<>();
     

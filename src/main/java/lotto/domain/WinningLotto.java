@@ -13,10 +13,6 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
     
-    public static WinningLotto of(List<Integer> numbers, int bonusNumber) {
-        return new WinningLotto(Lotto.fromNumbers(numbers), LottoNumber.from(bonusNumber));
-    }
-    
     public static WinningLotto of(List<Integer> numbers, LottoNumber bonusNumber) {
         return new WinningLotto(Lotto.fromNumbers(numbers), bonusNumber);
     }
