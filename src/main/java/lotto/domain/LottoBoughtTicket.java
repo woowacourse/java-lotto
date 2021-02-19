@@ -1,12 +1,8 @@
 package lotto.domain;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class LottoBoughtTicket extends LottoTicket {
-
-    private static final int TOTAL_NUMBER_COUNT = 12;
 
     public LottoBoughtTicket(final List<LottoNumber> lottoNumbers) {
         super(lottoNumbers);
@@ -19,8 +15,9 @@ public class LottoBoughtTicket extends LottoTicket {
     }
 
     private int calculateMatchCount(final LottoWinnerTicket lottoWinnerTicket) {
-        Set<LottoNumber> matchingCheckContainer = new HashSet<>(this.getLottoNumbers());
-        matchingCheckContainer.addAll(lottoWinnerTicket.getLottoNumbers());
-        return TOTAL_NUMBER_COUNT - matchingCheckContainer.size();
+        return (int) lottoWinnerTicket.getLottoNumbers()
+                .stream()
+                .filter(this::isContain)
+                .count();
     }
 }
