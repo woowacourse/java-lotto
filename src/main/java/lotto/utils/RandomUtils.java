@@ -9,8 +9,7 @@ public class RandomUtils {
     private RandomUtils() {
     }
 
-    public static List<Integer> generateRandomNumbers(
-        List<Integer> allBoundOfNumbers, int needCount) {
+    public static List<Integer> generateRandomNumbers(List<Integer> allBoundOfNumbers, int needCount) {
         Collections.shuffle(allBoundOfNumbers);
 
         return allBoundOfNumbers.stream()
