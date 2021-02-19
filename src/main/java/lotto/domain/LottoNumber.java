@@ -42,7 +42,7 @@ public class LottoNumber {
         return new LottoNumber(lottoNum);
     }
     
-    public static boolean isInRange(int lottoNum) {
+    private static boolean isInRange(int lottoNum) {
         return lottoNum >= MIN_LOTTO_NUM && lottoNum <= MAX_LOTTO_NUM;
     }
     
