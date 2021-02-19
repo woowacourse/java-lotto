@@ -40,8 +40,8 @@ public class LottoNumber {
         }
     }
 
-    public int toInt() {
-        return number.toInt();
+    public int unbox() {
+        return number.unbox();
     }
 
     @Override
@@ -63,6 +63,6 @@ public class LottoNumber {
 
     @Override
     public String toString() {
-        return String.valueOf(number.toInt());
+        return String.valueOf(number.unbox());
     }
 }

@@ -59,9 +59,9 @@ public class LottoNumbers {
             .count();
     }
 
-    public List<Integer> toIntegerList() {
+    public List<Integer> unbox() {
         return lottoNumbers.stream()
-            .map(LottoNumber::toInt)
+            .map(LottoNumber::unbox)
             .collect(toList());
     }
 

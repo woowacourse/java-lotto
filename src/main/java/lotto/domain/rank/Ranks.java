@@ -12,12 +12,12 @@ public class Ranks {
     }
 
     public Long getWinningPrice() {
-        return Rank.toList().stream()
+        return Rank.getAllPossibleRanks().stream()
             .mapToLong(rank -> rank.getWinnings() * ranks.get(rank))
             .sum();
     }
 
-    public Map<Rank, Long> toMap() {
+    public Map<Rank, Long> unbox() {
         return new HashMap<>(ranks);
     }
 }

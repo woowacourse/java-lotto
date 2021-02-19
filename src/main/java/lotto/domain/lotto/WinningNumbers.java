@@ -54,7 +54,7 @@ public class WinningNumbers {
     }
 
     private Map<Rank, Long> fillUnrankedCount(Map<Rank, Long> statistics) {
-        Rank.toList().stream()
+        Rank.getAllPossibleRanks().stream()
             .filter(rank -> !statistics.containsKey(rank))
             .forEach(rank -> statistics.put(rank, 0L));
 

@@ -36,9 +36,9 @@ public enum Rank {
         return bonusNumber;
     }
 
-    public static List<Rank> toList() {
-        return Arrays.asList(Rank.values())
-            .stream().filter(rank -> rank != Rank.FAIL)
+    public static List<Rank> getAllPossibleRanks() {
+        return Arrays.asList(Rank.values()).stream()
+            .filter(rank -> rank != Rank.FAIL)
             .collect(Collectors.toList());
     }
 

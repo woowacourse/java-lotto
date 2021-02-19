@@ -23,10 +23,10 @@ public class PayOut {
     }
 
     public int getGameCount() {
-        return number.toInt() / GAME_PRICE;
+        return number.unbox() / GAME_PRICE;
     }
 
-    public int toInt() {
-        return number.toInt();
+    public int unbox() {
+        return number.unbox();
     }
 }

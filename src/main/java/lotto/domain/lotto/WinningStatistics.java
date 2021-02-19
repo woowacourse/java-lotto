@@ -12,11 +12,11 @@ public class WinningStatistics {
 
     public WinningStatistics(Map<Rank, Long> gameResult, PayOut payOut) {
         this.ranks = new Ranks(gameResult);
-        this.yield = ranks.getWinningPrice() / payOut.toInt();
+        this.yield = ranks.getWinningPrice() / payOut.unbox();
     }
 
-    public Map<Rank, Long> toMap() {
-        return ranks.toMap();
+    public Map<Rank, Long> unbox() {
+        return ranks.unbox();
     }
 
     public double getYield() {

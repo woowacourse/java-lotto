@@ -14,10 +14,10 @@ public class LottoNumberTest {
     @DisplayName("정상적인 로또 번호 생성")
     void inputLottoNumber() {
         LottoNumber lottoNumber = LottoNumber.valueOf(1);
-        assertThat(lottoNumber.toInt()).isEqualTo(1);
+        assertThat(lottoNumber.unbox()).isEqualTo(1);
 
         lottoNumber = LottoNumber.valueOf(45);
-        assertThat(lottoNumber.toInt()).isEqualTo(45);
+        assertThat(lottoNumber.unbox()).isEqualTo(45);
     }
 
     @ParameterizedTest

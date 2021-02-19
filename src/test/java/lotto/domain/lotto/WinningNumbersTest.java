@@ -59,7 +59,7 @@ public class WinningNumbersTest {
         ));
         WinningStatistics result = winningNumbers.getResult(lottoTicket, PayOut.valueOf("3000"));
 
-        Map<Rank, Long> actual = result.toMap();
+        Map<Rank, Long> actual = result.unbox();
 
         assertThat(expected).isEqualTo(actual);
         assertThat(expectedTotalWinnings / 3000D)

@@ -31,7 +31,7 @@ public class Number {
         return value > target;
     }
 
-    public int toInt() {
+    public int unbox() {
         return value;
     }
 
