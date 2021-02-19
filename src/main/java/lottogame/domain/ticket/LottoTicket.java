@@ -8,28 +8,28 @@ import lottogame.domain.number.LottoNumbers;
 
 public class LottoTicket {
 
-    public static final int START_LOTTO_NUMBER = 1;
-    public static final int FINISH_LOTTO_NUMBER = 45;
+    private static final int START_LOTTO_NUMBER = 1;
+    private static final int FINISH_LOTTO_NUMBER = 45;
 
-    private final LottoNumbers lottoNumbers = new LottoNumbers();
+    private final LottoNumbers lottoNumbers;
 
     public LottoTicket() {
-        for (int number : getShuffledNumbers(new ArrayList<>())) {
-            lottoNumbers.add(new LottoNumber(number + ""));
+        this.lottoNumbers = new LottoNumbers();
+        for (int number : issueLottoNumbers(new ArrayList<>())) {
+            lottoNumbers.add(new LottoNumber(number));
         }
     }
 
-    private List<Integer> getShuffledNumbers(List<Integer> numbers) {
+    private List<Integer> issueLottoNumbers(List<Integer> numbers) {
         Collections.shuffle(initNumbers(numbers));
-
         List<Integer> shuffledNumbers = numbers.subList(0, 6);
         Collections.sort(shuffledNumbers);
         return shuffledNumbers;
     }
 
-    public List<Integer> initNumbers(List<Integer> numbers) {
-        for (int i = START_LOTTO_NUMBER; i <= FINISH_LOTTO_NUMBER; i++) {
-            numbers.add(i);
+    private List<Integer> initNumbers(List<Integer> numbers) {
+        for (int number = START_LOTTO_NUMBER; number <= FINISH_LOTTO_NUMBER; number++) {
+            numbers.add(number);
         }
         return numbers;
     }
