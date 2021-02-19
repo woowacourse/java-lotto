@@ -1,6 +1,8 @@
 package lotto.view;
 
+import com.google.common.primitives.Ints;
 import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 import lotto.domain.Result;
 
 import java.util.Arrays;
@@ -16,9 +18,13 @@ public class OutputView {
 
     public static void showBuyLotto(List<Lotto> lottos) {
         System.out.printf("%d개를 구매했습니다.\n", lottos.size());
+        StringBuilder sb = new StringBuilder();
         for (Lotto lotto : lottos) {
-            System.out.println(lotto.getNumbers());
+            sb.append("[");
+            sb.append(Ints.join(", ", lotto.getLottoNumbers().stream().mapToInt(i -> i).toArray()));
+            sb.append("]\n");
         }
+        System.out.println(sb.toString());
     }
 
     public static void result(List<Result> results, float profit) {

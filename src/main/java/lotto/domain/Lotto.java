@@ -2,6 +2,7 @@ package lotto.domain;
 
 import com.google.common.primitives.Ints;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Lotto {
@@ -33,12 +34,8 @@ public class Lotto {
         return lottoNumbers.contains(bonusNumber);
     }
 
-    public String getNumbers() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("[");
-        sb.append(Ints.join(", ", lottoNumbers.stream().mapToInt(i -> i).toArray()));
-        sb.append("]");
 
-        return sb.toString();
+    public List<Integer> getLottoNumbers() {
+        return lottoNumbers;
     }
 }
