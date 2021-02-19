@@ -7,17 +7,18 @@ import lotto.view.OutputView;
 import java.util.stream.Collectors;
 
 public class LottoController {
+    private final LottoTicketFactory lottoTicketFactory;
+
+    public LottoController() {
+        this.lottoTicketFactory = new LottoTicketFactory();
+    }
+
     public void run() {
         Money money = new Money(InputView.inputMoney());
-        LottoTickets lottoTickets = getLottoTickets(money);
+        LottoTickets lottoTickets = lottoTicketFactory.buyLottoTickets(money);
         LottoTicket winningTicket = getWinningTicket(lottoTickets);
         LottoResult lottoResult = getLottoResult(lottoTickets, winningTicket);
         showResult(lottoResult, money);
-    }
-
-    private LottoTickets getLottoTickets(Money money) {
-        LottoTicketFactory lottoTicketFactory = new LottoTicketFactory();
-        return lottoTicketFactory.buyLottoTickets(money);
     }
 
     private LottoTicket getWinningTicket(LottoTickets lottoTickets) {
