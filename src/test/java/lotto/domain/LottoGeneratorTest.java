@@ -14,6 +14,6 @@ class LottoGeneratorTest {
     void check_six() {
         List<Integer> lottoNumbers = LottoGenerator.make();
 
-        assertThat(lottoNumbers.size()).isEqualTo(6);
+        assertThat(lottoNumbers).hasSize(6);
     }
 }

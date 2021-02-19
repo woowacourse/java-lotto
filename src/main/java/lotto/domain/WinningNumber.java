@@ -21,7 +21,6 @@ public class WinningNumber {
         if(set.size() != 6){
             throw new IllegalArgumentException("중복된 당첨번호가 있어서는 안됩니다.");
         }
-
     }
 
     private void validateNumber(String[] inputs) {
@@ -37,7 +36,6 @@ public class WinningNumber {
     }
 
     private List<Integer> makeInteger(String[] inputs) {
-
         return Arrays.stream(inputs)
                 .map(s -> Integer.parseInt(s))
                 .collect(Collectors.toList());
