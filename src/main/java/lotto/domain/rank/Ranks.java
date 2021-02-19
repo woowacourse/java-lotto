@@ -19,6 +19,7 @@ public class Ranks {
     public static Ranks valueOf(LottoTicket lottoTicket, WinningNumbers winningNumbers) {
         return new Ranks(lottoTicket.unwrap().stream()
             .map(lottoNumbers -> getRank(winningNumbers, lottoNumbers))
+            .filter(rank -> rank != Rank.FAIL)
             .collect(Collectors.collectingAndThen(
                 Collectors.groupingBy(Function.identity(), Collectors.counting()),
                 Ranks::fillUnrankedCount)));

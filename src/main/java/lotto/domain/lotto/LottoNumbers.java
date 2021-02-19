@@ -36,16 +36,16 @@ public class LottoNumbers {
             .collect(Collectors.toList());
     }
 
-    private static void validateDuplication(List<String> lottoNumbers) {
-        if (lottoNumbers.stream().distinct().count() != lottoNumbers.size()) {
-            throw new IllegalArgumentException("로또 넘버에 중복이 있습니다.");
-        }
-    }
-
     private static LottoNumbers getLottoNumbersFromParsedNumbers(List<String> lottoNumbers) {
         return lottoNumbers.stream()
             .map(lottoNumber -> LottoNumber.valueOf(lottoNumber))
             .collect(collectingAndThen(toSet(), LottoNumbers::new));
+    }
+
+    private static void validateDuplication(List<String> lottoNumbers) {
+        if (lottoNumbers.stream().distinct().count() != lottoNumbers.size()) {
+            throw new IllegalArgumentException("로또 넘버에 중복이 있습니다.");
+        }
     }
 
     private static void validateLottoNumberCount(Set<LottoNumber> lottoNumbers) {
