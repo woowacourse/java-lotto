@@ -3,10 +3,10 @@ package lotto.controller;
 import java.util.List;
 import java.util.Scanner;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
-import lotto.domain.WinningBoard;
 import lotto.domain.WinningLotto;
 import lotto.domain.ticketFactory.FixedNumbersGenerator;
 import lotto.domain.ticketFactory.TicketFactory;
@@ -22,8 +22,8 @@ public class LottoController {
     private Money money;
     private LottoTickets lottoTickets;
 
-    public LottoController(final Scanner scanner) {
-        inputView = new InputView(scanner);
+    public LottoController() {
+        inputView = new InputView();
         ticketFactory = new TicketFactory();
     }
 
@@ -75,7 +75,7 @@ public class LottoController {
 
     private void showResult(WinningLotto winningLotto) {
         List<Integer> hitCounts = lottoTickets.checkHitCount(winningLotto);
-        int totalReward = WinningBoard.calculateTotalReward(hitCounts);
+        int totalReward = LottoResult.calculateTotalReward(hitCounts);
 
         OutputView.printWinningResultTitle();
         OutputView.printProfit(money.calculateProfit(totalReward),hitCounts);
