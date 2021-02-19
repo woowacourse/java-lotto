@@ -41,7 +41,6 @@ public enum RankFactory {
     private static boolean rankConditionFilter(RankFactory rankFactory,
                                                int matchedNumber,
                                                boolean hasBonusNumber) {
-        return rankFactory.hasBonusNumber && hasBonusNumber && rankFactory.matchedNumber == matchedNumber ||
-                !rankFactory.hasBonusNumber && rankFactory.matchedNumber == matchedNumber;
+        return rankFactory.matchedNumber == matchedNumber && (!rankFactory.hasBonusNumber || hasBonusNumber);
     }
 }

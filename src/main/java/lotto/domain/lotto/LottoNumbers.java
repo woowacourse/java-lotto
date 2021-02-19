@@ -34,11 +34,15 @@ public class LottoNumbers {
     }
 
     public int getMatchCount(LottoNumbers lottoNumbers) {
-        return (int) this.lottoNumbers.stream().filter(lottoNumbers::contains).count();
+        return (int) this.lottoNumbers.stream()
+                .filter(lottoNumbers::contains)
+                .count();
     }
 
     public List<Integer> toIntegerList() {
-        return lottoNumbers.stream().map(LottoNumber::getValueAsInt).collect(toList());
+        return lottoNumbers.stream()
+                .map(LottoNumber::getValueAsInt)
+                .collect(toList());
     }
 
     public boolean contains(LottoNumber lottoNumber) {

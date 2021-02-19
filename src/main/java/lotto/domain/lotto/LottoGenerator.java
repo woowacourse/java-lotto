@@ -3,9 +3,12 @@ package lotto.domain.lotto;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Stream;
 
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.Number;
+
+import static java.util.stream.Collectors.toList;
 
 public class LottoGenerator {
 
@@ -26,19 +29,19 @@ public class LottoGenerator {
     }
 
     public LottoGroup generateLottos(int count) {
-        List<LottoNumbers> lottos = new ArrayList();
-
-        for (int i = 0; i < count; i++) {
-            LottoNumbers lottoNumbers = new LottoNumbers(generateRandomLottoNumber());
-            lottos.add(lottoNumbers);
-        }
-
-        return new LottoGroup(lottos);
+        return new LottoGroup(
+                Stream.generate(this::generateRandomLottoNumber)
+                        .limit(count)
+                        .map(LottoNumbers::new)
+                        .collect(toList())
+        );
     }
 
     private List<LottoNumber> generateRandomLottoNumber() {
         Collections.shuffle(lottoNumbers);
 
-        return new ArrayList<>(lottoNumbers.subList(0, LOTTO_COUNT_MAXIMUM));
+        return lottoNumbers.stream()
+                .limit(LOTTO_COUNT_MAXIMUM)
+                .collect(toList());
     }
 }
