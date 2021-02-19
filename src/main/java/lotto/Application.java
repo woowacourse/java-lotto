@@ -1,7 +1,6 @@
 package lotto;
 
 import lotto.controller.LottoController;
-import lotto.view.Screen;
 
 public class Application {
 

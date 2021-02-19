@@ -5,8 +5,8 @@ import lotto.domain.LottoTickets;
 import lotto.domain.Payment;
 import lotto.domain.WinningLotto;
 import lotto.exception.IllegalTypeException;
+import lotto.view.InputView;
 import lotto.view.OutputView;
-import lotto.view.Screen;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,7 +19,7 @@ public class LottoController {
 
     public void run() {
         try {
-            Payment payment = new Payment(Integer.parseInt(Screen.getInputMoney()));
+            Payment payment = new Payment(Integer.parseInt(InputView.inputMoney()));
             LottoTickets lottoTickets = new LottoTickets(payment.count());
             showLottoTickets(payment, lottoTickets);
             WinningLotto winningLotto = createWinningLotto();
@@ -31,12 +31,12 @@ public class LottoController {
     }
 
     private WinningLotto createWinningLotto() {
-        String values = Screen.getLottoNumbers().replaceAll(REGEX_WITH_SPACE, REGEX);
+        String values = InputView.lottoNumber().replaceAll(REGEX_WITH_SPACE, REGEX);
         List<Integer> numbers = Arrays.stream(values.split(REGEX))
             .mapToInt(Integer::parseInt)
             .boxed()
             .collect(Collectors.toList());
-        int bonusNumber = Integer.parseInt(Screen.getBonusBallNumber());
+        int bonusNumber = Integer.parseInt(InputView.bonusNumber());
 
         return new WinningLotto(numbers, bonusNumber);
     }
