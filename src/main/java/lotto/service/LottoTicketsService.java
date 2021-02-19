@@ -1,8 +1,8 @@
 package lotto.service;
 
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
-import lotto.domain.Money;
+import lotto.domain.lottoticket.LottoTicket;
+import lotto.domain.lottoticket.LottoTickets;
+import lotto.domain.money.Money;
 
 import java.util.ArrayList;
 import java.util.List;

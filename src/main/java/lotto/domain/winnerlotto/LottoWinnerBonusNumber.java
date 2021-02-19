@@ -1,4 +1,7 @@
-package lotto.domain;
+package lotto.domain.winnerlotto;
+
+import lotto.domain.number.LottoNumber;
+import lotto.domain.winnerlotto.LottoWinnerTicket;
 
 public class LottoWinnerBonusNumber extends LottoNumber {
 

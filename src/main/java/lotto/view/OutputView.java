@@ -1,6 +1,11 @@
 package lotto.view;
 
 import lotto.domain.*;
+import lotto.domain.winnerlotto.rank.LottoRank;
+import lotto.domain.lottoticket.LottoTicket;
+import lotto.domain.lottoticket.LottoTickets;
+import lotto.domain.money.Money;
+import lotto.domain.number.LottoNumber;
 
 import java.util.Map;
 import java.util.stream.Collectors;
