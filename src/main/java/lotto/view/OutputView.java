@@ -19,8 +19,16 @@ public class OutputView {
         System.out.println("구매금액을 입력해 주세요.");
     }
 
-    public static void printBuyLottoCountMessage(final int value) {
-        System.out.printf("%s개를 구매했습니다.%n", value);
+    public static void printInputManualLottoCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+    }
+
+    public static void printInputLottoNumbers() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+    }
+
+    public static void printBuyLottoCountMessage(final int manual, final int auto) {
+        System.out.printf("수동으로 %s개, 자동으로 %s를 구매했습니다.%n", manual, auto);
     }
 
     public static void printLottoNumbersMessage() {
@@ -36,7 +44,7 @@ public class OutputView {
                 .map(String::valueOf)
                 .collect(Collectors.joining(DELIMITER));
 
-        System.out.printf("%s %s %s%n", DELIMITER_HEAD, numbers, DELIMITER_TAIL);
+        System.out.printf("%s%s%s%n", DELIMITER_HEAD, numbers, DELIMITER_TAIL);
     }
 
     public static void printNewLineMessage() {

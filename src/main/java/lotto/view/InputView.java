@@ -14,12 +14,21 @@ public class InputView {
         return SCANNER.nextLine();
     }
 
-    public static String lottoNumber() {
+    public static String inputManualLottoCount() {
+        OutputView.printInputManualLottoCount();
+        return SCANNER.nextLine();
+    }
+
+    public static String inputLottoNumbers() {
+        return SCANNER.nextLine();
+    }
+
+    public static String inputWinningLottoNumbers() {
         OutputView.printLottoNumbersMessage();
         return SCANNER.nextLine();
     }
 
-    public static String bonusNumber() {
+    public static String inputBonusNumber() {
         OutputView.printInputBonusBallMessage();
 
         String input = SCANNER.nextLine();
