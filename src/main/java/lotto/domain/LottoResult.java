@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoResult {
@@ -10,8 +11,8 @@ public class LottoResult {
         this.lottoResults = new ArrayList<>(lottoResults);
     }
 
-    public double calculateProfitRate(Money money) {
-        return Prize.calculatePrizeMoneySum(lottoResults, money);
+    public double calculateProfitRate() {
+        return Prize.calculatePrizeMoneySum(lottoResults);
     }
 
     public int getCountPerPrizeType(Prize prize) {

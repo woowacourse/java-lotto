@@ -34,14 +34,14 @@ public enum Prize {
         return matchCount == BONUS_CHECK_PIVOT;
     }
 
-    public static double calculatePrizeMoneySum(List<Prize> lottoResults, Money money) {
-        Money moneySum = Money.ZERO;
+    public static double calculatePrizeMoneySum(List<Prize> lottoResults) {
+        Money profit = Money.ZERO;
         for (Prize prize : Prize.values()) {
-            Money perPrizeMoneySum = prize.prizeMoney
+            Money perPrizeProfitSum = prize.prizeMoney
                     .multiple(getCountByPrizeType(lottoResults, prize));
-            moneySum = moneySum.plus(perPrizeMoneySum);
+            profit = profit.plus(perPrizeProfitSum);
         }
-        return moneySum.getRate(money);
+        return profit.getProfitRate(lottoResults.size());
     }
 
     public static int getCountByPrizeType(List<Prize> lottoResults, Prize prize) {

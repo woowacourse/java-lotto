@@ -6,8 +6,8 @@ import java.util.List;
 
 import static lotto.domain.LottoNumber.MAX_LOTTO_NUMBER;
 import static lotto.domain.LottoNumber.MIN_LOTTO_NUMBER;
-import static lotto.domain.LottoTicket.LOTTO_PRICE;
 import static lotto.domain.LottoTicket.LOTTO_TICKET_SIZE;
+import static lotto.domain.Money.LOTTO_PRICE;
 
 public class LottoTicketFactory {
     public static final int START_INDEX = 0;

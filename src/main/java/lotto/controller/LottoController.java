@@ -14,11 +14,11 @@ public class LottoController {
     }
 
     public void run() {
-        Money purchaseMoney = new Money(InputView.inputMoney());
-        LottoTickets lottoTickets = lottoTicketFactory.buyLottoTickets(purchaseMoney);
+        Money inputMoney = new Money(InputView.inputMoney());
+        LottoTickets lottoTickets = lottoTicketFactory.buyLottoTickets(inputMoney);
         LottoTicket winningTicket = getWinningTicket(lottoTickets);
         LottoResult lottoResult = getLottoResult(lottoTickets, winningTicket);
-        showResult(lottoResult, purchaseMoney);
+        showResult(lottoResult);
     }
 
     private LottoTicket getWinningTicket(LottoTickets lottoTickets) {
@@ -36,8 +36,8 @@ public class LottoController {
         return new LottoResult(lottoTickets.checkPrizesByWinningTickets(winningLotto));
     }
 
-    private void showResult(LottoResult lottoResult, Money money) {
+    private void showResult(LottoResult lottoResult) {
         OutputView.printResultStatistic(lottoResult);
-        OutputView.printProfitRate(lottoResult, money);
+        OutputView.printProfitRate(lottoResult.calculateProfitRate());
     }
 }
