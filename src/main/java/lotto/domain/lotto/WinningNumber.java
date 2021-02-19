@@ -20,8 +20,8 @@ public class WinningNumber {
     public WinningNumber(String lottoNumber, String bonusNumber) {
         LottoNumbers extractedLottoNumbers =
                 getLottoNumbersFromStringLottoNumberList(getSplitLottoNumber(lottoNumber));
-
         validateBonusNumberFormat(bonusNumber);
+
         LottoNumber extractedBonusNumber = new LottoNumber(new Number(bonusNumber));
         validateDuplicateBonusNumberWithLottoNumbers(extractedLottoNumbers, extractedBonusNumber);
 
