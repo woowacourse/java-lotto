@@ -32,21 +32,11 @@ public enum Reword {
     public static Reword valueOf(final int hitCount, final boolean isHitBonus) {
         validateHitCount(hitCount);
 
-        if (hitCount == SECOND.hitCount) {
-            return checkBonusReword(isHitBonus);
-        }
-
         return Arrays.stream(values())
-            .filter(reword -> reword.matchHitCount(hitCount))
-            .findFirst()
-            .orElse(Reword.NONE);
-    }
-
-    private static Reword checkBonusReword(final boolean isHitBonus) {
-        if (isHitBonus) {
-            return Reword.SECOND;
-        }
-        return Reword.THIRD;
+                .filter(reword -> reword.matchHitCount(hitCount))
+                .filter(reword -> reword != Reword.THIRD || !isHitBonus)
+                .findFirst()
+                .orElse(Reword.NONE);
     }
 
     private boolean matchHitCount(final int hitCount) {
