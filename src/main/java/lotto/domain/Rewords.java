@@ -39,10 +39,14 @@ public class Rewords {
         long profit = EMPTY;
 
         for (Reword key : rewords.keySet()) {
-            profit += (long) key.getWinningMoney() * rewords.get(key);
+            profit += multiply(key.getWinningMoney(), rewords.get(key));
         }
 
         return divide(money, profit);
+    }
+
+    private long multiply(final int winningMoney, final int count) {
+        return (long) winningMoney * count;
     }
 
     private double divide(final long money, final long winningMoney) {
