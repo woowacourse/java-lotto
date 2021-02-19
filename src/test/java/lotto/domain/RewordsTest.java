@@ -3,6 +3,9 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
+
+import lotto.domain.reword.Reword;
+import lotto.domain.reword.Rewords;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

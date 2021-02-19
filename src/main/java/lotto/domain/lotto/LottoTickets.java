@@ -1,5 +1,7 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
+import lotto.domain.reword.Reword;
+import lotto.domain.reword.Rewords;
 import lotto.utils.RandomUtils;
 
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Rewords;
+import lotto.domain.reword.Rewords;
 
 import java.util.List;
 import java.util.stream.Collectors;

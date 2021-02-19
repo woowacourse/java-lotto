@@ -1,5 +1,6 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
+import lotto.domain.Payment;
 import lotto.exception.LowBalanceException;
 
 import java.util.Objects;

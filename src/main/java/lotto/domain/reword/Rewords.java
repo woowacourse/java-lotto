@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.reword;
 
 import java.util.Collections;
 import java.util.EnumMap;

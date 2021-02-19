@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.lotto.LottoCount;
 import lotto.exception.LowBalanceException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

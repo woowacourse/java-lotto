@@ -1,5 +1,6 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
+import lotto.domain.reword.Reword;
 import lotto.exception.DuplicateLottoNumberException;
 
 import java.util.List;

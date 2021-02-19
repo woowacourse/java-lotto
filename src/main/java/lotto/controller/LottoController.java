@@ -1,6 +1,12 @@
 package lotto.controller;
 
 import lotto.domain.*;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoCount;
+import lotto.domain.lotto.LottoTickets;
+import lotto.domain.lotto.WinningLotto;
+import lotto.domain.reword.Reword;
+import lotto.domain.reword.Rewords;
 import lotto.exception.IllegalTypeException;
 import lotto.view.InputView;
 import lotto.view.OutputView;
