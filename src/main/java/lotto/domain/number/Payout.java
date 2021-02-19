@@ -7,7 +7,7 @@ public class Payout {
     private final int amount;
 
     private Payout(int amount) {
-        validateNegative(amount);
+        validatePositive(amount);
         this.amount = amount;
     }
 
@@ -23,7 +23,7 @@ public class Payout {
         }
     }
 
-    private static void validateNegative(int amount) {
+    private static void validatePositive(int amount) {
         if (amount <= PRICE_MINIMUM) {
             throw new IllegalArgumentException("입력값이 양수가 아닙니다.");
         }

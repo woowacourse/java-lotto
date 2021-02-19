@@ -2,12 +2,14 @@ package lotto.domain.lotto;
 
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toSet;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 import lotto.domain.number.LottoNumber;
 
 public class LottoNumbers {
@@ -22,29 +24,28 @@ public class LottoNumbers {
         this.lottoNumbers = new HashSet<>(lottoNumbers);
     }
 
-    public static LottoNumbers valueOf(List<LottoNumber> lottoNumbers) {
-        validateDuplication(lottoNumbers);
-        return new LottoNumbers(new HashSet<>(lottoNumbers));
-    }
-
     public static LottoNumbers valueOf(String unparsedLottoNumbers) {
-        return getLottoNumbersFromStringList(splitLottoNumber(unparsedLottoNumbers));
+        List<String> parsedLottoNumbers = splitLottoNumber(unparsedLottoNumbers);
+        validateDuplication(parsedLottoNumbers);
+        return getLottoNumbersFromParsedNumbers(parsedLottoNumbers);
     }
 
     private static List<String> splitLottoNumber(String lottoNumber) {
-        return Arrays.asList(lottoNumber.split(LOTTO_NUMBER_SEPARATOR, -1));
+        return Arrays.stream(lottoNumber.split(LOTTO_NUMBER_SEPARATOR, -1))
+            .map(String::trim)
+            .collect(Collectors.toList());
     }
 
-    private static LottoNumbers getLottoNumbersFromStringList(List<String> lottoNumbers) {
-        return lottoNumbers.stream()
-            .map(lottoNumber -> LottoNumber.valueOf(lottoNumber.trim()))
-            .collect(collectingAndThen(toList(), LottoNumbers::valueOf));
-    }
-
-    private static void validateDuplication(List<LottoNumber> lottoNumbers) {
+    private static void validateDuplication(List<String> lottoNumbers) {
         if (lottoNumbers.stream().distinct().count() != lottoNumbers.size()) {
             throw new IllegalArgumentException("로또 넘버에 중복이 있습니다.");
         }
+    }
+
+    private static LottoNumbers getLottoNumbersFromParsedNumbers(List<String> lottoNumbers) {
+        return lottoNumbers.stream()
+            .map(lottoNumber -> LottoNumber.valueOf(lottoNumber))
+            .collect(collectingAndThen(toSet(), LottoNumbers::new));
     }
 
     private static void validateLottoNumberCount(Set<LottoNumber> lottoNumbers) {
@@ -66,6 +67,7 @@ public class LottoNumbers {
     public List<Integer> unwrap() {
         return lottoNumbers.stream()
             .map(LottoNumber::unwrap)
+            .sorted()
             .collect(toList());
     }
 
