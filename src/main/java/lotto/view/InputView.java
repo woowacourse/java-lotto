@@ -29,12 +29,10 @@ public class InputView {
                 .collect(Collectors.toList());
     }
 
-    public static int bonusNumber(List<Integer> numbers) {
+    public static String bonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요");
-        String bonusNum = scanner.nextLine();
-        validateBounus(numbers, bonusNum);
 
-        return Integer.parseInt(bonusNum);
+        return scanner.nextLine();
     }
 
     private static void validateCheck(String[] numbers) {
