@@ -11,8 +11,8 @@ import lottogame.domain.ticket.LottoTickets;
 
 public class OutputView {
 
-    public static final String TICKETS_COUNT_MSG = "개를 구매했습니다.";
-    public static final String AMOUNT_YIELD_FORMAT = "총 수익률은 %.2f입니다.";
+    private static final String TICKETS_COUNT_MSG = "개를 구매했습니다.";
+    private static final String AMOUNT_YIELD_FORMAT = "총 수익률은 %.2f입니다.";
 
     public static void printLottoTickets(final LottoTickets lottoTickets) {
         System.out.println(lottoTickets.getTicketsCount() + TICKETS_COUNT_MSG);
@@ -22,7 +22,7 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printLottoNumbers(final LottoTicket lottoTicket) {
+    private static void printLottoNumbers(final LottoTicket lottoTicket) {
         List<String> lottoNumbers = lottoTicket.getLottoNumbers()
             .stream()
             .map(lottoNumber -> Integer.toString(lottoNumber.getValue()))
