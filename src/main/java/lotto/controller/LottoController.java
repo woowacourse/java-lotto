@@ -55,8 +55,7 @@ public class LottoController {
     private LottoWinnerBonusNumber initLottoWinnerBonusNumber(LottoWinnerTicket lottoWinnerTicket) {
         OutputView.askWinnerBonusNumber();
         try {
-
-            return new LottoWinnerBonusNumber(Integer.parseInt(InputView.getUserInput()));
+            return new LottoWinnerBonusNumber(Integer.parseInt(InputView.getUserInput()), lottoWinnerTicket);
         } catch (NullPointerException | IllegalArgumentException e) {
             OutputView.printErrorMessage(e);
             return initLottoWinnerBonusNumber(lottoWinnerTicket);

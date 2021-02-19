@@ -26,7 +26,7 @@ public class LottoResultStatisticsTest {
                 )
         );
 
-        LottoWinnerBonusNumber lottoWinnerBonusNumber = new LottoWinnerBonusNumber(7);
+        LottoWinnerBonusNumber lottoWinnerBonusNumber = new LottoWinnerBonusNumber(7, lottoWinnerTicket);
 
         lottoWinner = new LottoWinner(lottoWinnerTicket, lottoWinnerBonusNumber);
 

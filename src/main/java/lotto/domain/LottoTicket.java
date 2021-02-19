@@ -22,6 +22,10 @@ public class LottoTicket {
         return this.lottoNumbers.contains(lottoNumber);
     }
 
+    public boolean isContain(final int number) {
+        return this.lottoNumbers.contains(new LottoNumber(number));
+    }
+
     private void validateLottoTicket(final List<LottoNumber> lottoNumbers) {
         validateEmptyTicket(lottoNumbers);
         validateCount(lottoNumbers);
