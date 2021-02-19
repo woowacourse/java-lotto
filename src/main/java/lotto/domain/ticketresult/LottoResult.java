@@ -33,41 +33,38 @@ public class LottoResult {
         }
     }
 
-    public void applyOneTicketResult(LottoTicket purchasedOneLottoTicket) {
-        int countMatchedNumbers
-            = getOneLottoTicketNumbersMatchedCountResult(purchasedOneLottoTicket);
+    public void applyOneTicketResult(LottoTicket lottoTicket) {
+        int countMatchedNumbers = getOneLottoTicketNumbersMatchedCountResult(lottoTicket);
 
         if (countMatchedNumbers < MIN_MATCH_NUMBER_COUNT_TO_GET_PRIZE) {
             return;
         }
-        increaseOneCountOfLottoMatchType(countMatchedNumbers, purchasedOneLottoTicket);
+        increaseOneCountOfLottoMatchType(countMatchedNumbers, lottoTicket);
     }
 
-    private int getOneLottoTicketNumbersMatchedCountResult(LottoTicket purchasedOneLottoTicket) {
+    private int getOneLottoTicketNumbersMatchedCountResult(LottoTicket lottoTicket) {
         LottoTicket winningLottoTicket = winningLottoNumbers.getWinningTicket();
 
-        return (int) purchasedOneLottoTicket.getLottoTicketNumbers()
+        return (int) lottoTicket.getLottoTicketNumbers()
             .stream()
-            .filter(purchasedLottoNumber -> winningLottoTicket.getLottoTicketNumbers()
-                .contains(purchasedLottoNumber))
+            .filter(lottoNumber -> winningLottoTicket.getLottoTicketNumbers()
+                .contains(lottoNumber))
             .count();
     }
 
-    private void increaseOneCountOfLottoMatchType(int countMatchedNumbers,
-        LottoTicket purchasedOneLottoTicket) {
+    private void increaseOneCountOfLottoMatchType(int countMatchedNumbers, LottoTicket lottoTicket) {
 
-        List<LottoMatchType> lottoMatchTypes = LottoMatchType
-            .getLottoMatchType(countMatchedNumbers);
+        List<LottoMatchType> lottoMatchTypes = LottoMatchType.getLottoMatchType(countMatchedNumbers);
 
         if (lottoMatchTypes.size() == FIVE_MATCHED_SIZE) {
-            handleFiveMatchType(purchasedOneLottoTicket);
+            handleFiveMatchType(lottoTicket);
             return;
         }
         handleOtherMatchTypes(lottoMatchTypes);
     }
 
-    private void handleFiveMatchType(LottoTicket purchasedOneLottoTicket) {
-        if (purchasedOneLottoTicket.hasBonusNumber(winningLottoNumbers.getBonusNumber())) {
+    private void handleFiveMatchType(LottoTicket lottoTicket) {
+        if (lottoTicket.hasBonusNumber(winningLottoNumbers.getBonusNumber())) {
             Integer currentMatchedNumbersCount = resultCounts.get(FIVE_AND_BONUS_MATCH);
             resultCounts.put(FIVE_AND_BONUS_MATCH, currentMatchedNumbersCount + 1);
             totalLottoWinningMoney += FIVE_AND_BONUS_MATCH.getPrizeMoney();
