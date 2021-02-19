@@ -5,9 +5,9 @@ import java.util.List;
 
 public enum WinningResult {
     FAILED(0, 0, ""),
-    FIFTH_PRIZE(3, 5000, "3개 일치"),
-    FOURTH_PRIZE(4, 50000, "4개 일치"),
-    THIRD_PRIZE(5, 1500000, "5개 일치"),
+    FIFTH_PRIZE(3, 5_000, "3개 일치"),
+    FOURTH_PRIZE(4, 50_000, "4개 일치"),
+    THIRD_PRIZE(5, 1_500_000, "5개 일치"),
     SECOND_PRIZE(6, 30_000_000, "5개 일치, 보너스 볼 일치"),
     FIRST_PRIZE(7, 2_000_000_000, "6개 일치");
 
