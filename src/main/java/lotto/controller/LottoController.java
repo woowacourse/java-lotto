@@ -1,7 +1,5 @@
 package lotto.controller;
 
-import java.util.List;
-import java.util.Scanner;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
@@ -18,6 +16,7 @@ public class LottoController {
 
     private final InputView inputView;
     private final TicketFactory ticketFactory;
+    private final LottoResult lottoResult;
 
     private Money money;
     private LottoTickets lottoTickets;
@@ -25,6 +24,7 @@ public class LottoController {
     public LottoController() {
         inputView = new InputView();
         ticketFactory = new TicketFactory();
+        lottoResult = new LottoResult();
     }
 
     public void run() {
@@ -74,10 +74,9 @@ public class LottoController {
     }
 
     private void showResult(WinningLotto winningLotto) {
-        List<Integer> hitCounts = lottoTickets.checkHitCount(winningLotto);
-        int totalReward = LottoResult.calculateTotalReward(hitCounts);
+        lottoResult.checkWinnings(lottoTickets,winningLotto);
 
         OutputView.printWinningResultTitle();
-        OutputView.printProfit(money.calculateProfit(totalReward),hitCounts);
+        OutputView.printProfit(money.calculateProfit(lottoResult.calculateTotalReward()),lottoResult.getResults());
     }
 }

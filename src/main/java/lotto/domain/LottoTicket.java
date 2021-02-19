@@ -6,30 +6,13 @@ import java.util.Set;
 
 public class LottoTicket {
 
-
-    private static final int CHECK_HIT_COUNT_HAS_BONUS = 5;
-    private static final int SECOND = 6;
-    private static final int FIRST = 7;
-
     private final Set<LottoNumber> lottoNumbers;
 
     public LottoTicket(final Set<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public int compareNumbers(WinningLotto winningLotto) {
-        int hits = countHits(winningLotto.getNumbers());
-
-        if (hits == CHECK_HIT_COUNT_HAS_BONUS && winningLotto.hasBonus(this)) {
-            return SECOND;
-        }
-        if (hits == SECOND) {
-            return FIRST;
-        }
-        return hits;
-    }
-
-    private int countHits(LottoTicket winningTicket) {
+    public int countHits(LottoTicket winningTicket) {
         Set<LottoNumber> hitLottoNumbers = new HashSet<>(lottoNumbers);
         hitLottoNumbers.retainAll(winningTicket.lottoNumbers);
         return hitLottoNumbers.size();
