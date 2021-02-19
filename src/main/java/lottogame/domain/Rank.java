@@ -16,7 +16,8 @@ public enum Rank {
     private final int price;
     private final String messageFormat;
 
-    Rank(final int matchCount, final boolean isBonusMatch, final int price, final String messageFormat) {
+    Rank(final int matchCount, final boolean isBonusMatch, final int price,
+        final String messageFormat) {
         this.matchCount = matchCount;
         this.isBonusMatch = isBonusMatch;
         this.price = price;
@@ -32,14 +33,10 @@ public enum Rank {
     }
 
     public int getPrice() {
-        return price;
-    }
-
-    public int getMatchCount() {
-        return matchCount;
+        return this.price;
     }
 
     public String getMessageFormat() {
-        return messageFormat;
+        return this.messageFormat;
     }
 }
