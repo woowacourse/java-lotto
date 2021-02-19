@@ -12,7 +12,8 @@ public class LottoMain {
     public static void main(String[] args) {
         LottoMachine lottoMachine = new LottoMachine();
         UserPurchase userPurchase = getUserPurchaseInput();
-        PurchasedLottoTickets purchasedLottoTickets = purchaseLottoTickets(lottoMachine, userPurchase);
+        PurchasedLottoTickets purchasedLottoTickets = lottoMachine.purchaseLottoTicket(userPurchase);
+        OutputView.printPurchasedLottoTickets(purchasedLottoTickets);
         WinningLottoNumbers winningLottoNumbers = getWinningLottoNumbersInput();
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers, userPurchase);
         OutputView.printResult(lottoComparator.getLottoResult(purchasedLottoTickets));
@@ -26,15 +27,6 @@ public class LottoMain {
             return getUserPurchaseInput();
         }
     }
-
-    private static PurchasedLottoTickets purchaseLottoTickets(LottoMachine lottoMachine,
-        UserPurchase userPurchase) {
-        PurchasedLottoTickets purchasedLottoTickets
-            = lottoMachine.purchaseLottoTicket(userPurchase);
-        OutputView.printPurchasedLottoTickets(purchasedLottoTickets);
-        return purchasedLottoTickets;
-    }
-
 
     private static WinningLottoNumbers getWinningLottoNumbersInput() {
         try {
