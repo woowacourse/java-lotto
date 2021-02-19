@@ -11,11 +11,15 @@ public class LottoResult {
         this.lottoResults = new ArrayList<>(lottoResults);
     }
 
+    public List<Prize> lottoResult() {
+        return Collections.unmodifiableList(lottoResults);
+    }
+
     public double calculateProfitRate() {
         return Prize.calculatePrizeMoneySum(lottoResults);
     }
 
     public int getCountPerPrizeType(Prize prize) {
-        return Prize.getCountByPrizeType(lottoResults,prize);
+        return Prize.getCountByPrizeType(lottoResults, prize);
     }
 }

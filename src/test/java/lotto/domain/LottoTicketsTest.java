@@ -15,7 +15,7 @@ class LottoTicketsTest {
     private LottoTickets lottoTickets;
     private List<LottoNumber> winningNumbers;
     private LottoNumber bonusBall;
-    private List<Prize> result;
+    private LottoResult lottoResult;
 
     @BeforeEach
     void init() {
@@ -46,13 +46,13 @@ class LottoTicketsTest {
                 new LottoNumber("7"));
 
         bonusBall = new LottoNumber("8");
-        result = lottoTickets.checkPrizesByWinningTickets(new WinningLotto(new LottoTicket(winningNumbers), bonusBall));
+        lottoResult = lottoTickets.checkPrizesByWinningTickets(new WinningLotto(new LottoTicket(winningNumbers), bonusBall));
     }
 
     @Test
     @DisplayName("당첨 티켓 분류")
     void checkWinningTicket() {
-        assertThat(result.get(0)).isEqualTo(Prize.FIRST_PRIZE);
-        assertThat(result.get(1)).isEqualTo(Prize.SECOND_PRIZE);
+        assertThat(lottoResult.lottoResult().get(0)).isEqualTo(Prize.FIRST_PRIZE);
+        assertThat(lottoResult.lottoResult().get(1)).isEqualTo(Prize.SECOND_PRIZE);
     }
 }

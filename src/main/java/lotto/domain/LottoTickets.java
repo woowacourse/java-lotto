@@ -15,12 +15,12 @@ public class LottoTickets {
         return Collections.unmodifiableList(lottoTickets);
     }
 
-    public List<Prize> checkPrizesByWinningTickets(WinningLotto winningLotto) {
+    public LottoResult checkPrizesByWinningTickets(WinningLotto winningLotto) {
         List<Prize> winningTickets = new ArrayList<>();
         for (LottoTicket lottoTicket : this.lottoTickets) {
             winningTickets.add(Prize.getPrizeType(lottoTicket.getMatchingCount(winningLotto.getWinningTicket().lottoTicket()),
                     lottoTicket.isMatchingBonusNumber(winningLotto.getBonusNumber())));
         }
-        return winningTickets;
+        return new LottoResult(winningTickets);
     }
 }
