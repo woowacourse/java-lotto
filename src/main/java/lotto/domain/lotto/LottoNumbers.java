@@ -1,9 +1,11 @@
 package lotto.domain.lotto;
 
+import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
 import java.util.List;
 import java.util.Objects;
+
 import lotto.domain.number.LottoNumber;
 
 public class LottoNumbers {
@@ -62,7 +64,8 @@ public class LottoNumbers {
 
     @Override
     public String toString() {
-        return String.join("-",
-            lottoNumbers.stream().map(LottoNumber::toString).collect(toList()));
+        return lottoNumbers.stream()
+                .map(LottoNumber::toString)
+                .collect(joining("-"));
     }
 }
