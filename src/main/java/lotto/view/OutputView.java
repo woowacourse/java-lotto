@@ -63,7 +63,7 @@ public class OutputView {
     private static void printStatisticsAccordingToBonus(Rank rank) {
         String format = STATISTICS_NONE_BONUS_FORMAT;
 
-        if (rank.getBonus()) {
+        if (rank.hasBonus()) {
             format = STATISTICS_BONUS_FORMAT;
         }
 

@@ -33,7 +33,7 @@ public class Rank {
         return matchingCount;
     }
 
-    public boolean getBonus() {
+    public boolean hasBonus() {
         return bonus;
     }
 
