@@ -5,6 +5,7 @@ import java.util.Objects;
 public class LottoNumber {
     public static final int MINIMUM = 1;
     public static final int MAXIMUM = 45;
+
     private final int number;
     private final boolean isBonusNumber;
 
