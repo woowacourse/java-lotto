@@ -17,22 +17,21 @@ public class LottoMachine {
         this.outputView = new OutputView();
     }
 
-    public void purchase() {
-        PayAmount payAmount = inputView.readPayAmount();
-
-        int payCount = payAmount.getPayCount();
-        outputView.printPurchasingLotto(payCount);
-
-        Lottos lottos = new Lottos();
-        lottos.makeLottos(payCount);
-        outputView.printLottos(lottos);
-
+    public Lottos purchase() {
+        int purchasedCount = inputView.readPaymentAmount().getPayCount();
+        Lottos lottos = new Lottos().makeLottos(purchasedCount);
+        outputView.printPurchasedLottos(purchasedCount, lottos);
+    
+        return lottos;
+    }
+    
+    public void seeResults(Lottos lottos) {
         List<Integer> lotto = inputView.readWinningLotto();
         LottoNumber bonusNumber = inputView.readBonusNumber();
-
+    
         WinningLotto winningLotto = WinningLotto.of(lotto, bonusNumber);
         LottoStatisticResult result = Rank.match(lottos, winningLotto);
-
-        outputView.printStatisticResult(result);
+    
+        outputView.printStatistics(result);
     }
 }
