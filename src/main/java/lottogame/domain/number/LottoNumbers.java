@@ -2,6 +2,7 @@ package lottogame.domain.number;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 public class LottoNumbers {
@@ -14,9 +15,20 @@ public class LottoNumbers {
 
     public LottoNumbers(final List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
+        validateDuplicate(this.lottoNumbers);
     }
 
+    private void validateDuplicate(final List<LottoNumber> lottoNumbers) {
+        if (new HashSet<>(lottoNumbers).size() != lottoNumbers.size()) {
+            throw new IllegalArgumentException("잘못된 당첨번호 입력입니다.");
+        }
+    }
+
+
     public void add(final LottoNumber lottoNumber) {
+        if (contains(lottoNumber)) {
+            throw new IllegalArgumentException("중복된 당첨번호가 존재합니다.");
+        }
         lottoNumbers.add(lottoNumber);
     }
 

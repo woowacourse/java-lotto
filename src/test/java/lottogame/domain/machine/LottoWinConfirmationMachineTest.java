@@ -10,9 +10,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LottoWinningMachineTest {
+public class LottoWinConfirmationMachineTest {
 
-    private LottoWinningMachine lottoWinningMachine;
+    private LottoWinConfirmationMachine lottoWinConfirmationMachine;
 
     @BeforeEach
     void setUp() {
@@ -23,7 +23,7 @@ public class LottoWinningMachineTest {
             winningNumbers.add(new LottoNumber(i + ""));
         }
 
-        lottoWinningMachine = new LottoWinningMachine(winningNumbers, bonusNumber);
+        lottoWinConfirmationMachine = new LottoWinConfirmationMachine(winningNumbers, bonusNumber);
     }
 
     @Test
@@ -41,8 +41,8 @@ public class LottoWinningMachineTest {
             }
         };
 
-        assertThat(lottoWinningMachine.countMatchedWinningNumber(lottoTicket)).isEqualTo(6);
-        assertThat(lottoWinningMachine.countMatchedWinningNumber(lottoTicket)).isNotEqualTo(5);
+        assertThat(lottoWinConfirmationMachine.countMatchedWinningNumber(lottoTicket)).isEqualTo(6);
+        assertThat(lottoWinConfirmationMachine.countMatchedWinningNumber(lottoTicket)).isNotEqualTo(5);
     }
 
     @Test
@@ -61,6 +61,6 @@ public class LottoWinningMachineTest {
             }
         };
 
-        assertThat(lottoWinningMachine.isMatchBonusNumber(lottoTicket)).isTrue();
+        assertThat(lottoWinConfirmationMachine.isMatchBonusNumber(lottoTicket)).isTrue();
     }
 }

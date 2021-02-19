@@ -4,14 +4,21 @@ import lottogame.domain.number.LottoNumber;
 import lottogame.domain.number.LottoNumbers;
 import lottogame.domain.ticket.LottoTicket;
 
-public class LottoWinningMachine {
+public class LottoWinConfirmationMachine {
 
     private final LottoNumbers winningNumbers;
     private final LottoNumber bonusNumber;
 
-    public LottoWinningMachine(final LottoNumbers winningNumbers, final LottoNumber bonusNumber) {
+    public LottoWinConfirmationMachine(final LottoNumbers winningNumbers, final LottoNumber bonusNumber) {
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
+        validateDuplicate(winningNumbers, bonusNumber);
+    }
+
+    private void validateDuplicate(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
+        if (winningNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 번호가 당첨번호와 중복됩니다.");
+        }
     }
 
     public int countMatchedWinningNumber(final LottoTicket lottoTicket) {
