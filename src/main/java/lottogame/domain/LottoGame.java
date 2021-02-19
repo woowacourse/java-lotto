@@ -54,10 +54,8 @@ public class LottoGame {
     }
 
     private List<LottoWinTicket> getWinningTickets() {
-        this.lottoWinConfirmationMachine = new LottoWinConfirmationMachine(drawnWinningNumbers,
-            drawnBonusNumber);
+        this.lottoWinConfirmationMachine = new LottoWinConfirmationMachine(drawnWinningNumbers, drawnBonusNumber);
         List<LottoWinTicket> lottoWinTickets = new ArrayList<>();
-
         for (LottoTicket lottoTicket : lottoTickets.toList()) {
             int matchedCount = this.lottoWinConfirmationMachine
                 .countMatchedWinningNumber(lottoTicket);

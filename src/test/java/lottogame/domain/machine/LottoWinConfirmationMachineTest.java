@@ -42,7 +42,8 @@ public class LottoWinConfirmationMachineTest {
         };
 
         assertThat(lottoWinConfirmationMachine.countMatchedWinningNumber(lottoTicket)).isEqualTo(6);
-        assertThat(lottoWinConfirmationMachine.countMatchedWinningNumber(lottoTicket)).isNotEqualTo(5);
+        assertThat(lottoWinConfirmationMachine.countMatchedWinningNumber(lottoTicket))
+            .isNotEqualTo(5);
     }
 
     @Test
