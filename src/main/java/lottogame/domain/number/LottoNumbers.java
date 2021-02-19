@@ -7,6 +7,7 @@ import java.util.List;
 
 public class LottoNumbers {
 
+    public static final int LOTTO_NUMBER_COUNT = 6;
     private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers() {
@@ -23,7 +24,6 @@ public class LottoNumbers {
             throw new IllegalArgumentException("잘못된 당첨번호 입력입니다.");
         }
     }
-
 
     public void add(final LottoNumber lottoNumber) {
         if (contains(lottoNumber)) {
