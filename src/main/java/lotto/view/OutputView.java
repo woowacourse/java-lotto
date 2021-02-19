@@ -12,10 +12,10 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void printPurchasedLottoTickets(LottoTickets purchasedLottoTickets) {
-        List<LottoTicket> lottoTickets = purchasedLottoTickets.getTickets();
-        OutputPrinter.printCompletedPurchaseGuideMessage(lottoTickets.size());
-        for (LottoTicket lottoTicket : lottoTickets) {
+    public static void printLottoTickets(LottoTickets lottoTickets) {
+        List<LottoTicket> allLottoTickets = lottoTickets.getTickets();
+        OutputPrinter.printCompletedPurchaseGuideMessage(allLottoTickets.size());
+        for (LottoTicket lottoTicket : allLottoTickets) {
             OutputPrinter.printLottoTicketNumbers(lottoTicket);
         }
         InputPrinter.printNewLine();

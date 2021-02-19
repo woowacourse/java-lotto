@@ -20,7 +20,7 @@ public class LottoGenerator {
         }
     }
 
-    public LottoTickets generatePurchasedTickets(UserPurchase userPurchase) {
+    public LottoTickets purchaseTickets(UserPurchase userPurchase) {
         LottoTickets purchasedLottoTickets = new LottoTickets();
         for (int i = 0; i < userPurchase.getNumberOfTickets(); i++) {
             Collections.shuffle(allNumbers);

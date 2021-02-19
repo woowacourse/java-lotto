@@ -12,8 +12,8 @@ public class LottoMain {
     public static void main(String[] args) {
         UserPurchase userPurchase = getUserPurchaseInput();
         LottoGenerator lottoGenerator = new LottoGenerator();
-        LottoTickets purchasedLottoTickets = lottoGenerator.generatePurchasedTickets(userPurchase);
-        OutputView.printPurchasedLottoTickets(purchasedLottoTickets);
+        LottoTickets purchasedLottoTickets = lottoGenerator.purchaseTickets(userPurchase);
+        OutputView.printLottoTickets(purchasedLottoTickets);
         WinningLottoNumbers winningLottoNumbers = getWinningLottoNumbersInput();
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers, userPurchase);
         OutputView.printResult(lottoComparator.getLottoResult(purchasedLottoTickets));
