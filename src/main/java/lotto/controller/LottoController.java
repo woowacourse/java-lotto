@@ -19,10 +19,10 @@ public class LottoController {
     public void run() {
         try {
             Payment payment = new Payment(Integer.parseInt(InputView.inputMoney()));
-            TicketCount ticketCount = new TicketCount(payment, Integer.parseInt(InputView.inputManualLottoCount()));
+            LottoCount lottoCount = new LottoCount(payment, Integer.parseInt(InputView.inputManualLottoCount()));
 
-            LottoTickets lottoTickets = new LottoTickets(ticketCount.auto(), createManualLotto(ticketCount.manual()));
-            showLottoTickets(ticketCount, lottoTickets);
+            LottoTickets lottoTickets = new LottoTickets(lottoCount.auto(), createManualLotto(lottoCount.manual()));
+            showLottoTickets(lottoCount, lottoTickets);
 
             WinningLotto winningLotto = createWinningLotto();
             showResult(lottoTickets, winningLotto, payment);
@@ -64,7 +64,7 @@ public class LottoController {
         return new WinningLotto(numbers, bonusNumber);
     }
 
-    private void showLottoTickets(TicketCount ticketCount, LottoTickets lottoTickets) {
+    private void showLottoTickets(LottoCount ticketCount, LottoTickets lottoTickets) {
         OutputView.printBuyLottoCountMessage(ticketCount.manual(), ticketCount.auto());
 
         for (Lotto lotto : lottoTickets.getLottoTickets()) {

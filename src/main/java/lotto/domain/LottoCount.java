@@ -4,12 +4,12 @@ import lotto.exception.LowBalanceException;
 
 import java.util.Objects;
 
-public class TicketCount {
+public class LottoCount {
 
     private final int manual;
     private final int auto;
 
-    public TicketCount(final Payment payment, final int count) {
+    public LottoCount(final Payment payment, final int count) {
         validate(payment, count);
         this.auto = payment.count() - count;
         this.manual = count;
@@ -33,7 +33,7 @@ public class TicketCount {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TicketCount that = (TicketCount) o;
+        LottoCount that = (LottoCount) o;
         return manual == that.manual && auto == that.auto;
     }
 
