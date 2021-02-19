@@ -16,19 +16,21 @@ public class OutputView {
     
     private static final String VIEW_OF_INCOME_RATE = "총 수익률은 %.2f입니다.";
     
-    private static final String VIEW_OF_LOTTO_STATISTICS_CONTENT = "%s%s%s";
+    private static final String VIEW_OF_LOTTO_STATISTICS_TITLE_FORMAT = "%s%s%s%s%s";
     
-    private static final String VIEW_OF_LOTTO_STATISTICS = "당첨 통계";
+    private static final String VIEW_OF_LOTTO_STATISTICS_TITLE = "당첨 통계";
     
     private static final String VIEW_OF_SEPARATOR = "---------";
     
+    private static final String NEW_LINE = System.lineSeparator();
+    
     public void printPurchaseLottos(int purchaseCount, Lottos lottos) {
-        printPurchaseCount(VIEW_OF_PURCHASE_COUNT, purchaseCount);
+        printPurchaseCount(purchaseCount);
         printPurchaseLottos(lottos);
     }
     
-    private void printPurchaseCount(String viewOfPurchaseCount, double purchasingLottoCount2) {
-        System.out.printf(viewOfPurchaseCount, purchasingLottoCount2);
+    private void printPurchaseCount(int purchaseCount) {
+        System.out.printf(VIEW_OF_PURCHASE_COUNT, purchaseCount);
     }
     
     private void printPurchaseLottos(Lottos lottos) {
@@ -48,15 +50,15 @@ public class OutputView {
     }
     
     private void printStatisticTitle() {
-        System.out.printf(VIEW_OF_LOTTO_STATISTICS_CONTENT, System.lineSeparator(), VIEW_OF_LOTTO_STATISTICS,
-                VIEW_OF_SEPARATOR);
+        System.out.printf(VIEW_OF_LOTTO_STATISTICS_TITLE_FORMAT, NEW_LINE, VIEW_OF_LOTTO_STATISTICS_TITLE, NEW_LINE,
+                VIEW_OF_SEPARATOR, NEW_LINE);
     }
     
     private void printStatisticContent(LottoStatisticResult result) {
         Arrays.stream(Rank.values())
               .sorted(RankComparator.INSTANCE)
               .forEach(rank -> System.out.printf(VIEW_OF_LOTTO_RESULT, rank.getMatchCount(), rank.getReward(),
-                      result.get(rank), System.lineSeparator()));
+                      result.get(rank), NEW_LINE));
     }
     
     private void printIncomeRate(double incomeRate) {
