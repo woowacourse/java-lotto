@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,9 +17,38 @@ public class RankFactoryTest {
         Arrays.stream(RankFactory.values()).forEach(
                 v -> {
                     Rank rank = RankFactory.createRanking(v, 1L);
-                    assertThat(v.isSameRank(rank.getRank())).isTrue();
+                    assertThat(
+                            Objects.equals(
+                                    v,
+                                    createRankFromRankFactoryViaIntegerRanking(rank.getRank())
+                            )
+                    ).isTrue();
                 }
         );
+    }
+
+    private RankFactory createRankFromRankFactoryViaIntegerRanking(int rank) {
+        if( rank == 1) {
+            return RankFactory.getRank(6, false);
+        }
+
+        if( rank == 2) {
+            return RankFactory.getRank(5, true);
+        }
+
+        if( rank == 3) {
+            return RankFactory.getRank(5, false);
+        }
+
+        if( rank == 4) {
+            return RankFactory.getRank(4, false);
+        }
+
+        if( rank == 5) {
+            return RankFactory.getRank(3, false);
+        }
+
+        return RankFactory.getRank(1, false);
     }
 
     @Test

@@ -13,20 +13,14 @@ public enum RankFactory {
     FIFTH(5, 3, false, 5000),
     FAIL(-1, -1, false, 0);
 
-    private final int rank;
     private final int matchedNumber;
     private final boolean hasBonusNumber;
     private final Function<Long, Rank> ranking;
 
     RankFactory(int rank, int matchedNumber, boolean hasBonusNumber, int winnings) {
-        this.rank = rank;
         this.matchedNumber = matchedNumber;
         this.hasBonusNumber = hasBonusNumber;
         this.ranking = count -> new Rank(rank, winnings, count, matchedNumber, hasBonusNumber);
-    }
-
-    public boolean isSameRank(int rank) {
-        return this.rank == rank;
     }
 
     public static Rank createRanking(RankFactory expectedRank, Long count) {
