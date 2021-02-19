@@ -11,10 +11,8 @@ import lotto.domain.ticketpurchase.UserPurchase;
 import lotto.type.LottoMatchType;
 
 public class LottoResult {
-    private static final int ZERO = 0;
     private static final int MIN_MATCH_NUMBER_COUNT_TO_GET_PRIZE = 3;
     private static final int FIVE_MATCHED_SIZE = 2;
-    private static final int ONE_COUNT = 1;
 
     private final WinningLottoNumbers winningLottoNumbers;
     private final Map<LottoMatchType, Integer> resultCounts;
@@ -31,7 +29,7 @@ public class LottoResult {
 
     private void initializeLottoCounts() {
         for (LottoMatchType lottoMatchType : LottoMatchType.values()) {
-            resultCounts.put(lottoMatchType, ZERO);
+            resultCounts.put(lottoMatchType, 0);
         }
     }
 
@@ -71,19 +69,19 @@ public class LottoResult {
     private void handleFiveMatchType(LottoTicket purchasedOneLottoTicket) {
         if (purchasedOneLottoTicket.hasBonusNumber(winningLottoNumbers.getBonusNumber())) {
             Integer currentMatchedNumbersCount = resultCounts.get(FIVE_AND_BONUS_MATCH);
-            resultCounts.put(FIVE_AND_BONUS_MATCH, currentMatchedNumbersCount + ONE_COUNT);
+            resultCounts.put(FIVE_AND_BONUS_MATCH, currentMatchedNumbersCount + 1);
             totalLottoWinningMoney += FIVE_AND_BONUS_MATCH.getPrizeMoney();
             return;
         }
         Integer currentMatchedNumbersCount = resultCounts.get(FIVE_MATCH);
-        resultCounts.put(FIVE_MATCH, currentMatchedNumbersCount + ONE_COUNT);
+        resultCounts.put(FIVE_MATCH, currentMatchedNumbersCount + 1);
         totalLottoWinningMoney += FIVE_MATCH.getPrizeMoney();
     }
 
     private void handleOtherMatchTypes(List<LottoMatchType> lottoMatchTypes) {
-        LottoMatchType lottoMatchType = lottoMatchTypes.get(ZERO);
+        LottoMatchType lottoMatchType = lottoMatchTypes.get(0);
         Integer currentMatchedNumbersCount = resultCounts.get(lottoMatchType);
-        resultCounts.put(lottoMatchType, currentMatchedNumbersCount + ONE_COUNT);
+        resultCounts.put(lottoMatchType, currentMatchedNumbersCount + 1);
         totalLottoWinningMoney += lottoMatchType.getPrizeMoney();
     }
 
