@@ -12,7 +12,7 @@ public class LottoTicket {
 
     private final List<LottoNumber> lottoNumbers;
 
-    public LottoTicket(List<LottoNumber> lottoNumbers) {
+    public LottoTicket(List<LottoNumber> lottoNumbers) throws IllegalArgumentException {
         validateSize(lottoNumbers);
         validateNotDuplicate(lottoNumbers);
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
@@ -27,13 +27,13 @@ public class LottoTicket {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    private void validateSize(List<LottoNumber> lottoNumbers) {
+    private void validateSize(List<LottoNumber> lottoNumbers) throws IllegalArgumentException {
         if (lottoNumbers.size() != SIZE) {
             throw new IllegalArgumentException("로또 번호 개수는 6개여야 합니다.");
         }
     }
 
-    private void validateNotDuplicate(List<LottoNumber> lottoNumbers) {
+    private void validateNotDuplicate(List<LottoNumber> lottoNumbers) throws IllegalArgumentException {
         Set<LottoNumber> lottoNumbersWithoutDuplication = new HashSet<>(lottoNumbers);
         if (lottoNumbersWithoutDuplication.size() != lottoNumbers.size()) {
             throw new IllegalArgumentException("로또 번호는 중복되지 않아야 합니다.");
