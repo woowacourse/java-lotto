@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 public class LottoNumber implements Comparable<LottoNumber> {
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 45;
-    public static final Pattern NUMBER_PATTERN = Pattern.compile("^[0-9]*$");
+    private static final Pattern NUMBER_PATTERN = Pattern.compile("^[0-9]*$");
 
     private final int value;
 
