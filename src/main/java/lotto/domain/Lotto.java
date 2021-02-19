@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.exception.DuplicateLottoNumberException;
+import lotto.exception.InvalidLottoNumberCountException;
 
 import java.util.HashSet;
 import java.util.List;
@@ -25,6 +26,10 @@ public class Lotto {
     }
 
     private void validateDuplicatedNumber(final List<Integer> values) {
+        if (values.size() != LOTTO_SIZE) {
+            throw new InvalidLottoNumberCountException();
+        }
+
         if (new HashSet<>(values).size() != LOTTO_SIZE) {
             throw new DuplicateLottoNumberException();
         }
