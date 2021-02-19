@@ -1,18 +1,16 @@
 package lotto.domain.ticketresult;
 
-import static lotto.type.LottoMatchType.FIVE_AND_BONUS_MATCH;
-import static lotto.type.LottoMatchType.FIVE_MATCH;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
+import lotto.domain.ticketpurchase.LottoTickets;
 import lotto.domain.ticketpurchase.UserPurchase;
 import lotto.type.LottoMatchType;
 
 public class LottoResult {
     private static final int MIN_MATCH_NUMBER_COUNT_TO_GET_PRIZE = 3;
-    private static final int FIVE_MATCHED_SIZE = 2;
 
     private final WinningTicketAndBonusNumber winningLottoNumbers;
     private final Map<LottoMatchType, Integer> resultCounts;
@@ -34,52 +32,28 @@ public class LottoResult {
     }
 
     public void applyOneTicketResult(LottoTicket lottoTicket) {
-        int countMatchedNumbers = getOneLottoTicketNumbersMatchedCountResult(lottoTicket);
-
-        if (countMatchedNumbers < MIN_MATCH_NUMBER_COUNT_TO_GET_PRIZE) {
+        List<LottoNumber> matchedLottoNumbers = getMatchedLottoNumbers(lottoTicket);
+        if (matchedLottoNumbers.size() < MIN_MATCH_NUMBER_COUNT_TO_GET_PRIZE) {
             return;
         }
-        increaseOneCountOfLottoMatchType(countMatchedNumbers, lottoTicket);
+        increaseOneCountOfLottoMatchType(matchedLottoNumbers);
     }
 
-    private int getOneLottoTicketNumbersMatchedCountResult(LottoTicket lottoTicket) {
-        LottoTicket winningLottoTicket = winningLottoNumbers.getWinningTicket();
-
-        return (int) lottoTicket.getLottoTicketNumbers()
-            .stream()
-            .filter(lottoNumber -> winningLottoTicket.getLottoTicketNumbers()
-                .contains(lottoNumber))
-            .count();
+    private List<LottoNumber> getMatchedLottoNumbers(LottoTicket lottoTicket) {
+        return winningLottoNumbers.getMatchedLottoNumbers(lottoTicket);
     }
 
-    private void increaseOneCountOfLottoMatchType(int countMatchedNumbers, LottoTicket lottoTicket) {
+    private void increaseOneCountOfLottoMatchType(List<LottoNumber> matchedLottoNumbersToGetPrize) {
+        LottoMatchType lottoMatchTypes
+            = LottoMatchType.getLottoMatchType(matchedLottoNumbersToGetPrize);
+        resultCounts.put(lottoMatchTypes, resultCounts.get(lottoMatchTypes) + 1);
+    }
 
-        List<LottoMatchType> lottoMatchTypes = LottoMatchType.getLottoMatchType(countMatchedNumbers);
-
-        if (lottoMatchTypes.size() == FIVE_MATCHED_SIZE) {
-            handleFiveMatchType(lottoTicket);
-            return;
+    public void addAllWinningMoney() {
+        for (LottoMatchType lottoMatchType : resultCounts.keySet()) {
+            int matchedCount = resultCounts.get(lottoMatchType);
+            totalLottoWinningMoney += lottoMatchType.getPrizeMoney() * matchedCount;
         }
-        handleOtherMatchTypes(lottoMatchTypes);
-    }
-
-    private void handleFiveMatchType(LottoTicket lottoTicket) {
-        if (lottoTicket.contains(winningLottoNumbers.getBonusNumber())) {
-            Integer currentMatchedNumbersCount = resultCounts.get(FIVE_AND_BONUS_MATCH);
-            resultCounts.put(FIVE_AND_BONUS_MATCH, currentMatchedNumbersCount + 1);
-            totalLottoWinningMoney += FIVE_AND_BONUS_MATCH.getPrizeMoney();
-            return;
-        }
-        Integer currentMatchedNumbersCount = resultCounts.get(FIVE_MATCH);
-        resultCounts.put(FIVE_MATCH, currentMatchedNumbersCount + 1);
-        totalLottoWinningMoney += FIVE_MATCH.getPrizeMoney();
-    }
-
-    private void handleOtherMatchTypes(List<LottoMatchType> lottoMatchTypes) {
-        LottoMatchType lottoMatchType = lottoMatchTypes.get(0);
-        Integer currentMatchedNumbersCount = resultCounts.get(lottoMatchType);
-        resultCounts.put(lottoMatchType, currentMatchedNumbersCount + 1);
-        totalLottoWinningMoney += lottoMatchType.getPrizeMoney();
     }
 
     public int getCountOfMatchedNumbersOfSpecificType(LottoMatchType lottoMatchType) {

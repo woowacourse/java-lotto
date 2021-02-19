@@ -17,7 +17,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LottoComparatorTest {
+public class LottoResultTest {
     private WinningTicketAndBonusNumber winningLottoNumbers;
     private static final int PURCHASE_PRICE = 10000;
     private final UserPurchase userPurchase = new UserPurchase(PURCHASE_PRICE);
@@ -34,7 +34,7 @@ public class LottoComparatorTest {
                 new LottoNumber(6)
             )
         );
-        LottoNumber bonusNumber = new LottoNumber(7);
+        LottoNumber bonusNumber = new LottoNumber(7, true);
         winningLottoNumbers = new WinningTicketAndBonusNumber(winnerTicket, bonusNumber);
     }
 
@@ -241,8 +241,7 @@ public class LottoComparatorTest {
 
         assertThat(lottoResult.getProfit())
             .isEqualTo(
-                ((double) FOUR_MATCH.getPrizeMoney() + (double) FIVE_AND_BONUS_MATCH
-                    .getPrizeMoney())
+                ((double) FOUR_MATCH.getPrizeMoney() + (double) FIVE_AND_BONUS_MATCH.getPrizeMoney())
                     / (double) PURCHASE_PRICE
             );
     }

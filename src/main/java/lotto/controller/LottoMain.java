@@ -12,11 +12,12 @@ public class LottoMain {
     public static void main(String[] args) {
         UserPurchase userPurchase = getUserPurchaseInput();
         LottoGenerator lottoGenerator = new LottoGenerator();
-        LottoTickets purchasedLottoTickets = lottoGenerator.purchaseTickets(userPurchase);
-        OutputView.printLottoTickets(purchasedLottoTickets);
+        LottoTickets lottoTickets = lottoGenerator.purchaseTickets(userPurchase);
+        OutputView.printLottoTickets(lottoTickets);
+
         WinningTicketAndBonusNumber winningLottoNumbers = getWinningLottoNumbersInput();
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers, userPurchase);
-        OutputView.printResult(lottoComparator.getLottoResult(purchasedLottoTickets));
+        OutputView.printResult(lottoComparator.getLottoResult(lottoTickets));
     }
 
     private static UserPurchase getUserPurchaseInput() {

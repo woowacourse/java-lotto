@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
     private static final int SIZE = 6;
@@ -38,5 +39,11 @@ public class LottoTicket {
         if (lottoNumbersWithoutDuplication.size() != lottoNumbers.size()) {
             throw new IllegalArgumentException("로또 번호는 중복되지 않아야 합니다.");
         }
+    }
+
+    public List<LottoNumber> getMatchedLottoNumbers(LottoTicket lottoTicket) {
+        return lottoTicket.getLottoTicketNumbers().stream()
+            .filter(this.lottoNumbers::contains)
+            .collect(Collectors.toList());
     }
 }

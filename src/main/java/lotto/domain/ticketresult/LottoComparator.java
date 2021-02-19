@@ -11,11 +11,11 @@ public class LottoComparator {
         this.lottoResult = new LottoResult(winningLottoNumbers, userPurchase);
     }
 
-    public LottoResult getLottoResult(
-        LottoTickets purchasedLottoTickets) {
-        for (LottoTicket purchasedOneLottoTicket : purchasedLottoTickets.getTickets()) {
-            lottoResult.applyOneTicketResult(purchasedOneLottoTicket);
+    public LottoResult getLottoResult(LottoTickets lottoTickets) {
+        for (LottoTicket lottoTicket : lottoTickets.getTickets()) {
+            lottoResult.applyOneTicketResult(lottoTicket);
         }
+        lottoResult.addAllWinningMoney();
         return lottoResult;
     }
 }

@@ -25,18 +25,18 @@ public class InputView {
         return new UserPurchase(purchasePrice);
     }
 
-    public static WinningTicketAndBonusNumber getWinningLottoNumbers() throws IllegalArgumentException {
-        List<LottoNumber> lottoNumbers = getWinningLottoNumbersInput();
-        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
-        LottoNumber bonusNumber = getBonusNumberInput();
-        return new WinningTicketAndBonusNumber(lottoTicket, bonusNumber);
-    }
-
     private static int validateNaturalNumber(String purchasePriceInput) throws IllegalArgumentException {
         if (!purchasePriceInput.matches(NUMERIC_REGULAR_EXPRESSION)) {
             throw new IllegalArgumentException("자연수를 입력해주세요.");
         }
         return Integer.parseInt(purchasePriceInput);
+    }
+
+    public static WinningTicketAndBonusNumber getWinningLottoNumbers() throws IllegalArgumentException {
+        List<LottoNumber> lottoNumbers = getWinningLottoNumbersInput();
+        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+        LottoNumber bonusNumber = getBonusNumberInput();
+        return new WinningTicketAndBonusNumber(lottoTicket, bonusNumber);
     }
 
     private static List<LottoNumber> getWinningLottoNumbersInput() throws IllegalArgumentException {
@@ -60,6 +60,6 @@ public class InputView {
         String bonusNumberInput = scanner.nextLine();
         int bonusNumber = validateNaturalNumber(bonusNumberInput);
         InputPrinter.printNewLine();
-        return new LottoNumber(bonusNumber);
+        return new LottoNumber(bonusNumber, true);
     }
 }
