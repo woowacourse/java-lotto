@@ -40,8 +40,7 @@ public class OutputView {
 
     private static void printWinningResult(Map<Rank, Integer> ranks) {
         for (Entry<Rank, Integer> rank : ranks.entrySet()) {
-            int rankCount = rank.getValue();
-            System.out.format(rank.getKey().getMessageFormat(), rankCount);
+            System.out.format(rank.getKey().getMessageFormat(), rank.getValue());
             System.out.println();
         }
     }
