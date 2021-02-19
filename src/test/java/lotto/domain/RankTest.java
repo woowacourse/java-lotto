@@ -43,7 +43,7 @@ public class RankTest {
         
         Lottos lottos = new Lottos(LOTTO_GROUP);
         
-        return Rank.searchRank(lottos, WINNING_LOTTO);
+        return lottos.retrieveResults(WINNING_LOTTO);
     }
     
     @ParameterizedTest
