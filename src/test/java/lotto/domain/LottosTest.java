@@ -1,27 +1,24 @@
 package lotto.domain;
 
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottosTest {
     
     @Test
+    @DisplayName("구매 로또 생성 테스트")
     void init() {
         // given
-        List<Lotto> lottos = new ArrayList<>();
-        lottos.add(Lotto.fromNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        lottos.add(Lotto.fromNumbers(Arrays.asList(7, 8, 9, 10, 11, 12)));
+        int purchaseCount = 10;
         
         // when
-        ThrowingCallable throwingCallable = () -> new Lottos(lottos);
+        Lottos lottos = Lottos.makeLottos(purchaseCount);
+        
         
         // then
-        assertThatCode(throwingCallable).doesNotThrowAnyException();
+        assertThat(lottos.toInts()
+                         .size()).isEqualTo(10);
     }
 }
