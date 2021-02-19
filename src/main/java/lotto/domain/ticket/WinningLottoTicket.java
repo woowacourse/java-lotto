@@ -6,12 +6,13 @@ import lotto.domain.number.LottoNumberFactory;
 
 import java.util.List;
 
-public class WinningLottoTicket extends LottoTicket {
+public class WinningLottoTicket {
     public static final String BONUS_DUPLICATE_WINNING_NUMBER = "보너스 번호가 당첨 번호와 중복되었습니다. 중복된 번호 : %d";
     private final LottoNumber bonusNumber;
+    private final LottoTicket winningLottoTicket;
 
     public WinningLottoTicket(List<Integer> winningNumber, int bonusNumber) {
-        super(winningNumber);
+        winningLottoTicket = new LottoTicket(winningNumber);
         validateDuplicatedBonusNumber(bonusNumber);
         this.bonusNumber = LottoNumberFactory.getInstance(bonusNumber);
     }
@@ -19,7 +20,7 @@ public class WinningLottoTicket extends LottoTicket {
     private void validateDuplicatedBonusNumber(int bonusNumber) {
         LottoNumber bonusLottoNumber = LottoNumberFactory.getInstance(bonusNumber);
 
-        boolean isDuplicated = this.list().stream()
+        boolean isDuplicated = winningLottoTicket.list().stream()
                 .anyMatch(winningNumber -> winningNumber.equals(bonusLottoNumber));
 
         if (isDuplicated) {
@@ -31,7 +32,7 @@ public class WinningLottoTicket extends LottoTicket {
 
     public Prize compareNumbers(LottoTicket lottoTicket) {
         long winningCount = lottoTicket.list().stream()
-                .filter(lottoNumber -> this.list().contains(lottoNumber))
+                .filter(lottoNumber -> winningLottoTicket.list().contains(lottoNumber))
                 .count();
 
         boolean isBonus = lottoTicket.list().stream()
