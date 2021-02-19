@@ -14,12 +14,12 @@ public class LottoResult {
     private static final int MIN_MATCH_NUMBER_COUNT_TO_GET_PRIZE = 3;
     private static final int FIVE_MATCHED_SIZE = 2;
 
-    private final WinningLottoNumbers winningLottoNumbers;
+    private final WinningTicketAndBonusNumber winningLottoNumbers;
     private final Map<LottoMatchType, Integer> resultCounts;
     private final int purchasePrice;
     private int totalLottoWinningMoney;
 
-    public LottoResult(WinningLottoNumbers winningLottoNumbers, UserPurchase userPurchase) {
+    public LottoResult(WinningTicketAndBonusNumber winningLottoNumbers, UserPurchase userPurchase) {
         this.winningLottoNumbers = winningLottoNumbers;
         this.resultCounts = new HashMap<>();
         initializeLottoCounts();
@@ -64,7 +64,7 @@ public class LottoResult {
     }
 
     private void handleFiveMatchType(LottoTicket lottoTicket) {
-        if (lottoTicket.hasBonusNumber(winningLottoNumbers.getBonusNumber())) {
+        if (lottoTicket.contains(winningLottoNumbers.getBonusNumber())) {
             Integer currentMatchedNumbersCount = resultCounts.get(FIVE_AND_BONUS_MATCH);
             resultCounts.put(FIVE_AND_BONUS_MATCH, currentMatchedNumbersCount + 1);
             totalLottoWinningMoney += FIVE_AND_BONUS_MATCH.getPrizeMoney();

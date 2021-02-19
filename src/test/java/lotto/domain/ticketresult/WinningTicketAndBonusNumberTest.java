@@ -9,7 +9,7 @@ import lotto.domain.LottoTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class WinningLottoNumbersTest {
+public class WinningTicketAndBonusNumberTest {
     private final LottoTicket lottoTicket = new LottoTicket(
         Arrays.asList(
             new LottoNumber(1),
@@ -26,16 +26,16 @@ public class WinningLottoNumbersTest {
     void Should_Not_ThrowException_When_ValidLottoNumbers() {
         LottoNumber bonusNumber = new LottoNumber(7);
         assertThatCode(
-            () -> new WinningLottoNumbers(lottoTicket, bonusNumber)
+            () -> new WinningTicketAndBonusNumber(lottoTicket, bonusNumber)
         ).doesNotThrowAnyException();
     }
 
     @DisplayName("당첨 번호에 보너스 번호 포함시 에러")
     @Test
-    void Should_ThrowException_When_LottoNumbersContainBonusNumber() {
+    void Should_ThrowException_When_WinningLottoNumbersContainBonusNumber() {
         LottoNumber bonusNumber = new LottoNumber(5);
         assertThatThrownBy(
-            () -> new WinningLottoNumbers(lottoTicket, bonusNumber)
+            () -> new WinningTicketAndBonusNumber(lottoTicket, bonusNumber)
         ).isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.ticketpurchase.UserPurchase;
-import lotto.domain.ticketresult.WinningLottoNumbers;
+import lotto.domain.ticketresult.WinningTicketAndBonusNumber;
 import lotto.view.printer.InputPrinter;
 
 public class InputView {
@@ -25,11 +25,11 @@ public class InputView {
         return new UserPurchase(purchasePrice);
     }
 
-    public static WinningLottoNumbers getWinningLottoNumbers() throws IllegalArgumentException {
+    public static WinningTicketAndBonusNumber getWinningLottoNumbers() throws IllegalArgumentException {
         List<LottoNumber> lottoNumbers = getWinningLottoNumbersInput();
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
         LottoNumber bonusNumber = getBonusNumberInput();
-        return new WinningLottoNumbers(lottoTicket, bonusNumber);
+        return new WinningTicketAndBonusNumber(lottoTicket, bonusNumber);
     }
 
     private static int validateNaturalNumber(String purchasePriceInput) throws IllegalArgumentException {
