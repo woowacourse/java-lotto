@@ -12,6 +12,9 @@ public class OutputView {
     private static final String DELIMITER_TAIL = "]";
     private static final String CONTOUR = "---------";
 
+    private OutputView() {
+    }
+
     public static void printInputMoneyMessage() {
         System.out.println("구매금액을 입력해 주세요.");
     }
