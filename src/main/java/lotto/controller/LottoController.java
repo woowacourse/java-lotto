@@ -4,7 +4,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoTickets;
 import lotto.domain.Payment;
 import lotto.domain.WinningLotto;
-import lotto.utils.ParserUtils;
+import lotto.exception.IllegalTypeException;
 import lotto.view.OutputView;
 import lotto.view.Screen;
 
@@ -14,35 +14,34 @@ import java.util.stream.Collectors;
 
 public class LottoController {
 
-    private static final String REGEX = ", ";
-
-    private final LottoTickets lottoTickets;
-    private final WinningLotto winningLotto;
-    private final Payment payment;
-
-    public LottoController(final String value) {
-        payment = new Payment(ParserUtils.tryParseInt(value));
-        lottoTickets = new LottoTickets(payment.count());
-        showLottoTickets();
-        winningLotto = createWinningLotto();
-    }
+    private static final String REGEX = ",";
+    private static final String REGEX_WITH_SPACE = ", ";
 
     public void run() {
-        OutputView.printResultMessage(lottoTickets.getResult(winningLotto), payment.getPayment());
+        try {
+            Payment payment = new Payment(Integer.parseInt(Screen.getInputMoney()));
+            LottoTickets lottoTickets = new LottoTickets(payment.count());
+            showLottoTickets(payment, lottoTickets);
+            WinningLotto winningLotto = createWinningLotto();
+            OutputView.printResultMessage(lottoTickets.getResult(winningLotto), payment.getPayment());
+        }
+        catch (NumberFormatException e) {
+            throw new IllegalTypeException();
+        }
     }
 
     private WinningLotto createWinningLotto() {
-        String values = Screen.getLottoNumbers();
+        String values = Screen.getLottoNumbers().replaceAll(REGEX_WITH_SPACE, REGEX);
         List<Integer> numbers = Arrays.stream(values.split(REGEX))
-            .mapToInt(ParserUtils::tryParseInt)
+            .mapToInt(Integer::parseInt)
             .boxed()
             .collect(Collectors.toList());
-        int bonusNumber = ParserUtils.tryParseInt(Screen.getBonusBallNumber());
+        int bonusNumber = Integer.parseInt(Screen.getBonusBallNumber());
 
         return new WinningLotto(numbers, bonusNumber);
     }
 
-    private void showLottoTickets() {
+    private void showLottoTickets(Payment payment, LottoTickets lottoTickets) {
         OutputView.printBuyLottoCountMessage(payment.count());
 
         for (Lotto lotto : lottoTickets.getLottoTickets()) {
