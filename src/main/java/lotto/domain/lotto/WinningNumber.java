@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.Number;
 import lotto.domain.number.PayOut;
@@ -19,7 +19,7 @@ public class WinningNumber {
 
     public WinningNumber(String lottoNumber, String bonusNumber) {
         LottoNumbers extractedLottoNumbers =
-            getLottoNumbersFromStringLottoNumberList(getSplitLottoNumber(lottoNumber));
+                getLottoNumbersFromStringLottoNumberList(getSplitLottoNumber(lottoNumber));
 
         validateBonusNumberFormat(bonusNumber);
         LottoNumber extractedBonusNumber = new LottoNumber(new Number(bonusNumber));
@@ -31,8 +31,8 @@ public class WinningNumber {
 
     private LottoNumbers getLottoNumbersFromStringLottoNumberList(List<String> lottoNumbers) {
         return new LottoNumbers(lottoNumbers.stream()
-            .map(lottoNumber -> new LottoNumber(new Number(lottoNumber.trim())))
-            .collect(Collectors.toList()));
+                .map(lottoNumber -> new LottoNumber(new Number(lottoNumber.trim())))
+                .collect(Collectors.toList()));
     }
 
     private List<String> getSplitLottoNumber(String lottoNumber) {
@@ -48,7 +48,7 @@ public class WinningNumber {
     }
 
     private void validateDuplicateBonusNumberWithLottoNumbers(LottoNumbers lottoNumbers,
-        LottoNumber bonusNumber) {
+                                                              LottoNumber bonusNumber) {
         if (lottoNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException("보너스 번호는 로또 번호와 달라야 합니다.");
         }
@@ -60,9 +60,9 @@ public class WinningNumber {
 
     public AnalysedLottos analysingLottos(LottoGroup lottoGroup, PayOut payOut) {
         Map<RankFactory, Long> rankAndCount = lottoGroup.getLottos().stream()
-            .map(this::getRank)
-            .filter(rank -> !rank.equals(RankFactory.FAIL))
-            .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+                .map(this::getRank)
+                .filter(rank -> !rank.equals(RankFactory.FAIL))
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
         Arrays.stream(RankFactory.values())
                 .filter(rank -> !rank.equals(RankFactory.FAIL) && !rankAndCount.containsKey(rank))
@@ -73,8 +73,8 @@ public class WinningNumber {
 
     private RankFactory getRank(LottoNumbers lottoNumbers) {
         return RankFactory.getRank(
-            this.lottoNumbers.getMatchCount(lottoNumbers),
-            lottoNumbers.contains(bonusNumber)
+                this.lottoNumbers.getMatchCount(lottoNumbers),
+                lottoNumbers.contains(bonusNumber)
         );
     }
 
