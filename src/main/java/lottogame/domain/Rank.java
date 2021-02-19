@@ -1,7 +1,7 @@
 package lottogame.domain;
 
 import java.util.Arrays;
-import lottogame.domain.ticket.LottoTicketResult;
+import lottogame.domain.ticket.LottoWinTicket;
 
 public enum Rank {
     FAIL(0, false, 0, "0개 일치 (0원)- %d개"),
@@ -24,10 +24,10 @@ public enum Rank {
         this.messageFormat = messageFormat;
     }
 
-    public static Rank getRank(LottoTicketResult lottoTicketResult) {
+    public static Rank getRank(LottoWinTicket lottoWinTicket) {
         return Arrays.stream(values())
-            .filter(rank -> rank.matchCount == lottoTicketResult.getMatchCount())
-            .filter(rank -> rank.isBonusMatch == lottoTicketResult.isBonusMatched())
+            .filter(rank -> lottoWinTicket.isSameMatchCount(rank.matchCount))
+            .filter(rank -> lottoWinTicket.isSameBonusMatch(rank.isBonusMatch))
             .findAny()
             .orElse(FAIL);
     }
