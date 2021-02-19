@@ -6,7 +6,7 @@ import lotto.domain.lottomachine.RandomLottoMachine;
 import lotto.domain.primitive.LottoNumber;
 import lotto.domain.primitive.Money;
 import lotto.domain.primitive.Ticket;
-import lotto.domain.rating.RatingInfo;
+import lotto.domain.rating.RatingCounter;
 import lotto.domain.statistics.LottoStatistics;
 import lotto.domain.statistics.WinningLotto;
 import lotto.view.InputView;
@@ -25,8 +25,8 @@ public class LottoController {
         OutputView.printLottoResults(lottoManager.buyLotto(ticket));
 
         WinningLotto winningLotto = buyWinningLotto();
-        RatingInfo ratingInfo = lottoManager.scratchLotto(winningLotto);
-        OutputView.printWinningStats(new LottoStatistics(ratingInfo), ticket.getPrice());
+        RatingCounter ratingCounter = lottoManager.scratchLotto(winningLotto);
+        OutputView.printWinningStats(new LottoStatistics(ratingCounter), ticket.getPrice());
     }
 
     public Ticket buyLotto() {

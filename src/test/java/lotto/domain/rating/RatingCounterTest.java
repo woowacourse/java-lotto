@@ -5,13 +5,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class RatingInfoTest {
+public class RatingCounterTest {
     @Test
     @DisplayName("등수 정보 업데이트")
     void updateRatingInfo() {
-        RatingInfo ratingInfo = new RatingInfo();
+        RatingCounter ratingCounter = new RatingCounter();
         Rating rating = Rating.FIRST;
-        ratingInfo.update(rating);
-        assertThat(ratingInfo.get(rating)).isEqualTo(1);
+        ratingCounter.update(rating);
+        assertThat(ratingCounter.get(rating)).isEqualTo(1);
     }
 }

@@ -6,7 +6,7 @@ import lotto.domain.primitive.LottoNumber;
 import lotto.domain.primitive.Money;
 import lotto.domain.primitive.Ticket;
 import lotto.domain.rating.Rating;
-import lotto.domain.rating.RatingInfo;
+import lotto.domain.rating.RatingCounter;
 import lotto.domain.statistics.WinningLotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -56,8 +56,8 @@ public class LottoManagerTest {
         lottoManager.buyLotto(ticket);
         WinningLotto winningLotto = new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
                 new LottoNumber(7));
-        RatingInfo ratingInfo = lottoManager.scratchLotto(winningLotto);
+        RatingCounter ratingCounter = lottoManager.scratchLotto(winningLotto);
 
-        assertThat(ratingInfo.get(Rating.FIRST)).isEqualTo(2);
+        assertThat(ratingCounter.get(Rating.FIRST)).isEqualTo(2);
     }
 }

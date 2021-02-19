@@ -2,7 +2,7 @@ package lotto.domain.statistics;
 
 import lotto.domain.primitive.Money;
 import lotto.domain.rating.Rating;
-import lotto.domain.rating.RatingInfo;
+import lotto.domain.rating.RatingCounter;
 
 public class LottoStatistics {
 
@@ -12,8 +12,8 @@ public class LottoStatistics {
     private RatingInfo ratingInfo;
     private final StringBuilder log = new StringBuilder();
 
-    public LottoStatistics(final RatingInfo ratingInfo) {
-        this.ratingInfo = ratingInfo;
+    public LottoStatistics(final RatingCounter ratingCounter) {
+        this.ratingCounter = ratingCounter;
     }
 
     public String getWinningDetail() {
@@ -21,7 +21,7 @@ public class LottoStatistics {
             if (rating == Rating.MISS) {
                 break;
             }
-            log.append(ratingToString(rating, ratingInfo.get(rating)));
+            log.append(ratingToString(rating, ratingCounter.get(rating)));
         }
         return log.toString();
     }
@@ -45,7 +45,7 @@ public class LottoStatistics {
             if (rating == Rating.MISS) {
                 break;
             }
-            sum += rating.getReward() * ratingInfo.get(rating);
+            sum += rating.getReward() * ratingCounter.get(rating);
         }
         return sum;
     }

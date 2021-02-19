@@ -2,7 +2,7 @@ package lotto.domain.statistics;
 
 import lotto.domain.primitive.Money;
 import lotto.domain.rating.Rating;
-import lotto.domain.rating.RatingInfo;
+import lotto.domain.rating.RatingCounter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,19 +10,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoStatisticsTest {
     private static final String ENTER = System.lineSeparator();
-    RatingInfo ratingInfo;
+    RatingCounter ratingCounter;
     LottoStatistics lottoStatistics;
 
     @BeforeEach
     void setup() {
-        ratingInfo = new RatingInfo();
-        lottoStatistics = new LottoStatistics(ratingInfo);
+        ratingCounter = new RatingCounter();
+        lottoStatistics = new LottoStatistics(ratingCounter);
     }
 
     @Test
     void firstPrizeToString() {
         Rating rating = Rating.FIRST;
-        int count = ratingInfo.get(rating);
+        int count = ratingCounter.get(rating);
 
         String actual = lottoStatistics.ratingToString(rating, count);
 
@@ -32,7 +32,7 @@ class LottoStatisticsTest {
     @Test
     void secondPrizeToString() {
         Rating rating = Rating.SECOND;
-        int count = ratingInfo.get(rating);
+        int count = ratingCounter.get(rating);
 
         String actual = lottoStatistics.ratingToString(rating, count);
 
@@ -47,7 +47,7 @@ class LottoStatisticsTest {
 
     @Test
     void getTotalSum() {
-        ratingInfo.update(Rating.FIRST);
+        ratingCounter.update(Rating.FIRST);
         assertThat(lottoStatistics.totalSum()).isEqualTo(2000000000);
     }
 }

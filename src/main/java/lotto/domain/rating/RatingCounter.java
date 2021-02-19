@@ -3,11 +3,11 @@ package lotto.domain.rating;
 import java.util.EnumMap;
 import java.util.Map;
 
-public class RatingInfo {
+public class RatingCounter {
 
     private Map<Rating, Counter> ratings;
 
-    public RatingInfo() {
+    public RatingCounter() {
         ratings = new EnumMap<>(Rating.class);
         for (Rating rating : Rating.values()) {
             ratings.put(rating, new Counter());
