@@ -2,7 +2,10 @@ package lotto.domain;
 
 import lotto.utils.RandomUtils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -34,7 +37,10 @@ public class LottoTickets {
         for (int i = 0; i < autoCount; i++) {
             lottoTickets.add(new Lotto(RandomUtils.generateRandomNumbers(auto, LOTTO_SIZE)));
         }
-        lottoTickets.addAll(manual);
+
+        if (manual != null) {
+            lottoTickets.addAll(manual);
+        }
 
         return Collections.unmodifiableList(lottoTickets);
     }
