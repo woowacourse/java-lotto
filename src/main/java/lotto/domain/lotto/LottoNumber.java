@@ -23,6 +23,7 @@ public class LottoNumber {
     }
 
     public static LottoNumber valueOf(String numberValue) {
+        numberValue = numberValue.trim();
         validateNumeric(numberValue);
         return new LottoNumber(numberValue);
     }
