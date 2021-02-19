@@ -4,7 +4,7 @@ import java.util.*;
 
 public class LottoTicket {
 
-    private static final int VALID_NUMBER_COUNT = 6;
+    private static final int LOTTO_NUMBER_SIZE = 6;
     private static final String NULL_ERROR_MESSAGE = "null값은 허용하지 않습니다.";
     private static final String EMPTY_ERROR_MESSAGE = "숫자는 하나 이상이어야 합니다.";
     private static final String COUNT_ERROR_MESSAGE = "숫자는 6개여야 합니다.";
@@ -46,7 +46,7 @@ public class LottoTicket {
     }
 
     private void validateCount(final List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() == VALID_NUMBER_COUNT) {
+        if (lottoNumbers.size() == LOTTO_NUMBER_SIZE) {
             return;
         }
         throw new IllegalArgumentException(COUNT_ERROR_MESSAGE);
