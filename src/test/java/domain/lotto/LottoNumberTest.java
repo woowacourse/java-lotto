@@ -11,7 +11,7 @@ public class LottoNumberTest {
 
     @Test
     @DisplayName("로또 번호는 1부터 45까지 숫자다.")
-    public void check_car_name_exception() {
+    public void testLottoNumberRange() {
         assertThatThrownBy(() -> new LottoNumber(46))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining(LOTTO_NUMBER_RANGE_ERROR.getMessage());

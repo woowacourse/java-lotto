@@ -11,10 +11,9 @@ import org.junit.jupiter.api.Test;
 public class RanksTest {
 
     @Test
-    @DisplayName("원하는 등수 개수를 제대로 찾아내는지 테스트")
-    public void find_wanted_number_of_rank() {
-        Ranks lottoResult = new Ranks(
-            Arrays.asList(Rank.FIFTH, Rank.FIFTH, Rank.FIFTH, Rank.SECOND));
+    @DisplayName("등수 개수를 찾아낸다.")
+    public void testFindNumberOfRank() {
+        Ranks lottoResult = new Ranks(Arrays.asList(Rank.FIFTH, Rank.FIFTH, Rank.FIFTH, Rank.SECOND));
         assertThat(lottoResult.getNumberOfRank(Rank.FIRST)).isEqualTo(0);
         assertThat(lottoResult.getNumberOfRank(Rank.SECOND)).isEqualTo(1);
         assertThat(lottoResult.getNumberOfRank(Rank.THIRD)).isEqualTo(0);
@@ -24,13 +23,12 @@ public class RanksTest {
 
     @Test
     @DisplayName("수익률을 계산한다")
-    public void calculate_profit_rate() {
-        Ranks lottoResult = new Ranks(
-            Arrays.asList(Rank.FIFTH, Rank.NO_MATCH, Rank.NO_MATCH,
+    public void testCalculateProfitRate() {
+        Ranks lottoResult = new Ranks(Arrays.asList(Rank.FIFTH, Rank.NO_MATCH, Rank.NO_MATCH,
                 Rank.NO_MATCH, Rank.NO_MATCH, Rank.NO_MATCH, Rank.NO_MATCH, Rank.NO_MATCH,
-                Rank.NO_MATCH, Rank.NO_MATCH,
-                Rank.NO_MATCH, Rank.NO_MATCH, Rank.NO_MATCH, Rank.NO_MATCH));
+                Rank.NO_MATCH, Rank.NO_MATCH, Rank.NO_MATCH, Rank.NO_MATCH, Rank.NO_MATCH, Rank.NO_MATCH));
         double profitRate = lottoResult.calculateProfitRate();
         assertThat(profitRate).isEqualTo(5000 / 14000f);
     }
+
 }
