@@ -38,7 +38,7 @@ public class OutputView {
         printWinningResult(ranks);
     }
 
-    private static void printWinningResult(Map<Rank, Integer> ranks) {
+    private static void printWinningResult(final Map<Rank, Integer> ranks) {
         for (Entry<Rank, Integer> rank : ranks.entrySet()) {
             System.out.format(rank.getKey().getMessageFormat(), rank.getValue());
             System.out.println();

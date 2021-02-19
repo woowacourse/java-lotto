@@ -10,11 +10,11 @@ public class LottoWinTicket {
         this.isBonusMatch = isBonusMatch;
     }
 
-    public boolean isSameMatchCount(int matchCount) {
+    public boolean isSameMatchCount(final int matchCount) {
         return this.matchCount == matchCount;
     }
 
-    public boolean isSameBonusMatch(boolean isBonusMatch) {
+    public boolean isSameBonusMatch(final boolean isBonusMatch) {
         return this.isBonusMatch == isBonusMatch;
     }
 }

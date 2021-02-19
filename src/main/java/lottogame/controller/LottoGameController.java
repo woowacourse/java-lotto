@@ -9,7 +9,7 @@ public class LottoGameController {
 
     private final LottoGame lottoGame;
 
-    public LottoGameController(LottoGame lottoGame) {
+    public LottoGameController(final LottoGame lottoGame) {
         this.lottoGame = lottoGame;
     }
 

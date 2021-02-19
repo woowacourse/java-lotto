@@ -20,14 +20,14 @@ public class LottoTicket {
         }
     }
 
-    private List<Integer> issueLottoNumbers(List<Integer> numbers) {
+    private List<Integer> issueLottoNumbers(final List<Integer> numbers) {
         Collections.shuffle(initNumbers(numbers));
         List<Integer> shuffledNumbers = numbers.subList(0, 6);
         Collections.sort(shuffledNumbers);
         return shuffledNumbers;
     }
 
-    private List<Integer> initNumbers(List<Integer> numbers) {
+    private List<Integer> initNumbers(final List<Integer> numbers) {
         for (int number = START_LOTTO_NUMBER; number <= FINISH_LOTTO_NUMBER; number++) {
             numbers.add(number);
         }
