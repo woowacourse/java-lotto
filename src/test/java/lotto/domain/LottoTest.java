@@ -9,6 +9,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LottoTest {
@@ -39,21 +40,22 @@ public class LottoTest {
                 .hasMessageContaining("유효하지 않은 로또 번호입니다.");
     }
 
+    @DisplayName("당첨번호 일치 갯수 확인")
     @Test
     void countNumberOfMatch() {
-        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-
-        int matches = lotto.matchingCount(winningNumbers);
+        int matches = lotto.matchingCount(new WinningNumber("1, 2, 3, 4, 5, 6"));
 
         assertThat(matches).isEqualTo(3);
     }
 
+    @DisplayName("보너스 번호 일치여부 확인")
     @Test
     void bonusMatch() {
         int bonusNumber = 20;
-        boolean match = lotto.isBonusMatch(bonusNumber);
+        int notBonusNumber = 22;
 
-        assertTrue(match);
+        assertTrue(lotto.isBonusMatch(bonusNumber));
+        assertFalse(lotto.isBonusMatch(notBonusNumber));
     }
 
 
