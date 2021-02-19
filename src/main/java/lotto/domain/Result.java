@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public enum Result {
 
@@ -32,19 +34,13 @@ public enum Result {
     }
 
     public static List<Integer> getStatistics(List<Result> results) {
-        Map<Result, Integer> statistics = new LinkedHashMap<>();
-        initStatistics(statistics);
+        Map<Result,Integer> statistics = Arrays.stream(Result.values())
+                .collect(Collectors.toMap(Function.identity(), value -> 0,(key1,key2) -> key1,LinkedHashMap::new));
         checkResult(results, statistics);
 
         List<Integer> firstToFifth = new ArrayList(statistics.values()).subList(FIRST_INDEX, FIFTH_INDEX);
         Collections.reverse(firstToFifth);
         return firstToFifth;
-    }
-
-    private static void initStatistics(Map<Result, Integer> statistics) {
-        for (Result result : values()) {
-            statistics.put(result, 0);
-        }
     }
 
     private static void checkResult(List<Result> results, Map<Result, Integer> statistics) {
