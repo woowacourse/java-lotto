@@ -1,0 +1,34 @@
+package lotto.domain.lottos.generator;
+
+import lotto.domain.lottos.LottoNumber;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class RandomNumberGenerator implements LottoNumberGenerator {
+
+    private static final int MIN_NUMBER_RANGE = 1;
+    private static final int MAX_NUMBER_RANGE = 45;
+    private static final int LOTTO_SIZE = 6;
+
+    private static final List<LottoNumber> CACHE;
+
+    static {
+        CACHE = IntStream.range(MIN_NUMBER_RANGE, MAX_NUMBER_RANGE)
+                .boxed()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<LottoNumber> generateNumbers() {
+        Collections.shuffle(CACHE);
+        return CACHE
+                .stream()
+                .limit(LOTTO_SIZE)
+                .sorted()
+                .collect(Collectors.toList());
+    }
+}

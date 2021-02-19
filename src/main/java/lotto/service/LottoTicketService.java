@@ -2,10 +2,10 @@ package lotto.service;
 
 import lotto.domain.lottos.LottoBoughtTicket;
 import lotto.domain.lottos.LottoNumber;
+import lotto.domain.lottos.generator.RandomNumberGenerator;
 import lotto.domain.lottos.winnerlotto.LottoWinnerTicket;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,13 +19,7 @@ public class LottoTicketService {
     }
 
     public static LottoBoughtTicket createLottoTicket() {
-        List<LottoNumber> lottoNumbers = LottoNumber.getCache();
-        Collections.shuffle(lottoNumbers);
-        return lottoNumbers
-                .stream()
-                .limit(LOTTO_NUMBER_SIZE)
-                .sorted()
-                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoBoughtTicket::new));
+        return new LottoBoughtTicket(new RandomNumberGenerator().generateNumbers());
     }
 
     public static LottoWinnerTicket createLottoWinnerTicket(String input) {

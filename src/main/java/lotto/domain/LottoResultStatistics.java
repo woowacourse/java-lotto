@@ -1,9 +1,9 @@
 package lotto.domain;
 
-import lotto.domain.lottos.rank.LottoRank;
 import lotto.domain.lottos.LottoTickets;
-import lotto.domain.money.Money;
+import lotto.domain.lottos.rank.LottoRank;
 import lotto.domain.lottos.winnerlotto.LottoWinner;
+import lotto.domain.money.Money;
 
 import java.util.Arrays;
 import java.util.EnumMap;
