@@ -3,7 +3,10 @@ package lotto.domain;
 import lotto.exception.DuplicateLottoNumberException;
 import lotto.exception.InvalidLottoNumberCountException;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Lotto {
