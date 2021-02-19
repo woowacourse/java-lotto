@@ -10,11 +10,15 @@ public class LottoNumber {
     private final int value;
 
     public LottoNumber(final String value) {
-        this.value = Integer.parseInt(value);
-        validateRange(this.value);
+        this(Integer.parseInt(value));
     }
 
-    private void validateRange(final int value) {
+    public LottoNumber(final int number) {
+        this.value = number;
+        validateNumberRange(this.value);
+    }
+
+    private void validateNumberRange(final int value) {
         if (value < START_NUMBER || FINISH_NUMBER < value) {
             throw new IllegalArgumentException("로또 숫자 범위를 벗어났습니다.");
         }
