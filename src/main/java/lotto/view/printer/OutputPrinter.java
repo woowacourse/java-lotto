@@ -7,7 +7,7 @@ import lotto.domain.LottoTicket;
 import lotto.type.LottoMatchType;
 
 public class OutputPrinter {
-    private static final String NEW_LINE = "\n";
+    private static final String NEW_LINE = System.lineSeparator();
 
     private OutputPrinter() {
     }
