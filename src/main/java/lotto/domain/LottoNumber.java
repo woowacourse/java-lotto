@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
@@ -16,11 +18,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private final int number;
 
     static {
-        List<LottoNumber> cacheNumbers = new ArrayList<>();
-        for (int i = MIN_NUMBER_RANGE; i < MAX_NUMBER_RANGE; i++) {
-            cacheNumbers.add(new LottoNumber(i));
-        }
-        CACHE = Collections.unmodifiableList(cacheNumbers);
+        CACHE = Collections.unmodifiableList(
+                IntStream.range(MIN_NUMBER_RANGE, MAX_NUMBER_RANGE)
+                .boxed()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList()));
     }
 
     public LottoNumber(int number) {
