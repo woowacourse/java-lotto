@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static lotto.domain.LottoNumber.MAX_LOTTO_NUMBER;
+import static lotto.domain.LottoNumber.MIN_LOTTO_NUMBER;
+import static lotto.domain.LottoTicket.LOTTO_PRICE;
+import static lotto.domain.LottoTicket.LOTTO_TICKET_SIZE;
+
 public class LottoTicketFactory {
-    public static final int MIN_LOTTO_NUMBER = 1;
-    public static final int MAX_LOTTO_NUMBER = 49;
-    public static final int LOTTO_PRICE = 1000;
     public static final int START_INDEX = 0;
-    public static final int LOTTO_TICKET_SIZE = 6;
 
     private final List<LottoNumber> lottoNumberRange;
 

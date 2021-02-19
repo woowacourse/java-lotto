@@ -6,9 +6,9 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class LottoNumber implements Comparable<LottoNumber> {
+    public static final int MIN_LOTTO_NUMBER = 1;
+    public static final int MAX_LOTTO_NUMBER = 45;
     public static final Pattern NUMBER_PATTERN = Pattern.compile("^[0-9]*$");
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 45;
 
     private final int value;
 
@@ -29,7 +29,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
 
     private boolean isInvalidLottoNumberRange(String input) {
-        return Integer.parseInt(input) < MIN_NUMBER || Integer.parseInt(input) > MAX_NUMBER;
+        return Integer.parseInt(input) < MIN_LOTTO_NUMBER ||
+                Integer.parseInt(input) > MAX_LOTTO_NUMBER;
     }
 
     private int getValue() {
