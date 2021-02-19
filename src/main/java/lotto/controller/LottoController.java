@@ -4,7 +4,8 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.stream.Collectors;
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
 
 public class LottoController {
     private final LottoTicketFactory lottoTicketFactory;
@@ -23,11 +24,9 @@ public class LottoController {
     private WinningLotto getWinningLotto(LottoTickets lottoTickets) {
         OutputView.printLottoTicketsCount(lottoTickets);
         OutputView.printLottoTickets(lottoTickets);
-        LottoTicket winningTicket = new LottoTicket(
-                InputView.inputWinningNumbers()
-                        .stream()
-                        .map(LottoNumber::new)
-                        .collect(Collectors.toList()));
+        LottoTicket winningTicket = InputView.inputWinningNumbers().stream()
+                .map(LottoNumber::new)
+                .collect(collectingAndThen(toList(), LottoTicket::new));
         LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());
         return new WinningLotto(winningTicket, bonusNumber);
     }
