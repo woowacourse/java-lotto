@@ -5,11 +5,12 @@ import java.util.Objects;
 public class LottoResult {
     private final int matchedCount;
     private final boolean isSecond;
+    private static final int SECOND_MATCHED_COUNT = 5;
 
     public LottoResult(int matchedCount, boolean hasBonusBall) {
         this.matchedCount = matchedCount;
         boolean isSecond = false;
-        if (matchedCount == 5) {
+        if (matchedCount == SECOND_MATCHED_COUNT) {
             isSecond = hasBonusBall;
         }
         this.isSecond = isSecond;
