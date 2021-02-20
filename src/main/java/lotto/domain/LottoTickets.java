@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoTickets {
+    private static final int LOTTO_TICKET_PRICE = 1000;
 
     private final List<LottoTicket> lottoTickets;
 
@@ -18,6 +19,13 @@ public class LottoTickets {
     public static LottoTickets generateAutomatic(int lottoTicketCounts, LottoNumberGenerator lottoNumberGenerator) {
         List<LottoTicket> lottoTickets = Stream.generate(() -> LottoTicket.from(lottoNumberGenerator.generate()))
                 .limit(lottoTicketCounts)
+                .collect(Collectors.toList());
+        return new LottoTickets(lottoTickets);
+    }
+
+    public static LottoTickets generateAutomatic2(PurchasingPrice purchasingPrice, LottoNumberGenerator lottoNumberGenerator) {
+        List<LottoTicket> lottoTickets = Stream.generate(() -> LottoTicket.from(lottoNumberGenerator.generate()))
+                .limit(purchasingPrice.calculatePurchasableTicketCounts(LOTTO_TICKET_PRICE))
                 .collect(Collectors.toList());
         return new LottoTickets(lottoTickets);
     }

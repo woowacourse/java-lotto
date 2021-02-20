@@ -11,14 +11,14 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 
 class PurchasingPriceTest {
 
-    @DisplayName("로또 구입 금액은 1000원 미만인 경우 객체 생성 예외가 발생한다")
+    @DisplayName("로또 구입 금액은 양의 정수여야 한다.")
     @ParameterizedTest
-    @ValueSource(ints = {-10, 0, 999})
+    @ValueSource(ints = {-10, 0})
     void cannotMakePurchasingPrice(int purchasingPrice) {
         assertThatCode(() -> {
             new PurchasingPrice(purchasingPrice);
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또 티켓 최소 구매 금액은 1000원입니다.");
+                .hasMessage("로또 티켓 구매 금액은 양의 정수이어야 합니다.");
     }
 
     @DisplayName("로또 구입 금액이 1000원 이상이면 객체가 정상 생성된다")
@@ -37,7 +37,7 @@ class PurchasingPriceTest {
         int price = 3987;
         PurchasingPrice purchasingPrice = new PurchasingPrice(price);
 
-        int purchasableLottoTicketCounts = purchasingPrice.calculatePurchasableTicketCounts();
+        int purchasableLottoTicketCounts = purchasingPrice.calculatePurchasableTicketCounts(1000);
 
         assertThat(purchasableLottoTicketCounts).isEqualTo(3987 / 1000);
     }

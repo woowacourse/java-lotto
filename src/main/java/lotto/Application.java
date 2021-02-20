@@ -9,7 +9,7 @@ import java.util.List;
 public class Application {
     public static void main(String[] args) {
         PurchasingPrice purchasingPrice = new PurchasingPrice(InputView.inputPurchasingPrice());
-        int lottoTicketCounts = purchasingPrice.calculatePurchasableTicketCounts();
+        int lottoTicketCounts = purchasingPrice.calculatePurchasableTicketCounts(1000);
         LottoTickets lottoTickets = LottoTickets.generateAutomatic(lottoTicketCounts, new RandomLottoNumberGenerator());
         OutputView.printPurchasedLottoTicketCounts(lottoTicketCounts);
         OutputView.printAllLottoTicketNumbers(lottoTickets);
