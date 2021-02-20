@@ -14,8 +14,4 @@ public class LottoTickets {
         return new ArrayList<>(lottoTickets);
     }
 
-    // todo 메소드 필요 여부?
-    public int size() {
-        return lottoTickets.size();
-    }
 }

@@ -41,7 +41,6 @@ public class LottoController {
 
     private LottoTickets buyLottoTicket(int lottoPurchaseMoney) {
         LottoTickets lottoTickets = lottoMachine.createTicketsByMoney(lottoPurchaseMoney);
-        outputView.printTicketsSize(lottoTickets.size());
         outputView.printAllLottoTickets(lottoTickets);
         return lottoTickets;
     }

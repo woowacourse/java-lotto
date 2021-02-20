@@ -10,12 +10,9 @@ import lotto.domain.LottoTickets;
 import lotto.domain.Prize;
 
 public class OutputView {
-    public void printTicketsSize(int size) {
-        System.out.printf("%d개를 구매했습니다.\n", size);
-    }
-
     public void printAllLottoTickets(LottoTickets lottoTickets) {
-        lottoTickets.list().forEach(lottoTicket ->
+        System.out.printf("%d개를 구매했습니다.\n", lottoTickets.getLottoTickets().size());
+        lottoTickets.getLottoTickets().forEach(lottoTicket ->
             System.out.println(lottoTicket.printLottoTicket())
         );
     }
