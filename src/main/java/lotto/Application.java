@@ -13,9 +13,10 @@ public class Application {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        String input = InputView.takeMoneyInput(scanner);
-        Money money = new Money(input);
-        Lottos lottos = new Lottos(money.calculateNumberOfLotto());
+        Money money = new Money(InputView.takeMoneyInput(scanner));
+        LottoGenerator lottoGenerator = new LottoGenerator();
+
+        Lottos lottos = new Lottos(lottoGenerator.createLottos(money.calculateAffordableNumberOfLotto()));
         OutputView.showLottos(lottos);
 
         WinningLotto winningLotto = new WinningLotto(

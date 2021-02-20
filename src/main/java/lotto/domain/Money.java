@@ -27,7 +27,7 @@ public class Money {
         }
     }
 
-    public int calculateNumberOfLotto() {
+    public int calculateAffordableNumberOfLotto() {
         return money / LOTTO_PRICE;
     }
 

@@ -7,23 +7,10 @@ import java.util.List;
 public class Lottos {
     //TODO:
     // final로 만들고 밑에 생성자 관련해서 리팩토링
-    private List<Lotto> lottos = new ArrayList<>();
+    private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
-    }
-
-    public Lottos(int count) {
-        createLottos(count);
-    }
-
-    //TODO:
-    // LottoNumbergenerator를 주입 받아 전략패턴 만들기
-    private void createLottos(int count) {
-        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
-        for (int i = 0; i < count; i++) {
-            lottos.add(lottoNumberGenerator.createLotto());
-        }
     }
 
     public List<Result> getResults(WinningLotto winningLotto) {

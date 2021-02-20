@@ -9,7 +9,7 @@ import static lotto.domain.Lotto.LOTTO_START_INDEX;
 import static lotto.domain.LottoNumber.MAXIMUM_CANDIDATE_NUMBER;
 import static lotto.domain.LottoNumber.MINIMUM_CANDIDATE_NUMBER;
 
-public class LottoNumberGenerator {
+public class LottoGenerator {
     private static final List<Integer> candidateNumbers = new ArrayList<>();
 
     static {
@@ -22,7 +22,17 @@ public class LottoNumberGenerator {
         }
     }
 
-    public Lotto createLotto() {
+    //TODO:
+    // LottoNumberGenerator를 주입 받아 전략패턴 만들기
+    public List<Lotto> createLottos(int numberOfLottoToCreate) {
+        ArrayList<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < numberOfLottoToCreate; i++) {
+            lottos.add(createLotto());
+        }
+        return lottos;
+    }
+
+    private Lotto createLotto() {
         Collections.shuffle(candidateNumbers);
         List<Integer> numbers = candidateNumbers.subList(LOTTO_START_INDEX, LOTTO_SIZE);
         Collections.sort(numbers);

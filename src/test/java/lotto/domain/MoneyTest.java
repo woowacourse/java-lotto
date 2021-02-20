@@ -35,7 +35,7 @@ public class MoneyTest {
     @Test
     void calculateNumberOfLotto() {
         Money money = new Money("13500");
-        int numberOfLotto = money.calculateNumberOfLotto();
+        int numberOfLotto = money.calculateAffordableNumberOfLotto();
 
         assertThat(numberOfLotto).isEqualTo(13);
     }
