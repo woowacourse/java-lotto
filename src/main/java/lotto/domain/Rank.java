@@ -26,6 +26,10 @@ public enum Rank {
         return reward;
     }
 
+    public int getMatchCount() {
+        return matchCount;
+    }
+
     public static LottoStatisticResult match(Lottos lottos, WinningLotto winningLotto) {
         List<Lotto> lottoGroup = lottos.getLottos();
 
