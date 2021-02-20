@@ -61,6 +61,10 @@ public class LottoMoney {
         }
     }
 
+    public int toTicketQuantity() {
+        return value / SINGLE_LOTTO_PRICE;
+    }
+
     public int getValue() {
         return value;
     }
