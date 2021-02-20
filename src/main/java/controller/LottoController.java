@@ -21,6 +21,15 @@ public class LottoController {
         outputView.printProfit(profit);
     }
 
+    private Money createBudgetMoney() {
+        try {
+            return new Money(inputView.scanBudget());
+        } catch (RuntimeException e) {
+            outputView.printError(e);
+            return createBudgetMoney();
+        }
+    }
+
     private WinningNumber createWinningNumber() {
         try {
             LottoTicket winningNumbers = LottoTicket.valueOf(inputView.scanWinningNumber());
@@ -29,15 +38,6 @@ public class LottoController {
         } catch (RuntimeException e) {
             outputView.printError(e);
             return createWinningNumber();
-        }
-    }
-
-    private Money createBudgetMoney() {
-        try {
-            return new Money(inputView.scanBudget());
-        } catch (RuntimeException e) {
-            outputView.printError(e);
-            return createBudgetMoney();
         }
     }
 }

@@ -33,17 +33,17 @@ public class LottoTicket {
         return new LottoTicket(lottoNumbersList);
     }
 
+    private static void isValidNumberCountOrThrow(List<String> lottoNumbers) {
+        if (lottoNumbers.size() != TOTAL_LOTTO_NUMBER_COUNT) {
+            throw new IllegalArgumentException(ERROR_INVALID_NUMBER_COUNT);
+        }
+    }
+
     private static boolean isNoneDuplicationNumberOrThrow(List<LottoNumber> lottoNumbers, LottoNumber lottoNumber) {
         if (lottoNumbers.contains(lottoNumber)) {
             throw new IllegalArgumentException(ERROR_INVALID_DUPLICATION_NUMBER);
         }
         return true;
-    }
-
-    private static void isValidNumberCountOrThrow(List<String> lottoNumbers) {
-        if (lottoNumbers.size() != TOTAL_LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException(ERROR_INVALID_NUMBER_COUNT);
-        }
     }
 
     public boolean contains(LottoNumber lottoNumber) {
