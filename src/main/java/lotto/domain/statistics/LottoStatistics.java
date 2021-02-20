@@ -22,9 +22,6 @@ public class LottoStatistics {
     public double totalSum() {
         double sum = 0;
         for (Rating rating : Rating.values()) {
-            if (rating == Rating.MISS) {
-                break;
-            }
             sum += rating.getReward() * ratingCounter.get(rating);
         }
         return sum;
