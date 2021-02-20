@@ -38,11 +38,13 @@ public class LottoGenerator {
         );
     }
 
-    public LottoGroup generateLottosWithManualLottoNumbers(List<LottoNumbers> manualLottoNumbers, PayOut payOut) {
+    public LottoGroup generateLottosWithManualLottoNumbers(List<String> manualLottoNumbers, PayOut payOut) {
         return new LottoGroup(
-               manualLottoNumbers
+                manualLottoNumbers.stream()
+                .map(LottoNumbers::valueOf)
+                .collect(toList())
         ).addition(
-                generateLottos(payOut.getGameCount())
+                generateLottos(payOut.getValueAsInt())
         );
     }
 

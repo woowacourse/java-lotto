@@ -48,6 +48,11 @@ public class PayOut {
         return new PayOut(value.subtraction(payOut.value));
     }
 
+    public PayOut subtractionUsingGameCount(int count) {
+        return subtraction(new PayOut(count * GAME_PRICE));
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

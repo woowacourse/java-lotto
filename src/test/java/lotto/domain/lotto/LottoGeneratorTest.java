@@ -28,16 +28,12 @@ public class LottoGeneratorTest {
                 "5,3,8,6,4,9"
         );
 
-        List<LottoNumbers> manualLottoNumbers = manualStringLottoNumbers.stream()
-                .map(LottoNumbers::valueOf)
-                .collect(toList());
-
         PayOut zeroPayOut = PayOut.ZERO;
 
         LottoGenerator lottoGenerator = new LottoGenerator();
         assertThat(
                 lottoGenerator.generateLottosWithManualLottoNumbers(
-                        manualLottoNumbers,
+                        manualStringLottoNumbers,
                         zeroPayOut
                 ).getCount()
         ).isEqualTo(3);
@@ -52,16 +48,13 @@ public class LottoGeneratorTest {
                 "5,3,8,6,4,9"
         );
 
-        List<LottoNumbers> manualLottoNumbers = manualStringLottoNumbers.stream()
-                .map(LottoNumbers::valueOf)
-                .collect(toList());
 
         PayOut payOut = new PayOut(3000);
 
         LottoGenerator lottoGenerator = new LottoGenerator();
         assertThat(
                 lottoGenerator.generateLottosWithManualLottoNumbers(
-                        manualLottoNumbers,
+                        manualStringLottoNumbers,
                         payOut
                 ).getCount()
         ).isEqualTo(6);

@@ -1,12 +1,15 @@
 package lotto.controller;
 
-import lotto.domain.lotto.LottoGenerator;
-import lotto.domain.lotto.LottoGroup;
-import lotto.domain.lotto.WinningNumber;
-import lotto.domain.lotto.AnalysedLottos;
+import lotto.domain.lotto.*;
+import lotto.domain.number.Number;
 import lotto.domain.number.PayOut;
 import lotto.view.InputView;
 import lotto.view.OutputView;
+
+import java.util.List;
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toList;
 
 public class LottoController {
     private static final LottoGenerator lottoGenerator = new LottoGenerator();
@@ -14,7 +17,13 @@ public class LottoController {
     public static void run() {
         PayOut payOut = getPayOutFromUser();
 
-        LottoGroup lottoGroup = createLottosAccordingToTheAmount(payOut);
+        Number manualLottoCount = getManualLottoCountFromUser();
+        List<String> manualLottos = getManualLottosFromUser(manualLottoCount);
+        OutputView.payOuted(payOut.getGameCount(), manualLottoCount.getValueAsInt());
+
+        LottoGroup lottoGroup = createLottosAccordingToTheAmount(manualLottos,
+                payOut.subtractionUsingGameCount(manualLottoCount.getValueAsInt())
+        );
 
         WinningNumber winningNumber = new WinningNumber(
                 getLastWeekLottoNumberFromUser(),
@@ -29,13 +38,30 @@ public class LottoController {
 
         PayOut payOut = new PayOut(InputView.getStringInputFromUser());
 
-        OutputView.payOuted(payOut.getGameCount());
-
         return payOut;
     }
 
-    private static LottoGroup createLottosAccordingToTheAmount(PayOut payOut) {
-        LottoGroup lottoGroup = lottoGenerator.generateLottos(payOut.getGameCount());
+    private static Number getManualLottoCountFromUser() {
+        OutputView.manualPurchase();
+
+        return new Number(InputView.getStringInputFromUser());
+    }
+
+    private static List<String> getManualLottosFromUser(Number manualLottoCount) {
+        OutputView.manualLottoNumber();
+
+        return Stream.generate(InputView::getStringInputFromUser)
+                .limit(manualLottoCount.getValueAsInt())
+                .collect(toList());
+    }
+
+    private static LottoGroup createLottosAccordingToTheAmount(List<String> manualLottos,
+                                                               PayOut payOut) {
+        LottoGroup lottoGroup = lottoGenerator.generateLottosWithManualLottoNumbers(
+                manualLottos,
+                payOut
+        );
+
         OutputView.boughtLottos(lottoGroup);
 
         return lottoGroup;
