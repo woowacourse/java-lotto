@@ -1,6 +1,7 @@
 package lotto.domain.lottos.generator;
 
 import lotto.domain.lottos.LottoNumber;
+import lotto.domain.lottos.LottoTicket;
 
 import java.util.Collections;
 import java.util.List;
@@ -11,7 +12,6 @@ public class RandomNumberGenerator implements LottoNumberGenerator {
 
     private static final int MIN_NUMBER_RANGE = 1;
     private static final int MAX_NUMBER_RANGE = 45;
-    private static final int LOTTO_SIZE = 6;
 
     private static final List<LottoNumber> CACHE;
 
@@ -27,7 +27,7 @@ public class RandomNumberGenerator implements LottoNumberGenerator {
         Collections.shuffle(CACHE);
         return CACHE
                 .stream()
-                .limit(LOTTO_SIZE)
+                .limit(LottoTicket.LOTTO_NUMBER_SIZE)
                 .sorted()
                 .collect(Collectors.toList());
     }
