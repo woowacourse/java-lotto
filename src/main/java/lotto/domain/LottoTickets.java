@@ -18,8 +18,8 @@ public class LottoTickets {
     public LottoResult checkPrizesByWinningTickets(WinningLotto winningLotto) {
         List<Prize> winningTickets = new ArrayList<>();
         for (LottoTicket lottoTicket : this.lottoTickets) {
-            winningTickets.add(Prize.getPrizeType(lottoTicket.getMatchingCount(winningLotto.getWinningTicket().lottoTicket()),
-                    lottoTicket.isContainLottoNumber(winningLotto.getBonusNumber())));
+            Prize prize = winningLotto.matchPrize(lottoTicket);
+            winningTickets.add(prize);
         }
         return new LottoResult(winningTickets);
     }

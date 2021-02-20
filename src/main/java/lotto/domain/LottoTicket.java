@@ -34,14 +34,4 @@ public class LottoTicket {
     public List<LottoNumber> lottoTicket() {
         return Collections.unmodifiableList(lottoTicket);
     }
-
-    public int getMatchingCount(List<LottoNumber> numbers) {
-        return (int) numbers.stream()
-                .filter(this.lottoTicket::contains)
-                .count();
-    }
-
-    public boolean isContainLottoNumber(LottoNumber lottoNumber) {
-        return lottoTicket.contains(lottoNumber);
-    }
 }

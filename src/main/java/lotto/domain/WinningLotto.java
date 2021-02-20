@@ -7,22 +7,32 @@ public class WinningLotto {
     private LottoNumber bonusNumber;
 
     public WinningLotto(LottoTicket winningTicket, LottoNumber bonusNumber) {
-        validateWinningLotto(winningTicket, bonusNumber);
         this.winningTicket = new LottoTicket(winningTicket.lottoTicket());
         this.bonusNumber = new LottoNumber(bonusNumber.toString());
+        validateWinningLotto();
     }
 
-    private void validateWinningLotto(LottoTicket winningTicket, LottoNumber bonusNumber) {
-        if (winningTicket.isContainLottoNumber(bonusNumber)) {
+    private void validateWinningLotto() {
+        if (isContainBonusNumber(winningTicket)) {
             throw new IllegalWinningLottoException();
         }
     }
 
-    public LottoTicket getWinningTicket() {
-        return winningTicket;
+    public Prize matchPrize(LottoTicket lottoTicket) {
+        int matchCount = getMatchingCount(lottoTicket);
+        boolean isBonusNumber = isContainBonusNumber(lottoTicket);
+        return Prize.findPrize(matchCount, isBonusNumber);
     }
 
-    public LottoNumber getBonusNumber() {
-        return bonusNumber;
+    private int getMatchingCount(LottoTicket lottoTicket) {
+        return (int) lottoTicket.lottoTicket().stream()
+                .filter(winningTicket.lottoTicket()::contains)
+                .count();
+    }
+
+    private boolean isContainBonusNumber(LottoTicket lottoTicket) {
+        return lottoTicket.lottoTicket()
+                .stream()
+                .anyMatch(lottoNumber -> lottoNumber.equals(bonusNumber));
     }
 }

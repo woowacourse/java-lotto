@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.List;
 
 public enum Prize {
     NO_PRIZE(Money.ZERO, 0),
@@ -20,10 +19,11 @@ public enum Prize {
         this.matchCount = matchCount;
     }
 
-    public static Prize getPrizeType(int matchCount, boolean isBonusBall) {
-        if (isMatchCountEqualsPivot(matchCount) && isBonusBall) {
+    public static Prize findPrize(int matchCount, boolean isBonusNumber) {
+        if (isMatchCountEqualsPivot(matchCount) && isBonusNumber) {
             return SECOND_PRIZE;
         }
+
         return Arrays.stream(values())
                 .filter(s -> s.matchCount == matchCount)
                 .findFirst()
