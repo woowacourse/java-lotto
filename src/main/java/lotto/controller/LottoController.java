@@ -25,6 +25,8 @@ public class LottoController {
 
     public void start(){
         LottoTickets lottoTickets = buyLottoTicket(inputView.takeLottoMoney());
+        outputView.printTicketsSize(lottoTickets.size());
+        outputView.printAllLottoTickets(lottoTickets);
 
         WinningLottoTicket winningLotto = createWinningLotto(inputView.inputWinningNumbers(), inputView.takeBonusNumber());
 
@@ -35,8 +37,6 @@ public class LottoController {
 
     public LottoTickets buyLottoTicket(int lottoPurchaseMoney) {
         LottoTickets lottoTickets = lottoMachine.createTicketsByMoney(lottoPurchaseMoney);
-        outputView.printTicketsSize(lottoTickets.size());
-        outputView.printAllLottoTickets(lottoTickets);
         return lottoTickets;
     }
 
