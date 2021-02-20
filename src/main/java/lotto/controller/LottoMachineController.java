@@ -1,16 +1,22 @@
-package lotto.domain;
+package lotto.controller;
 
 import java.util.List;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoStatisticResult;
+import lotto.domain.Lottos;
+import lotto.domain.PayAmount;
+import lotto.domain.Rank;
+import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-public class LottoMachine {
+public class LottoMachineController {
 
     private final InputView inputView;
 
     private final OutputView outputView;
 
-    public LottoMachine() {
+    public LottoMachineController() {
         this.inputView = new InputView();
         this.outputView = new OutputView();
     }
