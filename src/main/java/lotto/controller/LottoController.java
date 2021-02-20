@@ -26,7 +26,7 @@ public class LottoController {
         OutputView.printWinningStats(new LottoStatistics(ratingCounter), ticket.getPrice());
     }
 
-    public Ticket buyLotto() {
+    private Ticket buyLotto() {
         try {
             return tryBuyLotto();
         } catch (IllegalArgumentException e) {
@@ -35,13 +35,13 @@ public class LottoController {
         }
     }
 
-    public Ticket tryBuyLotto() {
+    private Ticket tryBuyLotto() {
         OutputView.getMessage("구입금액을 입력해 주세요.");
         int money = InputView.getInt();
         return new Ticket(new Money(money));
     }
 
-    public WinningLotto buyWinningLotto() {
+    private WinningLotto buyWinningLotto() {
         try {
             return tryBuyWinningLotto();
         } catch (IllegalArgumentException e) {
@@ -50,7 +50,7 @@ public class LottoController {
         }
     }
 
-    public WinningLotto tryBuyWinningLotto() {
+    private WinningLotto tryBuyWinningLotto() {
         Lotto lotto = Lotto.createByInteger(InputView.getWinningNumbers());
         OutputView.getMessage("보너스 볼을 입력해 주세요.");
         LottoNumber bonusNumber = new LottoNumber(InputView.getInt());
