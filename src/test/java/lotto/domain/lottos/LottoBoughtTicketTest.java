@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,19 +16,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoBoughtTicketTest {
 
     private LottoWinner lottoWinner;
+    private List<LottoNumber> lottoNumbers;
 
     @BeforeEach
     void setUp() {
-        LottoTicket lottoWinnerTicket = new LottoTicket(
-                Arrays.asList(
-                        new LottoNumber(1),
-                        new LottoNumber(2),
-                        new LottoNumber(3),
-                        new LottoNumber(4),
-                        new LottoNumber(5),
-                        new LottoNumber(6)
-                )
+        lottoNumbers = Arrays.asList(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6)
         );
+
+        LottoTicket lottoWinnerTicket = new LottoTicket(lottoNumbers);
         LottoBonusNumber lottoBonusNumber = LottoBonusNumber.of("7", lottoWinnerTicket);
 
         lottoWinner = new LottoWinner(lottoWinnerTicket, lottoBonusNumber);
@@ -36,16 +38,7 @@ class LottoBoughtTicketTest {
     @Test
     @DisplayName("구매한 로또 티켓 생성된다.")
     public void createBoughtTicketTest() {
-        LottoBoughtTicket lottoBoughtTicket = new LottoBoughtTicket(
-                Arrays.asList(
-                        new LottoNumber(1),
-                        new LottoNumber(2),
-                        new LottoNumber(3),
-                        new LottoNumber(4),
-                        new LottoNumber(5),
-                        new LottoNumber(6)
-                )
-        );
+        LottoBoughtTicket lottoBoughtTicket = new LottoBoughtTicket(lottoNumbers);
 
         assertThat(lottoBoughtTicket).isInstanceOf(LottoBoughtTicket.class);
     }
@@ -53,16 +46,7 @@ class LottoBoughtTicketTest {
     @Test
     @DisplayName("1등 매칭 된다.")
     public void matchFirstPriceTest() {
-        LottoBoughtTicket lottoBoughtTicket = new LottoBoughtTicket(
-                Arrays.asList(
-                        new LottoNumber(1),
-                        new LottoNumber(2),
-                        new LottoNumber(3),
-                        new LottoNumber(4),
-                        new LottoNumber(5),
-                        new LottoNumber(6)
-                )
-        );
+        LottoBoughtTicket lottoBoughtTicket = new LottoBoughtTicket(lottoNumbers);
 
         LottoRank lottoRank = lottoBoughtTicket.getRank(lottoWinner);
 
