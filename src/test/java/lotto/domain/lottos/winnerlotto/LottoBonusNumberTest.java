@@ -33,16 +33,16 @@ public class LottoBonusNumberTest {
     @Test
     @DisplayName("보너스 숫자를 생성한다.")
     public void createNumberTest() {
-        LottoBonusNumber number = new LottoBonusNumber(6, lottoWinnerTicket);
+        LottoBonusNumber number = LottoBonusNumber.of("6", lottoWinnerTicket);
 
-        assertThat(number).isEqualTo(new LottoBonusNumber(6, lottoWinnerTicket));
+        assertThat(number).isEqualTo(LottoBonusNumber.of("6", lottoWinnerTicket));
     }
 
     @Test
     @DisplayName("보너스 로또 숫자는 1~45 사이의 숫자여야한다.")
     public void validateNumberTest() {
         assertThatThrownBy(() -> {
-            new LottoBonusNumber(46, lottoWinnerTicket);
+            LottoBonusNumber.of("46", lottoWinnerTicket);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -50,7 +50,7 @@ public class LottoBonusNumberTest {
     @DisplayName("보너스 번호는 당첨번호 6개와 중복되면 IllegalArgument예외가 발생한다.")
     public void duplicateBonusNumberTest() {
         assertThatThrownBy(() -> {
-            new LottoBonusNumber(45, lottoWinnerTicket);
+            LottoBonusNumber.of("45", lottoWinnerTicket);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }

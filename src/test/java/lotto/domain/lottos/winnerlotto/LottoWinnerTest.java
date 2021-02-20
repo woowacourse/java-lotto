@@ -25,7 +25,7 @@ public class LottoWinnerTest {
                 new LottoNumber(45)
         );
         LottoTicket lottoWinnerTicket = new LottoTicket(lottoWinnerNumbers);
-        LottoBonusNumber lottoBonusNumber = new LottoBonusNumber(9, lottoWinnerTicket);
+        LottoBonusNumber lottoBonusNumber = LottoBonusNumber.of("9", lottoWinnerTicket);
 
         assertThat(new LottoWinner(lottoWinnerTicket, lottoBonusNumber)).isInstanceOf(LottoWinner.class);
     }

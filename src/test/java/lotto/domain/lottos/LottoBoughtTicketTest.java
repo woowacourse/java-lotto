@@ -28,7 +28,7 @@ class LottoBoughtTicketTest {
                         new LottoNumber(6)
                 )
         );
-        LottoBonusNumber lottoBonusNumber = new LottoBonusNumber(7, lottoWinnerTicket);
+        LottoBonusNumber lottoBonusNumber = LottoBonusNumber.of("7", lottoWinnerTicket);
 
         lottoWinner = new LottoWinner(lottoWinnerTicket, lottoBonusNumber);
     }
