@@ -15,7 +15,7 @@ public class LottoTicket {
     public LottoTicket(List<LottoNumber> lottoNumbers) {
         validateSize(lottoNumbers);
         validateNotDuplicate(lottoNumbers);
-        lottoNumbers.sort(Comparator.comparingInt(LottoNumber::getNumber));
+        lottoNumbers.sort(LottoNumber::compareTo);
         this.numbers = new ArrayList<>(lottoNumbers);
     }
 
