@@ -12,11 +12,9 @@ public class Money {
         this.money = money;
     }
 
-    //TODO:
-    // 매직넘버
     private void validateNotEnoughMoney(int money) {
         if (money < LOTTO_PRICE) {
-            throw new IllegalArgumentException("1000원 이상의 금액만 입력 가능합니다.");
+            throw new IllegalArgumentException(String.format("%d원 이상의 금액만 입력 가능합니다.", LOTTO_PRICE));
         }
     }
 
