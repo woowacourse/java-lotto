@@ -37,6 +37,12 @@ public class LottoGenerator {
         );
     }
 
+    public LottoGroup generateLottosWithManualLottoNumbers(List<LottoNumbers> manualLottoNumbers) {
+        return new LottoGroup(
+               manualLottoNumbers
+        );
+    }
+
     private List<LottoNumber> generateRandomLottoNumber() {
         Collections.shuffle(lottoNumbers);
 
