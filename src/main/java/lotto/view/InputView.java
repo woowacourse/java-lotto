@@ -21,7 +21,7 @@ public class InputView {
     public static UserPurchase getUserPurchase() {
         InputPrinter.printPurchasePriceInputGuideMessage();
         String purchasePriceInput = scanner.nextLine();
-        int purchasePrice = validateNaturalNumber(purchasePriceInput);
+        int purchasePrice = parseNumericInput(purchasePriceInput);
         return new UserPurchase(purchasePrice);
     }
 
@@ -32,11 +32,11 @@ public class InputView {
         return new WinningLottoNumbers(lottoTicket, bonusNumber);
     }
 
-    private static int validateNaturalNumber(String purchasePriceInput) {
-        if (!purchasePriceInput.matches(NUMERIC_REGULAR_EXPRESSION)) {
+    private static int parseNumericInput(String inputValue) {
+        if (!inputValue.matches(NUMERIC_REGULAR_EXPRESSION)) {
             throw new IllegalArgumentException("자연수를 입력해주세요.");
         }
-        return Integer.parseInt(purchasePriceInput);
+        return Integer.parseInt(inputValue);
     }
 
     private static List<LottoNumber> getWinningLottoNumbersInput() {
@@ -58,7 +58,7 @@ public class InputView {
     private static LottoNumber getBonusNumberInput() {
         InputPrinter.printBonusNumberInputGuideMessage();
         String bonusNumberInput = scanner.nextLine();
-        int bonusNumber = validateNaturalNumber(bonusNumberInput);
+        int bonusNumber = parseNumericInput(bonusNumberInput);
         InputPrinter.printNewLine();
         return new LottoNumber(bonusNumber);
     }
