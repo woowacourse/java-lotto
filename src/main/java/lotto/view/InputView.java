@@ -40,7 +40,8 @@ public class InputView {
     private List<Integer> inputToIntegerList() {
         String input = scanner.nextLine();
         List<String> splitNumbers = Arrays.asList(input.split(COMMA));
-        List<String> trimNumbers = splitNumbers.stream().map(String::trim).collect(Collectors.toList());
+        List<String> trimNumbers = splitNumbers.stream().map(String::trim)
+            .collect(Collectors.toList());
 
         return stringsToIntegers(trimNumbers);
     }

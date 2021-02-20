@@ -20,7 +20,9 @@ public class LottoNumberFactory {
             .filter(ball -> ball.equals(LottoNumber.createLottoNumber(lottoNumber)))
             .findFirst()
             .orElseThrow(() -> new IllegalArgumentException(
-                String.format("로또 번호가 잘 못 되었습니다. 최소값 : %d, 최대값 : %d, 입력값 : %d", MIN_RANGE, MAX_RANGE, lottoNumber))
+                String
+                    .format("로또 번호가 잘 못 되었습니다. 최소값 : %d, 최대값 : %d, 입력값 : %d", MIN_RANGE, MAX_RANGE,
+                        lottoNumber))
             );
     }
 }

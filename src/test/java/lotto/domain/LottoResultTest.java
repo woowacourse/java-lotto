@@ -11,8 +11,8 @@ class LottoResultTest {
 
     @DisplayName("로또 상금을 제대로 계산하는지 확인")
     @Test
-    void 로또_결과_상금_계산(){
-        Map<Prize,Long> lottoResultMap = new HashMap<>();
+    void 로또_결과_상금_계산() {
+        Map<Prize, Long> lottoResultMap = new HashMap<>();
         lottoResultMap.put(Prize.FIRST, 1L); // 20억
         lottoResultMap.put(Prize.SECOND, 2L); // 6천만
         lottoResultMap.put(Prize.THIRD, 1L); // 150만

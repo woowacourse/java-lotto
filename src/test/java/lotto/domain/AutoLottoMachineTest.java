@@ -9,11 +9,11 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class AutoLottoMachineTest {
-    private AutoLottoMachine autoLottoMachine = new AutoLottoMachine();
+    private final AutoLottoMachine autoLottoMachine = new AutoLottoMachine();
 
     @DisplayName("목표 장수에 맞추어 티켓을 생성하는지 확인")
     @Test
-    void 목표에_맞추어_티켓을_생성한다(){
+    void 목표에_맞추어_티켓을_생성한다() {
         int numberOfTickets = 5;
 
         LottoTickets tickets = autoLottoMachine.createTickets(5);
@@ -23,7 +23,7 @@ class AutoLottoMachineTest {
 
     @DisplayName("금액에 맞추어 티켓을 생성하는지 확인")
     @Test
-    void 금액에_맞추어_티켓을_생성하는지(){
+    void 금액에_맞추어_티켓을_생성하는지() {
         int numberOfTickets = 5;
         int purchaseMoney = 5000;
 
@@ -43,7 +43,7 @@ class AutoLottoMachineTest {
     @DisplayName("구매금액 단위가 음수이면 예외처리하는지 확인")
     @ParameterizedTest
     @ValueSource(ints = {-1000, -2000, -50000, -150000})
-    void 금액이_음수이면_예외(int purchaseMoney){
+    void 금액이_음수이면_예외(int purchaseMoney) {
         assertThatThrownBy(() -> autoLottoMachine.createTicketsByMoney(purchaseMoney))
             .isInstanceOf(IllegalArgumentException.class);
     }

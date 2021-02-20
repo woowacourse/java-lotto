@@ -23,7 +23,8 @@ class InputViewTest {
         Scanner scanner = new Scanner(new ByteArrayInputStream("test,test".getBytes()));
         InputView inputView = new InputView(scanner);
 
-        assertThatThrownBy(inputView::inputWinningNumbers).isExactlyInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(inputView::inputWinningNumbers)
+            .isExactlyInstanceOf(IllegalArgumentException.class);
     }
 
 }

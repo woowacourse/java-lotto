@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
@@ -15,7 +16,7 @@ class LottoTicketTest {
         List<Integer> randomNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         LottoTicket testLottoNumbers = new LottoTicket(randomNumbers);
 
-        assertThat(testLottoNumbers.list())
+        assertThat(testLottoNumbers.getLottoNumbers())
             .containsExactly(LottoNumberFactory.getInstance(1),
                 LottoNumberFactory.getInstance(2),
                 LottoNumberFactory.getInstance(3),
