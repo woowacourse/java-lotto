@@ -11,7 +11,7 @@ public class LottoManager {
 
     private final RatingInfo ratingInfo = new RatingInfo();
     private final LottoRepository lottoRepository = new LottoRepository();
-    private LottoMachine lottoMachine;
+    private final LottoMachine lottoMachine;
 
     public LottoManager(final LottoMachine lottoMachine) {
         this.lottoMachine = lottoMachine;
