@@ -5,8 +5,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
-    //TODO:
-    // final로 만들고 밑에 생성자 관련해서 리팩토링
     private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
@@ -14,16 +12,10 @@ public class Lottos {
     }
 
     public List<Rank> getResults(WinningLotto winningLotto) {
-        List<LottoNumber> winningLottoNumbers = winningLotto.getWinningLottoNumbers();
-        int bonusNumber = winningLotto.getBonusNumberAsInt();
-        return collectCorrespondingResults(winningLottoNumbers, bonusNumber);
-    }
-
-    private List<Rank> collectCorrespondingResults(List<LottoNumber> winningLottoNumbers, int bonusNumber) {
         List<Rank> ranks = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            int matches = lotto.countMatchingNumbers(winningLottoNumbers);
-            boolean bonusMatch = lotto.hasBonusNumber(bonusNumber);
+            int matches = lotto.countMatchingNumbers(winningLotto);
+            boolean bonusMatch = lotto.hasBonusNumber(winningLotto);
             ranks.add(Rank.getCorrespondingRank(matches, bonusMatch));
         }
         return ranks;

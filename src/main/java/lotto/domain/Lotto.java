@@ -2,7 +2,10 @@ package lotto.domain;
 
 import com.google.common.primitives.Ints;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class Lotto {
     public static final int LOTTO_START_INDEX = 0;
@@ -35,18 +38,16 @@ public class Lotto {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
-    //TODO
-    // Lotto객체를 주입 받도록 리팩토링
-    public int countMatchingNumbers(List<LottoNumber> numbers) {
-        return (int) numbers.stream()
-                .filter(lottoNumbers::contains)
-                .count();
+    public int countMatchingNumbers(WinningLotto winningLotto) {
+        return winningLotto.countMatchingNumbers(lottoNumbers);
     }
 
-    public boolean hasBonusNumber(int bonusNumber) {
-        return lottoNumbers.contains(new LottoNumber(bonusNumber));
+    public boolean hasBonusNumber(WinningLotto winningLotto) {
+        return winningLotto.hasAnyMatch(lottoNumbers);
     }
 
+    //TODO:
+    // String.format 으로
     public String getLottoSummary() {
         StringBuilder sb = new StringBuilder();
         sb.append("[");
@@ -56,9 +57,5 @@ public class Lotto {
         sb.append("]");
 
         return sb.toString();
-    }
-
-    public int getLottoSize() {
-        return lottoNumbers.size();
     }
 }

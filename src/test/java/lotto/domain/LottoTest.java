@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
+import static lotto.domain.WinningLottoTest.createCustomWinningLotto;
 import static lotto.view.InputView.convertStringsToInts;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -34,17 +35,18 @@ public class LottoTest {
 
     @Test
     void countNumberOfMatch() {
-        Lotto winningLotto = createCustomLotto("1, 2, 3, 4, 5, 6");
+        WinningLotto winningLotto = createCustomWinningLotto("1, 2, 3, 4, 5, 6", "10");
 
-        int matches = lotto.countMatchingNumbers(winningLotto.toList());
+        int matches = lotto.countMatchingNumbers(winningLotto);
 
         assertThat(matches).isEqualTo(3);
     }
 
     @Test
     void bonusMatch() {
-        int bonusNumber = 20;
-        boolean match = lotto.hasBonusNumber(bonusNumber);
+        WinningLotto winningLotto = createCustomWinningLotto("1, 2, 3, 4, 5, 6", "20");
+
+        boolean match = lotto.hasBonusNumber(winningLotto);
 
         assertTrue(match);
     }

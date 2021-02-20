@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.Collections;
 import java.util.List;
 
 public class WinningLotto extends Lotto {
@@ -19,11 +18,14 @@ public class WinningLotto extends Lotto {
         }
     }
 
-    public List<LottoNumber> getWinningLottoNumbers() {
-        return Collections.unmodifiableList(lottoNumbers);
+    public int countMatchingNumbers(List<LottoNumber> lottoNumbers) {
+        return (int) this.lottoNumbers
+                .stream()
+                .filter(lottoNumbers::contains)
+                .count();
     }
 
-    public int getBonusNumberAsInt() {
-        return bonusNumber.getNumber();
+    public boolean hasAnyMatch(List<LottoNumber> numbers) {
+        return numbers.contains(bonusNumber);
     }
 }
