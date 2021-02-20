@@ -11,11 +11,11 @@ public class LottoResult {
     private final Map<LottoRank, Long> statistics;
 
     public LottoResult(Map<LottoRank, Long> statistics) {
-        initiateEntry(statistics);
+        initiateDefaultEntry(statistics);
         this.statistics = new EnumMap<>(statistics);
     }
 
-    private void initiateEntry(Map<LottoRank, Long> statistics) {
+    private void initiateDefaultEntry(Map<LottoRank, Long> statistics) {
         Arrays.stream(LottoRank.values())
                 .forEach(lottoRank -> statistics.computeIfAbsent(lottoRank, key -> ZERO));
     }
