@@ -96,7 +96,7 @@ public class LottoTicketTest {
     }
 
     @Test
-    @DisplayName("로또 티켓 생성시 입력받은 List가 잘 정렬 되있는지 검사")
+    @DisplayName("구매한 로또 티켓의 숫자가 잘 정렬 되있는지 검사")
     public void lottoTicketSortTest() {
         LottoTicket lottoTicket = LottoTicketService.createLottoTicket();
 
