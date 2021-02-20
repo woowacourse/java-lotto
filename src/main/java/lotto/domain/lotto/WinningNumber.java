@@ -3,8 +3,6 @@ package lotto.domain.lotto;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Objects;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.PayOut;
