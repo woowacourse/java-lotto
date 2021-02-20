@@ -28,13 +28,13 @@ public class OutputView {
         Arrays.stream(Rank.values())
                 .filter(rank -> !Rank.UNRANKED.equals(rank))
                 .forEach(rank -> {
-                    String message = getMessage(rank);
-                    extracted(resultMap, rank, message);
+                    printResultPerRank(resultMap, rank);
                 });
     }
 
-    private static void extracted(Map<Rank, Integer> resultMap, Rank rank, String message) {
-        String prize = rank.getPrize().toString();
+    private static void printResultPerRank(Map<Rank, Integer> resultMap, Rank rank) {
+        String message = getRankMessage(rank);
+        BigInteger prize = rank.getPrize();
         Integer matchCount = resultMap.getOrDefault(rank, 0);
 
         System.out.printf("%s (%s원)- %d개%n", message, prize, matchCount);
@@ -57,7 +57,7 @@ public class OutputView {
             return "3개 일치";
         }
 
-        return "";
+        throw new IllegalArgumentException("UNRANKED는 출력하지 않습니다.");
     }
 
     public static void printTickets(List<LottoTicket> lottoTickets) {
