@@ -3,13 +3,13 @@ package domain;
 import java.util.List;
 
 public class WinningResult {
-    private final Price price;
+    private final LottoMoney lottoMoney;
     private final List<Ranking> rankings;
 
     public WinningResult(final WinningNumbers winningNumbers, final List<LottoTicket> lottoTickets,
-                         Price price) {
+                         LottoMoney lottoMoney) {
         this.rankings = winningNumbers.getRankings(lottoTickets);
-        this.price = price;
+        this.lottoMoney = lottoMoney;
     }
 
     public int countNumberOfRank(final Ranking ranking) {
@@ -19,7 +19,7 @@ public class WinningResult {
     }
 
     public double getProfitRate() {
-        return ((double) getTotalProfit()) / price.getValue();
+        return ((double) getTotalProfit()) / lottoMoney.getValue();
     }
 
     private int getTotalProfit() {

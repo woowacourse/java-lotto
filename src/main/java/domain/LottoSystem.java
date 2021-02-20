@@ -3,17 +3,17 @@ package domain;
 import java.util.List;
 
 public class LottoSystem {
-    private final Price price;
+    private final LottoMoney lottoMoney;
     private final List<LottoTicket> lottoTickets;
 
-    private LottoSystem(final Price price) {
-        this.price = price;
-        final LottoMachine lottoMachine = LottoMachine.valueOf(price);
+    private LottoSystem(final LottoMoney lottoMoney) {
+        this.lottoMoney = lottoMoney;
+        final LottoMachine lottoMachine = LottoMachine.valueOf(lottoMoney);
         this.lottoTickets = lottoMachine.generateLottoTickets();
     }
 
     public static LottoSystem init(final String price) {
-        return new LottoSystem(Price.valueOf(price));
+        return new LottoSystem(LottoMoney.valueOf(price));
     }
 
     public List<LottoTicket> getLottoTickets() {
@@ -25,6 +25,6 @@ public class LottoSystem {
     }
 
     public WinningResult getWinningResult(final WinningNumbers winningNumbers) {
-        return new WinningResult(winningNumbers, lottoTickets, price);
+        return new WinningResult(winningNumbers, lottoTickets, lottoMoney);
     }
 }

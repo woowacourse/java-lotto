@@ -36,8 +36,8 @@ class WinningResultTest {
         assertThat(winningResult.getProfitRate()).isEqualTo(2_030_005_000.0 / 3000.0);
     }
 
-    private Price createValidPrice() {
-        return Price.valueOf("3000");
+    private LottoMoney createValidPrice() {
+        return LottoMoney.valueOf("3000");
     }
 
     private List<LottoTicket> createValidLottoTickets() {

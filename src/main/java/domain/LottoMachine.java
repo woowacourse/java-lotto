@@ -8,14 +8,14 @@ public class LottoMachine {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
 
-    private final Price price;
+    private final LottoMoney lottoMoney;
 
-    private LottoMachine(final Price price) {
-        this.price = price;
+    private LottoMachine(final LottoMoney lottoMoney) {
+        this.lottoMoney = lottoMoney;
     }
 
-    public static LottoMachine valueOf(final Price price) {
-        return new LottoMachine(price);
+    public static LottoMachine valueOf(final LottoMoney lottoMoney) {
+        return new LottoMachine(lottoMoney);
     }
 
     public List<LottoTicket> generateLottoTickets() {
@@ -30,6 +30,6 @@ public class LottoMachine {
     }
 
     public int getLottoTicketQuantity() {
-        return price.getValue() / LOTTO_TICKET_PRICE;
+        return lottoMoney.getValue() / LOTTO_TICKET_PRICE;
     }
 }
