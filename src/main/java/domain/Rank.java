@@ -20,8 +20,8 @@ public enum Rank {
         this.reward = reward;
     }
 
-    public static Rank from(long match, boolean bonusBallMatch) {
-        if (bonusBallMatch && match == FIVE) {
+    public static Rank from(long match, boolean hasBonus) {
+        if (match == FIVE && hasBonus) {
             return Rank.SECOND;
         }
         return Arrays.stream(Rank.values())
