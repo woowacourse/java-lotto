@@ -32,7 +32,7 @@ public class LottoController {
     }
 
     private void showResult(LottoTickets lottoTickets, WinningLotto winningLotto) {
-        LottoResult lottoResult = lottoTickets.checkPrizesByWinningTickets(winningLotto);
+        LottoResult lottoResult = winningLotto.checkPrizes(lottoTickets);
         OutputView.printResultStatistic(lottoResult);
         Money totalProfit = lottoResult.getTotalProfit();
         double profitRate = totalProfit.divide(lottoResult.lottoResult().size());

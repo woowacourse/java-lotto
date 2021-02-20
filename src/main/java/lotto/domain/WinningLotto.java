@@ -2,6 +2,9 @@ package lotto.domain;
 
 import lotto.exception.IllegalWinningLottoException;
 
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
+
 public class WinningLotto {
     private LottoTicket winningTicket;
     private LottoNumber bonusNumber;
@@ -16,6 +19,12 @@ public class WinningLotto {
         if (isContainBonusNumber(winningTicket)) {
             throw new IllegalWinningLottoException();
         }
+    }
+
+    public LottoResult checkPrizes(LottoTickets lottoTickets) {
+        return lottoTickets.lottoTickets().stream()
+                .map(this::matchPrize)
+                .collect(collectingAndThen(toList(), LottoResult::new));
     }
 
     public Prize matchPrize(LottoTicket lottoTicket) {
