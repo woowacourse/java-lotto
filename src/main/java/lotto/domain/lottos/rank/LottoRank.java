@@ -20,17 +20,14 @@ public enum LottoRank {
 
     public static LottoRank matchLottoRank(final int matchCount, final boolean matchBonusNumber) {
         return Arrays.stream(LottoRank.values())
-                .filter(rank -> isMatchRank(rank, matchCount, matchBonusNumber))
+                .filter(rank -> rank.isMatchRank(matchCount))
+                .filter(rank -> !rank.equals(SECOND_PLACE) || matchBonusNumber)
                 .findFirst()
                 .orElse(SIXTH_PLACE);
     }
 
-    private static boolean isMatchRank(LottoRank rank, int matchCount, boolean matchBonusNumber) {
-        if (matchCount == 5 && SECOND_PLACE.equals(rank)) {
-            return matchBonusNumber;
-        }
-
-        return matchCount == rank.matches;
+    private boolean isMatchRank(int matchCount) {
+        return this.matches == matchCount;
     }
 
     public int getMatches() {
