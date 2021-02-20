@@ -23,7 +23,7 @@ public class LottosTest {
 
         List<LottoNumber> winningNumbers = createCustomLottoNumbers("1, 2, 3, 4, 5, 6");
         LottoNumber bonusNumber = new LottoNumber(20);
-        List<Result> results = lottos.getResults(new WinningLotto(winningNumbers, bonusNumber));
+        List<Result> results = lottos.getResults(new WinningLotto(new Lotto(winningNumbers), bonusNumber));
 
         List<Result> expectedResults = Arrays.asList(Result.FIFTH, Result.NONE);
 

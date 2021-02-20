@@ -20,7 +20,7 @@ public class Application {
         OutputView.showLottos(lottos);
 
         WinningLotto winningLotto = new WinningLotto(
-                convertStringsToLottoNumbers(InputView.takeWinningNumbersInput(scanner)),
+                new Lotto(convertStringsToLottoNumbers(InputView.takeWinningNumbersInput(scanner))),
                 new LottoNumber(InputView.takeBonusNumberInput(scanner))
         );
 

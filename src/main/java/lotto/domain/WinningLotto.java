@@ -1,49 +1,26 @@
 package lotto.domain;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-import static lotto.domain.Lotto.LOTTO_SIZE;
-
-public class WinningLotto {
-    public static final String LOTTO_SIZE_ERROR = String.format("당첨 번호는 총 %d개 이어야 합니다.", LOTTO_SIZE);
-    public static final String DUPLICATE_ERROR = "중복되는 번호는 안됩니다.";
-
-    private final List<LottoNumber> winningLottoNumbers;
+public class WinningLotto extends Lotto {
     private final LottoNumber bonusNumber;
 
-    public WinningLotto(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
-        validateLottoSize(winningNumbers);
-        validateDuplicates(winningNumbers);
-        this.winningLottoNumbers = winningNumbers;
+    public WinningLotto(Lotto winningLotto, LottoNumber bonusNumber) {
+        super(winningLotto.toList());
 
-        validateDuplicatesWithWinningNumbers(bonusNumber);
+        validateDuplicatesWithLottoNumbers(bonusNumber);
         this.bonusNumber = bonusNumber;
     }
 
-    private void validateLottoSize(List<LottoNumber> numbers) {
-        if (numbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException(LOTTO_SIZE_ERROR);
-        }
-    }
-
-    private void validateDuplicates(List<LottoNumber> numbers) {
-        Set<LottoNumber> numberGroup = new HashSet<>(numbers);
-        if (numberGroup.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException(DUPLICATE_ERROR);
-        }
-    }
-
-    private void validateDuplicatesWithWinningNumbers(LottoNumber number) {
-        if (number.hasAnyMatchingNumber(winningLottoNumbers)) {
+    private void validateDuplicatesWithLottoNumbers(LottoNumber number) {
+        if (number.hasAnyMatchingNumber(lottoNumbers)) {
             throw new IllegalArgumentException();
         }
     }
 
     public List<LottoNumber> getWinningLottoNumbers() {
-        return Collections.unmodifiableList(winningLottoNumbers);
+        return Collections.unmodifiableList(lottoNumbers);
     }
 
     public int getBonusNumberAsInt() {

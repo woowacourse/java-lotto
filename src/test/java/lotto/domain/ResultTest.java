@@ -25,12 +25,11 @@ public class ResultTest {
         List<LottoNumber> winningNumbers = createCustomLottoNumbers("1, 2, 3, 4, 5, 6");
         LottoNumber bonusNumber = new LottoNumber(20);
 
-
         Lotto lotto1 = new Lotto(createCustomLottoNumbers("1, 2, 3, 20, 21, 40")); // FIFTH
         Lotto lotto2 = new Lotto(createCustomLottoNumbers("1, 2, 3, 4, 5, 20")); // SECOND
         Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2));
 
-        List<Result> results = lottos.getResults(new WinningLotto(winningNumbers, bonusNumber));
+        List<Result> results = lottos.getResults(new WinningLotto(new Lotto(winningNumbers), bonusNumber));
         List<Integer> stats = Result.getStatistics(results);
         assertThat(stats).isEqualTo(Arrays.asList(1, 0, 0, 1, 0));
     }
@@ -46,7 +45,7 @@ public class ResultTest {
         Lotto lotto3 = new Lotto(createCustomLottoNumbers("1, 2, 3, 4, 5, 20")); // SECOND
         Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3));
 
-        List<Result> results = lottos.getResults(new WinningLotto(winningNumbers, bonusNumber));
+        List<Result> results = lottos.getResults(new WinningLotto(new Lotto(winningNumbers), bonusNumber));
 
         float profit = Result.calculateProfit(results);
         assertThat(profit).isEqualTo(60_005_000);
