@@ -12,10 +12,13 @@ public class RandomLottoMachine implements LottoMachine {
     private static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_NUMBER_COUNT = 6;
 
-    private final List<Integer> lottoNumbers = IntStream
-            .rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
-            .boxed()
-            .collect(Collectors.toList());
+    private final List<Integer> lottoNumbers;
+
+    public RandomLottoMachine() {
+        lottoNumbers = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
+                                .boxed()
+                                .collect(Collectors.toList());
+    }
 
     @Override
     public List<Integer> generate() {
