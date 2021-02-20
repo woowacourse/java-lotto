@@ -16,7 +16,9 @@ public class Lotto {
     private final List<LottoNumber> numbers;
 
     public Lotto(final List<Integer> numbers) {
-        this(numbers.stream().map(LottoNumber::new).collect(Collectors.toList()), true);
+        this(numbers.stream()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList()), true);
     }
 
     /*

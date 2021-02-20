@@ -29,7 +29,9 @@ public enum Rating {
             return MISS;
         }
 
-        return Arrays.stream(values()).filter(rating -> rating.matchCount == matchCount).findAny()
+        return Arrays.stream(values())
+            .filter(rating -> rating.matchCount == matchCount)
+            .findAny()
             .orElseThrow(() -> new NoSuchElementException(NONE_RATING_ERROR_MESSAGE));
     }
 
