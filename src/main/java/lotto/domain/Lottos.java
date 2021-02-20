@@ -5,24 +5,21 @@ import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
-    private final int count;
     //TODO:
     // final로 만들고 밑에 생성자 관련해서 리팩토링
-    private List<Lotto> lottos = new ArrayList<>();;
+    private List<Lotto> lottos = new ArrayList<>();
 
     public Lottos(List<Lotto> lottos) {
-        this.count = lottos.size();
         this.lottos = lottos;
     }
 
     public Lottos(int count) {
-        this.count = count;
-        createLottos();
+        createLottos(count);
     }
 
     //TODO:
     // LottoNumbergenerator를 주입 받아 전략패턴 만들기
-    private void createLottos() {
+    private void createLottos(int count) {
         LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
         for (int i = 0; i < count; i++) {
             lottos.add(lottoNumberGenerator.createLotto());
