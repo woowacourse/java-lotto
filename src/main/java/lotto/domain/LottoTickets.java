@@ -4,17 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTickets {
-    private List<LottoTicket> lottoTickets;
+    private final List<LottoTicket> lottoTickets;
 
-    public LottoTickets(List<LottoTicket> lottoTickets){
+    public LottoTickets(List<LottoTicket> lottoTickets) {
         this.lottoTickets = lottoTickets;
     }
 
-    public List<LottoTicket> list(){
+    public List<LottoTicket> getLottoTickets() {
         return new ArrayList<>(lottoTickets);
     }
 
-    public int size(){
+    // todo 메소드 필요 여부?
+    public int size() {
         return lottoTickets.size();
     }
 }

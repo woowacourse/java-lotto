@@ -4,11 +4,11 @@ import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
 
-import java.util.List;
 import java.util.function.Function;
 import lotto.domain.AutoLottoMachine;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoResult;
+import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.WinningLottoTicket;
 import lotto.view.InputView;
@@ -32,7 +32,7 @@ public class LottoController {
         //todo : lottoTickets 일급 콜렉션 생성
         LottoTickets lottoTickets = buyLottoTicket(lottoPurchaseMoney);
 
-        WinningLottoTicket winningLottoTicket = createWinningLotto();
+        WinningLottoTicket winningLottoTicket = createWinningLottoTicket();
 
         LottoResult lottoResult = calculateLottoResult(lottoTickets, winningLottoTicket);
 
@@ -46,15 +46,15 @@ public class LottoController {
         return lottoTickets;
     }
 
-    private WinningLottoTicket createWinningLotto() {
-        List<Integer> winningNumbers = inputView.inputWinningNumbers();
+    private WinningLottoTicket createWinningLottoTicket() {
+        LottoTicket winningTicket = new LottoTicket(inputView.inputWinningNumbers());
         int bonusNumber = inputView.takeBonusNumber();
-        return new WinningLottoTicket(winningNumbers, bonusNumber);
+        return new WinningLottoTicket(winningTicket, bonusNumber);
     }
 
     private LottoResult calculateLottoResult(LottoTickets lottoTickets,
         WinningLottoTicket winningLottoTicket) {
-        return lottoTickets.list().stream()
+        return lottoTickets.getLottoTickets().stream()
             .map(winningLottoTicket::compareNumbers)
             .collect(collectingAndThen(
                 groupingBy(Function.identity(), counting()),

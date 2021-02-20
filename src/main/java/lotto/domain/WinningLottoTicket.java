@@ -1,14 +1,14 @@
 package lotto.domain;
 
-import java.util.List;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.LottoNumberFactory;
 
-public class WinningLottoTicket extends LottoTicket {
+public class WinningLottoTicket {
+    private final LottoTicket winningTicket;
     private final LottoNumber bonusNumber;
 
-    public WinningLottoTicket(List<Integer> winningNumber, int bonusNumber) {
-        super(winningNumber);
+    public WinningLottoTicket(LottoTicket winningTicket, int bonusNumber) {
+        this.winningTicket = winningTicket;
         validateDuplicatedBonusNumber(bonusNumber);
         this.bonusNumber = LottoNumberFactory.getInstance(bonusNumber);
     }
@@ -16,7 +16,7 @@ public class WinningLottoTicket extends LottoTicket {
     private void validateDuplicatedBonusNumber(int bonusNumber) {
         LottoNumber bonusLottoNumber = LottoNumberFactory.getInstance(bonusNumber);
 
-        boolean isDuplicated = this.list().stream()
+        boolean isDuplicated = this.winningTicket.getLottoNumbers().stream()
             .anyMatch(winningNumber -> winningNumber.equals(bonusLottoNumber));
 
         if (isDuplicated) {
@@ -27,11 +27,11 @@ public class WinningLottoTicket extends LottoTicket {
     }
 
     public Prize compareNumbers(LottoTicket lottoTicket) {
-        long winningCount = lottoTicket.list().stream()
-            .filter(lottoNumber -> this.list().contains(lottoNumber))
+        long winningCount = lottoTicket.getLottoNumbers().stream()
+            .filter(lottoNumber -> this.winningTicket.getLottoNumbers().contains(lottoNumber))
             .count();
 
-        boolean isBonus = lottoTicket.list().stream()
+        boolean isBonus = lottoTicket.getLottoNumbers().stream()
             .anyMatch(winningNumber -> winningNumber.equals(bonusNumber));
 
         return getResult(winningCount, isBonus);
