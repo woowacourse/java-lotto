@@ -13,6 +13,7 @@ public class LottoTicketService {
 
     private static final String DELIMITER = ",";
     private static final String COUNT_ERROR_MESSAGE = "당첨 숫자는 6개 넣어야 합니다.";
+    private static final String NUMBER_FORMAT_ERROR_MESSAGE = "로또 당첨번호는 6개 모두 숫자여야합니다.";
     private static final int LOTTO_NUMBER_SIZE = 6;
 
     private LottoTicketService() {
@@ -22,17 +23,29 @@ public class LottoTicketService {
         return new LottoBoughtTicket(new RandomNumberGenerator().generateNumbers());
     }
 
-    public static LottoTicket createLottoWinnerTicket(String input) {
+    public static LottoTicket createLottoWinnerTicket(final String input) {
         List<LottoNumber> lottoWinnerNumbers =
                 Arrays.stream(input.split(DELIMITER))
                         .map(String::trim)
-                        .map(Integer::parseInt)
+                        .map(LottoTicketService::parseInt)
                         .map(LottoNumber::new)
                         .collect(Collectors.toList());
-        if (lottoWinnerNumbers.size() != LOTTO_NUMBER_SIZE) {
+        validateLottoSize(lottoWinnerNumbers.size());
+        return new LottoTicket(lottoWinnerNumbers);
+    }
+
+    private static int parseInt(String input) {
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException(NUMBER_FORMAT_ERROR_MESSAGE);
+        }
+    }
+
+    private static void validateLottoSize(final int size) {
+        if (size != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException(COUNT_ERROR_MESSAGE);
         }
-        return new LottoTicket(lottoWinnerNumbers);
     }
 
 }
