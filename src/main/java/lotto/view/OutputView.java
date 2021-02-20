@@ -9,8 +9,10 @@ import lotto.domain.Lottos;
 import lotto.domain.Rank;
 
 public class OutputView {
+    private static final String MANUAL_LOTTO_NUMBER_QUESTION = "수동으로 구매할 번호를 입력해 주세요.";
 
     public void printPurchasingLotto(int purchasingLottoCount) {
+        System.out.println();
         System.out.println(purchasingLottoCount + "개를 구매했습니다.");
     }
 
@@ -53,5 +55,9 @@ public class OutputView {
                          + result.getOrNoCount(rank) + "개");
                  }
              });
+    }
+
+    public void printInputManualLottoNumbers() {
+        System.out.println(MANUAL_LOTTO_NUMBER_QUESTION);
     }
 }

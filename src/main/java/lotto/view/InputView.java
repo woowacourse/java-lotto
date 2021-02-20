@@ -6,6 +6,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 import lotto.domain.LottoCount;
 import lotto.domain.LottoNumber;
+import lotto.domain.Lottos;
 import lotto.domain.PayAmount;
 
 public class InputView {
@@ -34,11 +35,7 @@ public class InputView {
 
     private List<Integer> readWinningLottoExceptBonusNumber() {
         String input = read(WINNING_LOTTO_NUMBER_QUESTION);
-        String[] lottoNumbers = input.split(DELIMITER);
-        return Arrays.stream(lottoNumbers)
-                     .map(number -> Integer.parseInt(number.trim()))
-                     .map(number -> LottoNumber.from(number).getLottoNum())
-                     .collect(Collectors.toList());
+        return splitAndToInts(input);
     }
 
     public LottoNumber readBonusNumber() {
@@ -53,9 +50,21 @@ public class InputView {
         return new LottoCount(lottoCount);
     }
 
+    public List<Integer> readManualLottoNumbers() {
+        String input = scanner.nextLine();
+        return splitAndToInts(input);
+    }
+
+    private List<Integer> splitAndToInts(String lottoNumbers) {
+        String[] lottoNumberGroup = lottoNumbers.split(DELIMITER);
+        return Arrays.stream(lottoNumberGroup)
+                     .map(number -> Integer.parseInt(number.trim()))
+                     .map(number -> LottoNumber.from(number).getLottoNum())
+                     .collect(Collectors.toList());
+    }
+
     private String read(String question) {
         System.out.println(question);
         return scanner.nextLine();
     }
-
 }
