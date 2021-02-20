@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoStatisticResult;
-import lotto.domain.Lottos;
-import lotto.domain.Rank;
-import lotto.domain.RankComparator;
+import lotto.domain.*;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -24,13 +21,13 @@ public class OutputView {
     
     private static final String NEW_LINE = System.lineSeparator();
     
-    public void printPurchaseLottos(int purchaseCount, Lottos lottos) {
-        printPurchaseCount(purchaseCount);
+    public void printPurchaseLottos(PaymentAmount paymentAmount, Lottos lottos) {
+        printPurchaseCount(paymentAmount);
         printPurchaseLottos(lottos);
     }
     
-    private void printPurchaseCount(int purchaseCount) {
-        System.out.printf(VIEW_OF_PURCHASE_COUNT, purchaseCount);
+    private void printPurchaseCount(PaymentAmount paymentAmount) {
+        System.out.printf(VIEW_OF_PURCHASE_COUNT, paymentAmount.getPurchaseCount());
     }
     
     private void printPurchaseLottos(Lottos lottos) {

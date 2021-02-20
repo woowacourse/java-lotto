@@ -1,9 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoStatisticResult;
-import lotto.domain.Lottos;
-import lotto.domain.WinningLotto;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -21,12 +18,11 @@ public class LottoMachine {
     }
     
     public Lottos purchase() {
-        int purchaseCount = inputView.readPaymentAmount()
-                                     .getPurchaseCount();
+        PaymentAmount paymentAmount = inputView.readPaymentAmount();
         
-        Lottos lottos = Lottos.makeLottos(purchaseCount);
+        Lottos lottos = Lottos.makeLottos(paymentAmount);
         
-        outputView.printPurchaseLottos(purchaseCount, lottos);
+        outputView.printPurchaseLottos(paymentAmount, lottos);
         
         return lottos;
     }
