@@ -21,12 +21,6 @@ public class Lotto {
             .collect(Collectors.toList()), true);
     }
 
-    /*
-    List<Integer> List<LottoNumber>를 동시에 사용했을 때, Erase~~ 에러를 띄웁니다.
-    기존에는 static createByName(List<Integer> numbers)와 같은 방식으로 구현을 진행했었는데요,
-    JDK HashSet 의 생성자에 경우 dummy 를 추가하는 방식으로 생성자 오버로딩을 구현해서 이런식으로 구현해봤습니다.
-    현업에서는 어떻게 사용되는지 궁금합니다!
-     */
     public Lotto(final List<LottoNumber> numbers, final boolean dummy) {
         validateNumberCount(numbers);
         validateDistinct(numbers);
@@ -57,10 +51,8 @@ public class Lotto {
     }
 
     public List<Integer> getNumbers() {
-        List<LottoNumber> copyNumbers = new ArrayList<>(numbers);
-        return Collections.unmodifiableList(copyNumbers.stream()
+        return Collections.unmodifiableList(numbers.stream()
             .map(LottoNumber::getNumber)
-            .sorted()
             .collect(Collectors.toList()));
     }
 }

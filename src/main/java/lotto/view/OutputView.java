@@ -36,6 +36,7 @@ public class OutputView {
     public static void printLottoResult(StringBuilder log, Lotto lotto) {
         log.append(LOTTO_RESULT_OPEN);
         String body = lotto.getNumbers().stream()
+            .sorted()
             .map(String::valueOf)
             .collect(Collectors.joining(NUMBER_DELIMITER));
         log.append(body);
