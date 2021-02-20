@@ -19,8 +19,8 @@ public class LottoResult {
             .sum();
     }
 
-    public Optional<Long> get(Prize prize){
-        return Optional.ofNullable(lottoResult.get(prize));
+    public long get(Prize prize){
+        return lottoResult.getOrDefault(prize, 0L);
     }
 
     public long calculateProfitPercent(){

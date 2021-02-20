@@ -19,20 +19,19 @@ import java.util.List;
 import java.util.Scanner;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoControllerTest {
     LottoController lottoController;
 
     @BeforeEach
-    void setup(){
+    void setup() {
         InputView inputView = new InputView(new Scanner(System.in));
         lottoController = new LottoController(inputView, new OutputView(), new AutoLottoMachine());
     }
 
     @DisplayName("로또 티켓 구매 메소드 확인")
     @ParameterizedTest
-    @ValueSource(ints = {1,2,3,4,5,6,7,8,10})
+    @ValueSource(ints = {1, 2, 3, 4, 5, 6, 7, 8, 10})
     void buyLottoTicket(int testSize) {
         LottoTickets lottoTickets = lottoController.buyLottoTicket(AutoLottoMachine.LOTTO_PRICE * testSize);
 

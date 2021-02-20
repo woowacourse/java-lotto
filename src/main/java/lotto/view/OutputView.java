@@ -55,10 +55,8 @@ public class OutputView {
     }
 
     public String makeWinningResultMessage(Prize prize, LottoResult lottoResult) {
-        Optional<Long> winningCount = lottoResult.get(prize);
-
         return String.format(findFormat(prize), prize.getMatchCount(), prize.getPrizeMoney(),
-                winningCount.orElse(0L));
+                lottoResult.get(prize));
     }
 
     public String findFormat(Prize prize) {
