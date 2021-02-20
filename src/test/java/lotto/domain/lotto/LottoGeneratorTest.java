@@ -31,9 +31,30 @@ public class LottoGeneratorTest {
 
         List<LottoNumbers> manualLottoNumbers = manualStringLottoNumbers.stream()
                 .map(LottoNumbers::valueOf)
-                .collect(toList());;
+                .collect(toList());
+
+        PayOut zeroPayOut = PayOut.ZERO;
 
         LottoGenerator lottoGenerator = new LottoGenerator();
-        assertThat(lottoGenerator.generateLottosWithManualLottoNumbers(manualLottoNumbers).getCount()).isEqualTo(3);
+        assertThat(lottoGenerator.generateLottosWithManualLottoNumbers(manualLottoNumbers, zeroPayOut).getCount()).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("수동 로또번호를 입력하면, 수동번호의 로또그를을 생성한다")
+    void generateLottos() {
+        List<String> manualStringLottoNumbers = Arrays.asList(
+                "1,2,3,4,5,6",
+                "1,3,4,7,34,6",
+                "5,3,8,6,4,9"
+        );
+
+        List<LottoNumbers> manualLottoNumbers = manualStringLottoNumbers.stream()
+                .map(LottoNumbers::valueOf)
+                .collect(toList());
+
+        PayOut payOut = new PayOut(3000);
+
+        LottoGenerator lottoGenerator = new LottoGenerator();
+        assertThat(lottoGenerator.generateLottosWithManualLottoNumbers(manualLottoNumbers, payOut).getCount()).isEqualTo(3);
     }
 }
