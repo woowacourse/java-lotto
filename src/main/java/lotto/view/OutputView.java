@@ -5,10 +5,9 @@ import lotto.domain.LottoStatistics;
 import lotto.domain.Lottos;
 import lotto.domain.Rank;
 
-import java.util.Arrays;
 import java.util.List;
 
-import static lotto.domain.Rank.*;
+import static lotto.domain.Rank.getRanksForStatistics;
 
 public class OutputView {
     private OutputView() {
@@ -22,22 +21,14 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void result(LottoStatistics lottoStatistics) {
+    public static void showResultStatistics(LottoStatistics lottoStatistics) {
         System.out.println("당첨 통계");
         System.out.println("---------");
         List<Integer> statistics = lottoStatistics.getWinCountByRank();
-        List<Rank> fifthToFirst = getRanksForStatistics();
-        String[] additionalExplanation = getAdditionalExplanation();
+        List<Rank> ranksForStatistics = getRanksForStatistics();
         for (int i = 0; i < statistics.size(); i++) {
-            System.out.printf("%d개 일치%s(%d원)- %d개\n", fifthToFirst.get(i).getCount(), additionalExplanation[i], fifthToFirst.get(i).getPrize(), statistics.get(i));
+            System.out.printf("%s %d개\n", ranksForStatistics.get(i).getMessage(), statistics.get(i));
         }
         System.out.printf("총 수익률은 %.2f입니다.\n", lottoStatistics.getProfitRate());
-    }
-
-    private static String[] getAdditionalExplanation() {
-        String[] bonus = new String[RANK_END_INDEX];
-        Arrays.fill(bonus, " ");
-        bonus[INDEX_OF_SECOND_RANK] = ", 보너스 볼 일치";
-        return bonus;
     }
 }

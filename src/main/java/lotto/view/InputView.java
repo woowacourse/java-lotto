@@ -35,6 +35,7 @@ public class InputView {
         System.out.println("보너스 볼을 입력해 주세요");
         String bonusBallInput = scanner.nextLine();
         validateNumeric(bonusBallInput);
+        System.out.println();
         return Integer.parseInt(bonusBallInput);
     }
 
