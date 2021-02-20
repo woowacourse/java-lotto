@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 public class LottoStatisticResultTest {
 
     private static final WinningLotto WINNING_LOTTO
-        = WinningLotto.of(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+        = WinningLotto.of(Arrays.asList(1, 2, 3, 4, 5, 6), LottoNumber.from("7"));
 
     @Test
     void match_ReturnProperMatchingCount() {

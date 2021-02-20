@@ -14,7 +14,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 public class RankTest {
 
     private static final WinningLotto WINNING_LOTTO
-        = WinningLotto.of(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+        = WinningLotto.of(Arrays.asList(1, 2, 3, 4, 5, 6), LottoNumber.from("7"));
 
     private static final List<Lotto> LOTTO_GROUP = new ArrayList<>();
 

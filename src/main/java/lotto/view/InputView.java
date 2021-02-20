@@ -33,14 +33,14 @@ public class InputView {
         String input = read(WINNING_LOTTO_NUMBER_QUESTION);
         String[] lottoNumbers = input.split(DELIMITER);
         return Arrays.stream(lottoNumbers)
-                     .map(number -> Integer.parseInt(number))
+                     .map(number -> Integer.parseInt(number.trim()))
                      .map(number -> LottoNumber.from(number).getLottoNum())
                      .collect(Collectors.toList());
     }
 
     public LottoNumber readBonusNumber() {
         String input = read(BONUS_LOTTO_NUMBER_QUESTION);
-        return LottoNumber.fromStringLottoNumber(input);
+        return LottoNumber.from(input);
     }
 
     private String read(String question) {

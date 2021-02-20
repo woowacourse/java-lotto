@@ -17,7 +17,7 @@ public class WinningLottoTest {
 
         // when
         ThrowingCallable throwingCallable
-            = () -> WinningLotto.of(numbers, bonusNumber);
+            = () -> WinningLotto.of(numbers, LottoNumber.from(bonusNumber));
 
         // then
         assertThatCode(throwingCallable).doesNotThrowAnyException();
