@@ -23,6 +23,7 @@ public class LottoMachine {
         for (int i = 0; i < quantity; i++) {
             lottos.add(makeLotto());
         }
+        return lottos;
     }
 
     private Lotto makeLotto() {

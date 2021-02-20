@@ -1,8 +1,7 @@
 package lottogame.view;
 
 import lottogame.domain.Rank;
-import lottogame.domain.lotto.Lotto;
-import lottogame.domain.stats.LottoResults;
+import lottogame.domain.dto.LottoResults;
 
 import java.util.List;
 import java.util.Map;
@@ -16,13 +15,13 @@ public class OutputView {
         System.out.printf("%d개를 구매했습니다.\n", quantity);
     }
 
-    public static void showLottos(List<Lotto> lottos) {
-        lottos.stream()
-                .map(lotto -> lotto.values())
-                .forEach(numbers -> System.out.println(integerToString(numbers)));
+    public static void showLottos(List<List<Integer>> lottos) {
+        for (List<Integer> lotto : lottos) {
+            System.out.println(formatLottosOutput(lotto));
+        }
     }
 
-    private static String integerToString(List<Integer> numbers) {
+    private static String formatLottosOutput(List<Integer> numbers) {
         return numbers.stream()
                 .map(number -> String.valueOf(number))
                 .collect(Collectors.joining(", ", "[", "]"));

@@ -1,6 +1,7 @@
 package lottogame.domain.lotto;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoNumber {
@@ -13,6 +14,10 @@ public class LottoNumber {
         for (int i = 0; i < LOTTO_VOLUME; i++) {
             numbers.add(makeNumber());
         }
+    }
+
+    public List<Integer> values() {
+        return Collections.unmodifiableList(numbers);
     }
 
     private Integer makeNumber() {

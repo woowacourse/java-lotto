@@ -4,6 +4,7 @@ import lottogame.domain.LottoMachine;
 import lottogame.view.InputView;
 import lottogame.domain.lotto.Lottos;
 import lottogame.domain.Money;
+import lottogame.view.OutputView;
 
 public class GameController {
     private LottoMachine lottoMachine;
@@ -16,10 +17,8 @@ public class GameController {
         Money money = new Money(InputView.inputMoney());
         int quantity = lottoMachine.purchaseQuantity(money);
         Lottos lottos = new Lottos(lottoMachine.buyLotto(quantity));
-//            buyLotto();
+        OutputView.showLottos(lottos.numbersOfLottos());
 //            OutputView.printResult(matchLottos());
-
-
     }
 
 //    private void buyLotto() {
