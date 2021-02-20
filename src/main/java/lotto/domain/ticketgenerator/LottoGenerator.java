@@ -10,7 +10,6 @@ import lotto.domain.ticketpurchase.UserPurchase;
 
 public class LottoGenerator {
     private static final int ZERO = 0;
-    private static final int SIZE = 6;
     private final List<LottoNumber> allNumbers;
 
     public LottoGenerator() {
@@ -25,7 +24,7 @@ public class LottoGenerator {
 
         for (int i = 0; i < userPurchase.getNumberOfTicket(); i++) {
             Collections.shuffle(allNumbers);
-            lottoTickets.add(new LottoTicket(new ArrayList<>(allNumbers.subList(ZERO, SIZE))));
+            lottoTickets.add(new LottoTicket(new ArrayList<>(allNumbers.subList(ZERO, LottoTicket.SIZE))));
         }
         return new PurchasedLottoTickets(lottoTickets);
     }
