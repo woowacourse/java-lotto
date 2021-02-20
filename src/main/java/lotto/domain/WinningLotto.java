@@ -8,7 +8,7 @@ public class WinningLotto {
 
     public WinningLotto(LottoTicket winningTicket, LottoNumber bonusNumber) {
         validateWinningLotto(winningTicket, bonusNumber);
-        this.winningTicket = new LottoTicket(winningTicket.lottoTicket());
+        this.winningTicket = new LottoTicket(winningTicket.getLottoTicket());
         this.bonusNumber = new LottoNumber(bonusNumber.toString());
     }
 

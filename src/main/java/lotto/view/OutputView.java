@@ -14,7 +14,7 @@ public class OutputView {
     }
 
     public static void printLottoTicketsCount(LottoTickets lottoTickets) {
-        System.out.println(lottoTickets.lottoTickets().size() + "개를 구매했습니다.");
+        System.out.println(lottoTickets.getLottoTickets().size() + "개를 구매했습니다.");
     }
 
     public static void printInputWinningNumbers() {
@@ -26,8 +26,8 @@ public class OutputView {
     }
 
     public static void printLottoTickets(LottoTickets lottoTickets) {
-        for (LottoTicket lottoTicket : lottoTickets.lottoTickets()) {
-            System.out.println(lottoTicket.lottoTicket());
+        for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
+            System.out.println(lottoTicket.getLottoTicket());
         }
     }
 

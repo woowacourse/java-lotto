@@ -30,7 +30,7 @@ public class LottoTicket {
         return new HashSet<>(numbers).size() != numbers.size();
     }
 
-    public List<LottoNumber> lottoTicket() {
+    public List<LottoNumber> getLottoTicket() {
         return Collections.unmodifiableList(lottoTicket);
     }
 
