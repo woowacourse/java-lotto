@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoRank;
-import lotto.domain.LottoResult;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
+import lotto.domain.*;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -37,6 +34,7 @@ public class OutputView {
     private static void printEachLottoTicketNumbers(LottoTicket lottoTicket) {
         String numbers = lottoTicket.getLottoNumbers()
                 .stream()
+                .sorted(Comparator.comparingInt(LottoNumber::getNumber))
                 .map(lottoNumber -> String.valueOf(lottoNumber.getNumber()))
                 .collect(Collectors.joining(DELIMITER, PREFIX, SUFFIX));
         System.out.println(numbers);
