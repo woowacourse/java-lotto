@@ -18,28 +18,29 @@ public enum Ranking {
     private final boolean bonusMatching;
     private final int money;
 
-    Ranking(int matching, boolean bonusMatching, int money) {
+    Ranking(final int matching, final boolean bonusMatching, final int money) {
         this.matching = matching;
         this.bonusMatching = bonusMatching;
         this.money = money;
     }
 
-    public static Ranking select(int matching, boolean bonusMatching) {
+    public static Ranking select(final int matching, final boolean bonusMatching) {
         final Stream<Ranking> rankingStream = Arrays.stream(Ranking.values())
                 .filter(ranking -> Objects.equals(matching, ranking.matching));
+
         if (matching >= BONUS_CONSIDER_LIMIT) {
             return considerBonus(bonusMatching, rankingStream);
         }
         return notConsiderBonus(rankingStream);
     }
 
-    private static Ranking notConsiderBonus(Stream<Ranking> rankingStream) {
+    private static Ranking notConsiderBonus(final Stream<Ranking> rankingStream) {
         return rankingStream
                 .findFirst()
                 .orElse(NOTHING);
     }
 
-    private static Ranking considerBonus(boolean bonusMatching, Stream<Ranking> rankingStream) {
+    private static Ranking considerBonus(final boolean bonusMatching, final Stream<Ranking> rankingStream) {
         return rankingStream
                 .filter(ranking -> Objects.equals(bonusMatching, ranking.bonusMatching))
                 .findFirst()

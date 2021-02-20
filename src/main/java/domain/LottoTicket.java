@@ -51,17 +51,16 @@ public class LottoTicket {
         return LOTTO_TICKET_SIZE;
     }
 
-    public Ranking checkRanking(final LottoTicket winningTicket, LottoNumber bonusNumber) {
+    public Ranking checkRanking(final LottoTicket winningTicket, final LottoNumber bonusNumber) {
         int matching = (int) lottoNumbers.stream()
                 .filter(number -> winningTicket.contains(number))
                 .count();
 
         boolean bonusMatching = contains(bonusNumber);
-
         return Ranking.select(matching, bonusMatching);
     }
 
-    public boolean contains(LottoNumber lottoNumber) {
+    public boolean contains(final LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
 

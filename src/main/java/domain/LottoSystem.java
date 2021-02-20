@@ -3,13 +3,12 @@ package domain;
 import java.util.List;
 
 public class LottoSystem {
-
     private final Price price;
     private final List<LottoTicket> lottoTickets;
 
     private LottoSystem(final Price price) {
         this.price = price;
-        LottoMachine lottoMachine = LottoMachine.valueOf(price);
+        final LottoMachine lottoMachine = LottoMachine.valueOf(price);
         this.lottoTickets = lottoMachine.generateLottoTickets();
     }
 

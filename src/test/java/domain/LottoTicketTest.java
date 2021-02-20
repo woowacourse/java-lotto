@@ -6,11 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 import java.util.Arrays;
 import java.util.List;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottoTicketTest {
-
     @DisplayName("유효한 값이면 객체 생성 성공")
     @Test
     void valueOf_validInput_success() {
@@ -44,12 +44,6 @@ public class LottoTicketTest {
                         .isThrownBy(() -> LottoTicket.valueOf(moreLottoNumbers))
                         .withMessageContaining("개수가 6이 아닙니다.")
         );
-    }
-
-    @DisplayName("6개의 숫자를 가진 로또 티켓 객체 생성")
-    @Test
-    void generate_success() {
-
     }
 
     private List<Integer> getValidNumbers() {

@@ -3,11 +3,10 @@ package domain;
 import java.util.List;
 
 public class WinningResult {
-
     private final Price price;
     private final List<Ranking> rankings;
 
-    public WinningResult(WinningNumbers winningNumbers, List<LottoTicket> lottoTickets,
+    public WinningResult(final WinningNumbers winningNumbers, final List<LottoTicket> lottoTickets,
                          Price price) {
         this.rankings = winningNumbers.getRankings(lottoTickets);
         this.price = price;

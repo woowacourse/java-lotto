@@ -3,7 +3,6 @@ package domain;
 import java.util.Objects;
 
 public class LottoNumber {
-
     private static final int MIN_NUMBER_VALUE = 1;
     private static final int MAX_NUMBER_VALUE = 45;
 

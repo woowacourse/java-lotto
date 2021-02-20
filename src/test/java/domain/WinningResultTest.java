@@ -5,12 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 import java.util.Arrays;
 import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class WinningResultTest {
-
     private WinningResult winningResult;
 
     @BeforeEach
@@ -36,11 +36,11 @@ class WinningResultTest {
         assertThat(winningResult.getProfitRate()).isEqualTo(2_030_005_000.0 / 3000.0);
     }
 
-    Price createValidPrice() {
+    private Price createValidPrice() {
         return Price.valueOf("3000");
     }
 
-    List<LottoTicket> createValidLottoTickets() {
+    private List<LottoTicket> createValidLottoTickets() {
         return Arrays.asList(
                 LottoTicket.valueOf(Arrays.asList(1, 2, 3, 4, 5, 6)),
                 LottoTicket.valueOf(Arrays.asList(4, 5, 6, 7, 8, 9)),
@@ -48,7 +48,7 @@ class WinningResultTest {
         );
     }
 
-    WinningNumbers createValidWinningNumbers() {
+    private WinningNumbers createValidWinningNumbers() {
         return WinningNumbers.valueOf(
                 Arrays.asList(1, 2, 3, 4, 5, 6), 9
         );

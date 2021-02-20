@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WinningNumbers {
-
     private static final int WINNING_TICKET_SIZE = 6;
-
     private static final String WINNING_TICKET_SIZE_ERROR = "당첨 번호의 개수가 맞지 않습니다.";
     private static final String BONUS_DUPLICATE_ERROR = "당첨 번호에 보너스 번호가 포함되어 있습니다.";
+
     private final LottoTicket winningTicket;
     private final LottoNumber bonusNumber;
 
@@ -27,7 +26,7 @@ public class WinningNumbers {
         validateDistinctBonus(winningNumbers, bonusNumber);
     }
 
-    private static void validateSize(List<Integer> winningNumbers) {
+    private static void validateSize(final List<Integer> winningNumbers) {
         if (winningNumbers.size() != WINNING_TICKET_SIZE) {
             throw new IllegalArgumentException(WINNING_TICKET_SIZE_ERROR);
         }

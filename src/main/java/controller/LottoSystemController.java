@@ -4,14 +4,14 @@ import domain.LottoSystem;
 import domain.Ranking;
 import domain.WinningNumbers;
 import domain.WinningResult;
-import java.util.Arrays;
 import view.InputView;
 import view.OutputView;
 
-public class LottoSystemController {
+import java.util.Arrays;
 
-    LottoSystem lottoSystem;
-    WinningResult winningResult;
+public class LottoSystemController {
+    private LottoSystem lottoSystem;
+    private WinningResult winningResult;
 
     public void run() {
         buyLottoTickets();
@@ -22,7 +22,6 @@ public class LottoSystemController {
     private void buyLottoTickets() {
         lottoSystem = LottoSystem.init(InputView.receivePrice());
         OutputView.printNumberOfTickets(lottoSystem.getLottoQuantity());
-
         OutputView.printLottoTickets(lottoSystem.getLottoTickets());
     }
 

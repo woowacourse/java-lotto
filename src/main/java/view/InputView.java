@@ -6,7 +6,6 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class InputView {
-
     private static final Scanner SCANNER = new Scanner(System.in);
     private static final String RECEIVE_PRICE_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String RECEIVE_WINNING_NUMBERS_MESSAGE = "지난 당첨 번호를 입력해 주세요.";

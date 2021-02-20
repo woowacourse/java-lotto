@@ -10,7 +10,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class PriceTest {
-
     @DisplayName("유효한 값이면 객체 생성 성공")
     @ParameterizedTest
     @ValueSource(strings = {"1000", "10000", "1000000"})

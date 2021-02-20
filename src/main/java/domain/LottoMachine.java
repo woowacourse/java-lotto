@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoMachine {
-
     private static final int LOTTO_TICKET_PRICE = 1000;
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
@@ -22,6 +21,7 @@ public class LottoMachine {
     public List<LottoTicket> generateLottoTickets() {
         final List<LottoTicket> lottoTickets = new ArrayList<>();
         final int lottoTicketQuantity = getLottoTicketQuantity();
+
         for (int i = 0; i < lottoTicketQuantity; i++) {
             lottoTickets.add(LottoTicket.valueOf(
                     RandomLottoNumberGenerator.generate(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)));
