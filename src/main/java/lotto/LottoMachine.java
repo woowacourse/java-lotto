@@ -20,7 +20,7 @@ public class LottoMachine {
     public Lottos purchase() {
         PaymentAmount paymentAmount = inputView.readPaymentAmount();
         
-        Lottos lottos = Lottos.makeLottos(paymentAmount);
+        Lottos lottos = LottoFactory.makeLottos(paymentAmount);
         
         outputView.printPurchaseLottos(paymentAmount, lottos);
         

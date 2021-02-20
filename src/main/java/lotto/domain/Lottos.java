@@ -18,14 +18,6 @@ public class Lottos {
         this.lottos = new ArrayList<>(lottos);
     }
     
-    public static Lottos makeLottos(PaymentAmount paymentAmount) {
-        List<Lotto> lottos = Stream.generate(() -> Lotto.fromGenerator(new RandomNumberGenerator()))
-                                   .limit(paymentAmount.getPurchaseCount())
-                                   .collect(Collectors.toList());
-        
-        return new Lottos(lottos);
-    }
-    
     public List<List<Integer>> toInts() {
         return lottos.stream()
                      .map(Lotto::toInts)

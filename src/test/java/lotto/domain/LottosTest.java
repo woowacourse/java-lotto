@@ -11,14 +11,14 @@ public class LottosTest {
     @DisplayName("구매 로또 생성 테스트")
     void init() {
         // given
-        int purchaseCount = 10;
+        String paymentAmount = "1000";
+        int purchaseCount = 1;
         
         // when
-        Lottos lottos = Lottos.makeLottos(purchaseCount);
+        Lottos lottos = LottoFactory.makeLottos(PaymentAmount.from(paymentAmount));
         
         
         // then
-        assertThat(lottos.toInts()
-                         .size()).isEqualTo(10);
+        assertThat(lottos.toInts().size()).isEqualTo(purchaseCount);
     }
 }
