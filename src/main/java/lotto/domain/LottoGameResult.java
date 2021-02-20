@@ -6,28 +6,28 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoGameResult {
-    private final Map<Rank, Integer> ranks;
+    private final Map<Rank, Integer> resultMap;
 
     public LottoGameResult() {
-        ranks = new HashMap<>();
+        resultMap = new HashMap<>();
         initEnumMap();
     }
 
     private void initEnumMap() {
         Arrays.stream(Rank.values())
-                .forEach(rank -> ranks.put(rank, 0));
+                .forEach(rank -> resultMap.put(rank, 0));
     }
 
     public void add(Rank rank) {
-        ranks.put(rank, ranks.get(rank) + 1);
+        resultMap.put(rank, resultMap.get(rank) + 1);
     }
 
-    public Map<Rank, Integer> ranks() {
-        return Collections.unmodifiableMap(ranks);
+    public Map<Rank, Integer> toResultMap() {
+        return Collections.unmodifiableMap(resultMap);
     }
 
     public int countByRank(Rank rank) {
-        return ranks.get(rank);
+        return resultMap.get(rank);
     }
 
     public double calculateProfit() {
@@ -35,13 +35,13 @@ public class LottoGameResult {
     }
 
     private double totalReward() {
-        return ranks.entrySet().stream()
+        return resultMap.entrySet().stream()
                 .mapToDouble(entry -> entry.getKey().getReward() * entry.getValue())
                 .sum();
     }
 
     private int calculateTotalPrice() {
-        int numberOfTotalLotto = ranks.values()
+        int numberOfTotalLotto = resultMap.values()
                 .stream()
                 .mapToInt(num -> num)
                 .sum();
