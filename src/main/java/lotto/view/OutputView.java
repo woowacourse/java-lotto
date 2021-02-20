@@ -13,6 +13,11 @@ import static lotto.domain.Result.getResultsFromFifthToFirst;
 public class OutputView {
     public static final int INDEX_OF_SECOND_RESULT = 3;
 
+    private OutputView() {
+
+    }
+
+
     public static void showLottos(Lottos lottos) {
         System.out.printf("%d개를 구매했습니다.\n", lottos.getNumberOfLotto());
         for (Lotto lotto : lottos.getLottos()) {
