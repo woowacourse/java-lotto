@@ -34,8 +34,6 @@ public class LottoTest {
         lotto = createCustomLotto("1, 2, 3, 20, 21, 40");
     }
 
-    /*TODO:
-     *  생성자 관련 테스트 추가 (예외 처리)*/
     @DisplayName("로또의 사이즈를 제대로 검증 해주는지")
     @Test
     void validateLottoSize() {
