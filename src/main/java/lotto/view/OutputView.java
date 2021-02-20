@@ -4,7 +4,7 @@ import java.util.stream.Collectors;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoRepository;
 import lotto.domain.statistics.LottoStatistics;
-import lotto.domain.primitive.Money;
+import lotto.domain.manager.Money;
 
 public class OutputView {
 

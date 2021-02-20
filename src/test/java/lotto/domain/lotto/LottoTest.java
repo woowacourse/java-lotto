@@ -3,7 +3,6 @@ package lotto.domain.lotto;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
-import lotto.domain.primitive.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

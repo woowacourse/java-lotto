@@ -1,6 +1,6 @@
 package lotto.domain.statistics;
 
-import lotto.domain.primitive.Money;
+import lotto.domain.manager.Money;
 import lotto.domain.rating.Rating;
 import lotto.domain.rating.RatingInfo;
 

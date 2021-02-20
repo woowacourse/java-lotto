@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.manager;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -6,9 +6,10 @@ import java.util.List;
 import java.util.Arrays;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoRepository;
-import lotto.domain.primitive.LottoNumber;
-import lotto.domain.primitive.Money;
-import lotto.domain.primitive.Ticket;
+import lotto.domain.lotto.LottoNumber;
+import lotto.domain.manager.LottoManager;
+import lotto.domain.manager.Money;
+import lotto.domain.manager.Ticket;
 import lotto.domain.rating.Rating;
 import lotto.domain.rating.RatingInfo;
 import lotto.domain.statistics.WinningLotto;

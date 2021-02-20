@@ -2,7 +2,7 @@ package lotto.domain.statistics;
 
 import static org.assertj.core.api.Assertions.*;
 
-import lotto.domain.primitive.Money;
+import lotto.domain.manager.Money;
 import lotto.domain.rating.Rating;
 import lotto.domain.rating.RatingInfo;
 import org.junit.jupiter.api.BeforeEach;
