@@ -1,6 +1,7 @@
 package lotto.domain.lottos.winnerlotto;
 
 import lotto.domain.lottos.LottoNumber;
+import lotto.domain.lottos.LottoTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +24,7 @@ public class LottoWinnerTest {
                 new LottoNumber(5),
                 new LottoNumber(45)
         );
-        LottoWinnerTicket lottoWinnerTicket = new LottoWinnerTicket(lottoWinnerNumbers);
+        LottoTicket lottoWinnerTicket = new LottoTicket(lottoWinnerNumbers);
         LottoWinnerBonusNumber lottoWinnerBonusNumber = new LottoWinnerBonusNumber(9, lottoWinnerTicket);
 
         assertThat(new LottoWinner(lottoWinnerTicket, lottoWinnerBonusNumber)).isInstanceOf(LottoWinner.class);

@@ -1,10 +1,10 @@
 package lotto.controller;
 
 import lotto.domain.LottoResultStatistics;
+import lotto.domain.lottos.LottoTicket;
 import lotto.domain.lottos.LottoTickets;
 import lotto.domain.lottos.winnerlotto.LottoWinner;
 import lotto.domain.lottos.winnerlotto.LottoWinnerBonusNumber;
-import lotto.domain.lottos.winnerlotto.LottoWinnerTicket;
 import lotto.domain.money.Money;
 import lotto.service.LottoTicketService;
 import lotto.service.LottoTicketsService;
@@ -17,7 +17,7 @@ public class LottoController {
         Money money = initMoney();
         LottoTickets lottoTickets = initLottoTickets(money);
 
-        LottoWinnerTicket lottoWinnerTicket = initLottoWinnerTicket();
+        LottoTicket lottoWinnerTicket = initLottoWinnerTicket();
         LottoWinnerBonusNumber lottoWinnerBonusNumber = initLottoWinnerBonusNumber(lottoWinnerTicket);
         LottoWinner lottoWinner = new LottoWinner(lottoWinnerTicket, lottoWinnerBonusNumber);
 
@@ -28,14 +28,12 @@ public class LottoController {
     }
 
     private Money initMoney() {
-        Money money;
         try {
-            money = new Money(InputView.getMoneyInput());
+            return new Money(InputView.getMoneyInput());
         } catch (NullPointerException | IllegalArgumentException e) {
             OutputView.printErrorMessage(e);
             return initMoney();
         }
-        return money;
     }
 
     private LottoTickets initLottoTickets(Money money) {
@@ -44,7 +42,7 @@ public class LottoController {
         return lottoTickets;
     }
 
-    private LottoWinnerTicket initLottoWinnerTicket() {
+    private LottoTicket initLottoWinnerTicket() {
         try {
             return LottoTicketService.createLottoWinnerTicket(InputView.getWinnerNumbersInput());
         } catch (NullPointerException | IllegalArgumentException e) {
@@ -53,7 +51,7 @@ public class LottoController {
         }
     }
 
-    private LottoWinnerBonusNumber initLottoWinnerBonusNumber(LottoWinnerTicket lottoWinnerTicket) {
+    private LottoWinnerBonusNumber initLottoWinnerBonusNumber(LottoTicket lottoWinnerTicket) {
         try {
             return new LottoWinnerBonusNumber(Integer.parseInt(InputView.getBonusNumberInput()), lottoWinnerTicket);
         } catch (NullPointerException | IllegalArgumentException e) {

@@ -2,7 +2,6 @@ package lotto.domain.lottos;
 
 import lotto.domain.lottos.rank.LottoRank;
 import lotto.domain.lottos.winnerlotto.LottoWinner;
-import lotto.domain.lottos.winnerlotto.LottoWinnerTicket;
 
 import java.util.List;
 
@@ -18,7 +17,7 @@ public class LottoBoughtTicket extends LottoTicket {
         return LottoRank.matchLottoRank(matchCount, matchBonusNumber);
     }
 
-    private int calculateMatchCount(final LottoWinnerTicket lottoWinnerTicket) {
+    private int calculateMatchCount(final LottoTicket lottoWinnerTicket) {
         return (int) lottoWinnerTicket.getLottoNumbers()
                 .stream()
                 .filter(this::isContain)

@@ -1,7 +1,6 @@
 package lotto.service;
 
 import lotto.domain.lottos.LottoTicket;
-import lotto.domain.lottos.winnerlotto.LottoWinnerTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -18,8 +17,8 @@ public class LottoTicketServiceTest {
     @Test
     @DisplayName("당첨 번호를 생성한다.")
     public void createLottoWinnerTicket() {
-        LottoWinnerTicket lottoWinnerTicket = LottoTicketService.createLottoWinnerTicket("1,2,3,4,5,6");
+        LottoTicket lottoWinnerTicket = LottoTicketService.createLottoWinnerTicket("1,2,3,4,5,6");
 
-        assertThat(lottoWinnerTicket).isInstanceOf(LottoWinnerTicket.class);
+        assertThat(lottoWinnerTicket).isInstanceOf(LottoTicket.class);
     }
 }

@@ -2,8 +2,8 @@ package lotto.service;
 
 import lotto.domain.lottos.LottoBoughtTicket;
 import lotto.domain.lottos.LottoNumber;
+import lotto.domain.lottos.LottoTicket;
 import lotto.domain.lottos.generator.RandomNumberGenerator;
-import lotto.domain.lottos.winnerlotto.LottoWinnerTicket;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,7 +22,7 @@ public class LottoTicketService {
         return new LottoBoughtTicket(new RandomNumberGenerator().generateNumbers());
     }
 
-    public static LottoWinnerTicket createLottoWinnerTicket(String input) {
+    public static LottoTicket createLottoWinnerTicket(String input) {
         List<LottoNumber> lottoWinnerNumbers =
                 Arrays.stream(input.split(DELIMITER))
                         .map(String::trim)
@@ -32,7 +32,7 @@ public class LottoTicketService {
         if (lottoWinnerNumbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException(COUNT_ERROR_MESSAGE);
         }
-        return new LottoWinnerTicket(lottoWinnerNumbers);
+        return new LottoTicket(lottoWinnerNumbers);
     }
 
 }

@@ -2,11 +2,11 @@ package lotto.domain;
 
 import lotto.domain.lottos.LottoBoughtTicket;
 import lotto.domain.lottos.LottoNumber;
+import lotto.domain.lottos.LottoTicket;
 import lotto.domain.lottos.LottoTickets;
 import lotto.domain.lottos.rank.LottoRank;
 import lotto.domain.lottos.winnerlotto.LottoWinner;
 import lotto.domain.lottos.winnerlotto.LottoWinnerBonusNumber;
-import lotto.domain.lottos.winnerlotto.LottoWinnerTicket;
 import lotto.domain.money.Money;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -23,7 +23,7 @@ public class LottoResultStatisticsTest {
 
     @BeforeEach
     public void setUp() {
-        LottoWinnerTicket lottoWinnerTicket = new LottoWinnerTicket(
+        LottoTicket lottoWinnerTicket = new LottoTicket(
                 Arrays.asList(
                         new LottoNumber(1),
                         new LottoNumber(2),

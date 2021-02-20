@@ -3,7 +3,6 @@ package lotto.domain.lottos;
 import lotto.domain.lottos.rank.LottoRank;
 import lotto.domain.lottos.winnerlotto.LottoWinner;
 import lotto.domain.lottos.winnerlotto.LottoWinnerBonusNumber;
-import lotto.domain.lottos.winnerlotto.LottoWinnerTicket;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,7 +18,7 @@ class LottoBoughtTicketTest {
 
     @BeforeEach
     void setUp() {
-        LottoWinnerTicket lottoWinnerTicket = new LottoWinnerTicket(
+        LottoTicket lottoWinnerTicket = new LottoTicket(
                 Arrays.asList(
                         new LottoNumber(1),
                         new LottoNumber(2),

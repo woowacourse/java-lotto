@@ -1,6 +1,7 @@
 package lotto.domain.lottos.winnerlotto;
 
 import lotto.domain.lottos.LottoNumber;
+import lotto.domain.lottos.LottoTicket;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoWinnerBonusNumberTest {
 
-    private LottoWinnerTicket lottoWinnerTicket;
+    private LottoTicket lottoWinnerTicket;
 
     @BeforeEach
     void setUp() {
@@ -26,7 +27,7 @@ public class LottoWinnerBonusNumberTest {
                 new LottoNumber(45)
         );
 
-        lottoWinnerTicket = new LottoWinnerTicket(lottoWinnerNumbers);
+        lottoWinnerTicket = new LottoTicket(lottoWinnerNumbers);
     }
 
     @Test
