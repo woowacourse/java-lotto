@@ -9,22 +9,22 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoStatisticsTest {
+class LottoResultTest {
 
-    private LottoStatistics lottoStatistics;
+    private LottoResult lottoResult;
 
     @BeforeEach
     void setUp() {
         Map<LottoRank, Long> statisticsMap = new HashMap<>();
         statisticsMap.put(LottoRank.FIRST_PRIZE, 1L);
-        lottoStatistics = new LottoStatistics(statisticsMap);
+        lottoResult = new LottoResult(statisticsMap);
     }
 
     @DisplayName("로또 통계에서 각 순위별 당첨 티켓 개수를 가져온다. 없는 경우 0을 반환한다.")
     @Test
     void getCounts() {
-        assertThat(lottoStatistics.getTicketCountsByRank(LottoRank.FIRST_PRIZE)).isEqualTo(1);
-        assertThat(lottoStatistics.getTicketCountsByRank(LottoRank.SECOND_PRIZE)).isZero();
+        assertThat(lottoResult.getTicketCountsByRank(LottoRank.FIRST_PRIZE)).isEqualTo(1);
+        assertThat(lottoResult.getTicketCountsByRank(LottoRank.SECOND_PRIZE)).isZero();
     }
 
     @DisplayName("구매 금액과 비교해 수익률을 계산한다.")
@@ -32,7 +32,7 @@ class LottoStatisticsTest {
     void calculateYield() {
         PurchasingPrice purchasingPrice = new PurchasingPrice(35477);
 
-        double yield = lottoStatistics.calculateYield(purchasingPrice);
+        double yield = lottoResult.calculateYield(purchasingPrice);
 
         assertThat(yield).isEqualTo(((double) 2000000000) / 35477);
     }

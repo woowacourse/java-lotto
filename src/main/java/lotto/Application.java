@@ -17,7 +17,7 @@ public class Application {
         List<Integer> winningTicketNumbers = InputView.inputWinningTicketNumbers();
         int bonusBallNumber = InputView.inputBonusBallNumber();
         WinningLottoTicket winningLottoTicket = WinningLottoTicket.of(winningTicketNumbers, bonusBallNumber);
-        LottoStatistics lottoStatistics = lottoTickets.getStatistics(winningLottoTicket);
-        OutputView.printLottoResult(lottoStatistics, purchasingPrice);
+        LottoResult lottoResult = lottoTickets.checkResult(winningLottoTicket);
+        OutputView.printLottoResult(lottoResult, purchasingPrice);
     }
 }

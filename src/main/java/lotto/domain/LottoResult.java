@@ -3,17 +3,17 @@ package lotto.domain;
 import java.util.EnumMap;
 import java.util.Map;
 
-public class LottoStatistics {
+public class LottoResult {
     private static final long ZERO = 0;
 
-    private final Map<LottoRank, Long> statisticsMap;
+    private final Map<LottoRank, Long> statistics;
 
-    public LottoStatistics(Map<LottoRank, Long> statisticsMap) {
-        this.statisticsMap = new EnumMap<>(statisticsMap);
+    public LottoResult(Map<LottoRank, Long> statistics) {
+        this.statistics = new EnumMap<>(statistics);
     }
 
     public long getTicketCountsByRank(LottoRank lottoRank) {
-        return statisticsMap.computeIfAbsent(lottoRank, key -> ZERO);
+        return statistics.computeIfAbsent(lottoRank, key -> ZERO);
     }
 
     public double calculateYield(PurchasingPrice purchasingPrice) {
@@ -23,9 +23,9 @@ public class LottoStatistics {
     }
 
     private long calculatePrizeMoneyTotal() {
-        return statisticsMap.keySet()
+        return statistics.keySet()
                 .stream()
-                .mapToLong(lottoRank -> lottoRank.getPrizeMoney() * statisticsMap.get(lottoRank))
+                .mapToLong(lottoRank -> lottoRank.getPrizeMoney() * statistics.get(lottoRank))
                 .sum();
     }
 }

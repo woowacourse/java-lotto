@@ -22,12 +22,12 @@ public class LottoTickets {
         return new LottoTickets(lottoTickets);
     }
 
-    public LottoStatistics getStatistics(WinningLottoTicket winningLottoTicket) {
+    public LottoResult checkResult(WinningLottoTicket winningLottoTicket) {
         Map<LottoRank, Long> statistics = lottoTickets.stream()
                 .map(winningLottoTicket::compareNumbers)
                 .collect(Collectors.groupingBy(lottoRank -> lottoRank, () -> new EnumMap<>(LottoRank.class),
                         Collectors.counting()));
-        return new LottoStatistics(statistics);
+        return new LottoResult(statistics);
     }
 
     public List<LottoTicket> getLottoTickets() {

@@ -38,20 +38,20 @@ public class OutputView {
         System.out.println(numbers);
     }
 
-    public static void printLottoResult(LottoStatistics lottoStatistics, PurchasingPrice purchasingPrice) {
+    public static void printLottoResult(LottoResult lottoResult, PurchasingPrice purchasingPrice) {
         System.out.println(RESULT_HEADER_MESSAGE);
         System.out.println(HYPHENS);
         Arrays.stream(LottoRank.values())
                 .filter(lottoRank -> lottoRank != LottoRank.MISS)
                 .sorted(Comparator.reverseOrder())
-                .forEach(lottoRank -> printStatisticsByRank(lottoRank, lottoStatistics));
-        System.out.printf(YIELD_MESSAGE, lottoStatistics.calculateYield(purchasingPrice));
+                .forEach(lottoRank -> printStatisticsByRank(lottoRank, lottoResult));
+        System.out.printf(YIELD_MESSAGE, lottoResult.calculateYield(purchasingPrice));
     }
 
-    private static void printStatisticsByRank(LottoRank lottoRank, LottoStatistics lottoStatistics) {
+    private static void printStatisticsByRank(LottoRank lottoRank, LottoResult lottoResult) {
         int matchCounts = lottoRank.getMatchCounts();
         int prizeMoney = lottoRank.getPrizeMoney();
-        int ticketCountsByRank = (int) lottoStatistics.getTicketCountsByRank(lottoRank);
+        int ticketCountsByRank = (int) lottoResult.getTicketCountsByRank(lottoRank);
         if (lottoRank == LottoRank.SECOND_PRIZE) {
             System.out.printf(LOTTO_STATISTICS_BONUS_BALL_MESSAGE, matchCounts, prizeMoney, ticketCountsByRank);
             return;
