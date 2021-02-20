@@ -14,7 +14,13 @@ public class WinningLotto {
     }
     
     public static WinningLotto of(List<Integer> numbers, LottoNumber bonusNumber) {
-        return new WinningLotto(Lotto.fromNumbers(numbers), bonusNumber);
+        final Lotto lotto = Lotto.fromNumbers(numbers);
+        
+        if (lotto.contains(bonusNumber)) {
+            throw new IllegalArgumentException();
+        }
+        
+        return new WinningLotto(lotto, bonusNumber);
     }
     
     public Lotto getLotto() {
