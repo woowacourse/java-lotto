@@ -25,7 +25,7 @@ public class LottoNumberTest {
         assertThat(first).isNotEqualTo(second);
     }
 
-    @DisplayName("45를 초과한 수가 입력될 경 예외를 발생시킨다.")
+    @DisplayName("45를 초과한 수가 입력될 경우 예외를 발생시킨다.")
     @Test
     public void validateNumberRangeTest() {
         assertThatThrownBy( () -> new LottoNumber("46")).isInstanceOf(IllegalArgumentException.class);
