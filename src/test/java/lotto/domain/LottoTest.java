@@ -3,18 +3,30 @@ package lotto.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
+import java.util.Arrays;
 
-import static lotto.domain.LottoNumberTest.createCustomLottoNumbers;
+import static lotto.view.InputView.convertStringsToInts;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LottoTest {
     private Lotto lotto;
 
+    public static Lotto createCustomLotto(String customNumbers) {
+        int[] numbers = convertStringsToInts(customNumbers.split(", "));
+        return new Lotto(Arrays.asList(
+                new LottoNumber(numbers[0]),
+                new LottoNumber(numbers[1]),
+                new LottoNumber(numbers[2]),
+                new LottoNumber(numbers[3]),
+                new LottoNumber(numbers[4]),
+                new LottoNumber(numbers[5]))
+        );
+    }
+
     @BeforeEach
     void setUp() {
-        lotto = new Lotto(createCustomLottoNumbers("1, 2, 3, 20, 21, 40"));
+        lotto = createCustomLotto("1, 2, 3, 20, 21, 40");
     }
 
     /*TODO:
@@ -22,9 +34,9 @@ public class LottoTest {
 
     @Test
     void countNumberOfMatch() {
-        List<LottoNumber> winningNumbers = createCustomLottoNumbers("1, 2, 3, 4, 5, 6");
+        Lotto winningLotto = createCustomLotto("1, 2, 3, 4, 5, 6");
 
-        int matches = lotto.countMatchingNumbers(winningNumbers);
+        int matches = lotto.countMatchingNumbers(winningLotto.toList());
 
         assertThat(matches).isEqualTo(3);
     }

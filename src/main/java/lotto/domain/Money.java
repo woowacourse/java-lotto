@@ -7,22 +7,13 @@ public class Money {
 
     private final int money;
 
-    public Money(String money) {
-        validateNumber(money);
+    public Money(int money) {
         validateNotEnoughMoney(money);
-        this.money = Integer.parseInt(money);
+        this.money = money;
     }
 
-    private void validateNumber(String money) {
-        try {
-            Integer.parseInt(money);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("금액은 정수만 입력 가능합니다");
-        }
-    }
-
-    private void validateNotEnoughMoney(String money) {
-        if (Integer.parseInt(money) < LOTTO_PRICE) {
+    private void validateNotEnoughMoney(int money) {
+        if (money < LOTTO_PRICE) {
             throw new IllegalArgumentException("1000원 이상의 금액만 입력 가능합니다.");
         }
     }

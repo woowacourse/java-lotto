@@ -35,6 +35,8 @@ public class Lotto {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
+    //TODO
+    // Lotto객체를 주입 받도록 리팩토링
     public int countMatchingNumbers(List<LottoNumber> numbers) {
         return (int) numbers.stream()
                 .filter(lottoNumbers::contains)

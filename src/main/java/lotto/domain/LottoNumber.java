@@ -7,7 +7,6 @@ import java.util.Objects;
 public class LottoNumber {
     public static final int MINIMUM_CANDIDATE_NUMBER = 1;
     public static final int MAXIMUM_CANDIDATE_NUMBER = 45;
-    public static final String NON_NUMERIC_ERROR = "숫자만 입력 가능합니다.";
     public static final String NUMBER_OUT_OF_BOUNDS_ERROR = String.format(
             "%d 에서 %d 사이의 숫자만 입력해주세요.",
             MINIMUM_CANDIDATE_NUMBER,
@@ -21,29 +20,15 @@ public class LottoNumber {
         this.number = number;
     }
 
-    public LottoNumber(String number) {
-        validateNumeric(number);
-        validateRangeOfNumber(Integer.parseInt(number));
-        this.number = Integer.parseInt(number);
-    }
-
-    public static List<LottoNumber> convertStringsToLottoNumbers(String[] numbers) {
+    public static List<LottoNumber> createLottoNumbers(int[] numbers) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (String number : numbers) {
+        for (int number : numbers) {
             lottoNumbers.add(new LottoNumber(number));
         }
         return lottoNumbers;
     }
 
-    private void validateNumeric(String number) {
-        try {
-            Integer.parseInt(number);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(NON_NUMERIC_ERROR);
-        }
-    }
-
-    private void validateRangeOfNumber(int number) {
+    public static void validateRangeOfNumber(int number) {
         if (number < MINIMUM_CANDIDATE_NUMBER || MAXIMUM_CANDIDATE_NUMBER < number) {
             throw new IllegalArgumentException(NUMBER_OUT_OF_BOUNDS_ERROR);
         }
