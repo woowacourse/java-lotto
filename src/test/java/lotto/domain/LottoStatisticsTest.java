@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static lotto.domain.LottoTest.createCustomLotto;
+import static lotto.domain.ManualLottoGeneratorTest.createCustomLotto;
 import static lotto.domain.WinningLottoTest.createCustomWinningLotto;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -27,7 +27,7 @@ class LottoStatisticsTest {
         Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2));
 
         List<Rank> ranks = lottos.getResults(winningLotto);
-        LottoStatistics lottoStatistics = new LottoStatistics(ranks, new Money(2000));
+        LottoStatistics lottoStatistics = new LottoStatistics(ranks, new Money(2999));
 
         List<Integer> numberOfWinByRank = lottoStatistics.getWinCountByRank();
         assertThat(numberOfWinByRank).isEqualTo(Arrays.asList(1, 0, 0, 1, 0));
@@ -36,16 +36,13 @@ class LottoStatisticsTest {
     @DisplayName("총 수익률 계산")
     @Test
     void getTotalProfit() {
-        Lotto winningNumbers = createCustomLotto("1, 2, 3, 4, 5, 6");
-        LottoNumber bonusNumber = new LottoNumber(20);
-
         Lotto lotto1 = createCustomLotto("1, 2, 3, 20, 21, 40"); // FIFTH
         Lotto lotto2 = createCustomLotto("1, 2, 3, 4, 5, 20"); // SECOND
         Lotto lotto3 = createCustomLotto("1, 2, 3, 4, 5, 20"); // SECOND
         Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3));
 
-        List<Rank> ranks = lottos.getResults(new WinningLotto(winningNumbers, bonusNumber));
-        LottoStatistics lottoStatistics = new LottoStatistics(ranks, new Money(3000));
+        List<Rank> ranks = lottos.getResults(winningLotto);
+        LottoStatistics lottoStatistics = new LottoStatistics(ranks, new Money(3999));
 
         assertThat(lottoStatistics.getProfitRate()).isEqualTo((float) 60_005_000 / 3000);
     }

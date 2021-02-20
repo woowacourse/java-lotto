@@ -9,7 +9,6 @@ import java.util.Arrays;
 import static lotto.domain.Lotto.DUPLICATE_ERROR;
 import static lotto.domain.Lotto.LOTTO_SIZE_ERROR;
 import static lotto.domain.WinningLottoTest.createCustomWinningLotto;
-import static lotto.view.InputView.convertStringsToInts;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -17,21 +16,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class LottoTest {
     private Lotto lotto;
 
-    public static Lotto createCustomLotto(String customNumbers) {
-        int[] numbers = convertStringsToInts(customNumbers.split(", "));
-        return new Lotto(Arrays.asList(
-                new LottoNumber(numbers[0]),
-                new LottoNumber(numbers[1]),
-                new LottoNumber(numbers[2]),
-                new LottoNumber(numbers[3]),
-                new LottoNumber(numbers[4]),
-                new LottoNumber(numbers[5]))
-        );
-    }
-
     @BeforeEach
     void setUp() {
-        lotto = createCustomLotto("1, 2, 3, 20, 21, 40");
+        lotto = ManualLottoGeneratorTest.createCustomLotto("1, 2, 3, 20, 21, 40");
     }
 
     @DisplayName("로또의 사이즈를 제대로 검증 해주는지")

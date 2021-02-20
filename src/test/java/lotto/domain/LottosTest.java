@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static lotto.domain.LottoTest.createCustomLotto;
+import static lotto.domain.ManualLottoGeneratorTest.createCustomLotto;
 import static lotto.domain.WinningLottoTest.createCustomWinningLotto;
 import static org.assertj.core.api.Assertions.assertThat;
 
