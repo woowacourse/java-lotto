@@ -17,15 +17,4 @@ public class FixedGenerator implements LottoGenerator {
                 new LottoNumber(6)
         ));
     }
-
-    public Lotto generateWinningLottoNumber() {
-        return new Lotto(Arrays.asList(
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6),
-                new LottoNumber(9)
-        ));
-    }
 }

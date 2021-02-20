@@ -6,6 +6,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final int MIN_NUMBER_OF_LOTTO = 1;
     private static final int MAX_NUMBER_OF_LOTTO = 45;
+
     private final int number;
 
     public LottoNumber(Integer number) {

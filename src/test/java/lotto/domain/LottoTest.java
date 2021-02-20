@@ -35,7 +35,7 @@ public class LottoTest {
     @DisplayName("정적 팩토리 메서드를 이용한 로또 생성 테스트")
     @Test
     void testCreateLottoByStaticFactoryMethod() {
-        Lotto newLotto = Lotto.ofLotto(Arrays.asList(1,3,4,5,6,7));
+        Lotto newLotto = Lotto.ofLotto(Arrays.asList(1, 3, 4, 5, 6, 7));
 
         assertThat(newLotto).isEqualTo(lotto);
     }

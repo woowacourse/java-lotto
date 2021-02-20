@@ -1,6 +1,9 @@
 package lotto.utils;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+
+import java.util.Arrays;
 
 public interface LottoGenerator {
     int MIN_LOTTO_NUMBER = 1;
@@ -9,5 +12,14 @@ public interface LottoGenerator {
 
     Lotto generate();
 
-    Lotto generateWinningLottoNumber();
+    default Lotto generateWinningLottoNumber() {
+        return new Lotto(Arrays.asList(
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6),
+                new LottoNumber(9)
+        ));
+    }
 }
