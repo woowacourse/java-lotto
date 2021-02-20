@@ -39,9 +39,25 @@ public class LottoTicket {
         }
     }
 
+    public long calculateWinningTicketCount(LottoTicket winningTicket) {
+        return lottoNumbers.stream()
+            .filter(winningTicket::containsLottoNumber)
+            .count();
+    }
+
+    private boolean containsLottoNumber(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
+    public boolean containsAnyNumber(LottoNumber lottoNumber) {
+        return lottoNumbers.stream()
+            .anyMatch(winningNumber -> winningNumber.equals(lottoNumber));
+    }
+
     public List<LottoNumber> getLottoNumbers() {
         return new ArrayList<>(lottoNumbers);
     }
+
 
     //todo : 방안 1) 전달용 객체 생성 2) list getter 메소드 활용해서 outputView에서 동일한 작업
     public String printLottoTicket() {

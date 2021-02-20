@@ -27,12 +27,8 @@ public class WinningLottoTicket {
     }
 
     public Prize compareNumbers(LottoTicket lottoTicket) {
-        long winningCount = lottoTicket.getLottoNumbers().stream()
-            .filter(lottoNumber -> this.winningTicket.getLottoNumbers().contains(lottoNumber))
-            .count();
-
-        boolean isBonus = lottoTicket.getLottoNumbers().stream()
-            .anyMatch(winningNumber -> winningNumber.equals(bonusNumber));
+        long winningCount = lottoTicket.calculateWinningTicketCount(winningTicket);
+        boolean isBonus = lottoTicket.containsAnyNumber(bonusNumber);
 
         return getResult(winningCount, isBonus);
     }
