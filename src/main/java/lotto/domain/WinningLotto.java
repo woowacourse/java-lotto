@@ -1,15 +1,21 @@
 package lotto.domain;
 
-import lotto.utils.Validator;
+import lotto.exception.IllegalWinningLottoException;
 
 public class WinningLotto {
     private LottoTicket winningTicket;
     private LottoNumber bonusNumber;
 
     public WinningLotto(LottoTicket winningTicket, LottoNumber bonusNumber) {
-        Validator.validateWinningLotto(winningTicket, bonusNumber);
+        validateWinningLotto(winningTicket, bonusNumber);
         this.winningTicket = new LottoTicket(winningTicket.lottoTicket());
         this.bonusNumber = new LottoNumber(bonusNumber.toString());
+    }
+
+    private void validateWinningLotto(LottoTicket winningTicket, LottoNumber bonusNumber) {
+        if (winningTicket.hasLottoNumberInTicket(bonusNumber)) {
+            throw new IllegalWinningLottoException();
+        }
     }
 
     public LottoTicket getWinningTicket() {
