@@ -46,7 +46,7 @@ public class LottoTest {
                 new LottoNumber(6),
                 new LottoNumber(7)
         ))).isInstanceOf(IllegalArgumentException.class)
-        .hasMessage(LOTTO_SIZE_ERROR);
+                .hasMessage(LOTTO_SIZE_ERROR);
     }
 
     @DisplayName("로또 숫자가 중복되는 것이 있는지 제대로 검증 해주는지")

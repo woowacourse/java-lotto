@@ -11,10 +11,10 @@ public class Application {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        LottoMachine lottoMachine = LottoMachine.getInstance();
         Money money = new Money(InputView.takeMoneyInput(scanner));
+        AutomaticLottoGenerator automaticLottoGenerator = new AutomaticLottoGenerator();
 
-        Lottos lottos = new Lottos(lottoMachine.createLottos(new AutomaticLottoGenerator(), money.calculateAffordableNumberOfLotto()));
+        Lottos lottos = new Lottos(automaticLottoGenerator.createLottos(money.calculateAffordableNumberOfLotto()));
         OutputView.showLottos(lottos);
 
         WinningLotto winningLotto = new WinningLotto(

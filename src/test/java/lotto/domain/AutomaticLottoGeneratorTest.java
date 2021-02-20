@@ -18,7 +18,7 @@ class AutomaticLottoGeneratorTest {
         try {
             automaticLottoGenerator.createLotto();
             return true;
-        } catch(Exception e) {
+        } catch (Exception e) {
             return false;
         }
     }
