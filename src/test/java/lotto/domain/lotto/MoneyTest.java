@@ -13,6 +13,11 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class MoneyTest {
 
+    @Test
+    void construct_fail() {
+        assertThatThrownBy(() -> new Money(BigInteger.valueOf(-1)));
+    }
+
     @ParameterizedTest
     @MethodSource("valueOf_success_testcase")
     void valueOf_success(String input, BigInteger expected) {
@@ -32,7 +37,7 @@ class MoneyTest {
     void valueOf_fail(String input) {
         assertThatThrownBy(() -> Money.valueOf(input))
                 .hasMessage("구입금액은 0 이상의 정수여야합니다.")
-                .isInstanceOf(NumberFormatException.class);
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

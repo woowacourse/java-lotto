@@ -6,10 +6,19 @@ import lotto.utils.NumericStringValidator;
 
 public class Money {
 
+    public static final String AMOUNT_SHOULD_BE_GREATER_THAN_ZERO = "구입금액은 0 이상의 정수여야합니다.";
+
     private final BigInteger amount;
 
     public Money(BigInteger amount) {
+        if (lessThanZero(amount)) {
+            throw new IllegalArgumentException(AMOUNT_SHOULD_BE_GREATER_THAN_ZERO);
+        }
         this.amount = amount;
+    }
+
+    private boolean lessThanZero(BigInteger amount) {
+        return amount.compareTo(BigInteger.ZERO) < 0;
     }
 
     public static Money valueOf(String amountValue) {
@@ -19,7 +28,7 @@ public class Money {
 
     private static void validateNumeric(String input) {
         if (!NumericStringValidator.isValid(input)) {
-            throw new NumberFormatException("구입금액은 0 이상의 정수여야합니다.");
+            throw new IllegalArgumentException(AMOUNT_SHOULD_BE_GREATER_THAN_ZERO);
         }
     }
 
