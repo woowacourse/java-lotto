@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
+
 public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
 
@@ -16,11 +19,8 @@ public class LottoTickets {
     }
 
     public LottoResult checkPrizesByWinningTickets(WinningLotto winningLotto) {
-        List<Prize> winningTickets = new ArrayList<>();
-        for (LottoTicket lottoTicket : this.lottoTickets) {
-            Prize prize = winningLotto.matchPrize(lottoTicket);
-            winningTickets.add(prize);
-        }
-        return new LottoResult(winningTickets);
+        return lottoTickets.stream()
+                .map(winningLotto::matchPrize)
+                .collect(collectingAndThen(toList(), LottoResult::new));
     }
 }
