@@ -6,6 +6,8 @@ import static lotto.domain.Rank.RANK_END_INDEX;
 import static lotto.domain.Rank.RANK_START_INDEX;
 
 public class LottoStatistics {
+    public static final String DEFAULT_STATISTICS_FORMAT = "%d개 일치 (%d원)- ";
+    public static final String STATISTICS_FORMAT_FOR_SECOND = "%d개 일치, 보너스 볼 일치(%d원)- ";
     private static final int STATISTICS_INITIAL_VALUE = 0;
 
     private final Map<Rank, Integer> statistics = new LinkedHashMap<>();
