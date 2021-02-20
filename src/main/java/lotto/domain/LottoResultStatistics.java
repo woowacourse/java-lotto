@@ -28,7 +28,7 @@ public class LottoResultStatistics {
 
     private static Map<LottoRank, Integer> setLottoResult() {
         Map<LottoRank, Integer> lottoResult = new EnumMap<>(LottoRank.class);
-        Arrays.stream(LottoRank.values())
+        Arrays.asList(LottoRank.values())
                 .forEach(value -> lottoResult.put(value, DEFAULT_COUNT));
         return lottoResult;
     }
