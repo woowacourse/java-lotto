@@ -18,11 +18,10 @@ public class LottoResult {
             winningLotto.hasBonus(ticket));
     }
 
-    public Map<WinningBoard, Integer> checkWinnings(LottoTickets lottoTickets,
+    public void checkWinnings(LottoTickets lottoTickets,
         WinningLotto winningLotto) {
-        lottoTickets.toList()
+        lottoTickets.getLottoTickets()
             .forEach(ticket -> addWinning(getWinning(winningLotto, ticket)));
-        return results;
     }
 
     private void addWinning(WinningBoard winningBoard) {

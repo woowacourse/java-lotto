@@ -19,7 +19,7 @@ public class LottoTickets {
         lottoTickets.add(lottoTicket);
     }
 
-    public List<LottoTicket> toList() {
+    public List<LottoTicket> getLottoTickets() {
         return new ArrayList<>(lottoTickets);
     }
 }

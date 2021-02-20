@@ -29,7 +29,7 @@ public class LottoTicketsTest {
             (new LottoTicket(lottoNumbers),
                 new LottoTicket(lottoNumbers2)));
 
-        assertThat(lottoTickets.toList())
+        assertThat(lottoTickets.getLottoTickets())
             .contains(new LottoTicket(lottoNumbers), new LottoTicket(lottoNumbers2));
     }
 }
