@@ -10,6 +10,7 @@ public class RankTest {
     @Test
     public void rankFromTest() {
         Rank rank = Rank.from(6, false);
+
         assertThat(rank).isInstanceOf(Rank.class);
     }
 
@@ -17,6 +18,7 @@ public class RankTest {
     @Test
     public void compareFirstRewardTest() {
         Rank rank = Rank.from(6, false);
+
         assertThat(rank.getReward()).isEqualTo(new Money("2000000000"));
     }
 
@@ -24,6 +26,7 @@ public class RankTest {
     @Test
     public void compareSecondRewardTest() {
         Rank rank = Rank.from(5, true);
+
         assertThat(rank.getReward()).isEqualTo(new Money("30000000"));
     }
 
@@ -31,6 +34,7 @@ public class RankTest {
     @Test
     public void compareNoRewardTest() {
         Rank rank = Rank.from(1, false);
+
         assertThat(rank.getReward()).isEqualTo(new Money("0"));
     }
 }

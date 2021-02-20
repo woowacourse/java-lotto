@@ -10,7 +10,9 @@ public class LottoMachineTest {
     @Test
     public void purchaseLottoTicketTest() {
         Money money = new Money("3000");
+
         LottoTickets lottoTickets = LottoMachine.buy(money);
+
         assertThat(lottoTickets.size()).isEqualTo(3);
     }
 }

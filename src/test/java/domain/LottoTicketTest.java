@@ -28,6 +28,7 @@ public class LottoTicketTest {
     @Test
     public void createRandomLottoTicketTest() {
         LottoTicket lottoTicket = LottoTicket.of(LottoNumberRepository.shuffleLottoNumbers());
+
         assertThat(lottoTicket).isInstanceOf(LottoTicket.class);
     }
 

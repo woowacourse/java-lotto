@@ -16,6 +16,7 @@ public class LottoTicketsTest {
                 LottoTicket.of(LottoNumberRepository.shuffleLottoNumbers()),
                 LottoTicket.of(LottoNumberRepository.shuffleLottoNumbers())
         ));
+
         assertThat(lottoTickets).isInstanceOf(LottoTickets.class);
     }
 }

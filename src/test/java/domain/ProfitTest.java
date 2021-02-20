@@ -10,6 +10,7 @@ public class ProfitTest {
     @Test
     public void calculateProfitTest() {
         Profit profit = new Profit(new Money("10000"), new Money("5000"));
+
         assertThat(profit.toDouble()).isEqualTo(0.5);
     }
 }

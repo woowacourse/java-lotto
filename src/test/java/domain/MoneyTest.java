@@ -12,6 +12,7 @@ public class MoneyTest {
     public void equalsTest() {
         Money money1 = new Money("1000");
         Money money2 = new Money("1000");
+
         assertThat(money1).isEqualTo(money2);
     }
 

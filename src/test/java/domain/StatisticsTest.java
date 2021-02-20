@@ -31,7 +31,9 @@ public class StatisticsTest {
     @Test
     public void calculateStatistics() {
         Statistics statistics = new Statistics(winningNumber, lottoTickets);
+
         Map<Rank, Integer> lottoStatistics = statistics.result();
+
         assertThat(lottoStatistics).isEqualTo(new HashMap<Rank, Integer>() {
             {
                 put(Rank.FIRST, 1);
@@ -48,7 +50,9 @@ public class StatisticsTest {
     @Test
     public void calculateRewardTest() {
         Statistics statistics = new Statistics(winningNumber, lottoTickets);
+
         Money reward = statistics.getReward();
+
         assertThat(reward.toLong()).isEqualTo(2_060_000_000);
     }
 }
