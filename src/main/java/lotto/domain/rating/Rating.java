@@ -12,8 +12,8 @@ public enum Rating {
     MISS(0, 0);
 
     private static final String NONE_RATING_ERROR_MESSAGE = "[Error] 존재하지 않는 Rating 객체";
-    private int matchCount;
-    private int reward;
+    private final int matchCount;
+    private final int reward;
 
     Rating(final int matchCount, final int reward) {
         this.matchCount = matchCount;
