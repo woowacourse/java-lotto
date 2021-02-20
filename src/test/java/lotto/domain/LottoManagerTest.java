@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoRepository;
+import lotto.domain.lottomachine.TestLottoMachine;
 import lotto.domain.primitive.LottoNumber;
 import lotto.domain.primitive.Money;
 import lotto.domain.primitive.Ticket;
@@ -24,7 +25,7 @@ public class LottoManagerTest {
 
     @BeforeEach
     void setup() {
-        lottoManager = new LottoManager(() -> Arrays.asList(1, 2, 3, 4, 5, 6));
+        lottoManager = new LottoManager(new TestLottoMachine());
         lottoRepository = new LottoRepository();
     }
 
