@@ -3,13 +3,12 @@ package lotto.view;
 import lotto.domain.*;
 
 import java.util.Arrays;
-import java.util.Collections;
 
 public class OutputView {
     
     private static final String VIEW_OF_LOTTO_RESULT = "%d개 일치 (%d원) - %d개%s";
     
-    private static final String VIEW_OF_PURCHASE_COUNT = "%d개를 구매했습니다.";
+    private static final String VIEW_OF_PURCHASE_COUNT = "%d개를 구매했습니다.%s";
     
     private static final String VIEW_OF_INCOME_RATE = "총 수익률은 %.2f입니다.";
     
@@ -27,15 +26,12 @@ public class OutputView {
     }
     
     private void printPurchaseCount(PaymentAmount paymentAmount) {
-        System.out.printf(VIEW_OF_PURCHASE_COUNT, paymentAmount.getPurchaseCount());
+        System.out.printf(VIEW_OF_PURCHASE_COUNT, paymentAmount.getPurchaseCount(), NEW_LINE);
     }
     
     private void printPurchaseLottos(Lottos lottos) {
         lottos.toInts()
-              .forEach(lotto -> {
-                  Collections.sort(lotto);
-                  System.out.println(lotto);
-              });
+              .forEach(System.out::println);
         
         System.out.println();
     }
@@ -53,7 +49,7 @@ public class OutputView {
     
     private void printStatisticContent(LottoStatisticResult result) {
         Arrays.stream(Rank.values())
-              .sorted(RankComparator.INSTANCE)
+              .sorted()
               .forEach(rank -> System.out.printf(VIEW_OF_LOTTO_RESULT, rank.getMatchCount(), rank.getReward(),
                       result.get(rank), NEW_LINE));
     }

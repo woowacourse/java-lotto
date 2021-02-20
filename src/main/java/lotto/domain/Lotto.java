@@ -51,6 +51,7 @@ public class Lotto {
     public List<Integer> toInts() {
         return lottoNumbers.stream()
                            .map(LottoNumber::getLottoNum)
+                           .sorted()
                            .collect(Collectors.toList());
     }
 }
