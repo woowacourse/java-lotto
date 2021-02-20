@@ -16,11 +16,11 @@ public class Money {
         }
     }
 
-    public int getMoney() {
-        return this.money;
-    }
-
     public int buyLotto(int lottoPrice) {
         return money / lottoPrice;
+    }
+
+    public float divide(int totalPrizeMoney) {
+        return (float) totalPrizeMoney / money;
     }
 }

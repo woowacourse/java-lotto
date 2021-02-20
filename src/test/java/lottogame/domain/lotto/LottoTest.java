@@ -2,7 +2,6 @@ package lottogame.domain.lotto;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -21,7 +20,7 @@ class LottoTest {
         lotto = new Lotto(new LottoNumber(values));
     }
 
-    @DisplayName("로또가 당첨 개수가 올바른 지 테스트")
+    @DisplayName("로또의 당첨 개수가 올바르게 체크되는지 테스트")
     @ParameterizedTest
     @CsvSource(value = {"8, 21, 23, 41, 42, 43:7:6",
             "3, 5, 11, 16, 32, 38:8:0",

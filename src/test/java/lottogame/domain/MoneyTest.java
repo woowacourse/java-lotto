@@ -1,15 +1,11 @@
 package lottogame.domain;
 
-import lottogame.utils.CannotBuyLottoException;
 import lottogame.utils.InvalidMoneyException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class MoneyTest {
 

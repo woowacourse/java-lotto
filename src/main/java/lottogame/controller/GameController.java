@@ -39,5 +39,4 @@ public class GameController {
         int bonusBall = InputView.inputBonusNumber();
         return new WinningLotto(numbers, bonusBall);
     }
-
 }
