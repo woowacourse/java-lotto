@@ -3,7 +3,9 @@ package lotto.domain.lotto;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toList;
 
 public class LottoGroup {
 
@@ -21,9 +23,20 @@ public class LottoGroup {
         return Collections.unmodifiableList(lottos);
     }
 
+    public LottoGroup addition(LottoGroup lottoGroup) {
+        return new LottoGroup(
+                Stream.concat(
+                        lottos.stream(),
+                        lottoGroup.lottos.stream()
+                ).collect(toList())
+        );
+    }
+
     @Override
     public String toString() {
         return String.join(System.lineSeparator(), lottos.stream()
-            .map(LottoNumbers::toString).collect(Collectors.toList()));
+            .map(LottoNumbers::toString).collect(toList()));
     }
+
+
 }
