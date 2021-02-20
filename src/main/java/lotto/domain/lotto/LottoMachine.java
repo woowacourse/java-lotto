@@ -1,8 +1,8 @@
 package lotto.domain.lotto;
 
+import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import lotto.utils.LottoGenerator;
 
 public class LottoMachine {
@@ -14,12 +14,19 @@ public class LottoMachine {
     }
 
     public List<LottoTicket> buyTickets(LottoGenerator lottoGenerator) {
-        return IntStream.range(0, getTicketCount()).boxed()
-                .map(ignored -> lottoGenerator.generateLottoTicket())
-                .collect(Collectors.toList());
+        ArrayList<LottoTicket> lottoTickets = new ArrayList<>();
+
+        for (BigInteger bi = getTicketCount();
+                bi.compareTo(BigInteger.ZERO) > 0;
+                bi = bi.subtract(BigInteger.ONE)) {
+
+            lottoTickets.add(lottoGenerator.generateLottoTicket());
+        }
+
+        return lottoTickets;
     }
 
-    private int getTicketCount() {
-        return money.toBigInteger().intValue() / LottoTicket.PRICE;
+    private BigInteger getTicketCount() {
+        return money.toBigInteger().divide(LottoTicket.PRICE);
     }
 }

@@ -1,5 +1,6 @@
 package lotto.domain.lotto;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -11,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class LottoTicket {
 
-    public static final int PRICE = 1000;
+    public static final BigInteger PRICE = BigInteger.valueOf(1000);
     public static final int SIZE_OF_LOTTO_NUMBERS = 6;
 
     private final List<LottoNumber> lottoNumbers;
