@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static lotto.domain.LottoNumber.MAX_LOTTO_NUMBER;
+import static lotto.domain.LottoNumber.MIN_LOTTO_NUMBER;
+import static lotto.domain.LottoTicket.LOTTO_TICKET_SIZE;
+import static lotto.domain.Money.LOTTO_PRICE;
+
 public class LottoTicketFactory {
-    public static final int MIN_LOTTO_NUMBER = 1;
-    public static final int MAX_LOTTO_NUMBER = 49;
-    public static final int LOTTO_PRICE = 1000;
-    public static final int START_INDEX = 0;
-    public static final int LOTTO_TICKET_SIZE = 6;
+    private static final int START_INDEX = 0;
 
     private final List<LottoNumber> lottoNumberRange;
 
@@ -20,16 +21,16 @@ public class LottoTicketFactory {
         }
     }
 
-    public List<LottoTicket> buyLottoTickets(Money money) {
-        int length = (int) money.getValue() / LOTTO_PRICE;
+    public LottoTickets buyLottoTickets(Money money) {
+        int count = (int) money.getValue() / LOTTO_PRICE;
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < length; i++) {
-            lottoTickets.add(new LottoTicket(createLottoTicketByRange()));
+        for (int i = 0; i < count; i++) {
+            lottoTickets.add(new LottoTicket(createLottoNumbersByRange()));
         }
-        return lottoTickets;
+        return new LottoTickets(lottoTickets);
     }
 
-    private List<LottoNumber> createLottoTicketByRange() {
+    private List<LottoNumber> createLottoNumbersByRange() {
         Collections.shuffle(lottoNumberRange);
         List<LottoNumber> lottoNumbers = lottoNumberRange.subList(START_INDEX, LOTTO_TICKET_SIZE);
         Collections.sort(lottoNumbers);

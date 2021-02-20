@@ -15,7 +15,7 @@ class LottoResultTest {
 
     @BeforeEach
     void init() {
-        this.prizes = Arrays.asList(Prize.FIRST_PRIZE, Prize.FIRST_PRIZE, Prize.NO_PRIZE);
+        this.prizes = Arrays.asList(Prize.FIRST_PRIZE, Prize.FIRST_PRIZE, Prize.NO_PRIZE, Prize.NO_PRIZE);
         this.lottoResult = new LottoResult(prizes);
     }
 
@@ -26,9 +26,8 @@ class LottoResultTest {
     }
 
     @Test
-    @DisplayName("수익률 계산 확인")
+    @DisplayName("수익금 계산 확인")
     void calculateProfitRate() {
-        Money money = new Money(2000);
-        assertThat(lottoResult.calculateProfitRate(money)).isEqualTo(2000000.0);
+        assertThat(lottoResult.getTotalProfit().getValue()).isEqualTo(4000000000L);
     }
 }

@@ -14,13 +14,4 @@ public class LottoTickets {
     public List<LottoTicket> lottoTickets() {
         return Collections.unmodifiableList(lottoTickets);
     }
-
-    public List<Prize> checkWinningTickets(WinningLotto winningLotto) {
-        List<Prize> winningTickets = new ArrayList<>();
-        for (LottoTicket lottoTicket : this.lottoTickets) {
-            winningTickets.add(Prize.getPrizeType(lottoTicket.getMatchingCount(winningLotto.getWinningTicket().lottoTicket()),
-                    lottoTicket.isMatchingBonusNumber(winningLotto.getBonusNumber())));
-        }
-        return winningTickets;
-    }
 }

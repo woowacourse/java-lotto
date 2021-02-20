@@ -1,13 +1,14 @@
 package lotto.domain;
 
+import lotto.exception.IllegalDivisorCountException;
 import lotto.exception.IllegalMoneyException;
 
 import java.util.regex.Pattern;
 
 public class Money {
-    public static final Pattern NUMBER_PATTERN = Pattern.compile("^[0-9]*$");
-    public static final int MINIMUM_MONEY = 1000;
     public static final Money ZERO = new Money(0);
+    public static final int LOTTO_PRICE = 1000;
+    private static final Pattern NUMBER_PATTERN = Pattern.compile("^[0-9]*$");
 
     private final long value;
 
@@ -31,17 +32,25 @@ public class Money {
     }
 
     private boolean isLessThanMinimumMoney(String input) {
-        return Integer.parseInt(input) < MINIMUM_MONEY;
-    }
-    public Money plus(Money money){
-        return new Money(money.getValue() + this.value);
-    }
-    public Money multiple(int number){
-        return new Money(this.value * number);
+        return Integer.parseInt(input) < LOTTO_PRICE;
     }
 
-    public double getRate(Money money){
-        return this.value / money.getValue();
+    public Money plus(Money money) {
+        if (money.value == 0) {
+            return this;
+        }
+        return new Money(money.value + this.value);
+    }
+
+    public Money multiple(int count) {
+        return new Money(this.value * count);
+    }
+
+    public double divide(int count) {
+        if (count <= 0) {
+            throw new IllegalDivisorCountException();
+        }
+        return this.value / (LOTTO_PRICE * count);
     }
 
     public long getValue() {

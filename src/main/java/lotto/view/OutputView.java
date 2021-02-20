@@ -50,7 +50,7 @@ public class OutputView {
         System.out.println(prize.getMatchCount() + "개 일치(" + prize.getPrizeMoney().getValue() + "원)- " + count + "개");
     }
 
-    public static void printProfitRate(LottoResult lottoResult, Money money) {
-        System.out.println("총 수익률은 " + lottoResult.calculateProfitRate(money) + "입니다.");
+    public static void printProfitRate(double profitRate) {
+        System.out.println("총 수익률은 " + profitRate + "입니다.");
     }
 }
