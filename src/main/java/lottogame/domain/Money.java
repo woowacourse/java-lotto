@@ -1,10 +1,8 @@
 package lottogame.domain;
 
-import lottogame.utils.CannotBuyLottoException;
 import lottogame.utils.InvalidMoneyException;
 
 public class Money {
-    private static final int LOTTO_PRICE = 1000;
     private final int money;
 
     public Money(int money) {
@@ -22,11 +20,7 @@ public class Money {
         return this.money;
     }
 
-    public int lottoQuantity() {
-        int quantity = money / LOTTO_PRICE;
-        if (quantity == 0) {
-            throw new CannotBuyLottoException();
-        }
-        return quantity;
+    public int buyLotto(int lottoPrice) {
+        return money / lottoPrice;
     }
 }
