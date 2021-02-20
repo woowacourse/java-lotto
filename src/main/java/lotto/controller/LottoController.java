@@ -54,7 +54,7 @@ public class LottoController {
     }
 
     private WinningLotto tryBuyWinningLotto() {
-        Lotto lotto = new Lotto(InputView.getWinningNumbers());
+        Lotto lotto = Lotto.getInstanceByInt(InputView.getWinningNumbers());
         OutputView.getMessage(INPUT_BONUS_BALL_MESSAGE);
         LottoNumber bonusNumber = new LottoNumber(InputView.getInt());
         return new WinningLotto(lotto, bonusNumber);

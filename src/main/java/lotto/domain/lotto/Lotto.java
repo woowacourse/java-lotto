@@ -13,13 +13,13 @@ public class Lotto {
     private static final String DUPLICATE_NUMBER_ERROR_MESSAGE = "중복된 숫자 입력입니다.";
     private final List<LottoNumber> numbers;
 
-    public Lotto(final List<Integer> numbers) {
-        this(numbers.stream()
+    public static Lotto getInstanceByInt(final List<Integer> numbers) {
+        return new Lotto(numbers.stream()
             .map(LottoNumber::new)
-            .collect(Collectors.toList()), true);
+            .collect(Collectors.toList()));
     }
 
-    public Lotto(final List<LottoNumber> numbers, final boolean dummy) {
+    public Lotto(final List<LottoNumber> numbers) {
         validateNumberCount(numbers);
         validateDistinct(numbers);
         this.numbers = numbers;

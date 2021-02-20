@@ -47,7 +47,8 @@ public class LottoManagerTest {
         Ticket ticket = new Ticket(new Money(2000));
 
         lottoManager.buyLotto(ticket);
-        WinningLotto winningLotto = new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
+        WinningLotto winningLotto = new WinningLotto(
+            Lotto.getInstanceByInt(Arrays.asList(1, 2, 3, 4, 5, 6)),
             new LottoNumber(7));
         RatingInfo ratingInfo = lottoManager.scratchLotto(winningLotto);
 
