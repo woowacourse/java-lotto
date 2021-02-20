@@ -12,7 +12,7 @@ public class LottoManager {
 
     private final RatingCounter ratingCounter = new RatingCounter();
     private final LottoRepository lottoRepository = new LottoRepository();
-    private LottoMachine lottoMachine;
+    private final LottoMachine lottoMachine;
 
     public LottoManager(final LottoMachine lottoMachine) {
         this.lottoMachine = lottoMachine;

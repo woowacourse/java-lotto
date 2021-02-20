@@ -10,19 +10,13 @@ public class Lotto {
     private static final int LOTTO_NUMBER_COUNT = 6;
     private final List<LottoNumber> numbers;
 
-    public Lotto(final List<Integer> numbers) {
-        this(numbers.stream()
-                    .map(LottoNumber::new)
-                    .collect(Collectors.toList()), true);
+    public static Lotto createByInteger(final List<Integer> numbers) {
+        return new Lotto(numbers.stream()
+                                .map(LottoNumber::new)
+                                .collect(Collectors.toList()));
     }
 
-    /*
-    List<Integer> List<LottoNumber>를 동시에 사용했을 때, Erase~~ 에러를 띄웁니다.
-    기존에는 static createByName(List<Integer> numbers)와 같은 방식으로 구현을 진행했었는데요,
-    JDK HashSet 의 생성자에 경우 dummy 를 추가하는 방식으로 생성자 오버로딩을 구현해서 이런식으로 구현해봤습니다.
-    현업에서는 어떻게 사용되는지 궁금합니다!
-     */
-    public Lotto(final List<LottoNumber> numbers, final boolean dummy) {
+    public Lotto(final List<LottoNumber> numbers) {
         validateNumberCount(numbers);
         validateDistinct(numbers);
         this.numbers = numbers;

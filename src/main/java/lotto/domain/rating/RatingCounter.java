@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class RatingCounter {
 
-    private Map<Rating, Counter> ratings;
+    private final Map<Rating, Counter> ratings;
 
     public RatingCounter() {
         ratings = new EnumMap<>(Rating.class);
