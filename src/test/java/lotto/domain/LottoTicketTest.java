@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import java.util.List;
-import lotto.domain.number.LottoNumber;
 import lotto.domain.number.LottoNumberFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

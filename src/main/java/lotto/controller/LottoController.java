@@ -1,6 +1,8 @@
 package lotto.controller;
 
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.groupingBy;
 
 import java.util.List;
 import java.util.function.Function;
