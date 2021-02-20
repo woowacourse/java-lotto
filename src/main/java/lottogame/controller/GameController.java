@@ -12,13 +12,9 @@ import lottogame.view.OutputView;
 import java.util.List;
 
 public class GameController {
-    private LottoMachine lottoMachine;
-
-    public GameController() {
-        lottoMachine = new LottoMachine();
-    }
 
     public void run() {
+        LottoMachine lottoMachine = new LottoMachine();
         Money money = new Money(InputView.inputMoney());
         int quantity = lottoMachine.purchaseQuantity(money);
         Lottos lottos = new Lottos(lottoMachine.buyLotto(quantity));
