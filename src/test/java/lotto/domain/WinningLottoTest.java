@@ -32,7 +32,7 @@ public class WinningLottoTest {
         LottoNumber bonusNumber = new LottoNumber("7");
         WinningLotto winningLotto = new WinningLotto(lotto, bonusNumber);
 
-        List<Integer> winningNumbers = Arrays.asList(1,2,3,4,5,6);
+        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
         assertThat(winningLotto)
                 .isEqualTo(new WinningLotto(Lotto.ofLotto(winningNumbers), 7));
