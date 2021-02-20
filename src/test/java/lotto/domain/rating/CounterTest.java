@@ -7,8 +7,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CounterTest {
     @Test
     void name() {
-        Counter expected = new Counter(1);
-        Counter counter = new Counter(0);
+        Counter expected = new Counter();
+        expected = expected.plus();
+        Counter counter = new Counter();
         Counter actual = counter.plus();
         assertThat(actual).isEqualTo(expected);
     }

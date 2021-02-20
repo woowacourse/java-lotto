@@ -10,7 +10,7 @@ public class Counter {
         this(0);
     }
 
-    public Counter(final int count) {
+    private Counter(final int count) {
         this.count = count;
     }
 
