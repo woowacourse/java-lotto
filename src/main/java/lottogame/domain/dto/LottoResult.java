@@ -1,4 +1,4 @@
-package lottogame.domain.stats;
+package lottogame.domain.dto;
 
 import lottogame.domain.Rank;
 
