@@ -5,13 +5,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Statistics {
-    private static final Integer ZERO = 0;
+    private static final Integer INITIAL_COUNT = 0;
 
     private final Map<Rank, Integer> lottoStatistics = new HashMap<>();
 
     public Statistics(WinningNumber winningNumber, LottoTickets lottoTickets) {
         for (Rank rank : Rank.values()) {
-            lottoStatistics.put(rank, ZERO);
+            lottoStatistics.put(rank, INITIAL_COUNT);
         }
         calculate(winningNumber, lottoTickets);
     }
