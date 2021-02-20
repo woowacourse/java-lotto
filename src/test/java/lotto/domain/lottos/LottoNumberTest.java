@@ -21,6 +21,6 @@ public class LottoNumberTest {
     public void validateNumberTest() {
         assertThatThrownBy(() -> {
             new LottoNumber(46);
-        }).isInstanceOf(IllegalArgumentException.class);
+        }).isInstanceOf(IllegalArgumentException.class).hasMessage(LottoNumber.RANGE_ERROR_MESSAGE);
     }
 }

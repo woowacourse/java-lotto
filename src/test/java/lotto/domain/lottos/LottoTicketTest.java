@@ -34,14 +34,14 @@ public class LottoTicketTest {
     @NullSource
     public void nullNotAllowedTest(List<LottoNumber> lottoNumbers) {
         assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
-                .isInstanceOf(NullPointerException.class).hasMessage("null값은 허용하지 않습니다.");
+                .isInstanceOf(NullPointerException.class).hasMessage(LottoTicket.NULL_ERROR_MESSAGE);
     }
 
     @ParameterizedTest(name = "빈값을 생성자의 매개변수로 허용하지 않는다.")
     @EmptySource
     public void emptyParameterTest(List<LottoNumber> lottoNumbers) {
         assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
-                .isInstanceOf(IllegalArgumentException.class).hasMessage("숫자는 하나 이상이어야 합니다.");
+                .isInstanceOf(IllegalArgumentException.class).hasMessage(LottoTicket.EMPTY_ERROR_MESSAGE);
     }
 
     @Test
@@ -58,7 +58,7 @@ public class LottoTicketTest {
 
         assertThatThrownBy(() -> {
             new LottoTicket(lottoNumbers);
-        }).isInstanceOf(RuntimeException.class);
+        }).isInstanceOf(IllegalArgumentException.class).hasMessage(LottoTicket.DUPLICATE_ERROR_MESSAGE);
     }
 
     @Test
@@ -76,7 +76,7 @@ public class LottoTicketTest {
 
         assertThatThrownBy(() -> {
             new LottoTicket(lottoNumbers);
-        }).isInstanceOf(RuntimeException.class);
+        }).isInstanceOf(IllegalArgumentException.class).hasMessage(LottoTicket.COUNT_ERROR_MESSAGE);
     }
 
     @Test
@@ -92,7 +92,7 @@ public class LottoTicketTest {
 
         assertThatThrownBy(() -> {
             new LottoTicket(lottoNumbers);
-        }).isInstanceOf(RuntimeException.class);
+        }).isInstanceOf(RuntimeException.class).hasMessage(LottoTicket.COUNT_ERROR_MESSAGE);
     }
 
     @Test

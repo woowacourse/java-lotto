@@ -43,14 +43,14 @@ public class LottoBonusNumberTest {
     public void validateNumberTest() {
         assertThatThrownBy(() -> {
             LottoBonusNumber.of("46", lottoWinnerTicket);
-        }).isInstanceOf(IllegalArgumentException.class);
+        }).isInstanceOf(IllegalArgumentException.class).hasMessage(LottoBonusNumber.RANGE_ERROR_MESSAGE);
     }
 
     @Test
-    @DisplayName("보너스 번호는 당첨번호 6개와 중복되면 IllegalArgument예외가 발생한다.")
+    @DisplayName("보너스 번호는 당첨번호 6개와 중복되면 IllegalArgument 예외가 발생한다.")
     public void duplicateBonusNumberTest() {
         assertThatThrownBy(() -> {
             LottoBonusNumber.of("45", lottoWinnerTicket);
-        }).isInstanceOf(IllegalArgumentException.class);
+        }).isInstanceOf(IllegalArgumentException.class).hasMessage(LottoBonusNumber.DUPLICATE_ERROR_MESSAGE);
     }
 }

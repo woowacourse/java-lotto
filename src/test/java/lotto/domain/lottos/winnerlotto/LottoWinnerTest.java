@@ -2,6 +2,7 @@ package lotto.domain.lottos.winnerlotto;
 
 import lotto.domain.lottos.LottoNumber;
 import lotto.domain.lottos.LottoTicket;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,10 +14,13 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoWinnerTest {
 
-    @Test
-    @DisplayName("로또 당첨 티켓을 생성한다.")
-    public void createWinnerLottoTicketTest() {
-        List<LottoNumber> lottoWinnerNumbers = Arrays.asList(
+    List<LottoNumber> lottoWinnerNumbers;
+    LottoTicket lottoWinnerTicket;
+    LottoBonusNumber lottoBonusNumber;
+
+    @BeforeEach
+    void setUp() {
+        lottoWinnerNumbers = Arrays.asList(
                 new LottoNumber(1),
                 new LottoNumber(2),
                 new LottoNumber(3),
@@ -24,9 +28,13 @@ public class LottoWinnerTest {
                 new LottoNumber(5),
                 new LottoNumber(45)
         );
-        LottoTicket lottoWinnerTicket = new LottoTicket(lottoWinnerNumbers);
-        LottoBonusNumber lottoBonusNumber = LottoBonusNumber.of("9", lottoWinnerTicket);
+        lottoWinnerTicket = new LottoTicket(lottoWinnerNumbers);
+        lottoBonusNumber = LottoBonusNumber.of("9", lottoWinnerTicket);
+    }
 
+    @Test
+    @DisplayName("로또 당첨 티켓을 생성한다.")
+    public void createWinnerLottoTicketTest() {
         assertThat(new LottoWinner(lottoWinnerTicket, lottoBonusNumber)).isInstanceOf(LottoWinner.class);
     }
 
@@ -36,6 +44,6 @@ public class LottoWinnerTest {
 
         assertThatThrownBy(() -> {
             new LottoWinner(null, null);
-        }).isInstanceOf(NullPointerException.class).hasMessage("null 값은 허용하지 않습니다.");
+        }).isInstanceOf(NullPointerException.class).hasMessage(LottoWinner.NULL_ERROR_MESSAGE);
     }
 }

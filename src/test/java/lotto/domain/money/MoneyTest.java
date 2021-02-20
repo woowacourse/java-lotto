@@ -27,10 +27,18 @@ public class MoneyTest {
     @Test
     @DisplayName("1000원 미만은 받을 수 없다.")
     public void notEnoughBudgetTest() {
-
         assertThatThrownBy(() -> {
             new Money("500");
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("1000원 이상 입력해주세요.");
+                .hasMessage(Money.SHORT_MONEY_MESSAGE);
+    }
+
+    @Test
+    @DisplayName("돈을 생성할 때 문자열을 넘겨주면 예외가 발생한다.")
+    public void  invalidNumberFormatTest() {
+        assertThatThrownBy(() -> {
+            new Money("이건문자열이");
+        }).isInstanceOf(NumberFormatException.class)
+                .hasMessage(Money.NUMBER_FORMAT_ERROR_MESSAGE);
     }
 }

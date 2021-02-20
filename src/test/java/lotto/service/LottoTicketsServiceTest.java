@@ -23,6 +23,6 @@ class LottoTicketsServiceTest {
     public void notEnoughMoneyTest() {
         assertThatThrownBy(() -> {
             LottoTickets lottoTickets = LottoTicketsService.createLottoTickets(new Money("500"));
-        });
+        }).isInstanceOf(IllegalArgumentException.class).hasMessage(Money.SHORT_MONEY_MESSAGE);
     }
 }

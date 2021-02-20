@@ -28,14 +28,14 @@ public class LottoTicketServiceTest {
     public void invalidLottoNumbersTest() {
         assertThatThrownBy(() -> {
             LottoTicketService.createLottoWinnerTicket("1,2,3,4,5");
-        }).isInstanceOf(IllegalArgumentException.class);
+        }).isInstanceOf(IllegalArgumentException.class).hasMessage(LottoTicketService.COUNT_ERROR_MESSAGE);
     }
 
     @Test
     @DisplayName("당첨 번호 입력에 숫자이외의 것을 입력하면 NumberFormatException 발생")
     public void invalidNumberFormatTest() {
         assertThatThrownBy(() -> {
-            LottoTicketService.createLottoWinnerTicket("1,2,3,4,이건문자열이다");
-        }).isInstanceOf(NumberFormatException.class);
+            LottoTicketService.createLottoWinnerTicket("1,2,3,4,이건문자열이다,6");
+        }).isInstanceOf(NumberFormatException.class).hasMessage(LottoTicketService.NUMBER_FORMAT_ERROR_MESSAGE);
     }
 }

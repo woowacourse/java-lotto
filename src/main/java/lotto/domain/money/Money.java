@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class Money {
 
-    private static final String SHORT_MONEY_MESSAGE = "1000원 이상 입력해주세요.";
-    private static final String NUMBER_FORMAT_ERROR_MESSAGE = "입력금액은 숫자여야합니다.";
+    public static final String SHORT_MONEY_MESSAGE = "1000원 이상 입력해주세요.";
+    public static final String NUMBER_FORMAT_ERROR_MESSAGE = "입력금액은 숫자여야합니다.";
     private static final int LOTTO_PRICE = 1000;
 
     private final int money;

@@ -5,8 +5,8 @@ import lotto.domain.lottos.LottoTicket;
 
 public class LottoBonusNumber extends LottoNumber {
 
-    private static final String DUPLICATE_ERROR_MESSAGE = "당첨번호에 이미 있는 보너스 숫자입니다.";
-    private static final String NUMBER_FORMAT_ERROR_MESSAGE = "입력은 숫자여야 합니다.";
+    public static final String DUPLICATE_ERROR_MESSAGE = "당첨번호에 이미 있는 보너스 숫자입니다.";
+    public static final String NUMBER_FORMAT_ERROR_MESSAGE = "입력은 숫자여야 합니다.";
 
     private LottoBonusNumber(int number) {
         super(number);

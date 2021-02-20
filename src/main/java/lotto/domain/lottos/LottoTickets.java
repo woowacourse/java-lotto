@@ -10,8 +10,8 @@ import java.util.Objects;
 
 public class LottoTickets {
 
-    private static final String NULL_ERROR_MESSAGE = "null 값은 허용하지 않습니다.";
-    private static final String EMPTY_ERROR_MESSAGE = "로또는 한장 이상 구매해야 합니다.";
+    public static final String NULL_ERROR_MESSAGE = "null 값은 허용하지 않습니다.";
+    public static final String EMPTY_ERROR_MESSAGE = "로또는 한장 이상 구매해야 합니다.";
     private static final int INCREMENT_COUNT = 1;
 
     private final List<LottoTicket> lottoTickets;

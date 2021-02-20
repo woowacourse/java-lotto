@@ -31,7 +31,7 @@ public class LottoTicketsTest {
     public void nullParameterTest(List<LottoTicket> lottoTickets) {
         assertThatThrownBy(() -> {
             new LottoTickets(lottoTickets);
-        }).isInstanceOf(NullPointerException.class).hasMessage("null 값은 허용하지 않습니다.");
+        }).isInstanceOf(NullPointerException.class).hasMessage(LottoTickets.NULL_ERROR_MESSAGE);
     }
 
     @ParameterizedTest(name = "빈값은 생성자의 매개변수로 허용하지 않는다.")
@@ -39,7 +39,7 @@ public class LottoTicketsTest {
     public void emptyParameterTest(List<LottoTicket> lottoTickets) {
         assertThatThrownBy(() -> {
             new LottoTickets(lottoTickets);
-        }).isInstanceOf(IllegalArgumentException.class).hasMessage("로또는 한장 이상 구매해야 합니다.");
+        }).isInstanceOf(IllegalArgumentException.class).hasMessage(LottoTickets.EMPTY_ERROR_MESSAGE);
     }
 
     @Test
