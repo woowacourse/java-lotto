@@ -16,10 +16,8 @@ public class LottoResult {
         return statistics.computeIfAbsent(lottoRank, key -> ZERO);
     }
 
-    public double calculateYield(PurchasingPrice purchasingPrice) {
-        long prizeMoneyTotal = calculatePrizeMoneyTotal();
-        int denominatorCost = purchasingPrice.getPrice();
-        return (((double) prizeMoneyTotal) / denominatorCost);
+    public double calculateYield(int purchasingPrice) {
+        return ((double) calculatePrizeMoneyTotal()) / purchasingPrice;
     }
 
     private long calculatePrizeMoneyTotal() {
