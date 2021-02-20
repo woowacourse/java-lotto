@@ -1,6 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.ticketgenerator.LottoMachine;
+import lotto.domain.ticketgenerator.LottoGenerator;
 import lotto.domain.ticketpurchase.PurchasedLottoTickets;
 import lotto.domain.ticketpurchase.UserPurchase;
 import lotto.domain.ticketresult.LottoComparator;
@@ -10,9 +10,10 @@ import lotto.view.OutputView;
 
 public class LottoMain {
     public static void main(String[] args) {
-        LottoMachine lottoMachine = new LottoMachine();
+        LottoGenerator lottoGenerator = new LottoGenerator();
         UserPurchase userPurchase = getUserPurchaseInput();
-        PurchasedLottoTickets purchasedLottoTickets = lottoMachine.purchaseLottoTicket(userPurchase);
+
+        PurchasedLottoTickets purchasedLottoTickets = lottoGenerator.generatePurchasedTickets(userPurchase);
         OutputView.printPurchasedLottoTickets(purchasedLottoTickets);
 
         WinningLottoNumbers winningLottoNumbers = getWinningLottoNumbersInput();

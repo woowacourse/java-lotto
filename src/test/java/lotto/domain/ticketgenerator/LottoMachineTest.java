@@ -12,9 +12,8 @@ public class LottoMachineTest {
     @Test
     void Should_ReturnPurchasedTickets_When_Purchased() {
         UserPurchase userPurchase = new UserPurchase(18000);
-        LottoMachine lottoMachine = new LottoMachine();
-        PurchasedLottoTickets purchasedLottoTickets = lottoMachine
-            .purchaseLottoTicket(userPurchase);
+        LottoGenerator lottoGenerator = new LottoGenerator();
+        PurchasedLottoTickets purchasedLottoTickets = lottoGenerator.generatePurchasedTickets(userPurchase);
         assertThat(purchasedLottoTickets.getTickets().size()).isEqualTo(18);
     }
 }

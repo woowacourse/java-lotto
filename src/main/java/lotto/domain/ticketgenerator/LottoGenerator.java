@@ -6,6 +6,7 @@ import java.util.List;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.ticketpurchase.PurchasedLottoTickets;
+import lotto.domain.ticketpurchase.UserPurchase;
 
 public class LottoGenerator {
     private static final int ZERO = 0;
@@ -19,10 +20,10 @@ public class LottoGenerator {
         }
     }
 
-    public PurchasedLottoTickets generatePurchasedTickets(int numberOfTicket) {
+    public PurchasedLottoTickets generatePurchasedTickets(UserPurchase userPurchase) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
 
-        for (int i = 0; i < numberOfTicket; i++) {
+        for (int i = 0; i < userPurchase.getNumberOfTicket(); i++) {
             Collections.shuffle(allNumbers);
             lottoTickets.add(new LottoTicket(new ArrayList<>(allNumbers.subList(ZERO, SIZE))));
         }
