@@ -1,16 +1,14 @@
 package lotto.view;
 
+import java.math.BigInteger;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.Rank;
 import lotto.domain.result.Result;
 
-public class OutputView {
+public class ResultView {
 
-    private OutputView() {
+    private ResultView() {
     }
 
     public static void printResult(Result result) {
@@ -40,7 +38,7 @@ public class OutputView {
         System.out.printf("%s (%s원)- %d개%n", message, prize, matchCount);
     }
 
-    private static String getMessage(Rank rank) {
+    private static String getRankMessage(Rank rank) {
         if (Rank.FIRST_PLACE.equals(rank)) {
             return "6개 일치";
         }
@@ -58,26 +56,5 @@ public class OutputView {
         }
 
         throw new IllegalArgumentException("UNRANKED는 출력하지 않습니다.");
-    }
-
-    public static void printTickets(List<LottoTicket> lottoTickets) {
-        printLottoTicketCount(lottoTickets.size());
-
-        for (LottoTicket lottoTicket : lottoTickets) {
-            printLottoTicket(lottoTicket);
-        }
-
-        System.out.println();
-    }
-
-    private static void printLottoTicket(LottoTicket lottoTicket) {
-        String numbers = lottoTicket.toUnmodifiableList().stream()
-                .map(lottoNumber -> Integer.toString(lottoNumber.toInt()))
-                .collect(Collectors.joining(", "));
-        System.out.println("[" + numbers + "]");
-    }
-
-    private static void printLottoTicketCount(int lottoTicketCount) {
-        System.out.printf("%d개를 구매했습니다.\n", lottoTicketCount);
     }
 }

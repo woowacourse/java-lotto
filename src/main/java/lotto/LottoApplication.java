@@ -8,17 +8,18 @@ import lotto.domain.result.LottoMatcher;
 import lotto.domain.result.Result;
 import lotto.utils.RandomLottoGenerator;
 import lotto.view.InputView;
-import lotto.view.OutputView;
+import lotto.view.ResultView;
+import lotto.view.TicketsView;
 
 public class LottoApplication {
 
     public static void main(String[] args) {
         Money money = getMoneyByInput();
         List<LottoTicket> lottoTickets = getLottoTicketsByMoney(money);
-        OutputView.printTickets(lottoTickets);
+        TicketsView.printTickets(lottoTickets);
 
         Result result = getMatchedLottoResult(money, lottoTickets);
-        OutputView.printResult(result);
+        ResultView.printResult(result);
     }
 
     private static Money getMoneyByInput() {
