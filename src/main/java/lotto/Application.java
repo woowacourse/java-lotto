@@ -9,9 +9,8 @@ import java.util.List;
 public class Application {
     public static void main(String[] args) {
         PurchasingPrice purchasingPrice = new PurchasingPrice(InputView.inputPurchasingPrice());
-        int lottoTicketCounts = purchasingPrice.calculatePurchasableTicketCounts(1000);
         LottoTickets lottoTickets = LottoTickets.generateAutomatic(purchasingPrice, new RandomLottoNumberGenerator());
-        OutputView.printPurchasedLottoTicketCounts(lottoTicketCounts);
+        OutputView.printPurchasedLottoTicketCounts(lottoTickets.getTicketCounts());
         OutputView.printAllLottoTicketNumbers(lottoTickets);
 
         List<Integer> winningTicketNumbers = InputView.inputWinningTicketNumbers();

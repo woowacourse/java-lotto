@@ -35,4 +35,14 @@ class LottoTicketsTest {
 
         assertThat(secondPrizeTicketCounts).isEqualTo(3);
     }
+
+    @DisplayName("구매한 로또 티켓의 개수를 반환한다")
+    @Test
+    void getTicketCounts() {
+        LottoTickets lottoTickets = LottoTickets.generateAutomatic(new PurchasingPrice(3127), lottoNumberGenerator);
+
+        int ticketCounts = lottoTickets.getTicketCounts();
+
+        assertThat(ticketCounts).isEqualTo(3);
+    }
 }

@@ -41,6 +41,10 @@ public class LottoTickets {
         return new LottoResult(statistics);
     }
 
+    public int getTicketCounts() {
+        return lottoTickets.size();
+    }
+
     public List<LottoTicket> getLottoTickets() {
         return Collections.unmodifiableList(lottoTickets);
     }
