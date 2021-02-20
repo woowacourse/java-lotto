@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.lotto.*;
+import lotto.domain.number.ManualPurchasesNumber;
 import lotto.domain.number.Number;
 import lotto.domain.number.PayOut;
 import lotto.view.InputView;
@@ -17,8 +18,10 @@ public class LottoController {
     public static void run() {
         PayOut payOut = getPayOutFromUser();
 
-        Number manualLottoCount = getManualLottoCountFromUser();
+        ManualPurchasesNumber manualLottoCount = getManualLottoCountFromUser(payOut);
+
         List<String> manualLottos = getManualLottosFromUser(manualLottoCount);
+
         OutputView.payOuted(payOut.getGameCount(), manualLottoCount.getValueAsInt());
 
         LottoGroup lottoGroup = createLottosAccordingToTheAmount(manualLottos,
@@ -41,10 +44,10 @@ public class LottoController {
         return payOut;
     }
 
-    private static Number getManualLottoCountFromUser() {
+    private static ManualPurchasesNumber getManualLottoCountFromUser(PayOut payOut) {
         OutputView.manualPurchase();
 
-        return new Number(InputView.getStringInputFromUser());
+        return new ManualPurchasesNumber(InputView.getStringInputFromUser(), payOut);
     }
 
     private static List<String> getManualLottosFromUser(Number manualLottoCount) {

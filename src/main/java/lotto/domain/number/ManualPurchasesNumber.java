@@ -2,6 +2,10 @@ package lotto.domain.number;
 
 public class ManualPurchasesNumber extends Number {
     public ManualPurchasesNumber(int number, PayOut payOut) {
+        this(String.valueOf(number), payOut);
+    }
+
+    public ManualPurchasesNumber(String number, PayOut payOut) {
         super(number);
 
         validatePurchasable(payOut);
