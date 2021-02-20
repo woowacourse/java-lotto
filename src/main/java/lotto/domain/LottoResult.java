@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
 
@@ -9,7 +11,13 @@ public class LottoResult {
     private final Map<LottoRank, Long> statistics;
 
     public LottoResult(Map<LottoRank, Long> statistics) {
+        initiateEntry(statistics);
         this.statistics = new EnumMap<>(statistics);
+    }
+
+    private void initiateEntry(Map<LottoRank, Long> statistics) {
+        Arrays.stream(LottoRank.values())
+                .forEach(lottoRank -> statistics.computeIfAbsent(lottoRank, key -> ZERO));
     }
 
     public long getTicketCountsByRank(LottoRank lottoRank) {
@@ -25,5 +33,9 @@ public class LottoResult {
                 .stream()
                 .mapToLong(lottoRank -> lottoRank.getPrizeMoney() * statistics.get(lottoRank))
                 .sum();
+    }
+
+    public Map<LottoRank, Long> getStatistics() {
+        return Collections.unmodifiableMap(statistics);
     }
 }

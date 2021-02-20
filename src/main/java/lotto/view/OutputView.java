@@ -7,6 +7,7 @@ import lotto.domain.LottoTickets;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class OutputView {
@@ -44,21 +45,22 @@ public class OutputView {
     public static void printLottoResult(LottoResult lottoResult, double yield) {
         System.out.println(RESULT_HEADER_MESSAGE);
         System.out.println(HYPHENS);
+        Map<LottoRank, Long> statistics = lottoResult.getStatistics();
         Arrays.stream(LottoRank.values())
                 .filter(lottoRank -> lottoRank != LottoRank.MISS)
                 .sorted(Comparator.reverseOrder())
-                .forEach(lottoRank -> printStatisticsByRank(lottoRank, lottoResult));
+                .forEach(lottoRank -> printStatisticsByRank(lottoRank, statistics));
         System.out.printf(YIELD_MESSAGE, yield);
     }
 
-    private static void printStatisticsByRank(LottoRank lottoRank, LottoResult lottoResult) {
+    private static void printStatisticsByRank(LottoRank lottoRank, Map<LottoRank, Long> statistics) {
         int matchCounts = lottoRank.getMatchCounts();
         int prizeMoney = lottoRank.getPrizeMoney();
-        int ticketCountsByRank = (int) lottoResult.getTicketCountsByRank(lottoRank);
+        long ticketCounts = statistics.get(lottoRank);
         if (lottoRank == LottoRank.SECOND_PRIZE) {
-            System.out.printf(LOTTO_STATISTICS_BONUS_BALL_MESSAGE, matchCounts, prizeMoney, ticketCountsByRank);
+            System.out.printf(LOTTO_STATISTICS_BONUS_BALL_MESSAGE, matchCounts, prizeMoney, ticketCounts);
             return;
         }
-        System.out.printf(LOTTO_STATISTICS_MESSAGE, matchCounts, prizeMoney, ticketCountsByRank);
+        System.out.printf(LOTTO_STATISTICS_MESSAGE, matchCounts, prizeMoney, ticketCounts);
     }
 }

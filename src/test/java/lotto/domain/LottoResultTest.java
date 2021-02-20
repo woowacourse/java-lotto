@@ -34,4 +34,15 @@ class LottoResultTest {
 
         assertThat(yield).isEqualTo(((double) 2000000000) / 35000);
     }
+
+    @DisplayName("LottoResult가 반환하는 EntrySet의 Key는 LottoRank 열거형들로 초기화된 상태이다")
+    @Test
+    void getStatistics() {
+        Map<LottoRank, Long> statistics = lottoResult.getStatistics();
+
+        int keyCounts = statistics.size();
+        int lottoRankCounts = LottoRank.values().length;
+
+        assertThat(keyCounts).isEqualTo(lottoRankCounts);
+    }
 }
