@@ -55,13 +55,13 @@ public class OutputView {
 
     private void printMatchCount(Rank rank, long count) {
         if (rank.equals(Rank.SECOND)) {
-            System.out.printf((STATISTICS_BONUS_FORMAT) + "%n", rank.getCount(), rank.getReward().toLong(), count);
+            System.out.printf((STATISTICS_BONUS_FORMAT) + "%n", rank.getMatch(), rank.getReward().toLong(), count);
             return;
         }
         if (rank.equals(Rank.NOTHING)) {
             return;
         }
-        System.out.printf((STATISTICS_FORMAT) + "%n", rank.getCount(), rank.getReward().toLong(), count);
+        System.out.printf((STATISTICS_FORMAT) + "%n", rank.getMatch(), rank.getReward().toLong(), count);
     }
 
     public void printProfit(Profit profit) {

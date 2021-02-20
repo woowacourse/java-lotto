@@ -12,26 +12,26 @@ public enum Rank {
 
     private static final long FIVE = 5;
 
-    long count;
-    Money reward;
+    private final long match;
+    private final Money reward;
 
-    Rank(long count, Money reward) {
-        this.count = count;
+    Rank(long match, Money reward) {
+        this.match = match;
         this.reward = reward;
     }
 
-    public static Rank from(long count, boolean bonusBallMatch) {
-        if (bonusBallMatch && count == FIVE) {
+    public static Rank from(long match, boolean bonusBallMatch) {
+        if (bonusBallMatch && match == FIVE) {
             return Rank.SECOND;
         }
         return Arrays.stream(Rank.values())
-                .filter(item -> item.getCount() == count)
+                .filter(item -> item.getMatch() == match)
                 .findAny()
                 .orElse(NOTHING);
     }
 
-    public long getCount() {
-        return this.count;
+    public long getMatch() {
+        return this.match;
     }
 
     public Money getReward() {
@@ -40,6 +40,6 @@ public enum Rank {
 
     @Override
     public String toString() {
-        return String.format("Count: %d, Money: %d", this.count, this.getReward().toLong());
+        return String.format("Match: %d, Reward: %d", this.match, this.getReward().toLong());
     }
 }
