@@ -26,7 +26,7 @@ public class LottoBonusNumber extends LottoNumber {
         }
     }
 
-    public static void validateDuplicateBonusNumber
+    private static void validateDuplicateBonusNumber
             (int number, LottoTicket lottoWinnerTicket) {
         if (lottoWinnerTicket.isContain(number)) {
             throw new IllegalArgumentException(DUPLICATE_ERROR_MESSAGE);
