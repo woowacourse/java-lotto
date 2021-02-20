@@ -2,27 +2,20 @@ package lottogame.controller;
 
 import lottogame.domain.LottoMachine;
 import lottogame.view.InputView;
-import lottogame.view.OutputView;
-import lottogame.domain.lotto.Lotto;
-import lottogame.domain.lotto.LottoGenerator;
 import lottogame.domain.lotto.Lottos;
 import lottogame.domain.Money;
-import lottogame.domain.lotto.WinningLotto;
-import lottogame.domain.dto.LottoResults;
-
-import java.util.List;
 
 public class GameController {
     private LottoMachine lottoMachine;
 
     public GameController() {
         lottoMachine = new LottoMachine();
-        LottoGenerator.generate();
     }
 
     public void run() {
         Money money = new Money(InputView.inputMoney());
         int quantity = lottoMachine.purchaseQuantity(money);
+        Lottos lottos = new Lottos(lottoMachine.buyLotto(quantity));
 //            buyLotto();
 //            OutputView.printResult(matchLottos());
 
