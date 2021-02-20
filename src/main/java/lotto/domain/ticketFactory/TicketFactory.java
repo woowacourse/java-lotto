@@ -1,36 +1,37 @@
 package lotto.domain.ticketFactory;
 
+import static lotto.domain.LottoNumber.LOTTO_NUMBER_MAX_LIMIT;
+import static lotto.domain.LottoNumber.LOTTO_NUMBER_MIN_LIMIT;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 
 public class TicketFactory {
 
-    public static final int LOTTO_NUMBER_MAX_LIMIT = 44;
-    public static final int LOTTO_NUMBER_MIN_LIMIT = 1;
-    public static final List<LottoNumber> lottoNumbers = new ArrayList<>();
-
-    private final RandomNumbersGenerator randomNumbersGenerator;
+    private final RandomTicketGenerator randomTicketGenerator;
 
     public TicketFactory() {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int i = LOTTO_NUMBER_MIN_LIMIT; i <= LOTTO_NUMBER_MAX_LIMIT; i++) {
             lottoNumbers.add(new LottoNumber(i));
         }
-        randomNumbersGenerator = new RandomNumbersGenerator();
+        randomTicketGenerator = new RandomTicketGenerator(lottoNumbers);
     }
 
-    public LottoTickets makeTicketsByCount(int counts) {
+    public LottoTicket makeFixedTicket(List<Integer> lottoNumbers) {
+        FixedTicketGenerator fixedTicketGenerator = new FixedTicketGenerator(lottoNumbers);
+        return fixedTicketGenerator.generateTicket();
+    }
+
+    public LottoTickets makeRandomTicketsByCount(int counts) {
         LottoTickets lottoTickets = new LottoTickets();
         for (int i = 0; i < counts; i++) {
-            lottoTickets.addTicket(makeTicket(randomNumbersGenerator.generateNumbers()));
+            lottoTickets.addTicket(randomTicketGenerator.generateTicket());
         }
         return lottoTickets;
     }
 
-    public LottoTicket makeTicket(Set<LottoNumber> lottoNumbers) {
-        return new LottoTicket(lottoNumbers);
-    }
 }

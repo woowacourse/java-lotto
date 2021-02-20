@@ -6,7 +6,6 @@ import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
 import lotto.domain.WinningLotto;
-import lotto.domain.ticketFactory.FixedNumbersGenerator;
 import lotto.domain.ticketFactory.TicketFactory;
 import lotto.exception.LottoCustomException;
 import lotto.view.InputView;
@@ -47,7 +46,7 @@ public class LottoController {
     }
 
     private LottoTickets buyTickets() {
-        lottoTickets = ticketFactory.makeTicketsByCount(money.countTickets());
+        lottoTickets = ticketFactory.makeRandomTicketsByCount(money.countTickets());
         OutputView.printAllTickets(lottoTickets);
         return lottoTickets;
     }
@@ -61,9 +60,7 @@ public class LottoController {
     private LottoTicket inputWinningNumbers() {
         try {
             OutputView.printWinningNumbers();
-            FixedNumbersGenerator fixedNumbersGenerator = new FixedNumbersGenerator(
-                inputView.inputNumbers());
-            return ticketFactory.makeTicket(fixedNumbersGenerator.generateNumbers());
+            return ticketFactory.makeFixedTicket(inputView.inputNumbers());
         } catch (LottoCustomException exception) {
             OutputView.printErrorMessage(exception);
             return inputWinningNumbers();

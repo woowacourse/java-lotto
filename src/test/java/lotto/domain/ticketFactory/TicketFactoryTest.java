@@ -19,9 +19,9 @@ class TicketFactoryTest {
     @DisplayName("입력한 갯수만큼 로또 티켓이 만들어진다.")
     @Test
     void createTickets() {
-        LottoTickets lottoTickets = ticketFactory.makeTicketsByCount(3);
+        LottoTickets lottoTickets = ticketFactory.makeRandomTicketsByCount(3);
 
-        assertThat(lottoTickets.toList().size()).isEqualTo(3);
+        assertThat(lottoTickets.getLottoTickets().size()).isEqualTo(3);
     }
 
     @DisplayName("입력한 번호들을 가진 로또 티켓이 만들어진다.")
@@ -29,8 +29,7 @@ class TicketFactoryTest {
     void createTicket() {
         List<Integer> numbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         Set<Integer> actual = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-        FixedNumbersGenerator fixedNumbersGenerator = new FixedNumbersGenerator(numbers);
-        LottoTicket lottoTicket = ticketFactory.makeTicket(fixedNumbersGenerator.generateNumbers());
+        LottoTicket lottoTicket = ticketFactory.makeFixedTicket(numbers);
 
         assertThat(lottoTicket.getLottoNumbers()).isEqualTo(actual);
     }
