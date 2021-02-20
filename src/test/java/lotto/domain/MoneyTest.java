@@ -3,41 +3,52 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static lotto.domain.Money.NOT_ENOUGH_MONEY_ERROR;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+//TODO:
+// 정상적인 생성자 작동 테스트
+// 검증 테스트에 메세지까지 확인하기
 public class MoneyTest {
     @DisplayName("올바른 입력값 확인")
     @Test
-    void is_number() {
-        Money money = new Money(1000);
+    void moneyConstructor() {
+        Money money = new Money(1_000);
 
-        assertThat(money).isEqualTo(new Money(1000));
+        assertThat(money).isEqualTo(new Money(1_000));
     }
 
     @DisplayName("1000원 이하 인지 확인 ")
     @Test
-    void is_less_1000() {
-        assertThatThrownBy(() -> {
-            new Money(999);
-        }).isInstanceOf(IllegalArgumentException.class);
+    void validateNotEnoughMoney() {
+        assertThatThrownBy(() -> new Money(999)).isInstanceOf(IllegalArgumentException.class)
+        .hasMessage(NOT_ENOUGH_MONEY_ERROR);
     }
 
     @DisplayName("금액 따라 로또 갯수 산출 하는지")
     @Test
     void calculateNumberOfLotto() {
-        Money money = new Money(13500);
+        Money money = new Money(13_500);
         int numberOfLotto = money.calculateAffordableNumberOfLotto();
 
         assertThat(numberOfLotto).isEqualTo(13);
     }
 
+    @DisplayName("input으로 받은 금액 중에서 실제로 로또를 구매한 금액을 제대로 산출하는지")
+    @Test
+    void calculateMoneyActuallyInvested() {
+        Money money = new Money(3_999);
+
+        assertThat(money.calculateMoneyActuallyInvested()).isEqualTo(new Money(3_000));
+    }
+
     @DisplayName("수익률 계산")
     @Test
     void calculateProfitRate() {
-        Money money = new Money(1000);
-        Money profit = new Money(10000);
+        Money moneyInvested = new Money(2_000);
+        Money profit = new Money(10_000);
 
-        assertThat(money.calculateProfitRate(profit)).isEqualTo(10);
+        assertThat(moneyInvested.calculateProfitRate(profit)).isEqualTo((float) 10_000 / 2_000);
     }
 }
