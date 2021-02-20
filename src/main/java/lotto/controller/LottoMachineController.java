@@ -26,7 +26,9 @@ public class LottoMachineController {
 
     public void purchase() {
         PayAmount payAmount = inputView.readPayAmount();
+        LottoCount lottoCount = payAmount.getLottoCount();
         LottoCount manualLottoCount = inputView.readManualLottoCount();
+        LottoCount autoLottoCount = lottoCount.subtract(manualLottoCount);
 
         outputView.printInputManualLottoNumbers();
         List<Lotto> manualLottos = new ArrayList<>();
@@ -35,10 +37,10 @@ public class LottoMachineController {
             manualLottos.add(Lotto.fromNumbers(lottoNumbers));
         }
 
-        int payCount = payAmount.getPayCount();
-        outputView.printPurchasingLotto(payCount);
 
-        Lottos lottos = Lottos.from(payCount);
+        outputView.printPurchasingLotto(autoLottoCount.get());
+
+        Lottos lottos = Lottos.from(autoLottoCount.get());
         outputView.printLottos(lottos);
 
         List<Integer> lotto = inputView.readWinningLotto();
