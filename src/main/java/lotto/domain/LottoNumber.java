@@ -14,13 +14,13 @@ public class LottoNumber {
     private final int number;
 
     public LottoNumber(int number) {
-        validateNumberBetween1to45(number);
+        validateRangeOfNumber(number);
         this.number = number;
     }
 
     public LottoNumber(String number) {
         validateNumeric(number);
-        validateNumberBetween1to45(Integer.parseInt(number));
+        validateRangeOfNumber(Integer.parseInt(number));
         this.number = Integer.parseInt(number);
     }
 
@@ -40,7 +40,7 @@ public class LottoNumber {
         }
     }
 
-    private void validateNumberBetween1to45(int number) {
+    private void validateRangeOfNumber(int number) {
         if (number < MINIMUM_CANDIDATE_NUMBER || MAXIMUM_CANDIDATE_NUMBER < number) {
             throw new IllegalArgumentException(NUMBER_OUT_OF_BOUNDS_ERROR);
         }

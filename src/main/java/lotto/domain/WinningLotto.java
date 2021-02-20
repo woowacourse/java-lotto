@@ -7,14 +7,14 @@ import java.util.Set;
 
 public class WinningLotto {
     public static final int NORMAL_LOTTO_NUMBERS_LENGTH = 6;
-    public static final String NOT_SIX_NUMBERS_ERROR = "당첨 번호는 총 6개 이어야 합니다.";
+    public static final String LOTTO_SIZE_ERROR = "당첨 번호는 총 6개 이어야 합니다.";
     public static final String DUPLICATE_ERROR = "중복되는 번호는 안됩니다.";
 
     private final List<LottoNumber> winningLottoNumbers;
     private final LottoNumber bonusNumber;
 
     public WinningLotto(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
-        validateSixNumbers(winningNumbers);
+        validateLottoSize(winningNumbers);
         validateDuplicates(winningNumbers);
         this.winningLottoNumbers = winningNumbers;
 
@@ -22,9 +22,9 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
-    private void validateSixNumbers(List<LottoNumber> numbers) {
+    private void validateLottoSize(List<LottoNumber> numbers) {
         if (numbers.size() != NORMAL_LOTTO_NUMBERS_LENGTH) {
-            throw new IllegalArgumentException(NOT_SIX_NUMBERS_ERROR);
+            throw new IllegalArgumentException(LOTTO_SIZE_ERROR);
         }
     }
 

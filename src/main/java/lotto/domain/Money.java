@@ -7,7 +7,7 @@ public class Money {
 
     public Money(String money) {
         validateNumber(money);
-        validateMoneyLowerThan1000(money);
+        validateNotEnoughMoney(money);
         this.money = Integer.parseInt(money);
     }
 
@@ -19,7 +19,7 @@ public class Money {
         }
     }
 
-    private void validateMoneyLowerThan1000(String money) {
+    private void validateNotEnoughMoney(String money) {
         if (Integer.parseInt(money) < 1000) {
             throw new IllegalArgumentException("1000원 이상의 금액만 입력 가능합니다.");
         }
