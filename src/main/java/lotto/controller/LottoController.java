@@ -3,7 +3,7 @@ package lotto.controller;
 import lotto.domain.*;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoCount;
-import lotto.domain.lotto.LottoTickets;
+import lotto.domain.lotto.Lottos;
 import lotto.domain.lotto.WinningLotto;
 import lotto.domain.reword.Reword;
 import lotto.domain.reword.Rewords;
@@ -27,11 +27,11 @@ public class LottoController {
             Payment payment = new Payment(Integer.parseInt(InputView.inputMoney()));
             LottoCount lottoCount = new LottoCount(payment, Integer.parseInt(InputView.inputManualLottoCount()));
 
-            LottoTickets lottoTickets = new LottoTickets(lottoCount.auto(), createManualLotto(lottoCount.manual()));
-            showLottoTickets(lottoCount, lottoTickets);
+            Lottos lottos = new Lottos(lottoCount.auto(), createManualLotto(lottoCount.manual()));
+            showLottos(lottoCount, lottos);
 
             WinningLotto winningLotto = createWinningLotto();
-            showResult(lottoTickets, winningLotto, payment);
+            showResult(lottos, winningLotto, payment);
         }
         catch (NumberFormatException e) {
             throw new IllegalTypeException();
@@ -70,18 +70,18 @@ public class LottoController {
         return new WinningLotto(numbers, bonusNumber);
     }
 
-    private void showLottoTickets(LottoCount ticketCount, LottoTickets lottoTickets) {
+    private void showLottos(LottoCount ticketCount, Lottos lottos) {
         OutputView.printBuyLottoCountMessage(ticketCount.manual(), ticketCount.auto());
 
-        for (Lotto lotto : lottoTickets.getLottoTickets()) {
+        for (Lotto lotto : lottos.getLottos()) {
             OutputView.printLottoMessage(lotto.getLottoNumbers());
         }
 
         OutputView.printNewLineMessage();
     }
 
-    private void showResult(final LottoTickets lottoTickets, final WinningLotto winningLotto, final Payment payment) {
-        Rewords rewords = lottoTickets.createRewords(winningLotto);
+    private void showResult(final Lottos lottos, final WinningLotto winningLotto, final Payment payment) {
+        Rewords rewords = lottos.createRewords(winningLotto);
 
         OutputView.printResult();
         for (Reword reword : Reword.values()) {

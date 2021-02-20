@@ -11,7 +11,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoTickets {
+public class Lottos {
 
     private static final int START_LOTTO_NUMBER = 1;
     private static final int END_LOTTO_NUMBER = 45;
@@ -19,18 +19,18 @@ public class LottoTickets {
     private static final List<Integer> ALL_LOTTO_NUMBERS = IntStream
         .range(START_LOTTO_NUMBER, END_LOTTO_NUMBER + 1).boxed().collect(Collectors.toList());
 
-    private final List<Lotto> lottoTickets;
+    private final List<Lotto> lottos;
 
-    public LottoTickets(final int count) {
+    public Lottos(final int count) {
         this(count, ALL_LOTTO_NUMBERS, null);
     }
 
-    public LottoTickets(final int autoPurchaseCount, final List<Lotto> manual) {
+    public Lottos(final int autoPurchaseCount, final List<Lotto> manual) {
         this(autoPurchaseCount, ALL_LOTTO_NUMBERS, manual);
     }
 
-    public LottoTickets(final int count, final List<Integer> auto, final List<Lotto> manual) {
-        lottoTickets = createLottoTickets(count, auto, manual);
+    public Lottos(final int count, final List<Integer> auto, final List<Lotto> manual) {
+        lottos = createLottoTickets(count, auto, manual);
     }
 
     private List<Lotto> createLottoTickets(final int autoCount, final List<Integer> auto, final List<Lotto> manual) {
@@ -50,27 +50,27 @@ public class LottoTickets {
     public Rewords createRewords(final WinningLotto winningLotto) {
         List<Reword> rewords = new ArrayList<>();
 
-        for (Lotto lotto : lottoTickets) {
+        for (Lotto lotto : lottos) {
             rewords.add(winningLotto.match(lotto));
         }
 
         return new Rewords(rewords);
     }
 
-    public List<Lotto> getLottoTickets() {
-        return lottoTickets;
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoTickets that = (LottoTickets) o;
-        return Objects.equals(lottoTickets, that.lottoTickets);
+        Lottos that = (Lottos) o;
+        return Objects.equals(lottos, that.lottos);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoTickets);
+        return Objects.hash(lottos);
     }
 }

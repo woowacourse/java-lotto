@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoTickets;
+import lotto.domain.lotto.Lottos;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,8 +17,8 @@ public class LottoTicketsTest {
     @DisplayName("LottoTickets 생성 테스트")
     @Test
     void create() {
-        LottoTickets lottoTickets = new LottoTickets(14);
-        assertThat(lottoTickets.getLottoTickets().size()).isEqualTo(14);
+        Lottos lottos = new Lottos(14);
+        assertThat(lottos.getLottos().size()).isEqualTo(14);
     }
 
     @DisplayName("같은 번호가 생성되었는지 테스트")
@@ -26,10 +26,10 @@ public class LottoTicketsTest {
     void numberSort() {
         Lotto lotto = new Lotto(Arrays.asList(2, 45, 6, 5, 3, 1));
         List<Lotto> manualLotto = Collections.singletonList(lotto);
-        LottoTickets lottoTickets = new LottoTickets(0, manualLotto);
+        Lottos lottos = new Lottos(0, manualLotto);
         List<Lotto> expectedLottoTickets = new ArrayList<>();
 
         expectedLottoTickets.add(new Lotto(Arrays.asList(1, 2, 3, 45, 5, 6)));
-        assertThat(lottoTickets.getLottoTickets()).isEqualTo(expectedLottoTickets);
+        assertThat(lottos.getLottos()).isEqualTo(expectedLottoTickets);
     }
 }
