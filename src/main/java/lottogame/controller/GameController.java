@@ -1,10 +1,13 @@
 package lottogame.controller;
 
 import lottogame.domain.LottoMachine;
+import lottogame.domain.lotto.WinningLotto;
 import lottogame.view.InputView;
 import lottogame.domain.lotto.Lottos;
 import lottogame.domain.Money;
 import lottogame.view.OutputView;
+
+import java.util.List;
 
 public class GameController {
     private LottoMachine lottoMachine;
@@ -18,15 +21,15 @@ public class GameController {
         int quantity = lottoMachine.purchaseQuantity(money);
         Lottos lottos = new Lottos(lottoMachine.buyLotto(quantity));
         OutputView.showLottos(lottos.numbersOfLottos());
-//            OutputView.printResult(matchLottos());
+        WinningLotto winningLotto = askWinningLotto();
+//        OutputView.printResult(matchLottos());
     }
 
-//    private void buyLotto() {
-//        int quantity = money.lottoQuantity();
-//        List<Lotto> lottoGroup = LottoGenerator.makeLottos(quantity);
-//        lottos = new Lottos(lottoGroup);
-//        printPurchasedLottos(quantity);
-//    }
+    private WinningLotto askWinningLotto() {
+        List<Integer> numbers = InputView.inputWinningLottoNumbers();
+        int bonusBall = InputView.inputBonusNumber();
+        return new WinningLotto(numbers, bonusBall);
+    }
 
 //    private void printPurchasedLottos(int quantity) {
 //        OutputView.showLottoQuantity(quantity);
