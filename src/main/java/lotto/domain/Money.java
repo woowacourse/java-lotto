@@ -3,6 +3,8 @@ package lotto.domain;
 import java.util.Objects;
 
 public class Money {
+    private static final int LOTTO_PRICE = 1000;
+
     private final int money;
 
     public Money(String money) {
@@ -20,13 +22,13 @@ public class Money {
     }
 
     private void validateNotEnoughMoney(String money) {
-        if (Integer.parseInt(money) < 1000) {
+        if (Integer.parseInt(money) < LOTTO_PRICE) {
             throw new IllegalArgumentException("1000원 이상의 금액만 입력 가능합니다.");
         }
     }
 
     public int calculateNumberOfLotto() {
-        return money / 1000;
+        return money / LOTTO_PRICE;
     }
 
     public float calculateProfitRate(int profit) {

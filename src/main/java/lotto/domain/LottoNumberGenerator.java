@@ -4,19 +4,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static lotto.domain.Lotto.LOTTO_SIZE;
+import static lotto.domain.Lotto.LOTTO_START_INDEX;
+import static lotto.domain.LottoNumber.MAXIMUM_CANDIDATE_NUMBER;
+import static lotto.domain.LottoNumber.MINIMUM_CANDIDATE_NUMBER;
+
 public class LottoNumberGenerator {
-    public static final int MINIMUM_CANDIDATE_NUMBER = 1;
-    public static final int MAXIMUM_CANDIDATE_NUMBER = 45;
-    private static final int START_INDEX = 0;
-    private static final int END_INDEX = 6;
-
-    public LottoNumberGenerator() {
-    }
-
     public List<LottoNumber> createLotto() {
         List<Integer> candidateNumbers = createCandidates();
         Collections.shuffle(candidateNumbers);
-        List<Integer> numbers = candidateNumbers.subList(START_INDEX, END_INDEX);
+        List<Integer> numbers = candidateNumbers.subList(LOTTO_START_INDEX, LOTTO_SIZE);
         Collections.sort(numbers);
 
         return createLottoNumbers(numbers);

@@ -5,6 +5,9 @@ import com.google.common.primitives.Ints;
 import java.util.List;
 
 public class Lotto {
+    public static final int LOTTO_START_INDEX = 0;
+    public static final int LOTTO_SIZE = 6;
+
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {

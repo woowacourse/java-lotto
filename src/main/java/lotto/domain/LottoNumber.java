@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static lotto.domain.LottoNumberGenerator.MAXIMUM_CANDIDATE_NUMBER;
-import static lotto.domain.LottoNumberGenerator.MINIMUM_CANDIDATE_NUMBER;
-
 public class LottoNumber {
+    public static final int MINIMUM_CANDIDATE_NUMBER = 1;
+    public static final int MAXIMUM_CANDIDATE_NUMBER = 45;
     public static final String NON_NUMERIC_ERROR = "숫자만 입력 가능합니다.";
-    public static final String NUMBER_OUT_OF_BOUNDS_ERROR = "1 에서 45 사이의 숫자만 입력해주세요.";
+    public static final String NUMBER_OUT_OF_BOUNDS_ERROR = String.format(
+            "%d 에서 %d 사이의 숫자만 입력해주세요.",
+            MINIMUM_CANDIDATE_NUMBER,
+            MAXIMUM_CANDIDATE_NUMBER
+    );
 
     private final int number;
 
