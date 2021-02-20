@@ -22,15 +22,15 @@ public class LottoTicketFactory {
     }
 
     public LottoTickets buyLottoTickets(Money money) {
-        int length = (int) money.getValue() / LOTTO_PRICE;
+        int count = (int) money.getValue() / LOTTO_PRICE;
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < length; i++) {
-            lottoTickets.add(new LottoTicket(createLottoTicketByRange()));
+        for (int i = 0; i < count; i++) {
+            lottoTickets.add(new LottoTicket(createLottoNumbersByRange()));
         }
         return new LottoTickets(lottoTickets);
     }
 
-    private List<LottoNumber> createLottoTicketByRange() {
+    private List<LottoNumber> createLottoNumbersByRange() {
         Collections.shuffle(lottoNumberRange);
         List<LottoNumber> lottoNumbers = lottoNumberRange.subList(START_INDEX, LOTTO_TICKET_SIZE);
         Collections.sort(lottoNumbers);
