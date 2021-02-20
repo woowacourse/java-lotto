@@ -11,13 +11,13 @@ public class Lottos {
 
     private final List<Lotto> lottos = new ArrayList<>();
 
-    public Lottos(LottoGenerator lottoGenerator, Money money) {
-        makeRandomLottos(lottoGenerator, money);
+    public Lottos(Money money) {
+        makeRandomLottos(money);
     }
 
-    private void makeRandomLottos(LottoGenerator lottoGenerator, Money money) {
+    private void makeRandomLottos(Money money) {
         for (int i = 0; i < money.toNumberOfPurchaseLotto(); i++) {
-            lottos.add(lottoGenerator.generate());
+            lottos.add(Lotto.ofRandomLotto());
         }
     }
 

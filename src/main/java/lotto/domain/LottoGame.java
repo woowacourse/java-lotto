@@ -8,7 +8,7 @@ public class LottoGame {
     public Lottos buyLottos(Money money) {
         LottoGenerator lottoGenerator = new RandomGenerator();
 
-        return new Lottos(lottoGenerator, money);
+        return new Lottos(money);
     }
 
     public LottoGameResult compareWithWinningLotto(Lottos lottos, WinningLotto winningLotto) {

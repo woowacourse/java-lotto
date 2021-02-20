@@ -1,10 +1,15 @@
 package lotto.domain;
 
+import lotto.utils.LottoGenerator;
+import lotto.utils.RandomGenerator;
+
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
     public static final int LOTTO_NUMBER_SIZE = 6;
+
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
@@ -13,11 +18,16 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-//    public Lotto(List<Integer> numbers) {
-//        this(numbers.stream()
-//                .map(LottoNumber::new)
-//                .collect(Collectors.toList()));
-//    }
+    public static Lotto ofRandomLotto() {
+        LottoGenerator randomGenerator = new RandomGenerator();
+        return randomGenerator.generate();
+    }
+
+    public static Lotto ofLotto(List<Integer> numbers) {
+        return new Lotto((numbers.stream()
+                .map(LottoNumber::new))
+                .collect(Collectors.toList()));
+    }
 
     public List<LottoNumber> toList() {
         return Collections.unmodifiableList(lottoNumbers);

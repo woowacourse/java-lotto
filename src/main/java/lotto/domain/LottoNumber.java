@@ -8,7 +8,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MAX_NUMBER_OF_LOTTO = 45;
     private final int number;
 
-    public LottoNumber(int number) {
+    public LottoNumber(Integer number) {
         this(Integer.toString(number));
     }
 

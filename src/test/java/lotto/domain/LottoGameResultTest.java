@@ -34,7 +34,7 @@ public class LottoGameResultTest {
     void testCalculateProfit() {
         Money money = new Money("1000");
         LottoGenerator fixedGenerator = new FixedGenerator();
-        Lottos lottos = new Lottos(fixedGenerator, money);
+        Lottos lottos = new Lottos(money);
         WinningLotto winningLotto = new WinningLotto(fixedGenerator.generateWinningLottoNumber(), 1);
 
         LottoGame lottoGame = new LottoGame();

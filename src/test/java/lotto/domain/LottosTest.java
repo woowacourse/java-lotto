@@ -15,7 +15,7 @@ public class LottosTest {
         LottoGenerator fixedGenerator = new FixedGenerator();
         Money purchaseMoney = new Money("1000");
 
-        Lottos lottos = new Lottos(fixedGenerator, purchaseMoney);
+        Lottos lottos = new Lottos(purchaseMoney);
         Lotto fixedLotto = fixedGenerator.generate();
 
         assertThat(lottos.toList().get(0)).isEqualTo(fixedLotto);
