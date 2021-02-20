@@ -3,7 +3,7 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottoPurchase {
+public class LottoMachine {
     private final static int PRICE = 1000;
 
     public static LottoTickets buy(Money money) {

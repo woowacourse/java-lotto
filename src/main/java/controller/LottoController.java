@@ -10,7 +10,7 @@ public class LottoController {
 
     public void run() {
         Money budget = createBudgetMoney();
-        LottoTickets lottoTickets = LottoPurchase.buy(budget);
+        LottoTickets lottoTickets = LottoMachine.buy(budget);
         outputView.printLottoTicket(lottoTickets);
         outputView.newLine();
         WinningNumber winningNumber = createWinningNumber();
