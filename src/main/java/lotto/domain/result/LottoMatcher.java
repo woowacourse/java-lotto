@@ -11,15 +11,13 @@ import lotto.domain.lotto.WinningNumbers;
 
 public class LottoMatcher {
 
-    WinningNumbers winningNumbers;
-    String bonusBallValue;
-    List<LottoTicket> lottoTickets;
-    Money paymentAmount;
+    private final WinningNumbers winningNumbers;
+    private final List<LottoTicket> lottoTickets;
+    private final Money paymentAmount;
 
     public LottoMatcher(String winningNumbersValue, String bonusBallValue,
             List<LottoTicket> lottoTickets, Money paymentAmount) {
         this.winningNumbers = new WinningNumbers(winningNumbersValue, bonusBallValue);
-        this.bonusBallValue = bonusBallValue;
         this.lottoTickets = new ArrayList<>(lottoTickets);
         this.paymentAmount = paymentAmount;
     }

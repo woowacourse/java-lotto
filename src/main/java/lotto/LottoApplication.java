@@ -37,9 +37,9 @@ public class LottoApplication {
 
     private static Result getMatchedLottoResult(Money money, List<LottoTicket> lottoTickets) {
         try {
-            LottoMatcher lottoMatcher = new LottoMatcher(InputView.getWinningNumbersInput(),
+            LottoMatcher lottoMatcher = new LottoMatcher(
+                    InputView.getWinningNumbersInput(),
                     InputView.getBonusBallInput(), lottoTickets, money);
-
             return lottoMatcher.getResult();
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());

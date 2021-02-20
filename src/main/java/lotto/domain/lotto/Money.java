@@ -2,12 +2,11 @@ package lotto.domain.lotto;
 
 import java.math.BigInteger;
 import java.util.Objects;
-import java.util.regex.Pattern;
+import lotto.utils.NumericStringValidator;
 
 public class Money {
 
     private final BigInteger amount;
-    private static final Pattern NUMERIC_PATTERN = Pattern.compile("\\d+");
 
     public Money(BigInteger amount) {
         this.amount = amount;
@@ -19,7 +18,7 @@ public class Money {
     }
 
     private static void validateNumeric(String input) {
-        if (!NUMERIC_PATTERN.matcher(input).matches()) {
+        if (!NumericStringValidator.isValid(input)) {
             throw new NumberFormatException("구입금액은 0 이상의 정수여야합니다.");
         }
     }

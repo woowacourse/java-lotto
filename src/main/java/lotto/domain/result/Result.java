@@ -1,6 +1,7 @@
 package lotto.domain.result;
 
 import java.math.BigInteger;
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
 import lotto.domain.lotto.Rank;
@@ -30,7 +31,7 @@ public class Result {
     }
 
     public Map<Rank, Integer> getResultMap() {
-        return resultMap;
+        return Collections.unmodifiableMap(resultMap);
     }
 
     public BigInteger getEarningRate() {

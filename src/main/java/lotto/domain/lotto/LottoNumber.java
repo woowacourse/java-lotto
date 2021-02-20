@@ -1,13 +1,12 @@
 package lotto.domain.lotto;
 
 import java.util.Objects;
-import java.util.regex.Pattern;
+import lotto.utils.NumericStringValidator;
 
 public class LottoNumber {
 
     public static final int MINIMUM_VALUE = 1;
     public static final int MAXIMUM_VALUE = 45;
-    private static final Pattern NUMERIC_PATTERN = Pattern.compile("\\d+");
 
     private final int number;
 
@@ -29,7 +28,7 @@ public class LottoNumber {
     }
 
     private static void validateNumeric(String input) {
-        if (!NUMERIC_PATTERN.matcher(input).matches()) {
+        if (!NumericStringValidator.isValid(input)) {
             throw new NumberFormatException("로또의 번호는 1이상 45이하의 정수여야 합니다.");
         }
     }
