@@ -22,6 +22,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return number;
     }
 
+    public String getStringNumber() {
+        return String.valueOf(number);
+    }
+
     private void validateLottoNumber(String number) {
         validateEmpty(number);
         validateNumber(number);
