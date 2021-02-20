@@ -3,8 +3,6 @@ package lotto.view;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTickets;
 import lotto.domain.Prize;
@@ -35,19 +33,9 @@ public class OutputView {
     }
 
     public String makeWinningResultMessage(Prize prize, Map<Prize, Long> resultMap) {
-        Long winningCount = resultMap.get(prize);
-        if (Objects.isNull(winningCount)) {
-            winningCount = 0L;
-        }
-        return String.format(findFormat(prize), prize.getMatchCount(), prize.getPrizeMoney(),
-            winningCount);
-    }
-
-    // 다른 시도 방안
-    public String makeWinningResultMessageV2(Prize prize, Map<Prize, Long> resultMap) {
-        Optional<Long> winningCount = Optional.ofNullable(resultMap.get(prize));
-        return String.format(findFormat(prize), prize.getMatchCount(), prize.getPrizeMoney(),
-            winningCount.orElse(0L));
+        long winningCount = resultMap.getOrDefault(prize, 0L);
+        return String
+            .format(findFormat(prize), prize.getMatchCount(), prize.getPrizeMoney(), winningCount);
     }
 
     public String findFormat(Prize prize) {
