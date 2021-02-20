@@ -8,8 +8,6 @@ import java.util.stream.Collectors;
 public class Lotto {
 
     private static final int LOTTO_NUMBER_COUNT = 6;
-    private static final String LOTTO_NUMBER_COUNT_ERROR_MESSAGE = "잘못된 개수의 입력입니다.";
-    private static final String DUPLICATE_NUMBER_ERROR_MESSAGE = "중복된 숫자 입력입니다.";
     private final List<LottoNumber> numbers;
 
     public Lotto(final List<Integer> numbers) {
@@ -32,7 +30,7 @@ public class Lotto {
 
     private void validateNumberCount(final List<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException(LOTTO_NUMBER_COUNT_ERROR_MESSAGE);
+            throw new IllegalArgumentException("잘못된 개수의 입력입니다.");
         }
     }
 
@@ -40,7 +38,7 @@ public class Lotto {
         if (numbers.stream()
                    .distinct()
                    .count() != numbers.size()) {
-            throw new IllegalArgumentException(DUPLICATE_NUMBER_ERROR_MESSAGE);
+            throw new IllegalArgumentException("중복된 숫자 입력입니다.");
         }
     }
 

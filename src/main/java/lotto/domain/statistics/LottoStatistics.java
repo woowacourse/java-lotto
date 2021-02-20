@@ -7,10 +7,7 @@ import lotto.domain.rating.RatingCounter;
 
 public class LottoStatistics {
 
-    private static final String ENTER = System.lineSeparator();
-    private static final String START_PRINT_FORMAT = "%d개 일치";
-    private static final String HAS_BONUS_BALL = ", 보너스 볼 일치";
-    private static final String END_PRINT_FORMAT = " (%d원) - %d개" + ENTER;
+    private static final String NEW_LINE = System.lineSeparator();
     private final RatingCounter ratingCounter;
 
     public LottoStatistics(final RatingCounter ratingCounter) {
@@ -31,11 +28,11 @@ public class LottoStatistics {
     public String ratingToString(final Rating rating, final int count) {
         LottoResult lottoResult = rating.getLottoResult();
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(String.format(START_PRINT_FORMAT,lottoResult.getMatchedCount()));
+        stringBuilder.append(String.format("%d개 일치",lottoResult.getMatchedCount()));
         if (lottoResult.isSecond()) {
-            stringBuilder.append(HAS_BONUS_BALL);
+            stringBuilder.append(", 보너스 볼 일치");
         }
-        stringBuilder.append(String.format(END_PRINT_FORMAT,rating.getReward(),count));
+        stringBuilder.append(String.format(" (%d원) - %d개" + NEW_LINE,rating.getReward(),count));
         return stringBuilder.toString();
     }
 

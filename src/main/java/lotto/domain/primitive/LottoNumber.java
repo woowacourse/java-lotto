@@ -6,7 +6,6 @@ public class LottoNumber {
 
     private static final int LOTTO_MIN_NUMBER = 1;
     private static final int LOTTO_MAX_NUMBER = 45;
-    private static final String OUT_RANGE_NUMBER_ERROR_MESSAGE = "범위가 초과된 숫자 입력입니다.";
     private final int number;
 
     public LottoNumber(final int number) {
@@ -16,7 +15,7 @@ public class LottoNumber {
 
     private void validateLottoRange(final int number) {
         if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {
-            throw new IllegalArgumentException(OUT_RANGE_NUMBER_ERROR_MESSAGE);
+            throw new IllegalArgumentException("범위가 초과된 숫자 입력입니다.");
         }
     }
 
