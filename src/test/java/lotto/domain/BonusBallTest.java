@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +22,7 @@ public class BonusBallTest {
 
     @BeforeEach
     void setUp() {
-        ArrayList<Integer> winningLotto = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+        List<Integer> winningLotto = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         winLotto = new Lotto(winningLotto);
     }
 
@@ -55,7 +56,7 @@ public class BonusBallTest {
     @Test
     void 보너스볼_맞는지_확인() {
         BonusBall bonusBall = new BonusBall(winLotto, SAMPLE_BONUSBALL);
-        ArrayList<Integer> numbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 7));
+        List<Integer> numbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 7));
         Lotto lotto = new Lotto(numbers);
         boolean expected = bonusBall.hasBonusBall(lotto);
         assertThat(expected).isEqualTo(true);

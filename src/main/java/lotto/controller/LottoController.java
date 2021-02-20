@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGroup;
 import lotto.domain.Rank;
@@ -12,7 +13,7 @@ import java.util.TreeMap;
 
 public class LottoController {
 
-    private static final ArrayList<Rank> wins = new ArrayList<>();
+    private static final List<Rank> wins = new ArrayList<>();
     private static final Map<Rank, Integer> countByRank = new TreeMap<>();
     private static LottoGroup lottoGroup;
     private static WinningLotto winningLotto;

@@ -1,5 +1,6 @@
 package lotto.view;
 
+import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGroup;
 import lotto.domain.Rank;
@@ -29,7 +30,7 @@ public class LottoView {
     }
 
     public static void printLottoGroup(LottoGroup LottoGroup) {
-        ArrayList<Lotto> lottoGroup = LottoGroup.getLottoGroup();
+        List<Lotto> lottoGroup = LottoGroup.getLottoGroup();
         for (int i = 0; i < LottoGroup.getCount(); i++) {
             System.out.print(lottoGroup.get(i).getLotto() + CHANGE_LINE);
         }

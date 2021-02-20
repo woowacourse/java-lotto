@@ -29,9 +29,9 @@ public class WinningLotto {
             .collect(Collectors.toList());
     }
 
-    private ArrayList<Integer> generateWinningLotto(String numberInput) {
+    private List<Integer> generateWinningLotto(String numberInput) {
         List<Integer> winningNumbers = changeToList(numberInput);
-        ArrayList<Integer> winningNums = new ArrayList<>(winningNumbers);
+        List<Integer> winningNums = new ArrayList<>(winningNumbers);
         return winningNums;
     }
 

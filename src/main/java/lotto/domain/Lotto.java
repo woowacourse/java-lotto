@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Lotto {
@@ -12,33 +13,33 @@ public class Lotto {
     private static final int MAXIMUM_NUMBER = 45;
     private static final int MINIMUM_NUMBER = 1;
     private static final int LOTTO_NUMBER_LIMIT = 6;
-    private final ArrayList<Integer> lotto;
+    private final List<Integer> lotto;
 
-    public Lotto(ArrayList<Integer> numbers) {
+    public Lotto(List<Integer> numbers) {
         validateCount(numbers);
         validateDuplicate(numbers);
         validateNumsRange(numbers);
         this.lotto = numbers;
     }
 
-    public ArrayList<Integer> getLotto() {
+    public List<Integer> getLotto() {
         return this.lotto;
     }
 
-    private void validateCount(ArrayList<Integer> nums) {
+    private void validateCount(List<Integer> nums) {
         if (nums.size() != LOTTO_NUMBER_LIMIT) {
             throw new IllegalArgumentException(NUMBER_COUNT_ERROR);
         }
     }
 
-    private void validateDuplicate(ArrayList<Integer> nums) {
+    private void validateDuplicate(List<Integer> nums) {
         Set<Integer> numbers = new HashSet<>(nums);
         if (nums.size() != numbers.size()) {
             throw new IllegalArgumentException(NUMBER_DUPLICATE_ERROR);
         }
     }
 
-    private void validateNumsRange(ArrayList<Integer> nums) {
+    private void validateNumsRange(List<Integer> nums) {
         for (Integer num : nums) {
             validateNumRange(num);
         }

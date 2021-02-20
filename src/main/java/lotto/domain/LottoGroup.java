@@ -1,13 +1,14 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class LottoGroup {
 
     private static Money money;
     private static int count;
-    private final ArrayList<Lotto> lottoGroup = new ArrayList<>();
+    private final List<Lotto> lottoGroup = new ArrayList<>();
 
     public LottoGroup(String input) {
         money = new Money(input);
@@ -32,7 +33,7 @@ public class LottoGroup {
         return count;
     }
 
-    public ArrayList<Lotto> getLottoGroup() {
+    public List<Lotto> getLottoGroup() {
         return this.lottoGroup;
     }
 }
