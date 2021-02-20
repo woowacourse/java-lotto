@@ -1,8 +1,8 @@
 package lottogame.domain.lotto;
 
 import lottogame.domain.Money;
-import lottogame.domain.stats.LottoResult;
-import lottogame.domain.stats.LottoResults;
+import lottogame.domain.dto.LottoResult;
+import lottogame.domain.dto.LottoResults;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ public class Lottos {
     private LottoResults lottoResults;
 
     public Lottos(List<Lotto> values) {
-        lottos.addAll(values);
+        lottos.addAll(new ArrayList<>(values));
     }
 
     public List<Lotto> values() {
