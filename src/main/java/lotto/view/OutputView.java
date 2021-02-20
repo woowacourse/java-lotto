@@ -26,7 +26,7 @@ public class OutputView {
         System.out.println("당첨 통계");
         System.out.println("---------");
         List<Integer> statistics = lottoStatistics.getWinCountByRank();
-        List<Rank> fifthToFirst = getRanksWithPrize();
+        List<Rank> fifthToFirst = getRanksForStatistics();
         String[] additionalExplanation = getAdditionalExplanation();
         for (int i = 0; i < statistics.size(); i++) {
             System.out.printf("%d개 일치%s(%d원)- %d개\n", fifthToFirst.get(i).getCount(), additionalExplanation[i], fifthToFirst.get(i).getPrize(), statistics.get(i));

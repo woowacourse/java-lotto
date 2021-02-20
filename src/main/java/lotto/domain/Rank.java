@@ -32,7 +32,7 @@ public enum Rank {
                 .orElse(NONE);
     }
 
-    public static List<Rank> getRanksWithPrize() {
+    public static List<Rank> getRanksForStatistics() {
         List<Rank> values = Arrays.asList(values()).subList(RANK_START_INDEX, RANK_END_INDEX);
         Collections.reverse(values);
         return values;
