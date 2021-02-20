@@ -18,11 +18,17 @@ public class LottoNumber {
         for (int i = 0; i < LOTTO_NUMBER_VOLUME; i++) {
             numbers.add(makeNumber());
         }
+        sortNumbers();
     }
 
     public LottoNumber(List<Integer> numbers) {
         validate(numbers);
         this.numbers.addAll(numbers);
+        sortNumbers();
+    }
+
+    private void sortNumbers() {
+        Collections.sort(numbers);
     }
 
     public LottoNumber(int bonusBall) {

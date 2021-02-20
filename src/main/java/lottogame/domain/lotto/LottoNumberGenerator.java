@@ -4,7 +4,7 @@ public class LottoNumberGenerator {
     private LottoNumberGenerator() {
     }
 
-    public static Integer generate(int lottoMin, int lottoMax) {
+    static Integer generate(int lottoMin, int lottoMax) {
         return (int) (Math.random() * lottoMax) + lottoMin;
     }
 }
