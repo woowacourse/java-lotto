@@ -46,7 +46,7 @@ public class RankTest {
         LOTTO_GROUP.clear();
         LOTTO_GROUP.add(lotto);
 
-        Lottos lottos = new Lottos(LOTTO_GROUP);
+        Lottos lottos = Lottos.from(LOTTO_GROUP);
 
         return Rank.match(lottos, WINNING_LOTTO);
     }

@@ -8,25 +8,26 @@ public class Lottos {
 
     private final List<Lotto> lottos;
 
-    public Lottos() {
-        this(new ArrayList<>());
-    }
-
-    public Lottos(List<Lotto> lottos) {
+    private Lottos(List<Lotto> lottos) {
         this.lottos = new ArrayList<>(lottos);
     }
 
-    public List<Lotto> getLottos() {
-        return lottos;
+    public static Lottos from(List<Lotto> lottos) {
+        return new Lottos(lottos);
     }
 
-    public Lottos makeLottos(int payCount) {
+    public static Lottos from(int payCount) {
+        List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < payCount; i++) {
             Lotto lotto = Lotto.fromGenerator(new RandomNumberGenerator());
             lottos.add(lotto);
         }
 
-        return new Lottos(this.lottos);
+        return new Lottos(lottos);
+    }
+
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 
     public List<List<Integer>> toInts() {

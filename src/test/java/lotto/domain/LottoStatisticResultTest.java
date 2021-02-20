@@ -19,7 +19,7 @@ public class LottoStatisticResultTest {
         lottoGroup.add(Lotto.fromNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
         lottoGroup.add(Lotto.fromNumbers(Arrays.asList(7, 8, 9, 10, 11, 12)));
 
-        Lottos lottos = new Lottos(lottoGroup);
+        Lottos lottos = Lottos.from(lottoGroup);
 
         LottoStatisticResult result = Rank.match(lottos, WINNING_LOTTO);
 
@@ -38,7 +38,7 @@ public class LottoStatisticResultTest {
         lottoGroup.add(Lotto.fromNumbers(Arrays.asList(1, 2, 3, 4, 44, 45))); // 4등 - 50000원
         lottoGroup.add(Lotto.fromNumbers(Arrays.asList(40, 41, 42, 43, 44, 45))); // 당첨 X - 0원
 
-        Lottos lottos = new Lottos(lottoGroup);
+        Lottos lottos = Lottos.from(lottoGroup);
         LottoStatisticResult result = Rank.match(lottos, WINNING_LOTTO);
 
         // when

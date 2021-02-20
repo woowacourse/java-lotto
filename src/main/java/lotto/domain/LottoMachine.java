@@ -21,8 +21,7 @@ public class LottoMachine {
         int payCount = payAmount.getPayCount();
         outputView.printPurchasingLotto(payCount);
 
-        Lottos lottos = new Lottos();
-        lottos.makeLottos(payCount);
+        Lottos lottos = Lottos.from(payCount);
         outputView.printLottos(lottos);
 
         List<Integer> lotto = inputView.readWinningLotto();

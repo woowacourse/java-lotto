@@ -19,7 +19,7 @@ public class LottosTest {
 
         // when
         ThrowingCallable throwingCallable
-            = () -> new Lottos(lottos);
+            = () -> Lottos.from(lottos);
 
         // then
         assertThatCode(throwingCallable).doesNotThrowAnyException();
