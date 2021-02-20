@@ -24,7 +24,7 @@ public class LottoTicket {
     }
 
     public boolean hasBonusNumber(LottoNumber lottoNumber) {
-        return numbers.contains(lottoNumber);
+        return this.numbers.contains(lottoNumber);
     }
 
     private void validateSize(List<LottoNumber> lottoNumbers) {

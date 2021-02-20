@@ -23,7 +23,7 @@ public class WinningLottoNumbers {
 
     private void validateWinningTicketNotContainsBonusNumber(LottoTicket winningTicket,
         LottoNumber bonusNumber) {
-        if (winningTicket.getLottoTicketNumbers().contains(bonusNumber)) {
+        if (winningTicket.hasBonusNumber(bonusNumber)) {
             throw new IllegalArgumentException("보너스 번호는 당첨 번호에 포함되지 않아야 합니다.");
         }
     }
