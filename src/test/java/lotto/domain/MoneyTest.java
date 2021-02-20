@@ -36,7 +36,7 @@ public class MoneyTest {
     @Test
     void calculateProfitRate() {
         Money money = new Money(1000);
-        int profit = 10000;
+        Money profit = new Money(10000);
 
         assertThat(money.calculateProfitRate(profit)).isEqualTo(10);
     }

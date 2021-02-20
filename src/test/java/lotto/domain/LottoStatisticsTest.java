@@ -9,19 +9,10 @@ import java.util.List;
 import static lotto.domain.LottoTest.createCustomLotto;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ResultTest {
-    @DisplayName("매치 카운트랑 보너스 카운트에 맞는 합당한 결과를 알려 주는지")
-    @Test
-    void getResult() {
-        int matchCount = 0;
-        boolean bonusMatch = true;
-
-        assertThat(Result.getResult(matchCount, bonusMatch)).isEqualTo(Result.NONE);
-    }
-
+class LottoStatisticsTest {
     @DisplayName("결과 값을 통계 리스트로 반환")
     @Test
-    void resultStatistics() {
+    void getNumberOfWinByRank() {
         Lotto winningNumbers = createCustomLotto("1, 2, 3, 4, 5, 6");
         LottoNumber bonusNumber = new LottoNumber(20);
 
@@ -29,14 +20,16 @@ public class ResultTest {
         Lotto lotto2 = createCustomLotto("1, 2, 3, 4, 5, 20"); // SECOND
         Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2));
 
-        List<Result> results = lottos.getResults(new WinningLotto(winningNumbers, bonusNumber));
-        List<Integer> stats = Result.getStatistics(results);
-        assertThat(stats).isEqualTo(Arrays.asList(1, 0, 0, 1, 0));
+        List<Rank> ranks = lottos.getResults(new WinningLotto(winningNumbers, bonusNumber));
+        LottoStatistics lottoStatistics = new LottoStatistics(ranks, new Money(2000));
+
+        List<Integer> numberOfWinByRank = lottoStatistics.getWinCountByRank();
+        assertThat(numberOfWinByRank).isEqualTo(Arrays.asList(1, 0, 0, 1, 0));
     }
 
-    @DisplayName("총 수익을 계산")
+    @DisplayName("총 수익률 계산")
     @Test
-    void calculateTotalProfit() {
+    void getTotalProfit() {
         Lotto winningNumbers = createCustomLotto("1, 2, 3, 4, 5, 6");
         LottoNumber bonusNumber = new LottoNumber(20);
 
@@ -45,9 +38,9 @@ public class ResultTest {
         Lotto lotto3 = createCustomLotto("1, 2, 3, 4, 5, 20"); // SECOND
         Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3));
 
-        List<Result> results = lottos.getResults(new WinningLotto(winningNumbers, bonusNumber));
+        List<Rank> ranks = lottos.getResults(new WinningLotto(winningNumbers, bonusNumber));
+        LottoStatistics lottoStatistics = new LottoStatistics(ranks, new Money(3000));
 
-        float profit = Result.calculateProfit(results);
-        assertThat(profit).isEqualTo(60_005_000);
+        assertThat(lottoStatistics.getProfitRate()).isEqualTo((float) 60_005_000 / 3000);
     }
 }

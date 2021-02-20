@@ -13,20 +13,20 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public List<Result> getResults(WinningLotto winningLotto) {
+    public List<Rank> getResults(WinningLotto winningLotto) {
         List<LottoNumber> winningLottoNumbers = winningLotto.getWinningLottoNumbers();
         int bonusNumber = winningLotto.getBonusNumberAsInt();
         return collectCorrespondingResults(winningLottoNumbers, bonusNumber);
     }
 
-    private List<Result> collectCorrespondingResults(List<LottoNumber> winningLottoNumbers, int bonusNumber) {
-        List<Result> results = new ArrayList<>();
+    private List<Rank> collectCorrespondingResults(List<LottoNumber> winningLottoNumbers, int bonusNumber) {
+        List<Rank> ranks = new ArrayList<>();
         for (Lotto lotto : lottos) {
             int matches = lotto.countMatchingNumbers(winningLottoNumbers);
             boolean bonusMatch = lotto.hasBonusNumber(bonusNumber);
-            results.add(Result.getResult(matches, bonusMatch));
+            ranks.add(Rank.getCorrespondingRank(matches, bonusMatch));
         }
-        return results;
+        return ranks;
     }
 
     public List<Lotto> getLottos() {

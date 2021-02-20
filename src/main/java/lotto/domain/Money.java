@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.Objects;
 
 public class Money {
-    private static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1000;
 
     private final int money;
 
@@ -12,18 +12,24 @@ public class Money {
         this.money = money;
     }
 
+    //TODO:
+    // 매직넘버
     private void validateNotEnoughMoney(int money) {
         if (money < LOTTO_PRICE) {
             throw new IllegalArgumentException("1000원 이상의 금액만 입력 가능합니다.");
         }
     }
 
+    public Money calculateMoneyActuallyInvested() {
+        return new Money(calculateAffordableNumberOfLotto() * LOTTO_PRICE);
+    }
+
     public int calculateAffordableNumberOfLotto() {
         return money / LOTTO_PRICE;
     }
 
-    public float calculateProfitRate(int profit) {
-        return (float) profit / money;
+    public float calculateProfitRate(Money profit) {
+        return (float) profit.money / this.money;
     }
 
     @Override

@@ -23,10 +23,10 @@ public class LottosTest {
 
         Lotto winningNumbers = createCustomLotto("1, 2, 3, 4, 5, 6");
         LottoNumber bonusNumber = new LottoNumber(20);
-        List<Result> results = lottos.getResults(new WinningLotto(winningNumbers, bonusNumber));
+        List<Rank> ranks = lottos.getResults(new WinningLotto(winningNumbers, bonusNumber));
 
-        List<Result> expectedResults = Arrays.asList(Result.FIFTH, Result.NONE);
+        List<Rank> expectedRanks = Arrays.asList(Rank.FIFTH, Rank.NONE);
 
-        assertThat(results).isEqualTo(expectedResults);
+        assertThat(ranks).isEqualTo(expectedRanks);
     }
 }

@@ -24,7 +24,7 @@ public class Application {
                 new LottoNumber(InputView.takeBonusNumberInput(scanner))
         );
 
-        List<Result> results = lottos.getResults(winningLotto);
-        OutputView.result(results, money.calculateProfitRate(Result.calculateProfit(results)));
+        List<Rank> ranks = lottos.getResults(winningLotto);
+        OutputView.result(new LottoStatistics(ranks, money));
     }
 }
