@@ -15,11 +15,11 @@ public class LottoWinner {
     public LottoWinner(LottoTicket lottoWinnerTicket, LottoWinnerBonusNumber lottoWinnerBonusNumber) {
         validateNull(lottoWinnerTicket, lottoWinnerBonusNumber);
         this.lottoWinnerTicket = lottoWinnerTicket;
-        validateIfWinnerBonusNumberInWinnerTicket(lottoWinnerTicket, lottoWinnerBonusNumber);
+        validateDuplicateNumber(lottoWinnerTicket, lottoWinnerBonusNumber);
         this.lottoWinnerBonusNumber = lottoWinnerBonusNumber;
     }
 
-    public void validateIfWinnerBonusNumberInWinnerTicket
+    public void validateDuplicateNumber
             (LottoTicket lottoWinnerTicket, LottoWinnerBonusNumber lottoWinnerBonusNumber) {
         if (lottoWinnerTicket.isContain(lottoWinnerBonusNumber)) {
             throw new IllegalArgumentException(DUPLICATE_ERROR_MESSAGE);
