@@ -23,7 +23,7 @@ public class MoneyTest {
     @Test
     void validateNotEnoughMoney() {
         assertThatThrownBy(() -> new Money(999)).isInstanceOf(IllegalArgumentException.class)
-        .hasMessage(NOT_ENOUGH_MONEY_ERROR);
+                .hasMessage(NOT_ENOUGH_MONEY_ERROR);
     }
 
     @DisplayName("금액 따라 로또 갯수 산출 하는지")

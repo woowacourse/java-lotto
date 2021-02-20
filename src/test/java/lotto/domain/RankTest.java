@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class RankTest {
     @DisplayName("매치 카운트랑 보너스 카운트에 맞는 합당한 결과를 알려 주는지")
     @ParameterizedTest
-    @CsvSource({"0,true,NONE", "6,false,FIRST", "5,true,SECOND","5,false,THIRD"})
+    @CsvSource({"0,true,NONE", "6,false,FIRST", "5,true,SECOND", "5,false,THIRD"})
     void getCorrespondingRank(int matchCount, boolean bonusMatch, Rank rank) {
         assertThat(Rank.getCorrespondingRank(matchCount, bonusMatch)).isEqualTo(rank);
     }

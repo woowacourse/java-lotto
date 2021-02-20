@@ -20,7 +20,7 @@ class WinningLottoTest {
     @BeforeEach
     void setUp() {
         winingLotto = createCustomWinningLotto("1, 2, 3, 4, 5, 6", "20");
-        manualLottoGenerator = new ManualLottoGenerator(new int[] {1, 2, 3, 4, 5, 20});
+        manualLottoGenerator = new ManualLottoGenerator(new int[]{1, 2, 3, 4, 5, 20});
     }
 
     @DisplayName("보너스가 당첨 번호와 중복 되는 것이 있는지 검증")
