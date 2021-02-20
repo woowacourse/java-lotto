@@ -12,7 +12,7 @@ import lotto.domain.lotto.Lottos;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LottoTicketsTest {
+public class LottosTest {
 
     @DisplayName("LottoTickets 생성 테스트")
     @Test
