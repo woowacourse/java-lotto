@@ -11,10 +11,14 @@ public class LottoNumber {
     private final int number;
 
     public LottoNumber(int number) {
-        if (number < MINIMUM_VALUE || MAXIMUM_VALUE < number) {
+        if (outOfRange(number)) {
             throw new IllegalArgumentException("로또의 번호는 1이상 45이하의 정수여야 합니다.");
         }
         this.number = number;
+    }
+
+    private boolean outOfRange(int number) {
+        return number < MINIMUM_VALUE || MAXIMUM_VALUE < number;
     }
 
     private LottoNumber(String numberValue) {
