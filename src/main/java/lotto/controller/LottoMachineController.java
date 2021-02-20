@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import java.util.List;
+import lotto.domain.LottoCount;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoStatisticResult;
 import lotto.domain.Lottos;
@@ -23,6 +24,7 @@ public class LottoMachineController {
 
     public void purchase() {
         PayAmount payAmount = inputView.readPayAmount();
+        LottoCount manualLottoCount = inputView.readManualLottoCount();
 
         int payCount = payAmount.getPayCount();
         outputView.printPurchasingLotto(payCount);
