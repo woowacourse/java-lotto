@@ -42,7 +42,7 @@ public class Lotto {
     }
 
     public boolean hasBonusNumber(WinningLotto winningLotto) {
-        return winningLotto.hasAnyMatch(lottoNumbers);
+        return winningLotto.hasBonusMatch(lottoNumbers);
     }
 
     public String getLottoSummary() {

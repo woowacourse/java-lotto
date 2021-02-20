@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -20,7 +19,7 @@ public class LottoNumber {
         this.number = number;
     }
 
-    public static void validateRangeOfNumber(int number) {
+    private void validateRangeOfNumber(int number) {
         if (number < MINIMUM_CANDIDATE_NUMBER || MAXIMUM_CANDIDATE_NUMBER < number) {
             throw new IllegalArgumentException(NUMBER_OUT_OF_BOUNDS_ERROR);
         }

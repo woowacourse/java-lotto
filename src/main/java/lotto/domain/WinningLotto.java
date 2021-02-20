@@ -12,8 +12,8 @@ public class WinningLotto extends Lotto {
         this.bonusNumber = bonusNumber;
     }
 
-    private void validateDuplicatesWithLottoNumbers(LottoNumber number) {
-        if (number.hasAnyMatchingNumber(lottoNumbers)) {
+    private void validateDuplicatesWithLottoNumbers(LottoNumber bonusNumber) {
+        if (bonusNumber.hasAnyMatchingNumber(lottoNumbers)) {
             throw new IllegalArgumentException();
         }
     }
@@ -25,7 +25,7 @@ public class WinningLotto extends Lotto {
                 .count();
     }
 
-    public boolean hasAnyMatch(List<LottoNumber> numbers) {
+    public boolean hasBonusMatch(List<LottoNumber> numbers) {
         return numbers.contains(bonusNumber);
     }
 }

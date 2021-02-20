@@ -15,7 +15,7 @@ public class ManualLottoGenerator implements LottoGenerator {
         return new Lotto(createLottoNumbers());
     }
 
-    private List<LottoNumber> createLottoNumbers() {
+    public List<LottoNumber> createLottoNumbers() {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int number : numbers) {
             lottoNumbers.add(new LottoNumber(number));
