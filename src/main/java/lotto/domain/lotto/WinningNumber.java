@@ -46,24 +46,13 @@ public class WinningNumber {
     }
 
     public AnalysedLottos analysingLottos(LottoGroup lottoGroup, PayOut payOut) {
-        //todo sendMessageToLottoGroup
-        Map<RankFactory, Long> rankAndCount = lottoGroup.getLottos().stream()
-                .map(this::getRank)
-                .filter(rank -> !rank.equals(RankFactory.FAIL))
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        Map<RankFactory, Long> rankAndCount = lottoGroup.calculateLottoResult(lottoNumbers, bonusNumber);
 
         Arrays.stream(RankFactory.values())
                 .filter(rank -> !rank.equals(RankFactory.FAIL) && !rankAndCount.containsKey(rank))
                 .forEach(rank -> rankAndCount.put(rank, 0L));
 
         return new AnalysedLottos(rankAndCount, payOut);
-    }
-
-    private RankFactory getRank(LottoNumbers lottoNumbers) {
-        return RankFactory.getRank(
-                this.lottoNumbers.getMatchCount(lottoNumbers),
-                lottoNumbers.contains(bonusNumber)
-        );
     }
 
     @Override
