@@ -53,7 +53,7 @@ public class LottoController {
     }
 
     private void drawLotto() {
-        ArrayList<Lotto> lottoGroup = LottoController.lottoGroup.getLottoGroup();
+        List<Lotto> lottoGroup = LottoController.lottoGroup.getLottoGroup();
         for (Lotto lotto : lottoGroup) {
             Rank rank = winningLotto.findRank(lotto);
             wins.add(rank);
