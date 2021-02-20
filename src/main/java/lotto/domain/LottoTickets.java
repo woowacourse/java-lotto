@@ -41,6 +41,10 @@ public class LottoTickets {
         return new LottoResult(statistics);
     }
 
+    public int getPurchasingPrice() {
+        return lottoTickets.size() * LOTTO_TICKET_PRICE;
+    }
+
     public int getTicketCounts() {
         return lottoTickets.size();
     }
