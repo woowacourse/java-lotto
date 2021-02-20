@@ -10,7 +10,7 @@ public enum Rank {
     FIFTH(3, new Money("5000")),
     NOTHING(0, new Money("0"));
 
-    private static final long FIVE = 5;
+    private static final long SECOND_MATCH = 5;
 
     private final long match;
     private final Money reward;
@@ -21,7 +21,7 @@ public enum Rank {
     }
 
     public static Rank from(long match, boolean hasBonus) {
-        if (match == FIVE && hasBonus) {
+        if (match == SECOND_MATCH && hasBonus) {
             return Rank.SECOND;
         }
         return Arrays.stream(Rank.values())
