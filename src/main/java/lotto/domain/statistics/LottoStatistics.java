@@ -9,7 +9,7 @@ public class LottoStatistics {
     private static final String ENTER = System.lineSeparator();
     private static final String PRINT_FORMAT = "%d개 일치 (%d원) - %d개" + ENTER;
     private static final String SECOND_PRINT_FORMAT = "%d개 일치, 보너스 볼 일치 (%d원) - %d개" + ENTER;
-    private RatingInfo ratingInfo;
+    private final RatingInfo ratingInfo;
     private final StringBuilder log = new StringBuilder();
 
     public LottoStatistics(final RatingInfo ratingInfo) {
