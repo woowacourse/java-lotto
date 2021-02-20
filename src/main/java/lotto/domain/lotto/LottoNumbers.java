@@ -6,7 +6,6 @@ import static java.util.stream.Collectors.toList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.Number;

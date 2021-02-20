@@ -44,7 +44,7 @@ public class LottoGeneratorTest {
     }
 
     @Test
-    @DisplayName("수동 로또번호를 입력하면, 수동번호의 로또그를을 생성한다")
+    @DisplayName("수동 로또번호를 입력하면, 수동번호의 로또그를과 남은 금액만큼 자동 로또 번호를 생성한다")
     void generateManualLottosWithAutoLottos() {
         List<String> manualStringLottoNumbers = Arrays.asList(
                 "1,2,3,4,5,6",
