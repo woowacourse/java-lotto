@@ -33,9 +33,7 @@ public class LottoMachine {
     
     public void seeResults(Lottos lottos) {
         List<Integer> lotto = inputView.readWinningLotto();
-        
         LottoNumber bonusNumber = inputView.readBonusNumber();
-        
         WinningLotto winningLotto = WinningLotto.of(lotto, bonusNumber);
         
         LottoStatisticResult result = lottos.retrieveResults(winningLotto);
