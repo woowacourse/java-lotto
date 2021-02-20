@@ -1,7 +1,7 @@
 package view;
 
 import domain.LottoNumber;
-import domain.LottoTicket;
+import domain.ticket.LottoTicket;
 import domain.Ranking;
 
 import java.util.List;

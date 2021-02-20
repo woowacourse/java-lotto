@@ -1,4 +1,7 @@
-package domain;
+package domain.ticket;
+
+import domain.LottoNumber;
+import domain.Ranking;
 
 import java.util.ArrayList;
 import java.util.Collections;

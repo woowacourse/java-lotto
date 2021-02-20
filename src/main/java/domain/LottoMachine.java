@@ -1,5 +1,7 @@
 package domain;
 
+import domain.ticket.LottoTicket;
+
 import java.util.ArrayList;
 import java.util.List;
 

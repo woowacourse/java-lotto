@@ -1,5 +1,7 @@
 package domain;
 
+import domain.ticket.LottoTicket;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
