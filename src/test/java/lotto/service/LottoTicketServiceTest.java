@@ -28,7 +28,8 @@ public class LottoTicketServiceTest {
     public void invalidLottoNumbersTest() {
         assertThatThrownBy(() -> {
             LottoTicketService.createLottoWinnerTicket("1,2,3,4,5");
-        }).isInstanceOf(IllegalArgumentException.class).hasMessage(LottoTicketService.COUNT_ERROR_MESSAGE);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(String.format(LottoTicketService.COUNT_ERROR_MESSAGE, LottoTicket.LOTTO_NUMBER_SIZE));
     }
 
     @Test
@@ -36,6 +37,7 @@ public class LottoTicketServiceTest {
     public void invalidNumberFormatTest() {
         assertThatThrownBy(() -> {
             LottoTicketService.createLottoWinnerTicket("1,2,3,4,이건문자열이다,6");
-        }).isInstanceOf(NumberFormatException.class).hasMessage(LottoTicketService.NUMBER_FORMAT_ERROR_MESSAGE);
+        }).isInstanceOf(NumberFormatException.class)
+                .hasMessage(String.format(LottoTicketService.NUMBER_FORMAT_ERROR_MESSAGE, LottoTicket.LOTTO_NUMBER_SIZE));
     }
 }

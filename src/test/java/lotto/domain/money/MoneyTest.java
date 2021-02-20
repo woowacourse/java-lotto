@@ -3,6 +3,7 @@ package lotto.domain.money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static lotto.domain.money.Money.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -30,7 +31,7 @@ public class MoneyTest {
         assertThatThrownBy(() -> {
             new Money("500");
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(Money.SHORT_MONEY_MESSAGE);
+                .hasMessage(String.format(SHORT_MONEY_MESSAGE, LOTTO_PRICE));
     }
 
     @Test
@@ -39,6 +40,6 @@ public class MoneyTest {
         assertThatThrownBy(() -> {
             new Money("이건문자열이");
         }).isInstanceOf(NumberFormatException.class)
-                .hasMessage(Money.NUMBER_FORMAT_ERROR_MESSAGE);
+                .hasMessage(NUMBER_FORMAT_ERROR_MESSAGE);
     }
 }

@@ -11,8 +11,8 @@ import java.util.stream.Collectors;
 
 public class LottoTicketService {
 
-    public static final String COUNT_ERROR_MESSAGE = "당첨 숫자는 6개 넣어야 합니다.";
-    public static final String NUMBER_FORMAT_ERROR_MESSAGE = "로또 당첨번호는 6개 모두 숫자여야합니다.";
+    public static final String COUNT_ERROR_MESSAGE = "당첨 숫자는 %d개 넣어야 합니다.";
+    public static final String NUMBER_FORMAT_ERROR_MESSAGE = "로또 당첨번호는 %d개 모두 숫자여야합니다.";
     private static final String DELIMITER = ",";
 
     private LottoTicketService() {
@@ -37,13 +37,13 @@ public class LottoTicketService {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new NumberFormatException(NUMBER_FORMAT_ERROR_MESSAGE);
+            throw new NumberFormatException(String.format(NUMBER_FORMAT_ERROR_MESSAGE, LottoTicket.LOTTO_NUMBER_SIZE));
         }
     }
 
     private static void validateLottoSize(final int size) {
         if (size != LottoTicket.LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException(COUNT_ERROR_MESSAGE);
+            throw new IllegalArgumentException(String.format(COUNT_ERROR_MESSAGE, LottoTicket.LOTTO_NUMBER_SIZE));
         }
     }
 

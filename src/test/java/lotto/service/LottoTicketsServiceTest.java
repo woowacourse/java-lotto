@@ -5,6 +5,7 @@ import lotto.domain.money.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static lotto.domain.money.Money.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -22,7 +23,8 @@ class LottoTicketsServiceTest {
     @DisplayName("돈을 1000원 이하로 주면 로또 티켓 만들어주지 않는다.")
     public void notEnoughMoneyTest() {
         assertThatThrownBy(() -> {
-            LottoTickets lottoTickets = LottoTicketsService.createLottoTickets(new Money("500"));
-        }).isInstanceOf(IllegalArgumentException.class).hasMessage(Money.SHORT_MONEY_MESSAGE);
+            LottoTicketsService.createLottoTickets(new Money("500"));
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(String.format(SHORT_MONEY_MESSAGE, LOTTO_PRICE));
     }
 }

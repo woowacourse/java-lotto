@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.NullSource;
 import java.util.Arrays;
 import java.util.List;
 
+import static lotto.domain.lottos.LottoTicket.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -34,14 +35,14 @@ public class LottoTicketTest {
     @NullSource
     public void nullNotAllowedTest(List<LottoNumber> lottoNumbers) {
         assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
-                .isInstanceOf(NullPointerException.class).hasMessage(LottoTicket.NULL_ERROR_MESSAGE);
+                .isInstanceOf(NullPointerException.class).hasMessage(NULL_ERROR_MESSAGE);
     }
 
     @ParameterizedTest(name = "빈값을 생성자의 매개변수로 허용하지 않는다.")
     @EmptySource
     public void emptyParameterTest(List<LottoNumber> lottoNumbers) {
         assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
-                .isInstanceOf(IllegalArgumentException.class).hasMessage(LottoTicket.EMPTY_ERROR_MESSAGE);
+                .isInstanceOf(IllegalArgumentException.class).hasMessage(EMPTY_ERROR_MESSAGE);
     }
 
     @Test
@@ -58,7 +59,7 @@ public class LottoTicketTest {
 
         assertThatThrownBy(() -> {
             new LottoTicket(lottoNumbers);
-        }).isInstanceOf(IllegalArgumentException.class).hasMessage(LottoTicket.DUPLICATE_ERROR_MESSAGE);
+        }).isInstanceOf(IllegalArgumentException.class).hasMessage(DUPLICATE_ERROR_MESSAGE);
     }
 
     @Test
@@ -76,7 +77,7 @@ public class LottoTicketTest {
 
         assertThatThrownBy(() -> {
             new LottoTicket(lottoNumbers);
-        }).isInstanceOf(IllegalArgumentException.class).hasMessage(LottoTicket.COUNT_ERROR_MESSAGE);
+        }).isInstanceOf(IllegalArgumentException.class).hasMessage(String.format(COUNT_ERROR_MESSAGE, LOTTO_NUMBER_SIZE));
     }
 
     @Test
@@ -92,7 +93,7 @@ public class LottoTicketTest {
 
         assertThatThrownBy(() -> {
             new LottoTicket(lottoNumbers);
-        }).isInstanceOf(RuntimeException.class).hasMessage(LottoTicket.COUNT_ERROR_MESSAGE);
+        }).isInstanceOf(RuntimeException.class).hasMessage(String.format(COUNT_ERROR_MESSAGE, LOTTO_NUMBER_SIZE));
     }
 
     @Test

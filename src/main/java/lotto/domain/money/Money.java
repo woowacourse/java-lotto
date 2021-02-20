@@ -4,9 +4,9 @@ import java.util.Objects;
 
 public class Money {
 
-    public static final String SHORT_MONEY_MESSAGE = "1000원 이상 입력해주세요.";
+    public static final String SHORT_MONEY_MESSAGE = "%d원 이상 입력해주세요.";
     public static final String NUMBER_FORMAT_ERROR_MESSAGE = "입력금액은 숫자여야합니다.";
-    private static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1000;
 
     private final int money;
 
@@ -31,7 +31,7 @@ public class Money {
 
     private void validateBudgetMoney(int money) {
         if (money < LOTTO_PRICE) {
-            throw new IllegalArgumentException(SHORT_MONEY_MESSAGE);
+            throw new IllegalArgumentException(String.format(SHORT_MONEY_MESSAGE, LOTTO_PRICE));
         }
     }
 

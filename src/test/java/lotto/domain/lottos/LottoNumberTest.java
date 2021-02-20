@@ -3,6 +3,7 @@ package lotto.domain.lottos;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static lotto.domain.lottos.LottoNumber.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -21,6 +22,7 @@ public class LottoNumberTest {
     public void validateNumberTest() {
         assertThatThrownBy(() -> {
             new LottoNumber(46);
-        }).isInstanceOf(IllegalArgumentException.class).hasMessage(LottoNumber.RANGE_ERROR_MESSAGE);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(String.format(RANGE_ERROR_MESSAGE, MIN_NUMBER_RANGE, MAX_NUMBER_RANGE));
     }
 }

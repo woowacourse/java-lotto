@@ -4,9 +4,9 @@ import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
-    private static final int MIN_NUMBER_RANGE = 1;
-    private static final int MAX_NUMBER_RANGE = 45;
-    public static final String RANGE_ERROR_MESSAGE = "숫자는 1~45 사이의 숫자여야한다.";
+    public static final int MIN_NUMBER_RANGE = 1;
+    public static final int MAX_NUMBER_RANGE = 45;
+    public static final String RANGE_ERROR_MESSAGE = "숫자는 %d ~ %d 사이의 숫자여야한다.";
 
     private final int number;
 
@@ -23,7 +23,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         if (number >= MIN_NUMBER_RANGE && number <= MAX_NUMBER_RANGE) {
             return;
         }
-        throw new IllegalArgumentException(RANGE_ERROR_MESSAGE);
+        throw new IllegalArgumentException(String.format(RANGE_ERROR_MESSAGE, MIN_NUMBER_RANGE, MAX_NUMBER_RANGE));
     }
 
     @Override
