@@ -7,18 +7,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoNumberTest {
-    @DisplayName("같은 숫자인 경우 정상 처리된다")
+    @DisplayName("로또 번호가 같을 경우 정상 처리된다.")
     @Test
-    public void isEqualsTest() {
+    public void isSameLottoNumber() {
         LottoNumber first = new LottoNumber("1");
         LottoNumber second = new LottoNumber("1");
 
         assertThat(first).isEqualTo(second);
     }
 
-    @DisplayName("다른 숫자인 경우 예외 처리된다")
+    @DisplayName("로또 번호가 다를 경우 정상 처리된다.")
     @Test
-    public void isNotEqualsTest() {
+    public void isDifferentLottoNumber() {
         LottoNumber first = new LottoNumber("1");
         LottoNumber second = new LottoNumber("2");
 
