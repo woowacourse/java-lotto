@@ -14,10 +14,6 @@ public class Price {
 
     private final int value;
 
-    private Price(final int value) {
-        this.value = value;
-    }
-
     private Price(final String value) {
         this.value = Integer.parseInt(value);
     }

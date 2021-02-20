@@ -6,7 +6,6 @@ import java.util.List;
 public class WinningNumbers {
 
     private static final int WINNING_TICKET_SIZE = 6;
-    private static final int BONUS_NUMBER_SIZE = 1;
 
     private static final String WINNING_TICKET_SIZE_ERROR = "당첨 번호의 개수가 맞지 않습니다.";
     private static final String BONUS_DUPLICATE_ERROR = "당첨 번호에 보너스 번호가 포함되어 있습니다.";
