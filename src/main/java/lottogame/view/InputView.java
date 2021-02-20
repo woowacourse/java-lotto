@@ -1,5 +1,7 @@
 package lottogame.view;
 
+import lottogame.utils.InvalidMoneyException;
+
 import java.util.Scanner;
 
 public class InputView {
@@ -9,12 +11,16 @@ public class InputView {
     }
 
     public static String input() {
-        return scanner.nextLine().trim();
+        return scanner.nextLine();
     }
 
-    public static String inputMoney() {
-        System.out.println("구입 금액을 입력해 주세요.");
-        return input();
+    public static int inputMoney() {
+        try {
+            System.out.println("구입 금액을 입력해 주세요.");
+            return Integer.parseInt(input());
+        } catch (NumberFormatException e) {
+            throw new InvalidMoneyException();
+        }
     }
 
     public static String inputWinningLottoNumbers() {
