@@ -25,27 +25,42 @@ public class LottoMachineController {
     }
 
     public void purchase() {
+        List<Lotto> lottos = getInputLottos();
+        WinningLotto winningLotto = getInputWinningLotto();
+        LottoStatisticResult result = Rank.match(Lottos.from(lottos), winningLotto);
+        outputView.printStatisticResult(result);
+    }
+
+    private List<Lotto> getInputLottos() {
         PayAmount payAmount = inputView.readPayAmount();
         LottoCount lottoCount = payAmount.getLottoCount();
         LottoCount manualLottoCount = inputView.readManualLottoCount();
         LottoCount autoLottoCount = lottoCount.subtract(manualLottoCount);
 
         outputView.printInputManualLottoNumbers();
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < manualLottoCount.get(); i++) {
-            List<Integer> lottoNumbers = inputView.readManualLottoNumbers();
-            lottos.add(Lotto.fromNumbers(lottoNumbers));
-        }
+        List<Lotto> manualLottos = getInputManualLottos(manualLottoCount);
 
         outputView.printPurchasingLotto(manualLottoCount.get(), autoLottoCount.get());
         List<Lotto> autoLottos = Lottos.from(autoLottoCount.get()).getLottos();
         outputView.printLottos(Lottos.from(autoLottos));
-
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.addAll(manualLottos);
         lottos.addAll(autoLottos);
+        return lottos;
+    }
+
+    private List<Lotto> getInputManualLottos(LottoCount count) {
+        List<Lotto> manualLottos = new ArrayList<>();
+        for (int i = 0; i < count.get(); i++) {
+            List<Integer> lottoNumbers = inputView.readManualLottoNumbers();
+            manualLottos.add(Lotto.fromNumbers(lottoNumbers));
+        }
+        return manualLottos;
+    }
+
+    private WinningLotto getInputWinningLotto() {
         List<Integer> lotto = inputView.readWinningLotto();
         LottoNumber bonusNumber = inputView.readBonusNumber();
-        WinningLotto winningLotto = WinningLotto.of(lotto, bonusNumber);
-        LottoStatisticResult result = Rank.match(Lottos.from(lottos), winningLotto);
-        outputView.printStatisticResult(result);
+        return WinningLotto.of(lotto, bonusNumber);
     }
 }
