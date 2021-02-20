@@ -10,8 +10,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoStatisticsTest {
     private static final String ENTER = System.lineSeparator();
-    RatingCounter ratingCounter;
-    LottoStatistics lottoStatistics;
+    private RatingCounter ratingCounter;
+    private LottoStatistics lottoStatistics;
 
     @BeforeEach
     void setup() {
