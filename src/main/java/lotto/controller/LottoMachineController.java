@@ -31,24 +31,21 @@ public class LottoMachineController {
         LottoCount autoLottoCount = lottoCount.subtract(manualLottoCount);
 
         outputView.printInputManualLottoNumbers();
-        List<Lotto> manualLottos = new ArrayList<>();
+        List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < manualLottoCount.get(); i++) {
             List<Integer> lottoNumbers = inputView.readManualLottoNumbers();
-            manualLottos.add(Lotto.fromNumbers(lottoNumbers));
+            lottos.add(Lotto.fromNumbers(lottoNumbers));
         }
 
+        outputView.printPurchasingLotto(manualLottoCount.get(), autoLottoCount.get());
+        List<Lotto> autoLottos = Lottos.from(autoLottoCount.get()).getLottos();
+        outputView.printLottos(Lottos.from(autoLottos));
 
-        outputView.printPurchasingLotto(autoLottoCount.get());
-
-        Lottos lottos = Lottos.from(autoLottoCount.get());
-        outputView.printLottos(lottos);
-
+        lottos.addAll(autoLottos);
         List<Integer> lotto = inputView.readWinningLotto();
         LottoNumber bonusNumber = inputView.readBonusNumber();
-
         WinningLotto winningLotto = WinningLotto.of(lotto, bonusNumber);
-        LottoStatisticResult result = Rank.match(lottos, winningLotto);
-
+        LottoStatisticResult result = Rank.match(Lottos.from(lottos), winningLotto);
         outputView.printStatisticResult(result);
     }
 }

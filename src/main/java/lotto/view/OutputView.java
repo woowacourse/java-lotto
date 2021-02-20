@@ -11,9 +11,15 @@ import lotto.domain.Rank;
 public class OutputView {
     private static final String MANUAL_LOTTO_NUMBER_QUESTION = "수동으로 구매할 번호를 입력해 주세요.";
 
-    public void printPurchasingLotto(int purchasingLottoCount) {
+    public void printPurchasingLotto(int manualLottoCount, int autoLottoCount) {
         System.out.println();
-        System.out.println(purchasingLottoCount + "개를 구매했습니다.");
+        StringBuilder sb = new StringBuilder();
+        sb.append("수동으로 ")
+          .append(manualLottoCount)
+          .append("장, 자동으로 ")
+          .append(autoLottoCount)
+          .append("개를 구매했습니다.");
+        System.out.println(sb.toString());
     }
 
     public void printLottos(Lottos lottos) {
