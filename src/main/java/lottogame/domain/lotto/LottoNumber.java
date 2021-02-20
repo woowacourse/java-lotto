@@ -27,10 +27,6 @@ public class LottoNumber {
         sortNumbers();
     }
 
-    private void sortNumbers() {
-        Collections.sort(numbers);
-    }
-
     public LottoNumber(int bonusBall) {
         if (invalidRange(bonusBall)) {
             throw new InvalidBonusBallNumberException();
@@ -38,9 +34,21 @@ public class LottoNumber {
         numbers.add(bonusBall);
     }
 
+    private Integer makeNumber() {
+        int number = LottoNumberGenerator.generate(LOTTO_MIN, LOTTO_MAX);
+        if (numbers.contains(number)) {
+            return makeNumber();
+        }
+        return number;
+    }
+
     private void validate(List<Integer> numbers) {
         validNumberRange(numbers);
         duplicateNumbers(numbers);
+    }
+
+    private void sortNumbers() {
+        Collections.sort(numbers);
     }
 
     private void validNumberRange(List<Integer> numbers) {
@@ -62,29 +70,21 @@ public class LottoNumber {
         }
     }
 
-    private Integer makeNumber() {
-        int number = LottoNumberGenerator.generate(LOTTO_MIN, LOTTO_MAX);
-        if (numbers.contains(number)) {
-            return makeNumber();
-        }
-        return number;
-    }
-
-    public List<Integer> values() {
+    List<Integer> values() {
         return Collections.unmodifiableList(numbers);
     }
 
-    public int matchCount(WinningLotto winningLotto) {
+    int matchCount(WinningLotto winningLotto) {
         return (int) numbers.stream()
                 .filter(number -> winningLotto.contains(number))
                 .count();
     }
 
-    public boolean contains(Integer number) {
+    boolean contains(Integer number) {
         return numbers.contains(number);
     }
 
-    public boolean contains(LottoNumber bonusBall) {
+    boolean contains(LottoNumber bonusBall) {
         return numbers.stream()
                 .filter(number -> bonusBall.contains(number))
                 .findFirst()

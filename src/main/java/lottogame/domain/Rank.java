@@ -34,15 +34,15 @@ public enum Rank {
         return money;
     }
 
-    private boolean isSameAs(int count) {
-        return this.count == count;
-    }
-
     public boolean isNotFound() {
         return this.equals(NOT_FOUND);
     }
 
     public boolean isSecond() {
         return this.equals(SECOND);
+    }
+
+    private boolean isSameAs(int count) {
+        return this.count == count;
     }
 }

@@ -11,10 +11,6 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void showLottoQuantity(int quantity) {
-        System.out.printf("%d개를 구매했습니다.\n", quantity);
-    }
-
     public static void showLottos(List<List<Integer>> lottos) {
         for (List<Integer> lotto : lottos) {
             System.out.println(formatLottosOutput(lotto));

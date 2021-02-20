@@ -20,11 +20,11 @@ public class WinningLotto {
         }
     }
 
-    public boolean contains(Integer number) {
+    boolean contains(Integer number) {
         return lotto.contains(number);
     }
 
-    public boolean matchBonusBall(Lotto lotto) {
+    boolean matchBonusBall(Lotto lotto) {
         return lotto.contains(bonusBall);
     }
 }

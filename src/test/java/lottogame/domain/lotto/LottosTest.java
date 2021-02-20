@@ -1,14 +1,9 @@
 package lottogame.domain.lotto;
 
-import lottogame.domain.Money;
-import lottogame.domain.Rank;
 import lottogame.domain.dto.LottoResult;
-import lottogame.domain.dto.LottoResults;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import javax.xml.transform.Result;
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -45,7 +40,6 @@ class LottosTest {
                 new LottoResult(5, false));
 
         assertThat(lottos.matchesLottos(winningLotto)).isEqualTo(expected);
-// 구매 금액 : 4000 , 결과 통계 new int[]{1, 1, 1, 1, 0
     }
 
     @DisplayName("순위별 당첨 통계가 제대로 저장되는 지 확인 ver2")
@@ -86,39 +80,5 @@ class LottosTest {
                 new LottoResult(1, false));
 
         assertThat(lottos.matchesLottos(winningLotto)).isEqualTo(expected);
-// 구매 금액 : 14000 , 결과 통계 new int[]{1, 0, 0, 0, 0}
     }
-
-//    private void matchTest(String[] lottoNumbersGroup, WinningLotto winningLotto, int money, int[] expectedCount) {
-//        Lottos lottos = new Lottos(makeLottos(lottoNumbersGroup));
-//
-//        LottoResults lottoResults = lottos.findMatchLottos(winningLotto, new Money(money));
-//        Map<Rank, Integer> sameResult = new LinkedHashMap<>();
-//
-//        sameResult.put(Rank.FIFTH, expectedCount[0]);
-//        sameResult.put(Rank.FOURTH, expectedCount[1]);
-//        sameResult.put(Rank.THIRD, expectedCount[2]);
-//        sameResult.put(Rank.SECOND, expectedCount[3]);
-//        sameResult.put(Rank.FIRST, expectedCount[4]);
-//        assertThat(lottoResults.values()).isEqualTo(sameResult);
-//
-//        float expected = (5000 * expectedCount[0]
-//                + 50000 * expectedCount[1]
-//                + 1500000 * expectedCount[2]
-//                + 30000000 * expectedCount[3]
-//                + 2000000000 * expectedCount[4]) / Float.valueOf(money);
-//        assertThat(lottoResults.getProfit()).isEqualTo(expected);
-//    }
-//
-//    List<Lotto> makeLottos(String[] inputs) {
-//        List<Lotto> lottos = new ArrayList<>();
-//        for (String input : inputs) {
-//            String[] numbers = input.split(", ");
-//            List<Integer> nums = Arrays.stream(numbers)
-//                    .map(x -> Integer.parseInt(x))
-//                    .collect(Collectors.toList());
-//            lottos.add(new Lotto(nums));
-//        }
-//        return lottos;
-//    }
 }
