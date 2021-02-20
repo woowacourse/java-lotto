@@ -19,10 +19,10 @@ public class WinningNumber {
     }
 
     public Rank calculateRank(LottoTicket lottoTicket) {
-        long correctNumber = lottoTicket.numbers().stream()
+        long match = lottoTicket.numbers().stream()
                 .filter(this.winningNumbers::contains)
                 .count();
         boolean hasBonus = lottoTicket.contains(this.bonusBall);
-        return Rank.from(correctNumber, hasBonus);
+        return Rank.from(match, hasBonus);
     }
 }
