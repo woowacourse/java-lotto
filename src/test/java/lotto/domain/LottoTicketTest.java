@@ -55,7 +55,7 @@ class LottoTicketTest {
         LottoTicket lottoTicket = LottoTicket.from(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoTicket winningTicket = LottoTicket.from(numbers);
 
-        int targetMatchCounts = lottoTicket.getMatchCounts(winningTicket);
+        int targetMatchCounts = lottoTicket.checkMatchCounts(winningTicket);
 
         assertThat(targetMatchCounts).isEqualTo(matchCounts);
     }

@@ -31,7 +31,7 @@ public class LottoTicket {
         }
     }
 
-    public int getMatchCounts(LottoTicket lottoTicket) {
+    public int checkMatchCounts(LottoTicket lottoTicket) {
         return (int) lottoNumbers.stream()
                 .filter(lottoTicket::contains)
                 .count();
