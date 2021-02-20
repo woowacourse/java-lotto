@@ -8,10 +8,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoNumberGeneratorTest {
     @Test
-    void check_six() {
+    void checkSize() {
         LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
-        List<LottoNumber> lottoNumbers = lottoNumberGenerator.createLotto();
+        Lotto lotto = lottoNumberGenerator.createLotto();
 
-        assertThat(lottoNumbers.size()).isEqualTo(6);
+        assertThat(lotto.getLottoSize()).isEqualTo(6);
     }
 }

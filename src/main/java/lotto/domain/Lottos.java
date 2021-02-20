@@ -6,7 +6,9 @@ import java.util.List;
 
 public class Lottos {
     private final int count;
-    private final List<Lotto> lottos;
+    //TODO:
+    // final로 만들고 밑에 생성자 관련해서 리팩토링
+    private List<Lotto> lottos = new ArrayList<>();;
 
     public Lottos(List<Lotto> lottos) {
         this.count = lottos.size();
@@ -15,16 +17,16 @@ public class Lottos {
 
     public Lottos(int count) {
         this.count = count;
-        this.lottos = createLottos();
+        createLottos();
     }
 
-    private List<Lotto> createLottos() {
+    //TODO:
+    // LottoNumbergenerator를 주입 받아 전략패턴 만들기
+    private void createLottos() {
         LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
-        List<Lotto> newLottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            newLottos.add(new Lotto(lottoNumberGenerator.createLotto()));
+            lottos.add(lottoNumberGenerator.createLotto());
         }
-        return newLottos;
     }
 
     public List<Result> getResults(WinningLotto winningLotto) {

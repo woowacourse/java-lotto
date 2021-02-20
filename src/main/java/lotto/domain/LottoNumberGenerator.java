@@ -22,12 +22,12 @@ public class LottoNumberGenerator {
         }
     }
 
-    public List<LottoNumber> createLotto() {
+    public Lotto createLotto() {
         Collections.shuffle(candidateNumbers);
         List<Integer> numbers = candidateNumbers.subList(LOTTO_START_INDEX, LOTTO_SIZE);
         Collections.sort(numbers);
 
-        return createLottoNumbers(numbers);
+        return new Lotto(createLottoNumbers(numbers));
     }
 
     private List<LottoNumber> createLottoNumbers(List<Integer> numbers) {
@@ -37,6 +37,4 @@ public class LottoNumberGenerator {
         }
         return lottoNumbers;
     }
-
-
 }

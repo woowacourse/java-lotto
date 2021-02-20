@@ -34,4 +34,8 @@ public class Lotto {
 
         return sb.toString();
     }
+
+    public int getLottoSize() {
+        return lottoNumbers.size();
+    }
 }
