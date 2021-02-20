@@ -2,14 +2,14 @@ package lotto.domain;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 public class LottoGameResult {
     private final Map<Rank, Integer> resultMap;
 
     public LottoGameResult() {
-        resultMap = new HashMap<>();
+        resultMap = new EnumMap<>(Rank.class);
         initEnumMap();
     }
 
