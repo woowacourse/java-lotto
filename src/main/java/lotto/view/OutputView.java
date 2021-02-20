@@ -3,6 +3,9 @@ package lotto.view;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoRepository;
 import lotto.domain.primitive.Money;
+import lotto.domain.rating.LottoResult;
+import lotto.domain.rating.Rating;
+import lotto.domain.rating.RatingCounter;
 import lotto.domain.statistics.LottoStatistics;
 
 import java.util.stream.Collectors;
@@ -19,23 +22,22 @@ public class OutputView {
     }
 
     public static void printLottoResults(LottoRepository lottoRepository) {
-        StringBuilder log = new StringBuilder();
+        StringBuilder buffer = new StringBuilder();
         for (Lotto lotto : lottoRepository.toList()) {
-            printLottoResult(log, lotto);
+            appendLottoResult(buffer, lotto);
         }
-        log.append(NEW_LINE);
-        System.out.print(log.toString());
+        buffer.append(NEW_LINE);
+        System.out.print(buffer.toString());
     }
 
-    public static void printLottoResult(StringBuilder log, Lotto lotto) {
-        log.append("[");
-        String body = lotto.getNumbers()
+    public static void appendLottoResult(StringBuilder buffer, Lotto lotto) {
+        buffer.append("[");
+        buffer.append(lotto.getNumbers()
                            .stream()
                            .map(String::valueOf)
-                           .collect(Collectors.joining(","));
-        log.append(body);
-        log.append("]")
-           .append(NEW_LINE);
+                           .collect(Collectors.joining(",")));
+        buffer.append("]")
+              .append(NEW_LINE);
     }
 
     public static void printWinningStats(LottoStatistics lottoStatistics, int money) {
@@ -45,7 +47,24 @@ public class OutputView {
 
     private static void printWinningDetail(LottoStatistics lottoStatistics) {
         System.out.println(NEW_LINE + "당첨 통계" + NEW_LINE + "---------");
-        System.out.print(lottoStatistics.getWinningDetail());
+        RatingCounter ratingCounter = lottoStatistics.getRatingCounter();
+        for (Rating rating : Rating.values()) {
+            if (rating == Rating.MISS) {
+                break;
+            }
+            printRatingResult(rating, ratingCounter.get(rating));
+        }
+    }
+
+    private static void printRatingResult(final Rating rating, final int count) {
+        LottoResult lottoResult = rating.getLottoResult();
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(String.format("%d개 일치", lottoResult.getMatchedCount()));
+        if (lottoResult.isSecond()) {
+            stringBuilder.append(", 보너스 볼 일치");
+        }
+        stringBuilder.append(String.format(" (%d원) - %d개", rating.getReward(), count));
+        System.out.println(stringBuilder.toString());
     }
 
     private static void printEarningRate(double rate) {

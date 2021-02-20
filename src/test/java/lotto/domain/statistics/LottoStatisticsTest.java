@@ -20,26 +20,6 @@ class LottoStatisticsTest {
     }
 
     @Test
-    void firstPrizeToString() {
-        Rating rating = Rating.FIRST;
-        int count = ratingCounter.get(rating);
-
-        String actual = lottoStatistics.ratingToString(rating, count);
-
-        assertThat(actual).isEqualTo("6개 일치 (2000000000원) - 0개" + ENTER);
-    }
-
-    @Test
-    void secondPrizeToString() {
-        Rating rating = Rating.SECOND;
-        int count = ratingCounter.get(rating);
-
-        String actual = lottoStatistics.ratingToString(rating, count);
-
-        assertThat(actual).isEqualTo("5개 일치, 보너스 볼 일치 (30000000원) - 0개" + ENTER);
-    }
-
-    @Test
     void getEarningRate() {
         double actual = lottoStatistics.getEarningRate(new Money(5000));
         assertThat(actual).isEqualTo(0);
