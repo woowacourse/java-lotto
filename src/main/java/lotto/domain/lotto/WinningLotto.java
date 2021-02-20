@@ -4,7 +4,6 @@ import lotto.domain.reword.Reword;
 import lotto.exception.DuplicateLottoNumberException;
 
 import java.util.List;
-import java.util.Objects;
 
 public class WinningLotto extends Lotto {
 
@@ -22,25 +21,9 @@ public class WinningLotto extends Lotto {
         }
     }
 
-    public Reword match(final Lotto lotto) {
-        int count = (int) lottoNumbers.stream()
-            .filter(lotto::isContainsNumber)
-            .count();
+    public Reword matchAll(final Lotto lotto) {
+        int count = match(lotto);
 
         return Reword.valueOf(count, lotto.isContainsNumber(bonusNumber));
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        WinningLotto that = (WinningLotto) o;
-        return Objects.equals(bonusNumber, that.bonusNumber);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), bonusNumber);
     }
 }

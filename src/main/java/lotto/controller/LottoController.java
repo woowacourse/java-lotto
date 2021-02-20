@@ -1,6 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.*;
+import lotto.domain.Payment;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoCount;
 import lotto.domain.lotto.Lottos;

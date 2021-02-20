@@ -17,8 +17,10 @@ public class LottoTest {
     @Test
     void create() {
         Lotto lotto = new Lotto(Arrays.asList(1, 25, 32, 45, 7, 3));
+        Lotto comparingLotto = new Lotto(Arrays.asList(1, 25, 32, 45, 7, 3));
 
-        assertThat(lotto).isEqualTo(new Lotto(Arrays.asList(1, 25, 32, 45, 7, 3)));
+        assertThat(lotto.match(comparingLotto)).isEqualTo(6);
+        assertThat(lotto).isNotEqualTo(comparingLotto);
     }
 
     @DisplayName("로또 번호 중복 테스트")

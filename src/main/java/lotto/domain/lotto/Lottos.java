@@ -51,7 +51,7 @@ public class Lottos {
         List<Reword> rewords = new ArrayList<>();
 
         for (Lotto lotto : lottos) {
-            rewords.add(winningLotto.match(lotto));
+            rewords.add(winningLotto.matchAll(lotto));
         }
 
         return new Rewords(rewords);

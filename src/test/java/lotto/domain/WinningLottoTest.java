@@ -19,9 +19,12 @@ public class WinningLottoTest {
     @Test
     void create() {
         WinningLotto winningLotto
-            = new WinningLotto(Arrays.asList(1, 3, 5, 7, 9, 45), 44);
-        assertThat(winningLotto)
-            .isEqualTo(new WinningLotto(Arrays.asList(1, 3, 5, 7, 9, 45), 44));
+                = new WinningLotto(Arrays.asList(1, 3, 5, 7, 9, 45), 44);
+        WinningLotto comparingLotto
+                = new WinningLotto(Arrays.asList(3, 5, 7, 9, 45, 1), 44);
+
+        assertThat(winningLotto.matchAll(comparingLotto)).isEqualTo(Reword.FIRST);
+        assertThat(winningLotto).isNotEqualTo(comparingLotto);
     }
 
     @DisplayName("보너스 번호 에러테스트")
@@ -44,13 +47,13 @@ public class WinningLottoTest {
     @Test
     void match() {
         Reword rewordThird = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7)
-            .match(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 8)));
+                .matchAll(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 8)));
         Reword rewordSecond = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7)
-                .match(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)));
+                .matchAll(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)));
         Reword rewordFirst = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7)
-                .match(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+                .matchAll(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
         Reword rewordNone = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7)
-                .match(new Lotto(Arrays.asList(11, 12, 31, 41, 5, 7)));
+                .matchAll(new Lotto(Arrays.asList(11, 12, 31, 41, 5, 7)));
 
         assertThat(rewordThird).isEqualTo(Reword.THIRD);
         assertThat(rewordSecond).isEqualTo(Reword.SECOND);

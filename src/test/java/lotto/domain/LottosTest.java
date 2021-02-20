@@ -30,6 +30,6 @@ public class LottosTest {
         List<Lotto> expectedLottoTickets = new ArrayList<>();
 
         expectedLottoTickets.add(new Lotto(Arrays.asList(1, 2, 3, 45, 5, 6)));
-        assertThat(lottos.getLottos()).isEqualTo(expectedLottoTickets);
+        assertThat(lottos.getLottos().get(0).match(expectedLottoTickets.get(0))).isEqualTo(6);
     }
 }
