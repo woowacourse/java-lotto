@@ -26,7 +26,7 @@ public enum Rank {
         this.prize = prize;
     }
 
-    public static Rank getInstance(int numberMatchCount, boolean isBonusBallMatches) {
+    public static Rank matchRank(int numberMatchCount, boolean isBonusBallMatches) {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.biFunction.apply(numberMatchCount, isBonusBallMatches))
                 .findFirst()

@@ -1,6 +1,7 @@
 package lotto.domain.result;
 
 import java.math.BigInteger;
+import java.util.EnumMap;
 import java.util.Map;
 import lotto.domain.lotto.Rank;
 
@@ -10,7 +11,7 @@ public class Result {
     private final EarningRate earningRate;
 
     public Result(Map<Rank, Integer> resultMap, BigInteger paymentAmount) {
-        this.resultMap = resultMap;
+        this.resultMap = new EnumMap<>(resultMap);
         this.earningRate = new EarningRate(getTotalPrize(resultMap), paymentAmount);
     }
 

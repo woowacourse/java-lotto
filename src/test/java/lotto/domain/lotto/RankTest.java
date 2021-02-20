@@ -14,7 +14,7 @@ class RankTest {
     @DisplayName("Rank 테스트")
     @MethodSource("getInstance_testcase")
     void getInstance(int numberMatchCount, boolean isBonusBallMatches, Rank expectedRank) {
-        assertThat(Rank.getInstance(numberMatchCount, isBonusBallMatches)).isEqualTo(expectedRank);
+        assertThat(Rank.matchRank(numberMatchCount, isBonusBallMatches)).isEqualTo(expectedRank);
     }
 
     static Stream<Arguments> getInstance_testcase() {

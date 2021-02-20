@@ -1,7 +1,7 @@
 package lotto.domain.result;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import lotto.domain.lotto.LottoTicket;
@@ -29,10 +29,10 @@ public class LottoMatcher {
     }
 
     private Map<Rank, Integer> getResultMap() {
-        Map<Rank, Integer> resultMap = new HashMap<>();
+        Map<Rank, Integer> resultMap = new EnumMap<>(Rank.class);
 
         for (LottoTicket lottoTicket : lottoTickets) {
-            Rank rank = winningNumbers.getRank(lottoTicket);
+            Rank rank = winningNumbers.matchRank(lottoTicket);
             resultMap.put(rank, resultMap.getOrDefault(rank, 0) + 1);
         }
         return resultMap;

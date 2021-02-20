@@ -46,7 +46,7 @@ class WinningNumbersTest {
         WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6", "7");
         LottoTicket lottoTicket = new LottoTicket(lottoTicketValue);
 
-        assertThat(winningNumbers.getRank(lottoTicket)).isEqualTo(expectedRank);
+        assertThat(winningNumbers.matchRank(lottoTicket)).isEqualTo(expectedRank);
     }
 
     private static Stream<Arguments> getRank_testcase() {

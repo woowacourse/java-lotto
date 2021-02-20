@@ -17,8 +17,8 @@ public class WinningNumbers {
         this.bonusBall = bonusBall;
     }
 
-    public Rank getRank(LottoTicket lottoTicket) {
-        return Rank.getInstance(
+    public Rank matchRank(LottoTicket lottoTicket) {
+        return Rank.matchRank(
                 countMatches(lottoTicket),
                 lottoTicket.contains(bonusBall));
     }
