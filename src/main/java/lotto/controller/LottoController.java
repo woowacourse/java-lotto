@@ -19,21 +19,13 @@ public class LottoController {
         PayOut payOut = getPayOutFromUser();
 
         ManualPurchasesNumber manualLottoCount = getManualLottoCountFromUser(payOut);
-
-        List<String> manualLottos = getManualLottosFromUser(manualLottoCount);
-
-        OutputView.payOuted(payOut.getGameCount(), manualLottoCount.getValueAsInt());
+        List<String> manualLottos = getManualLottosFromUser(payOut, manualLottoCount);
 
         LottoGroup lottoGroup = createLottosAccordingToTheAmount(manualLottos,
                 payOut.subtractionUsingGameCount(manualLottoCount.getValueAsInt())
         );
 
-        WinningNumber winningNumber = new WinningNumber(
-                getLastWeekLottoNumberFromUser(),
-                getBonusNumberFromUser()
-        );
-
-        lottoResultAnalysisAndPrint(winningNumber, lottoGroup, payOut);
+        createWinningNumberAndlottoResultAnalysisAndPrint( lottoGroup, payOut);
     }
 
     private static PayOut getPayOutFromUser() {
@@ -50,12 +42,16 @@ public class LottoController {
         return new ManualPurchasesNumber(InputView.getStringInputFromUser(), payOut);
     }
 
-    private static List<String> getManualLottosFromUser(Number manualLottoCount) {
+    private static List<String> getManualLottosFromUser(PayOut payOut, Number manualLottoCount) {
         OutputView.manualLottoNumber();
 
-        return Stream.generate(InputView::getStringInputFromUser)
+        List<String> manualLottos = Stream.generate(InputView::getStringInputFromUser)
                 .limit(manualLottoCount.getValueAsInt())
                 .collect(toList());
+
+        OutputView.payOuted(payOut.getGameCount(), manualLottoCount.getValueAsInt());
+
+        return manualLottos;
     }
 
     private static LottoGroup createLottosAccordingToTheAmount(List<String> manualLottos,
@@ -82,10 +78,15 @@ public class LottoController {
         return InputView.getStringInputFromUser();
     }
 
-    private static void lottoResultAnalysisAndPrint(
-            WinningNumber winningNumber,
+    private static void createWinningNumberAndlottoResultAnalysisAndPrint(
             LottoGroup lottoGroup,
             PayOut payOut) {
+
+        WinningNumber winningNumber = new WinningNumber(
+                getLastWeekLottoNumberFromUser(),
+                getBonusNumberFromUser()
+        );
+
         AnalysedLottos analysedLottos = winningNumber.analysingLottos(lottoGroup, payOut);
         OutputView.statistics(analysedLottos);
     }
