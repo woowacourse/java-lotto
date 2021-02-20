@@ -20,16 +20,11 @@ public class WinningLotto {
         }
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        WinningLotto that = (WinningLotto) o;
-        return bonusBall == that.bonusBall && Objects.equals(lotto, that.lotto);
+    public boolean contains(Integer number) {
+        return lotto.contains(number);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(lotto, bonusBall);
+    public boolean matchBonusBall(Lotto lotto) {
+        return lotto.contains(bonusBall);
     }
 }

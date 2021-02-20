@@ -13,17 +13,15 @@ public class Lotto {
         return lottoNumber.values();
     }
 
-//    public int match(Lotto winningLotto) {
-//        return (int) numbers.stream()
-//                .filter(number -> winningLotto.contains(number))
-//                .count();
-//    }
-//
-//    public boolean contains(int number) {
-//        return numbers.contains(number);
-//    }
-//
-//    public boolean containsBonus(WinningLotto winningLotto) {
-//        return numbers.contains(winningLotto.getBonusBall());
-//    }
+    public int matchCount(WinningLotto winningLotto) {
+        return lottoNumber.matchCount(winningLotto);
+    }
+
+    public boolean contains(Integer number) {
+        return lottoNumber.contains(number);
+    }
+
+    public boolean contains(LottoNumber bonusBall) {
+        return lottoNumber.contains(bonusBall);
+    }
 }

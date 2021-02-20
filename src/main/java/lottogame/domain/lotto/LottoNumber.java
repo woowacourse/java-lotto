@@ -33,11 +33,11 @@ public class LottoNumber {
     }
 
     private void validate(List<Integer> numbers) {
-        checkNumbersRange(numbers);
+        validNumberRange(numbers);
         duplicateNumbers(numbers);
     }
 
-    private void checkNumbersRange(List<Integer> numbers) {
+    private void validNumberRange(List<Integer> numbers) {
         numbers.stream()
                 .filter(number -> invalidRange(number))
                 .findAny()
@@ -56,15 +56,32 @@ public class LottoNumber {
         }
     }
 
-    public List<Integer> values() {
-        return Collections.unmodifiableList(numbers);
-    }
-
     private Integer makeNumber() {
         int number = LottoNumberGenerator.generate(LOTTO_MIN, LOTTO_MAX);
         if (numbers.contains(number)) {
             return makeNumber();
         }
         return number;
+    }
+
+    public List<Integer> values() {
+        return Collections.unmodifiableList(numbers);
+    }
+
+    public int matchCount(WinningLotto winningLotto) {
+        return (int) numbers.stream()
+                .filter(number -> winningLotto.contains(number))
+                .count();
+    }
+
+    public boolean contains(Integer number) {
+        return numbers.contains(number);
+    }
+
+    public boolean contains(LottoNumber bonusBall) {
+        return numbers.stream()
+                .filter(number -> bonusBall.contains(number))
+                .findFirst()
+                .isPresent();
     }
 }
