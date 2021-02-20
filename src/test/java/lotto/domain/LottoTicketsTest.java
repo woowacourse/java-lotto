@@ -13,7 +13,8 @@ class LottoTicketsTest {
     @Test
     void getLottoResult() {
         LottoNumberGenerator lottoNumberGenerator = () -> Arrays.asList(1, 2, 3, 4, 5, 6);
-        LottoTickets lottoTickets = LottoTickets.generateAutomatic(3, lottoNumberGenerator);
+        PurchasingPrice purchasingPrice = new PurchasingPrice(3000);
+        LottoTickets lottoTickets = LottoTickets.generateAutomatic(purchasingPrice, lottoNumberGenerator);
         WinningLottoTicket winningLottoTicket = WinningLottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 7), 6);
 
         LottoResult lottoResult = lottoTickets.checkResult(winningLottoTicket);

@@ -16,14 +16,7 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
-    public static LottoTickets generateAutomatic(int lottoTicketCounts, LottoNumberGenerator lottoNumberGenerator) {
-        List<LottoTicket> lottoTickets = Stream.generate(() -> LottoTicket.from(lottoNumberGenerator.generate()))
-                .limit(lottoTicketCounts)
-                .collect(Collectors.toList());
-        return new LottoTickets(lottoTickets);
-    }
-
-    public static LottoTickets generateAutomatic2(PurchasingPrice purchasingPrice, LottoNumberGenerator lottoNumberGenerator) {
+    public static LottoTickets generateAutomatic(PurchasingPrice purchasingPrice, LottoNumberGenerator lottoNumberGenerator) {
         List<LottoTicket> lottoTickets = Stream.generate(() -> LottoTicket.from(lottoNumberGenerator.generate()))
                 .limit(purchasingPrice.calculatePurchasableTicketCounts(LOTTO_TICKET_PRICE))
                 .collect(Collectors.toList());
