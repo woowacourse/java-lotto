@@ -44,7 +44,7 @@ public class LottoGenerator {
                 .map(LottoNumbers::valueOf)
                 .collect(toList())
         ).addition(
-                generateLottos(payOut.getValueAsInt())
+                generateLottos(payOut.getGameCount())
         );
     }
 
