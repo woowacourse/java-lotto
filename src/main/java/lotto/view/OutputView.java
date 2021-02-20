@@ -1,6 +1,9 @@
 package lotto.view;
 
-import lotto.domain.*;
+import lotto.domain.LottoRank;
+import lotto.domain.LottoResult;
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -38,14 +41,14 @@ public class OutputView {
         System.out.println(numbers);
     }
 
-    public static void printLottoResult(LottoResult lottoResult, PurchasingPrice purchasingPrice) {
+    public static void printLottoResult(LottoResult lottoResult, double yield) {
         System.out.println(RESULT_HEADER_MESSAGE);
         System.out.println(HYPHENS);
         Arrays.stream(LottoRank.values())
                 .filter(lottoRank -> lottoRank != LottoRank.MISS)
                 .sorted(Comparator.reverseOrder())
                 .forEach(lottoRank -> printStatisticsByRank(lottoRank, lottoResult));
-        System.out.printf(YIELD_MESSAGE, lottoResult.calculateYield(purchasingPrice));
+        System.out.printf(YIELD_MESSAGE, yield);
     }
 
     private static void printStatisticsByRank(LottoRank lottoRank, LottoResult lottoResult) {
