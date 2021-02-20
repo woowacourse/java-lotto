@@ -57,7 +57,7 @@ public class RankTest {
     void match_1stLotto_1stRank(LottoStatisticResult result, Rank rank) {
 
         // when
-        Long count = result.get(rank);
+        Long count = result.getOrNoCount(rank);
 
         // then
         assertThat(count).isEqualTo(1L);

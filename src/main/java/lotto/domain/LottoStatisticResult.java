@@ -13,7 +13,7 @@ public class LottoStatisticResult {
         this.rankCount = rankCount;
     }
 
-    public Long get(Rank rank) {
+    public Long getOrNoCount(Rank rank) {
         return rankCount.getOrDefault(rank, NO_COUNT);
     }
 

@@ -24,7 +24,7 @@ public class LottoStatisticResultTest {
         LottoStatisticResult result = Rank.match(lottos, WINNING_LOTTO);
 
         // when
-        Long count = result.get(Rank.FIRST);
+        Long count = result.getOrNoCount(Rank.FIRST);
 
         // then
         assertThat(count).isEqualTo(1L);
