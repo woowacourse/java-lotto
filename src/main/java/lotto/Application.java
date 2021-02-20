@@ -7,8 +7,6 @@ import lotto.view.OutputView;
 import java.util.List;
 import java.util.Scanner;
 
-import static lotto.domain.LottoNumber.createLottoNumbers;
-
 public class Application {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -20,7 +18,7 @@ public class Application {
         OutputView.showLottos(lottos);
 
         WinningLotto winningLotto = new WinningLotto(
-                new Lotto(createLottoNumbers(InputView.takeWinningNumbersInput(scanner))),
+                new ManualLottoGenerator(InputView.takeWinningNumbersInput(scanner)).createLotto(),
                 new LottoNumber(InputView.takeBonusNumberInput(scanner))
         );
 

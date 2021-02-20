@@ -1,17 +1,13 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ManualLottoGenerator implements LottoGenerator {
-    private final List<Integer> numbers;
+    private final int[] numbers;
 
-    public ManualLottoGenerator(String numbers) {
-        this.numbers = Arrays.stream(numbers.split(", "))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+    public ManualLottoGenerator(int[] numbers) {
+        this.numbers = numbers;
     }
 
     @Override
@@ -21,7 +17,7 @@ public class ManualLottoGenerator implements LottoGenerator {
 
     private List<LottoNumber> createLottoNumbers() {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (Integer number : numbers) {
+        for (int number : numbers) {
             lottoNumbers.add(new LottoNumber(number));
         }
         return lottoNumbers;

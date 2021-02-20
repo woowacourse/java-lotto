@@ -20,14 +20,6 @@ public class LottoNumber {
         this.number = number;
     }
 
-    public static List<LottoNumber> createLottoNumbers(int[] numbers) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int number : numbers) {
-            lottoNumbers.add(new LottoNumber(number));
-        }
-        return lottoNumbers;
-    }
-
     public static void validateRangeOfNumber(int number) {
         if (number < MINIMUM_CANDIDATE_NUMBER || MAXIMUM_CANDIDATE_NUMBER < number) {
             throw new IllegalArgumentException(NUMBER_OUT_OF_BOUNDS_ERROR);
