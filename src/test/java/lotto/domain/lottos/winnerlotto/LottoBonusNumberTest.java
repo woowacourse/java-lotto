@@ -12,7 +12,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class LottoWinnerBonusNumberTest {
+public class LottoBonusNumberTest {
 
     private LottoTicket lottoWinnerTicket;
 
@@ -33,16 +33,16 @@ public class LottoWinnerBonusNumberTest {
     @Test
     @DisplayName("보너스 숫자를 생성한다.")
     public void createNumberTest() {
-        LottoWinnerBonusNumber number = new LottoWinnerBonusNumber(6, lottoWinnerTicket);
+        LottoBonusNumber number = new LottoBonusNumber(6, lottoWinnerTicket);
 
-        assertThat(number).isEqualTo(new LottoWinnerBonusNumber(6, lottoWinnerTicket));
+        assertThat(number).isEqualTo(new LottoBonusNumber(6, lottoWinnerTicket));
     }
 
     @Test
     @DisplayName("보너스 로또 숫자는 1~45 사이의 숫자여야한다.")
     public void validateNumberTest() {
         assertThatThrownBy(() -> {
-            new LottoWinnerBonusNumber(46, lottoWinnerTicket);
+            new LottoBonusNumber(46, lottoWinnerTicket);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -50,7 +50,7 @@ public class LottoWinnerBonusNumberTest {
     @DisplayName("보너스 번호는 당첨번호 6개와 중복되면 IllegalArgument예외가 발생한다.")
     public void duplicateBonusNumberTest() {
         assertThatThrownBy(() -> {
-            new LottoWinnerBonusNumber(45, lottoWinnerTicket);
+            new LottoBonusNumber(45, lottoWinnerTicket);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }

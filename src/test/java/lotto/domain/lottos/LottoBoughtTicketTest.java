@@ -2,7 +2,7 @@ package lotto.domain.lottos;
 
 import lotto.domain.lottos.rank.LottoRank;
 import lotto.domain.lottos.winnerlotto.LottoWinner;
-import lotto.domain.lottos.winnerlotto.LottoWinnerBonusNumber;
+import lotto.domain.lottos.winnerlotto.LottoBonusNumber;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,9 +28,9 @@ class LottoBoughtTicketTest {
                         new LottoNumber(6)
                 )
         );
-        LottoWinnerBonusNumber lottoWinnerBonusNumber = new LottoWinnerBonusNumber(7, lottoWinnerTicket);
+        LottoBonusNumber lottoBonusNumber = new LottoBonusNumber(7, lottoWinnerTicket);
 
-        lottoWinner = new LottoWinner(lottoWinnerTicket, lottoWinnerBonusNumber);
+        lottoWinner = new LottoWinner(lottoWinnerTicket, lottoBonusNumber);
     }
 
     @Test

@@ -10,32 +10,32 @@ public class LottoWinner {
     private static final String NULL_ERROR_MESSAGE = "null 값은 허용하지 않습니다.";
 
     private final LottoTicket lottoWinnerTicket;
-    private final LottoWinnerBonusNumber lottoWinnerBonusNumber;
+    private final LottoBonusNumber lottoBonusNumber;
 
-    public LottoWinner(LottoTicket lottoWinnerTicket, LottoWinnerBonusNumber lottoWinnerBonusNumber) {
-        validateNull(lottoWinnerTicket, lottoWinnerBonusNumber);
+    public LottoWinner(LottoTicket lottoWinnerTicket, LottoBonusNumber lottoBonusNumber) {
+        validateNull(lottoWinnerTicket, lottoBonusNumber);
         this.lottoWinnerTicket = lottoWinnerTicket;
-        validateDuplicateNumber(lottoWinnerTicket, lottoWinnerBonusNumber);
-        this.lottoWinnerBonusNumber = lottoWinnerBonusNumber;
+        validateDuplicateNumber(lottoWinnerTicket, lottoBonusNumber);
+        this.lottoBonusNumber = lottoBonusNumber;
     }
 
     public void validateDuplicateNumber
-            (LottoTicket lottoWinnerTicket, LottoWinnerBonusNumber lottoWinnerBonusNumber) {
-        if (lottoWinnerTicket.isContain(lottoWinnerBonusNumber)) {
+            (LottoTicket lottoWinnerTicket, LottoBonusNumber lottoBonusNumber) {
+        if (lottoWinnerTicket.isContain(lottoBonusNumber)) {
             throw new IllegalArgumentException(DUPLICATE_ERROR_MESSAGE);
         }
     }
 
-    private void validateNull(LottoTicket lottoWinnerTicket, LottoWinnerBonusNumber lottoWinnerBonusNumber) {
+    private void validateNull(LottoTicket lottoWinnerTicket, LottoBonusNumber lottoBonusNumber) {
         Objects.requireNonNull(lottoWinnerTicket, NULL_ERROR_MESSAGE);
-        Objects.requireNonNull(lottoWinnerBonusNumber, NULL_ERROR_MESSAGE);
+        Objects.requireNonNull(lottoBonusNumber, NULL_ERROR_MESSAGE);
     }
 
     public LottoTicket getLottoWinnerTicket() {
         return lottoWinnerTicket;
     }
 
-    public LottoWinnerBonusNumber getLottoWinnerBonusNumber() {
-        return lottoWinnerBonusNumber;
+    public LottoBonusNumber getLottoWinnerBonusNumber() {
+        return lottoBonusNumber;
     }
 }

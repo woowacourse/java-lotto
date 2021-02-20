@@ -4,7 +4,7 @@ import lotto.domain.LottoResultStatistics;
 import lotto.domain.lottos.LottoTicket;
 import lotto.domain.lottos.LottoTickets;
 import lotto.domain.lottos.winnerlotto.LottoWinner;
-import lotto.domain.lottos.winnerlotto.LottoWinnerBonusNumber;
+import lotto.domain.lottos.winnerlotto.LottoBonusNumber;
 import lotto.domain.money.Money;
 import lotto.service.LottoTicketService;
 import lotto.service.LottoTicketsService;
@@ -18,8 +18,8 @@ public class LottoController {
         LottoTickets lottoTickets = initLottoTickets(money);
 
         LottoTicket lottoWinnerTicket = initLottoWinnerTicket();
-        LottoWinnerBonusNumber lottoWinnerBonusNumber = initLottoWinnerBonusNumber(lottoWinnerTicket);
-        LottoWinner lottoWinner = new LottoWinner(lottoWinnerTicket, lottoWinnerBonusNumber);
+        LottoBonusNumber lottoBonusNumber = initLottoWinnerBonusNumber(lottoWinnerTicket);
+        LottoWinner lottoWinner = new LottoWinner(lottoWinnerTicket, lottoBonusNumber);
 
         LottoResultStatistics lottoResultStatistics =
                 LottoResultStatistics.calculateResultStatistics(lottoTickets, lottoWinner);
@@ -51,9 +51,9 @@ public class LottoController {
         }
     }
 
-    private LottoWinnerBonusNumber initLottoWinnerBonusNumber(LottoTicket lottoWinnerTicket) {
+    private LottoBonusNumber initLottoWinnerBonusNumber(LottoTicket lottoWinnerTicket) {
         try {
-            return new LottoWinnerBonusNumber(Integer.parseInt(InputView.getBonusNumberInput()), lottoWinnerTicket);
+            return new LottoBonusNumber(Integer.parseInt(InputView.getBonusNumberInput()), lottoWinnerTicket);
         } catch (NullPointerException | IllegalArgumentException e) {
             OutputView.printErrorMessage(e);
             return initLottoWinnerBonusNumber(lottoWinnerTicket);

@@ -6,7 +6,7 @@ import lotto.domain.lottos.LottoTicket;
 import lotto.domain.lottos.LottoTickets;
 import lotto.domain.lottos.rank.LottoRank;
 import lotto.domain.lottos.winnerlotto.LottoWinner;
-import lotto.domain.lottos.winnerlotto.LottoWinnerBonusNumber;
+import lotto.domain.lottos.winnerlotto.LottoBonusNumber;
 import lotto.domain.money.Money;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -34,9 +34,9 @@ public class LottoResultStatisticsTest {
                 )
         );
 
-        LottoWinnerBonusNumber lottoWinnerBonusNumber = new LottoWinnerBonusNumber(7, lottoWinnerTicket);
+        LottoBonusNumber lottoBonusNumber = new LottoBonusNumber(7, lottoWinnerTicket);
 
-        lottoWinner = new LottoWinner(lottoWinnerTicket, lottoWinnerBonusNumber);
+        lottoWinner = new LottoWinner(lottoWinnerTicket, lottoBonusNumber);
 
         LottoBoughtTicket lottoTicket1 = new LottoBoughtTicket(
                 Arrays.asList(
