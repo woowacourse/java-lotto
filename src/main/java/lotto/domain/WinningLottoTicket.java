@@ -26,14 +26,10 @@ public class WinningLottoTicket {
         }
     }
 
-    public Prize compareNumbers(LottoTicket lottoTicket) {
-        long winningCount = lottoTicket.calculateWinningTicketCount(winningTicket);
+    public Prize calculatePrize(LottoTicket lottoTicket) {
+        int winningNumberCount = lottoTicket.compareWinningNumber(winningTicket);
         boolean isBonus = lottoTicket.containsAnyNumber(bonusNumber);
 
-        return getResult(winningCount, isBonus);
-    }
-
-    public Prize getResult(long winningCount, boolean isBonus) {
-        return Prize.findByMatchCount((int) winningCount, isBonus);
+        return Prize.findByMatchCount(winningNumberCount, isBonus);
     }
 }

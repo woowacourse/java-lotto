@@ -39,8 +39,8 @@ public class LottoTicket {
         }
     }
 
-    public long calculateWinningTicketCount(LottoTicket winningTicket) {
-        return lottoNumbers.stream()
+    public int compareWinningNumber(LottoTicket winningTicket) {
+        return (int) lottoNumbers.stream()
             .filter(winningTicket::containsLottoNumber)
             .count();
     }
@@ -57,7 +57,6 @@ public class LottoTicket {
     public List<LottoNumber> getLottoNumbers() {
         return new ArrayList<>(lottoNumbers);
     }
-
 
     //todo : 방안 1) 전달용 객체 생성 2) list getter 메소드 활용해서 outputView에서 동일한 작업
     public String printLottoTicket() {
