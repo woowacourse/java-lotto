@@ -6,20 +6,24 @@ import java.io.InputStreamReader;
 
 public class InputView {
 
+    private static final String ASK_HOW_MUCH_TO_BUY = "구입금액을 입력해 주세요.";
+    private static final String ASK_WINNER_LOTTO_TICKET = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String ASK_WINNER_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
+
     private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     public static String getMoneyInput() {
-        OutputView.askHowMuchToBuy();
+        System.out.println(ASK_HOW_MUCH_TO_BUY);
         return getUserInput();
     }
 
     public static String getWinnerNumbersInput() {
-        OutputView.askWinnerLottoTicket();
+        System.out.println(ASK_WINNER_LOTTO_TICKET);
         return getUserInput();
     }
 
     public static String getBonusNumberInput() {
-        OutputView.askWinnerBonusNumber();
+        System.out.println(ASK_WINNER_BONUS_NUMBER);
         return getUserInput();
     }
 
