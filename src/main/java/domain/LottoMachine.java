@@ -5,9 +5,9 @@ import java.util.List;
 
 public class LottoMachine {
 
-    private final static int LOTTO_TICKET_PRICE = 1000;
-    private final static int MIN_LOTTO_NUMBER = 1;
-    private final static int MAX_LOTTO_NUMBER = 45;
+    private static final int LOTTO_TICKET_PRICE = 1000;
+    private static final int MIN_LOTTO_NUMBER = 1;
+    private static final int MAX_LOTTO_NUMBER = 45;
 
     private final Price price;
 
