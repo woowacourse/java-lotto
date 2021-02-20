@@ -31,8 +31,10 @@ public class InputView {
 
     private List<Integer> readWinningLottoExceptBonusNumber() {
         String input = read(WINNING_LOTTO_NUMBER_QUESTION);
-        return Arrays.stream(input.split(DELIMITER))
-                     .map(number -> LottoNumber.fromStringLottoNumber(number).getLottoNum())
+        String[] lottoNumbers = input.split(DELIMITER);
+        return Arrays.stream(lottoNumbers)
+                     .map(number -> Integer.parseInt(number))
+                     .map(number -> LottoNumber.from(number).getLottoNum())
                      .collect(Collectors.toList());
     }
 
