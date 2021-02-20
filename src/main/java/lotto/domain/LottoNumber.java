@@ -38,8 +38,8 @@ public class LottoNumber {
         return numbers.contains(new LottoNumber(number));
     }
 
-    public int getNumber() {
-        return number;
+    public String getNumberAsString() {
+        return String.valueOf(number);
     }
 
     @Override

@@ -1,11 +1,10 @@
 package lotto.domain;
 
-import com.google.common.primitives.Ints;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
     public static final int LOTTO_START_INDEX = 0;
@@ -46,16 +45,13 @@ public class Lotto {
         return winningLotto.hasAnyMatch(lottoNumbers);
     }
 
-    //TODO:
-    // String.format 으로
     public String getLottoSummary() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("[");
-        sb.append(Ints.join(", ", lottoNumbers.stream()
-                .mapToInt(LottoNumber::getNumber)
-                .toArray()));
-        sb.append("]");
+        return String.format("[%s]", lottoSummary());
+    }
 
-        return sb.toString();
+    private String lottoSummary() {
+        return lottoNumbers.stream()
+                .map(LottoNumber::getNumberAsString)
+                .collect(Collectors.joining(", "));
     }
 }
