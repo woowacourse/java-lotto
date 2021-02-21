@@ -13,7 +13,7 @@ public class LottoTicketsDto {
         this.singleLottoTicketDtos = singleLottoTicketDtos;
     }
 
-    public LottoTicketsDto of(final AutoLottoTickets autoLottoTickets) {
+    public static LottoTicketsDto of(final AutoLottoTickets autoLottoTickets) {
         List<SingleLottoTicketDto> dtos = autoLottoTickets.toList()
                 .stream()
                 .map(LottoTicket.class::cast)
