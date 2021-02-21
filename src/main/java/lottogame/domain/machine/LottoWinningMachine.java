@@ -22,6 +22,6 @@ public class LottoWinningMachine {
     }
 
     public boolean isMatchBonusNumber(final LottoTicket lottoTicket) {
-        return lottoTicket.getLottoNumbers().contains(bonusNumber);
+        return lottoTicket.isContainNumber(bonusNumber);
     }
 }
