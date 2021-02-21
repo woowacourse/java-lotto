@@ -1,5 +1,7 @@
 package lotto.domain.lottomachine;
 
+import lotto.domain.primitive.LottoNumber;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -12,17 +14,18 @@ public class RandomLottoMachine implements LottoMachine {
     private static final int LOTTO_MAX_NUMBER = 45;
     private static final int LOTTO_NUMBER_COUNT = 6;
 
-    private final List<Integer> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public RandomLottoMachine() {
         lottoNumbers = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
                                 .boxed()
+                                .map(LottoNumber::new)
                                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<Integer> generate() {
-        List<Integer> numbers = new ArrayList<>(lottoNumbers);
+    public List<LottoNumber> generate() {
+        List<LottoNumber> numbers = new ArrayList<>(lottoNumbers);
         Collections.shuffle(numbers);
         return new ArrayList<>(numbers.subList(0, LOTTO_NUMBER_COUNT));
     }

@@ -53,7 +53,7 @@ public class LottoController {
 
     public void generateLottos(Ticket ticket) {
         for (int i = 0; i < ticket.getCount(); i++) {
-            lottos.add(Lotto.createByInteger(lottoMachine.generate()));
+            lottos.add(new Lotto(lottoMachine.generate()));
         }
     }
 
