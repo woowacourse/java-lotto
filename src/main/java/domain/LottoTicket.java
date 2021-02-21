@@ -13,10 +13,6 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public List<LottoNumber> numbers() {
-        return Collections.unmodifiableList(this.lottoNumbers);
-    }
-
     public static LottoTicket of(List<Integer> lottoNumbers) {
         validateNumberCount(lottoNumbers);
         validateDuplicationNumber(lottoNumbers);
@@ -44,5 +40,9 @@ public class LottoTicket {
 
     public boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
+    }
+
+    public List<LottoNumber> numbers() {
+        return Collections.unmodifiableList(this.lottoNumbers);
     }
 }
