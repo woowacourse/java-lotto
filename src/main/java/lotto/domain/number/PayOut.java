@@ -3,7 +3,6 @@ package lotto.domain.number;
 import java.util.Objects;
 
 public class PayOut {
-    public static final PayOut ZERO = new PayOut();
     private final Number value;
 
     public PayOut(Number number) {
@@ -19,12 +18,8 @@ public class PayOut {
         this(new Number(number));
     }
 
-    private PayOut() {
-        value = new Number(0);
-    }
-
     private void validateNegative(int value) {
-        if (value <= 0) {
+        if (value < 0) {
             throw new IllegalArgumentException("입력값이 양수가 아닙니다.");
         }
     }
@@ -34,12 +29,6 @@ public class PayOut {
     }
 
     public PayOut subtract(PayOut payOut) {
-        Number subtractedNumber = value.subtract(payOut.value);
-
-        if(subtractedNumber.equals(ZERO)) {
-            return new PayOut();
-        }
-
         return new PayOut(value.subtract(payOut.value));
     }
 
