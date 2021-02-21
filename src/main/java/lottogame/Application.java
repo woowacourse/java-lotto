@@ -9,7 +9,7 @@ public class Application {
 
         LottoGameController lottoGameController = new LottoGameController(new LottoGame());
         lottoGameController.buyTickets();
-        lottoGameController.printLottoTickets();
+        lottoGameController.printBroughtLottoTickets();
         lottoGameController.drawWinningNumber();
         lottoGameController.printLottoGameResult();
     }

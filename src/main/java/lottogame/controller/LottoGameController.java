@@ -17,13 +17,12 @@ public class LottoGameController {
         lottoGame.buyTickets(new Money(InputView.getMoneyInput()));
     }
 
-    public void drawWinningNumber() {
-        lottoGame
-                .drawWinningNumber(InputView.getWinningNumbersInput(), InputView.getBonusNumberInput());
+    public void printBroughtLottoTickets() {
+        OutputView.printBroughtLottoTickets(lottoGame.getBroughtTickets());
     }
 
-    public void printLottoTickets() {
-        OutputView.printLottoTickets(lottoGame.getBroughtTickets());
+    public void drawWinningNumber() {
+        lottoGame.drawWinningNumber(InputView.getWinningNumbersInput(), InputView.getBonusNumberInput());
     }
 
     public void printLottoGameResult() {

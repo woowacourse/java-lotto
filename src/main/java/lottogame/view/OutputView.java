@@ -15,7 +15,7 @@ public class OutputView {
     public static final String TICKETS_COUNT_MSG = "개를 구매했습니다.";
     public static final String AMOUNT_YIELD_FORMAT = "총 수익률은 %.2f입니다.";
 
-    public static void printLottoTickets(final LottoTickets lottoTickets) {
+    public static void printBroughtLottoTickets(final LottoTickets lottoTickets) {
         System.out.println(lottoTickets.getTicketsCount() + TICKETS_COUNT_MSG);
         for (LottoTicket lottoTicket : lottoTickets.toList()) {
             printLottoNumbers(lottoTicket);

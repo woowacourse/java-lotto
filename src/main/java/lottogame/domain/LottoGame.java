@@ -15,16 +15,14 @@ import java.util.Map;
 
 public class LottoGame {
 
-    private Money initMoney;
     private LottoTickets lottoTickets;
-    private LottoNumbers drawnWinningNumbers;
     private LottoNumber drawnBonusNumber;
-    private LottoWinningMachine lottoWinningMachine;
+    private LottoNumbers drawnWinningNumbers;
     private LottoGameResult lottoGameResult;
+    private final LottoTicketMachine lottoTicketMachine = new LottoTicketMachine();
 
     public void buyTickets(final Money money) {
-        this.initMoney = new Money(Integer.toString(money.getValue()));
-        this.lottoTickets = new LottoTicketMachine().buyTickets(money);
+        this.lottoTickets = lottoTicketMachine.buyTickets(money);
     }
 
     public void drawWinningNumber(final String winningNumbers, final String bonusNumber) {
@@ -37,8 +35,8 @@ public class LottoGame {
         return lottoTickets;
     }
 
-    private List<LottoTicketResult> getWinningTickets() {
-        lottoWinningMachine = new LottoWinningMachine(drawnWinningNumbers, drawnBonusNumber);
+    private List<LottoTicketResult> getMatchedTickets() {
+        LottoWinningMachine lottoWinningMachine = new LottoWinningMachine(drawnWinningNumbers, drawnBonusNumber);
         List<LottoTicketResult> lottoTicketResults = new ArrayList<>();
 
         for (LottoTicket lottoTicket : lottoTickets.toList()) {
@@ -50,11 +48,11 @@ public class LottoGame {
     }
 
     public Map<Rank, Integer> getLottoGameResult() {
-        lottoGameResult = new LottoGameResult(getWinningTickets());
+        lottoGameResult = new LottoGameResult(getMatchedTickets());
         return lottoGameResult.toMap();
     }
 
     public double getLottoGameYield() {
-        return lottoGameResult.getPriceAmount() / initMoney.getValue();
+        return lottoGameResult.getPriceAmount() / lottoTickets.getCostUsedToBuy();
     }
 }
