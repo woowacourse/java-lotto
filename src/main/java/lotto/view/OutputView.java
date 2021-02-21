@@ -14,10 +14,6 @@ public class OutputView {
 
     private static final String NEW_LINE = System.lineSeparator();
 
-    public void getMessage(String message) {
-        System.out.println(message);
-    }
-
     public void printBuyTicket(int count) {
         System.out.printf("%d개를 구매했습니다." + NEW_LINE, count);
     }
@@ -70,4 +66,9 @@ public class OutputView {
     private void printEarningRate(double rate) {
         System.out.printf("총 수익률은 %.2f입니다.", rate);
     }
+
+    public void printMessage(String message) {
+        System.out.println(message);
+    }
+
 }
