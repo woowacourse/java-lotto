@@ -20,6 +20,10 @@ public final class LottoTicket extends Ticket {
                 .forEach(i -> TOTAL_NUMBERS.add(i));
     }
 
+    public LottoTicket() {
+        this(Collections.emptyList());
+    }
+
     public LottoTicket(List<Integer> selectedNumbers) {
         List<Integer> numbers = generateNumbers(selectedNumbers);
         validate(numbers);
