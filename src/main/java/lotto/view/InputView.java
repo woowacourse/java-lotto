@@ -59,7 +59,6 @@ public class InputView {
         String[] lottoNumberGroup = lottoNumbers.split(DELIMITER);
         return Arrays.stream(lottoNumberGroup)
                      .map(number -> Integer.parseInt(number.trim()))
-                     .map(number -> LottoNumber.from(number).getLottoNum())
                      .collect(Collectors.toList());
     }
 
