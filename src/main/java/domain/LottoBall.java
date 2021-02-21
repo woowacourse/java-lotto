@@ -26,7 +26,7 @@ public class LottoBall {
 
     private static void validateLottoBall(final int number) {
         if (number < MIN_NUMBER || number > MAX_NUMBER) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(MIN_NUMBER + "~" + MAX_NUMBER + " 사이의 번호만 허용합니다.");
         }
     }
 }

@@ -23,7 +23,8 @@ public class LottoBallTest {
     @ValueSource(ints = {-10, -5, 50, 55})
     void LottoBallParameterTest(int number) {
         assertThatThrownBy(() -> LottoBall.valueOf(number))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("1~45 사이의 번호만 허용합니다.");
     }
 
     @DisplayName("LottoBall 싱글톤 변환 테스트")
