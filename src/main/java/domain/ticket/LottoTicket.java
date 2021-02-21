@@ -44,10 +44,6 @@ public final class LottoTicket extends Ticket {
         return makeFullNumbers(selectedNumbers);
     }
 
-    private boolean hasDuplication(final List<Integer> selectedNumbers) {
-        return selectedNumbers.size() != new HashSet<>(selectedNumbers).size();
-    }
-
     private List<Integer> makeFullNumbers(final List<Integer> selectedNumbers) {
         final List<Integer> numbers = new ArrayList<>(selectedNumbers);
         addRandomNumbers(numbers);

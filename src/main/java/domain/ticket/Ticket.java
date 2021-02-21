@@ -21,20 +21,24 @@ public abstract class Ticket {
         validateDuplicateNumbers(numbers);
     }
 
-    protected void validateDuplicateNumbers(final List<Integer> numbers) {
-        if (numbers.size() != new HashSet<>(numbers).size()) {
+    private void validateDuplicateNumbers(final List<Integer> numbers) {
+        if (hasDuplication(numbers)) {
             throw new IllegalArgumentException("중복 숫자가 존재합니다.");
         }
     }
 
-    protected void validateIncorrectSize(final List<Integer> numbers) {
+    protected boolean hasDuplication(final List<Integer> numbers) {
+        return numbers.size() != new HashSet<>(numbers).size();
+    }
+
+    private void validateIncorrectSize(final List<Integer> numbers) {
         if (numbers.size() != LOTTO_TICKET_SIZE) {
             throw new IllegalArgumentException(
                     String.format("로또 숫자의 개수가 %d이 아닙니다: %d", LOTTO_TICKET_SIZE, numbers.size()));
         }
     }
 
-    protected abstract List<Integer> generateNumbers(List<Integer> selectedNumbers);
+    protected abstract List<Integer> generateNumbers(List<Integer> numbers);
 
     @Override
     public boolean equals(final Object o) {
