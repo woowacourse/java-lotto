@@ -1,31 +1,32 @@
 package lottogame.domain.number;
 
 import java.util.Objects;
+import lottogame.utils.RandomUtils;
 
 public class LottoNumber {
 
-    private static final int START_NUMBER = 1;
-    private static final int FINISH_NUMBER = 45;
+    private static final int START_LOTTO_NUMBER = 1;
+    private static final int FINISH_LOTTO_NUMBER = 45;
 
-    private final int value;
+    private final int number;
 
-    public LottoNumber(final String value) {
-        this(Integer.parseInt(value));
+    public LottoNumber() {
+        this(RandomUtils.nextPositiveInt(START_LOTTO_NUMBER, FINISH_LOTTO_NUMBER));
     }
 
     public LottoNumber(final int number) {
-        this.value = number;
-        validateNumberRange(this.value);
+        this.number = number;
+        validateNumberRange(this.number);
     }
 
     private void validateNumberRange(final int value) {
-        if (value < START_NUMBER || FINISH_NUMBER < value) {
-            throw new IllegalArgumentException("로또 숫자 범위를 벗어났습니다.");
+        if (value < START_LOTTO_NUMBER || FINISH_LOTTO_NUMBER < value) {
+            throw new IllegalArgumentException("유효한 로또 번호 범위를 벗어났습니다.");
         }
     }
 
-    public int getValue() {
-        return value;
+    public int getNumber() {
+        return number;
     }
 
     @Override
@@ -37,11 +38,11 @@ public class LottoNumber {
             return false;
         }
         LottoNumber lottoNumber = (LottoNumber) o;
-        return value == lottoNumber.value;
+        return number == lottoNumber.number;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value);
+        return Objects.hash(number);
     }
 }
