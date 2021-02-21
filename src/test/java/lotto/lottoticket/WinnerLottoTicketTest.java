@@ -12,7 +12,7 @@ import static lotto.lottoticket.TicketValidation.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
-public class WinnerTicketTest {
+public class WinnerLottoTicketTest {
     @Test
     @DisplayName("당첨 번호 생성 확인")
     void winnerTicketCreate() {
@@ -66,7 +66,7 @@ public class WinnerTicketTest {
     void checkResult() {
         WinnerTicket winnerTicket = new WinnerTicket("1,2,3,4,5,6");
         NumbersGenerator numbersGenerator = () -> Arrays.asList(1, 2, 3, 4, 5, 6);
-        Ticket ticket = new Ticket(numbersGenerator);
-        assertThat(winnerTicket.findMatchCount(ticket)).isEqualTo(6);
+        LottoTicket lottoTicket = new LottoTicket(numbersGenerator);
+        assertThat(winnerTicket.findMatchCount(lottoTicket)).isEqualTo(6);
     }
 }

@@ -1,8 +1,8 @@
 package lotto.view;
 
 import lotto.lottogame.LottoCount;
-import lotto.lottoticket.Ticket;
-import lotto.lottoticket.Tickets;
+import lotto.lottoticket.LottoTicket;
+import lotto.lottoticket.LottoTickets;
 import lotto.ranking.Ranking;
 import lotto.ranking.Statistics;
 
@@ -34,9 +34,9 @@ public class OutputView {
         System.out.println(lottoCount.getLottoCount() + COMPLETE_PURCHASE_MESSAGE);
     }
 
-    public static void showTickets(Tickets tickets) {
-        for (Ticket ticket : tickets.getTickets()) {
-            System.out.println(ticket.getTicket());
+    public static void showTickets(LottoTickets lottoTickets) {
+        for (LottoTicket lottoTicket : lottoTickets.getTickets()) {
+            System.out.println(lottoTicket.getTicket());
         }
     }
 

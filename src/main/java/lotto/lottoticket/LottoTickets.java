@@ -7,28 +7,28 @@ import lotto.ranking.Ranking;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tickets {
-    private final List<Ticket> tickets;
+public class LottoTickets {
+    private final List<LottoTicket> lottoTickets;
 
-    public Tickets(LottoCount lottoCount, NumbersGenerator numbersGenerator) {
-        this.tickets = new ArrayList<>();
+    public LottoTickets(LottoCount lottoCount, NumbersGenerator numbersGenerator) {
+        this.lottoTickets = new ArrayList<>();
         while (lottoCount.isGreaterThanZero()) {
             lottoCount = lottoCount.decreaseOne();
-            tickets.add(new Ticket(numbersGenerator));
+            lottoTickets.add(new LottoTicket(numbersGenerator));
         }
     }
 
     public List<Ranking> makeResult(WinnerTicket winnerTicket, BonusBall bonusBall) {
         List<Ranking> result = new ArrayList<>();
-        for (Ticket ticket : tickets) {
-            int matchCount = winnerTicket.findMatchCount(ticket);
-            boolean bonus = ticket.containsBonusBall(bonusBall);
+        for (LottoTicket lottoTicket : lottoTickets) {
+            int matchCount = winnerTicket.findMatchCount(lottoTicket);
+            boolean bonus = lottoTicket.containsBonusBall(bonusBall);
             result.add(Ranking.makePrice(matchCount, bonus));
         }
         return result;
     }
 
-    public List<Ticket> getTickets() {
-        return this.tickets;
+    public List<LottoTicket> getTickets() {
+        return this.lottoTickets;
     }
 }

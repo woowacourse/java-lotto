@@ -37,10 +37,10 @@ public class WinnerTicket {
         return this.winnerTicket.contains(number);
     }
 
-    public int findMatchCount(Ticket ticket) {
+    public int findMatchCount(LottoTicket lottoTicket) {
         int matchCount = 0;
         for (Integer number : winnerTicket) {
-            matchCount += ticket.countWithContaining(number);
+            matchCount += lottoTicket.countWithContaining(number);
         }
         return matchCount;
     }

@@ -11,13 +11,13 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class TicketTest {
+public class LottoTicketTest {
     @Test
     @DisplayName("로또 티켓 생성")
     void ticketCreate() {
         NumbersGenerator numbersGenerator = () -> Arrays.asList(1, 2, 3, 4, 5, 6);
-        Ticket ticket = new Ticket(numbersGenerator);
-        assertThat(ticket).isEqualTo(new Ticket(numbersGenerator));
+        LottoTicket lottoTicket = new LottoTicket(numbersGenerator);
+        assertThat(lottoTicket).isEqualTo(new LottoTicket(numbersGenerator));
     }
 
     @Test
@@ -25,7 +25,7 @@ public class TicketTest {
     void checkNumberInRange() {
         NumbersGenerator numbersGenerator = () -> Arrays.asList(1, 46, 2, 3, 4, 5);
         assertThatThrownBy(() ->
-                new Ticket(numbersGenerator)
+                new LottoTicket(numbersGenerator)
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ERROR_MESSAGE_INVALID_RANGE);
     }
@@ -35,7 +35,7 @@ public class TicketTest {
     void checkDuplicatedNumber() {
         NumbersGenerator numbersGenerator = () -> Arrays.asList(1, 1, 2, 3, 4, 5);
         assertThatThrownBy(() ->
-                new Ticket(numbersGenerator)
+                new LottoTicket(numbersGenerator)
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ERROR_MESSAGE_DUPLICATED);
     }
@@ -45,7 +45,7 @@ public class TicketTest {
     void checkSizeOfNumbers() {
         NumbersGenerator numbersGenerator = () -> Arrays.asList(1, 2, 3, 4, 5);
         assertThatThrownBy(() ->
-                new Ticket(numbersGenerator)
+                new LottoTicket(numbersGenerator)
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ERROR_MESSAGE_INVALID_SIZE);
     }
@@ -55,7 +55,7 @@ public class TicketTest {
     void checkContainBonusBall() {
         BonusBall bonusBall = new BonusBall("6", new WinnerTicket(("1, 2, 3, 4, 5, 8")));
         NumbersGenerator numbersGenerator = () -> Arrays.asList(1, 2, 3, 4, 5, 6);
-        Ticket ticket = new Ticket(numbersGenerator);
-        assertTrue(ticket.containsBonusBall(bonusBall));
+        LottoTicket lottoTicket = new LottoTicket(numbersGenerator);
+        assertTrue(lottoTicket.containsBonusBall(bonusBall));
     }
 }

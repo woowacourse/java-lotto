@@ -8,10 +8,10 @@ import java.util.Objects;
 import static lotto.lottogame.LottoCount.ONE_COUNT;
 import static lotto.lottogame.LottoCount.ZERO;
 
-public class Ticket {
+public class LottoTicket {
     private final List<Integer> numbers;
 
-    public Ticket(NumbersGenerator numbersGenerator) {
+    public LottoTicket(NumbersGenerator numbersGenerator) {
         this.numbers = validate(numbersGenerator.generate());
     }
 
@@ -44,8 +44,8 @@ public class Ticket {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Ticket ticket = (Ticket) o;
-        return Objects.equals(numbers, ticket.numbers);
+        LottoTicket lottoTicket = (LottoTicket) o;
+        return Objects.equals(numbers, lottoTicket.numbers);
     }
 
     @Override
