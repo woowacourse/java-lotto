@@ -35,7 +35,7 @@ public class AutoLottoTickets {
     private List<Prize> calculatePrizes(final WinningNumbers winningNumbers) {
         return this.lottoTickets
                 .stream()
-                .map(ticket -> Prize.of(winningNumbers, LottoTicket.class.cast(this)))
+                .map(ticket -> Prize.of(winningNumbers, LottoTicket.class.cast(ticket)))
                 .collect(Collectors.toList());
     }
 
