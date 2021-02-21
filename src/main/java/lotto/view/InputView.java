@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.Money;
 
@@ -22,18 +23,18 @@ public class InputView {
         }
     }
 
-    public static List<LottoNumber> askLastWinningLottoNumber() {
+    public static Lotto askLastWinningLotto() {
         OutputView.printMessage("지난 주 당첨 번호를 입력해 주세요.");
         String input = scanner.nextLine();
         try {
-            return makeWinningLottoNumbers(input);
+            return new Lotto(createWinningLottoNumbers(input));
         } catch (Exception e) {
             OutputView.printError(e);
-            return askLastWinningLottoNumber();
+            return askLastWinningLotto();
         }
     }
 
-    private static List<LottoNumber> makeWinningLottoNumbers(String input) {
+    private static List<LottoNumber> createWinningLottoNumbers(String input) {
         List<String> splitNumbers = Arrays.asList(input.split(","));
         return splitNumbers.stream()
                 .map(LottoNumber::new)
