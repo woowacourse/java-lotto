@@ -7,7 +7,6 @@ import lotto.domain.ticket.LottoTickets;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class OutputView {

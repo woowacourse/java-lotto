@@ -2,6 +2,7 @@ package lotto.domain.number;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
@@ -9,11 +10,24 @@ public class LottoNumbers {
 
     public LottoNumbers(List<Integer> lottoNumbers){
         this.lottoNumbers = lottoNumbers.stream()
-                .map(LottoNumber::createLottoNumber)
+                .map(LottoNumberFactory::of)
                 .collect(Collectors.toList());
     }
 
     public List<LottoNumber> list() {
         return Collections.unmodifiableList(lottoNumbers);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof LottoNumbers)) return false;
+        LottoNumbers that = (LottoNumbers) o;
+        return Objects.equals(lottoNumbers, that.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 }

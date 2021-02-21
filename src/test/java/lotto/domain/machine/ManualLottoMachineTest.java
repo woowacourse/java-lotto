@@ -40,7 +40,7 @@ class ManualLottoMachineTest {
         LottoTickets lottoTickets = manualLottoMachine.createTicketsByMoney(expectedSize, lottoNumbersBundle);
 
         assertThat(lottoTickets.size()).isEqualTo(expectedSize);
-        assertThat(lottoTickets.list().get(0)).isEqualTo(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        assertThat(lottoTickets.list().get(0)).isEqualTo(LottoTicket.createLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
 
     @DisplayName("수동 로또 개수 예외처리 확인")

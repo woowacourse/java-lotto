@@ -5,6 +5,7 @@ import lotto.domain.number.LottoNumbers;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 public class LottoTicket {
@@ -15,29 +16,50 @@ public class LottoTicket {
 
     private final LottoNumbers lottoNumbers;
 
-    public LottoTicket(List<Integer> numbers) {
-        validateLottoNumberCount(numbers);
-        validateDuplicatedLottoNumbers(numbers);
+    private LottoTicket(LottoNumbers lottoNumbers){
+        validateLottoNumberCount(lottoNumbers);
+        validateDuplicatedLottoNumbers(lottoNumbers);
 
-        this.lottoNumbers = new LottoNumbers(numbers);
+        this.lottoNumbers = lottoNumbers;
     }
 
-    private void validateLottoNumberCount(List<Integer> numbers) {
-        if (numbers.size() != SIZE_OF_LOTTO_NUMBERS) {
+    public static LottoTicket createLottoTicket(LottoNumbers lottoNumbers){
+        return new LottoTicket(lottoNumbers);
+    }
+
+    public static LottoTicket createLottoTicket(List<Integer> numbers){
+        return new LottoTicket(new LottoNumbers(numbers));
+    }
+
+    private void validateLottoNumberCount(LottoNumbers lottoNumbers) {
+        if (lottoNumbers.list().size() != SIZE_OF_LOTTO_NUMBERS) {
             throw new IllegalArgumentException(
-                    String.format(NUMBER_SIZE_ERROR_MSG_FORMAT, SIZE_OF_LOTTO_NUMBERS, numbers.size())
+                    String.format(NUMBER_SIZE_ERROR_MSG_FORMAT, SIZE_OF_LOTTO_NUMBERS, lottoNumbers.list().size())
             );
         }
     }
 
-    private void validateDuplicatedLottoNumbers(List<Integer> numbers) {
-        Set<Integer> duplicateCheck = new HashSet<>(numbers);
-        if (numbers.size() != duplicateCheck.size()) {
+    private void validateDuplicatedLottoNumbers(LottoNumbers lottoNumbers) {
+        Set<LottoNumber> duplicateCheck = new HashSet<>(lottoNumbers.list());
+        if (lottoNumbers.list().size() != duplicateCheck.size()) {
             throw new IllegalArgumentException(DUPLICATE_ERROR_MSG_FORMAT);
         }
     }
 
     public List<LottoNumber> list() {
         return lottoNumbers.list();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof LottoTicket)) return false;
+        LottoTicket that = (LottoTicket) o;
+        return Objects.equals(lottoNumbers, that.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 }

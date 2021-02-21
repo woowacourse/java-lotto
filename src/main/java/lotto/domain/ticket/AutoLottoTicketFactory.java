@@ -8,11 +8,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class AutoLottoTicketFactoryAdapter {
+public class AutoLottoTicketFactory {
     public static final int FROM_INDEX = 0;
     public static final int TO_INDEX = 6;
-
-    private LottoTicketFactory manualLottoTicketFactory = new LottoTicketFactory();
 
     private static final List<Integer> lottoNumbers = IntStream
             .rangeClosed(LottoNumber.MIN_RANGE, LottoNumber.MAX_RANGE)
@@ -20,7 +18,7 @@ public class AutoLottoTicketFactoryAdapter {
             .collect(Collectors.toList());
 
     public LottoTicket createLottoTicket() {
-        return manualLottoTicketFactory.createLottoTicket(shuffleNumbers());
+        return LottoTicket.createLottoTicket(shuffleNumbers());
     }
 
     private List<Integer> shuffleNumbers() {

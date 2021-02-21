@@ -45,7 +45,7 @@ class LottoControllerTest {
         int bonusNumber = 7;
         WinningLottoTicket winningLottoTicket = lottoController.createWinningLotto(winningNumbers, bonusNumber);
 
-        LottoTicket expectedFirstPrize = new LottoTicket(winningNumbers);
+        LottoTicket expectedFirstPrize = LottoTicket.createLottoTicket(winningNumbers);
         assertThat(winningLottoTicket.compareNumbers(expectedFirstPrize)).isEqualTo(Prize.FIRST);
     }
 
@@ -56,7 +56,7 @@ class LottoControllerTest {
         int bonusNumber = 7;
         WinningLottoTicket winningLottoTicket = lottoController.createWinningLotto(winningNumbers, bonusNumber);
 
-        LottoTicket expectedFirstPrize = new LottoTicket(winningNumbers);
+        LottoTicket expectedFirstPrize = LottoTicket.createLottoTicket(winningNumbers);
         LottoTickets lottoTickets = new LottoTickets(Arrays.asList(expectedFirstPrize));
         LottoResult lottoResult = lottoController.calculateLottoResult(lottoTickets, winningLottoTicket);
 

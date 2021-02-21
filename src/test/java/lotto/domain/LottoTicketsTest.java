@@ -13,9 +13,9 @@ class LottoTicketsTest {
     @DisplayName("size메소드 동작 확인")
     @Test
     void size메소드_동작_확인() {
-        LottoTicket ticket1 = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoTicket ticket2 = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoTicket ticket3 = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoTicket ticket1 = LottoTicket.createLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoTicket ticket2 = LottoTicket.createLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoTicket ticket3 = LottoTicket.createLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
         List<LottoTicket> ticketBundle = Arrays.asList(ticket1, ticket2, ticket3);
 
         LottoTickets tickets = new LottoTickets(ticketBundle);

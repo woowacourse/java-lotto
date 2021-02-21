@@ -31,7 +31,7 @@ class WinningLottoTicketTest {
     void 당첨_번호_비교_결과_테스트(int first, int second, int third, int fourth, int fifth, int sixth,
                          Prize expectedResult) {
         List<Integer> lottoNumbers = Arrays.asList(first, second, third, fourth, fifth, sixth);
-        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+        LottoTicket lottoTicket = LottoTicket.createLottoTicket(lottoNumbers);
 
         assertThat(winningTicket.compareNumbers(lottoTicket))
                 .isEqualTo(expectedResult);

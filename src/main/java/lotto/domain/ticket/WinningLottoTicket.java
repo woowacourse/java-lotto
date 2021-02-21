@@ -12,7 +12,7 @@ public class WinningLottoTicket {
     private final LottoTicket winningLottoTicket;
 
     public WinningLottoTicket(List<Integer> winningNumber, int bonusNumber) {
-        winningLottoTicket = new LottoTicket(winningNumber);
+        winningLottoTicket = LottoTicket.createLottoTicket(winningNumber);
         validateDuplicatedBonusNumber(bonusNumber);
         this.bonusNumber = LottoNumberFactory.of(bonusNumber);
     }
