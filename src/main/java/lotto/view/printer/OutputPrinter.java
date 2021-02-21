@@ -2,8 +2,10 @@ package lotto.view.printer;
 
 import static lotto.view.InputView.LOTTO_NUMBERS_DELIMITER;
 
+import java.math.BigDecimal;
 import java.util.stream.Collectors;
 import lotto.domain.LottoTicket;
+import lotto.domain.ticketgenerator.AllPurchasedLottoTickets;
 import lotto.type.LottoMatchType;
 
 public class OutputPrinter {
@@ -12,8 +14,12 @@ public class OutputPrinter {
     private OutputPrinter() {
     }
 
-    public static void printCompletedPurchaseGuideMessage(int numberOfTicket) {
-        System.out.printf("%d개를 구매했습니다." + NEW_LINE, numberOfTicket);
+    public static void printMessageOfCompletedPurchase(
+        AllPurchasedLottoTickets allPurchasedLottoTickets) {
+
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다." + NEW_LINE,
+            allPurchasedLottoTickets.getNumberOfManuallyPurchasedLottoTickets(),
+            allPurchasedLottoTickets.getNumberOfAutomaticallyPurchasedLottoTickets());
     }
 
     public static void printLottoTicketNumbers(LottoTicket lottoTicket) {
@@ -35,7 +41,7 @@ public class OutputPrinter {
         System.out.printf(lottoMatchType.getMatchCountMessage() + NEW_LINE, countOfMatchedNumbers);
     }
 
-    public static void printProfitMessage(double profit) {
+    public static void printProfitMessage(BigDecimal profit) {
         System.out.printf("총 수익률은 %.2f입니다." + NEW_LINE, profit);
     }
 }

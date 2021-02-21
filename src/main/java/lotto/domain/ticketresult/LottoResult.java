@@ -1,5 +1,7 @@
 package lotto.domain.ticketresult;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +17,7 @@ public class LottoResult {
     private final WinningTicketAndBonusNumber winningLottoNumbers;
     private final Map<LottoMatchType, Integer> resultCounts;
     private final PurchasePrice purchasePrice;
-    private int totalLottoWinningMoney;
+    private long totalLottoWinningMoney;
 
     public LottoResult(WinningTicketAndBonusNumber winningLottoNumbers, UserPurchase userPurchase) {
         this.winningLottoNumbers = winningLottoNumbers;
@@ -32,7 +34,8 @@ public class LottoResult {
     }
 
     public void applyOneTicketResult(LottoTicket lottoTicket) {
-        List<LottoNumber> matchedLottoNumbers = winningLottoNumbers.getMatchedLottoNumbers(lottoTicket);
+        List<LottoNumber> matchedLottoNumbers = winningLottoNumbers
+            .getMatchedLottoNumbers(lottoTicket);
         if (matchedLottoNumbers.size() < MIN_MATCH_NUMBER_COUNT_TO_GET_PRIZE) {
             return;
         }
@@ -49,7 +52,7 @@ public class LottoResult {
     public void addAllWinningMoney() {
         for (LottoMatchType lottoMatchType : resultCounts.keySet()) {
             int matchedCount = resultCounts.get(lottoMatchType);
-            totalLottoWinningMoney += lottoMatchType.getPrizeMoney() * matchedCount;
+            totalLottoWinningMoney += (long) lottoMatchType.getPrizeMoney() * (long) matchedCount;
         }
     }
 
@@ -57,7 +60,10 @@ public class LottoResult {
         return resultCounts.get(lottoMatchType);
     }
 
-    public double getProfit() {
-        return (double) totalLottoWinningMoney / (double) purchasePrice.getPurchasePrice();
+    public BigDecimal getProfit() {
+        return new BigDecimal(String.valueOf(totalLottoWinningMoney))
+            .divide(new BigDecimal(String.valueOf(purchasePrice.getPurchasePrice())),
+                MathContext.DECIMAL32)
+            .setScale(2, BigDecimal.ROUND_HALF_UP);
     }
 }

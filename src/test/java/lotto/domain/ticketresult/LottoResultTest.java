@@ -8,6 +8,8 @@ import static lotto.type.LottoMatchType.SIX_MATCH;
 import static lotto.type.LottoMatchType.THREE_MATCH;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.Arrays;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
@@ -75,7 +77,11 @@ public class LottoResultTest {
             .isEqualTo(1);
 
         assertThat(lottoResult.getProfit())
-            .isEqualTo((double) SIX_MATCH.getPrizeMoney() / (double) PURCHASE_PRICE);
+            .isEqualTo(
+                new BigDecimal(String.valueOf(SIX_MATCH.getPrizeMoney()))
+                    .divide(new BigDecimal(String.valueOf(PURCHASE_PRICE)), MathContext.DECIMAL32)
+                .setScale(2, BigDecimal.ROUND_HALF_UP)
+            );
     }
 
 
@@ -112,7 +118,11 @@ public class LottoResultTest {
             .isEqualTo(0);
 
         assertThat(lottoResult.getProfit())
-            .isEqualTo((double) FIVE_AND_BONUS_MATCH.getPrizeMoney() / (double) PURCHASE_PRICE);
+            .isEqualTo(
+                new BigDecimal(String.valueOf(FIVE_AND_BONUS_MATCH.getPrizeMoney()))
+                    .divide(new BigDecimal(String.valueOf(PURCHASE_PRICE)), MathContext.DECIMAL32)
+                    .setScale(2, BigDecimal.ROUND_HALF_UP)
+            );
     }
 
 
@@ -149,7 +159,11 @@ public class LottoResultTest {
             .isEqualTo(0);
 
         assertThat(lottoResult.getProfit())
-            .isEqualTo((double) FIVE_MATCH.getPrizeMoney() / (double) PURCHASE_PRICE);
+            .isEqualTo(
+                new BigDecimal(String.valueOf(FIVE_MATCH.getPrizeMoney()))
+                    .divide(new BigDecimal(String.valueOf(PURCHASE_PRICE)), MathContext.DECIMAL32)
+                    .setScale(2, BigDecimal.ROUND_HALF_UP)
+            );
     }
 
 
@@ -186,7 +200,11 @@ public class LottoResultTest {
             .isEqualTo(0);
 
         assertThat(lottoResult.getProfit())
-            .isEqualTo((double) FOUR_MATCH.getPrizeMoney() / (double) PURCHASE_PRICE);
+            .isEqualTo(
+                new BigDecimal(String.valueOf(FOUR_MATCH.getPrizeMoney()))
+                    .divide(new BigDecimal(String.valueOf(PURCHASE_PRICE)), MathContext.DECIMAL32)
+                    .setScale(2, BigDecimal.ROUND_HALF_UP)
+            );
     }
 
 
@@ -223,7 +241,11 @@ public class LottoResultTest {
             .isEqualTo(0);
 
         assertThat(lottoResult.getProfit())
-            .isEqualTo((double) THREE_MATCH.getPrizeMoney() / (double) PURCHASE_PRICE);
+            .isEqualTo(
+                new BigDecimal(String.valueOf(THREE_MATCH.getPrizeMoney()))
+                    .divide(new BigDecimal(String.valueOf(PURCHASE_PRICE)), MathContext.DECIMAL32)
+                    .setScale(2, BigDecimal.ROUND_HALF_UP)
+            );
     }
 
     @DisplayName("여러 개 당첨 - 2등, 4등")
@@ -269,9 +291,12 @@ public class LottoResultTest {
 
         assertThat(lottoResult.getProfit())
             .isEqualTo(
-                ((double) FOUR_MATCH.getPrizeMoney() + (double) FIVE_AND_BONUS_MATCH
-                    .getPrizeMoney())
-                    / (double) PURCHASE_PRICE
+                new BigDecimal(String.valueOf(
+                    FOUR_MATCH.getPrizeMoney()
+                    + FIVE_AND_BONUS_MATCH.getPrizeMoney())
+                )
+                    .divide(new BigDecimal(String.valueOf(PURCHASE_PRICE)), MathContext.DECIMAL32)
+                    .setScale(2, BigDecimal.ROUND_HALF_UP)
             );
     }
 }

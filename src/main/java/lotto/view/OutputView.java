@@ -14,7 +14,7 @@ public class OutputView {
 
     public static void printAllLottoTickets(AllPurchasedLottoTickets allPurchasedLottoTickets) {
         List<LottoTicket> allLottoTickets = allPurchasedLottoTickets.getAllTickets();
-        OutputPrinter.printCompletedPurchaseGuideMessage(allLottoTickets.size());
+        OutputPrinter.printMessageOfCompletedPurchase(allPurchasedLottoTickets);
         for (LottoTicket lottoTicket : allLottoTickets) {
             OutputPrinter.printLottoTicketNumbers(lottoTicket);
         }
