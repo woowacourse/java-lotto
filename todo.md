@@ -1,5 +1,4 @@
 # todo
-LottoGenerator의 purchaseTickets() purchasedLottoTickets -> lottoTickets로 변경
 
 # done
 - LottoTicket 에서 allNumbers, shuffle 분리. 일급컬렉션으로.
@@ -21,3 +20,4 @@ LottoGenerator의 purchaseTickets() purchasedLottoTickets -> lottoTickets로 변
 - 클래스다이어그램 의존성 확인.
 - 로또티켓 정렬되는지 테스트.
 - 로또 결과 별도 객체로 포장.
+- LottoGenerator의 purchaseTickets() purchasedLottoTickets -> lottoTickets로 변경.
