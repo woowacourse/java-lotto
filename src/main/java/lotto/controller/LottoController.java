@@ -15,18 +15,17 @@ public class LottoController {
 
     private static final String REGEX = ", ";
 
-    private final LottoTickets lottoTickets;
-    private final WinningLotto winningLotto;
-    private final Payment payment;
+    private LottoTickets lottoTickets;
+    private WinningLotto winningLotto;
+    private Payment payment;
 
-    public LottoController(final String value) {
-        payment = new Payment(ParseUtils.parseInt(value));
+    public LottoController() {}
+
+    public void run() {
+        payment = new Payment(ParseUtils.parseInt(InputView.getInputMoney()));
         lottoTickets = new LottoTickets(payment.count());
         showLottoTickets();
         winningLotto = createWinningLotto();
-    }
-
-    public void run() {
         OutputView.printResultMessage(lottoTickets.getResult(winningLotto), payment.getPayment());
     }
 
