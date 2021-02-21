@@ -20,10 +20,6 @@ public class LottoResult {
                 .forEach(lottoRank -> statistics.computeIfAbsent(lottoRank, key -> ZERO));
     }
 
-    public long getTicketCountsByRank(LottoRank lottoRank) {
-        return statistics.computeIfAbsent(lottoRank, key -> ZERO);
-    }
-
     public double calculateYield(int purchasingPrice) {
         return ((double) calculatePrizeMoneyTotal()) / purchasingPrice;
     }
