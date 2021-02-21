@@ -1,6 +1,5 @@
 package domain.ticket;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,7 +22,7 @@ class WinningTicketTest {
     public void setUp() {
         winningNumbers = Arrays.asList(1, 3, 5, 7, 9, 11);
         duplicateNumber = Arrays.asList(1, 1, 2, 3, 4, 5);
-        moreNumbers = Arrays.asList(1, 2, 3, 4 ,5 , 6, 7);
+        moreNumbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
     }
 
     @DisplayName("당첨 티켓 객체 생성 성공")
