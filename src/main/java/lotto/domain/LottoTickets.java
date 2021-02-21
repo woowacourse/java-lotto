@@ -20,7 +20,7 @@ public class LottoTickets {
         for (LottoTicket lottoTicket : this.lottoTickets) {
             winningTickets.add(Prize.getPrizeType(
                     lottoTicket.getMatchingCount(winningLotto.getWinningTicket().getLottoTicket()),
-                    lottoTicket.isMatchingBonusNumber(winningLotto.getBonusNumber())));
+                    lottoTicket.hasLottoNumberInTicket(winningLotto.getBonusNumber())));
         }
         return winningTickets;
     }
