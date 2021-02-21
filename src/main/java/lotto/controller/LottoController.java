@@ -50,6 +50,6 @@ public class LottoController {
                 .map(winningLottoTicket::compareNumbers)
                 .collect(collectingAndThen(
                         groupingBy(Function.identity(), counting()),
-                        lottoResultMap -> new LottoResult(lottoResultMap, lottoMachine.getLottoPrice())));
+                        lottoResultMap -> new LottoResult(lottoResultMap, lottoMachine.getLottoPrice().multiply(lottoTickets.size()))));
     }
 }

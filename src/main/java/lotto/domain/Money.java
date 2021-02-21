@@ -10,4 +10,8 @@ public class Money {
     public int getMoney() {
         return money;
     }
+
+    public Money multiply(int times){
+        return new Money(money * times);
+    }
 }

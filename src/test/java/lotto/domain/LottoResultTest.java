@@ -24,4 +24,15 @@ class LottoResultTest {
 
         assertThat(lottoResult.calculatePrizeMoney()).isEqualTo(2061765000L);
     }
+
+    @DisplayName("수익률 계산 확인")
+    @Test
+    void 수익률_계산(){
+        Map<Prize, Long> lottoResultMap = new HashMap<>();
+        lottoResultMap.put(Prize.FIFTH, 3L); // 15000
+
+        LottoResult lottoResult = new LottoResult(lottoResultMap, new Money(3000));
+
+        assertThat(lottoResult.calculateProfitPercent()).isEqualTo(500L);
+    }
 }
