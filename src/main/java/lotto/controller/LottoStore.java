@@ -1,6 +1,6 @@
 package lotto.controller;
 
-import java.util.Map;
+import java.util.EnumMap;
 import java.util.Map.Entry;
 import java.util.Scanner;
 import lotto.domain.LottoAnnouncement;
@@ -32,7 +32,7 @@ public class LottoStore {
     public void process() {
         Lottos lottos = buyLotto();
         LottoAnnouncement lottoAnnouncement = announcementInputView.inputAnnouncement();
-        Map<LottoRank, Integer> lottoResultStatistics = lottos.getStatistics(lottoAnnouncement);
+        EnumMap<LottoRank, Integer> lottoResultStatistics = lottos.getStatistics(lottoAnnouncement);
         printLottoResult(lottoResultStatistics, lottos);
     }
 
@@ -44,12 +44,12 @@ public class LottoStore {
         return purchasedLottos;
     }
 
-    public void printLottoResult(Map<LottoRank, Integer> lottoResultStatistics, Lottos lottos) {
+    public void printLottoResult(EnumMap<LottoRank, Integer> lottoResultStatistics, Lottos lottos) {
         double profitRate = calculateProfitRate(lottoResultStatistics, lottos.getSize());
         outputView.printLottoStatistics(lottoResultStatistics, profitRate);
     }
 
-    public double calculateProfitRate(Map<LottoRank, Integer> lottosResult, int lottoPiece) {
+    public double calculateProfitRate(EnumMap<LottoRank, Integer> lottosResult, int lottoPiece) {
         double sum = 0;
         for (Entry<LottoRank, Integer> keyValue : lottosResult.entrySet()) {
             sum += keyValue.getKey().getPrizeMoney() * keyValue.getValue();

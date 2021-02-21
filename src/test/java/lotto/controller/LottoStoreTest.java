@@ -1,8 +1,8 @@
 package lotto.controller;
 
 import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Stream;
 import lotto.controller.generator.LottoManualGenerator;
@@ -55,7 +55,7 @@ public class LottoStoreTest {
         LottoManualGenerator lottoManualGenerator = new LottoManualGenerator(scanner);
         Lottos exampleLottos = new Lottos(lottoManualGenerator, 1);
         LottoAnnouncement lottoAnnouncement = new LottoAnnouncement(WINNING_NUMBERS, BONUS_NUMBER);
-        Map<LottoRank, Integer> exampleLottosResult =
+        EnumMap<LottoRank, Integer> exampleLottosResult =
             exampleLottos.getStatistics(lottoAnnouncement);
         double value = new LottoStore().calculateProfitRate(exampleLottosResult, 1);
         assertThat(value).isEqualTo(profitRate);

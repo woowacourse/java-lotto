@@ -2,9 +2,8 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedHashMap;
+import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
 import lotto.controller.generator.LottoGenerator;
 
 public class Lottos {
@@ -17,8 +16,8 @@ public class Lottos {
         }
     }
 
-    public Map<LottoRank, Integer> getStatistics(LottoAnnouncement lottoAnnouncement) {
-        Map<LottoRank, Integer> getStatistics = setUpStatistics();
+    public EnumMap<LottoRank, Integer> getStatistics(LottoAnnouncement lottoAnnouncement) {
+        EnumMap<LottoRank, Integer> getStatistics = setUpStatistics();
         for (Lotto lotto : lottoBunch) {
             LottoRank targetRank = lotto.getLottoRank(lottoAnnouncement);
             getStatistics.replace(targetRank, getStatistics.get(targetRank) + 1);
@@ -26,8 +25,8 @@ public class Lottos {
         return getStatistics;
     }
 
-    private Map<LottoRank, Integer> setUpStatistics() {
-        Map<LottoRank, Integer> setUpStatistics = new LinkedHashMap<>();
+    private EnumMap<LottoRank, Integer> setUpStatistics() {
+        EnumMap<LottoRank, Integer> setUpStatistics = new EnumMap<>(LottoRank.class);
         for (LottoRank singleLottoRank : LottoRank.values()) {
             setUpStatistics.put(singleLottoRank, 0);
         }
