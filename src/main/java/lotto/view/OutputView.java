@@ -8,6 +8,7 @@ import lotto.domain.rating.Rating;
 import lotto.domain.rating.RatingCounter;
 import lotto.domain.statistics.LottoStatistics;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class OutputView {
@@ -17,13 +18,13 @@ public class OutputView {
         System.out.println(message);
     }
 
-    public static void printBuyLotto(int count) {
+    public static void printBuyTicket(int count) {
         System.out.printf("%d개를 구매했습니다." + NEW_LINE, count);
     }
 
-    public static void printLottoResults(LottoRepository lottoRepository) {
+    public static void printLottoResults(List<Lotto> lottos) {
         StringBuilder buffer = new StringBuilder();
-        for (Lotto lotto : lottoRepository.toList()) {
+        for (Lotto lotto : lottos) {
             appendLottoResult(buffer, lotto);
         }
         buffer.append(NEW_LINE);
