@@ -15,9 +15,9 @@ import java.util.Map;
 
 public class LottoGame {
 
-    private LottoTickets lottoTickets;
     private LottoNumber drawnBonusNumber;
     private LottoNumbers drawnWinningNumbers;
+    private LottoTickets lottoTickets;
     private LottoGameResult lottoGameResult;
     private final LottoTicketMachine lottoTicketMachine = new LottoTicketMachine();
 
@@ -35,7 +35,12 @@ public class LottoGame {
         return lottoTickets;
     }
 
-    private List<LottoTicketResult> getMatchedTickets() {
+    public Map<Rank, Integer> getLottoGameResult() {
+        lottoGameResult = new LottoGameResult(getTicketsResult());
+        return lottoGameResult.toMap();
+    }
+
+    private List<LottoTicketResult> getTicketsResult() {
         LottoWinningMachine lottoWinningMachine = new LottoWinningMachine(drawnWinningNumbers, drawnBonusNumber);
         List<LottoTicketResult> lottoTicketResults = new ArrayList<>();
 
@@ -47,12 +52,7 @@ public class LottoGame {
         return lottoTicketResults;
     }
 
-    public Map<Rank, Integer> getLottoGameResult() {
-        lottoGameResult = new LottoGameResult(getMatchedTickets());
-        return lottoGameResult.toMap();
-    }
-
     public double getLottoGameYield() {
-        return lottoGameResult.getPriceAmount() / lottoTickets.getCostUsedToBuy();
+        return lottoGameResult.getLottoGameYield(lottoTickets.getCostUsedToBuy());
     }
 }

@@ -29,7 +29,11 @@ public class LottoGameResult {
         return Collections.unmodifiableMap(lottoGameResult);
     }
 
-    public double getPriceAmount() {
+    public double getLottoGameYield(final int ticketCount) {
+        return getPriceAmount() / ticketCount;
+    }
+
+    private double getPriceAmount() {
         double priceAmount = 0.0;
         for (Map.Entry<Rank, Integer> rank : lottoGameResult.entrySet()) {
             priceAmount += rank.getKey().getPrice() * rank.getValue();
