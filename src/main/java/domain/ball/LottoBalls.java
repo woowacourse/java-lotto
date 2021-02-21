@@ -43,13 +43,13 @@ public class LottoBalls {
         boolean isUnique = lottoBalls.stream()
                 .allMatch(new HashSet<>()::add);
         if (!isUnique) {
-            throw new IllegalArgumentException("로또 번호에 중복된 값이 있습니다. 다시 입력해주세요.");
+            throw new IllegalArgumentException(String.format("로또 번호에 중복된 값이 있습니다. 다시 입력해주세요. 입력값 %s", lottoBalls.toString()));
         }
     }
 
     private void validateSize(final List<LottoBall> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_BALL_SIZE) {
-            throw new IllegalArgumentException("6개의 로또 번호가 필요합니다.");
+            throw new IllegalArgumentException(String.format("%d개의 로또 번호가 필요합니다.", LOTTO_BALL_SIZE));
         }
     }
 
