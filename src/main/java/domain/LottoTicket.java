@@ -10,7 +10,7 @@ public class LottoTicket {
     private static final String DUPLICATE_NUMBER_ERROR = "중복 숫자가 존재합니다.";
     private static final String INCORRECT_LOTTO_NUMBER_SIZE_ERROR = "로또 숫자의 개수가 6이 아닙니다.";
 
-    private static final int LOTTO_TICKET_SIZE = 6;
+    public static final int LOTTO_TICKET_SIZE = 6;
 
     private final List<LottoNumber> lottoNumbers;
 
@@ -47,13 +47,9 @@ public class LottoTicket {
         }
     }
 
-    public static int getLottoTicketSize() {
-        return LOTTO_TICKET_SIZE;
-    }
-
     public Ranking checkRanking(final LottoTicket winningTicket, LottoNumber bonusNumber) {
         int matching = (int) lottoNumbers.stream()
-                .filter(number -> winningTicket.contains(number))
+                .filter(winningTicket::contains)
                 .count();
 
         boolean bonusMatching = contains(bonusNumber);
