@@ -1,11 +1,8 @@
 package lotto.lottogame;
 
 import lotto.lottoticket.BonusBall;
-import lotto.lottoticket.LottoTickets;
 import lotto.lottoticket.WinnerTicket;
-import lotto.lottoticket.ticketnumber.RandomNumbersGenerator;
 import lotto.money.Money;
-import lotto.money.PrizeMoney;
 import lotto.ranking.Statistics;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -13,15 +10,13 @@ import lotto.view.OutputView;
 public class LottoController {
     public void run() {
         Money money = generateMoney();
-        LottoCount lottoCount = generateCount(money);
-        LottoTickets lottoTickets = generateTickets(lottoCount);
-        WinnerTicket winnerTicket = generateWinnerTicket();
-        BonusBall bonusBall = generateBonusBall(winnerTicket);
+        LottoGame lottoGame = new LottoGame(generateCount(money));
+        OutputView.showTickets(lottoGame.createTickets());
 
-        Statistics statistics = new Statistics(lottoTickets.makeResult(winnerTicket, bonusBall));
+        WinnerTicket winnerTicket = generateWinnerTicket();
+        Statistics statistics = lottoGame.createStatistics(winnerTicket, generateBonusBall(winnerTicket));
         OutputView.noticeStatistics(statistics);
-        PrizeMoney prizeMoney = new PrizeMoney(statistics);
-        OutputView.showProfit(prizeMoney.calculateProfit(money));
+        OutputView.showProfit(lottoGame.createResult(statistics, money));
     }
 
     private Money generateMoney() {
@@ -43,12 +38,6 @@ public class LottoController {
             OutputView.printError(e);
             return generateCount(money);
         }
-    }
-
-    private LottoTickets generateTickets(LottoCount lottoCount) {
-        LottoTickets lottoTickets = new LottoTickets(lottoCount, new RandomNumbersGenerator());
-        OutputView.showTickets(lottoTickets);
-        return lottoTickets;
     }
 
     private WinnerTicket generateWinnerTicket() {
