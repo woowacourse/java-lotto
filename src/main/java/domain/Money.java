@@ -3,7 +3,7 @@ package domain;
 import java.util.Objects;
 
 public class Money {
-    private static final int ZERO = 0;
+    public static final Money ZERO = new Money(0);
 
     private final long value;
 
@@ -12,19 +12,14 @@ public class Money {
         this.value = value;
     }
 
-    public double calculateEarningRate(Money used) {
-        double earningRate = this.value / (double) used.value;
-        return (long) (earningRate * 100) / 100.0;
-    }
-
     private void validateMoney(long value) {
-        if (value < ZERO) {
+        if (value < 0) {
             throw new IllegalArgumentException("금액은 0이상이어야 합니다.");
         }
     }
 
     public int divide(long value) {
-        if (value <= ZERO) {
+        if (value <= 0) {
             throw new IllegalArgumentException("0이하의 값으로 나눌 수 없습니다.");
         }
 
@@ -37,6 +32,11 @@ public class Money {
 
     public Money add(Money target) {
         return new Money(value + target.value);
+    }
+
+    public double calculateEarningRate(Money used) {
+        double earningRate = this.value / (double) used.value;
+        return (long) (earningRate * 100) / 100.0;
     }
 
     public long getValue() {

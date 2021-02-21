@@ -12,12 +12,10 @@ public class LottoWinningTable {
     }
 
     public Money getTotalWinningMoney() {
-        Money total = new Money(0);
+        Money total = Money.ZERO;
         for (LottoRank lottoRank : winningTable.keySet()) {
-            Money prize = lottoRank.getPrize();
             long count = winningTable.get(lottoRank);
-
-            total = total.add(prize.multiply(count));
+            total = total.add(lottoRank.getPrize(count));
         }
 
         return total;

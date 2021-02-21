@@ -22,13 +22,13 @@ public enum LottoRank {
         return getMatchRank(winningLotto.findMatchCount(target), winningLotto.isBonusBallMatch(target));
     }
 
-    private static LottoRank getMatchRank(int matchCnt, boolean isBonusMatch) {
-        if (SECOND.matchCount(matchCnt) || THIRD.matchCount(matchCnt)) {
+    private static LottoRank getMatchRank(int matchCount, boolean isBonusMatch) {
+        if (SECOND.isMatch(matchCount) || THIRD.isMatch(matchCount)) {
             return determineSecondOrThird(isBonusMatch);
         }
 
         return Arrays.stream(LottoRank.values())
-                .filter(lottoRank -> lottoRank.matchCount(matchCnt))
+                .filter(lottoRank -> lottoRank.isMatch(matchCount))
                 .findAny()
                 .orElse(MISS);
     }
@@ -45,11 +45,15 @@ public enum LottoRank {
         return correctCount;
     }
 
-    private boolean matchCount(int countOfMatch) {
+    private boolean isMatch(int countOfMatch) {
         return this.correctCount == countOfMatch;
     }
 
     public Money getPrize() {
         return prize;
+    }
+
+    public Money getPrize(long count) {
+        return prize.multiply(count);
     }
 }
