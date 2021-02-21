@@ -29,9 +29,9 @@ public class LottoStatistics {
     }
 
     public List<Integer> getWinCountByRank() {
-        List<Integer> numberOfWinByRank = new ArrayList<>(statistics.values()).subList(RANK_START_INDEX, RANK_END_INDEX);
-        Collections.reverse(numberOfWinByRank);
-        return numberOfWinByRank;
+        List<Integer> winCountByRank = new ArrayList<>(statistics.values()).subList(RANK_START_INDEX, RANK_END_INDEX);
+        Collections.reverse(winCountByRank);
+        return winCountByRank;
     }
 
     public float getProfitRate() {
