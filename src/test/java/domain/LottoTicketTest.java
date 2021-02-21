@@ -33,13 +33,9 @@ class LottoTicketTest {
     @DisplayName("객체 생성 실패 : 숫자가 6개가 아닌 경우")
     @Test
     void valueOf_incorrectSize_exceptionThrown() {
-        final List<Integer> fewerLottoNumbers = getFewerNumbers();
         final List<Integer> moreLottoNumbers = getMoreNumbers();
 
         assertAll(
-                () -> assertThatIllegalArgumentException()
-                        .isThrownBy(() -> LottoTicket.valueOf(fewerLottoNumbers))
-                        .withMessageContaining("개수가 6이 아닙니다."),
                 () -> assertThatIllegalArgumentException()
                         .isThrownBy(() -> LottoTicket.valueOf(moreLottoNumbers))
                         .withMessageContaining("개수가 6이 아닙니다.")
@@ -52,10 +48,6 @@ class LottoTicketTest {
 
     private List<Integer> getDuplicateNumbers() {
         return Arrays.asList(1, 1, 5, 10, 13, 29);
-    }
-
-    private List<Integer> getFewerNumbers() {
-        return Arrays.asList(1, 5, 10, 13, 20);
     }
 
     private List<Integer> getMoreNumbers() {

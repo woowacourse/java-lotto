@@ -38,7 +38,7 @@ public class LottoTicket {
     }
 
     private static void validateIncorrectSize(final Set<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() > LOTTO_TICKET_SIZE) {
+        if (lottoNumbers.size() != LOTTO_TICKET_SIZE) {
             throw new IllegalArgumentException(INCORRECT_LOTTO_NUMBER_SIZE_ERROR);
         }
     }
