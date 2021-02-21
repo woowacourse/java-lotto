@@ -36,15 +36,20 @@ public class InputView {
         if (manualTicketCounts > ZERO) {
             System.out.println(INPUT_MANUAL_TICKET_NUMBERS_MESSAGE);
         }
-        return Stream.generate(() -> SCANNER.nextLine().split(COMMA_DELIMITER, SPLIT_LIMIT_THRESHOLD))
+        return Stream.generate(InputView::nextLineWithSplit)
                 .map(ManualTicketNumbers::from)
                 .limit(manualTicketCounts)
                 .collect(Collectors.toList());
     }
 
+    private static String[] nextLineWithSplit() {
+        return SCANNER.nextLine()
+                .split(COMMA_DELIMITER, SPLIT_LIMIT_THRESHOLD);
+    }
+
     public static List<Integer> inputWinningTicketNumbers() {
         System.out.println(INPUT_WINNING_TICKET_NUMBERS_MESSAGE);
-        return Arrays.stream(SCANNER.nextLine().split(COMMA_DELIMITER, SPLIT_LIMIT_THRESHOLD))
+        return Arrays.stream(nextLineWithSplit())
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
