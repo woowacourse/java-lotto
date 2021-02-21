@@ -64,4 +64,10 @@ public final class LottoTicket extends Ticket {
         return this.lottoNumbers
                 .contains(bonusNumber);
     }
+
+    public List<Integer> toIntegerList() {
+        return lottoNumbers.stream()
+                .map(LottoNumber::getValue)
+                .collect(Collectors.toList());
+    }
 }

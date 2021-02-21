@@ -7,6 +7,7 @@ import domain.WinningStatics;
 import domain.ticket.LottoTicket;
 import domain.ticket.Ticket;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -36,5 +37,9 @@ public class AutoLottoTickets {
                 .stream()
                 .map(ticket -> Prize.of(winningNumbers, LottoTicket.class.cast(this)))
                 .collect(Collectors.toList());
+    }
+
+    public List<Ticket> toList() {
+        return Collections.unmodifiableList(lottoTickets);
     }
 }
