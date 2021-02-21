@@ -1,51 +1,47 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import lotto.exception.LottoException;
 
+import java.util.Arrays;
+
 public enum LottoRank {
-  NONE(0, 0),
-  FIFTH(3, 5_000),
-  FOURTH(4, 50_000),
-  THIRD(5, 1_500_000),
-  SECOND(5, 30_000_000),
-  FIRST(6, 2_000_000_000);
+    NONE(0, 0),
+    FIFTH(3, 5_000),
+    FOURTH(4, 50_000),
+    THIRD(5, 1_500_000),
+    SECOND(5, 30_000_000),
+    FIRST(6, 2_000_000_000);
 
-  private static final int MIN_MATCH = 3;
-  private static final String MESSAGE_FORM = "%d개 일치%s(%d원) - %d개";
+    private static final int MIN_MATCH = 3;
 
-  private final int matchCount;
-  private final int winningMoney;
+    private final int matchCount;
+    private final int winningMoney;
 
-  LottoRank(int matchCount, int winningMoney) {
-    this.matchCount = matchCount;
-    this.winningMoney = winningMoney;
-  }
-
-  public static LottoRank of(int matchCount, boolean bonusMatch) {
-    if (matchCount < MIN_MATCH) {
-      return NONE;
+    LottoRank(int matchCount, int winningMoney) {
+        this.matchCount = matchCount;
+        this.winningMoney = winningMoney;
     }
 
-    if (SECOND.matchCount == matchCount && bonusMatch) {
-      return SECOND;
+    public static LottoRank of(int matchCount, boolean bonusMatch) {
+        if (matchCount < MIN_MATCH) {
+            return NONE;
+        }
+
+        if (SECOND.matchCount == matchCount && bonusMatch) {
+            return SECOND;
+        }
+
+        return Arrays.stream(values())
+                .filter(value -> value.matchCount == matchCount)
+                .findFirst()
+                .orElseThrow(() -> new LottoException("값이 잘못되었습니다."));
     }
 
-    return Arrays.stream(values())
-        .filter(value -> value.matchCount == matchCount)
-        .findFirst()
-        .orElseThrow(() -> new LottoException("값이 잘못되었습니다."));
-  }
-
-  public int winningMoney() {
-    return winningMoney;
-  }
-
-  public String message(int count) {
-    if (this == SECOND) {
-      return String.format(MESSAGE_FORM, matchCount, ", 보너스 볼 일치", winningMoney, count);
+    public int winningMoney() {
+        return winningMoney;
     }
-    return String.format(MESSAGE_FORM, matchCount, "", winningMoney, count);
-  }
 
+    public int matchCount() {
+        return matchCount;
+    }
 }
