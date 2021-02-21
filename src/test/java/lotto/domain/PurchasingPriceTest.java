@@ -41,4 +41,16 @@ class PurchasingPriceTest {
 
         assertThat(purchasableLottoTicketCounts).isEqualTo(3987 / 1000);
     }
+
+    @DisplayName("구매 가능한 티켓 개수를 계산할 때, 인자로 주어지는 티켓 가격은 양의 정수여야 한다")
+    @ParameterizedTest
+    @ValueSource(ints = {-500, 0})
+    void cannotCalculateTicketCounts(int ticketCost) {
+        PurchasingPrice purchasingPrice = new PurchasingPrice(4000);
+
+        assertThatCode(() -> {
+            purchasingPrice.calculatePurchasableTicketCounts(ticketCost);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("티켓 가격은 양의 정수여야 합니다.");
+    }
 }
