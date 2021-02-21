@@ -2,8 +2,12 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import lotto.exception.InvalidLottoRankException;
 
 public class Rewords {
+
+    private static final int FIFTH = 5;
+    private static final int FIRST = 1;
 
     private final List<Reword> rewords;
 
@@ -11,24 +15,9 @@ public class Rewords {
         this.rewords = new ArrayList<>(rewords);
     }
 
-    public int getFirst() {
-        return matchCount(Reword.FIRST);
-    }
-
-    public int getSecond() {
-        return matchCount(Reword.SECOND);
-    }
-
-    public int getThird() {
-        return matchCount(Reword.THIRD);
-    }
-
-    public int getFourth() {
-        return matchCount(Reword.FOURTH);
-    }
-
-    public int getFifth() {
-        return matchCount(Reword.FIFTH);
+    public int getRankCount(int rank) {
+        validate(rank);
+        return matchCount(Reword.values()[rank - 1]);
     }
 
     public double profit(final int money) {
@@ -37,6 +26,12 @@ public class Rewords {
             .sum();
 
         return LottoCalculator.divide(money, profit);
+    }
+
+    private void validate(int rank) {
+        if (rank < FIRST || rank > FIFTH) {
+            throw new InvalidLottoRankException();
+        }
     }
 
     private int matchCount(final Reword reword) {
