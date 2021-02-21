@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -30,10 +31,7 @@ public class Lotto {
         return lottoNumbers.findMatchCount(targetLotto.lottoNumbers);
     }
 
-    @Override
-    public String toString() {
-        return "[" +
-                lottoNumbers +
-                ']';
+    public List<Integer> getValues() {
+        return lottoNumbers.getValues();
     }
 }

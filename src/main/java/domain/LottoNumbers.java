@@ -41,6 +41,12 @@ public class LottoNumbers {
         return this.lottoNumbers.contains(lottoNumber);
     }
 
+    public List<Integer> getValues() {
+        return lottoNumbers.stream()
+                .map(lottoNumber -> lottoNumber.getValue())
+                .collect(Collectors.toList());
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
