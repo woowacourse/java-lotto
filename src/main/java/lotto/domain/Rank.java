@@ -4,14 +4,14 @@ import java.util.Arrays;
 
 public enum Rank {
     NOTHING(0, 0),
-    FIFTH(3, 5000),
-    FOURTH(4, 50000),
-    THIRD(5, 1500000),
-    SECOND(5, 30000000),
-    FIRST(6, 2000000000);
+    FIFTH(3, 5_000),
+    FOURTH(4, 50_000),
+    THIRD(5, 1_500_000),
+    SECOND(5, 30_000_000),
+    FIRST(6, 2_000_000_000);
 
-    private int countOfMatch;
-    private int reward;
+    private final int countOfMatch;
+    private final int reward;
 
     Rank(int countOfMatch, int reward) {
         this.countOfMatch = countOfMatch;
@@ -26,8 +26,8 @@ public enum Rank {
         return reward;
     }
 
-    public static Rank rankOf(int countOfMatch, boolean bonusNumber) {
-        if (!bonusNumber && THIRD.matchCount(countOfMatch)) {
+    public static Rank rankOf(int countOfMatch, boolean hasBonusNumber) {
+        if (!hasBonusNumber && THIRD.matchCount(countOfMatch)) {
             return THIRD;
         }
         return Arrays.stream(values())
