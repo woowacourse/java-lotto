@@ -16,6 +16,6 @@ public class Application {
 
     private static LottoController createLottoController() {
         InputView inputView = new InputView(new Scanner(System.in));
-        return new LottoController(inputView, new OutputView(), new AutoLottoMachine());
+        return new LottoController(inputView, new OutputView(), new AutoLottoMachine(1000));
     }
 }

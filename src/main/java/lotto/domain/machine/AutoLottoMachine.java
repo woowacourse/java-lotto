@@ -8,19 +8,24 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class AutoLottoMachine implements LottoMachine {
-    public static final int LOTTO_PRICE = 1000;
+    //public static final int LOTTO_PRICE = 1000;
 
     private static final String INDIVISIBLE_MONEY_ERROR_MSG_FORMAT = "로또는 %d원 단위로 구매해야 있습니다. 입력금액 : %d";
     private static final String MONEY_MUST_BE_POSITIVE_ERROR_MSG_FORMAT = "금액은 양수여야 합니다. 입력금액 : %d";
 
+    private final int lottoPrice;
     private final LottoTicketFactory lottoTicketFactory = new AutoLottoTicketFactory();
+
+    public AutoLottoMachine(int lottoPrice) {
+        this.lottoPrice = lottoPrice;
+    }
 
     @Override
     public LottoTickets createTicketsByMoney(int purchaseMoney) {
         validateNegativeDigit(purchaseMoney);
         validateNoExtraMoney(purchaseMoney);
 
-        int numberOfTickets = purchaseMoney / LOTTO_PRICE;
+        int numberOfTickets = purchaseMoney / lottoPrice;
         return createTickets(numberOfTickets);
     }
 
@@ -31,9 +36,9 @@ public class AutoLottoMachine implements LottoMachine {
     }
 
     private void validateNoExtraMoney(int purchaseMoney) {
-        if (purchaseMoney % LOTTO_PRICE != 0) {
+        if (purchaseMoney % lottoPrice != 0) {
             throw new IllegalArgumentException(
-                    String.format(INDIVISIBLE_MONEY_ERROR_MSG_FORMAT, LOTTO_PRICE, purchaseMoney));
+                    String.format(INDIVISIBLE_MONEY_ERROR_MSG_FORMAT, lottoPrice, purchaseMoney));
         }
     }
 
@@ -42,5 +47,10 @@ public class AutoLottoMachine implements LottoMachine {
             throw new IllegalArgumentException(
                     String.format(MONEY_MUST_BE_POSITIVE_ERROR_MSG_FORMAT, purchaseMoney));
         }
+    }
+
+    @Override
+    public int getLottoPrice() {
+        return lottoPrice;
     }
 }

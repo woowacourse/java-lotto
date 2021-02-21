@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class AutoLottoMachineTest {
-    private AutoLottoMachine autoLottoMachine = new AutoLottoMachine();
+    private AutoLottoMachine autoLottoMachine = new AutoLottoMachine(1000);
 
     @DisplayName("금액에 맞추어 티켓을 생성하는지 확인")
     @Test

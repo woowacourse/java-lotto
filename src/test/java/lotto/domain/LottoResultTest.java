@@ -20,7 +20,7 @@ class LottoResultTest {
         lottoResultMap.put(Prize.FOURTH, 5L); // 25만
         lottoResultMap.put(Prize.FIFTH, 3L); // 15000
 
-        LottoResult lottoResult = new LottoResult(lottoResultMap);
+        LottoResult lottoResult = new LottoResult(lottoResultMap, 1000);
 
         assertThat(lottoResult.calculatePrizeMoney()).isEqualTo(2061765000L);
     }

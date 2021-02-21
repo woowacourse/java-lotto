@@ -26,14 +26,14 @@ class LottoControllerTest {
     @BeforeEach
     void setup() {
         InputView inputView = new InputView(new Scanner(System.in));
-        lottoController = new LottoController(inputView, new OutputView(), new AutoLottoMachine());
+        lottoController = new LottoController(inputView, new OutputView(), new AutoLottoMachine(1000));
     }
 
     @DisplayName("로또 티켓 구매 메소드 확인")
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3, 4, 5, 6, 7, 8, 10})
     void buyLottoTicket(int testSize) {
-        LottoTickets lottoTickets = lottoController.buyLottoTicket(AutoLottoMachine.LOTTO_PRICE * testSize);
+        LottoTickets lottoTickets = lottoController.buyLottoTicket(1000 * testSize);
 
         assertThat(lottoTickets.size()).isEqualTo(testSize);
     }

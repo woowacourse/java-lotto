@@ -23,7 +23,7 @@ public class LottoController {
         this.lottoMachine = lottoMachine;
     }
 
-    public void start(){
+    public void start() {
         LottoTickets lottoTickets = buyLottoTicket(inputView.takeLottoMoney());
         outputView.printTicketsSize(lottoTickets.size());
         outputView.printAllLottoTickets(lottoTickets);
@@ -45,11 +45,11 @@ public class LottoController {
     }
 
     public LottoResult calculateLottoResult(LottoTickets lottoTickets,
-        WinningLottoTicket winningLottoTicket) {
+                                            WinningLottoTicket winningLottoTicket) {
         return lottoTickets.list().stream()
-            .map(winningLottoTicket::compareNumbers)
-            .collect(collectingAndThen(
-                groupingBy(Function.identity(), counting()),
-                LottoResult::new));
+                .map(winningLottoTicket::compareNumbers)
+                .collect(collectingAndThen(
+                        groupingBy(Function.identity(), counting()),
+                        lottoResultMap -> new LottoResult(lottoResultMap, lottoMachine.getLottoPrice())));
     }
 }
