@@ -10,8 +10,12 @@ public class LottoNumber {
     private final int value;
 
     public LottoNumber(final String value) {
-        this.value = Integer.parseInt(value);
-        validateRange(this.value);
+        this(Integer.parseInt(value));
+    }
+
+    public LottoNumber(final int value){
+        validateRange(value);
+        this.value = value;
     }
 
     private void validateRange(final int value) {
