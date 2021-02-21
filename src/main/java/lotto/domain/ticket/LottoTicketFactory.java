@@ -1,6 +1,9 @@
 package lotto.domain.ticket;
 
-public interface LottoTicketFactory {
-    LottoTicket createLottoTicket();
-}
+import java.util.List;
 
+public class LottoTicketFactory {
+    public LottoTicket createLottoTicket(List<Integer> lottoNumbers) {
+        return new LottoTicket(lottoNumbers);
+    }
+}

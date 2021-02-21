@@ -36,8 +36,8 @@ public class LottoController {
     }
 
     public LottoTickets buyLottoTicket(int lottoPurchaseMoney) {
-        LottoTickets lottoTickets = lottoMachine.createTicketsByMoney(lottoPurchaseMoney);
-        return lottoTickets;
+        int numberOfTickets = lottoMachine.calculateNumberOfTickets(lottoPurchaseMoney);
+        return lottoMachine.createTicketsByMoney(numberOfTickets);
     }
 
     public WinningLottoTicket createWinningLotto(List<Integer> winningNumbers, int bonusNumber) {

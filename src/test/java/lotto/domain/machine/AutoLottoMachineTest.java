@@ -16,19 +16,20 @@ class AutoLottoMachineTest {
     @DisplayName("금액에 맞추어 티켓을 생성하는지 확인")
     @Test
     void 금액에_맞추어_티켓을_생성하는지() {
-        int numberOfTickets = 5;
+        int expectedNumberOfTickets = 5;
         int purchaseMoney = 5000;
 
-        LottoTickets tickets = autoLottoMachine.createTicketsByMoney(purchaseMoney);
+        int numberOfTickets = autoLottoMachine.calculateNumberOfTickets(purchaseMoney);
+        LottoTickets tickets = autoLottoMachine.createTicketsByMoney(numberOfTickets);
 
-        assertThat(tickets.size()).isEqualTo(numberOfTickets);
+        assertThat(tickets.size()).isEqualTo(expectedNumberOfTickets);
     }
 
     @DisplayName("구매금액 단위가 맞지 않으면 예외처리하는지 확인")
     @ParameterizedTest
     @ValueSource(ints = {5500, 4900, 1234, 2500})
     void 금액단위_안맞으면_예외(int purchaseMoney) {
-        assertThatThrownBy(() -> autoLottoMachine.createTicketsByMoney(purchaseMoney))
+        assertThatThrownBy(() -> autoLottoMachine.calculateNumberOfTickets(purchaseMoney))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -36,7 +37,7 @@ class AutoLottoMachineTest {
     @ParameterizedTest
     @ValueSource(ints = {-1000, -2000, -50000, -150000})
     void 금액이_음수이면_예외(int purchaseMoney) {
-        assertThatThrownBy(() -> autoLottoMachine.createTicketsByMoney(purchaseMoney))
+        assertThatThrownBy(() -> autoLottoMachine.calculateNumberOfTickets(purchaseMoney))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

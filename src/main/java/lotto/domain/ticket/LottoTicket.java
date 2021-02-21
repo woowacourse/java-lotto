@@ -2,8 +2,10 @@ package lotto.domain.ticket;
 
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.LottoNumberFactory;
+import lotto.domain.number.LottoNumbers;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
@@ -16,7 +18,7 @@ public class LottoTicket {
     private static final String NUMBER_SIZE_ERROR_MSG_FORMAT = "로또 번호는 %d개여야 합니다. 현재 개수 : %d";
     private static final String DUPLICATE_ERROR_MSG_FORMAT = "로또 번호가 중복되었습니다.";
 
-    private final List<LottoNumber> lottoNumbers;
+    private final LottoNumbers lottoNumbers;
 
     public LottoTicket(List<Integer> numbers) {
         validateLottoNumberCount(numbers);
@@ -24,7 +26,7 @@ public class LottoTicket {
 
         this.lottoNumbers = numbers.stream().map(LottoNumberFactory::of)
                 .sorted(Comparator.naturalOrder())
-                .collect(Collectors.toList());
+                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoNumbers::new));
     }
 
     private void validateLottoNumberCount(List<Integer> numbers) {
@@ -43,6 +45,6 @@ public class LottoTicket {
     }
 
     public List<LottoNumber> list() {
-        return new ArrayList<>(lottoNumbers);
+        return lottoNumbers.list();
     }
 }
