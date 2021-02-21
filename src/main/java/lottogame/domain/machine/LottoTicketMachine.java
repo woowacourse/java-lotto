@@ -11,14 +11,10 @@ public class LottoTicketMachine {
     public LottoTickets buyTickets(final Money money) {
         LottoTickets lottoTickets = new LottoTickets();
 
-        while (isCanBuyTicket(money)) {
+        while (money.isCanBuy(TICKET_PRICE)) {
             lottoTickets.add(new LottoTicket());
             money.use(TICKET_PRICE);
         }
         return lottoTickets;
-    }
-
-    private boolean isCanBuyTicket(final Money money) {
-        return money.getValue() >= TICKET_PRICE;
     }
 }

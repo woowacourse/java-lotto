@@ -6,10 +6,11 @@ public class Money {
 
     public Money(final String money) {
         this.value = Integer.parseInt(money);
-        isPositive(this.value);
+        moneyValidate(this.value);
     }
 
     public void use(final int price) {
+        moneyValidate(price);
         this.value -= price;
     }
 
@@ -17,9 +18,13 @@ public class Money {
         return this.value;
     }
 
-    private void isPositive(final int value) {
+    public boolean isCanBuy(final int price) {
+        return value > price;
+    }
+
+    private void moneyValidate(final int value) {
         if (value < 0) {
-            throw new IllegalArgumentException("돈 입력은 양수이여야 합니다.");
+            throw new IllegalArgumentException("돈은 음수가 될 수 없습니다.");
         }
     }
 }
