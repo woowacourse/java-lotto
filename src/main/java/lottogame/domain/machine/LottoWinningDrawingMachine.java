@@ -5,10 +5,11 @@ import lottogame.domain.number.LottoNumbers;
 
 public class LottoWinningDrawingMachine {
 
-    public static final String DELIMITER = ", ";
+    public static final String DELIMITER = ",";
     private final LottoNumbers lottoNumbers = new LottoNumbers();
 
-    public LottoNumbers drawing(final String drawingNumbers) {
+    public LottoNumbers drawing(String drawingNumbers) {
+        drawingNumbers = drawingNumbers.replaceAll(" ", "");
         for (String number : drawingNumbers.split(DELIMITER)) {
             this.lottoNumbers.add(new LottoNumber(number));
         }
