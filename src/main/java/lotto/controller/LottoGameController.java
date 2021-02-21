@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.*;
+import lotto.utils.AutoLottoGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -9,42 +10,39 @@ public class LottoGameController {
     private final LottoGame lottoGame = new LottoGame();
 
     public void run() {
-        Lottos lottos = buyAutoLotto();
-
-        WinningLotto lastWinningLotto =
-                makeWinningLotto(lastWinningLotto(), InputView.askBonusNumber());
-
-        showGameResult(lottos, lastWinningLotto);
+        buyAutoLotto();
+        Lotto lotto = InputView.askLastWinningLotto();
+        WinningLotto lastWinningLotto = createLastWinningLotto(lotto);
+        showLottoGameResult(lastWinningLotto);
     }
 
-    private Lottos buyAutoLotto() {
+    private void buyAutoLotto() {
         Money money = InputView.askMoney();
-        Lottos lottos = lottoGame.buyLottos(money);
-        OutputView.printEachLotto(lottos);
-        return lottos;
+        lottoGame.buyLottos(money, new AutoLottoGenerator());
+        OutputView.printEachLotto(lottoGame.myLottos());
     }
 
-    private WinningLotto makeWinningLotto(Lotto winningLotto, LottoNumber bonusNumber) {
+    private WinningLotto createLastWinningLotto(Lotto lotto) {
+        LottoNumber bonusNumber = createBonusNumber();
         try {
-            return new WinningLotto(winningLotto, bonusNumber);
+            return new WinningLotto(lotto, bonusNumber);
         } catch (Exception e) {
             OutputView.printError(e);
-            bonusNumber = InputView.askBonusNumber();
-            return makeWinningLotto(winningLotto, bonusNumber);
+            return createLastWinningLotto(lotto);
         }
     }
 
-    private Lotto lastWinningLotto() {
+    private LottoNumber createBonusNumber() {
         try {
-            return new Lotto(InputView.askLastWinningLottoNumber());
+            return InputView.askBonusNumber();
         } catch (Exception e) {
             OutputView.printError(e);
-            return lastWinningLotto();
+            return createBonusNumber();
         }
     }
 
-    private void showGameResult(Lottos lottos, WinningLotto lastWinningLotto) {
-        LottoGameResult lottoGameResult = lottoGame.compareWithWinningLotto(lottos, lastWinningLotto);
+    private void showLottoGameResult(WinningLotto lastWinningLotto) {
+        LottoGameResult lottoGameResult = lottoGame.calculateLottoGameResult(lastWinningLotto);
         OutputView.printLottoGameResult(lottoGameResult);
     }
 }
