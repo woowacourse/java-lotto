@@ -5,28 +5,17 @@ import java.util.Objects;
 public class LottoNumber {
     private static final int MIN_NUMBER_RANGE = 1;
     private static final int MAX_NUMBER_RANGE = 45;
-    private static final String INTEGER_REGULAR_EXPRESSION = "^-?[0-9]+$";
-    private static final String ERROR_INVALID_INPUT_FORMAT = "[ERROR] 로또 번호는 숫자만 입력해주세요.";
     private static final String ERROR_INVALID_NUMBER_RANGE = "[ERROR] 로또 번호는 1~45 사이로 입력해주세요.";
 
     private final int number;
 
-    public LottoNumber(String input) {
-        validateInputFormat(input);
-        int number = Integer.parseInt(input);
+    public LottoNumber(int number) {
         validateNumberRange(number);
         this.number = number;
     }
 
-    private void validateInputFormat(String input) {
-        if (input.matches(INTEGER_REGULAR_EXPRESSION)) {
-            return;
-        }
-        throw new IllegalArgumentException(ERROR_INVALID_INPUT_FORMAT);
-    }
-
     private void validateNumberRange(int number) {
-        if (number < MIN_NUMBER_RANGE || number > MAX_NUMBER_RANGE) {
+        if ((number < MIN_NUMBER_RANGE) || (number > MAX_NUMBER_RANGE)) {
             throw new IllegalArgumentException(ERROR_INVALID_NUMBER_RANGE);
         }
     }

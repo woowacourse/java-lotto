@@ -9,7 +9,7 @@ public class LottoMachineTest {
     @DisplayName("금액이 입력되면 금액에 맞게 로또 티켓을 구매한다.")
     @Test
     public void purchaseLottoTicketTest() {
-        Money money = new Money("3000");
+        Money money = new Money(3_000);
 
         LottoTickets lottoTickets = LottoMachine.buy(money);
 

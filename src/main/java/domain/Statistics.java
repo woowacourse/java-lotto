@@ -34,6 +34,6 @@ public class Statistics {
             long count = lottoStatistics.get(rank);
             total += count * rank.getReward().toLong();
         }
-        return new Money(Long.toString(total));
+        return new Money(total);
     }
 }

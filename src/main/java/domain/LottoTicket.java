@@ -17,7 +17,7 @@ public class LottoTicket {
         return Collections.unmodifiableList(this.lottoNumbers);
     }
 
-    public static LottoTicket valueOf(List<String> lottoNumbers) {
+    public static LottoTicket valueOf(List<Integer> lottoNumbers) {
         validateNumberCount(lottoNumbers);
         validateDuplicationNumber(lottoNumbers);
 
@@ -28,14 +28,14 @@ public class LottoTicket {
         return new LottoTicket(lottoTicket);
     }
 
-    private static void validateNumberCount(List<String> lottoNumbers) {
+    private static void validateNumberCount(List<Integer> lottoNumbers) {
         if (lottoNumbers.size() != TOTAL_LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(ERROR_INVALID_NUMBER_COUNT);
         }
     }
 
-    private static void validateDuplicationNumber(List<String> lottoNumbers) {
-        Set<String> distinctLottoNumbers = new HashSet<>(lottoNumbers);
+    private static void validateDuplicationNumber(List<Integer> lottoNumbers) {
+        Set<Integer> distinctLottoNumbers = new HashSet<>(lottoNumbers);
 
         if (distinctLottoNumbers.size() < TOTAL_LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(ERROR_INVALID_DUPLICATION_NUMBER);
