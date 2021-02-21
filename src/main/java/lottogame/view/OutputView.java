@@ -1,34 +1,21 @@
 package lottogame.view;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.stream.Collectors;
 import lottogame.domain.Rank;
-import lottogame.domain.ticket.LottoTicket;
-import lottogame.domain.ticket.LottoTickets;
 
 public class OutputView {
 
-    private static final String TICKETS_COUNT_MSG = "개를 구매했습니다.";
+    private static final String TICKETS_COUNT_MESSAGE = "개를 구매했습니다.";
     private static final String AMOUNT_YIELD_FORMAT = "총 수익률은 %.2f입니다.";
 
-    public static void printLottoTickets(final LottoTickets lottoTickets) {
-        System.out.println(lottoTickets.getTicketsCount() + TICKETS_COUNT_MSG);
-        for (LottoTicket lottoTicket : lottoTickets.toList()) {
-            printLottoNumbers(lottoTicket);
+    public static void printLottoTickets(final List<String> lottoTickets) {
+        System.out.println(lottoTickets.size() + TICKETS_COUNT_MESSAGE);
+        for (String lottoTicket : lottoTickets) {
+            System.out.println(lottoTicket);
         }
         System.out.println();
-    }
-
-    private static void printLottoNumbers(final LottoTicket lottoTicket) {
-        List<String> lottoNumbers = lottoTicket.getLottoNumbers()
-            .stream()
-            .map(lottoNumber -> Integer.toString(lottoNumber.getValue()))
-            .collect(Collectors.toCollection(ArrayList::new));
-
-        System.out.println("[" + String.join(", ", lottoNumbers) + "]");
     }
 
     public static void printLottoGameResult(final Map<Rank, Integer> ranks) {
