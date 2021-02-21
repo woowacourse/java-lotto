@@ -31,6 +31,9 @@ public class InputView {
         InputPrinter.printPurchasePriceInputGuideMessage();
         String purchasePriceInput = scanner.nextLine();
         int purchasePrice = validateNaturalNumber(purchasePriceInput);
+
+        InputPrinter.printManualPurchaseInputGuideMessage();
+
         return new UserPurchase(purchasePrice);
     }
 
