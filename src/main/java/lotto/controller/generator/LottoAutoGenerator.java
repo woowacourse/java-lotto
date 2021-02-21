@@ -25,6 +25,6 @@ public class LottoAutoGenerator implements LottoGenerator {
         Collections.shuffle(candidateNumbers);
         Set<Integer> lottoNumbers =
             new TreeSet<>(candidateNumbers.subList(0, LOTTO_POSSESSION_NUMBER));
-        return new ArrayList<>(lottoNumbers);
+        return Collections.synchronizedList(new ArrayList<>(lottoNumbers));
     }
 }

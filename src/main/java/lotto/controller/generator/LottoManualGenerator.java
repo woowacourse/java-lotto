@@ -1,5 +1,6 @@
 package lotto.controller.generator;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import lotto.viewer.LottoGeneratorInputView;
@@ -16,6 +17,6 @@ public class LottoManualGenerator implements LottoGenerator {
 
     @Override
     public List<Integer> generateNumbers() {
-        return this.lottoGeneratorInputView.inputWinningNumbers();
+        return Collections.synchronizedList(this.lottoGeneratorInputView.inputWinningNumbers());
     }
 }
