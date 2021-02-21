@@ -2,6 +2,7 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class WinningNumbers {
 
@@ -40,10 +41,8 @@ public class WinningNumbers {
     }
 
     public List<Ranking> getRankings(final List<LottoTicket> lottoTickets) {
-        List<Ranking> rankings = new ArrayList<>();
-        for (LottoTicket lottoTicket : lottoTickets) {
-            rankings.add(lottoTicket.checkRanking(winningTicket, bonusNumber));
-        }
-        return rankings;
+        return lottoTickets.stream()
+            .map(lottoTicket -> lottoTicket.checkRanking(winningTicket, bonusNumber))
+            .collect(Collectors.toList());
     }
 }
