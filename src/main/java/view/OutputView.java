@@ -20,6 +20,9 @@ public class OutputView {
     private static final String BONUS_BALL_FORMAT = ", 보너스 볼 일치";
     private static final String EMPTY_STRING = "";
 
+    private OutputView() {
+    }
+
     public static void printNumberOfTickets(final int lottoQuantity) {
         System.out.println(lottoQuantity + NUMBER_OF_TICKETS);
     }
