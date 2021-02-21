@@ -15,19 +15,11 @@ public class WinningLotto {
     }
 
     public LottoRank match(Lotto userLotto) {
-        boolean isMatchBonus = userLotto.getNumbers().contains(bonus);
+        boolean isMatchBonus = userLotto.isContains(bonus);
         long numOfMatch = userLotto.getNumbers()
             .stream()
-            .filter(lottoNumber -> winningLotto.getNumbers().contains(lottoNumber))
+            .filter(lottoNumber -> winningLotto.isContains(lottoNumber))
             .count();
         return LottoRank.valueOf(numOfMatch, isMatchBonus);
-    }
-
-    public Lotto getWinningLotto() {
-        return winningLotto;
-    }
-
-    public LottoNumber getBonus() {
-        return bonus;
     }
 }

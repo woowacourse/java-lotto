@@ -53,4 +53,8 @@ public class Lotto {
     public List<LottoNumber> getNumbers() {
         return new ArrayList<>(numbers);
     }
+
+    public boolean isContains(LottoNumber lottoNumber) {
+        return numbers.contains(lottoNumber);
+    }
 }
