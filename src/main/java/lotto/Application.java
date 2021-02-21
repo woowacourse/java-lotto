@@ -19,7 +19,8 @@ public class Application {
         int bonusBallNumber = InputView.inputBonusBallNumber();
         WinningLottoTicket winningLottoTicket = WinningLottoTicket.of(winningTicketNumbers, bonusBallNumber);
         LottoResult lottoResult = lottoTickets.checkResult(winningLottoTicket);
-        double yield = lottoResult.calculateYield(lottoTickets.getPurchasingPrice());
+        int purchasingPriceTotal = lottoMachine.calculatePurchasingPrice(lottoTickets);
+        double yield = lottoResult.calculateYield(purchasingPriceTotal);
         OutputView.printLottoResult(lottoResult, yield);
     }
 }

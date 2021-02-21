@@ -28,4 +28,8 @@ public class LottoMachine {
             throw new IllegalArgumentException(NOT_ENOUGH_MONEY);
         }
     }
+
+    public int calculatePurchasingPrice(LottoTickets lottoTickets) {
+        return lottoTickets.getTicketCounts() * LOTTO_TICKET_COST;
+    }
 }

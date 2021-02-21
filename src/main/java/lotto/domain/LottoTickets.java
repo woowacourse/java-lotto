@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoTickets {
-    private static final int LOTTO_TICKET_PRICE = 1000;
 
     private final List<LottoTicket> lottoTickets;
 
@@ -43,10 +42,6 @@ public class LottoTickets {
         List<LottoTicket> concatLottoTickets = Stream.concat(this.lottoTickets.stream(), targetLottoTickets.lottoTickets.stream())
                 .collect(Collectors.toList());
         return new LottoTickets(concatLottoTickets);
-    }
-
-    public int getPurchasingPrice() {
-        return lottoTickets.size() * LOTTO_TICKET_PRICE;
     }
 
     public int getTicketCounts() {

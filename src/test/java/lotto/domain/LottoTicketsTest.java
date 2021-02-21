@@ -56,14 +56,4 @@ class LottoTicketsTest {
 
         assertThat(ticketCounts).isEqualTo(3);
     }
-
-    @DisplayName("로또 티켓을 구매하는데 든 금액을 반환한다")
-    @Test
-    void getPurchasingPrice() {
-        LottoTickets lottoTickets = LottoTickets.generateAutomatic(4, lottoNumberGenerator);
-
-        int purchasingPrice = lottoTickets.getPurchasingPrice();
-
-        assertThat(purchasingPrice).isEqualTo(4000);
-    }
 }

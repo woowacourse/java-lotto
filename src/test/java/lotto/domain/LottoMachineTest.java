@@ -49,4 +49,15 @@ class LottoMachineTest {
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("금액이 부족하여 로또 티켓을 구매할 수 없습니다.");
     }
+
+    @DisplayName("로또 티켓을 구매하는데 든 금액을 반환한다")
+    @Test
+    void getPurchasingPrice() {
+        LottoMachine lottoMachine = new LottoMachine(new RandomLottoNumberGenerator());
+        LottoTickets lottoTickets = lottoMachine.issueLottoTickets(new PurchasingPrice(4000), Collections.emptyList());
+
+        int purchasingPrice = lottoMachine.calculatePurchasingPrice(lottoTickets);
+
+        assertThat(purchasingPrice).isEqualTo(4000);
+    }
 }
