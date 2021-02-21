@@ -1,31 +1,48 @@
 package lottogame.view;
 
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class InputView {
 
     private static final Scanner scanner = new Scanner(System.in);
+    private static final Pattern pattern = Pattern.compile("([0-9])+");
 
-    public static int getInputMoney() {
+    public static int inputMoney() {
         System.out.println("구입금액을 입력해 주세요.");
         String money = scanner.nextLine();
         validateInteger(money);
         return Integer.parseInt(money);
     }
 
-    private static void validateInteger(String money) {
-        if (!money.chars().allMatch(Character::isDigit)) {
-            throw new IllegalArgumentException("구입 금액은 정수로만 입력 가능합니다.");
-        }
-    }
-
-    public static String getWinningNumbersInput() {
+    public static Set<Integer> inputWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return scanner.nextLine();
+        return getWinningNumbers(pattern.matcher(scanner.nextLine()));
     }
 
-    public static String getBonusNumberInput() {
+    private static Set<Integer> getWinningNumbers(Matcher matcher) {
+        Set<Integer> winningNumbers = new HashSet<>();
+        while (matcher.find()) {
+            String number = matcher.group();
+            validateInteger(number);
+            winningNumbers.add(Integer.parseInt(number));
+        }
+        return winningNumbers;
+    }
+
+    public static int inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return scanner.nextLine();
+        String number = scanner.nextLine();
+        validateInteger(number);
+        return Integer.parseInt(number);
+    }
+
+    private static void validateInteger(String string) {
+        if (!string.chars().allMatch(Character::isDigit)) {
+            throw new IllegalArgumentException("정수만 입력 가능합니다.");
+        }
     }
 }
