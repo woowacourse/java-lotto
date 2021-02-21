@@ -118,4 +118,22 @@ public class LottoLineTest {
         WinningNumbers winningNumbers = new WinningNumbers(new LottoLine(answerLottoNumbers), new LottoNumber(9));
         assertThat(lottoLine.matchLottoNumbers(lottoNumbers, winningNumbers)).isEqualTo(Rank.SECOND);
     }
+
+    @Test
+    @DisplayName("로또 번호 매칭 테스트 1등")
+    void lotto_number_match_test_first() {
+        List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(1)
+                , new LottoNumber(2), new LottoNumber(3), new LottoNumber(4)
+                , new LottoNumber(5), new LottoNumber(14)
+        );
+
+        List<LottoNumber> answerLottoNumbers = Arrays.asList(new LottoNumber(1)
+                , new LottoNumber(2), new LottoNumber(3), new LottoNumber(4)
+                , new LottoNumber(5), new LottoNumber(14)
+        );
+
+        LottoLine lottoLine = new LottoLine(lottoNumbers);
+        WinningNumbers winningNumbers = new WinningNumbers(new LottoLine(answerLottoNumbers), new LottoNumber(9));
+        assertThat(lottoLine.matchLottoNumbers(lottoNumbers, winningNumbers)).isEqualTo(Rank.FIRST);
+    }
 }
