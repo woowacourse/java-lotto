@@ -19,14 +19,15 @@ public class LottoGenerator {
         }
     }
 
-    public LottoTickets purchaseTickets(UserPurchase userPurchase) {
-        LottoTickets lottoTickets = new LottoTickets();
-        for (int i = 0; i < userPurchase.getNumberOfAllTickets(); i++) {
+    public AllPurchasedLottoTickets purchaseTickets(UserPurchase userPurchase) {
+        LottoTickets automaticallyPurchasedLottoTickets = new LottoTickets();
+        for (int i = 0; i < userPurchase.getNumberOfAutomaticallyPurchasedLottoTickets(); i++) {
             Collections.shuffle(allNumbers);
-            LottoTicket newLottoTicket
+            LottoTicket automaticallyGeneratedLottoTicket
                 = new LottoTicket(allNumbers.subList(0, LOTTO_NUMBERS_SIZE));
-            lottoTickets.add(newLottoTicket);
+            automaticallyPurchasedLottoTickets.add(automaticallyGeneratedLottoTicket);
         }
-        return lottoTickets;
+        return new AllPurchasedLottoTickets(userPurchase.getManuallyPurchasedLottoTickets(),
+            automaticallyPurchasedLottoTickets);
     }
 }

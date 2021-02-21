@@ -23,4 +23,8 @@ public class LottoTickets {
     public int size() {
         return tickets.size();
     }
+
+    public void addAll(LottoTickets lottoTickets) {
+        tickets.addAll(lottoTickets.getTickets());
+    }
 }

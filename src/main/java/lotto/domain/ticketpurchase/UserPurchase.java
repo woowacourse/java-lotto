@@ -17,6 +17,13 @@ public class UserPurchase {
         return purchasePrice.getNumberOfAllTicketsToPurchase();
     }
 
+    public LottoTickets getManuallyPurchasedLottoTickets() {
+        return manuallyPurchasedLottoTickets;
+    }
+    public int getNumberOfAutomaticallyPurchasedLottoTickets() {
+        return getNumberOfAllTickets() - manuallyPurchasedLottoTickets.size();
+    }
+
     public PurchasePrice getPurchasePrice() {
         return purchasePrice;
     }
