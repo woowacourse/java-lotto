@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 
+import static lotto.lottoticket.LottoNumber.ERROR_MESSAGE_INVALID_RANGE;
 import static lotto.lottoticket.TicketValidation.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
@@ -65,7 +66,9 @@ public class WinnerLottoTicketTest {
     @DisplayName("당첨 결과 확인")
     void checkResult() {
         WinnerTicket winnerTicket = new WinnerTicket("1,2,3,4,5,6");
-        NumbersGenerator numbersGenerator = () -> Arrays.asList(1, 2, 3, 4, 5, 6);
+        NumbersGenerator numbersGenerator = () -> Arrays.asList(
+                new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
         LottoTicket lottoTicket = new LottoTicket(numbersGenerator);
         assertThat(winnerTicket.findMatchCount(lottoTicket)).isEqualTo(6);
     }

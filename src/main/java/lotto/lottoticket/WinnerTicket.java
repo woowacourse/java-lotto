@@ -7,40 +7,39 @@ import java.util.Objects;
 public class WinnerTicket {
     private static final String COMMA_DELIMITER = ",";
 
-    private final List<Integer> winnerTicket;
+    private final List<LottoNumber> winnerTicket;
 
     public WinnerTicket(String numbers) {
         this.winnerTicket = splitNumbers(numbers);
     }
 
-    private List<Integer> splitNumbers(String values) {
-        List<Integer> numbers = new ArrayList<>();
+    private List<LottoNumber> splitNumbers(String values) {
+        List<LottoNumber> numbers = new ArrayList<>();
         for (String value : values.split(COMMA_DELIMITER)) {
             numbers.add(makeValidatedNumber(value));
         }
         return makeValidatedNumbers(numbers);
     }
 
-    private int makeValidatedNumber(String value) {
+    private LottoNumber makeValidatedNumber(String value) {
         TicketValidation.validateNumber(value);
         int number = Integer.parseInt(value.trim());
-        TicketValidation.validateNumberInRange(number);
-        return number;
+        return new LottoNumber(number);
     }
 
-    private List<Integer> makeValidatedNumbers(List<Integer> numbers) {
+    private List<LottoNumber> makeValidatedNumbers(List<LottoNumber> numbers) {
         TicketValidation.validateSize(numbers);
         TicketValidation.validateDuplicated(numbers);
         return numbers;
     }
 
-    public boolean containsSameNumber(int number) {
+    public boolean containsSameNumber(LottoNumber number) {
         return this.winnerTicket.contains(number);
     }
 
     public int findMatchCount(LottoTicket lottoTicket) {
         int matchCount = 0;
-        for (Integer number : winnerTicket) {
+        for (LottoNumber number : winnerTicket) {
             matchCount += lottoTicket.countWithContaining(number);
         }
         return matchCount;

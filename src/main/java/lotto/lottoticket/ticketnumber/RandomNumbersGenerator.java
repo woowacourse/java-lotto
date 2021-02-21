@@ -1,5 +1,7 @@
 package lotto.lottoticket.ticketnumber;
 
+import lotto.lottoticket.LottoNumber;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -16,13 +18,21 @@ public class RandomNumbersGenerator implements NumbersGenerator {
             .collect(Collectors.toList());
 
     @Override
-    public List<Integer> generate() {
+    public List<LottoNumber> generate() {
         List<Integer> randomNumbers = new ArrayList<>();
         Collections.shuffle(NUMBERS_IN_RANGE);
         for (int i = 0; i < NUMBER_COUNT_IN_LOTTO; i++) {
             randomNumbers.add(NUMBERS_IN_RANGE.get(i));
         }
         Collections.sort(randomNumbers);
-        return randomNumbers;
+        return makeLottoNumbers(randomNumbers);
+    }
+
+    private List<LottoNumber> makeLottoNumbers(List<Integer> randomNumbers) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (Integer number : randomNumbers) {
+            lottoNumbers.add(new LottoNumber(number));
+        }
+        return lottoNumbers;
     }
 }

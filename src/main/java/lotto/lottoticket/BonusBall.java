@@ -5,24 +5,23 @@ import java.util.Objects;
 import static lotto.lottoticket.TicketValidation.ERROR_MESSAGE_DUPLICATED;
 
 public class BonusBall {
-    private final int bonusBall;
+    private final LottoNumber bonusBall;
 
     public BonusBall(String value, WinnerTicket winnerTicket) {
         TicketValidation.validateNumber(value);
         this.bonusBall = makeValidateNumber(value, winnerTicket);
     }
 
-    private int makeValidateNumber(String value, WinnerTicket winnerTicket) {
-        int number = Integer.parseInt(value.trim());
-        TicketValidation.validateNumberInRange(number);
-        if (winnerTicket.containsSameNumber(number)) {
+    private LottoNumber makeValidateNumber(String value, WinnerTicket winnerTicket) {
+        LottoNumber lottoNumber = new LottoNumber(Integer.parseInt(value.trim()));
+        if (winnerTicket.containsSameNumber(lottoNumber)) {
             throw new IllegalArgumentException(ERROR_MESSAGE_DUPLICATED);
         }
-        return number;
+        return lottoNumber;
     }
 
-    public boolean isSameThan(int number) {
-        return this.bonusBall == number;
+    public boolean isSameThan(LottoNumber number) {
+        return this.bonusBall.equals(number);
     }
 
     @Override

@@ -6,7 +6,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import static lotto.lottoticket.TicketValidation.*;
+import static lotto.lottoticket.LottoNumber.ERROR_MESSAGE_INVALID_RANGE;
+import static lotto.lottoticket.TicketValidation.ERROR_MESSAGE_DUPLICATED;
+import static lotto.lottoticket.TicketValidation.ERROR_MESSAGE_INVALID_SIZE;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -15,7 +17,9 @@ public class LottoTicketTest {
     @Test
     @DisplayName("로또 티켓 생성")
     void ticketCreate() {
-        NumbersGenerator numbersGenerator = () -> Arrays.asList(1, 2, 3, 4, 5, 6);
+        NumbersGenerator numbersGenerator = () -> Arrays.asList(
+                new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
         LottoTicket lottoTicket = new LottoTicket(numbersGenerator);
         assertThat(lottoTicket).isEqualTo(new LottoTicket(numbersGenerator));
     }
@@ -23,7 +27,9 @@ public class LottoTicketTest {
     @Test
     @DisplayName("1부터 45사이 숫자인지 확인")
     void checkNumberInRange() {
-        NumbersGenerator numbersGenerator = () -> Arrays.asList(1, 46, 2, 3, 4, 5);
+        NumbersGenerator numbersGenerator = () -> Arrays.asList(
+                new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                new LottoNumber(4), new LottoNumber(5), new LottoNumber(46));
         assertThatThrownBy(() ->
                 new LottoTicket(numbersGenerator)
         ).isInstanceOf(IllegalArgumentException.class)
@@ -33,7 +39,9 @@ public class LottoTicketTest {
     @Test
     @DisplayName("로또 숫자 중복 확인")
     void checkDuplicatedNumber() {
-        NumbersGenerator numbersGenerator = () -> Arrays.asList(1, 1, 2, 3, 4, 5);
+        NumbersGenerator numbersGenerator = () -> Arrays.asList(
+                new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                new LottoNumber(4), new LottoNumber(5), new LottoNumber(5));
         assertThatThrownBy(() ->
                 new LottoTicket(numbersGenerator)
         ).isInstanceOf(IllegalArgumentException.class)
@@ -43,7 +51,9 @@ public class LottoTicketTest {
     @Test
     @DisplayName("로또 숫자 개수 확인")
     void checkSizeOfNumbers() {
-        NumbersGenerator numbersGenerator = () -> Arrays.asList(1, 2, 3, 4, 5);
+        NumbersGenerator numbersGenerator = () -> Arrays.asList(
+                new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                new LottoNumber(4), new LottoNumber(5));
         assertThatThrownBy(() ->
                 new LottoTicket(numbersGenerator)
         ).isInstanceOf(IllegalArgumentException.class)
@@ -54,7 +64,9 @@ public class LottoTicketTest {
     @DisplayName("보너스볼 포함 확인")
     void checkContainBonusBall() {
         BonusBall bonusBall = new BonusBall("6", new WinnerTicket(("1, 2, 3, 4, 5, 8")));
-        NumbersGenerator numbersGenerator = () -> Arrays.asList(1, 2, 3, 4, 5, 6);
+        NumbersGenerator numbersGenerator = () -> Arrays.asList(
+                new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
         LottoTicket lottoTicket = new LottoTicket(numbersGenerator);
         assertTrue(lottoTicket.containsBonusBall(bonusBall));
     }

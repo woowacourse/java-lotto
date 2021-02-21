@@ -4,27 +4,25 @@ import lotto.lottoticket.ticketnumber.NumbersGenerator;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static lotto.lottogame.LottoCount.ONE_COUNT;
 import static lotto.lottogame.LottoCount.ZERO;
 
 public class LottoTicket {
-    private final List<Integer> numbers;
+    private final List<LottoNumber> numbers;
 
     public LottoTicket(NumbersGenerator numbersGenerator) {
         this.numbers = validate(numbersGenerator.generate());
     }
 
-    private List<Integer> validate(List<Integer> values) {
+    private List<LottoNumber> validate(List<LottoNumber> values) {
         TicketValidation.validateSize(values);
         TicketValidation.validateDuplicated(values);
-        for (Integer number : values) {
-            TicketValidation.validateNumberInRange(number);
-        }
         return values;
     }
 
-    public int countWithContaining(Integer number) {
+    public int countWithContaining(LottoNumber number) {
         if (numbers.contains(number)) {
             return ONE_COUNT;
         }
@@ -37,7 +35,9 @@ public class LottoTicket {
     }
 
     public List<Integer> getTicket() {
-        return numbers;
+        return numbers.stream()
+                .map(LottoNumber::getNumber)
+                .collect(Collectors.toList());
     }
 
     @Override

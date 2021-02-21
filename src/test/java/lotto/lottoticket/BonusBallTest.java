@@ -3,7 +3,9 @@ package lotto.lottoticket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static lotto.lottoticket.TicketValidation.*;
+import static lotto.lottoticket.LottoNumber.ERROR_MESSAGE_INVALID_RANGE;
+import static lotto.lottoticket.TicketValidation.ERROR_MESSAGE_DUPLICATED;
+import static lotto.lottoticket.TicketValidation.ERROR_MESSAGE_INVALID_INPUT;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -46,7 +48,7 @@ public class BonusBallTest {
     @DisplayName("보너스볼 포함 확인")
     void checkContainBonusBall() {
         BonusBall bonusBall = new BonusBall("15", new WinnerTicket("1, 2, 3, 4, 5, 6"));
-        assertTrue(bonusBall.isSameThan(15));
-        assertFalse(bonusBall.isSameThan(5));
+        assertTrue(bonusBall.isSameThan(new LottoNumber(15)));
+        assertFalse(bonusBall.isSameThan(new LottoNumber(5)));
     }
 }

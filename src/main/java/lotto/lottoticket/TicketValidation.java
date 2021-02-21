@@ -2,15 +2,12 @@ package lotto.lottoticket;
 
 import java.util.List;
 
-import static lotto.lottoticket.ticketnumber.RandomNumbersGenerator.*;
+import static lotto.lottoticket.ticketnumber.RandomNumbersGenerator.NUMBER_COUNT_IN_LOTTO;
 
 public class TicketValidation {
     public static final String ERROR_MESSAGE_DUPLICATED = "중복되는 숫자가 존재합니다.";
     public static final String ERROR_MESSAGE_INVALID_INPUT = "잘못된 입력입니다.";
     public static final String ERROR_MESSAGE_INVALID_SIZE = "숫자는 6개여야 합니다.";
-    public static final String ERROR_MESSAGE_INVALID_RANGE = "숫자는 1부터 45사이여야 합니다.";
-    private static final String SPACE = " ";
-    private static final String NON_SPACE = "";
 
     public static void validateNumber(String value) {
         try {
@@ -20,13 +17,7 @@ public class TicketValidation {
         }
     }
 
-    public static void validateNumberInRange(int number) {
-        if (number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_INVALID_RANGE);
-        }
-    }
-
-    public static void validateDuplicated(List<Integer> value) {
+    public static void validateDuplicated(List<LottoNumber> value) {
         boolean duplicated = value.stream()
                 .distinct()
                 .count() != value.size();
@@ -36,7 +27,7 @@ public class TicketValidation {
         }
     }
 
-    public static void validateSize(List<Integer> value) {
+    public static void validateSize(List<LottoNumber> value) {
         if (value.size() != NUMBER_COUNT_IN_LOTTO) {
             throw new IllegalArgumentException(ERROR_MESSAGE_INVALID_SIZE);
         }
