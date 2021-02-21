@@ -1,11 +1,12 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class LottoMachine {
 
-    private final static int LOTTO_TICKET_PRICE = 1000;
     private final static int MIN_LOTTO_NUMBER = 1;
     private final static int MAX_LOTTO_NUMBER = 45;
 
@@ -20,16 +21,19 @@ public class LottoMachine {
     }
 
     public List<LottoTicket> generateLottoTickets() {
-        final List<LottoTicket> lottoTickets = new ArrayList<>();
-        final int lottoTicketQuantity = getLottoTicketQuantity();
-        for (int i = 0; i < lottoTicketQuantity; i++) {
-            lottoTickets.add(LottoTicket.valueOf(
-                    RandomLottoNumberGenerator.generate(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)));
-        }
-        return lottoTickets;
+        final int lottoTicketQuantity = price.getNumberOfTickets();
+        final List<Integer> numberBox = generateNumberBox();
+
+        return Stream
+            .generate(() -> LottoTicket.valueOf(RandomLottoNumberGenerator.generate(numberBox)))
+            .limit(lottoTicketQuantity)
+            .collect(Collectors.toList());
     }
 
-    private int getLottoTicketQuantity() {
-        return price.getValue() / LOTTO_TICKET_PRICE;
+    private List<Integer> generateNumberBox() {
+        return IntStream
+            .rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
+            .boxed()
+            .collect(Collectors.toList());
     }
 }

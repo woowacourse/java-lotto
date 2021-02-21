@@ -13,13 +13,11 @@ public class Price {
     private static final String NOT_DIVISIBLE_ERROR = "1000원 단위 금액이 아닙니다.";
 
     private final int value;
-
-    private Price(final int value) {
-        this.value = value;
-    }
+    private final int numberOfTickets;
 
     private Price(final String value) {
         this.value = Integer.parseInt(value);
+        this.numberOfTickets = this.value / MIN_PRICE;
     }
 
     public static Price valueOf(final String value) {
@@ -71,6 +69,10 @@ public class Price {
 
     public int getValue() {
         return value;
+    }
+
+    public int getNumberOfTickets() {
+        return numberOfTickets;
     }
 
     @Override
