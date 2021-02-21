@@ -14,7 +14,7 @@ public class Money {
     }
 
     public boolean isCanBuy(final int price) {
-        return value > price;
+        return value >= price;
     }
 
     private void moneyValidate(final int value) {
