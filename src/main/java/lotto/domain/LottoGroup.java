@@ -6,21 +6,21 @@ import java.util.List;
 
 public class LottoGroup {
 
-  private final List<Lotto> lottoList;
+    private final List<Lotto> lottoList;
 
-  public LottoGroup() {
-    this.lottoList = new ArrayList<>();
-  }
+    public LottoGroup() {
+        this.lottoList = new ArrayList<>();
+    }
 
-  public void addLotto(Lotto lotto) {
-    lottoList.add(lotto);
-  }
+    public void addLotto(Lotto lotto) {
+        lottoList.add(lotto);
+    }
 
-  public int size() {
-    return lottoList.size();
-  }
+    public int size() {
+        return lottoList.size();
+    }
 
-  public List<Lotto> lottoGroup() {
-    return Collections.unmodifiableList(lottoList);
-  }
+    public List<Lotto> lottoGroup() {
+        return Collections.unmodifiableList(lottoList);
+    }
 }
