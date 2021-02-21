@@ -17,6 +17,9 @@ import lotto.domain.rank.Ranks;
 
 public class OutputView {
 
+    private OutputView(){
+    }
+
     public static void printLottoResult(Ranks lottoResult) {
         System.out.println(WINNING_LOTTO_LINE_STATISTICS.getMessage());
         System.out.printf(FIFTH_PLACE_RESULT_FORMAT.getMessage(), lottoResult.getNumberOfRank(Rank.FIFTH));

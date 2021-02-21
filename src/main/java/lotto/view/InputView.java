@@ -14,6 +14,9 @@ public class InputView {
     private static final String DELIMIT = ",";
     private static final Scanner SCANNER = new Scanner(System.in);
 
+    private InputView() {
+    }
+
     public static int getMoneyUserInput() {
         System.out.println(PURCHASE_MONEY_INPUT_REQUEST.getMessage());
         return Integer.parseInt(SCANNER.nextLine());
