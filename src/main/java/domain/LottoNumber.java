@@ -1,11 +1,13 @@
 package domain;
 
-import java.util.Objects;
+import java.util.*;
 
 public class LottoNumber {
 
     private static final int MIN_NUMBER_VALUE = 1;
     private static final int MAX_NUMBER_VALUE = 45;
+
+    private static final Set<LottoNumber> existingNumbers = new HashSet<>();
 
     private final int value;
 
@@ -15,7 +17,16 @@ public class LottoNumber {
 
     public static LottoNumber valueOf(final int value) {
         validateRange(value);
-        return new LottoNumber(value);
+        LottoNumber lottoNumber = getInstance(value);
+        existingNumbers.add(lottoNumber);
+        return lottoNumber;
+    }
+
+    private static LottoNumber getInstance(int value) {
+       return existingNumbers.stream()
+            .filter(number -> number.getValue() == value)
+            .findAny()
+            .orElse(new LottoNumber(value));
     }
 
     private static void validateRange(final int value) {
