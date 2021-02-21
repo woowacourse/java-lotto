@@ -1,22 +1,5 @@
 package lotto.domain;
 
-import lotto.controller.LottoController;
-import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoRepository;
-import lotto.domain.lottomachine.TestLottoMachine;
-import lotto.domain.primitive.LottoNumber;
-import lotto.domain.primitive.Money;
-import lotto.domain.primitive.Ticket;
-import lotto.domain.rating.Rating;
-import lotto.domain.rating.RatingCounter;
-import lotto.domain.statistics.WinningLotto;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 //public class LottoControllerTest {
