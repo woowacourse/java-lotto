@@ -1,11 +1,13 @@
 package lotto.ranking;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
 
 import static lotto.game.LottoCount.ZERO;
 
 public class Statistics {
-
     private final Map<Ranking, Integer> statistics;
 
     public Statistics(List<Ranking> rankings) {

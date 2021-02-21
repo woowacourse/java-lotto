@@ -1,10 +1,10 @@
 package lotto.view;
 
 import lotto.game.LottoCount;
-import lotto.ticket.Ticket;
-import lotto.ticket.Tickets;
 import lotto.ranking.Ranking;
 import lotto.ranking.Statistics;
+import lotto.ticket.Ticket;
+import lotto.ticket.Tickets;
 
 import java.util.Map;
 

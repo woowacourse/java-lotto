@@ -1,12 +1,12 @@
 package lotto.game;
 
+import lotto.money.Money;
+import lotto.money.PrizeMoney;
+import lotto.ranking.Statistics;
 import lotto.ticket.BonusBall;
 import lotto.ticket.Tickets;
 import lotto.ticket.WinnerTicket;
 import lotto.ticket.strategy.RandomNumbersGenerator;
-import lotto.money.Money;
-import lotto.money.PrizeMoney;
-import lotto.ranking.Statistics;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
