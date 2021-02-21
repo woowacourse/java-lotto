@@ -11,6 +11,7 @@ public class LottoTicket {
 
     public static final int START_LOTTO_NUMBER = 1;
     public static final int FINISH_LOTTO_NUMBER = 45;
+    public static final int COUNT_LOTTO_NUMBER = 6;
 
     private final LottoNumbers lottoNumbers = new LottoNumbers();
 
@@ -23,7 +24,7 @@ public class LottoTicket {
     private List<Integer> getShuffledNumbers(List<Integer> numbers) {
         Collections.shuffle(initNumbers(numbers));
 
-        List<Integer> shuffledNumbers = numbers.subList(0, 6);
+        List<Integer> shuffledNumbers = numbers.subList(0, COUNT_LOTTO_NUMBER);
         Collections.sort(shuffledNumbers);
         return shuffledNumbers;
     }
