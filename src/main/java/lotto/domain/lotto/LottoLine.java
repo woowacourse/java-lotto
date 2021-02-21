@@ -22,10 +22,10 @@ public class LottoLine {
         value = unDuplicatedLottoNumber;
     }
 
-    public Rank matchLottoNumbers(List<LottoNumber> lottoNumbers, LottoNumber bonusNumber,
-                                  List<LottoNumber> answerLottoNumbers) {
-        int matchCount = (int) lottoNumbers.stream().filter(answerLottoNumbers::contains).count();
-        boolean hasBonusNumber = answerLottoNumbers.contains(bonusNumber);
+    public Rank matchLottoNumbers(List<LottoNumber> lottoNumbers, WinningNumbers winningNumbers) {
+        List<LottoNumber> winningLottoNumbers = winningNumbers.getLastWinningLottoNumbers().getValues();
+        int matchCount = (int) lottoNumbers.stream().filter(winningLottoNumbers::contains).count();
+        boolean hasBonusNumber = winningLottoNumbers.contains(winningNumbers.getLastWinBonusBall());
         return Rank.check(matchCount, hasBonusNumber);
     }
 

@@ -22,9 +22,7 @@ public class LottoTicket {
     public List<Rank> matchLottoLines(WinningNumbers winningNumbers) {
         List<Rank> ranks = new ArrayList<>();
         for (LottoLine lottoLine : lottoLines) {
-            ranks.add(lottoLine
-                    .matchLottoNumbers(lottoLine.getValues(), winningNumbers.getLastWinBonusBall(),
-                            winningNumbers.getLastWinningLottoNumbers().getValues()));
+            ranks.add(lottoLine.matchLottoNumbers(lottoLine.getValues(), winningNumbers));
         }
         return ranks;
     }
