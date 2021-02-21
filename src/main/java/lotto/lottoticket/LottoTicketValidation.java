@@ -4,10 +4,14 @@ import java.util.List;
 
 import static lotto.lottoticket.ticketnumber.RandomNumbersGenerator.NUMBER_COUNT_IN_LOTTO;
 
-public class TicketValidation {
+public class LottoTicketValidation {
     public static final String ERROR_MESSAGE_DUPLICATED = "중복되는 숫자가 존재합니다.";
     public static final String ERROR_MESSAGE_INVALID_INPUT = "잘못된 입력입니다.";
     public static final String ERROR_MESSAGE_INVALID_SIZE = "숫자는 6개여야 합니다.";
+
+    private LottoTicketValidation() {
+
+    }
 
     public static void validateNumber(String value) {
         try {

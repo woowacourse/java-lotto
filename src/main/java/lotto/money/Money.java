@@ -1,6 +1,6 @@
 package lotto.money;
 
-import lotto.lottoticket.TicketValidation;
+import lotto.lottoticket.LottoTicketValidation;
 
 import java.util.Objects;
 
@@ -17,7 +17,7 @@ public class Money {
     }
 
     private int validate(String money) {
-        TicketValidation.validateNumber(money);
+        LottoTicketValidation.validateNumber(money);
         int number = Integer.parseInt(money.trim());
         checkMinimum(number);
         return number;

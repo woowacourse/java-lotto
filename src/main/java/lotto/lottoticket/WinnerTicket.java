@@ -22,14 +22,14 @@ public class WinnerTicket {
     }
 
     private LottoNumber makeValidatedNumber(String value) {
-        TicketValidation.validateNumber(value);
+        LottoTicketValidation.validateNumber(value);
         int number = Integer.parseInt(value.trim());
         return new LottoNumber(number);
     }
 
     private List<LottoNumber> makeValidatedNumbers(List<LottoNumber> numbers) {
-        TicketValidation.validateSize(numbers);
-        TicketValidation.validateDuplicated(numbers);
+        LottoTicketValidation.validateSize(numbers);
+        LottoTicketValidation.validateDuplicated(numbers);
         return numbers;
     }
 

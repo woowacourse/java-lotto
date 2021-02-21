@@ -2,13 +2,13 @@ package lotto.lottoticket;
 
 import java.util.Objects;
 
-import static lotto.lottoticket.TicketValidation.ERROR_MESSAGE_DUPLICATED;
+import static lotto.lottoticket.LottoTicketValidation.ERROR_MESSAGE_DUPLICATED;
 
 public class BonusBall {
     private final LottoNumber bonusBall;
 
     public BonusBall(String value, WinnerTicket winnerTicket) {
-        TicketValidation.validateNumber(value);
+        LottoTicketValidation.validateNumber(value);
         this.bonusBall = makeValidateNumber(value, winnerTicket);
     }
 

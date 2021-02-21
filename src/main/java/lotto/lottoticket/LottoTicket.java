@@ -17,8 +17,8 @@ public class LottoTicket {
     }
 
     private List<LottoNumber> validate(List<LottoNumber> values) {
-        TicketValidation.validateSize(values);
-        TicketValidation.validateDuplicated(values);
+        LottoTicketValidation.validateSize(values);
+        LottoTicketValidation.validateDuplicated(values);
         return values;
     }
 
