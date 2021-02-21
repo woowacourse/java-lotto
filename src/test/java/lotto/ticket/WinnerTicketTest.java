@@ -74,7 +74,7 @@ public class WinnerTicketTest {
                         new Number("6")
                 );
         WinnerTicket winnerTicket = new WinnerTicket("1,2,3,4,5,6");
-        Ticket ticket = new Ticket(numbersGenerator);
+        Ticket ticket = new Ticket(numbersGenerator.generate());
         assertThat(winnerTicket.findMatchCount(ticket)).isEqualTo(6);
     }
 }

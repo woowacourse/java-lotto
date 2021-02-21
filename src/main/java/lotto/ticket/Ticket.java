@@ -13,10 +13,6 @@ import static lotto.game.LottoCount.ZERO;
 public class Ticket {
     private final List<Number> numbers;
 
-    public Ticket(NumbersGenerator numbersGenerator) {
-        this.numbers = new ArrayList<>(validate(numbersGenerator.generate()));
-    }
-
     public Ticket(List<Number> numbers) {
         this.numbers = new ArrayList<>(validate(numbers));
     }

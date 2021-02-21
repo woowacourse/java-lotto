@@ -24,8 +24,8 @@ public class TicketTest {
                         new Number("5"),
                         new Number("6")
                 );
-        Ticket ticket = new Ticket(numbersGenerator);
-        assertThat(ticket).isEqualTo(new Ticket(numbersGenerator));
+        Ticket ticket = new Ticket(numbersGenerator.generate());
+        assertThat(ticket).isEqualTo(new Ticket(numbersGenerator.generate()));
     }
 
     @Test
@@ -41,7 +41,7 @@ public class TicketTest {
                         new Number("5")
                 );
         assertThatThrownBy(() ->
-                new Ticket(numbersGenerator)
+                new Ticket(numbersGenerator.generate())
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ERROR_MESSAGE_INVALID_RANGE);
     }
@@ -59,7 +59,7 @@ public class TicketTest {
                         new Number("5")
                 );
         assertThatThrownBy(() ->
-                new Ticket(numbersGenerator)
+                new Ticket(numbersGenerator.generate())
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ERROR_MESSAGE_DUPLICATED);
     }
@@ -76,7 +76,7 @@ public class TicketTest {
                         new Number("5")
                 );
         assertThatThrownBy(() ->
-                new Ticket(numbersGenerator)
+                new Ticket(numbersGenerator.generate())
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ERROR_MESSAGE_INVALID_SIZE);
     }
@@ -94,7 +94,7 @@ public class TicketTest {
                         new Number("6")
                 );
         BonusBall bonusBall = new BonusBall("6", new WinnerTicket(("1, 2, 3, 4, 5, 8")));
-        Ticket ticket = new Ticket(numbersGenerator);
+        Ticket ticket = new Ticket(numbersGenerator.generate());
         assertTrue(ticket.hasContainBonus(bonusBall));
     }
 }

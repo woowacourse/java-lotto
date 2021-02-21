@@ -17,7 +17,7 @@ public class Tickets {
         this.tickets = new ArrayList<>();
         while (lottoCount.isGreaterThanZero()) {
             lottoCount = lottoCount.decreaseOne();
-            tickets.add(new Ticket(numbersGenerator));
+            tickets.add(new Ticket(numbersGenerator.generate()));
         }
     }
 
