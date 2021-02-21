@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.Objects;
 
 public class Money {
-    public static final int LOTTO_PRICE = 1000;
+    private static final int LOTTO_PRICE = 1000;
     public static final String NOT_ENOUGH_MONEY_ERROR = String.format("%d원 이상의 금액만 입력 가능합니다.", LOTTO_PRICE);
 
     private final int money;
