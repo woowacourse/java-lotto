@@ -1,11 +1,9 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoStatistics;
-import lotto.domain.Lottos;
-import lotto.domain.Rank;
+import lotto.domain.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static lotto.domain.Rank.getRanksForStatistics;
 
@@ -16,9 +14,20 @@ public class OutputView {
     public static void showLottos(Lottos lottos) {
         System.out.printf("%d개를 구매했습니다.\n", lottos.getNumberOfLotto());
         for (Lotto lotto : lottos.getLottos()) {
-            System.out.println(lotto.getLottoSummary());
+            System.out.println(printLottoSummary(lotto));
         }
         System.out.println();
+    }
+
+    private static String printLottoSummary(Lotto lotto) {
+        return String.format("[%s]", lottoSummary(lotto));
+    }
+
+    private static String lottoSummary(Lotto lotto) {
+        return lotto.getLottoNumbers()
+                .stream()
+                .map(LottoNumber::getNumberAsString)
+                .collect(Collectors.joining(", "));
     }
 
     public static void showResultStatistics(LottoStatistics lottoStatistics) {

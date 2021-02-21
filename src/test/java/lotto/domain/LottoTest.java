@@ -70,10 +70,4 @@ public class LottoTest {
 
         assertTrue(match);
     }
-
-    @DisplayName("로또에 대한 요약을 형식에 맞게 제대로 하는지")
-    @Test
-    void getLottoSummary() {
-        assertThat(lotto.getLottoSummary()).isEqualTo("[1, 2, 3, 20, 21, 40]");
-    }
 }

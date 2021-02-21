@@ -30,7 +30,7 @@ public class Lotto {
         }
     }
 
-    public List<LottoNumber> toList() {
+    public List<LottoNumber> getLottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
@@ -40,16 +40,6 @@ public class Lotto {
 
     public boolean hasBonusNumber(WinningLotto winningLotto) {
         return winningLotto.hasBonusMatch(lottoNumbers);
-    }
-
-    public String getLottoSummary() {
-        return String.format("[%s]", lottoSummary());
-    }
-
-    private String lottoSummary() {
-        return lottoNumbers.stream()
-                .map(LottoNumber::getNumberAsString)
-                .collect(Collectors.joining(", "));
     }
 
     @Override
