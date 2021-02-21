@@ -25,7 +25,7 @@ public enum Prize {
         this.money = money;
     }
 
-    public static Prize valueOf(final WinningNumbers winningNumbers, final LottoTicket lottoTicket) {
+    public static Prize of(final WinningNumbers winningNumbers, final LottoTicket lottoTicket) {
         final int matching = winningNumbers.countMatching(lottoTicket);
         boolean bonusMatching = winningNumbers.hasBonus(lottoTicket);
         return calculate(matching, bonusMatching);
