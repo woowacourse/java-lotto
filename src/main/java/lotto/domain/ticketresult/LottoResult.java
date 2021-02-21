@@ -43,9 +43,10 @@ public class LottoResult {
     }
 
     private void increaseOneCountOfLottoMatchType(List<LottoNumber> matchedLottoNumbersToGetPrize) {
-        LottoMatchType lottoMatchTypes
+        LottoMatchType lottoMatchType
             = LottoMatchType.getLottoMatchType(matchedLottoNumbersToGetPrize);
-        resultCounts.put(lottoMatchTypes, resultCounts.get(lottoMatchTypes) + 1);
+        resultCounts
+            .computeIfPresent(lottoMatchType, (LottoMatchType key, Integer value) -> ++value);
     }
 
     public void addAllWinningMoney() {
