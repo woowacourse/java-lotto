@@ -11,7 +11,8 @@ public enum Rank {
     FIFTH(3, 5_000L),
     NOTHING(0, 0L);
     
-    public static final Comparator<Rank> ASCENDING_ORDER = new AscendingComparator();
+    public static final Comparator<Rank> ASCENDING_ORDER = Comparator.comparingInt(Rank::getMatchCount)
+                                                                     .thenComparing(Rank::getReward);
     
     private final int matchCount;
     
@@ -63,30 +64,5 @@ public enum Rank {
     
     public int getMatchCount() {
         return matchCount;
-    }
-    
-    private static class AscendingComparator implements Comparator<Rank> {
-        @Override
-        public int compare(Rank preRank, Rank postRank) {
-            int valueOfComparedMatchCount = compareMatchCount(preRank, postRank);
-            
-            if (isSameMatchCount(valueOfComparedMatchCount)) {
-                return compareReward(preRank, postRank);
-            }
-            
-            return valueOfComparedMatchCount;
-        }
-        
-        private boolean isSameMatchCount(int valueOfComparedMatchCount) {
-            return valueOfComparedMatchCount == 0;
-        }
-    
-        private int compareMatchCount(Rank preRank, Rank postRank) {
-            return preRank.matchCount - postRank.matchCount;
-        }
-    
-        private int compareReward(Rank preRank, Rank postRank) {
-            return (int) (preRank.reward - postRank.reward);
-        }
     }
 }
