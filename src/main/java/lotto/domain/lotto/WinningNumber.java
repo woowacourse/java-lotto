@@ -43,14 +43,14 @@ public class WinningNumber {
         return lottoNumbers;
     }
 
-    public AnalysedLottos analysingLottos(LottoGroup lottoGroup, PayOut payOut) {
+    public AnalysedLottos analysingLottos(LottoGroup lottoGroup) {
         Map<RankFactory, Long> rankAndCount = lottoGroup.calculateLottoResult(lottoNumbers, bonusNumber);
 
         Arrays.stream(RankFactory.values())
                 .filter(rank -> !rank.equals(RankFactory.FAIL) && !rankAndCount.containsKey(rank))
                 .forEach(rank -> rankAndCount.put(rank, 0L));
 
-        return new AnalysedLottos(rankAndCount, payOut);
+        return new AnalysedLottos(rankAndCount);
     }
 
     @Override

@@ -87,9 +87,13 @@ public class WinningNumberTest {
                 )
             )
         ));
-        AnalysedLottos result = winningNumber.analysingLottos(lottoGroup, new PayOut(1000));
+        AnalysedLottos result = winningNumber.analysingLottos(lottoGroup);
 
-        List<Long> actual = result.getRankings().stream().map(Rank::getCount).collect(toList());
+        List<Long> actual = result
+                .getRankings()
+                .stream()
+                .map(Rank::getCount)
+                .collect(toList());
 
         assertThat(actual).isEqualTo(expected);
     }

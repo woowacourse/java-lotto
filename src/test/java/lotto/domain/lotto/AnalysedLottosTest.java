@@ -48,7 +48,7 @@ public class AnalysedLottosTest {
                 )
             )
         ));
-        AnalysedLottos result = winningNumber.analysingLottos(lottoGroup, new PayOut(3000));
-        assertThat(2031500000D / 3000D).isEqualTo(result.getYield(), withPrecision(2d));
+        AnalysedLottos result = winningNumber.analysingLottos(lottoGroup);
+        assertThat(2031500000D / 3000D).isEqualTo(result.getYield( new PayOut(3000)), withPrecision(2d));
     }
 }
