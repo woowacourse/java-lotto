@@ -10,11 +10,11 @@ import static lotto.domain.LottoNumber.MAXIMUM_CANDIDATE_NUMBER;
 import static lotto.domain.LottoNumber.MINIMUM_CANDIDATE_NUMBER;
 
 public class AutomaticLottoGenerator implements LottoGenerator {
-    private static final List<Integer> candidateNumbers = new ArrayList<>();
+    private static final List<LottoNumber> candidateNumbers = new ArrayList<>();
 
     static {
         for (int i = MINIMUM_CANDIDATE_NUMBER; i <= MAXIMUM_CANDIDATE_NUMBER; i++) {
-            candidateNumbers.add(i);
+            candidateNumbers.add(new LottoNumber(i));
         }
     }
 
@@ -28,17 +28,9 @@ public class AutomaticLottoGenerator implements LottoGenerator {
 
     public Lotto createLotto() {
         Collections.shuffle(candidateNumbers);
-        List<Integer> numbers = candidateNumbers.subList(LOTTO_START_INDEX, LOTTO_SIZE);
+        List<LottoNumber> numbers = candidateNumbers.subList(LOTTO_START_INDEX, LOTTO_SIZE);
         Collections.sort(numbers);
 
-        return new Lotto(createLottoNumbers(numbers));
-    }
-
-    private List<LottoNumber> createLottoNumbers(List<Integer> numbers) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (Integer number : numbers) {
-            lottoNumbers.add(new LottoNumber(number));
-        }
-        return lottoNumbers;
+        return new Lotto(numbers);
     }
 }
