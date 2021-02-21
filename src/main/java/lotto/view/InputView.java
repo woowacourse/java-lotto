@@ -12,7 +12,7 @@ import lotto.view.printer.InputPrinter;
 
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
-    private static final String NUMERIC_REGULAR_EXPRESSION = "\\d+";
+    private static final String NATURAL_NUMBER_REGEX = "[1-9]\\d*";
     public static final String LOTTO_NUMBER_DELIMITER = ", ";
 
     private InputView() {
@@ -35,7 +35,7 @@ public class InputView {
     }
 
     private static int validateNaturalNumber(String purchasePriceInput) {
-        if (!purchasePriceInput.matches(NUMERIC_REGULAR_EXPRESSION)) {
+        if (!purchasePriceInput.matches(NATURAL_NUMBER_REGEX)) {
             throw new IllegalArgumentException("자연수를 입력해주세요.");
         }
         return Integer.parseInt(purchasePriceInput);
@@ -68,8 +68,8 @@ public class InputView {
 
     private static void validateAllNaturalNumbers(String winningNumbersInput) {
         if (!Arrays.stream(winningNumbersInput.split(LOTTO_NUMBER_DELIMITER))
-            .allMatch(name -> name.matches(NUMERIC_REGULAR_EXPRESSION))) {
-            throw new IllegalArgumentException("올바르지 않은 입력입니다.");
+            .allMatch(name -> name.matches(NATURAL_NUMBER_REGEX))) {
+            throw new IllegalArgumentException("각 로또 번호는 자연수여야 합니다.");
         }
     }
 

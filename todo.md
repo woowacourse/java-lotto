@@ -1,6 +1,6 @@
 # todo
 LottoGenerator의 purchaseTickets() purchasedLottoTickets -> lottoTickets로 변경
-구매 금액 에러 메시지 "천원 단위의 금액을 입력해주세요."로 변경
+
 # done
 - LottoTicket 에서 allNumbers, shuffle 분리. 일급컬렉션으로.
 - LottoGenerator new ArrayList()<>; 생성자 내부에서 초기화.
