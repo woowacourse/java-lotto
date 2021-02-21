@@ -21,7 +21,7 @@ public class Ticket {
         return count;
     }
 
-    public int getPrice() {
-        return TICKET_PRICE * count;
+    public Money getPrice() {
+        return new Money(TICKET_PRICE * count);
     }
 }

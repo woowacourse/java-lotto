@@ -6,7 +6,7 @@ public enum Rating {
     THIRD(1_500_000, new LottoResult(5, false)),
     FOURTH(50_000, new LottoResult(4, false)),
     FIFTH(5_000, new LottoResult(3, false)),
-    MISS(0, new LottoResult(0,false));
+    MISS(0, new LottoResult(0, false));
 
     private final LottoResult lottoResult;
     private final int reward;
@@ -17,9 +17,9 @@ public enum Rating {
     }
 
     public static Rating getRating(final int matchCount, final boolean containBonusBall) {
-        LottoResult lottoResult = new LottoResult(matchCount,containBonusBall);
-        for (Rating rating: values()) {
-            if (rating.lottoResult.equals(lottoResult)){
+        LottoResult lottoResult = new LottoResult(matchCount, containBonusBall);
+        for (Rating rating : values()) {
+            if (rating.lottoResult.equals(lottoResult)) {
                 return rating;
             }
         }

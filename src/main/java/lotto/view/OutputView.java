@@ -1,11 +1,9 @@
 package lotto.view;
 
 import lotto.domain.lotto.Lotto;
-import lotto.domain.primitive.Money;
 import lotto.domain.rating.LottoResult;
 import lotto.domain.rating.Rating;
 import lotto.domain.rating.RatingCounter;
-import lotto.domain.statistics.LottoStatistics;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,14 +38,13 @@ public class OutputView {
               .append(NEW_LINE);
     }
 
-    public static void printWinningStats(LottoStatistics lottoStatistics, int money) {
-        printWinningDetail(lottoStatistics);
-        printEarningRate(lottoStatistics.getEarningRate(new Money(money)));
+    public static void printWinningStats(RatingCounter ratingCounter, double rate) {
+        printWinningDetail(ratingCounter);
+        printEarningRate(rate);
     }
 
-    private static void printWinningDetail(LottoStatistics lottoStatistics) {
+    private static void printWinningDetail(RatingCounter ratingCounter) {
         System.out.println(NEW_LINE + "당첨 통계" + NEW_LINE + "---------");
-        RatingCounter ratingCounter = lottoStatistics.getRatingCounter();
         for (Rating rating : Rating.values()) {
             if (rating == Rating.MISS) {
                 break;

@@ -47,6 +47,8 @@ public class Lotto {
         return numbers.contains(input);
     }
 
+
+
     public List<Integer> getNumbers() {
         List<LottoNumber> copyNumbers = new ArrayList<>(numbers);
         return Collections.unmodifiableList(copyNumbers.stream()

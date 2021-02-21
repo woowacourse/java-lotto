@@ -1,39 +1,31 @@
 package lotto.controller;
 
+import lotto.domain.LottoService;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lottomachine.LottoMachine;
+import lotto.domain.lottomachine.RandomLottoMachine;
 import lotto.domain.primitive.LottoNumber;
 import lotto.domain.primitive.Money;
 import lotto.domain.primitive.Ticket;
-import lotto.domain.rating.Rating;
-import lotto.domain.rating.RatingCounter;
-import lotto.domain.statistics.LottoStatistics;
 import lotto.domain.statistics.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class LottoController {
-    private final LottoMachine lottoMachine;
-    private final RatingCounter ratingCounter = new RatingCounter();
-    private final List<Lotto> lottos = new ArrayList<>();
-
-    public LottoController(LottoMachine lottoMachine) {
-        this.lottoMachine = lottoMachine;
+    public LottoController() {
     }
 
     public void start() {
+        LottoService lottoService = new LottoService(new RandomLottoMachine());
         Ticket ticket = buyTicket();
 
         OutputView.printBuyTicket(ticket.getCount());
-        generateLottos(ticket);
-        OutputView.printLottoResults(lottos);
+        lottoService.generateLottos(ticket);
+        OutputView.printLottoResults(lottoService.getLottos());
 
-        WinningLotto winningLotto = getWinningLotto();
-        RatingCounter ratingCounter = scratchLotto(winningLotto);
-        OutputView.printWinningStats(new LottoStatistics(ratingCounter), ticket.getPrice());
+        lottoService.scratchLotto(getWinningLotto());
+
+        OutputView.printWinningStats(lottoService.getRatingCounter(), lottoService.getEarningRate(ticket.getPrice()));
     }
 
     private Ticket buyTicket() {
@@ -51,12 +43,6 @@ public class LottoController {
         return new Ticket(new Money(money));
     }
 
-    public void generateLottos(Ticket ticket) {
-        for (int i = 0; i < ticket.getCount(); i++) {
-            lottos.add(new Lotto(lottoMachine.generate()));
-        }
-    }
-
     private WinningLotto getWinningLotto() {
         try {
             return tryGetWinningLotto();
@@ -71,14 +57,5 @@ public class LottoController {
         OutputView.getMessage("보너스 볼을 입력해 주세요.");
         LottoNumber bonusNumber = new LottoNumber(InputView.getInt());
         return new WinningLotto(lotto, bonusNumber);
-    }
-
-    public RatingCounter scratchLotto(WinningLotto winningLotto) {
-        for (Lotto lotto : lottos) {
-            int match = winningLotto.compareLottoNumber(lotto);
-            boolean hasBonusBall = winningLotto.compareBonusBall(lotto);
-            ratingCounter.update(Rating.getRating(match, hasBonusBall));
-        }
-        return ratingCounter;
     }
 }
