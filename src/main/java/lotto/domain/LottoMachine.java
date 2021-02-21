@@ -1,6 +1,4 @@
-package lotto;
-
-import lotto.domain.*;
+package lotto.domain;
 
 public class LottoMachine {
     
