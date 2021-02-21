@@ -41,7 +41,7 @@ public class PayOut {
     public PayOut subtraction(PayOut payOut) {
         Number subtractedNumber = value.subtraction(payOut.value);
 
-        if(subtractedNumber.equals(ZERO)) {
+        if (subtractedNumber.equals(ZERO)) {
             return new PayOut();
         }
 

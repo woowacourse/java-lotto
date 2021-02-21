@@ -12,16 +12,16 @@ public class NumberTest {
     @DisplayName("숫자가 아닌 경우")
     void inputNoNumber() {
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> new Number("abc"))
-            .withMessageContaining("입력이 숫자가 아니거나");
+                .isThrownBy(() -> new Number("abc"))
+                .withMessageContaining("입력이 숫자가 아니거나");
     }
 
     @Test
     @DisplayName("Integer 범위 밖인 경우")
     void inputOutOfInteger() {
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> new Number("9876543211324"))
-            .withMessageContaining("범위를 벗어났습니다.");
+                .isThrownBy(() -> new Number("9876543211324"))
+                .withMessageContaining("범위를 벗어났습니다.");
     }
 
     @Test

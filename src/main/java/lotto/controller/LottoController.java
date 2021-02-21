@@ -25,7 +25,7 @@ public class LottoController {
                 payOut.subtractionUsingGameCount(manualLottoCount.getValueAsInt())
         );
 
-        createWinningNumberAndlottoResultAnalysisAndPrint( lottoGroup, payOut);
+        createWinningNumberAndlottoResultAnalysisAndPrint(lottoGroup, payOut);
     }
 
     private static PayOut getPayOutFromUser() {

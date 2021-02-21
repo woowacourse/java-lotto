@@ -24,7 +24,7 @@ public class LottoGenerator {
 
         for (int i = LOTTO_NUMBER_MINIMUM; i <= LOTTO_NUMBER_MAXIMUM; i++) {
             lottoNumbers.add(
-                new LottoNumber(new Number(i))
+                    new LottoNumber(new Number(i))
             );
         }
     }
@@ -41,8 +41,8 @@ public class LottoGenerator {
     public LottoGroup generateLottosWithManualLottoNumbers(List<String> manualLottoNumbers, PayOut payOut) {
         return new LottoGroup(
                 manualLottoNumbers.stream()
-                .map(LottoNumbers::valueOf)
-                .collect(toList())
+                        .map(LottoNumbers::valueOf)
+                        .collect(toList())
         ).addition(
                 generateLottos(payOut.getGameCount())
         );

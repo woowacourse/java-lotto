@@ -26,8 +26,8 @@ public class LottoNumbers {
     public static LottoNumbers valueOf(String lottoNumbers) {
         return new LottoNumbers(
                 getSplitLottoNumber(lottoNumbers).stream()
-                .map(lottoNumber -> new LottoNumber(new Number(lottoNumber.trim())))
-                .collect(toList())
+                        .map(lottoNumber -> new LottoNumber(new Number(lottoNumber.trim())))
+                        .collect(toList())
         );
     }
 

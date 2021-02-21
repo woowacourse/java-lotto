@@ -12,7 +12,7 @@ public class ManualPurchasesNumber extends Number {
     }
 
     private void validatePurchasable(PayOut payOut) {
-        if(payOut.getGameCount() < getValueAsInt()) {
+        if (payOut.getGameCount() < getValueAsInt()) {
             throw new IllegalArgumentException("가능한 게임 횟수를 초과했습니다.");
         }
     }

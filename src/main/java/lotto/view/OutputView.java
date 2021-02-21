@@ -12,7 +12,7 @@ import lotto.domain.rank.Rank;
 public class OutputView {
     private static final String PAYOUT = "구입금액을 입력해 주세요";
     private static final String MANUAL_PURCHASE = System.lineSeparator() + "수동으로 구매할 로또 수를 입력해 주세요.";
-    private static final String MANUAL_LOTTO_NUMBER  = System.lineSeparator() + "수동으로 구매할 번호를 입력해 주세요";
+    private static final String MANUAL_LOTTO_NUMBER = System.lineSeparator() + "수동으로 구매할 번호를 입력해 주세요";
     private static final String LOTTO_COUNT_FORMAT = System.lineSeparator() + "수동으로 %d장, 자동으로 %d개를 구매했습니다." + System.lineSeparator();
     private static final String LAST_WEEK_LOTTO_NUMBER = System.lineSeparator() + "지난 주 당첨 번호를 입력해 주세요";
     private static final String BONUS_NUMBER = "보너스 볼을 입력해 주세요.";

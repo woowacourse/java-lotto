@@ -24,11 +24,11 @@ public class PayOutTest {
     @DisplayName("음수를 입력하면 예외")
     void inputNegativeOrZeroPayOutNumber() {
         assertThatIllegalArgumentException().isThrownBy(
-            () -> new PayOut(new Number(-1))
+                () -> new PayOut(new Number(-1))
         ).withMessage("입력값이 양수가 아닙니다.");
 
         assertThatIllegalArgumentException().isThrownBy(
-            () -> new PayOut(new Number(0))
+                () -> new PayOut(new Number(0))
         ).withMessage("입력값이 양수가 아닙니다.");
     }
 

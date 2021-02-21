@@ -1,6 +1,5 @@
 package lotto.domain.lotto;
 
-import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import lotto.domain.number.PayOut;
