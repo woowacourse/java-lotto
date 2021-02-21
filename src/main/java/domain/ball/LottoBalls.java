@@ -53,11 +53,6 @@ public class LottoBalls {
         }
     }
 
-    public boolean containNumber(final LottoBall targetLottoBall) {
-        return lottoBalls.stream()
-                .anyMatch(targetLottoBall::equals);
-    }
-
     public List<LottoBall> getLottoBalls() {
         List<LottoBall> copy = new ArrayList<>(this.lottoBalls);
         return Collections.unmodifiableList(copy);
@@ -71,7 +66,7 @@ public class LottoBalls {
         boolean containBonus = this.lottoBalls.stream()
                 .anyMatch(bonusBall::equals);
 
-        return LottoRank.findByBonusWithMatches(containBonus, count);
+        return LottoRank.findRankByBonusAndMatches(containBonus, count);
     }
 
     private boolean contains(LottoBall lottoBall) {
