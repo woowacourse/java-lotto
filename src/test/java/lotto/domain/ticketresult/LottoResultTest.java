@@ -39,7 +39,7 @@ public class LottoResultTest {
                 new LottoNumber(6)
             )
         );
-        LottoNumber bonusNumber = new LottoNumber(7, true);
+        LottoNumber bonusNumber = new LottoNumber(7);
         winningLottoNumbers = new WinningTicketAndBonusNumber(winnerTicket, bonusNumber);
         userPurchase = new UserPurchase(new PurchasePrice(PURCHASE_PRICE), new LottoTickets());
     }

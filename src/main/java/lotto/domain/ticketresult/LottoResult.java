@@ -13,6 +13,7 @@ import lotto.type.LottoMatchType;
 
 public class LottoResult {
     private static final int MIN_MATCH_NUMBER_COUNT_TO_GET_PRIZE = 3;
+    private static final int SECOND_DECIMAL_PLACE = 2;
 
     private final WinningTicketAndBonusNumber winningLottoNumbers;
     private final Map<LottoMatchType, Integer> resultCounts;
@@ -34,15 +35,16 @@ public class LottoResult {
     }
 
     public void applyOneTicketResult(LottoTicket lottoTicket) {
-        List<LottoNumber> matchedLottoNumbers = winningLottoNumbers
+        MatchedLottoNumbers matchedLottoNumbers = winningLottoNumbers
             .getMatchedLottoNumbers(lottoTicket);
-        if (matchedLottoNumbers.size() < MIN_MATCH_NUMBER_COUNT_TO_GET_PRIZE) {
+        if (matchedLottoNumbers.getSizeOfNumbersNotIncludingBonusNumber()
+            < MIN_MATCH_NUMBER_COUNT_TO_GET_PRIZE) {
             return;
         }
         increaseOneCountOfLottoMatchType(matchedLottoNumbers);
     }
 
-    private void increaseOneCountOfLottoMatchType(List<LottoNumber> matchedLottoNumbersToGetPrize) {
+    private void increaseOneCountOfLottoMatchType(MatchedLottoNumbers matchedLottoNumbersToGetPrize) {
         LottoMatchType lottoMatchType
             = LottoMatchType.getLottoMatchType(matchedLottoNumbersToGetPrize);
         resultCounts
@@ -64,6 +66,6 @@ public class LottoResult {
         return new BigDecimal(String.valueOf(totalLottoWinningMoney))
             .divide(new BigDecimal(String.valueOf(purchasePrice.getPurchasePrice())),
                 MathContext.DECIMAL32)
-            .setScale(2, BigDecimal.ROUND_HALF_UP);
+            .setScale(SECOND_DECIMAL_PLACE, BigDecimal.ROUND_HALF_UP);
     }
 }

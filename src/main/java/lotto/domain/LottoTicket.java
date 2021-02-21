@@ -20,7 +20,7 @@ public class LottoTicket {
         this.lottoNumbers.sort(Comparator.comparingInt(LottoNumber::getNumber));
     }
 
-    public List<LottoNumber> getLottoTicketNumbers() {
+    public List<LottoNumber> getLottoNumbers() {
         return Collections.unmodifiableList(this.lottoNumbers);
     }
 
@@ -42,7 +42,7 @@ public class LottoTicket {
     }
 
     public List<LottoNumber> getMatchedLottoNumbers(LottoTicket lottoTicket) {
-        return lottoTicket.getLottoTicketNumbers().stream()
+        return lottoTicket.getLottoNumbers().stream()
             .filter(this.lottoNumbers::contains)
             .collect(Collectors.toList());
     }

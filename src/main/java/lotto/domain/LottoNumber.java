@@ -7,15 +7,9 @@ public class LottoNumber {
     public static final int MAXIMUM = 45;
 
     private final int number;
-    private final boolean isBonusNumber;
 
     public LottoNumber(int number) {
-        this(number, false);
-    }
-
-    public LottoNumber(int number, boolean isBonusNumber) {
         this.number = number;
-        this.isBonusNumber = isBonusNumber;
         validateRange(number);
     }
 
@@ -27,10 +21,6 @@ public class LottoNumber {
 
     public int getNumber() {
         return this.number;
-    }
-
-    public boolean isBonusNumber() {
-        return this.isBonusNumber;
     }
 
     @Override

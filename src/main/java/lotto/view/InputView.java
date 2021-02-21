@@ -115,6 +115,6 @@ public class InputView {
         String bonusNumberInput = scanner.nextLine();
         int bonusNumber = validateInteger(bonusNumberInput);
         InputPrinter.printNewLine();
-        return new LottoNumber(bonusNumber, true);
+        return new LottoNumber(bonusNumber);
     }
 }

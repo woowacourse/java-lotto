@@ -24,7 +24,7 @@ public class OutputPrinter {
 
     public static void printLottoTicketNumbers(LottoTicket lottoTicket) {
         System.out.println("[" +
-            lottoTicket.getLottoTicketNumbers().stream()
+            lottoTicket.getLottoNumbers().stream()
                 .map(lottoNumber -> Integer.toString(lottoNumber.getNumber()))
                 .collect(Collectors.joining(LOTTO_NUMBERS_DELIMITER))
             + "]"

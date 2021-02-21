@@ -1,8 +1,7 @@
 package lotto.type;
 
 import java.util.Arrays;
-import java.util.List;
-import lotto.domain.LottoNumber;
+import lotto.domain.ticketresult.MatchedLottoNumbers;
 
 public enum LottoMatchType {
     THREE_MATCH(3, 5_000,
@@ -11,24 +10,24 @@ public enum LottoMatchType {
         "4개 일치 (50000원) - %d개"),
     FIVE_MATCH(5, 1_500_000,
         "5개 일치 (1500000원) - %d개"),
-    FIVE_AND_BONUS_MATCH(6, 30_000_000,
+    FIVE_AND_BONUS_MATCH(5, 30_000_000,
         "5개 일치, 보너스 볼 일치(30000000원) - %d개"),
     SIX_MATCH(6, 2_000_000_000,
         "6개 일치 (2000000000원) - %d개");
 
-    private final int countMatchedNumbers;
+    private final int countOfMatchedNumbersNotIncludingBonusNumber;
     private final int prizeMoney;
     private final String matchCountMessage;
 
-    LottoMatchType(int countMatchedNumbers, int prizeMoney,
+    LottoMatchType(int countOfMatchedNumbersNotIncludingBonusNumber, int prizeMoney,
         String matchCountMessage) {
-        this.countMatchedNumbers = countMatchedNumbers;
+        this.countOfMatchedNumbersNotIncludingBonusNumber = countOfMatchedNumbersNotIncludingBonusNumber;
         this.prizeMoney = prizeMoney;
         this.matchCountMessage = matchCountMessage;
     }
 
-    public int getCountMatchedNumbers() {
-        return countMatchedNumbers;
+    public int getCountOfMatchedNumbersNotIncludingBonusNumber() {
+        return countOfMatchedNumbersNotIncludingBonusNumber;
     }
 
     public int getPrizeMoney() {
@@ -39,26 +38,30 @@ public enum LottoMatchType {
         return matchCountMessage;
     }
 
-    public static LottoMatchType getLottoMatchType(List<LottoNumber> matchedLottoNumbersToGetPrize) {
-        if (matchedLottoNumbersToGetPrize.size() != SIX_MATCH.getCountMatchedNumbers()) {
-            return getLottoMatchTypeNotSixNumbersMatched(matchedLottoNumbersToGetPrize);
+    public static LottoMatchType getLottoMatchType(
+        MatchedLottoNumbers matchedLottoNumbersToGetPrize) {
+        if (matchedLottoNumbersToGetPrize.getSizeOfNumbersNotIncludingBonusNumber()
+            != FIVE_MATCH.getCountOfMatchedNumbersNotIncludingBonusNumber()) {
+            return getLottoMatchTypeNotFiveNumbersMatched(matchedLottoNumbersToGetPrize);
         }
-        return getLottoMatchTypeSixNumbersMatched(matchedLottoNumbersToGetPrize);
+        return getLottoMatchTypeFiveNumbersMatched(matchedLottoNumbersToGetPrize);
     }
 
-    private static LottoMatchType getLottoMatchTypeNotSixNumbersMatched(List<LottoNumber> matchedLottoNumbers) {
+    private static LottoMatchType getLottoMatchTypeNotFiveNumbersMatched(
+        MatchedLottoNumbers matchedLottoNumbers) {
         return Arrays.stream(LottoMatchType.values())
             .filter(lottoMatchType ->
-                lottoMatchType.getCountMatchedNumbers() == matchedLottoNumbers.size())
+                lottoMatchType.getCountOfMatchedNumbersNotIncludingBonusNumber()
+                    == matchedLottoNumbers.getSizeOfNumbersNotIncludingBonusNumber())
             .findAny()
             .orElseThrow(IllegalArgumentException::new);
     }
 
-    private static LottoMatchType getLottoMatchTypeSixNumbersMatched(List<LottoNumber> matchedLottoNumbers) {
-        if (matchedLottoNumbers.stream()
-            .anyMatch(LottoNumber::isBonusNumber)) {
+    private static LottoMatchType getLottoMatchTypeFiveNumbersMatched(
+        MatchedLottoNumbers matchedLottoNumbers) {
+        if (matchedLottoNumbers.isContainsBonusNumber()) {
             return FIVE_AND_BONUS_MATCH;
         }
-        return SIX_MATCH;
+        return FIVE_MATCH;
     }
 }
