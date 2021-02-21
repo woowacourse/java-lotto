@@ -1,57 +1,72 @@
 package domain;
 
+import domain.ticket.LottoTicket;
+
 import java.util.Arrays;
 import java.util.Objects;
-import java.util.stream.Stream;
 
 public enum Prize {
-    FIRST(6, false, 2_000_000_000),
-    SECOND(5, true, 30_000_000),
-    THIRD(5, false, 1_500_000),
-    FOURTH(4, false, 50_000),
-    FIFTH(3, false, 5000),
-    NOTHING(0, false, 0);
+    FIRST(6, false, 2_000_000_000L),
+    SECOND(5, true, 30_000_000L),
+    THIRD(5, false, 1_500_000L),
+    FOURTH(4, false, 50_000L),
+    FIFTH(3, false, 5000L),
+    NOTHING(0, false, 0L);
 
-    private static final int BONUS_CONSIDER_LIMIT = 5;
+    private static final int BONUS_CONSIDER_CRITERION = 5;
 
     private final int matching;
     private final boolean bonusMatching;
-    private final int money;
+    private final long money;
 
-    Prize(final int matching, final boolean bonusMatching, final int money) {
+    Prize(final int matching, final boolean bonusMatching, final long money) {
         this.matching = matching;
         this.bonusMatching = bonusMatching;
         this.money = money;
     }
 
-    public static Prize select(final int matching, final boolean bonusMatching) {
-        final Stream<Prize> rankingStream = Arrays.stream(Prize.values())
-                .filter(prize -> Objects.equals(matching, prize.matching));
+    public static Prize valueOf(final WinningNumbers winningNumbers, final LottoTicket lottoTicket) {
+        final int matching = winningNumbers.countMatching(lottoTicket);
+        boolean bonusMatching = winningNumbers.hasBonus(lottoTicket);
+        return calculate(matching, bonusMatching);
+    }
 
-        if (matching >= BONUS_CONSIDER_LIMIT) {
-            return considerBonus(bonusMatching, rankingStream);
+    public static Prize calculate(final int matching, boolean bonusMatching) {
+        if (needBonusChecking(matching)) {
+            return considerBonus(matching, bonusMatching);
         }
-        return notConsiderBonus(rankingStream);
+
+        return notConsiderBonus(matching, bonusMatching);
     }
 
-    private static Prize notConsiderBonus(final Stream<Prize> rankingStream) {
-        return rankingStream
-                .findFirst()
-                .orElse(NOTHING);
+    private static boolean needBonusChecking(final int matching) {
+        return matching == BONUS_CONSIDER_CRITERION;
     }
 
-    private static Prize considerBonus(final boolean bonusMatching, final Stream<Prize> rankingStream) {
-        return rankingStream
+    private static Prize considerBonus(final int matching, final boolean bonusMatching) {
+        return Arrays.stream(values())
+                .filter(prize -> Objects.equals(matching, prize.matching))
                 .filter(prize -> Objects.equals(bonusMatching, prize.bonusMatching))
                 .findFirst()
                 .orElse(NOTHING);
     }
 
-    public int getMoney() {
+    private static Prize notConsiderBonus(final int matching, final boolean bonusMatching) {
+        return Arrays.stream(values())
+                .filter(prize -> Objects.equals(matching, prize.matching))
+                .findFirst()
+                .orElse(NOTHING);
+    }
+
+    public long getMoney() {
         return money;
     }
 
     public int getMatching() {
         return matching;
+    }
+
+    public boolean isBonusMatching() {
+        return bonusMatching;
     }
 }
