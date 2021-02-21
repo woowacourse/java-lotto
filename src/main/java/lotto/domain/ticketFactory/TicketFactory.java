@@ -11,27 +11,28 @@ import lotto.domain.LottoTickets;
 
 public class TicketFactory {
 
-    private final RandomTicketGenerator randomTicketGenerator;
+    static final RandomTicketGenerator randomTicketGenerator;
 
-    public TicketFactory() {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
+    static {
+        final List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int i = LOTTO_NUMBER_MIN_LIMIT; i <= LOTTO_NUMBER_MAX_LIMIT; i++) {
             lottoNumbers.add(new LottoNumber(i));
         }
         randomTicketGenerator = new RandomTicketGenerator(lottoNumbers);
     }
 
-    public LottoTicket makeFixedTicket(List<Integer> lottoNumbers) {
+    private TicketFactory() { }
+
+    public static LottoTicket makeFixedTicket(List<Integer> lottoNumbers) {
         FixedTicketGenerator fixedTicketGenerator = new FixedTicketGenerator(lottoNumbers);
         return fixedTicketGenerator.generateTicket();
     }
 
-    public LottoTickets makeRandomTicketsByCount(int counts) {
+    public static LottoTickets makeRandomTicketsByCount(int counts) {
         LottoTickets lottoTickets = new LottoTickets();
         for (int i = 0; i < counts; i++) {
             lottoTickets.addTicket(randomTicketGenerator.generateTicket());
         }
         return lottoTickets;
     }
-
 }

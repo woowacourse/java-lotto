@@ -14,12 +14,11 @@ import org.junit.jupiter.api.Test;
 
 class TicketFactoryTest {
 
-    TicketFactory ticketFactory = new TicketFactory();
 
     @DisplayName("입력한 갯수만큼 로또 티켓이 만들어진다.")
     @Test
     void createTickets() {
-        LottoTickets lottoTickets = ticketFactory.makeRandomTicketsByCount(3);
+        LottoTickets lottoTickets = TicketFactory.makeRandomTicketsByCount(3);
 
         assertThat(lottoTickets.getLottoTickets().size()).isEqualTo(3);
     }
@@ -29,7 +28,7 @@ class TicketFactoryTest {
     void createTicket() {
         List<Integer> numbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         Set<Integer> actual = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoTicket lottoTicket = ticketFactory.makeFixedTicket(numbers);
+        LottoTicket lottoTicket = TicketFactory.makeFixedTicket(numbers);
 
         assertThat(lottoTicket.getLottoNumbers()).isEqualTo(actual);
     }

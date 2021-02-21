@@ -14,23 +14,16 @@ import lotto.view.OutputView;
 public class LottoController {
 
     private final InputView inputView;
-    private final TicketFactory ticketFactory;
-    private final LottoResult lottoResult;
-
-    private Money money;
-    private LottoTickets lottoTickets;
 
     public LottoController() {
         inputView = new InputView();
-        ticketFactory = new TicketFactory();
-        lottoResult = new LottoResult();
     }
 
     public void run() {
-        money = inputMoney();
-        lottoTickets = buyTickets();
+        Money money = inputMoney();
+        LottoTickets lottoTickets = buyTickets(money);
         WinningLotto winningLotto = inputWinningLotto();
-        showResult(winningLotto);
+        showResult(lottoTickets, winningLotto, money);
     }
 
     private Money inputMoney() {
@@ -45,8 +38,8 @@ public class LottoController {
         }
     }
 
-    private LottoTickets buyTickets() {
-        lottoTickets = ticketFactory.makeRandomTicketsByCount(money.countTickets());
+    private LottoTickets buyTickets(Money money) {
+        LottoTickets lottoTickets = TicketFactory.makeRandomTicketsByCount(money.countTickets());
         OutputView.printAllTickets(lottoTickets);
         return lottoTickets;
     }
@@ -60,7 +53,7 @@ public class LottoController {
     private LottoTicket inputWinningNumbers() {
         try {
             OutputView.printWinningNumbers();
-            return ticketFactory.makeFixedTicket(inputView.inputNumbers());
+            return TicketFactory.makeFixedTicket(inputView.inputNumbers());
         } catch (LottoCustomException exception) {
             OutputView.printErrorMessage(exception);
             return inputWinningNumbers();
@@ -85,7 +78,8 @@ public class LottoController {
         }
     }
 
-    private void showResult(WinningLotto winningLotto) {
+    private void showResult(LottoTickets lottoTickets, WinningLotto winningLotto, Money money) {
+        LottoResult lottoResult = new LottoResult();
         lottoResult.checkWinnings(lottoTickets, winningLotto);
 
         OutputView.printWinningResultTitle();
