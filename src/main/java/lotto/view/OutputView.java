@@ -3,6 +3,8 @@ package lotto.view;
 import lotto.domain.*;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class OutputView {
     
@@ -22,18 +24,28 @@ public class OutputView {
     
     public void printPurchaseLottos(PaymentAmount paymentAmount, Lottos lottos) {
         printPurchaseCount(paymentAmount);
-        printPurchaseLottos(lottos);
+        printEveryPurchaseLottos(lottos);
     }
     
     private void printPurchaseCount(PaymentAmount paymentAmount) {
         System.out.printf(VIEW_OF_PURCHASE_COUNT, paymentAmount.getPurchaseCount(), NEW_LINE);
     }
     
-    private void printPurchaseLottos(Lottos lottos) {
-        lottos.toInts()
+    private void printEveryPurchaseLottos(Lottos lottos) {
+        lottos.getLottos()
+              .stream()
+              .map(this::sortLottoNumbers)
               .forEach(System.out::println);
         
         System.out.println();
+    }
+    
+    private List<Integer> sortLottoNumbers(Lotto lotto) {
+        return lotto.getLottoNumbers()
+                    .stream()
+                    .map(LottoNumber::getLottoNum)
+                    .sorted()
+                    .collect(Collectors.toList());
     }
     
     public void printStatistic(LottoStatisticResult result) {

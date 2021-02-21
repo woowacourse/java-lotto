@@ -19,6 +19,6 @@ public class LottosTest {
         
         
         // then
-        assertThat(lottos.toInts().size()).isEqualTo(purchaseCount);
+        assertThat(lottos.getLottos().size()).isEqualTo(purchaseCount);
     }
 }

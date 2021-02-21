@@ -5,7 +5,6 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
@@ -18,20 +17,17 @@ public class Lottos {
         this.lottos = new ArrayList<>(lottos);
     }
     
-    public List<List<Integer>> toInts() {
-        return lottos.stream()
-                     .map(Lotto::toInts)
-                     .collect(Collectors.toList());
+    public List<Lotto> getLottos() {
+        return new ArrayList<>(lottos);
     }
     
     public LottoStatisticResult retrieveResults(WinningLotto winningLotto) {
         Map<Rank, Long> rankCount = this.lottos.stream()
                                                .map(lotto -> Rank.searchRank(winningLotto, lotto))
                                                .collect(groupingBy(
-                                                               Function.identity(),
-                                                               () -> new EnumMap<>(Rank.class),
-                                                               counting()
-                                                       ));
+                                                       Function.identity(),
+                                                       () -> new EnumMap<>(Rank.class),
+                                                       counting()));
         
         return new LottoStatisticResult(rankCount);
     }

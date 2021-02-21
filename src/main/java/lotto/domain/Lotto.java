@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -48,10 +49,7 @@ public class Lotto {
         return lottoNumbers.contains(number);
     }
     
-    public List<Integer> toInts() {
-        return lottoNumbers.stream()
-                           .map(LottoNumber::getLottoNum)
-                           .sorted()
-                           .collect(Collectors.toList());
+    public Set<LottoNumber> getLottoNumbers() {
+        return new HashSet<>(lottoNumbers);
     }
 }
