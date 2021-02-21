@@ -14,4 +14,11 @@ public class LottoCountTest {
         LottoCount lottoCount = new LottoCount(new Money("10000"));
         assertThat(lottoCount).isEqualTo(new LottoCount(new Money("10000")));
     }
+
+    @Test
+    @DisplayName("구매 금액에 따른 로또 티켓 장수확인")
+    void lottoCount() {
+        LottoCount lottoCount = new LottoCount(new Money("14000"));
+        assertThat(lottoCount.getLottoCount()).isEqualTo(14);
+    }
 }
