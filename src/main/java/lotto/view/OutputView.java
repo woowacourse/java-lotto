@@ -60,7 +60,7 @@ public class OutputView {
             stringBuilder.append(", 보너스 볼 일치");
         }
         stringBuilder.append(String.format(" (%d원) - %d개", rating.getReward(), count));
-        System.out.println(stringBuilder.toString());
+        System.out.println(stringBuilder);
     }
 
     private void printEarningRate(double rate) {
