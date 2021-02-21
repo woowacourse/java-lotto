@@ -38,6 +38,10 @@ public abstract class Ticket {
         }
     }
 
+    public boolean isSameNumbers(final Ticket ticket) {
+        return this.lottoNumbers.equals(ticket.lottoNumbers);
+    }
+
     protected abstract List<Integer> generateNumbers(List<Integer> numbers);
 
     @Override
