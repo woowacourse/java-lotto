@@ -33,11 +33,11 @@ public class OutputView {
     public static void printLottoTicket(LottoTicket lottoTicket) {
         System.out.println(lottoTicket.getLottoLineSize() + "개를 구매했습니다.");
         for (LottoLine line : lottoTicket.getLottoLines()) {
-            List<String> lottoNumbers = line.getLottoNumbers().stream()
+            String lottoNumbers = line.getLottoNumbers().stream()
                 .sorted()
                 .map(lottoNumber -> String.valueOf(lottoNumber.getValue()))
-                .collect(Collectors.toList());
-            System.out.println("[" + String.join(", ", lottoNumbers) + "]");
+                .collect(Collectors.joining(", ", "[", "]"));
+            System.out.println(lottoNumbers);
         }
     }
 
