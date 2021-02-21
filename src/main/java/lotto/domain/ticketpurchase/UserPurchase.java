@@ -20,6 +20,7 @@ public class UserPurchase {
     public LottoTickets getManuallyPurchasedLottoTickets() {
         return manuallyPurchasedLottoTickets;
     }
+
     public int getNumberOfAutomaticallyPurchasedLottoTickets() {
         return getNumberOfAllTickets() - manuallyPurchasedLottoTickets.size();
     }

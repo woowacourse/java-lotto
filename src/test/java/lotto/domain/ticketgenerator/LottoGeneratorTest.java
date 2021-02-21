@@ -50,6 +50,23 @@ public class LottoGeneratorTest {
             .isEqualTo(0);
     }
 
+    @DisplayName("전체 자동 구매 결과 테스트")
+    @Test
+    void Should_Return_LottoTicketsWithExactTickets_When_PurchaseAllAutomatically() {
+        LottoTickets manuallyPurchasedLottoTickets = new LottoTickets();
+        UserPurchase userPurchase
+            = new UserPurchase(new PurchasePrice(2_000), manuallyPurchasedLottoTickets);
+        LottoGenerator lottoGenerator = new LottoGenerator();
+
+        AllPurchasedLottoTickets allPurchasedLottoTickets
+            = lottoGenerator.purchaseTickets(userPurchase);
+
+        assertThat(allPurchasedLottoTickets.getNumberOfManuallyPurchasedLottoTickets())
+            .isEqualTo(0);
+        assertThat(allPurchasedLottoTickets.getNumberOfAutomaticallyPurchasedLottoTickets())
+            .isEqualTo(2);
+    }
+
     @DisplayName("일부 수동 구매 결과 테스트")
     @Test
     void Should_Return_LottoTicketsWithExactTickets_When_PurchaseSomeTicketsManually() {
