@@ -1,67 +1,71 @@
 package view;
 
-import domain.LottoNumber;
-import domain.ticket.LottoTicket;
-import domain.Ranking;
+import dto.LottoTicketsDto;
+import dto.PrizeDto;
+import dto.SingleLottoTicketDto;
+import dto.WinningStaticsDto;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class OutputView {
-    private static final String WINNING_STATISTICS_TITLE = "당첨 통계";
-    private static final String DIVIDER = "---------";
-    private static final String NUMBER_OF_TICKETS = "개를 구매했습니다.";
-    private static final String COMMA = ", ";
-    private static final String LEFT_BRACKET = "[";
-    private static final String RIGHT_BRACKET = "]";
-    private static final String RANK_RESULT_FORMAT = "%d개 일치 %s(%d원) - %d개";
-    private static final String TOTAL_PROFIT_RATE_PREFIX = "총 수익률은 ";
-    private static final String TOTAL_PROFIT_RATE_SUFFIX = "입니다.";
-    private static final String BONUS_BALL_FORMAT = ", 보너스 볼 일치";
-    private static final String EMPTY_STRING = "";
-
     private OutputView() {
     }
 
-    public static void printNumberOfTickets(final int lottoQuantity) {
-        System.out.println(lottoQuantity + NUMBER_OF_TICKETS);
+    public static void printLottoQuantity(final int lottoQuantity) {
+        System.out.println(String.format("%d개를 구매했습니다.", lottoQuantity));
     }
 
-    public static void printLottoTickets(final List<LottoTicket> lottoTickets) {
-        lottoTickets.forEach(ticket -> System.out.println(printLottoNumbers(ticket)));
+    public static void printLottoTickets(final LottoTicketsDto lottoTicketsDto) {
+        final List<SingleLottoTicketDto> singleLottoTicketDtos = lottoTicketsDto.getSingleLottoTicketDtos();
+        singleLottoTicketDtos.forEach(
+                ticket -> printLottoNumbers(ticket.getLottoNumbers())
+        );
     }
 
-    private static String printLottoNumbers(final LottoTicket lottoTicket) {
-        String numbers = lottoTicket.toList()
-                .stream()
-                .map(LottoNumber::getValue)
+    private static void printLottoNumbers(final List<Integer> numbers) {
+        String joinNumbers = numbers.stream()
                 .map(String::valueOf)
-                .collect(Collectors.joining(COMMA));
+                .collect(Collectors.joining(", "));
 
-        return LEFT_BRACKET + numbers + RIGHT_BRACKET;
+        System.out.println("[" + joinNumbers + "]");
     }
 
-    public static void printRankResultTitle() {
-        System.out.println(WINNING_STATISTICS_TITLE);
-        System.out.println(DIVIDER);
+    public static void printWinningStaticsTitle() {
+        System.out.println("당첨 통계");
+        System.out.println("---------");
     }
 
-    public static void printIndividualRankResult(final int countNumberOfRank, final Ranking ranking) {
-        String bonusMessage = EMPTY_STRING;
-        if (ranking == Ranking.SECOND) {
-            bonusMessage = BONUS_BALL_FORMAT;
+    public static void printWinningStatics(final WinningStaticsDto winningStaticsDto) {
+        List<PrizeDto> prizeDtos = winningStaticsDto.getPrizeDtos();
+        prizeDtos.forEach(
+                prizeDto -> printWinningStaticsPerPrize(prizeDto)
+        );
+    }
+
+    private static void printWinningStaticsPerPrize(final PrizeDto prizeDtos) {
+        System.out.println(makePrizeStaticsMessage(prizeDtos));
+    }
+
+    private static String makePrizeStaticsMessage(final PrizeDto prizeDto) {
+        final int matching = prizeDto.getMatching();
+        final boolean bonusMatching = prizeDto.isBonusMatching();
+        final long money = prizeDto.getMoney();
+        final int winningNumber = prizeDto.getWinningNumber();
+
+        return String.format("%d개 일치 %s(%d원) - %d개",
+                matching, getBonusMatchMessage(bonusMatching), money, winningNumber);
+    }
+
+    private static String getBonusMatchMessage(final boolean bonusMatching) {
+        if (bonusMatching) {
+            return ", 보너스 볼 일치";
         }
-
-        String print = String.format(
-                RANK_RESULT_FORMAT, ranking.getMatching(), bonusMessage, ranking.getMoney(), countNumberOfRank);
-        System.out.println(print);
+        return "";
     }
 
-    public static void printTotalProfitRate(final double profitRate) {
-        System.out.println(TOTAL_PROFIT_RATE_PREFIX + profitRate + TOTAL_PROFIT_RATE_SUFFIX);
-    }
-
-    public static void printError(final Exception e) {
-        System.out.println(e.getMessage());
+    public static void printProfitRate(final double profitRate) {
+        final double flooredProfitRate = Math.floor(profitRate * 100.) / 100.;
+        System.out.println(String.format("총 수익률은 %.2f입니다.", flooredProfitRate));
     }
 }
