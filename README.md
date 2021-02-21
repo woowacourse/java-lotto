@@ -51,15 +51,15 @@
 - [ ] 가격 integer 최댓값 넘어가는 오버플로우 상황 고려
 - [ ] Prize 캐싱 여부
 - [ ] LottoMoney value long으로 변경
-- [ ] WinningStatics에 caluateTotalProfit Stream으로 바꾸기
+- [ ] map을 이용한 for문 stream으로 변경 (WinningStatics)
 
 ## 1단계 피드백 후 리팩터링 목록
 
 - [x] 사용하지 않는 코드 정리
 - [x] 컨벤션 정리
-- [ ] 모든 validate 메서드 static 제거 후 생성자에서 실행
-- [ ] 의미 있는 값만 상수로 포장
-- [ ] 작은 도메인 부터 구조 정리
-- [ ] 적절한 객체에게 역할 분배하기
+- [x] 모든 validate 메서드 static 제거 후 생성자에서 실행
+- [x] 의미 있는 값만 상수로 포장
+- [x] 작은 도메인 부터 구조 정리
+- [x] 적절한 객체에게 역할 분배하기
 - [x] 로또 넘버 캐싱
-- [ ] 최대한의 테스트 넣기
+- [x] 최대한의 테스트 넣기
