@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -26,7 +27,8 @@ public class BonusBallTest {
     }
 
     @Test
-    void 보너스볼이_숫자인지_확인() {
+    @DisplayName("보너스볼이 숫자인지 확인")
+    void validateBonusBallType() {
         String falseBonusBall = FALSE_TYPE_SAMPLE;
         assertThatThrownBy(() -> {
             new BonusBall(winLotto, falseBonusBall);
@@ -35,7 +37,8 @@ public class BonusBallTest {
     }
 
     @Test
-    void 보너스볼이_범위에_있는지_확인() {
+    @DisplayName("보너스볼이 범위에 있는지 확인")
+    void validateBonusBallRange() {
         String falseBonusBall = FALSE_RANGE_SAMPLE;
         assertThatThrownBy(() -> {
             new BonusBall(winLotto, falseBonusBall);
@@ -44,7 +47,8 @@ public class BonusBallTest {
     }
 
     @Test
-    void 보너스볼이_당첨번호와_중복인지_확인() {
+    @DisplayName("보너스볼이 당첨번호와 중복인지 확인")
+    void validateOverlappedBonusBall() {
         String falseBonusBall = FALSE_DUPLICATE_SAMPLE;
         assertThatThrownBy(() -> {
             new BonusBall(winLotto, falseBonusBall);
@@ -53,7 +57,8 @@ public class BonusBallTest {
     }
 
     @Test
-    void 보너스볼_맞는지_확인() {
+    @DisplayName("보너스볼 맞는지 확인")
+    void isBonusBall() {
         BonusBall bonusBall = new BonusBall(winLotto, SAMPLE_BONUSBALL);
         ArrayList<Integer> numbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 7));
         Lotto lotto = new Lotto(numbers);

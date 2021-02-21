@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -11,7 +12,8 @@ public class RankTest {
             "5,false,THIRD",
             "5,true,SECOND",
     })
-    void 등수가_맞게_나오는지_확인(int match, boolean bonusMatch, Rank expected) {
+    @DisplayName("등수가 맞게 나오는지 확인")
+    void isRightRank(int match, boolean bonusMatch, Rank expected) {
         Rank rank = Rank.makeRankByMatch(match, bonusMatch);
         assertThat(rank).isEqualTo(expected);
     }
