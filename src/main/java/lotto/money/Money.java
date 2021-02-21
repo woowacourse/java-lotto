@@ -5,10 +5,9 @@ import lotto.ticket.TicketValidation;
 import java.util.Objects;
 
 public class Money {
-    public static final String ERROR_MESSAGE_MINIMUM_MONEY = "1000원 이상의 금액이 필요합니다.";
-
     private static final int MINIMUM_PRICE = 1000;
     private static final int SECOND_DECIMAL_POINT_MAKER = 100;
+    public static final String ERROR_MESSAGE_MINIMUM_MONEY = MINIMUM_PRICE + "원 이상의 금액이 필요합니다.";
 
     private final int money;
 
