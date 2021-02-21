@@ -27,10 +27,7 @@ public class Money {
     }
 
     public boolean isLessThan(int price) {
-        if (this.price < price) {
-            return true;
-        }
-        return false;
+        return this.price < price;
     }
 
     public int getPrice() {
