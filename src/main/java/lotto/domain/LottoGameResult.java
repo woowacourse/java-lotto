@@ -5,7 +5,11 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
 
+import static lotto.domain.Money.PRICE_OF_LOTTO;
+
 public class LottoGameResult {
+    public static final int ADD_ONE = 1;
+
     private final Map<Rank, Integer> ranks;
 
     public LottoGameResult() {
@@ -19,7 +23,7 @@ public class LottoGameResult {
     }
 
     public void add(Rank rank) {
-        ranks.put(rank, ranks.get(rank) + 1);
+        ranks.put(rank, countByRank(rank) + ADD_ONE);
     }
 
     public Map<Rank, Integer> ranks() {
@@ -45,6 +49,6 @@ public class LottoGameResult {
                 .stream()
                 .mapToInt(num -> num)
                 .sum();
-        return numberOfTotalLotto * Money.PRICE_OF_LOTTO;
+        return numberOfTotalLotto * PRICE_OF_LOTTO;
     }
 }
