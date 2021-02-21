@@ -16,19 +16,18 @@ public class AutoLottoMachine implements LottoMachine {
     private final LottoTicketFactory lottoTicketFactory = new AutoLottoTicketFactory();
 
     @Override
-    public LottoTickets createTickets(int numberOfTickets) {
-        return IntStream.range(0, numberOfTickets)
-                .mapToObj(i -> lottoTicketFactory.createLottoTicket())
-                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoTickets::new));
-    }
-
-    @Override
     public LottoTickets createTicketsByMoney(int purchaseMoney) {
         validateNegativeDigit(purchaseMoney);
         validateNoExtraMoney(purchaseMoney);
 
         int numberOfTickets = purchaseMoney / LOTTO_PRICE;
         return createTickets(numberOfTickets);
+    }
+
+    private LottoTickets createTickets(int numberOfTickets) {
+        return IntStream.range(0, numberOfTickets)
+                .mapToObj(i -> lottoTicketFactory.createLottoTicket())
+                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoTickets::new));
     }
 
     private void validateNoExtraMoney(int purchaseMoney) {
