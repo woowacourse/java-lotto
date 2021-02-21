@@ -12,7 +12,7 @@ public class LottoCount {
     private final int lottoCount;
 
     public LottoCount(Money money) {
-        this.lottoCount = money.divideMoney(LOTTO_PRICE);
+        this(money.divideMoney(LOTTO_PRICE));
     }
 
     private LottoCount(int lottoCount) {
