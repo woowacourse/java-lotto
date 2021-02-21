@@ -24,7 +24,10 @@ public enum Prize {
         if (isMatchCountSameAsPivot(matchCount) && isBonusBall) {
             return SECOND_PRIZE;
         }
-        return Arrays.stream(values()).filter(s -> s.matchCount == matchCount).findFirst().orElse(NO_PRIZE);
+        return Arrays.stream(values())
+                .filter(prize -> prize.matchCount == matchCount)
+                .findFirst()
+                .orElse(NO_PRIZE);
     }
 
     private static boolean isMatchCountSameAsPivot(int matchCount) {

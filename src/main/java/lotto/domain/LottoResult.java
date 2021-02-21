@@ -20,7 +20,7 @@ public class LottoResult {
 
     public int getCountByPrizeType(Prize prize) {
         return (int) lottoResults.stream()
-                .filter(p -> p.equals(prize))
+                .filter(resultPrize -> resultPrize.equals(prize))
                 .count();
     }
 }

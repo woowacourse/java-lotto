@@ -18,7 +18,8 @@ public class LottoTickets {
     public List<Prize> checkWinningTickets(WinningLotto winningLotto) {
         List<Prize> winningTickets = new ArrayList<>();
         for (LottoTicket lottoTicket : this.lottoTickets) {
-            winningTickets.add(Prize.getPrizeType(lottoTicket.getMatchingCount(winningLotto.getWinningTicket().getLottoTicket()),
+            winningTickets.add(Prize.getPrizeType(
+                    lottoTicket.getMatchingCount(winningLotto.getWinningTicket().getLottoTicket()),
                     lottoTicket.isMatchingBonusNumber(winningLotto.getBonusNumber())));
         }
         return winningTickets;

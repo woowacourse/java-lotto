@@ -21,8 +21,9 @@ public class LottoTicketFactory {
     }
 
     public List<LottoTicket> buyLottoTickets(Money money) {
-        int length = (int) money.getValue() / LOTTO_PRICE;
         List<LottoTicket> lottoTickets = new ArrayList<>();
+
+        int length = (int) money.getValue() / LOTTO_PRICE;
         for (int i = 0; i < length; i++) {
             lottoTickets.add(new LottoTicket(createLottoTicketByRange()));
         }
