@@ -59,7 +59,7 @@ public class InputView {
 
     private static int validateInteger(String purchasePriceInput) {
         if (!purchasePriceInput.matches(INTEGER_REGEX)) {
-            throw new IllegalArgumentException("정수를 입력해주세요.");
+            throw new IllegalArgumentException("잘못된 입력입니다.");
         }
         return Integer.parseInt(purchasePriceInput);
     }
@@ -103,7 +103,7 @@ public class InputView {
     private static void validateAllIntegerLottoNumbersInput(String winningNumbersInput) {
         if (!Arrays.stream(winningNumbersInput.split(LOTTO_NUMBERS_DELIMITER))
             .allMatch(name -> name.matches(INTEGER_REGEX))) {
-            throw new IllegalArgumentException("각 로또 번호는 정수여야 합니다.");
+            throw new IllegalArgumentException("잘못된 입력입니다.");
         }
     }
 
