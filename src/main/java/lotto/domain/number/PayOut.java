@@ -4,7 +4,6 @@ import java.util.Objects;
 
 public class PayOut {
     public static final PayOut ZERO = new PayOut();
-    private static final int GAME_PRICE = 1000;
     private final Number value;
 
     public PayOut(Number number) {
@@ -30,10 +29,6 @@ public class PayOut {
         }
     }
 
-    public int getGameCount() {
-        return value.getValueAsInt() / GAME_PRICE;
-    }
-
     public int getValueAsInt() {
         return value.getValueAsInt();
     }
@@ -47,11 +42,6 @@ public class PayOut {
 
         return new PayOut(value.subtract(payOut.value));
     }
-
-    public PayOut subtractUsingGameCount(int count) {
-        return subtract(new PayOut(count * GAME_PRICE));
-    }
-
 
     @Override
     public boolean equals(Object o) {

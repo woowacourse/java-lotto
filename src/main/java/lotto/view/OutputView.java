@@ -6,7 +6,6 @@ import java.util.List;
 
 import lotto.domain.lotto.LottoGroup;
 import lotto.domain.lotto.LottoNumbers;
-import lotto.domain.lotto.AnalysedLottos;
 import lotto.domain.rank.Rank;
 
 public class OutputView {

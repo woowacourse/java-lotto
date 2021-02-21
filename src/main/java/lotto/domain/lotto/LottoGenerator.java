@@ -7,7 +7,6 @@ import java.util.stream.Stream;
 
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.Number;
-import lotto.domain.number.PayOut;
 
 import static java.util.stream.Collectors.toList;
 
@@ -38,13 +37,13 @@ public class LottoGenerator {
         );
     }
 
-    public LottoGroup generateLottosWithManualLottoNumbers(List<String> manualLottoNumbers, PayOut payOut) {
+    public LottoGroup generateLottosWithManualLottoNumbers(List<String> manualLottoNumbers, int autoGameCount) {
         return new LottoGroup(
                 manualLottoNumbers.stream()
                         .map(LottoNumbers::valueOf)
                         .collect(toList())
         ).add(
-                generateLottos(payOut.getGameCount())
+                generateLottos(autoGameCount)
         );
     }
 

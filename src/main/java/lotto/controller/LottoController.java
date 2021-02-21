@@ -1,7 +1,6 @@
 package lotto.controller;
 
 import lotto.domain.lotto.*;
-import lotto.domain.number.ManualPurchasesNumber;
 import lotto.domain.number.Number;
 import lotto.domain.number.PayOut;
 import lotto.view.InputView;
@@ -13,19 +12,23 @@ import java.util.stream.Stream;
 import static java.util.stream.Collectors.toList;
 
 public class LottoController {
-    private static final LottoGenerator lottoGenerator = new LottoGenerator();
+    private static final LottoGenerator LOTTO_GENERATOR = new LottoGenerator();
+    private static final GamePrice GAME_PRICE = new GamePrice();
 
     public static void run() {
         PayOut payOut = getPayOutFromUser();
 
-        ManualPurchasesNumber manualLottoCount = getManualLottoCountFromUser(payOut);
-        List<String> manualLottos = getManualLottosFromUser(payOut, manualLottoCount);
+        Number manualLottoCount = getManualLottoCountFromUser();
+        List<String> manualLottos = getManualLottosFromUser(GAME_PRICE.getGameCount(payOut), manualLottoCount);
 
         LottoGroup lottoGroup = createLottosAccordingToTheAmount(manualLottos,
-                payOut.subtractUsingGameCount(manualLottoCount.getValueAsInt())
+                GAME_PRICE.getGameCount(
+                        GAME_PRICE.subtractPayOutByGameCount(payOut, manualLottoCount.getValueAsInt())
+                )
         );
 
-        createWinningNumberAndlottoResultAnalysisAndPrint(lottoGroup, payOut);
+        WinningNumber winningNumber = createWinningNumber();
+        createWinningNumberAndlottoResultAnalysisAndPrint(winningNumber, lottoGroup, payOut);
     }
 
     private static PayOut getPayOutFromUser() {
@@ -34,34 +37,41 @@ public class LottoController {
         return new PayOut(InputView.getStringInputFromUser());
     }
 
-    private static ManualPurchasesNumber getManualLottoCountFromUser(PayOut payOut) {
+    private static Number getManualLottoCountFromUser() {
         OutputView.manualPurchase();
 
-        return new ManualPurchasesNumber(InputView.getStringInputFromUser(), payOut);
+        return new Number(InputView.getStringInputFromUser());
     }
 
-    private static List<String> getManualLottosFromUser(PayOut payOut, Number manualLottoCount) {
+    private static List<String> getManualLottosFromUser(int gameCount, Number manualLottoCount) {
         OutputView.manualLottoNumber();
 
         List<String> manualLottos = Stream.generate(InputView::getStringInputFromUser)
                 .limit(manualLottoCount.getValueAsInt())
                 .collect(toList());
 
-        OutputView.payOuted(payOut.getGameCount(), manualLottoCount.getValueAsInt());
+        OutputView.payOuted(gameCount, manualLottoCount.getValueAsInt());
 
         return manualLottos;
     }
 
     private static LottoGroup createLottosAccordingToTheAmount(List<String> manualLottos,
-                                                               PayOut payOut) {
-        LottoGroup lottoGroup = lottoGenerator.generateLottosWithManualLottoNumbers(
+                                                               int gameCount) {
+        LottoGroup lottoGroup = LOTTO_GENERATOR.generateLottosWithManualLottoNumbers(
                 manualLottos,
-                payOut
+                gameCount
         );
 
         OutputView.boughtLottos(lottoGroup);
 
         return lottoGroup;
+    }
+
+    public static WinningNumber createWinningNumber() {
+        return new WinningNumber(
+                getLastWeekLottoNumberFromUser(),
+                getBonusNumberFromUser()
+        );
     }
 
     private static String getLastWeekLottoNumberFromUser() {
@@ -77,16 +87,11 @@ public class LottoController {
     }
 
     private static void createWinningNumberAndlottoResultAnalysisAndPrint(
+            WinningNumber winningNumber,
             LottoGroup lottoGroup,
             PayOut payOut) {
 
-        WinningNumber winningNumber = new WinningNumber(
-                getLastWeekLottoNumberFromUser(),
-                getBonusNumberFromUser()
-        );
-
-        AnalysedLottos analysedLottos = winningNumber.analysingLottos(lottoGroup);
-        OutputView.printWinningStatistics(analysedLottos.getRankings());
-        OutputView.printYield(analysedLottos.getYield(payOut));
+        OutputView.printWinningStatistics(winningNumber.getRanks(lottoGroup));
+        OutputView.printYield(winningNumber.getYield(lottoGroup, payOut));
     }
 }

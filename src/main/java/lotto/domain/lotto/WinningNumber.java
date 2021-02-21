@@ -1,12 +1,17 @@
 package lotto.domain.lotto;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.PayOut;
+import lotto.domain.rank.Rank;
 import lotto.domain.rank.RankFactory;
+
+import static java.util.Comparator.comparingInt;
+import static java.util.stream.Collectors.toList;
 
 public class WinningNumber {
 
@@ -43,14 +48,34 @@ public class WinningNumber {
         return lottoNumbers;
     }
 
-    public AnalysedLottos analysingLottos(LottoGroup lottoGroup) {
+    public List<Rank> getRanks(LottoGroup lottoGroup) {
+        Map<RankFactory, Long> rankAndCount = createRankAndCount(lottoGroup);
+
+        return createRanks(rankAndCount);
+    }
+
+    private Map<RankFactory, Long> createRankAndCount(LottoGroup lottoGroup) {
         Map<RankFactory, Long> rankAndCount = lottoGroup.calculateLottoResult(lottoNumbers, bonusNumber);
 
         Arrays.stream(RankFactory.values())
                 .filter(rank -> !rank.equals(RankFactory.FAIL) && !rankAndCount.containsKey(rank))
                 .forEach(rank -> rankAndCount.put(rank, 0L));
 
-        return new AnalysedLottos(rankAndCount);
+        return rankAndCount;
+    }
+
+    private List<Rank> createRanks(Map<RankFactory, Long> rankAndCount) {
+        return Arrays.stream(RankFactory.values())
+                .filter(rank -> !rank.equals(RankFactory.FAIL))
+                .map(key -> RankFactory.createRanking(key, rankAndCount.getOrDefault(key, 0L)))
+                .sorted(comparingInt(Rank::getRank))
+                .collect(toList());
+    }
+
+    public double getYield(LottoGroup lottoGroup, PayOut payOut) {
+        return getRanks(lottoGroup).stream()
+                .mapToDouble(r -> r.getWinnings() * r.getCount())
+                .sum() / payOut.getValueAsInt();
     }
 
     @Override

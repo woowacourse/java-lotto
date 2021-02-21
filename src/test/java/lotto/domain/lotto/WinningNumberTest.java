@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.List;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.Number;
-import lotto.domain.number.PayOut;
 import lotto.domain.rank.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -87,10 +86,9 @@ public class WinningNumberTest {
                 )
             )
         ));
-        AnalysedLottos result = winningNumber.analysingLottos(lottoGroup);
 
-        List<Long> actual = result
-                .getRankings()
+        List<Long> actual = winningNumber.
+                getRanks(lottoGroup)
                 .stream()
                 .map(Rank::getCount)
                 .collect(toList());

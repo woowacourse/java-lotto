@@ -26,7 +26,7 @@ public class LottoGeneratorTest {
         assertThat(
                 lottoGenerator.generateLottosWithManualLottoNumbers(
                         manualStringLottoNumbers,
-                        zeroPayOut
+                        0
                 ).getCount()
         ).isEqualTo(3);
     }
@@ -40,14 +40,11 @@ public class LottoGeneratorTest {
                 "5,3,8,6,4,9"
         );
 
-
-        PayOut payOut = new PayOut(3000);
-
         LottoGenerator lottoGenerator = new LottoGenerator();
         assertThat(
                 lottoGenerator.generateLottosWithManualLottoNumbers(
                         manualStringLottoNumbers,
-                        payOut
+                        3
                 ).getCount()
         ).isEqualTo(6);
     }
