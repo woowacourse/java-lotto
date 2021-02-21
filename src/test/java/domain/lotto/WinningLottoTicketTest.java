@@ -1,7 +1,5 @@
 package domain.lotto;
 
-import domain.ball.LottoBall;
-import domain.ball.LottoBalls;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +8,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class WinningLottoTicketTest {
 

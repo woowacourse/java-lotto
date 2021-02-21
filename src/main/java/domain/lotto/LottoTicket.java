@@ -8,6 +8,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoTicket {
+    public static final int TICKET_PRICE = 1000;
+
     private final LottoBalls lottoBalls;
 
     public LottoTicket(final LottoBalls lottoBalls) {

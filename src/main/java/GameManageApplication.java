@@ -1,5 +1,5 @@
 import domain.LottoGameMachine;
-import domain.budget.Budget;
+import domain.bettingMoney.BettingMoney;
 import domain.lotto.LottoTickets;
 import domain.lotto.WinningLotto;
 import util.InputUtil;
@@ -10,7 +10,7 @@ public class GameManageApplication {
     private final MainScreen mainScreen;
     private final LottoGameScreen lottoGameScreen;
 
-    public GameManageApplication(MainScreen mainScreen, LottoGameScreen lottoGameScreen) {
+    public GameManageApplication(final MainScreen mainScreen, final LottoGameScreen lottoGameScreen) {
         this.mainScreen = mainScreen;
         this.lottoGameScreen = lottoGameScreen;
     }
@@ -25,8 +25,8 @@ public class GameManageApplication {
     private LottoGameMachine lottoGameManageInitialize() {
         mainScreen.showInputMoney();
         int input = InputUtil.nextInt();
-        Budget budget = Budget.amounts(input);
-        LottoGameMachine lottoGameMachine = new LottoGameMachine(budget, lottoGameScreen);
+        BettingMoney bettingMoney = BettingMoney.of(input);
+        LottoGameMachine lottoGameMachine = new LottoGameMachine(bettingMoney, lottoGameScreen);
         return lottoGameMachine;
     }
 }
