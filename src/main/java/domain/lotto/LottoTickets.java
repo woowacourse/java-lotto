@@ -13,7 +13,7 @@ public class LottoTickets {
         this.lottoTickets = new ArrayList<>(lottoTickets);
     }
 
-    public List<LottoTicket> getLottos() {
+    public List<LottoTicket> getLottoTickets() {
         ArrayList<LottoTicket> copy = new ArrayList<>(this.lottoTickets);
         return Collections.unmodifiableList(copy);
     }

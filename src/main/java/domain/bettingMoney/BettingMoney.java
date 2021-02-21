@@ -28,9 +28,9 @@ public class BettingMoney {
         return this.bettingMoney / TICKET_PRICE;
     }
 
-    public BigDecimal getRevenue(final int prizeMoney) {
+    public BigDecimal getEarningRate(final int prizeMoney) {
         BigDecimal bettingMoney = BigDecimal.valueOf(this.bettingMoney);
         BigDecimal prize = BigDecimal.valueOf(prizeMoney);
-        return bettingMoney.divide(prize);
+        return prize.divide(bettingMoney);
     }
 }

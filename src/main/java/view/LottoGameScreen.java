@@ -1,9 +1,10 @@
 package view;
 
 import domain.ball.LottoBall;
+import domain.lotto.LottoTicket;
 import domain.result.LottoRank;
 import util.OutputUtil;
-import view.dto.*;
+import view.dto.LottoGameResultDto;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -11,7 +12,6 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoGameScreen {
-    public static final String BUY_STATUS = "%d개를 구매했습니다.";
     public static final String LOTTO_PREFIX = "[";
     public static final String LOTTO_POSTFIX = "]";
     public static final String DELIMITER = ", ";
@@ -22,27 +22,17 @@ public class LottoGameScreen {
     public static final String STRING_FORMATTER = "%s개 일치 (%d원)- ";
     public static final String REVENUE_RESULT_FORMATTER = "총 수익률은 %.2f입니다.";
 
-
-    public void showLottoCount(final LottoCountResponseDto lottoCountResponseDto) {
-        OutputUtil.printMessage(String.format(BUY_STATUS, lottoCountResponseDto.getLottoCount()));
+    public void showAllLottoStatus(final List<LottoTicket> lottoTickets) {
+        lottoTickets.stream()
+                .forEach(lottoTicket -> showTicketStatus(lottoTicket));
     }
 
-    public void showAllLottoStatus(final List<LottoResponseDto> lottoResponseDtos) {
-        List<LottoBallsDto> lottoBallsDtos = lottoResponseDtos.stream()
-                .map(lottoResponseDto -> lottoResponseDto.getLottoNumbersDto())
-                .collect(Collectors.toList());
-
-        lottoBallsDtos.stream()
-                .forEach(lottoBallDto -> showLottoStatus(lottoBallDto));
-    }
-
-    private void showLottoStatus(final LottoBallsDto lottoBallsDto) {
-        List<LottoBall> lottoBalls = lottoBallsDto.getLottoBalls();
-        String lottoStatus = makeSingleLottoStatus(lottoBalls);
+    private void showTicketStatus(final LottoTicket lottoTicket) {
+        String lottoStatus = makeSingleLottoTicketStatus(lottoTicket.getLottoBalls());
         OutputUtil.printMessage(lottoStatus);
     }
 
-    private String makeSingleLottoStatus(final List<LottoBall> lottoBalls) {
+    private String makeSingleLottoTicketStatus(final List<LottoBall> lottoBalls) {
         List<String> status = lottoBalls.stream()
                 .map(lottoBall -> String.valueOf(lottoBall.getValue()))
                 .collect(Collectors.toList());
@@ -57,52 +47,51 @@ public class LottoGameScreen {
         OutputUtil.printMessage(BONUS_LOTTO_CONFIRMATION);
     }
 
-    public void showDrawResult(DrawResultDto drawResultDto) {
+    public void showGameResult(LottoGameResultDto lottoGameResultDto) {
         OutputUtil.printMessage(RESULT);
         OutputUtil.printMessage(LINE);
-        showThreeMatchesResult(drawResultDto);
-        showFourMatchesResult(drawResultDto);
-        showFiveMatchesResult(drawResultDto);
-        showFiveMatchesAndBonusResult(drawResultDto);
-        showSixMatchesResult(drawResultDto);
+        showThreeMatchesResult(lottoGameResultDto);
+        showFourMatchesResult(lottoGameResultDto);
+        showFiveMatchesResult(lottoGameResultDto);
+        showFiveMatchesAndBonusResult(lottoGameResultDto);
+        showSixMatchesResult(lottoGameResultDto);
     }
 
-    private void showSixMatchesResult(DrawResultDto drawResultDto) {
-        Integer count = getCount(drawResultDto, LottoRank.SIX_MATCHES);
+    private void showSixMatchesResult(LottoGameResultDto lottoGameResultDto) {
+        Integer count = getCount(lottoGameResultDto, LottoRank.SIX_MATCHES);
         OutputUtil.printMessage(String.format(STRING_FORMATTER, "6", 2000000000) + count + "개");
     }
 
-    private void showFiveMatchesAndBonusResult(DrawResultDto drawResultDto) {
-        Integer count = getCount(drawResultDto, LottoRank.FIVE_AND_BONUS_MATCHES);
+    private void showFiveMatchesAndBonusResult(LottoGameResultDto lottoGameResultDto) {
+        Integer count = getCount(lottoGameResultDto, LottoRank.FIVE_AND_BONUS_MATCHES);
         OutputUtil.printMessage("5개 일치, 보너스 볼 일치(30000000원)- " + count + "개");
     }
 
-    private void showFiveMatchesResult(DrawResultDto drawResultDto) {
-        Integer count = getCount(drawResultDto, LottoRank.FIVE_MATCHES);
+    private void showFiveMatchesResult(LottoGameResultDto lottoGameResultDto) {
+        Integer count = getCount(lottoGameResultDto, LottoRank.FIVE_MATCHES);
         OutputUtil.printMessage(String.format(STRING_FORMATTER, "5", 1500000) + count + "개");
     }
 
-    private void showFourMatchesResult(DrawResultDto drawResultDto) {
-        Integer count = getCount(drawResultDto, LottoRank.FOUR_MATCHES);
+    private void showFourMatchesResult(LottoGameResultDto lottoGameResultDto) {
+        Integer count = getCount(lottoGameResultDto, LottoRank.FOUR_MATCHES);
         OutputUtil.printMessage(String.format(STRING_FORMATTER, "4", 50000) + count + "개");
     }
 
-    private void showThreeMatchesResult(DrawResultDto drawResultDto) {
-        Integer count = getCount(drawResultDto, LottoRank.THREE_MATCHES);
+    private void showThreeMatchesResult(LottoGameResultDto lottoGameResultDto) {
+        Integer count = getCount(lottoGameResultDto, LottoRank.THREE_MATCHES);
         OutputUtil.printMessage(String.format(STRING_FORMATTER, "3", 5000) + count + "개");
     }
 
-    private Integer getCount(DrawResultDto drawResultDto, LottoRank lottoRank) {
-        Integer count = drawResultDto.getMatches().get(lottoRank);
+    private Integer getCount(LottoGameResultDto lottoGameResultDto, LottoRank lottoRank) {
+        Integer count = lottoGameResultDto.getMatches().get(lottoRank);
         if (Objects.isNull(count)) {
             return 0;
         }
         return count;
     }
 
-    public void showRevenueResult(RevenueDto revenueDto) {
-        BigDecimal revenue = revenueDto.getRevenueDto();
-        OutputUtil.printMessage(String.format(REVENUE_RESULT_FORMATTER, revenue.doubleValue()));
+    public void showRevenueResult(BigDecimal earningsRate) {
+        OutputUtil.printMessage(String.format(REVENUE_RESULT_FORMATTER, earningsRate.doubleValue()));
     }
 }
 

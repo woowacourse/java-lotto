@@ -2,12 +2,15 @@ package domain.result;
 
 import domain.ball.LottoBall;
 import domain.ball.LottoBalls;
+import domain.bettingMoney.BettingMoney;
 import domain.lotto.LottoTicket;
 import domain.lotto.LottoTickets;
 import domain.lotto.WinningLotto;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -15,6 +18,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 
 class ResultTest {
+
+    private WinningLotto winningLotto;
+
+    @BeforeEach
+    void initWinningLotto() {
+        int[] winningNumber = {1, 2, 3, 4, 5, 6};
+        int bonusNumber = 7;
+        Set<Integer> winningNumbers = Arrays.stream(winningNumber)
+                .boxed()
+                .collect(Collectors.toSet());
+        winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+    }
 
     @DisplayName("Result객체 정상 생성 테스트")
     @Test
@@ -29,7 +44,7 @@ class ResultTest {
         LottoTickets lottoTickets = new LottoTickets(Collections.singletonList(new LottoTicket(new LottoBalls(lottoBalls))));
 
         //then
-        assertThatCode(() -> new Result(lottoTickets))
+        assertThatCode(() -> new Result(lottoTickets, winningLotto))
                 .doesNotThrowAnyException();
     }
 
@@ -38,22 +53,15 @@ class ResultTest {
     void Result_결과를_반환한다() {
         //given
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        int[] winningLottoNumbers = {1, 2, 3, 4, 5, 6};
-        int bonusNumber = 7;
 
         //when
         List<LottoBall> lottoBalls = lottoNumbers.stream()
                 .map(lottoNumber -> new LottoBall(lottoNumber))
                 .collect(Collectors.toList());
         LottoTickets lottoTickets = new LottoTickets(Collections.singletonList(new LottoTicket(new LottoBalls(lottoBalls))));
-        Result result = new Result(lottoTickets);
+        Result result = new Result(lottoTickets, winningLotto);
 
-        Set<Integer> winningNumbers = Arrays.stream(winningLottoNumbers)
-                .boxed()
-                .collect(Collectors.toSet());
-
-        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
-        Map<LottoRank, Integer> results = result.findMatches(winningLotto);
+        Map<LottoRank, Integer> results = result.getResults();
 
         //then
         assertThat(results.get(LottoRank.SIX_MATCHES)).isEqualTo(1);
@@ -65,8 +73,6 @@ class ResultTest {
         //given
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         List<Integer> lottoNumbers2 = Arrays.asList(1, 2, 3, 4, 5, 8);
-        int[] winningLottoNumbers = {1, 2, 3, 4, 5, 6};
-        int bonusNumber = 7;
 
         //when
         List<LottoBall> lottoBalls = lottoNumbers.stream()
@@ -76,14 +82,9 @@ class ResultTest {
                 .map(lottoNumber -> new LottoBall(lottoNumber))
                 .collect(Collectors.toList());
         LottoTickets lottoTickets = new LottoTickets(Arrays.asList(new LottoTicket(new LottoBalls(lottoBalls)), new LottoTicket(new LottoBalls(lottoBalls2))));
-        Result result = new Result(lottoTickets);
+        Result result = new Result(lottoTickets, winningLotto);
 
-        Set<Integer> winningNumbers = Arrays.stream(winningLottoNumbers)
-                .boxed()
-                .collect(Collectors.toSet());
-
-        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
-        Map<LottoRank, Integer> results = result.findMatches(winningLotto);
+        Map<LottoRank, Integer> results = result.getResults();
 
         assertThat(results.get(LottoRank.SIX_MATCHES)).isEqualTo(1);
         assertThat(results.get(LottoRank.FIVE_MATCHES)).isEqualTo(1);
@@ -94,24 +95,39 @@ class ResultTest {
     void ResultSecondPrizeTest() {
         //given
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 7);
-        int[] winningLottoNumbers = {1, 2, 3, 4, 5, 6};
-        int bonusNumber = 7;
 
         //when
         List<LottoBall> lottoBalls = lottoNumbers.stream()
                 .map(lottoNumber -> new LottoBall(lottoNumber))
                 .collect(Collectors.toList());
         LottoTickets lottoTickets = new LottoTickets(Collections.singletonList(new LottoTicket(new LottoBalls(lottoBalls))));
-        Result result = new Result(lottoTickets);
+        Result result = new Result(lottoTickets, winningLotto);
 
-        Set<Integer> winningNumbers = Arrays.stream(winningLottoNumbers)
-                .boxed()
-                .collect(Collectors.toSet());
-
-        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
-        Map<LottoRank, Integer> results = result.findMatches(winningLotto);
+        Map<LottoRank, Integer> results = result.getResults();
 
         //then
         assertThat(results.get(LottoRank.FIVE_AND_BONUS_MATCHES)).isEqualTo(1);
+    }
+
+    @DisplayName("수익률 반환 테스트")
+    @Test
+    void earningsRateTest() {
+        //given
+        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 7, 8, 9);
+        List<Integer> lottoNumbers2 = Arrays.asList(1, 2, 3, 7, 8, 9);
+
+        //when
+        List<LottoBall> lottoBalls = lottoNumbers.stream()
+                .map(lottoNumber -> new LottoBall(lottoNumber))
+                .collect(Collectors.toList());
+        List<LottoBall> lottoBalls2 = lottoNumbers2.stream()
+                .map(lottoNumber -> new LottoBall(lottoNumber))
+                .collect(Collectors.toList());
+        LottoTickets lottoTickets = new LottoTickets(Arrays.asList(new LottoTicket(new LottoBalls(lottoBalls)), new LottoTicket(new LottoBalls(lottoBalls2))));
+        Result result = new Result(lottoTickets, winningLotto);
+
+        BigDecimal earningsRate = result.findEarningsRate(BettingMoney.of(2000));
+        System.out.println("earningsRate.doubleValue() = " + earningsRate.doubleValue());
+        assertThat(earningsRate).isEqualTo(BigDecimal.valueOf(5));
     }
 }

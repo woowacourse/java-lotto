@@ -6,9 +6,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import static domain.ball.LottoBall.MAX_LOTTO_VALUE;
+import static domain.ball.LottoBall.MIN_LOTTO_VALUE;
 
 public class LottoBalls {
-    private static final int LOTTO_NUMBERS_SIZE = 6;
+    private static final int LOTTO_BALL_SIZE = 6;
 
     private final List<LottoBall> lottoBalls;
 
@@ -16,6 +21,17 @@ public class LottoBalls {
         List<LottoBall> copy = new ArrayList<>(lottoBalls);
         validateLottoNumbers(copy);
         this.lottoBalls = copy;
+    }
+
+    public static List<LottoBall> getRandomLottoBalls() {
+        List<LottoBall> lottoBalls = IntStream.rangeClosed(MIN_LOTTO_VALUE, MAX_LOTTO_VALUE)
+                .mapToObj(LottoBall::new)
+                .collect(Collectors.toList());
+        Collections.shuffle(lottoBalls);
+        return lottoBalls.stream()
+                .limit(LOTTO_BALL_SIZE)
+                .sorted()
+                .collect(Collectors.toList());
     }
 
     private void validateLottoNumbers(final List<LottoBall> lottoBalls) {
@@ -32,7 +48,7 @@ public class LottoBalls {
     }
 
     private void validateSize(final List<LottoBall> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
+        if (lottoNumbers.size() != LOTTO_BALL_SIZE) {
             throw new IllegalArgumentException("6개의 로또 번호가 필요합니다.");
         }
     }
@@ -42,7 +58,7 @@ public class LottoBalls {
                 .anyMatch(targetLottoBall::equals);
     }
 
-    public List<LottoBall> getLottoNumbers() {
+    public List<LottoBall> getLottoBalls() {
         List<LottoBall> copy = new ArrayList<>(this.lottoBalls);
         return Collections.unmodifiableList(copy);
     }

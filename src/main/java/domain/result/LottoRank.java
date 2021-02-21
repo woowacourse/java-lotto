@@ -30,10 +30,6 @@ public enum LottoRank {
         return FIVE_AND_BONUS_MATCHES;
     }
 
-    public int getMatches() {
-        return matches;
-    }
-
     private boolean isSameMatches(final int matches) {
         return this.matches == matches;
     }

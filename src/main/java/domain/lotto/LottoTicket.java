@@ -16,8 +16,8 @@ public class LottoTicket {
         this.lottoBalls = lottoBalls;
     }
 
-    public List<LottoBall> findLottoNumbers() {
-        List<LottoBall> lottoBalls = this.lottoBalls.getLottoNumbers();
+    public List<LottoBall> getLottoBalls() {
+        List<LottoBall> lottoBalls = this.lottoBalls.getLottoBalls();
         return Collections.unmodifiableList(lottoBalls);
     }
 
