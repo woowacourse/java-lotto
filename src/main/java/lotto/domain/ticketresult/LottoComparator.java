@@ -7,7 +7,8 @@ import lotto.domain.ticketpurchase.UserPurchase;
 public class LottoComparator {
     private final LottoResult lottoResult;
 
-    public LottoComparator(WinningTicketAndBonusNumber winningLottoNumbers, UserPurchase userPurchase) {
+    public LottoComparator(WinningTicketAndBonusNumber winningLottoNumbers,
+        UserPurchase userPurchase) {
         this.lottoResult = new LottoResult(winningLottoNumbers, userPurchase);
     }
 

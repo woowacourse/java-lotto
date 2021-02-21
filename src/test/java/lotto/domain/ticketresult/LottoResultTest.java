@@ -80,7 +80,7 @@ public class LottoResultTest {
             .isEqualTo(
                 new BigDecimal(String.valueOf(SIX_MATCH.getPrizeMoney()))
                     .divide(new BigDecimal(String.valueOf(PURCHASE_PRICE)), MathContext.DECIMAL32)
-                .setScale(2, BigDecimal.ROUND_HALF_UP)
+                    .setScale(2, BigDecimal.ROUND_HALF_UP)
             );
     }
 
@@ -293,7 +293,7 @@ public class LottoResultTest {
             .isEqualTo(
                 new BigDecimal(String.valueOf(
                     FOUR_MATCH.getPrizeMoney()
-                    + FIVE_AND_BONUS_MATCH.getPrizeMoney())
+                        + FIVE_AND_BONUS_MATCH.getPrizeMoney())
                 )
                     .divide(new BigDecimal(String.valueOf(PURCHASE_PRICE)), MathContext.DECIMAL32)
                     .setScale(2, BigDecimal.ROUND_HALF_UP)

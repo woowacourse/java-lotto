@@ -8,7 +8,6 @@ import static lotto.type.LottoMatchType.THREE_MATCH;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
-import java.util.List;
 import lotto.domain.LottoNumber;
 import lotto.domain.ticketresult.MatchedLottoNumbers;
 import org.junit.jupiter.api.DisplayName;

@@ -3,9 +3,7 @@ package lotto.domain.ticketresult;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.ticketpurchase.PurchasePrice;
 import lotto.domain.ticketpurchase.UserPurchase;
@@ -44,7 +42,8 @@ public class LottoResult {
         increaseOneCountOfLottoMatchType(matchedLottoNumbers);
     }
 
-    private void increaseOneCountOfLottoMatchType(MatchedLottoNumbers matchedLottoNumbersToGetPrize) {
+    private void increaseOneCountOfLottoMatchType(
+        MatchedLottoNumbers matchedLottoNumbersToGetPrize) {
         LottoMatchType lottoMatchType
             = LottoMatchType.getLottoMatchType(matchedLottoNumbersToGetPrize);
         resultCounts

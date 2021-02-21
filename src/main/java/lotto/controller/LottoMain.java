@@ -16,7 +16,8 @@ public class LottoMain {
             = lottoGenerator.purchaseTickets(userPurchase);
         OutputView.printAllLottoTickets(allPurchasedLottoTickets);
 
-        WinningTicketAndBonusNumber winningLottoNumbers = InputView.getWinningTicketAndBonusNumber();
+        WinningTicketAndBonusNumber winningLottoNumbers = InputView
+            .getWinningTicketAndBonusNumber();
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers, userPurchase);
         OutputView.printResult(lottoComparator.getLottoResult(allPurchasedLottoTickets));
     }
