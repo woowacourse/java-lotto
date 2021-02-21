@@ -2,22 +2,27 @@ package lotto.domain;
 
 import lotto.utils.LottoGenerator;
 
+import java.util.stream.IntStream;
+
 public class LottoGame {
 
-    public Lottos buyLottos(Money money) {
-        LottoGenerator lottoGenerator = new LottoGenerator();
-        Lottos lottos = new Lottos();
-        for (int i = 0; i < money.countLotto(); i++) {
-            lottos.add(lottoGenerator.generate());
-        }
-        return lottos;
+    private final Lottos myLottos;
+
+    public LottoGame() {
+        myLottos = new Lottos();
     }
 
-    public LottoGameResult compareWithWinningLotto(Lottos lottos, WinningLotto winningLotto) {
-        LottoGameResult lottoGameResult = new LottoGameResult();
-        for (Lotto lotto : lottos.lottos()) {
-            lottoGameResult.add(winningLotto.findRank(lotto));
-        }
-        return lottoGameResult;
+    public Lottos myLottos() {
+        return myLottos;
+    }
+
+    public void buyLottos(Money money, LottoGenerator lottoGenerator) {
+        IntStream.range(0, money.countLotto())
+                .mapToObj(i -> lottoGenerator.generate())
+                .forEach(myLottos::add);
+    }
+
+    public LottoGameResult calculateLottoGameResult(WinningLotto winningLotto) {
+        return myLottos().compareWithWinningLotto(winningLotto);
     }
 }
