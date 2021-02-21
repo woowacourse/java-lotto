@@ -14,12 +14,12 @@ public class LottoTest {
     @Test
     void LottoConstructorTest() {
         assertThatCode(() -> new Lotto(Arrays.asList(
-                    LottoBall.valueOf(1),
-                    LottoBall.valueOf(2),
-                    LottoBall.valueOf(3),
-                    LottoBall.valueOf(4),
-                    LottoBall.valueOf(5),
-                    LottoBall.valueOf(6))))
+                LottoBall.valueOf(1),
+                LottoBall.valueOf(2),
+                LottoBall.valueOf(3),
+                LottoBall.valueOf(4),
+                LottoBall.valueOf(5),
+                LottoBall.valueOf(6))))
                 .doesNotThrowAnyException();
     }
 
