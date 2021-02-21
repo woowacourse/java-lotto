@@ -5,11 +5,9 @@ import lottogame.domain.machine.LottoWinningDrawingMachine;
 import lottogame.domain.machine.LottoWinningMachine;
 import lottogame.domain.number.LottoNumber;
 import lottogame.domain.number.LottoNumbers;
-import lottogame.domain.ticket.LottoTicket;
 import lottogame.domain.ticket.LottoTicketResult;
 import lottogame.domain.ticket.LottoTickets;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -42,14 +40,7 @@ public class LottoGame {
 
     private List<LottoTicketResult> getTicketsResult() {
         LottoWinningMachine lottoWinningMachine = new LottoWinningMachine(drawnWinningNumbers, drawnBonusNumber);
-        List<LottoTicketResult> lottoTicketResults = new ArrayList<>();
-
-        for (LottoTicket lottoTicket : lottoTickets.toList()) {
-            int matchedCount = lottoWinningMachine.countMatchedWinningNumber(lottoTicket);
-            boolean isBonusMatch = lottoWinningMachine.isMatchBonusNumber(lottoTicket);
-            lottoTicketResults.add(new LottoTicketResult(matchedCount, isBonusMatch));
-        }
-        return lottoTicketResults;
+        return lottoTickets.getLottoTicketResults(lottoWinningMachine);
     }
 
     public double getLottoGameYield() {
