@@ -8,27 +8,43 @@ import java.util.List;
 
 public class LottoGameController {
 
-    private final LottoGame lottoGame = new LottoGame();
+    private LottoGame lottoGame = new LottoGame();
+    private LottoGameResult lottoGameResult = new LottoGameResult();
+    private Lottos manualLottos;
+    private Lottos autoLottos;
 
     public void run() {
-        Lottos lottos = buyAutoLotto();
+        LottoAmount lottoAmount = makeLottoAmount();
 
+        buyAndPrintLottos(lottoAmount.toManualAmountNumber(), lottoAmount.toAutoAmountNumber());
+
+        WinningLotto lastWinningLotto = askWinningLotto();
+
+        lottoGameResult
+                = lottoGame.compareWithWinningLotto(manualLottos, autoLottos, lastWinningLotto);
+
+        OutputView.printLottoGameResult(lottoGameResult);
+    }
+
+    private LottoAmount makeLottoAmount() {
+        Money money = InputView.askMoney();
+
+        return InputView.askLottoAmount(money);
+    }
+
+    private void buyAndPrintLottos(int manualAmount, int autoAmount) {
+        manualLottos = InputView.askManualLottoNumbers(manualAmount);
+        autoLottos = lottoGame.buyAutoLottos(autoAmount);
+
+        OutputView.printTotalNumberOfLotto(manualLottos, autoLottos);
+        OutputView.printEachLotto(manualLottos, autoLottos);
+    }
+
+    private WinningLotto askWinningLotto() {
         Lotto winningLotto = askWinningLottoNumbers();
         LottoNumber bonusNumber = InputView.askBonusNumber();
 
-        WinningLotto lastWinningLotto = makeWinningLotto(winningLotto, bonusNumber);
-
-        showGameResult(lottos, lastWinningLotto);
-    }
-
-    private Lottos buyAutoLotto() {
-        Money money = InputView.askMoney();
-        Lottos lottos = lottoGame.buyLottos(money);
-
-        OutputView.printTotalNumberOfLotto(lottos);
-        OutputView.printEachLotto(lottos);
-
-        return lottos;
+        return makeWinningLotto(winningLotto, bonusNumber);
     }
 
     private WinningLotto makeWinningLotto(Lotto winningLotto, LottoNumber bonusNumber) {
@@ -48,11 +64,5 @@ public class LottoGameController {
             OutputView.printError(e.getMessage());
             return askWinningLottoNumbers();
         }
-    }
-
-    private void showGameResult(Lottos lottos, WinningLotto lastWinningLotto) {
-        LottoGameResult lottoGameResult = lottoGame.compareWithWinningLotto(lottos, lastWinningLotto);
-
-        OutputView.printLottoGameResult(lottoGameResult);
     }
 }

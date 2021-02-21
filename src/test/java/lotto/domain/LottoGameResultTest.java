@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoGameResultTest {
@@ -31,12 +33,19 @@ public class LottoGameResultTest {
     @DisplayName("수익률 계산 테스트")
     @Test
     void testCalculateProfit() {
-        Lottos lottos = new Lottos(1);
-        WinningLotto winningLotto = new WinningLotto(lottos.toList().get(0), 1);
+        Lottos autolottos = new Lottos(1);
+
+        Lotto manualLotto = new Lotto(Arrays.asList(
+                new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
+
+        Lottos manualLottos = new Lottos(Arrays.asList(manualLotto));
+
+        WinningLotto winningLotto = new WinningLotto(manualLottos.toList().get(0), 8);
 
         LottoGame lottoGame = new LottoGame();
-        double profit = lottoGame.compareWithWinningLotto(lottos, winningLotto).calculateProfit();
+        double profit = lottoGame.compareWithWinningLotto(manualLottos, autolottos, winningLotto).calculateProfit();
 
-        assertThat(profit).isEqualTo(2_000_000);
+        assertThat(profit).isEqualTo(1_000_000);
     }
 }

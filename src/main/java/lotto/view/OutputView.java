@@ -26,7 +26,7 @@ public class OutputView {
         printMessage(System.lineSeparator() + errorMessage + System.lineSeparator());
     }
 
-    public static void printEachLotto(final Lottos manualLottos,final Lottos autoLottos) {
+    public static void printEachLotto(final Lottos manualLottos, final Lottos autoLottos) {
         manualLottos.toList().forEach(OutputView::printOneLotto);
         autoLottos.toList().forEach(OutputView::printOneLotto);
         System.out.println();
