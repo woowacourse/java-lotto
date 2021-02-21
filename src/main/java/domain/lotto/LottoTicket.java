@@ -7,10 +7,10 @@ import domain.result.LottoRank;
 import java.util.Collections;
 import java.util.List;
 
-public class Lotto {
+public class LottoTicket {
     private final LottoBalls lottoBalls;
 
-    public Lotto(final LottoBalls lottoBalls) {
+    public LottoTicket(final LottoBalls lottoBalls) {
         this.lottoBalls = lottoBalls;
     }
 

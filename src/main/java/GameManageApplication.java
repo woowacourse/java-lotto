@@ -1,13 +1,12 @@
 import domain.LottoGameMachine;
 import domain.budget.Budget;
-import domain.lotto.Lottos;
+import domain.lotto.LottoTickets;
 import domain.lotto.WinningLotto;
 import util.InputUtil;
 import view.LottoGameScreen;
 import view.MainScreen;
 
 public class GameManageApplication {
-
     private final MainScreen mainScreen;
     private final LottoGameScreen lottoGameScreen;
 
@@ -18,9 +17,9 @@ public class GameManageApplication {
 
     public void run() {
         LottoGameMachine lottoGameMachine = lottoGameManageInitialize();
-        Lottos lottos = lottoGameMachine.makeLottos();
+        LottoTickets lottoTickets = lottoGameMachine.makeLottos();
         WinningLotto winnings = lottoGameMachine.findWinnings();
-        lottoGameMachine.lottoDraw(lottos, winnings);
+        lottoGameMachine.lottoDraw(lottoTickets, winnings);
     }
 
     private LottoGameMachine lottoGameManageInitialize() {

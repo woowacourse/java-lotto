@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
 
-class LottoBallTest {
+class LottoTicketBallTest {
 
     @DisplayName("LottoBall 정상 생성된다.")
     @Test

@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
 
-public class LottoTest {
+public class LottoTicketTest {
 
     @DisplayName("Lotto 정상 생성된다.")
     @Test
@@ -25,6 +25,6 @@ public class LottoTest {
                 .collect(Collectors.toList());
 
         //then
-        assertThatCode(() -> new Lotto(new LottoBalls(lottoBalls))).doesNotThrowAnyException();
+        assertThatCode(() -> new LottoTicket(new LottoBalls(lottoBalls))).doesNotThrowAnyException();
     }
 }

@@ -6,21 +6,21 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Lottos {
-    private final List<Lotto> lottos;
+public class LottoTickets {
+    private final List<LottoTicket> lottoTickets;
 
-    public Lottos(List<Lotto> lottos) {
-        this.lottos = new ArrayList<>(lottos);
+    public LottoTickets(List<LottoTicket> lottoTickets) {
+        this.lottoTickets = new ArrayList<>(lottoTickets);
     }
 
-    public List<Lotto> getLottos() {
-        ArrayList<Lotto> copy = new ArrayList<>(this.lottos);
+    public List<LottoTicket> getLottos() {
+        ArrayList<LottoTicket> copy = new ArrayList<>(this.lottoTickets);
         return Collections.unmodifiableList(copy);
     }
 
     public List<LottoRank> findMatches(WinningLotto winningLotto) {
         List<LottoRank> lottoRanks = new ArrayList<>();
-        lottos.stream()
+        lottoTickets.stream()
                 .map(lotto -> lotto.findMatchesNumber(winningLotto))
                 .forEach(match -> {
                     lottoRanks.add(match);

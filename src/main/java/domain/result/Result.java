@@ -1,6 +1,6 @@
 package domain.result;
 
-import domain.lotto.Lottos;
+import domain.lotto.LottoTickets;
 import domain.lotto.WinningLotto;
 
 import java.util.HashMap;
@@ -8,16 +8,16 @@ import java.util.List;
 import java.util.Map;
 
 public class Result {
-    private final Lottos lottos;
+    private final LottoTickets lottoTickets;
     private final Map<LottoRank, Integer> results;
 
-    public Result(Lottos lottos) {
-        this.lottos = lottos;
+    public Result(LottoTickets lottoTickets) {
+        this.lottoTickets = lottoTickets;
         this.results = new HashMap<>();
     }
 
     public Map<LottoRank, Integer> findMatches(WinningLotto winningLotto) {
-        List<LottoRank> lottoRanks = lottos.findMatches(winningLotto);
+        List<LottoRank> lottoRanks = lottoTickets.findMatches(winningLotto);
         for (LottoRank lottoRank : lottoRanks) {
             putResult(lottoRank);
         }

@@ -1,11 +1,9 @@
 package domain;
 
-import domain.ball.LottoBall;
-import domain.ball.LottoBalls;
 import domain.budget.Budget;
-import domain.lotto.Lotto;
-import domain.lotto.LottoCount;
-import domain.lotto.Lottos;
+import domain.lotto.LottoTicket;
+import domain.lotto.TicketCount;
+import domain.lotto.LottoTickets;
 import domain.lotto.WinningLotto;
 import domain.result.LottoRank;
 import domain.result.Result;
@@ -35,37 +33,37 @@ public class LottoGameMachine {
         this.lottoGameScreen = lottoGameScreen;
     }
 
-    public Lottos makeLottos() {
-        LottoCount lottoCount = calculateLottoCount();
+    public LottoTickets makeLottos() {
+        TicketCount ticketCount = calculateLottoCount();
         LottoGameScreen lottoGameScreen = new LottoGameScreen();
-        lottoGameScreen.showLottoCount(new LottoCountResponseDto(lottoCount.getLottoCount()));
+        lottoGameScreen.showLottoCount(new LottoCountResponseDto(ticketCount.getTicketCount()));
 
-        Lottos lottos = makeLottos(lottoCount);
-        List<Lotto> lottoGroup = lottos.getLottos();
+        LottoTickets lottoTickets = makeLottos(ticketCount);
+        List<LottoTicket> lottoTicketGroup = lottoTickets.getLottos();
 
-        List<LottoResponseDto> lottoResponseDtos = makeLottoResponseDtos(lottoGroup);
+        List<LottoResponseDto> lottoResponseDtos = makeLottoResponseDtos(lottoTicketGroup);
         lottoGameScreen.showAllLottoStatus(lottoResponseDtos);
-        return lottos;
+        return lottoTickets;
     }
 
-    private List<LottoResponseDto> makeLottoResponseDtos(final List<Lotto> lottoGroup) {
-        List<LottoResponseDto> lottoResponseDtos = lottoGroup.stream()
+    private List<LottoResponseDto> makeLottoResponseDtos(final List<LottoTicket> lottoTicketGroup) {
+        List<LottoResponseDto> lottoResponseDtos = lottoTicketGroup.stream()
                 .map(lotto -> (new LottoResponseDto(lotto)))
                 .collect(Collectors.toList());
         return lottoResponseDtos;
     }
 
-    private Lottos makeLottos(final LottoCount lottoCount) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < lottoCount.getLottoCount(); i++) {
-            lottos.add(new Lotto(RandomLottoUtil.generateLottoNumbers()));
+    private LottoTickets makeLottos(final TicketCount ticketCount) {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        for (int i = 0; i < ticketCount.getTicketCount(); i++) {
+            lottoTickets.add(new LottoTicket(RandomLottoUtil.generateLottoNumbers()));
         }
-        return new Lottos(lottos);
+        return new LottoTickets(lottoTickets);
     }
 
-    private LottoCount calculateLottoCount() {
+    private TicketCount calculateLottoCount() {
         int lottoCount = budget.intQuotient(LOTTO_COST);
-        return LottoCount.of(lottoCount);
+        return TicketCount.of(lottoCount);
     }
 
     public WinningLotto findWinnings() {
@@ -78,8 +76,8 @@ public class LottoGameMachine {
         return new WinningLotto(winningNumbers, bonusNumber);
     }
 
-    public void lottoDraw(Lottos lottos, WinningLotto winnings) {
-        Result result = new Result(lottos);
+    public void lottoDraw(LottoTickets lottoTickets, WinningLotto winnings) {
+        Result result = new Result(lottoTickets);
         Map<LottoRank, Integer> matches = result.findMatches(winnings);
         lottoGameScreen.showDrawResult(new DrawResultDto(matches));
         Budget price = Budget.amounts(0);

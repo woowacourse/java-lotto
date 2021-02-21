@@ -2,8 +2,8 @@ package domain.result;
 
 import domain.ball.LottoBall;
 import domain.ball.LottoBalls;
-import domain.lotto.Lotto;
-import domain.lotto.Lottos;
+import domain.lotto.LottoTicket;
+import domain.lotto.LottoTickets;
 import domain.lotto.WinningLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -26,10 +26,10 @@ class ResultTest {
         List<LottoBall> lottoBalls = lottoNumbers.stream()
                 .map(lottoNumber -> new LottoBall(lottoNumber))
                 .collect(Collectors.toList());
-        Lottos lottos = new Lottos(Collections.singletonList(new Lotto(new LottoBalls(lottoBalls))));
+        LottoTickets lottoTickets = new LottoTickets(Collections.singletonList(new LottoTicket(new LottoBalls(lottoBalls))));
 
         //then
-        assertThatCode(() -> new Result(lottos))
+        assertThatCode(() -> new Result(lottoTickets))
                 .doesNotThrowAnyException();
     }
 
@@ -45,8 +45,8 @@ class ResultTest {
         List<LottoBall> lottoBalls = lottoNumbers.stream()
                 .map(lottoNumber -> new LottoBall(lottoNumber))
                 .collect(Collectors.toList());
-        Lottos lottos = new Lottos(Collections.singletonList(new Lotto(new LottoBalls(lottoBalls))));
-        Result result = new Result(lottos);
+        LottoTickets lottoTickets = new LottoTickets(Collections.singletonList(new LottoTicket(new LottoBalls(lottoBalls))));
+        Result result = new Result(lottoTickets);
 
         Set<Integer> winningNumbers = Arrays.stream(winningLottoNumbers)
                 .boxed()
@@ -75,8 +75,8 @@ class ResultTest {
         List<LottoBall> lottoBalls2 = lottoNumbers2.stream()
                 .map(lottoNumber -> new LottoBall(lottoNumber))
                 .collect(Collectors.toList());
-        Lottos lottos = new Lottos(Arrays.asList(new Lotto(new LottoBalls(lottoBalls)), new Lotto(new LottoBalls(lottoBalls2))));
-        Result result = new Result(lottos);
+        LottoTickets lottoTickets = new LottoTickets(Arrays.asList(new LottoTicket(new LottoBalls(lottoBalls)), new LottoTicket(new LottoBalls(lottoBalls2))));
+        Result result = new Result(lottoTickets);
 
         Set<Integer> winningNumbers = Arrays.stream(winningLottoNumbers)
                 .boxed()
@@ -101,8 +101,8 @@ class ResultTest {
         List<LottoBall> lottoBalls = lottoNumbers.stream()
                 .map(lottoNumber -> new LottoBall(lottoNumber))
                 .collect(Collectors.toList());
-        Lottos lottos = new Lottos(Collections.singletonList(new Lotto(new LottoBalls(lottoBalls))));
-        Result result = new Result(lottos);
+        LottoTickets lottoTickets = new LottoTickets(Collections.singletonList(new LottoTicket(new LottoBalls(lottoBalls))));
+        Result result = new Result(lottoTickets);
 
         Set<Integer> winningNumbers = Arrays.stream(winningLottoNumbers)
                 .boxed()

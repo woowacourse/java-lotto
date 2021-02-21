@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class LottoBallsTest {
+public class LottoTicketBallsTest {
 
     @DisplayName("LottoBalls 정상 생성된다")
     @Test
