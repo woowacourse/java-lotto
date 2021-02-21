@@ -1,25 +1,18 @@
 package lotto.ranking;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static lotto.game.LottoCount.ZERO;
 
 public class Statistics {
-    private static final int STATISTIC_CAPACITY = 6;
 
     private final Map<Ranking, Integer> statistics;
 
     public Statistics(List<Ranking> rankings) {
-        statistics = new HashMap<>(STATISTIC_CAPACITY);
-        statistics.put(Ranking.FIRST, ZERO);
-        statistics.put(Ranking.SECOND, ZERO);
-        statistics.put(Ranking.THIRD, ZERO);
-        statistics.put(Ranking.FORTH, ZERO);
-        statistics.put(Ranking.FIFTH, ZERO);
-        statistics.put(Ranking.NOTHING, ZERO);
+        statistics = new EnumMap<>(Ranking.class);
+        for (Ranking ranking : Ranking.values()) {
+            statistics.put(ranking, ZERO);
+        }
         calculateStatistics(rankings);
     }
 

@@ -6,9 +6,6 @@ import lotto.ticket.Tickets;
 import lotto.ranking.Ranking;
 import lotto.ranking.Statistics;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
 public class OutputView {
@@ -57,9 +54,7 @@ public class OutputView {
 
     private static void printRankings(Statistics statistics) {
         Map<Ranking, Integer> result = statistics.getStatistics();
-        List<Ranking> rankings = Arrays.asList(Ranking.values());
-        Collections.reverse(rankings);
-        for (Ranking ranking : rankings) {
+        for (Ranking ranking : Ranking.values()) {
             printEachRanking(result, ranking);
         }
     }
