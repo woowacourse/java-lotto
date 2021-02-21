@@ -1,8 +1,8 @@
 package lotto.controller;
 
 import lotto.domain.LottoResult;
+import lotto.domain.Money;
 import lotto.domain.Prize;
-import lotto.domain.machine.AutoLottoMachine;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTickets;
 import lotto.domain.ticket.WinningLottoTicket;
@@ -26,14 +26,14 @@ class LottoControllerTest {
     @BeforeEach
     void setup() {
         InputView inputView = new InputView(new Scanner(System.in));
-        lottoController = new LottoController(inputView, new OutputView(), new AutoLottoMachine(1000));
+        lottoController = new LottoController(inputView, new OutputView(), new Money(1000));
     }
 
     @DisplayName("로또 티켓 구매 메소드 확인")
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3, 4, 5, 6, 7, 8, 10})
     void buyLottoTicket(int testSize) {
-        LottoTickets lottoTickets = lottoController.buyLottoTicket(1000 * testSize);
+        LottoTickets lottoTickets = lottoController.buyAutoLottoTicket(1000 * testSize);
 
         assertThat(lottoTickets.size()).isEqualTo(testSize);
     }

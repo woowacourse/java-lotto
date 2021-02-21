@@ -1,5 +1,6 @@
 package lotto.domain.machine;
 
+import lotto.domain.Money;
 import lotto.domain.number.LottoNumbers;
 import lotto.domain.ticket.AutoLottoTicketFactory;
 import lotto.domain.ticket.LottoTickets;
@@ -11,7 +12,7 @@ import java.util.stream.IntStream;
 public class AutoLottoMachine extends LottoMachine {
     private final AutoLottoTicketFactory lottoTicketFactory = new AutoLottoTicketFactory();
 
-    public AutoLottoMachine(int lottoPrice) {
+    public AutoLottoMachine(Money lottoPrice) {
         super(lottoPrice);
     }
 

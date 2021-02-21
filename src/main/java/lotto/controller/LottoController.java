@@ -1,7 +1,9 @@
 package lotto.controller;
 
 import lotto.domain.LottoResult;
-import lotto.domain.machine.LottoMachine;
+import lotto.domain.Money;
+import lotto.domain.machine.AutoLottoMachine;
+import lotto.domain.machine.ManualLottoMachine;
 import lotto.domain.ticket.LottoTickets;
 import lotto.domain.ticket.WinningLottoTicket;
 import lotto.view.InputView;
@@ -15,16 +17,18 @@ import static java.util.stream.Collectors.*;
 public class LottoController {
     private final InputView inputView;
     private final OutputView outputView;
-    private final LottoMachine lottoMachine;
+    private final AutoLottoMachine autoLottoMachine;
+    private final ManualLottoMachine manualLottoMachine;
 
-    public LottoController(InputView inputView, OutputView outputView, LottoMachine lottoMachine) {
+    public LottoController(InputView inputView, OutputView outputView, Money ticketPrice) {
         this.inputView = inputView;
         this.outputView = outputView;
-        this.lottoMachine = lottoMachine;
+        this.autoLottoMachine = new AutoLottoMachine(ticketPrice);
+        this.manualLottoMachine = new ManualLottoMachine(ticketPrice);
     }
 
     public void start() {
-        LottoTickets lottoTickets = buyLottoTicket(inputView.takeLottoMoney());
+        LottoTickets lottoTickets = buyAutoLottoTicket(inputView.takeLottoMoney());
         outputView.printTicketsSize(lottoTickets.size());
         outputView.printAllLottoTickets(lottoTickets);
 
@@ -35,9 +39,9 @@ public class LottoController {
         outputView.printLottoResult(lottoResult);
     }
 
-    public LottoTickets buyLottoTicket(int lottoPurchaseMoney) {
-        int numberOfTickets = lottoMachine.calculateNumberOfTickets(lottoPurchaseMoney);
-        return lottoMachine.createTicketsByMoney(numberOfTickets);
+    public LottoTickets buyAutoLottoTicket(int lottoPurchaseMoney) {
+        int numberOfTickets = autoLottoMachine.calculateNumberOfTickets(lottoPurchaseMoney);
+        return autoLottoMachine.createTicketsByMoney(numberOfTickets);
     }
 
     public WinningLottoTicket createWinningLotto(List<Integer> winningNumbers, int bonusNumber) {
@@ -50,6 +54,6 @@ public class LottoController {
                 .map(winningLottoTicket::compareNumbers)
                 .collect(collectingAndThen(
                         groupingBy(Function.identity(), counting()),
-                        lottoResultMap -> new LottoResult(lottoResultMap, lottoMachine.getLottoPrice().multiply(lottoTickets.size()))));
+                        lottoResultMap -> new LottoResult(lottoResultMap, autoLottoMachine.getLottoPrice().multiply(lottoTickets.size()))));
     }
 }

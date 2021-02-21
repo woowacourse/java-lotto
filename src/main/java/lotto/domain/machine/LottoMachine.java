@@ -13,8 +13,8 @@ public abstract class LottoMachine {
 
     private final Money lottoPrice;
 
-    public LottoMachine(int lottoPrice) {
-        this.lottoPrice = new Money(lottoPrice);
+    public LottoMachine(Money lottoPrice) {
+        this.lottoPrice = lottoPrice;
     }
 
     public int calculateNumberOfTickets(int purchaseMoney) {

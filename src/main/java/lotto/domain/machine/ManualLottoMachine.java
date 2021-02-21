@@ -1,5 +1,6 @@
 package lotto.domain.machine;
 
+import lotto.domain.Money;
 import lotto.domain.number.LottoNumbers;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTickets;
@@ -12,7 +13,7 @@ import static java.util.stream.Collectors.toList;
 public class ManualLottoMachine extends LottoMachine {
     public static final String TICKETS_SIZE_ERROR_MSG_FORMAT = "수동 로또의 개수와 입력한 수동 로또 번호의 숫자가 같지 않습니다. 개수 : %d, 입력한 수동 번호의 수 : %d";
 
-    public ManualLottoMachine(int lottoPrice) {
+    public ManualLottoMachine(Money lottoPrice) {
         super(lottoPrice);
     }
 
