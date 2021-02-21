@@ -61,7 +61,8 @@ public class LottoServiceTest {
 
     @Test
     void getTotalSum() {
-        lottoService.getRatingCounter().update(Rating.FIRST);
-        assertThat(lottoService.totalSum()).isEqualTo(2000000000);
+        RatingCounter ratingCounter = lottoService.getRatingCounter();
+        ratingCounter.update(Rating.FIRST);
+        assertThat(ratingCounter.totalSum()).isEqualTo(2000000000);
     }
 }

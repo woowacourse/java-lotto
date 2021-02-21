@@ -31,15 +31,7 @@ public class LottoService {
     }
 
     public double getEarningRate(final Money money) {
-        return totalSum() / money.getValue();
-    }
-
-    public double totalSum() {
-        double sum = 0;
-        for (Rating rating : Rating.values()) {
-            sum += rating.getReward() * ratingCounter.get(rating);
-        }
-        return sum;
+        return ratingCounter.totalSum() / money.getValue();
     }
 
     public List<Lotto> getLottos() {

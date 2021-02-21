@@ -23,4 +23,12 @@ public class RatingCounter {
         Counter counter = ratings.get(rating);
         return counter.getCount();
     }
+
+    public double totalSum() {
+        double sum = 0;
+        for (Rating rating : Rating.values()) {
+            sum += rating.getReward() * ratings.get(rating).getCount();
+        }
+        return sum;
+    }
 }
