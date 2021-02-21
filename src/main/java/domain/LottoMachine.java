@@ -29,7 +29,7 @@ public class LottoMachine {
         return lottoTickets;
     }
 
-    public int getLottoTicketQuantity() {
+    private int getLottoTicketQuantity() {
         return price.getValue() / LOTTO_TICKET_PRICE;
     }
 }
