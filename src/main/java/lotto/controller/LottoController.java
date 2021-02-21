@@ -86,6 +86,7 @@ public class LottoController {
         );
 
         AnalysedLottos analysedLottos = winningNumber.analysingLottos(lottoGroup, payOut);
-        OutputView.statistics(analysedLottos);
+        OutputView.printWinningStatistics(analysedLottos.getRankings());
+        OutputView.printYield(analysedLottos.getYield());
     }
 }

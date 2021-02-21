@@ -63,11 +63,14 @@ public class OutputView {
         System.out.println(BONUS_NUMBER);
     }
 
-    public static void statistics(AnalysedLottos analysedLottos) {
+    public static void printWinningStatistics(List<Rank> ranks) {
         System.out.println(WINNING_STATISTICS);
         System.out.println(LINE);
-        analysedLottos.getRankings().forEach(OutputView::printStatisticsAccordingToBonus);
-        System.out.printf(STATISTICS_YIELD_FORMAT, analysedLottos.getYield());
+        ranks.forEach(OutputView::printStatisticsAccordingToBonus);
+    }
+
+    public static void printYield(double yield) {
+        System.out.printf(STATISTICS_YIELD_FORMAT, yield);
     }
 
     private static void printStatisticsAccordingToBonus(Rank rank) {
