@@ -10,17 +10,9 @@ public class LottoMachine {
     private final static int MIN_LOTTO_NUMBER = 1;
     private final static int MAX_LOTTO_NUMBER = 45;
 
-    private final Price price;
+    private LottoMachine() {}
 
-    private LottoMachine(final Price price) {
-        this.price = price;
-    }
-
-    public static LottoMachine valueOf(final Price price) {
-        return new LottoMachine(price);
-    }
-
-    public List<LottoTicket> generateLottoTickets() {
+    public static List<LottoTicket> generateLottoTickets(Price price) {
         final int lottoTicketQuantity = price.getNumberOfTickets();
         final List<Integer> numberBox = generateNumberBox();
 
@@ -30,7 +22,7 @@ public class LottoMachine {
             .collect(Collectors.toList());
     }
 
-    private List<Integer> generateNumberBox() {
+    private static List<Integer> generateNumberBox() {
         return IntStream
             .rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
             .boxed()

@@ -9,8 +9,7 @@ public class LottoSystem {
 
     private LottoSystem(final Price price) {
         this.price = price;
-        LottoMachine lottoMachine = LottoMachine.valueOf(price);
-        this.lottoTickets = lottoMachine.generateLottoTickets();
+        this.lottoTickets = LottoMachine.generateLottoTickets(price);
     }
 
     public static LottoSystem init(final String price) {
