@@ -46,7 +46,7 @@ public class OutputView {
     }
 
     private static void printLottoNumbers(LottoNumbers lottoNumbers) {
-        List<String> convertedLottoNumbers = lottoNumbers.toIntegerList().stream()
+        List<String> convertedLottoNumbers = lottoNumbers.getValueAsIntegerList().stream()
                 .map(String::valueOf)
                 .collect(toList());
 

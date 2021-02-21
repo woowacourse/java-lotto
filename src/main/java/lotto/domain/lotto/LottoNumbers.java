@@ -53,8 +53,7 @@ public class LottoNumbers {
                 .count();
     }
 
-    //todo changeMethodName
-    public List<Integer> toIntegerList() {
+    public List<Integer> getValueAsIntegerList() {
         return lottoNumbers.stream()
                 .map(LottoNumber::getValueAsInt)
                 .collect(toList());
