@@ -2,9 +2,9 @@ package lotto.domain;
 
 public class LottoGame {
 
-    public Lottos buyLottos(Money money) {
+    public Lottos buyAutoLottos(int autoAmount) {
 
-        return new Lottos(money);
+        return new Lottos(autoAmount);
     }
 
     public LottoGameResult compareWithWinningLotto(Lottos lottos, WinningLotto winningLotto) {

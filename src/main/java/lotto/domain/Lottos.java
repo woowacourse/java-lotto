@@ -9,12 +9,12 @@ public class Lottos {
 
     private final List<Lotto> lottos = new ArrayList<>();
 
-    public Lottos(Money money) {
-        makeRandomLottos(money);
+    public Lottos(int autoAmount) {
+        makeRandomLottos(autoAmount);
     }
 
-    private void makeRandomLottos(Money money) {
-        for (int i = 0; i < money.toNumberOfPurchaseLotto(); i++) {
+    private void makeRandomLottos(int autoAmount) {
+        for (int i = 0; i < autoAmount; i++) {
             lottos.add(Lotto.ofRandomLotto());
         }
     }

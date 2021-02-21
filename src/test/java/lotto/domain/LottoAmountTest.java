@@ -12,7 +12,7 @@ public class LottoAmountTest {
     @Test
     void testCreateLottoAmount() {
         Money money = new Money("14000");
-        String manual = "4000";
+        String manual = "4";
         LottoAmount lottoAmount = new LottoAmount(money, manual);
 
         assertThat(lottoAmount.toManualAmountNumber()).isEqualTo(4);

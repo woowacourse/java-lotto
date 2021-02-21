@@ -31,9 +31,7 @@ public class LottoGameResultTest {
     @DisplayName("수익률 계산 테스트")
     @Test
     void testCalculateProfit() {
-        Money money = new Money("1000");
-
-        Lottos lottos = new Lottos(money);
+        Lottos lottos = new Lottos(1);
         WinningLotto winningLotto = new WinningLotto(lottos.toList().get(0), 1);
 
         LottoGame lottoGame = new LottoGame();

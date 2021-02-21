@@ -13,7 +13,7 @@ public class LottosTest {
     void testCreateLottos() {
         Money purchaseMoney = new Money("1000");
 
-        Lottos lottos = new Lottos(purchaseMoney);
+        Lottos lottos = new Lottos(1);
 
         assertThat(lottos.toList().size()).isEqualTo(purchaseMoney.toNumberOfPurchaseLotto());
     }
