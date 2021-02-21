@@ -12,13 +12,14 @@ import java.util.Arrays;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.ticketpurchase.LottoTickets;
+import lotto.domain.ticketpurchase.PurchasePrice;
 import lotto.domain.ticketpurchase.UserPurchase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottoResultTest {
-    private static final int PURCHASE_PRICE = 10000;
+    private static final int PURCHASE_PRICE = 10_000;
 
     private WinningTicketAndBonusNumber winningLottoNumbers;
     private UserPurchase userPurchase;
@@ -37,7 +38,7 @@ public class LottoResultTest {
         );
         LottoNumber bonusNumber = new LottoNumber(7, true);
         winningLottoNumbers = new WinningTicketAndBonusNumber(winnerTicket, bonusNumber);
-        userPurchase = new UserPurchase(PURCHASE_PRICE, new LottoTickets());
+        userPurchase = new UserPurchase(new PurchasePrice(PURCHASE_PRICE), new LottoTickets());
     }
 
     @DisplayName("1등 당첨 - 6개 일치")

@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.ticketpurchase.LottoTickets;
+import lotto.domain.ticketpurchase.NumberOfTicketsToPurchaseManually;
+import lotto.domain.ticketpurchase.PurchasePrice;
 import lotto.domain.ticketpurchase.UserPurchase;
 import lotto.domain.ticketresult.WinningTicketAndBonusNumber;
 import lotto.view.printer.InputPrinter;
@@ -14,7 +16,7 @@ import lotto.view.printer.InputPrinter;
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
     private static final String INTEGER_REGEX = "\\d+";
-    public static final String LOTTO_NUMBER_DELIMITER = ", ";
+    public static final String LOTTO_NUMBERS_DELIMITER = ", ";
 
     private InputView() {
     }
@@ -29,33 +31,30 @@ public class InputView {
     }
 
     private static UserPurchase getUserPurchaseInputFromUser() {
-        int purchasePrice = getPurchasePriceInputFromUser();
-        int numberOfManualPurchaseTickets = getNumberOfManualPurchaseTickets();
+        PurchasePrice purchasePrice = getPurchasePriceInputFromUser();
+        NumberOfTicketsToPurchaseManually numberOfTicketsToPurchaseManually
+            = getNumberOfTicketsToPurchaseManually(purchasePrice);
         LottoTickets manuallyPurchasedLottoTickets
-            = getManuallyPurchasedLottoTicketsNumbersInputFromUser(numberOfManualPurchaseTickets);
+            = getManuallyPurchasedLottoTicketsInputFromUser(numberOfTicketsToPurchaseManually);
         return new UserPurchase(purchasePrice, manuallyPurchasedLottoTickets);
     }
 
-    private static int getPurchasePriceInputFromUser() {
-        InputPrinter.printPurchasePriceInputGuideMessage();
+    private static PurchasePrice getPurchasePriceInputFromUser() {
+        InputPrinter.printInputGuideMessageOfPurchasePrice();
         String purchasePriceInput = scanner.nextLine();
-        return validateInteger(purchasePriceInput);
+        int purchasePrice = validateInteger(purchasePriceInput);
+        return new PurchasePrice(purchasePrice);
     }
 
-    private static int getNumberOfManualPurchaseTickets() {
-        InputPrinter.printNumberOfManualPurchaseTicketsInputGuideMessage();
-        String numberOfManualPurchaseTicketsInput = scanner.nextLine();
-        return validateInteger(numberOfManualPurchaseTicketsInput);
-    }
+    private static NumberOfTicketsToPurchaseManually getNumberOfTicketsToPurchaseManually(
+        PurchasePrice purchasePrice) {
 
-    private static LottoTickets getManuallyPurchasedLottoTicketsNumbersInputFromUser(
-        int numberOfManualPurchaseTickets) {
-        InputPrinter.printLottoNumbersToManuallyPurchaseInputGuideMessage();
-        LottoTickets manuallyPurchasedLottoTickets = new LottoTickets();
-        for (int i = 0; i < numberOfManualPurchaseTickets; i++) {
-            manuallyPurchasedLottoTickets.add(new LottoTicket(getLottoNumbersInput()));
-        }
-        return manuallyPurchasedLottoTickets;
+        InputPrinter.printInputGuideMessageOfNumberOfManualPurchaseTickets();
+        String numberOfTicketsToPurchaseManuallyInput = scanner.nextLine();
+        int numberOfTicketsToPurchaseManually
+            = validateInteger(numberOfTicketsToPurchaseManuallyInput);
+        return new NumberOfTicketsToPurchaseManually(numberOfTicketsToPurchaseManually,
+            purchasePrice);
     }
 
     private static int validateInteger(String purchasePriceInput) {
@@ -63,6 +62,25 @@ public class InputView {
             throw new IllegalArgumentException("정수를 입력해주세요.");
         }
         return Integer.parseInt(purchasePriceInput);
+    }
+
+    private static LottoTickets getManuallyPurchasedLottoTicketsInputFromUser(
+        NumberOfTicketsToPurchaseManually numberOfManualPurchaseTickets) {
+
+        InputPrinter.printInputGuideMessageOfLottoNumbersToPurchaseManually();
+        LottoTickets manuallyPurchasedLottoTickets = new LottoTickets();
+        for (int i = 0; i < numberOfManualPurchaseTickets.getNumberOfTickets(); i++) {
+            manuallyPurchasedLottoTickets.add(new LottoTicket(getLottoNumbersInput()));
+        }
+        return manuallyPurchasedLottoTickets;
+    }
+
+    private static List<LottoNumber> getLottoNumbersInput() {
+        String winningNumbersInput = scanner.nextLine();
+        validateAllIntegerLottoNumbersInput(winningNumbersInput);
+        return Arrays.stream(winningNumbersInput.split(LOTTO_NUMBERS_DELIMITER))
+            .map(inputNumber -> new LottoNumber(Integer.parseInt(inputNumber)))
+            .collect(Collectors.toList());
     }
 
     public static WinningTicketAndBonusNumber getWinningTicketAndBonusNumber() {
@@ -75,30 +93,22 @@ public class InputView {
     }
 
     private static WinningTicketAndBonusNumber getWinningTicketAndBonusNumberInputFromUser() {
-        InputPrinter.printWinnerLottoNumbersInputGuideMessage();
+        InputPrinter.printInputGuideMessageOfWinnerLottoNumbers();
         List<LottoNumber> lottoNumbers = getLottoNumbersInput();
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
         LottoNumber bonusNumber = getBonusNumberInput();
         return new WinningTicketAndBonusNumber(lottoTicket, bonusNumber);
     }
 
-    private static List<LottoNumber> getLottoNumbersInput() {
-        String winningNumbersInput = scanner.nextLine();
-        validateAllIntegers(winningNumbersInput);
-        return Arrays.stream(winningNumbersInput.split(LOTTO_NUMBER_DELIMITER))
-            .map(inputNumber -> new LottoNumber(Integer.parseInt(inputNumber)))
-            .collect(Collectors.toList());
-    }
-
-    private static void validateAllIntegers(String winningNumbersInput) {
-        if (!Arrays.stream(winningNumbersInput.split(LOTTO_NUMBER_DELIMITER))
+    private static void validateAllIntegerLottoNumbersInput(String winningNumbersInput) {
+        if (!Arrays.stream(winningNumbersInput.split(LOTTO_NUMBERS_DELIMITER))
             .allMatch(name -> name.matches(INTEGER_REGEX))) {
             throw new IllegalArgumentException("각 로또 번호는 정수여야 합니다.");
         }
     }
 
     private static LottoNumber getBonusNumberInput() {
-        InputPrinter.printBonusNumberInputGuideMessage();
+        InputPrinter.printInputGuideMessageOfBonusNumber();
         String bonusNumberInput = scanner.nextLine();
         int bonusNumber = validateInteger(bonusNumberInput);
         InputPrinter.printNewLine();

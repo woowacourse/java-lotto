@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
+import lotto.domain.ticketpurchase.PurchasePrice;
 import lotto.domain.ticketpurchase.UserPurchase;
 import lotto.type.LottoMatchType;
 
@@ -13,7 +14,7 @@ public class LottoResult {
 
     private final WinningTicketAndBonusNumber winningLottoNumbers;
     private final Map<LottoMatchType, Integer> resultCounts;
-    private final int purchasePrice;
+    private final PurchasePrice purchasePrice;
     private int totalLottoWinningMoney;
 
     public LottoResult(WinningTicketAndBonusNumber winningLottoNumbers, UserPurchase userPurchase) {
@@ -57,6 +58,6 @@ public class LottoResult {
     }
 
     public double getProfit() {
-        return (double) totalLottoWinningMoney / (double) purchasePrice;
+        return (double) totalLottoWinningMoney / (double) purchasePrice.getPurchasePrice();
     }
 }

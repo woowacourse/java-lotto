@@ -1,6 +1,6 @@
 package lotto.view.printer;
 
-import static lotto.view.InputView.LOTTO_NUMBER_DELIMITER;
+import static lotto.view.InputView.LOTTO_NUMBERS_DELIMITER;
 
 import java.util.stream.Collectors;
 import lotto.domain.LottoTicket;
@@ -20,7 +20,7 @@ public class OutputPrinter {
         System.out.println("[" +
             lottoTicket.getLottoTicketNumbers().stream()
                 .map(lottoNumber -> Integer.toString(lottoNumber.getNumber()))
-                .collect(Collectors.joining(LOTTO_NUMBER_DELIMITER))
+                .collect(Collectors.joining(LOTTO_NUMBERS_DELIMITER))
             + "]"
         );
     }

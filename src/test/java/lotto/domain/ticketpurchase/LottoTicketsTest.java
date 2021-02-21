@@ -25,10 +25,11 @@ public class LottoTicketsTest {
         LottoTicket lottoTicket1 = new LottoTicket(lottoNumbers);
         LottoTicket lottoTicket2 = new LottoTicket(lottoNumbers);
 
-        LottoTickets purchasedLottoTickets = new LottoTickets();
-        purchasedLottoTickets.add(lottoTicket1);
-        purchasedLottoTickets.add(lottoTicket2);
+        LottoTickets lottoTickets = new LottoTickets();
+        lottoTickets.add(lottoTicket1);
+        lottoTickets.add(lottoTicket2);
 
-        assertThat(purchasedLottoTickets.getTickets().size()).isEqualTo(2);
+        assertThat(lottoTickets.size()).isEqualTo(2);
+        assertThat(lottoTickets.getTickets().size()).isEqualTo(2);
     }
 }

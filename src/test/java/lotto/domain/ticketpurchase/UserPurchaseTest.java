@@ -1,33 +1,31 @@
 package lotto.domain.ticketpurchase;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatCode;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 
 public class UserPurchaseTest {
-    @DisplayName("구입 금액이 1000원 단위일 시 정상")
+    @DisplayName("구입한 티켓 수 반환 확인")
     @Test
-    void Should_Not_ThrowException_When_PurchasePriceExactlyDividedByThousand() {
-        assertThatCode(() -> new UserPurchase(1000, new LottoTickets()))
-            .doesNotThrowAnyException();
+    void Should_Return_ExactNumberOfPurchasedTickets_When_GetNumberOfAllTickets() {
+        PurchasePrice purchasePrice = new PurchasePrice(2000);
+        LottoTickets manuallyPurchasedLottoTickets = new LottoTickets();
+
+        UserPurchase userPurchase = new UserPurchase(purchasePrice, manuallyPurchasedLottoTickets);
+
+        assertThat(userPurchase.getNumberOfAllTickets()).isEqualTo(2);
     }
 
-    @DisplayName("구입 금액이 1000원 단위가 아닐 시 에러")
+    @DisplayName("구입 금액 객체 반환 확인")
     @Test
-    void Should_ThrowException_When_PurchasePriceNotDividedByThousand() {
-        Assertions.assertThatThrownBy(() ->
-            new UserPurchase(1200, new LottoTickets())
-        ).isInstanceOf(IllegalArgumentException.class);
-    }
+    void Should_Return_ExactPurchasePriceObject_When_GetPurchasePrice() {
+        PurchasePrice purchasePrice = new PurchasePrice(2000);
+        LottoTickets manuallyPurchasedLottoTickets = new LottoTickets();
 
-    @DisplayName("구입 금액이 1000원 단위일 때 티켓 개수 확인")
-    @Test
-    void Should_ReturnNumberOfTickets_When_ExactlyDividedByThousand() {
-        UserPurchase userPurchase = new UserPurchase(21000, new LottoTickets());
-        assertThat(userPurchase.getNumberOfAllTickets()).isEqualTo(21);
+        UserPurchase userPurchase = new UserPurchase(purchasePrice, manuallyPurchasedLottoTickets);
+
+        assertThat(userPurchase.getPurchasePrice()).isEqualTo(purchasePrice);
     }
 }

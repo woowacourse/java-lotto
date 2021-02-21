@@ -3,6 +3,7 @@ package lotto.domain.ticketgenerator;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import lotto.domain.ticketpurchase.LottoTickets;
+import lotto.domain.ticketpurchase.PurchasePrice;
 import lotto.domain.ticketpurchase.UserPurchase;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,7 @@ public class LottoGeneratorTest {
     @Test
     void Should_Return_LottoTicketsWithExactNumberOfTickets_When_Purchase() {
 
-        UserPurchase userPurchase = new UserPurchase(10_000, new LottoTickets());
+        UserPurchase userPurchase = new UserPurchase(new PurchasePrice(10_000), new LottoTickets());
         LottoGenerator lottoGenerator = new LottoGenerator();
 
         LottoTickets lottoTickets = lottoGenerator.purchaseTickets(userPurchase);
