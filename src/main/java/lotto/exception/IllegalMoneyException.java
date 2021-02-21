@@ -3,7 +3,7 @@ package lotto.exception;
 import lotto.view.ErrorView;
 
 public class IllegalMoneyException extends IllegalArgumentException {
-    public IllegalMoneyException() {
-        ErrorView.printIllegalMoneyErrorMessage();
+    public IllegalMoneyException(String message) {
+        ErrorView.printErrorMessage(message);
     }
 }

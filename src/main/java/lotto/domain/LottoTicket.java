@@ -18,17 +18,20 @@ public class LottoTicket {
     }
 
     private void validateLottoNumbers(List<LottoNumber> numbers) {
-        if (isInvalidateLottoSize(numbers) || isDuplicateNumber(numbers)) {
-            throw new IllegalLottoNumbersException();
+        validateLottoBySize(numbers);
+        validateDuplicateNumber(numbers);
+    }
+
+    private void validateLottoBySize(List<LottoNumber> numbers) {
+        if (numbers.size() != LOTTO_TICKET_SIZE) {
+            throw new IllegalLottoNumbersException("로또 티켓의 길이가 맞지 않습니다.");
         }
     }
 
-    private boolean isInvalidateLottoSize(List<LottoNumber> numbers) {
-        return numbers.size() != LOTTO_TICKET_SIZE;
-    }
-
-    private boolean isDuplicateNumber(List<LottoNumber> numbers) {
-        return new HashSet<>(numbers).size() != numbers.size();
+    private void validateDuplicateNumber(List<LottoNumber> numbers) {
+        if (new HashSet<>(numbers).size() != numbers.size()) {
+            throw new IllegalLottoNumbersException("티켓 내 중복되는 숫자들이 있습니다.");
+        }
     }
 
     public List<LottoNumber> getLottoTicket() {

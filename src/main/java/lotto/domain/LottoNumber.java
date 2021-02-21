@@ -18,18 +18,21 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private void validateLottoNumber(String input) {
-        if (isInvalidNumberFormat(input) || isInvalidLottoNumberRange(input)) {
-            throw new IllegalLottoNumberException();
+        validateNumberByFormat(input);
+        validateLottoNumberByRange(input);
+    }
+
+    private void validateNumberByFormat(String input) {
+        if (!NUMBER_PATTERN.matcher(input).matches()) {
+            throw new IllegalLottoNumberException(input + " : 양수가 아닙니다.");
         }
     }
 
-    private boolean isInvalidNumberFormat(String input) {
-        return !NUMBER_PATTERN.matcher(input).matches();
-    }
-
-    private boolean isInvalidLottoNumberRange(String input) {
+    private void validateLottoNumberByRange(String input) {
         int value = Integer.parseInt(input);
-        return value > MAX_LOTTO_NUMBER || value < MIN_LOTTO_NUMBER;
+        if (value > MAX_LOTTO_NUMBER || value < MIN_LOTTO_NUMBER) {
+            throw new IllegalLottoNumberException(input + " : 로또번호의 범위를 벗어납니다.");
+        }
     }
 
     private int getValue() {

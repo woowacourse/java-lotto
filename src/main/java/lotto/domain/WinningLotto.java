@@ -14,7 +14,7 @@ public class WinningLotto {
 
     private void validateWinningLotto(LottoTicket winningTicket, LottoNumber bonusNumber) {
         if (winningTicket.hasLottoNumberInTicket(bonusNumber)) {
-            throw new IllegalWinningLottoException();
+            throw new IllegalWinningLottoException(bonusNumber + " : 티켓 내 숫자와 보너스 번호가 중복됩니다.");
         }
     }
 

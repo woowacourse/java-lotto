@@ -20,17 +20,21 @@ public class Money {
     }
 
     private void validateMoneyValue(String input) {
-        if (isInvalidNumberFormat(input) || isLessThanMinimumMoney(input)) {
-            throw new IllegalMoneyException();
+        validateNumberByFormat(input);
+        validateMoneyByMiniMumLimit(input);
+
+    }
+
+    private void validateNumberByFormat(String input) {
+        if (!NUMBER_PATTERN.matcher(input).matches()) {
+            throw new IllegalMoneyException(input + " : 양수가 아닙니다.");
         }
     }
 
-    private boolean isInvalidNumberFormat(String input) {
-        return !NUMBER_PATTERN.matcher(input).matches();
-    }
-
-    private boolean isLessThanMinimumMoney(String input) {
-        return Integer.parseInt(input) < MINIMUM_MONEY;
+    private void validateMoneyByMiniMumLimit(String input) {
+        if (Integer.parseInt(input) < MINIMUM_MONEY) {
+            throw new IllegalMoneyException(input + " : " + MINIMUM_MONEY + "보다 큰 금액을 입력해야 합니다.");
+        }
     }
 
     public long getValue() {
