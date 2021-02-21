@@ -19,6 +19,15 @@ public class InputView {
     }
 
     public static UserPurchase getUserPurchase() {
+        try {
+            return getUserPurchaseInputFromUser();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return getUserPurchase();
+        }
+    }
+
+    private static UserPurchase getUserPurchaseInputFromUser() {
         InputPrinter.printPurchasePriceInputGuideMessage();
         String purchasePriceInput = scanner.nextLine();
         int purchasePrice = validateNaturalNumber(purchasePriceInput);
@@ -32,7 +41,16 @@ public class InputView {
         return Integer.parseInt(purchasePriceInput);
     }
 
-    public static WinningTicketAndBonusNumber getWinningLottoNumbers() {
+    public static WinningTicketAndBonusNumber getWinningTicketAndBonusNumber() {
+        try {
+            return getWinningTicketAndBonusNumberInputFromUser();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return getWinningTicketAndBonusNumber();
+        }
+    }
+
+    private static WinningTicketAndBonusNumber getWinningTicketAndBonusNumberInputFromUser() {
         List<LottoNumber> lottoNumbers = getWinningLottoNumbersInput();
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
         LottoNumber bonusNumber = getBonusNumberInput();
