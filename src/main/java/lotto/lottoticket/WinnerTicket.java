@@ -16,18 +16,19 @@ public class WinnerTicket {
     private List<Integer> splitNumbers(String values) {
         List<Integer> numbers = new ArrayList<>();
         for (String value : values.split(COMMA_DELIMITER)) {
-            numbers.add(validateNumber(value));
+            numbers.add(makeValidatedNumber(value));
         }
-        return validateNumbers(numbers);
+        return makeValidatedNumbers(numbers);
     }
 
-    private int validateNumber(String value) {
-        int number = TicketValidation.validateNumber(value);
+    private int makeValidatedNumber(String value) {
+        TicketValidation.validateNumber(value);
+        int number = Integer.parseInt(value.trim());
         TicketValidation.validateNumberInRange(number);
         return number;
     }
 
-    private List<Integer> validateNumbers(List<Integer> numbers) {
+    private List<Integer> makeValidatedNumbers(List<Integer> numbers) {
         TicketValidation.validateSize(numbers);
         TicketValidation.validateDuplicated(numbers);
         return numbers;

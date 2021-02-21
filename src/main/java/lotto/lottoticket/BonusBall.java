@@ -8,16 +8,16 @@ public class BonusBall {
     private final int bonusBall;
 
     public BonusBall(String value, WinnerTicket winnerTicket) {
-        int number = validateNumber(value);
+        TicketValidation.validateNumber(value);
+        this.bonusBall = makeValidateNumber(value, winnerTicket);
+    }
+
+    private int makeValidateNumber(String value, WinnerTicket winnerTicket) {
+        int number = Integer.parseInt(value.trim());
+        TicketValidation.validateNumberInRange(number);
         if (winnerTicket.containsSameNumber(number)) {
             throw new IllegalArgumentException(ERROR_MESSAGE_DUPLICATED);
         }
-        this.bonusBall = number;
-    }
-
-    private int validateNumber(String value) {
-        int number = TicketValidation.validateNumber(value);
-        TicketValidation.validateNumberInRange(number);
         return number;
     }
 

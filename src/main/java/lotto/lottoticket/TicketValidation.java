@@ -12,10 +12,9 @@ public class TicketValidation {
     private static final String SPACE = " ";
     private static final String NON_SPACE = "";
 
-    public static Integer validateNumber(String value) {
+    public static void validateNumber(String value) {
         try {
-            value = value.replace(SPACE, NON_SPACE);
-            return Integer.parseInt(value);
+            Integer.parseInt(value.trim());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ERROR_MESSAGE_INVALID_INPUT);
         }

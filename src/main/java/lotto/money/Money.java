@@ -17,9 +17,10 @@ public class Money {
     }
 
     private int validate(String money) {
-        int value = TicketValidation.validateNumber(money);
-        checkMinimum(value);
-        return value;
+        TicketValidation.validateNumber(money);
+        int number = Integer.parseInt(money.trim());
+        checkMinimum(number);
+        return number;
     }
 
     private void checkMinimum(int value) {
