@@ -43,17 +43,13 @@ public class LottoTicket {
         }
     }
 
-    public Ranking checkRanking(final LottoTicket winningTicket, LottoNumber bonusNumber) {
-        int matching = (int) lottoNumbers.stream()
-                .filter(winningTicket::contains)
-                .count();
-
-        boolean bonusMatching = contains(bonusNumber);
-
-        return Ranking.select(matching, bonusMatching);
+    public int countMatchingNumbers(LottoTicket lottoTicket) {
+        return (int) lottoNumbers.stream()
+            .filter(lottoTicket::contains)
+            .count();
     }
 
-    private boolean contains(LottoNumber lottoNumber) {
+    public boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
 

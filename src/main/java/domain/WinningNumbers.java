@@ -1,6 +1,5 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,7 +41,13 @@ public class WinningNumbers {
 
     public List<Ranking> getRankings(final List<LottoTicket> lottoTickets) {
         return lottoTickets.stream()
-            .map(lottoTicket -> lottoTicket.checkRanking(winningTicket, bonusNumber))
+            .map(this::checkRanking)
             .collect(Collectors.toList());
+    }
+
+    private Ranking checkRanking(LottoTicket lottoTicket) {
+        int matching = winningTicket.countMatchingNumbers(lottoTicket);
+        boolean bonusMatching = lottoTicket.contains(bonusNumber);
+        return Ranking.select(matching, bonusMatching);
     }
 }
