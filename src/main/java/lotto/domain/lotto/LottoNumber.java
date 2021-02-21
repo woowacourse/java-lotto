@@ -1,13 +1,13 @@
 package lotto.domain.lotto;
 
-import static lotto.domain.lotto.utils.LottoAttributes.LOTTO_NUMBER_END;
-import static lotto.domain.lotto.utils.LottoAttributes.LOTTO_NUMBER_START;
 import static lotto.view.messages.ErrorMessages.LOTTO_NUMBER_RANGE_ERROR;
 
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
+    public static final int LOTTO_NUMBER_START = 1;
+    public static final int LOTTO_NUMBER_END = 45;
     private final int value;
 
     public LottoNumber(int value) {

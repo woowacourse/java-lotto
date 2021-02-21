@@ -1,7 +1,7 @@
 package lotto.domain.rank;
 
 
-import static lotto.domain.lotto.utils.LottoAttributes.LOTTO_LINE_PRICE;
+import static lotto.domain.lotto.LottoTicket.LOTTO_LINE_PRICE;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,6 +1,5 @@
 package lotto.domain.lotto;
 
-import static lotto.domain.lotto.utils.LottoAttributes.LOTTO_NUMBER_COUNT;
 import static lotto.view.messages.ErrorMessages.LOTTO_LINE_NUMBER_COUNT_DUPLICATE_ERROR;
 
 import java.util.ArrayList;
@@ -12,12 +11,14 @@ import lotto.domain.rank.Rank;
 
 public class LottoLine {
 
+    public static final int LOTTO_NUMBER_COUNT = 6;
     private final List<LottoNumber> lottoNumbers;
 
     public LottoLine(List<LottoNumber> lottoNumbers) {
         Set<LottoNumber> set = new HashSet<>(lottoNumbers);
         if (set.size() != LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException(LOTTO_LINE_NUMBER_COUNT_DUPLICATE_ERROR.getMessage());
+            throw new IllegalArgumentException(
+                LOTTO_LINE_NUMBER_COUNT_DUPLICATE_ERROR.getMessage());
         }
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }

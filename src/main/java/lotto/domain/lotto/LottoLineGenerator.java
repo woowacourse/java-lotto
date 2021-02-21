@@ -1,7 +1,7 @@
 package lotto.domain.lotto;
 
-import static lotto.domain.lotto.utils.LottoAttributes.LOTTO_NUMBER_END;
-import static lotto.domain.lotto.utils.LottoAttributes.LOTTO_NUMBER_START;
+import static lotto.domain.lotto.LottoNumber.LOTTO_NUMBER_END;
+import static lotto.domain.lotto.LottoNumber.LOTTO_NUMBER_START;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -1,6 +1,5 @@
 package lotto.domain.lotto;
 
-import static lotto.domain.lotto.utils.LottoAttributes.LOTTO_LINE_PRICE;
 import static lotto.view.messages.ErrorMessages.LOTTO_PURCHASE_PRICE_ERROR;
 
 import java.util.ArrayList;
@@ -11,6 +10,7 @@ import lotto.domain.rank.Rank;
 
 public class LottoTicket {
 
+    public static final int LOTTO_LINE_PRICE = 1000;
     private static final LottoLineGenerator randomLottoGenerator = new LottoLineGenerator();
     private final List<LottoLine> lottoLines;
 
