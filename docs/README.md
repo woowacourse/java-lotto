@@ -26,9 +26,26 @@
 <br>
 
 ## 프로그래밍 요구사항
-- [ ] 배열 대신 ArrayList를 사용한다.
-- [ ] java enum을 적용해 프로그래밍을 구현한다.
-- [ ] 모든 원시값과 문자열을 포장한다.
-- [ ] 줄여쓰지 않는다(축약 금지).
-- [ ] 일급 콜렉션을 쓴다.
+- [x] 배열 대신 ArrayList를 사용한다.
+- [x] java enum을 적용해 프로그래밍을 구현한다.
+- [x] 모든 원시값과 문자열을 포장한다.
+- [x] 줄여쓰지 않는다(축약 금지).
+- [x] 일급 콜렉션을 쓴다.
 
+<br>
+
+## 1단계 피드백 체크리스트
+- [ ] 사용하지 않는 메서드 및 import 모두 제거
+- [ ] 자율적인 객체로 리팩토링 (`WinningLotto`)
+- [ ] 상수화
+    - 로또 두번째 세번째 순위의 맞는 개수인 5를 별도의 상수 처리
+    - `Lotto` 테스트를 위한 public 및 네이밍 리팩토링
+- [ ] HashMap 리팩토링 (`computeIfPresent`)
+- [ ] Controller가 InputView만 상태로 만든 부분 수정
+- [ ] InputView와 OutputView의 책임 리팩토링
+- [ ] 금액 기준으로 구매할 로또 갯수를 구하고 로또는 생성하는 로직 분리
+    - `LottoStore`를 만들어 WinningLotto와 WinningBonus에 대한 코드 분리
+- [ ] `RandomLottoGenerator`에서 셔플에 사용되는 리스트 캐싱 및 메서드 참조 리팩토링
+- [ ] 의미없는 문자열 더하기 제거 (`LessThanLottoPriceException`)
+- [ ] 의미없는 조건문 제거 (`Money`)
+- [ ] 모든 변수는 생성자에서 초기화해주도록!
