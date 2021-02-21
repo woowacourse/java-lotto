@@ -10,9 +10,10 @@ public enum Prize {
     SECOND_PRIZE(new Money(30000000), 5),
     FIRST_PRIZE(new Money(2000000000), 6);
 
-    public static final int BONUS_CHECK_PIVOT = 5;
-    private Money prizeMoney;
-    private int matchCount;
+    private static final int BONUS_CHECK_PIVOT = 5;
+
+    private final Money prizeMoney;
+    private final int matchCount;
 
     Prize(Money prizeMoney, int matchCount) {
         this.prizeMoney = prizeMoney;
