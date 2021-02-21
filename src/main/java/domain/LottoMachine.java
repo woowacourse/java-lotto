@@ -9,7 +9,7 @@ public class LottoMachine {
     public static LottoTickets buy(Money money) {
         List<LottoTicket> lottoTicket = new ArrayList<>();
         for (int i = 0; i < money.toLong() / PRICE; i++) {
-            lottoTicket.add(LottoTicket.of(LottoNumberRepository.shuffleLottoNumbers()));
+            lottoTicket.add(new LottoTicket(LottoNumberRepository.shuffleLottoNumbers()));
         }
         return new LottoTickets(lottoTicket);
     }

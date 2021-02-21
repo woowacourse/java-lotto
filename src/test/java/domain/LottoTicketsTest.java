@@ -12,9 +12,9 @@ public class LottoTicketsTest {
     @Test
     public void createLottoTickets() {
         LottoTickets lottoTickets = new LottoTickets(Arrays.asList(
-                LottoTicket.of(LottoNumberRepository.shuffleLottoNumbers()),
-                LottoTicket.of(LottoNumberRepository.shuffleLottoNumbers()),
-                LottoTicket.of(LottoNumberRepository.shuffleLottoNumbers())
+                new LottoTicket(LottoNumberRepository.shuffleLottoNumbers()),
+                new LottoTicket(LottoNumberRepository.shuffleLottoNumbers()),
+                new LottoTicket(LottoNumberRepository.shuffleLottoNumbers())
         ));
 
         assertThat(lottoTickets).isInstanceOf(LottoTickets.class);
