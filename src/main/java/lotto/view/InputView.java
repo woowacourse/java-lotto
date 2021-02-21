@@ -7,7 +7,7 @@ import java.util.Scanner;
 import lotto.domain.lotto.LottoNumber;
 
 public class InputView {
-
+    private static final String DELIMITER = ",";
     private static final Scanner scanner = new Scanner(System.in);
 
     private InputView() {
@@ -21,7 +21,7 @@ public class InputView {
     public static String[] getLottoLine() {
         System.out.println(InputViewMessages.REQUEST_LAST_WIN_LOTTO_NUMBERS.getMessage());
         String lottoNumbersInput = scanner.nextLine();
-        String[] splitLottoNumbersInput = lottoNumbersInput.replace(" ", "").split(",");
+        String[] splitLottoNumbersInput = lottoNumbersInput.replace(" ", "").split(DELIMITER);
         return splitLottoNumbersInput;
     }
 
