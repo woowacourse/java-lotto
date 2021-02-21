@@ -11,9 +11,6 @@ public enum Rank {
     SECOND(5, 30_000_000),
     FIRST(6, 2_000_000_000);
 
-    public static final String RANK_BONUS_FORM = "%d개 일치, 보너스 볼 일치(%d원)- %d개" + System.lineSeparator();
-    public static final String RANK_FORM = "%d개 일치 (%d원)- %d개" + System.lineSeparator();
-
     private int countOfMatch;
     private int reward;
 
@@ -28,13 +25,6 @@ public enum Rank {
 
     public int getReward() {
         return reward;
-    }
-
-    public String rankMessage(int countNumber) {
-        if (this == SECOND) {
-            return String.format(RANK_BONUS_FORM, countOfMatch, reward, countNumber);
-        }
-        return String.format(RANK_FORM, countOfMatch, reward, countNumber);
     }
 
     public static Rank rankOf(int countOfMatch, boolean bonusNumber) {
