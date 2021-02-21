@@ -37,7 +37,7 @@ public class OutputView {
     }
 
     private static void printResult(Map<LottoRank, Long> resultsValues, LottoRank lottoRank) {
-        System.out.printf(format, lottoRank.getMatchCount(), lottoRank.getPrize().getValue(), resultsValues.get(lottoRank));
+        System.out.printf(format, lottoRank.getCorrectCount(), lottoRank.getPrize().getValue(), resultsValues.get(lottoRank));
     }
 
     public static void printEarningRate(double earningRate) {

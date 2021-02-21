@@ -98,7 +98,7 @@ class MoneyTest {
         Money winningMoney = new Money(5_000L);
 
         //when
-        double earningRate = Money.calculateEarningRate(winningMoney, usedMoney);
+        double earningRate = winningMoney.calculateEarningRate(usedMoney);
 
         //then
         assertThat(earningRate).isEqualTo(0.35D);

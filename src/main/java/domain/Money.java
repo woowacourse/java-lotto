@@ -12,12 +12,8 @@ public class Money {
         this.value = value;
     }
 
-    /*
-     XXX :: 인스턴스 메소드 vs 클래스 메소드로 정의 (ex, revenue.calculateEarningRate(used))
-      Money.add(Money one, Money two);
-     */
-    public static double calculateEarningRate(Money revenue, Money used) {
-        double earningRate = revenue.value / (double) used.value;
+    public double calculateEarningRate(Money used) {
+        double earningRate = this.value / (double) used.value;
         return (long) (earningRate * 100) / 100.0;
     }
 

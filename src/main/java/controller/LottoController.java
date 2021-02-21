@@ -20,7 +20,7 @@ public class LottoController {
         OutputView.printResults(results);
 
         Money revenue = results.getTotalWinningMoney();
-        double earningRate = Money.calculateEarningRate(revenue, amount);
+        double earningRate = revenue.calculateEarningRate(amount);
         OutputView.printEarningRate(earningRate);
     }
 }

@@ -53,7 +53,7 @@ class WinningLottoTest {
         Lotto targetLotto = new Lotto(new int[]{1, 2, 3, 4, 5, 6});
 
         // when
-        LottoRank lottoRank = winningLotto.match(targetLotto);
+        LottoRank lottoRank = LottoRank.valueOf(winningLotto, targetLotto);
 
         // then
         assertThat(lottoRank).isEqualTo(LottoRank.FIRST);

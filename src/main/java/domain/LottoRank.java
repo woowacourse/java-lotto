@@ -10,15 +10,19 @@ public enum LottoRank {
     FIFTH(3, 5_000),
     MISS(0, 0);
 
-    private final int correctCnt;
+    private final int correctCount;
     private final Money prize;
 
-    LottoRank(int correctCnt, long prize) {
-        this.correctCnt = correctCnt;
+    LottoRank(int correctCount, long prize) {
+        this.correctCount = correctCount;
         this.prize = new Money(prize);
     }
 
-    public static LottoRank valueOf(int matchCnt, boolean isBonusMatch) {
+    public static LottoRank valueOf(WinningLotto winningLotto, Lotto target) {
+        return getMatchRank(winningLotto.findMatchCount(target), winningLotto.isBonusBallMatch(target));
+    }
+
+    private static LottoRank getMatchRank(int matchCnt, boolean isBonusMatch) {
         if (SECOND.matchCount(matchCnt) || THIRD.matchCount(matchCnt)) {
             return determineSecondOrThird(isBonusMatch);
         }
@@ -37,15 +41,15 @@ public enum LottoRank {
         return THIRD;
     }
 
+    public int getCorrectCount() {
+        return correctCount;
+    }
+
     private boolean matchCount(int countOfMatch) {
-        return this.correctCnt == countOfMatch;
+        return this.correctCount == countOfMatch;
     }
 
     public Money getPrize() {
         return prize;
-    }
-
-    public int getMatchCount() {
-        return correctCnt;
     }
 }
