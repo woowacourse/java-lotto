@@ -10,6 +10,9 @@ public class InputView {
 
     private static final Scanner scanner = new Scanner(System.in);
 
+    private InputView() {
+    }
+
     public static String getMoney() {
         System.out.println(InputViewMessages.REQUEST_PURCHASE_MONEY.getMessage());
         return scanner.nextLine();
