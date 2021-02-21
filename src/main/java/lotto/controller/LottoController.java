@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lotto.domain.Money;
@@ -32,8 +33,18 @@ public class LottoController {
         return LottoTicketFactory.createLottoTicket(money.getValue());
     }
 
+    private List<LottoNumber> getLottoLine(String[] splitLottoNumbersInput) {
+        ArrayList<LottoNumber> lottoNumberList = new ArrayList();
+
+        for (int i = 0; i < splitLottoNumbersInput.length; i++) {
+            lottoNumberList.add(new LottoNumber(splitLottoNumbersInput[i]));
+        }
+
+        return lottoNumberList;
+    }
+
     private LottoResult getLottoResult(LottoTicket lottoTicket) {
-        LottoLine lottoLine = new LottoLine(InputView.getLottoLine());
+        LottoLine lottoLine = new LottoLine(getLottoLine(InputView.getLottoLine()));
         LottoNumber bonusLottoNumber = new LottoNumber(InputView.getBonusLottoNumber());
 
         if (lottoLine.containNumber(bonusLottoNumber)) {

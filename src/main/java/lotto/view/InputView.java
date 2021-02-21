@@ -15,16 +15,11 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static List<LottoNumber> getLottoLine() {
+    public static String[] getLottoLine() {
         System.out.println(InputViewMessages.REQUEST_LAST_WIN_LOTTO_NUMBERS.getMessage());
         String lottoNumbersInput = scanner.nextLine();
         String[] splitLottoNumbersInput = lottoNumbersInput.replace(" ", "").split(",");
-        ArrayList<LottoNumber> lottoNumberList = new ArrayList();
-
-        for (int i = 0; i < splitLottoNumbersInput.length; i++) {
-            lottoNumberList.add(new LottoNumber(splitLottoNumbersInput[i]));
-        }
-        return lottoNumberList;
+        return splitLottoNumbersInput;
     }
 
     public static int getBonusLottoNumber() {
