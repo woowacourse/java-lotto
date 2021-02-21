@@ -41,9 +41,9 @@ public class LottoNumbers {
         return this.lottoNumbers.contains(lottoNumber);
     }
 
-    public List<Integer> getValues() {
+    public List<Integer> getNumbers() {
         return lottoNumbers.stream()
-                .map(lottoNumber -> lottoNumber.getValue())
+                .map(lottoNumber -> lottoNumber.getNumber())
                 .collect(Collectors.toList());
     }
 

@@ -31,7 +31,7 @@ public class Lotto {
         return lottoNumbers.findMatchCount(targetLotto.lottoNumbers);
     }
 
-    public List<Integer> getValues() {
-        return lottoNumbers.getValues();
+    public List<Integer> getNumbers() {
+        return lottoNumbers.getNumbers();
     }
 }
