@@ -40,7 +40,7 @@
 - [x] 상수화
     - 로또 두번째 세번째 순위의 맞는 개수인 5를 별도의 상수 처리
     - `Lotto` 테스트를 위한 public 및 네이밍 리팩토링
-- [ ] HashMap 리팩토링 (`computeIfPresent`)
+- [x] HashMap 리팩토링 (`computeIfPresent`)
 - [ ] Controller가 InputView만 상태로 만든 부분 수정
 - [ ] InputView와 OutputView의 책임 리팩토링
 - [ ] 금액 기준으로 구매할 로또 갯수를 구하고 로또는 생성하는 로직 분리

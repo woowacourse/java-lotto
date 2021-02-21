@@ -8,20 +8,18 @@ import lotto.domain.lotto.Lotto;
 public class LottoResult {
 
     private final Map<LottoRank, Integer> result;
-    private int totalPurchaseAmount = 0;
+    private int totalPurchaseAmount;
 
     public LottoResult() {
         result = new HashMap<>();
         for (LottoRank rank : LottoRank.values()) {
             result.put(rank, 0);
         }
+        totalPurchaseAmount = 0;
     }
 
     public void addRank(LottoRank lottoRank) {
-        if (result.containsKey(lottoRank)) {
-            int num = result.get(lottoRank);
-            result.put(lottoRank, num + 1);
-        }
+        result.computeIfPresent(lottoRank, (LottoRank key, Integer value) -> ++value);
         totalPurchaseAmount += Lotto.LOTTO_PRICE;
     }
 
