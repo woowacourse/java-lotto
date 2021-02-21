@@ -1,6 +1,5 @@
 package domain;
 
-import domain.ball.BonusBall;
 import domain.ball.LottoBall;
 import domain.ball.LottoBalls;
 import domain.budget.Budget;
@@ -70,13 +69,13 @@ public class LottoGameMachine {
 
     public WinningLotto findWinnings() {
         lottoGameScreen.confirmWinningLotto();
-        String winningLottoText = InputUtil.nextLine();
+        String winningLottoInput = InputUtil.nextLine();
 
         lottoGameScreen.confirmBonusLotto();
-        String bonusLotto = InputUtil.nextLine();
+        String bonusLottoInput = InputUtil.nextLine();
 
-        LottoBalls lottoBalls = new LottoBalls(winningLottoText);
-        BonusBall bonusBall = BonusBall.of(LottoBall.of(bonusLotto));
+        LottoBalls lottoBalls = new LottoBalls(winningLottoInput);
+        LottoBall bonusBall = LottoBall.of(bonusLottoInput);
 
         return new WinningLotto(lottoBalls, bonusBall);
     }

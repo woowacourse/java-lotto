@@ -1,6 +1,6 @@
 package domain.result;
 
-import domain.ball.BonusBall;
+import domain.ball.LottoBall;
 import domain.ball.LottoBalls;
 import domain.lotto.Lotto;
 import domain.lotto.Lottos;
@@ -31,7 +31,7 @@ class ResultTest {
         Lottos lottos = new Lottos(Collections.singletonList(new Lotto(LottoBalls.generate(lottoNumbers))));
 
         Result result = new Result(lottos);
-        WinningLotto winningLotto = new WinningLotto(LottoBalls.generate(Arrays.asList(1, 2, 3, 4, 5, 6)), BonusBall.of(7));
+        WinningLotto winningLotto = new WinningLotto(LottoBalls.generate(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoBall(7));
         Map<LottoRank, Integer> results = result.findMatches(winningLotto);
 
         assertThat(results.get(LottoRank.SIX_MATCHES)).isEqualTo(1);
@@ -48,7 +48,7 @@ class ResultTest {
         Lottos multipleLottos = new Lottos(lottos);
 
         Result result = new Result(multipleLottos);
-        WinningLotto winningLotto = new WinningLotto(LottoBalls.generate(Arrays.asList(1, 2, 3, 4, 5, 6)), BonusBall.of(7));
+        WinningLotto winningLotto = new WinningLotto(LottoBalls.generate(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoBall(7));
 
         Map<LottoRank, Integer> results = result.findMatches(winningLotto);
 
@@ -65,7 +65,7 @@ class ResultTest {
 
         Lottos lottoBundle = new Lottos(lottos);
         Result result = new Result(lottoBundle);
-        WinningLotto winningLotto = new WinningLotto(LottoBalls.generate(Arrays.asList(1, 2, 3, 4, 5, 6)), BonusBall.of(7));
+        WinningLotto winningLotto = new WinningLotto(LottoBalls.generate(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoBall(7));
         Map<LottoRank, Integer> results = result.findMatches(winningLotto);
 
         assertThat(results.get(LottoRank.FIVE_AND_BONUS_MATCHES)).isEqualTo(1);
