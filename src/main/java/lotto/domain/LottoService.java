@@ -1,12 +1,10 @@
 package lotto.domain;
 
-import lotto.domain.lotto.Lotto;
 import lotto.domain.lottomachine.LottoMachine;
 import lotto.domain.primitive.Money;
 import lotto.domain.primitive.Ticket;
 import lotto.domain.rating.Rating;
 import lotto.domain.rating.RatingCounter;
-import lotto.domain.statistics.WinningLotto;
 
 import java.util.ArrayList;
 import java.util.List;

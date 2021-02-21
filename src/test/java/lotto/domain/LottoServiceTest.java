@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.lotto.Lotto;
 import lotto.domain.lottomachine.LottoMachine;
 import lotto.domain.lottomachine.TestLottoMachine;
 import lotto.domain.primitive.LottoNumber;
@@ -8,7 +7,6 @@ import lotto.domain.primitive.Money;
 import lotto.domain.primitive.Ticket;
 import lotto.domain.rating.Rating;
 import lotto.domain.rating.RatingCounter;
-import lotto.domain.statistics.WinningLotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,8 +25,6 @@ public class LottoServiceTest {
         lottoMachine = new TestLottoMachine();
         lottoService = new LottoService(lottoMachine);
     }
-
-
 
     @Test
     @DisplayName("로또 구매 결과 확인")

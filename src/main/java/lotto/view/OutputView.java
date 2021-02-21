@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.lotto.Lotto;
+import lotto.domain.Lotto;
 import lotto.domain.rating.LottoResult;
 import lotto.domain.rating.Rating;
 import lotto.domain.rating.RatingCounter;

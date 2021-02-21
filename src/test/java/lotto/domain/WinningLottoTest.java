@@ -1,6 +1,7 @@
-package lotto.domain.statistics;
+package lotto.domain;
 
-import lotto.domain.lotto.Lotto;
+import lotto.domain.WinningLotto;
+import lotto.domain.Lotto;
 import lotto.domain.primitive.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
