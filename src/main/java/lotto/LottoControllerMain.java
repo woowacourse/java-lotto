@@ -13,13 +13,11 @@ public class LottoControllerMain {
 
         OutputView.showBuyLotto(lottos.getLottos());
 
-        List<Result> results = lottos.checkLottoResults(
-                new WinningNumber(InputView.winningNumbers()),
-                new BonusNumber(InputView.bonusNumber())
-        );
+        WinningLotto winningLotto = new WinningLotto(new Lotto(InputView.winningNumbers()), new BonusNumber(InputView.bonusNumber()));
+        List<Result> results = winningLotto.getWinningResult(lottos.getLottos());
 
         OutputView.resultMessage();
-        OutputView.result(Result.getResultValues(), new Statistics(results));
+        OutputView.result(new Statistics(results));
         OutputView.showTotalProfit(money.calculateProfitRate(Result.calculateProfit(results)));
     }
 }

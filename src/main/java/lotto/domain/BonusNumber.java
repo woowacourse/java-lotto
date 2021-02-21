@@ -4,16 +4,13 @@ public class BonusNumber {
 
     private final int bonus;
 
-    public BonusNumber(String bonus) {
+    public BonusNumber(int bonus) {
         validateBonus(bonus);
-        this.bonus = Integer.parseInt(bonus);
+        this.bonus = bonus;
     }
 
-    private void validateBonus(String bonus) {
-        if (!bonus.chars().allMatch(Character::isDigit)) {
-            throw new IllegalArgumentException("보너스 번호는 숫자여야 합니다.");
-        }
-        if (Integer.parseInt(bonus) < 1 || Integer.parseInt(bonus) > 45) {
+    private void validateBonus(int bonus) {
+        if (bonus < 1 || bonus > 45) {
             throw new IllegalArgumentException("1~45 사이의 숫자여야 합니다.");
         }
     }

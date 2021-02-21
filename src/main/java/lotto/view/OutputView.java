@@ -5,6 +5,7 @@ import lotto.domain.Lotto;
 import lotto.domain.Result;
 import lotto.domain.Statistics;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class OutputView {
@@ -23,15 +24,18 @@ public class OutputView {
         System.out.println(sb.toString());
     }
 
-    public static void result(List<Result> values,Statistics statistics) {
-        for (Result result : values) {
-            System.out.printf("%d개 일치%s(%d원)- %d개\n",
-                    result.getCount(),
-                    result.getBonus(),
-                    result.getPrize(),
-                    statistics.getStatic(result)
-            );
-        }
+    public static void result(Statistics statistics) {
+        Arrays.stream(Result.values())
+                .sorted((result1, result2) -> result2.getPrize() - result1.getPrize())
+                .forEach(result ->
+                        System.out.printf(
+                                "%d개 일치%s(%d원)- %d개\n",
+                                result.getCount(),
+                                result.getBonus(),
+                                result.getPrize(),
+                                statistics.getRankCount(result)
+                        )
+                );
     }
 
     public static void showTotalProfit(float profit) {
