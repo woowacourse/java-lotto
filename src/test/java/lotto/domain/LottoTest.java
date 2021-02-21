@@ -18,7 +18,7 @@ public class LottoTest {
         assertThat(lotto).isEqualTo(new Lotto(Arrays.asList(11, 25, 32, 41, 7, 3)));
     }
 
-    @DisplayName("로또번호 에러테스트")
+    @DisplayName("로또번호 중복 에러테스트")
     @Test
     void duplicateException() {
         assertThatThrownBy(() ->
