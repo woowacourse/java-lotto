@@ -37,14 +37,14 @@ public class InputView {
         return inputString;
     }
 
-    public List<String> scanWinningNumber() {
+    public List<String> scanWinningNumbers() {
         System.out.println(MESSAGE_WINNING_NUMBER);
         String inputString = deleteWhiteSpaces(scanner.nextLine());
         if (inputString.contains(COMMA)) {
             return Arrays.asList(inputString.split(COMMA));
         }
         System.out.println(ERROR_INVALID_DELIMITER);
-        return scanWinningNumber();
+        return scanWinningNumbers();
     }
 
     public String scanBonusBall() {

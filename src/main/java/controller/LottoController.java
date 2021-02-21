@@ -11,9 +11,9 @@ public class LottoController {
     public void run() {
         Money budget = createBudgetMoney();
         LottoTickets lottoTickets = createLottoTickets(budget);
-        WinningNumber winningNumber = createWinningNumber();
+        WinningLotto winningLotto = createWinningLotto();
 
-        Statistics statistics = new Statistics(winningNumber, lottoTickets);
+        Statistics statistics = new Statistics(winningLotto, lottoTickets);
         Profit profit = new Profit(budget, statistics.getReward());
 
         outputView.printStatistics(statistics);
@@ -36,15 +36,15 @@ public class LottoController {
         return lottoTickets;
     }
 
-    private WinningNumber createWinningNumber() {
+    private WinningLotto createWinningLotto() {
         try {
-            LottoTicket winningNumbers = LottoTicket.valueOf(inputView.scanWinningNumber());
+            LottoTicket winningNumbers = LottoTicket.valueOf(inputView.scanWinningNumbers());
             LottoNumber bonusBall = new LottoNumber(inputView.scanBonusBall());
             outputView.newLine();
-            return new WinningNumber(winningNumbers, bonusBall);
+            return new WinningLotto(winningNumbers, bonusBall);
         } catch (RuntimeException e) {
             outputView.printError(e);
-            return createWinningNumber();
+            return createWinningLotto();
         }
     }
 }

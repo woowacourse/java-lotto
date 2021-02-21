@@ -11,12 +11,12 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class StatisticsTest {
-    private WinningNumber winningNumber;
+    private WinningLotto winningLotto;
     private LottoTickets lottoTickets;
 
     @BeforeEach
     public void setUp() {
-        winningNumber = new WinningNumber(
+        winningLotto = new WinningLotto(
                 LottoTicket.valueOf(Arrays.asList("1", "2", "3", "4", "5", "6")),
                 new LottoNumber("7"));
         lottoTickets = new LottoTickets(Arrays.asList(
@@ -30,7 +30,7 @@ public class StatisticsTest {
     @DisplayName("일치하는 번호 개수에 따른 통계값을 구한다.")
     @Test
     public void calculateStatistics() {
-        Statistics statistics = new Statistics(winningNumber, lottoTickets);
+        Statistics statistics = new Statistics(winningLotto, lottoTickets);
 
         Map<Rank, Integer> lottoStatistics = statistics.result();
 
@@ -49,7 +49,7 @@ public class StatisticsTest {
     @DisplayName("상금을 계산한다.")
     @Test
     public void calculateRewardTest() {
-        Statistics statistics = new Statistics(winningNumber, lottoTickets);
+        Statistics statistics = new Statistics(winningLotto, lottoTickets);
 
         Money reward = statistics.getReward();
 
