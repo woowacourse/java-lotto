@@ -25,10 +25,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
     return new LottoNumber(number);
   }
 
-  public static List<LottoNumber> asList(int... numbers) {
-    return Arrays.stream(numbers)
-        .mapToObj(LottoNumber::new)
-        .collect(Collectors.toList());
+  public static List<LottoNumber> asList(List<Integer> numbers) {
+    return numbers
+            .stream()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
   }
 
   public int get() {

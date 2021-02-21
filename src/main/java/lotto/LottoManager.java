@@ -37,7 +37,7 @@ public class LottoManager {
             return lottoSeller.sellLotto(money);
         } catch (LottoException e) {
             OutputView.printMessage(e.getMessage());
-            return createLottoGroup(money);
+            return createLottoGroup(InputView.getMoney());
         }
     }
 }

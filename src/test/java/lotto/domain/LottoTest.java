@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.List;
 import lotto.exception.LottoNumberException;
 import org.assertj.core.api.Assertions;
@@ -13,7 +14,7 @@ class LottoTest {
 
   @BeforeEach
   void setUp() {
-    validLottoNumbers = LottoNumber.asList(1, 2, 3, 4, 5, 6);
+    validLottoNumbers = LottoNumber.asList(Arrays.asList(1, 2, 3, 4, 5, 6));
   }
 
   @Test
@@ -26,21 +27,21 @@ class LottoTest {
   @Test
   @DisplayName("로또 생성 : 사이즈 미만으로 실패")
   void createLottoWithUnderSize() {
-    Assertions.assertThatThrownBy(() -> new Lotto(LottoNumber.asList(1, 2, 3)))
+    Assertions.assertThatThrownBy(() -> new Lotto(LottoNumber.asList(Arrays.asList(1, 2, 3))))
         .isInstanceOf(LottoNumberException.class);
   }
 
   @Test
   @DisplayName("로또 생성 : 사이즈 초과로 실패")
   void createLottoWithOverSize() {
-    Assertions.assertThatThrownBy(() -> new Lotto(LottoNumber.asList(1, 2, 3, 4, 5, 6, 7)))
+    Assertions.assertThatThrownBy(() -> new Lotto(LottoNumber.asList(Arrays.asList(1, 2, 3, 4, 5, 6, 7))))
         .isInstanceOf(LottoNumberException.class);
   }
 
   @Test
   @DisplayName("로또 생성 : 번호 중복으로 실패")
   void createLottoWithDuplicateNumber() {
-    Assertions.assertThatThrownBy(() -> new Lotto(LottoNumber.asList(1, 2, 3, 4, 6, 6)))
+    Assertions.assertThatThrownBy(() -> new Lotto(LottoNumber.asList(Arrays.asList(1, 2, 3, 4, 6, 6))))
         .isInstanceOf(LottoNumberException.class);
   }
 }

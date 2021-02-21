@@ -4,6 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import lotto.exception.LottoNumberException;
 import lotto.util.LottoGenerator;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,7 +22,7 @@ class WinningLottoTest {
 
   @BeforeEach
   void setUp() {
-    lotto = LottoGenerator.generate(1, 2, 3, 4, 5, 6);
+    lotto = LottoGenerator.generate(Arrays.asList(1, 2, 3, 4, 5, 6));
     bonusNumber = LottoNumber.of(7);
   }
 
@@ -35,7 +38,10 @@ class WinningLottoTest {
   @CsvSource(value = {"1,2,3,4,5,6:FIRST", "1,2,3,4,5,7:SECOND", "1,2,3,4,5,33:THIRD"}, delimiter = ':')
   void checkRankWithInputLotto(String numbers, LottoRank expectedRank) {
     WinningLotto winningLotto = new WinningLotto(lotto, this.bonusNumber);
-    int[] lottoNumbers = Arrays.stream(numbers.split(",")).mapToInt(Integer::parseInt).toArray();
+    List<Integer> lottoNumbers = Arrays
+            .stream(numbers.split(","))
+            .map(Integer::parseInt)
+            .collect(Collectors.toList());
     LottoRank rank = winningLotto.matchRank(LottoGenerator.generate(lottoNumbers));
     assertThat(rank).isEqualTo(expectedRank);
   }

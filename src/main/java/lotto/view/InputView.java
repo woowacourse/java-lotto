@@ -7,7 +7,9 @@ import lotto.exception.LottoException;
 import lotto.util.LottoGenerator;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class InputView {
 
@@ -34,10 +36,10 @@ public class InputView {
         try {
             OutputView.printMessage(INPUT_WINNING_NUMBER_MESSAGE);
             String winningNumbers = SCAN.nextLine();
-            int[] numbers = Arrays
+            List<Integer> numbers = Arrays
                     .stream(winningNumbers.trim().split(","))
-                    .mapToInt(Integer::parseInt)
-                    .toArray();
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toList());
             return LottoGenerator.generate(numbers);
         } catch (LottoException e) {
             OutputView.printMessage(e.getMessage());

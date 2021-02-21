@@ -30,7 +30,7 @@ public class LottoGenerator {
         .collect(Collectors.toList());
   }
 
-  public static Lotto generate(int... number) {
-    return new Lotto(LottoNumber.asList(number));
+  public static Lotto generate(List<Integer> numbers) {
+    return new Lotto(LottoNumber.asList(numbers));
   }
 }
