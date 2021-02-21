@@ -20,13 +20,13 @@ public class LottoGenerator {
     }
 
     public LottoTickets purchaseTickets(UserPurchase userPurchase) {
-        LottoTickets purchasedLottoTickets = new LottoTickets();
+        LottoTickets lottoTickets = new LottoTickets();
         for (int i = 0; i < userPurchase.getNumberOfTickets(); i++) {
             Collections.shuffle(allNumbers);
             LottoTicket newLottoTicket
                 = new LottoTicket(allNumbers.subList(0, LOTTO_NUMBERS_SIZE));
-            purchasedLottoTickets.add(newLottoTicket);
+            lottoTickets.add(newLottoTicket);
         }
-        return purchasedLottoTickets;
+        return lottoTickets;
     }
 }
