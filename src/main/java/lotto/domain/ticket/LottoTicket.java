@@ -1,16 +1,11 @@
 package lotto.domain.ticket;
 
 import lotto.domain.number.LottoNumber;
-import lotto.domain.number.LottoNumberFactory;
 import lotto.domain.number.LottoNumbers;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class LottoTicket {
     public static final int SIZE_OF_LOTTO_NUMBERS = 6;
@@ -24,9 +19,7 @@ public class LottoTicket {
         validateLottoNumberCount(numbers);
         validateDuplicatedLottoNumbers(numbers);
 
-        this.lottoNumbers = numbers.stream().map(LottoNumberFactory::of)
-                .sorted(Comparator.naturalOrder())
-                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoNumbers::new));
+        this.lottoNumbers = new LottoNumbers(numbers);
     }
 
     private void validateLottoNumberCount(List<Integer> numbers) {

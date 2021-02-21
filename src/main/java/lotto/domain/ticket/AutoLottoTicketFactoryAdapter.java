@@ -1,6 +1,6 @@
 package lotto.domain.ticket;
 
-import lotto.domain.number.LottoNumberFactory;
+import lotto.domain.number.LottoNumber;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,7 +15,7 @@ public class AutoLottoTicketFactoryAdapter {
     private LottoTicketFactory manualLottoTicketFactory = new LottoTicketFactory();
 
     private static final List<Integer> lottoNumbers = IntStream
-            .rangeClosed(LottoNumberFactory.MIN_RANGE, LottoNumberFactory.MAX_RANGE)
+            .rangeClosed(LottoNumber.MIN_RANGE, LottoNumber.MAX_RANGE)
             .boxed()
             .collect(Collectors.toList());
 
