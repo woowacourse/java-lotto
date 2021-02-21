@@ -18,7 +18,7 @@ public class OutputView {
     private static final String ENTER_BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String STATISTICS_TITLE = "당첨 통계";
     private static final String STATISTICS_DIVIDER = "---------";
-    private static final String RANKING_RESULT_FORMAT = "%d개 일치, 보너스 볼 일치 (%d원)- %d개%n";
+    private static final String RANKING_RESULT_FORMAT = "%d개 일치 (%d원)- %d개%n";
     private static final String RANKING_SECOND_RESULT_FORMAT = "%d개 일치, 보너스 볼 일치 (%d원)- %d개%n";
     private static final String TOTAL_PROFIT_FORMAT = "총 수익률은 %s 입니다.";
 
