@@ -12,7 +12,7 @@ public class InputView {
     private InputView() {
     }
 
-    public static String receivePrice() {
+    public static String receivePurchaseAmount() {
         return receiveInput("구입금액을 입력해 주세요.");
     }
 
@@ -30,6 +30,7 @@ public class InputView {
     }
 
     public static List<Integer> receiveWinningNumbers() {
+        System.out.println();
         String input = receiveInput("지난 당첨 번호를 입력해 주세요.");
         return createNumbers(input);
     }
@@ -47,6 +48,7 @@ public class InputView {
 
     public static int receiveBonusNumber() {
         String input = receiveInput("보너스 볼을 입력해 주세요.");
+        System.out.println();
         return createNumber(input);
     }
 
