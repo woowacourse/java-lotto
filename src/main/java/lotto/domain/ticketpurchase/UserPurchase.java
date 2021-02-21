@@ -9,6 +9,10 @@ public class UserPurchase {
         this.manuallyPurchasedLottoTickets = manuallyPurchasedLottoTickets;
     }
 
+    public UserPurchase(PurchasePrice purchasePrice) {
+        this(purchasePrice, new LottoTickets());
+    }
+
     public int getNumberOfAllTickets() {
         return purchasePrice.getNumberOfAllTicketsToPurchase();
     }

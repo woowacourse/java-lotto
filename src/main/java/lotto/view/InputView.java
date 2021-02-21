@@ -34,6 +34,9 @@ public class InputView {
         PurchasePrice purchasePrice = getPurchasePriceInputFromUser();
         NumberOfTicketsToPurchaseManually numberOfTicketsToPurchaseManually
             = getNumberOfTicketsToPurchaseManually(purchasePrice);
+        if (numberOfTicketsToPurchaseManually.getNumberOfTickets() == 0) {
+            return new UserPurchase(purchasePrice);
+        }
         LottoTickets manuallyPurchasedLottoTickets
             = getManuallyPurchasedLottoTicketsInputFromUser(numberOfTicketsToPurchaseManually);
         return new UserPurchase(purchasePrice, manuallyPurchasedLottoTickets);
