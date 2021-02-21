@@ -18,6 +18,6 @@ public class RandomLottoUtil {
         IntStream intStream = new Random().ints(1, 46);
         intStream.distinct().limit(6).sorted()
                 .forEach(i -> lottoBalls.add(new LottoBall(i)));
-        return LottoBalls.of(lottoBalls);
+        return new LottoBalls(lottoBalls);
     }
 }

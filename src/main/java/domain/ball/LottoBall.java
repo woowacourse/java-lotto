@@ -5,6 +5,7 @@ import java.util.Objects;
 public class LottoBall {
     private static final int MIN_LOTTO_VALUE = 1;
     private static final int MAX_LOTTO_VALUE = 45;
+    public static final String PERMIT_LOTTO_NUMBER = "%d~%d 사이의 번호만 허용합니다.";
 
     private final int value;
 
@@ -13,18 +14,9 @@ public class LottoBall {
         this.value = value;
     }
 
-    public static LottoBall of(final String value) {
-        try {
-            int intValue = Integer.parseInt(value);
-            return new LottoBall(intValue);
-        } catch (NumberFormatException numberFormatException) {
-            throw new IllegalArgumentException("1~45 사이의 번호만 허용합니다.");
-        }
-    }
-
     private void validateNumber(final int value) {
         if (!isBetweenNumber(value)) {
-            throw new IllegalArgumentException("1~45 사이의 번호만 허용합니다.");
+            throw new IllegalArgumentException(String.format(PERMIT_LOTTO_NUMBER, MIN_LOTTO_VALUE, MAX_LOTTO_VALUE));
         }
     }
 

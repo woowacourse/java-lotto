@@ -6,40 +6,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoBalls {
     private static final int LOTTO_NUMBERS_SIZE = 6;
-    private static final int SPLIT_THRESHOLD = -1;
-    private static final String DELIMITER = ", ";
 
     private final List<LottoBall> lottoBalls;
 
-    private LottoBalls(final List<LottoBall> lottoBalls) {
+    public LottoBalls(final List<LottoBall> lottoBalls) {
         List<LottoBall> copy = new ArrayList<>(lottoBalls);
         validateLottoNumbers(copy);
         this.lottoBalls = copy;
-    }
-
-    public LottoBalls(final String lottoNumbers) {
-        String[] temp = lottoNumbers.split(DELIMITER, SPLIT_THRESHOLD);
-        List<LottoBall> tempLottoBalls = new ArrayList<>();
-        for (int i = 0; i < temp.length; i++) {
-            tempLottoBalls.add(LottoBall.of(temp[i]));
-        }
-        validateLottoNumbers(tempLottoBalls);
-        this.lottoBalls = tempLottoBalls;
-    }
-
-    public static LottoBalls of(final List<LottoBall> lottoBalls) {
-        return new LottoBalls(lottoBalls);
-    }
-
-    public static LottoBalls generate(final List<Integer> lottoNumbers) {
-        List<LottoBall> lottoBallGroup = lottoNumbers.stream()
-                .map(lottoNumber -> new LottoBall(lottoNumber))
-                .collect(Collectors.toList());
-        return new LottoBalls(lottoBallGroup);
     }
 
     private void validateLottoNumbers(final List<LottoBall> lottoBalls) {
@@ -55,15 +31,15 @@ public class LottoBalls {
         }
     }
 
-    private void validateSize(final List lottoNumbers) {
+    private void validateSize(final List<LottoBall> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException("6개의 로또 번호가 필요합니다.");
         }
     }
 
-    public boolean containNumber(final LottoBall bonusBall) {
+    public boolean containNumber(final LottoBall targetLottoBall) {
         return lottoBalls.stream()
-                .anyMatch(lottoNumber -> bonusBall.equals(lottoNumber));
+                .anyMatch(targetLottoBall::equals);
     }
 
     public List<LottoBall> getLottoNumbers() {
@@ -73,11 +49,11 @@ public class LottoBalls {
 
     public LottoRank matchCount(LottoBalls lottoBalls, LottoBall bonusBall) {
         int count = (int) this.lottoBalls.stream()
-                .filter(lottoNumber -> lottoBalls.contains(lottoNumber))
+                .filter(lottoBalls::contains)
                 .count();
 
         boolean containBonus = this.lottoBalls.stream()
-                .anyMatch(lottoNumber -> bonusBall.equals(lottoNumber));
+                .anyMatch(bonusBall::equals);
 
         return LottoRank.findByBonusWithMatches(containBonus, count);
     }

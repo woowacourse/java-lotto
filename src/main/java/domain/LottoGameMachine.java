@@ -21,6 +21,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoGameMachine {
@@ -69,15 +70,12 @@ public class LottoGameMachine {
 
     public WinningLotto findWinnings() {
         lottoGameScreen.confirmWinningLotto();
-        String winningLottoInput = InputUtil.nextLine();
+        Set<Integer> winningNumbers = InputUtil.inputWinningNumbers();
 
         lottoGameScreen.confirmBonusLotto();
-        String bonusLottoInput = InputUtil.nextLine();
+        int bonusNumber = InputUtil.inputBonusNumber();
 
-        LottoBalls lottoBalls = new LottoBalls(winningLottoInput);
-        LottoBall bonusBall = LottoBall.of(bonusLottoInput);
-
-        return new WinningLotto(lottoBalls, bonusBall);
+        return new WinningLotto(winningNumbers, bonusNumber);
     }
 
     public void lottoDraw(Lottos lottos, WinningLotto winnings) {
@@ -87,8 +85,8 @@ public class LottoGameMachine {
         Budget price = Budget.amounts(0);
 
         List<Budget> budgets = matches.entrySet().stream()
-                .map(match -> match.getKey())
-                .map(lottoRank -> lottoRank.getBudget())
+                .map(Map.Entry::getKey)
+                .map(LottoRank::getBudget)
                 .collect(Collectors.toList());
         for (Budget budget : budgets) {
             price = price.add(budget);
