@@ -8,8 +8,8 @@ import lotto.domain.LottoTickets;
 import lotto.domain.Payment;
 import lotto.domain.WinningLotto;
 import lotto.utils.ParseUtils;
+import lotto.view.InputView;
 import lotto.view.OutputView;
-import lotto.view.Screen;
 
 public class LottoController {
 
@@ -31,12 +31,12 @@ public class LottoController {
     }
 
     private WinningLotto createWinningLotto() {
-        String values = Screen.getLottoNumbers();
+        String values = InputView.getLottoNumbers();
         List<Integer> numbers = Arrays.stream(values.split(REGEX))
             .mapToInt(Integer::parseInt)
             .boxed()
             .collect(Collectors.toList());
-        int bonusNumber = ParseUtils.parseInt(Screen.getBonusBallNumber());
+        int bonusNumber = ParseUtils.parseInt(InputView.getBonusBallNumber());
         return new WinningLotto(numbers, bonusNumber);
     }
 

@@ -22,6 +22,11 @@ public class OutputView {
     private static final String TOTAL_PROFIT = "총 수익률은 %.2f 입니다.";
     private static final String FOUR_MATCHES = "4개 일치 (50000원)- %d";
     public static final String FORMAT_STRING = "%s%s%s";
+    private static final int FIRST = 1;
+    private static final int SECOND = 2;
+    private static final int THIRD = 3;
+    private static final int FOURTH = 4;
+    private static final int FIFTH = 5;
 
     public static void printInputMoneyMessage() {
         System.out.println(INPUT_MONEY_MESSAGE);
@@ -54,11 +59,11 @@ public class OutputView {
     public static void printResultMessage(final Rewords rewords, final int money) {
         System.out.println(WINNING_STATISTICS);
         System.out.println(CONTOUR);
-        System.out.println(String.format(THREE_MATCHES, rewords.getFifth()));
-        System.out.println(String.format(FOUR_MATCHES, rewords.getFourth()));
-        System.out.println(String.format(FIVE_MATCHES, rewords.getThird()));
-        System.out.println(String.format(FIVE_MATCHES_WITH_BONUS_NUMBER, rewords.getSecond()));
-        System.out.println(String.format(SIX_MATCHES, rewords.getFirst()));
+        System.out.println(String.format(THREE_MATCHES, rewords.getRankCount(FIRST)));
+        System.out.println(String.format(FOUR_MATCHES, rewords.getRankCount(SECOND)));
+        System.out.println(String.format(FIVE_MATCHES, rewords.getRankCount(THIRD)));
+        System.out.println(String.format(FIVE_MATCHES_WITH_BONUS_NUMBER, rewords.getRankCount(FOURTH)));
+        System.out.println(String.format(SIX_MATCHES, rewords.getRankCount(FIFTH)));
         System.out.println(String.format(TOTAL_PROFIT, rewords.profit(money)));
     }
 }
