@@ -2,9 +2,6 @@ package lotto.domain;
 
 import lotto.domain.lottomachine.LottoMachine;
 import lotto.domain.lottomachine.TestLottoMachine;
-import lotto.domain.primitive.LottoNumber;
-import lotto.domain.primitive.Money;
-import lotto.domain.primitive.Ticket;
 import lotto.domain.rating.Rating;
 import lotto.domain.rating.RatingCounter;
 import org.junit.jupiter.api.BeforeEach;

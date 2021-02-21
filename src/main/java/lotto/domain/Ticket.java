@@ -1,4 +1,6 @@
-package lotto.domain.primitive;
+package lotto.domain;
+
+import lotto.domain.Money;
 
 public class Ticket {
 

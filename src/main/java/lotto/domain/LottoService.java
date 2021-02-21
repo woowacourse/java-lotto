@@ -1,8 +1,6 @@
 package lotto.domain;
 
 import lotto.domain.lottomachine.LottoMachine;
-import lotto.domain.primitive.Money;
-import lotto.domain.primitive.Ticket;
 import lotto.domain.rating.Rating;
 import lotto.domain.rating.RatingCounter;
 

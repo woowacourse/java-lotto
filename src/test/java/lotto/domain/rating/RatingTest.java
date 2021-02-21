@@ -1,7 +1,7 @@
 package lotto.domain.rating;
 
 import lotto.domain.Lotto;
-import lotto.domain.primitive.LottoNumber;
+import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;

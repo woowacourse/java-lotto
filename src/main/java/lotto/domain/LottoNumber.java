@@ -1,4 +1,4 @@
-package lotto.domain.primitive;
+package lotto.domain;
 
 import java.util.Objects;
 
