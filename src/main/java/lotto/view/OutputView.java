@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class OutputView {
 
-    public static final String LOTTO_PURCHASE_FORM = "%d개를 구매했습니다." + System.lineSeparator();
+    public static final String LOTTO_PURCHASE_FORM = "수동으로 %d장, 자동으로 %d개를 구매했습니다." + System.lineSeparator();
     public static final String LOTTO_DELIMITER = ", ";
     public static final String LOTTO_FORM = "[%s]" + System.lineSeparator();
     public static final String PROFIT_FORM = "총 수익률은 %.2f 입니다." + System.lineSeparator();
@@ -26,13 +26,14 @@ public class OutputView {
         printMessage(System.lineSeparator() + errorMessage + System.lineSeparator());
     }
 
-    public static void printEachLotto(final Lottos lottos) {
-        lottos.toList().forEach(OutputView::printOneLotto);
+    public static void printEachLotto(final Lottos manualLottos,final Lottos autoLottos) {
+        manualLottos.toList().forEach(OutputView::printOneLotto);
+        autoLottos.toList().forEach(OutputView::printOneLotto);
         System.out.println();
     }
 
-    public static void printTotalNumberOfLotto(Lottos lottos) {
-        printMessageByFormat(LOTTO_PURCHASE_FORM, lottos.toList().size());
+    public static void printTotalNumberOfLotto(Lottos manualLottos, Lottos AutoLottos) {
+        printMessageByFormat(LOTTO_PURCHASE_FORM, manualLottos.toList().size(), AutoLottos.toList().size());
     }
 
     private static void printOneLotto(Lotto lotto) {

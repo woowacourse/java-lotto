@@ -15,6 +15,7 @@ public class Lotto {
     public Lotto(List<LottoNumber> lottoNumbers) {
         validateNumberSize(lottoNumbers);
         validateDuplicate(lottoNumbers);
+        Collections.sort(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 

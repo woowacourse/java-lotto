@@ -7,10 +7,14 @@ import java.util.Objects;
 
 public class Lottos {
 
-    private final List<Lotto> lottos = new ArrayList<>();
+    private List<Lotto> lottos = new ArrayList<>();
 
     public Lottos(int autoAmount) {
         makeRandomLottos(autoAmount);
+    }
+
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
     private void makeRandomLottos(int autoAmount) {
