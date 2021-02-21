@@ -12,10 +12,5 @@ public class Application {
     LottoGroup lottoGroup = LottoManager.createLotto();
     WinningLotto winningLotto = LottoManager.getWinningLotto();
     LottoManager.printResult(lottoGroup, winningLotto);
-
-
-//    LottoResult lottoResult = new LottoResult();
-//    lottoResult.add(LottoRank.SECOND);
-//    OutputView.printLottoResult(lottoResult);
   }
 }
