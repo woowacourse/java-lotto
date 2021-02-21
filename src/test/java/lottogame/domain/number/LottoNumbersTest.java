@@ -11,6 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class LottoNumbersTest {
+
     private List<LottoNumber> lottoNumberGroup = new ArrayList<>();
 
     @BeforeEach
