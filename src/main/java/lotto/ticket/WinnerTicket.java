@@ -5,6 +5,8 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static java.util.stream.Collectors.collectingAndThen;
+
 public class WinnerTicket {
     private static final String DELIMITER = ",";
     private static final String SPACE = " ";
@@ -17,11 +19,10 @@ public class WinnerTicket {
     }
 
     private Ticket splitNumbers(String values) {
-        List<Number> numbers = Stream.of(values.split(DELIMITER))
+        return Stream.of(values.split(DELIMITER))
                 .map(s -> s.replaceAll(SPACE, EMPTY))
                 .map(Number::new)
-                .collect(Collectors.toList());
-        return new Ticket((numbers));
+                .collect(collectingAndThen(Collectors.toList(), Ticket::new));
     }
 
     public boolean isSameNumber(Number number) {
