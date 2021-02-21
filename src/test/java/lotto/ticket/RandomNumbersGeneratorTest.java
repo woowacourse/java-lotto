@@ -34,12 +34,4 @@ public class RandomNumbersGeneratorTest {
                 .count() == randomNumbers.size();
         assertTrue(duplicated);
     }
-
-//    @Test
-//    @DisplayName("자동 로또 생성 숫자 1부터 45 사이 확인")
-//    void checkNumbersInRange() {
-//        for (Number randomNumber : randomNumbers) {
-//            assertThat(randomNumber).isBetween(MINIMUM_NUMBER, MAXIMUM_NUMBER);
-//        }
-//    }
 }
