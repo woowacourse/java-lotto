@@ -4,12 +4,14 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoControllerMain {
     public static void main(String[] args) {
         Money money = new Money(InputView.inputMoney());
-        Lottos lottos = new Lottos(money.countBuyLotto());
+        List<Lotto> manualLottos = new ArrayList<>();
+        Lottos lottos = new Lottos(manualLottos, money.countBuyLotto());
 
         OutputView.showBuyLotto(lottos.getLottos());
 
