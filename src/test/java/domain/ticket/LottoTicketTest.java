@@ -71,6 +71,16 @@ public class LottoTicketTest {
                 .isEqualTo(new LottoTicket(getValidNumbers()));
     }
 
+    @DisplayName("당첨 티켓과 동등 비교")
+    @Test
+    void equals_lottoTicket() {
+        final LottoTicket lottoTicket = new LottoTicket(getValidNumbers());
+        final WinningTicket winningTicket = new WinningTicket(getValidNumbers());
+
+        assertThat(lottoTicket.isSameNumbers(winningTicket))
+                .isEqualTo(true);
+    }
+
     @DisplayName("오름차순 정렬 되어 저장되면 성공")
     @Test
     void shuffled_equals() {
