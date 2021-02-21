@@ -4,13 +4,15 @@ import java.util.List;
 import java.util.Objects;
 import lotto.exception.DuplicateLottoNumberException;
 
-public class WinningLotto extends Lotto {
+public class WinningLotto {
 
+    // todo - 컴포지션 사용하기
+    private final Lotto lotto;
     private final LottoNumber bonusNumber;
 
     public WinningLotto(final List<Integer> numbers, final int bonusNumber) {
-        super(numbers);
         validateBonusNumber(numbers, bonusNumber);
+        lotto = new Lotto(numbers);
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
@@ -21,8 +23,8 @@ public class WinningLotto extends Lotto {
     }
 
     public Reword match(final Lotto lotto) {
-        int count = (int) lottoNumbers.stream()
-            .filter(lotto::isContainsNumber)
+        int count = (int) this.lotto.getLottoNumbers().stream()
+            .filter(number -> lotto.isContainsNumber(new LottoNumber(number)))
             .count();
 
         return Reword.valueOf(count, lotto.isContainsNumber(bonusNumber));
