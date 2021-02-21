@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -42,7 +43,7 @@ class LottoTicketTest {
     void makeLottoTicket() {
         LottoTicket lottoTicket = LottoTicket.from(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        List<LottoNumber> lottoNumbers = lottoTicket.getLottoNumbers();
+        Set<LottoNumber> lottoNumbers = lottoTicket.getLottoNumbers();
 
         assertThat(lottoNumbers).contains(LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3),
                 LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6));
