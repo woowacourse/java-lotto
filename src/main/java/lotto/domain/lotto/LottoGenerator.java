@@ -29,7 +29,7 @@ public class LottoGenerator {
         }
     }
 
-    public LottoGroup generateLottos(int count) {
+    private LottoGroup generateLottos(int count) {
         return new LottoGroup(
                 Stream.generate(this::generateRandomLottoNumber)
                         .limit(count)

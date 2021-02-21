@@ -12,13 +12,6 @@ import java.util.List;
 public class LottoGeneratorTest {
 
     @Test
-    @DisplayName("로또 그룹 생성")
-    void generateAutoLottoGroup() {
-        LottoGenerator lottoGenerator = new LottoGenerator();
-        assertThat(lottoGenerator.generateLottos(3).getCount()).isEqualTo(3);
-    }
-
-    @Test
     @DisplayName("수동 로또번호를 입력하면, 수동번호의 로또그를을 생성한다")
     void generateManualLottos() {
         List<String> manualStringLottoNumbers = Arrays.asList(
