@@ -1,9 +1,5 @@
 package lotto.controller;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +9,7 @@ import lotto.controller.generator.LottoManualGenerator;
 import lotto.domain.LottoAnnouncement;
 import lotto.domain.LottoRank;
 import lotto.domain.Lottos;
+import lotto.utility.InputTest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -26,29 +23,19 @@ public class LottoStoreTest {
 
     public static final List<Integer> WINNING_NUMBERS = Arrays.asList(1, 2, 3, 4, 5, 6);
     public static final int BONUS_NUMBER = 7;
-    private final InputStream systemIn = System.in;
-    private final PrintStream systemOut = System.out;
-    private ByteArrayInputStream testIn;
-    private ByteArrayOutputStream testOut;
+
+    private InputTest inputTest = new InputTest();
     private Scanner scanner;
 
     @BeforeEach
     public void setUp() {
-        testOut = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(testOut));
-    }
-
-    private void provideInput(String inputStringData) {
-        testIn = new ByteArrayInputStream(inputStringData.getBytes());
-        System.setIn(testIn);
+        inputTest.setUp();
     }
 
     @AfterEach
-    public void restoreSystemInputOutput() {
-        System.setIn(systemIn);
-        System.setOut(systemOut);
+    public void restoreSystemInputOutput(){
+        inputTest.restoreSystemInputOutput();
     }
-
 
     private static Stream<Arguments> provideLottosResult() {
         return Stream.of(
@@ -63,7 +50,7 @@ public class LottoStoreTest {
     @DisplayName("총 수익률 계산")
     @MethodSource("provideLottosResult")
     void lottoProfitCalculateTest(String exampleLotto, double profitRate) {
-        provideInput(exampleLotto);
+        inputTest.provideInput(exampleLotto);
         scanner = new Scanner(System.in);
         LottoManualGenerator lottoManualGenerator = new LottoManualGenerator(scanner);
         Lottos exampleLottos = new Lottos(lottoManualGenerator, 1);

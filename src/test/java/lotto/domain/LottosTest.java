@@ -1,9 +1,5 @@
 package lotto.domain;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +7,7 @@ import java.util.Scanner;
 import java.util.stream.Stream;
 import lotto.controller.generator.LottoAutoGenerator;
 import lotto.controller.generator.LottoManualGenerator;
+import lotto.utility.InputTest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -26,27 +23,17 @@ public class LottosTest {
     public static final List<Integer> WINNING_NUMBERS = Arrays.asList(1, 2, 3, 4, 5, 6);
     public static final int BONUS_NUMBER = 7;
 
-    private final InputStream systemIn = System.in;
-    private final PrintStream systemOut = System.out;
-    private ByteArrayInputStream testIn;
-    private ByteArrayOutputStream testOut;
+    private InputTest inputTest = new InputTest();
     private Scanner scanner;
 
     @BeforeEach
     public void setUp() {
-        testOut = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(testOut));
-    }
-
-    private void provideInput(String inputStringData) {
-        testIn = new ByteArrayInputStream(inputStringData.getBytes());
-        System.setIn(testIn);
+        inputTest.setUp();
     }
 
     @AfterEach
     public void restoreSystemInputOutput() {
-        System.setIn(systemIn);
-        System.setOut(systemOut);
+        inputTest.restoreSystemInputOutput();
     }
 
     @Test
@@ -71,7 +58,7 @@ public class LottosTest {
     @DisplayName("당첨 통계 결과 수합")
     @MethodSource("provideLottosResult")
     void lottosResult(String exampleLotto, LottoRank exampleRank) {
-        provideInput(exampleLotto);
+        inputTest.provideInput(exampleLotto);
         scanner = new Scanner(System.in);
         LottoManualGenerator lottoManualGenerator = new LottoManualGenerator(scanner);
         Lottos exampleLottos = new Lottos(lottoManualGenerator, 1);
