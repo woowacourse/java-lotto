@@ -13,7 +13,7 @@ public class LottoNumber {
         this(Integer.parseInt(value));
     }
 
-    public LottoNumber(final int value){
+    public LottoNumber(final int value) {
         validateRange(value);
         this.value = value;
     }

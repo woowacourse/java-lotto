@@ -15,7 +15,6 @@ public class LottoNumbers {
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
-
     public boolean contains(final LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }

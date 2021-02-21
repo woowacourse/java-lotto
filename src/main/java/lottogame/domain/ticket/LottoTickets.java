@@ -27,7 +27,7 @@ public class LottoTickets {
         return lottoTickets.size() * TICKET_PRICE;
     }
 
-    public List<LottoTicketResult> getLottoTicketResults(final LottoWinningMachine lottoWinningMachine){
+    public List<LottoTicketResult> getLottoTicketResults(final LottoWinningMachine lottoWinningMachine) {
         List<LottoTicketResult> lottoTicketResults = new ArrayList<>();
 
         for (LottoTicket lottoTicket : lottoTickets) {
