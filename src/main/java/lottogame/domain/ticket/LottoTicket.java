@@ -23,4 +23,8 @@ public class LottoTicket {
         Collections.sort(numberList);
         return numberList;
     }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
 }
