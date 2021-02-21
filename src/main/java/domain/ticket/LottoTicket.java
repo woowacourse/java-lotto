@@ -1,73 +1,63 @@
 package domain.ticket;
 
 import domain.LottoNumber;
-import domain.Ranking;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-public class LottoTicket {
-    private static final String DUPLICATE_NUMBER_ERROR = "중복 숫자가 존재합니다.";
-    private static final String INCORRECT_LOTTO_NUMBER_SIZE_ERROR = "로또 숫자의 개수가 6이 아닙니다.";
+import static domain.LottoNumber.MAX_NUMBER_VALUE;
+import static domain.LottoNumber.MIN_NUMBER_VALUE;
 
-    private static final int LOTTO_TICKET_SIZE = 6;
+public final class LottoTicket extends Ticket {
+    private static final List<Integer> TOTAL_NUMBERS = new ArrayList<>();
 
-    private final List<LottoNumber> lottoNumbers;
-
-    private LottoTicket(final List<LottoNumber> lottoNumbers) {
-        validate(lottoNumbers);
-        this.lottoNumbers = new ArrayList<>(lottoNumbers);
+    static {
+        IntStream.rangeClosed(MIN_NUMBER_VALUE, MAX_NUMBER_VALUE)
+                .forEach(i -> TOTAL_NUMBERS.add(i));
     }
 
-    public static LottoTicket valueOf(final List<Integer> numbers) {
-        return new LottoTicket(generateLottoNumbers(numbers));
+    public LottoTicket(List<Integer> selectedNumbers) {
+        List<Integer> numbers = generateNumbers(selectedNumbers);
+        validate(numbers);
+
+        this.lottoNumbers.addAll(
+                numbers.stream()
+                        .sorted()
+                        .map(LottoNumber::valueOf)
+                        .collect(Collectors.toList())
+        );
     }
 
-    private static List<LottoNumber> generateLottoNumbers(final List<Integer> numbers) {
-        return numbers.stream()
-                .sorted()
-                .map(LottoNumber::valueOf)
-                .collect(Collectors.toList());
-    }
-
-    private static void validate(final List<LottoNumber> lottoNumbers) {
-        validateDuplicateNumbers(lottoNumbers);
-        validateIncorrectSize(lottoNumbers);
-    }
-
-    private static void validateDuplicateNumbers(final List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != new HashSet<>(lottoNumbers).size()) {
-            throw new IllegalArgumentException(DUPLICATE_NUMBER_ERROR);
+    @Override
+    protected List<Integer> generateNumbers(final List<Integer> selectedNumbers) {
+        if (hasDuplication(selectedNumbers)) {
+            throw new IllegalArgumentException("선택한 번호 중에 중복 숫자가 존재합니다.");
         }
+        return makeFullNumbers(selectedNumbers);
     }
 
-    private static void validateIncorrectSize(final List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_TICKET_SIZE) {
-            throw new IllegalArgumentException(INCORRECT_LOTTO_NUMBER_SIZE_ERROR);
-        }
+    private boolean hasDuplication(final List<Integer> selectedNumbers) {
+        return selectedNumbers.size() != new HashSet<>(selectedNumbers).size();
     }
 
-    public static int getLottoTicketSize() {
-        return LOTTO_TICKET_SIZE;
+    private List<Integer> makeFullNumbers(final List<Integer> selectedNumbers) {
+        final List<Integer> numbers = new ArrayList<>(selectedNumbers);
+        addRandomNumbers(numbers);
+        return numbers;
     }
 
-    public Ranking checkRanking(final LottoTicket winningTicket, final LottoNumber bonusNumber) {
-        int matching = (int) lottoNumbers.stream()
-                .filter(number -> winningTicket.contains(number))
-                .count();
+    private List<Integer> addRandomNumbers(final List<Integer> numbers) {
+        Collections.shuffle(TOTAL_NUMBERS);
 
-        boolean bonusMatching = contains(bonusNumber);
-        return Ranking.select(matching, bonusMatching);
-    }
+        TOTAL_NUMBERS.stream()
+                .filter(randomNumber -> numbers.size() < LOTTO_TICKET_SIZE)
+                .filter(randomNumber -> !numbers.contains(randomNumber))
+                .forEach(randomNumber -> numbers.add(randomNumber));
 
-    public boolean contains(final LottoNumber lottoNumber) {
-        return lottoNumbers.contains(lottoNumber);
-    }
-
-    public List<LottoNumber> toList() {
-        return Collections.unmodifiableList(lottoNumbers);
+        return numbers;
     }
 }
