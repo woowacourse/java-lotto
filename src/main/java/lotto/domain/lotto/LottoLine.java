@@ -26,7 +26,7 @@ public class LottoLine {
         List<LottoNumber> winningLottoNumbers = winningNumbers.getLastWinningLottoNumbers().getValues();
         int matchCount = (int) lottoNumbers.stream().filter(winningLottoNumbers::contains).count();
         boolean hasBonusNumber = winningLottoNumbers.contains(winningNumbers.getLastWinBonusBall());
-        return Rank.check(matchCount, hasBonusNumber);
+        return Rank.matchRank(matchCount, hasBonusNumber);
     }
 
     public List<LottoNumber> getValues() {

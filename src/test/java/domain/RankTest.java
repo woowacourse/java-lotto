@@ -11,7 +11,7 @@ public class RankTest {
     @Test
     @DisplayName("로또 등수가 잘 계산된다.")
     void lotto_rank_test() {
-        assertThat(Rank.FOURTH).isEqualTo(Rank.check(4, true));
-        assertThat(Rank.NO_MATCH).isEqualTo(Rank.check(10, true));
+        assertThat(Rank.FOURTH).isEqualTo(Rank.matchRank(4, true));
+        assertThat(Rank.NO_MATCH).isEqualTo(Rank.matchRank(10, true));
     }
 }

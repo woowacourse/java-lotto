@@ -18,7 +18,7 @@ public enum Rank {
         this.money = money;
     }
 
-    public static Rank check(int matchCount, boolean hasBonusNumber) {
+    public static Rank matchRank(int matchCount, boolean hasBonusNumber) {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.isSameMatchCount(matchCount))
                 .filter(rank -> !rank.equals(SECOND) || hasBonusNumber)
