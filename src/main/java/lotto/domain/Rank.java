@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public enum Rank {
     FIRST(6, 2_000_000_000L),
@@ -9,6 +10,8 @@ public enum Rank {
     FOURTH(4, 50_000L),
     FIFTH(3, 5_000L),
     NOTHING(0, 0L);
+    
+    public static final Comparator<Rank> ASCENDING_ORDER = new AscendingComparator();
     
     private final int matchCount;
     
@@ -54,19 +57,36 @@ public enum Rank {
         return rank;
     }
     
-    public static int compareMatchCount(Rank preRank, Rank postRank) {
-        return preRank.matchCount - postRank.matchCount;
-    }
-    
-    public static int compareReward(Rank preRank, Rank postRank) {
-        return (int) (preRank.reward - postRank.reward);
-    }
-    
     public long getReward() {
         return reward;
     }
     
     public int getMatchCount() {
         return matchCount;
+    }
+    
+    private static class AscendingComparator implements Comparator<Rank> {
+        @Override
+        public int compare(Rank preRank, Rank postRank) {
+            int valueOfComparedMatchCount = compareMatchCount(preRank, postRank);
+            
+            if (isSameMatchCount(valueOfComparedMatchCount)) {
+                return compareReward(preRank, postRank);
+            }
+            
+            return valueOfComparedMatchCount;
+        }
+        
+        private boolean isSameMatchCount(int valueOfComparedMatchCount) {
+            return valueOfComparedMatchCount == 0;
+        }
+    
+        private int compareMatchCount(Rank preRank, Rank postRank) {
+            return preRank.matchCount - postRank.matchCount;
+        }
+    
+        private int compareReward(Rank preRank, Rank postRank) {
+            return (int) (preRank.reward - postRank.reward);
+        }
     }
 }

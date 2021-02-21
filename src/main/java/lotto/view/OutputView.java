@@ -49,7 +49,7 @@ public class OutputView {
     
     private void printStatisticContent(LottoStatisticResult result) {
         Arrays.stream(Rank.values())
-              .sorted()
+              .sorted(Rank.ASCENDING_ORDER)
               .forEach(rank -> System.out.printf(VIEW_OF_LOTTO_RESULT, rank.getMatchCount(), rank.getReward(),
                       result.get(rank), NEW_LINE));
     }
