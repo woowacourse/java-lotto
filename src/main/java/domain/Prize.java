@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.stream.Stream;
 
-public enum Ranking {
+public enum Prize {
     FIRST(6, false, 2_000_000_000),
     SECOND(5, true, 30_000_000),
     THIRD(5, false, 1_500_000),
@@ -18,15 +18,15 @@ public enum Ranking {
     private final boolean bonusMatching;
     private final int money;
 
-    Ranking(final int matching, final boolean bonusMatching, final int money) {
+    Prize(final int matching, final boolean bonusMatching, final int money) {
         this.matching = matching;
         this.bonusMatching = bonusMatching;
         this.money = money;
     }
 
-    public static Ranking select(final int matching, final boolean bonusMatching) {
-        final Stream<Ranking> rankingStream = Arrays.stream(Ranking.values())
-                .filter(ranking -> Objects.equals(matching, ranking.matching));
+    public static Prize select(final int matching, final boolean bonusMatching) {
+        final Stream<Prize> rankingStream = Arrays.stream(Prize.values())
+                .filter(prize -> Objects.equals(matching, prize.matching));
 
         if (matching >= BONUS_CONSIDER_LIMIT) {
             return considerBonus(bonusMatching, rankingStream);
@@ -34,15 +34,15 @@ public enum Ranking {
         return notConsiderBonus(rankingStream);
     }
 
-    private static Ranking notConsiderBonus(final Stream<Ranking> rankingStream) {
+    private static Prize notConsiderBonus(final Stream<Prize> rankingStream) {
         return rankingStream
                 .findFirst()
                 .orElse(NOTHING);
     }
 
-    private static Ranking considerBonus(final boolean bonusMatching, final Stream<Ranking> rankingStream) {
+    private static Prize considerBonus(final boolean bonusMatching, final Stream<Prize> rankingStream) {
         return rankingStream
-                .filter(ranking -> Objects.equals(bonusMatching, ranking.bonusMatching))
+                .filter(prize -> Objects.equals(bonusMatching, prize.bonusMatching))
                 .findFirst()
                 .orElse(NOTHING);
     }
