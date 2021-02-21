@@ -31,9 +31,7 @@ public class LottoController {
     private static PayOut getPayOutFromUser() {
         OutputView.payout();
 
-        PayOut payOut = new PayOut(InputView.getStringInputFromUser());
-
-        return payOut;
+        return new PayOut(InputView.getStringInputFromUser());
     }
 
     private static ManualPurchasesNumber getManualLottoCountFromUser(PayOut payOut) {

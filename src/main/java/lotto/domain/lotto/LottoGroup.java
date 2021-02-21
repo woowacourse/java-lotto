@@ -11,6 +11,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
 public class LottoGroup {
@@ -57,8 +58,9 @@ public class LottoGroup {
 
     @Override
     public String toString() {
-        return String.join(System.lineSeparator(), lottos.stream()
-                .map(LottoNumbers::toString).collect(toList()));
+        return lottos.stream()
+                .map(LottoNumbers::toString)
+                .collect(joining(System.lineSeparator()));
     }
 
 
