@@ -6,7 +6,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LottoMachineTest {
+class LottoMachineTest {
 
     @DisplayName("유효한 값이면 객체 생성 성공")
     @Test

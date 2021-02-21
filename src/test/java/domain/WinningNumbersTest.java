@@ -8,7 +8,7 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class WinningNumbersTest {
+class WinningNumbersTest {
 
     @DisplayName("유효한 값이면 객체 생성 성공")
     @Test
