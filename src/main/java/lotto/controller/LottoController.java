@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import lotto.domain.lotto.LottoLine;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.LottoTicket;
+import lotto.domain.lotto.WinningLottoLine;
 import lotto.domain.rank.Ranks;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -15,9 +16,8 @@ public class LottoController {
         LottoTicket lottoTicket = createLottoTicket();
         OutputView.printLottoTicket(lottoTicket);
 
-        LottoLine winningLottoLine = createWinningLottoLine();
-        LottoNumber bonusLottoNumber = createBonusLottoNumber();
-        OutputView.printLottoResult(createLottoWinningResult(lottoTicket, winningLottoLine, bonusLottoNumber));
+        WinningLottoLine winningLottoLine = new WinningLottoLine(createLottoLine(), createBonusLottoNumber());
+        OutputView.printLottoResult(createLottoWinningResult(lottoTicket, winningLottoLine));
     }
 
     private LottoTicket createLottoTicket(){
@@ -29,7 +29,7 @@ public class LottoController {
         }
     }
 
-    private LottoLine createWinningLottoLine(){
+    private LottoLine createLottoLine(){
         try {
             List<Integer> lottoNumbersUserInput = InputView.getLottoNumbersUserInput();
             List<LottoNumber> lottoNumbers = lottoNumbersUserInput.stream()
@@ -38,7 +38,7 @@ public class LottoController {
             return new LottoLine(lottoNumbers);
         }catch (Exception e){
             System.out.println(e.getMessage());
-            return createWinningLottoLine();
+            return createLottoLine();
         }
     }
 
@@ -51,8 +51,8 @@ public class LottoController {
         }
     }
 
-    private Ranks createLottoWinningResult(LottoTicket lottoTicket, LottoLine winningLottoLine, LottoNumber bonusLottoNumber){
-        return new Ranks(lottoTicket.checkLottoLines(winningLottoLine, bonusLottoNumber));
+    private Ranks createLottoWinningResult(LottoTicket lottoTicket, WinningLottoLine winningLottoLine){
+        return new Ranks(lottoTicket.checkLottoLines(winningLottoLine));
     }
 
 }

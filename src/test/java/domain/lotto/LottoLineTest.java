@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import lotto.domain.lotto.LottoLine;
 import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.WinningLottoLine;
 import lotto.domain.rank.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -48,7 +49,7 @@ public class LottoLineTest {
         LottoLine lottoLine = new LottoLine(lottoNumbers);
         LottoNumber bonusLottoNumber = new LottoNumber(7);
 
-        assertThat(lottoLine.checkLottoLine(new LottoLine(lottoNumbers), bonusLottoNumber))
+        assertThat(lottoLine.checkLottoLine(new WinningLottoLine(new LottoLine(lottoNumbers), bonusLottoNumber)))
             .isEqualTo(Rank.FIRST);
     }
 

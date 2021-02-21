@@ -30,8 +30,9 @@ public class LottoTicket {
         return lottoLines;
     }
 
-    public List<Rank> checkLottoLines(LottoLine answerLottoLine, LottoNumber bonusNumber) {
-        return lottoLines.stream().map(it -> it.checkLottoLine(answerLottoLine, bonusNumber))
+    public List<Rank> checkLottoLines(WinningLottoLine winningLottoLine) {
+        return lottoLines.stream()
+            .map(it -> it.checkLottoLine(winningLottoLine))
             .collect(Collectors.toList());
     }
 

@@ -23,19 +23,18 @@ public class LottoLine {
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
-    public Rank checkLottoLine(LottoLine answerLottoLine, LottoNumber bonusNumber) {
-        int matchCount = (int) getMatchCount(answerLottoLine);
-        boolean hasBonusNumber = lottoNumbers.contains(bonusNumber);
+    public Rank checkLottoLine(WinningLottoLine winningLottoLine) {
+        int matchCount = winningLottoLine.getLottoNumberMatchCount(lottoNumbers);
+        boolean hasBonusNumber = winningLottoLine.isContainBonusLottoNumber(lottoNumbers);
         return Rank.getMatchedRank(matchCount, hasBonusNumber);
-    }
-
-    private long getMatchCount(LottoLine lottoLine) {
-        List<LottoNumber> lottoNumbers = lottoLine.getLottoNumbers();
-        return lottoNumbers.stream().filter(this.lottoNumbers::contains).count();
     }
 
     public List<LottoNumber> getLottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
+    }
+
+    public boolean isContainLottoNumber(LottoNumber lottoNumber){
+        return this.lottoNumbers.contains(lottoNumber);
     }
 
 }
