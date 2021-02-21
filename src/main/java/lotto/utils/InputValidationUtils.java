@@ -7,7 +7,7 @@ import lotto.exception.LessThanLottoPriceException;
 public class InputValidationUtils {
 
     public static void validatePurchaseAmount(int value) {
-        if (value < Lotto.PRICE) {
+        if (value < Lotto.LOTTO_PRICE) {
             throw new LessThanLottoPriceException();
         }
     }

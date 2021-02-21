@@ -22,7 +22,7 @@ public class LottoResult {
             int num = result.get(lottoRank);
             result.put(lottoRank, num + 1);
         }
-        totalPurchaseAmount += Lotto.PRICE;
+        totalPurchaseAmount += Lotto.LOTTO_PRICE;
     }
 
     public int findNumOfMatchByKey(LottoRank lottoRank) {

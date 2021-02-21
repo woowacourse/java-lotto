@@ -21,7 +21,8 @@ class RandomLottoGeneratorTest {
     @DisplayName("랜덤으로 생성된 번호들은 6개여야 한다.")
     @Test
     void 번호_길이_테스트() {
-        assertThat(lottoNumbers.size()).isEqualTo(Lotto.LENGTH);
+        int lottoLength = 6;
+        assertThat(lottoNumbers.size()).isEqualTo(lottoLength);
     }
 
     @DisplayName("랜덤으로 생성된 번호들은 서로 중복되면 안된다.")

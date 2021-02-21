@@ -7,8 +7,8 @@ import lotto.domain.lottogenerator.LottoGenerator;
 
 public class Lotto {
 
-    public static final int PRICE = 1000;
-    public static final int LENGTH = 6;
+    public static final int LOTTO_PRICE = 1000;
+    private static final int LOTTO_LENGTH = 6;
 
     private final List<LottoNumber> numbers;
 
@@ -35,7 +35,7 @@ public class Lotto {
     }
 
     private static void validateLottoLength(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != LENGTH) {
+        if (lottoNumbers.size() != LOTTO_LENGTH) {
             throw new IllegalArgumentException("로또 번호는 6개의 숫자로 이루어져야 합니다.");
         }
     }
@@ -45,7 +45,7 @@ public class Lotto {
             .distinct()
             .collect(Collectors.toList());
 
-        if (distinctedLottoNumbers.size() != LENGTH) {
+        if (distinctedLottoNumbers.size() != LOTTO_LENGTH) {
             throw new IllegalArgumentException("로또 번호는 중복된 숫자가 존재할 수 없습니다.");
         }
     }

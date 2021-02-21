@@ -10,6 +10,7 @@ public enum LottoRank {
     FIFTH(3, 5000),
     NO_MATCH(0, 0);
 
+    public static final int SECOND_AND_THIRD_CORRECT_COUNT = 5;
     private final int correct;
     private final int prize;
 
@@ -19,7 +20,7 @@ public enum LottoRank {
     }
 
     public static LottoRank valueOf(long numOfMatch, boolean isMatchBonus) {
-        if (numOfMatch == 5 && isMatchBonus) {
+        if (numOfMatch == SECOND_AND_THIRD_CORRECT_COUNT && isMatchBonus) {
             return SECOND;
         }
 
