@@ -30,14 +30,18 @@ public class LottoGameResult {
     }
 
     public double getLottoGameYield(final int ticketCount) {
-        return getPriceAmount() / ticketCount;
+        return getPrizeMoneyAmount() / ticketCount;
     }
 
-    private double getPriceAmount() {
-        double priceAmount = 0.0;
-        for (Map.Entry<Rank, Integer> rank : lottoGameResult.entrySet()) {
-            priceAmount += rank.getKey().getPrice() * rank.getValue();
+    private double getPrizeMoneyAmount() {
+        double prizeMoneyAmount = 0.0;
+        for (Map.Entry<Rank, Integer> winnerBoard : lottoGameResult.entrySet()) {
+            prizeMoneyAmount += getPrizeMoneyByRank(winnerBoard.getKey()) * winnerBoard.getValue();
         }
-        return priceAmount;
+        return prizeMoneyAmount;
+    }
+
+    private double getPrizeMoneyByRank(final Rank rank) {
+        return rank.getPrizeMoney();
     }
 }
