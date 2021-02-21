@@ -8,7 +8,7 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoResultsTest {
+class LottoWinningTableTest {
 
     @DisplayName("LottoResults를 생성하는 기능")
     @Test
@@ -19,10 +19,10 @@ class LottoResultsTest {
         results.put(LottoRank.SECOND, 4L);
 
         //when
-        LottoResults lottoResults = new LottoResults(results);
+        LottoWinningTable lottoWinningTable = new LottoWinningTable(results);
 
         //then
-        assertThat(lottoResults).isNotNull();
+        assertThat(lottoWinningTable).isNotNull();
     }
 
     @DisplayName("총 당첨금액을 반환하는 기능")
@@ -32,10 +32,10 @@ class LottoResultsTest {
         Map<LottoRank, Long> results = new HashMap<>();
         results.put(LottoRank.FIRST, 1L);
         results.put(LottoRank.SECOND, 4L);
-        LottoResults lottoResults = new LottoResults(results);
+        LottoWinningTable lottoWinningTable = new LottoWinningTable(results);
 
         //when
-        Money totalMoney = lottoResults.getTotalWinningMoney();
+        Money totalMoney = lottoWinningTable.getTotalWinningMoney();
 
         //then
         assertThat(totalMoney).isEqualTo(new Money(2_120_000_000));

@@ -35,8 +35,8 @@ public class Money {
         return new Money(value * multiplier);
     }
 
-    public Money add(Money targetMoney) {
-        return new Money(value + targetMoney.value);
+    public Money add(Money target) {
+        return new Money(value + target.value);
     }
 
     public long getValue() {

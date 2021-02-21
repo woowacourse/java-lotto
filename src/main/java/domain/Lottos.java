@@ -10,7 +10,7 @@ public class Lottos {
         this.lottos = new ArrayList<>(lottos);
     }
 
-    public LottoResults getLottoResults(WinningLotto winningLotto) {
+    public LottoWinningTable makeWinningTable(WinningLotto winningLotto) {
         Map<LottoRank, Long> results = new HashMap<>();
 
         for (LottoRank rank : LottoRank.values()) {
@@ -21,10 +21,14 @@ public class Lottos {
             LottoRank winningRank = LottoRank.valueOf(winningLotto, lotto);
             results.put(winningRank, results.get(winningRank) + 1);
         }
-        return new LottoResults(results);
+        return new LottoWinningTable(results);
     }
 
     public List<Lotto> getLottos() {
         return new ArrayList<>(lottos);
+    }
+
+    public int getNumberOfLotto() {
+        return lottos.size();
     }
 }

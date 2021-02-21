@@ -43,7 +43,7 @@ class LottosTest {
         WinningLotto winningLotto = new WinningLotto(lotto, new LottoNumber(7));
 
         //when
-        LottoResults results = lottos.getLottoResults(winningLotto);
+        LottoWinningTable results = lottos.makeWinningTable(winningLotto);
 
         //then
         assertThat(results.getValues().get(LottoRank.FIRST)).isEqualTo(1L);

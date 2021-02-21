@@ -1,9 +1,6 @@
 package view;
 
-import domain.Lotto;
-import domain.LottoRank;
-import domain.LottoResults;
-import domain.Lottos;
+import domain.*;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -16,17 +13,27 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void printNumberOfPurchasedLotto(int numberOfLotto) {
+    public static void printPurchaseInformation(Lottos boughtLottos) {
+        printNumberOfPurchasedLotto(boughtLottos.getNumberOfLotto());
+        printAllLottoList(boughtLottos);
+    }
+
+    private static void printNumberOfPurchasedLotto(int numberOfLotto) {
         System.out.println(numberOfLotto + "개를 구매했습니다.");
     }
 
-    public static void printAllLottoList(Lottos boughtLottos) {
+    private static void printAllLottoList(Lottos boughtLottos) {
         for (Lotto lotto : boughtLottos.getLottos()) {
             System.out.println(lotto.getValues());
         }
     }
 
-    public static void printResults(LottoResults results) {
+    public static void printResult(LottoResult lottoResult) {
+        printWinningTable(lottoResult.getWinningTable());
+        printEarningRate(lottoResult.getEarningRate());
+    }
+
+    private static void printWinningTable(LottoWinningTable results) {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
@@ -40,7 +47,7 @@ public class OutputView {
         System.out.printf(format, lottoRank.getCorrectCount(), lottoRank.getPrize().getValue(), resultsValues.get(lottoRank));
     }
 
-    public static void printEarningRate(double earningRate) {
+    private static void printEarningRate(double earningRate) {
         System.out.printf("총 수익률은 %.2f입니다.", earningRate);
     }
 }
