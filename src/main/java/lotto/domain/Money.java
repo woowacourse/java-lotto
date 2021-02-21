@@ -25,8 +25,9 @@ public class Money {
 
     public static void findEarning(Map<Rank, Integer> countByRank) {
         int sumOfPrize = 0;
-        for (Map.Entry<Rank, Integer> singleCount : countByRank.entrySet())
+        for (Map.Entry<Rank, Integer> singleCount : countByRank.entrySet()) {
             sumOfPrize += singleCount.getKey().getPrize() * singleCount.getValue();
+        }
         earning = sumOfPrize;
     }
 
@@ -45,13 +46,15 @@ public class Money {
     }
 
     private void validateRange(int money) {
-        if (money < THOUSAND)
+        if (money < THOUSAND) {
             throw new IllegalArgumentException(MONEY_RANGE_ERROR);
+        }
     }
 
     private void validateUnit(int money) {
-        if (money % THOUSAND != 0)
+        if (money % THOUSAND != 0) {
             throw new IllegalArgumentException(MONEY_UNIT_ERROR);
+        }
     }
 
     public int count() {

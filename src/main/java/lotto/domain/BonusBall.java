@@ -21,8 +21,9 @@ public class BonusBall {
     }
 
     private void validateBonusBallRange() {
-        if (bonusBall < 1 || bonusBall > 45)
+        if (bonusBall < 1 || bonusBall > 45) {
             throw new IllegalArgumentException(NUMBER_RANGE_ERROR);
+        }
     }
 
     private void validateDuplicate(Lotto winLotto) {

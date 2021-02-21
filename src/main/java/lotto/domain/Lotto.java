@@ -25,25 +25,29 @@ public class Lotto {
     }
 
     private void validateCount(ArrayList<Integer> nums) {
-        if (nums.size() != LOTTO_NUMBER_LIMIT)
+        if (nums.size() != LOTTO_NUMBER_LIMIT) {
             throw new IllegalArgumentException(NUMBER_COUNT_ERROR);
+        }
     }
 
     private void validateDuplicate(ArrayList<Integer> nums) {
         Set<Integer> numbers = new HashSet<>();
         numbers.addAll(nums);
-        if (nums.size() != numbers.size())
+        if (nums.size() != numbers.size()) {
             throw new IllegalArgumentException(NUMBER_DUPLICATE_ERROR);
+        }
     }
 
     private void validateNumsRange(ArrayList<Integer> nums) {
-        for (int i = 0; i < nums.size(); i++)
+        for (int i = 0; i < nums.size(); i++) {
             validateNumRange(nums.get(i));
+        }
     }
 
     private void validateNumRange(int number) {
-        if (number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER)
+        if (number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER) {
             throw new IllegalArgumentException(NUMBER_RANGE_ERROR);
+        }
     }
 
     public boolean isContainNum(int number) {
