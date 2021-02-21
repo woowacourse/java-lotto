@@ -9,8 +9,6 @@ import lotto.domain.lotto.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import static lotto.view.ErrorMessages.ERROR_BONUS_LOTTO_NUMBER_DUPLICATED;
-
 public class LottoController {
 
     public void run() {
@@ -26,7 +24,7 @@ public class LottoController {
 
     private LottoTicket getLottoTicket() {
         Money money = new Money(InputView.getMoney());
-        return LottoTicketFactory.createLottoTicket(money.getValue());
+        return LottoTicketGenerator.createLottoTicket(money.getValue());
     }
 
     private WinningNumbers getWinningNumbers() {

@@ -15,7 +15,7 @@ public class OutputView {
     private OutputView() {
 
     }
-    
+
     public static void printResult(LottoResult lottoResult) {
         System.out.println(OUTPUT_WIN_STATISTICS_MESSAGES.getMessage());
         System.out.printf((OUTPUT_FIFTH_RESULT_FORMAT.getMessage()) + "%n",

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import lotto.view.ErrorMessages;
 
-public class LottoTicketFactory {
+public class LottoTicketGenerator {
 
     private static final RandomLottoGenerator randomLottoGenerator = new RandomLottoGenerator();
 
