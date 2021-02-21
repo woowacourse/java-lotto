@@ -1,7 +1,6 @@
 package lottogame.domain;
 
 public class Money {
-
     private int value;
 
     public Money(final String money) {
@@ -12,10 +11,6 @@ public class Money {
     public void use(final int price) {
         moneyValidate(price);
         this.value -= price;
-    }
-
-    public int getValue() {
-        return this.value;
     }
 
     public boolean isCanBuy(final int price) {
