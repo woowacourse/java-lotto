@@ -23,6 +23,14 @@ public class LottoTickets {
         return new LottoTickets(lottoTickets);
     }
 
+    public static LottoTickets generateManual(List<ManualTicketNumbers> manualTicketNumbers) {
+        List<LottoTicket> lottoTickets = manualTicketNumbers.stream()
+                .map(ManualTicketNumbers::getManualTicketNumbers)
+                .map(LottoTicket::from)
+                .collect(Collectors.toList());
+        return new LottoTickets(lottoTickets);
+    }
+
     public LottoResult checkResult(WinningLottoTicket winningLottoTicket) {
         Map<LottoRank, Long> statistics = lottoTickets.stream()
                 .map(winningLottoTicket::compareNumbers)
