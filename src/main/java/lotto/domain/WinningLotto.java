@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.rating.Rating;
+
 public class WinningLotto {
 
     private final Lotto lotto;
@@ -15,14 +17,17 @@ public class WinningLotto {
         if (lotto.containNumber(bonusBall)) {
             throw new IllegalArgumentException("중복된 보너스 볼 입력입니다.");
         }
-
     }
 
-    public int compareLottoNumber(final Lotto lotto) {
+    public Rating scratch(Lotto lotto) {
+        return Rating.getRating(compareLottoNumber(lotto), compareBonusBall(lotto));
+    }
+
+    private int compareLottoNumber(final Lotto lotto) {
         return lotto.countCommonValue(this.lotto);
     }
 
-    public boolean compareBonusBall(final Lotto lotto) {
+    private boolean compareBonusBall(final Lotto lotto) {
         return lotto.containNumber(bonusBall);
     }
 }

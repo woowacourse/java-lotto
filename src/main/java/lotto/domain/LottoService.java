@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import lotto.domain.lottomachine.LottoMachine;
-import lotto.domain.rating.Rating;
 import lotto.domain.rating.RatingCounter;
 
 import java.util.ArrayList;
@@ -24,9 +23,7 @@ public class LottoService {
 
     public void scratchLotto(WinningLotto winningLotto) {
         for (Lotto lotto : lottos) {
-            int match = winningLotto.compareLottoNumber(lotto);
-            boolean hasBonusBall = winningLotto.compareBonusBall(lotto);
-            ratingCounter.update(Rating.getRating(match, hasBonusBall));
+            ratingCounter.update(winningLotto.scratch(lotto));
         }
     }
 

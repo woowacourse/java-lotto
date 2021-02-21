@@ -1,11 +1,15 @@
 package lotto.domain;
 
+import lotto.domain.lottomachine.LottoMachine;
+import lotto.domain.lottomachine.TestLottoMachine;
+import lotto.domain.rating.Rating;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 public class WinningLottoTest {
 
@@ -17,5 +21,14 @@ public class WinningLottoTest {
         assertThatThrownBy(() -> new WinningLotto(lotto, bonusBall))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("중복된");
+    }
+
+    @Test
+    @DisplayName("스크래치 결과 확인")
+    void scratch() {
+        LottoMachine lottoMachine = new TestLottoMachine();
+        Lotto lotto = new Lotto(lottoMachine.generate());
+        WinningLotto winningLotto = new WinningLotto(lotto, new LottoNumber(7));
+        assertThat(winningLotto.scratch(lotto)).isEqualTo(Rating.FIRST);
     }
 }
