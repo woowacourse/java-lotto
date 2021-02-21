@@ -1,13 +1,10 @@
 package lotto.domain.lotto;
-
-import static lotto.utils.Config.PRICE_EACH_LOTTO;
-
 import java.util.ArrayList;
 
 import lotto.view.ErrorMessages;
 
 public class LottoTicketGenerator {
-
+    private static final int PRICE_EACH_LOTTO = 1000;
     private static final RandomLottoGenerator randomLottoGenerator = new RandomLottoGenerator();
 
     public static LottoTicket createLottoTicket(int money) {

@@ -1,13 +1,12 @@
 package lotto.domain.lotto;
 
-import static lotto.utils.Config.END;
-import static lotto.utils.Config.START;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class RandomLottoGenerator {
+    private static final int START = 1;
+    private static final int END = 45;
 
     private static final ArrayList<LottoNumber> totalLottoNumberList = new ArrayList<>();
 

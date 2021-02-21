@@ -1,14 +1,12 @@
 package lotto.domain.lotto;
 
-import static lotto.utils.Config.PRICE_EACH_LOTTO;
-
 import java.util.Arrays;
 import java.util.List;
 
 import lotto.domain.Rank;
 
 public class LottoResult {
-
+    private static final int PRICE_EACH_LOTTO = 1000;
     private final List<Rank> rankList;
 
     public LottoResult(List<Rank> rankList) {

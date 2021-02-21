@@ -1,14 +1,13 @@
 package lotto.domain.lotto;
 
-import static lotto.utils.Config.END;
-import static lotto.utils.Config.START;
-
 import java.util.Objects;
 
 import lotto.utils.Validation;
 import lotto.view.ErrorMessages;
 
 public class LottoNumber implements Comparable<LottoNumber> {
+    private static final int START = 1;
+    private static final int END = 45;
 
     private final int value;
 
