@@ -7,13 +7,14 @@ import java.util.stream.Collectors;
 
 public class InputView {
 
-    private static final Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner;
     private static final String NUMBER_DELIMITER = ",";
 
-    private InputView() {
+    public InputView(Scanner scanner) {
+        this.scanner = scanner;
     }
 
-    public static int getInt() {
+    public int getInt() {
         try {
             String input = scanner.nextLine()
                                   .trim();
@@ -23,9 +24,8 @@ public class InputView {
         }
     }
 
-    public static List<Integer> getWinningNumbers() {
+    public List<Integer> getWinningNumbers() {
         try {
-            OutputView.getMessage("지난 주 당첨 번호를 입력해 주세요.");
             String input = scanner.nextLine()
                                   .trim();
             return Arrays.stream(input.split(NUMBER_DELIMITER))

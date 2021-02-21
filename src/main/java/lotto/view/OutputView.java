@@ -9,17 +9,20 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class OutputView {
+    public OutputView() {
+    }
+
     private static final String NEW_LINE = System.lineSeparator();
 
-    public static void getMessage(String message) {
+    public void getMessage(String message) {
         System.out.println(message);
     }
 
-    public static void printBuyTicket(int count) {
+    public void printBuyTicket(int count) {
         System.out.printf("%d개를 구매했습니다." + NEW_LINE, count);
     }
 
-    public static void printLottoResults(List<Lotto> lottos) {
+    public void printLottoResults(List<Lotto> lottos) {
         StringBuilder buffer = new StringBuilder();
         for (Lotto lotto : lottos) {
             appendLottoResult(buffer, lotto);
@@ -28,7 +31,7 @@ public class OutputView {
         System.out.print(buffer.toString());
     }
 
-    public static void appendLottoResult(StringBuilder buffer, Lotto lotto) {
+    public void appendLottoResult(StringBuilder buffer, Lotto lotto) {
         buffer.append("[");
         buffer.append(lotto.getNumbers()
                            .stream()
@@ -38,12 +41,12 @@ public class OutputView {
               .append(NEW_LINE);
     }
 
-    public static void printWinningStats(RatingCounter ratingCounter, double rate) {
+    public void printWinningStats(RatingCounter ratingCounter, double rate) {
         printWinningDetail(ratingCounter);
         printEarningRate(rate);
     }
 
-    private static void printWinningDetail(RatingCounter ratingCounter) {
+    private void printWinningDetail(RatingCounter ratingCounter) {
         System.out.println(NEW_LINE + "당첨 통계" + NEW_LINE + "---------");
         for (Rating rating : Rating.values()) {
             if (rating == Rating.MISS) {
@@ -53,7 +56,7 @@ public class OutputView {
         }
     }
 
-    private static void printRatingResult(final Rating rating, final int count) {
+    private void printRatingResult(final Rating rating, final int count) {
         LottoResult lottoResult = rating.getLottoResult();
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(String.format("%d개 일치", lottoResult.getMatchedCount()));
@@ -64,7 +67,7 @@ public class OutputView {
         System.out.println(stringBuilder.toString());
     }
 
-    private static void printEarningRate(double rate) {
+    private void printEarningRate(double rate) {
         System.out.printf("총 수익률은 %.2f입니다.", rate);
     }
 }
