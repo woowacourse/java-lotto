@@ -42,10 +42,10 @@ public class PayOutTest {
 
     @Test
     @DisplayName("뺄셈을 하면 빼진 수의 PayOut 객체를 반환한다.")
-    void subtraction() {
+    void subtract() {
         PayOut _10000 = new PayOut(10000);
         PayOut _5000 = new PayOut(5000);
 
-        assertThat(_10000.subtraction(_5000)).isEqualTo(_5000);
+        assertThat(_10000.subtract(_5000)).isEqualTo(_5000);
     }
 }

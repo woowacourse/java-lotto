@@ -43,7 +43,7 @@ public class LottoGenerator {
                 manualLottoNumbers.stream()
                         .map(LottoNumbers::valueOf)
                         .collect(toList())
-        ).addition(
+        ).add(
                 generateLottos(payOut.getGameCount())
         );
     }

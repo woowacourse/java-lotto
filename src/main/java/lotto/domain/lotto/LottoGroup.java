@@ -29,7 +29,7 @@ public class LottoGroup {
         return Collections.unmodifiableList(lottos);
     }
 
-    public LottoGroup addition(LottoGroup lottoGroup) {
+    public LottoGroup add(LottoGroup lottoGroup) {
         return new LottoGroup(
                 Stream.concat(
                         lottos.stream(),

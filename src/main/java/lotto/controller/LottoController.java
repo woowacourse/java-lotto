@@ -22,7 +22,7 @@ public class LottoController {
         List<String> manualLottos = getManualLottosFromUser(payOut, manualLottoCount);
 
         LottoGroup lottoGroup = createLottosAccordingToTheAmount(manualLottos,
-                payOut.subtractionUsingGameCount(manualLottoCount.getValueAsInt())
+                payOut.subtractUsingGameCount(manualLottoCount.getValueAsInt())
         );
 
         createWinningNumberAndlottoResultAnalysisAndPrint(lottoGroup, payOut);

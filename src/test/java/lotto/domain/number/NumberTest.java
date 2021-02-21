@@ -36,17 +36,17 @@ public class NumberTest {
 
     @Test
     @DisplayName("덧셈을 하면 더해진 수의 Number 객체를 반환한다.")
-    void addition() {
+    void add() {
         Number numberOne = new Number(1);
-        assertThat(numberOne.addition(numberOne)).isEqualTo(new Number(2));
+        assertThat(numberOne.add(numberOne)).isEqualTo(new Number(2));
     }
 
     @Test
     @DisplayName("뺄셈을 하면 빼진 수의 Number 객체를 반환한다.")
-    void subtraction() {
+    void subtract() {
         Number numberTwo = new Number(2);
         Number numberOne = new Number(1);
 
-        assertThat(numberTwo.subtraction(numberOne)).isEqualTo(numberOne);
+        assertThat(numberTwo.subtract(numberOne)).isEqualTo(numberOne);
     }
 }

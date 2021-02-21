@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoGroupTest {
     @Test
     @DisplayName("로또 그룹의 merge를 수행한다.")
-    void addition_addLottosViaMergingWithOtherLottoGroup() {
+    void add_addLottosViaMergingWithOtherLottoGroup() {
         LottoNumbers lottoNumbers1 = new LottoNumbers(Arrays.asList(
                 new LottoNumber(1),
                 new LottoNumber(2),
@@ -38,7 +38,7 @@ public class LottoGroupTest {
                 lottoNumbers2
         ));
 
-        LottoGroup addedLottoGroup = lottoGroup1.addition(lottoGroup2);
+        LottoGroup addedLottoGroup = lottoGroup1.add(lottoGroup2);
 
         assertThat(addedLottoGroup.getLottos().get(0).getMatchCount(lottoNumbers1)).isEqualTo(6);
         assertThat(addedLottoGroup.getLottos().get(1).getMatchCount(lottoNumbers2)).isEqualTo(6);

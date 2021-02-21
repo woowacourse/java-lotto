@@ -48,11 +48,11 @@ public class Number {
         return this.value == value;
     }
 
-    public Number addition(Number number) {
+    public Number add(Number number) {
         return new Number(value + number.value);
     }
 
-    public Number subtraction(Number number) {
+    public Number subtract(Number number) {
         return new Number(value - number.value);
     }
 

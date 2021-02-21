@@ -38,18 +38,18 @@ public class PayOut {
         return value.getValueAsInt();
     }
 
-    public PayOut subtraction(PayOut payOut) {
-        Number subtractedNumber = value.subtraction(payOut.value);
+    public PayOut subtract(PayOut payOut) {
+        Number subtractedNumber = value.subtract(payOut.value);
 
-        if (subtractedNumber.equals(ZERO)) {
+        if(subtractedNumber.equals(ZERO)) {
             return new PayOut();
         }
 
-        return new PayOut(value.subtraction(payOut.value));
+        return new PayOut(value.subtract(payOut.value));
     }
 
-    public PayOut subtractionUsingGameCount(int count) {
-        return subtraction(new PayOut(count * GAME_PRICE));
+    public PayOut subtractUsingGameCount(int count) {
+        return subtract(new PayOut(count * GAME_PRICE));
     }
 
 
