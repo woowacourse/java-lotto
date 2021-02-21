@@ -19,8 +19,8 @@ public class LottoTicket {
         return Collections.unmodifiableList(this.lottoNumbers);
     }
 
-    public static LottoTicket of(List<LottoNumber> shuffleLottoNumbers) {
-        return new LottoTicket(shuffleLottoNumbers);
+    public static LottoTicket of(List<LottoNumber> lottoNumbers) {
+        return new LottoTicket(lottoNumbers);
     }
 
     public static LottoTicket valueOf(List<String> lottoNumbers) {
