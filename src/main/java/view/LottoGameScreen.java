@@ -7,7 +7,9 @@ import util.OutputUtil;
 import view.dto.LottoGameResultDto;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -19,7 +21,8 @@ public class LottoGameScreen {
     public static final String BONUS_LOTTO_CONFIRMATION = "보너스 볼을 입력해 주세요.";
     public static final String RESULT = "당첨통계";
     public static final String LINE = "----------";
-    public static final String STRING_FORMATTER = "%s개 일치 (%d원)- ";
+    public static final String LOTTO_RESULT_MESSAGE = "%s개 일치 (%d원)- %d개";
+    public static final String SECOND_PRIZE_RESULT_MESSAGE = "%d개 일치, 보너스 볼 일치 (%d)원- %d개";
     public static final String REVENUE_RESULT_FORMATTER = "총 수익률은 %.2f입니다.";
 
     public void showAllLottoStatus(final List<LottoTicket> lottoTickets) {
@@ -50,40 +53,26 @@ public class LottoGameScreen {
     public void showGameResult(LottoGameResultDto lottoGameResultDto) {
         OutputUtil.printMessage(RESULT);
         OutputUtil.printMessage(LINE);
-        showThreeMatchesResult(lottoGameResultDto);
-        showFourMatchesResult(lottoGameResultDto);
-        showFiveMatchesResult(lottoGameResultDto);
-        showFiveMatchesAndBonusResult(lottoGameResultDto);
-        showSixMatchesResult(lottoGameResultDto);
+        showMatchesResult(lottoGameResultDto);
     }
 
-    private void showSixMatchesResult(LottoGameResultDto lottoGameResultDto) {
-        Integer count = getCount(lottoGameResultDto, LottoRank.SIX_MATCHES);
-        OutputUtil.printMessage(String.format(STRING_FORMATTER, "6", 2000000000) + count + "개");
+    private void showMatchesResult(LottoGameResultDto lottoGameResultDto) {
+        Map<LottoRank, Integer> matches = lottoGameResultDto.getMatches();
+        Arrays.stream(LottoRank.values())
+                .filter(LottoRank::hasMatches)
+                .forEach(lottoRank ->
+                        OutputUtil.printMessage(String.format(findMessage(lottoRank), lottoRank.getMatches(), lottoRank.getPrize(), getCount(matches, lottoRank))));
     }
 
-    private void showFiveMatchesAndBonusResult(LottoGameResultDto lottoGameResultDto) {
-        Integer count = getCount(lottoGameResultDto, LottoRank.FIVE_AND_BONUS_MATCHES);
-        OutputUtil.printMessage("5개 일치, 보너스 볼 일치(30000000원)- " + count + "개");
+    private String findMessage(LottoRank key) {
+        if (key.isSecond()) {
+            return SECOND_PRIZE_RESULT_MESSAGE;
+        }
+        return LOTTO_RESULT_MESSAGE;
     }
 
-    private void showFiveMatchesResult(LottoGameResultDto lottoGameResultDto) {
-        Integer count = getCount(lottoGameResultDto, LottoRank.FIVE_MATCHES);
-        OutputUtil.printMessage(String.format(STRING_FORMATTER, "5", 1500000) + count + "개");
-    }
-
-    private void showFourMatchesResult(LottoGameResultDto lottoGameResultDto) {
-        Integer count = getCount(lottoGameResultDto, LottoRank.FOUR_MATCHES);
-        OutputUtil.printMessage(String.format(STRING_FORMATTER, "4", 50000) + count + "개");
-    }
-
-    private void showThreeMatchesResult(LottoGameResultDto lottoGameResultDto) {
-        Integer count = getCount(lottoGameResultDto, LottoRank.THREE_MATCHES);
-        OutputUtil.printMessage(String.format(STRING_FORMATTER, "3", 5000) + count + "개");
-    }
-
-    private Integer getCount(LottoGameResultDto lottoGameResultDto, LottoRank lottoRank) {
-        Integer count = lottoGameResultDto.getMatches().get(lottoRank);
+    private Integer getCount(Map<LottoRank, Integer> matches, LottoRank lottoRank) {
+        Integer count = matches.get(lottoRank);
         if (Objects.isNull(count)) {
             return 0;
         }
