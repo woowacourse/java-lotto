@@ -13,14 +13,14 @@ public class LottoMachine {
         this.lottoNumberGenerator = lottoNumberGenerator;
     }
 
-    public LottoTickets issueLottoTickets(PurchasingPrice purchasingPrice, List<ManualTicketNumbers> manualTicketNumbers) {
+    public LottoTickets issueLottoTickets(PurchasingPrice purchasingPrice, List<ManualTicketNumbers> manualTicketsNumbers) {
         int purchasableTicketCounts = purchasingPrice.calculatePurchasableTicketCounts(LOTTO_TICKET_COST);
-        int manualTicketCounts = manualTicketNumbers.size();
+        int manualTicketCounts = manualTicketsNumbers.size();
         if (purchasableTicketCounts == ZERO || manualTicketCounts > purchasableTicketCounts) {
             throw new IllegalArgumentException(NOT_ENOUGH_MONEY);
         }
         int automaticTicketCounts = purchasableTicketCounts - manualTicketCounts;
-        LottoTickets manualLottoTickets = LottoTickets.generateManual(manualTicketNumbers);
+        LottoTickets manualLottoTickets = LottoTickets.generateManual(manualTicketsNumbers);
         LottoTickets automaticLottoTickets = LottoTickets.generateAutomatic(automaticTicketCounts, lottoNumberGenerator);
         return manualLottoTickets.concat(automaticLottoTickets);
     }

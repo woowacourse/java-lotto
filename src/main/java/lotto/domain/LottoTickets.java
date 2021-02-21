@@ -23,8 +23,8 @@ public class LottoTickets {
         return new LottoTickets(lottoTickets);
     }
 
-    public static LottoTickets generateManual(List<ManualTicketNumbers> manualTicketNumbers) {
-        List<LottoTicket> lottoTickets = manualTicketNumbers.stream()
+    public static LottoTickets generateManual(List<ManualTicketNumbers> manualTicketsNumbers) {
+        List<LottoTicket> lottoTickets = manualTicketsNumbers.stream()
                 .map(ManualTicketNumbers::getManualTicketNumbers)
                 .map(LottoTicket::from)
                 .collect(Collectors.toList());
