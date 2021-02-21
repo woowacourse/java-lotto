@@ -31,15 +31,11 @@ public class LottoResult {
     }
 
     public void applyOneTicketResult(LottoTicket lottoTicket) {
-        List<LottoNumber> matchedLottoNumbers = getMatchedLottoNumbers(lottoTicket);
+        List<LottoNumber> matchedLottoNumbers = winningLottoNumbers.getMatchedLottoNumbers(lottoTicket);
         if (matchedLottoNumbers.size() < MIN_MATCH_NUMBER_COUNT_TO_GET_PRIZE) {
             return;
         }
         increaseOneCountOfLottoMatchType(matchedLottoNumbers);
-    }
-
-    private List<LottoNumber> getMatchedLottoNumbers(LottoTicket lottoTicket) {
-        return winningLottoNumbers.getMatchedLottoNumbers(lottoTicket);
     }
 
     private void increaseOneCountOfLottoMatchType(List<LottoNumber> matchedLottoNumbersToGetPrize) {
