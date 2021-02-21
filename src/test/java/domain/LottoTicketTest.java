@@ -32,19 +32,19 @@ public class LottoTicketTest {
         assertThat(lottoTicket).isInstanceOf(LottoTicket.class);
     }
 
-    @DisplayName("중복된 번호를 입력할 경우 예외를 발생시킨다.")
-    @Test
-    public void validLottoTicketTest() {
-        assertThatThrownBy(() -> LottoTicket.valueOf(
-                Arrays.asList("1", "2", "3", "4", "5", "5")))
-                .isInstanceOf(IllegalArgumentException.class);
-    }
-
     @DisplayName("입력 값이 6개가 아닌 경우 예외를 발생시킨다.")
     @Test
     public void validateLottoNumberCount() {
         assertThatThrownBy(() -> LottoTicket.valueOf(
                 Arrays.asList("1", "2", "3", "4")))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("중복된 번호를 입력할 경우 예외를 발생시킨다.")
+    @Test
+    public void validLottoTicketTest() {
+        assertThatThrownBy(() -> LottoTicket.valueOf(
+                Arrays.asList("1", "2", "3", "4", "5", "5")))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
