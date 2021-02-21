@@ -60,4 +60,9 @@ public final class LottoTicket extends Ticket {
 
         return numbers;
     }
+
+    public boolean hasBonus(final LottoNumber bonusNumber) {
+        return this.lottoNumbers
+                .contains(bonusNumber);
+    }
 }

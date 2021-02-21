@@ -61,6 +61,10 @@ public class LottoMoney {
         }
     }
 
+    public double toScale(final long targetValue) {
+        return (double) targetValue / value;
+    }
+
     public int toTicketQuantity() {
         return value / SINGLE_LOTTO_PRICE;
     }

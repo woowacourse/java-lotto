@@ -1,5 +1,6 @@
 package domain;
 
+import domain.ticket.LottoTicket;
 import domain.ticket.Ticket;
 import domain.ticket.WinningTicket;
 
@@ -23,5 +24,13 @@ public class WinningNumbers {
         if (winningNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException("당첨 번호에 보너스 번호가 포함되어 있습니다:" + bonusNumber);
         }
+    }
+
+    public int countMatching(final LottoTicket lottoTicket) {
+        return winningTicket.countSameNumbers(lottoTicket);
+    }
+
+    public boolean hasBonus(final LottoTicket lottoTicket) {
+        return lottoTicket.hasBonus(bonusNumber);
     }
 }

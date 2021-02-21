@@ -42,6 +42,13 @@ public abstract class Ticket {
         return this.lottoNumbers.equals(ticket.lottoNumbers);
     }
 
+    public int countSameNumbers(final Ticket lottoTicket) {
+        return (int) this.lottoNumbers
+                .stream()
+                .filter(lottoNumber -> lottoTicket.lottoNumbers.contains(lottoNumber))
+                .count();
+    }
+
     protected abstract List<Integer> generateNumbers(List<Integer> numbers);
 
     @Override

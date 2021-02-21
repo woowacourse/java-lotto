@@ -1,6 +1,9 @@
 package domain.tickets;
 
 import domain.LottoMoney;
+import domain.Prize;
+import domain.WinningNumbers;
+import domain.WinningStatics;
 import domain.ticket.LottoTicket;
 import domain.ticket.Ticket;
 
@@ -21,5 +24,17 @@ public class AutoLottoTickets {
 
     public boolean isSameQuantity(final int ticketQuantity) {
         return lottoTickets.size() == ticketQuantity;
+    }
+
+    public WinningStatics calculateWinningStatics(final WinningNumbers winningNumbers) {
+        final List<Prize> prizes = calculatePrizes(winningNumbers);
+        return new WinningStatics(prizes);
+    }
+
+    private List<Prize> calculatePrizes(final WinningNumbers winningNumbers) {
+        return this.lottoTickets
+                .stream()
+                .map(ticket -> Prize.of(winningNumbers, LottoTicket.class.cast(this)))
+                .collect(Collectors.toList());
     }
 }

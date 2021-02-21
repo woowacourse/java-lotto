@@ -50,6 +50,8 @@
 - [ ] Price의 역할 분리 고려
 - [ ] 가격 integer 최댓값 넘어가는 오버플로우 상황 고려
 - [ ] Prize 캐싱 여부
+- [ ] LottoMoney value long으로 변경
+- [ ] WinningStatics에 caluateTotalProfit Stream으로 바꾸기
 
 ## 1단계 피드백 후 리팩터링 목록
 
