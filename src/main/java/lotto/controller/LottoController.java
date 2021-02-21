@@ -5,11 +5,7 @@ import java.util.List;
 
 import lotto.domain.Money;
 import lotto.domain.Rank;
-import lotto.domain.lotto.LottoLine;
-import lotto.domain.lotto.LottoNumber;
-import lotto.domain.lotto.LottoResult;
-import lotto.domain.lotto.LottoTicket;
-import lotto.domain.lotto.LottoTicketFactory;
+import lotto.domain.lotto.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -20,9 +16,9 @@ public class LottoController {
     public void run() {
         try {
             LottoTicket lottoTicket = getLottoTicket();
-
             OutputView.printLottoTicket(lottoTicket);
-            OutputView.printResult(getLottoResult(lottoTicket));
+            WinningNumbers winningNumbers = getWinningNumbers();
+            OutputView.printResult(checkLottoTicket(lottoTicket, winningNumbers));
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -31,6 +27,13 @@ public class LottoController {
     private LottoTicket getLottoTicket() {
         Money money = new Money(InputView.getMoney());
         return LottoTicketFactory.createLottoTicket(money.getValue());
+    }
+
+    private WinningNumbers getWinningNumbers() {
+        LottoLine lottoLine = new LottoLine(getLottoLine(InputView.getLottoLine()));
+        LottoNumber bonusLottoNumber = new LottoNumber(InputView.getBonusLottoNumber());
+        WinningNumbers winningNumbers = new WinningNumbers(lottoLine, bonusLottoNumber);
+        return winningNumbers;
     }
 
     private List<LottoNumber> getLottoLine(String[] splitLottoNumbersInput) {
@@ -43,21 +46,9 @@ public class LottoController {
         return lottoNumberList;
     }
 
-    private LottoResult getLottoResult(LottoTicket lottoTicket) {
-        LottoLine lottoLine = new LottoLine(getLottoLine(InputView.getLottoLine()));
-        LottoNumber bonusLottoNumber = new LottoNumber(InputView.getBonusLottoNumber());
-
-        if (lottoLine.containNumber(bonusLottoNumber)) {
-            throw new IllegalArgumentException(ERROR_BONUS_LOTTO_NUMBER_DUPLICATED.getMessage());
-        }
-
-        return checkLottoTicket(lottoTicket, lottoLine, bonusLottoNumber);
-    }
-
-    private LottoResult checkLottoTicket(LottoTicket lottoTicket, LottoLine winLottoLine,
-                                         LottoNumber bonusBallNumber) {
+    private LottoResult checkLottoTicket(LottoTicket lottoTicket, WinningNumbers winningNumbers) {
         List<Rank> rankList = lottoTicket
-                .matchLottoLines(winLottoLine.getValues(), bonusBallNumber);
+                .matchLottoLines(winningNumbers);
         return new LottoResult(rankList);
     }
 }

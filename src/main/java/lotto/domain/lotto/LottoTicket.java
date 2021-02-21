@@ -19,12 +19,12 @@ public class LottoTicket {
         return lottoLines.size();
     }
 
-    public List<Rank> matchLottoLines(List<LottoNumber> answerLottoNumbers,
-                                      LottoNumber bonusNumber) {
+    public List<Rank> matchLottoLines(WinningNumbers winningNumbers) {
         List<Rank> ranks = new ArrayList<>();
         for (LottoLine lottoLine : lottoLines) {
             ranks.add(lottoLine
-                    .matchLottoNumbers(lottoLine.getValues(), bonusNumber, answerLottoNumbers));
+                    .matchLottoNumbers(lottoLine.getValues(), winningNumbers.getLastWinBonusBall(),
+                            winningNumbers.getLastWinningLottoNumbers().getValues()));
         }
         return ranks;
     }
