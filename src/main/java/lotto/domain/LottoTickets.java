@@ -18,19 +18,19 @@ public class LottoTickets {
 
     private final List<Lotto> lottoTickets;
 
-    public LottoTickets(final int count) {
-        this(count, ALL_LOTTO_NUMBERS);
+    public LottoTickets(final int buyLottoSize) {
+        this(buyLottoSize, ALL_LOTTO_NUMBERS);
     }
 
-    public LottoTickets(final int count, final List<Integer> values) {
-        lottoTickets = createLottoTickets(count, values);
+    public LottoTickets(final int buyLottoSize, final List<Integer> LottoNumbers) {
+        lottoTickets = createLottoTickets(buyLottoSize, LottoNumbers);
     }
 
-    private List<Lotto> createLottoTickets(final int value, final List<Integer> values) {
+    private List<Lotto> createLottoTickets(final int buyLottoSize, final List<Integer> LottoNumbers) {
         List<Lotto> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < value; i++) {
+        for (int i = 0; i < buyLottoSize; i++) {
             lottoTickets
-                .add(new Lotto(RandomUtils.generateRandomNumbers(values, LOTTO_SIZE)));
+                .add(new Lotto(RandomUtils.generateRandomNumbers(LottoNumbers, LOTTO_SIZE)));
         }
         return lottoTickets;
     }

@@ -26,8 +26,8 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    private void validateDuplicatedNumber(final List<Integer> values) {
-        if (new HashSet<>(values).size() != LOTTO_SIZE) {
+    private void validateDuplicatedNumber(final List<Integer> numbers) {
+        if (new HashSet<>(numbers).size() != LOTTO_SIZE) {
             throw new DuplicateLottoNumberException();
         }
     }

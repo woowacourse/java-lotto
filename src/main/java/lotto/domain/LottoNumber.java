@@ -10,13 +10,13 @@ public class LottoNumber {
 
     private final int number;
 
-    public LottoNumber(final int value) {
-        validate(value);
-        number = value;
+    public LottoNumber(final int number) {
+        validate(number);
+        this.number = number;
     }
 
-    private void validate(final int value) {
-        if (value < MIN_BOUND || value > MAX_BOUND) {
+    private void validate(final int number) {
+        if (number < MIN_BOUND || number > MAX_BOUND) {
             throw new InvalidLottoNumberException();
         }
     }

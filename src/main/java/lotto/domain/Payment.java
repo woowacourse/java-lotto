@@ -9,19 +9,19 @@ public class Payment {
 
     private final int money;
 
-    public Payment(final int value) {
-        validate(value);
-        money = convertPaymentAmount(value);
+    public Payment(final int money) {
+        validate(money);
+        this.money = convertPaymentAmount(money);
     }
 
-    private void validate(final int value) {
-        if (value < MIN_PAYMENT) {
+    private void validate(final int money) {
+        if (money < MIN_PAYMENT) {
             throw new InvalidPaymentAmountException();
         }
     }
 
-    public int convertPaymentAmount(final int value) {
-        return value - (value % MIN_PAYMENT);
+    public int convertPaymentAmount(final int money) {
+        return money - (money % MIN_PAYMENT);
     }
 
     public int count() {

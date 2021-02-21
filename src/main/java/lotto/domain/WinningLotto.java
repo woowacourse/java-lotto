@@ -14,8 +14,8 @@ public class WinningLotto extends Lotto {
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
-    private void validateBonusNumber(final List<Integer> values, int value) {
-        if (values.contains(value)) {
+    private void validateBonusNumber(final List<Integer> numbers, int bonusNumber) {
+        if (numbers.contains(bonusNumber)) {
             throw new DuplicateLottoNumberException();
         }
     }
