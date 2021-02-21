@@ -8,7 +8,6 @@ import static lotto.view.messages.OutputMessages.SECOND_PLACE_RESULT_FORMAT;
 import static lotto.view.messages.OutputMessages.THIRD_PLACE_RESULT_FORMAT;
 import static lotto.view.messages.OutputMessages.WINNING_LOTTO_LINE_STATISTICS;
 
-import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.lotto.LottoLine;
 import lotto.domain.lotto.LottoTicket;
