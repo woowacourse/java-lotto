@@ -38,7 +38,7 @@ public class WinningLottoTest {
     void name2() {
         LottoNumber bonusNumber = new LottoNumber("7");
         WinningLotto winningLotto = new WinningLotto(Lotto, bonusNumber);
-        assertThat(winningLotto.toString()).isEqualTo(Lotto.toString() + ", " + bonusNumber.toString());
+        assertThat(winningLotto).isEqualTo(new WinningLotto(Lotto, bonusNumber));
     }
 
     @Test
