@@ -3,17 +3,22 @@ package lottogame.domain.machine;
 import lottogame.domain.number.LottoNumber;
 import lottogame.domain.number.LottoNumbers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LottoWinningDrawingMachine {
 
     public static final String DELIMITER = ",";
-    private final LottoNumbers lottoNumbers = new LottoNumbers();
+    private LottoNumbers lottoNumbers;
 
     public LottoNumbers drawing(String drawingNumbers) {
         drawingNumbers = drawingNumbers.replaceAll(" ", "");
+        final List<LottoNumber> lottoNumberGroup = new ArrayList<>();
+
         for (String number : drawingNumbers.split(DELIMITER)) {
-            this.lottoNumbers.add(new LottoNumber(number));
+            lottoNumberGroup.add(new LottoNumber(number));
         }
-        return new LottoNumbers(this.lottoNumbers.toList());
+        return lottoNumbers = new LottoNumbers(lottoNumberGroup);
     }
 
     public LottoNumber bonusDrawing(final String drawingNumber) {

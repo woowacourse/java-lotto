@@ -13,12 +13,14 @@ public class LottoTicket {
     public static final int FINISH_LOTTO_NUMBER = 45;
     public static final int COUNT_LOTTO_NUMBER = 6;
 
-    private final LottoNumbers lottoNumbers = new LottoNumbers();
+    private final LottoNumbers lottoNumbers;
 
     public LottoTicket() {
+        List<LottoNumber> lottoNumberGroup = new ArrayList<>();
         for (int number : getShuffledNumbers(new ArrayList<>())) {
-            lottoNumbers.add(new LottoNumber(number + ""));
+            lottoNumberGroup.add(new LottoNumber(number));
         }
+        lottoNumbers = new LottoNumbers(lottoNumberGroup);
     }
 
     private List<Integer> getShuffledNumbers(List<Integer> numbers) {
@@ -29,7 +31,7 @@ public class LottoTicket {
         return shuffledNumbers;
     }
 
-    public List<Integer> initNumbers(List<Integer> numbers) {
+    private List<Integer> initNumbers(List<Integer> numbers) {
         for (int i = START_LOTTO_NUMBER; i <= FINISH_LOTTO_NUMBER; i++) {
             numbers.add(i);
         }

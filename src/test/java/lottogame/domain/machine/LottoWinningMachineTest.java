@@ -1,8 +1,5 @@
 package lottogame.domain.machine;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.util.List;
 import lottogame.domain.number.LottoNumber;
 import lottogame.domain.number.LottoNumbers;
 import lottogame.domain.ticket.LottoTicket;
@@ -10,33 +7,39 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class LottoWinningMachineTest {
 
     private LottoWinningMachine lottoWinningMachine;
 
     @BeforeEach
     void setUp() {
-        LottoNumbers winningNumbers = new LottoNumbers();
-        LottoNumber bonusNumber = new LottoNumber("7");
+        List<LottoNumber> lottoNumberGroup = new ArrayList<>();
+        LottoNumber bonusNumber = new LottoNumber(7);
 
         for (int i = 1; i <= 6; ++i) {
-            winningNumbers.add(new LottoNumber(i + ""));
+            lottoNumberGroup.add(new LottoNumber(i));
         }
 
+        LottoNumbers winningNumbers = new LottoNumbers(lottoNumberGroup);
         lottoWinningMachine = new LottoWinningMachine(winningNumbers, bonusNumber);
     }
 
     @Test
-    @DisplayName("로또 당첨 번호와 티켓 번호 비교 결과가 올바른지")
+    @DisplayName("로또 당첨 번호와 티켓 번호 비교 결과가 올바르면 통과한다")
     void validMatchResult() {
         LottoTicket lottoTicket = new LottoTicket() {
             @Override
             public List<LottoNumber> getLottoNumbers() {
-                LottoNumbers drawingNumbers = new LottoNumbers();
-
+                List<LottoNumber> lottoNumberGroup = new ArrayList<>();
                 for (int i = 1; i <= 6; ++i) {
-                    drawingNumbers.add(new LottoNumber(i + ""));
+                    lottoNumberGroup.add(new LottoNumber(i));
                 }
+                LottoNumbers drawingNumbers = new LottoNumbers(lottoNumberGroup);
                 return drawingNumbers.toList();
             }
         };
@@ -46,17 +49,18 @@ public class LottoWinningMachineTest {
     }
 
     @Test
-    @DisplayName("보너스 번호 일치 확인")
+    @DisplayName("보너스 번호가 일치할 경우 통과한다")
     void checkBonusLottoNumber() {
         LottoTicket lottoTicket = new LottoTicket() {
             @Override
             public List<LottoNumber> getLottoNumbers() {
-                LottoNumbers drawingNumbers = new LottoNumbers();
+                List<LottoNumber> lottoNumberGroup = new ArrayList<>();
 
                 for (int i = 1; i <= 5; ++i) {
-                    drawingNumbers.add(new LottoNumber(i + ""));
+                    lottoNumberGroup.add(new LottoNumber(i + ""));
                 }
-                drawingNumbers.add(new LottoNumber("7"));
+                lottoNumberGroup.add(new LottoNumber("7"));
+                LottoNumbers drawingNumbers = new LottoNumbers(lottoNumberGroup);
                 return drawingNumbers.toList();
             }
         };
