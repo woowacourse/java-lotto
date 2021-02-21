@@ -31,7 +31,7 @@ public class InputView {
         return Integer.parseInt(SCANNER.nextLine());
     }
 
-    public static List<ManualTicketNumbers> inputManualTicketNumbers() {
+    public static List<ManualTicketNumbers> inputManualTicketsNumbers() {
         int manualTicketCounts = nextIntWithInstructionMessage(INPUT_MANUAL_TICKET_COUNTS_MESSAGE);
         if (manualTicketCounts > ZERO) {
             System.out.println(INPUT_MANUAL_TICKET_NUMBERS_MESSAGE);

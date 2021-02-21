@@ -20,7 +20,7 @@ public class LottoController {
 
     private LottoTickets buyLottoTickets(LottoMachine lottoMachine) {
         PurchasingPrice purchasingPrice = new PurchasingPrice(InputView.inputPurchasingPrice());
-        List<ManualTicketNumbers> manualTicketsNumbers = InputView.inputManualTicketNumbers();
+        List<ManualTicketNumbers> manualTicketsNumbers = InputView.inputManualTicketsNumbers();
         LottoTickets lottoTickets = lottoMachine.issueLottoTickets(purchasingPrice, manualTicketsNumbers);
         OutputView.printPurchasedLottoTicketCounts(manualTicketsNumbers.size(), lottoTickets.getTicketCounts());
         OutputView.printAllLottoTicketNumbers(lottoTickets);
