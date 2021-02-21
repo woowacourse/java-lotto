@@ -13,11 +13,6 @@ public class LottoResult {
             .forEach(winningBoard -> this.results.put(winningBoard, 0));
     }
 
-    private static WinningBoard getWinning(WinningLotto winningLotto, LottoTicket ticket) {
-        return WinningBoard.findWinnings(ticket.countHits(winningLotto.getNumbers()),
-            winningLotto.hasBonus(ticket));
-    }
-
     public void checkWinnings(LottoTickets lottoTickets,
         WinningLotto winningLotto) {
         lottoTickets.getLottoTickets()
@@ -26,6 +21,11 @@ public class LottoResult {
 
     private void addWinning(WinningBoard winningBoard) {
         results.put(winningBoard, results.get(winningBoard) + 1);
+    }
+
+    private WinningBoard getWinning(WinningLotto winningLotto, LottoTicket ticket) {
+        return WinningBoard.findWinnings(ticket.countHits(winningLotto.getNumbers()),
+            winningLotto.hasBonus(ticket));
     }
 
     public int calculateTotalReward() {
