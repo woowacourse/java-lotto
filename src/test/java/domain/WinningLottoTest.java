@@ -31,7 +31,7 @@ public class WinningLottoTest {
 
     @DisplayName("맞춘 개수에 맞는 Rank 객체가 리턴된다. - 1등")
     @Test
-    public void calculateLottoFirstRank() {
+    public void calculateLottoRankFirst() {
         WinningLotto winningLotto = new WinningLotto(
                 LottoTicket.valueOf(Arrays.asList("3", "4", "7", "8", "10", "16")),
                 new LottoNumber("22"));
@@ -43,7 +43,7 @@ public class WinningLottoTest {
 
     @DisplayName("맞춘 개수에 맞는 Rank 객체가 리턴된다. - 2등")
     @Test
-    public void calculateLottoSecondRank() {
+    public void calculateLottoRankSecond() {
         WinningLotto winningLotto = new WinningLotto(
                 LottoTicket.valueOf(Arrays.asList("3", "4", "7", "8", "10", "16")),
                 new LottoNumber("22"));
@@ -55,7 +55,7 @@ public class WinningLottoTest {
 
     @DisplayName("맞춘 개수에 맞는 Rank 객체가 리턴된다. - 없는 경우")
     @Test
-    public void calculateLottoNoneRank() {
+    public void calculateLottoRankNothing() {
         WinningLotto winningLotto = new WinningLotto(
                 LottoTicket.valueOf(Arrays.asList("3", "4", "7", "8", "10", "16")),
                 new LottoNumber("22"));
