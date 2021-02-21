@@ -21,7 +21,7 @@ public class LottoGenerator {
 
     public LottoTickets purchaseTickets(UserPurchase userPurchase) {
         LottoTickets lottoTickets = new LottoTickets();
-        for (int i = 0; i < userPurchase.getNumberOfTickets(); i++) {
+        for (int i = 0; i < userPurchase.getNumberOfAllTickets(); i++) {
             Collections.shuffle(allNumbers);
             LottoTicket newLottoTicket
                 = new LottoTicket(allNumbers.subList(0, LOTTO_NUMBERS_SIZE));

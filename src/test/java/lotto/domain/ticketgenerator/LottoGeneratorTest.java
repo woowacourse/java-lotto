@@ -11,7 +11,8 @@ public class LottoGeneratorTest {
     @DisplayName("매개변수로 받은 개수만큼 로또 티켓 구입 테스트")
     @Test
     void Should_Return_LottoTicketsWithExactNumberOfTickets_When_Purchase() {
-        UserPurchase userPurchase = new UserPurchase(10_000);
+
+        UserPurchase userPurchase = new UserPurchase(10_000, new LottoTickets());
         LottoGenerator lottoGenerator = new LottoGenerator();
 
         LottoTickets lottoTickets = lottoGenerator.purchaseTickets(userPurchase);

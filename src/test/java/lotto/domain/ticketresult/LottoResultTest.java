@@ -37,7 +37,7 @@ public class LottoResultTest {
         );
         LottoNumber bonusNumber = new LottoNumber(7, true);
         winningLottoNumbers = new WinningTicketAndBonusNumber(winnerTicket, bonusNumber);
-        userPurchase = new UserPurchase(PURCHASE_PRICE);
+        userPurchase = new UserPurchase(PURCHASE_PRICE, new LottoTickets());
     }
 
     @DisplayName("1등 당첨 - 6개 일치")

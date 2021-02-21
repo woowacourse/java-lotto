@@ -19,4 +19,8 @@ public class LottoTickets {
     public List<LottoTicket> getTickets() {
         return Collections.unmodifiableList(tickets);
     }
+
+    public int size() {
+        return tickets.size();
+    }
 }

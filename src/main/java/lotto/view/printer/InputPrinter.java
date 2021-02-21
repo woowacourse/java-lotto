@@ -8,7 +8,7 @@ public class InputPrinter {
         System.out.println("구입금액을 입력해 주세요.");
     }
 
-    public static void printManualPurchaseInputGuideMessage() {
+    public static void printNumberOfManualPurchaseTicketsInputGuideMessage() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
     }
 
@@ -22,5 +22,9 @@ public class InputPrinter {
 
     public static void printNewLine() {
         System.out.println();
+    }
+
+    public static void printLottoNumbersToManuallyPurchaseInputGuideMessage() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
     }
 }
