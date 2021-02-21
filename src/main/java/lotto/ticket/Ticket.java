@@ -1,7 +1,5 @@
 package lotto.ticket;
 
-import lotto.ticket.strategy.NumbersGenerator;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -23,7 +21,7 @@ public class Ticket {
         return values;
     }
 
-    public int hasSameNumber(Number number) {
+    public int sameNumberCountOne(Number number) {
         if (numbers.contains(number)) {
             return ONE_COUNT;
         }
@@ -51,7 +49,7 @@ public class Ticket {
     public int sameNumberCount(Ticket winnerTicket) {
         int matchCount = ZERO;
         for (Number number : numbers) {
-            matchCount += winnerTicket.hasSameNumber(number);
+            matchCount += winnerTicket.sameNumberCountOne(number);
         }
         return matchCount;
     }
