@@ -29,7 +29,7 @@ public class OutputView {
     }
 
     private static String printLottoNumbers(final LottoTicket lottoTicket) {
-        String numbers = lottoTicket.toList().stream()
+        String numbers = lottoTicket.toSet().stream()
                 .map(LottoNumber::getValue)
                 .map(String::valueOf)
                 .collect(Collectors.joining(COMMA));

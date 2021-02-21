@@ -1,48 +1,44 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
     private static final String DUPLICATE_NUMBER_ERROR = "중복 숫자가 존재합니다.";
     private static final String INCORRECT_LOTTO_NUMBER_SIZE_ERROR = "로또 숫자의 개수가 6이 아닙니다.";
-
     public static final int LOTTO_TICKET_SIZE = 6;
 
-    private final List<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
-    private LottoTicket(final List<LottoNumber> lottoNumbers) {
+    private LottoTicket(final Set<LottoNumber> lottoNumbers) {
         validate(lottoNumbers);
-        this.lottoNumbers = new ArrayList<>(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
     }
 
     public static LottoTicket valueOf(final List<Integer> numbers) {
-        return new LottoTicket(generateLottoNumbers(numbers));
+        return new LottoTicket(generateLottoNumbers(new HashSet<>(numbers)));
     }
 
-    private static List<LottoNumber> generateLottoNumbers(final List<Integer> numbers) {
+    private static Set<LottoNumber> generateLottoNumbers(final HashSet<Integer> numbers) {
         return numbers.stream()
                 .sorted()
                 .map(LottoNumber::valueOf)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
-    private static void validate(final List<LottoNumber> lottoNumbers) {
+    private static void validate(final Set<LottoNumber> lottoNumbers) {
         validateDuplicateNumbers(lottoNumbers);
         validateIncorrectSize(lottoNumbers);
     }
 
-    private static void validateDuplicateNumbers(final List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != new HashSet<>(lottoNumbers).size()) {
+    private static void validateDuplicateNumbers(final Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() < LOTTO_TICKET_SIZE) {
             throw new IllegalArgumentException(DUPLICATE_NUMBER_ERROR);
         }
     }
 
-    private static void validateIncorrectSize(final List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_TICKET_SIZE) {
+    private static void validateIncorrectSize(final Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() > LOTTO_TICKET_SIZE) {
             throw new IllegalArgumentException(INCORRECT_LOTTO_NUMBER_SIZE_ERROR);
         }
     }
@@ -57,11 +53,11 @@ public class LottoTicket {
         return Ranking.select(matching, bonusMatching);
     }
 
-    public boolean contains(LottoNumber lottoNumber) {
+    private boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    public List<LottoNumber> toList() {
-        return Collections.unmodifiableList(lottoNumbers);
+    public Set<LottoNumber> toSet() {
+        return Collections.unmodifiableSet(lottoNumbers);
     }
 }
