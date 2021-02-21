@@ -23,6 +23,6 @@ public class LottoGame {
     }
 
     private Money findUsedMoney(Lottos purchasedLottos) {
-        return new Money(purchasedLottos.getNumberOfLotto() * Lotto.PRICE);
+        return purchasedLottos.getPurchasedAmount();
     }
 }

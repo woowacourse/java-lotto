@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    public static final int PRICE = 1000;
+    private static final int PRICE = 1000;
 
     private final LottoNumbers lottoNumbers;
 
@@ -21,6 +21,10 @@ public class Lotto {
 
     public static int getNumberOfAvailablePurchases(Money money) {
         return money.divide(PRICE);
+    }
+
+    public static Money getPurchasedAmount(int purchaseCount) {
+        return new Money(PRICE * purchaseCount);
     }
 
     public boolean contains(LottoNumber lottoNumber) {
