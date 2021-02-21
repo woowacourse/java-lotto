@@ -18,12 +18,12 @@ public class AutomaticLottoGenerator implements LottoGenerator {
         }
     }
 
-    public List<Lotto> createLottos(int numberOfLottoToCreate) {
-        ArrayList<Lotto> lottos = new ArrayList<>();
+    public Lottos createLottos(int numberOfLottoToCreate) {
+        List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < numberOfLottoToCreate; i++) {
             lottos.add(createLotto());
         }
-        return lottos;
+        return new Lottos(lottos);
     }
 
     public Lotto createLotto() {

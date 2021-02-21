@@ -23,7 +23,7 @@ public class LottoController {
         int numberOfLottoToBuy = money.calculateAffordableNumberOfLotto();
         AutomaticLottoGenerator automaticLottoGenerator = new AutomaticLottoGenerator();
 
-        return new Lottos(automaticLottoGenerator.createLottos(numberOfLottoToBuy));
+        return automaticLottoGenerator.createLottos(numberOfLottoToBuy);
     }
 
     private WinningLotto getWinningLotto(Scanner scanner) {

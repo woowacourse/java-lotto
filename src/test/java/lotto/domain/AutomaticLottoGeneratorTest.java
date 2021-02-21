@@ -10,16 +10,8 @@ class AutomaticLottoGeneratorTest {
     @Test
     void createLottos() {
         AutomaticLottoGenerator automaticLottoGenerator = new AutomaticLottoGenerator();
+        Lottos lottos = automaticLottoGenerator.createLottos(4);
 
-        assertThat(isLottoCreationSuccessful(automaticLottoGenerator)).isTrue();
-    }
-
-    private boolean isLottoCreationSuccessful(AutomaticLottoGenerator automaticLottoGenerator) {
-        try {
-            automaticLottoGenerator.createLotto();
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+        assertThat(lottos.getNumberOfLotto()).isEqualTo(4);
     }
 }
