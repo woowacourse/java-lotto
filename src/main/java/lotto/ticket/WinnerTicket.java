@@ -29,7 +29,7 @@ public class WinnerTicket {
     }
 
     public int findMatchCount(Ticket ticket) {
-        return ticket.hasSameNumberCount(winnerTicket);
+        return ticket.sameNumberCount(winnerTicket);
     }
 
     @Override
