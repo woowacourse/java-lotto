@@ -54,7 +54,7 @@ public class LottoAnnouncement {
     }
 
     private void checkValidNumber(int targetNumber) {
-        boolean criteria = targetNumber < LOWER_LIMIT | targetNumber > UPPER_LIMIT;
+        boolean criteria = (targetNumber < LOWER_LIMIT) | (targetNumber > UPPER_LIMIT);
 
         if (criteria) {
             throw new LottoAnnouncementException("범위를 벗어난 숫자입니다.");
