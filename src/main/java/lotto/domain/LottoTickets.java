@@ -39,6 +39,12 @@ public class LottoTickets {
         return new LottoResult(statistics);
     }
 
+    public LottoTickets concat(LottoTickets targetLottoTickets) {
+        List<LottoTicket> concatLottoTickets = Stream.concat(this.lottoTickets.stream(), targetLottoTickets.lottoTickets.stream())
+                .collect(Collectors.toList());
+        return new LottoTickets(concatLottoTickets);
+    }
+
     public int getPurchasingPrice() {
         return lottoTickets.size() * LOTTO_TICKET_PRICE;
     }
