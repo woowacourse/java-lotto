@@ -13,7 +13,7 @@ public class WinningLottoTest {
     @Test
     public void createWinningLotto() {
         WinningLotto winningLotto = new WinningLotto(
-                LottoTicket.valueOf(Arrays.asList(3, 4, 7, 8, 10, 16)),
+                LottoTicket.of(Arrays.asList(3, 4, 7, 8, 10, 16)),
                 new LottoNumber(22));
 
         assertThat(winningLotto).isInstanceOf(WinningLotto.class);
@@ -24,7 +24,7 @@ public class WinningLottoTest {
     public void createWinningLottoException() {
         assertThatThrownBy(() -> {
             new WinningLotto(
-                LottoTicket.valueOf(Arrays.asList(3, 4, 7, 8, 10, 16)),
+                LottoTicket.of(Arrays.asList(3, 4, 7, 8, 10, 16)),
                 new LottoNumber(10));
         }).isInstanceOf(IllegalArgumentException.class);
     }
@@ -33,10 +33,10 @@ public class WinningLottoTest {
     @Test
     public void calculateLottoRankFirst() {
         WinningLotto winningLotto = new WinningLotto(
-                LottoTicket.valueOf(Arrays.asList(3, 4, 7, 8, 10, 16)),
+                LottoTicket.of(Arrays.asList(3, 4, 7, 8, 10, 16)),
                 new LottoNumber(22));
 
-        Rank rank = winningLotto.calculateRank(LottoTicket.valueOf(Arrays.asList(3, 4, 7, 8, 10, 16)));
+        Rank rank = winningLotto.calculateRank(LottoTicket.of(Arrays.asList(3, 4, 7, 8, 10, 16)));
 
         assertThat(rank).isEqualTo(Rank.FIRST);
     }
@@ -45,10 +45,10 @@ public class WinningLottoTest {
     @Test
     public void calculateLottoRankSecond() {
         WinningLotto winningLotto = new WinningLotto(
-                LottoTicket.valueOf(Arrays.asList(3, 4, 7, 8, 10, 16)),
+                LottoTicket.of(Arrays.asList(3, 4, 7, 8, 10, 16)),
                 new LottoNumber(22));
 
-        Rank rank = winningLotto.calculateRank(LottoTicket.valueOf(Arrays.asList(3, 4, 7, 8, 10, 22)));
+        Rank rank = winningLotto.calculateRank(LottoTicket.of(Arrays.asList(3, 4, 7, 8, 10, 22)));
 
         assertThat(rank).isEqualTo(Rank.SECOND);
     }
@@ -57,10 +57,10 @@ public class WinningLottoTest {
     @Test
     public void calculateLottoRankNothing() {
         WinningLotto winningLotto = new WinningLotto(
-                LottoTicket.valueOf(Arrays.asList(3, 4, 7, 8, 10, 16)),
+                LottoTicket.of(Arrays.asList(3, 4, 7, 8, 10, 16)),
                 new LottoNumber(22));
 
-        Rank rank = winningLotto.calculateRank(LottoTicket.valueOf(Arrays.asList(1, 2, 5, 7, 11, 15)));
+        Rank rank = winningLotto.calculateRank(LottoTicket.of(Arrays.asList(1, 2, 5, 7, 11, 15)));
 
         assertThat(rank).isEqualTo(Rank.NOTHING);
     }

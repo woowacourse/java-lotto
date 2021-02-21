@@ -17,7 +17,7 @@ public class LottoTicket {
         return Collections.unmodifiableList(this.lottoNumbers);
     }
 
-    public static LottoTicket valueOf(List<Integer> lottoNumbers) {
+    public static LottoTicket of(List<Integer> lottoNumbers) {
         validateNumberCount(lottoNumbers);
         validateDuplicationNumber(lottoNumbers);
 

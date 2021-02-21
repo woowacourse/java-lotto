@@ -38,7 +38,7 @@ public class LottoController {
 
     private WinningLotto createWinningLotto() {
         try {
-            LottoTicket winningNumbers = LottoTicket.valueOf(inputView.scanWinningNumbers());
+            LottoTicket winningNumbers = LottoTicket.of(inputView.scanWinningNumbers());
             LottoNumber bonusBall = new LottoNumber(inputView.scanBonusBall());
             outputView.newLine();
             return new WinningLotto(winningNumbers, bonusBall);
