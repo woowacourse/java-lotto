@@ -1,10 +1,12 @@
 package lotto.ticket;
 
+import lotto.ticket.strategy.ManualNumbersGenerator;
 import lotto.ticket.strategy.NumbersGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static lotto.ticket.TicketValidation.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -96,5 +98,13 @@ public class TicketTest {
         BonusBall bonusBall = new BonusBall("6", new WinnerTicket(("1, 2, 3, 4, 5, 8")));
         Ticket ticket = new Ticket(numbersGenerator.generate());
         assertTrue(ticket.hasContainBonus(bonusBall));
+    }
+
+    @Test
+    @DisplayName("수동 생성 시 티켓 내부 숫자 개수 확인")
+    void checkManualTicketSize() {
+        List<Number> numbers = new ManualNumbersGenerator("1,2,3,4,5,6").generate();
+        List<Number> ticket = new Ticket(numbers).getTicket();
+        assertThat(ticket.size()).isEqualTo(6);
     }
 }

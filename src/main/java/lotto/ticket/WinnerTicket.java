@@ -1,16 +1,13 @@
 package lotto.ticket;
 
+import lotto.ticket.util.SplitNumbers;
+
 import java.util.Objects;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.collectingAndThen;
 
 public class WinnerTicket {
-    private static final String DELIMITER = ",";
-    private static final String SPACE = " ";
-    private static final String EMPTY = "";
-
     private final Ticket winnerTicket;
 
     public WinnerTicket(String numbers) {
@@ -18,9 +15,7 @@ public class WinnerTicket {
     }
 
     private Ticket splitNumbers(String values) {
-        return Stream.of(values.split(DELIMITER))
-                .map(s -> s.replaceAll(SPACE, EMPTY))
-                .map(Number::new)
+        return SplitNumbers.splitNumberStream(values)
                 .collect(collectingAndThen(Collectors.toList(), Ticket::new));
     }
 
