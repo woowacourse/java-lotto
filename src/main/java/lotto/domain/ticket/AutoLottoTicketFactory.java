@@ -23,6 +23,6 @@ public class AutoLottoTicketFactory {
 
     private List<Integer> shuffleNumbers() {
         Collections.shuffle(lottoNumbers);
-        return new ArrayList<>(lottoNumbers.subList(FROM_INDEX, TO_INDEX));
+        return lottoNumbers.subList(FROM_INDEX, TO_INDEX);
     }
 }

@@ -1,5 +1,6 @@
-package lotto.domain;
+package lotto.domain.ticket;
 
+import lotto.domain.Prize;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.WinningLottoTicket;
 import org.junit.jupiter.api.BeforeAll;
