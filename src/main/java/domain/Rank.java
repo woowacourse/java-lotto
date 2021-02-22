@@ -19,8 +19,8 @@ public enum Rank {
 
     private static final long FIVE = 5;
 
-    long count;
-    Money reward;
+    private final long count;
+    private final Money reward;
 
     Rank(long count, Money reward) {
         this.count = count;
