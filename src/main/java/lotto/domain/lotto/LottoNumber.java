@@ -12,25 +12,29 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private final int value;
 
-    public LottoNumber(String input) {
-        validateLottoNumber(input);
-        this.value = Integer.parseInt(input);
+    public LottoNumber(String number) {
+        validateLottoNumber(number);
+        this.value = Integer.parseInt(number);
     }
 
-    private void validateLottoNumber(String input) {
-        if (isInvalidNumberFormat(input) || isInvalidLottoNumberRange(input)) {
+    private void validateLottoNumber(String number) {
+        if (isBlank(number) || isInvalidNumberFormat(number) || isInvalidLottoNumberRange(number)) {
             throw new IllegalLottoNumberException();
         }
     }
 
-    private boolean isInvalidNumberFormat(String input) {
-        return !NUMBER_PATTERN.matcher(input).matches();
+    private boolean isBlank(String number) {
+        return "".equals(number);
+    }
+
+    private boolean isInvalidNumberFormat(String number) {
+        return !NUMBER_PATTERN.matcher(number).matches();
     }
 
 
-    private boolean isInvalidLottoNumberRange(String input) {
-        return Integer.parseInt(input) < MIN_LOTTO_NUMBER ||
-                Integer.parseInt(input) > MAX_LOTTO_NUMBER;
+    private boolean isInvalidLottoNumberRange(String number) {
+        return Integer.parseInt(number) < MIN_LOTTO_NUMBER ||
+                Integer.parseInt(number) > MAX_LOTTO_NUMBER;
     }
 
     private int getValue() {

@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoNumberTest {
     @ParameterizedTest
-    @ValueSource(strings = {"a", "-1", "55"})
+    @ValueSource(strings = {"a", "-1", "55", ""})
     @DisplayName("1~49의 숫자인지 검사")
     void validateNumbers(String input) {
         assertThatThrownBy(() -> {
