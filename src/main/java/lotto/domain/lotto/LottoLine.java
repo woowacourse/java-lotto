@@ -21,8 +21,7 @@ public class LottoLine {
                     ErrorMessages.ERROR_LOTTO_NUMBER_DUPLICATED.getMessage());
         }
 
-        value = Collections.unmodifiableList(
-                new ArrayList<>(unDuplicatedLottoNumber));
+        value = new ArrayList<>(unDuplicatedLottoNumber);
     }
 
     public Rank matchLottoNumbers(WinningNumbers winningNumbers) {
@@ -30,7 +29,7 @@ public class LottoLine {
     }
 
     public List<LottoNumber> getValue() {
-        return value;
+        return Collections.unmodifiableList(value);
     }
 
     public boolean containNumber(LottoNumber number) {
