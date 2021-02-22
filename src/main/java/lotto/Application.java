@@ -10,5 +10,7 @@ public class Application {
         LottoController lottoController = new LottoController();
 
         lottoController.tryLotto(scanner);
+
+        scanner.close();
     }
 }
