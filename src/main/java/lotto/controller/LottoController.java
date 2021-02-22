@@ -28,20 +28,23 @@ public class LottoController {
     }
 
     private WinningNumbers getWinningNumbers() {
-        LottoLine lottoLine = new LottoLine(getLottoLine(InputView.getLottoLine()));
-        LottoNumber bonusLottoNumber = new LottoNumber(InputView.getBonusLottoNumber());
-        WinningNumbers winningNumbers = new WinningNumbers(lottoLine, bonusLottoNumber);
-        return winningNumbers;
+        String[] splitLottoNumbersInput = InputView.getSplitLottoNumbers();
+        LottoLine lottoLine = getLottoLine(splitLottoNumbersInput);
+
+        String bonusBallInput = InputView.getBonusLottoNumber();
+        LottoNumber bonusLottoNumber = new LottoNumber(bonusBallInput);
+
+        return new WinningNumbers(lottoLine, bonusLottoNumber);
     }
 
-    private List<LottoNumber> getLottoLine(String[] splitLottoNumbersInput) {
+    private LottoLine getLottoLine(String[] splitLottoNumbersInput) {
         ArrayList<LottoNumber> lottoNumberList = new ArrayList();
 
         for (int i = 0; i < splitLottoNumbersInput.length; i++) {
             lottoNumberList.add(new LottoNumber(splitLottoNumbersInput[i]));
         }
 
-        return lottoNumberList;
+        return new LottoLine(lottoNumberList);
     }
 
     private LottoResult checkLottoTicket(LottoTicket lottoTicket, WinningNumbers winningNumbers) {

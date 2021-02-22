@@ -18,17 +18,16 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static String[] getLottoLine() {
+    public static String[] getSplitLottoNumbers() {
         System.out.println(InputViewMessages.REQUEST_LAST_WIN_LOTTO_NUMBERS.getMessage());
         String lottoNumbersInput = scanner.nextLine();
         String[] splitLottoNumbersInput = lottoNumbersInput.replace(" ", "").split(DELIMITER);
         return splitLottoNumbersInput;
     }
 
-    public static int getBonusLottoNumber() {
+    public static String getBonusLottoNumber() {
         System.out.println(InputViewMessages.REQUEST_LAST_WIN_BONUS_BALL.getMessage());
-        int number = Integer.parseInt(scanner.nextLine());
-        return number;
+        return scanner.nextLine();
     }
 
 }
