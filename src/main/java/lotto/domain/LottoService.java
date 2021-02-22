@@ -21,7 +21,7 @@ public class LottoService {
         return lottoRepository;
     }
 
-    public RatingInfo scratchLotto(WinningLotto winningLotto) {
+    public RatingInfo scratchLotto(final WinningLotto winningLotto) {
         for (Lotto lotto : lottoRepository.toList()) {
             int match = winningLotto.compareLottoNumber(lotto);
             boolean hasBonusBall = winningLotto.compareBonusBall(lotto);
