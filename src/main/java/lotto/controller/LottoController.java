@@ -4,11 +4,13 @@ import lotto.domain.LottoResult;
 import lotto.domain.Money;
 import lotto.domain.machine.AutoLottoMachine;
 import lotto.domain.machine.ManualLottoMachine;
+import lotto.domain.number.LottoNumbers;
 import lotto.domain.ticket.LottoTickets;
 import lotto.domain.ticket.WinningLottoTicket;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
@@ -29,6 +31,18 @@ public class LottoController {
 
     public void start() {
         LottoTickets lottoTickets = buyAutoLottoTicket(inputView.takeLottoMoney());
+        int sizeOfManualLotto = inputView.inputSizeOfManualLotto();
+
+        inputView.printRequestMessageForInputManualLottoNumbers();
+        List<LottoNumbers> lottoNumbers = new ArrayList<>();
+        for(int i = 0 ; i < sizeOfManualLotto; i++){
+            lottoNumbers.add(new LottoNumbers(inputView.inputManualLottoNumbers()));
+        }
+
+        LottoTickets tickets = manualLottoMachine.createTickets(sizeOfManualLotto, lottoNumbers);
+        outputView.printTicketsSize(sizeOfManualLotto);
+        outputView.printAllLottoTickets(tickets);
+
         outputView.printTicketsSize(lottoTickets.size());
         outputView.printAllLottoTickets(lottoTickets);
 
@@ -56,4 +70,5 @@ public class LottoController {
                         groupingBy(Function.identity(), counting()),
                         lottoResultMap -> new LottoResult(lottoResultMap, autoLottoMachine.getLottoPrice().multiply(lottoTickets.size()))));
     }
+
 }
