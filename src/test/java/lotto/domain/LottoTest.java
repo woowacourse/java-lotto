@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,12 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LottoTest {
-    private Lotto lotto;
-
-    @BeforeEach
-    void setUp() {
-        lotto = new Lotto(Arrays.asList(1, 2, 3, 20, 21, 40));
-    }
 
     @DisplayName("6개 아닌 로또 번호 생성 오류 확인")
     @Test
@@ -45,6 +38,7 @@ public class LottoTest {
     @DisplayName("보너스 번호 일치여부 확인")
     @Test
     void bonusMatch() {
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 20, 21, 40));
         int bonusNumber = 20;
         int notBonusNumber = 22;
 

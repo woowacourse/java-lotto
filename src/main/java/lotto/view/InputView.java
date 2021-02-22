@@ -1,6 +1,5 @@
 package lotto.view;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -61,12 +60,12 @@ public class InputView {
     }
 
     public static List<String> inputManualPurchase(int manualCount) {
-        if(manualCount == 0){
+        if (manualCount == 0) {
             return Arrays.asList();
         }
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 
-        return Stream.generate(()->scanner.nextLine())
+        return Stream.generate(() -> scanner.nextLine())
                 .limit(manualCount)
                 .collect(Collectors.toList());
     }

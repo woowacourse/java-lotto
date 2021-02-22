@@ -10,14 +10,14 @@ public class ManualLotto {
 
     List<Lotto> manualLotto;
 
-    public ManualLotto(List<String> inputs){
+    public ManualLotto(List<String> inputs) {
         this.manualLotto = makeManualLotto(inputs);
     }
 
     private List<Lotto> makeManualLotto(List<String> manualPurchaseNumbers) {
         List<Lotto> manualLotto = new ArrayList<>();
 
-        for(String input : manualPurchaseNumbers){
+        for (String input : manualPurchaseNumbers) {
             validateInputCheck(input);
             List<Integer> lottoNumbers = Arrays.stream(input.split(", "))
                     .map(s -> Integer.parseInt(s))
@@ -28,8 +28,8 @@ public class ManualLotto {
     }
 
     private void validateInputCheck(String input) {
-        if(!Arrays.stream(input.split(", "))
-                .allMatch(s -> s.chars().allMatch(Character::isDigit))){
+        if (!Arrays.stream(input.split(", "))
+                .allMatch(s -> s.chars().allMatch(Character::isDigit))) {
             throw new IllegalArgumentException("숫자와 , 를 이용하여 입력해주세요.");
         }
     }

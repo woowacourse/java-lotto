@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class WinningLotto {
-
     private final Lotto winningNumbers;
     private final BonusNumber bonusNumber;
 
@@ -13,7 +12,6 @@ public class WinningLotto {
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
     }
-
 
     public List<Result> getWinningResult(Lottos lottos) {
         List<Result> results = new ArrayList<>();

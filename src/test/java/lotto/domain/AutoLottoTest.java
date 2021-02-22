@@ -13,6 +13,5 @@ public class AutoLottoTest {
         AutoLotto autoLotto = new AutoLotto(6);
 
         assertThat(autoLotto.getAutoLotto()).hasSize(6);
-
     }
 }
