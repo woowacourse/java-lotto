@@ -14,7 +14,7 @@ public class WinningLottoTest {
     void howManyWins() {
         Lotto generatedLotto = new Lotto(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
         WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 8, 9", "10");
-        assertThat(winningLotto.howManyWins(generatedLotto)).isEqualTo(4);
+        assertThat(WinningLotto.howManyWins(generatedLotto)).isEqualTo(4);
     }
 
     @Test

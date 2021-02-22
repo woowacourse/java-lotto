@@ -18,7 +18,7 @@ public class LottoController {
 
     public void startLotto() {
         lottos = new Lottos(LottoView.requestMoney());
-        LottoView.displayLottoCount(lottos.getCount());
+        LottoView.displayLottoCount(lottos.getLottoGroup().size());
         LottoView.displayLottoGroup(lottos);
         makeWinningLotto();
     }

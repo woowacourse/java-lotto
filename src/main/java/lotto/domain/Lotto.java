@@ -21,10 +21,6 @@ public class Lotto {
         this.lottoNumbers = nums;
     }
 
-    public List<Integer> getLottoNumbers() {
-        return this.lottoNumbers;
-    }
-
     private void validateCount(ArrayList<Integer> nums) {
         if (nums.size() != LOTTO_NUMBER_LIMIT) {
             throw new IllegalArgumentException(NUMBER_COUNT_ERROR);
@@ -32,16 +28,15 @@ public class Lotto {
     }
 
     private void validateDuplicate(ArrayList<Integer> nums) {
-        Set<Integer> numbers = new HashSet<>();
-        numbers.addAll(nums);
+        Set<Integer> numbers = new HashSet<>(nums);
         if (nums.size() != numbers.size()) {
             throw new IllegalArgumentException(NUMBER_DUPLICATE_ERROR);
         }
     }
 
     private void validateNumsRange(ArrayList<Integer> nums) {
-        for (int i = 0; i < nums.size(); i++) {
-            validateNumRange(nums.get(i));
+        for (Integer num : nums) {
+            validateNumRange(num);
         }
     }
 
@@ -49,6 +44,10 @@ public class Lotto {
         if (number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER) {
             throw new IllegalArgumentException(NUMBER_RANGE_ERROR);
         }
+    }
+
+    public List<Integer> getLottoNumbers() {
+        return this.lottoNumbers;
     }
 
     public boolean isContainNum(int number) {

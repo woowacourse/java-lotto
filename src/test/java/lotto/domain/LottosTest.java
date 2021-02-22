@@ -11,7 +11,7 @@ public class LottosTest {
     void checkLottoCount() {
         String money = "14000";
         Lottos lottos = new Lottos(money);
-        assertThat(lottos.getCount()).isEqualTo(14);
+        assertThat(lottos.getLottoGroup().size()).isEqualTo(14);
     }
 }
 
