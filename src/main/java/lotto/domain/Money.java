@@ -20,15 +20,15 @@ public class Money {
         }
     }
 
-    public Money calculateMoneyActuallyInvested() {
-        return new Money(calculateAffordableLottoQuantity() * LOTTO_PRICE);
+    public Money getMoneyActuallyInvested() {
+        return new Money(getAffordableLottoQuantity() * LOTTO_PRICE);
     }
 
-    public int calculateAffordableLottoQuantity() {
+    public int getAffordableLottoQuantity() {
         return money / LOTTO_PRICE;
     }
 
-    public float calculateProfitRate(Money profit) {
+    public float getProfitRate(Money profit) {
         return (float) profit.money / this.money;
     }
 

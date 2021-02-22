@@ -21,7 +21,7 @@ public class LottoStatistics {
 
     public LottoStatistics(List<Rank> ranks, Money money) {
         createStatistics(ranks);
-        this.moneyInvested = money.calculateMoneyActuallyInvested();
+        this.moneyInvested = money.getMoneyActuallyInvested();
     }
 
     private void createStatistics(List<Rank> ranks) {
@@ -37,7 +37,7 @@ public class LottoStatistics {
     }
 
     public float getProfitRate() {
-        return moneyInvested.calculateProfitRate(getTotalProfit());
+        return moneyInvested.getProfitRate(getTotalProfit());
     }
 
     private Money getTotalProfit() {

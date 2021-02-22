@@ -14,21 +14,30 @@ public class LottoController {
 
         int manualLottoQuantity = InputView.takeManualLottoQuantityInput(scanner);
         money.validateAffordability(manualLottoQuantity);
+        List<int[]> manualLottoNumbersSequence = InputView.takeManualLottoNumbersInput(scanner, manualLottoQuantity);
 
-        Lottos manualLottos = buy(new ManualLottoGenerator(null), manualLottoQuantity);
+        Lottos lottos = buyLottos(manualLottoNumbersSequence, manualLottoQuantity, money);
+        OutputView.showLottos(lottos);
 
-        Money moneyLeftAfterBuyingManualLotto = money.getChange(manualLottoQuantity);
-        Lottos autoLottos = buy(new AutomaticLottoGenerator(), moneyLeftAfterBuyingManualLotto.calculateAffordableLottoQuantity());
-
-        Lottos totalLottos = manualLottos.merge(autoLottos);
-        OutputView.showLottos(totalLottos);
-
-        List<Rank> results = totalLottos.getResults(getWinningLotto(scanner));
+        List<Rank> results = lottos.getResults(getWinningLotto(scanner));
 
         OutputView.showResultStatistics(new LottoStatistics(results, money));
     }
 
-    public Lottos buy(LottoGenerator lottoGenerator, int lottoQuantity) {
+    private Lottos buyLottos(List<int[]> manualLottoNumbersSequence, int manualLottoQuantity, Money money) {
+        Lottos manualLottos = buy(
+                new ManualLottoGenerator(manualLottoNumbersSequence),
+                manualLottoQuantity);
+        Money moneyLeftAfterBuyingManualLotto = money.getChange(manualLottoQuantity);
+
+        Lottos autoLottos = buy(
+                new AutomaticLottoGenerator(),
+                moneyLeftAfterBuyingManualLotto.getAffordableLottoQuantity());
+
+        return manualLottos.merge(autoLottos);
+    }
+
+    private Lottos buy(LottoGenerator lottoGenerator, int lottoQuantity) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoQuantity; i++) {
             lottos.add(lottoGenerator.createLotto());

@@ -31,7 +31,7 @@ public class MoneyTest {
     @Test
     void calculateNumberOfLotto() {
         Money money = new Money(13_500);
-        int numberOfLotto = money.calculateAffordableLottoQuantity();
+        int numberOfLotto = money.getAffordableLottoQuantity();
 
         assertThat(numberOfLotto).isEqualTo(13);
     }
@@ -41,7 +41,7 @@ public class MoneyTest {
     void calculateMoneyActuallyInvested() {
         Money money = new Money(3_999);
 
-        assertThat(money.calculateMoneyActuallyInvested()).isEqualTo(new Money(3_000));
+        assertThat(money.getMoneyActuallyInvested()).isEqualTo(new Money(3_000));
     }
 
     @DisplayName("수익률 계산")
@@ -50,7 +50,7 @@ public class MoneyTest {
         Money moneyInvested = new Money(2_000);
         Money profit = new Money(10_000);
 
-        assertThat(moneyInvested.calculateProfitRate(profit)).isEqualTo((float) 10_000 / 2_000);
+        assertThat(moneyInvested.getProfitRate(profit)).isEqualTo((float) 10_000 / 2_000);
     }
 
     @DisplayName("수동 로또 구매할 돈이 부족할 때 에러 반환 하는지")
