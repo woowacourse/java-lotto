@@ -65,7 +65,7 @@ public class LottoController {
         try {
             outputView.printMessage("수동으로 구매할 번호를 입력해 주세요.");
             for (int i = 0; i < ticket.getManualCount(); i++) {
-                getManualLottoNumber(inputView.getWinningNumbers(), lottoService);
+                getManualLottoNumber(inputView.getLottoNumbers(), lottoService);
             }
         } catch (IllegalArgumentException e) {
             outputView.printMessage(e.getMessage());
@@ -88,7 +88,7 @@ public class LottoController {
 
     private WinningLotto tryGetWinningLotto() {
         outputView.printMessage("지난 주 당첨 번호를 입력해 주세요.");
-        Lotto lotto = Lotto.createByInteger(inputView.getWinningNumbers());
+        Lotto lotto = Lotto.createByInteger(inputView.getLottoNumbers());
         outputView.printMessage("보너스 볼을 입력해 주세요.");
         LottoNumber bonusNumber = new LottoNumber(inputView.getInt());
         return new WinningLotto(lotto, bonusNumber);

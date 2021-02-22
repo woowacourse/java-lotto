@@ -24,7 +24,7 @@ public class InputView {
         }
     }
 
-    public List<Integer> getWinningNumbers() {
+    public List<Integer> getLottoNumbers() {
         try {
             String input = scanner.nextLine()
                                   .trim();
