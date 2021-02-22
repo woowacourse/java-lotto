@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import lotto.utils.LottoGenerator;
 
@@ -10,6 +11,16 @@ public class Machine {
     public Machine(String moneyValue, LottoGenerator lottoGenerator) {
         money = new Money(moneyValue);
         this.lottoTickets = new LottoTickets(money.getPossibleTicketCount(), lottoGenerator);
+    }
+
+    public Machine(String moneyValue, List<String> lottoNumbers, LottoGenerator lottoGenerator) {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        for (String lottoNumber : lottoNumbers) {
+            lottoTickets.add(new LottoTicket(lottoNumber));
+        }
+        money = new Money(moneyValue, lottoTickets);
+        this.lottoTickets = new LottoTickets(lottoTickets, money.getPossibleTicketCount(),
+            lottoGenerator);
     }
 
     public List<LottoTicket> getTickets() {
@@ -23,5 +34,6 @@ public class Machine {
     public Result getResult(String winningNumbersValue, String bonusBallValue) {
         return new Result(winningNumbersValue, bonusBallValue, lottoTickets);
     }
+
 
 }

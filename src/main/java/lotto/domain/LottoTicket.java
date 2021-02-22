@@ -16,6 +16,10 @@ public class LottoTicket {
 
     private final List<LottoNumber> lottoNumbers;
 
+    public LottoTicket(String lottoNumbersValue) {
+        this(covertToLottoNumbers(lottoNumbersValue));
+    }
+
     public LottoTicket(List<LottoNumber> lottoNumbers) {
         List<LottoNumber> numbers = new ArrayList<>(lottoNumbers);
 
@@ -36,10 +40,6 @@ public class LottoTicket {
         if (lottoNumbers.size() != SIZE_OF_LOTTO_NUMBERS) {
             throw new CustomException("로또 티켓의 사이즈는 " + SIZE_OF_LOTTO_NUMBERS + "개 입니다.");
         }
-    }
-
-    public LottoTicket(String lottoNumbersValue) {
-        this(covertToLottoNumbers(lottoNumbersValue));
     }
 
     private static List<LottoNumber> covertToLottoNumbers(String s) {

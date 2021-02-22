@@ -1,8 +1,11 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.Arrays;
+import java.util.List;
 import lotto.utils.CustomException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -32,6 +35,30 @@ class MoneyTest {
     void generate1() {
         assertThatThrownBy(() -> new Money("12ls"))
             .isInstanceOf(CustomException.class);
+    }
+
+    @Test
+    @DisplayName("수동발행")
+    void generate_analog() {
+        List<LottoTicket> lottoTickets = Arrays.asList(
+            new LottoTicket("11,12,13,14,15,16"),
+            new LottoTicket("21,22,23,24,25,26"),
+            new LottoTicket("31,32,33,34,35,36"));
+
+        assertThatCode(() -> new Money("14000", lottoTickets))
+            .doesNotThrowAnyException();
+    }
+
+    @Test
+    @DisplayName("수동발행갯수만큼 차감")
+    void getPossibleTicket() {
+        List<LottoTicket> lottoTickets = Arrays.asList(
+            new LottoTicket("11,12,13,14,15,16"),
+            new LottoTicket("21,22,23,24,25,26"),
+            new LottoTicket("31,32,33,34,35,36"));
+
+        final Money money = new Money("14000", lottoTickets);
+        assertThat(money.getPossibleTicketCount()).isEqualTo(11);
     }
 
 }

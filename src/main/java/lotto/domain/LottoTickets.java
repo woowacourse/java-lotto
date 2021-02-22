@@ -9,8 +9,18 @@ import lotto.utils.LottoGenerator;
 public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
 
+
     public LottoTickets(int ticketCount, LottoGenerator lottoGenerator) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
+        for (int i = 0; i < ticketCount; i++) {
+            lottoTickets.add(lottoGenerator.generateLottoTicket());
+        }
+        this.lottoTickets = lottoTickets;
+    }
+
+    public LottoTickets(List<LottoTicket> lottoTicketsInput, int ticketCount,
+        LottoGenerator lottoGenerator) {
+        List<LottoTicket> lottoTickets = new ArrayList<>(lottoTicketsInput);
         for (int i = 0; i < ticketCount; i++) {
             lottoTickets.add(lottoGenerator.generateLottoTicket());
         }
