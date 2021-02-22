@@ -17,6 +17,15 @@ public class Lottos {
         this.lottos = new ArrayList<>(lottos);
     }
     
+    public static Lottos of(Lottos... lottoGroup) {
+        List<Lotto> newLottos = new ArrayList<>();
+        for (Lottos lottos : lottoGroup) {
+            newLottos.addAll(lottos.getLottos());
+        }
+        
+        return new Lottos(newLottos);
+    }
+    
     public List<Lotto> getLottos() {
         return new ArrayList<>(lottos);
     }
@@ -24,10 +33,8 @@ public class Lottos {
     public LottoStatisticResult retrieveResults(WinningLotto winningLotto) {
         Map<Rank, Long> rankCount = this.lottos.stream()
                                                .map(lotto -> Rank.searchRank(winningLotto, lotto))
-                                               .collect(groupingBy(
-                                                       Function.identity(),
-                                                       () -> new EnumMap<>(Rank.class),
-                                                       counting()));
+                                               .collect(groupingBy(Function.identity(),
+                                                       () -> new EnumMap<>(Rank.class), counting()));
         
         return new LottoStatisticResult(rankCount);
     }
