@@ -43,6 +43,6 @@ class LottoNumberTest {
     void toInt(int input, int expected) {
         LottoNumber lottoNumber = new LottoNumber(input);
 
-        assertThat(lottoNumber.toInt()).isEqualTo(expected);
+        assertThat(lottoNumber.toInteger()).isEqualTo(expected);
     }
 }

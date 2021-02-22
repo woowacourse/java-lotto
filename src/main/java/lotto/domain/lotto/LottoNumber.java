@@ -39,7 +39,7 @@ public class LottoNumber {
         }
     }
 
-    public int toInt() {
+    public Integer toInteger() {
         return number;
     }
 

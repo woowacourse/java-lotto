@@ -25,9 +25,10 @@ public class TicketsView {
 
     private static void printLottoTicket(LottoTicket lottoTicket) {
         String numbers = lottoTicket.toUnmodifiableList().stream()
-                .map(lottoNumber -> Integer.toString(lottoNumber.toInt()))
-                .collect(Collectors.joining(", "));
-        System.out.println("[" + numbers + "]");
+                .map(lottoNumber -> lottoNumber.toInteger().toString())
+                .collect(Collectors.joining(", ", "[", "]"));
+
+        System.out.println(numbers);
     }
 
 }
