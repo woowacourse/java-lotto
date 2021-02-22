@@ -9,4 +9,8 @@ public class LottoBundle {
     public LottoBundle(List<Lotto> lottoBundle) {
         this.lottoBundle = new ArrayList<>(lottoBundle);
     }
+
+    public int countNumberOfLotto() {
+        return lottoBundle.size();
+    }
 }
