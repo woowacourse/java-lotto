@@ -22,7 +22,7 @@ public class LottoLine {
                     ERROR_LOTTO_NUMBER_DUPLICATED);
         }
 
-        value = new ArrayList<>(unDuplicatedLottoNumber);
+        value = new ArrayList(unDuplicatedLottoNumber);
     }
 
     public Rank matchLottoNumbers(WinningNumbers winningNumbers) {
