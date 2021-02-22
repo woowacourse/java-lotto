@@ -2,11 +2,7 @@ package lotto.domain.lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.assertj.core.api.Assertions.withPrecision;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 import lotto.domain.rank.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -38,30 +34,13 @@ public class WinningNumbersTest {
     }
 
     @Test
-    @DisplayName("등수 계산을 반환")
-    void getStatistics() {
-        WinningNumbers winningNumbers = WinningNumbers.valueOf("1, 2, 3, 4, 5, 6", "7");
-        Map<Rank, Long> expected = new HashMap<>();
-        expected.put(Rank.FIRST, 1L);
-        expected.put(Rank.SECOND, 1L);
-        expected.put(Rank.THIRD, 1L);
-        expected.put(Rank.FOURTH, 0L);
-        expected.put(Rank.FIFTH, 0L);
-        expected.put(Rank.FAIL, 0L);
-        int expectedTotalWinnings =
-            Rank.FIRST.getWinnings() + Rank.SECOND.getWinnings() + Rank.THIRD.getWinnings();
+    @DisplayName("등수 반환 확인")
+    void checkRank() {
+        WinningNumbers winningNumbers = WinningNumbers.valueOf("1,2,3,4,5,6", "7");
+        LottoNumbers lottoNumbers = LottoNumbers.valueOf("2,3,4,5,6,8");
+        assertThat(winningNumbers.checkRank(lottoNumbers)).isEqualTo(Rank.THIRD);
 
-        LottoTicket lottoTicket = new LottoTicket(Arrays.asList(
-            LottoNumbers.valueOf("1,2,3,4,5,6"),
-            LottoNumbers.valueOf("1,2,3,4,5,34"),
-            LottoNumbers.valueOf("1,2,3,4,5,7")
-        ));
-        WinningStatistics result = lottoTicket.getWinningStatistics(winningNumbers);
-
-        Map<Rank, Long> actual = result.getRanks().unwrap();
-
-        assertThat(expected).isEqualTo(actual);
-        assertThat(expectedTotalWinnings / 3000D)
-            .isEqualTo(result.getYield().unwrap(), withPrecision(2d));
+        lottoNumbers = LottoNumbers.valueOf("2,3,4,5,6,7");
+        assertThat(winningNumbers.checkRank(lottoNumbers)).isEqualTo(Rank.SECOND);
     }
 }

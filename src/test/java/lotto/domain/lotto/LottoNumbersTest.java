@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 import lotto.domain.number.LottoNumber;
@@ -78,5 +79,32 @@ public class LottoNumbersTest {
 
         assertThat(new LottoNumbers(lottoNumbers).unwrap())
             .isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
+    }
+
+    @Test
+    @DisplayName("로또 번호 포함 확인")
+    void containsTest() {
+        LottoNumbers lottoNumbers = LottoNumbers.valueOf("1,2,3,4,5,6");
+
+        assertThat(lottoNumbers.contains(LottoNumber.valueOf("6"))).isTrue();
+        assertThat(lottoNumbers.contains(LottoNumber.valueOf("7"))).isFalse();
+    }
+
+    @Test
+    @DisplayName("로또 번호 매칭 기능")
+    void matchTest() {
+        LottoNumbers lottoNumbers1 = LottoNumbers.valueOf("1,2,3,4,5,6");
+        LottoNumbers lottoNumbers2 = LottoNumbers.valueOf("4,5,6,7,8,9");
+
+        assertThat(lottoNumbers1.match(lottoNumbers2)).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("unwrap 시 제대로 정렬되는지 확인")
+    void unwrapTest() {
+        LottoNumbers lottoNumbers = LottoNumbers.valueOf("5,1,4,3,2,6");
+        List<Integer> expected = Arrays.asList(1, 2, 3, 4, 5, 6);
+
+        assertThat(lottoNumbers.unwrap()).isEqualTo(expected);
     }
 }
