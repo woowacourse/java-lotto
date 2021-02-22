@@ -19,7 +19,7 @@ public class LottoTicket {
     private LottoTicket(LottoNumbers lottoNumbers){
         validateLottoNumberCount(lottoNumbers);
         validateDuplicatedLottoNumbers(lottoNumbers);
-
+        lottoNumbers.sort();
         this.lottoNumbers = lottoNumbers;
     }
 

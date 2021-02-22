@@ -1,6 +1,7 @@
 package lotto.domain.number;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -16,6 +17,10 @@ public class LottoNumbers {
 
     public List<LottoNumber> list() {
         return Collections.unmodifiableList(lottoNumbers);
+    }
+
+    public void sort(){
+        lottoNumbers.sort(Comparator.naturalOrder());
     }
 
     @Override
