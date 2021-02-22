@@ -10,7 +10,7 @@ public class Lottos {
         this.values = values;
     }
 
-    public Integer getNumLotto(){
+    public Integer size() {
         return values.size();
     }
 

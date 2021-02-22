@@ -57,7 +57,7 @@ public class LottoController {
         LottoStore lottoStore = new LottoStore();
         Lottos purchasedLottos = lottoStore.buyLottos(money);
 
-        OutputView.numPurchasedLotto(purchasedLottos.getNumLotto());
+        OutputView.numPurchasedLotto(purchasedLottos.size());
         OutputView.lottosPrint(purchasedLottos);
 
         return purchasedLottos;

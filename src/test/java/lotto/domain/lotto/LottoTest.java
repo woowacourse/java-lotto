@@ -47,7 +47,7 @@ public class LottoTest {
         LottoStore lottoStore = new LottoStore();
         Lottos lottos = lottoStore.buyLottos(money);
 
-        assertThat(lottos.getNumLotto()).isEqualTo(14);
+        assertThat(lottos.size()).isEqualTo(14);
     }
 
     @Test
