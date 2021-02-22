@@ -2,10 +2,8 @@ package lotto.view;
 
 import java.util.List;
 import lotto.domain.Lotto;
-import lotto.domain.LottoGroup;
 import lotto.domain.Rank;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class LottoView {
@@ -29,10 +27,9 @@ public class LottoView {
         System.out.println(count + LOTTO_COUNT_MESSAGE);
     }
 
-    public static void printLottoGroup(LottoGroup LottoGroup) {
-        List<Lotto> lottoGroup = LottoGroup.getLottoGroup();
-        for (int i = 0; i < LottoGroup.getCount(); i++) {
-            System.out.print(lottoGroup.get(i).getLotto() + CHANGE_LINE);
+    public static void printLottos(List<Lotto> lottos) {
+        for (Lotto lotto : lottos) {
+            System.out.println(lotto.toString());
         }
     }
 

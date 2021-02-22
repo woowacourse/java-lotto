@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -28,5 +29,14 @@ public class Lotto {
         if (lottoNumberSizeCheck.size() != lottoNumbers.size()) {
             throw new IllegalArgumentException(DUPLICATE_ERROR);
         }
+    }
+
+    @Override
+    public String toString() {
+        List<Integer> lottoNumbers = new ArrayList<>();
+        for (LottoNumber lottoNumber : this.lottoNumbers) {
+            lottoNumbers.add(lottoNumber.getNumber());
+        }
+        return lottoNumbers.toString();
     }
 }
