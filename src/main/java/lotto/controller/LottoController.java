@@ -1,12 +1,7 @@
 package lotto.controller;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoService;
-import lotto.domain.WinningLotto;
+import lotto.domain.*;
 import lotto.domain.lottomachine.RandomLottoMachine;
-import lotto.domain.LottoNumber;
-import lotto.domain.Money;
-import lotto.domain.Ticket;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 

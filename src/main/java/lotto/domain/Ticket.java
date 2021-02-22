@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.Money;
-
 public class Ticket {
 
     private static final int TICKET_PRICE = 1000;

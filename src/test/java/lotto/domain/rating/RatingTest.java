@@ -27,7 +27,8 @@ public class RatingTest {
 
         Rating rating = Rating
                 .getRating(inputLotto.countCommonValue(lotto), inputLotto.containNumber(bonusNumber));
-        assertThat(rating.getLottoResult().getMatchedCount()).isEqualTo(expected);
+        assertThat(rating.getLottoResult()
+                         .getMatchedCount()).isEqualTo(expected);
     }
 
     @ParameterizedTest
