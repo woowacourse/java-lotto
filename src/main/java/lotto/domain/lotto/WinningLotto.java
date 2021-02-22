@@ -12,12 +12,8 @@ public class WinningLotto {
     }
 
     public static WinningLotto generatedBy(Lotto lotto, LottoNumber bonus) {
-        validateWinningLotto(lotto, bonus);
-        return new WinningLotto(lotto, bonus);
-    }
-
-    private static void validateWinningLotto(Lotto lotto, LottoNumber bonus) {
         validateBonus(lotto, bonus);
+        return new WinningLotto(lotto, bonus);
     }
 
     private static void validateBonus(Lotto lotto, LottoNumber bonus) {
