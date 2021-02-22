@@ -8,10 +8,17 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 class AutomaticLottoGeneratorTest {
     @DisplayName("로또를 에러 없이 잘 생성 하는지")
     @Test
-    void createLottos() {
+    void createLotto() {
         AutomaticLottoGenerator automaticLottoGenerator = new AutomaticLottoGenerator();
-        Lottos lottos = automaticLottoGenerator.createLottos(4);
+        assertThat(isLottoCreationSuccessful(automaticLottoGenerator)).isTrue();
+    }
 
-        assertThat(lottos.getNumberOfLotto()).isEqualTo(4);
+    private boolean isLottoCreationSuccessful(AutomaticLottoGenerator automaticLottoGenerator) {
+        try {
+            automaticLottoGenerator.createLotto();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
