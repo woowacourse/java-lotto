@@ -11,6 +11,7 @@ public class OutputPrinter {
     private static final String START_BRACKET = "[";
     private static final String END_BRACKET = "]";
     private static final String NEW_LINE = "\n";
+    private static final String MATCH_MESSAGE = "%d개 일치 (%d원) - %d개";
 
     private OutputPrinter() {
     }
@@ -33,10 +34,9 @@ public class OutputPrinter {
         System.out.println("---------");
     }
 
-    public static void printEachNumberMatchedCountMessage(LottoMatchType lottoMatchType,
-        Map<LottoMatchType, Integer> result) {
-        System.out.printf(lottoMatchType.getMatchCountMessage() + NEW_LINE,
-            result.get(lottoMatchType));
+    public static void printEachNumberMatchedCountMessage(LottoMatchType lottoMatchType, Map<LottoMatchType, Integer> result) {
+        System.out.printf(MATCH_MESSAGE + NEW_LINE,
+            lottoMatchType.getCountMatchedNumbers(), lottoMatchType.getPrizeMoney(), result.get(lottoMatchType));
     }
 
     public static void printProfitMessage(double profit) {
