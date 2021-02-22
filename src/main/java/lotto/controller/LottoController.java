@@ -24,7 +24,7 @@ public class LottoController {
 
     private LottoTicket getLottoTicket() {
         Money money = new Money(InputView.getMoney());
-        return LottoTicketGenerator.createLottoTicket(money.getValue());
+        return LottoTicketGenerator.getInstance().createLottoTicket(money.getValue());
     }
 
     private WinningNumbers getWinningNumbers() {
