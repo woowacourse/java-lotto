@@ -5,6 +5,8 @@ import lotto.domain.lottomachine.RandomLottoMachine;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.List;
+
 public class LottoController {
     private InputView inputView;
     private OutputView outputView;
@@ -19,6 +21,7 @@ public class LottoController {
         Ticket ticket = buyTicket();
 
         getManualCount(ticket);
+        getManualLottoNumbers(ticket,lottoService);
 
         outputView.printBuyTicket(ticket.getCount());
         lottoService.generateLottos(ticket);
@@ -56,6 +59,22 @@ public class LottoController {
     private void tryGetManualCount(Ticket ticket) {
         outputView.printMessage("수동으로 구매할 로또 수를 입력해 주세요");
         ticket.setManualCount(inputView.getInt());
+    }
+
+    private void getManualLottoNumbers(Ticket ticket, LottoService lottoService) {
+        try {
+            outputView.printMessage("수동으로 구매할 번호를 입력해 주세요.");
+            for (int i = 0; i < ticket.getManualCount(); i++) {
+                getManualLottoNumber(inputView.getWinningNumbers(), lottoService);
+            }
+        } catch (IllegalArgumentException e) {
+            outputView.printMessage(e.getMessage());
+            getManualCount(ticket);
+        }
+    }
+
+    private void getManualLottoNumber(List<Integer> lottoNumbers, LottoService lottoService) {
+        lottoService.generateManualLotto(Lotto.createByInteger(lottoNumbers));
     }
 
     private WinningLotto getWinningLotto() {
