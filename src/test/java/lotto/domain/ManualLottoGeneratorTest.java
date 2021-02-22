@@ -12,6 +12,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 class ManualLottoGeneratorTest {
     private static ManualLottoGenerator manualLottoGenerator;
 
+    //TODO:
+    // test fixture
     public static Lotto createCustomLotto(String customNumbers) {
         int[] numbers = convertStringsToInts(customNumbers.split(", "));
         return new ManualLottoGenerator(numbers).createLotto();

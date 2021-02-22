@@ -13,34 +13,43 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoStatisticsTest {
     private WinningLotto winningLotto;
+    private Lottos lottos;
 
     @BeforeEach
     void setUp() {
+        Lotto lotto1 = new Lotto(Arrays.asList(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(20),
+                new LottoNumber(21),
+                new LottoNumber(40))); //FIFTH
+
+        Lotto lotto2 = new Lotto(Arrays.asList(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(20))); //SECOND
+
+        lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto2));
         winningLotto = createCustomWinningLotto("1, 2, 3, 4, 5, 6", "20");
     }
 
     @DisplayName("결과 값을 통계 리스트로 반환")
     @Test
     void getWinCountByRank() {
-        Lotto lotto1 = createCustomLotto("1, 2, 3, 20, 21, 40"); // FIFTH
-        Lotto lotto2 = createCustomLotto("1, 2, 3, 4, 5, 20"); // SECOND
-        Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2));
-
         List<Rank> ranks = lottos.getResults(winningLotto);
-        LottoStatistics lottoStatistics = new LottoStatistics(ranks, new Money(2999));
+        LottoStatistics lottoStatistics = new LottoStatistics(ranks, new Money(3999));
 
         List<Integer> numberOfWinByRank = lottoStatistics.getWinCountByRank();
-        assertThat(numberOfWinByRank).isEqualTo(Arrays.asList(1, 0, 0, 1, 0));
+        assertThat(numberOfWinByRank).isEqualTo(Arrays.asList(1, 0, 0, 2, 0));
     }
 
     @DisplayName("총 수익률 계산")
     @Test
     void getTotalProfit() {
-        Lotto lotto1 = createCustomLotto("1, 2, 3, 20, 21, 40"); // FIFTH
-        Lotto lotto2 = createCustomLotto("1, 2, 3, 4, 5, 20"); // SECOND
-        Lotto lotto3 = createCustomLotto("1, 2, 3, 4, 5, 20"); // SECOND
-        Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3));
-
         List<Rank> ranks = lottos.getResults(winningLotto);
         LottoStatistics lottoStatistics = new LottoStatistics(ranks, new Money(3999));
 
