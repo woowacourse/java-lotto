@@ -46,9 +46,8 @@
 - [x] 숫자를 나눌 delimiter(,) 와 trim() 처리
 - [x] 사용자로부터 받은 번호가 정렬되지 않은 경우
 - [x] null이 아닌 enter가 입력된 경우 예외처리
-- [ ] 로또 티켓 가격이 바뀔 경우
-- [ ] Price의 역할 분리 고려
-- [ ] 가격 integer 최댓값 넘어가는 오버플로우 상황 고려
+- [x] 로또 티켓 가격이 바뀔 경우
+- [x] 가격 integer 최댓값 넘어가는 오버플로우 상황 고려
 - [ ] Prize 캐싱 여부
 - [ ] LottoMoney value long으로 변경
 - [ ] map을 이용한 for문 stream으로 변경 (WinningStatics)
