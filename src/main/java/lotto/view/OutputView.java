@@ -18,24 +18,24 @@ public class OutputView {
     private static final String LOTTO_RESULT_OPEN = "[";
     private static final String LOTTO_RESULT_CLOSE = "]";
 
-    public static void getMessage(String message) {
+    public static void getMessage(final String message) {
         System.out.println(message);
     }
 
-    public static void printBuyLotto(int count) {
+    public static void printBuyLotto(final int count) {
         System.out.printf(BUY_LOTTO_MESSAGE, count);
     }
 
-    public static void printLottoResults(LottoRepository lottoRepository) {
-        StringBuilder log = new StringBuilder();
-        for (Lotto lotto : lottoRepository.toList()) {
+    public static void printLottoResults(final LottoRepository lottoRepository) {
+        final StringBuilder log = new StringBuilder();
+        for (final Lotto lotto : lottoRepository.toList()) {
             printLottoResult(log, lotto);
         }
         log.append(ENTER);
         System.out.print(log.toString());
     }
 
-    public static void printLottoResult(StringBuilder log, Lotto lotto) {
+    private static void printLottoResult(final StringBuilder log, final Lotto lotto) {
         log.append(LOTTO_RESULT_OPEN);
         String body = lotto.getNumbers().stream()
             .sorted()
@@ -45,18 +45,18 @@ public class OutputView {
         log.append(LOTTO_RESULT_CLOSE).append(ENTER);
     }
 
-    public static void printWinningStats(RatingInfo ratingInfo, double rate) {
+    public static void printWinningStats(final RatingInfo ratingInfo, double rate) {
         printWinningDetail(ratingInfo);
         printEarningRate(rate);
     }
 
-    private static void printWinningDetail(RatingInfo ratingInfo) {
+    private static void printWinningDetail(final RatingInfo ratingInfo) {
         System.out.println(WINNING_DETAIL_HEADER);
         System.out.println(getWinningDetail(ratingInfo));
     }
 
-    public static String getWinningDetail(RatingInfo ratingInfo) {
-        StringBuilder log = new StringBuilder();
+    private static String getWinningDetail(final RatingInfo ratingInfo) {
+        final StringBuilder log = new StringBuilder();
         for (Rating rating : Rating.values()) {
             if (rating == Rating.MISS) {
                 break;
@@ -66,7 +66,7 @@ public class OutputView {
         return log.toString();
     }
 
-    public static String appendWinningRatingLog(final Rating rating, final int count) {
+    private static String appendWinningRatingLog(final Rating rating, final int count) {
         if (rating == Rating.SECOND) {
             return String
                 .format(SECOND_PRINT_FORMAT, rating.getMatchCount(), rating.getReward(), count);
@@ -75,7 +75,7 @@ public class OutputView {
             .format(PRINT_FORMAT, rating.getMatchCount(), rating.getReward(), count);
     }
 
-    private static void printEarningRate(double rate) {
+    private static void printEarningRate(final double rate) {
         System.out.printf(TOTAL_EARNING_RATE_MESSAGE, rate);
     }
 }
