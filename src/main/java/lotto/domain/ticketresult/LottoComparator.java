@@ -33,16 +33,14 @@ public class LottoComparator {
 
     public Map<LottoMatchType, Integer> getLottoResult(PurchasedLottoTickets purchasedLottoTickets) {
         for (LottoTicket purchasedOneLottoTicket : purchasedLottoTickets.getTickets()) {
-            int countMatchedNumbers
-                = getEachLottoResult(purchasedOneLottoTicket,
-                winningLottoNumbers.getWinningTicket());
+            int countMatchedNumbers = getEachLottoResult(purchasedOneLottoTicket);
             addResult(countMatchedNumbers, purchasedOneLottoTicket);
         }
         return Collections.unmodifiableMap(new HashMap<>(lottoResult));
     }
 
-    private int getEachLottoResult(LottoTicket purchasedOneLottoTicket,
-        LottoTicket winningLottoTicket) {
+    private int getEachLottoResult(LottoTicket purchasedOneLottoTicket) {
+        LottoTicket winningLottoTicket = winningLottoNumbers.getWinningTicket();
 
         return (int) purchasedOneLottoTicket.getLottoTicketNumbers()
             .stream()
