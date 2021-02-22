@@ -57,4 +57,10 @@ public class Lotto {
     public boolean isContains(LottoNumber lottoNumber) {
         return numbers.contains(lottoNumber);
     }
+
+    public int match(Lotto lotto) {
+        return (int) numbers.stream()
+            .filter(number -> lotto.isContains(number))
+            .count();
+    }
 }

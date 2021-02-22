@@ -23,10 +23,7 @@ public class WinningLotto {
 
     public LottoRank match(Lotto userLotto) {
         boolean isMatchBonus = userLotto.isContains(bonus);
-        long numOfMatch = userLotto.getNumbers()
-            .stream()
-            .filter(lottoNumber -> winningLotto.isContains(lottoNumber))
-            .count();
+        int numOfMatch = userLotto.match(winningLotto);
         return LottoRank.valueOf(numOfMatch, isMatchBonus);
     }
 }
