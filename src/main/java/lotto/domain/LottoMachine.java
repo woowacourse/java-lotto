@@ -3,7 +3,7 @@ package lotto.domain;
 public class LottoMachine {
     
     public Lottos purchase(PaymentAmount paymentAmount) {
-        return LottoFactory.makeLottos(paymentAmount);
+        return LottosFactory.makeLottos(paymentAmount);
     }
     
     public LottoStatisticResult seeResults(Lottos lottos, WinningLotto winningLotto) {
