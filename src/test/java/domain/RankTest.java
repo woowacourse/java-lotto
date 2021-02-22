@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RankTest {
-    @DisplayName("맞춘 개수에 맞는 Rank 객체 리턴 테스트")
+    @DisplayName("로또 번호를 맞춘 개수에 맞는 Rank 객체가 리턴되는지 테스트한다.")
     @Test
     public void rankFromTest() {
         Rank rank = Rank.from(6, false);

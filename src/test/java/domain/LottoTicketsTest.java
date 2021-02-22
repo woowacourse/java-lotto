@@ -8,7 +8,7 @@ import java.util.Arrays;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTicketsTest {
-    @DisplayName("전체 로또 티켓을 반환한다.")
+    @DisplayName("LottoTickets는 LottoTicket 리스트를 인자로 받아 생성된다.")
     @Test
     public void createLottoTickets() {
         LottoTickets lottoTickets = new LottoTickets(Arrays.asList(

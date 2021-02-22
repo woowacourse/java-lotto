@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTicketTest {
-    @DisplayName("로또 번호 생성을 테스트한다.")
+    @DisplayName("로또 티켓 생성을 테스트한다.")
     @Test
     public void createLottoTicketTest() {
         LottoTicket lottoTicket = LottoTicket.valueOf(Arrays.asList("1", "2", "3", "4", "5", "6"));

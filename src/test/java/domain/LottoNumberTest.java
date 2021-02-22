@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoNumberTest {
-    @DisplayName("같은 숫자인 경우 정상 처리된다")
+    @DisplayName("두 객체가 같은 숫자를 담는 경우 equals 메소드는 두 객체에 대해 true를 리턴한다.")
     @Test
     public void isEqualsTest() {
         LottoNumber first = new LottoNumber("1");
@@ -16,7 +16,7 @@ public class LottoNumberTest {
         assertThat(first).isEqualTo(second);
     }
 
-    @DisplayName("다른 숫자인 경우 예외 처리된다")
+    @DisplayName("두 객체가 다른 숫자를 담는 경우 equals 메소드는 두 객체에 대해 false를 리턴한다.")
     @Test
     public void isNotEqualsTest() {
         LottoNumber first = new LottoNumber("1");
@@ -25,19 +25,19 @@ public class LottoNumberTest {
         assertThat(first).isNotEqualTo(second);
     }
 
-    @DisplayName("45를 초과한 수가 입력될 경우 예외를 발생시킨다.")
+    @DisplayName("생성자에 45를 초과한 수가 입력될 경우 예외를 발생시킨다.")
     @Test
     public void validateNumberRangeTest() {
         assertThatThrownBy( () -> new LottoNumber("46")).isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("음수가 입력된 경우 예외를 발생시킨다.")
+    @DisplayName("생성자에 음수가 입력된 경우 예외를 발생시킨다.")
     @Test
     public void validateNegativeNumberRangeTest() {
         assertThatThrownBy( () -> new LottoNumber("-1")).isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("숫자가 아닌 경우 예외를 발생시킨다.")
+    @DisplayName("생성자 인자에 숫자가 아닌 값이 넘겨진 경우 예외를 발생시킨다.")
     @Test
     public void validateNumberTest() {
         assertThatThrownBy( () -> new LottoNumber("a")).isInstanceOf(IllegalArgumentException.class);
