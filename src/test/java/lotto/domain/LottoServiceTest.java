@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,6 +38,15 @@ public class LottoServiceTest {
         assertThat(lottos.get(0)
                          .getNumbers()).isEqualTo(lottoNumbers);
         assertThat(lottos.size()).isEqualTo(14);
+    }
+
+    @Test
+    @DisplayName("수동 로또 구매하기")
+    void manualLottoCheck() {
+        List<Integer> expected = Arrays.asList(1,2,3,4,5,6);
+        Lotto lotto = Lotto.createByInteger(expected);
+        lottoService.generateManualLotto(lotto);
+        assertThat(lottoService.getLottos().get(0).getNumbers()).isEqualTo(expected);
     }
 
     @Test

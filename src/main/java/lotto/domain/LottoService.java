@@ -15,8 +15,12 @@ public class LottoService {
         this.lottoMachine = lottoMachine;
     }
 
+    public void generateManualLotto(Lotto lotto) {
+        lottos.add(lotto);
+    }
+
     public void generateLottos(Ticket ticket) {
-        for (int i = 0; i < ticket.getCount(); i++) {
+        for (int i = 0; i < ticket.getRandomCount(); i++) {
             lottos.add(new Lotto(lottoMachine.generate()));
         }
     }
