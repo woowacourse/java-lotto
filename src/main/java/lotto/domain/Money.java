@@ -56,4 +56,8 @@ public class Money {
     public long getValue() {
         return value;
     }
+
+    public int getPurchaseCount() {
+        return (int) value / LOTTO_PRICE;
+    }
 }

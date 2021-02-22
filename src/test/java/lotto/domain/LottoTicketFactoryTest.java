@@ -10,7 +10,7 @@ public class LottoTicketFactoryTest {
     @DisplayName("입력받은 금액만큼 티켓 생성")
     void createLottoTickets() {
         LottoTicketFactory lottoTicketFactory = new LottoTicketFactory();
-        assertThat(lottoTicketFactory.buyLottoTickets(new Money(10000))
+        assertThat(lottoTicketFactory.generateLottoTickets(10)
                 .lottoTickets().size()).isEqualTo(10);
     }
 }

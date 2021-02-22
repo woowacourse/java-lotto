@@ -6,7 +6,6 @@ import lotto.view.OutputView;
 
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
-import static lotto.domain.Money.LOTTO_PRICE;
 
 public class LottoController {
     private final LottoTicketFactory lottoTicketFactory;
@@ -18,8 +17,9 @@ public class LottoController {
     public void run() {
         Money inputMoney = new Money(InputView.inputMoney());
         String inputManualLottoCount = InputView.inputManualLottoCount();
-        LottoCount lottoCount = new LottoCount(inputManualLottoCount, (int) inputMoney.getValue() / LOTTO_PRICE);
-        LottoTickets lottoTickets = lottoTicketFactory.buyLottoTickets(inputMoney);
+        int totalLottoCount = inputMoney.getPurchaseCount();
+        LottoCount lottoCount = new LottoCount(inputManualLottoCount, totalLottoCount);
+        LottoTickets lottoTickets = lottoTicketFactory.generateLottoTickets(lottoCount.getAutoLottoCount());
         WinningLotto winningLotto = getWinningLotto(lottoTickets);
         showResult(lottoTickets, winningLotto);
     }
