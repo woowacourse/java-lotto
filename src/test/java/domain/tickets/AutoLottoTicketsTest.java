@@ -12,7 +12,7 @@ class AutoLottoTicketsTest {
     @DisplayName("객체 생성 성공")
     @Test
     void create_validInput_success() {
-        final LottoMoney lottoMoney = LottoMoney.valueOf("14000");
+        final LottoMoney lottoMoney = new LottoMoney("14000");
         final int expectedQuantity = 14;
 
         assertAll(

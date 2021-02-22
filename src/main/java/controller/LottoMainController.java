@@ -26,7 +26,7 @@ public class LottoMainController {
 
     private LottoMoney inputLottoMoney() {
         String input = InputView.receivePurchaseAmount();
-        return LottoMoney.valueOf(input);
+        return new LottoMoney(input);
     }
 
     private AutoLottoTickets buyLottoTickets(final LottoMoney lottoMoney) {

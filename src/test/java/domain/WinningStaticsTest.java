@@ -39,7 +39,7 @@ class WinningStaticsTest {
                 .sum();
         final WinningStatics winningStatics = new WinningStatics(prizes);
 
-        final double profitRate = winningStatics.calculateProfitRate(LottoMoney.valueOf(String.valueOf(money)));
+        final double profitRate = winningStatics.calculateProfitRate(new LottoMoney(String.valueOf(money)));
         assertThat(profitRate).isEqualTo((double) totalProfit / money);
     }
 }

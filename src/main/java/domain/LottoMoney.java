@@ -8,7 +8,7 @@ public class LottoMoney {
 
     private final int value;
 
-    private LottoMoney(final String value) {
+    public LottoMoney(final String value) {
         validate(value);
         this.value = Integer.parseInt(value);
     }
@@ -21,10 +21,6 @@ public class LottoMoney {
         validatePositiveInteger(number);
         validateRange(number);
         validateDivisible(number);
-    }
-
-    public static LottoMoney valueOf(final String value) {
-        return new LottoMoney(value);
     }
 
     private void validateRange(final int value) {
