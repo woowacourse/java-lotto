@@ -1,8 +1,9 @@
 package lotto.lottoticket;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class WinnerTicket {
     private static final String COMMA_DELIMITER = ",";
@@ -14,11 +15,9 @@ public class WinnerTicket {
     }
 
     private List<LottoNumber> splitNumbers(String values) {
-        List<LottoNumber> numbers = new ArrayList<>();
-        for (String value : values.split(COMMA_DELIMITER)) {
-            numbers.add(makeValidatedNumber(value));
-        }
-        return makeValidatedNumbers(numbers);
+        return Arrays.stream(values.split(COMMA_DELIMITER))
+                .map(this::makeValidatedNumber)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), this::makeValidatedNumbers));
     }
 
     private LottoNumber makeValidatedNumber(String value) {
