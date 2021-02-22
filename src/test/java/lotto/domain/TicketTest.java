@@ -14,4 +14,12 @@ public class TicketTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("원 이상");
     }
+
+    @Test
+    @DisplayName("수동 구매가 전체 티켓 수를 넘을 때")
+    void validateManualTicket() {
+        Ticket ticket = new Ticket(new Money(14000));
+        assertThatThrownBy(() -> ticket.setManualCount(15)).isInstanceOf(IllegalArgumentException.class)
+                                                           .hasMessageContaining("수동 로또");
+    }
 }
