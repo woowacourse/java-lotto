@@ -29,6 +29,7 @@ public class LottoNumberTest {
     }
 
     @Test
+    @DisplayName("같은 숫자면 같은 LottoNumber 로 판단")
     void lottoNumber() {
         assertThat(new LottoNumber(5)).isEqualTo(new LottoNumber(5));
     }
