@@ -3,7 +3,7 @@ package lotto.domain;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -12,12 +12,18 @@ public class Result {
     private final BigInteger earningRate;
 
     public Result(String winnings, String bonus, LottoTickets lottoTickets) {
-        this.resultMap = new HashMap<>();
+        this.resultMap = new EnumMap<>(Rank.class);
         setResultMap(new WinningNumbers(winnings, bonus), lottoTickets);
         BigDecimal prizePerRank = getTotalPrizePerRank();
         this.earningRate = getEarningRate(lottoTickets.size() * LottoTicket.PRICE, prizePerRank);
     }
 
+    private void setResultMap(WinningNumbers winningNumbers, LottoTickets lottoTickets) {
+        for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
+            Rank rank = winningNumbers.getRank(lottoTicket);
+            resultMap.put(rank, resultMap.getOrDefault(rank, 0) + 1);
+        }
+    }
 
     private BigInteger getEarningRate(int buyPrice, BigDecimal prizePerRank) {
         return (prizePerRank
@@ -34,12 +40,6 @@ public class Result {
         return prizePerRank;
     }
 
-    private void setResultMap(WinningNumbers winningNumbers, LottoTickets lottoTickets) {
-        for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
-            Rank rank = winningNumbers.getRank(lottoTicket);
-            resultMap.put(rank, resultMap.getOrDefault(rank, 0) + 1);
-        }
-    }
 
     public Map<Rank, Integer> getResultMap() {
         return Collections.unmodifiableMap(resultMap);

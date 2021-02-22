@@ -23,7 +23,20 @@ src/main/java/lotto/domain/Result.java
 
 src/main/java/lotto/domain/Result.java
 
-- [ ] EnumMap 공부하여 활용해보기
+- [x] EnumMap 공부하여 활용해보기
+  * EnumMap 공부    
+    단순히 HashMap을 EnumMap으로 바꾸는 것 이외에 아무 차이가 없어 보였기에 어떤 효과가 있을지 공부해보았다.
+    ```
+    1. Performance
+    : performance optimization, like a quicker hash computation since all possible keys are known in advance.  
+    2. Functionality
+    : EnumMap is an ordered map, in that its views will iterate in enum order.
+    
+    출처:https://www.baeldung.com/java-enum-map
+    ```
+    Key 값으로 가지고 있기 위해서는 hashing 작업이 이루어지는데 EnumMap은 이미 알고있는 키이기 때문에 빠른 해싱이 가능하다고 한다. 정확한 내부구현은 어려운 듯
+    싶으니 해싱이 간편해진다는 요점을 알자.    
+    또다른 기능은 EnumMap은 orderedMap이다. Enum에 명시된 순서를 유지한다.
 
 src/main/java/lotto/utils/FixedLottoGenerator.java
 
