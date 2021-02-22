@@ -29,21 +29,13 @@ public class Ticket {
     }
 
     public boolean hasContainBonus(BonusBall bonusBall) {
-        for (Number number : numbers) {
-            if (bonusBall.isSameThan(number)) {
-                return true;
-            }
-        }
-        return false;
+        return numbers.stream()
+                .anyMatch(bonusBall::isSameThan);
     }
 
     public boolean contains(Number value) {
-        for (Number number : numbers) {
-            if (number.equals(value)) {
-                return true;
-            }
-        }
-        return false;
+        return numbers.stream()
+                .anyMatch(value::equals);
     }
 
     public int sameNumberCount(Ticket winnerTicket) {
