@@ -51,4 +51,16 @@ public class MoneyTest {
 
         assertThat(moneyInvested.calculateProfitRate(profit)).isEqualTo((float) 10_000 / 2_000);
     }
+
+    //TODO
+    // validateAffordability test
+    // calculateMoneyLeft test
+    @DisplayName("수동 로또 구매 후 잔돈 계산 제대로 하는지")
+    @Test
+    void calculateMoneyLeft() {
+        Money money = new Money(5540);
+        int manualLottoQuantity = 3;
+
+        assertThat(money.calculateMoneyLeft(manualLottoQuantity)).isEqualTo(new Money(2540));
+    }
 }
