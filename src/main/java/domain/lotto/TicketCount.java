@@ -15,13 +15,13 @@ public class TicketCount {
         return new TicketCount(lottoCount);
     }
 
+    public int getTicketCount() {
+        return ticketCount;
+    }
+
     private void validateLottoCount(final int lottoCount) {
         if (lottoCount <= ZERO) {
             throw new IllegalArgumentException(String.format(TICKET_MINIMUM_SIZE_EXCEPTION_MESSAGE, lottoCount));
         }
-    }
-
-    public int getTicketCount() {
-        return ticketCount;
     }
 }

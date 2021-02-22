@@ -21,12 +21,6 @@ public class Result {
         setResult();
     }
 
-    private Map<LottoRank, Integer> setResult() {
-        List<LottoRank> lottoRanks = lottoTickets.findMatches(winningLotto);
-        lottoRanks.forEach(this::putResult);
-        return results;
-    }
-
     public BigDecimal findEarningsRate(BettingMoney bettingMoney) {
         int prize = results.entrySet().stream()
                 .map(Map.Entry::getKey)
@@ -35,15 +29,21 @@ public class Result {
         return bettingMoney.getEarningRate(prize);
     }
 
+    public Map<LottoRank, Integer> getResults() {
+        return results;
+    }
+
+    private Map<LottoRank, Integer> setResult() {
+        List<LottoRank> lottoRanks = lottoTickets.findMatches(winningLotto);
+        lottoRanks.forEach(this::putResult);
+        return results;
+    }
+
     private void putResult(final LottoRank lottoRank) {
         if (!results.containsKey(lottoRank)) {
             results.put(lottoRank, 1);
             return;
         }
         results.put(lottoRank, results.get(lottoRank) + 1);
-    }
-
-    public Map<LottoRank, Integer> getResults() {
-        return results;
     }
 }

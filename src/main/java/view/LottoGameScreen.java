@@ -30,18 +30,6 @@ public class LottoGameScreen {
                 .forEach(lottoTicket -> showTicketStatus(lottoTicket));
     }
 
-    private void showTicketStatus(final LottoTicket lottoTicket) {
-        String lottoStatus = makeSingleLottoTicketStatus(lottoTicket.getLottoBalls());
-        OutputUtil.printMessage(lottoStatus);
-    }
-
-    private String makeSingleLottoTicketStatus(final List<LottoBall> lottoBalls) {
-        List<String> status = lottoBalls.stream()
-                .map(lottoBall -> String.valueOf(lottoBall.getValue()))
-                .collect(Collectors.toList());
-        return LOTTO_PREFIX + String.join(DELIMITER, status) + LOTTO_POSTFIX;
-    }
-
     public void confirmWinningLotto() {
         OutputUtil.printMessage(WINNING_LOTTO_CONFIRMATION);
     }
@@ -54,6 +42,22 @@ public class LottoGameScreen {
         OutputUtil.printMessage(RESULT);
         OutputUtil.printMessage(LINE);
         showMatchesResult(lottoGameResultDto);
+    }
+
+    public void showRevenueResult(BigDecimal earningsRate) {
+        OutputUtil.printMessage(String.format(REVENUE_RESULT_FORMATTER, earningsRate.doubleValue()));
+    }
+
+    private void showTicketStatus(final LottoTicket lottoTicket) {
+        String lottoStatus = makeSingleLottoTicketStatus(lottoTicket.getLottoBalls());
+        OutputUtil.printMessage(lottoStatus);
+    }
+
+    private String makeSingleLottoTicketStatus(final List<LottoBall> lottoBalls) {
+        List<String> status = lottoBalls.stream()
+                .map(lottoBall -> String.valueOf(lottoBall.getValue()))
+                .collect(Collectors.toList());
+        return LOTTO_PREFIX + String.join(DELIMITER, status) + LOTTO_POSTFIX;
     }
 
     private void showMatchesResult(LottoGameResultDto lottoGameResultDto) {
@@ -78,9 +82,4 @@ public class LottoGameScreen {
         }
         return count;
     }
-
-    public void showRevenueResult(BigDecimal earningsRate) {
-        OutputUtil.printMessage(String.format(REVENUE_RESULT_FORMATTER, earningsRate.doubleValue()));
-    }
 }
-

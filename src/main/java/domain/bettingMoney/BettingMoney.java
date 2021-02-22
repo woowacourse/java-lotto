@@ -18,12 +18,6 @@ public class BettingMoney {
         return new BettingMoney(bettingMoney);
     }
 
-    private void validateMoney(final int bettingMoney) {
-        if (bettingMoney < TICKET_PRICE) {
-            throw new IllegalArgumentException(String.format(NOT_ENOUGH_MONEY_EXCEPTION_MESSAGE, TICKET_PRICE, bettingMoney));
-        }
-    }
-
     public int getTicketCount() {
         return this.bettingMoney / TICKET_PRICE;
     }
@@ -32,5 +26,11 @@ public class BettingMoney {
         BigDecimal bettingMoney = BigDecimal.valueOf(this.bettingMoney);
         BigDecimal prize = BigDecimal.valueOf(prizeMoney);
         return prize.divide(bettingMoney);
+    }
+
+    private void validateMoney(final int bettingMoney) {
+        if (bettingMoney < TICKET_PRICE) {
+            throw new IllegalArgumentException(String.format(NOT_ENOUGH_MONEY_EXCEPTION_MESSAGE, TICKET_PRICE, bettingMoney));
+        }
     }
 }

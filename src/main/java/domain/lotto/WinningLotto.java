@@ -23,6 +23,10 @@ public class WinningLotto {
         this.bonusBall = makeBonusBall(bonusNumber);
     }
 
+    public LottoRank winningMatchCount(final LottoBalls lottoBalls) {
+        return lottoBalls.matchCount(this.winningBalls, bonusBall);
+    }
+
     private LottoBalls makeWinningBalls(Set<Integer> winningNumbers) {
         List<LottoBall> lottoBalls = winningNumbers.stream()
                 .map(LottoBall::new)
@@ -44,9 +48,5 @@ public class WinningLotto {
         if (winningNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException(String.format(DUPLICATE_BONUS_NUMBER_EXCEPTION_MESSAGE, bonusNumber));
         }
-    }
-
-    public LottoRank winningMatchCount(final LottoBalls lottoBalls) {
-        return lottoBalls.matchCount(this.winningBalls, bonusBall);
     }
 }

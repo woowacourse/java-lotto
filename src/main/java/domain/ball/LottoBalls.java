@@ -34,6 +34,22 @@ public class LottoBalls {
                 .collect(Collectors.toList());
     }
 
+    public List<LottoBall> getLottoBalls() {
+        List<LottoBall> copy = new ArrayList<>(this.lottoBalls);
+        return Collections.unmodifiableList(copy);
+    }
+
+    public LottoRank matchCount(LottoBalls lottoBalls, LottoBall bonusBall) {
+        int count = (int) this.lottoBalls.stream()
+                .filter(lottoBalls::contains)
+                .count();
+
+        boolean containBonus = this.lottoBalls.stream()
+                .anyMatch(bonusBall::equals);
+
+        return LottoRank.findRankByBonusAndMatches(containBonus, count);
+    }
+
     private void validateLottoNumbers(final List<LottoBall> lottoBalls) {
         validateDuplicate(lottoBalls);
         validateSize(lottoBalls);
@@ -51,22 +67,6 @@ public class LottoBalls {
         if (lottoNumbers.size() != LOTTO_BALL_SIZE) {
             throw new IllegalArgumentException(String.format("%d개의 로또 번호가 필요합니다.", LOTTO_BALL_SIZE));
         }
-    }
-
-    public List<LottoBall> getLottoBalls() {
-        List<LottoBall> copy = new ArrayList<>(this.lottoBalls);
-        return Collections.unmodifiableList(copy);
-    }
-
-    public LottoRank matchCount(LottoBalls lottoBalls, LottoBall bonusBall) {
-        int count = (int) this.lottoBalls.stream()
-                .filter(lottoBalls::contains)
-                .count();
-
-        boolean containBonus = this.lottoBalls.stream()
-                .anyMatch(bonusBall::equals);
-
-        return LottoRank.findRankByBonusAndMatches(containBonus, count);
     }
 
     private boolean contains(LottoBall lottoBall) {

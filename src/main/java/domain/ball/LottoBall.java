@@ -54,4 +54,3 @@ public class LottoBall implements Comparable<LottoBall> {
         return value + " ";
     }
 }
-
