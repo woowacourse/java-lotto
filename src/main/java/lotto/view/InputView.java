@@ -29,7 +29,7 @@ public class InputView {
 	}
 
 	public static int takeManualLottoQuantityInput(Scanner scanner) {
-		System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+		System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
 		String manualLottoQuantity = scanner.nextLine();
 		validateIntegerNumber(manualLottoQuantity);
 		System.out.println();
