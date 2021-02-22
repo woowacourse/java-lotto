@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.IllegalManualLottoAmountException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,5 +14,13 @@ public class ManualLottoAmountTest {
     void create() {
         ManualLottoAmount manualLottoAmount = new ManualLottoAmount("5", 7);
         assertThat(manualLottoAmount.getValue()).isEqualTo(5);
+    }
+
+    @DisplayName("숫자형식 오류 검증")
+    @Test
+    void validate() {
+        assertThatThrownBy(() -> new ManualLottoAmount("a", 7))
+                .isInstanceOf(IllegalManualLottoAmountException.class)
+                .hasMessage("a : 올바른 형식이 아닙니다.");
     }
 }
