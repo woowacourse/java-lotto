@@ -3,13 +3,7 @@ package lotto;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoResult;
-import lotto.domain.Money;
-import lotto.domain.Rank;
-import lotto.domain.Seller;
-import lotto.domain.WinningLotto;
+import lotto.domain.*;
 import lotto.view.LottoView;
 
 public class Application {
@@ -37,7 +31,7 @@ public class Application {
         for (Lotto lotto : lottos) {
             Rank rank = winningLotto.findRank(lotto);
             int rankCount = ranks.get(rank);
-            ranks.put(rank, rankCount+1);
+            ranks.put(rank, rankCount + 1);
         }
         LottoResult lottoResult = new LottoResult(ranks);
         LottoView.displayResultMessage();

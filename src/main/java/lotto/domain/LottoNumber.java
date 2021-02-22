@@ -40,8 +40,12 @@ public class LottoNumber {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         LottoNumber lottoNumber = (LottoNumber) o;
         return Objects.equals(number, lottoNumber.number);
     }

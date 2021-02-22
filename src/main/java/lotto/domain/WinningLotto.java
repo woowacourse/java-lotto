@@ -20,6 +20,7 @@ public class WinningLotto {
             throw new IllegalArgumentException(DUPLICATED_NUMBER_ERROR);
         }
     }
+
     private int howManyWins(Lotto lotto) {
         List<LottoNumber> wins = new ArrayList<>(winLotto.getLottoNumbers());
         wins.retainAll(lotto.getLottoNumbers());
