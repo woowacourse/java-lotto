@@ -13,7 +13,7 @@ public class RandomNumbersGenerator implements NumbersGenerator {
     public static final int MAXIMUM_NUMBER = 45;
     public static final int NUMBER_COUNT_IN_LOTTO = 6;
 
-    private static final List<Integer> NUMBERS_IN_RANGE =
+    private final List<Integer> NUMBERS_IN_RANGE =
             IntStream.rangeClosed(MINIMUM_NUMBER, MAXIMUM_NUMBER)
                     .boxed()
                     .collect(Collectors.toList());
