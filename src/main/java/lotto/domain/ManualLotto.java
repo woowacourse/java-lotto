@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class ManualLotto {
 
-    List<Lotto> manualLotto;
+    private List<Lotto> manualLotto;
 
     public ManualLotto(List<String> inputs) {
         this.manualLotto = makeManualLotto(inputs);
