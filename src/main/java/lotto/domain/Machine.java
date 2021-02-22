@@ -16,8 +16,7 @@ public class Machine {
     }
 
     public Result getResult(String winningNumbersValue, String bonusBallValue) {
-        WinningNumbers winningNumbers = new WinningNumbers(winningNumbersValue, bonusBallValue);
-        return new Result(winningNumbers, this.lottoTickets);
+        return new Result(winningNumbersValue, bonusBallValue, lottoTickets);
     }
 
 }

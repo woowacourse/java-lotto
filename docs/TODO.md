@@ -16,7 +16,10 @@ src/main/java/lotto/domain/Rank.java
 
 src/main/java/lotto/domain/Result.java
 
-- [ ] 매개변수가 많아진다면 Builder를 고민
+- [x] 매개변수가 많아진다면 Builder를 고민
+  * Builder를 사용하는데 대한 의견   
+    Builder를 구현해보았으나, 선택적 매개변수를 사용할 때 의미가 있는 것 같다. 결국 Result라는 객체는 WinningNumbers와 LottoTickets가
+    필수적으로 필요하기 때문에 Builder 패턴을 사용하면 오히려 필요한 정보가 누락되는 상황이 발생할 수 있다. 대신 생성자의 입력값을 더 간단하게 수정할 수 있었다.
 
 src/main/java/lotto/domain/Result.java
 

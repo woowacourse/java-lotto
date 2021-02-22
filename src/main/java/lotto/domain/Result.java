@@ -6,26 +6,18 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import lotto.utils.LottoGenerator;
 
 public class Result {
     private final Map<Rank, Integer> resultMap;
     private final BigInteger earningRate;
 
-    public Result(String winningNumbers, String bonusBall, int ticketCount,
-        LottoGenerator lottoGenerator) {
-        this(new WinningNumbers(winningNumbers, bonusBall),
-            new LottoTickets(ticketCount, lottoGenerator));
-    }
-
-    public Result(WinningNumbers winningNumbers, LottoTickets lottoTickets) {
+    public Result(String winnings, String bonus, LottoTickets lottoTickets) {
         this.resultMap = new HashMap<>();
-
-        setResultMap(winningNumbers, lottoTickets);
+        setResultMap(new WinningNumbers(winnings, bonus), lottoTickets);
         BigDecimal prizePerRank = getTotalPrizePerRank();
-
         this.earningRate = getEarningRate(lottoTickets.size() * LottoTicket.PRICE, prizePerRank);
     }
+
 
     private BigInteger getEarningRate(int buyPrice, BigDecimal prizePerRank) {
         return (prizePerRank

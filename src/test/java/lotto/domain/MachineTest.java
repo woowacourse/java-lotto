@@ -24,7 +24,8 @@ class MachineTest {
     @Test
     @DisplayName("결과 값 테스트")
     void getResult() {
-        Result result = new Result("1,2,3,4,5,6", "7", 3, new FixedLottoGenerator());
+        final LottoTickets lottoTickets = new LottoTickets(3, new FixedLottoGenerator());
+        Result result = new Result("1,2,3,4,5,6", "7", lottoTickets);
         Machine machine = new Machine("3000", new FixedLottoGenerator());
 
         assertThat(machine.getResult("1,2,3,4,5,6", "7")).isEqualTo(result);
