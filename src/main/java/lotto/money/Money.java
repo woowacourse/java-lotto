@@ -16,7 +16,8 @@ public class Money {
     }
 
     private int validate(String money) {
-        int value = TicketValidation.validateNumber(money);
+        TicketValidation.validateNumber(money);
+        int value = Integer.parseInt(money);
         checkMinimum(value);
         return value;
     }
@@ -27,8 +28,8 @@ public class Money {
         }
     }
 
-    public int divideMoney(int unit) {
-        return this.money / unit;
+    public String divideMoney(int unit) {
+        return String.valueOf(this.money / unit);
     }
 
     public String calculateProfit(int totalMoney) {

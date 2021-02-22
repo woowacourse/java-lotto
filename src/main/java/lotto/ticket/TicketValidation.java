@@ -1,7 +1,9 @@
 package lotto.ticket;
 
+import java.util.Arrays;
 import java.util.List;
 
+import static lotto.game.LottoCount.ZERO;
 import static lotto.ticket.strategy.RandomNumbersGenerator.*;
 
 public class TicketValidation {
@@ -10,11 +12,15 @@ public class TicketValidation {
     public static final String ERROR_MESSAGE_INVALID_SIZE = "숫자는 6개여야 합니다.";
     public static final String ERROR_MESSAGE_INVALID_RANGE = "숫자는 1부터 45사이여야 합니다.";
 
-    public static Integer validateNumber(String number) {
-        try {
-            return Integer.parseInt(number);
-        } catch (NumberFormatException e) {
+    public static void validateNumber(String value) {
+        if (value.length() == ZERO) {
             throw new IllegalArgumentException(ERROR_MESSAGE_INVALID_INPUT);
+        }
+        for (int i = 0; i < value.length(); i++) {
+            char number = value.charAt(i);
+            if (!Character.isDigit(number)) {
+                throw new IllegalArgumentException(ERROR_MESSAGE_INVALID_INPUT);
+            }
         }
     }
 

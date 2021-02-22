@@ -1,6 +1,7 @@
 package lotto.game;
 
 import lotto.money.Money;
+import lotto.ticket.TicketValidation;
 
 import java.util.Objects;
 
@@ -15,8 +16,9 @@ public class LottoCount {
         this(money.divideMoney(LOTTO_PRICE));
     }
 
-    private LottoCount(int lottoCount) {
-        this.lottoCount = lottoCount;
+    public LottoCount(String count) {
+        TicketValidation.validateNumber(count);
+        this.lottoCount = Integer.parseInt(count);
     }
 
     public boolean isGreaterThanZero() {
@@ -24,7 +26,7 @@ public class LottoCount {
     }
 
     public LottoCount decreaseOne() {
-        return new LottoCount(lottoCount - ONE_COUNT);
+        return new LottoCount(String.valueOf(lottoCount - ONE_COUNT));
     }
 
     public int getLottoCount() {

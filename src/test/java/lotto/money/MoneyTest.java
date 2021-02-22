@@ -38,7 +38,7 @@ public class MoneyTest {
     void negativeAmount() {
         assertThatThrownBy(() ->
                 new Money("-1")
-        ).isInstanceOf(IllegalArgumentException.class).hasMessageContaining(ERROR_MESSAGE_MINIMUM_MONEY);
+        ).isInstanceOf(IllegalArgumentException.class).hasMessageContaining(ERROR_MESSAGE_INVALID_INPUT);
     }
 
     @Test

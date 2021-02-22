@@ -10,7 +10,8 @@ public class Number {
     }
 
     private int validate(String value) {
-        int number = TicketValidation.validateNumber(value);
+        TicketValidation.validateNumber(value);
+        int number = Integer.parseInt(value);
         TicketValidation.validateNumberInRange(number);
         return number;
     }
