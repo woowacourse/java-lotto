@@ -65,7 +65,7 @@ public class WinningLottoTest {
         assertThat(lottoResult).isEqualTo(LottoRank.FIFTH);
     }
 
-    @DisplayName("보너스 번호 테스트")
+    @DisplayName("보너스 번호 확인 테스트")
     @Test
     void 보너스_번호_확인_테스트() {
         // given, when
@@ -77,5 +77,18 @@ public class WinningLottoTest {
         // then
         LottoRank lottoResult = winningLotto.match(userLotto);
         assertThat(lottoResult).isEqualTo(LottoRank.SECOND);
+    }
+
+    @DisplayName("보너스 번호는 당첨 번호는 없는 번호여야한다.")
+    @Test
+    void 보너스_번호와_당첨_번호_다른지_확인_테스트() {
+        // given, when
+        Lotto winningLottoValue = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
+        int winningBonus = 6;
+
+        // then
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            WinningLotto winningLotto = new WinningLotto(winningLottoValue, winningBonus);
+        });
     }
 }
