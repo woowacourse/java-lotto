@@ -31,4 +31,8 @@ public class Lotto {
             throw new IllegalArgumentException("로또 번호가 중복됩니다");
         }
     }
+
+    public boolean contains(final LottoBall lottoBall) {
+        return lotto.contains(lottoBall);
+    }
 }
