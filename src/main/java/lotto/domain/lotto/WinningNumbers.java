@@ -19,7 +19,10 @@ public class WinningNumbers {
     }
 
     public Rank matchRank(List<LottoNumber> lottoNumbers) {
-        int matchCount = (int) lottoNumbers.stream().filter(lottoLine.getValue()::contains).count();
+        int matchCount = (int) lottoNumbers.stream()
+                .filter(lottoLine.getValue()::contains)
+                .count();
+
         boolean hasBonusNumber = lottoNumbers.contains(bonusNumber);
         return Rank.matchRank(matchCount, hasBonusNumber);
     }

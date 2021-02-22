@@ -15,13 +15,18 @@ public class LottoResult {
     }
 
     public int findNumberOfRank(Rank wantedRank) {
-        long count = rankList.stream().filter(rank -> rank.equals(wantedRank)).count();
+        long count = rankList.stream()
+                .filter(rank -> rank.equals(wantedRank))
+                .count();
+        
         return (int) count;
     }
 
     public float calculateProfitRate() {
         float totalWinMoney = Arrays.stream(Rank.values())
-                .mapToInt(rank -> findNumberOfRank(rank) * rank.getMoney()).sum();
+                .mapToInt(rank -> findNumberOfRank(rank) * rank.getMoney())
+                .sum();
+
         return totalWinMoney / getPurchaseTotalMoney();
     }
 
