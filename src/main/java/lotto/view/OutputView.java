@@ -8,8 +8,8 @@ import java.util.stream.Collectors;
 public class OutputView {
 
     public static final String LOTTO_PURCHASE_FORM = "수동으로 %d장, 자동으로 %d개를 구매했습니다." + System.lineSeparator();
-    public static final String RANK_BONUS_FORM = "%d개 일치, 보너스 볼 일치(%d원)- %d개" + System.lineSeparator();
-    public static final String RANK_FORM = "%d개 일치 (%d원)- %d개" + System.lineSeparator();
+    public static final String RANK_BONUS_FORM = "%s개 일치, 보너스 볼 일치(%s원)- %s개" + System.lineSeparator();
+    public static final String RANK_FORM = "%s개 일치 (%s원)- %s개" + System.lineSeparator();
     public static final String LOTTO_DELIMITER = ", ";
     public static final String LOTTO_FORM = "[%s]" + System.lineSeparator();
     public static final String PROFIT_FORM = "총 수익률은 %.2f 입니다." + System.lineSeparator();
@@ -21,7 +21,7 @@ public class OutputView {
         System.out.println(message);
     }
 
-    public static void printMessageByFormat(final String format, final Object... message) {
+    public static void printMessageByFormat(String format, Object... message) {
         System.out.printf(format, message);
     }
 
@@ -70,9 +70,9 @@ public class OutputView {
     }
 
     private static void printByRankForm(String rankBonusForm, Map.Entry<Rank, Integer> entry) {
-        int rank = entry.getKey().getCountOfMatch();
-        int reward = entry.getKey().getReward();
-        Integer matchCount = entry.getValue();
+        String rank = String.valueOf(entry.getKey().getCountOfMatch());
+        String reward = String.format("%.2f", entry.getKey().getReward());
+        String matchCount = String.valueOf(entry.getValue());
 
         printMessageByFormat(rankBonusForm, rank, reward, matchCount);
     }

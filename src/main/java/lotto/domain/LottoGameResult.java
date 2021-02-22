@@ -40,10 +40,10 @@ public class LottoGameResult {
                 .sum();
     }
 
-    private int calculateTotalPrice() {
-        int numberOfTotalLotto = resultMap.values()
+    private double calculateTotalPrice() {
+        double numberOfTotalLotto = resultMap.values()
                 .stream()
-                .mapToInt(num -> num)
+                .mapToDouble(num -> num)
                 .sum();
 
         return numberOfTotalLotto * Money.PRICE_OF_LOTTO;

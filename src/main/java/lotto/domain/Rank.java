@@ -12,9 +12,9 @@ public enum Rank {
     FIRST(6, 2_000_000_000);
 
     private int countOfMatch;
-    private int reward;
+    private double reward;
 
-    Rank(int countOfMatch, int reward) {
+    Rank(int countOfMatch, double reward) {
         this.countOfMatch = countOfMatch;
         this.reward = reward;
     }
@@ -23,7 +23,7 @@ public enum Rank {
         return this.countOfMatch;
     }
 
-    public int getReward() {
+    public double getReward() {
         return reward;
     }
 
