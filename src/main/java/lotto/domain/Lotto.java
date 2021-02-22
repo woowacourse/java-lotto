@@ -20,14 +20,14 @@ public class Lotto {
     }
 
     public static Lotto from(String inputNumbers) {
-        NullCheckNumbers(inputNumbers);
+        nullCheckNumbers(inputNumbers);
         String[] splittedNumbers = inputNumbers.split(DELIMITER);
         List<Integer> lottoNumbers = convertInputLottoNumbersToInteger(splittedNumbers);
         validateLottoNumbers(lottoNumbers);
         return new Lotto(lottoNumbers);
     }
 
-    private static void NullCheckNumbers(String inputNumbers) {
+    private static void nullCheckNumbers(String inputNumbers) {
         if (inputNumbers == null) {
             throw new LottoNumberNullException();
         }
@@ -39,7 +39,7 @@ public class Lotto {
                     .map(String::trim)
                     .map(Integer::parseInt)
                     .collect(Collectors.toList());
-        } catch (Exception e) {
+        } catch (LottoNumberCountException e) {
             throw new LottoNumberCountException();
         }
     }
