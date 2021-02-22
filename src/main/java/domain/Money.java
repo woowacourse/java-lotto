@@ -24,6 +24,11 @@ public class Money {
         this.money = money;
     }
 
+    public Money(long money) {
+        validatePositiveNumber(money);
+        this.money = money;
+    }
+
     private void validateInputFormat(String input) {
         if (input.matches(LONG_REGULAR_EXPRESSION)) {
             return;
