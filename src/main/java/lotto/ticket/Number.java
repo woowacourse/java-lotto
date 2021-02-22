@@ -2,7 +2,7 @@ package lotto.ticket;
 
 import java.util.Objects;
 
-public class Number {
+public class Number implements Comparable<Number> {
     private final int number;
 
     public Number(String value) {
@@ -14,6 +14,11 @@ public class Number {
         int number = Integer.parseInt(value);
         TicketValidation.validateNumberInRange(number);
         return number;
+    }
+
+    @Override
+    public int compareTo(Number o) {
+        return Integer.compare(this.number, o.number);
     }
 
     @Override

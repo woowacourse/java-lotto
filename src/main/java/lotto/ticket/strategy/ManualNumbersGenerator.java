@@ -22,6 +22,7 @@ public class ManualNumbersGenerator implements NumbersGenerator {
 
     @Override
     public List<Number> generate() {
+        Collections.sort(ticket);
         return Collections.unmodifiableList(ticket);
     }
 }
