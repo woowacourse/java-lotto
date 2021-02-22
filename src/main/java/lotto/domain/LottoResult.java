@@ -5,11 +5,11 @@ import java.util.Map;
 
 public class LottoResult {
     private final Map<Prize, Long> lottoResult;
-    private final Money lottoPrice;
+    private final Money purchasePrice;
 
-    public LottoResult(Map<Prize, Long> lottoResult, Money lottoPrice) {
+    public LottoResult(Map<Prize, Long> lottoResult, Money purchasePrice) {
         this.lottoResult = new EnumMap<>(lottoResult);
-        this.lottoPrice = lottoPrice;
+        this.purchasePrice = purchasePrice;
     }
 
     public long calculatePrizeMoney() {
@@ -24,6 +24,6 @@ public class LottoResult {
 
     public long calculateProfitPercent() {
         return (calculatePrizeMoney() * 100)
-                / ((long) lottoResult.values().size() * lottoPrice.getMoney());
+                / ((long)purchasePrice.getMoney());
     }
 }
