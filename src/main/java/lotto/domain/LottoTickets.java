@@ -27,7 +27,4 @@ public class LottoTickets {
         return new ArrayList<>(lottoTickets);
     }
 
-    public int size() {
-        return lottoTickets.size();
-    }
 }

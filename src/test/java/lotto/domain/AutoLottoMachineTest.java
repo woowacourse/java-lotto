@@ -18,7 +18,7 @@ class AutoLottoMachineTest {
 
         LottoTickets tickets = autoLottoMachine.createTickets(5);
 
-        assertThat(tickets.size()).isEqualTo(numberOfTickets);
+        assertThat(tickets.getLottoTickets().size()).isEqualTo(numberOfTickets);
     }
 
     @DisplayName("금액에 맞추어 티켓을 생성하는지 확인")
@@ -29,7 +29,7 @@ class AutoLottoMachineTest {
 
         LottoTickets tickets = autoLottoMachine.createTicketsByMoney(purchaseMoney);
 
-        assertThat(tickets.size()).isEqualTo(numberOfTickets);
+        assertThat(tickets.getLottoTickets().size()).isEqualTo(numberOfTickets);
     }
 
     @DisplayName("구매금액 단위가 맞지 않으면 예외처리하는지 확인")
