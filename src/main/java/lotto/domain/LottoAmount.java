@@ -2,6 +2,8 @@ package lotto.domain;
 
 public class LottoAmount {
 
+    public static final int PURCHASABLE_NUMBER = 0;
+
     private int totalAmount;
     private int manualAmount;
     private int autoAmount;
@@ -36,6 +38,10 @@ public class LottoAmount {
     private void validateAmount(Money money, String manualAmount) {
         if (Integer.parseInt(manualAmount) > money.toNumberOfPurchaseLotto()) {
             throw new IllegalArgumentException("입력한 수량이 구입 가능 수량보다 많습니다.");
+        }
+
+        if (Integer.parseInt(manualAmount) < PURCHASABLE_NUMBER) {
+            throw new IllegalArgumentException("0 이상의 수를 입력해주세요.");
         }
     }
 
