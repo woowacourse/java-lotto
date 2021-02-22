@@ -1,6 +1,8 @@
 package lottogame.domain.lotto;
 
-import lottogame.domain.dto.LottoResult;
+import lottogame.domain.dto.LottoDto;
+import lottogame.domain.dto.LottosDto;
+import lottogame.domain.statistic.LottoResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,16 +16,16 @@ public class Lottos {
         lottos.addAll(new ArrayList<>(values));
     }
 
-    public List<List<Integer>> numbersOfLottos() {
-        return lottos.stream()
-                .map(lotto -> lotto.values())
-                .collect(Collectors.toList());
+    public LottosDto numbersOfLottos() {
+        return new LottosDto(lottos.stream()
+                        .map(lotto -> new LottoDto(lotto.values()))
+                        .collect(Collectors.toList()));
     }
 
     public List<LottoResult> matchesLottos(WinningLotto winningLotto) {
         List<LottoResult> lottoResults = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            int count = lotto.matchCount(winningLotto);
+            int count = lotto.matchNumberCount(winningLotto);
             boolean bonus = winningLotto.matchBonusBall(lotto);
             lottoResults.add(new LottoResult(count, bonus));
         }

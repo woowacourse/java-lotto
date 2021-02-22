@@ -1,10 +1,15 @@
 package lottogame.domain.lotto;
 
 public class LottoNumberGenerator {
-    private LottoNumberGenerator() {
+    private final int lottoMin;
+    private final int lottoMax;
+
+    public LottoNumberGenerator(int lottoMin, int lottoMax) {
+        this.lottoMin = lottoMin;
+        this.lottoMax = lottoMax;
     }
 
-    static Integer generate(int lottoMin, int lottoMax) {
-        return (int) (Math.random() * lottoMax) + lottoMin;
+    public Integer generate() {
+        return (int) (Math.random() * this.lottoMax) + lottoMin;
     }
 }

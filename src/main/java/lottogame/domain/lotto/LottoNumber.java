@@ -1,93 +1,47 @@
 package lottogame.domain.lotto;
 
-import lottogame.utils.DuplicateLottoNumberException;
-import lottogame.utils.InvalidBonusBallNumberException;
 import lottogame.utils.InvalidLottoNumberRangeException;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Objects;
 
 public class LottoNumber {
-    private static final int LOTTO_MIN = 1;
-    private static final int LOTTO_MAX = 45;
-    private static final int LOTTO_NUMBER_VOLUME = 6;
-    private final List<Integer> numbers = new ArrayList<>();
+    public static final int LOTTO_MIN = 1;
+    public static final int LOTTO_MAX = 45;
+    private final int number;
 
-    public LottoNumber() {
-        for (int i = 0; i < LOTTO_NUMBER_VOLUME; i++) {
-            numbers.add(makeNumber());
-        }
-        sortNumbers();
+    public LottoNumber(int number) {
+        validNumberRange(number);
+        this.number = number;
     }
 
-    public LottoNumber(List<Integer> numbers) {
-        validate(numbers);
-        this.numbers.addAll(numbers);
-        sortNumbers();
+    private void validNumberRange(int number) {
+        if (number < LOTTO_MIN || number > LOTTO_MAX) {
+            throw new InvalidLottoNumberRangeException();
+        }
     }
 
-    public LottoNumber(int bonusBall) {
-        if (invalidRange(bonusBall)) {
-            throw new InvalidBonusBallNumberException();
-        }
-        numbers.add(bonusBall);
+    public LottoNumber values() {
+        return new LottoNumber(number);
     }
 
-    private Integer makeNumber() {
-        int number = LottoNumberGenerator.generate(LOTTO_MIN, LOTTO_MAX);
-        if (numbers.contains(number)) {
-            return makeNumber();
-        }
+    public int getNumber() {
         return number;
     }
 
-    private void validate(List<Integer> numbers) {
-        validNumberRange(numbers);
-        duplicateNumbers(numbers);
+    public boolean equals(int number) {
+        return this.number == number;
     }
 
-    private void sortNumbers() {
-        Collections.sort(numbers);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumber that = (LottoNumber) o;
+        return number == that.number;
     }
 
-    private void validNumberRange(List<Integer> numbers) {
-        numbers.stream()
-                .filter(number -> invalidRange(number))
-                .findAny()
-                .ifPresent(s -> {
-                    throw new InvalidLottoNumberRangeException();
-                });
-    }
-
-    private boolean invalidRange(int number) {
-        return number < LOTTO_MIN || number > LOTTO_MAX;
-    }
-
-    private void duplicateNumbers(List<Integer> numbers) {
-        if (numbers.stream().distinct().count() != numbers.size()) {
-            throw new DuplicateLottoNumberException();
-        }
-    }
-
-    List<Integer> values() {
-        return Collections.unmodifiableList(numbers);
-    }
-
-    int matchCount(WinningLotto winningLotto) {
-        return (int) numbers.stream()
-                .filter(number -> winningLotto.contains(number))
-                .count();
-    }
-
-    boolean contains(Integer number) {
-        return numbers.contains(number);
-    }
-
-    boolean contains(LottoNumber bonusBall) {
-        return numbers.stream()
-                .filter(number -> bonusBall.contains(number))
-                .findFirst()
-                .isPresent();
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 }
