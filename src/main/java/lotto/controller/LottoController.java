@@ -1,10 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.Payment;
-import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoCount;
-import lotto.domain.lotto.Lottos;
-import lotto.domain.lotto.WinningLotto;
+import lotto.domain.lotto.*;
 import lotto.domain.reword.Reword;
 import lotto.domain.reword.Rewords;
 import lotto.exception.IllegalTypeException;
@@ -12,25 +9,23 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoController {
 
-    private static final String REGEX = ",";
-    private static final String REGEX_WITH_SPACE = ", ";
-
     public void run() {
         try {
+            LottoMachine lottoMachine = new LottoMachine();
+
             Payment payment = new Payment(Integer.parseInt(InputView.inputMoney()));
             LottoCount lottoCount = new LottoCount(payment, Integer.parseInt(InputView.inputManualLottoCount()));
 
-            Lottos lottos = new Lottos(lottoCount.auto(), createManualLotto(lottoCount.manual()));
+            OutputView.printInputLottoNumbers();
+            Lottos lottos = new Lottos(lottoCount.auto(), createManualLotto(lottoMachine, lottoCount.manual()));
             showLottos(lottoCount, lottos);
 
-            WinningLotto winningLotto = createWinningLotto();
+            WinningLotto winningLotto = createWinningLotto(lottoMachine);
             showResult(lottos, winningLotto, payment);
         }
         catch (NumberFormatException e) {
@@ -38,36 +33,19 @@ public class LottoController {
         }
     }
 
-    private List<Lotto> createManualLotto(final int count) {
+    public List<Lotto> createManualLotto(LottoMachine lottoMachine, final int count) {
         final List<Lotto> lottoTickets = new ArrayList<>();
 
-        OutputView.printInputLottoNumbers();
         for (int i = 0; i < count; i++) {
-            lottoTickets.add(createLotto());
+            lottoMachine.createAndPutLotto(lottoTickets, InputView.inputLottoNumbers());
         }
 
         return Collections.unmodifiableList(lottoTickets);
     }
 
-    private Lotto createLotto() {
-        String values = InputView.inputLottoNumbers().replaceAll(REGEX_WITH_SPACE, REGEX);
-        List<Integer> numbers = Arrays.stream(values.split(REGEX))
-                .mapToInt(Integer::parseInt)
-                .boxed()
-                .collect(Collectors.toList());
-
-        return new Lotto(numbers);
-    }
-
-    private WinningLotto createWinningLotto() {
-        String values = InputView.inputWinningLottoNumbers().replaceAll(REGEX_WITH_SPACE, REGEX);
-        List<Integer> numbers = Arrays.stream(values.split(REGEX))
-            .mapToInt(Integer::parseInt)
-            .boxed()
-            .collect(Collectors.toList());
-        int bonusNumber = Integer.parseInt(InputView.inputBonusNumber());
-
-        return new WinningLotto(numbers, bonusNumber);
+    public WinningLotto createWinningLotto(LottoMachine lottoMachine) {
+        List<Integer> lottoNumbers = lottoMachine.createLottoNumbers(InputView.inputWinningLottoNumbers());
+        return lottoMachine.createWinningLotto(lottoNumbers, InputView.inputBonusNumber());
     }
 
     private void showLottos(LottoCount ticketCount, Lottos lottos) {
