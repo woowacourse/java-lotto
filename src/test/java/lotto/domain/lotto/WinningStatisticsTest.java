@@ -47,6 +47,6 @@ class WinningStatisticsTest {
             .sum();
 
         assertThat(winningStatistics.getYield().unwrap())
-            .isEqualTo((double) totalWinnings / 6000, withPrecision(2d));
+            .isEqualTo((double) totalWinnings / 6000, withPrecision(0.01));
     }
 }
