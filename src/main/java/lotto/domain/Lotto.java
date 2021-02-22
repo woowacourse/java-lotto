@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -16,12 +15,12 @@ public class Lotto {
     }
     
     public static Lotto fromGenerator(LottoNumberGenerator generator) {
-        return fromNumbers(generator.generateNumbers());
+        final Set<Integer> numbers = generator.generateNumbers();
+        
+        return fromNumbers(mapIntToLottoNumber(numbers));
     }
     
-    public static Lotto fromNumbers(List<Integer> numbers) {
-        Set<LottoNumber> lottoNumbers = mapIntToLottoNumber(numbers);
-        
+    public static Lotto fromNumbers(Set<LottoNumber> lottoNumbers) {
         if (!matchesLength(lottoNumbers.size())) {
             throw new IllegalArgumentException();
         }
@@ -33,7 +32,7 @@ public class Lotto {
         return size == LOTTO_LENGTH;
     }
     
-    private static Set<LottoNumber> mapIntToLottoNumber(List<Integer> numbers) {
+    private static Set<LottoNumber> mapIntToLottoNumber(Set<Integer> numbers) {
         return numbers.stream()
                       .map(LottoNumber::from)
                       .collect(Collectors.toSet());
