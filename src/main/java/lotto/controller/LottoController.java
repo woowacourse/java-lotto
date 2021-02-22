@@ -18,6 +18,8 @@ public class LottoController {
         LottoService lottoService = new LottoService(new RandomLottoMachine());
         Ticket ticket = buyTicket();
 
+        getManualCount(ticket);
+
         outputView.printBuyTicket(ticket.getCount());
         lottoService.generateLottos(ticket);
         outputView.printLottoResults(lottoService.getLottos());
@@ -40,6 +42,20 @@ public class LottoController {
         outputView.printMessage("구입금액을 입력해 주세요.");
         int money = inputView.getInt();
         return new Ticket(new Money(money));
+    }
+
+    private void getManualCount(Ticket ticket) {
+        try {
+            tryGetManualCount(ticket);
+        } catch (IllegalArgumentException e) {
+            outputView.printMessage(e.getMessage());
+            getManualCount(ticket);
+        }
+    }
+
+    private void tryGetManualCount(Ticket ticket) {
+        outputView.printMessage("수동으로 구매할 로또 수를 입력해 주세요");
+        ticket.setManualCount(inputView.getInt());
     }
 
     private WinningLotto getWinningLotto() {
