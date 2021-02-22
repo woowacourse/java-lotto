@@ -40,7 +40,7 @@ public class Lottos {
             lottoTickets.add(new Lotto(RandomUtils.generateRandomNumbers(auto, LOTTO_SIZE)));
         }
 
-        if (!Objects.isNull(manual)) {
+        if (Objects.nonNull(manual)) {
             lottoTickets.addAll(manual);
         }
 
