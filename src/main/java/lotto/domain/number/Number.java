@@ -48,6 +48,14 @@ public class Number {
         return this.value == value;
     }
 
+    public Number add(Number number) {
+        return new Number(value + number.value);
+    }
+
+    public Number subtract(Number number) {
+        return new Number(value - number.value);
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(value);

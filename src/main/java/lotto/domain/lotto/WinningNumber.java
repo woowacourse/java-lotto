@@ -4,13 +4,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import lotto.domain.number.LottoNumber;
-import lotto.domain.number.Number;
 import lotto.domain.number.PayOut;
+import lotto.domain.rank.Rank;
 import lotto.domain.rank.RankFactory;
+
+import static java.util.Comparator.comparingInt;
+import static java.util.stream.Collectors.toList;
 
 public class WinningNumber {
 
@@ -18,25 +19,14 @@ public class WinningNumber {
     private final LottoNumber bonusNumber;
 
     public WinningNumber(String lottoNumber, String bonusNumber) {
-        LottoNumbers extractedLottoNumbers =
-                getLottoNumbersFromStringLottoNumberList(getSplitLottoNumber(lottoNumber));
+        LottoNumbers extractedLottoNumbers = LottoNumbers.valueOf(lottoNumber);
         validateBonusNumberFormat(bonusNumber);
 
-        LottoNumber extractedBonusNumber = new LottoNumber(new Number(bonusNumber));
+        LottoNumber extractedBonusNumber = new LottoNumber(bonusNumber);
         validateDuplicateBonusNumberWithLottoNumbers(extractedLottoNumbers, extractedBonusNumber);
 
         this.lottoNumbers = extractedLottoNumbers;
         this.bonusNumber = extractedBonusNumber;
-    }
-
-    private LottoNumbers getLottoNumbersFromStringLottoNumberList(List<String> lottoNumbers) {
-        return new LottoNumbers(lottoNumbers.stream()
-                .map(lottoNumber -> new LottoNumber(new Number(lottoNumber.trim())))
-                .collect(Collectors.toList()));
-    }
-
-    private List<String> getSplitLottoNumber(String lottoNumber) {
-        return Arrays.asList(lottoNumber.split(",", -1));
     }
 
     private void validateBonusNumberFormat(String input) {
@@ -58,24 +48,34 @@ public class WinningNumber {
         return lottoNumbers;
     }
 
-    public AnalysedLottos analysingLottos(LottoGroup lottoGroup, PayOut payOut) {
-        Map<RankFactory, Long> rankAndCount = lottoGroup.getLottos().stream()
-                .map(this::getRank)
-                .filter(rank -> !rank.equals(RankFactory.FAIL))
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+    public List<Rank> getRanks(LottoGroup lottoGroup) {
+        Map<RankFactory, Long> rankAndCount = createRankAndCount(lottoGroup);
+
+        return createRanks(rankAndCount);
+    }
+
+    private Map<RankFactory, Long> createRankAndCount(LottoGroup lottoGroup) {
+        Map<RankFactory, Long> rankAndCount = lottoGroup.calculateLottoResult(lottoNumbers, bonusNumber);
 
         Arrays.stream(RankFactory.values())
                 .filter(rank -> !rank.equals(RankFactory.FAIL) && !rankAndCount.containsKey(rank))
                 .forEach(rank -> rankAndCount.put(rank, 0L));
 
-        return new AnalysedLottos(rankAndCount, payOut);
+        return rankAndCount;
     }
 
-    private RankFactory getRank(LottoNumbers lottoNumbers) {
-        return RankFactory.getRank(
-                this.lottoNumbers.getMatchCount(lottoNumbers),
-                lottoNumbers.contains(bonusNumber)
-        );
+    private List<Rank> createRanks(Map<RankFactory, Long> rankAndCount) {
+        return Arrays.stream(RankFactory.values())
+                .filter(rank -> !rank.equals(RankFactory.FAIL))
+                .map(key -> RankFactory.createRanking(key, rankAndCount.getOrDefault(key, 0L)))
+                .sorted(comparingInt(Rank::getRank))
+                .collect(toList());
+    }
+
+    public double getYield(LottoGroup lottoGroup, PayOut payOut) {
+        return getRanks(lottoGroup).stream()
+                .mapToDouble(r -> r.getWinnings() * r.getCount())
+                .sum() / payOut.getValueAsInt();
     }
 
     @Override

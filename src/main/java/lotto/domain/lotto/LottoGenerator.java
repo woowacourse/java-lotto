@@ -23,17 +23,27 @@ public class LottoGenerator {
 
         for (int i = LOTTO_NUMBER_MINIMUM; i <= LOTTO_NUMBER_MAXIMUM; i++) {
             lottoNumbers.add(
-                new LottoNumber(new Number(i))
+                    new LottoNumber(new Number(i))
             );
         }
     }
 
-    public LottoGroup generateLottos(int count) {
+    private LottoGroup generateLottos(int count) {
         return new LottoGroup(
                 Stream.generate(this::generateRandomLottoNumber)
                         .limit(count)
                         .map(LottoNumbers::new)
                         .collect(toList())
+        );
+    }
+
+    public LottoGroup generateLottosWithManualLottoNumbers(List<String> manualLottoNumbers, int autoGameCount) {
+        return new LottoGroup(
+                manualLottoNumbers.stream()
+                        .map(LottoNumbers::valueOf)
+                        .collect(toList())
+        ).add(
+                generateLottos(autoGameCount)
         );
     }
 

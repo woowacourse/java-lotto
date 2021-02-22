@@ -3,10 +3,12 @@ package lotto.domain.lotto;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 import lotto.domain.number.LottoNumber;
+import lotto.domain.number.Number;
 
 public class LottoNumbers {
 
@@ -19,6 +21,18 @@ public class LottoNumbers {
         validateLottoNumberCount(lottoNumbers);
 
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public static LottoNumbers valueOf(String lottoNumbers) {
+        return new LottoNumbers(
+                getSplitLottoNumber(lottoNumbers).stream()
+                        .map(lottoNumber -> new LottoNumber(new Number(lottoNumber.trim())))
+                        .collect(toList())
+        );
+    }
+
+    private static List<String> getSplitLottoNumber(String lottoNumber) {
+        return Arrays.asList(lottoNumber.split(",", -1));
     }
 
     private void validateDuplicate(List<LottoNumber> lottoNumbers) {
@@ -39,7 +53,7 @@ public class LottoNumbers {
                 .count();
     }
 
-    public List<Integer> toIntegerList() {
+    public List<Integer> getValueAsIntegerList() {
         return lottoNumbers.stream()
                 .map(LottoNumber::getValueAsInt)
                 .collect(toList());

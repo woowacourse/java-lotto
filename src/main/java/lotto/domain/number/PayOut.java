@@ -1,13 +1,13 @@
 package lotto.domain.number;
 
-public class PayOut {
+import java.util.Objects;
 
-    private static final int GAME_PRICE = 1000;
-    private final Number payOut;
+public class PayOut {
+    private final Number value;
 
     public PayOut(Number number) {
         validateNegative(number.getValueAsInt());
-        this.payOut = number;
+        this.value = number;
     }
 
     public PayOut(int number) {
@@ -19,16 +19,29 @@ public class PayOut {
     }
 
     private void validateNegative(int value) {
-        if (value <= 0) {
+        if (value < 0) {
             throw new IllegalArgumentException("입력값이 양수가 아닙니다.");
         }
     }
 
-    public int getGameCount() {
-        return payOut.getValueAsInt() / GAME_PRICE;
+    public int getValueAsInt() {
+        return value.getValueAsInt();
     }
 
-    public int getValueAsInt() {
-        return payOut.getValueAsInt();
+    public PayOut subtract(PayOut payOut) {
+        return new PayOut(value.subtract(payOut.value));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PayOut payOut = (PayOut) o;
+        return Objects.equals(value, payOut.value);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 }

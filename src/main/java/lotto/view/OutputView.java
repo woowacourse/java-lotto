@@ -6,12 +6,13 @@ import java.util.List;
 
 import lotto.domain.lotto.LottoGroup;
 import lotto.domain.lotto.LottoNumbers;
-import lotto.domain.lotto.AnalysedLottos;
 import lotto.domain.rank.Rank;
 
 public class OutputView {
     private static final String PAYOUT = "구입금액을 입력해 주세요";
-    private static final String LOTTO_COUNT_FORMAT = "%d개를 구매했습니다." + System.lineSeparator();
+    private static final String MANUAL_PURCHASE = System.lineSeparator() + "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String MANUAL_LOTTO_NUMBER = System.lineSeparator() + "수동으로 구매할 번호를 입력해 주세요";
+    private static final String LOTTO_COUNT_FORMAT = System.lineSeparator() + "수동으로 %d장, 자동으로 %d개를 구매했습니다." + System.lineSeparator();
     private static final String LAST_WEEK_LOTTO_NUMBER = System.lineSeparator() + "지난 주 당첨 번호를 입력해 주세요";
     private static final String BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
     private static final String WINNING_STATISTICS = System.lineSeparator() + "당첨 동계";
@@ -27,8 +28,16 @@ public class OutputView {
         System.out.println(PAYOUT);
     }
 
-    public static void payOuted(int lottoCount) {
-        System.out.printf(LOTTO_COUNT_FORMAT, lottoCount);
+    public static void manualPurchase() {
+        System.out.println(MANUAL_PURCHASE);
+    }
+
+    public static void manualLottoNumber() {
+        System.out.println(MANUAL_LOTTO_NUMBER);
+    }
+
+    public static void payOuted(int buyableLottoCount, int manualLottoCount) {
+        System.out.printf(LOTTO_COUNT_FORMAT, manualLottoCount, buyableLottoCount - manualLottoCount);
     }
 
     public static void boughtLottos(LottoGroup lottoGroup) {
@@ -36,7 +45,7 @@ public class OutputView {
     }
 
     private static void printLottoNumbers(LottoNumbers lottoNumbers) {
-        List<String> convertedLottoNumbers = lottoNumbers.toIntegerList().stream()
+        List<String> convertedLottoNumbers = lottoNumbers.getValueAsIntegerList().stream()
                 .map(String::valueOf)
                 .collect(toList());
 
@@ -53,11 +62,14 @@ public class OutputView {
         System.out.println(BONUS_NUMBER);
     }
 
-    public static void statistics(AnalysedLottos analysedLottos) {
+    public static void printWinningStatistics(List<Rank> ranks) {
         System.out.println(WINNING_STATISTICS);
         System.out.println(LINE);
-        analysedLottos.getRankings().forEach(OutputView::printStatisticsAccordingToBonus);
-        System.out.printf(STATISTICS_YIELD_FORMAT, analysedLottos.getYield());
+        ranks.forEach(OutputView::printStatisticsAccordingToBonus);
+    }
+
+    public static void printYield(double yield) {
+        System.out.printf(STATISTICS_YIELD_FORMAT, yield);
     }
 
     private static void printStatisticsAccordingToBonus(Rank rank) {

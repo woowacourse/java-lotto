@@ -28,23 +28,23 @@ public class RankFactoryTest {
     }
 
     private RankFactory createRankFromRankFactoryViaIntegerRanking(int rank) {
-        if( rank == 1) {
+        if (rank == 1) {
             return RankFactory.getRank(6, false);
         }
 
-        if( rank == 2) {
+        if (rank == 2) {
             return RankFactory.getRank(5, true);
         }
 
-        if( rank == 3) {
+        if (rank == 3) {
             return RankFactory.getRank(5, false);
         }
 
-        if( rank == 4) {
+        if (rank == 4) {
             return RankFactory.getRank(4, false);
         }
 
-        if( rank == 5) {
+        if (rank == 5) {
             return RankFactory.getRank(3, false);
         }
 
