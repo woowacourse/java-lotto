@@ -12,12 +12,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LottoTest {
 
-    private static final Lotto winningLotto = new Lotto("1,2,3,4,5,6");
+    private static final Lotto winningLotto = Lotto.from("1,2,3,4,5,6");
 
     @Test
     @DisplayName("보너스 볼 포함하는 경우")
     void bonusBallDuplicated() {
-        Lotto lotto = new Lotto("11,12,13,14,15,16");
+        Lotto lotto = Lotto.from("11,12,13,14,15,16");
         assertEquals(lotto.isContainNumber(11), true);
     }
 
@@ -26,7 +26,7 @@ public class LottoTest {
     @ValueSource(strings = {"1,2,3,4,5,6,7", "1,2,3"})
     void numbersCountValid(String numbers) {
         assertThatThrownBy(() -> {
-            Lotto lotto = new Lotto(numbers);
+            Lotto lotto = Lotto.from(numbers);
         }).isInstanceOf(LottoNumberCountException.class);
     }
 
@@ -35,7 +35,7 @@ public class LottoTest {
     @ValueSource(strings = {"1,2,3,4,5,6,46", "0,1,2,3,4,5"})
     void numbersScopeValid(String numbers) {
         assertThatThrownBy(() -> {
-            Lotto lotto = new Lotto(numbers);
+            Lotto lotto = Lotto.from(numbers);
         }).isInstanceOf(NumberScopeException.class);
     }
 }

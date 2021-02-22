@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 class BonusBallTest {
-    private static final Lotto lotto = new Lotto("1,2,3,4,5,6");
+    private static final Lotto lotto = Lotto.from("1,2,3,4,5,6");
 
     @Test
     @DisplayName("보너스 볼 중복될 경우")

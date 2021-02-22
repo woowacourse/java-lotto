@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class WinningLottoTest {
-    private static final Lotto lotto = new Lotto("1,2,3,4,5,6");
+    private static final Lotto lotto = Lotto.from("1,2,3,4,5,6");
     private static final BonusBall bonusBall = new BonusBall(7, lotto);
     private static final WinningLotto winningLotto = new WinningLotto(lotto, bonusBall);
 
@@ -27,7 +27,7 @@ class WinningLottoTest {
     @DisplayName("로또 매칭 확인")
     @MethodSource("provideLottoNumbersAndRank")
     void test(String lottoNumbers, String lottoRank) {
-        Lotto lotto = new Lotto(lottoNumbers);
+        Lotto lotto = Lotto.from(lottoNumbers);
         LottoRank rank = winningLotto.getLottoResult(lotto);
         assertThat(rank.name()).isEqualTo(lottoRank);
     }

@@ -14,16 +14,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottosTest {
 
-    private static final Lotto lotto = new Lotto("1,2,3,4,5,6");
+    private static final Lotto lotto = Lotto.from("1,2,3,4,5,6");
     private static final BonusBall bonusBall = new BonusBall(7, lotto);
     private static final WinningLotto winningLotto = new WinningLotto(lotto, bonusBall);
 
     private static Stream<Arguments> provideLottosResult() {
         return Stream.of(
-                Arguments.of(new Lotto("2,4,8,9,13,25"), LottoRank.NONE),
-                Arguments.of(new Lotto("2,4,7,9,13,25"), LottoRank.FIFTH),
-                Arguments.of(new Lotto("2,4,6,1,7,3"), LottoRank.SECOND),
-                Arguments.of(new Lotto("1,2,3,4,5,6"), LottoRank.FIRST)
+                Arguments.of(Lotto.from("2,4,8,9,13,25"), LottoRank.NONE),
+                Arguments.of(Lotto.from("2,4,7,9,13,25"), LottoRank.FIFTH),
+                Arguments.of(Lotto.from("2,4,6,1,7,3"), LottoRank.SECOND),
+                Arguments.of(Lotto.from("1,2,3,4,5,6"), LottoRank.FIRST)
         );
     }
 
