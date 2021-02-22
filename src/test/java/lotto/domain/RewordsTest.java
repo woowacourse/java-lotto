@@ -19,9 +19,9 @@ public class RewordsTest {
     @DisplayName("포함된 개수 테스트")
     @Test
     void rewordRankCount() {
-        assertThat(rewords.getRankCount(1)).isEqualTo(1);
-        assertThat(rewords.getRankCount(2)).isEqualTo(2);
-        assertThat(rewords.getRankCount(3)).isEqualTo(0);
+        assertThat(rewords.getRankCount(Reword.FIRST)).isEqualTo(1);
+        assertThat(rewords.getRankCount(Reword.SECOND)).isEqualTo(2);
+        assertThat(rewords.getRankCount(Reword.THIRD)).isEqualTo(0);
     }
 
     @DisplayName("수익률 테스트")
