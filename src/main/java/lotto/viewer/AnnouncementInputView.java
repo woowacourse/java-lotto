@@ -39,7 +39,6 @@ public class AnnouncementInputView {
         List<Integer> inputWinningNumbers;
         try {
             inputWinningNumbers = parseToWinner();
-            checkSize(inputWinningNumbers);
         } catch (Exception e) {
             inputWinningNumbers = inputWinningNumbers();
         }
@@ -49,14 +48,15 @@ public class AnnouncementInputView {
     private List<Integer> parseToWinner() {
         String rawWinningNumbers = scanner.nextLine();
         String[] splittedWinningNumbers = rawWinningNumbers.split(DELIMITER);
+        checkSize(splittedWinningNumbers);
         return Arrays.stream(splittedWinningNumbers)
             .map(String::trim)
             .map(Integer::parseInt)
             .collect(Collectors.toList());
     }
 
-    private void checkSize(List<Integer> targetWinner) {
-        if (targetWinner.size() != LOTTE_POSSESSION_NUMBER) {
+    private void checkSize(String[] targetWinner) {
+        if (targetWinner.length != LOTTE_POSSESSION_NUMBER) {
             throw new LottoAnnouncementException(LOTTO_ANNOUNCE_SIZE_MESSAGE);
         }
     }
