@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -18,11 +19,11 @@ public class RandomNumberGenerator implements LottoNumberGenerator {
                                                           .collect(Collectors.toList());
     
     @Override
-    public List<Integer> generateNumbers() {
+    public Set<Integer> generateNumbers() {
         Collections.shuffle(NUMBERS);
         
         return NUMBERS.stream()
                       .limit(LOTTO_LENGTH)
-                      .collect(Collectors.toList());
+                      .collect(Collectors.toSet());
     }
 }

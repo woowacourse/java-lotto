@@ -1,17 +1,17 @@
 package lotto.domain;
 
-import java.util.List;
+import java.util.Set;
 
 public class FixedNumberGenerator implements LottoNumberGenerator {
     
-    private final List<Integer> numbers;
+    private final Set<Integer> numbers;
     
-    public FixedNumberGenerator(List<Integer> numbers) {
+    public FixedNumberGenerator(Set<Integer> numbers) {
         this.numbers = numbers;
     }
     
     @Override
-    public List<Integer> generateNumbers() {
+    public Set<Integer> generateNumbers() {
         return numbers;
     }
 }
