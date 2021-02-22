@@ -56,4 +56,11 @@ public class MoneyTest {
         assertThatThrownBy(() -> money.divide(0))
                 .isInstanceOf(IllegalDivisorCountException.class);
     }
+
+    @Test
+    @DisplayName("구매 개수 확인")
+    void getPurchaseCount() {
+        Money money = new Money("10000");
+        assertThat(money.getPurchaseCount()).isEqualTo(10);
+    }
 }
