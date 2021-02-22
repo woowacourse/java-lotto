@@ -20,8 +20,8 @@ public class LottoService {
         this.lottoMachine = lottoMachine;
     }
 
-    public void generateManualLotto(Lotto lotto) {
-        lottos.add(lotto);
+    public void generateManualLotto(List<Lotto> lottos) {
+        this.lottos.addAll(lottos);
     }
 
     public void generateLottos(Ticket ticket) {

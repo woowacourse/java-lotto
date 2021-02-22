@@ -20,8 +20,9 @@ public class LottoController {
         LottoService lottoService = new LottoService();
         Ticket ticket = buyTicket();
 
-        getManualCount(ticket);
-        getManualLottoNumbers(ticket,lottoService);
+        setManualCount(ticket);
+        List<Lotto> manualLottos = getManualLottoNumbers(ticket);
+        lottoService.generateManualLotto(manualLottos);
 
         outputView.printBuyTicket(ticket.getManualCount(), ticket.getRandomCount());
         lottoService.generateLottos(ticket);
