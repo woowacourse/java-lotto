@@ -23,29 +23,30 @@ class WinningStatisticsTest {
             LottoNumbers.valueOf("1,2,3,4,5,7"),
             LottoNumbers.valueOf("1,2,3,4,5,34"),
             LottoNumbers.valueOf("1,2,3,4,11,12"),
-            LottoNumbers.valueOf("1,2,3,11,12,13")
+            LottoNumbers.valueOf("1,2,3,11,12,13"),
+            LottoNumbers.valueOf("7,8,9,10,11,12")
         ));
 
-        winningStatistics = new WinningStatistics(lottoTicket, winningNumbers);
+        winningStatistics = lottoTicket.getWinningStatistics(winningNumbers);
     }
 
     @Test
     @DisplayName("당첨 통계 확인")
     void newWinningStatistics() {
         Map<Rank, Long> expected = new HashMap<>();
-        Rank.getAllPossibleRanks().stream().forEach(rank -> expected.put(rank, 1L));
+        Arrays.stream(Rank.values()).forEach(rank -> expected.put(rank, 1L));
 
-        assertThat(winningStatistics.unwrap()).isEqualTo(expected);
+        assertThat(winningStatistics.getRanks().unwrap()).isEqualTo(expected);
     }
 
     @Test
     @DisplayName("수익률 확인")
     void getYield() {
-        int totalWinnings = Rank.getAllPossibleRanks().stream()
+        int totalWinnings = Arrays.stream(Rank.values())
             .mapToInt(Rank::getWinnings)
             .sum();
 
-        assertThat(winningStatistics.getYield())
-            .isEqualTo((double) totalWinnings / 5000, withPrecision(2d));
+        assertThat(winningStatistics.getYield().unwrap())
+            .isEqualTo((double) totalWinnings / 6000 , withPrecision(2d));
     }
 }

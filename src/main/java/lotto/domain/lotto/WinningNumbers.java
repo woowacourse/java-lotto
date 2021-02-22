@@ -2,6 +2,7 @@ package lotto.domain.lotto;
 
 import java.util.Objects;
 import lotto.domain.number.LottoNumber;
+import lotto.domain.rank.Rank;
 
 public class WinningNumbers {
 
@@ -28,12 +29,19 @@ public class WinningNumbers {
         }
     }
 
-    public boolean hasBonusNumber(LottoNumbers lottoNumbers) {
+    public Rank checkRank(LottoNumbers lottoNumbers) {
+        return Rank.valueOf(
+            getMatchCount(lottoNumbers),
+            hasBonusNumber(lottoNumbers)
+        );
+    }
+
+    private boolean hasBonusNumber(LottoNumbers lottoNumbers) {
         return lottoNumbers.contains(bonusNumber);
     }
 
-    public int getMatchCount(LottoNumbers lottoNumbers) {
-        return this.lottoNumbers.getMatchCount(lottoNumbers);
+    private int getMatchCount(LottoNumbers lottoNumbers) {
+        return this.lottoNumbers.match(lottoNumbers);
     }
 
     @Override

@@ -1,24 +1,22 @@
 package lotto.domain.lotto;
 
-import java.util.Map;
-import lotto.domain.rank.Rank;
 import lotto.domain.rank.Ranks;
 
 public class WinningStatistics {
 
     private final Ranks ranks;
-    private final double yield;
+    private final Yield yield;
 
-    public WinningStatistics(LottoTicket lottoTicket, WinningNumbers winningNumbers) {
-        this.ranks = Ranks.valueOf(lottoTicket, winningNumbers);
-        this.yield = (double) ranks.getTotalWinnings() / lottoTicket.getTotalLottoPrice();
+    public WinningStatistics(Ranks ranks, Yield yield) {
+        this.ranks = new Ranks(ranks.unwrap());
+        this.yield = new Yield(yield.unwrap());
     }
 
-    public Map<Rank, Long> unwrap() {
-        return ranks.unwrap();
+    public Ranks getRanks() {
+        return new Ranks(ranks);
     }
 
-    public double getYield() {
-        return yield;
+    public Yield getYield() {
+        return new Yield(yield);
     }
 }

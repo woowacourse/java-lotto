@@ -16,6 +16,6 @@ class LottoTicketTest {
         LottoTicket lottoTicket = RandomLottoGenerator.getInstance()
             .buyLottoTicket(Payout.valueOf(amount));
 
-        assertThat(lottoTicket.getCount()).isEqualTo(expected);
+        assertThat(lottoTicket.count()).isEqualTo(expected);
     }
 }

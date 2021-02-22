@@ -30,7 +30,7 @@ public class LottoController {
 
     private static LottoTicket buyLotto(Payout payout) {
         LottoTicket lottoTicket = LOTTO_GENERATOR.buyLottoTicket(payout);
-        OutputView.payOuted(lottoTicket.getCount());
+        OutputView.payOuted(lottoTicket.count());
         OutputView.boughtLotties(lottoTicket);
 
         return lottoTicket;
@@ -50,6 +50,6 @@ public class LottoController {
 
     private static void calculateStatistics(WinningNumbers winningNumbers,
         LottoTicket lottoTicket) {
-        OutputView.statistics(new WinningStatistics(lottoTicket, winningNumbers));
+        OutputView.statistics(lottoTicket.getWinningStatistics(winningNumbers));
     }
 }

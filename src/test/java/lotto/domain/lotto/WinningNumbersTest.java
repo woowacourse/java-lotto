@@ -49,6 +49,7 @@ public class WinningNumbersTest {
         expected.put(Rank.THIRD, 1L);
         expected.put(Rank.FOURTH, 0L);
         expected.put(Rank.FIFTH, 0L);
+        expected.put(Rank.FAIL, 0L);
         int expectedTotalWinnings =
             Rank.FIRST.getWinnings() + Rank.SECOND.getWinnings() + Rank.THIRD.getWinnings();
 
@@ -57,34 +58,12 @@ public class WinningNumbersTest {
             LottoNumbers.valueOf("1,2,3,4,5,34"),
             LottoNumbers.valueOf("1,2,3,4,5,7")
         ));
-        WinningStatistics result = new WinningStatistics(lottoTicket, winningNumbers);
+        WinningStatistics result = lottoTicket.getWinningStatistics(winningNumbers);
 
-        Map<Rank, Long> actual = result.unwrap();
+        Map<Rank, Long> actual = result.getRanks().unwrap();
 
         assertThat(expected).isEqualTo(actual);
         assertThat(expectedTotalWinnings / 3000D)
-            .isEqualTo(result.getYield(), withPrecision(2d));
-    }
-
-    @Test
-    @DisplayName("보너스 번호 확인 테스트")
-    void hasBonusNumber() {
-        WinningNumbers winningNumbers = WinningNumbers.valueOf("1,2,3,4,5,6", "7");
-
-        LottoNumbers lottoNumbers = LottoNumbers.valueOf("1,2,3,4,5,6");
-        assertThat(winningNumbers.hasBonusNumber(lottoNumbers)).isFalse();
-
-        lottoNumbers = LottoNumbers.valueOf("7,1,2,3,4,5");
-        assertThat(winningNumbers.hasBonusNumber(lottoNumbers)).isTrue();
-    }
-
-    @ParameterizedTest
-    @DisplayName("당첨 번호 일치 개수")
-    @CsvSource(value = {"1,2,3,4,5,6:6", "7,2,3,4,8,9:3", "7,8,9,10,11,12:0"}, delimiter = ':')
-    void getMatchCount(String input, int expected) {
-        WinningNumbers winningNumbers = WinningNumbers.valueOf("1,2,3,4,5,6", "7");
-        LottoNumbers lottoNumbers = LottoNumbers.valueOf(input);
-
-        assertThat(winningNumbers.getMatchCount(lottoNumbers)).isEqualTo(expected);
+            .isEqualTo(result.getYield().unwrap(), withPrecision(2d));
     }
 }

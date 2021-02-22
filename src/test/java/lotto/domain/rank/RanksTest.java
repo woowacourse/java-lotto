@@ -23,9 +23,9 @@ public class RanksTest {
             LottoNumbers.valueOf("1,2,3,11,12,13")
         ));
 
-        Ranks ranks = Ranks.valueOf(lottoTicket, winningNumbers);
+        Ranks ranks = lottoTicket.getWinningStatistics(winningNumbers).getRanks();
 
-        Long expected = Rank.getAllPossibleRanks().stream()
+        Long expected = Arrays.stream(Rank.values())
             .mapToLong(Rank::getWinnings)
             .sum();
 

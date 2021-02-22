@@ -27,19 +27,19 @@ public class LottoNumbers {
     public static LottoNumbers valueOf(String unparsedLottoNumbers) {
         List<String> parsedLottoNumbers = splitLottoNumber(unparsedLottoNumbers);
         validateDuplication(parsedLottoNumbers);
-        return getLottoNumbersFromParsedNumbers(parsedLottoNumbers);
+        return valueOf(parsedLottoNumbers);
+    }
+
+    private static LottoNumbers valueOf(List<String> parsedNumbers) {
+        return parsedNumbers.stream()
+            .map(LottoNumber::valueOf)
+            .collect(collectingAndThen(toSet(), LottoNumbers::new));
     }
 
     private static List<String> splitLottoNumber(String lottoNumber) {
         return Arrays.stream(lottoNumber.split(LOTTO_NUMBER_SEPARATOR, -1))
             .map(String::trim)
             .collect(Collectors.toList());
-    }
-
-    private static LottoNumbers getLottoNumbersFromParsedNumbers(List<String> lottoNumbers) {
-        return lottoNumbers.stream()
-            .map(lottoNumber -> LottoNumber.valueOf(lottoNumber))
-            .collect(collectingAndThen(toSet(), LottoNumbers::new));
     }
 
     private static void validateDuplication(List<String> lottoNumbers) {
@@ -58,9 +58,9 @@ public class LottoNumbers {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    public int getMatchCount(LottoNumbers lottoNumbers) {
-        return (int) this.lottoNumbers.stream()
-            .filter(lottoNumbers::contains)
+    public int match(LottoNumbers lottoNumbersToMatch) {
+        return (int) lottoNumbers.stream()
+            .filter(lottoNumbersToMatch::contains)
             .count();
     }
 
