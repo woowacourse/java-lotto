@@ -6,9 +6,9 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class Money {
-    private final int money;
     private static final int LOTTO_PRICE = 1000;
     private static final Pattern NUMBER_PATTERN = Pattern.compile("^[0-9]*$");
+    private final int money;
 
     public Money(String money) {
         validate(money);
