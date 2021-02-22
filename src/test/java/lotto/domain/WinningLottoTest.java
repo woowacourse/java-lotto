@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.util.LottoFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -25,7 +26,11 @@ public class WinningLottoTest {
     @DisplayName("로또 당첨결과 확인")
     @Test
     void testEntireLottoMatching() {
-        Lottos lottos = new Lottos(new ManualLotto(Arrays.asList("1, 2, 3, 20, 21, 40", "1, 2, 20, 25, 29, 45")), new AutoLotto(0));
+
+        Lottos lottos = new Lottos(
+                LottoFactory.createManualLotto(Arrays.asList("1, 2, 3, 20, 21, 40", "1, 2, 20, 25, 29, 45")),
+                LottoFactory.createAutoLotto(0)
+        );
 
         WinningLotto winningLotto = new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new BonusNumber(20));
         List<Result> results = winningLotto.getWinningResult(lottos);

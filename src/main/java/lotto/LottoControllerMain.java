@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.*;
+import lotto.util.LottoFactory;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -12,7 +13,10 @@ public class LottoControllerMain {
         int manualCount = InputView.inputManualPurchaseCount();
         int autoCount = money.totalCountOfPurchaseLotto() - manualCount;
 
-        Lottos lottos = new Lottos(new ManualLotto(InputView.inputManualPurchase(manualCount)), new AutoLotto(autoCount));
+        Lottos lottos = new Lottos(
+                LottoFactory.createManualLotto(InputView.inputManualPurchase(manualCount)),
+                LottoFactory.createAutoLotto(autoCount)
+        );
 
         OutputView.showBuyLotto(lottos);
 

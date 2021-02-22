@@ -1,25 +1,14 @@
 package lotto.domain;
 
-import lotto.util.LottoGenerator;
-
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class AutoLotto {
 
     private final List<Lotto> autoLotto;
 
-    public AutoLotto(int autoCount) {
-        this.autoLotto = purchaseAutoLotto(autoCount);
-    }
-
-    private List<Lotto> purchaseAutoLotto(int count) {
-        return Stream.generate(() -> new Lotto(LottoGenerator.make()))
-                .limit(count)
-                .collect(Collectors.toList());
-
+    public AutoLotto(List<Lotto> autoLotto) {
+        this.autoLotto = autoLotto;
     }
 
     public List<Lotto> getAutoLotto() {
