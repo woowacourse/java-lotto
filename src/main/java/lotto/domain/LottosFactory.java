@@ -8,9 +8,9 @@ public class LottosFactory {
     
     private LottosFactory() {}
     
-    public static Lottos makeLottos(PaymentAmount paymentAmount) {
+    public static Lottos makeLottos(PurchaseCount purchaseCount) {
         List<Lotto> lottos = Stream.generate(() -> Lotto.fromGenerator(new RandomNumberGenerator()))
-                                   .limit(paymentAmount.getPurchaseCount())
+                                   .limit(purchaseCount.getAutomaticPurchaseCount())
                                    .collect(Collectors.toList());
         
         return new Lottos(lottos);

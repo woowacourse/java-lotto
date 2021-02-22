@@ -2,8 +2,8 @@ package lotto.domain;
 
 public class LottoMachine {
     
-    public Lottos purchase(PaymentAmount paymentAmount) {
-        return LottosFactory.makeLottos(paymentAmount);
+    public Lottos purchase(PurchaseCount purchaseCount) {
+        return LottosFactory.makeLottos(purchaseCount);
     }
     
     public LottoStatisticResult seeResults(Lottos lottos, WinningLotto winningLotto) {
