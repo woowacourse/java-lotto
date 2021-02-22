@@ -23,7 +23,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         CACHE = Collections.unmodifiableList(cacheNumbers);
     }
 
-    public LottoNumber(int number) {
+    private LottoNumber(int number) {
         validateRange(number);
         this.number = number;
     }
