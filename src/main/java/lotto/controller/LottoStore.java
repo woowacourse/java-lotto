@@ -5,6 +5,7 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.Map;
+import java.util.Set;
 
 public class LottoStore {
 
@@ -36,13 +37,12 @@ public class LottoStore {
     }
 
     public double calculateProfitRate(Map<LottoRank, Integer> lottoResultStatistics, int purchasedLottoCount) {
-        double initialCapital = purchasedLottoCount * LOTTO_PRICE;
-        double sum = 0;
+        int initialCapital = purchasedLottoCount * LOTTO_PRICE;
 
-        for (LottoRank rank : lottoResultStatistics.keySet()) {
-            int rankMatchLottoCount = lottoResultStatistics.get(rank);
-            sum += rank.getPrizeMoney() * rankMatchLottoCount;
-        }
+        double sum = lottoResultStatistics.entrySet().stream()
+                .mapToInt(entry -> entry.getKey().getPrizeMoney() * entry.getValue())
+                .sum();
+
         double rawProfitRate = sum / initialCapital;
 
         return Math.round(rawProfitRate * 100) / 100.00;
