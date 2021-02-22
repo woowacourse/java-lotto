@@ -7,8 +7,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.Collections;
-import java.util.Map;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,7 +16,7 @@ public class LottoStoreTest {
     private static final BonusBall bonusBall = new BonusBall(7, lotto);
     private static final WinningLotto winningLotto = new WinningLotto(lotto, bonusBall);
 
-    private static Stream<Arguments> provideLottosResult() {
+    private static Stream<Arguments> provideLottoAndProfitRateResult() {
         return Stream.of(
                 Arguments.of(Lotto.from("2, 4, 8, 9, 13, 25"), 0.00),
                 Arguments.of(Lotto.from("2, 4, 6, 8, 13, 25"), 5.00),
@@ -28,14 +26,11 @@ public class LottoStoreTest {
     }
 
     @ParameterizedTest
-    @DisplayName("총 수익률 계산")
-    @MethodSource("provideLottosResult")
-    void lottoProfitCalculateTest(Lotto exampleLotto, double profitRate) {
-        Lottos exampleLottos = new Lottos(Collections.singletonList(exampleLotto));
-        Map<LottoRank, Integer> exampleLottosResult =
-                exampleLottos.getStatistics(winningLotto);
-        double value = new LottoStore().calculateProfitRate(exampleLottosResult, 1);
-        assertThat(value).isEqualTo(profitRate);
+    @DisplayName("수익률 계산")
+    @MethodSource("provideLottoAndProfitRateResult")
+    void lottoProfitCalculateTest(Lotto inputLotto, double expectedProfitRate) {
+        LottoRank lottoResult = winningLotto.getLottoResult(inputLotto);
+        assertThat((double) (lottoResult.getPrizeMoney() / 1000)).isEqualTo(expectedProfitRate);
     }
 
     @ParameterizedTest

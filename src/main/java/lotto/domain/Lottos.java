@@ -5,11 +5,7 @@ import java.util.*;
 public class Lottos {
 
     private final List<Lotto> lottoBunch = new ArrayList<>();
-
-    public Lottos(List<Lotto> purchasedLottos) {
-        lottoBunch.addAll(purchasedLottos);
-    }
-
+    
     public Lottos(int purchasedLottoCount) {
         for (int i = 0; i < purchasedLottoCount; i++) {
             lottoBunch.add(LottoGenerator.createLotto());

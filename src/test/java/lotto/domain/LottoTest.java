@@ -13,12 +13,23 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.stream.Stream;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LottoTest {
+    private static final Lotto lotto = Lotto.from("1,2,3,4,5,6");
+    private static final BonusBall bonusBall = new BonusBall(7, lotto);
+    private static final WinningLotto winningLotto = new WinningLotto(lotto, bonusBall);
 
-    private static final Lotto winningLotto = Lotto.from("1,2,3,4,5,6");
+    private static Stream<Arguments> provideLottoAndLottoRank() {
+        return Stream.of(
+                Arguments.of(Lotto.from("2,4,8,9,13,25"), LottoRank.NONE),
+                Arguments.of(Lotto.from("2,4,7,9,13,25"), LottoRank.FIFTH),
+                Arguments.of(Lotto.from("2,4,6,1,7,3"), LottoRank.SECOND),
+                Arguments.of(Lotto.from("1,2,3,4,5,6"), LottoRank.FIRST)
+        );
+    }
 
     private static Stream<Arguments> provideAllExceptionCase() {
         return Stream.of(
@@ -68,5 +79,13 @@ public class LottoTest {
         assertThatThrownBy(() -> {
             Lotto.from(input);
         }).isInstanceOf(LottoException.class);
+    }
+
+    @ParameterizedTest
+    @DisplayName("당첨 통계 결과 수합")
+    @MethodSource("provideLottoAndLottoRank")
+    void lottosResult(Lotto exampleLotto, LottoRank expectedRank) {
+        LottoRank lottoResult = winningLotto.getLottoResult(exampleLotto);
+        assertThat(lottoResult).isEqualTo(expectedRank);
     }
 }
