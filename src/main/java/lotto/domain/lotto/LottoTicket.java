@@ -1,12 +1,7 @@
 package lotto.domain.lotto;
 
-import static java.util.stream.Collectors.collectingAndThen;
-import static java.util.stream.Collectors.toList;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
-import lotto.domain.number.Payout;
 
 public class LottoTicket {
 
@@ -17,14 +12,12 @@ public class LottoTicket {
         this.lottoTicket = new ArrayList<>(lottoTicket);
     }
 
-    public static LottoTicket valueOf(Payout payout, RandomLottoGenerator randomLottoGenerator) {
-        return Stream.generate(randomLottoGenerator::nextLottoNumbers)
-            .limit(payout.getNumberOfStuff(LOTTO_PRICE))
-            .collect(collectingAndThen(toList(), LottoTicket::new));
-    }
-
     public List<LottoNumbers> unwrap() {
         return new ArrayList<>(lottoTicket);
+    }
+
+    public static int getLottoPrice() {
+        return LOTTO_PRICE;
     }
 
     public int getCount() {

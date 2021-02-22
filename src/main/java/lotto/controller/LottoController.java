@@ -29,7 +29,7 @@ public class LottoController {
     }
 
     private static LottoTicket buyLotto(Payout payout) {
-        LottoTicket lottoTicket = LottoTicket.valueOf(payout, LOTTO_GENERATOR);
+        LottoTicket lottoTicket = LOTTO_GENERATOR.buyLottoTicket(payout);
         OutputView.payOuted(lottoTicket.getCount());
         OutputView.boughtLotties(lottoTicket);
 

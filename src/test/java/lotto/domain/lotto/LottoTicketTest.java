@@ -13,8 +13,8 @@ class LottoTicketTest {
     @DisplayName("지불 금액에 따른 로또 개수")
     @CsvSource({"1,0", "999,0", "1000,1", "1001,1", "1999,1"})
     void valueOf(String amount, int expected) {
-        LottoTicket lottoTicket = LottoTicket.valueOf(Payout.valueOf(amount),
-            RandomLottoGenerator.getInstance());
+        LottoTicket lottoTicket = RandomLottoGenerator.getInstance()
+            .buyLottoTicket(Payout.valueOf(amount));
 
         assertThat(lottoTicket.getCount()).isEqualTo(expected);
     }
