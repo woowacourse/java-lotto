@@ -16,7 +16,7 @@ public class LottoService {
         this.lottoMachine = lottoMachine;
     }
 
-    public LottoRepository buyLotto(final Ticket ticket) {
+    public LottoRepository getLotto(final Ticket ticket) {
         lottoRepository.generateLottoByTicket(lottoMachine, ticket.getCount());
         return lottoRepository;
     }

@@ -18,7 +18,7 @@ public class LottoController {
         Ticket ticket = buyLotto();
 
         OutputView.printBuyLotto(ticket.getCount());
-        OutputView.printLottoResults(lottoService.buyLotto(ticket));
+        OutputView.printLottoResults(lottoService.getLotto(ticket));
 
         WinningLotto winningLotto = buyWinningLotto();
         RatingInfo ratingInfo = lottoService.scratchLotto(winningLotto);

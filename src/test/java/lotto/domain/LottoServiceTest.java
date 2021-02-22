@@ -31,7 +31,7 @@ public class LottoServiceTest {
         lottoRepository.generateLottoByTicket(() -> Arrays.asList(1, 2, 3, 4, 5, 6), count);
 
         Ticket ticket = new Ticket(new Money(14000));
-        LottoRepository lottoRepositoryByLottoManager = lottoManager.buyLotto(ticket);
+        LottoRepository lottoRepositoryByLottoManager = lottoManager.getLotto(ticket);
 
         for (int i = 0; i < count; i++) {
             List<Integer> expected = lottoRepository.toList().get(i).getNumbers();
@@ -45,7 +45,7 @@ public class LottoServiceTest {
     void scratchLottoCheck() {
         Ticket ticket = new Ticket(new Money(2000));
 
-        lottoManager.buyLotto(ticket);
+        lottoManager.getLotto(ticket);
         WinningLotto winningLotto = new WinningLotto(
             Lotto.getInstanceByInt(Arrays.asList(1, 2, 3, 4, 5, 6)),
             new LottoNumber(7));
