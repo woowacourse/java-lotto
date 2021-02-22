@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static lotto.domain.lotto.LottoLine.LOTTO_LINE_SIZE;
 import static lotto.domain.lotto.LottoNumber.LOTTO_FINAL_NUMBER;
 import static lotto.domain.lotto.LottoNumber.LOTTO_START_NUMBER;
 
@@ -18,7 +19,7 @@ public class RandomLottoGenerator {
 
     public List<LottoNumber> createLottoLine() {
         Collections.shuffle(totalLottoNumberList);
-        List<LottoNumber> picked = totalLottoNumberList.subList(0, 6);
+        List<LottoNumber> picked = totalLottoNumberList.subList(0, LOTTO_LINE_SIZE);
         Collections.sort(picked);
         return picked;
     }
