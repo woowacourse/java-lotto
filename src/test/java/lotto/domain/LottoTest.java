@@ -1,42 +1,42 @@
 package lotto.domain;
 
-import java.util.List;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.Arrays;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
 public class LottoTest {
-    private static final String NUMBER_COUNT_ERROR = "[ERROR] 6개의 숫자를 입력해주세요";
-    private static final String NUMBER_DUPLICATE_ERROR = "[ERROR] 숫자는 중복될 수 없습니다";
-    private static final String NUMBER_RANGE_ERROR = "[ERROR] 1 ~ 45 사이의 숫자를 입력해주세요";
+
+    public static final String NUMBER_SIZE_ERROR = "[ERROR] 총 6개의 숫자를 입력해야 합니다.";
+    public static final String DUPLICATE_ERROR = "[ERROR] 중복되는 숫자를 입력할 수 없습니다.";
 
     @Test
-    void 숫자가_6개인지_확인() {
-        List<Integer> nums = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
+    @DisplayName("포함된 숫자가 6개인지 검증")
+    void lottoNumbers_size() {
         assertThatThrownBy(() -> {
-            new Lotto(nums);
+            new Lotto(Arrays.asList(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3)
+            ));
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(NUMBER_COUNT_ERROR);
+            .hasMessageContaining(NUMBER_SIZE_ERROR);
     }
 
     @Test
-    void 숫자가_중복인지_확인() {
-        List<Integer> nums = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 5));
+    @DisplayName("중복이 있을 때 에러 발생")
+    void lottoNumbers_duplicate() {
         assertThatThrownBy(() -> {
-            new Lotto(nums);
+            new Lotto(Arrays.asList(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(5)
+            ));
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(NUMBER_DUPLICATE_ERROR);
-    }
-
-    @Test
-    void 숫자가_범위에_있는지_확인() {
-        List<Integer> nums = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 50));
-        assertThatThrownBy(() -> {
-            new Lotto(nums);
-        }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(NUMBER_RANGE_ERROR);
+            .hasMessageContaining(DUPLICATE_ERROR);
     }
 }
