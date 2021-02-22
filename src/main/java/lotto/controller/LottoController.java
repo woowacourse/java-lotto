@@ -20,13 +20,13 @@ public class LottoController {
         int totalLottoCount = inputMoney.getPurchaseCount();
         LottoCount lottoCount = new LottoCount(inputManualLottoCount, totalLottoCount);
         LottoTickets lottoTickets = lottoTicketFactory.generateLottoTickets(lottoCount.getAutoLottoCount());
+        OutputView.printLottoTicketsCount(lottoCount);
+        OutputView.printLottoTickets(lottoTickets);
         WinningLotto winningLotto = getWinningLotto(lottoTickets);
         showResult(lottoTickets, winningLotto);
     }
 
     private WinningLotto getWinningLotto(LottoTickets lottoTickets) {
-        OutputView.printLottoTicketsCount(lottoTickets);
-        OutputView.printLottoTickets(lottoTickets);
         LottoTicket winningTicket = InputView.inputWinningNumbers().stream()
                 .map(LottoNumber::new)
                 .collect(collectingAndThen(toList(), LottoTicket::new));
