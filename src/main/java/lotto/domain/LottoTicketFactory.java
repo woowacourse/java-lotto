@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoTicketFactory {
@@ -38,6 +39,9 @@ public class LottoTicketFactory {
     }
 
     public List<LottoNumber> createManualLottoTicket(List<String> numbers) {
-        return new ArrayList<>();
+        return numbers.stream()
+                .map(LottoNumber::new)
+                .sorted()
+                .collect(Collectors.toList());
     }
 }
