@@ -1,6 +1,8 @@
 package lottogame.controller;
 
 import java.util.Set;
+import lottogame.domain.LottoGame;
+import lottogame.domain.LottoGameResult;
 import lottogame.domain.Money;
 import lottogame.domain.machine.LottoTicketIssueMachine;
 import lottogame.domain.number.LottoWinningNumbers;
@@ -14,14 +16,25 @@ public class LottoGameController {
     }
 
     public void play() {
-        Money money = new Money(InputView.inputMoney());
-        LottoTickets lottoTickets = LottoTicketIssueMachine.issueTickets(new Money(money));
+        LottoTickets lottoTickets = getLottoTickets(new Money(InputView.inputMoney()));
         OutputView.printLottoTickets(lottoTickets.getLottoTickets());
+        LottoWinningNumbers lottoWinningNumbers = getWinningNumbers();
 
+        LottoGame lottoGame = new LottoGame(lottoTickets, lottoWinningNumbers);
+        LottoGameResult lottoGameResult = lottoGame.getMatchingResult();
+        OutputView.printLottoGameResult(lottoGameResult);
+        OutputView.printLottoGameYield(lottoGame.getYield(lottoGameResult));
+    }
+
+    private LottoWinningNumbers getWinningNumbers() {
         Set<Integer> winningNumbers = InputView.inputWinningNumbers();
         int bonusNumber = InputView.inputBonusNumber();
-        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(winningNumbers, bonusNumber);
+        return new LottoWinningNumbers(winningNumbers, bonusNumber);
+    }
 
-
+    private LottoTickets getLottoTickets(Money money) {
+        LottoTicketIssueMachine lottoTicketIssueMachine =
+            new LottoTicketIssueMachine(new Money(money));
+        return lottoTicketIssueMachine.issueTickets();
     }
 }
