@@ -10,7 +10,7 @@ public class RandomUtilsTest {
 
     @Test
     @DisplayName("지정된 범위의 난수 생성")
-    void random_number_make() {
+    void testMakeRandomNumber() {
         final int startNumber = 1;
         final int endNumber = 45;
 
@@ -22,7 +22,7 @@ public class RandomUtilsTest {
 
     @Test
     @DisplayName("잘못된 범위 입력 예외처리")
-    void random_number_make_exception() {
+    void testMakeRandomNumberException() {
         assertThatThrownBy(() -> RandomUtils.nextPositiveInt(10, 9))
             .isInstanceOf(IllegalArgumentException.class);
         assertThatThrownBy(() -> RandomUtils.nextPositiveInt(-3, 9))
