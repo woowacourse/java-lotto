@@ -6,7 +6,7 @@ import java.util.Objects;
  * Money.java
  * 로또 프로그램 내에서 통용되는 돈을 뜻하는 클래스
  *
- * @author Kimun Kim, github.com/tributetothemoon스
+ * @author Kimun Kim, github.com/tributetothemoon
  * @author Daeun Lee, github.com/da-nyee
  */
 public class Money {

@@ -4,7 +4,7 @@ package domain;
  * Rank.java
  * 이윤을 구하고 담는 Wrapper 클래스
  *
- * @author Kimun Kim, github.com/tributetothemoon스
+ * @author Kimun Kim, github.com/tributetothemoon
  * @author Daeun Lee, github.com/da-nyee
  */
 public class Profit {

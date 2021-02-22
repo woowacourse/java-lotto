@@ -8,7 +8,7 @@ import java.util.List;
  * LottoTicket.java
  * 한 장의 로또 티켓 클래스
  *
- * @author Kimun Kim, github.com/tributetothemoon스
+ * @author Kimun Kim, github.com/tributetothemoon
  * @author Daeun Lee, github.com/da-nyee
  */
 public class LottoTicket {

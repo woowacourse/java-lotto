@@ -6,7 +6,7 @@ import java.util.Objects;
  * LottoNumber.java
  * 로또 번호 1자리를 뜻하는 클래스
  *
- * @author Kimun Kim, github.com/tributetothemoon스
+ * @author Kimun Kim, github.com/tributetothemoon
  * @author Daeun Lee, github.com/da-nyee
  */
 public class LottoNumber {
