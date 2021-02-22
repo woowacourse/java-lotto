@@ -17,11 +17,11 @@ public abstract class LottoMachine {
         this.lottoPrice = lottoPrice;
     }
 
-    public int calculateNumberOfTickets(int purchaseMoney) {
-        validateNegativeDigit(purchaseMoney);
-        validateNoExtraMoney(purchaseMoney);
+    public int calculateNumberOfTickets(Money purchaseMoney) {
+        validateNegativeDigit(purchaseMoney.getMoney());
+        validateNoExtraMoney(purchaseMoney.getMoney());
 
-        return purchaseMoney / lottoPrice.getMoney();
+        return purchaseMoney.getMoney() / lottoPrice.getMoney();
     }
 
     public LottoTickets createTicketsByMoney(int numberOfTickets) {

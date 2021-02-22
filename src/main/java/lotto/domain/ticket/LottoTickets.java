@@ -17,4 +17,8 @@ public class LottoTickets {
     public int size() {
         return lottoTickets.size();
     }
+
+    public boolean concat(LottoTickets that) {
+        return this.lottoTickets.addAll(that.list());
+    }
 }

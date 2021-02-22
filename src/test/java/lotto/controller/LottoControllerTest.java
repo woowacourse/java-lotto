@@ -33,7 +33,7 @@ class LottoControllerTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3, 4, 5, 6, 7, 8, 10})
     void buyLottoTicket(int testSize) {
-        LottoTickets lottoTickets = lottoController.buyAutoLottoTicket(1000 * testSize);
+        LottoTickets lottoTickets = lottoController.buyAutoLottoTicket(new Money(1000 * testSize));
 
         assertThat(lottoTickets.size()).isEqualTo(testSize);
     }

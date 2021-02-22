@@ -10,7 +10,7 @@ import java.util.Comparator;
 import java.util.stream.Collectors;
 
 public class OutputView {
-    private static final String INFORM_SIZE_MSG = "%d개를 구매했습니다.\n";
+    private static final String INFORM_SIZE_MSG = "수동으로 %d장, 자동으로 %d장을 구매했습니다.\n";
     private static final String WINNING_STATISTICS = "당첨 통계";
     private static final String DASHES = "---------";
     private static final String INFORM_RESULT_AND_BONUS_MSG_FORMAT = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
@@ -20,8 +20,8 @@ public class OutputView {
     private static final String TICKET_PREFIX = "[";
     private static final String TICKET_SUFFIX = "]";
 
-    public void printTicketsSize(int size) {
-        System.out.printf(INFORM_SIZE_MSG, size);
+    public void printTicketsSize(int manualSize, int autoSize) {
+        System.out.printf(INFORM_SIZE_MSG, manualSize, autoSize);
     }
 
     public void printAllLottoTickets(LottoTickets lottoTickets) {

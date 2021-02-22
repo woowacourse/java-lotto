@@ -30,20 +30,22 @@ public class LottoController {
     }
 
     public void start() {
-        LottoTickets lottoTickets = buyAutoLottoTicket(inputView.takeLottoMoney());
+        Money purchaseMoney = new Money(inputView.takeLottoMoney());
         int sizeOfManualLotto = inputView.inputSizeOfManualLotto();
+
+        purchaseMoney.minus(new Money(sizeOfManualLotto * manualLottoMachine.getLottoPrice().getMoney()));
+        LottoTickets autoLottoTickets = buyAutoLottoTicket(purchaseMoney);
 
         inputView.printRequestMessageForInputManualLottoNumbers();
         List<LottoNumbers> lottoNumbers = new ArrayList<>();
-        for(int i = 0 ; i < sizeOfManualLotto; i++){
+        for (int i = 0; i < sizeOfManualLotto; i++) {
             lottoNumbers.add(new LottoNumbers(inputView.inputManualLottoNumbers()));
         }
 
-        LottoTickets tickets = manualLottoMachine.createTickets(sizeOfManualLotto, lottoNumbers);
-        outputView.printTicketsSize(sizeOfManualLotto);
-        outputView.printAllLottoTickets(tickets);
+        LottoTickets lottoTickets = manualLottoMachine.createTickets(sizeOfManualLotto, lottoNumbers);
+        outputView.printTicketsSize(sizeOfManualLotto, autoLottoTickets.size());
 
-        outputView.printTicketsSize(lottoTickets.size());
+        lottoTickets.concat(autoLottoTickets);
         outputView.printAllLottoTickets(lottoTickets);
 
         WinningLottoTicket winningLotto = createWinningLotto(inputView.inputWinningNumbers(), inputView.takeBonusNumber());
@@ -53,7 +55,7 @@ public class LottoController {
         outputView.printLottoResult(lottoResult);
     }
 
-    public LottoTickets buyAutoLottoTicket(int lottoPurchaseMoney) {
+    public LottoTickets buyAutoLottoTicket(Money lottoPurchaseMoney) {
         int numberOfTickets = autoLottoMachine.calculateNumberOfTickets(lottoPurchaseMoney);
         return autoLottoMachine.createTicketsByMoney(numberOfTickets);
     }

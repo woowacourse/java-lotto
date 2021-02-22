@@ -7,7 +7,8 @@ import lotto.domain.number.LottoNumberFactory;
 import java.util.List;
 
 public class WinningLottoTicket {
-    public static final String BONUS_DUPLICATE_WINNING_NUMBER = "보너스 번호가 당첨 번호와 중복되었습니다. 중복된 번호 : %d";
+    private static final String BONUS_DUPLICATE_WINNING_NUMBER = "보너스 번호가 당첨 번호와 중복되었습니다. 중복된 번호 : %d";
+
     private final LottoNumber bonusNumber;
     private final LottoTicket winningLottoTicket;
 

@@ -1,5 +1,6 @@
 package lotto.domain.machine;
 
+import lotto.domain.Money;
 import lotto.domain.number.LottoNumbers;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTickets;
@@ -15,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ManualLottoMachineTest {
-    private LottoMachine manualLottoMachine = new ManualLottoMachine(1000);
+    private LottoMachine manualLottoMachine = new ManualLottoMachine(new Money(1000));
     private List<LottoNumbers> lottoNumbersBundle;
     private int expectedSize;
 
