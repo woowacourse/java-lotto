@@ -1,30 +1,44 @@
 package lottogame.domain.lotto;
 
 import lottogame.utils.DuplicateLottoNumberException;
+import lottogame.utils.InvalidBonusBallNumberException;
+import lottogame.utils.InvalidLottoNumberRangeException;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class WinningLotto {
     private final Lotto lotto;
     private final LottoNumber bonusBall;
 
     public WinningLotto(List<Integer> numbers, int bonusBall) {
-        lotto = new Lotto(new LottoNumber(numbers));
-        this.bonusBall = new LottoNumber(bonusBall);
-        validate(numbers, bonusBall);
+        List<LottoNumber> lottoNumbers = numbers.stream()
+                .map(number -> new LottoNumber(number))
+                .collect(Collectors.toList());
+        duplicateBonusBall(numbers, bonusBall);
+        lotto = new Lotto(lottoNumbers);
+        this.bonusBall = makeBonusBall(bonusBall);
     }
 
-    private void validate(List<Integer> numbers, int bonusBall) {
+    private LottoNumber makeBonusBall(int bonusBall) {
+        try {
+            return new LottoNumber(bonusBall);
+        } catch (InvalidLottoNumberRangeException e) {
+            throw new InvalidBonusBallNumberException();
+        }
+    }
+
+    private void duplicateBonusBall(List<Integer> numbers, int bonusBall) {
         if (numbers.contains(bonusBall)) {
             throw new DuplicateLottoNumberException();
         }
     }
 
-    boolean contains(Integer number) {
-        return lotto.contains(number);
+    public int matchNumbers(List<LottoNumber> lottoNumbers) {
+        return lotto.matchNumberCount(lottoNumbers);
     }
 
-    boolean matchBonusBall(Lotto lotto) {
-        return lotto.contains(bonusBall);
+    public boolean matchBonusBall(Lotto lotto) {
+        return lotto.matchBonusBall(bonusBall);
     }
 }
