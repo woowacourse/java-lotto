@@ -23,6 +23,12 @@ public class InputView {
         return SCANNER.nextLine();
     }
 
+    public static List<String> inputManualLottoNumbers() {
+        return Arrays.asList(SCANNER.nextLine()
+                .replace(BLANK, REPLACEMENT)
+                .split(DELIMITER));
+    }
+
     public static List<String> inputWinningNumbers() {
         OutputView.printInputWinningNumbers();
         return Arrays.asList(SCANNER.nextLine()

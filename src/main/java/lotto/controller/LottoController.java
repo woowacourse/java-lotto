@@ -4,6 +4,9 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
 
@@ -19,8 +22,19 @@ public class LottoController {
         String inputManualLottoCount = InputView.inputManualLottoCount();
         int totalLottoCount = inputMoney.getPurchaseCount();
         LottoCount lottoCount = new LottoCount(inputManualLottoCount, totalLottoCount);
+        List<LottoTicket> manualLottoNumbers = new ArrayList<>();
+        OutputView.printInputManualLottoNumbers();
+        while (lottoCount.isAvailManualLottoRound()) {
+            List<String> numbers = InputView.inputManualLottoNumbers();
+            manualLottoNumbers.add(numbers.stream()
+                    .map(LottoNumber::new)
+                    .collect(collectingAndThen(toList(), LottoTicket::new)));
+            lottoCount.passManualLottoRound();
+        }
+        LottoTickets manualLottoTickets = new LottoTickets(manualLottoNumbers);
         LottoTickets lottoTickets = lottoTicketFactory.generateLottoTickets(lottoCount.getAutoLottoCount());
         OutputView.printLottoTicketsCount(lottoCount);
+        OutputView.printLottoTickets(manualLottoTickets);
         OutputView.printLottoTickets(lottoTickets);
         WinningLotto winningLotto = getWinningLotto(lottoTickets);
         showResult(lottoTickets, winningLotto);
