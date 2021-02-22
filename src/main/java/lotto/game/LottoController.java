@@ -4,8 +4,11 @@ import lotto.money.Money;
 import lotto.money.PrizeMoney;
 import lotto.ranking.Statistics;
 import lotto.ticket.BonusBall;
+import lotto.ticket.Ticket;
 import lotto.ticket.Tickets;
 import lotto.ticket.WinnerTicket;
+import lotto.ticket.strategy.ManualNumbersGenerator;
+import lotto.ticket.strategy.NumbersGenerator;
 import lotto.ticket.strategy.RandomNumbersGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -14,11 +17,40 @@ public class LottoController {
     public void run() {
         Money money = generateMoney();
         LottoCount lottoCount = generateCount(money);
-        Tickets tickets = generateTickets(lottoCount);
+        LottoCount manualTicketAmount = generateManualTicketAmount();
+        LottoCount autoTicketAmount = lottoCount.purchaseManualTicket(manualTicketAmount);
+
+        Tickets manualTickets = purchaseManualTickets(manualTicketAmount);
+        Tickets autoTickets = generateAutoTicket(autoTicketAmount);
+        OutputView.noticeLottoCount(manualTicketAmount, autoTicketAmount);
+
+        Tickets totalTicket = new Tickets(manualTickets, autoTickets);
+        OutputView.showTickets(totalTicket);
+
         WinnerTicket winnerTicket = generateWinnerTicket();
         BonusBall bonusBall = generateBonusBall(winnerTicket);
-        Statistics statistics = generateStatistics(tickets, winnerTicket, bonusBall);
+        Statistics statistics = generateStatistics(totalTicket, winnerTicket, bonusBall);
         makeResult(money, statistics);
+    }
+
+    private Tickets purchaseManualTickets(LottoCount value) {
+        Tickets tickets = new Tickets();
+        try {
+            OutputView.enterManualTicketNumber();
+            eachManualTicketGenerate(tickets, value);
+            return tickets;
+        } catch (IllegalArgumentException e) {
+            OutputView.printError(e);
+            return purchaseManualTickets(value);
+        }
+    }
+
+    private void eachManualTicketGenerate(Tickets tickets, LottoCount count) {
+        while (count.isGreaterThanZero()) {
+            count = count.decreaseOne();
+            NumbersGenerator numbersGenerator = new ManualNumbersGenerator(InputView.inputNumbers());
+            tickets.add(new Ticket(numbersGenerator.generate()));
+        }
     }
 
     private Money generateMoney() {
@@ -33,19 +65,25 @@ public class LottoController {
 
     private LottoCount generateCount(Money money) {
         try {
-            LottoCount lottoCount = new LottoCount(money);
-            OutputView.noticeLottoCount(lottoCount);
-            return lottoCount;
+            return new LottoCount(money);
         } catch (IllegalArgumentException e) {
             OutputView.printError(e);
             return generateCount(money);
         }
     }
 
-    private Tickets generateTickets(LottoCount lottoCount) {
-        Tickets tickets = new Tickets(lottoCount, new RandomNumbersGenerator());
-        OutputView.showTickets(tickets);
-        return tickets;
+    private LottoCount generateManualTicketAmount() {
+        try {
+            OutputView.enterManualTicketAmount();
+            return InputView.inputManualTicketAmount();
+        } catch (IllegalArgumentException e) {
+            OutputView.printError(e);
+            return generateManualTicketAmount();
+        }
+    }
+
+    private Tickets generateAutoTicket(LottoCount lottoCount) {
+        return new Tickets(lottoCount, new RandomNumbersGenerator());
     }
 
     private WinnerTicket generateWinnerTicket() {

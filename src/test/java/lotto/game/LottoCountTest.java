@@ -1,8 +1,6 @@
 package lotto.game;
 
 import lotto.money.Money;
-import lotto.ticket.Tickets;
-import lotto.ticket.strategy.ManualNumbersGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

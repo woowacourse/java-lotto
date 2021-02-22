@@ -3,8 +3,8 @@ package lotto.money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static lotto.ticket.TicketValidation.ERROR_MESSAGE_INVALID_INPUT;
 import static lotto.money.Money.ERROR_MESSAGE_MINIMUM_MONEY;
+import static lotto.ticket.TicketValidation.ERROR_MESSAGE_INVALID_INPUT;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 

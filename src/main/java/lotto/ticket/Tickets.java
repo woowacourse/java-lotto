@@ -17,6 +17,12 @@ public class Tickets {
         this.tickets = new ArrayList<>();
     }
 
+    public Tickets(Tickets manualTickets, Tickets autoTickets) {
+        this.tickets = new ArrayList<>();
+        this.tickets.addAll(manualTickets.tickets);
+        this.tickets.addAll(autoTickets.tickets);
+    }
+
     public Tickets(LottoCount lottoCount, NumbersGenerator numbersGenerator) {
         this.tickets = new ArrayList<>();
         while (lottoCount.isGreaterThanZero()) {
@@ -41,6 +47,10 @@ public class Tickets {
             bonus = ticket.hasContainBonus(bonusBall);
         }
         return bonus;
+    }
+
+    public void add(Ticket ticket) {
+        this.tickets.add(ticket);
     }
 
     public List<Ticket> getTickets() {

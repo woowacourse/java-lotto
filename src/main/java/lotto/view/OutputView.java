@@ -10,7 +10,10 @@ import java.util.Map;
 
 public class OutputView {
     private static final String ENTER_PURCHASE_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
-    private static final String COMPLETE_PURCHASE_MESSAGE = "개를 구매했습니다.";
+    private static final String ENTER_MANUAL_TICKET_AMOUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String ENTER_MANUAL_TICKET_NUMBER = "수동으로 구매할 번호를 입력해 주세요.";
+    //    private static final String COMPLETE_PURCHASE_MESSAGE = "개를 구매했습니다.";
+    private static final String COMPLETE_PURCHASE_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String ENTER_WINNER_TICKET_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String ENTER_BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String STATISTICS_TITLE = "당첨 통계";
@@ -26,8 +29,9 @@ public class OutputView {
         System.out.println(ENTER_PURCHASE_MONEY_MESSAGE);
     }
 
-    public static void noticeLottoCount(LottoCount lottoCount) {
-        System.out.println(lottoCount.getLottoCount() + COMPLETE_PURCHASE_MESSAGE);
+    public static void noticeLottoCount(LottoCount manual, LottoCount auto) {
+        System.out.printf(COMPLETE_PURCHASE_MESSAGE, manual.getLottoCount(), auto.getLottoCount());
+        System.out.println();
     }
 
     public static void showTickets(Tickets tickets) {
@@ -77,5 +81,13 @@ public class OutputView {
 
     public static void printError(IllegalArgumentException e) {
         System.err.println(e.getMessage());
+    }
+
+    public static void enterManualTicketAmount() {
+        System.out.println(ENTER_MANUAL_TICKET_AMOUNT);
+    }
+
+    public static void enterManualTicketNumber() {
+        System.out.println(ENTER_MANUAL_TICKET_NUMBER);
     }
 }
