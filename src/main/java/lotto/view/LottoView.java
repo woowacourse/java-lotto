@@ -17,7 +17,7 @@ public class LottoView {
     private static final String RESULT_TITLE_MESSAGE = "\n당첨 통계\n----------";
     private static final String AMOUNT = "개";
     private static final String EARNING_RATE_MESSAGE = "총 수익률은 %s입니다.";
-    private static final DecimalFormat decimalFormat = new DecimalFormat("0.00");
+    private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.00");
 
     public static String requestMoney() {
         System.out.println(INPUT_MONEY_MESSAGE);
@@ -53,6 +53,6 @@ public class LottoView {
     }
 
     public static void displayEarningRate(double earningRate) {
-        System.out.printf(EARNING_RATE_MESSAGE, decimalFormat.format(earningRate));
+        System.out.printf(EARNING_RATE_MESSAGE, DECIMAL_FORMAT.format(earningRate));
     }
 }
