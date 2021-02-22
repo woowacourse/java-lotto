@@ -51,8 +51,9 @@ public class OutputView {
         return "";
     }
 
-    public static void printTickets(List<LottoTicket> lottoTickets) {
+    public static void printTickets(List<LottoTicket> lottoTickets, int change) {
         System.out.printf("%d개를 구매했습니다.\n", lottoTickets.size());
+        System.out.printf("거스름 돈은 %d원 입니다.\n", change);
 
         for (LottoTicket lottoTicket : lottoTickets) {
             String numbers = lottoTicket.getUnmodifiableList().stream()

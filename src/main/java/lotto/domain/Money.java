@@ -6,6 +6,7 @@ import lotto.utils.StringChecker;
 
 public class Money {
     private final BigDecimal money;
+    private BigDecimal change;
 
     public Money(String moneyValue) {
         validateIsNumber(moneyValue);
@@ -19,7 +20,13 @@ public class Money {
     }
 
     public int getPossibleTicketCount() {
-        return money.intValue() / LottoTicket.PRICE;
+        int ticketCount = money.intValue() / LottoTicket.PRICE;
+        change = money.subtract(BigDecimal.valueOf(LottoTicket.PRICE * ticketCount));
+        return ticketCount;
+    }
+
+    public int getChange() {
+        return change.intValue();
     }
 
 }

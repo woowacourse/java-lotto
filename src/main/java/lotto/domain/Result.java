@@ -13,9 +13,11 @@ public class Result {
 
     public Result(String winnings, String bonus, LottoTickets lottoTickets) {
         this.resultMap = new EnumMap<>(Rank.class);
+
         setResultMap(new WinningNumbers(winnings, bonus), lottoTickets);
-        BigDecimal prizePerRank = getTotalPrizePerRank();
-        this.earningRate = getEarningRate(lottoTickets.size() * LottoTicket.PRICE, prizePerRank);
+        BigDecimal totalPrize = getTotalPrize();
+
+        this.earningRate = getEarningRate(lottoTickets.size() * LottoTicket.PRICE, totalPrize);
     }
 
     private void setResultMap(WinningNumbers winningNumbers, LottoTickets lottoTickets) {
@@ -25,21 +27,23 @@ public class Result {
         }
     }
 
+    private BigDecimal getTotalPrize() {
+        BigDecimal localPrize = BigDecimal.ZERO;
+
+        for (Map.Entry<Rank, Integer> result : resultMap.entrySet()) {
+            localPrize = localPrize.add(
+                result.getKey().getPrize()
+                    .multiply(BigDecimal.valueOf(result.getValue()))
+            );
+        }
+        return localPrize;
+    }
+
     private BigInteger getEarningRate(int buyPrice, BigDecimal prizePerRank) {
         return (prizePerRank
             .divide(BigDecimal.valueOf(buyPrice), 2, BigDecimal.ROUND_CEILING))
             .multiply(BigDecimal.valueOf(100)).toBigInteger();
     }
-
-    private BigDecimal getTotalPrizePerRank() {
-        BigDecimal prizePerRank = BigDecimal.ZERO;
-        for (Map.Entry<Rank, Integer> result : resultMap.entrySet()) {
-            prizePerRank = result.getKey().getPrize()
-                .multiply(BigDecimal.valueOf(result.getValue()));
-        }
-        return prizePerRank;
-    }
-
 
     public Map<Rank, Integer> getResultMap() {
         return Collections.unmodifiableMap(resultMap);

@@ -27,7 +27,7 @@ public class LottoApplication {
         final String moneyValue = InputView.getMoneyInput();
 
         final Machine machine = new Machine(moneyValue, new RandomLottoGenerator());
-        OutputView.printTickets(machine.getTickets());
+        OutputView.printTickets(machine.getTickets(), machine.getChange());
         Result result = machine
             .getResult(InputView.getWinningNumbersInput(), InputView.getBonusBallInput());
 
