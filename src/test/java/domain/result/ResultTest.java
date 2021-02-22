@@ -31,9 +31,9 @@ class ResultTest {
         winningLotto = new WinningLotto(winningNumbers, bonusNumber);
     }
 
-    @DisplayName("Result객체 정상 생성 테스트")
+    @DisplayName("Result 정상 생성 테스트.")
     @Test
-    void Result_객체_정상_생성된다() {
+    void resultGenerateTest() {
         //given
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
@@ -48,9 +48,9 @@ class ResultTest {
                 .doesNotThrowAnyException();
     }
 
-    @DisplayName("Result 결과 반환한다.")
+    @DisplayName("Result 결과 테스트.")
     @Test
-    void Result_결과를_반환한다() {
+    void resultFindRankTest() {
         //given
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
@@ -67,9 +67,9 @@ class ResultTest {
         assertThat(results.get(LottoRank.SIX_MATCHES)).isEqualTo(1);
     }
 
-    @DisplayName("Result 복수 결과 반환한다")
+    @DisplayName("Result 복수 결과 반환 테스트.")
     @Test
-    void Result_로또_복수_결과_테스트() {
+    void resultManyRankTest() {
         //given
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         List<Integer> lottoNumbers2 = Arrays.asList(1, 2, 3, 4, 5, 8);
@@ -92,7 +92,7 @@ class ResultTest {
 
     @DisplayName("5개의 볼, 보너스 볼이 맞을 때 2등 당첨된다.")
     @Test
-    void ResultSecondPrizeTest() {
+    void resultSecondPrizeTest() {
         //given
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 7);
 
@@ -109,9 +109,9 @@ class ResultTest {
         assertThat(results.get(LottoRank.FIVE_AND_BONUS_MATCHES)).isEqualTo(1);
     }
 
-    @DisplayName("수익률 반환 테스트")
+    @DisplayName("수익률 반환 테스트.")
     @Test
-    void earningsRateTest() {
+    void resultEarningsRateTest() {
         //given
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 7, 8, 9);
         List<Integer> lottoNumbers2 = Arrays.asList(1, 2, 3, 7, 8, 9);

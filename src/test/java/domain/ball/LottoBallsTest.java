@@ -10,11 +10,11 @@ import java.util.stream.Collectors;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class LottoTicketBallsTest {
+public class LottoBallsTest {
 
-    @DisplayName("LottoBalls 정상 생성된다")
+    @DisplayName("LottoBalls 정상 생성 테스트.")
     @Test
-    void LottoBalls_생성_테스트() {
+    void lottoBallsGenerateTest() {
         //given
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
@@ -28,9 +28,9 @@ public class LottoTicketBallsTest {
                 .doesNotThrowAnyException();
     }
 
-    @DisplayName("LottoBalls의 인스턴스의 사이즈가 6이 아니면 에러가 발생한다. ")
+    @DisplayName("LottoBalls 인스턴스의 사이즈가 6이 아니면 에러가 발생한다.")
     @Test
-    void LottoBalls_사이즈_예외_테스트() {
+    void lottoBallsSizeErrorTest() {
         //given
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
 
@@ -43,9 +43,9 @@ public class LottoTicketBallsTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("LottoBalls에 중복된 LottoNumber가 있다면 에러가 발생한다.")
+    @DisplayName("LottoBalls에 중복된 LottoBall이 있다면 에러가 발생한다.")
     @Test
-    void LottoBalls_중복_예외_테스트() {
+    void lottoBallsDuplicateErrorTest() {
         //given
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 6, 6);
 

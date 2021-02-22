@@ -8,19 +8,19 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
 
-class LottoTicketBallTest {
+class LottoBallTest {
 
-    @DisplayName("LottoBall 정상 생성된다.")
+    @DisplayName("LottoBall 정상 생성 테스트.")
     @Test
-    void LottoBall_생성_테스트() {
+    void lottoBallGenerateTest() {
         assertThatCode(() -> new LottoBall(3))
                 .doesNotThrowAnyException();
     }
 
-    @DisplayName("보장되지 않은 LottoNumber 에러 발생한다. ")
+    @DisplayName("보장되지 않은(중복되지 않은 1~45의 숫자이며, 6개의 숫자) LottoBall이 저장될 시 에러 발생한다.")
     @ParameterizedTest
     @ValueSource(ints = {-1, 0, 46, 47})
-    void LottoBall_에러_테스트(int value) {
+    void lottoBallNotGuaranteedErrorTest(int value) {
         Assertions.assertThatThrownBy(() -> new LottoBall(value))
                 .isInstanceOf(IllegalArgumentException.class);
     }

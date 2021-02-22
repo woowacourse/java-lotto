@@ -11,9 +11,9 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 
 public class WinningLottoTicketTest {
 
-    @DisplayName("WinningLotto 정상 생성된다.")
+    @DisplayName("WinningLotto 정상 생성 테스트.")
     @Test
-    void winningLotto_생성_테스트() {
+    void winningLottoGenerateTest() {
         //given
         int[] lottoNumbers = {1, 2, 3, 4, 5, 6};
         int bonusNumber = 7;
@@ -28,9 +28,9 @@ public class WinningLottoTicketTest {
                 .doesNotThrowAnyException();
     }
 
-    @DisplayName("LottoNumbers와 BonusNumber 중복 검사")
+    @DisplayName("winningLotto LottoBalls의 수와 BonusBall의 수거 중복일 시 에러가 발생한다.")
     @Test
-    void winningLotto_중복_테스트() {
+    void winningLottoDuplicateErrorTest() {
         //given
         int[] lottoNumbers = {1, 2, 3, 4, 5, 6};
         int bonusNumber = 6;
@@ -47,7 +47,7 @@ public class WinningLottoTicketTest {
 
     @DisplayName("WinningBalls 갯수가 5개 이하이면 에러가 발생한다.")
     @Test
-    void winningLottoWiningBallSizeTest() {
+    void winningLottoBallSizeErrorTest() {
         //given
         int[] lottoNumbers = {1, 2, 3, 5, 5, 6};
         int bonusNumber = 6;

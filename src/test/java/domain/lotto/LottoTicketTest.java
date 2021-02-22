@@ -13,9 +13,9 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 
 public class LottoTicketTest {
 
-    @DisplayName("Lotto 정상 생성된다.")
+    @DisplayName("LottoTicket 정상 생성 테스트.")
     @Test
-    public void Lotto_생성() {
+    public void lottoTicketGenerateTest() {
         //given
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
