@@ -3,7 +3,6 @@ package lotto.domain;
 import lotto.exception.BonusBall.BonusBallDuplicatedException;
 import lotto.exception.BonusBall.BonusBallException;
 import lotto.exception.BonusBall.BonusBallScopeException;
-import lotto.exception.Lotto.LottoException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

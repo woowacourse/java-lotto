@@ -5,7 +5,6 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.Map;
-import java.util.Set;
 
 public class LottoStore {
 
