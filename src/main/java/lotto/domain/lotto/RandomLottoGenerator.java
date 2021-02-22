@@ -7,8 +7,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import lotto.domain.number.LottoChance;
 import lotto.domain.number.LottoNumber;
-import lotto.domain.number.Payout;
 
 public class RandomLottoGenerator {
 
@@ -24,9 +24,9 @@ public class RandomLottoGenerator {
         return RANDOM_LOTTO_GENERATOR;
     }
 
-    public LottoTicket buyLottoTicket(Payout payout) {
+    public LottoTicket buyLottoTicket(LottoChance lottoChance) {
         return Stream.generate(this::nextLottoNumbers)
-            .limit(payout.getNumberOfStuff(LottoTicket.getLottoPrice()))
+            .limit(lottoChance.getActiveChance())
             .collect(collectingAndThen(toList(), LottoTicket::new));
     }
 

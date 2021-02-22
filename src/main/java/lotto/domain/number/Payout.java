@@ -1,5 +1,7 @@
 package lotto.domain.number;
 
+import lotto.domain.lotto.LottoTicket;
+
 public class Payout {
 
     private static final int PRICE_MINIMUM = 0;
@@ -26,6 +28,20 @@ public class Payout {
     private static void validatePositive(int amount) {
         if (amount <= PRICE_MINIMUM) {
             throw new IllegalArgumentException("입력값이 양수가 아닙니다.");
+        }
+    }
+
+    public LottoChance newLottoChance(Chance passiveChance) {
+        validatePassiveChance(passiveChance);
+        Chance activeChance = new Chance(
+            getNumberOfStuff(LottoTicket.getLottoPrice()) - passiveChance.unwrap());
+
+        return new LottoChance(passiveChance, activeChance);
+    }
+
+    private void validatePassiveChance(Chance passiveChance) {
+        if (getNumberOfStuff(LottoTicket.getLottoPrice()) < passiveChance.unwrap()) {
+            throw new IllegalArgumentException("금액보다 많은 로또 수 입니다.");
         }
     }
 

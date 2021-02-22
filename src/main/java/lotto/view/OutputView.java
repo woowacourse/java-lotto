@@ -23,6 +23,7 @@ public class OutputView {
     private static final String STATISTICS_BONUS_FORMAT = "%d개 일치, 보너스 볼 일치(%d원)- %d개\n";
     private static final String STATISTICS_YIELD_FORMAT = "총 수익률은 %.2f입니다.\n";
     private static final String LOTTO_NUMBERS_FORMAT = "[%s]\n";
+    private static final String PASSIVE_LOTTO_COUNT = "\n수동으로 구매할 로또 수를 입력해 주세요.";
 
     public static void payout() {
         System.out.println(PAYOUT);
@@ -78,5 +79,9 @@ public class OutputView {
         }
 
         System.out.printf(format, rank.getMatchedNumber(), rank.getWinnings(), count);
+    }
+
+    public static void passiveLottoCount() {
+        System.out.println(PASSIVE_LOTTO_COUNT);
     }
 }

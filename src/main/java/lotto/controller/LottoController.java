@@ -3,6 +3,8 @@ package lotto.controller;
 import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.RandomLottoGenerator;
 import lotto.domain.lotto.WinningNumbers;
+import lotto.domain.number.Chance;
+import lotto.domain.number.LottoChance;
 import lotto.domain.number.Payout;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -13,7 +15,8 @@ public class LottoController {
 
     public static void run() {
         Payout payout = inputPayout();
-        LottoTicket lottoTicket = buyLotto(payout);
+        LottoChance lottoChance = inputPassiveLottoChance(payout);
+        LottoTicket lottoTicket = buyLotto(lottoChance);
         WinningNumbers winningNumbers =
             WinningNumbers.valueOf(inputLastWeekLottoNumber(), inputBonusNumber());
 
@@ -27,8 +30,14 @@ public class LottoController {
         return payOut;
     }
 
-    private static LottoTicket buyLotto(Payout payout) {
-        LottoTicket lottoTicket = LOTTO_GENERATOR.buyLottoTicket(payout);
+    private static LottoChance inputPassiveLottoChance(Payout payout) {
+        OutputView.passiveLottoCount();
+        String passiveLottoChance = InputView.getStringInputFromUser();
+        return payout.newLottoChance(Chance.valueOf(passiveLottoChance));
+    }
+
+    private static LottoTicket buyLotto(LottoChance lottoChance) {
+        LottoTicket lottoTicket = LOTTO_GENERATOR.buyLottoTicket(lottoChance);
         OutputView.payOuted(lottoTicket.count());
         OutputView.boughtLotties(lottoTicket);
 
