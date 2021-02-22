@@ -43,7 +43,7 @@
 - [x] HashMap 리팩토링 (`computeIfPresent`)
 - [x] Controller가 InputView를 가지고 있는 문제 리팩토링
 - [x] InputView와 OutputView의 책임 리팩토링
-- [ ] 금액 기준으로 구매할 로또 갯수를 구하고 로또는 생성하는 로직 분리
+- [x] 금액 기준으로 구매할 로또 갯수를 구하고 로또는 생성하는 로직 분리
     - `LottoStore`를 만들어 WinningLotto와 WinningBonus에 대한 코드 분리
 - [x] `RandomLottoGenerator`에서 셔플에 사용되는 리스트 캐싱 및 메서드 참조 리팩토링
 - [x] 비효율적인 문자열 더하기 제거 (`LessThanLottoPriceException`)

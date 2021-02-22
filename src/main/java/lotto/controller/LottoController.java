@@ -17,12 +17,9 @@ import lotto.view.OutputView;
 
 public class LottoController {
 
-    public LottoController() {
-    }
-
     public void play() {
         Money purchaseAmount = Money.priceOf(InputView.inputPurchaseAmount());
-        Lottos purchasedLottos = buyLotto(purchaseAmount);
+        Lottos purchasedLottos = Lottos.buyLotto(purchaseAmount);
         OutputView.printLottos(purchasedLottos);
 
         Lotto winningLottoNumber = Lotto.of(InputView.inputWinningLottoNumbers());
@@ -30,18 +27,6 @@ public class LottoController {
         WinningLotto winningLotto = new WinningLotto(winningLottoNumber, bonus);
         LottoResult lottoResult = purchasedLottos.match(winningLotto);
         OutputView.printLottoResult(lottoResult);
-    }
-
-    private Lottos buyLotto(Money purchaseAmount) {
-        if (purchaseAmount.isLessThan(1000)) {
-            throw new LessThanLottoPriceException();
-        }
-        int numOfAvailableLotto = purchaseAmount.getPrice() / 1000;
-        List<Lotto> availableLotto = new ArrayList<>();
-        for (int i = 0; i < numOfAvailableLotto; i++) {
-            availableLotto.add(Lotto.generatedBy(new RandomLottoGenerator()));
-        }
-        return new Lottos(availableLotto);
     }
 }
 
