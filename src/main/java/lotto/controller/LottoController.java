@@ -1,15 +1,15 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.domain.lottomachine.RandomLottoMachine;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoController {
-    private InputView inputView;
-    private OutputView outputView;
+    private final InputView inputView;
+    private final OutputView outputView;
 
     public LottoController(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
@@ -17,7 +17,7 @@ public class LottoController {
     }
 
     public void start() {
-        LottoService lottoService = new LottoService(new RandomLottoMachine());
+        LottoService lottoService = new LottoService();
         Ticket ticket = buyTicket();
 
         getManualCount(ticket);
@@ -47,34 +47,32 @@ public class LottoController {
         return new Ticket(new Money(money));
     }
 
-    private void getManualCount(Ticket ticket) {
+    private void setManualCount(Ticket ticket) {
         try {
-            tryGetManualCount(ticket);
+            trySetManualCount(ticket);
         } catch (IllegalArgumentException e) {
             outputView.printMessage(e.getMessage());
-            getManualCount(ticket);
+            setManualCount(ticket);
         }
     }
 
-    private void tryGetManualCount(Ticket ticket) {
+    private void trySetManualCount(Ticket ticket) {
         outputView.printMessage("수동으로 구매할 로또 수를 입력해 주세요");
         ticket.setManualCount(inputView.getInt());
     }
 
-    private void getManualLottoNumbers(Ticket ticket, LottoService lottoService) {
+    private List<Lotto> getManualLottoNumbers(Ticket ticket) {
         try {
             outputView.printMessage("수동으로 구매할 번호를 입력해 주세요.");
+            List<Lotto> inputLottos = new ArrayList<>();
             for (int i = 0; i < ticket.getManualCount(); i++) {
-                getManualLottoNumber(inputView.getLottoNumbers(), lottoService);
+                inputLottos.add(Lotto.createByInteger(inputView.getLottoNumbers()));
             }
+            return inputLottos;
         } catch (IllegalArgumentException e) {
             outputView.printMessage(e.getMessage());
-            getManualCount(ticket);
+            return getManualLottoNumbers(ticket);
         }
-    }
-
-    private void getManualLottoNumber(List<Integer> lottoNumbers, LottoService lottoService) {
-        lottoService.generateManualLotto(Lotto.createByInteger(lottoNumbers));
     }
 
     private WinningLotto getWinningLotto() {

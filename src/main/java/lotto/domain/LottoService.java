@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.lottomachine.LottoMachine;
+import lotto.domain.lottomachine.RandomLottoMachine;
 import lotto.domain.rating.RatingCounter;
 
 import java.util.ArrayList;
@@ -10,6 +11,10 @@ public class LottoService {
     private final LottoMachine lottoMachine;
     private final List<Lotto> lottos = new ArrayList<>();
     private final RatingCounter ratingCounter = new RatingCounter();
+
+    public LottoService() {
+        this(new RandomLottoMachine());
+    }
 
     public LottoService(LottoMachine lottoMachine) {
         this.lottoMachine = lottoMachine;
