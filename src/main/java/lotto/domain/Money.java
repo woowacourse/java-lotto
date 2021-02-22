@@ -39,11 +39,15 @@ public class Money {
     }
 
     private boolean isAffordable(int lottoQuantity) {
-        return 0 <= calculateMoneyLeft(lottoQuantity).money;
+        return 0 <= calculateChange(lottoQuantity);
     }
 
-    public Money calculateMoneyLeft(int lottoQuantity) {
-        return new Money(money - (lottoQuantity * LOTTO_PRICE));
+    public Money getChange(int lottoQuantity) {
+        return new Money(calculateChange(lottoQuantity));
+    }
+
+    private int calculateChange(int lottoQuantity) {
+        return money - (lottoQuantity * LOTTO_PRICE);
     }
 
     @Override

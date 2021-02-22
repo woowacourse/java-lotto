@@ -3,6 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static lotto.domain.Money.MANUAL_LOTTO_QUANTITY_ERROR;
 import static lotto.domain.Money.NOT_ENOUGH_MONEY_ERROR;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -52,15 +53,22 @@ public class MoneyTest {
         assertThat(moneyInvested.calculateProfitRate(profit)).isEqualTo((float) 10_000 / 2_000);
     }
 
-    //TODO
-    // validateAffordability test
-    // calculateMoneyLeft test
+    @DisplayName("수동 로또 구매할 돈이 부족할 때 에러 반환 하는지")
+    @Test
+    void validateAffordability() {
+        Money money = new Money(2_999);
+        int manualLottoQuantity = 3;
+
+        assertThatThrownBy(() -> money.validateAffordability(manualLottoQuantity)).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(MANUAL_LOTTO_QUANTITY_ERROR);
+    }
+
     @DisplayName("수동 로또 구매 후 잔돈 계산 제대로 하는지")
     @Test
     void calculateMoneyLeft() {
-        Money money = new Money(5540);
+        Money money = new Money(5_540);
         int manualLottoQuantity = 3;
 
-        assertThat(money.calculateMoneyLeft(manualLottoQuantity)).isEqualTo(new Money(2540));
+        assertThat(money.getChange(manualLottoQuantity)).isEqualTo(new Money(2540));
     }
 }

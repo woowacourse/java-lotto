@@ -17,7 +17,7 @@ public class LottoController {
 
         Lottos manualLottos = buy(new ManualLottoGenerator(null), manualLottoQuantity);
 
-        Money moneyLeftAfterBuyingManualLotto = money.calculateMoneyLeft(manualLottoQuantity);
+        Money moneyLeftAfterBuyingManualLotto = money.getChange(manualLottoQuantity);
         Lottos autoLottos = buy(new AutomaticLottoGenerator(), moneyLeftAfterBuyingManualLotto.calculateAffordableLottoQuantity());
 
         Lottos totalLottos = manualLottos.merge(autoLottos);
