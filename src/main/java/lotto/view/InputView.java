@@ -12,8 +12,7 @@ public class InputView {
         try {
             return br.readLine().trim();
         } catch (IOException ie) {
-            getUserInput();
+            return getUserInput();
         }
-        return null;
     }
 }
