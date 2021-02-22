@@ -74,7 +74,7 @@ class MoneyTest {
     }
 
     @Test
-    @DisplayName("수동발행갯수만큼 차감 - 자동발행 불가능 경우")
+    @DisplayName("수동발행갯수만큼 차감 - 자동발행 0인 경우")
     void getPossibleTicket1() {
         List<LottoTicket> lottoTickets = Arrays.asList(
             new LottoTicket("11,12,13,14,15,16"),

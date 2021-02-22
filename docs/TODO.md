@@ -45,4 +45,4 @@ src/main/java/lotto/utils/FixedLottoGenerator.java
 # 2단계 미션 구현
 
 - [X] README 작성
-- [ ] 구현 (README 참고)
+- [x] 구현 (README 참고)
