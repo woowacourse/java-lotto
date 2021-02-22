@@ -7,13 +7,13 @@ package domain;
  * @author Kimun Kim, github.com/tributetothemoon
  * @author Daeun Lee, github.com/da-nyee
  */
-public class WinningNumber {
+public class WinningNumbers {
     private static final String ERROR_DUPLICATED_NUMBER = "[ERROR] 보너스 볼은 당첨 번호와 중복될 수 없습니다.";
 
     private final LottoTicket winningNumbers;
     private final LottoNumber bonusBall;
 
-    public WinningNumber(LottoTicket winningNumbers, LottoNumber bonusBall) {
+    public WinningNumbers(LottoTicket winningNumbers, LottoNumber bonusBall) {
         this.winningNumbers = winningNumbers;
         validateBonusBall(bonusBall);
         this.bonusBall = bonusBall;

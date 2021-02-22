@@ -16,16 +16,16 @@ public class Statistics {
 
     private final Map<Rank, Integer> lottoStatistics = new HashMap<>();
 
-    public Statistics(WinningNumber winningNumber, LottoTickets lottoTickets) {
+    public Statistics(WinningNumbers winningNumbers, LottoTickets lottoTickets) {
         for (Rank rank : Rank.values()) {
             lottoStatistics.put(rank, ZERO);
         }
-        calculate(winningNumber, lottoTickets);
+        calculate(winningNumbers, lottoTickets);
     }
 
-    private void calculate(WinningNumber winningNumber, LottoTickets lottoTickets) {
+    private void calculate(WinningNumbers winningNumbers, LottoTickets lottoTickets) {
         for (LottoTicket lottoTicket : lottoTickets.lottoTickets()) {
-            Rank rank = winningNumber.calculateRank(lottoTicket);
+            Rank rank = winningNumbers.calculateRank(lottoTicket);
             Integer count = lottoStatistics.get(rank);
             lottoStatistics.put(rank, count + 1);
         }
