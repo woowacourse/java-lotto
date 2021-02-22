@@ -16,10 +16,17 @@ public class Money {
 
     public Money(String moneyValue, List<LottoTicket> lottoTickets) {
         validateIsNumber(moneyValue);
+        validateNotOverMoney(moneyValue, lottoTickets);
         final BigDecimal money = new BigDecimal(moneyValue);
         this.ticketCount = money.divideToIntegralValue(new BigDecimal(LottoTicket.PRICE)).intValue()
             - lottoTickets.size();
         this.change = money.subtract(BigDecimal.valueOf(LottoTicket.PRICE * ticketCount));
+    }
+
+    private void validateNotOverMoney(String moneyValue, List<LottoTicket> lottoTickets) {
+        if (Long.valueOf(moneyValue) < lottoTickets.size() * LottoTicket.PRICE) {
+            throw new CustomException("수동발행이 구입가능금액을 넘어 발행이 취소됩니다.");
+        }
     }
 
     private void validateIsNumber(String moneyValue) {

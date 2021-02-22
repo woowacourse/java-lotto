@@ -45,8 +45,20 @@ class MoneyTest {
             new LottoTicket("21,22,23,24,25,26"),
             new LottoTicket("31,32,33,34,35,36"));
 
-        assertThatCode(() -> new Money("14000", lottoTickets))
+        assertThatCode(() -> new Money("3000", lottoTickets))
             .doesNotThrowAnyException();
+    }
+
+    @Test
+    @DisplayName("실패 - 수동발행이 구매금액을 넘어가는 경우")
+    void generate_analog1() {
+        List<LottoTicket> lottoTickets = Arrays.asList(
+            new LottoTicket("11,12,13,14,15,16"),
+            new LottoTicket("21,22,23,24,25,26"),
+            new LottoTicket("31,32,33,34,35,36"));
+
+        assertThatThrownBy(() -> new Money("2000", lottoTickets))
+            .isInstanceOf(CustomException.class);
     }
 
     @Test
@@ -59,6 +71,18 @@ class MoneyTest {
 
         final Money money = new Money("14000", lottoTickets);
         assertThat(money.getPossibleTicketCount()).isEqualTo(11);
+    }
+
+    @Test
+    @DisplayName("수동발행갯수만큼 차감 - 자동발행 불가능 경우")
+    void getPossibleTicket1() {
+        List<LottoTicket> lottoTickets = Arrays.asList(
+            new LottoTicket("11,12,13,14,15,16"),
+            new LottoTicket("21,22,23,24,25,26"),
+            new LottoTicket("31,32,33,34,35,36"));
+
+        final Money money = new Money("3000", lottoTickets);
+        assertThat(money.getPossibleTicketCount()).isEqualTo(0);
     }
 
 }
