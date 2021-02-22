@@ -35,6 +35,8 @@ public class RewordTest {
         assertThat(Reword.valueOf(6, false)).isEqualTo(Reword.FIRST);
         assertThat(Reword.valueOf(5, true)).isEqualTo(Reword.SECOND);
         assertThat(Reword.valueOf(5, false)).isEqualTo(Reword.THIRD);
+        assertThat(Reword.valueOf(3, false)).isEqualTo(Reword.FIFTH);
+        assertThat(Reword.valueOf(3, true)).isEqualTo(Reword.FIFTH);
     }
 
     @DisplayName("hitCount 에 따른 에러테스트")
