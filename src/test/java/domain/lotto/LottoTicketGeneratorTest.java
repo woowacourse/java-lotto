@@ -12,7 +12,7 @@ public class LottoTicketGeneratorTest {
     @Test
     @DisplayName("전달 된 돈 만큼의 로또 번호 라인를 가진 로또 티켓을 발행한다")
     public void create_lotto_ticket_by_sending_money(){
-        LottoTicket lottoTicket = LottoTicketGenerator.createLottoTicket(14000);
+        LottoTicket lottoTicket = LottoTicketGenerator.getInstance().createLottoTicket(14000);
         assertThat(lottoTicket.getLength()).isEqualTo(14);
     }
 }
