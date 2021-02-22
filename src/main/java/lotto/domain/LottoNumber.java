@@ -44,7 +44,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         throw new IllegalArgumentException(RANGE_ERROR_MESSAGE);
     }
 
-    @Override //equals 함부로 쓰면 안된다고 했는데, 우리팀의 경우 상속 받은 것들 비교를 제대로 못해줘서 디버깅 한참 걸림. 다른예시좀?
+    @Override
     public boolean equals(Object o) {
         return number == ((LottoNumber) o).number;
     }
