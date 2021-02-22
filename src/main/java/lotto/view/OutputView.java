@@ -14,7 +14,7 @@ import lotto.domain.rank.Rank;
 public class OutputView {
 
     private static final String PAYOUT = "구입금액을 입력해 주세요";
-    private static final String LOTTO_COUNT_FORMAT = "개를 구매했습니다.";
+    private static final String LOTTO_COUNT_FORMAT = "\n%d개를 구매했습니다.\n";
     private static final String LAST_WEEK_LOTTO_NUMBER = "\n지난 주 당첨 번호를 입력해 주세요";
     private static final String BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
     private static final String WINNING_STATISTICS = "\n당첨 통계";
@@ -30,7 +30,7 @@ public class OutputView {
     }
 
     public static void payOuted(int lottoCount) {
-        System.out.println(String.valueOf(lottoCount).concat(LOTTO_COUNT_FORMAT));
+        System.out.printf(LOTTO_COUNT_FORMAT, lottoCount);
     }
 
     public static void boughtLotties(LottoTicket lottoTicket) {

@@ -20,7 +20,7 @@ public class LottoTicket {
 
     public WinningStatistics getWinningStatistics(WinningNumbers winningNumbers) {
         Ranks ranks = checkLottoRanks(winningNumbers);
-        Yield yield = new Yield(ranks.getTotalWinnings() / getTotalLottoPrice());
+        Yield yield = new Yield((double) ranks.getTotalWinnings() / getTotalLottoPrice());
 
         return new WinningStatistics(ranks, yield);
     }
