@@ -1,7 +1,8 @@
 package lotto.domain;
 
-import lotto.exception.LottoNumberCountException;
-import lotto.exception.NumberScopeException;
+import lotto.exception.Lotto.LottoNumberCountException;
+import lotto.exception.Lotto.LottoNumberNullException;
+import lotto.exception.Lotto.LottoNumberScopeException;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -23,12 +24,12 @@ public class Lotto {
         String[] splittedNumbers = inputNumbers.split(DELIMITER);
         List<Integer> lottoNumbers = convertInputLottoNumbersToInteger(splittedNumbers);
         validateLottoNumbers(lottoNumbers);
-        return new Lotto(new ArrayList<>(lottoNumbers));
+        return new Lotto(lottoNumbers);
     }
 
     private static void NullCheckNumbers(String inputNumbers) {
         if (inputNumbers == null) {
-            throw new LottoNumberCountException();
+            throw new LottoNumberNullException();
         }
     }
 
@@ -51,7 +52,7 @@ public class Lotto {
     private static void validateLottoNumbersScope(List<Integer> lottoNumbers) {
         if (lottoNumbers.stream()
                 .anyMatch(num -> num <= 0 || num > 45)) {
-            throw new NumberScopeException();
+            throw new LottoNumberScopeException();
         }
     }
 

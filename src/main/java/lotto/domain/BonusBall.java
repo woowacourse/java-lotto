@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import lotto.exception.BonusBallDuplicatedException;
-import lotto.exception.BonusBallScopeException;
+import lotto.exception.BonusBall.BonusBallDuplicatedException;
+import lotto.exception.BonusBall.BonusBallScopeException;
 
 public class BonusBall {
     final int bonusNumber;

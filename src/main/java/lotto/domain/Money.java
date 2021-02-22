@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import lotto.controller.LottoStore;
-import lotto.exception.MoneyException;
+import lotto.exception.Money.MoneyException;
 
 public class Money {
     private final int money;
