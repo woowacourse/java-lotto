@@ -1,6 +1,7 @@
 package lotto.domain.lotto;
 
 public class Yield {
+
     private static double YIELD_MIN = 0;
 
     private final double rate;
