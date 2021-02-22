@@ -4,7 +4,7 @@ import lotto.exception.BonusBall.BonusBallDuplicatedException;
 import lotto.exception.BonusBall.BonusBallScopeException;
 
 public class BonusBall {
-    final int bonusNumber;
+    private final int bonusNumber;
 
     public BonusBall(int bonusNumber, Lotto lotto) {
         validateBonusNumber(bonusNumber, lotto);
@@ -23,7 +23,7 @@ public class BonusBall {
     }
 
     private void validateBonusNumberScope(int bonusNumber) {
-        if (bonusNumber <= 0 || bonusNumber > 45) {
+        if (bonusNumber <= LottoGenerator.LOTTO_START_NUMBER || bonusNumber > LottoGenerator.LOTTO_END_NUMBER) {
             throw new BonusBallScopeException();
         }
     }

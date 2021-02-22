@@ -1,7 +1,6 @@
 package lotto.domain;
 
 public class WinningLotto {
-    public static final int LOTTO_POSSESSION_NUMBER = 6;
     public static final double SECOND_RANK_MATCH_COUNT = 5.5;
 
     private final Lotto winningLotto;
@@ -28,7 +27,7 @@ public class WinningLotto {
     }
 
     private boolean isSecondRank(long count, Lotto lotto) {
-        return count == LOTTO_POSSESSION_NUMBER && lotto.isContainNumber(bonusBall.getBonusNumber());
+        return count == LottoGenerator.LOTTO_POSSESSION_NUMBER && lotto.isContainNumber(bonusBall.getBonusNumber());
     }
 
     private long getCount(Lotto lotto) {
