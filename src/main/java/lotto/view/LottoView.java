@@ -15,7 +15,8 @@ public class LottoView {
     private static final String BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String RESULT_TITLE_MESSAGE = "\n당첨 통계\n----------";
     private static final String CHANGE_LINE = "\n";
-    private static final String AMOUNT = "개";
+    private static final String LOTTO_RESULT_MESSSAGE = "%d개 일치 (%d원)- %d개\n";
+    private static final String SECOND_RANK_RESULT_MESSAGE = "%d개 일치, 보너스 볼 일치 (%d)원- %d개\n";
     private static final String EARNING_RATE_MESSAGE = "총 수익률은 %s입니다.";
 
     public static String requestMoney() {
@@ -49,7 +50,14 @@ public class LottoView {
     }
 
     public static void displayResult(Rank rank, int count) {
-        System.out.println(rank + Integer.toString(count) + AMOUNT);
+        System.out.printf(findMessage(rank), rank.getMatchCount(), rank.getPrize(), count);
+    }
+
+    private static String findMessage(Rank rank) {
+        if (rank == Rank.SECOND) {
+            return SECOND_RANK_RESULT_MESSAGE;
+        }
+        return LOTTO_RESULT_MESSSAGE;
     }
 
     public static void displayEarningRate(String earningRate) {
