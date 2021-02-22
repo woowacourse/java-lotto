@@ -11,7 +11,7 @@ public class OutputView {
     public void printAllLottoTickets(LottoTickets lottoTickets) {
         System.out.printf("%d개를 구매했습니다.\n", lottoTickets.getLottoTickets().size());
         lottoTickets.getLottoTickets().forEach(lottoTicket ->
-            System.out.println(lottoTicket.printLottoTicket())
+            System.out.println(Arrays.toString(lottoTicket.getLottoNumbers().toArray()))
         );
     }
 
