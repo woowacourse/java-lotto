@@ -16,6 +16,13 @@ public class InputView {
         return Integer.parseInt(moneyInput);
     }
 
+    public static int takeManualLottoQuantityInput(Scanner scanner) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        String manualLottoQuantity = scanner.nextLine();
+        validateNumeric(manualLottoQuantity);
+        return Integer.parseInt(manualLottoQuantity);
+    }
+
     public static int[] takeWinningNumbersInput(Scanner scanner) {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String[] winningNumberInput = scanner.nextLine().split(", ");
