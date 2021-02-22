@@ -20,7 +20,8 @@ public class Money {
         final BigDecimal money = new BigDecimal(moneyValue);
         this.ticketCount = money.divideToIntegralValue(new BigDecimal(LottoTicket.PRICE)).intValue()
             - lottoTickets.size();
-        this.change = money.subtract(BigDecimal.valueOf(LottoTicket.PRICE * ticketCount));
+        this.change = money
+            .subtract(BigDecimal.valueOf((lottoTickets.size() + ticketCount) * LottoTicket.PRICE));
     }
 
     private void validateNotOverMoney(String moneyValue, List<LottoTicket> lottoTickets) {
