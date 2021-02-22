@@ -3,21 +3,13 @@ package lotto.domain;
 import java.util.Objects;
 
 public class Money {
-    private static final int LOTTO_PRICE = 1000;
-    public static final String NOT_ENOUGH_MONEY_ERROR = String.format("%d원 이상의 금액만 입력 가능합니다.", LOTTO_PRICE);
+    public static final int LOTTO_PRICE = 1000;
     public static final String MANUAL_LOTTO_QUANTITY_ERROR = "수동 로또를 살 돈이 모자랍니다.";
 
     private final int money;
 
     public Money(int money) {
-        validateNotEnoughMoney(money);
         this.money = money;
-    }
-
-    private void validateNotEnoughMoney(int money) {
-        if (money < LOTTO_PRICE) {
-            throw new IllegalArgumentException(NOT_ENOUGH_MONEY_ERROR);
-        }
     }
 
     public Money getMoneyActuallyInvested() {
