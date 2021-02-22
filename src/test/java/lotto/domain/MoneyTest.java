@@ -22,8 +22,8 @@ public class MoneyTest {
 	@DisplayName("금액 따라 로또 갯수 산출 하는지")
 	@Test
 	void calculateNumberOfLotto() {
-		Money money = new Money(13_500);
-		int numberOfLotto = money.getAffordableLottoQuantity();
+		Money money = new Money(13_001);
+		long numberOfLotto = money.getAffordableLottoQuantity();
 
 		assertThat(numberOfLotto).isEqualTo(13);
 	}
@@ -31,9 +31,11 @@ public class MoneyTest {
 	@DisplayName("input으로 받은 금액 중에서 실제로 로또를 구매한 금액을 제대로 산출하는지")
 	@Test
 	void calculateMoneyActuallyInvested() {
-		Money money = new Money(3_999);
+		Money thisMoney = new Money(4_000);
+		Money thatMoney = new Money(3_999);
 
-		assertThat(money.getMoneyActuallyInvested()).isEqualTo(new Money(3_000));
+		assertThat(thisMoney.getMoneyActuallyInvested()).isEqualTo(new Money(4_000));
+		assertThat(thatMoney.getMoneyActuallyInvested()).isEqualTo(new Money(3_000));
 	}
 
 	@DisplayName("수익률 계산")
@@ -61,6 +63,6 @@ public class MoneyTest {
 		Money money = new Money(5_540);
 		int manualLottoQuantity = 3;
 
-		assertThat(money.getChange(manualLottoQuantity)).isEqualTo(new Money(2540));
+		assertThat(money.getChange(manualLottoQuantity)).isEqualTo(new Money(2_540));
 	}
 }

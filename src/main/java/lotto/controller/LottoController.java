@@ -24,14 +24,10 @@ public class LottoController {
     }
 
     private Lottos buyLottos(List<int[]> manualLottoNumbersSequence, int manualLottoQuantity, Money money) {
-        Lottos manualLottos = buy(
-                new ManualLottoGenerator(manualLottoNumbersSequence),
-                manualLottoQuantity);
+        Lottos manualLottos = buy(new ManualLottoGenerator(manualLottoNumbersSequence), manualLottoQuantity);
         Money moneyLeftAfterBuyingManualLottos = money.getChange(manualLottoQuantity);
 
-        Lottos autoLottos = buy(
-                new AutomaticLottoGenerator(),
-                moneyLeftAfterBuyingManualLottos.getAffordableLottoQuantity());
+        Lottos autoLottos = buy(new AutomaticLottoGenerator(), moneyLeftAfterBuyingManualLottos.getAffordableLottoQuantity());
 
         return manualLottos.merge(autoLottos);
     }

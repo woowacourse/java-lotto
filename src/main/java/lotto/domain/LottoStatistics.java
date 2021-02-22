@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.math.BigInteger;
 import java.util.*;
 
 import static lotto.domain.Rank.RANK_END_INDEX;
@@ -41,9 +42,9 @@ public class LottoStatistics {
     }
 
     private Money getTotalProfit() {
-        int totalProfit = 0;
+        long totalProfit = 0;
         for (Rank rank : statistics.keySet()) {
-            totalProfit += statistics.get(rank) * rank.getPrize();
+            totalProfit += (long) statistics.get(rank) * rank.getPrize();
         }
         return new Money(totalProfit);
     }

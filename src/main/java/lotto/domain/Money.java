@@ -6,7 +6,11 @@ public class Money {
     public static final int LOTTO_PRICE = 1000;
     public static final String MANUAL_LOTTO_QUANTITY_ERROR = "수동 로또를 살 돈이 모자랍니다.";
 
-    private final int money;
+    private final long money;
+
+    public Money(long money) {
+        this.money = money;
+    }
 
     public Money(int money) {
         this.money = money;
@@ -17,7 +21,7 @@ public class Money {
     }
 
     public int getAffordableLottoQuantity() {
-        return money / LOTTO_PRICE;
+        return (int) money / LOTTO_PRICE;
     }
 
     public float getProfitRate(Money profit) {
@@ -38,8 +42,8 @@ public class Money {
         return new Money(calculateChange(lottoQuantity));
     }
 
-    private int calculateChange(int lottoQuantity) {
-        return money - (lottoQuantity * LOTTO_PRICE);
+    private long calculateChange(int lottoQuantity) {
+        return money - ((long) lottoQuantity * LOTTO_PRICE);
     }
 
     @Override
