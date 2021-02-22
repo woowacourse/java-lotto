@@ -18,17 +18,17 @@ public enum Rank {
     UNRANKED((val, isBonus) -> val < 3,
             BigInteger.valueOf(0));
 
-    private final BiFunction<Integer, Boolean, Boolean> biFunction;
+    private final BiFunction<Integer, Boolean, Boolean> matchFunction;
     private final BigInteger prize;
 
-    Rank(BiFunction<Integer, Boolean, Boolean> biFunction, BigInteger prize) {
-        this.biFunction = biFunction;
+    Rank(BiFunction<Integer, Boolean, Boolean> matchFunction, BigInteger prize) {
+        this.matchFunction = matchFunction;
         this.prize = prize;
     }
 
-    public static Rank matchRank(int numberMatchCount, boolean isBonusBallMatches) {
+    public static Rank matchRank(int lottoNumberMatchCount, boolean isBonusBallMatches) {
         return Arrays.stream(Rank.values())
-                .filter(rank -> rank.biFunction.apply(numberMatchCount, isBonusBallMatches))
+                .filter(rank -> rank.matchFunction.apply(lottoNumberMatchCount, isBonusBallMatches))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("당첨금을 계산할 수 없습니다."));
     }

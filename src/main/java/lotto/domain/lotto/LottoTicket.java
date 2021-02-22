@@ -21,7 +21,8 @@ public class LottoTicket {
         lottoNumbers = new ArrayList<>(lottoNumbers);
 
         if (invalidSizeOrContainsDuplicatedNumbers(lottoNumbers)) {
-            throw new IllegalArgumentException("로또는 중복된 수 없이 6개의 숫자로 이루어져야 합니다.");
+            throw new IllegalArgumentException(
+                    String.format("로또는 중복된 수 없이 %d개의 숫자로 이루어져야 합니다.", SIZE_OF_LOTTO_NUMBERS));
         }
 
         this.lottoNumbers = lottoNumbers;

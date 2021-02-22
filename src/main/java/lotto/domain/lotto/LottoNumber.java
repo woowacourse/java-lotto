@@ -12,7 +12,8 @@ public class LottoNumber {
 
     public LottoNumber(int number) {
         if (outOfRange(number)) {
-            throw new IllegalArgumentException("로또의 번호는 1이상 45이하의 정수여야 합니다.");
+            throw new IllegalArgumentException(
+                    String.format("로또의 번호는 %d 이상 %d 이하의 정수여야 합니다.", MINIMUM_VALUE, MAXIMUM_VALUE));
         }
         this.number = number;
     }
@@ -33,7 +34,8 @@ public class LottoNumber {
 
     private static void validateNumeric(String input) {
         if (!NumericStringValidator.isValid(input)) {
-            throw new NumberFormatException("로또의 번호는 1이상 45이하의 정수여야 합니다.");
+            throw new IllegalArgumentException(
+                    String.format("로또의 번호는 %d 이상 %d 이하의 정수여야 합니다.", MINIMUM_VALUE, MAXIMUM_VALUE));
         }
     }
 
