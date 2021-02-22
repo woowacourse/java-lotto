@@ -9,10 +9,12 @@ import lotto.controller.generator.LottoGenerator;
 public class Lottos {
 
     private final List<Lotto> lottoBunch = new ArrayList<>();
+    private final LottoGenerator lottoGenerator;
 
     public Lottos(LottoGenerator lottoGenerator, int purchasedLottoCount) {
+        this.lottoGenerator = lottoGenerator;
         for (int i = 0; i < purchasedLottoCount; i++) {
-            lottoBunch.add(new Lotto(lottoGenerator));
+            lottoBunch.add(new Lotto(this.lottoGenerator.generateNumbers()));
         }
     }
 
