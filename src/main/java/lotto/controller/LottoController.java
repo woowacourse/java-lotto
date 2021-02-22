@@ -31,6 +31,7 @@ public class LottoController {
 
     public void start() {
         LottoTickets lottoTickets = buyAllLottoTickets();
+
         outputView.printAllLottoTickets(lottoTickets);
 
         LottoResult lottoResult = calculateLottoResult(lottoTickets,
@@ -43,23 +44,20 @@ public class LottoController {
     private LottoTickets buyAllLottoTickets() {
         Money purchaseMoney = new Money(inputView.takeLottoMoney());
         int sizeOfManualLotto = inputView.inputSizeOfManualLotto();
+        List<LottoNumbers> lottoNumbersBundle = inputManualLottoNumbers(sizeOfManualLotto);
+        LottoTickets lottoTickets = createAllLottoTickets(purchaseMoney, sizeOfManualLotto, lottoNumbersBundle);
+        outputView.printTicketsSize(sizeOfManualLotto, lottoTickets.size() - sizeOfManualLotto);
+        return lottoTickets;
+    }
 
+    public LottoTickets createAllLottoTickets(Money purchaseMoney, int sizeOfManualLotto, List<LottoNumbers> lottoNumbersBundle) {
         LottoTickets autoLottoTickets = lottoMachineService.buyAutoLottoTicket(subtractManualLottoPrice(purchaseMoney, sizeOfManualLotto));
-
-        LottoTickets manualLottoTickets = buyManualLottoTickets(sizeOfManualLotto);
-        outputView.printTicketsSize(sizeOfManualLotto, autoLottoTickets.size());
-
+        LottoTickets manualLottoTickets = lottoMachineService.buyManualLottoTicket(sizeOfManualLotto, lottoNumbersBundle);
         return manualLottoTickets.concat(autoLottoTickets);
     }
 
     private Money subtractManualLottoPrice(Money purchaseMoney, int sizeOfManualLotto) {
         return purchaseMoney.minus(new Money(sizeOfManualLotto * lottoMachineService.getLottoPrice().getMoney()));
-    }
-
-    private LottoTickets buyManualLottoTickets(int sizeOfManualLotto) {
-        List<LottoNumbers> lottoNumbers = inputManualLottoNumbers(sizeOfManualLotto);
-
-        return lottoMachineService.buyManualLottoTicket(sizeOfManualLotto, lottoNumbers);
     }
 
     private List<LottoNumbers> inputManualLottoNumbers(int sizeOfManualLotto) {
@@ -74,7 +72,6 @@ public class LottoController {
                 .collect(toList());
     }
 
-
     public WinningLottoTicket createWinningLotto(List<Integer> winningNumbers, int bonusNumber) {
         return new WinningLottoTicket(winningNumbers, bonusNumber);
     }
@@ -87,5 +84,4 @@ public class LottoController {
                         groupingBy(Function.identity(), counting()),
                         lottoResultMap -> new LottoResult(lottoResultMap, lottoMachineService.getLottoPrice().multiply(lottoTickets.size()))));
     }
-
 }
