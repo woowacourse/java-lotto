@@ -26,7 +26,7 @@ public class Money {
 
     private void validateNumberByFormat(String input) {
         if (!NUMBER_PATTERN.matcher(input).matches()) {
-            throw new IllegalMoneyException(input + " : 양수가 아닙니다.");
+            throw new IllegalMoneyException(input + " : 올바른 형식이 아닙니다.");
         }
     }
 

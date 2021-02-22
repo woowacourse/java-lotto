@@ -11,12 +11,22 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoNumberTest {
     @ParameterizedTest
-    @ValueSource(strings = {"a", "-1", "55"})
-    @DisplayName("1~49의 숫자인지 검사")
+    @ValueSource(strings = {"a", "-1"})
+    @DisplayName("숫자인지 검사")
     void validateNumbers(String input) {
         assertThatThrownBy(() -> {
             LottoNumber lottoNumber = new LottoNumber(input);
-        }).isInstanceOf(IllegalLottoNumberException.class);
+        }).isInstanceOf(IllegalLottoNumberException.class)
+        .hasMessage(input + " : 올바른 형식이 아닙니다.");
+    }
+
+    @DisplayName("1~49 사이의 숫자인지 검사")
+    @Test
+    void validateNumbersByRange() {
+        assertThatThrownBy(() -> {
+            LottoNumber lottoNumber = new LottoNumber("55");
+        }).isInstanceOf(IllegalLottoNumberException.class)
+        .hasMessage("55 : 로또번호의 범위를 벗어납니다.");
     }
 
     @Test
