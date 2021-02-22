@@ -1,4 +1,7 @@
 package lotto.exception;
 
-public class IllegalManualLottoAmountException {
+public class IllegalManualLottoAmountException extends IllegalArgumentException{
+    public IllegalManualLottoAmountException(String message) {
+        super(message);
+    }
 }

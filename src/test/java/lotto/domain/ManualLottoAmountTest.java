@@ -3,6 +3,8 @@ package lotto.domain;
 import lotto.exception.IllegalManualLottoAmountException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -17,10 +19,11 @@ public class ManualLottoAmountTest {
     }
 
     @DisplayName("숫자형식 오류 검증")
-    @Test
-    void validate() {
-        assertThatThrownBy(() -> new ManualLottoAmount("a", 7))
+    @ParameterizedTest
+    @ValueSource(strings = {"a", ";", "12df", " "})
+    void validate(String input) {
+        assertThatThrownBy(() -> new ManualLottoAmount(input, 7))
                 .isInstanceOf(IllegalManualLottoAmountException.class)
-                .hasMessage("a : 올바른 형식이 아닙니다.");
+                .hasMessage(input + " : 올바른 형식이 아닙니다.");
     }
 }
