@@ -23,10 +23,9 @@ public class LottoController {
 
             OutputView.printInputLottoNumbers();
             Lottos lottos = new Lottos(lottoCount.auto(), createManualLotto(lottoMachine, lottoCount.manual()));
-            showLottos(lottoCount, lottos);
 
-            WinningLotto winningLotto = createWinningLotto(lottoMachine);
-            showResult(lottos, winningLotto, payment);
+            showLottos(lottoCount, lottos);
+            showResult(lottos, createWinningLotto(lottoMachine), payment);
         }
         catch (NumberFormatException e) {
             throw new IllegalTypeException();
