@@ -30,7 +30,7 @@ public class OutputView {
         );
     }
 
-    private String makeEachLottoTicketToString(LottoTicket lottoTicket){
+    private String makeEachLottoTicketToString(LottoTicket lottoTicket) {
         return lottoTicket.list().stream()
                 .map(Object::toString)
                 .collect(Collectors.joining(COMMA, TICKET_PREFIX, TICKET_SUFFIX));

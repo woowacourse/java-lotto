@@ -24,9 +24,9 @@ public enum Prize {
 
     public static Prize findByMatchCount(int matchCount, boolean isBonus) {
         return Arrays.stream(Prize.values())
-            .filter(prize -> prize.matchCount == matchCount && prize.isBonus == isBonus)
-            .findFirst()
-            .orElse(LOSING);
+                .filter(prize -> prize.matchCount == matchCount && prize.isBonus == isBonus)
+                .findFirst()
+                .orElse(LOSING);
     }
 
     public int getRank() {

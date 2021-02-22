@@ -27,7 +27,7 @@ class LottoResultTest {
 
     @DisplayName("수익률 계산 확인")
     @Test
-    void 수익률_계산(){
+    void 수익률_계산() {
         Map<Prize, Long> lottoResultMap = new HashMap<>();
         lottoResultMap.put(Prize.FIFTH, 3L); // 15000
 

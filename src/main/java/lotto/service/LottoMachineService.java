@@ -1,6 +1,7 @@
 package lotto.service;
 
 import lotto.domain.Money;
+import lotto.domain.PurchaseInfo;
 import lotto.domain.machine.AutoLottoMachine;
 import lotto.domain.machine.LottoMachine;
 import lotto.domain.machine.ManualLottoMachine;
@@ -18,16 +19,23 @@ public class LottoMachineService {
         this.manualLottoMachine = new ManualLottoMachine(lottoPrice);
     }
 
-    public LottoTickets buyAutoLottoTicket(Money lottoPurchaseMoney) {
+    public LottoTickets createAllLottoTickets(PurchaseInfo purchaseInfo, List<LottoNumbers> lottoNumbersBundle) {
+        LottoTickets autoLottoTickets = buyAutoLottoTicket(purchaseInfo.calculateLeftMoney());
+        LottoTickets manualLottoTickets = buyManualLottoTicket(purchaseInfo.numberOfManualLotto(), lottoNumbersBundle);
+        return manualLottoTickets.concat(autoLottoTickets);
+    }
+
+    private LottoTickets buyAutoLottoTicket(Money lottoPurchaseMoney) {
         int numberOfTickets = autoLottoMachine.calculateNumberOfTickets(lottoPurchaseMoney);
         return autoLottoMachine.createTicketsByMoney(numberOfTickets);
     }
 
-    public LottoTickets buyManualLottoTicket(int sizeOfManualLotto, List<LottoNumbers> lottoNumbers) {
+    private LottoTickets buyManualLottoTicket(int sizeOfManualLotto, List<LottoNumbers> lottoNumbers) {
         return manualLottoMachine.createTickets(sizeOfManualLotto, lottoNumbers);
     }
 
     public Money getLottoPrice() {
         return autoLottoMachine.getLottoPrice();
     }
+
 }

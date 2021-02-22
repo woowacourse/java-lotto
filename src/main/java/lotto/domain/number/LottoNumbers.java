@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class LottoNumbers {
     private final List<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(List<Integer> lottoNumbers){
+    public LottoNumbers(List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers.stream()
                 .map(LottoNumberFactory::of)
                 .collect(Collectors.toList());
@@ -19,7 +19,7 @@ public class LottoNumbers {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
-    public void sort(){
+    public void sort() {
         lottoNumbers.sort(Comparator.naturalOrder());
     }
 

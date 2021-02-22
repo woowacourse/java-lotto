@@ -3,6 +3,7 @@ package lotto.controller;
 import lotto.domain.LottoResult;
 import lotto.domain.Money;
 import lotto.domain.Prize;
+import lotto.domain.PurchaseInfo;
 import lotto.domain.number.LottoNumbers;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTickets;
@@ -30,12 +31,13 @@ class LottoControllerTest {
 
     @DisplayName("수동, 자동 로또 생성 메소드 확인")
     @Test
-    void createAllLottoTest(){
-        List<Integer> rowLottoNumbers = Arrays.asList(6,5,4,3,2,1);
+    void createAllLottoTest() {
+        List<Integer> rowLottoNumbers = Arrays.asList(6, 5, 4, 3, 2, 1);
         LottoNumbers lottoNumbers = new LottoNumbers(rowLottoNumbers);
 
         List<LottoNumbers> lottoNumbersBundle = Arrays.asList(lottoNumbers);
-        LottoTickets allLottoTickets = lottoController.createAllLottoTickets(new Money(2000), 1, lottoNumbersBundle);
+        PurchaseInfo purchaseInfo = new PurchaseInfo(new Money(2000), new Money(1000), 1);
+        LottoTickets allLottoTickets = lottoController.createAllLottoTickets(purchaseInfo, lottoNumbersBundle);
 
         assertThat(allLottoTickets.size()).isEqualTo(2);
         assertThat(allLottoTickets.list().get(0).list()).isEqualTo(lottoNumbers.list());

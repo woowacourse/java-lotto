@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.LottoResult;
 import lotto.domain.Money;
+import lotto.domain.PurchaseInfo;
 import lotto.domain.number.LottoNumbers;
 import lotto.domain.ticket.LottoTickets;
 import lotto.domain.ticket.WinningLottoTicket;
@@ -30,9 +31,9 @@ public class LottoController {
     }
 
     public void start() {
-        LottoTickets lottoTickets = buyAllLottoTickets();
-
-        outputView.printAllLottoTickets(lottoTickets);
+        PurchaseInfo purchaseInfo = inputMoneyAndNumberOfManualLotto();
+        LottoTickets lottoTickets = createAllLottoTickets(purchaseInfo, inputManualLottoNumbers(purchaseInfo));
+        printTicketsCondition(purchaseInfo, lottoTickets);
 
         LottoResult lottoResult = calculateLottoResult(lottoTickets,
                 createWinningLotto(inputView.inputWinningNumbers(), inputView.takeBonusNumber())
@@ -41,34 +42,32 @@ public class LottoController {
         outputView.printLottoResult(lottoResult);
     }
 
-    private LottoTickets buyAllLottoTickets() {
-        Money purchaseMoney = new Money(inputView.takeLottoMoney());
-        int sizeOfManualLotto = inputView.inputSizeOfManualLotto();
-        List<LottoNumbers> lottoNumbersBundle = inputManualLottoNumbers(sizeOfManualLotto);
-        LottoTickets lottoTickets = createAllLottoTickets(purchaseMoney, sizeOfManualLotto, lottoNumbersBundle);
-        outputView.printTicketsSize(sizeOfManualLotto, lottoTickets.size() - sizeOfManualLotto);
-        return lottoTickets;
+    private void printTicketsCondition(PurchaseInfo purchaseInfo, LottoTickets lottoTickets) {
+        outputView.printTicketsSize(purchaseInfo.numberOfManualLotto(), purchaseInfo.numberOfAutoLotto());
+        outputView.printAllLottoTickets(lottoTickets);
     }
 
-    public LottoTickets createAllLottoTickets(Money purchaseMoney, int sizeOfManualLotto, List<LottoNumbers> lottoNumbersBundle) {
-        LottoTickets autoLottoTickets = lottoMachineService.buyAutoLottoTicket(subtractManualLottoPrice(purchaseMoney, sizeOfManualLotto));
-        LottoTickets manualLottoTickets = lottoMachineService.buyManualLottoTicket(sizeOfManualLotto, lottoNumbersBundle);
-        return manualLottoTickets.concat(autoLottoTickets);
+    private PurchaseInfo inputMoneyAndNumberOfManualLotto() {
+        return new PurchaseInfo(
+                new Money(inputView.takeLottoMoney())
+                , new Money(lottoMachineService.getLottoPrice())
+                , inputView.inputSizeOfManualLotto()
+        );
     }
 
-    private Money subtractManualLottoPrice(Money purchaseMoney, int sizeOfManualLotto) {
-        return purchaseMoney.minus(new Money(sizeOfManualLotto * lottoMachineService.getLottoPrice().getMoney()));
+    public LottoTickets createAllLottoTickets(PurchaseInfo purchaseInfo, List<LottoNumbers> lottoNumbersBundle) {
+        return lottoMachineService.createAllLottoTickets(purchaseInfo, lottoNumbersBundle);
     }
 
-    private List<LottoNumbers> inputManualLottoNumbers(int sizeOfManualLotto) {
-        if (sizeOfManualLotto < ONE) {
+    private List<LottoNumbers> inputManualLottoNumbers(PurchaseInfo purchaseInfo) {
+        if (purchaseInfo.numberOfManualLotto() < ONE) {
             return Collections.emptyList();
         }
 
         inputView.printRequestMessageForInputManualLottoNumbers();
 
         return Stream.generate(() -> new LottoNumbers(inputView.inputManualLottoNumbers()))
-                .limit(sizeOfManualLotto)
+                .limit(purchaseInfo.numberOfManualLotto())
                 .collect(toList());
     }
 

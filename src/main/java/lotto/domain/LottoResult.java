@@ -24,6 +24,6 @@ public class LottoResult {
 
     public long calculateProfitPercent() {
         return (calculatePrizeMoney() * 100)
-                / ((long)purchasePrice.getMoney());
+                / ((long) purchasePrice.getMoney());
     }
 }

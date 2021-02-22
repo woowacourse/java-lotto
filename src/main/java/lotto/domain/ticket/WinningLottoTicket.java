@@ -39,7 +39,7 @@ public class WinningLottoTicket {
         boolean isBonus = lottoTicket.list().stream()
                 .anyMatch(winningNumber -> winningNumber.equals(bonusNumber));
 
-        return getResult((int)winningCount, isBonus);
+        return getResult((int) winningCount, isBonus);
     }
 
     private Prize getResult(int winningCount, boolean isBonus) {

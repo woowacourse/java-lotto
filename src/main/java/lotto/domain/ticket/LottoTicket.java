@@ -16,18 +16,18 @@ public class LottoTicket {
 
     private final LottoNumbers lottoNumbers;
 
-    private LottoTicket(LottoNumbers lottoNumbers){
+    private LottoTicket(LottoNumbers lottoNumbers) {
         validateLottoNumberCount(lottoNumbers);
         validateDuplicatedLottoNumbers(lottoNumbers);
         lottoNumbers.sort();
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static LottoTicket createLottoTicket(LottoNumbers lottoNumbers){
+    public static LottoTicket createLottoTicket(LottoNumbers lottoNumbers) {
         return new LottoTicket(lottoNumbers);
     }
 
-    public static LottoTicket createLottoTicket(List<Integer> numbers){
+    public static LottoTicket createLottoTicket(List<Integer> numbers) {
         return new LottoTicket(new LottoNumbers(numbers));
     }
 

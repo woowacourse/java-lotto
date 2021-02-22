@@ -30,7 +30,7 @@ public class InputView {
         }
     }
 
-    public void printRequestMessageForInputManualLottoNumbers(){
+    public void printRequestMessageForInputManualLottoNumbers() {
         System.out.println(REQUEST_MANUAL_LOTTO_NUMBERS_MSG);
     }
 

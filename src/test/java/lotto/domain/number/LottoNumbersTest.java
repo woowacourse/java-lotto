@@ -15,8 +15,8 @@ class LottoNumbersTest {
     LottoNumbers lottoNumbers;
 
     @BeforeEach
-    void setUp(){
-        rowLottoNumbers = Arrays.asList(6,5,4,3,2,1);
+    void setUp() {
+        rowLottoNumbers = Arrays.asList(6, 5, 4, 3, 2, 1);
         lottoNumbers = new LottoNumbers(rowLottoNumbers);
     }
 

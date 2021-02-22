@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.Objects;
 
 public class Money {
-    public static final String AMOUNT_MUST_NOT_NEGATIVE_ERROR_MSG_FORMAT = "금액은 0보다 작을 수 없습니다. 입력된 금액 : %d";
+    private static final String AMOUNT_MUST_NOT_NEGATIVE_ERROR_MSG_FORMAT = "금액은 0보다 작을 수 없습니다. 입력된 금액 : %d";
     private final int money;
 
     public Money(int money) {
@@ -27,6 +27,10 @@ public class Money {
 
     public Money multiply(int times) {
         return new Money(money * times);
+    }
+
+    public int divide(Money that) {
+        return this.money / that.money;
     }
 
     public Money minus(Money that) {
