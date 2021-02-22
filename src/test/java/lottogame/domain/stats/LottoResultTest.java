@@ -1,11 +1,8 @@
 package lottogame.domain.stats;
 
-import lottogame.domain.lotto.LottoNumber;
+import lottogame.domain.lotto.*;
 import lottogame.view.OutputView;
 import lottogame.domain.Money;
-import lottogame.domain.lotto.Lotto;
-import lottogame.domain.lotto.Lottos;
-import lottogame.domain.lotto.WinningLotto;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -50,7 +47,8 @@ class LottoResultTest {
         values = Arrays.asList(3, 8, 27, 30, 35, 44);
         list.add(new Lotto(makeLottoNumberList(values)));
         lottos = new Lottos(list);
-        OutputView.printResult(lottos.findMatchLottos(winningLotto, new Money("14000")));
+        LottoGame lottoGame = new LottoGame(lottos, new Money("14000"));
+        OutputView.printResult(lottoGame.Results(winningLotto));
     }
 
     List<LottoNumber> makeLottoNumberList(List<Integer> numbers) {

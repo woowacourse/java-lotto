@@ -27,7 +27,7 @@ class LottosTest {
     }
 
     @Test
-    void 로또_매칭_테스트_1() {
+    void 로또_매칭_테스트1() {
         matchTest(new String[]{"1, 2, 3, 4, 45, 44", "1, 2, 3, 43, 44, 45", "1, 2, 3, 4, 5, 7", "1, 2, 3, 4, 5, 44"},
                 new WinningLotto("1, 2, 3, 4, 5, 6", "7"),
                 "4000",
@@ -35,7 +35,7 @@ class LottosTest {
     }
 
     @Test
-    void 로또_매칭_테스트케이스_2() {
+    void 로또_매칭_테스트2() {
         matchTest(new String[]{
                         "8, 21, 23, 41, 42, 43", "3, 5, 11, 16, 32, 38", "7, 11, 16, 35, 36, 44",
                         "1, 8, 11, 31, 41, 42", "13, 14, 16, 38, 42, 45", "7, 11, 30, 40, 42, 43",
@@ -49,8 +49,8 @@ class LottosTest {
 
     private void matchTest(String[] lottoNumbersGroup, WinningLotto winningLotto, String money, int[] expectedCount) {
         Lottos lottos = new Lottos(makeLottos(lottoNumbersGroup));
-
-        LottoResults lottoResults = lottos.findMatchLottos(winningLotto, new Money(money));
+        LottoGame lottoGame = new LottoGame(lottos, new Money(money));
+        LottoResults lottoResults = lottoGame.Results(winningLotto);
         Map<Rank, Integer> sameResult = new LinkedHashMap<>();
 
         sameResult.put(Rank.FIFTH, expectedCount[0]);
