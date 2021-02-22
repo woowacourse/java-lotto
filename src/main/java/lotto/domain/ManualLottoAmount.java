@@ -8,6 +8,6 @@ public class ManualLottoAmount {
     }
 
     public int getValue() {
-        return 0;
+        return this.value;
     }
 }
