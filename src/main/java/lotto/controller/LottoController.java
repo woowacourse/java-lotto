@@ -6,7 +6,7 @@ import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
 import lotto.domain.WinningLotto;
-import lotto.domain.ticketFactory.TicketFactory;
+import lotto.domain.ticketFactory.TicketBox;
 import lotto.exception.LottoCustomException;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -22,16 +22,16 @@ public class LottoController {
     public void run() {
         Money money = inputMoney();
         LottoTickets lottoTickets = buyTickets(money);
+
         WinningLotto winningLotto = inputWinningLotto();
+
         showResult(lottoTickets, winningLotto, money);
     }
 
     private Money inputMoney() {
         try {
             OutputView.printMoneyMessage();
-            Money money = new Money(inputView.inputValue());
-            OutputView.printTicketCountMessage(money.countTickets());
-            return money;
+            return new Money(inputView.inputValue());
         } catch (LottoCustomException exception) {
             OutputView.printErrorMessage(exception);
             return inputMoney();
@@ -39,24 +39,34 @@ public class LottoController {
     }
 
     private LottoTickets buyTickets(Money money) {
-        LottoTickets lottoTickets = TicketFactory.makeRandomTicketsByCount(money.countTickets());
-        OutputView.printAllTickets(lottoTickets);
+        TicketBox ticketBox = new TicketBox();
+        LottoTickets lottoTickets = new LottoTickets();
+        OutputView.printFixedTicketMessage();
+        int fixedTickets = inputView.inputValue();
+        OutputView.printInputFixedTicketMessage();
+        for(int i = 0; i<fixedTickets; i++){
+            lottoTickets.addTicket(inputTicket());
+        }
+        for(int i=0; i< money.countTickets() - fixedTickets; i++){
+            lottoTickets.addTicket(ticketBox.makeRandomTicket());
+        }
+        OutputView.printAllTickets(fixedTickets, money.countTickets() - fixedTickets, lottoTickets);
         return lottoTickets;
     }
 
     private WinningLotto inputWinningLotto() {
-        LottoTicket lottoTicket = inputWinningNumbers();
+        OutputView.printWinningNumbers();
+        LottoTicket lottoTicket = inputTicket();
         LottoNumber bonus = inputBonus(lottoTicket);
         return new WinningLotto(lottoTicket, bonus);
     }
 
-    private LottoTicket inputWinningNumbers() {
+    private LottoTicket inputTicket() {
         try {
-            OutputView.printWinningNumbers();
-            return TicketFactory.makeFixedTicket(inputView.inputNumbers());
+            return new LottoTicket(inputView.inputNumbers());
         } catch (LottoCustomException exception) {
             OutputView.printErrorMessage(exception);
-            return inputWinningNumbers();
+            return inputTicket();
         }
     }
 

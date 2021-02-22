@@ -1,26 +1,32 @@
 package lotto.domain.ticketFactory;
 
+import static lotto.domain.LottoNumber.LOTTO_NUMBER_MAX_LIMIT;
+import static lotto.domain.LottoNumber.LOTTO_NUMBER_MIN_LIMIT;
+
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
 
-public class RandomTicketGenerator implements TicketGenerator {
+public class RandomTicketGenerator {
 
-    private final List<LottoNumber> lottoNumbers;
+    private static final List<Integer> numbers;
 
-    public RandomTicketGenerator(List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+    static {
+        numbers = new ArrayList<>();
+        for (int i = LOTTO_NUMBER_MIN_LIMIT; i <= LOTTO_NUMBER_MAX_LIMIT; i++) {
+            numbers.add(i);
+        }
     }
 
-    @Override
-    public LottoTicket generateTicket() {
-        List<LottoNumber> numbers = lottoNumbers;
-        Collections.shuffle(numbers);
-        return new LottoTicket(IntStream.rangeClosed(1, 6)
-            .mapToObj(numbers::get)
-            .collect(Collectors.toSet()));
+    public List<Integer> generateNumbers() {
+        List<Integer> LottoNumbers = numbers;
+        Collections.shuffle(LottoNumbers);
+        return IntStream.rangeClosed(1, 6)
+            .map(LottoNumbers::get)
+            .boxed()
+            .collect(Collectors.toList());
     }
 }

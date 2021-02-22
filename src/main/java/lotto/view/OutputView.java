@@ -16,6 +16,7 @@ public class OutputView {
     public static final String SHOW_TOTAL_YIELD_MESSAGE = "총 수익률은 %.2f입니다.";
     public static final String SPLIT_LINE = "---------";
     public static final String RESULT_FORMAT_MESSAGE = "%s (%d) - %d개";
+    public static final String SHOW_TICKETS_STATE_MESSAGE = "수동으로 %d장, 자동으로 %d장을 구매했습니다.";
 
     public static void printErrorMessage(Exception exception) {
         System.out.println(exception.getMessage());
@@ -33,7 +34,8 @@ public class OutputView {
         System.out.println(lottoTicket.getLottoNumbers());
     }
 
-    public static void printAllTickets(LottoTickets lottoTickets) {
+    public static void printAllTickets(int fixedTickets, int randomTickets, LottoTickets lottoTickets) {
+        System.out.printf(SHOW_TICKETS_STATE_MESSAGE +System.lineSeparator(),fixedTickets,randomTickets);
         lottoTickets.getLottoTickets().forEach(OutputView::printTicket);
     }
 
@@ -66,4 +68,11 @@ public class OutputView {
         }
     }
 
+    public static void printFixedTicketMessage() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+    }
+
+    public static void printInputFixedTicketMessage() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+    }
 }
