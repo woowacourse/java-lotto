@@ -28,17 +28,18 @@ public enum Prize {
     public static Prize of(final WinningNumbers winningNumbers, final LottoTicket lottoTicket) {
         final int matching = winningNumbers.countMatching(lottoTicket);
         boolean bonusMatching = winningNumbers.hasBonus(lottoTicket);
-        return transform(matching, bonusMatching);
+        return choice(matching, bonusMatching);
     }
 
-    private static Prize transform(final int matching, final boolean bonusMatching) {
+    public static Prize choice(final int matching, final boolean bonusMatching) {
         return Arrays.stream(values())
-                .map(prize -> prize.transformIfSecondOrThird(matching, bonusMatching))
+                .filter(prize -> Objects.equals(prize.matching, matching))
+                .map(prize -> prize.choiceIfSecondOrThird(matching, bonusMatching))
                 .findFirst()
                 .orElse(NOTHING);
     }
 
-    private Prize transformIfSecondOrThird(final int matching, final boolean bonusMatching) {
+    private Prize choiceIfSecondOrThird(final int matching, final boolean bonusMatching) {
         if (matching == BONUS_CONSIDER_CRITERION) {
             return getSecondOrThird(bonusMatching);
         }
