@@ -24,25 +24,15 @@ public class AnnouncementInputView {
 
     public LottoAnnouncement inputAnnouncement() {
         LottoAnnouncement inputAnnouncement;
-        try {
-            List<Integer> winners = inputWinningNumbers();
-            int bonusNumber = inputBonusNumber();
-            inputAnnouncement = new LottoAnnouncement(winners, bonusNumber);
-        } catch (LottoAnnouncementException lottoAnnouncementException) {
-            inputAnnouncement = inputAnnouncement();
-        }
+        List<Integer> winners = inputWinningNumbers();
+        int bonusNumber = inputBonusNumber();
+        inputAnnouncement = new LottoAnnouncement(winners, bonusNumber);
         return inputAnnouncement;
     }
 
     private List<Integer> inputWinningNumbers() {
         System.out.println(INPUT_WINNERS_MESSAGE);
-        List<Integer> inputWinningNumbers;
-        try {
-            inputWinningNumbers = parseToWinner();
-        } catch (Exception e) {
-            inputWinningNumbers = inputWinningNumbers();
-        }
-        return inputWinningNumbers;
+        return parseToWinner();
     }
 
     private List<Integer> parseToWinner() {
@@ -63,13 +53,7 @@ public class AnnouncementInputView {
 
     private int inputBonusNumber() {
         System.out.println(INPUT_BONUS_MESSAGE);
-        int bonusNumber;
-        try {
-            bonusNumber = scanner.nextInt();
-        } catch (Exception e) {
-            System.out.println(WRONG_INTEGER_MESSAGE);
-            bonusNumber = inputBonusNumber();
-        }
+        int bonusNumber= scanner.nextInt();
         scanner.nextLine();
         return bonusNumber;
     }

@@ -31,13 +31,13 @@ public class LottoStore {
 
     public void process() {
         Lottos lottos = buyLotto();
-        LottoAnnouncement lottoAnnouncement = announcementInputView.inputAnnouncement();
+        LottoAnnouncement lottoAnnouncement = receiveValidLottoAnnouncement();
         EnumMap<LottoRank, Integer> lottoResultStatistics = lottos.getStatistics(lottoAnnouncement);
         printLottoResult(lottoResultStatistics, lottos);
     }
 
     public Lottos buyLotto() {
-        Money possessedMoney = moneyInputView.purchaseMoney();
+        Money possessedMoney = receiveValidMoney();
         LottoAutoGenerator lottoAutoGenerator = new LottoAutoGenerator();
         Lottos purchasedLottos =
             new Lottos(lottoAutoGenerator, possessedMoney.getLottoPieces(LOTTO_PRICE));
@@ -58,5 +58,29 @@ public class LottoStore {
         double investCapital = lottoPiece * LOTTO_PRICE;
         double rawProfitRate = sum / investCapital;
         return Math.round(rawProfitRate * DECIMAL_TRIM_NUMERATOR) / DECIMAL_TRIM_DENOMINATOR;
+    }
+
+    private Money receiveValidMoney() {
+        Money candidateMoney;
+
+        try {
+            candidateMoney = moneyInputView.purchaseMoney();
+        } catch (Exception e) {
+            candidateMoney = receiveValidMoney();
+        }
+
+        return candidateMoney;
+    }
+
+    private LottoAnnouncement receiveValidLottoAnnouncement() {
+        LottoAnnouncement candidateLottoAnnouncement;
+
+        try {
+            candidateLottoAnnouncement = announcementInputView.inputAnnouncement();
+        } catch (Exception e) {
+            candidateLottoAnnouncement = receiveValidLottoAnnouncement();
+        }
+
+        return candidateLottoAnnouncement;
     }
 }

@@ -20,11 +20,7 @@ public class LottoGeneratorInputView {
 
     public List<Integer> inputWinningNumbers() {
         List<Integer> inputWinningNumbers;
-        try {
-            inputWinningNumbers = parseToWinner();
-        } catch (Exception e) {
-            inputWinningNumbers = inputWinningNumbers();
-        }
+        inputWinningNumbers = parseToWinner();
         return inputWinningNumbers;
     }
 
