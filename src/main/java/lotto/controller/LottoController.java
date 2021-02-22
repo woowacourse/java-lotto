@@ -16,7 +16,7 @@ public class LottoController {
             LottoTicket lottoTicket = getLottoTicket();
             OutputView.printLottoTicket(lottoTicket);
             WinningNumbers winningNumbers = getWinningNumbers();
-            OutputView.printResult(checkLottoTicket(lottoTicket, winningNumbers));
+            OutputView.printResult(matchLottoTicket(lottoTicket, winningNumbers));
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -47,7 +47,7 @@ public class LottoController {
         return new LottoLine(lottoNumberList);
     }
 
-    private LottoResult checkLottoTicket(LottoTicket lottoTicket, WinningNumbers winningNumbers) {
+    private LottoResult matchLottoTicket(LottoTicket lottoTicket, WinningNumbers winningNumbers) {
         List<Rank> rankList = lottoTicket
                 .matchLottoLines(winningNumbers);
         return new LottoResult(rankList);
