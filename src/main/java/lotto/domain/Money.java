@@ -22,7 +22,6 @@ public class Money {
     private void validateMoneyValue(String input) {
         validateNumberByFormat(input);
         validateMoneyByMiniMumLimit(input);
-
     }
 
     private void validateNumberByFormat(String input) {
