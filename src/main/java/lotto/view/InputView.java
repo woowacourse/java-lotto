@@ -18,6 +18,11 @@ public class InputView {
         return SCANNER.nextLine();
     }
 
+    public static String inputManualLottoCount() {
+        OutputView.printInputManualLottoCount();
+        return SCANNER.nextLine();
+    }
+
     public static List<String> inputWinningNumbers() {
         OutputView.printInputWinningNumbers();
         return Arrays.asList(SCANNER.nextLine()

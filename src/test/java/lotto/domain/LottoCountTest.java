@@ -9,11 +9,12 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoCountTest {
     @ParameterizedTest
-    @ValueSource(strings = {"-1", "q", "-"})
+    @ValueSource(strings = {"-1", "q", "-", "", "11"})
     @DisplayName("구매할 로또 수 검증")
-    void checkLottoCount(String count) {
+    void checkLottoCount(String manualCount) {
+        int totalCount = 10;
         assertThatThrownBy(() -> {
-            LottoCount lottoCount = new LottoCount(count);
+            LottoCount lottoCount = new LottoCount(manualCount, totalCount);
         }).isInstanceOf(IllegalLottoCountException.class);
     }
 }
