@@ -18,7 +18,7 @@ public class LottoResult {
         return this.rank;
     }
 
-    public void add(Lotto lotto, WinningLotto winningLotto) {
+    public void checkWinningLotto(Lotto lotto, WinningLotto winningLotto) {
         int count = (int) lotto.getNumbers().stream()
             .filter(number -> winningLotto.getLotto().getNumbers().contains(number)).count();
         boolean bonus = lotto.getNumbers().contains(winningLotto.getBonus());

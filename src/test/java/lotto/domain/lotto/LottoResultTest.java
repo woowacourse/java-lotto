@@ -32,11 +32,11 @@ public class LottoResultTest {
         WinningLotto winningLotto = WinningLotto.generatedBy(testLotto, LottoNumber.valueOf(10));
 
         LottoResult lottoResult = new LottoResult();
-        lottoResult.add(testLotto, winningLotto);
+        lottoResult.checkWinningLotto(testLotto, winningLotto);
         LottoRank lottoRank = lottoResult.findRank(6, true);
         assertThat(lottoResult.getResult().get(lottoRank)).isEqualTo(1);
 
-        lottoResult.add(testLotto, winningLotto);
+        lottoResult.checkWinningLotto(testLotto, winningLotto);
         assertThat(lottoResult.getResult().get(lottoRank)).isEqualTo(2);
 
     }
@@ -47,7 +47,7 @@ public class LottoResultTest {
         WinningLotto winningLotto = WinningLotto.generatedBy(testLotto, LottoNumber.valueOf(10));
         LottoResult lottoResult = new LottoResult();
 
-        lottoResult.add(testLotto, winningLotto);
+        lottoResult.checkWinningLotto(testLotto, winningLotto);
         System.out.println(lottoResult.getResult());
         System.out.println(lottoResult.getProfitRate());
     }
@@ -59,7 +59,7 @@ public class LottoResultTest {
         Lotto testLotto2 = Lotto.generatedBy(Arrays.asList(4, 5, 6, 7, 8, 9));
         WinningLotto winningLotto = WinningLotto.generatedBy(testLotto2, LottoNumber.valueOf(10));
         LottoResult lottoResult = new LottoResult();
-        lottoResult.add(testLotto, winningLotto);
+        lottoResult.checkWinningLotto(testLotto, winningLotto);
         System.out.println(lottoResult.getResult());
         System.out.println(lottoResult.getProfitRate());
 
