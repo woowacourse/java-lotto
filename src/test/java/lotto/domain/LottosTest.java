@@ -15,7 +15,7 @@ public class LottosTest {
         int purchaseCount = 1;
         
         // when
-        Lottos lottos = LottoFactory.makeLottos(PaymentAmount.from(paymentAmount));
+        Lottos lottos = LottosFactory.makeLottos(PaymentAmount.from(paymentAmount));
         
         
         // then

@@ -12,8 +12,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class RankTest {
     
-    private static final WinningLotto WINNING_LOTTO = WinningLotto.of(Arrays.asList(1, 2, 3, 4, 5, 6),
-            LottoNumber.from(7));
+    private static final Lotto WIN_LOTTO = LottoFactory.fromNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+    private static final WinningLotto WINNING_LOTTO = WinningLotto.of(WIN_LOTTO, LottoNumber.from(7));
     
     @ParameterizedTest
     @MethodSource("generateLotto")
@@ -28,18 +28,13 @@ class RankTest {
     }
     
     private static Stream<Arguments> generateLotto() {
-        Lotto firstRankLotto = Lotto.fromNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto firstRankLotto = LottoFactory.fromNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto secondRankLotto = LottoFactory.fromNumbers(Arrays.asList(1, 2, 3, 4, 5, 7));
+        Lotto thirdRankLotto = LottoFactory.fromNumbers(Arrays.asList(1, 2, 3, 4, 5, 45));
+        Lotto fourthRankLotto = LottoFactory.fromNumbers(Arrays.asList(1, 2, 3, 4, 44, 45));
+        Lotto fifthRankLotto = LottoFactory.fromNumbers(Arrays.asList(1, 2, 3, 43, 44, 45));
+        Lotto nothingRankLotto = LottoFactory.fromNumbers(Arrays.asList(1, 2, 42, 43, 44, 45));
         
-        Lotto secondRankLotto = Lotto.fromNumbers(Arrays.asList(1, 2, 3, 4, 5, 7));
-        
-        Lotto thirdRankLotto = Lotto.fromNumbers(Arrays.asList(1, 2, 3, 4, 5, 45));
-        
-        Lotto fourthRankLotto = Lotto.fromNumbers(Arrays.asList(1, 2, 3, 4, 44, 45));
-        
-        Lotto fifthRankLotto = Lotto.fromNumbers(Arrays.asList(1, 2, 3, 43, 44, 45));
-        
-        Lotto nothingRankLotto = Lotto.fromNumbers(Arrays.asList(1, 2, 42, 43, 44, 45));
-    
         return Stream.of(
                 Arguments.of(firstRankLotto, Rank.FIRST),
                 Arguments.of(secondRankLotto, Rank.SECOND),
