@@ -2,17 +2,17 @@ package lottogame.domain.ticket;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import lottogame.domain.LottoGameResult;
+import lottogame.domain.Rank;
+import lottogame.domain.number.LottoWinningNumbers;
 
 public class LottoTickets {
 
     private final List<LottoTicket> lottoTickets;
 
-    public LottoTickets() {
-        this.lottoTickets = new ArrayList<>();
-    }
-
-    public void add(final LottoTicket lottoTicket) {
-        this.lottoTickets.add(lottoTicket);
+    public LottoTickets(final List<LottoTicket> lottoTickets) {
+        this.lottoTickets = new ArrayList<>(lottoTickets);
     }
 
     public List<String> getLottoTickets() {
@@ -21,5 +21,20 @@ public class LottoTickets {
             ticketsList.add(lottoTicket.getLottoNumbers().toString());
         }
         return ticketsList;
+    }
+
+    public LottoGameResult getMatchingResult(final LottoWinningNumbers lottoWinningNumbers,
+        final Map<Rank, Integer> matchingResults) {
+        for (LottoTicket lottoTicket : this.lottoTickets) {
+            Rank rank = getRank(lottoWinningNumbers, lottoTicket);
+            matchingResults.put(rank, matchingResults.get(rank) + 1);
+        }
+        return new LottoGameResult(matchingResults);
+    }
+
+    private Rank getRank(LottoWinningNumbers lottoWinningNumbers, LottoTicket lottoTicket) {
+        int matchCount = lottoWinningNumbers.countMatchedWinningNumber(lottoTicket);
+        boolean isBonusMatch = lottoWinningNumbers.isMatchBonusNumber(lottoTicket);
+        return Rank.of(matchCount, isBonusMatch);
     }
 }
