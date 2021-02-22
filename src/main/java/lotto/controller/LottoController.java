@@ -28,7 +28,7 @@ public class LottoController {
                 lottoCount.getAutoLottoCount(), manualLottoTickets);
         OutputView.printLottoTicketsCount(lottoCount);
         OutputView.printLottoTickets(lottoTickets);
-        WinningLotto winningLotto = getWinningLotto(lottoTickets);
+        WinningLotto winningLotto = getWinningLotto();
         showResult(lottoTickets, winningLotto);
     }
 
@@ -51,8 +51,9 @@ public class LottoController {
         return new LottoCount(inputManualLottoCount, totalLottoCount);
     }
 
-    private WinningLotto getWinningLotto(LottoTickets lottoTickets) {
-        LottoTicket winningTicket = InputView.inputWinningNumbers().stream()
+    private WinningLotto getWinningLotto() {
+        LottoTicket winningTicket = InputView.inputWinningNumbers()
+                .stream()
                 .map(LottoNumber::new)
                 .collect(collectingAndThen(toList(), LottoTicket::new));
         LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());
