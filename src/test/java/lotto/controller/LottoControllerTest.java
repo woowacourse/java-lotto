@@ -11,8 +11,6 @@ import lotto.view.OutputView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,15 +25,6 @@ class LottoControllerTest {
     void setup() {
         InputView inputView = new InputView(new Scanner(System.in));
         lottoController = new LottoController(inputView, new OutputView(), new Money(1000));
-    }
-
-    @DisplayName("로또 티켓 구매 메소드 확인")
-    @ParameterizedTest
-    @ValueSource(ints = {1, 2, 3, 4, 5, 6, 7, 8, 10})
-    void buyLottoTicket(int testSize) {
-        LottoTickets lottoTickets = lottoController.buyAutoLottoTicket(new Money(1000 * testSize));
-
-        assertThat(lottoTickets.size()).isEqualTo(testSize);
     }
 
     @DisplayName("당첨로또 생성 메소드 확인")

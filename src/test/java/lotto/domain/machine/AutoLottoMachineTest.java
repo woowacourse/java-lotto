@@ -1,7 +1,6 @@
 package lotto.domain.machine;
 
 import lotto.domain.Money;
-import lotto.domain.machine.AutoLottoMachine;
 import lotto.domain.ticket.LottoTickets;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
