@@ -6,6 +6,7 @@ import lotto.domain.Result;
 import lotto.domain.Statistics;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public class OutputView {
@@ -13,8 +14,8 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void showBuyLotto(List<Lotto> lottos) {
-        System.out.printf("%d개를 구매했습니다.\n", lottos.size());
+    public static void showBuyLotto(int manualCount, List<Lotto> lottos) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualCount, lottos.size()-manualCount);
         StringBuilder sb = new StringBuilder();
         for (Lotto lotto : lottos) {
             sb.append("[");
@@ -26,7 +27,8 @@ public class OutputView {
 
     public static void result(Statistics statistics) {
         Arrays.stream(Result.values())
-                .sorted((result1, result2) -> result2.getPrize() - result1.getPrize())
+                .filter(result -> !result.equals(Result.NONE))
+                .sorted(Comparator.comparingInt(Result::getCount))
                 .forEach(result ->
                         System.out.printf(
                                 "%d개 일치%s(%d원)- %d개\n",

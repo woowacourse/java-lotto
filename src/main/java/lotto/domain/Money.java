@@ -10,7 +10,7 @@ public class Money {
         this.money = money;
     }
 
-    public int countBuyLotto() {
+    public int totalCountOfPurchaseLotto() {
         return money / LOTTO_PRICE;
     }
 

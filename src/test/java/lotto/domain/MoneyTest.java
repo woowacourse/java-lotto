@@ -28,7 +28,7 @@ public class MoneyTest {
     @Test
     void calculateNumberOfLotto() {
         Money money = new Money(13500);
-        int numberOfLotto = money.countBuyLotto();
+        int numberOfLotto = money.totalCountOfPurchaseLotto();
 
         assertThat(numberOfLotto).isEqualTo(13);
     }

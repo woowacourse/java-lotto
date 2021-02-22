@@ -4,16 +4,17 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoControllerMain {
     public static void main(String[] args) {
         Money money = new Money(InputView.inputMoney());
-        List<Lotto> manualLottos = new ArrayList<>();
-        Lottos lottos = new Lottos(manualLottos, money.countBuyLotto());
+        int manualCount = InputView.inputManualPurchaseCount();
+        int autoCount = money.totalCountOfPurchaseLotto() - manualCount;
 
-        OutputView.showBuyLotto(lottos.getLottos());
+        Lottos lottos = new Lottos(new ManualLotto(InputView.inputManualPurchase(manualCount)), autoCount);
+
+        OutputView.showBuyLotto(manualCount, lottos.getLottos());
 
         WinningLotto winningLotto = new WinningLotto(new Lotto(InputView.winningNumbers()), new BonusNumber(InputView.bonusNumber()));
         List<Result> results = winningLotto.getWinningResult(lottos.getLottos());

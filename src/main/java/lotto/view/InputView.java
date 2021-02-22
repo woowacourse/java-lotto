@@ -1,9 +1,11 @@
 package lotto.view;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
@@ -45,5 +47,27 @@ public class InputView {
         }
 
         return Integer.parseInt(bonus);
+    }
+
+    public static int inputManualPurchaseCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        String input = scanner.nextLine();
+
+        if (!input.chars().allMatch(Character::isDigit)) {
+            throw new IllegalArgumentException("숫자를 입력해주세요.");
+        }
+
+        return Integer.parseInt(input);
+    }
+
+    public static List<String> inputManualPurchase(int manualCount) {
+        if(manualCount == 0){
+            return Arrays.asList();
+        }
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+
+        return Stream.generate(()->scanner.nextLine())
+                .limit(manualCount)
+                .collect(Collectors.toList());
     }
 }

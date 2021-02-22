@@ -2,15 +2,14 @@ package lotto.domain;
 
 import lotto.util.LottoGenerator;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Lottos {
     private final List<Lotto> lottos;
 
-    public Lottos(List<Lotto> manualNumbers, int autoCount) {
-        this.lottos = manualNumbers;
+    public Lottos(ManualLotto manualLotto, int autoCount) {
+        this.lottos = manualLotto.getManualLotto();
         buyAutoLotto(autoCount);
     }
 
@@ -18,8 +17,7 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static void buyAutoLotto(int count) {
-        List<Lotto> lottos = new ArrayList<>();
+    private void buyAutoLotto(int count) {
         for (int i = 0; i < count; i++) {
             lottos.add(new Lotto(LottoGenerator.make()));
         }
