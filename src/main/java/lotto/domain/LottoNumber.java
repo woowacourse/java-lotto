@@ -16,11 +16,11 @@ public class LottoNumber {
     public static LottoNumber fromStringLottoNumber(String lottoNum) {
         lottoNum = lottoNum.trim();
         
-        if (!isInteger(lottoNum)) {
-            throw new IllegalArgumentException();
+        if (isInteger(lottoNum)) {
+            return from(Integer.parseInt(lottoNum));
         }
-        
-        return from(Integer.parseInt(lottoNum));
+    
+        throw new IllegalArgumentException();
     }
     
     private static boolean isInteger(String input) {
@@ -34,11 +34,11 @@ public class LottoNumber {
     }
     
     public static LottoNumber from(int lottoNum) {
-        if (!isInRange(lottoNum)) {
-            throw new IllegalArgumentException();
+        if (isInRange(lottoNum)) {
+            return new LottoNumber(lottoNum);
         }
-        
-        return new LottoNumber(lottoNum);
+    
+        throw new IllegalArgumentException();
     }
     
     private static boolean isInRange(int lottoNum) {

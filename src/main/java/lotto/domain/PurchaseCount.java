@@ -14,17 +14,21 @@ public class PurchaseCount {
     }
     
     public static PurchaseCount of(PaymentAmount paymentAmount, String manualPurchaseCount) {
-        if (!isInteger(manualPurchaseCount)) {
-            throw new IllegalArgumentException();
-        }
-    
+        int manualCount = parseInt(manualPurchaseCount);
         int totalCount = paymentAmount.getPurchaseCount();
-        int manualCount = Integer.parseInt(manualPurchaseCount);
         if (isNegative(manualCount) || isBiggerThanTotal(totalCount, manualCount)) {
             throw new IllegalArgumentException();
         }
         
         return new PurchaseCount(manualCount, totalCount - manualCount);
+    }
+    
+    private static int parseInt(String manualPurchaseCount) {
+        if (isInteger(manualPurchaseCount)) {
+            return Integer.parseInt(manualPurchaseCount);
+        }
+    
+        throw new IllegalArgumentException();
     }
     
     private static boolean isBiggerThanTotal(int totalCount, int purchaseCount) {

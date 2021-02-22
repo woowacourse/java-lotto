@@ -21,11 +21,11 @@ public class Lotto {
     }
     
     public static Lotto fromNumbers(Set<LottoNumber> lottoNumbers) {
-        if (!matchesLength(lottoNumbers.size())) {
-            throw new IllegalArgumentException();
+        if (matchesLength(lottoNumbers.size())) {
+            return new Lotto(lottoNumbers);
         }
-        
-        return new Lotto(lottoNumbers);
+    
+        throw new IllegalArgumentException();
     }
     
     private static boolean matchesLength(int size) {
