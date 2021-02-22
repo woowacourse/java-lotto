@@ -52,7 +52,7 @@ public class OutputView {
     }
 
     public static void numMatchPrint(LottoResult lottoResult) {
-        for (Entry<LottoRank, Integer> entrySet : lottoResult.getRank().entrySet()) {
+        for (Entry<LottoRank, Integer> entrySet : lottoResult.getResult().entrySet()) {
             printResult(entrySet);
         }
 

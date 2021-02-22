@@ -50,6 +50,22 @@ public class Lotto {
         }
     }
 
+    public LottoRank check(WinningLotto winningLotto) {
+        boolean bonus = this.numbers.contains(winningLotto.getBonus());
+        int count = numMatches(winningLotto.getLotto());
+        return findRank(count, bonus);
+    }
+
+    public LottoRank findRank(int count, boolean bonus) {
+        return LottoRank.checkRank(count, bonus);
+    }
+
+    private int numMatches(Lotto lotto) {
+        return (int) this.numbers.stream().
+            filter(number -> lotto.getNumbers().contains(number))
+            .count();
+    }
+
     public List<LottoNumber> getNumbers() {
         return new ArrayList<>(numbers);
     }
