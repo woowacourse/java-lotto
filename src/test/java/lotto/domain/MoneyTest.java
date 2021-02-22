@@ -6,13 +6,12 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
 
+import static lotto.domain.Money.MONEY_RANGE_ERROR;
+import static lotto.domain.Money.MONEY_UNIT_ERROR;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class MoneyTest {
-    private static final String MONEY_UNIT_ERROR = "[ERROR] 금액을 1000단위로 입력해주세요";
-    private static final String MONEY_INT_ERROR = "[ERROR] 숫자만 입력할 수 있습니다";
-    private static final String MONEY_RANGE_ERROR = "[ERROR] 금액을 1000원 이상 입력해주세요";
 
     @Test
     @DisplayName("구입금액이_숫자인지_확인")
@@ -21,7 +20,7 @@ public class MoneyTest {
         assertThatThrownBy(() -> {
             new Money(falseMoney);
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(MONEY_INT_ERROR);
+                .hasMessageContaining(Money.MONEY_INT_ERROR);
     }
 
     @Test

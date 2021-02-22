@@ -3,9 +3,9 @@ package lotto.domain;
 import java.util.Map;
 
 public class Money {
-    private static final String MONEY_INT_ERROR = "[ERROR] 숫자만 입력할 수 있습니다";
-    private static final String MONEY_RANGE_ERROR = "[ERROR] 금액을 1000원 이상 입력해주세요";
-    private static final String MONEY_UNIT_ERROR = "[ERROR] 금액을 1000단위로 입력해주세요";
+    public static final String MONEY_INT_ERROR = "[ERROR] 숫자만 입력할 수 있습니다";
+    public static final String MONEY_RANGE_ERROR = "[ERROR] 금액을 1000원 이상 입력해주세요";
+    public static final String MONEY_UNIT_ERROR = "[ERROR] 금액을 1000단위로 입력해주세요";
     private static final String FORMAT = "%.2f";
     private static final int THOUSAND = 1000;
     private static int money;

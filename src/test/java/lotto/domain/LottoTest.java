@@ -9,9 +9,6 @@ import java.util.Arrays;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
-    private static final String NUMBER_COUNT_ERROR = "[ERROR] 6개의 숫자를 입력해주세요";
-    private static final String NUMBER_DUPLICATE_ERROR = "[ERROR] 숫자는 중복될 수 없습니다";
-    private static final String NUMBER_RANGE_ERROR = "[ERROR] 1 ~ 45 사이의 숫자를 입력해주세요";
 
     @Test
     @DisplayName("숫자가 6개인지 확인")
@@ -20,7 +17,7 @@ public class LottoTest {
         assertThatThrownBy(() -> {
             new Lotto(nums);
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(NUMBER_COUNT_ERROR);
+                .hasMessageContaining(Lotto.NUMBER_COUNT_ERROR);
     }
 
     @Test
@@ -30,7 +27,7 @@ public class LottoTest {
         assertThatThrownBy(() -> {
             new Lotto(nums);
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(NUMBER_DUPLICATE_ERROR);
+                .hasMessageContaining(Lotto.NUMBER_DUPLICATE_ERROR);
     }
 
     @Test
@@ -40,6 +37,6 @@ public class LottoTest {
         assertThatThrownBy(() -> {
             new Lotto(nums);
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(NUMBER_RANGE_ERROR);
+                .hasMessageContaining(Lotto.NUMBER_RANGE_ERROR);
     }
 }
