@@ -7,10 +7,11 @@ import java.util.List;
 import java.util.Set;
 
 import lotto.domain.Rank;
-import lotto.view.ErrorMessages;
 
 public class LottoLine {
+    private static final String ERROR_LOTTO_NUMBER_DUPLICATED = "[Error] 로또번호 라인은 중복되지 않은 6개의 숫자여야 합니다.";
     protected static final int LOTTO_LINE_SIZE = 6;
+
     private final List<LottoNumber> value;
 
     public LottoLine(List<LottoNumber> lottoNumbers) {
@@ -18,7 +19,7 @@ public class LottoLine {
 
         if (unDuplicatedLottoNumber.size() != LOTTO_LINE_SIZE) {
             throw new IllegalArgumentException(
-                    ErrorMessages.ERROR_LOTTO_NUMBER_DUPLICATED.getMessage());
+                    ERROR_LOTTO_NUMBER_DUPLICATED);
         }
 
         value = new ArrayList<>(unDuplicatedLottoNumber);

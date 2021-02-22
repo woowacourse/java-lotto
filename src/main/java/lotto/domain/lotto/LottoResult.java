@@ -18,7 +18,7 @@ public class LottoResult {
         long count = rankList.stream()
                 .filter(rank -> rank.equals(wantedRank))
                 .count();
-        
+
         return (int) count;
     }
 

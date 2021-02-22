@@ -2,9 +2,8 @@ package lotto.domain.lotto;
 
 import java.util.ArrayList;
 
-import lotto.view.ErrorMessages;
-
 public class LottoTicketGenerator {
+    private static final String ERROR_LOTTO_MONEY_NOT_ENOUGH = "[ERROR] 돈이 부족합니다.";
     protected static final int PRICE_EACH_LOTTO = 1000;
 
     private static LottoTicketGenerator instance;
@@ -36,7 +35,7 @@ public class LottoTicketGenerator {
     private int getNumberOfLottoLine(int money) {
         int numberOfLottoLine = money / PRICE_EACH_LOTTO;
         if (numberOfLottoLine <= 0) {
-            throw new IllegalArgumentException(ErrorMessages.ERROR_LOTTO_MONEY_NOT_ENOUGH.getMessage());
+            throw new IllegalArgumentException(ERROR_LOTTO_MONEY_NOT_ENOUGH);
         }
         return numberOfLottoLine;
     }

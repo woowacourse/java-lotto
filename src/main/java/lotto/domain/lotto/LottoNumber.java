@@ -3,9 +3,10 @@ package lotto.domain.lotto;
 import java.util.Objects;
 
 import lotto.utils.Validation;
-import lotto.view.ErrorMessages;
 
 public class LottoNumber implements Comparable<LottoNumber> {
+    private static final String ERROR_LOTTO_NUMBER_OUT_OF_BOUND = "[Error] 로또 번호는 1부터 45까지 입니다.";
+
     protected static final int LOTTO_START_NUMBER = 1;
     protected static final int LOTTO_FINAL_NUMBER = 45;
 
@@ -28,8 +29,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private void validateLottoNumberRange(int lottoNumber) {
         if (lottoNumber < LOTTO_START_NUMBER || lottoNumber > LOTTO_FINAL_NUMBER) {
-            throw new IllegalArgumentException(
-                    ErrorMessages.ERROR_LOTTO_NUMBER_OUT_OF_BOUND.getMessage());
+            throw new IllegalArgumentException(ERROR_LOTTO_NUMBER_OUT_OF_BOUND);
         }
     }
 
