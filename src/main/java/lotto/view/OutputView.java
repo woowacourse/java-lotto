@@ -2,6 +2,7 @@ package lotto.view;
 
 import com.google.common.primitives.Ints;
 import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 import lotto.domain.Result;
 import lotto.domain.Statistics;
 
@@ -14,15 +15,20 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void showBuyLotto(int manualCount, List<Lotto> lottos) {
-        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualCount, lottos.size()-manualCount);
+    public static void showBuyLotto(Lottos lottos) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", lottos.getManualLotto().size(), lottos.getAutoLotto().size());
         StringBuilder sb = new StringBuilder();
+        showLottoNumbers(sb, lottos.getManualLotto());
+        showLottoNumbers(sb, lottos.getAutoLotto());
+        System.out.println(sb.toString());
+    }
+
+    private static void showLottoNumbers(StringBuilder sb, List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
             sb.append("[");
             sb.append(Ints.join(", ", lotto.getLottoNumbers().stream().mapToInt(i -> i).toArray()));
             sb.append("]\n");
         }
-        System.out.println(sb.toString());
     }
 
     public static void result(Statistics statistics) {

@@ -12,12 +12,12 @@ public class LottoControllerMain {
         int manualCount = InputView.inputManualPurchaseCount();
         int autoCount = money.totalCountOfPurchaseLotto() - manualCount;
 
-        Lottos lottos = new Lottos(new ManualLotto(InputView.inputManualPurchase(manualCount)), autoCount);
+        Lottos lottos = new Lottos(new ManualLotto(InputView.inputManualPurchase(manualCount)), new AutoLotto(autoCount));
 
-        OutputView.showBuyLotto(manualCount, lottos.getLottos());
+        OutputView.showBuyLotto(lottos);
 
         WinningLotto winningLotto = new WinningLotto(new Lotto(InputView.winningNumbers()), new BonusNumber(InputView.bonusNumber()));
-        List<Result> results = winningLotto.getWinningResult(lottos.getLottos());
+        List<Result> results = winningLotto.getWinningResult(lottos);
 
         OutputView.resultMessage();
         OutputView.result(new Statistics(results));

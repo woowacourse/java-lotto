@@ -25,12 +25,10 @@ public class WinningLottoTest {
     @DisplayName("로또 당첨결과 확인")
     @Test
     void testEntireLottoMatching() {
-        Lotto lotto1 = new Lotto(Arrays.asList(1, 2, 3, 20, 21, 40));
-        Lotto lotto2 = new Lotto(Arrays.asList(1, 2, 20, 25, 29, 45));
-        Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2));
+        Lottos lottos = new Lottos(new ManualLotto(Arrays.asList("1, 2, 3, 20, 21, 40", "1, 2, 20, 25, 29, 45")), new AutoLotto(0));
 
         WinningLotto winningLotto = new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new BonusNumber(20));
-        List<Result> results = winningLotto.getWinningResult(lottos.getLottos());
+        List<Result> results = winningLotto.getWinningResult(lottos);
 
         List<Result> expectedResults = Arrays.asList(Result.FIFTH, Result.NONE);
 

@@ -15,15 +15,21 @@ public class WinningLotto {
     }
 
 
-    public List<Result> getWinningResult(List<Lotto> lottoNumbers) {
+    public List<Result> getWinningResult(Lottos lottos) {
         List<Result> results = new ArrayList<>();
-        for (Lotto lotto : lottoNumbers) {
+        checkResult(results, lottos.getManualLotto());
+        checkResult(results, lottos.getAutoLotto());
+
+        return results;
+    }
+
+    private void checkResult(List<Result> results, List<Lotto> lottos) {
+        for (Lotto lotto : lottos) {
             results.add(Result.decisionLottoRank(
                     matchingCount(lotto.getLottoNumbers()),
                     lotto.isBonusMatch(bonusNumber.getBonus())
             ));
         }
-        return results;
     }
 
     private int matchingCount(List<Integer> lottoNumbers) {
