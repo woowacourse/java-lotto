@@ -24,10 +24,6 @@ public class PayOutTest {
         assertThatIllegalArgumentException().isThrownBy(
                 () -> new PayOut(new Number(-1))
         ).withMessage("입력값이 양수가 아닙니다.");
-
-        assertThatIllegalArgumentException().isThrownBy(
-                () -> new PayOut(new Number(0))
-        ).withMessage("입력값이 양수가 아닙니다.");
     }
 
     @Test

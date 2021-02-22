@@ -20,7 +20,7 @@ public class LottoGeneratorTest {
                 "5,3,8,6,4,9"
         );
 
-        PayOut zeroPayOut = PayOut.ZERO;
+        PayOut zeroPayOut = new PayOut(0);
 
         LottoGenerator lottoGenerator = new LottoGenerator();
         assertThat(
