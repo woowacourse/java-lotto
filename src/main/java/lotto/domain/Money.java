@@ -9,18 +9,18 @@ public class Money {
     private static final String MONEY_UNIT_ERROR = "[ERROR] 금액을 1000단위로 입력해주세요";
     private static final String FORMAT = "%.2f";
     private static final int THOUSAND = 1000;
-    private static int money;
+    private final int money;
     private static int earning;
 
     public Money(String input) {
         int inputMoney = changeToInt(input);
         validateRange(inputMoney);
         validateUnit(inputMoney);
-        money = inputMoney;
+        this.money = inputMoney;
     }
 
-    public static String findEarningRate() {
-        double earningRate = (double) earning / (double) money;
+    public String findEarningRate() {
+        double earningRate = (double) earning / (double) this.money;
         return String.format(FORMAT, earningRate);
     }
 
