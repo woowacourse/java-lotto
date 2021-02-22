@@ -2,8 +2,10 @@ package lotto;
 
 import java.util.List;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.Money;
 import lotto.domain.Seller;
+import lotto.domain.WinningLotto;
 import lotto.view.LottoView;
 
 public class Application {
@@ -16,5 +18,10 @@ public class Application {
 
         LottoView.buyLotto(count);
         LottoView.printLottos(lottos);
+
+        WinningLotto winningLotto = new WinningLotto(
+            new Lotto(seller.sell(LottoView.requestWinningNumber())),
+            new LottoNumber(LottoView.requestBonusBallNumber())
+        );
     }
 }

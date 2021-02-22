@@ -5,7 +5,8 @@ import java.util.List;
 
 public class Seller {
 
-    private final LottoGenerator lottoGenerator = new LottoGenerator();
+    public static final String DELIMITER = ",";
+    private static final LottoGenerator lottoGenerator = new LottoGenerator();
 
     public List<Lotto> sell(int count) {
         List<Lotto> lottos = new ArrayList<>();
@@ -13,5 +14,13 @@ public class Seller {
             lottos.add(new Lotto(lottoGenerator.generateLotto()));
         }
         return lottos;
+    }
+
+    public List<LottoNumber> sell(String input) {
+        List<LottoNumber> lottoNumber = new ArrayList<>();
+        for (String number : input.split(DELIMITER, -1)) {
+            lottoNumber.add(new LottoNumber(number));
+        }
+        return lottoNumber;
     }
 }

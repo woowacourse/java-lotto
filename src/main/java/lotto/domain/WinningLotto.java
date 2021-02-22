@@ -1,43 +1,34 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class WinningLotto {
 
-    private static final String DELIMITER = ",";
-    private static Lotto winLotto;
-    private static BonusBall bonusBall;
+    private static final String DUPLICATED_NUMBER_ERROR = "[ERROR] 보너스볼 숫자는 당첨번호와 중복될 수 없습니다";
+    private final Lotto winLotto;
+    private final LottoNumber bonusBall;
 
-    public WinningLotto(String winningInput, String bonusBallInput) {
-        winLotto = new Lotto(generateWinningLotto(winningInput));
-        bonusBall = new BonusBall(winLotto, bonusBallInput);
+    public WinningLotto(Lotto lotto, LottoNumber bonusBall) {
+        validateDuplicate(lotto, bonusBall);
+        this.winLotto = lotto;
+        this.bonusBall = bonusBall;
     }
 
-    public static int howManyWins(Lotto lotto) {
-        ArrayList<Integer> wins = new ArrayList<>(winLotto.getLotto());
-        wins.retainAll(lotto.getLotto());
+    public void validateDuplicate(Lotto lotto, LottoNumber bonusBall) {
+        if (lotto.isContain(bonusBall)) {
+            throw new IllegalArgumentException(DUPLICATED_NUMBER_ERROR);
+        }
+    }
+    private int howManyWins(Lotto lotto) {
+        List<LottoNumber> wins = new ArrayList<>(winLotto.getLottoNumbers());
+        wins.retainAll(lotto.getLottoNumbers());
         return wins.size();
-    }
-
-    private List<Integer> changeToList(String numberInput) {
-        return Arrays.stream(numberInput.split(DELIMITER))
-            .map(String::trim)
-            .map(Integer::parseInt)
-            .collect(Collectors.toList());
-    }
-
-    private List<Integer> generateWinningLotto(String numberInput) {
-        List<Integer> winningNumbers = changeToList(numberInput);
-        List<Integer> winningNums = new ArrayList<>(winningNumbers);
-        return winningNums;
     }
 
     public Rank findRank(Lotto lotto) {
         int match = howManyWins(lotto);
-        boolean bonusMatch = bonusBall.hasBonusBall(lotto);
+        boolean bonusMatch = lotto.isContain(bonusBall);
         return Rank.makeRankByMatch(match, bonusMatch);
     }
 }

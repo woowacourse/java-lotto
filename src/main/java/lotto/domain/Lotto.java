@@ -31,6 +31,14 @@ public class Lotto {
         }
     }
 
+    public boolean isContain(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
+
     @Override
     public String toString() {
         List<Integer> lottoNumbers = new ArrayList<>();
