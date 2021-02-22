@@ -21,7 +21,8 @@ public class LottoNumber {
 
     private void validateNumberRange(final int value) {
         if (value < START_LOTTO_NUMBER || FINISH_LOTTO_NUMBER < value) {
-            throw new IllegalArgumentException("유효한 로또 번호 범위를 벗어났습니다.");
+            throw new IllegalArgumentException("유효한 로또 번호 범위는 "
+                + START_LOTTO_NUMBER + "~" + FINISH_LOTTO_NUMBER + "입니다.");
         }
     }
 
