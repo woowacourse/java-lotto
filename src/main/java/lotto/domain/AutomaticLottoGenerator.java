@@ -19,8 +19,10 @@ public class AutomaticLottoGenerator implements LottoGenerator {
     }
 
     public Lotto createLotto() {
-        Collections.shuffle(candidateNumbers);
-        List<LottoNumber> numbers = candidateNumbers.subList(LOTTO_START_INDEX, LOTTO_SIZE);
+        List<LottoNumber> copy = new ArrayList<>(candidateNumbers);
+        Collections.shuffle(copy);
+        System.out.println();
+        List<LottoNumber> numbers = copy.subList(LOTTO_START_INDEX, LOTTO_SIZE);
         Collections.sort(numbers);
 
         return new Lotto(numbers);
