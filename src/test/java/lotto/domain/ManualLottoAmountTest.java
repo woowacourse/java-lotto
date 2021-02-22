@@ -26,4 +26,12 @@ public class ManualLottoAmountTest {
                 .isInstanceOf(IllegalManualLottoAmountException.class)
                 .hasMessage(input + " : 올바른 형식이 아닙니다.");
     }
+
+    @DisplayName("돈의 범위를 초과하는 오류 검증")
+    @Test
+    void validateByMoney() {
+        assertThatThrownBy(() -> new ManualLottoAmount("5", 1))
+                .isInstanceOf(IllegalManualLottoAmountException.class)
+                .hasMessage("5 : 소지금으로 구매할 수 있는 범위를 초과합니다.");
+    }
 }
