@@ -14,9 +14,6 @@ import lotto.view.OutputView;
 
 public class LottoController {
 
-    private static final String INPUT_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
-    private static final String INPUT_BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
-
     public void start() {
         LottoManager lottoManager = new LottoManager(new RandomLottoMachine());
         Ticket ticket = buyLotto();
@@ -39,8 +36,7 @@ public class LottoController {
     }
 
     private Ticket tryBuyLotto() {
-        OutputView.getMessage(INPUT_MONEY_MESSAGE);
-        int money = InputView.getInt();
+        int money = InputView.getMoney();
         return new Ticket(new Money(money));
     }
 
@@ -55,8 +51,7 @@ public class LottoController {
 
     private WinningLotto tryBuyWinningLotto() {
         Lotto lotto = Lotto.getInstanceByInt(InputView.getWinningNumbers());
-        OutputView.getMessage(INPUT_BONUS_BALL_MESSAGE);
-        LottoNumber bonusNumber = new LottoNumber(InputView.getInt());
+        LottoNumber bonusNumber = new LottoNumber(InputView.getBonusBall());
         return new WinningLotto(lotto, bonusNumber);
     }
 }
