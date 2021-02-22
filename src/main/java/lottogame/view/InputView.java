@@ -8,19 +8,19 @@ import java.util.regex.Pattern;
 
 public class InputView {
 
-    private static final Scanner scanner = new Scanner(System.in);
-    private static final Pattern pattern = Pattern.compile("([0-9])+");
+    private static final Scanner SCANNER = new Scanner(System.in);
+    private static final Pattern PATTERN = Pattern.compile("([0-9])+");
 
     public static int inputMoney() {
         System.out.println("구입금액을 입력해 주세요.");
-        String money = scanner.nextLine();
+        String money = SCANNER.nextLine();
         validateInteger(money);
         return Integer.parseInt(money);
     }
 
     public static Set<Integer> inputWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return getWinningNumbers(pattern.matcher(scanner.nextLine()));
+        return getWinningNumbers(PATTERN.matcher(SCANNER.nextLine()));
     }
 
     private static Set<Integer> getWinningNumbers(Matcher matcher) {
@@ -35,7 +35,7 @@ public class InputView {
 
     public static int inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        String number = scanner.nextLine();
+        String number = SCANNER.nextLine();
         validateInteger(number);
         return Integer.parseInt(number);
     }
