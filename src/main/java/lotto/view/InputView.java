@@ -1,11 +1,12 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.PaymentAmount;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class InputView {
@@ -30,13 +31,14 @@ public class InputView {
         return PaymentAmount.from(input);
     }
     
-    public List<Integer> readWinningLotto() {
+    public Lotto readWinningLotto() {
         String input = read(WINNING_LOTTO_NUMBER_QUESTION);
         
-        return Arrays.stream(input.split(DELIMITER))
-                     .map(number -> LottoNumber.fromStringLottoNumber(number)
-                                               .getLottoNum())
-                     .collect(Collectors.toList());
+        Set<LottoNumber> lottoNumbers = Arrays.stream(input.split(DELIMITER))
+                                              .map(LottoNumber::fromStringLottoNumber)
+                                              .collect(Collectors.toSet());
+        
+        return Lotto.fromNumbers(lottoNumbers);
     }
     
     public LottoNumber readBonusNumber() {
