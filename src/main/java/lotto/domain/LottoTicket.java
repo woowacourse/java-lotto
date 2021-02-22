@@ -14,11 +14,15 @@ public class LottoTicket {
     private final List<LottoNumber> lottoNumbers;
 
     public LottoTicket(List<LottoNumber> lottoNumbers) {
+        validate(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
+    }
+
+    private void validate(List<LottoNumber> lottoNumbers) {
         Objects.requireNonNull(lottoNumbers, NULL_ERROR_MESSAGE);
         validateEmptyTicket(lottoNumbers);
         validateCount(lottoNumbers);
         validateDuplicate(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
     }
 
     public List<LottoNumber> getLottoNumbers() {
