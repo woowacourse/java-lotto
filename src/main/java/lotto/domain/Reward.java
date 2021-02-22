@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.Arrays;
 import lotto.exception.InvalidLottoHitCountException;
 
-public enum Reword {
+public enum Reward {
 
     FIRST(6, 2_000_000_000),
     SECOND(5, 30_000_000),
@@ -15,7 +15,7 @@ public enum Reword {
     private final int hitCount;
     private final int winningMoney;
 
-    Reword(final int hitCount, final int winningMoney) {
+    Reward(final int hitCount, final int winningMoney) {
         this.hitCount = hitCount;
         this.winningMoney = winningMoney;
     }
@@ -28,17 +28,17 @@ public enum Reword {
         return winningMoney;
     }
 
-    public static Reword valueOf(final int hitCount, final boolean isHitBonus) {
+    public static Reward valueOf(final int hitCount, final boolean isHitBonus) {
         validateHitCount(hitCount);
 
         return Arrays.stream(values())
-            .filter(reword -> reword.matchHitCount(hitCount))
-            .filter(reword -> reword.rewordClassification(isHitBonus))
+            .filter(reward -> reward.matchHitCount(hitCount))
+            .filter(reward -> reward.rewardClassification(isHitBonus))
             .findFirst()
-            .orElse(Reword.NONE);
+            .orElse(Reward.NONE);
     }
 
-    private boolean rewordClassification(final boolean isHitBonus) {
+    private boolean rewardClassification(final boolean isHitBonus) {
         return !this.equals(SECOND) || isHitBonus;
     }
 

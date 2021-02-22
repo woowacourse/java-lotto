@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.LottoTickets;
 import lotto.domain.Payment;
-import lotto.domain.Reword;
-import lotto.domain.Rewords;
+import lotto.domain.Reward;
+import lotto.domain.Rewards;
 import lotto.domain.WinningLotto;
 import lotto.utils.ParseUtils;
 import lotto.view.InputView;
@@ -18,7 +18,8 @@ public class LottoController {
 
     private static final String REGEX = ", ";
 
-    public LottoController() {}
+    public LottoController() {
+    }
 
     public void run() {
         final Payment payment = new Payment(ParseUtils.parseInt(InputView.getInputMoney()));
@@ -46,21 +47,22 @@ public class LottoController {
         OutputView.printNewLineMessage();
     }
 
-    private void callResultMessage(Payment payment, LottoTickets lottoTickets, WinningLotto winningLotto) {
+    private void callResultMessage(Payment payment, LottoTickets lottoTickets,
+        WinningLotto winningLotto) {
         OutputView.printResultMessage();
-        Rewords rewords = lottoTickets.getResult(winningLotto);
-        Arrays.stream(Reword.values())
-            .sorted(Comparator.comparing(Reword::getWinningMoney))
-            .filter(reword -> !reword.equals(reword.NONE))
-            .forEach(reword -> callMatchMessage(reword, rewords.getRankCount(reword)));
-        OutputView.printProfitMessage(rewords.profit(payment.getPayment()));
+        Rewards rewards = lottoTickets.getResult(winningLotto);
+        Arrays.stream(Reward.values())
+            .sorted(Comparator.comparing(Reward::getWinningMoney))
+            .filter(reward -> !reward.equals(reward.NONE))
+            .forEach(reward -> callMatchMessage(reward, rewards.getRankCount(reward)));
+        OutputView.printProfitMessage(rewards.profit(payment.getPayment()));
     }
 
-    private void callMatchMessage(Reword reword, int count) {
-        if (reword != Reword.SECOND) {
-            OutputView.printMatchMessage(reword, count);
+    private void callMatchMessage(Reward reward, int count) {
+        if (reward != Reward.SECOND) {
+            OutputView.printMatchMessage(reward, count);
             return;
         }
-        OutputView.printMatchBonusMessage(reword, count);
+        OutputView.printMatchBonusMessage(reward, count);
     }
 }

@@ -8,43 +8,43 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class RewordTest {
+public class RewardTest {
 
-    private Reword reword;
+    private Reward reward;
 
     @BeforeEach
     void setUp() {
-        reword = Reword.THIRD;
+        reward = Reward.THIRD;
     }
 
     @DisplayName("맞춘 공의 개수 테스트")
     @Test
     void hitCountTest() {
-        assertThat(reword.getHitCount()).isEqualTo(5);
+        assertThat(reward.getHitCount()).isEqualTo(5);
     }
 
     @DisplayName("당첨 금액 테스트")
     @Test
     void winningMoneyTest() {
-        assertThat(reword.getWinningMoney()).isEqualTo(1_500_000);
+        assertThat(reward.getWinningMoney()).isEqualTo(1_500_000);
     }
 
     @DisplayName("등수 반환 테스트")
     @Test
     void valueOfTest() {
-        assertThat(Reword.valueOf(6, false)).isEqualTo(Reword.FIRST);
-        assertThat(Reword.valueOf(5, true)).isEqualTo(Reword.SECOND);
-        assertThat(Reword.valueOf(5, false)).isEqualTo(Reword.THIRD);
-        assertThat(Reword.valueOf(3, false)).isEqualTo(Reword.FIFTH);
-        assertThat(Reword.valueOf(3, true)).isEqualTo(Reword.FIFTH);
+        assertThat(Reward.valueOf(6, false)).isEqualTo(Reward.FIRST);
+        assertThat(Reward.valueOf(5, true)).isEqualTo(Reward.SECOND);
+        assertThat(Reward.valueOf(5, false)).isEqualTo(Reward.THIRD);
+        assertThat(Reward.valueOf(3, false)).isEqualTo(Reward.FIFTH);
+        assertThat(Reward.valueOf(3, true)).isEqualTo(Reward.FIFTH);
     }
 
     @DisplayName("hitCount 에 따른 에러테스트")
     @Test
     void validate() {
-        assertThatThrownBy(() -> Reword.valueOf(-1, false)).isInstanceOf(
+        assertThatThrownBy(() -> Reward.valueOf(-1, false)).isInstanceOf(
             InvalidLottoHitCountException.class);
-        assertThatThrownBy(() -> Reword.valueOf(7, false)).isInstanceOf(
+        assertThatThrownBy(() -> Reward.valueOf(7, false)).isInstanceOf(
             InvalidLottoHitCountException.class);
     }
 }

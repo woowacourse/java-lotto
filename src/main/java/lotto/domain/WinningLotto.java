@@ -22,12 +22,12 @@ public class WinningLotto {
         }
     }
 
-    public Reword match(final Lotto lotto) {
+    public Reward match(final Lotto lotto) {
         int count = (int) this.lotto.getLottoNumbers().stream()
             .filter(number -> lotto.isContainsNumber(new LottoNumber(number)))
             .count();
 
-        return Reword.valueOf(count, lotto.isContainsNumber(bonusNumber));
+        return Reward.valueOf(count, lotto.isContainsNumber(bonusNumber));
     }
 
     @Override

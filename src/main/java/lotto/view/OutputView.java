@@ -2,8 +2,7 @@ package lotto.view;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.domain.Reword;
-import lotto.domain.Rewords;
+import lotto.domain.Reward;
 
 public class OutputView {
 
@@ -39,14 +38,14 @@ public class OutputView {
         System.out.println(CONTOUR);
     }
 
-    public static void printMatchMessage(final Reword reword, int count) {
-        System.out.printf((MATCHES_MESSAGE) + "%n", reword.getHitCount(), reword.getWinningMoney(),
+    public static void printMatchMessage(final Reward reward, int count) {
+        System.out.printf((MATCHES_MESSAGE) + "%n", reward.getHitCount(), reward.getWinningMoney(),
             count);
     }
 
-    public static void printMatchBonusMessage(final Reword reword, int count) {
-        System.out.printf((FIVE_MATCHES_WITH_BONUS_NUMBER) + "%n", reword.getHitCount(),
-            reword.getWinningMoney(), count);
+    public static void printMatchBonusMessage(final Reward reward, int count) {
+        System.out.printf((FIVE_MATCHES_WITH_BONUS_NUMBER) + "%n", reward.getHitCount(),
+            reward.getWinningMoney(), count);
     }
 
     public static void printProfitMessage(double profit) {

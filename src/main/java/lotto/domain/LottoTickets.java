@@ -39,12 +39,12 @@ public class LottoTickets {
         return Collections.unmodifiableList(lottoTickets);
     }
 
-    public Rewords getResult(final WinningLotto winningLotto) {
-        List<Reword> rewords = new ArrayList<>();
+    public Rewards getResult(final WinningLotto winningLotto) {
+        List<Reward> rewards = new ArrayList<>();
         for (Lotto lotto : lottoTickets) {
-            rewords.add(winningLotto.match(lotto));
+            rewards.add(winningLotto.match(lotto));
         }
-        return new Rewords(rewords);
+        return new Rewards(rewards);
     }
 
     @Override
