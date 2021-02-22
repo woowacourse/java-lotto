@@ -1,20 +1,20 @@
 package lotto.controller;
 
-import lotto.domain.manager.LottoManager;
+import lotto.domain.LottoService;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lottomachine.RandomLottoMachine;
 import lotto.domain.lotto.LottoNumber;
-import lotto.domain.manager.Money;
-import lotto.domain.manager.Ticket;
+import lotto.domain.Money;
+import lotto.domain.Ticket;
 import lotto.domain.rating.RatingInfo;
-import lotto.domain.rating.WinningLotto;
+import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
 
     public void start() {
-        LottoManager lottoManager = new LottoManager(new RandomLottoMachine());
+        LottoService lottoManager = new LottoService(new RandomLottoMachine());
         Ticket ticket = buyLotto();
 
         OutputView.printBuyLotto(ticket.getCount());

@@ -1,19 +1,18 @@
-package lotto.domain.manager;
+package lotto.domain;
 
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoRepository;
 import lotto.domain.lottomachine.LottoMachine;
 import lotto.domain.rating.Rating;
 import lotto.domain.rating.RatingInfo;
-import lotto.domain.rating.WinningLotto;
 
-public class LottoManager {
+public class LottoService {
 
     private final RatingInfo ratingInfo = new RatingInfo();
     private final LottoRepository lottoRepository = new LottoRepository();
     private final LottoMachine lottoMachine;
 
-    public LottoManager(final LottoMachine lottoMachine) {
+    public LottoService(final LottoMachine lottoMachine) {
         this.lottoMachine = lottoMachine;
     }
 

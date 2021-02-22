@@ -1,4 +1,4 @@
-package lotto.domain.rating;
+package lotto.domain;
 
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
@@ -19,7 +19,6 @@ public class WinningLotto {
         if (lotto.containNumber(bonusBall)) {
             throw new IllegalArgumentException(BONUS_BALL_IN_LOTTO_ERROR_MESSAGE);
         }
-
     }
 
     public int compareLottoNumber(final Lotto lotto) {

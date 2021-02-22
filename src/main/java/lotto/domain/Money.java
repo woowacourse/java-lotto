@@ -1,4 +1,4 @@
-package lotto.domain.manager;
+package lotto.domain;
 
 public class Money {
 

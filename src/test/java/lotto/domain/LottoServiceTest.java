@@ -1,4 +1,4 @@
-package lotto.domain.manager;
+package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -9,19 +9,18 @@ import lotto.domain.lotto.LottoRepository;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.rating.Rating;
 import lotto.domain.rating.RatingInfo;
-import lotto.domain.rating.WinningLotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LottoManagerTest {
+public class LottoServiceTest {
 
-    LottoManager lottoManager;
+    LottoService lottoManager;
     LottoRepository lottoRepository;
 
     @BeforeEach
     void setup() {
-        lottoManager = new LottoManager(() -> Arrays.asList(1, 2, 3, 4, 5, 6));
+        lottoManager = new LottoService(() -> Arrays.asList(1, 2, 3, 4, 5, 6));
         lottoRepository = new LottoRepository();
     }
 
