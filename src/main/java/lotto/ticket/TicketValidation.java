@@ -1,6 +1,7 @@
 package lotto.ticket;
 
-import java.util.Arrays;
+import lotto.game.LottoCount;
+
 import java.util.List;
 
 import static lotto.game.LottoCount.ZERO;
@@ -11,6 +12,7 @@ public class TicketValidation {
     public static final String ERROR_MESSAGE_INVALID_INPUT = "잘못된 입력입니다.";
     public static final String ERROR_MESSAGE_INVALID_SIZE = "숫자는 6개여야 합니다.";
     public static final String ERROR_MESSAGE_INVALID_RANGE = "숫자는 1부터 45사이여야 합니다.";
+    public static final String ERROR_MESSAGE_INVALID_AMOUNT = "구매 금액보다 많이 구입할 수 없습니다.";
 
     public static void validateNumber(String value) {
         if (value.length() == ZERO) {
@@ -49,6 +51,12 @@ public class TicketValidation {
     public static void validateSameNumber(Number number, WinnerTicket winnerTicket) {
         if (winnerTicket.isSameNumber(number)) {
             throw new IllegalArgumentException(ERROR_MESSAGE_DUPLICATED);
+        }
+    }
+
+    public static void validateAmount(int currentCount, LottoCount count) {
+        if (!count.canPurchase(currentCount)) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_INVALID_AMOUNT);
         }
     }
 }

@@ -16,9 +16,9 @@ public class LottoCount {
         this(money.divideMoney(LOTTO_PRICE));
     }
 
-    public LottoCount(String count) {
-        TicketValidation.validateNumber(count);
-        this.lottoCount = Integer.parseInt(count);
+    public LottoCount(String value) {
+        TicketValidation.validateNumber(value);
+        this.lottoCount = Integer.parseInt(value);
     }
 
     public boolean isGreaterThanZero() {
@@ -27,6 +27,14 @@ public class LottoCount {
 
     public LottoCount decreaseOne() {
         return new LottoCount(String.valueOf(lottoCount - ONE_COUNT));
+    }
+
+    public void purchaseManualTicket(LottoCount count) {
+        TicketValidation.validateAmount(lottoCount, count);
+    }
+
+    public boolean canPurchase(int currentCount) {
+        return currentCount >= this.lottoCount;
     }
 
     public int getLottoCount() {
