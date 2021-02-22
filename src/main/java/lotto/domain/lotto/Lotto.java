@@ -15,7 +15,7 @@ public class Lotto {
     protected final List<LottoNumber> lottoNumbers;
 
     public Lotto(final List<Integer> numbers) {
-        validateDuplicatedNumber(numbers);
+        validate(numbers);
         lottoNumbers = numberToLottoNumbers(numbers);
     }
 
@@ -32,7 +32,7 @@ public class Lotto {
                 .collect(Collectors.toList()));
     }
 
-    private void validateDuplicatedNumber(final List<Integer> values) {
+    private void validate(final List<Integer> values) {
         if (values.size() != LOTTO_SIZE) {
             throw new InvalidLottoNumberCountException();
         }
