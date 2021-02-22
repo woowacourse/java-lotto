@@ -20,21 +20,11 @@ public enum LottoRank {
     }
 
     public static LottoRank matchLottoRank(int matchCount, boolean matchBonusNumber) {
-        if (matchCount < 3) {
-            return SIXTH_PLACE;
-        }
-
-        if (matchCount != 5) {
-            return Arrays.stream(LottoRank.values())
-                    .filter(value -> value.matches == matchCount)
-                    .findFirst()
-                    .orElseThrow(IllegalArgumentException::new);
-        }
-
-        if (matchBonusNumber) {
-            return SECOND_PLACE;
-        }
-        return THIRD_PLACE;
+        return Arrays.stream(LottoRank.values())
+                .filter(rank -> rank.getMatches() == matchCount)
+                .filter(rank -> !rank.equals(SECOND_PLACE) || matchBonusNumber)
+                .findFirst()
+                .orElse(SIXTH_PLACE);
     }
 
     public static Comparator<LottoRank> matchCountComparator = new Comparator<LottoRank>() {
