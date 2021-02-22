@@ -19,11 +19,15 @@ public class LottoResultTest {
     void 로또_일치_갯수_테스트() {
         Lotto testLotto = Lotto.generatedBy(Arrays.asList(1, 2, 3, 4, 5, 6));
         Lotto testLotto2 = Lotto.generatedBy(Arrays.asList(6, 7, 3, 9, 10, 11));
+        WinningLotto winningLotto = WinningLotto.generatedBy(testLotto2, LottoNumber.valueOf(20));
 
-        int count = (int) testLotto.getNumbers().stream()
-            .filter(number -> testLotto2.getNumbers().contains(number)).count();
+        LottoResult lottoResult = new LottoResult();
+        lottoResult.checkWinningLotto(testLotto, winningLotto);
 
-        assertThat(count).isEqualTo(2);
+        assertThat(lottoResult.getResult().get(LottoRank.SIXTH)).isEqualTo(1);
+
+        System.out.println(lottoResult.getResult());
+
     }
 
     @Test
@@ -33,7 +37,7 @@ public class LottoResultTest {
 
         LottoResult lottoResult = new LottoResult();
         lottoResult.checkWinningLotto(testLotto, winningLotto);
-        LottoRank lottoRank = lottoResult.findRank(6, true);
+        LottoRank lottoRank = testLotto.findRank(6, true);
         assertThat(lottoResult.getResult().get(lottoRank)).isEqualTo(1);
 
         lottoResult.checkWinningLotto(testLotto, winningLotto);
