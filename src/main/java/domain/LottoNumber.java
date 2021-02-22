@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 /**
  * LottoNumber.java
@@ -12,9 +13,9 @@ import java.util.Objects;
 public class LottoNumber {
     private static final int MIN_NUMBER_RANGE = 1;
     private static final int MAX_NUMBER_RANGE = 45;
-    private static final String INTEGER_REGULAR_EXPRESSION = "^-?[0-9]+$";
     private static final String ERROR_INVALID_INPUT_FORMAT = "[ERROR] 로또 번호는 숫자만 입력해주세요.";
     private static final String ERROR_INVALID_NUMBER_RANGE = "[ERROR] 로또 번호는 1~45 사이로 입력해주세요.";
+    private static final Pattern INTEGER_PATTERN = Pattern.compile("^-?[0-9]+$");
 
     private final int number;
 
@@ -26,7 +27,7 @@ public class LottoNumber {
     }
 
     private void validateInputFormat(String input) {
-        if (input.matches(INTEGER_REGULAR_EXPRESSION)) {
+        if (INTEGER_PATTERN.matcher(input).matches()) {
             return;
         }
         throw new IllegalArgumentException(ERROR_INVALID_INPUT_FORMAT);
