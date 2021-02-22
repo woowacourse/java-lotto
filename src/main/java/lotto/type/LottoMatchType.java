@@ -20,8 +20,7 @@ public enum LottoMatchType {
     private final int prizeMoney;
     private final String matchCountMessage;
 
-    LottoMatchType(int countMatchedNumbers, int prizeMoney,
-                   String matchCountMessage) {
+    LottoMatchType(int countMatchedNumbers, int prizeMoney, String matchCountMessage) {
         this.countMatchedNumbers = countMatchedNumbers;
         this.prizeMoney = prizeMoney;
         this.matchCountMessage = matchCountMessage;
