@@ -10,12 +10,12 @@ public class WinningStatics {
     private final Map<Prize, Integer> numberPerPrize = new LinkedHashMap<>();
 
     {
+        numberPerPrize.put(Prize.NOTHING, 0);
         numberPerPrize.put(Prize.FIFTH, 0);
         numberPerPrize.put(Prize.FOURTH, 0);
         numberPerPrize.put(Prize.THIRD, 0);
         numberPerPrize.put(Prize.SECOND, 0);
         numberPerPrize.put(Prize.FIRST, 0);
-        numberPerPrize.put(Prize.NOTHING, 0);
     }
 
     public WinningStatics(final List<Prize> prizes) {
