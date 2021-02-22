@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
-    private final List<Integer> numbers;
+    private final List<LottoNumber> numbers;
 
-    public Lotto(List<Integer> values) {
+    public Lotto(List<LottoNumber> values) {
         numbers = values;
     }
 
-    public List<Integer> values() {
+    public List<LottoNumber> values() {
         return new ArrayList<>(numbers);
     }
 
@@ -21,8 +21,8 @@ public class Lotto {
                 .count();
     }
 
-    public boolean contains(int number) {
-        return numbers.contains(number);
+    public boolean contains(LottoNumber lottonumber) {
+        return numbers.contains(lottonumber);
     }
 
     public boolean containsBonus(WinningLotto winningLotto) {

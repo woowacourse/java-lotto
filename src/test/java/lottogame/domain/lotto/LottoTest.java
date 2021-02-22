@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,13 +16,13 @@ class LottoTest {
 
     @BeforeEach
     void setUp() {
-        List<Integer> randomValues = Arrays.asList(new Integer[]{8, 21, 23, 41, 42, 43});
-        lotto = new Lotto(randomValues);
+        List<Integer> randomValues = Arrays.asList(8, 21, 23, 41, 42, 43);
+        lotto = new Lotto(makeLottoNumberList(randomValues));
     }
 
     @Test
     void 객체_생성() {
-        assertThat(lotto).isEqualTo(new Lotto(Arrays.asList(new Integer[]{8, 21, 23, 41, 42, 43})));
+        assertThat(lotto).isEqualTo(new Lotto(makeLottoNumberList(Arrays.asList(8, 21, 23, 41, 42, 43))));
     }
 
     @ParameterizedTest
@@ -36,8 +37,12 @@ class LottoTest {
 
     @Test
     void 보너스가_포함되었는지_테스트() {
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7));
+        Lotto lotto = new Lotto(makeLottoNumberList(Arrays.asList(1, 2, 3, 4, 5, 7)));
         WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6", "7");
         assertThat(lotto.containsBonus(winningLotto)).isTrue();
+    }
+
+    List<LottoNumber> makeLottoNumberList(List<Integer> numbers) {
+        return numbers.stream().map(number -> new LottoNumber(number)).collect(Collectors.toList());
     }
 }

@@ -72,8 +72,8 @@ class LottosTest {
         List<Lotto> lottos = new ArrayList<>();
         for (String input : inputs) {
             String[] numbers = input.split(", ");
-            List<Integer> nums = Arrays.stream(numbers)
-                    .map(x -> Integer.parseInt(x))
+            List<LottoNumber> nums = Arrays.stream(numbers)
+                    .map(x -> new LottoNumber(Integer.parseInt(x)))
                     .collect(Collectors.toList());
             lottos.add(new Lotto(nums));
         }

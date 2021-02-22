@@ -12,21 +12,21 @@ public class WinningLotto {
     private static final Pattern NUMBER_PATTERN = Pattern.compile("^(\\d{1,2},\\s){5}\\d{1,2}$");
     private static final Pattern BONUS_NUMBER_PATTERN = Pattern.compile("^[0-9]*$");
     private final Lotto lotto;
-    private final int bonusNumber;
+    private final LottoNumber bonusNumber;
 
     public WinningLotto(String numbers, String bonusNumber) {
-        List<Integer> lotto = split(numbers);
+        List<LottoNumber> lotto = split(numbers);
         validateBonusNumber(bonusNumber);
-        this.bonusNumber = Integer.parseInt(bonusNumber);
+        this.bonusNumber = new LottoNumber(Integer.parseInt(bonusNumber));
         isDuplicate(lotto, this.bonusNumber);
         this.lotto = new Lotto(lotto);
     }
 
-    private List<Integer> split(String numbers) {
+    private List<LottoNumber> split(String numbers) {
         validateInput(numbers);
         String[] lotto = numbers.split(DELIMITER);
         return Arrays.stream(lotto)
-                .map(Integer::parseInt)
+                .map(number -> new LottoNumber(Integer.parseInt(number)))
                 .collect(Collectors.toList());
     }
 
@@ -42,14 +42,14 @@ public class WinningLotto {
         }
     }
 
-    private void isDuplicate(List<Integer> lotto, int bonusNumber) {
-        Set<Integer> numbers = new HashSet<>(lotto);
+    private void isDuplicate(List<LottoNumber> lotto, LottoNumber bonusNumber) {
+        Set<LottoNumber> numbers = new HashSet<>(lotto);
         if (numbers.size() != lotto.size() || lotto.contains(bonusNumber)) {
             throw new RedundantNumbersException();
         }
     }
 
-    public int getBonusBall() {
+    public LottoNumber getBonusBall() {
         return this.bonusNumber;
     }
 
@@ -62,7 +62,7 @@ public class WinningLotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         WinningLotto that = (WinningLotto) o;
-        return bonusNumber == that.bonusNumber && Objects.equals(lotto, that.lotto);
+        return Objects.equals(lotto, that.lotto) && Objects.equals(bonusNumber, that.bonusNumber);
     }
 
     @Override

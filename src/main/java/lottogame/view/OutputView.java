@@ -2,6 +2,7 @@ package lottogame.view;
 
 import lottogame.domain.Rank;
 import lottogame.domain.lotto.Lotto;
+import lottogame.domain.lotto.LottoNumber;
 import lottogame.domain.stats.LottoResults;
 
 import java.util.List;
@@ -22,9 +23,9 @@ public class OutputView {
                 .forEach(numbers -> System.out.println(integerToString(numbers)));
     }
 
-    private static String integerToString(List<Integer> numbers) {
+    private static String integerToString(List<LottoNumber> numbers) {
         return numbers.stream()
-                .map(number -> String.valueOf(number))
+                .map(number -> String.valueOf(number.getNumber()))
                 .collect(Collectors.joining(", ", "[", "]"));
     }
 
