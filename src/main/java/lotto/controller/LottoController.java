@@ -23,7 +23,7 @@ public class LottoController {
         getManualCount(ticket);
         getManualLottoNumbers(ticket,lottoService);
 
-        outputView.printBuyTicket(ticket.getCount());
+        outputView.printBuyTicket(ticket.getManualCount(), ticket.getRandomCount());
         lottoService.generateLottos(ticket);
         outputView.printLottoResults(lottoService.getLottos());
 
