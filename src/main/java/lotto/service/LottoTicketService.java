@@ -13,7 +13,7 @@ public class LottoTicketService {
 
     private static final String DELIMITER = ",";
     private static final String COUNT_ERROR_MESSAGE = "당첨 숫자는 6개 넣어야 합니다.";
-    private static final int VALID_NUMBER_COUNT = 6;
+    private static final int LOTTO_NUMBER_COUNT = 6;
 
     private LottoTicketService() {
     }
@@ -36,7 +36,7 @@ public class LottoTicketService {
                         .map(Integer::parseInt)
                         .map(LottoNumber::new)
                         .collect(Collectors.toList());
-        if (lottoWinnerNumbers.size() != VALID_NUMBER_COUNT) {
+        if (lottoWinnerNumbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(COUNT_ERROR_MESSAGE);
         }
         return new LottoWinnerTicket(lottoWinnerNumbers);
