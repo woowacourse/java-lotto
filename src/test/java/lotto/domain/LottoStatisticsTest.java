@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static lotto.domain.WinningLottoTest.createCustomWinningLotto;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoStatisticsTest {
@@ -33,7 +32,16 @@ class LottoStatisticsTest {
 				new LottoNumber(20))); //SECOND
 
 		lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto2));
-		winningLotto = createCustomWinningLotto("1, 2, 3, 4, 5, 6", "20");
+
+		winningLotto = new WinningLotto(
+				new Lotto(Arrays.asList(
+						new LottoNumber(1),
+						new LottoNumber(2),
+						new LottoNumber(3),
+						new LottoNumber(4),
+						new LottoNumber(5),
+						new LottoNumber(6))),
+				new LottoNumber(20));
 	}
 
 	@DisplayName("결과 값을 통계 리스트로 반환")

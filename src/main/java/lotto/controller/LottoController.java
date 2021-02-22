@@ -9,9 +9,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class LottoController {
+	//TODO
+	// lotto quantity에 대한 클래스 만들고 에서 음수 인지 검증?
 	public void tryLotto(Scanner scanner) {
 		Money money = new Money(InputView.takeMoneyInput(scanner));
-
 		int manualLottoQuantity = InputView.takeManualLottoQuantityInput(scanner);
 		money.validateAffordability(manualLottoQuantity);
 		List<int[]> manualLottoNumbersSequence = InputView.takeManualLottoNumbersInput(scanner, manualLottoQuantity);
