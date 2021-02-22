@@ -9,7 +9,6 @@ import java.util.stream.IntStream;
 public class RandomNumberGenerator implements LottoNumberGenerator {
     
     private static final int MIN_LOTTO_NUM = 1;
-    
     private static final int MAX_LOTTO_NUM = 45;
     
     private static final int LOTTO_LENGTH = 6;
