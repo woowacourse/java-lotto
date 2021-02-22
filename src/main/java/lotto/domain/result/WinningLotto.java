@@ -1,5 +1,8 @@
-package lotto.domain;
+package lotto.domain.result;
 
+import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.LottoTicket;
+import lotto.domain.lotto.LottoTickets;
 import lotto.exception.IllegalWinningLottoException;
 
 import static java.util.stream.Collectors.collectingAndThen;

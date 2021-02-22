@@ -1,12 +1,12 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static lotto.domain.LottoNumber.MAX_LOTTO_NUMBER;
-import static lotto.domain.LottoNumber.MIN_LOTTO_NUMBER;
-import static lotto.domain.LottoTicket.LOTTO_TICKET_SIZE;
+import static lotto.domain.lotto.LottoNumber.MAX_LOTTO_NUMBER;
+import static lotto.domain.lotto.LottoNumber.MIN_LOTTO_NUMBER;
+import static lotto.domain.lotto.LottoTicket.LOTTO_TICKET_SIZE;
 
 public class LottoTicketFactory {
     private static final int START_INDEX = 0;

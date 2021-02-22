@@ -1,6 +1,10 @@
 package lotto.view;
 
-import lotto.domain.*;
+import lotto.domain.lotto.LottoCount;
+import lotto.domain.lotto.LottoTicket;
+import lotto.domain.lotto.LottoTickets;
+import lotto.domain.result.LottoResult;
+import lotto.domain.result.Prize;
 
 public class OutputView {
 

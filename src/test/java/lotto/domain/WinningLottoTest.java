@@ -1,12 +1,17 @@
 package lotto.domain;
 
+import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.LottoTicket;
+import lotto.domain.lotto.LottoTickets;
+import lotto.domain.result.LottoResult;
+import lotto.domain.result.Prize;
+import lotto.domain.result.WinningLotto;
 import lotto.exception.IllegalWinningLottoException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
