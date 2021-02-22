@@ -4,7 +4,6 @@ import java.util.Objects;
 
 public class Money {
 
-    private static final Money ZERO = Money.priceOf(0);
     private final int price;
 
     private Money(int price) {
@@ -20,10 +19,6 @@ public class Money {
         if (value < 0) {
             throw new IllegalArgumentException("금액은 마이너스가 될 수 없습니다.");
         }
-    }
-
-    public Money minus(int price) {
-        return Money.priceOf(this.price - price);
     }
 
     public boolean isLessThan(int price) {

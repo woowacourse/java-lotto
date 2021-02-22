@@ -1,9 +1,7 @@
 package lotto.domain.lotto;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import lotto.domain.WinningLotto;
 import lotto.domain.lottogenerator.RandomLottoGenerator;
