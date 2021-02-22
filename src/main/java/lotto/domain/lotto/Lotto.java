@@ -7,8 +7,8 @@ import lotto.domain.lotto.lottogenerator.LottoGenerator;
 
 public class Lotto {
 
-    public static final String NUM_LOTTO_ERROR_MESSAGE = "로또 번호는 %d개의 숫자로 이루어져야 합니다.";
-    public static final String DUPLICATION_LOTTO_ERROR_MESSAGE = "로또 번호는 중복된 숫자가 존재할 수 없습니다.";
+    private static final String NUM_LOTTO_ERROR_MESSAGE = "로또 번호는 %d개의 숫자로 이루어져야 합니다.";
+    private static final String DUPLICATION_LOTTO_ERROR_MESSAGE = "로또 번호는 중복된 숫자가 존재할 수 없습니다.";
     private final List<LottoNumber> numbers;
 
     private Lotto(List<LottoNumber> numbers) {
@@ -17,7 +17,7 @@ public class Lotto {
 
     public static Lotto generatedBy(List<Integer> numbers) {
         List<LottoNumber> lottoNumbers = numbers.stream()
-            .map(number -> LottoNumber.valueOf(number))
+            .map(LottoNumber::valueOf)
             .collect(Collectors.toList());
         return Lotto.generatedBy(() -> lottoNumbers);
     }
