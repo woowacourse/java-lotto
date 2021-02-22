@@ -49,6 +49,6 @@ public class LottoStore {
     }
 
     public int calculateAffordableLottoTickets(Money money) {
-        return money.getAffordableLottoTickets();
+        return money.getMoney() / LOTTO_PRICE;
     }
 }

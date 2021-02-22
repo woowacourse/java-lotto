@@ -4,6 +4,7 @@ import lotto.domain.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Collections;
@@ -35,5 +36,13 @@ public class LottoStoreTest {
                 exampleLottos.getStatistics(winningLotto);
         double value = new LottoStore().calculateProfitRate(exampleLottosResult, 1);
         assertThat(value).isEqualTo(profitRate);
+    }
+
+    @ParameterizedTest
+    @DisplayName("구입가능한 로또 매수 계산")
+    @CsvSource(value = {"14000,14", "10200,10"})
+    void calculateAffordableLottoTicketsTest(int inputMoney, int expectedLottoTickets) {
+        Money money = new Money(inputMoney);
+        assertThat(new LottoStore().calculateAffordableLottoTickets(money)).isEqualTo(expectedLottoTickets);
     }
 }

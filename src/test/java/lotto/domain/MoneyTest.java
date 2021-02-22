@@ -18,12 +18,4 @@ class MoneyTest {
             new Money(999);
         }).isInstanceOf(MoneyException.class);
     }
-
-    @ParameterizedTest
-    @DisplayName("구입가능한 로또 매수 계산")
-    @CsvSource(value = {"14000,14", "10200,10"})
-    void calculateAffordableLottoTicketsTest(int inputMoney, int expectedLottoTickets) {
-        Money money = new Money(inputMoney);
-        assertThat(money.getAffordableLottoTickets()).isEqualTo(expectedLottoTickets);
-    }
 }
