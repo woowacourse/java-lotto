@@ -15,12 +15,6 @@ public class WinningLotto {
         bonusBall = new BonusBall(winLotto, bonusBallInput);
     }
 
-    public static int howManyWins(Lotto lotto) {
-        ArrayList<Integer> wins = new ArrayList<>(winLotto.getLottoNumbers());
-        wins.retainAll(lotto.getLottoNumbers());
-        return wins.size();
-    }
-
     private ArrayList<Integer> generateWinningLotto(String numberInput) {
         List<Integer> winningNumbers = changeToList(numberInput);
         ArrayList<Integer> winningNums = new ArrayList<>();
@@ -34,6 +28,12 @@ public class WinningLotto {
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
         return winningNumbers;
+    }
+
+    public static int howManyWins(Lotto lotto) {
+        ArrayList<Integer> wins = new ArrayList<>(winLotto.getLottoNumbers());
+        wins.retainAll(lotto.getLottoNumbers());
+        return wins.size();
     }
 
     public Rank findRank(Lotto lotto) {

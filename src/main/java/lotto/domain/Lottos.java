@@ -14,17 +14,17 @@ public class Lottos {
         generateLottoGroup();
     }
 
-    public static String findResult(Map<Rank, Integer> countByRank) {
-        Money.findEarning(countByRank);
-        return Money.findEarningRate();
-    }
-
     private void generateLottoGroup() {
         LottoGenerator lottoGenerator = new LottoGenerator();
         for (int i = 0; i < count; i++) {
             Lotto generatedLotto = new Lotto(lottoGenerator.generateLottoNums());
             lottoGroup.add(generatedLotto);
         }
+    }
+
+    public static String findResult(Map<Rank, Integer> countByRank) {
+        Money.findEarning(countByRank);
+        return Money.findEarningRate();
     }
 
     public int getCount() {
