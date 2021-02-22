@@ -23,7 +23,6 @@ public class LottoGame {
 
     public LottoResults Results(WinningLotto winningLotto) {
         LottoResults lottoResults = lottos.matchLottos(winningLotto);
-        lottoResults.matchedLottos();
         lottoResults.calculateProfit(money);
         return lottoResults;
     }

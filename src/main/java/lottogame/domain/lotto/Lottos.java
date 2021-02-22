@@ -1,6 +1,6 @@
 package lottogame.domain.lotto;
 
-import lottogame.domain.stats.LottoResult;
+import lottogame.domain.Rank;
 import lottogame.domain.stats.LottoResults;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class Lottos {
         for (Lotto lotto : lottos) {
             int count = lotto.match(winningLotto.values());
             boolean bonus = lotto.containsBonus(winningLotto);
-            lottoResults.add(new LottoResult(count, bonus));
+            lottoResults.add(Rank.of(count, bonus));
         }
         return lottoResults;
     }

@@ -6,26 +6,25 @@ import lottogame.domain.Rank;
 import java.util.*;
 
 public class LottoResults {
-    private List<LottoResult> resultGroup = new ArrayList<>();
-    private Map<Rank, Integer> result;
+    private Map<Rank, Integer> result = new HashMap<>();
     private int totalWinningAmount = 0;
     private float profit;
 
-    public void add(LottoResult lottoResult) {
-        resultGroup.add(lottoResult);
+    public LottoResults() {
+        for (Rank rank : Rank.values()) {
+            if (rank.isNotFound()) {
+                continue;
+            }
+            result.put(rank, 0);
+        }
     }
 
-    public void matchedLottos() {
-        result = new LinkedHashMap<>();
-        for (Rank rank : Rank.values()) {
-            if (rank.isNotFound()) continue;
-            int count = (int) resultGroup
-                    .stream()
-                    .filter(lottoResult -> lottoResult.equals(rank))
-                    .count();
-            totalWinningAmount += (count * rank.getMoney());
-            result.put(rank, count);
+    public void add(Rank rank) {
+        if (rank.isNotFound()) {
+            return;
         }
+        result.put(rank, result.get(rank) + 1);
+        totalWinningAmount += rank.getMoney();
     }
 
     public Map<Rank, Integer> values() {
