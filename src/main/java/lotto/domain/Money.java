@@ -1,29 +1,24 @@
 package lotto.domain;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import lotto.utils.CustomException;
 import lotto.utils.StringChecker;
 
 public class Money {
-    private final BigDecimal money;
-    private final int ticketCount;
+    private final long ticketCount;
     private final BigDecimal change;
 
     public Money(String moneyValue) {
-        validateIsNumber(moneyValue);
-        this.money = new BigDecimal(moneyValue);
-        this.ticketCount = money.divideToIntegralValue(new BigDecimal(LottoTicket.PRICE))
-            .intValue();
-        this.change = money.subtract(BigDecimal.valueOf(LottoTicket.PRICE * ticketCount));
+        this(moneyValue, new ArrayList<>());
     }
 
     public Money(String moneyValue, List<LottoTicket> lottoTickets) {
         validateIsNumber(moneyValue);
-        this.money = new BigDecimal(moneyValue);
-        this.ticketCount =
-            money.divideToIntegralValue(new BigDecimal(LottoTicket.PRICE)).intValue() - lottoTickets
-                .size();
+        final BigDecimal money = new BigDecimal(moneyValue);
+        this.ticketCount = money.divideToIntegralValue(new BigDecimal(LottoTicket.PRICE)).intValue()
+            - lottoTickets.size();
         this.change = money.subtract(BigDecimal.valueOf(LottoTicket.PRICE * ticketCount));
     }
 
@@ -34,7 +29,7 @@ public class Money {
     }
 
     public int getPossibleTicketCount() {
-        return ticketCount;
+        return (int) ticketCount;
     }
 
     public int getChange() {

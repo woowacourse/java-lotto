@@ -9,8 +9,7 @@ public class Machine {
     private final LottoTickets lottoTickets;
 
     public Machine(String moneyValue, LottoGenerator lottoGenerator) {
-        money = new Money(moneyValue);
-        this.lottoTickets = new LottoTickets(money.getPossibleTicketCount(), lottoGenerator);
+        this(moneyValue, new ArrayList<>(), lottoGenerator);
     }
 
     public Machine(String moneyValue, List<String> lottoNumbers, LottoGenerator lottoGenerator) {
@@ -18,7 +17,7 @@ public class Machine {
         for (String lottoNumber : lottoNumbers) {
             lottoTickets.add(new LottoTicket(lottoNumber));
         }
-        money = new Money(moneyValue, lottoTickets);
+        this.money = new Money(moneyValue, lottoTickets);
         this.lottoTickets = new LottoTickets(lottoTickets, money.getPossibleTicketCount(),
             lottoGenerator);
     }
