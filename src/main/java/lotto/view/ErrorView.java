@@ -26,4 +26,8 @@ public class ErrorView {
     public static void printIllegalDivisorCountMessage() {
         System.out.println(ERROR_PREFIX + "0 이하의 값으로 나눌 수 없습니다.");
     }
+
+    public static void printIllegalLottoCountMessage() {
+        System.out.println(ERROR_PREFIX + "수동 로또 구매 갯수를 잘못 입력하셨습니다.");
+    }
 }

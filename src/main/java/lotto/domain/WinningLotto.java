@@ -6,8 +6,8 @@ import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
 
 public class WinningLotto {
-    private LottoTicket winningTicket;
-    private LottoNumber bonusNumber;
+    private final LottoTicket winningTicket;
+    private final LottoNumber bonusNumber;
 
     public WinningLotto(LottoTicket winningTicket, LottoNumber bonusNumber) {
         this.winningTicket = new LottoTicket(winningTicket.lottoTicket());

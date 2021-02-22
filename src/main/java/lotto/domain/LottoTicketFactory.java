@@ -20,8 +20,9 @@ public class LottoTicketFactory {
         }
     }
 
-    public LottoTickets generateLottoTickets(int autoLottoCount) {
+    public LottoTickets generateLottoTickets(int autoLottoCount, List<LottoTicket> manualLottoTickets) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
+        lottoTickets.addAll(manualLottoTickets);
         for (int i = 0; i < autoLottoCount; i++) {
             lottoTickets.add(new LottoTicket(createLottoNumbersByRange()));
         }

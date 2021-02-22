@@ -8,13 +8,11 @@ public class LottoCount {
     private static final Pattern NUMBER_PATTERN = Pattern.compile("^[0-9]*$");
     private final int manualLottoCount;
     private final int autoLottoCount;
-    private int manualLottoRound;
 
     public LottoCount(String manualCount, int totalCount) {
         validateLottoCount(manualCount, totalCount);
         this.manualLottoCount = Integer.parseInt(manualCount);
         this.autoLottoCount = totalCount - manualLottoCount;
-        manualLottoRound = 0;
     }
 
     private void validateLottoCount(String manualCount, int totalCount) {
@@ -42,13 +40,5 @@ public class LottoCount {
 
     public int getAutoLottoCount() {
         return autoLottoCount;
-    }
-
-    public boolean isAvailManualLottoRound() {
-        return manualLottoCount != manualLottoRound;
-    }
-
-    public void passManualLottoRound() {
-        this.manualLottoRound++;
     }
 }

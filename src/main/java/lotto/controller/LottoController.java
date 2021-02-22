@@ -19,25 +19,33 @@ public class LottoController {
 
     public void run() {
         Money inputMoney = new Money(InputView.inputMoney());
-        String inputManualLottoCount = InputView.inputManualLottoCount();
-        int totalLottoCount = inputMoney.getPurchaseCount();
-        LottoCount lottoCount = new LottoCount(inputManualLottoCount, totalLottoCount);
-        List<LottoTicket> manualLottoNumbers = new ArrayList<>();
-        OutputView.printInputManualLottoNumbers();
-        while (lottoCount.isAvailManualLottoRound()) {
-            List<String> numbers = InputView.inputManualLottoNumbers();
-            manualLottoNumbers.add(numbers.stream()
-                    .map(LottoNumber::new)
-                    .collect(collectingAndThen(toList(), LottoTicket::new)));
-            lottoCount.passManualLottoRound();
-        }
-        LottoTickets manualLottoTickets = new LottoTickets(manualLottoNumbers);
-        LottoTickets lottoTickets = lottoTicketFactory.generateLottoTickets(lottoCount.getAutoLottoCount());
+        LottoCount lottoCount = getLottoCount(inputMoney);
+        List<LottoTicket> manualLottoTickets = getAllManualLottoTicket(lottoCount);
+        LottoTickets lottoTickets = lottoTicketFactory.generateLottoTickets(
+                lottoCount.getAutoLottoCount(), manualLottoTickets);
         OutputView.printLottoTicketsCount(lottoCount);
-        OutputView.printLottoTickets(manualLottoTickets);
         OutputView.printLottoTickets(lottoTickets);
         WinningLotto winningLotto = getWinningLotto(lottoTickets);
         showResult(lottoTickets, winningLotto);
+    }
+
+    private List<LottoTicket> getAllManualLottoTicket(LottoCount lottoCount) {
+        OutputView.printInputManualLottoNumbers();
+        List<LottoTicket> manualLottoTickets = new ArrayList<>();
+        for (int i = 0; i < lottoCount.getManualLottoCount(); i++) {
+            manualLottoTickets.add(
+                    InputView.inputManualLottoNumbers()
+                            .stream()
+                            .map(LottoNumber::new)
+                            .collect(collectingAndThen(toList(), LottoTicket::new)));
+        }
+        return manualLottoTickets;
+    }
+
+    private LottoCount getLottoCount(Money inputMoney) {
+        String inputManualLottoCount = InputView.inputManualLottoCount();
+        int totalLottoCount = inputMoney.getPurchaseCount();
+        return new LottoCount(inputManualLottoCount, totalLottoCount);
     }
 
     private WinningLotto getWinningLotto(LottoTickets lottoTickets) {
