@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import lotto.view.ErrorMessages;
 
 public class LottoTicketGenerator {
-    private static final int PRICE_EACH_LOTTO = 1000;
+    protected static final int PRICE_EACH_LOTTO = 1000;
     private static final RandomLottoGenerator randomLottoGenerator = new RandomLottoGenerator();
 
     public static LottoTicket createLottoTicket(int money) {

@@ -5,8 +5,9 @@ import java.util.List;
 
 import lotto.domain.Rank;
 
+import static lotto.domain.lotto.LottoTicketGenerator.PRICE_EACH_LOTTO;
+
 public class LottoResult {
-    private static final int PRICE_EACH_LOTTO = 1000;
     private final List<Rank> rankList;
 
     public LottoResult(List<Rank> rankList) {

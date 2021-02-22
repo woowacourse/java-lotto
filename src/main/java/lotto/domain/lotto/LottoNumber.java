@@ -6,8 +6,8 @@ import lotto.utils.Validation;
 import lotto.view.ErrorMessages;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    private static final int START = 1;
-    private static final int END = 45;
+    protected static final int LOTTO_START_NUMBER = 1;
+    protected static final int LOTTO_FINAL_NUMBER = 45;
 
     private final int value;
 
@@ -27,7 +27,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private void validateLottoNumberRange(int lottoNumber) {
-        if (lottoNumber < START || lottoNumber > END) {
+        if (lottoNumber < LOTTO_START_NUMBER || lottoNumber > LOTTO_FINAL_NUMBER) {
             throw new IllegalArgumentException(
                     ErrorMessages.ERROR_LOTTO_NUMBER_OUT_OF_BOUND.getMessage());
         }
