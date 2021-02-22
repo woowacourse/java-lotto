@@ -28,34 +28,28 @@ public enum Prize {
     public static Prize of(final WinningNumbers winningNumbers, final LottoTicket lottoTicket) {
         final int matching = winningNumbers.countMatching(lottoTicket);
         boolean bonusMatching = winningNumbers.hasBonus(lottoTicket);
-        return calculate(matching, bonusMatching);
+        return transform(matching, bonusMatching);
     }
 
-    public static Prize calculate(final int matching, boolean bonusMatching) {
-        if (needBonusChecking(matching)) {
-            return considerBonus(matching, bonusMatching);
+    private static Prize transform(final int matching, final boolean bonusMatching) {
+        return Arrays.stream(values())
+                .map(prize -> prize.transformIfSecondOrThird(matching, bonusMatching))
+                .findFirst()
+                .orElse(NOTHING);
+    }
+
+    private Prize transformIfSecondOrThird(final int matching, final boolean bonusMatching) {
+        if (matching == BONUS_CONSIDER_CRITERION) {
+            return getSecondOrThird(bonusMatching);
         }
-
-        return notConsiderBonus(matching, bonusMatching);
+        return this;
     }
 
-    private static boolean needBonusChecking(final int matching) {
-        return matching == BONUS_CONSIDER_CRITERION;
-    }
-
-    private static Prize considerBonus(final int matching, final boolean bonusMatching) {
-        return Arrays.stream(values())
-                .filter(prize -> Objects.equals(matching, prize.matching))
-                .filter(prize -> Objects.equals(bonusMatching, prize.bonusMatching))
-                .findFirst()
-                .orElse(NOTHING);
-    }
-
-    private static Prize notConsiderBonus(final int matching, final boolean bonusMatching) {
-        return Arrays.stream(values())
-                .filter(prize -> Objects.equals(matching, prize.matching))
-                .findFirst()
-                .orElse(NOTHING);
+    private Prize getSecondOrThird(final boolean bonusMatching) {
+        if (bonusMatching) {
+            return SECOND;
+        }
+        return THIRD;
     }
 
     public long getMoney() {
