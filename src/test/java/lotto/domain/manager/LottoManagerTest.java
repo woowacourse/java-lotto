@@ -9,7 +9,7 @@ import lotto.domain.lotto.LottoRepository;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.rating.Rating;
 import lotto.domain.rating.RatingInfo;
-import lotto.domain.statistics.WinningLotto;
+import lotto.domain.rating.WinningLotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

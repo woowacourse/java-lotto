@@ -1,10 +1,11 @@
-package lotto.domain.statistics;
+package lotto.domain.rating;
 
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
+import lotto.domain.rating.WinningLotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

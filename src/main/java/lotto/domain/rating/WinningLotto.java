@@ -1,4 +1,4 @@
-package lotto.domain.statistics;
+package lotto.domain.rating;
 
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;

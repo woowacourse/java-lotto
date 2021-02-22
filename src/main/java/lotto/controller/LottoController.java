@@ -7,7 +7,7 @@ import lotto.domain.lotto.LottoNumber;
 import lotto.domain.manager.Money;
 import lotto.domain.manager.Ticket;
 import lotto.domain.rating.RatingInfo;
-import lotto.domain.statistics.WinningLotto;
+import lotto.domain.rating.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
