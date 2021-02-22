@@ -61,8 +61,6 @@ public class MoneyTest {
 		Money money = new Money(5_540);
 		int manualLottoQuantity = 3;
 
-		money.getChange(manualLottoQuantity);
-
-		assertThat(money).isEqualTo(new Money(2540));
+		assertThat(money.getChange(manualLottoQuantity)).isEqualTo(new Money(2540));
 	}
 }
