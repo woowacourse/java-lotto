@@ -1,5 +1,6 @@
 package lotto.view;
 
+import java.text.DecimalFormat;
 import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.Rank;
@@ -14,9 +15,9 @@ public class LottoView {
     private static final String LAST_WEEK_LOTTO_MESSAGE = "\n지난 주 당첨 번호를 입력해 주세요.";
     private static final String BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String RESULT_TITLE_MESSAGE = "\n당첨 통계\n----------";
-    private static final String CHANGE_LINE = "\n";
     private static final String AMOUNT = "개";
     private static final String EARNING_RATE_MESSAGE = "총 수익률은 %s입니다.";
+    private static final DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
     public static String requestMoney() {
         System.out.println(INPUT_MONEY_MESSAGE);
@@ -51,7 +52,7 @@ public class LottoView {
         System.out.println(rank + Integer.toString(count) + AMOUNT);
     }
 
-    public static void displayEarningRate(String earningRate) {
-        System.out.printf(EARNING_RATE_MESSAGE, earningRate);
+    public static void displayEarningRate(double earningRate) {
+        System.out.printf(EARNING_RATE_MESSAGE, decimalFormat.format(earningRate));
     }
 }

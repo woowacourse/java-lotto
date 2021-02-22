@@ -43,18 +43,4 @@ public class MoneyTest {
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(MONEY_UNIT_ERROR);
     }
-
-    @Test
-    @DisplayName("당첨금에 따라 수익률을 맞게 계산하는지 확인")
-    void earning_rate() {
-        Map<Rank, Integer> sampleCount = new HashMap<>();
-        sampleCount.put(Rank.FIFTH, 1);
-        Money money = new Money("14000");
-
-        Money.findEarning(sampleCount);
-        assertThat(Money.getEarning()).isEqualTo(5000);
-
-        String earningRate = money.findEarningRate();
-        assertThat(earningRate).isEqualTo("0.36");
-    }
 }
