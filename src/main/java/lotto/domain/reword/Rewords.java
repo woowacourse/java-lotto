@@ -17,19 +17,14 @@ public class Rewords {
         final Map<Reword, Integer> rewordMap = new EnumMap<>(Reword.class);
 
         for (Reword reword : rewords) {
-            rewordMap.putIfAbsent(reword, EMPTY_REWORD);
-            rewordMap.put(reword, rewordMap.get(reword) + 1);
+            rewordMap.put(reword, rewordMap.getOrDefault(reword, EMPTY_REWORD) + 1);
         }
 
         return Collections.unmodifiableMap(rewordMap);
     }
 
     public int countOfReword(final Reword reword) {
-        if (Objects.isNull(rewords.get(reword))) {
-            return EMPTY_REWORD;
-        }
-
-        return rewords.get(reword);
+        return rewords.getOrDefault(reword, rewords.getOrDefault(reword, EMPTY_REWORD));
     }
 
     public double profit(final int money) {
