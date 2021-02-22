@@ -24,12 +24,15 @@ public class LottoController {
     
     private Lottos purchase() {
         PaymentAmount paymentAmount = inputView.readPaymentAmount();
+        PurchaseCount purchaseCount = inputView.readPurchaseCount(paymentAmount);
         
-        Lottos lottos = lottoMachine.purchase(paymentAmount);
+        Lottos manualLottos = inputView.readManualLotto(purchaseCount);
+        Lottos automaticLottos = lottoMachine.purchase(purchaseCount);
+        Lottos allLottos = Lottos.of(manualLottos, automaticLottos);
         
-        outputView.printPurchaseLottos(paymentAmount, lottos);
+        outputView.printPurchaseLottos(purchaseCount, allLottos);
         
-        return lottos;
+        return allLottos;
     }
     
     private void seeResults(Lottos lottos) {
