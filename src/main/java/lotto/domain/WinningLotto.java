@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.List;
-
 public class WinningLotto {
     
     private final Lotto lotto;
@@ -13,9 +11,7 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
     
-    public static WinningLotto of(List<Integer> numbers, LottoNumber bonusNumber) {
-        final Lotto lotto = Lotto.fromNumbers(numbers);
-        
+    public static WinningLotto of(Lotto lotto, LottoNumber bonusNumber) {
         if (lotto.contains(bonusNumber)) {
             throw new IllegalArgumentException();
         }

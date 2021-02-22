@@ -15,8 +15,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoStatisticResultTest {
     
-    private static final WinningLotto WINNING_LOTTO
-            = WinningLotto.of(Arrays.asList(1, 2, 3, 4, 5, 6),LottoNumber.from(7));
+    private static final Lotto WIN_LOTTO = LottoFactory.fromNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+    private static final WinningLotto WINNING_LOTTO = WinningLotto.of(WIN_LOTTO, LottoNumber.from(7));
     
     private static final List<Lotto> LOTTO_GROUP = new ArrayList<>();
     
@@ -34,22 +34,22 @@ public class LottoStatisticResultTest {
     
     private static Stream<Arguments> generateLottoStaticResult() {
         LottoStatisticResult firstRankResult
-                = generateLottoStatisticResult(Lotto.fromNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
+                = generateLottoStatisticResult(LottoFactory.fromNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
         
         LottoStatisticResult secondRankResult
-                = generateLottoStatisticResult(Lotto.fromNumbers(Arrays.asList(1, 2, 3, 4, 5, 7)));
+                = generateLottoStatisticResult(LottoFactory.fromNumbers(Arrays.asList(1, 2, 3, 4, 5, 7)));
         
         LottoStatisticResult thirdRankResult
-                = generateLottoStatisticResult(Lotto.fromNumbers(Arrays.asList(1, 2, 3, 4, 5, 45)));
+                = generateLottoStatisticResult(LottoFactory.fromNumbers(Arrays.asList(1, 2, 3, 4, 5, 45)));
         
         LottoStatisticResult fourthRankResult
-                = generateLottoStatisticResult(Lotto.fromNumbers(Arrays.asList(1, 2, 3, 4, 44, 45)));
+                = generateLottoStatisticResult(LottoFactory.fromNumbers(Arrays.asList(1, 2, 3, 4, 44, 45)));
         
         LottoStatisticResult fifthRankResult
-                = generateLottoStatisticResult(Lotto.fromNumbers(Arrays.asList(1, 2, 3, 43, 44, 45)));
+                = generateLottoStatisticResult(LottoFactory.fromNumbers(Arrays.asList(1, 2, 3, 43, 44, 45)));
         
-        LottoStatisticResult nothingRankResult
-                = generateLottoStatisticResult(Lotto.fromNumbers(Arrays.asList(1, 2, 42, 43, 44, 45)));
+        LottoStatisticResult nothingRankResult =
+                generateLottoStatisticResult(LottoFactory.fromNumbers(Arrays.asList(1, 2, 42, 43, 44, 45)));
         
         return Stream.of(
                 Arguments.of(firstRankResult, Rank.FIRST),
@@ -75,9 +75,9 @@ public class LottoStatisticResultTest {
     void calculateIncomeRate() {
         // given
         List<Lotto> lottoGroup = new ArrayList<>();
-        lottoGroup.add(Lotto.fromNumbers(Arrays.asList(1, 2, 3, 43, 44, 45)));
-        lottoGroup.add(Lotto.fromNumbers(Arrays.asList(1, 2, 3, 4, 44, 45)));
-        lottoGroup.add(Lotto.fromNumbers(Arrays.asList(40, 41, 42, 43, 44, 45)));
+        lottoGroup.add(LottoFactory.fromNumbers(Arrays.asList(1, 2, 3, 4, 44, 45)));
+        lottoGroup.add(LottoFactory.fromNumbers(Arrays.asList(1, 2, 3, 43, 44, 45)));
+        lottoGroup.add(LottoFactory.fromNumbers(Arrays.asList(40, 41, 42, 43, 44, 45)));
         
         Lottos lottos = new Lottos(lottoGroup);
         LottoStatisticResult result = lottos.retrieveResults(WINNING_LOTTO);
