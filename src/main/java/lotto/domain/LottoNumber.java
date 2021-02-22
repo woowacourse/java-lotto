@@ -1,13 +1,12 @@
 package lotto.domain;
 
 import java.util.Objects;
-import java.util.regex.Pattern;
 import lotto.utils.CustomException;
+import lotto.utils.StringChecker;
 
 public class LottoNumber {
     public static final int MINIMUM_NUMBER = 1;
     public static final int MAXIMUM_NUMBER = 45;
-    private static final String IS_NUMBER = "\\d+";
 
     private final int number;
 
@@ -28,7 +27,7 @@ public class LottoNumber {
     }
 
     private static void validateIsNumber(String numberValue) {
-        if (!Pattern.matches(IS_NUMBER, numberValue)) {
+        if (!StringChecker.isNumber(numberValue)) {
             throw new CustomException("로또 넘버는 숫자이어야 합니다.");
         }
     }

@@ -8,11 +8,11 @@
 
 src/main/java/lotto/domain/LottoNumber.java
 
-- [ ] Pattern 재활용 방안 (매번 Pattern 객체를 생성하는 것은 비싼 행위)
+- [x] Pattern 재활용 방안 (매번 Pattern 객체를 생성하는 것은 비싼 행위)
 
 src/main/java/lotto/domain/Rank.java
 
-- [ ] BigDecimal.valueOf의 반복을 생성자를 통해 제거
+- [x] BigDecimal.valueOf의 반복을 생성자를 통해 제거
 
 src/main/java/lotto/domain/Result.java
 
@@ -24,7 +24,7 @@ src/main/java/lotto/domain/Result.java
 
 src/main/java/lotto/utils/FixedLottoGenerator.java
 
-- [ ] 테스트를 위한 코드는 테스트 패키지로 옮기는 것
+- [x] 테스트를 위한 코드는 테스트 패키지로 옮기는 것
 
 # 2단계 미션 구현
 

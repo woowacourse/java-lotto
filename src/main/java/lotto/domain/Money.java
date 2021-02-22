@@ -1,12 +1,10 @@
 package lotto.domain;
 
 import java.math.BigDecimal;
-import java.util.regex.Pattern;
 import lotto.utils.CustomException;
+import lotto.utils.StringChecker;
 
 public class Money {
-    private static final String IS_NUMBER = "\\d+";
-
     private final BigDecimal money;
 
     public Money(String moneyValue) {
@@ -15,7 +13,7 @@ public class Money {
     }
 
     private void validateIsNumber(String moneyValue) {
-        if (!Pattern.matches(IS_NUMBER, moneyValue)) {
+        if (!StringChecker.isNumber(moneyValue)) {
             throw new CustomException("구입금액은 숫자이어야 합니다.");
         }
     }
