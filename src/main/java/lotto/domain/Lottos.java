@@ -27,8 +27,8 @@ public class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
-    public int getNumberOfLotto() {
-        return lottos.size();
+    public int getAutoLottoQuantity(int manualLottoQuantity) {
+        return lottos.size() - manualLottoQuantity;
     }
 
     public Lottos merge(Lottos that) {

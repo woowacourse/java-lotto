@@ -17,10 +17,9 @@ public class LottoController {
         List<int[]> manualLottoNumbersSequence = InputView.takeManualLottoNumbersInput(scanner, manualLottoQuantity);
 
         Lottos lottos = buyLottos(manualLottoNumbersSequence, manualLottoQuantity, money);
-        OutputView.showLottos(lottos);
+        OutputView.showLottos(lottos, manualLottoQuantity);
 
         List<Rank> results = lottos.getResults(getWinningLotto(scanner));
-
         OutputView.showResultStatistics(new LottoStatistics(results, money));
     }
 
