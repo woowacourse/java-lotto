@@ -30,11 +30,11 @@ public class LottoService {
         return ratingInfo;
     }
 
-    public double getEarningRate(final int money) {
+    public double calculateEarningRate(final int money) {
         return totalSum() / money;
     }
 
-    public double totalSum() {
+    private double totalSum() {
         double sum = 0;
         for (Rating rating : Rating.values()) {
             if (rating == Rating.MISS) {

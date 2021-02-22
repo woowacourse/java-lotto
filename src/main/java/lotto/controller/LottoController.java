@@ -14,15 +14,16 @@ import lotto.view.OutputView;
 public class LottoController {
 
     public void start() {
-        LottoService lottoManager = new LottoService(new RandomLottoMachine());
+        LottoService lottoService = new LottoService(new RandomLottoMachine());
         Ticket ticket = buyLotto();
 
         OutputView.printBuyLotto(ticket.getCount());
-        OutputView.printLottoResults(lottoManager.buyLotto(ticket));
+        OutputView.printLottoResults(lottoService.buyLotto(ticket));
 
         WinningLotto winningLotto = buyWinningLotto();
-        RatingInfo ratingInfo = lottoManager.scratchLotto(winningLotto);
-        OutputView.printWinningStats(ratingInfo, lottoManager.getEarningRate(ticket.getPrice()));
+        RatingInfo ratingInfo = lottoService.scratchLotto(winningLotto);
+        OutputView
+            .printWinningStats(ratingInfo, lottoService.calculateEarningRate(ticket.getPrice()));
     }
 
     private Ticket buyLotto() {
