@@ -12,8 +12,8 @@ import java.util.stream.Collectors;
 public class LottoTicketService {
 
     private static final String DELIMITER = ",";
-    private static final String COUNT_ERROR_MESSAGE = "당첨 숫자는 6개 넣어야 합니다.";
     private static final int LOTTO_NUMBER_COUNT = 6;
+    private static final String COUNT_ERROR_MESSAGE = "당첨 숫자는 " + LOTTO_NUMBER_COUNT + "개 넣어야 합니다.";
 
     private LottoTicketService() {
     }
