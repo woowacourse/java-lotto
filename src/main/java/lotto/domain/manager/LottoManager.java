@@ -30,5 +30,20 @@ public class LottoManager {
         }
         return ratingInfo;
     }
+
+    public double getEarningRate(final int money) {
+        return totalSum() / money;
+    }
+
+    public double totalSum() {
+        double sum = 0;
+        for (Rating rating : Rating.values()) {
+            if (rating == Rating.MISS) {
+                break;
+            }
+            sum += rating.getReward() * ratingInfo.get(rating);
+        }
+        return sum;
+    }
 }
 

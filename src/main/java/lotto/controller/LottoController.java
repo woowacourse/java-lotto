@@ -7,7 +7,6 @@ import lotto.domain.lotto.LottoNumber;
 import lotto.domain.manager.Money;
 import lotto.domain.manager.Ticket;
 import lotto.domain.rating.RatingInfo;
-import lotto.domain.statistics.LottoStatistics;
 import lotto.domain.statistics.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -23,7 +22,7 @@ public class LottoController {
 
         WinningLotto winningLotto = buyWinningLotto();
         RatingInfo ratingInfo = lottoManager.scratchLotto(winningLotto);
-        OutputView.printWinningStats(new LottoStatistics(ratingInfo), ticket.getPrice());
+        OutputView.printWinningStats(ratingInfo, lottoManager.getEarningRate(ticket.getPrice()));
     }
 
     private Ticket buyLotto() {
