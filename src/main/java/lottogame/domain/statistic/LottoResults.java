@@ -1,28 +1,29 @@
-package lottogame.domain.dto;
+package lottogame.domain.statistic;
 
 import lottogame.domain.Money;
 import lottogame.domain.Rank;
+import lottogame.domain.dto.LottoResultDto;
 
 import java.util.*;
 
 public class LottoResults {
     private final List<LottoResult> LottoResults;
-    private final Map<Rank, Integer> result = new LinkedHashMap<>();
     private int totalPrizeMoney = 0;
-    private float profit;
 
     public LottoResults(List<LottoResult> results) {
         LottoResults = new ArrayList<>(results);
     }
 
-    public void makeStatistics(Money money) {
+    public LottoResultDto makeStatistics(Money money) {
+        Map<Rank, Integer> result = new LinkedHashMap<>();
         Arrays.stream(Rank.values())
                 .filter(rank -> !rank.isNotFound())
-                .forEach(rank -> calculatePrize(rank));
-        calculateProfit(money);
+                .forEach(rank -> calculatePrize(rank, result));
+        float profit = calculateProfit(money);
+        return new LottoResultDto(result, profit);
     }
 
-    private void calculatePrize(Rank rank) {
+    private void calculatePrize(Rank rank, Map<Rank, Integer> result) {
         int count = (int) LottoResults
                 .stream()
                 .filter(lottoResult -> lottoResult.equals(rank))
@@ -31,15 +32,7 @@ public class LottoResults {
         result.put(rank, count);
     }
 
-    public Map<Rank, Integer> values() {
-        return Collections.unmodifiableMap(result);
-    }
-
-    public void calculateProfit(Money money) {
-        profit = money.divide(totalPrizeMoney);
-    }
-
-    public float getProfit() {
-        return this.profit;
+    private float calculateProfit(Money money) {
+        return money.divide(totalPrizeMoney);
     }
 }
