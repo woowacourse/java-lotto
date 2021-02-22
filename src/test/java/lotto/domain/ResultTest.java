@@ -30,7 +30,7 @@ class ResultTest {
         Result result = new Result("1,2,3,4,5,7", "6", lottoTickets);
 
         EnumMap<Rank, Object> mapToCompare = new EnumMap<>(Rank.class);
-        mapToCompare.put(Rank.SEC0ND_PLACE, 2);
+        mapToCompare.put(Rank.SECOND_PLACE, 2);
 
         assertThat(result.getResultMap()).isEqualTo(mapToCompare);
     }
@@ -39,11 +39,8 @@ class ResultTest {
     @DisplayName("2장 구매시, 1등 2개 수익률")
     void getEarningRate1() {
         final int TICKET_COUNT = 2;
-        BigInteger outputMoney = Rank.FIRST_PLACE.getPrize().multiply(new BigDecimal(TICKET_COUNT))
-            .toBigInteger();
-        BigInteger inputMoney = new BigInteger(String.valueOf(LottoTicket.PRICE * TICKET_COUNT));
-        BigInteger earningRate = outputMoney.divide(inputMoney)
-            .multiply(new BigInteger("100"));
+        Rank rankStatus = Rank.FIRST_PLACE;
+        BigInteger earningRate = calculateEarningRate(rankStatus, TICKET_COUNT);
 
         LottoTickets lottoTickets = new LottoTickets(TICKET_COUNT, new FixedLottoGenerator());
         Result result = new Result("1,2,3,4,5,6", "7", lottoTickets);
@@ -55,11 +52,8 @@ class ResultTest {
     @DisplayName("2장 구매시, 2등 2개 수익률")
     void getEarningRate2() {
         final int TICKET_COUNT = 2;
-        BigInteger outputMoney = Rank.SEC0ND_PLACE.getPrize().multiply(new BigDecimal(TICKET_COUNT))
-            .toBigInteger();
-        BigInteger inputMoney = new BigInteger(String.valueOf(LottoTicket.PRICE * TICKET_COUNT));
-        BigInteger earningRate = outputMoney.divide(inputMoney)
-            .multiply(new BigInteger("100"));
+        final Rank rankStatus = Rank.SECOND_PLACE;
+        BigInteger earningRate = calculateEarningRate(rankStatus, TICKET_COUNT);
 
         LottoTickets lottoTickets = new LottoTickets(TICKET_COUNT, new FixedLottoGenerator());
         Result result = new Result("1,2,3,4,5,7", "6", lottoTickets);
@@ -71,16 +65,21 @@ class ResultTest {
     @DisplayName("2장 구매시, 미당첨 수익률")
     void getEarningRate3() {
         final int TICKET_COUNT = 2;
-        BigInteger outputMoney = Rank.UNRANKED.getPrize().multiply(new BigDecimal(TICKET_COUNT))
-            .toBigInteger();
-        BigInteger inputMoney = new BigInteger(String.valueOf(LottoTicket.PRICE * TICKET_COUNT));
-        BigInteger earningRate = outputMoney.divide(inputMoney)
-            .multiply(new BigInteger("100"));
+        final Rank rankStatus = Rank.UNRANKED;
+        BigInteger earningRate = calculateEarningRate(rankStatus, TICKET_COUNT);
 
         LottoTickets lottoTickets = new LottoTickets(TICKET_COUNT, new FixedLottoGenerator());
         Result result = new Result("11,12,13,14,15,16", "6", lottoTickets);
 
         assertThat(result.getEarningRate()).isEqualTo(earningRate);
+    }
+
+    private BigInteger calculateEarningRate(Rank rankStatus, int ticketCount) {
+        BigInteger outputMoney = rankStatus.getPrize().multiply(new BigDecimal(ticketCount))
+            .toBigInteger();
+        BigInteger inputMoney = new BigInteger(String.valueOf(LottoTicket.PRICE * ticketCount));
+        return outputMoney.divide(inputMoney)
+            .multiply(new BigInteger("100"));
     }
 
 }

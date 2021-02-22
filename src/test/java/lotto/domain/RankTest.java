@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
@@ -21,7 +21,7 @@ class RankTest {
         return Stream.of(
             Arguments.of(6, false, Rank.FIRST_PLACE),
             Arguments.of(6, true, Rank.FIRST_PLACE),
-            Arguments.of(5, true, Rank.SEC0ND_PLACE),
+            Arguments.of(5, true, Rank.SECOND_PLACE),
             Arguments.of(5, false, Rank.THIRD_PLACE),
             Arguments.of(4, false, Rank.FOURTH_PLACE),
             Arguments.of(4, true, Rank.FOURTH_PLACE),

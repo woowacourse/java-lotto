@@ -35,7 +35,7 @@ public class OutputView {
         if (Rank.FIRST_PLACE.equals(rank)) {
             return "6개 일치";
         }
-        if (Rank.SEC0ND_PLACE.equals(rank)) {
+        if (Rank.SECOND_PLACE.equals(rank)) {
             return "5개 일치, 보너스 볼 일치";
         }
         if (Rank.THIRD_PLACE.equals(rank)) {
