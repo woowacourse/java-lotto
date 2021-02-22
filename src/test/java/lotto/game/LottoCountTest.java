@@ -1,6 +1,8 @@
 package lotto.game;
 
 import lotto.money.Money;
+import lotto.ticket.Tickets;
+import lotto.ticket.strategy.ManualNumbersGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -58,8 +60,18 @@ public class LottoCountTest {
         LottoCount lottoCount = new LottoCount(purchaseMoney);
         LottoCount manualLottoCount = new LottoCount("15");
         assertThatThrownBy(() ->
-                lottoCount.purchaseManualTicket(manualLottoCount)
+                lottoCount.checkPurchasePossibility(manualLottoCount)
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ERROR_MESSAGE_INVALID_AMOUNT);
+    }
+
+    @Test
+    @DisplayName("수동 구매 후 남은 구입 가능 횟수 확인")
+    void checkRemainCount() {
+        Money purchaseMoney = new Money("14000");
+        LottoCount lottoCount = new LottoCount(purchaseMoney);
+        LottoCount manualLottoCount = new LottoCount("3");
+        LottoCount remainCount = lottoCount.purchaseManualTicket(manualLottoCount);
+        assertThat(remainCount).isEqualTo(new LottoCount("11"));
     }
 }

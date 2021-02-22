@@ -29,8 +29,17 @@ public class LottoCount {
         return new LottoCount(String.valueOf(lottoCount - ONE_COUNT));
     }
 
-    public void purchaseManualTicket(LottoCount count) {
+    public void checkPurchasePossibility(LottoCount count) {
         TicketValidation.validateAmount(lottoCount, count);
+    }
+
+    public LottoCount purchaseManualTicket(LottoCount count) {
+        TicketValidation.validateAmount(lottoCount, count);
+        return count.remainCount(lottoCount);
+    }
+
+    private LottoCount remainCount(int lottoCount) {
+        return new LottoCount(String.valueOf(lottoCount - this.lottoCount));
     }
 
     public boolean canPurchase(int currentCount) {

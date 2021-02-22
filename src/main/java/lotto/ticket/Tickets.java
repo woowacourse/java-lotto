@@ -13,6 +13,10 @@ public class Tickets {
 
     private final List<Ticket> tickets;
 
+    public Tickets() {
+        this.tickets = new ArrayList<>();
+    }
+
     public Tickets(LottoCount lottoCount, NumbersGenerator numbersGenerator) {
         this.tickets = new ArrayList<>();
         while (lottoCount.isGreaterThanZero()) {
