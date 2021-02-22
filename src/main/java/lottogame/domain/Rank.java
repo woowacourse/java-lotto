@@ -23,17 +23,13 @@ public enum Rank {
     public static Rank of(final int matchCount, final boolean isBonusMatch) {
         return Arrays.stream(values())
             .filter(rank -> rank.isSameMatchCount(matchCount))
-            .filter(rank -> rank.isSameBonusMatch(isBonusMatch))
+            .filter(rank -> !rank.equals(RANK2) || isBonusMatch)
             .findAny()
             .orElse(FAIL);
     }
 
     private boolean isSameMatchCount(final int matchCount) {
         return this.matchCount == matchCount;
-    }
-
-    private boolean isSameBonusMatch(boolean isBonusMatch) {
-        return this.isBonusMatch == isBonusMatch;
     }
 
     public int getMatchCount() {
