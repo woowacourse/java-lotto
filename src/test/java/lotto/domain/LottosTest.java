@@ -1,9 +1,10 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lotto.controller.generator.LottoAutoGenerator;
 import lotto.controller.generator.LottoManualGenerator;
@@ -22,9 +23,9 @@ public class LottosTest {
 
     public static final List<Integer> WINNING_NUMBERS = Arrays.asList(1, 2, 3, 4, 5, 6);
     public static final int BONUS_NUMBER = 7;
+    private static final String DELIMITER = ", ";
 
     private InputTest inputTest = new InputTest();
-    private Scanner scanner;
 
     @BeforeEach
     public void setUp() {
@@ -58,9 +59,8 @@ public class LottosTest {
     @DisplayName("당첨 통계 결과 수합")
     @MethodSource("provideLottosResult")
     void lottosResult(String exampleLotto, LottoRank exampleRank) {
-        inputTest.provideInput(exampleLotto);
-        scanner = new Scanner(System.in);
-        LottoManualGenerator lottoManualGenerator = new LottoManualGenerator(scanner);
+        List<List<Integer>> manualLottoNumbers = manualLottoNumbers(exampleLotto);
+        LottoManualGenerator lottoManualGenerator = new LottoManualGenerator(manualLottoNumbers);
         Lottos exampleLottos = new Lottos(lottoManualGenerator, 1);
         LottoAnnouncement lottoAnnouncement = new LottoAnnouncement(WINNING_NUMBERS, BONUS_NUMBER);
         Map<LottoRank, Integer> exampleLottosResult =
@@ -69,5 +69,18 @@ public class LottosTest {
         assertThat(value).isEqualTo(1);
     }
 
+    private List<List<Integer>> manualLottoNumbers(String exampleLotto) {
+        List<List<Integer>> manualLottoNumbers = new ArrayList<>();
+        List<Integer> singleManualLottoNumbers = parseToWinner(exampleLotto);
+        manualLottoNumbers.add(singleManualLottoNumbers);
+        return manualLottoNumbers;
+    }
 
+    private List<Integer> parseToWinner(String exampleLotto) {
+        String[] splittedWinningNumbers = exampleLotto.split(DELIMITER);
+        return Arrays.stream(splittedWinningNumbers)
+            .map(String::trim)
+            .map(Integer::parseInt)
+            .collect(Collectors.toList());
+    }
 }

@@ -2,21 +2,21 @@ package lotto.controller.generator;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Scanner;
-import lotto.viewer.LottoGeneratorInputView;
 
 public class LottoManualGenerator implements LottoGenerator {
 
-    private final LottoGeneratorInputView lottoGeneratorInputView;
-    final Scanner scanner;
+    private final List<List<Integer>> manualSelectedNumbers;
+    private int emitNumbers;
 
-    public LottoManualGenerator(Scanner scanner) {
-        this.lottoGeneratorInputView = new LottoGeneratorInputView(scanner);
-        this.scanner = scanner;
+    public LottoManualGenerator(List<List<Integer>> manualSelectedNumbers) {
+        this.manualSelectedNumbers = manualSelectedNumbers;
+        emitNumbers = 0;
     }
 
     @Override
     public List<Integer> generateNumbers() {
-        return Collections.synchronizedList(this.lottoGeneratorInputView.inputWinningNumbers());
+        List<Integer> generateNumber = manualSelectedNumbers.get(emitNumbers);
+        emitNumbers++;
+        return Collections.synchronizedList(generateNumber);
     }
 }
