@@ -30,7 +30,7 @@ public class MoneyTest {
     @Test
     void calculateNumberOfLotto() {
         Money money = new Money(13_500);
-        int numberOfLotto = money.calculateAffordableNumberOfLotto();
+        int numberOfLotto = money.calculateAffordableLottoQuantity();
 
         assertThat(numberOfLotto).isEqualTo(13);
     }

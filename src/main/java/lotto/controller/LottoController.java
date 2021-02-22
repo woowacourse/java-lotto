@@ -4,6 +4,7 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -11,23 +12,32 @@ public class LottoController {
     public void tryLotto(Scanner scanner) {
         Money money = new Money(InputView.takeMoneyInput(scanner));
 
-        Lottos lottos = buy(money);
-        OutputView.showLottos(lottos);
+        int manualLottoQuantity = InputView.takeManualLottoQuantityInput(scanner);
+        money.validateAffordability(manualLottoQuantity);
 
-        List<Rank> results = lottos.getResults(getWinningLotto(scanner));
+        Lottos manualLottos = buy(new ManualLottoGenerator(null), manualLottoQuantity);
+
+        Money moneyLeftAfterBuyingManualLotto = money.calculateMoneyLeft(manualLottoQuantity);
+        Lottos autoLottos = buy(new AutomaticLottoGenerator(), moneyLeftAfterBuyingManualLotto.calculateAffordableLottoQuantity());
+
+        Lottos totalLottos = manualLottos.merge(autoLottos);
+        OutputView.showLottos(totalLottos);
+
+        List<Rank> results = totalLottos.getResults(getWinningLotto(scanner));
 
         OutputView.showResultStatistics(new LottoStatistics(results, money));
     }
 
-    private Lottos buy(Money money) {
-        int numberOfLottoToBuy = money.calculateAffordableNumberOfLotto();
-        AutomaticLottoGenerator automaticLottoGenerator = new AutomaticLottoGenerator();
-
-        return automaticLottoGenerator.createLottos(numberOfLottoToBuy);
+    public Lottos buy(LottoGenerator lottoGenerator, int lottoQuantity) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < lottoQuantity; i++) {
+            lottos.add(lottoGenerator.createLotto());
+        }
+        return new Lottos(lottos);
     }
 
     private WinningLotto getWinningLotto(Scanner scanner) {
-        int[] winningNumbers = InputView.takeWinningNumbersInput(scanner);
+        List<int[]> winningNumbers = InputView.takeWinningNumbersInput(scanner);
         int bonusNumber = InputView.takeBonusNumberInput(scanner);
         return new WinningLotto(new ManualLottoGenerator(winningNumbers).createLotto(), new LottoNumber(bonusNumber));
     }

@@ -4,22 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ManualLottoGenerator implements LottoGenerator {
-    private final int[] numbers;
+    private final List<int[]> lottoNumberStored;
+    private int index = 0;
 
-    public ManualLottoGenerator(int[] numbers) {
-        this.numbers = numbers;
+    public ManualLottoGenerator(List<int[]> numbersSequence) {
+        this.lottoNumberStored = numbersSequence;
     }
 
     @Override
     public Lotto createLotto() {
-        return new Lotto(createLottoNumbers());
-    }
-
-    public List<LottoNumber> createLottoNumbers() {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int number : numbers) {
+        for (int number : lottoNumberStored.get(index++)) {
             lottoNumbers.add(new LottoNumber(number));
         }
-        return lottoNumbers;
+        return new Lotto(lottoNumbers);
     }
 }

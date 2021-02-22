@@ -11,6 +11,8 @@ public class LottoStatistics {
     private final Map<Rank, Integer> statistics = new LinkedHashMap<>();
     private final Money moneyInvested;
 
+    //TODO
+    // 생성자로 이동
     {
         for (Rank rank : Rank.values()) {
             statistics.put(rank, STATISTICS_INITIAL_VALUE);

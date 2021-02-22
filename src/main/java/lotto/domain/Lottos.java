@@ -3,6 +3,8 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lottos {
     private final List<Lotto> lottos;
@@ -27,5 +29,11 @@ public class Lottos {
 
     public int getNumberOfLotto() {
         return lottos.size();
+    }
+
+    public Lottos merge(Lottos that) {
+        List<Lotto> newLottos = Stream.concat(this.lottos.stream(), that.lottos.stream())
+                .collect(Collectors.toList());
+        return new Lottos(newLottos);
     }
 }

@@ -1,6 +1,8 @@
 package lotto.view;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -23,17 +25,23 @@ public class InputView {
         return Integer.parseInt(manualLottoQuantity);
     }
 
-    public static int[] takeWinningNumbersInput(Scanner scanner) {
+    public static List<int[]> takeWinningNumbersInput(Scanner scanner) {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String[] winningNumberInput = scanner.nextLine().split(", ");
         for (String number : winningNumberInput) {
             validateNumeric(number);
         }
-        return convertStringsToInts(winningNumberInput);
+        return convertToNumbersSequence(winningNumberInput);
     }
 
-    public static int[] convertStringsToInts(String[] winningNumberInput) {
-        return Arrays.stream(winningNumberInput)
+    private static List<int[]> convertToNumbersSequence(String[] winningNumbersInput) {
+        List<int[]> numbersSequence = new ArrayList<>();
+        numbersSequence.add(convertToInts(winningNumbersInput));
+        return numbersSequence;
+    }
+
+    public static int[] convertToInts(String[] winningNumbersInput) {
+        return Arrays.stream(winningNumbersInput)
                 .mapToInt(Integer::parseInt)
                 .toArray();
     }

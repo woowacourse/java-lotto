@@ -5,6 +5,7 @@ import java.util.Objects;
 public class Money {
     private static final int LOTTO_PRICE = 1000;
     public static final String NOT_ENOUGH_MONEY_ERROR = String.format("%d원 이상의 금액만 입력 가능합니다.", LOTTO_PRICE);
+    public static final String MANUAL_LOTTO_QUANTITY_ERROR = "수동 로또를 살 돈이 모자랍니다.";
 
     private final int money;
 
@@ -20,15 +21,29 @@ public class Money {
     }
 
     public Money calculateMoneyActuallyInvested() {
-        return new Money(calculateAffordableNumberOfLotto() * LOTTO_PRICE);
+        return new Money(calculateAffordableLottoQuantity() * LOTTO_PRICE);
     }
 
-    public int calculateAffordableNumberOfLotto() {
+    public int calculateAffordableLottoQuantity() {
         return money / LOTTO_PRICE;
     }
 
     public float calculateProfitRate(Money profit) {
         return (float) profit.money / this.money;
+    }
+
+    public void validateAffordability(int lottoQuantity) {
+        if (!isAffordable(lottoQuantity)) {
+            throw new IllegalArgumentException(MANUAL_LOTTO_QUANTITY_ERROR);
+        }
+    }
+
+    private boolean isAffordable(int lottoQuantity) {
+        return 0 <= calculateMoneyLeft(lottoQuantity).money;
+    }
+
+    public Money calculateMoneyLeft(int lottoQuantity) {
+        return new Money(money - (lottoQuantity * LOTTO_PRICE));
     }
 
     @Override
