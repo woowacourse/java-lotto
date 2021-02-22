@@ -25,15 +25,19 @@ public class LottoTicketFactory {
 
         int length = (int) money.getValue() / LOTTO_PRICE;
         for (int i = 0; i < length; i++) {
-            lottoTickets.add(new LottoTicket(createLottoTicketByRange()));
+            lottoTickets.add(new LottoTicket(createAutoLottoTicket()));
         }
         return lottoTickets;
     }
 
-    private List<LottoNumber> createLottoTicketByRange() {
+    private List<LottoNumber> createAutoLottoTicket() {
         Collections.shuffle(lottoNumberRange);
         List<LottoNumber> lottoNumbers = lottoNumberRange.subList(START_INDEX, LOTTO_TICKET_SIZE);
         Collections.sort(lottoNumbers);
         return lottoNumbers;
+    }
+
+    public List<LottoNumber> createManualLottoTicket(List<String> numbers) {
+        return new ArrayList<>();
     }
 }
