@@ -14,15 +14,26 @@ public class TicketValidation {
     public static final String ERROR_MESSAGE_INVALID_RANGE = "숫자는 1부터 45사이여야 합니다.";
     public static final String ERROR_MESSAGE_INVALID_AMOUNT = "구매 금액보다 많이 구입할 수 없습니다.";
 
+    private TicketValidation() {
+    }
+
     public static void validateNumber(String value) {
+        emptyNumberCheck(value);
+        for (int i = 0; i < value.length(); i++) {
+            char number = value.charAt(i);
+            checkIsNumber(number);
+        }
+    }
+
+    private static void emptyNumberCheck(String value) {
         if (value.length() == ZERO) {
             throw new IllegalArgumentException(ERROR_MESSAGE_INVALID_INPUT);
         }
-        for (int i = 0; i < value.length(); i++) {
-            char number = value.charAt(i);
-            if (!Character.isDigit(number)) {
-                throw new IllegalArgumentException(ERROR_MESSAGE_INVALID_INPUT);
-            }
+    }
+
+    private static void checkIsNumber(char number) {
+        if (!Character.isDigit(number)) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_INVALID_INPUT);
         }
     }
 
