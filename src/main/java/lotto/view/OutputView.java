@@ -36,7 +36,7 @@ public class OutputView {
         System.out.printf((OUTPUT_PURCHASE_NUMBER_OF_LOTTO_MESSAGES).getMessage() + "%n",
                 lottoTicket.getLength());
         for (LottoLine line : lottoTicket.getLottoLines()) {
-            List<String> lottoNumbers = line.getValues().stream()
+            List<String> lottoNumbers = line.getValue().stream()
                     .sorted()
                     .map(lottoNumber -> String.valueOf(lottoNumber.getValue()))
                     .collect(Collectors.toList());

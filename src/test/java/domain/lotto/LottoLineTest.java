@@ -62,7 +62,7 @@ public class LottoLineTest {
 
         LottoLine lottoLine = new LottoLine(lottoNumbers);
         WinningNumbers winningNumbers = new WinningNumbers(new LottoLine(answerLottoNumbers), new LottoNumber(9));
-        assertThat(lottoLine.matchLottoNumbers(lottoNumbers, winningNumbers)).isEqualTo(Rank.FIFTH);
+        assertThat(lottoLine.matchLottoNumbers(winningNumbers)).isEqualTo(Rank.FIFTH);
     }
 
     @Test
@@ -80,7 +80,7 @@ public class LottoLineTest {
 
         LottoLine lottoLine = new LottoLine(lottoNumbers);
         WinningNumbers winningNumbers = new WinningNumbers(new LottoLine(answerLottoNumbers), new LottoNumber(9));
-        assertThat(lottoLine.matchLottoNumbers(lottoNumbers, winningNumbers)).isEqualTo(Rank.FOURTH);
+        assertThat(lottoLine.matchLottoNumbers(winningNumbers)).isEqualTo(Rank.FOURTH);
     }
 
     @Test
@@ -98,7 +98,7 @@ public class LottoLineTest {
 
         LottoLine lottoLine = new LottoLine(lottoNumbers);
         WinningNumbers winningNumbers = new WinningNumbers(new LottoLine(answerLottoNumbers), new LottoNumber(9));
-        assertThat(lottoLine.matchLottoNumbers(lottoNumbers, winningNumbers)).isEqualTo(Rank.THIRD);
+        assertThat(lottoLine.matchLottoNumbers(winningNumbers)).isEqualTo(Rank.THIRD);
     }
 
     @Test
@@ -116,7 +116,7 @@ public class LottoLineTest {
 
         LottoLine lottoLine = new LottoLine(lottoNumbers);
         WinningNumbers winningNumbers = new WinningNumbers(new LottoLine(answerLottoNumbers), new LottoNumber(9));
-        assertThat(lottoLine.matchLottoNumbers(lottoNumbers, winningNumbers)).isEqualTo(Rank.SECOND);
+        assertThat(lottoLine.matchLottoNumbers(winningNumbers)).isEqualTo(Rank.SECOND);
     }
 
     @Test
@@ -134,6 +134,6 @@ public class LottoLineTest {
 
         LottoLine lottoLine = new LottoLine(lottoNumbers);
         WinningNumbers winningNumbers = new WinningNumbers(new LottoLine(answerLottoNumbers), new LottoNumber(9));
-        assertThat(lottoLine.matchLottoNumbers(lottoNumbers, winningNumbers)).isEqualTo(Rank.FIRST);
+        assertThat(lottoLine.matchLottoNumbers(winningNumbers)).isEqualTo(Rank.FIRST);
     }
 }

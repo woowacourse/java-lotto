@@ -22,7 +22,7 @@ public class LottoTicket {
     public List<Rank> matchLottoLines(WinningNumbers winningNumbers) {
         List<Rank> ranks = new ArrayList<>();
         for (LottoLine lottoLine : lottoLines) {
-            ranks.add(lottoLine.matchLottoNumbers(lottoLine.getValues(), winningNumbers));
+            ranks.add(lottoLine.matchLottoNumbers(winningNumbers));
         }
         return ranks;
     }

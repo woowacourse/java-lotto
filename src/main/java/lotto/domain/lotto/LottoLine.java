@@ -11,27 +11,26 @@ import lotto.view.ErrorMessages;
 
 public class LottoLine {
 
-    private final Set<LottoNumber> value;
+    private final List<LottoNumber> value;
 
     public LottoLine(List<LottoNumber> lottoNumbers) {
         Set<LottoNumber> unDuplicatedLottoNumber = new HashSet(lottoNumbers);
+
         if (unDuplicatedLottoNumber.size() != 6) {
             throw new IllegalArgumentException(
                     ErrorMessages.ERROR_LOTTO_NUMBER_DUPLICATED.getMessage());
         }
-        value = unDuplicatedLottoNumber;
+
+        value = Collections.unmodifiableList(
+                new ArrayList<>(unDuplicatedLottoNumber));
     }
 
-    public Rank matchLottoNumbers(List<LottoNumber> lottoNumbers, WinningNumbers winningNumbers) {
-        List<LottoNumber> winningLottoNumbers = winningNumbers.getLastWinningLottoNumbers().getValues();
-        int matchCount = (int) lottoNumbers.stream().filter(winningLottoNumbers::contains).count();
-        boolean hasBonusNumber = lottoNumbers.contains(winningNumbers.getLastWinBonusBall());
-        return Rank.matchRank(matchCount, hasBonusNumber);
+    public Rank matchLottoNumbers(WinningNumbers winningNumbers) {
+        return winningNumbers.matchRank(value);
     }
 
-    public List<LottoNumber> getValues() {
-        return Collections.unmodifiableList(
-                new ArrayList<>(value));
+    public List<LottoNumber> getValue() {
+        return value;
     }
 
     public boolean containNumber(LottoNumber number) {
