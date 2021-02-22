@@ -30,7 +30,7 @@ public class LottoView {
 
     public static void displayLottoGroup(Lottos lottos) {
         ArrayList<Lotto> lottoGroup = lottos.getLottoGroup();
-        for (int i = 0; i < lottos.getCount(); i++) {
+        for (int i = 0; i < lottoGroup.size(); i++) {
             System.out.print(lottoGroup.get(i).getLottoNumbers() + CHANGE_LINE);
         }
     }
