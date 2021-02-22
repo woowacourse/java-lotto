@@ -17,34 +17,19 @@ import lotto.view.OutputView;
 
 public class LottoController {
 
-    private final InputView inputView;
-
-    public LottoController(Scanner scanner) {
-        this.inputView = new InputView(scanner);
+    public LottoController() {
     }
 
     public void play() {
-        Money purchaseAmount = inputPurchaseAmount();
+        Money purchaseAmount = Money.priceOf(InputView.inputPurchaseAmount());
         Lottos purchasedLottos = buyLotto(purchaseAmount);
         OutputView.printLottos(purchasedLottos);
 
-        Lotto winningLottoNumber = inputWinningLotto();
-        int bonus = inputWinningBonus();
+        Lotto winningLottoNumber = Lotto.of(InputView.inputWinningLottoNumbers());
+        int bonus = InputView.inputWinningBonus();
         WinningLotto winningLotto = new WinningLotto(winningLottoNumber, bonus);
         LottoResult lottoResult = purchasedLottos.match(winningLotto);
         OutputView.printLottoResult(lottoResult);
-    }
-
-    private Money inputPurchaseAmount() {
-        try {
-            OutputView.printPurchaseAmountGuideMessage();
-            int purchaseAmountValue = Integer.parseInt(inputView.inputValue());
-            InputValidationUtils.validatePurchaseAmount(purchaseAmountValue);
-            return Money.priceOf(purchaseAmountValue);
-        } catch (Exception e) {
-            OutputView.printExceptionMessage(e);
-            return inputPurchaseAmount();
-        }
     }
 
     private Lottos buyLotto(Money purchaseAmount) {
@@ -57,32 +42,6 @@ public class LottoController {
             availableLotto.add(Lotto.generatedBy(new RandomLottoGenerator()));
         }
         return new Lottos(availableLotto);
-    }
-
-    private Lotto inputWinningLotto() {
-        try {
-            OutputView.printWinningLottoGuideMessage();
-            List<Integer> winningLottoNumbers = inputView.inputWinningLottoNumbers()
-                .stream()
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
-            return Lotto.of(winningLottoNumbers);
-        } catch (Exception e) {
-            OutputView.printExceptionMessage(e);
-            return inputWinningLotto();
-        }
-    }
-
-    private int inputWinningBonus() {
-        try {
-            OutputView.printWinningLottoBonusGuideMessage();
-            int bonusValue = Integer.parseInt(inputView.inputValue());
-            InputValidationUtils.validateWinningBonus(bonusValue);
-            return bonusValue;
-        } catch (Exception e) {
-            OutputView.printExceptionMessage(e);
-            return inputWinningBonus();
-        }
     }
 }
 
