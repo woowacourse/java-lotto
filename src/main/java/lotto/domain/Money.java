@@ -4,20 +4,28 @@ import lotto.exception.LottoPriceException;
 
 public class Money {
 
-  private final long money;
+  private final long value;
 
-  private Money(final long price) {
-    if (price < 0) {
-      throw new LottoPriceException("음수를 입력할 수 없습니다.");
+  private Money(final long value) {
+    if (value < 0) {
+      throw new LottoPriceException("돈이 부족합니다.");
     }
-    this.money = price;
+    this.value = value;
   }
 
   public static Money of(final int price) {
     return new Money(price);
   }
 
-  public int divide(final int number) {
-    return (int) money / number;
+  public Money minus(final int price) {
+    return new Money(value - price);
+  }
+
+  public int affordableCount(final int price) {
+    return (int) value / price;
+  }
+
+  public long value() {
+    return value;
   }
 }
