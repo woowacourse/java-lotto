@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class LottoResult {
 
-    public static final int RATE = 100;
+    private static final int RATE = 100;
     private final Map<LottoRank, Integer> rank;
 
     public LottoResult() {
