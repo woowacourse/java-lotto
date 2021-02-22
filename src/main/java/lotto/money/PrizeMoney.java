@@ -1,6 +1,5 @@
 package lotto.money;
 
-import lotto.ranking.Ranking;
 import lotto.ranking.Statistics;
 
 import java.util.Objects;
@@ -9,15 +8,7 @@ public class PrizeMoney {
     private final int prizeMoney;
 
     public PrizeMoney(Statistics statistics) {
-        this.prizeMoney = totalPrize(statistics);
-    }
-
-    private int totalPrize(Statistics statistics) {
-        int prize = 0;
-        for (Ranking ranking : Ranking.values()) {
-            prize += ranking.calculatePrize(statistics.findRankingCount(ranking));
-        }
-        return prize;
+        this.prizeMoney = statistics.getTotalPrize();
     }
 
     public String calculateProfit(Money money) {

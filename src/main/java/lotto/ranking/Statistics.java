@@ -28,6 +28,14 @@ public class Statistics {
         return statistics.get(ranking);
     }
 
+    public int getTotalPrize() {
+        int prize = 0;
+        for (Ranking ranking : Ranking.values()) {
+            prize += ranking.calculatePrize(findRankingCount(ranking));
+        }
+        return prize;
+    }
+
     public Map<Ranking, Integer> getStatistics() {
         return Collections.unmodifiableMap(statistics);
     }
