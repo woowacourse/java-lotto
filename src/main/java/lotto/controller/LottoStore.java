@@ -39,7 +39,8 @@ public class LottoStore {
     public Lottos buyLotto() {
         Money possessedMoney = moneyInputView.purchaseMoney();
         LottoAutoGenerator lottoAutoGenerator = new LottoAutoGenerator();
-        Lottos purchasedLottos = new Lottos(lottoAutoGenerator, possessedMoney.getLottoPieces());
+        Lottos purchasedLottos =
+            new Lottos(lottoAutoGenerator, possessedMoney.getLottoPieces(LOTTO_PRICE));
         outputView.printPurchasedLottos(purchasedLottos);
         return purchasedLottos;
     }

@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 public class MoneyTest {
 
+    private final int LOTTO_PRICE = 1000;
     private final static String NULL_MESSAGE = "로또를 사기에 금액이 모자랍니다.";
 
     @Test
@@ -17,14 +18,15 @@ public class MoneyTest {
         int sampleMoney = 14500;
         int expectedLottoPieces = 14;
         Money money = new Money(sampleMoney);
-        assertThat(money.getLottoPieces()).isEqualTo(expectedLottoPieces);
+        assertThat(money.getLottoPieces(LOTTO_PRICE)).isEqualTo(expectedLottoPieces);
     }
 
     @Test
     @DisplayName("잔액이 모자랄 때, 에러 발생 테스트")
     void lackMoneyToLottoPieces() {
         int sampleMoney = 100;
-        assertThatThrownBy(() -> new Money(sampleMoney))
+        Money money = new Money(sampleMoney);
+        assertThatThrownBy(() -> money.getLottoPieces(LOTTO_PRICE))
             .isInstanceOf(LottoPiecesException.class)
             .hasMessageContaining(NULL_MESSAGE);
     }
