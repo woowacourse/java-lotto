@@ -1,7 +1,6 @@
 package lotto.ranking;
 
 import java.util.EnumMap;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +24,9 @@ public class Statistics {
     }
 
     public int findRankingCount(Ranking ranking) {
+        if (ranking.equals(Ranking.NOTHING)) {
+            return 0;
+        }
         return statistics.get(ranking);
     }
 

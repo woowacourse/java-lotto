@@ -11,7 +11,7 @@ public class LottoController {
     public void run() {
         Money money = generateMoney();
         LottoGame lottoGame = new LottoGame(generateCount(money));
-        OutputView.showTickets(lottoGame.createTickets());
+        OutputView.showTickets(lottoGame.getLottoTickets());
 
         WinnerTicket winnerTicket = generateWinnerTicket();
         Statistics statistics = lottoGame.createStatistics(winnerTicket, generateBonusBall(winnerTicket));

@@ -9,21 +9,21 @@ import lotto.money.PrizeMoney;
 import lotto.ranking.Statistics;
 
 public class LottoGame {
-    private final LottoCount lottoCount;
+    private final LottoTickets lottoTickets;
 
-    public LottoGame(LottoCount generateCount) {
-        this.lottoCount = generateCount;
-    }
-
-    public LottoTickets createTickets() {
-        return new LottoTickets(lottoCount, new RandomNumbersGenerator());
+    public LottoGame(LottoCount lottoCount) {
+        this.lottoTickets = new LottoTickets(lottoCount, new RandomNumbersGenerator());
     }
 
     public Statistics createStatistics(WinnerTicket winnerTicket, BonusBall bonusBall) {
-        return new Statistics(createTickets().makeResult(winnerTicket, bonusBall));
+        return new Statistics(lottoTickets.makeResult(winnerTicket, bonusBall));
     }
 
     public double createResult(Statistics statistics, Money money) {
         return new PrizeMoney(statistics).calculateProfit(money);
+    }
+
+    public LottoTickets getLottoTickets() {
+        return lottoTickets;
     }
 }
