@@ -16,6 +16,7 @@ public class LottoController {
 
     public void run() {
         Money inputMoney = new Money(InputView.inputMoney());
+        
         LottoTickets lottoTickets = lottoTicketFactory.buyLottoTickets(inputMoney);
         WinningLotto winningLotto = getWinningLotto(lottoTickets);
         showResult(lottoTickets, winningLotto);
