@@ -38,18 +38,19 @@ public class InputView {
     }
     
     public Lottos readManualLotto(PurchaseCount purchaseCount) {
-        String input = read(MANUAL_LOTTO_NUMBER_QUESTION);
-    
-        List<Lotto> lottos = Stream.generate(() -> readLotto(input))
-              .limit(purchaseCount.getManualPurchaseCount())
-              .collect(Collectors.toList());
+        System.out.println(MANUAL_LOTTO_NUMBER_QUESTION);
+        
+        List<Lotto> lottos = Stream.generate(scanner::nextLine)
+                                   .limit(purchaseCount.getManualPurchaseCount())
+                                   .map(this::readLotto)
+                                   .collect(Collectors.toList());
         
         return new Lottos(lottos);
     }
     
     public Lotto readWinningLotto() {
         String input = read(WINNING_LOTTO_NUMBER_QUESTION);
-    
+        
         return readLotto(input);
     }
     
@@ -70,6 +71,14 @@ public class InputView {
     private String read(String question) {
         System.out.println(question);
         
-        return scanner.nextLine();
+        String input = scanner.nextLine();
+        
+        if (input == null || input.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+        
+        System.out.println();
+        
+        return input;
     }
 }
