@@ -66,7 +66,7 @@
 - [x] LottoNumber에 캐시 자료구조 변경 고려
 - [x] LottoSystem에 Getter 불변 객체 반환으로 수정
 - [x] LottoTicket ValidateDuplicatedNumber 메소드 고민 필요
-- [ ] InputView에서 숫자를 parseInt로 받는 것 고려 - 예외 처리 방식 변경
+- [x] InputView에서 숫자를 parseInt로 받는 것 고려 - 예외 처리 방식 변경
 - [x] 1-45 리스트 Generator 내부에서 생성
 - [ ] WinningNumbers validateSize 중복 검증 수정
 - [ ] WinningNumbers/WinningResult 에 get 붙은 메소드 이름 고민

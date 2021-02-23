@@ -13,7 +13,7 @@ public class LottoSystem {
         this.lottoTickets = LottoMachine.generateLottoTickets(price);
     }
 
-    public static LottoSystem init(final String price) {
+    public static LottoSystem init(final int price) {
         return new LottoSystem(Price.valueOf(price));
     }
 

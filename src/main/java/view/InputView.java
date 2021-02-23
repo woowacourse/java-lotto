@@ -1,6 +1,7 @@
 package view;
 
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -14,8 +15,8 @@ public class InputView {
     private static final String NULL_ERROR = "null 이 입력되었습니다.";
     private static final String NOT_INT_ERROR = "정수가 아닙니다.";
 
-    public static String receivePrice() {
-        return receiveInput(RECEIVE_PRICE_MESSAGE);
+    public static int receivePrice() {
+        return receiveNumber(RECEIVE_PRICE_MESSAGE);
     }
 
     public static List<Integer> receiveWinningNumbers() {
@@ -27,7 +28,12 @@ public class InputView {
     }
 
     private static int receiveNumber(final String message) {
-        return createNumber(receiveInputNotNull(message));
+        try {
+            System.out.println(message);
+            return SCANNER.nextInt();
+        } catch (InputMismatchException e) {
+            throw new InputMismatchException(NOT_INT_ERROR);
+        }
     }
 
     private static List<Integer> receiveNumbers(final String message) {
@@ -40,17 +46,14 @@ public class InputView {
         return userInput;
     }
 
+    private static String receiveInput(final String message) {
+        System.out.println(message);
+        return SCANNER.nextLine().trim();
+    }
+
     private static void validateNull(final String userInput) {
         if (userInput == null) {
             throw new IllegalArgumentException(NULL_ERROR);
-        }
-    }
-
-    private static int createNumber(final String userInput) {
-        try {
-            return Integer.parseInt(userInput);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(NOT_INT_ERROR);
         }
     }
 
@@ -63,10 +66,5 @@ public class InputView {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(NOT_INT_ERROR);
         }
-    }
-
-    private static String receiveInput(final String message) {
-        System.out.println(message);
-        return SCANNER.nextLine().trim();
     }
 }

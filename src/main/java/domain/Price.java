@@ -7,51 +7,31 @@ public class Price {
     private static final int MIN_PRICE = 1000;
     private static final int MAX_PRICE = 1_000_000;
     private static final String OUT_OF_LIMIT_ERROR = "범위를 벗어났습니다.";
-    private static final String NOT_INT_ERROR = "정수가 아닙니다.";
-    private static final String NULL_ERROR = "null 이 입력되었습니다.";
     private static final String NOT_POSITIVE_INT_ERROR = "양의 정수가 아닙니다.";
     private static final String NOT_DIVISIBLE_ERROR = "1000원 단위 금액이 아닙니다.";
 
     private final int value;
     private final int numberOfTickets;
 
-    private Price(final String value) {
-        this.value = Integer.parseInt(value);
+    private Price(final int value) {
+        this.value = value;
         this.numberOfTickets = this.value / MIN_PRICE;
     }
 
-    public static Price valueOf(final String value) {
+    public static Price valueOf(final int value) {
         validate(value);
         return new Price(value);
     }
 
-    private static void validate(final String value) {
-        validateNotNull(value);
-        validateNumeric(value);
-
-        final int number = Integer.parseInt(value);
-        validatePositiveInteger(number);
-        validateRange(number);
-        validateDivisible(number);
+    private static void validate(final int value) {
+        validatePositiveInteger(value);
+        validateRange(value);
+        validateDivisible(value);
     }
 
     private static void validateRange(final int value) {
         if (value < MIN_PRICE || value > MAX_PRICE) {
             throw new IllegalArgumentException(OUT_OF_LIMIT_ERROR);
-        }
-    }
-
-    private static void validateNumeric(final String value) {
-        try {
-            Integer.parseInt(value);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(NOT_INT_ERROR);
-        }
-    }
-
-    private static void validateNotNull(final String value) {
-        if (value == null) {
-            throw new IllegalArgumentException(NULL_ERROR);
         }
     }
 
