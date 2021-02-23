@@ -13,12 +13,12 @@ public class UserPurchaseTest {
     void setUp() {
         lottoTicket = new LottoTicket(
             Arrays.asList(
-                LottoNumbers.of(1),
-                LottoNumbers.of(2),
-                LottoNumbers.of(3),
-                LottoNumbers.of(4),
-                LottoNumbers.of(5),
-                LottoNumbers.of(6)
+                LottoNumbers.get(1),
+                LottoNumbers.get(2),
+                LottoNumbers.get(3),
+                LottoNumbers.get(4),
+                LottoNumbers.get(5),
+                LottoNumbers.get(6)
             )
         );
     }

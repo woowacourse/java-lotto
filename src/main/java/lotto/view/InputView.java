@@ -80,7 +80,7 @@ public class InputView {
         String lottoNumbersInput = scanner.nextLine();
         validateAllIntegerLottoNumbersInput(lottoNumbersInput);
         return Arrays.stream(lottoNumbersInput.split(LOTTO_NUMBERS_DELIMITER))
-            .map(numberInput -> LottoNumbers.of(Integer.parseInt(numberInput)))
+            .map(numberInput -> LottoNumbers.get(Integer.parseInt(numberInput)))
             .collect(Collectors.toList());
     }
 
@@ -112,6 +112,6 @@ public class InputView {
         String bonusNumberInput = scanner.nextLine();
         int bonusNumber = validateInteger(bonusNumberInput);
         InputPrinter.printNewLine();
-        return LottoNumbers.of(bonusNumber);
+        return LottoNumbers.get(bonusNumber);
     }
 }

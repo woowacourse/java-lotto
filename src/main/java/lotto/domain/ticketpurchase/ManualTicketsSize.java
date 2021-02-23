@@ -1,16 +1,18 @@
 package lotto.domain.ticketpurchase;
 
+import lotto.domain.exception.InvalidManualTicketsSizeException;
+
 public class ManualTicketsSize {
     private final int numberOfTickets;
 
     public ManualTicketsSize(int manualTicketsSize, PurchasePrice purchasePrice) {
-        validate(manualTicketsSize, purchasePrice.allTicketsSize());
+        validate(manualTicketsSize, purchasePrice);
         this.numberOfTickets = manualTicketsSize;
     }
 
-    private void validate(int manualTicketsSize, int allTicketsSize) {
-        if (manualTicketsSize < 0 || allTicketsSize < manualTicketsSize) {
-            throw new IllegalArgumentException("0개 이상, 총 구매 티켓 개수 이하여야 합니다.");
+    private void validate(int manualTicketsSize, PurchasePrice purchasePrice) {
+        if (manualTicketsSize < 0 || purchasePrice.allTicketsSize() < manualTicketsSize) {
+            throw new InvalidManualTicketsSizeException();
         }
     }
 

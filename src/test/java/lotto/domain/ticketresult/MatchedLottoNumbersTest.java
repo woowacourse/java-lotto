@@ -17,15 +17,15 @@ class MatchedLottoNumbersTest {
     void setUp() {
         LottoTicket winningLottoTicket = new LottoTicket(
             Arrays.asList(
-                LottoNumbers.of(1),
-                LottoNumbers.of(2),
-                LottoNumbers.of(3),
-                LottoNumbers.of(4),
-                LottoNumbers.of(5),
-                LottoNumbers.of(6)
+                LottoNumbers.get(1),
+                LottoNumbers.get(2),
+                LottoNumbers.get(3),
+                LottoNumbers.get(4),
+                LottoNumbers.get(5),
+                LottoNumbers.get(6)
             )
         );
-        LottoNumber bonusNumber = LottoNumbers.of(7);
+        LottoNumber bonusNumber = LottoNumbers.get(7);
         winningTicketAndBonusNumber
             = new WinningTicketAndBonusNumber(winningLottoTicket, bonusNumber);
     }
@@ -35,12 +35,12 @@ class MatchedLottoNumbersTest {
     void Should_Return_ExpectedMatchResult_When_Regular2Bonus0() {
         LottoTicket lottoTicket = new LottoTicket(
             Arrays.asList(
-                LottoNumbers.of(1),
-                LottoNumbers.of(2),
-                LottoNumbers.of(11),
-                LottoNumbers.of(12),
-                LottoNumbers.of(13),
-                LottoNumbers.of(14)
+                LottoNumbers.get(1),
+                LottoNumbers.get(2),
+                LottoNumbers.get(11),
+                LottoNumbers.get(12),
+                LottoNumbers.get(13),
+                LottoNumbers.get(14)
             )
         );
 
@@ -56,12 +56,12 @@ class MatchedLottoNumbersTest {
     void Should_Return_ExpectedMatchResult_When_Regular0Bonus1() {
         LottoTicket lottoTicket = new LottoTicket(
             Arrays.asList(
-                LottoNumbers.of(11),
-                LottoNumbers.of(7),
-                LottoNumbers.of(13),
-                LottoNumbers.of(14),
-                LottoNumbers.of(15),
-                LottoNumbers.of(16)
+                LottoNumbers.get(11),
+                LottoNumbers.get(7),
+                LottoNumbers.get(13),
+                LottoNumbers.get(14),
+                LottoNumbers.get(15),
+                LottoNumbers.get(16)
             )
         );
 
@@ -77,12 +77,12 @@ class MatchedLottoNumbersTest {
     void Should_Return_ExpectedMatchResult_When_Regular3Bonus1() {
         LottoTicket lottoTicket = new LottoTicket(
             Arrays.asList(
-                LottoNumbers.of(1),
-                LottoNumbers.of(2),
-                LottoNumbers.of(3),
-                LottoNumbers.of(7),
-                LottoNumbers.of(13),
-                LottoNumbers.of(14)
+                LottoNumbers.get(1),
+                LottoNumbers.get(2),
+                LottoNumbers.get(3),
+                LottoNumbers.get(7),
+                LottoNumbers.get(13),
+                LottoNumbers.get(14)
             )
         );
 

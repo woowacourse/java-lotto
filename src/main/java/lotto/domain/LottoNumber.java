@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Objects;
+import lotto.domain.exception.InvalidLottoNumberException;
 
 public class LottoNumber {
     public static final int MINIMUM = 1;
@@ -9,13 +10,13 @@ public class LottoNumber {
     private final int number;
 
     public LottoNumber(int number) {
+        validate(number);
         this.number = number;
-        validateRange(number);
     }
 
-    private void validateRange(int number) {
+    private void validate(int number) {
         if (number < MINIMUM || MAXIMUM < number) {
-            throw new IllegalArgumentException("로또 번호는 1이상, 45이하여야 합니다.");
+            throw new InvalidLottoNumberException();
         }
     }
 

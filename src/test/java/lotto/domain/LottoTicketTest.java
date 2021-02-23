@@ -20,12 +20,12 @@ public class LottoTicketTest {
     void setUp() {
         lottoNumbers = new ArrayList<>(
             Arrays.asList(
-                LottoNumbers.of(5),
-                LottoNumbers.of(4),
-                LottoNumbers.of(2),
-                LottoNumbers.of(3),
-                LottoNumbers.of(6),
-                LottoNumbers.of(1)
+                LottoNumbers.get(5),
+                LottoNumbers.get(4),
+                LottoNumbers.get(2),
+                LottoNumbers.get(3),
+                LottoNumbers.get(6),
+                LottoNumbers.get(1)
             ));
     }
 
@@ -70,7 +70,7 @@ public class LottoTicketTest {
     @Test
     void Should_ThrowException_When_LottoNumberDuplicate() {
         lottoNumbers.remove(0);
-        lottoNumbers.add(0, LottoNumbers.of(1));
+        lottoNumbers.add(0, LottoNumbers.get(1));
 
         assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
             .isInstanceOf(IllegalArgumentException.class);

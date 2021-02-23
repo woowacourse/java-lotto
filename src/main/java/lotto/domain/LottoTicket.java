@@ -13,18 +13,14 @@ public class LottoTicket {
     private final List<LottoNumber> numbers;
 
     public LottoTicket(List<LottoNumber> numbers) {
-        validateSize(numbers);
-        validateNotDuplicate(numbers);
+        validate(numbers);
         this.numbers = new ArrayList<>(numbers);
         this.numbers.sort(Comparator.comparingInt(LottoNumber::getNumber));
     }
 
-    public List<LottoNumber> getNumbers() {
-        return Collections.unmodifiableList(this.numbers);
-    }
-
-    public boolean contains(LottoNumber lottoNumber) {
-        return numbers.contains(lottoNumber);
+    private void validate(List<LottoNumber> numbers) {
+        validateSize(numbers);
+        validateNotDuplicate(numbers);
     }
 
     private void validateSize(List<LottoNumber> lottoNumbers) {
@@ -37,6 +33,14 @@ public class LottoTicket {
         if (new HashSet<>(lottoNumbers).size() != lottoNumbers.size()) {
             throw new IllegalArgumentException("로또 번호는 중복되지 않아야 합니다.");
         }
+    }
+
+    public List<LottoNumber> getNumbers() {
+        return Collections.unmodifiableList(this.numbers);
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return numbers.contains(lottoNumber);
     }
 
     public List<LottoNumber> getMatchedLottoNumbers(List<LottoNumber> lottoNumbers) {

@@ -1,5 +1,7 @@
 package lotto.domain.ticketpurchase;
 
+import lotto.domain.exception.InvalidPurchasePriceException;
+
 public class PurchasePrice {
     private static final int ONE_TICKET_PRICE = 1000;
 
@@ -12,7 +14,7 @@ public class PurchasePrice {
 
     private void validate(int price) {
         if (price <= 0 || (price % ONE_TICKET_PRICE) != 0) {
-            throw new IllegalArgumentException("구입 금액은 1000원 단위여야 합니다.");
+            throw new InvalidPurchasePriceException();
         }
     }
 

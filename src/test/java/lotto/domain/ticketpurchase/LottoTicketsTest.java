@@ -16,12 +16,12 @@ public class LottoTicketsTest {
     @Test
     void Should_Return_ExactLottoTickets_When_AfterAddLottoTickets() {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
-        lottoNumbers.add(LottoNumbers.of(1));
-        lottoNumbers.add(LottoNumbers.of(2));
-        lottoNumbers.add(LottoNumbers.of(3));
-        lottoNumbers.add(LottoNumbers.of(4));
-        lottoNumbers.add(LottoNumbers.of(5));
-        lottoNumbers.add(LottoNumbers.of(6));
+        lottoNumbers.add(LottoNumbers.get(1));
+        lottoNumbers.add(LottoNumbers.get(2));
+        lottoNumbers.add(LottoNumbers.get(3));
+        lottoNumbers.add(LottoNumbers.get(4));
+        lottoNumbers.add(LottoNumbers.get(5));
+        lottoNumbers.add(LottoNumbers.get(6));
 
         LottoTicket lottoTicket1 = new LottoTicket(lottoNumbers);
         LottoTicket lottoTicket2 = new LottoTicket(lottoNumbers);

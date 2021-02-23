@@ -19,7 +19,7 @@ public class LottoNumbers {
     private LottoNumbers() {
     }
 
-    public static LottoNumber of(int number) {
+    public static LottoNumber get(int number) {
         return numbers.get(number - 1);
     }
 

@@ -18,12 +18,12 @@ public class WinningTicketAndBonusNumberTest {
     void setUp() {
         winningTicket = new LottoTicket(
             Arrays.asList(
-                LottoNumbers.of(1),
-                LottoNumbers.of(2),
-                LottoNumbers.of(3),
-                LottoNumbers.of(4),
-                LottoNumbers.of(5),
-                LottoNumbers.of(6)
+                LottoNumbers.get(1),
+                LottoNumbers.get(2),
+                LottoNumbers.get(3),
+                LottoNumbers.get(4),
+                LottoNumbers.get(5),
+                LottoNumbers.get(6)
             )
         );
     }
@@ -31,7 +31,7 @@ public class WinningTicketAndBonusNumberTest {
     @DisplayName("우승 로또 번호 정상 생성")
     @Test
     void Should_Not_ThrowException_When_ValidLottoNumbers() {
-        LottoNumber bonusNumber = LottoNumbers.of(7);
+        LottoNumber bonusNumber = LottoNumbers.get(7);
         assertThatCode(
             () -> new WinningTicketAndBonusNumber(winningTicket, bonusNumber)
         ).doesNotThrowAnyException();
@@ -40,7 +40,7 @@ public class WinningTicketAndBonusNumberTest {
     @DisplayName("당첨 번호에 보너스 번호 포함시 에러")
     @Test
     void Should_ThrowException_When_WinningLottoNumbersContainBonusNumber() {
-        LottoNumber bonusNumber = LottoNumbers.of(5);
+        LottoNumber bonusNumber = LottoNumbers.get(5);
         assertThatThrownBy(
             () -> new WinningTicketAndBonusNumber(winningTicket, bonusNumber)
         ).isInstanceOf(IllegalArgumentException.class);

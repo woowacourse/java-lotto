@@ -11,7 +11,7 @@ class LottoNumbersTest {
     @Test
     void Should_ContainAllLottoNumbers_When_ApplicationStart() {
         for (int i = 1; i <= 45; i++) {
-            assertThat(LottoNumbers.of(i)).isEqualTo(new LottoNumber(i));
+            assertThat(LottoNumbers.get(i)).isEqualTo(new LottoNumber(i));
         }
     }
 
@@ -28,7 +28,7 @@ class LottoNumbersTest {
     void Should_Not_Shuffled_When_AfterGetRandomNumbersTicketSize() {
         LottoNumbers.getRandomNumbersTicketSize();
         for (int i = 1; i <= 45; i++) {
-            assertThat(LottoNumbers.of(i)).isEqualTo(new LottoNumber(i));
+            assertThat(LottoNumbers.get(i)).isEqualTo(new LottoNumber(i));
         }
     }
 }
