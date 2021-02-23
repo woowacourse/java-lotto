@@ -24,8 +24,8 @@ public class Money {
 		return new LottoQuantity((int) money / LOTTO_PRICE);
 	}
 
-	public float getProfitRate(Money profit) {
-		return (float) profit.money / this.money;
+	public float divide(Money that) {
+		return (float) that.money / this.money;
 	}
 
 	public void validateAffordabilityOf(LottoQuantity lottoQuantity) {

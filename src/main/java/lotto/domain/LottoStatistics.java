@@ -36,7 +36,7 @@ public class LottoStatistics {
 	}
 
 	public float getProfitRate() {
-		return moneyInvested.getProfitRate(getTotalProfit());
+		return moneyInvested.divide(getTotalProfit());
 	}
 
 	private Money getTotalProfit() {

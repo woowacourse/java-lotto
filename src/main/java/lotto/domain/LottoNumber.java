@@ -29,7 +29,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 		}
 	}
 
-	public boolean hasAnyMatchingNumber(List<LottoNumber> numbers) {
+	public boolean isIncludedIn(List<LottoNumber> numbers) {
 		return numbers.contains(new LottoNumber(number));
 	}
 

@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-//TODO List<int[]>뿐만 아니라 int[]도 받을 수 있게 할까?
 public class ManualLottoGenerator implements LottoGenerator {
 	private final List<int[]> lottoNumbersStored;
 	private int index = 0;

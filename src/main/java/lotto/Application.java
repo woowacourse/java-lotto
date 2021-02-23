@@ -9,7 +9,7 @@ public class Application {
 		Scanner scanner = new Scanner(System.in);
 		LottoController lottoController = new LottoController();
 
-		lottoController.tryLotto(scanner);
+		lottoController.start(scanner);
 
 		scanner.close();
 	}

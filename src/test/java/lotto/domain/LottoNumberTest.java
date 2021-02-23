@@ -34,7 +34,7 @@ public class LottoNumberTest {
 		LottoNumber lottoNumber1 = new LottoNumber(4);
 		LottoNumber lottoNumber2 = new LottoNumber(10);
 
-		assertThat(lottoNumber1.hasAnyMatchingNumber(lottoNumbers)).isTrue();
-		assertThat(lottoNumber2.hasAnyMatchingNumber(lottoNumbers)).isFalse();
+		assertThat(lottoNumber1.isIncludedIn(lottoNumbers)).isTrue();
+		assertThat(lottoNumber2.isIncludedIn(lottoNumbers)).isFalse();
 	}
 }

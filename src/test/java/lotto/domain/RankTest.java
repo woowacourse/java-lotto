@@ -14,7 +14,7 @@ public class RankTest {
 	@ParameterizedTest
 	@CsvSource({"0,true,NONE", "6,false,FIRST", "5,true,SECOND", "5,false,THIRD"})
 	void getCorrespondingRank(int matchCount, boolean bonusMatch, Rank rank) {
-		assertThat(Rank.getCorrespondingRank(matchCount, bonusMatch)).isEqualTo(rank);
+		assertThat(Rank.getRankByGivenMatchInformation(matchCount, bonusMatch)).isEqualTo(rank);
 	}
 
 	@DisplayName("당첨 통계를 위한 랭크만을 순서에 맞게 추출해 주는지")

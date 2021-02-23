@@ -10,7 +10,6 @@ import java.util.List;
 import static lotto.domain.Money.MANUAL_LOTTO_QUANTITY_ERROR;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoMachineTest {
 	@DisplayName("생성자 테스트")
@@ -41,7 +40,7 @@ class LottoMachineTest {
 
 		Lottos lottos = lottoMachine.createLottosFrom(numbersSequence);
 
-		assertThat(lottos.getLottos().get(0)).isEqualTo(new Lotto(Arrays.asList(
+		assertThat(lottos.toList().get(0)).isEqualTo(new Lotto(Arrays.asList(
 				new LottoNumber(1),
 				new LottoNumber(2),
 				new LottoNumber(3),
@@ -49,7 +48,7 @@ class LottoMachineTest {
 				new LottoNumber(5),
 				new LottoNumber(6)
 		)));
-		assertThat(lottos.getLottos().get(1)).isEqualTo(new Lotto(Arrays.asList(
+		assertThat(lottos.toList().get(1)).isEqualTo(new Lotto(Arrays.asList(
 				new LottoNumber(1),
 				new LottoNumber(2),
 				new LottoNumber(3),

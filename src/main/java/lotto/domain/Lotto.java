@@ -33,12 +33,12 @@ public class Lotto {
 		return Collections.unmodifiableList(lottoNumbers);
 	}
 
-	public int countMatchingNumbers(WinningLotto winningLotto) {
-		return winningLotto.countMatchingNumbers(lottoNumbers);
+	public int countMatchingNumbersWith(WinningLotto winningLotto) {
+		return winningLotto.countMatchingNumbersWith(lottoNumbers);
 	}
 
-	public boolean hasBonusNumber(WinningLotto winningLotto) {
-		return winningLotto.hasBonusMatch(lottoNumbers);
+	public boolean hasBonusMatchWith(WinningLotto winningLotto) {
+		return winningLotto.hasBonusMatchWith(lottoNumbers);
 	}
 
 	@Override

@@ -43,7 +43,7 @@ class LottoControllerTest {
 
 	private boolean isControllerRunningSuccessfully(LottoController lottoController) {
 		try {
-			lottoController.tryLotto(scanner);
+			lottoController.start(scanner);
 			return true;
 		} catch (Exception e) {
 			return false;

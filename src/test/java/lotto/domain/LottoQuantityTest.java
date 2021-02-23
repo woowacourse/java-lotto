@@ -48,7 +48,7 @@ class LottoQuantityTest {
 		)));
 
 		Lottos autoLottos = lottoQuantity.createLottosUsing(new AutomaticLottoGenerator());
-		assertThat(autoLottos.getLottos().size()).isEqualTo(3);
+		assertThat(autoLottos.toList().size()).isEqualTo(3);
 	}
 
 	private Lotto createCustomLotto(final int... numbers) {

@@ -45,7 +45,7 @@ class WinningLottoTest {
 	@DisplayName("당첨 번호와 로또와의 매칭 확인 제대로 하는지")
 	@Test
 	void countMatchingNumbers() {
-		assertThat(winingLotto.countMatchingNumbers(Arrays.asList(
+		assertThat(winingLotto.countMatchingNumbersWith(Arrays.asList(
 				new LottoNumber(1),
 				new LottoNumber(2),
 				new LottoNumber(3),
@@ -57,7 +57,7 @@ class WinningLottoTest {
 	@DisplayName("보너스 번호와 로또와의 매칭 확인 제대로 하는지")
 	@Test
 	void hasBonusMatch() {
-		assertThat(winingLotto.hasBonusMatch(Arrays.asList(
+		assertThat(winingLotto.hasBonusMatchWith(Arrays.asList(
 				new LottoNumber(1),
 				new LottoNumber(2),
 				new LottoNumber(3),

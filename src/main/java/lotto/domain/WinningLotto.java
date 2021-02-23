@@ -10,24 +10,24 @@ public class WinningLotto extends Lotto {
 	public WinningLotto(Lotto winningLotto, LottoNumber bonusNumber) {
 		super(winningLotto.getLottoNumbers());
 
-		validateDuplicatesWithLottoNumbers(bonusNumber);
+		validateDuplicateWithLottoNumbers(bonusNumber);
 		this.bonusNumber = bonusNumber;
 	}
 
-	private void validateDuplicatesWithLottoNumbers(LottoNumber bonusNumber) {
-		if (bonusNumber.hasAnyMatchingNumber(lottoNumbers)) {
+	private void validateDuplicateWithLottoNumbers(LottoNumber bonusNumber) {
+		if (bonusNumber.isIncludedIn(lottoNumbers)) {
 			throw new IllegalArgumentException(DUPLICATE_BONUS_NUMBER_ERROR);
 		}
 	}
 
-	public int countMatchingNumbers(List<LottoNumber> lottoNumbers) {
+	public int countMatchingNumbersWith(List<LottoNumber> lottoNumbers) {
 		return (int) this.lottoNumbers
 				.stream()
 				.filter(lottoNumbers::contains)
 				.count();
 	}
 
-	public boolean hasBonusMatch(List<LottoNumber> numbers) {
+	public boolean hasBonusMatchWith(List<LottoNumber> numbers) {
 		return numbers.contains(bonusNumber);
 	}
 }

@@ -10,7 +10,7 @@ import static lotto.view.OutputView.printLottoPurchaseSummaryBasedOn;
 import static lotto.view.OutputView.printResultStatisticsBasedOn;
 
 public class LottoController {
-	public void tryLotto(Scanner scanner) {
+	public void start(Scanner scanner) {
 		LottoMachine lottoMachine = new LottoMachine(
 				new Money(takeMoneyInput(scanner)),
 				new LottoQuantity(takeManualLottoQuantityInput(scanner)));

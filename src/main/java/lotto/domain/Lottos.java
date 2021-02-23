@@ -7,6 +7,8 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static lotto.domain.Rank.getRankByGivenMatchInformation;
+
 public class Lottos {
 	private final List<Lotto> lottos;
 
@@ -17,14 +19,14 @@ public class Lottos {
 	public List<Rank> getResultsBasedOn(WinningLotto winningLotto) {
 		List<Rank> ranks = new ArrayList<>();
 		for (Lotto lotto : lottos) {
-			int matches = lotto.countMatchingNumbers(winningLotto);
-			boolean bonusMatch = lotto.hasBonusNumber(winningLotto);
-			ranks.add(Rank.getCorrespondingRank(matches, bonusMatch));
+			int matches = lotto.countMatchingNumbersWith(winningLotto);
+			boolean bonusMatch = lotto.hasBonusMatchWith(winningLotto);
+			ranks.add(getRankByGivenMatchInformation(matches, bonusMatch));
 		}
 		return ranks;
 	}
 
-	public List<Lotto> getLottos() {
+	public List<Lotto> toList() {
 		return Collections.unmodifiableList(lottos);
 	}
 
