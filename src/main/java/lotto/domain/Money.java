@@ -1,8 +1,5 @@
 package lotto.domain;
 
-import lotto.exception.IllegalDivisorCountException;
-import lotto.exception.IllegalMoneyException;
-
 import java.util.regex.Pattern;
 
 public class Money {
@@ -22,17 +19,20 @@ public class Money {
     }
 
     private void validateMoneyValue(String input) {
-        if (isInvalidNumberFormat(input) || isLessThanMinimumMoney(input)) {
-            throw new IllegalMoneyException();
+        checkInvalidNumberFormat(input);
+        checkLessThanMinimumMoney(input);
+    }
+
+    private void checkInvalidNumberFormat(String input) {
+        if (!NUMBER_PATTERN.matcher(input).matches()) {
+            throw new IllegalArgumentException("[ERROR] 구입 금액이 정수가 아닙니다.");
         }
     }
 
-    private boolean isInvalidNumberFormat(String input) {
-        return !NUMBER_PATTERN.matcher(input).matches();
-    }
-
-    private boolean isLessThanMinimumMoney(String input) {
-        return Integer.parseInt(input) < LOTTO_PRICE;
+    private void checkLessThanMinimumMoney(String input) {
+        if (Integer.parseInt(input) < LOTTO_PRICE) {
+            throw new IllegalArgumentException("[ERROR] 구입 금액이 로또 금액보다 작습니다.");
+        }
     }
 
     public Money plus(Money money) {
@@ -48,7 +48,7 @@ public class Money {
 
     public double divide(int count) {
         if (count <= 0) {
-            throw new IllegalDivisorCountException();
+            throw new ArithmeticException("[ERROR] 0으로 나눌 수 없습니다.");
         }
         return this.value / (LOTTO_PRICE * count);
     }

@@ -1,7 +1,5 @@
 package lotto.domain.lotto;
 
-import lotto.exception.IllegalLottoNumbersException;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -18,17 +16,20 @@ public class LottoTicket {
     }
 
     private void validateLottoNumbers(List<LottoNumber> numbers) {
-        if (isInvalidateLottoSize(numbers) || isDuplicateNumber(numbers)) {
-            throw new IllegalLottoNumbersException();
+        checkLottoSize(numbers);
+        checkDuplicateNumber(numbers);
+    }
+
+    private void checkLottoSize(List<LottoNumber> numbers) {
+        if (numbers.size() != LOTTO_TICKET_SIZE) {
+            throw new IllegalArgumentException("[ERROR] 로또 티켓 숫자는 6개 입니다.");
         }
     }
 
-    private boolean isInvalidateLottoSize(List<LottoNumber> numbers) {
-        return numbers.size() != LOTTO_TICKET_SIZE;
-    }
-
-    private boolean isDuplicateNumber(List<LottoNumber> numbers) {
-        return new HashSet<>(numbers).size() != numbers.size();
+    private void checkDuplicateNumber(List<LottoNumber> numbers) {
+        if (new HashSet<>(numbers).size() != numbers.size()) {
+            throw new IllegalArgumentException("[ERROR] 티켓 내 중복된 로또 숫자가 있습니다.");
+        }
     }
 
     public List<LottoNumber> lottoTicket() {

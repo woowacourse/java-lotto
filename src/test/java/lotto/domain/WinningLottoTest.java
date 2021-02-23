@@ -6,7 +6,6 @@ import lotto.domain.lotto.LottoTickets;
 import lotto.domain.result.LottoResult;
 import lotto.domain.result.Prize;
 import lotto.domain.result.WinningLotto;
-import lotto.exception.IllegalWinningLottoException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -73,6 +72,6 @@ class WinningLottoTest {
         LottoNumber bonusNumber = new LottoNumber("3");
         assertThatThrownBy(() -> {
             WinningLotto winningLotto = new WinningLotto(winningTicket, bonusNumber);
-        }).isInstanceOf(IllegalWinningLottoException.class);
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 }

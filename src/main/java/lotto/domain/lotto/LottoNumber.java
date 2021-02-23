@@ -1,7 +1,5 @@
 package lotto.domain.lotto;
 
-import lotto.exception.IllegalLottoNumberException;
-
 import java.util.Objects;
 import java.util.regex.Pattern;
 
@@ -18,23 +16,21 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private void validateLottoNumber(String number) {
-        if (isBlank(number) || isInvalidNumberFormat(number) || isInvalidLottoNumberRange(number)) {
-            throw new IllegalLottoNumberException();
+        checkLottoNumber(number);
+        checkLottoNumberRange(number);
+    }
+
+    private void checkLottoNumber(String number) {
+        if ("".equals(number) || !NUMBER_PATTERN.matcher(number).matches()) {
+            throw new IllegalArgumentException("[ERROR] 로또 번호가 정수가 아닙니다.");
         }
     }
 
-    private boolean isBlank(String number) {
-        return "".equals(number);
-    }
-
-    private boolean isInvalidNumberFormat(String number) {
-        return !NUMBER_PATTERN.matcher(number).matches();
-    }
-
-
-    private boolean isInvalidLottoNumberRange(String number) {
-        return Integer.parseInt(number) < MIN_LOTTO_NUMBER ||
-                Integer.parseInt(number) > MAX_LOTTO_NUMBER;
+    private void checkLottoNumberRange(String number) {
+        if (Integer.parseInt(number) < MIN_LOTTO_NUMBER ||
+                Integer.parseInt(number) > MAX_LOTTO_NUMBER) {
+            throw new IllegalArgumentException("[ERROR] 로또 번호 범위를 초과했습니다.");
+        }
     }
 
     private int getValue() {

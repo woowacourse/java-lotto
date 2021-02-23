@@ -1,7 +1,5 @@
 package lotto.domain.lotto;
 
-import lotto.exception.IllegalLottoCountException;
-
 import java.util.regex.Pattern;
 
 public class LottoCount {
@@ -16,22 +14,20 @@ public class LottoCount {
     }
 
     private void validateLottoCount(String manualCount, int totalCount) {
-        if (isBlank(manualCount) || isInvalidNumberFormat(manualCount) ||
-                isExceedTotalCount(manualCount, totalCount)) {
-            throw new IllegalLottoCountException();
+        checkManualCount(manualCount);
+        checkExceedTotalCount(manualCount, totalCount);
+    }
+
+    private void checkManualCount(String manualCount) {
+        if ("".equals(manualCount) || !NUMBER_PATTERN.matcher(manualCount).matches()) {
+            throw new IllegalArgumentException("[ERROR] 구매 갯수가 정수가 아닙니다.");
         }
     }
 
-    private boolean isBlank(String manualCount) {
-        return "".equals(manualCount);
-    }
-
-    private boolean isInvalidNumberFormat(String manualCount) {
-        return !NUMBER_PATTERN.matcher(manualCount).matches();
-    }
-
-    private boolean isExceedTotalCount(String manualCount, int totalCount) {
-        return totalCount < Integer.parseInt(manualCount);
+    private void checkExceedTotalCount(String manualCount, int totalCount) {
+        if (totalCount < Integer.parseInt(manualCount)) {
+            throw new IllegalArgumentException("[ERROR] 구매 가능한 로또 개수를 초과했습니다.");
+        }
     }
 
     public int getManualLottoCount() {

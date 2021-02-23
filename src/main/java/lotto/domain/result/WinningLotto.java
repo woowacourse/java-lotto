@@ -3,7 +3,6 @@ package lotto.domain.result;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.LottoTickets;
-import lotto.exception.IllegalWinningLottoException;
 
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
@@ -20,7 +19,7 @@ public class WinningLotto {
 
     private void validateWinningLotto() {
         if (isContainBonusNumber(winningTicket)) {
-            throw new IllegalWinningLottoException();
+            throw new IllegalArgumentException("[ERROR] 당첨 번호와 보너스 번호가 중복됩니다.");
         }
     }
 

@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import lotto.domain.lotto.LottoNumber;
-import lotto.exception.IllegalLottoNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,12 +11,21 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoNumberTest {
     @ParameterizedTest
-    @ValueSource(strings = {"a", "-1", "55", ""})
-    @DisplayName("1~49의 숫자인지 검사")
+    @ValueSource(strings = {"a", "-1", ""})
+    @DisplayName("로또 숫자 포맷 검증")
     void validateNumbers(String input) {
         assertThatThrownBy(() -> {
             LottoNumber lottoNumber = new LottoNumber(input);
-        }).isInstanceOf(IllegalLottoNumberException.class);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("로또 범위 초과했을 경우")
+    void validateNumbersRange() {
+        String input = "55";
+        assertThatThrownBy(() -> {
+            LottoNumber lottoNumber = new LottoNumber(input);
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
