@@ -6,6 +6,7 @@ import lotto.exception.LottoCustomException;
 public class Money {
 
     public static final String MONEY_LESS_THAN_MIN_MONEY_ERROR_MESSAGE = "입력 금액은 1000원 이상이어야 합니다.";
+    public static final String MANUAL_TICKETS_OVER_LIMIT_ERROR_MESSAGE = "구입하려는 수동 티켓 갯수가 구입하려는 티켓 수보다 많습니다.";
     private static final int MIN_MONEY_UNIT = 1_000;
 
     private final int money;
@@ -25,8 +26,18 @@ public class Money {
         return this.money / MIN_MONEY_UNIT;
     }
 
+    public int calculateCharge() {
+        return money % MIN_MONEY_UNIT;
+    }
+
     public float calculateProfit(int totalReward) {
         return (float) totalReward / (float) money;
+    }
+
+    public void checkLimit(int tickets) {
+        if (countTickets() < tickets) {
+            throw new LottoCustomException(MANUAL_TICKETS_OVER_LIMIT_ERROR_MESSAGE);
+        }
     }
 
     @Override
