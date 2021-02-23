@@ -37,7 +37,8 @@ public class LottoExchangeTest {
             LottoNumbers.valueOf("1,2,3,4,5,6"),
             LottoNumbers.valueOf("7,8,9,10,11,12")
         );
-        LottoTicket lottoTicket = LottoExchange.getInstance().buyLottoTicket(Payout.valueOf("2000"), manualLottos);
+        LottoTicket lottoTicket = LottoExchange.getInstance()
+            .buyLottoTicket(Payout.valueOf("2000"), manualLottos);
 
         assertThat(lottoTicket.unwrap()).isEqualTo(manualLottos);
     }

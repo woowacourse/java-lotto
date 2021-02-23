@@ -31,10 +31,6 @@ public class ManualCount {
         }
     }
 
-    public boolean isBiggerThan(int count) {
-        return this.count > count;
-    }
-
     public int unwrap() {
         return count;
     }

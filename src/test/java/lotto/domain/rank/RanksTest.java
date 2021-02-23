@@ -17,8 +17,9 @@ public class RanksTest {
 
     @BeforeEach
     void setUp() {
-        WinningNumbers winningNumbers = new WinningNumbers(LottoNumbers.valueOf("1,2,3,4,5,6"), LottoNumber
-            .valueOf("7"));
+        WinningNumbers winningNumbers = new WinningNumbers(LottoNumbers.valueOf("1,2,3,4,5,6"),
+            LottoNumber
+                .valueOf("7"));
         LottoTicket lottoTicket = new LottoTicket(Arrays.asList(
             LottoNumbers.valueOf("1,2,3,4,5,6"),
             LottoNumbers.valueOf("1,2,3,4,5,7"),
