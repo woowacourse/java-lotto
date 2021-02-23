@@ -58,8 +58,8 @@ public class LottoCountTest {
         LottoCount lottoCount = new LottoCount(purchaseMoney);
         LottoCount manualLottoCount = new LottoCount("15");
         assertThatThrownBy(() ->
-                lottoCount.checkPurchasePossibility(manualLottoCount)
-        ).isInstanceOf(IllegalArgumentException.class)
+                lottoCount.consumeTicket(manualLottoCount)
+        ).isInstanceOf(IllegalStateException.class)
                 .hasMessageContaining(ERROR_MESSAGE_INVALID_AMOUNT);
     }
 

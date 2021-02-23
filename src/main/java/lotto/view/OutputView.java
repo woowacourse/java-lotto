@@ -79,7 +79,7 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printError(IllegalArgumentException e) {
+    public static void printError(RuntimeException e) {
         System.err.println(e.getMessage());
     }
 

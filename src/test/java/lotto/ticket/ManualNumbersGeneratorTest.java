@@ -52,7 +52,7 @@ public class ManualNumbersGeneratorTest {
         assertThatThrownBy(() -> {
             List<Number> numbers = new ManualNumbersGenerator("1,2,3,4,5,46").generate();
             new Ticket(numbers);
-        }).isInstanceOf(IllegalArgumentException.class)
+        }).isInstanceOf(IllegalStateException.class)
                 .hasMessage(ERROR_MESSAGE_INVALID_RANGE);
     }
 

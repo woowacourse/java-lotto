@@ -43,10 +43,6 @@ public class LottoCount {
         return new LottoCount(String.valueOf(lottoCount - ONE_COUNT));
     }
 
-    public void checkPurchasePossibility(LottoCount count) {
-        validateAmount(lottoCount, count);
-    }
-
     public LottoCount consumeTicket(LottoCount count) {
         validateAmount(lottoCount, count);
         return count.remainCount(lottoCount);
@@ -54,7 +50,7 @@ public class LottoCount {
 
     private void validateAmount(int currentCount, LottoCount count) {
         if (!count.canPurchase(currentCount)) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_INVALID_AMOUNT);
+            throw new IllegalStateException(ERROR_MESSAGE_INVALID_AMOUNT);
         }
     }
 

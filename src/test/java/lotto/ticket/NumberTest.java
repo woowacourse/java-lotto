@@ -37,7 +37,7 @@ public class NumberTest {
         assertThatThrownBy(() -> {
             Number.valueOf("0");
             Number.valueOf("46");
-        }).isInstanceOf(IllegalArgumentException.class)
+        }).isInstanceOf(IllegalStateException.class)
                 .hasMessage(ERROR_MESSAGE_INVALID_RANGE);
     }
 }

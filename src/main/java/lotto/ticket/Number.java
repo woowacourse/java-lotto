@@ -50,7 +50,7 @@ public class Number implements Comparable<Number> {
 
     private static void validateNumberInRange(int number) {
         if (number < Ticket.MIN_NUMBER || number > Ticket.MAX_NUMBER) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_INVALID_RANGE);
+            throw new IllegalStateException(ERROR_MESSAGE_INVALID_RANGE);
         }
     }
 

@@ -44,7 +44,7 @@ public class WinnerTicketTest {
     @DisplayName("숫자의 범위가 1부터 45사이의 수가 아닌 경우")
     void checkNumberInRange() {
         assertThatThrownBy(() -> new WinnerTicket("1,2,3,4,5,46"))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(IllegalStateException.class)
                 .hasMessage(ERROR_MESSAGE_INVALID_RANGE);
     }
 

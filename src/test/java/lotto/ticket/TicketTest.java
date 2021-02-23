@@ -46,7 +46,7 @@ public class TicketTest {
                 );
         assertThatThrownBy(() ->
                 new Ticket(numbersGenerator.generate())
-        ).isInstanceOf(IllegalArgumentException.class)
+        ).isInstanceOf(IllegalStateException.class)
                 .hasMessageContaining(ERROR_MESSAGE_INVALID_RANGE);
     }
 

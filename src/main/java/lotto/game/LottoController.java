@@ -69,7 +69,7 @@ public class LottoController {
             List<Ticket> tickets = new ArrayList<>();
             ticketGenerate(count, tickets);
             return new Tickets(tickets);
-        } catch (IllegalArgumentException e) {
+        } catch (RuntimeException e) {
             OutputView.printError(e);
             return manualTicketGenerate(count);
         }
@@ -102,7 +102,7 @@ public class LottoController {
         try {
             OutputView.enterWinnerTicket();
             return InputView.inputWinnerTicket();
-        } catch (IllegalArgumentException e) {
+        } catch (RuntimeException e) {
             OutputView.printError(e);
             return verifyWinnerTicket();
         }
@@ -112,7 +112,7 @@ public class LottoController {
         try {
             OutputView.enterBonusBall();
             return InputView.inputBonusBall(winnerTicket);
-        } catch (IllegalArgumentException e) {
+        } catch (RuntimeException e) {
             OutputView.printError(e);
             return verifyBonusBall(winnerTicket);
         }
