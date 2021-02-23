@@ -42,13 +42,13 @@ public class OutputView {
     }
 
     private void printMatchCountAndReward(LottoStatisticResult result) {
-        List<Rank> ranks = new ArrayList<>(Arrays.asList(
+        List<Rank> ranks = Arrays.asList(
             Rank.FIFTH,
             Rank.FOURTH,
             Rank.THIRD,
             Rank.SECOND,
             Rank.FIRST
-        ));
+        );
 
         ranks.stream()
              .forEach(rank -> {
