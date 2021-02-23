@@ -9,7 +9,9 @@ import java.util.Map;
 
 public class OutputView {
     private static final String WINNING_INFO_MESSAGE = "%s (%s)원 - %s개";
-    private static final int FAILED = 0;
+    private static final String WINNING_RESULT_MESSAGE = "%d개 일치";
+    private static final String CONTAIN_BONUS_BALL = ", 보너스 볼 일치";
+    private static final int NO_MATCH = 0;
 
     private OutputView() {
     }
@@ -59,13 +61,25 @@ public class OutputView {
     }
 
     private static void printWinningResult(Rank result, Map<Rank, Integer> winningResult) {
-        if (result.getMatchCount() == FAILED) {
+        if (result.getMatchCount() == NO_MATCH) {
             return;
         }
-        System.out.println(String.format(WINNING_INFO_MESSAGE, result.getMessage(), result.getWinnings(), convertNullToZero(winningResult.get(result))));
+
+        System.out.printf(
+                (WINNING_INFO_MESSAGE) + "%n",
+                getWinningResultMessage(result),
+                result.getWinnings(),
+                convertCountNullToZero(winningResult.get(result)));
     }
 
-    private static int convertNullToZero(Integer number) {
+    private static String getWinningResultMessage(Rank rank) {
+        if (rank.equals(Rank.SECOND_PRIZE)) { // 보너스볼이 포함된 경우
+            return String.format(WINNING_RESULT_MESSAGE + CONTAIN_BONUS_BALL, rank.getMatchCount());
+        }
+        return String.format(WINNING_RESULT_MESSAGE, rank.getMatchCount());
+    }
+
+    private static int convertCountNullToZero(Integer number) {
         if (number == null) {
             return 0;
         }
