@@ -1,10 +1,8 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.Money;
 import lotto.exception.LottoException;
-import lotto.util.LottoGenerator;
 
 import java.util.Arrays;
 import java.util.List;

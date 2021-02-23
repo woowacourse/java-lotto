@@ -1,10 +1,10 @@
 package lotto.domain;
 
+import lotto.exception.LottoNumberException;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import lotto.exception.LottoNumberException;
 
 public class Lotto {
 
