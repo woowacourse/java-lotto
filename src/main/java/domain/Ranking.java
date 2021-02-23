@@ -10,8 +10,6 @@ public enum Ranking {
     FIFTH(3, 5000),
     NOTHING(0, 0);
 
-    private static final int BONUS_CONSIDER_LIMIT = 5;
-
     private final int matching;
     private final int money;
 
@@ -27,7 +25,7 @@ public enum Ranking {
             .findFirst()
             .orElse(NOTHING);
     }
-    
+
     public int getMoney() {
         return money;
     }
