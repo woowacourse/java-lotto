@@ -12,6 +12,7 @@ import java.util.Objects;
 public class Money {
     private static final String ERROR_INVALID_INPUT_FORMAT = "[ERROR] 금액은 숫자만 입력해주세요.";
     private static final String ERROR_NEGATIVE_NUMBER = "[ERROR] 양수만 입력해주세요.";
+    private static final String ERROR_INVALID_SUBTRACTION = "[ERROR] 뺼셈이 불가능합니다. (금액은 0원 이하로 떨어질 수 없습니다)";
     private static final String LONG_REGULAR_EXPRESSION = "^-?[0-9]+$";
     private static final long ZERO = 0;
 
@@ -57,5 +58,17 @@ public class Money {
     @Override
     public int hashCode() {
         return Objects.hash(money);
+    }
+
+    public Money subtract(Money money) {
+        long value = this.money - money.toLong();
+        if (value < ZERO) {
+            throw new IllegalArgumentException(ERROR_INVALID_SUBTRACTION);
+        }
+        return new Money(value);
+    }
+
+    public Money multiply(int multiplicand) {
+        return new Money(this.money * multiplicand);
     }
 }
