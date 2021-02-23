@@ -13,7 +13,7 @@ public class LottoGameResult {
     }
 
     public Map<Rank, Integer> getRanks() {
-        Map<Rank, Integer> ranks = new EnumMap<>(matchingResults);
+        Map<Rank, Integer> ranks = new EnumMap<>(this.matchingResults);
         ranks.remove(Rank.FAIL);
         return ranks;
     }
@@ -29,7 +29,7 @@ public class LottoGameResult {
     }
 
     public double totalWinningPrice() {
-        return matchingResults.entrySet()
+        return this.matchingResults.entrySet()
             .stream()
             .mapToInt(rank -> multiplyPriceByCount(rank.getKey(), rank.getValue()))
             .sum();

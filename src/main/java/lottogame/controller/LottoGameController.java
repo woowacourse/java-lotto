@@ -26,15 +26,15 @@ public class LottoGameController {
         OutputView.printLottoGameYield(lottoGame.getYield(lottoGameResult));
     }
 
-    private LottoWinningNumbers getWinningNumbers() {
-        Set<Integer> winningNumbers = InputView.inputWinningNumbers();
-        int bonusNumber = InputView.inputBonusNumber();
-        return new LottoWinningNumbers(winningNumbers, bonusNumber);
-    }
-
     private LottoTickets getLottoTickets(Money money) {
         LottoTicketIssueMachine lottoTicketIssueMachine =
             new LottoTicketIssueMachine(new Money(money));
         return lottoTicketIssueMachine.issueTickets();
+    }
+
+    private LottoWinningNumbers getWinningNumbers() {
+        Set<Integer> winningNumbers = InputView.inputWinningNumbers();
+        int bonusNumber = InputView.inputBonusNumber();
+        return new LottoWinningNumbers(winningNumbers, bonusNumber);
     }
 }

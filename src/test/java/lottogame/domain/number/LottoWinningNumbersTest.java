@@ -26,7 +26,7 @@ public class LottoWinningNumbersTest {
         );
 
         assertThat(lottoWinningNumbers.countMatchedWinningNumber(lottoTicket)).isEqualTo(5);
-        assertThat(lottoWinningNumbers.isMatchBonusNumber(lottoTicket)).isTrue();
+        assertThat(lottoWinningNumbers.hasBonusNumber(lottoTicket)).isTrue();
     }
 
     @Test

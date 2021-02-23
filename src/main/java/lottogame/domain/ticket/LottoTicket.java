@@ -17,7 +17,7 @@ public class LottoTicket {
 
     public List<Integer> getLottoNumbers() {
         List<Integer> numberList = new ArrayList<>();
-        for (LottoNumber lottoNumber : lottoNumbers) {
+        for (LottoNumber lottoNumber : this.lottoNumbers) {
             numberList.add(lottoNumber.getNumber());
         }
         Collections.sort(numberList);
@@ -25,6 +25,6 @@ public class LottoTicket {
     }
 
     public boolean contains(LottoNumber lottoNumber) {
-        return lottoNumbers.contains(lottoNumber);
+        return this.lottoNumbers.contains(lottoNumber);
     }
 }

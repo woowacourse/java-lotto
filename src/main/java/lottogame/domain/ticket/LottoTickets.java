@@ -17,7 +17,7 @@ public class LottoTickets {
 
     public List<String> getLottoTickets() {
         List<String> ticketsList = new ArrayList<>();
-        for (LottoTicket lottoTicket : lottoTickets) {
+        for (LottoTicket lottoTicket : this.lottoTickets) {
             ticketsList.add(lottoTicket.getLottoNumbers().toString());
         }
         return ticketsList;
@@ -34,7 +34,7 @@ public class LottoTickets {
 
     private Rank getRank(LottoWinningNumbers lottoWinningNumbers, LottoTicket lottoTicket) {
         int matchCount = lottoWinningNumbers.countMatchedWinningNumber(lottoTicket);
-        boolean isBonusMatch = lottoWinningNumbers.isMatchBonusNumber(lottoTicket);
-        return Rank.of(matchCount, isBonusMatch);
+        boolean hasBonus = lottoWinningNumbers.hasBonusNumber(lottoTicket);
+        return Rank.of(matchCount, hasBonus);
     }
 }

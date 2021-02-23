@@ -12,17 +12,16 @@ public class LottoGame {
     private final LottoTickets lottoTickets;
     private final LottoWinningNumbers lottoWinningNumbers;
 
-    public LottoGame(final LottoTickets lottoTickets,
-        final LottoWinningNumbers lottoWinningNumbers) {
+    public LottoGame(final LottoTickets lottoTickets, final LottoWinningNumbers lottoWinningNumbers) {
         this.lottoTickets = lottoTickets;
         this.lottoWinningNumbers = lottoWinningNumbers;
     }
 
     public LottoGameResult getMatchingResult() {
-        return this.lottoTickets.getMatchingResult(this.lottoWinningNumbers, initMachingResults());
+        return this.lottoTickets.getMatchingResult(this.lottoWinningNumbers, initMatchingResults());
     }
 
-    private Map<Rank, Integer> initMachingResults() {
+    private Map<Rank, Integer> initMatchingResults() {
         Map<Rank, Integer> machingResults = new EnumMap<>(Rank.class);
         for (Rank rank : Rank.values()) {
             machingResults.put(rank, INIT_COUNT);

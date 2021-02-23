@@ -28,7 +28,7 @@ public class OutputView {
     }
 
     private static String printLottoRank(Rank rank, Integer count) {
-        if (rank.isBonusMatch()) {
+        if (rank.hasBonus()) {
             return String.format(BONUS_RANK_PRINT_FORMAT,
                 rank.getMatchCount(), rank.getPrice(), count);
         }

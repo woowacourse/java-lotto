@@ -25,7 +25,7 @@ public class LottoGameResultTest {
     @Test
     @DisplayName("총 구입 금액이 일치하는지 확인")
     void testSameMatchCount() {
-        assertThat(lottoGameResult.totalInvestment()).isEqualTo(6*1000);
+        assertThat(lottoGameResult.totalInvestment()).isEqualTo(6 * 1000);
     }
 
     @Test
