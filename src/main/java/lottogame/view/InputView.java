@@ -7,6 +7,7 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import lottogame.domain.Count;
 
 public class InputView {
 
@@ -27,10 +28,11 @@ public class InputView {
         return Integer.parseInt(count);
     }
 
-    public static List<Set<Integer>> inputManualTicketNumbers(final int ticketCount) {
+    public static List<Set<Integer>> inputManualTicketNumbers(final Count ticketCount) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
         List<Set<Integer>> manualTicketNumbers = new ArrayList<>();
-        for (int i = 0; i < ticketCount; i++) {
+        while (ticketCount.isRemain()) {
+            ticketCount.reduce();
             manualTicketNumbers.add(splitNumbers(PATTERN.matcher(SCANNER.nextLine())));
         }
         return manualTicketNumbers;

@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import lottogame.domain.Count;
 import lottogame.domain.Money;
 import lottogame.domain.number.LottoNumber;
 import lottogame.domain.ticket.LottoTicket;
@@ -16,9 +17,9 @@ public class LottoTicketIssueMachine {
     private static final int LOTTO_NUMBER_COUNT = 6;
 
     private final Money money;
-    private final int manualTicketCount;
+    private final Count manualTicketCount;
 
-    public LottoTicketIssueMachine(final Money money, final int manualTicketCount) {
+    public LottoTicketIssueMachine(final Money money, final Count manualTicketCount) {
         this.money = money;
         this.manualTicketCount = manualTicketCount;
         validateMinPurchaseAmount(this.money);
@@ -35,9 +36,9 @@ public class LottoTicketIssueMachine {
         }
     }
 
-    private void validateCanBuyCount(final int manualTicketCount) {
-        if (!money.canBuyAmount(manualTicketCount * TICKET_PRICE)) {
-            throw new IllegalArgumentException("수도응로 구매할 로또의 총 금액이 구입금액을 넘습니다.");
+    private void validateCanBuyCount(final Count manualTicketCount) {
+        if (!money.canBuyAmount(manualTicketCount.multiplyWith(TICKET_PRICE))) {
+            throw new IllegalArgumentException("수동으로 구매할 로또의 총 금액이 구입금액을 넘습니다.");
         }
     }
 
