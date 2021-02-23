@@ -21,8 +21,9 @@ public class OutputView {
         System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
     }
 
-    public static void printLottoTicketsCount(LottoTickets lottoTickets) {
-        System.out.println(lottoTickets.getLottoTickets().size() + "개를 구매했습니다.");
+    public static void printLottoTicketsCount(LottoTickets lottoTickets, ManualLottoAmount manualLottoAmount) {
+        System.out.println("수동으로 " + manualLottoAmount.getValue() + "장, 자동으로 " +
+                (lottoTickets.getLottoTickets().size() - manualLottoAmount.getValue()) + "장을 구매했습니다.");
     }
 
     public static void printInputWinningNumbers() {

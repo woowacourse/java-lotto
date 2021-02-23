@@ -12,14 +12,17 @@ public class LottoController {
         Money money = new Money(InputView.inputMoney());
         ManualLottoAmount manualLottoAmount = new ManualLottoAmount(InputView.inputManualLottoAmount(), money.getPurchasableLottoCount());
         LottoTickets lottoTickets = getLottoTickets(money, manualLottoAmount);
-        LottoTicket winningTicket = getWinningTicket(lottoTickets);
+        LottoTicket winningTicket = LottoTicketFactory.createManualLottoTicket(InputView.inputWinningNumbers());
         LottoResult lottoResult = getLottoResult(lottoTickets, winningTicket);
         showResult(lottoResult, money);
     }
 
     private LottoTickets getLottoTickets(Money money, ManualLottoAmount manualLottoAmount) {
         List<LottoTicket> manualTickets = getManualLottoTickets(manualLottoAmount);
-        return LottoTicketFactory.createLottoTicketsIncludingManualTickets(money, manualTickets);
+        LottoTickets purchasedTickets = LottoTicketFactory.createLottoTicketsIncludingManualTickets(money, manualTickets);
+        OutputView.printLottoTicketsCount(purchasedTickets, manualLottoAmount);
+        OutputView.printLottoTickets(purchasedTickets);
+        return purchasedTickets;
     }
 
     private List<LottoTicket> getManualLottoTickets(ManualLottoAmount manualLottoAmount) {
@@ -30,12 +33,6 @@ public class LottoController {
                     LottoTicketFactory.createManualLottoTicket(InputView.inputLottoNumbers()));
         }
         return manualLottoTickets;
-    }
-
-    private LottoTicket getWinningTicket(LottoTickets lottoTickets) {
-        OutputView.printLottoTicketsCount(lottoTickets);
-        OutputView.printLottoTickets(lottoTickets);
-        return LottoTicketFactory.createManualLottoTicket(InputView.inputWinningNumbers());
     }
 
     private LottoResult getLottoResult(LottoTickets lottoTickets, LottoTicket winningTicket) {
