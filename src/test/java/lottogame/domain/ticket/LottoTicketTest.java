@@ -2,8 +2,10 @@ package lottogame.domain.ticket;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 import lottogame.domain.number.LottoNumber;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -15,13 +17,11 @@ public class LottoTicketTest {
 
     @BeforeEach
     void setUp() {
-        Set<LottoNumber> lottoNumberSet = new HashSet<>();
-        lottoNumberSet.add(new LottoNumber(1));
-        lottoNumberSet.add(new LottoNumber(2));
-        lottoNumberSet.add(new LottoNumber(3));
-        lottoNumberSet.add(new LottoNumber(4));
-        lottoNumberSet.add(new LottoNumber(5));
-        lottoNumberSet.add(new LottoNumber(6));
+        Set<LottoNumber> lottoNumberSet = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)
+            .stream()
+            .map(LottoNumber::new)
+            .collect(Collectors.toSet())
+        );
         this.lottoTicket = new LottoTicket(lottoNumberSet);
     }
 
