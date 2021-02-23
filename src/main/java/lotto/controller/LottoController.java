@@ -17,29 +17,25 @@ public class LottoController {
     public void start() {
         LottoService lottoService = new LottoService();
         LottoRepository lottoRepository = new LottoRepository();
-        Ticket ticket = buyTicket();
 
-        OutputView.printBuyLotto(ticket.getCount());
-        OutputView.printLottoResults(
-            lottoService.getLotto(lottoRepository, new RandomLottoMachine(), ticket));
+        Ticket ticket = buyLotto();
+        printTicketCountAndLottoResult(ticket, lottoService, lottoRepository);
 
         WinningLotto winningLotto = buyWinningLotto();
         RatingInfo ratingInfo = lottoService.scratchLotto(lottoRepository, winningLotto);
-        OutputView
-            .printWinningStats(ratingInfo,
-                lottoService.calculateEarningRate(ratingInfo, ticket.getPrice()));
+        printWinningStats(ratingInfo, lottoService, ticket);
     }
 
-    private Ticket buyTicket() {
+    private Ticket buyLotto() {
         try {
-            return tryBuyTicket();
+            return tryBuyLotto();
         } catch (IllegalArgumentException e) {
             OutputView.getMessage(e.getMessage());
-            return buyTicket();
+            return buyLotto();
         }
     }
 
-    private Ticket tryBuyTicket() {
+    private Ticket tryBuyLotto() {
         int money = InputView.getMoney();
         return new Ticket(new Money(money));
     }
@@ -57,5 +53,19 @@ public class LottoController {
         Lotto lotto = Lotto.from(InputView.getWinningNumbers());
         LottoNumber bonusNumber = new LottoNumber(InputView.getBonusBall());
         return new WinningLotto(lotto, bonusNumber);
+    }
+
+    private void printTicketCountAndLottoResult(Ticket ticket, LottoService lottoService,
+        LottoRepository lottoRepository) {
+        OutputView.printBuyLotto(ticket.getCount());
+        OutputView.printLottoResults(
+            lottoService.getLotto(lottoRepository, new RandomLottoMachine(), ticket));
+    }
+
+    private void printWinningStats(RatingInfo ratingInfo, LottoService lottoService,
+        Ticket ticket) {
+        OutputView
+            .printWinningStats(ratingInfo,
+                lottoService.calculateEarningRate(ratingInfo, ticket.getPrice()));
     }
 }
