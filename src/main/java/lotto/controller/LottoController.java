@@ -89,7 +89,7 @@ public class LottoController {
         outputView.printMessage("지난 주 당첨 번호를 입력해 주세요.");
         Lotto lotto = Lotto.createByInteger(inputView.getLottoNumbers());
         outputView.printMessage("보너스 볼을 입력해 주세요.");
-        LottoNumber bonusNumber = new LottoNumber(inputView.getInt());
+        LottoNumber bonusNumber = LottoNumber.valueOf(inputView.getInt());
         return new WinningLotto(lotto, bonusNumber);
     }
 }

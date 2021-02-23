@@ -17,7 +17,7 @@ public class WinningLottoTest {
     @DisplayName("보너스 볼이 지난 주 당첨 번호 안에 있는지 확인")
     void containBonusBallInLotto() {
         Lotto lotto = Lotto.createByInteger(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoNumber bonusBall = new LottoNumber(6);
+        LottoNumber bonusBall = LottoNumber.valueOf(6);
         assertThatThrownBy(() -> new WinningLotto(lotto, bonusBall))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("중복된");
@@ -28,7 +28,7 @@ public class WinningLottoTest {
     void scratch() {
         LottoMachine lottoMachine = new TestLottoMachine();
         Lotto lotto = new Lotto(lottoMachine.generate());
-        WinningLotto winningLotto = new WinningLotto(lotto, new LottoNumber(7));
+        WinningLotto winningLotto = new WinningLotto(lotto, LottoNumber.valueOf(7));
         assertThat(winningLotto.scratch(lotto)).isEqualTo(Rating.FIRST);
     }
 }

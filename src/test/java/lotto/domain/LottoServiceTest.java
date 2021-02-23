@@ -32,7 +32,7 @@ public class LottoServiceTest {
         lottoService.generateLottos(ticket);
         List<Integer> lottoNumbers = lottoMachine.generate()
                                                  .stream()
-                                                 .map(LottoNumber::getNumber)
+                                                 .map(LottoNumber::intValue)
                                                  .collect(Collectors.toList());
 
         List<Lotto> lottos = lottoService.getLottos();
@@ -58,7 +58,7 @@ public class LottoServiceTest {
         Lotto lotto = new Lotto(lottoMachine.generate());
 
         lottoService.generateLottos(ticket);
-        WinningLotto winningLotto = new WinningLotto(lotto, new LottoNumber(7));
+        WinningLotto winningLotto = new WinningLotto(lotto, LottoNumber.valueOf(7));
         lottoService.scratchLotto(winningLotto);
         RatingCounter ratingCounter = lottoService.getRatingCounter();
 

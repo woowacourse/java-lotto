@@ -10,7 +10,7 @@ public class Lotto {
 
     public static Lotto createByInteger(final List<Integer> numbers) {
         return new Lotto(numbers.stream()
-                                .map(LottoNumber::new)
+                                .map(LottoNumber::valueOf)
                                 .collect(Collectors.toList()));
     }
 
@@ -49,7 +49,7 @@ public class Lotto {
     public List<Integer> getNumbers() {
         List<LottoNumber> copyNumbers = new ArrayList<>(numbers);
         return Collections.unmodifiableList(copyNumbers.stream()
-                                                       .map(LottoNumber::getNumber)
+                                                       .map(LottoNumber::intValue)
                                                        .sorted()
                                                        .collect(Collectors.toList()));
     }
