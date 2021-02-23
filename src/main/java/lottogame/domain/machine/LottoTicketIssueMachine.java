@@ -21,9 +21,13 @@ public class LottoTicketIssueMachine {
         validateMinPurchaseAmount(this.money);
     }
 
+    public static int getTicketPrice() {
+        return TICKET_PRICE;
+    }
+
     private void validateMinPurchaseAmount(final Money money) {
         if (!money.canBuyAmount(TICKET_PRICE)) {
-            throw new IllegalArgumentException("최소 입력 금액은 1000원 이상입니다.");
+            throw new IllegalArgumentException("최소 입력 금액은 " + TICKET_PRICE + "원 이상입니다.");
         }
     }
 
@@ -42,9 +46,5 @@ public class LottoTicketIssueMachine {
             lottoNumbers.add(new LottoNumber());
         }
         return lottoNumbers;
-    }
-
-    public static int getTicketPrice() {
-        return TICKET_PRICE;
     }
 }
