@@ -8,11 +8,19 @@ import java.util.List;
 public class LottoTickets {
 
     public static final int TICKET_PRICE = 1000;
+    private int autoTicketCount;
 
     private final List<LottoTicket> lottoTickets = new ArrayList<>();
 
     public void add(final LottoTicket lottoTicket) {
         lottoTickets.add(lottoTicket);
+        countAutoTicket(lottoTicket);
+    }
+
+    private void countAutoTicket(final LottoTicket lottoTicket) {
+        if (lottoTicket.isAutoTicket()) {
+            autoTicketCount++;
+        }
     }
 
     public List<LottoTicket> toList() {
@@ -21,6 +29,14 @@ public class LottoTickets {
 
     public int getTicketsCount() {
         return lottoTickets.size();
+    }
+
+    public int getAutoTicketsCount() {
+        return autoTicketCount;
+    }
+
+    public int getManualTicketsCount() {
+        return lottoTickets.size() - autoTicketCount;
     }
 
     public int getCostUsedToBuy() {

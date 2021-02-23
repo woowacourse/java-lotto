@@ -1,7 +1,12 @@
 package lottogame.domain.ticket;
 
+import lottogame.domain.number.LottoNumber;
+import lottogame.domain.number.LottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,5 +21,22 @@ public class LottoTicketsTest {
         lottoTickets.add(lottoTicket1);
 
         assertThat(lottoTickets.toList().size()).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("수동 티켓이 1개, 자동 티켓이 1개 삽입 되었을때 올바른 결과를 가져온다.")
+    void lottoTicketCount() {
+        LottoTicket autoTicket = new LottoAutoTicket();
+        List<LottoNumber> lottoNumberGroup = new ArrayList<>();
+        for (int i = 1; i <= 6; ++i) {
+            lottoNumberGroup.add(new LottoNumber(i));
+        }
+        LottoManualTicket manualTicket = new LottoManualTicket(new LottoNumbers(lottoNumberGroup));
+        LottoTickets lottoTickets = new LottoTickets();
+        lottoTickets.add(manualTicket);
+        lottoTickets.add(autoTicket);
+
+        assertThat(lottoTickets.getAutoTicketsCount()).isEqualTo(1);
+        assertThat(lottoTickets.getManualTicketsCount()).isEqualTo(1);
     }
 }
