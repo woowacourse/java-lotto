@@ -15,16 +15,17 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
-    public static LottoTickets generate(List<ManualTicket> manualTicketsNumbers, int automaticTicketCounts, LottoNumberGenerator lottoNumberGenerator) {
-        Stream<LottoTicket> manualTickets = generateManual(manualTicketsNumbers);
-        Stream<LottoTicket> automaticTickets = generateAutomatic(automaticTicketCounts, lottoNumberGenerator);
-        List<LottoTicket> concatLottoTickets = Stream.concat(manualTickets, automaticTickets)
+    public static LottoTickets generate(ManualTickets manualTickets, int automaticTicketCounts, LottoNumberGenerator lottoNumberGenerator) {
+        Stream<LottoTicket> manualLottoTickets = generateManual(manualTickets);
+        Stream<LottoTicket> automaticLottoTickets = generateAutomatic(automaticTicketCounts, lottoNumberGenerator);
+        List<LottoTicket> concatLottoTickets = Stream.concat(manualLottoTickets, automaticLottoTickets)
                 .collect(Collectors.toList());
         return new LottoTickets(concatLottoTickets);
     }
 
-    private static Stream<LottoTicket> generateManual(List<ManualTicket> manualTicketsNumbers) {
-        return manualTicketsNumbers.stream()
+    private static Stream<LottoTicket> generateManual(ManualTickets manualTickets) {
+        return manualTickets.getManualTickets()
+                .stream()
                 .map(ManualTicket::getManualTicketNumbers)
                 .map(LottoTicket::from);
     }
