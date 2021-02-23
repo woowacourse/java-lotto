@@ -9,10 +9,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LottoTicketTest {
 
     private Set<LottoNumber> lottoNumbers;
+    private Set<LottoNumber> sizeOverLottoNumbers;
+    private Set<LottoNumber> sizeLessLottoNumbers;
 
     @BeforeEach
     void setUp() {
@@ -22,7 +25,10 @@ public class LottoTicketTest {
         LottoNumber lotto4 = new LottoNumber(4);
         LottoNumber lotto5 = new LottoNumber(5);
         LottoNumber lotto6 = new LottoNumber(6);
+        LottoNumber lotto7 = new LottoNumber(7);
         lottoNumbers = new HashSet<>(Arrays.asList(lotto1, lotto2, lotto3, lotto4, lotto5, lotto6));
+        sizeLessLottoNumbers = new HashSet<>(Arrays.asList(lotto1, lotto2, lotto3, lotto4, lotto5));
+        sizeOverLottoNumbers = new HashSet<>(Arrays.asList(lotto1, lotto2, lotto3, lotto4, lotto5, lotto6, lotto7));
     }
 
     @Test
@@ -30,5 +36,14 @@ public class LottoTicketTest {
     void createLotto() {
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
         assertThat(lottoTicket).isEqualTo(new LottoTicket(lottoNumbers));
+    }
+
+    @Test
+    @DisplayName("로또는 총 6개의 숫자로 이루어져야한다.")
+    void lottoSize() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new LottoTicket(sizeLessLottoNumbers));
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new LottoTicket(sizeOverLottoNumbers));
     }
 }
