@@ -29,4 +29,8 @@ public class LottoBall {
             throw new IllegalArgumentException(MIN_NUMBER + "~" + MAX_NUMBER + " 사이의 번호만 허용합니다.");
         }
     }
+
+    public int getNumber() {
+        return number;
+    }
 }
