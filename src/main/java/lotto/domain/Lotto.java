@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.exception.Lotto.LottoNumberCountException;
+import lotto.exception.Lotto.LottoNumberNotIntegerException;
 import lotto.exception.Lotto.LottoNumberNullException;
 import lotto.exception.Lotto.LottoNumberScopeException;
 
@@ -39,8 +40,8 @@ public class Lotto {
                     .map(String::trim)
                     .map(Integer::parseInt)
                     .collect(Collectors.toList());
-        } catch (LottoNumberCountException e) {
-            throw new LottoNumberCountException();
+        } catch (NumberFormatException e) {
+            throw new LottoNumberNotIntegerException();
         }
     }
 

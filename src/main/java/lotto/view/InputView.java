@@ -1,6 +1,6 @@
 package lotto.view;
 
-import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -13,17 +13,28 @@ public class InputView {
     private static final String INPUT_BONUS_BALL_NUMBER = "보너스 볼을 입력해주세요";
     private static final String INPUT_MANUAL_LOTTO_NUMBERS = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String INPUT_MANUAL_LOTTO_NUMBER = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String INPUT_MISMATCH_ERROR_MESSAGE = "[ERROR] 숫자를 입력해주세요.";
 
     public static int inputMoney() {
         OutputView.printInputMessage(INPUT_MONEY);
-        int money = scanner.nextInt();
+        int money;
+        try {
+            money = scanner.nextInt();
+        } catch (InputMismatchException e) {
+            throw new IllegalArgumentException(INPUT_MISMATCH_ERROR_MESSAGE);
+        }
         scanner.nextLine();
         return money;
     }
 
     public static int inputManualLottoCount() {
         OutputView.printInputMessage(INPUT_MANUAL_LOTTO_NUMBER);
-        int manualLottoCount = scanner.nextInt();
+        int manualLottoCount;
+        try {
+            manualLottoCount = scanner.nextInt();
+        } catch (InputMismatchException e) {
+            throw new IllegalArgumentException(INPUT_MISMATCH_ERROR_MESSAGE);
+        }
         scanner.nextLine();
         return manualLottoCount;
     }
@@ -43,6 +54,12 @@ public class InputView {
 
     public static int inputBonusNumber() {
         System.out.println(INPUT_BONUS_BALL_NUMBER);
-        return scanner.nextInt();
+        int bonusNumber;
+        try {
+            bonusNumber = scanner.nextInt();
+        } catch (InputMismatchException e) {
+            throw new IllegalArgumentException(INPUT_MISMATCH_ERROR_MESSAGE);
+        }
+        return bonusNumber;
     }
 }
