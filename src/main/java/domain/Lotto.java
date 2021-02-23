@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
@@ -40,5 +41,9 @@ public class Lotto {
         return (int) this.lotto.stream()
                 .filter(lottoBall -> lottoToCompare.contains(lottoBall))
                 .count();
+    }
+
+    public List<LottoBall> getLotto() {
+        return Collections.unmodifiableList(lotto);
     }
 }
