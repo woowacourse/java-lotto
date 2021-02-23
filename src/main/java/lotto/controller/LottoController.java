@@ -8,21 +8,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static lotto.view.InputView.*;
+import static lotto.view.OutputView.showLottos;
+import static lotto.view.OutputView.showResultStatistics;
+
 public class LottoController {
 	//TODO
-	// lotto quantity에 대한 클래스 만들고 에서 음수 인지 검증?
 	// lotto machine 만들고 생산에 대한 로직 담당 (lottoQuantity를 인자로?)
 	public void tryLotto(Scanner scanner) {
-		Money money = new Money(InputView.takeMoneyInput(scanner));
-		LottoQuantity manualLottoQuantity = new LottoQuantity(InputView.takeManualLottoQuantityInput(scanner));
+		Money money = new Money(takeMoneyInput(scanner));
+		LottoQuantity manualLottoQuantity = new LottoQuantity(takeManualLottoQuantityInput(scanner));
 		money.validateAffordabilityOf(manualLottoQuantity);
-		List<int[]> manualLottoNumbersSequence = InputView.takeManualLottoNumbersInput(scanner, manualLottoQuantity);
+		List<int[]> manualLottoNumbersSequence = takeManualLottoNumbersInput(scanner, manualLottoQuantity);
 
 		Lottos lottos = buyLottos(manualLottoNumbersSequence, manualLottoQuantity, money);
-		OutputView.showLottos(lottos, manualLottoQuantity);
+		showLottos(lottos, manualLottoQuantity);
 
 		List<Rank> results = lottos.getResults(getWinningLotto(scanner));
-		OutputView.showResultStatistics(new LottoStatistics(results, money));
+		showResultStatistics(new LottoStatistics(results, money));
 	}
 
 	private Lottos buyLottos(List<int[]> manualLottoNumbersSequence, LottoQuantity manualLottoQuantity, Money money) {
@@ -42,9 +45,10 @@ public class LottoController {
 		return new Lottos(lottos);
 	}
 
+	//TODO List<int[]>뿐만 아니라 int[]도 받을 수 있게 할까?
 	private WinningLotto getWinningLotto(Scanner scanner) {
-		List<int[]> winningNumbers = InputView.takeWinningNumbersInput(scanner);
-		int bonusNumber = InputView.takeBonusNumberInput(scanner);
+		List<int[]> winningNumbers = takeWinningNumbersInput(scanner);
+		int bonusNumber = takeBonusNumberInput(scanner);
 		return new WinningLotto(new ManualLottoGenerator(winningNumbers).createLotto(), new LottoNumber(bonusNumber));
 	}
 }
