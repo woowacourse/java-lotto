@@ -23,7 +23,7 @@ public class WinningTicketAndBonusNumber {
     public MatchedLottoNumbers getMatchedLottoNumbers(LottoTicket lottoTicket) {
         LottoNumber matchedBonusNumber = getMatchedBonusNumber(lottoTicket);
         List<LottoNumber> matchedLottoNumbersExceptBonusNumber
-            = winningTicket.getMatchedLottoNumbers(lottoTicket.getNumbers());
+            = winningTicket.getMatchedLottoNumbers(lottoTicket);
         if (matchedBonusNumber != null) {
             matchedLottoNumbersExceptBonusNumber.remove(matchedBonusNumber);
         }

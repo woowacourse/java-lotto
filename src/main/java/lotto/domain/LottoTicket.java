@@ -43,8 +43,8 @@ public class LottoTicket {
         return numbers.contains(lottoNumber);
     }
 
-    public List<LottoNumber> getMatchedLottoNumbers(List<LottoNumber> lottoNumbers) {
-        return lottoNumbers.stream()
+    public List<LottoNumber> getMatchedLottoNumbers(LottoTicket lottoTicket) {
+        return lottoTicket.getNumbers().stream()
             .filter(numbers::contains)
             .collect(Collectors.toList());
     }
