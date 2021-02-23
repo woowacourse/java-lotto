@@ -63,7 +63,7 @@
 - [x] null이 아닌 enter가 입력된 경우 예외처리
 - [x] 코딩 컨벤션 으로 static final 순서 수정
 - [ ] LottoMachine 생성시 Generator 인자로 전달
-- [ ] LottoNumber에 캐시 자료구조 변경 고려
+- [x] LottoNumber에 캐시 자료구조 변경 고려
 - [ ] LottoSystem에 Getter 불변 객체 반환으로 수정
 - [ ] LottoTicket ValidateDuplicatedNumber 메소드 고민 필요
 - [ ] InputView에서 숫자를 parseInt로 받는 것 고려 - 예외 처리 방식 변경

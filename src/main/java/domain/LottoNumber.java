@@ -1,15 +1,15 @@
 package domain;
 
-import java.util.HashSet;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 
 public class LottoNumber {
 
     private static final int MIN_NUMBER_VALUE = 1;
     private static final int MAX_NUMBER_VALUE = 45;
 
-    private static final Set<LottoNumber> existingNumbers = new HashSet<>();
+    private static final Map<Integer, LottoNumber> existingNumbers = new HashMap<>();
 
     private final int value;
 
@@ -19,16 +19,8 @@ public class LottoNumber {
 
     public static LottoNumber valueOf(final int value) {
         validateRange(value);
-        LottoNumber lottoNumber = getInstance(value);
-        existingNumbers.add(lottoNumber);
-        return lottoNumber;
-    }
-
-    private static LottoNumber getInstance(int value) {
-        return existingNumbers.stream()
-            .filter(number -> number.getValue() == value)
-            .findAny()
-            .orElse(new LottoNumber(value));
+        existingNumbers.putIfAbsent(value, new LottoNumber(value));
+        return existingNumbers.get(value);
     }
 
     private static void validateRange(final int value) {
