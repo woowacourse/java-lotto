@@ -1,13 +1,12 @@
 package lotto.ticket.strategy;
 
 import lotto.ticket.Number;
+import lotto.ticket.Ticket;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static lotto.ticket.Number.NUMBER_COUNT_IN_LOTTO;
 
 public class RandomNumbersGenerator implements NumbersGenerator {
 
@@ -17,7 +16,7 @@ public class RandomNumbersGenerator implements NumbersGenerator {
         Collections.shuffle(numbers);
 
         return numbers.stream()
-                .limit(NUMBER_COUNT_IN_LOTTO)
+                .limit(Ticket.NUMBER_COUNT)
                 .sorted()
                 .collect(Collectors.toList());
     }

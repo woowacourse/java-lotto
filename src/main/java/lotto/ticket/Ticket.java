@@ -9,6 +9,11 @@ import static lotto.game.LottoCount.ONE_COUNT;
 import static lotto.game.LottoCount.ZERO;
 
 public class Ticket {
+    public static final int PRICE = 1000;
+    public static final int MIN_NUMBER = 1;
+    public static final int MAX_NUMBER = 45;
+    public static final int NUMBER_COUNT = 6;
+
     private final List<Number> numbers;
 
     public Ticket(List<Number> numbers) {

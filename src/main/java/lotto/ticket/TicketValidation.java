@@ -5,7 +5,6 @@ import lotto.game.LottoCount;
 import java.util.List;
 
 import static lotto.game.LottoCount.ZERO;
-import static lotto.ticket.Number.*;
 
 public class TicketValidation {
     public static final String ERROR_MESSAGE_DUPLICATED = "중복되는 숫자가 존재합니다.";
@@ -38,13 +37,13 @@ public class TicketValidation {
     }
 
     public static void validateNumberInRange(int number) {
-        if (number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER) {
+        if (number < Ticket.MIN_NUMBER || number > Ticket.MAX_NUMBER) {
             throw new IllegalArgumentException(ERROR_MESSAGE_INVALID_RANGE);
         }
     }
 
     public static void validateSize(List<Number> value) {
-        if (value.size() != NUMBER_COUNT_IN_LOTTO) {
+        if (value.size() != Ticket.NUMBER_COUNT) {
             throw new IllegalArgumentException(ERROR_MESSAGE_INVALID_SIZE);
         }
     }

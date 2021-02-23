@@ -23,7 +23,7 @@ public class RandomNumbersGeneratorTest {
     @Test
     @DisplayName("자동 로또 생성 숫자 6개 확인")
     void randomNumbersCreate() {
-        assertThat(randomNumbers.size()).isEqualTo(6);
+        assertThat(randomNumbers.size()).isEqualTo(Ticket.NUMBER_COUNT);
     }
 
     @Test

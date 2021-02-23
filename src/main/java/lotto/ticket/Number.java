@@ -7,14 +7,12 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Number implements Comparable<Number> {
-    public static final int MINIMUM_NUMBER = 1;
-    public static final int MAXIMUM_NUMBER = 45;
-    public static final int NUMBER_COUNT_IN_LOTTO = 6;
+
 
     private static final List<Number> cache;
 
     static {
-        cache = IntStream.rangeClosed(MINIMUM_NUMBER, MAXIMUM_NUMBER)
+        cache = IntStream.rangeClosed(Ticket.MIN_NUMBER, Ticket.MAX_NUMBER)
                 .mapToObj(Integer::toString)
                 .map(Number::new)
                 .collect(Collectors.toList());

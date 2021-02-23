@@ -105,6 +105,6 @@ public class TicketTest {
     void checkManualTicketSize() {
         List<Number> numbers = new ManualNumbersGenerator("1,2,3,4,5,6").generate();
         List<Number> ticket = new Ticket(numbers).getTicket();
-        assertThat(ticket.size()).isEqualTo(6);
+        assertThat(ticket.size()).isEqualTo(Ticket.NUMBER_COUNT);
     }
 }
