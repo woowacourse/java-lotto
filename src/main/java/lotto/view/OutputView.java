@@ -7,14 +7,14 @@ import java.util.stream.Collectors;
 
 public class OutputView {
 
-    public static final String LOTTO_PURCHASE_FORM = "수동으로 %d장, 자동으로 %d개를 구매했습니다." + System.lineSeparator();
-    public static final String RANK_BONUS_FORM = "%s개 일치, 보너스 볼 일치(%s원)- %s개" + System.lineSeparator();
-    public static final String RANK_FORM = "%s개 일치 (%s원)- %s개" + System.lineSeparator();
-    public static final String LOTTO_DELIMITER = ", ";
-    public static final String LOTTO_FORM = "[%s]" + System.lineSeparator();
-    public static final String PROFIT_FORM = "총 수익률은 %.2f 입니다." + System.lineSeparator();
-    public static final String GAME_RESULT = "당첨 통계";
-    public static final String SECTION_DELIMITER = "--------";
+    private static final String LOTTO_PURCHASE_FORM = "수동으로 %d장, 자동으로 %d개를 구매했습니다." + System.lineSeparator();
+    private static final String RANK_BONUS_FORM = "%s개 일치, 보너스 볼 일치(%s원)- %s개" + System.lineSeparator();
+    private static final String RANK_FORM = "%s개 일치 (%s원)- %s개" + System.lineSeparator();
+    private static final String LOTTO_DELIMITER = ", ";
+    private static final String LOTTO_FORM = "[%s]" + System.lineSeparator();
+    private static final String PROFIT_FORM = "총 수익률은 %.2f 입니다." + System.lineSeparator();
+    private static final String GAME_RESULT = "당첨 통계";
+    private static final String SECTION_DELIMITER = "--------";
 
 
     public static void printMessage(final String message) {
@@ -71,7 +71,7 @@ public class OutputView {
 
     private static void printByRankForm(String rankBonusForm, Map.Entry<Rank, Integer> entry) {
         String rank = String.valueOf(entry.getKey().getCountOfMatch());
-        String reward = String.format("%.2f", entry.getKey().getReward());
+        String reward = String.valueOf(entry.getKey().getReward());
         String matchCount = String.valueOf(entry.getValue());
 
         printMessageByFormat(rankBonusForm, rank, reward, matchCount);
