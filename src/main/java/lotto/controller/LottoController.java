@@ -29,8 +29,8 @@ public class LottoController {
     }
 
     private LottoCount getLottoCount(int totalLottoCount) {
-        String inputManualLottoCount = InputView.inputManualLottoCount();
-        return new LottoCount(inputManualLottoCount, totalLottoCount);
+        int inputManualCount = ParseUtil.parseInt(InputView.inputManualLottoCount());
+        return new LottoCount(inputManualCount, totalLottoCount);
     }
 
     private LottoTickets buyLottoTickets(LottoCount lottoCount) {
