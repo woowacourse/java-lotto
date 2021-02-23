@@ -13,7 +13,7 @@ public class LottoTicket {
     private final Set<LottoNumber> lottoNumbers;
 
     private LottoTicket(final Set<LottoNumber> lottoNumbers) {
-        validate(lottoNumbers);
+        validateIncorrectSize(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -26,17 +26,6 @@ public class LottoTicket {
             .sorted()
             .map(LottoNumber::valueOf)
             .collect(Collectors.toSet());
-    }
-
-    private static void validate(final Set<LottoNumber> lottoNumbers) {
-        validateDuplicateNumbers(lottoNumbers);
-        validateIncorrectSize(lottoNumbers);
-    }
-
-    private static void validateDuplicateNumbers(final Set<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() < LOTTO_TICKET_SIZE) {
-            throw new IllegalArgumentException(DUPLICATE_NUMBER_ERROR);
-        }
     }
 
     private static void validateIncorrectSize(final Set<LottoNumber> lottoNumbers) {
