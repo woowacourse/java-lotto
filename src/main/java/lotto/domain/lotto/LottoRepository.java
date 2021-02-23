@@ -1,6 +1,7 @@
 package lotto.domain.lotto;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import lotto.domain.lottomachine.LottoMachine;
@@ -13,6 +14,10 @@ public class LottoRepository {
         for (int i = 0; i < ticketCount; i++) {
             lottos.add(Lotto.from(lottoMachine.generate()));
         }
+    }
+
+    public void generateLottoByManual(final Lotto lotto) {
+        lottos.add(lotto);
     }
 
     public List<Lotto> toList() {

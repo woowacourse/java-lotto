@@ -27,4 +27,13 @@ public class LottoRepositoryTest {
         assertThat(lottoRepository.toList().get(0).getNumbers()).isEqualTo(expected);
     }
 
+    @Test
+    @DisplayName("로또 수동 생성 정보 비교")
+    void compareLottoByManual() {
+        List<Integer> expected = Arrays.asList(1, 2, 3, 4, 5, 6);
+        LottoRepository lottoRepository = new LottoRepository();
+        lottoRepository.generateLottoByManual(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        assertThat(lottoRepository.toList().get(0).getNumbers()).isEqualTo(expected);
+    }
+
 }
