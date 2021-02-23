@@ -1,6 +1,7 @@
 package lotto.domain.lotto;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import lotto.domain.Rank;
@@ -28,6 +29,6 @@ public class LottoTicket {
     }
 
     public List<LottoLine> getLottoLines() {
-        return lottoLines;
+        return Collections.unmodifiableList(lottoLines);
     }
 }
