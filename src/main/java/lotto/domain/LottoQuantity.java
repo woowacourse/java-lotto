@@ -12,11 +12,11 @@ public class LottoQuantity {
 	private final int lottoQuantity;
 
 	public LottoQuantity(int lottoQuantity) {
-		validateNonNegativityOf(lottoQuantity);
+		validateNonNegativity(lottoQuantity);
 		this.lottoQuantity = lottoQuantity;
 	}
 
-	private void validateNonNegativityOf(int lottoQuantity) {
+	private void validateNonNegativity(int lottoQuantity) {
 		if (lottoQuantity < 0) {
 			throw new IllegalArgumentException(NEGATIVE_LOTTO_QUANTITY_ERROR);
 		}
@@ -32,10 +32,6 @@ public class LottoQuantity {
 
 	public long getTotalPrice() {
 		return (long) lottoQuantity * LOTTO_PRICE;
-	}
-
-	public int getLeftLottoQuantityOf(int lottoQuantity) {
-		return lottoQuantity - this.lottoQuantity;
 	}
 
 	public int getLottoQuantity() {

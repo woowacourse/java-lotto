@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -27,14 +28,22 @@ public class Lottos {
 		return Collections.unmodifiableList(lottos);
 	}
 
-	// TODO 메서드명 괜찮은가?
-	public int getLottoQuantityExcept(LottoQuantity manualLottoQuantity) {
-		return manualLottoQuantity.getLeftLottoQuantityOf(lottos.size());
-	}
-
 	public Lottos merge(Lottos that) {
 		List<Lotto> newLottos = Stream.concat(this.lottos.stream(), that.lottos.stream())
 				.collect(Collectors.toList());
 		return new Lottos(newLottos);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Lottos lottos1 = (Lottos) o;
+		return lottos.equals(lottos1.lottos);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(lottos);
 	}
 }
