@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import static lotto.domain.Money.LOTTO_PRICE;
@@ -18,6 +20,14 @@ public class LottoQuantity {
 		if (lottoQuantity < 0) {
 			throw new IllegalArgumentException(NEGATIVE_LOTTO_QUANTITY_ERROR);
 		}
+	}
+
+	public Lottos createLottosWith(LottoGenerator lottoGenerator) {
+		List<Lotto> lottos = new ArrayList<>();
+		for (int i = 0; i < lottoQuantity; i++) {
+			lottos.add(lottoGenerator.createLotto());
+		}
+		return new Lottos(lottos);
 	}
 
 	public long getTotalPrice() {

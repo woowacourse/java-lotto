@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoMachine {
@@ -18,18 +17,10 @@ public class LottoMachine {
 	}
 
 	public Lottos createLottosFrom(List<int[]> manualLottoNumbersSequence) {
-		Lottos manualLottos = create(new ManualLottoGenerator(manualLottoNumbersSequence), manualLottoQuantity);
-		Lottos autoLottos = create(new AutomaticLottoGenerator(), autoLottoQuantity);
+		Lottos manualLottos = manualLottoQuantity.createLottosWith(new ManualLottoGenerator(manualLottoNumbersSequence));
+		Lottos autoLottos = autoLottoQuantity.createLottosWith(new AutomaticLottoGenerator());
 
 		return manualLottos.merge(autoLottos);
-	}
-
-	private Lottos create(LottoGenerator lottoGenerator, LottoQuantity lottoQuantity) {
-		List<Lotto> lottos = new ArrayList<>();
-		for (int i = 0; i < lottoQuantity.getLottoQuantity(); i++) {
-			lottos.add(lottoGenerator.createLotto());
-		}
-		return new Lottos(lottos);
 	}
 
 	public Money getMoney() {
