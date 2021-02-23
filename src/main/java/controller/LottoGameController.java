@@ -20,9 +20,14 @@ public class LottoGameController {
     }
 
     private GameMoney makeGameMoney() {
-        OutputView.printGameMoneyRequest();
-        int userGameMoney = InputView.getGameMoney();
-        return new GameMoney(userGameMoney);
+        try {
+            OutputView.printGameMoneyRequest();
+            int userGameMoney = InputView.getGameMoney();
+            return new GameMoney(userGameMoney);
+        } catch (IllegalArgumentException e) {
+            OutputView.printErrorMessage(e.getMessage());
+            return makeGameMoney();
+        }
     }
 
     private LottoBundle makeLottoBundle(final GameMoney gameMoney) {
