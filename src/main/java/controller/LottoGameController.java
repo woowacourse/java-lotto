@@ -14,9 +14,9 @@ public class LottoGameController {
 
         final LottoBundle lottoBundle = makeLottoBundle(gameMoney);
 
-        final WinningLotto winningLotto = makeWinningLotto();
+        final WinningResult winningResult = makeWinningResult();
 
-        makeLottoResult(lottoBundle, winningLotto, gameMoney);
+        makeLottoResult(lottoBundle, winningResult, gameMoney);
     }
 
     private GameMoney makeGameMoney() {
@@ -36,18 +36,18 @@ public class LottoGameController {
         return lottoBundle;
     }
 
-    private WinningLotto makeWinningLotto() {
+    private WinningResult makeWinningResult() {
         try {
-            final Lotto winningLotto = makeLottoWinningLotto();
+            final Lotto winningLotto = makeWinningLotto();
             final LottoBall bonusBall = makeBonusBall();
-            return new WinningLotto(winningLotto, bonusBall);
+            return new WinningResult(winningLotto, bonusBall);
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
-            return makeWinningLotto();
+            return makeWinningResult();
         }
     }
 
-    private Lotto makeLottoWinningLotto() {
+    private Lotto makeWinningLotto() {
         try {
             OutputView.printWinningLottoRequest();
             final List<Integer> winningLottoNumber = InputView.getWinningLotto();
@@ -56,7 +56,7 @@ public class LottoGameController {
                     .collect(Collectors.toList()));
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
-            return makeLottoWinningLotto();
+            return makeWinningLotto();
         }
     }
 
@@ -71,10 +71,10 @@ public class LottoGameController {
         }
     }
 
-    private void makeLottoResult(final LottoBundle lottoBundle, final WinningLotto winningLotto, final GameMoney gameMoney) {
+    private void makeLottoResult(final LottoBundle lottoBundle, final WinningResult winningResult, final GameMoney gameMoney) {
         final LottoResult lottoResult = new LottoResult();
 
-        final Map<LottoRank, Integer> gameResult = lottoResult.checkResult(lottoBundle, winningLotto);
+        final Map<LottoRank, Integer> gameResult = lottoResult.checkResult(lottoBundle, winningResult);
         OutputView.printLottoResult(gameResult);
 
         final double profitRate = lottoResult.checkProfitRate(gameResult);

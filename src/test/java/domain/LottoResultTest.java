@@ -14,14 +14,14 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 public class LottoResultTest {
     private static LottoBundle lottoBundle;
-    private static WinningLotto winningLotto;
+    private static WinningResult winningResult;
 
     private LottoResult lottoResult;
 
     @BeforeAll
     static void setUp() {
         lottoBundle = makeLottoBundle();
-        winningLotto = makeWinningLotto();
+        winningResult = makeWinningLotto();
     }
 
     private static LottoBundle makeLottoBundle() {
@@ -31,8 +31,8 @@ public class LottoResultTest {
         ));
     }
 
-    private static WinningLotto makeWinningLotto() {
-        return new WinningLotto(makeLotto(2, 7), LottoBall.valueOf(8));
+    private static WinningResult makeWinningLotto() {
+        return new WinningResult(makeLotto(2, 7), LottoBall.valueOf(8));
     }
 
     private static Lotto makeLotto(final int from, final int to) {
@@ -51,7 +51,7 @@ public class LottoResultTest {
     @DisplayName("checkResult 테스트")
     @Test
     void LottoResultCheckResult() {
-        final Map<LottoRank, Integer> result = lottoResult.checkResult(lottoBundle, winningLotto);
+        final Map<LottoRank, Integer> result = lottoResult.checkResult(lottoBundle, winningResult);
         assertThat(result.get(LottoRank.NONE_MATCHES)).isEqualTo(0);
         assertThat(result.get(LottoRank.THREE_MATCHES)).isEqualTo(0);
         assertThat(result.get(LottoRank.FOUR_MATCHES)).isEqualTo(0);
@@ -63,7 +63,7 @@ public class LottoResultTest {
     @DisplayName("checkProfitRate 테스트")
     @Test
     void LottoResultCheckProfitRate() {
-        final Map<LottoRank, Integer> result = lottoResult.checkResult(lottoBundle, winningLotto);
+        final Map<LottoRank, Integer> result = lottoResult.checkResult(lottoBundle, winningResult);
         final double profitRate = lottoResult.checkProfitRate(result);
 
         final int moneyGain = LottoRank.FIVE_AND_BONUS_MATCHES.getPrizeMoney() + LottoRank.FIVE_MATCHES.getPrizeMoney();

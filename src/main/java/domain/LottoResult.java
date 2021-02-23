@@ -9,22 +9,22 @@ public class LottoResult {
     private static final int SETUP_VALUE = 0;
     private static final int SINGLE_LOTTO_GAME_COST = 1000;
 
-    public Map<LottoRank, Integer> checkResult(final LottoBundle lottoBundle, final WinningLotto winningLotto) {
+    public Map<LottoRank, Integer> checkResult(final LottoBundle lottoBundle, final WinningResult winningResult) {
         final Map<LottoRank, Integer> lottoResult = new HashMap<>();
         Arrays.stream(LottoRank.values())
                 .forEach(lottoRank -> lottoResult.put(lottoRank, SETUP_VALUE));
 
         for (Lotto lotto : lottoBundle.getLottoBundle()) {
-            LottoRank lottoRank = checkSingleLottoRank(lotto, winningLotto);
+            LottoRank lottoRank = checkSingleLottoRank(lotto, winningResult);
             lottoResult.put(lottoRank, lottoResult.get(lottoRank) + 1);
         }
 
         return Collections.unmodifiableMap(lottoResult);
     }
 
-    private LottoRank checkSingleLottoRank(final Lotto lotto, final WinningLotto winningLotto) {
-        final int matchNumberResult = winningLotto.matchWinningLotto(lotto);
-        final boolean matchBonusBallResult = winningLotto.matchBonusBall(lotto);
+    private LottoRank checkSingleLottoRank(final Lotto lotto, final WinningResult winningResult) {
+        final int matchNumberResult = winningResult.matchWinningLotto(lotto);
+        final boolean matchBonusBallResult = winningResult.matchBonusBall(lotto);
         final LottoRank lottoRank = LottoRank.findLottoRank(matchNumberResult, matchBonusBallResult);
         return lottoRank;
     }

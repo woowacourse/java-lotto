@@ -15,7 +15,7 @@ public class WinningLottoTest {
     void WinningLottoConstructor() {
         Lotto lotto = makeProperLotto();
         LottoBall lottoBall = LottoBall.valueOf(7);
-        assertThatCode(() -> new WinningLotto(lotto, lottoBall))
+        assertThatCode(() -> new WinningResult(lotto, lottoBall))
                 .doesNotThrowAnyException();
     }
 
@@ -24,7 +24,7 @@ public class WinningLottoTest {
     void WinningLottoErrorTest() {
         Lotto lotto = makeProperLotto();
         LottoBall lottoBall = LottoBall.valueOf(1);
-        assertThatThrownBy(() -> new WinningLotto(lotto, lottoBall))
+        assertThatThrownBy(() -> new WinningResult(lotto, lottoBall))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("보너스 볼은 당첨 번호와 중복될 수 없습니다.");
     }
