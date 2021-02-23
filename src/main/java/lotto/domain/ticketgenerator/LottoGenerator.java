@@ -1,12 +1,13 @@
 package lotto.domain.ticketgenerator;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.ticketpurchase.PurchasedLottoTickets;
 import lotto.domain.ticketpurchase.UserPurchase;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class LottoGenerator {
     private static final int ZERO = 0;
@@ -24,9 +25,13 @@ public class LottoGenerator {
 
         for (int i = 0; i < userPurchase.getNumberOfTicket(); i++) {
             Collections.shuffle(allNumbers);
-            List<LottoNumber> numbers = new ArrayList<>(allNumbers.subList(ZERO, LottoTicket.SIZE));
-            lottoTickets.add(new LottoTicket(numbers));
+            generateTicket(lottoTickets);
         }
         return new PurchasedLottoTickets(lottoTickets);
+    }
+
+    private void generateTicket(List<LottoTicket> lottoTickets) {
+        List<LottoNumber> numbers = new ArrayList<>(allNumbers.subList(ZERO, LottoTicket.SIZE));
+        lottoTickets.add(new LottoTicket(numbers));
     }
 }
