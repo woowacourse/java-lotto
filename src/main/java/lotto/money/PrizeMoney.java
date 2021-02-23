@@ -5,10 +5,10 @@ import lotto.ranking.Statistics;
 import java.util.Objects;
 
 public class PrizeMoney {
-    private final int prizeMoney;
+    private final Money prizeMoney;
 
     public PrizeMoney(Statistics statistics) {
-        this.prizeMoney = statistics.getTotalPrize();
+        this.prizeMoney = new Money(statistics.getTotalPrize());
     }
 
     public String calculateProfit(Money money) {
@@ -20,7 +20,7 @@ public class PrizeMoney {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PrizeMoney that = (PrizeMoney) o;
-        return prizeMoney == that.prizeMoney;
+        return Objects.equals(prizeMoney, that.prizeMoney);
     }
 
     @Override

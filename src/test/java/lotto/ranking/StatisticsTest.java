@@ -22,6 +22,6 @@ public class StatisticsTest {
     @DisplayName("당첨 결과에 따른 당첨금 총액 확인")
     void totalPrize() {
         Statistics statistics = new Statistics(Arrays.asList(Ranking.FIRST, Ranking.FORTH, Ranking.FORTH, Ranking.FORTH));
-        assertThat(statistics.getTotalPrize()).isEqualTo(2_000_150_000);
+        assertThat(statistics.getTotalPrize()).isEqualTo("2000150000");
     }
 }

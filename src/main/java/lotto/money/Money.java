@@ -32,8 +32,8 @@ public class Money {
         return String.valueOf(this.money / unit);
     }
 
-    public String calculateProfit(int totalMoney) {
-        double profit = Math.floor((double) totalMoney / money * SECOND_DECIMAL_POINT_MAKER) / SECOND_DECIMAL_POINT_MAKER;
+    public String calculateProfit(Money totalMoney) {
+        double profit = Math.floor((double) totalMoney.money / money * SECOND_DECIMAL_POINT_MAKER) / SECOND_DECIMAL_POINT_MAKER;
         return Double.toString(profit);
     }
 

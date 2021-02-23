@@ -28,12 +28,12 @@ public class Statistics {
         return statistics.get(ranking);
     }
 
-    public int getTotalPrize() {
+    public String getTotalPrize() {
         int prize = 0;
         for (Ranking ranking : Ranking.values()) {
             prize += ranking.calculatePrize(findRankingCount(ranking));
         }
-        return prize;
+        return Integer.toString(prize);
     }
 
     public Map<Ranking, Integer> getStatistics() {
