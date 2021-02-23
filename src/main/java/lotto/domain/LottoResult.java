@@ -1,8 +1,10 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class LottoResult {
 
@@ -24,15 +26,25 @@ public class LottoResult {
     }
 
     private WinningBoard getWinning(WinningLotto winningLotto, LottoTicket ticket) {
-        return WinningBoard.findWinnings(ticket.countHits(winningLotto.getNumbers()),
+        return WinningBoard.findWinnings(countHits(winningLotto, ticket),
             winningLotto.hasBonus(ticket));
+    }
+
+    private int countHits(WinningLotto winningLotto, LottoTicket ticket) {
+        Set<Integer> hitLottoNumbers = new HashSet<>(ticket.getLottoNumbers());
+        hitLottoNumbers.retainAll(winningLotto.getNumbers().getLottoNumbers());
+        return hitLottoNumbers.size();
     }
 
     public int calculateTotalReward() {
         return results.entrySet()
             .stream()
-            .mapToInt(result -> result.getKey().getReward() * result.getValue())
+            .mapToInt(this::calculateReward)
             .sum();
+    }
+
+    private int calculateReward(Map.Entry<WinningBoard, Integer> result) {
+        return result.getKey().getReward() * result.getValue();
     }
 
     public Map<WinningBoard, Integer> getResults() {

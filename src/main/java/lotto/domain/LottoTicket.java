@@ -9,8 +9,8 @@ import lotto.exception.LottoCustomException;
 
 public class LottoTicket {
 
-    private static final int LOTTO_SIZE = 6;
-    private static final String NOT_DUPLICATE_NUMBERS_ERROR_MESSAGE = "당첨번호는 중복되지 않은 숫자들로 총 " + LOTTO_SIZE + "개이어야 합니다.";
+    public static final int LOTTO_SIZE = 6;
+    private static final String NOT_DUPLICATE_NUMBERS_ERROR_MESSAGE = "당첨번호는 중복되지 않은 숫자들로 총 %d개이어야 합니다.";
 
     private final Set<LottoNumber> lottoNumbers;
 
@@ -18,7 +18,7 @@ public class LottoTicket {
         this.lottoNumbers = makeTicket(lottoNumbers);
     }
 
-    private Set<LottoNumber> makeTicket(List<Integer> numbers){
+    private Set<LottoNumber> makeTicket(List<Integer> numbers) {
         validateSize(numbers);
         return numbers.stream()
             .map(LottoNumber::new)
@@ -27,18 +27,13 @@ public class LottoTicket {
 
     private void validateSize(List<Integer> numbers) {
         if (isNotProperSize(numbers)) {
-            throw new LottoCustomException(NOT_DUPLICATE_NUMBERS_ERROR_MESSAGE);
+            throw new LottoCustomException(
+                String.format(NOT_DUPLICATE_NUMBERS_ERROR_MESSAGE, LOTTO_SIZE));
         }
     }
 
     private boolean isNotProperSize(List<Integer> lottoNumbers) {
         return lottoNumbers.size() != LOTTO_SIZE;
-    }
-
-    public int countHits(LottoTicket winningTicket) {
-        Set<LottoNumber> hitLottoNumbers = new HashSet<>(lottoNumbers);
-        hitLottoNumbers.retainAll(winningTicket.lottoNumbers);
-        return hitLottoNumbers.size();
     }
 
     public boolean hasNumber(LottoNumber number) {
