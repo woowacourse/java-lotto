@@ -1,8 +1,6 @@
 package lotto.view;
 
 
-import static lotto.domain.lotto.LottoTicket.LOTTO_LINE_PRICE;
-
 import java.util.stream.Collectors;
 import lotto.domain.lotto.LottoLine;
 import lotto.domain.lotto.LottoTicket;
@@ -34,6 +32,9 @@ public class OutputView {
     }
 
     public static void printLottoTicket(LottoTicket lottoTicket) {
+        System.out.printf(PURCHASE_RESULT_INFORMATION_FORMAT, lottoTicket.getAutoLottoLineCount()
+            , lottoTicket.getManualLottoLineCount());
+
         for (LottoLine line : lottoTicket.getLottoLines()) {
             String lottoNumbers = line.getLottoNumbers().stream()
                 .sorted()
@@ -43,8 +44,4 @@ public class OutputView {
         }
     }
 
-    public static void printPurchaseInformation(int money, int manualLottoLineCount) {
-        System.out.printf(PURCHASE_RESULT_INFORMATION_FORMAT, manualLottoLineCount,
-            money / LOTTO_LINE_PRICE);
-    }
 }
