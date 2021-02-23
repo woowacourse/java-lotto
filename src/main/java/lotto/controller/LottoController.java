@@ -22,17 +22,19 @@ public class LottoController {
 
     public void run() {
         Money inputMoney = new Money(InputView.inputMoney());
-        LottoCount lottoCount = getLottoCount(inputMoney);
-        List<LottoTicket> manualLottoTickets = getAllManualLottoTicket(lottoCount.getManualLottoCount());
+        int totalLottoCount = inputMoney.getPurchaseCount();
+        LottoCount lottoCount = getLottoCount(totalLottoCount);
+        List<LottoTicket> manualLottoTickets =
+                createAllManualLottoTicket(lottoCount.getManualLottoCount());
         LottoTickets lottoTickets = lottoTicketFactory.generateLottoTickets(
                 lottoCount.getAutoLottoCount(), manualLottoTickets);
         OutputView.printLottoTicketsCount(lottoCount);
         OutputView.printLottoTickets(lottoTickets);
         WinningLotto winningLotto = getWinningLotto();
-        showResult(lottoTickets, winningLotto);
+        showResult(totalLottoCount, lottoTickets, winningLotto);
     }
 
-    private List<LottoTicket> getAllManualLottoTicket(int manualLottoCount) {
+    private List<LottoTicket> createAllManualLottoTicket(int manualLottoCount) {
         OutputView.printInputManualLottoNumbers();
         List<LottoTicket> manualLottoTickets = new ArrayList<>();
         for (int i = 0; i < manualLottoCount; i++) {
@@ -45,9 +47,8 @@ public class LottoController {
         return manualLottoTickets;
     }
 
-    private LottoCount getLottoCount(Money inputMoney) {
+    private LottoCount getLottoCount(int totalLottoCount) {
         String inputManualLottoCount = InputView.inputManualLottoCount();
-        int totalLottoCount = inputMoney.getPurchaseCount();
         return new LottoCount(inputManualLottoCount, totalLottoCount);
     }
 
@@ -61,11 +62,11 @@ public class LottoController {
         return new WinningLotto(winningTicket, bonusNumber);
     }
 
-    private void showResult(LottoTickets lottoTickets, WinningLotto winningLotto) {
+    private void showResult(int totalLottoCount, LottoTickets lottoTickets, WinningLotto winningLotto) {
         LottoResult lottoResult = winningLotto.checkPrizes(lottoTickets);
         OutputView.printResultStatistic(lottoResult);
         Money totalProfit = lottoResult.getTotalProfit();
-        double profitRate = totalProfit.divide(lottoResult.lottoResult().size());
+        double profitRate = totalProfit.divide(totalLottoCount);
         OutputView.printProfitRate(profitRate);
     }
 }
