@@ -21,7 +21,7 @@ public class Ranks {
     }
 
     public int getNumberOfRank(Rank rank) {
-        return Math.toIntExact(rankCounts.getOrDefault(rank, 0L));
+        return rankCounts.getOrDefault(rank, 0L).intValue();
     }
 
     public float calculateProfitRate() {
