@@ -31,6 +31,7 @@ public class OutputView {
     }
 
     public static void printTotalWinningResult(Map<Rank, Integer> winningResult) {
+        printNewLine();
         System.out.println("당첨 통계");
         printSplitLine();
 
