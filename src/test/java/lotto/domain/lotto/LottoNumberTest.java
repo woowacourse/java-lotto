@@ -35,7 +35,7 @@ class LottoNumberTest {
     @ValueSource(strings = {"-1", "0.1", "word"})
     void generate_valid_not_int(String input) {
         assertThatThrownBy(() -> LottoNumber.valueOf(input))
-                .isInstanceOf(NumberFormatException.class);
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest

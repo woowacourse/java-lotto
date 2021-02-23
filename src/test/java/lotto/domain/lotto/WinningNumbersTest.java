@@ -15,14 +15,14 @@ class WinningNumbersTest {
     @CsvSource(value = {"1,1,2,3,4,5:6", "1,2,3,4,5,6:1"}, delimiter = ':')
     void duplicatedNumbers_fail(String lottoNumbersValue, String bonusBallValue) {
         assertThatThrownBy(() -> new WinningNumbers(lottoNumbersValue, bonusBallValue))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest
     @MethodSource("invalidInput_testcase")
     void invalidInput_fail(String lottoNumbersValue, String bonusBallValue) {
         assertThatThrownBy(() -> new WinningNumbers(lottoNumbersValue, bonusBallValue))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     private static Stream<Arguments> invalidInput_testcase() {
