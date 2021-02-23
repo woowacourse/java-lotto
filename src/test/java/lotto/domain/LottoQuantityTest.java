@@ -39,10 +39,10 @@ class LottoQuantityTest {
 				new int[]{1, 2, 3, 4, 5, 6},
 				new int[]{1, 2, 3, 4, 5, 7},
 				new int[]{1, 2, 3, 4, 5, 8}
-				)));
+		)));
 
 		assertThat(manualLottos).isEqualTo(new Lottos(Arrays.asList(
-				createCustomLotto(1, 2 ,3, 4, 5, 6),
+				createCustomLotto(1, 2, 3, 4, 5, 6),
 				createCustomLotto(1, 2, 3, 4, 5, 7),
 				createCustomLotto(1, 2, 3, 4, 5, 8)
 		)));

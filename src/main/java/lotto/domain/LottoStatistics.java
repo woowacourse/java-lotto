@@ -13,7 +13,7 @@ public class LottoStatistics {
 
 	public LottoStatistics(List<Rank> ranks, Money money) {
 		initializeEmptyStatistics();
-		aggregateStatisticsAccordingTo(ranks);
+		aggregateStatisticsBasedOn(ranks);
 		this.moneyInvested = money;
 	}
 
@@ -23,7 +23,7 @@ public class LottoStatistics {
 		}
 	}
 
-	private void aggregateStatisticsAccordingTo(List<Rank> ranks) {
+	private void aggregateStatisticsBasedOn(List<Rank> ranks) {
 		for (Rank rank : ranks) {
 			statistics.put(rank, statistics.get(rank) + 1);
 		}

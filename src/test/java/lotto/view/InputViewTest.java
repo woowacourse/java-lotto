@@ -22,6 +22,13 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 class InputViewTest {
 	private Scanner scanner;
 
+	private static Stream<Arguments> provideInputsForMoneyInputTest() {
+		return Stream.of(
+				Arguments.of("999", NOT_ENOUGH_MONEY_ERROR),
+				Arguments.of("정수가아니야", NON_NUMERIC_ERROR)
+		);
+	}
+
 	@AfterEach
 	void closeScanner() {
 		scanner.close();
@@ -37,13 +44,6 @@ class InputViewTest {
 
 		assertThatThrownBy(() -> InputView.takeMoneyInput(scanner)).isInstanceOf(IllegalArgumentException.class)
 				.hasMessage(errorMessage);
-	}
-
-	private static Stream<Arguments> provideInputsForMoneyInputTest() {
-		return Stream.of(
-				Arguments.of("999", NOT_ENOUGH_MONEY_ERROR),
-				Arguments.of("정수가아니야", NON_NUMERIC_ERROR)
-		);
 	}
 
 	@DisplayName("수동 로또 갯수를 입력받을 때 정수인지 확인")
