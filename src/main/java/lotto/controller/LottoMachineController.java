@@ -33,7 +33,7 @@ public class LottoMachineController {
 
     private List<Lotto> getInputLottos() {
         PayAmount payAmount = inputView.readPayAmount();
-        LottoCount lottoCount = payAmount.getLottoCount();
+        LottoCount lottoCount = payAmount.calculateLottoCount();
         LottoCount manualLottoCount = inputView.readManualLottoCount();
         LottoCount autoLottoCount = lottoCount.subtract(manualLottoCount);
 

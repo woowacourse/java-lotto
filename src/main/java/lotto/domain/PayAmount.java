@@ -43,7 +43,7 @@ public class PayAmount {
         return value % LOTTO_PAY == ZeroRemainder;
     }
 
-    public LottoCount getLottoCount() {
+    public LottoCount calculateLottoCount() {
         return new LottoCount(payAmount / LOTTO_PAY);
     }
 }
