@@ -8,8 +8,8 @@ public enum WinningResult {
     FIFTH_PRIZE(3, 5_000, "3개 일치"),
     FOURTH_PRIZE(4, 50_000, "4개 일치"),
     THIRD_PRIZE(5, 1_500_000, "5개 일치"),
-    SECOND_PRIZE(6, 30_000_000, "5개 일치, 보너스 볼 일치"),
-    FIRST_PRIZE(7, 2_000_000_000, "6개 일치");
+    SECOND_PRIZE(5, 30_000_000, "5개 일치, 보너스 볼 일치"),
+    FIRST_PRIZE(6, 2_000_000_000, "6개 일치");
 
     private final int hitCount;
     private final int winnings;
@@ -28,8 +28,8 @@ public enum WinningResult {
                 .findFirst()
                 .orElse(FAILED);
 
-        if (lottoResult == SECOND_PRIZE && !isBonus) {
-            return THIRD_PRIZE;
+        if (lottoResult == THIRD_PRIZE && isBonus) {
+            return SECOND_PRIZE;
         }
         return lottoResult;
     }
