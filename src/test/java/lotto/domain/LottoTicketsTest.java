@@ -20,32 +20,32 @@ class LottoTicketsTest {
     @BeforeEach
     void init() {
         firstPrizeTicket = new LottoTicket(Arrays.asList(
-                LottoNumber.createLottoNumber("1"),
-                LottoNumber.createLottoNumber("2"),
-                LottoNumber.createLottoNumber("3"),
-                LottoNumber.createLottoNumber("4"),
-                LottoNumber.createLottoNumber("5"),
-                LottoNumber.createLottoNumber("7")));
+                LottoNumber.of("1"),
+                LottoNumber.of("2"),
+                LottoNumber.of("3"),
+                LottoNumber.of("4"),
+                LottoNumber.of("5"),
+                LottoNumber.of("7")));
 
         secondPrizeTicket = new LottoTicket(Arrays.asList(
-                LottoNumber.createLottoNumber("1"),
-                LottoNumber.createLottoNumber("2"),
-                LottoNumber.createLottoNumber("3"),
-                LottoNumber.createLottoNumber("4"),
-                LottoNumber.createLottoNumber("5"),
-                LottoNumber.createLottoNumber("8")));
+                LottoNumber.of("1"),
+                LottoNumber.of("2"),
+                LottoNumber.of("3"),
+                LottoNumber.of("4"),
+                LottoNumber.of("5"),
+                LottoNumber.of("8")));
 
         lottoTickets = new LottoTickets(Arrays.asList(firstPrizeTicket, secondPrizeTicket));
 
         winningNumbers = Arrays.asList(
-                LottoNumber.createLottoNumber("1"),
-                LottoNumber.createLottoNumber("2"),
-                LottoNumber.createLottoNumber("3"),
-                LottoNumber.createLottoNumber("4"),
-                LottoNumber.createLottoNumber("5"),
-                LottoNumber.createLottoNumber("7"));
+                LottoNumber.of("1"),
+                LottoNumber.of("2"),
+                LottoNumber.of("3"),
+                LottoNumber.of("4"),
+                LottoNumber.of("5"),
+                LottoNumber.of("7"));
 
-        bonusBall = LottoNumber.createLottoNumber("8");
+        bonusBall = LottoNumber.of("8");
         result = lottoTickets.checkWinningTickets(new WinningLotto(new LottoTicket(winningNumbers), bonusBall));
     }
 

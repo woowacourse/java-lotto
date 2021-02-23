@@ -14,13 +14,13 @@ public class LottoTicketTest {
     @DisplayName("매개변수로 넘어온 리스트의 길이가 6을 넘을 경우")
     void checkMemberNames() {
         List<LottoNumber> numbers = Arrays.asList(
-                LottoNumber.createLottoNumber("1"),
-                LottoNumber.createLottoNumber("4"),
-                LottoNumber.createLottoNumber("5"),
-                LottoNumber.createLottoNumber("8"),
-                LottoNumber.createLottoNumber("10"),
-                LottoNumber.createLottoNumber("9"),
-                LottoNumber.createLottoNumber("40"));
+                LottoNumber.of("1"),
+                LottoNumber.of("4"),
+                LottoNumber.of("5"),
+                LottoNumber.of("8"),
+                LottoNumber.of("10"),
+                LottoNumber.of("9"),
+                LottoNumber.of("40"));
         assertThatThrownBy(() -> {
             LottoTicket lottoTicket = new LottoTicket(numbers);
         }).isInstanceOf(IllegalLottoNumbersException.class)
@@ -31,11 +31,11 @@ public class LottoTicketTest {
     @DisplayName("매개변수로 넘어온 리스트의 길이가 6이 되지 않는 경우")
     void wrongArgumentCreate() {
         List<LottoNumber> numbers = Arrays.asList(
-                LottoNumber.createLottoNumber("1"),
-                LottoNumber.createLottoNumber("4"),
-                LottoNumber.createLottoNumber("5"),
-                LottoNumber.createLottoNumber("8"),
-                LottoNumber.createLottoNumber("10"));
+                LottoNumber.of("1"),
+                LottoNumber.of("4"),
+                LottoNumber.of("5"),
+                LottoNumber.of("8"),
+                LottoNumber.of("10"));
         assertThatThrownBy(() -> {
             LottoTicket lottoTicket = new LottoTicket(numbers);
         }).isInstanceOf(IllegalLottoNumbersException.class)
@@ -46,12 +46,12 @@ public class LottoTicketTest {
     @DisplayName("매개변수로 넘어온 리스트 안에 중복되는 수가 있는 검사")
     void duplicateNumbers() {
         List<LottoNumber> numbers = Arrays.asList(
-                LottoNumber.createLottoNumber("1"),
-                LottoNumber.createLottoNumber("4"),
-                LottoNumber.createLottoNumber("8"),
-                LottoNumber.createLottoNumber("8"),
-                LottoNumber.createLottoNumber("8"),
-                LottoNumber.createLottoNumber("10"));
+                LottoNumber.of("1"),
+                LottoNumber.of("4"),
+                LottoNumber.of("8"),
+                LottoNumber.of("8"),
+                LottoNumber.of("8"),
+                LottoNumber.of("10"));
         assertThatThrownBy(() -> {
             LottoTicket lottoTicket = new LottoTicket(numbers);
         }).isInstanceOf(IllegalLottoNumbersException.class)

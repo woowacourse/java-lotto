@@ -16,7 +16,7 @@ public class LottoTicketFactory {
     static {
         lottoNumberRange = new ArrayList<>();
         IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
-                .forEach(number -> lottoNumberRange.add(LottoNumber.createLottoNumber(Integer.toString(number))));
+                .forEach(number -> lottoNumberRange.add(LottoNumber.of(Integer.toString(number))));
     }
 
     private LottoTicketFactory() {
@@ -41,7 +41,7 @@ public class LottoTicketFactory {
 
     public static LottoTicket createManualLottoTicket(List<String> numbers) {
         return new LottoTicket(numbers.stream()
-                .map(LottoNumber::createLottoNumber)
+                .map(LottoNumber::of)
                 .sorted()
                 .collect(Collectors.toList()));
     }

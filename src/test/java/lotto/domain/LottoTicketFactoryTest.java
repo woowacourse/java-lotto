@@ -16,12 +16,12 @@ public class LottoTicketFactoryTest {
     void createManualLottoTickets() {
         List<String> numbers = new ArrayList<>(Arrays.asList("1","2","3","4","5","6"));
         assertThat(LottoTicketFactory.createManualLottoTicket(numbers).getLottoTicket()).containsExactly(
-                LottoNumber.createLottoNumber("1"),
-                LottoNumber.createLottoNumber("2"),
-                LottoNumber.createLottoNumber("3"),
-                LottoNumber.createLottoNumber("4"),
-                LottoNumber.createLottoNumber("5"),
-                LottoNumber.createLottoNumber("6"));
+                LottoNumber.of("1"),
+                LottoNumber.of("2"),
+                LottoNumber.of("3"),
+                LottoNumber.of("4"),
+                LottoNumber.of("5"),
+                LottoNumber.of("6"));
     }
 
     @Test

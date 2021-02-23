@@ -6,7 +6,6 @@ import lotto.view.OutputView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoController {
     public void run() {
@@ -40,7 +39,7 @@ public class LottoController {
     }
 
     private LottoResult getLottoResult(LottoTickets lottoTickets, LottoTicket winningTicket) {
-        LottoNumber bonusNumber = LottoNumber.createLottoNumber(InputView.inputBonusNumber());
+        LottoNumber bonusNumber = LottoNumber.of(InputView.inputBonusNumber());
         WinningLotto winningLotto = new WinningLotto(winningTicket, bonusNumber);
         return new LottoResult(lottoTickets.checkWinningTickets(winningLotto));
     }
