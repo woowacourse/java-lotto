@@ -16,7 +16,7 @@ public class LottoMachine {
         numberGenerator = new LottoNumberGenerator(LottoNumber.LOTTO_MIN, LottoNumber.LOTTO_MAX);
     }
 
-    public List<Lotto> buyLotto(int quantity) {
+    public List<Lotto> buyAutoTicket(int quantity) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < quantity; i++) {
             lottos.add(makeLotto());

@@ -24,14 +24,14 @@ class LottoMachineTest {
     @DisplayName("로또가 정상 구매 되는 지 확인")
     @Test
     void 로또_구매_기능_테스트() {
-        List<Lotto> lottos = lottoMachine.buyLotto(4);
+        List<Lotto> lottos = lottoMachine.buyAutoTicket(4);
         assertThat(lottos).hasSize(4);
     }
 
     @DisplayName("로또 생성 시 중복 숫자를 방지하는 기능이 잘 동작하는 지 확인")
     @Test
     void 로또_생성_기능_테스트() {
-        List<Lotto> lottos = lottoMachine.buyLotto(3);
+        List<Lotto> lottos = lottoMachine.buyAutoTicket(3);
         assertThat(lottos).hasSize(3);
 
         for (Lotto lotto : lottos) {

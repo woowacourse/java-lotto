@@ -1,7 +1,9 @@
 package lottogame.domain;
 
-import lottogame.utils.CannotBuyLottoException;
+import lottogame.domain.lotto.Lotto;
 import lottogame.utils.InvalidManualTicketQuantityException;
+
+import java.util.List;
 
 public class TicketMachine {
     private static final int TICKET_PRICE = 1000;
@@ -12,9 +14,9 @@ public class TicketMachine {
     }
 
     private void validateQuantityRange(Money money, int quantity) {
-        if (quantity == 0) {
-            throw new CannotBuyLottoException();
-        }
+//        if (quantity == 0) {
+//            throw new CannotBuyLottoException();
+//        }
         checkQuantityByMoney(money, quantity);
     }
 

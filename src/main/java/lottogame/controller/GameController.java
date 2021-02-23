@@ -24,9 +24,8 @@ public class GameController {
         int manualQuantity = inputView.inputManualQuantity();
         money = ticketMachine.validManualTicket(money, manualQuantity);
         int autoTicketQuantity = ticketMachine.buyableAutoTicketQuantity(money);
-        makeManualLotto(autoTicketQuantity);
-//        int quantity = lottoMachine.purchaseQuantity(money);
-//        Lottos lottos = new Lottos(lottoMachine.buyLotto(quantity));
+        List<Lotto> manualLottos = makeManualLotto(autoTicketQuantity);
+        List<Lotto> autoLottos = lottoMachine.buyAutoTicket(autoTicketQuantity);
 //        OutputView.showLottos(lottos.numbersOfLottos());
 //        WinningLotto winningLotto = askWinningLotto();
 //        LottoResults lottoResults = matchLottos(lottos, winningLotto);
@@ -34,9 +33,10 @@ public class GameController {
 //        OutputView.printResult(lottoResultDto);
     }
 
-    private void makeManualLotto(int autoTicketQuantity) {
+    private List<Lotto> makeManualLotto(int autoTicketQuantity) {
         List<LottoDto> manualLotto = inputView.inputManualLotto(autoTicketQuantity);
         List<Lotto> manualLottos = lottoMachine.makeManualLotto(manualLotto);
+        return manualLottos;
     }
 
     private LottoResults matchLottos(Lottos lottos, WinningLotto winningLotto) {
