@@ -8,6 +8,7 @@ import java.util.Map;
 
 public class OutputView {
 
+    private static final String LOTTO_COUNT_FORM = "수동으로 %d장, 자동으로 %d장을 구매했습니다.";
     private static final String LOTTO_FORM = "[%s]\n";
     private static final String RESULT_MESSAGE = "당첨 통계";
     private static final String BOUNDARY = "---------";
@@ -19,6 +20,7 @@ public class OutputView {
     }
 
     public static void printBoughtLotto(final LottoGroup lottoGroup) {
+        System.out.println(String.format(LOTTO_COUNT_FORM, lottoGroup.getManualCount(), lottoGroup.getAutoCount()));
         lottoGroup.lottoGroup()
                 .forEach(lotto -> System.out.printf(LOTTO_FORM, lotto));
     }

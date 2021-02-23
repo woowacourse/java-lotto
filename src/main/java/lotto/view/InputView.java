@@ -4,6 +4,7 @@ import lotto.domain.LottoNumber;
 import lotto.domain.Money;
 import lotto.exception.LottoException;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -15,6 +16,9 @@ public class InputView {
     private static final String INPUT_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String INPUT_WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
+    private static final String INPUT_MANUAL_COUNT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String INPUT_MANUAL_NUMBER_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
+    private static final String NUMBER_FORMAT_ERROR_MESSAGE = "숫자를 입력해주세요.";
 
     public static Money getMoney() {
         try {
@@ -22,7 +26,7 @@ public class InputView {
             int money = Integer.parseInt(SCAN.nextLine());
             return Money.of(money);
         } catch (NumberFormatException e) {
-            OutputView.printMessage("숫자를 입력해주세요.");
+            OutputView.printMessage(NUMBER_FORMAT_ERROR_MESSAGE);
             return getMoney();
         } catch (LottoException e) {
             OutputView.printMessage(e.getMessage());
@@ -43,7 +47,7 @@ public class InputView {
             OutputView.printMessage(e.getMessage());
             return getWinningNumbers();
         } catch (NumberFormatException e) {
-            OutputView.printMessage("숫자를 입력해주세요.");
+            OutputView.printMessage(NUMBER_FORMAT_ERROR_MESSAGE);
             return getWinningNumbers();
         }
     }
@@ -56,5 +60,24 @@ public class InputView {
             OutputView.printMessage(e.getMessage());
             return getBonusNumber();
         }
+    }
+
+    public static int getManualLottoCount() {
+        try {
+            OutputView.printMessage(INPUT_MANUAL_COUNT_MESSAGE);
+            return Integer.parseInt(SCAN.nextLine());
+        } catch (NumberFormatException e) {
+            OutputView.printMessage(NUMBER_FORMAT_ERROR_MESSAGE);
+            return getManualLottoCount();
+        }
+    }
+
+    public static List<String> getManualNumbers(int count) {
+        OutputView.printMessage(INPUT_MANUAL_NUMBER_MESSAGE);
+        List<String> inputNumbers = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            inputNumbers.add(SCAN.nextLine());
+        }
+        return inputNumbers;
     }
 }
