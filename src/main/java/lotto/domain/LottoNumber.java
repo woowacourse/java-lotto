@@ -5,17 +5,30 @@ import lotto.exception.InvalidLottoNumberException;
 
 public class LottoNumber {
 
+    private static final LottoNumber[] lottoNumberCache;
     private static final int MIN_BOUND = 1;
     private static final int MAX_BOUND = 45;
 
     private final int number;
 
-    public LottoNumber(final int number) {
-        validate(number);
+    static {
+        LottoNumber[] lottoCache = new LottoNumber[45];
+        for (int i = MIN_BOUND; i <= MAX_BOUND; i++) {
+            lottoCache[i - 1] = new LottoNumber(i);
+        }
+        lottoNumberCache = lottoCache;
+    }
+
+    private LottoNumber(final int number) {
         this.number = number;
     }
 
-    private void validate(final int number) {
+    public static LottoNumber valueOf(final int number) {
+        validate(number);
+        return lottoNumberCache[number - 1];
+    }
+
+    private static void validate(final int number) {
         if (number < MIN_BOUND || number > MAX_BOUND) {
             throw new InvalidLottoNumberException();
         }
@@ -23,22 +36,5 @@ public class LottoNumber {
 
     public int getLottoNumber() {
         return number;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        LottoNumber that = (LottoNumber) o;
-        return number == that.number;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(number);
     }
 }
