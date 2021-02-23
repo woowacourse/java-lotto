@@ -18,7 +18,7 @@ public class LottoController {
         LottoService lottoService = new LottoService();
         LottoRepository lottoRepository = new LottoRepository();
 
-        Ticket totalTicket = buyLotto();
+        Ticket totalTicket = buyTicket();
         Ticket manualTicket = manualBuyTicket(totalTicket);
 
         generateLottoNumbers(manualTicket.getCount(), lottoRepository);
@@ -30,16 +30,16 @@ public class LottoController {
         printWinningStats(ratingInfo, lottoService, totalTicket);
     }
 
-    private Ticket buyLotto() {
+    private Ticket buyTicket() {
         try {
-            return tryBuyLotto();
+            return tryBuyTicket();
         } catch (IllegalArgumentException e) {
             OutputView.getMessage(e.getMessage());
-            return buyLotto();
+            return buyTicket();
         }
     }
 
-    private Ticket tryBuyLotto() {
+    private Ticket tryBuyTicket() {
         int money = InputView.getMoney();
         return new Ticket(new Money(money));
     }
