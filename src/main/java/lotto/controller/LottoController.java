@@ -37,7 +37,7 @@ public class LottoController {
         List<LottoTicket> manualLottoTickets = new ArrayList<>();
         for (int i = 0; i < manualLottoCount; i++) {
             manualLottoTickets.add(
-                    InputView.inputManualLottoNumbers()
+                    InputView.inputNumbers()
                             .stream()
                             .map(LottoNumber::new)
                             .collect(collectingAndThen(toList(), LottoTicket::new)));
@@ -52,7 +52,8 @@ public class LottoController {
     }
 
     private WinningLotto getWinningLotto() {
-        LottoTicket winningTicket = InputView.inputWinningNumbers()
+        OutputView.printInputWinningNumbers();
+        LottoTicket winningTicket = InputView.inputNumbers()
                 .stream()
                 .map(LottoNumber::new)
                 .collect(collectingAndThen(toList(), LottoTicket::new));
