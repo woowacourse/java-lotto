@@ -14,7 +14,7 @@ public class LottoResult {
         Arrays.stream(LottoRank.values())
                 .forEach(lottoRank -> lottoResult.put(lottoRank, SETUP_VALUE));
 
-        for (Lotto lotto : lottoBundle.getLottos()) {
+        for (Lotto lotto : lottoBundle.getLottoBundle()) {
             LottoRank lottoRank = checkSingleLottoRank(lotto, winningLotto);
             lottoResult.put(lottoRank, lottoResult.get(lottoRank) + 1);
         }

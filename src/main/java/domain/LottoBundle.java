@@ -15,7 +15,7 @@ public class LottoBundle {
         return lottoBundle.size();
     }
 
-    public List<Lotto> getLottos() {
+    public List<Lotto> getLottoBundle() {
         return Collections.unmodifiableList(lottoBundle);
     }
 }
