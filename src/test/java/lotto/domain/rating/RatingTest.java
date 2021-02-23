@@ -18,9 +18,9 @@ public class RatingTest {
     void getRatingByNumberAndBonusBall(String input, int expected) {
         Integer[] arr = Arrays.stream(input.split(","))
             .mapToInt(Integer::parseInt).boxed().toArray(Integer[]::new);
-        Lotto inputLotto = Lotto.getInstanceByInt(Arrays.asList(arr));
+        Lotto inputLotto = Lotto.from(Arrays.asList(arr));
 
-        Lotto lotto = Lotto.getInstanceByInt(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto lotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumber bonusNumber = new LottoNumber(7);
 
         Rating rating = Rating
@@ -36,9 +36,9 @@ public class RatingTest {
     void getRatingRewardCheck(String input, int expected) {
         Integer[] arr = Arrays.stream(input.split(","))
             .mapToInt(Integer::parseInt).boxed().toArray(Integer[]::new);
-        Lotto inputLotto = Lotto.getInstanceByInt(Arrays.asList(arr));
+        Lotto inputLotto = Lotto.from(Arrays.asList(arr));
 
-        Lotto lotto = Lotto.getInstanceByInt(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto lotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumber bonusNumber = new LottoNumber(7);
 
         Rating rating = Rating

@@ -47,7 +47,7 @@ public class LottoServiceTest {
 
         lottoManager.getLotto(ticket);
         WinningLotto winningLotto = new WinningLotto(
-            Lotto.getInstanceByInt(Arrays.asList(1, 2, 3, 4, 5, 6)),
+            Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)),
             new LottoNumber(7));
         RatingInfo ratingInfo = lottoManager.scratchLotto(winningLotto);
 

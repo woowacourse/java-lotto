@@ -13,7 +13,7 @@ public class Lotto {
     private static final String DUPLICATE_NUMBER_ERROR_MESSAGE = "중복된 숫자 입력입니다.";
     private final List<LottoNumber> numbers;
 
-    public static Lotto getInstanceByInt(final List<Integer> numbers) {
+    public static Lotto from(final List<Integer> numbers) {
         return new Lotto(numbers.stream()
             .map(LottoNumber::new)
             .collect(Collectors.toList()));

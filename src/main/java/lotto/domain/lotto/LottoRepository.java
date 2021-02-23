@@ -11,7 +11,7 @@ public class LottoRepository {
 
     public void generateLottoByTicket(final LottoMachine lottoMachine, final int ticketCount) {
         for (int i = 0; i < ticketCount; i++) {
-            lottos.add(Lotto.getInstanceByInt(lottoMachine.generate()));
+            lottos.add(Lotto.from(lottoMachine.generate()));
         }
     }
 
