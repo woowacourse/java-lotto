@@ -19,13 +19,10 @@ public enum Ranking {
     }
 
     public static Ranking makePrice(int count, boolean bonusMatch) {
-        if (count == SECOND.matchCount && bonusMatch) {
-            return SECOND;
-        }
         return Arrays.stream(values())
                 .filter(ranking -> ranking.matchCount == count)
-                .filter(ranking -> !ranking.equals(SECOND))
-                .findAny()
+                .filter(ranking -> !ranking.equals(SECOND) || bonusMatch)
+                .findFirst()
                 .orElse(NOTHING);
     }
 
