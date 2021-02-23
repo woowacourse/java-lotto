@@ -21,6 +21,16 @@ public class LottoTicketFactory {
                 .forEach(number -> lottoNumberRange.add(new LottoNumber(Integer.toString(number))));
     }
 
+    public List<LottoTicket> buyLottoTicketsIncludingManualTickets(Money money, List<LottoTicket> manualTickets) {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+
+        int length = (int) money.getValue() / LOTTO_PRICE;
+        for (int i = 0; i < length; i++) {
+            lottoTickets.add(new LottoTicket(createAutoLottoTicket()));
+        }
+        return lottoTickets;
+    }
+
     public List<LottoTicket> buyLottoTickets(Money money) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
 

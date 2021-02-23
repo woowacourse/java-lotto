@@ -9,7 +9,7 @@ public class ManualLottoAmount {
 
     private final int value;
 
-    public ManualLottoAmount(String input, int purchasableLottoCount) {
+    public ManualLottoAmount(String input, int purchasableLottoCount) {  // TODO : Money 받을지 그대로 int 받을지
         validateManualLottoAmount(input, purchasableLottoCount);
         this.value = Integer.parseInt(input);
     }
