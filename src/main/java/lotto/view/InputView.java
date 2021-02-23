@@ -65,9 +65,16 @@ public class InputView {
     public static int getManualLottoCount() {
         try {
             OutputView.printMessage(INPUT_MANUAL_COUNT_MESSAGE);
-            return Integer.parseInt(SCAN.nextLine());
+            int count = Integer.parseInt(SCAN.nextLine());
+            if (count < 0) {
+                throw new IllegalArgumentException("숫자는 음수가 될 수 없습니다.");
+            }
+            return count;
         } catch (NumberFormatException e) {
             OutputView.printMessage(NUMBER_FORMAT_ERROR_MESSAGE);
+            return getManualLottoCount();
+        } catch (IllegalArgumentException e){
+            OutputView.printMessage(e.getMessage());
             return getManualLottoCount();
         }
     }
