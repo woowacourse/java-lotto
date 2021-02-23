@@ -21,8 +21,20 @@ public class LottoSeller {
         for (int i = 0; i < count; i++) {
             lottos.add(LottoGenerator.generate());
         }
-        LottoGroup lottoGroup = new LottoGroup(lottos);
-        return lottoGroup;
+        return new LottoGroup(lottos);
+    }
+
+    public LottoGroup sellManualLotto(final Money money, final int manualCount, List<Lotto> manualLottos) {
+        int count = money.divide(LOTTO_PRICE);
+        if (count < MIN_COUNT || count < manualCount) {
+            throw new LottoPriceException("가격이 부족합니다.");
+        }
+
+        List<Lotto> lottos = new ArrayList<>(manualLottos);
+        for (int i = 0; i < count - manualCount; i++) {
+            lottos.add(LottoGenerator.generate());
+        }
+        return new LottoGroup(lottos);
     }
 
     public static int lottoPrice() {
