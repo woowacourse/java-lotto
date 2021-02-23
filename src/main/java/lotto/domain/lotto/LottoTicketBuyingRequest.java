@@ -42,6 +42,6 @@ public class LottoTicketBuyingRequest {
     public int getAutoLottoAmount() {
         int moneyValue = money.getValue();
         int manualLottoAmountValue = manualLottoAmount.getValue();
-        return new LottoAmount( moneyValue / PRICE_EACH_LOTTO - manualLottoAmountValue).getValue();
+        return new LottoAmount(moneyValue / PRICE_EACH_LOTTO - manualLottoAmountValue).getValue();
     }
 }
