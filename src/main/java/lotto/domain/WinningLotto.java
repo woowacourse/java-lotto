@@ -6,7 +6,6 @@ import lotto.exception.DuplicateLottoNumberException;
 
 public class WinningLotto {
 
-    // todo - 컴포지션 사용하기
     private final Lotto lotto;
     private final LottoNumber bonusNumber;
 
