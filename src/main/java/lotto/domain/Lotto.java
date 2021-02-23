@@ -24,6 +24,7 @@ public class Lotto {
         nullCheckNumbers(inputNumbers);
         String[] splittedNumbers = inputNumbers.split(DELIMITER);
         List<Integer> lottoNumbers = convertInputLottoNumbersToInteger(splittedNumbers);
+        lottoNumbers = lottoNumbers.stream().sorted().collect(Collectors.toList());
         validateLottoNumbers(lottoNumbers);
         return new Lotto(lottoNumbers);
     }
