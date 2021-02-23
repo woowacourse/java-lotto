@@ -2,21 +2,19 @@ package lotto.domain.ticketpurchase;
 
 public class UserPurchase {
     private final PurchasePrice purchasePrice;
-    private final NumberOfTicketsToPurchaseManually numberOfTicketsToPurchaseManually;
+    private final ManualTicketsSize manualTicketsSize;
 
-    public UserPurchase(PurchasePrice purchasePrice,
-        NumberOfTicketsToPurchaseManually numberOfTicketsToPurchaseManually) {
-
+    public UserPurchase(PurchasePrice purchasePrice, ManualTicketsSize manualTicketsSize) {
         this.purchasePrice = purchasePrice;
-        this.numberOfTicketsToPurchaseManually = numberOfTicketsToPurchaseManually;
+        this.manualTicketsSize = manualTicketsSize;
     }
 
-    public int getNumberOfAllTickets() {
-        return purchasePrice.getNumberOfAllTicketsToPurchase();
+    public int allTicketsSize() {
+        return purchasePrice.allTicketsSize();
     }
 
-    public int autoTicketsSize() {
-        return getNumberOfAllTickets() - numberOfTicketsToPurchaseManually.size();
+    public int randomTicketsSize() {
+        return allTicketsSize() - manualTicketsSize.size();
     }
 
     public PurchasePrice getPurchasePrice() {
@@ -24,14 +22,14 @@ public class UserPurchase {
     }
 
     public int manualTicketsSize() {
-        return numberOfTicketsToPurchaseManually.size();
+        return manualTicketsSize.size();
     }
 
-    public boolean isPurchaseManual() {
-         return numberOfTicketsToPurchaseManually.isNotZero();
+    public boolean isPurchaseManually() {
+        return manualTicketsSize.isNotZero();
     }
 
-    public boolean isPurchaseAuto() {
-        return false;
+    public boolean isPurchaseRandomly() {
+        return purchasePrice.allTicketsSize() - manualTicketsSize() > 0;
     }
 }

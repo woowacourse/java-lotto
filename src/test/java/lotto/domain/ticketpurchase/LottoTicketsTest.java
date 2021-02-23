@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 public class LottoTicketsTest {
     @DisplayName("로또 티켓 추가 및 꺼내기 테스트")
     @Test
-    void Should_ReturnLottoTickets_When_AddedLottoTickets() {
+    void Should_Return_ExactLottoTickets_When_AfterAddLottoTickets() {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         lottoNumbers.add(LottoNumbers.of(1));
         lottoNumbers.add(LottoNumbers.of(2));
@@ -31,6 +31,6 @@ public class LottoTicketsTest {
         lottoTickets.add(lottoTicket2);
 
         assertThat(lottoTickets.size()).isEqualTo(2);
-        assertThat(lottoTickets.getTickets().size()).isEqualTo(2);
+        assertThat(lottoTickets.getAll().size()).isEqualTo(2);
     }
 }

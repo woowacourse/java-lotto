@@ -44,7 +44,7 @@ public class LottoTicketTest {
 
         for (int i = 0; i < unsortedLottoNumbers.size(); i++) {
             assertThat(unsortedLottoNumbers.get(i))
-                .isNotEqualTo(unsortedLottoTicket.getLottoNumbers().get(i));
+                .isNotEqualTo(unsortedLottoTicket.getNumbers().get(i));
         }
 
         List<LottoNumber> sortedLottoNumbers = unsortedLottoNumbers.stream()
@@ -53,7 +53,7 @@ public class LottoTicketTest {
 
         for (int i = 0; i < sortedLottoNumbers.size(); i++) {
             assertThat(sortedLottoNumbers.get(i))
-                .isEqualTo(unsortedLottoTicket.getLottoNumbers().get(i));
+                .isEqualTo(unsortedLottoTicket.getNumbers().get(i));
         }
     }
 

@@ -12,11 +12,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class WinningTicketAndBonusNumberTest {
-    private LottoTicket lottoTicket;
+    private LottoTicket winningTicket;
 
     @BeforeEach
     void setUp() {
-        lottoTicket = new LottoTicket(
+        winningTicket = new LottoTicket(
             Arrays.asList(
                 LottoNumbers.of(1),
                 LottoNumbers.of(2),
@@ -33,7 +33,7 @@ public class WinningTicketAndBonusNumberTest {
     void Should_Not_ThrowException_When_ValidLottoNumbers() {
         LottoNumber bonusNumber = LottoNumbers.of(7);
         assertThatCode(
-            () -> new WinningTicketAndBonusNumber(lottoTicket, bonusNumber)
+            () -> new WinningTicketAndBonusNumber(winningTicket, bonusNumber)
         ).doesNotThrowAnyException();
     }
 
@@ -42,7 +42,7 @@ public class WinningTicketAndBonusNumberTest {
     void Should_ThrowException_When_WinningLottoNumbersContainBonusNumber() {
         LottoNumber bonusNumber = LottoNumbers.of(5);
         assertThatThrownBy(
-            () -> new WinningTicketAndBonusNumber(lottoTicket, bonusNumber)
+            () -> new WinningTicketAndBonusNumber(winningTicket, bonusNumber)
         ).isInstanceOf(IllegalArgumentException.class);
     }
 }

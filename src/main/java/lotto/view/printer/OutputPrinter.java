@@ -14,28 +14,26 @@ public class OutputPrinter {
     private OutputPrinter() {
     }
 
-    public static void printMessageOfCompletedPurchase(
-        UserPurchase userPurchase) {
-
+    public static void printManualAndAutoTicketsSizeMessage(UserPurchase userPurchase) {
         System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다." + NEW_LINE,
-            userPurchase.manualTicketsSize(), userPurchase.autoTicketsSize());
+            userPurchase.manualTicketsSize(), userPurchase.randomTicketsSize());
     }
 
-    public static void printLottoTicketNumbers(LottoTicket lottoTicket) {
+    public static void printOneLottoTicketNumbers(LottoTicket lottoTicket) {
         System.out.println("[" +
-            lottoTicket.getLottoNumbers().stream()
+            lottoTicket.getNumbers().stream()
                 .map(lottoNumber -> Integer.toString(lottoNumber.getNumber()))
                 .collect(Collectors.joining(LOTTO_NUMBERS_DELIMITER))
             + "]"
         );
     }
 
-    public static void printResultTitleMessage() {
+    public static void printResultTitle() {
         System.out.println("당첨 통계");
         System.out.println("---------");
     }
 
-    public static void printEachNumberMatchedCountMessage(LottoMatchType lottoMatchType,
+    public static void printLottoMatchTypeCountMessage(LottoMatchType lottoMatchType,
         int countOfMatchedNumbers) {
         System.out.printf(lottoMatchType.getMatchCountMessage() + NEW_LINE, countOfMatchedNumbers);
     }

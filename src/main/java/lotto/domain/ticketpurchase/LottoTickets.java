@@ -16,15 +16,15 @@ public class LottoTickets {
         tickets.add(lottoTicket);
     }
 
-    public List<LottoTicket> getTickets() {
+    public void addAll(LottoTickets lottoTickets) {
+        tickets.addAll(lottoTickets.getAll());
+    }
+
+    public List<LottoTicket> getAll() {
         return Collections.unmodifiableList(tickets);
     }
 
     public int size() {
         return tickets.size();
-    }
-
-    public void addAll(LottoTickets lottoTickets) {
-        tickets.addAll(lottoTickets.getTickets());
     }
 }

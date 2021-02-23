@@ -3,31 +3,28 @@ package lotto.domain.ticketresult;
 import static lotto.type.LottoMatchType.FIVE_AND_BONUS_MATCH;
 import static lotto.type.LottoMatchType.FIVE_MATCH;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import lotto.domain.LottoNumber;
 import lotto.type.LottoMatchType;
 
 public class MatchedLottoNumbers {
-    private final List<LottoNumber> numbersNotIncludingBonusNumber;
+    private final List<LottoNumber> numbersExceptBonusNumber;
     private final LottoNumber bonusNumber;
 
-    public MatchedLottoNumbers(
-        List<LottoNumber> matchedLottoNumbersNotIncludingBonusNumber,
-        LottoNumber matchedBonusNumber) {
-
-        this.numbersNotIncludingBonusNumber = matchedLottoNumbersNotIncludingBonusNumber;
-        this.bonusNumber = matchedBonusNumber;
+    public MatchedLottoNumbers(List<LottoNumber> numbersExceptBonusNumber,
+        LottoNumber bonusNumber) {
+        this.numbersExceptBonusNumber = numbersExceptBonusNumber;
+        this.bonusNumber = bonusNumber;
     }
 
-    public int getSizeOfNumbersNotIncludingBonusNumber() {
-        return numbersNotIncludingBonusNumber.size();
+    public int getSizeExceptBonusNumber() {
+        return numbersExceptBonusNumber.size();
     }
 
     public LottoMatchType getMatchType() {
-        if (numbersNotIncludingBonusNumber.size()
-            != FIVE_MATCH.getCountOfMatchedNumbersNotIncludingBonusNumber()) {
+        if (numbersExceptBonusNumber.size()
+            != FIVE_MATCH.getCountExceptBonusNumber()) {
             return getLottoMatchTypeNotFiveNumbersMatched();
         }
         return getLottoMatchTypeFiveNumbersMatched();
@@ -36,8 +33,7 @@ public class MatchedLottoNumbers {
     private LottoMatchType getLottoMatchTypeNotFiveNumbersMatched() {
         return Arrays.stream(LottoMatchType.values())
             .filter(lottoMatchType ->
-                lottoMatchType.getCountOfMatchedNumbersNotIncludingBonusNumber()
-                    == numbersNotIncludingBonusNumber.size())
+                lottoMatchType.getCountExceptBonusNumber() == numbersExceptBonusNumber.size())
             .findAny()
             .orElseThrow(IllegalArgumentException::new);
     }
@@ -54,7 +50,7 @@ public class MatchedLottoNumbers {
     }
 
     public int size() {
-        int size = numbersNotIncludingBonusNumber.size();
+        int size = numbersExceptBonusNumber.size();
         if (bonusNumber != null) {
             size++;
         }

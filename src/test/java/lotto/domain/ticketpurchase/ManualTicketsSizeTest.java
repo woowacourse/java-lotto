@@ -7,42 +7,37 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class NumberOfTicketsToPurchaseManuallyTest {
+class ManualTicketsSizeTest {
     @DisplayName("0개 이상, 총 구매 티켓 개수 이하의 티켓을 수동구매할 때 정상")
     @ParameterizedTest
     @ValueSource(ints = {0, 5, 10})
-    void Should_Not_ThrowException_When_PurchaseValidNumberOfTicketsManually(
-        int numberOfTicketsToPurchaseManually) {
-
+    void Should_Not_ThrowException_When_ManualTicketsSizeIsValid(int manualTicketsSize) {
         PurchasePrice purchasePrice = new PurchasePrice(10_000);
 
         Assertions.assertThatCode(
-            () -> new NumberOfTicketsToPurchaseManually(
-                numberOfTicketsToPurchaseManually, purchasePrice)
+            () -> new ManualTicketsSize(manualTicketsSize, purchasePrice)
         ).doesNotThrowAnyException();
     }
 
     @DisplayName("0개 미만의 티켓을 수동구매할 때 예외 발생")
     @Test
-    void Should_ThrowException_When_PurchaseLessThanZeroTicketsManually() {
-        int numberOfTicketsToPurchaseManually = -1;
+    void Should_ThrowException_When_ManualTicketsSizeIsLessThanZero() {
+        int manualTicketsSize = -1;
         PurchasePrice purchasePrice = new PurchasePrice(1000);
 
         Assertions.assertThatThrownBy(
-            () -> new NumberOfTicketsToPurchaseManually(
-                numberOfTicketsToPurchaseManually, purchasePrice)
+            () -> new ManualTicketsSize(manualTicketsSize, purchasePrice)
         ).isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("총 구매 티켓 개수 초과의 티켓을 수동구매할 때 예외 발생")
     @Test
-    void Should_ThrowException_When_PurchaseGreaterThanAllNumberOfTicketsManually() {
-        int numberOfTicketsToPurchaseManually = 2;
+    void Should_ThrowException_When_ManualTicketsSizeIsOverThanAllTickets() {
+        int manualTicketsSize = 2;
         PurchasePrice purchasePrice = new PurchasePrice(1000);
 
         Assertions.assertThatThrownBy(
-            () -> new NumberOfTicketsToPurchaseManually(
-                numberOfTicketsToPurchaseManually, purchasePrice)
+            () -> new ManualTicketsSize(manualTicketsSize, purchasePrice)
         ).isInstanceOf(IllegalArgumentException.class);
     }
 }

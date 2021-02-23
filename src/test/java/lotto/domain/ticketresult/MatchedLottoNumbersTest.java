@@ -30,11 +30,10 @@ class MatchedLottoNumbersTest {
             = new WinningTicketAndBonusNumber(winningLottoTicket, bonusNumber);
     }
 
-    @DisplayName("일치한 번호들이 보너스 번호 여부에 따라 구분되어서 결과로 나오는지 - "
-        + "일반 번호 2개, 보너스 번호 0개")
+    @DisplayName("일반 번호와 보너스 번호의 일치 결과 테스트 - 일반 번호 2개, 보너스 번호 0개")
     @Test
-    void Should_Return_ExactClassifiedMatchResult_When_Regular2Bonus0() {
-        LottoTicket purchasedLottoTicket = new LottoTicket(
+    void Should_Return_ExpectedMatchResult_When_Regular2Bonus0() {
+        LottoTicket lottoTicket = new LottoTicket(
             Arrays.asList(
                 LottoNumbers.of(1),
                 LottoNumbers.of(2),
@@ -46,17 +45,16 @@ class MatchedLottoNumbersTest {
         );
 
         MatchedLottoNumbers matchedLottoNumbers
-            = winningTicketAndBonusNumber.getMatchedLottoNumbers(purchasedLottoTicket);
+            = winningTicketAndBonusNumber.getMatchedLottoNumbers(lottoTicket);
 
-        assertThat(matchedLottoNumbers.getSizeOfNumbersNotIncludingBonusNumber()).isEqualTo(2);
+        assertThat(matchedLottoNumbers.getSizeExceptBonusNumber()).isEqualTo(2);
         assertThat(matchedLottoNumbers.isContainsBonusNumber()).isFalse();
     }
 
-    @DisplayName("일치한 번호들이 보너스 번호 여부에 따라 구분되어서 결과로 나오는지 - "
-        + "일반 번호 0개, 보너스 번호 1개")
+    @DisplayName("일반 번호와 보너스 번호의 일치 결과 테스트 - 일반 번호 0개, 보너스 번호 1개")
     @Test
-    void Should_Return_ExactClassifiedMatchResult_When_Regular0Bonus1() {
-        LottoTicket purchasedLottoTicket = new LottoTicket(
+    void Should_Return_ExpectedMatchResult_When_Regular0Bonus1() {
+        LottoTicket lottoTicket = new LottoTicket(
             Arrays.asList(
                 LottoNumbers.of(11),
                 LottoNumbers.of(7),
@@ -68,17 +66,16 @@ class MatchedLottoNumbersTest {
         );
 
         MatchedLottoNumbers matchedLottoNumbers
-            = winningTicketAndBonusNumber.getMatchedLottoNumbers(purchasedLottoTicket);
+            = winningTicketAndBonusNumber.getMatchedLottoNumbers(lottoTicket);
 
-        assertThat(matchedLottoNumbers.getSizeOfNumbersNotIncludingBonusNumber()).isEqualTo(0);
+        assertThat(matchedLottoNumbers.getSizeExceptBonusNumber()).isEqualTo(0);
         assertThat(matchedLottoNumbers.isContainsBonusNumber()).isTrue();
     }
 
-    @DisplayName("일치한 번호들이 보너스 번호 여부에 따라 구분되어서 결과로 나오는지 - "
-        + "일반 번호 3개, 보너스 번호 1개")
+    @DisplayName("일반 번호와 보너스 번호의 일치 결과 테스트 - 일반 번호 3개, 보너스 번호 1개")
     @Test
-    void Should_Return_ExactClassifiedMatchResult_When_Regular3Bonus1() {
-        LottoTicket purchasedLottoTicket = new LottoTicket(
+    void Should_Return_ExpectedMatchResult_When_Regular3Bonus1() {
+        LottoTicket lottoTicket = new LottoTicket(
             Arrays.asList(
                 LottoNumbers.of(1),
                 LottoNumbers.of(2),
@@ -90,9 +87,9 @@ class MatchedLottoNumbersTest {
         );
 
         MatchedLottoNumbers matchedLottoNumbers
-            = winningTicketAndBonusNumber.getMatchedLottoNumbers(purchasedLottoTicket);
+            = winningTicketAndBonusNumber.getMatchedLottoNumbers(lottoTicket);
 
-        assertThat(matchedLottoNumbers.getSizeOfNumbersNotIncludingBonusNumber()).isEqualTo(3);
+        assertThat(matchedLottoNumbers.getSizeExceptBonusNumber()).isEqualTo(3);
         assertThat(matchedLottoNumbers.isContainsBonusNumber()).isTrue();
     }
 }

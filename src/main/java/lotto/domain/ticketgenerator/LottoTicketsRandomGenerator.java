@@ -5,10 +5,10 @@ import lotto.domain.LottoTicket;
 import lotto.domain.ticketpurchase.LottoTickets;
 import lotto.domain.ticketpurchase.UserPurchase;
 
-public class LottoRandomGenerator {
+public class LottoTicketsRandomGenerator {
     public LottoTickets generate(UserPurchase userPurchase) {
         LottoTickets lottoTickets = new LottoTickets();
-        for (int i = 0; i < userPurchase.autoTicketsSize(); i++) {
+        for (int i = 0; i < userPurchase.randomTicketsSize(); i++) {
             LottoTicket randomTicket = new LottoTicket(LottoNumbers.getRandomNumbersTicketSize());
             lottoTickets.add(randomTicket);
         }

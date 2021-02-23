@@ -1,9 +1,8 @@
 package lotto.domain;
 
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +25,7 @@ class LottoNumbersTest {
 
     @DisplayName("랜덤 로또 번호들 얻은 이후 원래 로또번호들 안섞인 상태인지 테스트")
     @Test
-    void Should_Not_Shuffled_When_GetRandomNumbersTicketSize() {
+    void Should_Not_Shuffled_When_AfterGetRandomNumbersTicketSize() {
         LottoNumbers.getRandomNumbersTicketSize();
         for (int i = 1; i <= 45; i++) {
             assertThat(LottoNumbers.of(i)).isEqualTo(new LottoNumber(i));

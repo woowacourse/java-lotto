@@ -1,6 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.ticketgenerator.LottoRandomGenerator;
+import lotto.domain.ticketgenerator.LottoTicketsRandomGenerator;
 import lotto.domain.ticketpurchase.LottoTickets;
 import lotto.domain.ticketpurchase.UserPurchase;
 import lotto.domain.ticketresult.LottoComparator;
@@ -12,12 +12,12 @@ public class LottoMain {
     public static void main(String[] args) {
         UserPurchase userPurchase = InputView.getUserPurchase();
         LottoTickets lottoTickets = new LottoTickets();
-        if (userPurchase.isPurchaseManual()) {
+        if (userPurchase.isPurchaseManually()) {
             lottoTickets.addAll(InputView.purchaseManually(userPurchase));
         }
-        LottoRandomGenerator lottoRandomGenerator = new LottoRandomGenerator();
-        if (userPurchase.isPurchaseAuto()) {
-            lottoTickets.addAll(lottoRandomGenerator.generate(userPurchase));
+        LottoTicketsRandomGenerator lottoTicketsRandomGenerator = new LottoTicketsRandomGenerator();
+        if (userPurchase.isPurchaseRandomly()) {
+            lottoTickets.addAll(lottoTicketsRandomGenerator.generate(userPurchase));
         }
         OutputView.printAllLottoTickets(lottoTickets, userPurchase);
 
