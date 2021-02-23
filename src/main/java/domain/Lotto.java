@@ -35,4 +35,10 @@ public class Lotto {
     public boolean contains(final LottoBall lottoBall) {
         return lotto.contains(lottoBall);
     }
+
+    public int matchNumber(final Lotto lottoToCompare) {
+        return (int) this.lotto.stream()
+                .filter(lottoBall -> lottoToCompare.contains(lottoBall))
+                .count();
+    }
 }
