@@ -10,35 +10,40 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class WinningLottoTest {
-    private LottoTicket firstPrizeTicket;
-    private LottoTicket secondPrizeTicket;
+    private List<LottoNumber> firstPrizeLottoNumbers;
+    private List<LottoNumber> secondPrizeLottoNumbers;
+    private List<List<LottoNumber>> lottoGroups;
     private LottoTickets lottoTickets;
 
     @BeforeEach
     void init() {
-        firstPrizeTicket = new LottoTicket(Arrays.asList(
+        firstPrizeLottoNumbers = Arrays.asList(
                 LottoNumber.valueOf(1),
                 LottoNumber.valueOf(2),
                 LottoNumber.valueOf(3),
                 LottoNumber.valueOf(4),
                 LottoNumber.valueOf(5),
-                LottoNumber.valueOf(7)));
+                LottoNumber.valueOf(7));
 
-        secondPrizeTicket = new LottoTicket(Arrays.asList(
+        secondPrizeLottoNumbers = Arrays.asList(
                 LottoNumber.valueOf(1),
                 LottoNumber.valueOf(2),
                 LottoNumber.valueOf(3),
                 LottoNumber.valueOf(4),
                 LottoNumber.valueOf(5),
-                LottoNumber.valueOf(8)));
-
-        lottoTickets = new LottoTickets(Arrays.asList(firstPrizeTicket, secondPrizeTicket));
+                LottoNumber.valueOf(8));
+        lottoGroups = new ArrayList<>();
+        lottoGroups.add(firstPrizeLottoNumbers);
+        lottoGroups.add(secondPrizeLottoNumbers);
+        lottoTickets = new LottoTickets(lottoGroups);
     }
 
     @Test

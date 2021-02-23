@@ -34,28 +34,25 @@ public class LottoController {
     }
 
     private LottoTickets buyLottoTickets(LottoCount lottoCount) {
-        List<LottoTicket> lottoTicketGroup = new ArrayList<>();
-        lottoTicketGroup.addAll(createAllManualLottoTicket(lottoCount.getManualLottoCount()));
-        lottoTicketGroup.addAll(createAllAutoLottoTicket(lottoCount.getAutoLottoCount()));
-        return new LottoTickets(lottoTicketGroup);
+        List<List<LottoNumber>> lottoNumbersGroup = new ArrayList<>();
+        lottoNumbersGroup.addAll(createAllManualLottoTicket(lottoCount.getManualLottoCount()));
+        lottoNumbersGroup.addAll(createAutoNumbers(lottoCount.getAutoLottoCount()));
+        return new LottoTickets(lottoNumbersGroup);
     }
 
-    private List<LottoTicket> createAllManualLottoTicket(int manualLottoCount) {
+    private List<List<LottoNumber>> createAllManualLottoTicket(int manualLottoCount) {
         OutputView.printInputManualLottoNumbers();
-        List<LottoTicket> manualLottoTickets = new ArrayList<>();
-        for (int i = 0; i < manualLottoCount; i++) {
-            manualLottoTickets.add(
-                    InputView.inputNumbers()
-                            .stream()
-                            .map(input -> LottoNumber.valueOf(ParseUtil.parseInt(input)))
-                            .collect(collectingAndThen(toList(), LottoTicket::new)));
-        }
-        return manualLottoTickets;
+        return IntStream.range(0, manualLottoCount)
+                .mapToObj(i -> InputView.inputNumbers()
+                        .stream()
+                        .map(input -> LottoNumber.valueOf(ParseUtil.parseInt(input)))
+                        .collect(Collectors.toList()))
+                .collect(Collectors.toList());
     }
 
-    private List<LottoTicket> createAllAutoLottoTicket(int autoLottoCount) {
+    private List<List<LottoNumber>> createAutoNumbers(int autoLottoCount) {
         return IntStream.range(0, autoLottoCount)
-                .mapToObj(i -> LottoTicketFactory.generateAutoLottoTicket())
+                .mapToObj(i -> AutoNumbersFactory.generateAutoLottoTicket())
                 .collect(Collectors.toList());
     }
 
@@ -69,7 +66,8 @@ public class LottoController {
         return new WinningLotto(winningTicket, bonusNumber);
     }
 
-    private void showResult(int totalLottoCount, LottoTickets lottoTickets, WinningLotto winningLotto) {
+    private void showResult(int totalLottoCount, LottoTickets lottoTickets,
+                            WinningLotto winningLotto) {
         LottoResult lottoResult = winningLotto.checkPrizes(lottoTickets);
         OutputView.printResultStatistic(lottoResult);
         Money totalProfit = lottoResult.getTotalProfit();
