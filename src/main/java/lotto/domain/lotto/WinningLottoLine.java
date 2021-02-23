@@ -10,7 +10,7 @@ public class WinningLottoLine {
     private final LottoNumber bonusLottoNumber;
 
     public WinningLottoLine(LottoLine winningLottoLine, LottoNumber bonusLottoNumber) {
-        if (winningLottoLine.isContainLottoNumber(bonusLottoNumber)) {
+        if (winningLottoLine.hasLottoNumber(bonusLottoNumber)) {
             throw new IllegalArgumentException(
                 LOTTO_LINE_NUMBER_BONUS_LOTTO_NUMBER_DUPLICATE_ERROR.getMessage());
         }

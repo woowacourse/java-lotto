@@ -33,7 +33,7 @@ public class LottoLine {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
-    public boolean isContainLottoNumber(LottoNumber lottoNumber) {
+    public boolean hasLottoNumber(LottoNumber lottoNumber) {
         return this.lottoNumbers.contains(lottoNumber);
     }
 
