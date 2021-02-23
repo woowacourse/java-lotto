@@ -13,6 +13,14 @@ public class OutputView {
         System.out.println("구입금액을 입력해 주세요.");
     }
 
+    public static void printInputManualLottoAmountMessage() {
+        System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
+    }
+
+    public static void printInputManualLottoNumbersMessage() {
+        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
+    }
+
     public static void printLottoTicketsCount(LottoTickets lottoTickets) {
         System.out.println(lottoTickets.getLottoTickets().size() + "개를 구매했습니다.");
     }

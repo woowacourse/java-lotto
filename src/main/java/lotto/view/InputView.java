@@ -35,7 +35,7 @@ public class InputView {
     }
 
     public static String inputManualLottoAmount() {
-        //TODO : 안내메세지 출력.
+        OutputView.printInputManualLottoAmountMessage();
         return SCANNER.nextLine();
     }
 }

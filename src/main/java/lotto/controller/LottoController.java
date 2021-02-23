@@ -23,8 +23,8 @@ public class LottoController {
     }
 
     private List<LottoTicket> getManualLottoTickets(ManualLottoAmount manualLottoAmount) {
-        // TODO : 안내 메세지 출력
         List<LottoTicket> manualLottoTickets = new ArrayList<>();
+        OutputView.printInputManualLottoNumbersMessage();
         for (int i = 0; i < manualLottoAmount.getValue(); i++) {
             manualLottoTickets.add(
                     LottoTicketFactory.createManualLottoTicket(InputView.inputLottoNumbers()));
