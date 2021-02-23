@@ -6,13 +6,11 @@ public class LottoAmount {
 
     private int totalAmount;
     private int manualAmount;
-    private int autoAmount;
 
     public LottoAmount(Money money, String manualAmount) {
         validateManualMoney(money, manualAmount);
         this.totalAmount = money.toNumberOfPurchaseLotto();
         this.manualAmount = Integer.parseInt(manualAmount);
-        this.autoAmount = totalAmount - this.manualAmount;
     }
 
     private void validateManualMoney(Money money, String manualAmount) {
@@ -50,6 +48,6 @@ public class LottoAmount {
     }
 
     public int toAutoAmountNumber() {
-        return autoAmount;
+        return totalAmount - manualAmount;
     }
 }
