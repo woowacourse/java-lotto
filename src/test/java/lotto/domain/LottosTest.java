@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.util.LottoFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,13 +13,13 @@ public class LottosTest {
     @Test
     void createLottos() {
         Lottos lottos = new Lottos(
-                LottoFactory.createManualLotto(Arrays.asList("1, 2, 3, 20, 21, 40", "1, 2, 20, 25, 29, 45")),
-                LottoFactory.createAutoLotto(0)
+                ManualLotto.createManualLotto(Arrays.asList("1, 2, 3, 20, 21, 40", "1, 2, 20, 25, 29, 45")),
+                AutoLotto.createAutoLotto(0)
         );
 
         assertThat(lottos).isEqualTo(new Lottos(
-                LottoFactory.createManualLotto(Arrays.asList("1, 2, 3, 20, 21, 40", "1, 2, 20, 25, 29, 45")),
-                LottoFactory.createAutoLotto(0)
+                ManualLotto.createManualLotto(Arrays.asList("1, 2, 3, 20, 21, 40", "1, 2, 20, 25, 29, 45")),
+                AutoLotto.createAutoLotto(0)
         ));
     }
 

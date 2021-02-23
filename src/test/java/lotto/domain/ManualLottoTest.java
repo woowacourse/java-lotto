@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.util.LottoFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,16 +16,16 @@ public class ManualLottoTest {
     void create_manual_lotto() {
         List<String> manualLottoNumbers = Arrays.asList("1, 2, 3, 4, 5, 6", "7, 8, 9, 10, 11, 12");
 
-        ManualLotto manualLotto = LottoFactory.createManualLotto(manualLottoNumbers);
+        ManualLotto manualLotto = ManualLotto.createManualLotto(manualLottoNumbers);
 
-        assertThat(manualLotto).isEqualTo(LottoFactory.createManualLotto(Arrays.asList("1, 2, 3, 4, 5, 6", "7, 8, 9, 10, 11, 12")));
+        assertThat(manualLotto).isEqualTo(ManualLotto.createManualLotto(Arrays.asList("1, 2, 3, 4, 5, 6", "7, 8, 9, 10, 11, 12")));
     }
 
     @DisplayName("유효하지 않는 번호 생성 테스트")
     @Test
     void wrong_manual_lottoNumbers() {
         assertThatThrownBy(() -> {
-            LottoFactory.createManualLotto(Arrays.asList("1, 2, 3, 4, 5, 46"));
+            ManualLotto.createManualLotto(Arrays.asList("1, 2, 3, 4, 5, 46"));
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("유효하지 않은 로또 번호입니다.");
     }
@@ -35,7 +34,7 @@ public class ManualLottoTest {
     @Test
     void wrong_input_lottoNumbers() {
         assertThatThrownBy(() -> {
-            LottoFactory.createManualLotto(Arrays.asList("a, 2, 3, 4, 5, 6"));
+            ManualLotto.createManualLotto(Arrays.asList("a, 2, 3, 4, 5, 6"));
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("숫자와 , 를 이용하여 입력해주세요.");
     }
