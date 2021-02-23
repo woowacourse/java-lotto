@@ -14,7 +14,7 @@ public class LottoNumberTest {
     @DisplayName("숫자 외의 입력에 대해 에러 발생")
     void lottoNumber_isInteger() {
         assertThatThrownBy(() -> {
-            new LottoNumber("ab");
+            LottoNumber.of("ab");
         }).isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining(NUMBER_RANGE_ERROR);
     }
@@ -23,7 +23,7 @@ public class LottoNumberTest {
     @DisplayName("숫자가 범위를 넘어가면 에러 발생")
     void lottoNumber_range() {
         assertThatThrownBy(() -> {
-            new LottoNumber(50);
+            LottoNumber.of(50);
         }).isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining(NUMBER_RANGE_ERROR);
     }
@@ -31,7 +31,7 @@ public class LottoNumberTest {
     @Test
     @DisplayName("같은 숫자면 같은 LottoNumber 로 판단")
     void lottoNumber() {
-        assertThat(new LottoNumber(5)).isEqualTo(new LottoNumber(5));
+        assertThat(LottoNumber.of(5)).isEqualTo(LottoNumber.of(5));
     }
 
 }

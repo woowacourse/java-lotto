@@ -13,22 +13,22 @@ public class WinningLottoTest {
     @DisplayName("몇 등에 당첨인지 확인")
     void winningLotto_findRank() {
         Lotto winLotto = new Lotto(Arrays.asList(
-            new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(4),
-            new LottoNumber(5),
-            new LottoNumber(6)
+            LottoNumber.of(1),
+            LottoNumber.of(2),
+            LottoNumber.of(3),
+            LottoNumber.of(4),
+            LottoNumber.of(5),
+            LottoNumber.of(6)
         ));
-        WinningLotto winningLotto = new WinningLotto(winLotto, new LottoNumber(7));
+        WinningLotto winningLotto = new WinningLotto(winLotto, LottoNumber.of(7));
 
         Lotto lotto = new Lotto(Arrays.asList(
-            new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(4),
-            new LottoNumber(5),
-            new LottoNumber(7)
+            LottoNumber.of(1),
+            LottoNumber.of(2),
+            LottoNumber.of(3),
+            LottoNumber.of(4),
+            LottoNumber.of(5),
+            LottoNumber.of(7)
         ));
         Rank rank = winningLotto.findRank(lotto);
         assertThat(rank).isEqualTo(Rank.SECOND);

@@ -20,7 +20,7 @@ public class Seller {
         List<LottoNumber> lottoNumber = new ArrayList<>();
         for (String number : input.split(DELIMITER, -1)) {
             number = number.trim();
-            lottoNumber.add(new LottoNumber(number));
+            lottoNumber.add(LottoNumber.of(number));
         }
         return lottoNumber;
     }

@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber {
@@ -9,18 +11,29 @@ public class LottoNumber {
     public static final String NUMBER_RANGE_ERROR = "[ERROR] 1 ~ 45 사이의 숫자를 입력해 주세요.";
     private final int number;
 
-    public LottoNumber(int number) {
-        validateRange(number);
+    private static Map<Integer, LottoNumber> lottoNumberCache = new HashMap<>();
+    static {
+        for (int i=MIN_NUMBER; i<=MAX_NUMBER; i++) {
+            lottoNumberCache.put(i, new LottoNumber(i));
+        }
+    }
+
+    private LottoNumber(int number) {
         this.number = number;
     }
 
-    public LottoNumber(String input) {
+    public static LottoNumber of(int number) {
+        validateRange(number);
+        return lottoNumberCache.get(number);
+    }
+
+    public static LottoNumber of(String input) {
         int number = validateNumber(input);
         validateRange(number);
-        this.number = number;
+        return lottoNumberCache.get(number);
     }
 
-    private int validateNumber(String input) {
+    private static int validateNumber(String input) {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
@@ -28,7 +41,7 @@ public class LottoNumber {
         }
     }
 
-    private void validateRange(int number) {
+    private static void validateRange(int number) {
         if (number < MIN_NUMBER || number > MAX_NUMBER) {
             throw new IllegalArgumentException(NUMBER_RANGE_ERROR);
         }

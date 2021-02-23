@@ -20,7 +20,7 @@ public class Application {
 
         WinningLotto winningLotto = new WinningLotto(
             new Lotto(seller.sell(LottoView.requestWinningNumber())),
-            new LottoNumber(LottoView.requestBonusBallNumber())
+            LottoNumber.of(LottoView.requestBonusBallNumber())
         );
 
         Map<Rank, Integer> ranks = new LinkedHashMap<>();
