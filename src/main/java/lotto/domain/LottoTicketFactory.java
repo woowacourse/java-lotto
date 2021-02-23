@@ -36,6 +36,7 @@ public class LottoTicketFactory {
         Collections.shuffle(lottoNumberRange);
         return new LottoTicket(lottoNumberRange.stream()
                 .limit(LOTTO_TICKET_SIZE)
+                .sorted()
                 .collect(Collectors.toList()));
     }
 

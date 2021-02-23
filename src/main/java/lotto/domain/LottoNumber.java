@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 
-public class LottoNumber implements Comparable<LottoNumber> {
+public class LottoNumber implements Comparable<LottoNumber>{
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final Pattern NUMBER_PATTERN = Pattern.compile("^[0-9]*$");
     private static final int MIN_LOTTO_NUMBER = 1;
@@ -17,13 +17,13 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     static {
         IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
-                .forEach(number -> lottoNumbers.put(number, new LottoNumber(Integer.toString(number))));
+                .forEach(number -> lottoNumbers.put(number, new LottoNumber(number)));
     }
 
     private final int value;
 
-    private LottoNumber(String input) {
-        this.value = Integer.parseInt(input);
+    private LottoNumber(int input) {
+        this.value = input;
     }
 
     public static LottoNumber of(String input) {

@@ -24,6 +24,19 @@ public class LottoTicketFactoryTest {
                 LottoNumber.of("6"));
     }
 
+    @DisplayName("수동로또 정렬기능 검증")
+    @Test
+    void sortManualLottoTickets() {
+        List<String> numbers = new ArrayList<>(Arrays.asList("6","2","3","5","4","1"));
+        assertThat(LottoTicketFactory.createManualLottoTicket(numbers).getLottoTicket()).containsExactly(
+                LottoNumber.of("1"),
+                LottoNumber.of("2"),
+                LottoNumber.of("3"),
+                LottoNumber.of("4"),
+                LottoNumber.of("5"),
+                LottoNumber.of("6"));
+    }
+
     @Test
     @DisplayName("입력받은 금액만큼 수동티켓과 자동티켓 생성")
     void createAutoAndManualLottoTickets() {
