@@ -61,13 +61,13 @@
 - [x] 숫자를 나눌 delimiter(,) 와 trim() 처리
 - [x] 사용자로부터 받은 번호가 정렬되지 않은 경우
 - [x] null이 아닌 enter가 입력된 경우 예외처리
-- [ ] 코딩 컨벤션 으로 static final 순서 수정
+- [x] 코딩 컨벤션 으로 static final 순서 수정
 - [ ] LottoMachine 생성시 Generator 인자로 전달
 - [ ] LottoNumber에 캐시 자료구조 변경 고려
 - [ ] LottoSystem에 Getter 불변 객체 반환으로 수정
 - [ ] LottoTicket ValidateDuplicatedNumber 메소드 고민 필요
 - [ ] InputView에서 숫자를 parseInt로 받는 것 고려 - 예외 처리 방식 변경
-- [ ] 1-45 리스트 Generator 내부에서 생성
+- [x] 1-45 리스트 Generator 내부에서 생성
 - [ ] WinningNumbers validateSize 중복 검증 수정
 - [ ] WinningNumbers/WinningResult 에 get 붙은 메소드 이름 고민
 - [ ] Controller 필드에 변수 줄이기 
