@@ -4,6 +4,7 @@ import domain.Prize;
 import domain.WinningStatics;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -27,6 +28,7 @@ public class WinningStaticsDto {
                         }
                 );
 
+        Collections.reverse(prizeDtos);
         return new WinningStaticsDto(prizeDtos);
     }
 

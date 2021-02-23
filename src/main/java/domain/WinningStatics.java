@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -10,12 +11,8 @@ public class WinningStatics {
     private final Map<Prize, Integer> numberPerPrize = new LinkedHashMap<>();
 
     {
-        numberPerPrize.put(Prize.NOTHING, 0);
-        numberPerPrize.put(Prize.FIFTH, 0);
-        numberPerPrize.put(Prize.FOURTH, 0);
-        numberPerPrize.put(Prize.THIRD, 0);
-        numberPerPrize.put(Prize.SECOND, 0);
-        numberPerPrize.put(Prize.FIRST, 0);
+        Arrays.stream(Prize.values())
+                .forEachOrdered(prize -> numberPerPrize.put(prize, 0));
     }
 
     public WinningStatics(final List<Prize> prizes) {
