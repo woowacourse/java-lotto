@@ -12,8 +12,8 @@ public class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 45})
     void create(int input) {
-        LottoNumber lottoNumber = new LottoNumber(input);
-        assertThat(lottoNumber).isEqualTo(new LottoNumber(input));
+        LottoNumber lottoNumber = LottoNumber.valueOf(input);
+        assertThat(lottoNumber).isEqualTo(LottoNumber.valueOf(input));
     }
 
 }

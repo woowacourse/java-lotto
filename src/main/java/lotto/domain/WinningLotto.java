@@ -12,7 +12,7 @@ public class WinningLotto {
     public WinningLotto(final List<Integer> numbers, final int bonusNumber) {
         validateBonusNumber(numbers, bonusNumber);
         lotto = new Lotto(numbers);
-        this.bonusNumber = new LottoNumber(bonusNumber);
+        this.bonusNumber = LottoNumber.valueOf(bonusNumber);
     }
 
     private void validateBonusNumber(final List<Integer> numbers, int bonusNumber) {
@@ -23,7 +23,7 @@ public class WinningLotto {
 
     public Reward match(final Lotto lotto) {
         int count = (int) this.lotto.getLottoNumbers().stream()
-            .filter(number -> lotto.isContainsNumber(new LottoNumber(number)))
+            .filter(number -> lotto.isContainsNumber(LottoNumber.valueOf(number)))
             .count();
 
         return Reward.valueOf(count, lotto.isContainsNumber(bonusNumber));
