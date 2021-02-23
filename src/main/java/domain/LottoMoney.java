@@ -65,10 +65,6 @@ public class LottoMoney {
         return value / SINGLE_LOTTO_PRICE;
     }
 
-    public int getValue() {
-        return value;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
