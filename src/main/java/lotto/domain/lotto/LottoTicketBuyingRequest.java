@@ -15,7 +15,7 @@ public class LottoTicketBuyingRequest {
 
     public LottoTicketBuyingRequest(Money money, int numberOfManualLotto) {
         if (numberOfManualLotto * PRICE_EACH_LOTTO > money.getValue()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ERROR_MANUAL_LOTTO_PRICE_OVER);
         }
 
         this.money = money;
