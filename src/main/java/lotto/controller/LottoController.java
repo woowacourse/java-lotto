@@ -26,9 +26,10 @@ public class LottoController {
 
             showLottos(lottoCount, lottos);
             showResult(lottos, createWinningLotto(lottoMachine), payment);
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             throw new IllegalTypeException();
+        } catch (IllegalArgumentException | NullPointerException e) {
+            e.printStackTrace();
         }
     }
 
