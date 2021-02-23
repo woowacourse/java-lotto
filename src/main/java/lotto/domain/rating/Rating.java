@@ -16,7 +16,7 @@ public enum Rating {
         this.reward = reward;
     }
 
-    public static Rating getRating(final int matchCount, final boolean containBonusBall) {
+    public static Rating of(final int matchCount, final boolean containBonusBall) {
         LottoResult lottoResult = new LottoResult(matchCount, containBonusBall);
         for (Rating rating : values()) {
             if (rating.lottoResult.equals(lottoResult)) {

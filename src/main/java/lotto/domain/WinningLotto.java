@@ -20,14 +20,14 @@ public class WinningLotto {
     }
 
     public Rating scratch(Lotto lotto) {
-        return Rating.getRating(compareLottoNumber(lotto), compareBonusBall(lotto));
+        return Rating.of(matchedLottoNumberCount(lotto), containBonusBall(lotto));
     }
 
-    private int compareLottoNumber(final Lotto lotto) {
+    private int matchedLottoNumberCount(final Lotto lotto) {
         return lotto.countCommonValue(this.lotto);
     }
 
-    private boolean compareBonusBall(final Lotto lotto) {
+    private boolean containBonusBall(final Lotto lotto) {
         return lotto.containNumber(bonusBall);
     }
 }

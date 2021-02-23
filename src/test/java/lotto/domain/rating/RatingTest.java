@@ -26,7 +26,7 @@ public class RatingTest {
         LottoNumber bonusNumber = LottoNumber.valueOf(7);
 
         Rating rating = Rating
-                .getRating(inputLotto.countCommonValue(lotto), inputLotto.containNumber(bonusNumber));
+                .of(inputLotto.countCommonValue(lotto), inputLotto.containNumber(bonusNumber));
         assertThat(rating.getLottoResult()
                          .getMatchedCount()).isEqualTo(expected);
     }
@@ -46,7 +46,7 @@ public class RatingTest {
         LottoNumber bonusNumber = LottoNumber.valueOf(7);
 
         Rating rating = Rating
-                .getRating(inputLotto.countCommonValue(lotto), inputLotto.containNumber(bonusNumber));
+                .of(inputLotto.countCommonValue(lotto), inputLotto.containNumber(bonusNumber));
         assertThat(rating.getReward()).isEqualTo(expected);
     }
 }
