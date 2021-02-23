@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 import java.util.Arrays;
 import java.util.List;
-import lotto.domain.ticketFactory.TicketFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,7 +17,7 @@ class WinningLottoTest {
     @BeforeEach
     void init(){
         numbers = Arrays.asList(1,2,3,4,5,6);
-        winningTicket = TicketFactory.makeFixedTicket(numbers);
+        winningTicket = new LottoTicket(numbers);
     }
 
     @DisplayName("당첨 로또의 번호들과 보너스볼의 번호는 중복되어선 안된다.")
@@ -34,7 +33,7 @@ class WinningLottoTest {
     @Test
     void checkBonus(){
         List<Integer> ticketNumbers = Arrays.asList(1,2,3,4,5,7);
-        LottoTicket lottoTicket = TicketFactory.makeFixedTicket(ticketNumbers);
+        LottoTicket lottoTicket = new LottoTicket(ticketNumbers);
         WinningLotto winningLotto = new WinningLotto(winningTicket,new LottoNumber(7));
         WinningLotto winningLotto2 = new WinningLotto(winningTicket,new LottoNumber(10));
         assertThat(winningLotto.hasBonus(lottoTicket)).isTrue();

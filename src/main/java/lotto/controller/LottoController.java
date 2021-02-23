@@ -1,13 +1,16 @@
 package lotto.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.IntStream;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
 import lotto.domain.WinningLotto;
-import lotto.domain.ticketFactory.TicketBox;
 import lotto.exception.LottoCustomException;
+import lotto.utils.RandomUtils;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -39,52 +42,82 @@ public class LottoController {
     }
 
     private LottoTickets buyTickets(Money money) {
-        TicketBox ticketBox = new TicketBox();
         LottoTickets lottoTickets = new LottoTickets();
-        OutputView.printFixedTicketMessage();
-        int fixedTickets = inputView.inputValue();
-        OutputView.printInputFixedTicketMessage();
-        for(int i = 0; i<fixedTickets; i++){
-            lottoTickets.addTicket(inputTicket());
-        }
-        for(int i=0; i< money.countTickets() - fixedTickets; i++){
-            lottoTickets.addTicket(ticketBox.makeRandomTicket());
-        }
-        OutputView.printAllTickets(fixedTickets, money.countTickets() - fixedTickets, lottoTickets);
+        int fixedTickets = inputManualTicketsCount(money);
+        buyManualTickets(lottoTickets, fixedTickets);
+        buyRandomTickets(lottoTickets, money.countTickets() - fixedTickets);
+        OutputView.printAllTickets(fixedTickets, money, lottoTickets);
         return lottoTickets;
     }
 
-    private WinningLotto inputWinningLotto() {
-        OutputView.printWinningNumbers();
-        LottoTicket lottoTicket = inputTicket();
-        LottoNumber bonus = inputBonus(lottoTicket);
-        return new WinningLotto(lottoTicket, bonus);
+    private void buyManualTickets(LottoTickets lottoTickets, int count) {
+        if (count > 0) {
+            OutputView.printInputFixedTicketMessage();
+            lottoTickets.addTickets(inputManualTickets(count));
+        }
     }
 
-    private LottoTicket inputTicket() {
+    private void buyRandomTickets(LottoTickets lottoTickets, int count) {
+        if (count > 0) {
+            lottoTickets.addTickets(inputRandomTickets(count));
+        }
+    }
+
+    private List<LottoTicket> inputRandomTickets(int count) {
+        List<LottoTicket> tickets = new ArrayList<>();
+        IntStream.rangeClosed(1, count)
+            .forEach(index -> {
+                tickets.add(new LottoTicket(RandomUtils.generateNumbers()));
+            });
+        return tickets;
+    }
+
+    private int inputManualTicketsCount(Money money) {
+        try {
+            OutputView.printFixedTicketMessage();
+            int manualTickets = inputView.inputValue();
+            money.checkLimit(manualTickets);
+            return manualTickets;
+        } catch (LottoCustomException exception) {
+            OutputView.printErrorMessage(exception);
+            return inputManualTicketsCount(money);
+        }
+    }
+
+    private List<LottoTicket> inputManualTickets(int count) {
+        List<LottoTicket> tickets = new ArrayList<>();
+        IntStream.rangeClosed(1, count)
+            .forEach(index -> {
+                tickets.add(inputManualTicket());
+            });
+        return tickets;
+    }
+
+    private LottoTicket inputManualTicket() {
         try {
             return new LottoTicket(inputView.inputNumbers());
         } catch (LottoCustomException exception) {
             OutputView.printErrorMessage(exception);
-            return inputTicket();
+            return inputManualTicket();
         }
+    }
+
+    private WinningLotto inputWinningLotto() {
+        OutputView.printWinningNumbers();
+        LottoTicket lottoTicket = inputManualTicket();
+        LottoNumber bonus = inputBonus(lottoTicket);
+        return new WinningLotto(lottoTicket, bonus);
     }
 
     private LottoNumber inputBonus(LottoTicket lottoTicket) {
         try {
             OutputView.printBonusNumber();
             LottoNumber bonusNumber = new LottoNumber(inputView.inputValue());
-            validateDuplicate(lottoTicket, bonusNumber);
+            bonusNumber.validateDuplicate(lottoTicket);
             return bonusNumber;
         } catch (LottoCustomException exception) {
             OutputView.printErrorMessage(exception);
             return inputBonus(lottoTicket);
-        }
-    }
-
-    private void validateDuplicate(LottoTicket lottoTicket, LottoNumber bonusNumber) {
-        if (lottoTicket.hasNumber(bonusNumber)) {
-            throw new LottoCustomException("보너스 볼은 지난 주 당첨번호와 중복될 수 없습니다.");
         }
     }
 

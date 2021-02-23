@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import java.util.Collections;
-import lotto.domain.ticketFactory.TicketFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,9 +15,9 @@ class LottoResultTest {
 
     @BeforeEach
     void init() {
-        LottoTicket lottoTicket = TicketFactory.makeFixedTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoTicket lottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
         lottoTickets = new LottoTickets(Collections.singletonList(lottoTicket));
-        LottoTicket winningTicket = TicketFactory.makeFixedTicket(Arrays.asList(1, 2, 3, 4, 5, 7));
+        LottoTicket winningTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 7));
         winningLotto = new WinningLotto(winningTicket, new LottoNumber(6));
     }
 
