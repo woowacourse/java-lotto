@@ -5,8 +5,9 @@ import lotto.exception.LottoCustomException;
 import java.util.Objects;
 
 public class Money {
-    private static final int ZERO = 0;
+
     private static final int MONEY_UNIT = 1000;
+    private static final int ZERO = 0;
 
     private final int money;
 
@@ -15,7 +16,7 @@ public class Money {
         this.money = money;
     }
 
-    public int getTicketCount() {
+    public int getTotalPurchaseCount() {
         return this.money / MONEY_UNIT;
     }
 
@@ -25,6 +26,13 @@ public class Money {
 
     public int getChange() {
         return money % MONEY_UNIT;
+    }
+
+    public boolean isCountExceedLimit(int checkMoney) {
+        if (checkMoney * MONEY_UNIT > money) {
+            return true;
+        }
+        return false;
     }
 
     public int getMoney() {

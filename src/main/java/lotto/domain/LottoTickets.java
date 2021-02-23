@@ -19,7 +19,11 @@ public class LottoTickets {
         return new ArrayList<>(lottoTickets);
     }
 
-    public void makeTicketByCount(int counts) {
+    public void addManuallyCreatedTickets(List<LottoTicket> lottoTickets) {
+        this.lottoTickets.addAll(lottoTickets);
+    }
+
+    public void generateTicketAutomatically(int counts) {
         for (int i = 0; i < counts; i++) {
             lottoTickets.add(RandomNumberTicketFactory.makeTicket());
         }
