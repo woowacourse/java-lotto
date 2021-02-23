@@ -17,19 +17,23 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
-    public static LottoTickets generateAutomatic(int lottoTicketCounts, LottoNumberGenerator lottoNumberGenerator) {
-        List<LottoTicket> lottoTickets = Stream.generate(() -> LottoTicket.from(lottoNumberGenerator.generate()))
-                .limit(lottoTicketCounts)
+    public static LottoTickets generate(List<TicketNumbersDto> manualTicketsNumbers, int automaticTicketCounts, LottoNumberGenerator lottoNumberGenerator) {
+        Stream<LottoTicket> manualTickets = generateManual(manualTicketsNumbers);
+        Stream<LottoTicket> automaticTickets = generateAutomatic(automaticTicketCounts, lottoNumberGenerator);
+        List<LottoTicket> concatLottoTickets = Stream.concat(manualTickets, automaticTickets)
                 .collect(Collectors.toList());
-        return new LottoTickets(lottoTickets);
+        return new LottoTickets(concatLottoTickets);
     }
 
-    public static LottoTickets generateManual(List<TicketNumbersDto> manualTicketsNumbers) {
-        List<LottoTicket> lottoTickets = manualTicketsNumbers.stream()
+    private static Stream<LottoTicket> generateManual(List<TicketNumbersDto> manualTicketsNumbers) {
+        return manualTicketsNumbers.stream()
                 .map(TicketNumbersDto::getTicketNumbers)
-                .map(LottoTicket::from)
-                .collect(Collectors.toList());
-        return new LottoTickets(lottoTickets);
+                .map(LottoTicket::from);
+    }
+
+    private static Stream<LottoTicket> generateAutomatic(int automaticTicketCounts, LottoNumberGenerator lottoNumberGenerator) {
+        return Stream.generate(() -> LottoTicket.from(lottoNumberGenerator.generate()))
+                .limit(automaticTicketCounts);
     }
 
     public LottoResult checkResult(WinningLottoTicket winningLottoTicket) {
@@ -38,12 +42,6 @@ public class LottoTickets {
                 .collect(Collectors.groupingBy(lottoRank -> lottoRank, () -> new EnumMap<>(LottoRank.class),
                         Collectors.counting()));
         return new LottoResult(statistics);
-    }
-
-    public LottoTickets concat(LottoTickets targetLottoTickets) {
-        List<LottoTicket> concatLottoTickets = Stream.concat(this.lottoTickets.stream(), targetLottoTickets.lottoTickets.stream())
-                .collect(Collectors.toList());
-        return new LottoTickets(concatLottoTickets);
     }
 
     public int getTicketCounts() {

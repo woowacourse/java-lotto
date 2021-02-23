@@ -20,9 +20,7 @@ public class LottoMachine {
         int manualTicketCounts = manualTicketsNumbers.size();
         validatePurchasingPrice(purchasableTicketCounts, manualTicketCounts);
         int automaticTicketCounts = purchasableTicketCounts - manualTicketCounts;
-        LottoTickets manualLottoTickets = LottoTickets.generateManual(manualTicketsNumbers);
-        LottoTickets automaticLottoTickets = LottoTickets.generateAutomatic(automaticTicketCounts, lottoNumberGenerator);
-        return manualLottoTickets.concat(automaticLottoTickets);
+        return LottoTickets.generate(manualTicketsNumbers, automaticTicketCounts, lottoNumberGenerator);
     }
 
     private void validatePurchasingPrice(int purchasableTicketCounts, int manualTicketCounts) {
