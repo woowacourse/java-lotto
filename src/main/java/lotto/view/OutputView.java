@@ -9,7 +9,7 @@ import lotto.domain.rating.RatingInfo;
 public class OutputView {
 
     private static final String ENTER = System.lineSeparator();
-    private static final String BUY_LOTTO_MESSAGE = "수동으로 %d장, 자동으로 %d장을 구매했습니다." + ENTER;
+    private static final String BUY_LOTTO_MESSAGE = ENTER + "수동으로 %d장, 자동으로 %d장을 구매했습니다." + ENTER;
     private static final String WINNING_DETAIL_HEADER = ENTER + "당첨 통계" + ENTER + "---------";
     private static final String PRINT_FORMAT = "%d개 일치 (%d원) - %d개" + ENTER;
     private static final String SECOND_PRINT_FORMAT = "%d개 일치, 보너스 볼 일치 (%d원) - %d개" + ENTER;
