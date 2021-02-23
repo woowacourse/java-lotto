@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.domain.result.LottoStatisticResult;
+import lotto.domain.result.WinningLotto;
+
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;

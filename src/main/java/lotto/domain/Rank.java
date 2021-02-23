@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.result.WinningLotto;
+
 import java.util.Arrays;
 import java.util.Comparator;
 

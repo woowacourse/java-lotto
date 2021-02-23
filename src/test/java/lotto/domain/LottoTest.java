@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.generator.FixedNumberGenerator;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

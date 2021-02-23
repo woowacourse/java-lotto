@@ -24,7 +24,7 @@ public class PurchaseCount {
             throw new IllegalArgumentException(ERROR_NEGATIVE_LOTTO_NUMBER);
         }
         
-        if(isBiggerThanTotal(totalCount, manualCount)) {
+        if (isBiggerThanTotal(totalCount, manualCount)) {
             throw new IllegalArgumentException(ERROR_ILLEGAL_MANUAL_COUNT);
         }
         
@@ -35,7 +35,7 @@ public class PurchaseCount {
         if (isInteger(manualPurchaseCount)) {
             return Integer.parseInt(manualPurchaseCount);
         }
-    
+        
         throw new IllegalArgumentException(ERROR_NOT_INTEGER);
     }
     

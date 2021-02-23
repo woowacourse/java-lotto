@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.generator.LottoNumberGenerator;
+
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -26,7 +28,7 @@ public class Lotto {
         if (matchesLength(lottoNumbers.size())) {
             return new Lotto(lottoNumbers);
         }
-    
+        
         throw new IllegalArgumentException(ERROR_ILLEGAL_LOTTO_LENGTH);
     }
     

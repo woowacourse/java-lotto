@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.*;
+import lotto.domain.result.LottoStatisticResult;
 
 import java.util.Arrays;
 import java.util.List;

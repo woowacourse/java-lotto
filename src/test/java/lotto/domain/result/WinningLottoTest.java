@@ -1,5 +1,8 @@
-package lotto.domain;
+package lotto.domain.result;
 
+import lotto.domain.Lotto;
+import lotto.domain.LottoFactory;
+import lotto.domain.LottoNumber;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
