@@ -10,10 +10,10 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
-    public static LottoTickets generateLottoTickets(int manualTicketCounts, int autoTicketCounts, LottoNumberGenerator manualNumberGenerator,
+    public static LottoTickets generateLottoTickets(PurchasingCount purchasingCount, LottoNumberGenerator manualNumberGenerator,
                                                     LottoNumberGenerator randomNumberGenerator) {
-        List<LottoTicket> manualLottoTickets = buyTickets(manualTicketCounts, manualNumberGenerator);
-        List<LottoTicket> autoLottoTickets = buyTickets(autoTicketCounts, randomNumberGenerator);
+        List<LottoTicket> manualLottoTickets = buyTickets(purchasingCount.getManualTicketCounts(), manualNumberGenerator);
+        List<LottoTicket> autoLottoTickets = buyTickets(purchasingCount.getAutoTicketCounts(), randomNumberGenerator);
         manualLottoTickets.addAll(autoLottoTickets);
         return new LottoTickets(manualLottoTickets);
     }

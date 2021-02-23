@@ -50,13 +50,15 @@ class LottoTicketsTest {
     @DisplayName("수동 로또, 자동 로또 생성 테스트")
     @Test
     void makeLottoTickets() {
+        PurchasingPrice purchasingPrice = new PurchasingPrice(5000);
+        PurchasingCount purchasingCount = PurchasingCount.of(purchasingPrice, 2);
         List<List<Integer>> numberGroup = new ArrayList<>();
         numberGroup.add(Arrays.asList(1, 2, 3, 4, 5, 6));
         numberGroup.add(Arrays.asList(7, 8, 9, 10, 11, 12));
 
-        LottoTickets lottoTickets = LottoTickets.generateLottoTickets(4, 2, new RandomLottoNumberGenerator(),
-                new ManualLottoNumberGenerator(numberGroup));
+        LottoTickets lottoTickets = LottoTickets.generateLottoTickets(purchasingCount, new ManualLottoNumberGenerator(numberGroup),
+                new RandomLottoNumberGenerator());
 
-        assertThat(lottoTickets.size()).isEqualTo(6);
+        assertThat(lottoTickets.size()).isEqualTo(5);
     }
 }
