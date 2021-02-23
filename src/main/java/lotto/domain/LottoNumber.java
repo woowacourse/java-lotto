@@ -10,7 +10,7 @@ public class LottoNumber {
     private final int lottoNum;
 
     private LottoNumber(int lottoNum) {
-        if (!isInRange(lottoNum)) {
+        if (isNotInRange(lottoNum)) {
             throw new IllegalArgumentException("1~45의 숫자만 입력해야 합니다.");
         }
         this.lottoNum = lottoNum;
@@ -38,8 +38,8 @@ public class LottoNumber {
         return new LottoNumber(lottoNum);
     }
 
-    private static boolean isInRange(int lottoNum) {
-        return lottoNum >= MIN_LOTTO_NUM && lottoNum <= MAX_LOTTO_NUM;
+    private static boolean isNotInRange(int lottoNum) {
+        return lottoNum < MIN_LOTTO_NUM || lottoNum > MAX_LOTTO_NUM;
     }
 
     public int getLottoNum() {
