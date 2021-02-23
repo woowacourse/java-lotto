@@ -10,22 +10,21 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
-    public static LottoTickets generateAutomatically(int lottoTicketCounts, LottoNumberGenerator lottoNumberGenerator) {
+    public static LottoTickets generateLottoTickets(int manualTicketCounts, int autoTicketCounts, LottoNumberGenerator manualNumberGenerator,
+                                                    LottoNumberGenerator randomNumberGenerator) {
+        List<LottoTicket> manualLottoTickets = buyTickets(manualTicketCounts, manualNumberGenerator);
+        List<LottoTicket> autoLottoTickets = buyTickets(autoTicketCounts, randomNumberGenerator);
+        manualLottoTickets.addAll(autoLottoTickets);
+        return new LottoTickets(manualLottoTickets);
+    }
+
+    private static List<LottoTicket> buyTickets(int lottoTicketCounts, LottoNumberGenerator lottoNumberGenerator) {
         List<LottoTicket> lottoTicketGroup = new ArrayList<>();
         for (int i = 0; i < lottoTicketCounts; i++) {
             LottoTicket lottoTicket = LottoTicket.generateTicket(lottoNumberGenerator.generate());
             lottoTicketGroup.add(lottoTicket);
         }
-        return new LottoTickets(lottoTicketGroup);
-    }
-
-    public static LottoTickets generateManually(int manualTicketCounts, List<List<Integer>> numberGroup) {
-        List<LottoTicket> lottoTicketGroup = new ArrayList<>();
-        for (int i = 0; i < manualTicketCounts; i++) {
-            LottoTicket lottoTicket = LottoTicket.generateTicket(numberGroup.get(i));
-            lottoTicketGroup.add(lottoTicket);
-        }
-        return new LottoTickets(lottoTicketGroup);
+        return lottoTicketGroup;
     }
 
     public int size() {
