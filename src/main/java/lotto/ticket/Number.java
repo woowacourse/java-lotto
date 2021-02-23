@@ -7,7 +7,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Number implements Comparable<Number> {
-
+    public static final String ERROR_MESSAGE_INVALID_INPUT = "잘못된 입력입니다.";
+    public static final String ERROR_MESSAGE_INVALID_RANGE = "숫자는 1부터 45사이여야 합니다.";
 
     private static final List<Number> cache;
 
@@ -34,10 +35,23 @@ public class Number implements Comparable<Number> {
     }
 
     private static int validate(String value) {
-        TicketValidation.validateNumber(value);
-        int number = Integer.parseInt(value);
-        TicketValidation.validateNumberInRange(number);
+        int number = validateNumber(value);
+        validateNumberInRange(number);
         return number;
+    }
+
+    public static int validateNumber(String value) {
+        try {
+            return Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_INVALID_INPUT);
+        }
+    }
+
+    private static void validateNumberInRange(int number) {
+        if (number < Ticket.MIN_NUMBER || number > Ticket.MAX_NUMBER) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_INVALID_RANGE);
+        }
     }
 
     @Override

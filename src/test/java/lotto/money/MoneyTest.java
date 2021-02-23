@@ -4,7 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static lotto.money.Money.ERROR_MESSAGE_MINIMUM_MONEY;
-import static lotto.ticket.TicketValidation.ERROR_MESSAGE_INVALID_INPUT;
+import static lotto.ticket.Number.ERROR_MESSAGE_INVALID_INPUT;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
@@ -38,7 +38,7 @@ public class MoneyTest {
     void negativeAmount() {
         assertThatThrownBy(() ->
                 new Money("-1")
-        ).isInstanceOf(IllegalArgumentException.class).hasMessageContaining(ERROR_MESSAGE_INVALID_INPUT);
+        ).isInstanceOf(IllegalArgumentException.class).hasMessageContaining(ERROR_MESSAGE_MINIMUM_MONEY);
     }
 
     @Test

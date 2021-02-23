@@ -1,9 +1,10 @@
 package lotto.money;
 
 import lotto.ticket.Ticket;
-import lotto.ticket.TicketValidation;
 
 import java.util.Objects;
+
+import static lotto.ticket.Number.validateNumber;
 
 public class Money {
     private static final int SECOND_DECIMAL_POINT_MAKER = 100;
@@ -15,14 +16,13 @@ public class Money {
         this.money = validate(money);
     }
 
-    private int validate(String money) {
-        TicketValidation.validateNumber(money);
-        int value = Integer.parseInt(money);
-        checkMinimum(value);
-        return value;
+    private int validate(String value) {
+        int money = validateNumber(value);
+        validateMinimumPrice(money);
+        return money;
     }
 
-    private void checkMinimum(int value) {
+    private void validateMinimumPrice(int value) {
         if (value < Ticket.PRICE) {
             throw new IllegalArgumentException(ERROR_MESSAGE_MINIMUM_MONEY);
         }

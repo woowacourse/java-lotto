@@ -8,7 +8,9 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static lotto.ticket.TicketValidation.*;
+import static lotto.ticket.Number.ERROR_MESSAGE_INVALID_RANGE;
+import static lotto.ticket.Ticket.ERROR_MESSAGE_DUPLICATED;
+import static lotto.ticket.Ticket.ERROR_MESSAGE_INVALID_SIZE;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertTrue;

@@ -2,11 +2,14 @@ package lotto.game;
 
 import lotto.money.Money;
 import lotto.ticket.Ticket;
-import lotto.ticket.TicketValidation;
 
 import java.util.Objects;
 
+import static lotto.ticket.Number.ERROR_MESSAGE_INVALID_INPUT;
+import static lotto.ticket.Number.validateNumber;
+
 public class LottoCount {
+    public static final String ERROR_MESSAGE_INVALID_AMOUNT = "구매 금액보다 많이 구입할 수 없습니다.";
     public static final int ZERO = 0;
     public static final int ONE_COUNT = 1;
 
@@ -17,8 +20,19 @@ public class LottoCount {
     }
 
     public LottoCount(String value) {
-        TicketValidation.validateNumber(value);
-        this.lottoCount = Integer.parseInt(value);
+        this.lottoCount = validate(value);
+    }
+
+    private int validate(String value) {
+        int number = validateNumber(value);
+        validateNotNegative(number);
+        return number;
+    }
+
+    private void validateNotNegative(int number) {
+        if (number < ZERO) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_INVALID_INPUT);
+        }
     }
 
     public boolean isGreaterThanZero() {
@@ -30,12 +44,18 @@ public class LottoCount {
     }
 
     public void checkPurchasePossibility(LottoCount count) {
-        TicketValidation.validateAmount(lottoCount, count);
+        validateAmount(lottoCount, count);
     }
 
     public LottoCount consumeTicket(LottoCount count) {
-        TicketValidation.validateAmount(lottoCount, count);
+        validateAmount(lottoCount, count);
         return count.remainCount(lottoCount);
+    }
+
+    private void validateAmount(int currentCount, LottoCount count) {
+        if (!count.canPurchase(currentCount)) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_INVALID_AMOUNT);
+        }
     }
 
     private LottoCount remainCount(int lottoCount) {

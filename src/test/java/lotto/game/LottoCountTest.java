@@ -4,8 +4,8 @@ import lotto.money.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static lotto.ticket.TicketValidation.ERROR_MESSAGE_INVALID_AMOUNT;
-import static lotto.ticket.TicketValidation.ERROR_MESSAGE_INVALID_INPUT;
+import static lotto.game.LottoCount.ERROR_MESSAGE_INVALID_AMOUNT;
+import static lotto.ticket.Number.ERROR_MESSAGE_INVALID_INPUT;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
