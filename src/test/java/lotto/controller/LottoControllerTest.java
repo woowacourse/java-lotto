@@ -53,18 +53,4 @@ class LottoControllerTest {
         LottoTicket expectedFirstPrize = LottoTicket.createLottoTicket(winningNumbers);
         assertThat(winningLottoTicket.compareNumbers(expectedFirstPrize)).isEqualTo(Prize.FIRST);
     }
-
-    @DisplayName("로또 결과물을 잘 생성하는지 확인")
-    @Test
-    void calculateLottoResult() {
-        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        int bonusNumber = 7;
-        WinningLottoTicket winningLottoTicket = lottoController.createWinningLotto(winningNumbers, bonusNumber);
-
-        LottoTicket expectedFirstPrize = LottoTicket.createLottoTicket(winningNumbers);
-        LottoTickets lottoTickets = new LottoTickets(Arrays.asList(expectedFirstPrize));
-        LottoResult lottoResult = lottoController.calculateLottoResult(lottoTickets, winningLottoTicket);
-
-        assertThat(lottoResult.calculatePrizeMoney()).isEqualTo(2000000000);
-    }
 }

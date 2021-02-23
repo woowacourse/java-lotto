@@ -12,10 +12,9 @@ import lotto.view.OutputView;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Stream;
 
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.toList;
 
 public class LottoController {
     private static final int ONE = 1;
@@ -35,8 +34,9 @@ public class LottoController {
         LottoTickets lottoTickets = createAllLottoTickets(purchaseInfo, inputManualLottoNumbers(purchaseInfo));
         printTicketsCondition(purchaseInfo, lottoTickets);
 
-        LottoResult lottoResult = calculateLottoResult(lottoTickets,
-                createWinningLotto(inputView.inputWinningNumbers(), inputView.takeBonusNumber())
+        LottoResult lottoResult = lottoTickets.calculateLottoResult(
+                createWinningLotto(inputView.inputWinningNumbers(), inputView.takeBonusNumber()),
+                lottoMachineService.getLottoPrice()
         );
 
         outputView.printLottoResult(lottoResult);
@@ -73,14 +73,5 @@ public class LottoController {
 
     public WinningLottoTicket createWinningLotto(List<Integer> winningNumbers, int bonusNumber) {
         return new WinningLottoTicket(winningNumbers, bonusNumber);
-    }
-
-    public LottoResult calculateLottoResult(LottoTickets lottoTickets,
-                                            WinningLottoTicket winningLottoTicket) {
-        return lottoTickets.list().stream()
-                .map(winningLottoTicket::compareNumbers)
-                .collect(collectingAndThen(
-                        groupingBy(Function.identity(), counting()),
-                        lottoResultMap -> new LottoResult(lottoResultMap, lottoMachineService.getLottoPrice().multiply(lottoTickets.size()))));
     }
 }
