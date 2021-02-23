@@ -29,15 +29,6 @@ public class LottoController {
         manageChange(money);
     }
 
-    private Purchase inputManualPurchase(Money money) {
-        try {
-            return new Purchase(money, inputView.inputCountOfPurchaseManually());
-        } catch (LottoCustomException e) {
-            OutputView.printErrorMessage(e.getMessage());
-            return inputManualPurchase(money);
-        }
-    }
-
     private Money inputMoney() {
         try {
             final Money money = new Money(inputView.inputMoney());
@@ -48,6 +39,31 @@ public class LottoController {
         }
     }
 
+    private Purchase inputManualPurchase(Money money) {
+        if (money.isEmpty()) {
+            return new Purchase(money, Money.ZERO);
+        }
+
+        try {
+            return new Purchase(money, inputView.inputCountOfPurchaseManually());
+        } catch (LottoCustomException e) {
+            OutputView.printErrorMessage(e.getMessage());
+            return inputManualPurchase(money);
+        }
+    }
+
+    private LottoTickets createLottoTickets(Purchase purchase) {
+        LottoTickets lottoTickets = new LottoTickets();
+
+        if (purchase.isManualPurchaseExist()) {
+            lottoTickets.addManuallyCreatedTickets(inputManualNumbers(purchase));
+        }
+
+        lottoTickets.generateTicketAutomatically(purchase.getAutoPurchase());
+        OutputView.printAllTickets(purchase, lottoTickets);
+        return lottoTickets;
+    }
+
     private List<LottoTicket> inputManualNumbers(Purchase purchase) {
         try {
             return inputView.inputManualNumbers(purchase.getManualPurchase());
@@ -55,15 +71,6 @@ public class LottoController {
             OutputView.printErrorMessage(e.getMessage());
             return inputManualNumbers(purchase);
         }
-    }
-
-    private LottoTickets createLottoTickets(Purchase purchase) {
-        LottoTickets lottoTickets = new LottoTickets();
-        lottoTickets.addManuallyCreatedTickets(inputManualNumbers(purchase));
-
-        lottoTickets.generateTicketAutomatically(purchase.getAutoPurchase());
-        OutputView.printAllTickets(purchase, lottoTickets);
-        return lottoTickets;
     }
 
     private WinningTicket makeWinningTicket() {

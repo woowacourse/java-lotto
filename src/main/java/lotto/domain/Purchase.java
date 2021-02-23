@@ -3,6 +3,8 @@ package lotto.domain;
 import lotto.exception.LottoCustomException;
 
 public class Purchase {
+    private static final int ZERO = 0;
+
     private final Money money;
     private final int autoPurchase;
     private final int manualPurchase;
@@ -20,6 +22,10 @@ public class Purchase {
 
     public int getManualPurchase() {
         return manualPurchase;
+    }
+
+    public boolean isManualPurchaseExist() {
+        return manualPurchase != ZERO;
     }
 
     private int calculate(int manualPurchase) {

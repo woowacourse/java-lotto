@@ -17,7 +17,7 @@ class LottoProfitTest {
         result.put(Rank.FIRST_PRIZE, 1);
         Money money = new Money(1000);
 
-       assertThat(LottoProfit.ofProfit(result, money).getProfit())
-               .isEqualTo(Rank.FIRST_PRIZE.getWinnings() / money.getMoney());
+        assertThat(LottoProfit.ofProfit(result, money).getProfit())
+                .isEqualTo(Rank.FIRST_PRIZE.getWinnings() / money.getMoney());
     }
 }

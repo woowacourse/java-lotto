@@ -6,8 +6,8 @@ import java.util.Objects;
 
 public class Money {
 
+    public static final int ZERO = 0;
     private static final int MONEY_UNIT = 1000;
-    private static final int ZERO = 0;
 
     private final int money;
 
@@ -37,6 +37,10 @@ public class Money {
 
     public int getMoney() {
         return money;
+    }
+
+    public boolean isEmpty() {
+        return money == ZERO;
     }
 
     private void validateMoneyLimit(final int money) {
