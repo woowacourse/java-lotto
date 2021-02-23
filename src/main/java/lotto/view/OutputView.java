@@ -3,7 +3,7 @@ package lotto.view;
 import lotto.domain.LottoProfit;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
-import lotto.domain.WinningResult;
+import lotto.domain.Rank;
 
 import java.util.Map;
 
@@ -43,11 +43,11 @@ public class OutputView {
         System.out.println("지난 주 당첨 번호를 입력해주세요.");
     }
 
-    public static void printTotalWinningResult(Map<WinningResult, Integer> winningResult) {
+    public static void printTotalWinningResult(Map<Rank, Integer> winningResult) {
         System.out.println("당첨 통계");
         printSplitLine();
 
-        for (WinningResult result : WinningResult.values()) {
+        for (Rank result : Rank.values()) {
             printWinningResult(result, winningResult);
         }
     }
@@ -70,8 +70,8 @@ public class OutputView {
         System.out.println(lottoTicket.getLottoNumbers());
     }
 
-    private static void printWinningResult(WinningResult result, Map<WinningResult, Integer> winningResult) {
-        if (result.getHitCount() == FAILED) {
+    private static void printWinningResult(Rank result, Map<Rank, Integer> winningResult) {
+        if (result.getMatchCount() == FAILED) {
             return;
         }
         System.out.println(String.format(WINNING_INFO_MESSAGE, result.getMessage(), result.getWinnings(), convertNullToZero(winningResult.get(result))));

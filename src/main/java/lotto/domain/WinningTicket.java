@@ -20,10 +20,10 @@ public class WinningTicket extends LottoTicket {
         }
     }
 
-    public WinningResult getLottoResult(LottoTicket lottoTicket) {
+    public Rank getLottoResult(LottoTicket lottoTicket) {
         int matchCount = matchNumbers(lottoTicket);
         boolean isBonus = lottoTicket.contains(bonusNumber);
-        return WinningResult.findWinningResult(matchCount, isBonus);
+        return Rank.of(matchCount, isBonus);
     }
 
     private int matchNumbers(LottoTicket ticket) {

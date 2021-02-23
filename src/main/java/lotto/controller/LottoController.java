@@ -21,7 +21,7 @@ public class LottoController {
         LottoTickets lottoTickets = buyLottoTickets(money);
 
         WinningTicket winningTicket = makeWinningTicket();
-        Map<WinningResult, Integer> result = LottoResultMachine.confirmResult(lottoTickets, winningTicket);
+        Map<Rank, Integer> result = LottoResultMachine.confirmResult(lottoTickets, winningTicket);
 
         OutputView.printProfit(LottoProfit.ofProfit(result, money));
         OutputView.printTotalWinningResult(result);
