@@ -12,9 +12,7 @@ public class LottoController {
         Money budget = createBudgetMoney();
         LottoTickets lottoTickets = LottoPurchase.buy(budget);
         outputView.printLottoTicket(lottoTickets);
-        outputView.newLine();
         WinningNumbers winningNumber = createWinningNumber();
-        outputView.newLine();
         Statistics statistics = new Statistics(winningNumber, lottoTickets);
         Profit profit = new Profit(budget, statistics.getReward());
         outputView.printStatistics(statistics);
