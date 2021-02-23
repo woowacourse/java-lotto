@@ -20,6 +20,12 @@ class OutputViewTest {
 		System.setOut(new PrintStream(outputStream));
 	}
 
+	@AfterEach
+	void tearDown() {
+		System.setOut(System.out);
+		outputStream.reset();
+	}
+
 	@DisplayName("구매한 로또들을 제대로 출력하는지")
 	@Test
 	void printLottoPurchaseSummaryBasedOn() {
@@ -40,6 +46,16 @@ class OutputViewTest {
 		assertThat(outputStream.toString()).isEqualTo(expectedLottoPurchaseSummaryOutput);
 	}
 
+	private Lotto createCustomLotto(final int... numbers) {
+		return new Lotto(Arrays.asList(
+				new LottoNumber(numbers[0]),
+				new LottoNumber(numbers[1]),
+				new LottoNumber(numbers[2]),
+				new LottoNumber(numbers[3]),
+				new LottoNumber(numbers[4]),
+				new LottoNumber(numbers[5])));
+	}
+
 	@DisplayName("당첨 통계를 올바로 출력 하는지")
 	@Test
 	void printResultStatisticsBasedOn() {
@@ -58,21 +74,5 @@ class OutputViewTest {
 		String expectedResultStatisticsOutput = sb.toString();
 
 		assertThat(outputStream.toString()).isEqualTo(expectedResultStatisticsOutput);
-	}
-
-	private Lotto createCustomLotto(final int... numbers) {
-		return new Lotto(Arrays.asList(
-				new LottoNumber(numbers[0]),
-				new LottoNumber(numbers[1]),
-				new LottoNumber(numbers[2]),
-				new LottoNumber(numbers[3]),
-				new LottoNumber(numbers[4]),
-				new LottoNumber(numbers[5])));
-	}
-
-	@AfterEach
-	void tearDown() {
-		System.setOut(System.out);
-		outputStream.reset();
 	}
 }
