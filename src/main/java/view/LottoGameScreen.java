@@ -44,13 +44,13 @@ public class LottoGameScreen {
         OutputUtil.printMessage(BONUS_LOTTO_CONFIRMATION);
     }
 
-    public void showGameResult(LottoGameResultDto lottoGameResultDto) {
+    public void showGameResult(final LottoGameResultDto lottoGameResultDto) {
         OutputUtil.printMessage(RESULT);
         OutputUtil.printMessage(LINE);
         showMatchesResult(lottoGameResultDto);
     }
 
-    public void showRevenueResult(BigDecimal earningsRate) {
+    public void showRevenueResult(final BigDecimal earningsRate) {
         OutputUtil.printMessage(String.format(REVENUE_RESULT_FORMATTER, earningsRate.doubleValue()));
     }
 
@@ -66,7 +66,7 @@ public class LottoGameScreen {
         return LOTTO_PREFIX + String.join(DELIMITER, status) + LOTTO_POSTFIX;
     }
 
-    private void showMatchesResult(LottoGameResultDto lottoGameResultDto) {
+    private void showMatchesResult(final LottoGameResultDto lottoGameResultDto) {
         Map<LottoRank, Integer> matches = lottoGameResultDto.getMatches();
         Arrays.stream(LottoRank.values())
                 .filter(LottoRank::hasMatches)
@@ -74,14 +74,14 @@ public class LottoGameScreen {
                         OutputUtil.printMessage(String.format(findMessage(lottoRank), lottoRank.getMatches(), lottoRank.getPrize(), getCount(matches, lottoRank))));
     }
 
-    private String findMessage(LottoRank key) {
-        if (key.isSecond()) {
+    private String findMessage(final LottoRank key) {
+        if (key.hasBonus()) {
             return SECOND_PRIZE_RESULT_MESSAGE;
         }
         return LOTTO_RESULT_MESSAGE;
     }
 
-    private Integer getCount(Map<LottoRank, Integer> matches, LottoRank lottoRank) {
+    private Integer getCount(final Map<LottoRank, Integer> matches, final LottoRank lottoRank) {
         Integer count = matches.get(lottoRank);
         if (Objects.isNull(count)) {
             return 0;

@@ -30,10 +30,10 @@ public class LottoBalls {
                 .filter(winningBalls::contains)
                 .count();
 
-        boolean containBonus = this.lottoBalls.stream()
+        boolean hasBonus = this.lottoBalls.stream()
                 .anyMatch(bonusBall::equals);
 
-        return LottoRank.findRankByBonusAndMatches(containBonus, count);
+        return LottoRank.findRankByBonusAndMatches(hasBonus, count);
     }
 
     private void validateLottoNumbers(final List<LottoBall> lottoBalls) {

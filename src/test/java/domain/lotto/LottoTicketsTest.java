@@ -46,14 +46,14 @@ class LottoTicketsTest {
 
     @DisplayName("LottoTickets 정상 생성 테스트.")
     @Test
-    void LottoTicketsGenerateTest() {
+    void lottoTicketsGenerateTest() {
         Assertions.assertThatCode(() -> new LottoTickets(lottoTickets))
                 .doesNotThrowAnyException();
     }
 
     @DisplayName("로또 결과 테스트")
     @Test
-    void LottoTicketMatchesTest() {
+    void lottoTicketMatchesTest() {
         //given
         LottoTickets lottoTickets = new LottoTickets(this.lottoTickets);
 

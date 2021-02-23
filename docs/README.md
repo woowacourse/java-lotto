@@ -62,7 +62,9 @@
 - [x] RandomLottoBall 생성 책임 변경하기 - ddb0c9b
 - [x] LottoGameMachine 네이밍 변경
 - [x] 출력 메시지 동일하게 수정 - cc77469
-- [x] HashMap 메소드 사용해서 코드 줄이기
+- [x] HashMap 메소드 사용해서 코드 줄이기 - e1767fc
+- [x] 정적 메소드 팩토리 제거 - 9416592
+- [x]
 
 ## 프로그래밍 요구사항
 - indent(인덴트, 들여쓰기) depth를 2단계에서 1단계로 줄여라.
