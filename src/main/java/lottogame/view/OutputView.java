@@ -12,7 +12,9 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void showLottos(List<LottoDto> lottosDtos) {
+    public static void showLottos(int manualQuantity, List<LottoDto> lottosDtos) {
+        int autoQuantity = lottosDtos.size() - manualQuantity;
+        System.out.printf("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualQuantity, autoQuantity);
         for (LottoDto lottoDto : lottosDtos) {
             System.out.println(formatLottosOutput(lottoDto.getNumbers()));
         }

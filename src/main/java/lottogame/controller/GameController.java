@@ -29,7 +29,7 @@ public class GameController {
         List<Lotto> manualLottos = makeManualLotto(autoTicketQuantity);
         List<Lotto> autoLottos = lottoMachine.buyAutoTicket(autoTicketQuantity);
         Lottos lottos = new Lottos(manualLottos, autoLottos);
-        OutputView.showLottos(lottos.numbersOfLottos());
+        OutputView.showLottos(manualQuantity, lottos.numbersOfLottos());
         LottoResults lottoResults = matchLottos(lottos, askWinningLotto());
         LottoResultDto lottoResultDto = lottoResults.makeStatistics(money);
         OutputView.printResult(lottoResultDto);

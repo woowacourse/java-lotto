@@ -52,7 +52,7 @@ public class InputView {
     }
 
     public List<LottoDto> inputManualLotto(int autoTicketQuantity) {
-        System.out.println("\n수동으로 구매할 로또 수를 입력해주세요.");
+        System.out.println("\n수동으로 구매할 로또 번호를 입력해 주세요.");
         List<LottoDto> lottoDtos = new ArrayList<>();
         for (int i=0; i<autoTicketQuantity; i++) {
             LottoDto lottoDto = LottoDto.Of(inputLottoNumbers());
@@ -72,7 +72,7 @@ public class InputView {
 
     public int inputManualQuantity() {
         try {
-            System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+            System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
             return Integer.parseInt(input());
         } catch (NumberFormatException e) {
             throw new InvalidManualTicketQuantityException();
