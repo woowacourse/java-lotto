@@ -16,17 +16,20 @@ public class InputView {
 
     public static int inputMoney() {
         OutputView.printInputMessage(INPUT_MONEY);
-        return scanner.nextInt();
+        int money = scanner.nextInt();
+        scanner.nextLine();
+        return money;
     }
 
     public static int inputManualLottoCount() {
         OutputView.printInputMessage(INPUT_MANUAL_LOTTO_NUMBER);
-        return scanner.nextInt();
+        int manualLottoCount = scanner.nextInt();
+        scanner.nextLine();
+        return manualLottoCount;
     }
 
     public static List<String> inputManualLottoNumbers(int manualLottoCount) {
         OutputView.printInputMessage(INPUT_MANUAL_LOTTO_NUMBERS);
-        scanner.nextLine();
 
         return Stream.generate(scanner::nextLine)
                 .limit(manualLottoCount)
