@@ -15,5 +15,4 @@ public class LottoNumberTest {
         LottoNumber lottoNumber = LottoNumber.valueOf(input);
         assertThat(lottoNumber).isEqualTo(LottoNumber.valueOf(input));
     }
-
 }
