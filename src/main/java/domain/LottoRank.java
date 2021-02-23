@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Arrays;
+
 public enum LottoRank {
     NONE_MATCHES(0, 0, false),
     THREE_MATCHES(5_000, 3, false),
@@ -7,6 +9,8 @@ public enum LottoRank {
     FIVE_MATCHES(1_500_000, 5, false),
     FIVE_AND_BONUS_MATCHES(30_000_000, 5, true),
     SIX_MATCHES(2_000_000_000, 6, false);
+
+    private static final int DETECT_BONUS = 5;
 
     private final int prizeMoney;
     private final int lottoBallMatch;
@@ -19,22 +23,22 @@ public enum LottoRank {
     }
 
     public static LottoRank findLottoRank(final int lottoBallMatch, final boolean bonusMatch) {
-        if (lottoBallMatch == 3) {
-            return THREE_MATCHES;
+        return Arrays.stream(values())
+                .filter(lottoRank -> lottoRank.checkLottoBallMatch(lottoBallMatch))
+                .filter(lottoRank -> lottoRank.checkBonusMatch(lottoBallMatch, bonusMatch))
+                .findFirst()
+                .orElse(NONE_MATCHES);
+    }
+
+    private boolean checkLottoBallMatch(final int lottoBallMatch) {
+        return (this.lottoBallMatch == lottoBallMatch);
+    }
+
+    private boolean checkBonusMatch(final int lottoBallMatch, final boolean bonusMatch) {
+        if (lottoBallMatch != DETECT_BONUS) {
+            return true;
         }
-        if (lottoBallMatch == 4) {
-            return FOUR_MATCHES;
-        }
-        if (lottoBallMatch == 5 && !bonusMatch) {
-            return FIVE_MATCHES;
-        }
-        if (lottoBallMatch == 5 && bonusMatch) {
-            return FIVE_AND_BONUS_MATCHES;
-        }
-        if (lottoBallMatch == 6) {
-            return SIX_MATCHES;
-        }
-        return NONE_MATCHES;
+        return (this.bonusMatch == bonusMatch);
     }
 
     public int getPrizeMoney() {
