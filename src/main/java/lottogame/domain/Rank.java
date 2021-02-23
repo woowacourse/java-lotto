@@ -24,7 +24,7 @@ public enum Rank {
         this.messageFormat = messageFormat;
     }
 
-    public static Rank getRank(LottoTicketResult lottoTicketResult) {
+    public static Rank getRank(final LottoTicketResult lottoTicketResult) {
         return Arrays.stream(values())
                 .filter(rank -> rank.matchCount == lottoTicketResult.getMatchCount())
                 .filter(rank -> !rank.equals(RANK3) || rank.isBonusMatch == lottoTicketResult.isBonusMatched())

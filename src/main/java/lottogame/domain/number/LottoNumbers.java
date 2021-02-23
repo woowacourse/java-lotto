@@ -1,7 +1,6 @@
 package lottogame.domain.number;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
@@ -20,7 +19,7 @@ public class LottoNumbers {
     }
 
     public List<LottoNumber> toList() {
-        return Collections.unmodifiableList(new ArrayList<>(this.lottoNumbers));
+        return new ArrayList<>(this.lottoNumbers);
     }
 
     private void validDrawingNumbers(final List<LottoNumber> lottoNumbers) {
