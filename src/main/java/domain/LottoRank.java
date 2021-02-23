@@ -36,4 +36,8 @@ public enum LottoRank {
         }
         return NONE_MATCHES;
     }
+
+    public int getPrizeMoney() {
+        return this.prizeMoney;
+    }
 }
