@@ -21,10 +21,10 @@ public class LottoController {
 
     private LottoTickets buyLottoTickets(LottoMachine lottoMachine) {
         PurchasingPrice purchasingPrice = new PurchasingPrice(InputView.inputPurchasingPrice());
-        List<String[]> manualTicketsNumbers = InputView.inputManualTicketsNumbers();
-        LottoTickets lottoTickets = lottoMachine.issueLottoTickets(purchasingPrice, ManualTickets.from(manualTicketsNumbers));
+        ManualTickets manualTickets = ManualTickets.from(InputView.inputManualTicketsNumbers());
+        LottoTickets lottoTickets = lottoMachine.issueLottoTickets(purchasingPrice, manualTickets);
 
-        OutputView.printPurchasedLottoTicketCounts(manualTicketsNumbers.size(), lottoTickets.getTicketCounts());
+        OutputView.printPurchasedLottoTicketCounts(manualTickets.size(), lottoTickets.getTicketCounts());
         OutputView.printAllLottoTicketNumbers(lottoTickets);
         return lottoTickets;
     }
