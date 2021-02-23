@@ -1,6 +1,5 @@
 package lotto.domain.rank;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,10 +9,6 @@ public class Ranks {
 
     public Ranks(Map<Rank, Long> ranks) {
         this.ranks = new HashMap<>(ranks);
-    }
-
-    public Ranks(Ranks ranks) {
-        this.ranks = ranks.unwrap();
     }
 
     public Long getRanksCount() {

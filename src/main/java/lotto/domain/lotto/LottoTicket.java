@@ -8,7 +8,6 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import lotto.domain.rank.Rank;
 import lotto.domain.rank.Ranks;
-import lotto.domain.winning.WinningNumbers;
 
 public class LottoTicket {
 
@@ -18,7 +17,7 @@ public class LottoTicket {
         this.lottoTicket = new ArrayList<>(lottoTicket);
     }
 
-    public Ranks calculateRankings(WinningNumbers winningNumbers) {
+    public Ranks calculateRanks(WinningNumbers winningNumbers) {
         return new Ranks(lottoTicket.stream()
             .map(lottoNumbers -> winningNumbers.checkRank(lottoNumbers))
             .collect(Collectors.collectingAndThen(

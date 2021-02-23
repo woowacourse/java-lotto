@@ -11,7 +11,8 @@ import lotto.domain.rank.Ranks;
 public class LottoExchange {
 
     private static final int LOTTO_PRICE = 1000;
-    private static final RandomLottoGenerator RANDOM_LOTTO_GENERATOR = RandomLottoGenerator.getInstance();
+    private static final RandomLottoGenerator RANDOM_LOTTO_GENERATOR = RandomLottoGenerator
+        .getInstance();
     private static final LottoExchange LOTTO_EXCHANGE = new LottoExchange();
 
     private LottoExchange() {
@@ -33,7 +34,7 @@ public class LottoExchange {
     private void validatePossibleOrder(Payout payout, ManualCount manualCount) {
         int possibleLottoTicketCount = payout.getNumberOfStuff(LOTTO_PRICE);
 
-        if(manualCount.isBiggerThan(possibleLottoTicketCount)) {
+        if (manualCount.isBiggerThan(possibleLottoTicketCount)) {
             throw new IllegalArgumentException("금액보다 수동 입력의 개수가 너무 많습니다.");
         }
     }

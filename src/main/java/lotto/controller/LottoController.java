@@ -2,10 +2,10 @@ package lotto.controller;
 
 import lotto.domain.lotto.LottoExchange;
 import lotto.domain.lotto.LottoTicket;
+import lotto.domain.lotto.WinningNumbers;
 import lotto.domain.number.ManualCount;
 import lotto.domain.number.Payout;
 import lotto.domain.rank.Ranks;
-import lotto.domain.winning.WinningNumbers;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -57,7 +57,7 @@ public class LottoController {
 
     private static void calculateStatistics(WinningNumbers winningNumbers,
         LottoTicket lottoTicket) {
-        Ranks ranks = lottoTicket.calculateRankings(winningNumbers);
+        Ranks ranks = lottoTicket.calculateRanks(winningNumbers);
         OutputView.statistics(ranks);
         OutputView.printYield(LOTTO_EXCHANGE.calculateYield(ranks));
     }

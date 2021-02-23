@@ -1,7 +1,5 @@
 package lotto.domain.number;
 
-import lotto.domain.lotto.LottoTicket;
-
 public class Payout {
 
     private static final int PRICE_MINIMUM = 0;
