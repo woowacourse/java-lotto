@@ -32,6 +32,21 @@ public class MoneyTest {
         assertThat(new Money(4500).countTickets()).isEqualTo(4);
     }
 
+    @DisplayName("입력금액이 1000원 단위로 나누어 떨어지지 않으면 거스름돈이 생긴다.")
+    @Test
+    void charge(){
+        assertThat(new Money(3000).calculateCharge()).isEqualTo(0);
+        assertThat(new Money(3800).calculateCharge()).isEqualTo(800);
+    }
+
+    @DisplayName("구입하려는 수동 티켓 수가 입력금액으로 살 수 있는 티켓 수보다 많을 경우 에러를 발생시킨다.")
+    @Test
+    void limit(){
+        Money money = new Money(5000);
+        assertThatIllegalArgumentException()
+            .isThrownBy(() -> money.checkLimit(10));
+    }
+
     @DisplayName("구입 금액과 리워드를 이용해 수익률을 계산할 수 있다.")
     @Test
     void calculateProfit() {
