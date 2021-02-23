@@ -1,19 +1,15 @@
 package view;
 
-import domain.Lotto;
-import domain.LottoBall;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
 
     private InputView() {
     }
-
 
     public static int getGameMoney() {
         try {
@@ -25,27 +21,24 @@ public class InputView {
         }
     }
 
-    public static Lotto getWinningLotto() {
+    public static List<Integer> getWinningLotto() {
         try {
             final String userInput = scanner.nextLine();
-            final String[] splitInput = userInput.split(",");
-            List<LottoBall> lottoBalls = new ArrayList<>();
-            Arrays.stream(splitInput)
-                    .forEach( num -> lottoBalls.add(LottoBall.valueOf(Integer.parseInt(num)) ));
-            return new Lotto(lottoBalls);
-        } catch (Exception e) {
-            OutputView.printErrorMessage("똑바로 입력 좀 해라");
+            return Arrays.stream(userInput.split(","))
+                    .map(number -> Integer.parseInt(number.trim()))
+                    .collect(Collectors.toList());
+        } catch (NumberFormatException e) {
+            OutputView.printErrorMessage(", 를 사용하여 구분되게 입력해 주세요");
             return getWinningLotto();
         }
     }
 
-    public static LottoBall getBonusBall() {
+    public static int getBonusBall() {
         try {
             final String userInput = scanner.nextLine();
-            final LottoBall lottoBall = LottoBall.valueOf(Integer.parseInt(userInput));
-            return lottoBall;
-        } catch (Exception e) {
-            OutputView.printErrorMessage("제발 똑바로 입력해줘");
+            return Integer.parseInt(userInput);
+        } catch (NumberFormatException e) {
+            OutputView.printErrorMessage("자연수를 입력해 주세요.");
             return getBonusBall();
         }
     }
