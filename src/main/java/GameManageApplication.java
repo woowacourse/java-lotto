@@ -35,12 +35,10 @@ public class GameManageApplication {
         lottoGameScreen.showRevenueResult(result.findEarningsRate(bettingMoney));
     }
 
-    private WinningLotto getWinningLotto() {
-        lottoGameScreen.confirmWinningLotto();
-        Set<Integer> winningNumbers = InputUtil.inputWinningNumbers();
-        lottoGameScreen.confirmBonusLotto();
-        int bonusNumber = InputUtil.inputBonusNumber();
-        return new WinningLotto(winningNumbers, bonusNumber);
+    private BettingMoney getBettingMoney() {
+        mainScreen.showInputMoney();
+        int input = InputUtil.nextInt();
+        return BettingMoney.of(input);
     }
 
     private TicketCount getTicketCount(final BettingMoney bettingMoney) {
@@ -48,9 +46,11 @@ public class GameManageApplication {
         return TicketCount.of(ticketCount);
     }
 
-    private BettingMoney getBettingMoney() {
-        mainScreen.showInputMoney();
-        int input = InputUtil.nextInt();
-        return BettingMoney.of(input);
+    private WinningLotto getWinningLotto() {
+        lottoGameScreen.confirmWinningLotto();
+        Set<Integer> winningNumbers = InputUtil.inputWinningNumbers();
+        lottoGameScreen.confirmBonusLotto();
+        int bonusNumber = InputUtil.inputBonusNumber();
+        return new WinningLotto(winningNumbers, bonusNumber);
     }
 }
