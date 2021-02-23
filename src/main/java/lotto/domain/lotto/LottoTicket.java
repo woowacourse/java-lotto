@@ -41,8 +41,8 @@ public class LottoTicket {
 
     public List<LottoLine> getTotalLottoLine() {
         ArrayList<LottoLine> totalLottoLine = new ArrayList();
-        totalLottoLine.addAll(autoLottoLines);
         totalLottoLine.addAll(manualLottoLines);
+        totalLottoLine.addAll(autoLottoLines);
         return Collections.unmodifiableList(totalLottoLine);
     }
 
