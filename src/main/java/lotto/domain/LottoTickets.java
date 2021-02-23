@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.dto.TicketNumbersDto;
-
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
@@ -17,7 +15,7 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
-    public static LottoTickets generate(List<TicketNumbersDto> manualTicketsNumbers, int automaticTicketCounts, LottoNumberGenerator lottoNumberGenerator) {
+    public static LottoTickets generate(List<ManualTicket> manualTicketsNumbers, int automaticTicketCounts, LottoNumberGenerator lottoNumberGenerator) {
         Stream<LottoTicket> manualTickets = generateManual(manualTicketsNumbers);
         Stream<LottoTicket> automaticTickets = generateAutomatic(automaticTicketCounts, lottoNumberGenerator);
         List<LottoTicket> concatLottoTickets = Stream.concat(manualTickets, automaticTickets)
@@ -25,9 +23,9 @@ public class LottoTickets {
         return new LottoTickets(concatLottoTickets);
     }
 
-    private static Stream<LottoTicket> generateManual(List<TicketNumbersDto> manualTicketsNumbers) {
+    private static Stream<LottoTicket> generateManual(List<ManualTicket> manualTicketsNumbers) {
         return manualTicketsNumbers.stream()
-                .map(TicketNumbersDto::getTicketNumbers)
+                .map(ManualTicket::getManualTicketNumbers)
                 .map(LottoTicket::from);
     }
 
