@@ -59,6 +59,7 @@ public class LottoController {
     }
 
     private void generateLottoNumbers(final int count, final LottoRepository lottoRepository) {
+        OutputView.getMessage(InputView.INPUT_MANUAL_BUY_NUMBERS_MESSAGE);
         for (int i = 0; i < count; i++) {
             Lotto lotto = manualBuyLotto();
             lottoRepository.generateLottoByManual(lotto);
@@ -75,7 +76,7 @@ public class LottoController {
     }
 
     private Lotto tryManualBuyLotto() {
-        return Lotto.from(InputView.getLottoNumbers());
+        return Lotto.from(InputView.getNumbers());
     }
 
     private WinningLotto buyWinningLotto() {
