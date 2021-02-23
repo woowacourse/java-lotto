@@ -23,7 +23,7 @@ public class WinningLotto {
         this.bonusBall = makeBonusBall(bonusNumber);
     }
 
-    public LottoRank winningMatchCount(final LottoBalls lottoBalls) {
+    public LottoRank findLottoRank(final LottoBalls lottoBalls) {
         return lottoBalls.matchCount(this.winningBalls, bonusBall);
     }
 

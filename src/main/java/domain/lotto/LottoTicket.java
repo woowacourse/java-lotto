@@ -22,6 +22,6 @@ public class LottoTicket {
     }
 
     public LottoRank findMatchesNumber(WinningLotto winningLotto) {
-        return winningLotto.winningMatchCount(lottoBalls);
+        return winningLotto.findLottoRank(lottoBalls);
     }
 }

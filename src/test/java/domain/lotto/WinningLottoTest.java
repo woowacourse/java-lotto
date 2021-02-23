@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
 
-public class WinningLottoTicketTest {
+public class WinningLottoTest {
 
     @DisplayName("WinningLotto 정상 생성 테스트.")
     @Test

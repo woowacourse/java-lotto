@@ -5,6 +5,7 @@ import domain.result.LottoRank;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
@@ -19,12 +20,8 @@ public class LottoTickets {
     }
 
     public List<LottoRank> findMatches(WinningLotto winningLotto) {
-        List<LottoRank> lottoRanks = new ArrayList<>();
-        lottoTickets.stream()
+        return lottoTickets.stream()
                 .map(lotto -> lotto.findMatchesNumber(winningLotto))
-                .forEach(match -> {
-                    lottoRanks.add(match);
-                });
-        return lottoRanks;
+                .collect(Collectors.toList());
     }
 }
