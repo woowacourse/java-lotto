@@ -18,6 +18,6 @@ public class LottoGenerator {
 
     public List<LottoNumber> generateLotto() {
         Collections.shuffle(lottoNumbers);
-        return lottoNumbers.subList(0, LOTTO_NUMBER_LIMIT);
+        return new ArrayList<>(lottoNumbers.subList(0, LOTTO_NUMBER_LIMIT));
     }
 }
