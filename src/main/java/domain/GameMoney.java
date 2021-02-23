@@ -3,7 +3,6 @@ package domain;
 import util.LottoGenerator;
 
 import java.math.BigDecimal;
-import java.util.Collections;
 
 public class GameMoney {
     private static final int SINGLE_LOTTO_GAME_MONEY = 1000;
