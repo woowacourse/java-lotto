@@ -32,7 +32,7 @@ public class InputView {
         }
     }
 
-    public static Lotto getWinningNumbers() {
+    public static List<Integer> getWinningNumbers() {
         try {
             OutputView.printMessage(INPUT_WINNING_NUMBER_MESSAGE);
             String winningNumbers = SCAN.nextLine();
@@ -40,7 +40,7 @@ public class InputView {
                     .stream(winningNumbers.trim().split(","))
                     .map(Integer::parseInt)
                     .collect(Collectors.toList());
-            return LottoGenerator.generate(numbers);
+            return numbers;
         } catch (LottoException e) {
             OutputView.printMessage(e.getMessage());
             return getWinningNumbers();
