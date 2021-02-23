@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.Map;
 
 public class LottoProfit {
-    private float profit;
+    private final float profit;
 
     private LottoProfit(float profit) {
         this.profit = profit;
