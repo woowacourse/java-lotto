@@ -24,7 +24,9 @@ public class LottoController {
 
     private Money createBudgetMoney() {
         try {
-            return new Money(inputView.scanBudget());
+            Money budget = new Money(inputView.scanBudget());
+            OutputView.printLottoTicketCount(budget);
+            return budget;
         } catch (RuntimeException e) {
             outputView.printError(e);
             return createBudgetMoney();

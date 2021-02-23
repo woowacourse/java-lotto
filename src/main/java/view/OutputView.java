@@ -9,12 +9,14 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class OutputView {
+    private static final int PRICE = 1000;
     private static final String LEFT_BRACKET = "[";
     private static final String RIGHT_BRACKET = "]";
     private static final String COMMA_WITH_BLANK = ", ";
+    private static final String MESSAGE_LOTTO_TICKET_COUNT_FORMAT = "%d개를 구매했습니다.";
     private static final String MESSAGE_STATISTICS = "\n당첨 통계\n--------\n";
-    private static final String STATISTICS_FORMAT = "%d개 일치 (%d원)- %d개";
-    private static final String STATISTICS_BONUS_FORMAT = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
+    private static final String MESSAGE_STATISTICS_BONUS_FORMAT = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
+    private static final String MESSAGE_STATISTICS_FORMAT = "%d개 일치 (%d원)- %d개";
     private static final String MESSAGE_PROFIT_FORMAT = "총 수익률은 %.2f입니다.";
 
     private static OutputView instance;
@@ -26,8 +28,8 @@ public class OutputView {
         return instance;
     }
 
-    public void printError(Exception e) {
-        System.out.println(e.getMessage());
+    public static void printLottoTicketCount(Money budget) {
+        System.out.printf((MESSAGE_LOTTO_TICKET_COUNT_FORMAT) + "%n", budget.toLong() / PRICE);
     }
 
     public void printLottoTicket(List<LottoTicket> lottoTickets) {
@@ -51,16 +53,20 @@ public class OutputView {
 
     private void printMatchCount(Rank rank, long count) {
         if (rank.equals(Rank.SECOND)) {
-            System.out.printf((STATISTICS_BONUS_FORMAT) + "%n", rank.getMatch(), rank.getReward().toLong(), count);
+            System.out.printf((MESSAGE_STATISTICS_BONUS_FORMAT) + "%n", rank.getMatch(), rank.getReward().toLong(), count);
             return;
         }
         if (rank.equals(Rank.NOTHING)) {
             return;
         }
-        System.out.printf((STATISTICS_FORMAT) + "%n", rank.getMatch(), rank.getReward().toLong(), count);
+        System.out.printf((MESSAGE_STATISTICS_FORMAT) + "%n", rank.getMatch(), rank.getReward().toLong(), count);
     }
 
     public void printProfit(Profit profit) {
         System.out.printf((MESSAGE_PROFIT_FORMAT) + "%n", profit.toDouble());
+    }
+
+    public void printError(Exception e) {
+        System.out.println(e.getMessage());
     }
 }
