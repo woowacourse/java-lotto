@@ -1,31 +1,28 @@
 package domain;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
     public static final int LOTTO_TICKET_SIZE = 6;
-    private static final String DUPLICATE_NUMBER_ERROR = "중복 숫자가 존재합니다.";
     private static final String INCORRECT_LOTTO_NUMBER_SIZE_ERROR = "로또 숫자의 개수가 6이 아닙니다.";
     private final Set<LottoNumber> lottoNumbers;
 
-    private LottoTicket(final Set<LottoNumber> lottoNumbers) {
+    private LottoTicket(final List<LottoNumber> numbers) {
+        LinkedHashSet<LottoNumber> lottoNumbers = new LinkedHashSet<>(numbers);
         validateIncorrectSize(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
     public static LottoTicket valueOf(final List<Integer> numbers) {
-        return new LottoTicket(generateLottoNumbers(new HashSet<>(numbers)));
+        return new LottoTicket(generateLottoNumbers(numbers));
     }
 
-    private static Set<LottoNumber> generateLottoNumbers(final HashSet<Integer> numbers) {
+    private static List<LottoNumber> generateLottoNumbers(final List<Integer> numbers) {
         return numbers.stream()
             .sorted()
             .map(LottoNumber::valueOf)
-            .collect(Collectors.toSet());
+            .collect(Collectors.toList());
     }
 
     private static void validateIncorrectSize(final Set<LottoNumber> lottoNumbers) {
