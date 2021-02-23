@@ -11,9 +11,10 @@ public class LottoNumber {
     public static final String NUMBER_RANGE_ERROR = "[ERROR] 1 ~ 45 사이의 숫자를 입력해 주세요.";
     private final int number;
 
-    private static Map<Integer, LottoNumber> lottoNumberCache = new HashMap<>();
+    private static final Map<Integer, LottoNumber> lottoNumberCache = new HashMap<>();
+
     static {
-        for (int i=MIN_NUMBER; i<=MAX_NUMBER; i++) {
+        for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
             lottoNumberCache.put(i, new LottoNumber(i));
         }
     }

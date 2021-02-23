@@ -2,10 +2,17 @@ package lotto.controller;
 
 import java.util.List;
 import java.util.Map;
-import lotto.domain.*;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoResult;
+import lotto.domain.Money;
+import lotto.domain.Rank;
+import lotto.domain.Seller;
+import lotto.domain.WinningLotto;
 import lotto.view.LottoView;
 
 public class LottoController {
+
     private Seller seller;
     private Money money;
     private List<Lotto> lottos;
@@ -16,7 +23,7 @@ public class LottoController {
     }
 
     public void buyLotto() {
-        this.money =  new Money(LottoView.requestMoney());
+        this.money = new Money(LottoView.requestMoney());
         int count = money.count();
         this.lottos = seller.sell(count);
         LottoView.buyLotto(count);
