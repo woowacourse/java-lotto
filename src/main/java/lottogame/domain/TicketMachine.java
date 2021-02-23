@@ -12,9 +12,6 @@ public class TicketMachine {
     }
 
     private void validateQuantityRange(Money money, int quantity) {
-        if (quantity == 0) {
-            throw new CannotBuyLottoException();
-        }
         checkQuantityByMoney(money, quantity);
     }
 

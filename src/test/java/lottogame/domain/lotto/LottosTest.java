@@ -89,7 +89,8 @@ class LottosTest {
                 new LottoResult(4, false),
                 new LottoResult(3, false),
                 new LottoResult(5, true),
-                new LottoResult(5, true),
+                new LottoResult(5, false),
+
                 new LottoResult(0, false),
                 new LottoResult(2, false),
                 new LottoResult(0, true),
