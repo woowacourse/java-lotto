@@ -34,11 +34,13 @@ public class LottoTicketBuyingRequest {
         return manualLottoLineList;
     }
 
-    public Money getRemainMoney() {
-        return new Money(money.getValue() - manualLottoAmount.getValue() * PRICE_EACH_LOTTO);
+    public int getManualLottoAmount() {
+        return manualLottoAmount.getValue();
     }
 
-    public LottoAmount getAutoLottoAmount() {
-        return new LottoAmount(money.getValue() / PRICE_EACH_LOTTO - manualLottoAmount.getValue());
+    public int getAutoLottoAmount() {
+        int moneyValue = money.getValue();
+        int manualLottoAmountValue = manualLottoAmount.getValue();
+        return new LottoAmount( moneyValue / PRICE_EACH_LOTTO - manualLottoAmountValue).getValue();
     }
 }
