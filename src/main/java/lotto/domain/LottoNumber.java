@@ -14,7 +14,7 @@ public class LottoNumber {
         this.number = number;
     }
 
-    private void validate(int number) {
+    public static void validate(int number) {
         if (number < MINIMUM || MAXIMUM < number) {
             throw new InvalidLottoNumberException();
         }

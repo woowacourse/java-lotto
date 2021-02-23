@@ -20,6 +20,7 @@ public class LottoNumbers {
     }
 
     public static LottoNumber get(int number) {
+        LottoNumber.validate(number);
         return numbers.get(number - 1);
     }
 
