@@ -3,7 +3,9 @@ package lotto.view;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 import lotto.domain.LottoStatisticResult;
 import lotto.domain.Lottos;
 import lotto.domain.Rank;
@@ -42,14 +44,10 @@ public class OutputView {
     }
 
     private void printMatchCountAndReward(LottoStatisticResult result) {
-        List<Rank> ranks = Arrays.asList(
-            Rank.FIFTH,
-            Rank.FOURTH,
-            Rank.THIRD,
-            Rank.SECOND,
-            Rank.FIRST
-        );
-
+        List<Rank> ranks = Arrays.stream(Rank.values())
+                                 .filter(rank -> rank != Rank.NOTHING)
+                                 .sorted(Comparator.comparing(Rank::getReward))
+                                 .collect(Collectors.toList());
         ranks.stream()
              .forEach(rank -> {
                  if (rank == Rank.SECOND) {
