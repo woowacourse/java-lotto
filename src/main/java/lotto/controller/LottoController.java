@@ -13,6 +13,7 @@ public class LottoController {
         LottoTickets lottoTickets = buyLottoTickets(lottoMachine);
         WinningLottoTicket winningLottoTicket = generateWinningLottoTicket();
         LottoResult lottoResult = lottoTickets.checkResult(winningLottoTicket);
+
         int purchasingPriceTotal = lottoMachine.calculatePurchasingPrice(lottoTickets);
         double yield = lottoResult.calculateYield(purchasingPriceTotal);
         OutputView.printLottoResult(lottoResult, yield);
@@ -22,6 +23,7 @@ public class LottoController {
         PurchasingPrice purchasingPrice = new PurchasingPrice(InputView.inputPurchasingPrice());
         List<ManualTicketNumbers> manualTicketsNumbers = InputView.inputManualTicketsNumbers();
         LottoTickets lottoTickets = lottoMachine.issueLottoTickets(purchasingPrice, manualTicketsNumbers);
+
         OutputView.printPurchasedLottoTicketCounts(manualTicketsNumbers.size(), lottoTickets.getTicketCounts());
         OutputView.printAllLottoTicketNumbers(lottoTickets);
         return lottoTickets;
