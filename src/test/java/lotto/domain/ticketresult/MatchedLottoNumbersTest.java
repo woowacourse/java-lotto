@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
 import lotto.domain.LottoTicket;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -16,15 +17,15 @@ class MatchedLottoNumbersTest {
     void setUp() {
         LottoTicket winningLottoTicket = new LottoTicket(
             Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)
+                LottoNumbers.of(1),
+                LottoNumbers.of(2),
+                LottoNumbers.of(3),
+                LottoNumbers.of(4),
+                LottoNumbers.of(5),
+                LottoNumbers.of(6)
             )
         );
-        LottoNumber bonusNumber = new LottoNumber(7);
+        LottoNumber bonusNumber = LottoNumbers.of(7);
         winningTicketAndBonusNumber
             = new WinningTicketAndBonusNumber(winningLottoTicket, bonusNumber);
     }
@@ -35,12 +36,12 @@ class MatchedLottoNumbersTest {
     void Should_Return_ExactClassifiedMatchResult_When_Regular2Bonus0() {
         LottoTicket purchasedLottoTicket = new LottoTicket(
             Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(11),
-                new LottoNumber(12),
-                new LottoNumber(13),
-                new LottoNumber(14)
+                LottoNumbers.of(1),
+                LottoNumbers.of(2),
+                LottoNumbers.of(11),
+                LottoNumbers.of(12),
+                LottoNumbers.of(13),
+                LottoNumbers.of(14)
             )
         );
 
@@ -57,12 +58,12 @@ class MatchedLottoNumbersTest {
     void Should_Return_ExactClassifiedMatchResult_When_Regular0Bonus1() {
         LottoTicket purchasedLottoTicket = new LottoTicket(
             Arrays.asList(
-                new LottoNumber(11),
-                new LottoNumber(7),
-                new LottoNumber(13),
-                new LottoNumber(14),
-                new LottoNumber(15),
-                new LottoNumber(16)
+                LottoNumbers.of(11),
+                LottoNumbers.of(7),
+                LottoNumbers.of(13),
+                LottoNumbers.of(14),
+                LottoNumbers.of(15),
+                LottoNumbers.of(16)
             )
         );
 
@@ -79,12 +80,12 @@ class MatchedLottoNumbersTest {
     void Should_Return_ExactClassifiedMatchResult_When_Regular3Bonus1() {
         LottoTicket purchasedLottoTicket = new LottoTicket(
             Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(7),
-                new LottoNumber(13),
-                new LottoNumber(14)
+                LottoNumbers.of(1),
+                LottoNumbers.of(2),
+                LottoNumbers.of(3),
+                LottoNumbers.of(7),
+                LottoNumbers.of(13),
+                LottoNumbers.of(14)
             )
         );
 

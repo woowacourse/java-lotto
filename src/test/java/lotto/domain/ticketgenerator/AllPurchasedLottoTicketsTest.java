@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
 import lotto.domain.LottoTicket;
 import lotto.domain.ticketpurchase.LottoTickets;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,12 +18,12 @@ class AllPurchasedLottoTicketsTest {
     void setUp() {
         lottoTicket = new LottoTicket(
             Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)
+                LottoNumbers.of(1),
+                LottoNumbers.of(2),
+                LottoNumbers.of(3),
+                LottoNumbers.of(4),
+                LottoNumbers.of(5),
+                LottoNumbers.of(6)
             )
         );
     }
