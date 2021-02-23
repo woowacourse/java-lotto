@@ -46,5 +46,5 @@
 
 ## 할 수 있으면 해보기
 
-- [ ] LottoNumber 캐싱하기
+- [x] LottoNumber 캐싱하기
 
