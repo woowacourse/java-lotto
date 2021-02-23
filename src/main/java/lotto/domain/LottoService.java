@@ -8,20 +8,15 @@ import lotto.domain.rating.RatingInfo;
 
 public class LottoService {
 
-    private final RatingInfo ratingInfo = new RatingInfo();
-    private final LottoRepository lottoRepository = new LottoRepository();
-    private final LottoMachine lottoMachine;
-
-    public LottoService(final LottoMachine lottoMachine) {
-        this.lottoMachine = lottoMachine;
-    }
-
-    public LottoRepository getLotto(final Ticket ticket) {
+    public LottoRepository getLotto(final LottoRepository lottoRepository,
+        final LottoMachine lottoMachine, final Ticket ticket) {
         lottoRepository.generateLottoByTicket(lottoMachine, ticket.getCount());
         return lottoRepository;
     }
 
-    public RatingInfo scratchLotto(final WinningLotto winningLotto) {
+    public RatingInfo scratchLotto(final LottoRepository lottoRepository,
+        final WinningLotto winningLotto) {
+        RatingInfo ratingInfo = new RatingInfo();
         for (Lotto lotto : lottoRepository.toList()) {
             int match = winningLotto.compareLottoNumber(lotto);
             boolean hasBonusBall = winningLotto.compareBonusBall(lotto);
@@ -30,11 +25,11 @@ public class LottoService {
         return ratingInfo;
     }
 
-    public double calculateEarningRate(final int money) {
-        return totalSum() / money;
+    public double calculateEarningRate(final RatingInfo ratingInfo, final int money) {
+        return totalSum(ratingInfo) / money;
     }
 
-    private double totalSum() {
+    private double totalSum(final RatingInfo ratingInfo) {
         double sum = 0;
         for (Rating rating : Rating.values()) {
             if (rating == Rating.MISS) {

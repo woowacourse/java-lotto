@@ -7,6 +7,8 @@ import java.util.Arrays;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoRepository;
 import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lottomachine.LottoMachine;
+import lotto.domain.lottomachine.RandomLottoMachine;
 import lotto.domain.rating.Rating;
 import lotto.domain.rating.RatingInfo;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,11 +19,13 @@ public class LottoServiceTest {
 
     LottoService lottoManager;
     LottoRepository lottoRepository;
+    LottoMachine lottoMachine;
 
     @BeforeEach
     void setup() {
-        lottoManager = new LottoService(() -> Arrays.asList(1, 2, 3, 4, 5, 6));
+        lottoManager = new LottoService();
         lottoRepository = new LottoRepository();
+        lottoMachine = () -> Arrays.asList(1, 2, 3, 4, 5, 6);
     }
 
     @Test
@@ -31,7 +35,8 @@ public class LottoServiceTest {
         lottoRepository.generateLottoByTicket(() -> Arrays.asList(1, 2, 3, 4, 5, 6), count);
 
         Ticket ticket = new Ticket(new Money(14000));
-        LottoRepository lottoRepositoryByLottoManager = lottoManager.getLotto(ticket);
+        LottoRepository lottoRepositoryByLottoManager = lottoManager
+            .getLotto(lottoRepository, lottoMachine, ticket);
 
         for (int i = 0; i < count; i++) {
             List<Integer> expected = lottoRepository.toList().get(i).getNumbers();
@@ -45,11 +50,11 @@ public class LottoServiceTest {
     void scratchLottoCheck() {
         Ticket ticket = new Ticket(new Money(2000));
 
-        lottoManager.getLotto(ticket);
+        lottoManager.getLotto(lottoRepository, lottoMachine, ticket);
         WinningLotto winningLotto = new WinningLotto(
             Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)),
             new LottoNumber(7));
-        RatingInfo ratingInfo = lottoManager.scratchLotto(winningLotto);
+        RatingInfo ratingInfo = lottoManager.scratchLotto(lottoRepository, winningLotto);
 
         assertThat(ratingInfo.get(Rating.FIRST)).isEqualTo(2);
     }

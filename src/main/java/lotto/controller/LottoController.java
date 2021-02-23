@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.LottoService;
 import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoRepository;
 import lotto.domain.lottomachine.RandomLottoMachine;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.Money;
@@ -14,24 +15,27 @@ import lotto.view.OutputView;
 public class LottoController {
 
     public void start() {
-        LottoService lottoService = new LottoService(new RandomLottoMachine());
-        Ticket ticket = butTicket();
+        LottoService lottoService = new LottoService();
+        LottoRepository lottoRepository = new LottoRepository();
+        Ticket ticket = buyTicket();
 
         OutputView.printBuyLotto(ticket.getCount());
-        OutputView.printLottoResults(lottoService.getLotto(ticket));
+        OutputView.printLottoResults(
+            lottoService.getLotto(lottoRepository, new RandomLottoMachine(), ticket));
 
         WinningLotto winningLotto = buyWinningLotto();
-        RatingInfo ratingInfo = lottoService.scratchLotto(winningLotto);
+        RatingInfo ratingInfo = lottoService.scratchLotto(lottoRepository, winningLotto);
         OutputView
-            .printWinningStats(ratingInfo, lottoService.calculateEarningRate(ticket.getPrice()));
+            .printWinningStats(ratingInfo,
+                lottoService.calculateEarningRate(ratingInfo, ticket.getPrice()));
     }
 
-    private Ticket butTicket() {
+    private Ticket buyTicket() {
         try {
             return tryBuyTicket();
         } catch (IllegalArgumentException e) {
             OutputView.getMessage(e.getMessage());
-            return butTicket();
+            return buyTicket();
         }
     }
 
