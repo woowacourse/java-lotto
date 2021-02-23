@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.dto.TicketNumbersDto;
+
 import java.util.List;
 
 public class LottoMachine {
@@ -13,7 +15,7 @@ public class LottoMachine {
         this.lottoNumberGenerator = lottoNumberGenerator;
     }
 
-    public LottoTickets issueLottoTickets(PurchasingPrice purchasingPrice, List<ManualTicketNumbers> manualTicketsNumbers) {
+    public LottoTickets issueLottoTickets(PurchasingPrice purchasingPrice, List<TicketNumbersDto> manualTicketsNumbers) {
         int purchasableTicketCounts = purchasingPrice.calculatePurchasableTicketCounts(LOTTO_TICKET_COST);
         int manualTicketCounts = manualTicketsNumbers.size();
         validatePurchasingPrice(purchasableTicketCounts, manualTicketCounts);

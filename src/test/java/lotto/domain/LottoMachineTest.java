@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.dto.TicketNumbersDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,15 +14,14 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 class LottoMachineTest {
 
     private final LottoMachine lottoMachine = new LottoMachine(() -> Arrays.asList(1, 2, 3, 4, 5, 6));
-    private final List<ManualTicketNumbers> manualTicketNumbers = Arrays.asList(
-            ManualTicketNumbers.from("11, 12, 13, 14, 15, 16".split(", ")));
+    private final List<TicketNumbersDto> ticketNumberDtos = Arrays.asList(new TicketNumbersDto(Arrays.asList(1, 2, 3, 4, 5, 6)));
 
     @DisplayName("구매 금액에서 수동 티켓 구매하고 남은 돈으로 자동 로또 티켓을 구매한다")
     @Test
     void issueLottoTickets() {
         PurchasingPrice purchasingPrice = new PurchasingPrice(3000);
 
-        LottoTickets lottoTickets = lottoMachine.issueLottoTickets(purchasingPrice, manualTicketNumbers);
+        LottoTickets lottoTickets = lottoMachine.issueLottoTickets(purchasingPrice, ticketNumberDtos);
         int ticketCounts = lottoTickets.getTicketCounts();
 
         assertThat(ticketCounts).isEqualTo(3);
@@ -33,7 +33,7 @@ class LottoMachineTest {
         PurchasingPrice purchasingPrice = new PurchasingPrice(500);
 
         assertThatCode(() -> {
-            lottoMachine.issueLottoTickets(purchasingPrice, manualTicketNumbers);
+            lottoMachine.issueLottoTickets(purchasingPrice, ticketNumberDtos);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("금액이 부족하여 로또 티켓을 구매할 수 없습니다.");
     }
@@ -42,10 +42,10 @@ class LottoMachineTest {
     @Test
     void cannotIssueAutomaticLottoTickets() {
         PurchasingPrice purchasingPrice = new PurchasingPrice(900);
-        List<ManualTicketNumbers> emptyManualTicketNumbers = Collections.emptyList();
+        List<TicketNumbersDto> emptyTicketNumberDtos = Collections.emptyList();
 
         assertThatCode(() -> {
-            lottoMachine.issueLottoTickets(purchasingPrice, emptyManualTicketNumbers);
+            lottoMachine.issueLottoTickets(purchasingPrice, emptyTicketNumberDtos);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("금액이 부족하여 로또 티켓을 구매할 수 없습니다.");
     }

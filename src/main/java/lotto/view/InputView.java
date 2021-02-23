@@ -1,6 +1,7 @@
 package lotto.view;
 
-import lotto.domain.ManualTicketNumbers;
+import lotto.dto.TicketNumbersAssembler;
+import lotto.dto.TicketNumbersDto;
 
 import java.util.Arrays;
 import java.util.List;
@@ -31,13 +32,13 @@ public class InputView {
         return Integer.parseInt(SCANNER.nextLine());
     }
 
-    public static List<ManualTicketNumbers> inputManualTicketsNumbers() {
+    public static List<TicketNumbersDto> inputManualTicketsNumbers() {
         int manualTicketCounts = nextIntWithInstructionMessage(INPUT_MANUAL_TICKET_COUNTS_MESSAGE);
         if (manualTicketCounts > ZERO) {
             System.out.println(INPUT_MANUAL_TICKET_NUMBERS_MESSAGE);
         }
         return Stream.generate(InputView::nextLineWithSplit)
-                .map(ManualTicketNumbers::from)
+                .map(TicketNumbersAssembler::writeTicketNumbersDto)
                 .limit(manualTicketCounts)
                 .collect(Collectors.toList());
     }
