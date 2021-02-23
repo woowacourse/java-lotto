@@ -31,8 +31,7 @@ public class LottoController {
 
     private Money inputMoney() {
         try {
-            final Money money = new Money(inputView.inputMoney());
-            return money;
+            return new Money(inputView.inputMoney());
         } catch (LottoCustomException e) {
             OutputView.printErrorMessage(e.getMessage());
             return inputMoney();

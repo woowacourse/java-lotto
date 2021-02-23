@@ -29,10 +29,7 @@ public class Money {
     }
 
     public boolean isCountExceedLimit(int checkMoney) {
-        if (checkMoney * MONEY_UNIT > money) {
-            return true;
-        }
-        return false;
+        return checkMoney * MONEY_UNIT > money;
     }
 
     public int getMoney() {
