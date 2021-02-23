@@ -5,19 +5,25 @@ import java.util.*;
 public class Lottos {
 
     private final List<Lotto> lottoBunch = new ArrayList<>();
+    private final int manualLottoCount;
 
-    public Lottos(int purchasedLottoCount) {
-        for (int i = 0; i < purchasedLottoCount; i++) {
+    public Lottos(List<String> manualLottoNumbers, int purchasedLottoCount) {
+        manualLottoCount = manualLottoNumbers.size();
+        int autoLottoCount = purchasedLottoCount - manualLottoCount;
+        for (String manualLottoNumber : manualLottoNumbers) {
+            lottoBunch.add(LottoGenerator.createManualLotto(manualLottoNumber));
+        }
+        for (int i = 0; i < autoLottoCount; i++) {
             lottoBunch.add(LottoGenerator.createAutoLotto());
         }
     }
 
     public Map<LottoRank, Integer> getStatistics(WinningLotto winningLotto) {
         Map<LottoRank, Integer> getStatistics = setUpStatistics();
-        for (Lotto lotto : lottoBunch) {
-            LottoRank lottoRank = winningLotto.getLottoResult(lotto);
-            getStatistics.replace(lottoRank, getStatistics.get(lottoRank) + 1);
-        }
+        lottoBunch.stream()
+                .map(winningLotto::getLottoResult)
+                .forEach(rank -> getStatistics.replace(rank, getStatistics.get(rank) + 1));
+
         return getStatistics;
     }
 
@@ -35,5 +41,9 @@ public class Lottos {
 
     public int getSize() {
         return lottoBunch.size();
+    }
+
+    public int getManualLottoCount() {
+        return manualLottoCount;
     }
 }

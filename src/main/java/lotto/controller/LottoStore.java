@@ -4,7 +4,10 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoStore {
 
@@ -19,9 +22,14 @@ public class LottoStore {
 
     public Lottos buyLotto() {
         Money money = new Money(InputView.inputMoney());
-        Lottos purchasedLottos = new Lottos(calculateAffordableLottoTickets(money));
+        Lottos purchasedLottos = new Lottos(manualLottoNumbers(), calculateAffordableLottoTickets(money));
         OutputView.printPurchasedLottos(purchasedLottos);
         return purchasedLottos;
+    }
+
+    private List<String> manualLottoNumbers() {
+        int manualLottoCount = InputView.inputManualLottoCount();
+        return InputView.inputManualLottoNumbers(manualLottoCount);
     }
 
     private WinningLotto decideWinningLotto() {

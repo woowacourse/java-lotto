@@ -12,7 +12,7 @@ public class OutputView {
     public static final String REGULAR_RESULT_EXPRESSION = "%d개 일치, (%d원) - %d개" + System.lineSeparator();
     public static final String BONUS_RESULT_EXPRESSION = "5개 일치, 보너스볼일치(%d원) - %d개" + System.lineSeparator();
     public static final String PROFIT_RATE_EXPRESSION = "총 수익률은 %.2f입니다." + System.lineSeparator();
-    public static final String PURCHASED_LOTTO_COUNT_ALARM = "%d를 구매하였습니다." + System.lineSeparator();
+    public static final String PURCHASED_LOTTO_COUNT_ALARM = "수동으로 %d장, 자동으로 %d개를 구매했습니다." + System.lineSeparator();
     public static final String LOTTO_STATISTICS_PREFIX = "당첨 통계" + System.lineSeparator() + "---------";
 
     public static void printInputMessage(String message) {
@@ -21,7 +21,8 @@ public class OutputView {
 
     public static void printPurchasedLottos(Lottos purchasedLottos) {
         List<Lotto> lottoBunch = purchasedLottos.getLottoBunch();
-        System.out.printf(PURCHASED_LOTTO_COUNT_ALARM, lottoBunch.size());
+        int manualLottoCount = purchasedLottos.getManualLottoCount();
+        System.out.printf(PURCHASED_LOTTO_COUNT_ALARM, manualLottoCount, purchasedLottos.getSize() - manualLottoCount);
         for (Lotto lotto : lottoBunch) {
             System.out.println(lotto.getNumbers());
         }
