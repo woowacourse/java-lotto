@@ -50,7 +50,7 @@
 - [x] 모든 변수는 생성자에서 초기화해주도록!
 
 ## 2단계 체크리스트
-- [ ] LottoNumber 1부터 45 캐싱 (`IntegerCache` 참)
+- [x] LottoNumber 1부터 45 캐싱 (`IntegerCache` 참고)
 - [ ] 테스트코드 꼼꼼히 확인후 추가
     - `Lotto.isContains`
 - [ ] 로또 수동 구매 기능
