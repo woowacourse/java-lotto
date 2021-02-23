@@ -19,21 +19,21 @@ public enum LottoRank {
     }
 
     public static LottoRank findLottoRank(final int lottoBallMatch, final boolean bonusMatch) {
-        for (LottoRank lottoRank : LottoRank.values()) {
-            if (lottoBallMatch < 3) {
-                return NONE_MATCHES;
-            } else if (lottoBallMatch == 3) {
-                return THREE_MATCHES;
-            } else if (lottoBallMatch == 4) {
-                return FOUR_MATCHES;
-            } else if (lottoBallMatch == 5) {
-                if (bonusMatch) {
-                    return FIVE_AND_BONUS_MATCHES;
-                }
-                return FIVE_MATCHES;
-            } else {
-                return SIX_MATCHES;
-            }
+        if (lottoBallMatch == 3) {
+            return THREE_MATCHES;
         }
+        if (lottoBallMatch == 4) {
+            return FOUR_MATCHES;
+        }
+        if (lottoBallMatch == 5 && !bonusMatch) {
+            return FIVE_MATCHES;
+        }
+        if (lottoBallMatch == 5 && bonusMatch) {
+            return FIVE_AND_BONUS_MATCHES;
+        }
+        if (lottoBallMatch == 6) {
+            return SIX_MATCHES;
+        }
+        return NONE_MATCHES;
     }
 }
