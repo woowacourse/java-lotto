@@ -1,19 +1,34 @@
 package lotto.domain;
 
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LottoResult {
 
-    private static final String FORMAT = "%.2f";
-    private final Map<Rank, Integer> rankResult;
+    private final Map<Rank, Integer> ranks = new LinkedHashMap<>();
 
-    public LottoResult(Map<Rank, Integer> rankResult) {
-        this.rankResult = rankResult;
+    public LottoResult() {
+        initRanks();
+    }
+
+    private void initRanks() {
+        for (int i = 1; i < Rank.values().length; i++) {
+            ranks.put(Rank.values()[i], 0);
+        }
+    }
+
+    public Map<Rank, Integer> matchRank(WinningLotto winningLotto, List<Lotto> lottos) {
+        for (Lotto lotto : lottos) {
+            Rank rank = winningLotto.findRank(lotto);
+            ranks.computeIfPresent(rank, (key, val) -> val + 1);
+        }
+        return ranks;
     }
 
     public double findEarningRate(int money) {
         int sumOfPrize = 0;
-        for (Map.Entry<Rank, Integer> singleCount : rankResult.entrySet()) {
+        for (Map.Entry<Rank, Integer> singleCount : ranks.entrySet()) {
             sumOfPrize += singleCount.getKey().getPrize() * singleCount.getValue();
         }
         return (double) sumOfPrize / (double) money;
