@@ -48,8 +48,7 @@ public class OutputView {
                                  .filter(rank -> rank != Rank.NOTHING)
                                  .sorted(Comparator.comparing(Rank::getReward))
                                  .collect(Collectors.toList());
-        ranks.stream()
-             .forEach(rank -> {
+        ranks.forEach(rank -> {
                  if (rank == Rank.SECOND) {
                      System.out.println("5개 일치, 보너스 볼 일치 (" + rank.getReward() + "원)- "
                          + result.getOrNoCount(rank) + "개");
