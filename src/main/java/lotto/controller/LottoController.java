@@ -1,6 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.*;
+import lotto.domain.Money;
 import lotto.domain.lotto.*;
 import lotto.domain.result.LottoResult;
 import lotto.domain.result.WinningLotto;
@@ -23,7 +23,7 @@ public class LottoController {
     public void run() {
         Money inputMoney = new Money(InputView.inputMoney());
         LottoCount lottoCount = getLottoCount(inputMoney);
-        List<LottoTicket> manualLottoTickets = getAllManualLottoTicket(lottoCount);
+        List<LottoTicket> manualLottoTickets = getAllManualLottoTicket(lottoCount.getManualLottoCount());
         LottoTickets lottoTickets = lottoTicketFactory.generateLottoTickets(
                 lottoCount.getAutoLottoCount(), manualLottoTickets);
         OutputView.printLottoTicketsCount(lottoCount);
@@ -32,10 +32,10 @@ public class LottoController {
         showResult(lottoTickets, winningLotto);
     }
 
-    private List<LottoTicket> getAllManualLottoTicket(LottoCount lottoCount) {
+    private List<LottoTicket> getAllManualLottoTicket(int manualLottoCount) {
         OutputView.printInputManualLottoNumbers();
         List<LottoTicket> manualLottoTickets = new ArrayList<>();
-        for (int i = 0; i < lottoCount.getManualLottoCount(); i++) {
+        for (int i = 0; i < manualLottoCount; i++) {
             manualLottoTickets.add(
                     InputView.inputManualLottoNumbers()
                             .stream()
