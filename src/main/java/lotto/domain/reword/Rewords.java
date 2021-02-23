@@ -27,7 +27,7 @@ public class Rewords {
     }
 
     public int countOfReword(final Reword reword) {
-        return rewords.getOrDefault(reword, rewords.getOrDefault(reword, EMPTY_REWORD));
+        return rewords.getOrDefault(reword, EMPTY_REWORD);
     }
 
     public double profit(final int money) {
