@@ -15,6 +15,7 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.ticketgenerator.AllPurchasedLottoTickets;
 import lotto.domain.ticketpurchase.LottoTickets;
+import lotto.domain.ticketpurchase.NumberOfTicketsToPurchaseManually;
 import lotto.domain.ticketpurchase.PurchasePrice;
 import lotto.domain.ticketpurchase.UserPurchase;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,12 +24,14 @@ import org.junit.jupiter.api.Test;
 
 public class LottoResultTest {
     private static final int PURCHASE_PRICE = 10_000;
+    private PurchasePrice purchasePrice;
 
     private WinningTicketAndBonusNumber winningLottoNumbers;
-    private UserPurchase userPurchase;
 
     @BeforeEach
     void setWinningLottoNumbers() {
+        purchasePrice = new PurchasePrice(PURCHASE_PRICE);
+
         LottoTicket winnerTicket = new LottoTicket(
             Arrays.asList(
                 new LottoNumber(1),
@@ -41,7 +44,6 @@ public class LottoResultTest {
         );
         LottoNumber bonusNumber = new LottoNumber(7);
         winningLottoNumbers = new WinningTicketAndBonusNumber(winnerTicket, bonusNumber);
-        userPurchase = new UserPurchase(new PurchasePrice(PURCHASE_PRICE), new LottoTickets());
     }
 
     @DisplayName("1등 당첨 - 6개 일치")
@@ -55,15 +57,14 @@ public class LottoResultTest {
             new LottoNumber(5),
             new LottoNumber(6)
         ));
-        LottoTickets manuallyPurchasedLottoTickets = new LottoTickets();
-        manuallyPurchasedLottoTickets.add(lottoTicket);
-        LottoTickets automaticallyPurchasedLottoTickets = new LottoTickets();
-        AllPurchasedLottoTickets allPurchasedLottoTickets
-            = new AllPurchasedLottoTickets(manuallyPurchasedLottoTickets,
-            automaticallyPurchasedLottoTickets);
+        LottoTickets lottoTickets = new LottoTickets();
+        lottoTickets.add(lottoTicket);
 
+        NumberOfTicketsToPurchaseManually numberOfTicketsToPurchaseManually
+            = new NumberOfTicketsToPurchaseManually(1, purchasePrice);
+        UserPurchase userPurchase = new UserPurchase(purchasePrice, numberOfTicketsToPurchaseManually);
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers, userPurchase);
-        LottoResult lottoResult = lottoComparator.getLottoResult(allPurchasedLottoTickets);
+        LottoResult lottoResult = lottoComparator.getLottoResult(lottoTickets);
 
         assertThat(lottoResult.getCountOfMatchedNumbersOfSpecificType(THREE_MATCH))
             .isEqualTo(0);
@@ -96,15 +97,14 @@ public class LottoResultTest {
             new LottoNumber(5),
             new LottoNumber(7)
         ));
-        LottoTickets manuallyPurchasedLottoTickets = new LottoTickets();
-        LottoTickets automaticallyPurchasedLottoTickets = new LottoTickets();
-        automaticallyPurchasedLottoTickets.add(lottoTicket);
-        AllPurchasedLottoTickets allPurchasedLottoTickets
-            = new AllPurchasedLottoTickets(manuallyPurchasedLottoTickets,
-            automaticallyPurchasedLottoTickets);
+        LottoTickets lottoTickets = new LottoTickets();
+        lottoTickets.add(lottoTicket);
 
+        NumberOfTicketsToPurchaseManually numberOfTicketsToPurchaseManually
+            = new NumberOfTicketsToPurchaseManually(1, purchasePrice);
+        UserPurchase userPurchase = new UserPurchase(purchasePrice, numberOfTicketsToPurchaseManually);
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers, userPurchase);
-        LottoResult lottoResult = lottoComparator.getLottoResult(allPurchasedLottoTickets);
+        LottoResult lottoResult = lottoComparator.getLottoResult(lottoTickets);
 
         assertThat(lottoResult.getCountOfMatchedNumbersOfSpecificType(THREE_MATCH))
             .isEqualTo(0);
@@ -137,15 +137,14 @@ public class LottoResultTest {
             new LottoNumber(5),
             new LottoNumber(9)
         ));
-        LottoTickets manuallyPurchasedLottoTickets = new LottoTickets();
-        manuallyPurchasedLottoTickets.add(lottoTicket);
-        LottoTickets automaticallyPurchasedLottoTickets = new LottoTickets();
-        AllPurchasedLottoTickets allPurchasedLottoTickets
-            = new AllPurchasedLottoTickets(manuallyPurchasedLottoTickets,
-            automaticallyPurchasedLottoTickets);
+        LottoTickets lottoTickets = new LottoTickets();
+        lottoTickets.add(lottoTicket);
 
+        NumberOfTicketsToPurchaseManually numberOfTicketsToPurchaseManually
+            = new NumberOfTicketsToPurchaseManually(1, purchasePrice);
+        UserPurchase userPurchase = new UserPurchase(purchasePrice, numberOfTicketsToPurchaseManually);
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers, userPurchase);
-        LottoResult lottoResult = lottoComparator.getLottoResult(allPurchasedLottoTickets);
+        LottoResult lottoResult = lottoComparator.getLottoResult(lottoTickets);
 
         assertThat(lottoResult.getCountOfMatchedNumbersOfSpecificType(THREE_MATCH))
             .isEqualTo(0);
@@ -178,15 +177,14 @@ public class LottoResultTest {
             new LottoNumber(9),
             new LottoNumber(10)
         ));
-        LottoTickets manuallyPurchasedLottoTickets = new LottoTickets();
-        LottoTickets automaticallyPurchasedLottoTickets = new LottoTickets();
-        automaticallyPurchasedLottoTickets.add(lottoTicket);
-        AllPurchasedLottoTickets allPurchasedLottoTickets
-            = new AllPurchasedLottoTickets(manuallyPurchasedLottoTickets,
-            automaticallyPurchasedLottoTickets);
+        LottoTickets lottoTickets = new LottoTickets();
+        lottoTickets.add(lottoTicket);
 
+        NumberOfTicketsToPurchaseManually numberOfTicketsToPurchaseManually
+            = new NumberOfTicketsToPurchaseManually(1, purchasePrice);
+        UserPurchase userPurchase = new UserPurchase(purchasePrice, numberOfTicketsToPurchaseManually);
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers, userPurchase);
-        LottoResult lottoResult = lottoComparator.getLottoResult(allPurchasedLottoTickets);
+        LottoResult lottoResult = lottoComparator.getLottoResult(lottoTickets);
 
         assertThat(lottoResult.getCountOfMatchedNumbersOfSpecificType(THREE_MATCH))
             .isEqualTo(0);
@@ -219,15 +217,14 @@ public class LottoResultTest {
             new LottoNumber(11),
             new LottoNumber(12)
         ));
-        LottoTickets manuallyPurchasedLottoTickets = new LottoTickets();
-        manuallyPurchasedLottoTickets.add(lottoTicket);
-        LottoTickets automaticallyPurchasedLottoTickets = new LottoTickets();
-        AllPurchasedLottoTickets allPurchasedLottoTickets
-            = new AllPurchasedLottoTickets(manuallyPurchasedLottoTickets,
-            automaticallyPurchasedLottoTickets);
+        LottoTickets lottoTickets = new LottoTickets();
+        lottoTickets.add(lottoTicket);
 
+        NumberOfTicketsToPurchaseManually numberOfTicketsToPurchaseManually
+            = new NumberOfTicketsToPurchaseManually(1, purchasePrice);
+        UserPurchase userPurchase = new UserPurchase(purchasePrice, numberOfTicketsToPurchaseManually);
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers, userPurchase);
-        LottoResult lottoResult = lottoComparator.getLottoResult(allPurchasedLottoTickets);
+        LottoResult lottoResult = lottoComparator.getLottoResult(lottoTickets);
 
         assertThat(lottoResult.getCountOfMatchedNumbersOfSpecificType(THREE_MATCH))
             .isEqualTo(1);
@@ -251,7 +248,7 @@ public class LottoResultTest {
     @DisplayName("여러 개 당첨 - 2등, 4등")
     @Test
     void Should_Return_Result_When_2ndAnd4thWinning() {
-        LottoTicket manuallyPurchasedLottoTicket = new LottoTicket(Arrays.asList(
+        LottoTicket lottoTicket1 = new LottoTicket(Arrays.asList(
             new LottoNumber(1),
             new LottoNumber(2),
             new LottoNumber(3),
@@ -259,7 +256,7 @@ public class LottoResultTest {
             new LottoNumber(5),
             new LottoNumber(7)
         ));
-        LottoTicket automaticallyPurchasedLottoTicket = new LottoTicket(Arrays.asList(
+        LottoTicket lottoTicket2 = new LottoTicket(Arrays.asList(
             new LottoNumber(1),
             new LottoNumber(2),
             new LottoNumber(3),
@@ -267,16 +264,17 @@ public class LottoResultTest {
             new LottoNumber(9),
             new LottoNumber(10)
         ));
-        LottoTickets manuallyPurchasedLottoTickets = new LottoTickets();
-        manuallyPurchasedLottoTickets.add(manuallyPurchasedLottoTicket);
-        LottoTickets automaticallyPurchasedLottoTickets = new LottoTickets();
-        automaticallyPurchasedLottoTickets.add(automaticallyPurchasedLottoTicket);
-        AllPurchasedLottoTickets allPurchasedLottoTickets
-            = new AllPurchasedLottoTickets(manuallyPurchasedLottoTickets,
-            automaticallyPurchasedLottoTickets);
+        LottoTickets lottoTickets = new LottoTickets();
+        lottoTickets.add(lottoTicket1);
+        lottoTickets.add(lottoTicket2);
 
+
+        PurchasePrice purchasePrices2Tickets = new PurchasePrice(2000);
+        NumberOfTicketsToPurchaseManually numberOfTicketsToPurchaseManually
+            = new NumberOfTicketsToPurchaseManually(2,purchasePrices2Tickets);
+        UserPurchase userPurchase = new UserPurchase(purchasePrice, numberOfTicketsToPurchaseManually);
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers, userPurchase);
-        LottoResult lottoResult = lottoComparator.getLottoResult(allPurchasedLottoTickets);
+        LottoResult lottoResult = lottoComparator.getLottoResult(lottoTickets);
 
         assertThat(lottoResult.getCountOfMatchedNumbersOfSpecificType(THREE_MATCH))
             .isEqualTo(0);

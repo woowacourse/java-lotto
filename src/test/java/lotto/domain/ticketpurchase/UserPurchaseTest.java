@@ -27,55 +27,5 @@ public class UserPurchaseTest {
         );
     }
 
-    @DisplayName("모든 함수 반환 결과 확인 - 수동 구매 0개, 자동 구매 5개")
-    @Test
-    void Should_Return_AllCorrectResult_When_PurchaseManually0Tickets() {
-        PurchasePrice purchasePrice = new PurchasePrice(5000);
-        LottoTickets manuallyPurchasedLottoTickets = new LottoTickets();
 
-        UserPurchase userPurchase = new UserPurchase(purchasePrice, manuallyPurchasedLottoTickets);
-
-        assertThat(userPurchase.getNumberOfAllTickets()).isEqualTo(5);
-        assertThat(userPurchase.getManuallyPurchasedLottoTickets())
-            .isEqualTo(manuallyPurchasedLottoTickets);
-        assertThat(userPurchase.getNumberOfAutomaticallyPurchasedLottoTickets()).isEqualTo(5);
-        assertThat(userPurchase.getPurchasePrice()).isEqualTo(purchasePrice);
-    }
-
-    @DisplayName("모든 함수 반환 결과 확인 - 수동 구매 5개, 자동 구매 0개")
-    @Test
-    void Should_Return_AllCorrectResult_When_PurchaseManually5Tickets() {
-        PurchasePrice purchasePrice = new PurchasePrice(5000);
-        LottoTickets manuallyPurchasedLottoTickets = new LottoTickets();
-        manuallyPurchasedLottoTickets.add(lottoTicket);
-        manuallyPurchasedLottoTickets.add(lottoTicket);
-        manuallyPurchasedLottoTickets.add(lottoTicket);
-        manuallyPurchasedLottoTickets.add(lottoTicket);
-        manuallyPurchasedLottoTickets.add(lottoTicket);
-
-        UserPurchase userPurchase = new UserPurchase(purchasePrice, manuallyPurchasedLottoTickets);
-
-        assertThat(userPurchase.getNumberOfAllTickets()).isEqualTo(5);
-        assertThat(userPurchase.getManuallyPurchasedLottoTickets())
-            .isEqualTo(manuallyPurchasedLottoTickets);
-        assertThat(userPurchase.getNumberOfAutomaticallyPurchasedLottoTickets()).isEqualTo(0);
-        assertThat(userPurchase.getPurchasePrice()).isEqualTo(purchasePrice);
-    }
-
-    @DisplayName("모든 함수 반환 결과 확인 - 수동 구매 2개, 자동 구매 3개")
-    @Test
-    void Should_Return_AllCorrectResult_When_PurchaseManually2Automatically3Tickets() {
-        PurchasePrice purchasePrice = new PurchasePrice(5000);
-        LottoTickets manuallyPurchasedLottoTickets = new LottoTickets();
-        manuallyPurchasedLottoTickets.add(lottoTicket);
-        manuallyPurchasedLottoTickets.add(lottoTicket);
-
-        UserPurchase userPurchase = new UserPurchase(purchasePrice, manuallyPurchasedLottoTickets);
-
-        assertThat(userPurchase.getNumberOfAllTickets()).isEqualTo(5);
-        assertThat(userPurchase.getManuallyPurchasedLottoTickets())
-            .isEqualTo(manuallyPurchasedLottoTickets);
-        assertThat(userPurchase.getNumberOfAutomaticallyPurchasedLottoTickets()).isEqualTo(3);
-        assertThat(userPurchase.getPurchasePrice()).isEqualTo(purchasePrice);
-    }
 }

@@ -1,7 +1,7 @@
 package lotto.domain.ticketresult;
 
 import lotto.domain.LottoTicket;
-import lotto.domain.ticketgenerator.AllPurchasedLottoTickets;
+import lotto.domain.ticketpurchase.LottoTickets;
 import lotto.domain.ticketpurchase.UserPurchase;
 
 public class LottoComparator {
@@ -12,8 +12,8 @@ public class LottoComparator {
         this.lottoResult = new LottoResult(winningLottoNumbers, userPurchase);
     }
 
-    public LottoResult getLottoResult(AllPurchasedLottoTickets allPurchasedLottoTickets) {
-        for (LottoTicket lottoTicket : allPurchasedLottoTickets.getAllTickets()) {
+    public LottoResult getLottoResult(LottoTickets lottoTickets) {
+        for (LottoTicket lottoTicket : lottoTickets.getTickets()) {
             lottoResult.applyOneTicketResult(lottoTicket);
         }
         lottoResult.addAllWinningMoney();

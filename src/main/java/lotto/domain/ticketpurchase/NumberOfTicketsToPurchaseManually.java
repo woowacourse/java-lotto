@@ -18,7 +18,11 @@ public class NumberOfTicketsToPurchaseManually {
         }
     }
 
-    public int getNumberOfTickets() {
+    public int size() {
         return numberOfTickets;
+    }
+
+    public boolean isNotZero() {
+        return numberOfTickets != 0;
     }
 }

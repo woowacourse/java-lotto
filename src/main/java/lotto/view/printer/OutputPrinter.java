@@ -5,7 +5,7 @@ import static lotto.view.InputView.LOTTO_NUMBERS_DELIMITER;
 import java.math.BigDecimal;
 import java.util.stream.Collectors;
 import lotto.domain.LottoTicket;
-import lotto.domain.ticketgenerator.AllPurchasedLottoTickets;
+import lotto.domain.ticketpurchase.UserPurchase;
 import lotto.type.LottoMatchType;
 
 public class OutputPrinter {
@@ -15,11 +15,10 @@ public class OutputPrinter {
     }
 
     public static void printMessageOfCompletedPurchase(
-        AllPurchasedLottoTickets allPurchasedLottoTickets) {
+        UserPurchase userPurchase) {
 
         System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다." + NEW_LINE,
-            allPurchasedLottoTickets.getNumberOfManuallyPurchasedLottoTickets(),
-            allPurchasedLottoTickets.getNumberOfAutomaticallyPurchasedLottoTickets());
+            userPurchase.manualTicketsSize(), userPurchase.autoTicketsSize());
     }
 
     public static void printLottoTicketNumbers(LottoTicket lottoTicket) {

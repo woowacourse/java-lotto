@@ -34,12 +34,7 @@ public class InputView {
         PurchasePrice purchasePrice = getPurchasePriceInputFromUser();
         NumberOfTicketsToPurchaseManually numberOfTicketsToPurchaseManually
             = getNumberOfTicketsToPurchaseManually(purchasePrice);
-        if (numberOfTicketsToPurchaseManually.getNumberOfTickets() == 0) {
-            return new UserPurchase(purchasePrice);
-        }
-        LottoTickets manuallyPurchasedLottoTickets
-            = getManuallyPurchasedLottoTicketsInputFromUser(numberOfTicketsToPurchaseManually);
-        return new UserPurchase(purchasePrice, manuallyPurchasedLottoTickets);
+        return new UserPurchase(purchasePrice, numberOfTicketsToPurchaseManually);
     }
 
     private static PurchasePrice getPurchasePriceInputFromUser() {
@@ -67,15 +62,13 @@ public class InputView {
         return Integer.parseInt(purchasePriceInput);
     }
 
-    private static LottoTickets getManuallyPurchasedLottoTicketsInputFromUser(
-        NumberOfTicketsToPurchaseManually numberOfManualPurchaseTickets) {
-
+    public static LottoTickets purchaseManually(UserPurchase userPurchase) {
         InputPrinter.printInputGuideMessageOfLottoNumbersToPurchaseManually();
-        LottoTickets manuallyPurchasedLottoTickets = new LottoTickets();
-        for (int i = 0; i < numberOfManualPurchaseTickets.getNumberOfTickets(); i++) {
-            manuallyPurchasedLottoTickets.add(new LottoTicket(getLottoNumbersInput()));
+        LottoTickets lottoTickets = new LottoTickets();
+        for (int i = 0; i < userPurchase.manualTicketsSize(); i++) {
+            lottoTickets.add(new LottoTicket(getLottoNumbersInput()));
         }
-        return manuallyPurchasedLottoTickets;
+        return lottoTickets;
     }
 
     private static List<LottoNumber> getLottoNumbersInput() {

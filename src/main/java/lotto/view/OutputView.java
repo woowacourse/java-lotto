@@ -3,6 +3,8 @@ package lotto.view;
 import java.util.List;
 import lotto.domain.LottoTicket;
 import lotto.domain.ticketgenerator.AllPurchasedLottoTickets;
+import lotto.domain.ticketpurchase.LottoTickets;
+import lotto.domain.ticketpurchase.UserPurchase;
 import lotto.domain.ticketresult.LottoResult;
 import lotto.type.LottoMatchType;
 import lotto.view.printer.InputPrinter;
@@ -12,10 +14,9 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void printAllLottoTickets(AllPurchasedLottoTickets allPurchasedLottoTickets) {
-        List<LottoTicket> allLottoTickets = allPurchasedLottoTickets.getAllTickets();
-        OutputPrinter.printMessageOfCompletedPurchase(allPurchasedLottoTickets);
-        for (LottoTicket lottoTicket : allLottoTickets) {
+    public static void printAllLottoTickets(LottoTickets lottoTickets, UserPurchase userPurchase) {
+        OutputPrinter.printMessageOfCompletedPurchase(userPurchase);
+        for (LottoTicket lottoTicket : lottoTickets.getTickets()) {
             OutputPrinter.printLottoTicketNumbers(lottoTicket);
         }
         InputPrinter.printNewLine();
