@@ -20,9 +20,9 @@ public class MoneyTest {
 	@Test
 	void calculateNumberOfLotto() {
 		Money money = new Money(13_001);
-		long numberOfLotto = money.getAffordableLottoQuantity();
+		LottoQuantity numberOfLotto = money.getAffordableLottoQuantity();
 
-		assertThat(numberOfLotto).isEqualTo(13);
+		assertThat(numberOfLotto).isEqualTo(new LottoQuantity(13));
 	}
 
 	@DisplayName("input으로 받은 금액 중에서 실제로 로또를 구매한 금액을 제대로 산출하는지")
@@ -48,9 +48,9 @@ public class MoneyTest {
 	@Test
 	void validateAffordability() {
 		Money money = new Money(2_999);
-		int manualLottoQuantity = 3;
+		LottoQuantity manualLottoQuantity = new LottoQuantity(3);
 
-		assertThatThrownBy(() -> money.validateAffordability(manualLottoQuantity)).isInstanceOf(IllegalArgumentException.class)
+		assertThatThrownBy(() -> money.validateAffordabilityOf(manualLottoQuantity)).isInstanceOf(IllegalArgumentException.class)
 				.hasMessage(MANUAL_LOTTO_QUANTITY_ERROR);
 	}
 
@@ -58,8 +58,8 @@ public class MoneyTest {
 	@Test
 	void calculateMoneyLeft() {
 		Money money = new Money(5_540);
-		int manualLottoQuantity = 3;
+		LottoQuantity manualLottoQuantity = new LottoQuantity(3);
 
-		assertThat(money.getChange(manualLottoQuantity)).isEqualTo(new Money(2_540));
+		assertThat(money.getChangeAfterBuying(manualLottoQuantity)).isEqualTo(new Money(2_540));
 	}
 }

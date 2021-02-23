@@ -17,33 +17,33 @@ public class Money {
     }
 
     public Money getMoneyActuallyInvested() {
-        return new Money(getAffordableLottoQuantity() * LOTTO_PRICE);
+        return new Money(getAffordableLottoQuantity().getTotalPrice());
     }
 
-    public int getAffordableLottoQuantity() {
-        return (int) money / LOTTO_PRICE;
+    public LottoQuantity getAffordableLottoQuantity() {
+        return new LottoQuantity((int) money / LOTTO_PRICE);
     }
 
     public float getProfitRate(Money profit) {
         return (float) profit.money / this.money;
     }
 
-    public void validateAffordability(int lottoQuantity) {
-        if (!isAffordable(lottoQuantity)) {
+    public void validateAffordabilityOf(LottoQuantity lottoQuantity) {
+        if (!isAffordableToBuy(lottoQuantity)) {
             throw new IllegalArgumentException(MANUAL_LOTTO_QUANTITY_ERROR);
         }
     }
 
-    private boolean isAffordable(int lottoQuantity) {
+    private boolean isAffordableToBuy(LottoQuantity lottoQuantity) {
         return 0 <= calculateChange(lottoQuantity);
     }
 
-    public Money getChange(int lottoQuantity) {
+    public Money getChangeAfterBuying(LottoQuantity lottoQuantity) {
         return new Money(calculateChange(lottoQuantity));
     }
 
-    private long calculateChange(int lottoQuantity) {
-        return money - ((long) lottoQuantity * LOTTO_PRICE);
+    private long calculateChange(LottoQuantity lottoQuantity) {
+        return money - lottoQuantity.getTotalPrice();
     }
 
     @Override

@@ -27,8 +27,9 @@ public class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
-    public int getAutoLottoQuantity(int manualLottoQuantity) {
-        return lottos.size() - manualLottoQuantity;
+    // TODO 메서드명 괜찮은가?
+    public int getLottoQuantityExcept(LottoQuantity manualLottoQuantity) {
+        return manualLottoQuantity.getLeftLottoQuantityOf(lottos.size());
     }
 
     public Lottos merge(Lottos that) {

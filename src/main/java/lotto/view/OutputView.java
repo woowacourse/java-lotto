@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoStatistics;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,8 +14,8 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void showLottos(Lottos lottos, int manualLottoQuantity) {
-        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualLottoQuantity, lottos.getAutoLottoQuantity(manualLottoQuantity));
+    public static void showLottos(Lottos lottos, LottoQuantity manualLottoQuantity) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualLottoQuantity.getLottoQuantity(), lottos.getLottoQuantityExcept(manualLottoQuantity));
         for (Lotto lotto : lottos.getLottos()) {
             System.out.println(printLottoSummary(lotto));
         }
