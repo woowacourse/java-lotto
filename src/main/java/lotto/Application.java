@@ -10,7 +10,7 @@ public class Application {
     public static void main(String[] args) {
         PurchasingPrice purchasingPrice = new PurchasingPrice(InputView.inputPurchasingPrice());
         int lottoTicketCounts = purchasingPrice.calculatePurchasableTicketCounts();
-        LottoTickets lottoTickets = LottoTickets.generateLottoTickets(lottoTicketCounts, new RandomLottoNumberGenerator());
+        LottoTickets lottoTickets = LottoTickets.generateAutomatically(lottoTicketCounts, new RandomLottoNumberGenerator());
         OutputView.printLottoCountMessage(lottoTicketCounts);
         OutputView.printLottoTicketNumbers(lottoTickets);
 

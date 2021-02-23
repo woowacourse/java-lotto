@@ -10,7 +10,7 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
-    public static LottoTickets generateLottoTickets(int lottoTicketCounts, LottoNumberGenerator lottoNumberGenerator) {
+    public static LottoTickets generateAutomatically(int lottoTicketCounts, LottoNumberGenerator lottoNumberGenerator) {
         List<LottoTicket> lottoTicketGroup = new ArrayList<>();
         for (int i = 0; i < lottoTicketCounts; i++) {
             LottoTicket lottoTicket = LottoTicket.generateTicket(lottoNumberGenerator.generate());
