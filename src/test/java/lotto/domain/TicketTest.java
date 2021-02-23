@@ -13,6 +13,8 @@ public class TicketTest {
     @DisplayName("티켓을 구매 못하는 경우 확인")
     void validateMinimumTicketPrice() {
         assertThatThrownBy(() -> new Ticket(new Money(900)))
-            .isInstanceOf(IllegalArgumentException.class).hasMessageContaining("원 이상");
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining(
+                String.format(Ticket.TICKET_MINIMUM_PRICE_ERROR_MESSAGE, Ticket.TICKET_PRICE));
     }
 }

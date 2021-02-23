@@ -9,8 +9,8 @@ import java.util.stream.Collectors;
 public class Lotto {
 
     private static final int LOTTO_NUMBER_COUNT = 6;
-    private static final String LOTTO_NUMBER_COUNT_ERROR_MESSAGE = "잘못된 개수의 입력입니다.";
-    private static final String DUPLICATE_NUMBER_ERROR_MESSAGE = "중복된 숫자 입력입니다.";
+    public static final String LOTTO_NUMBER_COUNT_ERROR_MESSAGE = "잘못된 개수의 입력입니다.";
+    public static final String DUPLICATE_NUMBER_ERROR_MESSAGE = "중복된 숫자 입력입니다.";
     private final List<LottoNumber> numbers;
 
     public static Lotto from(final List<Integer> numbers) {

@@ -2,8 +2,8 @@ package lotto.domain;
 
 public class Ticket {
 
-    private static final int TICKET_PRICE = 1000;
-    private static final String TICKET_MINIMUM_PRICE_ERROR_MESSAGE = "돈은 %d원 이상이어야 합니다.";
+    public static final int TICKET_PRICE = 1000;
+    public static final String TICKET_MINIMUM_PRICE_ERROR_MESSAGE = "돈은 %d원 이상이어야 합니다.";
     private final int count;
 
     public Ticket(Money money) {

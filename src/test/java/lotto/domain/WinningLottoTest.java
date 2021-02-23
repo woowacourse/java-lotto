@@ -16,6 +16,7 @@ public class WinningLottoTest {
         Lotto lotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumber bonusBall = new LottoNumber(6);
         assertThatThrownBy(() -> new WinningLotto(lotto, bonusBall))
-            .isInstanceOf(IllegalArgumentException.class).hasMessageContaining("중복된");
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining(WinningLotto.BONUS_BALL_IN_LOTTO_ERROR_MESSAGE);
     }
 }

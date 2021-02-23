@@ -14,16 +14,19 @@ public class LottoTest {
     @DisplayName("잘못된 개수의 로또 번호")
     void generateIllegalNumberCountLotto() {
         assertThatThrownBy(() -> Lotto.from(Arrays.asList(1, 2, 3, 4)))
-            .isInstanceOf(IllegalArgumentException.class).hasMessageContaining("잘못된 개수");
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining(Lotto.LOTTO_NUMBER_COUNT_ERROR_MESSAGE);
         assertThatThrownBy(() -> Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6, 7)))
-            .isInstanceOf(IllegalArgumentException.class).hasMessageContaining("잘못된 개수");
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining(Lotto.LOTTO_NUMBER_COUNT_ERROR_MESSAGE);
     }
 
     @Test
     @DisplayName("중복 로또 번호")
     void generateDuplicateLotto() {
         assertThatThrownBy(() -> Lotto.from(Arrays.asList(1, 1, 3, 4, 5, 45)))
-            .isInstanceOf(IllegalArgumentException.class).hasMessageContaining("중복");
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining(Lotto.DUPLICATE_NUMBER_ERROR_MESSAGE);
     }
 
     @ParameterizedTest

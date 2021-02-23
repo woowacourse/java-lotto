@@ -13,6 +13,7 @@ public class LottoNumberTest {
     @DisplayName("범위 초과 로또 번호")
     void generateOutRangeLottoNumber(int number) {
         assertThatThrownBy(() -> new LottoNumber(number))
-            .isInstanceOf(IllegalArgumentException.class).hasMessageContaining("범위가 초과");
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining(LottoNumber.OUT_RANGE_NUMBER_ERROR_MESSAGE);
     }
 }

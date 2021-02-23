@@ -12,7 +12,8 @@ public class MoneyTest {
     @DisplayName("양수인지 확인")
     void validatePositiveInt() {
         assertThatThrownBy(() -> new Money(0))
-            .isInstanceOf(IllegalArgumentException.class).hasMessageContaining("양의 정수");
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining(Money.NON_POSITIVE_ERROR_MESSAGE);
     }
 
 }
