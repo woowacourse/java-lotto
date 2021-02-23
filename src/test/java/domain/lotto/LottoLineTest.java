@@ -16,24 +16,55 @@ import org.junit.jupiter.api.Test;
 public class LottoLineTest {
 
     @Test
-    @DisplayName("중복된 로또 번호가 있을 경우 예외를 발생 시킨다.")
+    @DisplayName("로또 번호 6개로 로또 라인을 생성한다.")
+    void testCreateLottoLine() {
+        List<LottoNumber> lottoNumbers = Arrays.asList(
+            new LottoNumber(1), new LottoNumber(2),
+            new LottoNumber(3), new LottoNumber(4),
+            new LottoNumber(5), new LottoNumber(6)
+        );
+
+        LottoLine lottoLine = new LottoLine(lottoNumbers);
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            assertThat(lottoLine.hasLottoNumber(lottoNumber)).isEqualTo(true);
+        }
+    }
+
+    @Test
+    @DisplayName("중복된 로또 번호들로 로또 라인 생성시 예외가 발생한다.")
     void testExceptionThrownDuplicatedLottoNumber() {
-        List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(1),
-            new LottoNumber(2), new LottoNumber(2), new LottoNumber(5), new LottoNumber(6));
+        List<LottoNumber> lottoNumbers = Arrays.asList(
+            new LottoNumber(1), new LottoNumber(1),
+            new LottoNumber(2), new LottoNumber(3),
+            new LottoNumber(4), new LottoNumber(6)
+        );
 
         assertThatThrownBy(() -> new LottoLine(lottoNumbers))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining(LOTTO_LINE_NUMBER_COUNT_DUPLICATE_ERROR.getMessage());
     }
 
+    @Test
+    @DisplayName("로또 번호 개수가 6개 초과라면 로또 라인 생성시 예외가 발생한다.")
+    void testExceptionThrownLottoNumberCountExcess6() {
+        List<LottoNumber> lottoNumbers = Arrays.asList(
+            new LottoNumber(1), new LottoNumber(2),
+            new LottoNumber(3), new LottoNumber(4),
+            new LottoNumber(5), new LottoNumber(6),
+            new LottoNumber(7)
+        );
+        assertThatThrownBy(() -> new LottoLine(lottoNumbers))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining(LOTTO_LINE_NUMBER_COUNT_DUPLICATE_ERROR.getMessage());
+    }
 
     @Test
-    @DisplayName("로또 번호가 6개보다 많을때 예외를 발생 시킨다.")
-    void testExceptionThrownLottoNumberCountExcess6() {
-        List<LottoNumber> lottoNumbers = Arrays
-            .asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6), new LottoNumber(7));
-
+    @DisplayName("로또 번호 개수가 6개 미만라면 로또 라인 생성시 예외가 발생한다.")
+    void testExceptionThrownLottoNumberCountUnder6() {
+        List<LottoNumber> lottoNumbers = Arrays.asList(
+            new LottoNumber(1), new LottoNumber(2),
+            new LottoNumber(3)
+        );
         assertThatThrownBy(() -> new LottoLine(lottoNumbers))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining(LOTTO_LINE_NUMBER_COUNT_DUPLICATE_ERROR.getMessage());
@@ -42,16 +73,18 @@ public class LottoLineTest {
     @Test
     @DisplayName("로또 1등 당첨 결과가 제대로 나온다.")
     void testLottoNumberMatch() {
-        List<LottoNumber> lottoNumbers = Arrays
-            .asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+        List<LottoNumber> lottoNumbers = Arrays.asList(
+            new LottoNumber(1), new LottoNumber(2),
+            new LottoNumber(3), new LottoNumber(4),
+            new LottoNumber(5), new LottoNumber(6)
+        );
 
         LottoLine lottoLine = new LottoLine(lottoNumbers);
         LottoNumber bonusLottoNumber = new LottoNumber(7);
 
-        assertThat(lottoLine
-            .checkLottoLine(new WinningLottoLine(new LottoLine(lottoNumbers), bonusLottoNumber)))
-            .isEqualTo(Rank.FIRST);
+        assertThat(lottoLine.checkLottoLine(
+            new WinningLottoLine(lottoLine, bonusLottoNumber)
+        )).isEqualTo(Rank.FIRST);
     }
 
 }
