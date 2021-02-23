@@ -17,7 +17,7 @@ public class LottoTicketsTest {
         assertThat(lottoTickets.getLottoTickets().size()).isEqualTo(14);
     }
 
-    @DisplayName("같은 번호가 생성되었는지 테스트(정렬")
+    @DisplayName("같은 번호가 생성되었는지 테스트(정렬)")
     @Test
     void numberSort() {
         List<List<Integer>> numbers = new ArrayList<>();
