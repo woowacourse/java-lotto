@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.math.BigInteger;
 import java.util.*;
 
 import static lotto.domain.Rank.RANK_END_INDEX;
@@ -12,20 +11,19 @@ public class LottoStatistics {
     private final Map<Rank, Integer> statistics = new LinkedHashMap<>();
     private final Money moneyInvested;
 
-    //TODO
-    // 생성자로 이동
-    {
+    public LottoStatistics(List<Rank> ranks, Money money) {
+        initializeEmptyStatistics();
+        aggregateStatisticsAccordingTo(ranks);
+        this.moneyInvested = money.getMoneyActuallyInvested();
+    }
+
+    private void initializeEmptyStatistics() {
         for (Rank rank : Rank.values()) {
             statistics.put(rank, STATISTICS_INITIAL_VALUE);
         }
     }
 
-    public LottoStatistics(List<Rank> ranks, Money money) {
-        createStatistics(ranks);
-        this.moneyInvested = money.getMoneyActuallyInvested();
-    }
-
-    private void createStatistics(List<Rank> ranks) {
+    private void aggregateStatisticsAccordingTo(List<Rank> ranks) {
         for (Rank rank : ranks) {
             statistics.put(rank, statistics.get(rank) + 1);
         }
