@@ -1,27 +1,19 @@
 package lottogame.domain;
 
+import lottogame.domain.dto.LottoDto;
 import lottogame.domain.lotto.Lotto;
 import lottogame.domain.lotto.LottoNumber;
 import lottogame.domain.lotto.LottoNumberGenerator;
-import lottogame.utils.CannotBuyLottoException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoMachine {
-    private static final int LOTTO_PRICE = 1000;
     private final LottoNumberGenerator numberGenerator;
 
     public LottoMachine() {
         numberGenerator = new LottoNumberGenerator(LottoNumber.LOTTO_MIN, LottoNumber.LOTTO_MAX);
-    }
-
-    public int purchaseQuantity(Money money) {
-        int quantity = money.buyLotto(LOTTO_PRICE);
-        if (quantity == 0) {
-            throw new CannotBuyLottoException();
-        }
-        return quantity;
     }
 
     public List<Lotto> buyLotto(int quantity) {
@@ -52,5 +44,17 @@ public class LottoMachine {
                 .filter(lottoNumber -> lottoNumber.equals(random))
                 .findAny()
                 .isPresent();
+    }
+
+    public List<Lotto> makeManualLotto(List<LottoDto> manualLottos) {
+        return manualLottos.stream()
+                .map(lottoDto -> makeLotto(lottoDto.getNumbers()))
+                .collect(Collectors.toList());
+    }
+
+    private Lotto makeLotto(List<Integer> numbers) {
+        return new Lotto(numbers.stream()
+                .map(number -> new LottoNumber(number))
+                .collect(Collectors.toList()));
     }
 }
