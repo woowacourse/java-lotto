@@ -4,34 +4,40 @@ import lotto.domain.Money;
 import lotto.domain.lotto.*;
 import lotto.domain.result.LottoResult;
 import lotto.domain.result.WinningLotto;
+import lotto.utils.ParseUtil;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
 
 public class LottoController {
-    private final LottoTicketFactory lottoTicketFactory;
-
-    public LottoController() {
-        this.lottoTicketFactory = new LottoTicketFactory();
-    }
-
     public void run() {
         Money inputMoney = new Money(InputView.inputMoney());
         int totalLottoCount = inputMoney.getPurchaseCount();
         LottoCount lottoCount = getLottoCount(totalLottoCount);
-        List<LottoTicket> manualLottoTickets =
-                createAllManualLottoTicket(lottoCount.getManualLottoCount());
-        LottoTickets lottoTickets = lottoTicketFactory.generateLottoTickets(
-                lottoCount.getAutoLottoCount(), manualLottoTickets);
+        LottoTickets lottoTickets = buyLottoTickets(lottoCount);
         OutputView.printLottoTicketsCount(lottoCount);
         OutputView.printLottoTickets(lottoTickets);
-        WinningLotto winningLotto = getWinningLotto();
+        WinningLotto winningLotto = readWinningLotto();
         showResult(totalLottoCount, lottoTickets, winningLotto);
+    }
+
+    private LottoCount getLottoCount(int totalLottoCount) {
+        String inputManualLottoCount = InputView.inputManualLottoCount();
+        return new LottoCount(inputManualLottoCount, totalLottoCount);
+    }
+
+    private LottoTickets buyLottoTickets(LottoCount lottoCount) {
+        List<LottoTicket> lottoTicketGroup = new ArrayList<>();
+        lottoTicketGroup.addAll(createAllManualLottoTicket(lottoCount.getManualLottoCount()));
+        lottoTicketGroup.addAll(createAllAutoLottoTicket(lottoCount.getAutoLottoCount()));
+        return new LottoTickets(lottoTicketGroup);
     }
 
     private List<LottoTicket> createAllManualLottoTicket(int manualLottoCount) {
@@ -41,24 +47,25 @@ public class LottoController {
             manualLottoTickets.add(
                     InputView.inputNumbers()
                             .stream()
-                            .map(LottoNumber::new)
+                            .map(input -> LottoNumber.valueOf(ParseUtil.parseInt(input)))
                             .collect(collectingAndThen(toList(), LottoTicket::new)));
         }
         return manualLottoTickets;
     }
 
-    private LottoCount getLottoCount(int totalLottoCount) {
-        String inputManualLottoCount = InputView.inputManualLottoCount();
-        return new LottoCount(inputManualLottoCount, totalLottoCount);
+    private List<LottoTicket> createAllAutoLottoTicket(int autoLottoCount) {
+        return IntStream.range(0, autoLottoCount)
+                .mapToObj(i -> LottoTicketFactory.generateAutoLottoTicket())
+                .collect(Collectors.toList());
     }
 
-    private WinningLotto getWinningLotto() {
+    private WinningLotto readWinningLotto() {
         OutputView.printInputWinningNumbers();
         LottoTicket winningTicket = InputView.inputNumbers()
                 .stream()
-                .map(LottoNumber::new)
+                .map(input -> LottoNumber.valueOf(ParseUtil.parseInt(input)))
                 .collect(collectingAndThen(toList(), LottoTicket::new));
-        LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());
+        LottoNumber bonusNumber = LottoNumber.valueOf(ParseUtil.parseInt(InputView.inputBonusNumber()));
         return new WinningLotto(winningTicket, bonusNumber);
     }
 

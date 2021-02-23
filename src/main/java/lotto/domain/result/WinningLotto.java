@@ -12,8 +12,8 @@ public class WinningLotto {
     private final LottoNumber bonusNumber;
 
     public WinningLotto(LottoTicket winningTicket, LottoNumber bonusNumber) {
-        this.winningTicket = new LottoTicket(winningTicket.lottoTicket());
-        this.bonusNumber = new LottoNumber(bonusNumber.toString());
+        this.winningTicket = winningTicket;
+        this.bonusNumber = bonusNumber;
         validateWinningLotto();
     }
 

@@ -23,20 +23,20 @@ class WinningLottoTest {
     @BeforeEach
     void init() {
         firstPrizeTicket = new LottoTicket(Arrays.asList(
-                new LottoNumber("1"),
-                new LottoNumber("2"),
-                new LottoNumber("3"),
-                new LottoNumber("4"),
-                new LottoNumber("5"),
-                new LottoNumber("7")));
+                LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(7)));
 
         secondPrizeTicket = new LottoTicket(Arrays.asList(
-                new LottoNumber("1"),
-                new LottoNumber("2"),
-                new LottoNumber("3"),
-                new LottoNumber("4"),
-                new LottoNumber("5"),
-                new LottoNumber("8")));
+                LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(8)));
 
         lottoTickets = new LottoTickets(Arrays.asList(firstPrizeTicket, secondPrizeTicket));
     }
@@ -45,14 +45,14 @@ class WinningLottoTest {
     @DisplayName("당첨 티켓 분류")
     void checkWinningTicket() {
         LottoTicket winningTicket = new LottoTicket(Arrays.asList(
-                new LottoNumber("1"),
-                new LottoNumber("2"),
-                new LottoNumber("3"),
-                new LottoNumber("4"),
-                new LottoNumber("5"),
-                new LottoNumber("7")));
+                LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(7)));
 
-        LottoNumber bonusNumber = new LottoNumber("8");
+        LottoNumber bonusNumber = LottoNumber.valueOf(8);
         WinningLotto winningLotto = new WinningLotto(winningTicket, bonusNumber);
         LottoResult lottoResult = winningLotto.checkPrizes(lottoTickets);
         assertThat(lottoResult.lottoResult().get(0)).isEqualTo(Prize.FIRST_PRIZE);
@@ -63,13 +63,13 @@ class WinningLottoTest {
     @DisplayName("당첨번호와 보너스 번호가 중복되는 지 검증")
     void checkDuplicateBonusNumber() {
         LottoTicket winningTicket = new LottoTicket(Arrays.asList(
-                new LottoNumber("1"),
-                new LottoNumber("2"),
-                new LottoNumber("3"),
-                new LottoNumber("4"),
-                new LottoNumber("5"),
-                new LottoNumber("7")));
-        LottoNumber bonusNumber = new LottoNumber("3");
+                LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(7)));
+        LottoNumber bonusNumber = LottoNumber.valueOf(3);
         assertThatThrownBy(() -> {
             WinningLotto winningLotto = new WinningLotto(winningTicket, bonusNumber);
         }).isInstanceOf(IllegalArgumentException.class);

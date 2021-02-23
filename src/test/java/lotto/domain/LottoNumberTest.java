@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.lotto.LottoNumber;
+import lotto.utils.ParseUtil;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -11,28 +12,28 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoNumberTest {
     @ParameterizedTest
-    @ValueSource(strings = {"a", "-1", ""})
-    @DisplayName("로또 숫자 포맷 검증")
+    @ValueSource(strings = {"a", "", "+"})
+    @DisplayName("로또 숫자 입력시 포맷 검증")
     void validateNumbers(String input) {
         assertThatThrownBy(() -> {
-            LottoNumber lottoNumber = new LottoNumber(input);
+            LottoNumber lottoNumber = LottoNumber.valueOf(ParseUtil.parseInt(input));
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(ints = {55, -1, 0})
     @DisplayName("로또 범위 초과했을 경우")
-    void validateNumbersRange() {
-        String input = "55";
+    void validateNumbersRange(int input) {
         assertThatThrownBy(() -> {
-            LottoNumber lottoNumber = new LottoNumber(input);
+            LottoNumber lottoNumber = LottoNumber.valueOf(input);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     @DisplayName("동일성 검사")
     void checkEqual() {
-        LottoNumber lottoNumber1 = new LottoNumber("1");
-        LottoNumber lottoNumber2 = new LottoNumber("1");
+        LottoNumber lottoNumber1 = LottoNumber.valueOf(1);
+        LottoNumber lottoNumber2 = LottoNumber.valueOf(1);
         assertThat(lottoNumber1).isEqualTo(lottoNumber2);
     }
 }
