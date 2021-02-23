@@ -1,7 +1,7 @@
 package lotto.domain.ticketresult;
 
-import static lotto.type.LottoMatchType.FIVE_AND_BONUS_MATCH;
-import static lotto.type.LottoMatchType.FIVE_MATCH;
+import static lotto.domain.ticketresult.Rank.FIVE_AND_BONUS_MATCH;
+import static lotto.domain.ticketresult.Rank.FIVE_MATCH;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 import lotto.domain.LottoTicket;
 import lotto.domain.ticketpurchase.PurchasedLottoTickets;
-import lotto.type.LottoMatchType;
 
 public class LottoComparator {
     private static final int ZERO = 0;
@@ -17,7 +16,7 @@ public class LottoComparator {
     private static final int FIVE_MATCHED_SIZE = 2;
 
     private final WinningLottoNumbers winningLottoNumbers;
-    private final Map<LottoMatchType, Integer> lottoResult;
+    private final Map<Rank, Integer> lottoResult;
 
     public LottoComparator(WinningLottoNumbers winningLottoNumbers) {
         this.winningLottoNumbers = winningLottoNumbers;
@@ -26,12 +25,12 @@ public class LottoComparator {
     }
 
     private void initializeLottoResult() {
-        for (LottoMatchType lottoMatchType : LottoMatchType.values()) {
-            lottoResult.put(lottoMatchType, ZERO);
+        for (Rank rank : Rank.values()) {
+            lottoResult.put(rank, ZERO);
         }
     }
 
-    public Map<LottoMatchType, Integer> getLottoResult(PurchasedLottoTickets purchasedLottoTickets) {
+    public Map<Rank, Integer> getLottoResult(PurchasedLottoTickets purchasedLottoTickets) {
         for (LottoTicket purchasedOneLottoTicket : purchasedLottoTickets.getTickets()) {
             int countMatchedNumbers = getEachLottoResult(purchasedOneLottoTicket);
             addResult(countMatchedNumbers, purchasedOneLottoTicket);
@@ -50,16 +49,16 @@ public class LottoComparator {
     }
 
     private void addResult(int countMatchedNumbers, LottoTicket purchasedOneLottoTicket) {
-        List<LottoMatchType> lottoMatchTypes = LottoMatchType
+        List<Rank> ranks = Rank
             .getLottoMatchType(countMatchedNumbers);
-        if (lottoMatchTypes.size() == ZERO) {
+        if (ranks.size() == ZERO) {
             return;
         }
-        if (lottoMatchTypes.size() == FIVE_MATCHED_SIZE) {
+        if (ranks.size() == FIVE_MATCHED_SIZE) {
             handleFiveMatchType(purchasedOneLottoTicket);
             return;
         }
-        handleOtherMatchTypes(lottoMatchTypes);
+        handleOtherMatchTypes(ranks);
     }
 
     private void handleFiveMatchType(LottoTicket purchasedOneLottoTicket) {
@@ -72,9 +71,9 @@ public class LottoComparator {
         lottoResult.put(FIVE_MATCH, currentMatchedNumbersCount + ONE_COUNT);
     }
 
-    private void handleOtherMatchTypes(List<LottoMatchType> lottoMatchTypes) {
-        LottoMatchType lottoMatchType = lottoMatchTypes.get(ZERO);
-        Integer currentMatchedNumbersCount = lottoResult.get(lottoMatchType);
-        lottoResult.put(lottoMatchType, currentMatchedNumbersCount + ONE_COUNT);
+    private void handleOtherMatchTypes(List<Rank> ranks) {
+        Rank rank = ranks.get(ZERO);
+        Integer currentMatchedNumbersCount = lottoResult.get(rank);
+        lottoResult.put(rank, currentMatchedNumbersCount + ONE_COUNT);
     }
 }

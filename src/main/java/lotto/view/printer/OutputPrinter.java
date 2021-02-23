@@ -5,7 +5,7 @@ import static lotto.view.InputView.LOTTO_NUMBER_DELIMITER;
 import java.util.Map;
 import java.util.stream.Collectors;
 import lotto.domain.LottoTicket;
-import lotto.type.LottoMatchType;
+import lotto.domain.ticketresult.Rank;
 
 public class OutputPrinter {
     private static final String START_BRACKET = "[";
@@ -34,9 +34,9 @@ public class OutputPrinter {
         System.out.println("---------");
     }
 
-    public static void printEachNumberMatchedCountMessage(LottoMatchType lottoMatchType, Map<LottoMatchType, Integer> result) {
+    public static void printEachNumberMatchedCountMessage(Rank rank, Map<Rank, Integer> result) {
         System.out.printf(MATCH_MESSAGE + NEW_LINE,
-            lottoMatchType.getCountMatchedNumbers(), lottoMatchType.getPrizeMoney(), result.get(lottoMatchType));
+            rank.getCountMatchedNumbers(), rank.getPrizeMoney(), result.get(rank));
     }
 
     public static void printProfitMessage(double profit) {

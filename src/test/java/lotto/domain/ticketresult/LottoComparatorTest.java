@@ -1,11 +1,11 @@
 package lotto.domain.ticketresult;
 
 
-import static lotto.type.LottoMatchType.FIVE_AND_BONUS_MATCH;
-import static lotto.type.LottoMatchType.FIVE_MATCH;
-import static lotto.type.LottoMatchType.FOUR_MATCH;
-import static lotto.type.LottoMatchType.SIX_MATCH;
-import static lotto.type.LottoMatchType.THREE_MATCH;
+import static lotto.domain.ticketresult.Rank.FIVE_AND_BONUS_MATCH;
+import static lotto.domain.ticketresult.Rank.FIVE_MATCH;
+import static lotto.domain.ticketresult.Rank.FOUR_MATCH;
+import static lotto.domain.ticketresult.Rank.SIX_MATCH;
+import static lotto.domain.ticketresult.Rank.THREE_MATCH;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,7 +14,6 @@ import java.util.Map;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.ticketpurchase.PurchasedLottoTickets;
-import lotto.type.LottoMatchType;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -55,7 +54,7 @@ public class LottoComparatorTest {
         PurchasedLottoTickets purchasedLottoTickets = new PurchasedLottoTickets(lottoTickets);
 
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
-        Map<LottoMatchType, Integer> lottoResult
+        Map<Rank, Integer> lottoResult
             = lottoComparator.getLottoResult(purchasedLottoTickets);
 
         Assertions.assertThat(lottoResult.get(THREE_MATCH)).isEqualTo(0);
@@ -82,7 +81,7 @@ public class LottoComparatorTest {
         PurchasedLottoTickets purchasedLottoTickets = new PurchasedLottoTickets(lottoTickets);
 
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
-        Map<LottoMatchType, Integer> lottoResult
+        Map<Rank, Integer> lottoResult
             = lottoComparator.getLottoResult(purchasedLottoTickets);
 
         Assertions.assertThat(lottoResult.get(THREE_MATCH)).isEqualTo(0);
@@ -109,7 +108,7 @@ public class LottoComparatorTest {
         PurchasedLottoTickets purchasedLottoTickets = new PurchasedLottoTickets(lottoTickets);
 
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
-        Map<LottoMatchType, Integer> lottoResult
+        Map<Rank, Integer> lottoResult
             = lottoComparator.getLottoResult(purchasedLottoTickets);
 
         Assertions.assertThat(lottoResult.get(THREE_MATCH)).isEqualTo(0);
@@ -136,7 +135,7 @@ public class LottoComparatorTest {
         PurchasedLottoTickets purchasedLottoTickets = new PurchasedLottoTickets(lottoTickets);
 
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
-        Map<LottoMatchType, Integer> lottoResult
+        Map<Rank, Integer> lottoResult
             = lottoComparator.getLottoResult(purchasedLottoTickets);
 
         Assertions.assertThat(lottoResult.get(THREE_MATCH)).isEqualTo(0);
@@ -163,7 +162,7 @@ public class LottoComparatorTest {
         PurchasedLottoTickets purchasedLottoTickets = new PurchasedLottoTickets(lottoTickets);
 
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
-        Map<LottoMatchType, Integer> lottoResult
+        Map<Rank, Integer> lottoResult
             = lottoComparator.getLottoResult(purchasedLottoTickets);
 
         Assertions.assertThat(lottoResult.get(THREE_MATCH)).isEqualTo(1);

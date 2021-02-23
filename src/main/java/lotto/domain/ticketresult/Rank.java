@@ -1,10 +1,10 @@
-package lotto.type;
+package lotto.domain.ticketresult;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public enum LottoMatchType {
+public enum Rank {
     THREE_MATCH(3, 5_000),
     FOUR_MATCH(4, 50_000),
     FIVE_MATCH(5, 1_500_000),
@@ -14,7 +14,7 @@ public enum LottoMatchType {
     private final int countMatchedNumbers;
     private final int prizeMoney;
 
-    LottoMatchType(int countMatchedNumbers, int prizeMoney) {
+    Rank(int countMatchedNumbers, int prizeMoney) {
         this.countMatchedNumbers = countMatchedNumbers;
         this.prizeMoney = prizeMoney;
     }
@@ -27,8 +27,8 @@ public enum LottoMatchType {
         return prizeMoney;
     }
 
-    public static List<LottoMatchType> getLottoMatchType(int countMatchedNumbers) {
-        return Arrays.stream(LottoMatchType.values())
+    public static List<Rank> getLottoMatchType(int countMatchedNumbers) {
+        return Arrays.stream(Rank.values())
                 .filter(lottoMatchType -> lottoMatchType.countMatchedNumbers == countMatchedNumbers)
                 .collect(Collectors.toList());
     }
