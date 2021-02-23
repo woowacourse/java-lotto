@@ -37,6 +37,12 @@ public class LottoTicket {
         return new ArrayList<>(lottoTicket);
     }
 
+    public int getCountByType(LottoNumbersType type) {
+        return (int) lottoTicket.stream()
+            .filter(lottoNumbers -> lottoNumbers.getType() == type)
+            .count();
+    }
+
     public int count() {
         return lottoTicket.size();
     }

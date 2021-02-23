@@ -2,11 +2,11 @@ package lotto.domain.lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import lotto.domain.number.LottoNumber;
-import lotto.domain.number.ManualCount;
 import lotto.domain.number.Payout;
 import lotto.domain.rank.Rank;
 import org.junit.jupiter.api.DisplayName;
@@ -21,7 +21,7 @@ class LottoTicketTest {
     @CsvSource({"1,0", "999,0", "1000,1", "1001,1", "1999,1"})
     void valueOf(String amount, int expected) {
         LottoTicket lottoTicket = LottoExchange.getInstance()
-            .buyLottoTicket(Payout.valueOf(amount), ManualCount.valueOf("0"));
+            .buyLottoTicket(Payout.valueOf(amount), new ArrayList<>());
 
         assertThat(lottoTicket.count()).isEqualTo(expected);
     }

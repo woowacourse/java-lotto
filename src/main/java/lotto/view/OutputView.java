@@ -14,7 +14,7 @@ import lotto.domain.rank.Ranks;
 public class OutputView {
 
     private static final String PAYOUT = "구입금액을 입력해 주세요";
-    private static final String LOTTO_COUNT_FORMAT = "\n%d개를 구매했습니다.\n";
+    private static final String LOTTO_COUNT_FORMAT = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     private static final String LAST_WEEK_LOTTO_NUMBER = "\n지난 주 당첨 번호를 입력해 주세요";
     private static final String BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
     private static final String WINNING_STATISTICS = "\n당첨 통계";
@@ -24,13 +24,14 @@ public class OutputView {
     private static final String STATISTICS_YIELD_FORMAT = "총 수익률은 %.2f입니다.\n";
     private static final String LOTTO_NUMBERS_FORMAT = "[%s]\n";
     private static final String MANUAL_COUNT = "\n수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String MANUAL = "\n수동으로 구매할 번호를 입력해 주세요.";
 
     public static void payout() {
         System.out.println(PAYOUT);
     }
 
-    public static void payOuted(int lottoCount) {
-        System.out.printf(LOTTO_COUNT_FORMAT, lottoCount);
+    public static void payOuted(int manualCount, int autoCount) {
+        System.out.printf(LOTTO_COUNT_FORMAT, manualCount, autoCount);
     }
 
     public static void boughtLotties(LottoTicket lottoTicket) {
@@ -85,5 +86,9 @@ public class OutputView {
 
     public static void manualCount() {
         System.out.println(MANUAL_COUNT);
+    }
+
+    public static void manual() {
+        System.out.println(MANUAL);
     }
 }

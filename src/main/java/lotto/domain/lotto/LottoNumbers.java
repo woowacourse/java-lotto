@@ -16,12 +16,21 @@ public class LottoNumbers {
 
     private static final int LOTTO_NUMBER_COUNT = 6;
     private static final String LOTTO_NUMBER_SEPARATOR = ",";
+    private static final RandomLottoGenerator RANDOM_LOTTO_GENERATOR
+        = RandomLottoGenerator.getInstance();
 
     private final Set<LottoNumber> lottoNumbers;
+    private final LottoNumbersType type;
 
-    public LottoNumbers(Set<LottoNumber> lottoNumbers) {
+    private LottoNumbers(Set<LottoNumber> lottoNumbers, LottoNumbersType type) {
         validateLottoNumberCount(lottoNumbers);
         this.lottoNumbers = new HashSet<>(lottoNumbers);
+        this.type = type;
+    }
+
+    public static LottoNumbers valueOf() {
+        return new LottoNumbers(RANDOM_LOTTO_GENERATOR.nextLottoNumbers(LOTTO_NUMBER_COUNT),
+            LottoNumbersType.AUTO);
     }
 
     public static LottoNumbers valueOf(String unparsedLottoNumbers) {
@@ -32,13 +41,14 @@ public class LottoNumbers {
 
     private static LottoNumbers valueOf(List<String> parsedNumbers) {
         return parsedNumbers.stream()
+            .map(String::trim)
             .map(LottoNumber::valueOf)
-            .collect(collectingAndThen(toSet(), LottoNumbers::new));
+            .collect(collectingAndThen(toSet(),
+                lottoNumbers1 -> new LottoNumbers(lottoNumbers1, LottoNumbersType.MANUAL)));
     }
 
     private static List<String> splitLottoNumber(String lottoNumber) {
         return Arrays.stream(lottoNumber.split(LOTTO_NUMBER_SEPARATOR, -1))
-            .map(String::trim)
             .collect(Collectors.toList());
     }
 
@@ -71,8 +81,8 @@ public class LottoNumbers {
             .collect(toList());
     }
 
-    public static int getLottoNumberCount() {
-        return LOTTO_NUMBER_COUNT;
+    public LottoNumbersType getType() {
+        return type;
     }
 
     @Override
