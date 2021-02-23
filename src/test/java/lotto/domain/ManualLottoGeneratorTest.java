@@ -15,12 +15,10 @@ class ManualLottoGeneratorTest {
 
 	@BeforeEach
 	void setUp() {
-		manualLottoGenerator = new ManualLottoGenerator(convertToNumbersSequence(new int[]{1, 2, 3, 4, 5, 6}));
+		manualLottoGenerator = new ManualLottoGenerator(convertToNumbersSequence(1, 2, 3, 4, 5, 6));
 	}
 
-	//TODO
-	// static 지우기
-	private List<int[]> convertToNumbersSequence(int[] winningNumbersInput) {
+	private List<int[]> convertToNumbersSequence(final int... winningNumbersInput) {
 		List<int[]> numberSequence = new ArrayList<>();
 		numberSequence.add(winningNumbersInput);
 		return numberSequence;

@@ -29,8 +29,8 @@ class LottoControllerTest {
 	@DisplayName("관련 인풋들이 주어질 때 제대로 동작하는지")
 	@ParameterizedTest
 	@MethodSource("provideInputsForLottoTrial")
-	void tryLotto(String inputGroup, boolean result) {
-		InputStream inputStream = generateUserInput(inputGroup);
+	void tryLotto(String inputSequence, boolean result) {
+		InputStream inputStream = generateUserInput(inputSequence);
 		System.setIn(inputStream);
 		scanner = new Scanner(System.in);
 
