@@ -49,7 +49,8 @@ public class LottoLineTest {
         LottoLine lottoLine = new LottoLine(lottoNumbers);
         LottoNumber bonusLottoNumber = new LottoNumber(7);
 
-        assertThat(lottoLine.checkLottoLine(new WinningLottoLine(new LottoLine(lottoNumbers), bonusLottoNumber)))
+        assertThat(lottoLine
+            .checkLottoLine(new WinningLottoLine(new LottoLine(lottoNumbers), bonusLottoNumber)))
             .isEqualTo(Rank.FIRST);
     }
 

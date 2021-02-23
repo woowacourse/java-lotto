@@ -11,7 +11,8 @@ public class WinningLottoLine {
 
     public WinningLottoLine(LottoLine winningLottoLine, LottoNumber bonusLottoNumber) {
         if (winningLottoLine.isContainLottoNumber(bonusLottoNumber)) {
-            throw new IllegalArgumentException(LOTTO_LINE_NUMBER_BONUS_LOTTO_NUMBER_DUPLICATE_ERROR.getMessage());
+            throw new IllegalArgumentException(
+                LOTTO_LINE_NUMBER_BONUS_LOTTO_NUMBER_DUPLICATE_ERROR.getMessage());
         }
         this.winningLottoLine = winningLottoLine;
         this.bonusLottoNumber = bonusLottoNumber;
