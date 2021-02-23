@@ -3,6 +3,9 @@ package lotto.domain;
 import lotto.exception.LottoPriceException;
 import lotto.util.LottoGenerator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LottoSeller {
 
     private static final int LOTTO_PRICE = 1000;
@@ -14,10 +17,11 @@ public class LottoSeller {
             throw new LottoPriceException("가격이 부족합니다.");
         }
 
-        LottoGroup lottoGroup = new LottoGroup();
+        List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            lottoGroup.addLotto(LottoGenerator.generate());
+            lottos.add(LottoGenerator.generate());
         }
+        LottoGroup lottoGroup = new LottoGroup(lottos);
         return lottoGroup;
     }
 

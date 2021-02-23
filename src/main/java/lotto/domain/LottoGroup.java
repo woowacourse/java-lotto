@@ -8,12 +8,8 @@ public class LottoGroup {
 
     private final List<Lotto> lottos;
 
-    public LottoGroup() {
-        this.lottos = new ArrayList<>();
-    }
-
-    public void addLotto(Lotto lotto) {
-        lottos.add(lotto);
+    public LottoGroup(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
     public int size() {
