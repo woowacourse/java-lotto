@@ -18,6 +18,10 @@ public class ManualTickets {
         return new ManualTickets(manualTickets);
     }
 
+    public int size() {
+        return manualTickets.size();
+    }
+
     public List<ManualTicket> getManualTickets() {
         return manualTickets;
     }

@@ -17,7 +17,7 @@ class ManualTicketsTest {
         List<String[]> inputNumbers = Arrays.asList(split, split);
 
         ManualTickets manualTickets = ManualTickets.from(inputNumbers);
-        int manualTicketCounts = manualTickets.getManualTickets().size();
+        int manualTicketCounts = manualTickets.size();
 
         assertThat(manualTicketCounts).isEqualTo(2);
     }

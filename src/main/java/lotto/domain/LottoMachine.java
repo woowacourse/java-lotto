@@ -13,7 +13,7 @@ public class LottoMachine {
 
     public LottoTickets issueLottoTickets(PurchasingPrice purchasingPrice, ManualTickets manualTickets) {
         int purchasableTicketCounts = purchasingPrice.calculatePurchasableTicketCounts(LOTTO_TICKET_COST);
-        int manualTicketCounts = manualTickets.getManualTickets().size();
+        int manualTicketCounts = manualTickets.size();
         validatePurchasingPrice(purchasableTicketCounts, manualTicketCounts);
         int automaticTicketCounts = purchasableTicketCounts - manualTicketCounts;
         return LottoTickets.generate(manualTickets, automaticTicketCounts, lottoNumberGenerator);
