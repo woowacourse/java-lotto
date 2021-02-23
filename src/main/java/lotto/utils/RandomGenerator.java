@@ -24,7 +24,7 @@ public class RandomGenerator implements LottoGenerator {
     @Override
     public Lotto generate() {
         Collections.shuffle(numbers);
-        List<LottoNumber> lottoNumbers = numbers.subList(FROM_INDEX, Lotto.LOTTO_NUMBER_SIZE);
+        List<LottoNumber> lottoNumbers = new ArrayList<>(numbers.subList(FROM_INDEX, Lotto.LOTTO_NUMBER_SIZE));
         Collections.sort(lottoNumbers);
 
         return new Lotto(lottoNumbers);

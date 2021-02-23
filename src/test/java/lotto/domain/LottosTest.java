@@ -1,7 +1,10 @@
 package lotto.domain;
 
+import lotto.utils.LottoGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -11,10 +14,10 @@ public class LottosTest {
     @DisplayName("LottoGenerator를 이용한 Lottos 생성 테스트")
     @Test
     void testCreateLottos() {
-        Money purchaseMoney = new Money("1000");
+        LottoGenerator fixedGenerator = new FixedGenerator();
 
-        Lottos lottos = new Lottos(1);
+        Lottos fixedLottos = new Lottos(Arrays.asList(fixedGenerator.generate()));
 
-        assertThat(lottos.toList().size()).isEqualTo(purchaseMoney.toNumberOfPurchaseLotto());
+        assertThat(fixedLottos).isEqualTo(new Lottos(Arrays.asList(fixedGenerator.generate())));
     }
 }

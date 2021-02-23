@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.utils.LottoGenerator;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -33,7 +34,8 @@ public class LottoGameResultTest {
     @DisplayName("수익률 계산 테스트")
     @Test
     void testCalculateProfit() {
-        Lottos autolottos = new Lottos(1);
+        LottoGenerator fixedGenerator = new FixedGenerator();
+        Lottos fixedLottos = new Lottos(Arrays.asList(fixedGenerator.generate()));
 
         Lotto manualLotto = new Lotto(Arrays.asList(
                 new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
@@ -41,11 +43,11 @@ public class LottoGameResultTest {
 
         Lottos manualLottos = new Lottos(Arrays.asList(manualLotto));
 
-        WinningLotto winningLotto = new WinningLotto(manualLottos.toList().get(0), 8);
+        WinningLotto winningLotto = new WinningLotto(fixedLottos.toList().get(0), 8);
 
         LottoGame lottoGame = new LottoGame();
-        double profit = lottoGame.compareWithWinningLotto(manualLottos, autolottos, winningLotto).calculateProfit();
+        double profit = lottoGame.compareWithWinningLotto(manualLottos, fixedLottos, winningLotto).calculateProfit();
 
-        assertThat(profit).isEqualTo(1_000_000);
+        assertThat(profit).isEqualTo(2_000_000);
     }
 }
