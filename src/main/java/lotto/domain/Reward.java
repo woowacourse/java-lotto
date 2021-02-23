@@ -32,13 +32,13 @@ public enum Reward {
         validateHitCount(hitCount);
 
         return Arrays.stream(values())
-            .filter(reward -> reward.matchHitCount(hitCount))
-            .filter(reward -> reward.rewardClassification(isHitBonus))
+            .filter(reword -> reword.matchHitCount(hitCount))
+            .filter(reword -> reword.rewordClassification(isHitBonus))
             .findFirst()
             .orElse(Reward.NONE);
     }
 
-    private boolean rewardClassification(final boolean isHitBonus) {
+    private boolean rewordClassification(final boolean isHitBonus) {
         return !this.equals(SECOND) || isHitBonus;
     }
 
