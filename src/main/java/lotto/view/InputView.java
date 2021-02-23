@@ -57,12 +57,6 @@ public class InputView {
 		return convertToInts(winningNumberInput);
 	}
 
-	private static List<int[]> convertToNumbersSequence(String[] winningNumbersInput) {
-		List<int[]> numbersSequence = new ArrayList<>();
-		numbersSequence.add(convertToInts(winningNumbersInput));
-		return numbersSequence;
-	}
-
 	private static int[] convertToInts(String[] winningNumbersInput) {
 		return Arrays.stream(winningNumbersInput)
 				.mapToInt(Integer::parseInt)

@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.Objects;
 
 public class LottoMachine {
 	private final Money money;
@@ -33,5 +34,18 @@ public class LottoMachine {
 
 	public int getAutoLottoQuantityAsInt() {
 		return autoLottoQuantity.getLottoQuantity();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		LottoMachine that = (LottoMachine) o;
+		return money.equals(that.money) && manualLottoQuantity.equals(that.manualLottoQuantity) && autoLottoQuantity.equals(that.autoLottoQuantity);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(money, manualLottoQuantity, autoLottoQuantity);
 	}
 }
