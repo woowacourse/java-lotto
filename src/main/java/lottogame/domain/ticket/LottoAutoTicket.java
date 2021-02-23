@@ -23,7 +23,6 @@ public class LottoAutoTicket implements LottoTicket {
         Collections.shuffle(initNumbers(numbers));
 
         List<Integer> shuffledNumbers = numbers.subList(0, COUNT_LOTTO_NUMBER);
-        Collections.sort(shuffledNumbers);
         return shuffledNumbers;
     }
 

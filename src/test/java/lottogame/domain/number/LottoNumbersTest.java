@@ -55,4 +55,16 @@ public class LottoNumbersTest {
         assertThatThrownBy(() -> new LottoNumbers(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("로또번호가 들어오면 정렬시킨다")
+    void sortLottoNumbers() {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+
+        for (int i = 6; i >= 1; --i) {
+            lottoNumbers.add(new LottoNumber(i));
+        }
+        LottoNumbers sortedNumbers = new LottoNumbers(lottoNumbers);
+        assertThat(sortedNumbers.toList()).isEqualTo(lottoNumberGroup);
+    }
 }

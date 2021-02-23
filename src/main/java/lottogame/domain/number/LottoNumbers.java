@@ -1,6 +1,7 @@
 package lottogame.domain.number;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 
@@ -9,8 +10,9 @@ public class LottoNumbers {
     public static final int DRAWING_COUNT_LIMIT = 6;
     private final List<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(final List<LottoNumber> lottoNumbers) {
+    public LottoNumbers(List<LottoNumber> lottoNumbers) {
         validDrawingNumbers(lottoNumbers);
+        lottoNumbers.sort((Comparator.comparingInt(LottoNumber::getValue)));
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
