@@ -12,10 +12,14 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public Set<Integer> getLottoNumbers() {
+    public Set<Integer> toSet() {
         Set<Integer> numbers = new HashSet<>();
         lottoNumbers.forEach(lottoNumber -> numbers.add(lottoNumber.getNumber()));
         return numbers;
+    }
+
+    public Set<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 
     public boolean contains(LottoNumber lottoNumber) {

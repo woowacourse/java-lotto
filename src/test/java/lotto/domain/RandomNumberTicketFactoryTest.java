@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.LottoTicket;
-import lotto.domain.RandomNumberTicketFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,6 +11,6 @@ public class RandomNumberTicketFactoryTest {
     @Test
     void checkSizeOfTicketNumbers() {
         LottoTicket lottoTicket = RandomNumberTicketFactory.makeTicket();
-        assertThat(lottoTicket.getLottoNumbers().size()).isEqualTo(6);
+        assertThat(lottoTicket.toSet().size()).isEqualTo(6);
     }
 }

@@ -67,7 +67,7 @@ public class OutputView {
     }
 
     private static void printTicket(LottoTicket lottoTicket) {
-        System.out.println(lottoTicket.getLottoNumbers());
+        System.out.println(lottoTicket.toSet());
     }
 
     private static void printWinningResult(Rank result, Map<Rank, Integer> winningResult) {

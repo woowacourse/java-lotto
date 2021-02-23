@@ -50,10 +50,10 @@ public class LottoController {
     private WinningTicket makeWinningTicket() {
         try {
             OutputView.printWinningNumbersTitle();
-            Set<LottoNumber> winningNumbers = inputView.inputWinningNumbers();
+            LottoTicket lottoTicket = new LottoTicket(inputView.inputWinningNumbers());
             OutputView.printBonusNumberTitle();
             LottoNumber bonusNumber = new LottoNumber(inputView.inputBonusNumber());
-            return new WinningTicket(winningNumbers, bonusNumber);
+            return new WinningTicket(lottoTicket, bonusNumber);
         } catch (LottoCustomException e) {
             OutputView.printErrorMessage(e.getMessage());
             return makeWinningTicket();
