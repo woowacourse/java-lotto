@@ -10,12 +10,12 @@ public class LottoAmount {
 
     public LottoAmount(String lottoAmountInput) {
         if (!isNumeric(lottoAmountInput)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ERROR_LOTTO_AMOUNT_NOT_NUMERIC);
         }
 
         int lottoAmount = Integer.parseInt(lottoAmountInput);
         if (lottoAmount < 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ERROR_LOTTO_AMOUNT_NEGATIVE);
         }
 
         value = lottoAmount;
@@ -24,7 +24,7 @@ public class LottoAmount {
 
     public LottoAmount(int lottoAmount) {
         if (lottoAmount < 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ERROR_LOTTO_AMOUNT_NEGATIVE);
         }
 
         value = lottoAmount;
