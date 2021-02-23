@@ -19,6 +19,15 @@ public class LottoTickets {
         return new LottoTickets(lottoTicketGroup);
     }
 
+    public static LottoTickets generateManually(int manualTicketCounts, List<List<Integer>> numberGroup) {
+        List<LottoTicket> lottoTicketGroup = new ArrayList<>();
+        for (int i = 0; i < manualTicketCounts; i++) {
+            LottoTicket lottoTicket = LottoTicket.generateTicket(numberGroup.get(i));
+            lottoTicketGroup.add(lottoTicket);
+        }
+        return new LottoTickets(lottoTicketGroup);
+    }
+
     public int size() {
         return lottoTickets.size();
     }
