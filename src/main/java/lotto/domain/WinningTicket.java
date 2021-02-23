@@ -21,12 +21,12 @@ public class WinningTicket extends LottoTicket {
     }
 
     public WinningResult getLottoResult(LottoTicket lottoTicket) {
-        int matchCount = findDuplicatedNumbers(lottoTicket);
+        int matchCount = matchNumbers(lottoTicket);
         boolean isBonus = lottoTicket.contains(bonusNumber);
         return WinningResult.findWinningResult(matchCount, isBonus);
     }
 
-    private int findDuplicatedNumbers(LottoTicket ticket) {
+    private int matchNumbers(LottoTicket ticket) {
         int count = (int) this.lottoNumbers.stream()
                 .filter(ticket::contains)
                 .count();
