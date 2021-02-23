@@ -15,6 +15,6 @@ public class LottoTicketsTest {
         LottoTicketIssueMachine lottoTicketIssueMachine =
             new LottoTicketIssueMachine(new Money(3000));
         LottoTickets lottoTickets = lottoTicketIssueMachine.issueTickets();
-        assertThat(lottoTickets.getLottoTickets().size()).isEqualTo(3);
+        assertThat(lottoTickets.getLottoTickets()).hasSize(3);
     }
 }
