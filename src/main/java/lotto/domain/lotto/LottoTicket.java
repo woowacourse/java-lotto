@@ -1,7 +1,5 @@
 package lotto.domain.lotto;
 
-import static lotto.view.messages.ErrorMessages.LOTTO_PURCHASE_PRICE_ERROR;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -14,12 +12,14 @@ public class LottoTicket {
     private static final LottoLineGenerator RANDOM_LOTTO_GENERATOR = new LottoLineGenerator();
     private final List<LottoLine> lottoLines;
 
-    public LottoTicket(int money) {
-        int lottoLineCount = money / LOTTO_LINE_PRICE;
-        if (money < 0 || lottoLineCount <= 0) {
-            throw new IllegalArgumentException(LOTTO_PURCHASE_PRICE_ERROR.getMessage());
-        }
+    public LottoTicket(LottoMoney money) {
+        int lottoLineCount = money.getValue()  / LOTTO_LINE_PRICE;
         this.lottoLines = makeLottoLines(lottoLineCount);
+    }
+
+    public LottoTicket(LottoMoney money, List<LottoLine> lottoLines) {
+        this(money);
+        this.lottoLines.addAll(lottoLines);
     }
 
     private List<LottoLine> makeLottoLines(int count) {
@@ -30,9 +30,9 @@ public class LottoTicket {
         return lottoLines;
     }
 
-    public List<Rank> checkLottoLines(WinningLottoLine winningLottoLine) {
+    public List<Rank> checkLottoLines(WinningLotto winningLotto) {
         return lottoLines.stream()
-            .map(it -> it.checkLottoLine(winningLottoLine))
+            .map(it -> it.checkLottoLine(winningLotto))
             .collect(Collectors.toList());
     }
 
@@ -44,4 +44,13 @@ public class LottoTicket {
         return lottoLines.size();
     }
 
+    public int getManualLottoLineCount(){
+        Long count = lottoLines.stream().filter(LottoLine::isManualLotto).count();
+        return count.intValue();
+    }
+
+    public int getAutoLottoLineCount(){
+        Long count = lottoLines.stream().filter(it -> !it.isManualLotto()).count();
+        return count.intValue();
+    }
 }

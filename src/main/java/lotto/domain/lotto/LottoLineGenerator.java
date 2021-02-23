@@ -23,7 +23,7 @@ public class LottoLineGenerator {
         Collections.shuffle(LOTTO_NUMBERS);
         List<LottoNumber> picked = LOTTO_NUMBERS
             .subList(PICKED_LOTTO_NUMBERS_FROM, PICKED_LOTTO_NUMBERS_TO);
-        return new LottoLine(picked);
+        return new LottoLine(picked, false);
     }
 
 }

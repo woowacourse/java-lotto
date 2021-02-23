@@ -14,16 +14,18 @@ public class LottoLine {
 
     public static final int LOTTO_NUMBER_COUNT = 6;
     private final List<LottoNumber> lottoNumbers;
+    private final boolean isManualLotto;
 
-    public LottoLine(List<LottoNumber> lottoNumbers) {
+    public LottoLine(List<LottoNumber> lottoNumbers, boolean isManualLotto) {
         validateSize(lottoNumbers);
         validateDuplicate(lottoNumbers);
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
+        this.isManualLotto = isManualLotto;
     }
 
-    public Rank checkLottoLine(WinningLottoLine winningLottoLine) {
-        int LottoNumberMatchCount = winningLottoLine.getLottoNumberMatchCount(lottoNumbers);
-        boolean hasBonusNumber = winningLottoLine.isContainBonusLottoNumber(lottoNumbers);
+    public Rank checkLottoLine(WinningLotto winningLotto) {
+        int LottoNumberMatchCount = winningLotto.getLottoNumberMatchCount(lottoNumbers);
+        boolean hasBonusNumber = winningLotto.isContainBonusLottoNumber(lottoNumbers);
         return Rank.getMatchedRank(LottoNumberMatchCount, hasBonusNumber);
     }
 
@@ -46,6 +48,10 @@ public class LottoLine {
         if (set.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(LOTTO_LINE_NUMBER_DUPLICATE_ERROR.getMessage());
         }
+    }
+
+    public boolean isManualLotto(){
+        return isManualLotto;
     }
 
 }

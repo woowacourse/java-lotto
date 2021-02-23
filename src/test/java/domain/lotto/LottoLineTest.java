@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 import lotto.domain.lotto.LottoLine;
 import lotto.domain.lotto.LottoNumber;
-import lotto.domain.lotto.WinningLottoLine;
+import lotto.domain.lotto.WinningLotto;
 import lotto.domain.rank.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,7 +25,7 @@ public class LottoLineTest {
             new LottoNumber(5), new LottoNumber(6)
         );
 
-        LottoLine lottoLine = new LottoLine(lottoNumbers);
+        LottoLine lottoLine = new LottoLine(lottoNumbers, true);
         for (LottoNumber lottoNumber : lottoNumbers) {
             assertThat(lottoLine.hasLottoNumber(lottoNumber)).isEqualTo(true);
         }
@@ -40,7 +40,7 @@ public class LottoLineTest {
             new LottoNumber(4), new LottoNumber(6)
         );
 
-        assertThatThrownBy(() -> new LottoLine(lottoNumbers))
+        assertThatThrownBy(() -> new LottoLine(lottoNumbers, true))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining(LOTTO_LINE_NUMBER_DUPLICATE_ERROR.getMessage());
     }
@@ -54,7 +54,7 @@ public class LottoLineTest {
             new LottoNumber(5), new LottoNumber(6),
             new LottoNumber(7)
         );
-        assertThatThrownBy(() -> new LottoLine(lottoNumbers))
+        assertThatThrownBy(() -> new LottoLine(lottoNumbers, true))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining(LOTTO_LINE_NUMBER_COUNT_ERROR.getMessage());
     }
@@ -68,11 +68,11 @@ public class LottoLineTest {
             new LottoNumber(5), new LottoNumber(6)
         );
 
-        LottoLine lottoLine = new LottoLine(lottoNumbers);
+        LottoLine lottoLine = new LottoLine(lottoNumbers, true);
         LottoNumber bonusLottoNumber = new LottoNumber(7);
 
         assertThat(lottoLine.checkLottoLine(
-            new WinningLottoLine(lottoLine, bonusLottoNumber)
+            new WinningLotto(lottoLine, bonusLottoNumber)
         )).isEqualTo(Rank.FIRST);
     }
 
