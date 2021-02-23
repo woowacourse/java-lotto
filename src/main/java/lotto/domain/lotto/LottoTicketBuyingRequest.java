@@ -4,6 +4,7 @@ import lotto.domain.Money;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static lotto.domain.lotto.LottoTicketGenerator.PRICE_EACH_LOTTO;
@@ -12,9 +13,9 @@ import static lotto.domain.lotto.LottoTicketGenerator.PRICE_EACH_LOTTO;
 public class LottoTicketBuyingRequest {
     private static final String ERROR_MANUAL_LOTTO_PRICE_OVER = "[ERROR] 총 구입 금액보다 수동구입량이 많습니다.";
 
-    private Money money;
-    private LottoAmount manualLottoAmount;
-    private List<LottoLine> manualLottoLineList;
+    private final Money money;
+    private final LottoAmount manualLottoAmount;
+    private final List<LottoLine> manualLottoLineList;
 
     public LottoTicketBuyingRequest(Money money, LottoAmount manualLottoAmount) {
         if (manualLottoAmount.getValue() * PRICE_EACH_LOTTO > money.getValue()) {
@@ -31,7 +32,7 @@ public class LottoTicketBuyingRequest {
     }
 
     public List<LottoLine> getManualLottoLineList() {
-        return manualLottoLineList;
+        return Collections.unmodifiableList(manualLottoLineList);
     }
 
     public int getManualLottoAmount() {
