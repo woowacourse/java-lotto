@@ -4,8 +4,10 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+
 import java.util.ArrayList;
 import java.util.List;
+
 import java.util.Map;
 
 public class LottoStore {

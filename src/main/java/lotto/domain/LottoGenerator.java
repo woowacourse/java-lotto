@@ -16,6 +16,7 @@ public class LottoGenerator {
     }
 
     public static Lotto createAutoLotto() {
+
         Collections.shuffle(candidateNumbers);
         Set<Integer> lottoNumbers =
                 new TreeSet<>(candidateNumbers.subList(0, LOTTO_POSSESSION_NUMBER));
@@ -25,4 +26,5 @@ public class LottoGenerator {
     public static Lotto createManualLotto(String inputNumbers) {
         return Lotto.from(inputNumbers);
     }
+
 }
