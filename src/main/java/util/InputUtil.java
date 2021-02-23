@@ -8,17 +8,10 @@ import java.util.stream.Collectors;
 public class InputUtil {
     private static final Scanner SCANNER = new Scanner(System.in);
     private static final String DELIMITER = ",";
+    private static final String WRONG_NUMBER_EXCEPTION_MESSAGE = "자연수만 입력 가능합니다. 현재 입력 값 : %s.";
+    private static final String BETTING_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
 
     private InputUtil() {
-    }
-
-    public static int nextInt() {
-        String inputValue = SCANNER.nextLine();
-        try {
-            return Integer.parseInt(inputValue);
-        } catch (NumberFormatException numberFormatException) {
-            throw new IllegalArgumentException(String.format("자연수만 입력 가능합니다. | 현재 입력 값 : %s ", inputValue));
-        }
     }
 
     public static Set<Integer> inputWinningNumbers() {
@@ -31,5 +24,19 @@ public class InputUtil {
 
     public static int inputBonusNumber() {
         return nextInt();
+    }
+
+    public static int inputBettingMoney() {
+        System.out.println(BETTING_MONEY_MESSAGE);
+        return nextInt();
+    }
+
+    private static int nextInt() {
+        String inputValue = SCANNER.nextLine();
+        try {
+            return Integer.parseInt(inputValue);
+        } catch (NumberFormatException numberFormatException) {
+            throw new IllegalArgumentException(String.format(WRONG_NUMBER_EXCEPTION_MESSAGE, inputValue));
+        }
     }
 }

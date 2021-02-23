@@ -2,6 +2,7 @@ package view;
 
 import domain.ball.LottoBall;
 import domain.lotto.LottoTicket;
+import domain.lotto.TicketCount;
 import domain.result.LottoRank;
 import util.OutputUtil;
 import view.dto.LottoGameResultDto;
@@ -14,16 +15,21 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoGameScreen {
-    public static final String LOTTO_PREFIX = "[";
-    public static final String LOTTO_POSTFIX = "]";
-    public static final String DELIMITER = ", ";
-    public static final String WINNING_LOTTO_CONFIRMATION = "\n지난 주 당첨 번호를 입력해 주세요.";
-    public static final String BONUS_LOTTO_CONFIRMATION = "보너스 볼을 입력해 주세요.";
-    public static final String RESULT = "당첨통계";
-    public static final String LINE = "----------";
-    public static final String LOTTO_RESULT_MESSAGE = "%s개 일치 (%d원)- %d개";
-    public static final String SECOND_PRIZE_RESULT_MESSAGE = "%d개 일치, 보너스 볼 일치 (%d)원- %d";
-    public static final String REVENUE_RESULT_FORMATTER = "총 수익률은 %.2f입니다.";
+    private static final String LOTTO_TICKET_COUNT = "%d개를 구매했습니다.";
+    private static final String LOTTO_PREFIX = "[";
+    private static final String LOTTO_POSTFIX = "]";
+    private static final String DELIMITER = ", ";
+    private static final String WINNING_LOTTO_CONFIRMATION = "\n지난 주 당첨 번호를 입력해 주세요.";
+    private static final String BONUS_LOTTO_CONFIRMATION = "보너스 볼을 입력해 주세요.";
+    private static final String RESULT = "당첨통계";
+    private static final String LINE = "----------";
+    private static final String LOTTO_RESULT_MESSAGE = "%s개 일치 (%d원)- %d개";
+    private static final String SECOND_PRIZE_RESULT_MESSAGE = "%d개 일치, 보너스 볼 일치 (%d)원- %d";
+    private static final String REVENUE_RESULT_FORMATTER = "총 수익률은 %.2f입니다.";
+
+    public void showTicketCount(final TicketCount lottoCount) {
+        OutputUtil.printMessage(String.format(LOTTO_TICKET_COUNT, lottoCount.getTicketCount()));
+    }
 
     public void showAllLottoStatus(final List<LottoTicket> lottoTickets) {
         lottoTickets.stream()
