@@ -3,20 +3,26 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+//TODO List<int[]>뿐만 아니라 int[]도 받을 수 있게 할까?
 public class ManualLottoGenerator implements LottoGenerator {
-    private final List<int[]> lottoNumberStored;
-    private int index = 0;
+	private final List<int[]> lottoNumbersStored;
+	private int index = 0;
 
-    public ManualLottoGenerator(List<int[]> numbersSequence) {
-        this.lottoNumberStored = numbersSequence;
-    }
+	public ManualLottoGenerator(List<int[]> numbersSequence) {
+		this.lottoNumbersStored = numbersSequence;
+	}
 
-    @Override
-    public Lotto createLotto() {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int number : lottoNumberStored.get(index++)) {
-            lottoNumbers.add(new LottoNumber(number));
-        }
-        return new Lotto(lottoNumbers);
-    }
+	public ManualLottoGenerator(int[] numbers) {
+		lottoNumbersStored = new ArrayList<>();
+		lottoNumbersStored.add(numbers);
+	}
+
+	@Override
+	public Lotto createLotto() {
+		List<LottoNumber> lottoNumbers = new ArrayList<>();
+		for (int number : lottoNumbersStored.get(index++)) {
+			lottoNumbers.add(new LottoNumber(number));
+		}
+		return new Lotto(lottoNumbers);
+	}
 }

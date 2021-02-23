@@ -5,12 +5,12 @@ import lotto.controller.LottoController;
 import java.util.Scanner;
 
 public class Application {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        LottoController lottoController = new LottoController();
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		LottoController lottoController = new LottoController();
 
-        lottoController.tryLotto(scanner);
+		lottoController.tryLotto(scanner);
 
-        scanner.close();
-    }
+		scanner.close();
+	}
 }

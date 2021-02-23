@@ -50,11 +50,11 @@ public class InputView {
 		return numbersSequence;
 	}
 
-	public static List<int[]> takeWinningNumbersInput(Scanner scanner) {
+	public static int[] takeWinningNumbersInput(Scanner scanner) {
 		System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 		String[] winningNumberInput = scanner.nextLine().split(", ");
 		validateIntegerNumbers(winningNumberInput);
-		return convertToNumbersSequence(winningNumberInput);
+		return convertToInts(winningNumberInput);
 	}
 
 	private static List<int[]> convertToNumbersSequence(String[] winningNumbersInput) {
