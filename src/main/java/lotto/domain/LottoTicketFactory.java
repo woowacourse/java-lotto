@@ -22,10 +22,10 @@ public class LottoTicketFactory {
     }
 
     public List<LottoTicket> buyLottoTicketsIncludingManualTickets(Money money, List<LottoTicket> manualTickets) {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
+        List<LottoTicket> lottoTickets = new ArrayList<>(manualTickets);
 
-        int length = (int) money.getValue() / LOTTO_PRICE;
-        for (int i = 0; i < length; i++) {
+        int autoCreateCount = money.getPurchasableLottoCount() - manualTickets.size();
+        for (int i = 0; i < autoCreateCount; i++) {
             lottoTickets.add(new LottoTicket(createAutoLottoTicket()));
         }
         return lottoTickets;
