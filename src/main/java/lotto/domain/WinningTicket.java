@@ -27,9 +27,8 @@ public class WinningTicket extends LottoTicket {
     }
 
     private int matchNumbers(LottoTicket ticket) {
-        int count = (int) this.lottoNumbers.stream()
+        return (int) this.lottoNumbers.stream()
                 .filter(ticket::contains)
                 .count();
-        return count;
     }
 }
