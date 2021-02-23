@@ -4,11 +4,11 @@ import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 public enum Rating {
-    FIRST(6, 2000000000),
-    SECOND(5, 30000000),
-    THIRD(5, 1500000),
-    FOURTH(4, 50000),
-    FIFTH(3, 5000),
+    FIRST(6, 2_000_000_000),
+    SECOND(5, 30_000_000),
+    THIRD(5, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(3, 5_000),
     MISS(0, 0);
 
     private static final String NONE_RATING_ERROR_MESSAGE = "[Error] 존재하지 않는 Rating 객체";
