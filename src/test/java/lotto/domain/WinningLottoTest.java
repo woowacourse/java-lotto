@@ -24,7 +24,7 @@ public class WinningLottoTest {
                 = new WinningLotto(Arrays.asList(3, 5, 7, 9, 45, 1), 44);
 
         assertThat(winningLotto.matchAll(comparingLotto)).isEqualTo(Reword.FIRST);
-        assertThat(winningLotto).isNotEqualTo(comparingLotto);
+        assertThat(winningLotto).isEqualTo(comparingLotto);
     }
 
     @DisplayName("보너스 번호 에러테스트")
