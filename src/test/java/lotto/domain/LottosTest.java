@@ -41,7 +41,7 @@ public class LottosTest {
 						new LottoNumber(6))),
 				new LottoNumber(20));
 
-		List<Rank> ranks = lottos.getResults(winningLotto);
+		List<Rank> ranks = lottos.getResultsBasedOn(winningLotto);
 
 		List<Rank> expectedRanks = Arrays.asList(Rank.FIFTH, Rank.NONE);
 

@@ -22,7 +22,7 @@ public class LottoQuantity {
 		}
 	}
 
-	public Lottos createLottosWith(LottoGenerator lottoGenerator) {
+	public Lottos createLottosUsing(LottoGenerator lottoGenerator) {
 		List<Lotto> lottos = new ArrayList<>();
 		for (int i = 0; i < lottoQuantity; i++) {
 			lottos.add(lottoGenerator.createLotto());

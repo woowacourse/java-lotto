@@ -14,26 +14,26 @@ public class OutputView {
 	private OutputView() {
 	}
 
-	public static void showLottos(Lottos lottos, LottoMachine lottoMachine) {
+	public static void printLottoPurchaseSummaryBasedOn(Lottos lottos, LottoMachine lottoMachine) {
 		System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", lottoMachine.getManualLottoQuantityAsInt(), lottoMachine.getAutoLottoQuantityAsInt());
 		for (Lotto lotto : lottos.getLottos()) {
-			System.out.println(printLottoSummary(lotto));
+			printLottoSummaryOf(lotto);
 		}
 		System.out.println();
 	}
 
-	private static String printLottoSummary(Lotto lotto) {
-		return String.format("[%s]", lottoSummary(lotto));
+	private static void printLottoSummaryOf(Lotto lotto) {
+		System.out.printf("[%s]\n", lottoSummaryOf(lotto));
 	}
 
-	private static String lottoSummary(Lotto lotto) {
+	private static String lottoSummaryOf(Lotto lotto) {
 		return lotto.getLottoNumbers()
 				.stream()
 				.map(LottoNumber::getNumberAsString)
 				.collect(Collectors.joining(", "));
 	}
 
-	public static void showResultStatistics(LottoStatistics lottoStatistics) {
+	public static void printResultStatisticsBasedOn(LottoStatistics lottoStatistics) {
 		System.out.println("당첨 통계");
 		System.out.println("---------");
 		List<Integer> statistics = lottoStatistics.getWinCountByRank();

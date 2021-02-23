@@ -39,7 +39,7 @@ class LottoStatisticsTest {
 	@DisplayName("결과 값을 통계 리스트로 반환")
 	@Test
 	void getWinCountByRank() {
-		List<Rank> ranks = lottos.getResults(winningLotto);
+		List<Rank> ranks = lottos.getResultsBasedOn(winningLotto);
 		LottoStatistics lottoStatistics = new LottoStatistics(ranks, new Money(3000));
 
 		List<Integer> numberOfWinByRank = lottoStatistics.getWinCountByRank();
@@ -49,7 +49,7 @@ class LottoStatisticsTest {
 	@DisplayName("총 수익률 계산")
 	@Test
 	void getTotalProfit() {
-		List<Rank> ranks = lottos.getResults(winningLotto);
+		List<Rank> ranks = lottos.getResultsBasedOn(winningLotto);
 		LottoStatistics lottoStatistics = new LottoStatistics(ranks, new Money(3000));
 
 		assertThat(lottoStatistics.getProfitRate()).isEqualTo((float) (30_000_000 + 1_500_000 + 5_000) / 3000);

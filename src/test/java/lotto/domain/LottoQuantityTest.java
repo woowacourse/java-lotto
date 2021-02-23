@@ -35,7 +35,7 @@ class LottoQuantityTest {
 	@DisplayName("로또 생성 갯수만큼 로또를 잘 생성해 내는지")
 	@Test
 	void createLottosWith() {
-		Lottos manualLottos = lottoQuantity.createLottosWith(new ManualLottoGenerator(Arrays.asList(
+		Lottos manualLottos = lottoQuantity.createLottosUsing(new ManualLottoGenerator(Arrays.asList(
 				new int[]{1, 2, 3, 4, 5, 6},
 				new int[]{1, 2, 3, 4, 5, 7},
 				new int[]{1, 2, 3, 4, 5, 8}
@@ -47,7 +47,7 @@ class LottoQuantityTest {
 				createCustomLotto(1, 2, 3, 4, 5, 8)
 		)));
 
-		Lottos autoLottos = lottoQuantity.createLottosWith(new AutomaticLottoGenerator());
+		Lottos autoLottos = lottoQuantity.createLottosUsing(new AutomaticLottoGenerator());
 		assertThat(autoLottos.getLottos().size()).isEqualTo(3);
 	}
 

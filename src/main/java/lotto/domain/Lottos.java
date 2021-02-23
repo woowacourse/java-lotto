@@ -14,7 +14,7 @@ public class Lottos {
 		this.lottos = lottos;
 	}
 
-	public List<Rank> getResults(WinningLotto winningLotto) {
+	public List<Rank> getResultsBasedOn(WinningLotto winningLotto) {
 		List<Rank> ranks = new ArrayList<>();
 		for (Lotto lotto : lottos) {
 			int matches = lotto.countMatchingNumbers(winningLotto);

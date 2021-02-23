@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Scanner;
 
 import static lotto.view.InputView.*;
-import static lotto.view.OutputView.showLottos;
-import static lotto.view.OutputView.showResultStatistics;
+import static lotto.view.OutputView.printLottoPurchaseSummaryBasedOn;
+import static lotto.view.OutputView.printResultStatisticsBasedOn;
 
 public class LottoController {
 	public void tryLotto(Scanner scanner) {
@@ -16,10 +16,10 @@ public class LottoController {
 				new LottoQuantity(takeManualLottoQuantityInput(scanner)));
 
 		Lottos lottos = lottoMachine.createLottosFrom(takeManualLottoNumbersInput(scanner, lottoMachine));
-		showLottos(lottos, lottoMachine);
+		printLottoPurchaseSummaryBasedOn(lottos, lottoMachine);
 
-		List<Rank> results = lottos.getResults(getWinningLotto(scanner));
-		showResultStatistics(new LottoStatistics(results, lottoMachine.getMoney()));
+		List<Rank> results = lottos.getResultsBasedOn(getWinningLotto(scanner));
+		printResultStatisticsBasedOn(new LottoStatistics(results, lottoMachine.getMoney()));
 	}
 
 	private WinningLotto getWinningLotto(Scanner scanner) {

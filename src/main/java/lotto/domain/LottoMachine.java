@@ -17,8 +17,8 @@ public class LottoMachine {
 	}
 
 	public Lottos createLottosFrom(List<int[]> manualLottoNumbersSequence) {
-		Lottos manualLottos = manualLottoQuantity.createLottosWith(new ManualLottoGenerator(manualLottoNumbersSequence));
-		Lottos autoLottos = autoLottoQuantity.createLottosWith(new AutomaticLottoGenerator());
+		Lottos manualLottos = manualLottoQuantity.createLottosUsing(new ManualLottoGenerator(manualLottoNumbersSequence));
+		Lottos autoLottos = autoLottoQuantity.createLottosUsing(new AutomaticLottoGenerator());
 
 		return manualLottos.merge(autoLottos);
 	}
