@@ -18,7 +18,8 @@ public class LottoController {
 
     public void run() {
         final Money money = inputMoney();
-        final LottoTickets lottoTickets = buyLottoTickets(money);
+        final Purchase purchase = inputManualPurchase(money);
+        final LottoTickets lottoTickets = createLottoTickets(purchase);
 
         final WinningTicket winningTicket = makeWinningTicket();
         final Map<Rank, Integer> result = LottoResultMachine.confirmResult(lottoTickets, winningTicket);
@@ -28,10 +29,18 @@ public class LottoController {
         manageChange(money);
     }
 
+    private Purchase inputManualPurchase(Money money) {
+        try {
+            return new Purchase(money, inputView.inputCountOfPurchaseManually());
+        } catch (LottoCustomException e) {
+            OutputView.printErrorMessage(e.getMessage());
+            return inputManualPurchase(money);
+        }
+    }
+
     private Money inputMoney() {
         try {
             final Money money = new Money(inputView.inputMoney());
-            OutputView.printNumberOfTickets(money.getTotalPurchaseCount());
             return money;
         } catch (LottoCustomException e) {
             OutputView.printErrorMessage(e.getMessage());
@@ -39,17 +48,21 @@ public class LottoController {
         }
     }
 
-    private LottoTickets buyLottoTickets(Money money) {
+    private List<LottoTicket> inputManualNumbers(Purchase purchase) {
+        try {
+            return inputView.inputManualNumbers(purchase.getManualPurchase());
+        } catch (LottoCustomException e) {
+            OutputView.printErrorMessage(e.getMessage());
+            return inputManualNumbers(purchase);
+        }
+    }
+
+    private LottoTickets createLottoTickets(Purchase purchase) {
         LottoTickets lottoTickets = new LottoTickets();
+        lottoTickets.addManuallyCreatedTickets(inputManualNumbers(purchase));
 
-        // 수동으로 티켓 생성
-        final int manualCount = inputView.inputCountOfPurchaseManually();
-        final List<LottoTicket> manuallyCreatedTickets = inputView.inputManualNumbers(manualCount);
-        lottoTickets.addManuallyCreatedTickets(manuallyCreatedTickets);
-
-        // 자동으로 티켓 생성
-        lottoTickets.generateTicketAutomatically(money.getTotalPurchaseCount());
-        OutputView.printAllTickets(lottoTickets);
+        lottoTickets.generateTicketAutomatically(purchase.getAutoPurchase());
+        OutputView.printAllTickets(purchase, lottoTickets);
         return lottoTickets;
     }
 

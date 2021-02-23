@@ -1,13 +1,11 @@
 package lotto.view;
 
-import lotto.domain.LottoProfit;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
-import lotto.domain.Rank;
+import lotto.domain.*;
 
 import java.util.Map;
 
 public class OutputView {
+    private static final String PURCHASE_INFO_MESSAGE = "수동으로 %d장, 자동으로 %d장을 구매했습니다.";
     private static final String WINNING_INFO_MESSAGE = "%s (%s)원 - %s개";
     private static final String WINNING_RESULT_MESSAGE = "%d개 일치";
     private static final String CONTAIN_BONUS_BALL = ", 보너스 볼 일치";
@@ -18,13 +16,12 @@ public class OutputView {
 
     public static void printErrorMessage(String message) {
         System.out.println(message);
+        printNewLine();
     }
 
-    public static void printNumberOfTickets(int counts) {
-        System.out.println(counts + "개를 구매했습니다.");
-    }
-
-    public static void printAllTickets(LottoTickets lottoTickets) {
+    public static void printAllTickets(Purchase purchase, LottoTickets lottoTickets) {
+        System.out.printf(PURCHASE_INFO_MESSAGE, purchase.getManualPurchase(), purchase.getAutoPurchase());
+        printNewLine();
         lottoTickets.toList().forEach(OutputView::printTicket);
         printNewLine();
     }
