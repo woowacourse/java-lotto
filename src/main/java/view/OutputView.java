@@ -12,7 +12,7 @@ public class OutputView {
     private static final String LEFT_BRACKET = "[";
     private static final String RIGHT_BRACKET = "]";
     private static final String COMMA_WITH_BLANK = ", ";
-    private static final String MESSAGE_STATISTICS = "당첨 통계\n--------\n";
+    private static final String MESSAGE_STATISTICS = "\n당첨 통계\n--------\n";
     private static final String STATISTICS_FORMAT = "%d개 일치 (%d원)- %d개";
     private static final String STATISTICS_BONUS_FORMAT = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
     private static final String MESSAGE_PROFIT_FORMAT = "총 수익률은 %.2f입니다.";
@@ -39,16 +39,12 @@ public class OutputView {
         }
     }
 
-    public void newLine() {
-        System.out.println();
-    }
-
     public void printStatistics(Statistics statistics) {
         Map<Rank, Integer> result = statistics.result();
         List<Rank> ranks = Arrays.asList(Rank.values());
         Collections.reverse(ranks);
         System.out.print(MESSAGE_STATISTICS);
-        for (Rank rank: ranks) {
+        for (Rank rank : ranks) {
             printMatchCount(rank, result.get(rank));
         }
     }

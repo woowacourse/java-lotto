@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class InputView {
     private static final String MESSAGE_BUDGET = "구입금액을 입력해 주세요.";
-    private static final String MESSAGE_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String MESSAGE_WINNING_NUMBER = "\n지난 주 당첨 번호를 입력해 주세요.";
     private static final String MESSAGE_BONUS_BALL = "보너스 볼을 입력해 주세요.";
     private static final String BLANK = "";
     private static final String COMMA = ",";

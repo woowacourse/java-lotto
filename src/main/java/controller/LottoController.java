@@ -34,7 +34,6 @@ public class LottoController {
     private List<LottoTicket> createLottoTickets(Money budget) {
         List<LottoTicket> lottoTickets = LottoMachine.buy(budget);
         outputView.printLottoTicket(lottoTickets);
-        outputView.newLine();
         return lottoTickets;
     }
 
@@ -42,7 +41,6 @@ public class LottoController {
         try {
             LottoTicket winningNumbers = LottoTicket.of(inputView.scanWinningNumbers());
             LottoNumber bonusBall = new LottoNumber(inputView.scanBonusBall());
-            outputView.newLine();
             return new WinningLotto(winningNumbers, bonusBall);
         } catch (RuntimeException e) {
             outputView.printError(e);
