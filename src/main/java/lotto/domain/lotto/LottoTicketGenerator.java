@@ -3,7 +3,6 @@ package lotto.domain.lotto;
 import java.util.ArrayList;
 
 public class LottoTicketGenerator {
-    private static final String ERROR_LOTTO_MONEY_NOT_ENOUGH = "[ERROR] 돈이 부족합니다.";
     protected static final int PRICE_EACH_LOTTO = 1000;
 
     private static LottoTicketGenerator instance;
