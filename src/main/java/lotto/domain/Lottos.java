@@ -8,7 +8,7 @@ public class Lottos {
 
     public Lottos(int purchasedLottoCount) {
         for (int i = 0; i < purchasedLottoCount; i++) {
-            lottoBunch.add(LottoGenerator.createLotto());
+            lottoBunch.add(LottoGenerator.createAutoLotto());
         }
     }
 

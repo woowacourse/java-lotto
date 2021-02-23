@@ -15,10 +15,14 @@ public class LottoGenerator {
         }
     }
 
-    public static Lotto createLotto() {
+    public static Lotto createAutoLotto() {
         Collections.shuffle(candidateNumbers);
         Set<Integer> lottoNumbers =
                 new TreeSet<>(candidateNumbers.subList(0, LOTTO_POSSESSION_NUMBER));
         return Lotto.from(new ArrayList<>(lottoNumbers));
+    }
+
+    public static Lotto createManualLotto(String inputNumbers) {
+        return Lotto.from(inputNumbers);
     }
 }
