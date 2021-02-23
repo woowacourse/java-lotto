@@ -11,31 +11,23 @@ import java.util.Arrays;
 
 public class LottoSystemController {
 
-    private LottoSystem lottoSystem;
-    private WinningResult winningResult;
-
     public void run() {
-        buyLottoTickets();
-        decideWinningNumbers();
-        calculateResult();
-    }
-
-    private void buyLottoTickets() {
-        lottoSystem = LottoSystem.init(InputView.receivePrice());
-        OutputView.printNumberOfTickets(lottoSystem.getLottoQuantity());
-
-        OutputView.printLottoTickets(lottoSystem.getLottoTickets());
-    }
-
-    private void decideWinningNumbers() {
-        winningResult = lottoSystem.getWinningResult(
+        LottoSystem lottoSystem = LottoSystem.init(InputView.receivePrice());
+        printLottoTicketsInfo(lottoSystem);
+        WinningResult winningResult = lottoSystem.getWinningResult(
             WinningNumbers.valueOf(
                 InputView.receiveWinningNumbers(),
                 InputView.receiveBonusNumber()
             ));
+        printLottoResult(winningResult);
     }
 
-    private void calculateResult() {
+    private void printLottoTicketsInfo(LottoSystem lottoSystem) {
+        OutputView.printNumberOfTickets(lottoSystem.getLottoQuantity());
+        OutputView.printLottoTickets(lottoSystem.getLottoTickets());
+    }
+
+    private void printLottoResult(WinningResult winningResult) {
         OutputView.printRankResultTitle();
         Arrays.stream(Ranking.values())
             .filter(ranking -> ranking != Ranking.NOTHING)
