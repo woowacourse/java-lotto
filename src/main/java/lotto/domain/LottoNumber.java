@@ -17,6 +17,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.value = Integer.parseInt(input);
     }
 
+    public static LottoNumber createLottoNumber(String input) {
+        return new LottoNumber(input);
+    }
+
     private void validateLottoNumber(String input) {
         validateNumberByFormat(input);
         validateLottoNumberByRange(input);
@@ -37,10 +41,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private int getValue() {
         return value;
-    }
-
-    public static LottoNumber createLottoNumber(String input) {
-        return new LottoNumber(input);
     }
 
     @Override

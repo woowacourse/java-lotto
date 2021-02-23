@@ -9,38 +9,40 @@ import java.util.stream.IntStream;
 public class LottoTicketFactory {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
-    private static final int START_INDEX = 0;
     private static final int LOTTO_TICKET_SIZE = 6;
 
-    private final List<LottoNumber> lottoNumberRange;
+    private static final List<LottoNumber> lottoNumberRange;
 
-    public LottoTicketFactory() {
-        this.lottoNumberRange = new ArrayList<>();
+    static {
+        lottoNumberRange = new ArrayList<>();
         IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
                 .forEach(number -> lottoNumberRange.add(LottoNumber.createLottoNumber(Integer.toString(number))));
     }
 
-    public List<LottoTicket> buyLottoTicketsIncludingManualTickets(Money money, List<LottoTicket> manualTickets) {
+    private LottoTicketFactory() {
+    }
+
+    public static LottoTickets createLottoTicketsIncludingManualTickets(Money money, List<LottoTicket> manualTickets) {
         List<LottoTicket> lottoTickets = new ArrayList<>(manualTickets);
 
         int autoCreateCount = money.getPurchasableLottoCount() - manualTickets.size();
         for (int i = 0; i < autoCreateCount; i++) {
-            lottoTickets.add(new LottoTicket(createAutoLottoTicket()));
+            lottoTickets.add(createAutoLottoTicket());
         }
-        return lottoTickets;
+        return new LottoTickets(lottoTickets);
     }
 
-    private List<LottoNumber> createAutoLottoTicket() {
+    private static LottoTicket createAutoLottoTicket() {
         Collections.shuffle(lottoNumberRange);
-        List<LottoNumber> lottoNumbers = lottoNumberRange.subList(START_INDEX, LOTTO_TICKET_SIZE);
-        Collections.sort(lottoNumbers);
-        return lottoNumbers;
+        return new LottoTicket(lottoNumberRange.stream()
+                .limit(LOTTO_TICKET_SIZE)
+                .collect(Collectors.toList()));
     }
 
-    public List<LottoNumber> createManualLottoTicket(List<String> numbers) {
-        return numbers.stream()
+    public static LottoTicket createManualLottoTicket(List<String> numbers) {
+        return new LottoTicket(numbers.stream()
                 .map(LottoNumber::createLottoNumber)
                 .sorted()
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 }
