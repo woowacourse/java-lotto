@@ -17,7 +17,7 @@ class LottoNumbersTest {
 
     @DisplayName("랜덤 로또 번호들 티켓 사이즈 만큼 나오는지 테스트")
     @Test
-    void Should_Return_RandomNumbersTicketSize_When_GetRandomNumbersTicketSize() {
+    void Should_Return_RandomNumbersTicketSize_When_Get() {
         assertThat(
             LottoNumbers.getRandomNumbersTicketSize().size()
         ).isEqualTo(6);
