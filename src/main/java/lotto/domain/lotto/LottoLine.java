@@ -1,8 +1,5 @@
 package lotto.domain.lotto;
 
-import static lotto.view.messages.ErrorMessages.LOTTO_LINE_NUMBER_COUNT_ERROR;
-import static lotto.view.messages.ErrorMessages.LOTTO_LINE_NUMBER_DUPLICATE_ERROR;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -12,6 +9,8 @@ import lotto.domain.rank.Rank;
 
 public class LottoLine {
 
+    public static final String LOTTO_LINE_NUMBER_COUNT_ERROR = "[Error] 로또 번호는 6개 입니다.";
+    public static final String LOTTO_LINE_NUMBER_DUPLICATE_ERROR = "[Error] 로또 번호는 중복될 수 없습니다.";
     public static final int LOTTO_NUMBER_COUNT = 6;
     private final List<LottoNumber> lottoNumbers;
     private final boolean isManualLotto;
@@ -39,18 +38,18 @@ public class LottoLine {
 
     private void validateSize(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != 6) {
-            throw new IllegalArgumentException(LOTTO_LINE_NUMBER_COUNT_ERROR.getMessage());
+            throw new IllegalArgumentException(LOTTO_LINE_NUMBER_COUNT_ERROR);
         }
     }
 
     private void validateDuplicate(List<LottoNumber> lottoNumbers) {
         Set<LottoNumber> set = new HashSet<>(lottoNumbers);
         if (set.size() != LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException(LOTTO_LINE_NUMBER_DUPLICATE_ERROR.getMessage());
+            throw new IllegalArgumentException(LOTTO_LINE_NUMBER_DUPLICATE_ERROR);
         }
     }
 
-    public boolean isManualLotto(){
+    public boolean isManualLotto() {
         return isManualLotto;
     }
 

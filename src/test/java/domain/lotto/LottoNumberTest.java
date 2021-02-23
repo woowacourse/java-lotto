@@ -1,6 +1,6 @@
 package domain.lotto;
 
-import static lotto.view.messages.ErrorMessages.LOTTO_NUMBER_RANGE_ERROR;
+import static lotto.domain.lotto.LottoNumber.LOTTO_NUMBER_RANGE_ERROR;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
@@ -23,11 +23,11 @@ public class LottoNumberTest {
     void testCreateLottoNumberException() {
         assertThatThrownBy(() -> new LottoNumber(0))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessageContaining(LOTTO_NUMBER_RANGE_ERROR.getMessage());
+            .hasMessageContaining(LOTTO_NUMBER_RANGE_ERROR);
 
         assertThatThrownBy(() -> new LottoNumber(46))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessageContaining(LOTTO_NUMBER_RANGE_ERROR.getMessage());
+            .hasMessageContaining(LOTTO_NUMBER_RANGE_ERROR);
     }
 
 }

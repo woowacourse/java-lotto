@@ -1,6 +1,6 @@
 package domain.lotto;
 
-import static lotto.view.messages.ErrorMessages.LOTTO_LINE_NUMBER_BONUS_LOTTO_NUMBER_DUPLICATE_ERROR;
+import static lotto.domain.lotto.WinningLotto.LOTTO_LINE_NUMBER_BONUS_LOTTO_NUMBER_DUPLICATE_ERROR;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
@@ -16,11 +16,10 @@ import org.junit.jupiter.api.Test;
 public class WinningLottoTest {
 
     LottoLine lottoLine;
-    private List<LottoNumber> lottoNumbers;
 
     @BeforeEach
     void setUp() {
-        lottoNumbers = Arrays.asList(
+        List<LottoNumber> lottoNumbers = Arrays.asList(
             new LottoNumber(1), new LottoNumber(2),
             new LottoNumber(3), new LottoNumber(4),
             new LottoNumber(5), new LottoNumber(6)
@@ -51,7 +50,7 @@ public class WinningLottoTest {
             assertThatThrownBy(() -> new WinningLotto(lottoLine, bonusLottoNumber))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(
-                    LOTTO_LINE_NUMBER_BONUS_LOTTO_NUMBER_DUPLICATE_ERROR.getMessage());
+                    LOTTO_LINE_NUMBER_BONUS_LOTTO_NUMBER_DUPLICATE_ERROR);
         }
     }
 

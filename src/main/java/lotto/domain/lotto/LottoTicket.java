@@ -13,7 +13,7 @@ public class LottoTicket {
     private final List<LottoLine> lottoLines;
 
     public LottoTicket(LottoMoney money) {
-        int lottoLineCount = money.getValue()  / LOTTO_LINE_PRICE;
+        int lottoLineCount = money.getValue() / LOTTO_LINE_PRICE;
         this.lottoLines = makeLottoLines(lottoLineCount);
     }
 
@@ -44,12 +44,12 @@ public class LottoTicket {
         return lottoLines.size();
     }
 
-    public int getManualLottoLineCount(){
+    public int getManualLottoLineCount() {
         Long count = lottoLines.stream().filter(LottoLine::isManualLotto).count();
         return count.intValue();
     }
 
-    public int getAutoLottoLineCount(){
+    public int getAutoLottoLineCount() {
         Long count = lottoLines.stream().filter(it -> !it.isManualLotto()).count();
         return count.intValue();
     }

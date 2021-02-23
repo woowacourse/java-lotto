@@ -1,7 +1,7 @@
 package domain.lotto;
 
-import static lotto.view.messages.ErrorMessages.LOTTO_LINE_NUMBER_COUNT_ERROR;
-import static lotto.view.messages.ErrorMessages.LOTTO_LINE_NUMBER_DUPLICATE_ERROR;
+import static lotto.domain.lotto.LottoLine.LOTTO_LINE_NUMBER_COUNT_ERROR;
+import static lotto.domain.lotto.LottoLine.LOTTO_LINE_NUMBER_DUPLICATE_ERROR;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
@@ -42,7 +42,7 @@ public class LottoLineTest {
 
         assertThatThrownBy(() -> new LottoLine(lottoNumbers, true))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessageContaining(LOTTO_LINE_NUMBER_DUPLICATE_ERROR.getMessage());
+            .hasMessageContaining(LOTTO_LINE_NUMBER_DUPLICATE_ERROR);
     }
 
     @Test
@@ -56,7 +56,7 @@ public class LottoLineTest {
         );
         assertThatThrownBy(() -> new LottoLine(lottoNumbers, true))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessageContaining(LOTTO_LINE_NUMBER_COUNT_ERROR.getMessage());
+            .hasMessageContaining(LOTTO_LINE_NUMBER_COUNT_ERROR);
     }
 
     @Test
