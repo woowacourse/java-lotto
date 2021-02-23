@@ -1,11 +1,13 @@
 package lotto.domain.ticketresult;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
 import lotto.domain.LottoTicket;
+import lotto.type.LottoMatchType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -47,8 +49,10 @@ class MatchedLottoNumbersTest {
         MatchedLottoNumbers matchedLottoNumbers
             = winningTicketAndBonusNumber.getMatchedLottoNumbers(lottoTicket);
 
-        assertThat(matchedLottoNumbers.getSizeExceptBonusNumber()).isEqualTo(2);
+        assertThatThrownBy(matchedLottoNumbers::getMatchType)
+            .isInstanceOf(IllegalArgumentException.class);
         assertThat(matchedLottoNumbers.isContainsBonusNumber()).isFalse();
+        assertThat(matchedLottoNumbers.size()).isEqualTo(2);
     }
 
     @DisplayName("일반 번호와 보너스 번호의 일치 결과 테스트 - 일반 번호 0개, 보너스 번호 1개")
@@ -68,8 +72,10 @@ class MatchedLottoNumbersTest {
         MatchedLottoNumbers matchedLottoNumbers
             = winningTicketAndBonusNumber.getMatchedLottoNumbers(lottoTicket);
 
-        assertThat(matchedLottoNumbers.getSizeExceptBonusNumber()).isEqualTo(0);
+        assertThatThrownBy(matchedLottoNumbers::getMatchType)
+            .isInstanceOf(IllegalArgumentException.class);
         assertThat(matchedLottoNumbers.isContainsBonusNumber()).isTrue();
+        assertThat(matchedLottoNumbers.size()).isEqualTo(1);
     }
 
     @DisplayName("일반 번호와 보너스 번호의 일치 결과 테스트 - 일반 번호 3개, 보너스 번호 1개")
@@ -89,7 +95,8 @@ class MatchedLottoNumbersTest {
         MatchedLottoNumbers matchedLottoNumbers
             = winningTicketAndBonusNumber.getMatchedLottoNumbers(lottoTicket);
 
-        assertThat(matchedLottoNumbers.getSizeExceptBonusNumber()).isEqualTo(3);
+        assertThat(matchedLottoNumbers.getMatchType()).isEqualTo(LottoMatchType.THREE_MATCH);
         assertThat(matchedLottoNumbers.isContainsBonusNumber()).isTrue();
+        assertThat(matchedLottoNumbers.size()).isEqualTo(4);
     }
 }

@@ -18,10 +18,6 @@ public class MatchedLottoNumbers {
         this.bonusNumber = bonusNumber;
     }
 
-    public int getSizeExceptBonusNumber() {
-        return numbersExceptBonusNumber.size();
-    }
-
     public LottoMatchType getMatchType() {
         if (numbersExceptBonusNumber.size()
             != FIVE_MATCH.getCountExceptBonusNumber()) {
