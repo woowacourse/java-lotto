@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Map;
 import lotto.domain.lotto.LottoNumbers;
 import lotto.domain.lotto.LottoTicket;
-import lotto.domain.lotto.WinningStatistics;
 import lotto.domain.rank.Rank;
+import lotto.domain.rank.Ranks;
 
 public class OutputView {
 
@@ -23,7 +23,7 @@ public class OutputView {
     private static final String STATISTICS_BONUS_FORMAT = "%d개 일치, 보너스 볼 일치(%d원)- %d개\n";
     private static final String STATISTICS_YIELD_FORMAT = "총 수익률은 %.2f입니다.\n";
     private static final String LOTTO_NUMBERS_FORMAT = "[%s]\n";
-    private static final String PASSIVE_LOTTO_COUNT = "\n수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String MANUAL_COUNT = "\n수동으로 구매할 로또 수를 입력해 주세요.";
 
     public static void payout() {
         System.out.println(PAYOUT);
@@ -53,17 +53,15 @@ public class OutputView {
         System.out.println(BONUS_NUMBER);
     }
 
-    public static void statistics(WinningStatistics winningStatistics) {
+    public static void statistics(Ranks ranks) {
         printTitleOfStatistics();
-        Map<Rank, Long> gameResult = winningStatistics.getRanks().unwrap();
+        Map<Rank, Long> gameResult = ranks.unwrap();
         List<Rank> keys = new ArrayList<>(gameResult.keySet());
 
         keys.stream()
             .filter(rank -> rank != Rank.FAIL)
             .sorted(Comparator.comparingInt(Rank::getWinnings))
             .forEach(rank -> printStatisticsAccordingToBonus(rank, gameResult.get(rank)));
-
-        System.out.printf(STATISTICS_YIELD_FORMAT, winningStatistics.getYield().unwrap());
     }
 
     private static void printTitleOfStatistics() {
@@ -81,7 +79,11 @@ public class OutputView {
         System.out.printf(format, rank.getMatchedNumber(), rank.getWinnings(), count);
     }
 
-    public static void passiveLottoCount() {
-        System.out.println(PASSIVE_LOTTO_COUNT);
+    public static void printYield(double yield) {
+        System.out.printf(STATISTICS_YIELD_FORMAT, yield);
+    }
+
+    public static void manualCount() {
+        System.out.println(MANUAL_COUNT);
     }
 }

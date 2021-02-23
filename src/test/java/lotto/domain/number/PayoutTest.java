@@ -15,7 +15,7 @@ public class PayoutTest {
     @DisplayName("숫자를 입력 받는다.")
     void inputPayOutNumber() {
         Payout payout = Payout.valueOf("2147483647");
-        assertThat(payout.getAmount()).isEqualTo(2147483647);
+        assertThat(payout.unwrap()).isEqualTo(2147483647);
     }
 
     @ParameterizedTest

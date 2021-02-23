@@ -31,21 +31,7 @@ public class Payout {
         }
     }
 
-    public LottoChance newLottoChance(Chance passiveChance) {
-        validatePassiveChance(passiveChance);
-        Chance activeChance = new Chance(
-            getNumberOfStuff(LottoTicket.getLottoPrice()) - passiveChance.unwrap());
-
-        return new LottoChance(passiveChance, activeChance);
-    }
-
-    private void validatePassiveChance(Chance passiveChance) {
-        if (getNumberOfStuff(LottoTicket.getLottoPrice()) < passiveChance.unwrap()) {
-            throw new IllegalArgumentException("금액보다 많은 로또 수 입니다.");
-        }
-    }
-
-    public int getAmount() {
+    public int unwrap() {
         return amount;
     }
 

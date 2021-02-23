@@ -2,7 +2,7 @@ package lotto.domain.lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import lotto.domain.number.Chance;
+import lotto.domain.number.ManualCount;
 import lotto.domain.number.Payout;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -14,8 +14,8 @@ class LottoTicketTest {
     @DisplayName("지불 금액에 따른 로또 개수")
     @CsvSource({"1,0", "999,0", "1000,1", "1001,1", "1999,1"})
     void valueOf(String amount, int expected) {
-        LottoTicket lottoTicket = RandomLottoGenerator.getInstance()
-            .buyLottoTicket(Payout.valueOf(amount).newLottoChance(Chance.valueOf("0")));
+        LottoTicket lottoTicket = LottoExchange.getInstance()
+            .buyLottoTicket(Payout.valueOf(amount), ManualCount.valueOf("0"));
 
         assertThat(lottoTicket.count()).isEqualTo(expected);
     }

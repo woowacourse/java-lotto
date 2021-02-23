@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.Arrays;
 import lotto.domain.lotto.LottoNumbers;
 import lotto.domain.lotto.LottoTicket;
-import lotto.domain.lotto.WinningNumbers;
+import lotto.domain.winning.WinningNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +23,7 @@ public class RanksTest {
             LottoNumbers.valueOf("1,2,3,11,12,13")
         ));
 
-        Ranks ranks = lottoTicket.getWinningStatistics(winningNumbers).getRanks();
+        Ranks ranks = lottoTicket.calculateRankings(winningNumbers);
 
         Long expected = Arrays.stream(Rank.values())
             .mapToLong(Rank::getWinnings)

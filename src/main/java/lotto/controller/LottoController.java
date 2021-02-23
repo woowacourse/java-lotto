@@ -1,22 +1,22 @@
 package lotto.controller;
 
+import lotto.domain.lotto.LottoExchange;
 import lotto.domain.lotto.LottoTicket;
-import lotto.domain.lotto.RandomLottoGenerator;
-import lotto.domain.lotto.WinningNumbers;
-import lotto.domain.number.Chance;
-import lotto.domain.number.LottoChance;
+import lotto.domain.number.ManualCount;
 import lotto.domain.number.Payout;
+import lotto.domain.rank.Ranks;
+import lotto.domain.winning.WinningNumbers;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
 
-    private static final RandomLottoGenerator LOTTO_GENERATOR = RandomLottoGenerator.getInstance();
+    private static final LottoExchange LOTTO_EXCHANGE = LottoExchange.getInstance();
 
     public static void run() {
         Payout payout = inputPayout();
-        LottoChance lottoChance = inputPassiveLottoChance(payout);
-        LottoTicket lottoTicket = buyLotto(lottoChance);
+        ManualCount manualCount = inputManualCount(payout);
+        LottoTicket lottoTicket = buyLotto(payout, manualCount);
         WinningNumbers winningNumbers =
             WinningNumbers.valueOf(inputLastWeekLottoNumber(), inputBonusNumber());
 
@@ -25,19 +25,18 @@ public class LottoController {
 
     private static Payout inputPayout() {
         OutputView.payout();
-        Payout payOut = Payout.valueOf(InputView.getStringInputFromUser());
 
-        return payOut;
+        return Payout.valueOf(InputView.getStringInputFromUser());
     }
 
-    private static LottoChance inputPassiveLottoChance(Payout payout) {
-        OutputView.passiveLottoCount();
-        String passiveLottoChance = InputView.getStringInputFromUser();
-        return payout.newLottoChance(Chance.valueOf(passiveLottoChance));
+    private static ManualCount inputManualCount(Payout payout) {
+        OutputView.manualCount();
+
+        return ManualCount.valueOf(InputView.getStringInputFromUser());
     }
 
-    private static LottoTicket buyLotto(LottoChance lottoChance) {
-        LottoTicket lottoTicket = LOTTO_GENERATOR.buyLottoTicket(lottoChance);
+    private static LottoTicket buyLotto(Payout payout, ManualCount manualCount) {
+        LottoTicket lottoTicket = LOTTO_EXCHANGE.buyLottoTicket(payout, manualCount);
         OutputView.payOuted(lottoTicket.count());
         OutputView.boughtLotties(lottoTicket);
 
@@ -58,6 +57,8 @@ public class LottoController {
 
     private static void calculateStatistics(WinningNumbers winningNumbers,
         LottoTicket lottoTicket) {
-        OutputView.statistics(lottoTicket.getWinningStatistics(winningNumbers));
+        Ranks ranks = lottoTicket.calculateRankings(winningNumbers);
+        OutputView.statistics(ranks);
+        OutputView.printYield(LOTTO_EXCHANGE.calculateYield(ranks));
     }
 }

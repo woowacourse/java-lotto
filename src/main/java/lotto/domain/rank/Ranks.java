@@ -16,9 +16,15 @@ public class Ranks {
         this.ranks = ranks.unwrap();
     }
 
+    public Long getRanksCount() {
+        return ranks.keySet().stream()
+            .mapToLong(rank -> ranks.get(rank))
+            .sum();
+    }
+
     public Long getTotalWinnings() {
-        return Arrays.stream(Rank.values())
-            .mapToLong(rank -> rank.getWinnings() * ranks.getOrDefault(rank, 0L))
+        return ranks.keySet().stream()
+            .mapToLong(rank -> ranks.get(rank) * rank.getWinnings())
             .sum();
     }
 
