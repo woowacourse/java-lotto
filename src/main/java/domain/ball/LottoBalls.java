@@ -6,14 +6,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
-import static domain.ball.LottoBall.MAX_LOTTO_VALUE;
-import static domain.ball.LottoBall.MIN_LOTTO_VALUE;
 
 public class LottoBalls {
-    private static final int LOTTO_BALL_SIZE = 6;
+    public static final int LOTTO_BALL_SIZE = 6;
 
     private final List<LottoBall> lottoBalls;
 
@@ -23,25 +18,14 @@ public class LottoBalls {
         this.lottoBalls = copy;
     }
 
-    public static List<LottoBall> getRandomLottoBalls() {
-        List<LottoBall> lottoBalls = IntStream.rangeClosed(MIN_LOTTO_VALUE, MAX_LOTTO_VALUE)
-                .mapToObj(LottoBall::new)
-                .collect(Collectors.toList());
-        Collections.shuffle(lottoBalls);
-        return lottoBalls.stream()
-                .limit(LOTTO_BALL_SIZE)
-                .sorted()
-                .collect(Collectors.toList());
-    }
-
     public List<LottoBall> getLottoBalls() {
         List<LottoBall> copy = new ArrayList<>(this.lottoBalls);
         return Collections.unmodifiableList(copy);
     }
 
-    public LottoRank matchCount(LottoBalls lottoBalls, LottoBall bonusBall) {
+    public LottoRank matchCount(LottoBalls winningBalls, LottoBall bonusBall) {
         int count = (int) this.lottoBalls.stream()
-                .filter(lottoBalls::contains)
+                .filter(winningBalls::contains)
                 .count();
 
         boolean containBonus = this.lottoBalls.stream()

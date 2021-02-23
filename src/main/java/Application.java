@@ -1,11 +1,11 @@
-import domain.LottoGameMachine;
+import domain.LottoMachine;
 import service.LottoService;
 import view.LottoGameScreen;
 
 public class Application {
     public static void main(String[] args) {
-        LottoGameMachine lottoGameMachine = new LottoGameMachine();
-        LottoService lottoService = new LottoService(lottoGameMachine);
+        LottoMachine lottoMachine = new LottoMachine();
+        LottoService lottoService = new LottoService(lottoMachine);
         GameManageApplication gameManageApplication = new GameManageApplication(new LottoGameScreen(), lottoService);
         gameManageApplication.run();
     }

@@ -3,7 +3,7 @@
 
 
 ## 매세지 정의 
-- 로또 금액을 반환하라
+- 로또 금액을 반환하
 - 로또를 구매하라 
 - 로또를 생성하라
 - 로또 갯수만큼 로또 번호를 생성하라 
@@ -58,7 +58,9 @@
 
 ### step1 2차 피드백
 - [x] GameManageApplication 메서드 순서 변경 - d534d61
-- [x] InputUtils 책임 재정의
+- [x] InputUtils 책임 재정의 - 562e9c7
+- [x] RandomLottoBall 생성 책임 변경하기
+- [x] LottoGameMachine 네이밍 변경
 
 ## 프로그래밍 요구사항
 - indent(인덴트, 들여쓰기) depth를 2단계에서 1단계로 줄여라.
