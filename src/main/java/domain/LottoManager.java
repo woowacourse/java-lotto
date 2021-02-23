@@ -3,18 +3,18 @@ package domain;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoSystem {
+public class LottoManager {
 
     private final Price price;
     private final List<LottoTicket> lottoTickets;
 
-    private LottoSystem(final Price price) {
+    private LottoManager(final Price price) {
         this.price = price;
         this.lottoTickets = LottoMachine.generateLottoTickets(price);
     }
 
-    public static LottoSystem init(final int price) {
-        return new LottoSystem(Price.valueOf(price));
+    public static LottoManager init(final int price) {
+        return new LottoManager(Price.valueOf(price));
     }
 
     public List<LottoTicket> getLottoTickets() {

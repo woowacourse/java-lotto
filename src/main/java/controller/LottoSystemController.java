@@ -1,6 +1,6 @@
 package controller;
 
-import domain.LottoSystem;
+import domain.LottoManager;
 import domain.Ranking;
 import domain.WinningNumbers;
 import domain.WinningResult;
@@ -12,9 +12,9 @@ import java.util.Arrays;
 public class LottoSystemController {
 
     public void run() {
-        LottoSystem lottoSystem = LottoSystem.init(InputView.receivePrice());
-        printLottoTicketsInfo(lottoSystem);
-        WinningResult winningResult = lottoSystem.getWinningResult(
+        LottoManager lottoManager = LottoManager.init(InputView.receivePrice());
+        printLottoTicketsInfo(lottoManager);
+        WinningResult winningResult = lottoManager.getWinningResult(
             WinningNumbers.valueOf(
                 InputView.receiveWinningNumbers(),
                 InputView.receiveBonusNumber()
@@ -22,9 +22,9 @@ public class LottoSystemController {
         printLottoResult(winningResult);
     }
 
-    private void printLottoTicketsInfo(LottoSystem lottoSystem) {
-        OutputView.printNumberOfTickets(lottoSystem.getLottoQuantity());
-        OutputView.printLottoTickets(lottoSystem.getLottoTickets());
+    private void printLottoTicketsInfo(LottoManager lottoManager) {
+        OutputView.printNumberOfTickets(lottoManager.getLottoQuantity());
+        OutputView.printLottoTickets(lottoManager.getLottoTickets());
     }
 
     private void printLottoResult(WinningResult winningResult) {
