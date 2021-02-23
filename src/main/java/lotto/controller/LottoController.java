@@ -40,12 +40,12 @@ public class LottoController {
         OutputView.printLottoTickets(lottoTickets);
         return new LottoTicket(
                 InputView.inputWinningNumbers().stream()
-                        .map(LottoNumber::new)
+                        .map(LottoNumber::createLottoNumber)
                         .collect(Collectors.toList()));
     }
 
     private LottoResult getLottoResult(LottoTickets lottoTickets, LottoTicket winningTicket) {
-        LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());
+        LottoNumber bonusNumber = LottoNumber.createLottoNumber(InputView.inputBonusNumber());
         WinningLotto winningLotto = new WinningLotto(winningTicket, bonusNumber);
         return new LottoResult(lottoTickets.checkWinningTickets(winningLotto));
     }

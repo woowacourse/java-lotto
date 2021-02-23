@@ -23,12 +23,12 @@ public class LottoTicketFactoryTest {
     void createManualLottoTickets() {
         List<String> numbers = new ArrayList<>(Arrays.asList("1","2","3","4","5","6"));
         assertThat(lottoTicketFactory.createManualLottoTicket(numbers)).containsExactly(
-                new LottoNumber("1"),
-                new LottoNumber("2"),
-                new LottoNumber("3"),
-                new LottoNumber("4"),
-                new LottoNumber("5"),
-                new LottoNumber("6"));
+                LottoNumber.createLottoNumber("1"),
+                LottoNumber.createLottoNumber("2"),
+                LottoNumber.createLottoNumber("3"),
+                LottoNumber.createLottoNumber("4"),
+                LottoNumber.createLottoNumber("5"),
+                LottoNumber.createLottoNumber("6"));
     }
 
     @Test

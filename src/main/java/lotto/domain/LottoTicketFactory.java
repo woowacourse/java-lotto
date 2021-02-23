@@ -17,7 +17,7 @@ public class LottoTicketFactory {
     public LottoTicketFactory() {
         this.lottoNumberRange = new ArrayList<>();
         IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
-                .forEach(number -> lottoNumberRange.add(new LottoNumber(Integer.toString(number))));
+                .forEach(number -> lottoNumberRange.add(LottoNumber.createLottoNumber(Integer.toString(number))));
     }
 
     public List<LottoTicket> buyLottoTicketsIncludingManualTickets(Money money, List<LottoTicket> manualTickets) {
@@ -39,7 +39,7 @@ public class LottoTicketFactory {
 
     public List<LottoNumber> createManualLottoTicket(List<String> numbers) {
         return numbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::createLottoNumber)
                 .sorted()
                 .collect(Collectors.toList());
     }
