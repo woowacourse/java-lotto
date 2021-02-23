@@ -1,6 +1,7 @@
 package lotto.domain.lotto;
 
-import static lotto.view.messages.ErrorMessages.LOTTO_LINE_NUMBER_COUNT_DUPLICATE_ERROR;
+import static lotto.view.messages.ErrorMessages.LOTTO_LINE_NUMBER_COUNT_ERROR;
+import static lotto.view.messages.ErrorMessages.LOTTO_LINE_NUMBER_DUPLICATE_ERROR;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,11 +16,8 @@ public class LottoLine {
     private final List<LottoNumber> lottoNumbers;
 
     public LottoLine(List<LottoNumber> lottoNumbers) {
-        Set<LottoNumber> set = new HashSet<>(lottoNumbers);
-        if (set.size() != LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException(
-                LOTTO_LINE_NUMBER_COUNT_DUPLICATE_ERROR.getMessage());
-        }
+        validateSize(lottoNumbers);
+        validateDuplicate(lottoNumbers);
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
@@ -35,6 +33,19 @@ public class LottoLine {
 
     public boolean hasLottoNumber(LottoNumber lottoNumber) {
         return this.lottoNumbers.contains(lottoNumber);
+    }
+
+    private void validateSize(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != 6) {
+            throw new IllegalArgumentException(LOTTO_LINE_NUMBER_COUNT_ERROR.getMessage());
+        }
+    }
+
+    private void validateDuplicate(List<LottoNumber> lottoNumbers) {
+        Set<LottoNumber> set = new HashSet<>(lottoNumbers);
+        if (set.size() != LOTTO_NUMBER_COUNT) {
+            throw new IllegalArgumentException(LOTTO_LINE_NUMBER_DUPLICATE_ERROR.getMessage());
+        }
     }
 
 }

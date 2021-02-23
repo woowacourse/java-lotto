@@ -1,6 +1,7 @@
 package domain.lotto;
 
-import static lotto.view.messages.ErrorMessages.LOTTO_LINE_NUMBER_COUNT_DUPLICATE_ERROR;
+import static lotto.view.messages.ErrorMessages.LOTTO_LINE_NUMBER_COUNT_ERROR;
+import static lotto.view.messages.ErrorMessages.LOTTO_LINE_NUMBER_DUPLICATE_ERROR;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
@@ -41,11 +42,11 @@ public class LottoLineTest {
 
         assertThatThrownBy(() -> new LottoLine(lottoNumbers))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessageContaining(LOTTO_LINE_NUMBER_COUNT_DUPLICATE_ERROR.getMessage());
+            .hasMessageContaining(LOTTO_LINE_NUMBER_DUPLICATE_ERROR.getMessage());
     }
 
     @Test
-    @DisplayName("로또 번호 개수가 6개 초과라면 로또 라인 생성시 예외가 발생한다.")
+    @DisplayName("로또 번호 개수가 6개가 아니면 로또 라인 생성시 예외가 발생한다.")
     void testExceptionThrownLottoNumberCountExcess6() {
         List<LottoNumber> lottoNumbers = Arrays.asList(
             new LottoNumber(1), new LottoNumber(2),
@@ -55,19 +56,7 @@ public class LottoLineTest {
         );
         assertThatThrownBy(() -> new LottoLine(lottoNumbers))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessageContaining(LOTTO_LINE_NUMBER_COUNT_DUPLICATE_ERROR.getMessage());
-    }
-
-    @Test
-    @DisplayName("로또 번호 개수가 6개 미만라면 로또 라인 생성시 예외가 발생한다.")
-    void testExceptionThrownLottoNumberCountUnder6() {
-        List<LottoNumber> lottoNumbers = Arrays.asList(
-            new LottoNumber(1), new LottoNumber(2),
-            new LottoNumber(3)
-        );
-        assertThatThrownBy(() -> new LottoLine(lottoNumbers))
-            .isInstanceOf(IllegalArgumentException.class)
-            .hasMessageContaining(LOTTO_LINE_NUMBER_COUNT_DUPLICATE_ERROR.getMessage());
+            .hasMessageContaining(LOTTO_LINE_NUMBER_COUNT_ERROR.getMessage());
     }
 
     @Test
