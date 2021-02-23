@@ -13,7 +13,7 @@ class TicketCountTest {
     @DisplayName("ticketCount 정상 생성 테스트.")
     @Test
     void ticketCountGenerateTest() {
-        assertThatCode(() -> TicketCount.of(1))
+        assertThatCode(() -> new TicketCount(1))
                 .doesNotThrowAnyException();
     }
 
@@ -21,7 +21,7 @@ class TicketCountTest {
     @ParameterizedTest
     @ValueSource(ints = {-1, 0})
     void ticketCountGenerateErrorTest(int value) {
-        assertThatThrownBy(() -> TicketCount.of(value))
+        assertThatThrownBy(() -> new TicketCount(value))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

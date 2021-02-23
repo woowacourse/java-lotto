@@ -39,7 +39,7 @@ public class GameManageApplication {
 
     private TicketCount getTicketCount(final BettingMoney bettingMoney) {
         int ticketCount = bettingMoney.getTicketCount();
-        return TicketCount.of(ticketCount);
+        return new TicketCount(ticketCount);
     }
 
     private WinningLotto getWinningLotto() {

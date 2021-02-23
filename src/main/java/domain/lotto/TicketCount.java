@@ -6,13 +6,9 @@ public class TicketCount {
 
     private final int ticketCount;
 
-    private TicketCount(final int ticketCount) {
+    public TicketCount(final int ticketCount) {
         validateLottoCount(ticketCount);
         this.ticketCount = ticketCount;
-    }
-
-    public static TicketCount of(final int lottoCount) {
-        return new TicketCount(lottoCount);
     }
 
     public int getTicketCount() {
