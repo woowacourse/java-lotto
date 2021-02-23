@@ -85,7 +85,6 @@ class LottosTest {
         WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 
 
-
         List<LottoResult> expectedLottoResults = Arrays.asList(
                 new LottoResult(4, false),
                 new LottoResult(3, false),

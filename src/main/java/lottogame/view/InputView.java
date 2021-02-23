@@ -54,7 +54,7 @@ public class InputView {
     public List<LottoDto> inputManualLotto(int autoTicketQuantity) {
         System.out.println("\n수동으로 구매할 로또 번호를 입력해 주세요.");
         List<LottoDto> lottoDtos = new ArrayList<>();
-        for (int i=0; i<autoTicketQuantity; i++) {
+        for (int i = 0; i < autoTicketQuantity; i++) {
             LottoDto lottoDto = LottoDto.Of(inputLottoNumbers());
             lottoDtos.add(lottoDto);
         }
