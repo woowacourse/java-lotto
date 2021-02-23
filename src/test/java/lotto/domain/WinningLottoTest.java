@@ -20,15 +20,6 @@ class WinningLottoTest {
         winningTicket = new LottoTicket(numbers);
     }
 
-    @DisplayName("당첨 로또의 번호들과 보너스볼의 번호는 중복되어선 안된다.")
-    @Test
-    void validate(){
-        LottoNumber duplicateBonus = new LottoNumber(2);
-
-        assertThatIllegalArgumentException()
-            .isThrownBy(() -> new WinningLotto(winningTicket,duplicateBonus));
-    }
-
     @DisplayName("구입한 로또에 보너스볼 번호가 있으면 참을 반환한다.")
     @Test
     void checkBonus(){
