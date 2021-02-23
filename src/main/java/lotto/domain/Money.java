@@ -17,6 +17,14 @@ public class Money {
         value = money;
     }
 
+    public Money(int moneyInput) {
+        if (moneyInput < 0) {
+            throw new IllegalArgumentException();
+        }
+
+        value = moneyInput;
+    }
+
     public int getValue() {
         return value;
     }
