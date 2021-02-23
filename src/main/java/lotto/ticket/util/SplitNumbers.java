@@ -15,6 +15,6 @@ public class SplitNumbers {
     public static Stream<Number> splitNumberStream(String numbers) {
         return Stream.of(numbers.split(DELIMITER))
                 .map(s -> s.replaceAll(SPACE, EMPTY))
-                .map(Number::new);
+                .map(Number::valueOf);
     }
 }

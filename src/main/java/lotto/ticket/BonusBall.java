@@ -6,7 +6,7 @@ public class BonusBall {
     private final Number bonusBall;
 
     public BonusBall(String value, WinnerTicket winnerTicket) {
-        Number number = new Number(value);
+        Number number = Number.valueOf(value);
         TicketValidation.validateSameNumber(number, winnerTicket);
         this.bonusBall = number;
     }

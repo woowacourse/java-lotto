@@ -19,12 +19,12 @@ public class TicketTest {
     void ticketCreate() {
         NumbersGenerator numbersGenerator =
                 () -> Arrays.asList(
-                        new Number("1"),
-                        new Number("2"),
-                        new Number("3"),
-                        new Number("4"),
-                        new Number("5"),
-                        new Number("6")
+                        Number.valueOf("1"),
+                        Number.valueOf("2"),
+                        Number.valueOf("3"),
+                        Number.valueOf("4"),
+                        Number.valueOf("5"),
+                        Number.valueOf("6")
                 );
         Ticket ticket = new Ticket(numbersGenerator.generate());
         assertThat(ticket).isEqualTo(new Ticket(numbersGenerator.generate()));
@@ -35,12 +35,12 @@ public class TicketTest {
     void checkNumberInRange() {
         NumbersGenerator numbersGenerator =
                 () -> Arrays.asList(
-                        new Number("1"),
-                        new Number("46"),
-                        new Number("2"),
-                        new Number("3"),
-                        new Number("4"),
-                        new Number("5")
+                        Number.valueOf("1"),
+                        Number.valueOf("46"),
+                        Number.valueOf("2"),
+                        Number.valueOf("3"),
+                        Number.valueOf("4"),
+                        Number.valueOf("5")
                 );
         assertThatThrownBy(() ->
                 new Ticket(numbersGenerator.generate())
@@ -53,12 +53,12 @@ public class TicketTest {
     void checkDuplicatedNumber() {
         NumbersGenerator numbersGenerator =
                 () -> Arrays.asList(
-                        new Number("1"),
-                        new Number("1"),
-                        new Number("2"),
-                        new Number("3"),
-                        new Number("4"),
-                        new Number("5")
+                        Number.valueOf("1"),
+                        Number.valueOf("1"),
+                        Number.valueOf("2"),
+                        Number.valueOf("3"),
+                        Number.valueOf("4"),
+                        Number.valueOf("5")
                 );
         assertThatThrownBy(() ->
                 new Ticket(numbersGenerator.generate())
@@ -71,11 +71,11 @@ public class TicketTest {
     void checkSizeOfNumbers() {
         NumbersGenerator numbersGenerator =
                 () -> Arrays.asList(
-                        new Number("1"),
-                        new Number("2"),
-                        new Number("3"),
-                        new Number("4"),
-                        new Number("5")
+                        Number.valueOf("1"),
+                        Number.valueOf("2"),
+                        Number.valueOf("3"),
+                        Number.valueOf("4"),
+                        Number.valueOf("5")
                 );
         assertThatThrownBy(() ->
                 new Ticket(numbersGenerator.generate())
@@ -88,12 +88,12 @@ public class TicketTest {
     void checkContainBonusBall() {
         NumbersGenerator numbersGenerator =
                 () -> Arrays.asList(
-                        new Number("1"),
-                        new Number("2"),
-                        new Number("3"),
-                        new Number("4"),
-                        new Number("5"),
-                        new Number("6")
+                        Number.valueOf("1"),
+                        Number.valueOf("2"),
+                        Number.valueOf("3"),
+                        Number.valueOf("4"),
+                        Number.valueOf("5"),
+                        Number.valueOf("6")
                 );
         BonusBall bonusBall = new BonusBall("6", new WinnerTicket(("1, 2, 3, 4, 5, 8")));
         Ticket ticket = new Ticket(numbersGenerator.generate());

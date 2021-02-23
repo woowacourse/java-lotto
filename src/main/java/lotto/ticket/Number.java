@@ -1,15 +1,41 @@
 package lotto.ticket;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Number implements Comparable<Number> {
+    public static final int MINIMUM_NUMBER = 1;
+    public static final int MAXIMUM_NUMBER = 45;
+    public static final int NUMBER_COUNT_IN_LOTTO = 6;
+
+    private static final List<Number> cache;
+
+    static {
+        cache = IntStream.rangeClosed(MINIMUM_NUMBER, MAXIMUM_NUMBER)
+                .mapToObj(Integer::toString)
+                .map(Number::new)
+                .collect(Collectors.toList());
+    }
+
     private final int number;
 
-    public Number(String value) {
+    private Number(String value) {
         this.number = validate(value);
     }
 
-    private int validate(String value) {
+    public static Number valueOf(String value) {
+        int number = validate(value);
+        return cache.get(number - 1);
+    }
+
+    public static List<Number> values() {
+        return Collections.unmodifiableList(cache);
+    }
+
+    private static int validate(String value) {
         TicketValidation.validateNumber(value);
         int number = Integer.parseInt(value);
         TicketValidation.validateNumberInRange(number);

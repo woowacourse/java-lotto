@@ -5,7 +5,7 @@ import lotto.game.LottoCount;
 import java.util.List;
 
 import static lotto.game.LottoCount.ZERO;
-import static lotto.ticket.strategy.RandomNumbersGenerator.*;
+import static lotto.ticket.Number.*;
 
 public class TicketValidation {
     public static final String ERROR_MESSAGE_DUPLICATED = "중복되는 숫자가 존재합니다.";

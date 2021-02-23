@@ -66,12 +66,12 @@ public class WinnerTicketTest {
     void checkResult() {
         NumbersGenerator numbersGenerator =
                 () -> Arrays.asList(
-                        new Number("1"),
-                        new Number("2"),
-                        new Number("3"),
-                        new Number("4"),
-                        new Number("5"),
-                        new Number("6")
+                        Number.valueOf("1"),
+                        Number.valueOf("2"),
+                        Number.valueOf("3"),
+                        Number.valueOf("4"),
+                        Number.valueOf("5"),
+                        Number.valueOf("6")
                 );
         WinnerTicket winnerTicket = new WinnerTicket("1,2,3,4,5,6");
         Ticket ticket = new Ticket(numbersGenerator.generate());
