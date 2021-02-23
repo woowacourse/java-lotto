@@ -1,7 +1,6 @@
 package view;
 
 import java.util.Arrays;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -30,9 +29,9 @@ public class InputView {
     private static int receiveNumber(final String message) {
         try {
             System.out.println(message);
-            return SCANNER.nextInt();
-        } catch (InputMismatchException e) {
-            throw new InputMismatchException(NOT_INT_ERROR);
+            return Integer.parseInt(SCANNER.nextLine());
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException(NOT_INT_ERROR);
         }
     }
 
