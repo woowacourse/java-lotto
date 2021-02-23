@@ -19,6 +19,8 @@ public class InputView {
     
     private static final String DELIMITER = ",";
     
+    private static final String ERROR_NULL_OR_EMPTY = "null 혹은 빈 값은 입력할 수 없습니다.";
+    
     private final Scanner scanner;
     
     public InputView() {
@@ -73,7 +75,7 @@ public class InputView {
         
         String input = scanner.nextLine();
         if (input == null || input.isEmpty()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ERROR_NULL_OR_EMPTY);
         }
         
         System.out.println();

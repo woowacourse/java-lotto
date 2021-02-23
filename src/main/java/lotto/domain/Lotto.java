@@ -8,6 +8,8 @@ public class Lotto {
     
     private static final int LOTTO_LENGTH = 6;
     
+    private static final String ERROR_ILLEGAL_LOTTO_LENGTH = "로또 번호의 길이가 6이 아닙니다.";
+    
     private final Set<LottoNumber> lottoNumbers;
     
     private Lotto(Set<LottoNumber> lottoNumbers) {
@@ -25,7 +27,7 @@ public class Lotto {
             return new Lotto(lottoNumbers);
         }
     
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException(ERROR_ILLEGAL_LOTTO_LENGTH);
     }
     
     private static boolean matchesLength(int size) {
