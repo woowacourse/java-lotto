@@ -9,7 +9,7 @@ public class WinningResult {
 
     public WinningResult(WinningNumbers winningNumbers, List<LottoTicket> lottoTickets,
                          Price price) {
-        this.rankings = winningNumbers.getRankings(lottoTickets);
+        this.rankings = winningNumbers.calculateRankings(lottoTickets);
         this.price = price;
     }
 
@@ -19,11 +19,11 @@ public class WinningResult {
             .count();
     }
 
-    public double getProfitRate() {
-        return ((double) getTotalProfit()) / price.getValue();
+    public double calculateProfitRate() {
+        return ((double) sumTotalProfit()) / price.getValue();
     }
 
-    private int getTotalProfit() {
+    private int sumTotalProfit() {
         return rankings.stream()
             .mapToInt(Ranking::getMoney)
             .sum();

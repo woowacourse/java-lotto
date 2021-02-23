@@ -1,13 +1,14 @@
 package domain;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertAll;
-
-import java.util.Arrays;
-import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+import java.util.List;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 class WinningResultTest {
 
@@ -33,11 +34,11 @@ class WinningResultTest {
     @DisplayName("총 수익률 계산 성공")
     @Test
     void getProfitRate_success() {
-        assertThat(winningResult.getProfitRate()).isEqualTo(2_030_005_000.0 / 3000.0);
+        assertThat(winningResult.calculateProfitRate()).isEqualTo(2_030_005_000.0 / 3000.0);
     }
 
     Price createValidPrice() {
-        return Price.valueOf("3000");
+        return Price.valueOf(3000);
     }
 
     List<LottoTicket> createValidLottoTickets() {

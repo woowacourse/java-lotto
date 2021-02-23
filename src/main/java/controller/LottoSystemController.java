@@ -42,6 +42,6 @@ public class LottoSystemController {
             .forEach(ranking ->
                 OutputView.printIndividualRankResult(winningResult.countNumberOfRank(ranking), ranking));
 
-        OutputView.printTotalProfitRate(winningResult.getProfitRate());
+        OutputView.printTotalProfitRate(winningResult.calculateProfitRate());
     }
 }
