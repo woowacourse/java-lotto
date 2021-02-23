@@ -48,7 +48,7 @@ public class RankTest {
 
         Lottos lottos = Lottos.from(LOTTO_GROUP);
 
-        return Rank.match(lottos, WINNING_LOTTO);
+        return lottos.match(WINNING_LOTTO);
     }
 
     @ParameterizedTest

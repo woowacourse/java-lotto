@@ -25,9 +25,9 @@ public class LottoMachineController {
     }
 
     public void purchase() {
-        List<Lotto> lottos = getInputLottos();
+        Lottos lottos = Lottos.from(getInputLottos());
         WinningLotto winningLotto = getInputWinningLotto();
-        LottoStatisticResult result = Rank.match(Lottos.from(lottos), winningLotto);
+        LottoStatisticResult result = lottos.match(winningLotto);
         outputView.printStatisticResult(result);
     }
 

@@ -30,16 +30,6 @@ public enum Rank {
         return matchCount;
     }
 
-    public static LottoStatisticResult match(Lottos lottos, WinningLotto winningLotto) {
-        List<Lotto> lottoGroup = lottos.getLottos();
-
-        Map<Rank, Long> rankCount = lottoGroup.stream()
-                                              .collect(Collectors.groupingBy(winningLotto::match,
-                                                  Collectors.counting()));
-
-        return new LottoStatisticResult(rankCount);
-    }
-
     public static Rank getRankByMatchCount(long matchCount, boolean requiredBonus) {
         return Arrays.stream(Rank.values())
                      .filter(rank -> isSameMatchCount(rank, matchCount))

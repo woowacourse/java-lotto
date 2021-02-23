@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Lottos {
@@ -34,5 +35,13 @@ public class Lottos {
         return lottos.stream()
                      .map(Lotto::toInts)
                      .collect(Collectors.toList());
+    }
+
+    public LottoStatisticResult match(WinningLotto winningLotto) {
+        Map<Rank, Long> rankCount = lottos.stream()
+                                              .collect(Collectors.groupingBy(winningLotto::match,
+                                                  Collectors.counting()));
+
+        return new LottoStatisticResult(rankCount);
     }
 }

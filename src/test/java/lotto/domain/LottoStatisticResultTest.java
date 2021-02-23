@@ -21,7 +21,7 @@ public class LottoStatisticResultTest {
 
         Lottos lottos = Lottos.from(lottoGroup);
 
-        LottoStatisticResult result = Rank.match(lottos, WINNING_LOTTO);
+        LottoStatisticResult result = lottos.match(WINNING_LOTTO);
 
         // when
         Long count = result.getOrNoCount(Rank.FIRST);
@@ -39,7 +39,7 @@ public class LottoStatisticResultTest {
         lottoGroup.add(Lotto.fromNumbers(Arrays.asList(40, 41, 42, 43, 44, 45))); // 당첨 X - 0원
 
         Lottos lottos = Lottos.from(lottoGroup);
-        LottoStatisticResult result = Rank.match(lottos, WINNING_LOTTO);
+        LottoStatisticResult result = lottos.match(WINNING_LOTTO);
 
         // when
         double incomeRate = result.calculateIncomeRate();
