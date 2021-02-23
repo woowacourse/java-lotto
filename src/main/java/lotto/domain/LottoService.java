@@ -9,8 +9,8 @@ import lotto.domain.rating.RatingInfo;
 public class LottoService {
 
     public LottoRepository getLotto(final LottoRepository lottoRepository,
-        final LottoMachine lottoMachine, final Ticket ticket) {
-        lottoRepository.generateLottoByTicket(lottoMachine, ticket.getCount());
+        final LottoMachine lottoMachine, final int count) {
+        lottoRepository.generateLottoByTicket(lottoMachine, count);
         return lottoRepository;
     }
 

@@ -22,7 +22,8 @@ public class LottoController {
         Ticket manualTicket = manualBuyTicket(totalTicket);
 
         generateLottoNumbers(manualTicket.getCount(), lottoRepository);
-        printTicketCountAndLottoResult(totalTicket, lottoService, lottoRepository);
+        printTicketCountAndLottoResult(manualTicket.getCount(),
+            totalTicket.getCount(), lottoService, lottoRepository);
 
         WinningLotto winningLotto = buyWinningLotto();
         RatingInfo ratingInfo = lottoService.scratchLotto(lottoRepository, winningLotto);
@@ -92,11 +93,12 @@ public class LottoController {
         return new WinningLotto(lotto, bonusNumber);
     }
 
-    private void printTicketCountAndLottoResult(Ticket ticket, LottoService lottoService,
+    private void printTicketCountAndLottoResult(final int manualCount, final int totalCount,
+        LottoService lottoService,
         LottoRepository lottoRepository) {
-        OutputView.printBuyLotto(ticket.getCount());
+        OutputView.printBuyLotto(manualCount, totalCount - manualCount);
         OutputView.printLottoResults(
-            lottoService.getLotto(lottoRepository, new RandomLottoMachine(), ticket));
+            lottoService.getLotto(lottoRepository, new RandomLottoMachine(), totalCount));
     }
 
     private void printWinningStats(RatingInfo ratingInfo, LottoService lottoService,
