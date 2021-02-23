@@ -21,7 +21,7 @@ public class LottoSeller {
         for (int i = 0; i < count; i++) {
             lottos.add(LottoGenerator.generate());
         }
-        return new LottoGroup(lottos);
+        return new LottoGroup(lottos, count);
     }
 
     public LottoGroup sellManualLotto(final Money money, final int manualCount, List<Lotto> manualLottos) {
@@ -34,7 +34,7 @@ public class LottoSeller {
         for (int i = 0; i < count - manualCount; i++) {
             lottos.add(LottoGenerator.generate());
         }
-        return new LottoGroup(lottos);
+        return new LottoGroup(lottos, count - manualCount, manualCount);
     }
 
     public static int lottoPrice() {
