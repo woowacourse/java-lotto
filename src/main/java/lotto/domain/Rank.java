@@ -12,9 +12,9 @@ public enum Rank {
     FIRST(6, 2_000_000_000);
 
     private int countOfMatch;
-    private double reward;
+    private int reward;
 
-    Rank(int countOfMatch, double reward) {
+    Rank(int countOfMatch, int reward) {
         this.countOfMatch = countOfMatch;
         this.reward = reward;
     }
@@ -23,18 +23,15 @@ public enum Rank {
         return this.countOfMatch;
     }
 
-    public double getReward() {
+    public int getReward() {
         return reward;
     }
 
     public static Rank rankOf(int countOfMatch, boolean bonusNumber) {
-        if (!bonusNumber && THIRD.matchCount(countOfMatch)) {
-            return THIRD;
-        }
 
-        return Arrays.stream(values())
-                .filter(rank -> rank != THIRD)
+        return Arrays.stream(Rank.values())
                 .filter(rank -> rank.matchCount(countOfMatch))
+                .filter(rank -> !rank.equals(SECOND) || bonusNumber)
                 .findFirst()
                 .orElse(NOTHING);
     }
