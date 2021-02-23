@@ -1,12 +1,6 @@
 package lotto.domain.ticketresult;
 
 
-import static lotto.domain.ticketresult.Rank.FIVE_AND_BONUS_MATCH;
-import static lotto.domain.ticketresult.Rank.FIVE_MATCH;
-import static lotto.domain.ticketresult.Rank.FOUR_MATCH;
-import static lotto.domain.ticketresult.Rank.SIX_MATCH;
-import static lotto.domain.ticketresult.Rank.THREE_MATCH;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -18,6 +12,8 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import static lotto.domain.ticketresult.Rank.*;
 
 public class LottoComparatorTest {
     private WinningLottoNumbers winningLottoNumbers;
@@ -57,11 +53,11 @@ public class LottoComparatorTest {
         Map<Rank, Integer> lottoResult
             = lottoComparator.getLottoResult(purchasedLottoTickets);
 
-        Assertions.assertThat(lottoResult.get(THREE_MATCH)).isEqualTo(0);
-        Assertions.assertThat(lottoResult.get(FOUR_MATCH)).isEqualTo(0);
-        Assertions.assertThat(lottoResult.get(FIVE_MATCH)).isEqualTo(0);
-        Assertions.assertThat(lottoResult.get(FIVE_AND_BONUS_MATCH)).isEqualTo(0);
-        Assertions.assertThat(lottoResult.get(SIX_MATCH)).isEqualTo(1);
+        Assertions.assertThat(lottoResult.get(FIFTH)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(FOURTH)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(THIRD)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(SECOND)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(FIRST)).isEqualTo(1);
     }
 
 
@@ -84,11 +80,11 @@ public class LottoComparatorTest {
         Map<Rank, Integer> lottoResult
             = lottoComparator.getLottoResult(purchasedLottoTickets);
 
-        Assertions.assertThat(lottoResult.get(THREE_MATCH)).isEqualTo(0);
-        Assertions.assertThat(lottoResult.get(FOUR_MATCH)).isEqualTo(0);
-        Assertions.assertThat(lottoResult.get(FIVE_MATCH)).isEqualTo(0);
-        Assertions.assertThat(lottoResult.get(FIVE_AND_BONUS_MATCH)).isEqualTo(1);
-        Assertions.assertThat(lottoResult.get(SIX_MATCH)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(FIFTH)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(FOURTH)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(THIRD)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(SECOND)).isEqualTo(1);
+        Assertions.assertThat(lottoResult.get(FIRST)).isEqualTo(0);
     }
 
 
@@ -111,11 +107,11 @@ public class LottoComparatorTest {
         Map<Rank, Integer> lottoResult
             = lottoComparator.getLottoResult(purchasedLottoTickets);
 
-        Assertions.assertThat(lottoResult.get(THREE_MATCH)).isEqualTo(0);
-        Assertions.assertThat(lottoResult.get(FOUR_MATCH)).isEqualTo(0);
-        Assertions.assertThat(lottoResult.get(FIVE_MATCH)).isEqualTo(1);
-        Assertions.assertThat(lottoResult.get(FIVE_AND_BONUS_MATCH)).isEqualTo(0);
-        Assertions.assertThat(lottoResult.get(SIX_MATCH)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(FIFTH)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(FOURTH)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(THIRD)).isEqualTo(1);
+        Assertions.assertThat(lottoResult.get(SECOND)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(FIRST)).isEqualTo(0);
     }
 
 
@@ -138,11 +134,11 @@ public class LottoComparatorTest {
         Map<Rank, Integer> lottoResult
             = lottoComparator.getLottoResult(purchasedLottoTickets);
 
-        Assertions.assertThat(lottoResult.get(THREE_MATCH)).isEqualTo(0);
-        Assertions.assertThat(lottoResult.get(FOUR_MATCH)).isEqualTo(1);
-        Assertions.assertThat(lottoResult.get(FIVE_MATCH)).isEqualTo(0);
-        Assertions.assertThat(lottoResult.get(FIVE_AND_BONUS_MATCH)).isEqualTo(0);
-        Assertions.assertThat(lottoResult.get(SIX_MATCH)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(FIFTH)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(FOURTH)).isEqualTo(1);
+        Assertions.assertThat(lottoResult.get(THIRD)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(SECOND)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(FIRST)).isEqualTo(0);
     }
 
 
@@ -165,10 +161,10 @@ public class LottoComparatorTest {
         Map<Rank, Integer> lottoResult
             = lottoComparator.getLottoResult(purchasedLottoTickets);
 
-        Assertions.assertThat(lottoResult.get(THREE_MATCH)).isEqualTo(1);
-        Assertions.assertThat(lottoResult.get(FOUR_MATCH)).isEqualTo(0);
-        Assertions.assertThat(lottoResult.get(FIVE_MATCH)).isEqualTo(0);
-        Assertions.assertThat(lottoResult.get(FIVE_AND_BONUS_MATCH)).isEqualTo(0);
-        Assertions.assertThat(lottoResult.get(SIX_MATCH)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(FIFTH)).isEqualTo(1);
+        Assertions.assertThat(lottoResult.get(FOURTH)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(THIRD)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(SECOND)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(FIRST)).isEqualTo(0);
     }
 }

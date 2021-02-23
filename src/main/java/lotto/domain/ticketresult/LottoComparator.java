@@ -1,7 +1,7 @@
 package lotto.domain.ticketresult;
 
-import static lotto.domain.ticketresult.Rank.FIVE_AND_BONUS_MATCH;
-import static lotto.domain.ticketresult.Rank.FIVE_MATCH;
+import static lotto.domain.ticketresult.Rank.SECOND;
+import static lotto.domain.ticketresult.Rank.THIRD;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -63,12 +63,12 @@ public class LottoComparator {
 
     private void handleFiveMatchType(LottoTicket purchasedOneLottoTicket) {
         if (purchasedOneLottoTicket.hasBonusNumber(winningLottoNumbers.getBonusNumber())) {
-            Integer currentMatchedNumbersCount = lottoResult.get(FIVE_AND_BONUS_MATCH);
-            lottoResult.put(FIVE_AND_BONUS_MATCH, currentMatchedNumbersCount + ONE_COUNT);
+            Integer currentMatchedNumbersCount = lottoResult.get(SECOND);
+            lottoResult.put(SECOND, currentMatchedNumbersCount + ONE_COUNT);
             return;
         }
-        Integer currentMatchedNumbersCount = lottoResult.get(FIVE_MATCH);
-        lottoResult.put(FIVE_MATCH, currentMatchedNumbersCount + ONE_COUNT);
+        Integer currentMatchedNumbersCount = lottoResult.get(THIRD);
+        lottoResult.put(THIRD, currentMatchedNumbersCount + ONE_COUNT);
     }
 
     private void handleOtherMatchTypes(List<Rank> ranks) {
