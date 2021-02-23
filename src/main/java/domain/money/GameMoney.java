@@ -1,5 +1,6 @@
-package domain;
+package domain.money;
 
+import domain.lotto.LottoBundle;
 import util.LottoGenerator;
 
 import java.math.BigDecimal;

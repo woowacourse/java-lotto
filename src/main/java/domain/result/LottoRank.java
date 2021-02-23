@@ -1,4 +1,4 @@
-package domain;
+package domain.result;
 
 import java.util.Arrays;
 

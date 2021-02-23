@@ -1,8 +1,8 @@
 package util;
 
-import domain.Lotto;
-import domain.LottoBall;
-import domain.LottoBundle;
+import domain.lotto.Lotto;
+import domain.lotto.LottoBall;
+import domain.lotto.LottoBundle;
 
 import java.util.ArrayList;
 import java.util.List;

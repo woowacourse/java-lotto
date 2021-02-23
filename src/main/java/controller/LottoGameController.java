@@ -1,6 +1,12 @@
 package controller;
 
-import domain.*;
+import domain.money.GameMoney;
+import domain.lotto.Lotto;
+import domain.lotto.LottoBall;
+import domain.lotto.LottoBundle;
+import domain.result.LottoRank;
+import domain.result.LottoResult;
+import domain.result.WinningResult;
 import view.InputView;
 import view.OutputView;
 

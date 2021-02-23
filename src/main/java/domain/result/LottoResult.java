@@ -1,4 +1,7 @@
-package domain;
+package domain.result;
+
+import domain.lotto.Lotto;
+import domain.lotto.LottoBundle;
 
 import java.util.Arrays;
 import java.util.Collections;

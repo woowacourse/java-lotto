@@ -1,8 +1,8 @@
 package view;
 
-import domain.Lotto;
-import domain.LottoBundle;
-import domain.LottoRank;
+import domain.lotto.Lotto;
+import domain.lotto.LottoBundle;
+import domain.result.LottoRank;
 
 import java.util.List;
 import java.util.Map;

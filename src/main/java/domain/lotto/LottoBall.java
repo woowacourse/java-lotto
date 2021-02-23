@@ -1,4 +1,4 @@
-package domain;
+package domain.lotto;
 
 public class LottoBall {
     private static final int MIN_NUMBER = 1;

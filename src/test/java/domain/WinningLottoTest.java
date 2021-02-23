@@ -1,5 +1,8 @@
 package domain;
 
+import domain.lotto.Lotto;
+import domain.lotto.LottoBall;
+import domain.result.WinningResult;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
