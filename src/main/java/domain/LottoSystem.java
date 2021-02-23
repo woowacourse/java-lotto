@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.Collections;
 import java.util.List;
 
 public class LottoSystem {
@@ -17,7 +18,7 @@ public class LottoSystem {
     }
 
     public List<LottoTicket> getLottoTickets() {
-        return lottoTickets;
+        return Collections.unmodifiableList(lottoTickets);
     }
 
     public int getLottoQuantity() {
