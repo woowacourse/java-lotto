@@ -9,7 +9,7 @@ import lotto.domain.rank.Ranks;
 
 public class OutputView {
 
-    private static final String PURCHASE_RESULT_INFORMATION_FORMAT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
+    private static final String PURCHASE_RESULT_INFORMATION_FORMAT = "수동으로 %d개, 자동으로 %d개를 구매했습니다.\n";
     private static final String WINNING_LOTTO_LINE_STATISTICS = "\n당첨 통계\n---------";
     private static final String FIFTH_PLACE_RESULT_FORMAT = "3개 일치 (5000원)- %d개\n";
     private static final String FORTH_PLACE_RESULT_FORMAT = "4개 일치 (50000원)- %d개\n";
@@ -32,8 +32,8 @@ public class OutputView {
     }
 
     public static void printLottoTicket(LottoTicket lottoTicket) {
-        System.out.printf(PURCHASE_RESULT_INFORMATION_FORMAT, lottoTicket.getAutoLottoLineCount()
-            , lottoTicket.getManualLottoLineCount());
+        System.out.printf(PURCHASE_RESULT_INFORMATION_FORMAT, lottoTicket.getManualLottoLineCount()
+            , lottoTicket.getAutoLottoLineCount());
 
         for (LottoLine line : lottoTicket.getLottoLines()) {
             String lottoNumbers = line.getLottoNumbers().stream()

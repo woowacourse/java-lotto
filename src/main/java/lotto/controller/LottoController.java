@@ -29,7 +29,7 @@ public class LottoController {
         try {
             LottoMoney lottoMoney = createLottoMoney();
             PurchaseCount manualPurchaseCount = createPurchaseCount();
-            InputView.printManualLottoLineNumbersInputRequestMessage();
+
             return new LottoTicket(lottoMoney.spendLottoLine(manualPurchaseCount),
                 createLottoLines(manualPurchaseCount));
         } catch (Exception e) {
@@ -78,6 +78,12 @@ public class LottoController {
     }
 
     private PurchaseCount createPurchaseCount() {
-        return new PurchaseCount(InputView.getManualPurchaseCountUserInput());
+        PurchaseCount purchaseCount =
+            new PurchaseCount(InputView.getManualPurchaseCountUserInput());
+        if (purchaseCount.getValue() > 0) {
+            InputView.printManualLottoLineNumbersInputRequestMessage();
+        }
+        return purchaseCount;
     }
+
 }
