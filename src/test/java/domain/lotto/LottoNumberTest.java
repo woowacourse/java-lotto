@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 public class LottoNumberTest {
 
     @Test
-    @DisplayName("로또 번호는 1부터 45까지 숫자다.")
+    @DisplayName("1부터 45사이의 숫자가 아닐경 로또 번호 생성시 예외가 발생한다.")
     public void testLottoNumberRange() {
         assertThatThrownBy(() -> new LottoNumber(46))
             .isInstanceOf(IllegalArgumentException.class)
