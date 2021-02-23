@@ -39,9 +39,8 @@ public class LottoSystemController {
         OutputView.printRankResultTitle();
         Arrays.stream(Ranking.values())
             .filter(ranking -> ranking != Ranking.NOTHING)
-            .forEach(ranking -> OutputView.printIndividualRankResult(
-                winningResult.countNumberOfRank(ranking),
-                ranking));
+            .forEach(ranking ->
+                OutputView.printIndividualRankResult(winningResult.countNumberOfRank(ranking), ranking));
 
         OutputView.printTotalProfitRate(winningResult.getProfitRate());
     }
