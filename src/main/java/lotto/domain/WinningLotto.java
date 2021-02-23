@@ -13,11 +13,14 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
-    public List<Result> getWinningResult(Lottos lottos) {
+    public List<Result> getWinningResult() {
         List<Result> results = new ArrayList<>();
-        checkResult(results, lottos.getManualLotto());
-        checkResult(results, lottos.getAutoLotto());
-
+        for (Lotto lotto : Lottos.getPurchaseLottos()) {
+            results.add(Result.decisionLottoRank(
+                    matchingCount(lotto.getLottoNumbers()),
+                    lotto.isBonusMatch(bonusNumber.getBonus())
+            ));
+        }
         return results;
     }
 

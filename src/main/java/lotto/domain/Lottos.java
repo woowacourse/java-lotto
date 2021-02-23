@@ -1,40 +1,47 @@
 package lotto.domain;
 
+import lotto.util.LottoGenerator;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lottos {
-    private final ManualLotto manualLotto;
-    private final AutoLotto autoLotto;
+    private static List<Lotto> purchaseLottos = new ArrayList<>();
 
-    public Lottos(ManualLotto manualLotto, AutoLotto autoLotto) {
-        this.manualLotto = manualLotto;
-        this.autoLotto = autoLotto;
+    private Lottos(List<Lotto> lottos){
+        this.purchaseLottos.addAll(lottos);
     }
 
-    public List<Lotto> getManualLotto() {
-        return manualLotto.getManualLotto();
+    public static Lottos createAutoLotto(int count) {
+        return new Lottos(Stream.generate(() -> new Lotto(LottoGenerator.makeLottoNumbers()))
+                .limit(count)
+                .collect(Collectors.toList()));
     }
 
-    public List<Lotto> getAutoLotto() {
-        return autoLotto.getAutoLotto();
+    public static Lottos createManualLotto(List<String> manualPurchaseNumbers) {
+        List<Lotto> manualLotto = new ArrayList<>();
+
+        for (String input : manualPurchaseNumbers) {
+            validateInputCheck(input);
+            List<Integer> lottoNumbers = Arrays.stream(input.split(", "))
+                    .map(s -> Integer.parseInt(s))
+                    .collect(Collectors.toList());
+            manualLotto.add(new Lotto(lottoNumbers));
+        }
+        return new Lottos(manualLotto);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Lottos)) return false;
-
-        Lottos lottos = (Lottos) o;
-
-        if (!Objects.equals(manualLotto, lottos.manualLotto)) return false;
-        return Objects.equals(autoLotto, lottos.autoLotto);
+    private static void validateInputCheck(String input) {
+        if (!Arrays.stream(input.split(", "))
+                .allMatch(s -> s.chars().allMatch(Character::isDigit))) {
+            throw new IllegalArgumentException("숫자와 , 를 이용하여 입력해주세요.");
+        }
     }
 
-    @Override
-    public int hashCode() {
-        int result = manualLotto != null ? manualLotto.hashCode() : 0;
-        result = 31 * result + (autoLotto != null ? autoLotto.hashCode() : 0);
-        return result;
+    public static List<Lotto> getPurchaseLottos() {
+        return purchaseLottos;
     }
 }
