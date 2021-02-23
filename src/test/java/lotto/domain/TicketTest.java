@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import lotto.domain.Money;
 import lotto.domain.Ticket;
+import org.eclipse.jetty.util.DateCache.Tick;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,5 +17,16 @@ public class TicketTest {
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining(
                 String.format(Ticket.TICKET_MINIMUM_PRICE_ERROR_MESSAGE, Ticket.TICKET_PRICE));
+    }
+
+    @Test
+    @DisplayName("수동 구매가 가능한지 확인")
+    void validateMaximumManualBuy() {
+        Ticket totalTicket = new Ticket(new Money(14000));
+        assertThatThrownBy(() -> new Ticket(15, totalTicket))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining(
+                String.format(Ticket.MANUAL_BUY_ERROR_MESSAGE, totalTicket.getCount())
+            );
     }
 }
