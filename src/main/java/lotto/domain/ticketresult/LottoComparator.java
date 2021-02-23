@@ -62,7 +62,7 @@ public class LottoComparator {
     }
 
     private void handleFiveMatchType(LottoTicket purchasedOneLottoTicket) {
-        if (purchasedOneLottoTicket.hasBonusNumber(winningLottoNumbers.getBonusNumber())) {
+        if (purchasedOneLottoTicket.hasNumber(winningLottoNumbers.getBonusNumber())) {
             Integer currentMatchedNumbersCount = lottoResult.get(SECOND);
             lottoResult.put(SECOND, currentMatchedNumbersCount + ONE_COUNT);
             return;

@@ -23,8 +23,8 @@ public class LottoTicket {
         return Collections.unmodifiableList(this.numbers);
     }
 
-    public boolean hasBonusNumber(LottoNumber lottoNumber) {
-        return this.numbers.contains(lottoNumber);
+    public boolean hasNumber(LottoNumber number) {
+        return this.numbers.contains(number);
     }
 
     private void validateSize(List<LottoNumber> lottoNumbers) {
