@@ -3,7 +3,7 @@ package lotto.view;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.lotto.LottoTicket;
-import lotto.domain.result.LottoGroup;
+import lotto.domain.result.UsersLottoTickets;
 
 public class TicketsView {
 
@@ -33,10 +33,10 @@ public class TicketsView {
     }
 
 
-    public static void printTickets(LottoGroup lottoGroup) {
-        printLottoTicketCount(lottoGroup.getAutoTicketsSize(), lottoGroup.getManualTicketsSize());
+    public static void printTickets(UsersLottoTickets usersLottoTickets) {
+        printLottoTicketCount(usersLottoTickets.getAutoTicketsSize(), usersLottoTickets.getManualTicketsSize());
 
-        for (LottoTicket lottoTicket : lottoGroup.getTotalTickets()) {
+        for (LottoTicket lottoTicket : usersLottoTickets.getTotalTickets()) {
             printLottoTicket(lottoTicket);
         }
 
