@@ -15,12 +15,12 @@ import lotto.view.OutputView;
 public class LottoController {
 
     public void start() {
-        LottoService lottoService = new LottoService();
-        LottoRepository lottoRepository = new LottoRepository();
+        final LottoService lottoService = new LottoService();
+        final LottoRepository lottoRepository = new LottoRepository();
 
-        Ticket totalTicket = buyTicket();
-        Ticket manualTicket = manualBuyTicket(totalTicket);
-        generateLottoNumbers(manualTicket.getCount(), lottoRepository);
+        final Ticket totalTicket = buyTicket();
+        final Ticket manualTicket = manualBuyTicket(totalTicket);
+        generateManualLottoNumbers(manualTicket.getCount(), lottoRepository);
         printBuyLottoResult(manualTicket.getCount(), totalTicket.getCount(), lottoService, lottoRepository);
 
         RatingInfo ratingInfo = lottoService.scratchLotto(lottoRepository, buyWinningLotto());
@@ -41,7 +41,7 @@ public class LottoController {
         return new Ticket(new Money(money));
     }
 
-    private Ticket manualBuyTicket(Ticket totalTicket) {
+    private Ticket manualBuyTicket(final Ticket totalTicket) {
         try {
             return tryManualBuyTicket(totalTicket);
         } catch (IllegalArgumentException e) {
@@ -50,12 +50,13 @@ public class LottoController {
         }
     }
 
-    private Ticket tryManualBuyTicket(Ticket totalTicket) {
+    private Ticket tryManualBuyTicket(final Ticket totalTicket) {
         int count = InputView.getManualTicketCount();
         return new Ticket(count, totalTicket);
     }
 
-    private void generateLottoNumbers(final int count, final LottoRepository lottoRepository) {
+    private void generateManualLottoNumbers(final int count,
+        final LottoRepository lottoRepository) {
         OutputView.getMessage(InputView.INPUT_MANUAL_BUY_NUMBERS_MESSAGE);
         for (int i = 0; i < count; i++) {
             Lotto lotto = manualBuyLotto();
@@ -98,8 +99,8 @@ public class LottoController {
             lottoService.getLotto(lottoRepository, new RandomLottoMachine(), totalCount));
     }
 
-    private void printWinningStats(RatingInfo ratingInfo, LottoService lottoService,
-        Ticket ticket) {
+    private void printWinningStats(final RatingInfo ratingInfo, final LottoService lottoService,
+        final Ticket ticket) {
         OutputView
             .printWinningStats(ratingInfo,
                 lottoService.calculateEarningRate(ratingInfo, ticket.getPrice()));
