@@ -19,13 +19,18 @@ public class LottoController {
     }
     
     public void run() {
-        seeResults(purchase());
+        final PurchaseCount purchaseCount = askPurchaseCount();
+        final Lottos lottos = sellLottos(purchaseCount);
+        final WinningLotto winningLotto = askWinningLotto();
+        showLottoResults(lottos, winningLotto);
     }
     
-    private Lottos purchase() {
+    private PurchaseCount askPurchaseCount() {
         PaymentAmount paymentAmount = inputView.readPaymentAmount();
-        PurchaseCount purchaseCount = inputView.readPurchaseCount(paymentAmount);
-        
+        return inputView.readPurchaseCount(paymentAmount);
+    }
+    
+    private Lottos sellLottos(PurchaseCount purchaseCount) {
         Lottos manualLottos = inputView.readManualLotto(purchaseCount);
         Lottos automaticLottos = lottoMachine.purchase(purchaseCount);
         Lottos allLottos = Lottos.of(manualLottos, automaticLottos);
@@ -35,13 +40,14 @@ public class LottoController {
         return allLottos;
     }
     
-    private void seeResults(Lottos lottos) {
+    private WinningLotto askWinningLotto() {
         Lotto lotto = inputView.readWinningLotto();
         LottoNumber bonusNumber = inputView.readBonusNumber();
-        
-        WinningLotto winningLotto = WinningLotto.of(lotto, bonusNumber);
+        return WinningLotto.of(lotto, bonusNumber);
+    }
+    
+    private void showLottoResults(Lottos lottos, WinningLotto winningLotto) {
         LottoStatisticResult result = lottoMachine.seeResults(lottos, winningLotto);
-        
         outputView.printStatistic(result);
     }
 }

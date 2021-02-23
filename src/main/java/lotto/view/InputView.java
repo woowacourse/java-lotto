@@ -72,7 +72,6 @@ public class InputView {
         System.out.println(question);
         
         String input = scanner.nextLine();
-        
         if (input == null || input.isEmpty()) {
             throw new IllegalArgumentException();
         }
