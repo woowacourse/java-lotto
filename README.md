@@ -70,5 +70,5 @@
 - [x] 1-45 리스트 Generator 내부에서 생성
 - [x] WinningNumbers validateSize 중복 검증 수정
 - [x] WinningNumbers/WinningResult 에 get 붙은 메소드 이름 고민
-- [ ] Controller 필드에 변수 줄이기 
-- [ ] Ranking 에 보너스 매칭 필드 없애도록 구현 수정 
+- [x] Controller 필드에 변수 줄이기 
+- [x] Ranking 에 보너스 매칭 필드 없애도록 구현 수정 
