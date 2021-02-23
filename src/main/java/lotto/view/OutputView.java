@@ -8,8 +8,8 @@ import java.util.stream.Collectors;
 import static lotto.view.RankMessage.getRankMessages;
 
 public class OutputView {
-	public static final String DEFAULT_STATISTICS_FORMAT = "%d개 일치 (%d원)- ";
-	public static final String STATISTICS_FORMAT_FOR_SECOND = "%d개 일치, 보너스 볼 일치(%d원)- ";
+	public static final String DEFAULT_STATISTICS_FORMAT = "%d개 일치 (%d원)-";
+	public static final String STATISTICS_FORMAT_FOR_SECOND = "%d개 일치, 보너스 볼 일치(%d원)-";
 
 	private OutputView() {
 	}

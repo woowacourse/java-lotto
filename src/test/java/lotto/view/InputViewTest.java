@@ -22,6 +22,11 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 class InputViewTest {
 	private Scanner scanner;
 
+	@AfterEach
+	void closeScanner() {
+		scanner.close();
+	}
+
 	@DisplayName("금액을 받을 때 검증을 잘 해주는지")
 	@ParameterizedTest
 	@MethodSource("provideInputsForMoneyInputTest")
@@ -89,10 +94,5 @@ class InputViewTest {
 
 	private InputStream generateUserInput(String input) {
 		return new ByteArrayInputStream(input.getBytes());
-	}
-
-	@AfterEach
-	void closeScanner() {
-		scanner.close();
 	}
 }
