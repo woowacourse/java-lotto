@@ -69,7 +69,7 @@ public class LottoCountTest {
         Money purchaseMoney = new Money("14000");
         LottoCount lottoCount = new LottoCount(purchaseMoney);
         LottoCount manualLottoCount = new LottoCount("3");
-        LottoCount remainCount = lottoCount.purchaseManualTicket(manualLottoCount);
+        LottoCount remainCount = lottoCount.consumeTicket(manualLottoCount);
         assertThat(remainCount).isEqualTo(new LottoCount("11"));
     }
 }

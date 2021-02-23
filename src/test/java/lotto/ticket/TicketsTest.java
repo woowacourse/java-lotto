@@ -44,7 +44,7 @@ public class TicketsTest {
         Money purchaseMoney = new Money("14000");
         LottoCount lottoCount = new LottoCount(purchaseMoney);
         LottoCount manualLottoCount = new LottoCount("3");
-        LottoCount remainCount = lottoCount.purchaseManualTicket(manualLottoCount);
+        LottoCount remainCount = lottoCount.consumeTicket(manualLottoCount);
         List<Ticket> ticketList = new ArrayList<>();
         while (remainCount.isGreaterThanZero()) {
             remainCount = remainCount.decreaseOne();

@@ -33,7 +33,7 @@ public class LottoCount {
         TicketValidation.validateAmount(lottoCount, count);
     }
 
-    public LottoCount purchaseManualTicket(LottoCount count) {
+    public LottoCount consumeTicket(LottoCount count) {
         TicketValidation.validateAmount(lottoCount, count);
         return count.remainCount(lottoCount);
     }
