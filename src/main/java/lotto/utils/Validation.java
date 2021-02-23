@@ -2,7 +2,6 @@ package lotto.utils;
 
 public class Validation {
 
-
     public static Boolean isNumeric(String value) {
         try {
             Integer.parseInt(value);
@@ -11,5 +10,4 @@ public class Validation {
         }
         return true;
     }
-
 }
