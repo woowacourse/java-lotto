@@ -14,7 +14,7 @@ public class LottoStatistics {
     public LottoStatistics(List<Rank> ranks, Money money) {
         initializeEmptyStatistics();
         aggregateStatisticsAccordingTo(ranks);
-        this.moneyInvested = money.getMoneyActuallyInvested();
+        this.moneyInvested = money;
     }
 
     private void initializeEmptyStatistics() {

@@ -35,14 +35,14 @@ public class Money {
     }
 
     private boolean isAffordableToBuy(LottoQuantity lottoQuantity) {
-        return 0 <= calculateChange(lottoQuantity);
+        return 0 <= calculateChangeAfterBuying(lottoQuantity);
     }
 
     public Money getChangeAfterBuying(LottoQuantity lottoQuantity) {
-        return new Money(calculateChange(lottoQuantity));
+        return new Money(calculateChangeAfterBuying(lottoQuantity));
     }
 
-    private long calculateChange(LottoQuantity lottoQuantity) {
+    private long calculateChangeAfterBuying(LottoQuantity lottoQuantity) {
         return money - lottoQuantity.getTotalPrice();
     }
 

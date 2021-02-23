@@ -5,6 +5,8 @@ import java.util.Objects;
 import static lotto.domain.Money.LOTTO_PRICE;
 
 public class LottoQuantity {
+	public static final String NEGATIVE_LOTTO_QUANTITY_ERROR = "로또 수량은 0 이상만 가능합니다.";
+
 	private final int lottoQuantity;
 
 	public LottoQuantity(int lottoQuantity) {
@@ -14,7 +16,7 @@ public class LottoQuantity {
 
 	private void validateNonNegativityOf(int lottoQuantity) {
 		if (lottoQuantity < 0) {
-			throw new IllegalArgumentException("로또 수량은 0 이상만 가능합니다.");
+			throw new IllegalArgumentException(NEGATIVE_LOTTO_QUANTITY_ERROR);
 		}
 	}
 
