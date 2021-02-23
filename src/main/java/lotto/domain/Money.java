@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static lotto.utils.Validation.isNumeric;
+
 public class Money {
 
     private final int value;
@@ -29,12 +31,4 @@ public class Money {
         return value;
     }
 
-    private Boolean isNumeric(String value) {
-        try {
-            Integer.parseInt(value);
-        } catch (NumberFormatException numberFormatException) {
-            return false;
-        }
-        return true;
-    }
 }
