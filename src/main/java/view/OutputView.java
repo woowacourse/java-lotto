@@ -39,7 +39,7 @@ public class OutputView {
 
     public static void printLottoBought(final LottoBundle lottoBundle) {
         printNumberOfLottoBought(lottoBundle);
-        for(Lotto lotto : lottoBundle.getLottoBundle()) {
+        for (Lotto lotto : lottoBundle.getLottoBundle()) {
             printSingleLottoBought(lotto);
         }
         printNewLine();

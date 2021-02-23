@@ -30,7 +30,7 @@ public class LottoBundleTest {
                 makeProperLotto(),
                 makeProperLotto(),
                 makeProperLotto()
-                ));
+        ));
         assertThat(lottoBundle.countNumberOfLotto()).isEqualTo(3);
     }
 
@@ -41,5 +41,4 @@ public class LottoBundleTest {
         }
         return new Lotto(lotto);
     }
-
 }

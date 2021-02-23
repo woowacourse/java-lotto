@@ -40,6 +40,6 @@ public class LottoResult {
             moneyGain += gameResult.get(lottoRank) * lottoRank.getPrizeMoney();
         }
 
-        return ((double)moneyGain / (double)moneySpent);
+        return ((double) moneyGain / (double) moneySpent);
     }
 }

@@ -74,6 +74,6 @@ public class LottoResultTest {
 
         final int moneyGain = LottoRank.FIVE_AND_BONUS_MATCHES.getPrizeMoney() + LottoRank.FIVE_MATCHES.getPrizeMoney();
         final int moneySpent = 2000;
-        assertThat(profitRate).isEqualTo((double)moneyGain/(double)moneySpent);
+        assertThat(profitRate).isEqualTo((double) moneyGain / (double) moneySpent);
     }
 }

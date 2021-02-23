@@ -1,7 +1,7 @@
 package domain;
 
-import domain.money.GameMoney;
 import domain.lotto.LottoBundle;
+import domain.money.GameMoney;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,7 +12,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 public class GameMoneyTest {
-
     @DisplayName("GameMoney 정상 생성 테스트")
     @Test
     void GameMoneyConstructorTest() {

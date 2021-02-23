@@ -7,16 +7,16 @@ public class LottoBall {
 
     private static final LottoBall[] lottoBalls = new LottoBall[MAX_NUMBER + ARRAY_EXTRA_INDEX];
 
-    private final int number;
-
-    private LottoBall(final int number) {
-        this.number = number;
-    }
-
     static {
         for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
             lottoBalls[i] = new LottoBall(i);
         }
+    }
+
+    private final int number;
+
+    private LottoBall(final int number) {
+        this.number = number;
     }
 
     public static LottoBall valueOf(final int number) {

@@ -11,7 +11,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class LottoTest {
-
     @DisplayName("로또가 정상적으로 생성되는지 테스트")
     @Test
     void LottoConstructorTest() {
@@ -51,5 +50,4 @@ public class LottoTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 번호가 중복됩니다");
     }
-
 }

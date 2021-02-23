@@ -11,7 +11,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 public class LottoBallTest {
-
     @DisplayName("LottoBall 생성 테스트")
     @Test
     void LottoBallConstructorTest() {

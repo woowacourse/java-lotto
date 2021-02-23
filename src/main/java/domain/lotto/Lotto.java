@@ -26,7 +26,7 @@ public class Lotto {
     }
 
     private void validateDuplicate(final List<LottoBall> lotto) {
-        final int lottoSizeWithoutDuplicate = (int)lotto.stream().distinct().count();
+        final int lottoSizeWithoutDuplicate = (int) lotto.stream().distinct().count();
 
         if (lotto.size() != lottoSizeWithoutDuplicate) {
             throw new IllegalArgumentException("로또 번호가 중복됩니다");
