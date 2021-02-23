@@ -8,12 +8,12 @@ import java.util.Arrays;
 import java.util.List;
 import lotto.domain.lotto.LottoLine;
 import lotto.domain.lotto.LottoNumber;
-import lotto.domain.lotto.WinningLottoLine;
+import lotto.domain.lotto.WinningLotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class WinningLottoLineTest {
+public class WinningLottoTest {
 
     LottoLine lottoLine;
     private List<LottoNumber> lottoNumbers;
@@ -25,22 +25,22 @@ public class WinningLottoLineTest {
             new LottoNumber(3), new LottoNumber(4),
             new LottoNumber(5), new LottoNumber(6)
         );
-        lottoLine = new LottoLine(lottoNumbers);
+        lottoLine = new LottoLine(lottoNumbers, true);
     }
 
     @Test
     @DisplayName("로또 번호 매칭과 보너스 볼 매칭이 올바르게 동작한다.")
     void testCreateWinningLottoLine() {
         LottoNumber bonusLottoNumber = new LottoNumber(13);
-        WinningLottoLine winningLottoLine = new WinningLottoLine(lottoLine, bonusLottoNumber);
+        WinningLotto winningLotto = new WinningLotto(lottoLine, bonusLottoNumber);
         List<LottoNumber> lottoNumbers = Arrays.asList(
             new LottoNumber(1), new LottoNumber(2),
             new LottoNumber(3), new LottoNumber(11),
             new LottoNumber(12), new LottoNumber(13)
         );
 
-        assertThat(winningLottoLine.getLottoNumberMatchCount(lottoNumbers)).isEqualTo(3);
-        assertThat(winningLottoLine.isContainBonusLottoNumber(lottoNumbers)).isEqualTo(true);
+        assertThat(winningLotto.getLottoNumberMatchCount(lottoNumbers)).isEqualTo(3);
+        assertThat(winningLotto.isContainBonusLottoNumber(lottoNumbers)).isEqualTo(true);
     }
 
     @Test
@@ -48,7 +48,7 @@ public class WinningLottoLineTest {
     void testCreateWinningLottoLineException() {
         for (int i = 0; i < 6; i++) {
             LottoNumber bonusLottoNumber = new LottoNumber(i + 1);
-            assertThatThrownBy(() -> new WinningLottoLine(lottoLine, bonusLottoNumber))
+            assertThatThrownBy(() -> new WinningLotto(lottoLine, bonusLottoNumber))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(
                     LOTTO_LINE_NUMBER_BONUS_LOTTO_NUMBER_DUPLICATE_ERROR.getMessage());

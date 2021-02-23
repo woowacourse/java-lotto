@@ -4,12 +4,12 @@ import static lotto.view.messages.ErrorMessages.LOTTO_LINE_NUMBER_BONUS_LOTTO_NU
 
 import java.util.List;
 
-public class WinningLottoLine {
+public class WinningLotto {
 
     private final LottoLine winningLottoLine;
     private final LottoNumber bonusLottoNumber;
 
-    public WinningLottoLine(LottoLine winningLottoLine, LottoNumber bonusLottoNumber) {
+    public WinningLotto(LottoLine winningLottoLine, LottoNumber bonusLottoNumber) {
         if (winningLottoLine.hasLottoNumber(bonusLottoNumber)) {
             throw new IllegalArgumentException(
                 LOTTO_LINE_NUMBER_BONUS_LOTTO_NUMBER_DUPLICATE_ERROR.getMessage());
