@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class OutputView {
-    private static final String PURCHASE_LOTTO_MESSAGE = "%d개를 구매했습니다.\n";
+    private static final String PURCHASE_LOTTO_MESSAGE = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     private static final String RESULT_MESSAGE = "당첨 통계";
     private static final String HYPHENS = "---------";
     private static final String LOTTO_STATISTICS_MESSAGE = "%d개 일치 (%d원)- %d개\n";
@@ -20,8 +20,8 @@ public class OutputView {
 
     private OutputView() {}
 
-    public static void printLottoCountMessage(int lottoCounts) {
-        System.out.printf(PURCHASE_LOTTO_MESSAGE, lottoCounts);
+    public static void printLottoCountMessage(PurchasingCount purchasingCount) {
+        System.out.printf(PURCHASE_LOTTO_MESSAGE, purchasingCount.getManualTicketCounts(), purchasingCount.getAutoTicketCounts());
     }
 
     public static void printLottoTicketNumbers(LottoTickets lottoTickets) {
