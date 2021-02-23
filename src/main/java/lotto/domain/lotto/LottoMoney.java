@@ -1,6 +1,8 @@
 package lotto.domain.lotto;
 
 
+import lotto.domain.PurchaseCount;
+
 public class LottoMoney {
 
     public static final int LOTTO_LINE_PRICE = 1000;
@@ -18,8 +20,8 @@ public class LottoMoney {
         return value;
     }
 
-    public LottoMoney spendLottoLine(int lottoLineCount) {
-        return new LottoMoney( value - lottoLineCount * LOTTO_LINE_PRICE);
+    public LottoMoney spendLottoLine(PurchaseCount purchaseCount) {
+        return new LottoMoney(value - purchaseCount.getValue() * LOTTO_LINE_PRICE);
     }
 
 }
