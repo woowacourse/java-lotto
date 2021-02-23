@@ -23,7 +23,7 @@ public class Result {
 
     public BigDecimal findEarningsRate(BettingMoney bettingMoney) {
         int prize = results.keySet().stream()
-                .mapToInt(lottoRank -> lottoRank.getPrize() * results.get(lottoRank))
+                .mapToInt(this::getTotalPrize)
                 .sum();
         return bettingMoney.getEarningRate(prize);
     }
@@ -41,5 +41,9 @@ public class Result {
     private void putResult(final LottoRank lottoRank) {
         results.computeIfPresent(lottoRank, (key, value) -> value + 1);
         results.putIfAbsent(lottoRank, 1);
+    }
+
+    private int getTotalPrize(LottoRank lottoRank) {
+        return lottoRank.getPrize() * results.get(lottoRank);
     }
 }

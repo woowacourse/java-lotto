@@ -64,7 +64,9 @@
 - [x] 출력 메시지 동일하게 수정 - cc77469
 - [x] HashMap 메소드 사용해서 코드 줄이기 - e1767fc
 - [x] 정적 메소드 팩토리 제거 - 9416592
-- [x]
+- [x] 네이밍 변경,  하드코딩 한 값 변경 - 46992ad
+- [x] LottoRank 테스트 코드 추가 - 46992ad
+- [x] Stream.forEach()를 Collections.forEach()로 변환
 
 ## 프로그래밍 요구사항
 - indent(인덴트, 들여쓰기) depth를 2단계에서 1단계로 줄여라.

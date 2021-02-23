@@ -32,8 +32,7 @@ public class LottoGameScreen {
     }
 
     public void showAllLottoStatus(final List<LottoTicket> lottoTickets) {
-        lottoTickets.stream()
-                .forEach(lottoTicket -> showTicketStatus(lottoTicket));
+        lottoTickets.forEach(lottoTicket -> showTicketStatus(lottoTicket));
     }
 
     public void confirmWinningLotto() {
