@@ -26,7 +26,7 @@ public enum Ranking {
 
     public static Ranking select(int matching, boolean bonusMatching) {
         final Stream<Ranking> rankingStream = Arrays.stream(Ranking.values())
-                .filter(ranking -> Objects.equals(matching, ranking.matching));
+            .filter(ranking -> Objects.equals(matching, ranking.matching));
         if (matching >= BONUS_CONSIDER_LIMIT) {
             return considerBonus(bonusMatching, rankingStream);
         }
@@ -35,15 +35,15 @@ public enum Ranking {
 
     private static Ranking notConsiderBonus(Stream<Ranking> rankingStream) {
         return rankingStream
-                .findFirst()
-                .orElse(NOTHING);
+            .findFirst()
+            .orElse(NOTHING);
     }
 
     private static Ranking considerBonus(boolean bonusMatching, Stream<Ranking> rankingStream) {
         return rankingStream
-                .filter(ranking -> Objects.equals(bonusMatching, ranking.bonusMatching))
-                .findFirst()
-                .orElse(NOTHING);
+            .filter(ranking -> Objects.equals(bonusMatching, ranking.bonusMatching))
+            .findFirst()
+            .orElse(NOTHING);
     }
 
     public int getMoney() {

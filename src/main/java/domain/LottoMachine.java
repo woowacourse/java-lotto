@@ -7,10 +7,11 @@ import java.util.stream.Stream;
 
 public class LottoMachine {
 
-    private final static int MIN_LOTTO_NUMBER = 1;
-    private final static int MAX_LOTTO_NUMBER = 45;
+    private static final int MIN_LOTTO_NUMBER = 1;
+    private static final int MAX_LOTTO_NUMBER = 45;
 
-    private LottoMachine() {}
+    private LottoMachine() {
+    }
 
     public static List<LottoTicket> generateLottoTickets(Price price) {
         final int lottoTicketQuantity = price.getNumberOfTickets();

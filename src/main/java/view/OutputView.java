@@ -3,6 +3,7 @@ package view;
 import domain.LottoNumber;
 import domain.LottoTicket;
 import domain.Ranking;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,9 +31,9 @@ public class OutputView {
 
     private static String printLottoNumbers(final LottoTicket lottoTicket) {
         String numbers = lottoTicket.toSet().stream()
-                .map(LottoNumber::getValue)
-                .map(String::valueOf)
-                .collect(Collectors.joining(COMMA));
+            .map(LottoNumber::getValue)
+            .map(String::valueOf)
+            .collect(Collectors.joining(COMMA));
         return LEFT_BRACKET + numbers + RIGHT_BRACKET;
     }
 
@@ -42,15 +43,15 @@ public class OutputView {
     }
 
     public static void printIndividualRankResult(final int countNumberOfRank,
-            final Ranking ranking) {
+                                                 final Ranking ranking) {
         String bonusMessage = EMPTY_STRING;
         if (ranking == Ranking.SECOND) {
             bonusMessage = BONUS_BALL_FORMAT;
         }
 
         String print = String
-                .format(RANK_RESULT_FORMAT, ranking.getMatching(), bonusMessage, ranking.getMoney(),
-                        countNumberOfRank);
+            .format(RANK_RESULT_FORMAT, ranking.getMatching(), bonusMessage, ranking.getMoney(),
+                countNumberOfRank);
         System.out.println(print);
     }
 

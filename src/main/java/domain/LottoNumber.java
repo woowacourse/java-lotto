@@ -1,6 +1,8 @@
 package domain;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 public class LottoNumber {
 
@@ -23,7 +25,7 @@ public class LottoNumber {
     }
 
     private static LottoNumber getInstance(int value) {
-       return existingNumbers.stream()
+        return existingNumbers.stream()
             .filter(number -> number.getValue() == value)
             .findAny()
             .orElse(new LottoNumber(value));

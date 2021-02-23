@@ -10,7 +10,7 @@ public class RandomLottoNumberGenerator {
         Collections.shuffle(numberBox);
 
         return numberBox.stream()
-                .limit(LottoTicket.LOTTO_TICKET_SIZE)
-                .collect(Collectors.toList());
+            .limit(LottoTicket.LOTTO_TICKET_SIZE)
+            .collect(Collectors.toList());
     }
 }

@@ -57,9 +57,9 @@ public class InputView {
     private static List<Integer> createNumbers(final String userInput) {
         try {
             return Arrays.stream(userInput.split(","))
-                    .map(String::trim)
-                    .map(Integer::new)
-                    .collect(Collectors.toList());
+                .map(String::trim)
+                .map(Integer::new)
+                .collect(Collectors.toList());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(NOT_INT_ERROR);
         }

@@ -8,15 +8,15 @@ public class WinningResult {
     private final List<Ranking> rankings;
 
     public WinningResult(WinningNumbers winningNumbers, List<LottoTicket> lottoTickets,
-            Price price) {
+                         Price price) {
         this.rankings = winningNumbers.getRankings(lottoTickets);
         this.price = price;
     }
 
     public int countNumberOfRank(final Ranking ranking) {
         return (int) rankings.stream()
-                .filter(current -> current == ranking)
-                .count();
+            .filter(current -> current == ranking)
+            .count();
     }
 
     public double getProfitRate() {
@@ -25,7 +25,7 @@ public class WinningResult {
 
     private int getTotalProfit() {
         return rankings.stream()
-                .mapToInt(Ranking::getMoney)
-                .sum();
+            .mapToInt(Ranking::getMoney)
+            .sum();
     }
 }

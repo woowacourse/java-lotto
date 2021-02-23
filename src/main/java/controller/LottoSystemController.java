@@ -4,9 +4,10 @@ import domain.LottoSystem;
 import domain.Ranking;
 import domain.WinningNumbers;
 import domain.WinningResult;
-import java.util.Arrays;
 import view.InputView;
 import view.OutputView;
+
+import java.util.Arrays;
 
 public class LottoSystemController {
 
@@ -28,19 +29,19 @@ public class LottoSystemController {
 
     private void decideWinningNumbers() {
         winningResult = lottoSystem.getWinningResult(
-                WinningNumbers.valueOf(
-                        InputView.receiveWinningNumbers(),
-                        InputView.receiveBonusNumber()
-                ));
+            WinningNumbers.valueOf(
+                InputView.receiveWinningNumbers(),
+                InputView.receiveBonusNumber()
+            ));
     }
 
     private void calculateResult() {
         OutputView.printRankResultTitle();
         Arrays.stream(Ranking.values())
-                .filter(ranking -> ranking != Ranking.NOTHING)
-                        .forEach(ranking -> OutputView.printIndividualRankResult(
-                                winningResult.countNumberOfRank(ranking),
-                                ranking));
+            .filter(ranking -> ranking != Ranking.NOTHING)
+            .forEach(ranking -> OutputView.printIndividualRankResult(
+                winningResult.countNumberOfRank(ranking),
+                ranking));
 
         OutputView.printTotalProfitRate(winningResult.getProfitRate());
     }
