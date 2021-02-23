@@ -33,19 +33,15 @@ public class LottoResult {
     }
 
     public void applyOneTicketResult(LottoTicket lottoTicket) {
-        MatchedLottoNumbers matchedLottoNumbers = winningLottoNumbers
-            .getMatchedLottoNumbers(lottoTicket);
-        if (matchedLottoNumbers.getSizeOfNumbersNotIncludingBonusNumber()
-            < MIN_MATCH_NUMBER_COUNT_TO_GET_PRIZE) {
+        MatchedLottoNumbers matchedLottoNumbers
+            = winningLottoNumbers.getMatchedLottoNumbers(lottoTicket);
+        if (matchedLottoNumbers.size() < MIN_MATCH_NUMBER_COUNT_TO_GET_PRIZE) {
             return;
         }
-        increaseOneCountOfLottoMatchType(matchedLottoNumbers);
+        increaseOneCountOfLottoMatchType(matchedLottoNumbers.getMatchType());
     }
 
-    private void increaseOneCountOfLottoMatchType(
-        MatchedLottoNumbers matchedLottoNumbersToGetPrize) {
-        LottoMatchType lottoMatchType
-            = LottoMatchType.getLottoMatchType(matchedLottoNumbersToGetPrize);
+    private void increaseOneCountOfLottoMatchType(LottoMatchType lottoMatchType) {
         resultCounts
             .computeIfPresent(lottoMatchType, (LottoMatchType key, Integer value) -> ++value);
     }

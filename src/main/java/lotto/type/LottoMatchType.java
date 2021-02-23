@@ -37,31 +37,4 @@ public enum LottoMatchType {
     public String getMatchCountMessage() {
         return matchCountMessage;
     }
-
-    public static LottoMatchType getLottoMatchType(
-        MatchedLottoNumbers matchedLottoNumbersToGetPrize) {
-        if (matchedLottoNumbersToGetPrize.getSizeOfNumbersNotIncludingBonusNumber()
-            != FIVE_MATCH.getCountOfMatchedNumbersNotIncludingBonusNumber()) {
-            return getLottoMatchTypeNotFiveNumbersMatched(matchedLottoNumbersToGetPrize);
-        }
-        return getLottoMatchTypeFiveNumbersMatched(matchedLottoNumbersToGetPrize);
-    }
-
-    private static LottoMatchType getLottoMatchTypeNotFiveNumbersMatched(
-        MatchedLottoNumbers matchedLottoNumbers) {
-        return Arrays.stream(LottoMatchType.values())
-            .filter(lottoMatchType ->
-                lottoMatchType.getCountOfMatchedNumbersNotIncludingBonusNumber()
-                    == matchedLottoNumbers.getSizeOfNumbersNotIncludingBonusNumber())
-            .findAny()
-            .orElseThrow(IllegalArgumentException::new);
-    }
-
-    private static LottoMatchType getLottoMatchTypeFiveNumbersMatched(
-        MatchedLottoNumbers matchedLottoNumbers) {
-        if (matchedLottoNumbers.isContainsBonusNumber()) {
-            return FIVE_AND_BONUS_MATCH;
-        }
-        return FIVE_MATCH;
-    }
 }

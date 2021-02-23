@@ -17,7 +17,7 @@ public class LottoMatchTypeTest {
     @DisplayName("일치하는 번호가 3개일 때 THREE_MATCH 반환")
     @Test
     void Should_Return_THREE_MATCH_When_ThreeNumbersMatched() {
-        MatchedLottoNumbers matchedLottoNumbersToGetPrize = new MatchedLottoNumbers(
+        MatchedLottoNumbers matchedLottoNumbersGettingMoney = new MatchedLottoNumbers(
             Arrays.asList(
                 new LottoNumber(1),
                 new LottoNumber(2),
@@ -26,14 +26,14 @@ public class LottoMatchTypeTest {
             null
         );
 
-        assertThat(LottoMatchType.getLottoMatchType(matchedLottoNumbersToGetPrize))
+        assertThat(matchedLottoNumbersGettingMoney.getMatchType())
             .isEqualTo(THREE_MATCH);
     }
 
     @DisplayName("일치하는 번호가 4개일 때 FOUR_MATCH 반환")
     @Test
     void Should_Return_FOUR_MATCH_When_FourNumbersMatched() {
-        MatchedLottoNumbers matchedLottoNumbersToGetPrize = new MatchedLottoNumbers(
+        MatchedLottoNumbers matchedLottoNumbersGettingMoney = new MatchedLottoNumbers(
             Arrays.asList(
                 new LottoNumber(1),
                 new LottoNumber(2),
@@ -43,14 +43,14 @@ public class LottoMatchTypeTest {
             new LottoNumber(5)
         );
 
-        assertThat(LottoMatchType.getLottoMatchType(matchedLottoNumbersToGetPrize))
+        assertThat(matchedLottoNumbersGettingMoney.getMatchType())
             .isEqualTo(FOUR_MATCH);
     }
 
     @DisplayName("일치하는 번호가 5개일 때 FIVE_MATCH 반환")
     @Test
     void Should_Return_FIVE_MATCH_When_FiveNumbersMatched() {
-        MatchedLottoNumbers matchedLottoNumbersToGetPrize = new MatchedLottoNumbers(
+        MatchedLottoNumbers matchedLottoNumbersGettingMoney = new MatchedLottoNumbers(
             Arrays.asList(
                 new LottoNumber(1),
                 new LottoNumber(2),
@@ -61,14 +61,14 @@ public class LottoMatchTypeTest {
             null
         );
 
-        assertThat(LottoMatchType.getLottoMatchType(matchedLottoNumbersToGetPrize))
+        assertThat(matchedLottoNumbersGettingMoney.getMatchType())
             .isEqualTo(FIVE_MATCH);
     }
 
     @DisplayName("5개의 일반 번호와 보너스 번호가 일치할 때 FIVE_AND_BONUS_MATCH 반환")
     @Test
     void Should_Return_FIVE_AND_BONUS_MATCH_When_FiveNumbersBonusNumberMatched() {
-        MatchedLottoNumbers matchedLottoNumbersToGetPrize = new MatchedLottoNumbers(
+        MatchedLottoNumbers matchedLottoNumbersGettingMoney = new MatchedLottoNumbers(
             Arrays.asList(
                 new LottoNumber(1),
                 new LottoNumber(2),
@@ -79,14 +79,14 @@ public class LottoMatchTypeTest {
             new LottoNumber(7)
         );
 
-        assertThat(LottoMatchType.getLottoMatchType(matchedLottoNumbersToGetPrize))
+        assertThat(matchedLottoNumbersGettingMoney.getMatchType())
             .isEqualTo(FIVE_AND_BONUS_MATCH);
     }
 
     @DisplayName("일치하는 번호가 6개일 때 SIX_MATCH 반환")
     @Test
     void Should_Return_SIX_MATCH_When_SixNumbersMatched() {
-        MatchedLottoNumbers matchedLottoNumbersToGetPrize = new MatchedLottoNumbers(
+        MatchedLottoNumbers matchedLottoNumbersGettingMoney = new MatchedLottoNumbers(
             Arrays.asList(
                 new LottoNumber(1),
                 new LottoNumber(2),
@@ -98,7 +98,7 @@ public class LottoMatchTypeTest {
             null
         );
 
-        assertThat(LottoMatchType.getLottoMatchType(matchedLottoNumbersToGetPrize))
+        assertThat(matchedLottoNumbersGettingMoney.getMatchType())
             .isEqualTo(SIX_MATCH);
     }
 }
