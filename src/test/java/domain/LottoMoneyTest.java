@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static domain.LottoMoney.SINGLE_LOTTO_PRICE;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 
@@ -67,7 +68,15 @@ class LottoMoneyTest {
     @Test
     void equals() {
         final LottoMoney lottoMoney = new LottoMoney("1000");
-        Assertions.assertThat(lottoMoney)
+        assertThat(lottoMoney)
                 .isEqualTo(new LottoMoney("1000"));
+    }
+
+    @DisplayName("로또 머니를 로또 티켓 수로 변환")
+    @Test
+    void toTicketQuantity() {
+        final LottoMoney lottoMoney = new LottoMoney("14000");
+        assertThat(lottoMoney.toTicketQuantity())
+                .isEqualTo(14);
     }
 }
