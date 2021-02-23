@@ -25,10 +25,13 @@ public class LottoController {
 
     public void run() {
         final Payment payment = new Payment(ParseUtils.parseInt(InputView.getInputMoney()));
-        final SelfLottoCount selfLottoCount = new SelfLottoCount(payment.count(), ParseUtils.parseInt(InputView.getBuySelfLottoCount()));
+        final SelfLottoCount selfLottoCount = new SelfLottoCount(payment.count(),
+            ParseUtils.parseInt(InputView.getBuySelfLottoCount()));
         final List<List<Integer>> selfLottoTickets = buySelfLottoTickets(selfLottoCount);
         final LottoTickets lottoTickets = new LottoTickets(payment.count(), selfLottoTickets);
-        OutputView.printBuyLottoCountMessage(selfLottoCount.getSelfCount(), payment.count() - selfLottoCount.getSelfCount());
+        OutputView.printBuyLottoCountMessage(
+            selfLottoCount.getSelfCount(), payment.count() - selfLottoCount.getSelfCount()
+        );
         showLottoTickets(lottoTickets);
         final WinningLotto winningLotto = createWinningLotto();
         callResultMessage(payment, lottoTickets, winningLotto);
