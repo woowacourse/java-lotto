@@ -1,7 +1,7 @@
 package lottogame.domain.machine;
 
 import lottogame.domain.Money;
-import lottogame.domain.ticket.LottoTicket;
+import lottogame.domain.ticket.LottoAutoTicket;
 import lottogame.domain.ticket.LottoTickets;
 
 public class LottoTicketMachine {
@@ -12,7 +12,7 @@ public class LottoTicketMachine {
         LottoTickets lottoTickets = new LottoTickets();
 
         while (money.isCanBuy(TICKET_PRICE)) {
-            lottoTickets.add(new LottoTicket());
+            lottoTickets.add(new LottoAutoTicket());
             money.use(TICKET_PRICE);
         }
         return lottoTickets;

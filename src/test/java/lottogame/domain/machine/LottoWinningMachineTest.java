@@ -2,6 +2,7 @@ package lottogame.domain.machine;
 
 import lottogame.domain.number.LottoNumber;
 import lottogame.domain.number.LottoNumbers;
+import lottogame.domain.ticket.LottoAutoTicket;
 import lottogame.domain.ticket.LottoTicket;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -32,7 +33,7 @@ public class LottoWinningMachineTest {
     @Test
     @DisplayName("로또 당첨 번호와 티켓 번호 비교 결과가 올바르면 통과한다")
     void validMatchResult() {
-        LottoTicket lottoTicket = new LottoTicket() {
+        LottoTicket lottoTicket = new LottoAutoTicket() {
             @Override
             public List<LottoNumber> getLottoNumbers() {
                 List<LottoNumber> lottoNumberGroup = new ArrayList<>();
@@ -51,7 +52,7 @@ public class LottoWinningMachineTest {
     @Test
     @DisplayName("보너스 번호가 일치할 경우 통과한다")
     void checkBonusLottoNumber() {
-        LottoTicket lottoTicket = new LottoTicket() {
+        LottoTicket lottoTicket = new LottoAutoTicket() {
             @Override
             public List<LottoNumber> getLottoNumbers() {
                 List<LottoNumber> lottoNumberGroup = new ArrayList<>();
