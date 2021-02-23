@@ -4,20 +4,35 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoController {
     public void run() {
         Money money = new Money(InputView.inputMoney());
-        LottoTickets lottoTickets = getLottoTickets(money);
+        ManualLottoAmount manualLottoAmount = new ManualLottoAmount(InputView.inputManualLottoAmount(), money.getPurchasableLottoCount());
+        LottoTickets lottoTickets = getLottoTickets(money, manualLottoAmount);
         LottoTicket winningTicket = getWinningTicket(lottoTickets);
         LottoResult lottoResult = getLottoResult(lottoTickets, winningTicket);
         showResult(lottoResult, money);
     }
 
-    private LottoTickets getLottoTickets(Money money) {
+    private LottoTickets getLottoTickets(Money money, ManualLottoAmount manualLottoAmount) {
         LottoTicketFactory lottoTicketFactory = new LottoTicketFactory();
-        return new LottoTickets(lottoTicketFactory.buyLottoTickets(money));
+        List<LottoTicket> manualTickets = getManualLottoTickets(manualLottoAmount);
+        return new LottoTickets(lottoTicketFactory.buyLottoTicketsIncludingManualTickets(money, manualTickets));
+    }
+
+    private List<LottoTicket> getManualLottoTickets(ManualLottoAmount manualLottoAmount) {
+        // TODO : 안내 메세지 출력
+        List<LottoTicket> manualLottoTickets = new ArrayList<>();
+        LottoTicketFactory lottoTicketFactory = new LottoTicketFactory();
+        for (int i = 0; i < manualLottoAmount.getValue(); i++) {
+            manualLottoTickets.add(new LottoTicket(
+                    lottoTicketFactory.createManualLottoTicket(InputView.inputLottoNumbers())));
+        }
+        return manualLottoTickets;
     }
 
     private LottoTicket getWinningTicket(LottoTickets lottoTickets) {

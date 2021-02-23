@@ -20,6 +20,10 @@ public class InputView {
 
     public static List<String> inputWinningNumbers() {
         OutputView.printInputWinningNumbers();
+        return inputLottoNumbers();
+    }
+
+    public static List<String> inputLottoNumbers() {
         return Arrays.asList(SCANNER.nextLine()
                 .replace(BLANK, REPLACEMENT)
                 .split(DELIMITER));
@@ -27,6 +31,11 @@ public class InputView {
 
     public static String inputBonusNumber() {
         OutputView.printInputBonusNumberMessage();
+        return SCANNER.nextLine();
+    }
+
+    public static String inputManualLottoAmount() {
+        //TODO : 안내메세지 출력.
         return SCANNER.nextLine();
     }
 }

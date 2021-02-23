@@ -9,7 +9,6 @@ import java.util.stream.IntStream;
 public class LottoTicketFactory {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
-    private static final int LOTTO_PRICE = 1000;
     private static final int START_INDEX = 0;
     private static final int LOTTO_TICKET_SIZE = 6;
 
@@ -26,16 +25,6 @@ public class LottoTicketFactory {
 
         int autoCreateCount = money.getPurchasableLottoCount() - manualTickets.size();
         for (int i = 0; i < autoCreateCount; i++) {
-            lottoTickets.add(new LottoTicket(createAutoLottoTicket()));
-        }
-        return lottoTickets;
-    }
-
-    public List<LottoTicket> buyLottoTickets(Money money) {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-
-        int length = (int) money.getValue() / LOTTO_PRICE;
-        for (int i = 0; i < length; i++) {
             lottoTickets.add(new LottoTicket(createAutoLottoTicket()));
         }
         return lottoTickets;

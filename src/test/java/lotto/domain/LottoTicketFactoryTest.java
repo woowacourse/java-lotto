@@ -18,12 +18,6 @@ public class LottoTicketFactoryTest {
         lottoTicketFactory = new LottoTicketFactory();
     }
 
-    @Test
-    @DisplayName("입력받은 금액만큼 자동티켓 생성")
-    void createLottoTickets() {
-        assertThat(lottoTicketFactory.buyLottoTickets(new Money(10000)).size()).isEqualTo(10);
-    }
-
     @DisplayName("수동로또 생성")
     @Test
     void createManualLottoTickets() {
