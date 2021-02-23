@@ -1,42 +1,33 @@
 package lotto.domain.rating;
 
 import java.util.Arrays;
-import java.util.NoSuchElementException;
 
 public enum Rating {
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 30_000_000),
-    THIRD(5, 1_500_000),
-    FOURTH(4, 50_000),
-    FIFTH(3, 5_000),
-    MISS(0, 0);
+    FIRST(new RatingResult(6, false), 2_000_000_000),
+    SECOND(new RatingResult(5, true), 30_000_000),
+    THIRD(new RatingResult(5, false), 1_500_000),
+    FOURTH(new RatingResult(4, false), 50_000),
+    FIFTH(new RatingResult(3, false), 5_000),
+    MISS(new RatingResult(0, false), 0);
 
-    private static final String NONE_RATING_ERROR_MESSAGE = "[Error] 존재하지 않는 Rating 객체";
-    private final int matchCount;
+    private final RatingResult ratingResult;
     private final int reward;
 
-    Rating(final int matchCount, final int reward) {
-        this.matchCount = matchCount;
+    Rating(final RatingResult ratingResult, final int reward) {
+        this.ratingResult = ratingResult;
         this.reward = reward;
     }
 
-    public static Rating getRating(final int matchCount, final boolean containBonusBall) {
-        if (matchCount == THIRD.matchCount && !containBonusBall) {
-            return THIRD;
-        }
-
-        if (matchCount < FIFTH.matchCount) {
-            return MISS;
-        }
-
+    public static Rating getRating(final int matchCount, final boolean hasBonusBall) {
+        RatingResult ratingResult = new RatingResult(matchCount, hasBonusBall);
         return Arrays.stream(values())
-            .filter(rating -> rating.matchCount == matchCount)
+            .filter(rating -> rating.ratingResult.equals(ratingResult))
             .findAny()
-            .orElseThrow(() -> new NoSuchElementException(NONE_RATING_ERROR_MESSAGE));
+            .orElse(MISS);
     }
 
     public int getMatchCount() {
-        return matchCount;
+        return ratingResult.getMatchCount();
     }
 
     public int getReward() {
