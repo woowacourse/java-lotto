@@ -22,21 +22,12 @@ public class LottoTicketGenerator {
     }
 
 
-    public LottoTicket createLottoTicket(int money) {
-        int numberOfLottoLine = getNumberOfLottoLine(money);
-
-        ArrayList<LottoLine> lottoLineList = new ArrayList<LottoLine>();
-        for (int i = 0; i < numberOfLottoLine; i++) {
-            lottoLineList.add(new LottoLine(randomLottoGenerator.createLottoLine()));
+    public LottoTicket createLottoTicket(LottoTicketBuyingRequest lottoTicketBuyingRequest) {
+        ArrayList<LottoLine> autoLottoLineList = new ArrayList<>();
+        for (int i = 0; i < lottoTicketBuyingRequest.getAutoLottoAmount(); i++) {
+            autoLottoLineList.add(new LottoLine(randomLottoGenerator.createLottoLine()));
         }
-        return new LottoTicket(lottoLineList);
-    }
 
-    private int getNumberOfLottoLine(int money) {
-        int numberOfLottoLine = money / PRICE_EACH_LOTTO;
-        if (numberOfLottoLine <= 0) {
-            throw new IllegalArgumentException(ERROR_LOTTO_MONEY_NOT_ENOUGH);
-        }
-        return numberOfLottoLine;
+        return new LottoTicket(autoLottoLineList, lottoTicketBuyingRequest.getManualLottoLineList());
     }
 }
