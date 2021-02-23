@@ -18,10 +18,6 @@ public class OutputView {
         System.out.println(message);
     }
 
-    public static void printMoneyMessage() {
-        System.out.println("구입금액을 입력해 주세요.");
-    }
-
     public static void printNumberOfTickets(int counts) {
         System.out.println(counts + "개를 구매했습니다.");
     }
@@ -33,14 +29,6 @@ public class OutputView {
 
     public static void printNewLine() {
         System.out.println();
-    }
-
-    public static void printBonusNumberTitle() {
-        System.out.println("보너스 볼을 입력해주세요.");
-    }
-
-    public static void printWinningNumbersTitle() {
-        System.out.println("지난 주 당첨 번호를 입력해주세요.");
     }
 
     public static void printTotalWinningResult(Map<Rank, Integer> winningResult) {

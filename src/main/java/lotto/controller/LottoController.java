@@ -6,7 +6,6 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.Map;
-import java.util.Set;
 
 public class LottoController {
 
@@ -23,14 +22,13 @@ public class LottoController {
         WinningTicket winningTicket = makeWinningTicket();
         Map<Rank, Integer> result = LottoResultMachine.confirmResult(lottoTickets, winningTicket);
 
-        OutputView.printProfit(LottoProfit.ofProfit(result, money));
         OutputView.printTotalWinningResult(result);
+        OutputView.printProfit(LottoProfit.ofProfit(result, money));
         manageChange(money);
     }
 
     private Money inputMoney() {
         try {
-            OutputView.printMoneyMessage();
             Money money = new Money(inputView.inputMoney());
             OutputView.printNumberOfTickets(money.getTicketCount());
             return money;
@@ -49,9 +47,7 @@ public class LottoController {
 
     private WinningTicket makeWinningTicket() {
         try {
-            OutputView.printWinningNumbersTitle();
             LottoTicket lottoTicket = new LottoTicket(inputView.inputWinningNumbers());
-            OutputView.printBonusNumberTitle();
             LottoNumber bonusNumber = new LottoNumber(inputView.inputBonusNumber());
             return new WinningTicket(lottoTicket, bonusNumber);
         } catch (LottoCustomException e) {
