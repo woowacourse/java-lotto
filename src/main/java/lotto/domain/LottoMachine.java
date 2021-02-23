@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.util.List;
-
 public class LottoMachine {
     private static final String NOT_ENOUGH_MONEY = "금액이 부족하여 로또 티켓을 구매할 수 없습니다.";
     private static final int LOTTO_TICKET_COST = 1000;
@@ -13,12 +11,12 @@ public class LottoMachine {
         this.lottoNumberGenerator = lottoNumberGenerator;
     }
 
-    public LottoTickets issueLottoTickets(PurchasingPrice purchasingPrice, List<ManualTicket> manualTicketsNumbers) {
+    public LottoTickets issueLottoTickets(PurchasingPrice purchasingPrice, ManualTickets manualTickets) {
         int purchasableTicketCounts = purchasingPrice.calculatePurchasableTicketCounts(LOTTO_TICKET_COST);
-        int manualTicketCounts = manualTicketsNumbers.size();
+        int manualTicketCounts = manualTickets.getManualTickets().size();
         validatePurchasingPrice(purchasableTicketCounts, manualTicketCounts);
         int automaticTicketCounts = purchasableTicketCounts - manualTicketCounts;
-        return LottoTickets.generate(manualTicketsNumbers, automaticTicketCounts, lottoNumberGenerator);
+        return LottoTickets.generate(manualTickets, automaticTicketCounts, lottoNumberGenerator);
     }
 
     private void validatePurchasingPrice(int purchasableTicketCounts, int manualTicketCounts) {
