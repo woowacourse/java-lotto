@@ -8,10 +8,12 @@ import lotto.ticket.Ticket;
 import lotto.ticket.Tickets;
 import lotto.ticket.WinnerTicket;
 import lotto.ticket.strategy.ManualNumbersGenerator;
-import lotto.ticket.strategy.NumbersGenerator;
 import lotto.ticket.strategy.RandomNumbersGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LottoController {
     public void run() {
@@ -20,11 +22,11 @@ public class LottoController {
         LottoCount manualTicketAmount = generateManualTicketAmount();
         LottoCount autoTicketAmount = lottoCount.purchaseManualTicket(manualTicketAmount);
 
-        Tickets manualTickets = purchaseManualTickets(manualTicketAmount);
-        Tickets autoTickets = generateAutoTicket(autoTicketAmount);
+        Tickets manualTickets = manualTicketGenerate(manualTicketAmount);
+        Tickets autoTickets = autoTicketGenerate(autoTicketAmount);
         OutputView.noticeLottoCount(manualTicketAmount, autoTicketAmount);
 
-        Tickets totalTicket = new Tickets(manualTickets, autoTickets);
+        Tickets totalTicket = Tickets.joinTicket(manualTickets, autoTickets);
         OutputView.showTickets(totalTicket);
 
         WinnerTicket winnerTicket = generateWinnerTicket();
@@ -33,23 +35,31 @@ public class LottoController {
         makeResult(money, statistics);
     }
 
-    private Tickets purchaseManualTickets(LottoCount value) {
-        Tickets tickets = new Tickets();
+    private Tickets autoTicketGenerate(LottoCount count) {
+        List<Ticket> tickets = new ArrayList<>();
+        while (count.isGreaterThanZero()) {
+            count = count.decreaseOne();
+            tickets.add(new Ticket(new RandomNumbersGenerator().generate()));
+        }
+        return new Tickets(tickets);
+    }
+
+    private Tickets manualTicketGenerate(LottoCount count) {
         try {
             OutputView.enterManualTicketNumber();
-            eachManualTicketGenerate(tickets, value);
-            return tickets;
+            List<Ticket> tickets = new ArrayList<>();
+            ticketGenerate(count, tickets);
+            return new Tickets(tickets);
         } catch (IllegalArgumentException e) {
             OutputView.printError(e);
-            return purchaseManualTickets(value);
+            return manualTicketGenerate(count);
         }
     }
 
-    private void eachManualTicketGenerate(Tickets tickets, LottoCount count) {
+    private void ticketGenerate(LottoCount count, List<Ticket> tickets) {
         while (count.isGreaterThanZero()) {
             count = count.decreaseOne();
-            NumbersGenerator numbersGenerator = new ManualNumbersGenerator(InputView.inputNumbers());
-            tickets.add(new Ticket(numbersGenerator.generate()));
+            tickets.add(new Ticket(new ManualNumbersGenerator(InputView.inputNumbers()).generate()));
         }
     }
 
@@ -80,10 +90,6 @@ public class LottoController {
             OutputView.printError(e);
             return generateManualTicketAmount();
         }
-    }
-
-    private Tickets generateAutoTicket(LottoCount lottoCount) {
-        return new Tickets(lottoCount, new RandomNumbersGenerator());
     }
 
     private WinnerTicket generateWinnerTicket() {

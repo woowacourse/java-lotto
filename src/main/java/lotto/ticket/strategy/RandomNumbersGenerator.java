@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.ticket.Number.*;
+import static lotto.ticket.Number.NUMBER_COUNT_IN_LOTTO;
 
 public class RandomNumbersGenerator implements NumbersGenerator {
 

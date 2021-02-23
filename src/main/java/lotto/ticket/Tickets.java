@@ -1,8 +1,6 @@
 package lotto.ticket;
 
-import lotto.game.LottoCount;
 import lotto.ranking.Ranking;
-import lotto.ticket.strategy.NumbersGenerator;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,22 +11,15 @@ public class Tickets {
 
     private final List<Ticket> tickets;
 
-    public Tickets() {
-        this.tickets = new ArrayList<>();
+    public Tickets(List<Ticket> tickets) {
+        this.tickets = tickets;
     }
 
-    public Tickets(Tickets manualTickets, Tickets autoTickets) {
-        this.tickets = new ArrayList<>();
-        this.tickets.addAll(manualTickets.tickets);
-        this.tickets.addAll(autoTickets.tickets);
-    }
-
-    public Tickets(LottoCount lottoCount, NumbersGenerator numbersGenerator) {
-        this.tickets = new ArrayList<>();
-        while (lottoCount.isGreaterThanZero()) {
-            lottoCount = lottoCount.decreaseOne();
-            tickets.add(new Ticket(numbersGenerator.generate()));
-        }
+    public static Tickets joinTicket(Tickets manualTickets, Tickets autoTickets) {
+        List<Ticket> tickets = new ArrayList<>();
+        tickets.addAll(manualTickets.tickets);
+        tickets.addAll(autoTickets.tickets);
+        return new Tickets(tickets);
     }
 
     public List<Ranking> makeResult(WinnerTicket winnerTicket, BonusBall bonusBall) {
@@ -47,10 +38,6 @@ public class Tickets {
             bonus = ticket.hasContainBonus(bonusBall);
         }
         return bonus;
-    }
-
-    public void add(Ticket ticket) {
-        this.tickets.add(ticket);
     }
 
     public List<Ticket> getTickets() {

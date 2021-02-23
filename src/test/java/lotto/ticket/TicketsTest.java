@@ -7,6 +7,7 @@ import lotto.ticket.strategy.RandomNumbersGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -15,7 +16,11 @@ public class TicketsTest {
     @Test
     @DisplayName("티켓들 생성 확인")
     void ticketsCreate() {
-        Tickets tickets = new Tickets(new LottoCount(new Money("20000")), new RandomNumbersGenerator());
+        List<Ticket> ticketList = new ArrayList<>();
+        for (int i = 0; i < 20; i++) {
+            ticketList.add(new Ticket(new RandomNumbersGenerator().generate()));
+        }
+        Tickets tickets = new Tickets(ticketList);
         assertThat(tickets.getTickets().size()).isEqualTo(20);
     }
 
@@ -24,7 +29,11 @@ public class TicketsTest {
     void checkTicketsRanking() {
         WinnerTicket winnerTicket = new WinnerTicket("1, 2, 3, 4, 5, 6");
         BonusBall bonusBall = new BonusBall("7", winnerTicket);
-        Tickets tickets = new Tickets(new LottoCount(new Money("2000000")), new RandomNumbersGenerator());
+        List<Ticket> ticketList = new ArrayList<>();
+        for (int i = 0; i < 2000; i++) {
+            ticketList.add(new Ticket(new RandomNumbersGenerator().generate()));
+        }
+        Tickets tickets = new Tickets(ticketList);
         List<Ranking> result = tickets.makeResult(winnerTicket, bonusBall);
         assertThat(result.size()).isEqualTo(2000);
     }
@@ -36,7 +45,12 @@ public class TicketsTest {
         LottoCount lottoCount = new LottoCount(purchaseMoney);
         LottoCount manualLottoCount = new LottoCount("3");
         LottoCount remainCount = lottoCount.purchaseManualTicket(manualLottoCount);
-        Tickets tickets = new Tickets(remainCount, new RandomNumbersGenerator());
+        List<Ticket> ticketList = new ArrayList<>();
+        while (remainCount.isGreaterThanZero()) {
+            remainCount = remainCount.decreaseOne();
+            ticketList.add(new Ticket(new RandomNumbersGenerator().generate()));
+        }
+        Tickets tickets = new Tickets(ticketList);
         assertThat(tickets.getTickets().size()).isEqualTo(11);
     }
 }
