@@ -9,20 +9,20 @@ public class UserPurchase {
         this.manualTicketsSize = manualTicketsSize;
     }
 
-    public int allTicketsSize() {
-        return purchasePrice.allTicketsSize();
-    }
-
-    public int randomTicketsSize() {
-        return allTicketsSize() - manualTicketsSize.size();
-    }
-
     public PurchasePrice getPurchasePrice() {
         return purchasePrice;
     }
 
     public int manualTicketsSize() {
         return manualTicketsSize.size();
+    }
+
+    public int randomTicketsSize() {
+        return allTicketsSize() - manualTicketsSize.size();
+    }
+
+    public int allTicketsSize() {
+        return purchasePrice.allTicketsSize();
     }
 
     public boolean isPurchaseManually() {
