@@ -12,11 +12,11 @@ public class OutputView {
     private OutputView() {
     }
 
-//    public static void showLottos(LottosDto lottosDtos) {
-//        for (LottoDto lottoDto : lottosDtos.getLottoDtos()) {
-//            System.out.println(formatLottosOutput(lottoDto.getNumbers()));
-//        }
-//    }
+    public static void showLottos(List<LottoDto> lottosDtos) {
+        for (LottoDto lottoDto : lottosDtos) {
+            System.out.println(formatLottosOutput(lottoDto.getNumbers()));
+        }
+    }
 
     private static String formatLottosOutput(List<Integer> numbers) {
         return numbers.stream()

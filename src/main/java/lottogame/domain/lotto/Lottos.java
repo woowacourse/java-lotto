@@ -1,5 +1,6 @@
 package lottogame.domain.lotto;
 
+import lottogame.domain.Rank;
 import lottogame.domain.dto.LottoDto;
 import lottogame.domain.statistic.LottoResult;
 
@@ -11,8 +12,9 @@ import java.util.stream.Collectors;
 public class Lottos {
     private final List<Lotto> lottos = new ArrayList<>();
 
-    public Lottos(List<Lotto> values) {
-        lottos.addAll(new ArrayList<>(values));
+    public Lottos(List<Lotto> manualLottos, List<Lotto> autoLottos) {
+        this.lottos.addAll(new ArrayList<>(manualLottos));
+        this.lottos.addAll(new ArrayList<>(autoLottos));
     }
 
     public List<LottoDto> numbersOfLottos() {
