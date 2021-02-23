@@ -22,8 +22,16 @@ public class Money {
         return (float) totalPrizeMoney / money;
     }
 
-    int buyLotto(int lottoPrice) {
+    public int buyLotto(int lottoPrice) {
         return money / lottoPrice;
+    }
+
+    public boolean availableForPurchase(int purchaseMoney) {
+        return money >= purchaseMoney;
+    }
+
+    public Money consume(int price) {
+        return new Money(money - price);
     }
 
     @Override

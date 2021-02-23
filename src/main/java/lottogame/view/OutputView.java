@@ -3,7 +3,6 @@ package lottogame.view;
 import lottogame.domain.Rank;
 import lottogame.domain.dto.LottoDto;
 import lottogame.domain.dto.LottoResultDto;
-import lottogame.domain.dto.LottosDto;
 
 import java.util.List;
 import java.util.Map;
@@ -13,11 +12,11 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void showLottos(LottosDto lottosDtos) {
-        for (LottoDto lottoDto : lottosDtos.getLottoDtos()) {
-            System.out.println(formatLottosOutput(lottoDto.getNumbers()));
-        }
-    }
+//    public static void showLottos(LottosDto lottosDtos) {
+//        for (LottoDto lottoDto : lottosDtos.getLottoDtos()) {
+//            System.out.println(formatLottosOutput(lottoDto.getNumbers()));
+//        }
+//    }
 
     private static String formatLottosOutput(List<Integer> numbers) {
         return numbers.stream()

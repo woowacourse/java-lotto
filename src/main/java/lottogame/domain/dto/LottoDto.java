@@ -12,6 +12,12 @@ public class LottoDto {
         this.numbers = numbers;
     }
 
+    public static LottoDto Of(List<Integer> numbers) {
+        return new LottoDto(numbers.stream()
+                .map(number -> new LottoNumber(number))
+                .collect(Collectors.toList()));
+    }
+
     public List<Integer> getNumbers() {
         return numbers.stream()
                 .map(LottoNumber::getNumber)
