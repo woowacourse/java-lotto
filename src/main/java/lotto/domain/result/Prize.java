@@ -6,11 +6,11 @@ import java.util.Arrays;
 
 public enum Prize {
     NO_PRIZE(Money.ZERO, 0),
-    FIFTH_PRIZE(new Money(5000), 3),
-    FOURTH_PRIZE(new Money(50000), 4),
-    THIRD_PRIZE(new Money(1500000), 5),
-    SECOND_PRIZE(new Money(30000000), 5),
-    FIRST_PRIZE(new Money(2000000000), 6);
+    FIFTH_PRIZE(new Money(5_000), 3),
+    FOURTH_PRIZE(new Money(50_000), 4),
+    THIRD_PRIZE(new Money(1500_000), 5),
+    SECOND_PRIZE(new Money(30_000_000), 5),
+    FIRST_PRIZE(new Money(2_000_000_000), 6);
 
     public static final int BONUS_CHECK_PIVOT = 5;
     private final Money prizeMoney;

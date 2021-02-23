@@ -4,21 +4,19 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
-import java.util.regex.Pattern;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 45;
-    private static final Pattern NUMBER_PATTERN = Pattern.compile("^[0-9]*$");
-    private static Map<Integer, LottoNumber> cacheLottoNumbers = new HashMap<>();
-
-    private final int value;
+    private static final Map<Integer, LottoNumber> cacheLottoNumbers = new HashMap<>();
 
     static {
         for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
             cacheLottoNumbers.put(i, new LottoNumber(i));
         }
     }
+
+    private final int value;
 
     private LottoNumber(int number) {
         validateLottoNumber(number);
