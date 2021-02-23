@@ -1,8 +1,10 @@
 package lotto.controller;
 
 import lotto.domain.lotto.LottoExchange;
+import lotto.domain.lotto.LottoNumbers;
 import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.WinningNumbers;
+import lotto.domain.number.LottoNumber;
 import lotto.domain.number.ManualCount;
 import lotto.domain.number.Payout;
 import lotto.domain.rank.Ranks;
@@ -18,7 +20,8 @@ public class LottoController {
         ManualCount manualCount = inputManualCount(payout);
         LottoTicket lottoTicket = buyLotto(payout, manualCount);
         WinningNumbers winningNumbers =
-            WinningNumbers.valueOf(inputLastWeekLottoNumber(), inputBonusNumber());
+            new WinningNumbers(LottoNumbers.valueOf(inputLastWeekLottoNumber()),
+                LottoNumber.valueOf(inputBonusNumber()));
 
         calculateStatistics(winningNumbers, lottoTicket);
     }

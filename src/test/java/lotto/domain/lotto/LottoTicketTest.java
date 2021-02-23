@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import lotto.domain.number.LottoNumber;
 import lotto.domain.number.ManualCount;
 import lotto.domain.number.Payout;
 import lotto.domain.rank.Rank;
@@ -36,7 +37,8 @@ class LottoTicketTest {
             LottoNumbers.valueOf("1,2,3,11,12,13"),
             LottoNumbers.valueOf("11,12,13,14,15,16")
         ));
-        WinningNumbers winningNumbers = WinningNumbers.valueOf("1,2,3,4,5,6", "7");
+        WinningNumbers winningNumbers =
+            new WinningNumbers(LottoNumbers.valueOf("1,2,3,4,5,6"), LottoNumber.valueOf("7"));
         Map<Rank, Long> expected = new HashMap<>();
         Arrays.stream(Rank.values()).forEach(rank -> expected.put(rank, 1L));
 

@@ -9,18 +9,10 @@ public class WinningNumbers {
     private final LottoNumbers lottoNumbers;
     private final LottoNumber bonusNumber;
 
-    private WinningNumbers(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
+    public WinningNumbers(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
+        validateDuplication(lottoNumbers, bonusNumber);
         this.lottoNumbers = lottoNumbers;
         this.bonusNumber = bonusNumber;
-    }
-
-    public static WinningNumbers valueOf(String unparsedLottoNumbers, String unparsedBonusNumber) {
-        LottoNumbers parsedLottoNumbers = LottoNumbers.valueOf(unparsedLottoNumbers);
-        LottoNumber parsedBonusNumber = LottoNumber.valueOf(unparsedBonusNumber);
-
-        validateDuplication(parsedLottoNumbers, parsedBonusNumber);
-
-        return new WinningNumbers(parsedLottoNumbers, parsedBonusNumber);
     }
 
     private static void validateDuplication(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
