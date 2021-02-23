@@ -24,7 +24,8 @@ public class LottoGenerator {
 
         for (int i = 0; i < userPurchase.getNumberOfTicket(); i++) {
             Collections.shuffle(allNumbers);
-            lottoTickets.add(new LottoTicket(new ArrayList<>(allNumbers.subList(ZERO, LottoTicket.SIZE))));
+            List<LottoNumber> numbers = new ArrayList<>(allNumbers.subList(ZERO, LottoTicket.SIZE));
+            lottoTickets.add(new LottoTicket(numbers));
         }
         return new PurchasedLottoTickets(lottoTickets);
     }
