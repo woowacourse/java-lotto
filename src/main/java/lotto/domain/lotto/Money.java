@@ -31,6 +31,10 @@ public class Money {
         }
     }
 
+    public Money subtract(BigInteger value) {
+        return new Money(this.amount.subtract(value));
+    }
+
     public BigInteger toBigInteger() {
         return amount;
     }

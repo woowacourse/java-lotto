@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.math.BigInteger;
 import java.util.stream.Stream;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -14,11 +15,14 @@ import org.junit.jupiter.params.provider.ValueSource;
 class MoneyTest {
 
     @Test
+    @DisplayName("생성 실패 - 0 미만")
     void construct_fail() {
-        assertThatThrownBy(() -> new Money(BigInteger.valueOf(-1)));
+        assertThatThrownBy(() -> new Money(BigInteger.valueOf(-1)))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest
+    @DisplayName("valueOf 성공")
     @MethodSource("valueOf_success_testcase")
     void valueOf_success(String input, BigInteger expected) {
         assertThat(Money.valueOf(input).toBigInteger()).isEqualTo(expected);
@@ -33,10 +37,29 @@ class MoneyTest {
     }
 
     @ParameterizedTest
+    @DisplayName("valueOf 실패 - 0 미만")
     @ValueSource(strings = {"a", "-1", "1.0"})
     void valueOf_fail(String input) {
         assertThatThrownBy(() -> Money.valueOf(input))
                 .hasMessage("구입금액은 0 이상의 정수여야합니다.")
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("subtract 성공")
+    void subtract() {
+        Money money = new Money(BigInteger.ONE);
+
+        assertThat(money.subtract(BigInteger.ONE))
+                .isEqualTo(new Money(BigInteger.ZERO));
+    }
+
+    @Test
+    @DisplayName("subtract 실패 - 0미만")
+    void subtract_fail() {
+        Money zeroMoney = new Money(BigInteger.ZERO);
+
+        assertThatThrownBy(() -> zeroMoney.subtract(BigInteger.ONE))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

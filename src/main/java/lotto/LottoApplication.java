@@ -15,7 +15,8 @@ public class LottoApplication {
 
     public static void main(String[] args) {
         Money money = getMoneyByInput();
-        List<LottoTicket> lottoTickets = getLottoTicketsByMoney(money);
+
+        List<LottoTicket> lottoTickets = buyLottoTickets(money);
         TicketsView.printTickets(lottoTickets);
 
         Result result = getMatchedLottoResult(money, lottoTickets);
@@ -31,7 +32,7 @@ public class LottoApplication {
         }
     }
 
-    private static List<LottoTicket> getLottoTicketsByMoney(Money money) {
+    private static List<LottoTicket> buyLottoTickets(Money money) {
         LottoMachine lottoMachine = new LottoMachine(money);
         return lottoMachine.buyTickets(new RandomLottoGenerator());
     }
