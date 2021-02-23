@@ -25,7 +25,7 @@ public class LottoService {
         return ratingInfo;
     }
 
-    public double calculateEarningRate(final RatingInfo ratingInfo, final int money) {
+    public double calculateEarningRate(final RatingInfo ratingInfo, final long money) {
         return totalSum(ratingInfo) / money;
     }
 
