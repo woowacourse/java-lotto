@@ -18,7 +18,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private void validateRange(int value) {
         if (value < MINIMUM || MAXIMUM < value) {
-            throw new IllegalArgumentException("로또 번호는 "+ MINIMUM + " 이상, " + MAXIMUM + " 이하여야 합니다.");
+            throw new IllegalArgumentException(String.format("로또 번호는 %d 이상, %d 이하여야 합니다.", MINIMUM, MAXIMUM);
         }
     }
 
