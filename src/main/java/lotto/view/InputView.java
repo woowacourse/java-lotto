@@ -61,9 +61,7 @@ public class InputView {
 		return numbersSequence;
 	}
 
-	//TODO
-	// private으로 바꾸기?
-	public static int[] convertToInts(String[] winningNumbersInput) {
+	private static int[] convertToInts(String[] winningNumbersInput) {
 		return Arrays.stream(winningNumbersInput)
 				.mapToInt(Integer::parseInt)
 				.toArray();

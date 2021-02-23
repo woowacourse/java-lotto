@@ -7,9 +7,6 @@ import static lotto.domain.Money.MANUAL_LOTTO_QUANTITY_ERROR;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-//TODO:
-// 정상적인 생성자 작동 테스트
-// 검증 테스트에 메세지까지 확인하기
 public class MoneyTest {
 	@DisplayName("올바른 입력값 확인")
 	@Test
