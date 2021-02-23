@@ -20,6 +20,7 @@ public class ParseUtils {
             return Arrays.stream(value.split(regex)).
                 mapToInt(number -> Integer.parseInt(number))
                 .boxed()
+                .sorted()
                 .collect(Collectors.toList());
         } catch (Exception e) {
             throw new IllegalTypeException();
