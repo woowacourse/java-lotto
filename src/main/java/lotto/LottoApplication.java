@@ -1,12 +1,15 @@
 package lotto;
 
+import java.math.BigInteger;
+import java.util.Collections;
 import java.util.List;
 import lotto.domain.lotto.LottoMachine;
 import lotto.domain.lotto.LottoTicket;
+import lotto.domain.lotto.ManualBuyAmount;
 import lotto.domain.lotto.Money;
 import lotto.domain.result.LottoMatcher;
 import lotto.domain.result.Result;
-import lotto.utils.RandomLottoGenerator;
+import lotto.domain.result.UsersLottoTickets;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 import lotto.view.TicketsView;
@@ -16,10 +19,11 @@ public class LottoApplication {
     public static void main(String[] args) {
         Money money = getMoneyByInput();
 
-        List<LottoTicket> lottoTickets = buyLottoTickets(money);
-        TicketsView.printTickets(lottoTickets);
+        UsersLottoTickets usersLottoTickets = getLottoGroup(money);
 
-        Result result = getMatchedLottoResult(money, lottoTickets);
+        TicketsView.printTickets(usersLottoTickets);
+
+        Result result = getMatchedLottoResult(money, usersLottoTickets.getTotalTickets());
         ResultView.printResult(result);
     }
 
@@ -32,9 +36,31 @@ public class LottoApplication {
         }
     }
 
-    private static List<LottoTicket> buyLottoTickets(Money money) {
-        LottoMachine lottoMachine = new LottoMachine(money);
-        return lottoMachine.buyTickets(new RandomLottoGenerator());
+    private static UsersLottoTickets getLottoGroup(Money money) {
+        try {
+            return buyLottoTickets(money);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getLottoGroup(money);
+        }
+    }
+
+    private static UsersLottoTickets buyLottoTickets(Money money) {
+        ManualBuyAmount manualAmount = ManualBuyAmount
+                .getInstance(InputView.getManualBuyAmountInput(), money);
+
+        LottoMachine lottoMachine = LottoMachine.getInstance(money, manualAmount);
+
+        List<String> ticketsValue = getManualTicketsValue(lottoMachine.getManualBuyAmount());
+
+        return lottoMachine.buyTickets(ticketsValue);
+    }
+
+    private static List<String> getManualTicketsValue(BigInteger amount) {
+        if (amount.equals(BigInteger.ZERO)) {
+            return Collections.emptyList();
+        }
+        return InputView.getManualLottoTicketsInput(amount);
     }
 
     private static Result getMatchedLottoResult(Money money, List<LottoTicket> lottoTickets) {
