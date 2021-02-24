@@ -29,20 +29,24 @@ public class LottoStatistics {
 		}
 	}
 
-	public List<Integer> getWinCountByRank() {
-		List<Integer> winCountByRank = new ArrayList<>(statistics.values()).subList(RANK_START_INDEX, RANK_END_INDEX);
-		Collections.reverse(winCountByRank);
-		return winCountByRank;
+	public List<Integer> getWinCountsByRank() {
+		List<Integer> allWinCountsByRank = new ArrayList<>(statistics.values());
+		List<Integer> winCountsByRankForStatistics = allWinCountsByRank.subList(RANK_START_INDEX, RANK_END_INDEX);
+		Collections.reverse(winCountsByRankForStatistics);
+		return winCountsByRankForStatistics;
 	}
 
 	public float getProfitRate() {
-		return moneyInvested.divide(getTotalProfit());
+		Money totalProfit = getTotalProfit();
+		return moneyInvested.divide(totalProfit);
 	}
 
 	private Money getTotalProfit() {
 		long totalProfit = 0;
 		for (Rank rank : statistics.keySet()) {
-			totalProfit += (long) statistics.get(rank) * rank.getPrize();
+			Integer winCount = statistics.get(rank);
+			int prize = rank.getPrize();
+			totalProfit += (long) winCount * prize;
 		}
 		return new Money(totalProfit);
 	}

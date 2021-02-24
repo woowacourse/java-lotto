@@ -17,11 +17,14 @@ public class Money {
 	}
 
 	public Money getMoneyActuallyInvested() {
-		return new Money(getAffordableLottoQuantity().getTotalPrice());
+		LottoQuantity affordableLottoQuantity = getAffordableLottoQuantity();
+		long totalPrice = affordableLottoQuantity.getTotalPrice();
+		return new Money(totalPrice);
 	}
 
 	public LottoQuantity getAffordableLottoQuantity() {
-		return new LottoQuantity((int) money / LOTTO_PRICE);
+		int lottoQuantity = (int) money / LOTTO_PRICE;
+		return new LottoQuantity(lottoQuantity);
 	}
 
 	public float divide(Money that) {
@@ -39,7 +42,8 @@ public class Money {
 	}
 
 	public Money getChangeAfterBuying(LottoQuantity lottoQuantity) {
-		return new Money(calculateChangeAfterBuying(lottoQuantity));
+		long change = calculateChangeAfterBuying(lottoQuantity);
+		return new Money(change);
 	}
 
 	private long calculateChangeAfterBuying(LottoQuantity lottoQuantity) {

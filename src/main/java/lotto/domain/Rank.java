@@ -32,9 +32,10 @@ public enum Rank {
 	}
 
 	public static List<Rank> getRanksForStatistics() {
-		List<Rank> values = Arrays.asList(values()).subList(RANK_START_INDEX, RANK_END_INDEX);
-		Collections.reverse(values);
-		return values;
+		List<Rank> allRanks = Arrays.asList(values());
+		List<Rank> ranksForStatistics = allRanks.subList(RANK_START_INDEX, RANK_END_INDEX);
+		Collections.reverse(ranksForStatistics);
+		return ranksForStatistics;
 	}
 
 	public int getCount() {

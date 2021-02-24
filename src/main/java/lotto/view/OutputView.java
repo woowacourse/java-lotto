@@ -15,7 +15,9 @@ public class OutputView {
 	}
 
 	public static void printLottoPurchaseSummaryBasedOn(Lottos lottos, LottoMachine lottoMachine) {
-		System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", lottoMachine.getManualLottoQuantityAsInt(), lottoMachine.getAutoLottoQuantityAsInt());
+		int manualLottoQuantity = lottoMachine.getManualLottoQuantityAsInt();
+		int autoLottoQuantity = lottoMachine.getAutoLottoQuantityAsInt();
+		System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualLottoQuantity, autoLottoQuantity);
 		for (Lotto lotto : lottos.toList()) {
 			printLottoSummaryOf(lotto);
 		}
@@ -23,10 +25,11 @@ public class OutputView {
 	}
 
 	private static void printLottoSummaryOf(Lotto lotto) {
-		System.out.printf("[%s]\n", lottoSummaryOf(lotto));
+		String lottoSummary = getLottoSummaryOf(lotto);
+		System.out.printf("[%s]\n", lottoSummary);
 	}
 
-	private static String lottoSummaryOf(Lotto lotto) {
+	private static String getLottoSummaryOf(Lotto lotto) {
 		return lotto.getLottoNumbers()
 				.stream()
 				.map(LottoNumber::getNumberAsString)
@@ -36,11 +39,12 @@ public class OutputView {
 	public static void printResultStatisticsBasedOn(LottoStatistics lottoStatistics) {
 		System.out.println("당첨 통계");
 		System.out.println("---------");
-		List<Integer> statistics = lottoStatistics.getWinCountByRank();
+		List<Integer> statistics = lottoStatistics.getWinCountsByRank();
 		List<String> rankMessages = getRankMessages();
 		for (int i = 0; i < statistics.size(); i++) {
 			System.out.printf("%s %d개\n", rankMessages.get(i), statistics.get(i));
 		}
-		System.out.printf("총 수익률은 %.2f입니다.\n", lottoStatistics.getProfitRate());
+		float profitRate = lottoStatistics.getProfitRate();
+		System.out.printf("총 수익률은 %.2f입니다.\n", profitRate);
 	}
 }

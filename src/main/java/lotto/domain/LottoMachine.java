@@ -18,8 +18,11 @@ public class LottoMachine {
 	}
 
 	public Lottos createLottosFrom(List<int[]> manualLottoNumbersSequence) {
-		Lottos manualLottos = manualLottoQuantity.createLottosUsing(new ManualLottoGenerator(manualLottoNumbersSequence));
-		Lottos autoLottos = autoLottoQuantity.createLottosUsing(new AutomaticLottoGenerator());
+		ManualLottoGenerator manualLottoGenerator = new ManualLottoGenerator(manualLottoNumbersSequence);
+		Lottos manualLottos = manualLottoQuantity.createLottosUsing(manualLottoGenerator);
+
+		AutomaticLottoGenerator automaticLottoGenerator = new AutomaticLottoGenerator();
+		Lottos autoLottos = autoLottoQuantity.createLottosUsing(automaticLottoGenerator);
 
 		return manualLottos.merge(autoLottos);
 	}

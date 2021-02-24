@@ -19,17 +19,26 @@ enum RankMessage {
 	private final String message;
 
 	RankMessage(String message) {
-		this.message = String.format(message, Rank.valueOf(this.name()).getCount(), Rank.valueOf(this.name()).getPrize());
+		Rank correspondingRank = getCorrespondingRank();
+		int count = correspondingRank.getCount();
+		int prize = correspondingRank.getPrize();
+		this.message = String.format(message, count, prize);
 	}
 
 	static List<String> getRankMessages() {
 		return Rank.getRanksForStatistics()
 				.stream()
-				.map(RankMessage::getCorrespondingMessage)
+				.map(RankMessage::getMessageOf)
 				.collect(Collectors.toList());
 	}
 
-	private static String getCorrespondingMessage(Rank rank) {
-		return RankMessage.valueOf(rank.name()).message;
+	private static String getMessageOf(Rank rank) {
+		String rankName = rank.name();
+		return RankMessage.valueOf(rankName)
+				.message;
+	}
+
+	private Rank getCorrespondingRank() {
+		return Rank.valueOf(this.name());
 	}
 }

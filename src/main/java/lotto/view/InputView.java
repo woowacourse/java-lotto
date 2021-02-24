@@ -44,7 +44,8 @@ public class InputView {
 		for (int i = 0; i < lottoMachine.getManualLottoQuantityAsInt(); i++) {
 			String[] numbersInput = scanner.nextLine().split(", ");
 			validateIntegerNumbers(numbersInput);
-			numbersSequence.add(convertToInts(numbersInput));
+			int[] numbers = convertToInts(numbersInput);
+			numbersSequence.add(numbers);
 		}
 		System.out.println();
 		return numbersSequence;

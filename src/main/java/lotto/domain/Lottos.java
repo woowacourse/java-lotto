@@ -21,7 +21,8 @@ public class Lottos {
 		for (Lotto lotto : lottos) {
 			int matches = lotto.countMatchingNumbersWith(winningLotto);
 			boolean bonusMatch = lotto.hasBonusMatchWith(winningLotto);
-			ranks.add(getRankByGivenMatchInformation(matches, bonusMatch));
+			Rank rankByGivenMatchInformation = getRankByGivenMatchInformation(matches, bonusMatch);
+			ranks.add(rankByGivenMatchInformation);
 		}
 		return ranks;
 	}

@@ -42,7 +42,7 @@ class LottoStatisticsTest {
 		List<Rank> ranks = lottos.getResultsBasedOn(winningLotto);
 		LottoStatistics lottoStatistics = new LottoStatistics(ranks, new Money(3000));
 
-		List<Integer> numberOfWinByRank = lottoStatistics.getWinCountByRank();
+		List<Integer> numberOfWinByRank = lottoStatistics.getWinCountsByRank();
 		assertThat(numberOfWinByRank).isEqualTo(Arrays.asList(1, 0, 1, 1, 0));
 	}
 

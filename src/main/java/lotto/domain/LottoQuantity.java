@@ -25,7 +25,8 @@ public class LottoQuantity {
 	public Lottos createLottosUsing(LottoGenerator lottoGenerator) {
 		List<Lotto> lottos = new ArrayList<>();
 		for (int i = 0; i < lottoQuantity; i++) {
-			lottos.add(lottoGenerator.createLotto());
+			Lotto lotto = lottoGenerator.createLotto();
+			lottos.add(lotto);
 		}
 		return new Lottos(lottos);
 	}
