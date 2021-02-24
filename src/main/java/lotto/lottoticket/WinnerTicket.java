@@ -21,9 +21,7 @@ public class WinnerTicket {
     }
 
     private LottoNumber makeValidatedNumber(String value) {
-        LottoTicketValidation.validateNumber(value);
-        int number = Integer.parseInt(value.trim());
-        return new LottoNumber(number);
+        return new LottoNumber(value);
     }
 
     private List<LottoNumber> makeValidatedNumbers(List<LottoNumber> numbers) {

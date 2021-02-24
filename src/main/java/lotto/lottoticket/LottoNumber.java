@@ -2,6 +2,7 @@ package lotto.lottoticket;
 
 import java.util.Objects;
 
+import static lotto.lottoticket.LottoTicketValidation.ERROR_MESSAGE_INVALID_INPUT;
 import static lotto.lottoticket.ticketnumber.RandomNumbersGenerator.MAXIMUM_NUMBER;
 import static lotto.lottoticket.ticketnumber.RandomNumbersGenerator.MINIMUM_NUMBER;
 
@@ -10,9 +11,21 @@ public class LottoNumber {
 
     private final int number;
 
+    public LottoNumber(String value) {
+        this(makeNumber(value));
+    }
+
     public LottoNumber(int number) {
         validateInRange(number);
         this.number = number;
+    }
+
+    public static int makeNumber(String value) {
+        try {
+            return Integer.parseInt(value.trim());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_INVALID_INPUT);
+        }
     }
 
     private void validateInRange(int number) {

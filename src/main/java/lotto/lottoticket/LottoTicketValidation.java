@@ -10,15 +10,6 @@ public class LottoTicketValidation {
     public static final String ERROR_MESSAGE_INVALID_SIZE = "숫자는 6개여야 합니다.";
 
     private LottoTicketValidation() {
-
-    }
-
-    public static void validateNumber(String value) {
-        try {
-            Integer.parseInt(value.trim());
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_INVALID_INPUT);
-        }
     }
 
     public static void validateDuplicated(List<LottoNumber> value) {
