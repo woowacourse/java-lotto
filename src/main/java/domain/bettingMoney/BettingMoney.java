@@ -13,7 +13,7 @@ public class BettingMoney {
         validateMoney(bettingMoney);
         this.bettingMoney = bettingMoney;
     }
-    
+
     public int getTicketCount() {
         return this.bettingMoney / TICKET_PRICE;
     }

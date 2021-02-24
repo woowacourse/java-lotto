@@ -3,7 +3,6 @@ package domain;
 import domain.ball.LottoBall;
 import domain.ball.LottoBallFactory;
 import domain.ball.LottoBalls;
-import domain.bettingMoney.BettingMoney;
 import domain.lotto.LottoTicket;
 
 import java.util.Collections;
@@ -13,9 +12,8 @@ import java.util.stream.IntStream;
 
 import static domain.ball.LottoBalls.LOTTO_BALL_SIZE;
 
-public class LottoMachine {
-    public List<LottoTicket> buyTickets(BettingMoney bettingMoney) {
-        int ticketCount = bettingMoney.getTicketCount();
+public class RandomLottoMachine {
+    public List<LottoTicket> makeTickets(int ticketCount) {
         return IntStream.range(0, ticketCount)
                 .mapToObj(count -> makeTicket())
                 .collect(Collectors.toList());
