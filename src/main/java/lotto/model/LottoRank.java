@@ -29,6 +29,7 @@ public enum LottoRank {
 
     private static LottoRank correctOf(long numOfMatch) {
         return Arrays.stream(LottoRank.values())
+            .filter(lottoRank -> lottoRank != LottoRank.SECOND)
             .filter(lottoRank -> lottoRank.getCorrect() == numOfMatch)
             .findFirst()
             .orElse(NO_MATCH);
