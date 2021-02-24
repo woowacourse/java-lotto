@@ -21,4 +21,4 @@ src/test/java/lotto/domain/ResultTest.java
 
 ## 수업 내용 적용
 
-- [ ] LottoNumber의 값은 1~45으로 한정되므로 객체를 캐싱하여 사용하는 방법
+- [x] LottoNumber의 값은 1~45으로 한정되므로 객체를 캐싱하여 사용하는 방법
