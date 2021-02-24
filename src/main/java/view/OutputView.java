@@ -1,8 +1,8 @@
 package view;
 
+import dto.LottoTicketDto;
 import dto.LottoTicketsDto;
 import dto.PrizeDto;
-import dto.LottoTicketDto;
 import dto.WinningStaticsDto;
 
 import java.util.List;
@@ -12,8 +12,8 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void printLottoQuantity(final int lottoQuantity) {
-        System.out.println(String.format("%d개를 구매했습니다.", lottoQuantity));
+    public static void printLottoQuantity(final int manualAmount, final int lottoQuantity) {
+        System.out.println(String.format("수동으로 %d장, 자동으로 %d장을 구매했습니다.", manualAmount, lottoQuantity));
     }
 
     public static void printLottoTickets(final LottoTicketsDto lottoTicketsDto) {
