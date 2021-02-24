@@ -60,7 +60,7 @@ public class LottoResult {
 
     public BigDecimal getProfit() {
         return new BigDecimal(String.valueOf(totalMoney))
-            .divide(new BigDecimal(String.valueOf(purchasePrice.getPrice())), MathContext.DECIMAL32)
-            .setScale(SECOND_DECIMAL_PLACE, BigDecimal.ROUND_HALF_UP);
+            .divide(new BigDecimal(String.valueOf(purchasePrice.getPrice())),
+                SECOND_DECIMAL_PLACE, BigDecimal.ROUND_HALF_UP);
     }
 }

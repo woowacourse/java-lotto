@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 
 public class LottoResultTest {
     private static final int PURCHASE_PRICE = 10_000;
-    private static final int NEW_SCALE = 2;
+    private static final int SECOND_DECIMAL_PLACE = 2;
 
     private PurchasePrice purchasePrice;
     private UserPurchase userPurchase;
@@ -82,8 +82,8 @@ public class LottoResultTest {
 
         assertThat(lottoResult.getProfit()).isEqualTo(
             new BigDecimal(String.valueOf(SIX_MATCH.getPrizeMoney()))
-                .divide(new BigDecimal(String.valueOf(PURCHASE_PRICE)), MathContext.DECIMAL32)
-                .setScale(NEW_SCALE, BigDecimal.ROUND_HALF_UP)
+                .divide(new BigDecimal(String.valueOf(PURCHASE_PRICE)),
+                    SECOND_DECIMAL_PLACE, BigDecimal.ROUND_HALF_UP)
         );
     }
 
@@ -122,8 +122,8 @@ public class LottoResultTest {
 
         assertThat(lottoResult.getProfit()).isEqualTo(
             new BigDecimal(String.valueOf(FIVE_AND_BONUS_MATCH.getPrizeMoney()))
-                .divide(new BigDecimal(String.valueOf(PURCHASE_PRICE)), MathContext.DECIMAL32)
-                .setScale(NEW_SCALE, BigDecimal.ROUND_HALF_UP)
+                .divide(new BigDecimal(String.valueOf(PURCHASE_PRICE)),
+                    SECOND_DECIMAL_PLACE, BigDecimal.ROUND_HALF_UP)
         );
     }
 
@@ -162,8 +162,8 @@ public class LottoResultTest {
 
         assertThat(lottoResult.getProfit()).isEqualTo(
             new BigDecimal(String.valueOf(FIVE_MATCH.getPrizeMoney()))
-                .divide(new BigDecimal(String.valueOf(PURCHASE_PRICE)), MathContext.DECIMAL32)
-                .setScale(NEW_SCALE, BigDecimal.ROUND_HALF_UP)
+                .divide(new BigDecimal(String.valueOf(PURCHASE_PRICE)),
+                    SECOND_DECIMAL_PLACE, BigDecimal.ROUND_HALF_UP)
         );
     }
 
@@ -202,8 +202,8 @@ public class LottoResultTest {
         // then
         assertThat(lottoResult.getProfit()).isEqualTo(
             new BigDecimal(String.valueOf(FOUR_MATCH.getPrizeMoney()))
-                .divide(new BigDecimal(String.valueOf(PURCHASE_PRICE)), MathContext.DECIMAL32)
-                .setScale(NEW_SCALE, BigDecimal.ROUND_HALF_UP)
+                .divide(new BigDecimal(String.valueOf(PURCHASE_PRICE)),
+                    SECOND_DECIMAL_PLACE, BigDecimal.ROUND_HALF_UP)
         );
     }
 
@@ -242,8 +242,8 @@ public class LottoResultTest {
 
         assertThat(lottoResult.getProfit()).isEqualTo(
             new BigDecimal(String.valueOf(THREE_MATCH.getPrizeMoney()))
-                .divide(new BigDecimal(String.valueOf(PURCHASE_PRICE)), MathContext.DECIMAL32)
-                .setScale(NEW_SCALE, BigDecimal.ROUND_HALF_UP)
+                .divide(new BigDecimal(String.valueOf(PURCHASE_PRICE)),
+                    SECOND_DECIMAL_PLACE, BigDecimal.ROUND_HALF_UP)
         );
     }
 
@@ -296,8 +296,8 @@ public class LottoResultTest {
         assertThat(lottoResult.getProfit()).isEqualTo(
             new BigDecimal(String.valueOf(
                 FOUR_MATCH.getPrizeMoney() + FIVE_AND_BONUS_MATCH.getPrizeMoney()))
-                .divide(new BigDecimal(String.valueOf(PURCHASE_PRICE)), MathContext.DECIMAL32)
-                .setScale(NEW_SCALE, BigDecimal.ROUND_HALF_UP)
+                .divide(new BigDecimal(String.valueOf(PURCHASE_PRICE)),
+                    SECOND_DECIMAL_PLACE, BigDecimal.ROUND_HALF_UP)
         );
     }
 }
