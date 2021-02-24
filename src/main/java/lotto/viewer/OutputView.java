@@ -3,7 +3,6 @@ package lotto.viewer;
 import java.util.List;
 import java.util.Map;
 import lotto.domain.Lotto;
-import lotto.domain.LottoAnnouncement;
 import lotto.domain.LottoRank;
 import lotto.domain.Lottos;
 import lotto.exception.LottoAnnouncementException;
