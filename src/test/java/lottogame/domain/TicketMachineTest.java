@@ -21,7 +21,7 @@ class TicketMachineTest {
     @ParameterizedTest
     @CsvSource(value = {"4000:4:0", "6000:3:3000", "15000:2:13000", "1000:0:1000"}, delimiter = ':')
     void 수동_로또_구매_테스트(int value, int quantity, int expectedMoney) {
-        Money money = ticketMachine.validManualTicket(new Money(value), quantity);
+        Money money = ticketMachine.buyManualTicket(new Money(value), quantity);
         assertThat(money).isEqualTo(new Money(expectedMoney));
     }
 
@@ -29,7 +29,7 @@ class TicketMachineTest {
     @ParameterizedTest
     @CsvSource(value = {"4000:5", "6000:7", "5000:12"}, delimiter = ':')
     void 수동_로또_구매_테스트(int value, int quantity) {
-        assertThatThrownBy(() -> ticketMachine.validManualTicket(new Money(value), quantity))
+        assertThatThrownBy(() -> ticketMachine.buyManualTicket(new Money(value), quantity))
                 .isInstanceOf(InvalidManualTicketQuantityException.class);
     }
 

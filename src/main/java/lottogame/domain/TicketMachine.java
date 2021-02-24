@@ -1,12 +1,11 @@
 package lottogame.domain;
 
-import lottogame.utils.CannotBuyLottoException;
 import lottogame.utils.InvalidManualTicketQuantityException;
 
 public class TicketMachine {
     private static final int TICKET_PRICE = 1000;
 
-    public Money validManualTicket(Money money, int quantity) {
+    public Money buyManualTicket(Money money, int quantity) {
         validateQuantityRange(money, quantity);
         return money.consume(quantity * TICKET_PRICE);
     }

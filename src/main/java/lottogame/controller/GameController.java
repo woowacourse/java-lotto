@@ -24,7 +24,7 @@ public class GameController {
     public void run() {
         Money money = new Money(inputView.inputMoney());
         int manualQuantity = inputView.inputManualQuantity();
-        money = ticketMachine.validManualTicket(money, manualQuantity);
+        money = ticketMachine.buyManualTicket(money, manualQuantity);
         int autoTicketQuantity = ticketMachine.buyableAutoTicketQuantity(money);
         List<Lotto> manualLottos = makeManualLotto(autoTicketQuantity);
         List<Lotto> autoLottos = lottoMachine.buyAutoTicket(autoTicketQuantity);
