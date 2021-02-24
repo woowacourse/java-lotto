@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class LottoTicketService {
 
     public static final String COUNT_ERROR_MESSAGE = "당첨 숫자는 %d개 넣어야 합니다.";
-    public static final String NUMBER_FORMAT_ERROR_MESSAGE = "로또 당첨번호는 %d개 모두 숫자여야합니다.";
+    public static final String NUMBER_FORMAT_ERROR_MESSAGE = "로또 번호는 %d개 모두 숫자여야합니다.";
     private static final String DELIMITER = ",";
 
     private LottoTicketService() {

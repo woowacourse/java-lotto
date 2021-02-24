@@ -20,7 +20,7 @@ public class ManualCountTest {
     @Test
     @DisplayName("수동 구매 개수 생성된다.")
     public void createManualCountTest() {
-        ManualCount manualCount = new ManualCount(4, money);
+        ManualCount manualCount = new ManualCount("4", money);
 
         assertThat(manualCount).isInstanceOf(ManualCount.class);
     }
@@ -29,7 +29,7 @@ public class ManualCountTest {
     @DisplayName("수동 구매 개수는 구매가능 개수를 초과할 수 없다.")
     public void validateManualCount() {
         assertThatThrownBy(() -> {
-            new ManualCount(5, money);
+            new ManualCount("5", money);
         }).isInstanceOf(IllegalArgumentException.class).hasMessage(String.format(ManualCount.INVALID_COUNT_ERROR_MESSAGE, money.getLottoCount()));
     }
 
@@ -37,7 +37,7 @@ public class ManualCountTest {
     @DisplayName("수동 구매 개수는 음수일 수 없다.")
     public void negativeManualCountTest() {
         assertThatThrownBy(() -> {
-            new ManualCount(-1, money);
+            new ManualCount("-1", money);
         }).isInstanceOf(IllegalArgumentException.class).hasMessage(String.format(ManualCount.INVALID_COUNT_ERROR_MESSAGE, money.getLottoCount()));
     }
 
