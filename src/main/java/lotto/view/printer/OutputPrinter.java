@@ -1,11 +1,12 @@
 package lotto.view.printer;
 
-import static lotto.view.InputView.LOTTO_NUMBER_DELIMITER;
+import lotto.domain.LottoTicket;
+import lotto.domain.ticketresult.Rank;
 
 import java.util.Map;
 import java.util.stream.Collectors;
-import lotto.domain.LottoTicket;
-import lotto.domain.ticketresult.Rank;
+
+import static lotto.view.InputView.LOTTO_NUMBER_DELIMITER;
 
 public class OutputPrinter {
     private static final String START_BRACKET = "[";
@@ -23,10 +24,10 @@ public class OutputPrinter {
 
     public static void printLottoTicketNumbers(LottoTicket lottoTicket) {
         System.out.println(START_BRACKET +
-            lottoTicket.getLottoTicketNumbers().stream()
-                .map(lottoNumber -> Integer.toString(lottoNumber.getNumber()))
-                .collect(Collectors.joining(LOTTO_NUMBER_DELIMITER))
-            + END_BRACKET
+                lottoTicket.getLottoTicketNumbers().stream()
+                        .map(lottoNumber -> Integer.toString(lottoNumber.getNumber()))
+                        .collect(Collectors.joining(LOTTO_NUMBER_DELIMITER))
+                + END_BRACKET
         );
     }
 

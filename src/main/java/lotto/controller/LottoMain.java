@@ -2,8 +2,8 @@ package lotto.controller;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
-import lotto.domain.ticketgenerator.LottoGenerator;
 import lotto.domain.LottoTickets;
+import lotto.domain.ticketgenerator.LottoGenerator;
 import lotto.domain.ticketpurchase.PurchasedTickets;
 import lotto.domain.ticketpurchase.UserPurchase;
 import lotto.domain.ticketresult.LottoComparator;

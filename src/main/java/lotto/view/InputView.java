@@ -1,19 +1,16 @@
 package lotto.view;
 
+import lotto.view.printer.InputPrinter;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
-import lotto.domain.ticketpurchase.UserPurchase;
-import lotto.domain.ticketresult.WinningLottoNumbers;
-import lotto.view.printer.InputPrinter;
 
 public class InputView {
+    public static final String LOTTO_NUMBER_DELIMITER = ", ";
     private static final Scanner scanner = new Scanner(System.in);
     private static final String NUMERIC_REGULAR_EXPRESSION = "\\d+";
-    public static final String LOTTO_NUMBER_DELIMITER = ", ";
 
     private InputView() {
     }
@@ -34,8 +31,8 @@ public class InputView {
         String lottoNumbersInput = scanner.nextLine();
         validateAllNaturalNumbers(lottoNumbersInput);
         return Arrays.stream(lottoNumbersInput.split(LOTTO_NUMBER_DELIMITER))
-            .map(Integer::parseInt)
-            .collect(Collectors.toList());
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 
     private static int parseNumericInput(String inputValue) {
@@ -47,7 +44,7 @@ public class InputView {
 
     private static void validateAllNaturalNumbers(String winningNumbersInput) {
         if (!Arrays.stream(winningNumbersInput.split(LOTTO_NUMBER_DELIMITER))
-            .allMatch(numberInput -> numberInput.matches(NUMERIC_REGULAR_EXPRESSION))) {
+                .allMatch(numberInput -> numberInput.matches(NUMERIC_REGULAR_EXPRESSION))) {
             throw new IllegalArgumentException("올바르지 않은 입력입니다.");
         }
     }

@@ -6,7 +6,7 @@ import lotto.domain.LottoTickets;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManualStrategy implements GenerateStrategy{
+public class ManualStrategy implements GenerateStrategy {
     private final List<LottoTicket> tickets;
 
     public ManualStrategy(List<LottoTicket> tickets) {

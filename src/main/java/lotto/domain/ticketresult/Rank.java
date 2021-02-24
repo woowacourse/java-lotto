@@ -20,14 +20,6 @@ public enum Rank {
         this.prizeMoney = prizeMoney;
     }
 
-    public int getCountMatchedNumbers() {
-        return matchedNumberCount;
-    }
-
-    public int getPrizeMoney() {
-        return prizeMoney;
-    }
-
     public static Rank getLottoRank(int matchedNumberCount, boolean hasBonusNumber) {
         if (isSecondPrize(matchedNumberCount, hasBonusNumber)) {
             return SECOND;
@@ -41,5 +33,13 @@ public enum Rank {
 
     private static boolean isSecondPrize(int matchedNumberCount, boolean hasBonusNumber) {
         return (matchedNumberCount == SECOND.matchedNumberCount) && hasBonusNumber;
+    }
+
+    public int getCountMatchedNumbers() {
+        return matchedNumberCount;
+    }
+
+    public int getPrizeMoney() {
+        return prizeMoney;
     }
 }
