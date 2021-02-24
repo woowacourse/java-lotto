@@ -1,33 +1,80 @@
 package lotto.domain.ticketpurchase;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatCode;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 
 public class UserPurchaseTest {
-    @DisplayName("구입 금액이 1000원 단위일 시 정상")
+    private static final int ONE_TICKET_PRICE = 1000;
+
+    @DisplayName("수동티켓 0개, 랜덤티켓 5개 테스트")
     @Test
-    void Should_Not_ThrowException_When_PurchasePriceExactlyDividedByThousand() {
-        assertThatCode(() -> new UserPurchase(1000))
-            .doesNotThrowAnyException();
+    void Should_Return_ExpectedResults_When_Manual0Random5() {
+        // given
+        int expectedManualTicketsSize = 0;
+        int expectedRandomTicketsSize = 5;
+        int expectedAllTicketsSize = expectedManualTicketsSize + expectedRandomTicketsSize;
+        PurchasePrice purchasePrice = new PurchasePrice(expectedAllTicketsSize * ONE_TICKET_PRICE);
+        ManualTicketsSize manualTicketsSize
+            = new ManualTicketsSize(expectedManualTicketsSize, purchasePrice);
+
+        // when
+        UserPurchase userPurchase = new UserPurchase(purchasePrice, manualTicketsSize);
+
+        // then
+        assertThat(userPurchase.getPurchasePrice()).isEqualTo(purchasePrice);
+        assertThat(userPurchase.manualTicketsSize()).isEqualTo(expectedManualTicketsSize);
+        assertThat(userPurchase.randomTicketsSize()).isEqualTo(expectedRandomTicketsSize);
+        assertThat(userPurchase.allTicketsSize()).isEqualTo(expectedAllTicketsSize);
+        assertThat(userPurchase.isPurchaseManually()).isFalse();
+        assertThat(userPurchase.isPurchaseRandomly()).isTrue();
     }
 
-    @DisplayName("구입 금액이 1000원 단위가 아닐 시 에러")
+    @DisplayName("수동티켓 5개, 랜덤티켓 0개 테스트")
     @Test
-    void Should_ThrowException_When_PurchasePriceNotDividedByThousand() {
-        Assertions.assertThatThrownBy(() ->
-            new UserPurchase(1200)
-        ).isInstanceOf(IllegalArgumentException.class);
+    void Should_Return_ExpectedResults_When_Manual5Random0() {
+        // given
+        int expectedManualTicketsSize = 5;
+        int expectedRandomTicketsSize = 0;
+        int expectedAllTicketsSize = expectedManualTicketsSize + expectedRandomTicketsSize;
+        PurchasePrice purchasePrice = new PurchasePrice(expectedAllTicketsSize * ONE_TICKET_PRICE);
+        ManualTicketsSize manualTicketsSize
+            = new ManualTicketsSize(expectedManualTicketsSize, purchasePrice);
+
+        // when
+        UserPurchase userPurchase = new UserPurchase(purchasePrice, manualTicketsSize);
+
+        // then
+        assertThat(userPurchase.getPurchasePrice()).isEqualTo(purchasePrice);
+        assertThat(userPurchase.manualTicketsSize()).isEqualTo(expectedManualTicketsSize);
+        assertThat(userPurchase.randomTicketsSize()).isEqualTo(expectedRandomTicketsSize);
+        assertThat(userPurchase.allTicketsSize()).isEqualTo(expectedAllTicketsSize);
+        assertThat(userPurchase.isPurchaseManually()).isTrue();
+        assertThat(userPurchase.isPurchaseRandomly()).isFalse();
     }
 
-    @DisplayName("구입 금액이 1000원 단위일 때 티켓 개수 확인")
+    @DisplayName("수동티켓 3개, 랜덤티켓 2개 테스트")
     @Test
-    void Should_ReturnNumberOfTickets_When_ExactlyDividedByThousand() {
-        UserPurchase userPurchase = new UserPurchase(21000);
-        assertThat(userPurchase.getNumberOfTickets()).isEqualTo(21);
+    void Should_Return_ExpectedResults_When_Manual3Random2() {
+        // given
+        int expectedManualTicketsSize = 3;
+        int expectedRandomTicketsSize = 2;
+        int expectedAllTicketsSize = expectedManualTicketsSize + expectedRandomTicketsSize;
+        PurchasePrice purchasePrice = new PurchasePrice(expectedAllTicketsSize * ONE_TICKET_PRICE);
+        ManualTicketsSize manualTicketsSize
+            = new ManualTicketsSize(expectedManualTicketsSize, purchasePrice);
+
+        // when
+        UserPurchase userPurchase = new UserPurchase(purchasePrice, manualTicketsSize);
+
+        // then
+        assertThat(userPurchase.getPurchasePrice()).isEqualTo(purchasePrice);
+        assertThat(userPurchase.manualTicketsSize()).isEqualTo(expectedManualTicketsSize);
+        assertThat(userPurchase.randomTicketsSize()).isEqualTo(expectedRandomTicketsSize);
+        assertThat(userPurchase.allTicketsSize()).isEqualTo(expectedAllTicketsSize);
+        assertThat(userPurchase.isPurchaseManually()).isTrue();
+        assertThat(userPurchase.isPurchaseRandomly()).isTrue();
     }
 }

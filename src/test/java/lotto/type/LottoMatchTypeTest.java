@@ -7,84 +7,48 @@ import static lotto.type.LottoMatchType.SIX_MATCH;
 import static lotto.type.LottoMatchType.THREE_MATCH;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Arrays;
-import java.util.List;
-import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottoMatchTypeTest {
-    @DisplayName("일치하는 번호가 3개일 때 THREE_MATCH 반환")
+    @DisplayName("THREE_MATCH get 함수 테스트")
     @Test
-    void Should_Return_THREE_MATCH_When_ThreeNumbersMatched() {
-        List<LottoNumber> matchedLottoNumbersToGetPrize = Arrays.asList(
-            new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3)
-        );
-
-        assertThat(LottoMatchType.getLottoMatchType(matchedLottoNumbersToGetPrize))
-            .isEqualTo(THREE_MATCH);
+    void Should_Return_ExpectedResults_When_GetFromTHREE_MATCH() {
+        assertThat(THREE_MATCH.getCountExceptBonusNumber()).isEqualTo(3);
+        assertThat(THREE_MATCH.getPrizeMoney()).isEqualTo(5_000);
+        assertThat(THREE_MATCH.getMatchCountMessage()).isEqualTo("3개 일치 (5000원) - %d개");
     }
 
-    @DisplayName("일치하는 번호가 4개일 때 FOUR_MATCH 반환")
+    @DisplayName("FOUR_MATCH get 함수 테스트")
     @Test
-    void Should_Return_FOUR_MATCH_When_FourNumbersMatched() {
-        List<LottoNumber> matchedLottoNumbersToGetPrize = Arrays.asList(
-            new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(4)
-        );
-
-        assertThat(LottoMatchType.getLottoMatchType(matchedLottoNumbersToGetPrize))
-            .isEqualTo(FOUR_MATCH);
+    void Should_Return_ExpectedResults_When_GetFromFour_MATCH() {
+        assertThat(FOUR_MATCH.getCountExceptBonusNumber()).isEqualTo(4);
+        assertThat(FOUR_MATCH.getPrizeMoney()).isEqualTo(50_000);
+        assertThat(FOUR_MATCH.getMatchCountMessage()).isEqualTo("4개 일치 (50000원) - %d개");
     }
 
-    @DisplayName("일치하는 번호가 5개일 때 FIVE_MATCH 반환")
+    @DisplayName("FIVE_MATCH get 함수 테스트")
     @Test
-    void Should_Return_FIVE_MATCH_When_FiveNumbersMatched() {
-        List<LottoNumber> matchedLottoNumbersToGetPrize = Arrays.asList(
-            new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(4),
-            new LottoNumber(5)
-        );
-
-        assertThat(LottoMatchType.getLottoMatchType(matchedLottoNumbersToGetPrize))
-            .isEqualTo(FIVE_MATCH);
+    void Should_Return_ExpectedResults_When_GetFromFive_MATCH() {
+        assertThat(FIVE_MATCH.getCountExceptBonusNumber()).isEqualTo(5);
+        assertThat(FIVE_MATCH.getPrizeMoney()).isEqualTo(1_500_000);
+        assertThat(FIVE_MATCH.getMatchCountMessage()).isEqualTo("5개 일치 (1500000원) - %d개");
     }
 
-    @DisplayName("5개의 일반 번호와 보너스 번호가 일치할 때 FIVE_AND_BONUS_MATCH 반환")
+    @DisplayName("FIVE_AND_BONUS_MATCH get 함수 테스트")
     @Test
-    void Should_Return_FIVE_AND_BONUS_MATCH_When_FiveNumbersBonusNumberMatched() {
-        List<LottoNumber> matchedLottoNumbersToGetPrize = Arrays.asList(
-            new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(4),
-            new LottoNumber(5),
-            new LottoNumber(6, true)
-        );
-
-        assertThat(LottoMatchType.getLottoMatchType(matchedLottoNumbersToGetPrize))
-            .isEqualTo(FIVE_AND_BONUS_MATCH);
+    void Should_Return_ExpectedResults_When_GetFromFIVE_AND_BONUS_MATCH() {
+        assertThat(FIVE_AND_BONUS_MATCH.getCountExceptBonusNumber()).isEqualTo(5);
+        assertThat(FIVE_AND_BONUS_MATCH.getPrizeMoney()).isEqualTo(30_000_000);
+        assertThat(FIVE_AND_BONUS_MATCH.getMatchCountMessage())
+            .isEqualTo("5개 일치, 보너스 볼 일치(30000000원) - %d개");
     }
 
-    @DisplayName("일치하는 번호가 6개일 때 SIX_MATCH 반환")
+    @DisplayName("SIX_MATCH get 함수 테스트")
     @Test
-    void Should_Return_SIX_MATCH_When_SixNumbersMatched() {
-        List<LottoNumber> matchedLottoNumbersToGetPrize = Arrays.asList(
-            new LottoNumber(1),
-            new LottoNumber(2),
-            new LottoNumber(3),
-            new LottoNumber(4),
-            new LottoNumber(5),
-            new LottoNumber(6)
-        );
-
-        assertThat(LottoMatchType.getLottoMatchType(matchedLottoNumbersToGetPrize))
-            .isEqualTo(SIX_MATCH);
+    void Should_Return_ExpectedResults_When_GetFromSIX_MATCH() {
+        assertThat(SIX_MATCH.getCountExceptBonusNumber()).isEqualTo(6);
+        assertThat(SIX_MATCH.getPrizeMoney()).isEqualTo(2_000_000_000);
+        assertThat(SIX_MATCH.getMatchCountMessage()).isEqualTo("6개 일치 (2000000000원) - %d개");
     }
 }

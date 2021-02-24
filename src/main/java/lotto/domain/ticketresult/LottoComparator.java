@@ -7,15 +7,16 @@ import lotto.domain.ticketpurchase.UserPurchase;
 public class LottoComparator {
     private final LottoResult lottoResult;
 
-    public LottoComparator(WinningTicketAndBonusNumber winningLottoNumbers, UserPurchase userPurchase) {
-        this.lottoResult = new LottoResult(winningLottoNumbers, userPurchase);
+    public LottoComparator(WinningTicketAndBonusNumber winningTicketAndBonusNumber,
+        UserPurchase userPurchase) {
+        this.lottoResult = new LottoResult(winningTicketAndBonusNumber, userPurchase);
     }
 
     public LottoResult getLottoResult(LottoTickets lottoTickets) {
-        for (LottoTicket lottoTicket : lottoTickets.getTickets()) {
-            lottoResult.applyOneTicketResult(lottoTicket);
+        for (LottoTicket lottoTicket : lottoTickets.getAll()) {
+            lottoResult.calculateResult(lottoTicket);
         }
-        lottoResult.addAllWinningMoney();
+        lottoResult.calculateMoney();
         return lottoResult;
     }
 }

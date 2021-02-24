@@ -13,22 +13,25 @@ import org.junit.jupiter.api.Test;
 public class LottoTicketsTest {
     @DisplayName("로또 티켓 추가 및 꺼내기 테스트")
     @Test
-    void Should_ReturnLottoTickets_When_AddedLottoTickets() {
+    void Should_Return_ExactLottoTickets_When_AfterAddLottoTickets() {
+        // given
         List<LottoNumber> lottoNumbers = new ArrayList<>();
-        lottoNumbers.add(new LottoNumber(1));
-        lottoNumbers.add(new LottoNumber(2));
-        lottoNumbers.add(new LottoNumber(3));
-        lottoNumbers.add(new LottoNumber(4));
-        lottoNumbers.add(new LottoNumber(5));
-        lottoNumbers.add(new LottoNumber(6));
+        for (int number = 1; number <= 6; number++) {
+            lottoNumbers.add(LottoNumber.valueOf(number));
+        }
 
         LottoTicket lottoTicket1 = new LottoTicket(lottoNumbers);
         LottoTicket lottoTicket2 = new LottoTicket(lottoNumbers);
 
-        LottoTickets purchasedLottoTickets = new LottoTickets();
-        purchasedLottoTickets.add(lottoTicket1);
-        purchasedLottoTickets.add(lottoTicket2);
+        // when
+        LottoTickets lottoTickets = new LottoTickets();
+        lottoTickets.add(lottoTicket1);
+        lottoTickets.add(lottoTicket2);
 
-        assertThat(purchasedLottoTickets.getTickets().size()).isEqualTo(2);
+        lottoTickets.addAll(lottoTickets);
+
+        // then
+        assertThat(lottoTickets.size()).isEqualTo(4);
+        assertThat(lottoTickets.getAll().size()).isEqualTo(4);
     }
 }

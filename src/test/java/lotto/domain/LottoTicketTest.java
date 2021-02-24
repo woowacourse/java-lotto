@@ -8,25 +8,26 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottoTicketTest {
     private List<LottoNumber> lottoNumbers;
+    private LottoTicket lottoTicket;
 
     @BeforeEach
     void setUp() {
         lottoNumbers = new ArrayList<>(
             Arrays.asList(
-                new LottoNumber(5),
-                new LottoNumber(4),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(6),
-                new LottoNumber(1)
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(6),
+                LottoNumber.valueOf(1)
             ));
+        lottoTicket = new LottoTicket(lottoNumbers);
     }
 
     @DisplayName("로또 티켓 정상 생성 테스트")
@@ -39,22 +40,9 @@ public class LottoTicketTest {
     @DisplayName("로또 티켓 생성 시, 로또 번호 오름차순 정렬상태인지 테스트")
     @Test
     void Should_Be_Sorted_When_LottoTicketCreated() {
-        List<LottoNumber> unsortedLottoNumbers = lottoNumbers;
-        LottoTicket unsortedLottoTicket = new LottoTicket(unsortedLottoNumbers);
-
-        for (int i = 0; i < unsortedLottoNumbers.size(); i++) {
-            assertThat(unsortedLottoNumbers.get(i))
-                .isNotEqualTo(unsortedLottoTicket.getLottoTicketNumbers().get(i));
-        }
-
-        List<LottoNumber> sortedLottoNumbers = unsortedLottoNumbers.stream()
-            .sorted(Comparator.comparingInt(LottoNumber::getNumber))
-            .collect(Collectors.toList());
-
-        for (int i = 0; i < sortedLottoNumbers.size(); i++) {
-            assertThat(sortedLottoNumbers.get(i))
-                .isEqualTo(unsortedLottoTicket.getLottoTicketNumbers().get(i));
-        }
+        LottoTicket unsortedLottoTicket = new LottoTicket(lottoNumbers);
+        assertThat(unsortedLottoTicket.getNumbers())
+            .isSortedAccordingTo(Comparator.comparingInt(LottoNumber::getNumber));
     }
 
     @DisplayName("유효하지 않은 사이즈의 로또 티켓 테스트")
@@ -66,13 +54,61 @@ public class LottoTicketTest {
             .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("중복되는 로또 번호를 가지는 티켓 테스트")
+    @DisplayName("중복되는 로또 번호를 가지는 티켓 생성 테스트")
     @Test
     void Should_ThrowException_When_LottoNumberDuplicate() {
-        lottoNumbers.remove(0);
-        lottoNumbers.add(0, new LottoNumber(1));
+        List<LottoNumber> duplicateLottoNumbers = new ArrayList<>(lottoNumbers);
+        duplicateLottoNumbers.remove(0);
+        duplicateLottoNumbers.add(0, LottoNumber.valueOf(1));
 
-        assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
+        assertThatThrownBy(() -> new LottoTicket(duplicateLottoNumbers))
             .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("모든 로또 번호들을 반환하는지 테스트")
+    @Test
+    void Should_Return_AllLottoNumbers_When_Get() {
+        assertThat(lottoTicket.getNumbers())
+            .containsExactly(
+                LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(6)
+            );
+    }
+
+    @DisplayName("로또티켓에 특정 로또번호가 포함되어있으면 true 반환")
+    @Test
+    void Should_Return_True_When_TicketContainsNumber() {
+        assertThat(lottoTicket.contains(LottoNumber.valueOf(3))).isTrue();
+    }
+
+    @DisplayName("로또티켓에 특정 로또번호가 포함되어있지 않으면 false 반환")
+    @Test
+    void Should_Return_False_When_TicketNotContainsNumber() {
+        assertThat(lottoTicket.contains(LottoNumber.valueOf(7))).isFalse();
+    }
+
+    @DisplayName("두 로또티켓에 모두 포함되어있는 로또번호들을 반환하는지 테스트")
+    @Test
+    void Should_Return_ExpectedNumbers_When_TwoTicketContainNumbers() {
+        List<LottoNumber> lottoNumbers2 = new ArrayList<>(
+            Arrays.asList(
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(22),
+                LottoNumber.valueOf(23),
+                LottoNumber.valueOf(6),
+                LottoNumber.valueOf(21)
+            ));
+        LottoTicket lottoTicket2 = new LottoTicket(lottoNumbers2);
+        assertThat(lottoTicket.getMatchedLottoNumbers(lottoTicket2))
+            .containsExactly(
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(6)
+            );
     }
 }

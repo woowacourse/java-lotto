@@ -1,28 +1,35 @@
 package lotto.domain.ticketpurchase;
 
 public class UserPurchase {
-    private static final int ONE_TICKET_PRICE = 1000;
+    private final PurchasePrice purchasePrice;
+    private final ManualTicketsSize manualTicketsSize;
 
-    private final int purchasePrice;
-    private final int numberOfTickets;
-
-    public UserPurchase(int purchasePrice) {
-        validateExactlyDividedByOneTicketPrice(purchasePrice);
+    public UserPurchase(PurchasePrice purchasePrice, ManualTicketsSize manualTicketsSize) {
         this.purchasePrice = purchasePrice;
-        this.numberOfTickets = purchasePrice / ONE_TICKET_PRICE;
+        this.manualTicketsSize = manualTicketsSize;
     }
 
-    public int getNumberOfTickets() {
-        return this.numberOfTickets;
+    public PurchasePrice getPurchasePrice() {
+        return purchasePrice;
     }
 
-    public int getPurchasePrice() {
-        return this.purchasePrice;
+    public int manualTicketsSize() {
+        return manualTicketsSize.size();
     }
 
-    private void validateExactlyDividedByOneTicketPrice(int purchasePrice) {
-        if (purchasePrice <= 0 || (purchasePrice % ONE_TICKET_PRICE) != 0) {
-            throw new IllegalArgumentException("구입 금액은 1000원 단위여야 합니다.");
-        }
+    public int randomTicketsSize() {
+        return allTicketsSize() - manualTicketsSize.size();
+    }
+
+    public int allTicketsSize() {
+        return purchasePrice.allTicketsSize();
+    }
+
+    public boolean isPurchaseManually() {
+        return manualTicketsSize.isNotZero();
+    }
+
+    public boolean isPurchaseRandomly() {
+        return purchasePrice.allTicketsSize() - manualTicketsSize() > 0;
     }
 }

@@ -5,27 +5,22 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
     private static final int SIZE = 6;
 
-    private final List<LottoNumber> lottoNumbers;
+    private final List<LottoNumber> numbers;
 
-    public LottoTicket(List<LottoNumber> lottoNumbers) {
-        validateSize(lottoNumbers);
-        validateNotDuplicate(lottoNumbers);
-        this.lottoNumbers = new ArrayList<>(lottoNumbers);
-        this.lottoNumbers.sort(Comparator.comparingInt(LottoNumber::getNumber));
+    public LottoTicket(List<LottoNumber> numbers) {
+        validate(numbers);
+        this.numbers = new ArrayList<>(numbers);
+        this.numbers.sort(Comparator.comparingInt(LottoNumber::getNumber));
     }
 
-    public List<LottoNumber> getLottoTicketNumbers() {
-        return Collections.unmodifiableList(this.lottoNumbers);
-    }
-
-    public boolean contains(LottoNumber lottoNumber) {
-        return lottoNumbers.contains(lottoNumber);
+    private void validate(List<LottoNumber> numbers) {
+        validateSize(numbers);
+        validateNotDuplicate(numbers);
     }
 
     private void validateSize(List<LottoNumber> lottoNumbers) {
@@ -35,15 +30,22 @@ public class LottoTicket {
     }
 
     private void validateNotDuplicate(List<LottoNumber> lottoNumbers) {
-        Set<LottoNumber> lottoNumbersWithoutDuplication = new HashSet<>(lottoNumbers);
-        if (lottoNumbersWithoutDuplication.size() != lottoNumbers.size()) {
+        if (new HashSet<>(lottoNumbers).size() != lottoNumbers.size()) {
             throw new IllegalArgumentException("로또 번호는 중복되지 않아야 합니다.");
         }
     }
 
+    public List<LottoNumber> getNumbers() {
+        return Collections.unmodifiableList(this.numbers);
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return numbers.contains(lottoNumber);
+    }
+
     public List<LottoNumber> getMatchedLottoNumbers(LottoTicket lottoTicket) {
-        return lottoTicket.getLottoTicketNumbers().stream()
-            .filter(this.lottoNumbers::contains)
+        return lottoTicket.getNumbers().stream()
+            .filter(numbers::contains)
             .collect(Collectors.toList());
     }
 }

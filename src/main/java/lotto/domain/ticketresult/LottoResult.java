@@ -1,27 +1,29 @@
 package lotto.domain.ticketresult;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
+import lotto.domain.ticketpurchase.PurchasePrice;
 import lotto.domain.ticketpurchase.UserPurchase;
 import lotto.type.LottoMatchType;
 
 public class LottoResult {
     private static final int MIN_MATCH_NUMBER_COUNT_TO_GET_PRIZE = 3;
+    private static final int SECOND_DECIMAL_PLACE = 2;
 
-    private final WinningTicketAndBonusNumber winningLottoNumbers;
+    private final WinningTicketAndBonusNumber winningTicketAndBonusNumber;
     private final Map<LottoMatchType, Integer> resultCounts;
-    private final int purchasePrice;
-    private int totalLottoWinningMoney;
+    private final PurchasePrice purchasePrice;
+    private long totalMoney;
 
-    public LottoResult(WinningTicketAndBonusNumber winningLottoNumbers, UserPurchase userPurchase) {
-        this.winningLottoNumbers = winningLottoNumbers;
+    public LottoResult(WinningTicketAndBonusNumber winningTicketAndBonusNumber,
+        UserPurchase userPurchase) {
+        this.winningTicketAndBonusNumber = winningTicketAndBonusNumber;
         this.resultCounts = new HashMap<>();
         initializeLottoCounts();
         this.purchasePrice = userPurchase.getPurchasePrice();
-        this.totalLottoWinningMoney = 0;
+        this.totalMoney = 0;
     }
 
     private void initializeLottoCounts() {
@@ -30,36 +32,34 @@ public class LottoResult {
         }
     }
 
-    public void applyOneTicketResult(LottoTicket lottoTicket) {
-        List<LottoNumber> matchedLottoNumbers = getMatchedLottoNumbers(lottoTicket);
+    public void calculateResult(LottoTicket lottoTicket) {
+        MatchedLottoNumbers matchedLottoNumbers
+            = winningTicketAndBonusNumber.getMatchedLottoNumbers(lottoTicket);
         if (matchedLottoNumbers.size() < MIN_MATCH_NUMBER_COUNT_TO_GET_PRIZE) {
             return;
         }
-        increaseOneCountOfLottoMatchType(matchedLottoNumbers);
+        countOneLottoMatchType(matchedLottoNumbers.getMatchType());
     }
 
-    private List<LottoNumber> getMatchedLottoNumbers(LottoTicket lottoTicket) {
-        return winningLottoNumbers.getMatchedLottoNumbers(lottoTicket);
+    private void countOneLottoMatchType(LottoMatchType lottoMatchType) {
+        resultCounts
+            .computeIfPresent(lottoMatchType, (LottoMatchType key, Integer value) -> ++value);
     }
 
-    private void increaseOneCountOfLottoMatchType(List<LottoNumber> matchedLottoNumbersToGetPrize) {
-        LottoMatchType lottoMatchTypes
-            = LottoMatchType.getLottoMatchType(matchedLottoNumbersToGetPrize);
-        resultCounts.put(lottoMatchTypes, resultCounts.get(lottoMatchTypes) + 1);
-    }
-
-    public void addAllWinningMoney() {
+    public void calculateMoney() {
         for (LottoMatchType lottoMatchType : resultCounts.keySet()) {
             int matchedCount = resultCounts.get(lottoMatchType);
-            totalLottoWinningMoney += lottoMatchType.getPrizeMoney() * matchedCount;
+            totalMoney += (long) lottoMatchType.getPrizeMoney() * (long) matchedCount;
         }
     }
 
-    public int getCountOfMatchedNumbersOfSpecificType(LottoMatchType lottoMatchType) {
+    public int getMatchTypeCount(LottoMatchType lottoMatchType) {
         return resultCounts.get(lottoMatchType);
     }
 
-    public double getProfit() {
-        return (double) totalLottoWinningMoney / (double) purchasePrice;
+    public BigDecimal getProfit() {
+        return new BigDecimal(String.valueOf(totalMoney))
+            .divide(new BigDecimal(String.valueOf(purchasePrice.getPrice())),
+                SECOND_DECIMAL_PLACE, BigDecimal.ROUND_HALF_UP);
     }
 }
