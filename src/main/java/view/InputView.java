@@ -24,13 +24,14 @@ public class InputView {
     public static List<String> receiveManualTickets() {
         int numberOfTickets = receiveNumber(RECEIVE_MANUAL_TICKET_MESSAGE);
         System.out.println(RECEIVE_MANUAL_TICKET_NUMBER_MESSAGE);
-        return Stream.generate(() -> receiveInputNotNull(""))
+        return Stream.generate(InputView::receiveInputNotNull)
             .limit(numberOfTickets)
             .collect(Collectors.toList());
     }
 
     public static List<Integer> receiveWinningNumbers() {
-        return receiveNumbers(RECEIVE_WINNING_NUMBERS_MESSAGE);
+        System.out.println(RECEIVE_WINNING_NUMBERS_MESSAGE);
+        return receiveNumbers();
     }
 
     public static int receiveBonusNumber() {
@@ -46,12 +47,12 @@ public class InputView {
         }
     }
 
-    private static List<Integer> receiveNumbers(final String message) {
-        return createNumbers(receiveInputNotNull(message));
+    private static List<Integer> receiveNumbers() {
+        return createNumbers(receiveInputNotNull());
     }
 
-    private static String receiveInputNotNull(final String message) {
-        String userInput = receiveInput(message);
+    private static String receiveInputNotNull() {
+        String userInput = SCANNER.nextLine().trim();
         validateNull(userInput);
         return userInput;
     }
@@ -60,11 +61,6 @@ public class InputView {
         if (userInput == null) {
             throw new IllegalArgumentException(NULL_ERROR);
         }
-    }
-
-    private static String receiveInput(final String message) {
-        System.out.println(message);
-        return SCANNER.nextLine().trim();
     }
 
     private static List<Integer> createNumbers(final String userInput) {
