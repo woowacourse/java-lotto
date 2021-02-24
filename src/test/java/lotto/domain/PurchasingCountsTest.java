@@ -11,21 +11,21 @@ class PurchasingCountsTest {
     @DisplayName("구매 개수 객체 생성 확인")
     @Test
     void makePurchasingCount() {
-        PurchasingPrice purchasingPrice = new PurchasingPrice(5000);
+        Money money = new Money(5000);
 
-        PurchasingCounts purchasingCounts = PurchasingCounts.of(purchasingPrice, 2);
+        PurchasingCounts purchasingCounts = PurchasingCounts.of(money, 2);
 
         assertThat(purchasingCounts.getManualTicketCounts()).isEqualTo(2);
         assertThat(purchasingCounts.getAutoTicketCounts()).isEqualTo(3);
     }
 
-    @DisplayName("구매 개수 범위를 벗어났을 경우")
+    @DisplayName("수동 구매 개수 범위를 벗어났을 경우")
     @Test
     void cannotMakePurchasingCount() {
-        PurchasingPrice purchasingPrice = new PurchasingPrice(5000);
+        Money money = new Money(5000);
 
         assertThatThrownBy(() -> {
-            PurchasingCounts.of(purchasingPrice, 6);
+            PurchasingCounts.of(money, 6);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("구매 가능한 티켓 개수 범위를 벗어났습니다.");
     }

@@ -1,14 +1,14 @@
 package lotto.domain;
 
-public class PurchasingPrice {
+public class Money {
     private static final int MINIMUM_TICKET_PRICE = 1000;
     private static final String INVALID_TICKET_PRICE = "로또 티켓 최소 구매 금액은 1000원입니다.";
 
-    private final int purchasingPrice;
+    private final int money;
 
-    public PurchasingPrice(int purchasingPrice) {
-        validatePrice(purchasingPrice);
-        this.purchasingPrice = purchasingPrice;
+    public Money(int money) {
+        validatePrice(money);
+        this.money = money;
     }
 
     private void validatePrice(int purchasingPrice) {
@@ -18,10 +18,10 @@ public class PurchasingPrice {
     }
 
     public int calculatePurchasableTicketCounts() {
-        return purchasingPrice / MINIMUM_TICKET_PRICE;
+        return money / MINIMUM_TICKET_PRICE;
     }
 
     public int getPurchasingPrice() {
-        return purchasingPrice;
+        return calculatePurchasableTicketCounts() * MINIMUM_TICKET_PRICE;
     }
 }

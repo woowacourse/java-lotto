@@ -16,8 +16,8 @@ public class PurchasingCounts {
         }
     }
 
-    public static PurchasingCounts of(PurchasingPrice purchasingPrice, int manualTicketCounts) {
-        int allTicketCounts = purchasingPrice.calculatePurchasableTicketCounts();
+    public static PurchasingCounts of(Money money, int manualTicketCounts) {
+        int allTicketCounts = money.calculatePurchasableTicketCounts();
         return new PurchasingCounts(manualTicketCounts, allTicketCounts - manualTicketCounts);
     }
 

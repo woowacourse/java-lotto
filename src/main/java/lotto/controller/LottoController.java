@@ -8,20 +8,20 @@ import java.util.List;
 
 public class LottoController {
     public void run() {
-        PurchasingPrice purchasingPrice = new PurchasingPrice(InputView.inputPurchasingPrice());
-        LottoTickets lottoTickets = buyLottoTickets(purchasingPrice);
+        Money money = new Money(InputView.inputPurchasingPrice());
+        LottoTickets lottoTickets = buyLottoTickets(money);
 
         List<Integer> winningTicketNumbers = InputView.inputWinningTicketNumbers();
         int bonusBallNumber = InputView.inputBonusBallNumber();
         WinningLottoTicket winningLottoTicket = WinningLottoTicket.of(winningTicketNumbers, bonusBallNumber);
 
         LottoStatistics lottoStatistics = lottoTickets.getStatistics(winningLottoTicket);
-        OutputView.printLottoResult(lottoStatistics, purchasingPrice);
+        OutputView.printLottoResult(lottoStatistics, money);
     }
 
-    private LottoTickets buyLottoTickets(PurchasingPrice purchasingPrice) {
+    private LottoTickets buyLottoTickets(Money money) {
         int manualTicketCounts = InputView.inputManualTicketCounts();
-        PurchasingCounts purchasingCounts = PurchasingCounts.of(purchasingPrice, manualTicketCounts);
+        PurchasingCounts purchasingCounts = PurchasingCounts.of(money, manualTicketCounts);
         List<List<Integer>> manualLottoNumbers = InputView.inputManualLottoNumbers(manualTicketCounts);
         LottoMachine lottoMachine = new LottoMachine(new ManualLottoNumberGenerator(manualLottoNumbers),
                 new RandomLottoNumberGenerator());

@@ -14,8 +14,8 @@ class LottoMachineTest {
     @DisplayName("수동 로또, 자동 로또 생성 테스트")
     @Test
     void makeLottoTicketsByLottoMachine() {
-        PurchasingPrice purchasingPrice = new PurchasingPrice(5000);
-        PurchasingCounts purchasingCounts = PurchasingCounts.of(purchasingPrice, 2);
+        Money money = new Money(5000);
+        PurchasingCounts purchasingCounts = PurchasingCounts.of(money, 2);
         List<List<Integer>> numberGroup = new ArrayList<>();
         numberGroup.add(Arrays.asList(1, 2, 3, 4, 5, 6));
         numberGroup.add(Arrays.asList(7, 8, 9, 10, 11, 12));

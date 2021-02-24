@@ -2,7 +2,6 @@ package lotto.view;
 
 import lotto.domain.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -38,7 +37,7 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printLottoResult(LottoStatistics lottoStatistics, PurchasingPrice purchasingPrice) {
+    public static void printLottoResult(LottoStatistics lottoStatistics, Money money) {
         System.out.println();
         System.out.println(RESULT_MESSAGE);
         System.out.println(HYPHENS);
@@ -46,7 +45,7 @@ public class OutputView {
                 .filter(lottoRank -> lottoRank != LottoRank.MISS)
                 .sorted(Comparator.reverseOrder())
                 .forEach(lottoRank -> printStatisticsMessage(lottoRank, lottoStatistics));
-        System.out.printf(YIELD_MESSAGE, lottoStatistics.calculateYield(purchasingPrice));
+        System.out.printf(YIELD_MESSAGE, lottoStatistics.calculateYield(money));
     }
 
     private static void printStatisticsMessage(LottoRank lottoRank, LottoStatistics lottoStatistics) {

@@ -16,13 +16,13 @@ public class LottoStatistics {
         return statisticsMap.computeIfAbsent(lottoRank, key -> ZERO);
     }
 
-    public double calculateYield(PurchasingPrice purchasingPrice) {
+    public double calculateYield(Money money) {
         Set<LottoRank> lottoRanks = statisticsMap.keySet();
         long priceTotal = ZERO;
         for (LottoRank lottoRank : lottoRanks) {
             priceTotal += lottoRank.getPrizeMoney() * statisticsMap.get(lottoRank);
         }
-        int denominator = purchasingPrice.getPurchasingPrice();
+        int denominator = money.getPurchasingPrice();
         return (((double) priceTotal) / denominator);
     }
 }
