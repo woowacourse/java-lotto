@@ -8,9 +8,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lotto.controller.generator.LottoAutoGenerator;
 import lotto.controller.generator.LottoManualGenerator;
-import lotto.utility.InputTest;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -24,18 +21,6 @@ public class LottosTest {
     public static final List<Integer> WINNING_NUMBERS = Arrays.asList(1, 2, 3, 4, 5, 6);
     public static final int BONUS_NUMBER = 7;
     private static final String DELIMITER = ", ";
-
-    private InputTest inputTest = new InputTest();
-
-    @BeforeEach
-    public void setUp() {
-        inputTest.setUp();
-    }
-
-    @AfterEach
-    public void restoreSystemInputOutput() {
-        inputTest.restoreSystemInputOutput();
-    }
 
     @Test
     @DisplayName("구입한 로또 매수만큼 로또 생성")

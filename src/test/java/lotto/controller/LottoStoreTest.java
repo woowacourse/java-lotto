@@ -10,9 +10,6 @@ import lotto.controller.generator.LottoManualGenerator;
 import lotto.domain.LottoAnnouncement;
 import lotto.domain.LottoRank;
 import lotto.domain.Lottos;
-import lotto.utility.InputTest;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -25,18 +22,6 @@ public class LottoStoreTest {
     public static final List<Integer> WINNING_NUMBERS = Arrays.asList(1, 2, 3, 4, 5, 6);
     public static final int BONUS_NUMBER = 7;
     private static final String DELIMITER = ", ";
-
-    private InputTest inputTest = new InputTest();
-
-    @BeforeEach
-    public void setUp() {
-        inputTest.setUp();
-    }
-
-    @AfterEach
-    public void restoreSystemInputOutput() {
-        inputTest.restoreSystemInputOutput();
-    }
 
     private static Stream<Arguments> provideLottosResult() {
         return Stream.of(
