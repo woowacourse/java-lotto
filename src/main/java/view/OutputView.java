@@ -1,6 +1,10 @@
 package view;
 
-import domain.*;
+import domain.LottoNumber;
+import domain.LottoTicket;
+import domain.Profit;
+import domain.Rank;
+import domain.Statistics;
 
 import java.util.Arrays;
 import java.util.Collections;
