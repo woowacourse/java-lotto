@@ -23,6 +23,12 @@ public class Lottos {
         }
     }
 
+    public void addMatchLotto(WinningLotto winningLotto, LottoGameResult lottoGameResult) {
+        for (Lotto lotto : lottos) {
+            lottoGameResult.add(winningLotto.findRank(lotto));
+        }
+    }
+
     public List<Lotto> toList() {
 
         return Collections.unmodifiableList(lottos);
