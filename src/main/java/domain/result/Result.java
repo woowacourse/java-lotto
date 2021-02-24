@@ -10,15 +10,10 @@ import java.util.List;
 import java.util.Map;
 
 public class Result {
-    private final LottoTickets lottoTickets;
-    private final WinningLotto winningLotto;
     private final Map<LottoRank, Integer> results;
 
     public Result(LottoTickets lottoTickets, WinningLotto winningLotto) {
-        this.lottoTickets = lottoTickets;
-        this.winningLotto = winningLotto;
-        this.results = new HashMap<>();
-        setResult();
+        this.results = makeResult(lottoTickets, winningLotto);
     }
 
     public BigDecimal findEarningsRate(BettingMoney bettingMoney) {
@@ -29,18 +24,17 @@ public class Result {
     }
 
     public Map<LottoRank, Integer> getResults() {
-        return results;
+        return new HashMap<>(results);
     }
 
-    private Map<LottoRank, Integer> setResult() {
+    private Map<LottoRank, Integer> makeResult(LottoTickets lottoTickets, WinningLotto winningLotto) {
+        Map<LottoRank, Integer> copy = new HashMap<>();
         List<LottoRank> lottoRanks = lottoTickets.findMatches(winningLotto);
-        lottoRanks.forEach(this::putResult);
-        return results;
-    }
-
-    private void putResult(final LottoRank lottoRank) {
-        results.computeIfPresent(lottoRank, (key, value) -> value + 1);
-        results.putIfAbsent(lottoRank, 1);
+        lottoRanks.forEach(lottoRank -> {
+            copy.computeIfPresent(lottoRank, (key, value) -> value + 1);
+            copy.putIfAbsent(lottoRank, 1);
+        });
+        return copy;
     }
 
     private int getTotalPrize(LottoRank lottoRank) {
