@@ -34,10 +34,8 @@ public class InputView {
         }
     }
 
-    public static List<Lotto> inputManualLottoNumbers() {
+    public static List<Lotto> inputManualLottoNumbers(int numOfPurchases) {
         try {
-            OutputView.printPurchaseNumOfManualLottoGuideMessage();
-            int numOfPurchases = inputNumOfManualLotto();
             OutputView.printPurchaseManualLottoGuideMessage();
             List<Lotto> manualLottoNumbers = new ArrayList<>();
             for (int i = 0; i < numOfPurchases; i++) {
@@ -46,12 +44,13 @@ public class InputView {
             return manualLottoNumbers;
         } catch (Exception e) {
             OutputView.printExceptionMessage(e);
-            return inputManualLottoNumbers();
+            return inputManualLottoNumbers(numOfPurchases);
         }
     }
 
-    private static int inputNumOfManualLotto() {
+    public static int inputNumOfManualLotto() {
         try {
+            OutputView.printPurchaseNumOfManualLottoGuideMessage();
             int numOfPurchases = Integer.parseInt(scanner.nextLine());
             validateNumOfManualLotto(numOfPurchases);
             System.out.println();
@@ -81,9 +80,14 @@ public class InputView {
         }
     }
 
-    public static List<Integer> inputWinningLottoNumbers() {
-        OutputView.printWinningLottoGuideMessage();
-        return inputLottoNumber();
+    public static Lotto inputWinningLottoNumbers() {
+        try {
+            OutputView.printWinningLottoGuideMessage();
+            return Lotto.of(inputLottoNumber());
+        } catch (Exception e) {
+            OutputView.printExceptionMessage(e);
+            return inputWinningLottoNumbers();
+        }
     }
 
     public static int inputWinningBonus() {
@@ -100,7 +104,7 @@ public class InputView {
 
     public static void validateWinningBonus(int value) {
         if (value < LottoNumber.MIN || value > LottoNumber.MAX) {
-            throw new IllegalArgumentException("보너스 번호는 1부터 45사이의 값이어야 합니다.");
+            throw new IllegalArgumentException("[ERROR] 보너스 번호는 1부터 45사이의 값이어야 합니다.");
         }
     }
 }
