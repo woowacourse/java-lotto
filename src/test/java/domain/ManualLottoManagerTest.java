@@ -25,7 +25,7 @@ class ManualLottoManagerTest {
 
         assertThatIllegalArgumentException()
             .isThrownBy(() -> ManualLottoManager.generate(money, lottoNumbers))
-            .withMessageContaining("초과");
+            .withMessageContaining("구매 가능한");
     }
 
     @DisplayName("수동 로또 생성 실패 : 중복 숫자가 들어가 있는 번호 입력")

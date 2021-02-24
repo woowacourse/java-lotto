@@ -11,7 +11,7 @@ public class ManualLottoManager {
 
     private static void validateSizeOfNum(final Money money, final List<String> manualTickets) {
         if (!money.canBuy(manualTickets.size())) {
-            throw new IllegalArgumentException("입력 숫자가 구매 가능 숫자를 초과했습니다");
+            throw new IllegalArgumentException("구매 가능한 로또 개수가 아닙니다.");
         }
     }
 }
