@@ -46,10 +46,6 @@ public class Lotto {
         return changedNums;
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return this.lottoNumbers;
-    }
-
     public boolean isContainNum(int number) {
         return changeToList().contains(number);
     }
