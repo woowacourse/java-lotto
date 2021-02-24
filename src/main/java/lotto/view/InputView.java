@@ -1,10 +1,10 @@
 package lotto.view;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
 import lotto.exception.LessThanLottoPriceException;
@@ -39,10 +39,11 @@ public class InputView {
             OutputView.printPurchaseNumOfManualLottoGuideMessage();
             int numOfPurchases = inputNumOfManualLotto();
             OutputView.printPurchaseManualLottoGuideMessage();
-            return Stream.iterate(0 , i -> i + 1)
-                .map(i -> Lotto.of(inputLottoNumber()))
-                .limit(numOfPurchases)
-                .collect(Collectors.toList());
+            List<Lotto> manualLottoNumbers = new ArrayList<>();
+            for (int i = 0; i < numOfPurchases; i++) {
+                manualLottoNumbers.add(Lotto.of(inputLottoNumber()));
+            }
+            return manualLottoNumbers;
         } catch (Exception e) {
             OutputView.printExceptionMessage(e);
             return inputManualLottoNumbers();
@@ -98,7 +99,7 @@ public class InputView {
     }
 
     public static void validateWinningBonus(int value) {
-        if (value <= LottoNumber.MIN || value > LottoNumber.MAX) {
+        if (value < LottoNumber.MIN || value > LottoNumber.MAX) {
             throw new IllegalArgumentException("보너스 번호는 1부터 45사이의 값이어야 합니다.");
         }
     }

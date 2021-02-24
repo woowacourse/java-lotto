@@ -6,7 +6,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Lottos;
-import lotto.domain.user.UserDto;
 import lotto.model.LottoRank;
 import lotto.model.LottoResult;
 
@@ -28,10 +27,8 @@ public class OutputView {
         System.out.println("구입금액을 입력해 주세요.");
     }
 
-    public static void printUserLottoPurchaseResult(UserDto userDto) {
+    public static void printLottoPurchaseResult(Lottos manualLottos, Lottos automaticLottos) {
         System.out.println();
-        Lottos manualLottos = userDto.getManualLottos();
-        Lottos automaticLottos = userDto.getAutomaticLottos();
 
         System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualLottos.getNumOfLottos(), automaticLottos.getNumOfLottos());
         printLottos(manualLottos);

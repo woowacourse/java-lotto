@@ -1,7 +1,9 @@
 package lotto.controller;
 
-import lotto.domain.user.User;
-import lotto.domain.user.UserDto;
+import lotto.domain.LottoMachine;
+import lotto.domain.WinningLotto;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.Lottos;
 import lotto.model.Money;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -9,16 +11,15 @@ import lotto.view.OutputView;
 public class LottoController {
 
     public void play() {
-        User user = new User(Money.priceOf(InputView.inputPurchaseAmount()));
-        user.buyManualLottos(InputView.inputManualLottoNumbers());
-        user.buyAutomaticLottos();
-        OutputView.printUserLottoPurchaseResult(UserDto.from(user));
+        Money insertedMoney = Money.priceOf(InputView.inputPurchaseAmount());
+        LottoMachine lottoMachine = LottoMachine.insertMoney(insertedMoney);
+        Lottos manualLottos = lottoMachine.buyManualLottos(InputView.inputManualLottoNumbers());
+        Lottos automaticLottos = lottoMachine.buyAutomaticLottos();
+        OutputView.printLottoPurchaseResult(manualLottos, automaticLottos);
 
-//        Lotto winningLottoNumber = Lotto.of(InputView.inputWinningLottoNumbers());
-//        int bonus = InputView.inputWinningBonus();
-//        WinningLotto winningLotto = new WinningLotto(winningLottoNumber, bonus);
-//        LottoResult lottoResult = purchasedLottos.match(winningLotto);
-//        OutputView.printLottoResult(lottoResult);
+        Lotto winningLottoNumber = Lotto.of(InputView.inputWinningLottoNumbers());
+        int bonus = InputView.inputWinningBonus();
+        WinningLotto winningLotto = new WinningLotto(winningLottoNumber, bonus);
     }
 }
 
