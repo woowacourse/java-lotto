@@ -16,20 +16,23 @@ public class LottoGameController {
 
     public void buyTickets() {
         Money money = new Money(InputView.getMoneyInput());
-        LottoManualTicketCount lottoManualTicketCount =
-                new LottoManualTicketCount(InputView.getManualLottoTicketCount(), money);
-        if (lottoManualTicketCount.isRemain()) {
-            buyManualTicket(money, lottoManualTicketCount);
-        }
+        System.out.println();
+        LottoManualTicketCount lottoManualTicketCount = new LottoManualTicketCount(InputView.getManualLottoTicketCount(), money);
+        System.out.println();
+        buyManualTicket(money, lottoManualTicketCount);
         buyAutoTicket(money);
     }
 
     private void buyManualTicket(Money money, LottoManualTicketCount lottoManualTicketCount) {
+        if (!lottoManualTicketCount.isRemain()) {
+            return;
+        }
         InputView.printManualNumbersInputRequestMessage();
         while (lottoManualTicketCount.isRemain()) {
             lottoGame.buyManualTicket(money, InputView.getManualNumbersInput());
             lottoManualTicketCount.reduce();
         }
+        System.out.println();
     }
 
     private void buyAutoTicket(Money money) {
