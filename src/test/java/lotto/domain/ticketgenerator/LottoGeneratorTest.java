@@ -5,6 +5,8 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.ticketpurchase.UserPurchase;
+import lotto.strategy.AutoStrategy;
+import lotto.strategy.ManualStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,10 +17,11 @@ public class LottoGeneratorTest {
     @DisplayName("구입 금액에 따른 티켓 다발 생성")
     @Test
     void Should_ReturnPurchasedTickets_When_Purchased() {
-        UserPurchase userPurchase = new UserPurchase(18000);
+        UserPurchase userPurchase = new UserPurchase(18000, 3);
         LottoGenerator lottoGenerator = new LottoGenerator();
-        LottoTickets lottoTickets = lottoGenerator.generatePurchasedTickets(userPurchase);
-        assertThat(lottoTickets.getTickets().size()).isEqualTo(18);
+        lottoGenerator.setGenerateStrategy(new AutoStrategy(15));
+        LottoTickets lottoTickets = lottoGenerator.generateTickets();
+        assertThat(lottoTickets.size()).isEqualTo(18);
     }
 
 
