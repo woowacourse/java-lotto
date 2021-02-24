@@ -65,7 +65,7 @@ class LottosTest {
                 + 1500000 * expectedCount[2]
                 + 30000000 * expectedCount[3]
                 + 2000000000 * expectedCount[4]) / Float.valueOf(money);
-        assertThat(lottoResults.getProfit()).isEqualTo(expected);
+        assertThat(lottoResults.calculateYield(new Money(money))).isEqualTo(expected);
     }
 
     List<Lotto> makeLottos(String[] inputs) {

@@ -3,7 +3,6 @@ package lottogame.view;
 import lottogame.domain.Rank;
 import lottogame.domain.lotto.Lotto;
 import lottogame.domain.lotto.LottoNumber;
-import lottogame.domain.stats.LottoResults;
 
 import java.util.List;
 import java.util.Map;
@@ -13,8 +12,8 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void showLottoQuantity(int quantity) {
-        System.out.printf("%d개를 구매했습니다.\n", quantity);
+    public static void showLottoQuantity(int totalQuantity, int manualQuantity) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualQuantity, totalQuantity - manualQuantity);
     }
 
     public static void showLottos(List<Lotto> lottos) {
@@ -29,18 +28,16 @@ public class OutputView {
                 .collect(Collectors.joining(", ", "[", "]"));
     }
 
-    public static void printResult(LottoResults results) {
+    public static void printResult(Map<Rank, Integer> results, float yield) {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
         printSummary(results);
-        System.out.printf("총 수익률은 %.2f입니다.\n", results.getProfit());
+        System.out.printf("총 수익률은 %.2f입니다.\n", yield);
     }
 
-    private static void printSummary(LottoResults results) {
-        for (Map.Entry<Rank, Integer> statistic : results.values().entrySet()) {
-            Rank rank = statistic.getKey();
-            int price = statistic.getValue();
-            printRank(rank, price);
+    private static void printSummary(Map<Rank, Integer> results) {
+        for (Rank rank : results.keySet()) {
+            printRank(rank, results.get(rank));
         }
     }
 

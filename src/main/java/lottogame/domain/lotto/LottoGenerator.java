@@ -1,5 +1,7 @@
 package lottogame.domain.lotto;
 
+import lottogame.domain.Quantity;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -14,9 +16,9 @@ public class LottoGenerator {
     private LottoGenerator() {
     }
 
-    public static List<Lotto> makeLottos(int amount) {
+    public static List<Lotto> makeLottos(Quantity quantity) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < amount; i++) {
+        for (int i = 0; i < quantity.value(); i++) {
             lottos.add(new Lotto(makeNumbers()));
         }
         return lottos;

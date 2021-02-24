@@ -20,16 +20,16 @@ class MoneyTest {
     @ParameterizedTest
     @ValueSource(strings = {"4가", "-1000", "-기나"})
     void 잘못된_금액_입력(String input) {
-        assertThatThrownBy(() -> {
-            new Money(input);
-        }).isInstanceOf(InvalidMoneyException.class);
+        assertThatThrownBy(() ->
+            new Money(input)
+        ).isInstanceOf(InvalidMoneyException.class);
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"14000:14", "500:0", "1100:1"}, delimiter = ':')
+    @CsvSource(value = {"14000:14", "1100:1"}, delimiter = ':')
     void 로또_갯수(String input, int expected) {
         Money money = new Money(input);
-        assertEquals(expected, money.lottoQuantity());
+        assertEquals(expected, money.calculateQuantity().value());
     }
 
     @Test

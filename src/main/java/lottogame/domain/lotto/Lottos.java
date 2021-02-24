@@ -3,8 +3,7 @@ package lottogame.domain.lotto;
 import lottogame.domain.Rank;
 import lottogame.domain.stats.LottoResults;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Lottos {
     private final List<Lotto> lottos = new ArrayList<>();
@@ -18,12 +17,26 @@ public class Lottos {
     }
 
     public LottoResults matchLottos(WinningLotto winningLotto) {
-        LottoResults lottoResults = new LottoResults();
+        Map<Rank, Integer> results = new EnumMap<>(Rank.class);
+        Arrays.stream(Rank.values()).forEach(rank -> results.put(rank, 0));
         for (Lotto lotto : lottos) {
             int count = lotto.match(winningLotto.values());
             boolean bonus = lotto.containsBonus(winningLotto);
-            lottoResults.add(Rank.of(count, bonus));
+            Rank rank = Rank.of(count, bonus);
+            results.put(rank, results.get(rank) + 1);
         }
-        return lottoResults;
+        return new LottoResults(results);
+    }
+
+    public int size() {
+        return lottos.size();
+    }
+
+    public void add(List<String> lottoNumbers) {
+        List<Lotto> manualLottos = new ArrayList<>();
+        for (String lottoNumber : lottoNumbers) {
+            manualLottos.add(Lotto.of(lottoNumber));
+        }
+        lottos.addAll(0, manualLottos);
     }
 }

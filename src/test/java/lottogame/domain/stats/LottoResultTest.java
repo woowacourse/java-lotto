@@ -48,7 +48,8 @@ class LottoResultTest {
         list.add(new Lotto(makeLottoNumberList(values)));
         lottos = new Lottos(list);
         LottoGame lottoGame = new LottoGame(lottos, new Money("14000"));
-        OutputView.printResult(lottoGame.Results(winningLotto));
+        LottoResults lottoResults = lottoGame.Results(winningLotto);
+        OutputView.printResult(lottoResults.values(), lottoResults.calculateYield(new Money("14000")));
     }
 
     List<LottoNumber> makeLottoNumberList(List<Integer> numbers) {
