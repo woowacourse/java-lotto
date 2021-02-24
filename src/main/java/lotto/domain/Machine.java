@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import lotto.utils.LottoGenerator;
@@ -7,6 +8,7 @@ import lotto.utils.LottoGenerator;
 public class Machine {
     private final Money money;
     private final LottoTickets lottoTickets;
+    private BigDecimal earnedMoney;
 
     public Machine(String moneyValue, LottoGenerator lottoGenerator) {
         this(moneyValue, new ArrayList<>(), lottoGenerator);
