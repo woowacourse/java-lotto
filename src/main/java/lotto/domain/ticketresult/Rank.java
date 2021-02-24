@@ -1,21 +1,22 @@
 package lotto.domain.ticketresult;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public enum Rank {
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 30_000_000),
-    THIRD(5, 1_500_000),
-    FOURTH(4, 50_000),
-    FIFTH(3, 5_000);
+    FIRST(6, false, 2_000_000_000),
+    SECOND(5, true, 30_000_000),
+    THIRD(5, false, 1_500_000),
+    FOURTH(4, false, 50_000),
+    FIFTH(3, false, 5_000),
+    NONE(0, false, 0);
 
     private final int matchedNumberCount;
+    private final boolean hasBonusNumber;
     private final int prizeMoney;
 
-    Rank(int matchedNumberCount, int prizeMoney) {
+    Rank(int matchedNumberCount, boolean hasBonusNumber, int prizeMoney) {
         this.matchedNumberCount = matchedNumberCount;
+        this.hasBonusNumber = hasBonusNumber;
         this.prizeMoney = prizeMoney;
     }
 
@@ -27,9 +28,18 @@ public enum Rank {
         return prizeMoney;
     }
 
-    public static List<Rank> getLottoMatchType(int matchedNumberCount) {
+    public static Rank getLottoRank(int matchedNumberCount, boolean hasBonusNumber) {
+        if (isSecondPrize(matchedNumberCount, hasBonusNumber)) {
+            return SECOND;
+        }
         return Arrays.stream(Rank.values())
-                .filter(lottoMatchType -> lottoMatchType.matchedNumberCount == matchedNumberCount)
-                .collect(Collectors.toList());
+                .filter(rank -> rank.matchedNumberCount == matchedNumberCount)
+                .filter(rank -> rank != SECOND)
+                .findFirst()
+                .orElseGet(() -> NONE);
+    }
+
+    private static boolean isSecondPrize(int matchedNumberCount, boolean hasBonusNumber) {
+        return (matchedNumberCount == SECOND.matchedNumberCount) && hasBonusNumber;
     }
 }

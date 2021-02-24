@@ -23,6 +23,10 @@ public class LottoTicket {
         return Collections.unmodifiableList(this.numbers);
     }
 
+    public int compare(LottoTicket lottoTicket) {
+        return (int) this.numbers.stream().filter(lottoTicket::hasNumber).count();
+    }
+
     public boolean hasNumber(LottoNumber number) {
         return this.numbers.contains(number);
     }

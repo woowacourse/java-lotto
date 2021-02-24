@@ -13,18 +13,18 @@ public class WinningLottoNumbers {
         this.bonusNumber = bonusNumber;
     }
 
-    public LottoTicket getWinningTicket() {
-        return winningTicket;
+    public int compare(LottoTicket purchasedLottoTicket) {
+        return winningTicket.compare(purchasedLottoTicket);
     }
 
     public LottoNumber getBonusNumber() {
-        return bonusNumber;
+        return this.bonusNumber;
     }
 
-    private void validateWinningTicketNotContainsBonusNumber(LottoTicket winningTicket,
-        LottoNumber bonusNumber) {
+    private void validateWinningTicketNotContainsBonusNumber(LottoTicket winningTicket, LottoNumber bonusNumber) {
         if (winningTicket.hasNumber(bonusNumber)) {
             throw new IllegalArgumentException("보너스 번호는 당첨 번호에 포함되지 않아야 합니다.");
         }
     }
+
 }

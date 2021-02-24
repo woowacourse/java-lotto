@@ -35,8 +35,9 @@ public class OutputPrinter {
     }
 
     public static void printEachNumberMatchedCountMessage(Rank rank, Map<Rank, Integer> result) {
-        System.out.printf(MATCH_MESSAGE + NEW_LINE,
-            rank.getCountMatchedNumbers(), rank.getPrizeMoney(), result.get(rank));
+        if (rank != Rank.NONE) {
+            System.out.printf(MATCH_MESSAGE + NEW_LINE, rank.getCountMatchedNumbers(), rank.getPrizeMoney(), result.get(rank));
+        }
     }
 
     public static void printProfitMessage(double profit) {
