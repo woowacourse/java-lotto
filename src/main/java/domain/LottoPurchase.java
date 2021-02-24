@@ -7,8 +7,6 @@ package domain;
  * @author Kimun Kim, github.com/tributetothemoon
  * @author Daeun Lee, github.com/da-nyee
  */
-import java.util.ArrayList;
-import java.util.List;
 
 public class LottoPurchase {
     public static LottoTicket buyAutomatically(Budget budget) {

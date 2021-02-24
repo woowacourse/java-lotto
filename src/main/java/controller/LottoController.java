@@ -1,6 +1,13 @@
 package controller;
 
-import domain.*;
+import domain.Budget;
+import domain.LottoTicket;
+import domain.Money;
+import domain.WinningNumbers;
+import domain.Statistics;
+import domain.Profit;
+import domain.LottoNumber;
+import domain.LottoPurchase;
 import view.InputView;
 import view.OutputView;
 import util.Repeater;
