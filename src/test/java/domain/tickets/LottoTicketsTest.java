@@ -9,6 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -33,10 +34,10 @@ class LottoTicketsTest {
         final TicketQuantity ticketQuantity = new TicketQuantity(lottoMoney, expectedManualAmount);
 
         assertAll(
-                () -> assertThatCode(() -> new LottoTickets(ticketQuantity))
+                () -> assertThatCode(() -> new LottoTickets(ticketQuantity, Collections.emptyList()))
                         .doesNotThrowAnyException(),
 
-                () -> assertThat(new LottoTickets(ticketQuantity)
+                () -> assertThat(new LottoTickets(ticketQuantity, Collections.emptyList())
                         .isSameTotalQuantity(expectedAutoAmount))
                         .isEqualTo(true)
         );

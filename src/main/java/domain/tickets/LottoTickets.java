@@ -16,12 +16,6 @@ import java.util.stream.IntStream;
 public class LottoTickets {
     private final List<Ticket> lottoTickets = new ArrayList<>();
 
-    public LottoTickets(final TicketQuantity ticketQuantity) {
-        final int autoAmount = ticketQuantity.getAutoAmount();
-
-        lottoTickets.addAll(createAutoLottoTickets(autoAmount));
-    }
-
     public LottoTickets(final TicketQuantity ticketQuantity, final List<List<Integer>> manualNumbers) {
         final int manualAmount = ticketQuantity.getManualAmount();
         final int autoAmount = ticketQuantity.getAutoAmount();
