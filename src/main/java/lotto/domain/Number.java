@@ -30,7 +30,7 @@ public class Number implements Comparable<Number> {
     }
 
     private static void checkValidRange(int candidateNumber) {
-        if ((candidateNumber < LOWER_LIMIT) | (candidateNumber > UPPER_LIMIT)) {
+        if ((candidateNumber < LOWER_LIMIT) || (candidateNumber > UPPER_LIMIT)) {
             throw new NumberException(EXCESS_NUMBER_MESSAGE);
         }
     }
@@ -45,20 +45,20 @@ public class Number implements Comparable<Number> {
         if (this == candidateObject) {
             return true;
         };
-        if (candidateObject == null || getClass() != candidateObject.getClass()) {
+        if ((candidateObject == null) || (getClass() != candidateObject.getClass())) {
             return false;
         }
         Number object = (Number) candidateObject;
-        return number == object.number;
+        return this.number == object.number;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(number);
+        return Objects.hash(this.number);
     }
 
     @Override
     public String toString() {
-        return Integer.toString(number);
+        return Integer.toString(this.number);
     }
 }
