@@ -14,11 +14,8 @@ import lotto.exception.LottoAnnouncementException;
 import lotto.exception.LottoException;
 import lotto.exception.MoneyException;
 import lotto.exception.PieceException;
-import lotto.viewer.AnnouncementInputView;
-import lotto.viewer.LottoGeneratorInputView;
-import lotto.viewer.MoneyInputView;
+import lotto.viewer.InputView;
 import lotto.viewer.OutputView;
-import lotto.viewer.PieceInputView;
 
 public class LottoStore {
 
@@ -26,18 +23,12 @@ public class LottoStore {
     private static final int DECIMAL_TRIM_NUMERATOR = 100;
     private static final double DECIMAL_TRIM_DENOMINATOR = 100.00;
 
-    private final AnnouncementInputView announcementInputView;
-    private final LottoGeneratorInputView lottoGeneratorInputView;
-    private final MoneyInputView moneyInputView;
-    private final PieceInputView pieceInputView;
+    private final InputView inputView;
     private final OutputView outputView;
 
     public LottoStore() {
         Scanner scanner = new Scanner(System.in);
-        pieceInputView = new PieceInputView(scanner);
-        moneyInputView = new MoneyInputView(scanner);
-        announcementInputView = new AnnouncementInputView(scanner);
-        lottoGeneratorInputView = new LottoGeneratorInputView(scanner);
+        inputView = new InputView(scanner);
         outputView = new OutputView();
     }
 
@@ -77,7 +68,7 @@ public class LottoStore {
     private Money receiveValidMoney() {
         Money candidateMoney;
         try {
-            candidateMoney = moneyInputView.purchaseMoney();
+            candidateMoney = inputView.purchaseMoney();
         } catch (MoneyException moneyException) {
             outputView.printMoneyException(moneyException);
             candidateMoney = receiveValidMoney();
@@ -88,7 +79,7 @@ public class LottoStore {
     private LottoAnnouncement receiveValidLottoAnnouncement() {
         LottoAnnouncement candidateLottoAnnouncement;
         try {
-            candidateLottoAnnouncement = announcementInputView.inputAnnouncement();
+            candidateLottoAnnouncement = inputView.inputAnnouncement();
         } catch (LottoAnnouncementException lottoAnnouncementException) {
             outputView.printLottoAnnouncementException(lottoAnnouncementException);
             candidateLottoAnnouncement = receiveValidLottoAnnouncement();
@@ -99,10 +90,10 @@ public class LottoStore {
     private Piece receiveManualPieces(Money possessedMoney) {
         Piece candidateManualPiece;
         try {
-            candidateManualPiece = pieceInputView.inputManualPieces(possessedMoney);
+            candidateManualPiece = inputView.inputManualPieces(possessedMoney);
         } catch (PieceException pieceException) {
             outputView.printPieceException(pieceException);
-            candidateManualPiece = pieceInputView.inputManualPieces(possessedMoney);
+            candidateManualPiece = inputView.inputManualPieces(possessedMoney);
         }
         return candidateManualPiece;
     }
@@ -111,7 +102,7 @@ public class LottoStore {
         LottoManualGenerator lottoManualGenerator;
         Lottos lottos;
         try {
-            lottoManualGenerator = lottoGeneratorInputView.lottoManualGenerator(manualPiece);
+            lottoManualGenerator = inputView.lottoManualGenerator(manualPiece);
             lottos = new Lottos(lottoManualGenerator, manualPiece.getPiece());
         } catch (LottoException lottoException) {
             outputView.printLottoException(lottoException);
