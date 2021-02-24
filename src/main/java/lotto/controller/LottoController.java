@@ -20,7 +20,6 @@ public class LottoController {
         OutputView.printLottoTicket(lottoTicket);
 
         WinningLotto winningLotto = creatWinningLotto();
-
         Ranks lottoWinningResult = createLottoWinningResult(lottoTicket, winningLotto);
         OutputView.printLottoResult(lottoWinningResult);
     }

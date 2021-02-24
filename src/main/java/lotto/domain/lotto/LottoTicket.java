@@ -14,7 +14,7 @@ public class LottoTicket {
     private final List<LottoLine> lottoLines;
 
     public LottoTicket(LottoMoney money) {
-        if(money.getCanBuyLottoLineCount() == 0){
+        if (money.getCanBuyLottoLineCount() == 0) {
             throw new IllegalArgumentException(LOTTO_PURCHASE_MONEY_LACK_ERROR);
         }
         int lottoLineCount = money.getCanBuyLottoLineCount();
@@ -22,7 +22,7 @@ public class LottoTicket {
     }
 
     public LottoTicket(LottoMoney money, List<LottoLine> lottoLines) {
-        if(money.getCanBuyLottoLineCount() == 0 && lottoLines.size() == 0){
+        if (money.getCanBuyLottoLineCount() == 0 && lottoLines.size() == 0) {
             throw new IllegalArgumentException(LOTTO_PURCHASE_MONEY_LACK_ERROR);
         }
         int lottoLineCount = money.getCanBuyLottoLineCount();
