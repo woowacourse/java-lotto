@@ -4,7 +4,7 @@ import domain.lotto.TicketCount;
 import domain.lotto.WinningLotto;
 import domain.result.Result;
 import service.LottoService;
-import util.InputUtil;
+import view.InputView;
 import view.LottoGameScreen;
 import view.dto.LottoGameResultDto;
 
@@ -13,10 +13,12 @@ import java.util.Set;
 public class GameManageApplication {
     private final LottoGameScreen lottoGameScreen;
     private final LottoService lottoService;
+    private final InputView inputView;
 
-    public GameManageApplication(final LottoGameScreen lottoGameScreen, LottoService lottoService) {
+    public GameManageApplication(final LottoGameScreen lottoGameScreen, LottoService lottoService, InputView inputView) {
         this.lottoGameScreen = lottoGameScreen;
         this.lottoService = lottoService;
+        this.inputView = inputView;
     }
 
     public void run() {
@@ -33,7 +35,7 @@ public class GameManageApplication {
     }
 
     private BettingMoney getBettingMoney() {
-        int input = InputUtil.inputBettingMoney();
+        int input = inputView.inputBettingMoney();
         return new BettingMoney(input);
     }
 
@@ -43,8 +45,8 @@ public class GameManageApplication {
     }
 
     private WinningLotto getWinningLotto() {
-        Set<Integer> winningNumbers = InputUtil.inputWinningNumbers();
-        int bonusNumber = InputUtil.inputBonusNumber();
+        Set<Integer> winningNumbers = inputView.inputWinningNumbers();
+        int bonusNumber = inputView.inputBonusNumber();
         return new WinningLotto(winningNumbers, bonusNumber);
     }
 }

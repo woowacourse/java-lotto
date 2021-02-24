@@ -4,6 +4,7 @@ import domain.ball.LottoBall;
 import domain.ball.LottoBallFactory;
 import domain.ball.LottoBalls;
 import domain.lotto.LottoTicket;
+import view.InputView;
 
 import java.util.Collections;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.stream.IntStream;
 
 import static domain.ball.LottoBalls.LOTTO_BALL_SIZE;
 
-public class RandomLottoMachine {
+public class LottoMachine {
     public List<LottoTicket> makeTickets(int ticketCount) {
         return IntStream.range(0, ticketCount)
                 .mapToObj(count -> makeTicket())
@@ -31,5 +32,19 @@ public class RandomLottoMachine {
                 .limit(LOTTO_BALL_SIZE)
                 .sorted()
                 .collect(Collectors.toList());
+    }
+
+    public List<LottoTicket> makeManualTicket(InputView inputView, int ticketCount) {
+        return IntStream.range(0, ticketCount)
+                .mapToObj(count -> makeManualTicket(inputView))
+                .collect(Collectors.toList());
+    }
+
+    private LottoTicket makeManualTicket(InputView inputView) {
+        List<Integer> manualTicketNumbers = inputView.inputManualTicketNumber();
+        List<LottoBall> lottoBalls = manualTicketNumbers.stream()
+                .map(LottoBall::new)
+                .collect(Collectors.toList());
+        return new LottoTicket(new LottoBalls(lottoBalls));
     }
 }
