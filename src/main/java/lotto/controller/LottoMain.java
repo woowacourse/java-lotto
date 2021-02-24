@@ -22,12 +22,11 @@ public class LottoMain {
     public static void main(String[] args) {
         LottoGenerator lottoGenerator = new LottoGenerator();
         UserPurchase userPurchase = getUserPurchaseInput();
-        List<LottoTicket> manualLottoTickets = getManualLottoTicketInput(userPurchase);
+        List<LottoTicket> manualLottoTicketsInput = getManualLottoTicketInput(userPurchase);
 
-        LottoTickets manualTickets = generateManualTicket(lottoGenerator, manualLottoTickets);
+        LottoTickets manualTickets = generateManualTicket(lottoGenerator, manualLottoTicketsInput);
         LottoTickets autoTickets = generateAutoTicket(lottoGenerator, userPurchase);
         PurchasedTickets purchasedTickets = new PurchasedTickets(manualTickets, autoTickets);
-
         OutputView.printPurchasedLottoTickets(purchasedTickets);
 
         WinningLottoNumbers winningLottoNumbers = getWinningLottoNumbersInput();
