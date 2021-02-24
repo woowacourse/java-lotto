@@ -9,6 +9,7 @@ public class InputView {
     private static final String MESSAGE_BUDGET = "구입금액을 입력해 주세요.";
     private static final String MESSAGE_WINNING_NUMBER = "\n지난 주 당첨 번호를 입력해 주세요.";
     private static final String MESSAGE_BONUS_BALL = "보너스 볼을 입력해 주세요.";
+    private static final String MESSAGE_MANUAL_QUANTITY = "\n수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String BLANK = "";
     private static final String COMMA = ",";
     private static final String NUMBER_REGULAR_EXPRESSION = "^-?[0-9]+$";
@@ -42,6 +43,24 @@ public class InputView {
 
     private String scanStringBudget() {
         System.out.println(MESSAGE_BUDGET);
+        return deleteWhiteSpaces(scanner.nextLine());
+    }
+
+    public long scanManualQuantity() {
+        String inputString = scanStringManualQuantity();
+        if (inputString.equals(BLANK)) {
+            System.out.println(ERROR_INVALID_BLANK);
+            return scanManualQuantity();
+        }
+        if (inputString.matches(NUMBER_REGULAR_EXPRESSION)) {
+            return Long.parseLong(inputString);
+        }
+        System.out.println(ERROR_INVALID_NUMBER_FORMAT);
+        return scanManualQuantity();
+    }
+
+    private String scanStringManualQuantity() {
+        System.out.println(MESSAGE_MANUAL_QUANTITY);
         return deleteWhiteSpaces(scanner.nextLine());
     }
 

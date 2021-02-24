@@ -12,6 +12,7 @@ public class LottoController {
 
     public void run() {
         Money budget = createBudgetMoney();
+        Quantity quantity = createManualLottoTickets(budget);
         List<LottoTicket> lottoTickets = createLottoTickets(budget);
         WinningLotto winningLotto = createWinningLotto();
 
@@ -28,6 +29,15 @@ public class LottoController {
         } catch (RuntimeException e) {
             outputView.printError(e);
             return createBudgetMoney();
+        }
+    }
+
+    private Quantity createManualLottoTickets(Money budget) {
+        try {
+            return new Quantity(budget, inputView.scanManualQuantity());
+        } catch (RuntimeException e) {
+            outputView.printError(e);
+            return createManualLottoTickets(budget);
         }
     }
 
