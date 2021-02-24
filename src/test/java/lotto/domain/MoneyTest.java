@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import lotto.exception.MoneyException;
+import lotto.exception.PieceException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -25,5 +26,16 @@ public class MoneyTest {
         assertThatThrownBy(() -> new Money(sampleMoney))
             .isInstanceOf(MoneyException.class)
             .hasMessageContaining(Money.NOT_ENOUGH_MONEY);
+    }
+
+    @Test
+    @DisplayName("수동 구매 매수가 구매 가능 매수 초과시, 예외 처리 테스트")
+    void excessAvailableLottoPieces() {
+        int sampleMoney = 2000;
+        int manualPieceNumber = 3;
+        Money money = new Money(sampleMoney);
+        assertThatThrownBy(() -> new Piece(money, manualPieceNumber))
+            .isInstanceOf(PieceException.class)
+            .hasMessageContaining(Piece.EXCESS_AVAILABLE_MESSAGE);
     }
 }

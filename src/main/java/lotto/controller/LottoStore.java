@@ -7,12 +7,15 @@ import lotto.domain.LottoAnnouncement;
 import lotto.domain.LottoRank;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
+import lotto.domain.Piece;
 import lotto.domain.generator.LottoAutoGenerator;
 import lotto.exception.LottoAnnouncementException;
 import lotto.exception.MoneyException;
+import lotto.exception.PieceException;
 import lotto.viewer.AnnouncementInputView;
 import lotto.viewer.MoneyInputView;
 import lotto.viewer.OutputView;
+import lotto.viewer.PieceInputView;
 
 public class LottoStore {
 
@@ -23,9 +26,11 @@ public class LottoStore {
     private final MoneyInputView moneyInputView;
     private final AnnouncementInputView announcementInputView;
     private final OutputView outputView;
+    private final PieceInputView pieceInputView;
 
     public LottoStore() {
         Scanner scanner = new Scanner(System.in);
+        pieceInputView = new PieceInputView(scanner);
         moneyInputView = new MoneyInputView(scanner);
         announcementInputView = new AnnouncementInputView(scanner);
         outputView = new OutputView();
@@ -40,6 +45,8 @@ public class LottoStore {
 
     public Lottos buyLotto() {
         Money possessedMoney = receiveValidMoney();
+        Piece manualPieces = receiveManualPieces(possessedMoney);
+        Piece autoPieces = new Piece(possessedMoney, manualPieces.getAnotherPiece(possessedMoney));
         LottoAutoGenerator lottoAutoGenerator = new LottoAutoGenerator();
         Lottos purchasedLottos =
             new Lottos(lottoAutoGenerator, possessedMoney.getLottoPieces());
@@ -82,5 +89,16 @@ public class LottoStore {
             candidateLottoAnnouncement = receiveValidLottoAnnouncement();
         }
         return candidateLottoAnnouncement;
+    }
+
+    private Piece receiveManualPieces(Money possessedMoney) {
+        Piece candidateManualPiece;
+        try {
+            candidateManualPiece = pieceInputView.inputManualPieces(possessedMoney);
+        } catch (PieceException pieceException) {
+            outputView.printPieceException(pieceException);
+            candidateManualPiece = pieceInputView.inputManualPieces(possessedMoney);
+        }
+        return candidateManualPiece;
     }
 }

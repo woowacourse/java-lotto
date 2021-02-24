@@ -4,18 +4,25 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import lotto.domain.Lotto;
-import lotto.exception.LottoAnnouncementException;
+import lotto.domain.Money;
+import lotto.domain.Piece;
+import lotto.exception.MoneyException;
+import lotto.exception.PieceException;
 
 public class LottoGeneratorInputView {
 
     private static final String DELIMITER = ", ";
-    private static final String LOTTO_ANNOUNCE_SIZE_MESSAGE = "로또 번호의 갯수가 기준과 다릅니다.";
 
     final Scanner scanner;
 
     public LottoGeneratorInputView(Scanner scanner) {
         this.scanner = scanner;
+    }
+
+    public Piece inputManualPieces(Money money) throws PieceException {
+        int inputAutoPieces = scanner.nextInt();
+        scanner.nextLine();
+        return new Piece(money, inputAutoPieces);
     }
 
     public List<Integer> inputWinningNumbers() {
@@ -27,16 +34,15 @@ public class LottoGeneratorInputView {
     private List<Integer> parseToWinner() {
         String rawWinningNumbers = scanner.nextLine();
         String[] splittedWinningNumbers = rawWinningNumbers.split(DELIMITER);
-        checkSize(splittedWinningNumbers);
         return Arrays.stream(splittedWinningNumbers)
             .map(String::trim)
             .map(Integer::parseInt)
             .collect(Collectors.toList());
     }
 
-    private void checkSize(String[] targetWinner) {
-        if (targetWinner.length != Lotto.LOTTO_POSSESSION_NUMBER) {
-            throw new LottoAnnouncementException(LOTTO_ANNOUNCE_SIZE_MESSAGE);
+    private void checkExcessManualPieces(Money money, int inputAutoPieces) {
+        if (money.getLottoPieces() < inputAutoPieces) {
+            throw new MoneyException(Money.EXCESS_LOTTO_PIECES);
         }
     }
 }
