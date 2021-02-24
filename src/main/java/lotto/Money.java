@@ -26,7 +26,6 @@ public class Money {
         }
     }
 
-
     public int getPrice(){
         return this.price;
     }

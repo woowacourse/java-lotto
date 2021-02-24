@@ -3,6 +3,7 @@ package lotto.view;
 import java.util.Scanner;
 import lotto.Money;
 import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.ManualLotto;
 
 public class InputView {
 
@@ -22,5 +23,9 @@ public class InputView {
 
     public String inputBonusNumber() {
         return scanner.nextLine();
+    }
+
+    public ManualLotto inputNumManualLotto() {
+        return new ManualLotto(scanner.nextLine());
     }
 }

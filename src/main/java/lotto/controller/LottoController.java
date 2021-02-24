@@ -10,6 +10,7 @@ import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.LottoResult;
 import lotto.domain.lotto.LottoStore;
 import lotto.domain.lotto.Lottos;
+import lotto.domain.lotto.ManualLotto;
 import lotto.domain.lotto.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -53,6 +54,8 @@ public class LottoController {
 
     private Lottos createLottos() {
         Money money = startMoney();
+        ManualLotto manualLotto = buyManualLotto();
+
         LottoStore lottoStore = new LottoStore();
         Lottos purchasedLottos = lottoStore.buyLottos(money);
 
@@ -61,6 +64,11 @@ public class LottoController {
 
         return purchasedLottos;
 
+    }
+
+    private ManualLotto buyManualLotto() {
+        OutputView.inputNumManualLotto();
+        return inputView.inputNumManualLotto();
     }
 
     private Money startMoney() {
