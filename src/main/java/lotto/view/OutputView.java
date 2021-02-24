@@ -19,8 +19,8 @@ public class OutputView {
         System.out.println(message);
     }
 
-    public static void printBoughtLotto(final LottoGroup lottoGroup) {
-        System.out.println(String.format(LOTTO_COUNT_FORM, lottoGroup.getManualCount(), lottoGroup.getAutoCount()));
+    public static void printBoughtLotto(final LottoGroup lottoGroup, int manualCount) {
+        System.out.println(String.format(LOTTO_COUNT_FORM, manualCount, lottoGroup.lottoGroup().size() - manualCount));
         lottoGroup.lottoGroup()
                 .forEach(lotto -> System.out.printf(LOTTO_FORM, lotto));
     }

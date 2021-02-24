@@ -14,8 +14,10 @@ import java.util.stream.Collectors;
 public class LottoManager {
 
     public static LottoGroup createLotto() {
-        LottoGroup lottoGroup = createLottoGroup(InputView.getMoney());
-        OutputView.printBoughtLotto(lottoGroup);
+        Money money = InputView.getMoney();
+        int manualCount = InputView.getManualLottoCount();
+        LottoGroup lottoGroup = createLottoGroup(money, manualCount);
+        OutputView.printBoughtLotto(lottoGroup, manualCount);
         return lottoGroup;
     }
 
@@ -37,19 +39,16 @@ public class LottoManager {
         OutputView.printLottoResult(lottoResult);
     }
 
-    private static LottoGroup createLottoGroup(Money money) {
+    private static LottoGroup createLottoGroup(Money money, int manualCount) {
         try {
             LottoSeller lottoSeller = new LottoSeller();
-            int count = InputView.getManualLottoCount();
-            List<Lotto> lottos = new ArrayList<>();
-            lottos = createManualLotto(InputView.getManualNumbers(count));
-            return lottoSeller.sellLotto(money, count, lottos);
+            return lottoSeller.sellLotto(money, manualCount, createManualLotto(InputView.getManualNumbers(manualCount)));
         } catch (LottoException e) {
             OutputView.printMessage(e.getMessage());
-            return createLottoGroup(InputView.getMoney());
+            return createLottoGroup(InputView.getMoney(), manualCount);
         } catch (NumberFormatException e) {
             OutputView.printMessage("숫자를 입력해주세요.");
-            return createLottoGroup(InputView.getMoney());
+            return createLottoGroup(InputView.getMoney(), manualCount);
         }
     }
 

@@ -19,7 +19,7 @@ public class LottoSeller {
         for (int i = 0; i < count - manualCount; i++) {
             lottos.add(LottoGenerator.generate());
         }
-        return new LottoGroup(lottos, count - manualCount, manualCount);
+        return new LottoGroup(lottos);
     }
 
     private static void validateCount(int count, int manualCount) {
