@@ -1,7 +1,6 @@
 package lotto.domain.ticketresult;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.util.HashMap;
 import java.util.Map;
 import lotto.domain.LottoTicket;

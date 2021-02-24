@@ -9,7 +9,6 @@ import static lotto.type.LottoMatchType.THREE_MATCH;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.util.Arrays;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
