@@ -13,7 +13,15 @@ public class InputView {
     }
 
     public static String receivePurchaseMoney() {
-        return receiveInput("구입금액을 입력해 주세요.");
+        String input = receiveInput("구입금액을 입력해 주세요.");
+        System.out.println();
+        return input;
+    }
+
+    public static int receiveManualTicketQuantity() {
+        String input = receiveInput("수동으로 구매할 로또 수를 입력해 주세요.");
+        System.out.println();
+        return createNumber(input);
     }
 
     private static String receiveInput(final String message) {
