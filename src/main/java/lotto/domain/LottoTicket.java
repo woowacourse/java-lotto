@@ -34,7 +34,14 @@ public class LottoTicket {
         return LottoRank.matchLottoRank(matchCount, matchBonusNumber);
     }
 
-    private int calculateMatchCount(LottoWinnerTicket lottoWinnerTicket) {
+    public boolean isContain(LottoNumber lottoWinnerBonusNumber) {
+        if (lottoNumbers.contains(lottoWinnerBonusNumber)) {
+            return true;
+        }
+        return false;
+    }
+
+    private int calculateMatchCount(LottoTicket lottoWinnerTicket) {
         Set<LottoNumber> matchingCheckContainer = new HashSet<>(lottoNumbers);
         matchingCheckContainer.addAll(lottoWinnerTicket.getLottoNumbers());
         return LOTTO_NUMBER_COUNT * 2 - matchingCheckContainer.size();

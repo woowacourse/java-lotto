@@ -15,7 +15,7 @@ public class LottoResultStatisticsTest {
 
     @BeforeEach
     public void setUp() {
-        LottoWinnerTicket lottoWinnerTicket = new LottoWinnerTicket(
+        LottoTicket lottoWinnerTicket = new LottoTicket(
                 Arrays.asList(
                         new LottoNumber(1),
                         new LottoNumber(2),
@@ -26,7 +26,7 @@ public class LottoResultStatisticsTest {
                 )
         );
 
-        LottoWinnerBonusNumber lottoWinnerBonusNumber = new LottoWinnerBonusNumber(7);
+        LottoNumber lottoWinnerBonusNumber = new LottoNumber(7);
 
         lottoWinner = new LottoWinner(lottoWinnerTicket, lottoWinnerBonusNumber);
 
