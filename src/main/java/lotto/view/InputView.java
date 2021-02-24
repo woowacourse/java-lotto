@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.LottoMachine;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -13,10 +14,12 @@ public class InputView {
 	public static final String NON_NUMERIC_ERROR = "숫자만 입력 가능합니다.";
 	public static final String NOT_ENOUGH_MONEY_ERROR = String.format("%d원 이상의 금액만 입력 가능합니다.", LOTTO_PRICE);
 
+	private static final Scanner scanner = new Scanner(System.in);
+
 	private InputView() {
 	}
 
-	public static int takeMoneyInput(Scanner scanner) {
+	public static int takeMoneyInput() {
 		System.out.println("구입금액을 입력해 주세요");
 		String moneyInput = scanner.nextLine();
 		validateIntegerNumber(moneyInput);
@@ -30,7 +33,7 @@ public class InputView {
 		}
 	}
 
-	public static int takeManualLottoQuantityInput(Scanner scanner) {
+	public static int takeManualLottoQuantityInput() {
 		System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
 		String manualLottoQuantity = scanner.nextLine();
 		validateIntegerNumber(manualLottoQuantity);
@@ -38,7 +41,7 @@ public class InputView {
 		return Integer.parseInt(manualLottoQuantity);
 	}
 
-	public static List<int[]> takeManualLottoNumbersInput(Scanner scanner, LottoMachine lottoMachine) {
+	public static List<int[]> takeManualLottoNumbersInput(LottoMachine lottoMachine) {
 		System.out.println("수동으로 구매할 번호를 입력해주세요.");
 		List<int[]> numbersSequence = new ArrayList<>();
 		for (int i = 0; i < lottoMachine.getManualLottoQuantityAsInt(); i++) {
@@ -51,7 +54,7 @@ public class InputView {
 		return numbersSequence;
 	}
 
-	public static int[] takeWinningNumbersInput(Scanner scanner) {
+	public static int[] takeWinningNumbersInput() {
 		System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 		String[] winningNumberInput = scanner.nextLine().split(", ");
 		validateIntegerNumbers(winningNumberInput);
@@ -70,7 +73,7 @@ public class InputView {
 		}
 	}
 
-	public static int takeBonusNumberInput(Scanner scanner) {
+	public static int takeBonusNumberInput() {
 		System.out.println("보너스 볼을 입력해 주세요");
 		String bonusBallInput = scanner.nextLine();
 		validateIntegerNumber(bonusBallInput);
@@ -84,5 +87,9 @@ public class InputView {
 		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException(NON_NUMERIC_ERROR);
 		}
+	}
+
+	public static void closeScanner() {
+		scanner.close();
 	}
 }

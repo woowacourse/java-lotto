@@ -3,51 +3,52 @@ package lotto.controller;
 import lotto.domain.*;
 
 import java.util.List;
-import java.util.Scanner;
 
 import static lotto.view.InputView.*;
 import static lotto.view.OutputView.printLottoPurchaseSummaryBasedOn;
 import static lotto.view.OutputView.printResultStatisticsBasedOn;
 
 public class LottoController {
-	public void start(Scanner scanner) {
-		LottoMachine lottoMachine = createLottoMachine(scanner);
+	public void start() {
+		LottoMachine lottoMachine = createLottoMachine();
 
-		Lottos lottos = createLottosBy(scanner, lottoMachine);
+		Lottos lottos = createLottosBy(lottoMachine);
 		printLottoPurchaseSummaryBasedOn(lottos, lottoMachine);
 
-		List<Rank> results = getResultsOf(scanner, lottos);
+		List<Rank> results = getResultsOf(lottos);
 		Money moneyInvested = lottoMachine.getMoney();
 		LottoStatistics lottoStatistics = new LottoStatistics(results, moneyInvested);
 		printResultStatisticsBasedOn(lottoStatistics);
+
+		closeScanner();
 	}
 
-	private LottoMachine createLottoMachine(Scanner scanner) {
-		int moneyInput = takeMoneyInput(scanner);
+	private LottoMachine createLottoMachine() {
+		int moneyInput = takeMoneyInput();
 		Money money = new Money(moneyInput);
 
-		int manualLottoQuantityInput = takeManualLottoQuantityInput(scanner);
+		int manualLottoQuantityInput = takeManualLottoQuantityInput();
 		LottoQuantity manualLottoQuantity = new LottoQuantity(manualLottoQuantityInput);
 
 		return new LottoMachine(money, manualLottoQuantity);
 	}
 
-	private Lottos createLottosBy(Scanner scanner, LottoMachine lottoMachine) {
-		List<int[]> manualLottoNumbersInput = takeManualLottoNumbersInput(scanner, lottoMachine);
+	private Lottos createLottosBy(LottoMachine lottoMachine) {
+		List<int[]> manualLottoNumbersInput = takeManualLottoNumbersInput(lottoMachine);
 		return lottoMachine.createLottosFrom(manualLottoNumbersInput);
 	}
 
-	private List<Rank> getResultsOf(Scanner scanner, Lottos lottos) {
-		WinningLotto winningLotto = createWinningLotto(scanner);
+	private List<Rank> getResultsOf(Lottos lottos) {
+		WinningLotto winningLotto = createWinningLotto();
 		return lottos.getResultsBasedOn(winningLotto);
 	}
 
-	private WinningLotto createWinningLotto(Scanner scanner) {
-		int[] winningNumbersInput = takeWinningNumbersInput(scanner);
+	private WinningLotto createWinningLotto() {
+		int[] winningNumbersInput = takeWinningNumbersInput();
 		ManualLottoGenerator manualLottoGenerator = new ManualLottoGenerator(winningNumbersInput);
 		Lotto winningLotto = manualLottoGenerator.createLotto();
 
-		int bonusNumberInput = takeBonusNumberInput(scanner);
+		int bonusNumberInput = takeBonusNumberInput();
 		LottoNumber bonusNumber = new LottoNumber(bonusNumberInput);
 
 		return new WinningLotto(winningLotto, bonusNumber);
