@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
-import lotto.util.LottoSeller;
 
 public class LottoResult {
 
@@ -36,7 +35,7 @@ public class LottoResult {
         .values()
         .stream()
         .reduce(INIT_COUNT, Integer::sum);
-    return count * LottoSeller.lottoPrice();
+    return count * Lotto.price();
   }
 
   private Long totalWinningAmount() {

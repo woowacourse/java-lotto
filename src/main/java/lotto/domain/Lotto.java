@@ -7,6 +7,7 @@ import lotto.exception.LottoNumberException;
 public class Lotto {
 
   private static final int LOTTO_NUMBERS_SIZE = 6;
+  private static final int PRICE = 1000;
   private final List<LottoNumber> lottoNumbers;
 
   public Lotto(final List<LottoNumber> lottoNumbers) {
@@ -45,5 +46,9 @@ public class Lotto {
 
   public List<LottoNumber> lottoNumbers() {
     return Collections.unmodifiableList(lottoNumbers);
+  }
+
+  public static int price() {
+    return PRICE;
   }
 }

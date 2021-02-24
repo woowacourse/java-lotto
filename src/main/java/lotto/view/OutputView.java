@@ -2,9 +2,9 @@ package lotto.view;
 
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
-import lotto.domain.LottoGroup;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoResult;
+import lotto.domain.lottoGroup.MixedLottoGroup;
 
 public class OutputView {
 
@@ -22,7 +22,7 @@ public class OutputView {
     System.out.println(message);
   }
 
-  public static void printBoughtLotto(final LottoGroup lottoGroup) {
+  public static void printBoughtLotto(final MixedLottoGroup lottoGroup) {
     System.out.printf(BOUGHT_LOTTO_FORM, lottoGroup.inputLottoCount(), lottoGroup.randomLottoCount());
     lottoGroup.lottoGroup()
         .forEach(lotto -> System.out.printf(LOTTO_FORM, lottoNumberMessage(lotto)));

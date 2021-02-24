@@ -1,17 +1,18 @@
 package lotto.view;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import lotto.domain.LottoGroup;
+import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.Money;
 import lotto.domain.WinningLotto;
+import lotto.domain.lottoGroup.ManualLottoGroup;
+import lotto.domain.lottoGroup.MixedLottoGroup;
+import lotto.domain.lottoGroup.RandomLottoGroup;
 import lotto.exception.LottoException;
 import lotto.exception.LottoPriceException;
-import lotto.util.LottoGenerator;
-import lotto.util.LottoSeller;
-import lotto.util.RandomLottoStrategy;
 
 public class InputView {
 
@@ -23,34 +24,33 @@ public class InputView {
   private static final String INPUT_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
 
 
-  public static LottoGroup lottoGroup() {
+  public static MixedLottoGroup lottoGroup() {
     try {
       Money money = money();
-      LottoGroup lottoGroup = new LottoGroup();
-      Money change = inputLottoGroup(lottoGroup, money);
-      randomLottoGroup(lottoGroup, change);
-      return lottoGroup;
+      ManualLottoGroup manual = manualLottoGroup(money);
+      Money change = money.minus(manual.size() * Lotto.price());
+      return new MixedLottoGroup(manual, randomLottoGroup(change));
     } catch (LottoException e) {
       OutputView.printMessage(e.getMessage());
       return lottoGroup();
     }
   }
 
-  private static Money inputLottoGroup(LottoGroup lottoGroup, Money money) {
+  private static ManualLottoGroup manualLottoGroup(Money money) {
     int count = inputCount(money);
-    lottoGroup.setInputLottoCount(count);
     OutputView.printMessage(INPUT_LOTTO_NUMBER);
+    List<String> lottoNumbers = new ArrayList<>();
     for (int i = 0; i < count; i++) {
-      money = LottoSeller.sellLotto(money, lottoGroup, InputView::lottoNumbers);
+      lottoNumbers.add(SCAN.nextLine());
     }
-    return money;
+    return new ManualLottoGroup(lottoNumbers);
   }
 
   private static int inputCount(Money money) {
     try {
       OutputView.printMessage(INPUT_LOTTO_COUNT);
       int count = Integer.parseInt(SCAN.nextLine());
-      int affordableCount = money.affordableCount(LottoSeller.lottoPrice());
+      int affordableCount = money.affordableCount(Lotto.price());
       if (affordableCount < count) {
         throw new LottoPriceException("금액이 부족합니다.");
       }
@@ -64,18 +64,16 @@ public class InputView {
     }
   }
 
-  private static void randomLottoGroup(LottoGroup lottoGroup, Money money) {
-    int randomLottoCount = money.affordableCount(LottoSeller.lottoPrice());
-    lottoGroup.setRandomLottoCount(randomLottoCount);
-    for (int i = 0; i < randomLottoCount; i++) {
-      LottoSeller.sellLotto(money, lottoGroup, new RandomLottoStrategy());
-    }
+  private static RandomLottoGroup randomLottoGroup(Money money) {
+    int randomLottoCount = money.affordableCount(Lotto.price());
+    return new RandomLottoGroup(randomLottoCount);
   }
 
   private static Money money() {
     try {
       OutputView.printMessage(INPUT_MONEY_MESSAGE);
       int money = Integer.parseInt(SCAN.nextLine());
+      validateMoney(money);
       return Money.of(money);
     } catch (NumberFormatException e) {
       OutputView.printMessage("숫자를 입력해주세요.");
@@ -86,10 +84,16 @@ public class InputView {
     }
   }
 
+  private static void validateMoney(int money) {
+    if (money < Lotto.price()) {
+      throw new LottoPriceException("최소 " + Lotto.price() + "원 이상을 입력해주세요.");
+    }
+  }
+
   public static WinningLotto winningLotto() {
     try {
       OutputView.printMessage(INPUT_WINNING_NUMBER_MESSAGE);
-      return new WinningLotto(LottoGenerator.generate(InputView::lottoNumbers), bonusNumber());
+      return new WinningLotto(new Lotto(lottoNumbers()), bonusNumber());
     } catch (LottoException e) {
       OutputView.printMessage(e.getMessage());
       return winningLotto();
