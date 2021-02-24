@@ -20,8 +20,8 @@ public class OutputView {
 
     private OutputView() {}
 
-    public static void printLottoCountMessage(PurchasingCount purchasingCount) {
-        System.out.printf(PURCHASE_LOTTO_MESSAGE, purchasingCount.getManualTicketCounts(), purchasingCount.getAutoTicketCounts());
+    public static void printLottoCountMessage(PurchasingCounts purchasingCounts) {
+        System.out.printf(PURCHASE_LOTTO_MESSAGE, purchasingCounts.getManualTicketCounts(), purchasingCounts.getAutoTicketCounts());
     }
 
     public static void printLottoTicketNumbers(LottoTickets lottoTickets) {

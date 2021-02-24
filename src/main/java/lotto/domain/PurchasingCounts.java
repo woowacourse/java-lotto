@@ -1,10 +1,10 @@
 package lotto.domain;
 
-public class PurchasingCount {
+public class PurchasingCounts {
     private final int manualTicketCounts;
     private final int autoTicketCounts;
 
-    public PurchasingCount(int manualTicketCounts, int autoTicketCounts) {
+    public PurchasingCounts(int manualTicketCounts, int autoTicketCounts) {
         validateTicketCounts(manualTicketCounts, autoTicketCounts);
         this.manualTicketCounts = manualTicketCounts;
         this.autoTicketCounts = autoTicketCounts;
@@ -16,9 +16,9 @@ public class PurchasingCount {
         }
     }
 
-    public static PurchasingCount of(PurchasingPrice purchasingPrice, int manualTicketCounts) {
+    public static PurchasingCounts of(PurchasingPrice purchasingPrice, int manualTicketCounts) {
         int allTicketCounts = purchasingPrice.calculatePurchasableTicketCounts();
-        return new PurchasingCount(manualTicketCounts, allTicketCounts - manualTicketCounts);
+        return new PurchasingCounts(manualTicketCounts, allTicketCounts - manualTicketCounts);
     }
 
     public int getManualTicketCounts() {
