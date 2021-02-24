@@ -2,6 +2,7 @@ package domain;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,15 +17,15 @@ public class Statistics {
 
     private final Map<Rank, Integer> lottoStatistics = new HashMap<>();
 
-    public Statistics(WinningNumbers winningNumbers, LottoTickets lottoTickets) {
+    public Statistics(WinningNumbers winningNumbers, List<LottoTicket> lottoTickets) {
         for (Rank rank : Rank.values()) {
             lottoStatistics.put(rank, ZERO);
         }
         calculate(winningNumbers, lottoTickets);
     }
 
-    private void calculate(WinningNumbers winningNumbers, LottoTickets lottoTickets) {
-        for (LottoTicket lottoTicket : lottoTickets.lottoTickets()) {
+    private void calculate(WinningNumbers winningNumbers, List<LottoTicket> lottoTickets) {
+        for (LottoTicket lottoTicket : lottoTickets) {
             Rank rank = winningNumbers.calculateRank(lottoTicket);
             Integer count = lottoStatistics.get(rank);
             lottoStatistics.put(rank, count + 1);

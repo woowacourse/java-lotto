@@ -4,13 +4,15 @@ import domain.*;
 import view.InputView;
 import view.OutputView;
 
+import java.util.List;
+
 public class LottoController {
     private final InputView inputView = InputView.getInstance();
     private final OutputView outputView = OutputView.getInstance();
 
     public void run() {
         Money budget = createBudgetMoney();
-        LottoTickets lottoTickets = LottoPurchase.buy(budget);
+        List<LottoTicket> lottoTickets = LottoPurchase.buy(budget);
         outputView.printLottoTicket(lottoTickets);
         WinningNumbers winningNumber = createWinningNumber();
         Statistics statistics = new Statistics(winningNumber, lottoTickets);
