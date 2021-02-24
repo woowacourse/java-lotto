@@ -7,7 +7,7 @@ import static lotto.lottoticket.ticketnumber.RandomNumbersGenerator.MAXIMUM_NUMB
 import static lotto.lottoticket.ticketnumber.RandomNumbersGenerator.MINIMUM_NUMBER;
 
 public class LottoNumber {
-    public static final String ERROR_MESSAGE_INVALID_RANGE = "숫자는 1부터 45사이여야 합니다.";
+    public static final String ERROR_MESSAGE_INVALID_RANGE = String.format("숫자는 %d부터 %d 사이여야 합니다.", MINIMUM_NUMBER, MAXIMUM_NUMBER);
 
     private final int number;
 

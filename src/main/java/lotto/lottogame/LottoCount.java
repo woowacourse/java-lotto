@@ -19,6 +19,14 @@ public class LottoCount {
         return this.lottoCount-- > ZERO;
     }
 
+    public boolean isSmallerThan(int autoLottoCount) {
+        return lottoCount < autoLottoCount;
+    }
+
+    public int subtractCount(int manualLottoCount) {
+        return lottoCount - manualLottoCount;
+    }
+
     public int getLottoCount() {
         return lottoCount;
     }

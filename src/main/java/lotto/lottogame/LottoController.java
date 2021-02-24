@@ -1,5 +1,6 @@
 package lotto.lottogame;
 
+import jdk.internal.util.xml.impl.Input;
 import lotto.lottoticket.BonusBall;
 import lotto.lottoticket.LottoTickets;
 import lotto.lottoticket.WinnerTicket;
@@ -12,6 +13,9 @@ public class LottoController {
     public void run() {
         Money money = generateMoney();
         LottoCount lottoCount = new LottoCount(money);
+        ManualLottoCount manualLottoCount = generateManualLottoCount();
+        AutoLottoCount autoLottoCount = manualLottoCount.makeManualCount(lottoCount);
+
         LottoTickets lottoTickets = new LottoTickets(lottoCount, new RandomNumbersGenerator());
         LottoGame lottoGame = new LottoGame(lottoTickets);
         OutputView.noticeLottoCount(lottoCount);
@@ -20,6 +24,16 @@ public class LottoController {
         OutputView.noticeStatistics(
                 lottoGame.calculateStatistics(winnerTicket, generateBonusBall(winnerTicket)),
                 lottoGame.calculateResult(money));
+    }
+
+    private ManualLottoCount generateManualLottoCount() {
+        try {
+            OutputView.noticeManualLottoCount();
+            return InputView.inputManualLottoCount();
+        } catch (IllegalArgumentException e) {
+            OutputView.printError(e);
+            return generateManualLottoCount();
+        }
     }
 
     private Money generateMoney() {
