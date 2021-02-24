@@ -17,7 +17,7 @@ public class Machine {
         for (String lottoNumber : lottoNumbers) {
             lottoTickets.add(new LottoTicket(lottoNumber));
         }
-        this.money = new Money(moneyValue, lottoTickets);
+        this.money = new Money(moneyValue, lottoTickets.size());
         this.lottoTickets = new LottoTickets(lottoTickets, money.getPossibleTicketCount(),
             lottoGenerator);
     }

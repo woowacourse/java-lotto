@@ -4,7 +4,7 @@
 
 src/main/java/lotto/domain/Money.java
 
-- [ ] Money에서 LottoTicket에 대한 정보를 모르는 상태로 해당 기능을 사용할 수 있다면 어떠한 장점이 있을까요?
+- [x] Money에서 LottoTicket에 대한 정보를 모르는 상태로 해당 기능을 사용할 수 있다면 어떠한 장점이 있을까요?
   (결합도를 낮추고 응집도를 높이는 것에 대한 장점으로 생각)
 
 src/main/java/lotto/domain/Result.java
