@@ -1,9 +1,9 @@
 package lotto.view;
 
 import lotto.domain.Money;
-import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoNumber;
-import lotto.domain.lotto.Lottos;
+import lotto.domain.ticket.Lotto;
+import lotto.domain.ticket.LottoNumber;
+import lotto.domain.ticket.Lottos;
 import lotto.domain.production.LottoMachine;
 import lotto.domain.production.LottoQuantity;
 import lotto.domain.result.LottoStatistics;

@@ -1,7 +1,7 @@
 package lotto.domain.result;
 
-import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoNumber;
+import lotto.domain.ticket.Lotto;
+import lotto.domain.ticket.LottoNumber;
 
 public class WinningLotto {
 	public static final String DUPLICATE_BONUS_NUMBER_ERROR = "보너스 번호가 당첨 번호와 중복됩니다.";

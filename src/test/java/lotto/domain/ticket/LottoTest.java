@@ -1,4 +1,4 @@
-package lotto.domain.lotto;
+package lotto.domain.ticket;
 
 import lotto.domain.result.WinningLotto;
 import org.junit.jupiter.api.BeforeEach;
@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import static lotto.domain.lotto.Lotto.DUPLICATE_ERROR;
-import static lotto.domain.lotto.Lotto.LOTTO_SIZE_ERROR;
+import static lotto.domain.ticket.Lotto.DUPLICATE_ERROR;
+import static lotto.domain.ticket.Lotto.LOTTO_SIZE_ERROR;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
