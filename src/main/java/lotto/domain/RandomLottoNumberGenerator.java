@@ -16,7 +16,6 @@ public class RandomLottoNumberGenerator implements LottoNumberGenerator {
     public List<Integer> generate() {
         Collections.shuffle(NUMBERS);
         List<Integer> numbers = NUMBERS.subList(0, 6);
-        Collections.sort(numbers);
         return numbers;
     }
 }

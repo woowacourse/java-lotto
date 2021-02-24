@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -29,6 +30,7 @@ public class OutputView {
         for (LottoTicket lottoTicket : lottoTicketGroup) {
             String numbers = lottoTicket.getLottoNumbers()
                     .stream()
+                    .sorted(Comparator.comparing(LottoNumber::getLottoNumber))
                     .map(lottoNumber -> String.valueOf(lottoNumber.getLottoNumber()))
                     .collect(Collectors.joining(DELIMITER, PREFIX, SUFFIX));
             System.out.println(numbers);

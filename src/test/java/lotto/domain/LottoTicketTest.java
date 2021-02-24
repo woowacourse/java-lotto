@@ -43,7 +43,7 @@ class LottoTicketTest {
     void makeLottoTicket() {
         LottoTicket lottoTicket = LottoTicket.generateTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
 
-        List<LottoNumber> lottoNumbers = lottoTicket.getLottoNumbers();
+        Set<LottoNumber> lottoNumbers = lottoTicket.getLottoNumbers();
 
         assertThat(lottoNumbers).contains(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
                 new LottoNumber(5), new LottoNumber(6));
