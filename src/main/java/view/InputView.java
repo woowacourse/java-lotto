@@ -12,7 +12,7 @@ public class InputView {
     private InputView() {
     }
 
-    public static String receivePurchaseAmount() {
+    public static String receivePurchaseMoney() {
         return receiveInput("구입금액을 입력해 주세요.");
     }
 
