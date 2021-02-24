@@ -1,34 +1,69 @@
 package lotto.controller;
 
-import lotto.domain.*;
-import lotto.view.InputView;
-import lotto.view.OutputView;
+import lotto.domain.Money;
+import lotto.domain.ticket.Lotto;
+import lotto.domain.ticket.LottoNumber;
+import lotto.domain.ticket.Lottos;
+import lotto.domain.production.LottoMachine;
+import lotto.domain.production.LottoQuantity;
+import lotto.domain.production.ManualLottoGenerator;
+import lotto.domain.result.LottoStatistics;
+import lotto.domain.result.Rank;
+import lotto.domain.result.WinningLotto;
 
 import java.util.List;
-import java.util.Scanner;
+
+import static lotto.view.InputView.*;
+import static lotto.view.OutputView.printLottoPurchaseSummaryBasedOn;
+import static lotto.view.OutputView.printResultStatisticsBasedOn;
 
 public class LottoController {
-    public void tryLotto(Scanner scanner) {
-        Money money = new Money(InputView.takeMoneyInput(scanner));
+	public void start() {
+		LottoMachine lottoMachine = createLottoMachine();
 
-        Lottos lottos = buy(money);
-        OutputView.showLottos(lottos);
+		Lottos lottos = createLottosBy(lottoMachine);
+		printLottoPurchaseSummaryBasedOn(lottos, lottoMachine);
 
-        List<Rank> results = lottos.getResults(getWinningLotto(scanner));
+		LottoStatistics lottoStatistics = createLottoStatisticsBasedOn(lottos, lottoMachine);
+		printResultStatisticsBasedOn(lottoStatistics);
 
-        OutputView.showResultStatistics(new LottoStatistics(results, money));
-    }
+		closeScanner();
+	}
 
-    private Lottos buy(Money money) {
-        int numberOfLottoToBuy = money.calculateAffordableNumberOfLotto();
-        AutomaticLottoGenerator automaticLottoGenerator = new AutomaticLottoGenerator();
+	private LottoMachine createLottoMachine() {
+		int moneyInput = takeMoneyInput();
+		Money money = new Money(moneyInput);
 
-        return new Lottos(automaticLottoGenerator.createLottos(numberOfLottoToBuy));
-    }
+		int manualLottoQuantityInput = takeManualLottoQuantityInput();
+		LottoQuantity manualLottoQuantity = new LottoQuantity(manualLottoQuantityInput);
 
-    private WinningLotto getWinningLotto(Scanner scanner) {
-        int[] winningNumbers = InputView.takeWinningNumbersInput(scanner);
-        int bonusNumber = InputView.takeBonusNumberInput(scanner);
-        return new WinningLotto(new ManualLottoGenerator(winningNumbers).createLotto(), new LottoNumber(bonusNumber));
-    }
+		return new LottoMachine(money, manualLottoQuantity);
+	}
+
+	private Lottos createLottosBy(LottoMachine lottoMachine) {
+		List<int[]> manualLottoNumbersInput = takeManualLottoNumbersInput(lottoMachine);
+		return lottoMachine.createLottosFrom(manualLottoNumbersInput);
+	}
+
+	private LottoStatistics createLottoStatisticsBasedOn(Lottos lottos, LottoMachine lottoMachine) {
+		List<Rank> results = getResultsOf(lottos);
+		Money moneyInvested = lottoMachine.getMoney();
+		return new LottoStatistics(results, moneyInvested);
+	}
+
+	private List<Rank> getResultsOf(Lottos lottos) {
+		WinningLotto winningLotto = createWinningLotto();
+		return lottos.getResultsBasedOn(winningLotto);
+	}
+
+	private WinningLotto createWinningLotto() {
+		int[] winningNumbersInput = takeWinningNumbersInput();
+		ManualLottoGenerator manualLottoGenerator = new ManualLottoGenerator(winningNumbersInput);
+		Lotto winningLotto = manualLottoGenerator.createLotto();
+
+		int bonusNumberInput = takeBonusNumberInput();
+		LottoNumber bonusNumber = new LottoNumber(bonusNumberInput);
+
+		return new WinningLotto(winningLotto, bonusNumber);
+	}
 }
