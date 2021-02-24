@@ -15,7 +15,7 @@ public class LottoGameController {
         printEachLottos(lottoGame);
 
         WinningLotto lastWinningLotto = askWinningLotto();
-        LottoGameResult lottoGameResult = getRankofLottoGame(lottoGame, lastWinningLotto);
+        LottoGameResult lottoGameResult = getRankOfLottoGame(lottoGame, lastWinningLotto);
 
         OutputView.printLottoGameResult(lottoGameResult);
     }
@@ -53,7 +53,7 @@ public class LottoGameController {
         }
     }
 
-    private LottoGameResult getRankofLottoGame(LottoGame lottoGame, WinningLotto lastWinningLotto) {
+    private LottoGameResult getRankOfLottoGame(LottoGame lottoGame, WinningLotto lastWinningLotto) {
         LottoGameResult lottoGameResult = new LottoGameResult();
         lottoGame.toManualLottos().addMatchLotto(lastWinningLotto, lottoGameResult);
         lottoGame.toAutoLottos().addMatchLotto(lastWinningLotto, lottoGameResult);
