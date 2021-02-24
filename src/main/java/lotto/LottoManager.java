@@ -15,7 +15,7 @@ public class LottoManager {
 
     public static LottoGroup createLotto() {
         Money money = InputView.getMoney();
-        int manualCount = InputView.getManualLottoCount();
+        int manualCount = InputView.getManualLottoCount(money);
         LottoGroup lottoGroup = createLottoGroup(money, manualCount);
         OutputView.printBoughtLotto(lottoGroup, manualCount);
         return lottoGroup;

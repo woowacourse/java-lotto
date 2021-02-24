@@ -23,4 +23,8 @@ public class Money {
     public int divide(final int number) {
         return (int) money / number;
     }
+
+    public boolean compareMoneyWithLottoCount(final int count) {
+        return count * LottoSeller.lottoPrice() >= money;
+    }
 }

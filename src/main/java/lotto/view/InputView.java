@@ -61,20 +61,23 @@ public class InputView {
         }
     }
 
-    public static int getManualLottoCount() {
+    public static int getManualLottoCount(Money money) {
         try {
             OutputView.printMessage(INPUT_MANUAL_COUNT_MESSAGE);
             int count = Integer.parseInt(SCAN.nextLine());
             if (count < 0) {
                 throw new IllegalArgumentException("숫자는 음수가 될 수 없습니다.");
             }
+            if (money.compareMoneyWithLottoCount(count)) {
+                throw new IllegalArgumentException("가격이 부족합니다.");
+            }
             return count;
         } catch (NumberFormatException e) {
             OutputView.printMessage(NUMBER_FORMAT_ERROR_MESSAGE);
-            return getManualLottoCount();
-        } catch (IllegalArgumentException e){
+            return getManualLottoCount(money);
+        } catch (IllegalArgumentException e) {
             OutputView.printMessage(e.getMessage());
-            return getManualLottoCount();
+            return getManualLottoCount(money);
         }
     }
 
