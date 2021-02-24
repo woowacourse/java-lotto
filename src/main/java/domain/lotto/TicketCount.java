@@ -19,7 +19,7 @@ public class TicketCount {
     }
 
     private void validateLottoCount(final int lottoCount) {
-        if (lottoCount <= ZERO) {
+        if (lottoCount < ZERO) {
             throw new IllegalArgumentException(String.format(TICKET_MINIMUM_SIZE_EXCEPTION_MESSAGE, lottoCount));
         }
     }
@@ -32,7 +32,7 @@ public class TicketCount {
     }
 
     private boolean isAvailableCount(int manualTicketCount) {
-        return manualTicketCount > 0 && manualTicketCount <= ticketCount;
+        return manualTicketCount >= 0 && manualTicketCount <= ticketCount;
     }
 
     @Override

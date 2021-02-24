@@ -7,6 +7,7 @@ import domain.lotto.LottoTicket;
 import util.OutputUtil;
 import view.InputView;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,6 +28,9 @@ public class LottoMachine {
     }
 
     public List<LottoTicket> makeManualTickets(InputView inputView, int ticketCount) {
+        if (ticketCount == 0) {
+            return Collections.emptyList();
+        }
         OutputUtil.printMessage("수동으로 구매할 번호를 입력해 주세요.");
         return IntStream.range(0, ticketCount)
                 .mapToObj(count -> makeManualTicket(inputView))
