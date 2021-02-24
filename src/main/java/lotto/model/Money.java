@@ -21,6 +21,13 @@ public class Money {
         }
     }
 
+    public Money minus(int value) {
+        if (this.price < value) {
+            throw new IllegalArgumentException("금액이 부족합니다.");
+        }
+        return Money.priceOf(this.price - value);
+    }
+
     public boolean isLessThan(int price) {
         return this.price < price;
     }
