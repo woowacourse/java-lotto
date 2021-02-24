@@ -19,7 +19,7 @@ import static lotto.domain.ticketresult.Rank.*;
 
 public class LottoComparatorTest {
     private WinningLottoNumbers winningLottoNumbers;
-    private PurchasedTickets purchasedTickets;
+    private LottoTickets dummy;
 
     @BeforeEach
     void setWinningLottoNumbers() {
@@ -38,151 +38,144 @@ public class LottoComparatorTest {
     }
 
     @BeforeEach
-    void setPurchasedTickets() {
-        List<LottoTicket> tickets = new ArrayList<>();
+    void setDummyLottoTicket() {
+        LottoTicket ticket = new LottoTicket(Arrays.asList(
+                new LottoNumber(31),
+                new LottoNumber(32),
+                new LottoNumber(33),
+                new LottoNumber(34),
+                new LottoNumber(35),
+                new LottoNumber(36)
+        ));
 
-        LottoTicket ticket = new LottoTicket(
-                Arrays.asList(
-                        new LottoNumber(1),
-                        new LottoNumber(2),
-                        new LottoNumber(3),
-                        new LottoNumber(4),
-                        new LottoNumber(5),
-                        new LottoNumber(6)
-                )
-        );
-        tickets.add(ticket);
-        LottoTickets manualTickets = new LottoTickets(tickets);
-        purchasedTickets = new PurchasedTickets(manualTickets, null);
+        dummy = new LottoTickets(Arrays.asList(ticket));
     }
 
-//    @DisplayName("1등 당첨 - 6개 일치")
-//    @Test
-//    void Should_Return_Result_When_SixNumbersMatched() {
-//        LottoTicket purchasedLottoTicket = new LottoTicket(Arrays.asList(
-//                new LottoNumber(1),
-//                new LottoNumber(2),
-//                new LottoNumber(3),
-//                new LottoNumber(4),
-//                new LottoNumber(5),
-//                new LottoNumber(6)
-//        ));
-//
-//        LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
-//        Map<Rank, Integer> lottoResult = lottoComparator.getLottoResult(purchasedLottoTickets);
-//
-//        Assertions.assertThat(lottoResult.get(FIFTH)).isEqualTo(0);
-//        Assertions.assertThat(lottoResult.get(FOURTH)).isEqualTo(0);
-//        Assertions.assertThat(lottoResult.get(THIRD)).isEqualTo(0);
-//        Assertions.assertThat(lottoResult.get(SECOND)).isEqualTo(0);
-//        Assertions.assertThat(lottoResult.get(FIRST)).isEqualTo(1);
-//    }
-//
-//
-//    @DisplayName("2등 당첨 - 5개, 보너스 번호 일치")
-//    @Test
-//    void Should_Return_Result_When_FiveNumbersAndBonusNumberMatched() {
-//        LottoTicket purchasedLottoTicket = new LottoTicket(Arrays.asList(
-//                new LottoNumber(1),
-//                new LottoNumber(2),
-//                new LottoNumber(3),
-//                new LottoNumber(4),
-//                new LottoNumber(5),
-//                new LottoNumber(7)
-//        ));
-//
-//        List<LottoTicket> lottoTickets = new ArrayList<>(Arrays.asList(purchasedLottoTicket));
-//        LottoTickets purchasedLottoTickets = new LottoTickets(lottoTickets);
-//
-//        LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
-//        Map<Rank, Integer> lottoResult
-//                = lottoComparator.getLottoResult(purchasedLottoTickets);
-//
-//        Assertions.assertThat(lottoResult.get(FIFTH)).isEqualTo(0);
-//        Assertions.assertThat(lottoResult.get(FOURTH)).isEqualTo(0);
-//        Assertions.assertThat(lottoResult.get(THIRD)).isEqualTo(0);
-//        Assertions.assertThat(lottoResult.get(SECOND)).isEqualTo(1);
-//        Assertions.assertThat(lottoResult.get(FIRST)).isEqualTo(0);
-//    }
-//
-//
-//    @DisplayName("3등 당첨 - 5개 일치")
-//    @Test
-//    void Should_Return_Result_When_FiveNumbersMatched() {
-//        LottoTicket purchasedLottoTicket = new LottoTicket(Arrays.asList(
-//                new LottoNumber(1),
-//                new LottoNumber(2),
-//                new LottoNumber(3),
-//                new LottoNumber(4),
-//                new LottoNumber(5),
-//                new LottoNumber(10)
-//        ));
-//
-//        List<LottoTicket> lottoTickets = new ArrayList<>(Arrays.asList(purchasedLottoTicket));
-//        LottoTickets purchasedLottoTickets = new LottoTickets(lottoTickets);
-//
-//        LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
-//        Map<Rank, Integer> lottoResult
-//                = lottoComparator.getLottoResult(purchasedLottoTickets);
-//
-//        Assertions.assertThat(lottoResult.get(FIFTH)).isEqualTo(0);
-//        Assertions.assertThat(lottoResult.get(FOURTH)).isEqualTo(0);
-//        Assertions.assertThat(lottoResult.get(THIRD)).isEqualTo(1);
-//        Assertions.assertThat(lottoResult.get(SECOND)).isEqualTo(0);
-//        Assertions.assertThat(lottoResult.get(FIRST)).isEqualTo(0);
-//    }
-//
-//
-//    @DisplayName("4등 당첨 - 4개 일치")
-//    @Test
-//    void Should_Return_Result_When_FourNumbersMatched() {
-//        LottoTicket purchasedLottoTicket = new LottoTicket(Arrays.asList(
-//                new LottoNumber(1),
-//                new LottoNumber(2),
-//                new LottoNumber(3),
-//                new LottoNumber(4),
-//                new LottoNumber(9),
-//                new LottoNumber(10)
-//        ));
-//
-//        List<LottoTicket> lottoTickets = new ArrayList<>(Arrays.asList(purchasedLottoTicket));
-//        LottoTickets purchasedLottoTickets = new LottoTickets(lottoTickets);
-//
-//        LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
-//        Map<Rank, Integer> lottoResult
-//                = lottoComparator.getLottoResult(purchasedLottoTickets);
-//
-//        Assertions.assertThat(lottoResult.get(FIFTH)).isEqualTo(0);
-//        Assertions.assertThat(lottoResult.get(FOURTH)).isEqualTo(1);
-//        Assertions.assertThat(lottoResult.get(THIRD)).isEqualTo(0);
-//        Assertions.assertThat(lottoResult.get(SECOND)).isEqualTo(0);
-//        Assertions.assertThat(lottoResult.get(FIRST)).isEqualTo(0);
-//    }
-//
-//
-//    @DisplayName("5등 당첨 - 3개 일치")
-//    @Test
-//    void Should_Return_Result_When_ThreeNumbersMatched() {
-//        LottoTicket purchasedLottoTicket = new LottoTicket(Arrays.asList(
-//                new LottoNumber(1),
-//                new LottoNumber(2),
-//                new LottoNumber(3),
-//                new LottoNumber(8),
-//                new LottoNumber(9),
-//                new LottoNumber(10)
-//        ));
-//
-//        List<LottoTicket> lottoTickets = new ArrayList<>(Arrays.asList(purchasedLottoTicket));
-//        LottoTickets purchasedLottoTickets = new LottoTickets(lottoTickets);
-//
-//        LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
-//        Map<Rank, Integer> lottoResult
-//                = lottoComparator.getLottoResult(purchasedLottoTickets);
-//
-//        Assertions.assertThat(lottoResult.get(FIFTH)).isEqualTo(1);
-//        Assertions.assertThat(lottoResult.get(FOURTH)).isEqualTo(0);
-//        Assertions.assertThat(lottoResult.get(THIRD)).isEqualTo(0);
-//        Assertions.assertThat(lottoResult.get(SECOND)).isEqualTo(0);
-//        Assertions.assertThat(lottoResult.get(FIRST)).isEqualTo(0);
-//    }
+    @DisplayName("1등 당첨 - 6개 일치")
+    @Test
+    void Should_Return_Result_When_SixNumbersMatched() {
+        LottoTicket ticket = new LottoTicket(Arrays.asList(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6)
+        ));
+
+        LottoTickets tickets = new LottoTickets(Arrays.asList(ticket));
+
+        PurchasedTickets purchasedTickets = new PurchasedTickets(tickets, dummy);
+
+        LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
+        Map<Rank, Integer> lottoResult = lottoComparator.getLottoResult(purchasedTickets);
+
+        Assertions.assertThat(lottoResult.get(FIFTH)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(FOURTH)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(THIRD)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(SECOND)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(FIRST)).isEqualTo(1);
+    }
+
+
+    @DisplayName("2등 당첨 - 5개, 보너스 번호 일치")
+    @Test
+    void Should_Return_Result_When_FiveNumbersAndBonusNumberMatched() {
+        LottoTicket ticket = new LottoTicket(Arrays.asList(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(7)
+        ));
+
+        LottoTickets tickets = new LottoTickets(Arrays.asList(ticket));
+
+        PurchasedTickets purchasedTickets = new PurchasedTickets(tickets, dummy);
+
+        LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
+        Map<Rank, Integer> lottoResult = lottoComparator.getLottoResult(purchasedTickets);
+
+        Assertions.assertThat(lottoResult.get(FIFTH)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(FOURTH)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(THIRD)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(SECOND)).isEqualTo(1);
+        Assertions.assertThat(lottoResult.get(FIRST)).isEqualTo(0);
+    }
+
+
+    @DisplayName("3등 당첨 - 5개 일치")
+    @Test
+    void Should_Return_Result_When_FiveNumbersMatched() {
+        LottoTicket ticket = new LottoTicket(Arrays.asList(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(10)
+        ));
+
+        LottoTickets tickets = new LottoTickets(Arrays.asList(ticket));
+        PurchasedTickets purchasedTickets = new PurchasedTickets(tickets, dummy);
+        LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
+        Map<Rank, Integer> lottoResult = lottoComparator.getLottoResult(purchasedTickets);
+
+        Assertions.assertThat(lottoResult.get(FIFTH)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(FOURTH)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(THIRD)).isEqualTo(1);
+        Assertions.assertThat(lottoResult.get(SECOND)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(FIRST)).isEqualTo(0);
+    }
+
+
+    @DisplayName("4등 당첨 - 4개 일치")
+    @Test
+    void Should_Return_Result_When_FourNumbersMatched() {
+        LottoTicket ticket = new LottoTicket(Arrays.asList(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(9),
+                new LottoNumber(10)
+        ));
+
+        LottoTickets tickets = new LottoTickets(Arrays.asList(ticket));
+        PurchasedTickets purchasedTickets = new PurchasedTickets(tickets, dummy);
+        LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
+        Map<Rank, Integer> lottoResult = lottoComparator.getLottoResult(purchasedTickets);
+
+        Assertions.assertThat(lottoResult.get(FIFTH)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(FOURTH)).isEqualTo(1);
+        Assertions.assertThat(lottoResult.get(THIRD)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(SECOND)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(FIRST)).isEqualTo(0);
+    }
+
+
+    @DisplayName("5등 당첨 - 3개 일치")
+    @Test
+    void Should_Return_Result_When_ThreeNumbersMatched() {
+        LottoTicket ticket = new LottoTicket(Arrays.asList(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(8),
+                new LottoNumber(9),
+                new LottoNumber(10)
+        ));
+
+        LottoTickets tickets = new LottoTickets(Arrays.asList(ticket));
+        PurchasedTickets purchasedTickets = new PurchasedTickets(tickets, dummy);
+        LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
+        Map<Rank, Integer> lottoResult = lottoComparator.getLottoResult(purchasedTickets);
+
+        Assertions.assertThat(lottoResult.get(FIFTH)).isEqualTo(1);
+        Assertions.assertThat(lottoResult.get(FOURTH)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(THIRD)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(SECOND)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(FIRST)).isEqualTo(0);
+    }
 }
