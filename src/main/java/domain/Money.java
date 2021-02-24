@@ -51,8 +51,12 @@ public class Money {
         return value;
     }
 
-    public int getNumberOfTickets() {
-        return numberOfTickets;
+    public boolean canBuy(int numberOfManualTickets) {
+        return numberOfManualTickets >= 0 && numberOfManualTickets <= numberOfTickets;
+    }
+
+    public int numberOfAutoTicket(int numberOfManualTicket) {
+        return numberOfTickets - numberOfManualTicket;
     }
 
     @Override

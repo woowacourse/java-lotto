@@ -8,13 +8,14 @@ public class LottoManager {
     private final Money money;
     private final List<LottoTicket> lottoTickets;
 
-    private LottoManager(final Money money) {
+    private LottoManager(final Money money, final List<String> manualTicketNumbers) {
         this.money = money;
-        this.lottoTickets = LottoMachine.generateLottoTickets(money);
+        this.lottoTickets = ManualLottoManager.generate(money, manualTicketNumbers);
+        this.lottoTickets.addAll(LottoMachine.generateAutoLottoTickets(money.numberOfAutoTicket(lottoTickets.size())));
     }
 
-    public static LottoManager init(final int price) {
-        return new LottoManager(Money.valueOf(price));
+    public static LottoManager init(final int money, final List<String> manualTicketNumbers) {
+        return new LottoManager(Money.valueOf(money), manualTicketNumbers);
     }
 
     public List<LottoTicket> getLottoTickets() {

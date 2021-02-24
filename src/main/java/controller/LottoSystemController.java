@@ -12,7 +12,8 @@ import java.util.Arrays;
 public class LottoSystemController {
 
     public void run() {
-        LottoManager lottoManager = LottoManager.init(InputView.receivePrice());
+        LottoManager lottoManager = LottoManager.init(InputView.receiveMoney(),
+            InputView.receiveManualTickets());
         printLottoTicketsInfo(lottoManager);
         printLottoResult(lottoManager);
     }
