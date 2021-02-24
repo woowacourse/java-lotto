@@ -9,21 +9,24 @@ import lotto.domain.rank.Rank;
 public class LottoTicket {
 
     public static final String LOTTO_PURCHASE_MONEY_LACK_ERROR = "[Error] 로또 구입 비용이 부족합니다. (로또 한 라인당 1,000원)";
-    public static final int LOTTO_LINE_PRICE = 1000;
     private static final LottoLineGenerator RANDOM_LOTTO_GENERATOR = new LottoLineGenerator();
     private final List<LottoLine> lottoLines;
 
     public LottoTicket(LottoMoney money) {
-        int lottoLineCount = money.getValue() / LOTTO_LINE_PRICE;
+        if(money.getCanBuyLottoLineCount() == 0){
+            throw new IllegalArgumentException(LOTTO_PURCHASE_MONEY_LACK_ERROR);
+        }
+        int lottoLineCount = money.getCanBuyLottoLineCount();
         this.lottoLines = makeLottoLines(lottoLineCount);
-        validateCreatLottoLines();
     }
 
     public LottoTicket(LottoMoney money, List<LottoLine> lottoLines) {
-        int lottoLineCount = money.getValue() / LOTTO_LINE_PRICE;
+        if(money.getCanBuyLottoLineCount() == 0 && lottoLines.size() == 0){
+            throw new IllegalArgumentException(LOTTO_PURCHASE_MONEY_LACK_ERROR);
+        }
+        int lottoLineCount = money.getCanBuyLottoLineCount();
         this.lottoLines = makeLottoLines(lottoLineCount);
         this.lottoLines.addAll(lottoLines);
-        validateCreatLottoLines();
     }
 
     private List<LottoLine> makeLottoLines(int count) {
@@ -49,18 +52,13 @@ public class LottoTicket {
     }
 
     public int getManualLottoLineCount() {
-        Long count = lottoLines.stream().filter(LottoLine::isManualLotto).count();
-        return count.intValue();
+        long count = lottoLines.stream().filter(LottoLine::isManualLotto).count();
+        return (int) count;
     }
 
     public int getAutoLottoLineCount() {
-        Long count = lottoLines.stream().filter(it -> !it.isManualLotto()).count();
-        return count.intValue();
+        long count = lottoLines.stream().filter(it -> !it.isManualLotto()).count();
+        return (int) count;
     }
 
-    public void validateCreatLottoLines() {
-        if (lottoLines.size() == 0) {
-            throw new IllegalArgumentException(LOTTO_PURCHASE_MONEY_LACK_ERROR);
-        }
-    }
 }

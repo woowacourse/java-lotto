@@ -1,13 +1,13 @@
 package lotto.domain.lotto;
 
 
-import static lotto.domain.lotto.LottoTicket.LOTTO_LINE_PRICE;
 import static lotto.domain.lotto.LottoTicket.LOTTO_PURCHASE_MONEY_LACK_ERROR;
 
 import lotto.domain.PurchaseCount;
 
 public class LottoMoney {
 
+    public static final int LOTTO_LINE_PRICE = 1000;
     private final int value;
 
     public LottoMoney(int value) {
@@ -17,12 +17,12 @@ public class LottoMoney {
         this.value = value;
     }
 
-    public int getValue() {
-        return value;
+    public LottoMoney spendLottoLine(PurchaseCount lottoPurchaseCount) {
+        return new LottoMoney(value - lottoPurchaseCount.getValue() * LOTTO_LINE_PRICE);
     }
 
-    public LottoMoney spendLottoLine(PurchaseCount purchaseCount) {
-        return new LottoMoney(value - purchaseCount.getValue() * LOTTO_LINE_PRICE);
+    public int getCanBuyLottoLineCount() {
+        return value / LOTTO_LINE_PRICE;
     }
 
 }
