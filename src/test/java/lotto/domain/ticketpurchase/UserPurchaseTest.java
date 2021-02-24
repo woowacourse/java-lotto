@@ -1,11 +1,11 @@
 package lotto.domain.ticketpurchase;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatCode;
-
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 
 
 public class UserPurchaseTest {
@@ -14,14 +14,14 @@ public class UserPurchaseTest {
     @Test
     void Should_Not_ThrowException_When_PurchasePriceExactlyDividedByThousand() {
         assertThatCode(() -> new UserPurchase(10000, 3))
-            .doesNotThrowAnyException();
+                .doesNotThrowAnyException();
     }
 
     @DisplayName("구입 금액이 1000원 단위가 아닐 시 에러")
     @Test
     void Should_ThrowException_When_PurchasePriceNotDividedByThousand() {
         Assertions.assertThatThrownBy(() ->
-            new UserPurchase(1200, 3)
+                new UserPurchase(1200, 3)
         ).isInstanceOf(IllegalArgumentException.class);
     }
 

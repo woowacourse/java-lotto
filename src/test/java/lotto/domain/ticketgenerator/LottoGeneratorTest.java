@@ -3,7 +3,6 @@ package lotto.domain.ticketgenerator;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
-import lotto.domain.ticketpurchase.UserPurchase;
 import lotto.strategy.AutoStrategy;
 import lotto.strategy.ManualStrategy;
 import org.junit.jupiter.api.BeforeEach;
