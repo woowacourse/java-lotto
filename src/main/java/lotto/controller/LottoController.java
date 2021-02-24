@@ -15,21 +15,31 @@ import java.util.List;
 public class LottoController {
 
     public void run() {
+        LottoMachine lottoMachine = new LottoMachine();
+
+        Payment payment = createPayment();
+        LottoCount lottoCount = createLottoCount(payment);
+
+        OutputView.printInputLottoNumbers();
+        Lottos lottos = new Lottos(lottoCount.auto(), createManualLotto(lottoMachine, lottoCount.manual()));
+
+        showLottos(lottoCount, lottos);
+        showResult(lottos, createWinningLotto(lottoMachine), payment);
+    }
+
+    private Payment createPayment() {
         try {
-            LottoMachine lottoMachine = new LottoMachine();
-
-            Payment payment = new Payment(Integer.parseInt(InputView.inputMoney()));
-            LottoCount lottoCount = new LottoCount(payment, Integer.parseInt(InputView.inputManualLottoCount()));
-
-            OutputView.printInputLottoNumbers();
-            Lottos lottos = new Lottos(lottoCount.auto(), createManualLotto(lottoMachine, lottoCount.manual()));
-
-            showLottos(lottoCount, lottos);
-            showResult(lottos, createWinningLotto(lottoMachine), payment);
+            return new Payment(Integer.parseInt(InputView.inputMoney()));
         } catch (NumberFormatException e) {
             throw new IllegalTypeException();
-        } catch (IllegalArgumentException | NullPointerException e) {
-            e.printStackTrace();
+        }
+    }
+
+    private LottoCount createLottoCount(Payment payment) {
+        try {
+            return new LottoCount(payment, Integer.parseInt(InputView.inputManualLottoCount()));
+        } catch (NumberFormatException e) {
+            throw new IllegalTypeException();
         }
     }
 
