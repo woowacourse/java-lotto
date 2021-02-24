@@ -7,17 +7,30 @@ import lotto.utils.StringChecker;
 public class LottoNumber {
     public static final int MINIMUM_NUMBER = 1;
     public static final int MAXIMUM_NUMBER = 45;
+    private static final LottoNumber[] cache = new LottoNumber[MAXIMUM_NUMBER + 1];
 
     private final int number;
 
-
-    public LottoNumber(String numberValue) {
-        this(convertToLottoNumber(numberValue));
+    static {
+        for (int i = 1; i <= MAXIMUM_NUMBER; i++) {
+            cache[i] = new LottoNumber(i);
+        }
     }
 
-    public LottoNumber(int number) {
+    private LottoNumber(int number) {
         validateNumberRange(number);
         this.number = number;
+    }
+
+    public static LottoNumber valueOf(String numberValue) {
+        return valueOf(convertToLottoNumber(numberValue));
+    }
+
+    public static LottoNumber valueOf(int i) {
+        if (i <= MAXIMUM_NUMBER && i >= MINIMUM_NUMBER) {
+            return LottoNumber.cache[i];
+        }
+        return new LottoNumber(i);
     }
 
     private static int convertToLottoNumber(String numberValue) {

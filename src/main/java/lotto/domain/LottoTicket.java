@@ -44,7 +44,7 @@ public class LottoTicket {
 
     private static List<LottoNumber> covertToLottoNumbers(String s) {
         return Arrays.stream(s.split(","))
-            .map(LottoNumber::new)
+            .map(LottoNumber::valueOf)
             .collect(Collectors.toList());
     }
 
