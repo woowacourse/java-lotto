@@ -44,7 +44,7 @@ public class LottoController {
 
     private LottoTicket initLottoWinnerTicket() {
         try {
-            return LottoTicketService.createLottoWinnerTicket(InputView.getWinnerNumbersInput());
+            return LottoTicketService.createManualLottoTicket(InputView.getWinnerNumbersInput());
         } catch (NullPointerException | IllegalArgumentException e) {
             OutputView.printErrorMessage(e);
             return initLottoWinnerTicket();

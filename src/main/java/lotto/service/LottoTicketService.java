@@ -22,7 +22,7 @@ public class LottoTicketService {
         return new LottoBoughtTicket(new RandomNumberGenerator().generateNumbers());
     }
 
-    public static LottoTicket createLottoWinnerTicket(final String input) {
+    public static LottoTicket createManualLottoTicket(final String input) {
         List<LottoNumber> lottoWinnerNumbers =
                 Arrays.stream(input.split(DELIMITER))
                         .map(String::trim)

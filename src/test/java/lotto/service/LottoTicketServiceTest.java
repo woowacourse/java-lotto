@@ -18,7 +18,7 @@ public class LottoTicketServiceTest {
     @Test
     @DisplayName("당첨 번호를 생성한다.")
     public void createLottoWinnerTicket() {
-        LottoTicket lottoWinnerTicket = LottoTicketService.createLottoWinnerTicket("1,2,3,4,5,6");
+        LottoTicket lottoWinnerTicket = LottoTicketService.createManualLottoTicket("1,2,3,4,5,6");
 
         assertThat(lottoWinnerTicket).isInstanceOf(LottoTicket.class);
     }
@@ -27,7 +27,7 @@ public class LottoTicketServiceTest {
     @DisplayName("당첨 번호를 5개 입력하면 IllegalArgumanetException 발생")
     public void invalidLottoNumbersTest() {
         assertThatThrownBy(() -> {
-            LottoTicketService.createLottoWinnerTicket("1,2,3,4,5");
+            LottoTicketService.createManualLottoTicket("1,2,3,4,5");
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(String.format(LottoTicketService.COUNT_ERROR_MESSAGE, LottoTicket.LOTTO_NUMBER_SIZE));
     }
@@ -36,7 +36,7 @@ public class LottoTicketServiceTest {
     @DisplayName("당첨 번호 입력에 숫자이외의 것을 입력하면 NumberFormatException 발생")
     public void invalidNumberFormatTest() {
         assertThatThrownBy(() -> {
-            LottoTicketService.createLottoWinnerTicket("1,2,3,4,이건문자열이다,6");
+            LottoTicketService.createManualLottoTicket("1,2,3,4,이건문자열이다,6");
         }).isInstanceOf(NumberFormatException.class)
                 .hasMessage(String.format(LottoTicketService.NUMBER_FORMAT_ERROR_MESSAGE, LottoTicket.LOTTO_NUMBER_SIZE));
     }
