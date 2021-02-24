@@ -25,6 +25,14 @@ public class UserPurchaseTest {
         ).isInstanceOf(IllegalArgumentException.class);
     }
 
+    @DisplayName("구입 금액보다 수동 티켓 총 금액이 더 많을 시 에러")
+    @Test
+    void Should_ThrowException_When_ManualTicketPriceGreaterThanPurchasePrice() {
+        Assertions.assertThatThrownBy(() ->
+                new UserPurchase(2000, 3)
+        ).isInstanceOf(IllegalArgumentException.class);
+    }
+
     @DisplayName("구입 금액이 1000원 단위일 때 티켓 개수 확인")
     @Test
     void Should_ReturnNumberOfTickets_When_ExactlyDividedByThousand() {
