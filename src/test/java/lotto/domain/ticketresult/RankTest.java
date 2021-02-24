@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.ticketresult;
 
 import lotto.domain.ticketresult.Rank;
 import org.assertj.core.api.Assertions;
