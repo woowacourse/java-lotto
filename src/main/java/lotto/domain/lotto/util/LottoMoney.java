@@ -1,9 +1,7 @@
-package lotto.domain.lotto;
+package lotto.domain.lotto.util;
 
 
 import static lotto.domain.lotto.LottoTicket.LOTTO_PURCHASE_MONEY_LACK_ERROR;
-
-import lotto.domain.PurchaseCount;
 
 public class LottoMoney {
 

@@ -2,8 +2,8 @@ package domain.lotto;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import lotto.domain.PurchaseCount;
-import lotto.domain.lotto.LottoMoney;
+import lotto.domain.lotto.util.PurchaseCount;
+import lotto.domain.lotto.util.LottoMoney;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

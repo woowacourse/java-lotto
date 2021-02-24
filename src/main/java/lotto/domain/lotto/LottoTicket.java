@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.domain.lotto.util.LottoMoney;
 import lotto.domain.rank.Rank;
 
 public class LottoTicket {
