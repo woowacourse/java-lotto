@@ -1,6 +1,6 @@
 package lotto.domain.lotto;
 
-public class WinningNumbers {
+public final class WinningNumbers {
 
     private final LottoTicket lottoTicket;
     private final LottoNumber bonusBall;

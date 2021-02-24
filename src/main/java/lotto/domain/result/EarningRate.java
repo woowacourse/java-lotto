@@ -2,7 +2,7 @@ package lotto.domain.result;
 
 import java.math.BigInteger;
 
-public class EarningRate {
+public final class EarningRate {
 
     public static final BigInteger HUNDRED = BigInteger.valueOf(100);
 

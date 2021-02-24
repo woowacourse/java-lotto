@@ -3,7 +3,7 @@ package lotto.domain.lotto;
 import java.math.BigInteger;
 import lotto.utils.NumericStringValidator;
 
-public class ManualBuyAmount {
+public final class ManualBuyAmount {
 
     private final BigInteger value;
 

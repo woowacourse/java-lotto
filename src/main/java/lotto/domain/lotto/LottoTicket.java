@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class LottoTicket {
+public final class LottoTicket {
 
     public static final BigInteger PRICE = BigInteger.valueOf(1000);
     public static final int SIZE_OF_LOTTO_NUMBERS = 6;

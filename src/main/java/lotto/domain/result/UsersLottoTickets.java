@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import lotto.domain.lotto.LottoTicket;
 
-public class UsersLottoTickets {
+public final class UsersLottoTickets {
 
     private final List<LottoTicket> manualLottoTickets;
     private final List<LottoTicket> autoLottoTickets;

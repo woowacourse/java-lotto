@@ -6,7 +6,7 @@ import java.util.EnumMap;
 import java.util.Map;
 import lotto.domain.lotto.Rank;
 
-public class Result {
+public final class Result {
 
     private final Map<Rank, Integer> resultMap;
     private final EarningRate earningRate;

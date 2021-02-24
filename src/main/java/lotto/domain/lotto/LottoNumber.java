@@ -3,7 +3,7 @@ package lotto.domain.lotto;
 import java.util.Objects;
 import lotto.utils.NumericStringValidator;
 
-public class LottoNumber {
+public final class LottoNumber {
 
     public static final int MINIMUM_VALUE = 1;
     public static final int MAXIMUM_VALUE = 45;

@@ -4,7 +4,7 @@ import java.math.BigInteger;
 import java.util.Objects;
 import lotto.utils.NumericStringValidator;
 
-public class Money {
+public final class Money {
 
     private final BigInteger amount;
     private static final int MINIMUM_AMOUNT = 0;
