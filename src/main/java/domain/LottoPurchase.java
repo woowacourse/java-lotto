@@ -13,7 +13,6 @@ import java.util.List;
 public class LottoPurchase {
     public static LottoTicket buyAutomatically(Budget budget) {
         budget.buy(LottoTicket.PRICE, 1);
-        LottoTicket lottoTicket = LottoTicket.of(LottoNumberRepository.shuffleLottoNumbers());
-        return lottoTicket;
+        return LottoTicket.of(LottoNumberRepository.shuffleLottoNumbers());
     }
 }

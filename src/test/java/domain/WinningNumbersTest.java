@@ -15,16 +15,16 @@ public class WinningNumbersTest {
     @BeforeEach
     public void setUp() {
         winningNumbers = new WinningNumbers(
-                LottoTicket.valueOf(Arrays.asList("1", "2", "3", "4", "5", "6")),
-                new LottoNumber("7"));
+                LottoTicket.valueOf(Arrays.asList(1,2,3,4,5,6)),
+                new LottoNumber(7));
     }
 
     @DisplayName("당첨 번호와 보너스 볼을 묶은 객체를 생성한다")
     @Test
     public void createWinningNumbers() {
         WinningNumbers winningNumberTest = new WinningNumbers(
-                LottoTicket.valueOf(Arrays.asList("1", "2", "3", "4", "5", "6")),
-                new LottoNumber("7"));
+                LottoTicket.valueOf(Arrays.asList(1,2,3,4,5,6)),
+                new LottoNumber(7));
         assertThat(winningNumberTest).isInstanceOf(WinningNumbers.class);
     }
 
@@ -33,29 +33,29 @@ public class WinningNumbersTest {
     public void createWinningNumbersException() {
         assertThatThrownBy(() -> {
             new WinningNumbers(
-                    LottoTicket.valueOf(Arrays.asList("1", "2", "3", "4", "5", "6")),
-                    new LottoNumber("6"));
+                    LottoTicket.valueOf(Arrays.asList(1,2,3,4,5,6)),
+                    new LottoNumber(6));
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("맞춘 개수에 맞는 Rank객체가 리턴된다. - 1등")
     @Test
     public void calculateLottoFirstRank() {
-        Rank rank = winningNumbers.calculateRank(LottoTicket.valueOf(Arrays.asList("1", "2", "3", "4", "5", "6")));
+        Rank rank = winningNumbers.calculateRank(LottoTicket.valueOf(Arrays.asList(1,2,3,4,5,6)));
         assertThat(rank).isEqualTo(Rank.FIRST);
     }
 
     @DisplayName("맞춘 개수에 맞는 Rank객체가 리턴된다. - 2등")
     @Test
     public void calculateLottoSecondRank() {
-        Rank rank = winningNumbers.calculateRank(LottoTicket.valueOf(Arrays.asList("1", "2", "3", "4", "5", "7")));
+        Rank rank = winningNumbers.calculateRank(LottoTicket.valueOf(Arrays.asList(1,2,3,4,5,7)));
         assertThat(rank).isEqualTo(Rank.SECOND);
     }
 
     @DisplayName("맞춘 개수에 맞는 Rank객체가 리턴된다. - 없는 경우")
     @Test
     public void calculateLottoNoneRank() {
-        Rank rank = winningNumbers.calculateRank(LottoTicket.valueOf(Arrays.asList("8", "9", "10", "11", "12", "13")));
+        Rank rank = winningNumbers.calculateRank(LottoTicket.valueOf(Arrays.asList(8,9,10,11,12,13)));
         assertThat(rank).isEqualTo(Rank.NOTHING);
     }
 }

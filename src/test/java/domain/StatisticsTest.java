@@ -18,13 +18,13 @@ public class StatisticsTest {
     @BeforeEach
     public void setUp() {
         winningNumbers = new WinningNumbers(
-                LottoTicket.valueOf(Arrays.asList("1", "2", "3", "4", "5", "6")),
-                new LottoNumber("7"));
+                LottoTicket.valueOf(Arrays.asList(1,2,3,4,5,6)),
+                new LottoNumber(7));
         lottoTickets = Arrays.asList(
-                LottoTicket.valueOf(Arrays.asList("1", "2", "3", "4", "5", "6")),
-                LottoTicket.valueOf(Arrays.asList("1", "2", "3", "4", "5", "7")),
-                LottoTicket.valueOf(Arrays.asList("1", "2", "3", "4", "6", "7")),
-                LottoTicket.valueOf(Arrays.asList("9", "10", "11", "12", "13", "14"))
+                LottoTicket.valueOf(Arrays.asList(1,2,3,4,5,6)),
+                LottoTicket.valueOf(Arrays.asList(1,2,3,4,5,7)),
+                LottoTicket.valueOf(Arrays.asList(1,2,3,4,6,7)),
+                LottoTicket.valueOf(Arrays.asList(9,10,11,12,13,14))
         );
     }
 

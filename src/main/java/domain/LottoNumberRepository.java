@@ -22,8 +22,7 @@ public class LottoNumberRepository {
 
     static {
         IntStream.rangeClosed(MINIMUM_NUMBER, MAXIMUM_NUMBER)
-                .mapToObj(Integer::toString)
-                .map(LottoNumber::new)
+                .mapToObj(LottoNumber::new)
                 .forEach(lottoNumbers::add);
     }
 

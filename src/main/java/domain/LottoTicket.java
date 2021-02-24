@@ -31,7 +31,7 @@ public class LottoTicket {
         return new LottoTicket(shuffleLottoNumbers);
     }
 
-    public static LottoTicket valueOf(List<String> lottoNumbers) {
+    public static LottoTicket valueOf(List<Integer> lottoNumbers) {
         isValidNumberCountOrThrow(lottoNumbers);
         List<LottoNumber> lottoNumbersList = new ArrayList<>();
         lottoNumbers.stream()
@@ -48,7 +48,7 @@ public class LottoTicket {
         return true;
     }
 
-    private static boolean isValidNumberCountOrThrow(List<String> lottoNumbers) {
+    private static boolean isValidNumberCountOrThrow(List<Integer> lottoNumbers) {
         if (lottoNumbers.size() != TOTAL_LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(ERROR_INVALID_NUMBER_COUNT);
         }

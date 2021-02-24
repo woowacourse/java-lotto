@@ -3,6 +3,7 @@ package controller;
 import domain.*;
 import view.InputView;
 import view.OutputView;
+import view.ScanRepeater;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,8 +34,8 @@ public class LottoController {
 
     private WinningNumbers createWinningNumber() {
         try {
-            LottoTicket winningNumbers = LottoTicket.valueOf(inputView.scanWinningNumber());
-            LottoNumber bonusBall = new LottoNumber(inputView.scanBonusBall());
+            LottoTicket winningNumbers = LottoTicket.valueOf(ScanRepeater.scanOrRepeatOnError(inputView::scanWinningNumber));
+            LottoNumber bonusBall = new LottoNumber(ScanRepeater.scanOrRepeatOnError(inputView::scanBonusBall));
             return new WinningNumbers(winningNumbers, bonusBall);
         } catch (RuntimeException e) {
             outputView.printError(e);
@@ -44,7 +45,7 @@ public class LottoController {
 
     private Budget createBudget() {
         try {
-            return new Budget(new Money(inputView.scanBudget()));
+            return new Budget(new Money(ScanRepeater.scanOrRepeatOnError(inputView::scanBudget)));
         } catch (RuntimeException e) {
             outputView.printError(e);
             return createBudget();
