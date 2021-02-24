@@ -3,12 +3,12 @@ package lotto.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.domain.lotto.util.PurchaseCount;
 import lotto.domain.lotto.LottoLine;
-import lotto.domain.lotto.util.LottoMoney;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.LottoTicket;
 import lotto.domain.lotto.WinningLotto;
+import lotto.domain.lotto.util.LottoMoney;
+import lotto.domain.lotto.util.PurchaseCount;
 import lotto.domain.rank.Ranks;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -19,8 +19,8 @@ public class LottoController {
         LottoTicket lottoTicket = createLottoTicket();
         OutputView.printLottoTicket(lottoTicket);
 
-        InputView.printWinningLottoLineInputRequestMessage();
-        WinningLotto winningLotto = new WinningLotto(createLottoLine(), createBonusLottoNumber());
+        WinningLotto winningLotto = creatWinningLotto();
+
         Ranks lottoWinningResult = createLottoWinningResult(lottoTicket, winningLotto);
         OutputView.printLottoResult(lottoWinningResult);
     }
@@ -84,6 +84,16 @@ public class LottoController {
             InputView.printManualLottoLineNumbersInputRequestMessage();
         }
         return purchaseCount;
+    }
+
+    private WinningLotto creatWinningLotto() {
+        try {
+            InputView.printWinningLottoLineInputRequestMessage();
+            return new WinningLotto(createLottoLine(), createBonusLottoNumber());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return creatWinningLotto();
+        }
     }
 
 }
