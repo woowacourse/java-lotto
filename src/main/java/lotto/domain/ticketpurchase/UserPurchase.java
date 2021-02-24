@@ -16,6 +16,12 @@ public class UserPurchase {
         this.autoTicketNumber = (purchasePrice / ONE_TICKET_PRICE) - manualTicketNumber;
     }
 
+    private void validateExactlyDividedByOneTicketPrice(int purchasePrice) {
+        if (purchasePrice <= ZERO || purchasePrice % ONE_TICKET_PRICE != ZERO) {
+            throw new IllegalArgumentException("구입 금액은 1000원 단위여야 합니다.");
+        }
+    }
+
     private void validateManualTicketPriceNotGreaterThanPurchasePrice(int purchasePrice, int manualTicketNumber) {
         if (purchasePrice < manualTicketNumber * ONE_TICKET_PRICE) {
             throw new IllegalArgumentException("구입금액에 맞게 입력해 주세요");
@@ -32,11 +38,5 @@ public class UserPurchase {
 
     public int getAutoTicketCount() {
         return this.autoTicketNumber;
-    }
-
-    private void validateExactlyDividedByOneTicketPrice(int purchasePrice) {
-        if (purchasePrice <= ZERO || purchasePrice % ONE_TICKET_PRICE != ZERO) {
-            throw new IllegalArgumentException("구입 금액은 1000원 단위여야 합니다.");
-        }
     }
 }
