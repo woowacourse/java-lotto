@@ -20,16 +20,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoSellerTest {
 
     private LottoSeller lottoSeller;
+    private List<Lotto> manualLottos;
 
     @BeforeEach
     void setUp() {
+        manualLottos = new ArrayList<>();
         lottoSeller = new LottoSeller();
     }
 
     @Test
     @DisplayName("로또 생성 성공")
     void createLotto_enoughMoney() {
-        LottoGroup lottoGroup = lottoSeller.sellLotto(Money.of(2000));
+        LottoGroup lottoGroup = lottoSeller.sellLotto(Money.of(2000), 0, manualLottos);
         assertThat(lottoGroup.size()).isEqualTo(2);
     }
 
@@ -37,7 +39,7 @@ class LottoSellerTest {
     @DisplayName("로또 생성 실패 - 음수 또는 부족한 돈")
     @ValueSource(ints = {500, -100})
     void createLotto_notEnoughMoney(int price) {
-        Assertions.assertThatThrownBy(() -> lottoSeller.sellLotto(Money.of(price)))
+        Assertions.assertThatThrownBy(() -> lottoSeller.sellLotto(Money.of(price), 0, manualLottos))
                 .isInstanceOf(LottoPriceException.class);
     }
 
@@ -45,7 +47,6 @@ class LottoSellerTest {
     @DisplayName("로또 수동 생성 성공")
     @CsvSource(value = {"3000:3:1,2,3,4,5,6/7,8,9,10,11,12/13,14,15,16,17,18"}, delimiter = ':')
     void createLotto_Manual(String money, int manualCount, String numbers) {
-        List<Lotto> manualLottos = new ArrayList<>();
         for(String number : numbers.split("/")){
             List<Integer> lottoNumbers = Arrays
                     .stream(number.split(","))
@@ -55,7 +56,7 @@ class LottoSellerTest {
             manualLottos.add(LottoGenerator.generate(lottoNumbers));
         }
 
-        List<Lotto> lottos = lottoSeller.sellManualLotto(Money.of(Integer.parseInt(money)), manualCount, manualLottos).lottoGroup();
+        List<Lotto> lottos = lottoSeller.sellLotto(Money.of(Integer.parseInt(money)), manualCount, manualLottos).lottoGroup();
         assertThat(lottos).isEqualTo(manualLottos);
     }
 
@@ -72,7 +73,7 @@ class LottoSellerTest {
                     .collect(Collectors.toList());
             manualLottos.add(LottoGenerator.generate(lottoNumbers));
         }
-        Assertions.assertThatThrownBy(() -> lottoSeller.sellManualLotto(Money.of(Integer.parseInt(money)), manualCount, manualLottos))
+        Assertions.assertThatThrownBy(() -> lottoSeller.sellLotto(Money.of(Integer.parseInt(money)), manualCount, manualLottos))
                 .isInstanceOf(LottoPriceException.class);
     }
 }

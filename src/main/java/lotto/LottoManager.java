@@ -41,11 +41,9 @@ public class LottoManager {
         try {
             LottoSeller lottoSeller = new LottoSeller();
             int count = InputView.getManualLottoCount();
-            if (count != 0) {
-                List<Lotto> lottos = createManualLotto(InputView.getManualNumbers(count));
-                return lottoSeller.sellManualLotto(money, count, lottos);
-            }
-            return lottoSeller.sellLotto(money);
+            List<Lotto> lottos = new ArrayList<>();
+            lottos = createManualLotto(InputView.getManualNumbers(count));
+            return lottoSeller.sellLotto(money, count, lottos);
         } catch (LottoException e) {
             OutputView.printMessage(e.getMessage());
             return createLottoGroup(InputView.getMoney());
