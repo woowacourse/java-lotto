@@ -28,8 +28,9 @@ public class LottoTicketMachineTest {
         LottoManualTicketCount ticketCount = new LottoManualTicketCount("2", money);
 
         LottoTickets lottoTickets = new LottoTickets();
-        for (int i = 0; i < ticketCount.value(); ++i) {
+        while(ticketCount.isRemain()){
             lottoTickets.add(lottoTicketMachine.buyManualTicket(money, "1,2,3,4,5,6"));
+            ticketCount.reduce();
         }
         assertThat(lottoTickets.toList().size()).isEqualTo(2);
         assertThat(lottoTicketMachine.buyAutoTickets(money).toList().size()).isEqualTo(3);

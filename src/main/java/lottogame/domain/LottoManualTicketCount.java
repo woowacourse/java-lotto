@@ -3,7 +3,7 @@ package lottogame.domain;
 public class LottoManualTicketCount {
 
     public static final int TICKET_PRICE = 1000;
-    private final int value;
+    private int value;
 
     public LottoManualTicketCount(final String manualTicketCount, final Money money) {
         value = Integer.parseInt(manualTicketCount);
@@ -11,8 +11,12 @@ public class LottoManualTicketCount {
         countValidate(value, money);
     }
 
-    public int value() {
-        return value;
+    public void reduce() {
+        value--;
+    }
+
+    public boolean isRemain() {
+        return value > 0;
     }
 
     private void positiveValidate(final int value) {

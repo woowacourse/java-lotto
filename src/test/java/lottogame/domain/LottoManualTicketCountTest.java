@@ -25,10 +25,16 @@ public class LottoManualTicketCountTest {
     }
 
     @Test
-    @DisplayName("5000원을 가지고 3개의 티켓을 구매 시도하면, 3개를 count를 가지고 있다.")
+    @DisplayName("5000원을 가지고 3개의 로또 티켓 카운트를 만들면 3회 반복된다.")
     void getValueTest() {
         LottoManualTicketCount lottoManualTicketCount =
                 new LottoManualTicketCount("3", new Money("5000"));
-        assertThat(lottoManualTicketCount.value()).isEqualTo(3);
+
+        int count = 0;
+        while (lottoManualTicketCount.isRemain()) {
+            count++;
+            lottoManualTicketCount.reduce();
+        }
+        assertThat(count).isEqualTo(3);
     }
 }
