@@ -20,14 +20,10 @@ public class LottoTicketIssueMachine {
     private final Count manualTicketCount;
 
     public LottoTicketIssueMachine(final Money money, final Count manualTicketCount) {
-        this.money = money;
-        this.manualTicketCount = manualTicketCount;
+        this.money = new Money(money);
+        this.manualTicketCount = new Count(manualTicketCount);
         validateMinPurchaseAmount(this.money);
         validateCanBuyCount(this.manualTicketCount);
-    }
-
-    public static int getTicketPrice() {
-        return TICKET_PRICE;
     }
 
     private void validateMinPurchaseAmount(final Money money) {
@@ -72,5 +68,9 @@ public class LottoTicketIssueMachine {
             lottoNumbers.add(new LottoNumber());
         }
         return lottoNumbers;
+    }
+
+    public static int getTicketPrice() {
+        return TICKET_PRICE;
     }
 }

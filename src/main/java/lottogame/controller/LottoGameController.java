@@ -21,20 +21,17 @@ public class LottoGameController {
     public void play() {
         Money money = new Money(InputView.inputMoney());
         Count manualTicketCount = new Count(InputView.inputManualTicketCount());
-        LottoTickets lottoTickets = getLottoTickets(money, manualTicketCount);
+        LottoGame lottoGame = new LottoGame(new LottoTicketIssueMachine(money, manualTicketCount));
+        LottoTickets lottoTickets = getLottoTickets(manualTicketCount, lottoGame);
         LottoWinningNumbers lottoWinningNumbers = getWinningNumbers();
-
-        LottoGame lottoGame = new LottoGame(lottoTickets, lottoWinningNumbers);
-        Map<Rank, Integer> ranks =  lottoGame.getMatchingResult();
-        OutputView.printLottoGameResult(ranks);
-        OutputView.printLottoGameYield(lottoGame.getYield(ranks));
+        Map<Rank, Integer> ranks = lottoGame.getMatchingResult(lottoTickets, lottoWinningNumbers);
+        printLottoGameResult(lottoGame.getMatchingResult(lottoTickets, lottoWinningNumbers), lottoGame.getYield(ranks));
     }
 
-    private LottoTickets getLottoTickets(final Money money, final Count manualTicketCount) {
-        List<Set<Integer>> manualTicketNumbers = InputView.inputManualTicketNumbers(new Count(manualTicketCount));
-        LottoTicketIssueMachine lottoTicketIssueMachine = new LottoTicketIssueMachine(new Money(money), new Count(manualTicketCount));
-        LottoTickets manualTickets = lottoTicketIssueMachine.issueManualTickets(manualTicketNumbers);
-        LottoTickets autoTickets = lottoTicketIssueMachine.issueAutoTickets();
+    private LottoTickets getLottoTickets(final Count manualTicketCount, final LottoGame lottoGame) {
+        List<Set<Integer>> manualTicketNumbers = InputView.inputManualTicketNumbers(manualTicketCount);
+        LottoTickets manualTickets = lottoGame.issueManualTickets(manualTicketNumbers);
+        LottoTickets autoTickets = lottoGame.issueAutoTickets();
         OutputView.printLottoTickets(manualTickets.getLottoTickets(), autoTickets.getLottoTickets());
         return manualTickets.joinLottoTickets(autoTickets);
     }
@@ -43,5 +40,10 @@ public class LottoGameController {
         Set<Integer> winningNumbers = InputView.inputWinningNumbers();
         int bonusNumber = InputView.inputBonusNumber();
         return new LottoWinningNumbers(winningNumbers, bonusNumber);
+    }
+
+    private void printLottoGameResult(final Map<Rank, Integer> ranks, final double yield) {
+        OutputView.printLottoGameResult(ranks);
+        OutputView.printLottoGameYield(yield);
     }
 }
