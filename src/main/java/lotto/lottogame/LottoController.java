@@ -1,22 +1,25 @@
 package lotto.lottogame;
 
 import lotto.lottoticket.BonusBall;
+import lotto.lottoticket.LottoTickets;
 import lotto.lottoticket.WinnerTicket;
+import lotto.lottoticket.ticketnumber.RandomNumbersGenerator;
 import lotto.money.Money;
-import lotto.ranking.Statistics;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
     public void run() {
         Money money = generateMoney();
-        LottoGame lottoGame = new LottoGame(generateCount(money));
-        OutputView.showTickets(lottoGame.getLottoTickets());
-
+        LottoCount lottoCount = new LottoCount(money);
+        LottoTickets lottoTickets = new LottoTickets(lottoCount, new RandomNumbersGenerator());
+        LottoGame lottoGame = new LottoGame(lottoTickets);
+        OutputView.noticeLottoCount(lottoCount);
+        OutputView.showTickets(lottoTickets);
         WinnerTicket winnerTicket = generateWinnerTicket();
-        Statistics statistics = lottoGame.createStatistics(winnerTicket, generateBonusBall(winnerTicket));
-        OutputView.noticeStatistics(statistics);
-        OutputView.showProfit(lottoGame.createResult(statistics, money));
+        OutputView.noticeStatistics(
+                lottoGame.calculateStatistics(winnerTicket, generateBonusBall(winnerTicket)),
+                lottoGame.calculateResult(money));
     }
 
     private Money generateMoney() {
@@ -26,17 +29,6 @@ public class LottoController {
         } catch (IllegalArgumentException e) {
             OutputView.printError(e);
             return generateMoney();
-        }
-    }
-
-    private LottoCount generateCount(Money money) {
-        try {
-            LottoCount lottoCount = new LottoCount(money);
-            OutputView.noticeLottoCount(lottoCount);
-            return lottoCount;
-        } catch (IllegalArgumentException e) {
-            OutputView.printError(e);
-            return generateCount(money);
         }
     }
 

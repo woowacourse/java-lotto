@@ -49,20 +49,21 @@ public class OutputView {
         System.out.println(ENTER_BONUS_BALL_MESSAGE);
     }
 
-    public static void noticeStatistics(Statistics statistics) {
+    public static void noticeStatistics(Statistics statistics, Double profit) {
         System.out.println();
         System.out.println(STATISTICS_TITLE);
         System.out.println(STATISTICS_DIVIDER);
-        printRankings(statistics);
+        printRankings(statistics, profit);
     }
 
-    private static void printRankings(Statistics statistics) {
+    private static void printRankings(Statistics statistics, Double profit) {
         Map<Ranking, Integer> result = statistics.getStatistics();
         List<Ranking> rankings = Arrays.asList(Ranking.values());
         Collections.reverse(rankings);
         for (Ranking ranking : rankings) {
             printEachRanking(result, ranking);
         }
+        showProfit(profit);
     }
 
     private static void printEachRanking(Map<Ranking, Integer> result, Ranking ranking) {

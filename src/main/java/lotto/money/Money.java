@@ -1,7 +1,5 @@
 package lotto.money;
 
-import lotto.lottoticket.LottoTicketValidation;
-
 import java.util.Objects;
 
 import static lotto.lottogame.LottoCount.LOTTO_PRICE;
