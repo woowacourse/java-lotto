@@ -6,6 +6,7 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import lotto.domain.LottoResult;
 import lotto.domain.generator.LottoManualGenerator;
 import lotto.domain.LottoAnnouncement;
 import lotto.domain.LottoRank;
@@ -40,10 +41,8 @@ public class LottoStoreTest {
         LottoManualGenerator lottoManualGenerator = new LottoManualGenerator(manualLottoNumbers);
         Lottos exampleLottos = new Lottos(lottoManualGenerator, 1);
         LottoAnnouncement lottoAnnouncement = new LottoAnnouncement(WINNING_NUMBERS, BONUS_NUMBER);
-        EnumMap<LottoRank, Integer> exampleLottosResult =
-            exampleLottos.getStatistics(lottoAnnouncement);
-        double value = new LottoStore().calculateProfitRate(exampleLottosResult, 1);
-        assertThat(value).isEqualTo(profitRate);
+        LottoResult lottoResult = new LottoResult(lottoAnnouncement, exampleLottos);
+        assertThat(lottoResult.getProfitRate()).isEqualTo(profitRate);
     }
 
     private List<List<Integer>> manualLottoNumbers(String exampleLotto) {

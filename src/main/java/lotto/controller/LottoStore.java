@@ -5,6 +5,7 @@ import java.util.Map.Entry;
 import java.util.Scanner;
 import lotto.domain.LottoAnnouncement;
 import lotto.domain.LottoRank;
+import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.Piece;
@@ -20,8 +21,6 @@ import lotto.viewer.OutputView;
 public class LottoStore {
 
     public static final int LOTTO_PRICE = 1000;
-    private static final int DECIMAL_TRIM_NUMERATOR = 100;
-    private static final double DECIMAL_TRIM_DENOMINATOR = 100.00;
 
     private final InputView inputView;
     private final OutputView outputView;
@@ -35,8 +34,8 @@ public class LottoStore {
     public void process() {
         Lottos lottos = buyLotto();
         LottoAnnouncement lottoAnnouncement = receiveValidLottoAnnouncement();
-        EnumMap<LottoRank, Integer> lottoResultStatistics = lottos.getStatistics(lottoAnnouncement);
-        printLottoResult(lottoResultStatistics, lottos);
+        LottoResult lottoResult = new LottoResult(lottoAnnouncement, lottos);
+        outputView.printLottoStatistics(lottoResult);
     }
 
     public Lottos buyLotto() {
@@ -48,21 +47,6 @@ public class LottoStore {
         purchasedLottos.addExtraPieces(lottoAutoGenerator, autoPieces.getPieceNumber());
         outputView.printPurchasedLottos(purchasedLottos, manualPieces);
         return purchasedLottos;
-    }
-
-    public void printLottoResult(EnumMap<LottoRank, Integer> lottoResultStatistics, Lottos lottos) {
-        double profitRate = calculateProfitRate(lottoResultStatistics, lottos.getSize());
-        outputView.printLottoStatistics(lottoResultStatistics, profitRate);
-    }
-
-    public double calculateProfitRate(EnumMap<LottoRank, Integer> lottosResult, int lottoPiece) {
-        double sum = 0;
-        for (Entry<LottoRank, Integer> keyValue : lottosResult.entrySet()) {
-            sum += keyValue.getKey().getPrizeMoney() * keyValue.getValue();
-        }
-        double investCapital = lottoPiece * LOTTO_PRICE;
-        double rawProfitRate = sum / investCapital;
-        return Math.round(rawProfitRate * DECIMAL_TRIM_NUMERATOR) / DECIMAL_TRIM_DENOMINATOR;
     }
 
     private Money receiveValidMoney() {

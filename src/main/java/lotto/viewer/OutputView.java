@@ -1,9 +1,10 @@
 package lotto.viewer;
 
+import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
 import lotto.domain.Lotto;
 import lotto.domain.LottoRank;
+import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 import lotto.domain.Piece;
 import lotto.exception.LottoAnnouncementException;
@@ -19,7 +20,7 @@ public class OutputView {
     private static final String PURCHASE_PIECE_EXPRESSION = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
 
     public void printPurchasedLottos(Lottos lottos, Piece manualPieces) {
-        List <Lotto> lottoBunch = lottos.getLottoBunch() ;
+        List<Lotto> lottoBunch = lottos.getLottoBunch();
         System.out.printf(PURCHASE_PIECE_EXPRESSION + System.lineSeparator(),
             manualPieces.getPieceNumber(), lottoBunch.size() - manualPieces.getPieceNumber());
         for (Lotto lotto : lottoBunch) {
@@ -28,7 +29,9 @@ public class OutputView {
         System.out.println();
     }
 
-    public void printLottoStatistics(Map<LottoRank, Integer> statistics, double profitRate) {
+    public void printLottoStatistics(LottoResult lottoResult) {
+        EnumMap<LottoRank, Integer> statistics = lottoResult.getLottoResultStatistics();
+        double profitRate = lottoResult.getProfitRate();
         System.out.println("당첨 통계");
         System.out.println("---------");
         for (LottoRank key : statistics.keySet()) {
@@ -36,7 +39,7 @@ public class OutputView {
         }
         System.out.printf(PROFIT_RATE_EXPRESSION + System.lineSeparator(), profitRate);
     }
-    
+
     private void printSingleResult(LottoRank key, int value) {
         if (key.equals(LottoRank.NONE)) {
             return;
@@ -47,7 +50,7 @@ public class OutputView {
             return;
         }
         System.out.printf(REGULAR_RESULT_EXPRESSION + System.lineSeparator(),
-            (int) key.getMatchingCount() ,key.getPrizeMoney(),value);
+            (int) key.getMatchingCount(), key.getPrizeMoney(), value);
     }
 
     public void printMoneyException(MoneyException moneyException) {
@@ -55,7 +58,7 @@ public class OutputView {
     }
 
     public void printLottoAnnouncementException(
-        LottoAnnouncementException lottoAnnouncementException ){
+        LottoAnnouncementException lottoAnnouncementException) {
         System.out.println(lottoAnnouncementException.getMessage());
     }
 
