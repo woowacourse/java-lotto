@@ -3,7 +3,7 @@ package lotto.service;
 import lotto.domain.lottos.LottoBoughtTicket;
 import lotto.domain.lottos.LottoNumber;
 import lotto.domain.lottos.LottoTicket;
-import lotto.domain.lottos.generator.RandomNumberGenerator;
+import lotto.util.RandomNumberGenerator;
 
 import java.util.Arrays;
 import java.util.List;
