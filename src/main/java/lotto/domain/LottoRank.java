@@ -26,7 +26,7 @@ public enum LottoRank {
                 .filter(lottoRank -> lottoRank != LottoRank.SECOND)
                 .filter(lottoRank -> lottoRank.matches(matchCounts))
                 .findFirst()
-                .orElseGet(() -> MISS);
+                .orElse(MISS);
     }
 
     private static boolean isSecond(int matchCounts, boolean isBonusBall) {
