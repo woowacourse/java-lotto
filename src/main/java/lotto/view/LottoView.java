@@ -18,6 +18,8 @@ public class LottoView {
     private static final String LOTTO_RESULT_MESSSAGE = "%d개 일치 (%d원)- %d개\n";
     private static final String SECOND_RANK_RESULT_MESSAGE = "%d개 일치, 보너스 볼 일치 (%d)원- %d개\n";
     private static final String EARNING_RATE_MESSAGE = "총 수익률은 %s입니다.";
+    private static final String INPUT_MANUAL_COUNT_MESSAGE = "\n수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String INPUT_MANUAL_NUMBER_MESSAGE = "\n수동으로 구매할 번호를 입력해 주세요.";
 
     public static String requestMoney() {
         System.out.println(INPUT_MONEY_MESSAGE);
@@ -25,12 +27,12 @@ public class LottoView {
     }
 
     public static String requestManualLottoCount() {
-        System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
+        System.out.println(INPUT_MANUAL_COUNT_MESSAGE);
         return SCANNER.nextLine();
     }
 
     public static void displayManualNumberMessage() {
-        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
+        System.out.println(INPUT_MANUAL_NUMBER_MESSAGE);
     }
 
     public static String requestManualNumber() {
