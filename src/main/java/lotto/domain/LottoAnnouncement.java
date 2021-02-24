@@ -9,7 +9,6 @@ import lotto.exception.LottoAnnouncementException;
 
 public class LottoAnnouncement {
 
-    public static final String DIFFERENT_POSESSION_MESSAGE = "로또 번호의 갯수가 기준과 다릅니다.";
     public static final String OVERLAPPED_WINNER_MESSAGE = "당첨 번호가 중복되었습니다.";
     public static final String OVERLAPPED_BONUS_MESSAGE = "보너스 번호가 중복되었습니다.";
 
@@ -56,7 +55,7 @@ public class LottoAnnouncement {
 
     private void checkProperSize(List<Integer> winners) {
         if (winners.size() != Lotto.LOTTO_POSSESSION_NUMBER) {
-            throw new LottoAnnouncementException(DIFFERENT_POSESSION_MESSAGE);
+            throw new LottoAnnouncementException(Lotto.DIFFERENT_POSSESSION_MESSAGE);
         }
     }
 
