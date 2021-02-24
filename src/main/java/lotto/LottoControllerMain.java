@@ -10,11 +10,13 @@ import java.util.List;
 public class LottoControllerMain {
     public static void main(String[] args) {
         Money money = new Money(InputView.inputMoney());
-        int manualCount = InputView.inputManualPurchaseCount();
-        int autoCount = money.totalCountOfPurchaseLotto() - manualCount;
+        ManualPurchaseCount manualPurchaseCount = new ManualPurchaseCount(InputView.inputManualPurchaseCount());
+        AutoPurchaseCount autoPurchaseCount = new AutoPurchaseCount(
+                money.totalCountOfPurchaseLotto() - manualPurchaseCount.getManualPurchaseCount()
+        );
 
-        LottoFactory manualLotto = LottoFactory.of(InputView.inputManualPurchase(manualCount));
-        LottoFactory autoLotto = LottoFactory.of(autoCount);
+        LottoFactory manualLotto = LottoFactory.of(InputView.inputManualPurchase(manualPurchaseCount.getManualPurchaseCount()));
+        LottoFactory autoLotto = LottoFactory.of(autoPurchaseCount.getAutoPurchaseCount());
 
         OutputView.showBuyLotto(manualLotto, autoLotto);
 
