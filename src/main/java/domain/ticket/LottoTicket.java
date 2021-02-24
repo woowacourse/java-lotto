@@ -12,11 +12,17 @@ import static domain.LottoNumber.MAX_NUMBER_VALUE;
 import static domain.LottoNumber.MIN_NUMBER_VALUE;
 
 public final class LottoTicket extends Ticket {
-    private static final List<Integer> TOTAL_NUMBERS = new ArrayList<>();
 
-    static {
-        IntStream.rangeClosed(MIN_NUMBER_VALUE, MAX_NUMBER_VALUE)
-                .forEach(i -> TOTAL_NUMBERS.add(i));
+    private final static class TotalNumbersCache {
+        private static final List<Integer> TOTAL_NUMBERS = new ArrayList<>();
+
+        static {
+            IntStream.rangeClosed(MIN_NUMBER_VALUE, MAX_NUMBER_VALUE)
+                    .forEach(i -> TOTAL_NUMBERS.add(i));
+        }
+
+        private TotalNumbersCache() {
+        }
     }
 
     public LottoTicket() {
@@ -50,9 +56,10 @@ public final class LottoTicket extends Ticket {
     }
 
     private List<Integer> addRandomNumbers(final List<Integer> numbers) {
-        Collections.shuffle(TOTAL_NUMBERS);
+        Collections.shuffle(TotalNumbersCache.TOTAL_NUMBERS);
 
-        TOTAL_NUMBERS.stream()
+        TotalNumbersCache.TOTAL_NUMBERS
+                .stream()
                 .filter(randomNumber -> numbers.size() < LOTTO_TICKET_SIZE)
                 .filter(randomNumber -> !numbers.contains(randomNumber))
                 .forEach(randomNumber -> numbers.add(randomNumber));

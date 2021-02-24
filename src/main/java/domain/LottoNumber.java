@@ -8,13 +8,19 @@ import java.util.stream.IntStream;
 public class LottoNumber {
     public static final int MIN_NUMBER_VALUE = 1;
     public static final int MAX_NUMBER_VALUE = 45;
-    private static final List<LottoNumber> CACHE = new ArrayList<>();
 
     private final int value;
 
-    static {
-        IntStream.rangeClosed(0, MAX_NUMBER_VALUE)
-                .forEach(i -> CACHE.add(new LottoNumber(i)));
+    private final static class LottoNumberCache {
+        private static final List<LottoNumber> CACHE = new ArrayList<>();
+
+        static {
+            IntStream.rangeClosed(0, MAX_NUMBER_VALUE)
+                    .forEach(i -> CACHE.add(new LottoNumber(i)));
+        }
+
+        private LottoNumberCache() {
+        }
     }
 
     private LottoNumber(final int value) {
@@ -27,7 +33,7 @@ public class LottoNumber {
                     String.format("%d~%d의 범위에서 벗어났습니다: %d", MIN_NUMBER_VALUE, MAX_NUMBER_VALUE, value)
             );
         }
-        return CACHE.get(value);
+        return LottoNumberCache.CACHE.get(value);
     }
 
     public int getValue() {
