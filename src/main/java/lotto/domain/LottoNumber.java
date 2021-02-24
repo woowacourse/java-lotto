@@ -48,10 +48,6 @@ public class LottoNumber {
         }
     }
 
-    public int getNumber() {
-        return this.number;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -67,5 +63,10 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    @Override
+    public String toString() {
+        return Integer.toString(number);
     }
 }
