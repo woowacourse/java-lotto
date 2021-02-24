@@ -50,7 +50,7 @@ public class InputView {
     public LottoManualGenerator lottoManualGenerator(Piece manualPiece) {
         System.out.println(MANUAL_LOTTO_INPUT_MESSAGE);
         List<List<Integer>> inputWinningNumbers = new ArrayList<>();
-        for (int i = 0; i < manualPiece.getPiece(); i++) {
+        for (int i = 0; i < manualPiece.getPieceNumber(); i++) {
             inputWinningNumbers.add(parseToWinner());
         }
         return new LottoManualGenerator(inputWinningNumbers);

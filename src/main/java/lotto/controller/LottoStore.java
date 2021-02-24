@@ -42,10 +42,10 @@ public class LottoStore {
     public Lottos buyLotto() {
         Money possessedMoney = receiveValidMoney();
         Piece manualPieces = receiveManualPieces(possessedMoney);
-        Piece autoPieces = new Piece(possessedMoney, manualPieces.getAnotherPiece(possessedMoney));
+        Piece autoPieces = manualPieces.getAnotherPiece(possessedMoney);
         LottoAutoGenerator lottoAutoGenerator = new LottoAutoGenerator();
         Lottos purchasedLottos = boughtManualLottos(manualPieces);
-        purchasedLottos.addExtraPieces(lottoAutoGenerator, autoPieces.getPiece());
+        purchasedLottos.addExtraPieces(lottoAutoGenerator, autoPieces.getPieceNumber());
         outputView.printPurchasedLottos(purchasedLottos, manualPieces);
         return purchasedLottos;
     }
@@ -103,7 +103,7 @@ public class LottoStore {
         Lottos lottos;
         try {
             lottoManualGenerator = inputView.lottoManualGenerator(manualPiece);
-            lottos = new Lottos(lottoManualGenerator, manualPiece.getPiece());
+            lottos = new Lottos(lottoManualGenerator, manualPiece.getPieceNumber());
         } catch (LottoException lottoException) {
             outputView.printLottoException(lottoException);
             lottos = boughtManualLottos(manualPiece);

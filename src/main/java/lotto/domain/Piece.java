@@ -19,11 +19,12 @@ public class Piece {
         }
     }
 
-    public int getAnotherPiece(Money money) {
-        return money.getLottoPieces() - this.piece;
+    public Piece getAnotherPiece(Money money) {
+        int anotherPieceNumber = money.getLottoPieces() - this.piece;
+        return new Piece(money, anotherPieceNumber);
     }
 
-    public int getPiece() {
+    public int getPieceNumber() {
         return this.piece;
     }
 }

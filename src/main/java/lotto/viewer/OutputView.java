@@ -21,7 +21,7 @@ public class OutputView {
     public void printPurchasedLottos(Lottos lottos, Piece manualPieces) {
         List <Lotto> lottoBunch = lottos.getLottoBunch() ;
         System.out.printf(PURCHASE_PIECE_EXPRESSION + System.lineSeparator(),
-            manualPieces.getPiece(), lottoBunch.size() - manualPieces.getPiece());
+            manualPieces.getPieceNumber(), lottoBunch.size() - manualPieces.getPieceNumber());
         for (Lotto lotto : lottoBunch) {
             System.out.println(lotto.getNumbers());
         }
