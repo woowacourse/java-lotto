@@ -10,9 +10,16 @@ public class UserPurchase {
 
     public UserPurchase(int purchasePrice, int manualTicketNumber) {
         validateExactlyDividedByOneTicketPrice(purchasePrice);
+        validateManualTicketPriceNotGreaterThanPurchasePrice(purchasePrice, manualTicketNumber);
         this.purchasePrice = purchasePrice;
         this.manualTicketNumber = manualTicketNumber;
         this.autoTicketNumber = (purchasePrice / ONE_TICKET_PRICE) - manualTicketNumber;
+    }
+
+    private void validateManualTicketPriceNotGreaterThanPurchasePrice(int purchasePrice, int manualTicketNumber) {
+        if (purchasePrice < manualTicketNumber * ONE_TICKET_PRICE) {
+            throw new IllegalArgumentException("구입금액에 맞게 입력해 주세요");
+        }
     }
 
     public int getPurchasePrice() {
