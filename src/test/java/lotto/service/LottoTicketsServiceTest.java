@@ -10,7 +10,8 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static lotto.domain.money.Money.*;
+import static lotto.domain.money.Money.LOTTO_PRICE;
+import static lotto.domain.money.Money.SHORT_MONEY_MESSAGE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 

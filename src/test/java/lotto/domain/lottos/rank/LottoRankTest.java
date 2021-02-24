@@ -45,7 +45,7 @@ class LottoRankTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = { 2,1,0 })
+    @ValueSource(ints = {2, 1, 0})
     @DisplayName("당첨 숫자 2개 이하 매칭이면 SIXTH_PLACE 반환")
     public void matchCount_2or1or0(int matchCount) {
         assertThat(LottoRank.matchLottoRank(matchCount, false))
