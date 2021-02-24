@@ -10,21 +10,18 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
-    public static LottoTickets generateLottoTickets(PurchasingCounts purchasingCounts, LottoNumberGenerator manualNumberGenerator,
-                                                    LottoNumberGenerator randomNumberGenerator) {
-        List<LottoTicket> manualLottoTickets = buyTickets(purchasingCounts.getManualTicketCounts(), manualNumberGenerator);
-        List<LottoTicket> autoLottoTickets = buyTickets(purchasingCounts.getAutoTicketCounts(), randomNumberGenerator);
-        manualLottoTickets.addAll(autoLottoTickets);
-        return new LottoTickets(manualLottoTickets);
-    }
-
-    private static List<LottoTicket> buyTickets(int lottoTicketCounts, LottoNumberGenerator lottoNumberGenerator) {
+    public static LottoTickets generateLottoTickets(int lottoTicketCounts, LottoNumberGenerator lottoNumberGenerator) {
         List<LottoTicket> lottoTicketGroup = new ArrayList<>();
         for (int i = 0; i < lottoTicketCounts; i++) {
             LottoTicket lottoTicket = LottoTicket.generateTicket(lottoNumberGenerator.generate());
             lottoTicketGroup.add(lottoTicket);
         }
-        return lottoTicketGroup;
+        return new LottoTickets(lottoTicketGroup);
+    }
+
+    public LottoTickets addAll(LottoTickets autoLottoTickets) {
+        this.lottoTickets.addAll(autoLottoTickets.lottoTickets);
+        return new LottoTickets(this.lottoTickets);
     }
 
     public int size() {
@@ -33,7 +30,7 @@ public class LottoTickets {
 
     public LottoStatistics getStatistics(WinningLottoTicket winningLottoTicket) {
         Map<LottoRank, Long> statistics = lottoTickets.stream()
-                .map(lottoTicket -> winningLottoTicket.compareNumbers(lottoTicket))
+                .map(winningLottoTicket::compareNumbers)
                 .collect(Collectors.groupingBy(lottoRank -> lottoRank, Collectors.counting()));
         return new LottoStatistics(statistics);
     }
