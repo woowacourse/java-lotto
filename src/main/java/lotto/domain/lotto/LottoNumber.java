@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     public static final int MIN_LOTTO_NUMBER = 1;
@@ -11,9 +12,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private static final Map<Integer, LottoNumber> cacheLottoNumbers = new HashMap<>();
 
     static {
-        for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
-            cacheLottoNumbers.put(i, new LottoNumber(i));
-        }
+        IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER + 1)
+                .forEach(i -> cacheLottoNumbers.put(i, new LottoNumber(i)));
     }
 
     private final int value;
