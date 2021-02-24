@@ -6,9 +6,9 @@ import java.util.Objects;
 
 public class LottoNumber {
 
-    public static final int MAX_NUMBER = 45;
-    public static final int MIN_NUMBER = 1;
-    public static final String NUMBER_RANGE_ERROR = "[ERROR] 1 ~ 45 사이의 숫자를 입력해 주세요.";
+    private static final int MAX_NUMBER = 45;
+    private static final int MIN_NUMBER = 1;
+    private static final String NUMBER_RANGE_ERROR = "[ERROR] 1 ~ 45 사이의 숫자를 입력해 주세요.";
     private final int number;
 
     private static final Map<Integer, LottoNumber> lottoNumberCache = new HashMap<>();
