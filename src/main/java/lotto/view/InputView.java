@@ -7,25 +7,29 @@ import lotto.domain.lotto.ManualLotto;
 
 public class InputView {
 
-    private final Scanner scanner;
+    private static final Scanner scanner = new Scanner(System.in);
 
-    public InputView(Scanner scanner) {
-        this.scanner = scanner;
+    private InputView(Scanner scanner){
+
     }
 
-    public Money inputMoney() {
+    public static Money inputMoney() {
         return new Money(scanner.nextLine());
     }
 
-    public String inputWinningNumbers() {
+    public static String inputWinningNumbers() {
         return scanner.nextLine();
     }
 
-    public String inputBonusNumber() {
+    public static String inputBonusNumber() {
         return scanner.nextLine();
     }
 
-    public ManualLotto inputNumManualLotto() {
+    public static ManualLotto inputNumManualLotto() {
         return new ManualLotto(scanner.nextLine());
+    }
+
+    public static String inputManualLottoNumber() {
+        return scanner.nextLine();
     }
 }

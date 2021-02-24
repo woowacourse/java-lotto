@@ -1,6 +1,7 @@
 package lotto.domain.lotto;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.lotto.lottogenerator.LottoGenerator;
@@ -9,10 +10,27 @@ public class Lotto {
 
     private static final String NUM_LOTTO_ERROR_MESSAGE = "로또 번호는 %d개의 숫자로 이루어져야 합니다.";
     private static final String DUPLICATION_LOTTO_ERROR_MESSAGE = "로또 번호는 중복된 숫자가 존재할 수 없습니다.";
+    private static final String ERROR_COLLECT_NUMBER = "올바른 숫자를 입력하여 주세요";
+
+    private static final String REGEX = ", ";
+
     private final List<LottoNumber> numbers;
 
     private Lotto(List<LottoNumber> numbers) {
         this.numbers = numbers;
+    }
+
+    public static Lotto generatedBy(String numbers) {
+        List<Integer> lottoNumbers;
+        try {
+            lottoNumbers = Arrays
+                .stream(numbers.split(REGEX))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+        } catch (Exception e) {
+            throw new IllegalArgumentException(ERROR_COLLECT_NUMBER);
+        }
+        return generatedBy(lottoNumbers);
     }
 
     public static Lotto generatedBy(List<Integer> numbers) {

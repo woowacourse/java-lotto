@@ -1,9 +1,6 @@
 package lotto.controller;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 import lotto.Money;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
@@ -17,11 +14,7 @@ import lotto.view.OutputView;
 
 public class LottoController {
 
-    public static final String REGEX = ", ";
-    private final InputView inputView;
-
-    public LottoController(Scanner scanner) {
-        this.inputView = new InputView(scanner);
+    public LottoController() {
     }
 
     public void play() {
@@ -36,9 +29,9 @@ public class LottoController {
     }
 
     private WinningLotto createWinningLotto() {
-        List<Integer> winningNumbers = createWinningNumbers();
+        Lotto winningLotto = createWinningNumbers();
         Integer bonusNumber = createBonusNUmber();
-        return WinningLotto.generatedBy(Lotto.generatedBy(winningNumbers),
+        return WinningLotto.generatedBy(winningLotto,
             LottoNumber.valueOf(bonusNumber));
     }
 
@@ -53,12 +46,13 @@ public class LottoController {
     }
 
     private Lottos createLottos() {
+        LottoStore lottoStore = new LottoStore();
+
         Money money = startMoney();
         ManualLotto manualLotto = buyManualLotto();
+        validNumManualLotto(money, manualLotto);
 
-        LottoStore lottoStore = new LottoStore();
-        Lottos purchasedLottos = lottoStore.buyLottos(money);
-
+        Lottos purchasedLottos = lottoStore.buyLottos(money, manualLotto);
         OutputView.numPurchasedLotto(purchasedLottos.size());
         OutputView.lottosPrint(purchasedLottos);
 
@@ -66,31 +60,31 @@ public class LottoController {
 
     }
 
+
+    private void validNumManualLotto(Money money, ManualLotto numManual) {
+        money.validNumManual(numManual);
+    }
+
     private ManualLotto buyManualLotto() {
         OutputView.inputNumManualLotto();
-        return inputView.inputNumManualLotto();
+        return InputView.inputNumManualLotto();
     }
 
     private Money startMoney() {
         OutputView.inputMoney();
-        return inputView.inputMoney();
+        return InputView.inputMoney();
     }
 
 
-    private List<Integer> createWinningNumbers() {
+    private Lotto createWinningNumbers() {
         OutputView.inputWinningNumber();
-        String winningNumbers = inputView.inputWinningNumbers();
-        List<Integer> lottoNumbers = Arrays
-            .stream(winningNumbers
-                .split(REGEX))
-            .map(Integer::parseInt)
-            .collect(Collectors.toList());
-        return lottoNumbers;
+        String winningNumbers = InputView.inputWinningNumbers();
+        return Lotto.generatedBy(winningNumbers);
     }
 
     private Integer createBonusNUmber() {
         OutputView.inputBonus();
-        String bonusNumber = inputView.inputBonusNumber();
+        String bonusNumber = InputView.inputBonusNumber();
         return Integer.parseInt(bonusNumber);
     }
 }

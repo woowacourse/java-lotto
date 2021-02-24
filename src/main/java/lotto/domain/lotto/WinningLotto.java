@@ -2,7 +2,7 @@ package lotto.domain.lotto;
 
 public class WinningLotto {
 
-    public static final String DUPLICATION_BONUS_BALL_ERROR = "중복된 보너스 볼 값입니다.";
+    private static final String DUPLICATION_BONUS_BALL_ERROR = "중복된 보너스 볼 값입니다.";
     private final Lotto lotto;
     private final LottoNumber bonus;
 

@@ -45,7 +45,7 @@ public class LottoTest {
     void 로또_구매_수량_테스트() {
         Money money = new Money("14990");
         LottoStore lottoStore = new LottoStore();
-        Lottos lottos = lottoStore.buyLottos(money);
+        Lottos lottos = lottoStore.buyLottos(money, new ManualLotto());
 
         assertThat(lottos.size()).isEqualTo(14);
     }
