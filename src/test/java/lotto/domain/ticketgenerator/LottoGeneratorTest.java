@@ -49,12 +49,11 @@ public class LottoGeneratorTest {
         assertThat(lottoGenerator.generateTickets().size()).isEqualTo(2);
     }
 
-    @DisplayName("구입 금액에 따른 티켓 다발 생성")
+    @DisplayName("자동 티켓 생성 테스트")
     @Test
     void Should_ReturnPurchasedTickets_When_Purchased() {
-        UserPurchase userPurchase = new UserPurchase(18000, 3);
         lottoGenerator.setGenerateStrategy(new AutoStrategy(15));
         LottoTickets lottoTickets = lottoGenerator.generateTickets();
-        assertThat(lottoTickets.size()).isEqualTo(18);
+        assertThat(lottoTickets.size()).isEqualTo(15);
     }
 }
