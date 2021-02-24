@@ -1,10 +1,13 @@
 package lotto.domain;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.Map;
 import lotto.utils.CustomException;
 import lotto.utils.StringChecker;
 
 public class Money {
+    private final BigDecimal money;
     private final int ticketCount;
     private final BigDecimal change;
 
@@ -15,7 +18,7 @@ public class Money {
     public Money(String moneyValue, int analogTicketCount) {
         validateIsNumber(moneyValue);
         validateNotOverMoney(moneyValue, analogTicketCount);
-        final BigDecimal money = new BigDecimal(moneyValue);
+        this.money = new BigDecimal(moneyValue);
         this.ticketCount = money.divideToIntegralValue(new BigDecimal(LottoTicket.PRICE)).intValue()
             - analogTicketCount;
         this.change = money
@@ -41,6 +44,30 @@ public class Money {
 
     public int getChange() {
         return change.intValue();
+    }
+
+    private BigDecimal calculateTotalPrize(Map<Rank, Integer> resultMap) {
+        BigDecimal localPrize = BigDecimal.ZERO;
+
+        for (Map.Entry<Rank, Integer> result : resultMap.entrySet()) {
+            localPrize = localPrize.add(
+                result.getKey().getPrize()
+                    .multiply(BigDecimal.valueOf(result.getValue()))
+            );
+        }
+        return localPrize;
+    }
+
+    private BigInteger calculateEarningRate(BigDecimal buyPrice, BigDecimal totalPrize) {
+        return (totalPrize
+            .divide(buyPrice, 2, BigDecimal.ROUND_CEILING))
+            .multiply(BigDecimal.valueOf(100)).toBigInteger();
+    }
+
+    public BigInteger getEarningRate(Map<Rank, Integer> results) {
+        final BigDecimal totalPrize = calculateTotalPrize(results);
+        return calculateEarningRate(money.subtract(change), totalPrize);
+
     }
 
 }

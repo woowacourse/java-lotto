@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import lotto.utils.FixedLottoGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,13 +25,17 @@ class MachineTest {
     }
 
     @Test
-    @DisplayName("결과 값 테스트")
+    @DisplayName("결과 값 테스트 - 1등 3개, 2등 0개")
     void getResult() {
-        final LottoTickets lottoTickets = new LottoTickets(3, new FixedLottoGenerator());
-        Result result = new Result("1,2,3,4,5,6", "7", lottoTickets);
         Machine machine = new Machine("3000", new FixedLottoGenerator());
 
-        assertThat(machine.getResult("1,2,3,4,5,6", "7")).isEqualTo(result);
+        final Map<Rank, Integer> resultMap = machine.getResult("1,2,3,4,5,6", "7")
+            .getResultMap();
+        int firstPlaces = resultMap.getOrDefault(Rank.FIRST_PLACE, 0);
+        int secondPlaces = resultMap.getOrDefault(Rank.SECOND_PLACE, 0);
+
+        assertThat(firstPlaces).isEqualTo(3);
+        assertThat(secondPlaces).isEqualTo(0);
     }
 
     @Test

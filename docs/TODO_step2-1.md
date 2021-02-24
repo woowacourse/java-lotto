@@ -9,7 +9,7 @@ src/main/java/lotto/domain/Money.java
 
 src/main/java/lotto/domain/Result.java
 
-- [ ] 금액에 관련된 로직은 Money에서 담당해도 괜찮겠네요!
+- [x] ❓ 금액에 관련된 로직은 Money에서 담당해도 괜찮겠네요!
 
 src/main/java/lotto/domain/Money.java
 
