@@ -14,7 +14,7 @@ public class LottoTicketsService {
     }
 
     public static LottoTickets createLottoTickets(Money money) {
-        List<LottoTicket> lottoTicketGroup = Stream.generate(LottoTicketService::createLottoTicket)
+        List<LottoTicket> lottoTicketGroup = Stream.generate(LottoTicketService::createAutoLottoTicket)
                 .limit(money.getLottoCount())
                 .collect(Collectors.toList());
         return new LottoTickets(lottoTicketGroup);

@@ -99,7 +99,7 @@ public class LottoTicketTest {
     @Test
     @DisplayName("구매한 로또 티켓의 숫자가 잘 정렬 되있는지 검사")
     public void lottoTicketSortTest() {
-        LottoTicket lottoTicket = LottoTicketService.createLottoTicket();
+        LottoTicket lottoTicket = LottoTicketService.createAutoLottoTicket();
 
         int number = 0;
         for (LottoNumber lottoNumber : lottoTicket.getLottoNumbers()) {

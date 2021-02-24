@@ -18,7 +18,7 @@ public class LottoTicketService {
     private LottoTicketService() {
     }
 
-    public static LottoBoughtTicket createLottoTicket() {
+    public static LottoBoughtTicket createAutoLottoTicket() {
         return new LottoBoughtTicket(new RandomNumberGenerator().generateNumbers());
     }
 
