@@ -32,7 +32,7 @@ public class LottoMachine {
 
     public Lottos buyAutomaticLottos() {
         int numOfAvailableLotto = balance.getPrice() / Lotto.LOTTO_PRICE;
-        List<Lotto> availableLotto = Stream.iterate(0, i -> i+1)
+        List<Lotto> availableLotto = Stream.iterate(0, i -> i + 1)
             .map(i -> Lotto.generatedBy(new RandomLottoGenerator()))
             .limit(numOfAvailableLotto)
             .collect(Collectors.toList());

@@ -4,7 +4,6 @@ import lotto.domain.LottoMachine;
 import lotto.domain.WinningLotto;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Lottos;
-import lotto.model.LottoResult;
 import lotto.model.LottoResults;
 import lotto.model.Money;
 import lotto.view.InputView;
@@ -17,12 +16,14 @@ public class LottoController {
             Money insertedMoney = Money.priceOf(InputView.inputPurchaseAmount());
             LottoMachine lottoMachine = LottoMachine.insertMoney(insertedMoney);
             int numOfManualLotto = InputView.inputNumOfManualLotto();
-            Lottos manualLottos = lottoMachine.buyManualLottos(InputView.inputManualLottoNumbers(numOfManualLotto));
+            Lottos manualLottos = lottoMachine
+                .buyManualLottos(InputView.inputManualLottoNumbers(numOfManualLotto));
             Lottos automaticLottos = lottoMachine.buyAutomaticLottos();
             OutputView.printLottoPurchaseResult(manualLottos, automaticLottos);
 
             WinningLotto winningLotto = inputWinningLotto();
-            LottoResults lottoResults = LottoResults.of(manualLottos.match(winningLotto), automaticLottos.match(winningLotto));
+            LottoResults lottoResults = LottoResults
+                .of(manualLottos.match(winningLotto), automaticLottos.match(winningLotto));
             OutputView.printLottoResult(lottoResults);
         } catch (Exception e) {
             OutputView.printExceptionMessage(e);

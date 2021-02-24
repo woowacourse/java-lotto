@@ -40,6 +40,7 @@ class LottoResultsTest {
     void 수익률_확인_테스트() {
         int numOfLotto = 3;
         int totalPrize = LottoRank.FIRST.getPrize() + LottoRank.SECOND.getPrize();
-        assertThat(lottoResults.getEarningsRate()).isEqualTo( (double) totalPrize / (double) (numOfLotto * Lotto.LOTTO_PRICE));
+        assertThat(lottoResults.getEarningsRate())
+            .isEqualTo((double) totalPrize / (double) (numOfLotto * Lotto.LOTTO_PRICE));
     }
 }

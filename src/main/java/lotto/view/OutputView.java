@@ -30,7 +30,8 @@ public class OutputView {
     public static void printLottoPurchaseResult(Lottos manualLottos, Lottos automaticLottos) {
         System.out.println();
 
-        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualLottos.getNumOfLottos(), automaticLottos.getNumOfLottos());
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualLottos.getNumOfLottos(),
+            automaticLottos.getNumOfLottos());
         printLottos(manualLottos);
         printLottos(automaticLottos);
         System.out.println();

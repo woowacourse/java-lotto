@@ -25,6 +25,7 @@ public class LottoNumber {
     }
 
     private static class LottoNumberCache {
+
         static final int LOW;
         static final int HIGH;
         static final LottoNumber[] CACHE;
@@ -34,7 +35,7 @@ public class LottoNumber {
             HIGH = MAX;
             CACHE = new LottoNumber[(MAX - MIN) + 1];
             for (int i = 0; i < CACHE.length; i++) {
-                CACHE[i] = new LottoNumber(i+1);
+                CACHE[i] = new LottoNumber(i + 1);
             }
         }
     }
