@@ -2,24 +2,17 @@ package lotto.domain.lotto;
 
 import java.util.Objects;
 import lotto.domain.number.LottoNumber;
+import lotto.domain.rank.Rank;
 
 public class WinningNumbers {
 
     private final LottoNumbers lottoNumbers;
     private final LottoNumber bonusNumber;
 
-    private WinningNumbers(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
+    public WinningNumbers(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
+        validateDuplication(lottoNumbers, bonusNumber);
         this.lottoNumbers = lottoNumbers;
         this.bonusNumber = bonusNumber;
-    }
-
-    public static WinningNumbers valueOf(String unparsedLottoNumbers, String unparsedBonusNumber) {
-        LottoNumbers parsedLottoNumbers = LottoNumbers.valueOf(unparsedLottoNumbers);
-        LottoNumber parsedBonusNumber = LottoNumber.valueOf(unparsedBonusNumber);
-
-        validateDuplication(parsedLottoNumbers, parsedBonusNumber);
-
-        return new WinningNumbers(parsedLottoNumbers, parsedBonusNumber);
     }
 
     private static void validateDuplication(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
@@ -28,12 +21,19 @@ public class WinningNumbers {
         }
     }
 
-    public boolean hasBonusNumber(LottoNumbers lottoNumbers) {
+    public Rank checkRank(LottoNumbers lottoNumbers) {
+        return Rank.valueOf(
+            getMatchCount(lottoNumbers),
+            hasBonusNumber(lottoNumbers)
+        );
+    }
+
+    private boolean hasBonusNumber(LottoNumbers lottoNumbers) {
         return lottoNumbers.contains(bonusNumber);
     }
 
-    public int getMatchCount(LottoNumbers lottoNumbers) {
-        return this.lottoNumbers.getMatchCount(lottoNumbers);
+    private int getMatchCount(LottoNumbers lottoNumbers) {
+        return this.lottoNumbers.match(lottoNumbers);
     }
 
     @Override

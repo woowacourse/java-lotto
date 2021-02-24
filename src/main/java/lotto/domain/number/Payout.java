@@ -29,7 +29,7 @@ public class Payout {
         }
     }
 
-    public int getAmount() {
+    public int unwrap() {
         return amount;
     }
 
