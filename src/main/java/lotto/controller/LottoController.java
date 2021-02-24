@@ -15,9 +15,7 @@ public class LottoController {
 		Lottos lottos = createLottosBy(lottoMachine);
 		printLottoPurchaseSummaryBasedOn(lottos, lottoMachine);
 
-		List<Rank> results = getResultsOf(lottos);
-		Money moneyInvested = lottoMachine.getMoney();
-		LottoStatistics lottoStatistics = new LottoStatistics(results, moneyInvested);
+		LottoStatistics lottoStatistics = createLottoStatisticsBasedOn(lottos, lottoMachine);
 		printResultStatisticsBasedOn(lottoStatistics);
 
 		closeScanner();
@@ -36,6 +34,12 @@ public class LottoController {
 	private Lottos createLottosBy(LottoMachine lottoMachine) {
 		List<int[]> manualLottoNumbersInput = takeManualLottoNumbersInput(lottoMachine);
 		return lottoMachine.createLottosFrom(manualLottoNumbersInput);
+	}
+
+	private LottoStatistics createLottoStatisticsBasedOn(Lottos lottos, LottoMachine lottoMachine) {
+		List<Rank> results = getResultsOf(lottos);
+		Money moneyInvested = lottoMachine.getMoney();
+		return new LottoStatistics(results, moneyInvested);
 	}
 
 	private List<Rank> getResultsOf(Lottos lottos) {
