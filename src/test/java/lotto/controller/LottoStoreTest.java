@@ -6,7 +6,7 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import lotto.controller.generator.LottoManualGenerator;
+import lotto.domain.generator.LottoManualGenerator;
 import lotto.domain.LottoAnnouncement;
 import lotto.domain.LottoRank;
 import lotto.domain.Lottos;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
-import lotto.controller.generator.LottoGenerator;
+import lotto.domain.generator.LottoGenerator;
 
 public class Lottos {
 

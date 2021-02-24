@@ -7,7 +7,7 @@ import lotto.domain.LottoAnnouncement;
 import lotto.domain.LottoRank;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
-import lotto.controller.generator.LottoAutoGenerator;
+import lotto.domain.generator.LottoAutoGenerator;
 import lotto.exception.LottoAnnouncementException;
 import lotto.exception.MoneyException;
 import lotto.viewer.AnnouncementInputView;
