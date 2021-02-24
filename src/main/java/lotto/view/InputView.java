@@ -1,5 +1,7 @@
 package lotto.view;
 
+import static lotto.utils.ConsoleUtils.printNotice;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -23,7 +25,7 @@ public class InputView {
         return SCANNER.nextLine();
     }
 
-    public static String getManuallyBuyAmountInput() {
+    public static String getManualBuyAmountInput() {
         printNotice("수동으로 구매할 로또 수를 입력해 주세요.");
         return SCANNER.nextLine();
     }
@@ -37,9 +39,5 @@ public class InputView {
         }
 
         return lottoTicketsInput;
-    }
-
-    private static void printNotice(String notice) {
-        System.out.println("\n" + notice);
     }
 }
