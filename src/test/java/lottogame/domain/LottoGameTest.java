@@ -28,8 +28,8 @@ public class LottoGameTest {
         this.lottoGame = new LottoGame(lottoTicketIssueMachine);
         this.manualTicketNumbers = new ArrayList<>();
         this.manualTicketNumbers.add(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        this.manualTicketNumbers.add(new HashSet<>(Arrays.asList(2, 3, 4, 5, 6, 7)));
-        this.manualTicketNumbers.add(new HashSet<>(Arrays.asList(8, 9, 10, 11, 12, 13)));
+        this.manualTicketNumbers.add(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        this.manualTicketNumbers.add(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
         this.manualTicketNumbers.add(new HashSet<>(Arrays.asList(19, 18, 17, 16, 15, 14)));
     }
 
@@ -47,7 +47,7 @@ public class LottoGameTest {
         LottoTickets manualTickets = this.lottoGame.issueManualTickets(this.manualTicketNumbers);
         LottoTickets autoTickets = this.lottoGame.issueAutoTickets();
         LottoTickets lottoTickets = manualTickets.joinLottoTickets(autoTickets);
-        assertThat(this.lottoGame.getYield(getLottoGameResult(lottoTickets))).isEqualTo(5);
+        assertThat(this.lottoGame.getYield(getLottoGameResult(lottoTickets))).isEqualTo(1.5);
     }
 
     private Map<Rank, Integer> getLottoGameResult(final LottoTickets lottoTickets) {

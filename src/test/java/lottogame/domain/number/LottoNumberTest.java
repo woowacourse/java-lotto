@@ -21,4 +21,11 @@ public class LottoNumberTest {
         assertThatThrownBy(() -> new LottoNumber(0)).isInstanceOf(IllegalArgumentException.class);
         assertThatThrownBy(() -> new LottoNumber(46)).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("캐싱된 LottoNumber가 새로 생성한 LottoNumber와 동일하게 인식되는지 테스트")
+    void testCacheLottoNumber() {
+        assertThat(LottoNumber.numbers().contains(new LottoNumber(1))).isTrue();
+        assertThat(LottoNumber.numbers().contains(new LottoNumber(45))).isTrue();
+    }
 }

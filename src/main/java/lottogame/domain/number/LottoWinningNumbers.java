@@ -13,14 +13,14 @@ public class LottoWinningNumbers {
 
     public LottoWinningNumbers(final Set<Integer> winningNumbers, final int bonusNumber) {
         this.winningNumbers = convertWinningNumbers(winningNumbers);
-        this.bonusNumber = new LottoNumber(bonusNumber);
+        this.bonusNumber = LottoNumber.valueOf(bonusNumber);
         validateNumbersCount(this.winningNumbers);
         validateDuplicate(this.winningNumbers, this.bonusNumber);
     }
 
     private Set<LottoNumber> convertWinningNumbers(Set<Integer> winningNumbers) {
         return winningNumbers.stream()
-            .map(LottoNumber::new)
+            .map(LottoNumber::valueOf)
             .collect(Collectors.toSet());
     }
 

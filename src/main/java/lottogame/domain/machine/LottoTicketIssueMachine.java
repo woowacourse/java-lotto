@@ -1,6 +1,7 @@
 package lottogame.domain.machine;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -49,7 +50,7 @@ public class LottoTicketIssueMachine {
 
     private Set<LottoNumber> convertToLottoNumbers(Set<Integer> ticketNumbers) {
         return ticketNumbers.stream()
-            .map(LottoNumber::new)
+            .map(LottoNumber::valueOf)
             .collect(Collectors.toSet());
     }
 
@@ -63,11 +64,9 @@ public class LottoTicketIssueMachine {
     }
 
     private Set<LottoNumber> issueNumbers() {
-        Set<LottoNumber> lottoNumbers = new HashSet<>();
-        while (lottoNumbers.size() < LOTTO_NUMBER_COUNT) {
-            lottoNumbers.add(new LottoNumber());
-        }
-        return lottoNumbers;
+        List<LottoNumber> numbers = new ArrayList<>(LottoNumber.numbers());
+        Collections.shuffle(numbers);
+        return new HashSet<>(numbers.subList(0, LOTTO_NUMBER_COUNT));
     }
 
     public static int getTicketPrice() {

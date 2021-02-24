@@ -28,6 +28,7 @@ public class OutputView {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
+        ranks.remove(Rank.FAIL);
         for (Entry<Rank, Integer> rank : ranks.entrySet()) {
             System.out.println(printLottoRank(rank.getKey(), rank.getValue()));
         }

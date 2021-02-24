@@ -31,7 +31,6 @@ public class LottoGame {
         Map<Rank, Integer> ranks = new EnumMap<>(
             lottoTickets.getMatchingResult(lottoWinningNumbers, initMatchingResults())
         );
-        ranks.remove(Rank.FAIL);
         return ranks;
     }
 
@@ -47,6 +46,17 @@ public class LottoGame {
         return totalWinningPrice(ranks) / totalInvestment(ranks);
     }
 
+    private double totalWinningPrice(final Map<Rank, Integer> ranks) {
+        return ranks.entrySet()
+            .stream()
+            .mapToInt(rank -> multiplyPriceByCount(rank.getKey(), rank.getValue()))
+            .sum();
+    }
+
+    private int multiplyPriceByCount(final Rank rank, final Integer count) {
+        return rank.getPrice() * count;
+    }
+
     private double totalInvestment(final Map<Rank, Integer> ranks) {
         return countBoughtTickets(ranks) * LottoTicketIssueMachine.getTicketPrice();
     }
@@ -55,16 +65,5 @@ public class LottoGame {
         return ranks.values()
             .stream()
             .reduce(0, Integer::sum);
-    }
-
-    private double totalWinningPrice(final Map<Rank, Integer> ranks) {
-        return ranks.entrySet()
-            .stream()
-            .mapToInt(rank -> multiplyPriceByCount(rank.getKey(), rank.getValue()))
-            .sum();
-    }
-
-    private int multiplyPriceByCount(Rank rank, Integer count) {
-        return rank.getPrice() * count;
     }
 }
