@@ -41,12 +41,12 @@ public class LottoController {
 
     private Lotto makeManualLotto() {
         String winningInput = LottoView.requestManualNumber();
-        return new Lotto(generateManualLotto(winningInput));
+        return new Lotto(changeToList(winningInput));
     }
 
     private void makeWinningLotto() {
         String winningInput = LottoView.requestWinningNumber();
-        Lotto winLotto = new Lotto(generateManualLotto(winningInput));
+        Lotto winLotto = new Lotto(changeToList(winningInput));
         String bonusInput = LottoView.requestBonusBallNumber();
         winningLotto = new WinningLotto(winLotto, bonusInput);
     }
@@ -65,15 +65,11 @@ public class LottoController {
         countByRank.forEach(LottoView::displayResult);
     }
 
-    private ArrayList<Integer> generateManualLotto(String numberInput) {
-        return new ArrayList<>(changeToList(numberInput));
-    }
-
-    private List<Integer> changeToList(String numberInput) {
+    private ArrayList<Integer> changeToList(String numberInput) {
         return Arrays.stream(numberInput.split(DELIMITER))
                 .map(String::trim)
                 .map(Integer::parseInt)
-                .collect(Collectors.toList());
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     private void countEachRank() {
