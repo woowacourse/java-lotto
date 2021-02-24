@@ -1,5 +1,6 @@
 package domain.ticket;
 
+import domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -80,6 +81,16 @@ public class LottoTicketTest {
 
         assertThat(lottoTicket)
                 .isEqualTo(new LottoTicket(getValidNumbers()));
+    }
+
+    @DisplayName("포함 테스트")
+    @Test
+    void contains() {
+        final List<Integer> validNumbers = getValidNumbers();
+        final LottoTicket lottoTicket = new LottoTicket(validNumbers);
+
+        assertThat(lottoTicket.contains(LottoNumber.valueOf(1)))
+                .isEqualTo(true);
     }
 
     private List<Integer> getValidNumbers() {
