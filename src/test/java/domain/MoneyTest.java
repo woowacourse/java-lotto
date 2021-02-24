@@ -21,4 +21,12 @@ public class MoneyTest {
     public void validatePositiveNumber() {
         assertThatThrownBy(() -> new Money(-1)).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("구입금액으로 살 수 있는 총 로또 개수를 계산한다.")
+    @Test
+    public void calculateTotalQuantityTest() {
+        Money budget = new Money(10_000);
+
+        assertThat(budget.calculateTotalQuantity()).isEqualTo(10);
+    }
 }

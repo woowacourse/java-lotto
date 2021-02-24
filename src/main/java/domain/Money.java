@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class Money {
     private static final long MINIMUM_RANGE = 0;
+    private static final long PRICE = 1000;
     private static final String ERROR_NEGATIVE_NUMBER = "[ERROR] 양수만 입력해주세요.";
 
     private final long money;
@@ -17,6 +18,10 @@ public class Money {
         if (input < MINIMUM_RANGE) {
             throw new IllegalArgumentException(ERROR_NEGATIVE_NUMBER);
         }
+    }
+
+    public long calculateTotalQuantity() {
+        return this.money / PRICE;
     }
 
     public long toLong() {
