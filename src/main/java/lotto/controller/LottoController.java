@@ -8,32 +8,37 @@ import lotto.view.LottoView;
 
 public class LottoController {
 
-    private Seller seller;
-    private Money money;
-    private List<Lotto> lottos;
-
     public void run() {
-        this.seller = new Seller();
-
+        Money money = payMoney();
+        List<Lotto> lottos = buyLotto(money);
+        WinningLotto winningLotto = checkWinningLotto();
+        drawLotto(winningLotto, lottos, money);
     }
 
-    public void buyLotto() {
-        this.money = new Money(LottoView.requestMoney());
+    private Money payMoney() {
+        return new Money(LottoView.requestMoney());
+    }
+
+    private List<Lotto> buyLotto(Money money) {
+        Seller seller = new Seller();
         int count = money.count();
-        this.lottos = seller.sell(count);
+        List<Lotto> lottos = seller.sell(count);
         LottoView.buyLotto(count);
         LottoView.printLottos(lottos);
+        return lottos;
     }
 
-    public void drawLotto() {
+    private WinningLotto checkWinningLotto() {
         LottoGenerator lottoGenerator = new LottoGenerator();
-        WinningLotto winningLotto = new WinningLotto(
-            new Lotto(lottoGenerator.generateManual(LottoView.requestWinningNumber())),
-            LottoNumber.of(LottoView.requestBonusBallNumber())
+        return new WinningLotto(
+                new Lotto(lottoGenerator.generateManual(LottoView.requestWinningNumber())),
+                LottoNumber.of(LottoView.requestBonusBallNumber())
         );
+    }
+
+    public void drawLotto(WinningLotto winningLotto, List<Lotto> lottos, Money money) {
         LottoResult lottoResult = new LottoResult();
         Map<Rank, Integer> ranks = lottoResult.matchRank(winningLotto, lottos);
-
         LottoView.displayResultMessage();
         ranks.forEach((rank, rankCount) -> {
             LottoView.displayResult(rank, rankCount);
