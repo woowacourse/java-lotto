@@ -8,8 +8,9 @@ import java.util.stream.Collectors;
 import static lotto.view.RankMessage.getRankMessages;
 
 public class OutputView {
+	private static final String DELIMITER = ", ";
 	public static final String DEFAULT_STATISTICS_FORMAT = "%d개 일치 (%d원)-";
-	public static final String STATISTICS_FORMAT_FOR_SECOND = "%d개 일치, 보너스 볼 일치(%d원)-";
+	public static final String STATISTICS_FORMAT_FOR_SECOND = "%d개 일치" + DELIMITER + "보너스 볼 일치(%d원)-";
 
 	private OutputView() {
 	}
@@ -17,7 +18,7 @@ public class OutputView {
 	public static void printLottoPurchaseSummaryBasedOn(Lottos lottos, LottoMachine lottoMachine) {
 		int manualLottoQuantity = lottoMachine.getManualLottoQuantityAsInt();
 		int autoLottoQuantity = lottoMachine.getAutoLottoQuantityAsInt();
-		System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualLottoQuantity, autoLottoQuantity);
+		System.out.printf("수동으로 %d장" + DELIMITER + "자동으로 %d개를 구매했습니다.\n", manualLottoQuantity, autoLottoQuantity);
 		for (Lotto lotto : lottos.toList()) {
 			printLottoSummaryOf(lotto);
 		}
@@ -33,7 +34,7 @@ public class OutputView {
 		return lotto.getLottoNumbers()
 				.stream()
 				.map(LottoNumber::getNumberAsString)
-				.collect(Collectors.joining(", "));
+				.collect(Collectors.joining(DELIMITER));
 	}
 
 	public static void printResultStatisticsBasedOn(LottoStatistics lottoStatistics) {
