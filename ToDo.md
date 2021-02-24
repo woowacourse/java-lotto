@@ -42,6 +42,9 @@
 ## LottoAnnouncement
 - 로또 당첨 번호와 보너스 번호 검증 및 저장
 
+## LottoResult
+- 당첨에 대한 통계를 계산하고 저
+
 ## LottoStore
 - 구입금액 입력을 받음
 - Lottos와 Lotto, LottoAnnouncement 인스턴스 생성
@@ -49,5 +52,3 @@
 - 자동과 수동으로 생성된 로또 수
 - 생성된 로또 출력
 - 당첨 번호 및 보너스 볼 입력
-- 당첨 통계 계산
-- 당첨 통계 출력
