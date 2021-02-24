@@ -11,9 +11,9 @@ public class LottosTest {
 
     @BeforeEach
     void setUp() {
-        String totalMoney = "14000";
+        Money money = new Money("14000");
         String manualCount = "3";
-        lottos = new Lottos(totalMoney, manualCount);
+        lottos = new Lottos(money, manualCount);
     }
 
     @Test

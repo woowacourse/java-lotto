@@ -10,8 +10,7 @@ public class Lottos {
     private static int randomCount;
     private final ArrayList<Lotto> lottoGroup = new ArrayList<>();
 
-    public Lottos(String inputTotalMoney, String inputManualCount) {
-        Money money = new Money(inputTotalMoney);
+    public Lottos(Money money, String inputManualCount) {
         manualCount = validateManualCount(inputManualCount, money.count());
         randomCount = money.count() - manualCount;
         generateLottoGroup(randomCount);

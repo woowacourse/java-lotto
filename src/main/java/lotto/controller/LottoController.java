@@ -1,9 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
-import lotto.domain.Rank;
-import lotto.domain.WinningLotto;
+import lotto.domain.*;
 import lotto.view.LottoView;
 
 import java.util.ArrayList;
@@ -20,7 +17,8 @@ public class LottoController {
     private static WinningLotto winningLotto;
 
     public void startLotto() {
-        makeAllLotto();
+        Money money = new Money(LottoView.requestMoney());
+        makeAllLotto(money);
         LottoView.displayLottoCount(lottos.getManualCount(), lottos.getRandomCount());
         LottoView.displayLottoGroup(lottos);
         makeWinningLotto();
@@ -32,10 +30,9 @@ public class LottoController {
         LottoView.displayEarningRate(Lottos.findResult(countByRank));
     }
 
-    private void makeAllLotto() {
-        String totalMoney = LottoView.requestMoney();
+    private void makeAllLotto(Money money) {
         String manualCount = LottoView.requestManualLottoCount();
-        lottos = new Lottos(totalMoney, manualCount);
+        lottos = new Lottos(money, manualCount);
         LottoView.displayManualNumberMessage();
         for (int i = 0; i < Integer.parseInt(manualCount); i++) {
             lottos.addManualLotto(makeManualLotto());
