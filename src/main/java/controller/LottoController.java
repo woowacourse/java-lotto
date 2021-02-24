@@ -22,13 +22,39 @@ public class LottoController {
     public void run() {
         Budget budget = Repeater.repeatFunctionOnError(this::createBudget);
         Money investedMoney = budget.remain();
-        List<LottoTicket> lottoTickets = buyLottosAutomatically(budget);
+
+        List<LottoTicket> lottoTickets = buyLottosManually(budget);
+        lottoTickets.addAll(buyLottosAutomatically(budget));
         outputView.printLottoTicket(lottoTickets);
+
         WinningNumbers winningNumber = Repeater.repeatFunctionOnError(this::createWinningNumber);
         Statistics statistics = new Statistics(winningNumber, lottoTickets);
-        Profit profit = new Profit(investedMoney, statistics.getReward());
         outputView.printStatistics(statistics);
+
+        Profit profit = new Profit(investedMoney, statistics.getReward());
         outputView.printProfit(profit);
+    }
+
+    private Budget createBudget() {
+        return new Budget(new Money(inputView.scanBudget()));
+    }
+
+    private List<LottoTicket> buyLottosManually(Budget budget) {
+        int quantity = Repeater.repeatFunctionOnError(inputView::scanManualLottoQuantity);
+        if (!budget.canAfford(LottoTicket.PRICE, quantity)) {
+            outputView.printNotEnoughBudget();
+            return buyLottosManually(budget);
+        }
+
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        outputView.requestLottoNumbersMessage();
+        for (int i = 0; i < quantity; i++) {
+            lottoTickets.add(Repeater.repeatFunctionOnError(() -> {
+                List<Integer> lottoNumbers = inputView.scanManualLottoNumbers();
+                return LottoPurchase.buyManually(lottoNumbers, budget);
+            }));
+        }
+        return lottoTickets;
     }
 
     private List<LottoTicket> buyLottosAutomatically(Budget budget) {
@@ -43,9 +69,5 @@ public class LottoController {
         LottoTicket winningNumbers = LottoTicket.valueOf(Repeater.repeatFunctionOnError(inputView::scanWinningNumber));
         LottoNumber bonusBall = new LottoNumber(Repeater.repeatFunctionOnError(inputView::scanBonusBall));
         return new WinningNumbers(winningNumbers, bonusBall);
-    }
-
-    private Budget createBudget() {
-        return new Budget(new Money(Repeater.repeatFunctionOnError(inputView::scanBudget)));
     }
 }
