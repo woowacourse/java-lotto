@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.lottos.LottoBoughtTicket;
 import lotto.domain.lottos.LottoNumber;
 import lotto.domain.lottos.LottoTicket;
 import lotto.domain.lottos.LottoTickets;
@@ -38,7 +37,7 @@ public class LottoResultStatisticsTest {
 
         lottoWinner = new LottoWinner(lottoWinnerTicket, lottoBonusNumber);
 
-        LottoBoughtTicket lottoTicket1 = new LottoBoughtTicket(
+        LottoTicket lottoTicket1 = new LottoTicket(
                 Arrays.asList(
                         new LottoNumber(1),
                         new LottoNumber(2),
@@ -48,7 +47,7 @@ public class LottoResultStatisticsTest {
                         new LottoNumber(6)
                 )
         );
-        LottoBoughtTicket lottoTicket2 = new LottoBoughtTicket(
+        LottoTicket lottoTicket2 = new LottoTicket(
                 Arrays.asList(
                         new LottoNumber(1),
                         new LottoNumber(2),
@@ -58,7 +57,7 @@ public class LottoResultStatisticsTest {
                         new LottoNumber(7)
                 )
         );
-        LottoBoughtTicket lottoTicket3 = new LottoBoughtTicket(
+        LottoTicket lottoTicket3 = new LottoTicket(
                 Arrays.asList(
                         new LottoNumber(1),
                         new LottoNumber(2),
@@ -68,7 +67,7 @@ public class LottoResultStatisticsTest {
                         new LottoNumber(8)
                 )
         );
-        LottoBoughtTicket lottoTicket4 = new LottoBoughtTicket(
+        LottoTicket lottoTicket4 = new LottoTicket(
                 Arrays.asList(
                         new LottoNumber(1),
                         new LottoNumber(2),

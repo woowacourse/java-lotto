@@ -1,6 +1,5 @@
 package lotto.service;
 
-import lotto.domain.lottos.LottoBoughtTicket;
 import lotto.domain.lottos.LottoNumber;
 import lotto.domain.lottos.LottoTicket;
 import lotto.util.RandomNumberGenerator;
@@ -18,8 +17,8 @@ public class LottoTicketService {
     private LottoTicketService() {
     }
 
-    public static LottoBoughtTicket createAutoLottoTicket() {
-        return new LottoBoughtTicket(new RandomNumberGenerator().generateNumbers());
+    public static LottoTicket createAutoLottoTicket() {
+        return new LottoTicket(new RandomNumberGenerator().generateNumbers());
     }
 
     public static LottoTicket createManualLottoTicket(final String input) {

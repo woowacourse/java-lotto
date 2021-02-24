@@ -35,7 +35,7 @@ public class LottoResultStatistics {
 
     public long calculateEarning(final Money money) {
         long totalReward = Arrays.stream(LottoRank.values())
-                .mapToInt(lottoRank -> this.lottoResult.get(lottoRank) * lottoRank.getReward())
+                .mapToLong(lottoRank -> this.lottoResult.get(lottoRank) * lottoRank.getReward())
                 .sum();
 
         double paidMoney = money.getMoney();

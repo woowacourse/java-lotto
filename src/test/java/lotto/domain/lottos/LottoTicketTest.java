@@ -1,6 +1,10 @@
 package lotto.domain.lottos;
 
+import lotto.domain.lottos.rank.LottoRank;
+import lotto.domain.lottos.winnerlotto.LottoBonusNumber;
+import lotto.domain.lottos.winnerlotto.LottoWinner;
 import lotto.service.LottoTicketService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -15,6 +19,26 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTicketTest {
+
+    private LottoWinner lottoWinner;
+    private List<LottoNumber> lottoNumbers;
+
+    @BeforeEach
+    void setUp() {
+        lottoNumbers = Arrays.asList(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6)
+        );
+
+        LottoTicket lottoWinnerTicket = new LottoTicket(lottoNumbers);
+        LottoBonusNumber lottoBonusNumber = LottoBonusNumber.of("7", lottoWinnerTicket);
+
+        lottoWinner = new LottoWinner(lottoWinnerTicket, lottoBonusNumber);
+    }
 
     @Test
     @DisplayName("로또 티켓을 생성한다.")
@@ -106,5 +130,110 @@ public class LottoTicketTest {
             assertThat(lottoNumber.getNumber() > number).isTrue();
             number = lottoNumber.getNumber();
         }
+    }
+
+    @Test
+    @DisplayName("1등 매칭 된다.")
+    public void matchFirstPriceTest() {
+        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+
+        LottoRank lottoRank = lottoTicket.getRank(lottoWinner);
+
+        assertThat(lottoRank).isEqualTo(LottoRank.FIRST_PLACE);
+    }
+
+    @Test
+    @DisplayName("2등 매칭 된다.")
+    public void matchSecondPriceTest() {
+        LottoTicket lottoTicket = new LottoTicket(
+                Arrays.asList(
+                        new LottoNumber(1),
+                        new LottoNumber(2),
+                        new LottoNumber(3),
+                        new LottoNumber(4),
+                        new LottoNumber(5),
+                        new LottoNumber(7)
+                )
+        );
+
+        LottoRank lottoRank = lottoTicket.getRank(lottoWinner);
+
+        assertThat(lottoRank).isEqualTo(LottoRank.SECOND_PLACE);
+    }
+
+    @Test
+    @DisplayName("3등 매칭 된다.")
+    public void matchThirdPriceTest() {
+        LottoTicket lottoTicket = new LottoTicket(
+                Arrays.asList(
+                        new LottoNumber(1),
+                        new LottoNumber(2),
+                        new LottoNumber(3),
+                        new LottoNumber(4),
+                        new LottoNumber(5),
+                        new LottoNumber(8)
+                )
+        );
+
+        LottoRank lottoRank = lottoTicket.getRank(lottoWinner);
+
+        assertThat(lottoRank).isEqualTo(LottoRank.THIRD_PLACE);
+    }
+
+    @Test
+    @DisplayName("4등 매칭 된다.")
+    public void matchFourthPriceTest() {
+        LottoTicket lottoTicket = new LottoTicket(
+                Arrays.asList(
+                        new LottoNumber(1),
+                        new LottoNumber(2),
+                        new LottoNumber(3),
+                        new LottoNumber(4),
+                        new LottoNumber(8),
+                        new LottoNumber(9)
+                )
+        );
+
+        LottoRank lottoRank = lottoTicket.getRank(lottoWinner);
+
+        assertThat(lottoRank).isEqualTo(LottoRank.FOURTH_PLACE);
+    }
+
+    @Test
+    @DisplayName("5등 매칭 된다.")
+    public void matchFifthPriceTest() {
+        LottoTicket lottoTicket = new LottoTicket(
+                Arrays.asList(
+                        new LottoNumber(1),
+                        new LottoNumber(2),
+                        new LottoNumber(3),
+                        new LottoNumber(8),
+                        new LottoNumber(9),
+                        new LottoNumber(10)
+                )
+        );
+
+        LottoRank lottoRank = lottoTicket.getRank(lottoWinner);
+
+        assertThat(lottoRank).isEqualTo(LottoRank.FIFTH_PLACE);
+    }
+
+    @Test
+    @DisplayName("6등 매칭 된다.")
+    public void matchSixthPriceTest() {
+        LottoTicket lottoTicket = new LottoTicket(
+                Arrays.asList(
+                        new LottoNumber(1),
+                        new LottoNumber(2),
+                        new LottoNumber(11),
+                        new LottoNumber(22),
+                        new LottoNumber(33),
+                        new LottoNumber(45)
+                )
+        );
+
+        LottoRank lottoRank = lottoTicket.getRank(lottoWinner);
+
+        assertThat(lottoRank).isEqualTo(LottoRank.SIXTH_PLACE);
     }
 }

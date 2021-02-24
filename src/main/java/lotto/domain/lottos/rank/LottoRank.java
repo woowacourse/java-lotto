@@ -12,9 +12,9 @@ public enum LottoRank {
 
     private final int matches;
     private final boolean matchBonusNumber;
-    private final int reward;
+    private final long reward;
 
-    LottoRank(final int matches, final boolean matchBonusNumber, final int reward) {
+    LottoRank(final int matches, final boolean matchBonusNumber, final long reward) {
         this.matches = matches;
         this.matchBonusNumber = matchBonusNumber;
         this.reward = reward;
@@ -35,7 +35,7 @@ public enum LottoRank {
         return matches;
     }
 
-    public int getReward() {
+    public long getReward() {
         return reward;
     }
 }
