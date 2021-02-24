@@ -10,15 +10,15 @@ import java.util.Arrays;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
-    private ArrayList<Integer> nums1;
-    private ArrayList<Integer> nums2;
-    private ArrayList<Integer> nums3;
+    private ArrayList<String> nums1;
+    private ArrayList<String> nums2;
+    private ArrayList<String> nums3;
 
     @BeforeEach
     void setUp() {
-        nums1 = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
-        nums2 = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 5));
-        nums3 = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 50));
+        nums1 = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5"));
+        nums2 = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "5"));
+        nums3 = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "50"));
     }
 
     @Test
@@ -39,6 +39,6 @@ public class LottoTest {
     @DisplayName("숫자가 범위에 있는지 확인")
     void validateNumberRange() {
         assertThatThrownBy(() -> new Lotto(nums3)).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(Lotto.NUMBER_RANGE_ERROR);
+                .hasMessageContaining(LottoNumber.NUMBER_RANGE_ERROR);
     }
 }

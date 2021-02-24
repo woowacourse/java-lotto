@@ -65,10 +65,9 @@ public class LottoController {
         countByRank.forEach(LottoView::displayResult);
     }
 
-    private ArrayList<Integer> changeToList(String numberInput) {
+    private ArrayList<String> changeToList(String numberInput) {
         return Arrays.stream(numberInput.split(DELIMITER))
                 .map(String::trim)
-                .map(Integer::parseInt)
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 

@@ -19,36 +19,33 @@ public class BonusBallTest {
 
     @BeforeEach
     void setUp() {
-        ArrayList<Integer> winningLotto = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+        ArrayList<String> winningLotto = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "6"));
         winLotto = new Lotto(winningLotto);
     }
 
     @Test
     @DisplayName("보너스볼이 숫자인지 확인")
     void validateBonusBallType() {
-        String falseBonusBall = FALSE_TYPE_SAMPLE;
         assertThatThrownBy(() -> {
-            new BonusBall(winLotto, falseBonusBall);
+            new BonusBall(winLotto, FALSE_TYPE_SAMPLE);
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(BonusBall.NUMBER_TYPE_ERROR);
+                .hasMessageContaining(LottoNumber.NUMBER_TYPE_ERROR);
     }
 
     @Test
     @DisplayName("보너스볼이 범위에 있는지 확인")
     void validateBonusBallRange() {
-        String falseBonusBall = FALSE_RANGE_SAMPLE;
         assertThatThrownBy(() -> {
-            new BonusBall(winLotto, falseBonusBall);
+            new BonusBall(winLotto, FALSE_RANGE_SAMPLE);
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(BonusBall.NUMBER_RANGE_ERROR);
+                .hasMessageContaining(LottoNumber.NUMBER_RANGE_ERROR);
     }
 
     @Test
     @DisplayName("보너스볼이 당첨번호와 중복인지 확인")
     void validateOverlappedBonusBall() {
-        String falseBonusBall = FALSE_DUPLICATE_SAMPLE;
         assertThatThrownBy(() -> {
-            new BonusBall(winLotto, falseBonusBall);
+            new BonusBall(winLotto, FALSE_DUPLICATE_SAMPLE);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(BonusBall.SAME_NUMBER_ERROR);
     }
@@ -57,7 +54,7 @@ public class BonusBallTest {
     @DisplayName("보너스볼 맞는지 확인")
     void isBonusBall() {
         BonusBall bonusBall = new BonusBall(winLotto, SAMPLE_BONUSBALL);
-        ArrayList<Integer> numbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 7));
+        ArrayList<String> numbers = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "7"));
         Lotto lotto = new Lotto(numbers);
         boolean expected = bonusBall.hasBonusBall(lotto);
         assertThat(expected).isEqualTo(true);

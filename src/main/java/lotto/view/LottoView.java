@@ -46,7 +46,7 @@ public class LottoView {
     public static void displayLottoGroup(Lottos lottos) {
         ArrayList<Lotto> lottoGroup = lottos.getLottoGroup();
         for (Lotto lotto : lottoGroup) {
-            System.out.print(lotto.getLottoNumbers() + CHANGE_LINE);
+            System.out.print(lotto.changeToList() + CHANGE_LINE);
         }
     }
 

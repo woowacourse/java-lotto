@@ -15,8 +15,8 @@ public class WinningLottoTest {
 
     @BeforeEach
     void setUp() {
-        Lotto winLotto = new Lotto(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        generatedLotto = new Lotto(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 7)));
+        Lotto winLotto = new Lotto(new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "6")));
+        generatedLotto = new Lotto(new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "7")));
         winningLotto = new WinningLotto(winLotto, "7");
     }
 

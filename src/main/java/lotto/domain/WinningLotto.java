@@ -12,8 +12,8 @@ public class WinningLotto {
     }
 
     public static int howManyWins(Lotto lotto) {
-        ArrayList<Integer> wins = new ArrayList<>(winLotto.getLottoNumbers());
-        wins.retainAll(lotto.getLottoNumbers());
+        ArrayList<Integer> wins = new ArrayList<>(winLotto.changeToList());
+        wins.retainAll(lotto.changeToList());
         return wins.size();
     }
 

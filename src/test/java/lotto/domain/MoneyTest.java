@@ -50,7 +50,7 @@ public class MoneyTest {
         sampleCount.put(Rank.FIFTH, 1);
         Money money = new Money("14000");
 
-        Money.findEarning(sampleCount);
+        money.findEarning(sampleCount);
         assertThat(Money.getEarning()).isEqualTo(5000);
 
         String earningRate = Money.findEarningRate();
