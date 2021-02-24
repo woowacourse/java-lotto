@@ -77,6 +77,6 @@
 
 # 2단계 리팩터링 목록
 - [x] 구매 수량을 알려주는 메시지 변경
-- [ ] LottoMoney 캐시 Map -> List로 변경
+- [x] LottoNumber 캐시 Map -> List로 변경
 - [ ] 캐싱에 내부 static 클래스 사용해 보기
 - [ ] Controller의 printLottoQuantity 메서드 고민
