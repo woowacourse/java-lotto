@@ -1,9 +1,11 @@
-package lotto.domain;
+package lotto.domain.result;
+
+import lotto.domain.Money;
 
 import java.util.*;
 
-import static lotto.domain.Rank.RANK_END_INDEX;
-import static lotto.domain.Rank.RANK_START_INDEX;
+import static lotto.domain.result.Rank.RANK_END_INDEX;
+import static lotto.domain.result.Rank.RANK_START_INDEX;
 
 public class LottoStatistics {
 	private static final int STATISTICS_INITIAL_VALUE = 0;

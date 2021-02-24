@@ -1,12 +1,14 @@
-package lotto.domain;
+package lotto.domain.result;
 
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import static lotto.domain.WinningLotto.DUPLICATE_BONUS_NUMBER_ERROR;
+import static lotto.domain.result.WinningLotto.DUPLICATE_BONUS_NUMBER_ERROR;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 

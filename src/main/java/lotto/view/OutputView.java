@@ -1,6 +1,10 @@
 package lotto.view;
 
-import lotto.domain.*;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.Lottos;
+import lotto.domain.production.LottoMachine;
+import lotto.domain.result.LottoStatistics;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,8 +12,8 @@ import java.util.stream.Collectors;
 import static lotto.view.RankMessage.getRankMessages;
 
 public class OutputView {
-	private static final String DELIMITER = ", ";
 	public static final String DEFAULT_STATISTICS_FORMAT = "%d개 일치 (%d원)-";
+	private static final String DELIMITER = ", ";
 	public static final String STATISTICS_FORMAT_FOR_SECOND = "%d개 일치" + DELIMITER + "보너스 볼 일치(%d원)-";
 
 	private OutputView() {

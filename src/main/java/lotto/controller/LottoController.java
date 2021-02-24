@@ -1,6 +1,15 @@
 package lotto.controller;
 
-import lotto.domain.*;
+import lotto.domain.Money;
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.Lottos;
+import lotto.domain.production.LottoMachine;
+import lotto.domain.production.LottoQuantity;
+import lotto.domain.production.ManualLottoGenerator;
+import lotto.domain.result.LottoStatistics;
+import lotto.domain.result.Rank;
+import lotto.domain.result.WinningLotto;
 
 import java.util.List;
 

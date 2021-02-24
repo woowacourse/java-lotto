@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Rank;
+import lotto.domain.result.Rank;
 
 import java.util.List;
 import java.util.stream.Collectors;

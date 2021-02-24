@@ -1,13 +1,16 @@
-package lotto.domain;
+package lotto.domain.production;
+
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static lotto.domain.Lotto.LOTTO_SIZE;
-import static lotto.domain.Lotto.LOTTO_START_INDEX;
-import static lotto.domain.LottoNumber.MAXIMUM_CANDIDATE_NUMBER;
-import static lotto.domain.LottoNumber.MINIMUM_CANDIDATE_NUMBER;
+import static lotto.domain.lotto.Lotto.LOTTO_SIZE;
+import static lotto.domain.lotto.Lotto.LOTTO_START_INDEX;
+import static lotto.domain.lotto.LottoNumber.MAXIMUM_CANDIDATE_NUMBER;
+import static lotto.domain.lotto.LottoNumber.MINIMUM_CANDIDATE_NUMBER;
 
 public class AutomaticLottoGenerator implements LottoGenerator {
 	private static final List<LottoNumber> candidateNumbers = new ArrayList<>();

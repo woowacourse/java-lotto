@@ -1,4 +1,7 @@
-package lotto.domain;
+package lotto.domain.lotto;
+
+import lotto.domain.result.Rank;
+import lotto.domain.result.WinningLotto;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,7 +10,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static lotto.domain.Rank.getRankByGivenMatchInformation;
+import static lotto.domain.result.Rank.getRankByGivenMatchInformation;
 
 public class Lottos {
 	private final List<Lotto> lottos;

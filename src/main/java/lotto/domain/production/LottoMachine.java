@@ -1,4 +1,7 @@
-package lotto.domain;
+package lotto.domain.production;
+
+import lotto.domain.Money;
+import lotto.domain.lotto.Lottos;
 
 import java.util.List;
 import java.util.Objects;

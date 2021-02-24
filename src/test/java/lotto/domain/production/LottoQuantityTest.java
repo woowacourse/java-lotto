@@ -1,13 +1,16 @@
-package lotto.domain;
+package lotto.domain.production;
 
+import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.Lottos;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import static lotto.domain.LottoQuantity.NEGATIVE_LOTTO_QUANTITY_ERROR;
 import static lotto.domain.Money.LOTTO_PRICE;
+import static lotto.domain.production.LottoQuantity.NEGATIVE_LOTTO_QUANTITY_ERROR;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 

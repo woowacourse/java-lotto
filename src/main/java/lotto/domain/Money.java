@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.production.LottoQuantity;
+
 import java.util.Objects;
 
 public class Money {
