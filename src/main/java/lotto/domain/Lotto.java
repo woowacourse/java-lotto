@@ -20,7 +20,7 @@ public class Lotto {
         checkValidNumbers(selectedNumber);
         numbers = new ArrayList<>();
         for (int integerNumber : selectedNumber) {
-            numbers.add(new Number(integerNumber));
+            numbers.add(Number.getFromCache(integerNumber));
         }
     }
 

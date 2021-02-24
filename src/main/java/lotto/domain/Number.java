@@ -1,22 +1,35 @@
 package lotto.domain;
 
+import java.util.HashMap;
 import java.util.Objects;
 import lotto.exception.NumberException;
 
 public class Number implements Comparable<Number> {
 
+    private static final HashMap<Integer, Number> NUMBER_CACHE = new HashMap<>();
     public static final String EXCESS_NUMBER_MESSAGE = "범위를 벗어난 숫자입니다.";
     public static final int UPPER_LIMIT = 45;
     public static final int LOWER_LIMIT = 1;
 
     private final int number;
 
+    static {
+        for (int i = LOWER_LIMIT; i <= UPPER_LIMIT; i++) {
+            NUMBER_CACHE.put(i, new Number(i));
+        }
+    }
+
     public Number(int candidateNumber) {
         checkValidRange(candidateNumber);
         this.number = candidateNumber;
     }
 
-    private void checkValidRange(int candidateNumber) {
+    public static Number getFromCache(int candidateNumber) {
+        checkValidRange(candidateNumber);
+        return NUMBER_CACHE.get(candidateNumber);
+    }
+
+    private static void checkValidRange(int candidateNumber) {
         if ((candidateNumber < LOWER_LIMIT) | (candidateNumber > UPPER_LIMIT)) {
             throw new NumberException(EXCESS_NUMBER_MESSAGE);
         }
