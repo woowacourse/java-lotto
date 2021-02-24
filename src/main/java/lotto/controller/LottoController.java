@@ -2,13 +2,8 @@ package lotto.controller;
 
 import java.util.List;
 import java.util.Map;
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoResult;
-import lotto.domain.Money;
-import lotto.domain.Rank;
-import lotto.domain.Seller;
-import lotto.domain.WinningLotto;
+
+import lotto.domain.*;
 import lotto.view.LottoView;
 
 public class LottoController {
@@ -31,8 +26,9 @@ public class LottoController {
     }
 
     public void drawLotto() {
+        LottoGenerator lottoGenerator = new LottoGenerator();
         WinningLotto winningLotto = new WinningLotto(
-            new Lotto(seller.sell(LottoView.requestWinningNumber())),
+            new Lotto(lottoGenerator.generateManual(LottoView.requestWinningNumber())),
             LottoNumber.of(LottoView.requestBonusBallNumber())
         );
         LottoResult lottoResult = new LottoResult();
