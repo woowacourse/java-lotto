@@ -50,8 +50,7 @@ class LottoSellerTest {
         for(String number : numbers.split("/")){
             List<Integer> lottoNumbers = Arrays
                     .stream(number.split(","))
-                    .mapToInt(Integer::parseInt)
-                    .boxed()
+                    .map(Integer::parseInt)
                     .collect(Collectors.toList());
             manualLottos.add(LottoGenerator.generate(lottoNumbers));
         }
@@ -68,8 +67,7 @@ class LottoSellerTest {
         for(String number : numbers.split("/")){
             List<Integer> lottoNumbers = Arrays
                     .stream(number.split(","))
-                    .mapToInt(Integer::parseInt)
-                    .boxed()
+                    .map(Integer::parseInt)
                     .collect(Collectors.toList());
             manualLottos.add(LottoGenerator.generate(lottoNumbers));
         }

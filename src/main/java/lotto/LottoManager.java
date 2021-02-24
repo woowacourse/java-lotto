@@ -57,8 +57,7 @@ public class LottoManager {
         for (String number : numbers) {
             lottos.add(LottoGenerator.generate(Arrays
                     .stream(number.split(","))
-                    .mapToInt(Integer::parseInt)
-                    .boxed()
+                    .map(Integer::parseInt)
                     .collect(Collectors.toList())));
         }
         return lottos;

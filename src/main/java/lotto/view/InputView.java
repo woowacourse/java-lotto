@@ -38,11 +38,10 @@ public class InputView {
         try {
             OutputView.printMessage(INPUT_WINNING_NUMBER_MESSAGE);
             String winningNumbers = SCAN.nextLine();
-            List<Integer> numbers = Arrays
+            return Arrays
                     .stream(winningNumbers.trim().split(","))
                     .map(Integer::parseInt)
                     .collect(Collectors.toList());
-            return numbers;
         } catch (LottoException e) {
             OutputView.printMessage(e.getMessage());
             return getWinningNumbers();
