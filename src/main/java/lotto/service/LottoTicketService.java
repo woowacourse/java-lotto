@@ -19,12 +19,7 @@ public class LottoTicketService {
     }
 
     public static LottoTicket createLottoTicket() {
-        List<LottoNumber> lottoNumbers = LottoNumber.getCache();
-        Collections.shuffle(lottoNumbers);
-        return lottoNumbers.stream()
-                .limit(LOTTO_NUMBER_COUNT)
-                .sorted()
-                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoTicket::new));
+        return new LottoTicket(LottoNumber.getCache());
     }
 
     public static LottoWinnerTicket createLottoWinnerTicket(String input) {

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
@@ -11,6 +12,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MAX_NUMBER_RANGE = 45;
     private static final String RANGE_ERROR_MESSAGE =
             "숫자는 + " + MIN_NUMBER_RANGE + "~" + MAX_NUMBER_RANGE + " 사이의 숫자여야한다.";
+    private static final int LOTTO_NUMBER_COUNT = LottoTicket.LOTTO_NUMBER_COUNT;
 
     private static final List<LottoNumber> CACHE;
 
@@ -34,7 +36,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static List<LottoNumber> getCache() {
-        return new ArrayList<>(CACHE);
+        Collections.shuffle(CACHE);
+        return CACHE.stream()
+                .limit(LOTTO_NUMBER_COUNT)
+                .sorted()
+                .collect(Collectors.toList());
     }
 
     private void validateRange(int number) {
