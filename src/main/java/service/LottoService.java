@@ -13,11 +13,11 @@ import java.util.stream.Stream;
 public class LottoService {
     private final LottoMachine lottoMachine;
 
-    public LottoService(LottoMachine lottoMachine) {
+    public LottoService(final LottoMachine lottoMachine) {
         this.lottoMachine = lottoMachine;
     }
 
-    public LottoTickets getLottoTickets(InputView inputView, TicketCount ticketCount) {
+    public LottoTickets getLottoTickets(final InputView inputView, final TicketCount ticketCount) {
         int manualTicketCount = inputView.inputManualTicketCount();
         TicketCount randomTicketCount = ticketCount.reduceTicketCount(manualTicketCount);
         List<LottoTicket> manualLottoTickets = getManualTickets(inputView, manualTicketCount);
@@ -26,11 +26,11 @@ public class LottoService {
         return new LottoTickets(lottoTickets);
     }
 
-    private List<LottoTicket> getRandomLottoTickets(int randomTicketCount) {
+    private List<LottoTicket> getRandomLottoTickets(final int randomTicketCount) {
         return lottoMachine.makeRandomTickets(randomTicketCount);
     }
 
-    private List<LottoTicket> getManualTickets(InputView inputView, int ticketCount) {
+    private List<LottoTicket> getManualTickets(final InputView inputView, final int ticketCount) {
         return lottoMachine.makeManualTickets(inputView, ticketCount);
     }
 }

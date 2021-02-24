@@ -21,7 +21,7 @@ public class LottoTicket {
         return Collections.unmodifiableList(lottoBalls);
     }
 
-    public LottoRank findLottoRankByWinningLotto(WinningLotto winningLotto) {
+    public LottoRank findLottoRankByWinningLotto(final WinningLotto winningLotto) {
         return winningLotto.findLottoRank(lottoBalls);
     }
 }

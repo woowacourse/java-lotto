@@ -7,7 +7,7 @@ import java.util.Map;
 public class LottoGameResultDto {
     private final Map<LottoRank, Integer> matches;
 
-    public LottoGameResultDto(Map<LottoRank, Integer> matches) {
+    public LottoGameResultDto(final Map<LottoRank, Integer> matches) {
         this.matches = matches;
     }
 

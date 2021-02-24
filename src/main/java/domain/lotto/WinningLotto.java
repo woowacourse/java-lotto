@@ -27,7 +27,7 @@ public class WinningLotto {
         return lottoBalls.findRankByWinningBalls(this.winningBalls, bonusBall);
     }
 
-    private LottoBalls makeWinningBalls(Set<Integer> winningNumbers) {
+    private LottoBalls makeWinningBalls(final Set<Integer> winningNumbers) {
         List<LottoBall> lottoBalls = winningNumbers.stream()
                 .map(LottoBall::new)
                 .collect(Collectors.toList());

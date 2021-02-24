@@ -12,11 +12,11 @@ import java.util.Map;
 public class Result {
     private final Map<LottoRank, Integer> results;
 
-    public Result(LottoTickets lottoTickets, WinningLotto winningLotto) {
+    public Result(final LottoTickets lottoTickets, final WinningLotto winningLotto) {
         this.results = makeResult(lottoTickets, winningLotto);
     }
 
-    public BigDecimal findEarningsRate(BettingMoney bettingMoney) {
+    public BigDecimal findEarningsRate(final BettingMoney bettingMoney) {
         long prize = results.keySet().stream()
                 .mapToLong(this::getTotalPrize)
                 .sum();
@@ -27,7 +27,7 @@ public class Result {
         return new HashMap<>(results);
     }
 
-    private Map<LottoRank, Integer> makeResult(LottoTickets lottoTickets, WinningLotto winningLotto) {
+    private Map<LottoRank, Integer> makeResult(final LottoTickets lottoTickets, final WinningLotto winningLotto) {
         Map<LottoRank, Integer> copy = new HashMap<>();
         List<LottoRank> lottoRanks = lottoTickets.findLottoRanks(winningLotto);
         lottoRanks.forEach(lottoRank -> {
@@ -37,7 +37,7 @@ public class Result {
         return copy;
     }
 
-    private Long getTotalPrize(LottoRank lottoRank) {
+    private Long getTotalPrize(final LottoRank lottoRank) {
         return Long.valueOf(lottoRank.getPrize()) * results.get(lottoRank);
     }
 }

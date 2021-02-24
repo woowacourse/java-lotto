@@ -15,7 +15,7 @@ import java.util.stream.IntStream;
 import static domain.ball.LottoBalls.LOTTO_BALL_SIZE;
 
 public class LottoMachine {
-    public List<LottoTicket> makeRandomTickets(int ticketCount) {
+    public List<LottoTicket> makeRandomTickets(final int ticketCount) {
         return IntStream.range(0, ticketCount)
                 .mapToObj(count -> makeRandomTicket())
                 .collect(Collectors.toList());
@@ -26,7 +26,7 @@ public class LottoMachine {
         return new LottoTicket(new LottoBalls(lottoBalls));
     }
 
-    public List<LottoTicket> makeManualTickets(InputView inputView, int ticketCount) {
+    public List<LottoTicket> makeManualTickets(final InputView inputView, final int ticketCount) {
         if (ticketCount == 0) {
             return Collections.emptyList();
         }
@@ -36,7 +36,7 @@ public class LottoMachine {
                 .collect(Collectors.toList());
     }
 
-    private LottoTicket makeManualTicket(InputView inputView) {
+    private LottoTicket makeManualTicket(final InputView inputView) {
         List<Integer> manualTicketNumbers = inputView.inputManualTicketNumber();
         List<LottoBall> lottoBalls = manualTicketNumbers.stream()
                 .map(LottoBall::new)

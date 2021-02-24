@@ -24,14 +24,14 @@ public class TicketCount {
         }
     }
 
-    public TicketCount reduceTicketCount(int manualTicketCount) {
+    public TicketCount reduceTicketCount(final int manualTicketCount) {
         if (isAvailableCount(manualTicketCount)) {
             return new TicketCount(this.ticketCount - manualTicketCount);
         }
         throw new IllegalArgumentException(String.format(MANUAL_TICKET_SIZE_EXCEPTION_MESSAGE, ticketCount, manualTicketCount));
     }
 
-    private boolean isAvailableCount(int manualTicketCount) {
+    private boolean isAvailableCount(final int manualTicketCount) {
         return manualTicketCount >= 0 && manualTicketCount <= ticketCount;
     }
 

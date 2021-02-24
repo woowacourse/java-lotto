@@ -19,7 +19,7 @@ public class LottoTickets {
         return Collections.unmodifiableList(copy);
     }
 
-    public List<LottoRank> findLottoRanks(WinningLotto winningLotto) {
+    public List<LottoRank> findLottoRanks(final WinningLotto winningLotto) {
         return lottoTickets.stream()
                 .map(lottoTicket -> lottoTicket.findLottoRankByWinningLotto(winningLotto))
                 .collect(Collectors.toList());

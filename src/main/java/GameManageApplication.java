@@ -15,7 +15,7 @@ public class GameManageApplication {
     private final LottoService lottoService;
     private final InputView inputView;
 
-    public GameManageApplication(final LottoGameScreen lottoGameScreen, LottoService lottoService, InputView inputView) {
+    public GameManageApplication(final LottoGameScreen lottoGameScreen, final LottoService lottoService, final InputView inputView) {
         this.lottoGameScreen = lottoGameScreen;
         this.lottoService = lottoService;
         this.inputView = inputView;
