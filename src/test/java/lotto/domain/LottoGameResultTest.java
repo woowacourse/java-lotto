@@ -37,16 +37,15 @@ public class LottoGameResultTest {
         LottoGenerator fixedGenerator = new FixedGenerator();
         Lottos fixedLottos = new Lottos(Arrays.asList(fixedGenerator.generate()));
 
-        Lotto manualLotto = new Lotto(Arrays.asList(
+        Lotto fixedWinningLotto = new Lotto(Arrays.asList(
                 new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                 new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
 
-        Lottos manualLottos = new Lottos(Arrays.asList(manualLotto));
+        WinningLotto winningLotto = new WinningLotto(fixedWinningLotto, 7);
+        LottoGameResult lottoGameResult = new LottoGameResult();
+        fixedLottos.addMatchLotto(winningLotto, lottoGameResult);
 
-        WinningLotto winningLotto = new WinningLotto(fixedLottos.toList().get(0), 8);
-
-        LottoGame lottoGame = new LottoGame();
-        double profit = lottoGame.compareWithWinningLotto(manualLottos, fixedLottos, winningLotto).calculateProfit();
+        double profit = lottoGameResult.calculateProfit();
 
         assertThat(profit).isEqualTo(2_000_000);
     }
