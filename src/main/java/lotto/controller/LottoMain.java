@@ -26,12 +26,13 @@ public class LottoMain {
 
         LottoTickets manualTickets = generateManualTicket(lottoGenerator, manualLottoTickets);
         LottoTickets autoTickets = generateAutoTicket(lottoGenerator, userPurchase);
+        PurchasedTickets purchasedTickets = new PurchasedTickets(manualTickets, autoTickets);
 
-        OutputView.printPurchasedLottoTickets(new PurchasedTickets(manualTickets, autoTickets));
+        OutputView.printPurchasedLottoTickets(purchasedTickets);
 
         WinningLottoNumbers winningLottoNumbers = getWinningLottoNumbersInput();
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
-        OutputView.printResult(lottoComparator.getLottoResult(purchasedLottoTickets), userPurchase.getPurchasePrice());
+        OutputView.printResult(lottoComparator.getLottoResult(purchasedTickets), userPurchase);
     }
 
     private static LottoTickets generateManualTicket(LottoGenerator lottoGenerator, List<LottoTicket> manualLottoTickets) {
@@ -47,8 +48,8 @@ public class LottoMain {
     private static UserPurchase getUserPurchaseInput() {
         try {
             int purchasePrice = InputView.getPurchasePrice();
-            int manualTicketNumber = InputView.getManualTicketNumber();
-            return new UserPurchase(purchasePrice, manualTicketNumber);
+            int manualTicketCount = InputView.getManualTicketCount();
+            return new UserPurchase(purchasePrice, manualTicketCount);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return getUserPurchaseInput();
@@ -57,7 +58,7 @@ public class LottoMain {
 
     private static List<LottoTicket> getManualLottoTicketInput(UserPurchase userPurchase) {
         List<LottoTicket> manualLottoTickets = new ArrayList<>();
-        InputPrinter.printManualTicketCountInputGuideMessage();
+        InputPrinter.printManualTicketInputGuideMessage();
         try {
             //TODO 메소드 분리
             for (int i = 0; i < userPurchase.getManualTicketCount(); i++) {

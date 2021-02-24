@@ -2,6 +2,7 @@ package lotto.domain.ticketresult;
 
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
+import lotto.domain.ticketpurchase.PurchasedTickets;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -25,10 +26,10 @@ public class LottoComparator {
         }
     }
 
-    public Map<Rank, Integer> getLottoResult(LottoTickets lottoTickets) {
-        for (LottoTicket purchasedLottoTicket : lottoTickets.getTickets()) {
-            int matchNumberCount = winningLottoNumbers.compare(purchasedLottoTicket);
-            boolean hasBonusNumber = purchasedLottoTicket.hasNumber(winningLottoNumbers.getBonusNumber());
+    public Map<Rank, Integer> getLottoResult(PurchasedTickets tickets) {
+        for (LottoTicket ticket : tickets.getTickets()) {
+            int matchNumberCount = winningLottoNumbers.compare(ticket);
+            boolean hasBonusNumber = ticket.hasNumber(winningLottoNumbers.getBonusNumber());
             addResult(matchNumberCount, hasBonusNumber);
         }
         return Collections.unmodifiableMap(new HashMap<>(lottoResult));

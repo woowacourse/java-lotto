@@ -24,7 +24,8 @@ public class InputView {
         return parseNumericInput(purchasePriceInput);
     }
 
-    public static int getManualTicketNumber() {
+    public static int getManualTicketCount() {
+        InputPrinter.printManualTicketCountInputGuideMessage();
         String manualTicketNumberInput = scanner.nextLine();
         return parseNumericInput(manualTicketNumberInput);
     }

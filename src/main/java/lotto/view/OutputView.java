@@ -1,13 +1,14 @@
 package lotto.view;
 
-import java.util.List;
-import java.util.Map;
 import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
 import lotto.domain.ticketpurchase.PurchasedTickets;
+import lotto.domain.ticketpurchase.UserPurchase;
 import lotto.domain.ticketresult.Rank;
 import lotto.view.printer.InputPrinter;
 import lotto.view.printer.OutputPrinter;
+
+import java.util.List;
+import java.util.Map;
 
 public class OutputView {
     private OutputView() {
@@ -15,14 +16,16 @@ public class OutputView {
 
     public static void printPurchasedLottoTickets(PurchasedTickets purchasedLottoTickets) {
         List<LottoTicket> lottoTickets = purchasedLottoTickets.getTickets();
-        OutputPrinter.printCompletedPurchaseGuideMessage(lottoTickets.size());
+        int manualTicketCount = purchasedLottoTickets.getManualTicketCount();
+        int autoTicketCount = purchasedLottoTickets.getAutoTicketCount();
+        OutputPrinter.printCompletedPurchaseGuideMessage(manualTicketCount, autoTicketCount);
         for (LottoTicket lottoTicket : lottoTickets) {
             OutputPrinter.printLottoTicketNumbers(lottoTicket);
         }
         InputPrinter.printNewLine();
     }
 
-    public static void printResult(Map<Rank, Integer> result, int purchasePrice) {
+    public static void printResult(Map<Rank, Integer> result, UserPurchase userPurchase) {
         OutputPrinter.printResultTitleMessage();
         int totalPrize = 0;
 
@@ -31,7 +34,7 @@ public class OutputView {
             OutputPrinter.printEachNumberMatchedCountMessage(rank, result);
         }
 
-        double profit = (double) totalPrize / (double) purchasePrice;
+        double profit = (double) totalPrize / (double) userPurchase.getPurchasePrice();
         OutputPrinter.printProfitMessage(profit);
     }
 }

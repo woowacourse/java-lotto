@@ -16,8 +16,9 @@ public class OutputPrinter {
     private OutputPrinter() {
     }
 
-    public static void printCompletedPurchaseGuideMessage(int numberOfTicket) {
-        System.out.printf("자동으로 %d개를 구매했습니다." + NEW_LINE, numberOfTicket);
+    public static void printCompletedPurchaseGuideMessage(int manualTicketCount, int autoTicketCount) {
+        System.out.println(String.format("수동으로 %d장, 자동으로 %d장을 구매했습니다.", manualTicketCount, autoTicketCount));
+        System.out.println();
     }
 
     public static void printLottoTicketNumbers(LottoTicket lottoTicket) {
