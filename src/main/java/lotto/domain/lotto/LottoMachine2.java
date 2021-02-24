@@ -68,7 +68,6 @@ public class LottoMachine2 {
     }
 
     private BigInteger getAutoTicketAmount() {
-        //todo 티켓수 BigInteger or int?
         return money.toBigInteger().divide(LottoTicket.PRICE);
     }
 }

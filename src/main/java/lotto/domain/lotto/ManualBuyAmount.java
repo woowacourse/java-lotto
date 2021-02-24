@@ -1,5 +1,6 @@
 package lotto.domain.lotto;
 
+import java.math.BigInteger;
 import lotto.utils.NumericStringValidator;
 
 public class ManualBuyAmount {
@@ -20,10 +21,16 @@ public class ManualBuyAmount {
     }
 
     private static void validateLessThanTotalAmount(Money money, int manualAmount) {
-        int totalAmount = getTotalTicketAmount(money);
-        if (manualAmount > totalAmount) {
+        if (manualAmountIsLessThanTotalAmount(money, manualAmount)) {
             throw new IllegalArgumentException("수동 구매 개수는 총 구매 개수 이내만 가능합니다.");
         }
+    }
+
+    private static boolean manualAmountIsLessThanTotalAmount(Money money, int manualAmount) {
+        BigInteger totalTicketAmount = getTotalTicketAmount(money);
+        BigInteger manualTicketAmount = BigInteger.valueOf(manualAmount);
+
+        return totalTicketAmount.compareTo(manualTicketAmount) < 0;
     }
 
     private static void validateNumeric(String manualAmountInput) {
@@ -32,9 +39,8 @@ public class ManualBuyAmount {
         }
     }
 
-    private static int getTotalTicketAmount(Money money) {
-        //todo 티켓수 BigInteger or int?
-        return money.toBigInteger().divide(LottoTicket.PRICE).intValue();
+    private static BigInteger getTotalTicketAmount(Money money) {
+        return money.toBigInteger().divide(LottoTicket.PRICE);
     }
 
     public int getValue() {
