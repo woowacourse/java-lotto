@@ -10,6 +10,7 @@ public class LottoTicket {
     private final Set<LottoNumber> lottoNumbers;
 
     private LottoTicket(Set<LottoNumber> lottoNumbers) {
+        validateNumberCounts(lottoNumbers.size());
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -17,12 +18,11 @@ public class LottoTicket {
         Set<LottoNumber> lottoNumbers = numbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet());
-        validateNumbers(numbers.size(), lottoNumbers.size());
         return new LottoTicket(lottoNumbers);
     }
 
-    private static void validateNumbers(int numberCounts, int distinctNumberCounts) {
-        if (numberCounts != VALID_LOTTO_NUMBER_COUNTS || numberCounts != distinctNumberCounts) {
+    private static void validateNumberCounts(int numberCounts) {
+        if (numberCounts != VALID_LOTTO_NUMBER_COUNTS) {
             throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_COUNTS);
         }
     }
@@ -33,7 +33,7 @@ public class LottoTicket {
 
     public int getMatchCounts(LottoTicket winningTicket) {
         return (int) this.lottoNumbers.stream()
-                .filter(lottoNumber -> winningTicket.contains(lottoNumber))
+                .filter(winningTicket::contains)
                 .count();
     }
 
