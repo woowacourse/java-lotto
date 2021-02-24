@@ -57,13 +57,15 @@ public class OutputView {
     }
 
     private static void printEachStatistics(Map.Entry<LottoRank, Integer> entry) {
-        if (entry.getKey().equals(LottoRank.SECOND_PLACE)) {
-            System.out.printf((EACH_RESULT_WITH_BONUS) + NEW_LINE, entry.getKey().getMatches(),
-                    entry.getKey().getReward(), entry.getValue());
-            return;
-        }
-        System.out.printf((EACH_RESULT) + NEW_LINE, entry.getKey().getMatches(),
+        System.out.printf(getResultFormatMessage(entry.getKey()) + NEW_LINE, entry.getKey().getMatches(),
                 entry.getKey().getReward(), entry.getValue());
+    }
+
+    private static String getResultFormatMessage(LottoRank rank) {
+        if (rank.equals(LottoRank.SECOND_PLACE)) {
+            return EACH_RESULT_WITH_BONUS;
+        }
+        return EACH_RESULT;
     }
 
     public static void printFinalResult(LottoResultStatistics lottoResultStatistics, Money money) {
