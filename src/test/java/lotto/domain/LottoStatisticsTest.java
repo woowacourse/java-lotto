@@ -33,6 +33,6 @@ class LottoStatisticsTest {
 
         double yield = lottoStatistics.calculateYield(money);
 
-        assertThat(yield).isEqualTo(((double)2000000000) / 35477);
+        assertThat(yield).isEqualTo(((double)2000000000) / 35000);
     }
 }

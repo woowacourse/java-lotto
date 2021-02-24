@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoMachineTest {
 
-    @DisplayName("수동 로또, 자동 로또 생성 테스트")
+    @DisplayName("구입 금액 및 수동 티켓 개수에 따른 수동 로또, 자동 로또가 제대로 생성되는지 확인")
     @Test
     void makeLottoTicketsByLottoMachine() {
         Money money = new Money(5000);
