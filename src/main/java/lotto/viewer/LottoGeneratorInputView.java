@@ -4,10 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import lotto.domain.Money;
-import lotto.domain.Piece;
-import lotto.exception.MoneyException;
-import lotto.exception.PieceException;
 
 public class LottoGeneratorInputView {
 
@@ -17,12 +13,6 @@ public class LottoGeneratorInputView {
 
     public LottoGeneratorInputView(Scanner scanner) {
         this.scanner = scanner;
-    }
-
-    public Piece inputManualPieces(Money money) throws PieceException {
-        int inputAutoPieces = scanner.nextInt();
-        scanner.nextLine();
-        return new Piece(money, inputAutoPieces);
     }
 
     public List<Integer> inputWinningNumbers() {
@@ -38,11 +28,5 @@ public class LottoGeneratorInputView {
             .map(String::trim)
             .map(Integer::parseInt)
             .collect(Collectors.toList());
-    }
-
-    private void checkExcessManualPieces(Money money, int inputAutoPieces) {
-        if (money.getLottoPieces() < inputAutoPieces) {
-            throw new MoneyException(Money.EXCESS_LOTTO_PIECES);
-        }
     }
 }
