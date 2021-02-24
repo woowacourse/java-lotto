@@ -2,23 +2,15 @@ package lottogame.domain.machine;
 
 import lottogame.domain.number.LottoNumber;
 import lottogame.domain.number.LottoNumbers;
-
-import java.util.ArrayList;
-import java.util.List;
+import lottogame.utils.LottoGameUtils;
 
 public class LottoWinningDrawingMachine {
 
     public static final String DELIMITER = ",";
     private LottoNumbers lottoNumbers;
 
-    public LottoNumbers drawing(String drawingNumbers) {
-        drawingNumbers = drawingNumbers.replaceAll(" ", "");
-        final List<LottoNumber> lottoNumberGroup = new ArrayList<>();
-
-        for (String number : drawingNumbers.split(DELIMITER)) {
-            lottoNumberGroup.add(new LottoNumber(number));
-        }
-        return lottoNumbers = new LottoNumbers(lottoNumberGroup);
+    public LottoNumbers drawing(final String drawingNumbers) {
+        return lottoNumbers = LottoGameUtils.getLottoNumbersByInputString(drawingNumbers);
     }
 
     public LottoNumber bonusDrawing(final String drawingNumber) {
