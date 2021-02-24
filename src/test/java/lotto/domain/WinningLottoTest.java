@@ -26,7 +26,6 @@ public class WinningLottoTest {
     @DisplayName("로또 당첨결과 확인")
     @Test
     void testEntireLottoMatching() {
-
         List<Lotto> manualLottos = Arrays.asList(
                 new Lotto(Arrays.asList(1, 2, 3, 20, 21, 40)),
                 new Lotto(Arrays.asList(1, 2, 20, 25, 29, 45))

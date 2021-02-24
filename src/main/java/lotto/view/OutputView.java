@@ -40,11 +40,19 @@ public class OutputView {
                         System.out.printf(
                                 "%d개 일치%s(%d원)- %d개\n",
                                 result.getCount(),
-                                (result == Result.SECOND ? SECOND : " "),
+                                bonusMessage(result),
                                 result.getPrize(),
                                 statistics.getRankCount(result)
                         )
                 );
+    }
+
+    private static String bonusMessage(Result result) {
+        String message = " ";
+        if(result == Result.SECOND){
+            return SECOND;
+        }
+        return message;
     }
 
     public static void showTotalProfit(float profit) {
