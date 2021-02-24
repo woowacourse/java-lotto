@@ -17,7 +17,9 @@ class LottoMachine2Test {
     @MethodSource("buyTickets_testcase")
     void buyTickets(String moneyValue, List<String> manualTicketsValue, int ManualTicketsSize,
             int AutoTicketsSize, int TotalTicketsSize) {
-        LottoMachine2 lottoMachine2 = new LottoMachine2(Money.valueOf(moneyValue));
+
+        LottoMachine2 lottoMachine2 = LottoMachine2
+                .getInstance(Money.valueOf(moneyValue), Integer.toString(manualTicketsValue.size()));
         UsersLottoTickets usersLottoTickets = lottoMachine2.buyTickets(manualTicketsValue);
 
         assertThat(usersLottoTickets.getManualTicketsSize()).isEqualTo(ManualTicketsSize);

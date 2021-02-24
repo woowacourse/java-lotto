@@ -8,7 +8,6 @@ import lotto.domain.lotto.Money;
 import lotto.domain.result.LottoMatcher;
 import lotto.domain.result.Result;
 import lotto.domain.result.UsersLottoTickets;
-import lotto.utils.NumericStringValidator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 import lotto.view.TicketsView;
@@ -37,33 +36,27 @@ public class LottoApplication2 {
 
     private static UsersLottoTickets getLottoGroup(Money money) {
         try {
-            return buyLottoTickets(money, getManualTicketsValue());
+            return buyLottoTickets(money);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return getLottoGroup(money);
         }
     }
 
-    private static List<String> getManualTicketsValue() {
-        int amount = getManuallyBuyAmountByInput();
-        if (amount < 1) {
+    private static UsersLottoTickets buyLottoTickets(Money money) {
+        LottoMachine2 lottoMachine = LottoMachine2
+                .getInstance(money, InputView.getManualBuyAmountInput());
+
+        List<String> ticketsValue = getManualTicketsValue(lottoMachine.getManualBuyAmount());
+
+        return lottoMachine.buyTickets(ticketsValue);
+    }
+
+    private static List<String> getManualTicketsValue(int amount) {
+        if (amount == 0) {
             return Collections.emptyList();
         }
         return InputView.getManualLottoTicketsInput(amount);
-    }
-
-    private static int getManuallyBuyAmountByInput() {
-        String input = InputView.getManuallyBuyAmountInput();
-        if (!NumericStringValidator.isValid(input)) {
-            System.out.println("0 이상의 정수만 가능합니다.");
-            return getManuallyBuyAmountByInput();
-        }
-        return Integer.parseInt(input);
-    }
-
-    private static UsersLottoTickets buyLottoTickets(Money money, List<String> manualTicketsValue) {
-        LottoMachine2 lottoMachine = new LottoMachine2(money);
-        return lottoMachine.buyTickets(manualTicketsValue);
     }
 
     private static Result getMatchedLottoResult(Money money, List<LottoTicket> lottoTickets) {
