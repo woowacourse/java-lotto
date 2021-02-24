@@ -6,15 +6,20 @@ import java.util.Map;
 public class Lottos {
     public static final String NUMBER_TYPE_ERROR = "[ERROR] 숫자만 입력할 수 있습니다";
     public static final String NUMBER_RANGE_ERROR = "[ERROR] 입력하신 금액으로 구입할 수 없습니다";
-    private final ArrayList<Lotto> lottoGroup = new ArrayList<>();
     private static int manualCount;
     private static int randomCount;
+    private final ArrayList<Lotto> lottoGroup = new ArrayList<>();
 
     public Lottos(String inputTotalMoney, String inputManualCount) {
         Money money = new Money(inputTotalMoney);
         manualCount = validateManualCount(inputManualCount, money.count());
         randomCount = money.count() - manualCount;
         generateLottoGroup(randomCount);
+    }
+
+    public static String findResult(Map<Rank, Integer> countByRank) {
+        Money.findEarning(countByRank);
+        return Money.findEarningRate();
     }
 
     private int validateManualCount(String inputManual, int totalCount) {
@@ -43,11 +48,6 @@ public class Lottos {
             Lotto generatedLotto = new Lotto(lottoGenerator.generateLottoNums());
             lottoGroup.add(generatedLotto);
         }
-    }
-
-    public static String findResult(Map<Rank, Integer> countByRank) {
-        Money.findEarning(countByRank);
-        return Money.findEarningRate();
     }
 
     public ArrayList<Lotto> getLottoGroup() {

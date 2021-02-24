@@ -18,6 +18,23 @@ public class Money {
         money = inputMoney;
     }
 
+    public static void findEarning(Map<Rank, Integer> countByRank) {
+        int sumOfPrize = 0;
+        for (Map.Entry<Rank, Integer> singleCount : countByRank.entrySet()) {
+            sumOfPrize += singleCount.getKey().getPrize() * singleCount.getValue();
+        }
+        earning = sumOfPrize;
+    }
+
+    public static String findEarningRate() {
+        double earningRate = (double) earning / (double) money;
+        return String.format(FORMAT, earningRate);
+    }
+
+    public static int getEarning() {
+        return earning;
+    }
+
     private int changeToInt(String input) {
         int money;
         try {
@@ -38,23 +55,6 @@ public class Money {
         if (money % THOUSAND != 0) {
             throw new IllegalArgumentException(MONEY_UNIT_ERROR);
         }
-    }
-
-    public static void findEarning(Map<Rank, Integer> countByRank) {
-        int sumOfPrize = 0;
-        for (Map.Entry<Rank, Integer> singleCount : countByRank.entrySet()) {
-            sumOfPrize += singleCount.getKey().getPrize() * singleCount.getValue();
-        }
-        earning = sumOfPrize;
-    }
-
-    public static String findEarningRate() {
-        double earningRate = (double) earning / (double) money;
-        return String.format(FORMAT, earningRate);
-    }
-
-    public static int getEarning() {
-        return earning;
     }
 
     public int count() {
