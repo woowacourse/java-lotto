@@ -4,6 +4,7 @@ import domain.*;
 import view.InputView;
 import view.OutputView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoController {
@@ -11,14 +12,23 @@ public class LottoController {
     private final OutputView outputView = OutputView.getInstance();
 
     public void run() {
-        Money budget = createBudgetMoney();
-        List<LottoTicket> lottoTickets = LottoPurchase.buy(budget);
+        Budget budget = createBudget();
+        Money investedMoney = budget.remain();
+        List<LottoTicket> lottoTickets = buyLottosAutomatically(budget);
         outputView.printLottoTicket(lottoTickets);
         WinningNumbers winningNumber = createWinningNumber();
         Statistics statistics = new Statistics(winningNumber, lottoTickets);
-        Profit profit = new Profit(budget, statistics.getReward());
+        Profit profit = new Profit(investedMoney, statistics.getReward());
         outputView.printStatistics(statistics);
         outputView.printProfit(profit);
+    }
+
+    private List<LottoTicket> buyLottosAutomatically(Budget budget) {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        while (budget.canAfford(LottoTicket.PRICE, 1)) {
+            lottoTickets.add(LottoPurchase.buyAutomatically(budget));
+        }
+        return lottoTickets;
     }
 
     private WinningNumbers createWinningNumber() {
@@ -32,12 +42,12 @@ public class LottoController {
         }
     }
 
-    private Money createBudgetMoney() {
+    private Budget createBudget() {
         try {
-            return new Money(inputView.scanBudget());
+            return new Budget(new Money(inputView.scanBudget()));
         } catch (RuntimeException e) {
             outputView.printError(e);
-            return createBudgetMoney();
+            return createBudget();
         }
     }
 }

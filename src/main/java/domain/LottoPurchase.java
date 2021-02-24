@@ -11,13 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoPurchase {
-    private final static int PRICE = 1000;
-
-    public static List<LottoTicket> buy(Money money) {
-        List<LottoTicket> lottoTicket = new ArrayList<>();
-        for (int i = 0; i < money.toLong() / PRICE; i++) {
-            lottoTicket.add(LottoTicket.of(LottoNumberRepository.shuffleLottoNumbers()));
-        }
+    public static LottoTicket buyAutomatically(Budget budget) {
+        budget.buy(LottoTicket.PRICE, 1);
+        LottoTicket lottoTicket = LottoTicket.of(LottoNumberRepository.shuffleLottoNumbers());
         return lottoTicket;
     }
 }
