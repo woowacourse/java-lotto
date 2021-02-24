@@ -12,7 +12,7 @@ public class BonusBall {
     }
 
     private LottoNumber makeValidateNumber(String value, WinnerTicket winnerTicket) {
-        LottoNumber lottoNumber = new LottoNumber(value);
+        LottoNumber lottoNumber = LottoNumber.valueOf(value);
         if (winnerTicket.containsSameNumber(lottoNumber)) {
             throw new IllegalArgumentException(ERROR_MESSAGE_DUPLICATED);
         }

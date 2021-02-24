@@ -11,12 +11,12 @@ public class LottoCount {
 
     private final int lottoCount;
 
-    public LottoCount(Money money) {
-        this(money.divideMoney(LOTTO_PRICE));
+    public LottoCount(int lottoCount) {
+        this.lottoCount = lottoCount;
     }
 
-    private LottoCount(int lottoCount) {
-        this.lottoCount = lottoCount;
+    public static LottoCount valueOf(Money money) {
+        return new LottoCount(money.divideMoney(LOTTO_PRICE));
     }
 
     public boolean isGreaterThanZero() {

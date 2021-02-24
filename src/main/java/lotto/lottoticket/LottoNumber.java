@@ -11,13 +11,13 @@ public class LottoNumber {
 
     private final int number;
 
-    public LottoNumber(String value) {
-        this(makeNumber(value));
-    }
-
     public LottoNumber(int number) {
         validateInRange(number);
         this.number = number;
+    }
+
+    public static LottoNumber valueOf(String value) {
+        return new LottoNumber(makeNumber(value));
     }
 
     public static int makeNumber(String value) {

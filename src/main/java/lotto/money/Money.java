@@ -23,7 +23,7 @@ public class Money {
         return number;
     }
 
-    public static int makeNumber(String value) {
+    public int makeNumber(String value) {
         try {
             return Integer.parseInt(value.trim());
         } catch (NumberFormatException e) {
