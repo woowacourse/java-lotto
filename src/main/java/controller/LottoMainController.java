@@ -10,13 +10,14 @@ import dto.WinningStaticsDto;
 import view.InputView;
 import view.OutputView;
 
+import java.util.Collections;
 import java.util.List;
 
 public class LottoMainController {
     public void run() {
         final LottoMoney lottoMoney = inputLottoMoney();
         final int manualLottoQuantity = InputView.receiveManualTicketQuantity();
-        final List<List<Integer>> expectedManualNumbers = InputView.receiveExpectedManualNumbers(manualLottoQuantity);
+        final List<List<Integer>> expectedManualNumbers = inputExpectedManualNumbers(manualLottoQuantity);
 
         final TicketQuantity ticketQuantity = new TicketQuantity(lottoMoney, manualLottoQuantity);
         final LottoTickets lottoTickets = buyLottoTickets(ticketQuantity, expectedManualNumbers);
@@ -29,6 +30,13 @@ public class LottoMainController {
     private LottoMoney inputLottoMoney() {
         String input = InputView.receivePurchaseMoney();
         return new LottoMoney(input);
+    }
+
+    private List<List<Integer>> inputExpectedManualNumbers(final int manualLottoQuantity) {
+        if (manualLottoQuantity == 0) {
+            return Collections.emptyList();
+        }
+        return InputView.receiveExpectedManualNumbers(manualLottoQuantity);
     }
 
     private LottoTickets buyLottoTickets(final TicketQuantity ticketQuantity, final List<List<Integer>> expectedManualNumbers) {
