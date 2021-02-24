@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -14,7 +15,7 @@ class LottoNumberTest {
     @ValueSource(ints = {0, 46})
     void cannotMake(int number) {
         assertThatCode(() -> {
-            new LottoNumber(number);
+            LottoNumber.from(number);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 번호 범위가 벗어났습니다.");
     }
@@ -23,8 +24,17 @@ class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 5, 45})
     void makeLottoNumber(int number) {
-        LottoNumber lottoNumber = new LottoNumber(number);
+        LottoNumber lottoNumber = LottoNumber.from(number);
 
         assertThat(lottoNumber.getLottoNumber()).isEqualTo(number);
+    }
+
+    @DisplayName("로또 번호 캐싱이 잘 되었는지 확인")
+    @ParameterizedTest
+    @ValueSource(ints = {1, 5, 45})
+    void compareLottoNumber(int number) {
+        LottoNumber lottoNumber = LottoNumber.from(number);
+
+        assertThat(lottoNumber).isSameAs(LottoNumber.from(number));
     }
 }

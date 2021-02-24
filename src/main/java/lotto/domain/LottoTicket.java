@@ -16,7 +16,7 @@ public class LottoTicket {
 
     public static LottoTicket generateTicket(List<Integer> numbers) {
         Set<LottoNumber> lottoNumbers = numbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::from)
                 .collect(Collectors.toSet());
         return new LottoTicket(lottoNumbers);
     }

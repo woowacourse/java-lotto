@@ -16,7 +16,7 @@ public class WinningLottoTicket {
 
     public static WinningLottoTicket of(List<Integer> winningNumbers, int bonusBallNumber) {
         LottoTicket lottoTicket = LottoTicket.generateTicket(winningNumbers);
-        LottoNumber bonusLottoNumber = new LottoNumber(bonusBallNumber);
+        LottoNumber bonusLottoNumber = LottoNumber.from(bonusBallNumber);
         return new WinningLottoTicket(lottoTicket, bonusLottoNumber);
     }
 
