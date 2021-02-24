@@ -39,4 +39,23 @@ public class LottoTicketsTest {
         assertThat(lottoTickets.getAutoTicketsCount()).isEqualTo(1);
         assertThat(lottoTickets.getManualTicketsCount()).isEqualTo(1);
     }
+
+    @Test
+    @DisplayName("수동 티켓 1개 구매, 자동 티켓 2개 구매 후 총 티켓이 3개임을 가져온다.")
+    void AllLottoTicketsCount() {
+        List<LottoNumber> lottoNumberGroup = new ArrayList<>();
+        for (int i = 1; i <= 6; ++i) {
+            lottoNumberGroup.add(new LottoNumber(i));
+        }
+        LottoManualTicket manualTicket = new LottoManualTicket(new LottoNumbers(lottoNumberGroup));
+        LottoTickets lottoTickets = new LottoTickets();
+        lottoTickets.add(manualTicket);
+
+        LottoTickets lottoAutoTickets = new LottoTickets();
+        lottoAutoTickets.add(new LottoAutoTicket());
+        lottoAutoTickets.add(new LottoAutoTicket());
+
+        lottoTickets.concat(lottoAutoTickets);
+        assertThat(lottoTickets.toList().size()).isEqualTo(3);
+    }
 }

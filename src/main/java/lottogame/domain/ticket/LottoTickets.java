@@ -23,6 +23,10 @@ public class LottoTickets {
         }
     }
 
+    public void concat(final LottoTickets lottoTickets){
+        this.lottoTickets.addAll(lottoTickets.toList());
+    }
+
     public List<LottoTicket> toList() {
         return new ArrayList<>(lottoTickets);
     }
