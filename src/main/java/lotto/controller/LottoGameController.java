@@ -20,6 +20,12 @@ public class LottoGameController {
         OutputView.printLottoGameResult(lottoGameResult);
     }
 
+    private LottoAmount makeLottoAmount() {
+        Money money = InputView.askMoney();
+
+        return InputView.askLottoAmount(money);
+    }
+
     private LottoGame buyTwoTypeLottos(LottoAmount lottoAmount) {
         LottoGame lottoGame = new LottoGame();
         List<Lotto> manualLottos = InputView.askManualLottoNumbers(lottoAmount.toManualAmountNumber());
@@ -32,6 +38,13 @@ public class LottoGameController {
     private void printEachLottos(LottoGame lottoGame) {
         OutputView.printTotalNumberOfLotto(lottoGame.toManualLottos(), lottoGame.toAutoLottos());
         OutputView.printEachLotto(lottoGame.toManualLottos(), lottoGame.toAutoLottos());
+    }
+
+    private WinningLotto askWinningLotto() {
+        Lotto winningLotto = askWinningLottoNumbers();
+        LottoNumber bonusNumber = InputView.askBonusNumber();
+
+        return makeWinningLotto(winningLotto, bonusNumber);
     }
 
     private Lotto askWinningLottoNumbers() {
@@ -55,22 +68,12 @@ public class LottoGameController {
 
     private LottoGameResult getRankOfLottoGame(LottoGame lottoGame, WinningLotto lastWinningLotto) {
         LottoGameResult lottoGameResult = new LottoGameResult();
-        lottoGame.toManualLottos().addMatchLotto(lastWinningLotto, lottoGameResult);
-        lottoGame.toAutoLottos().addMatchLotto(lastWinningLotto, lottoGameResult);
+        Lottos manualLottos = lottoGame.toManualLottos();
+        Lottos autoLottos = lottoGame.toAutoLottos();
+
+        manualLottos.addMatchLotto(lastWinningLotto, lottoGameResult);
+        autoLottos.addMatchLotto(lastWinningLotto, lottoGameResult);
 
         return lottoGameResult;
-    }
-
-    private LottoAmount makeLottoAmount() {
-        Money money = InputView.askMoney();
-
-        return InputView.askLottoAmount(money);
-    }
-
-    private WinningLotto askWinningLotto() {
-        Lotto winningLotto = askWinningLottoNumbers();
-        LottoNumber bonusNumber = InputView.askBonusNumber();
-
-        return makeWinningLotto(winningLotto, bonusNumber);
     }
 }
