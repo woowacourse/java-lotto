@@ -14,7 +14,7 @@ public class LottoTicketFactoryTest {
     @DisplayName("수동로또 생성")
     @Test
     void createManualLottoTickets() {
-        List<String> numbers = new ArrayList<>(Arrays.asList("1","2","3","4","5","6"));
+        List<String> numbers = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "6"));
         assertThat(LottoTicketFactory.createManualLottoTicket(numbers).getLottoTicket()).containsExactly(
                 LottoNumber.of("1"),
                 LottoNumber.of("2"),
@@ -27,14 +27,14 @@ public class LottoTicketFactoryTest {
     @DisplayName("수동로또 정렬기능 검증")
     @Test
     void sortManualLottoTickets() {
-        List<String> numbers = new ArrayList<>(Arrays.asList("6","2","3","5","4","1"));
+        List<String> numbers = new ArrayList<>(Arrays.asList("45", "2", "3", "5", "4", "1"));
         assertThat(LottoTicketFactory.createManualLottoTicket(numbers).getLottoTicket()).containsExactly(
                 LottoNumber.of("1"),
                 LottoNumber.of("2"),
                 LottoNumber.of("3"),
                 LottoNumber.of("4"),
                 LottoNumber.of("5"),
-                LottoNumber.of("6"));
+                LottoNumber.of("45"));
     }
 
     @Test

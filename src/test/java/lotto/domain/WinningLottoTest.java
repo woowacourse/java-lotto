@@ -24,6 +24,6 @@ class WinningLottoTest {
         assertThatThrownBy(() -> {
             WinningLotto winningLotto = new WinningLotto(winningTicket, bonusNumber);
         }).isInstanceOf(IllegalWinningLottoException.class)
-        .hasMessage(bonusNumber + " : 티켓 내 숫자와 보너스 번호가 중복됩니다.");
+                .hasMessage(bonusNumber + " : 티켓 내 숫자와 보너스 번호가 중복됩니다.");
     }
 }

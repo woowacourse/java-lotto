@@ -16,7 +16,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
 
     static {
-        IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
+        IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
                 .forEach(number -> lottoNumbers.put(number, new LottoNumber(number)));
     }
 

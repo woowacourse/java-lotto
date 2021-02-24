@@ -17,7 +17,7 @@ public class LottoNumberTest {
         assertThatThrownBy(() -> {
             LottoNumber lottoNumber = LottoNumber.of(input);
         }).isInstanceOf(IllegalLottoNumberException.class)
-        .hasMessage(input + " : 올바른 형식이 아닙니다.");
+                .hasMessage(input + " : 올바른 형식이 아닙니다.");
     }
 
     @DisplayName("1~49 사이의 숫자인지 검사")
@@ -26,7 +26,7 @@ public class LottoNumberTest {
         assertThatThrownBy(() -> {
             LottoNumber lottoNumber = LottoNumber.of("55");
         }).isInstanceOf(IllegalLottoNumberException.class)
-        .hasMessage("55 : 로또번호의 범위를 벗어납니다.");
+                .hasMessage("55 : 로또번호의 범위를 벗어납니다.");
     }
 
     @Test

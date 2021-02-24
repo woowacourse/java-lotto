@@ -24,7 +24,7 @@ public class LottoTicketTest {
         assertThatThrownBy(() -> {
             LottoTicket lottoTicket = new LottoTicket(numbers);
         }).isInstanceOf(IllegalLottoNumbersException.class)
-        .hasMessage("로또 티켓의 길이가 맞지 않습니다.");
+                .hasMessage("로또 티켓의 길이가 맞지 않습니다.");
     }
 
     @Test
@@ -39,7 +39,7 @@ public class LottoTicketTest {
         assertThatThrownBy(() -> {
             LottoTicket lottoTicket = new LottoTicket(numbers);
         }).isInstanceOf(IllegalLottoNumbersException.class)
-        .hasMessage("로또 티켓의 길이가 맞지 않습니다.");
+                .hasMessage("로또 티켓의 길이가 맞지 않습니다.");
     }
 
     @Test
@@ -55,6 +55,6 @@ public class LottoTicketTest {
         assertThatThrownBy(() -> {
             LottoTicket lottoTicket = new LottoTicket(numbers);
         }).isInstanceOf(IllegalLottoNumbersException.class)
-        .hasMessage("티켓 내 중복되는 숫자들이 있습니다.");
+                .hasMessage("티켓 내 중복되는 숫자들이 있습니다.");
     }
 }

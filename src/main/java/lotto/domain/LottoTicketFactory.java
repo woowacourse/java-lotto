@@ -15,7 +15,7 @@ public class LottoTicketFactory {
 
     static {
         lottoNumberRange = new ArrayList<>();
-        IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
+        IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
                 .forEach(number -> lottoNumberRange.add(LottoNumber.of(Integer.toString(number))));
     }
 

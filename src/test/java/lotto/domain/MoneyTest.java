@@ -16,7 +16,7 @@ public class MoneyTest {
         assertThatThrownBy(() -> {
             Money money = new Money(input);
         }).isInstanceOf(IllegalMoneyException.class)
-        .hasMessage(input + " : 올바른 형식이 아닙니다.");
+                .hasMessage(input + " : 올바른 형식이 아닙니다.");
     }
 
     @DisplayName("1000이상의 숫자인지 검증")
@@ -25,6 +25,6 @@ public class MoneyTest {
         assertThatThrownBy(() -> {
             Money money = new Money("500");
         }).isInstanceOf(IllegalMoneyException.class)
-        .hasMessage("500 : 1000보다 큰 금액을 입력해야 합니다.");
+                .hasMessage("500 : 1000보다 큰 금액을 입력해야 합니다.");
     }
 }
