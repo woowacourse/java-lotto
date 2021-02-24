@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -11,21 +12,26 @@ public class LottoAnnouncement {
     public static final String DIFFERENT_POSESSION_MESSAGE = "로또 번호의 갯수가 기준과 다릅니다.";
     public static final String OVERLAPPED_WINNER_MESSAGE = "당첨 번호가 중복되었습니다.";
     public static final String OVERLAPPED_BONUS_MESSAGE = "보너스 번호가 중복되었습니다.";
-    public static final String EXCESS_NUMBER_MESSAGE = "범위를 벗어난 숫자입니다.";
 
-    private final List<Integer> winners;
-    private final int bonusNumber;
+    private final List<Number> winners;
+    private final Number bonusNumber;
 
-    public LottoAnnouncement(List<Integer> winners, int bonusNumber) {
-        winners.forEach(this::checkValidNumber);
-        checkProperSize(winners);
-        checkValidNumber(bonusNumber);
-        checkOverlapped(winners, bonusNumber);
-        this.winners = winners;
-        this.bonusNumber = bonusNumber;
+    public LottoAnnouncement(List<Integer> rawWinners, int bonusNumber) {
+        checkProperSize(rawWinners);
+        checkOverlapped(rawWinners, bonusNumber);
+        this.winners = wrappedWinners(rawWinners);
+        this.bonusNumber = new Number(bonusNumber);
     }
 
-    private void checkOverlapped (List<Integer> winners, int bonusNumber) {
+    private List<Number> wrappedWinners(List<Integer> rawWinners) {
+        List<Number> winners = new ArrayList<>();
+        for (int rawWinner : rawWinners) {
+            winners.add(new Number(rawWinner));
+        }
+        return winners;
+    }
+
+    private void checkOverlapped(List<Integer> winners, int bonusNumber) {
         checkOverlappedAmongWinners(winners);
         checkOverlappedWinnersToBonus(winners, bonusNumber);
     }
@@ -54,19 +60,11 @@ public class LottoAnnouncement {
         }
     }
 
-    private void checkValidNumber(int targetNumber) {
-        boolean criteria = (targetNumber < Lotto.LOWER_LIMIT) | (targetNumber > Lotto.UPPER_LIMIT);
-
-        if (criteria) {
-            throw new LottoAnnouncementException(EXCESS_NUMBER_MESSAGE);
-        }
-    }
-
-    public List<Integer> getWinners() {
+    public List<Number> getWinners() {
         return Collections.unmodifiableList(winners);
     }
 
-    public int getBonusNumber() {
+    public Number getBonusNumber() {
         return bonusNumber;
     }
 }

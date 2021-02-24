@@ -11,17 +11,17 @@ public class Lotto {
 
     public static final String DIFFERENT_POSESSION_MESSAGE = "로또 번호의 갯수가 기준과 다릅니다.";
     public static final String OVERLAPPED_WINNER_MESSAGE = "당첨 번호가 중복되었습니다.";
-    public static final String EXCESS_NUMBER_MESSAGE = "범위를 벗어난 숫자입니다.";
     public static final double BONUS_MATCHING_COUNT = 5.5;
-    public static final int UPPER_LIMIT = 45;
-    public static final int LOWER_LIMIT = 1;
     public static final int LOTTO_POSSESSION_NUMBER = 6;
 
-    private final List<Integer> numbers;
+    private final List<Number> numbers;
 
     public Lotto(List<Integer> selectedNumber) {
         checkValidNumbers(selectedNumber);
-        numbers = new ArrayList<>(selectedNumber);
+        numbers = new ArrayList<>();
+        for (int integerNumber : selectedNumber) {
+            numbers.add(new Number(integerNumber));
+        }
     }
 
     public LottoRank getLottoRank(LottoAnnouncement lottoAnnouncement) {
@@ -30,9 +30,9 @@ public class Lotto {
     }
 
     private double getMatchingCount(LottoAnnouncement lottoAnnouncement) {
-        List <Integer> winningNumbers = lottoAnnouncement.getWinners();
-        int bonusNumber = lottoAnnouncement.getBonusNumber();
-        List<Integer> combinedWinningNumbers = getCombinedWinNumbers(winningNumbers, bonusNumber);
+        List <Number> winningNumbers = lottoAnnouncement.getWinners();
+        Number bonusNumber = lottoAnnouncement.getBonusNumber();
+        List <Number> combinedWinningNumbers = getCombinedWinNumbers(winningNumbers, bonusNumber);
         int count = getCount(combinedWinningNumbers);
 
         if (isSecondRank(count, bonusNumber)) {
@@ -41,27 +41,26 @@ public class Lotto {
         return count;
     }
 
-    private List<Integer> getCombinedWinNumbers(List<Integer> winningNumbers,
-        int bonusNumber) {
-        List<Integer> integratedWinningNumbers = new ArrayList<>(winningNumbers);
+    private List<Number> getCombinedWinNumbers(List<Number> winningNumbers,
+        Number bonusNumber) {
+        List<Number> integratedWinningNumbers = new ArrayList<>(winningNumbers);
         integratedWinningNumbers.add(bonusNumber);
         return integratedWinningNumbers;
     }
 
-    private int getCount(List<Integer> integratedWinningNumbers) {
+    private int getCount(List<Number> integratedWinningNumbers) {
         return (int) numbers.stream()
             .filter(integratedWinningNumbers::contains)
             .count();
     }
 
-    private boolean isSecondRank(int count, int bonusNumber) {
+    private boolean isSecondRank(int count, Number bonusNumber) {
         return count == LOTTO_POSSESSION_NUMBER && numbers.contains(bonusNumber);
     }
 
     private void checkValidNumbers (List<Integer> winners) {
         checkOverlappedAmongWinners(winners);
         checkProperSize(winners);
-        winners.forEach(this::checkValidNumber);
     }
 
     private void checkOverlappedAmongWinners(List<Integer> winners) {
@@ -78,15 +77,7 @@ public class Lotto {
         }
     }
 
-    private void checkValidNumber(int targetNumber) {
-        boolean criteria = (targetNumber < LOWER_LIMIT) | (targetNumber > UPPER_LIMIT);
-
-        if (criteria) {
-            throw new LottoAnnouncementException(EXCESS_NUMBER_MESSAGE);
-        }
-    }
-
-    public List<Integer> getNumbers() {
+    public List<Number> getNumbers() {
         return Collections.unmodifiableList(numbers);
     }
 }

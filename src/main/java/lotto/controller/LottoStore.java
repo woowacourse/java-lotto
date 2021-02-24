@@ -44,7 +44,7 @@ public class LottoStore {
         Piece manualPieces = receiveManualPieces(possessedMoney);
         Piece autoPieces = new Piece(possessedMoney, manualPieces.getAnotherPiece(possessedMoney));
         LottoAutoGenerator lottoAutoGenerator = new LottoAutoGenerator();
-        Lottos purchasedLottos = boughtLottos(manualPieces);
+        Lottos purchasedLottos = boughtManualLottos(manualPieces);
         purchasedLottos.addExtraPieces(lottoAutoGenerator, autoPieces.getPiece());
         outputView.printPurchasedLottos(purchasedLottos, manualPieces);
         return purchasedLottos;
@@ -98,7 +98,7 @@ public class LottoStore {
         return candidateManualPiece;
     }
 
-    private Lottos boughtLottos(Piece manualPiece) {
+    private Lottos boughtManualLottos(Piece manualPiece) {
         LottoManualGenerator lottoManualGenerator;
         Lottos lottos;
         try {
@@ -106,7 +106,7 @@ public class LottoStore {
             lottos = new Lottos(lottoManualGenerator, manualPiece.getPiece());
         } catch (LottoException lottoException) {
             outputView.printLottoException(lottoException);
-            lottos = boughtLottos(manualPiece);
+            lottos = boughtManualLottos(manualPiece);
         }
         return lottos;
     }
