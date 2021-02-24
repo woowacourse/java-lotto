@@ -27,7 +27,7 @@ public class LottoAnnouncement {
         this.bonusNumber = bonusNumber;
     }
 
-    private void checkOverlapped(List<Integer> winners, int bonusNumber) {
+    private void checkOverlapped (List<Integer> winners, int bonusNumber) {
         checkOverlappedAmongWinners(winners);
         checkOverlappedWinnersToBonus(winners, bonusNumber);
     }

@@ -3,7 +3,7 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
-import lotto.exception.LottoPiecesException;
+import lotto.exception.MoneyException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +23,7 @@ public class MoneyTest {
     void lackMoneyToLottoPieces() {
         int sampleMoney = 100;
         assertThatThrownBy(() -> new Money(sampleMoney))
-            .isInstanceOf(LottoPiecesException.class)
+            .isInstanceOf(MoneyException.class)
             .hasMessageContaining(Money.NOT_ENOUGH_MONEY);
     }
 }

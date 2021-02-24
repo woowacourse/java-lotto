@@ -3,8 +3,11 @@ package lotto.viewer;
 import java.util.List;
 import java.util.Map;
 import lotto.domain.Lotto;
+import lotto.domain.LottoAnnouncement;
 import lotto.domain.LottoRank;
 import lotto.domain.Lottos;
+import lotto.exception.LottoAnnouncementException;
+import lotto.exception.MoneyException;
 
 public class OutputView {
 
@@ -42,5 +45,14 @@ public class OutputView {
         }
         System.out.printf(REGULAR_RESULT_EXPRESSION + System.lineSeparator(),
             (int) key.getMatchingCount() ,key.getPrizeMoney(),value);
+    }
+
+    public void printMoneyException(MoneyException moneyException) {
+        System.out.println(moneyException.getMessage());
+    }
+
+    public void printLottoAnnouncementException(
+        LottoAnnouncementException lottoAnnouncementException ){
+        System.out.println(lottoAnnouncementException.getMessage());
     }
 }

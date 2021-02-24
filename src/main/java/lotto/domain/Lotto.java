@@ -16,7 +16,6 @@ public class Lotto {
 
     public LottoRank getLottoRank(LottoAnnouncement lottoAnnouncement) {
         double count = getMatchingCount(lottoAnnouncement);
-
         return LottoRank.getRank(count);
     }
 

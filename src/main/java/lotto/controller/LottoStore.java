@@ -8,6 +8,8 @@ import lotto.domain.LottoRank;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.controller.generator.LottoAutoGenerator;
+import lotto.exception.LottoAnnouncementException;
+import lotto.exception.MoneyException;
 import lotto.viewer.AnnouncementInputView;
 import lotto.viewer.MoneyInputView;
 import lotto.viewer.OutputView;
@@ -62,25 +64,23 @@ public class LottoStore {
 
     private Money receiveValidMoney() {
         Money candidateMoney;
-
         try {
             candidateMoney = moneyInputView.purchaseMoney();
-        } catch (Exception e) {
+        } catch (MoneyException moneyException) {
+            outputView.printMoneyException(moneyException);
             candidateMoney = receiveValidMoney();
         }
-
         return candidateMoney;
     }
 
     private LottoAnnouncement receiveValidLottoAnnouncement() {
         LottoAnnouncement candidateLottoAnnouncement;
-
         try {
             candidateLottoAnnouncement = announcementInputView.inputAnnouncement();
-        } catch (Exception e) {
+        } catch (LottoAnnouncementException lottoAnnouncementException) {
+            outputView.printLottoAnnouncementException(lottoAnnouncementException);
             candidateLottoAnnouncement = receiveValidLottoAnnouncement();
         }
-
         return candidateLottoAnnouncement;
     }
 }
