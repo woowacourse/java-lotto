@@ -16,6 +16,12 @@ public class Lottos {
         }
     }
 
+    public void addExtraPieces(LottoGenerator lottoGenerator, int purchasedLottoCount) {
+        for (int i = 0; i < purchasedLottoCount; i++) {
+            lottoBunch.add(new Lotto(lottoGenerator.generateNumbers()));
+        }
+    }
+
     public EnumMap<LottoRank, Integer> getStatistics(LottoAnnouncement lottoAnnouncement) {
         EnumMap<LottoRank, Integer> getStatistics = setUpStatistics();
         for (Lotto lotto : lottoBunch) {

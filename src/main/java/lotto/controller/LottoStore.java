@@ -54,7 +54,8 @@ public class LottoStore {
         Piece autoPieces = new Piece(possessedMoney, manualPieces.getAnotherPiece(possessedMoney));
         LottoAutoGenerator lottoAutoGenerator = new LottoAutoGenerator();
         Lottos purchasedLottos = boughtLottos(manualPieces);
-        outputView.printPurchasedLottos(purchasedLottos);
+        purchasedLottos.addExtraPieces(lottoAutoGenerator, autoPieces.getPiece());
+        outputView.printPurchasedLottos(purchasedLottos, manualPieces);
         return purchasedLottos;
     }
 

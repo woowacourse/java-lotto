@@ -5,6 +5,7 @@ import java.util.Map;
 import lotto.domain.Lotto;
 import lotto.domain.LottoRank;
 import lotto.domain.Lottos;
+import lotto.domain.Piece;
 import lotto.exception.LottoAnnouncementException;
 import lotto.exception.LottoException;
 import lotto.exception.MoneyException;
@@ -15,11 +16,12 @@ public class OutputView {
     private static final String REGULAR_RESULT_EXPRESSION = "%d개 일치, (%d원) - %d개";
     private static final String BONUS_RESULT_EXPRESSION = "5개 일치, 보너스볼일치(%d원) - %d개";
     private static final String PROFIT_RATE_EXPRESSION = "총 수익률은 %.2f입니다.";
-    private static final String PURCHASE_PIECE_EXPRESSION = "%d를 구매하였습니다.";
+    private static final String PURCHASE_PIECE_EXPRESSION = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
 
-    public void printPurchasedLottos(Lottos lottos) {
+    public void printPurchasedLottos(Lottos lottos, Piece manualPieces) {
         List <Lotto> lottoBunch = lottos.getLottoBunch() ;
-        System.out.printf(PURCHASE_PIECE_EXPRESSION + System.lineSeparator(), lottoBunch.size());
+        System.out.printf(PURCHASE_PIECE_EXPRESSION + System.lineSeparator(),
+            manualPieces.getPiece(), lottoBunch.size() - manualPieces.getPiece());
         for (Lotto lotto : lottoBunch) {
             System.out.println(lotto.getNumbers());
         }
