@@ -35,7 +35,7 @@ public class LottosTest {
         List<Lotto> lottosValue = Arrays.asList(lotto1, lotto2, lotto3, lotto4, lotto5,
             lotto6, lotto7, lotto8, lotto9, lotto10,
             lotto11, lotto12, lotto13, lotto14);
-        lottos = new Lottos(lottosValue);
+        lottos = Lottos.from(lottosValue);
         winningLotto = new WinningLotto(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)), 7);
     }
 

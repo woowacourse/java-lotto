@@ -11,8 +11,15 @@ public class Lottos {
 
     private final List<Lotto> lottos;
 
-    public Lottos(List<Lotto> lottos) {
+    private Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
+    }
+
+    public static Lottos from(List<Lotto> lottos) {
+        if (lottos.size() == 0) {
+            return EMPTY_LOTTOS;
+        }
+        return new Lottos(lottos);
     }
 
     public List<Lotto> getLottos() {

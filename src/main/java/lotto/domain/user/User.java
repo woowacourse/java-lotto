@@ -25,7 +25,7 @@ public class User {
             throw new LessThanLottoPriceException();
         }
         balance = balance.minus(priceOfLottos);
-        manualLottos = new Lottos(lottoNumbers);
+        manualLottos = Lottos.from(lottoNumbers);
     }
 
     public void buyAutomaticLottos() {
@@ -34,22 +34,14 @@ public class User {
             .map(i -> Lotto.generatedBy(new RandomLottoGenerator()))
             .limit(numOfAvailableLotto)
             .collect(Collectors.toList());
-        automaticLottos = new Lottos(availableLotto);
-    }
-
-    public int getNumOfManualLottos() {
-        return this.manualLottos.getNumOfLottos();
-    }
-
-    public int getNumOfAutomaticLottos() {
-        return this.automaticLottos.getNumOfLottos();
+        automaticLottos = Lottos.from(availableLotto);
     }
 
     public Lottos getManualLottos() {
-        return new Lottos(manualLottos.getLottos());
+        return Lottos.from(manualLottos.getLottos());
     }
 
     public Lottos getAutomaticLottos() {
-        return new Lottos(automaticLottos.getLottos());
+        return Lottos.from(automaticLottos.getLottos());
     }
 }
