@@ -1,6 +1,10 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoGenerator {
@@ -21,8 +25,8 @@ public class LottoGenerator {
         Collections.shuffle(lottoNumbers);
         lottoNumbers = lottoNumbers.subList(0, LOTTO_NUMBER_LIMIT);
         return lottoNumbers.stream()
-                .map(LottoNumber::of)
-                .collect(Collectors.toSet());
+            .map(LottoNumber::of)
+            .collect(Collectors.toSet());
     }
 
     public Set<LottoNumber> generateManual(String input) {

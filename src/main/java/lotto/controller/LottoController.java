@@ -2,7 +2,6 @@ package lotto.controller;
 
 import java.util.List;
 import java.util.Map;
-
 import lotto.domain.*;
 import lotto.view.*;
 
@@ -36,8 +35,8 @@ public class LottoController {
         String bonusBallInput = InputView.requestInput();
         LottoGenerator lottoGenerator = new LottoGenerator();
         return new WinningLotto(
-                new Lotto(lottoGenerator.generateManual(winningLottoInput)),
-                LottoNumber.of(bonusBallInput)
+            new Lotto(lottoGenerator.generateManual(winningLottoInput)),
+            LottoNumber.of(bonusBallInput)
         );
     }
 

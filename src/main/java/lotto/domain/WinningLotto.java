@@ -20,8 +20,8 @@ public class WinningLotto {
 
     private int howManyWins(Lotto lotto) {
         return lotto.getLottoNumbers()
-                .stream().filter(winLotto::isContain)
-                .toArray().length;
+            .stream().filter(winLotto::isContain)
+            .toArray().length;
     }
 
     public Rank findRank(Lotto lotto) {
