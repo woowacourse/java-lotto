@@ -31,7 +31,7 @@ public class LottoController {
 
     private LottoCount generateCount(Money money) {
         try {
-            LottoCount lottoCount = LottoCount.valueOf(money);
+            LottoCount lottoCount = new LottoCount(money);
             OutputView.noticeLottoCount(lottoCount);
             return lottoCount;
         } catch (IllegalArgumentException e) {

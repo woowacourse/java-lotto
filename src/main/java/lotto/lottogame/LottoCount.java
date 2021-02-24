@@ -9,22 +9,14 @@ public class LottoCount {
     public static final int ONE_COUNT = 1;
     public static final int LOTTO_PRICE = 1000;
 
-    private final int lottoCount;
+    private int lottoCount;
 
-    public LottoCount(int lottoCount) {
-        this.lottoCount = lottoCount;
+    public LottoCount(Money money) {
+        this.lottoCount = money.divideMoney(LOTTO_PRICE);
     }
 
-    public static LottoCount valueOf(Money money) {
-        return new LottoCount(money.divideMoney(LOTTO_PRICE));
-    }
-
-    public boolean isGreaterThanZero() {
-        return this.lottoCount > ZERO;
-    }
-
-    public LottoCount decreaseOne() {
-        return new LottoCount(lottoCount - ONE_COUNT);
+    public boolean isBiggerThanZeroWithDecreasing() {
+        return this.lottoCount-- > ZERO;
     }
 
     public int getLottoCount() {
