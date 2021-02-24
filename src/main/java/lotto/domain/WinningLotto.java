@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.util.LottoFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -13,14 +15,11 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
-    public List<Result> getWinningResult() {
+    public List<Result> getWinningResult(LottoFactory manualLotto, LottoFactory autoLotto) {
         List<Result> results = new ArrayList<>();
-        for (Lotto lotto : Lottos.getPurchaseLottos()) {
-            results.add(Result.decisionLottoRank(
-                    matchingCount(lotto.getLottoNumbers()),
-                    lotto.isBonusMatch(bonusNumber.getBonus())
-            ));
-        }
+        checkResult(results, manualLotto.getLottos());
+        checkResult(results, autoLotto.getLottos());
+
         return results;
     }
 

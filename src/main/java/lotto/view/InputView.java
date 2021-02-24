@@ -1,5 +1,8 @@
 package lotto.view;
 
+import lotto.domain.Lotto;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -59,14 +62,34 @@ public class InputView {
         return Integer.parseInt(input);
     }
 
-    public static List<String> inputManualPurchase(int manualCount) {
+    public static List<Lotto> inputManualPurchase(int manualCount) {
         if (manualCount == 0) {
             return Arrays.asList();
         }
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 
-        return Stream.generate(() -> scanner.nextLine())
+        return makeManualLotto(Stream.generate(() -> scanner.nextLine())
                 .limit(manualCount)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
+    }
+
+    private static List<Lotto> makeManualLotto(List<String> manualPurchaseNumbers) {
+        List<Lotto> manualLotto = new ArrayList<>();
+
+        for (String input : manualPurchaseNumbers) {
+            validateInputCheck(input);
+            List<Integer> lottoNumbers = Arrays.stream(input.split(", "))
+                    .map(s -> Integer.parseInt(s))
+                    .collect(Collectors.toList());
+            manualLotto.add(new Lotto(lottoNumbers));
+        }
+        return manualLotto;
+    }
+
+    private static void validateInputCheck(String input) {
+        if (!Arrays.stream(input.split(", "))
+                .allMatch(s -> s.chars().allMatch(Character::isDigit))) {
+            throw new IllegalArgumentException("숫자와 , 를 이용하여 입력해주세요.");
+        }
     }
 }

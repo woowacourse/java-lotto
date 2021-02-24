@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.*;
+import lotto.util.LottoFactory;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -12,14 +13,16 @@ public class LottoControllerMain {
         int manualCount = InputView.inputManualPurchaseCount();
         int autoCount = money.totalCountOfPurchaseLotto() - manualCount;
 
-        Lottos.createManualLotto(InputView.inputManualPurchase(manualCount));
-        Lottos.createAutoLotto(autoCount);
+        LottoFactory manualLotto = LottoFactory.of(InputView.inputManualPurchase(manualCount));
+        LottoFactory autoLotto = LottoFactory.of(autoCount);
 
-        OutputView.showBuyLotto(manualCount, autoCount);
+        OutputView.showBuyLotto(manualLotto, autoLotto);
 
         WinningLotto winningLotto = new WinningLotto(new Lotto(InputView.winningNumbers()), new BonusNumber(InputView.bonusNumber()));
-        List<Result> results = winningLotto.getWinningResult();
+        List<Result> results = winningLotto.getWinningResult(manualLotto, autoLotto);
 
-        OutputView.resultMessage(new Statistics(results), money.calculateProfitRate(Result.calculateProfit(results)));
+        OutputView.resultMessage();
+        OutputView.result(new Statistics(results));
+        OutputView.showTotalProfit(money.calculateProfitRate(Result.calculateProfit(results)));
     }
 }
