@@ -68,14 +68,17 @@ public class LottoMain {
         List<LottoTicket> manualLottoTickets = new ArrayList<>();
         InputPrinter.printManualTicketInputGuideMessage();
         try {
-            // TODO 메소드 분리
-            for (int i = 0; i < userPurchase.getManualTicketCount(); i++) {
-                manualLottoTickets.add(getLottoTicketInput());
-            }
+            addLottoTicketInput(userPurchase, manualLottoTickets);
             return manualLottoTickets;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return getManualLottoTicketInput(userPurchase);
+        }
+    }
+
+    private static void addLottoTicketInput(UserPurchase userPurchase, List<LottoTicket> manualLottoTickets) {
+        for (int i = 0; i < userPurchase.getManualTicketCount(); i++) {
+            manualLottoTickets.add(getLottoTicketInput());
         }
     }
 
