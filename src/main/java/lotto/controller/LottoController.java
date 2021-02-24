@@ -17,7 +17,7 @@ import java.util.stream.Stream;
 import static java.util.stream.Collectors.toList;
 
 public class LottoController {
-    private static final int ONE = 1;
+    private static final int MINIMUM_MANUAL_LOTTO_SIZE = 1;
 
     private final InputView inputView;
     private final OutputView outputView;
@@ -60,7 +60,7 @@ public class LottoController {
     }
 
     private List<LottoNumbers> inputManualLottoNumbers(PurchaseInfo purchaseInfo) {
-        if (purchaseInfo.numberOfManualLotto() < ONE) {
+        if (purchaseInfo.numberOfManualLotto() < MINIMUM_MANUAL_LOTTO_SIZE) {
             return Collections.emptyList();
         }
 

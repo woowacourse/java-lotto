@@ -20,7 +20,7 @@ class AutoLottoMachineTest {
         Money purchaseMoney = new Money(5000);
 
         int numberOfTickets = autoLottoMachine.calculateNumberOfTickets(purchaseMoney);
-        LottoTickets tickets = autoLottoMachine.createTicketsByMoney(numberOfTickets);
+        LottoTickets tickets = autoLottoMachine.createTickets(numberOfTickets);
 
         assertThat(tickets.size()).isEqualTo(expectedNumberOfTickets);
     }

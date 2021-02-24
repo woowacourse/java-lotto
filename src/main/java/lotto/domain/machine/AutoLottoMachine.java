@@ -1,25 +1,47 @@
 package lotto.domain.machine;
 
 import lotto.domain.Money;
+import lotto.domain.number.LottoNumber;
 import lotto.domain.number.LottoNumbers;
-import lotto.domain.ticket.AutoLottoTicketFactory;
 import lotto.domain.ticket.LottoTickets;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class AutoLottoMachine extends LottoMachine {
-    private final AutoLottoTicketFactory lottoTicketFactory = new AutoLottoTicketFactory();
+public class AutoLottoMachine {
+    public static final int FROM_INDEX = 0;
+    public static final int TO_INDEX = 6;
+
+    private static final List<Integer> lottoNumbers = IntStream
+            .rangeClosed(LottoNumber.MIN_RANGE, LottoNumber.MAX_RANGE)
+            .boxed()
+            .collect(Collectors.toList());
+
+    private final LottoMachine lottoMachine;
 
     public AutoLottoMachine(Money lottoPrice) {
-        super(lottoPrice);
+        this.lottoMachine = new LottoMachine(lottoPrice);
     }
 
-    @Override
-    public LottoTickets createTickets(int numberOfTickets, List<LottoNumbers> lottoNumbersBundle) {
+    public LottoTickets createTickets(int numberOfTickets) {
         return IntStream.range(0, numberOfTickets)
-                .mapToObj(i -> lottoTicketFactory.createLottoTicket())
-                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoTickets::new));
+                .mapToObj(i -> new LottoNumbers(shuffleNumbers()))
+                .collect(Collectors.collectingAndThen(Collectors.toList()
+                        , lottoNumbersBundle -> lottoMachine.createTickets(numberOfTickets, lottoNumbersBundle)));
+    }
+
+    private List<Integer> shuffleNumbers() {
+        Collections.shuffle(lottoNumbers);
+        return lottoNumbers.subList(FROM_INDEX, TO_INDEX);
+    }
+
+    public int calculateNumberOfTickets(Money lottoPurchaseMoney) {
+        return lottoMachine.calculateNumberOfTickets(lottoPurchaseMoney);
+    }
+
+    public Money getLottoPrice() {
+        return lottoMachine.getLottoPrice();
     }
 }

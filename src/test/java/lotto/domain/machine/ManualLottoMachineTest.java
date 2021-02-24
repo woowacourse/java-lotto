@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ManualLottoMachineTest {
-    private LottoMachine manualLottoMachine = new ManualLottoMachine(new Money(1000));
+    private ManualLottoMachine manualLottoMachine = new ManualLottoMachine(new Money(1000));
     private List<LottoNumbers> lottoNumbersBundle;
     private int expectedSize;
 
@@ -38,7 +38,7 @@ class ManualLottoMachineTest {
     @DisplayName("수동 로또가 생성되는지 확인")
     @Test
     void createTicketsByMoneyTest() {
-        LottoTickets lottoTickets = manualLottoMachine.createTicketsByMoney(expectedSize, lottoNumbersBundle);
+        LottoTickets lottoTickets = manualLottoMachine.createTickets(expectedSize, lottoNumbersBundle);
 
         assertThat(lottoTickets.size()).isEqualTo(expectedSize);
         assertThat(lottoTickets.list().get(0)).isEqualTo(LottoTicket.createLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)));
@@ -47,7 +47,7 @@ class ManualLottoMachineTest {
     @DisplayName("수동 로또 개수 예외처리 확인")
     @Test
     void 수동_로또_개수_예외처리() {
-        assertThatThrownBy(() -> manualLottoMachine.createTicketsByMoney(expectedSize - 1, lottoNumbersBundle)).
+        assertThatThrownBy(() -> manualLottoMachine.createTickets(expectedSize - 1, lottoNumbersBundle)).
                 isInstanceOf(IllegalArgumentException.class);
     }
 }
