@@ -27,8 +27,7 @@ public class LottoMachine {
     }
 
     private List<LottoBall> getRandomLottoBalls() {
-        LottoBallFactory instance = LottoBallFactory.getInstance();
-        List<LottoBall> lottoBalls = instance.getLottoBalls();
+        List<LottoBall> lottoBalls = LottoBallFactory.getLottoBalls();
         Collections.shuffle(lottoBalls);
         return lottoBalls.stream()
                 .limit(LOTTO_BALL_SIZE)
