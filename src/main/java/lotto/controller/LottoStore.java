@@ -1,10 +1,7 @@
 package lotto.controller;
 
-import java.util.EnumMap;
-import java.util.Map.Entry;
 import java.util.Scanner;
 import lotto.domain.LottoAnnouncement;
-import lotto.domain.LottoRank;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
