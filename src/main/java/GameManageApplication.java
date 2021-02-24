@@ -43,9 +43,7 @@ public class GameManageApplication {
     }
 
     private WinningLotto getWinningLotto() {
-        lottoGameScreen.confirmWinningLotto();
         Set<Integer> winningNumbers = InputUtil.inputWinningNumbers();
-        lottoGameScreen.confirmBonusLotto();
         int bonusNumber = InputUtil.inputBonusNumber();
         return new WinningLotto(winningNumbers, bonusNumber);
     }
