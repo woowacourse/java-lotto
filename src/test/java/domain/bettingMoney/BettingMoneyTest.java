@@ -13,7 +13,7 @@ class BettingMoneyTest {
     @ParameterizedTest
     @ValueSource(ints = {10000, 14000})
     void bettingMoneyGenerateTest(int value) {
-        assertThatCode(() -> BettingMoney.of(value))
+        assertThatCode(() -> new BettingMoney(value))
                 .doesNotThrowAnyException();
     }
 
@@ -21,7 +21,7 @@ class BettingMoneyTest {
     @ParameterizedTest
     @ValueSource(ints = {-1, 0, 900})
     void bettingMoneyNotGuaranteedErrorTest(int value) {
-        assertThatThrownBy(() -> BettingMoney.of(value))
+        assertThatThrownBy(() -> new BettingMoney(value))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

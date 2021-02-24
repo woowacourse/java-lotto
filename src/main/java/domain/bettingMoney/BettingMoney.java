@@ -9,15 +9,11 @@ public class BettingMoney {
 
     private final int bettingMoney;
 
-    private BettingMoney(final int bettingMoney) {
+    public BettingMoney(final int bettingMoney) {
         validateMoney(bettingMoney);
         this.bettingMoney = bettingMoney;
     }
-
-    public static BettingMoney of(final int bettingMoney) {
-        return new BettingMoney(bettingMoney);
-    }
-
+    
     public int getTicketCount() {
         return this.bettingMoney / TICKET_PRICE;
     }

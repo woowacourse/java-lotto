@@ -34,7 +34,7 @@ public class GameManageApplication {
 
     private BettingMoney getBettingMoney() {
         int input = InputUtil.inputBettingMoney();
-        return BettingMoney.of(input);
+        return new BettingMoney(input);
     }
 
     private TicketCount getTicketCount(final BettingMoney bettingMoney) {

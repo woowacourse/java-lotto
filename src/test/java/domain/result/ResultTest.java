@@ -126,7 +126,7 @@ class ResultTest {
         LottoTickets lottoTickets = new LottoTickets(Arrays.asList(new LottoTicket(new LottoBalls(lottoBalls)), new LottoTicket(new LottoBalls(lottoBalls2))));
         Result result = new Result(lottoTickets, winningLotto);
 
-        BigDecimal earningsRate = result.findEarningsRate(BettingMoney.of(2000));
+        BigDecimal earningsRate = result.findEarningsRate(new BettingMoney(2000));
         System.out.println("earningsRate.doubleValue() = " + earningsRate.doubleValue());
         assertThat(earningsRate).isEqualTo(BigDecimal.valueOf(5));
     }
