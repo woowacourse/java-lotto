@@ -1,5 +1,8 @@
-package lotto.domain;
+package lotto.domain.result;
 
+import lotto.domain.Lotto;
+import lotto.domain.LottoFactory;
+import lotto.domain.LottoNumber;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,11 +18,12 @@ public class WinningLottoTest {
     @DisplayName("당첨 로또 생성 테스트")
     void init() {
         // given
-        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        final List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Lotto lotto = LottoFactory.fromNumbers(numbers);
         LottoNumber bonusNumber = LottoNumber.from(45);
         
         // when
-        ThrowingCallable throwingCallable = () -> WinningLotto.of(numbers, bonusNumber);
+        ThrowingCallable throwingCallable = () -> WinningLotto.of(lotto, bonusNumber);
         
         // then
         assertThatCode(throwingCallable).doesNotThrowAnyException();

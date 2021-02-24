@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.result.WinningLotto;
+
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -25,33 +27,28 @@ public enum Rank {
     
     public static Rank searchRank(WinningLotto winningLotto, Lotto lotto) {
         long matchCount = winningLotto.countMatchingNumber(lotto);
-        
         boolean hasBonusNumber = winningLotto.checkThatLottoHasBonusNumber(lotto);
-        if (hasBonusNumber) {
-            matchCount++;
-        }
-        
         return Rank.searchRank(matchCount, hasBonusNumber);
     }
     
     private static Rank searchRank(long matchCount, boolean hasBonusNumber) {
         return Arrays.stream(Rank.values())
-                     .filter(rank -> hasSameMatchCount(rank, matchCount))
+                     .filter(rank -> isSameMatchCount(rank, matchCount))
                      .map(rank -> mapIfMatchCountIsFive(rank, hasBonusNumber))
                      .findFirst()
                      .orElse(Rank.NOTHING);
     }
     
-    private static boolean hasSameMatchCount(Rank rank, long matchCount) {
+    private static boolean isSameMatchCount(Rank rank, long matchCount) {
         return rank.matchCount == matchCount;
     }
     
     private static Rank mapIfMatchCountIsFive(Rank rank, boolean hasBonusNumber) {
-        if (hasSameMatchCount(Rank.FIRST, rank.matchCount) && hasBonusNumber) {
+        if (isSameMatchCount(Rank.SECOND, rank.matchCount) && hasBonusNumber) {
             return SECOND;
         }
         
-        if (hasSameMatchCount(Rank.SECOND, rank.matchCount)) {
+        if (isSameMatchCount(Rank.THIRD, rank.matchCount)) {
             return THIRD;
         }
         

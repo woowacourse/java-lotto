@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.generator.FixedNumberGenerator;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -7,7 +8,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -17,7 +19,7 @@ public class LottoTest {
     @DisplayName("로또 생성 테스트")
     void init() {
         // given
-        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Set<Integer> numbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         
         // when
         ThrowingCallable throwingCallable = () -> Lotto.fromGenerator(new FixedNumberGenerator(numbers));
@@ -30,7 +32,7 @@ public class LottoTest {
     @DisplayName("만약 로또 길이가 주어진 조건보다 짧다면 예외 발생")
     void init_NotMatchLength_ExceptionThrown() {
         // given
-        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+        Set<Integer> numbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5));
         
         // when
         ThrowingCallable throwingCallable = () -> Lotto.fromGenerator(new FixedNumberGenerator(numbers));
@@ -43,7 +45,7 @@ public class LottoTest {
     @CsvSource(value = {"1:true", "7:false"}, delimiter = ':')
     void containsTest(int lottoNum, boolean expected) {
         // given
-        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Set<Integer> numbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         Lotto lotto = Lotto.fromGenerator(new FixedNumberGenerator(numbers));
         LottoNumber lottoNumber = LottoNumber.from(lottoNum);
         
@@ -58,10 +60,10 @@ public class LottoTest {
     @DisplayName("두 로또 사이의 매칭되는 로또 숫자가 몇 개인지 확인")
     void countMatchingNumberTest() {
         // given
-        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Set<Integer> numbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         Lotto lotto = Lotto.fromGenerator(new FixedNumberGenerator(numbers));
         
-        List<Integer> numberGroup = Arrays.asList(1, 2, 3, 4, 5, 7);
+        Set<Integer> numberGroup = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 7));
         Lotto lottoGroup = Lotto.fromGenerator(new FixedNumberGenerator(numberGroup));
         
         // when

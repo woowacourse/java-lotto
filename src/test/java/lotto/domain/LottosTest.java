@@ -8,17 +8,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottosTest {
     
     @Test
-    @DisplayName("구매 로또 생성 테스트")
+    @DisplayName("자동 로또 생성 테스트")
     void init() {
         // given
-        String paymentAmount = "1000";
-        int purchaseCount = 1;
+        PaymentAmount paymentAmount = PaymentAmount.from("1000");
+        PurchaseCount purchaseCount = PurchaseCount.of(paymentAmount, "0");
         
         // when
-        Lottos lottos = LottoFactory.makeLottos(PaymentAmount.from(paymentAmount));
-        
+        Lottos lottos = LottosFactory.makeLottos(purchaseCount);
         
         // then
-        assertThat(lottos.getLottos().size()).isEqualTo(purchaseCount);
+        assertThat(lottos.getLottos().size()).isEqualTo(1);
     }
 }
