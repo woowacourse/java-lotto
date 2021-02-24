@@ -10,15 +10,6 @@ class AutomaticLottoGeneratorTest {
 	@Test
 	void createLotto() {
 		AutomaticLottoGenerator automaticLottoGenerator = new AutomaticLottoGenerator();
-		assertThat(isLottoCreationSuccessful(automaticLottoGenerator)).isTrue();
-	}
-
-	private boolean isLottoCreationSuccessful(AutomaticLottoGenerator automaticLottoGenerator) {
-		try {
-			automaticLottoGenerator.createLotto();
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
+		assertThat(automaticLottoGenerator.createLotto()).isNotNull();
 	}
 }
