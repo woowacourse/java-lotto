@@ -109,7 +109,7 @@ public class LottoResultStatisticsTest {
     public void calculateEarningTest() {
         Money money = new Money("3000");
 
-        int earningPercentage =
+        long earningPercentage =
                 LottoResultStatistics.calculateResultStatistics(lottoTickets, lottoWinner).calculateEarning(money);
 
         assertThat(earningPercentage).isEqualTo(67716566);
