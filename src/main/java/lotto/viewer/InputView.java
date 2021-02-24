@@ -47,7 +47,6 @@ public class InputView {
         return bonusNumber;
     }
 
-
     public LottoManualGenerator lottoManualGenerator(Piece manualPiece) {
         System.out.println(MANUAL_LOTTO_INPUT_MESSAGE);
         List<List<Integer>> inputWinningNumbers = new ArrayList<>();

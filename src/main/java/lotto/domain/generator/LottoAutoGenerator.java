@@ -7,16 +7,14 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.CopyOnWriteArrayList;
 import lotto.domain.Lotto;
+import lotto.domain.Number;
 
 public class LottoAutoGenerator implements LottoGenerator {
 
     private static final List<Integer> candidateNumbers = new ArrayList<>();
 
-    public static final int LOTTO_START_NUMBER = 1;
-    public static final int LOTTO_END_NUMBER = 45;
-
     static {
-        for (int number = LOTTO_START_NUMBER; number <= LOTTO_END_NUMBER; number++) {
+        for (int number = Number.LOWER_LIMIT; number <= Number.UPPER_LIMIT; number++) {
             candidateNumbers.add(number);
         }
     }
