@@ -15,15 +15,15 @@ import java.util.List;
 public class LottoMainController {
     public void run() {
         final LottoMoney lottoMoney = inputLottoMoney();
-        final TicketQuantity ticketQuantity = new TicketQuantity(lottoMoney, InputView.receiveManualTicketQuantity());
-        final LottoTickets lottoTickets = buyLottoTickets(lottoMoney);
-        printLottoQuantity(lottoMoney);
-        printLottoTickets(lottoTickets);
+        final int manualLottoQuantity = InputView.receiveManualTicketQuantity();
+        final List<List<Integer>> expectedManualNumbers = InputView.receiveExpectedManualNumbers(manualLottoQuantity);
+
+        final TicketQuantity ticketQuantity = new TicketQuantity(lottoMoney, manualLottoQuantity);
+        final LottoTickets lottoTickets = buyLottoTickets(ticketQuantity, expectedManualNumbers);
+        printPurchaseInformation(ticketQuantity, lottoTickets);
 
         final WinningNumbers winningNumbers = inputWinningNumbers();
-        final WinningStatics winningStatics = calculateWinningStatics(lottoTickets, winningNumbers);
-        printWinningStatics(winningStatics);
-        printProfitRate(winningStatics, lottoMoney);
+        printWinningStatics(lottoTickets, winningNumbers, lottoMoney);
     }
 
     private LottoMoney inputLottoMoney() {
@@ -31,12 +31,13 @@ public class LottoMainController {
         return new LottoMoney(input);
     }
 
-    private LottoTickets buyLottoTickets(final LottoMoney lottoMoney) {
-        return new LottoTickets(lottoMoney);
+    private LottoTickets buyLottoTickets(final TicketQuantity ticketQuantity, final List<List<Integer>> expectedManualNumbers) {
+        return new LottoTickets(ticketQuantity, expectedManualNumbers);
     }
 
-    private void printLottoQuantity(final LottoMoney lottoMoney) {
-        OutputView.printLottoQuantity(lottoMoney.toTicketQuantity());
+    private void printPurchaseInformation(final TicketQuantity ticketQuantity, final LottoTickets lottoTickets) {
+        OutputView.printLottoQuantity(ticketQuantity.getManualAmount(), ticketQuantity.getAutoAmount());
+        printLottoTickets(lottoTickets);
     }
 
     private void printLottoTickets(final LottoTickets lottoTickets) {
@@ -51,18 +52,13 @@ public class LottoMainController {
         return new WinningNumbers(winningNumbers, bonusNumber);
     }
 
-    private WinningStatics calculateWinningStatics(final LottoTickets lottoTickets,
-                                                   final WinningNumbers winningNumbers) {
+    private void printWinningStatics(final LottoTickets lottoTickets,
+                                     final WinningNumbers winningNumbers, final LottoMoney lottoMoney) {
 
-        return lottoTickets.calculateWinningStatics(winningNumbers);
-    }
+        final WinningStatics winningStatics = lottoTickets.calculateWinningStatics(winningNumbers);
 
-    private void printWinningStatics(final WinningStatics winningStatics) {
         OutputView.printWinningStaticsTitle();
         OutputView.printWinningStatics(WinningStaticsDto.of(winningStatics));
-    }
-
-    private void printProfitRate(final WinningStatics winningStatics, final LottoMoney lottoMoney) {
         OutputView.printProfitRate(winningStatics.calculateProfitRate(lottoMoney));
     }
 }
