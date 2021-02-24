@@ -16,6 +16,7 @@ public class InputView {
     private static final String ASK_BUY_MANUAL_NUMBERS = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String ASK_WINNER_LOTTO_TICKET = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String ASK_WINNER_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
+    private static final String NEW_LINE = System.lineSeparator();
 
     private static final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -25,11 +26,13 @@ public class InputView {
     }
 
     public static String getManualCountInput() {
+        System.out.print(NEW_LINE);
         System.out.println(ASK_BUY_MANUAL_LOTTO);
         return getUserInput();
     }
 
     public static List<String> getManualNumbersInput(ManualCount manualCount) {
+        System.out.print(NEW_LINE);
         System.out.println(ASK_BUY_MANUAL_NUMBERS);
         return IntStream.range(0, manualCount.getValue())
                 .mapToObj(i -> getUserInput())

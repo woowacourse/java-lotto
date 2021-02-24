@@ -52,7 +52,7 @@ public class LottoController {
     private LottoTickets initLottoTickets(Money money, ManualCount manualCount) {
         try {
             LottoTickets lottoTickets = LottoTicketsService.createLottoTickets(money, InputView.getManualNumbersInput(manualCount));
-            OutputView.printTickets(lottoTickets, money.getLottoCount());
+            OutputView.printTickets(lottoTickets, money.getLottoCount(), manualCount);
             return lottoTickets;
         } catch (NullPointerException | IllegalArgumentException e) {
             OutputView.printErrorMessage(e);
