@@ -8,6 +8,10 @@ import lotto.exception.LottoAnnouncementException;
 
 public class LottoAnnouncement {
 
+    public static final String DIFFERENT_POSESSION_MESSAGE = "로또 번호의 갯수가 기준과 다릅니다.";
+    public static final String OVERLAPPED_WINNER_MESSAGE = "당첨 번호가 중복되었습니다.";
+    public static final String OVERLAPPED_BONUS_MESSAGE = "보너스 번호가 중복되었습니다.";
+    public static final String EXCESS_NUMBER_MESSAGE = "범위를 벗어난 숫자입니다.";
     private static final int UPPER_LIMIT = 45;
     private static final int LOWER_LIMIT = 1;
 
@@ -32,7 +36,7 @@ public class LottoAnnouncement {
         Set<Integer> removedOverlappedWinners = new HashSet<>(winners);
 
         if (removedOverlappedWinners.size() != winners.size()) {
-            throw new LottoAnnouncementException("당첨 번호가 중복되었습니다.");
+            throw new LottoAnnouncementException(OVERLAPPED_WINNER_MESSAGE);
         }
     }
 
@@ -42,13 +46,13 @@ public class LottoAnnouncement {
             .count();
 
         if (overlappedCount != 0) {
-            throw new LottoAnnouncementException("보너스 번호가 중복되었습니다.");
+            throw new LottoAnnouncementException(OVERLAPPED_BONUS_MESSAGE);
         }
     }
 
     private void checkProperSize(List<Integer> winners) {
         if (winners.size() != Lotto.LOTTO_POSSESSION_NUMBER) {
-            throw new LottoAnnouncementException("로또 번호의 갯수가 기준과 다릅니다.");
+            throw new LottoAnnouncementException(DIFFERENT_POSESSION_MESSAGE);
         }
     }
 
@@ -56,7 +60,7 @@ public class LottoAnnouncement {
         boolean criteria = (targetNumber < LOWER_LIMIT) | (targetNumber > UPPER_LIMIT);
 
         if (criteria) {
-            throw new LottoAnnouncementException("범위를 벗어난 숫자입니다.");
+            throw new LottoAnnouncementException(EXCESS_NUMBER_MESSAGE);
         }
     }
 

@@ -11,10 +11,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class LottoAnnouncementTest {
 
-    private static final String OVERLAPPED_WINNER_MESSAGE = "당첨 번호가 중복되었습니다.";
-    private static final String OVERLAPPED_BONUS_MESSAGE = "보너스 번호가 중복되었습니다.";
-    private static final String EXCESS_NUMBER_MESSAGE = "범위를 벗어난 숫자입니다.";
-
     @Test
     @DisplayName("로또 당첨 번 발표 성공")
     void successAnnouncement() {
@@ -33,7 +29,7 @@ public class LottoAnnouncementTest {
         int announcedBonusNumber = 7;
         assertThatThrownBy( ()-> new LottoAnnouncement(announcedNumbers, announcedBonusNumber))
             .isInstanceOf(LottoAnnouncementException.class)
-            .hasMessageContaining(OVERLAPPED_WINNER_MESSAGE);
+            .hasMessageContaining(LottoAnnouncement.OVERLAPPED_WINNER_MESSAGE);
     }
 
     @Test
@@ -43,7 +39,7 @@ public class LottoAnnouncementTest {
         int announcedBonusNumber = 6;
         assertThatThrownBy( () -> new LottoAnnouncement(announcedNumbers, announcedBonusNumber))
             .isInstanceOf(LottoAnnouncementException.class)
-            .hasMessageContaining(OVERLAPPED_BONUS_MESSAGE);
+            .hasMessageContaining(LottoAnnouncement.OVERLAPPED_BONUS_MESSAGE);
     }
 
     @Test
@@ -53,6 +49,6 @@ public class LottoAnnouncementTest {
         int announcedBonusNumber = 46;
         assertThatThrownBy( () -> new LottoAnnouncement(announcedNumbers, announcedBonusNumber))
             .isInstanceOf(LottoAnnouncementException.class)
-            .hasMessageContaining(EXCESS_NUMBER_MESSAGE);
+            .hasMessageContaining(LottoAnnouncement.EXCESS_NUMBER_MESSAGE);
     }
 }

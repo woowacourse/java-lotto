@@ -4,6 +4,8 @@ import lotto.controller.LottoStore;
 import lotto.exception.LottoPiecesException;
 
 public class Money {
+
+    public static final String NOT_ENOUGH_MONEY = "로또를 사기에 금액이 모자랍니다.";
     private final int money;
 
     public Money(int money) {
@@ -17,7 +19,7 @@ public class Money {
 
     private void checkEnoughMoney(int possessedMoney) {
         if (possessedMoney < LottoStore.LOTTO_PRICE) {
-            throw new LottoPiecesException("로또를 사기에 금액이 모자랍니다.");
+            throw new LottoPiecesException(NOT_ENOUGH_MONEY);
         }
     }
 }

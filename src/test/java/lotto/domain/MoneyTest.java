@@ -23,6 +23,7 @@ public class MoneyTest {
     void lackMoneyToLottoPieces() {
         int sampleMoney = 100;
         assertThatThrownBy(() -> new Money(sampleMoney))
-            .isInstanceOf(LottoPiecesException.class);
+            .isInstanceOf(LottoPiecesException.class)
+            .hasMessageContaining(Money.NOT_ENOUGH_MONEY);
     }
 }
