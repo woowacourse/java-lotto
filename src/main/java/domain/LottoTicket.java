@@ -15,7 +15,7 @@ public class LottoTicket {
     public final static Money PRICE = new Money(1000);
     private static final int TOTAL_LOTTO_NUMBER_COUNT = 6;
     private static final String ERROR_INVALID_DUPLICATION_NUMBER = "[ERROR] 로또 번호는 중복되어선 안됩니다.";
-    private static final String ERROR_INVALID_NUMBER_COUNT = "[ERROR] 숫자는 6개를 입력해주세요.";
+    private static final String ERROR_INVALID_NUMBER_COUNT = "[ERROR] 6개의 번호를 입력해주세요. 쉼표로 구분하지 않으면 제대로 인식하지 않습니다.";
 
     private final List<LottoNumber> lottoNumbers;
 
@@ -48,10 +48,11 @@ public class LottoTicket {
         return true;
     }
 
-    private static void isValidNumberCountOrThrow(List<String> lottoNumbers) {
+    private static boolean isValidNumberCountOrThrow(List<String> lottoNumbers) {
         if (lottoNumbers.size() != TOTAL_LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(ERROR_INVALID_NUMBER_COUNT);
         }
+        return true;
     }
 
     public boolean contains(LottoNumber lottoNumber) {
