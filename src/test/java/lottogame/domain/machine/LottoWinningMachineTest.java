@@ -3,6 +3,7 @@ package lottogame.domain.machine;
 import lottogame.domain.number.LottoNumber;
 import lottogame.domain.number.LottoNumbers;
 import lottogame.domain.ticket.LottoAutoTicket;
+import lottogame.domain.ticket.LottoManualTicket;
 import lottogame.domain.ticket.LottoTicket;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -20,10 +21,10 @@ public class LottoWinningMachineTest {
     @BeforeEach
     void setUp() {
         List<LottoNumber> lottoNumberGroup = new ArrayList<>();
-        LottoNumber bonusNumber = new LottoNumber(7);
+        LottoNumber bonusNumber = LottoNumber.of(7);
 
         for (int i = 1; i <= 6; ++i) {
-            lottoNumberGroup.add(new LottoNumber(i));
+            lottoNumberGroup.add(LottoNumber.of(i));
         }
 
         LottoNumbers winningNumbers = new LottoNumbers(lottoNumberGroup);
@@ -38,7 +39,7 @@ public class LottoWinningMachineTest {
             public List<LottoNumber> getLottoNumbers() {
                 List<LottoNumber> lottoNumberGroup = new ArrayList<>();
                 for (int i = 1; i <= 6; ++i) {
-                    lottoNumberGroup.add(new LottoNumber(i));
+                    lottoNumberGroup.add(LottoNumber.of(i));
                 }
                 LottoNumbers drawingNumbers = new LottoNumbers(lottoNumberGroup);
                 return drawingNumbers.toList();
@@ -52,19 +53,14 @@ public class LottoWinningMachineTest {
     @Test
     @DisplayName("보너스 번호가 일치할 경우 통과한다")
     void checkBonusLottoNumber() {
-        LottoTicket lottoTicket = new LottoAutoTicket() {
-            @Override
-            public List<LottoNumber> getLottoNumbers() {
-                List<LottoNumber> lottoNumberGroup = new ArrayList<>();
 
-                for (int i = 1; i <= 5; ++i) {
-                    lottoNumberGroup.add(new LottoNumber(i + ""));
-                }
-                lottoNumberGroup.add(new LottoNumber("7"));
-                LottoNumbers drawingNumbers = new LottoNumbers(lottoNumberGroup);
-                return drawingNumbers.toList();
-            }
-        };
+        List<LottoNumber> lottoNumberGroup = new ArrayList<>();
+        for (int i = 2; i <= 7; ++i) {
+            lottoNumberGroup.add(LottoNumber.of(i));
+        }
+
+        LottoNumbers numbers = new LottoNumbers(lottoNumberGroup);
+        LottoTicket lottoTicket = new LottoManualTicket(numbers);
 
         assertThat(lottoWinningMachine.isMatchBonusNumber(lottoTicket)).isTrue();
     }

@@ -13,13 +13,14 @@ public class LottoAutoTicket implements LottoTicket {
 
     public LottoAutoTicket() {
         List<LottoNumber> lottoNumberGroup = new ArrayList<>();
-        for (int number : getShuffledNumbers(new ArrayList<>())) {
-            lottoNumberGroup.add(new LottoNumber(number));
+        for (int number : getShuffledNumbers()) {
+            lottoNumberGroup.add(LottoNumber.of(number));
         }
         lottoNumbers = new LottoNumbers(lottoNumberGroup);
     }
 
-    private List<Integer> getShuffledNumbers(final List<Integer> numbers) {
+    private List<Integer> getShuffledNumbers() {
+        List<Integer> numbers = new ArrayList<>();
         Collections.shuffle(initNumbers(numbers));
 
         List<Integer> shuffledNumbers = numbers.subList(0, COUNT_LOTTO_NUMBER);

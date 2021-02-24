@@ -6,7 +6,6 @@ import lottogame.utils.LottoGameUtils;
 
 public class LottoWinningDrawingMachine {
 
-    public static final String DELIMITER = ",";
     private LottoNumbers lottoNumbers;
 
     public LottoNumbers drawing(final String drawingNumbers) {
@@ -15,11 +14,11 @@ public class LottoWinningDrawingMachine {
 
     public LottoNumber bonusDrawing(final String drawingNumber) {
         validBonusNumber(drawingNumber);
-        return new LottoNumber(drawingNumber);
+        return LottoNumber.of(drawingNumber);
     }
 
     private void validBonusNumber(final String bonusNumber) {
-        if (lottoNumbers.contains(new LottoNumber(bonusNumber))) {
+        if (lottoNumbers.contains(LottoNumber.of(bonusNumber))) {
             throw new IllegalArgumentException("보너스 번호가 당첨번호와 중복됩니다.");
         }
     }

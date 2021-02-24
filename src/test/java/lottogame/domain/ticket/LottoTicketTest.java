@@ -39,7 +39,7 @@ public class LottoTicketTest {
 
         List<LottoNumber> lottoNumberGroup = new ArrayList<>();
         for (int i = 1; i <= 6; ++i) {
-            lottoNumberGroup.add(new LottoNumber(i));
+            lottoNumberGroup.add(LottoNumber.of(i));
         }
         LottoManualTicket lottoManualTicket = new LottoManualTicket(new LottoNumbers(lottoNumberGroup));
         assertThat(lottoManualTicket.isAutoTicket()).isFalse();

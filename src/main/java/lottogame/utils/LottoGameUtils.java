@@ -14,7 +14,7 @@ public class LottoGameUtils {
         final List<LottoNumber> lottoNumberGroup = new ArrayList<>();
 
         for (String number : lottoNumbers.split(DELIMITER)) {
-            lottoNumberGroup.add(new LottoNumber(number));
+            lottoNumberGroup.add(LottoNumber.of(number));
         }
         return new LottoNumbers(lottoNumberGroup);
     }

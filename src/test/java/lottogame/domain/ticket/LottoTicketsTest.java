@@ -29,7 +29,7 @@ public class LottoTicketsTest {
         LottoTicket autoTicket = new LottoAutoTicket();
         List<LottoNumber> lottoNumberGroup = new ArrayList<>();
         for (int i = 1; i <= 6; ++i) {
-            lottoNumberGroup.add(new LottoNumber(i));
+            lottoNumberGroup.add(LottoNumber.of(i));
         }
         LottoManualTicket manualTicket = new LottoManualTicket(new LottoNumbers(lottoNumberGroup));
         LottoTickets lottoTickets = new LottoTickets();
@@ -45,7 +45,7 @@ public class LottoTicketsTest {
     void AllLottoTicketsCount() {
         List<LottoNumber> lottoNumberGroup = new ArrayList<>();
         for (int i = 1; i <= 6; ++i) {
-            lottoNumberGroup.add(new LottoNumber(i));
+            lottoNumberGroup.add(LottoNumber.of(i));
         }
         LottoManualTicket manualTicket = new LottoManualTicket(new LottoNumbers(lottoNumberGroup));
         LottoTickets lottoTickets = new LottoTickets();
