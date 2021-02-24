@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.controller.LottoController;
-import lotto.domain.machine.AutoLottoMachine;
+import lotto.domain.Money;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -16,6 +16,6 @@ public class Application {
 
     private static LottoController createLottoController() {
         InputView inputView = new InputView(new Scanner(System.in));
-        return new LottoController(inputView, new OutputView(), new AutoLottoMachine());
+        return new LottoController(inputView, new OutputView(), new Money(1000));
     }
 }

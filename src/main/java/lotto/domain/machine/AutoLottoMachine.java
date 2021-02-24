@@ -1,47 +1,47 @@
 package lotto.domain.machine;
 
-import lotto.domain.ticket.AutoLottoTicketFactory;
-import lotto.domain.ticket.LottoTicketFactory;
+import lotto.domain.Money;
+import lotto.domain.number.LottoNumber;
+import lotto.domain.number.LottoNumbers;
 import lotto.domain.ticket.LottoTickets;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class AutoLottoMachine implements LottoMachine {
-    public static final int LOTTO_PRICE = 1000;
+public class AutoLottoMachine {
+    public static final int FROM_INDEX = 0;
+    public static final int TO_INDEX = 6;
 
-    private static final String INDIVISIBLE_MONEY_ERROR_MSG_FORMAT = "로또는 %d원 단위로 구매해야 있습니다. 입력금액 : %d";
-    private static final String MONEY_MUST_BE_POSITIVE_ERROR_MSG_FORMAT = "금액은 양수여야 합니다. 입력금액 : %d";
+    private static final List<Integer> lottoNumbers = IntStream
+            .rangeClosed(LottoNumber.MIN_RANGE, LottoNumber.MAX_RANGE)
+            .boxed()
+            .collect(Collectors.toList());
 
-    private final LottoTicketFactory lottoTicketFactory = new AutoLottoTicketFactory();
+    private final LottoMachine lottoMachine;
 
-    @Override
+    public AutoLottoMachine(Money lottoPrice) {
+        this.lottoMachine = new LottoMachine(lottoPrice);
+    }
+
     public LottoTickets createTickets(int numberOfTickets) {
         return IntStream.range(0, numberOfTickets)
-                .mapToObj(i -> lottoTicketFactory.createLottoTicket())
-                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoTickets::new));
+                .mapToObj(i -> new LottoNumbers(shuffleNumbers()))
+                .collect(Collectors.collectingAndThen(Collectors.toList()
+                        , lottoNumbersBundle -> lottoMachine.createTickets(numberOfTickets, lottoNumbersBundle)));
     }
 
-    @Override
-    public LottoTickets createTicketsByMoney(int purchaseMoney) {
-        validateNegativeDigit(purchaseMoney);
-        validateNoExtraMoney(purchaseMoney);
-
-        int numberOfTickets = purchaseMoney / LOTTO_PRICE;
-        return createTickets(numberOfTickets);
+    private List<Integer> shuffleNumbers() {
+        Collections.shuffle(lottoNumbers);
+        return lottoNumbers.subList(FROM_INDEX, TO_INDEX);
     }
 
-    private void validateNoExtraMoney(int purchaseMoney) {
-        if (purchaseMoney % LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException(
-                    String.format(INDIVISIBLE_MONEY_ERROR_MSG_FORMAT, LOTTO_PRICE, purchaseMoney));
-        }
+    public int calculateNumberOfTickets(Money lottoPurchaseMoney) {
+        return lottoMachine.calculateNumberOfTickets(lottoPurchaseMoney);
     }
 
-    private void validateNegativeDigit(int purchaseMoney) {
-        if (purchaseMoney < 0) {
-            throw new IllegalArgumentException(
-                    String.format(MONEY_MUST_BE_POSITIVE_ERROR_MSG_FORMAT, purchaseMoney));
-        }
+    public Money getLottoPrice() {
+        return lottoMachine.getLottoPrice();
     }
 }

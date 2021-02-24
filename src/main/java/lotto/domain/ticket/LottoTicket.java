@@ -1,14 +1,12 @@
 package lotto.domain.ticket;
 
 import lotto.domain.number.LottoNumber;
-import lotto.domain.number.LottoNumberFactory;
+import lotto.domain.number.LottoNumbers;
 
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class LottoTicket {
     public static final int SIZE_OF_LOTTO_NUMBERS = 6;
@@ -16,33 +14,52 @@ public class LottoTicket {
     private static final String NUMBER_SIZE_ERROR_MSG_FORMAT = "로또 번호는 %d개여야 합니다. 현재 개수 : %d";
     private static final String DUPLICATE_ERROR_MSG_FORMAT = "로또 번호가 중복되었습니다.";
 
-    private final List<LottoNumber> lottoNumbers;
+    private final LottoNumbers lottoNumbers;
 
-    public LottoTicket(List<Integer> numbers) {
-        validateLottoNumberCount(numbers);
-        validateDuplicatedLottoNumbers(numbers);
-
-        this.lottoNumbers = numbers.stream().map(LottoNumberFactory::of)
-                .sorted(Comparator.naturalOrder())
-                .collect(Collectors.toList());
+    private LottoTicket(LottoNumbers lottoNumbers) {
+        validateLottoNumberCount(lottoNumbers);
+        validateDuplicatedLottoNumbers(lottoNumbers);
+        lottoNumbers.sort();
+        this.lottoNumbers = lottoNumbers;
     }
 
-    private void validateLottoNumberCount(List<Integer> numbers) {
-        if (numbers.size() != SIZE_OF_LOTTO_NUMBERS) {
+    public static LottoTicket createLottoTicket(LottoNumbers lottoNumbers) {
+        return new LottoTicket(lottoNumbers);
+    }
+
+    public static LottoTicket createLottoTicket(List<Integer> numbers) {
+        return new LottoTicket(new LottoNumbers(numbers));
+    }
+
+    private void validateLottoNumberCount(LottoNumbers lottoNumbers) {
+        if (lottoNumbers.list().size() != SIZE_OF_LOTTO_NUMBERS) {
             throw new IllegalArgumentException(
-                    String.format(NUMBER_SIZE_ERROR_MSG_FORMAT, SIZE_OF_LOTTO_NUMBERS, numbers.size())
+                    String.format(NUMBER_SIZE_ERROR_MSG_FORMAT, SIZE_OF_LOTTO_NUMBERS, lottoNumbers.list().size())
             );
         }
     }
 
-    private void validateDuplicatedLottoNumbers(List<Integer> numbers) {
-        Set<Integer> duplicateCheck = new HashSet<>(numbers);
-        if (numbers.size() != duplicateCheck.size()) {
+    private void validateDuplicatedLottoNumbers(LottoNumbers lottoNumbers) {
+        Set<LottoNumber> duplicateCheck = new HashSet<>(lottoNumbers.list());
+        if (lottoNumbers.list().size() != duplicateCheck.size()) {
             throw new IllegalArgumentException(DUPLICATE_ERROR_MSG_FORMAT);
         }
     }
 
     public List<LottoNumber> list() {
-        return new ArrayList<>(lottoNumbers);
+        return lottoNumbers.list();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof LottoTicket)) return false;
+        LottoTicket that = (LottoTicket) o;
+        return Objects.equals(lottoNumbers, that.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 }

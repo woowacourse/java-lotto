@@ -7,11 +7,10 @@ import lotto.domain.ticket.LottoTickets;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class OutputView {
-    private static final String INFORM_SIZE_MSG = "%d개를 구매했습니다.\n";
+    private static final String INFORM_SIZE_MSG = "수동으로 %d장, 자동으로 %d장을 구매했습니다.\n";
     private static final String WINNING_STATISTICS = "당첨 통계";
     private static final String DASHES = "---------";
     private static final String INFORM_RESULT_AND_BONUS_MSG_FORMAT = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
@@ -21,8 +20,8 @@ public class OutputView {
     private static final String TICKET_PREFIX = "[";
     private static final String TICKET_SUFFIX = "]";
 
-    public void printTicketsSize(int size) {
-        System.out.printf(INFORM_SIZE_MSG, size);
+    public void printTicketsSize(int manualSize, int autoSize) {
+        System.out.printf(INFORM_SIZE_MSG, manualSize, autoSize);
     }
 
     public void printAllLottoTickets(LottoTickets lottoTickets) {
@@ -31,7 +30,7 @@ public class OutputView {
         );
     }
 
-    private String makeEachLottoTicketToString(LottoTicket lottoTicket){
+    private String makeEachLottoTicketToString(LottoTicket lottoTicket) {
         return lottoTicket.list().stream()
                 .map(Object::toString)
                 .collect(Collectors.joining(COMMA, TICKET_PREFIX, TICKET_SUFFIX));
@@ -55,10 +54,8 @@ public class OutputView {
     }
 
     public String makeWinningResultMessage(Prize prize, LottoResult lottoResult) {
-        Optional<Long> winningCount = lottoResult.get(prize);
-
         return String.format(findFormat(prize), prize.getMatchCount(), prize.getPrizeMoney(),
-                winningCount.orElse(0L));
+                lottoResult.get(prize));
     }
 
     public String findFormat(Prize prize) {

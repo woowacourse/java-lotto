@@ -7,12 +7,13 @@ import lotto.domain.number.LottoNumberFactory;
 import java.util.List;
 
 public class WinningLottoTicket {
-    public static final String BONUS_DUPLICATE_WINNING_NUMBER = "보너스 번호가 당첨 번호와 중복되었습니다. 중복된 번호 : %d";
+    private static final String BONUS_DUPLICATE_WINNING_NUMBER = "보너스 번호가 당첨 번호와 중복되었습니다. 중복된 번호 : %d";
+
     private final LottoNumber bonusNumber;
     private final LottoTicket winningLottoTicket;
 
     public WinningLottoTicket(List<Integer> winningNumber, int bonusNumber) {
-        winningLottoTicket = new LottoTicket(winningNumber);
+        winningLottoTicket = LottoTicket.createLottoTicket(winningNumber);
         validateDuplicatedBonusNumber(bonusNumber);
         this.bonusNumber = LottoNumberFactory.of(bonusNumber);
     }
@@ -38,7 +39,7 @@ public class WinningLottoTicket {
         boolean isBonus = lottoTicket.list().stream()
                 .anyMatch(winningNumber -> winningNumber.equals(bonusNumber));
 
-        return getResult((int)winningCount, isBonus);
+        return getResult((int) winningCount, isBonus);
     }
 
     private Prize getResult(int winningCount, boolean isBonus) {

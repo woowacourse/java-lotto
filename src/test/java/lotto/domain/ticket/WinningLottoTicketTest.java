@@ -1,7 +1,6 @@
-package lotto.domain;
+package lotto.domain.ticket;
 
-import lotto.domain.ticket.LottoTicket;
-import lotto.domain.ticket.WinningLottoTicket;
+import lotto.domain.Prize;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,19 +24,19 @@ class WinningLottoTicketTest {
         winningTicket = new WinningLottoTicket(winningNumbers, bonusNumber);
     }
 
-    @DisplayName("당첨 번호 비교 결과 테스트")
+    @DisplayName("당첨 로또를 통한 당첨 여부 확인 테스트")
     @ParameterizedTest
     @CsvSource({"1,2,3,8,9,10,FIFTH", "1,2,3,4,8,9,FOURTH", "1,2,3,4,5,8,THIRD", "1,2,3,4,5,7,SECOND", "1,2,3,4,5,6,FIRST", "7,8,9,10,11,12,LOSING"})
     void 당첨_번호_비교_결과_테스트(int first, int second, int third, int fourth, int fifth, int sixth,
                          Prize expectedResult) {
         List<Integer> lottoNumbers = Arrays.asList(first, second, third, fourth, fifth, sixth);
-        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+        LottoTicket lottoTicket = LottoTicket.createLottoTicket(lottoNumbers);
 
         assertThat(winningTicket.compareNumbers(lottoTicket))
                 .isEqualTo(expectedResult);
     }
 
-    @DisplayName("보너스 숫자와 당첨 숫자 중복 테스트")
+    @DisplayName("예외처리 : 보너스 숫자와 당첨 숫자가 중복될 때")
     @Test
     public void 보너스_숫자와_당첨_숫자_중복_테스트() {
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 7);
