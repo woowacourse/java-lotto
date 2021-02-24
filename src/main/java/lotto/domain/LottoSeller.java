@@ -8,7 +8,7 @@ import java.util.List;
 
 public class LottoSeller {
 
-    private static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1000;
     private static final int MIN_COUNT = 1;
 
     public static LottoGroup sellLotto(final Money money, final int manualCount, List<Lotto> manualLottos) {

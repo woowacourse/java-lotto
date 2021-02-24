@@ -10,6 +10,9 @@ public class Money {
         if (price < 0) {
             throw new LottoPriceException("음수를 입력할 수 없습니다.");
         }
+        if (price < LottoSeller.lottoPrice()) {
+            throw new LottoPriceException("가격이 부족합니다.");
+        }
         this.money = price;
     }
 
