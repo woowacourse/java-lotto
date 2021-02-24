@@ -17,10 +17,10 @@ public class Statistics {
                         value -> 0, (key1, key2) -> key1,
                         LinkedHashMap::new)
                 );
-        checkResult(results);
+        putResult(results);
     }
 
-    private void checkResult(List<Result> results) {
+    private void putResult(List<Result> results) {
         for (Result result : results) {
             statistic.put(result, statistic.get(result) + 1);
         }
