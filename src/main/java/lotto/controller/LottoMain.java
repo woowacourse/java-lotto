@@ -34,16 +34,6 @@ public class LottoMain {
         OutputView.printResult(lottoComparator.getLottoResult(purchasedTickets), userPurchase);
     }
 
-    private static LottoTickets generateManualTicket(LottoGenerator lottoGenerator, List<LottoTicket> manualLottoTickets) {
-        lottoGenerator.setGenerateStrategy(new ManualStrategy(manualLottoTickets));
-        return lottoGenerator.generateTickets();
-    }
-
-    private static LottoTickets generateAutoTicket(LottoGenerator lottoGenerator, UserPurchase userPurchase) {
-        lottoGenerator.setGenerateStrategy(new AutoStrategy(userPurchase.getAutoTicketCount()));
-        return lottoGenerator.generateTickets();
-    }
-
     private static UserPurchase getUserPurchaseInput() {
         try {
             int purchasePrice = InputView.getPurchasePrice();
@@ -52,15 +42,6 @@ public class LottoMain {
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return getUserPurchaseInput();
-        }
-    }
-
-    private static int getManualTicketCountInput() {
-        try {
-            return InputView.getManualTicketCount();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return getManualTicketCountInput();
         }
     }
 
@@ -79,6 +60,25 @@ public class LottoMain {
     private static void addLottoTicketInput(UserPurchase userPurchase, List<LottoTicket> manualLottoTickets) {
         for (int i = 0; i < userPurchase.getManualTicketCount(); i++) {
             manualLottoTickets.add(getLottoTicketInput());
+        }
+    }
+
+    private static LottoTickets generateManualTicket(LottoGenerator lottoGenerator, List<LottoTicket> manualLottoTickets) {
+        lottoGenerator.setGenerateStrategy(new ManualStrategy(manualLottoTickets));
+        return lottoGenerator.generateTickets();
+    }
+
+    private static LottoTickets generateAutoTicket(LottoGenerator lottoGenerator, UserPurchase userPurchase) {
+        lottoGenerator.setGenerateStrategy(new AutoStrategy(userPurchase.getAutoTicketCount()));
+        return lottoGenerator.generateTickets();
+    }
+
+    private static int getManualTicketCountInput() {
+        try {
+            return InputView.getManualTicketCount();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return getManualTicketCountInput();
         }
     }
 
