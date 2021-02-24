@@ -1,11 +1,13 @@
 package domain.bettingMoney;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import java.math.BigDecimal;
+
+import static org.assertj.core.api.Assertions.*;
 
 class BettingMoneyTest {
 
@@ -23,5 +25,50 @@ class BettingMoneyTest {
     void bettingMoneyNotGuaranteedErrorTest(int value) {
         assertThatThrownBy(() -> new BettingMoney(value))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("수익률 반환 값 테스트")
+    @Test
+    void earningsRateValueTest() {
+        //given
+        int money = 2000;
+        long totalPrize = 10000;
+
+        //when
+        BettingMoney bettingMoney = new BettingMoney(money);
+        BigDecimal earningRate = bettingMoney.getEarningRate(totalPrize);
+
+        //then
+        assertThat(earningRate).isEqualTo(new BigDecimal("5.00"));
+    }
+
+    @DisplayName("수익률 반환 테스트")
+    @Test
+    void earningsRateTest() {
+        //given
+        int money = 3000;
+        long totalPrize = 10000;
+
+        //when
+        BettingMoney bettingMoney = new BettingMoney(money);
+        BigDecimal earningRate = bettingMoney.getEarningRate(totalPrize);
+
+        //then
+        assertThat(earningRate).isEqualTo(BigDecimal.valueOf(3.33));
+    }
+
+    @DisplayName("int 최대값 이상의 상금도 정상 계산된다 테스트")
+    @Test
+    void earningsRateMaXIntegerTest() {
+        //given
+        int money = 3000;
+        long totalPrize = 200_000_000_000L;
+
+        //when
+        BettingMoney bettingMoney = new BettingMoney(money);
+        BigDecimal earningRate = bettingMoney.getEarningRate(totalPrize);
+
+        //then
+        assertThat(earningRate.intValue()).isEqualTo(totalPrize / money);
     }
 }

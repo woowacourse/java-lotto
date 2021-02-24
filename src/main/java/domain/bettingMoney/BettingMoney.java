@@ -18,10 +18,10 @@ public class BettingMoney {
         return this.bettingMoney / TICKET_PRICE;
     }
 
-    public BigDecimal getEarningRate(final int prizeMoney) {
+    public BigDecimal getEarningRate(final long prize) {
+        BigDecimal prizeMoney = BigDecimal.valueOf(prize);
         BigDecimal bettingMoney = BigDecimal.valueOf(this.bettingMoney);
-        BigDecimal prize = BigDecimal.valueOf(prizeMoney);
-        return prize.divide(bettingMoney);
+        return prizeMoney.divide(bettingMoney, 2, BigDecimal.ROUND_HALF_UP);
     }
 
     private void validateMoney(final int bettingMoney) {

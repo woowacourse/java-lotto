@@ -7,7 +7,6 @@ import domain.lotto.LottoTicket;
 import util.OutputUtil;
 import view.InputView;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;

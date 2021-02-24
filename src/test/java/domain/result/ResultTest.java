@@ -128,6 +128,6 @@ class ResultTest {
 
         BigDecimal earningsRate = result.findEarningsRate(new BettingMoney(2000));
         System.out.println("earningsRate.doubleValue() = " + earningsRate.doubleValue());
-        assertThat(earningsRate).isEqualTo(BigDecimal.valueOf(5));
+        assertThat(earningsRate).isEqualTo(new BigDecimal("5.00"));
     }
 }

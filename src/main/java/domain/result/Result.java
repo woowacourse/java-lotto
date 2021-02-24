@@ -17,8 +17,8 @@ public class Result {
     }
 
     public BigDecimal findEarningsRate(BettingMoney bettingMoney) {
-        int prize = results.keySet().stream()
-                .mapToInt(this::getTotalPrize)
+        long prize = results.keySet().stream()
+                .mapToLong(this::getTotalPrize)
                 .sum();
         return bettingMoney.getEarningRate(prize);
     }
@@ -37,7 +37,7 @@ public class Result {
         return copy;
     }
 
-    private int getTotalPrize(LottoRank lottoRank) {
-        return lottoRank.getPrize() * results.get(lottoRank);
+    private Long getTotalPrize(LottoRank lottoRank) {
+        return Long.valueOf(lottoRank.getPrize()) * results.get(lottoRank);
     }
 }
