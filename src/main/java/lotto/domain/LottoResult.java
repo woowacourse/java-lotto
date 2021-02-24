@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 public class LottoResult {
@@ -18,8 +17,8 @@ public class LottoResult {
         }
     }
 
-    public Map<Rank, Integer> matchRank(WinningLotto winningLotto, List<Lotto> lottos) {
-        for (Lotto lotto : lottos) {
+    public Map<Rank, Integer> matchRank(WinningLotto winningLotto, LottoGroup lottos) {
+        for (Lotto lotto : lottos.getLottoGroup()) {
             Rank rank = winningLotto.findRank(lotto);
             ranks.computeIfPresent(rank, (key, val) -> val + 1);
         }

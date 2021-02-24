@@ -9,7 +9,7 @@ public class LottoController {
 
     public void run() {
         Money money = payMoney();
-        List<Lotto> lottos = buyLotto(money);
+        LottoGroup lottos = buyLotto(money);
         WinningLotto winningLotto = checkWinningLotto();
         drawLotto(winningLotto, lottos, money);
     }
@@ -19,12 +19,12 @@ public class LottoController {
         return new Money(InputView.requestInput());
     }
 
-    private List<Lotto> buyLotto(Money money) {
+    private LottoGroup buyLotto(Money money) {
         Seller seller = new Seller();
         int count = money.count();
-        List<Lotto> lottos = seller.sell(count);
+        LottoGroup lottos = seller.sell(count);
         OutputView.buyLottoMessage(count);
-        OutputView.printLottos(lottos);
+        OutputView.printLottos(lottos.getLottoGroup());
         return lottos;
     }
 
@@ -40,7 +40,7 @@ public class LottoController {
         );
     }
 
-    public void drawLotto(WinningLotto winningLotto, List<Lotto> lottos, Money money) {
+    public void drawLotto(WinningLotto winningLotto, LottoGroup lottos, Money money) {
         LottoResult lottoResult = new LottoResult();
         Map<Rank, Integer> ranks = lottoResult.matchRank(winningLotto, lottos);
         OutputView.displayResultMessage();

@@ -13,7 +13,7 @@ public class SellerTest {
     void sell() {
         Seller seller = new Seller();
         int count = 3;
-        List<Lotto> lottos = seller.sell(count);
-        assertThat(lottos.size() == count).isTrue();
+        LottoGroup lottos = seller.sell(count);
+        assertThat(lottos.getLottoGroup().size() == count).isTrue();
     }
 }

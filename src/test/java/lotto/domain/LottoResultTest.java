@@ -33,13 +33,13 @@ public class LottoResultTest {
         LottoNumber.of(7)
     )));
     List<Lotto> lottos = new ArrayList<>(Collections.singletonList(lotto));
+    LottoGroup lottoGroup = new LottoGroup(lottos);
 
     @Test
     @DisplayName("등수가 올바르게 카운트되는지 확인")
     void matchRank_count() {
-        Map<Rank, Integer> ranks = lottoResult.matchRank(winningLotto, lottos);
+        Map<Rank, Integer> ranks = lottoResult.matchRank(winningLotto, lottoGroup);
         assertThat(ranks.get(Rank.SECOND)).isEqualTo(1);
-
     }
 
     @Test
