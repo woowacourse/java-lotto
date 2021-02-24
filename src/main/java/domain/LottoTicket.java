@@ -44,19 +44,4 @@ public class LottoTicket {
     public Set<LottoNumber> toSet() {
         return Collections.unmodifiableSet(lottoNumbers);
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-        LottoTicket that = (LottoTicket) o;
-        return Objects.equals(lottoNumbers, that.lottoNumbers);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(lottoNumbers);
-    }
 }
