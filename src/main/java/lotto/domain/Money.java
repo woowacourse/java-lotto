@@ -32,13 +32,13 @@ public class Money {
 	}
 
 	public void validateAffordabilityOf(LottoQuantity lottoQuantity) {
-		if (!isAffordableToBuy(lottoQuantity)) {
+		if (isNotAffordableToBuy(lottoQuantity)) {
 			throw new IllegalArgumentException(MANUAL_LOTTO_QUANTITY_ERROR);
 		}
 	}
 
-	private boolean isAffordableToBuy(LottoQuantity lottoQuantity) {
-		return 0 <= calculateChangeAfterBuying(lottoQuantity);
+	private boolean isNotAffordableToBuy(LottoQuantity lottoQuantity) {
+		return calculateChangeAfterBuying(lottoQuantity) < 0;
 	}
 
 	public Money getChangeAfterBuying(LottoQuantity lottoQuantity) {
