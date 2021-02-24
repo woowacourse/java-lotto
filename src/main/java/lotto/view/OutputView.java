@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoResultStatistics;
-import lotto.domain.ManualCount;
+import lotto.domain.ManualAmount;
 import lotto.domain.lottos.LottoNumber;
 import lotto.domain.lottos.LottoTicket;
 import lotto.domain.lottos.LottoTickets;
@@ -21,16 +21,16 @@ public class OutputView {
     private static final String EACH_RESULT_WITH_BONUS = "%d개 일치, 보너스 볼 일치(%d원)- %d개";
     private static final String FINAL_RESULT = "총 수익률은 %d%%입니다.";
 
-    public static void printTickets(LottoTickets lottoTickets, int count, ManualCount manualCount) {
-        howMuchBought(count, manualCount);
+    public static void printTickets(LottoTickets lottoTickets, int count, ManualAmount manualAmount) {
+        howMuchBought(count, manualAmount);
         lottoTickets.getLottoTickets()
                 .forEach(OutputView::printTicket);
         System.out.print(NEW_LINE);
     }
 
-    private static void howMuchBought(int count, ManualCount manualCount) {
+    private static void howMuchBought(int count, ManualAmount manualAmount) {
         System.out.print(NEW_LINE);
-        System.out.printf(HOW_MUCH_BOUGHT, manualCount.getValue(), count - manualCount.getValue());
+        System.out.printf(HOW_MUCH_BOUGHT, manualAmount.getValue(), count - manualAmount.getValue());
         System.out.print(NEW_LINE);
     }
 

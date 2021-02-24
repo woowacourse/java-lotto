@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.ManualCount;
+import lotto.domain.ManualAmount;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -31,10 +31,10 @@ public class InputView {
         return getUserInput();
     }
 
-    public static List<String> getManualNumbersInput(ManualCount manualCount) {
+    public static List<String> getManualNumbersInput(ManualAmount manualAmount) {
         System.out.print(NEW_LINE);
         System.out.println(ASK_BUY_MANUAL_NUMBERS);
-        return IntStream.range(0, manualCount.getValue())
+        return IntStream.range(0, manualAmount.getValue())
                 .mapToObj(i -> getUserInput())
                 .collect(Collectors.toList());
     }

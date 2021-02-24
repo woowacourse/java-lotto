@@ -1,7 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.LottoResultStatistics;
-import lotto.domain.ManualCount;
+import lotto.domain.ManualAmount;
 import lotto.domain.lottos.LottoTicket;
 import lotto.domain.lottos.LottoTickets;
 import lotto.domain.lottos.winnerlotto.LottoBonusNumber;
@@ -16,8 +16,8 @@ public class LottoController {
 
     public void lottoStart() {
         Money money = initMoney();
-        ManualCount manualCount = initManualCount(money);
-        LottoTickets lottoTickets = initLottoTickets(money, manualCount);
+        ManualAmount manualAmount = initManualCount(money);
+        LottoTickets lottoTickets = initLottoTickets(money, manualAmount);
 
         LottoTicket lottoWinnerTicket = initLottoWinnerTicket();
         LottoBonusNumber lottoBonusNumber = initLottoWinnerBonusNumber(lottoWinnerTicket);
@@ -38,23 +38,23 @@ public class LottoController {
         }
     }
 
-    private ManualCount initManualCount(Money money) {
+    private ManualAmount initManualCount(Money money) {
         try {
-            return new ManualCount(InputView.getManualCountInput(), money);
+            return new ManualAmount(InputView.getManualCountInput(), money);
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e);
             return initManualCount(money);
         }
     }
 
-    private LottoTickets initLottoTickets(Money money, ManualCount manualCount) {
+    private LottoTickets initLottoTickets(Money money, ManualAmount manualAmount) {
         try {
-            LottoTickets lottoTickets = LottoTicketsService.createLottoTickets(money, InputView.getManualNumbersInput(manualCount));
-            OutputView.printTickets(lottoTickets, money.getLottoCount(), manualCount);
+            LottoTickets lottoTickets = LottoTicketsService.createLottoTickets(money, InputView.getManualNumbersInput(manualAmount));
+            OutputView.printTickets(lottoTickets, money.getLottoCount(), manualAmount);
             return lottoTickets;
         } catch (NullPointerException | IllegalArgumentException e) {
             OutputView.printErrorMessage(e);
-            return initLottoTickets(money, manualCount);
+            return initLottoTickets(money, manualAmount);
         }
     }
 
