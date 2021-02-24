@@ -72,5 +72,5 @@
 - [x] WinningNumbers/WinningResult 에 get 붙은 메소드 이름 고민
 - [x] Controller 필드에 변수 줄이기 
 - [x] Ranking 에 보너스 매칭 필드 없애도록 구현 수정 
-- [ ] InputView 리팩토링
+- [x] InputView 리팩토링
 - [x] ManualLottoManager 테스트 코드 작성
