@@ -2,7 +2,7 @@ package view;
 
 import dto.LottoTicketsDto;
 import dto.PrizeDto;
-import dto.SingleLottoTicketDto;
+import dto.LottoTicketDto;
 import dto.WinningStaticsDto;
 
 import java.util.List;
@@ -17,8 +17,8 @@ public class OutputView {
     }
 
     public static void printLottoTickets(final LottoTicketsDto lottoTicketsDto) {
-        final List<SingleLottoTicketDto> singleLottoTicketDtos = lottoTicketsDto.getSingleLottoTicketDtos();
-        singleLottoTicketDtos.forEach(
+        final List<LottoTicketDto> lottoTicketDtos = lottoTicketsDto.getLottoTicketDtos();
+        lottoTicketDtos.forEach(
                 ticket -> printLottoNumbers(ticket.getLottoNumbers())
         );
     }
