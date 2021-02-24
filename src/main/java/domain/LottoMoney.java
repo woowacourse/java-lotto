@@ -65,6 +65,10 @@ public class LottoMoney {
         return value / SINGLE_LOTTO_PRICE;
     }
 
+    public boolean isExchangeable(final int ticketQuantity) {
+        return ticketQuantity <= toTicketQuantity();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
