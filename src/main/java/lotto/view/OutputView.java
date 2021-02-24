@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Lottos;
 import lotto.model.LottoRank;
-import lotto.model.LottoResult;
+import lotto.model.LottoResults;
 
 public class OutputView {
 
@@ -54,18 +54,18 @@ public class OutputView {
         System.out.println("보너스 볼을 입력해 주세요.");
     }
 
-    public static void printLottoResult(LottoResult lottoResult) {
+    public static void printLottoResult(LottoResults lottoResults) {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
-        List<LottoRank> sortedResultKey = sortedResultKey(lottoResult.getResult().keySet());
+        List<LottoRank> sortedResultKey = sortedResultKey(lottoResults.toMap().keySet());
         for (int i = 1; i < sortedResultKey.size(); i++) {
             LottoRank lottoRank = sortedResultKey.get(i);
             int correct = lottoRank.getCorrect();
             int prize = lottoRank.getPrize();
-            int numOfMatch = lottoResult.findNumOfMatchByKey(lottoRank);
+            int numOfMatch = lottoResults.findNumOfMatchByKey(lottoRank);
             System.out.println(correct + "개 일치 (" + prize + "원)- " + numOfMatch + "개");
         }
-        printLottoEariningRate(lottoResult.getEarningsRate());
+        printLottoEariningRate(lottoResults.getEarningsRate());
     }
 
     private static List<LottoRank> sortedResultKey(Set<LottoRank> keySet) {

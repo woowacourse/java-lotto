@@ -4,6 +4,8 @@ import lotto.domain.LottoMachine;
 import lotto.domain.WinningLotto;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Lottos;
+import lotto.model.LottoResult;
+import lotto.model.LottoResults;
 import lotto.model.Money;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -20,6 +22,10 @@ public class LottoController {
         Lotto winningLottoNumber = Lotto.of(InputView.inputWinningLottoNumbers());
         int bonus = InputView.inputWinningBonus();
         WinningLotto winningLotto = new WinningLotto(winningLottoNumber, bonus);
+        LottoResult manualLottosResult = manualLottos.match(winningLotto);
+        LottoResult automaticLottosResult = automaticLottos.match(winningLotto);
+        LottoResults lottoResults = LottoResults.of(manualLottosResult, automaticLottosResult);
+        OutputView.printLottoResult(lottoResults);
     }
 }
 
