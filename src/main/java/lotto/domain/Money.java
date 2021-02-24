@@ -16,13 +16,11 @@ public class Money {
     }
 
     private int changeToInt(String input) {
-        int money;
         try {
-            money = Integer.parseInt(input);
+            return Integer.parseInt(input);
         } catch (Exception e) {
             throw new IllegalArgumentException(MONEY_INT_ERROR);
         }
-        return money;
     }
 
     private void validateRange(int money) {
