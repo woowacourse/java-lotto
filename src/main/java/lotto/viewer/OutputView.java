@@ -6,6 +6,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoRank;
 import lotto.domain.Lottos;
 import lotto.exception.LottoAnnouncementException;
+import lotto.exception.LottoException;
 import lotto.exception.MoneyException;
 import lotto.exception.PieceException;
 
@@ -58,5 +59,9 @@ public class OutputView {
 
     public void printPieceException(PieceException pieceException) {
         System.out.println(pieceException.getMessage());
+    }
+
+    public void printLottoException(LottoException lottoException) {
+        System.out.println(lottoException.getMessage());
     }
 }

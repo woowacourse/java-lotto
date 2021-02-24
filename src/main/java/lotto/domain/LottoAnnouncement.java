@@ -12,8 +12,6 @@ public class LottoAnnouncement {
     public static final String OVERLAPPED_WINNER_MESSAGE = "당첨 번호가 중복되었습니다.";
     public static final String OVERLAPPED_BONUS_MESSAGE = "보너스 번호가 중복되었습니다.";
     public static final String EXCESS_NUMBER_MESSAGE = "범위를 벗어난 숫자입니다.";
-    private static final int UPPER_LIMIT = 45;
-    private static final int LOWER_LIMIT = 1;
 
     private final List<Integer> winners;
     private final int bonusNumber;
@@ -57,7 +55,7 @@ public class LottoAnnouncement {
     }
 
     private void checkValidNumber(int targetNumber) {
-        boolean criteria = (targetNumber < LOWER_LIMIT) | (targetNumber > UPPER_LIMIT);
+        boolean criteria = (targetNumber < Lotto.LOWER_LIMIT) | (targetNumber > Lotto.UPPER_LIMIT);
 
         if (criteria) {
             throw new LottoAnnouncementException(EXCESS_NUMBER_MESSAGE);
