@@ -5,11 +5,34 @@ import java.util.Map;
 
 public class Lottos {
     private final ArrayList<Lotto> lottoGroup = new ArrayList<>();
+    private static int manualCount;
+    private static int randomCount;
 
-    public Lottos(String input) {
-        Money money = new Money(input);
-        int count = money.count();
-        generateLottoGroup(count);
+    public Lottos(String inputTotalMoney, String inputManualCount) {
+        Money money = new Money(inputTotalMoney);
+        manualCount = validateManualCount(inputManualCount, money.count());
+        randomCount = money.count() - manualCount;
+        generateLottoGroup(randomCount);
+    }
+
+    private int validateManualCount(String inputManual, int totalCount) {
+        int manualCount = validateType(inputManual);
+        validateRange(manualCount, totalCount);
+        return manualCount;
+    }
+
+    private int validateType(String inputManual) {
+        try {
+            return Integer.parseInt(inputManual);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("[ERROR] 숫자만 입력할 수 있습니다");
+        }
+    }
+
+    private void validateRange(int manualCount, int totalCount) {
+        if (manualCount < 0 || manualCount > totalCount) {
+            throw new IllegalArgumentException("[ERROR] 입력하신 금액으로 구입할 수 없습니다");
+        }
     }
 
     private void generateLottoGroup(int count) {
@@ -27,5 +50,17 @@ public class Lottos {
 
     public ArrayList<Lotto> getLottoGroup() {
         return this.lottoGroup;
+    }
+
+    public void addManualLotto(Lotto lotto) {
+        lottoGroup.add(lotto);
+    }
+
+    public int getManualCount() {
+        return manualCount;
+    }
+
+    public int getRandomCount() {
+        return randomCount;
     }
 }

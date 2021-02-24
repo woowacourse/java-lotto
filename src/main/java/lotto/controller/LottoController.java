@@ -1,24 +1,21 @@
 package lotto.controller;
 
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
-import lotto.domain.Rank;
-import lotto.domain.WinningLotto;
+import lotto.domain.*;
 import lotto.view.LottoView;
 
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoController {
     private static final ArrayList<Rank> wins = new ArrayList<>();
     private static final Map<Rank, Integer> countByRank = new TreeMap<>();
+    private static final String DELIMITER = ",";
     private static Lottos lottos;
     private static WinningLotto winningLotto;
 
     public void startLotto() {
-        lottos = new Lottos(LottoView.requestMoney());
-        LottoView.displayLottoCount(lottos.getLottoGroup().size());
+        makeAllLotto();
+        LottoView.displayLottoCount(lottos.getManualCount(), lottos.getRandomCount());
         LottoView.displayLottoGroup(lottos);
         makeWinningLotto();
     }
@@ -29,10 +26,26 @@ public class LottoController {
         LottoView.displayEarningRate(Lottos.findResult(countByRank));
     }
 
+    private void makeAllLotto() {
+        String totalMoney = LottoView.requestMoney();
+        String manualCount = LottoView.requestManualLottoCount();
+        lottos = new Lottos(totalMoney, manualCount);
+        LottoView.displayManualNumberMessage();
+        for (int i = 0; i < Integer.parseInt(manualCount); i++) {
+            lottos.addManualLotto(makeManualLotto());
+        }
+    }
+
+    private Lotto makeManualLotto() {
+        String winningInput = LottoView.requestManualNumber();
+        return new Lotto(generateManualLotto(winningInput));
+    }
+
     private void makeWinningLotto() {
         String winningInput = LottoView.requestWinningNumber();
+        Lotto winLotto = new Lotto(generateManualLotto(winningInput));
         String bonusInput = LottoView.requestBonusBallNumber();
-        winningLotto = new WinningLotto(winningInput, bonusInput);
+        winningLotto = new WinningLotto(winLotto, bonusInput);
     }
 
     private void drawLotto() {
@@ -47,6 +60,17 @@ public class LottoController {
         LottoView.displayResultMessage();
         countEachRank();
         countByRank.forEach(LottoView::displayResult);
+    }
+
+    private ArrayList<Integer> generateManualLotto(String numberInput) {
+        return new ArrayList<>(changeToList(numberInput));
+    }
+
+    private List<Integer> changeToList(String numberInput) {
+        return Arrays.stream(numberInput.split(DELIMITER))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 
     private void countEachRank() {

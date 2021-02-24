@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class LottoView {
     private static final Scanner SCANNER = new Scanner(System.in);
     private static final String INPUT_MONEY_MESSAGE = "구입금액을 입력해주세요";
-    private static final String LOTTO_COUNT_MESSAGE = "개를 구매했습니다.";
+    private static final String LOTTO_COUNT_MESSAGE = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     private static final String LAST_WEEK_LOTTO_MESSAGE = "\n지난 주 당첨 번호를 입력해 주세요.";
     private static final String BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String RESULT_TITLE_MESSAGE = "\n당첨 통계\n----------";
@@ -24,14 +24,27 @@ public class LottoView {
         return SCANNER.nextLine();
     }
 
-    public static void displayLottoCount(int count) {
-        System.out.println(count + LOTTO_COUNT_MESSAGE);
+    public static String requestManualLottoCount() {
+        System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
+        return SCANNER.nextLine();
+    }
+
+    public static void displayManualNumberMessage() {
+        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
+    }
+
+    public static String requestManualNumber() {
+        return SCANNER.nextLine();
+    }
+
+    public static void displayLottoCount(int manualCount, int randomCount) {
+        System.out.printf(LOTTO_COUNT_MESSAGE, manualCount, randomCount);
     }
 
     public static void displayLottoGroup(Lottos lottos) {
         ArrayList<Lotto> lottoGroup = lottos.getLottoGroup();
-        for (int i = 0; i < lottoGroup.size(); i++) {
-            System.out.print(lottoGroup.get(i).getLottoNumbers() + CHANGE_LINE);
+        for (Lotto lotto : lottoGroup) {
+            System.out.print(lotto.getLottoNumbers() + CHANGE_LINE);
         }
     }
 

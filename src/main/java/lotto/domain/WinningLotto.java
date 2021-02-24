@@ -10,21 +10,21 @@ public class WinningLotto {
     private static Lotto winLotto;
     private static BonusBall bonusBall;
 
-    public WinningLotto(String winningInput, String bonusBallInput) {
-        winLotto = new Lotto(generateWinningLotto(winningInput));
+    public WinningLotto(Lotto lotto, String bonusBallInput) {
+        winLotto = lotto;
         bonusBall = new BonusBall(winLotto, bonusBallInput);
     }
 
-    private ArrayList<Integer> generateWinningLotto(String numberInput) {
-        return new ArrayList<>(changeToList(numberInput));
-    }
-
-    private List<Integer> changeToList(String numberInput) {
-        return Arrays.stream(numberInput.split(DELIMITER))
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
-    }
+//    private ArrayList<Integer> generateWinningLotto(String numberInput) {
+//        return new ArrayList<>(changeToList(numberInput));
+//    }
+//
+//    private List<Integer> changeToList(String numberInput) {
+//        return Arrays.stream(numberInput.split(DELIMITER))
+//                .map(String::trim)
+//                .map(Integer::parseInt)
+//                .collect(Collectors.toList());
+//    }
 
     public static int howManyWins(Lotto lotto) {
         ArrayList<Integer> wins = new ArrayList<>(winLotto.getLottoNumbers());
