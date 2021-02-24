@@ -15,6 +15,7 @@ public class InputView {
 
     private static InputView instance;
 
+    private OutputView outputView = OutputView.getInstance();
     private final Scanner scanner = new Scanner(System.in);
 
     public static InputView getInstance() {
@@ -31,6 +32,7 @@ public class InputView {
     public String scanBudget() {
         System.out.println(MESSAGE_BUDGET);
         String inputString = deleteWhiteSpaces(scanner.nextLine());
+        outputView.newLine();;
         validEmptyString(inputString);
         return inputString;
     }
@@ -39,6 +41,7 @@ public class InputView {
         System.out.println(MESSAGE_WINNING_NUMBER);
         String inputString = deleteWhiteSpaces(scanner.nextLine());
         validEmptyString(inputString);
+        outputView.newLine();
         return Arrays.stream(inputString.split(COMMA))
                 .map(this::parseInteger)
                 .collect(Collectors.toList());
@@ -48,6 +51,7 @@ public class InputView {
         System.out.println(MESSAGE_BONUS_BALL);
         String inputString = deleteWhiteSpaces(scanner.nextLine());
         validEmptyString(inputString);
+        outputView.newLine();
         return parseInteger(inputString);
     }
 
