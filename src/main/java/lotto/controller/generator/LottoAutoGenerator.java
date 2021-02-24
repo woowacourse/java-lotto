@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.CopyOnWriteArrayList;
+import lotto.domain.Lotto;
 
 public class LottoAutoGenerator implements LottoGenerator {
 
@@ -13,7 +14,6 @@ public class LottoAutoGenerator implements LottoGenerator {
 
     public static final int LOTTO_START_NUMBER = 1;
     public static final int LOTTO_END_NUMBER = 45;
-    public static final int LOTTO_POSSESSION_NUMBER = 6;
 
     static {
         for (int number = LOTTO_START_NUMBER; number <= LOTTO_END_NUMBER; number++) {
@@ -26,7 +26,7 @@ public class LottoAutoGenerator implements LottoGenerator {
         final List<Integer> shuffledNumbers = new CopyOnWriteArrayList<>(candidateNumbers);
         Collections.shuffle(shuffledNumbers);
         Set<Integer> lottoNumbers =
-            new TreeSet<>(shuffledNumbers.subList(0, LOTTO_POSSESSION_NUMBER));
+            new TreeSet<>(shuffledNumbers.subList(0, Lotto.LOTTO_POSSESSION_NUMBER));
         return new ArrayList<>(lottoNumbers);
     }
 }

@@ -2,6 +2,7 @@ package lotto.viewer;
 
 import java.util.Scanner;
 import lotto.domain.Money;
+import lotto.exception.LottoPiecesException;
 
 public class MoneyInputView {
 
@@ -13,7 +14,7 @@ public class MoneyInputView {
         this.scanner = scanner;
     }
 
-    public Money purchaseMoney() {
+    public Money purchaseMoney() throws LottoPiecesException {
         System.out.println(PURCAHSE_MONEY_MESSAGE);
         int rawMoney = scanner.nextInt();
         Money money = new Money(rawMoney);

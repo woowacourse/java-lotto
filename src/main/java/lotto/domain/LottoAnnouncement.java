@@ -10,7 +10,6 @@ public class LottoAnnouncement {
 
     private static final int UPPER_LIMIT = 45;
     private static final int LOWER_LIMIT = 1;
-    private static final int LOTTO_POSESSION_SIZE = 6;
 
     private final List<Integer> winners;
     private final int bonusNumber;
@@ -48,7 +47,7 @@ public class LottoAnnouncement {
     }
 
     private void checkProperSize(List<Integer> winners) {
-        if (winners.size() != LOTTO_POSESSION_SIZE) {
+        if (winners.size() != Lotto.LOTTO_POSSESSION_NUMBER) {
             throw new LottoAnnouncementException("로또 번호의 갯수가 기준과 다릅니다.");
         }
     }

@@ -4,13 +4,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import lotto.domain.Lotto;
 import lotto.exception.LottoAnnouncementException;
 
 public class LottoGeneratorInputView {
 
     private static final String DELIMITER = ", ";
     private static final String LOTTO_ANNOUNCE_SIZE_MESSAGE = "로또 번호의 갯수가 기준과 다릅니다.";
-    public static final int LOTTE_POSSESSION_NUMBER = 6;
 
     final Scanner scanner;
 
@@ -35,7 +35,7 @@ public class LottoGeneratorInputView {
     }
 
     private void checkSize(String[] targetWinner) {
-        if (targetWinner.length != LOTTE_POSSESSION_NUMBER) {
+        if (targetWinner.length != Lotto.LOTTO_POSSESSION_NUMBER) {
             throw new LottoAnnouncementException(LOTTO_ANNOUNCE_SIZE_MESSAGE);
         }
     }
