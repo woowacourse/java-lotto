@@ -1,24 +1,25 @@
 package lotto.domain;
 
+import java.util.List;
+
 public class LottoGame {
 
-    public Lottos buyAutoLottos(int autoAmount) {
+    private Lottos manualLottos;
+    private Lottos autoLottos;
 
-        return new Lottos(autoAmount);
+    public void buyManualLottos(List<Lotto> manualLottos) {
+        this.manualLottos = new Lottos(manualLottos);
     }
 
-    public LottoGameResult compareWithWinningLotto(Lottos manual, Lottos auto, WinningLotto winningLotto) {
-        LottoGameResult lottoGameResult = new LottoGameResult();
-
-        addMatchLotto(manual, winningLotto, lottoGameResult);
-        addMatchLotto(auto, winningLotto, lottoGameResult);
-
-        return lottoGameResult;
+    public void buyAutoLottos(int autoAmount) {
+        this.autoLottos = new Lottos(autoAmount);
     }
 
-    private void addMatchLotto(Lottos manual, WinningLotto winningLotto, LottoGameResult lottoGameResult) {
-        for (Lotto manualLotto : manual.toList()) {
-            lottoGameResult.add(winningLotto.findRank(manualLotto));
-        }
+    public Lottos toManualLottos() {
+        return manualLottos;
+    }
+
+    public Lottos toAutoLottos() {
+        return autoLottos;
     }
 }
