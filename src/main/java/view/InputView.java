@@ -30,7 +30,6 @@ public class InputView {
     }
 
     public static List<Integer> receiveWinningNumbers() {
-        System.out.println();
         String input = receiveInput("지난 당첨 번호를 입력해 주세요.");
         return createNumbers(input);
     }

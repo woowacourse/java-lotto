@@ -21,6 +21,7 @@ public class OutputView {
         lottoTicketDtos.forEach(
                 ticket -> printLottoNumbers(ticket.getLottoNumbers())
         );
+        System.out.println();
     }
 
     private static void printLottoNumbers(final List<Integer> numbers) {
