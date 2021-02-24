@@ -21,9 +21,9 @@ public class ResultTest {
 
     @DisplayName("순위 계산 기능 확인")
     @Test
-    void checkRank(){
-        Result first = Result.decisionLottoRank(6,false);
-        Result second = Result.decisionLottoRank(5,true);
+    void checkRank() {
+        Result first = Result.decisionLottoRank(6, false);
+        Result second = Result.decisionLottoRank(5, true);
         Result third = Result.decisionLottoRank(5, false);
         Result fourth = Result.decisionLottoRank(4, false);
         Result fifth = Result.decisionLottoRank(3, false);

@@ -49,7 +49,7 @@ public class OutputView {
 
     private static String bonusMessage(Result result) {
         String message = " ";
-        if(result == Result.SECOND){
+        if (result == Result.SECOND) {
             return SECOND;
         }
         return message;

@@ -17,8 +17,6 @@ public abstract class LottoFactory {
     public LottoFactory() {
     }
 
-    public abstract List<Lotto> getLottos();
-
     public static LottoFactory of(int count) {
         return new AutoLotto(Stream.generate(() -> new Lotto(makeLottoNumbers()))
                 .limit(count)
@@ -42,6 +40,7 @@ public abstract class LottoFactory {
         return lottoNumber;
     }
 
+    public abstract List<Lotto> getLottos();
 
 
 }

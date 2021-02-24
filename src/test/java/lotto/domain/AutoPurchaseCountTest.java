@@ -10,7 +10,7 @@ public class AutoPurchaseCountTest {
 
     @DisplayName("자동 로또 구매 갯수 확인")
     @Test
-    void autoLottoPurchaseCount(){
+    void autoLottoPurchaseCount() {
         AutoPurchaseCount autoPurchaseCount = new AutoPurchaseCount(3);
 
         assertThat(autoPurchaseCount.getAutoPurchaseCount()).isEqualTo(3);
@@ -18,8 +18,8 @@ public class AutoPurchaseCountTest {
 
     @DisplayName("돈보다 많은 구매를 갯수를 구매할 경우")
     @Test
-    void minusInputCheck(){
-        assertThatThrownBy(()->{
+    void minusInputCheck() {
+        assertThatThrownBy(() -> {
             new AutoPurchaseCount(-1);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("0이상의 숫자를 입력하세요. ");

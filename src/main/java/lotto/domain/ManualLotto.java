@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class ManualLotto extends LottoFactory {
 
-    private List<Lotto> manualLotto;
+    private final List<Lotto> manualLotto;
 
     public ManualLotto(List<Lotto> manualLotto) {
         super();
