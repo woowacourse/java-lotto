@@ -19,9 +19,9 @@ public class LottoTickets {
         return Collections.unmodifiableList(copy);
     }
 
-    public List<LottoRank> findMatches(WinningLotto winningLotto) {
+    public List<LottoRank> findLottoRanks(WinningLotto winningLotto) {
         return lottoTickets.stream()
-                .map(lotto -> lotto.findMatchesNumber(winningLotto))
+                .map(lottoTicket -> lottoTicket.findLottoRankByWinningLotto(winningLotto))
                 .collect(Collectors.toList());
     }
 }

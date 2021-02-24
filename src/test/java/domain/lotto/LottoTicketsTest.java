@@ -58,7 +58,7 @@ class LottoTicketsTest {
         LottoTickets lottoTickets = new LottoTickets(this.lottoTickets);
 
         //when
-        List<LottoRank> ranks = lottoTickets.findMatches(winningLotto);
+        List<LottoRank> ranks = lottoTickets.findLottoRanks(winningLotto);
 
         //then
         Assertions.assertThat(ranks.get(0)).isEqualTo(LottoRank.SIX_MATCHES);

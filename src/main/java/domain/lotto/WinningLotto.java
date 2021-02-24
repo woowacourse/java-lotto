@@ -24,7 +24,7 @@ public class WinningLotto {
     }
 
     public LottoRank findLottoRank(final LottoBalls lottoBalls) {
-        return lottoBalls.matchCount(this.winningBalls, bonusBall);
+        return lottoBalls.findRankByWinningBalls(this.winningBalls, bonusBall);
     }
 
     private LottoBalls makeWinningBalls(Set<Integer> winningNumbers) {

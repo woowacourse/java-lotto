@@ -29,7 +29,7 @@ public class Result {
 
     private Map<LottoRank, Integer> makeResult(LottoTickets lottoTickets, WinningLotto winningLotto) {
         Map<LottoRank, Integer> copy = new HashMap<>();
-        List<LottoRank> lottoRanks = lottoTickets.findMatches(winningLotto);
+        List<LottoRank> lottoRanks = lottoTickets.findLottoRanks(winningLotto);
         lottoRanks.forEach(lottoRank -> {
             copy.computeIfPresent(lottoRank, (key, value) -> value + 1);
             copy.putIfAbsent(lottoRank, 1);

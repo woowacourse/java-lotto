@@ -25,7 +25,7 @@ public class LottoBalls {
         return Collections.unmodifiableList(copy);
     }
 
-    public LottoRank matchCount(LottoBalls winningBalls, LottoBall bonusBall) {
+    public LottoRank findRankByWinningBalls(LottoBalls winningBalls, LottoBall bonusBall) {
         int count = (int) this.lottoBalls.stream()
                 .filter(winningBalls::contains)
                 .count();
