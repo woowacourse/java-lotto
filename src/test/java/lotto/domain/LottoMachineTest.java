@@ -26,4 +26,34 @@ class LottoMachineTest {
 
         assertThat(lottoTickets.size()).isEqualTo(5);
     }
+
+    @DisplayName("수동 티켓 개수가 0개 일때 자동 티켓 개수 확인")
+    @Test
+    void makeAutoLottoTicketsIfManualTicketCountsZero() {
+        Money money = new Money(5000);
+        PurchasingCounts purchasingCounts = PurchasingCounts.of(money, 0);
+        List<List<Integer>> numberGroup = new ArrayList<>();
+        LottoMachine lottoMachine = new LottoMachine(new ManualLottoNumberGenerator(numberGroup),
+                new RandomLottoNumberGenerator());
+
+        LottoTickets lottoTickets = lottoMachine.buyLottoTickets(purchasingCounts);
+
+        assertThat(lottoTickets.size()).isEqualTo(5);
+    }
+
+    @DisplayName("자동 티켓 개수가 0개 일때 수동 티켓 개수 확인")
+    @Test
+    void makeManualLottoTicketsIfAutoTicketCountsZero() {
+        Money money = new Money(2000);
+        PurchasingCounts purchasingCounts = PurchasingCounts.of(money, 2);
+        List<List<Integer>> numberGroup = new ArrayList<>();
+        numberGroup.add(Arrays.asList(1, 2, 3, 4, 5, 6));
+        numberGroup.add(Arrays.asList(7, 8, 9, 10, 11, 12));
+        LottoMachine lottoMachine = new LottoMachine(new ManualLottoNumberGenerator(numberGroup),
+                new RandomLottoNumberGenerator());
+
+        LottoTickets lottoTickets = lottoMachine.buyLottoTickets(purchasingCounts);
+
+        assertThat(lottoTickets.size()).isEqualTo(2);
+    }
 }
