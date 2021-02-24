@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class Lottos {
+    public static final String NUMBER_TYPE_ERROR = "[ERROR] 숫자만 입력할 수 있습니다";
+    public static final String NUMBER_RANGE_ERROR = "[ERROR] 입력하신 금액으로 구입할 수 없습니다";
     private final ArrayList<Lotto> lottoGroup = new ArrayList<>();
     private static int manualCount;
     private static int randomCount;
@@ -25,13 +27,13 @@ public class Lottos {
         try {
             return Integer.parseInt(inputManual);
         } catch (Exception e) {
-            throw new IllegalArgumentException("[ERROR] 숫자만 입력할 수 있습니다");
+            throw new IllegalArgumentException(NUMBER_TYPE_ERROR);
         }
     }
 
     private void validateRange(int manualCount, int totalCount) {
         if (manualCount < 0 || manualCount > totalCount) {
-            throw new IllegalArgumentException("[ERROR] 입력하신 금액으로 구입할 수 없습니다");
+            throw new IllegalArgumentException(NUMBER_RANGE_ERROR);
         }
     }
 
