@@ -57,7 +57,7 @@ class BettingMoneyTest {
         assertThat(earningRate).isEqualTo(BigDecimal.valueOf(3.33));
     }
 
-    @DisplayName("int 최대값 이상의 상금도 정상 계산된다 테스트")
+    @DisplayName("int 최대값 이상의 상금도 정상 계산된다")
     @Test
     void earningsRateMaXIntegerTest() {
         //given
