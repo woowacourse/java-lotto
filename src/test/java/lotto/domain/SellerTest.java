@@ -14,6 +14,6 @@ public class SellerTest {
         Seller seller = new Seller();
         int count = 3;
         List<Lotto> lottos = seller.sell(count);
-        assertThat(lottos.size() == count);
+        assertThat(lottos.size() == count).isTrue();
     }
 }
