@@ -1,5 +1,6 @@
 package lotto;
 
+import java.math.BigInteger;
 import java.util.Collections;
 import java.util.List;
 import lotto.domain.lotto.LottoMachine2;
@@ -55,8 +56,8 @@ public class LottoApplication2 {
         return lottoMachine.buyTickets(ticketsValue);
     }
 
-    private static List<String> getManualTicketsValue(int amount) {
-        if (amount == 0) {
+    private static List<String> getManualTicketsValue(BigInteger amount) {
+        if (amount.equals(BigInteger.ZERO)) {
             return Collections.emptyList();
         }
         return InputView.getManualLottoTicketsInput(amount);

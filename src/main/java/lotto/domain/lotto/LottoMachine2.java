@@ -25,7 +25,7 @@ public class LottoMachine2 {
         return new LottoMachine2(money, manualAmount, new RandomLottoGenerator());
     }
 
-    public int getManualBuyAmount() {
+    public BigInteger getManualBuyAmount() {
         return manualBuyAmount.getValue();
     }
 

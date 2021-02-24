@@ -5,32 +5,31 @@ import lotto.utils.NumericStringValidator;
 
 public class ManualBuyAmount {
 
-    private final int value;
+    private final BigInteger value;
 
-    private ManualBuyAmount(int value) {
+    private ManualBuyAmount(BigInteger value) {
         this.value = value;
     }
 
     public static ManualBuyAmount getInstance(String manualAmountInput, Money money) {
         validateNumeric(manualAmountInput);
 
-        int manualAmount = Integer.parseInt(manualAmountInput);
+        BigInteger manualAmount = new BigInteger(manualAmountInput);
         validateLessThanTotalAmount(money, manualAmount);
 
         return new ManualBuyAmount(manualAmount);
     }
 
-    private static void validateLessThanTotalAmount(Money money, int manualAmount) {
+    private static void validateLessThanTotalAmount(Money money, BigInteger manualAmount) {
         if (manualAmountIsLessThanTotalAmount(money, manualAmount)) {
             throw new IllegalArgumentException("수동 구매 개수는 총 구매 개수 이내만 가능합니다.");
         }
     }
 
-    private static boolean manualAmountIsLessThanTotalAmount(Money money, int manualAmount) {
+    private static boolean manualAmountIsLessThanTotalAmount(Money money, BigInteger manualAmount) {
         BigInteger totalTicketAmount = getTotalTicketAmount(money);
-        BigInteger manualTicketAmount = BigInteger.valueOf(manualAmount);
 
-        return totalTicketAmount.compareTo(manualTicketAmount) < 0;
+        return totalTicketAmount.compareTo(manualAmount) < 0;
     }
 
     private static void validateNumeric(String manualAmountInput) {
@@ -43,7 +42,7 @@ public class ManualBuyAmount {
         return money.toBigInteger().divide(LottoTicket.PRICE);
     }
 
-    public int getValue() {
+    public BigInteger getValue() {
         return value;
     }
 }
