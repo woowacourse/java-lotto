@@ -32,7 +32,7 @@ public class Lotto {
 
     private ArrayList<LottoNumber> changeToLottoNumber(ArrayList<String> nums) {
         ArrayList<LottoNumber> changedNums = new ArrayList<>();
-        for (String num: nums) {
+        for (String num : nums) {
             changedNums.add(new LottoNumber(num));
         }
         return changedNums;

@@ -6,7 +6,10 @@ import lotto.domain.Rank;
 import lotto.domain.WinningLotto;
 import lotto.view.LottoView;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 public class LottoController {
