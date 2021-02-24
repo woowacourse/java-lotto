@@ -14,7 +14,7 @@ import lotto.viewer.OutputView;
 
 public class LottoStore {
 
-    private final static int LOTTO_PRICE = 1000;
+    private static final int LOTTO_PRICE = 1000;
     private static final int DECIMAL_TRIM_NUMERATOR = 100;
     private static final double DECIMAL_TRIM_DENOMINATOR = 100.00;
 
