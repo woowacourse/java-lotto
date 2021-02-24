@@ -29,8 +29,8 @@ public enum LottoRank {
 
     public static LottoRank matchLottoRank(int matchCount, boolean bonusMatch) {
         return Arrays.stream(LottoRank.values())
-                .filter(rank -> rank.getMatches() == matchCount)
-                .filter(rank -> !rank.equals(SECOND_PLACE) || bonusMatch)
+                .filter(rank -> rank.matches == matchCount)
+                .filter(rank -> rank.bonusMatch == bonusMatch)
                 .findFirst()
                 .orElse(SIXTH_PLACE);
     }
