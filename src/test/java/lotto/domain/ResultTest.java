@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.EnumMap;
 import lotto.utils.FixedLottoGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,10 +16,7 @@ class ResultTest {
         LottoTickets lottoTickets = new LottoTickets(2, new FixedLottoGenerator());
         Result result = new Result("1,2,3,4,5,6", "7", lottoTickets);
 
-        EnumMap<Rank, Object> mapToCompare = new EnumMap<>(Rank.class);
-        mapToCompare.put(Rank.FIRST_PLACE, 2);
-
-        assertThat(result.getResultMap()).isEqualTo(mapToCompare);
+        assertThat(result.getResultMap().get(Rank.FIRST_PLACE)).isEqualTo(2);
     }
 
     @Test
@@ -29,10 +25,7 @@ class ResultTest {
         LottoTickets lottoTickets = new LottoTickets(2, new FixedLottoGenerator());
         Result result = new Result("1,2,3,4,5,7", "6", lottoTickets);
 
-        EnumMap<Rank, Object> mapToCompare = new EnumMap<>(Rank.class);
-        mapToCompare.put(Rank.SECOND_PLACE, 2);
-
-        assertThat(result.getResultMap()).isEqualTo(mapToCompare);
+        assertThat(result.getResultMap().get(Rank.SECOND_PLACE)).isEqualTo(2);
     }
 
     @Test

@@ -7,7 +7,7 @@ import lotto.utils.CustomException;
 import lotto.utils.StringChecker;
 
 public class Money {
-    private final long ticketCount;
+    private final int ticketCount;
     private final BigDecimal change;
 
     public Money(String moneyValue) {
@@ -21,11 +21,12 @@ public class Money {
         this.ticketCount = money.divideToIntegralValue(new BigDecimal(LottoTicket.PRICE)).intValue()
             - lottoTickets.size();
         this.change = money
-            .subtract(BigDecimal.valueOf((lottoTickets.size() + ticketCount) * LottoTicket.PRICE));
+            .subtract(
+                BigDecimal.valueOf((long) (lottoTickets.size() + ticketCount) * LottoTicket.PRICE));
     }
 
     private void validateNotOverMoney(String moneyValue, List<LottoTicket> lottoTickets) {
-        if (Long.valueOf(moneyValue) < lottoTickets.size() * LottoTicket.PRICE) {
+        if (Integer.parseInt(moneyValue) < lottoTickets.size() * LottoTicket.PRICE) {
             throw new CustomException("수동발행이 구입가능금액을 넘어 발행이 취소됩니다.");
         }
     }
@@ -37,7 +38,7 @@ public class Money {
     }
 
     public int getPossibleTicketCount() {
-        return (int) ticketCount;
+        return ticketCount;
     }
 
     public int getChange() {

@@ -13,11 +13,11 @@ src/main/java/lotto/domain/Result.java
 
 src/main/java/lotto/domain/Money.java
 
-- [ ] ticketCount를 long타입으로 관리하는 이유?
+- [x] ticketCount를 long타입으로 관리하는 이유?
 
 src/test/java/lotto/domain/ResultTest.java
 
-- [ ] Map을 비교하는 것이 아닌 해당 Rank의 수를 가져오거나 일치하는지 확인하는 기능을 추가하는 것도 괜찮을 것 같은데 어떻게 생각하시나요?
+- [X] Map을 비교하는 것이 아닌 해당 Rank의 수를 가져오거나 일치하는지 확인하는 기능을 추가하는 것도 괜찮을 것 같은데 어떻게 생각하시나요?
 
 ## 수업 내용 적용
 
