@@ -1,9 +1,10 @@
 package controller;
 
 import domain.LottoMoney;
+import domain.TicketQuantity;
 import domain.WinningNumbers;
 import domain.WinningStatics;
-import domain.tickets.AutoLottoTickets;
+import domain.tickets.LottoTickets;
 import dto.LottoTicketsDto;
 import dto.WinningStaticsDto;
 import view.InputView;
@@ -14,12 +15,13 @@ import java.util.List;
 public class LottoMainController {
     public void run() {
         final LottoMoney lottoMoney = inputLottoMoney();
-        final AutoLottoTickets autoLottoTickets = buyLottoTickets(lottoMoney);
+        final TicketQuantity ticketQuantity = new TicketQuantity(lottoMoney, InputView.receiveManualTicketQuantity());
+        final LottoTickets lottoTickets = buyLottoTickets(lottoMoney);
         printLottoQuantity(lottoMoney);
-        printLottoTickets(autoLottoTickets);
+        printLottoTickets(lottoTickets);
 
         final WinningNumbers winningNumbers = inputWinningNumbers();
-        final WinningStatics winningStatics = calculateWinningStatics(autoLottoTickets, winningNumbers);
+        final WinningStatics winningStatics = calculateWinningStatics(lottoTickets, winningNumbers);
         printWinningStatics(winningStatics);
         printProfitRate(winningStatics, lottoMoney);
     }
@@ -29,16 +31,16 @@ public class LottoMainController {
         return new LottoMoney(input);
     }
 
-    private AutoLottoTickets buyLottoTickets(final LottoMoney lottoMoney) {
-        return new AutoLottoTickets(lottoMoney);
+    private LottoTickets buyLottoTickets(final LottoMoney lottoMoney) {
+        return new LottoTickets(lottoMoney);
     }
 
     private void printLottoQuantity(final LottoMoney lottoMoney) {
         OutputView.printLottoQuantity(lottoMoney.toTicketQuantity());
     }
 
-    private void printLottoTickets(final AutoLottoTickets autoLottoTickets) {
-        final LottoTicketsDto lottoTicketsDto = LottoTicketsDto.of(autoLottoTickets);
+    private void printLottoTickets(final LottoTickets lottoTickets) {
+        final LottoTicketsDto lottoTicketsDto = LottoTicketsDto.of(lottoTickets);
         OutputView.printLottoTickets(lottoTicketsDto);
     }
 
@@ -49,10 +51,10 @@ public class LottoMainController {
         return new WinningNumbers(winningNumbers, bonusNumber);
     }
 
-    private WinningStatics calculateWinningStatics(final AutoLottoTickets autoLottoTickets,
+    private WinningStatics calculateWinningStatics(final LottoTickets lottoTickets,
                                                    final WinningNumbers winningNumbers) {
 
-        return autoLottoTickets.calculateWinningStatics(winningNumbers);
+        return lottoTickets.calculateWinningStatics(winningNumbers);
     }
 
     private void printWinningStatics(final WinningStatics winningStatics) {
