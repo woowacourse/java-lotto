@@ -6,7 +6,7 @@ public class Money {
     private static final int ZERO = 0;
     private static final int MIN_PRICE = 1000;
     private static final int MAX_PRICE = 1_000_000;
-    private static final String OUT_OF_LIMIT_ERROR = "범위를 벗어났습니다.";
+    private static final String OUT_OF_LIMIT_ERROR = "구입 금액 범위를 벗어났습니다.";
     private static final String NOT_POSITIVE_INT_ERROR = "양의 정수가 아닙니다.";
     private static final String NOT_DIVISIBLE_ERROR = "1000원 단위 금액이 아닙니다.";
 
