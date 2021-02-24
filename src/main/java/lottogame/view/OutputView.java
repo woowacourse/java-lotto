@@ -13,12 +13,12 @@ public class OutputView {
     }
 
     public static void showLottoQuantity(int totalQuantity, int manualQuantity) {
-        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualQuantity, totalQuantity - manualQuantity);
+        System.out.printf("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualQuantity, totalQuantity - manualQuantity);
     }
 
     public static void showLottos(List<Lotto> lottos) {
         lottos.stream()
-                .map(lotto -> lotto.values())
+                .map(Lotto::values)
                 .forEach(numbers -> System.out.println(integerToString(numbers)));
     }
 

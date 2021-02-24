@@ -6,7 +6,6 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class Money {
-    private static final int LOTTO_PRICE = 1000;
     private static final Pattern NUMBER_PATTERN = Pattern.compile("^[1-9][0-9]{3,}$");
     private final int money;
 
@@ -17,10 +16,6 @@ public class Money {
 
     public int getMoney() {
         return this.money;
-    }
-
-    public Quantity calculateQuantity() {
-        return Quantity.ofInt(this.money / LOTTO_PRICE);
     }
 
     private void validate(String money) {

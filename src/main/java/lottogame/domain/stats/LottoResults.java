@@ -13,27 +13,18 @@ public class LottoResults {
         this.lottoResults = lottoResults;
     }
 
-    public void add(Rank rank) {
-        if (rank.isNotFound()) {
-            return;
-        }
-        lottoResults.put(rank, lottoResults.get(rank) + 1);
-    }
-
     public Map<Rank, Integer> values() {
         return new EnumMap<>(lottoResults);
     }
 
     public int calculateWinningAmount() {
         return Arrays.stream(Rank.values())
-                .filter(rank -> rank.isFound())
+                .filter(Rank::isFound)
                 .mapToInt(rank -> lottoResults.get(rank) * rank.getMoney())
                 .sum();
     }
 
     public float calculateYield(Money money) {
-        System.out.println(calculateWinningAmount());
-        System.out.println(money.getMoney());
         return (float) calculateWinningAmount() / money.getMoney();
     }
 }

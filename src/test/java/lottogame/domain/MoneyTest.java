@@ -1,5 +1,6 @@
 package lottogame.domain;
 
+import lottogame.domain.lotto.LottoGame;
 import lottogame.utils.InvalidMoneyException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -23,19 +24,5 @@ class MoneyTest {
         assertThatThrownBy(() ->
             new Money(input)
         ).isInstanceOf(InvalidMoneyException.class);
-    }
-
-    @ParameterizedTest
-    @CsvSource(value = {"14000:14", "1100:1"}, delimiter = ':')
-    void 로또_갯수(String input, int expected) {
-        Money money = new Money(input);
-        assertEquals(expected, money.calculateQuantity().value());
-    }
-
-    @Test
-    void name() {
-        for (Rank rank : Rank.values()) {
-            System.out.println(rank.name());
-        }
     }
 }

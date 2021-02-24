@@ -27,16 +27,4 @@ public class Lottos {
         }
         return new LottoResults(results);
     }
-
-    public int size() {
-        return lottos.size();
-    }
-
-    public void add(List<String> lottoNumbers) {
-        List<Lotto> manualLottos = new ArrayList<>();
-        for (String lottoNumber : lottoNumbers) {
-            manualLottos.add(Lotto.of(lottoNumber));
-        }
-        lottos.addAll(0, manualLottos);
-    }
 }
