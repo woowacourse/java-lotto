@@ -14,12 +14,7 @@ public class LottoSystemController {
     public void run() {
         LottoManager lottoManager = LottoManager.init(InputView.receivePrice());
         printLottoTicketsInfo(lottoManager);
-        WinningResult winningResult = lottoManager.getWinningResult(
-            WinningNumbers.valueOf(
-                InputView.receiveWinningNumbers(),
-                InputView.receiveBonusNumber()
-            ));
-        printLottoResult(winningResult);
+        printLottoResult(lottoManager);
     }
 
     private void printLottoTicketsInfo(LottoManager lottoManager) {
@@ -27,7 +22,16 @@ public class LottoSystemController {
         OutputView.printLottoTickets(lottoManager.getLottoTickets());
     }
 
-    private void printLottoResult(WinningResult winningResult) {
+    private WinningResult calculateWinningResult(LottoManager lottoManager) {
+        return lottoManager.getWinningResult(
+            WinningNumbers.valueOf(
+                InputView.receiveWinningNumbers(),
+                InputView.receiveBonusNumber()
+            ));
+    }
+
+    private void printLottoResult(LottoManager lottoManager) {
+        WinningResult winningResult = calculateWinningResult(lottoManager);
         OutputView.printRankResultTitle();
         Arrays.stream(Ranking.values())
             .filter(ranking -> ranking != Ranking.NOTHING)
