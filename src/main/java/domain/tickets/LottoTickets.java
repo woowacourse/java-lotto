@@ -12,10 +12,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class AutoLottoTickets {
+public class LottoTickets {
     private final List<Ticket> lottoTickets;
 
-    public AutoLottoTickets(final LottoMoney lottoMoney) {
+    public LottoTickets(final LottoMoney lottoMoney) {
         final int ticketQuantity = lottoMoney.toTicketQuantity();
 
         this.lottoTickets = IntStream.range(0, ticketQuantity)

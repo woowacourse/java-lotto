@@ -1,7 +1,7 @@
 package dto;
 
 import domain.ticket.LottoTicket;
-import domain.tickets.AutoLottoTickets;
+import domain.tickets.LottoTickets;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,8 +13,8 @@ public class LottoTicketsDto {
         this.lottoTicketDtos = lottoTicketDtos;
     }
 
-    public static LottoTicketsDto of(final AutoLottoTickets autoLottoTickets) {
-        List<LottoTicketDto> dtos = autoLottoTickets.toList()
+    public static LottoTicketsDto of(final LottoTickets lottoTickets) {
+        List<LottoTicketDto> dtos = lottoTickets.toList()
                 .stream()
                 .map(LottoTicket.class::cast)
                 .map(LottoTicketDto::of)
