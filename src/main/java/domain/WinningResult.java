@@ -4,13 +4,13 @@ import java.util.List;
 
 public class WinningResult {
 
-    private final Price price;
+    private final Money money;
     private final List<Ranking> rankings;
 
     public WinningResult(WinningNumbers winningNumbers, List<LottoTicket> lottoTickets,
-                         Price price) {
+                         Money money) {
         this.rankings = winningNumbers.calculateRankings(lottoTickets);
-        this.price = price;
+        this.money = money;
     }
 
     public int countNumberOfRank(final Ranking ranking) {
@@ -20,7 +20,7 @@ public class WinningResult {
     }
 
     public double calculateProfitRate() {
-        return ((double) sumTotalProfit()) / price.getValue();
+        return ((double) sumTotalProfit()) / money.getValue();
     }
 
     private int sumTotalProfit() {

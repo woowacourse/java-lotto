@@ -2,7 +2,7 @@ package domain;
 
 import java.util.Objects;
 
-public class Price {
+public class Money {
     private static final int ZERO = 0;
     private static final int MIN_PRICE = 1000;
     private static final int MAX_PRICE = 1_000_000;
@@ -13,14 +13,14 @@ public class Price {
     private final int value;
     private final int numberOfTickets;
 
-    private Price(final int value) {
+    private Money(final int value) {
         this.value = value;
         this.numberOfTickets = this.value / MIN_PRICE;
     }
 
-    public static Price valueOf(final int value) {
+    public static Money valueOf(final int value) {
         validate(value);
-        return new Price(value);
+        return new Money(value);
     }
 
     private static void validate(final int value) {
@@ -63,8 +63,8 @@ public class Price {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Price price = (Price) o;
-        return value == price.value;
+        Money money = (Money) o;
+        return value == money.value;
     }
 
     @Override

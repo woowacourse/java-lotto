@@ -5,16 +5,16 @@ import java.util.List;
 
 public class LottoManager {
 
-    private final Price price;
+    private final Money money;
     private final List<LottoTicket> lottoTickets;
 
-    private LottoManager(final Price price) {
-        this.price = price;
-        this.lottoTickets = LottoMachine.generateLottoTickets(price);
+    private LottoManager(final Money money) {
+        this.money = money;
+        this.lottoTickets = LottoMachine.generateLottoTickets(money);
     }
 
     public static LottoManager init(final int price) {
-        return new LottoManager(Price.valueOf(price));
+        return new LottoManager(Money.valueOf(price));
     }
 
     public List<LottoTicket> getLottoTickets() {
@@ -26,6 +26,6 @@ public class LottoManager {
     }
 
     public WinningResult getWinningResult(final WinningNumbers winningNumbers) {
-        return new WinningResult(winningNumbers, lottoTickets, price);
+        return new WinningResult(winningNumbers, lottoTickets, money);
     }
 }

@@ -9,8 +9,8 @@ public class LottoMachine {
     private LottoMachine() {
     }
 
-    public static List<LottoTicket> generateLottoTickets(Price price) {
-        final int lottoTicketQuantity = price.getNumberOfTickets();
+    public static List<LottoTicket> generateLottoTickets(Money money) {
+        final int lottoTicketQuantity = money.getNumberOfTickets();
 
         return Stream
             .generate(() -> LottoTicket.valueOf(RandomLottoNumberGenerator.generate()))

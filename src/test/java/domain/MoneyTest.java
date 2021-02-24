@@ -9,13 +9,13 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class PriceTest {
+class MoneyTest {
 
     @DisplayName("유효한 값이면 객체 생성 성공")
     @ParameterizedTest
     @ValueSource(ints = {1000, 10000, 1000000})
     void valueOf_validInput_success(final int value) {
-        assertThatCode(() -> Price.valueOf(value))
+        assertThatCode(() -> Money.valueOf(value))
                 .doesNotThrowAnyException();
     }
 
@@ -24,7 +24,7 @@ class PriceTest {
     @ValueSource(ints = {-1000, -1, 0})
     void valueOf_notPositiveNumber_exceptionThrown(final int value) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> Price.valueOf(value))
+                .isThrownBy(() -> Money.valueOf(value))
                 .withMessageContaining("양의 정수");
     }
 
@@ -33,7 +33,7 @@ class PriceTest {
     @ValueSource(ints = {999, 1000001})
     void valueOf_outOfRange_exceptionThrown(final int value) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> Price.valueOf(value))
+                .isThrownBy(() -> Money.valueOf(value))
                 .withMessageContaining("범위를 벗어났습니다.");
     }
 
@@ -42,14 +42,14 @@ class PriceTest {
     @ValueSource(ints = {1001, 99999})
     void valueOf_divisible_exceptionThrown(final int value) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> Price.valueOf(value))
+                .isThrownBy(() -> Money.valueOf(value))
                 .withMessageContaining("1000원 단위 금액이 아닙니다.");
     }
 
     @DisplayName("동일한 객체 비교")
     @Test
     void equals() {
-        final Price price = Price.valueOf(1000);
-        assertEquals(price, Price.valueOf(1000));
+        final Money money = Money.valueOf(1000);
+        assertEquals(money, Money.valueOf(1000));
     }
 }
