@@ -17,7 +17,7 @@ public class OutputPrinter {
     }
 
     public static void printCompletedPurchaseGuideMessage(int numberOfTicket) {
-        System.out.printf("%d개를 구매했습니다." + NEW_LINE, numberOfTicket);
+        System.out.printf("자동으로 %d개를 구매했습니다." + NEW_LINE, numberOfTicket);
     }
 
     public static void printLottoTicketNumbers(LottoTicket lottoTicket) {

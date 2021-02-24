@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
-import lotto.domain.ticketpurchase.PurchasedLottoTickets;
+import lotto.domain.LottoTickets;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -47,7 +47,7 @@ public class LottoComparatorTest {
         ));
 
         List<LottoTicket> lottoTickets = new ArrayList<>(Arrays.asList(purchasedLottoTicket));
-        PurchasedLottoTickets purchasedLottoTickets = new PurchasedLottoTickets(lottoTickets);
+        LottoTickets purchasedLottoTickets = new LottoTickets(lottoTickets);
 
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
         Map<Rank, Integer> lottoResult
@@ -74,7 +74,7 @@ public class LottoComparatorTest {
         ));
 
         List<LottoTicket> lottoTickets = new ArrayList<>(Arrays.asList(purchasedLottoTicket));
-        PurchasedLottoTickets purchasedLottoTickets = new PurchasedLottoTickets(lottoTickets);
+        LottoTickets purchasedLottoTickets = new LottoTickets(lottoTickets);
 
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
         Map<Rank, Integer> lottoResult
@@ -101,7 +101,7 @@ public class LottoComparatorTest {
         ));
 
         List<LottoTicket> lottoTickets = new ArrayList<>(Arrays.asList(purchasedLottoTicket));
-        PurchasedLottoTickets purchasedLottoTickets = new PurchasedLottoTickets(lottoTickets);
+        LottoTickets purchasedLottoTickets = new LottoTickets(lottoTickets);
 
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
         Map<Rank, Integer> lottoResult
@@ -128,7 +128,7 @@ public class LottoComparatorTest {
         ));
 
         List<LottoTicket> lottoTickets = new ArrayList<>(Arrays.asList(purchasedLottoTicket));
-        PurchasedLottoTickets purchasedLottoTickets = new PurchasedLottoTickets(lottoTickets);
+        LottoTickets purchasedLottoTickets = new LottoTickets(lottoTickets);
 
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
         Map<Rank, Integer> lottoResult
@@ -155,7 +155,7 @@ public class LottoComparatorTest {
         ));
 
         List<LottoTicket> lottoTickets = new ArrayList<>(Arrays.asList(purchasedLottoTicket));
-        PurchasedLottoTickets purchasedLottoTickets = new PurchasedLottoTickets(lottoTickets);
+        LottoTickets purchasedLottoTickets = new LottoTickets(lottoTickets);
 
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
         Map<Rank, Integer> lottoResult

@@ -8,10 +8,11 @@ import java.util.Arrays;
 import java.util.List;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class PurchasedLottoTicketsTest {
+public class LottoTicketsTest {
     @DisplayName("로또 티켓 추가 및 꺼내기 테스트")
     @Test
     void Should_ReturnLottoTickets_When_AddedLottoTickets() {
@@ -27,7 +28,7 @@ public class PurchasedLottoTicketsTest {
         LottoTicket lottoTicket2 = new LottoTicket(lottoNumbers);
 
         List<LottoTicket> lottoTickets = new ArrayList<>(Arrays.asList(lottoTicket1, lottoTicket2));
-        PurchasedLottoTickets purchasedLottoTickets = new PurchasedLottoTickets(lottoTickets);
+        LottoTickets purchasedLottoTickets = new LottoTickets(lottoTickets);
 
         assertThat(purchasedLottoTickets.getTickets().size()).isEqualTo(2);
     }

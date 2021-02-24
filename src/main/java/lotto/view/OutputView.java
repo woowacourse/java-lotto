@@ -1,10 +1,10 @@
 package lotto.view;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import lotto.domain.LottoTicket;
-import lotto.domain.ticketpurchase.PurchasedLottoTickets;
+import lotto.domain.LottoTickets;
+import lotto.domain.ticketpurchase.PurchasedTickets;
 import lotto.domain.ticketresult.Rank;
 import lotto.view.printer.InputPrinter;
 import lotto.view.printer.OutputPrinter;
@@ -13,7 +13,7 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void printPurchasedLottoTickets(PurchasedLottoTickets purchasedLottoTickets) {
+    public static void printPurchasedLottoTickets(PurchasedTickets purchasedLottoTickets) {
         List<LottoTicket> lottoTickets = purchasedLottoTickets.getTickets();
         OutputPrinter.printCompletedPurchaseGuideMessage(lottoTickets.size());
         for (LottoTicket lottoTicket : lottoTickets) {

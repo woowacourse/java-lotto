@@ -18,17 +18,21 @@ public class InputView {
     private InputView() {
     }
 
-    public static int getUserPurchase() {
+    public static int getPurchasePrice() {
         InputPrinter.printPurchasePriceInputGuideMessage();
         String purchasePriceInput = scanner.nextLine();
         return parseNumericInput(purchasePriceInput);
     }
 
-    public static List<Integer> getWinningLottoNumbers() {
-        InputPrinter.printWinnerLottoNumbersInputGuideMessage();
-        String winningNumbersInput = scanner.nextLine();
-        validateAllNaturalNumbers(winningNumbersInput);
-        return Arrays.stream(winningNumbersInput.split(LOTTO_NUMBER_DELIMITER))
+    public static int getManualTicketNumber() {
+        String manualTicketNumberInput = scanner.nextLine();
+        return parseNumericInput(manualTicketNumberInput);
+    }
+
+    public static List<Integer> getLottoNumbers() {
+        String lottoNumbersInput = scanner.nextLine();
+        validateAllNaturalNumbers(lottoNumbersInput);
+        return Arrays.stream(lottoNumbersInput.split(LOTTO_NUMBER_DELIMITER))
             .map(Integer::parseInt)
             .collect(Collectors.toList());
     }
@@ -39,7 +43,6 @@ public class InputView {
         }
         return Integer.parseInt(inputValue);
     }
-
 
     private static void validateAllNaturalNumbers(String winningNumbersInput) {
         if (!Arrays.stream(winningNumbersInput.split(LOTTO_NUMBER_DELIMITER))
