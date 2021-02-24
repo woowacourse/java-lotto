@@ -33,7 +33,7 @@ class LottoMachineTest {
         int ticketCount = 3;
 
         //when
-        List<LottoTicket> lottoTickets = DUMMY_LOTTO_MACHINE.makeTickets(ticketCount);
+        List<LottoTicket> lottoTickets = DUMMY_LOTTO_MACHINE.makeRandomTickets(ticketCount);
 
         //then
         assertThat(lottoTickets.size()).isEqualTo(ticketCount);
@@ -47,7 +47,7 @@ class LottoMachineTest {
         InputView inputView = getInputView(manualLottoNumber);
 
         //when
-        assertThatCode(() -> DUMMY_LOTTO_MACHINE.makeManualTicket(inputView, 1))
+        assertThatCode(() -> DUMMY_LOTTO_MACHINE.makeManualTickets(inputView, 1))
                 .doesNotThrowAnyException();
     }
 
@@ -59,7 +59,7 @@ class LottoMachineTest {
         InputView inputView = getInputView(manualLottoNumber);
 
         //when
-        assertThatThrownBy(() -> DUMMY_LOTTO_MACHINE.makeManualTicket(inputView, 1))
+        assertThatThrownBy(() -> DUMMY_LOTTO_MACHINE.makeManualTickets(inputView, 1))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -4,6 +4,7 @@ import domain.ball.LottoBall;
 import domain.ball.LottoBallFactory;
 import domain.ball.LottoBalls;
 import domain.lotto.LottoTicket;
+import util.OutputUtil;
 import view.InputView;
 
 import java.util.Collections;
@@ -14,27 +15,19 @@ import java.util.stream.IntStream;
 import static domain.ball.LottoBalls.LOTTO_BALL_SIZE;
 
 public class LottoMachine {
-    public List<LottoTicket> makeTickets(int ticketCount) {
+    public List<LottoTicket> makeRandomTickets(int ticketCount) {
         return IntStream.range(0, ticketCount)
-                .mapToObj(count -> makeTicket())
+                .mapToObj(count -> makeRandomTicket())
                 .collect(Collectors.toList());
     }
 
-    private LottoTicket makeTicket() {
+    private LottoTicket makeRandomTicket() {
         List<LottoBall> lottoBalls = getRandomLottoBalls();
         return new LottoTicket(new LottoBalls(lottoBalls));
     }
 
-    private List<LottoBall> getRandomLottoBalls() {
-        List<LottoBall> lottoBalls = LottoBallFactory.getLottoBalls();
-        Collections.shuffle(lottoBalls);
-        return lottoBalls.stream()
-                .limit(LOTTO_BALL_SIZE)
-                .sorted()
-                .collect(Collectors.toList());
-    }
-
-    public List<LottoTicket> makeManualTicket(InputView inputView, int ticketCount) {
+    public List<LottoTicket> makeManualTickets(InputView inputView, int ticketCount) {
+        OutputUtil.printMessage("수동으로 구매할 번호를 입력해 주세요.");
         return IntStream.range(0, ticketCount)
                 .mapToObj(count -> makeManualTicket(inputView))
                 .collect(Collectors.toList());
@@ -46,5 +39,14 @@ public class LottoMachine {
                 .map(LottoBall::new)
                 .collect(Collectors.toList());
         return new LottoTicket(new LottoBalls(lottoBalls));
+    }
+
+    private List<LottoBall> getRandomLottoBalls() {
+        List<LottoBall> lottoBalls = LottoBallFactory.getLottoBalls();
+        Collections.shuffle(lottoBalls);
+        return lottoBalls.stream()
+                .limit(LOTTO_BALL_SIZE)
+                .sorted()
+                .collect(Collectors.toList());
     }
 }

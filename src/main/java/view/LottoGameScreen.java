@@ -22,7 +22,7 @@ public class LottoGameScreen {
     private static final String RESULT = "당첨통계";
     private static final String LINE = "----------";
     private static final String LOTTO_RESULT_MESSAGE = "%s개 일치 (%d원)- %d개";
-    private static final String SECOND_PRIZE_RESULT_MESSAGE = "%d개 일치, 보너스 볼 일치 (%d)원- %d";
+    private static final String SECOND_PRIZE_RESULT_MESSAGE = "%d개 일치, 보너스 볼 일치 (%d)원- %d개";
     private static final String REVENUE_RESULT_FORMATTER = "총 수익률은 %.2f입니다.";
 
     public void showTicketCount(final TicketCount lottoCount) {

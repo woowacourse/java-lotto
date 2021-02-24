@@ -25,10 +25,10 @@ public class GameManageApplication {
         BettingMoney bettingMoney = getBettingMoney();
         TicketCount ticketCount = getTicketCount(bettingMoney);
         lottoGameScreen.showTicketCount(ticketCount);
-        LottoTickets lottoTickets = lottoService.getLottoTickets(bettingMoney);
+        LottoTickets lottoTickets = lottoService.getLottoTickets(inputView, ticketCount);
         lottoGameScreen.showAllLottoStatus(lottoTickets.getLottoTickets());
-        WinningLotto winningLotto = getWinningLotto();
 
+        WinningLotto winningLotto = getWinningLotto();
         Result result = new Result(lottoTickets, winningLotto);
         lottoGameScreen.showGameResult(new LottoGameResultDto(result.getResults()));
         lottoGameScreen.showRevenueResult(result.findEarningsRate(bettingMoney));
