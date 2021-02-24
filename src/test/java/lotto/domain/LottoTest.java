@@ -26,6 +26,24 @@ public class LottoTest {
     }
 
     @Test
+    @DisplayName("숫자가 6개 초과로 들어올 때 검증")
+    void lottoNumbers_size_over() {
+        assertThatThrownBy(() -> {
+            new Lotto(new HashSet<>(Arrays.asList(
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(6),
+                LottoNumber.of(7)
+            )));
+        }).isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining(NUMBER_SIZE_ERROR);
+    }
+
+
+    @Test
     @DisplayName("중복이 있을 때 에러 발생")
     void lottoNumbers_duplicate() {
         assertThatThrownBy(() -> {
