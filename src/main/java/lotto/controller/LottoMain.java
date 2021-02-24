@@ -48,7 +48,7 @@ public class LottoMain {
     private static UserPurchase getUserPurchaseInput() {
         try {
             int purchasePrice = InputView.getPurchasePrice();
-            int manualTicketCount = InputView.getManualTicketCount();
+            int manualTicketCount = getManualTicketCountInput();
             return new UserPurchase(purchasePrice, manualTicketCount);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -56,11 +56,20 @@ public class LottoMain {
         }
     }
 
+    private static int getManualTicketCountInput() {
+        try {
+            return InputView.getManualTicketCount();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return getManualTicketCountInput();
+        }
+    }
+
     private static List<LottoTicket> getManualLottoTicketInput(UserPurchase userPurchase) {
         List<LottoTicket> manualLottoTickets = new ArrayList<>();
         InputPrinter.printManualTicketInputGuideMessage();
         try {
-            //TODO 메소드 분리
+            // TODO 메소드 분리
             for (int i = 0; i < userPurchase.getManualTicketCount(); i++) {
                 manualLottoTickets.add(getLottoTicketInput());
             }
