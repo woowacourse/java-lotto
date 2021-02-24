@@ -10,6 +10,7 @@ public class LottoResult {
     private static final int INIT_COUNT = 0;
     private static final int COUNTING_NUMBER = 1;
     private static final int RATE = 100;
+
     private final Map<LottoRank, Integer> rankMatch;
 
     public LottoResult() {
