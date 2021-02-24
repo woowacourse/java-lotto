@@ -33,12 +33,15 @@ public class Lotto {
 		return Collections.unmodifiableList(lottoNumbers);
 	}
 
-	public int countMatchingNumbersWith(WinningLotto winningLotto) {
-		return winningLotto.countMatchingNumbersWith(lottoNumbers);
+	public int countMatchingNumbersWith(Lotto that) {
+		return (int) this.lottoNumbers
+				.stream()
+				.filter(that::contains)
+				.count();
 	}
 
-	public boolean hasBonusMatchWith(WinningLotto winningLotto) {
-		return winningLotto.hasBonusMatchWith(lottoNumbers);
+	public boolean contains(LottoNumber lottoNumber) {
+		return lottoNumbers.contains(lottoNumber);
 	}
 
 	@Override

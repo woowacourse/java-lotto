@@ -29,10 +29,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
 		}
 	}
 
-	//TODO
-	// this 로 바꾸기
 	public boolean isIncludedIn(List<LottoNumber> numbers) {
-		return numbers.contains(new LottoNumber(number));
+		return numbers.contains(this);
 	}
 
 	public String getNumberAsString() {

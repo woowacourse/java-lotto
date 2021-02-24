@@ -19,8 +19,8 @@ public class Lottos {
 	public List<Rank> getResultsBasedOn(WinningLotto winningLotto) {
 		List<Rank> ranks = new ArrayList<>();
 		for (Lotto lotto : lottos) {
-			int matches = lotto.countMatchingNumbersWith(winningLotto);
-			boolean bonusMatch = lotto.hasBonusMatchWith(winningLotto);
+			int matches = winningLotto.countMatchingNumbersWith(lotto);
+			boolean bonusMatch = winningLotto.hasBonusMatchWith(lotto);
 			Rank rankByGivenMatchInformation = getRankByGivenMatchInformation(matches, bonusMatch);
 			ranks.add(rankByGivenMatchInformation);
 		}

@@ -69,26 +69,8 @@ public class LottoTest {
 	@DisplayName("매칭되는 숫자를 올바로 카운트 하는 지")
 	@Test
 	void countMatchingNumbers() {
-		int matches = lotto.countMatchingNumbersWith(winningLotto);
+		int matches = winningLotto.countMatchingNumbersWith(lotto);
 
 		assertThat(matches).isEqualTo(3);
-	}
-
-	@DisplayName("보너스 숫자가 있는지 올바로 확인 하는지")
-	@Test
-	void hasBonusNumber() {
-		assertThat(lotto.hasBonusMatchWith(winningLotto)).isFalse();
-
-		WinningLotto winningLottoWithMatchingBonusNumber = new WinningLotto(
-				new Lotto(Arrays.asList(
-						new LottoNumber(1),
-						new LottoNumber(2),
-						new LottoNumber(3),
-						new LottoNumber(4),
-						new LottoNumber(5),
-						new LottoNumber(6))),
-				new LottoNumber(40));
-
-		assertThat(lotto.hasBonusMatchWith(winningLottoWithMatchingBonusNumber)).isTrue();
 	}
 }

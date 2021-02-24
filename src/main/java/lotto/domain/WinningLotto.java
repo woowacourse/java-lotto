@@ -1,33 +1,28 @@
 package lotto.domain;
 
-import java.util.List;
-
-public class WinningLotto extends Lotto {
+public class WinningLotto {
 	public static final String DUPLICATE_BONUS_NUMBER_ERROR = "보너스 번호가 당첨 번호와 중복됩니다.";
 
+	private final Lotto winningLotto;
 	private final LottoNumber bonusNumber;
 
 	public WinningLotto(Lotto winningLotto, LottoNumber bonusNumber) {
-		super(winningLotto.getLottoNumbers());
-
-		validateDuplicateWithLottoNumbers(bonusNumber);
+		this.winningLotto = winningLotto;
+		validateDuplicateWithWinningNumbers(bonusNumber);
 		this.bonusNumber = bonusNumber;
 	}
 
-	private void validateDuplicateWithLottoNumbers(LottoNumber bonusNumber) {
-		if (bonusNumber.isIncludedIn(lottoNumbers)) {
+	private void validateDuplicateWithWinningNumbers(LottoNumber bonusNumber) {
+		if (winningLotto.contains(bonusNumber)) {
 			throw new IllegalArgumentException(DUPLICATE_BONUS_NUMBER_ERROR);
 		}
 	}
 
-	public int countMatchingNumbersWith(List<LottoNumber> lottoNumbers) {
-		return (int) this.lottoNumbers
-				.stream()
-				.filter(lottoNumbers::contains)
-				.count();
+	public int countMatchingNumbersWith(Lotto lotto) {
+		return lotto.countMatchingNumbersWith(winningLotto);
 	}
 
-	public boolean hasBonusMatchWith(List<LottoNumber> numbers) {
-		return numbers.contains(bonusNumber);
+	public boolean hasBonusMatchWith(Lotto lotto) {
+		return lotto.contains(bonusNumber);
 	}
 }
