@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
 import lotto.domain.LottoTicket;
 import lotto.type.LottoMatchType;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,15 +18,15 @@ class MatchedLottoNumbersTest {
     void setUp() {
         LottoTicket winningLottoTicket = new LottoTicket(
             Arrays.asList(
-                LottoNumbers.get(1),
-                LottoNumbers.get(2),
-                LottoNumbers.get(3),
-                LottoNumbers.get(4),
-                LottoNumbers.get(5),
-                LottoNumbers.get(6)
+                LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(6)
             )
         );
-        LottoNumber bonusNumber = LottoNumbers.get(7);
+        LottoNumber bonusNumber = LottoNumber.valueOf(7);
         winningTicketAndBonusNumber
             = new WinningTicketAndBonusNumber(winningLottoTicket, bonusNumber);
     }
@@ -37,12 +36,12 @@ class MatchedLottoNumbersTest {
     void Should_Return_ExpectedMatchResult_When_Regular2Bonus0() {
         LottoTicket lottoTicket = new LottoTicket(
             Arrays.asList(
-                LottoNumbers.get(1),
-                LottoNumbers.get(2),
-                LottoNumbers.get(11),
-                LottoNumbers.get(12),
-                LottoNumbers.get(13),
-                LottoNumbers.get(14)
+                LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(11),
+                LottoNumber.valueOf(12),
+                LottoNumber.valueOf(13),
+                LottoNumber.valueOf(14)
             )
         );
 
@@ -60,12 +59,12 @@ class MatchedLottoNumbersTest {
     void Should_Return_ExpectedMatchResult_When_Regular0Bonus1() {
         LottoTicket lottoTicket = new LottoTicket(
             Arrays.asList(
-                LottoNumbers.get(11),
-                LottoNumbers.get(7),
-                LottoNumbers.get(13),
-                LottoNumbers.get(14),
-                LottoNumbers.get(15),
-                LottoNumbers.get(16)
+                LottoNumber.valueOf(11),
+                LottoNumber.valueOf(7),
+                LottoNumber.valueOf(13),
+                LottoNumber.valueOf(14),
+                LottoNumber.valueOf(15),
+                LottoNumber.valueOf(16)
             )
         );
 
@@ -83,12 +82,12 @@ class MatchedLottoNumbersTest {
     void Should_Return_ExpectedMatchResult_When_Regular3Bonus1() {
         LottoTicket lottoTicket = new LottoTicket(
             Arrays.asList(
-                LottoNumbers.get(1),
-                LottoNumbers.get(2),
-                LottoNumbers.get(3),
-                LottoNumbers.get(7),
-                LottoNumbers.get(13),
-                LottoNumbers.get(14)
+                LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(7),
+                LottoNumber.valueOf(13),
+                LottoNumber.valueOf(14)
             )
         );
 

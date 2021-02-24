@@ -27,6 +27,22 @@ public class LottoNumberTest {
             .isInstanceOf(InvalidLottoNumberException.class);
     }
 
+    @DisplayName("캐싱되어있는 로또 번호 객체 가져오기 테스트")
+    @ParameterizedTest
+    @ValueSource(ints = {1, 10, 45})
+    void Should_Return_ExpectedNumber_When_ValueOf(int value) {
+        LottoNumber lottoNumber = LottoNumber.valueOf(value);
+        assertThat(lottoNumber.getNumber()).isEqualTo(value);
+    }
+
+    @DisplayName("유효하지 않은 값으로 캐싱되어있는 로또 번호 가져오기 테스트")
+    @ParameterizedTest
+    @ValueSource(ints = {-1, 0, 46})
+    void Should_ThrowException_When_ValueOfOutRange(int value) {
+        assertThatThrownBy(() -> LottoNumber.valueOf(value))
+            .isInstanceOf(InvalidLottoNumberException.class);
+    }
+
     @DisplayName("로또 번호 반환 테스트")
     @ParameterizedTest
     @ValueSource(ints = {1, 10, 45})

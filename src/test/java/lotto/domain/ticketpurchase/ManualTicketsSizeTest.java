@@ -1,7 +1,9 @@
 package lotto.domain.ticketpurchase;
 
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import lotto.domain.exception.InvalidManualTicketsSizeException;
 import org.junit.jupiter.api.DisplayName;

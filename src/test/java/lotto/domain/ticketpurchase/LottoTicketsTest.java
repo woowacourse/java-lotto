@@ -6,7 +6,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
 import lotto.domain.LottoTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,7 +17,7 @@ public class LottoTicketsTest {
         // given
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int number = 1; number <= 6; number++) {
-            lottoNumbers.add(LottoNumbers.get(number));
+            lottoNumbers.add(LottoNumber.valueOf(number));
         }
 
         LottoTicket lottoTicket1 = new LottoTicket(lottoNumbers);

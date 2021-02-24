@@ -19,9 +19,15 @@ public class LottoNumbers {
     private LottoNumbers() {
     }
 
-    public static LottoNumber get(int number) {
-        LottoNumber.validate(number);
-        return numbers.get(number - 1);
+    public static LottoNumber get(int index) {
+        validate(index);
+        return numbers.get(index);
+    }
+
+    private static void validate(int index) {
+        if (index < 0 || numbers.size() <= index) {
+            throw new IndexOutOfBoundsException("범위에서 벗어난 인덱스 입니다.");
+        }
     }
 
     public static List<LottoNumber> getRandomNumbersTicketSize() {

@@ -12,7 +12,6 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.Arrays;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
 import lotto.domain.LottoTicket;
 import lotto.domain.ticketpurchase.LottoTickets;
 import lotto.domain.ticketpurchase.ManualTicketsSize;
@@ -27,25 +26,24 @@ public class LottoResultTest {
     private static final int NEW_SCALE = 2;
 
     private PurchasePrice purchasePrice;
-    private ManualTicketsSize manualTicketsSize;
     private UserPurchase userPurchase;
     private WinningTicketAndBonusNumber winningTicketAndBonusNumber;
 
     @BeforeEach
     void setUp() {
         purchasePrice = new PurchasePrice(PURCHASE_PRICE);
-        manualTicketsSize = new ManualTicketsSize(1, purchasePrice);
+        ManualTicketsSize manualTicketsSize = new ManualTicketsSize(1, purchasePrice);
         LottoTicket winnerTicket = new LottoTicket(
             Arrays.asList(
-                LottoNumbers.get(1),
-                LottoNumbers.get(2),
-                LottoNumbers.get(3),
-                LottoNumbers.get(4),
-                LottoNumbers.get(5),
-                LottoNumbers.get(6)
+                LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(6)
             )
         );
-        LottoNumber bonusNumber = LottoNumbers.get(7);
+        LottoNumber bonusNumber = LottoNumber.valueOf(7);
         userPurchase = new UserPurchase(purchasePrice, manualTicketsSize);
         winningTicketAndBonusNumber = new WinningTicketAndBonusNumber(winnerTicket, bonusNumber);
     }
@@ -55,12 +53,12 @@ public class LottoResultTest {
     void Should_Return_ExpectedResult_When_SixNumbersMatched() {
         // given
         LottoTicket lottoTicket = new LottoTicket(Arrays.asList(
-            LottoNumbers.get(1),
-            LottoNumbers.get(2),
-            LottoNumbers.get(3),
-            LottoNumbers.get(4),
-            LottoNumbers.get(5),
-            LottoNumbers.get(6)
+            LottoNumber.valueOf(1),
+            LottoNumber.valueOf(2),
+            LottoNumber.valueOf(3),
+            LottoNumber.valueOf(4),
+            LottoNumber.valueOf(5),
+            LottoNumber.valueOf(6)
         ));
         LottoTickets lottoTickets = new LottoTickets();
         lottoTickets.add(lottoTicket);
@@ -95,12 +93,12 @@ public class LottoResultTest {
     void Should_Return_ExpectedResult_When_FiveNumbersAndBonusNumberMatched() {
         // given
         LottoTicket lottoTicket = new LottoTicket(Arrays.asList(
-            LottoNumbers.get(1),
-            LottoNumbers.get(2),
-            LottoNumbers.get(3),
-            LottoNumbers.get(4),
-            LottoNumbers.get(5),
-            LottoNumbers.get(7)
+            LottoNumber.valueOf(1),
+            LottoNumber.valueOf(2),
+            LottoNumber.valueOf(3),
+            LottoNumber.valueOf(4),
+            LottoNumber.valueOf(5),
+            LottoNumber.valueOf(7)
         ));
         LottoTickets lottoTickets = new LottoTickets();
         lottoTickets.add(lottoTicket);
@@ -135,12 +133,12 @@ public class LottoResultTest {
     void Should_Return_ExpectedResult_When_FiveNumbersMatched() {
         // given
         LottoTicket lottoTicket = new LottoTicket(Arrays.asList(
-            LottoNumbers.get(1),
-            LottoNumbers.get(2),
-            LottoNumbers.get(3),
-            LottoNumbers.get(4),
-            LottoNumbers.get(5),
-            LottoNumbers.get(9)
+            LottoNumber.valueOf(1),
+            LottoNumber.valueOf(2),
+            LottoNumber.valueOf(3),
+            LottoNumber.valueOf(4),
+            LottoNumber.valueOf(5),
+            LottoNumber.valueOf(9)
         ));
         LottoTickets lottoTickets = new LottoTickets();
         lottoTickets.add(lottoTicket);
@@ -175,12 +173,12 @@ public class LottoResultTest {
     void Should_Return_ExpectedResult_When_FourNumbersMatched() {
         // given
         LottoTicket lottoTicket = new LottoTicket(Arrays.asList(
-            LottoNumbers.get(1),
-            LottoNumbers.get(2),
-            LottoNumbers.get(3),
-            LottoNumbers.get(4),
-            LottoNumbers.get(9),
-            LottoNumbers.get(10)
+            LottoNumber.valueOf(1),
+            LottoNumber.valueOf(2),
+            LottoNumber.valueOf(3),
+            LottoNumber.valueOf(4),
+            LottoNumber.valueOf(9),
+            LottoNumber.valueOf(10)
         ));
         LottoTickets lottoTickets = new LottoTickets();
         lottoTickets.add(lottoTicket);
@@ -215,12 +213,12 @@ public class LottoResultTest {
     void Should_Return_ExpectedResult_When_ThreeNumbersMatched() {
         // given
         LottoTicket lottoTicket = new LottoTicket(Arrays.asList(
-            LottoNumbers.get(1),
-            LottoNumbers.get(2),
-            LottoNumbers.get(3),
-            LottoNumbers.get(10),
-            LottoNumbers.get(11),
-            LottoNumbers.get(12)
+            LottoNumber.valueOf(1),
+            LottoNumber.valueOf(2),
+            LottoNumber.valueOf(3),
+            LottoNumber.valueOf(10),
+            LottoNumber.valueOf(11),
+            LottoNumber.valueOf(12)
         ));
         LottoTickets lottoTickets = new LottoTickets();
         lottoTickets.add(lottoTicket);
@@ -254,20 +252,20 @@ public class LottoResultTest {
     void Should_Return_ExpectedResult_When_2ndAnd4thWinning() {
         // given
         LottoTicket lottoTicket1 = new LottoTicket(Arrays.asList(
-            LottoNumbers.get(1),
-            LottoNumbers.get(2),
-            LottoNumbers.get(3),
-            LottoNumbers.get(4),
-            LottoNumbers.get(5),
-            LottoNumbers.get(7)
+            LottoNumber.valueOf(1),
+            LottoNumber.valueOf(2),
+            LottoNumber.valueOf(3),
+            LottoNumber.valueOf(4),
+            LottoNumber.valueOf(5),
+            LottoNumber.valueOf(7)
         ));
         LottoTicket lottoTicket2 = new LottoTicket(Arrays.asList(
-            LottoNumbers.get(1),
-            LottoNumbers.get(2),
-            LottoNumbers.get(3),
-            LottoNumbers.get(4),
-            LottoNumbers.get(9),
-            LottoNumbers.get(10)
+            LottoNumber.valueOf(1),
+            LottoNumber.valueOf(2),
+            LottoNumber.valueOf(3),
+            LottoNumber.valueOf(4),
+            LottoNumber.valueOf(9),
+            LottoNumber.valueOf(10)
         ));
         LottoTickets lottoTickets = new LottoTickets();
         lottoTickets.add(lottoTicket1);

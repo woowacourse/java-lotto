@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
 import lotto.domain.LottoTicket;
 import lotto.domain.ticketpurchase.LottoTickets;
 import lotto.domain.ticketpurchase.ManualTicketsSize;
@@ -80,7 +79,7 @@ public class InputView {
         String lottoNumbersInput = scanner.nextLine();
         validateAllIntegerLottoNumbersInput(lottoNumbersInput);
         return Arrays.stream(lottoNumbersInput.split(LOTTO_NUMBERS_DELIMITER))
-            .map(numberInput -> LottoNumbers.get(Integer.parseInt(numberInput)))
+            .map(numberInput -> LottoNumber.valueOf(Integer.parseInt(numberInput)))
             .collect(Collectors.toList());
     }
 
@@ -112,6 +111,6 @@ public class InputView {
         String bonusNumberInput = scanner.nextLine();
         int bonusNumber = validateInteger(bonusNumberInput);
         InputPrinter.printNewLine();
-        return LottoNumbers.get(bonusNumber);
+        return LottoNumber.valueOf(bonusNumber);
     }
 }

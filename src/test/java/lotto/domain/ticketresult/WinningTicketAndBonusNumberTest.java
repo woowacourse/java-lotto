@@ -6,7 +6,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
 import lotto.domain.LottoTicket;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -20,22 +19,22 @@ public class WinningTicketAndBonusNumberTest {
     void setUp() {
         winningTicket = new LottoTicket(
             Arrays.asList(
-                LottoNumbers.get(1),
-                LottoNumbers.get(2),
-                LottoNumbers.get(3),
-                LottoNumbers.get(4),
-                LottoNumbers.get(5),
-                LottoNumbers.get(6)
+                LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(6)
             )
         );
-        LottoNumber bonusNumber = LottoNumbers.get(7);
+        LottoNumber bonusNumber = LottoNumber.valueOf(7);
         winningTicketAndBonusNumber = new WinningTicketAndBonusNumber(winningTicket, bonusNumber);
     }
 
     @DisplayName("우승 로또 번호 정상 생성")
     @Test
     void Should_Not_ThrowException_When_ValidLottoNumbers() {
-        LottoNumber bonusNumber = LottoNumbers.get(7);
+        LottoNumber bonusNumber = LottoNumber.valueOf(7);
         assertThatCode(
             () -> new WinningTicketAndBonusNumber(winningTicket, bonusNumber)
         ).doesNotThrowAnyException();
@@ -44,7 +43,7 @@ public class WinningTicketAndBonusNumberTest {
     @DisplayName("당첨 번호에 보너스 번호 포함시 에러")
     @Test
     void Should_ThrowException_When_WinningLottoNumbersContainBonusNumber() {
-        LottoNumber bonusNumber = LottoNumbers.get(5);
+        LottoNumber bonusNumber = LottoNumber.valueOf(5);
         assertThatThrownBy(
             () -> new WinningTicketAndBonusNumber(winningTicket, bonusNumber)
         ).isInstanceOf(IllegalArgumentException.class);
@@ -56,12 +55,12 @@ public class WinningTicketAndBonusNumberTest {
         // given
         LottoTicket lottoTicket = new LottoTicket(
             Arrays.asList(
-                LottoNumbers.get(1),
-                LottoNumbers.get(2),
-                LottoNumbers.get(3),
-                LottoNumbers.get(11),
-                LottoNumbers.get(12),
-                LottoNumbers.get(13)
+                LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(11),
+                LottoNumber.valueOf(12),
+                LottoNumber.valueOf(13)
             )
         );
 
@@ -79,12 +78,12 @@ public class WinningTicketAndBonusNumberTest {
         // given
         LottoTicket lottoTicket = new LottoTicket(
             Arrays.asList(
-                LottoNumbers.get(1),
-                LottoNumbers.get(2),
-                LottoNumbers.get(3),
-                LottoNumbers.get(4),
-                LottoNumbers.get(5),
-                LottoNumbers.get(13)
+                LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(13)
             )
         );
 

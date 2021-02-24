@@ -20,12 +20,12 @@ public class LottoTicketTest {
     void setUp() {
         lottoNumbers = new ArrayList<>(
             Arrays.asList(
-                LottoNumbers.get(5),
-                LottoNumbers.get(4),
-                LottoNumbers.get(2),
-                LottoNumbers.get(3),
-                LottoNumbers.get(6),
-                LottoNumbers.get(1)
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(6),
+                LottoNumber.valueOf(1)
             ));
         lottoTicket = new LottoTicket(lottoNumbers);
     }
@@ -59,7 +59,7 @@ public class LottoTicketTest {
     void Should_ThrowException_When_LottoNumberDuplicate() {
         List<LottoNumber> duplicateLottoNumbers = new ArrayList<>(lottoNumbers);
         duplicateLottoNumbers.remove(0);
-        duplicateLottoNumbers.add(0, LottoNumbers.get(1));
+        duplicateLottoNumbers.add(0, LottoNumber.valueOf(1));
 
         assertThatThrownBy(() -> new LottoTicket(duplicateLottoNumbers))
             .isInstanceOf(IllegalArgumentException.class);
@@ -70,25 +70,25 @@ public class LottoTicketTest {
     void Should_Return_AllLottoNumbers_When_Get() {
         assertThat(lottoTicket.getNumbers())
             .containsExactly(
-                LottoNumbers.get(1),
-                LottoNumbers.get(2),
-                LottoNumbers.get(3),
-                LottoNumbers.get(4),
-                LottoNumbers.get(5),
-                LottoNumbers.get(6)
+                LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(6)
             );
     }
 
     @DisplayName("로또티켓에 특정 로또번호가 포함되어있으면 true 반환")
     @Test
     void Should_Return_True_When_TicketContainsNumber() {
-        assertThat(lottoTicket.contains(LottoNumbers.get(3))).isTrue();
+        assertThat(lottoTicket.contains(LottoNumber.valueOf(3))).isTrue();
     }
 
     @DisplayName("로또티켓에 특정 로또번호가 포함되어있지 않으면 false 반환")
     @Test
     void Should_Return_False_When_TicketNotContainsNumber() {
-        assertThat(lottoTicket.contains(LottoNumbers.get(7))).isFalse();
+        assertThat(lottoTicket.contains(LottoNumber.valueOf(7))).isFalse();
     }
 
     @DisplayName("두 로또티켓에 모두 포함되어있는 로또번호들을 반환하는지 테스트")
@@ -96,19 +96,19 @@ public class LottoTicketTest {
     void Should_Return_ExpectedNumbers_When_TwoTicketContainNumbers() {
         List<LottoNumber> lottoNumbers2 = new ArrayList<>(
             Arrays.asList(
-                LottoNumbers.get(5),
-                LottoNumbers.get(4),
-                LottoNumbers.get(22),
-                LottoNumbers.get(23),
-                LottoNumbers.get(6),
-                LottoNumbers.get(21)
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(22),
+                LottoNumber.valueOf(23),
+                LottoNumber.valueOf(6),
+                LottoNumber.valueOf(21)
             ));
         LottoTicket lottoTicket2 = new LottoTicket(lottoNumbers2);
         assertThat(lottoTicket.getMatchedLottoNumbers(lottoTicket2))
             .containsExactly(
-                LottoNumbers.get(4),
-                LottoNumbers.get(5),
-                LottoNumbers.get(6)
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(6)
             );
     }
 }
