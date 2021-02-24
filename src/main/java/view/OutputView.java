@@ -28,11 +28,11 @@ public class OutputView {
         return instance;
     }
 
-    public static void printLottoTicketCount(Money budget) {
-        System.out.printf((MESSAGE_LOTTO_TICKET_COUNT_FORMAT) + "%n", budget.toLong() / PRICE);
+    public void printLottoTicketsCount(List<LottoTicket> lottoTickets) {
+        System.out.printf((MESSAGE_LOTTO_TICKET_COUNT_FORMAT) + "%n", lottoTickets.size());
     }
 
-    public void printLottoTicket(List<LottoTicket> lottoTickets) {
+    public void printLottoTickets(List<LottoTicket> lottoTickets) {
         for (LottoTicket lottoTicket : lottoTickets) {
             String numbers = lottoTicket.numbers().stream()
                     .map(LottoNumber::toString)

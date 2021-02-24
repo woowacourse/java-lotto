@@ -24,9 +24,7 @@ public class LottoController {
 
     private Money createBudgetMoney() {
         try {
-            Money budget = new Money(inputView.scanBudget());
-            OutputView.printLottoTicketCount(budget);
-            return budget;
+            return new Money(inputView.scanBudget());
         } catch (RuntimeException e) {
             outputView.printError(e);
             return createBudgetMoney();
@@ -35,7 +33,8 @@ public class LottoController {
 
     private List<LottoTicket> createLottoTickets(Money budget) {
         List<LottoTicket> lottoTickets = LottoMachine.buy(budget);
-        outputView.printLottoTicket(lottoTickets);
+        outputView.printLottoTicketsCount(lottoTickets);
+        outputView.printLottoTickets(lottoTickets);
         return lottoTickets;
     }
 
