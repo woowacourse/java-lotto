@@ -19,19 +19,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoSellerTest {
 
-    private LottoSeller lottoSeller;
     private List<Lotto> manualLottos;
 
     @BeforeEach
     void setUp() {
         manualLottos = new ArrayList<>();
-        lottoSeller = new LottoSeller();
     }
 
     @Test
     @DisplayName("로또 생성 성공")
     void createLotto_enoughMoney() {
-        LottoGroup lottoGroup = lottoSeller.sellLotto(Money.of(2000), 0, manualLottos);
+        LottoGroup lottoGroup = LottoSeller.sellLotto(Money.of(2000), 0, manualLottos);
         assertThat(lottoGroup.size()).isEqualTo(2);
     }
 
@@ -39,7 +37,7 @@ class LottoSellerTest {
     @DisplayName("로또 생성 실패 - 음수 또는 부족한 돈")
     @ValueSource(ints = {500, -100})
     void createLotto_notEnoughMoney(int price) {
-        Assertions.assertThatThrownBy(() -> lottoSeller.sellLotto(Money.of(price), 0, manualLottos))
+        Assertions.assertThatThrownBy(() -> LottoSeller.sellLotto(Money.of(price), 0, manualLottos))
                 .isInstanceOf(LottoPriceException.class);
     }
 
@@ -55,7 +53,7 @@ class LottoSellerTest {
             manualLottos.add(LottoGenerator.generate(lottoNumbers));
         }
 
-        List<Lotto> lottos = lottoSeller.sellLotto(Money.of(Integer.parseInt(money)), manualCount, manualLottos).lottoGroup();
+        List<Lotto> lottos = LottoSeller.sellLotto(Money.of(Integer.parseInt(money)), manualCount, manualLottos).lottoGroup();
         assertThat(lottos).isEqualTo(manualLottos);
     }
 
@@ -71,7 +69,7 @@ class LottoSellerTest {
                     .collect(Collectors.toList());
             manualLottos.add(LottoGenerator.generate(lottoNumbers));
         }
-        Assertions.assertThatThrownBy(() -> lottoSeller.sellLotto(Money.of(Integer.parseInt(money)), manualCount, manualLottos))
+        Assertions.assertThatThrownBy(() -> LottoSeller.sellLotto(Money.of(Integer.parseInt(money)), manualCount, manualLottos))
                 .isInstanceOf(LottoPriceException.class);
     }
 }

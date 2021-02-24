@@ -11,7 +11,7 @@ public class LottoSeller {
     private static final int LOTTO_PRICE = 1000;
     private static final int MIN_COUNT = 1;
 
-    public LottoGroup sellLotto(final Money money, final int manualCount, List<Lotto> manualLottos) {
+    public static LottoGroup sellLotto(final Money money, final int manualCount, List<Lotto> manualLottos) {
         int count = money.divide(LOTTO_PRICE);
         validateCount(count, manualCount);
 
