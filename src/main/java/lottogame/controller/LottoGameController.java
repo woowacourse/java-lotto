@@ -1,11 +1,12 @@
 package lottogame.controller;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import lottogame.domain.Count;
 import lottogame.domain.LottoGame;
-import lottogame.domain.LottoGameResult;
 import lottogame.domain.Money;
+import lottogame.domain.Rank;
 import lottogame.domain.machine.LottoTicketIssueMachine;
 import lottogame.domain.number.LottoWinningNumbers;
 import lottogame.domain.ticket.LottoTickets;
@@ -24,9 +25,9 @@ public class LottoGameController {
         LottoWinningNumbers lottoWinningNumbers = getWinningNumbers();
 
         LottoGame lottoGame = new LottoGame(lottoTickets, lottoWinningNumbers);
-        LottoGameResult lottoGameResult = lottoGame.getMatchingResult();
-        OutputView.printLottoGameResult(lottoGameResult);
-        OutputView.printLottoGameYield(lottoGame.getYield(lottoGameResult));
+        Map<Rank, Integer> ranks =  lottoGame.getMatchingResult();
+        OutputView.printLottoGameResult(ranks);
+        OutputView.printLottoGameYield(lottoGame.getYield(ranks));
     }
 
     private LottoTickets getLottoTickets(final Money money, final Count manualTicketCount) {

@@ -1,8 +1,8 @@
 package lottogame.view;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
-import lottogame.domain.LottoGameResult;
 import lottogame.domain.Rank;
 
 public class OutputView {
@@ -24,11 +24,11 @@ public class OutputView {
         }
     }
 
-    public static void printLottoGameResult(final LottoGameResult lottoGameResult) {
+    public static void printLottoGameResult(final Map<Rank, Integer> ranks) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
-        for (Entry<Rank, Integer> rank : lottoGameResult.getRanks().entrySet()) {
+        for (Entry<Rank, Integer> rank : ranks.entrySet()) {
             System.out.println(printLottoRank(rank.getKey(), rank.getValue()));
         }
     }

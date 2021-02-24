@@ -1,11 +1,11 @@
 package lottogame.domain.ticket;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import lottogame.domain.LottoGameResult;
 import lottogame.domain.Rank;
 import lottogame.domain.number.LottoWinningNumbers;
 
@@ -32,13 +32,13 @@ public class LottoTickets {
         return ticketsList;
     }
 
-    public LottoGameResult getMatchingResult(final LottoWinningNumbers lottoWinningNumbers,
+    public Map<Rank, Integer> getMatchingResult(final LottoWinningNumbers lottoWinningNumbers,
         final Map<Rank, Integer> matchingResults) {
         for (LottoTicket lottoTicket : this.lottoTickets) {
             Rank rank = getRank(lottoWinningNumbers, lottoTicket);
             matchingResults.put(rank, matchingResults.get(rank) + 1);
         }
-        return new LottoGameResult(matchingResults);
+        return new EnumMap<>(matchingResults);
     }
 
     private Rank getRank(LottoWinningNumbers lottoWinningNumbers, LottoTicket lottoTicket) {
