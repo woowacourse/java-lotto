@@ -15,16 +15,17 @@ class LottoMachine2Test {
 
     @ParameterizedTest
     @MethodSource("buyTickets_testcase")
-    void buyTickets(String moneyValue, List<String> manualTicketsValue, int ManualTicketsSize,
-            int AutoTicketsSize, int TotalTicketsSize) {
+    void buyTickets(String moneyValue, List<String> manualTicketsValue, int manualTicketsSize,
+            int autoTicketsSize, int totalTicketsSize) {
 
-        LottoMachine2 lottoMachine2 = LottoMachine2
-                .getInstance(Money.valueOf(moneyValue), Integer.toString(manualTicketsValue.size()));
+        Money money = Money.valueOf(moneyValue);
+        ManualBuyAmount manualBuyAmount = ManualBuyAmount.getInstance(Integer.toString(manualTicketsSize), money);
+        LottoMachine2 lottoMachine2 = LottoMachine2.getInstance(money, manualBuyAmount);
         UsersLottoTickets usersLottoTickets = lottoMachine2.buyTickets(manualTicketsValue);
 
-        assertThat(usersLottoTickets.getManualTicketsSize()).isEqualTo(ManualTicketsSize);
-        assertThat(usersLottoTickets.getAutoTicketsSize()).isEqualTo(AutoTicketsSize);
-        assertThat(usersLottoTickets.getTotalTickets().size()).isEqualTo(TotalTicketsSize);
+        assertThat(usersLottoTickets.getManualTicketsSize()).isEqualTo(manualTicketsSize);
+        assertThat(usersLottoTickets.getAutoTicketsSize()).isEqualTo(autoTicketsSize);
+        assertThat(usersLottoTickets.getTotalTickets().size()).isEqualTo(totalTicketsSize);
     }
 
     private static Stream<Arguments> buyTickets_testcase() {

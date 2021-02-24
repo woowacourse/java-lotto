@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import lotto.domain.lotto.LottoMachine2;
 import lotto.domain.lotto.LottoTicket;
+import lotto.domain.lotto.ManualBuyAmount;
 import lotto.domain.lotto.Money;
 import lotto.domain.result.LottoMatcher;
 import lotto.domain.result.Result;
@@ -44,8 +45,10 @@ public class LottoApplication2 {
     }
 
     private static UsersLottoTickets buyLottoTickets(Money money) {
-        LottoMachine2 lottoMachine = LottoMachine2
-                .getInstance(money, InputView.getManualBuyAmountInput());
+        ManualBuyAmount manualAmount = ManualBuyAmount
+                .getInstance(InputView.getManualBuyAmountInput(), money);
+
+        LottoMachine2 lottoMachine = LottoMachine2.getInstance(money, manualAmount);
 
         List<String> ticketsValue = getManualTicketsValue(lottoMachine.getManualBuyAmount());
 
