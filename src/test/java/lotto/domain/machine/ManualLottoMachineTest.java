@@ -35,16 +35,16 @@ class ManualLottoMachineTest {
 
     }
 
-    @DisplayName("수동 로또가 생성되는지 확인")
+    @DisplayName("수동로또가 로또 개수, 로또 번호들을 인자로 받아 생성되는지 확인")
     @Test
-    void createTicketsByMoneyTest() {
+    void createTicketsTest() {
         LottoTickets lottoTickets = manualLottoMachine.createTickets(expectedSize, lottoNumbersBundle);
 
         assertThat(lottoTickets.size()).isEqualTo(expectedSize);
         assertThat(lottoTickets.list().get(0)).isEqualTo(LottoTicket.createLottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
 
-    @DisplayName("수동 로또 개수 예외처리 확인")
+    @DisplayName("수동 로또 개수와 로또 번호들의 개수와 맞지 않을 때 예외처리 확인")
     @Test
     void 수동_로또_개수_예외처리() {
         assertThatThrownBy(() -> manualLottoMachine.createTickets(expectedSize - 1, lottoNumbersBundle)).

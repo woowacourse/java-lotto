@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class MoneyTest {
-    @DisplayName("금액이 잘 생성되는지 확인")
+    @DisplayName("숫자를 인자로 받아 금액을 생성하는지 확인")
     @Test
     void 금액_객체_생성_테스트() {
         int expectedMoneyAmount = 1000;
@@ -33,5 +33,15 @@ class MoneyTest {
         Money originMoney = new Money(originMoneyAmount);
         Money minusMoney = new Money(minusMoneyAmount);
         assertThat(originMoney.minus(minusMoney).getMoney()).isEqualTo(originMoneyAmount - minusMoneyAmount);
+    }
+
+    @DisplayName("금액 나누기 테스트")
+    @ParameterizedTest
+    @CsvSource(value = {"1500,2,750", "10000,4,2500"})
+    void 금액_나누기_테스트(int originMoneyAmount, int times, int expectedMoney) {
+        Money originMoney = new Money(originMoneyAmount);
+        Money divideMoney = new Money(times);
+
+        assertThat(originMoney.divide(divideMoney)).isEqualTo(expectedMoney);
     }
 }

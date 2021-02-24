@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class PurchaseInfoTest {
-    @DisplayName("구입정보 생성 테스트")
+    @DisplayName("구매금, 로또 가격, 수동로또 개수를 인자로 받아 객체 생성 테스트")
     @Test
     void createPurchaseInfoTest() {
         int numberOfManualLotto = 2;
@@ -16,7 +16,7 @@ class PurchaseInfoTest {
         assertThat(purchaseInfo.numberOfManualLotto()).isEqualTo(numberOfManualLotto);
     }
 
-    @DisplayName("남은 금액 테스트")
+    @DisplayName("잔액계산 테스트")
     @ParameterizedTest
     @CsvSource({"5000,1000,3000", "8000,1500,5000", "1500,250,1000"})
     void calculateLeftMoney(int purchaseMoney, int lottoPrice, int expectedMoneyAmount) {

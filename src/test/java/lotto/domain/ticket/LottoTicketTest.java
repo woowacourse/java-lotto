@@ -1,7 +1,6 @@
 package lotto.domain.ticket;
 
 import lotto.domain.number.LottoNumberFactory;
-import lotto.domain.ticket.LottoTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTicketTest {
-    @DisplayName("로또번호 리스트 생성 테스트")
+    @DisplayName("Integer 리스트를 인자로 로또번호 리스트 생성하는 createLottoTicket 테스트")
     @Test
     void 로또번호_리스트_생성_테스트() {
         List<Integer> randomNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);

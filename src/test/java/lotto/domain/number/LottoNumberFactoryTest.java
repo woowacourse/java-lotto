@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoNumberFactoryTest {
-    @DisplayName("로또번호 생성 테스트")
+    @DisplayName("로또 번호 생성 메소드인 of 테스트")
     @Test
     void 로또번호_생성_테스트() {
         int testNumber = 1;

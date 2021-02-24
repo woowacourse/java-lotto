@@ -20,7 +20,7 @@ class LottoNumbersTest {
         lottoNumbers = new LottoNumbers(rowLottoNumbers);
     }
 
-    @DisplayName("로또번호 일급컬렉션 생성테스트")
+    @DisplayName("번호 목록을 받아 로또번호 일급컬렉션을 생성하는 메소드인 of 테스트")
     @Test
     void createLottoNumbersTest() {
         List<LottoNumber> lottoNumberList = rowLottoNumbers.stream()

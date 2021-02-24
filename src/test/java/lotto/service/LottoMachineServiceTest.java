@@ -12,7 +12,6 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-
 class LottoMachineServiceTest {
     private LottoMachineService lottoMachineService = new LottoMachineService(new Money(1000));
 
