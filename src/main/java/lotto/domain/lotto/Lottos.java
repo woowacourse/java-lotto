@@ -17,4 +17,10 @@ public class Lottos {
     public List<Lotto> getLottos(){
         return this.values;
     }
+
+    public void check(LottoResult lottoResult, WinningLotto winningLotto) {
+        for (Lotto lotto : values) {
+            lottoResult.checkWinningLotto(lotto, winningLotto);
+        }
+    }
 }

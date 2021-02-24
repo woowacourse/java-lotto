@@ -43,9 +43,8 @@ public class LottoController {
 
     private void compareLotto(Lottos purchasedLottos, WinningLotto winningLotto) {
         LottoResult lottoResult = new LottoResult();
-        for (Lotto lotto : purchasedLottos.getLottos()) {
-            lottoResult.checkWinningLotto(lotto, winningLotto);
-        }
+
+        purchasedLottos.check(lottoResult, winningLotto);
 
         OutputView.totalWinning();
         OutputView.numMatchPrint(lottoResult);
