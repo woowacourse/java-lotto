@@ -23,8 +23,9 @@ public class LottoTickets {
         }
     }
 
-    public void concat(final LottoTickets lottoTickets){
+    public void concat(final LottoTickets lottoTickets) {
         this.lottoTickets.addAll(lottoTickets.toList());
+        this.autoTicketCount += lottoTickets.getAutoTicketsCount();
     }
 
     public List<LottoTicket> toList() {

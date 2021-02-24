@@ -15,12 +15,16 @@ public class LottoGame {
 
     private LottoNumber drawnBonusNumber;
     private LottoNumbers drawnWinningNumbers;
-    private LottoTickets lottoTickets;
     private LottoGameResult lottoGameResult;
+    private LottoTickets lottoTickets = new LottoTickets();
     private final LottoTicketMachine lottoTicketMachine = new LottoTicketMachine();
 
-    public void buyTickets(final Money money) {
-        this.lottoTickets = lottoTicketMachine.buyTickets(money);
+    public void buyManualTicket(final Money money, final String manualLottoNumbers) {
+        this.lottoTickets.add(lottoTicketMachine.buyManualTicket(money, manualLottoNumbers));
+    }
+
+    public void buyAutoTickets(final Money money) {
+        this.lottoTickets.concat(lottoTicketMachine.buyAutoTickets(money));
     }
 
     public void drawWinningNumber(final String winningNumbers, final String bonusNumber) {
