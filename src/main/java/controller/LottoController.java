@@ -3,7 +3,7 @@ package controller;
 import domain.*;
 import view.InputView;
 import view.OutputView;
-import view.ScanRepeater;
+import util.Repeater;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,11 +13,11 @@ public class LottoController {
     private final OutputView outputView = OutputView.getInstance();
 
     public void run() {
-        Budget budget = createBudget();
+        Budget budget = Repeater.repeatFunctionOnError(this::createBudget);
         Money investedMoney = budget.remain();
         List<LottoTicket> lottoTickets = buyLottosAutomatically(budget);
         outputView.printLottoTicket(lottoTickets);
-        WinningNumbers winningNumber = createWinningNumber();
+        WinningNumbers winningNumber = Repeater.repeatFunctionOnError(this::createWinningNumber);
         Statistics statistics = new Statistics(winningNumber, lottoTickets);
         Profit profit = new Profit(investedMoney, statistics.getReward());
         outputView.printStatistics(statistics);
@@ -33,22 +33,12 @@ public class LottoController {
     }
 
     private WinningNumbers createWinningNumber() {
-        try {
-            LottoTicket winningNumbers = LottoTicket.valueOf(ScanRepeater.scanOrRepeatOnError(inputView::scanWinningNumber));
-            LottoNumber bonusBall = new LottoNumber(ScanRepeater.scanOrRepeatOnError(inputView::scanBonusBall));
-            return new WinningNumbers(winningNumbers, bonusBall);
-        } catch (RuntimeException e) {
-            outputView.printError(e);
-            return createWinningNumber();
-        }
+        LottoTicket winningNumbers = LottoTicket.valueOf(Repeater.repeatFunctionOnError(inputView::scanWinningNumber));
+        LottoNumber bonusBall = new LottoNumber(Repeater.repeatFunctionOnError(inputView::scanBonusBall));
+        return new WinningNumbers(winningNumbers, bonusBall);
     }
 
     private Budget createBudget() {
-        try {
-            return new Budget(new Money(ScanRepeater.scanOrRepeatOnError(inputView::scanBudget)));
-        } catch (RuntimeException e) {
-            outputView.printError(e);
-            return createBudget();
-        }
+        return new Budget(new Money(Repeater.repeatFunctionOnError(inputView::scanBudget)));
     }
 }
