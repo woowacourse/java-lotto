@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.lotto.LottoNumber;
 import lotto.exception.InvalidLottoNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,7 @@ class LottoNumberTest {
     @DisplayName("로또 번호 일치 테스트")
     @Test
     void equalNumber() {
-        assertThat(new LottoNumber(32)).isEqualTo(new LottoNumber(32));
+        assertThat(new LottoNumber(45)).isEqualTo(new LottoNumber(45));
     }
 
     @DisplayName("올바르지 않은 로또 번호 범위 테스트")
@@ -20,6 +21,9 @@ class LottoNumberTest {
     void invalidBound() {
         assertThatThrownBy(() -> {
             new LottoNumber(0);
+        }).isInstanceOf(InvalidLottoNumberException.class);
+        assertThatThrownBy(() -> {
+            new LottoNumber(46);
         }).isInstanceOf(InvalidLottoNumberException.class);
     }
 }

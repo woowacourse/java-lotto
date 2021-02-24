@@ -1,7 +1,8 @@
 package lotto.domain;
 
-import java.util.Objects;
 import lotto.exception.InvalidPaymentAmountException;
+
+import java.util.Objects;
 
 public class Payment {
 

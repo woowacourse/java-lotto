@@ -3,6 +3,9 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
+
+import lotto.domain.reword.Reword;
+import lotto.domain.reword.Rewords;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,9 +22,9 @@ public class RewordsTest {
     @DisplayName("포함된 개수 테스트")
     @Test
     void rewordRankCount() {
-        assertThat(rewords.getFirst()).isEqualTo(1);
-        assertThat(rewords.getSecond()).isEqualTo(2);
-        assertThat(rewords.getFifth()).isEqualTo(0);
+        assertThat(rewords.countOfReword(Reword.FIRST)).isEqualTo(1);
+        assertThat(rewords.countOfReword(Reword.SECOND)).isEqualTo(2);
+        assertThat(rewords.countOfReword(Reword.FIFTH)).isEqualTo(0);
     }
 
     @DisplayName("수익률 테스트")

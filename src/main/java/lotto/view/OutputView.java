@@ -1,64 +1,66 @@
 package lotto.view;
 
+import lotto.domain.reword.Rewords;
+
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.domain.Rewords;
 
 public class OutputView {
 
-    private static final String BUY_LOTTO_COUNT_MESSAGE = "%s개를 구매했습니다.";
-    private static final String INPUT_MONEY_MESSAGE = "구매금액을 입력해 주세요.";
     private static final String DELIMITER = ", ";
     private static final String DELIMITER_HEAD = "[";
     private static final String DELIMITER_TAIL = "]";
-    private static final String LOTTO_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
-    private static final String INPUT_BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
-    private static final String WINNING_STATISTICS = "당첨 통계";
     private static final String CONTOUR = "---------";
-    private static final String THREE_MATCHES = "3개 일치 (5000원)- %d";
-    private static final String FIVE_MATCHES = "5개 일치 (1500000원)- %d";
-    private static final String FIVE_MATCHES_WITH_BONUS_NUMBER = "5개 일치, 보너스 볼 일치 (30000000원)- %d";
-    private static final String SIX_MATCHES = "6개 일치 (2000000000원)- %d";
-    private static final String TOTAL_PROFIT = "총 수익률은 %.2f 입니다.";
-    private static final String FOUR_MATCHES = "4개 일치 (50000원)- %d";
-    public static final String FORMAT_STRING = "%s%s%s";
 
-    public static void printInputMoneyMessage() {
-        System.out.println(INPUT_MONEY_MESSAGE);
+    private OutputView() {
     }
 
-    public static void printBuyLottoCountMessage(final int value) {
-        System.out.println(String.format(BUY_LOTTO_COUNT_MESSAGE, value));
+    public static void printInputMoneyMessage() {
+        System.out.println("구매금액을 입력해 주세요.");
+    }
+
+    public static void printInputManualLottoCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+    }
+
+    public static void printInputLottoNumbers() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+    }
+
+    public static void printBuyLottoCountMessage(final int manual, final int auto) {
+        System.out.printf("수동으로 %s개, 자동으로 %s를 구매했습니다.%n", manual, auto);
     }
 
     public static void printLottoNumbersMessage() {
-        System.out.println(LOTTO_NUMBERS_MESSAGE);
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     }
 
     public static void printInputBonusBallMessage() {
-        System.out.println(INPUT_BONUS_BALL_MESSAGE);
+        System.out.println("보너스 볼을 입력해 주세요.");
     }
 
     public static void printLottoMessage(List<Integer> values) {
         String numbers = values.stream()
-            .map(String::valueOf)
-            .collect(Collectors.joining(DELIMITER));
+                .map(String::valueOf)
+                .collect(Collectors.joining(DELIMITER));
 
-        System.out.println(String.format(FORMAT_STRING, DELIMITER_HEAD, numbers, DELIMITER_TAIL));
+        System.out.printf("%s%s%s%n", DELIMITER_HEAD, numbers, DELIMITER_TAIL);
     }
 
     public static void printNewLineMessage() {
         System.out.println();
     }
 
-    public static void printResultMessage(final Rewords rewords, final int money) {
-        System.out.println(WINNING_STATISTICS);
+    public static void printResult() {
+        System.out.println("당첨 통계");
         System.out.println(CONTOUR);
-        System.out.println(String.format(THREE_MATCHES, rewords.getFifth()));
-        System.out.println(String.format(FOUR_MATCHES, rewords.getFourth()));
-        System.out.println(String.format(FIVE_MATCHES, rewords.getThird()));
-        System.out.println(String.format(FIVE_MATCHES_WITH_BONUS_NUMBER, rewords.getSecond()));
-        System.out.println(String.format(SIX_MATCHES, rewords.getFirst()));
-        System.out.println(String.format(TOTAL_PROFIT, rewords.profit(money)));
+    }
+
+    public static void printReword(int hitCount, long reword, long profit) {
+        System.out.printf("%d개 일치 (%d원)- %d%n", hitCount, reword, profit);
+    }
+
+    public static void printProfit(final Rewords rewords, final int money) {
+        System.out.printf("총 수익률은 %.2f 입니다.%n", rewords.profit(money));
     }
 }

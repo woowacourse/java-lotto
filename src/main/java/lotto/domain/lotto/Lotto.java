@@ -1,11 +1,13 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
-import java.util.ArrayList;
+import lotto.exception.DuplicateLottoNumberException;
+import lotto.exception.InvalidLottoNumberCountException;
+
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import lotto.exception.DuplicateLottoNumberException;
 
 public class Lotto {
 
@@ -14,17 +16,28 @@ public class Lotto {
     protected final List<LottoNumber> lottoNumbers;
 
     public Lotto(final List<Integer> numbers) {
-        validateDuplicatedNumber(numbers);
+        validate(numbers);
         lottoNumbers = numberToLottoNumbers(numbers);
     }
 
-    private List<LottoNumber> numberToLottoNumbers(List<Integer> numbers) {
-        return numbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
+    public int match(final Lotto lotto) {
+        return (int) lottoNumbers.stream()
+                .filter(lotto::isContainsNumber)
+                .count();
     }
 
-    private void validateDuplicatedNumber(final List<Integer> values) {
+    private List<LottoNumber> numberToLottoNumbers(List<Integer> numbers) {
+        return Collections.unmodifiableList(numbers.stream()
+                .sorted()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList()));
+    }
+
+    private void validate(final List<Integer> values) {
+        if (values.size() != LOTTO_SIZE) {
+            throw new InvalidLottoNumberCountException();
+        }
+
         if (new HashSet<>(values).size() != LOTTO_SIZE) {
             throw new DuplicateLottoNumberException();
         }
@@ -43,12 +56,8 @@ public class Lotto {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         Lotto lotto = (Lotto) o;
         return Objects.equals(lottoNumbers, lotto.lottoNumbers);
     }

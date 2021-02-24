@@ -6,8 +6,10 @@ import java.util.stream.Collectors;
 
 public class RandomUtils {
 
-    public static List<Integer> generateRandomNumbers(
-        List<Integer> allBoundOfNumbers, int needCount) {
+    private RandomUtils() {
+    }
+
+    public static List<Integer> generateRandomNumbers(List<Integer> allBoundOfNumbers, int needCount) {
         Collections.shuffle(allBoundOfNumbers);
 
         return allBoundOfNumbers.stream()

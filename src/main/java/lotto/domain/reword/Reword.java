@@ -1,16 +1,17 @@
-package lotto.domain;
+package lotto.domain.reword;
+
+import lotto.exception.InvalidLottoHitCountException;
 
 import java.util.Arrays;
-import lotto.exception.InvalidLottoHitCountException;
 
 public enum Reword {
 
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 30_000_000),
-    THIRD(5, 1_500_000),
-    FOURTH(4, 50_000),
+    NONE(0, 0),
     FIFTH(3, 5_000),
-    NONE(0, 0);
+    FOURTH(4, 50_000),
+    THIRD(5, 1_500_000),
+    SECOND(5, 30_000_000),
+    FIRST(6, 2_000_000_000);
 
     private final int hitCount;
     private final int winningMoney;
@@ -31,21 +32,11 @@ public enum Reword {
     public static Reword valueOf(final int hitCount, final boolean isHitBonus) {
         validateHitCount(hitCount);
 
-        if (hitCount == SECOND.hitCount) {
-            return checkBonusReword(isHitBonus);
-        }
-
         return Arrays.stream(values())
-            .filter(reword -> reword.matchHitCount(hitCount))
-            .findFirst()
-            .orElse(Reword.NONE);
-    }
-
-    private static Reword checkBonusReword(final boolean isHitBonus) {
-        if (isHitBonus) {
-            return Reword.SECOND;
-        }
-        return Reword.THIRD;
+                .filter(reword -> reword.matchHitCount(hitCount))
+                .filter(reword -> reword != Reword.THIRD || !isHitBonus)
+                .findFirst()
+                .orElse(Reword.NONE);
     }
 
     private boolean matchHitCount(final int hitCount) {

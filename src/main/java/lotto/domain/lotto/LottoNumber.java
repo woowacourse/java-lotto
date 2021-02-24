@@ -1,7 +1,8 @@
-package lotto.domain;
+package lotto.domain.lotto;
+
+import lotto.exception.InvalidLottoNumberException;
 
 import java.util.Objects;
-import lotto.exception.InvalidLottoNumberException;
 
 public class LottoNumber {
 
