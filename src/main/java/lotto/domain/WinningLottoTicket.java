@@ -9,19 +9,19 @@ public class WinningLottoTicket {
     private final LottoNumber bonusBallNumber;
 
     private WinningLottoTicket(LottoTicket lottoTicket, LottoNumber bonusBallNumber) {
+        validateDuplicateNumbers(lottoTicket, bonusBallNumber);
         this.lottoTicket = lottoTicket;
         this.bonusBallNumber = bonusBallNumber;
     }
 
     public static WinningLottoTicket of(List<Integer> winningNumbers, int bonusBallNumber) {
-        validateDuplicateNumbers(winningNumbers, bonusBallNumber);
         LottoTicket lottoTicket = LottoTicket.generateTicket(winningNumbers);
         LottoNumber bonusLottoNumber = new LottoNumber(bonusBallNumber);
         return new WinningLottoTicket(lottoTicket, bonusLottoNumber);
     }
 
-    private static void validateDuplicateNumbers(List<Integer> winningNumbers, int bonusBallNumber) {
-        if (winningNumbers.contains(bonusBallNumber)) {
+    private static void validateDuplicateNumbers(LottoTicket lottoTicket, LottoNumber lottoNumber) {
+        if (lottoTicket.contains(lottoNumber)) {
             throw new IllegalArgumentException(DUPLICATION_NUMBER);
         }
     }
