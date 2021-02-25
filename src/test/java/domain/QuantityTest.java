@@ -18,10 +18,10 @@ public class QuantityTest {
     @DisplayName("수동으로 구매할 로또 수와 자동으로 구매할 로또 수를 Quantity 객체로 포장한다.")
     @Test
     public void calculateQuantity() {
-        Quantity lottoPurchase = new Quantity(budget, 4);
+        Quantity quantity = new Quantity(budget, 4);
 
-        assertThat(lottoPurchase.manual()).isEqualTo(4);
-        assertThat(lottoPurchase.auto()).isEqualTo(8);
+        assertThat(quantity.manual()).isEqualTo(4);
+        assertThat(quantity.auto()).isEqualTo(8);
     }
 
     @DisplayName("수동으로 구매할 로또 수가 음수인 경우 예외를 발생시킨다.")
