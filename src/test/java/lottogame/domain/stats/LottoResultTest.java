@@ -33,6 +33,6 @@ class LottoResultTest {
         List<Lotto> lottos = manualLottoGenerator.generateLottos();
         LottoGame lottoGame = new LottoGame(lottos, winningLotto);
         LottoResults lottoResults = lottoGame.results();
-        OutputView.printResult(lottoResults.values(), lottoResults.calculateYield(new Money("14000")));
+        OutputView.printResult(lottoResults.values(), lottoResults.calculateYield(Money.of("14000")));
     }
 }

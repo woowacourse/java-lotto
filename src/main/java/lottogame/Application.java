@@ -18,7 +18,7 @@ import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
-        Money money = new Money(InputView.inputMoney());
+        Money money = Money.of(InputView.inputMoney());
         List<Lotto> myLottos = buyLottos(money);
         WinningLotto winningLotto = confirmWinningLotto();
         LottoGame lottoGame = new LottoGame(myLottos, winningLotto);

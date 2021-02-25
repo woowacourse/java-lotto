@@ -7,19 +7,23 @@ public class Money {
     private static final Pattern NUMBER_PATTERN = Pattern.compile("^[1-9][0-9]{3,}$");
     private final int money;
 
-    public Money(String money) {
+    public Money(int money) {
+        this.money = money;
+    }
+
+    public static Money of(String money) {
         validate(money);
-        this.money = Integer.parseInt(money);
+        return new Money(Integer.parseInt(money));
     }
 
-    public int getMoney() {
-        return this.money;
-    }
-
-    private void validate(String money) {
+    private static void validate(String money) {
         if (!NUMBER_PATTERN.matcher(money).matches()) {
             throw new IllegalArgumentException("금액은 1,000이상이어야 합니다.");
         }
+    }
+
+    public int value() {
+        return this.money;
     }
 
     @Override

@@ -23,6 +23,6 @@ public class LottoResults {
     }
 
     public float calculateYield(Money money) {
-        return (float) calculateWinningAmount() / money.getMoney();
+        return (float) calculateWinningAmount() / money.value();
     }
 }

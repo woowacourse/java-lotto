@@ -35,7 +35,7 @@ public class Quantity {
     }
 
     public static Quantity from(Money money, Quantity manualQuantity) {
-        return Quantity.ofInt(money.getMoney() / LOTTO_PRICE).subtract(manualQuantity);
+        return Quantity.ofInt(money.value() / LOTTO_PRICE).subtract(manualQuantity);
     }
 
     public int value() {
