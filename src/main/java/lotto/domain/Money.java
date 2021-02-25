@@ -32,7 +32,7 @@ public class Money {
     }
 
     public int buyWithinLimit(int tickets) {
-        if(0 > tickets) {
+        if (0 > tickets) {
             throw new LottoCustomException(MANUAL_TICKETS_UNDER_ZERO_ERROR_MESSAGE);
         }
         if (countTickets() < tickets) {

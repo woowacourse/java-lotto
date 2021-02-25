@@ -9,6 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LottoResultTest {
+
     LottoResult lottoResult = new LottoResult();
     LottoTickets lottoTickets;
     WinningLotto winningLotto;
