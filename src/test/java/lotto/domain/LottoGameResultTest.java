@@ -36,8 +36,8 @@ public class LottoGameResultTest {
         Lottos fixedLottos = new Lottos(Arrays.asList(fixedGenerator.generate()));
 
         Lotto fixedWinningLotto = new Lotto(Arrays.asList(
-                new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
+                LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3),
+                LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6)));
 
         WinningLotto winningLotto = new WinningLotto(fixedWinningLotto, 7);
         LottoGameResult fixedGameResult = new LottoGameResult();

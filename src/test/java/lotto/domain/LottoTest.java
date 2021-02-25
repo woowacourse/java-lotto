@@ -14,9 +14,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class LottoTest {
 
     Lotto lotto = new Lotto(Arrays.asList(
-            new LottoNumber(1), new LottoNumber(3),
-            new LottoNumber(4), new LottoNumber(5),
-            new LottoNumber(6), new LottoNumber(7)
+            LottoNumber.from(1), LottoNumber.from(3),
+            LottoNumber.from(4), LottoNumber.from(5),
+            LottoNumber.from(6), LottoNumber.from(7)
     ));
 
 
@@ -24,9 +24,9 @@ public class LottoTest {
     @Test
     void createLotto() {
         Lotto newLotto = new Lotto(Arrays.asList(
-                new LottoNumber(1), new LottoNumber(3),
-                new LottoNumber(4), new LottoNumber(5),
-                new LottoNumber(6), new LottoNumber(7)
+                LottoNumber.from(1), LottoNumber.from(3),
+                LottoNumber.from(4), LottoNumber.from(5),
+                LottoNumber.from(6), LottoNumber.from(7)
         ));
 
         assertThat(newLotto).isEqualTo(lotto);
@@ -44,15 +44,15 @@ public class LottoTest {
     @Test
     void testValidateLotto() {
         List<LottoNumber> wrongLotto1 = Arrays.asList(
-                new LottoNumber(1), new LottoNumber(2),
-                new LottoNumber(3), new LottoNumber(4),
-                new LottoNumber(5)
+                LottoNumber.from(1), LottoNumber.from(2),
+                LottoNumber.from(3), LottoNumber.from(4),
+                LottoNumber.from(5)
         );
 
         List<LottoNumber> wrongLotto2 = Arrays.asList(
-                new LottoNumber(1), new LottoNumber(2),
-                new LottoNumber(3), new LottoNumber(4),
-                new LottoNumber(5), new LottoNumber(5)
+                LottoNumber.from(1), LottoNumber.from(2),
+                LottoNumber.from(3), LottoNumber.from(4),
+                LottoNumber.from(5), LottoNumber.from(5)
         );
 
 
@@ -63,7 +63,7 @@ public class LottoTest {
     @DisplayName("로또가 번호를 포함하는지 테스트")
     @Test
     void testContainNumber() {
-        LottoNumber number = new LottoNumber(1);
+        LottoNumber number = LottoNumber.from(1);
 
         assertTrue(lotto.containNumber(number));
     }
@@ -71,7 +71,7 @@ public class LottoTest {
     @DisplayName("로또가 번호를 포함하지 않는지 테스트")
     @Test
     void testNotContainNumber() {
-        LottoNumber number = new LottoNumber(2);
+        LottoNumber number = LottoNumber.from(2);
 
         assertFalse(lotto.containNumber(number));
     }
@@ -80,8 +80,8 @@ public class LottoTest {
     @Test
     void testCountOfMatchNumber() {
         Lotto otherLotto = new Lotto(Arrays.asList(
-                new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)
+                LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3),
+                LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6)
         ));
 
         assertThat(otherLotto.countOfMatchNumber(lotto)).isEqualTo(5);

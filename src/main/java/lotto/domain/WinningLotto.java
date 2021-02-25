@@ -14,7 +14,7 @@ public class WinningLotto {
     }
 
     public WinningLotto(Lotto lotto, int number) {
-        this(lotto, new LottoNumber(number));
+        this(lotto, LottoNumber.from(number));
     }
 
     public Rank findRank(Lotto lotto) {

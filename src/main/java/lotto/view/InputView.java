@@ -74,7 +74,7 @@ public class InputView {
         List<String> splitNumbers = Arrays.asList(input.split(DELIMITER));
 
         return splitNumbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::from)
                 .collect(Collectors.toList());
     }
 
@@ -83,7 +83,7 @@ public class InputView {
         String bonusNumber = SCANNER.nextLine();
 
         try {
-            return new LottoNumber(bonusNumber);
+            return LottoNumber.from(bonusNumber);
         } catch (Exception e) {
             OutputView.printError(e.getMessage());
             return askBonusNumber();

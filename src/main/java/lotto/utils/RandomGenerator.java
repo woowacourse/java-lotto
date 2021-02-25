@@ -17,7 +17,7 @@ public class RandomGenerator implements LottoGenerator {
 
     private void initLottoNumber() {
         for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
-            numbers.add(new LottoNumber(i));
+            numbers.add(LottoNumber.from(i));
         }
     }
 
