@@ -8,7 +8,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,7 +28,7 @@ public class LottoServiceTest {
     @DisplayName("로또 구매 결과 확인")
     void buyLottoCheck() {
         Ticket ticket = new Ticket(new Money(14000));
-        lottoService.generateLottos(ticket);
+        lottoService.generateLottos(ticket.getRandomCount());
         List<Integer> lottoNumbers = lottoMachine.generate()
                                                  .stream()
                                                  .map(LottoNumber::intValue)
@@ -45,9 +44,7 @@ public class LottoServiceTest {
     @DisplayName("수동 로또 구매하기")
     void manualLottoCheck() {
         List<Integer> expected = Arrays.asList(1,2,3,4,5,6);
-        List<Lotto> lottos = new ArrayList<>();
-        lottos.add(Lotto.createByInteger(expected));
-        lottoService.generateManualLotto(lottos);
+        lottoService.addManualLotto(Lotto.createByInteger(expected));
         assertThat(lottoService.getLottos().get(0).getNumbers()).isEqualTo(expected);
     }
 
@@ -57,7 +54,7 @@ public class LottoServiceTest {
         Ticket ticket = new Ticket(new Money(2000));
         Lotto lotto = new Lotto(lottoMachine.generate());
 
-        lottoService.generateLottos(ticket);
+        lottoService.generateLottos(ticket.getRandomCount());
         WinningLotto winningLotto = new WinningLotto(lotto, LottoNumber.valueOf(7));
         lottoService.scratchLotto(winningLotto);
         RatingCounter ratingCounter = lottoService.getRatingCounter();
