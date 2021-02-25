@@ -13,6 +13,7 @@ import lottogame.domain.lotto.Lottos;
 import lottogame.domain.Money;
 import lottogame.view.OutputView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -26,9 +27,9 @@ public class GameController {
         int manualQuantity = inputView.inputManualQuantity();
         money = ticketMachine.buyManualTicket(money, manualQuantity);
         int autoTicketQuantity = ticketMachine.buyableAutoTicketQuantity(money);
-        List<Lotto> manualLottos = makeManualLotto(autoTicketQuantity);
-        List<Lotto> autoLottos = lottoMachine.buyAutoTicket(autoTicketQuantity);
-        Lottos lottos = new Lottos(manualLottos, autoLottos);
+        List<Lotto> lottoGroup = makeManualLotto(autoTicketQuantity);
+        lottoGroup.addAll(lottoMachine.buyAutoTicket(autoTicketQuantity));
+        Lottos lottos = new Lottos(lottoGroup);
         OutputView.showLottos(manualQuantity, lottos.numbersOfLottos());
         LottoResults lottoResults = matchLottos(lottos, askWinningLotto());
         LottoResultDto lottoResultDto = lottoResults.makeStatistics(money);
@@ -37,8 +38,7 @@ public class GameController {
 
     private List<Lotto> makeManualLotto(int autoTicketQuantity) {
         List<LottoDto> manualLotto = inputView.inputManualLotto(autoTicketQuantity);
-        List<Lotto> manualLottos = lottoMachine.makeManualLotto(manualLotto);
-        return manualLottos;
+        return lottoMachine.makeManualLotto(manualLotto);
     }
 
     private LottoResults matchLottos(Lottos lottos, WinningLotto winningLotto) {

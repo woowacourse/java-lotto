@@ -11,10 +11,9 @@ import java.util.stream.Collectors;
 public class Lottos {
     private final List<Lotto> lottos;
 
-    public Lottos(List<Lotto> manualLottos, List<Lotto> autoLottos) {
+    public Lottos(List<Lotto> values) {
         List<Lotto> allLottos = new ArrayList<>();
-        allLottos.addAll(new ArrayList<>(manualLottos));
-        allLottos.addAll(new ArrayList<>(autoLottos));
+        allLottos.addAll(new ArrayList<>(values));
         this.lottos = new ArrayList<>(allLottos);
     }
 

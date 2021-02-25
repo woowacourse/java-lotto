@@ -13,17 +13,16 @@ class LottosTest {
     @DisplayName("수동/자동 로또들이 Lotts에 잘 생성되는 지 테스트")
     @Test
     void 로또들을_관리하는_로또_일급컬렉션() {
-        List<Lotto> manualLottos = Arrays.asList(
+        List<Lotto> lottoGroup = Arrays.asList(
                 makeLotto(Arrays.asList(12, 22, 33, 34, 35, 36)),
-                makeLotto(Arrays.asList(22, 23, 34, 35, 36, 37)));
-        List<Lotto> autoLottos = Arrays.asList(
+                makeLotto(Arrays.asList(22, 23, 34, 35, 36, 37)),
                 makeLotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
                 makeLotto(Arrays.asList(2, 3, 4, 5, 6, 7)),
                 makeLotto(Arrays.asList(3, 4, 5, 6, 7, 8)),
                 makeLotto(Arrays.asList(4, 5, 6, 7, 8, 9)),
                 makeLotto(Arrays.asList(5, 6, 7, 8, 9, 10)));
-        Lottos lottos = new Lottos(manualLottos, autoLottos);
-        assertThat(lottos).isEqualTo(new Lottos(manualLottos, autoLottos));
+        Lottos lottos = new Lottos(lottoGroup);
+        assertThat(lottos).isEqualTo(new Lottos(lottoGroup));
     }
 
     private Lotto makeLotto(List<Integer> numbers) {
@@ -36,15 +35,14 @@ class LottosTest {
     @DisplayName("순위별 당첨 통계가 제대로 저장되는 지 확인")
     @Test
     void 로또_순위별_당첨_통계() {
-        List<Lotto> manualLottos = Arrays.asList(
+        List<Lotto> lottoGroup = Arrays.asList(
                 makeLotto(Arrays.asList(2, 4, 5, 15, 35, 36)),      //  3
-                makeLotto(Arrays.asList(2, 3, 10, 12, 36, 37)));    // 1
-        List<Lotto> autoLottos = Arrays.asList(
+                makeLotto(Arrays.asList(2, 3, 10, 12, 36, 37)),    // 1
                 makeLotto(Arrays.asList(1, 2, 3, 4, 45, 44)),       // 4
                 makeLotto(Arrays.asList(1, 2, 3, 43, 44, 45)),      // 3
                 makeLotto(Arrays.asList(1, 2, 3, 4, 5, 7)),         // 5
                 makeLotto(Arrays.asList(1, 2, 3, 4, 5, 44)));       // 5
-        Lottos lottos = new Lottos(manualLottos, autoLottos);
+        Lottos lottos = new Lottos(lottoGroup);
         WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 
         List<LottoResult> expected = Arrays.asList(
@@ -61,12 +59,11 @@ class LottosTest {
     @DisplayName("순위별 당첨 통계가 제대로 저장되는 지 확인 ver2")
     @Test
     void 로또_순위별_당첨_통계_ver2() {
-        List<Lotto> manualLottos = Arrays.asList(
+        List<Lotto> lottoGroup = Arrays.asList(
                 makeLotto(Arrays.asList(1, 2, 3, 4, 45, 44)),
                 makeLotto(Arrays.asList(1, 2, 3, 43, 44, 45)),
                 makeLotto(Arrays.asList(1, 2, 3, 4, 5, 7)),
-                makeLotto(Arrays.asList(1, 2, 3, 4, 5, 44)));
-        List<Lotto> autoLottos = Arrays.asList(
+                makeLotto(Arrays.asList(1, 2, 3, 4, 5, 44)),
                 makeLotto(Arrays.asList(8, 21, 23, 41, 42, 43)),
                 makeLotto(Arrays.asList(3, 5, 11, 16, 32, 38)),
                 makeLotto(Arrays.asList(7, 11, 16, 35, 36, 44)),
@@ -81,7 +78,7 @@ class LottosTest {
                 makeLotto(Arrays.asList(13, 14, 18, 21, 23, 35)),
                 makeLotto(Arrays.asList(17, 21, 29, 37, 42, 45)),
                 makeLotto(Arrays.asList(3, 8, 27, 30, 35, 44)));
-        Lottos lottos = new Lottos(manualLottos, autoLottos);
+        Lottos lottos = new Lottos(lottoGroup);
         WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 
 
