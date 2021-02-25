@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 
 public class Number implements Comparable<Number> {
     public static final String ERROR_MESSAGE_INVALID_INPUT = "잘못된 입력입니다.";
-    public static final String ERROR_MESSAGE_INVALID_RANGE = "숫자는 1부터 45사이여야 합니다.";
+    public static final String ERROR_MESSAGE_INVALID_RANGE = "숫자는 " + Ticket.MIN_NUMBER + "부터 " + Ticket.MAX_NUMBER + "사이여야 합니다.";
 
     private static final List<Number> cache;
 
