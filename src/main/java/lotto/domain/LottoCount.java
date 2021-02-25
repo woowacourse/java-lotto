@@ -12,7 +12,7 @@ public class LottoCount {
         this.count = count;
     }
 
-    public int get() {
+    public int getCount() {
         return count;
     }
 
@@ -23,7 +23,7 @@ public class LottoCount {
     }
 
     public LottoCount subtract(LottoCount inputLottoCount) {
-        return new LottoCount(count - inputLottoCount.get());
+        return new LottoCount(count - inputLottoCount.getCount());
     }
 
     @Override

@@ -8,7 +8,6 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoStatisticResult;
 import lotto.domain.Lottos;
 import lotto.domain.PayAmount;
-import lotto.domain.Rank;
 import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -40,8 +39,8 @@ public class LottoMachineController {
         outputView.printInputManualLottoNumbers();
         List<Lotto> manualLottos = getInputManualLottos(manualLottoCount);
 
-        outputView.printPurchasingLotto(manualLottoCount.get(), autoLottoCount.get());
-        List<Lotto> autoLottos = Lottos.from(autoLottoCount.get()).getLottos();
+        outputView.printPurchasingLotto(manualLottoCount.getCount(), autoLottoCount.getCount());
+        List<Lotto> autoLottos = Lottos.from(autoLottoCount.getCount()).getLottos();
         outputView.printLottos(Lottos.from(autoLottos));
         List<Lotto> lottos = new ArrayList<>();
         lottos.addAll(manualLottos);
@@ -51,7 +50,7 @@ public class LottoMachineController {
 
     private List<Lotto> getInputManualLottos(LottoCount count) {
         List<Lotto> manualLottos = new ArrayList<>();
-        for (int i = 0; i < count.get(); i++) {
+        for (int i = 0; i < count.getCount(); i++) {
             List<Integer> lottoNumbers = inputView.readManualLottoNumbers();
             manualLottos.add(Lotto.fromNumbers(lottoNumbers));
         }
