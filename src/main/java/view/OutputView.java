@@ -1,9 +1,9 @@
 package view;
 
-import domain.LottoNumber;
-import domain.LottoTicket;
-import domain.LottoTickets;
-import domain.Rank;
+import domain.lotto.LottoNumber;
+import domain.lotto.LottoTicket;
+import domain.lotto.LottoTickets;
+import domain.rank.Rank;
 import domain.Transaction;
 import java.util.stream.Collectors;
 

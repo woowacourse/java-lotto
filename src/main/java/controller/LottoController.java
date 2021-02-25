@@ -1,9 +1,9 @@
 package controller;
 
-import domain.LottoTickets;
-import domain.Rank;
-import domain.Ranks;
-import domain.Result;
+import domain.lotto.LottoTickets;
+import domain.rank.Rank;
+import domain.rank.Ranks;
+import domain.lotto.Result;
 import domain.Transaction;
 import java.util.ArrayList;
 import java.util.Arrays;

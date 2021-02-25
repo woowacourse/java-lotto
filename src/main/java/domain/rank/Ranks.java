@@ -1,4 +1,4 @@
-package domain;
+package domain.rank;
 
 import java.util.List;
 

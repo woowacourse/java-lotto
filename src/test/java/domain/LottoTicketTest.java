@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+import domain.lotto.LottoTicket;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;

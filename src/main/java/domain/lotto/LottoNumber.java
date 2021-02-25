@@ -1,4 +1,4 @@
-package domain;
+package domain.lotto;
 
 import java.util.Collections;
 import java.util.HashMap;

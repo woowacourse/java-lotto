@@ -1,8 +1,10 @@
 package domain;
 
-import static domain.Rank.select;
+import static domain.rank.Rank.select;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
+
+import domain.rank.Rank;
 import org.junit.jupiter.api.DisplayName;
 
 import org.junit.jupiter.api.Test;

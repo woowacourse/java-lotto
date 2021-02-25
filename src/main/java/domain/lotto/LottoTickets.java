@@ -1,5 +1,8 @@
-package domain;
+package domain.lotto;
 
+import domain.rank.Rank;
+import domain.rank.Ranks;
+import domain.Transaction;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
