@@ -5,6 +5,7 @@ import lottogame.domain.lotto.LottoNumber;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -22,32 +23,34 @@ public class ManualLottoGenerator implements LottoGenerator {
         ticketStrings = new ArrayList<>(Arrays.asList(ticketString));
     }
 
-    private void validate(String numbers) {
-        if (!NUMBER_PATTERN.matcher(numbers).matches()) {
-            throw new IllegalArgumentException("당첨 번호를 잘못 입력하셨습니다.");
-        }
-    }
-
     @Override
     public List<Lotto> generateLottos() {
         return ticketStrings.stream()
-                .map(ticketString -> new Lotto(parse(ticketString)))
-                .collect(Collectors.toList());
-    }
-
-    private List<LottoNumber> parse(String ticketString) {
-        String[] numberStrings = ticketString.split(DELIMITER);
-        return Arrays.stream(numberStrings)
-                .map(LottoNumber::of)
+                .map(this::makeLotto)
                 .collect(Collectors.toList());
     }
 
     public Lotto generateLotto() {
-        return new Lotto(parse(ticketStrings.get(0)));
+        return makeLotto(ticketStrings.get(0));
+    }
+
+    private Lotto makeLotto(String ticketString) {
+        String[] numberStrings = ticketString.split(DELIMITER);
+        List<LottoNumber> lottoNumbers = Arrays.stream(numberStrings)
+                .map(LottoNumber::of)
+                .sorted()
+                .collect(Collectors.toList());
+        return new Lotto(lottoNumbers);
     }
 
     public void addResources(List<String> ticketStrings) {
         ticketStrings.forEach(this::validate);
         this.ticketStrings = ticketStrings;
+    }
+
+    private void validate(String numbers) {
+        if (!NUMBER_PATTERN.matcher(numbers).matches()) {
+            throw new IllegalArgumentException("로또번호를 잘못 입력했습니다.");
+        }
     }
 }
