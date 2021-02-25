@@ -16,7 +16,8 @@ public class LottoTickets {
 
     public LottoTickets(List<LottoTicket> lottoTicketsInput, int ticketCount,
         LottoGenerator lottoGenerator) {
-        List<LottoTicket> lottoTickets = new ArrayList<>(lottoTicketsInput);
+        List<LottoTicket> lottoTickets = new ArrayList<>(lottoTicketsInput.size() + ticketCount);
+        lottoTickets.addAll(lottoTicketsInput);
         for (int i = 0; i < ticketCount; i++) {
             lottoTickets.add(lottoGenerator.generateLottoTicket());
         }
