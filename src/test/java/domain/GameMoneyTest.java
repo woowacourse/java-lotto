@@ -34,4 +34,14 @@ public class GameMoneyTest {
         final LottoBundle lottoBundle = gameMoney.buyLotto();
         assertThat(lottoBundle.countNumberOfLotto()).isEqualTo(15);
     }
+
+    @DisplayName("GameMoney를 입력받고, 수동으로 살 로또 갯수를 입력 받고 가능한지 검증증")
+    @Test
+    void GameMoneyManuallyTest() {
+        final GameMoney gameMoney = new GameMoney(10000);
+        assertThatThrownBy(() -> gameMoney.checkManualBuyingAvailable(15))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("구입금액 이상으로 로또를 구매할 수 없습니다.");
+    }
 }
+

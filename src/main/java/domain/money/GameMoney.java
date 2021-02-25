@@ -38,4 +38,10 @@ public class GameMoney {
         final BigDecimal gameMoneyLeft = gameMoney.subtract(lottoBuyingMoney);
         gameMoney = gameMoneyLeft;
     }
+
+    public void checkManualBuyingAvailable(final int quantity) {
+        if (gameMoney.divide(new BigDecimal(SINGLE_LOTTO_GAME_MONEY)).intValue() < quantity) {
+            throw new IllegalArgumentException("구입금액 이상으로 로또를 구매할 수 없습니다.");
+        }
+    }
 }
