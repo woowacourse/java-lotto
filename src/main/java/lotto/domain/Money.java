@@ -4,7 +4,7 @@ public class Money {
 
     public static final int PRICE_OF_LOTTO = 1000;
 
-    private int money;
+    private final int money;
 
     public Money(String money) {
         validateMoney(money);
@@ -18,6 +18,7 @@ public class Money {
     private void validateMoney(String money) {
         validateEmpty(money);
         validateNumber(money);
+        validateNegative(money);
         validatePrice(money);
     }
 
@@ -35,9 +36,15 @@ public class Money {
         }
     }
 
+    private void validateNegative(String money) {
+        if (Integer.parseInt(money) < 0) {
+            throw new IllegalArgumentException("금액은 양수여야 합니다.");
+        }
+    }
+
     private void validatePrice(String money) {
         if (Integer.parseInt(money) < PRICE_OF_LOTTO) {
-            throw new IllegalArgumentException("로또를 구매에는 최소 1000원 이상의 금액이 필요합니다.");
+            throw new IllegalArgumentException("로또 구매에는 최소 1000원 이상의 금액이 필요합니다.");
         }
     }
 }
