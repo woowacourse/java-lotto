@@ -16,7 +16,7 @@ public class RandomLottoNumberGenerator {
         Collections.shuffle(numbers);
 
         return numbers.stream()
-                .limit(LottoTicket.getLottoTicketSize())
+                .limit(LottoTicket.LOTTO_TICKET_SIZE)
                 .collect(Collectors.toList());
     }
 }

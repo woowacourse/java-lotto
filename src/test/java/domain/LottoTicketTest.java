@@ -46,12 +46,6 @@ public class LottoTicketTest {
         );
     }
 
-    @DisplayName("6개의 숫자를 가진 로또 티켓 객체 생성")
-    @Test
-    void generate_success() {
-
-    }
-
     private List<Integer> getValidNumbers() {
         return Arrays.asList(1, 6, 23, 40, 30, 35);
     }

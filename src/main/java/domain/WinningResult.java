@@ -4,16 +4,12 @@ import java.util.List;
 
 public class WinningResult {
 
-    private final WinningNumbers winningNumbers;
-    private final List<LottoTicket> lottoTickets;
     private final Price price;
     private final List<Ranking> rankings;
 
     public WinningResult(WinningNumbers winningNumbers, List<LottoTicket> lottoTickets,
             Price price) {
         this.rankings = winningNumbers.getRankings(lottoTickets);
-        this.winningNumbers = winningNumbers;
-        this.lottoTickets = lottoTickets;
         this.price = price;
     }
 

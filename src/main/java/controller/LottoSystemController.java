@@ -10,8 +10,8 @@ import view.OutputView;
 
 public class LottoSystemController {
 
-    LottoSystem lottoSystem;
-    WinningResult winningResult;
+    private LottoSystem lottoSystem;
+    private WinningResult winningResult;
 
     public void run() {
         buyLottoTickets();
