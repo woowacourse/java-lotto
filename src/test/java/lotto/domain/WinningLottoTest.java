@@ -5,7 +5,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -22,7 +21,7 @@ public class WinningLottoTest {
         LottoNumber number4 = new LottoNumber("4");
         LottoNumber number5 = new LottoNumber("5");
         LottoNumber number6 = new LottoNumber("6");
-        List<LottoNumber> lottoNumbers = Arrays.asList(number1, number2, number3, number4, number5, number6);
+        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(number1, number2, number3, number4, number5, number6));
         Lotto = new Lotto(lottoNumbers);
     }
 
