@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 import lotto.utils.CustomException;
 
 public class LottoTicket {
-    public static final int PRICE = 1000;
     public static final int SIZE_OF_LOTTO_NUMBERS = 6;
 
     private final List<LottoNumber> lottoNumbers;

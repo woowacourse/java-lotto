@@ -6,29 +6,28 @@ import java.util.Map;
 import lotto.utils.CustomException;
 import lotto.utils.StringChecker;
 
-public class Money {
+public class Money implements Comparable<Money> {
+    private static final int DECIMAL_POINT = 2;
+    private static final int PERCENT = 100;
     private final BigDecimal money;
-    private final int ticketCount;
-    private final BigDecimal change;
 
-    public Money(String moneyValue) {
-        this(moneyValue, 0);
+    private Money(long value) {
+        validateNotNegative(value);
+        this.money = BigDecimal.valueOf(value);
     }
 
-    public Money(String moneyValue, int analogTicketCount) {
+    private Money(String moneyValue) {
         validateIsNumber(moneyValue);
-        validateNotOverMoney(moneyValue, analogTicketCount);
-        this.money = new BigDecimal(moneyValue);
-        this.ticketCount = money.divideToIntegralValue(new BigDecimal(LottoTicket.PRICE)).intValue()
-            - analogTicketCount;
-        this.change = money
-            .subtract(
-                BigDecimal.valueOf((long) (analogTicketCount + ticketCount) * LottoTicket.PRICE));
+        this.money = BigDecimal.valueOf(Long.parseLong(moneyValue));
     }
 
-    private void validateNotOverMoney(String moneyValue, int analogTicketCount) {
-        if (Integer.parseInt(moneyValue) < analogTicketCount * LottoTicket.PRICE) {
-            throw new CustomException("수동발행이 구입가능금액을 넘어 발행이 취소됩니다.");
+    private Money(BigDecimal moneyValue) {
+        this.money = moneyValue;
+    }
+
+    private void validateNotNegative(long value) {
+        if (value < 1) {
+            throw new CustomException("돈의 크기는 1이상이어야 합니다.");
         }
     }
 
@@ -38,15 +37,60 @@ public class Money {
         }
     }
 
-    public int getPossibleTicketCount() {
-        return ticketCount;
+    public static Money valueOf(long i) {
+        return new Money(i);
     }
 
-    public int getChange() {
-        return change.intValue();
+    public static Money valueOf(String i) {
+        return new Money(i);
     }
 
-    private BigDecimal calculateTotalPrize(Map<Rank, Integer> resultMap) {
+    public int toInt() {
+        return this.money.intValue();
+    }
+
+    public Money getChange(int analogCount, int autoCount, Money lottoPrice) {
+        final Money analog = lottoPrice.multiply(analogCount);
+        final Money auto = lottoPrice.multiply(autoCount);
+        final BigDecimal totalSpent = analog.add(auto).toBigDecimal();
+        final BigDecimal result = this.money.subtract(totalSpent);
+        return new Money(result);
+    }
+
+    public Money add(Money value) {
+        return new Money(money.add(value.toBigDecimal()));
+    }
+
+    public Money subtract(Money value) {
+        return new Money(money.subtract(value.toBigDecimal()));
+    }
+
+    public Money divide(Money value) {
+        return new Money(
+            money.divide(value.toBigDecimal(), DECIMAL_POINT, BigDecimal.ROUND_CEILING));
+    }
+
+
+    public Money multiply(Money value) {
+        return new Money(money.multiply(value.toBigDecimal()));
+    }
+
+    public Money multiply(int intValue) {
+        return new Money(money.multiply(BigDecimal.valueOf(intValue)));
+    }
+
+
+    public BigInteger getEarningRate(Map<Rank, Integer> results) {
+        final Money totalPrize = calculateTotalPrize(results);
+        return calculateEarningRate(this, totalPrize);
+
+    }
+
+    public Money getMoneySpentForTicket(Money lottoPrice, int value) {
+        return lottoPrice.multiply(value);
+    }
+
+    private Money calculateTotalPrize(Map<Rank, Integer> resultMap) {
         BigDecimal localPrize = BigDecimal.ZERO;
 
         for (Map.Entry<Rank, Integer> result : resultMap.entrySet()) {
@@ -55,19 +99,26 @@ public class Money {
                     .multiply(BigDecimal.valueOf(result.getValue()))
             );
         }
-        return localPrize;
+        return new Money(localPrize);
     }
 
-    private BigInteger calculateEarningRate(BigDecimal buyPrice, BigDecimal totalPrize) {
-        return (totalPrize
-            .divide(buyPrice, 2, BigDecimal.ROUND_CEILING))
-            .multiply(BigDecimal.valueOf(100)).toBigInteger();
+    private BigInteger calculateEarningRate(Money inputMoney, Money totalPrize) {
+        return totalPrize
+            .divide(inputMoney)
+            .multiply(Money.valueOf(PERCENT)).toBigInteger();
     }
 
-    public BigInteger getEarningRate(Map<Rank, Integer> results) {
-        final BigDecimal totalPrize = calculateTotalPrize(results);
-        return calculateEarningRate(money.subtract(change), totalPrize);
+    private BigInteger toBigInteger() {
+        return money.toBigInteger();
+    }
 
+    private BigDecimal toBigDecimal() {
+        return this.money;
+    }
+
+    @Override
+    public int compareTo(Money o) {
+        return money.compareTo(o.toBigDecimal());
     }
 
 }
