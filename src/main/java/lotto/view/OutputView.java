@@ -19,10 +19,10 @@ public class OutputView {
         printNewLine();
     }
 
-    public static void printAllTickets(Purchase purchase, LottoTickets lottoTickets) {
+    public static void printAllTickets(Purchase purchase, Lottos lottos) {
         System.out.printf(PURCHASE_INFO_MESSAGE, purchase.getManualPurchase(), purchase.getAutoPurchase());
         printNewLine();
-        lottoTickets.toList().forEach(OutputView::printTicket);
+        lottos.toList().forEach(OutputView::printTicket);
         printNewLine();
     }
 
@@ -54,8 +54,8 @@ public class OutputView {
         System.out.println("---------");
     }
 
-    private static void printTicket(LottoTicket lottoTicket) {
-        System.out.println(lottoTicket.toSet());
+    private static void printTicket(Lotto lotto) {
+        System.out.println(lotto.toSet());
     }
 
     private static void printWinningResult(Rank result, Map<Rank, Integer> winningResult) {

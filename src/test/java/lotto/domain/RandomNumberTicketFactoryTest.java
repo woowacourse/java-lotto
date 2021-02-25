@@ -10,7 +10,7 @@ public class RandomNumberTicketFactoryTest {
     @DisplayName("티켓 팩토리에서 생성한 티켓 넘버의 개수가 6개인지 확인")
     @Test
     void checkSizeOfTicketNumbers() {
-        LottoTicket lottoTicket = RandomNumberTicketFactory.makeTicket();
-        assertThat(lottoTicket.toSet().size()).isEqualTo(6);
+        Lotto lotto = RandomNumberTicketFactory.makeTicket();
+        assertThat(lotto.toSet().size()).isEqualTo(6);
     }
 }

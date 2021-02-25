@@ -9,7 +9,7 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoTicketsTest {
+public class LottosTest {
 
     @DisplayName("로또 티켓들 생성하기")
     @Test
@@ -26,11 +26,11 @@ public class LottoTicketsTest {
                 Arrays.asList(lotto1, lotto2, lotto3, lotto4, lotto5, lotto6));
         Set<LottoNumber> lottoNumbers2 = new HashSet<>(
                 Arrays.asList(lotto1, lotto2, lotto3, lotto4, lotto5, lotto7));
-        LottoTickets lottoTickets = new LottoTickets(Arrays.asList
-                (new LottoTicket(lottoNumbers),
-                        new LottoTicket(lottoNumbers2)));
+        Lottos lottos = new Lottos(Arrays.asList
+                (new Lotto(lottoNumbers),
+                        new Lotto(lottoNumbers2)));
 
-        assertThat(lottoTickets.toList())
-                .contains(new LottoTicket(lottoNumbers), new LottoTicket(lottoNumbers2));
+        assertThat(lottos.toList())
+                .contains(new Lotto(lottoNumbers), new Lotto(lottoNumbers2));
     }
 }

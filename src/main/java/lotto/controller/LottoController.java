@@ -19,10 +19,10 @@ public class LottoController {
     public void run() {
         final Money money = inputMoney();
         final Purchase purchase = inputManualPurchase(money);
-        final LottoTickets lottoTickets = createLottoTickets(purchase);
+        final Lottos lottos = createLottoTickets(purchase);
 
         final WinningTicket winningTicket = makeWinningTicket();
-        final Map<Rank, Integer> result = LottoResultMachine.confirmResult(lottoTickets, winningTicket);
+        final Map<Rank, Integer> result = LottoResultMachine.confirmResult(lottos, winningTicket);
 
         OutputView.printTotalWinningResult(result);
         OutputView.printProfit(LottoProfit.ofProfit(result, money));
@@ -47,19 +47,19 @@ public class LottoController {
         }
     }
 
-    private LottoTickets createLottoTickets(Purchase purchase) {
-        LottoTickets lottoTickets = new LottoTickets();
+    private Lottos createLottoTickets(Purchase purchase) {
+        Lottos lottos = new Lottos();
 
         if (purchase.isManualPurchaseExist()) {
-            lottoTickets.addManuallyCreatedTickets(inputManualNumbers(purchase));
+            lottos.addManuallyCreatedTickets(inputManualNumbers(purchase));
         }
 
-        lottoTickets.generateTicketAutomatically(purchase.getAutoPurchase());
-        OutputView.printAllTickets(purchase, lottoTickets);
-        return lottoTickets;
+        lottos.generateTicketAutomatically(purchase.getAutoPurchase());
+        OutputView.printAllTickets(purchase, lottos);
+        return lottos;
     }
 
-    private List<LottoTicket> inputManualNumbers(Purchase purchase) {
+    private List<Lotto> inputManualNumbers(Purchase purchase) {
         try {
             return inputView.inputManualNumbers(purchase.getManualPurchase());
         } catch (LottoCustomException e) {
@@ -70,9 +70,9 @@ public class LottoController {
 
     private WinningTicket makeWinningTicket() {
         try {
-            final LottoTicket lottoTicket = new LottoTicket(inputView.inputWinningNumbers());
+            final Lotto lotto = new Lotto(inputView.inputWinningNumbers());
             final LottoNumber bonusNumber = new LottoNumber(inputView.inputBonusNumber());
-            return new WinningTicket(lottoTicket, bonusNumber);
+            return new WinningTicket(lotto, bonusNumber);
         } catch (LottoCustomException e) {
             OutputView.printErrorMessage(e.getMessage());
             return makeWinningTicket();

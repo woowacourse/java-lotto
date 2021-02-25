@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
+import lotto.domain.Lotto;
 import lotto.exception.LottoCustomException;
 
 import java.util.*;
@@ -45,14 +45,14 @@ public class InputView {
         return parseInt(scanner.nextLine());
     }
 
-    public List<LottoTicket> inputManualNumbers(int manualCount) {
+    public List<Lotto> inputManualNumbers(int manualCount) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 
-        List<LottoTicket> lottoTickets = new ArrayList<>();
+        List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < manualCount; i++) {
-            lottoTickets.add(new LottoTicket(splitAndWrap(scanner.nextLine())));
+            lottos.add(new Lotto(splitAndWrap(scanner.nextLine())));
         }
-        return lottoTickets;
+        return lottos;
     }
 
     private Set<LottoNumber> splitAndWrap(String winningNumbers) {

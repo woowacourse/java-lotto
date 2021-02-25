@@ -11,7 +11,7 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-public class LottoTicketTest {
+public class LottoTest {
 
     private Set<LottoNumber> lottoNumbers;
     private Set<LottoNumber> sizeOverLottoNumbers;
@@ -34,16 +34,16 @@ public class LottoTicketTest {
     @Test
     @DisplayName("로또 생성하기")
     void createLotto() {
-        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
-        assertThat(lottoTicket).isEqualTo(new LottoTicket(lottoNumbers));
+        Lotto lotto = new Lotto(lottoNumbers);
+        assertThat(lotto).isEqualTo(new Lotto(lottoNumbers));
     }
 
     @Test
     @DisplayName("로또는 총 6개의 숫자로 이루어져야한다.")
     void lottoSize() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoTicket(sizeLessLottoNumbers));
+                .isThrownBy(() -> new Lotto(sizeLessLottoNumbers));
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoTicket(sizeOverLottoNumbers));
+                .isThrownBy(() -> new Lotto(sizeOverLottoNumbers));
     }
 }

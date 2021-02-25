@@ -4,30 +4,30 @@ import lotto.exception.LottoCustomException;
 
 public class WinningTicket {
 
-    private final LottoTicket lottoTicket;
+    private final Lotto lotto;
     private final LottoNumber bonusNumber;
 
-    public WinningTicket(LottoTicket lottoTicket, LottoNumber bonusNumber) {
-        this.lottoTicket = lottoTicket;
+    public WinningTicket(Lotto lotto, LottoNumber bonusNumber) {
+        this.lotto = lotto;
 
         validateBonusNumber(bonusNumber);
         this.bonusNumber = bonusNumber;
     }
 
     private void validateBonusNumber(LottoNumber bonusNumber) {
-        if (lottoTicket.contains(bonusNumber)) {
+        if (lotto.contains(bonusNumber)) {
             throw new LottoCustomException("당첨 번호와 중복되지 않는 보너스 번호를 입력해주세요.");
         }
     }
 
-    public Rank getRankOfLottoResult(LottoTicket lottoTicket) {
-        int matchCount = matchNumbers(lottoTicket);
-        boolean isBonus = lottoTicket.contains(bonusNumber);
+    public Rank getRankOfLottoResult(Lotto lotto) {
+        int matchCount = matchNumbers(lotto);
+        boolean isBonus = lotto.contains(bonusNumber);
         return Rank.of(matchCount, isBonus);
     }
 
-    private int matchNumbers(LottoTicket ticket) {
-        return (int) lottoTicket
+    private int matchNumbers(Lotto ticket) {
+        return (int) lotto
                 .getLottoNumbers()
                 .stream()
                 .filter(ticket::contains)

@@ -20,8 +20,8 @@ public class RandomNumberTicketFactory {
     private RandomNumberTicketFactory() {
     }
 
-    public static LottoTicket makeTicket() {
-        return new LottoTicket(makeLottoNumbers());
+    public static Lotto makeTicket() {
+        return new Lotto(makeLottoNumbers());
     }
 
     private static Set<LottoNumber> makeLottoNumbers() {
