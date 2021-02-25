@@ -4,16 +4,20 @@ import java.util.Arrays;
 
 public enum Rank {
 
-    NOTHING(0, 0, false),
-    FIFTH(3, 5_000, false),
-    FOURTH(4, 50_000, false),
-    THIRD(5, 1_500_000, false),
+    NOTHING(0, 0),
+    FIFTH(3, 5_000),
+    FOURTH(4, 50_000),
+    THIRD(5, 1_500_000),
     SECOND(5, 30_000_000, true),
-    FIRST(6, 2_000_000_000, false);
+    FIRST(6, 2_000_000_000);
 
     private int countOfMatch;
     private int reward;
     private boolean matchBonus;
+
+    Rank(int countOfMatch, int reward) {
+        this(countOfMatch, reward, false);
+    }
 
     Rank(int countOfMatch, int reward, boolean matchBonus) {
         this.countOfMatch = countOfMatch;
