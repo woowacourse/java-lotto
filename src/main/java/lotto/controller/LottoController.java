@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.IntStream;
+import lotto.domain.Count;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
@@ -41,13 +42,13 @@ public class LottoController {
 
     private LottoTickets buyTickets(Money money) {
         OutputView.printFixedTicketMessage();
-        int fixedTickets = money.buyWithinLimit(inputView.inputValue());
+        Count fixedTickets = new Count(money.buyWithinLimit(inputView.inputValue()));
         LottoTickets lottoTickets = new LottoTickets();
         Supplier<List<Integer>> randomNumbersGenerator = RandomUtils::generateNumbers;
 
         buyManualTickets(lottoTickets, fixedTickets);
         lottoTickets
-            .addTickets(inputTickets(money.countTickets() - fixedTickets, randomNumbersGenerator));
+            .addTickets(inputTickets(fixedTickets.remains(money.countTickets()), randomNumbersGenerator));
         OutputView.printAllTickets(fixedTickets, money, lottoTickets);
         return lottoTickets;
     }
@@ -69,8 +70,8 @@ public class LottoController {
             lottoResult.getResults());
     }
 
-    private void buyManualTickets(LottoTickets lottoTickets, int count) {
-        if (count > 0) {
+    private void buyManualTickets(LottoTickets lottoTickets, Count count) {
+        if (count.exists()) {
             OutputView.printInputFixedTicketMessage();
             Supplier<List<Integer>> manualNumbersGenerator = inputView::inputNumbers;
 
@@ -78,10 +79,10 @@ public class LottoController {
         }
     }
 
-    private List<LottoTicket> inputTickets(int count, Supplier<List<Integer>> ticketMaker) {
+    private List<LottoTicket> inputTickets(Count count, Supplier<List<Integer>> numbersGenerator) {
         List<LottoTicket> tickets = new ArrayList<>();
-        IntStream.rangeClosed(1, count)
-            .forEach(index -> tickets.add(new LottoTicket(ticketMaker.get())));
+        IntStream.rangeClosed(1, count.counts())
+            .forEach(index -> tickets.add(new LottoTicket(numbersGenerator.get())));
         return tickets;
     }
 }

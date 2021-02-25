@@ -2,6 +2,7 @@ package lotto.view;
 
 import java.util.Map;
 import java.util.Map.Entry;
+import lotto.domain.Count;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
@@ -40,9 +41,9 @@ public class OutputView {
         System.out.println(INPUT_MANUAL_TICKET_LOTTO_NUMBERS_INPUT);
     }
 
-    public static void printAllTickets(int fixedTickets, Money money, LottoTickets lottoTickets) {
-        System.out.printf(SHOW_TICKETS_STATE_MESSAGE + System.lineSeparator(), fixedTickets,
-            money.countTickets() - fixedTickets, money.calculateCharge());
+    public static void printAllTickets(Count fixedTickets, Money money, LottoTickets lottoTickets) {
+        System.out.printf(SHOW_TICKETS_STATE_MESSAGE + System.lineSeparator(), fixedTickets.counts(),
+            money.countTickets() - fixedTickets.counts(), money.calculateCharge());
         lottoTickets.getLottoTickets().forEach(OutputView::printTicket);
     }
 
