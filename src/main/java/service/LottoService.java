@@ -17,8 +17,7 @@ public class LottoService {
         this.lottoMachine = lottoMachine;
     }
 
-    public LottoTickets getLottoTickets(final InputView inputView, final TicketCount ticketCount) {
-        int manualTicketCount = inputView.inputManualTicketCount();
+    public LottoTickets getLottoTickets(final InputView inputView, final TicketCount ticketCount, int manualTicketCount) {
         TicketCount randomTicketCount = ticketCount.reduceTicketCount(manualTicketCount);
         List<LottoTicket> manualLottoTickets = getManualTickets(inputView, manualTicketCount);
         List<LottoTicket> randomLottoTickets = getRandomLottoTickets(randomTicketCount.getTicketCount());

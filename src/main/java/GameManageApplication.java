@@ -25,7 +25,7 @@ public class GameManageApplication {
         BettingMoney bettingMoney = getBettingMoney();
         TicketCount ticketCount = getTicketCount(bettingMoney);
         lottoGameScreen.showTicketCount(ticketCount);
-        LottoTickets lottoTickets = lottoService.getLottoTickets(inputView, ticketCount);
+        LottoTickets lottoTickets = lottoService.getLottoTickets(inputView, ticketCount, inputView.inputManualTicketCount());
         lottoGameScreen.showAllLottoStatus(lottoTickets.getLottoTickets());
 
         WinningLotto winningLotto = getWinningLotto();
