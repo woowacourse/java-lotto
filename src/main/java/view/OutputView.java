@@ -1,8 +1,8 @@
 package view;
 
 import domain.lottoGame.*;
-import domain.lottoGame.dto.LottoResult;
-import domain.lottoGame.dto.PurchaseResult;
+import domain.dto.GameResult;
+import domain.dto.PurchaseResult;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -29,7 +29,7 @@ public class OutputView {
         }
     }
 
-    public static void printLottoResults(LottoResult result) {
+    public static void printLottoResults(GameResult result) {
         printWinningTable(result.getWinningTable());
         printEarningRate(result.getEarningRate());
     }

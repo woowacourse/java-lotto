@@ -1,4 +1,4 @@
-package domain.lottoGame.dto;
+package domain.dto;
 
 import domain.lottoGame.Lottos;
 

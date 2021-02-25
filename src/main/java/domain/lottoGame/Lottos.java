@@ -15,17 +15,23 @@ public class Lottos {
     }
 
     public LottoWinningTable checkCorrect(WinningLotto winningLotto) {
-        Map<LottoRank, Long> results = new HashMap<>();
-
-        for (LottoRank rank : LottoRank.values()) {
-            results.put(rank, 0L);
-        }
+        Map<LottoRank, Long> results = intializeMap();
 
         for (Lotto lotto : lottos) {
             LottoRank winningRank = LottoRank.valueOf(winningLotto, lotto);
             results.put(winningRank, results.get(winningRank) + 1);
         }
+
         return new LottoWinningTable(results);
+    }
+
+    private Map<LottoRank, Long> intializeMap() {
+        Map<LottoRank, Long> results = new HashMap<>();
+
+        Arrays.stream(LottoRank.values())
+                .forEach(rank -> results.put(rank, 0L));
+
+        return results;
     }
 
     public List<Lotto> getLottos() {
