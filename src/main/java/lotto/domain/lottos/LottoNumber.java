@@ -9,7 +9,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public static final String RANGE_ERROR_MESSAGE = "숫자는 %d ~ %d 사이의 숫자여야한다.";
 
     private final int number;
-    private Object o;
 
     public LottoNumber(int number) {
         validateRange(number);
