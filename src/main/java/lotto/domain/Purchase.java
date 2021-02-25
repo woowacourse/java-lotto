@@ -11,6 +11,7 @@ public class Purchase {
 
     public Purchase(Money money, int manualPurchase) {
         this.money = money;
+
         validate(manualPurchase);
         this.manualPurchase = manualPurchase;
         this.autoPurchase = calculate(manualPurchase);
@@ -28,13 +29,13 @@ public class Purchase {
         return manualPurchase != ZERO;
     }
 
-    private int calculate(int manualPurchase) {
-        return money.getTotalPurchaseCount() - manualPurchase;
-    }
-
     private void validate(int manualPurchase) {
         if (money.exceedsLimit(manualPurchase)) {
             throw new LottoCustomException("수동으로 구매할 로또의 개수가 금액을 초과합니다.");
         }
+    }
+
+    private int calculate(int manualPurchase) {
+        return money.getTotalPurchaseCount() - manualPurchase;
     }
 }

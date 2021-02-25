@@ -8,7 +8,7 @@ public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
 
     public LottoTickets() {
-        this.lottoTickets = new ArrayList<>();
+        lottoTickets = new ArrayList<>();
     }
 
     public LottoTickets(List<LottoTicket> lottoTickets) {
@@ -20,7 +20,7 @@ public class LottoTickets {
     }
 
     public void addManuallyCreatedTickets(List<LottoTicket> lottoTickets) {
-        this.lottoTickets.addAll(lottoTickets);
+        lottoTickets.addAll(lottoTickets);
     }
 
     public void generateTicketAutomatically(int counts) {

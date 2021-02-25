@@ -27,7 +27,7 @@ public class WinningTicket {
     }
 
     private int matchNumbers(LottoTicket ticket) {
-        return (int) this.lottoTicket
+        return (int) lottoTicket
                 .getLottoNumbers()
                 .stream()
                 .filter(ticket::contains)
