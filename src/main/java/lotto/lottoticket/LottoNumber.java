@@ -10,6 +10,7 @@ public class LottoNumber {
     public static final String ERROR_MESSAGE_INVALID_RANGE = String.format("숫자는 %d부터 %d 사이여야 합니다.", MINIMUM_NUMBER, MAXIMUM_NUMBER);
 
     private static final LottoNumber[] cache;
+
     static {
         cache = new LottoNumber[(MAXIMUM_NUMBER - MINIMUM_NUMBER) + 1];
         for (int i = 0; i < MAXIMUM_NUMBER; i++) {
