@@ -4,6 +4,7 @@ import domain.*;
 import view.InputView;
 import view.OutputView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoController {
@@ -12,8 +13,8 @@ public class LottoController {
 
     public void run() {
         Money budget = createBudgetMoney();
-        Quantity quantity = createManualLottoTickets(budget);
-        List<LottoTicket> lottoTickets = createLottoTickets(budget);
+        Quantity quantity = createQuantity(budget);
+        List<LottoTicket> lottoTickets = createLottoTickets(quantity.manual(), quantity.auto());
         WinningLotto winningLotto = createWinningLotto();
 
         Statistics statistics = new Statistics(winningLotto, lottoTickets);
@@ -32,20 +33,30 @@ public class LottoController {
         }
     }
 
-    private Quantity createManualLottoTickets(Money budget) {
+    private Quantity createQuantity(Money budget) {
         try {
             return new Quantity(budget, inputView.scanManualQuantity());
         } catch (RuntimeException e) {
             outputView.printError(e);
-            return createManualLottoTickets(budget);
+            return createQuantity(budget);
         }
     }
 
-    private List<LottoTicket> createLottoTickets(Money budget) {
-        List<LottoTicket> lottoTickets = LottoMachine.buy(budget);
-        outputView.printLottoTicketsCount(lottoTickets);
+    private List<LottoTicket> createLottoTickets(long manualCount, long autoCount) {
+        List<LottoTicket> lottoTickets = new ArrayList<>(createManualLottoTickets(manualCount));
+        lottoTickets.addAll(createAutoLottoTickets(autoCount));
+        outputView.printLottoTicketsCount(manualCount, autoCount);
         outputView.printLottoTickets(lottoTickets);
         return lottoTickets;
+    }
+
+    private List<LottoTicket> createManualLottoTickets(long manualCount) {
+        List<List<Integer>> manualNumbers = inputView.scanManualNumbers(manualCount);
+        return LottoMachine.buyManual(manualNumbers);
+    }
+
+    private List<LottoTicket> createAutoLottoTickets(long autoCount) {
+        return LottoMachine.buyAuto(autoCount);
     }
 
     private WinningLotto createWinningLotto() {
