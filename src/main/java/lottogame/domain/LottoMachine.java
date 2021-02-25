@@ -39,10 +39,8 @@ public class LottoMachine {
     }
 
     private boolean isPossible(int random, List<LottoNumber> lottoNumbers) {
-        return !lottoNumbers.stream()
-                .filter(lottoNumber -> lottoNumber.equals(random))
-                .findAny()
-                .isPresent();
+        return lottoNumbers.stream()
+                .noneMatch(lottoNumber -> lottoNumber.equals(random));
     }
 
     public List<Lotto> makeManualLotto(List<LottoDto> manualLottos) {

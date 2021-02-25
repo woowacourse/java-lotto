@@ -30,7 +30,7 @@ class InputViewTest {
         Scanner scanner = new Scanner(new ByteArrayInputStream("1, 2, 3, 4, 5, 6".getBytes()));
         InputView inputView = new InputView(scanner);
         List<Integer> numbers = inputView.inputWinningLottoNumbers();
-        assertThat(numbers.equals(Arrays.asList(1, 2, 3, 4, 5, 6))).isTrue();
+        assertThat(numbers).isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 
     @DisplayName("구분자가 맨 앞에 들어가는 경우 예외 처리")

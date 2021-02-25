@@ -45,9 +45,9 @@ public class Lotto {
     }
 
     public List<LottoNumber> values() {
-        return new ArrayList<>(lottoNumbers.stream()
+        return lottoNumbers.stream()
                 .map(lottoNumber -> lottoNumber.values())
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
     }
 
     public int matchNumberCount(WinningLotto winningLotto) {
