@@ -6,10 +6,10 @@ import lottogame.domain.stats.LottoResults;
 import java.util.*;
 
 public class Lottos {
-    private final List<Lotto> lottos = new ArrayList<>();
+    private final List<Lotto> lottos;
 
-    public Lottos(List<Lotto> values) {
-        lottos.addAll(values);
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
     public List<Lotto> values() {
@@ -26,5 +26,18 @@ public class Lottos {
             results.put(rank, results.get(rank) + 1);
         }
         return new LottoResults(results);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lottos lottos1 = (Lottos) o;
+        return Objects.equals(lottos, lottos1.lottos);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottos);
     }
 }

@@ -1,86 +1,53 @@
 package lottogame.domain.lotto;
 
-import lottogame.domain.stats.Money;
-import lottogame.domain.stats.Quantity;
 import lottogame.domain.stats.Rank;
 import lottogame.domain.stats.LottoResults;
-import lottogame.utils.AutoLottoGenerator;
 import lottogame.utils.ManualLottoGenerator;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LottosTest {
     private ManualLottoGenerator manualLottoGenerator;
+    private Lottos lottos;
 
-    @Test
-    void 객체_생성() {
-        AutoLottoGenerator autoLottoGenerator = new AutoLottoGenerator(Quantity.of("5"));
-        autoLottoGenerator.generateLottos();
-        List<Lotto> lottoGroup = autoLottoGenerator.generateLottos();
-
-        Lottos lottos = new Lottos(lottoGroup);
-        for (Lotto lotto : lottoGroup) {
-            assertThat(lottos.values()).contains(lotto);
-        }
+    @BeforeEach
+    void setUp() {
+        manualLottoGenerator = new ManualLottoGenerator();
+        manualLottoGenerator.addResources(Arrays.asList(
+                "1, 2, 3, 4, 45, 44", "1, 2, 3, 43, 44, 45",
+                "1, 2, 3, 4, 5, 7", "1, 2, 3, 4, 5, 44"));
+        lottos = new Lottos(manualLottoGenerator.generateLottos());
     }
 
     @Test
-    void 로또_매칭_테스트1() {
-        manualLottoGenerator = new ManualLottoGenerator("1, 2, 3, 4, 5, 6");
-        matchTest(new String[]{"1, 2, 3, 4, 45, 44", "1, 2, 3, 43, 44, 45", "1, 2, 3, 4, 5, 7", "1, 2, 3, 4, 5, 44"},
-                new WinningLotto(manualLottoGenerator.generateLotto(), LottoNumber.of("7")),
-                "4000",
-                new int[]{1, 1, 1, 1, 0});
+    @DisplayName("같은 값을 가지면 같은 객체인지 확인")
+    void constructor1() {
+        manualLottoGenerator = new ManualLottoGenerator();
+        manualLottoGenerator.addResources(Arrays.asList(
+                "1, 2, 3, 4, 45, 44", "1, 2, 3, 43, 44, 45",
+                "1, 2, 3, 4, 5, 7", "1, 2, 3, 4, 5, 44"));
+        Lottos newLottos = new Lottos(manualLottoGenerator.generateLottos());
+        assertEquals(newLottos, lottos);
     }
 
     @Test
-    void 로또_매칭_테스트2() {
-        manualLottoGenerator = new ManualLottoGenerator("1, 2, 3, 4, 5, 6");
-        matchTest(new String[]{
-                        "8, 21, 23, 41, 42, 43", "3, 5, 11, 16, 32, 38", "7, 11, 16, 35, 36, 44",
-                        "1, 8, 11, 31, 41, 42", "13, 14, 16, 38, 42, 45", "7, 11, 30, 40, 42, 43",
-                        "2, 13, 22, 32, 38, 45", "23, 25, 33, 36, 39, 41", "1, 3, 5, 14, 22, 45",
-                        "5, 9, 38, 41, 43, 44", "2, 8, 9, 18, 19, 21", "13, 14, 18, 21, 23, 35",
-                        "17, 21, 29, 37, 42, 45", "3, 8, 27, 30, 35, 44"},
-                new WinningLotto(manualLottoGenerator.generateLotto(), LottoNumber.of("7")),
-                "14000",
-                new int[]{1, 0, 0, 0, 0});
-    }
-
-    private void matchTest(String[] lottoNumbersGroup, WinningLotto winningLotto, String money, int[] expectedCount) {
-        Lottos lottos = makeLottos(lottoNumbersGroup);
-        LottoGame lottoGame = new LottoGame(lottos, winningLotto);
-        LottoResults lottoResults = lottoGame.results();
-        Map<Rank, Integer> sameResult = new LinkedHashMap<>();
-
-        sameResult.put(Rank.FIFTH, expectedCount[0]);
-        sameResult.put(Rank.FOURTH, expectedCount[1]);
-        sameResult.put(Rank.THIRD, expectedCount[2]);
-        sameResult.put(Rank.SECOND, expectedCount[3]);
-        sameResult.put(Rank.FIRST, expectedCount[4]);
-        assertThat(lottoResults.values()).isEqualTo(sameResult);
-
-        float expected = (5000 * expectedCount[0]
-                + 50000 * expectedCount[1]
-                + 1500000 * expectedCount[2]
-                + 30000000 * expectedCount[3]
-                + 2000000000 * expectedCount[4]) / Float.parseFloat(money);
-//        assertThat(lottoResults.calculateYield(Money.of(money))).isEqualTo(expected);
-    }
-
-    Lottos makeLottos(String[] inputs) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (String input : inputs) {
-            String[] numbers = input.split(", ");
-            List<LottoNumber> nums = Arrays.stream(numbers)
-                    .map(LottoNumber::of)
-                    .collect(Collectors.toList());
-            lottos.add(new Lotto(nums));
-        }
-        return new Lottos(lottos);
+    @DisplayName("올바른 결과를 만드는지 확인")
+    void matchLottos() {
+        manualLottoGenerator = new ManualLottoGenerator("1, 2, 5, 20, 21, 22");
+        WinningLotto winningLotto = new WinningLotto(manualLottoGenerator.generateLotto(), LottoNumber.of(25));
+        EnumMap<Rank, Integer> results = new EnumMap<>(Rank.class);
+        results.put(Rank.NOT_FOUND, 0);
+        results.put(Rank.FIFTH, 2);
+        results.put(Rank.FOURTH, 0);
+        results.put(Rank.THIRD, 0);
+        results.put(Rank.SECOND, 0);
+        results.put(Rank.FIRST, 0);
+        LottoResults exectedlottoResults = new LottoResults(results);
+        assertEquals(exectedlottoResults, lottos.matchLottos(winningLotto));
     }
 }
