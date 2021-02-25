@@ -49,7 +49,7 @@ public class LottoMainController {
     }
 
     private void printLottoTickets(final LottoTickets lottoTickets) {
-        final LottoTicketsDto lottoTicketsDto = LottoTicketsDto.of(lottoTickets);
+        final LottoTicketsDto lottoTicketsDto = LottoTicketsDto.from(lottoTickets);
         OutputView.printLottoTickets(lottoTicketsDto);
     }
 
@@ -66,7 +66,7 @@ public class LottoMainController {
         final WinningStatics winningStatics = lottoTickets.calculateWinningStatics(winningNumbers);
 
         OutputView.printWinningStaticsTitle();
-        OutputView.printWinningStatics(WinningStaticsDto.of(winningStatics));
+        OutputView.printWinningStatics(WinningStaticsDto.from(winningStatics));
         OutputView.printProfitRate(winningStatics.calculateProfitRate(lottoMoney));
     }
 }

@@ -15,7 +15,7 @@ public class WinningStaticsDto {
         this.prizeDtos = prizeDtos;
     }
 
-    public static WinningStaticsDto of(final WinningStatics winningStatics) {
+    public static WinningStaticsDto from(final WinningStatics winningStatics) {
         final List<PrizeDto> prizeDtos = new ArrayList<>();
 
         winningStatics.toMap()

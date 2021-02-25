@@ -13,11 +13,11 @@ public class LottoTicketsDto {
         this.lottoTicketDtos = lottoTicketDtos;
     }
 
-    public static LottoTicketsDto of(final LottoTickets lottoTickets) {
+    public static LottoTicketsDto from(final LottoTickets lottoTickets) {
         List<LottoTicketDto> dtos = lottoTickets.toList()
                 .stream()
                 .map(LottoTicket.class::cast)
-                .map(LottoTicketDto::of)
+                .map(LottoTicketDto::from)
                 .collect(Collectors.toList());
 
         return new LottoTicketsDto(dtos);
