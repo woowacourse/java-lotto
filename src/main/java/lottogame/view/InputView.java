@@ -10,7 +10,7 @@ public class InputView {
     private InputView() {
     }
 
-    public static String scan() {
+    private static String scan() {
         return scanner.nextLine().trim();
     }
 

@@ -6,15 +6,15 @@ public class WinningLotto {
     private final Lotto lotto;
     private final LottoNumber bonusNumber;
 
-    public WinningLotto(Lotto lotto, String bonusNumber) {
-        this.bonusNumber = LottoNumber.of(bonusNumber);
-        isDuplicate(lotto, this.bonusNumber);
+    public WinningLotto(Lotto lotto, LottoNumber bonusNumber) {
+        validate(lotto, bonusNumber);
         this.lotto = lotto;
+        this.bonusNumber = bonusNumber;
     }
 
-    private void isDuplicate(Lotto lotto, LottoNumber bonusNumber) {
+    private void validate(Lotto lotto, LottoNumber bonusNumber) {
         if (lotto.contains(bonusNumber)) {
-            throw new IllegalArgumentException("같은 번호를 입력하셨습니다.");
+            throw new IllegalArgumentException("보너스번호는 로또번호와 달라야 합니다.");
         }
     }
 

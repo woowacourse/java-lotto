@@ -32,7 +32,7 @@ class LottosTest {
     void 로또_매칭_테스트1() {
         manualLottoGenerator = new ManualLottoGenerator("1, 2, 3, 4, 5, 6");
         matchTest(new String[]{"1, 2, 3, 4, 45, 44", "1, 2, 3, 43, 44, 45", "1, 2, 3, 4, 5, 7", "1, 2, 3, 4, 5, 44"},
-                new WinningLotto(manualLottoGenerator.generateLotto(), "7"),
+                new WinningLotto(manualLottoGenerator.generateLotto(), LottoNumber.of("7")),
                 "4000",
                 new int[]{1, 1, 1, 1, 0});
     }
@@ -46,13 +46,13 @@ class LottosTest {
                         "2, 13, 22, 32, 38, 45", "23, 25, 33, 36, 39, 41", "1, 3, 5, 14, 22, 45",
                         "5, 9, 38, 41, 43, 44", "2, 8, 9, 18, 19, 21", "13, 14, 18, 21, 23, 35",
                         "17, 21, 29, 37, 42, 45", "3, 8, 27, 30, 35, 44"},
-                new WinningLotto(manualLottoGenerator.generateLotto(), "7"),
+                new WinningLotto(manualLottoGenerator.generateLotto(), LottoNumber.of("7")),
                 "14000",
                 new int[]{1, 0, 0, 0, 0});
     }
 
     private void matchTest(String[] lottoNumbersGroup, WinningLotto winningLotto, String money, int[] expectedCount) {
-        List<Lotto> lottos = makeLottos(lottoNumbersGroup);
+        Lottos lottos = makeLottos(lottoNumbersGroup);
         LottoGame lottoGame = new LottoGame(lottos, winningLotto);
         LottoResults lottoResults = lottoGame.results();
         Map<Rank, Integer> sameResult = new LinkedHashMap<>();
@@ -72,7 +72,7 @@ class LottosTest {
 //        assertThat(lottoResults.calculateYield(Money.of(money))).isEqualTo(expected);
     }
 
-    List<Lotto> makeLottos(String[] inputs) {
+    Lottos makeLottos(String[] inputs) {
         List<Lotto> lottos = new ArrayList<>();
         for (String input : inputs) {
             String[] numbers = input.split(", ");
@@ -81,6 +81,6 @@ class LottosTest {
                     .collect(Collectors.toList());
             lottos.add(new Lotto(nums));
         }
-        return lottos;
+        return new Lottos(lottos);
     }
 }

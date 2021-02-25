@@ -13,7 +13,7 @@ public class Lotto {
     private static void validate(List<LottoNumber> lotto) {
         Set<LottoNumber> numbers = new HashSet<>(lotto);
         if (numbers.size() != lotto.size()) {
-            throw new IllegalArgumentException("같은 번호를 입력하셨습니다.");
+            throw new IllegalArgumentException("로또번호는 서로 달라야합니다.");
         }
     }
 

@@ -2,14 +2,12 @@ package lottogame.domain.lotto;
 
 import lottogame.domain.stats.LottoResults;
 
-import java.util.List;
-
 public class LottoGame {
     private Lottos lottos;
     private WinningLotto winningLotto;
 
-    public LottoGame(List<Lotto> lottos, WinningLotto winningLotto) {
-        this.lottos = new Lottos(lottos);
+    public LottoGame(Lottos lottos, WinningLotto winningLotto) {
+        this.lottos = lottos;
         this.winningLotto = winningLotto;
     }
 
