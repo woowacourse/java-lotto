@@ -14,7 +14,7 @@ public class Lottos {
         return values.size();
     }
 
-    public List<Lotto> getLottos(){
+    public List<Lotto> getLottos() {
         return this.values;
     }
 
@@ -22,5 +22,9 @@ public class Lottos {
         for (Lotto lotto : values) {
             lottoResult.checkWinningLotto(lotto, winningLotto);
         }
+    }
+
+    public Integer getNumAutoLotto(ManualLotto manualLotto) {
+        return this.values.size() - manualLotto.getNumLotto();
     }
 }
