@@ -11,10 +11,6 @@ public class TicketMachine {
     }
 
     private void validateQuantityRange(Money money, int quantity) {
-        checkQuantityByMoney(money, quantity);
-    }
-
-    private void checkQuantityByMoney(Money money, int quantity) {
         if (!money.availableForPurchase(TICKET_PRICE * quantity)) {
             throw new InvalidManualTicketQuantityException();
         }
