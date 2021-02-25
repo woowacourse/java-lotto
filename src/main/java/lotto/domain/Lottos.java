@@ -19,13 +19,13 @@ public class Lottos {
         return new ArrayList<>(lottos);
     }
 
-    public void addManuallyCreatedTickets(List<Lotto> manuallyCreatedLottos) {
+    public void addManuallyCreatedLottos(List<Lotto> manuallyCreatedLottos) {
         lottos.addAll(manuallyCreatedLottos);
     }
 
-    public void generateTicketAutomatically(int counts) {
+    public void generateLottoAutomatically(int counts) {
         for (int i = 0; i < counts; i++) {
-            lottos.add(RandomNumberTicketFactory.makeTicket());
+            lottos.add(RandomNumberGenerator.makeTicket());
         }
     }
 }

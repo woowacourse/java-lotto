@@ -51,10 +51,10 @@ public class LottoController {
         Lottos lottos = new Lottos();
 
         if (purchase.isManualPurchaseExist()) {
-            lottos.addManuallyCreatedTickets(inputManualNumbers(purchase));
+            lottos.addManuallyCreatedLottos(inputManualNumbers(purchase));
         }
 
-        lottos.generateTicketAutomatically(purchase.getAutoPurchase());
+        lottos.generateLottoAutomatically(purchase.getAutoPurchase());
         OutputView.printAllTickets(purchase, lottos);
         return lottos;
     }
