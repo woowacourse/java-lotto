@@ -3,42 +3,32 @@ package domain;
 import domain.ticket.LottoTicket;
 
 import java.util.Arrays;
+import java.util.function.BiPredicate;
 
 public enum Prize {
-    FIRST(6, false, 2_000_000_000L),
-    SECOND(5, true, 30_000_000L) {
-        @Override
-        boolean isMatched(final int matching, final boolean bonusMatching) {
-            return this.matching == matching && this.bonusMatching == bonusMatching;
-        }
-    },
-    THIRD(5, false, 1_500_000L) {
-        @Override
-        boolean isMatched(final int matching, final boolean bonusMatching) {
-            return this.matching == matching && this.bonusMatching == bonusMatching;
-        }
-    },
-    FOURTH(4, false, 50_000L),
-    FIFTH(3, false, 5000L),
-    NOTHING(0, false, 0L);
+    FIRST(6, false, 2_000_000_000L, (matching, bonusMatching) -> matching == 6),
+    SECOND(5, true, 30_000_000L, (matching, bonusMatching) -> matching == 5 && bonusMatching),
+    THIRD(5, false, 1_500_000L, (matching, bonusMatching) -> matching == 5 && !bonusMatching),
+    FOURTH(4, false, 50_000L, (matching, bonusMatching) -> matching == 4),
+    FIFTH(3, false, 5000L, (matching, bonusMatching) -> matching == 3),
+    NOTHING(0, false, 0L, (matching, bonusMatching) -> false);
 
-    protected final int matching;
-    protected final boolean bonusMatching;
-    protected final long money;
+    private final int matching;
+    private final boolean bonusMatching;
+    private final long money;
+    private final BiPredicate<Integer, Boolean> matchExpression;
 
-    Prize(final int matching, final boolean bonusMatching, final long money) {
+    Prize(final int matching, final boolean bonusMatching, final long money, final BiPredicate<Integer, Boolean> matchExpression) {
         this.matching = matching;
         this.bonusMatching = bonusMatching;
         this.money = money;
-    }
-
-    boolean isMatched(final int matching, final boolean bonusMatching) {
-        return this.matching == matching;
+        this.matchExpression = matchExpression;
     }
 
     public static Prize of(final WinningNumbers winningNumbers, final LottoTicket lottoTicket) {
         final int matching = winningNumbers.countMatching(lottoTicket);
         boolean bonusMatching = winningNumbers.hasBonus(lottoTicket);
+
         return choice(matching, bonusMatching);
     }
 
@@ -47,6 +37,10 @@ public enum Prize {
                 .filter(prize -> prize.isMatched(matching, bonusMatching))
                 .findFirst()
                 .orElse(NOTHING);
+    }
+
+    boolean isMatched(final int matching, final boolean bonusMatching) {
+        return matchExpression.test(matching, bonusMatching);
     }
 
     public long getMoney() {

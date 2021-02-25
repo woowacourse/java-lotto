@@ -82,4 +82,4 @@
 - [x] Controller의 printLottoQuantity 메서드 고민
 
 ## 2단계 피드백 후 리팩터링 목록
-- [x] Prize의 isMatched 다형성 이용
+- [x] Prize에 추상메서드 이용 -> 다형성 이용 -> 함수형 인터페이스 사용 순으로 변경
