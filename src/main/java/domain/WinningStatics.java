@@ -1,6 +1,5 @@
 package domain;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -11,14 +10,14 @@ public class WinningStatics {
     private final Map<Prize, Integer> numberPerPrize = new LinkedHashMap<>();
 
     {
-        Arrays.stream(Prize.values())
-                .forEachOrdered(prize -> numberPerPrize.put(prize, 0));
+        for (final Prize prize : Prize.values()) {
+            numberPerPrize.put(prize, 0);
+        }
     }
 
     public WinningStatics(final List<Prize> prizes) {
-        prizes.stream()
-                .forEach(prize -> numberPerPrize.
-                        computeIfPresent(prize, (Prize key, Integer value) -> value + 1));
+        prizes.forEach(prize -> numberPerPrize.
+                computeIfPresent(prize, (Prize key, Integer value) -> value + 1));
     }
 
     public double calculateProfitRate(final LottoMoney lottoMoney) {
