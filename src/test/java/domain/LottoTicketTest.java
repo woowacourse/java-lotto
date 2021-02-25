@@ -16,7 +16,7 @@ public class LottoTicketTest {
     void valueOf_validInput_success() {
         final List<Integer> lottoNumbers = getValidNumbers();
 
-        assertThatCode(() -> LottoTicket.valueOf(lottoNumbers))
+        assertThatCode(() -> LottoTicket.generateManual(lottoNumbers))
                 .doesNotThrowAnyException();
     }
 
@@ -26,7 +26,7 @@ public class LottoTicketTest {
         final List<Integer> lottoNumbers = getDuplicateNumbers();
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> LottoTicket.valueOf(lottoNumbers))
+                .isThrownBy(() -> LottoTicket.generateManual(lottoNumbers))
                 .withMessageContaining("중복");
     }
 
@@ -38,10 +38,10 @@ public class LottoTicketTest {
 
         assertAll(
                 () -> assertThatIllegalArgumentException()
-                        .isThrownBy(() -> LottoTicket.valueOf(fewerLottoNumbers))
+                        .isThrownBy(() -> LottoTicket.generateManual(fewerLottoNumbers))
                         .withMessageContaining("개수가 6이 아닙니다."),
                 () -> assertThatIllegalArgumentException()
-                        .isThrownBy(() -> LottoTicket.valueOf(moreLottoNumbers))
+                        .isThrownBy(() -> LottoTicket.generateManual(moreLottoNumbers))
                         .withMessageContaining("개수가 6이 아닙니다.")
         );
     }

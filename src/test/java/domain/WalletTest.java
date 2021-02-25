@@ -17,7 +17,7 @@ class WalletTest {
         assertThatCode(() -> new Wallet(5000)).doesNotThrowAnyException();
     }
 
-    @DisplayName("지갑 객체 생성 실패 : 음의 정수 입력")
+    @DisplayName("지갑 객체 생성 실패: 음의 정수 입력")
     @Test
     void negative_amount_fail() {
         assertThatIllegalArgumentException()

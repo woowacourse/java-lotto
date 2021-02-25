@@ -15,8 +15,7 @@ class WinningResultTest {
 
     @BeforeEach
     void setUp() {
-        winningResult = new WinningResult(createValidWinningNumbers(), createValidLottoTickets(),
-                createValidPrice());
+        winningResult = new WinningResult(createValidWinningNumbers(), createValidLottoTickets());
     }
 
     @DisplayName("각 등수별 일치 로또 티켓 개수 확인")
@@ -36,15 +35,11 @@ class WinningResultTest {
         assertThat(winningResult.getProfitRate()).isEqualTo(2_030_005_000.0 / 3000.0);
     }
 
-    Price createValidPrice() {
-        return Price.valueOf("3000");
-    }
-
     List<LottoTicket> createValidLottoTickets() {
         return Arrays.asList(
-                LottoTicket.valueOf(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                LottoTicket.valueOf(Arrays.asList(4, 5, 6, 7, 8, 9)),
-                LottoTicket.valueOf(Arrays.asList(1, 2, 3, 4, 5, 9))
+                LottoTicket.generateManual(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                LottoTicket.generateManual(Arrays.asList(4, 5, 6, 7, 8, 9)),
+                LottoTicket.generateManual(Arrays.asList(1, 2, 3, 4, 5, 9))
         );
     }
 

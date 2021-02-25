@@ -4,17 +4,10 @@ import java.util.List;
 
 public class LottoSystem {
 
-    private final Price price;
     private final List<LottoTicket> lottoTickets;
 
-    private LottoSystem(final Price price) {
-        this.price = price;
-        LottoMachine lottoMachine = LottoMachine.valueOf(price);
-        this.lottoTickets = lottoMachine.generateLottoTickets();
-    }
-
-    public static LottoSystem init(final String price) {
-        return new LottoSystem(Price.valueOf(price));
+    public LottoSystem(final Wallet wallet) {
+        this.lottoTickets = LottoTicketFactory.generateAuto(wallet);
     }
 
     public List<LottoTicket> getLottoTickets() {
@@ -26,6 +19,6 @@ public class LottoSystem {
     }
 
     public WinningResult getWinningResult(final WinningNumbers winningNumbers) {
-        return new WinningResult(winningNumbers, lottoTickets, price);
+        return new WinningResult(winningNumbers, lottoTickets);
     }
 }
