@@ -15,6 +15,10 @@ public class GameMoney {
         this.gameMoney = new BigDecimal(gameMoney);
     }
 
+    public static int getSingleLottoPrice() {
+        return SINGLE_LOTTO_GAME_MONEY;
+    }
+
     private void validateBudget(int gameMoney) {
         if (gameMoney < SINGLE_LOTTO_GAME_MONEY) {
             throw new IllegalArgumentException("게임에는 최소 " + SINGLE_LOTTO_GAME_MONEY + "원이 필요합니다.");
