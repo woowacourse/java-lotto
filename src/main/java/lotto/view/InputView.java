@@ -1,9 +1,10 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
 import lotto.domain.Money;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -23,22 +24,38 @@ public class InputView {
         }
     }
 
-    public static Lotto askLastWinningLotto() {
+    public static String askFixedLottoQuantity() {
+        OutputView.printMessage("수동으로 구매할 로또 수를 입력해 주세요.");
+        return scanner.nextLine();
+    }
+
+    public static List<LottoNumbers> askFixLottoNumbersBundle(int fixedLottoQuantity) {
+        OutputView.printMessage("수동으로 구매할 번호를 입력해 주세요.");
+        List<LottoNumbers> FixLottoNumbersBundle = new ArrayList<>();
+        for (int i = 0; i < fixedLottoQuantity; i++) {
+            String input = scanner.nextLine();
+            FixLottoNumbersBundle.add(createWinningLottoNumbers(input));
+        }
+        return FixLottoNumbersBundle;
+    }
+
+    public static LottoNumbers askLastWinningLottoNumbers() {
         OutputView.printMessage("지난 주 당첨 번호를 입력해 주세요.");
         String input = scanner.nextLine();
         try {
-            return new Lotto(createWinningLottoNumbers(input));
+            return createWinningLottoNumbers(input);
         } catch (Exception e) {
             OutputView.printError(e);
-            return askLastWinningLotto();
+            return askLastWinningLottoNumbers();
         }
     }
 
-    private static List<LottoNumber> createWinningLottoNumbers(String input) {
+    private static LottoNumbers createWinningLottoNumbers(String input) {
         List<String> splitNumbers = Arrays.asList(input.split(","));
-        return splitNumbers.stream()
+        List<LottoNumber> lottoNumbers = splitNumbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
+        return new LottoNumbers(lottoNumbers);
     }
 
 
