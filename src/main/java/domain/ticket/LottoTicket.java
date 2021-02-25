@@ -14,11 +14,11 @@ import static domain.LottoNumber.MIN_NUMBER_VALUE;
 public final class LottoTicket extends Ticket {
 
     private final static class TotalNumbersCache {
-        private static final List<Integer> TOTAL_NUMBERS = new ArrayList<>();
+        private static final List<Integer> NUMBERS = new ArrayList<>();
 
         static {
             IntStream.rangeClosed(MIN_NUMBER_VALUE, MAX_NUMBER_VALUE)
-                    .forEach(i -> TOTAL_NUMBERS.add(i));
+                    .forEach(i -> NUMBERS.add(i));
         }
 
         private TotalNumbersCache() {
