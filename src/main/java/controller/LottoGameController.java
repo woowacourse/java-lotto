@@ -10,12 +10,15 @@ import view.InputView;
 import view.OutputView;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoGameController {
     public void run() {
         final GameMoney gameMoney = makeGameMoney();
 
-        final LottoBundle lottoBundle = makeLottoBundle(gameMoney);
+        final List<Lotto> manualLotto = makeManualLotto(gameMoney);
+
+        final LottoBundle lottoBundle = makeLottoBundle(gameMoney, manualLotto);
 
         final WinningResult winningResult = makeWinningResult();
 
@@ -25,7 +28,7 @@ public class LottoGameController {
     private GameMoney makeGameMoney() {
         try {
             OutputView.printGameMoneyRequest();
-            int userGameMoney = InputView.getGameMoney();
+            final int userGameMoney = InputView.getGameMoney();
             return new GameMoney(userGameMoney);
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
@@ -33,8 +36,36 @@ public class LottoGameController {
         }
     }
 
-    private LottoBundle makeLottoBundle(final GameMoney gameMoney) {
-        final LottoBundle lottoBundle = gameMoney.buyLotto();
+    private List<Lotto> makeManualLotto(final GameMoney gameMoney) {
+        try {
+            final int manualLottoAmount = makeManualLottoAmount(gameMoney);
+            if (manualLottoAmount > 0) {
+                OutputView.printManualLottoRequest();
+            }
+            final List<List<Integer>> manualLotto = InputView.getManualLotto(manualLottoAmount);
+            return manualLotto.stream()
+                    .map(numbers -> Lotto.of(numbers))
+                    .collect(Collectors.toList());
+        } catch (IllegalArgumentException e) {
+            OutputView.printErrorMessage(e.getMessage());
+            return makeManualLotto(gameMoney);
+        }
+    }
+
+    private int makeManualLottoAmount(final GameMoney gameMoney) {
+        try {
+            OutputView.printManualLottoAmountRequest();
+            final int manualLottoAmount = InputView.getManualLottoNumber();
+            gameMoney.checkManualBuyingAvailable(manualLottoAmount);
+            return manualLottoAmount;
+        } catch (IllegalArgumentException e) {
+            OutputView.printErrorMessage(e.getMessage());
+            return makeManualLottoAmount(gameMoney);
+        }
+    }
+
+    private LottoBundle makeLottoBundle(final GameMoney gameMoney, final List<Lotto> manualLotto) {
+        final LottoBundle lottoBundle = gameMoney.buyLottoManually(manualLotto);
         OutputView.printLottoBought(lottoBundle);
         return lottoBundle;
     }

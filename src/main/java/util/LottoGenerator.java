@@ -28,11 +28,9 @@ public class LottoGenerator {
 
     public static LottoBundle createRandomLottoBundle(final List<Lotto> lotto, final int number) {
         final List<Lotto> lottos = new ArrayList<>(lotto);
-        System.out.println("lottos = " + lottos);
         for (int i = 0; i < number; i++) {
             lottos.add(createRandomLotto());
         }
-        System.out.println("lottos = " + lottos);
         return new LottoBundle(lottos);
     }
 

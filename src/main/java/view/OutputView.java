@@ -12,6 +12,8 @@ import java.util.stream.Collectors;
 public class OutputView {
     private static final String ERROR_INDICATOR = "[ERROR] ";
     private static final String GAME_MONEY_REQUEST = "구입금액을 입력해 주세요.";
+    private static final String MANUAL_LOTTO_AMOUNT_REQUEST = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String MANUAL_LOTTO_REQUEST = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String LOTTO_BOUGHT_STATUS = "%d개를 구매했습니다.";
     private static final String LOTTO_BOUGHT_PRINT_PREFIX = "[";
     private static final String LOTTO_BOUGHT_PRINT_DELIMITER = ", ";
@@ -36,6 +38,16 @@ public class OutputView {
 
     public static void printGameMoneyRequest() {
         System.out.println(GAME_MONEY_REQUEST);
+    }
+
+    public static void printManualLottoAmountRequest() {
+        printNewLine();
+        System.out.println(MANUAL_LOTTO_AMOUNT_REQUEST);
+    }
+
+    public static void printManualLottoRequest() {
+        printNewLine();
+        System.out.println(MANUAL_LOTTO_REQUEST);
     }
 
     public static void printLottoBought(final LottoBundle lottoBundle) {

@@ -41,19 +41,21 @@ public class GameMoney {
         gameMoney = gameMoneyLeft;
     }
 
-    public void checkManualBuyingAvailable(final int quantity) {
-        if (gameMoney.divide(new BigDecimal(SINGLE_LOTTO_GAME_MONEY)).intValue() < quantity) {
-            throw new IllegalArgumentException("구입금액 이상으로 로또를 구매할 수 없습니다.");
-        }
-    }
-
     public LottoBundle buyLottoManually(final List<Lotto> lottoBoughtManually) {
         final int numberOfLottoToBuy = gameMoney.divide(new BigDecimal(SINGLE_LOTTO_GAME_MONEY)).intValue();
         calculateGameMoneyLeft(numberOfLottoToBuy);
 
         final int numberOfAutoLottoToBuy = numberOfLottoToBuy - lottoBoughtManually.size();
-        System.out.println("numberOfAutoLottoToBuy = " + numberOfAutoLottoToBuy);
         final LottoBundle lottoBundle = LottoGenerator.createRandomLottoBundle(lottoBoughtManually, numberOfAutoLottoToBuy);
         return lottoBundle;
+    }
+
+    public void checkManualBuyingAvailable(final int quantity) {
+        if (gameMoney.divide(new BigDecimal(SINGLE_LOTTO_GAME_MONEY)).intValue() < quantity) {
+            throw new IllegalArgumentException("구입금액 이상으로 로또를 구매할 수 없습니다.");
+        }
+        if (quantity < 0) {
+            throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+        }
     }
 }
