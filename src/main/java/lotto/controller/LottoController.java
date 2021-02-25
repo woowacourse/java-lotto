@@ -10,10 +10,12 @@ import java.util.List;
 public class LottoController {
     public void run() {
         Money money = new Money(InputView.inputMoney());
-        ManualLottoAmount manualLottoAmount = new ManualLottoAmount(InputView.inputManualLottoAmount(), money.getPurchasableLottoCount());
+        ManualLottoAmount manualLottoAmount = new ManualLottoAmount(
+                InputView.inputManualLottoAmount(), money.getPurchasableLottoCount());
         LottoTickets lottoTickets = getLottoTickets(money, manualLottoAmount);
-        LottoTicket winningTicket = LottoTicketFactory.createManualLottoTicket(InputView.inputWinningNumbers());
-        LottoResult lottoResult = getLottoResult(lottoTickets, winningTicket);
+        WinningLotto winningLotto = LottoTicketFactory.createWinningLotto(
+                InputView.inputWinningNumbers(), InputView.inputBonusNumber());
+        LottoResult lottoResult = new LottoResult(lottoTickets.checkWinningTickets(winningLotto));
         showResult(lottoResult, money);
     }
 
@@ -32,12 +34,6 @@ public class LottoController {
             manualInputs.add(InputView.inputLottoNumbers());
         }
         return manualInputs;
-    }
-
-    private LottoResult getLottoResult(LottoTickets lottoTickets, LottoTicket winningTicket) {
-        LottoNumber bonusNumber = LottoNumber.of(InputView.inputBonusNumber());
-        WinningLotto winningLotto = new WinningLotto(winningTicket, bonusNumber);
-        return new LottoResult(lottoTickets.checkWinningTickets(winningLotto));
     }
 
     private void showResult(LottoResult lottoResult, Money money) {

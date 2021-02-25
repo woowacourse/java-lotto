@@ -57,4 +57,8 @@ public class LottoTicketFactory {
                 .sorted()
                 .collect(Collectors.toList()));
     }
+
+    public static WinningLotto createWinningLotto(List<String> winningInputs, String bonusNumberInput) {
+        return new WinningLotto(createManualLottoTicket(winningInputs), LottoNumber.of(bonusNumberInput));
+    }
 }
