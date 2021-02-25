@@ -22,14 +22,15 @@ public class LottoTicketService {
     }
 
     public static LottoTicket createManualLottoTicket(final String input) {
-        List<LottoNumber> lottoWinnerNumbers =
+        List<LottoNumber> lottoNumbers =
                 Arrays.stream(input.split(DELIMITER))
                         .map(String::trim)
                         .map(LottoTicketService::parseInt)
                         .map(LottoNumber::new)
+                        .sorted()
                         .collect(Collectors.toList());
-        validateLottoSize(lottoWinnerNumbers.size());
-        return new LottoTicket(lottoWinnerNumbers);
+        validateLottoSize(lottoNumbers.size());
+        return new LottoTicket(lottoNumbers);
     }
 
     private static int parseInt(String input) {

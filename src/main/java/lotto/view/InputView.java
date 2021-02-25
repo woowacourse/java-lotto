@@ -53,6 +53,6 @@ public class InputView {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return getUserInput();
     }
 }
