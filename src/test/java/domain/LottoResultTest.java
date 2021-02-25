@@ -11,7 +11,7 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class StatisticsTest {
+public class LottoResultTest {
     private WinningNumbers winningNumbers;
     private List<LottoTicket> lottoTickets;
 
@@ -31,9 +31,9 @@ public class StatisticsTest {
     @DisplayName("일치하는 번호 개수에 따른 통계값을 구한다.")
     @Test
     public void calculateStatistics() {
-        Statistics statistics = new Statistics(winningNumbers, lottoTickets);
-        Map<Rank, Integer> lottoStatistics = statistics.result();
-        assertThat(lottoStatistics).isEqualTo(new HashMap<Rank, Integer>() {
+        LottoResult lottoResult = new LottoResult(winningNumbers, lottoTickets);
+        Map<Rank, Integer> lottoStatisticsMap = lottoResult.result();
+        assertThat(lottoStatisticsMap).isEqualTo(new HashMap<Rank, Integer>() {
             {
                 put(Rank.FIRST, 1);
                 put(Rank.SECOND, 2);
@@ -48,8 +48,8 @@ public class StatisticsTest {
     @DisplayName("상금을 계산한다.")
     @Test
     public void calculateRewardTest() {
-        Statistics statistics = new Statistics(winningNumbers, lottoTickets);
-        Money reward = statistics.getReward();
+        LottoResult lottoResult = new LottoResult(winningNumbers, lottoTickets);
+        Money reward = lottoResult.getReward();
         assertThat(reward.toLong()).isEqualTo(2_060_000_000);
     }
 }

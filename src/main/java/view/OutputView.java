@@ -4,7 +4,6 @@ import domain.LottoNumber;
 import domain.LottoTicket;
 import domain.Profit;
 import domain.Rank;
-import domain.Statistics;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -49,13 +48,12 @@ public class OutputView {
         System.out.println();
     }
 
-    public void printStatistics(Statistics statistics) {
-        Map<Rank, Integer> result = statistics.result();
+    public void printLottoResultStatistics(Map<Rank, Integer> lottoResult) {
         List<Rank> ranks = Arrays.asList(Rank.values());
         Collections.reverse(ranks);
         System.out.print(MESSAGE_STATISTICS);
         for (Rank rank: ranks) {
-            printMatchCount(rank, result.get(rank));
+            printMatchCount(rank, lottoResult.get(rank));
         }
     }
 

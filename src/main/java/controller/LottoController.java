@@ -3,7 +3,7 @@ package controller;
 import domain.LottoTicket;
 import domain.Money;
 import domain.WinningNumbers;
-import domain.Statistics;
+import domain.LottoResult;
 import domain.Profit;
 import domain.LottoNumber;
 import domain.LottoPurchaseManager;
@@ -27,10 +27,10 @@ public class LottoController {
         outputView.printLottoTicket(lottoTickets);
 
         WinningNumbers winningNumber = Repeater.repeatFunctionOnError(this::createWinningNumber);
-        Statistics statistics = new Statistics(winningNumber, lottoTickets);
-        outputView.printStatistics(statistics);
+        LottoResult lottoResult = new LottoResult(winningNumber, lottoTickets);
+        outputView.printLottoResultStatistics(lottoResult.result());
 
-        Profit profit = new Profit(investedMoney, statistics.getReward());
+        Profit profit = new Profit(investedMoney, lottoResult.getReward());
         outputView.printProfit(profit);
     }
 
