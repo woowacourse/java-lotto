@@ -18,12 +18,12 @@ public class WinningLotto {
         }
     }
 
-    public LottoNumber getBonusBall() {
-        return this.bonusNumber;
+    public Lotto lotto() {
+        return lotto;
     }
 
-    public Lotto values() {
-        return lotto;
+    public LottoNumber bonusNumber() {
+        return bonusNumber;
     }
 
     @Override

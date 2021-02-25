@@ -25,7 +25,7 @@ class LottoResultsTest {
 
     @Test
     @DisplayName("같은 값을 가지면 같은 객체인지 확인")
-    void contructor() {
+    void constructor() {
         EnumMap<Rank, Integer> newResults = new EnumMap<>(Rank.class);
         newResults.put(Rank.NOT_FOUND, 0);
         newResults.put(Rank.FIFTH, 5);

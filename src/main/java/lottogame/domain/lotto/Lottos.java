@@ -20,8 +20,8 @@ public class Lottos {
         Map<Rank, Integer> results = new EnumMap<>(Rank.class);
         Arrays.stream(Rank.values()).forEach(rank -> results.put(rank, 0));
         for (Lotto lotto : lottos) {
-            int count = lotto.match(winningLotto.values());
-            boolean bonus = lotto.containsBonus(winningLotto);
+            int count = lotto.match(winningLotto.lotto());
+            boolean bonus = lotto.contains(winningLotto.bonusNumber());
             Rank rank = Rank.of(count, bonus);
             results.put(rank, results.get(rank) + 1);
         }
