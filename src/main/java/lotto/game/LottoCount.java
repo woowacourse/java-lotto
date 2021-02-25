@@ -10,8 +10,6 @@ import static lotto.ticket.Number.validateNumber;
 
 public class LottoCount {
     public static final String ERROR_MESSAGE_INVALID_AMOUNT = "구매 금액보다 많이 구입할 수 없습니다.";
-    public static final int ZERO = 0;
-    public static final int ONE_COUNT = 1;
 
     private final int lottoCount;
 
@@ -34,17 +32,17 @@ public class LottoCount {
     }
 
     private void validateNotNegative(int number) {
-        if (number < ZERO) {
+        if (number < 0) {
             throw new IllegalArgumentException(ERROR_MESSAGE_INVALID_INPUT);
         }
     }
 
     public boolean isGreaterThanZero() {
-        return this.lottoCount > ZERO;
+        return this.lottoCount > 0;
     }
 
     public LottoCount decreaseOne() {
-        return new LottoCount(lottoCount - ONE_COUNT);
+        return new LottoCount(lottoCount - 1);
     }
 
     public LottoCount consumeTicket(LottoCount count) {

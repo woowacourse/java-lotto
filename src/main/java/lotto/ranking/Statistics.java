@@ -2,17 +2,20 @@ package lotto.ranking;
 
 import lotto.money.Money;
 
-import java.util.*;
-
-import static lotto.game.LottoCount.ZERO;
+import java.util.Collections;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
 
 public class Statistics {
+    public static final int INITIAL_VALUE = 0;
+
     private final Map<Ranking, Integer> statistics;
 
     public Statistics(List<Ranking> rankings) {
         statistics = new EnumMap<>(Ranking.class);
         for (Ranking ranking : Ranking.values()) {
-            statistics.put(ranking, ZERO);
+            statistics.put(ranking, INITIAL_VALUE);
         }
         calculateStatistics(rankings);
     }

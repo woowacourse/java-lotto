@@ -5,8 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-import static lotto.game.LottoCount.ONE_COUNT;
-import static lotto.game.LottoCount.ZERO;
+import static lotto.ranking.Statistics.INITIAL_VALUE;
 
 public class Ticket {
     public static final int PRICE = 1000;
@@ -46,9 +45,9 @@ public class Ticket {
 
     public int sameNumberCountOne(Number number) {
         if (numbers.contains(number)) {
-            return ONE_COUNT;
+            return 1;
         }
-        return ZERO;
+        return 0;
     }
 
     public boolean hasContainBonus(BonusBall bonusBall) {
@@ -62,7 +61,7 @@ public class Ticket {
     }
 
     public int sameNumberCount(Ticket winnerTicket) {
-        int matchCount = ZERO;
+        int matchCount = INITIAL_VALUE;
         for (Number number : numbers) {
             matchCount += winnerTicket.sameNumberCountOne(number);
         }
