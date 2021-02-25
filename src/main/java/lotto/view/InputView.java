@@ -5,6 +5,8 @@ import lotto.money.Money;
 import lotto.ticket.BonusBall;
 import lotto.ticket.WinnerTicket;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -33,7 +35,11 @@ public class InputView {
         return new LottoCount(value);
     }
 
-    public static String inputNumbers() {
-        return scanner.nextLine();
+    public static List<String> inputNumbers(LottoCount count) {
+        List<String> manualLottoNumbers = new ArrayList<>();
+        for (int i = 0; i < count.getLottoCount(); i++) {
+            manualLottoNumbers.add(scanner.nextLine());
+        }
+        return manualLottoNumbers;
     }
 }

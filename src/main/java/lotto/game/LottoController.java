@@ -3,16 +3,10 @@ package lotto.game;
 import lotto.money.Money;
 import lotto.ranking.Statistics;
 import lotto.ticket.BonusBall;
-import lotto.ticket.Ticket;
 import lotto.ticket.Tickets;
 import lotto.ticket.WinnerTicket;
-import lotto.ticket.strategy.ManualNumbersGenerator;
-import lotto.ticket.strategy.RandomNumbersGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class LottoController {
     public void run() {
@@ -55,8 +49,9 @@ public class LottoController {
 
     private Tickets ticketPurchase(LottoCount manualTicketAmount, LottoCount autoTicketAmount) {
         Tickets manualTickets = manualTicketGenerate(manualTicketAmount);
-        Tickets autoTickets = autoTicketGenerate(autoTicketAmount);
+        Tickets autoTickets = LottoService.buyAutoTickets(autoTicketAmount);
         OutputView.noticeLottoCount(manualTicketAmount, autoTicketAmount);
+
         Tickets totalTicket = Tickets.joinTicket(manualTickets, autoTickets);
         OutputView.showTickets(totalTicket);
         return totalTicket;
@@ -65,29 +60,11 @@ public class LottoController {
     private Tickets manualTicketGenerate(LottoCount count) {
         try {
             OutputView.enterManualTicketNumber();
-            List<Ticket> tickets = new ArrayList<>();
-            ticketGenerate(count, tickets);
-            return new Tickets(tickets);
+            return LottoService.buyManualTickets(InputView.inputNumbers(count));
         } catch (RuntimeException e) {
             OutputView.printError(e);
             return manualTicketGenerate(count);
         }
-    }
-
-    private void ticketGenerate(LottoCount count, List<Ticket> tickets) {
-        while (count.isGreaterThanZero()) {
-            count = count.decreaseOne();
-            tickets.add(new Ticket(new ManualNumbersGenerator(InputView.inputNumbers()).generate()));
-        }
-    }
-
-    private Tickets autoTicketGenerate(LottoCount count) {
-        List<Ticket> tickets = new ArrayList<>();
-        while (count.isGreaterThanZero()) {
-            count = count.decreaseOne();
-            tickets.add(new Ticket(new RandomNumbersGenerator().generate()));
-        }
-        return new Tickets(tickets);
     }
 
     private void verifyResult(Money money, Tickets totalTicket) {
