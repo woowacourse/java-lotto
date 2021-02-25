@@ -15,6 +15,15 @@ public class LottoGame {
         this.autoLottos = new Lottos(autoAmount);
     }
 
+    public LottoGameResult draw(WinningLotto winningLotto) {
+        final LottoGameResult lottoGameResult = new LottoGameResult();
+
+        lottoGameResult.add(manualLottos.findMatchLotto(winningLotto));
+        lottoGameResult.add(autoLottos.findMatchLotto(winningLotto));
+
+        return lottoGameResult;
+    }
+
     public Lottos toManualLottos() {
         return manualLottos;
     }

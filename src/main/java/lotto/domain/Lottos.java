@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Lottos {
 
@@ -23,10 +24,11 @@ public class Lottos {
         }
     }
 
-    public void addMatchLotto(WinningLotto winningLotto, LottoGameResult lottoGameResult) {
-        for (Lotto lotto : lottos) {
-            lottoGameResult.add(winningLotto.findRank(lotto));
-        }
+    public List<Rank> findMatchLotto(WinningLotto winningLotto) {
+
+        return lottos.stream()
+                .map(winningLotto::findRank)
+                .collect(Collectors.toList());
     }
 
     public List<Lotto> toList() {

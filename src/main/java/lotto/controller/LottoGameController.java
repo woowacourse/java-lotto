@@ -15,7 +15,7 @@ public class LottoGameController {
         printEachLottos(lottoGame);
 
         WinningLotto lastWinningLotto = askWinningLotto();
-        LottoGameResult lottoGameResult = getRankOfLottoGame(lottoGame, lastWinningLotto);
+        LottoGameResult lottoGameResult = lottoGame.draw(lastWinningLotto);
 
         OutputView.printLottoGameResult(lottoGameResult);
     }
@@ -64,16 +64,5 @@ public class LottoGameController {
             OutputView.printError(e.getMessage());
             return makeWinningLotto(winningLotto, InputView.askBonusNumber());
         }
-    }
-
-    private LottoGameResult getRankOfLottoGame(LottoGame lottoGame, WinningLotto lastWinningLotto) {
-        LottoGameResult lottoGameResult = new LottoGameResult();
-        Lottos manualLottos = lottoGame.toManualLottos();
-        Lottos autoLottos = lottoGame.toAutoLottos();
-
-        manualLottos.addMatchLotto(lastWinningLotto, lottoGameResult);
-        autoLottos.addMatchLotto(lastWinningLotto, lottoGameResult);
-
-        return lottoGameResult;
     }
 }
