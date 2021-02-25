@@ -46,7 +46,7 @@ public class Money {
         return new Money(this.value * count);
     }
 
-    public double divide(int count) {
+    public double getProfitRate(int count) {
         if (count <= 0) {
             throw new ArithmeticException("[ERROR] 0으로 나눌 수 없습니다.");
         }

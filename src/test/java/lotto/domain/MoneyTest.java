@@ -53,14 +53,14 @@ public class MoneyTest {
     @DisplayName("수익률 계산")
     void divide() {
         Money money = new Money("10000");
-        assertThat(money.divide(10)).isEqualTo(1.0);
+        assertThat(money.getProfitRate(10)).isEqualTo(1.0);
     }
 
     @Test
     @DisplayName("수익률 계산할 때 0으로 나누는 경우")
     void divide0() {
         Money money = new Money("10000");
-        assertThatThrownBy(() -> money.divide(0))
+        assertThatThrownBy(() -> money.getProfitRate(0))
                 .isInstanceOf(ArithmeticException.class);
     }
 

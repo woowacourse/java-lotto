@@ -71,7 +71,7 @@ public class LottoController {
         LottoResult lottoResult = winningLotto.checkPrizes(lottoTickets);
         OutputView.printResultStatistic(lottoResult);
         Money totalProfit = lottoResult.getTotalProfit();
-        double profitRate = totalProfit.divide(totalLottoCount);
+        double profitRate = totalProfit.getProfitRate(totalLottoCount);
         OutputView.printProfitRate(profitRate);
     }
 }
