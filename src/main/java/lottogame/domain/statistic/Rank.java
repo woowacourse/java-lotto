@@ -1,4 +1,4 @@
-package lottogame.domain;
+package lottogame.domain.statistic;
 
 import java.util.Arrays;
 

@@ -1,8 +1,7 @@
 package lottogame.domain.dto;
 
-import lottogame.domain.Money;
-import lottogame.domain.Rank;
-import lottogame.domain.statistic.LottoResult;
+import lottogame.domain.lotto.Money;
+import lottogame.domain.statistic.Rank;
 import lottogame.domain.statistic.LottoResults;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -15,19 +14,19 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LottoResultsTest {
+class LottoResultsDtoTest {
     private LottoResults lottoResult;
-    private LottoResultDto lottoResultDto;
+    private LottoResultsDto lottoResultsDto;
 
     @BeforeEach
     void setUp() {
-        List<LottoResult> lottoResultGroup = Arrays.asList(
-                new LottoResult(4, false),
-                new LottoResult(3, false),
-                new LottoResult(5, true),
-                new LottoResult(5, false));
+        List<Rank> lottoResultGroup = Arrays.asList(
+                Rank.of(4, false),
+                Rank.of(3, false),
+                Rank.of(5, true),
+                Rank.of(5, false));
         lottoResult = new LottoResults(lottoResultGroup);
-        lottoResultDto = lottoResult.makeStatistics(new Money(4000));
+        lottoResultsDto = lottoResult.makeStatistics(new Money(4000));
     }
 
     @DisplayName("로또 당첨 통계를 출력하기 위한 기능이 잘 수행되는 지 결과 비교")
@@ -40,12 +39,12 @@ class LottoResultsTest {
             put(Rank.SECOND, 1);
             put(Rank.FIRST, 0);
         }};
-        assertThat(lottoResultDto.getResults()).containsAllEntriesOf(result);
+        assertThat(lottoResultsDto.getResults()).containsAllEntriesOf(result);
     }
 
     @Test
     void 로또_수익률_계산() {
         float expected = (float) (50000 + 5000 + 30000000 + 1500000) / 4000;
-        assertThat(lottoResultDto.getProfit()).isEqualTo(expected);
+        assertThat(lottoResultsDto.getProfit()).isEqualTo(expected);
     }
 }

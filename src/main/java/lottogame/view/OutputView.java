@@ -1,8 +1,8 @@
 package lottogame.view;
 
-import lottogame.domain.Rank;
+import lottogame.domain.statistic.Rank;
 import lottogame.domain.dto.LottoDto;
-import lottogame.domain.dto.LottoResultDto;
+import lottogame.domain.dto.LottoResultsDto;
 
 import java.util.List;
 import java.util.Map;
@@ -26,11 +26,11 @@ public class OutputView {
                 .collect(Collectors.joining(", ", "[", "]"));
     }
 
-    public static void printResult(LottoResultDto lottoResultDto) {
+    public static void printResult(LottoResultsDto lottoResultsDto) {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
-        printSummary(lottoResultDto.getResults());
-        System.out.printf("총 수익률은 %.2f입니다.\n", lottoResultDto.getProfit());
+        printSummary(lottoResultsDto.getResults());
+        System.out.printf("총 수익률은 %.2f입니다.\n", lottoResultsDto.getProfit());
     }
 
     private static void printSummary(Map<Rank, Integer> results) {

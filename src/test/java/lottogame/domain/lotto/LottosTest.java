@@ -1,6 +1,7 @@
 package lottogame.domain.lotto;
 
-import lottogame.domain.statistic.LottoResult;
+import lottogame.domain.statistic.Rank;
+import lottogame.domain.statistic.LottoResults;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -45,15 +46,15 @@ class LottosTest {
         Lottos lottos = new Lottos(lottoGroup);
         WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 
-        List<LottoResult> expected = Arrays.asList(
-                new LottoResult(3, false),
-                new LottoResult(1, false),
-                new LottoResult(4, false),
-                new LottoResult(3, false),
-                new LottoResult(5, true),
-                new LottoResult(5, false));
+        List<Rank> expected = Arrays.asList(
+                Rank.of(3, false),
+                Rank.of(1, false),
+                Rank.of(4, false),
+                Rank.of(3, false),
+                Rank.of(5, true),
+                Rank.of(5, false));
 
-        assertThat(lottos.matchesLottos(winningLotto)).isEqualTo(expected);
+        assertThat(lottos.matchesLottos(winningLotto)).isEqualTo(new LottoResults(expected));
     }
 
     @DisplayName("순위별 당첨 통계가 제대로 저장되는 지 확인 ver2")
@@ -82,27 +83,27 @@ class LottosTest {
         WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 
 
-        List<LottoResult> expectedLottoResults = Arrays.asList(
-                new LottoResult(4, false),
-                new LottoResult(3, false),
-                new LottoResult(5, true),
-                new LottoResult(5, false),
+        List<Rank> expected = Arrays.asList(
+                Rank.of(4, false),
+                Rank.of(3, false),
+                Rank.of(5, true),
+                Rank.of(5, false),
 
-                new LottoResult(0, false),
-                new LottoResult(2, false),
-                new LottoResult(0, true),
-                new LottoResult(1, false),
-                new LottoResult(0, false),
-                new LottoResult(0, true),
-                new LottoResult(1, false),
-                new LottoResult(0, false),
-                new LottoResult(3, false),
-                new LottoResult(1, false),
-                new LottoResult(1, false),
-                new LottoResult(0, false),
-                new LottoResult(0, false),
-                new LottoResult(1, false));
+                Rank.of(0, false),
+                Rank.of(2, false),
+                Rank.of(0, true),
+                Rank.of(1, false),
+                Rank.of(0, false),
+                Rank.of(0, true),
+                Rank.of(1, false),
+                Rank.of(0, false),
+                Rank.of(3, false),
+                Rank.of(1, false),
+                Rank.of(1, false),
+                Rank.of(0, false),
+                Rank.of(0, false),
+                Rank.of(1, false));
 
-        assertThat(lottos.matchesLottos(winningLotto)).isEqualTo(expectedLottoResults);
+        assertThat(lottos.matchesLottos(winningLotto)).isEqualTo(new LottoResults(expected));
     }
 }

@@ -1,7 +1,8 @@
 package lottogame.domain.lotto;
 
+import lottogame.domain.statistic.Rank;
 import lottogame.domain.dto.LottoDto;
-import lottogame.domain.statistic.LottoResult;
+import lottogame.domain.statistic.LottoResults;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,14 +24,14 @@ public class Lottos {
                 .collect(Collectors.toList());
     }
 
-    public List<LottoResult> matchesLottos(WinningLotto winningLotto) {
-        List<LottoResult> lottoResults = new ArrayList<>();
+    public LottoResults matchesLottos(WinningLotto winningLotto) {
+        List<Rank> ranks = new ArrayList<>();
         for (Lotto lotto : lottos) {
             int count = lotto.matchNumberCount(winningLotto);
             boolean bonus = winningLotto.matchBonusBall(lotto);
-            lottoResults.add(new LottoResult(count, bonus));
+            ranks.add(Rank.of(count, bonus));
         }
-        return lottoResults;
+        return new LottoResults(ranks);
     }
 
     @Override

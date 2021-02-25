@@ -3,17 +3,15 @@ package lottogame.controller;
 import lottogame.domain.LottoMachine;
 import lottogame.domain.TicketMachine;
 import lottogame.domain.dto.LottoDto;
-import lottogame.domain.dto.LottoResultDto;
+import lottogame.domain.dto.LottoResultsDto;
 import lottogame.domain.lotto.Lotto;
-import lottogame.domain.statistic.LottoResult;
 import lottogame.domain.statistic.LottoResults;
 import lottogame.domain.lotto.WinningLotto;
 import lottogame.view.InputView;
 import lottogame.domain.lotto.Lottos;
-import lottogame.domain.Money;
+import lottogame.domain.lotto.Money;
 import lottogame.view.OutputView;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -27,23 +25,18 @@ public class GameController {
         int manualQuantity = inputView.inputManualQuantity();
         money = ticketMachine.buyManualTicket(money, manualQuantity);
         int autoTicketQuantity = ticketMachine.buyableAutoTicketQuantity(money);
-        List<Lotto> lottoGroup = makeManualLotto(autoTicketQuantity);
+        List<Lotto> lottoGroup = makeManualLotto(manualQuantity);
         lottoGroup.addAll(lottoMachine.buyAutoTicket(autoTicketQuantity));
         Lottos lottos = new Lottos(lottoGroup);
         OutputView.showLottos(manualQuantity, lottos.numbersOfLottos());
-        LottoResults lottoResults = matchLottos(lottos, askWinningLotto());
-        LottoResultDto lottoResultDto = lottoResults.makeStatistics(money);
-        OutputView.printResult(lottoResultDto);
+        LottoResults lottoResults = lottos.matchesLottos(askWinningLotto());
+        LottoResultsDto lottoResultsDto = lottoResults.makeStatistics(money);
+        OutputView.printResult(lottoResultsDto);
     }
 
-    private List<Lotto> makeManualLotto(int autoTicketQuantity) {
-        List<LottoDto> manualLotto = inputView.inputManualLotto(autoTicketQuantity);
+    private List<Lotto> makeManualLotto(int manualTicketQuantity) {
+        List<LottoDto> manualLotto = inputView.inputManualLotto(manualTicketQuantity);
         return lottoMachine.makeManualLotto(manualLotto);
-    }
-
-    private LottoResults matchLottos(Lottos lottos, WinningLotto winningLotto) {
-        List<LottoResult> results = lottos.matchesLottos(winningLotto);
-        return new LottoResults(results);
     }
 
     private WinningLotto askWinningLotto() {

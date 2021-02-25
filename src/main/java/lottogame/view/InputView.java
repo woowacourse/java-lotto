@@ -51,10 +51,10 @@ public class InputView {
                 .collect(Collectors.toList());
     }
 
-    public List<LottoDto> inputManualLotto(int autoTicketQuantity) {
+    public List<LottoDto> inputManualLotto(int manualTicketQuantity) {
         System.out.println("\n수동으로 구매할 로또 번호를 입력해 주세요.");
         List<LottoDto> lottoDtos = new ArrayList<>();
-        for (int i = 0; i < autoTicketQuantity; i++) {
+        for (int i = 0; i < manualTicketQuantity; i++) {
             LottoDto lottoDto = LottoDto.Of(inputLottoNumbers());
             lottoDtos.add(lottoDto);
         }

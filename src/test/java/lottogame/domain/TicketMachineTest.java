@@ -1,5 +1,6 @@
 package lottogame.domain;
 
+import lottogame.domain.lotto.Money;
 import lottogame.utils.InvalidManualTicketQuantityException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

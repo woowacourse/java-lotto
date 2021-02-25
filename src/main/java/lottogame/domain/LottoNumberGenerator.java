@@ -1,4 +1,4 @@
-package lottogame.domain.lotto;
+package lottogame.domain;
 
 public class LottoNumberGenerator {
     private final int lottoMin;

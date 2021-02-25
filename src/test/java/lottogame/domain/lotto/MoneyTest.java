@@ -1,5 +1,6 @@
-package lottogame.domain;
+package lottogame.domain.lotto;
 
+import lottogame.domain.lotto.Money;
 import lottogame.utils.InvalidMoneyException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
