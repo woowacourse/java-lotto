@@ -26,7 +26,8 @@ class LottoResultsDtoTest {
                 Rank.of(5, true),
                 Rank.of(5, false));
         lottoResult = new LottoResults(lottoResultGroup);
-        lottoResultsDto = lottoResult.makeStatistics(new Money(4000));
+        Map<Rank, Integer> statistics = lottoResult.makeStatistics();
+        lottoResultsDto = new LottoResultsDto(statistics, lottoResult.makeProfit(statistics, new Money(4000)));
     }
 
     @DisplayName("로또 당첨 통계를 출력하기 위한 기능이 잘 수행되는 지 결과 비교")

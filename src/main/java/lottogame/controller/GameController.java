@@ -7,12 +7,14 @@ import lottogame.domain.dto.LottoResultsDto;
 import lottogame.domain.lotto.Lotto;
 import lottogame.domain.statistic.LottoResults;
 import lottogame.domain.lotto.WinningLotto;
+import lottogame.domain.statistic.Rank;
 import lottogame.view.InputView;
 import lottogame.domain.lotto.Lottos;
 import lottogame.domain.lotto.Money;
 import lottogame.view.OutputView;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class GameController {
@@ -30,8 +32,13 @@ public class GameController {
         Lottos lottos = new Lottos(lottoGroup);
         OutputView.showLottos(manualQuantity, lottos.numbersOfLottos());
         LottoResults lottoResults = lottos.matchesLottos(askWinningLotto());
-        LottoResultsDto lottoResultsDto = lottoResults.makeStatistics(money);
+        LottoResultsDto lottoResultsDto = makeLottoResultsDto(lottoResults, money);
         OutputView.printResult(lottoResultsDto);
+    }
+
+    private LottoResultsDto makeLottoResultsDto(LottoResults lottoResults, Money money) {
+        Map<Rank, Integer> statistics = lottoResults.makeStatistics();
+        return new LottoResultsDto(statistics, lottoResults.makeProfit(statistics, money));
     }
 
     private List<Lotto> makeManualLotto(int manualTicketQuantity) {

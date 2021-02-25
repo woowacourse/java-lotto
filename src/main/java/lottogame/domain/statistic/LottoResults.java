@@ -13,23 +13,25 @@ public class LottoResults {
         this.ranks = new ArrayList<>(ranks);
     }
 
-    public LottoResultsDto makeStatistics(Money money) {
+    public Map<Rank, Integer> makeStatistics() {
         Map<Rank, Integer> result = new LinkedHashMap<>();
         Arrays.stream(Rank.values())
                 .filter(rank -> !rank.isNotFound())
-                .forEach(rank -> calculatePrize(rank, result));
-        return new LottoResultsDto(result, calculateProfit(money));
+                .forEach(rank -> result.put(rank, countFrequency(rank)));
+        return result;
     }
 
-    private void calculatePrize(Rank rank, Map<Rank, Integer> result) {
-        int count = (int) ranks.stream()
-                .filter(value -> rank.equals(value))
+    private int countFrequency(Rank value) {
+        return (int) ranks.stream()
+                .filter(rank -> rank.equals(value))
                 .count();
-        totalPrizeMoney += (count * rank.getMoney());
-        result.put(rank, count);
     }
 
-    private float calculateProfit(Money money) {
+    public float makeProfit(Map<Rank, Integer> statistics, Money money) {
+        int totalPrizeMoney = 0;
+        for (Rank rank : statistics.keySet()) {
+            totalPrizeMoney += (statistics.get(rank) * rank.getMoney());
+        }
         return money.divide(totalPrizeMoney);
     }
 
