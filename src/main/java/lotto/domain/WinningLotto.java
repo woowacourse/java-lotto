@@ -20,6 +20,7 @@ public class WinningLotto {
     public Rank findRank(Lotto lotto) {
         int countOfMatch = winningLotto.countOfMatchNumber(lotto);
         boolean matchBonusNumber = lotto.containNumber(bonusNumber);
+
         return Rank.rankOf(countOfMatch, matchBonusNumber);
     }
 

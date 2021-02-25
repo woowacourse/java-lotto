@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.EnumMap;
-import java.util.Map;
+import java.util.*;
 
 public class LottoGameResult {
     private final Map<Rank, Integer> resultMap;
@@ -18,8 +15,8 @@ public class LottoGameResult {
                 .forEach(rank -> resultMap.put(rank, 0));
     }
 
-    public void add(Rank rank) {
-        resultMap.put(rank, resultMap.get(rank) + 1);
+    public void add(List<Rank> matchRank) {
+        matchRank.forEach(rank -> resultMap.put(rank, resultMap.get(rank) + 1));
     }
 
     public Map<Rank, Integer> toResultMap() {
@@ -35,6 +32,7 @@ public class LottoGameResult {
     }
 
     private double totalReward() {
+
         return resultMap.entrySet().stream()
                 .mapToDouble(entry -> entry.getKey().getReward() * entry.getValue())
                 .sum();

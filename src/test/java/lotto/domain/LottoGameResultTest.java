@@ -1,31 +1,29 @@
 package lotto.domain;
 
 import lotto.utils.LottoGenerator;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoGameResultTest {
 
-    static LottoGameResult lottoGameResult = new LottoGameResult();
-
-
-    @BeforeAll
-    static void beforeAll() {
-        lottoGameResult.add(Rank.rankOf(4, false)); // 4
-        lottoGameResult.add(Rank.rankOf(3, false)); // 5
-        lottoGameResult.add(Rank.rankOf(2, false));
-        lottoGameResult.add(Rank.rankOf(1, false));
-        lottoGameResult.add(Rank.rankOf(0, false));
-    }
-
     @DisplayName("랭크 별 개수 테스트")
     @Test
     void testAdd() {
+        LottoGameResult lottoGameResult = new LottoGameResult();
+        List<Rank> matchRank = Arrays.asList(
+                Rank.rankOf(4, false),
+                Rank.rankOf(3, false),
+                Rank.rankOf(2, false),
+                Rank.rankOf(1, false),
+                Rank.rankOf(0, false)
+        );
+        lottoGameResult.add(matchRank);
+
         assertThat(lottoGameResult.countByRank(Rank.FOURTH)).isEqualTo(1);
         assertThat(lottoGameResult.countByRank(Rank.NOTHING)).isEqualTo(3);
     }
@@ -42,10 +40,10 @@ public class LottoGameResultTest {
                 new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)));
 
         WinningLotto winningLotto = new WinningLotto(fixedWinningLotto, 7);
-        LottoGameResult lottoGameResult = new LottoGameResult();
-        fixedLottos.addMatchLotto(winningLotto, lottoGameResult);
+        LottoGameResult fixedGameResult = new LottoGameResult();
+        fixedGameResult.add(fixedLottos.findMatchLotto(winningLotto));
 
-        double profit = lottoGameResult.calculateProfit();
+        double profit = fixedGameResult.calculateProfit();
 
         assertThat(profit).isEqualTo(2_000_000);
     }
