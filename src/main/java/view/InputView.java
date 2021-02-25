@@ -31,12 +31,13 @@ public class InputView {
         return string.replaceAll("\\s+", "");
     }
 
-    public String scanBudget() {
+    public long scanBudget() {
         System.out.println(MESSAGE_BUDGET);
         String inputString = deleteWhiteSpaces(scanner.nextLine());
-        outputView.newLine();;
         validEmptyString(inputString);
-        return inputString;
+        long budget = parseLong(inputString);
+        outputView.newLine();
+        return budget;
     }
 
     public List<Integer> scanWinningNumber() {
@@ -68,6 +69,14 @@ public class InputView {
     private int parseInteger(String string) {
         try {
             return Integer.parseInt(string);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(ERROR_INVALID_NUMBER_FORMAT);
+        }
+    }
+
+    private long parseLong(String string) {
+        try {
+            return Long.parseLong(string);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ERROR_INVALID_NUMBER_FORMAT);
         }

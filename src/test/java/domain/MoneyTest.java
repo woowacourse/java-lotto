@@ -15,12 +15,6 @@ public class MoneyTest {
         assertThat(money1).isEqualTo(money2);
     }
 
-    @DisplayName("숫자가 아닌 인자를 생성자에 넘길 경우 예외를 발생시킨다.")
-    @Test
-    public void validateMoneyFormatTest() {
-        assertThatThrownBy(() -> new Money("a")).isInstanceOf(IllegalArgumentException.class);
-    }
-
     @DisplayName("음수가 입력된 경우 예외를 발생시킨다.")
     @Test
     public void validatePositiveNumber() {

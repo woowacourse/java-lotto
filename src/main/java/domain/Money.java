@@ -10,31 +10,15 @@ import java.util.Objects;
  * @author Daeun Lee, github.com/da-nyee
  */
 public class Money {
-    private static final String ERROR_INVALID_INPUT_FORMAT = "[ERROR] 금액은 숫자만 입력해주세요.";
     private static final String ERROR_NEGATIVE_NUMBER = "[ERROR] 양수만 입력해주세요.";
     private static final String ERROR_INVALID_SUBTRACTION = "[ERROR] 뺼셈이 불가능합니다. (금액은 0원 이하로 떨어질 수 없습니다)";
-    private static final String LONG_REGULAR_EXPRESSION = "^-?[0-9]+$";
     private static final long ZERO = 0;
 
     private final long money;
 
-    public Money(String input) {
-        validateInputFormat(input);
-        long money = Long.parseLong(input);
-        validatePositiveNumber(money);
-        this.money = money;
-    }
-
     public Money(long money) {
         validatePositiveNumber(money);
         this.money = money;
-    }
-
-    private void validateInputFormat(String input) {
-        if (input.matches(LONG_REGULAR_EXPRESSION)) {
-            return;
-        }
-        throw new IllegalArgumentException(ERROR_INVALID_INPUT_FORMAT);
     }
 
     private void validatePositiveNumber(long input) {

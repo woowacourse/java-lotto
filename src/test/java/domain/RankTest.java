@@ -17,20 +17,20 @@ public class RankTest {
     @Test
     public void compareFirstRewardTest() {
         Rank rank = Rank.from(6, false);
-        assertThat(rank.getReward()).isEqualTo(new Money("2000000000"));
+        assertThat(rank.getReward()).isEqualTo(new Money(2_000_000_000));
     }
 
     @DisplayName("2등 상금 리턴 테스트")
     @Test
     public void compareSecondRewardTest() {
         Rank rank = Rank.from(5, true);
-        assertThat(rank.getReward()).isEqualTo(new Money("30000000"));
+        assertThat(rank.getReward()).isEqualTo(new Money(30_000_000));
     }
 
     @DisplayName("상금이 없는 경우")
     @Test
     public void compareNoRewardTest() {
         Rank rank = Rank.from(1, false);
-        assertThat(rank.getReward()).isEqualTo(new Money("0"));
+        assertThat(rank.getReward()).isEqualTo(new Money(0));
     }
 }
