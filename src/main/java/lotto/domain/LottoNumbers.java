@@ -11,21 +11,25 @@ public class LottoNumbers {
 
     private final List<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(){
+    public LottoNumbers() {
         lottoNumbers = new ArrayList<>();
     }
 
-    public LottoNumbers(LottoNumbers lottoNumbers){
+    public LottoNumbers(LottoNumbers lottoNumbers) {
         this(lottoNumbers.lottoNumbers());
     }
 
-    public LottoNumbers(List<LottoNumber> lottoNumbers){
+    public LottoNumbers(List<LottoNumber> lottoNumbers) {
         validateLottoNumbers(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    public List<LottoNumber> lottoNumbers(){
+    public List<LottoNumber> lottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
+    }
+
+    public void sort() {
+        Collections.sort(lottoNumbers);
     }
 
     public boolean containNumber(LottoNumber number) {
@@ -36,6 +40,12 @@ public class LottoNumbers {
         return (int) lottoNumbers.stream()
                 .filter(lotto::containNumber)
                 .count();
+    }
+
+    public void checkBonusNumber(LottoNumber lottoNumber) {
+        if (lottoNumbers.contains(lottoNumber)) {
+            throw new IllegalArgumentException("보너스 번호와 로또번호가 중복입니다.");
+        }
     }
 
     private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
