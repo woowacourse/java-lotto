@@ -24,8 +24,7 @@ public class LottoTickets {
 
     public void putLottoResult(Map<LottoRank, Integer> lottoResult, LottoWinner lottoWinner) {
         this.lottoTickets.forEach(lottoTicket -> {
-            LottoTicket lottoBoughtTicket = lottoTicket;
-            LottoRank rank = lottoBoughtTicket.getRank(lottoWinner);
+            LottoRank rank = lottoTicket.getRank(lottoWinner);
             lottoResult.put(rank, lottoResult.getOrDefault(rank, 0) + INCREMENT_COUNT);
         });
     }
