@@ -8,7 +8,7 @@ public class Lotto {
     private static final int LOTTO_NUMBER_COUNT = 6;
     private final List<LottoNumber> numbers;
 
-    public static Lotto createByInteger(final List<Integer> numbers) {
+    public static Lotto of(final List<Integer> numbers) {
         return new Lotto(numbers.stream()
                                 .map(LottoNumber::valueOf)
                                 .collect(Collectors.toList()));

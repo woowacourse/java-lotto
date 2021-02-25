@@ -20,9 +20,9 @@ public class RatingTest {
                               .mapToInt(Integer::parseInt)
                               .boxed()
                               .toArray(Integer[]::new);
-        Lotto inputLotto = Lotto.createByInteger(Arrays.asList(arr));
+        Lotto inputLotto = Lotto.of(Arrays.asList(arr));
 
-        Lotto lotto = Lotto.createByInteger(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto lotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumber bonusNumber = LottoNumber.valueOf(7);
 
         Rating rating = Rating
@@ -40,9 +40,9 @@ public class RatingTest {
                               .mapToInt(Integer::parseInt)
                               .boxed()
                               .toArray(Integer[]::new);
-        Lotto inputLotto = Lotto.createByInteger(Arrays.asList(arr));
+        Lotto inputLotto = Lotto.of(Arrays.asList(arr));
 
-        Lotto lotto = Lotto.createByInteger(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto lotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumber bonusNumber = LottoNumber.valueOf(7);
 
         Rating rating = Rating

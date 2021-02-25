@@ -15,15 +15,15 @@ public class LottoNumber {
     }
 
     private static class LottoNumberCache {
-        static final int low = 1;
-        static final int high = 45;
-        static final LottoNumber[] cache;
+        private static final int low = 1;
+        private static final int high = 45;
+        private static final LottoNumber[] cache;
 
         static {
             cache = new LottoNumber[(high - low) + 1];
-            int j = low;
-            for (int k = 0; k < cache.length; k++)
-                cache[k] = new LottoNumber(j++);
+            int i = low;
+            for (int j = 0; j < cache.length; j++)
+                cache[j] = new LottoNumber(i++);
         }
 
         private LottoNumberCache() {

@@ -26,10 +26,6 @@ public class Ticket {
         this.manualCount = manualCount;
     }
 
-    public int getCount() {
-        return count;
-    }
-
     public int getManualCount() {
         return manualCount;
     }

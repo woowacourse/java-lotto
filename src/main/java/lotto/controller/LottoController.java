@@ -65,14 +65,14 @@ public class LottoController {
     private void generateLottos(LottoService lottoService, Ticket ticket) {
         outputView.printMessage("수동으로 구매할 번호를 입력해 주세요.");
         for (int i = 0; i < ticket.getManualCount(); i++) {
-            lottoService.addManualLotto(getManualLottoNumbers());
+            lottoService.addLotto(getManualLottoNumbers());
         }
         lottoService.generateLottos(ticket.getRandomCount());
     }
 
     private Lotto getManualLottoNumbers() {
         try {
-            return Lotto.createByInteger(inputView.getLottoNumbers());
+            return Lotto.of(inputView.getLottoNumbers());
         } catch (IllegalArgumentException e) {
             outputView.printMessage(e.getMessage());
             return getManualLottoNumbers();
@@ -90,7 +90,7 @@ public class LottoController {
 
     private WinningLotto tryGetWinningLotto() {
         outputView.printMessage("지난 주 당첨 번호를 입력해 주세요.");
-        Lotto lotto = Lotto.createByInteger(inputView.getLottoNumbers());
+        Lotto lotto = Lotto.of(inputView.getLottoNumbers());
         outputView.printMessage("보너스 볼을 입력해 주세요.");
         LottoNumber bonusNumber = LottoNumber.valueOf(inputView.getInt());
         return new WinningLotto(lotto, bonusNumber);
