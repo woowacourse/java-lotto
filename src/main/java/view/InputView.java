@@ -31,39 +31,13 @@ public class InputView {
     }
 
     public long scanBudget() {
-        String inputString = scanStringBudget();
-        if (inputString.equals(BLANK)) {
-            System.out.println(ERROR_INVALID_BLANK);
-            return scanBudget();
-        }
-        if (inputString.matches(NUMBER_REGULAR_EXPRESSION)) {
-            return Long.parseLong(inputString);
-        }
-        System.out.println(ERROR_INVALID_NUMBER_FORMAT);
-        return scanBudget();
-    }
-
-    private String scanStringBudget() {
         System.out.println(MESSAGE_BUDGET);
-        return deleteWhiteSpaces(scanner.nextLine());
+        return Long.parseLong(scanInputString());
     }
 
     public long scanManualQuantity() {
-        String inputString = scanStringManualQuantity();
-        if (inputString.equals(BLANK)) {
-            System.out.println(ERROR_INVALID_BLANK);
-            return scanManualQuantity();
-        }
-        if (inputString.matches(NUMBER_REGULAR_EXPRESSION)) {
-            return Long.parseLong(inputString);
-        }
-        System.out.println(ERROR_INVALID_NUMBER_FORMAT);
-        return scanManualQuantity();
-    }
-
-    private String scanStringManualQuantity() {
         System.out.println(MESSAGE_MANUAL_QUANTITY);
-        return deleteWhiteSpaces(scanner.nextLine());
+        return Long.parseLong(scanInputString());
     }
 
     public List<Integer> scanWinningNumbers() {
@@ -80,6 +54,22 @@ public class InputView {
         return manualNumbers;
     }
 
+    public int scanBonusBall() {
+        System.out.println(MESSAGE_BONUS_BALL);
+        return Integer.parseInt(scanInputString());
+    }
+
+    private String scanInputString() {
+        String inputString = deleteWhiteSpaces(scanner.nextLine());
+        if (inputString.equals(BLANK)) {
+            throw new IllegalArgumentException(ERROR_INVALID_BLANK);
+        }
+        if (inputString.matches(NUMBER_REGULAR_EXPRESSION)) {
+            return inputString;
+        }
+        throw new IllegalArgumentException(ERROR_INVALID_NUMBER_FORMAT);
+    }
+
     private List<Integer> scanNumbers() {
         String inputString = deleteWhiteSpaces(scanner.nextLine());
         if (inputString.contains(COMMA)) {
@@ -87,26 +77,7 @@ public class InputView {
                     .map(Integer::parseInt)
                     .collect(Collectors.toList());
         }
-        System.out.println(ERROR_INVALID_DELIMITER);
-        return scanNumbers();
-    }
-
-    public int scanBonusBall() {
-        String inputString = scanStringBonusBall();
-        if (inputString.equals(BLANK)) {
-            System.out.println(ERROR_INVALID_BLANK);
-            return scanBonusBall();
-        }
-        if (inputString.matches(NUMBER_REGULAR_EXPRESSION)) {
-            return Integer.parseInt(inputString);
-        }
-        System.out.println(ERROR_INVALID_NUMBER_FORMAT);
-        return scanBonusBall();
-    }
-
-    private String scanStringBonusBall() {
-        System.out.println(MESSAGE_BONUS_BALL);
-        return deleteWhiteSpaces(scanner.nextLine());
+        throw new IllegalArgumentException(ERROR_INVALID_DELIMITER);
     }
 
     private String deleteWhiteSpaces(String string) {
