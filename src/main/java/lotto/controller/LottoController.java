@@ -51,13 +51,10 @@ public class LottoController {
         Money money = startMoney();
         ManualLotto manualLotto = buyManualLotto();
         validNumManualLotto(money, manualLotto);
-
         Lottos purchasedLottos = lottoStore.buyLottos(money, manualLotto);
         OutputView.numPurchasedLotto(purchasedLottos.size());
         OutputView.lottosPrint(purchasedLottos);
-
         return purchasedLottos;
-
     }
 
 

@@ -19,10 +19,14 @@ public class LottoStore {
             lottos.add(buyManualLotto());
         }
 
-        for (int i = 0; i < money.getPrice() / LOTTO_PRICE; i++) {
+        for (int i = 0; i < getNumAutoLotto(money, numManual); i++) {
             lottos.add(buyAutoLotto());
         }
         return new Lottos(lottos);
+    }
+
+    private int getNumAutoLotto(Money money, ManualLotto numManual){
+        return money.getPrice() / LOTTO_PRICE - numManual.getNumLotto();
     }
 
     private Lotto buyManualLotto() {
