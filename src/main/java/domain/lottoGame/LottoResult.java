@@ -1,4 +1,4 @@
-package domain;
+package domain.lottoGame;
 
 public class LottoResult {
     private final LottoWinningTable winningTable;

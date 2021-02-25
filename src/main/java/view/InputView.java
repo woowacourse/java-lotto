@@ -1,6 +1,10 @@
 package view;
 
 import domain.*;
+import domain.lottoGame.Lotto;
+import domain.lottoGame.LottoNumber;
+import domain.lottoGame.LottoNumbers;
+import domain.lottoGame.WinningLotto;
 
 import java.util.Arrays;
 import java.util.List;

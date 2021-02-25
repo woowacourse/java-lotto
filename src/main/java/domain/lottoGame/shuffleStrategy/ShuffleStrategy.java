@@ -1,4 +1,6 @@
-package domain;
+package domain.lottoGame.shuffleStrategy;
+
+import domain.lottoGame.LottoNumber;
 
 import java.util.List;
 

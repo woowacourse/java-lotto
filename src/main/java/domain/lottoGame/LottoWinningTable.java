@@ -1,4 +1,6 @@
-package domain;
+package domain.lottoGame;
+
+import domain.Money;
 
 import java.util.HashMap;
 import java.util.Map;

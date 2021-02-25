@@ -1,4 +1,7 @@
-package domain;
+package domain.lottoGame;
+
+import domain.lottoGame.shuffleStrategy.DefaultShuffleStrategy;
+import domain.Money;
 
 public class LottoGame {
 

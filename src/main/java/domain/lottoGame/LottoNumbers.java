@@ -1,4 +1,4 @@
-package domain;
+package domain.lottoGame;
 
 import java.util.*;
 import java.util.stream.Collectors;

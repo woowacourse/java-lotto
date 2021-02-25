@@ -1,6 +1,8 @@
 package controller;
 
-import domain.*;
+import domain.lottoGame.LottoGame;
+import domain.lottoGame.LottoResult;
+import domain.lottoGame.Lottos;
 import view.InputView;
 import view.OutputView;
 
