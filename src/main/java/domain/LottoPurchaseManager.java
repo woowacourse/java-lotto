@@ -3,17 +3,17 @@ package domain;
 import java.util.List;
 
 /**
- * LottoPurchase.java
+ * LottoPurchaseManager.java
  * 로또 구매 로직을 담당하는 유틸리티 클래스
  *
  * @author Kimun Kim, github.com/tributetothemoon
  * @author Daeun Lee, github.com/da-nyee
  */
 
-public class LottoPurchase {
+public class LottoPurchaseManager {
     private Money budget;
 
-    public LottoPurchase(Money money) {
+    public LottoPurchaseManager(Money money) {
         this.budget = money;
     }
 
