@@ -16,6 +16,10 @@ public class Money {
         this.money = validate(money);
     }
 
+    public Money(int money) {
+        this(String.valueOf(money));
+    }
+
     private int validate(String value) {
         int money = validateNumber(value);
         validateMinimumPrice(money);
@@ -28,13 +32,12 @@ public class Money {
         }
     }
 
-    public String divideMoney(int unit) {
-        return String.valueOf(this.money / unit);
+    public int divideMoney(int unit) {
+        return this.money / unit;
     }
 
-    public String calculateProfit(Money totalMoney) {
-        double profit = Math.floor((double) totalMoney.money / money * SECOND_DECIMAL_POINT_MAKER) / SECOND_DECIMAL_POINT_MAKER;
-        return Double.toString(profit);
+    public double calculateProfit(Money totalMoney) {
+        return Math.floor((double) totalMoney.money / money * SECOND_DECIMAL_POINT_MAKER) / SECOND_DECIMAL_POINT_MAKER;
     }
 
     @Override

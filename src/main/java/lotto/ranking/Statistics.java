@@ -26,7 +26,7 @@ public class Statistics {
         }
     }
 
-    public String calculateProfit(Money purchaseMoney) {
+    public double calculateProfit(Money purchaseMoney) {
         return purchaseMoney.calculateProfit(new Money(getTotalPrize()));
     }
 
@@ -34,12 +34,12 @@ public class Statistics {
         return statistics.get(ranking);
     }
 
-    public String getTotalPrize() {
+    public int getTotalPrize() {
         int prize = 0;
         for (Ranking ranking : Ranking.values()) {
             prize += ranking.calculatePrize(findRankingCount(ranking));
         }
-        return Integer.toString(prize);
+        return prize;
     }
 
     public Map<Ranking, Integer> getStatistics() {

@@ -12,7 +12,6 @@ public class OutputView {
     private static final String ENTER_PURCHASE_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String ENTER_MANUAL_TICKET_AMOUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String ENTER_MANUAL_TICKET_NUMBER = "수동으로 구매할 번호를 입력해 주세요.";
-    //    private static final String COMPLETE_PURCHASE_MESSAGE = "개를 구매했습니다.";
     private static final String COMPLETE_PURCHASE_MESSAGE = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String ENTER_WINNER_TICKET_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String ENTER_BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
@@ -20,7 +19,7 @@ public class OutputView {
     private static final String STATISTICS_DIVIDER = "---------";
     private static final String RANKING_RESULT_FORMAT = "%d개 일치 (%d원)- %d개%n";
     private static final String RANKING_SECOND_RESULT_FORMAT = "%d개 일치, 보너스 볼 일치 (%d원)- %d개%n";
-    private static final String TOTAL_PROFIT_FORMAT = "총 수익률은 %s 입니다.";
+    private static final String TOTAL_PROFIT_FORMAT = "총 수익률은 %.2f 입니다.";
 
     private OutputView() {
     }
@@ -74,7 +73,7 @@ public class OutputView {
         System.out.printf(RANKING_RESULT_FORMAT, ranking.getMatchCount(), ranking.getPrice(), result.get(ranking));
     }
 
-    public static void showProfit(String calculateProfit) {
+    public static void showProfit(double calculateProfit) {
         System.out.printf(TOTAL_PROFIT_FORMAT, calculateProfit);
         System.out.println();
     }

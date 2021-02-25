@@ -45,6 +45,6 @@ public class MoneyTest {
     @DisplayName("수익률 계산")
     void calculateProfit() {
         Money money = new Money("14000");
-        assertThat(money.calculateProfit(new Money("5000"))).isEqualTo("0.35");
+        assertThat(money.calculateProfit(new Money("5000"))).isEqualTo(0.35);
     }
 }
