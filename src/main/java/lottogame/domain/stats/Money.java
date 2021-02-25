@@ -23,7 +23,7 @@ public class Money {
     }
 
     public int value() {
-        return this.money;
+        return money;
     }
 
     @Override
