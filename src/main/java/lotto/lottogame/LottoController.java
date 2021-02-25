@@ -15,32 +15,42 @@ import static lotto.lottogame.LottoCount.LOTTO_PRICE;
 public class LottoController {
     public void run() {
         Money money = generateMoney();
-        LottoTickets lottoTickets = generateTickets(money);
-        LottoGame lottoGame = new LottoGame(lottoTickets);
+        LottoCount lottoCount = new LottoCount(money.divideMoney(LOTTO_PRICE));
+        LottoGame lottoGame = new LottoGame(generateTickets(lottoCount));
         WinnerTicket winnerTicket = generateWinnerTicket();
         OutputView.noticeStatistics(
                 lottoGame.calculateStatistics(winnerTicket, generateBonusBall(winnerTicket)),
                 lottoGame.calculateResult(money));
     }
 
-    private LottoTickets generateTickets(Money money) {
-        LottoCount lottoCount = new LottoCount(money.divideMoney(LOTTO_PRICE));
+    private LottoTickets generateTickets(LottoCount lottoCount) {
         ManualLottoCount manualLottoCount = generateManualLottoCount(lottoCount);
         LottoCount autoLottoCount = manualLottoCount.makeAutoCount(lottoCount);
-        LottoTickets lottoTickets = new LottoTickets(manualLottoCount, generateManualLottoTicket());
+
+        LottoTickets lottoTickets = generateManualLottoTickets(manualLottoCount);
         lottoTickets.addTickets(autoLottoCount, new RandomNumbersGenerator());
+
         OutputView.noticeLottoCount(manualLottoCount, autoLottoCount);
         OutputView.showTickets(lottoTickets);
         return lottoTickets;
     }
 
-    private NumbersGenerator generateManualLottoTicket() {
+    private LottoTickets generateManualLottoTickets(ManualLottoCount manualLottoCount) {
+        try {
+            return new LottoTickets(manualLottoCount, generateManualNumbers());
+        } catch (IllegalArgumentException e) {
+            OutputView.printError(e);
+            return generateManualLottoTickets(manualLottoCount);
+        }
+    }
+
+    private NumbersGenerator generateManualNumbers() {
         try {
             OutputView.enterManualLottoTickets();
             return () -> LottoTicketMaker.makeLottoNumbers(InputView.inputTicket());
         } catch (IllegalArgumentException e) {
             OutputView.printError(e);
-            return generateManualLottoTicket();
+            return generateManualNumbers();
         }
     }
 

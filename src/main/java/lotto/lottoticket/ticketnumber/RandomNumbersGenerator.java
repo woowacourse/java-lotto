@@ -33,7 +33,7 @@ public class RandomNumbersGenerator implements NumbersGenerator {
 
     private List<LottoNumber> makeLottoNumbers(List<Integer> randomNumbers) {
         return randomNumbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
     }
 }

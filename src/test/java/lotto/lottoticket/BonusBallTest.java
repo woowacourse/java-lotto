@@ -48,7 +48,7 @@ public class BonusBallTest {
     @DisplayName("보너스볼 포함 확인")
     void checkContainBonusBall() {
         BonusBall bonusBall = new BonusBall("15", new WinnerTicket("1, 2, 3, 4, 5, 6"));
-        assertTrue(bonusBall.isSameThan(new LottoNumber(15)));
-        assertFalse(bonusBall.isSameThan(new LottoNumber(5)));
+        assertTrue(bonusBall.isSameThan(LottoNumber.of(15)));
+        assertFalse(bonusBall.isSameThan(LottoNumber.of(5)));
     }
 }
