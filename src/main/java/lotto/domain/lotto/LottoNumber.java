@@ -9,11 +9,11 @@ import java.util.stream.IntStream;
 public class LottoNumber implements Comparable<LottoNumber> {
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 45;
-    private static final Map<Integer, LottoNumber> cacheLottoNumbers = new HashMap<>();
+    private static final Map<Integer, LottoNumber> CACHE_LOTTO_NUMBERS = new HashMap<>();
 
     static {
         IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER + 1)
-                .forEach(i -> cacheLottoNumbers.put(i, new LottoNumber(i)));
+                .forEach(i -> CACHE_LOTTO_NUMBERS.put(i, new LottoNumber(i)));
     }
 
     private final int value;
@@ -31,11 +31,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public static LottoNumber valueOf(int index) {
         validateLottoNumber(index);
-        return cacheLottoNumbers.get(index);
+        return CACHE_LOTTO_NUMBERS.get(index);
     }
 
     public static Set<Integer> getKeys() {
-        return cacheLottoNumbers.keySet();
+        return CACHE_LOTTO_NUMBERS.keySet();
     }
 
     private int getValue() {
