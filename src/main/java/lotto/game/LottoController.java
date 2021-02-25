@@ -1,7 +1,6 @@
 package lotto.game;
 
 import lotto.money.Money;
-import lotto.money.PrizeMoney;
 import lotto.ranking.Statistics;
 import lotto.ticket.BonusBall;
 import lotto.ticket.Ticket;
@@ -95,7 +94,7 @@ public class LottoController {
         WinnerTicket winnerTicket = verifyWinnerTicket();
         BonusBall bonusBall = verifyBonusBall(winnerTicket);
         Statistics statistics = generateStatistics(totalTicket, winnerTicket, bonusBall);
-        showResult(money, statistics);
+        OutputView.showProfit(statistics.calculateProfit(money));
     }
 
     private WinnerTicket verifyWinnerTicket() {
@@ -122,10 +121,5 @@ public class LottoController {
         Statistics statistics = new Statistics(tickets.makeResult(winnerTicket, bonusBall));
         OutputView.noticeStatistics(statistics);
         return statistics;
-    }
-
-    private void showResult(Money money, Statistics statistics) {
-        PrizeMoney prizeMoney = new PrizeMoney(statistics);
-        OutputView.showProfit(prizeMoney.calculateProfit(money));
     }
 }

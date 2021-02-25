@@ -1,5 +1,7 @@
 package lotto.ranking;
 
+import lotto.money.Money;
+
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
@@ -22,6 +24,10 @@ public class Statistics {
         for (Ranking ranking : rankings) {
             statistics.computeIfPresent(ranking, (Ranking key, Integer value) -> ++value);
         }
+    }
+
+    public String calculateProfit(Money purchaseMoney) {
+        return purchaseMoney.calculateProfit(new Money(getTotalPrize()));
     }
 
     public int findRankingCount(Ranking ranking) {

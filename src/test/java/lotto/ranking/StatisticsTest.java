@@ -1,5 +1,6 @@
 package lotto.ranking;
 
+import lotto.money.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -23,5 +24,12 @@ public class StatisticsTest {
     void totalPrize() {
         Statistics statistics = new Statistics(Arrays.asList(Ranking.FIRST, Ranking.FORTH, Ranking.FORTH, Ranking.FORTH));
         assertThat(statistics.getTotalPrize()).isEqualTo("2000150000");
+    }
+
+    @Test
+    @DisplayName("수익률 계산 확인")
+    void calculateProfit() {
+        Statistics statistics = new Statistics(Arrays.asList(Ranking.FIFTH, Ranking.NOTHING, Ranking.NOTHING, Ranking.NOTHING));
+        assertThat(statistics.calculateProfit(new Money("14000"))).isEqualTo("0.35");
     }
 }
