@@ -44,6 +44,6 @@ public class LottoResult {
             long count = resultStatisticsMap.get(rank);
             total += count * rank.getReward().toLong();
         }
-        return new Money(total);
+        return Money.from(total);
     }
 }

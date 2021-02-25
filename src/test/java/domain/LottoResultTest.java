@@ -17,9 +17,9 @@ public class LottoResultTest {
 
     @BeforeEach
     public void setUp() {
-        winningNumbers = new WinningNumbers(
+        winningNumbers = WinningNumbers.of(
                 LottoTicket.valueOf(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                new LottoNumber(7));
+                LottoNumber.from(7));
         lottoTickets = Arrays.asList(
                 LottoTicket.valueOf(Arrays.asList(1, 2, 3, 4, 5, 6)),
                 LottoTicket.valueOf(Arrays.asList(1, 2, 3, 4, 5, 7)),

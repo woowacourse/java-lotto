@@ -13,13 +13,17 @@ public class WinningNumbers {
     private final LottoTicket winningNumbers;
     private final LottoNumber bonusBall;
 
-    public WinningNumbers(LottoTicket winningNumbers, LottoNumber bonusBall) {
+    private WinningNumbers(LottoTicket winningNumbers, LottoNumber bonusBall) {
         this.winningNumbers = winningNumbers;
-        validateBonusBall(bonusBall);
         this.bonusBall = bonusBall;
     }
 
-    private void validateBonusBall(LottoNumber bonusBall) {
+    public static WinningNumbers of(LottoTicket winningNumbers, LottoNumber bonusBall) {
+        validate(winningNumbers, bonusBall);
+        return new WinningNumbers(winningNumbers, bonusBall);
+    }
+
+    private static void validate(LottoTicket winningNumbers, LottoNumber bonusBall) {
         if (winningNumbers.contains(bonusBall)) {
             throw new IllegalArgumentException(ERROR_DUPLICATED_NUMBER);
         }

@@ -19,7 +19,7 @@ public class LottoController {
     private final OutputView outputView = OutputView.getInstance();
 
     public void run() {
-        LottoPurchaseManager lottoPurchaseManager = createLottoPurchase();
+        LottoPurchaseManager lottoPurchaseManager = createLottoPurchaseManager();
         Money investedMoney = lottoPurchaseManager.remainBudget();
 
         List<LottoTicket> lottoTickets = buyLottosManually(lottoPurchaseManager);
@@ -30,12 +30,12 @@ public class LottoController {
         LottoResult lottoResult = LottoResult.of(winningNumber, lottoTickets);
         outputView.printLottoResultStatistics(lottoResult.result());
 
-        Profit profit = new Profit(investedMoney, lottoResult.getReward());
+        Profit profit = Profit.of(investedMoney, lottoResult.getReward());
         outputView.printProfit(profit);
     }
 
-    private LottoPurchaseManager createLottoPurchase() {
-        return new LottoPurchaseManager(Repeater.repeatFunctionOnError(() -> new Money(inputView.scanBudget())));
+    private LottoPurchaseManager createLottoPurchaseManager() {
+        return LottoPurchaseManager.from(Repeater.repeatFunctionOnError(() -> Money.from(inputView.scanBudget())));
     }
 
     private List<LottoTicket> buyLottosManually(LottoPurchaseManager lottoPurchaseManager) {
@@ -66,7 +66,7 @@ public class LottoController {
 
     private WinningNumbers createWinningNumber() {
         LottoTicket winningNumbers = LottoTicket.valueOf(Repeater.repeatFunctionOnError(inputView::scanWinningNumber));
-        LottoNumber bonusBall = new LottoNumber(Repeater.repeatFunctionOnError(inputView::scanBonusBall));
-        return new WinningNumbers(winningNumbers, bonusBall);
+        LottoNumber bonusBall = LottoNumber.from(Repeater.repeatFunctionOnError(inputView::scanBonusBall));
+        return WinningNumbers.of(winningNumbers, bonusBall);
     }
 }

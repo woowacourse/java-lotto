@@ -14,17 +14,17 @@ public class WinningNumbersTest {
 
     @BeforeEach
     public void setUp() {
-        winningNumbers = new WinningNumbers(
+        winningNumbers = WinningNumbers.of(
                 LottoTicket.valueOf(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                new LottoNumber(7));
+                LottoNumber.from(7));
     }
 
     @DisplayName("당첨 번호와 보너스 볼을 묶은 객체를 생성한다")
     @Test
     public void createWinningNumbers() {
-        WinningNumbers winningNumberTest = new WinningNumbers(
+        WinningNumbers winningNumberTest = WinningNumbers.of(
                 LottoTicket.valueOf(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                new LottoNumber(7));
+                LottoNumber.from(7));
         assertThat(winningNumberTest).isInstanceOf(WinningNumbers.class);
     }
 
@@ -32,9 +32,9 @@ public class WinningNumbersTest {
     @Test
     public void createWinningNumbersException() {
         assertThatThrownBy(() -> {
-            new WinningNumbers(
+            WinningNumbers.of(
                     LottoTicket.valueOf(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                    new LottoNumber(6));
+                    LottoNumber.from(6));
         }).isInstanceOf(IllegalArgumentException.class);
     }
 

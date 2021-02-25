@@ -16,12 +16,16 @@ public class LottoNumber {
 
     private final int number;
 
-    public LottoNumber(int number) {
-        validateNumberRange(number);
+    private LottoNumber(int number) {
         this.number = number;
     }
 
-    private void validateNumberRange(int number) {
+    public static LottoNumber from(int number) {
+        validateNumberRange(number);
+        return new LottoNumber(number);
+    }
+
+    private static void validateNumberRange(int number) {
         if (number < MIN_NUMBER_RANGE || number > MAX_NUMBER_RANGE) {
             throw new IllegalArgumentException(ERROR_INVALID_NUMBER_RANGE);
         }

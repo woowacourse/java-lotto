@@ -16,12 +16,16 @@ public class Money {
 
     private final long money;
 
-    public Money(long money) {
-        validatePositiveNumber(money);
+    private Money(long money) {
         this.money = money;
     }
 
-    private void validatePositiveNumber(long input) {
+    public static Money from(long money) {
+        validatePositiveNumber(money);
+        return new Money(money);
+    }
+
+    private static void validatePositiveNumber(long input) {
         if (input < ZERO) {
             throw new IllegalArgumentException(ERROR_NEGATIVE_NUMBER);
         }

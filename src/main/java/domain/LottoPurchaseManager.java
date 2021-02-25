@@ -13,8 +13,12 @@ import java.util.List;
 public class LottoPurchaseManager {
     private Money budget;
 
-    public LottoPurchaseManager(Money money) {
+    private LottoPurchaseManager(Money money) {
         this.budget = money;
+    }
+
+    public static LottoPurchaseManager from(Money money) {
+        return new LottoPurchaseManager(money);
     }
 
     public boolean canAfford(Money pricePerItems, int quantity) {
