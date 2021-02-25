@@ -23,6 +23,13 @@ public final class LottoTicket extends Ticket {
 
         private TotalNumbersCache() {
         }
+
+        private static int get(int idx) {
+            if (idx >= NUMBERS.size()) {
+                throw new IndexOutOfBoundsException("캐시의 크기를 넘어간 인덱스를 참조하려고 했습니다.");
+            }
+            return NUMBERS.get(idx);
+        }
     }
 
     public LottoTicket() {
@@ -56,15 +63,22 @@ public final class LottoTicket extends Ticket {
     }
 
     private List<Integer> addRandomNumbers(final List<Integer> numbers) {
-        Collections.shuffle(TotalNumbersCache.TOTAL_NUMBERS);
+        Collections.shuffle(TotalNumbersCache.NUMBERS);
 
-        TotalNumbersCache.TOTAL_NUMBERS
-                .stream()
-                .filter(randomNumber -> numbers.size() < LOTTO_TICKET_SIZE)
-                .filter(randomNumber -> !numbers.contains(randomNumber))
-                .forEach(randomNumber -> numbers.add(randomNumber));
+        int idx = 0;
+        while (numbers.size() < LOTTO_TICKET_SIZE) {
+            final int randomNumber = TotalNumbersCache.get(idx++);
+            addIfNotDuplicated(numbers, randomNumber);
+        }
 
         return numbers;
+    }
+
+    private void addIfNotDuplicated(final List<Integer> numbers, final int randomNumber) {
+        if (numbers.contains(randomNumber)) {
+            return;
+        }
+        numbers.add(randomNumber);
     }
 
     public boolean contains(final LottoNumber lottoNumber) {
