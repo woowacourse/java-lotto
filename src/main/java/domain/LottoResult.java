@@ -15,25 +15,27 @@ import java.util.Map;
 public class LottoResult {
     private static final Integer ZERO = 0;
 
-    private final Map<Rank, Integer> resultStatisticsMap = new HashMap<>();
+    private final Map<Rank, Integer> resultStatisticsMap;
 
-    public LottoResult(WinningNumbers winningNumbers, List<LottoTicket> lottoTickets) {
+    private LottoResult(Map<Rank, Integer> resultStatisticsMap) {
+        this.resultStatisticsMap = Collections.unmodifiableMap(resultStatisticsMap);
+    }
+
+    public static LottoResult of(WinningNumbers winningNumbers, List<LottoTicket> lottoTickets) {
+        Map<Rank, Integer> resultStatisticsMap = new HashMap<>();
         for (Rank rank : Rank.values()) {
             resultStatisticsMap.put(rank, ZERO);
         }
-        calculate(winningNumbers, lottoTickets);
-    }
-
-    private void calculate(WinningNumbers winningNumbers, List<LottoTicket> lottoTickets) {
         for (LottoTicket lottoTicket : lottoTickets) {
             Rank rank = winningNumbers.calculateRank(lottoTicket);
             Integer count = resultStatisticsMap.get(rank);
             resultStatisticsMap.put(rank, count + 1);
         }
+        return new LottoResult(resultStatisticsMap);
     }
 
     public Map<Rank, Integer> result() {
-        return Collections.unmodifiableMap(resultStatisticsMap);
+        return this.resultStatisticsMap;
     }
 
     public Money getReward() {

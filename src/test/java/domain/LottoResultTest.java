@@ -31,7 +31,7 @@ public class LottoResultTest {
     @DisplayName("일치하는 번호 개수에 따른 통계값을 구한다.")
     @Test
     public void calculateStatistics() {
-        LottoResult lottoResult = new LottoResult(winningNumbers, lottoTickets);
+        LottoResult lottoResult = LottoResult.of(winningNumbers, lottoTickets);
         Map<Rank, Integer> lottoStatisticsMap = lottoResult.result();
         assertThat(lottoStatisticsMap).isEqualTo(new HashMap<Rank, Integer>() {
             {
@@ -48,7 +48,7 @@ public class LottoResultTest {
     @DisplayName("상금을 계산한다.")
     @Test
     public void calculateRewardTest() {
-        LottoResult lottoResult = new LottoResult(winningNumbers, lottoTickets);
+        LottoResult lottoResult = LottoResult.of(winningNumbers, lottoTickets);
         Money reward = lottoResult.getReward();
         assertThat(reward.toLong()).isEqualTo(2_060_000_000);
     }
