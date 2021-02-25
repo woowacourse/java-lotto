@@ -20,7 +20,6 @@ public class LottoController {
         final Money money = inputMoney();
         final Purchase purchase = inputManualPurchase(money);
         final Lottos lottos = createLottoTickets(purchase);
-
         final WinningTicket winningTicket = makeWinningTicket();
         final Map<Rank, Integer> result = LottoResultMachine.confirmResult(lottos, winningTicket);
 
@@ -49,12 +48,10 @@ public class LottoController {
 
     private Lottos createLottoTickets(Purchase purchase) {
         Lottos lottos = new Lottos();
-
-        if (purchase.isManualPurchaseExist()) {
-            lottos.addManuallyCreatedLottos(inputManualNumbers(purchase));
+        if (purchase.existManualPurchase()) {
+            LottoFactory.createManualLottos(lottos, inputManualNumbers(purchase));
         }
-
-        lottos.generateLottoAutomatically(purchase.getAutoPurchase());
+        LottoFactory.createAutoLottos(lottos, purchase);
         OutputView.printAllTickets(purchase, lottos);
         return lottos;
     }

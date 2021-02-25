@@ -25,7 +25,7 @@ public class Purchase {
         return manualPurchase;
     }
 
-    public boolean isManualPurchaseExist() {
+    public boolean existManualPurchase() {
         return manualPurchase != ZERO;
     }
 

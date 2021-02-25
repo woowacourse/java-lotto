@@ -26,8 +26,8 @@ public enum Rank {
                 .orElse(NO_MATCH);
     }
 
-    private boolean isSameMatchCount(int compareCount) {
-        return matchCount == compareCount;
+    private boolean isSameMatchCount(int comparingCount) {
+        return matchCount == comparingCount;
     }
 
     public int getWinnings() {

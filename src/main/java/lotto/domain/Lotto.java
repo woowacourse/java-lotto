@@ -18,7 +18,7 @@ public class Lotto {
 
     private void validate(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_SIZE) {
-            throw new LottoCustomException("로또는 총 6개의 번호로 이루어져야합니다.");
+            throw new LottoCustomException(String.format("로또는 총 %d개의 번호로 이루어져야합니다.", LOTTO_SIZE));
         }
     }
 

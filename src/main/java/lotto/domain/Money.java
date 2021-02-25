@@ -38,7 +38,7 @@ public class Money {
 
     private void validateMoneyLimit(final int money) {
         if (money < MONEY_UNIT) {
-            throw new LottoCustomException("입력 금액은 1000원 이상이어야 합니다.");
+            throw new LottoCustomException(String.format("입력 금액은 %d원 이상이어야 합니다.", MONEY_UNIT));
         }
     }
 
