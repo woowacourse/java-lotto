@@ -20,12 +20,16 @@ public class InputView {
         return parseToInteger(receiveInput(RECEIVE_PRICE_MESSAGE));
     }
 
-    public static int manualLottoNumbersCount() {
+    public static int manualCount() {
         return parseToInteger(receiveInput(RECEIVE_MANUAL_INPUT_COUNT));
     }
 
-    public static List<Integer> manualLottoNumbers() {
-        return receiveNumbers(RECEIVE_MANUAL_INPUT_NUMBERS);
+    public static void printManualNumberMessage() {
+        System.out.println(RECEIVE_MANUAL_INPUT_NUMBERS);
+    }
+
+    public static List<Integer> manualNumbers() {
+        return createNumbers(SCANNER.nextLine().trim());
     }
 
     public static List<Integer> winningNumbers() {

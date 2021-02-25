@@ -31,6 +31,16 @@ public class LottoTicket {
         return new LottoTicket(numbers);
     }
 
+    public Rank checkRanking(final LottoTicket winningTicket, LottoNumber bonusNumber) {
+        int matching = (int) lottoNumbers.stream()
+                .filter(winningTicket::contains)
+                .count();
+
+        boolean bonusMatching = contains(bonusNumber);
+
+        return Rank.select(matching, bonusMatching);
+    }
+
     private void validate(final List<LottoNumber> lottoNumbers) {
         validateDuplicateNumbers(lottoNumbers);
         validateIncorrectSize(lottoNumbers);
@@ -46,16 +56,6 @@ public class LottoTicket {
         if (lottoNumbers.size() != LOTTO_TICKET_SIZE) {
             throw new IllegalArgumentException(ERROR_WRONG_SIZE);
         }
-    }
-
-    public Ranking checkRanking(final LottoTicket winningTicket, LottoNumber bonusNumber) {
-        int matching = (int) lottoNumbers.stream()
-                .filter(winningTicket::contains)
-                .count();
-
-        boolean bonusMatching = contains(bonusNumber);
-
-        return Ranking.select(matching, bonusMatching);
     }
 
     public boolean contains(LottoNumber lottoNumber) {
