@@ -44,7 +44,7 @@ class LottosTest {
         WinningLotto winningLotto = new WinningLotto(lotto, new LottoNumber(7));
 
         //when
-        LottoWinningTable results = lottos.makeWinningTable(winningLotto);
+        LottoWinningTable results = lottos.checkCorrect(winningLotto);
 
         //then
         assertThat(results.getValues().get(LottoRank.FIRST)).isEqualTo(1L);

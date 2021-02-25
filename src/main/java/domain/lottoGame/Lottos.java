@@ -1,18 +1,20 @@
 package domain.lottoGame;
 
-import domain.Money;
-
 import java.util.*;
 
 public class Lottos {
 
     private final List<Lotto> lottos;
 
+    public Lottos() {
+        this.lottos = new ArrayList<>();
+    }
+
     public Lottos(final List<Lotto> lottos) {
         this.lottos = new ArrayList<>(lottos);
     }
 
-    public LottoWinningTable makeWinningTable(WinningLotto winningLotto) {
+    public LottoWinningTable checkCorrect(WinningLotto winningLotto) {
         Map<LottoRank, Long> results = new HashMap<>();
 
         for (LottoRank rank : LottoRank.values()) {
@@ -32,5 +34,11 @@ public class Lottos {
 
     public int getNumberOfLotto() {
         return lottos.size();
+    }
+
+    public Lottos add(Lottos lottos) {
+        List<Lotto> oldLottos = new ArrayList<>(this.lottos);
+        oldLottos.addAll(lottos.lottos);
+        return new Lottos(oldLottos);
     }
 }

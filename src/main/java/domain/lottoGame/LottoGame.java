@@ -1,35 +1,50 @@
 package domain.lottoGame;
 
+import domain.lottoGame.dto.PurchaseResult;
 import domain.lottoGame.shuffleStrategy.DefaultShuffleStrategy;
 import domain.Money;
+import domain.lottoGame.dto.LottoResult;
 
 public class LottoGame {
     private final static int PRICE = 1000;
 
+    private Lottos purchasedLottos;
+
     public LottoGame() {
+        purchasedLottos = new Lottos();
     }
 
     public int getNumberOfAvailablePurchases(Money amount) {
         return amount.divide(PRICE);
     }
 
-    public Lottos purchaseLottos(int count) {
-        return LottoFactory.generates(new DefaultShuffleStrategy(), count);
+    public PurchaseResult purchaseLottos(Lottos manualLottos, int tickets) {
+        int numberOfManualLottos = manualLottos.getNumberOfLotto();
+        purchaseManualLottos(manualLottos);
+
+        int numberOfRandomLottos = tickets - numberOfManualLottos;
+        purchaseRandomLottos(tickets);
+
+        return new PurchaseResult(purchasedLottos, numberOfManualLottos, numberOfRandomLottos);
     }
 
-    public LottoResult calculateResult(WinningLotto winningLotto, Lottos purchasedLottos) {
-        LottoWinningTable winningTable = purchasedLottos.makeWinningTable(winningLotto);
-        double earningRate = calculateEarningRate(winningTable, purchasedLottos);
-
-        return new LottoResult(winningTable, earningRate);
+    private void purchaseManualLottos(Lottos lottos) {
+        purchasedLottos = purchasedLottos.add(lottos);
     }
 
-    private double calculateEarningRate(LottoWinningTable winningTable, Lottos purchasedLottos) {
+    private void purchaseRandomLottos(int count) {
+        purchasedLottos = LottoFactory.generates(new DefaultShuffleStrategy(), count);
+    }
+
+    public LottoResult calculateResult(WinningLotto winningLotto) {
+        LottoWinningTable winningTable = purchasedLottos.checkCorrect(winningLotto);
+        return new LottoResult(winningTable, findEarningRate(winningTable));
+    }
+
+    private double findEarningRate(LottoWinningTable winningTable) {
         Money revenue = winningTable.getTotalWinningMoney();
-        return revenue.calculateEarningRate(findUsedMoney(purchasedLottos));
-    }
+        Money used = new Money(purchasedLottos.getNumberOfLotto() * PRICE);
 
-    private Money findUsedMoney(Lottos purchasedLottos) {
-        return new Money(purchasedLottos.getNumberOfLotto() * PRICE);
+        return revenue.calculateEarningRate(used);
     }
 }

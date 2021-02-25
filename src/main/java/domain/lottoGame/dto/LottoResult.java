@@ -1,4 +1,6 @@
-package domain.lottoGame;
+package domain.lottoGame.dto;
+
+import domain.lottoGame.LottoWinningTable;
 
 public class LottoResult {
     private final LottoWinningTable winningTable;
