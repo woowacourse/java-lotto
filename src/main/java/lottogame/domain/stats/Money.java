@@ -7,7 +7,7 @@ public class Money {
     private static final Pattern NUMBER_PATTERN = Pattern.compile("^[1-9][0-9]{3,}$");
     private final int money;
 
-    public Money(int money) {
+    private Money(int money) {
         this.money = money;
     }
 

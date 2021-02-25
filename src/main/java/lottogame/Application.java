@@ -38,7 +38,7 @@ public class Application {
     }
 
     private static List<Lotto> buyLottos(Money money) {
-        Quantity manualQuantity = Quantity.ofString(InputView.askManualQuantity());
+        Quantity manualQuantity = Quantity.of(InputView.askManualQuantity());
         Quantity autoQuantity = Quantity.from(money, manualQuantity);
         List<Lotto> lottos = createLottos(manualQuantity, autoQuantity);
         printPurchasedLottos(lottos, manualQuantity.value());

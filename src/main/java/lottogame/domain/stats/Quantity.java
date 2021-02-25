@@ -12,38 +12,43 @@ public class Quantity {
         this.quantity = quantity;
     }
 
-    public static Quantity ofInt(int quantity) {
-        validateInt(quantity);
+    private static Quantity of(int quantity) {
+        validate(quantity);
         return new Quantity(quantity);
     }
 
-    public static Quantity ofString(String quantity) {
-        validateString(quantity);
-        return new Quantity(Integer.parseInt(quantity));
+    public static Quantity of(String quantity) {
+        validate(quantity);
+        return Quantity.of(Integer.parseInt(quantity));
     }
 
-    private static void validateInt(int quantity) {
+    private static void validate(int quantity) {
         if (quantity < 0) {
             throw new IllegalArgumentException("잘못된 로또 수입니다.");
         }
     }
 
-    private static void validateString(String quantity) {
+    private static void validate(String quantity) {
         if (!QUANTITY_PATTERN.matcher(quantity).matches()) {
             throw new IllegalArgumentException("잘못된 로또 수입니다.");
         }
     }
 
     public static Quantity from(Money money, Quantity manualQuantity) {
-        return Quantity.ofInt(money.value() / LOTTO_PRICE).subtract(manualQuantity);
+        Quantity totalQuantity = Quantity.of(money.value() / LOTTO_PRICE);
+        return totalQuantity.subtract(manualQuantity);
+    }
+
+    private Quantity subtract(Quantity quantity) {
+        return Quantity.of(this.quantity - quantity.quantity);
+    }
+
+    public boolean isZero() {
+        return quantity == 0;
     }
 
     public int value() {
         return quantity;
-    }
-
-    public Quantity subtract(Quantity quantity) {
-        return Quantity.ofInt(this.quantity - quantity.value());
     }
 
     @Override
@@ -57,9 +62,5 @@ public class Quantity {
     @Override
     public int hashCode() {
         return Objects.hash(quantity);
-    }
-
-    public boolean isZero() {
-        return quantity == 0;
     }
 }

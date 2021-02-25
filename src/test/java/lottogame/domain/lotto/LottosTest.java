@@ -18,7 +18,7 @@ class LottosTest {
 
     @Test
     void 객체_생성() {
-        AutoLottoGenerator autoLottoGenerator = new AutoLottoGenerator(Quantity.ofInt(5));
+        AutoLottoGenerator autoLottoGenerator = new AutoLottoGenerator(Quantity.of("5"));
         autoLottoGenerator.generateLottos();
         List<Lotto> lottoGroup = autoLottoGenerator.generateLottos();
 
