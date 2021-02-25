@@ -5,16 +5,13 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoTicket {
 
     public static final int LOTTO_TICKET_SIZE = 6;
-    private final static int MIN_LOTTO_NUMBER = 1;
-    private final static int MAX_LOTTO_NUMBER = 45;
 
-    private static final String DUPLICATE_NUMBER_ERROR = "중복 숫자가 존재합니다.";
-    private static final String INCORRECT_LOTTO_NUMBER_SIZE_ERROR = "로또 숫자의 개수가 6이 아닙니다.";
+    private static final String ERROR_CONTAINS_DUPLICATE = "중복 숫자가 존재합니다.";
+    private static final String ERROR_WRONG_SIZE = "로또 숫자의 개수가 6이 아닙니다.";
 
     private final List<LottoNumber> lottoNumbers;
 
@@ -24,31 +21,14 @@ public class LottoTicket {
     }
 
     public static LottoTicket generateRandom() {
-        return new LottoTicket(createRandomIntegerList());
+        return new LottoTicket(LottoNumber.generateList(LOTTO_TICKET_SIZE));
     }
 
     public static LottoTicket generateManual(final List<Integer> lottoNumbers) {
         List<LottoNumber> numbers = lottoNumbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
         return new LottoTicket(numbers);
-    }
-
-    private static List<LottoNumber> createRandomIntegerList() {
-        return createShuffledIntegerList().stream()
-                .limit(LottoTicket.LOTTO_TICKET_SIZE)
-                .map(LottoNumber::new)
-                .sorted()
-                .collect(Collectors.toList());
-    }
-
-    private static List<Integer> createShuffledIntegerList() {
-        final List<Integer> numbers = IntStream
-                .rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
-                .boxed()
-                .collect(Collectors.toList());
-        Collections.shuffle(numbers);
-        return numbers;
     }
 
     private void validate(final List<LottoNumber> lottoNumbers) {
@@ -58,13 +38,13 @@ public class LottoTicket {
 
     private void validateDuplicateNumbers(final List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != new HashSet<>(lottoNumbers).size()) {
-            throw new IllegalArgumentException(DUPLICATE_NUMBER_ERROR);
+            throw new IllegalArgumentException(ERROR_CONTAINS_DUPLICATE);
         }
     }
 
     private void validateIncorrectSize(final List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_TICKET_SIZE) {
-            throw new IllegalArgumentException(INCORRECT_LOTTO_NUMBER_SIZE_ERROR);
+            throw new IllegalArgumentException(ERROR_WRONG_SIZE);
         }
     }
 

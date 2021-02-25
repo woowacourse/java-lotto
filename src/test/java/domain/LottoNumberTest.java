@@ -15,7 +15,7 @@ public class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3, 45})
     void valueOf_validValue_success(final int value) {
-        assertThatCode(() -> new LottoNumber(value))
+        assertThatCode(() -> LottoNumber.of(value))
                 .doesNotThrowAnyException();
     }
 
@@ -24,14 +24,14 @@ public class LottoNumberTest {
     @ValueSource(ints = {0, 46})
     void valueOf_outOfRange_exceptionThrown(final int value) {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoNumber(value))
+                .isThrownBy(() -> LottoNumber.of(value))
                 .withMessageContaining("범위");
     }
 
     @DisplayName("동일한 객체 비교")
     @Test
     void equals() {
-        final LottoNumber lottoNumber = new LottoNumber(1);
-        assertEquals(lottoNumber, new LottoNumber(1));
+        final LottoNumber lottoNumber = LottoNumber.of(1);
+        assertEquals(lottoNumber, LottoNumber.of(1));
     }
 }
