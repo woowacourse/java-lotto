@@ -24,7 +24,7 @@ public class OutputView {
 
     private static String lottoToString(List<LottoNumber> lottoNumbers) {
         return lottoNumbers.stream()
-                .map(lottoNumber -> String.valueOf(lottoNumber.getNumber()))
+                .map(lottoNumber -> String.valueOf(lottoNumber.value()))
                 .collect(Collectors.joining(", ", "[", "]"));
     }
 
