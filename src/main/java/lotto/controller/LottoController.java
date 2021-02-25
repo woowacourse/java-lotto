@@ -47,12 +47,10 @@ public class LottoController {
 
     private Lottos createLottos() {
         LottoStore lottoStore = new LottoStore();
-
         Money money = startMoney();
         ManualLotto manualLotto = buyManualLotto();
         validNumManualLotto(money, manualLotto);
         Lottos purchasedLottos = lottoStore.buyLottos(money, manualLotto);
-        //OutputView.numPurchasedLotto(purchasedLottos.size());
         OutputView.numPurchasedLotto(getNumManualLotto(manualLotto), purchasedLottos.getNumAutoLotto(manualLotto));
         OutputView.lottosPrint(purchasedLottos);
         return purchasedLottos;
