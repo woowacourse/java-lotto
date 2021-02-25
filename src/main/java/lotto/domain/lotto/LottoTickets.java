@@ -18,14 +18,14 @@ public class LottoTickets {
         this.lottoTickets = new ArrayList<>(lottoTickets);
     }
 
-    public List<LottoTicket> lottoTickets() {
-        return Collections.unmodifiableList(lottoTickets);
-    }
-
     public static LottoTickets auto(int count) {
         return Stream.generate(LottoTicket::auto)
                 .limit(count)
                 .collect(collectingAndThen(toList(), LottoTickets::new));
+    }
+
+    public List<LottoTicket> lottoTickets() {
+        return Collections.unmodifiableList(lottoTickets);
     }
 
     public LottoResult checkPrizes(WinningLotto winningLotto) {
