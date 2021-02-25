@@ -22,14 +22,25 @@ public class LottoTicketFactory {
     private LottoTicketFactory() {
     }
 
-    public static LottoTickets createLottoTicketsIncludingManualTickets(Money money, List<LottoTicket> manualTickets) {
-        List<LottoTicket> lottoTickets = new ArrayList<>(manualTickets);
+    public static LottoTickets createLottoTicketsIncludingManualTickets(Money money, List<List<String>> manualTicketInputs) {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        addManualLottoTickets(lottoTickets, manualTicketInputs);
 
-        int autoCreateCount = money.getPurchasableLottoCount() - manualTickets.size();
+        int autoCreateCount = money.getPurchasableLottoCount() - manualTicketInputs.size();
+        addAutoLottoTickets(lottoTickets, autoCreateCount);
+        return new LottoTickets(lottoTickets);
+    }
+
+    private static void addManualLottoTickets(List<LottoTicket> lottoTickets, List<List<String>> lottoTicketsNumbers) {
+        for (List<String> numbers : lottoTicketsNumbers) {
+            lottoTickets.add(createManualLottoTicket(numbers));
+        }
+    }
+
+    private static void addAutoLottoTickets(List<LottoTicket> lottoTickets, int autoCreateCount) {
         for (int i = 0; i < autoCreateCount; i++) {
             lottoTickets.add(createAutoLottoTicket());
         }
-        return new LottoTickets(lottoTickets);
     }
 
     private static LottoTicket createAutoLottoTicket() {
