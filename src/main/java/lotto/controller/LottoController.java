@@ -1,17 +1,17 @@
 package lotto.controller;
 
 import lotto.domain.Money;
-import lotto.domain.lotto.*;
+import lotto.domain.lotto.LottoCount;
+import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.LottoTicket;
+import lotto.domain.lotto.LottoTickets;
 import lotto.domain.result.LottoResult;
 import lotto.domain.result.WinningLotto;
 import lotto.utils.ParseUtil;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
@@ -34,26 +34,22 @@ public class LottoController {
     }
 
     private LottoTickets buyLottoTickets(LottoCount lottoCount) {
-        List<List<LottoNumber>> lottoNumbersGroup = new ArrayList<>();
-        lottoNumbersGroup.addAll(createAllManualLottoTicket(lottoCount.getManualLottoCount()));
-        lottoNumbersGroup.addAll(createAutoNumbers(lottoCount.getAutoLottoCount()));
-        return new LottoTickets(lottoNumbersGroup);
+        LottoTickets lottoTickets = createManualLottoTickets(lottoCount.getManualLottoCount());
+        lottoTickets.combine(createAutoTickets(lottoCount.getAutoLottoCount()));
+        return lottoTickets;
     }
 
-    private List<List<LottoNumber>> createAllManualLottoTicket(int manualLottoCount) {
+    private LottoTickets createManualLottoTickets(int manualCount) {
         OutputView.printInputManualLottoNumbers();
-        return IntStream.range(0, manualLottoCount)
-                .mapToObj(i -> InputView.inputNumbers()
-                        .stream()
-                        .map(input -> LottoNumber.valueOf(ParseUtil.parseInt(input)))
-                        .collect(Collectors.toList()))
-                .collect(Collectors.toList());
+        return Stream.generate(() -> LottoTicket.manual(InputView.inputNumbers()))
+                .limit(manualCount)
+                .collect(collectingAndThen(toList(), LottoTickets::new));
     }
 
-    private List<List<LottoNumber>> createAutoNumbers(int autoLottoCount) {
-        return IntStream.range(0, autoLottoCount)
-                .mapToObj(i -> AutoNumbersFactory.generateAutoLottoTicket())
-                .collect(Collectors.toList());
+    private LottoTickets createAutoTickets(int autoCount) {
+        return Stream.generate(LottoTicket::auto)
+                .limit(autoCount)
+                .collect(collectingAndThen(toList(), LottoTickets::new));
     }
 
     private WinningLotto readWinningLotto() {
