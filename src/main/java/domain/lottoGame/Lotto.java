@@ -1,14 +1,10 @@
 package domain.lottoGame;
 
-import domain.Money;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private static final int PRICE = 1000;
-
     private final LottoNumbers lottoNumbers;
 
     public Lotto(final LottoNumbers lottoNumbers) {
@@ -17,7 +13,7 @@ public class Lotto {
 
     public Lotto(final int[] numbers) {
         this(new LottoNumbers(Arrays.stream(numbers)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::from)
                 .collect(Collectors.toList())));
     }
 
