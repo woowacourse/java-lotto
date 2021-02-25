@@ -3,13 +3,12 @@ package domain.lotto;
 public class LottoBall {
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
-    private static final int ARRAY_EXTRA_INDEX = 1;
 
-    private static final LottoBall[] lottoBalls = new LottoBall[MAX_NUMBER + ARRAY_EXTRA_INDEX];
+    private static final LottoBall[] lottoBalls = new LottoBall[MAX_NUMBER];
 
     static {
         for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
-            lottoBalls[i] = new LottoBall(i);
+            lottoBalls[i - MIN_NUMBER] = new LottoBall(i);
         }
     }
 
@@ -21,7 +20,7 @@ public class LottoBall {
 
     public static LottoBall valueOf(final int number) {
         validateLottoBall(number);
-        return lottoBalls[number];
+        return lottoBalls[number - MIN_NUMBER];
     }
 
     private static void validateLottoBall(final int number) {
