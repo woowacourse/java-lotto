@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.domain.LottoAmount;
 import lotto.domain.LottoResultStatistics;
 import lotto.domain.ManualAmount;
 import lotto.domain.lottos.LottoTicket;
@@ -16,8 +17,8 @@ public class LottoController {
 
     public void lottoStart() {
         Money money = initMoney();
-        ManualAmount manualAmount = initManualCount(money);
-        LottoTickets lottoTickets = initLottoTickets(money, manualAmount);
+        LottoAmount lottoAmount = initLottoAmount(money);
+        LottoTickets lottoTickets = initLottoTickets(lottoAmount);
 
         LottoTicket lottoWinnerTicket = initLottoWinnerTicket();
         LottoBonusNumber lottoBonusNumber = initLottoWinnerBonusNumber(lottoWinnerTicket);
@@ -27,6 +28,11 @@ public class LottoController {
                 LottoResultStatistics.calculateResultStatistics(lottoTickets, lottoWinner);
         OutputView.printRewardResultBoard(lottoResultStatistics);
         OutputView.printFinalResult(lottoResultStatistics, money);
+    }
+
+    private LottoAmount initLottoAmount(Money money) {
+        ManualAmount manualAmount = initManualCount(money);
+        return new LottoAmount(money, manualAmount);
     }
 
     private Money initMoney() {
@@ -47,14 +53,15 @@ public class LottoController {
         }
     }
 
-    private LottoTickets initLottoTickets(Money money, ManualAmount manualAmount) {
+    private LottoTickets initLottoTickets(LottoAmount lottoAmount) {
         try {
-            LottoTickets lottoTickets = LottoTicketsService.createLottoTickets(money, InputView.getManualNumbersInput(manualAmount));
-            OutputView.printTickets(lottoTickets, money.getLottoCount(), manualAmount);
+            LottoTickets lottoTickets =
+                    LottoTicketsService.createLottoTickets(lottoAmount, InputView.getManualNumbersInput(lottoAmount.getManualAmount()));
+            OutputView.printTickets(lottoTickets, lottoAmount);
             return lottoTickets;
         } catch (NullPointerException | IllegalArgumentException e) {
             OutputView.printErrorMessage(e);
-            return initLottoTickets(money, manualAmount);
+            return initLottoTickets(lottoAmount);
         }
     }
 

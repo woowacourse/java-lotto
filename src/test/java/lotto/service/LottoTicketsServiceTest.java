@@ -1,5 +1,7 @@
 package lotto.service;
 
+import lotto.domain.LottoAmount;
+import lotto.domain.ManualAmount;
 import lotto.domain.lottos.LottoTicket;
 import lotto.domain.lottos.LottoTickets;
 import lotto.domain.money.Money;
@@ -10,35 +12,28 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static lotto.domain.money.Money.LOTTO_PRICE;
-import static lotto.domain.money.Money.SHORT_MONEY_MESSAGE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTicketsServiceTest {
 
     private List<String> manualLottoNumbers;
+    private LottoAmount lottoAmount;
 
     @BeforeEach
     public void setUp() {
+        Money money = new Money("3000");
+        ManualAmount manualAmount = new ManualAmount("3", money);
         manualLottoNumbers = Arrays.asList("1,2,3,4,5,6", "2,3,4,5,6,7", "3,4,5,6,7,8");
+        lottoAmount = new LottoAmount(money, manualAmount);
     }
 
     @Test
-    @DisplayName("돈을 주면 로또 티켓 여러장 만들어진다.")
+    @DisplayName("구매할 개수를 알려주면 로또 티켓 여러장 만들어진다.")
     public void createLottoTicketsTest() {
-        LottoTickets lottoTickets = LottoTicketsService.createLottoTickets(new Money("5000"), manualLottoNumbers);
+        LottoTickets lottoTickets = LottoTicketsService.createLottoTickets(lottoAmount, manualLottoNumbers);
 
         assertThat(lottoTickets).isInstanceOf(LottoTickets.class);
-    }
-
-    @Test
-    @DisplayName("돈을 1000원 이하로 주면 로또 티켓 만들어주지 않는다.")
-    public void notEnoughMoneyTest() {
-        assertThatThrownBy(() -> {
-            LottoTicketsService.createLottoTickets(new Money("500"), manualLottoNumbers);
-        }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(String.format(SHORT_MONEY_MESSAGE, LOTTO_PRICE));
     }
 
     @Test
