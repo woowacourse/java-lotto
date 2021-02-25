@@ -4,15 +4,12 @@ import domain.lotto.Lotto;
 import domain.lotto.LottoBall;
 import domain.lotto.LottoBundle;
 import domain.money.GameMoney;
-import domain.result.LottoRank;
 import domain.result.LottoResult;
 import domain.result.WinningResult;
 import view.InputView;
 import view.OutputView;
 
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 public class LottoGameController {
     public void run() {
@@ -22,7 +19,7 @@ public class LottoGameController {
 
         final WinningResult winningResult = makeWinningResult();
 
-        makeLottoResult(lottoBundle, winningResult, gameMoney);
+        makeLottoResult(lottoBundle, winningResult);
     }
 
     private GameMoney makeGameMoney() {
@@ -57,9 +54,7 @@ public class LottoGameController {
         try {
             OutputView.printWinningLottoRequest();
             final List<Integer> winningLottoNumber = InputView.getWinningLotto();
-            return new Lotto(winningLottoNumber.stream()
-                    .map(number -> LottoBall.valueOf(number))
-                    .collect(Collectors.toList()));
+            return Lotto.of(winningLottoNumber);
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
             return makeWinningLotto();
@@ -77,13 +72,11 @@ public class LottoGameController {
         }
     }
 
-    private void makeLottoResult(final LottoBundle lottoBundle, final WinningResult winningResult, final GameMoney gameMoney) {
-        final LottoResult lottoResult = new LottoResult();
+    private void makeLottoResult(final LottoBundle lottoBundle, final WinningResult winningResult) {
+        final LottoResult lottoResult = lottoBundle.checkResult(winningResult);
+        OutputView.printLottoResult(lottoResult);
 
-        final Map<LottoRank, Integer> gameResult = lottoResult.checkResult(lottoBundle, winningResult);
-        OutputView.printLottoResult(gameResult);
-
-        final double profitRate = lottoResult.checkProfitRate(gameResult);
+        final double profitRate = lottoResult.checkProfitRate();
         OutputView.printProfitRate(profitRate);
     }
 }

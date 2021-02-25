@@ -3,11 +3,18 @@ package domain.lotto;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
     private static final int LOTTO_BALLS_NUMBER = 6;
 
     private final List<LottoBall> lotto;
+
+    public static Lotto of(final List<Integer> lottoNumber) {
+        return new Lotto(lottoNumber.stream()
+                .map(number -> LottoBall.valueOf(number))
+                .collect(Collectors.toList()));
+    }
 
     public Lotto(final List<LottoBall> lotto) {
         validateLotto(lotto);
