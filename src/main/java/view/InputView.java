@@ -1,5 +1,6 @@
 package view;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -10,6 +11,7 @@ public class InputView {
     private static final String MESSAGE_WINNING_NUMBER = "\n지난 주 당첨 번호를 입력해 주세요.";
     private static final String MESSAGE_BONUS_BALL = "보너스 볼을 입력해 주세요.";
     private static final String MESSAGE_MANUAL_QUANTITY = "\n수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String MESSAGE_MANUAL_NUMBERS = "\n수동으로 구매할 번호를 입력해 주세요.";
     private static final String BLANK = "";
     private static final String COMMA = ",";
     private static final String NUMBER_REGULAR_EXPRESSION = "^-?[0-9]+$";
@@ -65,19 +67,28 @@ public class InputView {
     }
 
     public List<Integer> scanWinningNumbers() {
-        String inputString = scanStringWinningNumbers();
+        System.out.println(MESSAGE_WINNING_NUMBER);
+        return scanNumbers();
+    }
+
+    public List<List<Integer>> scanManualNumbers(long manualCount) {
+        System.out.println(MESSAGE_MANUAL_NUMBERS);
+        List<List<Integer>> manualNumbers = new ArrayList<>();
+        for (int i = 0; i < manualCount; i++) {
+            manualNumbers.add(scanNumbers());
+        }
+        return manualNumbers;
+    }
+
+    private List<Integer> scanNumbers() {
+        String inputString = deleteWhiteSpaces(scanner.nextLine());
         if (inputString.contains(COMMA)) {
             return Arrays.stream(inputString.split(COMMA))
                     .map(Integer::parseInt)
                     .collect(Collectors.toList());
         }
         System.out.println(ERROR_INVALID_DELIMITER);
-        return scanWinningNumbers();
-    }
-
-    private String scanStringWinningNumbers() {
-        System.out.println(MESSAGE_WINNING_NUMBER);
-        return deleteWhiteSpaces(scanner.nextLine());
+        return scanNumbers();
     }
 
     public int scanBonusBall() {
