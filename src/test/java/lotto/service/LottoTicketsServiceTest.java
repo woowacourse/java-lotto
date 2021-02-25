@@ -3,7 +3,6 @@ package lotto.service;
 import lotto.domain.lottos.LottoTicket;
 import lotto.domain.lottos.LottoTickets;
 import lotto.domain.lottos.amount.LottoAmount;
-import lotto.domain.lottos.amount.ManualAmount;
 import lotto.domain.money.Money;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -23,9 +22,8 @@ class LottoTicketsServiceTest {
     @BeforeEach
     public void setUp() {
         Money money = new Money("3000");
-        ManualAmount manualAmount = new ManualAmount("3", money);
         manualLottoNumbers = Arrays.asList("1,2,3,4,5,6", "2,3,4,5,6,7", "3,4,5,6,7,8");
-        lottoAmount = new LottoAmount(money, manualAmount);
+        lottoAmount = new LottoAmount(money, "3");
     }
 
     @Test

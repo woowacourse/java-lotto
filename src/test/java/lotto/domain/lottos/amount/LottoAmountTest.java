@@ -13,12 +13,12 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class LottoAmountTest {
 
     private Money money;
-    private ManualAmount manualAmount;
+    private String manualAmount;
 
     @BeforeEach
     void setUp() {
         money = new Money("3000");
-        manualAmount = new ManualAmount("2", money);
+        manualAmount = "2";
     }
 
     @Test
@@ -39,7 +39,7 @@ class LottoAmountTest {
 
     @ParameterizedTest(name = "매개변수 중 ManualAmount 가 null 이면 NullPointerException을 발생시킨다.")
     @NullSource
-    public void moneyIsNullTest(ManualAmount manualAmount) {
+    public void moneyIsNullTest(String manualAmount) {
         assertThatThrownBy(() -> {
             new LottoAmount(money, manualAmount);
         }).isInstanceOf(NullPointerException.class).hasMessage(LottoAmount.MANUAL_AMOUNT_NULL_ERROR_MESSAGE);

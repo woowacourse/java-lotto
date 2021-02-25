@@ -3,6 +3,7 @@ package lotto.service;
 import lotto.domain.lottos.LottoTicket;
 import lotto.domain.lottos.LottoTickets;
 import lotto.domain.lottos.amount.LottoAmount;
+import lotto.domain.money.Money;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,7 +14,7 @@ public class LottoTicketsService {
     private LottoTicketsService() {
     }
 
-    public static LottoTickets createLottoTickets(LottoAmount lottoAmount, List<String> inputLottosManualNumber) {
+    public static LottoTickets createLottoTickets(LottoAmount lottoAmount , List<String> inputLottosManualNumber) {
         List<LottoTicket> lottoTicketGroup = createManualLottoTickets(inputLottosManualNumber);
         lottoTicketGroup.addAll(createAutoLottoTickets(lottoAmount.getAutoAmount()));
         return new LottoTickets(lottoTicketGroup);
