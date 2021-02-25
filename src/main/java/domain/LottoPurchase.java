@@ -11,14 +11,28 @@ import java.util.List;
  */
 
 public class LottoPurchase {
-    public static LottoTicket buyAutomatically(Budget budget) {
-        budget.buy(LottoTicket.PRICE, 1);
+    private Money budget;
+
+    public LottoPurchase(Money money) {
+        this.budget = money;
+    }
+
+    public boolean canAfford(Money pricePerItems, int quantity) {
+        return this.budget.toLong() >= pricePerItems.multiply(quantity).toLong();
+    }
+
+    public Money remainBudget() {
+        return this.budget;
+    }
+
+    public LottoTicket buyAutomatically() {
+        this.budget = budget.subtract(LottoTicket.PRICE);
         return LottoTicket.of(LottoNumberRepository.shuffleLottoNumbers());
     }
 
-    public static LottoTicket buyManually(List<Integer> lottoNumbers, Budget budget) {
+    public LottoTicket buyManually(List<Integer> lottoNumbers) throws IllegalArgumentException {
         LottoTicket lottoTicket = LottoTicket.valueOf(lottoNumbers);
-        budget.buy(LottoTicket.PRICE, 1);
+        this.budget = budget.subtract(LottoTicket.PRICE);
         return lottoTicket;
     }
 }

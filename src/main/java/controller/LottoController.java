@@ -1,6 +1,5 @@
 package controller;
 
-import domain.Budget;
 import domain.LottoTicket;
 import domain.Money;
 import domain.WinningNumbers;
@@ -20,11 +19,11 @@ public class LottoController {
     private final OutputView outputView = OutputView.getInstance();
 
     public void run() {
-        Budget budget = Repeater.repeatFunctionOnError(this::createBudget);
-        Money investedMoney = budget.remain();
+        LottoPurchase lottoPurchase = createLottoPurchase();
+        Money investedMoney = lottoPurchase.remainBudget();
 
-        List<LottoTicket> lottoTickets = buyLottosManually(budget);
-        lottoTickets.addAll(buyLottosAutomatically(budget));
+        List<LottoTicket> lottoTickets = buyLottosManually(lottoPurchase);
+        lottoTickets.addAll(buyLottosAutomatically(lottoPurchase));
         outputView.printLottoTicket(lottoTickets);
 
         WinningNumbers winningNumber = Repeater.repeatFunctionOnError(this::createWinningNumber);
@@ -35,15 +34,15 @@ public class LottoController {
         outputView.printProfit(profit);
     }
 
-    private Budget createBudget() {
-        return new Budget(new Money(inputView.scanBudget()));
+    private LottoPurchase createLottoPurchase() {
+        return new LottoPurchase(Repeater.repeatFunctionOnError(() -> new Money(inputView.scanBudget())));
     }
 
-    private List<LottoTicket> buyLottosManually(Budget budget) {
+    private List<LottoTicket> buyLottosManually(LottoPurchase lottoPurchase) {
         int quantity = Repeater.repeatFunctionOnError(inputView::scanManualLottoQuantity);
-        if (!budget.canAfford(LottoTicket.PRICE, quantity)) {
+        if (!lottoPurchase.canAfford(LottoTicket.PRICE, quantity)) {
             outputView.printNotEnoughBudget();
-            return buyLottosManually(budget);
+            return buyLottosManually(lottoPurchase);
         }
 
         List<LottoTicket> lottoTickets = new ArrayList<>();
@@ -51,16 +50,16 @@ public class LottoController {
         for (int i = 0; i < quantity; i++) {
             lottoTickets.add(Repeater.repeatFunctionOnError(() -> {
                 List<Integer> lottoNumbers = inputView.scanManualLottoNumbers();
-                return LottoPurchase.buyManually(lottoNumbers, budget);
+                return lottoPurchase.buyManually(lottoNumbers);
             }));
         }
         return lottoTickets;
     }
 
-    private List<LottoTicket> buyLottosAutomatically(Budget budget) {
+    private List<LottoTicket> buyLottosAutomatically(LottoPurchase lottoPurchase) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        while (budget.canAfford(LottoTicket.PRICE, 1)) {
-            lottoTickets.add(LottoPurchase.buyAutomatically(budget));
+        while (lottoPurchase.canAfford(LottoTicket.PRICE, 1)) {
+            lottoTickets.add(lottoPurchase.buyAutomatically());
         }
         return lottoTickets;
     }
