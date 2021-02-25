@@ -20,9 +20,7 @@ public class LottoController {
         LottoAmount lottoAmount = initLottoAmount(money);
         LottoTickets lottoTickets = initLottoTickets(lottoAmount);
 
-        LottoTicket lottoWinnerTicket = initLottoWinnerTicket();
-        LottoBonusNumber lottoBonusNumber = initLottoWinnerBonusNumber(lottoWinnerTicket);
-        LottoWinner lottoWinner = new LottoWinner(lottoWinnerTicket, lottoBonusNumber);
+        LottoWinner lottoWinner = initLottoWinner();
 
         LottoResultStatistics lottoResultStatistics =
                 LottoResultStatistics.calculateResultStatistics(lottoTickets, lottoWinner);
@@ -63,6 +61,12 @@ public class LottoController {
             OutputView.printErrorMessage(e);
             return initLottoTickets(lottoAmount);
         }
+    }
+
+    private LottoWinner initLottoWinner() {
+        LottoTicket lottoWinnerTicket = initLottoWinnerTicket();
+        LottoBonusNumber lottoBonusNumber = initLottoWinnerBonusNumber(lottoWinnerTicket);
+        return new LottoWinner(lottoWinnerTicket, lottoBonusNumber);
     }
 
     private LottoTicket initLottoWinnerTicket() {
