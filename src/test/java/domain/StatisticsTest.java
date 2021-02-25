@@ -4,10 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -35,7 +32,7 @@ public class StatisticsTest {
 
         Map<Rank, Integer> lottoStatistics = statistics.result();
 
-        assertThat(lottoStatistics).isEqualTo(new HashMap<Rank, Integer>() {
+        assertThat(lottoStatistics).isEqualTo(new EnumMap<Rank, Integer>(Rank.class) {
             {
                 put(Rank.FIRST, 1);
                 put(Rank.SECOND, 2);

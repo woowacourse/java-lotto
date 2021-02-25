@@ -1,14 +1,11 @@
 package domain;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Statistics {
     private static final Integer INITIAL_COUNT = 0;
 
-    private final Map<Rank, Integer> lottoStatistics = new HashMap<>();
+    private final Map<Rank, Integer> lottoStatistics = new EnumMap<>(Rank.class);
 
     public Statistics(WinningLotto winningLotto, List<LottoTicket> lottoTickets) {
         for (Rank rank : Rank.values()) {
