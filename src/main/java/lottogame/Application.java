@@ -18,7 +18,7 @@ import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
-        Money money = Money.of(InputView.inputMoney());
+        Money money = Money.of(InputView.scanMoney());
         List<Lotto> myLottos = buyLottos(money);
         WinningLotto winningLotto = confirmWinningLotto();
         LottoGame lottoGame = new LottoGame(myLottos, winningLotto);
@@ -32,13 +32,13 @@ public class Application {
     }
 
     private static WinningLotto confirmWinningLotto() {
-        ManualLottoGenerator manualLottoGenerator = new ManualLottoGenerator(InputView.inputWinningLottoNumbers());
-        String bonusNumber = InputView.inputBonusNumber();
+        ManualLottoGenerator manualLottoGenerator = new ManualLottoGenerator(InputView.scanWinningLotto());
+        String bonusNumber = InputView.scanBonusNumber();
         return new WinningLotto(manualLottoGenerator.generateLotto(), bonusNumber);
     }
 
     private static List<Lotto> buyLottos(Money money) {
-        Quantity manualQuantity = Quantity.of(InputView.askManualQuantity());
+        Quantity manualQuantity = Quantity.of(InputView.scanManualQuantity());
         Quantity autoQuantity = Quantity.from(money, manualQuantity);
         List<Lotto> lottos = createLottos(manualQuantity, autoQuantity);
         printPurchasedLottos(lottos, manualQuantity.value());
@@ -59,7 +59,7 @@ public class Application {
 
     private static List<Lotto> generateLottos(Quantity quantity, LottoGenerator lottoGenerator) {
         if (lottoGenerator instanceof ManualLottoGenerator && !quantity.isZero()) {
-            ((ManualLottoGenerator) lottoGenerator).addResources(InputView.askLottoNumbers(quantity.value()));
+            ((ManualLottoGenerator) lottoGenerator).addResources(InputView.scanLottos(quantity.value()));
         }
         if (quantity.isZero()) {
             return new ArrayList<>();
