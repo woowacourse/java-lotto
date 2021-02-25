@@ -14,7 +14,7 @@ public class AutoNumbersFactory {
     private AutoNumbersFactory() {
     }
 
-    public static List<LottoNumber> generateAutoLottoTicket() {
+    public static List<LottoNumber> generateAutoLottoNumbers() {
         List<Integer> numbersKeys = new ArrayList<>(LottoNumber.getKeys());
         Collections.shuffle(numbersKeys);
         return IntStream.range(START_INDEX, LOTTO_TICKET_SIZE)

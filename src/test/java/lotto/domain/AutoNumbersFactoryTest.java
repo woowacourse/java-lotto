@@ -10,7 +10,7 @@ public class AutoNumbersFactoryTest {
     @Test
     @DisplayName("자동 로또 숫자들 갯수 테스트")
     void generateAutoLottoTicket() {
-        assertThat(AutoNumbersFactory.generateAutoLottoTicket()
+        assertThat(AutoNumbersFactory.generateAutoLottoNumbers()
                 .size()).isEqualTo(6);
     }
 }

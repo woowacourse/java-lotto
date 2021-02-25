@@ -1,5 +1,6 @@
 package lotto.domain.lotto;
 
+import lotto.domain.result.Prize;
 import lotto.utils.ParseUtil;
 
 import java.util.*;
@@ -10,14 +11,14 @@ public class LottoTicket {
 
     private final List<LottoNumber> lottoNumbers;
 
-    public LottoTicket(List<LottoNumber> numbers) {
+    private LottoTicket(List<LottoNumber> numbers) {
         validateLottoNumbers(numbers);
         Collections.sort(numbers);
         this.lottoNumbers = new ArrayList<>(numbers);
     }
 
     public static LottoTicket auto() {
-        return new LottoTicket(AutoNumbersFactory.generateAutoLottoTicket());
+        return new LottoTicket(AutoNumbersFactory.generateAutoLottoNumbers());
     }
 
     public static LottoTicket manual(List<String> lottoNumberStrings) {
@@ -46,5 +47,36 @@ public class LottoTicket {
 
     public List<LottoNumber> lottoTicket() {
         return Collections.unmodifiableList(lottoNumbers);
+    }
+
+    public Prize matchPrize(LottoTicket winningTicket, LottoNumber bonusNumber) {
+        int matchCount = getMatchingCount(winningTicket);
+        boolean isBonusNumber = isContainBonusNumber(bonusNumber);
+        return Prize.findPrize(matchCount, isBonusNumber);
+    }
+
+    private int getMatchingCount(LottoTicket winningTicket) {
+        return (int) winningTicket.lottoNumbers
+                .stream()
+                .filter(lottoNumbers::contains)
+                .count();
+    }
+
+    public boolean isContainBonusNumber(LottoNumber bonusNumber) {
+        return lottoNumbers.stream()
+                .anyMatch(lottoNumber -> lottoNumber.equals(bonusNumber));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoTicket that = (LottoTicket) o;
+        return Objects.equals(lottoNumbers, that.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 }

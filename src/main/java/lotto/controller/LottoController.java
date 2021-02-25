@@ -35,7 +35,7 @@ public class LottoController {
 
     private LottoTickets buyLottoTickets(LottoCount lottoCount) {
         LottoTickets lottoTickets = createManualLottoTickets(lottoCount.getManualLottoCount());
-        lottoTickets.combine(createAutoTickets(lottoCount.getAutoLottoCount()));
+        lottoTickets.combine(LottoTickets.auto(lottoCount.getAutoLottoCount()));
         return lottoTickets;
     }
 
@@ -46,25 +46,16 @@ public class LottoController {
                 .collect(collectingAndThen(toList(), LottoTickets::new));
     }
 
-    private LottoTickets createAutoTickets(int autoCount) {
-        return Stream.generate(LottoTicket::auto)
-                .limit(autoCount)
-                .collect(collectingAndThen(toList(), LottoTickets::new));
-    }
-
     private WinningLotto readWinningLotto() {
         OutputView.printInputWinningNumbers();
-        LottoTicket winningTicket = InputView.inputNumbers()
-                .stream()
-                .map(input -> LottoNumber.valueOf(ParseUtil.parseInt(input)))
-                .collect(collectingAndThen(toList(), LottoTicket::new));
+        LottoTicket winningTicket = LottoTicket.manual(InputView.inputNumbers());
         LottoNumber bonusNumber = LottoNumber.valueOf(ParseUtil.parseInt(InputView.inputBonusNumber()));
         return new WinningLotto(winningTicket, bonusNumber);
     }
 
     private void showResult(int totalLottoCount, LottoTickets lottoTickets,
                             WinningLotto winningLotto) {
-        LottoResult lottoResult = winningLotto.checkPrizes(lottoTickets);
+        LottoResult lottoResult = lottoTickets.checkPrizes(winningLotto);
         OutputView.printResultStatistic(lottoResult);
         Money totalProfit = lottoResult.getTotalProfit();
         double profitRate = totalProfit.getProfitRate(totalLottoCount);
