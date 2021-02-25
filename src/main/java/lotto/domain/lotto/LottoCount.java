@@ -1,13 +1,13 @@
 package lotto.domain.lotto;
 
 public class LottoCount {
-    private final int manualLottoCount;
-    private final int autoLottoCount;
+    private final int manualCount;
+    private final int autoCount;
 
     public LottoCount(int manualCount, int totalCount) {
         validateLottoCount(manualCount, totalCount);
-        this.manualLottoCount = manualCount;
-        this.autoLottoCount = totalCount - manualLottoCount;
+        this.manualCount = manualCount;
+        this.autoCount = totalCount - this.manualCount;
     }
 
     private void validateLottoCount(int manualCount, int totalCount) {
@@ -16,11 +16,11 @@ public class LottoCount {
         }
     }
 
-    public int getManualLottoCount() {
-        return manualLottoCount;
+    public int getManualCount() {
+        return manualCount;
     }
 
-    public int getAutoLottoCount() {
-        return autoLottoCount;
+    public int getAutoCount() {
+        return autoCount;
     }
 }

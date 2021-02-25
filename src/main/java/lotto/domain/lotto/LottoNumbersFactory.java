@@ -8,10 +8,10 @@ import java.util.stream.IntStream;
 
 import static lotto.domain.lotto.LottoTicket.LOTTO_TICKET_SIZE;
 
-public class AutoNumbersFactory {
+public class LottoNumbersFactory {
     private static final int START_INDEX = 0;
 
-    private AutoNumbersFactory() {
+    private LottoNumbersFactory() {
     }
 
     public static List<LottoNumber> generateAutoLottoNumbers() {

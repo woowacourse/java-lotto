@@ -34,8 +34,8 @@ public class LottoController {
     }
 
     private LottoTickets buyLottoTickets(LottoCount lottoCount) {
-        LottoTickets lottoTickets = createManualLottoTickets(lottoCount.getManualLottoCount());
-        lottoTickets.combine(LottoTickets.auto(lottoCount.getAutoLottoCount()));
+        LottoTickets lottoTickets = createManualLottoTickets(lottoCount.getManualCount());
+        lottoTickets.combine(LottoTickets.auto(lottoCount.getAutoCount()));
         return lottoTickets;
     }
 

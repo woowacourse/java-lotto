@@ -18,7 +18,7 @@ public class LottoTicket {
     }
 
     public static LottoTicket auto() {
-        return new LottoTicket(AutoNumbersFactory.generateAutoLottoNumbers());
+        return new LottoTicket(LottoNumbersFactory.generateAutoLottoNumbers());
     }
 
     public static LottoTicket manual(List<String> lottoNumberStrings) {

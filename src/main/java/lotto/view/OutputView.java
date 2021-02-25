@@ -27,7 +27,7 @@ public class OutputView {
 
     public static void printLottoTicketsCount(LottoCount lottoCount) {
         System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n",
-                lottoCount.getManualLottoCount(), lottoCount.getAutoLottoCount());
+                lottoCount.getManualCount(), lottoCount.getAutoCount());
     }
 
     public static void printInputWinningNumbers() {
