@@ -19,13 +19,18 @@ public class LottoTickets {
         return new LottoTickets(lottoTicketGroup);
     }
 
+    public LottoTickets addAll(LottoTickets autoLottoTickets) {
+        this.lottoTickets.addAll(autoLottoTickets.lottoTickets);
+        return new LottoTickets(this.lottoTickets);
+    }
+
     public int size() {
         return lottoTickets.size();
     }
 
     public LottoStatistics getStatistics(WinningLottoTicket winningLottoTicket) {
         Map<LottoRank, Long> statistics = lottoTickets.stream()
-                .map(lottoTicket -> winningLottoTicket.compareNumbers(lottoTicket))
+                .map(winningLottoTicket::compareNumbers)
                 .collect(Collectors.groupingBy(lottoRank -> lottoRank, Collectors.counting()));
         return new LottoStatistics(statistics);
     }

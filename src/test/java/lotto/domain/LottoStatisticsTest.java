@@ -29,10 +29,10 @@ class LottoStatisticsTest {
     @DisplayName("구매 금액과 비교해 수익률을 계산한다.")
     @Test
     void calculateYield() {
-        PurchasingPrice purchasingPrice = new PurchasingPrice(35477);
+        Money money = new Money(35477);
 
-        double yield = lottoStatistics.calculateYield(purchasingPrice);
+        double yield = lottoStatistics.calculateYield(money);
 
-        assertThat(yield).isEqualTo(((double)2000000000) / 35477);
+        assertThat(yield).isEqualTo(((double)2000000000) / 35000);
     }
 }

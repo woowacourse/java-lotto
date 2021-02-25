@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class OutputView {
-    private static final String PURCHASE_LOTTO_MESSAGE = "%d개를 구매했습니다.\n";
+    private static final String PURCHASE_LOTTO_MESSAGE = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     private static final String RESULT_MESSAGE = "당첨 통계";
     private static final String HYPHENS = "---------";
     private static final String LOTTO_STATISTICS_MESSAGE = "%d개 일치 (%d원)- %d개\n";
@@ -20,8 +20,8 @@ public class OutputView {
 
     private OutputView() {}
 
-    public static void printLottoCountMessage(int lottoCounts) {
-        System.out.printf(PURCHASE_LOTTO_MESSAGE, lottoCounts);
+    public static void printLottoCountMessage(PurchasingCounts purchasingCounts) {
+        System.out.printf(PURCHASE_LOTTO_MESSAGE, purchasingCounts.getManualTicketCounts(), purchasingCounts.getAutoTicketCounts());
     }
 
     public static void printLottoTicketNumbers(LottoTickets lottoTickets) {
@@ -29,6 +29,7 @@ public class OutputView {
         for (LottoTicket lottoTicket : lottoTicketGroup) {
             String numbers = lottoTicket.getLottoNumbers()
                     .stream()
+                    .sorted(Comparator.comparing(LottoNumber::getLottoNumber))
                     .map(lottoNumber -> String.valueOf(lottoNumber.getLottoNumber()))
                     .collect(Collectors.joining(DELIMITER, PREFIX, SUFFIX));
             System.out.println(numbers);
@@ -36,7 +37,7 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printLottoResult(LottoStatistics lottoStatistics, PurchasingPrice purchasingPrice) {
+    public static void printLottoResult(LottoStatistics lottoStatistics, Money money) {
         System.out.println();
         System.out.println(RESULT_MESSAGE);
         System.out.println(HYPHENS);
@@ -44,7 +45,7 @@ public class OutputView {
                 .filter(lottoRank -> lottoRank != LottoRank.MISS)
                 .sorted(Comparator.reverseOrder())
                 .forEach(lottoRank -> printStatisticsMessage(lottoRank, lottoStatistics));
-        System.out.printf(YIELD_MESSAGE, lottoStatistics.calculateYield(purchasingPrice));
+        System.out.printf(YIELD_MESSAGE, lottoStatistics.calculateYield(money));
     }
 
     private static void printStatisticsMessage(LottoRank lottoRank, LottoStatistics lottoStatistics) {
