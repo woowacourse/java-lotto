@@ -28,4 +28,8 @@ public class InputView {
     public static ManualLottoCount inputManualLottoCount() {
         return new ManualLottoCount(scanner.nextLine());
     }
+
+    public static String inputTicket() {
+        return scanner.nextLine();
+    }
 }

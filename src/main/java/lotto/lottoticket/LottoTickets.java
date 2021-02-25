@@ -12,7 +12,8 @@ public class LottoTickets {
 
     public LottoTickets(LottoCount lottoCount, NumbersGenerator numbersGenerator) {
         this.lottoTickets = new ArrayList<>();
-        while (lottoCount.isBiggerThanZeroWithDecreasing()) {
+        LottoCount check = LottoCount.valueOf(lottoCount);
+        while (check.isBiggerThanZeroWithDecreasing()) {
             lottoTickets.add(new LottoTicket(numbersGenerator));
         }
     }
@@ -25,6 +26,13 @@ public class LottoTickets {
             result.add(Ranking.makePrice(matchCount, bonus));
         }
         return result;
+    }
+
+    public void addTickets(LottoCount lottoCount, NumbersGenerator numbersGenerator) {
+        LottoCount check = LottoCount.valueOf(lottoCount);
+        while (check.isBiggerThanZeroWithDecreasing()) {
+            lottoTickets.add(new LottoTicket(numbersGenerator));
+        }
     }
 
     public List<LottoTicket> getTickets() {

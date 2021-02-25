@@ -1,6 +1,5 @@
 package lotto.lottogame;
 
-import lotto.money.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -28,19 +27,18 @@ public class ManualLottoCountTest {
 
     @ParameterizedTest
     @DisplayName("유효한 범위인지 확인")
-    @ValueSource(strings = {"10", "-1"})
+    @ValueSource(strings = {"6", "-1"})
     void AutoLottoCountInvalidRange(String value) {
-        LottoCount lottoCount = new LottoCount(new Money("9000"));
-        ManualLottoCount manualLottoCount = new ManualLottoCount(value);
-        assertThatThrownBy(() -> manualLottoCount.validRange(lottoCount)).isInstanceOf(IllegalArgumentException.class)
+        LottoCount lottoCount = new LottoCount(5);
+        assertThatThrownBy(() -> new ManualLottoCount(value).validRange(lottoCount)).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ERROR_MESSAGE_INVALID_RANGE);
     }
 
     @Test
     @DisplayName("올바른 입력 확인")
     void AutoLottoCountValidInput() {
-        LottoCount lottoCount = new LottoCount(new Money("9000"));
+        LottoCount lottoCount = new LottoCount(9);
         ManualLottoCount manualLottoCount = new ManualLottoCount("5");
-        assertThat(manualLottoCount.makeManualCount(lottoCount)).isEqualTo(new AutoLottoCount(4));
+        assertThat(manualLottoCount.makeAutoCount(lottoCount)).isEqualTo(new LottoCount(4));
     }
 }

@@ -1,33 +1,13 @@
 package lotto.lottoticket;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
-public class WinnerTicket {
-    private static final String COMMA_DELIMITER = ",";
-
+public class WinnerTicket extends LottoTicketMaker {
     private final List<LottoNumber> winnerTicket;
 
     public WinnerTicket(String numbers) {
-        this.winnerTicket = splitNumbers(numbers);
-    }
-
-    private List<LottoNumber> splitNumbers(String values) {
-        return Arrays.stream(values.split(COMMA_DELIMITER))
-                .map(this::makeValidatedNumber)
-                .collect(Collectors.collectingAndThen(Collectors.toList(), this::makeValidatedNumbers));
-    }
-
-    private LottoNumber makeValidatedNumber(String value) {
-        return LottoNumber.valueOf(value);
-    }
-
-    private List<LottoNumber> makeValidatedNumbers(List<LottoNumber> numbers) {
-        LottoTicketValidation.validateSize(numbers);
-        LottoTicketValidation.validateDuplicated(numbers);
-        return numbers;
+        this.winnerTicket = makeLottoNumbers(numbers);
     }
 
     public boolean containsSameNumber(LottoNumber number) {
