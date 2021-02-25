@@ -43,9 +43,11 @@ public class LottoServiceTest {
     @Test
     @DisplayName("수동 로또 구매하기")
     void manualLottoCheck() {
-        List<Integer> expected = Arrays.asList(1,2,3,4,5,6);
+        List<Integer> expected = Arrays.asList(1, 2, 3, 4, 5, 6);
         lottoService.addManualLotto(Lotto.createByInteger(expected));
-        assertThat(lottoService.getLottos().get(0).getNumbers()).isEqualTo(expected);
+        assertThat(lottoService.getLottos()
+                               .get(0)
+                               .getNumbers()).isEqualTo(expected);
     }
 
     @Test

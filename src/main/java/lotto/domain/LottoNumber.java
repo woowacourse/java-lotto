@@ -22,11 +22,12 @@ public class LottoNumber {
         static {
             cache = new LottoNumber[(high - low) + 1];
             int j = low;
-            for(int k = 0; k < cache.length; k++)
+            for (int k = 0; k < cache.length; k++)
                 cache[k] = new LottoNumber(j++);
         }
 
-        private LottoNumberCache() {}
+        private LottoNumberCache() {
+        }
     }
 
     public int intValue() {
