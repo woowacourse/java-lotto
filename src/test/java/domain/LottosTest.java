@@ -46,8 +46,8 @@ class LottosTest {
         LottoResults results = lottos.getLottoResults(winningLotto);
 
         //then
-//        assertThat(results).hasSize(6);
-//        assertThat(results.get(LottoRank.FIRST)).isEqualTo(1L);
-//        assertThat(results.get(LottoRank.MISS)).isEqualTo(2L);
+        assertThat(results.getValues()).hasSize(6);
+        assertThat(results.getValues().get(LottoRank.FIRST)).isEqualTo(1L);
+        assertThat(results.getValues().get(LottoRank.MISS)).isEqualTo(2L);
     }
 }
