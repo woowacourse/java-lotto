@@ -11,8 +11,8 @@ public class InputView {
     private static final String RECEIVE_PRICE_MESSAGE = "구입금액을 입력해 주세요.";
     private static final String RECEIVE_WINNING_NUMBERS_MESSAGE = "지난 당첨 번호를 입력해 주세요.";
     private static final String RECEIVE_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
-    private static final String NULL_ERROR = "null 이 입력되었습니다.";
-    private static final String NOT_INT_ERROR = "정수가 아닙니다.";
+    private static final String ERROR_NULL = "null 이 입력되었습니다.";
+    private static final String ERROR_NOT_INTEGER = "정수가 아닙니다.";
 
     public static String receivePrice() {
         return receiveInput(RECEIVE_PRICE_MESSAGE);
@@ -42,7 +42,7 @@ public class InputView {
 
     private static void validateNull(final String userInput) {
         if (userInput == null) {
-            throw new IllegalArgumentException(NULL_ERROR);
+            throw new IllegalArgumentException(ERROR_NULL);
         }
     }
 
@@ -50,7 +50,7 @@ public class InputView {
         try {
             return Integer.parseInt(userInput);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(NOT_INT_ERROR);
+            throw new IllegalArgumentException(ERROR_NOT_INTEGER);
         }
     }
 
@@ -58,10 +58,10 @@ public class InputView {
         try {
             return Arrays.stream(userInput.split(","))
                     .map(String::trim)
-                    .map(Integer::new)
+                    .map(Integer::parseInt)
                     .collect(Collectors.toList());
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(NOT_INT_ERROR);
+            throw new IllegalArgumentException(ERROR_NOT_INTEGER);
         }
     }
 
