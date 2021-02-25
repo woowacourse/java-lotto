@@ -9,20 +9,30 @@ public class InputView {
 
     private static final Scanner SCANNER = new Scanner(System.in);
     private static final String RECEIVE_PRICE_MESSAGE = "구입금액을 입력해 주세요.";
+    private static final String RECEIVE_MANUAL_INPUT_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String RECEIVE_MANUAL_INPUT_NUMBERS = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String RECEIVE_WINNING_NUMBERS_MESSAGE = "지난 당첨 번호를 입력해 주세요.";
     private static final String RECEIVE_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String ERROR_NULL = "null 이 입력되었습니다.";
     private static final String ERROR_NOT_INTEGER = "정수가 아닙니다.";
 
-    public static int receivePayment() {
+    public static int payment() {
         return parseToInteger(receiveInput(RECEIVE_PRICE_MESSAGE));
     }
 
-    public static List<Integer> receiveWinningNumbers() {
+    public static int manualLottoNumbersCount() {
+        return parseToInteger(receiveInput(RECEIVE_MANUAL_INPUT_COUNT));
+    }
+
+    public static List<Integer> manualLottoNumbers() {
+        return receiveNumbers(RECEIVE_MANUAL_INPUT_NUMBERS);
+    }
+
+    public static List<Integer> winningNumbers() {
         return receiveNumbers(RECEIVE_WINNING_NUMBERS_MESSAGE);
     }
 
-    public static int receiveBonusNumber() {
+    public static int bonusNumber() {
         return receiveNumber(RECEIVE_BONUS_NUMBER_MESSAGE);
     }
 
