@@ -12,10 +12,8 @@ public class LottoController {
     public void run() {
         Money money = generateMoney();
         LottoCount lottoCount = possibleLottoCount(money);
-        LottoCount manualTicketAmount = manualTicketAmount();
-        LottoCount autoTicketAmount = lottoCount.consumeTicket(manualTicketAmount);
-        Tickets totalTicket = ticketPurchase(manualTicketAmount, autoTicketAmount);
-        verifyResult(money, totalTicket);
+        Tickets tickets = purchaseTickets(lottoCount);
+        verifyResult(money, tickets);
     }
 
     private Money generateMoney() {
@@ -37,14 +35,20 @@ public class LottoController {
         }
     }
 
-    private LottoCount manualTicketAmount() {
+    private Tickets purchaseTickets(LottoCount lottoCount) {
         try {
-            OutputView.enterManualTicketAmount();
-            return InputView.inputManualTicketAmount();
-        } catch (IllegalArgumentException e) {
+            LottoCount manualTicketAmount = manualTicketAmount();
+            LottoCount autoTicketAmount = lottoCount.consumeTicket(manualTicketAmount);
+            return ticketPurchase(manualTicketAmount, autoTicketAmount);
+        } catch (RuntimeException e) {
             OutputView.printError(e);
-            return manualTicketAmount();
+            return purchaseTickets(lottoCount);
         }
+    }
+
+    private LottoCount manualTicketAmount() {
+        OutputView.enterManualTicketAmount();
+        return InputView.inputManualTicketAmount();
     }
 
     private Tickets ticketPurchase(LottoCount manualTicketAmount, LottoCount autoTicketAmount) {
