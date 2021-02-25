@@ -15,25 +15,34 @@ public class LottoNumber {
         private static final List<LottoNumber> CACHE = new ArrayList<>();
 
         static {
-            IntStream.rangeClosed(0, MAX_NUMBER_VALUE)
+            IntStream.rangeClosed(MIN_NUMBER_VALUE, MAX_NUMBER_VALUE)
                     .forEach(i -> CACHE.add(new LottoNumber(i)));
         }
 
         private LottoNumberCache() {
         }
+
+        private static LottoNumber get(int value) {
+            return CACHE.get(value - 1);
+        }
     }
 
     private LottoNumber(final int value) {
+        validate(value);
         this.value = value;
     }
 
     public static LottoNumber valueOf(final int value) {
+        validate(value);
+        return LottoNumberCache.get(value);
+    }
+
+    private static void validate(final int value) {
         if (value < MIN_NUMBER_VALUE || MAX_NUMBER_VALUE < value) {
             throw new IllegalArgumentException(
                     String.format("%d~%d의 범위에서 벗어났습니다: %d", MIN_NUMBER_VALUE, MAX_NUMBER_VALUE, value)
             );
         }
-        return LottoNumberCache.CACHE.get(value);
     }
 
     public int getValue() {
