@@ -31,6 +31,19 @@ public class Money {
         return money;
     }
 
+
+    public Money subtract(Money money) {
+        long value = this.money - money.toLong();
+        if (value < ZERO) {
+            throw new IllegalArgumentException(ERROR_INVALID_SUBTRACTION);
+        }
+        return new Money(value);
+    }
+
+    public Money multiply(int multiplicand) {
+        return new Money(this.money * multiplicand);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -44,15 +57,4 @@ public class Money {
         return Objects.hash(money);
     }
 
-    public Money subtract(Money money) {
-        long value = this.money - money.toLong();
-        if (value < ZERO) {
-            throw new IllegalArgumentException(ERROR_INVALID_SUBTRACTION);
-        }
-        return new Money(value);
-    }
-
-    public Money multiply(int multiplicand) {
-        return new Money(this.money * multiplicand);
-    }
 }

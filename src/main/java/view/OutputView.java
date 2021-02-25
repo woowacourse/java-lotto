@@ -52,7 +52,7 @@ public class OutputView {
         List<Rank> ranks = Arrays.asList(Rank.values());
         Collections.reverse(ranks);
         System.out.print(MESSAGE_STATISTICS);
-        for (Rank rank: ranks) {
+        for (Rank rank : ranks) {
             printMatchCount(rank, lottoResult.get(rank));
         }
     }

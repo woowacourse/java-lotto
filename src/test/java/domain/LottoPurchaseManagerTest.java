@@ -10,6 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoPurchaseManagerTest {
     private LottoPurchaseManager lottoPurchaseManager;
+
     @BeforeEach
     void setUp() {
         this.lottoPurchaseManager = new LottoPurchaseManager(new Money(3_000));
@@ -26,7 +27,7 @@ public class LottoPurchaseManagerTest {
     @DisplayName("로또 숫자의 리스트를 넘기면 Budget에서 금액을 차감하고 로또를 수동 구매한다.")
     @Test
     public void purchaseLottoTicketManuallyTest() {
-        LottoTicket lottoTicket = lottoPurchaseManager.buyManually(Arrays.asList(1,2,3,4,5,6));
+        LottoTicket lottoTicket = lottoPurchaseManager.buyManually(Arrays.asList(1, 2, 3, 4, 5, 6));
         assertThat(lottoTicket).isInstanceOf(LottoTicket.class);
         assertThat(lottoPurchaseManager.remainBudget()).isEqualTo(new Money(2_000));
     }
