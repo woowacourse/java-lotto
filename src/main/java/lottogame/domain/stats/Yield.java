@@ -9,8 +9,8 @@ public class Yield {
         this.yield = yield;
     }
 
-    public static Yield of(int totalWinningAmount, Money money) {
-        float yield = (float) totalWinningAmount / money.value();
+    public static Yield of(Money totalPrizeMoney, Money spendedNoney) {
+        float yield = (float) totalPrizeMoney.value() / spendedNoney.value();
         return new Yield(yield);
     }
 

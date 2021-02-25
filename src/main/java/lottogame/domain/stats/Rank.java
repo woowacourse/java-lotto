@@ -10,8 +10,8 @@ public enum Rank {
     SECOND(5, 30_000_000),
     FIRST(6, 2_000_000_000);
 
-    private int count;
-    private int money;
+    private final int count;
+    private final int money;
 
     Rank(int count, int money) {
         this.count = count;

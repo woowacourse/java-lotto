@@ -27,7 +27,7 @@ public class Application {
 
     private static void summarizeResults(LottoGame lottoGame, Money money) {
         LottoResults lottoResults = lottoGame.results();
-        Yield yield = Yield.of(lottoResults.calculateWinningAmount(), money);
+        Yield yield = Yield.of(lottoResults.totalPrizeMoney(), money);
         OutputView.printResult(lottoResults.values(), yield.value());
     }
 

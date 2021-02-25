@@ -15,7 +15,7 @@ class QuantityTest {
     @DisplayName("같은 값을 가지면 같은 객체인지 확인")
     void of1() {
         Quantity quantity = Quantity.of("10");
-        assertEquals(quantity, Quantity.of("10"));
+        assertEquals(Quantity.of("10"), quantity);
     }
 
     @ParameterizedTest
@@ -32,7 +32,7 @@ class QuantityTest {
     @CsvSource(value = {"0:0", "1:1", "5:5", "10:10", "500:500"}, delimiter = ':')
     void of3(String actualValue, int expectedValue) {
         Quantity quantity = Quantity.of(actualValue);
-        assertEquals(quantity.value(), expectedValue);
+        assertEquals(expectedValue, quantity.value());
     }
 
     @ParameterizedTest
@@ -42,7 +42,7 @@ class QuantityTest {
         Money money = Money.of(moneyInput);
         Quantity manualQuantity = Quantity.of(quantityInput);
         Quantity autoQuantity = Quantity.from(money, manualQuantity);
-        assertEquals(autoQuantity.value(), expectedValue);
+        assertEquals(expectedValue, autoQuantity.value());
     }
 
     @Test

@@ -16,6 +16,10 @@ public class Money {
         return new Money(Integer.parseInt(money));
     }
 
+    public static Money of(int money) {
+        return new Money(money);
+    }
+
     private static void validate(String money) {
         if (!NUMBER_PATTERN.matcher(money).matches()) {
             throw new IllegalArgumentException("금액은 1,000이상이어야 합니다.");

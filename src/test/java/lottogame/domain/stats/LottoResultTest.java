@@ -2,12 +2,13 @@ package lottogame.domain.stats;
 
 import lottogame.domain.lotto.*;
 import lottogame.utils.ManualLottoGenerator;
-import lottogame.view.OutputView;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
+
+// 나중에 지울 것
 class LottoResultTest {
     private ManualLottoGenerator manualLottoGenerator = new ManualLottoGenerator("1, 2, 3, 4, 5, 6");
     private WinningLotto winningLotto = new WinningLotto(manualLottoGenerator.generateLotto(), "7");
@@ -33,6 +34,6 @@ class LottoResultTest {
         List<Lotto> lottos = manualLottoGenerator.generateLottos();
         LottoGame lottoGame = new LottoGame(lottos, winningLotto);
         LottoResults lottoResults = lottoGame.results();
-        OutputView.printResult(lottoResults.values(), lottoResults.calculateYield(Money.of("14000")));
+//        
     }
 }

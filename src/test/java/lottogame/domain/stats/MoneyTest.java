@@ -14,7 +14,7 @@ class MoneyTest {
     @DisplayName("같은 값을 가지면 같은 객체인지 확인")
     void of1() {
         Money money = Money.of("14000");
-        assertEquals(money, Money.of("14000"));
+        assertEquals(Money.of("14000"), money);
     }
 
     @ParameterizedTest
@@ -31,6 +31,6 @@ class MoneyTest {
     @CsvSource(value = {"1000:1000", "1001:1001", "5000:5000", "10000:10000", "50000:50000"}, delimiter = ':')
     void of3(String actualValue, int expectedValue) {
         Money money = Money.of(actualValue);
-        assertEquals(money.value(), expectedValue);
+        assertEquals(expectedValue, money.value());
     }
 }
