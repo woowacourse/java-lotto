@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LottoCountTest {
-
     @Test
     @DisplayName("로또 개수 객체 생성")
     void lottoCountCreate() {

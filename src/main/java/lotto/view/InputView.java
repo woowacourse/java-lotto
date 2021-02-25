@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.lottogame.LottoCount;
 import lotto.lottogame.ManualLottoCount;
 import lotto.lottoticket.BonusBall;
 import lotto.lottoticket.WinnerTicket;
@@ -25,8 +26,8 @@ public class InputView {
         return new BonusBall(scanner.nextLine(), winnerTicket);
     }
 
-    public static ManualLottoCount inputManualLottoCount() {
-        return new ManualLottoCount(scanner.nextLine());
+    public static ManualLottoCount inputManualLottoCount(LottoCount lottoCount) {
+        return new ManualLottoCount(scanner.nextLine(), lottoCount);
     }
 
     public static String inputTicket() {
