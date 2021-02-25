@@ -19,8 +19,8 @@ public class Lottos {
         return new ArrayList<>(lottos);
     }
 
-    public void addManuallyCreatedTickets(List<Lotto> lottos) {
-        lottos.addAll(lottos);
+    public void addManuallyCreatedTickets(List<Lotto> manuallyCreatedLottos) {
+        lottos.addAll(manuallyCreatedLottos);
     }
 
     public void generateTicketAutomatically(int counts) {

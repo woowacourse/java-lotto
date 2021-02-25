@@ -1,7 +1,7 @@
 package lotto.view;
 
-import lotto.domain.LottoNumber;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.exception.LottoCustomException;
 
 import java.util.*;
