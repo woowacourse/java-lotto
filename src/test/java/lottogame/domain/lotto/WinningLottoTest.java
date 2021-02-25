@@ -1,36 +1,42 @@
 package lottogame.domain.lotto;
 
+import lottogame.utils.ManualLottoGenerator;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class WinningLottoTest {
-    @Test
-    void 객체_생성() {
-        Lotto lotto = new Lotto(Arrays.asList(
-                LottoNumber.of(1), LottoNumber.of(2),
-                LottoNumber.of(3), LottoNumber.of(4),
-                LottoNumber.of(5), LottoNumber.of(6)));
-        WinningLotto winningLotto = new WinningLotto(lotto, LottoNumber.of("7"));
-        assertThat(winningLotto).isEqualTo(new WinningLotto(lotto, LottoNumber.of("7")));
+    private ManualLottoGenerator manualLottoGenerator;
+    private Lotto lotto;
+    private LottoNumber bonusNumber;
+    private WinningLotto winningLotto;
+
+    @BeforeEach
+    void setUp() {
+        manualLottoGenerator = new ManualLottoGenerator("1, 2, 3, 4, 5, 6");
+        lotto = manualLottoGenerator.generateLotto();
+        bonusNumber = LottoNumber.of(7);
+        winningLotto = new WinningLotto(lotto, bonusNumber);
     }
 
     @Test
-    void 중복_체크() {
-        assertThatThrownBy(() -> new WinningLotto(new Lotto(Arrays.asList(
-                LottoNumber.of(1), LottoNumber.of(2),
-                LottoNumber.of(3), LottoNumber.of(4),
-                LottoNumber.of(6), LottoNumber.of(6))), LottoNumber.of("7")))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또번호는 서로 달라야합니다.");
+    @DisplayName("같은 값을 가지면 같은 객체인지 확인")
+    void constructor1() {
+        manualLottoGenerator = new ManualLottoGenerator("1, 2, 3, 4, 5, 6");
+        lotto = manualLottoGenerator.generateLotto();
+        bonusNumber = LottoNumber.of(7);
+        WinningLotto newWinningLotto = new WinningLotto(lotto, bonusNumber);
+        assertEquals(newWinningLotto, winningLotto);
+    }
 
-        assertThatThrownBy(() -> new WinningLotto(new Lotto(Arrays.asList(
-                LottoNumber.of(1), LottoNumber.of(2),
-                LottoNumber.of(3), LottoNumber.of(4),
-                LottoNumber.of(5), LottoNumber.of(6))), LottoNumber.of("6")))
+    @Test
+    @DisplayName("로또번호에 보너스번호와 같은 숫자가 있으면 예외가 발행하는지 확인")
+    void constructor2() {
+        bonusNumber = LottoNumber.of(6);
+        assertThatThrownBy(() -> new WinningLotto(lotto, bonusNumber))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("보너스번호는 로또번호와 달라야 합니다.");
     }
