@@ -16,10 +16,19 @@ public class LottoGame {
         return myLottos;
     }
 
-    public void buyLottos(Money money, LottoGenerator lottoGenerator) {
+    public LottoQuantity createLottoQuantity(Money money, String fixedLottoQuantity) throws IllegalArgumentException {
+        return new LottoQuantity(money, fixedLottoQuantity);
+    }
+
+    public void buyLottos(Money money, LottoGenerator lottoGenerator) throws IllegalArgumentException {
         IntStream.range(0, money.countLotto())
                 .mapToObj(i -> lottoGenerator.generate())
                 .forEach(myLottos::add);
+    }
+
+    public WinningLotto createWinningLotto(LottoNumbers lottoNumbers, LottoNumber bonusNumber)
+            throws IllegalArgumentException {
+        return new WinningLotto(new Lotto(lottoNumbers), bonusNumber);
     }
 
     public LottoGameResult calculateLottoGameResult(WinningLotto winningLotto) {
