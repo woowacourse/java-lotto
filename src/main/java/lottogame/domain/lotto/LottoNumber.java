@@ -1,7 +1,5 @@
 package lottogame.domain.lotto;
 
-import lottogame.utils.InvalidWinningLottoException;
-
 import java.util.Objects;
 import java.util.regex.Pattern;
 
@@ -20,12 +18,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public static LottoNumber of(String number) {
         validateString(number);
-        return new LottoNumber(Integer.parseInt(number));
+        return LottoNumber.of(Integer.parseInt(number));
     }
 
     private static void validateString(String number) {
         if (!BONUS_NUMBER_PATTERN.matcher(number).matches()) {
-            throw new InvalidWinningLottoException();
+            throw new IllegalArgumentException();
         }
     }
 

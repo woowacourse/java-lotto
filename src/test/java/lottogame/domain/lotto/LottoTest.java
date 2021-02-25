@@ -27,10 +27,8 @@ class LottoTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"8, 21, 23, 41, 42, 43:7:6",
-            "3, 5, 11, 16, 32, 38:8:0",
-            "7, 11, 16, 35, 36, 44:5:0",
-            "1, 8, 11, 31, 41, 42:3:3"}, delimiter = ':')
+    @CsvSource(value = {"8, 21, 23, 41, 42, 43:7:6", "3, 5, 11, 16, 32, 38:8:0",
+            "7, 11, 16, 35, 36, 44:5:0", "1, 8, 11, 31, 41, 42:3:3"}, delimiter = ':')
     void 일치하는_번호_갯수(String numbers, String bonus, int matchCount) {
         ManualLottoGenerator manualLottoGenerator = new ManualLottoGenerator(numbers);
         WinningLotto winningLotto = new WinningLotto(manualLottoGenerator.generateLotto(), bonus);

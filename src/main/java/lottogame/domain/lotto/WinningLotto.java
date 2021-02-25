@@ -1,7 +1,5 @@
 package lottogame.domain.lotto;
 
-import lottogame.utils.RedundantNumbersException;
-
 import java.util.Objects;
 
 public class WinningLotto {
@@ -16,7 +14,7 @@ public class WinningLotto {
 
     private void isDuplicate(Lotto lotto, LottoNumber bonusNumber) {
         if (lotto.contains(bonusNumber)) {
-            throw new RedundantNumbersException();
+            throw new IllegalArgumentException("같은 번호를 입력하셨습니다.");
         }
     }
 

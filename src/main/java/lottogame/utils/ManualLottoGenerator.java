@@ -24,7 +24,7 @@ public class ManualLottoGenerator implements LottoGenerator {
 
     private void validate(String numbers) {
         if (!NUMBER_PATTERN.matcher(numbers).matches()) {
-            throw new InvalidWinningLottoException();
+            throw new IllegalArgumentException("당첨 번호를 잘못 입력하셨습니다.");
         }
     }
 
@@ -38,7 +38,7 @@ public class ManualLottoGenerator implements LottoGenerator {
     private List<LottoNumber> parse(String ticketString) {
         String[] numberStrings = ticketString.split(DELIMITER);
         return Arrays.stream(numberStrings)
-                .map(numberString -> LottoNumber.of(Integer.parseInt(numberString)))
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
     }
 

@@ -1,7 +1,5 @@
 package lottogame.domain.stats;
 
-import lottogame.utils.InvalidMoneyException;
-
 import java.util.Objects;
 import java.util.regex.Pattern;
 
@@ -20,7 +18,7 @@ public class Money {
 
     private void validate(String money) {
         if (!NUMBER_PATTERN.matcher(money).matches()) {
-            throw new InvalidMoneyException();
+            throw new IllegalArgumentException("금액은 1,000이상이어야 합니다.");
         }
     }
 

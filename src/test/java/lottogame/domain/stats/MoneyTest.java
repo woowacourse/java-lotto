@@ -1,6 +1,5 @@
 package lottogame.domain.stats;
 
-import lottogame.utils.InvalidMoneyException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -18,8 +17,8 @@ class MoneyTest {
     @ParameterizedTest
     @ValueSource(strings = {"4가", "-1000", "-기나"})
     void 잘못된_금액_입력(String input) {
-        assertThatThrownBy(() ->
-                new Money(input)
-        ).isInstanceOf(InvalidMoneyException.class);
+        assertThatThrownBy(() -> new Money(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("금액은 1,000이상이어야 합니다.");
     }
 }

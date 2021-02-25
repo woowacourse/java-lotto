@@ -29,8 +29,7 @@ class LottoResultTest {
                 "2, 8, 9, 18, 19, 21",
                 "13, 14, 18, 21, 23, 35",
                 "17, 21, 29, 37, 42, 45",
-                "3, 8, 27, 30, 35, 44"
-        ));
+                "3, 8, 27, 30, 35, 44"));
         List<Lotto> lottos = manualLottoGenerator.generateLottos();
         LottoGame lottoGame = new LottoGame(lottos, winningLotto);
         LottoResults lottoResults = lottoGame.results();
