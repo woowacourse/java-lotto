@@ -1,6 +1,6 @@
 package lottogame.domain.lotto;
 
-import lottogame.domain.Rank;
+import lottogame.domain.stats.Rank;
 import lottogame.domain.stats.LottoResults;
 
 import java.util.*;

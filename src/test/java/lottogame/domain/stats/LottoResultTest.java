@@ -3,7 +3,6 @@ package lottogame.domain.stats;
 import lottogame.domain.lotto.*;
 import lottogame.utils.ManualLottoGenerator;
 import lottogame.view.OutputView;
-import lottogame.domain.Money;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -15,7 +14,8 @@ class LottoResultTest {
 
     @Test
     void 로또_결과_테스트() {
-        manualLottoGenerator = new ManualLottoGenerator(Arrays.asList(
+        manualLottoGenerator = new ManualLottoGenerator();
+        manualLottoGenerator.addResources(Arrays.asList(
                 "8, 21, 23, 41, 42, 43",
                 "3, 5, 11, 16, 32, 38",
                 "7, 11, 16, 35, 36, 44",
@@ -32,8 +32,8 @@ class LottoResultTest {
                 "3, 8, 27, 30, 35, 44"
         ));
         List<Lotto> lottos = manualLottoGenerator.generateLottos();
-        LottoGame lottoGame = new LottoGame(lottos);
-        LottoResults lottoResults = lottoGame.Results(winningLotto);
+        LottoGame lottoGame = new LottoGame(lottos, winningLotto);
+        LottoResults lottoResults = lottoGame.results();
         OutputView.printResult(lottoResults.values(), lottoResults.calculateYield(new Money("14000")));
     }
 }

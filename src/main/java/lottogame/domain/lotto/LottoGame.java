@@ -6,16 +6,14 @@ import java.util.List;
 
 public class LottoGame {
     private Lottos lottos;
+    private WinningLotto winningLotto;
 
-    public LottoGame(List<Lotto> lottos) {
+    public LottoGame(List<Lotto> lottos, WinningLotto winningLotto) {
         this.lottos = new Lottos(lottos);
+        this.winningLotto = winningLotto;
     }
 
-    public LottoResults Results(WinningLotto winningLotto) {
+    public LottoResults results() {
         return lottos.matchLottos(winningLotto);
-    }
-
-    public Lottos lottos() {
-        return lottos;
     }
 }

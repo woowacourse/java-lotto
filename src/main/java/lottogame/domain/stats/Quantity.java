@@ -1,10 +1,11 @@
-package lottogame.domain;
+package lottogame.domain.stats;
 
 import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class Quantity {
     private static final Pattern QUANTITY_PATTERN = Pattern.compile("^(0|[1-9][0-9]*)$");
+    private static final int LOTTO_PRICE = 1000;
     private final int quantity;
 
     private Quantity(int quantity) {
@@ -33,6 +34,10 @@ public class Quantity {
         }
     }
 
+    public static Quantity from(Money money, Quantity manualQuantity) {
+        return Quantity.ofInt(money.getMoney() / LOTTO_PRICE).subtract(manualQuantity);
+    }
+
     public int value() {
         return quantity;
     }
@@ -52,5 +57,9 @@ public class Quantity {
     @Override
     public int hashCode() {
         return Objects.hash(quantity);
+    }
+
+    public boolean isZero() {
+        return quantity == 0;
     }
 }

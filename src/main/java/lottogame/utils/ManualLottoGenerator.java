@@ -13,16 +13,13 @@ public class ManualLottoGenerator implements LottoGenerator {
     private static final String DELIMITER = ", ";
     private static final Pattern NUMBER_PATTERN = Pattern.compile("^(\\d{1,2},\\s){5}\\d{1,2}$");
 
-    private final List<String> ticketStrings;
+    private List<String> ticketStrings;
 
-    public ManualLottoGenerator(List<String> ticketStrings) {
-        ticketStrings.forEach(this::validate);
-        this.ticketStrings = ticketStrings;
+    public ManualLottoGenerator() {
     }
 
     public ManualLottoGenerator(String ticketString) {
-        validate(ticketString);
-        this.ticketStrings = new ArrayList<>(Arrays.asList(ticketString));
+        ticketStrings = new ArrayList<>(Arrays.asList(ticketString));
     }
 
     private void validate(String numbers) {
@@ -47,5 +44,10 @@ public class ManualLottoGenerator implements LottoGenerator {
 
     public Lotto generateLotto() {
         return new Lotto(parse(ticketStrings.get(0)));
+    }
+
+    public void addResources(List<String> ticketStrings) {
+        ticketStrings.forEach(this::validate);
+        this.ticketStrings = ticketStrings;
     }
 }

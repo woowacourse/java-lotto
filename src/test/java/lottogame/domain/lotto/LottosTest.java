@@ -1,8 +1,8 @@
 package lottogame.domain.lotto;
 
-import lottogame.domain.Money;
-import lottogame.domain.Quantity;
-import lottogame.domain.Rank;
+import lottogame.domain.stats.Money;
+import lottogame.domain.stats.Quantity;
+import lottogame.domain.stats.Rank;
 import lottogame.domain.stats.LottoResults;
 import lottogame.utils.AutoLottoGenerator;
 import lottogame.utils.ManualLottoGenerator;
@@ -53,8 +53,8 @@ class LottosTest {
 
     private void matchTest(String[] lottoNumbersGroup, WinningLotto winningLotto, String money, int[] expectedCount) {
         List<Lotto> lottos = makeLottos(lottoNumbersGroup);
-        LottoGame lottoGame = new LottoGame(lottos);
-        LottoResults lottoResults = lottoGame.Results(winningLotto);
+        LottoGame lottoGame = new LottoGame(lottos, winningLotto);
+        LottoResults lottoResults = lottoGame.results();
         Map<Rank, Integer> sameResult = new LinkedHashMap<>();
 
         sameResult.put(Rank.FIFTH, expectedCount[0]);

@@ -1,20 +1,18 @@
 package lottogame.domain.stats;
 
-import lottogame.domain.Money;
-import lottogame.domain.Rank;
-
 import java.util.*;
 
 public class LottoResults {
     private Map<Rank, Integer> lottoResults;
 
     public LottoResults(Map<Rank, Integer> lottoResults) {
-        lottoResults.remove(Rank.NOT_FOUND);
         this.lottoResults = lottoResults;
     }
 
     public Map<Rank, Integer> values() {
-        return new EnumMap<>(lottoResults);
+        Map<Rank, Integer> lottoResults = new EnumMap<>(this.lottoResults);
+        lottoResults.remove(Rank.NOT_FOUND);
+        return lottoResults;
     }
 
     public int calculateWinningAmount() {

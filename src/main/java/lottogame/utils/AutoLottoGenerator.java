@@ -1,6 +1,6 @@
 package lottogame.utils;
 
-import lottogame.domain.Quantity;
+import lottogame.domain.stats.Quantity;
 import lottogame.domain.lotto.Lotto;
 import lottogame.domain.lotto.LottoNumber;
 

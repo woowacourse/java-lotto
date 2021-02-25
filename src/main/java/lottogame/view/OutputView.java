@@ -1,6 +1,6 @@
 package lottogame.view;
 
-import lottogame.domain.Rank;
+import lottogame.domain.stats.Rank;
 import lottogame.domain.lotto.Lotto;
 import lottogame.domain.lotto.LottoNumber;
 
