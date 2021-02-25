@@ -50,26 +50,20 @@ public class LottoController {
         return lottoTickets;
     }
 
-    private void buyManualTickets(LottoTickets lottoTickets, int count) {
-        if (count > 0) {
-            OutputView.printInputFixedTicketMessage();
-            lottoTickets.addTickets(inputManualTickets(count));
-        }
+    private WinningLotto inputWinningLotto() {
+        OutputView.printWinningNumbers();
+        LottoTicket lottoTicket = inputManualTicket();
+        LottoNumber bonus = inputBonus(lottoTicket);
+        return new WinningLotto(lottoTicket, bonus);
     }
 
-    private void buyRandomTickets(LottoTickets lottoTickets, int count) {
-        if (count > 0) {
-            lottoTickets.addTickets(inputRandomTickets(count));
-        }
-    }
+    private void showResult(LottoTickets lottoTickets, WinningLotto winningLotto, Money money) {
+        LottoResult lottoResult = new LottoResult();
+        lottoResult.checkWinnings(lottoTickets, winningLotto);
 
-    private List<LottoTicket> inputRandomTickets(int count) {
-        List<LottoTicket> tickets = new ArrayList<>();
-        IntStream.rangeClosed(1, count)
-            .forEach(index -> {
-                tickets.add(new LottoTicket(RandomUtils.generateNumbers()));
-            });
-        return tickets;
+        OutputView.printWinningResultTitle();
+        OutputView.printProfit(money.calculateProfit(lottoResult.calculateTotalReward()),
+            lottoResult.getResults());
     }
 
     private int inputManualTicketsCount(Money money) {
@@ -81,6 +75,13 @@ public class LottoController {
         } catch (LottoCustomException exception) {
             OutputView.printErrorMessage(exception);
             return inputManualTicketsCount(money);
+        }
+    }
+
+    private void buyManualTickets(LottoTickets lottoTickets, int count) {
+        if (count > 0) {
+            OutputView.printInputFixedTicketMessage();
+            lottoTickets.addTickets(inputManualTickets(count));
         }
     }
 
@@ -102,11 +103,19 @@ public class LottoController {
         }
     }
 
-    private WinningLotto inputWinningLotto() {
-        OutputView.printWinningNumbers();
-        LottoTicket lottoTicket = inputManualTicket();
-        LottoNumber bonus = inputBonus(lottoTicket);
-        return new WinningLotto(lottoTicket, bonus);
+    private void buyRandomTickets(LottoTickets lottoTickets, int count) {
+        if (count > 0) {
+            lottoTickets.addTickets(inputRandomTickets(count));
+        }
+    }
+
+    private List<LottoTicket> inputRandomTickets(int count) {
+        List<LottoTicket> tickets = new ArrayList<>();
+        IntStream.rangeClosed(1, count)
+            .forEach(index -> {
+                tickets.add(new LottoTicket(RandomUtils.generateNumbers()));
+            });
+        return tickets;
     }
 
     private LottoNumber inputBonus(LottoTicket lottoTicket) {
@@ -119,14 +128,5 @@ public class LottoController {
             OutputView.printErrorMessage(exception);
             return inputBonus(lottoTicket);
         }
-    }
-
-    private void showResult(LottoTickets lottoTickets, WinningLotto winningLotto, Money money) {
-        LottoResult lottoResult = new LottoResult();
-        lottoResult.checkWinnings(lottoTickets, winningLotto);
-
-        OutputView.printWinningResultTitle();
-        OutputView.printProfit(money.calculateProfit(lottoResult.calculateTotalReward()),
-            lottoResult.getResults());
     }
 }
