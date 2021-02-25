@@ -19,6 +19,10 @@ public class LottoCount {
         this(money.divideMoney(Ticket.PRICE));
     }
 
+    private LottoCount(int value) {
+        this(String.valueOf(value));
+    }
+
     public LottoCount(String value) {
         this.lottoCount = validate(value);
     }
@@ -40,7 +44,7 @@ public class LottoCount {
     }
 
     public LottoCount decreaseOne() {
-        return new LottoCount(String.valueOf(lottoCount - ONE_COUNT));
+        return new LottoCount(lottoCount - ONE_COUNT);
     }
 
     public LottoCount consumeTicket(LottoCount count) {
@@ -55,7 +59,7 @@ public class LottoCount {
     }
 
     private LottoCount remainCount(int lottoCount) {
-        return new LottoCount(String.valueOf(lottoCount - this.lottoCount));
+        return new LottoCount(lottoCount - this.lottoCount);
     }
 
     public boolean canPurchase(int currentCount) {
