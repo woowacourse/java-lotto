@@ -21,7 +21,7 @@ public class OutputView {
     private static final String BONUS_BALL_COLLECT = ", 보너스 볼 일치";
     private static final String TOTAL_PROFIT_RATE = "총 수익률은 %.2f 입니다.";
     private static final String NUM_MANUAL_LOTTO = "수동으로 구매할 로또 수를 입력해 주세요.";
-    private static final String MANUAL_LOTTO_PRINT = "수동으로 구매한 번호를 입력해 주세요";
+    private static final String MANUAL_LOTTO_PRINT = "수동으로 구매할 번호를 입력해 주세요";
 
     public static void numPurchasedLotto(Integer numLotto) {
         System.out.println(numLotto + SUFFIX_PURCHASE_SUCCESS);
