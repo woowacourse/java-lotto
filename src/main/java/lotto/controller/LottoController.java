@@ -39,10 +39,6 @@ public class LottoController {
     }
 
     private Purchase inputManualPurchase(Money money) {
-        if (money.isEmpty()) {
-            return new Purchase(money, Money.ZERO);
-        }
-
         try {
             return new Purchase(money, inputView.inputCountOfPurchaseManually());
         } catch (LottoCustomException e) {

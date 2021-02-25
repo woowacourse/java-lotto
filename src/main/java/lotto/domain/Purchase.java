@@ -33,7 +33,7 @@ public class Purchase {
     }
 
     private void validate(int manualPurchase) {
-        if (money.isCountExceedLimit(manualPurchase)) {
+        if (money.exceedsLimit(manualPurchase)) {
             throw new LottoCustomException("수동으로 구매할 로또의 개수가 금액을 초과합니다.");
         }
     }

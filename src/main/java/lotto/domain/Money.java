@@ -28,16 +28,12 @@ public class Money {
         return money % MONEY_UNIT;
     }
 
-    public boolean isCountExceedLimit(int checkMoney) {
-        return checkMoney * MONEY_UNIT > money;
+    public boolean exceedsLimit(int inputMoney) {
+        return inputMoney * MONEY_UNIT > money;
     }
 
     public int getMoney() {
         return money;
-    }
-
-    public boolean isEmpty() {
-        return money == ZERO;
     }
 
     private void validateMoneyLimit(final int money) {
