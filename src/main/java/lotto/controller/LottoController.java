@@ -1,10 +1,10 @@
 package lotto.controller;
 
-import lotto.domain.LottoAmount;
 import lotto.domain.LottoResultStatistics;
-import lotto.domain.ManualAmount;
 import lotto.domain.lottos.LottoTicket;
 import lotto.domain.lottos.LottoTickets;
+import lotto.domain.lottos.amount.LottoAmount;
+import lotto.domain.lottos.amount.ManualAmount;
 import lotto.domain.lottos.winnerlotto.LottoBonusNumber;
 import lotto.domain.lottos.winnerlotto.LottoWinner;
 import lotto.domain.money.Money;

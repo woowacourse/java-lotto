@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.lottos.amount;
 
 import lotto.domain.money.Money;
 
@@ -9,7 +9,7 @@ public class ManualAmount {
 
     private final int value;
 
-    public ManualAmount(final String input,final Money money) {
+    public ManualAmount(final String input, final Money money) {
         int value = parseInt(input);
         validateManualCount(value, money);
         this.value = value;

@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.lottos.amount;
 
 import lotto.domain.money.Money;
 import org.junit.jupiter.api.BeforeEach;

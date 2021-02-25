@@ -1,10 +1,10 @@
 package lotto.view;
 
-import lotto.domain.LottoAmount;
 import lotto.domain.LottoResultStatistics;
 import lotto.domain.lottos.LottoNumber;
 import lotto.domain.lottos.LottoTicket;
 import lotto.domain.lottos.LottoTickets;
+import lotto.domain.lottos.amount.LottoAmount;
 import lotto.domain.lottos.rank.LottoRank;
 import lotto.domain.money.Money;
 

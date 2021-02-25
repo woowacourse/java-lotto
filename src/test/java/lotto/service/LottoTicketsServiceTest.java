@@ -1,9 +1,9 @@
 package lotto.service;
 
-import lotto.domain.LottoAmount;
-import lotto.domain.ManualAmount;
 import lotto.domain.lottos.LottoTicket;
 import lotto.domain.lottos.LottoTickets;
+import lotto.domain.lottos.amount.LottoAmount;
+import lotto.domain.lottos.amount.ManualAmount;
 import lotto.domain.money.Money;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
