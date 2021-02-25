@@ -44,7 +44,7 @@ public class MoneyTest {
     void limit(){
         Money money = new Money(5000);
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> money.checkLimit(10));
+            .isThrownBy(() -> money.buyWithinLimit(10));
     }
 
     @DisplayName("구입 금액과 리워드를 이용해 수익률을 계산할 수 있다.")

@@ -31,4 +31,12 @@ class WinningLottoTest {
         assertThat(winningLotto2.hasBonus(lottoTicket)).isFalse();
     }
 
+    @DisplayName("당첨 로또는 보너스볼과 숫자가 중복되어선 안된다.")
+    @Test
+    void duplicate(){
+        LottoNumber bonusBall = new LottoNumber(3);
+        assertThatIllegalArgumentException()
+            .isThrownBy(()->new WinningLotto(winningTicket, bonusBall));
+    }
+
 }

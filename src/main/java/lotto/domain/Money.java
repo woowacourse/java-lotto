@@ -7,6 +7,7 @@ public class Money {
 
     public static final String MONEY_LESS_THAN_MIN_MONEY_ERROR_MESSAGE = "입력 금액은 1000원 이상이어야 합니다.";
     public static final String MANUAL_TICKETS_OVER_LIMIT_ERROR_MESSAGE = "구입하려는 수동 티켓 갯수가 구입하려는 티켓 수보다 많습니다.";
+    public static final String MANUAL_TICKETS_UNDER_ZERO_ERROR_MESSAGE = "구매 티켓 수는 음수가 될 수 없습니다.";
     private static final int MIN_MONEY_UNIT = 1_000;
 
     private final int money;
@@ -30,14 +31,18 @@ public class Money {
         return money % MIN_MONEY_UNIT;
     }
 
-    public float calculateProfit(int totalReward) {
-        return (float) totalReward / (float) money;
-    }
-
-    public void checkLimit(int tickets) {
+    public int buyWithinLimit(int tickets) {
+        if(0 > tickets) {
+            throw new LottoCustomException(MANUAL_TICKETS_UNDER_ZERO_ERROR_MESSAGE);
+        }
         if (countTickets() < tickets) {
             throw new LottoCustomException(MANUAL_TICKETS_OVER_LIMIT_ERROR_MESSAGE);
         }
+        return tickets;
+    }
+
+    public float calculateProfit(int totalReward) {
+        return (float) totalReward / (float) money;
     }
 
     @Override
@@ -56,4 +61,5 @@ public class Money {
     public int hashCode() {
         return Objects.hash(money);
     }
+
 }
