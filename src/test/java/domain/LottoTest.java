@@ -28,17 +28,4 @@ class LottoTest {
         //then
         assertThat(lotto).isNotNull();
     }
-
-    @DisplayName("구입금액에 따라 Lotto 개수를 반환하는 기능")
-    @Test
-    void calculateLottoNumber() {
-        //given
-        Money money = new Money(1_000);
-
-        //when
-        long lottoCount = Lotto.getNumberOfAvailablePurchases(money);
-
-        //then
-        assertThat(lottoCount).isEqualTo(1);
-    }
 }

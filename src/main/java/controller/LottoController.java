@@ -1,5 +1,6 @@
 package controller;
 
+import domain.Money;
 import domain.lottoGame.LottoGame;
 import domain.lottoGame.LottoResult;
 import domain.lottoGame.Lottos;
@@ -10,7 +11,8 @@ public class LottoController {
     public static void main(String[] args) {
         LottoGame lottoGame = new LottoGame();
 
-        Lottos purchasedLottos = lottoGame.purchaseLottos(InputView.inputPurchaseMoney());
+        int count = lottoGame.getNumberOfAvailablePurchases(InputView.inputPurchaseMoney());
+        Lottos purchasedLottos = lottoGame.purchaseLottos(count);
         OutputView.printPurchaseInformation(purchasedLottos);
 
         LottoResult result = lottoGame.calculateResult(InputView.inputWinningLotto(), purchasedLottos);

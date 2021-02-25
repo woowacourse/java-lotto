@@ -21,14 +21,6 @@ public class Lotto {
                 .collect(Collectors.toList())));
     }
 
-    public static int getNumberOfAvailablePurchases(Money money) {
-        return money.divide(PRICE);
-    }
-
-    public static Money getPurchasedAmount(int purchaseCount) {
-        return new Money(PRICE * purchaseCount);
-    }
-
     public boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
