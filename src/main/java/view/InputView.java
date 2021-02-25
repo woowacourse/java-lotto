@@ -14,8 +14,8 @@ public class InputView {
     private static final String ERROR_NULL = "null 이 입력되었습니다.";
     private static final String ERROR_NOT_INTEGER = "정수가 아닙니다.";
 
-    public static String receivePrice() {
-        return receiveInput(RECEIVE_PRICE_MESSAGE);
+    public static int receivePayment() {
+        return parseToInteger(receiveInput(RECEIVE_PRICE_MESSAGE));
     }
 
     public static List<Integer> receiveWinningNumbers() {
@@ -27,7 +27,7 @@ public class InputView {
     }
 
     private static int receiveNumber(final String message) {
-        return createNumber(receiveInputNotNull(message));
+        return parseToInteger(receiveInputNotNull(message));
     }
 
     private static List<Integer> receiveNumbers(final String message) {
@@ -46,7 +46,7 @@ public class InputView {
         }
     }
 
-    private static int createNumber(final String userInput) {
+    private static int parseToInteger(final String userInput) {
         try {
             return Integer.parseInt(userInput);
         } catch (NumberFormatException e) {
