@@ -2,10 +2,7 @@ package lotto.ranking;
 
 import lotto.money.Money;
 
-import java.util.Collections;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static lotto.game.LottoCount.ZERO;
 
@@ -27,7 +24,7 @@ public class Statistics {
     }
 
     public double calculateProfit(Money purchaseMoney) {
-        return purchaseMoney.calculateProfit(new Money(getTotalPrize()));
+        return purchaseMoney.calculateProfit(getTotalPrize());
     }
 
     public int findRankingCount(Ranking ranking) {
