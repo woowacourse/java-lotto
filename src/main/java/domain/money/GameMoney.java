@@ -1,9 +1,11 @@
 package domain.money;
 
+import domain.lotto.Lotto;
 import domain.lotto.LottoBundle;
 import util.LottoGenerator;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class GameMoney {
     private static final int SINGLE_LOTTO_GAME_MONEY = 1000;
@@ -43,5 +45,15 @@ public class GameMoney {
         if (gameMoney.divide(new BigDecimal(SINGLE_LOTTO_GAME_MONEY)).intValue() < quantity) {
             throw new IllegalArgumentException("구입금액 이상으로 로또를 구매할 수 없습니다.");
         }
+    }
+
+    public LottoBundle buyLottoManually(final List<Lotto> lottoBoughtManually) {
+        final int numberOfLottoToBuy = gameMoney.divide(new BigDecimal(SINGLE_LOTTO_GAME_MONEY)).intValue();
+        calculateGameMoneyLeft(numberOfLottoToBuy);
+
+        final int numberOfAutoLottoToBuy = numberOfLottoToBuy - lottoBoughtManually.size();
+        System.out.println("numberOfAutoLottoToBuy = " + numberOfAutoLottoToBuy);
+        final LottoBundle lottoBundle = LottoGenerator.createRandomLottoBundle(lottoBoughtManually, numberOfAutoLottoToBuy);
+        return lottoBundle;
     }
 }

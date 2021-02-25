@@ -26,6 +26,16 @@ public class LottoGenerator {
         return new LottoBundle(lottos);
     }
 
+    public static LottoBundle createRandomLottoBundle(final List<Lotto> lotto, final int number) {
+        final List<Lotto> lottos = new ArrayList<>(lotto);
+        System.out.println("lottos = " + lottos);
+        for (int i = 0; i < number; i++) {
+            lottos.add(createRandomLotto());
+        }
+        System.out.println("lottos = " + lottos);
+        return new LottoBundle(lottos);
+    }
+
     private static Lotto createRandomLotto() {
         final List<LottoBall> lottoBalls = new ArrayList<>();
         IntStream intStream = new Random().ints(MIN_NUMBER, MAX_NUMBER + EXTRA_BOUND);
