@@ -1,7 +1,5 @@
-package domain;
+package domain.lotto;
 
-import domain.lotto.LottoTicket;
-import domain.lotto.Result;
 import java.util.Arrays;
 import java.util.List;
 

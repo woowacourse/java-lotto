@@ -1,10 +1,9 @@
-package domain;
+package domain.lotto;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import domain.lotto.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
