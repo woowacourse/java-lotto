@@ -3,6 +3,7 @@ package view;
 import domain.lotto.Lotto;
 import domain.lotto.LottoBundle;
 import domain.result.LottoRank;
+import domain.result.LottoResult;
 
 import java.util.List;
 import java.util.Map;
@@ -70,15 +71,19 @@ public class OutputView {
         System.out.println(BONUS_BALL_REQUEST);
     }
 
-    public static void printLottoResult(final Map<LottoRank, Integer> lottoResult) {
+    public static void printLottoResult(final LottoResult lottoResult) {
         printNewLine();
         System.out.println(LOTTO_RESULT_STATUS);
         System.out.println(LOTTO_RESULT_LINE);
-        System.out.println(String.format(LOTTO_RESULT_THREE_MATCH, lottoResult.get(LottoRank.THREE_MATCHES)));
-        System.out.println(String.format(LOTTO_RESULT_FOUR_MATCH, lottoResult.get(LottoRank.FOUR_MATCHES)));
-        System.out.println(String.format(LOTTO_RESULT_FIVE_MATCH, lottoResult.get(LottoRank.FIVE_MATCHES)));
-        System.out.println(String.format(LOTTO_RESULT_FIVE_AND_BONUS_MATCH, lottoResult.get(LottoRank.FIVE_AND_BONUS_MATCHES)));
-        System.out.println(String.format(LOTTO_RESULT_SIX_MATCH, lottoResult.get(LottoRank.SIX_MATCHES)));
+        printLottoRankResult(lottoResult.getLottoResult());
+    }
+
+    private static void printLottoRankResult(final Map<LottoRank, Integer> lottoRank) {
+        System.out.println(String.format(LOTTO_RESULT_THREE_MATCH, lottoRank.get(LottoRank.THREE_MATCHES)));
+        System.out.println(String.format(LOTTO_RESULT_FOUR_MATCH, lottoRank.get(LottoRank.FOUR_MATCHES)));
+        System.out.println(String.format(LOTTO_RESULT_FIVE_MATCH, lottoRank.get(LottoRank.FIVE_MATCHES)));
+        System.out.println(String.format(LOTTO_RESULT_FIVE_AND_BONUS_MATCH, lottoRank.get(LottoRank.FIVE_AND_BONUS_MATCHES)));
+        System.out.println(String.format(LOTTO_RESULT_SIX_MATCH, lottoRank.get(LottoRank.SIX_MATCHES)));
     }
 
     public static void printProfitRate(final double profitRate) {
