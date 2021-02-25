@@ -4,7 +4,9 @@ import lotto.domain.result.Prize;
 import lotto.utils.ParseUtil;
 
 import java.util.*;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
 
 public class LottoTicket {
     public static final int LOTTO_TICKET_SIZE = 6;
@@ -22,10 +24,9 @@ public class LottoTicket {
     }
 
     public static LottoTicket manual(List<String> lottoNumberStrings) {
-        List<LottoNumber> lottoNumbers = lottoNumberStrings.stream()
+        return lottoNumberStrings.stream()
                 .map(i -> LottoNumber.valueOf(ParseUtil.parseInt(i)))
-                .collect(Collectors.toList());
-        return new LottoTicket(lottoNumbers);
+                .collect(collectingAndThen(toList(), LottoTicket::new));
     }
 
     private void validateLottoNumbers(List<LottoNumber> numbers) {
