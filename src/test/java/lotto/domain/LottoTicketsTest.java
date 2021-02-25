@@ -4,55 +4,50 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatCode;
 
 class LottoTicketsTest {
 
     private final LottoNumberGenerator lottoNumberGenerator = () -> Arrays.asList(1, 2, 3, 4, 5, 6);
+    private final WinningLottoTicket winningLottoTicket = WinningLottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 7), 6);
 
-    @DisplayName("구매 금액이 부족하여 로또 구매가 불가능한 경우 예외 발생")
-    @Test
-    void cannotMakeLottoTicket() {
-        PurchasingPrice purchasingPrice = new PurchasingPrice(930);
-
-        assertThatCode(() -> {
-            LottoTickets.generateAutomatic(purchasingPrice, lottoNumberGenerator);
-        }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("금액이 부족하여 로또 티켓을 구매할 수 없습니다.");
-    }
-
-    @DisplayName("당첨 번호와 구매한 로또 티켓을 비교하여 결과를 반환한다.")
+    @DisplayName("수동 없이 자동 로또 티켓만을 구매한다.")
     @Test
     void getLottoResult() {
-        PurchasingPrice purchasingPrice = new PurchasingPrice(3000);
-        LottoTickets lottoTickets = LottoTickets.generateAutomatic(purchasingPrice, lottoNumberGenerator);
-        WinningLottoTicket winningLottoTicket = WinningLottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 7), 6);
+        ManualTickets manualTickets = ManualTickets.from(Collections.emptyList());
+        LottoTickets lottoTickets = LottoTickets.generate(manualTickets, 3, lottoNumberGenerator);
 
         LottoResult lottoResult = lottoTickets.checkResult(winningLottoTicket);
-        int secondPrizeTicketCounts = (int) lottoResult.getTicketCountsByRank(LottoRank.SECOND_PRIZE);
+        long secondPrizeTicketCounts = lottoResult.getStatistics().get(LottoRank.SECOND_PRIZE);
 
         assertThat(secondPrizeTicketCounts).isEqualTo(3);
     }
 
-    @DisplayName("구매한 로또 티켓의 개수를 반환한다")
+    @DisplayName("자동 없이 수동 로또 티켓만을 구매한다")
+    @Test
+    void makeManualLottoTickets() {
+        String[] split = "1, 2, 3, 4, 5, 6".split(", ");
+        ManualTickets manualTickets = ManualTickets.from(Arrays.asList(split, split));
+        LottoTickets lottoTickets = LottoTickets.generate(manualTickets, 0, lottoNumberGenerator);
+
+        long secondPrizeTicketCounts = lottoTickets.checkResult(winningLottoTicket)
+                .getStatistics()
+                .get(LottoRank.SECOND_PRIZE);
+
+        assertThat(secondPrizeTicketCounts).isEqualTo(2);
+    }
+
+    @DisplayName("자동과 수동을 혼합해 구매한 로또 티켓의 개수를 반환한다")
     @Test
     void getTicketCounts() {
-        LottoTickets lottoTickets = LottoTickets.generateAutomatic(new PurchasingPrice(3127), lottoNumberGenerator);
+        String[] split = "1, 2, 3, 4, 5, 6".split(", ");
+        ManualTickets manualTickets = ManualTickets.from(Arrays.asList(split, split));
+        LottoTickets lottoTickets = LottoTickets.generate(manualTickets, 3, lottoNumberGenerator);
 
         int ticketCounts = lottoTickets.getTicketCounts();
 
-        assertThat(ticketCounts).isEqualTo(3);
-    }
-
-    @DisplayName("로또 티켓을 구매하는데 든 금액을 반환한다")
-    @Test
-    void getPurchasingPrice() {
-        LottoTickets lottoTickets = LottoTickets.generateAutomatic(new PurchasingPrice(4000), lottoNumberGenerator);
-
-        int purchasingPrice = lottoTickets.getPurchasingPrice();
-
-        assertThat(purchasingPrice).isEqualTo(4000);
+        assertThat(ticketCounts).isEqualTo(5);
     }
 }

@@ -8,9 +8,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoTickets {
-    private static final int LOTTO_TICKET_PRICE = 1000;
-    private static final int ZERO = 0;
-    private static final String NOT_ENOUGH_PURCHASING_MONEY = "금액이 부족하여 로또 티켓을 구매할 수 없습니다.";
 
     private final List<LottoTicket> lottoTickets;
 
@@ -18,19 +15,24 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
-    public static LottoTickets generateAutomatic(PurchasingPrice purchasingPrice, LottoNumberGenerator lottoNumberGenerator) {
-        int purchasableTicketCounts = purchasingPrice.calculatePurchasableTicketCounts(LOTTO_TICKET_PRICE);
-        validateTicketCounts(purchasableTicketCounts);
-        List<LottoTicket> lottoTickets = Stream.generate(() -> LottoTicket.from(lottoNumberGenerator.generate()))
-                .limit(purchasableTicketCounts)
+    public static LottoTickets generate(ManualTickets manualTickets, int automaticTicketCounts, LottoNumberGenerator lottoNumberGenerator) {
+        Stream<LottoTicket> manualLottoTickets = generateManual(manualTickets);
+        Stream<LottoTicket> automaticLottoTickets = generateAutomatic(automaticTicketCounts, lottoNumberGenerator);
+        List<LottoTicket> concatLottoTickets = Stream.concat(manualLottoTickets, automaticLottoTickets)
                 .collect(Collectors.toList());
-        return new LottoTickets(lottoTickets);
+        return new LottoTickets(concatLottoTickets);
     }
 
-    private static void validateTicketCounts(int purchasableTicketCounts) {
-        if (purchasableTicketCounts == ZERO) {
-            throw new IllegalArgumentException(NOT_ENOUGH_PURCHASING_MONEY);
-        }
+    private static Stream<LottoTicket> generateManual(ManualTickets manualTickets) {
+        return manualTickets.getManualTickets()
+                .stream()
+                .map(ManualTicket::getManualTicketNumbers)
+                .map(LottoTicket::from);
+    }
+
+    private static Stream<LottoTicket> generateAutomatic(int automaticTicketCounts, LottoNumberGenerator lottoNumberGenerator) {
+        return Stream.generate(() -> LottoTicket.from(lottoNumberGenerator.generate()))
+                .limit(automaticTicketCounts);
     }
 
     public LottoResult checkResult(WinningLottoTicket winningLottoTicket) {
@@ -39,10 +41,6 @@ public class LottoTickets {
                 .collect(Collectors.groupingBy(lottoRank -> lottoRank, () -> new EnumMap<>(LottoRank.class),
                         Collectors.counting()));
         return new LottoResult(statistics);
-    }
-
-    public int getPurchasingPrice() {
-        return lottoTickets.size() * LOTTO_TICKET_PRICE;
     }
 
     public int getTicketCounts() {

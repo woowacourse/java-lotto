@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class OutputView {
-    private static final String PURCHASED_LOTTO_TICKET_COUNTS_MESSAGE = "%d개를 구매했습니다.\n";
+    private static final String PURCHASED_LOTTO_TICKET_COUNTS_MESSAGE = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     private static final String PREFIX = "[";
     private static final String DELIMITER = ", ";
     private static final String SUFFIX = "]";
@@ -21,8 +21,9 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void printPurchasedLottoTicketCounts(int lottoTicketCounts) {
-        System.out.printf(PURCHASED_LOTTO_TICKET_COUNTS_MESSAGE, lottoTicketCounts);
+    public static void printPurchasedLottoTicketCounts(int manualLottoTicketCounts, int totalLottoTicketCounts) {
+        int automaticLottoTicketCounts = totalLottoTicketCounts - manualLottoTicketCounts;
+        System.out.printf(PURCHASED_LOTTO_TICKET_COUNTS_MESSAGE, manualLottoTicketCounts, automaticLottoTicketCounts);
     }
 
     public static void printAllLottoTicketNumbers(LottoTickets lottoTickets) {
