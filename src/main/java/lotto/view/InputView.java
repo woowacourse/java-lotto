@@ -78,7 +78,6 @@ public class InputView {
                 .collect(Collectors.toList());
     }
 
-
     public static LottoNumber askBonusNumber() {
         OutputView.printMessage("보너스 볼을 입력해 주세요.");
         String bonusNumber = SCANNER.nextLine();
