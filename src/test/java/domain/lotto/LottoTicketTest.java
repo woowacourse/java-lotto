@@ -24,7 +24,7 @@ public class LottoTicketTest {
 
     @BeforeEach
     void setUp() {
-        lottoMoney = new LottoMoney(7000);
+        lottoMoney = new LottoMoney(7_000);
 
         List<LottoNumber> lottoNumbers = Arrays.asList(
             new LottoNumber(1), new LottoNumber(2),
