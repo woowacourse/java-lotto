@@ -5,9 +5,16 @@ import domain.result.LottoResult;
 import domain.result.WinningResult;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoBundle {
     private final List<Lotto> lottoBundle;
+
+    public static LottoBundle of(final List<List<Integer>> lottoNumberBundle) {
+        return new LottoBundle(lottoNumberBundle.stream()
+                .map(numbers -> Lotto.of(numbers))
+                .collect(Collectors.toList()));
+    }
 
     public LottoBundle(final List<Lotto> lottoBundle) {
         this.lottoBundle = new ArrayList<>(lottoBundle);
