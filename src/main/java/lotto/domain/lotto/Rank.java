@@ -5,18 +5,18 @@ import java.util.Arrays;
 import java.util.function.BiFunction;
 
 public enum Rank {
-    FIRST_PLACE((val, isBonus) -> val == 6,
+    FIRST_PLACE((matchCount, isBonus) -> matchCount == 6,
             BigInteger.valueOf(2_000_000_000)),
-    SEC0ND_PLACE((val, isBonus) -> val == 5 && isBonus,
+    SEC0ND_PLACE((matchCount, isBonus) -> matchCount == 5 && isBonus,
             BigInteger.valueOf(30_000_000)),
-    THIRD_PLACE((val, isBonus) -> val == 5 && !isBonus,
+    THIRD_PLACE((matchCount, isBonus) -> matchCount == 5 && !isBonus,
             BigInteger.valueOf(1_500_000)),
-    FOURTH_PLACE((val, isBonus) -> val == 4,
+    FOURTH_PLACE((matchCount, isBonus) -> matchCount == 4,
             BigInteger.valueOf(50_000)),
-    FIFTH_PLACE((val, isBonus) -> val == 3,
+    FIFTH_PLACE((matchCount, isBonus) -> matchCount == 3,
             BigInteger.valueOf(5_000)),
-    UNRANKED((val, isBonus) -> val < 3,
-            BigInteger.valueOf(0));
+    UNRANKED((matchCount, isBonus) -> matchCount < 3 && matchCount >= 0,
+            BigInteger.ZERO);
 
     private final BiFunction<Integer, Boolean, Boolean> matchFunction;
     private final BigInteger prize;
@@ -30,7 +30,7 @@ public enum Rank {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.matchFunction.apply(lottoNumberMatchCount, isBonusBallMatches))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("당첨금을 계산할 수 없습니다."));
+                .orElseThrow(() -> new IllegalArgumentException("잘못된 조건입니다. 당첨금을 계산할 수 없습니다."));
     }
 
     public BigInteger getPrize() {
