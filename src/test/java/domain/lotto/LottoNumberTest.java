@@ -1,8 +1,10 @@
 package domain.lotto;
 
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.HashSet;
 import java.util.List;
@@ -24,8 +26,8 @@ public class LottoNumberTest {
     @DisplayName("객체 생성 실패 : 1 ~ 45 가 아닌 값 입력")
     @ParameterizedTest
     @ValueSource(ints = {0, 46})
-    void of_outOfRange_exceptionThrown(final int value) {
-        // TODO
+    void of_outOfRange_returnNull(final int value) {
+        assertNull(LottoNumber.of(value));
     }
 
     @DisplayName("로또 넘버 리스트 생성 성공 : 사이즈 확인")
