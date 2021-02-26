@@ -43,17 +43,17 @@ public class LottoTicket {
     }
 
     private void validate(final List<LottoNumber> lottoNumbers) {
-        validateDuplicateNumbers(lottoNumbers);
-        validateIncorrectSize(lottoNumbers);
+        validateDuplicate(lottoNumbers);
+        validateSize(lottoNumbers);
     }
 
-    private void validateDuplicateNumbers(final List<LottoNumber> lottoNumbers) {
+    private void validateDuplicate(final List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != new HashSet<>(lottoNumbers).size()) {
             throw new IllegalArgumentException(ERROR_CONTAINS_DUPLICATE);
         }
     }
 
-    private void validateIncorrectSize(final List<LottoNumber> lottoNumbers) {
+    private void validateSize(final List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_TICKET_SIZE) {
             throw new IllegalArgumentException(ERROR_WRONG_SIZE);
         }
