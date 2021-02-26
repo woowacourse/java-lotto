@@ -14,7 +14,7 @@ public class LottoTicketGeneratorTest {
 
     @Test
     @DisplayName("수동 구매를 하고 남은 수량을 자동 구매 한다.")
-    public void create_lotto_ticket_by_purchasing_auto_after_manual(){
+    public void create_lotto_ticket_by_purchasing_auto_after_manual() {
         LottoTicketBuyingRequest lottoTicketBuyingRequest = new LottoTicketBuyingRequest(new Money(10000),
                 new LottoAmount(5));
 
@@ -34,7 +34,7 @@ public class LottoTicketGeneratorTest {
 
     @Test
     @DisplayName("수동 구매 개수가 0일 경우 전부 자동 구매를 한다.")
-    public void create_lotto_ticket_when_manual_zero(){
+    public void create_lotto_ticket_when_manual_zero() {
         LottoTicketBuyingRequest lottoTicketBuyingRequest = new LottoTicketBuyingRequest(new Money(10000),
                 new LottoAmount(0));
 
@@ -54,7 +54,7 @@ public class LottoTicketGeneratorTest {
 
     @Test
     @DisplayName("전부 수동 구매를 할 경우 테스트")
-    public void create_lotto_ticket_when_manual_full(){
+    public void create_lotto_ticket_when_manual_full() {
         LottoTicketBuyingRequest lottoTicketBuyingRequest = new LottoTicketBuyingRequest(new Money(10000),
                 new LottoAmount(10));
 
