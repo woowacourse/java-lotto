@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.IllegalLottoFormatException;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -8,9 +10,9 @@ public class Lotto {
     private static final int LOTTO_NUMBER_COUNT = 6;
     private final List<LottoNumber> numbers;
 
-    public static Lotto createByInteger(final List<Integer> numbers) {
+    public static Lotto of(final List<Integer> numbers) {
         return new Lotto(numbers.stream()
-                                .map(LottoNumber::new)
+                                .map(LottoNumber::valueOf)
                                 .collect(Collectors.toList()));
     }
 
@@ -22,7 +24,7 @@ public class Lotto {
 
     private void validateNumberCount(final List<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException("잘못된 개수의 입력입니다.");
+            throw new IllegalLottoFormatException("잘못된 개수의 입력입니다.");
         }
     }
 
@@ -30,7 +32,7 @@ public class Lotto {
         if (numbers.stream()
                    .distinct()
                    .count() != numbers.size()) {
-            throw new IllegalArgumentException("중복된 숫자 입력입니다.");
+            throw new IllegalLottoFormatException("중복된 숫자 입력입니다.");
         }
     }
 
@@ -46,11 +48,10 @@ public class Lotto {
     }
 
 
-
     public List<Integer> getNumbers() {
         List<LottoNumber> copyNumbers = new ArrayList<>(numbers);
         return Collections.unmodifiableList(copyNumbers.stream()
-                                                       .map(LottoNumber::getNumber)
+                                                       .map(LottoNumber::intValue)
                                                        .sorted()
                                                        .collect(Collectors.toList()));
     }

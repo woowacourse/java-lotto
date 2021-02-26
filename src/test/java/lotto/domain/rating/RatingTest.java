@@ -20,14 +20,15 @@ public class RatingTest {
                               .mapToInt(Integer::parseInt)
                               .boxed()
                               .toArray(Integer[]::new);
-        Lotto inputLotto = Lotto.createByInteger(Arrays.asList(arr));
+        Lotto inputLotto = Lotto.of(Arrays.asList(arr));
 
-        Lotto lotto = Lotto.createByInteger(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoNumber bonusNumber = new LottoNumber(7);
+        Lotto lotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNumber bonusNumber = LottoNumber.valueOf(7);
 
         Rating rating = Rating
-                .getRating(inputLotto.countCommonValue(lotto), inputLotto.containNumber(bonusNumber));
-        assertThat(rating.getLottoResult().getMatchedCount()).isEqualTo(expected);
+                .of(inputLotto.countCommonValue(lotto), inputLotto.containNumber(bonusNumber));
+        assertThat(rating.getLottoResult()
+                         .getMatchedCount()).isEqualTo(expected);
     }
 
     @ParameterizedTest
@@ -39,13 +40,13 @@ public class RatingTest {
                               .mapToInt(Integer::parseInt)
                               .boxed()
                               .toArray(Integer[]::new);
-        Lotto inputLotto = Lotto.createByInteger(Arrays.asList(arr));
+        Lotto inputLotto = Lotto.of(Arrays.asList(arr));
 
-        Lotto lotto = Lotto.createByInteger(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoNumber bonusNumber = new LottoNumber(7);
+        Lotto lotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNumber bonusNumber = LottoNumber.valueOf(7);
 
         Rating rating = Rating
-                .getRating(inputLotto.countCommonValue(lotto), inputLotto.containNumber(bonusNumber));
+                .of(inputLotto.countCommonValue(lotto), inputLotto.containNumber(bonusNumber));
         assertThat(rating.getReward()).isEqualTo(expected);
     }
 }

@@ -9,13 +9,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class OutputView {
-    public OutputView() {
-    }
 
     private static final String NEW_LINE = System.lineSeparator();
 
-    public void printBuyTicket(int count) {
-        System.out.printf("%d개를 구매했습니다." + NEW_LINE, count);
+    public OutputView() {
+    }
+
+    public void printBuyTicket(int manualCount, int randomCount) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다." + NEW_LINE, manualCount, randomCount);
     }
 
     public void printLottoResults(List<Lotto> lottos) {
@@ -60,7 +61,7 @@ public class OutputView {
             stringBuilder.append(", 보너스 볼 일치");
         }
         stringBuilder.append(String.format(" (%d원) - %d개", rating.getReward(), count));
-        System.out.println(stringBuilder.toString());
+        System.out.println(stringBuilder);
     }
 
     private void printEarningRate(double rate) {

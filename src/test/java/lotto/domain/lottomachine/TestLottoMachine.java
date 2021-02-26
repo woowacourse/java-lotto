@@ -11,7 +11,7 @@ public class TestLottoMachine implements LottoMachine {
     public List<LottoNumber> generate() {
         return IntStream.rangeClosed(1, 6)
                         .boxed()
-                        .map(LottoNumber::new)
+                        .map(LottoNumber::valueOf)
                         .collect(Collectors.toList());
     }
 }

@@ -19,7 +19,7 @@ public class RandomLottoMachine implements LottoMachine {
     public RandomLottoMachine() {
         lottoNumbers = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
                                 .boxed()
-                                .map(LottoNumber::new)
+                                .map(LottoNumber::valueOf)
                                 .collect(Collectors.toList());
     }
 
