@@ -1,13 +1,20 @@
 package lotto.controller;
 
-import lotto.domain.LottoGroup;
+import lotto.domain.LottoResult;
 import lotto.domain.WinningLotto;
+import lotto.domain.lottoGroup.MixedLottoGroup;
+import lotto.view.InputView;
+import lotto.view.OutputView;
 
 public class Application {
 
   public static void main(String[] args) {
-    LottoGroup lottoGroup = LottoManager.createRandomLotto();
-    WinningLotto winningLotto = LottoManager.getWinningLotto();
-    LottoManager.printResult(lottoGroup, winningLotto);
+    MixedLottoGroup mixedLottoGroup = InputView.lottoGroup();
+    OutputView.printBoughtLotto(mixedLottoGroup);
+
+    WinningLotto winningLotto = InputView.winningLotto();
+
+    LottoResult lottoResult = mixedLottoGroup.lottoResult(winningLotto);
+    OutputView.printLottoResult(lottoResult);
   }
 }
