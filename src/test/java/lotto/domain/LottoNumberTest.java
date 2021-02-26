@@ -18,6 +18,6 @@ public class LottoNumberTest {
     @DisplayName("캐시를 이용해 LottoNumber를 생성하도록 테스트")
     @Test
     void testCreateLottoNumber() {
-        assertThat(LottoNumber.from(4)).isEqualTo(LottoNumber.from("4"));
+        assertThat(LottoNumber.from(4)).isSameAs(LottoNumber.from("4"));
     }
 }
