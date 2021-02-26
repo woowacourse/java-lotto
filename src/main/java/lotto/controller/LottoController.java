@@ -34,7 +34,7 @@ public class LottoController {
 
         LottoTicketBuyingRequest lottoTicketBuyingRequest = new LottoTicketBuyingRequest(money, numberOfManualLotto);
         for (int i = 0; i < numberOfManualLotto.getValue(); i++) {
-            String[] splitLottoNumbersInput = InputView.getSplitLottoNumbers(REQUEST_INPUT_MANUAL_LOTTO_NUMBERS);
+            List<String> splitLottoNumbersInput = InputView.getSplitLottoNumbers(REQUEST_INPUT_MANUAL_LOTTO_NUMBERS);
             lottoTicketBuyingRequest.submitManualLottoLine(getLottoLine(splitLottoNumbersInput));
         }
 
@@ -47,7 +47,7 @@ public class LottoController {
     }
 
     private WinningNumbers getWinningNumbers() {
-        String[] splitLottoNumbersInput = InputView.getSplitLottoNumbers(REQUEST_LAST_WIN_LOTTO_NUMBERS);
+        List<String> splitLottoNumbersInput = InputView.getSplitLottoNumbers(REQUEST_LAST_WIN_LOTTO_NUMBERS);
         LottoLine lottoLine = getLottoLine(splitLottoNumbersInput);
 
         String bonusBallInput = InputView.getBonusLottoNumber();
@@ -56,11 +56,11 @@ public class LottoController {
         return new WinningNumbers(lottoLine, bonusLottoNumber);
     }
 
-    private LottoLine getLottoLine(String[] splitLottoNumbersInput) {
+    private LottoLine getLottoLine(List<String> splitLottoNumbersInput) {
         ArrayList<LottoNumber> lottoNumberList = new ArrayList();
 
-        for (int i = 0; i < splitLottoNumbersInput.length; i++) {
-            lottoNumberList.add(new LottoNumber(splitLottoNumbersInput[i]));
+        for (int i = 0; i < splitLottoNumbersInput.size(); i++) {
+            lottoNumberList.add(new LottoNumber(splitLottoNumbersInput.get(i)));
         }
 
         return new LottoLine(lottoNumberList);

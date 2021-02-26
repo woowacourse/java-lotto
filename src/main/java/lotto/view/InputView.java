@@ -1,6 +1,7 @@
 package lotto.view;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -31,11 +32,11 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static String[] getSplitLottoNumbers(String msg) {
+    public static List<String> getSplitLottoNumbers(String msg) {
         System.out.println(msg);
         String lottoNumbersInput = scanner.nextLine();
         String[] splitLottoNumbersInput = lottoNumbersInput.replace(" ", "").split(DELIMITER);
-        return splitLottoNumbersInput;
+        return Arrays.asList(splitLottoNumbersInput);
     }
 
     public static String getBonusLottoNumber() {
