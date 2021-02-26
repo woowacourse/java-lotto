@@ -37,7 +37,7 @@ public class LottoController {
     }
 
     private LottoTickets initLottoTickets(Money money) {
-        LottoTickets lottoTickets = LottoTicketsService.createLottoTickets(money);
+        LottoTickets lottoTickets = LottoTicketsService.createAutoLottoTickets(money);
         OutputView.printTickets(lottoTickets);
         return lottoTickets;
     }
@@ -45,7 +45,7 @@ public class LottoController {
     private LottoTicket initLottoWinnerTicket() {
         OutputView.askWinnerLottoTicket();
         try {
-            return LottoTicketService.createLottoWinnerTicket(InputView.getUserInput());
+            return LottoTicketService.createManualLottoTicket(InputView.getUserInput());
         } catch (NullPointerException | IllegalArgumentException e) {
             OutputView.printErrorMessage(e);
             return initLottoWinnerTicket();

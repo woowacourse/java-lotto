@@ -11,6 +11,6 @@ public class LottoTicketServiceTest {
     @Test
     @DisplayName("로또 티켓을 생성한다.")
     public void createLottoTicket() {
-        assertThat(LottoTicketService.createLottoTicket()).isInstanceOf(LottoTicket.class);
+        assertThat(LottoTicketService.createAutoLottoTicket()).isInstanceOf(LottoTicket.class);
     }
 }

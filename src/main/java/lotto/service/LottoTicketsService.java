@@ -13,10 +13,18 @@ public class LottoTicketsService {
 
     }
 
-    public static LottoTickets createLottoTickets(Money money) {
+    public static LottoTickets createManualLottoTickets(Money money) {
         List<LottoTicket> lottoTicketGroup = new ArrayList<>();
         for (int i = 0; i < money.lottoCount(); i++) {
-            lottoTicketGroup.add(LottoTicketService.createLottoTicket());
+            lottoTicketGroup.add(LottoTicketService.createAutoLottoTicket());
+        }
+        return new LottoTickets(lottoTicketGroup);
+    }
+
+    public static LottoTickets createAutoLottoTickets(Money money) {
+        List<LottoTicket> lottoTicketGroup = new ArrayList<>();
+        for (int i = 0; i < money.lottoCount(); i++) {
+            lottoTicketGroup.add(LottoTicketService.createAutoLottoTicket());
         }
         return new LottoTickets(lottoTicketGroup);
     }
