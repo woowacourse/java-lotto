@@ -48,14 +48,12 @@ public class LottoStore {
     }
 
     private Money receiveValidMoney() {
-        Money candidateMoney;
         try {
-            candidateMoney = inputView.purchaseMoney();
+            return inputView.purchaseMoney();
         } catch (MoneyException moneyException) {
             outputView.printLottoException(moneyException);
-            candidateMoney = receiveValidMoney();
+            return receiveValidMoney();
         }
-        return candidateMoney;
     }
 
     private LottoAnnouncement receiveValidLottoAnnouncement() {
@@ -72,14 +70,12 @@ public class LottoStore {
     }
 
     private Piece receiveManualPieces(Money possessedMoney) {
-        Piece candidateManualPiece;
         try {
-            candidateManualPiece = inputView.inputManualPieces(possessedMoney);
+            return inputView.inputManualPieces(possessedMoney);
         } catch (PieceException pieceException) {
             outputView.printLottoException(pieceException);
-            candidateManualPiece = inputView.inputManualPieces(possessedMoney);
+            return inputView.inputManualPieces(possessedMoney);
         }
-        return candidateManualPiece;
     }
 
     private Lottos boughtManualLottos(Piece manualPiece) {

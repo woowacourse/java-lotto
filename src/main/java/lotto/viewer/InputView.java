@@ -55,14 +55,12 @@ public class InputView {
     }
 
     public int inputBonusNumber() {
-        int rawMoney;
         try {
-            rawMoney = receiveInteger(INPUT_BONUS_MESSAGE);
+            return receiveInteger(INPUT_BONUS_MESSAGE);
         } catch (LottoException lottoException) {
             System.out.println(lottoException.getMessage());
-            rawMoney = receiveInteger(INPUT_BONUS_MESSAGE);
+            return receiveInteger(INPUT_BONUS_MESSAGE);
         }
-        return rawMoney;
     }
 
     private int receiveInteger(String receiveTargetMessage) throws LottoException {
@@ -80,21 +78,19 @@ public class InputView {
         System.out.println(MANUAL_LOTTO_INPUT_MESSAGE);
         List<List<Integer>> inputWinningNumbers = new ArrayList<>();
         for (int i = 0; i < manualPiece.getPieceNumber(); i++) {
-            List<Integer> lottoNumbers= getValidLottoNumbers();
+            List<Integer> lottoNumbers = getValidLottoNumbers();
             inputWinningNumbers.add(lottoNumbers);
         }
         return inputWinningNumbers;
     }
 
     private List<Integer> getValidLottoNumbers() {
-        List<Integer> lottoNumbers;
         try {
-            lottoNumbers = receiveWinners();
+            return receiveWinners();
         } catch (LottoException lottoException) {
             System.out.println(lottoException.getMessage());
-            lottoNumbers = receiveWinners();
+            return receiveWinners();
         }
-        return lottoNumbers;
     }
 
     private List<Integer> receiveWinners() throws LottoException {
