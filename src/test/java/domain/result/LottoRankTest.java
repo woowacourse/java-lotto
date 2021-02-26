@@ -14,10 +14,10 @@ class LottoRankTest {
 
     private static Stream<Arguments> rankWithMatches() {
         return Stream.of(
-                Arguments.of(2, true, LottoRank.NONE_MATCHES),
-                Arguments.of(3, true, LottoRank.THREE_MATCHES),
-                Arguments.of(4, true, LottoRank.FOUR_MATCHES),
-                Arguments.of(6, true, LottoRank.SIX_MATCHES)
+                Arguments.of(2, true, LottoRank.NONE_PLACE),
+                Arguments.of(3, true, LottoRank.FIFTH_PLACE),
+                Arguments.of(4, true, LottoRank.FOURTH_MATCHES),
+                Arguments.of(6, true, LottoRank.FIRST_PLACE)
         );
     }
 
@@ -32,7 +32,7 @@ class LottoRankTest {
         LottoRank findRank = LottoRank.findRankByBonusAndMatches(hasBonus, matches);
 
         //then
-        assertThat(findRank).isEqualTo(LottoRank.FIVE_AND_BONUS_MATCHES);
+        assertThat(findRank).isEqualTo(LottoRank.SECOND_PLACE);
     }
 
     @DisplayName("5개가 일치하지 않으면(2, 3등), 보너스 번호와 상관없이 등수를 반환한다.")

@@ -64,7 +64,7 @@ class ResultTest {
         Map<LottoRank, Integer> results = result.getResults();
 
         //then
-        assertThat(results.get(LottoRank.SIX_MATCHES)).isEqualTo(1);
+        assertThat(results.get(LottoRank.FIRST_PLACE)).isEqualTo(1);
     }
 
     @DisplayName("Result 복수 결과 반환 테스트.")
@@ -86,8 +86,8 @@ class ResultTest {
 
         Map<LottoRank, Integer> results = result.getResults();
 
-        assertThat(results.get(LottoRank.SIX_MATCHES)).isEqualTo(1);
-        assertThat(results.get(LottoRank.FIVE_MATCHES)).isEqualTo(1);
+        assertThat(results.get(LottoRank.FIRST_PLACE)).isEqualTo(1);
+        assertThat(results.get(LottoRank.THIRD_PLACE)).isEqualTo(1);
     }
 
     @DisplayName("5개의 볼, 보너스 볼이 맞을 때 2등 당첨된다.")
@@ -106,7 +106,7 @@ class ResultTest {
         Map<LottoRank, Integer> results = result.getResults();
 
         //then
-        assertThat(results.get(LottoRank.FIVE_AND_BONUS_MATCHES)).isEqualTo(1);
+        assertThat(results.get(LottoRank.SECOND_PLACE)).isEqualTo(1);
     }
 
     @DisplayName("수익률 반환 테스트.")

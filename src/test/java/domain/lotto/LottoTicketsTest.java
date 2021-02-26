@@ -61,7 +61,7 @@ class LottoTicketsTest {
         List<LottoRank> ranks = lottoTickets.findLottoRanks(winningLotto);
 
         //then
-        Assertions.assertThat(ranks.get(0)).isEqualTo(LottoRank.SIX_MATCHES);
-        Assertions.assertThat(ranks.get(1)).isEqualTo(LottoRank.THREE_MATCHES);
+        Assertions.assertThat(ranks.get(0)).isEqualTo(LottoRank.FIRST_PLACE);
+        Assertions.assertThat(ranks.get(1)).isEqualTo(LottoRank.FIFTH_PLACE);
     }
 }
