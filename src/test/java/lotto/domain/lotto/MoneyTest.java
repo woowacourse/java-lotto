@@ -9,6 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -63,11 +64,14 @@ class MoneyTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @Test
-    void equals() {
-        Money money1 = new Money(new BigInteger("1"));
-        Money money2 = new Money(new BigInteger("1"));
+    @ParameterizedTest
+    @DisplayName("값 객체 비교")
+    @CsvSource(value = {"0", "1000000000000000000000"})
+    void equals(String input) {
+        Money money1 = new Money(new BigInteger(input));
+        Money money2 = new Money(new BigInteger(input));
 
         assertThat(money1).isEqualTo(money2);
+        assertThat(money1).hasSameHashCodeAs(money2);
     }
 }
