@@ -6,18 +6,19 @@ import lotto.utils.NumericStringValidator;
 
 public final class Money {
 
+    private static final BigInteger MINIMUM_AMOUNT = BigInteger.valueOf(0);
+
     private final BigInteger amount;
-    private static final int MINIMUM_AMOUNT = 0;
 
     public Money(BigInteger amount) {
-        if (lessThanZero(amount)) {
-            throw new IllegalArgumentException(String.format("구입금액은 %d 이상의 정수여야합니다.", MINIMUM_AMOUNT));
-        }
+        validateGreaterThanMinimumAmount(amount);
         this.amount = amount;
     }
 
-    private boolean lessThanZero(BigInteger amount) {
-        return amount.compareTo(BigInteger.valueOf(MINIMUM_AMOUNT)) < 0;
+    private void validateGreaterThanMinimumAmount(BigInteger amount) {
+        if (amount.compareTo(MINIMUM_AMOUNT) < 0) {
+            throw new IllegalArgumentException(String.format("구입금액은 %d 이상의 정수여야합니다.", MINIMUM_AMOUNT));
+        }
     }
 
     public static Money valueOf(String amountValue) {
