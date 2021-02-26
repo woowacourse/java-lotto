@@ -71,7 +71,7 @@ public class LottoGameController {
 
     private LottoBundle makeAutoLottoBundle(final GameMoney gameMoney) {
         final int number = gameMoney.checkMaxLottoAvailable();
-        List<List<Integer>> autoLottoNumberBundle = new ArrayList<>();
+        final List<List<Integer>> autoLottoNumberBundle = new ArrayList<>();
         for (int i = 0; i < number; i++) {
             autoLottoNumberBundle.add(LottoGenerator.createRandomLottoNumber());
         }

@@ -14,8 +14,8 @@ public class WinningLottoTest {
     @DisplayName("WinningLotto 생성 테스트")
     @Test
     void WinningLottoConstructor() {
-        Lotto lotto = makeProperLotto();
-        LottoBall lottoBall = LottoBall.valueOf(7);
+        final Lotto lotto = makeProperLotto();
+        final LottoBall lottoBall = LottoBall.valueOf(7);
         assertThatCode(() -> new WinningResult(lotto, lottoBall))
                 .doesNotThrowAnyException();
     }
@@ -23,8 +23,8 @@ public class WinningLottoTest {
     @DisplayName("WinningLotto 보너스 볼이 당첨 번호에 포함된 경우 에러 발생")
     @Test
     void WinningLottoErrorTest() {
-        Lotto lotto = makeProperLotto();
-        LottoBall lottoBall = LottoBall.valueOf(1);
+        final Lotto lotto = makeProperLotto();
+        final LottoBall lottoBall = LottoBall.valueOf(1);
         assertThatThrownBy(() -> new WinningResult(lotto, lottoBall))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("보너스 볼은 당첨 번호와 중복될 수 없습니다.");

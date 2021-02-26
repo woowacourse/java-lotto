@@ -69,7 +69,7 @@ public class OutputView {
     }
 
     private static void printSingleLottoBought(final Lotto lotto) {
-        List<String> singleLottoBought = lotto.getLotto()
+        final List<String> singleLottoBought = lotto.getLotto()
                 .stream()
                 .map(lottoBall -> String.valueOf(lottoBall.getNumber()))
                 .collect(Collectors.toList());

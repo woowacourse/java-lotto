@@ -41,7 +41,7 @@ public class GameMoney {
         return lottoBundle;
     }
 
-    private void calculateGameMoneyLeft(int numberOfLottoToBuy) {
+    private void calculateGameMoneyLeft(final int numberOfLottoToBuy) {
         final BigDecimal lottoBuyingMoney = new BigDecimal(numberOfLottoToBuy * SINGLE_LOTTO_GAME_MONEY);
         final BigDecimal gameMoneyLeft = gameMoney.subtract(lottoBuyingMoney);
         gameMoney = gameMoneyLeft;

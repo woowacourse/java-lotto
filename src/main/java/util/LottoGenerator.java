@@ -15,7 +15,7 @@ public class LottoGenerator {
     }
 
     public static List<Integer> createRandomLottoNumber() {
-        IntStream intStream = new Random().ints(MIN_NUMBER, MAX_NUMBER + EXTRA_BOUND);
+        final IntStream intStream = new Random().ints(MIN_NUMBER, MAX_NUMBER + EXTRA_BOUND);
         return intStream.distinct()
                 .limit(LOTTO_BALLS_IN_LOTTO)
                 .sorted()
