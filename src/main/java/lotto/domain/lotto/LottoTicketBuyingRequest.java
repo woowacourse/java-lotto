@@ -18,12 +18,15 @@ public class LottoTicketBuyingRequest {
     private final List<LottoLine> manualLottoLineList = new ArrayList();
 
     public LottoTicketBuyingRequest(Money money, LottoAmount manualLottoAmount) {
+        validateLottoAmountOver();
+        this.money = money;
+        this.manualLottoAmount = manualLottoAmount;
+    }
+
+    private void validateLottoAmountOver() {
         if (manualLottoAmount.getValue() * PRICE_EACH_LOTTO > money.getValue()) {
             throw new IllegalArgumentException(ERROR_MANUAL_LOTTO_PRICE_OVER);
         }
-
-        this.money = money;
-        this.manualLottoAmount = manualLottoAmount;
     }
 
     public void submitManualLottoLine(LottoLine manualLottoLine) {
