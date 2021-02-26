@@ -8,7 +8,6 @@ import lotto.domain.LottoService;
 import lotto.domain.Money;
 import lotto.domain.Ticket;
 import lotto.domain.WinningLotto;
-import lotto.domain.lottomachine.LottoMachine;
 import lotto.domain.lottomachine.RandomLottoMachine;
 import lotto.domain.rating.Rating;
 import lotto.domain.rating.RatingInfo;

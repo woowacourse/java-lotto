@@ -1,7 +1,6 @@
 package lotto.controller;
 
 import lotto.domain.EarningRate;
-import lotto.domain.LottoService;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoRepository;
 import lotto.domain.lottomachine.RandomLottoMachine;

@@ -2,8 +2,6 @@ package lotto.domain;
 
 import lotto.domain.lotto.LottoRepository;
 import lotto.domain.lottomachine.LottoMachine;
-import lotto.domain.rating.Rating;
-import lotto.domain.rating.RatingInfo;
 
 public class LottoService {
 
