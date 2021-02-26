@@ -37,13 +37,13 @@
 ### LottoAutoGenerator
 - 6개의 번호를 자동으로 생성한다.
 ### LottoManualGenerator
-- 6개의 번호를 가진 리스트를 입력받아 생성한다.합
+- 6개의 번호를 가진 리스트를 입력받아 생성한다.
 
 ## LottoAnnouncement
 - 로또 당첨 번호와 보너스 번호 검증 및 저장
 
 ## LottoResult
-- 당첨에 대한 통계를 계산하고 저
+- 당첨에 대한 통계를 계산하고 저장 
 
 ## LottoStore
 - 구입금액 입력을 받음
