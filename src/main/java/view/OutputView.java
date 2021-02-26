@@ -14,7 +14,7 @@ public class OutputView {
     private static final String GAME_MONEY_REQUEST = "구입금액을 입력해 주세요.";
     private static final String MANUAL_LOTTO_AMOUNT_REQUEST = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String MANUAL_LOTTO_REQUEST = "수동으로 구매할 번호를 입력해 주세요.";
-    private static final String LOTTO_BOUGHT_STATUS = "%d개를 구매했습니다.";
+    private static final String LOTTO_BOUGHT_STATUS = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String LOTTO_BOUGHT_PRINT_PREFIX = "[";
     private static final String LOTTO_BOUGHT_PRINT_DELIMITER = ", ";
     private static final String LOTTO_BOUGHT_PRINT_POSTFIX = "]";
@@ -50,17 +50,22 @@ public class OutputView {
         System.out.println(MANUAL_LOTTO_REQUEST);
     }
 
-    public static void printLottoBought(final LottoBundle lottoBundle) {
-        printNumberOfLottoBought(lottoBundle);
-        for (Lotto lotto : lottoBundle.getLottoBundle()) {
-            printSingleLottoBought(lotto);
+    public static void printLottoBought(final LottoBundle manualLottoBundle, final LottoBundle autoLottoBundle) {
+        printNumberOfLottoBought(manualLottoBundle, autoLottoBundle);
+        for (Lotto manualLotto : manualLottoBundle.getLottoBundle()) {
+            printSingleLottoBought(manualLotto);
+        }
+        for (Lotto autoLotto : autoLottoBundle.getLottoBundle()) {
+            printSingleLottoBought(autoLotto);
         }
         printNewLine();
     }
 
-    private static void printNumberOfLottoBought(final LottoBundle lottoBundle) {
-        final int lottoBoughtNumber = lottoBundle.countNumberOfLotto();
-        System.out.println(String.format(LOTTO_BOUGHT_STATUS, lottoBoughtNumber));
+    private static void printNumberOfLottoBought(final LottoBundle manualLottoBundle, final LottoBundle autoLottoBundle) {
+        final int manualLottoBought = manualLottoBundle.countNumberOfLotto();
+        final int autoLottoBought = autoLottoBundle.countNumberOfLotto();
+        printNewLine();
+        System.out.println(String.format(LOTTO_BOUGHT_STATUS, manualLottoBought, autoLottoBought));
     }
 
     private static void printSingleLottoBought(final Lotto lotto) {
