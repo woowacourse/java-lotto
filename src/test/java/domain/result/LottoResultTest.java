@@ -25,15 +25,15 @@ public class LottoResultTest {
     }
 
     private static LottoBundle makeLottoBundle() {
-        return new LottoBundle(Arrays.asList(
-                Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                Lotto.of(Arrays.asList(3, 4, 5, 6, 7, 8))));
+        return LottoBundle.of(Arrays.asList(
+                Arrays.asList(1, 2, 3, 4, 5, 6),
+                Arrays.asList(3, 4, 5, 6, 7, 8)));
     }
 
     private static LottoBundle makeOtherLottoBundle() {
-        return new LottoBundle(Arrays.asList(
-                Lotto.of(Arrays.asList(31, 2, 3, 4, 35, 36)),
-                Lotto.of(Arrays.asList(33, 34, 5, 6, 7, 38))));
+        return LottoBundle.of(Arrays.asList(
+                Arrays.asList(31, 2, 3, 4, 35, 36),
+                Arrays.asList(33, 34, 5, 6, 7, 38)));
     }
 
     private static WinningResult makeWinningLotto() {

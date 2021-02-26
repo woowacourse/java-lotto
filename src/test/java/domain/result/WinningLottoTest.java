@@ -5,8 +5,7 @@ import domain.lotto.LottoBall;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
@@ -32,10 +31,6 @@ public class WinningLottoTest {
     }
 
     private Lotto makeProperLotto() {
-        List<LottoBall> lotto = new ArrayList<>();
-        for (int i = 1; i <= 6; i++) {
-            lotto.add(LottoBall.valueOf(i));
-        }
-        return new Lotto(lotto);
+        return Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 }

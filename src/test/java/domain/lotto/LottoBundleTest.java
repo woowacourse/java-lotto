@@ -11,19 +11,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 public class LottoBundleTest {
-    private List<Lotto> lottos;
+    private List<List<Integer>> lottos;
     private WinningResult winningResult;
 
     @BeforeEach
     void setUp() {
         lottos = new ArrayList<>();
-        lottos.add(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        lottos.add(Lotto.of(Arrays.asList(11, 12, 13, 14, 15, 16)));
+        lottos.add(Arrays.asList(1, 2, 3, 4, 5, 6));
+        lottos.add(Arrays.asList(11, 12, 13, 14, 15, 16));
 
         winningResult = new WinningResult(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoBall.valueOf(7));
     }
@@ -31,28 +32,31 @@ public class LottoBundleTest {
     @DisplayName("LottoBundle 생성 테스트")
     @Test
     void LottoBundleConstructorTest() {
-        assertThatCode(() -> new LottoBundle(lottos))
+        assertThatCode(() -> LottoBundle.of(lottos))
                 .doesNotThrowAnyException();
     }
 
     @DisplayName("LottoBundle countNumberOfLotto 테스트")
     @Test
     void countNumberOfLottoTest() {
-        final LottoBundle lottoBundle = new LottoBundle(lottos);
+        final LottoBundle lottoBundle = LottoBundle.of(lottos);
         assertThat(lottoBundle.countNumberOfLotto()).isEqualTo(lottos.size());
     }
 
     @DisplayName("LottoBundle getLottoBundle 테스트")
     @Test
     void getLottoBundleTest() {
-        final LottoBundle lottoBundle = new LottoBundle(lottos);
-        assertThat(lottoBundle.getLottoBundle()).isEqualTo(lottos);
+        final LottoBundle lottoBundle = LottoBundle.of(lottos);
+        List<Lotto> testLottoBundle = lottos.stream()
+                .map(numbers -> Lotto.of(numbers))
+                .collect(Collectors.toList());
+        assertThat(lottoBundle.getLottoBundle()).isEqualTo(testLottoBundle);
     }
 
     @DisplayName("LottoBundle checkResult 테스트")
     @Test
     void checkResultTest() {
-        final LottoBundle lottoBundle = new LottoBundle(lottos);
+        final LottoBundle lottoBundle = LottoBundle.of(lottos);
         final LottoResult lottoResult = lottoBundle.checkResult(winningResult);
         final Map<LottoRank, Integer> lottoRankResult = lottoResult.getLottoResult();
 
