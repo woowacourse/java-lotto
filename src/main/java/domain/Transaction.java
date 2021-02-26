@@ -15,16 +15,6 @@ public class Transaction {
         this.original = deposit;
     }
 
-    private void validate(int amount) {
-        validatePositive(amount);
-    }
-
-    private void validatePositive(int amount) {
-        if (amount < 0) {
-            throw new IllegalArgumentException("금액은 음의 정수 값을 가질 수 없습니다.");
-        }
-    }
-
     public void buyManualLotto(int count) {
         int totalPrice = LOTTO_TICKET_PRICE * count;
         if (deposit >= totalPrice) {
@@ -44,6 +34,16 @@ public class Transaction {
 
     public double calculateTotalProfitRate(int totalProfit) {
         return ((double) totalProfit) / original;
+    }
+
+    private void validate(int amount) {
+        validatePositive(amount);
+    }
+
+    private void validatePositive(int amount) {
+        if (amount < 0) {
+            throw new IllegalArgumentException("금액은 음의 정수 값을 가질 수 없습니다.");
+        }
     }
 
     public int getDeposit() {
