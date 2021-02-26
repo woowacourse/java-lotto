@@ -13,7 +13,7 @@ public class LottoTicketMachine {
         LottoTickets lottoTickets = new LottoTickets();
 
         while (money.isCanBuy(TICKET_PRICE)) {
-            lottoTickets.add(new LottoTicket());
+            lottoTickets.add(LottoTicket.of());
             money.use(TICKET_PRICE);
         }
         return lottoTickets;
@@ -24,6 +24,6 @@ public class LottoTicketMachine {
             throw new IllegalArgumentException("남은 금액이 모자릅니다.");
         }
         money.use(TICKET_PRICE);
-        return new LottoTicket(new LottoNumbers(selectedLottoNumbers));
+        return LottoTicket.of(new LottoNumbers(selectedLottoNumbers));
     }
 }

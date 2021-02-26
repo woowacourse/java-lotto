@@ -15,7 +15,7 @@ public class LottoTicketsTest {
     @Test
     @DisplayName("LottoTicket 삽입 테스트")
     void lottoTicketsAddTest() {
-        LottoTicket lottoTicket1 = new LottoAutoTicket();
+        LottoTicket lottoTicket1 = LottoTicket.of();
 
         LottoTickets lottoTickets = new LottoTickets();
         lottoTickets.add(lottoTicket1);
@@ -26,12 +26,12 @@ public class LottoTicketsTest {
     @Test
     @DisplayName("수동 티켓이 1개, 자동 티켓이 1개 삽입 되었을때 올바른 결과를 가져온다.")
     void lottoTicketCount() {
-        LottoTicket autoTicket = new LottoAutoTicket();
+        LottoTicket autoTicket = LottoTicket.of();
         List<LottoNumber> lottoNumberGroup = new ArrayList<>();
         for (int i = 1; i <= 6; ++i) {
             lottoNumberGroup.add(LottoNumber.of(i));
         }
-        LottoManualTicket manualTicket = new LottoManualTicket(new LottoNumbers(lottoNumberGroup));
+        LottoTicket manualTicket = LottoTicket.of(new LottoNumbers(lottoNumberGroup));
         LottoTickets lottoTickets = new LottoTickets();
         lottoTickets.add(manualTicket);
         lottoTickets.add(autoTicket);
@@ -47,13 +47,13 @@ public class LottoTicketsTest {
         for (int i = 1; i <= 6; ++i) {
             lottoNumberGroup.add(LottoNumber.of(i));
         }
-        LottoManualTicket manualTicket = new LottoManualTicket(new LottoNumbers(lottoNumberGroup));
+        LottoTicket manualTicket = LottoTicket.of(new LottoNumbers(lottoNumberGroup));
         LottoTickets lottoTickets = new LottoTickets();
         lottoTickets.add(manualTicket);
 
         LottoTickets lottoAutoTickets = new LottoTickets();
-        lottoAutoTickets.add(new LottoAutoTicket());
-        lottoAutoTickets.add(new LottoAutoTicket());
+        lottoAutoTickets.add(LottoTicket.of());
+        lottoAutoTickets.add(LottoTicket.of());
 
         lottoTickets.concat(lottoAutoTickets);
         assertThat(lottoTickets.toList().size()).isEqualTo(3);

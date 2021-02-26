@@ -13,11 +13,11 @@ public class LottoTicketMachineTest {
     LottoTicketMachine lottoTicketMachine = new LottoTicketMachine();
 
     @Test
-    @DisplayName("구입 금액에 해당하는 만큼 로또 티켓 발급")
+    @DisplayName("구입 금액에 해당하는 만큼 로또 티켓을 발급한다.")
     void lottoTicketMachineInsertMoney() {
-        assertThat(lottoTicketMachine.buyTickets(new Money("999")).toList().size()).isEqualTo(0);
-        assertThat(lottoTicketMachine.buyTickets(new Money("1000")).toList().size()).isEqualTo(1);
-        assertThat(lottoTicketMachine.buyTickets(new Money("3000")).toList().size())
+        assertThat(lottoTicketMachine.buyAutoTickets(new Money("999")).toList().size()).isEqualTo(0);
+        assertThat(lottoTicketMachine.buyAutoTickets(new Money("1000")).toList().size()).isEqualTo(1);
+        assertThat(lottoTicketMachine.buyAutoTickets(new Money("3000")).toList().size())
                 .isNotEqualTo(2);
     }
 

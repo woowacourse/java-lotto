@@ -40,6 +40,10 @@ public class LottoNumbers {
         return new ArrayList<>(this.lottoNumbers);
     }
 
+    public int size(){
+        return lottoNumbers.size();
+    }
+
     private void validDrawingNumbers(final List<LottoNumber> lottoNumbers) {
         if (new HashSet<>(lottoNumbers).size() != DRAWING_COUNT_LIMIT) {
             throw new IllegalArgumentException("잘못된 로또 번호 집합입니다.");
