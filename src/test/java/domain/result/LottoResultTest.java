@@ -3,7 +3,6 @@ package domain.result;
 import domain.lotto.Lotto;
 import domain.lotto.LottoBall;
 import domain.lotto.LottoBundle;
-import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -49,12 +48,12 @@ public class LottoResultTest {
         final LottoResult lottoResult = lottoBundle.checkResult(winningResult);
         final Map<LottoRank, Integer> result = lottoResult.getLottoResult();
 
-        assertThat(result.get(LottoRank.NONE_MATCHES)).isEqualTo(0);
-        assertThat(result.get(LottoRank.THREE_MATCHES)).isEqualTo(0);
-        assertThat(result.get(LottoRank.FOUR_MATCHES)).isEqualTo(0);
-        assertThat(result.get(LottoRank.FIVE_MATCHES)).isEqualTo(1);
-        assertThat(result.get(LottoRank.FIVE_AND_BONUS_MATCHES)).isEqualTo(1);
-        assertThat(result.get(LottoRank.SIX_MATCHES)).isEqualTo(0);
+        assertThat(result.get(LottoRank.NO_PRIZE)).isEqualTo(0);
+        assertThat(result.get(LottoRank.FIFTH_PRIZE)).isEqualTo(0);
+        assertThat(result.get(LottoRank.FOURTH_PRIZE)).isEqualTo(0);
+        assertThat(result.get(LottoRank.THIRD_PRIZE)).isEqualTo(1);
+        assertThat(result.get(LottoRank.SECOND_PRIZE)).isEqualTo(1);
+        assertThat(result.get(LottoRank.FIRST_PRIZE)).isEqualTo(0);
     }
 
     @DisplayName("checkProfitRate 테스트")
@@ -63,7 +62,7 @@ public class LottoResultTest {
         final LottoResult lottoResult = lottoBundle.checkResult(winningResult);
         final double profitRate = lottoResult.checkProfitRate();
 
-        final int moneyGain = LottoRank.FIVE_AND_BONUS_MATCHES.getPrizeMoney() + LottoRank.FIVE_MATCHES.getPrizeMoney();
+        final int moneyGain = LottoRank.SECOND_PRIZE.getPrizeMoney() + LottoRank.THIRD_PRIZE.getPrizeMoney();
         final int moneySpent = 2000;
         assertThat(profitRate).isEqualTo((double) moneyGain / (double) moneySpent);
     }
@@ -76,11 +75,11 @@ public class LottoResultTest {
         lottoResult.combineResult(lottoResultToCombine);
         final Map<LottoRank, Integer> finalResult = lottoResult.getLottoResult();
 
-        assertThat(finalResult.get(LottoRank.NONE_MATCHES)).isEqualTo(0);
-        assertThat(finalResult.get(LottoRank.THREE_MATCHES)).isEqualTo(2);
-        assertThat(finalResult.get(LottoRank.FOUR_MATCHES)).isEqualTo(0);
-        assertThat(finalResult.get(LottoRank.FIVE_MATCHES)).isEqualTo(1);
-        assertThat(finalResult.get(LottoRank.FIVE_AND_BONUS_MATCHES)).isEqualTo(1);
-        assertThat(finalResult.get(LottoRank.SIX_MATCHES)).isEqualTo(0);
+        assertThat(finalResult.get(LottoRank.NO_PRIZE)).isEqualTo(0);
+        assertThat(finalResult.get(LottoRank.FIFTH_PRIZE)).isEqualTo(2);
+        assertThat(finalResult.get(LottoRank.FOURTH_PRIZE)).isEqualTo(0);
+        assertThat(finalResult.get(LottoRank.THIRD_PRIZE)).isEqualTo(1);
+        assertThat(finalResult.get(LottoRank.SECOND_PRIZE)).isEqualTo(1);
+        assertThat(finalResult.get(LottoRank.FIRST_PRIZE)).isEqualTo(0);
     }
 }

@@ -1,8 +1,5 @@
 package domain.lotto;
 
-import domain.lotto.Lotto;
-import domain.lotto.LottoBall;
-import domain.lotto.LottoBundle;
 import domain.result.LottoRank;
 import domain.result.LottoResult;
 import domain.result.WinningResult;
@@ -59,11 +56,11 @@ public class LottoBundleTest {
         final LottoResult lottoResult = lottoBundle.checkResult(winningResult);
         final Map<LottoRank, Integer> lottoRankResult = lottoResult.getLottoResult();
 
-        assertThat(lottoRankResult.get(LottoRank.SIX_MATCHES)).isEqualTo(1);
-        assertThat(lottoRankResult.get(LottoRank.FIVE_AND_BONUS_MATCHES)).isEqualTo(0);
-        assertThat(lottoRankResult.get(LottoRank.FIVE_MATCHES)).isEqualTo(0);
-        assertThat(lottoRankResult.get(LottoRank.FOUR_MATCHES)).isEqualTo(0);
-        assertThat(lottoRankResult.get(LottoRank.THREE_MATCHES)).isEqualTo(0);
-        assertThat(lottoRankResult.get(LottoRank.NONE_MATCHES)).isEqualTo(1);
+        assertThat(lottoRankResult.get(LottoRank.FIRST_PRIZE)).isEqualTo(1);
+        assertThat(lottoRankResult.get(LottoRank.SECOND_PRIZE)).isEqualTo(0);
+        assertThat(lottoRankResult.get(LottoRank.THIRD_PRIZE)).isEqualTo(0);
+        assertThat(lottoRankResult.get(LottoRank.FOURTH_PRIZE)).isEqualTo(0);
+        assertThat(lottoRankResult.get(LottoRank.FIFTH_PRIZE)).isEqualTo(0);
+        assertThat(lottoRankResult.get(LottoRank.NO_PRIZE)).isEqualTo(1);
     }
 }

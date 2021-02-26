@@ -22,11 +22,11 @@ public class OutputView {
     private static final String BONUS_BALL_REQUEST = "보너스 볼을 입력해 주세요.";
     private static final String LOTTO_RESULT_STATUS = "당첨 통계";
     private static final String LOTTO_RESULT_LINE = "---------";
-    private static final String LOTTO_RESULT_THREE_MATCH = "3개 일치 (5000원)- %d개";
-    private static final String LOTTO_RESULT_FOUR_MATCH = "4개 일치 (50000원)- %d개";
-    private static final String LOTTO_RESULT_FIVE_MATCH = "5개 일치 (1500000원)- %d개";
-    private static final String LOTTO_RESULT_FIVE_AND_BONUS_MATCH = "5개 일치, 보너스 볼 일치(30000000원) - %d개";
-    private static final String LOTTO_RESULT_SIX_MATCH = "6개 일치 (2000000000원)- %d개";
+    private static final String LOTTO_RESULT_FIFTH_PRIZE = "3개 일치 (5000원)- %d개";
+    private static final String LOTTO_RESULT_FOURTH_PRIZE = "4개 일치 (50000원)- %d개";
+    private static final String LOTTO_RESULT_THIRD_PRIZE = "5개 일치 (1500000원)- %d개";
+    private static final String LOTTO_RESULT_SECOND_PRIZE = "5개 일치, 보너스 볼 일치(30000000원) - %d개";
+    private static final String LOTTO_RESULT_FIRST_PRIZE = "6개 일치 (2000000000원)- %d개";
     private static final String PROFIT_RATE_FORMAT = "총 수익률은 %.2f입니다.";
 
     private OutputView() {
@@ -96,11 +96,11 @@ public class OutputView {
     }
 
     private static void printLottoRankResult(final Map<LottoRank, Integer> lottoRank) {
-        System.out.println(String.format(LOTTO_RESULT_THREE_MATCH, lottoRank.get(LottoRank.THREE_MATCHES)));
-        System.out.println(String.format(LOTTO_RESULT_FOUR_MATCH, lottoRank.get(LottoRank.FOUR_MATCHES)));
-        System.out.println(String.format(LOTTO_RESULT_FIVE_MATCH, lottoRank.get(LottoRank.FIVE_MATCHES)));
-        System.out.println(String.format(LOTTO_RESULT_FIVE_AND_BONUS_MATCH, lottoRank.get(LottoRank.FIVE_AND_BONUS_MATCHES)));
-        System.out.println(String.format(LOTTO_RESULT_SIX_MATCH, lottoRank.get(LottoRank.SIX_MATCHES)));
+        System.out.println(String.format(LOTTO_RESULT_FIFTH_PRIZE, lottoRank.get(LottoRank.FIFTH_PRIZE)));
+        System.out.println(String.format(LOTTO_RESULT_FOURTH_PRIZE, lottoRank.get(LottoRank.FOURTH_PRIZE)));
+        System.out.println(String.format(LOTTO_RESULT_THIRD_PRIZE, lottoRank.get(LottoRank.THIRD_PRIZE)));
+        System.out.println(String.format(LOTTO_RESULT_SECOND_PRIZE, lottoRank.get(LottoRank.SECOND_PRIZE)));
+        System.out.println(String.format(LOTTO_RESULT_FIRST_PRIZE, lottoRank.get(LottoRank.FIRST_PRIZE)));
     }
 
     public static void printProfitRate(final double profitRate) {
