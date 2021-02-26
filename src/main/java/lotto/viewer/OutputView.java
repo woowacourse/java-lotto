@@ -1,7 +1,7 @@
 package lotto.viewer;
 
-import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 import lotto.domain.Lotto;
 import lotto.domain.LottoProfitRate;
 import lotto.domain.LottoRank;
@@ -28,7 +28,7 @@ public class OutputView {
     }
 
     public void printLottoStatistics(LottoResult lottoResult, LottoProfitRate lottoProfitRate) {
-        EnumMap<LottoRank, Integer> statistics = lottoResult.getLottoResultStatistics();
+        Map<LottoRank, Integer> statistics = lottoResult.getLottoResultStatistics();
         double profitRate = lottoProfitRate.getProfitRate();
         System.out.println("당첨 통계");
         System.out.println("---------");

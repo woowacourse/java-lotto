@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import java.util.EnumMap;
+import java.util.Map;
 import java.util.Map.Entry;
 
 public class LottoProfitRate {
@@ -15,7 +15,7 @@ public class LottoProfitRate {
             purchasedLottoPiece);
     }
 
-    private double calculateProfitRate(EnumMap<LottoRank, Integer> lottosResultStatistics,
+    private double calculateProfitRate(Map<LottoRank, Integer> lottosResultStatistics,
         int lottoPiece) {
         double sum = 0;
         for (Entry<LottoRank, Integer> keyValue : lottosResultStatistics.entrySet()) {

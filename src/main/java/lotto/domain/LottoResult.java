@@ -1,17 +1,19 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 public class LottoResult {
 
-    private final EnumMap<LottoRank, Integer> lottoResultStatistics;
+    private final Map<LottoRank, Integer> lottoResultStatistics;
 
     public LottoResult(LottoAnnouncement lottoAnnouncement, Lottos lottos) {
         this.lottoResultStatistics = getStatistics(lottoAnnouncement, lottos);
     }
 
-    public EnumMap<LottoRank, Integer> getStatistics(LottoAnnouncement lottoAnnouncement,
+    public Map<LottoRank, Integer> getStatistics(LottoAnnouncement lottoAnnouncement,
         Lottos lottos) {
         EnumMap<LottoRank, Integer> getStatistics = setUpStatistics();
         List<Lotto> lottoBunch = lottos.getLottoBunch();
@@ -30,7 +32,7 @@ public class LottoResult {
         return setUpStatistics;
     }
 
-    public EnumMap<LottoRank, Integer> getLottoResultStatistics() {
-        return lottoResultStatistics;
+    public Map<LottoRank, Integer> getLottoResultStatistics() {
+        return Collections.unmodifiableMap(lottoResultStatistics);
     }
 }
