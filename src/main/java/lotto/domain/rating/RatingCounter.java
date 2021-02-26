@@ -27,8 +27,8 @@ public class RatingCounter {
     public double totalSum() {
         double sum = 0;
         for (Rating rating : Rating.values()) {
-            sum += rating.getReward() * ratings.get(rating)
-                                               .getCount();
+            sum += (double) rating.getReward() * ratings.get(rating)
+                                                        .getCount();
         }
         return sum;
     }
