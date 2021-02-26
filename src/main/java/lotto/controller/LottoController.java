@@ -13,7 +13,7 @@ public class LottoController {
         LottoTickets lottoTickets = initLottoTickets(money);
 
         LottoTicket lottoWinnerTicket = initLottoWinnerTicket();
-        LottoNumber lottoWinnerBonusNumber = initLottoWinnerBonusNumber(lottoWinnerTicket);
+        LottoNumber lottoWinnerBonusNumber = initLottoWinnerBonusNumber();
         LottoWinner lottoWinner = new LottoWinner(lottoWinnerTicket, lottoWinnerBonusNumber);
 
         OutputView.printRewardResultBoard();
@@ -52,14 +52,14 @@ public class LottoController {
         }
     }
 
-    private LottoNumber initLottoWinnerBonusNumber(LottoTicket lottoWinnerTicket) {
+    private LottoNumber initLottoWinnerBonusNumber() {
         OutputView.askWinnerBonusNumber();
         try {
 
             return new LottoNumber(Integer.parseInt(InputView.getUserInput()));
         } catch (NullPointerException | IllegalArgumentException e) {
             OutputView.printErrorMessage(e);
-            return initLottoWinnerBonusNumber(lottoWinnerTicket);
+            return initLottoWinnerBonusNumber();
         }
     }
 }
