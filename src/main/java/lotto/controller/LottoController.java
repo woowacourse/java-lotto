@@ -6,6 +6,8 @@ import lotto.service.LottoTicketsService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import static java.lang.Integer.parseInt;
+
 public class LottoController {
 
     public void lottoStart() {
@@ -37,9 +39,23 @@ public class LottoController {
     }
 
     private LottoTickets initLottoTickets(Money money) {
-        LottoTickets lottoTickets = LottoTicketsService.createAutoLottoTickets(money);
-        OutputView.printTickets(lottoTickets);
-        return lottoTickets;
+        LottoTickets manualLottoTickets = initManualLottoTickets(money);
+        LottoTickets autoLottoTickets = LottoTicketsService.createAutoLottoTickets(money);
+        LottoTickets mergedLottoTickets = LottoTicketsService.mergeLottoTickets(manualLottoTickets, autoLottoTickets);
+        OutputView.printTickets(mergedLottoTickets);
+        return mergedLottoTickets;
+    }
+
+    public LottoTickets initManualLottoTickets(Money money) {
+        OutputView.askHowManyManualLottoTicketsToBuy();
+        try {
+            int manualTicketsCount = Integer.parseInt(InputView.getUserInput());
+            OutputView.askManualLottoTicket();
+            return LottoTicketsService.createManualLottoTickets(money, manualTicketsCount);
+        } catch (NullPointerException | IllegalArgumentException e) {
+            OutputView.printErrorMessage(e);
+            return initManualLottoTickets(money);
+        }
     }
 
     private LottoTicket initLottoWinnerTicket() {
@@ -55,8 +71,7 @@ public class LottoController {
     private LottoNumber initLottoWinnerBonusNumber() {
         OutputView.askWinnerBonusNumber();
         try {
-
-            return new LottoNumber(Integer.parseInt(InputView.getUserInput()));
+            return new LottoNumber(parseInt(InputView.getUserInput()));
         } catch (NullPointerException | IllegalArgumentException e) {
             OutputView.printErrorMessage(e);
             return initLottoWinnerBonusNumber();

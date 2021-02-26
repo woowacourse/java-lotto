@@ -20,6 +20,10 @@ public class LottoTickets {
         return this.lottoTickets;
     }
 
+    public void addAll(LottoTickets lottoTicketsToAdd) {
+        lottoTickets.addAll(lottoTicketsToAdd.getLottoTickets());
+    }
+
     private void validateEmptyTickets(final List<LottoTicket> lottoTickets) {
         if (lottoTickets.isEmpty()) {
             throw new IllegalArgumentException(EMPTY_ERROR_MESSAGE);

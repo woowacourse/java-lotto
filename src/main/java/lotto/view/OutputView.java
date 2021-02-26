@@ -17,6 +17,8 @@ public class OutputView {
     private static final String EACH_RESULT = "%d개 일치 (%d원)- %d개";
     private static final String EACH_RESULT_WITH_BONUS = "%d개 일치, 보너스 볼 일치(%d원)- %d개";
     private static final String FINAL_RESULT = "총 수익률은 %d%%입니다.";
+    private static final String ASK_HOW_MANY_MANUAL_LOTTO_TICKETS = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String ASK_MANUAL_LOTTO_TICKET = "수동으로 구매할 번호를 입력해 주세요.";
 
     public static void askHowMuchToBuy() {
         System.out.println(ASK_HOW_MUCH_TO_BUY);
@@ -81,5 +83,13 @@ public class OutputView {
 
     public static void printErrorMessage(Exception e) {
         System.out.println(e.getMessage());
+    }
+
+    public static void askHowManyManualLottoTicketsToBuy() {
+        System.out.println(ASK_HOW_MANY_MANUAL_LOTTO_TICKETS);
+    }
+
+    public static void askManualLottoTicket() {
+        System.out.println(ASK_MANUAL_LOTTO_TICKET);
     }
 }

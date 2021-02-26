@@ -3,6 +3,8 @@ package lotto.service;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
+import lotto.view.InputView;
+import lotto.view.OutputView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,19 +15,27 @@ public class LottoTicketsService {
 
     }
 
-    public static LottoTickets createManualLottoTickets(Money money) {
+    public static LottoTickets createManualLottoTickets(Money money, int manualTicketsCount) { //여기 인풋뷰..
         List<LottoTicket> lottoTicketGroup = new ArrayList<>();
-        for (int i = 0; i < money.lottoCount(); i++) {
-            lottoTicketGroup.add(LottoTicketService.createAutoLottoTicket());
+        for (int i = 0; i < manualTicketsCount; i++) {
+            lottoTicketGroup.add(LottoTicketService.createManualLottoTicket(InputView.getUserInput()));
         }
+        money.deductMoney(manualTicketsCount);
         return new LottoTickets(lottoTicketGroup);
     }
 
     public static LottoTickets createAutoLottoTickets(Money money) {
         List<LottoTicket> lottoTicketGroup = new ArrayList<>();
-        for (int i = 0; i < money.lottoCount(); i++) {
+        int moneyLeftOver = money.lottoCount();
+        for (int i = 0; i < moneyLeftOver; i++) {
             lottoTicketGroup.add(LottoTicketService.createAutoLottoTicket());
         }
+        money.deductMoney(moneyLeftOver);
         return new LottoTickets(lottoTicketGroup);
+    }
+
+    public static LottoTickets mergeLottoTickets(LottoTickets lottoTickets1, LottoTickets lottoTickets2) {
+        lottoTickets1.addAll(lottoTickets2);
+        return lottoTickets1;
     }
 }
