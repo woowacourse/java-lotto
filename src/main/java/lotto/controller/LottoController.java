@@ -43,8 +43,7 @@ public class LottoController {
     }
 
     private Ticket tryBuyTicket() {
-        outputView.printMessage("구입금액을 입력해 주세요.");
-        int money = inputView.getInt();
+        int money = inputView.getTicketMoney();
         return new Ticket(new Money(money));
     }
 
@@ -58,8 +57,7 @@ public class LottoController {
     }
 
     private void trySetManualCount(Ticket ticket) {
-        outputView.printMessage("수동으로 구매할 로또 수를 입력해 주세요");
-        ticket.setManualCount(inputView.getInt());
+        ticket.setManualCount(inputView.getManualLottoCount());
     }
 
     private void generateLottos(LottoService lottoService, Ticket ticket) {
@@ -89,10 +87,8 @@ public class LottoController {
     }
 
     private WinningLotto tryGetWinningLotto() {
-        outputView.printMessage("지난 주 당첨 번호를 입력해 주세요.");
-        Lotto lotto = Lotto.of(inputView.getLottoNumbers());
-        outputView.printMessage("보너스 볼을 입력해 주세요.");
-        LottoNumber bonusNumber = LottoNumber.valueOf(inputView.getInt());
+        Lotto lotto = Lotto.of(inputView.getWinningLottoNumbers());
+        LottoNumber bonusNumber = LottoNumber.valueOf(inputView.getBonusBallNumber());
         return new WinningLotto(lotto, bonusNumber);
     }
 }
