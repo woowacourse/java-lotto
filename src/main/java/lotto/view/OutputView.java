@@ -4,8 +4,9 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Map;
 import lotto.domain.LottoResult;
-import lotto.domain.LottoTickets;
+import lotto.domain.Money;
 import lotto.domain.Prize;
+import lotto.domain.ticket.LottoTickets;
 
 public class OutputView {
     public void printAllLottoTickets(LottoTickets lottoTickets) {
@@ -15,11 +16,11 @@ public class OutputView {
         );
     }
 
-    public void printLottoResult(LottoResult lottoResult, int purchaseMoney) {
+    public void printLottoResult(LottoResult lottoResult, Money purchaseMoney) {
         System.out.println("당첨 통계");
         System.out.println("---------");
         printWinningResult(lottoResult.getLottoResult());
-        printProfitRatio(purchaseMoney, lottoResult.calculatePrizeMoney());
+        printProfitRatio(purchaseMoney.getMoney(), lottoResult.getPrizeMoney());
     }
 
     public void printWinningResult(Map<Prize, Long> resultMap) {
