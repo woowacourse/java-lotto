@@ -1,10 +1,8 @@
 package domain.money;
 
 import domain.lotto.LottoBundle;
-import util.LottoGenerator;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 public class GameMoney {
@@ -12,7 +10,7 @@ public class GameMoney {
 
     private BigDecimal gameMoney;
 
-    public GameMoney(int gameMoney) {
+    public GameMoney(final int gameMoney) {
         validateBudget(gameMoney);
         this.gameMoney = new BigDecimal(gameMoney);
     }

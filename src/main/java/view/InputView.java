@@ -57,7 +57,7 @@ public class InputView {
     public static List<List<Integer>> getManualLotto(final int manualLottoAmount) {
         try {
             List<List<Integer>> manualLottoNumber = new ArrayList<>();
-            for (int i=0; i< manualLottoAmount; i++) {
+            for (int i = 0; i < manualLottoAmount; i++) {
                 final String userInput = scanner.nextLine();
                 manualLottoNumber.add(Arrays.stream(userInput.split(","))
                         .map(number -> Integer.parseInt(number.trim()))

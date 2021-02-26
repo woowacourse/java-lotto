@@ -11,16 +11,16 @@ public class Lotto {
 
     private final List<LottoBall> lotto;
 
+    public Lotto(final List<LottoBall> lotto) {
+        validateLotto(lotto);
+        this.lotto = new ArrayList<>(lotto);
+    }
+
     public static Lotto of(final List<Integer> lottoNumber) {
         return new Lotto(lottoNumber.stream()
                 .sorted()
                 .map(number -> LottoBall.valueOf(number))
                 .collect(Collectors.toList()));
-    }
-
-    public Lotto(final List<LottoBall> lotto) {
-        validateLotto(lotto);
-        this.lotto = new ArrayList<>(lotto);
     }
 
     private void validateLotto(final List<LottoBall> lotto) {
