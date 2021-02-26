@@ -36,8 +36,8 @@ class TransactionTest {
     @DisplayName("구매 실패, 보유 자산 유지")
     @Test
     void pay_fail() {
-        Transaction transaction = new Transaction(1000);
+        Transaction transaction = new Transaction(900);
         assertFalse(transaction.buyAutoLotto());
-        assertThat(transaction.getDeposit()).isEqualTo(1000);
+        assertThat(transaction.getDeposit()).isEqualTo(900);
     }
 }
