@@ -20,7 +20,7 @@ public class LottoBallsTest {
 
         //when
         List<LottoBall> lottoBalls = lottoNumbers.stream()
-                .map(lottoNumber -> new LottoBall(lottoNumber))
+                .map(lottoNumber -> LottoBall.from(lottoNumber))
                 .collect(Collectors.toList());
 
         //then
@@ -36,7 +36,7 @@ public class LottoBallsTest {
 
         //when
         List<LottoBall> lottoBalls = lottoNumbers.stream()
-                .map(lottoNumber -> new LottoBall(lottoNumber))
+                .map(lottoNumber -> LottoBall.from(lottoNumber))
                 .collect(Collectors.toList());
 
         assertThatThrownBy(() -> new LottoBalls(lottoBalls))
@@ -51,7 +51,7 @@ public class LottoBallsTest {
 
         //when
         List<LottoBall> lottoBalls = lottoNumbers.stream()
-                .map(lottoNumber -> new LottoBall(lottoNumber))
+                .map(lottoNumber -> LottoBall.from(lottoNumber))
                 .collect(Collectors.toList());
 
         //then

@@ -39,7 +39,7 @@ class ResultTest {
 
         //when
         List<LottoBall> lottoBalls = lottoNumbers.stream()
-                .map(lottoNumber -> new LottoBall(lottoNumber))
+                .map(lottoNumber -> LottoBall.from(lottoNumber))
                 .collect(Collectors.toList());
         LottoTickets lottoTickets = new LottoTickets(Collections.singletonList(new LottoTicket(new LottoBalls(lottoBalls))));
 
@@ -56,7 +56,7 @@ class ResultTest {
 
         //when
         List<LottoBall> lottoBalls = lottoNumbers.stream()
-                .map(lottoNumber -> new LottoBall(lottoNumber))
+                .map(lottoNumber -> LottoBall.from(lottoNumber))
                 .collect(Collectors.toList());
         LottoTickets lottoTickets = new LottoTickets(Collections.singletonList(new LottoTicket(new LottoBalls(lottoBalls))));
         Result result = new Result(lottoTickets, winningLotto);
@@ -76,10 +76,10 @@ class ResultTest {
 
         //when
         List<LottoBall> lottoBalls = lottoNumbers.stream()
-                .map(lottoNumber -> new LottoBall(lottoNumber))
+                .map(lottoNumber -> LottoBall.from(lottoNumber))
                 .collect(Collectors.toList());
         List<LottoBall> lottoBalls2 = lottoNumbers2.stream()
-                .map(lottoNumber -> new LottoBall(lottoNumber))
+                .map(lottoNumber -> LottoBall.from(lottoNumber))
                 .collect(Collectors.toList());
         LottoTickets lottoTickets = new LottoTickets(Arrays.asList(new LottoTicket(new LottoBalls(lottoBalls)), new LottoTicket(new LottoBalls(lottoBalls2))));
         Result result = new Result(lottoTickets, winningLotto);
@@ -98,7 +98,7 @@ class ResultTest {
 
         //when
         List<LottoBall> lottoBalls = lottoNumbers.stream()
-                .map(lottoNumber -> new LottoBall(lottoNumber))
+                .map(lottoNumber -> LottoBall.from(lottoNumber))
                 .collect(Collectors.toList());
         LottoTickets lottoTickets = new LottoTickets(Collections.singletonList(new LottoTicket(new LottoBalls(lottoBalls))));
         Result result = new Result(lottoTickets, winningLotto);
@@ -118,10 +118,10 @@ class ResultTest {
 
         //when
         List<LottoBall> lottoBalls = lottoNumbers.stream()
-                .map(lottoNumber -> new LottoBall(lottoNumber))
+                .map(lottoNumber -> LottoBall.from(lottoNumber))
                 .collect(Collectors.toList());
         List<LottoBall> lottoBalls2 = lottoNumbers2.stream()
-                .map(lottoNumber -> new LottoBall(lottoNumber))
+                .map(lottoNumber -> LottoBall.from(lottoNumber))
                 .collect(Collectors.toList());
         LottoTickets lottoTickets = new LottoTickets(Arrays.asList(new LottoTicket(new LottoBalls(lottoBalls)), new LottoTicket(new LottoBalls(lottoBalls2))));
         Result result = new Result(lottoTickets, winningLotto);

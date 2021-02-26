@@ -21,7 +21,7 @@ public class LottoTicketTest {
 
         //when
         List<LottoBall> lottoBalls = lottoNumbers.stream()
-                .map(lottoNumber -> new LottoBall(lottoNumber))
+                .map(lottoNumber -> LottoBall.from(lottoNumber))
                 .collect(Collectors.toList());
 
         //then

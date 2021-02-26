@@ -1,7 +1,6 @@
 package domain;
 
 import domain.ball.LottoBall;
-import domain.ball.LottoBallFactory;
 import domain.ball.LottoBalls;
 import domain.lotto.LottoTicket;
 import util.OutputUtil;
@@ -39,13 +38,13 @@ public class LottoMachine {
     private LottoTicket makeManualTicket(final InputView inputView) {
         List<Integer> manualTicketNumbers = inputView.inputManualTicketNumber();
         List<LottoBall> lottoBalls = manualTicketNumbers.stream()
-                .map(LottoBall::new)
+                .map(LottoBall::from)
                 .collect(Collectors.toList());
         return new LottoTicket(new LottoBalls(lottoBalls));
     }
 
     private List<LottoBall> getRandomLottoBalls() {
-        List<LottoBall> lottoBalls = LottoBallFactory.getLottoBalls();
+        List<LottoBall> lottoBalls = LottoBall.getLottoBalls();
         Collections.shuffle(lottoBalls);
         return lottoBalls.stream()
                 .limit(LOTTO_BALL_SIZE)

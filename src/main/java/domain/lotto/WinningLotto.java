@@ -29,13 +29,13 @@ public class WinningLotto {
 
     private LottoBalls makeWinningBalls(final Set<Integer> winningNumbers) {
         List<LottoBall> lottoBalls = winningNumbers.stream()
-                .map(LottoBall::new)
+                .map(LottoBall::from)
                 .collect(Collectors.toList());
         return new LottoBalls(lottoBalls);
     }
 
     private LottoBall makeBonusBall(int bonusNumber) {
-        return new LottoBall(bonusNumber);
+        return LottoBall.from(bonusNumber);
     }
 
     private void validateWinningNumbers(Set<Integer> winningNumbers) {
