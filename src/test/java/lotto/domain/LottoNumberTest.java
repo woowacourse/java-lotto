@@ -15,7 +15,7 @@ public class LottoNumberTest {
         assertThat(lottoNumber).isEqualTo(new LottoNumber(3));
     }
 
-    @DisplayName("로또 번호는 1~45사이의 숫자여야합니다.")
+    @DisplayName("로또 번호는 1~45사이의 숫자이어야 한다.")
     @Test
     void checkNumberInProperRange() {
         assertThatIllegalArgumentException()
@@ -24,4 +24,5 @@ public class LottoNumberTest {
         assertThatIllegalArgumentException()
             .isThrownBy(() -> new LottoNumber(46));
     }
+
 }

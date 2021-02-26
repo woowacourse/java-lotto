@@ -15,8 +15,8 @@ public class LottoTickets {
         this.lottoTickets = new ArrayList<>(lottoTickets);
     }
 
-    public void addTicket(LottoTicket lottoTicket) {
-        lottoTickets.add(lottoTicket);
+    public void addTickets(List<LottoTicket> tickets) {
+        lottoTickets.addAll(tickets);
     }
 
     public List<LottoTicket> getLottoTickets() {

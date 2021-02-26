@@ -1,13 +1,18 @@
 package lotto.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Supplier;
+import java.util.stream.IntStream;
+import lotto.domain.Count;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
 import lotto.domain.WinningLotto;
-import lotto.domain.ticketFactory.TicketFactory;
 import lotto.exception.LottoCustomException;
+import lotto.utils.RandomUtils;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -20,62 +25,40 @@ public class LottoController {
     }
 
     public void run() {
-        Money money = inputMoney();
-        LottoTickets lottoTickets = buyTickets(money);
-        WinningLotto winningLotto = inputWinningLotto();
-        showResult(lottoTickets, winningLotto, money);
-    }
-
-    private Money inputMoney() {
         try {
-            OutputView.printMoneyMessage();
-            Money money = new Money(inputView.inputValue());
-            OutputView.printTicketCountMessage(money.countTickets());
-            return money;
+            Money money = inputMoney();
+            LottoTickets lottoTickets = buyTickets(money);
+            WinningLotto winningLotto = inputWinningLotto();
+            showResult(lottoTickets, winningLotto, money);
         } catch (LottoCustomException exception) {
             OutputView.printErrorMessage(exception);
-            return inputMoney();
         }
     }
 
+    private Money inputMoney() {
+        OutputView.printMoneyMessage();
+        return new Money(inputView.inputValue());
+    }
+
     private LottoTickets buyTickets(Money money) {
-        LottoTickets lottoTickets = TicketFactory.makeRandomTicketsByCount(money.countTickets());
-        OutputView.printAllTickets(lottoTickets);
+        OutputView.printFixedTicketMessage();
+        Count fixedTickets = new Count(money.buyWithinLimit(inputView.inputValue()));
+        LottoTickets lottoTickets = new LottoTickets();
+        Supplier<List<Integer>> randomNumbersGenerator = RandomUtils::generateNumbers;
+
+        buyManualTickets(lottoTickets, fixedTickets);
+        lottoTickets
+            .addTickets(inputTickets(fixedTickets.remains(money.countTickets()), randomNumbersGenerator));
+        OutputView.printAllTickets(fixedTickets, money, lottoTickets);
         return lottoTickets;
     }
 
     private WinningLotto inputWinningLotto() {
-        LottoTicket lottoTicket = inputWinningNumbers();
-        LottoNumber bonus = inputBonus(lottoTicket);
+        OutputView.printWinningNumbers();
+        LottoTicket lottoTicket = new LottoTicket(inputView.inputNumbers());
+        OutputView.printBonusNumber();
+        LottoNumber bonus = new LottoNumber(inputView.inputValue());
         return new WinningLotto(lottoTicket, bonus);
-    }
-
-    private LottoTicket inputWinningNumbers() {
-        try {
-            OutputView.printWinningNumbers();
-            return TicketFactory.makeFixedTicket(inputView.inputNumbers());
-        } catch (LottoCustomException exception) {
-            OutputView.printErrorMessage(exception);
-            return inputWinningNumbers();
-        }
-    }
-
-    private LottoNumber inputBonus(LottoTicket lottoTicket) {
-        try {
-            OutputView.printBonusNumber();
-            LottoNumber bonusNumber = new LottoNumber(inputView.inputValue());
-            validateDuplicate(lottoTicket, bonusNumber);
-            return bonusNumber;
-        } catch (LottoCustomException exception) {
-            OutputView.printErrorMessage(exception);
-            return inputBonus(lottoTicket);
-        }
-    }
-
-    private void validateDuplicate(LottoTicket lottoTicket, LottoNumber bonusNumber) {
-        if (lottoTicket.hasNumber(bonusNumber)) {
-            throw new LottoCustomException("보너스 볼은 지난 주 당첨번호와 중복될 수 없습니다.");
-        }
     }
 
     private void showResult(LottoTickets lottoTickets, WinningLotto winningLotto, Money money) {
@@ -85,5 +68,21 @@ public class LottoController {
         OutputView.printWinningResultTitle();
         OutputView.printProfit(money.calculateProfit(lottoResult.calculateTotalReward()),
             lottoResult.getResults());
+    }
+
+    private void buyManualTickets(LottoTickets lottoTickets, Count count) {
+        if (count.exists()) {
+            OutputView.printInputFixedTicketMessage();
+            Supplier<List<Integer>> manualNumbersGenerator = inputView::inputNumbers;
+
+            lottoTickets.addTickets(inputTickets(count, manualNumbersGenerator));
+        }
+    }
+
+    private List<LottoTicket> inputTickets(Count count, Supplier<List<Integer>> numbersGenerator) {
+        List<LottoTicket> tickets = new ArrayList<>();
+        IntStream.rangeClosed(1, count.counts())
+            .forEach(index -> tickets.add(new LottoTicket(numbersGenerator.get())));
+        return tickets;
     }
 }

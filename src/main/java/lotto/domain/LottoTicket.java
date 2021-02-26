@@ -1,21 +1,39 @@
 package lotto.domain;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
+import lotto.exception.LottoCustomException;
 
 public class LottoTicket {
 
+    public static final int LOTTO_SIZE = 6;
+    private static final String NOT_DUPLICATE_NUMBERS_ERROR_MESSAGE = "당첨번호는 중복되지 않은 숫자들로 총 %d개이어야 합니다.";
+
     private final Set<LottoNumber> lottoNumbers;
 
-    public LottoTicket(final Set<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+    public LottoTicket(final List<Integer> lottoNumbers) {
+        this.lottoNumbers = makeTicket(lottoNumbers);
     }
 
-    public int countHits(LottoTicket winningTicket) {
-        Set<LottoNumber> hitLottoNumbers = new HashSet<>(lottoNumbers);
-        hitLottoNumbers.retainAll(winningTicket.lottoNumbers);
-        return hitLottoNumbers.size();
+    private Set<LottoNumber> makeTicket(List<Integer> numbers) {
+        validateSize(numbers);
+        return numbers.stream()
+            .map(LottoNumber::new)
+            .collect(Collectors.toSet());
+    }
+
+    private void validateSize(List<Integer> numbers) {
+        if (isNotProperSize(numbers)) {
+            throw new LottoCustomException(
+                String.format(NOT_DUPLICATE_NUMBERS_ERROR_MESSAGE, LOTTO_SIZE));
+        }
+    }
+
+    private boolean isNotProperSize(List<Integer> lottoNumbers) {
+        return lottoNumbers.size() != LOTTO_SIZE;
     }
 
     public boolean hasNumber(LottoNumber number) {

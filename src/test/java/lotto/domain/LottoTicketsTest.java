@@ -2,34 +2,46 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Collections;
+import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottoTicketsTest {
 
+    private LottoTickets lottoTickets;
+
+    @BeforeEach
+    void init() {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<Integer> numbers2 = Arrays.asList(1, 2, 3, 4, 5, 7);
+
+        lottoTickets = new LottoTickets(Arrays.asList
+            (new LottoTicket(numbers),
+                new LottoTicket(numbers2)));
+    }
+
     @DisplayName("로또 티켓들 생성하기")
     @Test
     public void create() {
-        LottoNumber lotto1 = new LottoNumber(1);
-        LottoNumber lotto2 = new LottoNumber(2);
-        LottoNumber lotto3 = new LottoNumber(3);
-        LottoNumber lotto4 = new LottoNumber(4);
-        LottoNumber lotto5 = new LottoNumber(5);
-        LottoNumber lotto6 = new LottoNumber(6);
-        LottoNumber lotto7 = new LottoNumber(7);
-
-        Set<LottoNumber> lottoNumbers = new HashSet<>(
-            Arrays.asList(lotto1, lotto2, lotto3, lotto4, lotto5, lotto6));
-        Set<LottoNumber> lottoNumbers2 = new HashSet<>(
-            Arrays.asList(lotto1, lotto2, lotto3, lotto4, lotto5, lotto7));
-        LottoTickets lottoTickets = new LottoTickets(Arrays.asList
-            (new LottoTicket(lottoNumbers),
-                new LottoTicket(lottoNumbers2)));
-
         assertThat(lottoTickets.getLottoTickets())
-            .contains(new LottoTicket(lottoNumbers), new LottoTicket(lottoNumbers2));
+            .contains(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 7)));
     }
+
+    @DisplayName("새 로또 티켓(들)을 생성하면 기존 로또티켓 목록에 추가한다.")
+    @Test
+    void add() {
+        List<LottoTicket> moreTickets = new ArrayList<>(
+            Collections.singletonList(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 8))));
+        lottoTickets.addTickets(moreTickets);
+        assertThat(lottoTickets.getLottoTickets())
+            .contains(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 7)),
+                new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 8)));
+    }
+
 }
