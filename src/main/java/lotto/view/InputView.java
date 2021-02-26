@@ -19,7 +19,7 @@ public class InputView {
         OutputView.printMessage("구입 금액을 입력해 주세요.");
         String money = SCANNER.nextLine();
         try {
-            return new Money(money);
+            return Money.of(money);
         } catch (Exception e) {
             OutputView.printError(e.getMessage());
             return askMoney();

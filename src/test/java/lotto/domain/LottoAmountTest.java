@@ -11,7 +11,7 @@ public class LottoAmountTest {
     @DisplayName("구입 하려는 로또 수량 생성 테스트")
     @Test
     void testCreateLottoAmount() {
-        Money money = new Money("14000");
+        Money money = Money.of("14000");
         String manual = "4";
         LottoAmount lottoAmount = new LottoAmount(money, manual);
 
@@ -21,7 +21,7 @@ public class LottoAmountTest {
 
     @Test
     void testValidateLottoAmount() {
-        Money money = new Money("14000");
+        Money money = Money.of("14000");
         String wrongManual1 = "";
         String wrongManual2 = "asd";
         String wrongManual4 = "1500";

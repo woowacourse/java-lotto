@@ -10,7 +10,7 @@ public class MoneyTest {
     @DisplayName("금액이 들어오면 구매할 수 있는 로또의 개수를 반환하는 테스트")
     @Test
     void testCountLotto() {
-        Money money = new Money("1000");
+        Money money = Money.of("1000");
         assertThat(money.toNumberOfPurchaseLotto()).isEqualTo(1);
     }
 
@@ -23,13 +23,13 @@ public class MoneyTest {
         String wrongMoney4 = "999";
 
         assertThatNullPointerException()
-                .isThrownBy(() -> new Money(wrongMoney1));
+                .isThrownBy(() -> Money.of(wrongMoney1));
         assertThatNullPointerException()
-                .isThrownBy(() -> new Money(wrongMoney2));
+                .isThrownBy(() -> Money.of(wrongMoney2));
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Money(wrongMoney3));
+                .isThrownBy(() -> Money.of(wrongMoney3));
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Money(wrongMoney4));
+                .isThrownBy(() -> Money.of(wrongMoney4));
     }
 }
