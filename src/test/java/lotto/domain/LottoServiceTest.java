@@ -45,17 +45,4 @@ public class LottoServiceTest {
         }
     }
 
-    @Test
-    @DisplayName("로또 긁은 내역 확인")
-    void scratchLottoCheck() {
-        Ticket ticket = new Ticket(new Money(2000));
-
-        lottoManager.getLotto(lottoRepository, lottoMachine, ticket.getCount());
-        WinningLotto winningLotto = new WinningLotto(
-            Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)),
-            LottoNumber.from(7));
-        RatingInfo ratingInfo = lottoManager.scratchLotto(lottoRepository, winningLotto);
-
-        assertThat(ratingInfo.get(Rating.FIRST)).isEqualTo(2);
-    }
 }

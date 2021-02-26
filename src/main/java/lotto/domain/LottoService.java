@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoRepository;
 import lotto.domain.lottomachine.LottoMachine;
 import lotto.domain.rating.Rating;
@@ -12,17 +11,6 @@ public class LottoService {
         final LottoMachine lottoMachine, final int count) {
         lottoRepository.generateLottoByTicket(lottoMachine, count);
         return lottoRepository;
-    }
-
-    public RatingInfo scratchLotto(final LottoRepository lottoRepository,
-        final WinningLotto winningLotto) {
-        RatingInfo ratingInfo = new RatingInfo();
-        for (Lotto lotto : lottoRepository.toList()) {
-            int match = winningLotto.compareLottoNumber(lotto);
-            boolean hasBonusBall = winningLotto.compareBonusBall(lotto);
-            ratingInfo.update(Rating.getRating(match, hasBonusBall));
-        }
-        return ratingInfo;
     }
 
     public double calculateEarningRate(final RatingInfo ratingInfo, final long money) {

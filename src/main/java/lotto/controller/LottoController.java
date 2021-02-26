@@ -21,9 +21,10 @@ public class LottoController {
         final Ticket totalTicket = buyTicket();
         final Ticket manualTicket = manualBuyTicket(totalTicket);
         generateManualLottoNumbers(manualTicket.getCount(), lottoRepository);
-        printBuyLottoResult(manualTicket.getCount(), totalTicket.getCount(), lottoService, lottoRepository);
+        printBuyLottoResult(manualTicket.getCount(), totalTicket.getCount(), lottoService,
+            lottoRepository);
 
-        RatingInfo ratingInfo = lottoService.scratchLotto(lottoRepository, buyWinningLotto());
+        RatingInfo ratingInfo = lottoRepository.scratchLotto(buyWinningLotto());
         printWinningStats(ratingInfo, lottoService, totalTicket);
     }
 
