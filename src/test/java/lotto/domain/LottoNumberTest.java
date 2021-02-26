@@ -78,7 +78,15 @@ class LottoNumberTest {
     void getNumber() {
         LottoNumber lottoNumber = LottoNumber.valueOf(1);
 
-        assertThat(lottoNumber.getNumber()).isEqualTo(1);
+        assertThat(lottoNumber).isEqualTo(LottoNumber.valueOf("1"));
+    }
+
+    @Test
+    @DisplayName("캐싱 객체 일치 여부 체크")
+    void getNumber1() {
+        LottoNumber lottoNumber = LottoNumber.valueOf(1);
+
+        assertThat(lottoNumber).isSameAs(LottoNumber.valueOf("1"));
     }
 
 }
