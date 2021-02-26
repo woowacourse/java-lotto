@@ -25,7 +25,7 @@ public class LottoController {
 
         outputView.printWinningStats(lottoService.getRatingCounter(), lottoService.getEarningRate(ticket.getPrice()));
     }
-    
+
     private Ticket buyTicketWithManualCount() {
         Ticket ticket = buyTicket();
         setManualCount(ticket);

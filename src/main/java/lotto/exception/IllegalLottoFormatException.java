@@ -1,6 +1,6 @@
 package lotto.exception;
 
-public class IllegalLottoFormatException extends IllegalArgumentException{
+public class IllegalLottoFormatException extends IllegalArgumentException {
     public IllegalLottoFormatException() {
         super();
     }
