@@ -39,8 +39,4 @@ public class Money {
     public long getValue() {
         return value;
     }
-
-    public int getPurchasableLottoCount() {
-        return (int) (this.value / MINIMUM_MONEY);
-    }
 }

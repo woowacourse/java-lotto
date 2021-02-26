@@ -10,6 +10,7 @@ public class LottoTicketFactory {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int LOTTO_TICKET_SIZE = 6;
+    public static final int LOTTO_PRICE = 1000;
 
     private static final List<LottoNumber> lottoNumberRange;
 
@@ -26,7 +27,7 @@ public class LottoTicketFactory {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         addManualLottoTickets(lottoTickets, manualTicketInputs);
 
-        int autoCreateCount = money.getPurchasableLottoCount() - manualTicketInputs.size();
+        int autoCreateCount = (int) money.getValue() / LOTTO_PRICE - manualTicketInputs.size();
         addAutoLottoTickets(lottoTickets, autoCreateCount);
         return new LottoTickets(lottoTickets);
     }

@@ -9,8 +9,8 @@ public class ManualLottoAmount {
 
     private final int value;
 
-    public ManualLottoAmount(String input, int purchasableLottoCount) {
-        validateManualLottoAmount(input, purchasableLottoCount);
+    public ManualLottoAmount(String input, Money money) {
+        validateManualLottoAmount(input, (int) money.getValue() / LottoTicketFactory.LOTTO_PRICE);
         this.value = Integer.parseInt(input);
     }
 
