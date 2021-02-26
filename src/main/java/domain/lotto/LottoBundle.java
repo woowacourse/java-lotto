@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class LottoBundle {
     private final List<Lotto> lottoBundle;
 
-    public LottoBundle(final List<Lotto> lottoBundle) {
+    private LottoBundle(final List<Lotto> lottoBundle) {
         this.lottoBundle = new ArrayList<>(lottoBundle);
     }
 

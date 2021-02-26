@@ -11,7 +11,7 @@ public class Lotto {
 
     private final List<LottoBall> lotto;
 
-    public Lotto(final List<LottoBall> lotto) {
+    private Lotto(final List<LottoBall> lotto) {
         validateLotto(lotto);
         this.lotto = new ArrayList<>(lotto);
     }
