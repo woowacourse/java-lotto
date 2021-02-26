@@ -17,21 +17,13 @@ public class LottoAnnouncementTest {
     @DisplayName("로또 당첨 번 발표 성공")
     void successAnnouncement() {
         List<Integer> announcedNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        List<Number> winnerNumbers = packWinnerNumbers(announcedNumbers);
+        Lotto winnerLotto = new Lotto(announcedNumbers);
         int announcedBonusNumber = 7;
         LottoAnnouncement lottoannouncement = new LottoAnnouncement(announcedNumbers,
             announcedBonusNumber);
         Number bonusNumber = Number.from(announcedBonusNumber);
-        assertThat(lottoannouncement.getWinners()).isEqualTo(winnerNumbers);
+        assertThat(lottoannouncement.getWinners()).isEqualTo(winnerLotto);
         assertThat(lottoannouncement.getBonusNumber()).isEqualTo(bonusNumber);
-    }
-
-    private List<Number> packWinnerNumbers(List<Integer> announcedWinnerNumbers) {
-        List<Number> packWinnerNumbers = new ArrayList<>();
-        for (int winnerNumber : announcedWinnerNumbers) {
-            packWinnerNumbers.add(Number.from(winnerNumber));
-        }
-        return packWinnerNumbers;
     }
 
     @Test

@@ -30,9 +30,9 @@ public class Lotto {
     }
 
     private double getMatchingCount(LottoAnnouncement lottoAnnouncement) {
-        List <Number> winningNumbers = lottoAnnouncement.getWinners();
+        Lotto winners = lottoAnnouncement.getWinners();
         Number bonusNumber = lottoAnnouncement.getBonusNumber();
-        List <Number> combinedWinningNumbers = getCombinedWinNumbers(winningNumbers, bonusNumber);
+        List <Number> combinedWinningNumbers = getCombinedWinNumbers(winners, bonusNumber);
         int count = getCount(combinedWinningNumbers);
 
         if (isSecondRank(count, bonusNumber)) {
@@ -41,9 +41,8 @@ public class Lotto {
         return count;
     }
 
-    private List<Number> getCombinedWinNumbers(List<Number> winningNumbers,
-        Number bonusNumber) {
-        List<Number> integratedWinningNumbers = new ArrayList<>(winningNumbers);
+    private List<Number> getCombinedWinNumbers(Lotto winner, Number bonusNumber) {
+        List<Number> integratedWinningNumbers = new ArrayList<>(winner.getNumbers());
         integratedWinningNumbers.add(bonusNumber);
         return integratedWinningNumbers;
     }
@@ -75,6 +74,29 @@ public class Lotto {
         if (winners.size() != Lotto.LOTTO_POSSESSION_NUMBER) {
             throw new LottoAnnouncementException(DIFFERENT_POSSESSION_MESSAGE);
         }
+    }
+
+    @Override
+    public boolean equals(Object candidateObject) {
+        if (this == candidateObject) {
+            return true;
+        };
+        if ((candidateObject == null) || (getClass() != candidateObject.getClass())) {
+            return false;
+        }
+        Lotto candidateLotto = (Lotto) candidateObject;
+        return isSameNumbers(candidateLotto);
+    }
+
+    private boolean isSameNumbers(Lotto candidateLotto) {
+        long sameNumbersCount = candidateLotto.getNumbers()
+            .stream()
+            .map(this.numbers::contains)
+            .count();
+        if (sameNumbersCount == LOTTO_POSSESSION_NUMBER) {
+            return true;
+        }
+        return false;
     }
 
     public List<Number> getNumbers() {
