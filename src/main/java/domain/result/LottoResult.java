@@ -24,6 +24,12 @@ public class LottoResult {
         return ((double) moneyGain / (double) moneySpent);
     }
 
+    public void combineResult(final LottoResult otherResult) {
+        for (LottoRank lottoRank : LottoRank.values()) {
+            this.lottoResult.put(lottoRank, this.lottoResult.get(lottoRank) + otherResult.lottoResult.get(lottoRank));
+        }
+    }
+
     public Map<LottoRank, Integer> getLottoResult() {
         return Collections.unmodifiableMap(this.lottoResult);
     }
