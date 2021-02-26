@@ -2,14 +2,13 @@ package lotto.controller;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.EnumMap;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import lotto.domain.LottoProfitRate;
 import lotto.domain.LottoResult;
 import lotto.domain.generator.LottoManualGenerator;
 import lotto.domain.LottoAnnouncement;
-import lotto.domain.LottoRank;
 import lotto.domain.Lottos;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -42,7 +41,8 @@ public class LottoStoreTest {
         Lottos exampleLottos = new Lottos(lottoManualGenerator, 1);
         LottoAnnouncement lottoAnnouncement = new LottoAnnouncement(WINNING_NUMBERS, BONUS_NUMBER);
         LottoResult lottoResult = new LottoResult(lottoAnnouncement, exampleLottos);
-        assertThat(lottoResult.getProfitRate()).isEqualTo(profitRate);
+        LottoProfitRate lottoProfitRate = new LottoProfitRate(lottoResult, exampleLottos.getSize());
+        assertThat(lottoProfitRate.getProfitRate()).isEqualTo(profitRate);
     }
 
     private List<List<Integer>> manualLottoNumbers(String exampleLotto) {

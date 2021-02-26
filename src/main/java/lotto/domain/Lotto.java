@@ -13,6 +13,7 @@ public class Lotto {
     public static final String OVERLAPPED_WINNER_MESSAGE = "당첨 번호가 중복되었습니다.";
     public static final double BONUS_MATCHING_COUNT = 5.5;
     public static final int LOTTO_POSSESSION_NUMBER = 6;
+    public static final int LOTTO_PRICE = 1000;
 
     private final List<Number> numbers;
 

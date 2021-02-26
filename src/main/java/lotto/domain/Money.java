@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.controller.LottoStore;
 import lotto.exception.MoneyException;
 
 public class Money {
@@ -14,11 +13,11 @@ public class Money {
     }
 
     public int getLottoPieces() {
-        return money / LottoStore.LOTTO_PRICE;
+        return money / Lotto.LOTTO_PRICE;
     }
 
     private void checkEnoughMoney(int possessedMoney) {
-        if (possessedMoney < LottoStore.LOTTO_PRICE) {
+        if (possessedMoney < Lotto.LOTTO_PRICE) {
             throw new MoneyException(NOT_ENOUGH_MONEY);
         }
     }

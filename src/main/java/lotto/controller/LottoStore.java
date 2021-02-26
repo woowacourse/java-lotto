@@ -3,6 +3,7 @@ package lotto.controller;
 import java.util.List;
 import java.util.Scanner;
 import lotto.domain.LottoAnnouncement;
+import lotto.domain.LottoProfitRate;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
@@ -18,8 +19,6 @@ import lotto.viewer.OutputView;
 
 public class LottoStore {
 
-    public static final int LOTTO_PRICE = 1000;
-
     private final InputView inputView;
     private final OutputView outputView;
 
@@ -33,7 +32,8 @@ public class LottoStore {
         Lottos lottos = buyLotto();
         LottoAnnouncement lottoAnnouncement = receiveValidLottoAnnouncement();
         LottoResult lottoResult = new LottoResult(lottoAnnouncement, lottos);
-        outputView.printLottoStatistics(lottoResult);
+        LottoProfitRate lottoProfitRate = new LottoProfitRate(lottoResult, lottos.getSize());
+        outputView.printLottoStatistics(lottoResult, lottoProfitRate);
     }
 
     public Lottos buyLotto() {

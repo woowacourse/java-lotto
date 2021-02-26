@@ -3,14 +3,12 @@ package lotto.viewer;
 import java.util.EnumMap;
 import java.util.List;
 import lotto.domain.Lotto;
+import lotto.domain.LottoProfitRate;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 import lotto.domain.Piece;
-import lotto.exception.LottoAnnouncementException;
 import lotto.exception.LottoException;
-import lotto.exception.MoneyException;
-import lotto.exception.PieceException;
 
 public class OutputView {
 
@@ -29,9 +27,9 @@ public class OutputView {
         System.out.println();
     }
 
-    public void printLottoStatistics(LottoResult lottoResult) {
+    public void printLottoStatistics(LottoResult lottoResult, LottoProfitRate lottoProfitRate) {
         EnumMap<LottoRank, Integer> statistics = lottoResult.getLottoResultStatistics();
-        double profitRate = lottoResult.getProfitRate();
+        double profitRate = lottoProfitRate.getProfitRate();
         System.out.println("당첨 통계");
         System.out.println("---------");
         for (LottoRank key : statistics.keySet()) {
