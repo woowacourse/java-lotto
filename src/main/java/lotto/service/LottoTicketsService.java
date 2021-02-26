@@ -14,7 +14,7 @@ public class LottoTicketsService {
 
     }
 
-    public static LottoTickets createManualLottoTickets(Money money, int manualTicketsCount) { //여기 인풋뷰..
+    public static LottoTickets createManualLottoTickets(Money money, int manualTicketsCount) {
         List<LottoTicket> lottoTicketGroup = new ArrayList<>();
         for (int i = 0; i < manualTicketsCount; i++) {
             lottoTicketGroup.add(LottoTicketService.createManualLottoTicket(InputView.getUserInput()));
