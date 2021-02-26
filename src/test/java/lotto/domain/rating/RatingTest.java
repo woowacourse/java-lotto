@@ -21,7 +21,7 @@ public class RatingTest {
         Lotto inputLotto = Lotto.from(Arrays.asList(arr));
 
         Lotto lotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoNumber bonusNumber = new LottoNumber(7);
+        LottoNumber bonusNumber = LottoNumber.from(7);
 
         Rating rating = Rating
             .getRating(inputLotto.countCommonValue(lotto), inputLotto.containNumber(bonusNumber));
@@ -39,7 +39,7 @@ public class RatingTest {
         Lotto inputLotto = Lotto.from(Arrays.asList(arr));
 
         Lotto lotto = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoNumber bonusNumber = new LottoNumber(7);
+        LottoNumber bonusNumber = LottoNumber.from(7);
 
         Rating rating = Rating
             .getRating(inputLotto.countCommonValue(lotto), inputLotto.containNumber(bonusNumber));

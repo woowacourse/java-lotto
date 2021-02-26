@@ -53,7 +53,7 @@ public class LottoServiceTest {
         lottoManager.getLotto(lottoRepository, lottoMachine, ticket.getCount());
         WinningLotto winningLotto = new WinningLotto(
             Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)),
-            new LottoNumber(7));
+            LottoNumber.from(7));
         RatingInfo ratingInfo = lottoManager.scratchLotto(lottoRepository, winningLotto);
 
         assertThat(ratingInfo.get(Rating.FIRST)).isEqualTo(2);

@@ -48,7 +48,7 @@ public class LottoTest {
     @CsvSource(value = {"1:true", "7:false"}, delimiter = ':')
     void containBonusNumber(int input, boolean expected) {
         Lotto init = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoNumber inputLottoNumber = new LottoNumber(input);
+        LottoNumber inputLottoNumber = LottoNumber.from(input);
         boolean actual = init.containNumber(inputLottoNumber);
         assertThat(actual).isEqualTo(expected);
     }
