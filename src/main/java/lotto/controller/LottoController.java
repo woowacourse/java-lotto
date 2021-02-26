@@ -40,10 +40,7 @@ public class LottoController {
     private WinningLotto createWinningLotto() {
         OutputView.printWinningLottoMessage();
         String values = InputView.getLottoNumbers();
-        List<Integer> numbers = Arrays.stream(values.split(REGEX))
-            .mapToInt(Integer::parseInt)
-            .boxed()
-            .collect(Collectors.toList());
+        List<Integer> numbers = ParseUtils.parseIntegerList(values, REGEX);
         int bonusNumber = ParseUtils.parseInt(InputView.getBonusBallNumber());
         return new WinningLotto(numbers, bonusNumber);
     }
