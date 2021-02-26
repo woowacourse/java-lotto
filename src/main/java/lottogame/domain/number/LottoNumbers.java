@@ -40,7 +40,7 @@ public class LottoNumbers {
         return new ArrayList<>(this.lottoNumbers);
     }
 
-    public int size(){
+    public int size() {
         return lottoNumbers.size();
     }
 

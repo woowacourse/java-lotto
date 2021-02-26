@@ -20,7 +20,7 @@ public class LottoGameController {
         buyAutoTickets(money);
     }
 
-    private void buyManualTickets(Money money){
+    private void buyManualTickets(Money money) {
         lottoGame.buyManualTickets(money, InputView.getManualLottoNumbers(money));
     }
 

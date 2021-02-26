@@ -31,7 +31,6 @@ public class LottoNumberTest {
     @DisplayName("LottoNumber를 1로 생성하려 했을 때")
     void lottoNumberValueIsOne() {
         String value = "1";
-        //LottoNumber lottoNumber1 = new LottoNumber(value);
         LottoNumber lottoNumber1 = LottoNumber.of(value);
         assertThat(lottoNumber1).isEqualTo(LottoNumber.of(value));
     }

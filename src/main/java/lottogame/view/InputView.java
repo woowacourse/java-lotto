@@ -19,7 +19,7 @@ public class InputView {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
 
         LottoTicketCount lottoTicketCount = new LottoTicketCount(scanner.nextLine(), money);
-        while(lottoTicketCount.isRemain()){
+        while (lottoTicketCount.isRemain()) {
             lottoTicketCount.reduce();
             ManualLottoNumbers.add(getManualNumbers());
         }

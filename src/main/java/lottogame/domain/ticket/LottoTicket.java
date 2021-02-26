@@ -26,7 +26,7 @@ public class LottoTicket {
         return new LottoTicket(getAutoNumbers(), true);
     }
 
-    public static LottoTicket of(final LottoNumbers lottoNumbers){
+    public static LottoTicket of(final LottoNumbers lottoNumbers) {
         return new LottoTicket(lottoNumbers, false);
     }
 
