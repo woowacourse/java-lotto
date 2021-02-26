@@ -1,4 +1,4 @@
-package domain;
+package domain.result;
 
 import domain.result.LottoRank;
 import org.junit.jupiter.api.DisplayName;
