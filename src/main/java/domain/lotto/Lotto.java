@@ -13,6 +13,7 @@ public class Lotto {
 
     public static Lotto of(final List<Integer> lottoNumber) {
         return new Lotto(lottoNumber.stream()
+                .sorted()
                 .map(number -> LottoBall.valueOf(number))
                 .collect(Collectors.toList()));
     }
