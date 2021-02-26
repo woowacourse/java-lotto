@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -40,7 +39,14 @@ public class GameMoneyTest {
                 .hasMessage("구입할 수 없는 수량입니다.");
     }
 
-    @DisplayName("GameMoney를 입력받고, 수동으로 구매할 로또를 입력한 후 구매한다.")
+    @DisplayName("GameMoney로 살 수 있는 최대한의 로또 갯수를 반환한다.")
+    @Test
+    void checkMaxLottoAvailableTest() {
+        final GameMoney gameMoney = new GameMoney(10000);
+        assertThat(gameMoney.checkMaxLottoAvailable()).isEqualTo(10);
+    }
+
+    @DisplayName("GameMoney를 입력받고, 구매할 로또를 입력한 후 구매한다.")
     @Test
     void GameMoneyBuyManualLottoTest() {
         final GameMoney gameMoney = new GameMoney(10000);
@@ -53,33 +59,12 @@ public class GameMoneyTest {
                 Arrays.asList(2, 3, 4, 5, 6, 7),
                 Arrays.asList(3, 4, 5, 6, 7, 8));
 
-        final LottoBundle manualLottoBundle = gameMoney.buyManualLotto(manualLottoBought);
+        final LottoBundle manualLottoBundle = gameMoney.buyLotto(manualLottoBought);
 
         assertThat(manualLottoBundle.countNumberOfLotto()).isEqualTo(3);
         assertThat(manualLottoBundle.getLottoBundle()).contains(lotto1);
         assertThat(manualLottoBundle.getLottoBundle()).contains(lotto2);
         assertThat(manualLottoBundle.getLottoBundle()).contains(lotto3);
-    }
-
-    @DisplayName("GameMoney로 로또를 구매하기")
-    @Test
-    void GameMoneyBuyAutoLottoTest() {
-        final GameMoney gameMoney = new GameMoney(15000);
-        final LottoBundle lottoBundle = gameMoney.buyAutoLotto();
-        assertThat(lottoBundle.countNumberOfLotto()).isEqualTo(15);
-    }
-
-    @DisplayName("GameMoney로 수동 로또와 자동 로또 구매하기")
-    @Test
-    void BuyManualLottoAndAutoLotto() {
-        final GameMoney gameMoney = new GameMoney(15000);
-        final List<List<Integer>> manualLottoNumbers = Arrays.asList(
-                Arrays.asList(1, 2, 3, 4, 5, 6),
-                Arrays.asList(2, 3, 4, 5, 6, 7));
-        final LottoBundle manualLottoBundle = gameMoney.buyManualLotto(manualLottoNumbers);
-        final LottoBundle autoLottoBundle = gameMoney.buyAutoLotto();
-        assertThat(manualLottoBundle.countNumberOfLotto()).isEqualTo(2);
-        assertThat(autoLottoBundle.countNumberOfLotto()).isEqualTo(13);
     }
 }
 

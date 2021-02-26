@@ -4,6 +4,7 @@ import domain.lotto.LottoBundle;
 import util.LottoGenerator;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameMoney {
@@ -27,22 +28,18 @@ public class GameMoney {
     }
 
     public void checkManualBuyingAvailable(final int quantity) {
-        if (quantity < 0 || gameMoney.divide(new BigDecimal(SINGLE_LOTTO_GAME_MONEY)).intValue() < quantity) {
+        if (quantity < 0 || checkMaxLottoAvailable() < quantity) {
             throw new IllegalArgumentException("구입할 수 없는 수량입니다.");
         }
     }
 
-    public LottoBundle buyManualLotto(final List<List<Integer>> manualLottoNumberBundle) {
-        final LottoBundle lottoBundle = LottoBundle.of(manualLottoNumberBundle);
-        calculateGameMoneyLeft(manualLottoNumberBundle.size());
-        return lottoBundle;
+    public int checkMaxLottoAvailable() {
+        return gameMoney.divide(new BigDecimal(SINGLE_LOTTO_GAME_MONEY)).intValue();
     }
 
-    public LottoBundle buyAutoLotto() {
-        final int numberOfLottoToBuy = gameMoney.divide(new BigDecimal(SINGLE_LOTTO_GAME_MONEY)).intValue();
-        calculateGameMoneyLeft(numberOfLottoToBuy);
-
-        final LottoBundle lottoBundle = LottoGenerator.createRandomLottoBundle(numberOfLottoToBuy);
+    public LottoBundle buyLotto(final List<List<Integer>> lottoNumberBundle) {
+        final LottoBundle lottoBundle = LottoBundle.of(lottoNumberBundle);
+        calculateGameMoneyLeft(lottoNumberBundle.size());
         return lottoBundle;
     }
 
