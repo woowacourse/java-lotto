@@ -54,7 +54,7 @@ public class LottoGameController {
     private int makeManualLottoAmount(final GameMoney gameMoney) {
         try {
             OutputView.printManualLottoAmountRequest();
-            final int manualLottoAmount = InputView.getManualLottoNumber();
+            final int manualLottoAmount = InputView.getManualLottoAmount();
             gameMoney.checkManualBuyingAvailable(manualLottoAmount);
             return manualLottoAmount;
         } catch (IllegalArgumentException e) {
@@ -92,7 +92,7 @@ public class LottoGameController {
     private Lotto makeWinningLotto() {
         try {
             OutputView.printWinningLottoRequest();
-            final List<Integer> winningLottoNumber = InputView.getWinningLotto();
+            final List<Integer> winningLottoNumber = InputView.getLotto();
             return Lotto.of(winningLottoNumber);
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());

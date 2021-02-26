@@ -22,17 +22,25 @@ public class InputView {
         }
     }
 
-    public static int getManualLottoNumber() {
+    public static int getManualLottoAmount() {
         try {
             final String userInput = scanner.nextLine();
             return Integer.parseInt(userInput);
         } catch (NumberFormatException e) {
             OutputView.printErrorMessage("자연수만 입력 가능합니다.");
-            return getManualLottoNumber();
+            return getManualLottoAmount();
         }
     }
 
-    public static List<Integer> getWinningLotto() {
+    public static List<List<Integer>> getManualLotto(final int manualLottoAmount) {
+        final List<List<Integer>> manualLottoNumber = new ArrayList<>();
+        for (int i = 0; i < manualLottoAmount; i++) {
+            manualLottoNumber.add(getLotto());
+        }
+        return manualLottoNumber;
+    }
+
+    public static List<Integer> getLotto() {
         try {
             final String userInput = scanner.nextLine();
             return Arrays.stream(userInput.split(","))
@@ -40,7 +48,7 @@ public class InputView {
                     .collect(Collectors.toList());
         } catch (NumberFormatException e) {
             OutputView.printErrorMessage(", 를 사용하여 구분되게 입력해 주세요");
-            return getWinningLotto();
+            return getLotto();
         }
     }
 
@@ -51,22 +59,6 @@ public class InputView {
         } catch (NumberFormatException e) {
             OutputView.printErrorMessage("자연수를 입력해 주세요.");
             return getBonusBall();
-        }
-    }
-
-    public static List<List<Integer>> getManualLotto(final int manualLottoAmount) {
-        try {
-            List<List<Integer>> manualLottoNumber = new ArrayList<>();
-            for (int i = 0; i < manualLottoAmount; i++) {
-                final String userInput = scanner.nextLine();
-                manualLottoNumber.add(Arrays.stream(userInput.split(","))
-                        .map(number -> Integer.parseInt(number.trim()))
-                        .collect(Collectors.toList()));
-            }
-            return manualLottoNumber;
-        } catch (NumberFormatException e) {
-            OutputView.printErrorMessage(", 를 사용하여 구분되게 입력해 주세요");
-            return getManualLotto(manualLottoAmount);
         }
     }
 }
