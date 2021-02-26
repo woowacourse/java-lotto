@@ -2,14 +2,13 @@ package lottogame.domain.machine;
 
 import lottogame.domain.number.LottoNumber;
 import lottogame.domain.number.LottoNumbers;
-import lottogame.utils.LottoGameUtils;
 
 public class LottoWinningDrawingMachine {
 
     private LottoNumbers lottoNumbers;
 
     public LottoNumbers drawing(final String drawingNumbers) {
-        return lottoNumbers = LottoGameUtils.getLottoNumbersByInputString(drawingNumbers);
+        return lottoNumbers = new LottoNumbers(drawingNumbers);
     }
 
     public LottoNumber bonusDrawing(final String drawingNumber) {

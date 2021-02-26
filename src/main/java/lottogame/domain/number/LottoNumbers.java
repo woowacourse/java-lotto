@@ -8,12 +8,28 @@ import java.util.List;
 public class LottoNumbers {
 
     public static final int DRAWING_COUNT_LIMIT = 6;
+    public static final String DELIMITER = ",";
+
     private final List<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(List<LottoNumber> lottoNumbers) {
+    public LottoNumbers(final String lottoNumbers) {
+        this(getSplitLottoNumbersByString(lottoNumbers));
+    }
+
+    public LottoNumbers(final List<LottoNumber> lottoNumbers) {
         validDrawingNumbers(lottoNumbers);
         lottoNumbers.sort((Comparator.comparingInt(LottoNumber::getValue)));
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
+    }
+
+    private static List<LottoNumber> getSplitLottoNumbersByString(String lottoNumbers) {
+        lottoNumbers = lottoNumbers.replaceAll(" ", "");
+        final List<LottoNumber> lottoNumberGroup = new ArrayList<>();
+
+        for (String number : lottoNumbers.split(DELIMITER)) {
+            lottoNumberGroup.add(LottoNumber.of(number));
+        }
+        return lottoNumberGroup;
     }
 
     public boolean contains(final LottoNumber lottoNumber) {

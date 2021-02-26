@@ -6,7 +6,6 @@ import lottogame.domain.ticket.LottoAutoTicket;
 import lottogame.domain.ticket.LottoManualTicket;
 import lottogame.domain.ticket.LottoTicket;
 import lottogame.domain.ticket.LottoTickets;
-import lottogame.utils.LottoGameUtils;
 
 public class LottoTicketMachine {
 
@@ -37,7 +36,8 @@ public class LottoTicketMachine {
             throw new IllegalArgumentException("남은 금액이 모자릅니다.");
         }
         money.use(TICKET_PRICE);
-        LottoNumbers lottoNumbers = LottoGameUtils.getLottoNumbersByInputString(selectedLottoNumbers);
-        return new LottoManualTicket(lottoNumbers);
+        return new LottoManualTicket(new LottoNumbers(selectedLottoNumbers));
+        //LottoNumbers lottoNumbers = LottoGameUtils.getLottoNumbersByInputString(selectedLottoNumbers);
+        //return new LottoManualTicket(lottoNumbers);
     }
 }
