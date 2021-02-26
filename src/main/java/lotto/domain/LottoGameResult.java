@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.*;
 
 public class LottoGameResult {
+
     private final Map<Rank, Integer> resultMap;
 
     public LottoGameResult() {
@@ -28,6 +29,7 @@ public class LottoGameResult {
     }
 
     public double calculateProfit() {
+
         return totalReward() / calculateTotalPrice();
     }
 
