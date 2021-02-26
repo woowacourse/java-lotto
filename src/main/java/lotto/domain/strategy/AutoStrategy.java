@@ -1,8 +1,8 @@
-package lotto.strategy;
+package lotto.domain.strategy;
 
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
+import lotto.domain.ticket.LottoNumber;
+import lotto.domain.ticket.LottoTicket;
+import lotto.domain.ticket.LottoTickets;
 
 import java.util.ArrayList;
 import java.util.Collections;

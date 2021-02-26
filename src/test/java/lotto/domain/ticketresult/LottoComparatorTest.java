@@ -1,9 +1,9 @@
 package lotto.domain.ticketresult;
 
 
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
+import lotto.domain.ticket.LottoNumber;
+import lotto.domain.ticket.LottoTicket;
+import lotto.domain.ticket.LottoTickets;
 import lotto.domain.ticketpurchase.PurchasedTickets;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,7 +20,7 @@ public class LottoComparatorTest {
     private LottoTickets dummy;
 
     @BeforeEach
-    void setWinningLottoNumbers() {
+    void setWinningLottoNumbersAndDummyTicket() {
         LottoTicket winnerTicket = new LottoTicket(
                 Arrays.asList(
                         new LottoNumber(1),
@@ -31,12 +31,7 @@ public class LottoComparatorTest {
                         new LottoNumber(6)
                 )
         );
-        LottoNumber bonusNumber = new LottoNumber(7);
-        winningLottoNumbers = new WinningLottoNumbers(winnerTicket, bonusNumber);
-    }
 
-    @BeforeEach
-    void setDummyLottoTicket() {
         LottoTicket ticket = new LottoTicket(Arrays.asList(
                 new LottoNumber(31),
                 new LottoNumber(32),
@@ -47,6 +42,8 @@ public class LottoComparatorTest {
         ));
 
         dummy = new LottoTickets(Arrays.asList(ticket));
+        LottoNumber bonusNumber = new LottoNumber(7);
+        winningLottoNumbers = new WinningLottoNumbers(winnerTicket, bonusNumber);
     }
 
     @DisplayName("1등 당첨 - 6개 일치")
@@ -68,13 +65,12 @@ public class LottoComparatorTest {
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
         Map<Rank, Integer> lottoResult = lottoComparator.getLottoResult(purchasedTickets);
 
-        Assertions.assertThat(lottoResult.get(FIFTH)).isEqualTo(0);
-        Assertions.assertThat(lottoResult.get(FOURTH)).isEqualTo(0);
-        Assertions.assertThat(lottoResult.get(THIRD)).isEqualTo(0);
-        Assertions.assertThat(lottoResult.get(SECOND)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(FIFTH)).isZero();
+        Assertions.assertThat(lottoResult.get(FOURTH)).isZero();
+        Assertions.assertThat(lottoResult.get(THIRD)).isZero();
+        Assertions.assertThat(lottoResult.get(SECOND)).isZero();
         Assertions.assertThat(lottoResult.get(FIRST)).isEqualTo(1);
     }
-
 
     @DisplayName("2등 당첨 - 5개, 보너스 번호 일치")
     @Test
@@ -95,13 +91,12 @@ public class LottoComparatorTest {
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
         Map<Rank, Integer> lottoResult = lottoComparator.getLottoResult(purchasedTickets);
 
-        Assertions.assertThat(lottoResult.get(FIFTH)).isEqualTo(0);
-        Assertions.assertThat(lottoResult.get(FOURTH)).isEqualTo(0);
-        Assertions.assertThat(lottoResult.get(THIRD)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(FIFTH)).isZero();
+        Assertions.assertThat(lottoResult.get(FOURTH)).isZero();
+        Assertions.assertThat(lottoResult.get(THIRD)).isZero();
         Assertions.assertThat(lottoResult.get(SECOND)).isEqualTo(1);
-        Assertions.assertThat(lottoResult.get(FIRST)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(FIRST)).isZero();
     }
-
 
     @DisplayName("3등 당첨 - 5개 일치")
     @Test
@@ -120,13 +115,12 @@ public class LottoComparatorTest {
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
         Map<Rank, Integer> lottoResult = lottoComparator.getLottoResult(purchasedTickets);
 
-        Assertions.assertThat(lottoResult.get(FIFTH)).isEqualTo(0);
-        Assertions.assertThat(lottoResult.get(FOURTH)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(FIFTH)).isZero();
+        Assertions.assertThat(lottoResult.get(FOURTH)).isZero();
         Assertions.assertThat(lottoResult.get(THIRD)).isEqualTo(1);
-        Assertions.assertThat(lottoResult.get(SECOND)).isEqualTo(0);
-        Assertions.assertThat(lottoResult.get(FIRST)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(SECOND)).isZero();
+        Assertions.assertThat(lottoResult.get(FIRST)).isZero();
     }
-
 
     @DisplayName("4등 당첨 - 4개 일치")
     @Test
@@ -145,13 +139,12 @@ public class LottoComparatorTest {
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
         Map<Rank, Integer> lottoResult = lottoComparator.getLottoResult(purchasedTickets);
 
-        Assertions.assertThat(lottoResult.get(FIFTH)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(FIFTH)).isZero();
         Assertions.assertThat(lottoResult.get(FOURTH)).isEqualTo(1);
-        Assertions.assertThat(lottoResult.get(THIRD)).isEqualTo(0);
-        Assertions.assertThat(lottoResult.get(SECOND)).isEqualTo(0);
-        Assertions.assertThat(lottoResult.get(FIRST)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(THIRD)).isZero();
+        Assertions.assertThat(lottoResult.get(SECOND)).isZero();
+        Assertions.assertThat(lottoResult.get(FIRST)).isZero();
     }
-
 
     @DisplayName("5등 당첨 - 3개 일치")
     @Test
@@ -171,9 +164,9 @@ public class LottoComparatorTest {
         Map<Rank, Integer> lottoResult = lottoComparator.getLottoResult(purchasedTickets);
 
         Assertions.assertThat(lottoResult.get(FIFTH)).isEqualTo(1);
-        Assertions.assertThat(lottoResult.get(FOURTH)).isEqualTo(0);
-        Assertions.assertThat(lottoResult.get(THIRD)).isEqualTo(0);
-        Assertions.assertThat(lottoResult.get(SECOND)).isEqualTo(0);
-        Assertions.assertThat(lottoResult.get(FIRST)).isEqualTo(0);
+        Assertions.assertThat(lottoResult.get(FOURTH)).isZero();
+        Assertions.assertThat(lottoResult.get(THIRD)).isZero();
+        Assertions.assertThat(lottoResult.get(SECOND)).isZero();
+        Assertions.assertThat(lottoResult.get(FIRST)).isZero();
     }
 }

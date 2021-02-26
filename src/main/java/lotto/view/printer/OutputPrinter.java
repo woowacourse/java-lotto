@@ -1,6 +1,6 @@
 package lotto.view.printer;
 
-import lotto.domain.LottoTicket;
+import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticketresult.Rank;
 
 import java.util.Map;

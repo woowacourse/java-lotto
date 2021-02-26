@@ -1,15 +1,15 @@
 package lotto.controller;
 
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
+import lotto.domain.ticket.LottoNumber;
+import lotto.domain.ticket.LottoTicket;
+import lotto.domain.ticket.LottoTickets;
 import lotto.domain.ticketgenerator.LottoGenerator;
 import lotto.domain.ticketpurchase.PurchasedTickets;
 import lotto.domain.ticketpurchase.UserPurchase;
 import lotto.domain.ticketresult.LottoComparator;
 import lotto.domain.ticketresult.WinningLottoNumbers;
-import lotto.strategy.AutoStrategy;
-import lotto.strategy.ManualStrategy;
+import lotto.domain.strategy.AutoStrategy;
+import lotto.domain.strategy.ManualStrategy;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 import lotto.view.printer.InputPrinter;
@@ -100,7 +100,9 @@ public class LottoMain {
 
     private static LottoTicket getLottoTicketInput() {
         List<Integer> numbers = InputView.getLottoNumbers();
-        List<LottoNumber> lottoNumbers = numbers.stream().map(LottoNumber::new).collect(Collectors.toList());
+        List<LottoNumber> lottoNumbers = numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
         return new LottoTicket(lottoNumbers);
     }
 

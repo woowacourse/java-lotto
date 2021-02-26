@@ -1,7 +1,7 @@
 package lotto.domain.ticketpurchase;
 
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
+import lotto.domain.ticket.LottoTicket;
+import lotto.domain.ticket.LottoTickets;
 
 import java.util.Collection;
 import java.util.List;

@@ -1,6 +1,6 @@
-package lotto.strategy;
+package lotto.domain.strategy;
 
-import lotto.domain.LottoTickets;
+import lotto.domain.ticket.LottoTickets;
 
 public interface GenerateStrategy {
     LottoTickets generateTickets();

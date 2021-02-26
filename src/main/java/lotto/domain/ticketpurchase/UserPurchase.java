@@ -17,15 +17,23 @@ public class UserPurchase {
     }
 
     private void validateExactlyDividedByOneTicketPrice(int purchasePrice) {
-        if (purchasePrice <= ZERO || purchasePrice % ONE_TICKET_PRICE != ZERO) {
+        if (isExactlyDividedByThousand(purchasePrice)) {
             throw new IllegalArgumentException("구입 금액은 1000원 단위여야 합니다.");
         }
     }
 
+    private boolean isExactlyDividedByThousand(int purchasePrice) {
+        return purchasePrice <= ZERO || purchasePrice % ONE_TICKET_PRICE != ZERO;
+    }
+
     private void validateManualTicketPriceNotGreaterThanPurchasePrice(int purchasePrice, int manualTicketNumber) {
-        if (purchasePrice < manualTicketNumber * ONE_TICKET_PRICE) {
+        if (isManualTicketPriceOverPurchasePrice(purchasePrice, manualTicketNumber)) {
             throw new IllegalArgumentException("구입금액에 맞게 입력해 주세요");
         }
+    }
+
+    private boolean isManualTicketPriceOverPurchasePrice(int purchasePrice, int manualTicketNumber) {
+        return purchasePrice < (manualTicketNumber * ONE_TICKET_PRICE);
     }
 
     public int getPurchasePrice() {
