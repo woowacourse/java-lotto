@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import java.util.Scanner;
 import lotto.Money;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
@@ -31,7 +30,7 @@ public class LottoController {
     private WinningLotto createWinningLotto() {
         Lotto winningLotto = createWinningNumbers();
         Integer bonusNumber = createBonusNUmber();
-        return WinningLotto.generatedBy(winningLotto,
+        return WinningLotto.generate(winningLotto,
             LottoNumber.valueOf(bonusNumber));
     }
 
@@ -79,7 +78,7 @@ public class LottoController {
     private Lotto createWinningNumbers() {
         OutputView.inputWinningNumber();
         String winningNumbers = InputView.inputWinningNumbers();
-        return Lotto.generatedBy(winningNumbers);
+        return Lotto.generate(winningNumbers);
     }
 
     private Integer createBonusNUmber() {

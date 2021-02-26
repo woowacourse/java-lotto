@@ -11,7 +11,7 @@ public class WinningLotto {
         this.bonus = bonus;
     }
 
-    public static WinningLotto generatedBy(Lotto lotto, LottoNumber bonus) {
+    public static WinningLotto generate(Lotto lotto, LottoNumber bonus) {
         validateBonus(lotto, bonus);
         return new WinningLotto(lotto, bonus);
     }

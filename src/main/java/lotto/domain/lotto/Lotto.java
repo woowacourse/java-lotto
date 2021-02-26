@@ -20,7 +20,7 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public static Lotto generatedBy(String numbers) {
+    public static Lotto generate(String numbers) {
         List<Integer> lottoNumbers;
         try {
             lottoNumbers = Arrays
@@ -30,17 +30,17 @@ public class Lotto {
         } catch (Exception e) {
             throw new IllegalArgumentException(ERROR_COLLECT_NUMBER);
         }
-        return generatedBy(lottoNumbers);
+        return generate(lottoNumbers);
     }
 
-    public static Lotto generatedBy(List<Integer> numbers) {
+    public static Lotto generate(List<Integer> numbers) {
         List<LottoNumber> lottoNumbers = numbers.stream()
             .map(LottoNumber::valueOf)
             .collect(Collectors.toList());
-        return Lotto.generatedBy(() -> lottoNumbers);
+        return Lotto.generate(() -> lottoNumbers);
     }
 
-    public static Lotto generatedBy(LottoGenerator lottoGenerator) {
+    public static Lotto generate(LottoGenerator lottoGenerator) {
         List<LottoNumber> lottoNumbers = lottoGenerator.generateLottoNumbers();
         validateLotto(lottoNumbers);
         return new Lotto(lottoNumbers);
