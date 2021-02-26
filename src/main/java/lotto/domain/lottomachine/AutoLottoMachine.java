@@ -1,13 +1,15 @@
-package lotto.domain;
+package lotto.domain.lottomachine;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import lotto.domain.ticket.LottoTicket;
+import lotto.domain.ticket.LottoTickets;
 import lotto.domain.number.LottoNumberFactory;
 
-public class AutoLottoTicketFactory implements LottoTicketFactory {
+public class AutoLottoMachine {
     public static final int FROM_INDEX = 0;
     public static final int TO_INDEX = 6;
     private final static List<Integer> lottoNumbers = IntStream
@@ -15,9 +17,10 @@ public class AutoLottoTicketFactory implements LottoTicketFactory {
         .boxed()
         .collect(Collectors.toList());
 
-    @Override
-    public LottoTicket createLottoTicket() {
-        return new LottoTicket(shuffleNumbers());
+    public LottoTickets createTickets(int ticketCount) {
+        return IntStream.range(0, ticketCount)
+            .mapToObj(i -> new LottoTicket(shuffleNumbers()))
+            .collect(Collectors.collectingAndThen(Collectors.toList(), LottoTickets::new));
     }
 
     private List<Integer> shuffleNumbers() {
