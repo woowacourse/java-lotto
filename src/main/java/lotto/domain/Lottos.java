@@ -18,6 +18,14 @@ public class Lottos {
         this.lottos = lottos;
     }
 
+    public static Lottos of(List<String> manuals) {
+        List<Lotto> manualottos = manuals.stream()
+                .map(Lotto::ofLotto)
+                .collect(Collectors.toList());
+
+        return new Lottos(manualottos);
+    }
+
     private void makeRandomLottos(int autoAmount) {
         for (int i = 0; i < autoAmount; i++) {
             lottos.add(Lotto.ofRandomLotto());

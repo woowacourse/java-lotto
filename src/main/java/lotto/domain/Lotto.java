@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 public class Lotto {
 
     public static final int LOTTO_NUMBER_SIZE = 6;
+    private static final String DELIMITER = ",";
 
     private final List<LottoNumber> lottoNumbers;
 
@@ -24,10 +25,17 @@ public class Lotto {
         return randomGenerator.generate();
     }
 
-    public static Lotto ofLotto(List<Integer> numbers) {
-        return new Lotto((numbers.stream()
-                .map(LottoNumber::from))
-                .collect(Collectors.toList()));
+    public static Lotto ofLotto(String numbers) {
+
+        return new Lotto(makeLottoNumbers(numbers));
+    }
+
+    private static List<LottoNumber> makeLottoNumbers(String numbers) {
+        List<String> splitNumbers = Arrays.asList(numbers.split(DELIMITER));
+
+        return splitNumbers.stream()
+                .map(LottoNumber::from)
+                .collect(Collectors.toList());
     }
 
     public List<LottoNumber> toList() {

@@ -25,7 +25,7 @@ public class LottoGameTest {
         LottoGame lottoGame = new LottoGame();
         FixedGenerator fixedGenerator = new FixedGenerator();
 
-        lottoGame.buyManualLottos(Arrays.asList(fixedGenerator.generate()));
+        lottoGame.buyManualLottos(new Lottos(Arrays.asList(fixedGenerator.generate())));
 
         assertThat(lottoGame.toManualLottos().toList().get(0)).isEqualTo(fixedGenerator.generate());
     }

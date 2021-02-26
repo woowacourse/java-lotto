@@ -1,14 +1,12 @@
 package lotto.domain;
 
-import java.util.List;
-
 public class LottoGame {
 
     private Lottos manualLottos;
     private Lottos autoLottos;
 
-    public void buyManualLottos(List<Lotto> manualLottos) {
-        this.manualLottos = new Lottos(manualLottos);
+    public void buyManualLottos(Lottos manualLottos) {
+        this.manualLottos = manualLottos;
     }
 
     public void buyAutoLottos(int autoAmount) {

@@ -35,7 +35,7 @@ public class WinningLottoTest {
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
         assertThat(winningLotto)
-                .isEqualTo(new WinningLotto(Lotto.ofLotto(winningNumbers), 7));
+                .isEqualTo(new WinningLotto(Lotto.ofLotto("1, 2, 3, 4, 5, 6"), 7));
     }
 
     @Test

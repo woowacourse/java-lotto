@@ -1,19 +1,14 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoAmount;
-import lotto.domain.LottoNumber;
-import lotto.domain.Money;
+import lotto.domain.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class InputView {
+
     private static final Scanner SCANNER = new Scanner(System.in);
-    private static final String DELIMITER = ",";
 
     public static Money askMoney() {
         OutputView.printMessage("구입 금액을 입력해 주세요.");
@@ -38,7 +33,7 @@ public class InputView {
         }
     }
 
-    public static List<Lotto> askManualLottoNumbers(int manualAmount) {
+    public static Lottos askManualLottoNumbers(int manualAmount) {
         OutputView.printMessage(System.lineSeparator() + "수동으로 구매할 번호를 입력해 주세요.");
 
         try {
@@ -49,33 +44,24 @@ public class InputView {
         }
     }
 
-    private static List<Lotto> makeManualLottos(int manualAmount) {
-        List<Lotto> manualLottos = new ArrayList<>();
+    private static Lottos makeManualLottos(int manualAmount) {
+        List<String> manualLottos = new ArrayList<>(manualAmount);
         for (int i = 0; i < manualAmount; i++) {
-            Lotto manualLotto = new Lotto(makeWinningLottoNumbers(SCANNER.nextLine()));
-            manualLottos.add(manualLotto);
+            manualLottos.add(SCANNER.nextLine());
         }
-        return manualLottos;
+        return Lottos.of(manualLottos);
     }
 
-    public static List<LottoNumber> askLastWinningLottoNumber() {
+    public static Lotto askLastWinningLottoNumber() {
         OutputView.printMessage("지난 주 당첨 번호를 입력해 주세요.");
         String input = SCANNER.nextLine();
 
         try {
-            return makeWinningLottoNumbers(input);
+            return Lotto.ofLotto(input);
         } catch (Exception e) {
             OutputView.printError(e.getMessage());
             return askLastWinningLottoNumber();
         }
-    }
-
-    private static List<LottoNumber> makeWinningLottoNumbers(String input) {
-        List<String> splitNumbers = Arrays.asList(input.split(DELIMITER));
-
-        return splitNumbers.stream()
-                .map(LottoNumber::from)
-                .collect(Collectors.toList());
     }
 
     public static LottoNumber askBonusNumber() {
