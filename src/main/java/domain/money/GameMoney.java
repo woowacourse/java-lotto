@@ -32,9 +32,9 @@ public class GameMoney {
         }
     }
 
-    public LottoBundle buyManualLotto(final List<List<Integer>> manualLottoNumber) {
-        final LottoBundle lottoBundle = LottoBundle.of(manualLottoNumber);
-        calculateGameMoneyLeft(manualLottoNumber.size());
+    public LottoBundle buyManualLotto(final List<List<Integer>> manualLottoNumberBundle) {
+        final LottoBundle lottoBundle = LottoBundle.of(manualLottoNumberBundle);
+        calculateGameMoneyLeft(manualLottoNumberBundle.size());
         return lottoBundle;
     }
 
