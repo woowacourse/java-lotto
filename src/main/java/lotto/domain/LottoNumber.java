@@ -12,7 +12,7 @@ public class LottoNumber {
     private final int number;
 
     static {
-        LottoNumber[] lottoCache = new LottoNumber[45];
+        LottoNumber[] lottoCache = new LottoNumber[MAX_BOUND];
         for (int i = MIN_BOUND; i <= MAX_BOUND; i++) {
             lottoCache[i - 1] = new LottoNumber(i);
         }
