@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.concurrent.CopyOnWriteArrayList;
 import lotto.domain.Lotto;
 import lotto.domain.Number;
 
@@ -20,8 +19,8 @@ public class LottoAutoNumberGenerator implements LottoNumberGenerator {
     }
 
     @Override
-    public List<Integer> generateNumbers() {
-        final List<Integer> shuffledNumbers = new CopyOnWriteArrayList<>(candidateNumbers);
+    public synchronized List<Integer> generateNumbers() {
+        final List<Integer> shuffledNumbers = Collections.synchronizedList(candidateNumbers);
         Collections.shuffle(shuffledNumbers);
         Set<Integer> lottoNumbers =
             new TreeSet<>(shuffledNumbers.subList(0, Lotto.LOTTO_POSSESSION_NUMBER));

@@ -14,7 +14,7 @@ public class LottoManualNumberGenerator implements LottoNumberGenerator {
     }
 
     @Override
-    public List<Integer> generateNumbers() {
+    public synchronized List<Integer> generateNumbers() {
         List<Integer> generateNumber = manualSelectedNumbers.get(emitNumbers);
         emitNumbers++;
         return Collections.synchronizedList(generateNumber);
