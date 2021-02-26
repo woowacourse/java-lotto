@@ -20,6 +20,12 @@ public final class ManualBuyAmount {
         return new ManualBuyAmount(manualAmount);
     }
 
+    private static void validateNumeric(String manualAmountInput) {
+        if (!NumericStringValidator.isValid(manualAmountInput)) {
+            throw new IllegalArgumentException("수동 구매 개수는 0 이상의 정수만 가능합니다.");
+        }
+    }
+
     private static void validateLessThanTotalAmount(Money money, BigInteger manualAmount) {
         if (manualAmountIsLessThanTotalAmount(money, manualAmount)) {
             throw new IllegalArgumentException("수동 구매 개수는 총 구매 개수 이내만 가능합니다.");
@@ -30,12 +36,6 @@ public final class ManualBuyAmount {
         BigInteger totalTicketAmount = getTotalTicketAmount(money);
 
         return totalTicketAmount.compareTo(manualAmount) < 0;
-    }
-
-    private static void validateNumeric(String manualAmountInput) {
-        if (!NumericStringValidator.isValid(manualAmountInput)) {
-            throw new IllegalArgumentException("수동 구매 개수는 0 이상의 정수만 가능합니다.");
-        }
     }
 
     private static BigInteger getTotalTicketAmount(Money money) {
