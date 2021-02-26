@@ -20,7 +20,7 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public static Lotto generate(String numbers) {
+    public static Lotto manual(String numbers) {
         List<Integer> lottoNumbers;
         try {
             lottoNumbers = Arrays

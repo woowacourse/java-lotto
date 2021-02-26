@@ -30,7 +30,7 @@ public class LottoStore {
     }
 
     private Lotto buyManualLotto() {
-        return Lotto.generate(InputView.inputManualLottoNumber());
+        return Lotto.manual(InputView.inputManualLottoNumber());
     }
 
 

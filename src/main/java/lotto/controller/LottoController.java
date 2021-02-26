@@ -78,7 +78,7 @@ public class LottoController {
     private Lotto createWinningNumbers() {
         OutputView.inputWinningNumber();
         String winningNumbers = InputView.inputWinningNumbers();
-        return Lotto.generate(winningNumbers);
+        return Lotto.manual(winningNumbers);
     }
 
     private Integer createBonusNUmber() {
