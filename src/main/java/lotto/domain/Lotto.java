@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.IllegalLottoFormatException;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -22,7 +24,7 @@ public class Lotto {
 
     private void validateNumberCount(final List<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException("잘못된 개수의 입력입니다.");
+            throw new IllegalLottoFormatException("잘못된 개수의 입력입니다.");
         }
     }
 
@@ -30,7 +32,7 @@ public class Lotto {
         if (numbers.stream()
                    .distinct()
                    .count() != numbers.size()) {
-            throw new IllegalArgumentException("중복된 숫자 입력입니다.");
+            throw new IllegalLottoFormatException("중복된 숫자 입력입니다.");
         }
     }
 

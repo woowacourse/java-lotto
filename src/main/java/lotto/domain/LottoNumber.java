@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.IllegalLottoNumberException;
+
 public class LottoNumber {
 
     private final int value;
@@ -11,7 +13,7 @@ public class LottoNumber {
     public static LottoNumber valueOf(int i) {
         if (i >= LottoNumberCache.low && i <= LottoNumberCache.high)
             return LottoNumberCache.cache[i + (-LottoNumberCache.low)];
-        throw new IllegalArgumentException("범위 이외의 숫자 입력입니다.");
+        throw new IllegalLottoNumberException("범위 이외의 숫자 입력입니다.");
     }
 
     private static class LottoNumberCache {
