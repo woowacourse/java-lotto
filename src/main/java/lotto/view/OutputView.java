@@ -16,7 +16,7 @@ public class OutputView {
     private static final String SECOND_RESULT_FORMAT = "5개 일치, 보너스 볼 일치 (30000000원)- %d개";
     private static final String FIRST_RESULT_FORMAT = "6개 일치 (2000000000원)- %d개";
     private static final String PROFIT_RESULT_FORMAT = "총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
-    private static final String PURCHASE_NUMBER_OF_LOTTO_MESSAGES = "%d개를 구매했습니다.";
+    private static final String PURCHASE_NUMBER_OF_LOTTO_MESSAGES = "수동으로 %d장 자동으로 %d개를 구매했습니다.";
 
     private OutputView() {
     }
@@ -39,13 +39,14 @@ public class OutputView {
 
     public static void printLottoTicket(LottoTicket lottoTicket) {
         System.out.printf((PURCHASE_NUMBER_OF_LOTTO_MESSAGES) + "%n",
-                lottoTicket.getLength());
-        for (LottoLine line : lottoTicket.getLottoLines()) {
+                lottoTicket.getManualLottoSize(), lottoTicket.getAutoLottoSize());
+        for (LottoLine line : lottoTicket.getTotalLottoLine()) {
             List<String> lottoNumbers = line.getValue().stream()
                     .sorted()
                     .map(lottoNumber -> String.valueOf(lottoNumber.getValue()))
                     .collect(Collectors.toList());
             System.out.println("[" + String.join(",", lottoNumbers) + "]");
         }
+        System.out.println();
     }
 }

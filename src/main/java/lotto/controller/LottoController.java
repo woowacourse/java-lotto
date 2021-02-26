@@ -9,11 +9,14 @@ import lotto.domain.lotto.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import static lotto.view.InputView.*;
+
 public class LottoController {
 
     public void run() {
         try {
-            LottoTicket lottoTicket = getLottoTicket();
+            LottoTicketBuyingRequest lottoTicketBuyingRequest = getLottoTicketBuyingRequest();
+            LottoTicket lottoTicket = getLottoTicket(lottoTicketBuyingRequest);
             OutputView.printLottoTicket(lottoTicket);
             WinningNumbers winningNumbers = getWinningNumbers();
             OutputView.printResult(matchLottoTicket(lottoTicket, winningNumbers));
@@ -22,26 +25,41 @@ public class LottoController {
         }
     }
 
-    private LottoTicket getLottoTicket() {
-        Money money = new Money(InputView.getMoney());
-        return LottoTicketGenerator.getInstance().createLottoTicket(money.getValue());
+
+    private LottoTicketBuyingRequest getLottoTicketBuyingRequest() {
+        Money money = new Money(InputView.getPositiveNumberInput(REQUEST_PURCHASE_MONEY));
+        int manualLottoCount = InputView.getPositiveNumberInput(REQUEST_NUMBER_OF_BUYING_MANUAL_LOTTO_NUMBERS);
+        LottoAmount numberOfManualLotto = new LottoAmount(manualLottoCount);
+
+        LottoTicketBuyingRequest lottoTicketBuyingRequest = new LottoTicketBuyingRequest(money, numberOfManualLotto);
+        for (int i = 0; i < numberOfManualLotto.getValue(); i++) {
+            List<Integer> splitLottoNumbersInput = InputView.getSplitLottoNumbers(REQUEST_INPUT_MANUAL_LOTTO_NUMBERS);
+            lottoTicketBuyingRequest.submitManualLottoLine(getLottoLine(splitLottoNumbersInput));
+        }
+
+        return lottoTicketBuyingRequest;
+    }
+
+
+    private LottoTicket getLottoTicket(LottoTicketBuyingRequest lottoTicketBuyingRequest) {
+        return LottoTicketGenerator.getInstance().createLottoTicket(lottoTicketBuyingRequest);
     }
 
     private WinningNumbers getWinningNumbers() {
-        String[] splitLottoNumbersInput = InputView.getSplitLottoNumbers();
+        List<Integer> splitLottoNumbersInput = InputView.getSplitLottoNumbers(REQUEST_LAST_WIN_LOTTO_NUMBERS);
         LottoLine lottoLine = getLottoLine(splitLottoNumbersInput);
 
-        String bonusBallInput = InputView.getBonusLottoNumber();
+        int bonusBallInput = InputView.getPositiveNumberInput(REQUEST_LAST_WIN_BONUS_BALL);
         LottoNumber bonusLottoNumber = new LottoNumber(bonusBallInput);
 
         return new WinningNumbers(lottoLine, bonusLottoNumber);
     }
 
-    private LottoLine getLottoLine(String[] splitLottoNumbersInput) {
+    private LottoLine getLottoLine(List<Integer> splitLottoNumbersInput) {
         ArrayList<LottoNumber> lottoNumberList = new ArrayList();
 
-        for (int i = 0; i < splitLottoNumbersInput.length; i++) {
-            lottoNumberList.add(new LottoNumber(splitLottoNumbersInput[i]));
+        for (int i = 0; i < splitLottoNumbersInput.size(); i++) {
+            lottoNumberList.add(new LottoNumber(splitLottoNumbersInput.get(i)));
         }
 
         return new LottoLine(lottoNumberList);
