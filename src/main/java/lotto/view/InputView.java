@@ -31,7 +31,7 @@ public class InputView {
         String manualAmount = SCANNER.nextLine();
 
         try {
-            return new LottoAmount(money, manualAmount);
+            return LottoAmount.of(money, manualAmount);
         } catch (Exception e) {
             OutputView.printError(e.getMessage());
             return askLottoAmount(money);

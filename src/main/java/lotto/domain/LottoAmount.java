@@ -7,25 +7,30 @@ public class LottoAmount {
     private int totalAmount;
     private int manualAmount;
 
-    public LottoAmount(Money money, String manualAmount) {
-        validateManualMoney(money, manualAmount);
+    public LottoAmount(Money money, int manualAmount) {
         this.totalAmount = money.toNumberOfPurchaseLotto();
-        this.manualAmount = Integer.parseInt(manualAmount);
+        this.manualAmount = manualAmount;
     }
 
-    private void validateManualMoney(Money money, String manualAmount) {
+    public static LottoAmount of(Money money, String manualAmount) {
+        validateManualMoney(money, manualAmount);
+
+        return new LottoAmount(money, Integer.parseInt(manualAmount));
+    }
+
+    private static void validateManualMoney(Money money, String manualAmount) {
         validateEmptyAmount(manualAmount);
         validateNumber(manualAmount);
         validateAmount(money, manualAmount);
     }
 
-    private void validateEmptyAmount(String manualAmount) {
+    private static void validateEmptyAmount(String manualAmount) {
         if (manualAmount.isEmpty()) {
             throw new IllegalArgumentException("정확한 로또 수량을 입력해 주세요.");
         }
     }
 
-    private void validateNumber(String manualAmount) {
+    private static void validateNumber(String manualAmount) {
         try {
             Integer.parseInt(manualAmount);
         } catch (NumberFormatException e) {
@@ -33,7 +38,7 @@ public class LottoAmount {
         }
     }
 
-    private void validateAmount(Money money, String manualAmount) {
+    private static void validateAmount(Money money, String manualAmount) {
         if (Integer.parseInt(manualAmount) > money.toNumberOfPurchaseLotto()) {
             throw new IllegalArgumentException("입력한 수량이 구입 가능 수량보다 많습니다.");
         }

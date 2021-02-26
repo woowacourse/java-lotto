@@ -13,7 +13,7 @@ public class LottoAmountTest {
     void testCreateLottoAmount() {
         Money money = Money.of("14000");
         String manual = "4";
-        LottoAmount lottoAmount = new LottoAmount(money, manual);
+        LottoAmount lottoAmount = LottoAmount.of(money, manual);
 
         assertThat(lottoAmount.toManualAmountNumber()).isEqualTo(4);
         assertThat(lottoAmount.toAutoAmountNumber()).isEqualTo(10);
@@ -24,10 +24,10 @@ public class LottoAmountTest {
         Money money = Money.of("14000");
         String wrongManual1 = "";
         String wrongManual2 = "asd";
-        String wrongManual4 = "1500";
+        String wrongManual3 = "1500";
 
-        assertThatIllegalArgumentException().isThrownBy(() -> new LottoAmount(money, wrongManual1));
-        assertThatIllegalArgumentException().isThrownBy(() -> new LottoAmount(money, wrongManual2));
-        assertThatIllegalArgumentException().isThrownBy(() -> new LottoAmount(money, wrongManual4));
+        assertThatIllegalArgumentException().isThrownBy(() -> LottoAmount.of(money, wrongManual1));
+        assertThatIllegalArgumentException().isThrownBy(() -> LottoAmount.of(money, wrongManual2));
+        assertThatIllegalArgumentException().isThrownBy(() -> LottoAmount.of(money, wrongManual3));
     }
 }
