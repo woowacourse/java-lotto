@@ -47,6 +47,9 @@ public class LottoController {
 
     private List<Lotto> buySelfLottoTickets(SelfLottoCount selfLottoCount) {
         final List<Lotto> selfLottoTickets = new ArrayList<>();
+        if (selfLottoCount.getSelfCount() == 0) {
+            return selfLottoTickets;
+        }
         OutputView.printBuyLottoNumberMessage();
         for (int i = 0; i < selfLottoCount.getSelfCount(); i++) {
             selfLottoTickets.add(new Lotto(getSelfLottoNumbers()));
