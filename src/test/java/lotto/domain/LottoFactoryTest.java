@@ -14,14 +14,14 @@ public class LottoFactoryTest {
     @BeforeEach
     void setUp() {
         lottos = new Lottos();
-        lotto = new Lotto(1, 2, 3, 4, 5, 6);
+        lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 
     @Test
     void createManualLottos() {
         lottos = LottoFactory.createManualLottos(lottos, Arrays.asList(lotto));
         assertThat(lottos.toList())
-                .contains(new Lotto(1, 2, 3, 4, 5, 6));
+                .contains(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
 
     @Test

@@ -2,10 +2,7 @@ package lotto.domain;
 
 import lotto.exception.LottoCustomException;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -18,14 +15,14 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public Lotto(final int ... numbers) {
+    public Lotto(final List<Integer> numbers) {
         final Set<LottoNumber> lottoNumbers = convertToSet(numbers);
         validate(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    private Set<LottoNumber> convertToSet(int ... numbers) {
-        return Arrays.stream(numbers).mapToObj(LottoNumber::new).collect(Collectors.toSet());
+    private Set<LottoNumber> convertToSet(List<Integer>numbers) {
+        return numbers.stream().map(LottoNumber::new).collect(Collectors.toSet());
     }
 
     private void validate(Set<LottoNumber> lottoNumbers) {

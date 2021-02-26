@@ -13,10 +13,10 @@ public class LottosTest {
     @Test
     public void create() {
         Lottos lottos = new Lottos(Arrays.asList
-                (new Lotto(1, 2, 3, 4, 5, 6),
-                        new Lotto(2, 3, 4, 5, 6, 7)));
+                (new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                        new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7))));
 
         assertThat(lottos.toList())
-                .contains(new Lotto(1, 2, 3, 4, 5, 6), new Lotto(2, 3, 4, 5, 6, 7));
+                .contains(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7)));
     }
 }
