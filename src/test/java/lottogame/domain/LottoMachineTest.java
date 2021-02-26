@@ -43,20 +43,8 @@ class LottoMachineTest {
     @DisplayName("수동 로또 입력 후 정상 로또 객체 반환 테스트")
     @Test
     void 수동_로또_입력_후_객체_생성_테스트() {
-        List<LottoNumber> manualLottoNumber1 = Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6));
-        List<LottoNumber> manualLottoNumber2 = Arrays.asList(
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6),
-                new LottoNumber(7));
+        List<LottoNumber> manualLottoNumber1 = LottoNumber.of(Arrays.asList(1, 2, 3, 4, 5, 6));
+        List<LottoNumber> manualLottoNumber2 = LottoNumber.of(Arrays.asList(2, 3, 4, 5, 6, 7));
 
         List<LottoDto> lottoDtos = Arrays.asList(
                 new LottoDto(manualLottoNumber1),

@@ -12,7 +12,7 @@ public class LottoMachine {
     private final LottoNumberGenerator numberGenerator;
 
     public LottoMachine() {
-        numberGenerator = new LottoNumberGenerator(LottoNumber.LOTTO_MIN, LottoNumber.LOTTO_MAX);
+        numberGenerator = new LottoNumberGenerator(LottoNumber.LOTTO_NUMBER_MIN, LottoNumber.LOTTO_NUMBER_MAX);
     }
 
     public List<Lotto> buyAutoTicket(int quantity) {
@@ -34,7 +34,7 @@ public class LottoMachine {
     private void makeRandomNumber(List<LottoNumber> lottoNumbers) {
         int random = numberGenerator.generate();
         if (isPossible(random, lottoNumbers)) {
-            lottoNumbers.add(new LottoNumber(random));
+            lottoNumbers.add(LottoNumber.valueOf(random));
         }
     }
 
@@ -51,7 +51,7 @@ public class LottoMachine {
 
     private Lotto makeLotto(List<Integer> numbers) {
         return new Lotto(numbers.stream()
-                .map(number -> new LottoNumber(number))
+                .map(number -> LottoNumber.valueOf(number))
                 .collect(Collectors.toList()));
     }
 }

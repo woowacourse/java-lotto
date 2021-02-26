@@ -2,26 +2,43 @@ package lottogame.domain.lotto;
 
 import lottogame.utils.InvalidLottoNumberRangeException;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoNumber {
-    public static final int LOTTO_MIN = 1;
-    public static final int LOTTO_MAX = 45;
+    public static final int LOTTO_NUMBER_MIN = 1;
+    public static final int LOTTO_NUMBER_MAX = 45;
     private final int number;
 
-    public LottoNumber(int number) {
-        validNumberRange(number);
-        this.number = number;
-    }
-
-    private void validNumberRange(int number) {
-        if (number < LOTTO_MIN || number > LOTTO_MAX) {
-            throw new InvalidLottoNumberRangeException();
+    private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
+    static {
+        for (int i = LOTTO_NUMBER_MIN; i <= LOTTO_NUMBER_MAX; i++) {
+            lottoNumbers.put(i, new LottoNumber(i));
         }
     }
 
+    public LottoNumber(int number) {
+        this.number = number;
+    }
+
+    public static LottoNumber valueOf(int number) {
+        if (!lottoNumbers.containsKey(number)) {
+            throw new InvalidLottoNumberRangeException();
+        }
+        return lottoNumbers.get(number);
+    }
+
+    public static List<LottoNumber> of(List<Integer> numbers) {
+        return numbers.stream()
+                .map(number -> LottoNumber.valueOf(number))
+                .collect(Collectors.toList());
+    }
+
     public LottoNumber values() {
-        return new LottoNumber(number);
+        return LottoNumber.valueOf(number);
     }
 
     public int getNumber() {

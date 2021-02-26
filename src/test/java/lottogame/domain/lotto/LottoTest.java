@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,7 +21,7 @@ class LottoTest {
     void setUp() {
         List<Integer> values = Arrays.asList(8, 21, 23, 41, 42, 43);
         List<LottoNumber> lottoNumbers = values.stream()
-                .map(value -> new LottoNumber(value))
+                .map(value -> LottoNumber.valueOf(value))
                 .collect(Collectors.toList());
         lotto = new Lotto(lottoNumbers);
     }
@@ -44,26 +43,14 @@ class LottoTest {
 
     @Test
     void 중복된_로또_번호_테스트() {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        lottoNumbers.add(new LottoNumber(1));
-        lottoNumbers.add(new LottoNumber(2));
-        lottoNumbers.add(new LottoNumber(3));
-        lottoNumbers.add(new LottoNumber(4));
-        lottoNumbers.add(new LottoNumber(5));
-        lottoNumbers.add(new LottoNumber(2));
+        List<LottoNumber> lottoNumbers = LottoNumber.of(Arrays.asList(1, 2, 3, 4, 5, 2));
         assertThatThrownBy(() -> new Lotto(lottoNumbers))
                 .isInstanceOf(DuplicateLottoNumberException.class);
     }
 
     @Test
     void 정상적인_로또_번호_테스트() {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        lottoNumbers.add(new LottoNumber(1));
-        lottoNumbers.add(new LottoNumber(2));
-        lottoNumbers.add(new LottoNumber(3));
-        lottoNumbers.add(new LottoNumber(4));
-        lottoNumbers.add(new LottoNumber(5));
-        lottoNumbers.add(new LottoNumber(6));
+        List<LottoNumber> lottoNumbers = LottoNumber.of(Arrays.asList(1, 2, 3, 4, 5, 6));
         assertThat(new Lotto(lottoNumbers)).isEqualTo(new Lotto(lottoNumbers));
     }
 }

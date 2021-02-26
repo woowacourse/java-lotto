@@ -13,7 +13,7 @@ public class WinningLotto {
 
     public WinningLotto(List<Integer> numbers, int bonusBall) {
         List<LottoNumber> lottoNumbers = numbers.stream()
-                .map(number -> new LottoNumber(number))
+                .map(number -> LottoNumber.valueOf(number))
                 .collect(Collectors.toList());
         duplicateBonusBall(numbers, bonusBall);
         lotto = new Lotto(lottoNumbers);
@@ -22,7 +22,7 @@ public class WinningLotto {
 
     private LottoNumber makeBonusBall(int bonusBall) {
         try {
-            return new LottoNumber(bonusBall);
+            return LottoNumber.valueOf(bonusBall);
         } catch (InvalidLottoNumberRangeException e) {
             throw new InvalidBonusBallNumberException();
         }

@@ -1,7 +1,6 @@
 package lottogame.domain.statistic;
 
 import lottogame.domain.lotto.Money;
-import lottogame.domain.dto.LottoResultsDto;
 
 import java.util.*;
 

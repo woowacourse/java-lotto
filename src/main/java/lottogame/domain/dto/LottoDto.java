@@ -14,7 +14,7 @@ public class LottoDto {
 
     public static LottoDto Of(List<Integer> numbers) {
         return new LottoDto(numbers.stream()
-                .map(number -> new LottoNumber(number))
+                .map(number -> LottoNumber.valueOf(number))
                 .collect(Collectors.toList()));
     }
 
