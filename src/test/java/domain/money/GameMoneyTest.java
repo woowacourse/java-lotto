@@ -1,15 +1,13 @@
 package domain.money;
 
 import domain.lotto.Lotto;
-import domain.lotto.LottoBall;
 import domain.lotto.LottoBundle;
-import domain.money.GameMoney;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
@@ -32,14 +30,6 @@ public class GameMoneyTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("GameMoney로 로또를 구매하기")
-    @Test
-    void GameMoneyBuyLottoTest() {
-        final GameMoney gameMoney = new GameMoney(15000);
-        final LottoBundle lottoBundle = gameMoney.buyLotto();
-        assertThat(lottoBundle.countNumberOfLotto()).isEqualTo(15);
-    }
-
     @DisplayName("GameMoney를 입력받고, 수동으로 살 로또 갯수를 입력 받고 가능한지 검증")
     @Test
     void GameMoneyCheckManualBuyingAvailableTest() {
@@ -53,30 +43,29 @@ public class GameMoneyTest {
     @Test
     void GameMoneyBuyLottoManuallyTest() {
         final GameMoney gameMoney = new GameMoney(10000);
-        List<Lotto> lottoBoughtManually = new ArrayList<>();
 
-        final Lotto lotto1 = makeLottoManually(1, 6);
-        final Lotto lotto2 = makeLottoManually(2, 7);
-        final Lotto lotto3 = makeLottoManually(3, 8);
+        final Lotto lotto1 = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
+        final Lotto lotto2 = Lotto.of(Arrays.asList(2, 3, 4, 5, 6, 7));
+        final Lotto lotto3 = Lotto.of(Arrays.asList(3, 4, 5, 6, 7, 8));
 
-        lottoBoughtManually.add(lotto1);
-        lottoBoughtManually.add(lotto2);
-        lottoBoughtManually.add(lotto3);
+        final List<List<Integer>> manualLottoBought = Arrays.asList(Arrays.asList(1, 2, 3, 4, 5, 6),
+                Arrays.asList(2, 3, 4, 5, 6, 7),
+                Arrays.asList(3, 4, 5, 6, 7, 8));
 
-        final LottoBundle lottoBundle = gameMoney.buyLottoManually(lottoBoughtManually);
+        final LottoBundle manualLottoBundle = gameMoney.buyManualLotto(manualLottoBought);
 
-        assertThat(lottoBundle.countNumberOfLotto()).isEqualTo(10);
-        assertThat(lottoBundle.getLottoBundle()).contains(lotto1);
-        assertThat(lottoBundle.getLottoBundle()).contains(lotto2);
-        assertThat(lottoBundle.getLottoBundle()).contains(lotto3);
+        assertThat(manualLottoBundle.countNumberOfLotto()).isEqualTo(3);
+        assertThat(manualLottoBundle.getLottoBundle()).contains(lotto1);
+        assertThat(manualLottoBundle.getLottoBundle()).contains(lotto2);
+        assertThat(manualLottoBundle.getLottoBundle()).contains(lotto3);
     }
 
-    private Lotto makeLottoManually(int from, int to) {
-        List<LottoBall> lotto = new ArrayList<>();
-        for (int i = from; i <= to; i++) {
-            lotto.add(LottoBall.valueOf(i));
-        }
-        return new Lotto(lotto);
+    @DisplayName("GameMoney로 로또를 구매하기")
+    @Test
+    void GameMoneyBuyAutoLottoTest() {
+        final GameMoney gameMoney = new GameMoney(15000);
+        final LottoBundle lottoBundle = gameMoney.buyAutoLotto();
+        assertThat(lottoBundle.countNumberOfLotto()).isEqualTo(15);
     }
 }
 

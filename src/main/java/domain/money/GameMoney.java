@@ -1,6 +1,5 @@
 package domain.money;
 
-import domain.lotto.Lotto;
 import domain.lotto.LottoBundle;
 import util.LottoGenerator;
 
@@ -33,16 +32,13 @@ public class GameMoney {
         }
     }
 
-    public LottoBundle buyLottoManually(final List<Lotto> lottoBoughtManually) {
-        final int numberOfLottoToBuy = gameMoney.divide(new BigDecimal(SINGLE_LOTTO_GAME_MONEY)).intValue();
-        calculateGameMoneyLeft(numberOfLottoToBuy);
-
-        final int numberOfAutoLottoToBuy = numberOfLottoToBuy - lottoBoughtManually.size();
-        final LottoBundle lottoBundle = LottoGenerator.createRandomLottoBundle(lottoBoughtManually, numberOfAutoLottoToBuy);
+    public LottoBundle buyManualLotto(final List<List<Integer>> manualLottoNumber) {
+        final LottoBundle lottoBundle = LottoBundle.of(manualLottoNumber);
+        calculateGameMoneyLeft(manualLottoNumber.size());
         return lottoBundle;
     }
 
-    public LottoBundle buyLotto() {
+    public LottoBundle buyAutoLotto() {
         final int numberOfLottoToBuy = gameMoney.divide(new BigDecimal(SINGLE_LOTTO_GAME_MONEY)).intValue();
         calculateGameMoneyLeft(numberOfLottoToBuy);
 
