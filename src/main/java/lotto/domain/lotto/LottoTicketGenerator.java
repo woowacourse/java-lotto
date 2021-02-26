@@ -1,6 +1,7 @@
 package lotto.domain.lotto;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class LottoTicketGenerator {
     protected static final int PRICE_EACH_LOTTO = 1000;
@@ -22,7 +23,7 @@ public class LottoTicketGenerator {
 
 
     public LottoTicket createLottoTicket(LottoTicketBuyingRequest lottoTicketBuyingRequest) {
-        ArrayList<LottoLine> autoLottoLineList = new ArrayList<>();
+        List<LottoLine> autoLottoLineList = new ArrayList();
         for (int i = 0; i < lottoTicketBuyingRequest.getAutoLottoAmount(); i++) {
             autoLottoLineList.add(new LottoLine(randomLottoGenerator.createLottoLine()));
         }
