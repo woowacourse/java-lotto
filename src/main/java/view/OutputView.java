@@ -27,13 +27,11 @@ public class OutputView {
     }
 
     private static void printLotto(Lotto lotto) {
-        LottoNumbers lottoNumbers = lotto.getValue();
-        printLottoNumbers(lottoNumbers);
+        printLottoNumbers(lotto.toList());
     }
 
-    private static void printLottoNumbers(LottoNumbers lottoNumbers) {
-        List<LottoNumber> lottoNumbersValues = lottoNumbers.getValues();
-        List<Integer> lotto = lottoNumbersValues.stream()
+    private static void printLottoNumbers(List<LottoNumber> lottoNumbers) {
+        List<Integer> lotto = lottoNumbers.stream()
                 .map(LottoNumber::getValue)
                 .collect(Collectors.toList());
         System.out.println(lotto);

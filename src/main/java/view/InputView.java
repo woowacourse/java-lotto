@@ -34,7 +34,7 @@ public class InputView {
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
 
-        return new Lotto(new LottoNumbers(lottoNumbers));
+        return new Lotto(lottoNumbers);
     }
 
     private static LottoNumber inputBonusBall() {
