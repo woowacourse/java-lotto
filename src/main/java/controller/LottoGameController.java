@@ -6,12 +6,16 @@ import domain.lotto.LottoBundle;
 import domain.money.GameMoney;
 import domain.result.LottoResult;
 import domain.result.WinningResult;
+import util.LottoGenerator;
 import view.InputView;
 import view.OutputView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGameController {
+    private static final int MINIMUM_AMOUNT = 1;
+
     public void run() {
         final GameMoney gameMoney = makeGameMoney();
 
@@ -38,11 +42,9 @@ public class LottoGameController {
     private LottoBundle makeManualLottoBundle(final GameMoney gameMoney) {
         try {
             final int manualLottoAmount = makeManualLottoAmount(gameMoney);
-            if (manualLottoAmount > 0) {
-                OutputView.printManualLottoRequest();
-            }
+            checkManualLottoBuying(manualLottoAmount);
             final List<List<Integer>> manualLottoNumberBundle = InputView.getManualLotto(manualLottoAmount);
-            return gameMoney.buyManualLotto(manualLottoNumberBundle);
+            return gameMoney.buyLotto(manualLottoNumberBundle);
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
             return makeManualLottoBundle(gameMoney);
@@ -61,8 +63,19 @@ public class LottoGameController {
         }
     }
 
+    private void checkManualLottoBuying(final int manualLottoAmount) {
+        if (manualLottoAmount >= MINIMUM_AMOUNT) {
+            OutputView.printManualLottoRequest();
+        }
+    }
+
     private LottoBundle makeAutoLottoBundle(final GameMoney gameMoney) {
-        return gameMoney.buyAutoLotto();
+        final int number = gameMoney.checkMaxLottoAvailable();
+        List<List<Integer>> autoLottoNumberBundle = new ArrayList<>();
+        for (int i = 0; i < number; i++) {
+            autoLottoNumberBundle.add(LottoGenerator.createRandomLottoNumber());
+        }
+        return gameMoney.buyLotto(autoLottoNumberBundle);
     }
 
     private WinningResult makeWinningResult() {
