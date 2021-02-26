@@ -7,11 +7,10 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoTicketFactory {
+    public static final int LOTTO_PRICE = 1000;
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int LOTTO_TICKET_SIZE = 6;
-    public static final int LOTTO_PRICE = 1000;
-
     private static final List<LottoNumber> autoLottoCandidates;
 
     static {
