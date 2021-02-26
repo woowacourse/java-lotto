@@ -10,19 +10,18 @@ import view.InputView;
 import view.OutputView;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoGameController {
     public void run() {
         final GameMoney gameMoney = makeGameMoney();
 
-        final List<Lotto> manualLotto = makeManualLotto(gameMoney);
-
-        final LottoBundle lottoBundle = makeLottoBundle(gameMoney, manualLotto);
+        final LottoBundle manualLottoBundle = makeManualLottoBundle(gameMoney);
+        final LottoBundle autoLottoBundle = makeAutoLottoBundle(gameMoney);
+        OutputView.printLottoBought(manualLottoBundle, autoLottoBundle);
 
         final WinningResult winningResult = makeWinningResult();
 
-        makeLottoResult(lottoBundle, winningResult);
+        makeLottoResult(manualLottoBundle, autoLottoBundle, winningResult);
     }
 
     private GameMoney makeGameMoney() {
@@ -36,19 +35,17 @@ public class LottoGameController {
         }
     }
 
-    private List<Lotto> makeManualLotto(final GameMoney gameMoney) {
+    private LottoBundle makeManualLottoBundle(final GameMoney gameMoney) {
         try {
             final int manualLottoAmount = makeManualLottoAmount(gameMoney);
             if (manualLottoAmount > 0) {
                 OutputView.printManualLottoRequest();
             }
-            final List<List<Integer>> manualLotto = InputView.getManualLotto(manualLottoAmount);
-            return manualLotto.stream()
-                    .map(numbers -> Lotto.of(numbers))
-                    .collect(Collectors.toList());
+            final List<List<Integer>> manualLottoNumberBundle = InputView.getManualLotto(manualLottoAmount);
+            return gameMoney.buyManualLotto(manualLottoNumberBundle);
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
-            return makeManualLotto(gameMoney);
+            return makeManualLottoBundle(gameMoney);
         }
     }
 
@@ -64,10 +61,8 @@ public class LottoGameController {
         }
     }
 
-    private LottoBundle makeLottoBundle(final GameMoney gameMoney, final List<Lotto> manualLotto) {
-        final LottoBundle lottoBundle = gameMoney.buyLottoManually(manualLotto);
-        OutputView.printLottoBought(lottoBundle);
-        return lottoBundle;
+    private LottoBundle makeAutoLottoBundle(final GameMoney gameMoney) {
+        return gameMoney.buyAutoLotto();
     }
 
     private WinningResult makeWinningResult() {
@@ -103,8 +98,11 @@ public class LottoGameController {
         }
     }
 
-    private void makeLottoResult(final LottoBundle lottoBundle, final WinningResult winningResult) {
-        final LottoResult lottoResult = lottoBundle.checkResult(winningResult);
+    private void makeLottoResult(final LottoBundle manualLottoBundle, final LottoBundle autoLottoBundle,
+                                 final WinningResult winningResult) {
+        final LottoResult lottoResult = manualLottoBundle.checkResult(winningResult);
+        final LottoResult autoLottoResult = autoLottoBundle.checkResult(winningResult);
+        lottoResult.combineResult(autoLottoResult);
         OutputView.printLottoResult(lottoResult);
 
         final double profitRate = lottoResult.checkProfitRate();
