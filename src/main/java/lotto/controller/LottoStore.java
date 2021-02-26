@@ -1,6 +1,8 @@
 package lotto.controller;
 
 import lotto.domain.*;
+import lotto.exception.Lotto.ManualLottoTicketCountNegativeNumberException;
+import lotto.exception.Lotto.ManualLottoTicketUnaffordableException;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -14,8 +16,6 @@ import java.util.stream.Collectors;
 public class LottoStore {
 
     public static final int LOTTO_PRICE = 1000;
-    public static final String MONEY_NOT_ENOUGH_ERROR_MESSAGE = "[ERROR] 금액으로 구매 가능한 로또의 매수보다 많은 양입니다.";
-    public static final String LOTTO_COUNT_NOT_AVAILABLE_ERROR_MESSAGE = "[ERROR] 구매할 로또의 수는 0매 이상이어야 합니다.";
 
     public void run() {
         try {
@@ -57,10 +57,10 @@ public class LottoStore {
 
     private void validateManualLottoCount(int affordableLottoTicketCount, int manualLottoCount) {
         if (manualLottoCount < 0) {
-            throw new IllegalArgumentException(LOTTO_COUNT_NOT_AVAILABLE_ERROR_MESSAGE);
+            throw new ManualLottoTicketCountNegativeNumberException(manualLottoCount);
         }
         if (manualLottoCount > affordableLottoTicketCount) {
-            throw new IllegalArgumentException(MONEY_NOT_ENOUGH_ERROR_MESSAGE);
+            throw new ManualLottoTicketUnaffordableException(manualLottoCount);
         }
     }
 

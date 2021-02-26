@@ -13,7 +13,7 @@ public class Money {
 
     private void validateMoneyValue(int money) {
         if (money < LottoStore.LOTTO_PRICE) {
-            throw new MoneyException();
+            throw new MoneyException(money);
         }
     }
 

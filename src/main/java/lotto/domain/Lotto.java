@@ -60,7 +60,7 @@ public class Lotto {
 
     private static void validateLottoNumbersCount(List<Integer> lottoNumbers) {
         if (new HashSet<>(lottoNumbers).size() != 6) {
-            throw new LottoNumberCountException();
+            throw new LottoNumberCountException(lottoNumbers);
         }
     }
 
