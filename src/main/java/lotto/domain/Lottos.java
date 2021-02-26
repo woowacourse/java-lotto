@@ -8,12 +8,11 @@ import lotto.domain.generator.LottoNumberGenerator;
 
 public class Lottos {
 
-    private final List<Lotto> lottoBunch = new ArrayList<>();
+    private final List<Lotto> lottoBunch;
 
     public Lottos(LottoNumberGenerator lottoNumberGenerator, int purchasedLottoCount) {
-        for (int i = 0; i < purchasedLottoCount; i++) {
-            lottoBunch.add(new Lotto(lottoNumberGenerator.generateNumbers()));
-        }
+        lottoBunch = new ArrayList<>();
+        addExtraPieces(lottoNumberGenerator, purchasedLottoCount);
     }
 
     public void addExtraPieces(LottoNumberGenerator lottoNumberGenerator,
