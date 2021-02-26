@@ -21,14 +21,14 @@ public class LottoServiceTest {
     @BeforeEach
     void setup() {
         lottoMachine = new TestLottoMachine();
-        lottoService = new LottoService(lottoMachine);
+        lottoService = new LottoService(lottoMachine, new Ticket(new Money(2000)));
     }
 
     @Test
     @DisplayName("로또 구매 결과 확인")
     void buyLottoCheck() {
-        Ticket ticket = new Ticket(new Money(14000));
-        lottoService.generateLottos(ticket.getRandomCount());
+        LottoService lottoService = new LottoService(lottoMachine, new Ticket(new Money(14000)));
+        lottoService.generateLottos();
         List<Integer> lottoNumbers = lottoMachine.generate()
                                                  .stream()
                                                  .map(LottoNumber::intValue)
@@ -53,10 +53,10 @@ public class LottoServiceTest {
     @Test
     @DisplayName("로또 긁은 내역 확인")
     void scratchLottoCheck() {
-        Ticket ticket = new Ticket(new Money(2000));
         Lotto lotto = new Lotto(lottoMachine.generate());
+        lottoService = new LottoService(lottoMachine, new Ticket(new Money(2000)));
 
-        lottoService.generateLottos(ticket.getRandomCount());
+        lottoService.generateLottos();
         WinningLotto winningLotto = new WinningLotto(lotto, LottoNumber.valueOf(7));
         lottoService.scratchLotto(winningLotto);
         RatingCounter ratingCounter = lottoService.getRatingCounter();

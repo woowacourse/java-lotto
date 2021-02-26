@@ -14,9 +14,8 @@ public class LottoController {
     }
 
     public void start() {
-        LottoService lottoService = new LottoService();
-
         Ticket ticket = buyTicketWithManualCount();
+        LottoService lottoService = new LottoService(ticket);
         generateLottos(lottoService, ticket);
 
         outputView.printBuyTicket(ticket.getManualCount(), ticket.getRandomCount());
@@ -65,7 +64,7 @@ public class LottoController {
         for (int i = 0; i < ticket.getManualCount(); i++) {
             lottoService.addLotto(getManualLottoNumbers());
         }
-        lottoService.generateLottos(ticket.getRandomCount());
+        lottoService.generateLottos();
     }
 
     private Lotto getManualLottoNumbers() {

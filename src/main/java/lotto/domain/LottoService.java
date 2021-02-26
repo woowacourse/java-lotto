@@ -11,21 +11,24 @@ public class LottoService {
     private final LottoMachine lottoMachine;
     private final List<Lotto> lottos = new ArrayList<>();
     private final RatingCounter ratingCounter = new RatingCounter();
+    private final Ticket ticket;
 
-    public LottoService() {
-        this(new RandomLottoMachine());
+
+    public LottoService(Ticket ticket) {
+        this(new RandomLottoMachine(), ticket);
     }
 
-    public LottoService(LottoMachine lottoMachine) {
+    public LottoService(LottoMachine lottoMachine, Ticket ticket) {
         this.lottoMachine = lottoMachine;
+        this.ticket = ticket;
     }
 
     public void addLotto(Lotto lotto) {
         lottos.add(lotto);
     }
 
-    public void generateLottos(int count) {
-        for (int i = 0; i < count; i++) {
+    public void generateLottos() {
+        for (int i = 0; i < ticket.getRandomCount(); i++) {
             lottos.add(new Lotto(lottoMachine.generate()));
         }
     }

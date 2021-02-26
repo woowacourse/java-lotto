@@ -33,7 +33,7 @@
 - [x] 보너스 볼은 지난 주 당첨 번호에 있는 숫자와 겹치면 안 됨.
 - [x] 1000원 단위가 아니라고 복권을 못 사는 것은 아님.
 - [x] 불변 객체로 변환.
-- [ ] Ticket 로직을 LottoService 안으로 이동
+- [x] Ticket 로직을 LottoService 안으로 이동
 ---
 ### Commit Convention
 - 커밋 메시지 언어 : 한글
