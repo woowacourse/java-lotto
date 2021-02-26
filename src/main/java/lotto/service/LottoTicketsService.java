@@ -4,7 +4,6 @@ import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
 import lotto.view.InputView;
-import lotto.view.OutputView;
 
 import java.util.ArrayList;
 import java.util.List;

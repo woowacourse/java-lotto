@@ -34,13 +34,13 @@ public class LottoController {
             OutputView.printErrorMessage(e);
             return initMoney();
         }
-        OutputView.howMuchBought(money.lottoCount());
         return money;
     }
 
     private LottoTickets initLottoTickets(Money money) {
         LottoTickets manualLottoTickets = initManualLottoTickets(money);
         LottoTickets autoLottoTickets = LottoTicketsService.createAutoLottoTickets(money);
+        OutputView.printHowManyTicketsBought(manualLottoTickets.size(), autoLottoTickets.size());
         LottoTickets mergedLottoTickets = LottoTicketsService.mergeLottoTickets(manualLottoTickets, autoLottoTickets);
         OutputView.printTickets(mergedLottoTickets);
         return mergedLottoTickets;
