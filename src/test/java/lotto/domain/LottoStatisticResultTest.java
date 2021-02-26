@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 public class LottoStatisticResultTest {
 
     private static final WinningLotto WINNING_LOTTO
-        = WinningLotto.of(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+        = WinningLotto.of(Arrays.asList(1, 2, 3, 4, 5, 6), LottoNumber.from("7"));
 
     @Test
     void match_ReturnProperMatchingCount() {
@@ -19,12 +19,12 @@ public class LottoStatisticResultTest {
         lottoGroup.add(Lotto.fromNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
         lottoGroup.add(Lotto.fromNumbers(Arrays.asList(7, 8, 9, 10, 11, 12)));
 
-        Lottos lottos = new Lottos(lottoGroup);
+        Lottos lottos = Lottos.from(lottoGroup);
 
-        LottoStatisticResult result = Rank.match(lottos, WINNING_LOTTO);
+        LottoStatisticResult result = lottos.match(WINNING_LOTTO);
 
         // when
-        Long count = result.get(Rank.FIRST);
+        Long count = result.getOrNoCount(Rank.FIRST);
 
         // then
         assertThat(count).isEqualTo(1L);
@@ -38,8 +38,8 @@ public class LottoStatisticResultTest {
         lottoGroup.add(Lotto.fromNumbers(Arrays.asList(1, 2, 3, 4, 44, 45))); // 4등 - 50000원
         lottoGroup.add(Lotto.fromNumbers(Arrays.asList(40, 41, 42, 43, 44, 45))); // 당첨 X - 0원
 
-        Lottos lottos = new Lottos(lottoGroup);
-        LottoStatisticResult result = Rank.match(lottos, WINNING_LOTTO);
+        Lottos lottos = Lottos.from(lottoGroup);
+        LottoStatisticResult result = lottos.match(WINNING_LOTTO);
 
         // when
         double incomeRate = result.calculateIncomeRate();

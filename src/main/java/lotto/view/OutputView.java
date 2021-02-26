@@ -1,14 +1,27 @@
 package lotto.view;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 import lotto.domain.LottoStatisticResult;
 import lotto.domain.Lottos;
 import lotto.domain.Rank;
 
 public class OutputView {
+    private static final String MANUAL_LOTTO_NUMBER_QUESTION = "수동으로 구매할 번호를 입력해 주세요.";
 
-    public void printPurchasingLotto(int purchasingLottoCount) {
-        System.out.println(purchasingLottoCount + "개를 구매했습니다.");
+    public void printPurchasingLotto(int manualLottoCount, int autoLottoCount) {
+        System.out.println();
+        StringBuilder sb = new StringBuilder();
+        sb.append("수동으로 ")
+          .append(manualLottoCount)
+          .append("장, 자동으로 ")
+          .append(autoLottoCount)
+          .append("개를 구매했습니다.");
+        System.out.println(sb.toString());
     }
 
     public void printLottos(Lottos lottos) {
@@ -25,12 +38,29 @@ public class OutputView {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.println("3개 일치 (5000원)- " + result.get(Rank.FIFTH) + "개");
-        System.out.println("4개 일치 (50000원)- " + result.get(Rank.FOURTH) + "개");
-        System.out.println("5개 일치 (1500000원)- " + result.get(Rank.THIRD) + "개");
-        System.out.println("5개 일치, 보너스 볼 일치(30000000원) - " + result.get(Rank.SECOND) + "개");
-        System.out.println("6개 일치 (2000000000원)- " + result.get(Rank.FIRST) + "개");
+        printMatchCountAndReward(result);
         System.out.println(
             "총 수익률은 " + String.format("%.2f", result.calculateIncomeRate()) + "입니다.");
+    }
+
+    private void printMatchCountAndReward(LottoStatisticResult result) {
+        List<Rank> ranks = Arrays.stream(Rank.values())
+                                 .filter(rank -> rank != Rank.NOTHING)
+                                 .sorted(Comparator.comparing(Rank::getReward))
+                                 .collect(Collectors.toList());
+        ranks.forEach(rank -> {
+                 if (rank == Rank.SECOND) {
+                     System.out.println("5개 일치, 보너스 볼 일치 (" + rank.getReward() + "원)- "
+                         + result.getOrNoCount(rank) + "개");
+                 }
+                 if (rank != Rank.SECOND) {
+                     System.out.println(rank.getMatchCount() + "개 일치 (" + rank.getReward() + "원)- "
+                         + result.getOrNoCount(rank) + "개");
+                 }
+             });
+    }
+
+    public void printInputManualLottoNumbers() {
+        System.out.println(MANUAL_LOTTO_NUMBER_QUESTION);
     }
 }

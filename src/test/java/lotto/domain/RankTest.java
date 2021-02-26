@@ -14,7 +14,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 public class RankTest {
 
     private static final WinningLotto WINNING_LOTTO
-        = WinningLotto.of(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+        = WinningLotto.of(Arrays.asList(1, 2, 3, 4, 5, 6), LottoNumber.from("7"));
 
     private static final List<Lotto> LOTTO_GROUP = new ArrayList<>();
 
@@ -46,9 +46,9 @@ public class RankTest {
         LOTTO_GROUP.clear();
         LOTTO_GROUP.add(lotto);
 
-        Lottos lottos = new Lottos(LOTTO_GROUP);
+        Lottos lottos = Lottos.from(LOTTO_GROUP);
 
-        return Rank.match(lottos, WINNING_LOTTO);
+        return lottos.match(WINNING_LOTTO);
     }
 
     @ParameterizedTest
@@ -57,7 +57,7 @@ public class RankTest {
     void match_1stLotto_1stRank(LottoStatisticResult result, Rank rank) {
 
         // when
-        Long count = result.get(rank);
+        Long count = result.getOrNoCount(rank);
 
         // then
         assertThat(count).isEqualTo(1L);
