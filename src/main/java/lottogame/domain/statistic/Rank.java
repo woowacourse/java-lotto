@@ -1,17 +1,17 @@
-package lottogame.domain;
+package lottogame.domain.statistic;
 
 import java.util.Arrays;
 
 public enum Rank {
-    FIFTH(3, 5000),
-    FOURTH(4, 50000),
-    THIRD(5, 1500000),
-    SECOND(5, 30000000),
-    FIRST(6, 2000000000),
+    FIFTH(3, 5_000),
+    FOURTH(4, 50_000),
+    THIRD(5, 1_500_000),
+    SECOND(5, 30_000_000),
+    FIRST(6, 2_000_000_000),
     NOT_FOUND(0, 0);
 
-    private int count;
-    private int money;
+    private final int count;
+    private final int money;
 
     Rank(int count, int money) {
         this.count = count;

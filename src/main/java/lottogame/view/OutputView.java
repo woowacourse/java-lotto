@@ -1,7 +1,8 @@
 package lottogame.view;
 
-import lottogame.domain.Rank;
-import lottogame.domain.dto.LottoResults;
+import lottogame.domain.statistic.Rank;
+import lottogame.domain.dto.LottoDto;
+import lottogame.domain.dto.LottoResultsDto;
 
 import java.util.List;
 import java.util.Map;
@@ -11,9 +12,11 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void showLottos(List<List<Integer>> lottos) {
-        for (List<Integer> lotto : lottos) {
-            System.out.println(formatLottosOutput(lotto));
+    public static void showLottos(int manualQuantity, List<LottoDto> lottosDtos) {
+        int autoQuantity = lottosDtos.size() - manualQuantity;
+        System.out.printf("\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualQuantity, autoQuantity);
+        for (LottoDto lottoDto : lottosDtos) {
+            System.out.println(formatLottosOutput(lottoDto.getNumbers()));
         }
     }
 
@@ -23,15 +26,15 @@ public class OutputView {
                 .collect(Collectors.joining(", ", "[", "]"));
     }
 
-    public static void printResult(LottoResults results) {
+    public static void printResult(LottoResultsDto lottoResultsDto) {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
-        printSummary(results);
-        System.out.printf("총 수익률은 %.2f입니다.\n", results.getProfit());
+        printSummary(lottoResultsDto.getResults());
+        System.out.printf("총 수익률은 %.2f입니다.\n", lottoResultsDto.getProfit());
     }
 
-    private static void printSummary(LottoResults results) {
-        for (Map.Entry<Rank, Integer> statistic : results.values().entrySet()) {
+    private static void printSummary(Map<Rank, Integer> results) {
+        for (Map.Entry<Rank, Integer> statistic : results.entrySet()) {
             Rank rank = statistic.getKey();
             int price = statistic.getValue();
             printRank(rank, price);

@@ -1,93 +1,64 @@
 package lottogame.domain.lotto;
 
-import lottogame.utils.DuplicateLottoNumberException;
-import lottogame.utils.InvalidBonusBallNumberException;
 import lottogame.utils.InvalidLottoNumberRangeException;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoNumber {
-    private static final int LOTTO_MIN = 1;
-    private static final int LOTTO_MAX = 45;
-    private static final int LOTTO_NUMBER_VOLUME = 6;
-    private final List<Integer> numbers = new ArrayList<>();
+    public static final int LOTTO_NUMBER_MIN = 1;
+    public static final int LOTTO_NUMBER_MAX = 45;
+    private final int number;
 
-    public LottoNumber() {
-        for (int i = 0; i < LOTTO_NUMBER_VOLUME; i++) {
-            numbers.add(makeNumber());
+    private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
+    static {
+        for (int i = LOTTO_NUMBER_MIN; i <= LOTTO_NUMBER_MAX; i++) {
+            lottoNumbers.put(i, new LottoNumber(i));
         }
-        sortNumbers();
     }
 
-    public LottoNumber(List<Integer> numbers) {
-        validate(numbers);
-        this.numbers.addAll(numbers);
-        sortNumbers();
+    public LottoNumber(int number) {
+        this.number = number;
     }
 
-    public LottoNumber(int bonusBall) {
-        if (invalidRange(bonusBall)) {
-            throw new InvalidBonusBallNumberException();
+    public static LottoNumber valueOf(int number) {
+        if (!lottoNumbers.containsKey(number)) {
+            throw new InvalidLottoNumberRangeException();
         }
-        numbers.add(bonusBall);
+        return lottoNumbers.get(number);
     }
 
-    private Integer makeNumber() {
-        int number = LottoNumberGenerator.generate(LOTTO_MIN, LOTTO_MAX);
-        if (numbers.contains(number)) {
-            return makeNumber();
-        }
+    public static List<LottoNumber> of(List<Integer> numbers) {
+        return numbers.stream()
+                .map(number -> LottoNumber.valueOf(number))
+                .collect(Collectors.toList());
+    }
+
+    public LottoNumber values() {
+        return LottoNumber.valueOf(number);
+    }
+
+    public int getNumber() {
         return number;
     }
 
-    private void validate(List<Integer> numbers) {
-        validNumberRange(numbers);
-        duplicateNumbers(numbers);
+    public boolean equals(int number) {
+        return this.number == number;
     }
 
-    private void sortNumbers() {
-        Collections.sort(numbers);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumber that = (LottoNumber) o;
+        return number == that.number;
     }
 
-    private void validNumberRange(List<Integer> numbers) {
-        numbers.stream()
-                .filter(number -> invalidRange(number))
-                .findAny()
-                .ifPresent(s -> {
-                    throw new InvalidLottoNumberRangeException();
-                });
-    }
-
-    private boolean invalidRange(int number) {
-        return number < LOTTO_MIN || number > LOTTO_MAX;
-    }
-
-    private void duplicateNumbers(List<Integer> numbers) {
-        if (numbers.stream().distinct().count() != numbers.size()) {
-            throw new DuplicateLottoNumberException();
-        }
-    }
-
-    List<Integer> values() {
-        return Collections.unmodifiableList(numbers);
-    }
-
-    int matchCount(WinningLotto winningLotto) {
-        return (int) numbers.stream()
-                .filter(number -> winningLotto.contains(number))
-                .count();
-    }
-
-    boolean contains(Integer number) {
-        return numbers.contains(number);
-    }
-
-    boolean contains(LottoNumber bonusBall) {
-        return numbers.stream()
-                .filter(number -> bonusBall.contains(number))
-                .findFirst()
-                .isPresent();
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 }

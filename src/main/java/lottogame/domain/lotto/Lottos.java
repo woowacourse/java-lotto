@@ -1,6 +1,8 @@
 package lottogame.domain.lotto;
 
-import lottogame.domain.dto.LottoResult;
+import lottogame.domain.statistic.Rank;
+import lottogame.domain.dto.LottoDto;
+import lottogame.domain.statistic.LottoResults;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,26 +10,28 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Lottos {
-    private final List<Lotto> lottos = new ArrayList<>();
+    private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> values) {
-        lottos.addAll(new ArrayList<>(values));
+        List<Lotto> allLottos = new ArrayList<>();
+        allLottos.addAll(new ArrayList<>(values));
+        this.lottos = new ArrayList<>(allLottos);
     }
 
-    public List<List<Integer>> numbersOfLottos() {
+    public List<LottoDto> numbersOfLottos() {
         return lottos.stream()
-                .map(lotto -> lotto.values())
+                .map(lotto -> new LottoDto(lotto.values()))
                 .collect(Collectors.toList());
     }
 
-    public List<LottoResult> matchesLottos(WinningLotto winningLotto) {
-        List<LottoResult> lottoResults = new ArrayList<>();
+    public LottoResults matchesLottos(WinningLotto winningLotto) {
+        List<Rank> ranks = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            int count = lotto.matchCount(winningLotto);
+            int count = lotto.matchNumberCount(winningLotto);
             boolean bonus = winningLotto.matchBonusBall(lotto);
-            lottoResults.add(new LottoResult(count, bonus));
+            ranks.add(Rank.of(count, bonus));
         }
-        return lottoResults;
+        return new LottoResults(ranks);
     }
 
     @Override

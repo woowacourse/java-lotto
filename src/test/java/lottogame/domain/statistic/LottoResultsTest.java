@@ -1,7 +1,6 @@
-package lottogame.domain.dto;
+package lottogame.domain.statistic;
 
-import lottogame.domain.Money;
-import lottogame.domain.Rank;
+import lottogame.domain.lotto.Money;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,18 +17,18 @@ class LottoResultsTest {
 
     @BeforeEach
     void setUp() {
-        List<LottoResult> lottoResultGroup = Arrays.asList(
-                new LottoResult(4, false),
-                new LottoResult(3, false),
-                new LottoResult(5, true),
-                new LottoResult(5, false));
+        List<Rank> lottoResultGroup = Arrays.asList(
+                Rank.of(4, false),
+                Rank.of(3, false),
+                Rank.of(5, true),
+                Rank.of(5, false));
         lottoResult = new LottoResults(lottoResultGroup);
-        lottoResult.makeStatistics(new Money(4000));
     }
 
     @DisplayName("로또 당첨 통계를 출력하기 위한 기능이 잘 수행되는 지 결과 비교")
     @Test
     void 로또_결과_계산() {
+        Map<Rank, Integer> statistics = lottoResult.makeStatistics();
         Map<Rank, Integer> result = new LinkedHashMap<Rank, Integer>() {{
             put(Rank.FIFTH, 1);
             put(Rank.FOURTH, 1);
@@ -37,12 +36,13 @@ class LottoResultsTest {
             put(Rank.SECOND, 1);
             put(Rank.FIRST, 0);
         }};
-        assertThat(lottoResult.values()).isEqualTo(result);
+        assertThat(statistics).isEqualTo(result);
     }
 
     @Test
     void 로또_수익률_계산() {
+        Map<Rank, Integer> statistics = lottoResult.makeStatistics();
         float expected = (float) (50000 + 5000 + 30000000 + 1500000) / 4000;
-        assertThat(lottoResult.getProfit()).isEqualTo(expected);
+        assertThat(lottoResult.makeProfit(statistics, new Money(4000))).isEqualTo(expected);
     }
 }

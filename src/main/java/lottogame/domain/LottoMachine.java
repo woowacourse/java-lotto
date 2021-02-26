@@ -1,24 +1,21 @@
 package lottogame.domain;
 
+import lottogame.domain.dto.LottoDto;
 import lottogame.domain.lotto.Lotto;
 import lottogame.domain.lotto.LottoNumber;
-import lottogame.utils.CannotBuyLottoException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoMachine {
-    private static final int LOTTO_PRICE = 1000;
+    private final LottoNumberGenerator numberGenerator;
 
-    public int purchaseQuantity(Money money) {
-        int quantity = money.buyLotto(LOTTO_PRICE);
-        if (quantity == 0) {
-            throw new CannotBuyLottoException();
-        }
-        return quantity;
+    public LottoMachine() {
+        numberGenerator = new LottoNumberGenerator(LottoNumber.LOTTO_NUMBER_MIN, LottoNumber.LOTTO_NUMBER_MAX);
     }
 
-    public List<Lotto> buyLotto(int quantity) {
+    public List<Lotto> buyAutoTicket(int quantity) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < quantity; i++) {
             lottos.add(makeLotto());
@@ -27,6 +24,34 @@ public class LottoMachine {
     }
 
     private Lotto makeLotto() {
-        return new Lotto(new LottoNumber());
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        while (lottoNumbers.size() < Lotto.LOTTO_NUMBER_VOLUME) {
+            makeRandomNumber(lottoNumbers);
+        }
+        return new Lotto(lottoNumbers);
+    }
+
+    private void makeRandomNumber(List<LottoNumber> lottoNumbers) {
+        int random = numberGenerator.generate();
+        if (isPossible(random, lottoNumbers)) {
+            lottoNumbers.add(LottoNumber.valueOf(random));
+        }
+    }
+
+    private boolean isPossible(int random, List<LottoNumber> lottoNumbers) {
+        return lottoNumbers.stream()
+                .noneMatch(lottoNumber -> lottoNumber.equals(random));
+    }
+
+    public List<Lotto> makeManualLotto(List<LottoDto> manualLottos) {
+        return manualLottos.stream()
+                .map(lottoDto -> makeLotto(lottoDto.getNumbers()))
+                .collect(Collectors.toList());
+    }
+
+    private Lotto makeLotto(List<Integer> numbers) {
+        return new Lotto(numbers.stream()
+                .map(number -> LottoNumber.valueOf(number))
+                .collect(Collectors.toList()));
     }
 }
