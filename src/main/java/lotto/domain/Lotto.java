@@ -1,15 +1,16 @@
 package lotto.domain;
 
+import lotto.exception.LottoNumberException;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import lotto.exception.LottoNumberException;
 
 public class Lotto {
 
     private static final String JOIN_DELIMITER = ", ";
     private static final int LOTTO_NUMBERS_SIZE = 6;
+
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(final List<LottoNumber> lottoNumbers) {

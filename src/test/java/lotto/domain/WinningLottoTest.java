@@ -17,12 +17,12 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class WinningLottoTest {
 
-    private Lotto lotto;
+    private List<Integer> lotto;
     private LottoNumber bonusNumber;
 
     @BeforeEach
     void setUp() {
-        lotto = LottoGenerator.generate(Arrays.asList(1, 2, 3, 4, 5, 6));
+        lotto = Arrays.asList(1, 2, 3, 4, 5, 6);
         bonusNumber = LottoNumber.of(7);
     }
 
