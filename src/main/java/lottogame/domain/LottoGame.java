@@ -16,7 +16,7 @@ public class LottoGame {
     private LottoNumber drawnBonusNumber;
     private LottoNumbers drawnWinningNumbers;
     private LottoGameResult lottoGameResult;
-    private LottoTickets lottoTickets = new LottoTickets();
+    private final LottoTickets lottoTickets = new LottoTickets();
     private final LottoTicketMachine lottoTicketMachine = new LottoTicketMachine();
 
     public void buyManualTickets(final Money money, final List<String> LottoNumbersGroup) {

@@ -22,7 +22,6 @@ public class LottoNumberTest {
     void lottoNumberValueIsNegativeNumber() {
         String value = "-1";
         assertThatThrownBy(() -> {
-            //LottoNumber lottoNumber = new LottoNumber(value);
             LottoNumber lottoNumber = LottoNumber.of(value);
         }).isInstanceOf(IllegalArgumentException.class);
     }
