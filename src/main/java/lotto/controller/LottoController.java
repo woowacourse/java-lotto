@@ -48,7 +48,7 @@ public class LottoController {
         LottoStore lottoStore = new LottoStore();
         Money money = startMoney();
         NumManualLotto numManualLotto = buyManualLotto();
-        validNumManualLotto(money, numManualLotto);
+        lottoStore.validNumManualLotto(money, numManualLotto);
         Lottos purchasedLottos = lottoStore.buyLottos(money, numManualLotto);
         OutputView
             .numPurchasedLotto(getNumManualLotto(numManualLotto), purchasedLottos.getNumAutoLotto(
@@ -59,11 +59,6 @@ public class LottoController {
 
     private Integer getNumManualLotto(NumManualLotto numManualLotto) {
         return numManualLotto.getNumLotto();
-    }
-
-
-    private void validNumManualLotto(Money money, NumManualLotto numManual) {
-        money.validNumManual(numManual);
     }
 
     private NumManualLotto buyManualLotto() {

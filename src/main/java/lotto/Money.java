@@ -7,7 +7,6 @@ public class Money {
 
     private static final String ERROR_POSITIVE = "음수는 불가능합니다.";
     private static final String ERROR_CONVERT_INT = "공백이나 숫자가 아닌 값은 불가능합니다.";
-    private static final String ERROR_BUY_FAIL = "구매 할 수 없는 로또 수량입니다.";
     private int price;
 
     public Money(String money) {
@@ -34,9 +33,7 @@ public class Money {
         return this.price;
     }
 
-    public void validNumManual(NumManualLotto numManual) {
-        if (price - (numManual.getNumLotto() * LottoStore.LOTTO_PRICE) < 0) {
-            throw new IllegalArgumentException(ERROR_BUY_FAIL);
-        }
+    public int getAvailableNumManualLotto(NumManualLotto numManualLotto) {
+        return this.price - (numManualLotto.getNumLotto() * LottoStore.LOTTO_PRICE);
     }
 }

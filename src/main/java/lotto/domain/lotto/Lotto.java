@@ -12,7 +12,7 @@ public class Lotto {
     private static final String DUPLICATION_LOTTO_ERROR_MESSAGE = "로또 번호는 중복된 숫자가 존재할 수 없습니다.";
     private static final String ERROR_COLLECT_NUMBER = "올바른 숫자를 입력하여 주세요";
 
-    private static final String REGEX = ", ";
+    private static final String REGEX_SPLITTER = ", ";
 
     private final List<LottoNumber> numbers;
 
@@ -21,16 +21,21 @@ public class Lotto {
     }
 
     public static Lotto manual(String numbers) {
-        List<Integer> lottoNumbers;
+        List<String> inputNumbers = createSplitNumber(numbers);
+        List<Integer> lottoNumbers = toIntegerNumber(inputNumbers);
+        return generate(lottoNumbers);
+    }
+
+    private static List<Integer> toIntegerNumber(List<String> inputNumbers) {
         try {
-            lottoNumbers = Arrays
-                .stream(numbers.split(REGEX))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+            return inputNumbers.stream().map(Integer::parseInt).collect(Collectors.toList());
         } catch (Exception e) {
             throw new IllegalArgumentException(ERROR_COLLECT_NUMBER);
         }
-        return generate(lottoNumbers);
+    }
+
+    private static List<String> createSplitNumber(String numbers) {
+        return Arrays.asList(numbers.split(REGEX_SPLITTER));
     }
 
     public static Lotto generate(List<Integer> numbers) {
