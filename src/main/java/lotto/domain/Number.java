@@ -7,7 +7,7 @@ import lotto.exception.NumberException;
 public class Number implements Comparable<Number> {
 
     private static final HashMap<Integer, Number> NUMBER_CACHE = new HashMap<>();
-    public static final String EXCESS_NUMBER_MESSAGE = "범위를 벗어난 숫자입니다.";
+    public static final String INVALID_NUMBER_MESSAGE = "범위를 벗어난 숫자입니다.";
     public static final int UPPER_LIMIT = 45;
     public static final int LOWER_LIMIT = 1;
 
@@ -19,19 +19,19 @@ public class Number implements Comparable<Number> {
         }
     }
 
-    public Number(int candidateNumber) {
+    private Number(int candidateNumber) {
         checkValidRange(candidateNumber);
         this.number = candidateNumber;
     }
 
-    public static Number getFromCache(int candidateNumber) {
+    public static Number from(int candidateNumber) {
         checkValidRange(candidateNumber);
         return NUMBER_CACHE.get(candidateNumber);
     }
 
     private static void checkValidRange(int candidateNumber) {
         if ((candidateNumber < LOWER_LIMIT) || (candidateNumber > UPPER_LIMIT)) {
-            throw new NumberException(EXCESS_NUMBER_MESSAGE);
+            throw new NumberException(INVALID_NUMBER_MESSAGE);
         }
     }
 

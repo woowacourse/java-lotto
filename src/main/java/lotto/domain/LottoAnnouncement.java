@@ -19,13 +19,13 @@ public class LottoAnnouncement {
         checkProperSize(rawWinners);
         checkOverlapped(rawWinners, bonusNumber);
         this.winners = wrappedWinners(rawWinners);
-        this.bonusNumber = Number.getFromCache(bonusNumber);
+        this.bonusNumber = Number.from(bonusNumber);
     }
 
     private List<Number> wrappedWinners(List<Integer> rawWinners) {
         List<Number> winners = new ArrayList<>();
         for (int rawWinner : rawWinners) {
-            winners.add(Number.getFromCache(rawWinner));
+            winners.add(Number.from(rawWinner));
         }
         return winners;
     }

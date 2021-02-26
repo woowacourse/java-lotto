@@ -21,7 +21,7 @@ public class LottoAnnouncementTest {
         int announcedBonusNumber = 7;
         LottoAnnouncement lottoannouncement = new LottoAnnouncement(announcedNumbers,
             announcedBonusNumber);
-        Number bonusNumber = new Number(announcedBonusNumber);
+        Number bonusNumber = Number.from(announcedBonusNumber);
         assertThat(lottoannouncement.getWinners()).isEqualTo(winnerNumbers);
         assertThat(lottoannouncement.getBonusNumber()).isEqualTo(bonusNumber);
     }
@@ -29,7 +29,7 @@ public class LottoAnnouncementTest {
     private List<Number> packWinnerNumbers(List<Integer> announcedWinnerNumbers) {
         List<Number> packWinnerNumbers = new ArrayList<>();
         for (int winnerNumber : announcedWinnerNumbers) {
-            packWinnerNumbers.add(new Number(winnerNumber));
+            packWinnerNumbers.add(Number.from(winnerNumber));
         }
         return packWinnerNumbers;
     }
@@ -61,6 +61,6 @@ public class LottoAnnouncementTest {
         int announcedBonusNumber = 46;
         assertThatThrownBy(() -> new LottoAnnouncement(announcedNumbers, announcedBonusNumber))
             .isInstanceOf(NumberException.class)
-            .hasMessageContaining(Number.EXCESS_NUMBER_MESSAGE);
+            .hasMessageContaining(Number.INVALID_NUMBER_MESSAGE);
     }
 }
