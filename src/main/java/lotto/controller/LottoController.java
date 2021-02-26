@@ -75,7 +75,7 @@ public class LottoController {
         Rewards rewards = lottoTickets.getResult(winningLotto);
         Arrays.stream(Reward.values())
             .sorted(Comparator.comparing(Reward::getWinningMoney))
-            .filter(reward -> !reward.equals(reward.NONE))
+            .filter(reward -> !reward.equals(Reward.NONE))
             .forEach(reward -> callMatchMessage(reward, rewards.getRankCount(reward)));
         OutputView.printProfitMessage(rewards.profit(payment.getPayment()));
     }
