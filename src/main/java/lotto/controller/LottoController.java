@@ -45,7 +45,7 @@ public class LottoController {
         Map<Rank, Integer> ranks = lottoResult.matchRank(winningLotto, lottos);
         OutputView.displayResultMessage();
         ranks.forEach((rank, rankCount) -> {
-            OutputView.displayResult(rank, rankCount);
+            OutputView.displayResult(rank.getMatchCount(), rank.getPrize(), rankCount);
         });
         OutputView.displayEarningRate(lottoResult.findEarningRate(money.getMoney()));
     }

@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.Rank;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 public class OutputView {
 
@@ -15,6 +16,8 @@ public class OutputView {
     private static final String AMOUNT = "개";
     private static final String EARNING_RATE_MESSAGE = "총 수익률은 %s입니다.";
     private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.00");
+    private static final String LOTTO_RESULT_MESSAGE = "%d개 일치, (%d)원 - %d개\n";
+    private static final String LOTTO_RESULT_SECOND_MESSAGE = "%d개 일치, 보너스 볼 일치 (%d)원 - %d개\n";
 
     public static void requestMoneyMessage() {
         System.out.println(INPUT_MONEY_MESSAGE);
@@ -42,8 +45,11 @@ public class OutputView {
         System.out.println(RESULT_TITLE_MESSAGE);
     }
 
-    public static void displayResult(Rank rank, int count) {
-        System.out.println(rank + Integer.toString(count) + AMOUNT);
+    public static void displayResult(int matchCount, int prize, int count) {
+        if (prize == 30_000_000) {
+            System.out.printf(LOTTO_RESULT_SECOND_MESSAGE, matchCount, prize, count);
+        }
+        System.out.printf(LOTTO_RESULT_MESSAGE, matchCount, prize, count);
     }
 
     public static void displayEarningRate(double earningRate) {
