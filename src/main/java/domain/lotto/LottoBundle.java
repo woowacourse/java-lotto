@@ -47,4 +47,17 @@ public class LottoBundle {
     public List<Lotto> getLottoBundle() {
         return Collections.unmodifiableList(lottoBundle);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoBundle that = (LottoBundle) o;
+        return Objects.equals(lottoBundle, that.lottoBundle);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoBundle);
+    }
 }
