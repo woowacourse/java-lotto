@@ -15,7 +15,9 @@ public class LottosTest {
     void createLottos() {
         int expectedLottoSize = 14;
         List<String> manualLottoNumbers = new ArrayList<>(Collections.singletonList("1,2,3,4,5,6"));
-        Lottos lottos = new Lottos(manualLottoNumbers, expectedLottoSize);
-        assertThat(lottos.getSize()).isEqualTo(expectedLottoSize);
+        Lottos manualLottos = LottoGenerator.createManualLottos(manualLottoNumbers);
+        Lottos autoLottos = LottoGenerator.createAutoLottos(13);
+        Lottos purchasedLottos = new Lottos(manualLottos, autoLottos);
+        assertThat(purchasedLottos.getSize()).isEqualTo(expectedLottoSize);
     }
 }

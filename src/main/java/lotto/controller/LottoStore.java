@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LottoStore {
 
@@ -36,8 +37,11 @@ public class LottoStore {
         Money money = new Money(InputView.inputMoney());
         int affordableLottoTicketCount = calculateAffordableLottoTickets(money);
         List<String> manualLottoNumbers = manualLottoNumbers(affordableLottoTicketCount);
-        Lottos purchasedLottos = new Lottos(manualLottoNumbers, affordableLottoTicketCount);
-        OutputView.printPurchasedLottos(purchasedLottos);
+        Lottos purchasedManualLottos = LottoGenerator.createManualLottos(manualLottoNumbers);
+        Lottos purchasedAutoLottos =
+                LottoGenerator.createAutoLottos(affordableLottoTicketCount - manualLottoNumbers.size());
+        Lottos purchasedLottos = new Lottos(purchasedManualLottos, purchasedAutoLottos);
+        OutputView.printPurchasedLottos(manualLottoNumbers.size(), purchasedLottos);
         return purchasedLottos;
     }
 
@@ -47,7 +51,8 @@ public class LottoStore {
             return new ArrayList<>();
         }
         validateManualLottoCount(affordableLottoTicketCount, manualLottoCount);
-        return InputView.inputManualLottoNumbers(manualLottoCount);
+        return InputView.inputManualLottoNumbers(manualLottoCount).stream()
+                .sorted().collect(Collectors.toList());
     }
 
     private void validateManualLottoCount(int affordableLottoTicketCount, int manualLottoCount) {
@@ -82,7 +87,7 @@ public class LottoStore {
         return Math.round(rawProfitRate * 100) / 100.00;
     }
 
-    public int calculateAffordableLottoTickets(Money money) {
+    private int calculateAffordableLottoTickets(Money money) {
         return money.getMoney() / LOTTO_PRICE;
     }
 }

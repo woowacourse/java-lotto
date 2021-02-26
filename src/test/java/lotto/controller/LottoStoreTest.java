@@ -32,12 +32,4 @@ public class LottoStoreTest {
         LottoRank lottoResult = winningLotto.getLottoResult(inputLotto);
         assertThat((double) (lottoResult.getPrizeMoney() / 1000)).isEqualTo(expectedProfitRate);
     }
-
-    @ParameterizedTest
-    @DisplayName("구입가능한 로또 매수 계산")
-    @CsvSource(value = {"14000,14", "10200,10"})
-    void calculateAffordableLottoTicketsTest(int inputMoney, int expectedLottoTickets) {
-        Money money = new Money(inputMoney);
-        assertThat(new LottoStore().calculateAffordableLottoTickets(money)).isEqualTo(expectedLottoTickets);
-    }
 }

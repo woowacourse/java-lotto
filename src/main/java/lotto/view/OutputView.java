@@ -19,9 +19,8 @@ public class OutputView {
         System.out.println(message);
     }
 
-    public static void printPurchasedLottos(Lottos purchasedLottos) {
+    public static void printPurchasedLottos(int manualLottoCount, Lottos purchasedLottos) {
         List<Lotto> lottoBunch = purchasedLottos.getLottoBunch();
-        int manualLottoCount = purchasedLottos.getManualLottoCount();
         System.out.printf(PURCHASED_LOTTO_COUNT_ALARM, manualLottoCount, purchasedLottos.getSize() - manualLottoCount);
         for (Lotto lotto : lottoBunch) {
             System.out.println(lotto.getNumbers());

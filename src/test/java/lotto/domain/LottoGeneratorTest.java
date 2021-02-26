@@ -13,15 +13,16 @@ class LottoGeneratorTest {
     @Test
     @DisplayName("로또 생성 시 6개의 숫자가 생성되는지 확인")
     void lottoCrateTest() {
-        Lotto lotto = LottoGenerator.createAutoLotto();
-        assertThat(lotto.getNumbers().size()).isEqualTo(6);
+        Lottos createdAutoLottos = LottoGenerator.createAutoLottos(1);
+        assertThat(createdAutoLottos.getLottoBunch().get(0).getNumbers().size()).isEqualTo(6);
     }
 
     @Test
     @DisplayName("수동 로또 생성 확인")
     void createManualLotto() {
+        List<String> inputNumbers = new ArrayList<>(Arrays.asList("1,2,3,4,5,6"));
         List<Integer> expectedNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto createdLotto = LottoGenerator.createManualLotto("1,2,3,4,5,6");
-        assertThat(createdLotto.getNumbers()).isEqualTo(expectedNumbers);
+        Lottos createdManualLottos = LottoGenerator.createManualLottos(inputNumbers);
+        assertThat(createdManualLottos.getLottoBunch().get(0).getNumbers()).isEqualTo(expectedNumbers);
     }
 }

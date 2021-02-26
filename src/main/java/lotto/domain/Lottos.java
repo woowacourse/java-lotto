@@ -5,17 +5,14 @@ import java.util.*;
 public class Lottos {
 
     private final List<Lotto> lottoBunch = new ArrayList<>();
-    private final int manualLottoCount;
 
-    public Lottos(List<String> manualLottoNumbers, int purchasedLottoCount) {
-        manualLottoCount = manualLottoNumbers.size();
-        int autoLottoCount = purchasedLottoCount - manualLottoCount;
-        for (String manualLottoNumber : manualLottoNumbers) {
-            lottoBunch.add(LottoGenerator.createManualLotto(manualLottoNumber));
-        }
-        for (int i = 0; i < autoLottoCount; i++) {
-            lottoBunch.add(LottoGenerator.createAutoLotto());
-        }
+    public Lottos(List<Lotto> lottos) {
+        lottoBunch.addAll(lottos);
+    }
+
+    public Lottos(Lottos manualLottos, Lottos autoLottos) {
+        lottoBunch.addAll(manualLottos.getLottoBunch());
+        lottoBunch.addAll(autoLottos.getLottoBunch());
     }
 
     public Map<LottoRank, Integer> getStatistics(WinningLotto winningLotto) {
@@ -41,9 +38,5 @@ public class Lottos {
 
     public int getSize() {
         return lottoBunch.size();
-    }
-
-    public int getManualLottoCount() {
-        return manualLottoCount;
     }
 }

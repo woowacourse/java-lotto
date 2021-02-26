@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 public class LottoGenerator {
 
@@ -15,16 +16,21 @@ public class LottoGenerator {
         }
     }
 
-    public static Lotto createAutoLotto() {
-
-        Collections.shuffle(candidateNumbers);
-        Set<Integer> lottoNumbers =
-                new TreeSet<>(candidateNumbers.subList(0, LOTTO_POSSESSION_NUMBER));
-        return Lotto.from(new ArrayList<>(lottoNumbers));
+    public static Lottos createManualLottos(List<String> manualLottoNumbers) {
+        List<Lotto> createdManualLottos = new ArrayList<>();
+        manualLottoNumbers.forEach(number -> createdManualLottos.add(Lotto.from(number)));
+        return new Lottos(createdManualLottos);
     }
 
-    public static Lotto createManualLotto(String inputNumbers) {
-        return Lotto.from(inputNumbers);
-    }
+    public static Lottos createAutoLottos(int autoLottoCount) {
+        List<Lotto> createdAutoLottos = new ArrayList<>();
+        Set<Integer> lottoNumbers;
+        for (int i = 0; i < autoLottoCount; i++) {
+            Collections.shuffle(candidateNumbers);
+            lottoNumbers = new TreeSet<>(candidateNumbers.subList(0, LOTTO_POSSESSION_NUMBER));
+            createdAutoLottos.add(Lotto.from(new ArrayList<>(lottoNumbers)));
+        }
 
+        return new Lottos(createdAutoLottos);
+    }
 }
