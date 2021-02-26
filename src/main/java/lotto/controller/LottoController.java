@@ -68,7 +68,7 @@ public class LottoController {
     private WinningTicket makeWinningTicket() {
         try {
             final Lotto lotto = new Lotto(inputView.inputWinningNumbers());
-            final LottoNumber bonusNumber = new LottoNumber(inputView.inputBonusNumber());
+            final LottoNumber bonusNumber = LottoNumber.from(inputView.inputBonusNumber());
             return new WinningTicket(lotto, bonusNumber);
         } catch (LottoCustomException e) {
             OutputView.printErrorMessage(e.getMessage());

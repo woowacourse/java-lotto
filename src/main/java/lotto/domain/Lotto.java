@@ -22,7 +22,7 @@ public class Lotto {
     }
 
     private Set<LottoNumber> convertToSet(List<Integer>numbers) {
-        return numbers.stream().map(LottoNumber::new).collect(Collectors.toSet());
+        return numbers.stream().map(LottoNumber::from).collect(Collectors.toSet());
     }
 
     private void validate(Set<LottoNumber> lottoNumbers) {

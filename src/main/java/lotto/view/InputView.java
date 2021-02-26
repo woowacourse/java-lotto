@@ -59,7 +59,7 @@ public class InputView {
         return Arrays.stream(winningNumbers.split(SEPARATOR))
                 .map(String::trim)
                 .map(InputView::parseInt)
-                .map(LottoNumber::new)
+                .map(LottoNumber::from)
                 .collect(Collectors.toSet());
     }
 }

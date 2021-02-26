@@ -2,22 +2,44 @@ package lotto.domain;
 
 import lotto.exception.LottoCustomException;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+
 import static java.lang.String.format;
 
 public class LottoNumber {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
 
+    private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
+    static {
+        for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER ; i++) {
+            lottoNumbers.put(i, new LottoNumber(i));
+        }
+    }
+
     private final int number;
 
-    public LottoNumber(final int number) {
-        if (isNumberNotInRange(number)) {
+    private LottoNumber(final int number) {
+//        if (isNumberNotInRange(number)) {
+//            throw new LottoCustomException(format(
+//                    "로또 번호는 %d-%d사이의 숫자이어야 합니다",
+//                    MIN_LOTTO_NUMBER,
+//                    MAX_LOTTO_NUMBER));
+//        }
+        this.number = number;
+    }
+
+    public static LottoNumber from(int number) {
+        LottoNumber lottoNumber = lottoNumbers.get(number);
+        if (Objects.isNull(lottoNumber)) {
             throw new LottoCustomException(format(
                     "로또 번호는 %d-%d사이의 숫자이어야 합니다",
                     MIN_LOTTO_NUMBER,
                     MAX_LOTTO_NUMBER));
         }
-        this.number = number;
+        return lottoNumber;
     }
 
     public Integer getNumber() {

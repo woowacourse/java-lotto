@@ -14,7 +14,7 @@ public class RandomNumberGenerator {
 
     static {
         IntStream.rangeClosed(LOTTO_NUMBER_MIN_LIMIT, LOTTO_NUMBER_MAX_LIMIT)
-                .forEach(number -> possibleLottoNumbers.put(number, new LottoNumber(number)));
+                .forEach(number -> possibleLottoNumbers.put(number, LottoNumber.from(number)));
     }
 
     private RandomNumberGenerator() {
