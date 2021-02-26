@@ -2,8 +2,6 @@ package lotto.domain.lotto;
 
 import java.util.Objects;
 
-import lotto.utils.Validation;
-
 public class LottoNumber implements Comparable<LottoNumber> {
     private static final String ERROR_LOTTO_NUMBER_OUT_OF_BOUND = "[Error] 로또 번호는 1부터 45까지 입니다.";
 

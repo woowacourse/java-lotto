@@ -2,14 +2,9 @@ package domain.lotto;
 
 import lotto.domain.Money;
 import lotto.domain.lotto.LottoAmount;
-import lotto.domain.lotto.LottoLine;
-import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.LottoTicketBuyingRequest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 

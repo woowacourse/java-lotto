@@ -3,8 +3,6 @@ package lotto.view;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import lotto.domain.lotto.LottoNumber;
-
 import static lotto.utils.Validation.isNumericAndPositive;
 
 public class InputView {
