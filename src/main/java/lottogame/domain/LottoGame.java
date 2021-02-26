@@ -19,8 +19,10 @@ public class LottoGame {
     private LottoTickets lottoTickets = new LottoTickets();
     private final LottoTicketMachine lottoTicketMachine = new LottoTicketMachine();
 
-    public void buyManualTicket(final Money money, final String manualLottoNumbers) {
-        this.lottoTickets.add(lottoTicketMachine.buyManualTicket(money, manualLottoNumbers));
+    public void buyManualTickets(final Money money, final List<String> LottoNumbersGroup) {
+        for (String lottoNumbers : LottoNumbersGroup) {
+            this.lottoTickets.add(lottoTicketMachine.buyManualTicket(money, lottoNumbers));
+        }
     }
 
     public void buyAutoTickets(final Money money) {

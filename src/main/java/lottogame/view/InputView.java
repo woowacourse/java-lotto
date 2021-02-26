@@ -2,6 +2,8 @@ package lottogame.view;
 
 import lottogame.domain.Money;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -12,15 +14,19 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static String getManualLottoTicketCount() {
+    public static List<String> getManualLottoNumbers(final Money money) {
+        List<String> ManualLottoNumbers = new ArrayList<>();
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        return scanner.nextLine();
+
+        LottoTicketCount lottoTicketCount = new LottoTicketCount(scanner.nextLine(), money);
+        while(lottoTicketCount.isRemain()){
+            lottoTicketCount.reduce();
+            ManualLottoNumbers.add(getManualNumbers());
+        }
+        return ManualLottoNumbers;
     }
 
-    public static String getManualLottoTickets(Money money) {
-        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-
-
+    private static String getManualNumbers() {
         return scanner.nextLine();
     }
 

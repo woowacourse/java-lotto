@@ -1,7 +1,6 @@
 package lottogame.controller;
 
 import lottogame.domain.LottoGame;
-import lottogame.domain.LottoManualTicketCount;
 import lottogame.domain.Money;
 import lottogame.view.InputView;
 import lottogame.view.OutputView;
@@ -17,25 +16,15 @@ public class LottoGameController {
     public void buyTickets() {
         Money money = new Money(InputView.getMoneyInput());
         System.out.println();
-        LottoManualTicketCount lottoManualTicketCount = new LottoManualTicketCount(InputView.getManualLottoTicketCount(), money);
-        System.out.println();
-        buyManualTicket(money, lottoManualTicketCount);
-        buyAutoTicket(money);
+        buyManualTickets(money);
+        buyAutoTickets(money);
     }
 
-    private void buyManualTicket(Money money, LottoManualTicketCount lottoManualTicketCount) {
-        if (!lottoManualTicketCount.isRemain()) {
-            return;
-        }
-        InputView.printManualNumbersInputRequestMessage();
-        while (lottoManualTicketCount.isRemain()) {
-            lottoGame.buyManualTicket(money, InputView.getManualNumbersInput());
-            lottoManualTicketCount.reduce();
-        }
-        System.out.println();
+    private void buyManualTickets(Money money){
+        lottoGame.buyManualTickets(money, InputView.getManualLottoNumbers(money));
     }
 
-    private void buyAutoTicket(Money money) {
+    private void buyAutoTickets(Money money) {
         lottoGame.buyAutoTickets(money);
     }
 

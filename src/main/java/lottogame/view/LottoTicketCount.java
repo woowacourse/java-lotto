@@ -1,11 +1,13 @@
-package lottogame.domain;
+package lottogame.view;
 
-public class LottoManualTicketCount {
+import lottogame.domain.Money;
+
+public class LottoTicketCount {
 
     public static final int TICKET_PRICE = 1000;
     private int value;
 
-    public LottoManualTicketCount(final String manualTicketCount, final Money money) {
+    public LottoTicketCount(final String manualTicketCount, final Money money) {
         value = Integer.parseInt(manualTicketCount);
         positiveValidate(value);
         countValidate(value, money);

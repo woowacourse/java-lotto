@@ -1,6 +1,6 @@
 package lottogame.domain.machine;
 
-import lottogame.domain.LottoManualTicketCount;
+import lottogame.view.LottoTicketCount;
 import lottogame.domain.Money;
 import lottogame.domain.ticket.LottoTickets;
 import org.junit.jupiter.api.DisplayName;
@@ -25,7 +25,7 @@ public class LottoTicketMachineTest {
     @DisplayName("수동 2장 자동 3장을 구매해본다")
     void manualAndAutoBuy() {
         Money money = new Money("5000");
-        LottoManualTicketCount ticketCount = new LottoManualTicketCount("2", money);
+        LottoTicketCount ticketCount = new LottoTicketCount("2", money);
 
         LottoTickets lottoTickets = new LottoTickets();
         while(ticketCount.isRemain()){
