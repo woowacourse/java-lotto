@@ -1,7 +1,5 @@
 package lotto.view;
 
-import static lotto.utils.ConsoleUtils.printNotice;
-
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,5 +42,9 @@ public class InputView {
         }
 
         return lottoTicketsInput;
+    }
+
+    private static void printNotice(String notice) {
+        System.out.println("\n" + notice);
     }
 }

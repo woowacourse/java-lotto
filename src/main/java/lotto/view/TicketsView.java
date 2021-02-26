@@ -1,8 +1,5 @@
 package lotto.view;
 
-import static lotto.utils.ConsoleUtils.printNotice;
-
-import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.lotto.LottoTicket;
 import lotto.domain.result.UsersLottoTickets;
@@ -10,20 +7,6 @@ import lotto.domain.result.UsersLottoTickets;
 public class TicketsView {
 
     private TicketsView() {
-    }
-
-    public static void printTickets(List<LottoTicket> lottoTickets) {
-        printLottoTicketCount(lottoTickets.size());
-
-        for (LottoTicket lottoTicket : lottoTickets) {
-            printLottoTicket(lottoTicket);
-        }
-
-        System.out.println();
-    }
-
-    private static void printLottoTicketCount(int lottoTicketCount) {
-        System.out.printf("%d개를 구매했습니다.\n", lottoTicketCount);
     }
 
     public static void printTickets(UsersLottoTickets usersLottoTickets) {
@@ -46,5 +29,9 @@ public class TicketsView {
                 .collect(Collectors.joining(", ", "[", "]"));
 
         System.out.println(numbers);
+    }
+
+    private static void printNotice(String notice) {
+        System.out.println("\n" + notice);
     }
 }
