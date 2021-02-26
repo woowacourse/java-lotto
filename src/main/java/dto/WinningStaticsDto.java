@@ -4,6 +4,7 @@ import domain.Prize;
 import domain.WinningStatics;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -14,7 +15,7 @@ public class WinningStaticsDto {
         this.prizeDtos = prizeDtos;
     }
 
-    public static WinningStaticsDto of(final WinningStatics winningStatics) {
+    public static WinningStaticsDto from(final WinningStatics winningStatics) {
         final List<PrizeDto> prizeDtos = new ArrayList<>();
 
         winningStatics.toMap()
@@ -27,6 +28,7 @@ public class WinningStaticsDto {
                         }
                 );
 
+        Collections.reverse(prizeDtos);
         return new WinningStaticsDto(prizeDtos);
     }
 

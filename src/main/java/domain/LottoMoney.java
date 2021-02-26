@@ -65,8 +65,8 @@ public class LottoMoney {
         return value / SINGLE_LOTTO_PRICE;
     }
 
-    public int getValue() {
-        return value;
+    public boolean isExchangeable(final int ticketQuantity) {
+        return ticketQuantity <= toTicketQuantity();
     }
 
     @Override

@@ -1,5 +1,6 @@
 package domain.ticket;
 
+import domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -71,16 +72,6 @@ public class LottoTicketTest {
                 .isEqualTo(new LottoTicket(getValidNumbers()));
     }
 
-    @DisplayName("당첨 티켓과 동등 비교")
-    @Test
-    void equals_lottoTicket() {
-        final LottoTicket lottoTicket = new LottoTicket(getValidNumbers());
-        final WinningTicket winningTicket = new WinningTicket(getValidNumbers());
-
-        assertThat(lottoTicket.isSameNumbers(winningTicket))
-                .isEqualTo(true);
-    }
-
     @DisplayName("오름차순 정렬 되어 저장되면 성공")
     @Test
     void shuffled_equals() {
@@ -90,6 +81,16 @@ public class LottoTicketTest {
 
         assertThat(lottoTicket)
                 .isEqualTo(new LottoTicket(getValidNumbers()));
+    }
+
+    @DisplayName("포함 테스트")
+    @Test
+    void contains() {
+        final List<Integer> validNumbers = getValidNumbers();
+        final LottoTicket lottoTicket = new LottoTicket(validNumbers);
+
+        assertThat(lottoTicket.contains(LottoNumber.valueOf(1)))
+                .isEqualTo(true);
     }
 
     private List<Integer> getValidNumbers() {

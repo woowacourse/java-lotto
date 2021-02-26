@@ -38,10 +38,6 @@ public abstract class Ticket {
         }
     }
 
-    public boolean isSameNumbers(final Ticket ticket) {
-        return this.lottoNumbers.equals(ticket.lottoNumbers);
-    }
-
     public int countSameNumbers(final Ticket lottoTicket) {
         return (int) this.lottoNumbers
                 .stream()

@@ -4,7 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static domain.Prize.choice;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 class PrizeTest {
@@ -12,7 +12,7 @@ class PrizeTest {
     @Test
     void choice_prize_success() {
         assertAll(
-                () -> assertThat(choice(6, true)).isEqualTo(Prize.FIRST),
+                () -> assertThat(choice(6, false)).isEqualTo(Prize.FIRST),
                 () -> assertThat(choice(5, true)).isEqualTo(Prize.SECOND),
                 () -> assertThat(choice(5, false)).isEqualTo(Prize.THIRD),
                 () -> assertThat(choice(4, true)).isEqualTo(Prize.FOURTH),

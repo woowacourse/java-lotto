@@ -57,14 +57,4 @@ class WinningTicketTest {
         assertThat(winningTicket)
                 .isEqualTo(new WinningTicket(new ArrayList<>(winningNumbers)));
     }
-
-    @DisplayName("로또 티켓과 동등 비교")
-    @Test
-    void equals_lottoTicket() {
-        final WinningTicket winningTicket = new WinningTicket(winningNumbers);
-        final LottoTicket lottoTicket = new LottoTicket(new ArrayList<>(winningNumbers));
-
-        assertThat(winningTicket.isSameNumbers(lottoTicket))
-                .isEqualTo(true);
-    }
 }

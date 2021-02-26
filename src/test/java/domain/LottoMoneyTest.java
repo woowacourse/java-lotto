@@ -1,14 +1,15 @@
 package domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static domain.LottoMoney.SINGLE_LOTTO_PRICE;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottoMoneyTest {
     @DisplayName("유효한 값이면 객체 생성 성공")
@@ -67,7 +68,27 @@ class LottoMoneyTest {
     @Test
     void equals() {
         final LottoMoney lottoMoney = new LottoMoney("1000");
-        Assertions.assertThat(lottoMoney)
+        assertThat(lottoMoney)
                 .isEqualTo(new LottoMoney("1000"));
+    }
+
+    @DisplayName("로또 머니를 로또 티켓 수로 변환")
+    @Test
+    void toTicketQuantity() {
+        final LottoMoney lottoMoney = new LottoMoney("14000");
+        assertThat(lottoMoney.toTicketQuantity())
+                .isEqualTo(14);
+    }
+
+    @DisplayName("티켓으로 전환하기에 충분한 돈이 있는지 확인")
+    @Test
+    void isExchangeable() {
+        final LottoMoney lottoMoney = new LottoMoney("14000");
+        assertAll(
+                () -> assertThat(lottoMoney.isExchangeable(14))
+                        .isEqualTo(true),
+                () -> assertThat(lottoMoney.isExchangeable(15))
+                        .isEqualTo(false)
+        );
     }
 }

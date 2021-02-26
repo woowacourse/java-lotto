@@ -1,29 +1,29 @@
 package dto;
 
 import domain.ticket.LottoTicket;
-import domain.tickets.AutoLottoTickets;
+import domain.tickets.LottoTickets;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoTicketsDto {
-    private final List<SingleLottoTicketDto> singleLottoTicketDtos;
+    private final List<LottoTicketDto> lottoTicketDtos;
 
-    private LottoTicketsDto(final List<SingleLottoTicketDto> singleLottoTicketDtos) {
-        this.singleLottoTicketDtos = singleLottoTicketDtos;
+    private LottoTicketsDto(final List<LottoTicketDto> lottoTicketDtos) {
+        this.lottoTicketDtos = lottoTicketDtos;
     }
 
-    public static LottoTicketsDto of(final AutoLottoTickets autoLottoTickets) {
-        List<SingleLottoTicketDto> dtos = autoLottoTickets.toList()
+    public static LottoTicketsDto from(final LottoTickets lottoTickets) {
+        List<LottoTicketDto> dtos = lottoTickets.toList()
                 .stream()
                 .map(LottoTicket.class::cast)
-                .map(SingleLottoTicketDto::of)
+                .map(LottoTicketDto::from)
                 .collect(Collectors.toList());
 
         return new LottoTicketsDto(dtos);
     }
 
-    public List<SingleLottoTicketDto> getSingleLottoTicketDtos() {
-        return singleLottoTicketDtos;
+    public List<LottoTicketDto> getLottoTicketDtos() {
+        return lottoTicketDtos;
     }
 }
