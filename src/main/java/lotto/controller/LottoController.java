@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.domain.EarningRate;
 import lotto.domain.LottoService;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoRepository;
@@ -15,17 +16,16 @@ import lotto.view.OutputView;
 public class LottoController {
 
     public void start() {
-        final LottoService lottoService = new LottoService();
         final LottoRepository lottoRepository = new LottoRepository();
 
         final Ticket totalTicket = buyTicket();
         final Ticket manualTicket = manualBuyTicket(totalTicket);
         generateManualLottoNumbers(manualTicket.getCount(), lottoRepository);
-        printBuyLottoResult(manualTicket.getCount(), totalTicket.getCount(), lottoService,
+        BuyLottoAndPrintResult(manualTicket.getCount(), totalTicket.getCount(),
             lottoRepository);
 
         RatingInfo ratingInfo = lottoRepository.scratchLotto(buyWinningLotto());
-        printWinningStats(ratingInfo, lottoService, totalTicket);
+        printWinningStats(ratingInfo, new EarningRate(), totalTicket);
     }
 
     private Ticket buyTicket() {
@@ -93,17 +93,17 @@ public class LottoController {
         return new WinningLotto(lotto, bonusNumber);
     }
 
-    private void printBuyLottoResult(final int manualCount, final int totalCount,
-        LottoService lottoService, LottoRepository lottoRepository) {
+    private void BuyLottoAndPrintResult(final int manualCount, final int totalCount,
+        LottoRepository lottoRepository) {
         OutputView.printBuyLotto(manualCount, totalCount - manualCount);
-        OutputView.printLottoResults(
-            lottoService.getLotto(lottoRepository, new RandomLottoMachine(), totalCount));
+        lottoRepository.generateLottoByTicket(new RandomLottoMachine(), totalCount);
+        OutputView.printLottoResults(lottoRepository);
     }
 
-    private void printWinningStats(final RatingInfo ratingInfo, final LottoService lottoService,
+    private void printWinningStats(final RatingInfo ratingInfo, final EarningRate earningRate,
         final Ticket ticket) {
         OutputView
             .printWinningStats(ratingInfo,
-                lottoService.calculateEarningRate(ratingInfo, ticket.getPrice()));
+                earningRate.calculate(ratingInfo, ticket.getPrice()));
     }
 }
