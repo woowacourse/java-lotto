@@ -12,16 +12,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private final int value;
 
-    public LottoNumber(String number) {
-        if (!Validation.isNumeric(number)) {
-            throw new IllegalArgumentException();
-        }
-
-        int lottoNumber = Integer.parseInt(number);
-        validateLottoNumberRange(lottoNumber);
-        this.value = lottoNumber;
-    }
-
     public LottoNumber(int lottoNumber) {
         validateLottoNumberRange(lottoNumber);
         this.value = lottoNumber;

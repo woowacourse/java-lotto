@@ -18,8 +18,8 @@ public class LottoTicketBuyingRequestTest {
     @Test
     @DisplayName("수동 구매로또의 개수는 총 로또 구매 개수를 초과해서는 안된다.")
     public void number_of_manual_lotto_numbers_must_not_exceed_total() {
-        Money money = new Money("2000");
-        LottoAmount manualLottoAmount = new LottoAmount("3");
+        Money money = new Money(2000);
+        LottoAmount manualLottoAmount = new LottoAmount(3);
 
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> {

@@ -1,7 +1,6 @@
 package lotto.controller;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import lotto.domain.Money;
@@ -10,8 +9,7 @@ import lotto.domain.lotto.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import static lotto.view.InputView.REQUEST_INPUT_MANUAL_LOTTO_NUMBERS;
-import static lotto.view.InputView.REQUEST_LAST_WIN_LOTTO_NUMBERS;
+import static lotto.view.InputView.*;
 
 public class LottoController {
 
@@ -29,12 +27,13 @@ public class LottoController {
 
 
     private LottoTicketBuyingRequest getLottoTicketBuyingRequest() {
-        Money money = new Money(InputView.getMoney());
-        LottoAmount numberOfManualLotto = new LottoAmount(InputView.getNumberOfManualLotto());
+        Money money = new Money(InputView.getPositiveNumberInput(REQUEST_PURCHASE_MONEY));
+        int manualLottoCount = InputView.getPositiveNumberInput(REQUEST_NUMBER_OF_BUYING_MANUAL_LOTTO_NUMBERS);
+        LottoAmount numberOfManualLotto = new LottoAmount(manualLottoCount);
 
         LottoTicketBuyingRequest lottoTicketBuyingRequest = new LottoTicketBuyingRequest(money, numberOfManualLotto);
         for (int i = 0; i < numberOfManualLotto.getValue(); i++) {
-            List<String> splitLottoNumbersInput = InputView.getSplitLottoNumbers(REQUEST_INPUT_MANUAL_LOTTO_NUMBERS);
+            List<Integer> splitLottoNumbersInput = InputView.getSplitLottoNumbers(REQUEST_INPUT_MANUAL_LOTTO_NUMBERS);
             lottoTicketBuyingRequest.submitManualLottoLine(getLottoLine(splitLottoNumbersInput));
         }
 
@@ -47,16 +46,16 @@ public class LottoController {
     }
 
     private WinningNumbers getWinningNumbers() {
-        List<String> splitLottoNumbersInput = InputView.getSplitLottoNumbers(REQUEST_LAST_WIN_LOTTO_NUMBERS);
+        List<Integer> splitLottoNumbersInput = InputView.getSplitLottoNumbers(REQUEST_LAST_WIN_LOTTO_NUMBERS);
         LottoLine lottoLine = getLottoLine(splitLottoNumbersInput);
 
-        String bonusBallInput = InputView.getBonusLottoNumber();
+        int bonusBallInput = InputView.getPositiveNumberInput(REQUEST_LAST_WIN_BONUS_BALL);
         LottoNumber bonusLottoNumber = new LottoNumber(bonusBallInput);
 
         return new WinningNumbers(lottoLine, bonusLottoNumber);
     }
 
-    private LottoLine getLottoLine(List<String> splitLottoNumbersInput) {
+    private LottoLine getLottoLine(List<Integer> splitLottoNumbersInput) {
         ArrayList<LottoNumber> lottoNumberList = new ArrayList();
 
         for (int i = 0; i < splitLottoNumbersInput.size(); i++) {
