@@ -51,7 +51,7 @@ class LottoTest {
                 .isExactlyInstanceOf(IllegalArgumentException.class);
     }
 
-    private static Stream<int[]> generateIfLottoNumberLengthNotSatisfied() {
+    private static Stream<int[]> generateIfLottoNumbersLengthNotSatisfied() {
         return Stream.of(new int[]{1, 2, 3, 4, 5}
                 , new int[]{1, 2, 3, 4, 5, 6, 7});
     }
