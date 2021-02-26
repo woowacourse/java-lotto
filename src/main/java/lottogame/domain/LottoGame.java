@@ -14,7 +14,6 @@ public class LottoGame {
 
     private final LottoTicketIssueMachine lottoTicketIssueMachine;
 
-
     public LottoGame(final LottoTicketIssueMachine lottoTicketIssueMachine) {
         this.lottoTicketIssueMachine = lottoTicketIssueMachine;
     }
@@ -28,10 +27,14 @@ public class LottoGame {
     }
 
     public Map<Rank, Integer> getMatchingResult(final LottoTickets lottoTickets, final LottoWinningNumbers lottoWinningNumbers) {
-        Map<Rank, Integer> ranks = new EnumMap<>(
-            lottoTickets.getMatchingResult(lottoWinningNumbers, initMatchingResults())
-        );
-        return ranks;
+        Map<Rank, Integer> matchingResult = lottoTickets.getMatchingResult(lottoWinningNumbers, initMatchingResults());
+        matchingResult.remove(Rank.FAIL);
+        return matchingResult;
+    }
+
+    public double getYield(final LottoTickets lottoTickets, final LottoWinningNumbers lottoWinningNumbers) {
+        Map<Rank, Integer> ranks = lottoTickets.getMatchingResult(lottoWinningNumbers, initMatchingResults());
+        return totalWinningPrice(ranks) / totalInvestment(ranks);
     }
 
     private Map<Rank, Integer> initMatchingResults() {
@@ -42,14 +45,10 @@ public class LottoGame {
         return matchingResults;
     }
 
-    public double getYield(final Map<Rank, Integer> ranks) {
-        return totalWinningPrice(ranks) / totalInvestment(ranks);
-    }
-
     private double totalWinningPrice(final Map<Rank, Integer> ranks) {
         return ranks.entrySet()
             .stream()
-            .mapToInt(rank -> multiplyPriceByCount(rank.getKey(), rank.getValue()))
+            .mapToDouble(rank -> multiplyPriceByCount(rank.getKey(), rank.getValue()))
             .sum();
     }
 
@@ -58,12 +57,9 @@ public class LottoGame {
     }
 
     private double totalInvestment(final Map<Rank, Integer> ranks) {
-        return countBoughtTickets(ranks) * LottoTicketIssueMachine.getTicketPrice();
-    }
-
-    private int countBoughtTickets(final Map<Rank, Integer> ranks) {
         return ranks.values()
             .stream()
-            .reduce(0, Integer::sum);
+            .reduce(0, Integer::sum)
+            * LottoTicketIssueMachine.getTicketPrice();
     }
 }
