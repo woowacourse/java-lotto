@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.List;
-import lotto.domain.LottoService;
 import lotto.domain.Money;
 import lotto.domain.Ticket;
 import lotto.domain.WinningLotto;
@@ -45,12 +44,11 @@ public class LottoRepositoryTest {
     @Test
     @DisplayName("로또 긁은 내역 확인")
     void scratchLottoCheck() {
-        LottoService lottoService = new LottoService();
         LottoRepository lottoRepository = new LottoRepository();
         Ticket ticket = new Ticket(new Money(2000));
 
-        lottoService
-            .getLotto(lottoRepository, () -> Arrays.asList(1, 2, 3, 4, 5, 6), ticket.getCount());
+        lottoRepository
+            .generateLottoByTicket(() -> Arrays.asList(1, 2, 3, 4, 5, 6), ticket.getCount());
 
         WinningLotto winningLotto = new WinningLotto(
             Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)),
