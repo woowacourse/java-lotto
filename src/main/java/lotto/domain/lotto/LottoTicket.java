@@ -5,51 +5,36 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.lotto.util.LottoMoney;
-import lotto.domain.rank.Rank;
+import lotto.domain.rank.Ranks;
 
 public class LottoTicket {
 
-    public static final String LOTTO_PURCHASE_MONEY_LACK_ERROR = "[Error] 로또 구입 비용이 부족합니다. (로또 한 라인당 1,000원)";
+    public static final String LOTTO_TICKET_CREATE_ERROR = "[Error] 로또 티켓을 생성하는데 필요한 금액과 로또 라인이 부족합니다.";
     private static final LottoLineGenerator RANDOM_LOTTO_GENERATOR = new LottoLineGenerator();
     private final List<LottoLine> lottoLines;
 
     public LottoTicket(LottoMoney money) {
-        if (money.getCanBuyLottoLineCount() == 0) {
-            throw new IllegalArgumentException(LOTTO_PURCHASE_MONEY_LACK_ERROR);
-        }
-        int lottoLineCount = money.getCanBuyLottoLineCount();
-        this.lottoLines = makeLottoLines(lottoLineCount);
+        this(money, new ArrayList<>());
     }
 
-    public LottoTicket(LottoMoney money, List<LottoLine> lottoLines) {
-        if (money.getCanBuyLottoLineCount() == 0 && lottoLines.size() == 0) {
-            throw new IllegalArgumentException(LOTTO_PURCHASE_MONEY_LACK_ERROR);
-        }
-        int lottoLineCount = money.getCanBuyLottoLineCount();
-        this.lottoLines = makeLottoLines(lottoLineCount);
-        this.lottoLines.addAll(lottoLines);
+    public LottoTicket(List<LottoLine> manualLottoLines) {
+        this(new LottoMoney(0), manualLottoLines);
     }
 
-    private List<LottoLine> makeLottoLines(int count) {
-        List<LottoLine> lottoLines = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            lottoLines.add(RANDOM_LOTTO_GENERATOR.createLottoLine());
-        }
-        return lottoLines;
+    public LottoTicket(LottoMoney money, List<LottoLine> manualLottoLines) {
+        this.lottoLines = makeAutoLottoLines(money.getCanBuyLottoLineCount());
+        this.lottoLines.addAll(manualLottoLines);
+        validateCreateLottoLines();
     }
 
-    public List<Rank> checkLottoLines(WinningLotto winningLotto) {
-        return lottoLines.stream()
+    public Ranks matchLottoLines(WinningLotto winningLotto) {
+        return new Ranks(lottoLines.stream()
             .map(it -> it.checkLottoLine(winningLotto))
-            .collect(Collectors.toList());
+            .collect(Collectors.toList()));
     }
 
     public List<LottoLine> getLottoLines() {
         return Collections.unmodifiableList(lottoLines);
-    }
-
-    public int getLottoLineSize() {
-        return lottoLines.size();
     }
 
     public int getManualLottoLineCount() {
@@ -60,6 +45,20 @@ public class LottoTicket {
     public int getAutoLottoLineCount() {
         long count = lottoLines.stream().filter(it -> !it.isManualLotto()).count();
         return (int) count;
+    }
+
+    public void validateCreateLottoLines() {
+        if (lottoLines.size() == 0) {
+            throw new IllegalArgumentException(LOTTO_TICKET_CREATE_ERROR);
+        }
+    }
+
+    private List<LottoLine> makeAutoLottoLines(int count) {
+        List<LottoLine> lottoLines = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            lottoLines.add(RANDOM_LOTTO_GENERATOR.createLottoLine());
+        }
+        return lottoLines;
     }
 
 }

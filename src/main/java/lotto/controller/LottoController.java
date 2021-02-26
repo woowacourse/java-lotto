@@ -69,7 +69,7 @@ public class LottoController {
 
     private Ranks createLottoWinningResult(LottoTicket lottoTicket,
         WinningLotto winningLotto) {
-        return new Ranks(lottoTicket.checkLottoLines(winningLotto));
+        return lottoTicket.matchLottoLines(winningLotto);
     }
 
     private LottoMoney createLottoMoney() {

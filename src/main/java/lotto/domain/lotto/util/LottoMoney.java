@@ -1,10 +1,9 @@
 package lotto.domain.lotto.util;
 
 
-import static lotto.domain.lotto.LottoTicket.LOTTO_PURCHASE_MONEY_LACK_ERROR;
-
 public class LottoMoney {
 
+    public static final String LOTTO_PURCHASE_MONEY_LACK_ERROR = "[Error] 로또 구입 비용이 부족합니다. (로또 한 라인당 1,000원)";
     public static final int LOTTO_LINE_PRICE = 1000;
     private final int value;
 
