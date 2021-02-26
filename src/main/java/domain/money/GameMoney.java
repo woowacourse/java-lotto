@@ -21,10 +21,25 @@ public class GameMoney {
         return SINGLE_LOTTO_GAME_MONEY;
     }
 
-    private void validateBudget(int gameMoney) {
+    private void validateBudget(final int gameMoney) {
         if (gameMoney < SINGLE_LOTTO_GAME_MONEY) {
             throw new IllegalArgumentException("게임에는 최소 " + SINGLE_LOTTO_GAME_MONEY + "원이 필요합니다.");
         }
+    }
+
+    public void checkManualBuyingAvailable(final int quantity) {
+        if (quantity < 0 || gameMoney.divide(new BigDecimal(SINGLE_LOTTO_GAME_MONEY)).intValue() < quantity) {
+            throw new IllegalArgumentException("구입할 수 없는 수량입니다.");
+        }
+    }
+
+    public LottoBundle buyLottoManually(final List<Lotto> lottoBoughtManually) {
+        final int numberOfLottoToBuy = gameMoney.divide(new BigDecimal(SINGLE_LOTTO_GAME_MONEY)).intValue();
+        calculateGameMoneyLeft(numberOfLottoToBuy);
+
+        final int numberOfAutoLottoToBuy = numberOfLottoToBuy - lottoBoughtManually.size();
+        final LottoBundle lottoBundle = LottoGenerator.createRandomLottoBundle(lottoBoughtManually, numberOfAutoLottoToBuy);
+        return lottoBundle;
     }
 
     public LottoBundle buyLotto() {
@@ -39,23 +54,5 @@ public class GameMoney {
         final BigDecimal lottoBuyingMoney = new BigDecimal(numberOfLottoToBuy * SINGLE_LOTTO_GAME_MONEY);
         final BigDecimal gameMoneyLeft = gameMoney.subtract(lottoBuyingMoney);
         gameMoney = gameMoneyLeft;
-    }
-
-    public LottoBundle buyLottoManually(final List<Lotto> lottoBoughtManually) {
-        final int numberOfLottoToBuy = gameMoney.divide(new BigDecimal(SINGLE_LOTTO_GAME_MONEY)).intValue();
-        calculateGameMoneyLeft(numberOfLottoToBuy);
-
-        final int numberOfAutoLottoToBuy = numberOfLottoToBuy - lottoBoughtManually.size();
-        final LottoBundle lottoBundle = LottoGenerator.createRandomLottoBundle(lottoBoughtManually, numberOfAutoLottoToBuy);
-        return lottoBundle;
-    }
-
-    public void checkManualBuyingAvailable(final int quantity) {
-        if (gameMoney.divide(new BigDecimal(SINGLE_LOTTO_GAME_MONEY)).intValue() < quantity) {
-            throw new IllegalArgumentException("구입금액 이상으로 로또를 구매할 수 없습니다.");
-        }
-        if (quantity < 0) {
-            throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
-        }
     }
 }

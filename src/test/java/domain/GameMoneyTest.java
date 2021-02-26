@@ -46,7 +46,7 @@ public class GameMoneyTest {
         final GameMoney gameMoney = new GameMoney(10000);
         assertThatThrownBy(() -> gameMoney.checkManualBuyingAvailable(15))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("구입금액 이상으로 로또를 구매할 수 없습니다.");
+                .hasMessage("구입할 수 없는 수량입니다.");
     }
 
     @DisplayName("GameMoney를 입력받고, 수동으로 구매할 금액을 입력받고, 수동으로 구매할 로또를 입력해주고, 자동으로까지 다 산다.")
