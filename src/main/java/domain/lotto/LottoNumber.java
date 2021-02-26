@@ -51,7 +51,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private void validateRange(final int value) {
         if (value < MIN_NUMBER_VALUE || value > MAX_NUMBER_VALUE) {
-            throw new IllegalArgumentException("1에서 45 범위에서 벗어났습니다.");
+            throw new IllegalArgumentException(String.format("1에서 45 범위에서 벗어났습니다: %d", value));
         }
     }
 

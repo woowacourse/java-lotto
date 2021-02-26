@@ -52,7 +52,7 @@ public class LottoController {
 
         OutputView.resultTitle();
         Arrays.stream(Rank.values())
-                .filter(rank -> rank != Rank.NOTHING)
+                .filter(rank -> !rank.equalsNothing())
                 .forEach(rank -> OutputView.rankInfo(ranks.count(rank), rank));
 
         OutputView.totalProfitRate(transaction.calculateTotalProfitRate(ranks.totalProfit()));

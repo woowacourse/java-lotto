@@ -21,8 +21,8 @@ public enum Rank {
 
     public static Rank select(int matching, boolean bonusMatching) {
         return Arrays.stream(Rank.values())
-                .filter(ranking -> Objects.equals(matching, ranking.matching))
-                .filter(ranking -> !ranking.equals(SECOND) || bonusMatching)
+                .filter(rank -> Objects.equals(matching, rank.matching))
+                .filter(rank -> !rank.equals(SECOND) || bonusMatching)
                 .findFirst()
                 .orElse(NOTHING);
     }
@@ -33,5 +33,9 @@ public enum Rank {
 
     public int getMatching() {
         return matching;
+    }
+
+    public boolean equalsNothing() {
+        return equals(NOTHING);
     }
 }
