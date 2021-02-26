@@ -17,21 +17,21 @@ public class LottoCount {
         this(money.divideMoney(Ticket.PRICE));
     }
 
-    private LottoCount(int value) {
-        this(String.valueOf(value));
-    }
-
     public LottoCount(String value) {
-        this.lottoCount = validate(value);
+        this(validate(value));
     }
 
-    private int validate(String value) {
+    private LottoCount(int value) {
+        this.lottoCount = value;
+    }
+
+    private static int validate(String value) {
         int number = validateNumber(value);
         validateNotNegative(number);
         return number;
     }
 
-    private void validateNotNegative(int number) {
+    private static void validateNotNegative(int number) {
         if (number < 0) {
             throw new IllegalArgumentException(ERROR_MESSAGE_INVALID_INPUT);
         }
