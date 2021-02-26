@@ -23,9 +23,9 @@ public class LottoLine {
     }
 
     public Rank checkLottoLine(WinningLotto winningLotto) {
-        int LottoNumberMatchCount = winningLotto.getLottoNumberMatchCount(lottoNumbers);
+        int lottoNumberMatchCount = winningLotto.getLottoNumberMatchCount(lottoNumbers);
         boolean hasBonusNumber = winningLotto.isContainBonusLottoNumber(lottoNumbers);
-        return Rank.getMatchedRank(LottoNumberMatchCount, hasBonusNumber);
+        return Rank.getMatchedRank(lottoNumberMatchCount, hasBonusNumber);
     }
 
     public List<LottoNumber> getLottoNumbers() {
