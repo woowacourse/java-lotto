@@ -15,7 +15,7 @@ public class LottoTicketBuyingRequest {
 
     private final Money money;
     private final LottoAmount manualLottoAmount;
-    private final List<LottoLine> manualLottoLineList;
+    private final List<LottoLine> manualLottoLineList = new ArrayList();
 
     public LottoTicketBuyingRequest(Money money, LottoAmount manualLottoAmount) {
         if (manualLottoAmount.getValue() * PRICE_EACH_LOTTO > money.getValue()) {
@@ -24,7 +24,6 @@ public class LottoTicketBuyingRequest {
 
         this.money = money;
         this.manualLottoAmount = manualLottoAmount;
-        this.manualLottoLineList = new ArrayList();
     }
 
     public void submitManualLottoLine(LottoLine manualLottoLine) {
