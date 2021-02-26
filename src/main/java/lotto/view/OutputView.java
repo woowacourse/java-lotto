@@ -1,8 +1,12 @@
 package lotto.view;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.domain.Payment;
 import lotto.domain.Reward;
+import lotto.domain.Rewards;
 
 public class OutputView {
 
@@ -35,23 +39,24 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printResultMessage() {
+    public static void printResultMessage(Rewards rewards, Payment payment) {
         System.out.println(WINNING_STATISTICS);
         System.out.println(CONTOUR);
+        Arrays.stream(Reward.values())
+            .sorted(Comparator.comparing(Reward::getWinningMoney))
+            .filter(reward -> !reward.equals(Reward.NONE))
+            .forEach(reward -> callMatchMessage(reward, rewards.getRankCount(reward)));
+        System.out.printf((TOTAL_PROFIT) + "%n", rewards.profit(payment.getPayment()));
     }
 
-    public static void printMatchMessage(final Reward reward, int count) {
-        System.out.printf((MATCHES_MESSAGE) + "%n", reward.getHitCount(), reward.getWinningMoney(),
-            count);
-    }
-
-    public static void printMatchBonusMessage(final Reward reward, int count) {
+    private static void callMatchMessage(Reward reward, int count) {
+        if (reward != Reward.SECOND) {
+            System.out.printf((MATCHES_MESSAGE) + "%n", reward.getHitCount(), reward.getWinningMoney(),
+                count);
+            return;
+        }
         System.out.printf((FIVE_MATCHES_WITH_BONUS_NUMBER) + "%n", reward.getHitCount(),
             reward.getWinningMoney(), count);
-    }
-
-    public static void printProfitMessage(double profit) {
-        System.out.printf((TOTAL_PROFIT) + "%n", profit);
     }
 
     public static void printBuyLottoNumberMessage() {

@@ -27,14 +27,14 @@ public class LottoController {
         final Payment payment = new Payment(ParseUtils.parseInt(InputView.getInputMoney()));
         final SelfLottoCount selfLottoCount = new SelfLottoCount(payment.count(),
             ParseUtils.parseInt(InputView.getBuySelfLottoCount()));
-        final List<List<Integer>> selfLottoTickets = buySelfLottoTickets(selfLottoCount);
+        final List<Lotto> selfLottoTickets = buySelfLottoTickets(selfLottoCount);
         final LottoTickets lottoTickets = new LottoTickets(payment.count(), selfLottoTickets);
         OutputView.printBuyLottoCountMessage(
             selfLottoCount.getSelfCount(), payment.count() - selfLottoCount.getSelfCount()
         );
         showLottoTickets(lottoTickets);
         final WinningLotto winningLotto = createWinningLotto();
-        callResultMessage(payment, lottoTickets, winningLotto);
+        OutputView.printResultMessage(lottoTickets.getResult(winningLotto), payment);
     }
 
     private WinningLotto createWinningLotto() {
@@ -45,11 +45,11 @@ public class LottoController {
         return new WinningLotto(numbers, bonusNumber);
     }
 
-    private List<List<Integer>> buySelfLottoTickets(SelfLottoCount selfLottoCount) {
-        final List<List<Integer>> selfLottoTickets = new ArrayList<>();
+    private List<Lotto> buySelfLottoTickets(SelfLottoCount selfLottoCount) {
+        final List<Lotto> selfLottoTickets = new ArrayList<>();
         OutputView.printBuyLottoNumberMessage();
         for (int i = 0; i < selfLottoCount.getSelfCount(); i++) {
-            selfLottoTickets.add(getSelfLottoNumbers());
+            selfLottoTickets.add(new Lotto(getSelfLottoNumbers()));
         }
         OutputView.printNewLineMessage();
         return selfLottoTickets;
@@ -64,24 +64,5 @@ public class LottoController {
             OutputView.printLottoMessage(lotto.getLottoNumbers());
         }
         OutputView.printNewLineMessage();
-    }
-
-    private void callResultMessage(Payment payment, LottoTickets lottoTickets,
-        WinningLotto winningLotto) {
-        OutputView.printResultMessage();
-        Rewards rewards = lottoTickets.getResult(winningLotto);
-        Arrays.stream(Reward.values())
-            .sorted(Comparator.comparing(Reward::getWinningMoney))
-            .filter(reward -> !reward.equals(Reward.NONE))
-            .forEach(reward -> callMatchMessage(reward, rewards.getRankCount(reward)));
-        OutputView.printProfitMessage(rewards.profit(payment.getPayment()));
-    }
-
-    private void callMatchMessage(Reward reward, int count) {
-        if (reward != Reward.SECOND) {
-            OutputView.printMatchMessage(reward, count);
-            return;
-        }
-        OutputView.printMatchBonusMessage(reward, count);
     }
 }
