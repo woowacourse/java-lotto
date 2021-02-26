@@ -32,11 +32,11 @@
 - 각 등수와 금액들을 저장
 - 등수에 해당하는 금액들을 매칭하여 돌려줌
 
-## LottoGenerator
+## LottoNumberGenerator
 - 6개의 번호를 가진 리스트를 생성한다.
-### LottoAutoGenerator
+### LottoAutoNumberGenerator
 - 6개의 번호를 자동으로 생성한다.
-### LottoManualGenerator
+### LottoManualNumberGenerator
 - 6개의 번호를 가진 리스트를 입력받아 생성한다.
 
 ## LottoAnnouncement

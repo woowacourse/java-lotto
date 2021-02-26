@@ -8,8 +8,8 @@ import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.Piece;
-import lotto.domain.generator.LottoAutoGenerator;
-import lotto.domain.generator.LottoManualGenerator;
+import lotto.domain.generator.LottoAutoNumberGenerator;
+import lotto.domain.generator.LottoManualNumberGenerator;
 import lotto.exception.LottoAnnouncementException;
 import lotto.exception.LottoException;
 import lotto.exception.MoneyException;
@@ -40,7 +40,7 @@ public class LottoStore {
         Money possessedMoney = receiveValidMoney();
         Piece manualPieces = receiveManualPieces(possessedMoney);
         Piece autoPieces = manualPieces.getAnotherPiece(possessedMoney);
-        LottoAutoGenerator lottoAutoGenerator = new LottoAutoGenerator();
+        LottoAutoNumberGenerator lottoAutoGenerator = new LottoAutoNumberGenerator();
         Lottos purchasedLottos = boughtManualLottos(manualPieces);
         purchasedLottos.addExtraPieces(lottoAutoGenerator, autoPieces.getPieceNumber());
         outputView.printPurchasedLottos(purchasedLottos, manualPieces);
@@ -79,10 +79,10 @@ public class LottoStore {
     }
 
     private Lottos boughtManualLottos(Piece manualPiece) {
-        LottoManualGenerator lottoManualGenerator;
+        LottoManualNumberGenerator lottoManualGenerator;
         try {
             List<List<Integer>> manualNumbers = inputView.receiveManualNumbers(manualPiece);
-            lottoManualGenerator = new LottoManualGenerator(manualNumbers);
+            lottoManualGenerator = new LottoManualNumberGenerator(manualNumbers);
             return new Lottos(lottoManualGenerator, manualPiece.getPieceNumber());
         } catch (LottoException lottoException) {
             outputView.printLottoException(lottoException);

@@ -9,7 +9,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import lotto.domain.Lotto;
 import lotto.domain.Number;
 
-public class LottoAutoGenerator implements LottoGenerator {
+public class LottoAutoNumberGenerator implements LottoNumberGenerator {
 
     private static final List<Integer> candidateNumbers = new ArrayList<>();
 

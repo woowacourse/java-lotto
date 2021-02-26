@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import lotto.domain.generator.LottoAutoGenerator;
-import lotto.domain.generator.LottoManualGenerator;
+import lotto.domain.generator.LottoAutoNumberGenerator;
+import lotto.domain.generator.LottoManualNumberGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -26,7 +26,7 @@ public class LottosTest {
     @DisplayName("구입한 로또 매수만큼 로또 생성")
     void createLottos() {
         int expectedLottoSize = 14;
-        LottoAutoGenerator lottoAutoGenerator = new LottoAutoGenerator();
+        LottoAutoNumberGenerator lottoAutoGenerator = new LottoAutoNumberGenerator();
         Lottos lottos = new Lottos(lottoAutoGenerator, expectedLottoSize);
         assertThat(lottos.getSize()).isEqualTo(expectedLottoSize);
     }
@@ -45,7 +45,7 @@ public class LottosTest {
     @MethodSource("provideLottosResult")
     void lottosResult(String exampleLotto, LottoRank exampleRank) {
         List<List<Integer>> manualLottoNumbers = manualLottoNumbers(exampleLotto);
-        LottoManualGenerator lottoManualGenerator = new LottoManualGenerator(manualLottoNumbers);
+        LottoManualNumberGenerator lottoManualGenerator = new LottoManualNumberGenerator(manualLottoNumbers);
         Lottos exampleLottos = new Lottos(lottoManualGenerator, 1);
         LottoAnnouncement lottoAnnouncement = new LottoAnnouncement(WINNING_NUMBERS, BONUS_NUMBER);
         Map<LottoRank, Integer> exampleLottosResult =

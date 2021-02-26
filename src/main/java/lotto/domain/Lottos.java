@@ -4,21 +4,22 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
-import lotto.domain.generator.LottoGenerator;
+import lotto.domain.generator.LottoNumberGenerator;
 
 public class Lottos {
 
     private final List<Lotto> lottoBunch = new ArrayList<>();
 
-    public Lottos(LottoGenerator lottoGenerator, int purchasedLottoCount) {
+    public Lottos(LottoNumberGenerator lottoNumberGenerator, int purchasedLottoCount) {
         for (int i = 0; i < purchasedLottoCount; i++) {
-            lottoBunch.add(new Lotto(lottoGenerator.generateNumbers()));
+            lottoBunch.add(new Lotto(lottoNumberGenerator.generateNumbers()));
         }
     }
 
-    public void addExtraPieces(LottoGenerator lottoGenerator, int purchasedLottoCount) {
+    public void addExtraPieces(LottoNumberGenerator lottoNumberGenerator,
+        int purchasedLottoCount) {
         for (int i = 0; i < purchasedLottoCount; i++) {
-            lottoBunch.add(new Lotto(lottoGenerator.generateNumbers()));
+            lottoBunch.add(new Lotto(lottoNumberGenerator.generateNumbers()));
         }
     }
 

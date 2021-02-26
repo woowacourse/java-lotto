@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lotto.domain.LottoProfitRate;
 import lotto.domain.LottoResult;
-import lotto.domain.generator.LottoManualGenerator;
+import lotto.domain.generator.LottoManualNumberGenerator;
 import lotto.domain.LottoAnnouncement;
 import lotto.domain.Lottos;
 import org.junit.jupiter.api.DisplayName;
@@ -37,7 +37,7 @@ public class LottoStoreTest {
     @MethodSource("provideLottosResult")
     void lottoProfitCalculateTest(String exampleLotto, double profitRate) {
         List<List<Integer>> manualLottoNumbers = manualLottoNumbers(exampleLotto);
-        LottoManualGenerator lottoManualGenerator = new LottoManualGenerator(manualLottoNumbers);
+        LottoManualNumberGenerator lottoManualGenerator = new LottoManualNumberGenerator(manualLottoNumbers);
         Lottos exampleLottos = new Lottos(lottoManualGenerator, 1);
         LottoAnnouncement lottoAnnouncement = new LottoAnnouncement(WINNING_NUMBERS, BONUS_NUMBER);
         LottoResult lottoResult = new LottoResult(lottoAnnouncement, exampleLottos);
