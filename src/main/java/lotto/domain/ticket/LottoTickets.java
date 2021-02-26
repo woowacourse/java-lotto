@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.ticket;
 
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.counting;
@@ -7,12 +7,18 @@ import static java.util.stream.Collectors.groupingBy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
+import lotto.domain.LottoResult;
 
 public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
 
     public LottoTickets(List<LottoTicket> lottoTickets) {
         this.lottoTickets = lottoTickets;
+    }
+
+    public LottoTickets(List<LottoTicket> lottoTickets, List<LottoTicket> joinLottoTickets) {
+        this.lottoTickets = lottoTickets;
+        lottoTickets.addAll(joinLottoTickets);
     }
 
     public LottoResult calculateLottoResult(WinningLottoTicket winningTicket) {

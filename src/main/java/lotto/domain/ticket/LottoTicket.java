@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.ticket;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -12,6 +12,7 @@ import lotto.domain.number.LottoNumberFactory;
 
 public class LottoTicket {
     public static final int SIZE_OF_LOTTO_NUMBERS = 6;
+    public static final int LOTTO_TICKET_PRICE = 1000;
 
     private final Set<LottoNumber> lottoNumbers;
 
@@ -46,13 +47,8 @@ public class LottoTicket {
             .count();
     }
 
-    private boolean containsLottoNumber(LottoNumber lottoNumber) {
+    public boolean containsLottoNumber(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
-    }
-
-    public boolean containsAnyNumber(LottoNumber lottoNumber) {
-        return lottoNumbers.stream()
-            .anyMatch(winningNumber -> winningNumber.equals(lottoNumber));
     }
 
     public List<LottoNumber> getLottoNumbers() {
