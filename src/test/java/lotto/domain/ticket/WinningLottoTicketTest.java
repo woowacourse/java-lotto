@@ -1,10 +1,13 @@
-package lotto.domain;
+package lotto.domain.ticket;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import java.util.List;
+import lotto.domain.Prize;
+import lotto.domain.number.LottoNumber;
+import lotto.domain.number.LottoNumberFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,7 +22,7 @@ class WinningLottoTicketTest {
     static void setUp() {
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         LottoTicket winningTicket = new LottoTicket(winningNumbers);
-        int bonusNumber = 7;
+        LottoNumber bonusNumber = LottoNumberFactory.getInstance(7);
         winningLottoTicket = new WinningLottoTicket(winningTicket, bonusNumber);
     }
 
@@ -41,7 +44,7 @@ class WinningLottoTicketTest {
     public void 보너스_숫자와_당첨_숫자_중복_테스트() {
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 7);
         LottoTicket winningTicket = new LottoTicket(winningNumbers);
-        int bonusNumber = 7;
+        LottoNumber bonusNumber = LottoNumberFactory.getInstance(7);
         assertThatThrownBy(() -> new WinningLottoTicket(winningTicket, bonusNumber))
             .isInstanceOf(IllegalArgumentException.class);
     }
