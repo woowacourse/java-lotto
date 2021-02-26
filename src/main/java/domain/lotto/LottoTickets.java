@@ -35,10 +35,6 @@ public class LottoTickets {
         return new Ranks(ranks);
     }
 
-    public int size() {
-        return tickets.size();
-    }
-
     public List<LottoTicket> toList() {
         return Collections.unmodifiableList(tickets);
     }
