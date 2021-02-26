@@ -53,19 +53,6 @@ public class OutputView {
             (int) key.getMatchingCount(), key.getPrizeMoney(), value);
     }
 
-    public void printMoneyException(MoneyException moneyException) {
-        System.out.println(moneyException.getMessage());
-    }
-
-    public void printLottoAnnouncementException(
-        LottoAnnouncementException lottoAnnouncementException) {
-        System.out.println(lottoAnnouncementException.getMessage());
-    }
-
-    public void printPieceException(PieceException pieceException) {
-        System.out.println(pieceException.getMessage());
-    }
-
     public void printLottoException(LottoException lottoException) {
         System.out.println(lottoException.getMessage());
     }

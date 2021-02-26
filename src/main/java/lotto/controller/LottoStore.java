@@ -51,7 +51,7 @@ public class LottoStore {
         try {
             candidateMoney = inputView.purchaseMoney();
         } catch (MoneyException moneyException) {
-            outputView.printMoneyException(moneyException);
+            outputView.printLottoException(moneyException);
             candidateMoney = receiveValidMoney();
         }
         return candidateMoney;
@@ -62,7 +62,7 @@ public class LottoStore {
         try {
             candidateLottoAnnouncement = inputView.inputAnnouncement();
         } catch (LottoAnnouncementException lottoAnnouncementException) {
-            outputView.printLottoAnnouncementException(lottoAnnouncementException);
+            outputView.printLottoException(lottoAnnouncementException);
             candidateLottoAnnouncement = receiveValidLottoAnnouncement();
         }
         return candidateLottoAnnouncement;
@@ -73,7 +73,7 @@ public class LottoStore {
         try {
             candidateManualPiece = inputView.inputManualPieces(possessedMoney);
         } catch (PieceException pieceException) {
-            outputView.printPieceException(pieceException);
+            outputView.printLottoException(pieceException);
             candidateManualPiece = inputView.inputManualPieces(possessedMoney);
         }
         return candidateManualPiece;
