@@ -3,8 +3,6 @@ package lotto.view;
 import java.text.DecimalFormat;
 import java.util.List;
 import lotto.domain.Lotto;
-import lotto.domain.Rank;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 public class OutputView {
 
@@ -13,11 +11,11 @@ public class OutputView {
     private static final String LAST_WEEK_LOTTO_MESSAGE = "\n지난 주 당첨 번호를 입력해 주세요.";
     private static final String BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String RESULT_TITLE_MESSAGE = "\n당첨 통계\n----------";
-    private static final String AMOUNT = "개";
     private static final String EARNING_RATE_MESSAGE = "총 수익률은 %s입니다.";
     private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.00");
     private static final String LOTTO_RESULT_MESSAGE = "%d개 일치, (%d)원 - %d개\n";
     private static final String LOTTO_RESULT_SECOND_MESSAGE = "%d개 일치, 보너스 볼 일치 (%d)원 - %d개\n";
+    public static final int SECOND_PRIZE = 30_000_000;
 
     public static void requestMoneyMessage() {
         System.out.println(INPUT_MONEY_MESSAGE);
@@ -46,7 +44,7 @@ public class OutputView {
     }
 
     public static void displayResult(int matchCount, int prize, int count) {
-        if (prize == 30_000_000) {
+        if (prize == SECOND_PRIZE) {
             System.out.printf(LOTTO_RESULT_SECOND_MESSAGE, matchCount, prize, count);
         }
         System.out.printf(LOTTO_RESULT_MESSAGE, matchCount, prize, count);
