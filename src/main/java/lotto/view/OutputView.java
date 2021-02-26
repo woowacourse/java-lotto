@@ -2,7 +2,7 @@ package lotto.view;
 
 import java.util.stream.Collectors;
 import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoRepository;
+import lotto.domain.lotto.Lotteries;
 import lotto.domain.rating.Rating;
 import lotto.domain.rating.RatingInfo;
 
@@ -26,9 +26,9 @@ public class OutputView {
         System.out.printf(BUY_LOTTO_MESSAGE, manualCount, autoCount);
     }
 
-    public static void printLottoResults(final LottoRepository lottoRepository) {
+    public static void printLottoResults(final Lotteries lotteries) {
         final StringBuilder log = new StringBuilder();
-        for (final Lotto lotto : lottoRepository.toList()) {
+        for (final Lotto lotto : lotteries.toList()) {
             printLottoResult(log, lotto);
         }
         log.append(ENTER);

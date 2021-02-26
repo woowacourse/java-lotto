@@ -8,7 +8,7 @@ import lotto.domain.lottomachine.LottoMachine;
 import lotto.domain.rating.Rating;
 import lotto.domain.rating.RatingInfo;
 
-public class LottoRepository {
+public class Lotteries {
 
     private final List<Lotto> lottos = new ArrayList<>();
 

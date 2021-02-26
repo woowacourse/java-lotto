@@ -1,8 +1,9 @@
 package lotto.controller;
 
 import lotto.domain.EarningRate;
+import lotto.domain.TicketCounter;
 import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoRepository;
+import lotto.domain.lotto.Lotteries;
 import lotto.domain.lottomachine.RandomLottoMachine;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.Money;
@@ -15,15 +16,15 @@ import lotto.view.OutputView;
 public class LottoController {
 
     public void start() {
-        final LottoRepository lottoRepository = new LottoRepository();
+        final Lotteries lotteries = new Lotteries();
 
         final Ticket totalTicket = buyTicket();
         final Ticket manualTicket = manualBuyTicket(totalTicket);
-        generateManualLottoNumbers(manualTicket.getCount(), lottoRepository);
+        generateManualLottoNumbers(manualTicket.getCount(), lotteries);
         buyLottoAndPrintResult(manualTicket.getCount(), totalTicket.getCount(),
-            lottoRepository);
+            lotteries);
 
-        RatingInfo ratingInfo = lottoRepository.scratchLotto(buyWinningLotto());
+        RatingInfo ratingInfo = lotteries.scratchLotto(buyWinningLotto());
         printWinningStats(ratingInfo, new EarningRate(), totalTicket);
     }
 
@@ -56,11 +57,11 @@ public class LottoController {
     }
 
     private void generateManualLottoNumbers(final int count,
-        final LottoRepository lottoRepository) {
+        final Lotteries lotteries) {
         OutputView.getMessage(InputView.INPUT_MANUAL_BUY_NUMBERS_MESSAGE);
         for (int i = 0; i < count; i++) {
             Lotto lotto = manualBuyLotto();
-            lottoRepository.generateLottoByManual(lotto);
+            lotteries.generateLottoByManual(lotto);
         }
     }
 
@@ -93,10 +94,10 @@ public class LottoController {
     }
 
     private void buyLottoAndPrintResult(final int manualCount, final int totalCount,
-        LottoRepository lottoRepository) {
+        Lotteries lotteries) {
         OutputView.printBuyLotto(manualCount, totalCount - manualCount);
-        lottoRepository.generateLottoByTicket(new RandomLottoMachine(), totalCount);
-        OutputView.printLottoResults(lottoRepository);
+        lotteries.generateLottoByTicket(new RandomLottoMachine(), totalCount);
+        OutputView.printLottoResults(lotteries);
     }
 
     private void printWinningStats(final RatingInfo ratingInfo, final EarningRate earningRate,
