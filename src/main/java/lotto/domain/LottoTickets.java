@@ -24,15 +24,12 @@ public class LottoTickets {
         this(buyLottoSize, new ArrayList<>());
     }
 
-    public LottoTickets(final int buyLottoSize, final List<List<Integer>> lottoNumbers) {
+    public LottoTickets(final int buyLottoSize, final List<Lotto> lottoNumbers) {
         lottoTickets = createLottoTickets(buyLottoSize, lottoNumbers);
     }
 
-    private List<Lotto> createLottoTickets(final int buyLottoSize, final List<List<Integer>> lottoNumbers) {
-        final List<Lotto> lottoTickets = new ArrayList<>();
-        for (List<Integer> numbers : lottoNumbers) {
-            lottoTickets.add(new Lotto(numbers));
-        }
+    private List<Lotto> createLottoTickets(final int buyLottoSize, final List<Lotto> lottoNumbers) {
+        final List<Lotto> lottoTickets = new ArrayList<>(lottoNumbers);
         for (int i = 0; i < buyLottoSize - lottoNumbers.size(); i++) {
             lottoTickets.add(
                 new Lotto(RandomUtils.generateRandomNumbers(ALL_LOTTO_NUMBERS, LOTTO_SIZE))

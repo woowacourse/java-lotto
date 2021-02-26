@@ -20,8 +20,7 @@ public class LottoTicketsTest {
     @DisplayName("같은 번호가 생성되었는지 테스트(정렬)")
     @Test
     void numberSort() {
-        List<List<Integer>> numbers = new ArrayList<>();
-        numbers.add(Arrays.asList(2, 4, 6, 5, 3, 1));
+        List<Lotto> numbers = Arrays.asList(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
         LottoTickets lottoTickets = new LottoTickets(1, numbers);
         List<Lotto> expectedLottoTickets = new ArrayList<>();
 
