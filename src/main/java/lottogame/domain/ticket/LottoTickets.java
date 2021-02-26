@@ -32,10 +32,6 @@ public class LottoTickets {
         return new ArrayList<>(lottoTickets);
     }
 
-    public int getTicketsCount() {
-        return lottoTickets.size();
-    }
-
     public int getAutoTicketsCount() {
         return autoTicketCount;
     }

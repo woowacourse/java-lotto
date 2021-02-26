@@ -2,8 +2,6 @@ package lottogame.domain.machine;
 
 import lottogame.domain.Money;
 import lottogame.domain.number.LottoNumbers;
-import lottogame.domain.ticket.LottoAutoTicket;
-import lottogame.domain.ticket.LottoManualTicket;
 import lottogame.domain.ticket.LottoTicket;
 import lottogame.domain.ticket.LottoTickets;
 
@@ -11,21 +9,11 @@ public class LottoTicketMachine {
 
     public static final int TICKET_PRICE = 1000;
 
-    public LottoTickets buyTickets(final Money money) {
-        LottoTickets lottoTickets = new LottoTickets();
-
-        while (money.isCanBuy(TICKET_PRICE)) {
-            lottoTickets.add(new LottoAutoTicket());
-            money.use(TICKET_PRICE);
-        }
-        return lottoTickets;
-    }
-
     public LottoTickets buyAutoTickets(final Money money) {
         LottoTickets lottoTickets = new LottoTickets();
 
         while (money.isCanBuy(TICKET_PRICE)) {
-            lottoTickets.add(new LottoAutoTicket());
+            lottoTickets.add(new LottoTicket());
             money.use(TICKET_PRICE);
         }
         return lottoTickets;
@@ -36,8 +24,6 @@ public class LottoTicketMachine {
             throw new IllegalArgumentException("남은 금액이 모자릅니다.");
         }
         money.use(TICKET_PRICE);
-        return new LottoManualTicket(new LottoNumbers(selectedLottoNumbers));
-        //LottoNumbers lottoNumbers = LottoGameUtils.getLottoNumbersByInputString(selectedLottoNumbers);
-        //return new LottoManualTicket(lottoNumbers);
+        return new LottoTicket(new LottoNumbers(selectedLottoNumbers));
     }
 }
