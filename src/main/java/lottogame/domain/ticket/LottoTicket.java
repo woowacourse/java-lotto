@@ -9,10 +9,19 @@ import lottogame.domain.number.LottoNumber;
 
 public class LottoTicket {
 
+    private static final int LOTTO_NUMBER_COUNT = 6;
+
     private final Set<LottoNumber> lottoNumbers;
 
     public LottoTicket(final Set<LottoNumber> lottoNumbers) {
         this.lottoNumbers = new HashSet<>(lottoNumbers);
+        validateCount(this.lottoNumbers);
+    }
+
+    private void validateCount(Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
+            throw new IllegalArgumentException("유효한 로또 번호 개수가 아닙니다.");
+        }
     }
 
     public List<Integer> getLottoNumbers() {
