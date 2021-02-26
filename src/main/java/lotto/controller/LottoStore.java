@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import java.util.List;
 import java.util.Scanner;
 import lotto.domain.LottoAnnouncement;
 import lotto.domain.LottoResult;
@@ -58,14 +59,16 @@ public class LottoStore {
     }
 
     private LottoAnnouncement receiveValidLottoAnnouncement() {
-        LottoAnnouncement candidateLottoAnnouncement;
+        List<Integer> winnerNumbers;
+        int bonusNumber;
         try {
-            candidateLottoAnnouncement = inputView.inputAnnouncement();
+            winnerNumbers = inputView.inputWinnerNumbers();
+            bonusNumber = inputView.inputBonusNumber();
+            return new LottoAnnouncement(winnerNumbers, bonusNumber);
         } catch (LottoAnnouncementException lottoAnnouncementException) {
             outputView.printLottoException(lottoAnnouncementException);
-            candidateLottoAnnouncement = receiveValidLottoAnnouncement();
+            return receiveValidLottoAnnouncement();
         }
-        return candidateLottoAnnouncement;
     }
 
     private Piece receiveManualPieces(Money possessedMoney) {
@@ -81,14 +84,13 @@ public class LottoStore {
 
     private Lottos boughtManualLottos(Piece manualPiece) {
         LottoManualGenerator lottoManualGenerator;
-        Lottos lottos;
         try {
-            lottoManualGenerator = inputView.lottoManualGenerator(manualPiece);
-            lottos = new Lottos(lottoManualGenerator, manualPiece.getPieceNumber());
+            List<List<Integer>> manualNumbers = inputView.receiveManualNumbers(manualPiece);
+            lottoManualGenerator = new LottoManualGenerator(manualNumbers);
+            return new Lottos(lottoManualGenerator, manualPiece.getPieceNumber());
         } catch (LottoException lottoException) {
             outputView.printLottoException(lottoException);
-            lottos = boughtManualLottos(manualPiece);
+            return boughtManualLottos(manualPiece);
         }
-        return lottos;
     }
 }

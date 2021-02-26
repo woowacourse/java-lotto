@@ -5,11 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import lotto.domain.LottoAnnouncement;
 import lotto.domain.Money;
 import lotto.domain.Piece;
-import lotto.domain.generator.LottoManualGenerator;
-import lotto.exception.LottoAnnouncementException;
 import lotto.exception.LottoException;
 import lotto.exception.PieceException;
 
@@ -52,20 +49,12 @@ public class InputView {
         return new Piece(money, rawAutoPieces);
     }
 
-    public LottoAnnouncement inputAnnouncement() throws LottoAnnouncementException {
-        LottoAnnouncement inputAnnouncement;
-        List<Integer> winners = inputWinningNumbers();
-        int bonusNumber = inputBonusNumber();
-        inputAnnouncement = new LottoAnnouncement(winners, bonusNumber);
-        return inputAnnouncement;
-    }
-
-    private List<Integer> inputWinningNumbers() {
+    public List<Integer> inputWinnerNumbers() {
         System.out.println(INPUT_WINNERS_MESSAGE);
         return getValidLottoNumbers();
     }
 
-    private int inputBonusNumber() {
+    public int inputBonusNumber() {
         int rawMoney;
         try {
             rawMoney = receiveInteger(INPUT_BONUS_MESSAGE);
@@ -87,14 +76,14 @@ public class InputView {
         }
     }
 
-    public LottoManualGenerator lottoManualGenerator(Piece manualPiece) {
+    public List<List<Integer>> receiveManualNumbers(Piece manualPiece) {
         System.out.println(MANUAL_LOTTO_INPUT_MESSAGE);
         List<List<Integer>> inputWinningNumbers = new ArrayList<>();
         for (int i = 0; i < manualPiece.getPieceNumber(); i++) {
             List<Integer> lottoNumbers= getValidLottoNumbers();
             inputWinningNumbers.add(lottoNumbers);
         }
-        return new LottoManualGenerator(inputWinningNumbers);
+        return inputWinningNumbers;
     }
 
     private List<Integer> getValidLottoNumbers() {
