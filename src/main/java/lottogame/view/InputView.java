@@ -15,27 +15,30 @@ public class InputView {
     }
 
     public static List<String> getManualLottoNumbers(final Money money) {
-        List<String> ManualLottoNumbers = new ArrayList<>();
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-
         LottoTicketCount lottoTicketCount = new LottoTicketCount(scanner.nextLine(), money);
-        while (lottoTicketCount.isRemain()) {
-            lottoTicketCount.reduce();
-            ManualLottoNumbers.add(getManualNumbers());
+
+        if (lottoTicketCount.isRemain()) {
+            printManualNumbersInputRequestMessage();
         }
-        return ManualLottoNumbers;
+        return getManualNumbersGroup(lottoTicketCount);
     }
 
     private static String getManualNumbers() {
         return scanner.nextLine();
     }
 
-    public static void printManualNumbersInputRequestMessage() {
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+    private static List<String> getManualNumbersGroup(LottoTicketCount lottoTicketCount) {
+        List<String> manualLottoNumbers = new ArrayList<>();
+        while (lottoTicketCount.isRemain()) {
+            lottoTicketCount.reduce();
+            manualLottoNumbers.add(getManualNumbers());
+        }
+        return manualLottoNumbers;
     }
 
-    public static String getManualNumbersInput() {
-        return scanner.nextLine();
+    public static void printManualNumbersInputRequestMessage() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
     }
 
     public static String getWinningNumbersInput() {
