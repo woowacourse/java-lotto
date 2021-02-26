@@ -6,7 +6,7 @@ import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.LottoResult;
 import lotto.domain.lotto.LottoStore;
 import lotto.domain.lotto.Lottos;
-import lotto.domain.lotto.ManualLotto;
+import lotto.domain.lotto.NumManualLotto;
 import lotto.domain.lotto.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -47,24 +47,26 @@ public class LottoController {
     private Lottos createLottos() {
         LottoStore lottoStore = new LottoStore();
         Money money = startMoney();
-        ManualLotto manualLotto = buyManualLotto();
-        validNumManualLotto(money, manualLotto);
-        Lottos purchasedLottos = lottoStore.buyLottos(money, manualLotto);
-        OutputView.numPurchasedLotto(getNumManualLotto(manualLotto), purchasedLottos.getNumAutoLotto(manualLotto));
+        NumManualLotto numManualLotto = buyManualLotto();
+        validNumManualLotto(money, numManualLotto);
+        Lottos purchasedLottos = lottoStore.buyLottos(money, numManualLotto);
+        OutputView
+            .numPurchasedLotto(getNumManualLotto(numManualLotto), purchasedLottos.getNumAutoLotto(
+                numManualLotto));
         OutputView.lottosPrint(purchasedLottos);
         return purchasedLottos;
     }
 
-    private Integer getNumManualLotto(ManualLotto manualLotto) {
-        return manualLotto.getNumLotto();
+    private Integer getNumManualLotto(NumManualLotto numManualLotto) {
+        return numManualLotto.getNumLotto();
     }
 
 
-    private void validNumManualLotto(Money money, ManualLotto numManual) {
+    private void validNumManualLotto(Money money, NumManualLotto numManual) {
         money.validNumManual(numManual);
     }
 
-    private ManualLotto buyManualLotto() {
+    private NumManualLotto buyManualLotto() {
         OutputView.inputNumManualLotto();
         return InputView.inputNumManualLotto();
     }

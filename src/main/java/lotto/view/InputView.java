@@ -2,8 +2,7 @@ package lotto.view;
 
 import java.util.Scanner;
 import lotto.Money;
-import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.ManualLotto;
+import lotto.domain.lotto.NumManualLotto;
 
 public class InputView {
 
@@ -25,8 +24,8 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static ManualLotto inputNumManualLotto() {
-        return new ManualLotto(scanner.nextLine());
+    public static NumManualLotto inputNumManualLotto() {
+        return new NumManualLotto(scanner.nextLine());
     }
 
     public static String inputManualLottoNumber() {

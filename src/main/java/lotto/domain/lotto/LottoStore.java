@@ -11,7 +11,7 @@ public class LottoStore {
 
     public static final int LOTTO_PRICE = 1000;
 
-    public Lottos buyLottos(Money money, ManualLotto numManual) {
+    public Lottos buyLottos(Money money, NumManualLotto numManual) {
         List<Lotto> lottos = new ArrayList<>();
 
         OutputView.manualNumberPrint();
@@ -25,7 +25,7 @@ public class LottoStore {
         return new Lottos(lottos);
     }
 
-    private int getNumAutoLotto(Money money, ManualLotto numManual){
+    private int getNumAutoLotto(Money money, NumManualLotto numManual) {
         return money.getPrice() / LOTTO_PRICE - numManual.getNumLotto();
     }
 

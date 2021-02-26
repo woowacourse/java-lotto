@@ -1,7 +1,7 @@
 package lotto;
 
 import lotto.domain.lotto.LottoStore;
-import lotto.domain.lotto.ManualLotto;
+import lotto.domain.lotto.NumManualLotto;
 
 public class Money {
 
@@ -34,7 +34,7 @@ public class Money {
         return this.price;
     }
 
-    public void validNumManual(ManualLotto numManual) {
+    public void validNumManual(NumManualLotto numManual) {
         if (price - (numManual.getNumLotto() * LottoStore.LOTTO_PRICE) < 0) {
             throw new IllegalArgumentException(ERROR_BUY_FAIL);
         }

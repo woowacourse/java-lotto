@@ -24,7 +24,7 @@ public class Lottos {
         }
     }
 
-    public Integer getNumAutoLotto(ManualLotto manualLotto) {
-        return this.values.size() - manualLotto.getNumLotto();
+    public Integer getNumAutoLotto(NumManualLotto numManualLotto) {
+        return this.values.size() - numManualLotto.getNumLotto();
     }
 }
