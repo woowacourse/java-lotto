@@ -41,7 +41,7 @@ public class LottoStoreTest {
         Lottos exampleLottos = new Lottos(lottoManualGenerator, 1);
         LottoAnnouncement lottoAnnouncement = new LottoAnnouncement(WINNING_NUMBERS, BONUS_NUMBER);
         LottoResult lottoResult = new LottoResult(lottoAnnouncement, exampleLottos);
-        LottoProfitRate lottoProfitRate = new LottoProfitRate(lottoResult, exampleLottos.getSize());
+        LottoProfitRate lottoProfitRate = lottoResult.getProfitRate();
         assertThat(lottoProfitRate.getProfitRate()).isEqualTo(profitRate);
     }
 

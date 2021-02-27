@@ -10,18 +10,18 @@ public class LottoProfitRate {
 
     private final double profitRate;
 
-    public LottoProfitRate(LottoResult lottoResult, int purchasedLottoPiece) {
+    public LottoProfitRate(LottoResult lottoResult, Piece purchasedLottoPiece) {
         this.profitRate = calculateProfitRate(lottoResult.getLottoResultStatistics(),
             purchasedLottoPiece);
     }
 
     private double calculateProfitRate(Map<LottoRank, Integer> lottosResultStatistics,
-        int lottoPiece) {
+        Piece lottoPiece) {
         double sum = 0;
         for (Entry<LottoRank, Integer> keyValue : lottosResultStatistics.entrySet()) {
             sum += keyValue.getKey().getPrizeMoney() * keyValue.getValue();
         }
-        double investCapital = lottoPiece * Lotto.LOTTO_PRICE;
+        double investCapital = lottoPiece.getPieceNumber() * Lotto.LOTTO_PRICE;
         double rawProfitRate = sum / investCapital;
         return Math.round(rawProfitRate * DECIMAL_TRIM_NUMERATOR) / DECIMAL_TRIM_DENOMINATOR;
     }

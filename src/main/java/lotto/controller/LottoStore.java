@@ -32,7 +32,7 @@ public class LottoStore {
         Lottos lottos = buyLotto();
         LottoAnnouncement lottoAnnouncement = receiveValidLottoAnnouncement();
         LottoResult lottoResult = new LottoResult(lottoAnnouncement, lottos);
-        LottoProfitRate lottoProfitRate = new LottoProfitRate(lottoResult, lottos.getSize());
+        LottoProfitRate lottoProfitRate = lottoResult.getProfitRate();
         outputView.printLottoStatistics(lottoResult, lottoProfitRate);
     }
 
