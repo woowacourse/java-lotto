@@ -9,9 +9,9 @@ import java.util.List;
 
 public class LottoTicket {
 
-    private static int START_LOTTO_NUMBER = 1;
-    private static int FINISH_LOTTO_NUMBER = 45;
-    private static int COUNT_LOTTO_NUMBER = 6;
+    private static final int START_LOTTO_NUMBER = 1;
+    private static final int FINISH_LOTTO_NUMBER = 45;
+    private static final int COUNT_LOTTO_NUMBER = 6;
 
     private final LottoNumbers lottoNumbers;
     private final boolean isAuto;
