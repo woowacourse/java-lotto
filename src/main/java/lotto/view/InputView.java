@@ -1,10 +1,11 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.exception.LottoCustomException;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class InputView {
@@ -30,9 +31,9 @@ public class InputView {
         return convertToInt(scanner.nextLine());
     }
 
-    public Set<LottoNumber> inputWinningNumbers() {
-        System.out.println("지난 주 당첨 번호를 입력해주세요.");
-        return splitAndWrap(scanner.nextLine());
+    public int inputCountOfManualPurchase() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return convertToInt(scanner.nextLine());
     }
 
     public int inputBonusNumber() {
@@ -40,19 +41,8 @@ public class InputView {
         return convertToInt(scanner.nextLine());
     }
 
-    public int inputCountOfPurchaseManually() {
-        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        return convertToInt(scanner.nextLine());
-    }
-
-    public List<Lotto> inputManualNumbers(int manualCount) {
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < manualCount; i++) {
-            lottos.add(new Lotto(splitAndWrap(scanner.nextLine())));
-        }
-        return lottos;
+    public Set<LottoNumber> inputLottoNumbers() {
+        return splitAndWrap(scanner.nextLine());
     }
 
     private Set<LottoNumber> splitAndWrap(String winningNumbers) {

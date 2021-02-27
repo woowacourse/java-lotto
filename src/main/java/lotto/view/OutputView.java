@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.domain.*;
 
 import java.util.Map;
+import java.util.Objects;
 
 public class OutputView {
     private static final String PURCHASE_INFO_MESSAGE = "수동으로 %d장, 자동으로 %d장을 구매했습니다.";
@@ -71,16 +72,24 @@ public class OutputView {
     }
 
     private static String getWinningResultMessage(Rank rank) {
-        if (rank.equals(Rank.SECOND_PRIZE)) { // 보너스볼이 포함된 경우
+        if (rank.equals(Rank.SECOND_PRIZE)) {
             return String.format(WINNING_RESULT_MESSAGE + CONTAIN_BONUS_BALL, rank.getMatchCount());
         }
         return String.format(WINNING_RESULT_MESSAGE, rank.getMatchCount());
     }
 
     private static int convertCountNullToZero(Integer number) {
-        if (number == null) {
+        if (Objects.isNull(number)) {
             return 0;
         }
         return number;
+    }
+
+    public static void printTitleOfInputManualLotto() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+    }
+
+    public static void printTitleOfInputWinningLotto() {
+        System.out.println("지난 주 당첨 번호를 입력해주세요.");
     }
 }
