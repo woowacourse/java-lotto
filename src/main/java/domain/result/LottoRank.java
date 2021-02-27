@@ -3,12 +3,12 @@ package domain.result;
 import java.util.Arrays;
 
 public enum LottoRank {
-    NONE_PLACE(0, 0, false),
-    FIFTH_PLACE(3, 5_000, false),
-    FOURTH_MATCHES(4, 50_000, false),
-    THIRD_PLACE(5, 1_500_000, false),
+    NONE_PLACE(0, 0),
+    FIFTH_PLACE(3, 5_000),
+    FOURTH_MATCHES(4, 50_000),
+    THIRD_PLACE(5, 1_500_000),
     SECOND_PLACE(5, 30_000_00, true),
-    FIRST_PLACE(6, 2_000_000_000, false);
+    FIRST_PLACE(6, 2_000_000_000);
 
     private static final int FIVE_MATCHES = 5;
 
@@ -20,6 +20,10 @@ public enum LottoRank {
         this.matches = matches;
         this.prize = prize;
         this.isSecond = isSecond;
+    }
+
+    LottoRank(final int matches, final int prize) {
+        this(matches, prize, false);
     }
 
     public static LottoRank findRankByBonusAndMatches(final boolean hasBonus, final int matches) {
