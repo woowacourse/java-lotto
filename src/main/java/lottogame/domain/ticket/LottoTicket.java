@@ -9,40 +9,59 @@ import java.util.List;
 
 public class LottoTicket {
 
-    public static final int START_LOTTO_NUMBER = 1;
-    public static final int FINISH_LOTTO_NUMBER = 45;
-    public static final int COUNT_LOTTO_NUMBER = 6;
+    private static final int START_LOTTO_NUMBER = 1;
+    private static final int FINISH_LOTTO_NUMBER = 45;
+    private static final int COUNT_LOTTO_NUMBER = 6;
 
     private final LottoNumbers lottoNumbers;
+    private final boolean isAuto;
 
-    public LottoTicket() {
-        List<LottoNumber> lottoNumberGroup = new ArrayList<>();
-        for (int number : getShuffledNumbers(new ArrayList<>())) {
-            lottoNumberGroup.add(new LottoNumber(number));
-        }
-        lottoNumbers = new LottoNumbers(lottoNumberGroup);
+
+    private LottoTicket(final LottoNumbers lottoNumbers, final boolean isAuto) {
+        this.lottoNumbers = new LottoNumbers(lottoNumbers.toList());
+        this.isAuto = isAuto;
     }
 
-    private List<Integer> getShuffledNumbers(List<Integer> numbers) {
+    public static LottoTicket of() {
+        return new LottoTicket(getAutoNumbers(), true);
+    }
+
+    public static LottoTicket of(final LottoNumbers lottoNumbers) {
+        return new LottoTicket(lottoNumbers, false);
+    }
+
+    private static LottoNumbers getAutoNumbers() {
+        List<LottoNumber> lottoNumberGroup = new ArrayList<>();
+        for (int number : getShuffledNumbers()) {
+            lottoNumberGroup.add(LottoNumber.of(number));
+        }
+        return new LottoNumbers(lottoNumberGroup);
+    }
+
+    private static List<Integer> getShuffledNumbers() {
+        List<Integer> numbers = new ArrayList<>();
         Collections.shuffle(initNumbers(numbers));
 
-        List<Integer> shuffledNumbers = numbers.subList(0, COUNT_LOTTO_NUMBER);
-        Collections.sort(shuffledNumbers);
-        return shuffledNumbers;
+        return numbers.subList(0, COUNT_LOTTO_NUMBER);
     }
 
-    private List<Integer> initNumbers(List<Integer> numbers) {
+    private static List<Integer> initNumbers(final List<Integer> numbers) {
         for (int i = START_LOTTO_NUMBER; i <= FINISH_LOTTO_NUMBER; i++) {
             numbers.add(i);
         }
         return numbers;
     }
 
+
     public List<LottoNumber> getLottoNumbers() {
-        return Collections.unmodifiableList(lottoNumbers.toList());
+        return new ArrayList<>(lottoNumbers.toList());
     }
 
-    public boolean isContainNumber(final LottoNumber lottoNumber){
+    public boolean isContainNumber(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
+    }
+
+    public boolean isAutoTicket() {
+        return isAuto;
     }
 }

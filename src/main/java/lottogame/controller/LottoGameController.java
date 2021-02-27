@@ -14,7 +14,18 @@ public class LottoGameController {
     }
 
     public void buyTickets() {
-        lottoGame.buyTickets(new Money(InputView.getMoneyInput()));
+        Money money = new Money(InputView.getMoneyInput());
+        System.out.println();
+        buyManualTickets(money);
+        buyAutoTickets(money);
+    }
+
+    private void buyManualTickets(Money money) {
+        lottoGame.buyManualTickets(money, InputView.getManualLottoNumbers(money));
+    }
+
+    private void buyAutoTickets(Money money) {
+        lottoGame.buyAutoTickets(money);
     }
 
     public void printBroughtLottoTickets() {

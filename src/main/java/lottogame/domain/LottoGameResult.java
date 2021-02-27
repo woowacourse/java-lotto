@@ -2,7 +2,6 @@ package lottogame.domain;
 
 import lottogame.domain.ticket.LottoTicketResult;
 
-import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +26,7 @@ public class LottoGameResult {
     }
 
     public Map<Rank, Integer> toMap() {
-        return Collections.unmodifiableMap(lottoGameResult);
+        return new LinkedHashMap<>(lottoGameResult);
     }
 
     public double getLottoGameYield(final int ticketCount) {

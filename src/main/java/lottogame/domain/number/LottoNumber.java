@@ -1,5 +1,7 @@
 package lottogame.domain.number;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber {
@@ -8,17 +10,29 @@ public class LottoNumber {
     private static final int FINISH_NUMBER = 45;
 
     private final int value;
+    private static final Map<Integer, LottoNumber> LOTTO_NUMBER_MAP = new HashMap<>();
 
-    public LottoNumber(final String value) {
-        this(Integer.parseInt(value));
+    static {
+        for (int number = START_NUMBER; number <= FINISH_NUMBER; ++number) {
+            LOTTO_NUMBER_MAP.put(number, new LottoNumber(number));
+        }
     }
 
-    public LottoNumber(final int value) {
+    private LottoNumber(final int value) {
         validateRange(value);
         this.value = value;
     }
 
-    private void validateRange(final int value) {
+    public static LottoNumber of(final String value) {
+        return LottoNumber.of(Integer.parseInt(value));
+    }
+
+    public static LottoNumber of(final int value) {
+        validateRange(value);
+        return LottoNumber.LOTTO_NUMBER_MAP.get(value);
+    }
+
+    private static void validateRange(final int value) {
         if (value < START_NUMBER || FINISH_NUMBER < value) {
             throw new IllegalArgumentException("로또 숫자 범위를 벗어났습니다.");
         }

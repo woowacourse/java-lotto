@@ -3,25 +3,41 @@ package lottogame.domain.ticket;
 import lottogame.domain.machine.LottoWinningMachine;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class LottoTickets {
 
     public static final int TICKET_PRICE = 1000;
+    private int autoTicketCount;
 
-    List<LottoTicket> lottoTickets = new ArrayList<>();
+    private final List<LottoTicket> lottoTickets = new ArrayList<>();
 
     public void add(final LottoTicket lottoTicket) {
         lottoTickets.add(lottoTicket);
+        countAutoTicket(lottoTicket);
+    }
+
+    private void countAutoTicket(final LottoTicket lottoTicket) {
+        if (lottoTicket.isAutoTicket()) {
+            autoTicketCount++;
+        }
+    }
+
+    public void concat(final LottoTickets lottoTickets) {
+        this.lottoTickets.addAll(lottoTickets.toList());
+        this.autoTicketCount += lottoTickets.getAutoTicketsCount();
     }
 
     public List<LottoTicket> toList() {
-        return Collections.unmodifiableList(lottoTickets);
+        return new ArrayList<>(lottoTickets);
     }
 
-    public int getTicketsCount() {
-        return lottoTickets.size();
+    public int getAutoTicketsCount() {
+        return autoTicketCount;
+    }
+
+    public int getManualTicketsCount() {
+        return lottoTickets.size() - autoTicketCount;
     }
 
     public int getCostUsedToBuy() {

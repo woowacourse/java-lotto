@@ -12,13 +12,13 @@ import java.util.stream.Collectors;
 
 public class OutputView {
 
-    public static final String TICKETS_COUNT_MSG = "개를 구매했습니다.";
+    public static final String TICKETS_COUNT_MSG = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     public static final String AMOUNT_YIELD_FORMAT = "총 수익률은 %.2f입니다.";
     public static final String LOTTO_GAME_RESULT_MSG = "당첨 통계";
     public static final String SEPARATOR_BAR_NINE = "---------";
 
     public static void printBroughtLottoTickets(final LottoTickets lottoTickets) {
-        System.out.println(lottoTickets.getTicketsCount() + TICKETS_COUNT_MSG);
+        System.out.println(String.format(TICKETS_COUNT_MSG, lottoTickets.getManualTicketsCount(), lottoTickets.getAutoTicketsCount()));
         for (LottoTicket lottoTicket : lottoTickets.toList()) {
             printLottoNumbers(lottoTicket);
         }
