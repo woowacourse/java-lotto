@@ -40,7 +40,7 @@ public class LottoController {
 
     private List<LottoTicket> buyLottosManually(LottoPurchaseManager lottoPurchaseManager) {
         int quantity = Repeater.repeatFunctionOnError(inputView::scanManualLottoQuantity);
-        if (!lottoPurchaseManager.canAfford(LottoTicket.PRICE, quantity)) {
+        if (!lottoPurchaseManager.canAfford(quantity)) {
             outputView.printNotEnoughBudget();
             return buyLottosManually(lottoPurchaseManager);
         }
@@ -58,7 +58,7 @@ public class LottoController {
 
     private List<LottoTicket> buyLottosAutomatically(LottoPurchaseManager lottoPurchaseManager) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        while (lottoPurchaseManager.canAfford(LottoTicket.PRICE, 1)) {
+        while (lottoPurchaseManager.canAfford(1)) {
             lottoTickets.add(lottoPurchaseManager.buyAutomatically());
         }
         return lottoTickets;

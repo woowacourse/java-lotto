@@ -21,8 +21,8 @@ public class LottoPurchaseManager {
         return new LottoPurchaseManager(money);
     }
 
-    public boolean canAfford(Money pricePerItems, int quantity) {
-        return this.budget.toLong() >= pricePerItems.multiply(quantity).toLong();
+    public boolean canAfford(int quantity) {
+        return this.budget.toLong() >= LottoTicket.PRICE.multiply(quantity).toLong();
     }
 
     public Money remainBudget() {

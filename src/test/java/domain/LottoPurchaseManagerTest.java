@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LottoPurchaseManagerTest {
     private LottoPurchaseManager lottoPurchaseManager;
@@ -14,6 +16,18 @@ public class LottoPurchaseManagerTest {
     @BeforeEach
     void setUp() {
         this.lottoPurchaseManager = LottoPurchaseManager.from(Money.from(3_000));
+    }
+
+    @DisplayName("로또를 구매할 수 있는지 여부를 리턴한다 - 가능할 때")
+    @Test
+    public void canAffordTest() {
+        assertTrue(lottoPurchaseManager.canAfford(3));
+    }
+
+    @DisplayName("로또를 구매할 수 있는지 여부를 리턴한다 - 불가능할 때")
+    @Test
+    public void canNotAffordTest() {
+        assertFalse(lottoPurchaseManager.canAfford(4));
     }
 
     @DisplayName("Budget에서 금액을 차감하고 로또를 자동 구매한다.")
