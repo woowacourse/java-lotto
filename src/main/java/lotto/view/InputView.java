@@ -22,4 +22,19 @@ public class InputView {
         }
         return money;
     }
+
+    public static int inputManualCount() {
+        int manualCount;
+        try {
+            manualCount = SCANNER.nextInt();
+        } catch (Exception e) {
+            throw new IllegalArgumentException(WRONG_INPUT_ERROR);
+        }
+        return manualCount;
+    }
+
+    public static List<Integer> inputManualLotto() {
+        List<Integer> lottoNumbers = new ArrayList<>();
+        return lottoNumbers;
+    }
 }
