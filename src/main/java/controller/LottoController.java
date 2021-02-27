@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoController {
+    private static final int ONE_TICKET_OF_LOTTO = 1;
+
     private final InputView inputView = InputView.getInstance();
     private final OutputView outputView = OutputView.getInstance();
 
@@ -58,7 +60,7 @@ public class LottoController {
 
     private List<LottoTicket> buyLottosAutomatically(LottoPurchaseManager lottoPurchaseManager) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        while (lottoPurchaseManager.canAfford(1)) {
+        while (lottoPurchaseManager.canAfford(ONE_TICKET_OF_LOTTO)) {
             lottoTickets.add(lottoPurchaseManager.buyAutomatically());
         }
         return lottoTickets;
