@@ -23,7 +23,7 @@ public class BonusBall {
     }
 
     private void validateBonusNumberScope(int bonusNumber) {
-        if (bonusNumber <= LottoGenerator.LOTTO_START_NUMBER || bonusNumber > LottoGenerator.LOTTO_END_NUMBER) {
+        if (bonusNumber < LottoGenerator.LOTTO_START_NUMBER || bonusNumber > LottoGenerator.LOTTO_END_NUMBER) {
             throw new BonusBallScopeException(bonusNumber);
         }
     }
