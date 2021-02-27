@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
+
     public static final int LOTTO_TICKET_SIZE = 6;
     private static final String INCORRECT_LOTTO_NUMBER_SIZE_ERROR = "로또 숫자의 개수가 6이 아닙니다.";
     private final Set<LottoNumber> lottoNumbers;

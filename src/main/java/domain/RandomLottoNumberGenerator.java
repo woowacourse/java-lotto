@@ -10,7 +10,7 @@ public class RandomLottoNumberGenerator {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
 
-    private static List<Integer> numberBox = IntStream
+    private static final List<Integer> numberBox = IntStream
         .rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
         .boxed()
         .collect(Collectors.toList());

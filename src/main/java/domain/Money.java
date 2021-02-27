@@ -3,6 +3,7 @@ package domain;
 import java.util.Objects;
 
 public class Money {
+
     private static final int ZERO = 0;
     private static final int MIN_PRICE = 1000;
     private static final int MAX_PRICE = 1_000_000;

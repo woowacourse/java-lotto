@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 public class WinningNumbers {
 
     private static final String BONUS_DUPLICATE_ERROR = "당첨 번호에 보너스 번호가 포함되어 있습니다.";
+
     private final LottoTicket winningTicket;
     private final LottoNumber bonusNumber;
 
