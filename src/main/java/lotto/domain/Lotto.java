@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import lotto.exception.LottoAnnouncementException;
 
 public class Lotto {
@@ -12,17 +13,14 @@ public class Lotto {
     public static final String DIFFERENT_POSSESSION_MESSAGE = "로또 번호의 갯수가 기준과 다릅니다.";
     public static final String OVERLAPPED_WINNER_MESSAGE = "당첨 번호가 중복되었습니다.";
     public static final double BONUS_MATCHING_COUNT = 5.5;
-    public static final int LOTTO_POSSESSION_NUMBER = 6;
-    public static final int LOTTO_PRICE = 1000;
+    public static final int POSSESSION_NUMBER = 6;
+    public static final int PRICE = 1000;
 
     private final List<Number> numbers;
 
-    public Lotto(List<Integer> selectedNumber) {
+    public Lotto(List<Number> selectedNumber) {
         checkValidNumbers(selectedNumber);
-        numbers = new ArrayList<>();
-        for (int integerNumber : selectedNumber) {
-            numbers.add(Number.from(integerNumber));
-        }
+        numbers = selectedNumber;
     }
 
     public LottoRank getLottoRank(LottoAnnouncement lottoAnnouncement) {
@@ -55,24 +53,24 @@ public class Lotto {
     }
 
     private boolean isSecondRank(int count, Number bonusNumber) {
-        return count == LOTTO_POSSESSION_NUMBER && numbers.contains(bonusNumber);
+        return count == POSSESSION_NUMBER && numbers.contains(bonusNumber);
     }
 
-    private void checkValidNumbers (List<Integer> winners) {
+    private void checkValidNumbers (List<Number> winners) {
         checkOverlappedAmongWinners(winners);
         checkProperSize(winners);
     }
 
-    private void checkOverlappedAmongWinners(List<Integer> winners) {
-        Set<Integer> removedOverlappedWinners = new HashSet<>(winners);
+    private void checkOverlappedAmongWinners(List<Number> winners) {
+        Set<Number> removedOverlappedWinners = new HashSet<>(winners);
 
         if (removedOverlappedWinners.size() != winners.size()) {
             throw new LottoAnnouncementException(OVERLAPPED_WINNER_MESSAGE);
         }
     }
 
-    private void checkProperSize(List<Integer> winners) {
-        if (winners.size() != Lotto.LOTTO_POSSESSION_NUMBER) {
+    private void checkProperSize(List<Number> winners) {
+        if (winners.size() != Lotto.POSSESSION_NUMBER) {
             throw new LottoAnnouncementException(DIFFERENT_POSSESSION_MESSAGE);
         }
     }
@@ -90,11 +88,11 @@ public class Lotto {
     }
 
     private boolean isSameNumbers(Lotto candidateLotto) {
-        long sameNumbersCount = candidateLotto.getNumbers()
+        double sameNumbersCount = candidateLotto.getNumbers()
             .stream()
             .map(this.numbers::contains)
             .count();
-        if (sameNumbersCount == LOTTO_POSSESSION_NUMBER) {
+        if (sameNumbersCount == POSSESSION_NUMBER) {
             return true;
         }
         return false;

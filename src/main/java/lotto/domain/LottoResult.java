@@ -12,7 +12,7 @@ public class LottoResult {
 
     public LottoResult(LottoAnnouncement lottoAnnouncement, Lottos lottos) {
         this.lottoResultStatistics = getStatistics(lottoAnnouncement, lottos);
-        Money investedMoney = new Money(lottos.getSize() * Lotto.LOTTO_PRICE);
+        Money investedMoney = new Money(lottos.getSize() * Lotto.PRICE);
         this.issuedLottoPieces = new Piece(investedMoney, lottos.getSize());
     }
 

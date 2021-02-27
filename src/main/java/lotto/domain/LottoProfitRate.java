@@ -21,7 +21,7 @@ public class LottoProfitRate {
         for (Entry<LottoRank, Integer> keyValue : lottosResultStatistics.entrySet()) {
             sum += keyValue.getKey().getPrizeMoney() * keyValue.getValue();
         }
-        double investCapital = lottoPiece.getPieceNumber() * Lotto.LOTTO_PRICE;
+        double investCapital = lottoPiece.getPieceNumber() * Lotto.PRICE;
         double rawProfitRate = sum / investCapital;
         return Math.round(rawProfitRate * DECIMAL_TRIM_NUMERATOR) / DECIMAL_TRIM_DENOMINATOR;
     }

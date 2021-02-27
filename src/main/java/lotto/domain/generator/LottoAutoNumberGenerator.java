@@ -10,20 +10,20 @@ import lotto.domain.Number;
 
 public class LottoAutoNumberGenerator implements LottoNumberGenerator {
 
-    private static final List<Integer> candidateNumbers = new ArrayList<>();
+    private static final List<Number> candidateNumbers = new ArrayList<>();
 
     static {
         for (int number = Number.LOWER_LIMIT; number <= Number.UPPER_LIMIT; number++) {
-            candidateNumbers.add(number);
+            candidateNumbers.add(Number.from(number));
         }
     }
 
     @Override
-    public synchronized List<Integer> generateNumbers() {
-        final List<Integer> shuffledNumbers = Collections.synchronizedList(candidateNumbers);
+    public synchronized List<Number> generateNumbers() {
+        final List<Number> shuffledNumbers = Collections.synchronizedList(candidateNumbers);
         Collections.shuffle(shuffledNumbers);
-        Set<Integer> lottoNumbers =
-            new TreeSet<>(shuffledNumbers.subList(0, Lotto.LOTTO_POSSESSION_NUMBER));
+        Set<Number> lottoNumbers =
+            new TreeSet<>(shuffledNumbers.subList(0, Lotto.POSSESSION_NUMBER));
         return new ArrayList<>(lottoNumbers);
     }
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import lotto.domain.Money;
+import lotto.domain.Number;
 import lotto.domain.Piece;
 import lotto.exception.LottoException;
 import lotto.exception.PieceException;
@@ -49,18 +50,20 @@ public class InputView {
         return new Piece(money, rawAutoPieces);
     }
 
-    public List<Integer> inputWinnerNumbers() {
+    public List<Number> inputWinnerNumbers() {
         System.out.println(INPUT_WINNERS_MESSAGE);
         return getValidLottoNumbers();
     }
 
-    public int inputBonusNumber() {
+    public Number inputBonusNumber() {
+        int rawNumber;
         try {
-            return receiveInteger(INPUT_BONUS_MESSAGE);
+            rawNumber = receiveInteger(INPUT_BONUS_MESSAGE);
         } catch (LottoException lottoException) {
             System.out.println(lottoException.getMessage());
-            return receiveInteger(INPUT_BONUS_MESSAGE);
+            rawNumber =  receiveInteger(INPUT_BONUS_MESSAGE);
         }
+        return Number.from(rawNumber);
     }
 
     private int receiveInteger(String receiveTargetMessage) throws LottoException {
@@ -74,17 +77,17 @@ public class InputView {
         }
     }
 
-    public List<List<Integer>> receiveManualNumbers(Piece manualPiece) {
+    public List<List<Number>> receiveManualNumbers(Piece manualPiece) {
         System.out.println(MANUAL_LOTTO_INPUT_MESSAGE);
-        List<List<Integer>> inputWinningNumbers = new ArrayList<>();
+        List<List<Number>> inputWinningNumbers = new ArrayList<>();
         for (int i = 0; i < manualPiece.getPieceNumber(); i++) {
-            List<Integer> lottoNumbers = getValidLottoNumbers();
+            List<Number> lottoNumbers = getValidLottoNumbers();
             inputWinningNumbers.add(lottoNumbers);
         }
         return inputWinningNumbers;
     }
 
-    private List<Integer> getValidLottoNumbers() {
+    private List<Number> getValidLottoNumbers() {
         try {
             return receiveWinners();
         } catch (LottoException lottoException) {
@@ -93,13 +96,13 @@ public class InputView {
         }
     }
 
-    private List<Integer> receiveWinners() throws LottoException {
+    private List<Number> receiveWinners() throws LottoException {
         try {
             String rawWinningNumbers = scanner.nextLine();
             String[] splittedWinningNumbers = rawWinningNumbers.split(DELIMITER);
             return Arrays.stream(splittedWinningNumbers)
                 .map(String::trim)
-                .map(Integer::parseInt)
+                .map(element -> Number.from(Integer.parseInt(element)))
                 .collect(Collectors.toList());
         } catch (Exception exception) {
             throw new LottoException(NOT_VALID_LOTTO_NUMBERS);

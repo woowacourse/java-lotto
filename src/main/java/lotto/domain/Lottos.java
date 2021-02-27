@@ -10,14 +10,14 @@ public class Lottos {
 
     private final List<Lotto> lottoBunch;
 
-    public Lottos(LottoNumberGenerator lottoNumberGenerator, int purchasedLottoCount) {
+    public Lottos(LottoNumberGenerator lottoNumberGenerator, Piece purchasedLottoCount) {
         lottoBunch = new ArrayList<>();
         addExtraPieces(lottoNumberGenerator, purchasedLottoCount);
     }
 
     public void addExtraPieces(LottoNumberGenerator lottoNumberGenerator,
-        int purchasedLottoCount) {
-        for (int i = 0; i < purchasedLottoCount; i++) {
+        Piece purchasedLottoCount) {
+        for (int i = 0; i < purchasedLottoCount.getPieceNumber(); i++) {
             lottoBunch.add(new Lotto(lottoNumberGenerator.generateNumbers()));
         }
     }

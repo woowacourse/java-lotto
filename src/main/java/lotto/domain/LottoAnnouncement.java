@@ -11,13 +11,13 @@ public class LottoAnnouncement {
     private final Lotto winners;
     private final Number bonusNumber;
 
-    public LottoAnnouncement(List<Integer> rawWinners, int bonusNumber) {
+    public LottoAnnouncement(List<Number> rawWinners, Number bonusNumber) {
         checkOverlappedWinnersToBonus(rawWinners, bonusNumber);
         this.winners = new Lotto(rawWinners);
-        this.bonusNumber = Number.from(bonusNumber);
+        this.bonusNumber = bonusNumber;
     }
 
-    private void checkOverlappedWinnersToBonus(List<Integer> winners, int bonusNumber) {
+    private void checkOverlappedWinnersToBonus(List<Number> winners, Number bonusNumber) {
         long overlappedCount = winners.stream()
             .filter(element -> element == bonusNumber)
             .count();

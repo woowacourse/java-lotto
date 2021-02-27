@@ -14,7 +14,7 @@ public class LottoAutoGeneratorTest {
     void selectSixNumberTest() {
         int expectedNumberCount = 6;
         LottoAutoNumberGenerator lottoAutoGenerator = new LottoAutoNumberGenerator();
-        List<Integer> generatedNumbers = lottoAutoGenerator.generateNumbers();
+        List<Number> generatedNumbers = lottoAutoGenerator.generateNumbers();
         assertThat(generatedNumbers.size()).isEqualTo(expectedNumberCount);
     }
 }

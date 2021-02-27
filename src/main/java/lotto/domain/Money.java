@@ -13,11 +13,11 @@ public class Money {
     }
 
     public int getLottoPieces() {
-        return money / Lotto.LOTTO_PRICE;
+        return money / Lotto.PRICE;
     }
 
     private void checkEnoughMoney(int possessedMoney) {
-        if (possessedMoney < Lotto.LOTTO_PRICE) {
+        if (possessedMoney < Lotto.PRICE) {
             throw new MoneyException(NOT_ENOUGH_MONEY);
         }
     }
