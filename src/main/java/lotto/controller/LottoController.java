@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import java.util.List;
 import java.util.Map;
 import lotto.domain.*;
 import lotto.view.*;
@@ -16,7 +15,7 @@ public class LottoController {
 
     private Money payMoney() {
         OutputView.requestMoneyMessage();
-        return new Money(InputView.requestInput());
+        return new Money(InputView.inputMoney());
     }
 
     private LottoGroup buyLotto(Money money) {
