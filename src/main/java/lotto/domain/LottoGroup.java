@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -13,7 +14,7 @@ public class LottoGroup {
     }
 
     public List<Lotto> getLottoGroup() {
-        return lottoGroup;
+        return Collections.unmodifiableList(lottoGroup);
     }
 
     public LottoGroup merge(LottoGroup target) {

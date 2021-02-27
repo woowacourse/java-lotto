@@ -1,8 +1,10 @@
 package lotto.view;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class InputView {
 
@@ -35,7 +37,7 @@ public class InputView {
         for (int i=0; i<count; i++) {
             lottoNumbers.add(SCANNER.nextLine());
         }
-        return lottoNumbers;
+        return Collections.unmodifiableList(lottoNumbers);
     }
 
     public static String requestWinningNumber() {
