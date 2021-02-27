@@ -25,7 +25,7 @@ class LottoTicketsTest {
         List<Integer> lottoNumbers2 = Arrays.asList(5, 6, 4, 8, 9, 10);
 
         List<LottoBall> lottoBalls = lottoNumbers.stream()
-                .map(lottoNumber ->  LottoBall.from(lottoNumber))
+                .map(lottoNumber -> LottoBall.from(lottoNumber))
                 .collect(Collectors.toList());
         List<LottoBall> lottoBalls2 = lottoNumbers2.stream()
                 .map(lottoNumber -> LottoBall.from(lottoNumber))

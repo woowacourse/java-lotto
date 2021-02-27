@@ -18,9 +18,9 @@ public class TicketCount {
         return ticketCount;
     }
 
-    private void validateLottoCount(final int lottoCount) {
-        if (lottoCount < ZERO) {
-            throw new IllegalArgumentException(String.format(TICKET_MINIMUM_SIZE_EXCEPTION_MESSAGE, lottoCount));
+    private void validateLottoCount(final int ticketCount) {
+        if (ticketCount < ZERO) {
+            throw new IllegalArgumentException(String.format(TICKET_MINIMUM_SIZE_EXCEPTION_MESSAGE, ticketCount));
         }
     }
 

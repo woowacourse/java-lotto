@@ -1,4 +1,5 @@
 import domain.bettingMoney.BettingMoney;
+import domain.lotto.LottoTicket;
 import domain.lotto.LottoTickets;
 import domain.lotto.TicketCount;
 import domain.lotto.WinningLotto;
@@ -23,7 +24,7 @@ public class GameManageApplication {
 
     public void run() {
         BettingMoney bettingMoney = getBettingMoney();
-        TicketCount ticketCount = getTicketCount(bettingMoney);
+        TicketCount ticketCount = bettingMoney.getTicketCount(LottoTicket.TICKET_PRICE);
         lottoGameScreen.showTicketCount(ticketCount);
         LottoTickets lottoTickets = lottoService.getLottoTickets(inputView, ticketCount, inputView.inputManualTicketCount());
         lottoGameScreen.showAllLottoStatus(lottoTickets.getLottoTickets());
@@ -41,11 +42,6 @@ public class GameManageApplication {
     private BettingMoney getBettingMoney() {
         int input = inputView.inputBettingMoney();
         return new BettingMoney(input);
-    }
-
-    private TicketCount getTicketCount(final BettingMoney bettingMoney) {
-        int ticketCount = bettingMoney.getTicketCount();
-        return new TicketCount(ticketCount);
     }
 
     private WinningLotto getWinningLotto() {
