@@ -1,6 +1,10 @@
 package lotto.view;
 
-import lotto.domain.*;
+import lotto.domain.lotto.LottoCount;
+import lotto.domain.lotto.LottoTicket;
+import lotto.domain.lotto.LottoTickets;
+import lotto.domain.result.LottoResult;
+import lotto.domain.result.Prize;
 
 public class OutputView {
 
@@ -13,8 +17,17 @@ public class OutputView {
         System.out.println("구입금액을 입력해 주세요.");
     }
 
-    public static void printLottoTicketsCount(LottoTickets lottoTickets) {
-        System.out.println(lottoTickets.lottoTickets().size() + "개를 구매했습니다.");
+    public static void printInputManualLottoCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해주세요.");
+    }
+
+    public static void printInputManualLottoNumbers() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+    }
+
+    public static void printLottoTicketsCount(LottoCount lottoCount) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n",
+                lottoCount.getManualCount(), lottoCount.getAutoCount());
     }
 
     public static void printInputWinningNumbers() {
@@ -53,4 +66,5 @@ public class OutputView {
     public static void printProfitRate(double profitRate) {
         System.out.println("총 수익률은 " + profitRate + "입니다.");
     }
+
 }

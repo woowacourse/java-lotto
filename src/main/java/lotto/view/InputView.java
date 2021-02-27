@@ -18,8 +18,12 @@ public class InputView {
         return SCANNER.nextLine();
     }
 
-    public static List<String> inputWinningNumbers() {
-        OutputView.printInputWinningNumbers();
+    public static String inputManualLottoCount() {
+        OutputView.printInputManualLottoCount();
+        return SCANNER.nextLine();
+    }
+
+    public static List<String> inputNumbers() {
         return Arrays.asList(SCANNER.nextLine()
                 .replace(BLANK, REPLACEMENT)
                 .split(DELIMITER));

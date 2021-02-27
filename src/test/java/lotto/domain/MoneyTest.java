@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.exception.IllegalDivisorCountException;
-import lotto.exception.IllegalMoneyException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,12 +10,21 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class MoneyTest {
     @ParameterizedTest
-    @ValueSource(strings = {"0", "-1", "a", "500"})
-    @DisplayName("1000 이상의 정수인지 검증")
+    @ValueSource(strings = {"0", "-1", "a"})
+    @DisplayName("구매할 로또 수 포맷 검증")
     void isValidMoney(String input) {
         assertThatThrownBy(() -> {
             Money money = new Money(input);
-        }).isInstanceOf(IllegalMoneyException.class);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("로또 금액보다 작은 경우")
+    void checkAmount() {
+        String input = "900";
+        assertThatThrownBy(() -> {
+            Money money = new Money(input);
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -46,14 +53,21 @@ public class MoneyTest {
     @DisplayName("수익률 계산")
     void divide() {
         Money money = new Money("10000");
-        assertThat(money.divide(10)).isEqualTo(1.0);
+        assertThat(money.getProfitRate(10)).isEqualTo(1.0);
     }
 
     @Test
     @DisplayName("수익률 계산할 때 0으로 나누는 경우")
     void divide0() {
         Money money = new Money("10000");
-        assertThatThrownBy(() -> money.divide(0))
-                .isInstanceOf(IllegalDivisorCountException.class);
+        assertThatThrownBy(() -> money.getProfitRate(0))
+                .isInstanceOf(ArithmeticException.class);
+    }
+
+    @Test
+    @DisplayName("구매 개수 확인")
+    void getPurchaseCount() {
+        Money money = new Money("10000");
+        assertThat(money.getPurchaseCount()).isEqualTo(10);
     }
 }
