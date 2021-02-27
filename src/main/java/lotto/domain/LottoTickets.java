@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import lotto.utils.ParseUtils;
 import lotto.utils.RandomUtils;
 
 public class LottoTickets {
@@ -13,6 +14,7 @@ public class LottoTickets {
     private static final int START_LOTTO_NUMBER = 1;
     private static final int END_LOTTO_NUMBER = 45;
     private static final int LOTTO_SIZE = 6;
+    private static final String REGEX = ", ";
     private static final List<Integer> ALL_LOTTO_NUMBERS = IntStream
         .range(START_LOTTO_NUMBER, END_LOTTO_NUMBER + 1)
         .boxed()
@@ -21,21 +23,28 @@ public class LottoTickets {
     private final List<Lotto> lottoTickets;
 
     public LottoTickets(final int buyLottoSize) {
-        this(buyLottoSize, new ArrayList<>());
+        lottoTickets = new ArrayList<>();
+        createLottoTickets(buyLottoSize);
     }
 
-    public LottoTickets(final int buyLottoSize, final List<Lotto> lottoNumbers) {
-        lottoTickets = createLottoTickets(buyLottoSize, lottoNumbers);
+    public LottoTickets(final List<String> lottoNumbers) {
+        lottoTickets = new ArrayList<>();
+        for (String lottoNumber : lottoNumbers) {
+            lottoTickets.add(new Lotto(ParseUtils.parseIntegerList(lottoNumber, REGEX)));
+        }
     }
 
-    private List<Lotto> createLottoTickets(final int buyLottoSize, final List<Lotto> lottoNumbers) {
-        final List<Lotto> lottoTickets = new ArrayList<>(lottoNumbers);
-        for (int i = 0; i < buyLottoSize - lottoNumbers.size(); i++) {
+    public LottoTickets(final int buyLottoSize, final LottoTickets selfLottoTickets) {
+        lottoTickets = new ArrayList<>(selfLottoTickets.getLottoTickets());
+        createLottoTickets(buyLottoSize);
+    }
+
+    private void createLottoTickets(final int buyLottoSize) {
+        for (int i = 0; i < buyLottoSize; i++) {
             lottoTickets.add(
                 new Lotto(RandomUtils.generateRandomNumbers(ALL_LOTTO_NUMBERS, LOTTO_SIZE))
             );
         }
-        return lottoTickets;
     }
 
     public List<Lotto> getLottoTickets() {
