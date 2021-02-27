@@ -1,9 +1,9 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class LottoFactory {
     private static final List<LottoNumber> CANDIDATES_NUMBERS;
@@ -14,10 +14,12 @@ public class LottoFactory {
                 .collect(Collectors.toList());
     }
 
-    public static Lottos generates(ShuffleStrategy strategy, int lottoCount) {
-        List<Lotto> lottos = Stream.generate(() -> generate(strategy))
-                .limit(lottoCount)
-                .collect(Collectors.toList());
+    public static Lottos generates(ShuffleStrategy strategy, CountOfPurchasingLotto lottoCount) {
+        List<Lotto> lottos = new ArrayList<>();
+        while (lottoCount.isPurchasingLottoLeft()) {
+            lottos.add(generate(strategy));
+            lottoCount.purchaseLotto();
+        }
 
         return new Lottos(lottos);
     }

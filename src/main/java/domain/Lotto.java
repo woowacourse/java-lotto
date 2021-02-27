@@ -39,8 +39,8 @@ public class Lotto {
         }
     }
 
-    public static int calculateLottoNumber(Money money) {
-        return money.divide(PRICE);
+    public static CountOfPurchasingLotto calculateLottoNumber(Money money) {
+        return new CountOfPurchasingLotto(money.divide(PRICE));
     }
 
     public boolean contains(LottoNumber lottoNumber) {

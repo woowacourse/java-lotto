@@ -8,7 +8,7 @@ public class LottoController {
 
     public static void main(String[] args) {
         Money purchaseMoney = InputView.inputPurchaseMoney();
-        int numberOfLotto = Lotto.calculateLottoNumber(purchaseMoney);
+        CountOfPurchasingLotto numberOfLotto = Lotto.calculateLottoNumber(purchaseMoney);
         OutputView.printNumberOfPurchaseLotto(numberOfLotto);
 
         Lottos lottos = LottoFactory.generates(new DefaultShuffleStrategy(), numberOfLotto);

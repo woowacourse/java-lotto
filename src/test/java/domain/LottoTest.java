@@ -66,10 +66,10 @@ class LottoTest {
         Money money = Money.createPurchasingLottoMoney(moneyValue);
 
         //when
-        long lottoNumber = Lotto.calculateLottoNumber(money);
+        CountOfPurchasingLotto lottoNumber = Lotto.calculateLottoNumber(money);
 
         //then
-        assertThat(lottoNumber).isEqualTo(expectedLottoNumber);
+        assertThat(lottoNumber).isEqualTo(new CountOfPurchasingLotto(expectedLottoNumber));
     }
 
     @DisplayName("로또넘버가 로또에 포함되는 숫자인지 확인하는 기능")

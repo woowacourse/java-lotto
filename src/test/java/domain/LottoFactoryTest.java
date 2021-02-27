@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoFactoryTest {
 
-    @DisplayName("로또 생성")
+    @DisplayName("자동으로 로또를 생성하는 기능")
     @Test
     void generateLotto() {
         //given
@@ -19,10 +19,10 @@ class LottoFactoryTest {
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
 
-        int lottoCount = 3;
+        CountOfPurchasingLotto countOfPurchasingLotto = new CountOfPurchasingLotto(3);
 
         //when
-        Lottos lottos = LottoFactory.generates(lottoNumbers -> numbers, lottoCount);
+        Lottos lottos = LottoFactory.generates(lottoNumbers -> numbers, countOfPurchasingLotto);
 
         //then
         assertThat(lottos).isNotNull();
