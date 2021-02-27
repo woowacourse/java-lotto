@@ -15,11 +15,11 @@ public class LottoNumber {
 
     public static LottoNumber valueOf(int value) {
         validateLottoNumber(value);
-        return LottoNumberCache.CACHE[value - 1];
+        return LottoNumberCache.CACHE[value];
     }
 
     private static void validateLottoNumber(int value) {
-        if (value < MIN || value > MAX) {
+        if (value < LottoNumberCache.LOW || value > LottoNumberCache.HIGH) {
             throw new IllegalArgumentException("로또 번호는 1부터 45사이의 값이어야 합니다.");
         }
     }
@@ -33,9 +33,9 @@ public class LottoNumber {
         static {
             LOW = MIN;
             HIGH = MAX;
-            CACHE = new LottoNumber[(MAX - MIN) + 1];
-            for (int i = 0; i < CACHE.length; i++) {
-                CACHE[i] = new LottoNumber(i + 1);
+            CACHE = new LottoNumber[MAX + 1];
+            for (int i = MIN; i <= MAX; i++) {
+                CACHE[i] = new LottoNumber(i);
             }
         }
     }
