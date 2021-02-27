@@ -28,13 +28,13 @@ public class Result {
     }
 
     private Map<LottoRank, Integer> makeResult(final LottoTickets lottoTickets, final WinningLotto winningLotto) {
-        Map<LottoRank, Integer> copy = new HashMap<>();
+        Map<LottoRank, Integer> result = new HashMap<>();
         List<LottoRank> lottoRanks = lottoTickets.findLottoRanks(winningLotto);
         lottoRanks.forEach(lottoRank -> {
-            copy.computeIfPresent(lottoRank, (key, value) -> value + 1);
-            copy.putIfAbsent(lottoRank, 1);
+            result.computeIfPresent(lottoRank, (key, value) -> value + 1);
+            result.putIfAbsent(lottoRank, 1);
         });
-        return copy;
+        return result;
     }
 
     private Long getTotalPrize(final LottoRank lottoRank) {
