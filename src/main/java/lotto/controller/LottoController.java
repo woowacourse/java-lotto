@@ -11,13 +11,13 @@ public class LottoController {
         Money money = new Money(InputView.requestMoney());
         Count count = new Count(money.count());
         count.manualCount(InputView.requestManualCount());
-        LottoGroup lottos = buyLotto(count);
-        WinningLotto winningLotto = checkWinningLotto();
+        LottoGenerator lottoGenerator = new LottoGenerator();
+        LottoGroup lottos = buyLotto(lottoGenerator, count);
+        WinningLotto winningLotto = checkWinningLotto(lottoGenerator);
         drawLotto(winningLotto, lottos, money);
     }
 
-    private LottoGroup buyLotto(Count count) {
-        LottoGenerator lottoGenerator = new LottoGenerator();
+    private LottoGroup buyLotto(LottoGenerator lottoGenerator, Count count) {
         int manualCount = count.getManualCount();
         int autoCount = count.getAutoCount();
 
@@ -31,10 +31,9 @@ public class LottoController {
         return lottos;
     }
 
-    private WinningLotto checkWinningLotto() {
+    private WinningLotto checkWinningLotto(LottoGenerator lottoGenerator) {
         String winningLottoInput = InputView.requestWinningNumber();
         String bonusBallInput = InputView.requestBonusBall();
-        LottoGenerator lottoGenerator = new LottoGenerator();
         return new WinningLotto(
             lottoGenerator.generateManual(winningLottoInput),
             LottoNumber.of(bonusBallInput)

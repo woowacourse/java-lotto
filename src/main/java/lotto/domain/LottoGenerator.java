@@ -20,13 +20,29 @@ public class LottoGenerator {
         }
     }
 
-    public Lotto generateAuto() {
+    public LottoGroup autoLotto(int count) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            lottos.add(generateAuto());
+        }
+        return new LottoGroup(lottos);
+    }
+
+    private Lotto generateAuto() {
         Collections.shuffle(numbers);
         List<Integer> lottoNumbers = numbers.subList(0, LOTTO_NUMBER_LIMIT);
         Set<LottoNumber> lotto = lottoNumbers.stream()
             .map(LottoNumber::of)
             .collect(Collectors.toSet());
         return new Lotto(lotto);
+    }
+
+    public LottoGroup manualLotto(List<String> input) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (String lottoNumbers : input) {
+            lottos.add(generateManual(lottoNumbers));
+        }
+        return new LottoGroup(lottos);
     }
 
     public Lotto generateManual(String input) {
@@ -36,21 +52,5 @@ public class LottoGenerator {
             lottoNumber.add(LottoNumber.of(value));
         }
         return new Lotto(lottoNumber);
-    }
-
-    public LottoGroup autoLotto(int count) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            lottos.add(generateAuto());
-        }
-        return new LottoGroup(lottos);
-    }
-
-    public LottoGroup manualLotto(List<String> input) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (String lottoNumbers : input) {
-            lottos.add(generateManual(lottoNumbers));
-        }
-        return new LottoGroup(lottos);
     }
 }
