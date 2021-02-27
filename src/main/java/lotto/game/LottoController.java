@@ -9,6 +9,12 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
+    private final LottoService lottoService;
+
+    public LottoController(LottoService lottoService) {
+        this.lottoService = lottoService;
+    }
+
     public void run() {
         Money money = generateMoney();
         LottoCount lottoCount = possibleLottoCount(money);
@@ -53,7 +59,7 @@ public class LottoController {
 
     private Tickets ticketPurchase(LottoCount manualTicketAmount, LottoCount autoTicketAmount) {
         Tickets manualTickets = manualTicketGenerate(manualTicketAmount);
-        Tickets autoTickets = LottoService.buyAutoTickets(autoTicketAmount);
+        Tickets autoTickets = lottoService.buyAutoTickets(autoTicketAmount);
         OutputView.noticeLottoCount(manualTicketAmount, autoTicketAmount);
 
         Tickets totalTicket = Tickets.joinTicket(manualTickets, autoTickets);
@@ -64,7 +70,7 @@ public class LottoController {
     private Tickets manualTicketGenerate(LottoCount count) {
         try {
             OutputView.enterManualTicketNumber();
-            return LottoService.buyManualTickets(InputView.inputNumbers(count));
+            return lottoService.buyManualTickets(InputView.inputNumbers(count));
         } catch (RuntimeException e) {
             OutputView.printError(e);
             return manualTicketGenerate(count);
