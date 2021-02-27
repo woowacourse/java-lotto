@@ -25,7 +25,7 @@ public class LottoMachine {
         return LottoTicket.valueOf(convertToInt(numbers));
     }
 
-    private static List<Integer> convertToInt(String ticket) {
+    public static List<Integer> convertToInt(String ticket) {
         try {
             return Arrays.stream(ticket.split(","))
                 .map(String::trim)

@@ -15,7 +15,8 @@ public class WinningNumbers {
         this.bonusNumber = LottoNumber.valueOf(bonusNumber);
     }
 
-    public static WinningNumbers valueOf(final List<Integer> winningNumbers, final int bonusNumber) {
+    public static WinningNumbers valueOf(final String numbers, final int bonusNumber) {
+        List<Integer> winningNumbers = LottoMachine.convertToInt(numbers);
         validateDistinctBonus(winningNumbers, bonusNumber);
         return new WinningNumbers(winningNumbers, bonusNumber);
     }

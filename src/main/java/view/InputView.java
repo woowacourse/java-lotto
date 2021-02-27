@@ -1,6 +1,5 @@
 package view;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -29,9 +28,9 @@ public class InputView {
             .collect(Collectors.toList());
     }
 
-    public static List<Integer> receiveWinningNumbers() {
+    public static String receiveWinningNumbers() {
         System.out.println(RECEIVE_WINNING_NUMBERS_MESSAGE);
-        return receiveNumbers();
+        return receiveInputNotNull();
     }
 
     public static int receiveBonusNumber() {
@@ -47,10 +46,6 @@ public class InputView {
         }
     }
 
-    private static List<Integer> receiveNumbers() {
-        return createNumbers(receiveInputNotNull());
-    }
-
     private static String receiveInputNotNull() {
         String userInput = SCANNER.nextLine().trim();
         validateNull(userInput);
@@ -60,17 +55,6 @@ public class InputView {
     private static void validateNull(final String userInput) {
         if (userInput == null) {
             throw new IllegalArgumentException(NULL_ERROR);
-        }
-    }
-
-    private static List<Integer> createNumbers(final String userInput) {
-        try {
-            return Arrays.stream(userInput.split(","))
-                .map(String::trim)
-                .map(Integer::new)
-                .collect(Collectors.toList());
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException(NOT_INT_ERROR);
         }
     }
 }
