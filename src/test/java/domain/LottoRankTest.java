@@ -20,4 +20,17 @@ class LottoRankTest {
         //then
         assertThat(lottoRank == result).isTrue();
     }
+
+    @DisplayName("특정 등수의 총 금액을 계산하는 기능")
+    @CsvSource(value = {
+            "6:FIRST", "5:SECOND", "5:THIRD", "4:FOURTH", "3:FIFTH", "0:MISS"
+    }, delimiter = ':')
+    void getTotalPrize(long countOfLotto, LottoRank result) {
+        //when
+        Money totalPrize = result.getTotalPrize(countOfLotto);
+
+        //then
+        Money expected = result.getPrize().multiply(countOfLotto);
+        assertThat(totalPrize).isEqualTo(expected);
+    }
 }
