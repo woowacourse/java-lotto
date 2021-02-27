@@ -29,15 +29,15 @@ public class LottoMachine {
         return manualBuyAmount.getValue();
     }
 
-    public UsersLottoTickets buyTickets(List<String> manualTicketsValue) {
-        List<LottoTicket> manualTickets = convertToLottoTickets(manualTicketsValue);
+    public UsersLottoTickets buyTickets(List<String> manualTicketsInput) {
+        List<LottoTicket> manualTickets = convertToLottoTickets(manualTicketsInput);
         List<LottoTicket> autoTickets = getAutoTickets();
 
         return new UsersLottoTickets(manualTickets, autoTickets);
     }
 
-    private List<LottoTicket> convertToLottoTickets(List<String> manualTicketsValue) {
-        List<LottoTicket> manualLottoTickets = manualTicketsValue.stream()
+    private List<LottoTicket> convertToLottoTickets(List<String> manualTicketsInput) {
+        List<LottoTicket> manualLottoTickets = manualTicketsInput.stream()
                 .map(LottoTicket::new)
                 .collect(Collectors.toList());
 

@@ -19,7 +19,7 @@ public class LottoApplication {
     public static void main(String[] args) {
         Money money = getMoneyByInput();
 
-        UsersLottoTickets usersLottoTickets = getLottoGroup(money);
+        UsersLottoTickets usersLottoTickets = getUsersLottoTickets(money);
 
         TicketsView.printTickets(usersLottoTickets);
 
@@ -36,12 +36,12 @@ public class LottoApplication {
         }
     }
 
-    private static UsersLottoTickets getLottoGroup(Money money) {
+    private static UsersLottoTickets getUsersLottoTickets(Money money) {
         try {
             return buyLottoTickets(money);
-        } catch (IllegalArgumentException e) {
+        } catch (RuntimeException e) {
             System.out.println(e.getMessage());
-            return getLottoGroup(money);
+            return getUsersLottoTickets(money);
         }
     }
 
@@ -51,13 +51,13 @@ public class LottoApplication {
 
         LottoMachine lottoMachine = LottoMachine.getInstance(money, manualAmount);
 
-        List<String> ticketsValue = getManualTicketsValue(lottoMachine.getManualBuyAmount());
+        List<String> manualTicketsInput = getManualTicketsInput(lottoMachine.getManualBuyAmount());
 
-        return lottoMachine.buyTickets(ticketsValue);
+        return lottoMachine.buyTickets(manualTicketsInput);
     }
 
-    private static List<String> getManualTicketsValue(BigInteger amount) {
-        if (amount.equals(BigInteger.ZERO)) {
+    private static List<String> getManualTicketsInput(BigInteger amount) {
+        if (BigInteger.ZERO.equals(amount)) {
             return Collections.emptyList();
         }
         return InputView.getManualLottoTicketsInput(amount);
