@@ -17,13 +17,24 @@ public class LottoTicketsTest {
         assertThat(lottoTickets.getLottoTickets().size()).isEqualTo(14);
     }
 
-    @DisplayName("같은 번호가 생성되었는지 테스트(정렬)")
+    @DisplayName("lottoTickets를 넘겼을때 병합 테스트")
+    @Test
+    void selfLottoCreateTest() {
+        LottoTickets lottoTickets = new LottoTickets(
+            Arrays.asList("1, 2, 3, 4, 5, 6", "2, 3, 4, 5, 6, 7")
+        );
+        lottoTickets = new LottoTickets(0, lottoTickets);
+        List<Lotto> expectedLottoTickets = new ArrayList<>();
+        expectedLottoTickets.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        expectedLottoTickets.add(new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7)));
+        assertThat(lottoTickets.getLottoTickets()).isEqualTo(expectedLottoTickets);
+    }
+
+    @DisplayName("문자열을 이용한 생성과 정렬 테스트")
     @Test
     void numberSort() {
-        List<Lotto> numbers = Arrays.asList(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        LottoTickets lottoTickets = new LottoTickets(1, numbers);
+        LottoTickets lottoTickets = new LottoTickets(Arrays.asList("1, 3, 2, 6, 5, 4"));
         List<Lotto> expectedLottoTickets = new ArrayList<>();
-
         expectedLottoTickets.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
         assertThat(lottoTickets.getLottoTickets()).isEqualTo(expectedLottoTickets);
     }
