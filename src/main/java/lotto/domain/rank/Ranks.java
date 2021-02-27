@@ -30,7 +30,9 @@ public class Ranks {
     }
 
     private int getTotalPurchaseMoney() {
-        return rankCounts.values().stream().mapToInt(Long::intValue).sum() * LOTTO_LINE_PRICE;
+        return rankCounts.values().stream()
+            .mapToInt(Long::intValue)
+            .sum() * LOTTO_LINE_PRICE;
     }
 
 }
