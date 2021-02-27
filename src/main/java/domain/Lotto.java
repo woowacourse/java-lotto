@@ -27,7 +27,7 @@ public class Lotto {
     }
 
     private void validateDuplicatedLottoNumbers(List<LottoNumber> lottoNumbers) {
-        Set<LottoNumber> distinctLottoNumbers = new HashSet(lottoNumbers);
+        Set<LottoNumber> distinctLottoNumbers = new HashSet<>(lottoNumbers);
         if (distinctLottoNumbers.size() != lottoNumbers.size()) {
             throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
         }
