@@ -22,8 +22,8 @@ public class LottoMain {
         UserPurchase userPurchase = getUserPurchaseInput();
         List<LottoTicket> manualLottoTicketsInput = getManualLottoTicketInput(userPurchase);
 
-        ManualTickets manualTickets = (ManualTickets) generateManualTicket(lottoGenerator, manualLottoTicketsInput);
-        AutoTickets autoTickets = (AutoTickets) generateAutoTicket(lottoGenerator, userPurchase);
+        ManualTickets manualTickets = generateManualTicket(lottoGenerator, manualLottoTicketsInput);
+        AutoTickets autoTickets = generateAutoTicket(lottoGenerator, userPurchase);
         PurchasedTickets purchasedTickets = new PurchasedTickets(manualTickets, autoTickets);
         OutputView.printPurchasedLottoTickets(purchasedTickets);
 
@@ -61,14 +61,14 @@ public class LottoMain {
         }
     }
 
-    private static LottoTickets generateManualTicket(LottoGenerator lottoGenerator, List<LottoTicket> manualLottoTickets) {
+    private static ManualTickets generateManualTicket(LottoGenerator lottoGenerator, List<LottoTicket> manualLottoTickets) {
         lottoGenerator.setGenerateStrategy(new ManualStrategy(manualLottoTickets));
-        return lottoGenerator.generateTickets();
+        return (ManualTickets) lottoGenerator.generateTickets();
     }
 
-    private static LottoTickets generateAutoTicket(LottoGenerator lottoGenerator, UserPurchase userPurchase) {
+    private static AutoTickets generateAutoTicket(LottoGenerator lottoGenerator, UserPurchase userPurchase) {
         lottoGenerator.setGenerateStrategy(new AutoStrategy(userPurchase.getAutoTicketCount()));
-        return lottoGenerator.generateTickets();
+        return (AutoTickets) lottoGenerator.generateTickets();
     }
 
     private static int getManualTicketCountInput() {
