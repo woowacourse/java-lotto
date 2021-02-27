@@ -9,16 +9,17 @@ import org.junit.jupiter.api.Test;
 class ManualBuyAmountTest {
 
     @Test
-    @DisplayName("수동구매수 > 총구매수")
+    @DisplayName("실패 - 수동구매수 > 총구매수")
     void getInstance_fail() {
         assertThatThrownBy(() -> ManualBuyAmount.getInstance("2", Money.valueOf("1000")))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    @DisplayName("getValue 테스트")
-    void getValue() {
+    @DisplayName("올바른 수동구매수 반환")
+    void getAmount() {
         ManualBuyAmount manualBuyAmount = ManualBuyAmount.getInstance("1", Money.valueOf("1000"));
-        assertThat(manualBuyAmount.getValue()).isEqualTo(1);
+
+        assertThat(manualBuyAmount.getAmount()).isEqualTo(1);
     }
 }

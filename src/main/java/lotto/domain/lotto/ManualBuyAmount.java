@@ -5,10 +5,10 @@ import lotto.utils.NumericStringValidator;
 
 public final class ManualBuyAmount {
 
-    private final BigInteger value;
+    private final BigInteger amount;
 
-    private ManualBuyAmount(BigInteger value) {
-        this.value = value;
+    private ManualBuyAmount(BigInteger amount) {
+        this.amount = amount;
     }
 
     public static ManualBuyAmount getInstance(String manualAmountInput, Money money) {
@@ -27,22 +27,18 @@ public final class ManualBuyAmount {
     }
 
     private static void validateLessThanTotalAmount(Money money, BigInteger manualAmount) {
-        if (manualAmountIsLessThanTotalAmount(money, manualAmount)) {
+        BigInteger totalAmount = getTotalTicketAmount(money);
+
+        if (totalAmount.compareTo(manualAmount) < 0) {
             throw new IllegalArgumentException("수동 구매 개수는 총 구매 개수 이내만 가능합니다.");
         }
-    }
-
-    private static boolean manualAmountIsLessThanTotalAmount(Money money, BigInteger manualAmount) {
-        BigInteger totalTicketAmount = getTotalTicketAmount(money);
-
-        return totalTicketAmount.compareTo(manualAmount) < 0;
     }
 
     private static BigInteger getTotalTicketAmount(Money money) {
         return money.toBigInteger().divide(LottoTicket.PRICE);
     }
 
-    public BigInteger getValue() {
-        return value;
+    public BigInteger getAmount() {
+        return amount;
     }
 }

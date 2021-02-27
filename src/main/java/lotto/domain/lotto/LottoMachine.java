@@ -26,7 +26,7 @@ public class LottoMachine {
     }
 
     public BigInteger getManualBuyAmount() {
-        return manualBuyAmount.getValue();
+        return manualBuyAmount.getAmount();
     }
 
     public UsersLottoTickets buyTickets(List<String> manualTicketsInput) {
