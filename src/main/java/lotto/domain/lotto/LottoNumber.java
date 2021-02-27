@@ -1,10 +1,11 @@
 package lotto.domain.lotto;
 
 import java.util.Objects;
+import lotto.exception.InvalidLottoNumberException;
 
 public class LottoNumber {
 
-    public static final int MIN = 0;
+    public static final int MIN = 1;
     public static final int MAX = 45;
 
     private final int value;
@@ -15,12 +16,28 @@ public class LottoNumber {
 
     public static LottoNumber valueOf(int value) {
         validateLottoNumber(value);
-        return new LottoNumber(value);
+        return LottoNumberCache.CACHE[value];
     }
 
     private static void validateLottoNumber(int value) {
-        if (value <= MIN || value > MAX) {
-            throw new IllegalArgumentException("로또 번호는 1부터 45사이의 값이어야 합니다.");
+        if (value < LottoNumberCache.LOW || value > LottoNumberCache.HIGH) {
+            throw new InvalidLottoNumberException();
+        }
+    }
+
+    private static class LottoNumberCache {
+
+        static final int LOW;
+        static final int HIGH;
+        static final LottoNumber[] CACHE;
+
+        static {
+            LOW = MIN;
+            HIGH = MAX;
+            CACHE = new LottoNumber[MAX + 1];
+            for (int i = MIN; i <= MAX; i++) {
+                CACHE[i] = new LottoNumber(i);
+            }
         }
     }
 

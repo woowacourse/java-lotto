@@ -1,12 +1,13 @@
 package lotto.domain.lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import java.util.Arrays;
 import java.util.List;
 import lotto.domain.WinningLotto;
-import lotto.model.LottoRank;
-import lotto.model.LottoResult;
+import lotto.domain.LottoRank;
+import lotto.domain.lottoresult.LottoResult;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -35,7 +36,7 @@ public class LottosTest {
         List<Lotto> lottosValue = Arrays.asList(lotto1, lotto2, lotto3, lotto4, lotto5,
             lotto6, lotto7, lotto8, lotto9, lotto10,
             lotto11, lotto12, lotto13, lotto14);
-        lottos = new Lottos(lottosValue);
+        lottos = Lottos.from(lottosValue);
         winningLotto = new WinningLotto(Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)), 7);
     }
 
@@ -55,5 +56,44 @@ public class LottosTest {
 
         // then
         assertThat(lottoResult.getEarningsRate()).isEqualTo(0.35714285714285715);
+    }
+
+    @Test
+    public void match_1등() {
+        Lotto userLotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto winningLotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
+        int result = userLotto.match(winningLotto);
+        assertThat(result).isEqualTo(6);
+    }
+
+    @Test
+    public void match_3등() {
+        Lotto userLotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto winningLotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 7));
+
+        int result = userLotto.match(winningLotto);
+
+        assertThat(result).isEqualTo(5);
+    }
+
+    @Test
+    public void of_중복_값() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 5));
+        });
+    }
+
+    @Test
+    public void of_6개_미만의_값() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            Lotto.of(Arrays.asList(1, 2, 3, 4, 5));
+        });
+    }
+
+    @Test
+    public void of_문자열_isNull() {
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 5));
+        });
     }
 }

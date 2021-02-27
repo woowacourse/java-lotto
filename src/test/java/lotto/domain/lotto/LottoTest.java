@@ -1,5 +1,6 @@
 package lotto.domain.lotto;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import java.util.Arrays;
@@ -25,5 +26,17 @@ public class LottoTest {
         assertThatIllegalArgumentException().isThrownBy(() -> {
             Lotto lotto = Lotto.of(lottoNumbers);
         });
+    }
+
+    @Test
+    void 로또_번호가_존재하는지_검사_테스트() {
+        // given, when
+        Lotto lotto = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNumber includedLottoNumber = LottoNumber.valueOf(5);
+        LottoNumber excludedLottoNumber = LottoNumber.valueOf(10);
+
+        // then
+        assertThat(lotto.isContains(includedLottoNumber)).isTrue();
+        assertThat(lotto.isContains(excludedLottoNumber)).isFalse();
     }
 }

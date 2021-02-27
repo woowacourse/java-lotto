@@ -1,4 +1,4 @@
-package lotto.model;
+package lotto.domain;
 
 import java.util.Objects;
 
@@ -19,6 +19,13 @@ public class Money {
         if (value < 0) {
             throw new IllegalArgumentException("금액은 마이너스가 될 수 없습니다.");
         }
+    }
+
+    public Money minus(int value) {
+        if (this.price < value) {
+            throw new IllegalArgumentException("금액이 부족합니다.");
+        }
+        return Money.priceOf(this.price - value);
     }
 
     public boolean isLessThan(int price) {

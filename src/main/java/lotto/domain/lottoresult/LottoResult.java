@@ -1,9 +1,10 @@
-package lotto.model;
+package lotto.domain.lottoresult;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import lotto.domain.lotto.Lotto;
+import lotto.domain.LottoRank;
 
 public class LottoResult {
 
@@ -23,6 +24,14 @@ public class LottoResult {
         totalPurchaseAmount += Lotto.LOTTO_PRICE;
     }
 
+    public void mergeResult(LottoResult lottoResult) {
+        Map<LottoRank, Integer> mergeResult = lottoResult.getResult();
+        for (LottoRank rank : mergeResult.keySet()) {
+            int numOfMatch = mergeResult.get(rank);
+            result.computeIfPresent(rank, (key, value) -> value += numOfMatch);
+        }
+    }
+
     public int findNumOfMatchByKey(LottoRank lottoRank) {
         return result.get(lottoRank);
     }
@@ -31,11 +40,15 @@ public class LottoResult {
         return result;
     }
 
+    public int getTotalPurchaseAmount() {
+        return totalPurchaseAmount;
+    }
+
     public double getEarningsRate() {
         return (double) getTotalPrize() / (double) totalPurchaseAmount;
     }
 
-    private int getTotalPrize() {
+    public int getTotalPrize() {
         int totalPrize = 0;
         for (Entry<LottoRank, Integer> entry : result.entrySet()) {
             totalPrize += (entry.getKey().getPrize() * entry.getValue());

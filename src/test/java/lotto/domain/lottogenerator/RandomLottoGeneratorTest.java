@@ -27,6 +27,7 @@ class RandomLottoGeneratorTest {
     @DisplayName("랜덤으로 생성된 번호들은 서로 중복되면 안된다.")
     @Test
     void 번호_중복_테스트() {
-        assertThat(lottoNumbers).extracting(lottoNumber -> lottoNumber.getValue()).doesNotHaveDuplicates();
+        assertThat(lottoNumbers).extracting(lottoNumber -> lottoNumber.getValue())
+            .doesNotHaveDuplicates();
     }
 }
