@@ -3,10 +3,8 @@ package lotto.domain;
 import lotto.exception.LottoCustomException;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Lotto {
     private static final int LOTTO_SIZE = 6;
@@ -16,16 +14,6 @@ public class Lotto {
     public Lotto(final Set<LottoNumber> lottoNumbers) {
         validate(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
-    }
-
-    public Lotto(final List<Integer> numbers) {
-        final Set<LottoNumber> lottoNumbers = convertToSet(numbers);
-        validate(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
-    }
-
-    private Set<LottoNumber> convertToSet(List<Integer> numbers) {
-        return numbers.stream().map(LottoNumber::from).collect(Collectors.toSet());
     }
 
     private void validate(Set<LottoNumber> lottoNumbers) {
