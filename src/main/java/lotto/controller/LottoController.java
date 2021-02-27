@@ -1,26 +1,19 @@
 package lotto.controller;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
-import java.util.stream.Collectors;
 import lotto.Money;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.LottoResult;
 import lotto.domain.lotto.LottoStore;
 import lotto.domain.lotto.Lottos;
+import lotto.domain.lotto.NumManualLotto;
 import lotto.domain.lotto.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
 
-    public static final String REGEX = ", ";
-    private final InputView inputView;
-
-    public LottoController(Scanner scanner) {
-        this.inputView = new InputView(scanner);
+    public LottoController() {
     }
 
     public void play() {
@@ -35,17 +28,16 @@ public class LottoController {
     }
 
     private WinningLotto createWinningLotto() {
-        List<Integer> winningNumbers = createWinningNumbers();
+        Lotto winningLotto = createWinningNumbers();
         Integer bonusNumber = createBonusNUmber();
-        return WinningLotto.generatedBy(Lotto.generatedBy(winningNumbers),
+        return WinningLotto.generate(winningLotto,
             LottoNumber.valueOf(bonusNumber));
     }
 
     private void compareLotto(Lottos purchasedLottos, WinningLotto winningLotto) {
         LottoResult lottoResult = new LottoResult();
-        for (Lotto lotto : purchasedLottos.getLottos()) {
-            lottoResult.checkWinningLotto(lotto, winningLotto);
-        }
+
+        purchasedLottos.check(lottoResult, winningLotto);
 
         OutputView.totalWinning();
         OutputView.numMatchPrint(lottoResult);
@@ -53,37 +45,42 @@ public class LottoController {
     }
 
     private Lottos createLottos() {
-        Money money = startMoney();
         LottoStore lottoStore = new LottoStore();
-        Lottos purchasedLottos = lottoStore.buyLottos(money);
-
-        OutputView.numPurchasedLotto(purchasedLottos.size());
+        Money money = startMoney();
+        NumManualLotto numManualLotto = buyManualLotto();
+        lottoStore.validNumManualLotto(money, numManualLotto);
+        Lottos purchasedLottos = lottoStore.buyLottos(money, numManualLotto);
+        OutputView
+            .numPurchasedLotto(getNumManualLotto(numManualLotto), purchasedLottos.getNumAutoLotto(
+                numManualLotto));
         OutputView.lottosPrint(purchasedLottos);
-
         return purchasedLottos;
+    }
 
+    private Integer getNumManualLotto(NumManualLotto numManualLotto) {
+        return numManualLotto.getNumLotto();
+    }
+
+    private NumManualLotto buyManualLotto() {
+        OutputView.inputNumManualLotto();
+        return InputView.inputNumManualLotto();
     }
 
     private Money startMoney() {
         OutputView.inputMoney();
-        return inputView.inputMoney();
+        return InputView.inputMoney();
     }
 
 
-    private List<Integer> createWinningNumbers() {
+    private Lotto createWinningNumbers() {
         OutputView.inputWinningNumber();
-        String winningNumbers = inputView.inputWinningNumbers();
-        List<Integer> lottoNumbers = Arrays
-            .stream(winningNumbers
-                .split(REGEX))
-            .map(Integer::parseInt)
-            .collect(Collectors.toList());
-        return lottoNumbers;
+        String winningNumbers = InputView.inputWinningNumbers();
+        return Lotto.manual(winningNumbers);
     }
 
     private Integer createBonusNUmber() {
         OutputView.inputBonus();
-        String bonusNumber = inputView.inputBonusNumber();
+        String bonusNumber = InputView.inputBonusNumber();
         return Integer.parseInt(bonusNumber);
     }
 }

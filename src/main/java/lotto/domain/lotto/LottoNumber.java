@@ -1,6 +1,9 @@
 package lotto.domain.lotto;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 public class LottoNumber {
 
@@ -9,6 +12,12 @@ public class LottoNumber {
     public static final int NUM_LOTTO_LIMIT = 6;
     public static final String LOTTO_RANGE_ERROR_MESSAGE = "로또 범위 내의 값을 입력하여 주세요.";
     private final int value;
+    private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
+
+    static {
+        IntStream.rangeClosed(MIN_LOTTO_LIMIT, MAX_LOTTO_LIMIT)
+            .forEach(i -> lottoNumbers.put(i, new LottoNumber(i)));
+    }
 
     private LottoNumber(int value) {
         this.value = value;
@@ -16,7 +25,7 @@ public class LottoNumber {
 
     public static LottoNumber valueOf(int value) {
         validateLottoNumber(value);
-        return new LottoNumber(value);
+        return lottoNumbers.get(value);
     }
 
     private static void validateLottoNumber(int value) {

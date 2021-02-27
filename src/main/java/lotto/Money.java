@@ -1,33 +1,39 @@
 package lotto;
 
+import lotto.domain.lotto.LottoStore;
+import lotto.domain.lotto.NumManualLotto;
+
 public class Money {
 
-    public static final String POSITIVE_ERROR_MESSAGE = "음수는 불가능합니다.";
-    public static final String SPACE_ERROR_MESSAGE = "공백은 불가능합니다.";
+    private static final String ERROR_POSITIVE = "음수는 불가능합니다.";
+    private static final String ERROR_CONVERT_INT = "공백이나 숫자가 아닌 값은 불가능합니다.";
     private int price;
 
-    public Money(String price) {
-        validMoney(price);
+    public Money(String money) {
+        int price = convertInt(money);
         validPositive(price);
-        this.price = Integer.parseInt(price);
+        this.price = price;
     }
 
-    private void validPositive(String price) {
-        if (Integer.parseInt(price) < 0) {
-            throw new IllegalArgumentException(POSITIVE_ERROR_MESSAGE);
-        }
-    }
-
-    private void validMoney(String price) {
+    private int convertInt(String price) {
         try {
-            Integer.parseInt(price);
+            return Integer.parseInt(price);
         } catch (Exception error) {
-            throw new IllegalArgumentException(SPACE_ERROR_MESSAGE);
+            throw new IllegalArgumentException(ERROR_CONVERT_INT);
         }
     }
 
+    private void validPositive(int price) {
+        if (price < 0) {
+            throw new IllegalArgumentException(ERROR_POSITIVE);
+        }
+    }
 
-    public int getPrice(){
+    public int getPrice() {
         return this.price;
+    }
+
+    public int getAvailableNumManualLotto(NumManualLotto numManualLotto) {
+        return this.price - (numManualLotto.getNumLotto() * LottoStore.LOTTO_PRICE);
     }
 }

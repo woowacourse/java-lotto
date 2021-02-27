@@ -14,7 +14,17 @@ public class Lottos {
         return values.size();
     }
 
-    public List<Lotto> getLottos(){
+    public List<Lotto> getLottos() {
         return this.values;
+    }
+
+    public void check(LottoResult lottoResult, WinningLotto winningLotto) {
+        for (Lotto lotto : values) {
+            lottoResult.checkWinningLotto(lotto, winningLotto);
+        }
+    }
+
+    public Integer getNumAutoLotto(NumManualLotto numManualLotto) {
+        return this.values.size() - numManualLotto.getNumLotto();
     }
 }

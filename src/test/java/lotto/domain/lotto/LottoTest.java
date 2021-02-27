@@ -16,7 +16,7 @@ public class LottoTest {
     @Test
     void 로또_번호_길이_테스트() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            Lotto lotto = Lotto.generatedBy(Arrays.asList(1, 2, 3, 4, 5));
+            Lotto lotto = Lotto.generate(Arrays.asList(1, 2, 3, 4, 5));
         });
     }
 
@@ -24,14 +24,14 @@ public class LottoTest {
     @Test
     void 로또_번호_중복_테스트() {
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            Lotto lotto = Lotto.generatedBy(Arrays.asList(1, 1, 2, 3, 4, 5));
+            Lotto lotto = Lotto.generate(Arrays.asList(1, 1, 2, 3, 4, 5));
         });
     }
 
     @RepeatedTest(10)
     void 로또_번호_랜덤_생성_테스트() {
         // given, when
-        Lotto lotto1 = Lotto.generatedBy(new RandomLottoGenerator());
+        Lotto lotto1 = Lotto.generate(new RandomLottoGenerator());
 
         // then
         lotto1.getNumbers()
@@ -45,7 +45,7 @@ public class LottoTest {
     void 로또_구매_수량_테스트() {
         Money money = new Money("14990");
         LottoStore lottoStore = new LottoStore();
-        Lottos lottos = lottoStore.buyLottos(money);
+        Lottos lottos = lottoStore.buyLottos(money, new NumManualLotto());
 
         assertThat(lottos.size()).isEqualTo(14);
     }

@@ -10,19 +10,21 @@ import lotto.domain.lotto.Lottos;
 
 public class OutputView {
 
-    public static final String SUFFIX_PURCHASE_SUCCESS = "개를 구매했습니다.";
-    public static final String RESULT_MESSAGE_SKELETON = "%d개 일치%s(%d원) - %d개";
-    public static final String INPUT_PURCHASE_PRICE = "구입금액을 입력해 주세요.";
-    public static final String INPUT_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
-    public static final String INPUT_BONUS_NUMBER = "보너스 번호를 입력해 주세요.";
-    public static final String WINNING_STATICS = "당첨 통계";
-    public static final String BOUNDARY = "---------";
-    public static final String SPACE = "";
-    public static final String BONUS_BALL_COLLECT = ", 보너스 볼 일치";
-    public static final String TOTAL_PROFIT_RATE = "총 수익률은 %.2f 입니다.";
+    private static final String BUY_COUNT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
+    private static final String RESULT_MESSAGE_SKELETON = "%d개 일치%s(%d원) - %d개";
+    private static final String INPUT_PURCHASE_PRICE = "구입금액을 입력해 주세요.";
+    private static final String INPUT_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String INPUT_BONUS_NUMBER = "보너스 번호를 입력해 주세요.";
+    private static final String WINNING_STATICS = "당첨 통계";
+    private static final String BOUNDARY = "---------";
+    private static final String SPACE = "";
+    private static final String BONUS_BALL_COLLECT = ", 보너스 볼 일치";
+    private static final String TOTAL_PROFIT_RATE = "총 수익률은 %.2f 입니다.";
+    private static final String NUM_MANUAL_LOTTO = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String MANUAL_LOTTO_PRINT = "수동으로 구매할 번호를 입력해 주세요";
 
-    public static void numPurchasedLotto(Integer numLotto) {
-        System.out.println(numLotto + SUFFIX_PURCHASE_SUCCESS);
+    public static void numPurchasedLotto(Integer numManualLotto, Integer numAutoLotto) {
+        System.out.println(String.format(BUY_COUNT, numManualLotto, numAutoLotto));
     }
 
     public static void inputMoney() {
@@ -89,5 +91,13 @@ public class OutputView {
 
     public static void errorPrint(Exception error) {
         System.out.println(error.getMessage());
+    }
+
+    public static void inputNumManualLotto() {
+        System.out.println(NUM_MANUAL_LOTTO);
+    }
+
+    public static void manualNumberPrint() {
+        System.out.println(MANUAL_LOTTO_PRINT);
     }
 }

@@ -17,9 +17,9 @@ public class LottoResultTest {
 
     @Test
     void 로또_일치_갯수_테스트() {
-        Lotto testLotto = Lotto.generatedBy(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto testLotto2 = Lotto.generatedBy(Arrays.asList(6, 7, 3, 9, 10, 11));
-        WinningLotto winningLotto = WinningLotto.generatedBy(testLotto2, LottoNumber.valueOf(20));
+        Lotto testLotto = Lotto.generate(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto testLotto2 = Lotto.generate(Arrays.asList(6, 7, 3, 9, 10, 11));
+        WinningLotto winningLotto = WinningLotto.generate(testLotto2, LottoNumber.valueOf(20));
 
         LottoResult lottoResult = new LottoResult();
         lottoResult.checkWinningLotto(testLotto, winningLotto);
@@ -32,8 +32,8 @@ public class LottoResultTest {
 
     @Test
     void 로또_당첨_카운팅_테스트() {
-        Lotto testLotto = Lotto.generatedBy(Arrays.asList(1, 2, 3, 4, 5, 6));
-        WinningLotto winningLotto = WinningLotto.generatedBy(testLotto, LottoNumber.valueOf(10));
+        Lotto testLotto = Lotto.generate(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinningLotto winningLotto = WinningLotto.generate(testLotto, LottoNumber.valueOf(10));
 
         LottoResult lottoResult = new LottoResult();
         lottoResult.checkWinningLotto(testLotto, winningLotto);
@@ -47,8 +47,8 @@ public class LottoResultTest {
 
     @Test
     void 로또_수익률_최고_테스트() {
-        Lotto testLotto = Lotto.generatedBy(Arrays.asList(1, 2, 3, 4, 5, 6));
-        WinningLotto winningLotto = WinningLotto.generatedBy(testLotto, LottoNumber.valueOf(10));
+        Lotto testLotto = Lotto.generate(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinningLotto winningLotto = WinningLotto.generate(testLotto, LottoNumber.valueOf(10));
         LottoResult lottoResult = new LottoResult();
 
         lottoResult.checkWinningLotto(testLotto, winningLotto);
@@ -59,9 +59,9 @@ public class LottoResultTest {
     @Test
     void 로또_수익률_일반_테스트() {
 
-        Lotto testLotto = Lotto.generatedBy(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto testLotto2 = Lotto.generatedBy(Arrays.asList(4, 5, 6, 7, 8, 9));
-        WinningLotto winningLotto = WinningLotto.generatedBy(testLotto2, LottoNumber.valueOf(10));
+        Lotto testLotto = Lotto.generate(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto testLotto2 = Lotto.generate(Arrays.asList(4, 5, 6, 7, 8, 9));
+        WinningLotto winningLotto = WinningLotto.generate(testLotto2, LottoNumber.valueOf(10));
         LottoResult lottoResult = new LottoResult();
         lottoResult.checkWinningLotto(testLotto, winningLotto);
         System.out.println(lottoResult.getResult());

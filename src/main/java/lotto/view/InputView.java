@@ -2,25 +2,33 @@ package lotto.view;
 
 import java.util.Scanner;
 import lotto.Money;
-import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.NumManualLotto;
 
 public class InputView {
 
-    private final Scanner scanner;
+    private static final Scanner scanner = new Scanner(System.in);
 
-    public InputView(Scanner scanner) {
-        this.scanner = scanner;
+    private InputView(Scanner scanner){
+
     }
 
-    public Money inputMoney() {
+    public static Money inputMoney() {
         return new Money(scanner.nextLine());
     }
 
-    public String inputWinningNumbers() {
+    public static String inputWinningNumbers() {
         return scanner.nextLine();
     }
 
-    public String inputBonusNumber() {
+    public static String inputBonusNumber() {
+        return scanner.nextLine();
+    }
+
+    public static NumManualLotto inputNumManualLotto() {
+        return new NumManualLotto(scanner.nextLine());
+    }
+
+    public static String inputManualLottoNumber() {
         return scanner.nextLine();
     }
 }
