@@ -7,9 +7,6 @@ import java.util.stream.Stream;
 
 public class LottoMachine {
 
-    private LottoMachine() {
-    }
-
     public static List<LottoTicket> generateAutoLottoTickets(int numOfTickets) {
         return Stream
             .generate(() -> LottoTicket.valueOf(RandomLottoNumberGenerator.generate()))
