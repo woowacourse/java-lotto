@@ -1,10 +1,10 @@
+import domain.LottoMachine;
 import domain.bettingMoney.BettingMoney;
 import domain.lotto.LottoTicket;
 import domain.lotto.LottoTickets;
 import domain.lotto.TicketCount;
 import domain.lotto.WinningLotto;
 import domain.result.Result;
-import service.LottoService;
 import view.InputView;
 import view.LottoGameScreen;
 import view.dto.LottoGameResultDto;
@@ -16,12 +16,10 @@ import java.util.Set;
 
 public class GameManageApplication {
     private final LottoGameScreen lottoGameScreen;
-    private final LottoService lottoService;
     private final InputView inputView;
 
-    public GameManageApplication(final LottoGameScreen lottoGameScreen, final LottoService lottoService, final InputView inputView) {
+    public GameManageApplication(final LottoGameScreen lottoGameScreen, final InputView inputView) {
         this.lottoGameScreen = lottoGameScreen;
-        this.lottoService = lottoService;
         this.inputView = inputView;
     }
 
@@ -40,17 +38,18 @@ public class GameManageApplication {
         return new BettingMoney(input);
     }
 
-    private LottoTickets getLottoTickets(TicketCount ticketCount) {
+    private LottoTickets getLottoTickets(final TicketCount ticketCount) {
         int manualTicketCount = inputView.inputManualTicketCount();
         TicketCount randomTicketCount = ticketCount.reduceTicketCount(manualTicketCount);
         List<List<Integer>> manualTicketsNumbers = getManualTicketsNumbers(manualTicketCount);
 
-        LottoTickets lottoTickets = lottoService.makeLottoTickets(manualTicketsNumbers, randomTicketCount);
+        LottoMachine lottoMachine = new LottoMachine();
+        LottoTickets lottoTickets = lottoMachine.makeLottoTickets(manualTicketsNumbers, randomTicketCount);
         lottoGameScreen.showAllLottoStatus(lottoTickets.getLottoTickets());
         return lottoTickets;
     }
 
-    private List<List<Integer>> getManualTicketsNumbers(int manualTicketCount) {
+    private List<List<Integer>> getManualTicketsNumbers(final int manualTicketCount) {
         if (manualTicketCount == 0) {
             return new ArrayList<>(Collections.emptyList());
         }
