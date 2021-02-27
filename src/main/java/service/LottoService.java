@@ -4,7 +4,6 @@ import domain.LottoMachine;
 import domain.lotto.LottoTicket;
 import domain.lotto.LottoTickets;
 import domain.lotto.TicketCount;
-import view.InputView;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,19 +16,19 @@ public class LottoService {
         this.lottoMachine = lottoMachine;
     }
 
-    public LottoTickets getLottoTickets(final InputView inputView, final TicketCount ticketCount, int manualTicketCount) {
-        TicketCount randomTicketCount = ticketCount.reduceTicketCount(manualTicketCount);
-        List<LottoTicket> manualLottoTickets = getManualTickets(inputView, manualTicketCount);
-        List<LottoTicket> randomLottoTickets = getRandomLottoTickets(randomTicketCount.getTicketCount());
+
+    public LottoTickets getLottoTickets(final List<List<Integer>> manualTicketsNumbers, final TicketCount randomTicketCount) {
+        List<LottoTicket> manualLottoTickets = getManualTickets(manualTicketsNumbers);
+        List<LottoTicket> randomLottoTickets = getRandomLottoTickets(randomTicketCount);
         List<LottoTicket> lottoTickets = Stream.concat(manualLottoTickets.stream(), randomLottoTickets.stream()).collect(Collectors.toList());
         return new LottoTickets(lottoTickets);
     }
 
-    private List<LottoTicket> getRandomLottoTickets(final int randomTicketCount) {
-        return lottoMachine.makeRandomTickets(randomTicketCount);
+    private List<LottoTicket> getRandomLottoTickets(final TicketCount randomTicketCount) {
+        return lottoMachine.makeRandomTickets(randomTicketCount.getTicketCount());
     }
 
-    private List<LottoTicket> getManualTickets(final InputView inputView, final int ticketCount) {
-        return lottoMachine.makeManualTickets(inputView, ticketCount);
+    private List<LottoTicket> getManualTickets(final List<List<Integer>> manualTicketsNumbers) {
+        return lottoMachine.makeManualTickets(manualTicketsNumbers);
     }
 }

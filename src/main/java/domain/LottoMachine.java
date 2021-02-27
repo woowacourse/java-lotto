@@ -23,12 +23,9 @@ public class LottoMachine {
         return new LottoTicket(new LottoBalls(lottoBalls));
     }
 
-    public List<LottoTicket> makeManualTickets(final List<Integer> manualTicketNumbers, final int ticketCount) {
-        if (ticketCount == 0) {
-            return Collections.emptyList();
-        }
-        return IntStream.range(0, ticketCount)
-                .mapToObj(count -> makeManualTicket(manualTicketNumbers))
+    public List<LottoTicket> makeManualTickets(final List<List<Integer>> manualTicketsNumbers) {
+        return manualTicketsNumbers.stream()
+                .map(this::makeManualTicket)
                 .collect(Collectors.toList());
     }
 

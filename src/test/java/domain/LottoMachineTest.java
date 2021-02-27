@@ -17,14 +17,6 @@ class LottoMachineTest {
 
     public static final LottoMachine DUMMY_LOTTO_MACHINE = new LottoMachine();
 
-    private InputView getInputView(String inputText) {
-        InputStream inputStream = new ByteArrayInputStream(inputText.getBytes());
-        System.setIn(System.in);
-        Scanner scanner = new Scanner(inputStream);
-        InputView inputView = new InputView(scanner);
-        return inputView;
-    }
-
     @DisplayName("로또 머신에게 구매 갯수를 넘겨주면 랜덤으로 만들어진 티켓을 반환한다.")
     @Test
     void lottoTicketMakeTest() {
@@ -43,9 +35,11 @@ class LottoMachineTest {
     void manualLottoTicketTest() {
         //given
         List<Integer> manualNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<Integer> manualNumbers2 = Arrays.asList(11, 12, 13, 14, 15, 45);
+        List<List<Integer>> manualTicketsNumbers = Arrays.asList(manualNumbers, manualNumbers2);
 
         //when
-        assertThatCode(() -> DUMMY_LOTTO_MACHINE.makeManualTickets(manualNumbers, 1))
+        assertThatCode(() -> DUMMY_LOTTO_MACHINE.makeManualTickets(manualTicketsNumbers))
                 .doesNotThrowAnyException();
     }
 
@@ -54,15 +48,14 @@ class LottoMachineTest {
     void manualLottoTicketInputErrorTest() {
         //given
         List<Integer> duplicateManualNumber = Arrays.asList(1, 2, 3, 4, 5, 5);
-        List<Integer> negativeManualNumbers2 = Arrays.asList(-1, 1, 2, 3, 4, 5);
-        List<Integer> overManualNumbers3 = Arrays.asList(1, 2, 3, 4, 5, 46);
+        List<Integer> negativeManualNumbers = Arrays.asList(-1, 1, 2, 3, 4, 5);
+        List<Integer> overManualNumbers = Arrays.asList(1, 2, 3, 4, 5, 46);
+
+        //when
+        List<List<Integer>> manualTicketsNumbers = Arrays.asList(duplicateManualNumber, negativeManualNumbers, overManualNumbers);
 
         //then
-        assertThatThrownBy(() -> DUMMY_LOTTO_MACHINE.makeManualTickets(duplicateManualNumber, 1))
-                .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> DUMMY_LOTTO_MACHINE.makeManualTickets(negativeManualNumbers2, 1))
-                .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> DUMMY_LOTTO_MACHINE.makeManualTickets(overManualNumbers3, 1))
+        assertThatThrownBy(() -> DUMMY_LOTTO_MACHINE.makeManualTickets(manualTicketsNumbers))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

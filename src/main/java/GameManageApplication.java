@@ -9,6 +9,9 @@ import view.InputView;
 import view.LottoGameScreen;
 import view.dto.LottoGameResultDto;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 public class GameManageApplication {
@@ -26,10 +29,30 @@ public class GameManageApplication {
         BettingMoney bettingMoney = getBettingMoney();
         TicketCount ticketCount = bettingMoney.getTicketCount(LottoTicket.TICKET_PRICE);
         lottoGameScreen.showTicketCount(ticketCount);
-        LottoTickets lottoTickets = lottoService.getLottoTickets(inputView, ticketCount, inputView.inputManualTicketCount());
-        lottoGameScreen.showAllLottoStatus(lottoTickets.getLottoTickets());
-
+        LottoTickets lottoTickets = getLottoTickets(ticketCount);
         viewGameResult(bettingMoney, lottoTickets);
+    }
+
+    private BettingMoney getBettingMoney() {
+        int input = inputView.inputBettingMoney();
+        return new BettingMoney(input);
+    }
+
+    private LottoTickets getLottoTickets(TicketCount ticketCount) {
+        int manualTicketCount = inputView.inputManualTicketCount();
+        TicketCount randomTicketCount = ticketCount.reduceTicketCount(manualTicketCount);
+        List<List<Integer>> manualTicketsNumbers = getManualTicketsNumbers(manualTicketCount);
+
+        LottoTickets lottoTickets = lottoService.getLottoTickets(manualTicketsNumbers, randomTicketCount);
+        lottoGameScreen.showAllLottoStatus(lottoTickets.getLottoTickets());
+        return lottoTickets;
+    }
+
+    private List<List<Integer>> getManualTicketsNumbers(int manualTicketCount) {
+        if (manualTicketCount == 0) {
+            return new ArrayList<>(Collections.emptyList());
+        }
+        return inputView.inputManualTicketNumber(manualTicketCount);
     }
 
     private void viewGameResult(BettingMoney bettingMoney, LottoTickets lottoTickets) {
@@ -37,11 +60,6 @@ public class GameManageApplication {
         Result result = new Result(lottoTickets, winningLotto);
         lottoGameScreen.showGameResult(new LottoGameResultDto(result.getResults()));
         lottoGameScreen.showRevenueResult(result.findEarningsRate(bettingMoney));
-    }
-
-    private BettingMoney getBettingMoney() {
-        int input = inputView.inputBettingMoney();
-        return new BettingMoney(input);
     }
 
     private WinningLotto getWinningLotto() {
