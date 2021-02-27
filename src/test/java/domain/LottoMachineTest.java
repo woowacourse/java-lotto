@@ -3,12 +3,11 @@ package domain;
 import domain.lotto.LottoTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 import view.InputView;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -43,23 +42,27 @@ class LottoMachineTest {
     @Test
     void manualLottoTicketTest() {
         //given
-        String manualLottoNumber = "1,2,3,4,5,6";
-        InputView inputView = getInputView(manualLottoNumber);
+        List<Integer> manualNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 
         //when
-        assertThatCode(() -> DUMMY_LOTTO_MACHINE.makeManualTickets(inputView, 1))
+        assertThatCode(() -> DUMMY_LOTTO_MACHINE.makeManualTickets(manualNumbers, 1))
                 .doesNotThrowAnyException();
     }
 
     @DisplayName("보장된 로또번호가 아닐시 입력시 에러가 발생한(보장된 로또 번호 중복되지 않은 1~45의 숫자이며, 중복되지 않은 6개의 숫자)")
-    @ParameterizedTest
-    @ValueSource(strings = {"1,2,3,4,5,5", "-1,1,2,3,4,5", "1,2,3,4,5,46"})
-    void manualLottoTicketInputErrorTest(String manualLottoNumber) {
+    @Test
+    void manualLottoTicketInputErrorTest() {
         //given
-        InputView inputView = getInputView(manualLottoNumber);
+        List<Integer> duplicateManualNumber = Arrays.asList(1, 2, 3, 4, 5, 5);
+        List<Integer> negativeManualNumbers2 = Arrays.asList(-1, 1, 2, 3, 4, 5);
+        List<Integer> overManualNumbers3 = Arrays.asList(1, 2, 3, 4, 5, 46);
 
-        //when
-        assertThatThrownBy(() -> DUMMY_LOTTO_MACHINE.makeManualTickets(inputView, 1))
+        //then
+        assertThatThrownBy(() -> DUMMY_LOTTO_MACHINE.makeManualTickets(duplicateManualNumber, 1))
+                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> DUMMY_LOTTO_MACHINE.makeManualTickets(negativeManualNumbers2, 1))
+                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> DUMMY_LOTTO_MACHINE.makeManualTickets(overManualNumbers3, 1))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

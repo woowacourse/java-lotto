@@ -3,8 +3,6 @@ package domain;
 import domain.ball.LottoBall;
 import domain.ball.LottoBalls;
 import domain.lotto.LottoTicket;
-import util.OutputUtil;
-import view.InputView;
 
 import java.util.Collections;
 import java.util.List;
@@ -25,18 +23,16 @@ public class LottoMachine {
         return new LottoTicket(new LottoBalls(lottoBalls));
     }
 
-    public List<LottoTicket> makeManualTickets(final InputView inputView, final int ticketCount) {
+    public List<LottoTicket> makeManualTickets(final List<Integer> manualTicketNumbers, final int ticketCount) {
         if (ticketCount == 0) {
             return Collections.emptyList();
         }
-        OutputUtil.printMessage("수동으로 구매할 번호를 입력해 주세요.");
         return IntStream.range(0, ticketCount)
-                .mapToObj(count -> makeManualTicket(inputView))
+                .mapToObj(count -> makeManualTicket(manualTicketNumbers))
                 .collect(Collectors.toList());
     }
 
-    private LottoTicket makeManualTicket(final InputView inputView) {
-        List<Integer> manualTicketNumbers = inputView.inputManualTicketNumber();
+    private LottoTicket makeManualTicket(final List<Integer> manualTicketNumbers) {
         List<LottoBall> lottoBalls = manualTicketNumbers.stream()
                 .map(LottoBall::from)
                 .collect(Collectors.toList());
