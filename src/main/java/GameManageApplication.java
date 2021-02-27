@@ -28,6 +28,10 @@ public class GameManageApplication {
         LottoTickets lottoTickets = lottoService.getLottoTickets(inputView, ticketCount, inputView.inputManualTicketCount());
         lottoGameScreen.showAllLottoStatus(lottoTickets.getLottoTickets());
 
+        viewGameResult(bettingMoney, lottoTickets);
+    }
+
+    private void viewGameResult(BettingMoney bettingMoney, LottoTickets lottoTickets) {
         WinningLotto winningLotto = getWinningLotto();
         Result result = new Result(lottoTickets, winningLotto);
         lottoGameScreen.showGameResult(new LottoGameResultDto(result.getResults()));
