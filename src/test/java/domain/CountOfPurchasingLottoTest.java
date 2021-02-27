@@ -19,4 +19,17 @@ class CountOfPurchasingLottoTest {
         //then
         assertThat(countOfPurchasingLotto).isNotNull();
     }
+
+    @DisplayName("CountOfLotto의 값을 1 감소시키는 기능")
+    @Test
+    void purchaseLotto() {
+        //given
+        CountOfPurchasingLotto countOfPurchasingLotto = new CountOfPurchasingLotto(2);
+
+        //when
+        countOfPurchasingLotto.purchaseLotto();
+
+        //then
+        assertThat(countOfPurchasingLotto).isEqualTo(new CountOfPurchasingLotto(1));
+    }
 }
