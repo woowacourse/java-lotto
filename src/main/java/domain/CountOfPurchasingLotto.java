@@ -3,15 +3,27 @@ package domain;
 import java.util.Objects;
 
 public class CountOfPurchasingLotto {
+    private static final int ZERO = 0;
 
     private int value;
 
     public CountOfPurchasingLotto(int value) {
+        validateCountOfPurchasingLotto(value);
         this.value = value;
+    }
+
+    private void validateCountOfPurchasingLotto(int value) {
+        if (value < 0) {
+            throw new IllegalArgumentException("로또 개수는 음수일 수 없습니다.");
+        }
     }
 
     public void purchaseLotto() {
         value--;
+    }
+
+    public boolean isPurchasingLottoLeft() {
+        return value > ZERO;
     }
 
     @Override
