@@ -5,7 +5,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -41,12 +42,14 @@ class WinningResultTest {
         return Money.valueOf(3000);
     }
 
-    List<LottoTicket> createValidLottoTickets() {
-        return Arrays.asList(
-                LottoTicket.valueOf(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                LottoTicket.valueOf(Arrays.asList(4, 5, 6, 7, 8, 9)),
-                LottoTicket.valueOf(Arrays.asList(1, 2, 3, 4, 5, 9))
-        );
+    LottoTickets createValidLottoTickets() {
+        return LottoTickets.valueOf(createValidPrice(),
+            Stream.<String>builder()
+                .add("1, 2, 3, 4, 5, 6")
+                .add("4, 5, 6, 7, 8, 9")
+                .add("1, 2, 3, 4, 5, 9")
+                .build()
+                .collect(Collectors.toList()));
     }
 
     WinningNumbers createValidWinningNumbers() {

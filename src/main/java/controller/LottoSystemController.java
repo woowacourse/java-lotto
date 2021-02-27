@@ -1,9 +1,6 @@
 package controller;
 
-import domain.LottoManager;
-import domain.Ranking;
-import domain.WinningNumbers;
-import domain.WinningResult;
+import domain.*;
 import view.InputView;
 import view.OutputView;
 
@@ -12,27 +9,20 @@ import java.util.Arrays;
 public class LottoSystemController {
 
     public void run() {
-        LottoManager lottoManager = LottoManager.init(InputView.receiveMoney(),
-            InputView.receiveManualTickets());
-        printLottoTicketsInfo(lottoManager);
-        printLottoResult(lottoManager);
+        Money money = Money.valueOf(InputView.receiveMoney());
+        LottoTickets lottoTickets= LottoTickets.valueOf(money, InputView.receiveManualTickets());
+
+        printLottoTicketsInfo(lottoTickets);
+        printLottoResult(lottoTickets, money);
     }
 
-    private void printLottoTicketsInfo(LottoManager lottoManager) {
-        OutputView.printNumberOfTickets(lottoManager.getLottoQuantity());
-        OutputView.printLottoTickets(lottoManager.getLottoTickets());
+    private void printLottoTicketsInfo(LottoTickets lottoTickets) {
+        OutputView.printNumberOfTickets(lottoTickets.getLottoQuantity());
+        OutputView.printLottoTickets(lottoTickets.toList());
     }
 
-    private WinningResult calculateWinningResult(LottoManager lottoManager) {
-        return lottoManager.getWinningResult(
-            WinningNumbers.valueOf(
-                InputView.receiveWinningNumbers(),
-                InputView.receiveBonusNumber()
-            ));
-    }
-
-    private void printLottoResult(LottoManager lottoManager) {
-        WinningResult winningResult = calculateWinningResult(lottoManager);
+    private void printLottoResult(LottoTickets lottoTickets, Money money) {
+        WinningResult winningResult = calculateWinningResult(lottoTickets, money);
         OutputView.printRankResultTitle();
         Arrays.stream(Ranking.values())
             .filter(ranking -> ranking != Ranking.NOTHING)
@@ -40,5 +30,13 @@ public class LottoSystemController {
                 OutputView.printIndividualRankResult(winningResult.countNumberOfRank(ranking), ranking));
 
         OutputView.printTotalProfitRate(winningResult.calculateProfitRate());
+    }
+
+    private WinningResult calculateWinningResult(LottoTickets lottoTickets, Money money) {
+        return new WinningResult(
+            WinningNumbers.valueOf(
+                InputView.receiveWinningNumbers(),
+                InputView.receiveBonusNumber()
+            ), lottoTickets, money);
     }
 }

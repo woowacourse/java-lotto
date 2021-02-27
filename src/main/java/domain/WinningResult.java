@@ -7,7 +7,7 @@ public class WinningResult {
     private final Money money;
     private final List<Ranking> rankings;
 
-    public WinningResult(WinningNumbers winningNumbers, List<LottoTicket> lottoTickets,
+    public WinningResult(WinningNumbers winningNumbers, LottoTickets lottoTickets,
                          Money money) {
         this.rankings = winningNumbers.calculateRankings(lottoTickets);
         this.money = money;

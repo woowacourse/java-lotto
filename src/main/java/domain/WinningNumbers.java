@@ -26,8 +26,8 @@ public class WinningNumbers {
         }
     }
 
-    public List<Ranking> calculateRankings(final List<LottoTicket> lottoTickets) {
-        return lottoTickets.stream()
+    public List<Ranking> calculateRankings(final LottoTickets lottoTickets) {
+        return lottoTickets.toList().stream()
             .map(this::checkRanking)
             .collect(Collectors.toList());
     }
