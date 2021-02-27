@@ -1,13 +1,13 @@
 package lotto.view;
 
-
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Lottos;
 import lotto.model.LottoRank;
-import lotto.model.LottoResults;
+import lotto.model.LottoResultsDto;
 
 public class OutputView {
 
@@ -55,27 +55,24 @@ public class OutputView {
         System.out.println("보너스 볼을 입력해 주세요.");
     }
 
-    public static void printLottoResult(LottoResults lottoResults) {
+    public static void printLottoResult(LottoResultsDto lottoResultsDto) {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
-        List<LottoRank> sortedResultKey = sortedResultKey(lottoResults.toMap().keySet());
+        Map<LottoRank, Integer> result = lottoResultsDto.getResult();
+        List<LottoRank> sortedResultKey = sortResultKey(result.keySet());
         for (int i = 1; i < sortedResultKey.size(); i++) {
             LottoRank lottoRank = sortedResultKey.get(i);
             int correct = lottoRank.getCorrect();
             int prize = lottoRank.getPrize();
-            int numOfMatch = lottoResults.findNumOfMatchByKey(lottoRank);
+            int numOfMatch = result.get(lottoRank);
             System.out.println(correct + "개 일치 (" + prize + "원)- " + numOfMatch + "개");
         }
-        printLottoEariningRate(lottoResults.getEarningsRate());
+        System.out.printf("총 수익률은 %.2f입니다.", lottoResultsDto.getEarningRate());
     }
 
-    private static List<LottoRank> sortedResultKey(Set<LottoRank> keySet) {
+    private static List<LottoRank> sortResultKey(Set<LottoRank> keySet) {
         return keySet.stream()
             .sorted((k1, k2) -> Integer.compare(k1.getPrize(), k2.getPrize()))
             .collect(Collectors.toList());
-    }
-
-    private static void printLottoEariningRate(double earningsRate) {
-        System.out.printf("총 수익률은 %.2f입니다.", earningsRate);
     }
 }

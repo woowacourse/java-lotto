@@ -5,6 +5,7 @@ import lotto.domain.WinningLotto;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Lottos;
 import lotto.model.LottoResults;
+import lotto.model.LottoResultsDto;
 import lotto.model.Money;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -24,7 +25,7 @@ public class LottoController {
             WinningLotto winningLotto = inputWinningLotto();
             LottoResults lottoResults = LottoResults
                 .of(manualLottos.match(winningLotto), automaticLottos.match(winningLotto));
-            OutputView.printLottoResult(lottoResults);
+            OutputView.printLottoResult(LottoResultsDto.from(lottoResults));
         } catch (IllegalArgumentException e) {
             OutputView.printExceptionMessage(e);
             play();
