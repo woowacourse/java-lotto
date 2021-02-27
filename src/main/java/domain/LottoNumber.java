@@ -15,7 +15,7 @@ public class LottoNumber {
     }
 
     private void validateNumberRange(int number) {
-        if ((number < MIN_NUMBER_RANGE) || (number > MAX_NUMBER_RANGE)) {
+        if (number < MIN_NUMBER_RANGE || number > MAX_NUMBER_RANGE) {
             throw new IllegalArgumentException(ERROR_INVALID_NUMBER_RANGE);
         }
     }

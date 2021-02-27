@@ -21,13 +21,24 @@ public enum Rank {
     }
 
     public static Rank from(long match, boolean hasBonus) {
-        if (match == SECOND_MATCH && hasBonus) {
-            return Rank.SECOND;
+        if (match == SECOND_MATCH) {
+            return decideSecondOrThird(hasBonus);
         }
         return Arrays.stream(Rank.values())
-                .filter(item -> item.getMatch() == match)
-                .findAny()
+                .filter(rank -> rank.isSameMatch(match))
+                .findFirst()
                 .orElse(NOTHING);
+    }
+
+    private static Rank decideSecondOrThird(boolean hasBonus) {
+        if (hasBonus) {
+            return SECOND;
+        }
+        return THIRD;
+    }
+
+    private boolean isSameMatch(long match) {
+        return this.match == match;
     }
 
     public long getMatch() {

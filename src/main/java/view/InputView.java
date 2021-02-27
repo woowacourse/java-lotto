@@ -1,5 +1,6 @@
 package view;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -7,8 +8,10 @@ import java.util.stream.Collectors;
 
 public class InputView {
     private static final String MESSAGE_BUDGET = "구입금액을 입력해 주세요.";
-    private static final String MESSAGE_WINNING_NUMBER = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String MESSAGE_WINNING_NUMBER = "\n지난 주 당첨 번호를 입력해 주세요.";
     private static final String MESSAGE_BONUS_BALL = "보너스 볼을 입력해 주세요.";
+    private static final String MESSAGE_MANUAL_QUANTITY = "\n수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String MESSAGE_MANUAL_NUMBERS = "\n수동으로 구매할 번호를 입력해 주세요.";
     private static final String BLANK = "";
     private static final String COMMA = ",";
     private static final String NUMBER_REGULAR_EXPRESSION = "^-?[0-9]+$";
@@ -28,55 +31,53 @@ public class InputView {
     }
 
     public long scanBudget() {
-        String inputString = scanStringBudget();
-        if (inputString.equals(BLANK)) {
-            System.out.println(ERROR_INVALID_BLANK);
-            return scanBudget();
-        }
-        if (inputString.matches(NUMBER_REGULAR_EXPRESSION)) {
-            return Long.parseLong(inputString);
-        }
-        System.out.println(ERROR_INVALID_NUMBER_FORMAT);
-        return scanBudget();
+        System.out.println(MESSAGE_BUDGET);
+        return Long.parseLong(scanInputString());
     }
 
-    private String scanStringBudget() {
-        System.out.println(MESSAGE_BUDGET);
-        return deleteWhiteSpaces(scanner.nextLine());
+    public long scanManualQuantity() {
+        System.out.println(MESSAGE_MANUAL_QUANTITY);
+        return Long.parseLong(scanInputString());
     }
 
     public List<Integer> scanWinningNumbers() {
-        String inputString = scanStringWinningNumbers();
+        System.out.println(MESSAGE_WINNING_NUMBER);
+        return scanNumbers();
+    }
+
+    public List<List<Integer>> scanManualNumbers(long manualCount) {
+        System.out.println(MESSAGE_MANUAL_NUMBERS);
+        List<List<Integer>> manualNumbers = new ArrayList<>();
+        for (int i = 0; i < manualCount; i++) {
+            manualNumbers.add(scanNumbers());
+        }
+        return manualNumbers;
+    }
+
+    public int scanBonusBall() {
+        System.out.println(MESSAGE_BONUS_BALL);
+        return Integer.parseInt(scanInputString());
+    }
+
+    private String scanInputString() {
+        String inputString = deleteWhiteSpaces(scanner.nextLine());
+        if (inputString.equals(BLANK)) {
+            throw new IllegalArgumentException(ERROR_INVALID_BLANK);
+        }
+        if (inputString.matches(NUMBER_REGULAR_EXPRESSION)) {
+            return inputString;
+        }
+        throw new IllegalArgumentException(ERROR_INVALID_NUMBER_FORMAT);
+    }
+
+    private List<Integer> scanNumbers() {
+        String inputString = deleteWhiteSpaces(scanner.nextLine());
         if (inputString.contains(COMMA)) {
             return Arrays.stream(inputString.split(COMMA))
                     .map(Integer::parseInt)
                     .collect(Collectors.toList());
         }
-        System.out.println(ERROR_INVALID_DELIMITER);
-        return scanWinningNumbers();
-    }
-
-    private String scanStringWinningNumbers() {
-        System.out.println(MESSAGE_WINNING_NUMBER);
-        return deleteWhiteSpaces(scanner.nextLine());
-    }
-
-    public int scanBonusBall() {
-        String inputString = scanStringBonusBall();
-        if (inputString.equals(BLANK)) {
-            System.out.println(ERROR_INVALID_BLANK);
-            return scanBonusBall();
-        }
-        if (inputString.matches(NUMBER_REGULAR_EXPRESSION)) {
-            return Integer.parseInt(inputString);
-        }
-        System.out.println(ERROR_INVALID_NUMBER_FORMAT);
-        return scanBonusBall();
-    }
-
-    private String scanStringBonusBall() {
-        System.out.println(MESSAGE_BONUS_BALL);
-        return deleteWhiteSpaces(scanner.nextLine());
+        throw new IllegalArgumentException(ERROR_INVALID_DELIMITER);
     }
 
     private String deleteWhiteSpaces(String string) {

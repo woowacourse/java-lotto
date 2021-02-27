@@ -30,6 +30,30 @@ public class RankTest {
         assertThat(rank.getReward()).isEqualTo(new Money(30_000_000));
     }
 
+    @DisplayName("3등 상금 리턴 테스트")
+    @Test
+    public void compareThirdRewardTest() {
+        Rank rank = Rank.from(5, false);
+
+        assertThat(rank.getReward()).isEqualTo(new Money(1_500_000));
+    }
+
+    @DisplayName("4등 상금 리턴 테스트")
+    @Test
+    public void compareFourthRewardTest() {
+        Rank rank = Rank.from(4, false);
+
+        assertThat(rank.getReward()).isEqualTo(new Money(50_000));
+    }
+
+    @DisplayName("5등 상금 리턴 테스트")
+    @Test
+    public void compareFifthRewardTest() {
+        Rank rank = Rank.from(3, false);
+
+        assertThat(rank.getReward()).isEqualTo(new Money(5_000));
+    }
+
     @DisplayName("상금이 없는 경우")
     @Test
     public void compareNoRewardTest() {
