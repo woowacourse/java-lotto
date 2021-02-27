@@ -1,10 +1,6 @@
 package domain.ball;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
+import java.util.*;
 
 public class LottoBall implements Comparable<LottoBall> {
     public static final int MIN_LOTTO_VALUE = 1;
@@ -32,7 +28,7 @@ public class LottoBall implements Comparable<LottoBall> {
     }
 
     public static List<LottoBall> getLottoBalls() {
-       return lottoBalls.values().stream().collect(Collectors.toList());
+        return new ArrayList<>(lottoBalls.values());
     }
 
     public int getValue() {
