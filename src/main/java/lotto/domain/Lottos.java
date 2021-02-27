@@ -6,18 +6,21 @@ public class Lottos {
 
     private final List<Lotto> lottoBunch = new ArrayList<>();
 
-    public Lottos(int purchasedLottoCount) {
-        for (int i = 0; i < purchasedLottoCount; i++) {
-            lottoBunch.add(LottoGenerator.createLotto());
-        }
+    public Lottos(List<Lotto> lottos) {
+        lottoBunch.addAll(lottos);
+    }
+
+    public Lottos(Lottos manualLottos, Lottos autoLottos) {
+        lottoBunch.addAll(manualLottos.getLottoBunch());
+        lottoBunch.addAll(autoLottos.getLottoBunch());
     }
 
     public Map<LottoRank, Integer> getStatistics(WinningLotto winningLotto) {
         Map<LottoRank, Integer> getStatistics = setUpStatistics();
-        for (Lotto lotto : lottoBunch) {
-            LottoRank lottoRank = winningLotto.getLottoResult(lotto);
-            getStatistics.replace(lottoRank, getStatistics.get(lottoRank) + 1);
-        }
+        lottoBunch.stream()
+                .map(winningLotto::getLottoResult)
+                .forEach(rank -> getStatistics.replace(rank, getStatistics.get(rank) + 1));
+
         return getStatistics;
     }
 

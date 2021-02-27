@@ -18,13 +18,13 @@ public class BonusBall {
 
     private void validateBonusNumberDuplicated(int bonusNumber, Lotto lotto) {
         if (lotto.isContainNumber(bonusNumber)) {
-            throw new BonusBallDuplicatedException();
+            throw new BonusBallDuplicatedException(bonusNumber);
         }
     }
 
     private void validateBonusNumberScope(int bonusNumber) {
-        if (bonusNumber <= LottoGenerator.LOTTO_START_NUMBER || bonusNumber > LottoGenerator.LOTTO_END_NUMBER) {
-            throw new BonusBallScopeException();
+        if (bonusNumber < LottoGenerator.LOTTO_START_NUMBER || bonusNumber > LottoGenerator.LOTTO_END_NUMBER) {
+            throw new BonusBallScopeException(bonusNumber);
         }
     }
 

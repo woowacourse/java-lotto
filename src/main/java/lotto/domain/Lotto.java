@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.exception.Lotto.LottoNumberCountException;
+import lotto.exception.Lotto.LottoNumberNotIntegerException;
 import lotto.exception.Lotto.LottoNumberNullException;
 import lotto.exception.Lotto.LottoNumberScopeException;
 
@@ -20,14 +21,15 @@ public class Lotto {
     }
 
     public static Lotto from(String inputNumbers) {
-        NullCheckNumbers(inputNumbers);
+        nullCheckNumbers(inputNumbers);
         String[] splittedNumbers = inputNumbers.split(DELIMITER);
         List<Integer> lottoNumbers = convertInputLottoNumbersToInteger(splittedNumbers);
+        lottoNumbers = lottoNumbers.stream().sorted().collect(Collectors.toList());
         validateLottoNumbers(lottoNumbers);
         return new Lotto(lottoNumbers);
     }
 
-    private static void NullCheckNumbers(String inputNumbers) {
+    private static void nullCheckNumbers(String inputNumbers) {
         if (inputNumbers == null) {
             throw new LottoNumberNullException();
         }
@@ -39,8 +41,8 @@ public class Lotto {
                     .map(String::trim)
                     .map(Integer::parseInt)
                     .collect(Collectors.toList());
-        } catch (Exception e) {
-            throw new LottoNumberCountException();
+        } catch (NumberFormatException e) {
+            throw new LottoNumberNotIntegerException();
         }
     }
 
@@ -58,7 +60,7 @@ public class Lotto {
 
     private static void validateLottoNumbersCount(List<Integer> lottoNumbers) {
         if (new HashSet<>(lottoNumbers).size() != 6) {
-            throw new LottoNumberCountException();
+            throw new LottoNumberCountException(lottoNumbers);
         }
     }
 

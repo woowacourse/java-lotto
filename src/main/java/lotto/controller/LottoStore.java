@@ -1,27 +1,70 @@
 package lotto.controller;
 
 import lotto.domain.*;
+import lotto.exception.Lotto.ManualLottoTicketCountNegativeNumberException;
+import lotto.exception.Lotto.ManualLottoTicketUnaffordableException;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LottoStore {
 
     public static final int LOTTO_PRICE = 1000;
 
-    public void process() {
+    public void run() {
+        try {
+            process();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            run();
+        }
+    }
+
+    private void process() {
         Lottos purchasedLottos = buyLotto();
         WinningLotto winningLotto = decideWinningLotto();
         Map<LottoRank, Integer> lottoResultStatistics = purchasedLottos.getStatistics(winningLotto);
         printLottoResult(lottoResultStatistics, purchasedLottos);
     }
 
-    public Lottos buyLotto() {
+    private Lottos buyLotto() {
         Money money = new Money(InputView.inputMoney());
-        Lottos purchasedLottos = new Lottos(calculateAffordableLottoTickets(money));
-        OutputView.printPurchasedLottos(purchasedLottos);
-        return purchasedLottos;
+        int affordableLottoTicketCount = calculateAffordableLottoTickets(money);
+        return getPurchasedLottos(affordableLottoTicketCount);
+    }
+
+    private Lottos getPurchasedLottos(int affordableLottoTicketCount) {
+        List<String> manualLottoNumbers = getManualLottoNumbers(affordableLottoTicketCount);
+        Lottos purchasedManualLottos = LottoGenerator.createManualLottos(manualLottoNumbers);
+        Lottos purchasedAutoLottos =
+                LottoGenerator.createAutoLottos(affordableLottoTicketCount - manualLottoNumbers.size());
+
+        OutputView.printPurchasedLottos(purchasedManualLottos, purchasedAutoLottos);
+
+        return new Lottos(purchasedManualLottos, purchasedAutoLottos);
+    }
+
+    private List<String> getManualLottoNumbers(int affordableLottoTicketCount) {
+        int manualLottoCount = InputView.inputManualLottoCount();
+        if (manualLottoCount == 0) {
+            return new ArrayList<>();
+        }
+        validateManualLottoCount(affordableLottoTicketCount, manualLottoCount);
+        return InputView.inputManualLottoNumbers(manualLottoCount).stream()
+                .sorted().collect(Collectors.toList());
+    }
+
+    private void validateManualLottoCount(int affordableLottoTicketCount, int manualLottoCount) {
+        if (manualLottoCount < 0) {
+            throw new ManualLottoTicketCountNegativeNumberException(manualLottoCount);
+        }
+        if (manualLottoCount > affordableLottoTicketCount) {
+            throw new ManualLottoTicketUnaffordableException(manualLottoCount);
+        }
     }
 
     private WinningLotto decideWinningLotto() {
@@ -30,12 +73,12 @@ public class LottoStore {
         return new WinningLotto(winningLotto, bonusBall);
     }
 
-    public void printLottoResult(Map<LottoRank, Integer> lottoResultStatistics, Lottos lottos) {
+    private void printLottoResult(Map<LottoRank, Integer> lottoResultStatistics, Lottos lottos) {
         double profitRate = calculateProfitRate(lottoResultStatistics, lottos.getSize());
         OutputView.printLottoStatistics(lottoResultStatistics, profitRate);
     }
 
-    public double calculateProfitRate(Map<LottoRank, Integer> lottoResultStatistics, int purchasedLottoCount) {
+    private double calculateProfitRate(Map<LottoRank, Integer> lottoResultStatistics, int purchasedLottoCount) {
         int initialCapital = purchasedLottoCount * LOTTO_PRICE;
 
         double sum = lottoResultStatistics.entrySet().stream()
@@ -47,7 +90,7 @@ public class LottoStore {
         return Math.round(rawProfitRate * 100) / 100.00;
     }
 
-    public int calculateAffordableLottoTickets(Money money) {
+    private int calculateAffordableLottoTickets(Money money) {
         return money.getMoney() / LOTTO_PRICE;
     }
 }

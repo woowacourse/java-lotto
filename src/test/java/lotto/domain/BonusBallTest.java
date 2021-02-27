@@ -12,6 +12,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.stream.Stream;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 class BonusBallTest {
@@ -49,5 +50,12 @@ class BonusBallTest {
         assertThatThrownBy(() -> {
             new BonusBall(input, lotto);
         }).isInstanceOf(BonusBallException.class);
+    }
+
+    @ParameterizedTest
+    @DisplayName("제대로 보너스 볼 생성")
+    @ValueSource(ints = {1,45})
+    void numbersRightTest(int input) {
+        assertThat(new BonusBall(input, Lotto.from("2,3,4,5,6,7")).getBonusNumber()).isEqualTo(input);
     }
 }
