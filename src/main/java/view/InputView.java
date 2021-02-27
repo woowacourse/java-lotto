@@ -1,9 +1,6 @@
 package view;
 
-import domain.Lotto;
-import domain.LottoNumber;
-import domain.Money;
-import domain.WinningLotto;
+import domain.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,6 +18,11 @@ public class InputView {
         System.out.println("구입금액을 입력해 주세요.");
         int money = SCANNER.nextInt();
         return Money.createPurchasingLottoMoney(money);
+    }
+
+    public static CountOfPurchasingLotto inputPurchasingPassiveLottoNumber() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        return new CountOfPurchasingLotto(SCANNER.nextInt());
     }
 
     public static WinningLotto inputWinningLotto() {
