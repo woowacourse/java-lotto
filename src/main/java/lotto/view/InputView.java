@@ -17,7 +17,7 @@ public class InputView {
         this.scanner = new Scanner(System.in);
     }
 
-    public static int parseInt(final String input) {
+    public static int convertToInt(final String input) {
         try {
             return Integer.parseInt(input);
         } catch (Exception e) {
@@ -27,7 +27,7 @@ public class InputView {
 
     public int inputMoney() {
         System.out.println("구입금액을 입력해 주세요.");
-        return parseInt(scanner.nextLine());
+        return convertToInt(scanner.nextLine());
     }
 
     public Set<LottoNumber> inputWinningNumbers() {
@@ -37,12 +37,12 @@ public class InputView {
 
     public int inputBonusNumber() {
         System.out.println("보너스 볼을 입력해주세요.");
-        return parseInt(scanner.nextLine());
+        return convertToInt(scanner.nextLine());
     }
 
     public int inputCountOfPurchaseManually() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        return parseInt(scanner.nextLine());
+        return convertToInt(scanner.nextLine());
     }
 
     public List<Lotto> inputManualNumbers(int manualCount) {
@@ -58,7 +58,7 @@ public class InputView {
     private Set<LottoNumber> splitAndWrap(String winningNumbers) {
         return Arrays.stream(winningNumbers.split(SEPARATOR))
                 .map(String::trim)
-                .map(InputView::parseInt)
+                .map(InputView::convertToInt)
                 .map(LottoNumber::from)
                 .collect(Collectors.toSet());
     }
