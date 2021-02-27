@@ -14,8 +14,7 @@ public class LottoController {
     }
 
     private Money payMoney() {
-        OutputView.requestMoneyMessage();
-        return new Money(InputView.inputMoney());
+        return new Money(InputView.requestMoney());
     }
 
     private LottoGroup buyLotto(Money money) {
@@ -28,10 +27,8 @@ public class LottoController {
     }
 
     private WinningLotto checkWinningLotto() {
-        OutputView.requestWinningNumberMessage();
-        String winningLottoInput = InputView.requestInput();
-        OutputView.requestBonusBallNumberMessage();
-        String bonusBallInput = InputView.requestInput();
+        String winningLottoInput = InputView.requestWinningNumber();
+        String bonusBallInput = InputView.requestBonusBall();
         LottoGenerator lottoGenerator = new LottoGenerator();
         return new WinningLotto(
             lottoGenerator.generateManual(winningLottoInput),

@@ -46,7 +46,7 @@ public class LottoResultTest {
     @DisplayName("수익률을 올바르게 계산하는지 확인")
     void earning_rate() {
         DecimalFormat decimalFormat = new DecimalFormat("0.00");
-        Money money = new Money(5000);
+        Money money = new Money("5000");
 
         double earningRate = lottoResult.findEarningRate(money.getMoney());
         assertThat(decimalFormat.format(earningRate)).isEqualTo("0.00");

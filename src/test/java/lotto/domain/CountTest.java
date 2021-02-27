@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 public class CountTest {
 
     public static final String NUMBER_EXCEED_ERROR = "[ERROR] 구매 가능한 수를 초과했습니다.";
-    Money money = new Money(10_000);
+    Money money = new Money("10000");
     Count count = new Count(money.count());
 
     @Test
