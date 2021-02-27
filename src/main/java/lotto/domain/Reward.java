@@ -5,19 +5,21 @@ import lotto.exception.InvalidLottoHitCountException;
 
 public enum Reward {
 
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 30_000_000),
-    THIRD(5, 1_500_000),
-    FOURTH(4, 50_000),
-    FIFTH(3, 5_000),
-    NONE(0, 0);
+    FIRST(6, 2_000_000_000, false),
+    SECOND(5, 30_000_000, true),
+    THIRD(5, 1_500_000, false),
+    FOURTH(4, 50_000, false),
+    FIFTH(3, 5_000, false),
+    NONE(0, 0, false);
 
     private final int hitCount;
     private final int winningMoney;
+    private final boolean isHitBonus;
 
-    Reward(final int hitCount, final int winningMoney) {
+    Reward(final int hitCount, final int winningMoney, final boolean isHitBonus) {
         this.hitCount = hitCount;
         this.winningMoney = winningMoney;
+        this.isHitBonus = isHitBonus;
     }
 
     public int getHitCount() {
@@ -32,17 +34,15 @@ public enum Reward {
         validateHitCount(hitCount);
 
         return Arrays.stream(values())
-            .filter(reword -> reword.matchHitCount(hitCount))
-            .filter(reword -> reword.rewordClassification(isHitBonus))
+            .filter(reword -> reword.matchHitCount(hitCount, isHitBonus))
             .findFirst()
             .orElse(Reward.NONE);
     }
 
-    private boolean rewordClassification(final boolean isHitBonus) {
-        return !this.equals(SECOND) || isHitBonus;
-    }
-
-    private boolean matchHitCount(final int hitCount) {
+    private boolean matchHitCount(final int hitCount, final boolean isHitBonus) {
+        if (this.isHitBonus) {
+            return hitCount == this.hitCount && isHitBonus;
+        }
         return hitCount == this.hitCount;
     }
 
