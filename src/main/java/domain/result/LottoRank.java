@@ -10,7 +10,7 @@ public enum LottoRank {
     SECOND_PLACE(5, 30_000_00, true),
     FIRST_PLACE(6, 2_000_000_000, false);
 
-    private static final int FIVE = 5;
+    private static final int FIVE_MATCHES = 5;
 
     private final int matches;
     private final int prize;
@@ -23,7 +23,7 @@ public enum LottoRank {
     }
 
     public static LottoRank findRankByBonusAndMatches(final boolean hasBonus, final int matches) {
-        if (!hasBonus || matches != FIVE) {
+        if (!hasBonus || matches != FIVE_MATCHES) {
             return Arrays.stream(values()).filter(lottoRank -> lottoRank.isSameMatches(matches))
                     .findFirst().orElse(NONE_PLACE);
         }
