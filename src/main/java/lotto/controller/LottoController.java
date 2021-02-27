@@ -51,7 +51,7 @@ public class LottoController {
         if (purchase.existManualPurchase()) {
             LottoFactory.createManualLottos(lottos, inputManualNumbers(purchase));
         }
-        LottoFactory.createAutoLottos(lottos, purchase);
+        LottoFactory.createAutoLottos(lottos, purchase.getAutoPurchase());
         OutputView.printAllTickets(purchase, lottos);
         return lottos;
     }

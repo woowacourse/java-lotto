@@ -17,6 +17,12 @@ public class Purchase {
         this.autoPurchase = calculate(manualPurchase);
     }
 
+    private void validate(int manualPurchase) {
+        if (money.exceedsLimit(manualPurchase)) {
+            throw new LottoCustomException("수동으로 구매할 로또의 개수가 금액을 초과합니다.");
+        }
+    }
+
     public int getAutoPurchase() {
         return autoPurchase;
     }
@@ -27,12 +33,6 @@ public class Purchase {
 
     public boolean existManualPurchase() {
         return manualPurchase != ZERO;
-    }
-
-    private void validate(int manualPurchase) {
-        if (money.exceedsLimit(manualPurchase)) {
-            throw new LottoCustomException("수동으로 구매할 로또의 개수가 금액을 초과합니다.");
-        }
     }
 
     private int calculate(int manualPurchase) {

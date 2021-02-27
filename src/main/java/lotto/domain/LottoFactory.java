@@ -8,12 +8,14 @@ public class LottoFactory {
     }
 
     public static Lottos createManualLottos(Lottos lottos, List<Lotto> lottoTickets) {
-        lottos.addManuallyCreatedLottos(lottoTickets);
+        lottos.addAll(lottoTickets);
         return lottos;
     }
 
-    public static Lottos createAutoLottos(Lottos lottos, Purchase purchase) {
-        lottos.generateLottoAutomatically(purchase.getAutoPurchase());
+    public static Lottos createAutoLottos(Lottos lottos, int counts) {
+        for (int i = 0; i < counts; i++) {
+            lottos.add(RandomNumberGenerator.makeTicket());
+        }
         return lottos;
     }
 }

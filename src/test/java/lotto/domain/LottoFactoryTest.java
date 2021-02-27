@@ -27,7 +27,7 @@ public class LottoFactoryTest {
     @Test
     void createAutoLottos() {
         Purchase purchase = new Purchase(new Money(2000), 0);
-        lottos = LottoFactory.createAutoLottos(lottos, purchase);
+        lottos = LottoFactory.createAutoLottos(lottos, purchase.getAutoPurchase());
         assertThat(lottos.toList().size()).isEqualTo(2);
     }
 }

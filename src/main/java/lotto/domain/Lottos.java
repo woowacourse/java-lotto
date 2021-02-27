@@ -19,13 +19,11 @@ public class Lottos {
         return new ArrayList<>(lottos);
     }
 
-    public void addManuallyCreatedLottos(List<Lotto> manuallyCreatedLottos) {
-        lottos.addAll(manuallyCreatedLottos);
+    public void add(Lotto lotto) {
+        lottos.add(lotto);
     }
 
-    public void generateLottoAutomatically(int counts) {
-        for (int i = 0; i < counts; i++) {
-            lottos.add(RandomNumberGenerator.makeTicket());
-        }
+    public void addAll(List<Lotto> manuallyCreatedLottos) {
+        lottos.addAll(manuallyCreatedLottos);
     }
 }
