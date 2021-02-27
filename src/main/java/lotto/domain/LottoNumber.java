@@ -12,8 +12,9 @@ public class LottoNumber {
     private static final int MAX_LOTTO_NUMBER = 45;
 
     private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
+
     static {
-        for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER ; i++) {
+        for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
             lottoNumbers.put(i, new LottoNumber(i));
         }
     }
@@ -29,10 +30,6 @@ public class LottoNumber {
         return lottoNumbers.get(number);
     }
 
-    public Integer getNumber() {
-        return number;
-    }
-
     private static void validate(int number) {
         if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
             throw new LottoCustomException(format(
@@ -40,6 +37,10 @@ public class LottoNumber {
                     MIN_LOTTO_NUMBER,
                     MAX_LOTTO_NUMBER));
         }
+    }
+
+    public Integer getNumber() {
+        return number;
     }
 
     @Override
