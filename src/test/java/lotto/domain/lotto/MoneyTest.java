@@ -38,7 +38,7 @@ class MoneyTest {
     }
 
     @ParameterizedTest
-    @DisplayName("valueOf 실패 - 0 미만")
+    @DisplayName("최소값인 0보다 작은 값은 생성 불가")
     @ValueSource(strings = {"a", "-1", "1.0"})
     void valueOf_fail(String input) {
         assertThatThrownBy(() -> Money.valueOf(input))
@@ -47,7 +47,7 @@ class MoneyTest {
     }
 
     @Test
-    @DisplayName("subtract 성공")
+    @DisplayName("subtract한 값만큼 amount가 감소된 새로운 객체 반환")
     void subtract() {
         Money money = new Money(BigInteger.ONE);
 
@@ -56,7 +56,7 @@ class MoneyTest {
     }
 
     @Test
-    @DisplayName("subtract 실패 - 0미만")
+    @DisplayName("subtract한 값이 최소값인 0보다 작다면 예외 발생")
     void subtract_fail() {
         Money zeroMoney = new Money(BigInteger.ZERO);
 

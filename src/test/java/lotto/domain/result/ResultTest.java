@@ -15,7 +15,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 class ResultTest {
 
     @ParameterizedTest
-    @DisplayName("수익률 계산")
+    @DisplayName("resultMap을 통해 총 상금을 계산, 올바른 수익률을 도출하는지")
     @MethodSource("getEarningRate_testcase")
     void getEarningRate(Map<Rank, Integer> resultMap, BigInteger paymentAmount,
             BigInteger expectedEarningRate) {

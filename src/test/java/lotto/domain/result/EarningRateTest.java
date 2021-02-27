@@ -12,7 +12,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 class EarningRateTest {
 
     @ParameterizedTest
-    @DisplayName("수익률 계산")
+    @DisplayName("수익률 계산결과 확인: 수익률 = (총상금 * 100) / 구입금액")
     @MethodSource("calculate_earningRate_testcase")
     void calculate_earningRate(BigInteger totalPrize, BigInteger paymentAmount,
             BigInteger expected) {
