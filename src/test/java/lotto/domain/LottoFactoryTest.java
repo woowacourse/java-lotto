@@ -19,7 +19,7 @@ public class LottoFactoryTest {
 
     @Test
     void createManualLottos() {
-        lottos = LottoFactory.createManualLottos(lottos, Arrays.asList(lotto));
+        LottoFactory.createManualLottos(lottos, Arrays.asList(lotto));
         assertThat(lottos.toList())
                 .contains(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
@@ -27,7 +27,7 @@ public class LottoFactoryTest {
     @Test
     void createAutoLottos() {
         Purchase purchase = new Purchase(new Money(2000), 0);
-        lottos = LottoFactory.createAutoLottos(lottos, purchase.getAutoPurchase());
-        assertThat(lottos.toList().size()).isEqualTo(2);
+        LottoFactory.createAutoLottos(lottos, purchase.getAutoPurchase());
+        assertThat(lottos.toList()).hasSize(2);
     }
 }

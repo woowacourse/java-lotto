@@ -22,8 +22,8 @@ public class WinningLotto {
 
     public Rank getRankOfLottoResult(Lotto lotto) {
         int matchCount = matchNumbers(lotto);
-        boolean isBonus = lotto.contains(bonusNumber);
-        return Rank.of(matchCount, isBonus);
+        boolean hasBonus = lotto.contains(bonusNumber);
+        return Rank.of(matchCount, hasBonus);
     }
 
     private int matchNumbers(Lotto ticket) {

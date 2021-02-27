@@ -7,15 +7,13 @@ public class LottoFactory {
     private LottoFactory() {
     }
 
-    public static Lottos createManualLottos(Lottos lottos, List<Lotto> lottoTickets) {
+    public static void createManualLottos(Lottos lottos, List<Lotto> lottoTickets) {
         lottos.addAll(lottoTickets);
-        return lottos;
     }
 
-    public static Lottos createAutoLottos(Lottos lottos, int counts) {
+    public static void createAutoLottos(Lottos lottos, int counts) {
         for (int i = 0; i < counts; i++) {
             lottos.add(RandomNumberGenerator.makeTicket());
         }
-        return lottos;
     }
 }
