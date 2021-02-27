@@ -20,7 +20,7 @@ public class LottoController {
         final Money money = inputMoney();
         final Purchase purchase = inputManualPurchase(money);
         final Lottos lottos = createLottos(purchase);
-        final WinningLotto winningLotto = makeWinningTicket();
+        final WinningLotto winningLotto = makeWinningLotto();
         final Map<Rank, Integer> result = LottoResultMachine.confirmResult(lottos, winningLotto);
 
         OutputView.printTotalWinningResult(result);
@@ -73,7 +73,7 @@ public class LottoController {
         }
     }
 
-    private WinningLotto makeWinningTicket() {
+    private WinningLotto makeWinningLotto() {
         try {
             OutputView.printTitleOfInputWinningLotto();
             return new WinningLotto(
@@ -82,7 +82,7 @@ public class LottoController {
             );
         } catch (LottoCustomException e) {
             OutputView.printErrorMessage(e.getMessage());
-            return makeWinningTicket();
+            return makeWinningLotto();
         }
     }
 
