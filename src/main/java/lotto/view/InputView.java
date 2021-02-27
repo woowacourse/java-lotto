@@ -21,6 +21,7 @@ public class InputView {
         try {
             money = scanner.nextInt();
         } catch (InputMismatchException e) {
+            scanner.nextLine();
             throw new IllegalArgumentException(INPUT_MISMATCH_ERROR_MESSAGE);
         }
         scanner.nextLine();
@@ -33,6 +34,7 @@ public class InputView {
         try {
             manualLottoCount = scanner.nextInt();
         } catch (InputMismatchException e) {
+            scanner.nextLine();
             throw new IllegalArgumentException(INPUT_MISMATCH_ERROR_MESSAGE);
         }
         scanner.nextLine();
@@ -58,6 +60,7 @@ public class InputView {
         try {
             bonusNumber = scanner.nextInt();
         } catch (InputMismatchException e) {
+            scanner.nextLine();
             throw new IllegalArgumentException(INPUT_MISMATCH_ERROR_MESSAGE);
         }
         return bonusNumber;
