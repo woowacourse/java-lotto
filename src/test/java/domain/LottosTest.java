@@ -50,4 +50,21 @@ class LottosTest {
         assertThat(results.getValues().get(LottoRank.FIRST)).isEqualTo(1L);
         assertThat(results.getValues().get(LottoRank.MISS)).isEqualTo(2L);
     }
+
+    @DisplayName("Lottos에 다른 Lottos를 추가하는 기능")
+    @Test
+    void addAll() {
+        //given
+        Lottos lottos = new Lottos(Arrays.asList(new Lotto(new int[]{1, 2, 3, 4, 5, 6})));
+        Lottos additionalLottos = new Lottos(Arrays.asList(new Lotto(new int[]{7, 8, 9, 10, 11, 12})));
+
+        //when
+        lottos.addAll(additionalLottos);
+
+        //then
+        assertThat(lottos.getLottos().size()).isEqualTo(2);
+        assertThat(lottos.getLottos())
+                .containsExactly(new Lotto(new int[]{1, 2, 3, 4, 5, 6}),
+                        new Lotto(new int[]{7, 8, 9, 10, 11, 12}));
+    }
 }
