@@ -3,7 +3,7 @@ package lotto.domain.lotto;
 import java.util.Collections;
 import java.util.List;
 import lotto.domain.WinningLotto;
-import lotto.model.LottoResult;
+import lotto.domain.lottoresult.LottoResult;
 
 public class Lottos {
 

@@ -4,12 +4,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import lotto.domain.WinningLotto;
-import lotto.model.LottoRank;
-import lotto.model.LottoResult;
+import lotto.domain.LottoRank;
+import lotto.domain.lottoresult.LottoResult;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -1,8 +1,9 @@
-package lotto.model;
+package lotto.domain.lottoresult;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import lotto.domain.LottoRank;
 
 public class LottoResultsDto {
 

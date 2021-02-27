@@ -1,4 +1,4 @@
-package lotto.model;
+package lotto.domain.lottoresult;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -6,6 +6,7 @@ import java.util.Arrays;
 import lotto.domain.WinningLotto;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Lottos;
+import lotto.domain.LottoRank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,8 +1,9 @@
-package lotto.model;
+package lotto.domain.lottoresult;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import lotto.domain.LottoRank;
 
 public class LottoResults {
 

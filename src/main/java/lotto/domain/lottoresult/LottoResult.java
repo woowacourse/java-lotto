@@ -1,9 +1,10 @@
-package lotto.model;
+package lotto.domain.lottoresult;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import lotto.domain.lotto.Lotto;
+import lotto.domain.LottoRank;
 
 public class LottoResult {
 

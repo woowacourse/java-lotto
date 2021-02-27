@@ -7,7 +7,6 @@ import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.lottogenerator.RandomLottoGenerator;
 import lotto.exception.LessThanLottoPriceException;
-import lotto.model.Money;
 
 public class LottoMachine {
 
