@@ -4,6 +4,7 @@ import lotto.domain.LottoMachine;
 import lotto.domain.WinningLotto;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Lottos;
+import lotto.domain.lotto.LottosDto;
 import lotto.model.LottoResults;
 import lotto.model.LottoResultsDto;
 import lotto.model.Money;
@@ -20,7 +21,7 @@ public class LottoController {
             Lottos manualLottos = lottoMachine
                 .buyManualLottos(InputView.inputManualLottoNumbers(numOfManualLotto));
             Lottos automaticLottos = lottoMachine.buyAutomaticLottos();
-            OutputView.printLottoPurchaseResult(manualLottos, automaticLottos);
+            OutputView.printLottoPurchaseResult(LottosDto.from(manualLottos), LottosDto.from(automaticLottos));
 
             WinningLotto winningLotto = inputWinningLotto();
             LottoResults lottoResults = LottoResults
