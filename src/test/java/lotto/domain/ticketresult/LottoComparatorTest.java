@@ -1,7 +1,10 @@
 package lotto.domain.ticketresult;
 
 
-import lotto.domain.ticket.*;
+import lotto.domain.ticket.AutoTickets;
+import lotto.domain.ticket.LottoNumber;
+import lotto.domain.ticket.LottoTicket;
+import lotto.domain.ticket.ManualTickets;
 import lotto.domain.ticketpurchase.PurchasedTickets;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

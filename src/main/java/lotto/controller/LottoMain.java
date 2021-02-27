@@ -1,13 +1,16 @@
 package lotto.controller;
 
-import lotto.domain.ticket.*;
+import lotto.domain.strategy.AutoStrategy;
+import lotto.domain.strategy.ManualStrategy;
+import lotto.domain.ticket.AutoTickets;
+import lotto.domain.ticket.LottoNumber;
+import lotto.domain.ticket.LottoTicket;
+import lotto.domain.ticket.ManualTickets;
 import lotto.domain.ticketgenerator.LottoGenerator;
 import lotto.domain.ticketpurchase.PurchasedTickets;
 import lotto.domain.ticketpurchase.UserPurchase;
 import lotto.domain.ticketresult.LottoComparator;
 import lotto.domain.ticketresult.WinningLottoNumbers;
-import lotto.domain.strategy.AutoStrategy;
-import lotto.domain.strategy.ManualStrategy;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 import lotto.view.printer.InputPrinter;

@@ -2,7 +2,6 @@ package lotto.domain.ticketpurchase;
 
 import lotto.domain.ticket.AutoTickets;
 import lotto.domain.ticket.LottoTicket;
-import lotto.domain.ticket.LottoTickets;
 import lotto.domain.ticket.ManualTickets;
 
 import java.util.Collection;

@@ -1,10 +1,10 @@
 package lotto.domain.ticketgenerator;
 
+import lotto.domain.strategy.AutoStrategy;
+import lotto.domain.strategy.ManualStrategy;
 import lotto.domain.ticket.LottoNumber;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTickets;
-import lotto.domain.strategy.AutoStrategy;
-import lotto.domain.strategy.ManualStrategy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
