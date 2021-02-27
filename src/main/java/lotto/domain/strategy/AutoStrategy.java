@@ -10,6 +10,7 @@ import java.util.List;
 
 public class AutoStrategy implements GenerateStrategy {
     public static final int ZERO = 0;
+    
     private final int ticketCount;
     private final List<LottoNumber> allNumbers = new ArrayList<>();
 
