@@ -5,16 +5,14 @@ import java.util.Map;
 
 public class LottoResult {
 
-    private final Map<Rank, Integer> ranks = new LinkedHashMap<>();
+    private final Map<Rank, Integer> ranks;
 
     public LottoResult() {
-        initRanks();
-    }
-
-    private void initRanks() {
+        Map<Rank, Integer> ranks = new LinkedHashMap<>();
         for (int i = 1; i < Rank.values().length; i++) {
             ranks.put(Rank.values()[i], 0);
         }
+        this.ranks = ranks;
     }
 
     public Map<Rank, Integer> matchRank(WinningLotto winningLotto, LottoGroup lottos) {
