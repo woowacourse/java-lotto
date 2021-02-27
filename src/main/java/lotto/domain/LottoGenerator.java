@@ -37,4 +37,20 @@ public class LottoGenerator {
         }
         return new Lotto(lottoNumber);
     }
+
+    public LottoGroup autoLotto(int count) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            lottos.add(generateAuto());
+        }
+        return new LottoGroup(lottos);
+    }
+
+    public LottoGroup manualLotto(List<String> input) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (String lottoNumbers : input) {
+            lottos.add(generateManual(lottoNumbers));
+        }
+        return new LottoGroup(lottos);
+    }
 }

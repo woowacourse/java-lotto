@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import java.util.List;
 import java.util.Map;
 import lotto.domain.*;
 import lotto.view.*;
@@ -7,21 +8,25 @@ import lotto.view.*;
 public class LottoController {
 
     public void run() {
-        Money money = payMoney();
-        LottoGroup lottos = buyLotto(money);
+        Money money = new Money(InputView.requestMoney());
+        Count count = new Count(money.count());
+        count.manualCount(InputView.requestManualCount());
+        LottoGroup lottos = buyLotto(count);
         WinningLotto winningLotto = checkWinningLotto();
         drawLotto(winningLotto, lottos, money);
     }
 
-    private Money payMoney() {
-        return new Money(InputView.requestMoney());
-    }
+    private LottoGroup buyLotto(Count count) {
+        LottoGenerator lottoGenerator = new LottoGenerator();
+        int manualCount = count.getManualCount();
+        int autoCount = count.getAutoCount();
 
-    private LottoGroup buyLotto(Money money) {
-        Seller seller = new Seller();
-        int count = money.count();
-        LottoGroup lottos = seller.sellAuto(count);
-        OutputView.buyLottoMessage(count);
+        List<String> lottoNumbers = InputView.requestManualLotto(manualCount);
+        LottoGroup manualLotto = lottoGenerator.manualLotto(lottoNumbers);
+        LottoGroup autoLotto = lottoGenerator.autoLotto(autoCount);
+        LottoGroup lottos = manualLotto.merge(autoLotto);
+
+        OutputView.buyLottoMessage(count.getManualCount(), count.getAutoCount());
         OutputView.printLottos(lottos.getLottoGroup());
         return lottos;
     }
