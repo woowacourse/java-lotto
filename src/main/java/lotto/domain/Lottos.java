@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
+import lotto.domain.generator.LottoManualNumberGenerator;
 import lotto.domain.generator.LottoNumberGenerator;
 
 public class Lottos {
@@ -12,13 +13,25 @@ public class Lottos {
 
     public Lottos(LottoNumberGenerator lottoNumberGenerator, Piece purchasedLottoCount) {
         lottoBunch = new ArrayList<>();
-        addExtraPieces(lottoNumberGenerator, purchasedLottoCount);
-    }
-
-    public void addExtraPieces(LottoNumberGenerator lottoNumberGenerator,
-        Piece purchasedLottoCount) {
         for (int i = 0; i < purchasedLottoCount.getPieceNumber(); i++) {
             lottoBunch.add(new Lotto(lottoNumberGenerator.generateNumbers()));
+        }
+    }
+    
+    public Lottos mergeLottos(Lottos targetLottos) {
+        List<List<Number>> mergedLottoNumbers = new ArrayList<>();
+        mergeNumbers(mergedLottoNumbers, this);
+        mergeNumbers(mergedLottoNumbers, targetLottos);
+        LottoManualNumberGenerator mergedNumberGenerator =
+            new LottoManualNumberGenerator(mergedLottoNumbers);
+        int rawMergedPiece = mergedLottoNumbers.size();
+        Money sumMoney = new Money(rawMergedPiece * Lotto.PRICE);
+        return new Lottos(mergedNumberGenerator, new Piece(sumMoney, rawMergedPiece));
+    }
+
+    private void mergeNumbers(List<List<Number>> mergedLottoNumbers, Lottos lottos) {
+        for (Lotto lotto : lottos.getLottoBunch()) {
+            mergedLottoNumbers.add(lotto.getNumbers());
         }
     }
 

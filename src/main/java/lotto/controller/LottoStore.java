@@ -42,10 +42,11 @@ public class LottoStore {
         Piece manualPieces = receiveManualPieces(possessedMoney);
         Piece autoPieces = manualPieces.getAnotherPiece(possessedMoney);
         LottoAutoNumberGenerator lottoAutoGenerator = new LottoAutoNumberGenerator();
-        Lottos purchasedLottos = boughtManualLottos(manualPieces);
-        purchasedLottos.addExtraPieces(lottoAutoGenerator, autoPieces);
-        outputView.printPurchasedLottos(purchasedLottos, manualPieces);
-        return purchasedLottos;
+        Lottos manualLottos = boughtManualLottos(manualPieces);
+        Lottos autoLottos = new Lottos(lottoAutoGenerator, autoPieces);
+        Lottos combinedLottos = manualLottos.mergeLottos(autoLottos);
+        outputView.printPurchasedLottos(combinedLottos, manualPieces);
+        return combinedLottos;
     }
 
     private Money receiveValidMoney() {
