@@ -15,7 +15,11 @@ public class Seller {
         return new LottoGroup(lottos);
     }
 
-    public Lotto sellManual(String input) {
-        return lottoGenerator.generateManual(input);
+    public LottoGroup sellManual(List<String> input) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (String lottoNumbers : input) {
+            lottos.add(lottoGenerator.generateManual(lottoNumbers));
+        }
+        return new LottoGroup(lottos);
     }
 }
