@@ -9,26 +9,26 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class SellerTest {
+public class LottoGeneratorTest {
 
-    Seller seller = new Seller();
+    LottoGenerator lottoGenerator = new LottoGenerator();
 
     @Test
     @DisplayName("금액에 맞는 수의 로또를 만드는지 확인")
-    void sell() {
+    void auto() {
         int count = 3;
-        LottoGroup lottos = seller.sellAuto(count);
+        LottoGroup lottos = lottoGenerator.autoLotto(count);
         assertThat(lottos.getLottoGroup().size() == count).isTrue();
     }
 
     @Test
     @DisplayName("입력한 로또 번호대로 로또를 생성하는지 확인")
-    void sellManual() {
+    void manual() {
         List<String> input = new ArrayList<>(Arrays.asList(
             "1, 2, 3, 4, 5, 6",
             "7, 8, 9, 10, 11, 12"
         ));
-        LottoGroup lottos = seller.sellManual(input);
+        LottoGroup lottos = lottoGenerator.manualLotto(input);
 
         Lotto one = new Lotto(new HashSet<>(Arrays.asList(
             LottoNumber.of(1),
