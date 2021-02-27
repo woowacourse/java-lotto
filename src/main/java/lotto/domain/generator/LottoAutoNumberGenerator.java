@@ -10,9 +10,9 @@ import lotto.domain.Number;
 
 public class LottoAutoNumberGenerator implements LottoNumberGenerator {
 
-    private static final List<Number> candidateNumbers = new ArrayList<>();
+    private final List<Number> candidateNumbers = new ArrayList<>();
 
-    static {
+    public LottoAutoNumberGenerator() {
         for (int number = Number.LOWER_LIMIT; number <= Number.UPPER_LIMIT; number++) {
             candidateNumbers.add(Number.from(number));
         }
@@ -20,10 +20,9 @@ public class LottoAutoNumberGenerator implements LottoNumberGenerator {
 
     @Override
     public synchronized List<Number> generateNumbers() {
-        final List<Number> shuffledNumbers = Collections.synchronizedList(candidateNumbers);
-        Collections.shuffle(shuffledNumbers);
+        Collections.shuffle(candidateNumbers);
         Set<Number> lottoNumbers =
-            new TreeSet<>(shuffledNumbers.subList(0, Lotto.POSSESSION_NUMBER));
+            new TreeSet<>(candidateNumbers.subList(0, Lotto.POSSESSION_NUMBER));
         return new ArrayList<>(lottoNumbers);
     }
 }
