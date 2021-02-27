@@ -1,6 +1,6 @@
 package lotto.domain.ticketgenerator;
 
-import lotto.domain.strategy.GenerateStrategy;
+import lotto.domain.ticketgenerator.strategy.GenerateStrategy;
 import lotto.domain.ticket.LottoTickets;
 
 public class LottoGenerator {

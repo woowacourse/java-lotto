@@ -1,7 +1,7 @@
 package lotto.controller;
 
-import lotto.domain.strategy.AutoStrategy;
-import lotto.domain.strategy.ManualStrategy;
+import lotto.domain.ticketgenerator.strategy.AutoStrategy;
+import lotto.domain.ticketgenerator.strategy.ManualStrategy;
 import lotto.domain.ticket.AutoTickets;
 import lotto.domain.ticket.LottoNumber;
 import lotto.domain.ticket.LottoTicket;

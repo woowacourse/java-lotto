@@ -1,4 +1,4 @@
-package lotto.domain.strategy;
+package lotto.domain.ticketgenerator.strategy;
 
 import lotto.domain.ticket.AutoTickets;
 import lotto.domain.ticket.LottoNumber;
