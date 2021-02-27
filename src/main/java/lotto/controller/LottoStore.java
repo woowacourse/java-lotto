@@ -6,10 +6,8 @@ import lotto.exception.Lotto.ManualLottoTicketUnaffordableException;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-
 import java.util.ArrayList;
 import java.util.List;
-
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -36,7 +34,7 @@ public class LottoStore {
     private Lottos buyLotto() {
         Money money = new Money(InputView.inputMoney());
         int affordableLottoTicketCount = calculateAffordableLottoTickets(money);
-        List<String> manualLottoNumbers = manualLottoNumbers(affordableLottoTicketCount);
+        List<String> manualLottoNumbers = getManualLottoNumbers(affordableLottoTicketCount);
         Lottos purchasedManualLottos = LottoGenerator.createManualLottos(manualLottoNumbers);
         Lottos purchasedAutoLottos =
                 LottoGenerator.createAutoLottos(affordableLottoTicketCount - manualLottoNumbers.size());
@@ -45,7 +43,7 @@ public class LottoStore {
         return purchasedLottos;
     }
 
-    private List<String> manualLottoNumbers(int affordableLottoTicketCount) {
+    private List<String> getManualLottoNumbers(int affordableLottoTicketCount) {
         int manualLottoCount = InputView.inputManualLottoCount();
         if (manualLottoCount == 0) {
             return new ArrayList<>();
