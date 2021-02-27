@@ -6,17 +6,17 @@ public class LottoTicket {
     public static final int PRICE = 1000;
     public static final int SIZE = 6;
 
-    private final List<LottoNumber> numbers;
+    private final Set<LottoNumber> numbers;
 
     public LottoTicket(List<LottoNumber> lottoNumbers) {
         validateSize(lottoNumbers);
         validateNotDuplicate(lottoNumbers);
         lottoNumbers.sort(LottoNumber::compareTo);
-        this.numbers = new ArrayList<>(lottoNumbers);
+        this.numbers = new HashSet<>(lottoNumbers);
     }
 
     public List<LottoNumber> getLottoTicketNumbers() {
-        return Collections.unmodifiableList(this.numbers);
+        return Collections.unmodifiableList(new ArrayList<>(this.numbers));
     }
 
     public int compare(LottoTicket lottoTicket) {
@@ -34,8 +34,7 @@ public class LottoTicket {
     }
 
     private void validateNotDuplicate(List<LottoNumber> lottoNumbers) {
-        Set<LottoNumber> lottoNumbersWithoutDuplication = new HashSet<>(lottoNumbers);
-        if (lottoNumbersWithoutDuplication.size() != lottoNumbers.size()) {
+        if (this.numbers.size() != lottoNumbers.size()) {
             throw new IllegalArgumentException("로또 번호는 중복되지 않아야 합니다.");
         }
     }
