@@ -12,12 +12,10 @@ import java.util.stream.Collectors;
 public class Ranks {
 
     private final Map<Rank, Long> rankCounts;
-    private final int size;
 
     public Ranks(List<Rank> ranks) {
         this.rankCounts = ranks.stream()
             .collect(Collectors.groupingBy(it -> it, HashMap::new, Collectors.counting()));
-        size = ranks.size();
     }
 
     public int getNumberOfRank(Rank rank) {
@@ -26,13 +24,13 @@ public class Ranks {
 
     public float calculateProfitRate() {
         float totalWinMoney = Arrays.stream(Rank.values())
-            .mapToInt(rank -> getNumberOfRank(rank) * rank.getMoney())
+            .mapToInt(rank -> rank.calculateRankMoney(getNumberOfRank(rank)))
             .sum();
-        return totalWinMoney / getPurchaseMoney();
+        return totalWinMoney / getTotalPurchaseMoney();
     }
 
-    private int getPurchaseMoney() {
-        return size * LOTTO_LINE_PRICE;
+    private int getTotalPurchaseMoney() {
+        return rankCounts.values().stream().mapToInt(Long::intValue).sum() * LOTTO_LINE_PRICE;
     }
 
 }

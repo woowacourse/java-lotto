@@ -31,8 +31,8 @@ public enum Rank {
         return this.matchCount == matchCount;
     }
 
-    public int getMoney() {
-        return money;
+    public int calculateRankMoney(int rankCounts){
+        return rankCounts * money;
     }
 
 }
