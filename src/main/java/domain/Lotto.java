@@ -39,6 +39,25 @@ public class Lotto {
         }
     }
 
+    public static int calculateLottoNumber(Money money) {
+        return money.divide(PRICE);
+    }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.stream()
+                .anyMatch(lottoNumber::equals);
+    }
+
+    public int findMatchCount(Lotto targetLotto) {
+        return (int) this.lottoNumbers.stream()
+                .filter(targetLotto::contains)
+                .count();
+    }
+
+    public List<LottoNumber> toList() {
+        return Collections.unmodifiableList(lottoNumbers);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -50,23 +69,5 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
-    }
-
-    public static int calculateLottoNumber(Money money) {
-        return money.divide(PRICE);
-    }
-
-    public boolean contains(LottoNumber lottoNumber) {
-        return lottoNumbers.contains(lottoNumber);
-    }
-
-    public int findMatchCount(Lotto targetLotto) {
-        return (int) this.lottoNumbers.stream()
-                .filter(targetLotto::contains)
-                .count();
-    }
-
-    public List<LottoNumber> toList() {
-        return Collections.unmodifiableList(lottoNumbers);
     }
 }

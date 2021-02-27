@@ -3,10 +3,10 @@ package domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -20,7 +20,7 @@ class LottoTest {
     @Test
     void generate() {
         //given
-        List<LottoNumber> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6).stream()
+        List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
 
@@ -70,5 +70,49 @@ class LottoTest {
 
         //then
         assertThat(lottoNumber).isEqualTo(expectedLottoNumber);
+    }
+
+    @DisplayName("로또넘버가 로또에 포함되는 숫자인지 확인하는 기능")
+    @ParameterizedTest
+    @CsvSource(value = {
+            "1:true", "2:true", "3:true", "4:true", "5:true", "6:true", "7:false", "8:false"
+    }, delimiter = ':')
+    void contains(int lottoNumberValue, boolean expected) {
+        //given
+        Lotto lotto = new Lotto(new int[]{1, 2, 3, 4, 5, 6});
+        LottoNumber lottoNumber = new LottoNumber(lottoNumberValue);
+
+        //when
+        boolean actual = lotto.contains(lottoNumber);
+
+        //then
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @DisplayName("두 로또 중에서 일치하는 로또숫자 개수를 파악하는 기능")
+    @ParameterizedTest
+    @MethodSource
+    void findMatchCount(int[] lottoNumbers, int expected) {
+        //given
+        Lotto lotto = new Lotto(new int[]{1, 2, 3, 4, 5, 6});
+        Lotto targetLotto = new Lotto(lottoNumbers);
+
+        //when
+        int actual = lotto.findMatchCount(targetLotto);
+
+        //then
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> findMatchCount() {
+        return Stream.of(
+                Arguments.of(new int[]{1, 2, 3, 4, 5, 6}, 6),
+                Arguments.of(new int[]{1, 2, 3, 4, 5, 7}, 5),
+                Arguments.of(new int[]{1, 2, 3, 4, 7, 8}, 4),
+                Arguments.of(new int[]{1, 2, 3, 7, 8, 9}, 3),
+                Arguments.of(new int[]{1, 2, 7, 8, 9, 10}, 2),
+                Arguments.of(new int[]{1, 7, 8, 9, 10, 11}, 1),
+                Arguments.of(new int[]{7, 8, 9, 10, 11, 12}, 0)
+        );
     }
 }
