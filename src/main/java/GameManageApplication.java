@@ -29,7 +29,9 @@ public class GameManageApplication {
         BettingMoney bettingMoney = getBettingMoney();
         TicketCount ticketCount = bettingMoney.getTicketCount(LottoTicket.TICKET_PRICE);
         lottoGameScreen.showTicketCount(ticketCount);
+
         LottoTickets lottoTickets = getLottoTickets(ticketCount);
+
         viewGameResult(bettingMoney, lottoTickets);
     }
 
@@ -43,7 +45,7 @@ public class GameManageApplication {
         TicketCount randomTicketCount = ticketCount.reduceTicketCount(manualTicketCount);
         List<List<Integer>> manualTicketsNumbers = getManualTicketsNumbers(manualTicketCount);
 
-        LottoTickets lottoTickets = lottoService.getLottoTickets(manualTicketsNumbers, randomTicketCount);
+        LottoTickets lottoTickets = lottoService.makeLottoTickets(manualTicketsNumbers, randomTicketCount);
         lottoGameScreen.showAllLottoStatus(lottoTickets.getLottoTickets());
         return lottoTickets;
     }
