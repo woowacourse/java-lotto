@@ -2,12 +2,12 @@ package lotto.domain;
 
 import lotto.exception.LottoCustomException;
 
-public class WinningTicket {
+public class WinningLotto {
 
     private final Lotto lotto;
     private final LottoNumber bonusNumber;
 
-    public WinningTicket(Lotto lotto, LottoNumber bonusNumber) {
+    public WinningLotto(Lotto lotto, LottoNumber bonusNumber) {
         this.lotto = lotto;
 
         validateBonusNumber(bonusNumber);

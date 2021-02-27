@@ -7,12 +7,12 @@ public class LottoResultMachine {
     private LottoResultMachine() {
     }
 
-    public static EnumMap<Rank, Integer> confirmResult(Lottos lottos, WinningTicket winningTicket) {
+    public static EnumMap<Rank, Integer> confirmResult(Lottos lottos, WinningLotto winningLotto) {
         final List<Lotto> tickets = lottos.toList();
         final EnumMap<Rank, Integer> result = new EnumMap<>(Rank.class);
 
         tickets.forEach(ticket -> {
-            updateResult(result, winningTicket.getRankOfLottoResult(ticket));
+            updateResult(result, winningLotto.getRankOfLottoResult(ticket));
         });
         return result;
     }
