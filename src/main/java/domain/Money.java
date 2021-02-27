@@ -12,11 +12,9 @@ public class Money {
     private static final String NOT_DIVISIBLE_ERROR = "1000원 단위 금액이 아닙니다.";
 
     private final int value;
-    private final int numberOfTickets;
 
     private Money(final int value) {
         this.value = value;
-        this.numberOfTickets = this.value / MIN_PRICE;
     }
 
     public static Money valueOf(final int value) {
@@ -52,12 +50,16 @@ public class Money {
         return value;
     }
 
-    public boolean canBuy(int numberOfManualTickets) {
-        return numberOfManualTickets >= 0 && numberOfManualTickets <= numberOfTickets;
+    public int purchasedAutoLottoSize(int numberOfManualTicket) {
+        return purchasedLottoSize() - numberOfManualTicket;
     }
 
-    public int numberOfAutoTicket(int numberOfManualTicket) {
-        return numberOfTickets - numberOfManualTicket;
+    public int purchasedLottoSize() {
+        return this.value / MIN_PRICE;
+    }
+
+    public boolean canBuy(int numberOfManualTickets) {
+        return numberOfManualTickets >= 0 && numberOfManualTickets <= purchasedLottoSize();
     }
 
     @Override
