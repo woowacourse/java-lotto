@@ -21,7 +21,7 @@ public class LottoController {
     private LottoGroup buyLotto(Money money) {
         Seller seller = new Seller();
         int count = money.count();
-        LottoGroup lottos = seller.sell(count);
+        LottoGroup lottos = seller.sellAuto(count);
         OutputView.buyLottoMessage(count);
         OutputView.printLottos(lottos.getLottoGroup());
         return lottos;
@@ -34,7 +34,7 @@ public class LottoController {
         String bonusBallInput = InputView.requestInput();
         LottoGenerator lottoGenerator = new LottoGenerator();
         return new WinningLotto(
-            new Lotto(lottoGenerator.generateManual(winningLottoInput)),
+            lottoGenerator.generateManual(winningLottoInput),
             LottoNumber.of(bonusBallInput)
         );
     }

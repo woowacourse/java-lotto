@@ -20,21 +20,21 @@ public class LottoGenerator {
         }
     }
 
-    public Set<LottoNumber> generateAuto() {
-        List<Integer> lottoNumbers = new ArrayList<>(numbers);
-        Collections.shuffle(lottoNumbers);
-        lottoNumbers = lottoNumbers.subList(0, LOTTO_NUMBER_LIMIT);
-        return lottoNumbers.stream()
+    public Lotto generateAuto() {
+        Collections.shuffle(numbers);
+        List<Integer> lottoNumbers = numbers.subList(0, LOTTO_NUMBER_LIMIT);
+        Set<LottoNumber> lotto = lottoNumbers.stream()
             .map(LottoNumber::of)
             .collect(Collectors.toSet());
+        return new Lotto(lotto);
     }
 
-    public Set<LottoNumber> generateManual(String input) {
+    public Lotto generateManual(String input) {
         Set<LottoNumber> lottoNumber = new HashSet<>();
         for (String value : input.split(DELIMITER, -1)) {
             value = value.trim();
             lottoNumber.add(LottoNumber.of(value));
         }
-        return lottoNumber;
+        return new Lotto(lottoNumber);
     }
 }
