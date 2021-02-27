@@ -12,9 +12,9 @@ import org.junit.jupiter.api.Test;
 
 class LottoResultsTest {
 
-    Lottos lottos1;
-    Lottos lottos2;
-    LottoResults lottoResults;
+    private Lottos lottos1;
+    private Lottos lottos2;
+    private LottoResults lottoResults;
 
     @BeforeEach
     void setUp() {
