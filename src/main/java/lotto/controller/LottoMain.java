@@ -1,8 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.ticket.LottoNumber;
-import lotto.domain.ticket.LottoTicket;
-import lotto.domain.ticket.LottoTickets;
+import lotto.domain.ticket.*;
 import lotto.domain.ticketgenerator.LottoGenerator;
 import lotto.domain.ticketpurchase.PurchasedTickets;
 import lotto.domain.ticketpurchase.UserPurchase;
@@ -24,8 +22,8 @@ public class LottoMain {
         UserPurchase userPurchase = getUserPurchaseInput();
         List<LottoTicket> manualLottoTicketsInput = getManualLottoTicketInput(userPurchase);
 
-        LottoTickets manualTickets = generateManualTicket(lottoGenerator, manualLottoTicketsInput);
-        LottoTickets autoTickets = generateAutoTicket(lottoGenerator, userPurchase);
+        ManualTickets manualTickets = (ManualTickets) generateManualTicket(lottoGenerator, manualLottoTicketsInput);
+        AutoTickets autoTickets = (AutoTickets) generateAutoTicket(lottoGenerator, userPurchase);
         PurchasedTickets purchasedTickets = new PurchasedTickets(manualTickets, autoTickets);
         OutputView.printPurchasedLottoTickets(purchasedTickets);
 

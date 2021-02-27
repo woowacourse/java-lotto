@@ -1,9 +1,7 @@
 package lotto.domain.ticketresult;
 
 
-import lotto.domain.ticket.LottoNumber;
-import lotto.domain.ticket.LottoTicket;
-import lotto.domain.ticket.LottoTickets;
+import lotto.domain.ticket.*;
 import lotto.domain.ticketpurchase.PurchasedTickets;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,7 +15,7 @@ import static lotto.domain.ticketresult.Rank.*;
 
 public class LottoComparatorTest {
     private WinningLottoNumbers winningLottoNumbers;
-    private LottoTickets dummy;
+    private ManualTickets dummy;
 
     @BeforeEach
     void setWinningLottoNumbersAndDummyTicket() {
@@ -41,7 +39,7 @@ public class LottoComparatorTest {
                 new LottoNumber(36)
         ));
 
-        dummy = new LottoTickets(Arrays.asList(ticket));
+        dummy = new ManualTickets(Arrays.asList(ticket));
         LottoNumber bonusNumber = new LottoNumber(7);
         winningLottoNumbers = new WinningLottoNumbers(winnerTicket, bonusNumber);
     }
@@ -58,9 +56,8 @@ public class LottoComparatorTest {
                 new LottoNumber(6)
         ));
 
-        LottoTickets tickets = new LottoTickets(Arrays.asList(ticket));
-
-        PurchasedTickets purchasedTickets = new PurchasedTickets(tickets, dummy);
+        AutoTickets tickets = new AutoTickets(Arrays.asList(ticket));
+        PurchasedTickets purchasedTickets = new PurchasedTickets(dummy, tickets);
 
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
         Map<Rank, Integer> lottoResult = lottoComparator.getLottoResult(purchasedTickets);
@@ -84,9 +81,8 @@ public class LottoComparatorTest {
                 new LottoNumber(7)
         ));
 
-        LottoTickets tickets = new LottoTickets(Arrays.asList(ticket));
-
-        PurchasedTickets purchasedTickets = new PurchasedTickets(tickets, dummy);
+        AutoTickets tickets = new AutoTickets(Arrays.asList(ticket));
+        PurchasedTickets purchasedTickets = new PurchasedTickets(dummy, tickets);
 
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
         Map<Rank, Integer> lottoResult = lottoComparator.getLottoResult(purchasedTickets);
@@ -110,8 +106,8 @@ public class LottoComparatorTest {
                 new LottoNumber(10)
         ));
 
-        LottoTickets tickets = new LottoTickets(Arrays.asList(ticket));
-        PurchasedTickets purchasedTickets = new PurchasedTickets(tickets, dummy);
+        AutoTickets tickets = new AutoTickets(Arrays.asList(ticket));
+        PurchasedTickets purchasedTickets = new PurchasedTickets(dummy, tickets);
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
         Map<Rank, Integer> lottoResult = lottoComparator.getLottoResult(purchasedTickets);
 
@@ -134,8 +130,8 @@ public class LottoComparatorTest {
                 new LottoNumber(10)
         ));
 
-        LottoTickets tickets = new LottoTickets(Arrays.asList(ticket));
-        PurchasedTickets purchasedTickets = new PurchasedTickets(tickets, dummy);
+        AutoTickets tickets = new AutoTickets(Arrays.asList(ticket));
+        PurchasedTickets purchasedTickets = new PurchasedTickets(dummy, tickets);
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
         Map<Rank, Integer> lottoResult = lottoComparator.getLottoResult(purchasedTickets);
 
@@ -158,8 +154,8 @@ public class LottoComparatorTest {
                 new LottoNumber(10)
         ));
 
-        LottoTickets tickets = new LottoTickets(Arrays.asList(ticket));
-        PurchasedTickets purchasedTickets = new PurchasedTickets(tickets, dummy);
+        AutoTickets tickets = new AutoTickets(Arrays.asList(ticket));
+        PurchasedTickets purchasedTickets = new PurchasedTickets(dummy, tickets);
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
         Map<Rank, Integer> lottoResult = lottoComparator.getLottoResult(purchasedTickets);
 

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoTickets {
+public abstract class LottoTickets {
     private final List<LottoTicket> tickets;
 
     public LottoTickets(List<LottoTicket> tickets) {

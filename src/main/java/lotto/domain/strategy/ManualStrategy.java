@@ -1,7 +1,7 @@
 package lotto.domain.strategy;
 
 import lotto.domain.ticket.LottoTicket;
-import lotto.domain.ticket.LottoTickets;
+import lotto.domain.ticket.ManualTickets;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ public class ManualStrategy implements GenerateStrategy {
     }
 
     @Override
-    public LottoTickets generateTickets() {
-        return new LottoTickets(tickets);
+    public ManualTickets generateTickets() {
+        return new ManualTickets(tickets);
     }
 }

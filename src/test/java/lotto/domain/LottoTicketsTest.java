@@ -1,6 +1,7 @@
 package lotto.domain;
 
 
+import lotto.domain.ticket.AutoTickets;
 import lotto.domain.ticket.LottoNumber;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTickets;
@@ -29,7 +30,8 @@ public class LottoTicketsTest {
         LottoTicket lottoTicket2 = new LottoTicket(lottoNumbers);
 
         List<LottoTicket> lottoTickets = new ArrayList<>(Arrays.asList(lottoTicket1, lottoTicket2));
-        LottoTickets purchasedLottoTickets = new LottoTickets(lottoTickets);
+        // TODO 확인
+        LottoTickets purchasedLottoTickets = new AutoTickets(lottoTickets);
 
         assertThat(purchasedLottoTickets.size()).isEqualTo(2);
     }

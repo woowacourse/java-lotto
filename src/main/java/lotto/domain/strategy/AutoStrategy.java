@@ -1,8 +1,8 @@
 package lotto.domain.strategy;
 
+import lotto.domain.ticket.AutoTickets;
 import lotto.domain.ticket.LottoNumber;
 import lotto.domain.ticket.LottoTicket;
-import lotto.domain.ticket.LottoTickets;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,12 +25,12 @@ public class AutoStrategy implements GenerateStrategy {
     }
 
     @Override
-    public LottoTickets generateTickets() {
+    public AutoTickets generateTickets() {
         List<LottoTicket> tickets = new ArrayList<>();
         for (int i = 0; i < ticketCount; i++) {
             tickets.add(generateTicket());
         }
-        return new LottoTickets(tickets);
+        return new AutoTickets(tickets);
     }
 
     private LottoTicket generateTicket() {
