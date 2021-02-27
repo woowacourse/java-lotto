@@ -1,8 +1,9 @@
 package lottogame.controller;
 
+import java.util.List;
 import java.util.Set;
+import lottogame.domain.Count;
 import lottogame.domain.LottoGame;
-import lottogame.domain.LottoGameResult;
 import lottogame.domain.Money;
 import lottogame.domain.machine.LottoTicketIssueMachine;
 import lottogame.domain.number.LottoWinningNumbers;
@@ -16,25 +17,28 @@ public class LottoGameController {
     }
 
     public void play() {
-        LottoTickets lottoTickets = getLottoTickets(new Money(InputView.inputMoney()));
-        OutputView.printLottoTickets(lottoTickets.getLottoTickets());
+        Money money = new Money(InputView.inputMoney());
+        Count manualTicketCount = new Count(InputView.inputManualTicketCount());
+        LottoGame lottoGame = new LottoGame(new LottoTicketIssueMachine(money, manualTicketCount));
+
+        LottoTickets lottoTickets = getLottoTickets(manualTicketCount, lottoGame);
         LottoWinningNumbers lottoWinningNumbers = getWinningNumbers();
 
-        LottoGame lottoGame = new LottoGame(lottoTickets, lottoWinningNumbers);
-        LottoGameResult lottoGameResult = lottoGame.getMatchingResult();
-        OutputView.printLottoGameResult(lottoGameResult);
-        OutputView.printLottoGameYield(lottoGame.getYield(lottoGameResult));
+        OutputView.printLottoGameResult(lottoGame.getMatchingResult(lottoTickets, lottoWinningNumbers));
+        OutputView.printLottoGameYield(lottoGame.getYield(lottoTickets, lottoWinningNumbers));
+    }
+
+    private LottoTickets getLottoTickets(final Count manualTicketCount, final LottoGame lottoGame) {
+        List<Set<Integer>> manualTicketNumbers = InputView.inputManualTicketNumbers(manualTicketCount);
+        LottoTickets manualTickets = lottoGame.issueManualTickets(manualTicketNumbers);
+        LottoTickets autoTickets = lottoGame.issueAutoTickets();
+        OutputView.printLottoTickets(manualTickets.getLottoTickets(), autoTickets.getLottoTickets());
+        return manualTickets.joinLottoTickets(autoTickets);
     }
 
     private LottoWinningNumbers getWinningNumbers() {
         Set<Integer> winningNumbers = InputView.inputWinningNumbers();
         int bonusNumber = InputView.inputBonusNumber();
         return new LottoWinningNumbers(winningNumbers, bonusNumber);
-    }
-
-    private LottoTickets getLottoTickets(Money money) {
-        LottoTicketIssueMachine lottoTicketIssueMachine =
-            new LottoTicketIssueMachine(new Money(money));
-        return lottoTicketIssueMachine.issueTickets();
     }
 }

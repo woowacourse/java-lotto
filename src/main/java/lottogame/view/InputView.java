@@ -1,10 +1,13 @@
 package lottogame.view;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import lottogame.domain.Count;
 
 public class InputView {
 
@@ -18,12 +21,29 @@ public class InputView {
         return Integer.parseInt(money);
     }
 
-    public static Set<Integer> inputWinningNumbers() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return getWinningNumbers(PATTERN.matcher(SCANNER.nextLine()));
+    public static int inputManualTicketCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        String count = SCANNER.nextLine();
+        validateInteger(count);
+        return Integer.parseInt(count);
     }
 
-    private static Set<Integer> getWinningNumbers(Matcher matcher) {
+    public static List<Set<Integer>> inputManualTicketNumbers(final Count purchaseCount) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        List<Set<Integer>> manualTicketNumbers = new ArrayList<>();
+        while (purchaseCount.isRemain()) {
+            purchaseCount.reduce();
+            manualTicketNumbers.add(splitNumbers(PATTERN.matcher(SCANNER.nextLine())));
+        }
+        return manualTicketNumbers;
+    }
+
+    public static Set<Integer> inputWinningNumbers() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        return splitNumbers(PATTERN.matcher(SCANNER.nextLine()));
+    }
+
+    private static Set<Integer> splitNumbers(Matcher matcher) {
         Set<Integer> winningNumbers = new HashSet<>();
         while (matcher.find()) {
             String number = matcher.group();

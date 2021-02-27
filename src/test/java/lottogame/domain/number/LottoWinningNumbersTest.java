@@ -21,12 +21,12 @@ public class LottoWinningNumbersTest {
 
         LottoTicket lottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 7)
             .stream()
-            .map(LottoNumber::new)
+            .map(LottoNumber::valueOf)
             .collect(Collectors.toSet())
         );
 
         assertThat(lottoWinningNumbers.countMatchedWinningNumber(lottoTicket)).isEqualTo(5);
-        assertThat(lottoWinningNumbers.isMatchBonusNumber(lottoTicket)).isTrue();
+        assertThat(lottoWinningNumbers.hasBonusNumber(lottoTicket)).isTrue();
     }
 
     @Test

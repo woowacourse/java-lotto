@@ -1,20 +1,26 @@
 package lottogame.domain.number;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
-import lottogame.utils.RandomUtils;
 
 public class LottoNumber {
 
     private static final int START_LOTTO_NUMBER = 1;
     private static final int FINISH_LOTTO_NUMBER = 45;
+    private static final Map<Integer, LottoNumber> CACHE = new HashMap<>();
+
+    static {
+        for (int i = START_LOTTO_NUMBER; i <= FINISH_LOTTO_NUMBER; i++) {
+            CACHE.put(i, new LottoNumber(i));
+        }
+    }
 
     private final int number;
 
-    public LottoNumber() {
-        this(RandomUtils.nextPositiveInt(START_LOTTO_NUMBER, FINISH_LOTTO_NUMBER));
-    }
-
-    public LottoNumber(final int number) {
+    private LottoNumber(final int number) {
         this.number = number;
         validateNumberRange(this.number);
     }
@@ -26,8 +32,20 @@ public class LottoNumber {
         }
     }
 
+    public static LottoNumber valueOf(final int number) {
+        LottoNumber lottoNumber = CACHE.get(number);
+        if (Objects.isNull(lottoNumber)) {
+            lottoNumber = new LottoNumber(number);
+        }
+        return lottoNumber;
+    }
+
+    public static List<LottoNumber> numbers() {
+        return new ArrayList<>(CACHE.values());
+    }
+
     public int getNumber() {
-        return number;
+        return this.number;
     }
 
     @Override

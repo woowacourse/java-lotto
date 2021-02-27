@@ -11,19 +11,19 @@ public enum Rank {
     RANK1(6, false, 2_000_000_000);
 
     private final int matchCount;
-    private final boolean isBonusMatch;
+    private final boolean hasBonus;
     private final int price;
 
-    Rank(final int matchCount, final boolean isBonusMatch, final int price) {
+    Rank(final int matchCount, final boolean hasBonus, final int price) {
         this.matchCount = matchCount;
-        this.isBonusMatch = isBonusMatch;
+        this.hasBonus = hasBonus;
         this.price = price;
     }
 
-    public static Rank of(final int matchCount, final boolean isBonusMatch) {
+    public static Rank of(final int matchCount, final boolean hasBonus) {
         return Arrays.stream(values())
             .filter(rank -> rank.isSameMatchCount(matchCount))
-            .filter(rank -> !rank.equals(RANK2) || isBonusMatch)
+            .filter(rank -> rank.isSameBonus(hasBonus))
             .findAny()
             .orElse(FAIL);
     }
@@ -32,15 +32,19 @@ public enum Rank {
         return this.matchCount == matchCount;
     }
 
-    public int getMatchCount() {
-        return matchCount;
-    }
-
-    public boolean isBonusMatch() {
-        return isBonusMatch;
+    private boolean isSameBonus(boolean hasBonus) {
+        return this.hasBonus == hasBonus;
     }
 
     public int getPrice() {
         return this.price;
+    }
+
+    public int getMatchCount() {
+        return this.matchCount;
+    }
+
+    public boolean hasBonus() {
+        return this.hasBonus;
     }
 }
