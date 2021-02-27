@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.ticket.LottoTicket;
+import lotto.domain.ticketpurchase.PurchasePrice;
 import lotto.domain.ticketpurchase.PurchasedTickets;
 import lotto.domain.ticketpurchase.UserPurchase;
 import lotto.domain.ticketresult.Rank;
@@ -25,7 +26,7 @@ public class OutputView {
         InputPrinter.printNewLine();
     }
 
-    public static void printResult(Map<Rank, Integer> result, UserPurchase userPurchase) {
+    public static void printResult(Map<Rank, Integer> result, PurchasePrice purchasePrice) {
         OutputPrinter.printResultTitleMessage();
         int totalPrize = 0;
 
@@ -34,7 +35,7 @@ public class OutputView {
             OutputPrinter.printEachNumberMatchedCountMessage(rank, result);
         }
 
-        double profit = (double) totalPrize / (double) userPurchase.getPurchasePrice();
+        double profit = (double) totalPrize / (double) purchasePrice.getPurchasePrice();
         OutputPrinter.printProfitMessage(profit);
     }
 }

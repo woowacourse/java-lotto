@@ -3,6 +3,7 @@ package lotto.domain.ticket;
 import java.util.*;
 
 public class LottoTicket {
+    public static final int PRICE = 1000;
     public static final int SIZE = 6;
 
     private final List<LottoNumber> numbers;

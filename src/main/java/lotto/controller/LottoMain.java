@@ -7,6 +7,7 @@ import lotto.domain.ticket.LottoNumber;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.ManualTickets;
 import lotto.domain.ticketgenerator.LottoGenerator;
+import lotto.domain.ticketpurchase.PurchasePrice;
 import lotto.domain.ticketpurchase.PurchasedTickets;
 import lotto.domain.ticketpurchase.UserPurchase;
 import lotto.domain.ticketresult.LottoComparator;
@@ -32,12 +33,12 @@ public class LottoMain {
 
         WinningLottoNumbers winningLottoNumbers = getWinningLottoNumbersInput();
         LottoComparator lottoComparator = new LottoComparator(winningLottoNumbers);
-        OutputView.printResult(lottoComparator.getLottoResult(purchasedTickets), userPurchase);
+        OutputView.printResult(lottoComparator.getLottoResult(purchasedTickets), userPurchase.getPurchasePrice());
     }
 
     private static UserPurchase getUserPurchaseInput() {
         try {
-            int purchasePrice = InputView.getPurchasePrice();
+            PurchasePrice purchasePrice = new PurchasePrice(InputView.getPurchasePrice());
             int manualTicketCount = getManualTicketCountInput();
             return new UserPurchase(purchasePrice, manualTicketCount);
         } catch (Exception e) {
