@@ -13,7 +13,7 @@ import java.util.Map;
  * @author Daeun Lee, github.com/da-nyee
  */
 public class LottoResult {
-    private static final Integer ZERO = 0;
+    private static final Integer INITIAL_VALUE_ONE = 1;
 
     private final Map<Rank, Integer> resultStatisticsMap;
 
@@ -23,15 +23,20 @@ public class LottoResult {
 
     public static LottoResult of(WinningNumbers winningNumbers, List<LottoTicket> lottoTickets) {
         Map<Rank, Integer> resultStatisticsMap = new HashMap<>();
-        for (Rank rank : Rank.values()) {
-            resultStatisticsMap.put(rank, ZERO);
-        }
         for (LottoTicket lottoTicket : lottoTickets) {
             Rank rank = winningNumbers.calculateRank(lottoTicket);
-            Integer count = resultStatisticsMap.get(rank);
-            resultStatisticsMap.put(rank, count + 1);
+            addCount(resultStatisticsMap, rank);
         }
         return new LottoResult(resultStatisticsMap);
+    }
+
+    private static void addCount(Map<Rank, Integer> resultStatisticsMap, Rank rank) {
+        if (resultStatisticsMap.containsKey(rank)) {
+            int count = resultStatisticsMap.get(rank);
+            resultStatisticsMap.put(rank, count + 1);
+            return;
+        }
+        resultStatisticsMap.put(rank, INITIAL_VALUE_ONE);
     }
 
     public Map<Rank, Integer> result() {
@@ -40,7 +45,7 @@ public class LottoResult {
 
     public Money getReward() {
         long total = 0;
-        for (Rank rank : Rank.values()) {
+        for (Rank rank : resultStatisticsMap.keySet()) {
             long count = resultStatisticsMap.get(rank);
             total += count * rank.getReward().toLong();
         }

@@ -21,6 +21,7 @@ public class OutputView {
     private static final String MESSAGE_PROFIT_FORMAT = "총 수익률은 %.2f입니다.";
     private static final String MESSAGE_REQUEST_MANUAL_NUMBER = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String ERROR_NOT_ENOUGH_BUDGET = "[ERROR] 보유 금액이 충분하지 않습니다.";
+    private static final int ZERO = 0;
 
     private static OutputView instance;
 
@@ -53,8 +54,15 @@ public class OutputView {
         Collections.reverse(ranks);
         System.out.print(MESSAGE_STATISTICS);
         for (Rank rank : ranks) {
-            printMatchCount(rank, lottoResult.get(rank));
+            printMatchCount(rank, getValueOfKeyOrReturnZero(lottoResult, rank));
         }
+    }
+    
+    private int getValueOfKeyOrReturnZero(Map<Rank, Integer> lottoResult, Rank key) {
+        if (lottoResult.containsKey(key)) {
+            return lottoResult.get(key);
+        }
+        return ZERO;
     }
 
     private void printMatchCount(Rank rank, long count) {

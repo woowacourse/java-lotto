@@ -37,9 +37,6 @@ public class LottoResultTest {
             {
                 put(Rank.FIRST, 1);
                 put(Rank.SECOND, 2);
-                put(Rank.THIRD, 0);
-                put(Rank.FOURTH, 0);
-                put(Rank.FIFTH, 0);
                 put(Rank.NOTHING, 1);
             }
         });
