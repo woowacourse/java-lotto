@@ -1,33 +1,38 @@
 package lotto.domain.rank;
 
 
-import static lotto.domain.lotto.LottoTicket.LOTTO_LINE_PRICE;
+import static lotto.domain.lotto.util.LottoMoney.LOTTO_LINE_PRICE;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Ranks {
 
-    private final List<Rank> ranks;
+    private final Map<Rank, Long> rankCounts;
 
     public Ranks(List<Rank> ranks) {
-        this.ranks = new ArrayList<>(ranks);
+        this.rankCounts = ranks.stream()
+            .collect(Collectors.groupingBy(it -> it, HashMap::new, Collectors.counting()));
     }
 
     public int getNumberOfRank(Rank rank) {
-        long count = ranks.stream().filter(it -> it.equals(rank)).count();
-        return (int) count;
+        return rankCounts.getOrDefault(rank, 0L).intValue();
     }
 
     public float calculateProfitRate() {
         float totalWinMoney = Arrays.stream(Rank.values())
-            .mapToInt(rank -> getNumberOfRank(rank) * rank.getMoney()).sum();
-        return totalWinMoney / getPurchaseMoney();
+            .mapToInt(rank -> rank.calculateRankMoney(getNumberOfRank(rank)))
+            .sum();
+        return totalWinMoney / getTotalPurchaseMoney();
     }
 
-    private int getPurchaseMoney() {
-        return ranks.size() * LOTTO_LINE_PRICE;
+    private int getTotalPurchaseMoney() {
+        return rankCounts.values().stream()
+            .mapToInt(Long::intValue)
+            .sum() * LOTTO_LINE_PRICE;
     }
 
 }

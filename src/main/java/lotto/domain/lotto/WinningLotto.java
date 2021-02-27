@@ -1,17 +1,17 @@
 package lotto.domain.lotto;
 
-import static lotto.view.messages.ErrorMessages.LOTTO_LINE_NUMBER_BONUS_LOTTO_NUMBER_DUPLICATE_ERROR;
-
 import java.util.List;
 
-public class WinningLottoLine {
+public class WinningLotto {
 
+    public static final String LOTTO_LINE_NUMBER_BONUS_LOTTO_NUMBER_DUPLICATE_ERROR = "[Error] 로또 번호와 보너스 번호가 중복됩니다.";
     private final LottoLine winningLottoLine;
     private final LottoNumber bonusLottoNumber;
 
-    public WinningLottoLine(LottoLine winningLottoLine, LottoNumber bonusLottoNumber) {
-        if (winningLottoLine.isContainLottoNumber(bonusLottoNumber)) {
-            throw new IllegalArgumentException(LOTTO_LINE_NUMBER_BONUS_LOTTO_NUMBER_DUPLICATE_ERROR.getMessage());
+    public WinningLotto(LottoLine winningLottoLine, LottoNumber bonusLottoNumber) {
+        if (winningLottoLine.hasLottoNumber(bonusLottoNumber)) {
+            throw new IllegalArgumentException(
+                LOTTO_LINE_NUMBER_BONUS_LOTTO_NUMBER_DUPLICATE_ERROR);
         }
         this.winningLottoLine = winningLottoLine;
         this.bonusLottoNumber = bonusLottoNumber;

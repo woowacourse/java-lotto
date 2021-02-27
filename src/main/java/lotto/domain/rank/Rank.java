@@ -11,15 +11,15 @@ public enum Rank {
     FIFTH(3, 5_000),
     NO_MATCH(0, 0);
 
-    private int matchCount;
-    private int money;
+    private final int matchCount;
+    private final int money;
 
-    Rank(int matchCount, int money){
+    Rank(int matchCount, int money) {
         this.matchCount = matchCount;
         this.money = money;
     }
 
-    public static Rank getMatchedRank(int matchCount, boolean hasBonusNumber){
+    public static Rank of(int matchCount, boolean hasBonusNumber) {
         return Arrays.stream(Rank.values())
             .filter(rank -> rank.isSameMatchCount(matchCount))
             .filter(rank -> !rank.equals(SECOND) || hasBonusNumber)
@@ -27,12 +27,12 @@ public enum Rank {
             .orElse(NO_MATCH);
     }
 
-    private boolean isSameMatchCount(int matchCount){
+    private boolean isSameMatchCount(int matchCount) {
         return this.matchCount == matchCount;
     }
 
-    public int getMoney(){
-        return money;
+    public int calculateRankMoney(int rankCounts) {
+        return rankCounts * money;
     }
 
 }
