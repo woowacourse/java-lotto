@@ -14,7 +14,7 @@ public class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 10, 45})
     void Should_Not_ThrowException_When_LottoNumberInRange(int lottoNumber) {
-        assertThatCode(() -> new LottoNumber(lottoNumber))
+        assertThatCode(() -> LottoNumber.of(lottoNumber))
                 .doesNotThrowAnyException();
     }
 
@@ -22,7 +22,7 @@ public class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {-1, 0, 46})
     void Should_ThrowException_When_LottoNumberOutRange(int lottoNumber) {
-        assertThatThrownBy(() -> new LottoNumber(lottoNumber))
+        assertThatThrownBy(() -> LottoNumber.of(lottoNumber))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

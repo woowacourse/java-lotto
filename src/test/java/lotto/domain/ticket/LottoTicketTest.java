@@ -15,12 +15,12 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class LottoTicketTest {
     private final List<LottoNumber> lottoNumbers = new ArrayList<>(
             Arrays.asList(
-                    new LottoNumber(1),
-                    new LottoNumber(2),
-                    new LottoNumber(3),
-                    new LottoNumber(4),
-                    new LottoNumber(5),
-                    new LottoNumber(6)
+                    LottoNumber.of(1),
+                    LottoNumber.of(2),
+                    LottoNumber.of(3),
+                    LottoNumber.of(4),
+                    LottoNumber.of(5),
+                    LottoNumber.of(6)
             ));
 
     @DisplayName("로또 티켓 정상 생성 테스트")
@@ -47,7 +47,7 @@ public class LottoTicketTest {
     @Test
     void Should_ThrowException_When_LottoNumberDuplicate() {
         lottoNumbers.remove(0);
-        lottoNumbers.add(0, new LottoNumber(2));
+        lottoNumbers.add(0, LottoNumber.of(2));
 
         assertThatThrownBy(() -> {
             LottoTicket lottoTicket = new LottoTicket(lottoNumbers);

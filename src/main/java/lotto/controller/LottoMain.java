@@ -103,14 +103,14 @@ public class LottoMain {
     private static LottoTicket getLottoTicketInput() {
         List<Integer> numbers = InputView.getLottoNumbers();
         List<LottoNumber> lottoNumbers = numbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
         return new LottoTicket(lottoNumbers);
     }
 
     private static LottoNumber getBonusNumberInput() {
         try {
-            return new LottoNumber(InputView.getBonusNumberInput());
+            return LottoNumber.of(InputView.getBonusNumberInput());
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return getBonusNumberInput();

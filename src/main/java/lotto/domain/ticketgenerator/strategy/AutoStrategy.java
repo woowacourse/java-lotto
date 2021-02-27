@@ -21,7 +21,7 @@ public class AutoStrategy implements GenerateStrategy {
 
     private void initAllNumbers() {
         for (int i = LottoNumber.MINIMUM; i <= LottoNumber.MAXIMUM; i++) {
-            allNumbers.add(new LottoNumber(i));
+            allNumbers.add(LottoNumber.of(i));
         }
     }
 

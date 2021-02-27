@@ -19,12 +19,12 @@ public class LottoTicketsTest {
     @Test
     void Should_ReturnLottoTickets_When_AddedLottoTickets() {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
-        lottoNumbers.add(new LottoNumber(1));
-        lottoNumbers.add(new LottoNumber(2));
-        lottoNumbers.add(new LottoNumber(3));
-        lottoNumbers.add(new LottoNumber(4));
-        lottoNumbers.add(new LottoNumber(5));
-        lottoNumbers.add(new LottoNumber(6));
+        lottoNumbers.add(LottoNumber.of(1));
+        lottoNumbers.add(LottoNumber.of(2));
+        lottoNumbers.add(LottoNumber.of(3));
+        lottoNumbers.add(LottoNumber.of(4));
+        lottoNumbers.add(LottoNumber.of(5));
+        lottoNumbers.add(LottoNumber.of(6));
 
         LottoTicket lottoTicket1 = new LottoTicket(lottoNumbers);
         LottoTicket lottoTicket2 = new LottoTicket(lottoNumbers);

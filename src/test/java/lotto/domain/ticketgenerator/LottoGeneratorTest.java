@@ -22,21 +22,21 @@ public class LottoGeneratorTest {
     void setUp() {
         lottoGenerator = new LottoGenerator();
         LottoTicket ticket1 = new LottoTicket(Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(6)
         ));
 
         LottoTicket ticket2 = new LottoTicket(Arrays.asList(
-                new LottoNumber(31),
-                new LottoNumber(32),
-                new LottoNumber(33),
-                new LottoNumber(34),
-                new LottoNumber(35),
-                new LottoNumber(36)
+                LottoNumber.of(31),
+                LottoNumber.of(32),
+                LottoNumber.of(33),
+                LottoNumber.of(34),
+                LottoNumber.of(35),
+                LottoNumber.of(36)
         ));
         tickets = Arrays.asList(ticket1, ticket2);
     }
