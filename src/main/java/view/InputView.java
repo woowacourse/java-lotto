@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class InputView {
 
@@ -16,22 +17,31 @@ public class InputView {
 
     public static Money inputPurchaseMoney() {
         System.out.println("구입금액을 입력해 주세요.");
-        int money = SCANNER.nextInt();
+        int money = Integer.parseInt(SCANNER.nextLine());
         return Money.createPurchasingLottoMoney(money);
     }
 
-    public static CountOfPurchasingLotto inputPurchasingPassiveLottoNumber() {
+    public static int inputPurchasingPassiveLottoNumber() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        return new CountOfPurchasingLotto(SCANNER.nextInt());
+        return Integer.parseInt(SCANNER.nextLine());
+    }
+
+    public static List<Lotto> inputPurchasingPassiveLottos(int numberOfLotto) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        List<Lotto> lottos = Stream.generate(InputView::inputLotto)
+                .limit(numberOfLotto)
+                .collect(Collectors.toList());
+        return lottos;
     }
 
     public static WinningLotto inputWinningLotto() {
-        return new WinningLotto(inputLotto(), inputBonusBall());
+        System.out.println("지난 주 당첨 로또를 입력해주세요.");
+        Lotto lastWinningLotto = inputLotto();
+
+        return new WinningLotto(lastWinningLotto, inputBonusBall());
     }
 
     private static Lotto inputLotto() {
-        System.out.println("지난 주 당첨 로또를 입력해주세요.");
-        SCANNER.nextLine();
         String input = SCANNER.nextLine();
         List<LottoNumber> lottoNumbers = Arrays.stream(input.split(","))
                 .map(String::trim)

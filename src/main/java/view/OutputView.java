@@ -15,8 +15,8 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void printNumberOfPurchaseLotto(CountOfPurchasingLotto numberOfLotto) {
-        System.out.println(numberOfLotto.getValue() + "개를 구매했습니다.");
+    public static void printNumberOfPurchaseLotto(int numberOfPassiveLotto, int numberOfLotto) {
+        System.out.println("수동으로 " + numberOfPassiveLotto + "장, " + "자동으로 " + numberOfLotto + "개를 구매했습니다.");
     }
 
     public static void printAllLottos(Lottos lottos) {
