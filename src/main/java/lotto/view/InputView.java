@@ -7,6 +7,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoNumber;
+import lotto.exception.InvalidLottoNumberException;
 import lotto.exception.LessThanLottoPriceException;
 
 public class InputView {
@@ -23,7 +24,7 @@ public class InputView {
             validatePurchaseAmount(purchaseAmountValue);
             System.out.println();
             return purchaseAmountValue;
-        } catch (Exception e) {
+        } catch (LessThanLottoPriceException e) {
             OutputView.printExceptionMessage(e);
             return inputPurchaseAmount();
         }
@@ -43,7 +44,7 @@ public class InputView {
                 manualLottoNumbers.add(Lotto.of(inputLottoNumber()));
             }
             return manualLottoNumbers;
-        } catch (Exception e) {
+        } catch (InvalidLottoNumberException e) {
             OutputView.printExceptionMessage(e);
             return inputManualLottoNumbers(numOfPurchases);
         }
@@ -56,7 +57,7 @@ public class InputView {
             validateNumOfManualLotto(numOfPurchases);
             System.out.println();
             return numOfPurchases;
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
             OutputView.printExceptionMessage(e);
             return inputNumOfManualLotto();
         }
@@ -75,7 +76,7 @@ public class InputView {
                 .map(number -> number.trim())
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             OutputView.printExceptionMessage(e);
             return inputLottoNumber();
         }
@@ -85,7 +86,7 @@ public class InputView {
         try {
             OutputView.printWinningLottoGuideMessage();
             return Lotto.of(inputLottoNumber());
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
             OutputView.printExceptionMessage(e);
             return inputWinningLottoNumbers();
         }
@@ -97,7 +98,7 @@ public class InputView {
             int bonusValue = Integer.parseInt(scanner.nextLine());
             validateWinningBonus(bonusValue);
             return bonusValue;
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
             OutputView.printExceptionMessage(e);
             return inputWinningBonus();
         }

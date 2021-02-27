@@ -1,6 +1,7 @@
 package lotto.domain.lotto;
 
 import java.util.Objects;
+import lotto.exception.InvalidLottoNumberException;
 
 public class LottoNumber {
 
@@ -20,7 +21,7 @@ public class LottoNumber {
 
     private static void validateLottoNumber(int value) {
         if (value < LottoNumberCache.LOW || value > LottoNumberCache.HIGH) {
-            throw new IllegalArgumentException("로또 번호는 1부터 45사이의 값이어야 합니다.");
+            throw new InvalidLottoNumberException();
         }
     }
 

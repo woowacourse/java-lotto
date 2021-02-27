@@ -25,7 +25,7 @@ public class LottoController {
             LottoResults lottoResults = LottoResults
                 .of(manualLottos.match(winningLotto), automaticLottos.match(winningLotto));
             OutputView.printLottoResult(lottoResults);
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
             OutputView.printExceptionMessage(e);
             play();
         }
