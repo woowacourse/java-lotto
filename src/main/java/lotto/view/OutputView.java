@@ -4,6 +4,8 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoRank;
 import lotto.domain.Lottos;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -19,13 +21,21 @@ public class OutputView {
         System.out.println(message);
     }
 
-    public static void printPurchasedLottos(int manualLottoCount, Lottos purchasedLottos) {
-        List<Lotto> lottoBunch = purchasedLottos.getLottoBunch();
-        System.out.printf(PURCHASED_LOTTO_COUNT_ALARM, manualLottoCount, purchasedLottos.getSize() - manualLottoCount);
-        for (Lotto lotto : lottoBunch) {
+    public static void printPurchasedLottos(Lottos purchasedManualLottos, Lottos purchasedAutoLottos) {
+        System.out.printf(PURCHASED_LOTTO_COUNT_ALARM, purchasedAutoLottos.getSize(), purchasedAutoLottos.getSize());
+
+        for (Lotto lotto : getLottoBunch(purchasedManualLottos, purchasedAutoLottos)) {
             System.out.println(lotto.getNumbers());
         }
         System.out.println();
+    }
+
+    private static List<Lotto> getLottoBunch(Lottos purchasedManualLottos, Lottos purchasedAutoLottos) {
+        List<Lotto> lottoBunch = new ArrayList<>();
+        lottoBunch.addAll(purchasedManualLottos.getLottoBunch());
+        lottoBunch.addAll(purchasedAutoLottos.getLottoBunch());
+
+        return lottoBunch;
     }
 
     public static void printLottoStatistics(Map<LottoRank, Integer> statistics, double profitRate) {

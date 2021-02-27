@@ -34,13 +34,18 @@ public class LottoStore {
     private Lottos buyLotto() {
         Money money = new Money(InputView.inputMoney());
         int affordableLottoTicketCount = calculateAffordableLottoTickets(money);
+        return getPurchasedLottos(affordableLottoTicketCount);
+    }
+
+    private Lottos getPurchasedLottos(int affordableLottoTicketCount) {
         List<String> manualLottoNumbers = getManualLottoNumbers(affordableLottoTicketCount);
         Lottos purchasedManualLottos = LottoGenerator.createManualLottos(manualLottoNumbers);
         Lottos purchasedAutoLottos =
                 LottoGenerator.createAutoLottos(affordableLottoTicketCount - manualLottoNumbers.size());
-        Lottos purchasedLottos = new Lottos(purchasedManualLottos, purchasedAutoLottos);
-        OutputView.printPurchasedLottos(manualLottoNumbers.size(), purchasedLottos);
-        return purchasedLottos;
+
+        OutputView.printPurchasedLottos(purchasedManualLottos, purchasedAutoLottos);
+
+        return new Lottos(purchasedManualLottos, purchasedAutoLottos);
     }
 
     private List<String> getManualLottoNumbers(int affordableLottoTicketCount) {
