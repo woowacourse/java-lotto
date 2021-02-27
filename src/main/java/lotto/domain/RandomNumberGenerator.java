@@ -10,7 +10,7 @@ public class RandomNumberGenerator {
     private static final int MIN_LOTTO_SIZE = 0;
     private static final int MAX_LOTTO_SIZE = 6;
 
-    private static Map<Integer, LottoNumber> possibleLottoNumbers = new HashMap<>();
+    private static final Map<Integer, LottoNumber> possibleLottoNumbers = new HashMap<>();
 
     static {
         IntStream.rangeClosed(LOTTO_NUMBER_MIN_LIMIT, LOTTO_NUMBER_MAX_LIMIT)
