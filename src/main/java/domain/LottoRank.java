@@ -48,4 +48,8 @@ public enum LottoRank {
     public int getCorrectCnt() {
         return correctCnt;
     }
+
+    public Money getTotalPrize(Long countOfLotto) {
+        return prize.multiply(countOfLotto);
+    }
 }

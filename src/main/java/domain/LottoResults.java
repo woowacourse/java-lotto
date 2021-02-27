@@ -12,13 +12,13 @@ public class LottoResults {
     }
 
     public Money getTotalWinningMoney() {
-        Money total = Money.valueOf(0L);
+        Money totalMoney = Money.valueOf(0L);
         for (LottoRank lottoRank : lottoResults.keySet()) {
-            Money money = lottoRank.getPrize().multiply(lottoResults.get(lottoRank)); //todo: Rank에게 메시지를 보내자!! (개수를 인자로 보내주면 될듯!)
-            total = total.add(money);
+            Money totalPrize = lottoRank.getTotalPrize(lottoResults.get(lottoRank));
+            totalMoney = totalMoney.add(totalPrize);
         }
 
-        return total;
+        return totalMoney;
     }
 
     public Map<LottoRank, Long> getValues() {
