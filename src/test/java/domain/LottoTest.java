@@ -63,7 +63,7 @@ class LottoTest {
     }, delimiter = ':')
     void calculateLottoNumber(int moneyValue, int expectedLottoNumber) {
         //given
-        Money money = new Money(moneyValue);
+        Money money = Money.createPurchasingLottoMoney(moneyValue);
 
         //when
         long lottoNumber = Lotto.calculateLottoNumber(money);

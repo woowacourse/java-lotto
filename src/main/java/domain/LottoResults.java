@@ -12,9 +12,9 @@ public class LottoResults {
     }
 
     public Money getTotalWinningMoney() {
-        Money total = new Money(0);
+        Money total = Money.valueOf(0L);
         for (LottoRank lottoRank : lottoResults.keySet()) {
-            Money money = lottoRank.getPrize().multiply(lottoResults.get(lottoRank));
+            Money money = lottoRank.getPrize().multiply(lottoResults.get(lottoRank)); //todo: Rank에게 메시지를 보내자!! (개수를 인자로 보내주면 될듯!)
             total = total.add(money);
         }
 

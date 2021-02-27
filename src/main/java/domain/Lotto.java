@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private static final int PRICE = 1_000;
+    protected static final int PRICE = 1_000;
     protected static final int LENGTH = 6;
 
     private final List<LottoNumber> lottoNumbers;

@@ -7,14 +7,29 @@ public class Money {
 
     private final long value;
 
-    public Money(long value) {
+    private Money(long value) {
         validateMoney(value);
         this.value = value;
+    }
+
+    public static Money valueOf(long value) {
+        return new Money(value);
+    }
+
+    public static Money createPurchasingLottoMoney(long value) {
+        validateMultipleLottoMoney(value);
+        return new Money(value);
     }
 
     private void validateMoney(long value) {
         if (value < ZERO) {
             throw new IllegalArgumentException("구입 금액은 0이상이어야 합니다.");
+        }
+    }
+
+    private static void validateMultipleLottoMoney(long value) {
+        if (value % Lotto.PRICE != ZERO) {
+            throw new IllegalArgumentException("구입 금액은 1,000원 단위만 입력 가능합니다.");
         }
     }
 
