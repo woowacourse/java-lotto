@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -13,6 +14,10 @@ public class LottoGroup {
         this.lottoGroup = lottoGroup;
     }
 
+    public LottoGroup(Lotto lotto) {
+        this.lottoGroup = Collections.singletonList(lotto);
+    }
+
     public List<Lotto> getLottoGroup() {
         return Collections.unmodifiableList(lottoGroup);
     }
@@ -20,5 +25,22 @@ public class LottoGroup {
     public LottoGroup merge(LottoGroup target) {
         return new LottoGroup(Stream.concat(lottoGroup.stream(), target.getLottoGroup().stream())
             .collect(Collectors.toList()));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoGroup lottos = (LottoGroup) o;
+        return Objects.equals(lottoGroup, lottos.lottoGroup);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoGroup);
     }
 }
