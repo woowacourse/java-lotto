@@ -6,13 +6,14 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import static lotto.domain.LottoTicket.LOTTO_NUMBER_COUNT;
+
 public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final int MIN_NUMBER_RANGE = 1;
     private static final int MAX_NUMBER_RANGE = 45;
     private static final String RANGE_ERROR_MESSAGE =
             "숫자는 + " + MIN_NUMBER_RANGE + "~" + MAX_NUMBER_RANGE + " 사이의 숫자여야한다.";
-    private static final int LOTTO_NUMBER_COUNT = LottoTicket.LOTTO_NUMBER_COUNT;
 
     private static final List<LottoNumber> CACHE;
 
