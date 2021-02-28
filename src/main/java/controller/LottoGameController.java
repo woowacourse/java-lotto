@@ -44,7 +44,9 @@ public class LottoGameController {
             final int manualLottoAmount = makeManualLottoAmount(gameMoney);
             checkManualLottoBuying(manualLottoAmount);
             final List<List<Integer>> manualLottoNumberBundle = InputView.getManualLotto(manualLottoAmount);
-            return gameMoney.buyLotto(manualLottoNumberBundle);
+            final LottoBundle manualLottoBundle = LottoBundle.of(manualLottoNumberBundle);
+            gameMoney.buyLotto(manualLottoNumberBundle.size());
+            return manualLottoBundle;
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
             return makeManualLottoBundle(gameMoney);
@@ -71,7 +73,10 @@ public class LottoGameController {
 
     private LottoBundle makeAutoLottoBundle(final GameMoney gameMoney) {
         LottoNumberGenerator lottoNumberGenerator = new RandomLottoNumberGenerator();
-        return gameMoney.buyAutoLotto(lottoNumberGenerator);
+        final int autoLottoAmount = gameMoney.checkMaxLottoAvailable();
+        final List<List<Integer>> autoLottoNumberBundle = lottoNumberGenerator.createLottoNumberBundle(autoLottoAmount);
+        gameMoney.buyLotto(autoLottoNumberBundle.size());
+        return LottoBundle.of(autoLottoNumberBundle);
     }
 
     private WinningResult makeWinningResult() {

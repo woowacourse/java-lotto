@@ -1,15 +1,9 @@
 package domain.money;
 
-import domain.lotto.Lotto;
-import domain.lotto.LottoBundle;
-import domain.number.LottoNumberGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-
-import java.util.Arrays;
-import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
@@ -45,50 +39,6 @@ public class GameMoneyTest {
     void checkMaxLottoAvailableTest() {
         final GameMoney gameMoney = new GameMoney(10000);
         assertThat(gameMoney.checkMaxLottoAvailable()).isEqualTo(10);
-    }
-
-    @DisplayName("GameMoney를 입력받고, 구매할 로또를 입력한 후 구매한다.")
-    @Test
-    void GameMoneyBuyManualLottoTest() {
-        final GameMoney gameMoney = new GameMoney(10000);
-
-        final Lotto lotto1 = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
-        final Lotto lotto2 = Lotto.of(Arrays.asList(2, 3, 4, 5, 6, 7));
-        final Lotto lotto3 = Lotto.of(Arrays.asList(3, 4, 5, 6, 7, 8));
-
-        final List<List<Integer>> manualLottoBought = Arrays.asList(Arrays.asList(1, 2, 3, 4, 5, 6),
-                Arrays.asList(2, 3, 4, 5, 6, 7),
-                Arrays.asList(3, 4, 5, 6, 7, 8));
-
-        final LottoBundle manualLottoBundle = gameMoney.buyLotto(manualLottoBought);
-
-        assertThat(manualLottoBundle.countNumberOfLotto()).isEqualTo(3);
-        assertThat(manualLottoBundle.getLottoBundle()).contains(lotto1);
-        assertThat(manualLottoBundle.getLottoBundle()).contains(lotto2);
-        assertThat(manualLottoBundle.getLottoBundle()).contains(lotto3);
-    }
-
-    @DisplayName("GameMoney를 입력받고, buyAutoLotto를 테스트 한다.")
-    @Test
-    void GameMoneyBuyAutoLotto() {
-        //Given
-        final GameMoney gameMoney = new GameMoney(2000);
-        final LottoNumberGenerator orderLottoNumberGenerator = new OrderLottoNumberGenerator();
-        //When
-        final LottoBundle autoLottoBundle = gameMoney.buyAutoLotto(orderLottoNumberGenerator);
-        //Then
-        final List<Lotto> lottoBundle = autoLottoBundle.getLottoBundle();
-        assertThat(lottoBundle).containsExactly(
-                        Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                        Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6))
-        );
-    }
-
-    class OrderLottoNumberGenerator implements LottoNumberGenerator {
-        @Override
-        public List<Integer> createLottoNumber() {
-            return Arrays.asList(1, 2, 3, 4, 5, 6);
-        }
     }
 
     @DisplayName("GameMoney를 입력받고, buyLotto를 통해 구매 후 남은 돈을 계산한다.")
