@@ -3,8 +3,8 @@ package domain.ball;
 import java.util.*;
 
 public class LottoBall implements Comparable<LottoBall> {
-    public static final int MIN_LOTTO_VALUE = 1;
-    public static final int MAX_LOTTO_VALUE = 45;
+    private static final int MIN_LOTTO_VALUE = 1;
+    private static final int MAX_LOTTO_VALUE = 45;
     private static final String PERMIT_LOTTO_NUMBER_EXCEPTION_MESSAGE = "%d~%d 사이의 번호만 허용합니다.";
     private static final Map<Integer, LottoBall> lottoBalls = new HashMap<>();
 

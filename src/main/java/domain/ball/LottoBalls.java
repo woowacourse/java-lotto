@@ -9,8 +9,8 @@ import java.util.List;
 
 public class LottoBalls {
     public static final int LOTTO_BALL_SIZE = 6;
-    public static final String DUPLICATE_EXCEPTION_MESSAGE = "로또 번호에 중복된 값이 있습니다. 다시 입력해주세요. 입력값 %s";
-    public static final String LOTTO_SIZE_EXCEPTION_MESSAGE = "%d개의 로또 번호가 필요합니다.";
+    private static final String DUPLICATE_EXCEPTION_MESSAGE = "로또 번호에 중복된 값이 있습니다. 다시 입력해주세요. 입력값 %s";
+    private static final String LOTTO_SIZE_EXCEPTION_MESSAGE = "%d개의 로또 번호가 필요합니다.";
 
     private final List<LottoBall> lottoBalls;
 
