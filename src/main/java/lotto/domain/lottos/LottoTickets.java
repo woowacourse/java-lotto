@@ -46,13 +46,6 @@ public class LottoTickets {
                 .collect(Collectors.toList());
     }
 
-    public void putLottoResult(Map<LottoRank, Integer> lottoResult, LottoWinner lottoWinner) {
-        this.lottoTickets.forEach(lottoTicket -> {
-            LottoRank rank = lottoTicket.getRank(lottoWinner);
-            lottoResult.computeIfPresent(rank, (LottoRank lottoRank, Integer count) -> ++count);
-        });
-    }
-
     public List<LottoTicket> getLottoTickets() {
         return Collections.unmodifiableList(this.lottoTickets);
     }
@@ -61,5 +54,12 @@ public class LottoTickets {
         if (lottoTickets.isEmpty()) {
             throw new IllegalArgumentException(EMPTY_ERROR_MESSAGE);
         }
+    }
+
+    public List<LottoRank> scanLottoTickets(LottoWinner lottoWinner) {
+        return this.lottoTickets
+                .stream()
+                .map(lottoTicket -> lottoTicket.getRank(lottoWinner))
+                .collect(Collectors.toList());
     }
 }

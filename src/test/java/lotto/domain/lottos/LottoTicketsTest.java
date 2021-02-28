@@ -1,6 +1,9 @@
 package lotto.domain.lottos;
 
 import lotto.domain.lottos.amount.LottoAmount;
+import lotto.domain.lottos.rank.LottoRank;
+import lotto.domain.lottos.winnerlotto.LottoBonusNumber;
+import lotto.domain.lottos.winnerlotto.LottoWinner;
 import lotto.domain.money.Money;
 import lotto.util.ManualNumberGenerator;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,6 +14,7 @@ import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.NullSource;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static lotto.domain.lottos.LottoTicket.COUNT_ERROR_MESSAGE;
@@ -24,13 +28,6 @@ public class LottoTicketsTest {
 
     @BeforeEach
     public void setUp() {
-        Money money = new Money("3000");
-        manualLottoNumbers = Arrays.asList("1,2,3,4,5,6", "2,3,4,5,6,7", "3,4,5,6,7,8");
-        lottoAmount = new LottoAmount(money, "3");
-    }
-
-    @BeforeEach
-    public void initLottoTickets() {
         Money money = new Money("3000");
         manualLottoNumbers = Arrays.asList("1,2,3,4,5,6", "2,3,4,5,6,7", "3,4,5,6,7,8");
         lottoAmount = new LottoAmount(money, "3");
@@ -107,5 +104,29 @@ public class LottoTicketsTest {
             LottoTickets.createManualLottoTickets(inputManualNumbers);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(String.format(COUNT_ERROR_MESSAGE, LOTTO_NUMBER_SIZE));
+    }
+
+    @Test
+    @DisplayName("로또 티켓들의 당첨 등수 리스트를 반환합니다.")
+    public void scanLottoTicketsTest() {
+        LottoAmount lottoAmount = new LottoAmount(new Money("6000"), "6");
+        List<String> inputManualNumbers =
+                Arrays.asList(
+                        "1,2,3,4,5,6",
+                        "1,2,3,4,5,7",
+                        "1,2,3,4,5,8",
+                        "1,2,3,4,8,9",
+                        "1,2,3,8,9,45",
+                        "1,2,8,9,44,45"
+                );
+        LottoTickets lottoTickets = LottoTickets.createLottoTickets(lottoAmount, inputManualNumbers);
+        LottoTicket lottoWinnerTicket = LottoTicket.createManualLottoTicket("1,2,3,4,5,6");
+        LottoBonusNumber lottoBonusNumber = LottoBonusNumber.of("7", lottoWinnerTicket);
+
+        LottoWinner lottoWinner = new LottoWinner(lottoWinnerTicket, lottoBonusNumber);
+
+        assertThat(lottoTickets.scanLottoTickets(lottoWinner))
+                .containsAll(Arrays.asList(LottoRank.values()));
+
     }
 }

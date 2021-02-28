@@ -22,7 +22,8 @@ public class LottoResultStatistics {
     public static LottoResultStatistics calculateResultStatistics(
             final LottoTickets lottoTickets, final LottoWinner lottoWinner) {
         Map<LottoRank, Integer> lottoResult = setLottoResult();
-        lottoTickets.putLottoResult(lottoResult, lottoWinner);
+        lottoTickets.scanLottoTickets(lottoWinner)
+                .forEach(lottoRank -> lottoResult.computeIfPresent(lottoRank, (LottoRank rank, Integer count) -> ++count));
         return new LottoResultStatistics(lottoResult);
     }
 
