@@ -19,7 +19,7 @@ public class LottoService {
         return joinTickets(autoTicket, manualTicket);
     }
 
-    public LottoTickets joinTickets(LottoTickets autoTicket, LottoTickets manualTicket) {
+    private LottoTickets joinTickets(LottoTickets autoTicket, LottoTickets manualTicket) {
         return new LottoTickets(autoTicket.getLottoTickets(), manualTicket.getLottoTickets());
     }
 }

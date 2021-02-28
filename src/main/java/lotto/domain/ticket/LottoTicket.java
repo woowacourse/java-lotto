@@ -11,7 +11,7 @@ import lotto.domain.number.LottoNumber;
 import lotto.domain.number.LottoNumberFactory;
 
 public class LottoTicket {
-    public static final int SIZE_OF_LOTTO_NUMBERS = 6;
+    private static final int SIZE_OF_LOTTO_NUMBERS = 6;
     public static final int PRICE = 1000;
 
     private final Set<LottoNumber> lottoNumbers;

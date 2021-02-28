@@ -10,9 +10,9 @@ import lotto.domain.ticket.LottoTickets;
 import lotto.domain.number.LottoNumberFactory;
 
 public class AutoLottoMachine {
-    public static final int FROM_INDEX = 0;
-    public static final int TO_INDEX = 6;
-    private final static List<Integer> lottoNumbers = IntStream
+    private static final int FROM_INDEX = 0;
+    private static final int TO_INDEX = 6;
+    private static final List<Integer> lottoNumbers = IntStream
         .rangeClosed(LottoNumberFactory.MIN_RANGE, LottoNumberFactory.MAX_RANGE)
         .boxed()
         .collect(Collectors.toList());

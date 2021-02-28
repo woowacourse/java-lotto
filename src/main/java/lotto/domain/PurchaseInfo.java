@@ -3,7 +3,7 @@ package lotto.domain;
 import lotto.domain.ticket.LottoTicket;
 
 public class PurchaseInfo {
-    public static final int MANUAL_COUNT_LIMIT = 1;
+    private static final int MANUAL_COUNT_LIMIT = 1;
 
     private final Money purchaseMoney;
     private final int purchaseManualCount;
