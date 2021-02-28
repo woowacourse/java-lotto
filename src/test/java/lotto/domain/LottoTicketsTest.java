@@ -20,9 +20,9 @@ public class LottoTicketsTest {
     @BeforeEach
     public void initLottoTickets() {
         lottoTickets = new LottoTickets(Arrays.asList(
-                LottoTicketService.createAutoLottoTicket(),
-                LottoTicketService.createAutoLottoTicket(),
-                LottoTicketService.createAutoLottoTicket()
+                LottoTicketService.createRandomLottoTicket(LottoNumber.getRandomLottoNumbers()),
+                LottoTicketService.createRandomLottoTicket(LottoNumber.getRandomLottoNumbers()),
+                LottoTicketService.createRandomLottoTicket(LottoNumber.getRandomLottoNumbers())
         ));
     }
 

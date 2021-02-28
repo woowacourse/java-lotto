@@ -1,5 +1,6 @@
 package lotto.service;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
@@ -22,11 +23,11 @@ public class LottoTicketsService {
         return new LottoTickets(lottoTicketGroup);
     }
 
-    public static LottoTickets createAutoLottoTickets(Money money) {
+    public static LottoTickets createRandomLottoTickets(Money money) {
         List<LottoTicket> lottoTicketGroup = new ArrayList<>();
         int moneyLeftOver = money.lottoCount();
         for (int i = 0; i < moneyLeftOver; i++) {
-            lottoTicketGroup.add(LottoTicketService.createAutoLottoTicket());
+            lottoTicketGroup.add(LottoTicketService.createRandomLottoTicket(LottoNumber.getRandomLottoNumbers()));
         }
         money.deductMoney(moneyLeftOver);
         return new LottoTickets(lottoTicketGroup);
