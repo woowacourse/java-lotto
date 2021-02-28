@@ -6,6 +6,7 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class LottoFactory {
+    private static final int ZERO = 0;
     private static final List<LottoNumber> CANDIDATES_NUMBERS;
 
     static {
@@ -19,6 +20,10 @@ public class LottoFactory {
     }
 
     public static Lottos generateAutoLottos(ShuffleStrategy strategy, int numberOfLotto) {
+        if (numberOfLotto < ZERO) {
+            throw new IllegalArgumentException("입력한 로또 개수가 총 구매할 로또 개수를 초과하였습니다.");
+        }
+
         List<Lotto> lottos = Stream.generate(() -> generateAutoLotto(strategy))
                 .limit(numberOfLotto)
                 .collect(Collectors.toList());
