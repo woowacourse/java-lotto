@@ -96,11 +96,11 @@ public class OutputView {
     }
 
     private static void printLottoRankResult(final Map<LottoRank, Integer> lottoRank) {
-        System.out.println(String.format(LOTTO_RESULT_FIFTH_PRIZE, lottoRank.get(LottoRank.FIFTH_PRIZE)));
-        System.out.println(String.format(LOTTO_RESULT_FOURTH_PRIZE, lottoRank.get(LottoRank.FOURTH_PRIZE)));
-        System.out.println(String.format(LOTTO_RESULT_THIRD_PRIZE, lottoRank.get(LottoRank.THIRD_PRIZE)));
-        System.out.println(String.format(LOTTO_RESULT_SECOND_PRIZE, lottoRank.get(LottoRank.SECOND_PRIZE)));
-        System.out.println(String.format(LOTTO_RESULT_FIRST_PRIZE, lottoRank.get(LottoRank.FIRST_PRIZE)));
+        System.out.println(String.format(LOTTO_RESULT_FIFTH_PRIZE, lottoRank.getOrDefault(LottoRank.FIFTH_PRIZE, 0)));
+        System.out.println(String.format(LOTTO_RESULT_FOURTH_PRIZE, lottoRank.getOrDefault(LottoRank.FOURTH_PRIZE, 0)));
+        System.out.println(String.format(LOTTO_RESULT_THIRD_PRIZE, lottoRank.getOrDefault(LottoRank.THIRD_PRIZE, 0)));
+        System.out.println(String.format(LOTTO_RESULT_SECOND_PRIZE, lottoRank.getOrDefault(LottoRank.SECOND_PRIZE, 0)));
+        System.out.println(String.format(LOTTO_RESULT_FIRST_PRIZE, lottoRank.getOrDefault(LottoRank.FIRST_PRIZE, 0)));
     }
 
     public static void printProfitRate(final double profitRate) {

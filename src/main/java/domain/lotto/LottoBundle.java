@@ -22,14 +22,10 @@ public class LottoBundle {
 
     public LottoResult checkResult(final WinningResult winningResult) {
         final Map<LottoRank, Integer> lottoResult = new HashMap<>();
-        Arrays.stream(LottoRank.values())
-                .forEach(lottoRank -> lottoResult.put(lottoRank, 0));
-
-        for (Lotto lotto : lottoBundle) {
+        for (Lotto lotto : this.lottoBundle) {
             LottoRank lottoRank = checkSingleLottoRank(lotto, winningResult);
-            lottoResult.put(lottoRank, lottoResult.get(lottoRank) + 1);
+            lottoResult.put(lottoRank, lottoResult.getOrDefault(lottoRank, 0 ) + 1);
         }
-
         return new LottoResult(lottoResult);
     }
 

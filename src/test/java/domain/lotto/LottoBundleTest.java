@@ -60,11 +60,11 @@ public class LottoBundleTest {
         final LottoResult lottoResult = lottoBundle.checkResult(winningResult);
         final Map<LottoRank, Integer> lottoRankResult = lottoResult.getLottoResult();
 
-        assertThat(lottoRankResult.get(LottoRank.FIRST_PRIZE)).isEqualTo(1);
-        assertThat(lottoRankResult.get(LottoRank.SECOND_PRIZE)).isEqualTo(0);
-        assertThat(lottoRankResult.get(LottoRank.THIRD_PRIZE)).isEqualTo(0);
-        assertThat(lottoRankResult.get(LottoRank.FOURTH_PRIZE)).isEqualTo(0);
-        assertThat(lottoRankResult.get(LottoRank.FIFTH_PRIZE)).isEqualTo(0);
-        assertThat(lottoRankResult.get(LottoRank.NO_PRIZE)).isEqualTo(1);
+        assertThat(lottoRankResult.getOrDefault(LottoRank.FIRST_PRIZE, 0)).isEqualTo(1);
+        assertThat(lottoRankResult.getOrDefault(LottoRank.SECOND_PRIZE, 0)).isEqualTo(0);
+        assertThat(lottoRankResult.getOrDefault(LottoRank.THIRD_PRIZE, 0)).isEqualTo(0);
+        assertThat(lottoRankResult.getOrDefault(LottoRank.FOURTH_PRIZE, 0)).isEqualTo(0);
+        assertThat(lottoRankResult.getOrDefault(LottoRank.FIFTH_PRIZE, 0)).isEqualTo(0);
+        assertThat(lottoRankResult.getOrDefault(LottoRank.NO_PRIZE, 0)).isEqualTo(1);
     }
 }

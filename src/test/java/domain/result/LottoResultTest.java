@@ -48,12 +48,12 @@ public class LottoResultTest {
         final LottoResult lottoResult = lottoBundle.checkResult(winningResult);
         final Map<LottoRank, Integer> result = lottoResult.getLottoResult();
 
-        assertThat(result.get(LottoRank.NO_PRIZE)).isEqualTo(0);
-        assertThat(result.get(LottoRank.FIFTH_PRIZE)).isEqualTo(0);
-        assertThat(result.get(LottoRank.FOURTH_PRIZE)).isEqualTo(0);
-        assertThat(result.get(LottoRank.THIRD_PRIZE)).isEqualTo(1);
-        assertThat(result.get(LottoRank.SECOND_PRIZE)).isEqualTo(1);
-        assertThat(result.get(LottoRank.FIRST_PRIZE)).isEqualTo(0);
+        assertThat(result.getOrDefault(LottoRank.NO_PRIZE, 0)).isEqualTo(0);
+        assertThat(result.getOrDefault(LottoRank.FIFTH_PRIZE, 0)).isEqualTo(0);
+        assertThat(result.getOrDefault(LottoRank.FOURTH_PRIZE, 0)).isEqualTo(0);
+        assertThat(result.getOrDefault(LottoRank.THIRD_PRIZE, 0)).isEqualTo(1);
+        assertThat(result.getOrDefault(LottoRank.SECOND_PRIZE, 0)).isEqualTo(1);
+        assertThat(result.getOrDefault(LottoRank.FIRST_PRIZE, 0)).isEqualTo(0);
     }
 
     @DisplayName("checkProfitRate 테스트")
@@ -75,11 +75,11 @@ public class LottoResultTest {
         lottoResult.combineResult(lottoResultToCombine);
         final Map<LottoRank, Integer> finalResult = lottoResult.getLottoResult();
 
-        assertThat(finalResult.get(LottoRank.NO_PRIZE)).isEqualTo(0);
-        assertThat(finalResult.get(LottoRank.FIFTH_PRIZE)).isEqualTo(2);
-        assertThat(finalResult.get(LottoRank.FOURTH_PRIZE)).isEqualTo(0);
-        assertThat(finalResult.get(LottoRank.THIRD_PRIZE)).isEqualTo(1);
-        assertThat(finalResult.get(LottoRank.SECOND_PRIZE)).isEqualTo(1);
-        assertThat(finalResult.get(LottoRank.FIRST_PRIZE)).isEqualTo(0);
+        assertThat(finalResult.getOrDefault(LottoRank.NO_PRIZE, 0)).isEqualTo(0);
+        assertThat(finalResult.getOrDefault(LottoRank.FIFTH_PRIZE, 0)).isEqualTo(2);
+        assertThat(finalResult.getOrDefault(LottoRank.FOURTH_PRIZE, 0)).isEqualTo(0);
+        assertThat(finalResult.getOrDefault(LottoRank.THIRD_PRIZE, 0)).isEqualTo(1);
+        assertThat(finalResult.getOrDefault(LottoRank.SECOND_PRIZE, 0)).isEqualTo(1);
+        assertThat(finalResult.getOrDefault(LottoRank.FIRST_PRIZE, 0)).isEqualTo(0);
     }
 }

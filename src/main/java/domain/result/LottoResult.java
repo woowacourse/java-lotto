@@ -16,17 +16,18 @@ public class LottoResult {
     public double checkProfitRate() {
         int moneySpent = 0;
         int moneyGain = 0;
-        for (LottoRank lottoRank : LottoRank.values()) {
-            moneySpent += lottoResult.get(lottoRank) * GameMoney.getSingleLottoPrice();
-            moneyGain += lottoResult.get(lottoRank) * lottoRank.getPrizeMoney();
+        for (LottoRank lottoRank : this.lottoResult.keySet()) {
+            moneySpent += this.lottoResult.get(lottoRank) * GameMoney.getSingleLottoPrice();
+            moneyGain += this.lottoResult.get(lottoRank) * lottoRank.getPrizeMoney();
         }
 
         return ((double) moneyGain / (double) moneySpent);
     }
 
     public void combineResult(final LottoResult otherResult) {
-        for (LottoRank lottoRank : LottoRank.values()) {
-            this.lottoResult.put(lottoRank, this.lottoResult.get(lottoRank) + otherResult.lottoResult.get(lottoRank));
+        for (LottoRank lottoRank : otherResult.lottoResult.keySet()) {
+            this.lottoResult.put(lottoRank,
+                    this.lottoResult.getOrDefault(lottoRank, 0) + otherResult.lottoResult.get(lottoRank));
         }
     }
 
