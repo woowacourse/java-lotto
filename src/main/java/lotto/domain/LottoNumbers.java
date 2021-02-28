@@ -1,35 +1,32 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class LottoNumbers {
 
     public static final int LOTTO_NUMBER_SIZE = 6;
 
-    private final List<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
-    public LottoNumbers() {
-        lottoNumbers = new ArrayList<>();
+    public LottoNumbers(List<LottoNumber> lottoNumbers) {
+        this(changeToSet(lottoNumbers));
     }
 
     public LottoNumbers(LottoNumbers lottoNumbers) {
         this(lottoNumbers.lottoNumbers());
     }
 
-    public LottoNumbers(List<LottoNumber> lottoNumbers) {
-        validateLottoNumbers(lottoNumbers);
+    public LottoNumbers(Set<LottoNumber> lottoNumbers) {
+        validateLottoNumberSize(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    public List<LottoNumber> lottoNumbers() {
-        return Collections.unmodifiableList(lottoNumbers);
+    public static Set<LottoNumber> changeToSet(List<LottoNumber> list) {
+        return new HashSet<>(list);
     }
 
-    public void sort() {
-        Collections.sort(lottoNumbers);
+    public Set<LottoNumber> lottoNumbers() {
+        return Collections.unmodifiableSet(lottoNumbers);
     }
 
     public boolean containNumber(LottoNumber number) {
@@ -42,30 +39,9 @@ public class LottoNumbers {
                 .count();
     }
 
-    public void checkBonusNumber(LottoNumber lottoNumber) {
-        if (lottoNumbers.contains(lottoNumber)) {
-            throw new IllegalArgumentException("보너스 번호와 로또번호가 중복입니다.");
-        }
-    }
-
-    private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
-        validateLottoNumberSize(lottoNumbers);
-        validateDuplicate(lottoNumbers);
-    }
-
-    private void validateLottoNumberSize(List<LottoNumber> lottoNumbers) {
+    private void validateLottoNumberSize(Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException("로또의 번호 개수가 맞지 않습니다.");
-        }
-    }
-
-    private void validateDuplicate(List<LottoNumber> lottoNumbers) {
-        int numberAfterDistinct = (int) lottoNumbers.stream()
-                .mapToInt(LottoNumber::getNumber)
-                .distinct()
-                .count();
-        if (numberAfterDistinct != LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException("중복된 번호가 있습니다.");
+            throw new IllegalArgumentException("로또의 번호 개수가 맞지 않습니다.(중복된 번호를 쓰지 않았는지 확인해보세요)");
         }
     }
 
