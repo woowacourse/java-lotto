@@ -51,7 +51,7 @@ public class LottoController {
         try {
             int manualTicketsCount = Integer.parseInt(InputView.getUserInput());
             OutputView.askManualLottoTicket();
-            return LottoTicketsService.createManualLottoTickets(money, manualTicketsCount);
+            return LottoTicketsService.createManualLottoTickets(InputView.getManualLottoTickets(manualTicketsCount), money);
         } catch (NullPointerException | IllegalArgumentException e) {
             OutputView.printErrorMessage(e);
             return initManualLottoTickets(money);

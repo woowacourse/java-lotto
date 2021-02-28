@@ -3,7 +3,6 @@ package lotto.service;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.Money;
-import lotto.view.InputView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,12 +13,12 @@ public class LottoTicketsService {
 
     }
 
-    public static LottoTickets createManualLottoTickets(Money money, int manualTicketsCount) {
+    public static LottoTickets createManualLottoTickets(List<String> manualLottoTicketInputs, Money money) {
         List<LottoTicket> lottoTicketGroup = new ArrayList<>();
-        for (int i = 0; i < manualTicketsCount; i++) {
-            lottoTicketGroup.add(LottoTicketService.createManualLottoTicket(InputView.getUserInput()));
+        for (String lottoTicketInput : manualLottoTicketInputs) {
+            lottoTicketGroup.add(LottoTicketService.createManualLottoTicket(lottoTicketInput));
         }
-        money.deductMoney(manualTicketsCount);
+        money.deductMoney(manualLottoTicketInputs.size());
         return new LottoTickets(lottoTicketGroup);
     }
 
