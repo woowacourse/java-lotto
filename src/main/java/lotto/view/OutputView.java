@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 public class OutputView {
 
-    private static final String HOW_MUCH_BOUGHT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
+    private static final String HOW_MUCH_BOUGHT = "수동으로 %d장, 자동으로 %d장을 구매했습니다.";
     private static final String REWARD_RESULT_BOARD = "당첨 통계";
     private static final String NEW_LINE = System.lineSeparator();
     private static final String RESULT_LINE = "---------";
