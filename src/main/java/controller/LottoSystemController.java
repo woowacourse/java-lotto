@@ -15,7 +15,7 @@ public class LottoSystemController {
         printLottoTicketsInfo(lottoTickets);
 
         WinningResult winningResult = calculateWinningResult(lottoTickets, money);
-        printLottoResult(winningResult, lottoTickets, money);
+        printLottoResult(winningResult);
     }
 
     private void printLottoTicketsInfo(LottoTickets lottoTickets) {
@@ -23,7 +23,7 @@ public class LottoSystemController {
         OutputView.printLottoTickets(lottoTickets.toList());
     }
 
-    private void printLottoResult(WinningResult winningResult, LottoTickets lottoTickets, Money money) {
+    private void printLottoResult(WinningResult winningResult) {
         OutputView.printRankResultTitle();
         Arrays.stream(Ranking.values())
             .filter(ranking -> ranking != Ranking.NOTHING)
