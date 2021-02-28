@@ -54,8 +54,8 @@ public class Money {
         return purchasedLottoSize() - numberOfManualTicket;
     }
 
-    public int purchasedLottoSize() {
-        return this.value / MIN_PRICE;
+    private int purchasedLottoSize() {
+        return this.value / LottoTicket.LOTTO_TICKET_PRICE;
     }
 
     public boolean canBuy(int numberOfManualTickets) {
