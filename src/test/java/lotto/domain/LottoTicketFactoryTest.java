@@ -40,13 +40,10 @@ public class LottoTicketFactoryTest {
     @Test
     @DisplayName("입력받은 금액만큼 수동티켓과 자동티켓 생성")
     void createAutoAndManualLottoTickets() {
-        LottoTicket ticket1 = LottoTicketFactory.createManualLottoTicket(Arrays.asList("1", "2", "3", "4", "5", "6"));
-        LottoTicket ticket2 = LottoTicketFactory.createManualLottoTicket(Arrays.asList("11", "12", "13", "14", "15", "16"));
         List<List<String>> lottoTickets = new ArrayList<>();
         lottoTickets.add(Arrays.asList("1", "2", "3", "4", "5", "6"));
         lottoTickets.add(Arrays.asList("11", "12", "13", "14", "15", "16"));
         assertThat(LottoTicketFactory.createLottoTicketsIncludingManualTickets(new Money(10000), lottoTickets).getLottoTickets())
-//                .contains(ticket1, ticket2)
                 .hasSize(10);
     }
 
