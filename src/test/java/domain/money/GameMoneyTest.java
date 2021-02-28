@@ -90,5 +90,22 @@ public class GameMoneyTest {
             return Arrays.asList(1, 2, 3, 4, 5, 6);
         }
     }
+
+    @DisplayName("GameMoney를 입력받고, buyLotto를 통해 구매 후 남은 돈을 계산한다.")
+    @Test
+    void GameMoneyBuyLotto() {
+        final GameMoney gameMoney = new GameMoney(3000);
+        assertThatCode(() -> gameMoney.buyLotto(3))
+                .doesNotThrowAnyException();
+    }
+
+    @DisplayName("입력 받은 GameMoney로 구매할 수 없는 수량의 로또를 구매하려고 하는 경우, 예외가 발생한다.")
+    @Test
+    void GameMoneyBuyLottoException() {
+        final GameMoney gameMoney = new GameMoney(3000);
+        assertThatThrownBy(() -> gameMoney.buyLotto(5))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("돈이 부족합니다.");
+    }
 }
 

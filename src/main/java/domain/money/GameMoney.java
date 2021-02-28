@@ -43,6 +43,10 @@ public class GameMoney {
         return lottoBundle;
     }
 
+    public void buyLotto(final int number) {
+        calculateGameMoneyLeft(number);
+    }
+
     public LottoBundle buyAutoLotto(final LottoNumberGenerator lottoNumberGenerator) {
         List<List<Integer>> lottoNumberBundle = new ArrayList<>();
         for (int i = 0; i < checkMaxLottoAvailable(); i++) {
@@ -54,6 +58,9 @@ public class GameMoney {
     private void calculateGameMoneyLeft(final int numberOfLottoToBuy) {
         final BigDecimal lottoBuyingMoney = new BigDecimal(numberOfLottoToBuy * SINGLE_LOTTO_GAME_MONEY);
         final BigDecimal gameMoneyLeft = gameMoney.subtract(lottoBuyingMoney);
+        if (gameMoneyLeft.intValue() < 0) {
+            throw new IllegalArgumentException("돈이 부족합니다.");
+        }
         gameMoney = gameMoneyLeft;
     }
 }
