@@ -17,7 +17,7 @@ public class LottoTicketService {
     private LottoTicketService() {
     }
 
-    public static LottoTicket createRandomTicket(List<LottoNumber> lottoNumbers) {
+    public static LottoTicket createTicket(List<LottoNumber> lottoNumbers) {
         return new LottoTicket(lottoNumbers);
     }
 
@@ -31,7 +31,6 @@ public class LottoTicketService {
         if (lottoWinnerNumbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(COUNT_ERROR_MESSAGE);
         }
-        return new LottoTicket(lottoWinnerNumbers);
+        return createTicket(lottoWinnerNumbers);
     }
-
 }

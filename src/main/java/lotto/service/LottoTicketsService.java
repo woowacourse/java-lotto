@@ -27,7 +27,7 @@ public class LottoTicketsService {
         List<LottoTicket> lottoTicketGroup = new ArrayList<>();
         int moneyLeftOver = money.ticketCount();
         for (int i = 0; i < moneyLeftOver; i++) {
-            lottoTicketGroup.add(LottoTicketService.createRandomTicket(LottoNumber.getRandomNumbers()));
+            lottoTicketGroup.add(LottoTicketService.createTicket(LottoNumber.getRandomNumbers()));
         }
         money.deduct(moneyLeftOver);
         return new LottoTickets(lottoTicketGroup);

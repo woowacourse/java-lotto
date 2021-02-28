@@ -12,7 +12,7 @@ public class LottoTicketServiceTest {
     @Test
     @DisplayName("로또 티켓을 생성한다.")
     public void createLottoTicket() {
-        assertThat(LottoTicketService.createRandomTicket(LottoNumber.getRandomNumbers()))
+        assertThat(LottoTicketService.createTicket(LottoNumber.getRandomNumbers()))
                 .isInstanceOf(LottoTicket.class);
     }
 }
