@@ -19,15 +19,15 @@ public class LottoTicketsService {
         return new LottoTickets(lottoTicketGroup);
     }
 
-    public static List<LottoTicket> createAutoLottoTickets(int autoAmount) {
-        return Stream.generate(LottoTicketService::createAutoLottoTicket)
-                .limit(autoAmount)
+    public static List<LottoTicket> createManualLottoTickets(List<String> inputLottosManualNumber) {
+        return inputLottosManualNumber.stream()
+                .map(LottoTicket::createManualLottoTicket)
                 .collect(Collectors.toList());
     }
 
-    public static List<LottoTicket> createManualLottoTickets(List<String> inputLottosManualNumber) {
-        return inputLottosManualNumber.stream()
-                .map(LottoTicketService::createManualLottoTicket)
+    public static List<LottoTicket> createAutoLottoTickets(int autoAmount) {
+        return Stream.generate(LottoTicket::createAutoLottoTicket)
+                .limit(autoAmount)
                 .collect(Collectors.toList());
     }
 }

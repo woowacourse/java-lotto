@@ -4,6 +4,7 @@ import lotto.domain.lottos.LottoTicket;
 import lotto.domain.lottos.LottoTickets;
 import lotto.domain.lottos.amount.LottoAmount;
 import lotto.domain.money.Money;
+import lotto.util.ManualNumberGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,6 +12,8 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static lotto.domain.lottos.LottoTicket.COUNT_ERROR_MESSAGE;
+import static lotto.domain.lottos.LottoTicket.LOTTO_NUMBER_SIZE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -52,7 +55,7 @@ class LottoTicketsServiceTest {
         assertThatThrownBy(() -> {
             LottoTicketsService.createManualLottoTickets(inputManualNumbers);
         }).isInstanceOf(NumberFormatException.class)
-                .hasMessage(String.format(LottoTicketService.NUMBER_FORMAT_ERROR_MESSAGE, LottoTicket.LOTTO_NUMBER_SIZE));
+                .hasMessage(String.format(ManualNumberGenerator.NUMBER_FORMAT_ERROR_MESSAGE, LOTTO_NUMBER_SIZE));
     }
 
     @Test
@@ -63,7 +66,7 @@ class LottoTicketsServiceTest {
         assertThatThrownBy(() -> {
             LottoTicketsService.createManualLottoTickets(inputManualNumbers);
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(String.format(LottoTicketService.COUNT_ERROR_MESSAGE, LottoTicket.LOTTO_NUMBER_SIZE));
+                .hasMessage(String.format(COUNT_ERROR_MESSAGE, LOTTO_NUMBER_SIZE));
     }
 
     @Test
@@ -74,6 +77,6 @@ class LottoTicketsServiceTest {
         assertThatThrownBy(() -> {
             LottoTicketsService.createManualLottoTickets(inputManualNumbers);
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(String.format(LottoTicketService.COUNT_ERROR_MESSAGE, LottoTicket.LOTTO_NUMBER_SIZE));
+                .hasMessage(String.format(COUNT_ERROR_MESSAGE, LOTTO_NUMBER_SIZE));
     }
 }

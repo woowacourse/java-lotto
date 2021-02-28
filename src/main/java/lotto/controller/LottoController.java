@@ -7,7 +7,6 @@ import lotto.domain.lottos.amount.LottoAmount;
 import lotto.domain.lottos.winnerlotto.LottoBonusNumber;
 import lotto.domain.lottos.winnerlotto.LottoWinner;
 import lotto.domain.money.Money;
-import lotto.service.LottoTicketService;
 import lotto.service.LottoTicketsService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -65,7 +64,7 @@ public class LottoController {
 
     private LottoTicket initLottoWinnerTicket() {
         try {
-            return LottoTicketService.createManualLottoTicket(InputView.getWinnerNumbersInput());
+            return LottoTicket.createManualLottoTicket(InputView.getWinnerNumbersInput());
         } catch (NullPointerException | IllegalArgumentException e) {
             OutputView.printErrorMessage(e);
             return initLottoWinnerTicket();

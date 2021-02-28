@@ -1,6 +1,5 @@
 package lotto.domain.lottos;
 
-import lotto.service.LottoTicketService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,9 +19,9 @@ public class LottoTicketsTest {
     @BeforeEach
     public void initLottoTickets() {
         lottoTickets = new LottoTickets(Arrays.asList(
-                LottoTicketService.createAutoLottoTicket(),
-                LottoTicketService.createAutoLottoTicket(),
-                LottoTicketService.createAutoLottoTicket()
+                LottoTicket.createAutoLottoTicket(),
+                LottoTicket.createAutoLottoTicket(),
+                LottoTicket.createAutoLottoTicket()
         ));
     }
 
