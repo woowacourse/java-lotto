@@ -1,80 +1,127 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.utils.AutoLottoGenerator;
-import lotto.utils.FixedLottoGenerator;
+import lotto.utils.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import static lotto.domain.LottoQuantity.ZERO_COUNT;
+import static lotto.domain.Quantity.ZERO_COUNT;
 
 public class LottoGameController {
 
-    private final LottoGame lottoGame = new LottoGame();
+    private LottoGame lottoGame;
 
     public void run() {
-        Money totalMoney = InputView.askMoney();
-        LottoQuantity lottoQuantity = createLottoQuantity(totalMoney);
-        buyLottos(lottoQuantity);
+        startLottoGame();
+        playLottoGame();
+    }
 
-        LottoNumbers lastWinningLottoNumbers = InputView.askLastWinningLottoNumbers();
-        LottoNumber bonusNumber = createBonusNumber(lastWinningLottoNumbers);
-        WinningLotto lastWinningLotto = lottoGame.createWinningLotto(lastWinningLottoNumbers, bonusNumber);
+    private void startLottoGame() {
+        Money price = createMoney();
+        Quantity manualQuantity = createManualLottoQuantity();
+        Quantity autoQuantity = createAutoLottoQuantity(price, manualQuantity);
 
-        LottoGameResult lottoGameResult = lottoGame.calculateLottoGameResult(lastWinningLotto);
+        LottosGenerator lottosGenerator = createGenerator(manualQuantity, autoQuantity);
+        lottoGame = new LottoGame(lottosGenerator);
+    }
+
+    private void playLottoGame() {
+        Lottos myLottos = lottoGame.createLottos();
+        OutputView.printEachLotto(myLottos);
+
+        LottoNumbers winningNumbers = createWinningNumbers();
+        LottoNumber bonusNumber = createBonusNumber();
+        WinningLotto winningLotto = createWinningLotto(winningNumbers, bonusNumber);
+
+        LottoGameResult lottoGameResult = lottoGame.calculateYield(myLottos, winningLotto);
         OutputView.printLottoGameResult(lottoGameResult);
     }
 
-    private LottoQuantity createLottoQuantity(Money totalMoney) {
+    private Money createMoney() {
+        String money = InputView.askMoney();
         try {
-            return lottoGame.createLottoQuantity(totalMoney, InputView.askFixedLottoQuantity());
+            return new Money(money);
         } catch (Exception e) {
             OutputView.printError(e);
-            return createLottoQuantity(totalMoney);
+            return createMoney();
         }
     }
 
-    private void buyLottos(LottoQuantity lottoQuantity) {
-        if (lottoQuantity.getFixedLottoQuantity() > ZERO_COUNT) {
-            buyFixedLotto(lottoQuantity);
-        }
-        if (lottoQuantity.getAutoLottoQuantity() > ZERO_COUNT) {
-            buyAutoLotto(lottoQuantity);
-        }
-        OutputView.printEachLotto(lottoGame.myLottos());
-    }
-
-    private void buyFixedLotto(LottoQuantity lottoQuantity) {
-        List<LottoNumbers> fixedLottoNumbersBundle = createLottoNumbersBundle(lottoQuantity);
-        if (lottoQuantity.getFixedLottoQuantity() != ZERO_COUNT) {
-            lottoGame.buyLottos(lottoQuantity.calculateFixedLottoPrice(),
-                    new FixedLottoGenerator(fixedLottoNumbersBundle));
-        }
-    }
-
-    private void buyAutoLotto(LottoQuantity lottoQuantity) {
-        lottoGame.buyLottos(lottoQuantity.calculateAutoLottoPrice(), new AutoLottoGenerator());
-    }
-
-    private List<LottoNumbers> createLottoNumbersBundle(LottoQuantity lottoQuantity) {
+    private Quantity createManualLottoQuantity() {
+        String manualQuantity = InputView.askManualLottoQuantity();
         try {
-            return InputView.askFixLottoNumbersBundle(lottoQuantity.getFixedLottoQuantity());
+            return new Quantity(manualQuantity);
         } catch (Exception e) {
             OutputView.printError(e);
-            return createLottoNumbersBundle(lottoQuantity);
+            return createManualLottoQuantity();
         }
     }
 
-    private LottoNumber createBonusNumber(LottoNumbers lottoNumbers) {
-        LottoNumber bonusNumber = InputView.askBonusNumber();
+    private Quantity createAutoLottoQuantity(Money price, Quantity manualQuantity) {
+        Money manualPrice = manualQuantity.calculateQuantityPrice();
         try {
-            lottoNumbers.checkBonusNumber(bonusNumber);
-            return bonusNumber;
+            Money autoPrice = price.calculateSubtract(manualPrice);
+            return new Quantity(autoPrice);
         } catch (Exception e) {
             OutputView.printError(e);
-            return createBonusNumber(lottoNumbers);
+            return createAutoLottoQuantity(createMoney(), createManualLottoQuantity());
+        }
+    }
+
+    private LottosGenerator createGenerator(Quantity manualQuantity, Quantity autoQuantity) {
+        List<String> manualNumbers = new ArrayList<>();
+        if (manualQuantity.quantity() > ZERO_COUNT) {
+            manualNumbers = createManualNumbers(manualQuantity);
+        }
+        try {
+            return new ComplexLottosGenerator(
+                    new ManualLottosGenerator(manualNumbers),
+                    new AutoLottosGenerator(autoQuantity)
+            );
+        } catch (Exception e) {
+            OutputView.printError(e);
+            return createGenerator(manualQuantity, autoQuantity);
+        }
+    }
+
+    private List<String> createManualNumbers(Quantity manualQuantity) {
+        try {
+            return InputView.askManualLottoNumbers(manualQuantity.quantity());
+        } catch (Exception e) {
+            OutputView.printError(e);
+            return createManualNumbers(manualQuantity);
+        }
+    }
+
+    private LottoNumbers createWinningNumbers() {
+        String numbers = InputView.askWinningLottoNumbers();
+        try {
+            return LottoNumbersFactory.createLottoNumbers(numbers);
+        } catch (Exception e) {
+            OutputView.printError(e);
+            return createWinningNumbers();
+        }
+    }
+
+    private LottoNumber createBonusNumber() {
+        String number = InputView.askBonusNumber();
+        try {
+            return new LottoNumber(number);
+        } catch (Exception e) {
+            OutputView.printError(e);
+            return createBonusNumber();
+        }
+    }
+
+    private WinningLotto createWinningLotto(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
+        try {
+            return lottoGame.createWinningLotto(winningNumbers, bonusNumber);
+        } catch (Exception e) {
+            OutputView.printError(e);
+            return createWinningLotto(winningNumbers, createBonusNumber());
         }
     }
 }
