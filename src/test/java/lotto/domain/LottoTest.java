@@ -15,7 +15,10 @@ public class LottoTest {
     @Test
     void lottoLengthCheck() {
         assertThatThrownBy(() -> {
-            new Lotto(Arrays.asList(1, 2));
+            new Lotto(Arrays.asList(
+                    new LottoNumber(1),
+                    new LottoNumber(2)
+            ));
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("로또는 6개의 번호가 있어야합니다.");
 

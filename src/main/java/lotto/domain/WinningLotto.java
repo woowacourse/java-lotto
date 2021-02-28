@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.util.LottoFactory;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -15,10 +13,9 @@ public class WinningLotto {
         this.lottoNumber = lottoNumber;
     }
 
-    public List<Result> getWinningResult(LottoFactory manualLotto, LottoFactory autoLotto) {
+    public List<Result> getWinningResult(Lottos lottos) {
         List<Result> results = new ArrayList<>();
-        addResult(results, manualLotto.getLottos());
-        addResult(results, autoLotto.getLottos());
+        addResult(results, lottos.getLottos());
 
         return results;
     }
@@ -27,12 +24,12 @@ public class WinningLotto {
         for (Lotto lotto : lottos) {
             results.add(Result.decisionLottoRank(
                     matchingCount(lotto.getLottoNumbers()),
-                    lotto.isBonusMatch(lottoNumber.getBonus())
+                    lotto.isBonusMatch(lottoNumber.getLottoNumber())
             ));
         }
     }
 
-    private int matchingCount(List<Integer> lottoNumbers) {
+    private int matchingCount(List<LottoNumber> lottoNumbers) {
         return (int) winningNumbers.getLottoNumbers().stream()
                 .filter(lottoNumbers::contains)
                 .count();

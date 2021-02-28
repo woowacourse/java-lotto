@@ -1,13 +1,11 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
@@ -26,7 +24,7 @@ public class InputView {
         return Integer.parseInt(input);
     }
 
-    public static List<Integer> winningNumbers() {
+    public static List<LottoNumber> winningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String[] inputs = scanner.nextLine().split(", ");
 
@@ -36,7 +34,7 @@ public class InputView {
         }
 
         return Arrays.stream(inputs)
-                .map(s -> Integer.parseInt(s))
+                .map(s -> new LottoNumber(Integer.parseInt(s)))
                 .collect(Collectors.toList());
     }
 
@@ -62,34 +60,7 @@ public class InputView {
         return Integer.parseInt(input);
     }
 
-    public static List<Lotto> inputManualPurchase(int manualCount) {
-        if (manualCount == 0) {
-            return Arrays.asList();
-        }
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-
-        return makeManualLotto(Stream.generate(() -> scanner.nextLine())
-                .limit(manualCount)
-                .collect(Collectors.toList()));
-    }
-
-    private static List<Lotto> makeManualLotto(List<String> manualPurchaseNumbers) {
-        List<Lotto> manualLotto = new ArrayList<>();
-
-        for (String input : manualPurchaseNumbers) {
-            validateInputCheck(input);
-            List<Integer> lottoNumbers = Arrays.stream(input.split(", "))
-                    .map(s -> Integer.parseInt(s))
-                    .collect(Collectors.toList());
-            manualLotto.add(new Lotto(lottoNumbers));
-        }
-        return manualLotto;
-    }
-
-    private static void validateInputCheck(String input) {
-        if (!Arrays.stream(input.split(", "))
-                .allMatch(s -> s.chars().allMatch(Character::isDigit))) {
-            throw new IllegalArgumentException("숫자와 , 를 이용하여 입력해주세요.");
-        }
+    public static String inputManualPurchase() {
+        return scanner.nextLine();
     }
 }

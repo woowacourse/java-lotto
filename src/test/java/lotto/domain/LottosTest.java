@@ -1,18 +1,21 @@
 package lotto.domain;
 
-import lotto.util.LottoFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AutoLottoTest {
+public class LottosTest {
 
     @DisplayName("자동 로또 생성 확인")
     @Test
     void create_auto_lotto() {
-        LottoFactory autoLotto = LottoFactory.of(6);
+        Lottos lottos = new Lottos();
 
-        assertThat(autoLotto.getLottos()).hasSize(6);
+        for (int i = 0; i < 6; i++) {
+            lottos.buyLotto(new LottoAutoGenerator());
+        }
+
+        assertThat(lottos.getLottos().size()).isEqualTo(6);
     }
 }

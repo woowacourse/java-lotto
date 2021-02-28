@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.util.LottoFactory;
+import lotto.util.LottoGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -31,8 +31,8 @@ public class WinningLottoTest {
                 new Lotto(Arrays.asList(1, 2, 20, 25, 29, 45))
         );
 
-        LottoFactory manualLotto = LottoFactory.of(manualLottos);
-        LottoFactory autoLotto = LottoFactory.of(0);
+        LottoGenerator manualLotto = LottoGenerator.of(manualLottos);
+        LottoGenerator autoLotto = LottoGenerator.of(0);
 
         WinningLotto winningLotto = new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(20));
         List<Result> results = winningLotto.getWinningResult(manualLotto, autoLotto);
