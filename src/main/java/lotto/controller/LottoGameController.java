@@ -4,31 +4,46 @@ import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.List;
-
 public class LottoGameController {
 
-    private final LottoGame lottoGame = new LottoGame();
-
     public void run() {
-        Lottos lottos = buyAutoLotto();
+        LottoAmount lottoAmount = makeLottoAmount();
 
-        Lotto winningLotto = askWinningLottoNumbers();
-        LottoNumber bonusNumber = InputView.askBonusNumber();
+        LottoGame lottoGame = buyTwoTypeLottos(lottoAmount);
+        printEachLottos(lottoGame);
 
-        WinningLotto lastWinningLotto = makeWinningLotto(winningLotto, bonusNumber);
+        WinningLotto lastWinningLotto = askWinningLotto();
+        LottoGameResult lottoGameResult = lottoGame.draw(lastWinningLotto);
 
-        showGameResult(lottos, lastWinningLotto);
+        OutputView.printLottoGameResult(lottoGameResult);
     }
 
-    private Lottos buyAutoLotto() {
+    private LottoAmount makeLottoAmount() {
         Money money = InputView.askMoney();
-        Lottos lottos = lottoGame.buyLottos(money);
 
-        OutputView.printTotalNumberOfLotto(lottos);
-        OutputView.printEachLotto(lottos);
+        return InputView.askLottoAmount(money);
+    }
 
-        return lottos;
+    private LottoGame buyTwoTypeLottos(LottoAmount lottoAmount) {
+        LottoGame lottoGame = new LottoGame();
+
+        Lottos manualLottos = InputView.askManualLottoNumbers(lottoAmount.toManualAmountNumber());
+        lottoGame.buyManualLottos(manualLottos);
+        lottoGame.buyAutoLottos(lottoAmount.toAutoAmountNumber());
+
+        return lottoGame;
+    }
+
+    private void printEachLottos(LottoGame lottoGame) {
+        OutputView.printTotalNumberOfLotto(lottoGame.toManualLottos(), lottoGame.toAutoLottos());
+        OutputView.printEachLotto(lottoGame.toManualLottos(), lottoGame.toAutoLottos());
+    }
+
+    private WinningLotto askWinningLotto() {
+        Lotto winningLotto = InputView.askLastWinningLottoNumber();
+        LottoNumber bonusNumber = InputView.askBonusNumber();
+
+        return makeWinningLotto(winningLotto, bonusNumber);
     }
 
     private WinningLotto makeWinningLotto(Lotto winningLotto, LottoNumber bonusNumber) {
@@ -38,21 +53,5 @@ public class LottoGameController {
             OutputView.printError(e.getMessage());
             return makeWinningLotto(winningLotto, InputView.askBonusNumber());
         }
-    }
-
-    private Lotto askWinningLottoNumbers() {
-        try {
-            List<LottoNumber> winningNumbers = InputView.askLastWinningLottoNumber();
-            return new Lotto(winningNumbers);
-        } catch (Exception e) {
-            OutputView.printError(e.getMessage());
-            return askWinningLottoNumbers();
-        }
-    }
-
-    private void showGameResult(Lottos lottos, WinningLotto lastWinningLotto) {
-        LottoGameResult lottoGameResult = lottoGame.compareWithWinningLotto(lottos, lastWinningLotto);
-
-        OutputView.printLottoGameResult(lottoGameResult);
     }
 }

@@ -17,21 +17,16 @@ public class RandomGenerator implements LottoGenerator {
 
     private void initLottoNumber() {
         for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
-            numbers.add(new LottoNumber(i));
+            numbers.add(LottoNumber.from(i));
         }
     }
 
     @Override
     public Lotto generate() {
         Collections.shuffle(numbers);
-        List<LottoNumber> lottoNumbers = numbers.subList(FROM_INDEX, Lotto.LOTTO_NUMBER_SIZE);
+        List<LottoNumber> lottoNumbers = new ArrayList<>(numbers.subList(FROM_INDEX, Lotto.LOTTO_NUMBER_SIZE));
         Collections.sort(lottoNumbers);
 
         return new Lotto(lottoNumbers);
-    }
-
-    @Override
-    public Lotto generateWinningLottoNumber() {
-        return null;
     }
 }

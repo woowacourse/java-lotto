@@ -1,22 +1,32 @@
 package lotto.domain;
 
-import lotto.utils.LottoGenerator;
-import lotto.utils.RandomGenerator;
-
 public class LottoGame {
 
-    public Lottos buyLottos(Money money) {
-        LottoGenerator lottoGenerator = new RandomGenerator();
+    private Lottos manualLottos;
+    private Lottos autoLottos;
 
-        return new Lottos(lottoGenerator, money);
+    public void buyManualLottos(Lottos manualLottos) {
+        this.manualLottos = manualLottos;
     }
 
-    public LottoGameResult compareWithWinningLotto(Lottos lottos, WinningLotto winningLotto) {
-        LottoGameResult lottoGameResult = new LottoGameResult();
-        for (Lotto lotto : lottos.toList()) {
-            lottoGameResult.add(winningLotto.findRank(lotto));
-        }
+    public void buyAutoLottos(int autoAmount) {
+        this.autoLottos = new Lottos(autoAmount);
+    }
+
+    public LottoGameResult draw(WinningLotto winningLotto) {
+        final LottoGameResult lottoGameResult = new LottoGameResult();
+
+        lottoGameResult.add(manualLottos.findMatchLotto(winningLotto));
+        lottoGameResult.add(autoLottos.findMatchLotto(winningLotto));
 
         return lottoGameResult;
+    }
+
+    public Lottos toManualLottos() {
+        return manualLottos;
+    }
+
+    public Lottos toAutoLottos() {
+        return autoLottos;
     }
 }

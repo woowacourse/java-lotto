@@ -8,6 +8,4 @@ public interface LottoGenerator {
     int FROM_INDEX = 0;
 
     Lotto generate();
-
-    Lotto generateWinningLottoNumber();
 }

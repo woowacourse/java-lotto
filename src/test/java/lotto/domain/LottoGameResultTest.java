@@ -1,29 +1,29 @@
 package lotto.domain;
 
 import lotto.utils.LottoGenerator;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoGameResultTest {
 
-    static LottoGameResult lottoGameResult = new LottoGameResult();
-
-
-    @BeforeAll
-    static void beforeAll() {
-        lottoGameResult.add(Rank.rankOf(4, false)); // 4
-        lottoGameResult.add(Rank.rankOf(3, false)); // 5
-        lottoGameResult.add(Rank.rankOf(2, false));
-        lottoGameResult.add(Rank.rankOf(1, false));
-        lottoGameResult.add(Rank.rankOf(0, false));
-    }
-
     @DisplayName("랭크 별 개수 테스트")
     @Test
     void testAdd() {
+        LottoGameResult lottoGameResult = new LottoGameResult();
+        List<Rank> matchRank = Arrays.asList(
+                Rank.rankOf(4, false),
+                Rank.rankOf(3, false),
+                Rank.rankOf(2, false),
+                Rank.rankOf(1, false),
+                Rank.rankOf(0, false)
+        );
+        lottoGameResult.add(matchRank);
+
         assertThat(lottoGameResult.countByRank(Rank.FOURTH)).isEqualTo(1);
         assertThat(lottoGameResult.countByRank(Rank.NOTHING)).isEqualTo(3);
     }
@@ -32,14 +32,19 @@ public class LottoGameResultTest {
     @DisplayName("수익률 계산 테스트")
     @Test
     void testCalculateProfit() {
-        Money money = new Money("1000");
         LottoGenerator fixedGenerator = new FixedGenerator();
-        Lottos lottos = new Lottos(fixedGenerator, money);
-        WinningLotto winningLotto = new WinningLotto(fixedGenerator.generateWinningLottoNumber(), 1);
+        Lottos fixedLottos = new Lottos(Arrays.asList(fixedGenerator.generate()));
 
-        LottoGame lottoGame = new LottoGame();
-        double profit = lottoGame.compareWithWinningLotto(lottos, winningLotto).calculateProfit();
+        Lotto fixedWinningLotto = new Lotto(Arrays.asList(
+                LottoNumber.from(1), LottoNumber.from(2), LottoNumber.from(3),
+                LottoNumber.from(4), LottoNumber.from(5), LottoNumber.from(6)));
 
-        assertThat(profit).isEqualTo(30000);
+        WinningLotto winningLotto = new WinningLotto(fixedWinningLotto, 7);
+        LottoGameResult fixedGameResult = new LottoGameResult();
+        fixedGameResult.add(fixedLottos.findMatchLotto(winningLotto));
+
+        double profit = fixedGameResult.calculateProfit();
+
+        assertThat(profit).isEqualTo(2_000_000);
     }
 }

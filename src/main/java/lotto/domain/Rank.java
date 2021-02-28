@@ -8,18 +8,21 @@ public enum Rank {
     FIFTH(3, 5_000),
     FOURTH(4, 50_000),
     THIRD(5, 1_500_000),
-    SECOND(5, 30_000_000),
+    SECOND(5, 30_000_000, true),
     FIRST(6, 2_000_000_000);
-
-    public static final String RANK_BONUS_FORM = "%d개 일치, 보너스 볼 일치(%d원)- %d개" + System.lineSeparator();
-    public static final String RANK_FORM = "%d개 일치 (%d원)- %d개" + System.lineSeparator();
 
     private int countOfMatch;
     private int reward;
+    private boolean matchBonus;
 
     Rank(int countOfMatch, int reward) {
+        this(countOfMatch, reward, false);
+    }
+
+    Rank(int countOfMatch, int reward, boolean matchBonus) {
         this.countOfMatch = countOfMatch;
         this.reward = reward;
+        this.matchBonus = matchBonus;
     }
 
     public int getCountOfMatch() {
@@ -30,21 +33,11 @@ public enum Rank {
         return reward;
     }
 
-    public String rankMessage(int countNumber) {
-        if (this == SECOND) {
-            return String.format(RANK_BONUS_FORM, countOfMatch, reward, countNumber);
-        }
-        return String.format(RANK_FORM, countOfMatch, reward, countNumber);
-    }
-
     public static Rank rankOf(int countOfMatch, boolean bonusNumber) {
-        if (!bonusNumber && THIRD.matchCount(countOfMatch)) {
-            return THIRD;
-        }
 
-        return Arrays.stream(values())
-                .filter(rank -> rank != THIRD)
+        return Arrays.stream(Rank.values())
                 .filter(rank -> rank.matchCount(countOfMatch))
+                .filter(rank -> !rank.equals(THIRD) || rank.matchBonus == bonusNumber)
                 .findFirst()
                 .orElse(NOTHING);
     }

@@ -3,16 +3,30 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import java.util.Arrays;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LottoGameTest {
 
+    @DisplayName("돈에 따른 자동 로또 구입 개수 테스트")
     @Test
-    @DisplayName("돈에 따른 로또 구입 개수 테스트")
-    void testBuyLottos() {
+    void testAutoBuyLottos() {
         LottoGame lottoGame = new LottoGame();
-        Money money = new Money("1000");
-        Lottos lottos = lottoGame.buyLottos(money);
-        assertThat(lottos.toList().size()).isEqualTo(1);
+
+        lottoGame.buyAutoLottos(4);
+
+        assertThat(lottoGame.toAutoLottos().toList().size()).isEqualTo(4);
+    }
+
+    @DisplayName("수동 로또 구입 개수 테스트")
+    @Test
+    void testBuyManualLottos() {
+        LottoGame lottoGame = new LottoGame();
+        FixedGenerator fixedGenerator = new FixedGenerator();
+
+        lottoGame.buyManualLottos(new Lottos(Arrays.asList(fixedGenerator.generate())));
+
+        assertThat(lottoGame.toManualLottos().toList().get(0)).isEqualTo(fixedGenerator.generate());
     }
 }

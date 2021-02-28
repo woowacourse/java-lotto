@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Objects;
+
 public class WinningLotto {
 
     private final Lotto winningLotto;
@@ -12,7 +14,7 @@ public class WinningLotto {
     }
 
     public WinningLotto(Lotto lotto, int number) {
-        this(lotto, new LottoNumber(number));
+        this(lotto, LottoNumber.from(number));
     }
 
     public Rank findRank(Lotto lotto) {
@@ -26,5 +28,18 @@ public class WinningLotto {
         if (lotto.containNumber(bonusNumber)) {
             throw new IllegalArgumentException("보너스 번호는 로또 번호와 중복될 수 없습니다.");
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WinningLotto that = (WinningLotto) o;
+        return Objects.equals(winningLotto, that.winningLotto) && Objects.equals(bonusNumber, that.bonusNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(winningLotto, bonusNumber);
     }
 }

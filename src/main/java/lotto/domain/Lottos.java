@@ -1,24 +1,42 @@
 package lotto.domain;
 
-import lotto.utils.LottoGenerator;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Lottos {
 
-    private final List<Lotto> lottos = new ArrayList<>();
+    private List<Lotto> lottos = new ArrayList<>();
 
-    public Lottos(LottoGenerator lottoGenerator, Money money) {
-        makeRandomLottos(lottoGenerator, money);
+    public Lottos(int autoAmount) {
+        makeRandomLottos(autoAmount);
     }
 
-    private void makeRandomLottos(LottoGenerator lottoGenerator, Money money) {
-        for (int i = 0; i < money.toNumberOfPurchaseLotto(); i++) {
-            lottos.add(lottoGenerator.generate());
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
+    }
+
+    public static Lottos of(List<String> manuals) {
+        List<Lotto> manualottos = manuals.stream()
+                .map(Lotto::ofLotto)
+                .collect(Collectors.toList());
+
+        return new Lottos(manualottos);
+    }
+
+    private void makeRandomLottos(int autoAmount) {
+        for (int i = 0; i < autoAmount; i++) {
+            lottos.add(Lotto.ofRandomLotto());
         }
+    }
+
+    public List<Rank> findMatchLotto(WinningLotto winningLotto) {
+
+        return lottos.stream()
+                .map(winningLotto::findRank)
+                .collect(Collectors.toList());
     }
 
     public List<Lotto> toList() {
