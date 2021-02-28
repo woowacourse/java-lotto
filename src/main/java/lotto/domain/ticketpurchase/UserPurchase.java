@@ -1,29 +1,38 @@
 package lotto.domain.ticketpurchase;
 
+import lotto.domain.ticket.LottoTicket;
+
 public class UserPurchase {
-    private static final int ONE_TICKET_PRICE = 1000;
-    private static final int ZERO = 0;
+    private final PurchasePrice purchasePrice;
+    private final int manualTicketNumber;
+    private final int autoTicketNumber;
 
-    private final int purchasePrice;
-    private final int numberOfTicket;
-
-    public UserPurchase(int purchasePrice) {
-        validateExactlyDividedByOneTicketPrice(purchasePrice);
+    public UserPurchase(PurchasePrice purchasePrice, int manualTicketNumber) {
+        validateManualTicketPriceNotGreaterThanPurchasePrice(purchasePrice, manualTicketNumber);
         this.purchasePrice = purchasePrice;
-        this.numberOfTicket = purchasePrice / ONE_TICKET_PRICE;
+        this.manualTicketNumber = manualTicketNumber;
+        this.autoTicketNumber = (purchasePrice.getPurchasePrice() / LottoTicket.PRICE) - manualTicketNumber;
     }
 
-    public int getNumberOfTicket() {
-        return this.numberOfTicket;
+    private void validateManualTicketPriceNotGreaterThanPurchasePrice(PurchasePrice purchasePrice, int manualTicketNumber) {
+        if (isTotalManualTicketPriceOverPurchasePrice(purchasePrice, manualTicketNumber)) {
+            throw new IllegalArgumentException("구입금액에 맞게 입력해 주세요");
+        }
     }
 
-    public int getPurchasePrice() {
+    private boolean isTotalManualTicketPriceOverPurchasePrice(PurchasePrice purchasePrice, int manualTicketNumber) {
+        return purchasePrice.isLessThan(manualTicketNumber * LottoTicket.PRICE);
+    }
+
+    public PurchasePrice getPurchasePrice() {
         return this.purchasePrice;
     }
 
-    private void validateExactlyDividedByOneTicketPrice(int purchasePrice) {
-        if (purchasePrice <= ZERO || purchasePrice % ONE_TICKET_PRICE != ZERO) {
-            throw new IllegalArgumentException("구입 금액은 1000원 단위여야 합니다.");
-        }
+    public int getManualTicketCount() {
+        return this.manualTicketNumber;
+    }
+
+    public int getAutoTicketCount() {
+        return this.autoTicketNumber;
     }
 }

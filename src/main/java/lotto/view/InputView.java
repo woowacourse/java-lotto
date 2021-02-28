@@ -1,35 +1,38 @@
 package lotto.view;
 
+import lotto.view.printer.InputPrinter;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoTicket;
-import lotto.domain.ticketpurchase.UserPurchase;
-import lotto.domain.ticketresult.WinningLottoNumbers;
-import lotto.view.printer.InputPrinter;
 
 public class InputView {
+    public static final String LOTTO_NUMBER_DELIMITER = ", ";
     private static final Scanner scanner = new Scanner(System.in);
     private static final String NUMERIC_REGULAR_EXPRESSION = "\\d+";
-    public static final String LOTTO_NUMBER_DELIMITER = ", ";
 
     private InputView() {
     }
 
-    public static UserPurchase getUserPurchase() {
+    public static int getPurchasePrice() {
         InputPrinter.printPurchasePriceInputGuideMessage();
         String purchasePriceInput = scanner.nextLine();
-        int purchasePrice = parseNumericInput(purchasePriceInput);
-        return new UserPurchase(purchasePrice);
+        return parseNumericInput(purchasePriceInput);
     }
 
-    public static WinningLottoNumbers getWinningLottoNumbers() {
-        List<LottoNumber> lottoNumbers = getWinningLottoNumbersInput();
-        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
-        LottoNumber bonusNumber = getBonusNumberInput();
-        return new WinningLottoNumbers(lottoTicket, bonusNumber);
+    public static int getManualTicketCount() {
+        InputPrinter.printManualTicketCountInputGuideMessage();
+        String manualTicketNumberInput = scanner.nextLine();
+        return parseNumericInput(manualTicketNumberInput);
+    }
+
+    public static List<Integer> getLottoNumbers() {
+        String lottoNumbersInput = scanner.nextLine();
+        validateAllNaturalNumbers(lottoNumbersInput);
+        return Arrays.stream(lottoNumbersInput.split(LOTTO_NUMBER_DELIMITER))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 
     private static int parseNumericInput(String inputValue) {
@@ -39,27 +42,17 @@ public class InputView {
         return Integer.parseInt(inputValue);
     }
 
-    private static List<LottoNumber> getWinningLottoNumbersInput() {
-        InputPrinter.printWinnerLottoNumbersInputGuideMessage();
-        String winningNumbersInput = scanner.nextLine();
-        validateAllNaturalNumbers(winningNumbersInput);
-        return Arrays.stream(winningNumbersInput.split(LOTTO_NUMBER_DELIMITER))
-            .map(inputNumber -> new LottoNumber(Integer.parseInt(inputNumber)))
-            .collect(Collectors.toList());
-    }
-
     private static void validateAllNaturalNumbers(String winningNumbersInput) {
         if (!Arrays.stream(winningNumbersInput.split(LOTTO_NUMBER_DELIMITER))
-            .allMatch(name -> name.matches(NUMERIC_REGULAR_EXPRESSION))) {
+                .allMatch(numberInput -> numberInput.matches(NUMERIC_REGULAR_EXPRESSION))) {
             throw new IllegalArgumentException("올바르지 않은 입력입니다.");
         }
     }
 
-    private static LottoNumber getBonusNumberInput() {
+    public static int getBonusNumberInput() {
         InputPrinter.printBonusNumberInputGuideMessage();
         String bonusNumberInput = scanner.nextLine();
-        int bonusNumber = parseNumericInput(bonusNumberInput);
         InputPrinter.printNewLine();
-        return new LottoNumber(bonusNumber);
+        return parseNumericInput(bonusNumberInput);
     }
 }
