@@ -14,21 +14,12 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoWinnerTest {
 
-    List<LottoNumber> lottoWinnerNumbers;
     LottoTicket lottoWinnerTicket;
     LottoBonusNumber lottoBonusNumber;
 
     @BeforeEach
     void setUp() {
-        lottoWinnerNumbers = Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(45)
-        );
-        lottoWinnerTicket = new LottoTicket(lottoWinnerNumbers);
+        lottoWinnerTicket = LottoTicket.createManualLottoTicket("1,2,3,4,5,45");
         lottoBonusNumber = LottoBonusNumber.of("9", lottoWinnerTicket);
     }
 

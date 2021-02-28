@@ -6,6 +6,7 @@ import lotto.domain.lottos.LottoTicket;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class ManualNumberGenerator implements LottoNumberGenerator {
@@ -16,10 +17,18 @@ public class ManualNumberGenerator implements LottoNumberGenerator {
     private final List<LottoNumber> lottoNumbers;
 
     public ManualNumberGenerator(final String input) {
+        Objects.requireNonNull(input, LottoTicket.NULL_ERROR_MESSAGE);
+        requireNonEmpty(input, LottoTicket.EMPTY_ERROR_MESSAGE);
         this.lottoNumbers = Arrays.stream(input.split(DELIMITER))
                 .map(this::parseLottoNumber)
                 .sorted()
                 .collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
+    }
+
+    private void requireNonEmpty(String input, String message) {
+        if (input.isEmpty()) {
+            throw new IllegalArgumentException(message);
+        }
     }
 
     @Override

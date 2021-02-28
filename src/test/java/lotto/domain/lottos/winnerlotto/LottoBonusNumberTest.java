@@ -19,16 +19,7 @@ public class LottoBonusNumberTest {
 
     @BeforeEach
     void setUp() {
-        List<LottoNumber> lottoWinnerNumbers = Arrays.asList(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(45)
-        );
-
-        lottoWinnerTicket = new LottoTicket(lottoWinnerNumbers);
+        lottoWinnerTicket = LottoTicket.createManualLottoTicket("1,2,3,4,5,45");
     }
 
     @Test

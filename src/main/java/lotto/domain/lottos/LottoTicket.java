@@ -11,13 +11,13 @@ public class LottoTicket {
 
     public static final int LOTTO_NUMBER_SIZE = 6;
     public static final String NULL_ERROR_MESSAGE = "null 값은 허용하지 않습니다.";
-    public static final String EMPTY_ERROR_MESSAGE = "숫자는 하나 이상이어야 합니다.";
-    public static final String COUNT_ERROR_MESSAGE = "숫자는 %d개 여야 합니다.";
+    public static final String EMPTY_ERROR_MESSAGE = "로또 숫자는 하나 이상이어야 합니다.";
+    public static final String COUNT_ERROR_MESSAGE = "로또 숫자는 %d개 여야 합니다.";
     public static final String DUPLICATE_ERROR_MESSAGE = "중복된 숫자가 존재합니다.";
 
     private final List<LottoNumber> lottoNumbers;
 
-    public LottoTicket(final List<LottoNumber> lottoNumbers) {
+    private LottoTicket(final List<LottoNumber> lottoNumbers) {
         Objects.requireNonNull(lottoNumbers, NULL_ERROR_MESSAGE);
         validateLottoTicket(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
@@ -28,8 +28,7 @@ public class LottoTicket {
     }
 
     public static LottoTicket createManualLottoTicket(final String input) {
-        List<LottoNumber> lottoNumbers = new ManualNumberGenerator(input).generateNumbers();
-        return new LottoTicket(lottoNumbers);
+        return new LottoTicket(new ManualNumberGenerator(input).generateNumbers());
     }
 
     public LottoRank getRank(final LottoWinner lottoWinner) {

@@ -22,61 +22,14 @@ public class LottoResultStatisticsTest {
 
     @BeforeEach
     public void setUp() {
-        LottoTicket lottoWinnerTicket = new LottoTicket(
-                Arrays.asList(
-                        new LottoNumber(1),
-                        new LottoNumber(2),
-                        new LottoNumber(3),
-                        new LottoNumber(4),
-                        new LottoNumber(5),
-                        new LottoNumber(6)
-                )
-        );
-
+        LottoTicket lottoWinnerTicket = LottoTicket.createManualLottoTicket("1,2,3,4,5,6");
         LottoBonusNumber lottoBonusNumber = LottoBonusNumber.of("7", lottoWinnerTicket);
-
         lottoWinner = new LottoWinner(lottoWinnerTicket, lottoBonusNumber);
 
-        LottoTicket lottoTicket1 = new LottoTicket(
-                Arrays.asList(
-                        new LottoNumber(1),
-                        new LottoNumber(2),
-                        new LottoNumber(3),
-                        new LottoNumber(4),
-                        new LottoNumber(5),
-                        new LottoNumber(6)
-                )
-        );
-        LottoTicket lottoTicket2 = new LottoTicket(
-                Arrays.asList(
-                        new LottoNumber(1),
-                        new LottoNumber(2),
-                        new LottoNumber(3),
-                        new LottoNumber(4),
-                        new LottoNumber(5),
-                        new LottoNumber(7)
-                )
-        );
-        LottoTicket lottoTicket3 = new LottoTicket(
-                Arrays.asList(
-                        new LottoNumber(1),
-                        new LottoNumber(2),
-                        new LottoNumber(3),
-                        new LottoNumber(4),
-                        new LottoNumber(5),
-                        new LottoNumber(8)
-                )
-        );
-        LottoTicket lottoTicket4 = new LottoTicket(
-                Arrays.asList(
-                        new LottoNumber(1),
-                        new LottoNumber(2),
-                        new LottoNumber(9),
-                        new LottoNumber(10),
-                        new LottoNumber(43),
-                        new LottoNumber(44)
-                )
-        );
+        LottoTicket lottoTicket1 = LottoTicket.createManualLottoTicket("1,2,3,4,5,6");
+        LottoTicket lottoTicket2 = LottoTicket.createManualLottoTicket("1,2,3,4,5,7");
+        LottoTicket lottoTicket3 = LottoTicket.createManualLottoTicket("1,2,3,4,5,8");
+        LottoTicket lottoTicket4 = LottoTicket.createManualLottoTicket("1,2,9,43,44,45");
         lottoTickets = new LottoTickets(Arrays.asList(lottoTicket1, lottoTicket2, lottoTicket3, lottoTicket4));
     }
 
