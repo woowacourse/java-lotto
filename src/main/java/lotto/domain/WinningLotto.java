@@ -17,13 +17,13 @@ public class WinningLotto {
 
     public List<Result> getWinningResult(LottoFactory manualLotto, LottoFactory autoLotto) {
         List<Result> results = new ArrayList<>();
-        checkResult(results, manualLotto.getLottos());
-        checkResult(results, autoLotto.getLottos());
+        addResult(results, manualLotto.getLottos());
+        addResult(results, autoLotto.getLottos());
 
         return results;
     }
 
-    private void checkResult(List<Result> results, List<Lotto> lottos) {
+    private void addResult(List<Result> results, List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
             results.add(Result.decisionLottoRank(
                     matchingCount(lotto.getLottoNumbers()),
