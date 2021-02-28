@@ -1,13 +1,12 @@
 package lotto.controller;
 
 import lotto.domain.EarningRate;
-import lotto.domain.TicketCounter;
+import lotto.domain.Ticket;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Lotteries;
 import lotto.domain.lottomachine.RandomLottoMachine;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.Money;
-import lotto.domain.Ticket;
 import lotto.domain.rating.RatingInfo;
 import lotto.domain.WinningLotto;
 import lotto.view.InputView;
@@ -17,47 +16,50 @@ public class LottoController {
 
     public void start() {
         final Lotteries lotteries = new Lotteries();
+        final Money money = getMoney();
+        final Ticket ticket = new Ticket(money, manualBuyTicket());
 
-        final Ticket totalTicket = buyTicket();
-        final Ticket manualTicket = manualBuyTicket(totalTicket);
-        generateManualLottoNumbers(manualTicket.getCount(), lotteries);
-        buyLottoAndPrintResult(manualTicket.getCount(), totalTicket.getCount(),
-            lotteries);
+        generateLotto(lotteries, ticket);
+        OutputView.printBuyLotto(ticket.getManualCount(), ticket.getAutoCount());
+        OutputView.printLottoResults(lotteries);
 
         RatingInfo ratingInfo = lotteries.scratchLotto(buyWinningLotto());
-        printWinningStats(ratingInfo, new EarningRate(), totalTicket);
+        OutputView.printWinningStats(ratingInfo, new EarningRate().calculate(ratingInfo, money.getValue()));
     }
 
-    private Ticket buyTicket() {
+    private Money getMoney() {
         try {
-            return tryBuyTicket();
+            return tryGetMoney();
         } catch (IllegalArgumentException e) {
             OutputView.getMessage(e.getMessage());
-            return buyTicket();
+            return getMoney();
         }
     }
 
-    private Ticket tryBuyTicket() {
+    private Money tryGetMoney() {
         int money = InputView.getMoney();
-        return new Ticket(new Money(money));
+        return new Money(money);
     }
 
-    private Ticket manualBuyTicket(final Ticket totalTicket) {
+    private int manualBuyTicket() {
         try {
-            return tryManualBuyTicket(totalTicket);
+            return tryManualBuyTicket();
         } catch (IllegalArgumentException e) {
             OutputView.getMessage(e.getMessage());
-            return manualBuyTicket(totalTicket);
+            return manualBuyTicket();
         }
     }
 
-    private Ticket tryManualBuyTicket(final Ticket totalTicket) {
-        int count = InputView.getManualTicketCount();
-        return new Ticket(count, totalTicket);
+    private int tryManualBuyTicket() {
+        return InputView.getManualTicketCount();
     }
 
-    private void generateManualLottoNumbers(final int count,
-        final Lotteries lotteries) {
+    private void generateLotto(Lotteries lotteries, Ticket ticket) {
+        generateManualLottoNumbers(ticket.getManualCount(), lotteries);
+        lotteries.generateLottoByTicket(new RandomLottoMachine(), ticket.getAutoCount());
+    }
+
+    private void generateManualLottoNumbers(final int count, final Lotteries lotteries) {
         OutputView.getMessage(InputView.INPUT_MANUAL_BUY_NUMBERS_MESSAGE);
         for (int i = 0; i < count; i++) {
             Lotto lotto = manualBuyLotto();
@@ -93,17 +95,4 @@ public class LottoController {
         return new WinningLotto(lotto, bonusNumber);
     }
 
-    private void buyLottoAndPrintResult(final int manualCount, final int totalCount,
-        Lotteries lotteries) {
-        OutputView.printBuyLotto(manualCount, totalCount - manualCount);
-        lotteries.generateLottoByTicket(new RandomLottoMachine(), totalCount);
-        OutputView.printLottoResults(lotteries);
-    }
-
-    private void printWinningStats(final RatingInfo ratingInfo, final EarningRate earningRate,
-        final Ticket ticket) {
-        OutputView
-            .printWinningStats(ratingInfo,
-                earningRate.calculate(ratingInfo, ticket.getPrice()));
-    }
 }

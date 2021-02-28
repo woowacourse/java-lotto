@@ -19,11 +19,12 @@ public class TicketTest {
     @Test
     @DisplayName("수동 구매가 가능한지 확인")
     void validateMaximumManualBuy() {
-        Ticket totalTicket = new Ticket(new Money(14000));
-        assertThatThrownBy(() -> new Ticket(15, totalTicket))
+        final Money money = new Money(14000);
+        final Ticket ticket = new Ticket(money);
+        assertThatThrownBy(() -> new Ticket(money, 15))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining(
-                String.format(Ticket.MANUAL_BUY_ERROR_MESSAGE, totalTicket.getCount())
+                String.format(Ticket.MANUAL_BUY_ERROR_MESSAGE, ticket.getTotalCount())
             );
     }
 }

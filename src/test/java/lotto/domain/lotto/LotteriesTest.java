@@ -48,7 +48,7 @@ public class LotteriesTest {
         Ticket ticket = new Ticket(new Money(2000));
 
         lotteries
-            .generateLottoByTicket(() -> Arrays.asList(1, 2, 3, 4, 5, 6), ticket.getCount());
+            .generateLottoByTicket(() -> Arrays.asList(1, 2, 3, 4, 5, 6), ticket.getTotalCount());
 
         WinningLotto winningLotto = new WinningLotto(
             Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)),
