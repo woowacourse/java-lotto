@@ -14,15 +14,15 @@ public class Money {
     public Money(final String money) {
         Objects.requireNonNull(money);
         int integerMoney = parseInt(money);
-        validateBudgetMoney(integerMoney);
+        validateBudget(integerMoney);
         this.money = integerMoney;
     }
 
-    public int lottoCount() {
+    public int ticketCount() {
         return this.money / LOTTO_PRICE;
     }
 
-    public void deductMoney(int manualPurchase) {
+    public void deduct(int manualPurchase) {
         int purchaseTotal = manualPurchase * LOTTO_PRICE;
         if (purchaseTotal > money) {
             throw new IllegalArgumentException(OUT_OF_BUDGET_ERROR_MESSAGE);
@@ -38,7 +38,7 @@ public class Money {
         }
     }
 
-    private void validateBudgetMoney(int money) {
+    private void validateBudget(int money) {
         if (money < LOTTO_PRICE) {
             throw new IllegalArgumentException(SHORT_MONEY_MESSAGE);
         }

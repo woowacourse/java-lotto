@@ -10,17 +10,17 @@ import static java.lang.Integer.parseInt;
 
 public class LottoController {
 
-    public void lottoStart() {
+    public void start() {
         Money money = initMoney();
-        LottoTickets lottoTickets = initLottoTickets(money);
+        LottoTickets lottoTickets = initTickets(money);
 
-        LottoTicket lottoWinnerTicket = initLottoWinnerTicket();
-        LottoNumber lottoWinnerBonusNumber = initLottoWinnerBonusNumber();
+        LottoTicket lottoWinnerTicket = initoWinnerTicket();
+        LottoNumber lottoWinnerBonusNumber = initWinnerBonusNumber();
         LottoWinner lottoWinner = new LottoWinner(lottoWinnerTicket, lottoWinnerBonusNumber);
 
         OutputView.printRewardResultBoard();
         LottoResultStatistics lottoResultStatistics =
-                LottoResultStatistics.calculateResultStatistics(lottoTickets, lottoWinner);
+                LottoResultStatistics.apply(lottoTickets, lottoWinner);
         OutputView.printStatistics(lottoResultStatistics);
         OutputView.printFinalResult(lottoResultStatistics, money);
     }
@@ -29,7 +29,7 @@ public class LottoController {
         Money money;
         try {
             OutputView.askHowMuchToBuy();
-            money = new Money(InputView.getUserInput());
+            money = new Money(InputView.getInput());
         } catch (NullPointerException | IllegalArgumentException e) {
             OutputView.printErrorMessage(e);
             return initMoney();
@@ -37,44 +37,44 @@ public class LottoController {
         return money;
     }
 
-    private LottoTickets initLottoTickets(Money money) {
-        LottoTickets manualLottoTickets = initManualLottoTickets(money);
-        LottoTickets autoLottoTickets = LottoTicketsService.createAutoLottoTickets(money);
+    private LottoTickets initTickets(Money money) {
+        LottoTickets manualLottoTickets = initManualTickets(money);
+        LottoTickets autoLottoTickets = LottoTicketsService.createRandomTickets(money);
         OutputView.printHowManyTicketsBought(manualLottoTickets.size(), autoLottoTickets.size());
-        LottoTickets mergedLottoTickets = manualLottoTickets.mergeLottoTickets(autoLottoTickets);
+        LottoTickets mergedLottoTickets = manualLottoTickets.merge(autoLottoTickets);
         OutputView.printTickets(mergedLottoTickets);
         return mergedLottoTickets;
     }
 
-    public LottoTickets initManualLottoTickets(Money money) {
-        OutputView.askHowManyManualLottoTicketsToBuy();
+    public LottoTickets initManualTickets(Money money) {
+        OutputView.askHowManyManualTicketsToBuy();
         try {
-            int manualTicketsCount = Integer.parseInt(InputView.getUserInput());
-            OutputView.askManualLottoTicket();
-            return LottoTicketsService.createManualLottoTickets(InputView.getManualLottoTickets(manualTicketsCount), money);
+            int manualTicketsCount = Integer.parseInt(InputView.getInput());
+            OutputView.askManualTicketNumbers();
+            return LottoTicketsService.createManualTickets(InputView.getManualTickets(manualTicketsCount), money);
         } catch (NullPointerException | IllegalArgumentException e) {
             OutputView.printErrorMessage(e);
-            return initManualLottoTickets(money);
+            return initManualTickets(money);
         }
     }
 
-    private LottoTicket initLottoWinnerTicket() {
-        OutputView.askWinnerLottoTicket();
+    private LottoTicket initoWinnerTicket() {
+        OutputView.askWinnerTicket();
         try {
-            return LottoTicketService.createManualLottoTicket(InputView.getUserInput());
+            return LottoTicketService.createManualTicket(InputView.getInput());
         } catch (NullPointerException | IllegalArgumentException e) {
             OutputView.printErrorMessage(e);
-            return initLottoWinnerTicket();
+            return initoWinnerTicket();
         }
     }
 
-    private LottoNumber initLottoWinnerBonusNumber() {
+    private LottoNumber initWinnerBonusNumber() {
         OutputView.askWinnerBonusNumber();
         try {
-            return new LottoNumber(parseInt(InputView.getUserInput()));
+            return new LottoNumber(parseInt(InputView.getInput()));
         } catch (NullPointerException | IllegalArgumentException e) {
             OutputView.printErrorMessage(e);
-            return initLottoWinnerBonusNumber();
+            return initWinnerBonusNumber();
         }
     }
 }

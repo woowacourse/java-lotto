@@ -12,28 +12,28 @@ public class LottoTickets {
 
     public LottoTickets(final List<LottoTicket> lottoTickets) {
         Objects.requireNonNull(lottoTickets, NULL_ERROR_MESSAGE);
-        validateEmptyTickets(lottoTickets);
+        validateEmpty(lottoTickets);
         this.lottoTickets = lottoTickets;
     }
 
-    public LottoTickets mergeLottoTickets(LottoTickets otherLottoTickets) {
+    public LottoTickets merge(LottoTickets otherLottoTickets) {
         this.addAll(otherLottoTickets);
         return this;
     }
 
-    public List<LottoTicket> getLottoTickets() {
+    public List<LottoTicket> getTickets() {
         return this.lottoTickets;
     }
 
     public void addAll(LottoTickets lottoTicketsToAdd) {
-        lottoTickets.addAll(lottoTicketsToAdd.getLottoTickets());
+        lottoTickets.addAll(lottoTicketsToAdd.getTickets());
     }
 
     public int size() {
         return lottoTickets.size();
     }
 
-    private void validateEmptyTickets(final List<LottoTicket> lottoTickets) {
+    private void validateEmpty(final List<LottoTicket> lottoTickets) {
         if (lottoTickets.isEmpty()) {
             throw new IllegalArgumentException(EMPTY_ERROR_MESSAGE);
         }

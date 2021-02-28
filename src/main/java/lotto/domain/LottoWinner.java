@@ -13,11 +13,11 @@ public class LottoWinner {
     public LottoWinner(LottoTicket lottoWinnerTicket, LottoNumber lottoWinnerBonusNumber) {
         validateNull(lottoWinnerTicket, lottoWinnerBonusNumber);
         this.lottoWinnerTicket = lottoWinnerTicket;
-        validateIfWinnerBonusNumberInWinnerTicket(lottoWinnerTicket, lottoWinnerBonusNumber);
+        validateDuplicate(lottoWinnerTicket, lottoWinnerBonusNumber);
         this.lottoWinnerBonusNumber = lottoWinnerBonusNumber;
     }
 
-    public void validateIfWinnerBonusNumberInWinnerTicket
+    public void validateDuplicate
             (LottoTicket lottoWinnerTicket, LottoNumber lottoWinnerBonusNumber) {
         if (lottoWinnerTicket.contains(lottoWinnerBonusNumber)) {
             throw new IllegalArgumentException(DUPLICATE_ERROR_MESSAGE);
@@ -29,11 +29,11 @@ public class LottoWinner {
         Objects.requireNonNull(lottoWinnerBonusNumber, NULL_ERROR_MESSAGE);
     }
 
-    public LottoTicket getLottoWinnerTicket() {
+    public LottoTicket getWinnerTicket() {
         return lottoWinnerTicket;
     }
 
-    public LottoNumber getLottoWinnerBonusNumber() {
+    public LottoNumber getWinnerBonusNumber() {
         return lottoWinnerBonusNumber;
     }
 

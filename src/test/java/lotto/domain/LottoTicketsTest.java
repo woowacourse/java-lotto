@@ -18,11 +18,11 @@ public class LottoTicketsTest {
     public LottoTickets lottoTickets;
 
     @BeforeEach
-    public void initLottoTickets() {
+    public void initTickets() {
         lottoTickets = new LottoTickets(Arrays.asList(
-                LottoTicketService.createRandomLottoTicket(LottoNumber.getRandomLottoNumbers()),
-                LottoTicketService.createRandomLottoTicket(LottoNumber.getRandomLottoNumbers()),
-                LottoTicketService.createRandomLottoTicket(LottoNumber.getRandomLottoNumbers())
+                LottoTicketService.createRandomTicket(LottoNumber.getRandomNumbers()),
+                LottoTicketService.createRandomTicket(LottoNumber.getRandomNumbers()),
+                LottoTicketService.createRandomTicket(LottoNumber.getRandomNumbers())
         ));
     }
 
@@ -44,13 +44,13 @@ public class LottoTicketsTest {
 
     @Test
     @DisplayName("구매한 여러장의 로또 티켓들을 가진 객체를 생성한다.")
-    public void createLottoTicketsTest() {
+    public void createTicketsTest() {
         assertThat(lottoTickets).isInstanceOf(LottoTickets.class);
     }
 
     @Test
     @DisplayName("구매한 로또 티켓의 갯수만큼 로또가 생성 되었는지 확인한다.")
-    public void lottoTicketsCountTest() {
-        assertThat(lottoTickets.getLottoTickets().size()).isEqualTo(3);
+    public void ticketsCountTest() {
+        assertThat(lottoTickets.getTickets().size()).isEqualTo(3);
     }
 }

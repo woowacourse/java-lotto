@@ -14,22 +14,22 @@ public class LottoTicketsService {
 
     }
 
-    public static LottoTickets createManualLottoTickets(List<String> manualLottoTicketInputs, Money money) {
+    public static LottoTickets createManualTickets(List<String> manualLottoTicketInputs, Money money) {
         List<LottoTicket> lottoTicketGroup = new ArrayList<>();
         for (String lottoTicketInput : manualLottoTicketInputs) {
-            lottoTicketGroup.add(LottoTicketService.createManualLottoTicket(lottoTicketInput));
+            lottoTicketGroup.add(LottoTicketService.createManualTicket(lottoTicketInput));
         }
-        money.deductMoney(manualLottoTicketInputs.size());
+        money.deduct(manualLottoTicketInputs.size());
         return new LottoTickets(lottoTicketGroup);
     }
 
-    public static LottoTickets createRandomLottoTickets(Money money) {
+    public static LottoTickets createRandomTickets(Money money) {
         List<LottoTicket> lottoTicketGroup = new ArrayList<>();
-        int moneyLeftOver = money.lottoCount();
+        int moneyLeftOver = money.ticketCount();
         for (int i = 0; i < moneyLeftOver; i++) {
-            lottoTicketGroup.add(LottoTicketService.createRandomLottoTicket(LottoNumber.getRandomLottoNumbers()));
+            lottoTicketGroup.add(LottoTicketService.createRandomTicket(LottoNumber.getRandomNumbers()));
         }
-        money.deductMoney(moneyLeftOver);
+        money.deduct(moneyLeftOver);
         return new LottoTickets(lottoTicketGroup);
     }
 }

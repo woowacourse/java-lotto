@@ -17,11 +17,11 @@ public class LottoTicketService {
     private LottoTicketService() {
     }
 
-    public static LottoTicket createRandomLottoTicket(List<LottoNumber> lottoNumbers) {
+    public static LottoTicket createRandomTicket(List<LottoNumber> lottoNumbers) {
         return new LottoTicket(lottoNumbers);
     }
 
-    public static LottoTicket createManualLottoTicket(String input) {
+    public static LottoTicket createManualTicket(String input) {
         List<LottoNumber> lottoWinnerNumbers =
                 Arrays.stream(input.split(DELIMITER))
                         .map(String::trim)

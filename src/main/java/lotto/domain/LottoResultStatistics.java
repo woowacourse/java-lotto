@@ -12,11 +12,11 @@ public class LottoResultStatistics {
         this.lottoResult = lottoResult;
     }
 
-    public static LottoResultStatistics calculateResultStatistics(
+    public static LottoResultStatistics apply(
             final LottoTickets lottoTickets, final LottoWinner lottoWinner) {
-        Map<LottoRank, Integer> lottoResult = setLottoResult();
+        Map<LottoRank, Integer> lottoResult = setResult();
 
-        for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
+        for (LottoTicket lottoTicket : lottoTickets.getTickets()) {
             LottoRank rank = lottoTicket.getRank(lottoWinner);
             lottoResult.put(rank, lottoResult.get(rank) + 1);
         }
@@ -24,7 +24,7 @@ public class LottoResultStatistics {
         return new LottoResultStatistics(lottoResult);
     }
 
-    public static Map<LottoRank, Integer> setLottoResult() {
+    public static Map<LottoRank, Integer> setResult() {
         Map<LottoRank, Integer> lottoResult = new TreeMap<>(LottoRank.matchCountComparator);
 
         for (LottoRank value : LottoRank.values()) {
@@ -34,7 +34,7 @@ public class LottoResultStatistics {
         return lottoResult;
     }
 
-    public int calculateEarning(Money money) {
+    public int earning(Money money) {
         int totalReward = 0;
 
         for (LottoRank lottoRank : LottoRank.values()) {
@@ -47,7 +47,7 @@ public class LottoResultStatistics {
         return result;
     }
 
-    public Map<LottoRank, Integer> getLottoResult() {
+    public Map<LottoRank, Integer> getResult() {
         return lottoResult;
     }
 }

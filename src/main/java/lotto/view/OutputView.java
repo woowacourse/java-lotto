@@ -25,7 +25,7 @@ public class OutputView {
     }
 
     public static void printTickets(LottoTickets lottoTickets) {
-        lottoTickets.getLottoTickets()
+        lottoTickets.getTickets()
                 .stream()
                 .forEach(lottoTicket -> printTicket(lottoTicket));
         System.out.print(NEW_LINE);
@@ -33,14 +33,14 @@ public class OutputView {
 
     public static void printTicket(LottoTicket lottoTicket) {
         System.out.println(
-                lottoTicket.getLottoNumbers()
+                lottoTicket.getNumbers()
                         .stream()
                         .map(LottoNumber::getNumber)
                         .map(String::valueOf)
                         .collect(Collectors.joining(", ", "[", "]")));
     }
 
-    public static void askWinnerLottoTicket() {
+    public static void askWinnerTicket() {
         System.out.println(ASK_WINNER_LOTTO_TICKET);
     }
 
@@ -55,7 +55,7 @@ public class OutputView {
     }
 
     public static void printStatistics(LottoResultStatistics resultStatistics) {
-        Map<LottoRank, Integer> lottoResult = resultStatistics.getLottoResult();
+        Map<LottoRank, Integer> lottoResult = resultStatistics.getResult();
         lottoResult.entrySet()
                 .stream()
                 .filter(entry -> !entry.getKey().equals(LottoRank.SIXTH_PLACE))
@@ -73,19 +73,19 @@ public class OutputView {
     }
 
     public static void printFinalResult(LottoResultStatistics lottoResultStatistics, Money money) {
-        System.out.printf(FINAL_RESULT, lottoResultStatistics.calculateEarning(money));
+        System.out.printf(FINAL_RESULT, lottoResultStatistics.earning(money));
     }
 
     public static void printErrorMessage(Exception e) {
         System.out.println(e.getMessage());
     }
 
-    public static void askHowManyManualLottoTicketsToBuy() {
+    public static void askHowManyManualTicketsToBuy() {
         System.out.print(NEW_LINE);
         System.out.println(ASK_HOW_MANY_MANUAL_LOTTO_TICKETS);
     }
 
-    public static void askManualLottoTicket() {
+    public static void askManualTicketNumbers() {
         System.out.print(NEW_LINE);
         System.out.println(ASK_MANUAL_LOTTO_TICKET);
     }

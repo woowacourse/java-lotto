@@ -27,7 +27,7 @@ public enum LottoRank {
         this.bonusMatch = bonusMatch;
     }
 
-    public static LottoRank matchLottoRank(int matchCount, boolean bonusMatch) {
+    public static LottoRank matchRank(int matchCount, boolean bonusMatch) {
         return Arrays.stream(LottoRank.values())
                 .filter(rank -> rank.matches == matchCount)
                 .filter(rank -> rank.bonusMatch == bonusMatch)

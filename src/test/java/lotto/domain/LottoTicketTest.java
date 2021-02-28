@@ -97,11 +97,11 @@ public class LottoTicketTest {
 
     @Test
     @DisplayName("로또 티켓 생성시 입력받은 List가 잘 정렬 되있는지 검사")
-    public void lottoTicketSortTest() {
-        LottoTicket lottoTicket = LottoTicketService.createRandomLottoTicket(LottoNumber.getRandomLottoNumbers());
+    public void ticketSortTest() {
+        LottoTicket lottoTicket = LottoTicketService.createRandomTicket(LottoNumber.getRandomNumbers());
 
         int number = 0;
-        for (LottoNumber lottoNumber : lottoTicket.getLottoNumbers()) {
+        for (LottoNumber lottoNumber : lottoTicket.getNumbers()) {
             assertThat(lottoNumber.getNumber() > number).isTrue();
             number = lottoNumber.getNumber();
         }

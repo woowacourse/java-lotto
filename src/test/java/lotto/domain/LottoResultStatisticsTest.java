@@ -65,9 +65,9 @@ public class LottoResultStatisticsTest {
 
     @Test
     @DisplayName("결과를 생성한다.")
-    public void createLottoResult() {
+    public void createResult() {
         LottoResultStatistics lottoResultStatistics =
-                LottoResultStatistics.calculateResultStatistics(lottoTickets, lottoWinner);
+                LottoResultStatistics.apply(lottoTickets, lottoWinner);
 
         assertThat(lottoResultStatistics).isInstanceOf(LottoResultStatistics.class);
     }
@@ -76,7 +76,7 @@ public class LottoResultStatisticsTest {
     @DisplayName("결과를 추출한다.")
     public void extractResult() {
         Map<LottoRank, Integer> result =
-                LottoResultStatistics.calculateResultStatistics(lottoTickets, lottoWinner).getLottoResult();
+                LottoResultStatistics.apply(lottoTickets, lottoWinner).getResult();
 
         assertThat(result.get(LottoRank.FIRST_PLACE)).isEqualTo(1);
         assertThat(result.get(LottoRank.SECOND_PLACE)).isEqualTo(1);
@@ -88,11 +88,11 @@ public class LottoResultStatisticsTest {
 
     @Test
     @DisplayName("수익률 계산한다.")
-    public void calculateEarningTest() {
+    public void earningsTest() {
         Money money = new Money("3000");
 
         int earningPercentage =
-                LottoResultStatistics.calculateResultStatistics(lottoTickets, lottoWinner).calculateEarning(money);
+                LottoResultStatistics.apply(lottoTickets, lottoWinner).earning(money);
 
         assertThat(earningPercentage).isEqualTo(67666566);
     }

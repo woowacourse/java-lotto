@@ -31,7 +31,7 @@ public class MoneyTest {
     public void notEnoughBudgetForManualNumbersTest() {
         Money money = new Money("5000");
         assertThatThrownBy(() -> {
-            money.deductMoney(6);
+            money.deduct(6);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("지불할 금액이 부족합니다.");
     }
