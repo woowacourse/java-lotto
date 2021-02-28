@@ -2,6 +2,7 @@ package domain.money;
 
 import domain.lotto.Lotto;
 import domain.lotto.LottoBundle;
+import domain.number.NumberGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -65,6 +66,29 @@ public class GameMoneyTest {
         assertThat(manualLottoBundle.getLottoBundle()).contains(lotto1);
         assertThat(manualLottoBundle.getLottoBundle()).contains(lotto2);
         assertThat(manualLottoBundle.getLottoBundle()).contains(lotto3);
+    }
+
+    @DisplayName("GameMoney를 입력받고, buyAutoLotto를 테스트 한다.")
+    @Test
+    void GameMoneyBuyAutoLotto() {
+        //Given
+        final GameMoney gameMoney = new GameMoney(2000);
+        final NumberGenerator orderNumberGenerator = new OrderNumberGenerator();
+        //When
+        final LottoBundle autoLottoBundle = gameMoney.buyAutoLotto(orderNumberGenerator);
+        //Then
+        final List<Lotto> lottoBundle = autoLottoBundle.getLottoBundle();
+        assertThat(lottoBundle).containsExactly(
+                        Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                        Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6))
+        );
+    }
+
+    class OrderNumberGenerator implements NumberGenerator {
+        @Override
+        public List<Integer> createLottoNumber() {
+            return Arrays.asList(1, 2, 3, 4, 5, 6);
+        }
     }
 }
 

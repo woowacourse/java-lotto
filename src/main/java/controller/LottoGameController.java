@@ -4,13 +4,13 @@ import domain.lotto.Lotto;
 import domain.lotto.LottoBall;
 import domain.lotto.LottoBundle;
 import domain.money.GameMoney;
+import domain.number.NumberGenerator;
+import domain.number.RandomNumberGenerator;
 import domain.result.LottoResult;
 import domain.result.WinningResult;
-import util.LottoGenerator;
 import view.InputView;
 import view.OutputView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGameController {
@@ -70,12 +70,8 @@ public class LottoGameController {
     }
 
     private LottoBundle makeAutoLottoBundle(final GameMoney gameMoney) {
-        final int number = gameMoney.checkMaxLottoAvailable();
-        final List<List<Integer>> autoLottoNumberBundle = new ArrayList<>();
-        for (int i = 0; i < number; i++) {
-            autoLottoNumberBundle.add(LottoGenerator.createRandomLottoNumber());
-        }
-        return gameMoney.buyLotto(autoLottoNumberBundle);
+        NumberGenerator numberGenerator = new RandomNumberGenerator();
+        return gameMoney.buyAutoLotto(numberGenerator);
     }
 
     private WinningResult makeWinningResult() {

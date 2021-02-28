@@ -1,8 +1,10 @@
 package domain.money;
 
 import domain.lotto.LottoBundle;
+import domain.number.NumberGenerator;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameMoney {
@@ -39,6 +41,14 @@ public class GameMoney {
         final LottoBundle lottoBundle = LottoBundle.of(lottoNumberBundle);
         calculateGameMoneyLeft(lottoNumberBundle.size());
         return lottoBundle;
+    }
+
+    public LottoBundle buyAutoLotto(final NumberGenerator numberGenerator) {
+        List<List<Integer>> lottoNumberBundle = new ArrayList<>();
+        for (int i = 0; i < checkMaxLottoAvailable(); i++) {
+            lottoNumberBundle.add(numberGenerator.createLottoNumber());
+        }
+        return buyLotto(lottoNumberBundle);
     }
 
     private void calculateGameMoneyLeft(final int numberOfLottoToBuy) {
