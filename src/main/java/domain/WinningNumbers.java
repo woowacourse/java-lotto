@@ -10,17 +10,17 @@ public class WinningNumbers {
     private final LottoNumber bonusNumber;
 
     private WinningNumbers(final List<Integer> winningNumbers, final int bonusNumber) {
+        validateDistinctBonus(winningNumbers, bonusNumber);
         this.winningTicket = LottoTicket.valueOf(winningNumbers);
         this.bonusNumber = LottoNumber.valueOf(bonusNumber);
     }
 
     public static WinningNumbers valueOf(final String numbers, final int bonusNumber) {
         List<Integer> winningNumbers = LottoMachine.convertToInt(numbers);
-        validateDistinctBonus(winningNumbers, bonusNumber);
         return new WinningNumbers(winningNumbers, bonusNumber);
     }
 
-    private static void validateDistinctBonus(final List<Integer> winningNumbers, final int bonusNumber) {
+    private void validateDistinctBonus(final List<Integer> winningNumbers, final int bonusNumber) {
         if (winningNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException(BONUS_DUPLICATE_ERROR);
         }

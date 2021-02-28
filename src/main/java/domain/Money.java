@@ -14,33 +14,33 @@ public class Money {
     private final int value;
 
     private Money(final int value) {
+        validate(value);
         this.value = value;
     }
 
     public static Money valueOf(final int value) {
-        validate(value);
         return new Money(value);
     }
 
-    private static void validate(final int value) {
+    private void validate(final int value) {
         validatePositiveInteger(value);
         validateRange(value);
         validateDivisible(value);
     }
 
-    private static void validateRange(final int value) {
+    private void validateRange(final int value) {
         if (value < MIN_PRICE || value > MAX_PRICE) {
             throw new IllegalArgumentException(OUT_OF_LIMIT_ERROR);
         }
     }
 
-    private static void validatePositiveInteger(final int value) {
+    private void validatePositiveInteger(final int value) {
         if (value <= ZERO) {
             throw new IllegalArgumentException(NOT_POSITIVE_INT_ERROR);
         }
     }
 
-    private static void validateDivisible(final int value) {
+    private void validateDivisible(final int value) {
         if (value % MIN_PRICE != ZERO) {
             throw new IllegalArgumentException(NOT_DIVISIBLE_ERROR);
         }

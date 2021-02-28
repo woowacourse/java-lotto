@@ -28,7 +28,7 @@ public class LottoTicket {
             .collect(Collectors.toList());
     }
 
-    private static void validateIncorrectSize(final Set<LottoNumber> lottoNumbers) {
+    private void validateIncorrectSize(final Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_TICKET_SIZE) {
             throw new IllegalArgumentException(INCORRECT_LOTTO_NUMBER_SIZE_ERROR);
         }
