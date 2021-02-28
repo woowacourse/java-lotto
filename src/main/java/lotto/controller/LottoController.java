@@ -41,7 +41,7 @@ public class LottoController {
         LottoTickets manualLottoTickets = initManualLottoTickets(money);
         LottoTickets autoLottoTickets = LottoTicketsService.createAutoLottoTickets(money);
         OutputView.printHowManyTicketsBought(manualLottoTickets.size(), autoLottoTickets.size());
-        LottoTickets mergedLottoTickets = LottoTicketsService.mergeLottoTickets(manualLottoTickets, autoLottoTickets);
+        LottoTickets mergedLottoTickets = manualLottoTickets.mergeLottoTickets(autoLottoTickets);
         OutputView.printTickets(mergedLottoTickets);
         return mergedLottoTickets;
     }

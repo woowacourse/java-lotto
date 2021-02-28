@@ -16,6 +16,11 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
+    public LottoTickets mergeLottoTickets(LottoTickets otherLottoTickets) {
+        this.addAll(otherLottoTickets);
+        return this;
+    }
+
     public List<LottoTicket> getLottoTickets() {
         return this.lottoTickets;
     }

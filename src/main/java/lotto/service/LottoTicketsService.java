@@ -32,9 +32,4 @@ public class LottoTicketsService {
         money.deductMoney(moneyLeftOver);
         return new LottoTickets(lottoTicketGroup);
     }
-
-    public static LottoTickets mergeLottoTickets(LottoTickets lottoTickets1, LottoTickets lottoTickets2) {
-        lottoTickets1.addAll(lottoTickets2);
-        return lottoTickets1;
-    }
 }
