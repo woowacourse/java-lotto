@@ -2,7 +2,7 @@ package domain.money;
 
 import domain.lotto.Lotto;
 import domain.lotto.LottoBundle;
-import domain.number.NumberGenerator;
+import domain.number.LottoNumberGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -73,9 +73,9 @@ public class GameMoneyTest {
     void GameMoneyBuyAutoLotto() {
         //Given
         final GameMoney gameMoney = new GameMoney(2000);
-        final NumberGenerator orderNumberGenerator = new OrderNumberGenerator();
+        final LottoNumberGenerator orderLottoNumberGenerator = new OrderLottoNumberGenerator();
         //When
-        final LottoBundle autoLottoBundle = gameMoney.buyAutoLotto(orderNumberGenerator);
+        final LottoBundle autoLottoBundle = gameMoney.buyAutoLotto(orderLottoNumberGenerator);
         //Then
         final List<Lotto> lottoBundle = autoLottoBundle.getLottoBundle();
         assertThat(lottoBundle).containsExactly(
@@ -84,7 +84,7 @@ public class GameMoneyTest {
         );
     }
 
-    class OrderNumberGenerator implements NumberGenerator {
+    class OrderLottoNumberGenerator implements LottoNumberGenerator {
         @Override
         public List<Integer> createLottoNumber() {
             return Arrays.asList(1, 2, 3, 4, 5, 6);

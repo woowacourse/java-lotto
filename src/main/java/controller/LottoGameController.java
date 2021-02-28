@@ -4,8 +4,8 @@ import domain.lotto.Lotto;
 import domain.lotto.LottoBall;
 import domain.lotto.LottoBundle;
 import domain.money.GameMoney;
-import domain.number.NumberGenerator;
-import domain.number.RandomNumberGenerator;
+import domain.number.LottoNumberGenerator;
+import domain.number.RandomLottoNumberGenerator;
 import domain.result.LottoResult;
 import domain.result.WinningResult;
 import view.InputView;
@@ -70,8 +70,8 @@ public class LottoGameController {
     }
 
     private LottoBundle makeAutoLottoBundle(final GameMoney gameMoney) {
-        NumberGenerator numberGenerator = new RandomNumberGenerator();
-        return gameMoney.buyAutoLotto(numberGenerator);
+        LottoNumberGenerator lottoNumberGenerator = new RandomLottoNumberGenerator();
+        return gameMoney.buyAutoLotto(lottoNumberGenerator);
     }
 
     private WinningResult makeWinningResult() {

@@ -5,7 +5,7 @@ import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class RandomNumberGenerator implements NumberGenerator {
+public class RandomLottoNumberGenerator implements LottoNumberGenerator {
     private final int EXTRA_BOUND = 1;
 
     @Override
