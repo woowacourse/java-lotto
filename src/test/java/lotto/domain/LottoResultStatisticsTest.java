@@ -1,8 +1,8 @@
 package lotto.domain;
 
-import lotto.domain.lottos.LottoNumber;
 import lotto.domain.lottos.LottoTicket;
 import lotto.domain.lottos.LottoTickets;
+import lotto.domain.lottos.amount.LottoAmount;
 import lotto.domain.lottos.rank.LottoRank;
 import lotto.domain.lottos.winnerlotto.LottoBonusNumber;
 import lotto.domain.lottos.winnerlotto.LottoWinner;
@@ -12,6 +12,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -26,11 +27,15 @@ public class LottoResultStatisticsTest {
         LottoBonusNumber lottoBonusNumber = LottoBonusNumber.of("7", lottoWinnerTicket);
         lottoWinner = new LottoWinner(lottoWinnerTicket, lottoBonusNumber);
 
-        LottoTicket lottoTicket1 = LottoTicket.createManualLottoTicket("1,2,3,4,5,6");
-        LottoTicket lottoTicket2 = LottoTicket.createManualLottoTicket("1,2,3,4,5,7");
-        LottoTicket lottoTicket3 = LottoTicket.createManualLottoTicket("1,2,3,4,5,8");
-        LottoTicket lottoTicket4 = LottoTicket.createManualLottoTicket("1,2,9,43,44,45");
-        lottoTickets = new LottoTickets(Arrays.asList(lottoTicket1, lottoTicket2, lottoTicket3, lottoTicket4));
+
+        LottoAmount lottoAmount = new LottoAmount(new Money("4000"), "4");
+        List<String> inputManualNumbers =
+                Arrays.asList("1,2,3,4,5,6",
+                "1,2,3,4,5,7",
+                "1,2,3,4,5,8",
+                "1,2,9,43,44,45");
+
+        lottoTickets = LottoTickets.createLottoTickets(lottoAmount, inputManualNumbers);
     }
 
     @Test
