@@ -37,7 +37,7 @@ public class LottoController {
     }
 
     private Money tryGetMoney() {
-        int money = InputView.getMoney();
+        final int money = InputView.getMoney();
         return new Money(money);
     }
 
@@ -90,8 +90,8 @@ public class LottoController {
     }
 
     private WinningLotto tryBuyWinningLotto() {
-        Lotto lotto = Lotto.from(InputView.getWinningNumbers());
-        LottoNumber bonusNumber = LottoNumber.from(InputView.getBonusBall());
+        final Lotto lotto = Lotto.from(InputView.getWinningNumbers());
+        final LottoNumber bonusNumber = LottoNumber.from(InputView.getBonusBall());
         return new WinningLotto(lotto, bonusNumber);
     }
 
