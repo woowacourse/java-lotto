@@ -12,6 +12,6 @@ public class RankTest {
     void testRankOf() {
         int countOfMatch = 5;
 
-        assertThat(Rank.rankOf(countOfMatch, true)).isEqualTo(Rank.SECOND);
+        assertThat(Rank.of(countOfMatch, true)).isEqualTo(Rank.SECOND);
     }
 }

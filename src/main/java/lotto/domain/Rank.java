@@ -26,7 +26,7 @@ public enum Rank {
         return reward;
     }
 
-    public static Rank rankOf(int countOfMatch, boolean hasBonusNumber) {
+    public static Rank of(int countOfMatch, boolean hasBonusNumber) {
         if (!hasBonusNumber && THIRD.matchCount(countOfMatch)) {
             return THIRD;
         }
