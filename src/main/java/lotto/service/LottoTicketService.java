@@ -17,7 +17,7 @@ public class LottoTicketService {
     }
 
     public static LottoTicket createAutoLottoTicket() {
-        return new LottoTicket(LottoNumber.getCache());
+        return new LottoTicket(LottoNumber.getRandomLottoNumbers());
     }
 
     public static LottoTicket createManualLottoTicket(String input) {

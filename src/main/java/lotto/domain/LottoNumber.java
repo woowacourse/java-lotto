@@ -35,7 +35,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return number;
     }
 
-    public static List<LottoNumber> getCache() {
+    public static List<LottoNumber> getRandomLottoNumbers() {
         List<LottoNumber> cachedLottoNumbers = new ArrayList<>(CACHE);
         Collections.shuffle(cachedLottoNumbers);
         return cachedLottoNumbers.stream()
