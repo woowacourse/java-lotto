@@ -18,7 +18,7 @@ public class LotteriesTest {
     @Test
     @DisplayName("티켓 개수만큼 로또 생성")
     void generateLottoByTicket() {
-        Lotteries lotteries = new Lotteries();
+        final Lotteries lotteries = new Lotteries();
         lotteries.generateLottoByTicket(new RandomLottoMachine(), 5);
         assertThat(lotteries.toList().size()).isEqualTo(5);
     }
@@ -26,8 +26,8 @@ public class LotteriesTest {
     @Test
     @DisplayName("로또 생성 정보 비교")
     void compareLottoByTicket() {
-        List<Integer> expected = Arrays.asList(1, 2, 3, 4, 5, 6);
-        Lotteries lotteries = new Lotteries();
+        final List<Integer> expected = Arrays.asList(1, 2, 3, 4, 5, 6);
+        final Lotteries lotteries = new Lotteries();
         lotteries.generateLottoByTicket(() -> expected, 5);
         assertThat(lotteries.toList().get(0).getNumbers()).isEqualTo(expected);
     }
@@ -35,8 +35,8 @@ public class LotteriesTest {
     @Test
     @DisplayName("로또 수동 생성 정보 비교")
     void compareLottoByManual() {
-        List<Integer> expected = Arrays.asList(1, 2, 3, 4, 5, 6);
-        Lotteries lotteries = new Lotteries();
+        final List<Integer> expected = Arrays.asList(1, 2, 3, 4, 5, 6);
+        final Lotteries lotteries = new Lotteries();
         lotteries.generateLottoByManual(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)));
         assertThat(lotteries.toList().get(0).getNumbers()).isEqualTo(expected);
     }
@@ -44,16 +44,16 @@ public class LotteriesTest {
     @Test
     @DisplayName("로또 긁은 내역 확인")
     void scratchLottoCheck() {
-        Lotteries lotteries = new Lotteries();
-        Ticket ticket = new Ticket(new Money(2000));
+        final Lotteries lotteries = new Lotteries();
+        final Ticket ticket = new Ticket(new Money(2000));
 
         lotteries
             .generateLottoByTicket(() -> Arrays.asList(1, 2, 3, 4, 5, 6), ticket.getTotalCount());
 
-        WinningLotto winningLotto = new WinningLotto(
+        final WinningLotto winningLotto = new WinningLotto(
             Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)),
             LottoNumber.from(7));
-        RatingInfo ratingInfo = lotteries.scratchLotto(winningLotto);
+        final RatingInfo ratingInfo = lotteries.scratchLotto(winningLotto);
 
         assertThat(ratingInfo.get(Rating.FIRST)).isEqualTo(2);
     }

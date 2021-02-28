@@ -54,7 +54,7 @@ public class LottoController {
         return InputView.getManualTicketCount();
     }
 
-    private void generateLotto(Lotteries lotteries, Ticket ticket) {
+    private void generateLotto(final Lotteries lotteries, final Ticket ticket) {
         generateManualLottoNumbers(ticket.getManualCount(), lotteries);
         lotteries.generateLottoByTicket(new RandomLottoMachine(), ticket.getAutoCount());
     }

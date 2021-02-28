@@ -33,23 +33,23 @@ public class LottoTest {
     @DisplayName("일치하는 로또 번호 개수 확인")
     @CsvSource(value = {"1,2,3,4,5,6:6", "1,2,3,4,5,7:5", "1,2,3,4,7,8:4", "1,2,3,7,8,9:3",
         "1,2,7,8,9,10:2", "1,7,8,9,10,11:1", "7,8,9,10,11,12:0"}, delimiter = ':')
-    void compareLottoNumber(String input, int expected) {
-        Lotto init = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Integer[] arr = Arrays.stream(input.split(","))
-            .mapToInt(Integer::parseInt).boxed().toArray(Integer[]::new);
+    void compareLottoNumber(final String input, final int expected) {
+        final Lotto init = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
+        final Integer[] arr = Arrays.stream(input.split(","))
+            .map(Integer::new).toArray(Integer[]::new);
 
-        Lotto lotto = Lotto.from(Arrays.asList(arr));
-        int actual = init.countCommonValue(lotto);
+        final Lotto lotto = Lotto.from(Arrays.asList(arr));
+        final int actual = init.countCommonValue(lotto);
         assertThat(actual).isEqualTo(expected);
     }
 
     @ParameterizedTest
     @DisplayName("보너스볼 포함 여부 확인")
     @CsvSource(value = {"1:true", "7:false"}, delimiter = ':')
-    void containBonusNumber(int input, boolean expected) {
-        Lotto init = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoNumber inputLottoNumber = LottoNumber.from(input);
-        boolean actual = init.containNumber(inputLottoNumber);
+    void containBonusNumber(final int input, final boolean expected) {
+        final Lotto init = Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6));
+        final LottoNumber inputLottoNumber = LottoNumber.from(input);
+        final boolean actual = init.containNumber(inputLottoNumber);
         assertThat(actual).isEqualTo(expected);
     }
 }

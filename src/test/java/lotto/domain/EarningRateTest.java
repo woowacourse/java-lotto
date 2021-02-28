@@ -10,9 +10,9 @@ public class EarningRateTest {
 
     @Test
     void calculate() {
-        RatingInfo ratingInfo = new RatingInfo();
-        long money = 10000L;
-        double expected = 200_000.0;
+        final RatingInfo ratingInfo = new RatingInfo();
+        final long money = 10000L;
+        final double expected = 200_000.0;
         ratingInfo.update(Rating.FIRST);
 
         EarningRate earningRate = new EarningRate();

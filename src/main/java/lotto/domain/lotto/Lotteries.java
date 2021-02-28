@@ -24,7 +24,7 @@ public class Lotteries {
 
     public RatingInfo scratchLotto(final WinningLotto winningLotto) {
         RatingInfo ratingInfo = new RatingInfo();
-        for (Lotto lotto : lottos) {
+        for (final Lotto lotto : lottos) {
             int match = winningLotto.compareLottoNumber(lotto);
             boolean hasBonusBall = winningLotto.compareBonusBall(lotto);
             ratingInfo.update(Rating.getRating(match, hasBonusBall));
