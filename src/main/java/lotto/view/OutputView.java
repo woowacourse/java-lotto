@@ -33,8 +33,9 @@ public class OutputView {
         System.out.println();
     }
 
-    private static void printOneLotto(Lotto lotto) {
+    private static void printOneLotto(final Lotto lotto) {
         String joinLottoNumber = lotto.lotto().lottoNumbers().stream()
+                .sorted()
                 .map(LottoNumber::toString)
                 .collect(Collectors.joining(LOTTO_DELIMITER));
         printMessageByFormat(LOTTO_FORM, joinLottoNumber);
@@ -52,7 +53,7 @@ public class OutputView {
         lottoGameResult.ranks().entrySet().forEach(OutputView::checkBonusNumber);
     }
 
-    private static void checkBonusNumber(Entry entry) {
+    private static void checkBonusNumber(final Entry<Rank, Integer> entry) {
         if (entry.getKey() == Rank.SECOND) {
             printRankForm(entry, RANK_BONUS_FORM);
         }
