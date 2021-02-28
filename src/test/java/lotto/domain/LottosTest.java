@@ -29,7 +29,7 @@ public class LottosTest {
         Money expectedPurchaseMoney = new Money(Lotto.PRICE * expectedPieceNumber);
         Piece expectedLottoPiece = new Piece(expectedPurchaseMoney, expectedPieceNumber);
         LottoAutoNumberGenerator lottoAutoGenerator = new LottoAutoNumberGenerator();
-        Lottos lottos = new Lottos(lottoAutoGenerator, expectedLottoPiece);
+        Lottos lottos = Lottos.generateLottos(lottoAutoGenerator, expectedLottoPiece);
         assertThat(lottos.getSize()).isEqualTo(expectedPieceNumber);
     }
 
@@ -52,7 +52,7 @@ public class LottosTest {
         List<List<Number>> manualLottoNumbers = manualLottoNumbers(exampleLotto);
         LottoManualNumberGenerator lottoManualGenerator =
             new LottoManualNumberGenerator(manualLottoNumbers);
-        Lottos exampleLottos = new Lottos(lottoManualGenerator, expectedPiece);
+        Lottos exampleLottos = Lottos.generateLottos(lottoManualGenerator, expectedPiece);
         LottoAnnouncement lottoAnnouncement = new LottoAnnouncement(WINNING_NUMBERS, BONUS_NUMBER);
         Map<LottoRank, Integer> exampleLottosResult =
             exampleLottos.getStatistics(lottoAnnouncement);

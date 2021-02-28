@@ -43,7 +43,7 @@ public class LottoStoreTest {
         List<List<Number>> manualLottoNumbers = manualLottoNumbers(exampleLotto);
         LottoManualNumberGenerator lottoManualGenerator
             = new LottoManualNumberGenerator(manualLottoNumbers);
-        Lottos exampleLottos = new Lottos(lottoManualGenerator,
+        Lottos exampleLottos = Lottos.generateLottos(lottoManualGenerator,
             new Piece(new Money(Lotto.PRICE),1));
         LottoAnnouncement lottoAnnouncement = new LottoAnnouncement(WINNING_NUMBERS, BONUS_NUMBER);
         LottoResult lottoResult = new LottoResult(lottoAnnouncement, exampleLottos);

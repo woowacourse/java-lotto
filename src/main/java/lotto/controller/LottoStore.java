@@ -43,7 +43,7 @@ public class LottoStore {
         Piece autoPieces = manualPieces.getAnotherPiece(possessedMoney);
         LottoAutoNumberGenerator lottoAutoGenerator = new LottoAutoNumberGenerator();
         Lottos manualLottos = boughtManualLottos(manualPieces);
-        Lottos autoLottos = new Lottos(lottoAutoGenerator, autoPieces);
+        Lottos autoLottos = Lottos.generateLottos(lottoAutoGenerator, autoPieces);
         Lottos combinedLottos = manualLottos.mergeLottos(autoLottos);
         outputView.printPurchasedLottos(combinedLottos, manualPieces);
         return combinedLottos;
@@ -85,7 +85,7 @@ public class LottoStore {
         try {
             List<List<Number>> manualNumbers = inputView.receiveManualNumbers(manualPiece);
             lottoManualGenerator = new LottoManualNumberGenerator(manualNumbers);
-            return new Lottos(lottoManualGenerator, manualPiece);
+            return Lottos.generateLottos(lottoManualGenerator, manualPiece);
         } catch (LottoException lottoException) {
             outputView.printLottoException(lottoException);
             return boughtManualLottos(manualPiece);
