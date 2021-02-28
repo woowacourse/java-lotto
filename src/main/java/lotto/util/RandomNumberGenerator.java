@@ -29,6 +29,6 @@ public class RandomNumberGenerator implements LottoNumberGenerator {
                 .stream()
                 .limit(LottoTicket.LOTTO_NUMBER_SIZE)
                 .sorted()
-                .collect(Collectors.toList());
+                .collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
     }
 }
