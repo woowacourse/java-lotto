@@ -20,7 +20,8 @@ public class LottoAutoNumberGenerator implements LottoNumberGenerator {
 
     @Override
     public synchronized List<Number> generateNumbers() {
-        Collections.shuffle(candidateNumbers);
+        final List<Number> numbers = new ArrayList<>(candidateNumbers);
+        Collections.shuffle(numbers);
         Set<Number> lottoNumbers =
             new TreeSet<>(candidateNumbers.subList(0, Lotto.POSSESSION_NUMBER));
         return new ArrayList<>(lottoNumbers);
