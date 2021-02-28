@@ -13,16 +13,9 @@ class WinningLottoTest {
     @Test
     @DisplayName("당첨번호와 보너스 번호가 중복되는 지 검증")
     void checkDuplicateBonusNumber() {
-        LottoTicket winningTicket = new LottoTicket(Arrays.asList(
-                new LottoNumber("1"),
-                new LottoNumber("2"),
-                new LottoNumber("3"),
-                new LottoNumber("4"),
-                new LottoNumber("5"),
-                new LottoNumber("7")));
-        LottoNumber bonusNumber = new LottoNumber("3");
         assertThatThrownBy(() -> {
-            WinningLotto winningLotto = new WinningLotto(winningTicket, bonusNumber);
-        }).isInstanceOf(IllegalWinningLottoException.class);
+            WinningLotto winningLotto = LottoTicketFactory.createWinningLotto(Arrays.asList("1", "2", "3", "4", "5", "7"), "3");
+        }).isInstanceOf(IllegalWinningLottoException.class)
+                .hasMessage("3 : 티켓 내 숫자와 보너스 번호가 중복됩니다.");
     }
 }

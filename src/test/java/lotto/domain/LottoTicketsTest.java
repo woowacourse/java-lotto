@@ -20,32 +20,32 @@ class LottoTicketsTest {
     @BeforeEach
     void init() {
         firstPrizeTicket = new LottoTicket(Arrays.asList(
-                new LottoNumber("1"),
-                new LottoNumber("2"),
-                new LottoNumber("3"),
-                new LottoNumber("4"),
-                new LottoNumber("5"),
-                new LottoNumber("7")));
+                LottoNumber.of("1"),
+                LottoNumber.of("2"),
+                LottoNumber.of("3"),
+                LottoNumber.of("4"),
+                LottoNumber.of("5"),
+                LottoNumber.of("7")));
 
         secondPrizeTicket = new LottoTicket(Arrays.asList(
-                new LottoNumber("1"),
-                new LottoNumber("2"),
-                new LottoNumber("3"),
-                new LottoNumber("4"),
-                new LottoNumber("5"),
-                new LottoNumber("8")));
+                LottoNumber.of("1"),
+                LottoNumber.of("2"),
+                LottoNumber.of("3"),
+                LottoNumber.of("4"),
+                LottoNumber.of("5"),
+                LottoNumber.of("8")));
 
         lottoTickets = new LottoTickets(Arrays.asList(firstPrizeTicket, secondPrizeTicket));
 
         winningNumbers = Arrays.asList(
-                new LottoNumber("1"),
-                new LottoNumber("2"),
-                new LottoNumber("3"),
-                new LottoNumber("4"),
-                new LottoNumber("5"),
-                new LottoNumber("7"));
+                LottoNumber.of("1"),
+                LottoNumber.of("2"),
+                LottoNumber.of("3"),
+                LottoNumber.of("4"),
+                LottoNumber.of("5"),
+                LottoNumber.of("7"));
 
-        bonusBall = new LottoNumber("8");
+        bonusBall = LottoNumber.of("8");
         result = lottoTickets.checkWinningTickets(new WinningLotto(new LottoTicket(winningNumbers), bonusBall));
     }
 
