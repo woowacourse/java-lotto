@@ -14,7 +14,6 @@ public class LottoTicket {
     public static final String EMPTY_ERROR_MESSAGE = "숫자는 하나 이상이어야 합니다.";
     public static final String COUNT_ERROR_MESSAGE = "숫자는 %d개 여야 합니다.";
     public static final String DUPLICATE_ERROR_MESSAGE = "중복된 숫자가 존재합니다.";
-    public static final String WINNER_COUNT_ERROR_MESSAGE = "당첨 숫자는 %d개 넣어야 합니다.";
 
     private final List<LottoNumber> lottoNumbers;
 
@@ -78,12 +77,6 @@ public class LottoTicket {
             return;
         }
         throw new IllegalArgumentException(String.format(COUNT_ERROR_MESSAGE, LOTTO_NUMBER_SIZE));
-    }
-
-    private static void validateLottoSize(final int size) {
-        if (size != LOTTO_NUMBER_SIZE) {
-            throw new IllegalArgumentException(String.format(WINNER_COUNT_ERROR_MESSAGE, LOTTO_NUMBER_SIZE));
-        }
     }
 
     public List<LottoNumber> getLottoNumbers() {
