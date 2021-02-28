@@ -16,9 +16,9 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
-    public LottoTickets(List<LottoTicket> lottoTickets, List<LottoTicket> joinLottoTickets) {
-        this.lottoTickets = lottoTickets;
-        lottoTickets.addAll(joinLottoTickets);
+    public LottoTickets(LottoTickets lottoTickets, LottoTickets joinLottoTickets) {
+        this.lottoTickets = lottoTickets.getLottoTickets();
+        this.lottoTickets.addAll(joinLottoTickets.getLottoTickets());
     }
 
     public LottoResult calculateLottoResult(WinningLottoTicket winningTicket) {
