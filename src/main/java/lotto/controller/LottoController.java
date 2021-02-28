@@ -59,13 +59,9 @@ public class LottoController {
         return lottoTickets;
     }
 
-    private List<List<String>> getManualInputs(ManualLottoAmount manualLottoAmount) {
-        List<List<String>> manualInputs = new ArrayList<>();
+    private List<String> getManualInputs(ManualLottoAmount manualLottoAmount) {
         OutputView.printInputManualLottoNumbersMessage();
-        for (int i = 0; i < manualLottoAmount.getValue(); i++) {
-            manualInputs.add(InputView.inputLottoNumbers());
-        }
-        return manualInputs;
+        return new ArrayList<>(InputView.inputManualLottoTickets(manualLottoAmount.getValue()));
     }
 
     private WinningLotto receiveWinningLottoInput() {

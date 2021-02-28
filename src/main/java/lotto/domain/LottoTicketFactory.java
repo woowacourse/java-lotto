@@ -1,6 +1,9 @@
 package lotto.domain;
 
+import lotto.view.InputView;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,7 +25,7 @@ public class LottoTicketFactory {
     private LottoTicketFactory() {
     }
 
-    public static LottoTickets createLottoTicketsIncludingManualTickets(Money money, List<List<String>> manualTicketInputs) {
+    public static LottoTickets createLottoTicketsIncludingManualTickets(Money money, List<String> manualTicketInputs) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         addManualLottoTickets(lottoTickets, manualTicketInputs);
 
@@ -31,9 +34,10 @@ public class LottoTicketFactory {
         return new LottoTickets(lottoTickets);
     }
 
-    private static void addManualLottoTickets(List<LottoTicket> lottoTickets, List<List<String>> lottoTicketsNumbers) {
-        for (List<String> numbers : lottoTicketsNumbers) {
-            lottoTickets.add(createManualLottoTicket(numbers));
+    private static void addManualLottoTickets(List<LottoTicket> lottoTickets, List<String> lottoTicketsNumbers) {
+        for (String numbers : lottoTicketsNumbers) {
+            lottoTickets.add(
+                    createManualLottoTicket(Arrays.asList(numbers.split(InputView.DELIMITER))));
         }
     }
 
