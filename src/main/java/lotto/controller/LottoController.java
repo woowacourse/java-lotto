@@ -9,8 +9,7 @@ public class LottoController {
 
     public void run() {
         Money money = new Money(InputView.requestMoney());
-        Count count = new Count(money.count());
-        count.manualCount(InputView.requestManualCount());
+        Count count = new Count(money.count(), InputView.requestManualCount());
         LottoGenerator lottoGenerator = new LottoGenerator();
         LottoGroup lottos = buyLotto(lottoGenerator, count);
         WinningLotto winningLotto = checkWinningLotto(lottoGenerator);

@@ -7,18 +7,15 @@ public class Count {
     private int manualCount;
     private int autoCount;
 
-    public Count(int count) {
+    public Count(int count, int manualCount) {
         this.totalCount = count;
+        validateManualCount(manualCount);
+        this.manualCount = manualCount;
+        this.autoCount = totalCount - manualCount;
     }
 
     public int getTotalCount() {
         return this.totalCount;
-    }
-
-    public void manualCount(int count) {
-        validateManualCount(count);
-        this.manualCount = count;
-        this.autoCount = totalCount - count;
     }
 
     public int getManualCount() {
