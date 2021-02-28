@@ -9,7 +9,7 @@ public class WinningResult {
 
     public WinningResult(WinningNumbers winningNumbers, LottoTickets lottoTickets,
                          Money money) {
-        this.rankings = winningNumbers.calculateRankings(lottoTickets);
+        this.rankings = lottoTickets.calculateRankings(winningNumbers);
         this.money = money;
     }
 

@@ -2,6 +2,7 @@ package domain;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTickets {
 
@@ -30,5 +31,11 @@ public class LottoTickets {
         if (!money.canBuy(manualTicketNumbers.size())) {
             throw new IllegalArgumentException("구매 가능한 로또 개수가 아닙니다.");
         }
+    }
+
+    public List<Ranking> calculateRankings(WinningNumbers winningNumbers) {
+        return lottoTickets.stream()
+            .map(winningNumbers::checkRanking)
+            .collect(Collectors.toList());
     }
 }
