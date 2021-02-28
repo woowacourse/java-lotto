@@ -11,10 +11,13 @@ import java.util.stream.Collectors;
 import lotto.utils.CustomException;
 
 public class LottoTicket {
-    public static final int PRICE = 1000;
     public static final int SIZE_OF_LOTTO_NUMBERS = 6;
 
     private final List<LottoNumber> lottoNumbers;
+
+    public LottoTicket(String lottoNumbersValue) {
+        this(covertToLottoNumbers(lottoNumbersValue));
+    }
 
     public LottoTicket(List<LottoNumber> lottoNumbers) {
         List<LottoNumber> numbers = new ArrayList<>(lottoNumbers);
@@ -38,13 +41,9 @@ public class LottoTicket {
         }
     }
 
-    public LottoTicket(String lottoNumbersValue) {
-        this(covertToLottoNumbers(lottoNumbersValue));
-    }
-
     private static List<LottoNumber> covertToLottoNumbers(String s) {
         return Arrays.stream(s.split(","))
-            .map(LottoNumber::new)
+            .map(LottoNumber::valueOf)
             .collect(Collectors.toList());
     }
 

@@ -29,4 +29,18 @@ class LottoTicketsTest {
             .isEqualTo(5);
     }
 
+    @Test
+    @DisplayName("입력받은 값으로 로또 티켓 발행")
+    void generate() {
+        List<LottoTicket> lottoTicketsValue = Arrays.asList(
+            new LottoTicket("11,12,13,14,15,16"),
+            new LottoTicket("21,22,23,24,25,26"),
+            new LottoTicket("31,32,33,34,35,36"));
+
+        LottoTickets lottoTickets = new LottoTickets(lottoTicketsValue, 7,
+            new FixedLottoGenerator());
+
+        assertThat(lottoTickets.size()).isEqualTo(10);
+    }
+
 }

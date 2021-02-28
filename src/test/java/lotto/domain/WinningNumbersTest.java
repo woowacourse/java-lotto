@@ -75,7 +75,7 @@ class WinningNumbersTest {
         WinningNumbers winningNumbers = new WinningNumbers("1,2,3,4,5,6", "7");
         LottoTicket lottoTicket = new LottoTicket("1,2,3,4,5,7");
 
-        assertThat(winningNumbers.getRank(lottoTicket)).isEqualTo(Rank.SEC0ND_PLACE);
+        assertThat(winningNumbers.getRank(lottoTicket)).isEqualTo(Rank.SECOND_PLACE);
     }
 
     @Test

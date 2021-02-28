@@ -20,7 +20,7 @@ public class RandomLottoGenerator implements LottoGenerator {
     }
 
     private LottoNumber getRandomLottoNumber() {
-        return new LottoNumber(random.nextInt(LottoNumber.MAXIMUM_NUMBER) + 1);
+        return LottoNumber.valueOf(random.nextInt(LottoNumber.MAXIMUM_NUMBER) + 1);
     }
 
 }

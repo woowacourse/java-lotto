@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.List;
 import lotto.domain.Machine;
 import lotto.domain.Result;
 import lotto.utils.CustomException;
@@ -25,9 +26,11 @@ public class LottoApplication {
 
     private static void runApplication() {
         final String moneyValue = InputView.getMoneyInput();
+        final List<String> analogTicketsValue = InputView.getAnalogTickets();
 
-        final Machine machine = new Machine(moneyValue, new RandomLottoGenerator());
-        OutputView.printTickets(machine.getTickets());
+        final Machine machine = new Machine(moneyValue, analogTicketsValue,
+            new RandomLottoGenerator());
+        OutputView.printTickets(machine.getTickets(), machine.getChange());
         Result result = machine
             .getResult(InputView.getWinningNumbersInput(), InputView.getBonusBallInput());
 

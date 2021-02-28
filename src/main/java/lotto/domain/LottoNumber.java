@@ -1,24 +1,38 @@
 package lotto.domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
-import java.util.regex.Pattern;
 import lotto.utils.CustomException;
+import lotto.utils.StringChecker;
 
 public class LottoNumber {
     public static final int MINIMUM_NUMBER = 1;
     public static final int MAXIMUM_NUMBER = 45;
-    private static final String IS_NUMBER = "\\d+";
+    private static final Map<Integer, LottoNumber> cache = new HashMap<>(MAXIMUM_NUMBER);
 
     private final int number;
 
-
-    public LottoNumber(String numberValue) {
-        this(convertToLottoNumber(numberValue));
+    static {
+        for (int i = MINIMUM_NUMBER; i <= MAXIMUM_NUMBER; i++) {
+            cache.put(i, new LottoNumber(i));
+        }
     }
 
-    public LottoNumber(int number) {
+    private LottoNumber(int number) {
         validateNumberRange(number);
         this.number = number;
+    }
+
+    public static LottoNumber valueOf(String numberValue) {
+        return valueOf(convertToLottoNumber(numberValue));
+    }
+
+    public static LottoNumber valueOf(int i) {
+        if (i <= MAXIMUM_NUMBER && i >= MINIMUM_NUMBER) {
+            return cache.get(i);
+        }
+        return new LottoNumber(i);
     }
 
     private static int convertToLottoNumber(String numberValue) {
@@ -28,7 +42,7 @@ public class LottoNumber {
     }
 
     private static void validateIsNumber(String numberValue) {
-        if (!Pattern.matches(IS_NUMBER, numberValue)) {
+        if (!StringChecker.isNumber(numberValue)) {
             throw new CustomException("로또 넘버는 숫자이어야 합니다.");
         }
     }
