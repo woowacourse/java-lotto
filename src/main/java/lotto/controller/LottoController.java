@@ -55,7 +55,7 @@ public class LottoController {
     private LottoTickets buyLottoTicket(PurchaseInfo purchaseInfo,
         List<LottoTicket> manualLottoTickets) {
         LottoTickets lottoTickets = lottoService.buyTicket(purchaseInfo, manualLottoTickets);
-        outputView.printAllLottoTickets(lottoTickets);
+        outputView.printAllLottoTickets(purchaseInfo, lottoTickets);
         return lottoTickets;
     }
 
