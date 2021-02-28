@@ -28,9 +28,9 @@ public class PurchaseInfo {
     }
 
     private void validateNoExtraMoney(Money purchaseMoney) {
-        if (purchaseMoney.getMoney() % LottoTicket.LOTTO_TICKET_PRICE != 0) {
+        if (purchaseMoney.getMoney() % LottoTicket.PRICE != 0) {
             throw new IllegalArgumentException(
-                String.format("로또는 %d원 단위로 구매해야 있습니다. 입력금액 : %d", LottoTicket.LOTTO_TICKET_PRICE,
+                String.format("로또는 %d원 단위로 구매해야 있습니다. 입력금액 : %d", LottoTicket.PRICE,
                     purchaseMoney.getMoney()));
         }
     }
@@ -47,7 +47,7 @@ public class PurchaseInfo {
     }
 
     public int calculateTotalPurchaseCount(Money purchaseMoney) {
-        return purchaseMoney.getMoney() / LottoTicket.LOTTO_TICKET_PRICE;
+        return purchaseMoney.getMoney() / LottoTicket.PRICE;
     }
 
     public int calculatePurchaseAutoCount(Money purchaseMoney, int purchaseManualCount) {
