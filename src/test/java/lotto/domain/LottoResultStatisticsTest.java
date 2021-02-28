@@ -31,9 +31,9 @@ public class LottoResultStatisticsTest {
         LottoAmount lottoAmount = new LottoAmount(new Money("4000"), "4");
         List<String> inputManualNumbers =
                 Arrays.asList("1,2,3,4,5,6",
-                "1,2,3,4,5,7",
-                "1,2,3,4,5,8",
-                "1,2,9,43,44,45");
+                        "1,2,3,4,5,7",
+                        "1,2,3,4,5,8",
+                        "1,2,9,43,44,45");
 
         lottoTickets = LottoTickets.createLottoTickets(lottoAmount, inputManualNumbers);
     }

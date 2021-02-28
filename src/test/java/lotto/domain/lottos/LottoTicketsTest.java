@@ -10,11 +10,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.NullSource;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static lotto.domain.lottos.LottoTicket.COUNT_ERROR_MESSAGE;
@@ -127,6 +125,5 @@ public class LottoTicketsTest {
 
         assertThat(lottoTickets.scanLottoTickets(lottoWinner))
                 .containsAll(Arrays.asList(LottoRank.values()));
-
     }
 }
