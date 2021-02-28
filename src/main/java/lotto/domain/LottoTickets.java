@@ -17,8 +17,9 @@ public class LottoTickets {
     }
 
     public LottoTickets merge(LottoTickets otherLottoTickets) {
-        this.addAll(otherLottoTickets);
-        return this;
+        LottoTickets mergedTickets = new LottoTickets(lottoTickets);
+        mergedTickets.addAll(otherLottoTickets);
+        return mergedTickets;
     }
 
     public List<LottoTicket> getTickets() {
