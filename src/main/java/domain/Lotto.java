@@ -17,7 +17,7 @@ public class Lotto {
 
     protected Lotto(int[] lottoNumbers) {
         this(Arrays.stream(lottoNumbers)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList()));
     }
 

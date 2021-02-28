@@ -40,7 +40,7 @@ class LottosTest {
     void getLottoResults() {
         //given
         Lotto lotto = new Lotto(new int[]{1, 2, 3, 4, 5, 6});
-        WinningLotto winningLotto = new WinningLotto(lotto, new LottoNumber(7));
+        WinningLotto winningLotto = new WinningLotto(lotto, LottoNumber.of(7));
 
         //when
         LottoResults results = lottos.getLottoResults(winningLotto);

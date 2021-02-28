@@ -49,7 +49,7 @@ public class InputView {
         List<LottoNumber> lottoNumbers = Arrays.stream(input.split(","))
                 .map(String::trim)
                 .map(Integer::parseInt)
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
 
         return new Lotto(lottoNumbers);
@@ -57,6 +57,6 @@ public class InputView {
 
     private static LottoNumber inputBonusBall() {
         System.out.println("보너스 볼을 입력해주세요.");
-        return new LottoNumber(SCANNER.nextInt());
+        return LottoNumber.of(SCANNER.nextInt());
     }
 }

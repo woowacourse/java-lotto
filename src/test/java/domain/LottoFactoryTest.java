@@ -17,7 +17,7 @@ class LottoFactoryTest {
     void generateLotto() {
         //given
         List<LottoNumber> numbers = Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
 
         int numberOfLotto = 3;

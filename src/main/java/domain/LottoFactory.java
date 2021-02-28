@@ -10,11 +10,11 @@ public class LottoFactory {
 
     static {
         CANDIDATES_NUMBERS = IntStream.rangeClosed(LottoNumber.NUMBER_MIN, LottoNumber.NUMBER_MAX)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList());
     }
 
-    public static Lottos generatesPassiveLottos(List<Lotto> lottos) { //todo: 수동로또도 캐싱으로 처리할 방법 없을까? (Hint: Integer 뜯어보기!)
+    public static Lottos generatesPassiveLottos(List<Lotto> lottos) {
         return new Lottos(lottos);
     }
 

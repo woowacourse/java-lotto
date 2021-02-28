@@ -21,7 +21,7 @@ class LottoTest {
     void generate() {
         //given
         List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
 
         //when
@@ -80,7 +80,7 @@ class LottoTest {
     void contains(int lottoNumberValue, boolean expected) {
         //given
         Lotto lotto = new Lotto(new int[]{1, 2, 3, 4, 5, 6});
-        LottoNumber lottoNumber = new LottoNumber(lottoNumberValue);
+        LottoNumber lottoNumber = LottoNumber.of(lottoNumberValue);
 
         //when
         boolean actual = lotto.contains(lottoNumber);
