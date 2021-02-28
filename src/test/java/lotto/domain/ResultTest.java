@@ -47,7 +47,7 @@ public class ResultTest {
         LottoFactory manualLotto = LottoFactory.of(Arrays.asList(lotto1, lotto2, lotto3));
         LottoFactory autoLotto = LottoFactory.of(0);
 
-        WinningLotto winningLotto = new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new BonusNumber(20));
+        WinningLotto winningLotto = new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(20));
 
         List<Result> results = winningLotto.getWinningResult(manualLotto, autoLotto);
 

@@ -1,12 +1,12 @@
 package lotto.domain;
 
-public class BonusNumber {
+public class LottoNumber {
 
-    private final int bonus;
+    private final int lottoNumber;
 
-    public BonusNumber(int bonus) {
-        validateBonus(bonus);
-        this.bonus = bonus;
+    public LottoNumber(int lottoNumber) {
+        validateBonus(lottoNumber);
+        this.lottoNumber = lottoNumber;
     }
 
     private void validateBonus(int bonus) {
@@ -16,21 +16,21 @@ public class BonusNumber {
     }
 
     public int getBonus() {
-        return bonus;
+        return lottoNumber;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof BonusNumber)) return false;
+        if (!(o instanceof LottoNumber)) return false;
 
-        BonusNumber that = (BonusNumber) o;
+        LottoNumber that = (LottoNumber) o;
 
-        return bonus == that.bonus;
+        return lottoNumber == that.lottoNumber;
     }
 
     @Override
     public int hashCode() {
-        return bonus;
+        return lottoNumber;
     }
 }

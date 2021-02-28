@@ -20,7 +20,7 @@ public class LottoControllerMain {
 
         OutputView.showBuyLotto(manualLotto, autoLotto);
 
-        WinningLotto winningLotto = new WinningLotto(new Lotto(InputView.winningNumbers()), new BonusNumber(InputView.bonusNumber()));
+        WinningLotto winningLotto = new WinningLotto(new Lotto(InputView.winningNumbers()), new LottoNumber(InputView.bonusNumber()));
         List<Result> results = winningLotto.getWinningResult(manualLotto, autoLotto);
 
         OutputView.resultMessage();

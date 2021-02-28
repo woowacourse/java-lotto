@@ -16,11 +16,11 @@ public class WinningLottoTest {
     void correctWinningNumber() {
         List<Integer> winningNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
 
-        BonusNumber bonusNumber = new BonusNumber(7);
-        WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumber), bonusNumber);
+        LottoNumber lottoNumber = new LottoNumber(7);
+        WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumber), lottoNumber);
 
 
-        assertThat(winningLotto).isEqualTo(new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new BonusNumber(7)));
+        assertThat(winningLotto).isEqualTo(new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(7)));
     }
 
     @DisplayName("로또 당첨결과 확인")
@@ -34,7 +34,7 @@ public class WinningLottoTest {
         LottoFactory manualLotto = LottoFactory.of(manualLottos);
         LottoFactory autoLotto = LottoFactory.of(0);
 
-        WinningLotto winningLotto = new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new BonusNumber(20));
+        WinningLotto winningLotto = new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(20));
         List<Result> results = winningLotto.getWinningResult(manualLotto, autoLotto);
 
         List<Result> expectedResults = Arrays.asList(Result.FIFTH, Result.NONE);

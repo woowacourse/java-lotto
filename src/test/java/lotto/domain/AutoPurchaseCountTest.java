@@ -22,6 +22,6 @@ public class AutoPurchaseCountTest {
         assertThatThrownBy(() -> {
             new AutoPurchaseCount(-1);
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("0이상의 숫자를 입력하세요. ");
+                .hasMessageContaining("구매금액을 초과하였습니다. 갯수를 확인해주세요. ");
     }
 }
