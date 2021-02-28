@@ -11,12 +11,12 @@ public class LottoTicketFactory {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int LOTTO_TICKET_SIZE = 6;
-    private static final List<LottoNumber> autoLottoCandidates;
+    private static final List<LottoNumber> AUTO_LOTTO_CANDIDATES;
 
     static {
-        autoLottoCandidates = new ArrayList<>();
+        AUTO_LOTTO_CANDIDATES = new ArrayList<>();
         IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
-                .forEach(number -> autoLottoCandidates.add(LottoNumber.of(Integer.toString(number))));
+                .forEach(number -> AUTO_LOTTO_CANDIDATES.add(LottoNumber.of(Integer.toString(number))));
     }
 
     private LottoTicketFactory() {
@@ -44,8 +44,8 @@ public class LottoTicketFactory {
     }
 
     private static LottoTicket createAutoLottoTicket() {
-        Collections.shuffle(autoLottoCandidates);
-        return new LottoTicket(autoLottoCandidates.stream()
+        Collections.shuffle(AUTO_LOTTO_CANDIDATES);
+        return new LottoTicket(AUTO_LOTTO_CANDIDATES.stream()
                 .limit(LOTTO_TICKET_SIZE)
                 .sorted()
                 .collect(Collectors.toList()));

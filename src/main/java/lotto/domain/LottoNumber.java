@@ -13,11 +13,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private static final Pattern NUMBER_PATTERN = Pattern.compile("^[0-9]*$");
     private static final int MIN_LOTTO_NUMBER = 1;
 
-    private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
+    private static final Map<Integer, LottoNumber> LOTTO_NUMBERS_CACHE = new HashMap<>();
 
     static {
         IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
-                .forEach(number -> lottoNumbers.put(number, new LottoNumber(number)));
+                .forEach(number -> LOTTO_NUMBERS_CACHE.put(number, new LottoNumber(number)));
     }
 
     private final int value;
@@ -28,7 +28,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public static LottoNumber of(String input) {
         validateLottoNumber(input);
-        return lottoNumbers.get(Integer.parseInt(input));
+        return LOTTO_NUMBERS_CACHE.get(Integer.parseInt(input));
     }
 
     private static void validateLottoNumber(String input) {
