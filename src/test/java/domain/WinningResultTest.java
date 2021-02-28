@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -54,7 +53,7 @@ class WinningResultTest {
 
     WinningNumbers createValidWinningNumbers() {
         return WinningNumbers.valueOf(
-                Arrays.asList(1, 2, 3, 4, 5, 6), 9
+                "1, 2, 3, 4, 5, 6", 9
         );
     }
 }
