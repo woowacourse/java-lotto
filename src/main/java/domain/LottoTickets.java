@@ -26,7 +26,7 @@ public class LottoTickets {
         return lottoTickets.size();
     }
 
-    private static void validateSizeOfManualTickets(final Money money, final List<String> manualTicketNumbers) {
+    private void validateSizeOfManualTickets(final Money money, final List<String> manualTicketNumbers) {
         if (!money.canBuy(manualTicketNumbers.size())) {
             throw new IllegalArgumentException("구매 가능한 로또 개수가 아닙니다.");
         }
