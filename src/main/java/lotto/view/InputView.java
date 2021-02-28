@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class InputView {
 
@@ -34,7 +33,7 @@ public class InputView {
         System.out.println(MANUAL_LOTTO_NUMBER_MESSAGE);
         List<String> lottoNumbers = new ArrayList<>();
         SCANNER.nextLine();
-        for (int i=0; i<count; i++) {
+        for (int i = 0; i < count; i++) {
             lottoNumbers.add(SCANNER.nextLine());
         }
         return Collections.unmodifiableList(lottoNumbers);
