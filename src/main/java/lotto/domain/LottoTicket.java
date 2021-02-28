@@ -34,11 +34,8 @@ public class LottoTicket {
         return LottoRank.matchLottoRank(matchCount, matchBonusNumber);
     }
 
-    public boolean isContain(LottoNumber lottoWinnerBonusNumber) {
-        if (lottoNumbers.contains(lottoWinnerBonusNumber)) {
-            return true;
-        }
-        return false;
+    public boolean contains(LottoNumber lottoWinnerBonusNumber) {
+        return lottoNumbers.contains(lottoWinnerBonusNumber);
     }
 
     private int calculateMatchCount(LottoTicket lottoWinnerTicket) {
