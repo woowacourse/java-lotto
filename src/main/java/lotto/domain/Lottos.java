@@ -20,16 +20,13 @@ public class Lottos {
         this.lottos.add(lotto);
     }
 
-    public List<Lotto> lottos() {
-        return Collections.unmodifiableList(lottos);
+    public void add(Lottos lottos) {
+        this.lottos.addAll(lottos.lottos());
     }
 
-    public LottoGameResult compareWithWinningLotto(WinningLotto winningLotto) {
-        LottoGameResult lottoGameResult = new LottoGameResult();
-        lottos().stream()
-                .map(winningLotto::findRank)
-                .forEach(lottoGameResult::add);
-        return lottoGameResult;
+
+    public List<Lotto> lottos() {
+        return Collections.unmodifiableList(lottos);
     }
 
     @Override
