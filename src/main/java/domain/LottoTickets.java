@@ -8,13 +8,13 @@ public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
 
     private LottoTickets(final Money money, final List<String> manualTicketNumbers) {
+        validateSizeOfManualTickets(money, manualTicketNumbers);
         this.lottoTickets = LottoMachine.generateManualLottoTickets(manualTicketNumbers);
         int sizeOfAutoLotto = money.purchasedAutoLottoSize(lottoTickets.size());
         this.lottoTickets.addAll(LottoMachine.generateAutoLottoTickets(sizeOfAutoLotto));
     }
 
     public static LottoTickets valueOf(final Money money, final List<String> manualTicketNumbers) {
-        validateSizeOfManualTickets(money, manualTicketNumbers);
         return new LottoTickets(money, manualTicketNumbers);
     }
 
