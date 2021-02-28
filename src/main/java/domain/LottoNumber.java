@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 public class LottoNumber implements Comparable<LottoNumber> {
     protected static final int NUMBER_MIN = 1;
     protected static final int NUMBER_MAX = 45;
-    private static final  Map<Integer, LottoNumber> NUMBERS;
+    private static final Map<Integer, LottoNumber> NUMBERS;
 
     private final int value;
 
