@@ -23,7 +23,7 @@ public class RandomNumbersGeneratorTest {
     @Test
     @DisplayName("자동 로또 생성 숫자 6개 확인")
     void randomNumbersCreate() {
-        assertThat(randomNumbers.size()).isEqualTo(6);
+        assertThat(randomNumbers.size()).isEqualTo(Ticket.NUMBER_COUNT);
     }
 
     @Test
@@ -34,12 +34,4 @@ public class RandomNumbersGeneratorTest {
                 .count() == randomNumbers.size();
         assertTrue(duplicated);
     }
-
-//    @Test
-//    @DisplayName("자동 로또 생성 숫자 1부터 45 사이 확인")
-//    void checkNumbersInRange() {
-//        for (Number randomNumber : randomNumbers) {
-//            assertThat(randomNumber).isBetween(MINIMUM_NUMBER, MAXIMUM_NUMBER);
-//        }
-//    }
 }

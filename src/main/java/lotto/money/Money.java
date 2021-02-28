@@ -1,14 +1,14 @@
 package lotto.money;
 
-import lotto.ticket.TicketValidation;
+import lotto.ticket.Ticket;
 
 import java.util.Objects;
 
-public class Money {
-    public static final String ERROR_MESSAGE_MINIMUM_MONEY = "1000원 이상의 금액이 필요합니다.";
+import static lotto.ticket.Number.validateNumber;
 
-    private static final int MINIMUM_PRICE = 1000;
+public class Money {
     private static final int SECOND_DECIMAL_POINT_MAKER = 100;
+    public static final String ERROR_MESSAGE_MINIMUM_MONEY = Ticket.PRICE + "원 이상의 금액이 필요합니다.";
 
     private final int money;
 
@@ -16,14 +16,14 @@ public class Money {
         this.money = validate(money);
     }
 
-    private int validate(String money) {
-        int value = TicketValidation.validateNumber(money);
-        checkMinimum(value);
-        return value;
+    private int validate(String value) {
+        int money = validateNumber(value);
+        validateMinimumPrice(money);
+        return money;
     }
 
-    private void checkMinimum(int value) {
-        if (value < MINIMUM_PRICE) {
+    private void validateMinimumPrice(int value) {
+        if (value < Ticket.PRICE) {
             throw new IllegalArgumentException(ERROR_MESSAGE_MINIMUM_MONEY);
         }
     }
@@ -32,9 +32,8 @@ public class Money {
         return this.money / unit;
     }
 
-    public String calculateProfit(int totalMoney) {
-        double profit = Math.floor((double) totalMoney / money * SECOND_DECIMAL_POINT_MAKER) / SECOND_DECIMAL_POINT_MAKER;
-        return Double.toString(profit);
+    public double calculateProfit(int totalMoney) {
+        return Math.floor((double) totalMoney / money * SECOND_DECIMAL_POINT_MAKER) / SECOND_DECIMAL_POINT_MAKER;
     }
 
     @Override

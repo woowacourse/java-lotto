@@ -8,7 +8,10 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 
-import static lotto.ticket.TicketValidation.*;
+import static lotto.ticket.Number.ERROR_MESSAGE_INVALID_INPUT;
+import static lotto.ticket.Number.ERROR_MESSAGE_INVALID_RANGE;
+import static lotto.ticket.Ticket.ERROR_MESSAGE_DUPLICATED;
+import static lotto.ticket.Ticket.ERROR_MESSAGE_INVALID_SIZE;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
@@ -41,7 +44,7 @@ public class WinnerTicketTest {
     @DisplayName("숫자의 범위가 1부터 45사이의 수가 아닌 경우")
     void checkNumberInRange() {
         assertThatThrownBy(() -> new WinnerTicket("1,2,3,4,5,46"))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(IllegalStateException.class)
                 .hasMessage(ERROR_MESSAGE_INVALID_RANGE);
     }
 
@@ -66,15 +69,15 @@ public class WinnerTicketTest {
     void checkResult() {
         NumbersGenerator numbersGenerator =
                 () -> Arrays.asList(
-                        new Number("1"),
-                        new Number("2"),
-                        new Number("3"),
-                        new Number("4"),
-                        new Number("5"),
-                        new Number("6")
+                        Number.valueOf("1"),
+                        Number.valueOf("2"),
+                        Number.valueOf("3"),
+                        Number.valueOf("4"),
+                        Number.valueOf("5"),
+                        Number.valueOf("6")
                 );
         WinnerTicket winnerTicket = new WinnerTicket("1,2,3,4,5,6");
-        Ticket ticket = new Ticket(numbersGenerator);
+        Ticket ticket = new Ticket(numbersGenerator.generate());
         assertThat(winnerTicket.findMatchCount(ticket)).isEqualTo(6);
     }
 }

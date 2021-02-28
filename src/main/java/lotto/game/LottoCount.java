@@ -1,30 +1,67 @@
 package lotto.game;
 
 import lotto.money.Money;
+import lotto.ticket.Ticket;
 
 import java.util.Objects;
 
+import static lotto.ticket.Number.ERROR_MESSAGE_INVALID_INPUT;
+import static lotto.ticket.Number.validateNumber;
+
 public class LottoCount {
-    public static final int ZERO = 0;
-    public static final int ONE_COUNT = 1;
-    private static final int LOTTO_PRICE = 1000;
+    public static final String ERROR_MESSAGE_INVALID_AMOUNT = "구매 금액보다 많이 구입할 수 없습니다.";
 
     private final int lottoCount;
 
     public LottoCount(Money money) {
-        this.lottoCount = money.divideMoney(LOTTO_PRICE);
+        this(money.divideMoney(Ticket.PRICE));
     }
 
-    private LottoCount(int lottoCount) {
-        this.lottoCount = lottoCount;
+    public LottoCount(String value) {
+        this(validate(value));
+    }
+
+    private LottoCount(int value) {
+        this.lottoCount = value;
+    }
+
+    private static int validate(String value) {
+        int number = validateNumber(value);
+        validateNotNegative(number);
+        return number;
+    }
+
+    private static void validateNotNegative(int number) {
+        if (number < 0) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_INVALID_INPUT);
+        }
     }
 
     public boolean isGreaterThanZero() {
-        return this.lottoCount > ZERO;
+        return this.lottoCount > 0;
     }
 
     public LottoCount decreaseOne() {
-        return new LottoCount(lottoCount - ONE_COUNT);
+        return new LottoCount(lottoCount - 1);
+    }
+
+    public LottoCount consumeTicket(LottoCount count) {
+        validateAmount(lottoCount, count);
+        return count.remainCount(lottoCount);
+    }
+
+    private void validateAmount(int currentCount, LottoCount count) {
+        if (!count.canPurchase(currentCount)) {
+            throw new IllegalStateException(ERROR_MESSAGE_INVALID_AMOUNT);
+        }
+    }
+
+    private LottoCount remainCount(int lottoCount) {
+        return new LottoCount(lottoCount - this.lottoCount);
+    }
+
+    public boolean canPurchase(int currentCount) {
+        return currentCount >= this.lottoCount;
     }
 
     public int getLottoCount() {

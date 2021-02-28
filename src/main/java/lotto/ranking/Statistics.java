@@ -1,25 +1,22 @@
 package lotto.ranking;
 
+import lotto.money.Money;
+
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-import static lotto.game.LottoCount.ZERO;
-
 public class Statistics {
-    private static final int STATISTIC_CAPACITY = 6;
+    public static final int INITIAL_VALUE = 0;
 
     private final Map<Ranking, Integer> statistics;
 
     public Statistics(List<Ranking> rankings) {
-        statistics = new HashMap<>(STATISTIC_CAPACITY);
-        statistics.put(Ranking.FIRST, ZERO);
-        statistics.put(Ranking.SECOND, ZERO);
-        statistics.put(Ranking.THIRD, ZERO);
-        statistics.put(Ranking.FORTH, ZERO);
-        statistics.put(Ranking.FIFTH, ZERO);
-        statistics.put(Ranking.NOTHING, ZERO);
+        statistics = new EnumMap<>(Ranking.class);
+        for (Ranking ranking : Ranking.values()) {
+            statistics.put(ranking, INITIAL_VALUE);
+        }
         calculateStatistics(rankings);
     }
 
@@ -29,8 +26,20 @@ public class Statistics {
         }
     }
 
+    public double calculateProfit(Money purchaseMoney) {
+        return purchaseMoney.calculateProfit(getTotalPrize());
+    }
+
     public int findRankingCount(Ranking ranking) {
         return statistics.get(ranking);
+    }
+
+    public int getTotalPrize() {
+        int prize = 0;
+        for (Ranking ranking : Ranking.values()) {
+            prize += ranking.calculatePrize(findRankingCount(ranking));
+        }
+        return prize;
     }
 
     public Map<Ranking, Integer> getStatistics() {

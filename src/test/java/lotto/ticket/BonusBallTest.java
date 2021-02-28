@@ -3,7 +3,9 @@ package lotto.ticket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static lotto.ticket.TicketValidation.*;
+import static lotto.ticket.Number.ERROR_MESSAGE_INVALID_INPUT;
+import static lotto.ticket.Number.ERROR_MESSAGE_INVALID_RANGE;
+import static lotto.ticket.Ticket.ERROR_MESSAGE_DUPLICATED;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -30,7 +32,7 @@ public class BonusBallTest {
     @DisplayName("숫자의 범위가 1부터 45사이의 수가 아닌 경우")
     void checkNumberInRange() {
         assertThatThrownBy(() -> new BonusBall("46", new WinnerTicket("1, 2, 3, 4, 5, 6")))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(IllegalStateException.class)
                 .hasMessage(ERROR_MESSAGE_INVALID_RANGE);
     }
 
@@ -46,7 +48,7 @@ public class BonusBallTest {
     @DisplayName("보너스볼 포함 확인")
     void checkContainBonusBall() {
         BonusBall bonusBall = new BonusBall("15", new WinnerTicket("1, 2, 3, 4, 5, 6"));
-        assertTrue(bonusBall.isSameThan(new Number("15")));
-        assertFalse(bonusBall.isSameThan(new Number("5")));
+        assertTrue(bonusBall.isSameThan(Number.valueOf("15")));
+        assertFalse(bonusBall.isSameThan(Number.valueOf("5")));
     }
 }
