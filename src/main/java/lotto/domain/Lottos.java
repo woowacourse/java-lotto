@@ -77,4 +77,12 @@ public class Lottos {
     public int getRandomCount() {
         return randomCount;
     }
+
+    public boolean isManualCount(int count) {
+        return manualCount == count;
+    }
+
+    public boolean isRandomCount(int count) {
+        return randomCount == count;
+    }
 }

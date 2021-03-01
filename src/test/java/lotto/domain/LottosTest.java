@@ -19,13 +19,13 @@ public class LottosTest {
     @Test
     @DisplayName("수동로또 구입개수 확인")
     void checkManualCount() {
-        assertThat(lottos.getManualCount()).isEqualTo(3);
+        assertThat(lottos.isManualCount(3)).isTrue();
     }
 
     @Test
     @DisplayName("자동로또 구입개수 확인")
     void checkRandomCount() {
-        assertThat(lottos.getRandomCount()).isEqualTo(11);
+        assertThat(lottos.isRandomCount(11)).isTrue();
     }
 }
 
