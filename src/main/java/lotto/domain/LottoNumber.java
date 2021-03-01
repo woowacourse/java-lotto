@@ -1,53 +1,60 @@
 package lotto.domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final int MIN_NUMBER_OF_LOTTO = 1;
     private static final int MAX_NUMBER_OF_LOTTO = 45;
+
+    public static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
+
+    static {
+        for (int i = MIN_NUMBER_OF_LOTTO; i <= MAX_NUMBER_OF_LOTTO; i++) {
+            lottoNumbers.put(i, new LottoNumber(i));
+        }
+    }
+
     private final int number;
 
     public LottoNumber(String number) {
-        number = number.trim();
-        validateLottoNumber(number);
-        this.number = Integer.parseInt(number);
+        this(changeToInt(number));
     }
 
-    public int getNumber() {
-        return number;
-    }
-
-    private void validateLottoNumber(String number) {
-        validateEmpty(number);
-        validateNumber(number);
+    public LottoNumber(int number) {
         validateNumberBound(number);
+        this.number = number;
     }
 
-    private void validateNumber(String number) {
+    private static int changeToInt(String number) {
+        number = number.trim();
+        validateNumber(number);
+        return Integer.parseInt(number);
+    }
+
+    private static void validateNumber(String number) {
         try {
-            Integer.parseInt(number.trim());
+            Integer.parseInt(number);
         } catch (NumberFormatException e) {
-            throw new NumberFormatException("숫자만 입력 가능합니다.");
+            throw new IllegalArgumentException("숫자만 입력 가능합니다.");
         }
     }
 
-    private void validateEmpty(String number) {
-        if (number.isEmpty()) {
-            throw new IllegalArgumentException("빈 값은 입력할 수 없습니다.");
+    private void validateNumberBound(int number) {
+        if (number < MIN_NUMBER_OF_LOTTO || number > MAX_NUMBER_OF_LOTTO) {
+            throw new IllegalArgumentException("로또 번호는 1~45 사이의 정수만 입력 가능합니다.");
         }
     }
 
-    private void validateNumberBound(String number) {
-        if (Integer.parseInt(number) < MIN_NUMBER_OF_LOTTO
-                || Integer.parseInt(number) > MAX_NUMBER_OF_LOTTO) {
-            throw new IllegalArgumentException("1~45 사이의 정수만 입력 가능합니다.");
-        }
+    public int number() {
+        return number;
     }
 
     @Override
     public int compareTo(LottoNumber o) {
-        return Integer.compare(number, o.getNumber());
+        return Integer.compare(number, o.number());
     }
 
     @Override

@@ -33,8 +33,9 @@ public class OutputView {
         System.out.println();
     }
 
-    private static void printOneLotto(Lotto lotto) {
-        String joinLottoNumber = lotto.lotto().stream()
+    private static void printOneLotto(final Lotto lotto) {
+        String joinLottoNumber = lotto.lotto().lottoNumbers().stream()
+                .sorted()
                 .map(LottoNumber::toString)
                 .collect(Collectors.joining(LOTTO_DELIMITER));
         printMessageByFormat(LOTTO_FORM, joinLottoNumber);
@@ -49,14 +50,16 @@ public class OutputView {
     }
 
     public static void printRankResult(final LottoGameResult lottoGameResult) {
-        lottoGameResult.ranks().entrySet().forEach(entry -> {
-            if (entry.getKey() == Rank.SECOND) {
-                printRankForm(entry, RANK_BONUS_FORM);
-            }
-            if (entry.getKey() != Rank.SECOND && entry.getKey() != Rank.NOTHING) {
-                printRankForm(entry, RANK_FORM);
-            }
-        });
+        lottoGameResult.ranks().entrySet().forEach(OutputView::checkBonusNumber);
+    }
+
+    private static void checkBonusNumber(final Entry<Rank, Integer> entry) {
+        if (entry.getKey() == Rank.SECOND) {
+            printRankForm(entry, RANK_BONUS_FORM);
+        }
+        if (entry.getKey() != Rank.SECOND && entry.getKey() != Rank.NOTHING) {
+            printRankForm(entry, RANK_FORM);
+        }
     }
 
     private static void printRankForm(final Entry<Rank, Integer> entry, final String format) {

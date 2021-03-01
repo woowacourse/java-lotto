@@ -13,17 +13,18 @@ public class LottoGameResultTest {
 
     @BeforeAll
     static void beforeAll() {
-        lottoGameResult.add(Rank.rankOf(4, false)); // 4
-        lottoGameResult.add(Rank.rankOf(3, false)); // 5
-        lottoGameResult.add(Rank.rankOf(2, false));
-        lottoGameResult.add(Rank.rankOf(1, false));
-        lottoGameResult.add(Rank.rankOf(0, false));
+        lottoGameResult.add(Rank.of(4, false));
+        lottoGameResult.add(Rank.of(3, false));
+        lottoGameResult.add(Rank.of(2, false));
+        lottoGameResult.add(Rank.of(1, false));
+        lottoGameResult.add(Rank.of(0, false));
     }
 
     @Test
-    @DisplayName("랭크 별 개수 테스트")
+    @DisplayName("랭크 별 당첨 개수 테스트")
     void testAdd() {
         assertThat(lottoGameResult.countByRank(Rank.FOURTH)).isEqualTo(1);
+        assertThat(lottoGameResult.countByRank(Rank.FIFTH)).isEqualTo(1);
         assertThat(lottoGameResult.countByRank(Rank.NOTHING)).isEqualTo(3);
     }
 

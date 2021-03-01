@@ -1,28 +1,28 @@
 package lotto.domain;
 
-import lotto.utils.LottoGenerator;
-
-import java.util.stream.IntStream;
+import lotto.utils.LottosGenerator;
 
 public class LottoGame {
 
-    private final Lottos myLottos;
+    private final LottosGenerator lottosGenerator;
 
-    public LottoGame() {
-        myLottos = new Lottos();
+    public LottoGame(LottosGenerator lottosGenerator) {
+        this.lottosGenerator = lottosGenerator;
     }
 
-    public Lottos myLottos() {
-        return myLottos;
+    public Lottos createLottos() throws IllegalArgumentException {
+        return lottosGenerator.generate();
     }
 
-    public void buyLottos(Money money, LottoGenerator lottoGenerator) {
-        IntStream.range(0, money.countLotto())
-                .mapToObj(i -> lottoGenerator.generate())
-                .forEach(myLottos::add);
+    public WinningLotto createWinningLotto(LottoNumbers winningNumbers, LottoNumber bonusNumber) throws IllegalArgumentException {
+        return new WinningLotto(new Lotto(winningNumbers), bonusNumber);
     }
 
-    public LottoGameResult calculateLottoGameResult(WinningLotto winningLotto) {
-        return myLottos().compareWithWinningLotto(winningLotto);
+    public LottoGameResult calculateYield(Lottos myLottos, WinningLotto winningLotto) {
+        LottoGameResult lottoGameResult = new LottoGameResult();
+        myLottos.lottos().stream()
+                .map(winningLotto::findRank)
+                .forEach(lottoGameResult::add);
+        return lottoGameResult;
     }
 }
