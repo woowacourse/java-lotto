@@ -25,4 +25,14 @@ public class MoneyTest {
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("1000원 이상 입력해주세요.");
     }
+
+    @Test
+    @DisplayName("지불 금액은 수동으로 구매할 로또 수보다 커야한다.")
+    public void notEnoughBudgetForManualNumbersTest() {
+        Money money = new Money("5000");
+        assertThatThrownBy(() -> {
+            money.deduct(6);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("지불할 금액이 부족합니다.");
+    }
 }

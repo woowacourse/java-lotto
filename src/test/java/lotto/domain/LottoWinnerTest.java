@@ -24,16 +24,16 @@ public class LottoWinnerTest {
                 new LottoNumber(5),
                 new LottoNumber(45)
         );
-        LottoWinnerTicket lottoWinnerTicket = new LottoWinnerTicket(lottoWinnerNumbers);
-        LottoWinnerBonusNumber lottoWinnerBonusNumber = new LottoWinnerBonusNumber(9);
+        LottoTicket lottoWinnerTicket = new LottoTicket(lottoWinnerNumbers);
+        LottoNumber lottoWinnerBonusNumber = new LottoNumber(9);
 
         assertThat(new LottoWinner(lottoWinnerTicket, lottoWinnerBonusNumber)).isInstanceOf(LottoWinner.class);
     }
 
     @ParameterizedTest(name = "Null은 생성자의 매개변수로 허용하지 않는다.")
     @NullSource
-    public void nullNotAllowedTest(LottoWinnerTicket lottoWinnerTicket) {
-        LottoWinnerBonusNumber lottoWinnerBonusNumber = new LottoWinnerBonusNumber(1);
+    public void nullNotAllowedTest(LottoTicket lottoWinnerTicket) {
+        LottoNumber lottoWinnerBonusNumber = new LottoNumber(1);
 
         assertThatThrownBy(() -> {
             new LottoWinner(lottoWinnerTicket, lottoWinnerBonusNumber);
@@ -53,7 +53,7 @@ public class LottoWinnerTest {
         );
 
         assertThatThrownBy(() -> {
-            new LottoWinner(new LottoWinnerTicket(lottoWinnerNumbers), new LottoWinnerBonusNumber(9));
+            new LottoWinner(new LottoTicket(lottoWinnerNumbers), new LottoNumber(9));
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -70,7 +70,7 @@ public class LottoWinnerTest {
         );
 
         assertThatThrownBy(() -> {
-            new LottoWinner(new LottoWinnerTicket(lottoWinnerNumbers), new LottoWinnerBonusNumber(6));
+            new LottoWinner(new LottoTicket(lottoWinnerNumbers), new LottoNumber(6));
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }

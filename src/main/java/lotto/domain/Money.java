@@ -6,19 +6,32 @@ public class Money {
 
     private static final String SHORT_MONEY_MESSAGE = "1000원 이상 입력해주세요.";
     private static final String NUMBER_FORMAT_ERROR_MESSAGE = "입력금액은 숫자여야합니다.";
+    private static final String OUT_OF_BUDGET_ERROR_MESSAGE = "지불할 금액이 부족합니다.";
     private static final int LOTTO_PRICE = 1000;
 
-    private final int money;
+    private int money;
 
     public Money(final String money) {
         Objects.requireNonNull(money);
         int integerMoney = parseInt(money);
-        validateBudgetMoney(integerMoney);
+        validateBudget(integerMoney);
         this.money = integerMoney;
     }
 
-    public int lottoCount() {
+    public Money(final Money originalMoney) {
+        this.money = originalMoney.getMoney();
+    }
+
+    public int ticketCount() {
         return this.money / LOTTO_PRICE;
+    }
+
+    public void deduct(int manualPurchase) {
+        int purchaseTotal = manualPurchase * LOTTO_PRICE;
+        if (purchaseTotal > money) {
+            throw new IllegalArgumentException(OUT_OF_BUDGET_ERROR_MESSAGE);
+        }
+        money = money - purchaseTotal;
     }
 
     private int parseInt(String money) {
@@ -29,7 +42,7 @@ public class Money {
         }
     }
 
-    private void validateBudgetMoney(int money) {
+    private void validateBudget(int money) {
         if (money < LOTTO_PRICE) {
             throw new IllegalArgumentException(SHORT_MONEY_MESSAGE);
         }

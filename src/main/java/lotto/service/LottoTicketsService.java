@@ -13,11 +13,12 @@ public class LottoTicketsService {
 
     }
 
-    public static LottoTickets createLottoTickets(Money money) {
+    public static LottoTickets createManualTickets(List<String> manualLottoTicketInputs, Money money) {
         List<LottoTicket> lottoTicketGroup = new ArrayList<>();
-        for (int i = 0; i < money.lottoCount(); i++) {
-            lottoTicketGroup.add(LottoTicketService.createLottoTicket());
+        for (String lottoTicketInput : manualLottoTicketInputs) {
+            lottoTicketGroup.add(LottoTicketService.createManualTicket(lottoTicketInput));
         }
+        money.deduct(manualLottoTicketInputs.size());
         return new LottoTickets(lottoTicketGroup);
     }
 }

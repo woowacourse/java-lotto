@@ -19,28 +19,32 @@ public class LottoTicket {
 
     private void validate(List<LottoNumber> lottoNumbers) {
         Objects.requireNonNull(lottoNumbers, NULL_ERROR_MESSAGE);
-        validateEmptyTicket(lottoNumbers);
+        validateEmpty(lottoNumbers);
         validateCount(lottoNumbers);
         validateDuplicate(lottoNumbers);
     }
 
-    public List<LottoNumber> getLottoNumbers() {
+    public List<LottoNumber> getNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
     public LottoRank getRank(LottoWinner lottoWinner) {
-        int matchCount = calculateMatchCount(lottoWinner.getLottoWinnerTicket());
-        boolean matchBonusNumber = lottoNumbers.contains(lottoWinner.getLottoWinnerBonusNumber());
-        return LottoRank.matchLottoRank(matchCount, matchBonusNumber);
+        int matchCount = calculateMatchCount(lottoWinner.getWinnerTicket());
+        boolean matchBonusNumber = lottoNumbers.contains(lottoWinner.getWinnerBonusNumber());
+        return LottoRank.matchRank(matchCount, matchBonusNumber);
     }
 
-    private int calculateMatchCount(LottoWinnerTicket lottoWinnerTicket) {
+    public boolean contains(LottoNumber lottoWinnerBonusNumber) {
+        return lottoNumbers.contains(lottoWinnerBonusNumber);
+    }
+
+    private int calculateMatchCount(LottoTicket lottoWinnerTicket) {
         Set<LottoNumber> matchingCheckContainer = new HashSet<>(lottoNumbers);
-        matchingCheckContainer.addAll(lottoWinnerTicket.getLottoNumbers());
+        matchingCheckContainer.addAll(lottoWinnerTicket.getNumbers());
         return LOTTO_NUMBER_COUNT * 2 - matchingCheckContainer.size();
     }
 
-    private void validateEmptyTicket(List<LottoNumber> lottoNumbers) {
+    private void validateEmpty(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.isEmpty()) {
             throw new IllegalArgumentException(EMPTY_ERROR_MESSAGE);
         }

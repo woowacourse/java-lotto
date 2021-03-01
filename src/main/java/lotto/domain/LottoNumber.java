@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+
+import static lotto.domain.LottoTicket.LOTTO_NUMBER_COUNT;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
@@ -33,8 +36,13 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return number;
     }
 
-    public static List<LottoNumber> getCache() {
-        return new ArrayList<>(CACHE);
+    public static List<LottoNumber> getRandomNumbers() {
+        List<LottoNumber> cachedLottoNumbers = new ArrayList<>(CACHE);
+        Collections.shuffle(cachedLottoNumbers);
+        return cachedLottoNumbers.stream()
+                .limit(LOTTO_NUMBER_COUNT)
+                .sorted()
+                .collect(Collectors.toList());
     }
 
     private void validateRange(int number) {

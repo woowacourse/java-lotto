@@ -7,33 +7,33 @@ public class LottoWinner {
     private static final String DUPLICATE_ERROR_MESSAGE = "당첨번호에 이미 있는 보너스 숫자입니다.";
     private static final String NULL_ERROR_MESSAGE = "null 값은 허용하지 않습니다.";
 
-    private final LottoWinnerTicket lottoWinnerTicket;
-    private final LottoWinnerBonusNumber lottoWinnerBonusNumber;
+    private final LottoTicket lottoWinnerTicket;
+    private final LottoNumber lottoWinnerBonusNumber;
 
-    public LottoWinner(LottoWinnerTicket lottoWinnerTicket, LottoWinnerBonusNumber lottoWinnerBonusNumber) {
+    public LottoWinner(LottoTicket lottoWinnerTicket, LottoNumber lottoWinnerBonusNumber) {
         validateNull(lottoWinnerTicket, lottoWinnerBonusNumber);
         this.lottoWinnerTicket = lottoWinnerTicket;
-        validateIfWinnerBonusNumberInWinnerTicket(lottoWinnerTicket, lottoWinnerBonusNumber);
+        validateDuplicate(lottoWinnerTicket, lottoWinnerBonusNumber);
         this.lottoWinnerBonusNumber = lottoWinnerBonusNumber;
     }
 
-    public void validateIfWinnerBonusNumberInWinnerTicket
-            (LottoWinnerTicket lottoWinnerTicket, LottoWinnerBonusNumber lottoWinnerBonusNumber) {
-        if (lottoWinnerTicket.isContain(lottoWinnerBonusNumber)) {
+    public void validateDuplicate
+            (LottoTicket lottoWinnerTicket, LottoNumber lottoWinnerBonusNumber) {
+        if (lottoWinnerTicket.contains(lottoWinnerBonusNumber)) {
             throw new IllegalArgumentException(DUPLICATE_ERROR_MESSAGE);
         }
     }
 
-    private void validateNull(LottoWinnerTicket lottoWinnerTicket, LottoWinnerBonusNumber lottoWinnerBonusNumber) {
+    private void validateNull(LottoTicket lottoWinnerTicket, LottoNumber lottoWinnerBonusNumber) {
         Objects.requireNonNull(lottoWinnerTicket, NULL_ERROR_MESSAGE);
         Objects.requireNonNull(lottoWinnerBonusNumber, NULL_ERROR_MESSAGE);
     }
 
-    public LottoWinnerTicket getLottoWinnerTicket() {
+    public LottoTicket getWinnerTicket() {
         return lottoWinnerTicket;
     }
 
-    public LottoWinnerBonusNumber getLottoWinnerBonusNumber() {
+    public LottoNumber getWinnerBonusNumber() {
         return lottoWinnerBonusNumber;
     }
 

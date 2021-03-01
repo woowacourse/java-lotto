@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.NullSource;
 
 import java.util.Arrays;
@@ -18,11 +17,11 @@ public class LottoTicketsTest {
     public LottoTickets lottoTickets;
 
     @BeforeEach
-    public void initLottoTickets() {
+    public void initTickets() {
         lottoTickets = new LottoTickets(Arrays.asList(
-                LottoTicketService.createLottoTicket(),
-                LottoTicketService.createLottoTicket(),
-                LottoTicketService.createLottoTicket()
+                LottoTicketService.createTicket(LottoNumber.getRandomNumbers()),
+                LottoTicketService.createTicket(LottoNumber.getRandomNumbers()),
+                LottoTicketService.createTicket(LottoNumber.getRandomNumbers())
         ));
     }
 
@@ -34,23 +33,15 @@ public class LottoTicketsTest {
         }).isInstanceOf(NullPointerException.class).hasMessage("null 값은 허용하지 않습니다.");
     }
 
-    @ParameterizedTest(name = "빈값은 생성자의 매개변수로 허용하지 않는다.")
-    @EmptySource
-    public void emptyParameterTest(List<LottoTicket> lottoTickets) {
-        assertThatThrownBy(() -> {
-            new LottoTickets(lottoTickets);
-        }).isInstanceOf(IllegalArgumentException.class).hasMessage("로또는 한장 이상 구매해야 합니다.");
-    }
-
     @Test
     @DisplayName("구매한 여러장의 로또 티켓들을 가진 객체를 생성한다.")
-    public void createLottoTicketsTest() {
+    public void createTicketsTest() {
         assertThat(lottoTickets).isInstanceOf(LottoTickets.class);
     }
 
     @Test
     @DisplayName("구매한 로또 티켓의 갯수만큼 로또가 생성 되었는지 확인한다.")
-    public void lottoTicketsCountTest() {
-        assertThat(lottoTickets.getLottoTickets().size()).isEqualTo(3);
+    public void ticketsCountTest() {
+        assertThat(lottoTickets.getTickets().size()).isEqualTo(3);
     }
 }
