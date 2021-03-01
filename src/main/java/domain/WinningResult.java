@@ -4,28 +4,28 @@ import java.util.List;
 
 public class WinningResult {
 
-    private final Price price;
+    private final Money money;
     private final List<Ranking> rankings;
 
-    public WinningResult(WinningNumbers winningNumbers, List<LottoTicket> lottoTickets,
-            Price price) {
-        this.rankings = winningNumbers.getRankings(lottoTickets);
-        this.price = price;
+    public WinningResult(WinningNumbers winningNumbers, LottoTickets lottoTickets,
+                         Money money) {
+        this.rankings = lottoTickets.calculateRankings(winningNumbers);
+        this.money = money;
     }
 
     public int countNumberOfRank(final Ranking ranking) {
         return (int) rankings.stream()
-                .filter(current -> current == ranking)
-                .count();
+            .filter(current -> current == ranking)
+            .count();
     }
 
-    public double getProfitRate() {
-        return ((double) getTotalProfit()) / price.getValue();
+    public double calculateProfitRate() {
+        return ((double) sumTotalProfit()) / money.getValue();
     }
 
-    private int getTotalProfit() {
+    private int sumTotalProfit() {
         return rankings.stream()
-                .mapToInt(Ranking::getMoney)
-                .sum();
+            .mapToInt(Ranking::getMoney)
+            .sum();
     }
 }

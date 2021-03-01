@@ -1,13 +1,14 @@
 package domain;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertAll;
-
-import java.util.Arrays;
-import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 class WinningResultTest {
 
@@ -33,24 +34,26 @@ class WinningResultTest {
     @DisplayName("총 수익률 계산 성공")
     @Test
     void getProfitRate_success() {
-        assertThat(winningResult.getProfitRate()).isEqualTo(2_030_005_000.0 / 3000.0);
+        assertThat(winningResult.calculateProfitRate()).isEqualTo(2_030_005_000.0 / 3000.0);
     }
 
-    Price createValidPrice() {
-        return Price.valueOf("3000");
+    Money createValidPrice() {
+        return Money.valueOf(3000);
     }
 
-    List<LottoTicket> createValidLottoTickets() {
-        return Arrays.asList(
-                LottoTicket.valueOf(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                LottoTicket.valueOf(Arrays.asList(4, 5, 6, 7, 8, 9)),
-                LottoTicket.valueOf(Arrays.asList(1, 2, 3, 4, 5, 9))
-        );
+    LottoTickets createValidLottoTickets() {
+        return LottoTickets.valueOf(createValidPrice(),
+            Stream.<String>builder()
+                .add("1, 2, 3, 4, 5, 6")
+                .add("4, 5, 6, 7, 8, 9")
+                .add("1, 2, 3, 4, 5, 9")
+                .build()
+                .collect(Collectors.toList()));
     }
 
     WinningNumbers createValidWinningNumbers() {
         return WinningNumbers.valueOf(
-                Arrays.asList(1, 2, 3, 4, 5, 6), 9
+                "1, 2, 3, 4, 5, 6", 9
         );
     }
 }

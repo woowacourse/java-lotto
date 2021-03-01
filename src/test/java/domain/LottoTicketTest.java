@@ -1,13 +1,14 @@
 package domain;
 
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
-import static org.junit.jupiter.api.Assertions.assertAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 class LottoTicketTest {
 
@@ -27,7 +28,7 @@ class LottoTicketTest {
 
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> LottoTicket.valueOf(lottoNumbers))
-                .withMessageContaining("중복");
+                .withMessageContaining("개수가 6이 아닙니다.");
     }
 
     @DisplayName("객체 생성 실패 : 숫자가 6개가 아닌 경우")

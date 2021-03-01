@@ -1,31 +1,38 @@
 package domain;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class LottoMachine {
 
-    private final static int MIN_LOTTO_NUMBER = 1;
-    private final static int MAX_LOTTO_NUMBER = 45;
-
-    private LottoMachine() {}
-
-    public static List<LottoTicket> generateLottoTickets(Price price) {
-        final int lottoTicketQuantity = price.getNumberOfTickets();
-        final List<Integer> numberBox = generateNumberBox();
-
+    public static List<LottoTicket> generateAutoLottoTickets(int numOfTickets) {
         return Stream
-            .generate(() -> LottoTicket.valueOf(RandomLottoNumberGenerator.generate(numberBox)))
-            .limit(lottoTicketQuantity)
+            .generate(() -> LottoTicket.valueOf(RandomLottoNumberGenerator.generate()))
+            .limit(numOfTickets)
             .collect(Collectors.toList());
     }
 
-    private static List<Integer> generateNumberBox() {
-        return IntStream
-            .rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
-            .boxed()
+    public static List<LottoTicket> generateManualLottoTickets(List<String> manualLotto) {
+        return manualLotto
+            .stream()
+            .map(LottoMachine::convertToLottoTicket)
             .collect(Collectors.toList());
+    }
+
+    private static LottoTicket convertToLottoTicket(String numbers) {
+        return LottoTicket.valueOf(convertToInt(numbers));
+    }
+
+    public static List<Integer> convertToInt(String ticket) {
+        try {
+            return Arrays.stream(ticket.split(","))
+                .map(String::trim)
+                .map(Integer::new)
+                .collect(Collectors.toList());
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("올바른 입력이 아닙니다.");
+        }
     }
 }

@@ -10,7 +10,7 @@ public class Application {
     private static void run() {
         try {
             start();
-        } catch (IllegalArgumentException e) {
+        } catch (RuntimeException e) {
             OutputView.printError(e);
             run();
         }
