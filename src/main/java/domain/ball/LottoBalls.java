@@ -6,14 +6,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
-import static domain.ball.LottoBall.MAX_LOTTO_VALUE;
-import static domain.ball.LottoBall.MIN_LOTTO_VALUE;
 
 public class LottoBalls {
-    private static final int LOTTO_BALL_SIZE = 6;
+    public static final int LOTTO_BALL_SIZE = 6;
+    private static final String DUPLICATE_EXCEPTION_MESSAGE = "로또 번호에 중복된 값이 있습니다. 다시 입력해주세요. 입력값 %s";
+    private static final String LOTTO_SIZE_EXCEPTION_MESSAGE = "%d개의 로또 번호가 필요합니다.";
 
     private final List<LottoBall> lottoBalls;
 
@@ -23,31 +20,20 @@ public class LottoBalls {
         this.lottoBalls = copy;
     }
 
-    public static List<LottoBall> getRandomLottoBalls() {
-        List<LottoBall> lottoBalls = IntStream.rangeClosed(MIN_LOTTO_VALUE, MAX_LOTTO_VALUE)
-                .mapToObj(LottoBall::new)
-                .collect(Collectors.toList());
-        Collections.shuffle(lottoBalls);
-        return lottoBalls.stream()
-                .limit(LOTTO_BALL_SIZE)
-                .sorted()
-                .collect(Collectors.toList());
-    }
-
     public List<LottoBall> getLottoBalls() {
         List<LottoBall> copy = new ArrayList<>(this.lottoBalls);
         return Collections.unmodifiableList(copy);
     }
 
-    public LottoRank matchCount(LottoBalls lottoBalls, LottoBall bonusBall) {
+    public LottoRank findRankByWinningBalls(final LottoBalls winningBalls, final LottoBall bonusBall) {
         int count = (int) this.lottoBalls.stream()
-                .filter(lottoBalls::contains)
+                .filter(winningBalls::contains)
                 .count();
 
-        boolean containBonus = this.lottoBalls.stream()
+        boolean hasBonus = this.lottoBalls.stream()
                 .anyMatch(bonusBall::equals);
 
-        return LottoRank.findRankByBonusAndMatches(containBonus, count);
+        return LottoRank.findRankByBonusAndMatches(hasBonus, count);
     }
 
     private void validateLottoNumbers(final List<LottoBall> lottoBalls) {
@@ -59,17 +45,17 @@ public class LottoBalls {
         boolean isUnique = lottoBalls.stream()
                 .allMatch(new HashSet<>()::add);
         if (!isUnique) {
-            throw new IllegalArgumentException(String.format("로또 번호에 중복된 값이 있습니다. 다시 입력해주세요. 입력값 %s", lottoBalls.toString()));
+            throw new IllegalArgumentException(String.format(DUPLICATE_EXCEPTION_MESSAGE, lottoBalls.toString()));
         }
     }
 
     private void validateSize(final List<LottoBall> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_BALL_SIZE) {
-            throw new IllegalArgumentException(String.format("%d개의 로또 번호가 필요합니다.", LOTTO_BALL_SIZE));
+            throw new IllegalArgumentException(String.format(LOTTO_SIZE_EXCEPTION_MESSAGE, LOTTO_BALL_SIZE));
         }
     }
 
-    private boolean contains(LottoBall lottoBall) {
+    private boolean contains(final LottoBall lottoBall) {
         return this.lottoBalls.contains(lottoBall);
     }
 }

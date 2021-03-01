@@ -1,27 +1,34 @@
 package domain.ball;
 
-import java.util.Objects;
+import java.util.*;
 
 public class LottoBall implements Comparable<LottoBall> {
-    public static final int MIN_LOTTO_VALUE = 1;
-    public static final int MAX_LOTTO_VALUE = 45;
-    public static final String PERMIT_LOTTO_NUMBER_EXCEPTION_MESSAGE = "%d~%d 사이의 번호만 허용합니다.";
+    private static final int MIN_LOTTO_VALUE = 1;
+    private static final int MAX_LOTTO_VALUE = 45;
+    private static final String PERMIT_LOTTO_NUMBER_EXCEPTION_MESSAGE = "%d~%d 사이의 번호만 허용합니다.";
+    private static final Map<Integer, LottoBall> lottoBalls = new HashMap<>();
 
-    private final int value;
-
-    public LottoBall(final int value) {
-        validateNumber(value);
-        this.value = value;
-    }
-
-    private void validateNumber(final int value) {
-        if (!isBetweenNumber(value)) {
-            throw new IllegalArgumentException(String.format(PERMIT_LOTTO_NUMBER_EXCEPTION_MESSAGE, MIN_LOTTO_VALUE, MAX_LOTTO_VALUE));
+    static {
+        for (int i = MIN_LOTTO_VALUE; i <= MAX_LOTTO_VALUE; i++) {
+            lottoBalls.put(i, new LottoBall(i));
         }
     }
 
-    private boolean isBetweenNumber(final int number) {
-        return number >= MIN_LOTTO_VALUE && number <= MAX_LOTTO_VALUE;
+    private final int value;
+
+    private LottoBall(final int value) {
+        this.value = value;
+    }
+
+    public static LottoBall from(final int value) {
+        if (Objects.isNull(lottoBalls.get(value))) {
+            throw new IllegalArgumentException(String.format(PERMIT_LOTTO_NUMBER_EXCEPTION_MESSAGE, MIN_LOTTO_VALUE, MAX_LOTTO_VALUE));
+        }
+        return lottoBalls.get(value);
+    }
+
+    public static List<LottoBall> getLottoBalls() {
+        return new ArrayList<>(lottoBalls.values());
     }
 
     public int getValue() {

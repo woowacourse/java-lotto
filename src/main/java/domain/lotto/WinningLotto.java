@@ -23,19 +23,19 @@ public class WinningLotto {
         this.bonusBall = makeBonusBall(bonusNumber);
     }
 
-    public LottoRank winningMatchCount(final LottoBalls lottoBalls) {
-        return lottoBalls.matchCount(this.winningBalls, bonusBall);
+    public LottoRank findLottoRank(final LottoBalls lottoBalls) {
+        return lottoBalls.findRankByWinningBalls(this.winningBalls, bonusBall);
     }
 
-    private LottoBalls makeWinningBalls(Set<Integer> winningNumbers) {
+    private LottoBalls makeWinningBalls(final Set<Integer> winningNumbers) {
         List<LottoBall> lottoBalls = winningNumbers.stream()
-                .map(LottoBall::new)
+                .map(LottoBall::from)
                 .collect(Collectors.toList());
         return new LottoBalls(lottoBalls);
     }
 
     private LottoBall makeBonusBall(int bonusNumber) {
-        return new LottoBall(bonusNumber);
+        return LottoBall.from(bonusNumber);
     }
 
     private void validateWinningNumbers(Set<Integer> winningNumbers) {

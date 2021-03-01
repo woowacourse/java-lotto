@@ -39,7 +39,7 @@ class ResultTest {
 
         //when
         List<LottoBall> lottoBalls = lottoNumbers.stream()
-                .map(lottoNumber -> new LottoBall(lottoNumber))
+                .map(lottoNumber -> LottoBall.from(lottoNumber))
                 .collect(Collectors.toList());
         LottoTickets lottoTickets = new LottoTickets(Collections.singletonList(new LottoTicket(new LottoBalls(lottoBalls))));
 
@@ -56,7 +56,7 @@ class ResultTest {
 
         //when
         List<LottoBall> lottoBalls = lottoNumbers.stream()
-                .map(lottoNumber -> new LottoBall(lottoNumber))
+                .map(lottoNumber -> LottoBall.from(lottoNumber))
                 .collect(Collectors.toList());
         LottoTickets lottoTickets = new LottoTickets(Collections.singletonList(new LottoTicket(new LottoBalls(lottoBalls))));
         Result result = new Result(lottoTickets, winningLotto);
@@ -64,7 +64,7 @@ class ResultTest {
         Map<LottoRank, Integer> results = result.getResults();
 
         //then
-        assertThat(results.get(LottoRank.SIX_MATCHES)).isEqualTo(1);
+        assertThat(results.get(LottoRank.FIRST_PLACE)).isEqualTo(1);
     }
 
     @DisplayName("Result 복수 결과 반환 테스트.")
@@ -76,18 +76,18 @@ class ResultTest {
 
         //when
         List<LottoBall> lottoBalls = lottoNumbers.stream()
-                .map(lottoNumber -> new LottoBall(lottoNumber))
+                .map(lottoNumber -> LottoBall.from(lottoNumber))
                 .collect(Collectors.toList());
         List<LottoBall> lottoBalls2 = lottoNumbers2.stream()
-                .map(lottoNumber -> new LottoBall(lottoNumber))
+                .map(lottoNumber -> LottoBall.from(lottoNumber))
                 .collect(Collectors.toList());
         LottoTickets lottoTickets = new LottoTickets(Arrays.asList(new LottoTicket(new LottoBalls(lottoBalls)), new LottoTicket(new LottoBalls(lottoBalls2))));
         Result result = new Result(lottoTickets, winningLotto);
 
         Map<LottoRank, Integer> results = result.getResults();
 
-        assertThat(results.get(LottoRank.SIX_MATCHES)).isEqualTo(1);
-        assertThat(results.get(LottoRank.FIVE_MATCHES)).isEqualTo(1);
+        assertThat(results.get(LottoRank.FIRST_PLACE)).isEqualTo(1);
+        assertThat(results.get(LottoRank.THIRD_PLACE)).isEqualTo(1);
     }
 
     @DisplayName("5개의 볼, 보너스 볼이 맞을 때 2등 당첨된다.")
@@ -98,7 +98,7 @@ class ResultTest {
 
         //when
         List<LottoBall> lottoBalls = lottoNumbers.stream()
-                .map(lottoNumber -> new LottoBall(lottoNumber))
+                .map(lottoNumber -> LottoBall.from(lottoNumber))
                 .collect(Collectors.toList());
         LottoTickets lottoTickets = new LottoTickets(Collections.singletonList(new LottoTicket(new LottoBalls(lottoBalls))));
         Result result = new Result(lottoTickets, winningLotto);
@@ -106,7 +106,7 @@ class ResultTest {
         Map<LottoRank, Integer> results = result.getResults();
 
         //then
-        assertThat(results.get(LottoRank.FIVE_AND_BONUS_MATCHES)).isEqualTo(1);
+        assertThat(results.get(LottoRank.SECOND_PLACE)).isEqualTo(1);
     }
 
     @DisplayName("수익률 반환 테스트.")
@@ -118,16 +118,16 @@ class ResultTest {
 
         //when
         List<LottoBall> lottoBalls = lottoNumbers.stream()
-                .map(lottoNumber -> new LottoBall(lottoNumber))
+                .map(lottoNumber -> LottoBall.from(lottoNumber))
                 .collect(Collectors.toList());
         List<LottoBall> lottoBalls2 = lottoNumbers2.stream()
-                .map(lottoNumber -> new LottoBall(lottoNumber))
+                .map(lottoNumber -> LottoBall.from(lottoNumber))
                 .collect(Collectors.toList());
         LottoTickets lottoTickets = new LottoTickets(Arrays.asList(new LottoTicket(new LottoBalls(lottoBalls)), new LottoTicket(new LottoBalls(lottoBalls2))));
         Result result = new Result(lottoTickets, winningLotto);
 
-        BigDecimal earningsRate = result.findEarningsRate(BettingMoney.of(2000));
+        BigDecimal earningsRate = result.findEarningsRate(new BettingMoney(2000));
         System.out.println("earningsRate.doubleValue() = " + earningsRate.doubleValue());
-        assertThat(earningsRate).isEqualTo(BigDecimal.valueOf(5));
+        assertThat(earningsRate).isEqualTo(new BigDecimal("5.00"));
     }
 }

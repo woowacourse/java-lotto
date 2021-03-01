@@ -10,40 +10,34 @@ import java.util.List;
 import java.util.Map;
 
 public class Result {
-    private final LottoTickets lottoTickets;
-    private final WinningLotto winningLotto;
     private final Map<LottoRank, Integer> results;
 
-    public Result(LottoTickets lottoTickets, WinningLotto winningLotto) {
-        this.lottoTickets = lottoTickets;
-        this.winningLotto = winningLotto;
-        this.results = new HashMap<>();
-        setResult();
+    public Result(final LottoTickets lottoTickets, final WinningLotto winningLotto) {
+        this.results = makeResult(lottoTickets, winningLotto);
     }
 
-    public BigDecimal findEarningsRate(BettingMoney bettingMoney) {
-        int prize = results.entrySet().stream()
-                .map(Map.Entry::getKey)
-                .mapToInt(lottoRank -> lottoRank.getPrize() * results.get(lottoRank))
+    public BigDecimal findEarningsRate(final BettingMoney bettingMoney) {
+        long prize = results.keySet().stream()
+                .mapToLong(this::getTotalPrize)
                 .sum();
         return bettingMoney.getEarningRate(prize);
     }
 
     public Map<LottoRank, Integer> getResults() {
-        return results;
+        return new HashMap<>(results);
     }
 
-    private Map<LottoRank, Integer> setResult() {
-        List<LottoRank> lottoRanks = lottoTickets.findMatches(winningLotto);
-        lottoRanks.forEach(this::putResult);
-        return results;
+    private Map<LottoRank, Integer> makeResult(final LottoTickets lottoTickets, final WinningLotto winningLotto) {
+        Map<LottoRank, Integer> result = new HashMap<>();
+        List<LottoRank> lottoRanks = lottoTickets.findLottoRanks(winningLotto);
+        lottoRanks.forEach(lottoRank -> {
+            result.computeIfPresent(lottoRank, (key, value) -> value + 1);
+            result.putIfAbsent(lottoRank, 1);
+        });
+        return result;
     }
 
-    private void putResult(final LottoRank lottoRank) {
-        if (!results.containsKey(lottoRank)) {
-            results.put(lottoRank, 1);
-            return;
-        }
-        results.put(lottoRank, results.get(lottoRank) + 1);
+    private Long getTotalPrize(final LottoRank lottoRank) {
+        return Long.valueOf(lottoRank.getPrize()) * results.get(lottoRank);
     }
 }
