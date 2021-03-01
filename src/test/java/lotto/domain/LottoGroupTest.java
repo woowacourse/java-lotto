@@ -21,9 +21,9 @@ public class LottoGroupTest {
     @Test
     void merge() {
         LottoGroup one = new LottoGroup(
-            new Lotto(lottoNumbers));
+            Arrays.asList(new Lotto(lottoNumbers)));
         LottoGroup two = new LottoGroup(
-            new Lotto(lottoNumbers));
+            Arrays.asList(new Lotto(lottoNumbers)));
         LottoGroup lottoGroup = one.merge(two);
 
         LottoGroup expected = new LottoGroup(

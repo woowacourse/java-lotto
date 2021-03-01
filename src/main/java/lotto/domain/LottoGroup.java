@@ -14,16 +14,12 @@ public class LottoGroup {
         this.lottoGroup = lottoGroup;
     }
 
-    public LottoGroup(Lotto lotto) {
-        this.lottoGroup = Collections.singletonList(lotto);
-    }
-
     public List<Lotto> getLottoGroup() {
         return Collections.unmodifiableList(lottoGroup);
     }
 
     public LottoGroup merge(LottoGroup target) {
-        return new LottoGroup(Stream.concat(lottoGroup.stream(), target.getLottoGroup().stream())
+        return new LottoGroup(Stream.concat(lottoGroup.stream(), target.lottoGroup.stream())
             .collect(Collectors.toList()));
     }
 
