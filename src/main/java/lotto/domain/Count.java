@@ -2,7 +2,7 @@ package lotto.domain;
 
 public class Count {
 
-    public static final String NUMBER_EXCEED_ERROR = "[ERROR] 구매 가능한 수를 초과했습니다.";
+    private static final String NUMBER_EXCEED_ERROR = "[ERROR] 구매 가능한 수를 초과했습니다.";
     private final int totalCount;
     private int manualCount;
     private int autoCount;
