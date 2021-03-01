@@ -2,28 +2,36 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import lotto.exception.LottoAnnouncementException;
 
 public class Lotto {
 
-    public static final int LOTTO_POSSESSION_NUMBER = 6;
+    public static final String DIFFERENT_POSSESSION_MESSAGE = "로또 번호의 갯수가 기준과 다릅니다.";
+    public static final String OVERLAPPED_WINNER_MESSAGE = "당첨 번호가 중복되었습니다.";
     public static final double BONUS_MATCHING_COUNT = 5.5;
-    private final List<Integer> numbers;
+    public static final int POSSESSION_NUMBER = 6;
+    public static final int PRICE = 1000;
 
-    public Lotto(List<Integer> selectedNumber) {
-        numbers = new ArrayList<>(selectedNumber);
+    private final List<Number> numbers;
+
+    public Lotto(List<Number> selectedNumber) {
+        checkValidNumbers(selectedNumber);
+        numbers = selectedNumber;
     }
 
     public LottoRank getLottoRank(LottoAnnouncement lottoAnnouncement) {
         double count = getMatchingCount(lottoAnnouncement);
-
         return LottoRank.getRank(count);
     }
 
     private double getMatchingCount(LottoAnnouncement lottoAnnouncement) {
-        List <Integer> winningNumbers = lottoAnnouncement.getWinners();
-        int bonusNumber = lottoAnnouncement.getBonusNumber();
-        List<Integer> combinedWinningNumbers = getCombinedWinNumbers(winningNumbers, bonusNumber);
+        Lotto winners = lottoAnnouncement.getWinners();
+        Number bonusNumber = lottoAnnouncement.getBonusNumber();
+        List <Number> combinedWinningNumbers = getCombinedWinNumbers(winners, bonusNumber);
         int count = getCount(combinedWinningNumbers);
 
         if (isSecondRank(count, bonusNumber)) {
@@ -32,24 +40,65 @@ public class Lotto {
         return count;
     }
 
-    private List<Integer> getCombinedWinNumbers(List<Integer> winningNumbers,
-        int bonusNumber) {
-        List<Integer> integratedWinningNumbers = new ArrayList<>(winningNumbers);
+    private List<Number> getCombinedWinNumbers(Lotto winner, Number bonusNumber) {
+        List<Number> integratedWinningNumbers = new ArrayList<>(winner.getNumbers());
         integratedWinningNumbers.add(bonusNumber);
         return integratedWinningNumbers;
     }
 
-    private int getCount(List<Integer> integratedWinningNumbers) {
+    private int getCount(List<Number> integratedWinningNumbers) {
         return (int) numbers.stream()
             .filter(integratedWinningNumbers::contains)
             .count();
     }
 
-    private boolean isSecondRank(int count, int bonusNumber) {
-        return count == LOTTO_POSSESSION_NUMBER && numbers.contains(bonusNumber);
+    private boolean isSecondRank(int count, Number bonusNumber) {
+        return count == POSSESSION_NUMBER && numbers.contains(bonusNumber);
     }
 
-    public List<Integer> getNumbers() {
+    private void checkValidNumbers (List<Number> winners) {
+        checkOverlappedAmongWinners(winners);
+        checkProperSize(winners);
+    }
+
+    private void checkOverlappedAmongWinners(List<Number> winners) {
+        Set<Number> removedOverlappedWinners = new HashSet<>(winners);
+
+        if (removedOverlappedWinners.size() != winners.size()) {
+            throw new LottoAnnouncementException(OVERLAPPED_WINNER_MESSAGE);
+        }
+    }
+
+    private void checkProperSize(List<Number> winners) {
+        if (winners.size() != Lotto.POSSESSION_NUMBER) {
+            throw new LottoAnnouncementException(DIFFERENT_POSSESSION_MESSAGE);
+        }
+    }
+
+    @Override
+    public boolean equals(Object candidateObject) {
+        if (this == candidateObject) {
+            return true;
+        };
+        if ((candidateObject == null) || (getClass() != candidateObject.getClass())) {
+            return false;
+        }
+        Lotto candidateLotto = (Lotto) candidateObject;
+        return isSameNumbers(candidateLotto);
+    }
+
+    private boolean isSameNumbers(Lotto candidateLotto) {
+        double sameNumbersCount = candidateLotto.getNumbers()
+            .stream()
+            .map(this.numbers::contains)
+            .count();
+        if (sameNumbersCount == POSSESSION_NUMBER) {
+            return true;
+        }
+        return false;
+    }
+
+    public List<Number> getNumbers() {
         return Collections.unmodifiableList(numbers);
     }
 }

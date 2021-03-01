@@ -4,18 +4,33 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
-import lotto.controller.generator.LottoGenerator;
+import lotto.domain.generator.LottoNumberGenerator;
 
 public class Lottos {
 
-    private final List<Lotto> lottoBunch = new ArrayList<>();
-    private final LottoGenerator lottoGenerator;
+    private final List<Lotto> lottoBunch;
 
-    public Lottos(LottoGenerator lottoGenerator, int purchasedLottoCount) {
-        this.lottoGenerator = lottoGenerator;
-        for (int i = 0; i < purchasedLottoCount; i++) {
-            lottoBunch.add(new Lotto(this.lottoGenerator.generateNumbers()));
+    private Lottos(final List<Lotto> lottoBunch) {
+        this.lottoBunch = lottoBunch;
+    }
+
+    public static Lottos generateLottos(LottoNumberGenerator lottoNumberGenerator,
+        Piece purchasedLottoCount) {
+        int purchasedRawLottoCount = purchasedLottoCount.getPieceNumber();
+        final List<Lotto> candidateLottoBunch = new ArrayList<>(purchasedRawLottoCount);
+        for (int i = 0; i < purchasedRawLottoCount; i++) {
+            candidateLottoBunch.add(new Lotto(lottoNumberGenerator.generateNumbers()));
         }
+
+        return new Lottos(candidateLottoBunch);
+    }
+
+    public Lottos mergeLottos(Lottos targetLottos) {
+        final List<Lotto> mergedLottosBunch = new ArrayList(lottoBunch.size()
+            + targetLottos.lottoBunch.size());
+        mergedLottosBunch.addAll(lottoBunch);
+        mergedLottosBunch.addAll(targetLottos.lottoBunch);
+        return new Lottos(mergedLottosBunch);
     }
 
     public EnumMap<LottoRank, Integer> getStatistics(LottoAnnouncement lottoAnnouncement) {

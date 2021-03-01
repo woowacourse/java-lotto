@@ -4,13 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import lotto.controller.generator.LottoAutoGenerator;
-import lotto.controller.generator.LottoManualGenerator;
-import lotto.utility.InputTest;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import lotto.domain.generator.LottoAutoNumberGenerator;
+import lotto.domain.generator.LottoManualNumberGenerator;
+import lotto.utility.NumberListTranslator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -21,29 +18,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottosTest {
 
-    public static final List<Integer> WINNING_NUMBERS = Arrays.asList(1, 2, 3, 4, 5, 6);
-    public static final int BONUS_NUMBER = 7;
-    private static final String DELIMITER = ", ";
-
-    private InputTest inputTest = new InputTest();
-
-    @BeforeEach
-    public void setUp() {
-        inputTest.setUp();
-    }
-
-    @AfterEach
-    public void restoreSystemInputOutput() {
-        inputTest.restoreSystemInputOutput();
-    }
+    public static final List<Number> WINNING_NUMBERS =
+        NumberListTranslator.translateIntToNumber(Arrays.asList(1, 2, 3, 4, 5, 6));
+    public static final Number BONUS_NUMBER = Number.from(7);
 
     @Test
     @DisplayName("구입한 로또 매수만큼 로또 생성")
     void createLottos() {
-        int expectedLottoSize = 14;
-        LottoAutoGenerator lottoAutoGenerator = new LottoAutoGenerator();
-        Lottos lottos = new Lottos(lottoAutoGenerator, expectedLottoSize);
-        assertThat(lottos.getSize()).isEqualTo(expectedLottoSize);
+        int expectedPieceNumber = 14;
+        Money expectedPurchaseMoney = new Money(Lotto.PRICE * expectedPieceNumber);
+        Piece expectedLottoPiece = new Piece(expectedPurchaseMoney, expectedPieceNumber);
+        LottoAutoNumberGenerator lottoAutoGenerator = new LottoAutoNumberGenerator();
+        Lottos lottos = Lottos.generateLottos(lottoAutoGenerator, expectedLottoPiece);
+        assertThat(lottos.getSize()).isEqualTo(expectedPieceNumber);
     }
 
     private static Stream<Arguments> provideLottosResult() {
@@ -59,28 +46,23 @@ public class LottosTest {
     @DisplayName("당첨 통계 결과 수합")
     @MethodSource("provideLottosResult")
     void lottosResult(String exampleLotto, LottoRank exampleRank) {
-        List<List<Integer>> manualLottoNumbers = manualLottoNumbers(exampleLotto);
-        LottoManualGenerator lottoManualGenerator = new LottoManualGenerator(manualLottoNumbers);
-        Lottos exampleLottos = new Lottos(lottoManualGenerator, 1);
+        int expectedPieceNumber = 1;
+        Money expectedMoney = new Money(Lotto.PRICE * expectedPieceNumber);
+        Piece expectedPiece = new Piece(expectedMoney, expectedPieceNumber);
+        List<List<Number>> manualLottoNumbers = manualLottoNumbers(exampleLotto);
+        LottoManualNumberGenerator lottoManualGenerator =
+            new LottoManualNumberGenerator(manualLottoNumbers);
+        Lottos exampleLottos = Lottos.generateLottos(lottoManualGenerator, expectedPiece);
         LottoAnnouncement lottoAnnouncement = new LottoAnnouncement(WINNING_NUMBERS, BONUS_NUMBER);
         Map<LottoRank, Integer> exampleLottosResult =
             exampleLottos.getStatistics(lottoAnnouncement);
-        int value = exampleLottosResult.get(exampleRank);
-        assertThat(value).isEqualTo(1);
+        assertThat(exampleLottosResult.get(exampleRank)).isEqualTo(expectedPieceNumber);
     }
 
-    private List<List<Integer>> manualLottoNumbers(String exampleLotto) {
-        List<List<Integer>> manualLottoNumbers = new ArrayList<>();
-        List<Integer> singleManualLottoNumbers = parseToWinner(exampleLotto);
+    private List<List<Number>> manualLottoNumbers(String exampleLotto) {
+        List<List<Number>> manualLottoNumbers = new ArrayList<>();
+        List<Number> singleManualLottoNumbers = NumberListTranslator.parseToWinner(exampleLotto);
         manualLottoNumbers.add(singleManualLottoNumbers);
         return manualLottoNumbers;
-    }
-
-    private List<Integer> parseToWinner(String exampleLotto) {
-        String[] splittedWinningNumbers = exampleLotto.split(DELIMITER);
-        return Arrays.stream(splittedWinningNumbers)
-            .map(String::trim)
-            .map(Integer::parseInt)
-            .collect(Collectors.toList());
     }
 }
