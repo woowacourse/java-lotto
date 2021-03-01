@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.NullSource;
 
 import java.util.Arrays;
@@ -32,14 +31,6 @@ public class LottoTicketsTest {
         assertThatThrownBy(() -> {
             new LottoTickets(lottoTickets);
         }).isInstanceOf(NullPointerException.class).hasMessage("null 값은 허용하지 않습니다.");
-    }
-
-    @ParameterizedTest(name = "빈값은 생성자의 매개변수로 허용하지 않는다.")
-    @EmptySource
-    public void emptyParameterTest(List<LottoTicket> lottoTickets) {
-        assertThatThrownBy(() -> {
-            new LottoTickets(lottoTickets);
-        }).isInstanceOf(IllegalArgumentException.class).hasMessage("로또는 한장 이상 구매해야 합니다.");
     }
 
     @Test
