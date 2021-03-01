@@ -1,6 +1,6 @@
 package domain;
 
-public class Transaction {
+public class Wallet {
 
     private static final int LOTTO_TICKET_PRICE = 1000;
 
@@ -9,7 +9,7 @@ public class Transaction {
     private int autoQuantity;
     private final int original;
 
-    public Transaction(int deposit) {
+    public Wallet(int deposit) {
         validate(deposit);
         this.deposit = deposit;
         this.original = deposit;
@@ -19,17 +19,13 @@ public class Transaction {
         int totalPrice = LOTTO_TICKET_PRICE * count;
         if (deposit >= totalPrice) {
             deposit -= totalPrice;
-            manualQuantity += count;
+            manualQuantity = count;
         }
     }
 
-    public boolean buyAutoLotto() {
-        if (deposit < LOTTO_TICKET_PRICE) {
-            return false;
-        }
-        deposit -= LOTTO_TICKET_PRICE;
-        ++autoQuantity;
-        return true;
+    public int buyAutoLotto() {
+        autoQuantity = deposit / LOTTO_TICKET_PRICE;
+        return autoQuantity;
     }
 
     public double calculateTotalProfitRate(int totalProfit) {

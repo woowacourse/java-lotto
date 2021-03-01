@@ -1,5 +1,6 @@
 package view;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -24,12 +25,13 @@ public class InputView {
         return parseToInteger(receiveInput(RECEIVE_MANUAL_INPUT_COUNT));
     }
 
-    public static void printManualNumberMessage() {
+    public static List<List<Integer>> manualNumbers(final int manualCount) {
         System.out.println(RECEIVE_MANUAL_INPUT_NUMBERS);
-    }
-
-    public static List<Integer> manualNumbers() {
-        return createNumbers(SCANNER.nextLine().trim());
+        List<List<Integer>> manualNumbers = new ArrayList<>();
+        for (int i = 0; i < manualCount; ++i) {
+            manualNumbers.add(createNumbers(SCANNER.nextLine().trim()));
+        }
+        return manualNumbers;
     }
 
     public static List<Integer> winningNumbers() {

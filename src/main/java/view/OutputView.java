@@ -4,7 +4,9 @@ import domain.lotto.LottoNumber;
 import domain.lotto.LottoTicket;
 import domain.lotto.LottoTickets;
 import domain.rank.Rank;
-import domain.Transaction;
+import domain.Wallet;
+import domain.rank.Ranks;
+import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class OutputView {
@@ -15,11 +17,11 @@ public class OutputView {
     private static final String RANK_RESULT_FORMAT = "%d개 일치 %s(%d원) - %d개";
     private static final String BONUS_BALL_FORMAT = ", 보너스 볼 일치";
 
-    public static void transactionInfo(Transaction transaction) {
+    public static void transactionInfo(Wallet wallet) {
         System.out.println(
                 String.format(TICKET_QUANTITY_FORMAT,
-                        transaction.getManualQuantity(),
-                        transaction.getAutoQuantity())
+                        wallet.getManualQuantity(),
+                        wallet.getAutoQuantity())
         );
     }
 
@@ -36,9 +38,12 @@ public class OutputView {
         return "[" + numbers + "]";
     }
 
-    public static void resultTitle() {
+    public static void result(Ranks ranks) {
         System.out.println(WINNING_STATISTICS_TITLE);
         System.out.println(DIVIDER);
+        Arrays.stream(Rank.values())
+                .filter(rank -> !rank.equalsNothing())
+                .forEach(rank -> rankInfo(ranks.count(rank), rank));
     }
 
     public static void rankInfo(final int count, final Rank rank) {

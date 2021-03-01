@@ -3,7 +3,7 @@ package domain.lotto;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 
-import domain.Transaction;
+import domain.Wallet;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -21,8 +21,8 @@ class LottoTicketsTest {
     @Test
     void generateAuto_successful() {
         LottoTickets lottoTickets = new LottoTickets();
-        Transaction transaction = new Transaction(14000);
-        lottoTickets.generateAuto(transaction);
+        Wallet wallet = new Wallet(14000);
+        lottoTickets.generateAuto(wallet);
         assertThat(lottoTickets.toList().size()).isEqualTo(14);
     }
 

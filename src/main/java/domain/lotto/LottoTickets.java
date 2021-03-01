@@ -2,7 +2,7 @@ package domain.lotto;
 
 import domain.rank.Rank;
 import domain.rank.Ranks;
-import domain.Transaction;
+import domain.Wallet;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -22,8 +22,8 @@ public class LottoTickets {
                 .forEach(tickets::add);
     }
 
-    public void generateAuto(final Transaction transaction) {
-        while (transaction.buyAutoLotto()) {
+    public void generateAuto(final Wallet wallet) {
+        for (int i = 0; i < wallet.buyAutoLotto(); ++i) {
             tickets.add(LottoTicket.generateRandom());
         }
     }
