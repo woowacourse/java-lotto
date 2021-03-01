@@ -6,8 +6,6 @@ import lotto.service.LottoTicketsService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.io.Serializable;
-
 import static java.lang.Integer.parseInt;
 
 public class LottoController {
