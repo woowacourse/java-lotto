@@ -5,12 +5,12 @@ public class Money {
 
     private final int money;
 
-    public Money(String money) {
+    public Money(int money) {
         validateNumber(money);
-        this.money = Integer.parseInt(money);
+        this.money = money;
     }
 
-    public int countBuyLotto() {
+    public int totalCountOfPurchaseLotto() {
         return money / LOTTO_PRICE;
     }
 
@@ -18,11 +18,8 @@ public class Money {
         return profit / money;
     }
 
-    private void validateNumber(String money) {
-        if (!money.chars().allMatch(Character::isDigit)) {
-            throw new IllegalArgumentException("금액은 정수만 입력 가능합니다");
-        }
-        if (Integer.parseInt(money) < 1000) {
+    private void validateNumber(int money) {
+        if (money < LOTTO_PRICE) {
             throw new IllegalArgumentException("1000원 이상의 금액만 입력 가능합니다.");
         }
     }

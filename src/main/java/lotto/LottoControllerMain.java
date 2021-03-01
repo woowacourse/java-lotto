@@ -9,17 +9,26 @@ import java.util.List;
 public class LottoControllerMain {
     public static void main(String[] args) {
         Money money = new Money(InputView.inputMoney());
-        Lottos lottos = new Lottos(money.countBuyLotto());
+        PurchaseCount purchaseCount = new PurchaseCount(money.totalCountOfPurchaseLotto(), InputView.inputManualPurchaseCount());
 
-        OutputView.showBuyLotto(lottos.getLottos());
+        Lottos lottos = new Lottos();
+        InputView.inputManualPurChaseMessage();
 
-        List<Result> results = lottos.checkLottoResults(
-                new WinningNumber(InputView.winningNumbers()),
-                new BonusNumber(InputView.bonusNumber())
-        );
+        for (int i = 0; i < purchaseCount.getManualPurchaseCount(); i++) {
+            lottos.buyLotto(new LottoManualGenerator(), InputView.inputManualPurchase());
+        }
+
+        for (int i = 0; i < purchaseCount.getAutoPurchaseCount(); i++) {
+            lottos.buyLotto(new LottoAutoGenerator());
+        }
+
+        OutputView.showBuyLotto(lottos, purchaseCount);
+
+        WinningLotto winningLotto = new WinningLotto(new Lotto(InputView.winningNumbers()), new LottoNumber(InputView.bonusNumber()));
+        List<Result> results = winningLotto.getWinningResult(lottos);
 
         OutputView.resultMessage();
-        OutputView.result(Result.getResultValues(), new Statistics(results));
+        OutputView.result(new Statistics(results));
         OutputView.showTotalProfit(money.calculateProfitRate(Result.calculateProfit(results)));
     }
 }

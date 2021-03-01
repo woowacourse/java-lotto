@@ -1,37 +1,58 @@
 package lotto.view;
 
-import com.google.common.primitives.Ints;
-import lotto.domain.Lotto;
-import lotto.domain.Result;
-import lotto.domain.Statistics;
+import lotto.domain.*;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class OutputView {
+    private static final String SECOND = ", 보너스 볼 일치";
 
     private OutputView() {
     }
 
-    public static void showBuyLotto(List<Lotto> lottos) {
-        System.out.printf("%d개를 구매했습니다.\n", lottos.size());
+    public static void showBuyLotto(Lottos lottos, PurchaseCount purchaseCount) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", purchaseCount.getManualPurchaseCount(), purchaseCount.getAutoPurchaseCount());
         StringBuilder sb = new StringBuilder();
-        for (Lotto lotto : lottos) {
-            sb.append("[");
-            sb.append(Ints.join(", ", lotto.getLottoNumbers().stream().mapToInt(i -> i).toArray()));
-            sb.append("]\n");
-        }
+        showLottoNumbers(sb, lottos.getLottos());
         System.out.println(sb.toString());
     }
 
-    public static void result(List<Result> values,Statistics statistics) {
-        for (Result result : values) {
-            System.out.printf("%d개 일치%s(%d원)- %d개\n",
-                    result.getCount(),
-                    result.getBonus(),
-                    result.getPrize(),
-                    statistics.getStatic(result)
+    private static void showLottoNumbers(StringBuilder sb, List<Lotto> lottos) {
+        for (Lotto lotto : lottos) {
+            sb.append("[");
+            sb.append(lotto.getLottoNumbers().stream()
+                    .map(lottoNumber -> lottoNumber.getLottoNumber())
+                    .map(String::valueOf)
+                    .collect(Collectors.joining(", "))
             );
+            sb.append("]\n");
         }
+    }
+
+    public static void result(Statistics statistics) {
+        Arrays.stream(Result.values())
+                .filter(result -> !result.equals(Result.NONE))
+                .sorted(Comparator.comparingInt(Result::getCount))
+                .forEach(result ->
+                        System.out.printf(
+                                "%d개 일치%s(%d원)- %d개\n",
+                                result.getCount(),
+                                bonusMessage(result),
+                                result.getPrize(),
+                                statistics.getRankCount(result)
+                        )
+                );
+    }
+
+    private static String bonusMessage(Result result) {
+        String message = " ";
+        if (result == Result.SECOND) {
+            return SECOND;
+        }
+        return message;
     }
 
     public static void showTotalProfit(float profit) {
