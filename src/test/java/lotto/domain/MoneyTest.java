@@ -44,16 +44,11 @@ public class MoneyTest {
     }
 
     @Test
-    @DisplayName("당첨금액과 수익률 계산")
+    @DisplayName("수익률 계산")
     void calculateEarnings() {
         Map<Rank, Integer> sampleCount = new HashMap<>();
         sampleCount.put(Rank.FIFTH, 1);
         Money money = new Money("14000");
-
-        money.findEarning(sampleCount);
-        assertThat(Money.getEarning()).isEqualTo(5000);
-
-        String earningRate = Money.findEarningRate();
-        assertThat(earningRate).isEqualTo("0.36");
+        assertThat(money.findEarningRate(sampleCount)).isEqualTo("0.36");
     }
 }

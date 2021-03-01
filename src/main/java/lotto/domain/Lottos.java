@@ -17,8 +17,7 @@ public class Lottos {
     }
 
     public static String findResult(Map<Rank, Integer> countByRank) {
-        Money.findEarning(countByRank);
-        return Money.findEarningRate();
+        return Money.findEarningRate(countByRank);
     }
 
     private int validateManualCount(String inputManual, int totalCount) {

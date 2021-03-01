@@ -9,7 +9,6 @@ public class Money {
     private static final String FORMAT = "%.2f";
     private static final int THOUSAND = 1000;
     private static int money;
-    private static int earning;
 
     public Money(String input) {
         int inputMoney = changeToInt(input);
@@ -18,21 +17,18 @@ public class Money {
         money = inputMoney;
     }
 
-    public static void findEarning(Map<Rank, Integer> countByRank) {
-        int sumOfPrize = 0;
-        for (Map.Entry<Rank, Integer> singleCount : countByRank.entrySet()) {
-            sumOfPrize += singleCount.getKey().getPrize() * singleCount.getValue();
-        }
-        earning = sumOfPrize;
-    }
-
-    public static String findEarningRate() {
+    public static String findEarningRate(Map<Rank, Integer> countByRank) {
+        int earning = findEarning(countByRank);
         double earningRate = (double) earning / (double) money;
         return String.format(FORMAT, earningRate);
     }
 
-    public static int getEarning() {
-        return earning;
+    private static int findEarning(Map<Rank, Integer> countByRank) {
+        int sumOfPrize = 0;
+        for (Map.Entry<Rank, Integer> singleCount : countByRank.entrySet()) {
+            sumOfPrize += singleCount.getKey().getPrize() * singleCount.getValue();
+        }
+        return sumOfPrize;
     }
 
     private int changeToInt(String input) {
