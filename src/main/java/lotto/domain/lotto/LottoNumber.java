@@ -3,7 +3,7 @@ package lotto.domain.lotto;
 import java.util.Objects;
 import lotto.utils.NumericStringValidator;
 
-public class LottoNumber {
+public final class LottoNumber {
 
     public static final int MINIMUM_VALUE = 1;
     public static final int MAXIMUM_VALUE = 45;
@@ -11,10 +11,15 @@ public class LottoNumber {
     private final int number;
 
     public LottoNumber(int number) {
-        if (number < MINIMUM_VALUE || MAXIMUM_VALUE < number) {
-            throw new IllegalArgumentException("로또의 번호는 1이상 45이하의 정수여야 합니다.");
+        if (outOfRange(number)) {
+            throw new IllegalArgumentException(
+                    String.format("로또의 번호는 %d 이상 %d 이하의 정수여야 합니다.", MINIMUM_VALUE, MAXIMUM_VALUE));
         }
         this.number = number;
+    }
+
+    private boolean outOfRange(int number) {
+        return number < MINIMUM_VALUE || MAXIMUM_VALUE < number;
     }
 
     private LottoNumber(String numberValue) {
@@ -29,11 +34,12 @@ public class LottoNumber {
 
     private static void validateNumeric(String input) {
         if (!NumericStringValidator.isValid(input)) {
-            throw new NumberFormatException("로또의 번호는 1이상 45이하의 정수여야 합니다.");
+            throw new IllegalArgumentException(
+                    String.format("로또의 번호는 %d 이상 %d 이하의 정수여야 합니다.", MINIMUM_VALUE, MAXIMUM_VALUE));
         }
     }
 
-    public int toInt() {
+    public Integer toInteger() {
         return number;
     }
 

@@ -4,12 +4,21 @@ import java.math.BigInteger;
 import java.util.Objects;
 import lotto.utils.NumericStringValidator;
 
-public class Money {
+public final class Money {
+
+    private static final BigInteger MINIMUM_AMOUNT = BigInteger.valueOf(0);
 
     private final BigInteger amount;
 
     public Money(BigInteger amount) {
+        validateGreaterThanMinimumAmount(amount);
         this.amount = amount;
+    }
+
+    private void validateGreaterThanMinimumAmount(BigInteger amount) {
+        if (amount.compareTo(MINIMUM_AMOUNT) < 0) {
+            throw new IllegalArgumentException(String.format("구입금액은 %d 이상의 정수여야합니다.", MINIMUM_AMOUNT));
+        }
     }
 
     public static Money valueOf(String amountValue) {
@@ -19,8 +28,12 @@ public class Money {
 
     private static void validateNumeric(String input) {
         if (!NumericStringValidator.isValid(input)) {
-            throw new NumberFormatException("구입금액은 0 이상의 정수여야합니다.");
+            throw new IllegalArgumentException(String.format("구입금액은 %d 이상의 정수여야합니다.", MINIMUM_AMOUNT));
         }
+    }
+
+    public Money subtract(BigInteger value) {
+        return new Money(this.amount.subtract(value));
     }
 
     public BigInteger toBigInteger() {

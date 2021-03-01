@@ -14,20 +14,18 @@ public class ResultView {
     public static void printResult(Result result) {
         Map<Rank, Integer> resultMap = result.getResultMap();
 
-        System.out.println("당첨 통계");
+        System.out.println("\n당첨 통계");
         System.out.println("---------");
 
         printResultMap(resultMap);
 
-        System.out.printf("총 수익률은 %s%%입니다.%n", result.getEarningRate());
+        System.out.printf("총 수익률은 %s%%입니다.\n", result.getEarningRate());
     }
 
     private static void printResultMap(Map<Rank, Integer> resultMap) {
         Arrays.stream(Rank.values())
                 .filter(rank -> !Rank.UNRANKED.equals(rank))
-                .forEach(rank -> {
-                    printResultPerRank(resultMap, rank);
-                });
+                .forEach(rank -> printResultPerRank(resultMap, rank));
     }
 
     private static void printResultPerRank(Map<Rank, Integer> resultMap, Rank rank) {

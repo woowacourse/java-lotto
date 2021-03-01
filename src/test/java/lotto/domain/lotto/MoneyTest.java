@@ -5,15 +5,25 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.math.BigInteger;
 import java.util.stream.Stream;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class MoneyTest {
 
+    @Test
+    @DisplayName("생성 실패 - 0 미만")
+    void construct_fail() {
+        assertThatThrownBy(() -> new Money(BigInteger.valueOf(-1)))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
     @ParameterizedTest
+    @DisplayName("valueOf 성공")
     @MethodSource("valueOf_success_testcase")
     void valueOf_success(String input, BigInteger expected) {
         assertThat(Money.valueOf(input).toBigInteger()).isEqualTo(expected);
@@ -28,18 +38,40 @@ class MoneyTest {
     }
 
     @ParameterizedTest
+    @DisplayName("최소값인 0보다 작은 값은 생성 불가")
     @ValueSource(strings = {"a", "-1", "1.0"})
     void valueOf_fail(String input) {
         assertThatThrownBy(() -> Money.valueOf(input))
                 .hasMessage("구입금액은 0 이상의 정수여야합니다.")
-                .isInstanceOf(NumberFormatException.class);
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    void equals() {
-        Money money1 = new Money(new BigInteger("1"));
-        Money money2 = new Money(new BigInteger("1"));
+    @DisplayName("subtract한 값만큼 amount가 감소된 새로운 객체 반환")
+    void subtract() {
+        Money money = new Money(BigInteger.ONE);
+
+        assertThat(money.subtract(BigInteger.ONE))
+                .isEqualTo(new Money(BigInteger.ZERO));
+    }
+
+    @Test
+    @DisplayName("subtract한 값이 최소값인 0보다 작다면 예외 발생")
+    void subtract_fail() {
+        Money zeroMoney = new Money(BigInteger.ZERO);
+
+        assertThatThrownBy(() -> zeroMoney.subtract(BigInteger.ONE))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
+    @DisplayName("값 객체 비교")
+    @CsvSource(value = {"0", "1000000000000000000000"})
+    void equals(String input) {
+        Money money1 = new Money(new BigInteger(input));
+        Money money2 = new Money(new BigInteger(input));
 
         assertThat(money1).isEqualTo(money2);
+        assertThat(money1).hasSameHashCodeAs(money2);
     }
 }

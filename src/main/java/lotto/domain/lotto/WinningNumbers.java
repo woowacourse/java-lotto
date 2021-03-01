@@ -1,6 +1,6 @@
 package lotto.domain.lotto;
 
-public class WinningNumbers {
+public final class WinningNumbers {
 
     private final LottoTicket lottoTicket;
     private final LottoNumber bonusBall;
@@ -10,7 +10,7 @@ public class WinningNumbers {
         LottoNumber bonusBall = LottoNumber.valueOf(bonusBallValue);
 
         if (lottoTicket.contains(bonusBall)) {
-            throw new RuntimeException();
+            throw new IllegalArgumentException("당첨번호와 보너스볼은 중복되지 않아야 합니다");
         }
 
         this.lottoTicket = lottoTicket;

@@ -20,27 +20,28 @@ class LottoTicketTest {
     @MethodSource("invalidList_testcase")
     void fail_invalidList(List<LottoNumber> lottoNumbers) {
         assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
-                .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     private static Stream<Arguments> invalidList_testcase() {
         return Stream.of(
                 Arguments.of(Collections.emptyList()),
-                Arguments.of(makeLottoNumber(1, 2, 3, 4, 5)),
-                Arguments.of(makeLottoNumber(1, 2, 3, 4, 5, 6, 7)),
-                Arguments.of(makeLottoNumber(1, 2, 3, 4, 5, 5))
+                Arguments.of(makeLottoNumbers(1, 2, 3, 4, 5)),
+                Arguments.of(makeLottoNumbers(1, 2, 3, 4, 5, 6, 7)),
+                Arguments.of(makeLottoNumbers(1, 2, 3, 4, 5, 5)),
+                Arguments.of(makeLottoNumbers(1, 2, 3, 4, 5, 5, 6))
         );
     }
 
     @ParameterizedTest
     @DisplayName("수정 불가 리스트로 반환")
-    @MethodSource("testcase")
+    @MethodSource("toUnmodifiableList_testcase")
     void toUnmodifiableList(ThrowingCallable throwingCallable) {
         assertThatThrownBy(throwingCallable)
                 .isInstanceOf(UnsupportedOperationException.class);
     }
 
-    private static Stream<Arguments> testcase() {
+    private static Stream<Arguments> toUnmodifiableList_testcase() {
         List<LottoNumber> lottoNumbers = new LottoTicket("1,2,3,4,5,6").toUnmodifiableList();
         LottoNumber lottoNumber = new LottoNumber(7);
 
@@ -52,7 +53,7 @@ class LottoTicketTest {
         );
     }
 
-    private static List<LottoNumber> makeLottoNumber(int... ints) {
+    private static List<LottoNumber> makeLottoNumbers(int... ints) {
         return Arrays.stream(ints).boxed()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
