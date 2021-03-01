@@ -6,6 +6,8 @@ import lotto.service.LottoTicketsService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.io.Serializable;
+
 import static java.lang.Integer.parseInt;
 
 public class LottoController {
@@ -18,7 +20,8 @@ public class LottoController {
 
     public void start() {
         Money money = initMoney();
-        Money totalMoney = money;
+        Money totalMoney = new Money(money);
+
         LottoTickets lottoTickets = initTickets(money);
 
         LottoTicket lottoWinnerTicket = initoWinnerTicket();
@@ -46,14 +49,18 @@ public class LottoController {
 
     private LottoTickets initTickets(Money money) {
         LottoTickets manualLottoTickets = initManualTickets(money);
-        LottoTickets autoLottoTickets = lottoTicketsGenerator.create(money);
+        LottoTickets autoLottoTickets = initAutoTickets(money);
         OutputView.printHowManyTicketsBought(manualLottoTickets.size(), autoLottoTickets.size());
         LottoTickets mergedLottoTickets = manualLottoTickets.merge(autoLottoTickets);
         OutputView.printTickets(mergedLottoTickets);
         return mergedLottoTickets;
     }
 
-    public LottoTickets initManualTickets(Money money) {
+    private LottoTickets initAutoTickets(Money money) {
+        return lottoTicketsGenerator.create(money);
+    }
+
+    private LottoTickets initManualTickets(Money money) {
         OutputView.askHowManyManualTicketsToBuy();
         try {
             int manualTicketsCount = Integer.parseInt(InputView.getInput());

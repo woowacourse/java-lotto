@@ -18,6 +18,10 @@ public class Money {
         this.money = integerMoney;
     }
 
+    public Money(final Money originalMoney){
+        this.money = originalMoney.getMoney();
+    }
+
     public int ticketCount() {
         return this.money / LOTTO_PRICE;
     }
