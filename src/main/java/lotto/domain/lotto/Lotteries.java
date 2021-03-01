@@ -18,8 +18,8 @@ public class Lotteries {
         }
     }
 
-    public void addLottoByManual(final Lotto lotto) {
-        lottos.add(lotto);
+    public void addLottoByManual(final List<Lotto> lottos) {
+        this.lottos.addAll(lottos);
     }
 
     public RatingInfo scratchLotto(final WinningLotto winningLotto) {

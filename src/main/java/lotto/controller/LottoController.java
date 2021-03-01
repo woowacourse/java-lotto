@@ -1,5 +1,7 @@
 package lotto.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import lotto.domain.EarningRate;
 import lotto.domain.Ticket;
 import lotto.domain.lotto.Lotto;
@@ -64,10 +66,12 @@ public class LottoController {
         final Lotteries lotteries = new Lotteries();
 
         OutputView.getMessage(InputView.INPUT_MANUAL_BUY_NUMBERS_MESSAGE);
+        final List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             final Lotto lotto = manualBuyLotto();
-            lotteries.addLottoByManual(lotto);
+            lottos.add(lotto);
         }
+        lotteries.addLottoByManual(lottos);
         return lotteries;
     }
 

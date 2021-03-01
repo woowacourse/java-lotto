@@ -3,6 +3,7 @@ package lotto.domain.lotto;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import lotto.domain.Money;
 import lotto.domain.Ticket;
@@ -37,7 +38,8 @@ public class LotteriesTest {
     void compareLottoByManual() {
         final List<Integer> expected = Arrays.asList(1, 2, 3, 4, 5, 6);
         final Lotteries lotteries = new Lotteries();
-        lotteries.addLottoByManual(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        lotteries.addLottoByManual(
+            Collections.singletonList(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6))));
         assertThat(lotteries.toList().get(0).getNumbers()).isEqualTo(expected);
     }
 
