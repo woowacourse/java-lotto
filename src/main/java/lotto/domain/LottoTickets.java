@@ -28,10 +28,6 @@ public class LottoTickets {
         return this.lottoTickets;
     }
 
-    public void addAll(LottoTickets lottoTicketsToAdd) {
-        lottoTickets.addAll(lottoTicketsToAdd.getTickets());
-    }
-
     public int size() {
         return lottoTickets.size();
     }
