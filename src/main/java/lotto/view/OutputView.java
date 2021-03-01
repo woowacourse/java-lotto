@@ -11,7 +11,8 @@ import lotto.domain.ticket.LottoTickets;
 
 public class OutputView {
     public void printAllLottoTickets(PurchaseInfo purchaseInfo, LottoTickets lottoTickets) {
-        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", purchaseInfo.getPurchaseManualCount(), purchaseInfo.getPurchaseAutoCount());
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", purchaseInfo.getPurchaseManualCount(),
+            purchaseInfo.getPurchaseAutoCount());
         lottoTickets.getLottoTickets().forEach(lottoTicket ->
             System.out.println(Arrays.toString(lottoTicket.getLottoNumbers().toArray()))
         );

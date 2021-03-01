@@ -5,9 +5,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import lotto.domain.number.LottoNumberFactory;
 import lotto.domain.ticket.LottoTicket;
 import lotto.domain.ticket.LottoTickets;
-import lotto.domain.number.LottoNumberFactory;
 
 public class AutoLottoMachine {
     private static final int FROM_INDEX = 0;
