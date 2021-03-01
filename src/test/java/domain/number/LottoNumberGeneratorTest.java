@@ -10,23 +10,6 @@ import java.util.List;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 public class LottoNumberGeneratorTest {
-    class OrderLottoNumberGenerator implements LottoNumberGenerator {
-
-        @Override
-        public List<List<Integer>> createLottoNumberBundle(int quantity) {
-            List<List<Integer>> lottoNumberBundle = new ArrayList<>();
-            for (int i = 0; i < quantity; i++) {
-                lottoNumberBundle.add(createLottoNumber());
-            }
-            return lottoNumberBundle;
-        }
-
-        @Override
-        public List<Integer> createLottoNumber() {
-            return Arrays.asList(1, 2, 3, 4, 5, 6);
-        }
-    }
-
     @DisplayName("createLottoNumberBundle 정상 동작 테스트")
     @Test
     void CreateLottoNumberBundleTest() {
@@ -50,5 +33,22 @@ public class LottoNumberGeneratorTest {
         final List<Integer> lottoNumber = lottoNumberGenerator.createLottoNumber();
         //Then
         assertThat(lottoNumber).isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
+    }
+
+    class OrderLottoNumberGenerator implements LottoNumberGenerator {
+
+        @Override
+        public List<List<Integer>> createLottoNumberBundle(int quantity) {
+            List<List<Integer>> lottoNumberBundle = new ArrayList<>();
+            for (int i = 0; i < quantity; i++) {
+                lottoNumberBundle.add(createLottoNumber());
+            }
+            return lottoNumberBundle;
+        }
+
+        @Override
+        public List<Integer> createLottoNumber() {
+            return Arrays.asList(1, 2, 3, 4, 5, 6);
+        }
     }
 }

@@ -8,5 +8,6 @@ public interface LottoNumberGenerator {
     int LOTTO_BALLS_IN_LOTTO = 6;
 
     List<List<Integer>> createLottoNumberBundle(final int quantity);
+
     List<Integer> createLottoNumber();
 }

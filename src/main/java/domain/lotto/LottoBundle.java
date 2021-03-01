@@ -24,7 +24,7 @@ public class LottoBundle {
         final Map<LottoRank, Integer> lottoResult = new HashMap<>();
         for (Lotto lotto : this.lottoBundle) {
             LottoRank lottoRank = checkSingleLottoRank(lotto, winningResult);
-            lottoResult.put(lottoRank, lottoResult.getOrDefault(lottoRank, 0 ) + 1);
+            lottoResult.put(lottoRank, lottoResult.getOrDefault(lottoRank, 0) + 1);
         }
         return new LottoResult(lottoResult);
     }
