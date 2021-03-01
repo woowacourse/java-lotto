@@ -1,5 +1,6 @@
 package view;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -21,7 +22,25 @@ public class InputView {
         }
     }
 
-    public static List<Integer> getWinningLotto() {
+    public static int getManualLottoAmount() {
+        try {
+            final String userInput = scanner.nextLine();
+            return Integer.parseInt(userInput);
+        } catch (NumberFormatException e) {
+            OutputView.printErrorMessage("자연수만 입력 가능합니다.");
+            return getManualLottoAmount();
+        }
+    }
+
+    public static List<List<Integer>> getManualLotto(final int manualLottoAmount) {
+        final List<List<Integer>> manualLottoNumber = new ArrayList<>();
+        for (int i = 0; i < manualLottoAmount; i++) {
+            manualLottoNumber.add(getLotto());
+        }
+        return manualLottoNumber;
+    }
+
+    public static List<Integer> getLotto() {
         try {
             final String userInput = scanner.nextLine();
             return Arrays.stream(userInput.split(","))
@@ -29,7 +48,7 @@ public class InputView {
                     .collect(Collectors.toList());
         } catch (NumberFormatException e) {
             OutputView.printErrorMessage(", 를 사용하여 구분되게 입력해 주세요");
-            return getWinningLotto();
+            return getLotto();
         }
     }
 

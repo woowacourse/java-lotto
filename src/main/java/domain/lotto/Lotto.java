@@ -3,15 +3,28 @@ package domain.lotto;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Lotto {
     private static final int LOTTO_BALLS_NUMBER = 6;
 
     private final List<LottoBall> lotto;
 
-    public Lotto(final List<LottoBall> lotto) {
+    private Lotto(final List<LottoBall> lotto) {
         validateLotto(lotto);
         this.lotto = new ArrayList<>(lotto);
+    }
+
+    public static Lotto of(final List<Integer> lottoNumber) {
+        return new Lotto(lottoNumber.stream()
+                .sorted()
+                .map(number -> LottoBall.valueOf(number))
+                .collect(Collectors.toList()));
+    }
+
+    public static int getLottoBallsNumber() {
+        return LOTTO_BALLS_NUMBER;
     }
 
     private void validateLotto(final List<LottoBall> lotto) {
@@ -45,5 +58,18 @@ public class Lotto {
 
     public List<LottoBall> getLotto() {
         return Collections.unmodifiableList(lotto);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto1 = (Lotto) o;
+        return Objects.equals(lotto, lotto1.lotto);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lotto);
     }
 }

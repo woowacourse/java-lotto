@@ -3,6 +3,7 @@ package view;
 import domain.lotto.Lotto;
 import domain.lotto.LottoBundle;
 import domain.result.LottoRank;
+import domain.result.LottoResult;
 
 import java.util.List;
 import java.util.Map;
@@ -11,7 +12,9 @@ import java.util.stream.Collectors;
 public class OutputView {
     private static final String ERROR_INDICATOR = "[ERROR] ";
     private static final String GAME_MONEY_REQUEST = "구입금액을 입력해 주세요.";
-    private static final String LOTTO_BOUGHT_STATUS = "%d개를 구매했습니다.";
+    private static final String MANUAL_LOTTO_AMOUNT_REQUEST = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String MANUAL_LOTTO_REQUEST = "수동으로 구매할 번호를 입력해 주세요.";
+    private static final String LOTTO_BOUGHT_STATUS = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
     private static final String LOTTO_BOUGHT_PRINT_PREFIX = "[";
     private static final String LOTTO_BOUGHT_PRINT_DELIMITER = ", ";
     private static final String LOTTO_BOUGHT_PRINT_POSTFIX = "]";
@@ -19,11 +22,11 @@ public class OutputView {
     private static final String BONUS_BALL_REQUEST = "보너스 볼을 입력해 주세요.";
     private static final String LOTTO_RESULT_STATUS = "당첨 통계";
     private static final String LOTTO_RESULT_LINE = "---------";
-    private static final String LOTTO_RESULT_THREE_MATCH = "3개 일치 (5000원)- %d개";
-    private static final String LOTTO_RESULT_FOUR_MATCH = "4개 일치 (50000원)- %d개";
-    private static final String LOTTO_RESULT_FIVE_MATCH = "5개 일치 (1500000원)- %d개";
-    private static final String LOTTO_RESULT_FIVE_AND_BONUS_MATCH = "5개 일치, 보너스 볼 일치(30000000원) - %d개";
-    private static final String LOTTO_RESULT_SIX_MATCH = "6개 일치 (2000000000원)- %d개";
+    private static final String LOTTO_RESULT_FIFTH_PRIZE = "3개 일치 (5000원)- %d개";
+    private static final String LOTTO_RESULT_FOURTH_PRIZE = "4개 일치 (50000원)- %d개";
+    private static final String LOTTO_RESULT_THIRD_PRIZE = "5개 일치 (1500000원)- %d개";
+    private static final String LOTTO_RESULT_SECOND_PRIZE = "5개 일치, 보너스 볼 일치(30000000원) - %d개";
+    private static final String LOTTO_RESULT_FIRST_PRIZE = "6개 일치 (2000000000원)- %d개";
     private static final String PROFIT_RATE_FORMAT = "총 수익률은 %.2f입니다.";
 
     private OutputView() {
@@ -37,21 +40,36 @@ public class OutputView {
         System.out.println(GAME_MONEY_REQUEST);
     }
 
-    public static void printLottoBought(final LottoBundle lottoBundle) {
-        printNumberOfLottoBought(lottoBundle);
-        for (Lotto lotto : lottoBundle.getLottoBundle()) {
-            printSingleLottoBought(lotto);
+    public static void printManualLottoAmountRequest() {
+        printNewLine();
+        System.out.println(MANUAL_LOTTO_AMOUNT_REQUEST);
+    }
+
+    public static void printManualLottoRequest() {
+        printNewLine();
+        System.out.println(MANUAL_LOTTO_REQUEST);
+    }
+
+    public static void printLottoBought(final LottoBundle manualLottoBundle, final LottoBundle autoLottoBundle) {
+        printNumberOfLottoBought(manualLottoBundle, autoLottoBundle);
+        for (Lotto manualLotto : manualLottoBundle.getLottoBundle()) {
+            printSingleLottoBought(manualLotto);
+        }
+        for (Lotto autoLotto : autoLottoBundle.getLottoBundle()) {
+            printSingleLottoBought(autoLotto);
         }
         printNewLine();
     }
 
-    private static void printNumberOfLottoBought(final LottoBundle lottoBundle) {
-        final int lottoBoughtNumber = lottoBundle.countNumberOfLotto();
-        System.out.println(String.format(LOTTO_BOUGHT_STATUS, lottoBoughtNumber));
+    private static void printNumberOfLottoBought(final LottoBundle manualLottoBundle, final LottoBundle autoLottoBundle) {
+        final int manualLottoBought = manualLottoBundle.countNumberOfLotto();
+        final int autoLottoBought = autoLottoBundle.countNumberOfLotto();
+        printNewLine();
+        System.out.println(String.format(LOTTO_BOUGHT_STATUS, manualLottoBought, autoLottoBought));
     }
 
     private static void printSingleLottoBought(final Lotto lotto) {
-        List<String> singleLottoBought = lotto.getLotto()
+        final List<String> singleLottoBought = lotto.getLotto()
                 .stream()
                 .map(lottoBall -> String.valueOf(lottoBall.getNumber()))
                 .collect(Collectors.toList());
@@ -70,15 +88,19 @@ public class OutputView {
         System.out.println(BONUS_BALL_REQUEST);
     }
 
-    public static void printLottoResult(final Map<LottoRank, Integer> lottoResult) {
+    public static void printLottoResult(final LottoResult lottoResult) {
         printNewLine();
         System.out.println(LOTTO_RESULT_STATUS);
         System.out.println(LOTTO_RESULT_LINE);
-        System.out.println(String.format(LOTTO_RESULT_THREE_MATCH, lottoResult.get(LottoRank.THREE_MATCHES)));
-        System.out.println(String.format(LOTTO_RESULT_FOUR_MATCH, lottoResult.get(LottoRank.FOUR_MATCHES)));
-        System.out.println(String.format(LOTTO_RESULT_FIVE_MATCH, lottoResult.get(LottoRank.FIVE_MATCHES)));
-        System.out.println(String.format(LOTTO_RESULT_FIVE_AND_BONUS_MATCH, lottoResult.get(LottoRank.FIVE_AND_BONUS_MATCHES)));
-        System.out.println(String.format(LOTTO_RESULT_SIX_MATCH, lottoResult.get(LottoRank.SIX_MATCHES)));
+        printLottoRankResult(lottoResult.getLottoResult());
+    }
+
+    private static void printLottoRankResult(final Map<LottoRank, Integer> lottoRank) {
+        System.out.println(String.format(LOTTO_RESULT_FIFTH_PRIZE, lottoRank.getOrDefault(LottoRank.FIFTH_PRIZE, 0)));
+        System.out.println(String.format(LOTTO_RESULT_FOURTH_PRIZE, lottoRank.getOrDefault(LottoRank.FOURTH_PRIZE, 0)));
+        System.out.println(String.format(LOTTO_RESULT_THIRD_PRIZE, lottoRank.getOrDefault(LottoRank.THIRD_PRIZE, 0)));
+        System.out.println(String.format(LOTTO_RESULT_SECOND_PRIZE, lottoRank.getOrDefault(LottoRank.SECOND_PRIZE, 0)));
+        System.out.println(String.format(LOTTO_RESULT_FIRST_PRIZE, lottoRank.getOrDefault(LottoRank.FIRST_PRIZE, 0)));
     }
 
     public static void printProfitRate(final double profitRate) {

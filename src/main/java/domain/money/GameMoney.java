@@ -1,8 +1,5 @@
 package domain.money;
 
-import domain.lotto.LottoBundle;
-import util.LottoGenerator;
-
 import java.math.BigDecimal;
 
 public class GameMoney {
@@ -10,28 +7,37 @@ public class GameMoney {
 
     private BigDecimal gameMoney;
 
-    public GameMoney(int gameMoney) {
+    public GameMoney(final int gameMoney) {
         validateBudget(gameMoney);
         this.gameMoney = new BigDecimal(gameMoney);
     }
 
-    private void validateBudget(int gameMoney) {
+    public static int getSingleLottoPrice() {
+        return SINGLE_LOTTO_GAME_MONEY;
+    }
+
+    private void validateBudget(final int gameMoney) {
         if (gameMoney < SINGLE_LOTTO_GAME_MONEY) {
             throw new IllegalArgumentException("게임에는 최소 " + SINGLE_LOTTO_GAME_MONEY + "원이 필요합니다.");
         }
     }
 
-    public LottoBundle buyLotto() {
-        final int numberOfLottoToBuy = gameMoney.divide(new BigDecimal(SINGLE_LOTTO_GAME_MONEY)).intValue();
-        calculateGameMoneyLeft(numberOfLottoToBuy);
-
-        final LottoBundle lottoBundle = LottoGenerator.createRandomLottoBundle(numberOfLottoToBuy);
-        return lottoBundle;
+    public void checkManualBuyingAvailable(final int quantity) {
+        if (quantity < 0 || checkMaxLottoAvailable() < quantity) {
+            throw new IllegalArgumentException("구입할 수 없는 수량입니다.");
+        }
     }
 
-    private void calculateGameMoneyLeft(int numberOfLottoToBuy) {
-        final BigDecimal lottoBuyingMoney = new BigDecimal(numberOfLottoToBuy * SINGLE_LOTTO_GAME_MONEY);
+    public int checkMaxLottoAvailable() {
+        return gameMoney.divide(new BigDecimal(SINGLE_LOTTO_GAME_MONEY)).intValue();
+    }
+
+    public void buyLotto(final int number) {
+        final BigDecimal lottoBuyingMoney = new BigDecimal(number * SINGLE_LOTTO_GAME_MONEY);
         final BigDecimal gameMoneyLeft = gameMoney.subtract(lottoBuyingMoney);
+        if (gameMoneyLeft.intValue() < 0) {
+            throw new IllegalArgumentException("돈이 부족합니다.");
+        }
         gameMoney = gameMoneyLeft;
     }
 }
