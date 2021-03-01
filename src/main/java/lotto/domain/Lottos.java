@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -57,8 +58,12 @@ public class Lottos {
         return wins;
     }
 
-    public ArrayList<Lotto> getLottoGroup() {
-        return this.lottoGroup;
+    public ArrayList<ArrayList<Integer>> changeFormat() {
+        ArrayList<ArrayList<Integer>> displayFormat = new ArrayList<>();
+        for (Lotto lotto : lottoGroup) {
+            displayFormat.add(lotto.changeToList());
+        }
+        return displayFormat;
     }
 
     public void addManualLotto(Lotto lotto) {

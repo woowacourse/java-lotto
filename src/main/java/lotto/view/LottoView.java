@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Rank;
 
@@ -44,9 +43,8 @@ public class LottoView {
     }
 
     public static void displayLottoGroup(Lottos lottos) {
-        ArrayList<Lotto> lottoGroup = lottos.getLottoGroup();
-        for (Lotto lotto : lottoGroup) {
-            System.out.print(lotto.changeToList() + CHANGE_LINE);
+        for (ArrayList<Integer> lotto : lottos.changeFormat()) {
+            System.out.print(lotto + CHANGE_LINE);
         }
     }
 
