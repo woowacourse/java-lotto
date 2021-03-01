@@ -10,8 +10,15 @@ import static java.lang.Integer.parseInt;
 
 public class LottoController {
 
+    private final LottoTicketsGenerator lottoTicketsGenerator;
+
+    public LottoController(LottoTicketsGenerator lottoTicketsGenerator) {
+        this.lottoTicketsGenerator = lottoTicketsGenerator;
+    }
+
     public void start() {
         Money money = initMoney();
+        Money totalMoney = money;
         LottoTickets lottoTickets = initTickets(money);
 
         LottoTicket lottoWinnerTicket = initoWinnerTicket();
@@ -22,7 +29,7 @@ public class LottoController {
         LottoResultStatistics lottoResultStatistics =
                 LottoResultStatistics.apply(lottoTickets, lottoWinner);
         OutputView.printStatistics(lottoResultStatistics);
-        OutputView.printFinalResult(lottoResultStatistics, money);
+        OutputView.printFinalResult(lottoResultStatistics, totalMoney);
     }
 
     private Money initMoney() {
@@ -39,7 +46,7 @@ public class LottoController {
 
     private LottoTickets initTickets(Money money) {
         LottoTickets manualLottoTickets = initManualTickets(money);
-        LottoTickets autoLottoTickets = LottoTicketsService.createRandomTickets(money);
+        LottoTickets autoLottoTickets = lottoTicketsGenerator.create(money);
         OutputView.printHowManyTicketsBought(manualLottoTickets.size(), autoLottoTickets.size());
         LottoTickets mergedLottoTickets = manualLottoTickets.merge(autoLottoTickets);
         OutputView.printTickets(mergedLottoTickets);
