@@ -56,14 +56,14 @@ public class LottoController {
 
     private void generateLotto(final Lotteries lotteries, final Ticket ticket) {
         generateManualLottoNumbers(ticket.getManualCount(), lotteries);
-        lotteries.generateLottoByTicket(new RandomLottoMachine(), ticket.getAutoCount());
+        lotteries.addLottoByTicket(new RandomLottoMachine(), ticket.getAutoCount());
     }
 
     private void generateManualLottoNumbers(final int count, final Lotteries lotteries) {
         OutputView.getMessage(InputView.INPUT_MANUAL_BUY_NUMBERS_MESSAGE);
         for (int i = 0; i < count; i++) {
             Lotto lotto = manualBuyLotto();
-            lotteries.generateLottoByManual(lotto);
+            lotteries.addLottoByManual(lotto);
         }
     }
 

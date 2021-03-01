@@ -12,13 +12,13 @@ public class Lotteries {
 
     private final List<Lotto> lottos = new ArrayList<>();
 
-    public void generateLottoByTicket(final LottoMachine lottoMachine, final int ticketCount) {
+    public void addLottoByTicket(final LottoMachine lottoMachine, final int ticketCount) {
         for (int i = 0; i < ticketCount; i++) {
             lottos.add(Lotto.from(lottoMachine.generate()));
         }
     }
 
-    public void generateLottoByManual(final Lotto lotto) {
+    public void addLottoByManual(final Lotto lotto) {
         lottos.add(lotto);
     }
 

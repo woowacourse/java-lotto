@@ -17,9 +17,9 @@ public class LotteriesTest {
 
     @Test
     @DisplayName("티켓 개수만큼 로또 생성")
-    void generateLottoByTicket() {
+    void addLottoByTicket() {
         final Lotteries lotteries = new Lotteries();
-        lotteries.generateLottoByTicket(new RandomLottoMachine(), 5);
+        lotteries.addLottoByTicket(new RandomLottoMachine(), 5);
         assertThat(lotteries.toList().size()).isEqualTo(5);
     }
 
@@ -28,7 +28,7 @@ public class LotteriesTest {
     void compareLottoByTicket() {
         final List<Integer> expected = Arrays.asList(1, 2, 3, 4, 5, 6);
         final Lotteries lotteries = new Lotteries();
-        lotteries.generateLottoByTicket(() -> expected, 5);
+        lotteries.addLottoByTicket(() -> expected, 5);
         assertThat(lotteries.toList().get(0).getNumbers()).isEqualTo(expected);
     }
 
@@ -37,7 +37,7 @@ public class LotteriesTest {
     void compareLottoByManual() {
         final List<Integer> expected = Arrays.asList(1, 2, 3, 4, 5, 6);
         final Lotteries lotteries = new Lotteries();
-        lotteries.generateLottoByManual(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        lotteries.addLottoByManual(Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)));
         assertThat(lotteries.toList().get(0).getNumbers()).isEqualTo(expected);
     }
 
@@ -48,7 +48,7 @@ public class LotteriesTest {
         final Ticket ticket = new Ticket(new Money(2000));
 
         lotteries
-            .generateLottoByTicket(() -> Arrays.asList(1, 2, 3, 4, 5, 6), ticket.getTotalCount());
+            .addLottoByTicket(() -> Arrays.asList(1, 2, 3, 4, 5, 6), ticket.getTotalCount());
 
         final WinningLotto winningLotto = new WinningLotto(
             Lotto.from(Arrays.asList(1, 2, 3, 4, 5, 6)),
