@@ -17,7 +17,7 @@ class MoneyTest {
         int moneyValue = 1_000;
 
         //when
-        Money money = Money.valueOf(moneyValue);
+        Money money = Money.createPurchasingLottoMoney(moneyValue);
 
         //then
         assertThat(money).isNotNull();
@@ -50,13 +50,13 @@ class MoneyTest {
     @Test
     void divide() {
         //given
-        Money money = Money.valueOf(10L);
+        Money money = Money.createPurchasingLottoMoney(5000L);
 
         //when
-        long number = money.divide(5L);
+        long number = money.divide(1000L);
 
         //then
-        assertThat(number).isEqualTo(2L);
+        assertThat(number).isEqualTo(5);
     }
 
     @DisplayName("구입금액을 0이나 음수로 나눈 값을 반환하는 기능")
@@ -66,7 +66,7 @@ class MoneyTest {
     })
     void divide(long value) {
         //given
-        Money money = Money.valueOf(10L);
+        Money money = Money.createPurchasingLottoMoney(1000L);
 
         //when //then
         assertThatThrownBy(() -> money.divide(value))
@@ -77,8 +77,8 @@ class MoneyTest {
     @Test
     void add() {
         //given
-        Money firstMoney = Money.valueOf(1_000L);
-        Money secondMoney = Money.valueOf(2_000L);
+        Money firstMoney = Money.createPurchasingLottoMoney(1_000L);
+        Money secondMoney = Money.createPurchasingLottoMoney(2_000L);
 
         //when
         Money sumMoney = firstMoney.add(secondMoney);
@@ -91,14 +91,14 @@ class MoneyTest {
     @Test
     void multiply() {
         //given
-        Money money = Money.valueOf(10L);
+        Money money = Money.createPurchasingLottoMoney(1_000L);
         long multipliedNumber = 3L;
 
         //when
         Money result = money.multiply(multipliedNumber);
 
         //then
-        assertThat(result).isEqualTo(Money.valueOf(30L));
+        assertThat(result).isEqualTo(Money.valueOf(3_000L));
     }
 
     @DisplayName("수익율을 계산하는 기능")

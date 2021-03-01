@@ -12,7 +12,7 @@ public class LottoResults {
     }
 
     public Money getTotalWinningMoney() {
-        Money totalMoney = Money.valueOf(0L);
+        Money totalMoney = Money.ZERO;
         for (LottoRank lottoRank : lottoResults.keySet()) {
             Money totalPrize = lottoRank.calculateTotalPrize(lottoResults.get(lottoRank));
             totalMoney = totalMoney.add(totalPrize);

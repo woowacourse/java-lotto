@@ -3,7 +3,8 @@ package domain;
 import java.util.Objects;
 
 public class Money {
-    private static final int ZERO = 0;
+    public static final Money ZERO = new Money(0);
+    private static final int ZERO_VALUE = 0;
 
     private final long value;
 
@@ -17,24 +18,28 @@ public class Money {
     }
 
     public static Money createPurchasingLottoMoney(long value) {
-        validateMultipleLottoMoney(value);
         return new Money(value);
     }
 
     private void validateMoney(long value) {
-        if (value < ZERO) {
+        validateNegativeLottoMoney(value);
+        validateMultipleLottoMoney(value);
+    }
+
+    private void validateNegativeLottoMoney(long value) {
+        if (value < ZERO_VALUE) {
             throw new IllegalArgumentException("구입 금액은 0이상이어야 합니다.");
         }
     }
 
     private static void validateMultipleLottoMoney(long value) {
-        if (value % Lotto.PRICE != ZERO) {
+        if (value % Lotto.PRICE != ZERO_VALUE) {
             throw new IllegalArgumentException("구입 금액은 1,000원 단위만 입력 가능합니다.");
         }
     }
 
     public int divide(long value) {
-        if (value <= ZERO) {
+        if (value <= ZERO_VALUE) {
             throw new IllegalArgumentException("0이하의 값으로 나눌 수 없습니다.");
         }
 
