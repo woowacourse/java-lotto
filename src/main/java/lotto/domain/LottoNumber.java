@@ -26,8 +26,7 @@ public class LottoNumber {
         }
     }
 
-    public int getNumber() {
-        return this.number;
+    public boolean isContain(Lotto winLotto) {
+        return winLotto.isContainNum(number);
     }
-
 }

@@ -10,12 +10,12 @@ public class BonusBall {
     }
 
     private void validateDuplicate(Lotto winLotto) {
-        if (winLotto.isContainNum(bonusNumber.getNumber())) {
+        if (bonusNumber.isContain(winLotto)) {
             throw new IllegalArgumentException(SAME_NUMBER_ERROR);
         }
     }
 
     public boolean hasBonusBall(Lotto lotto) {
-        return lotto.isContainNum(bonusNumber.getNumber());
+        return bonusNumber.isContain(lotto);
     }
 }
