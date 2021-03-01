@@ -49,6 +49,15 @@ public class Lottos {
         }
     }
 
+    public ArrayList<Rank> drawLotto(WinningLotto winningLotto) {
+        ArrayList<Rank> wins = new ArrayList<>();
+        for (Lotto lotto: lottoGroup) {
+            Rank rank = winningLotto.findRank(lotto);
+            wins.add(rank);
+        }
+        return wins;
+    }
+
     public ArrayList<Lotto> getLottoGroup() {
         return this.lottoGroup;
     }

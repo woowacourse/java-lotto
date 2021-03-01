@@ -10,8 +10,6 @@ import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 public class LottoController {
-    private static final ArrayList<Rank> wins = new ArrayList<>();
-    private static final Map<Rank, Integer> countByRank = new TreeMap<>();
     private static final String DELIMITER = ",";
     private static Lottos lottos;
     private static WinningLotto winningLotto;
@@ -25,8 +23,9 @@ public class LottoController {
     }
 
     public void endLotto() {
-        drawLotto();
-        drawResult();
+        LottoView.displayResultMessage();
+        Map<Rank, Integer> countByRank = countEachRank();
+        countByRank.forEach(LottoView::displayResult);
         LottoView.displayEarningRate(Lottos.findResult(countByRank));
     }
 
@@ -51,31 +50,20 @@ public class LottoController {
         winningLotto = new WinningLotto(winLotto, bonusInput);
     }
 
-    private void drawLotto() {
-        ArrayList<Lotto> lottoGroup = lottos.getLottoGroup();
-        for (Lotto lotto : lottoGroup) {
-            Rank rank = winningLotto.findRank(lotto);
-            wins.add(rank);
-        }
-    }
-
-    private void drawResult() {
-        LottoView.displayResultMessage();
-        countEachRank();
-        countByRank.forEach(LottoView::displayResult);
-    }
-
     private ArrayList<String> changeToList(String numberInput) {
         return Arrays.stream(numberInput.split(DELIMITER))
                 .map(String::trim)
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    private void countEachRank() {
+    private Map<Rank, Integer> countEachRank() {
+        ArrayList<Rank> wins = lottos.drawLotto(winningLotto);
+        Map<Rank, Integer> countByRank = new TreeMap<>();
         for (int i = 1; i < Rank.values().length; i++) {
             Rank rank = Rank.values()[i];
             int rankCount = (int) wins.stream().filter(win -> win == rank).count();
             countByRank.put(rank, rankCount);
         }
+        return countByRank;
     }
 }
