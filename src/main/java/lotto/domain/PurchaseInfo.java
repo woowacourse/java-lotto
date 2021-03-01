@@ -6,7 +6,8 @@ import lotto.domain.ticket.LottoTicket;
 
 public class PurchaseInfo {
     private static final int AUTO_COUNT_LIMIT = 0;
-    private static final int MANUAL_COUNT_LIMIT = 1;
+    private static final int MANUAL_COUNT_LIMIT = 0;
+    public static final int MANUAL_COUNT_NO_TICKET_LIMIT = 1;
 
     private final Money purchaseMoney;
     private final int purchaseManualCount;

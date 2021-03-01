@@ -21,9 +21,9 @@ class PurchaseInfoTest {
         assertThat(purchaseInfo.getPurchaseManualCount()).isEqualTo(2);
     }
 
-    @DisplayName("예외 처리 : 음수, 1이상이 아닌 수동 구매 개수에 대한 예외")
+    @DisplayName("예외 처리 : 음수인 수동 구매 개수에 대한 예외")
     @ParameterizedTest
-    @ValueSource(ints = {-5, 0})
+    @ValueSource(ints = {-5, -1})
     void 수동_구매_개수_예외(int testCount) {
 
         assertThatThrownBy(() -> new PurchaseInfo(new Money(2000), testCount, new ArrayList<>()))

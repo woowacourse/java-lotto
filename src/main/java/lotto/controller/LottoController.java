@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -43,6 +44,9 @@ public class LottoController {
 
     private List<LottoTicket> createManualLottoTickets(int purchaseManualCount) {
         inputView.printForInputManualLottoNumbersMessage();
+        if (PurchaseInfo.MANUAL_COUNT_NO_TICKET_LIMIT > purchaseManualCount) {
+            return new ArrayList<>();
+        }
         return IntStream.range(0, purchaseManualCount)
             .mapToObj(num -> inputView.inputForLottoNumbers())
             .map(LottoTicket::new)
