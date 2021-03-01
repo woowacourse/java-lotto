@@ -28,20 +28,17 @@ public class LottoController {
 
     public void start() {
         PurchaseInfo purchaseInfo = createPurchaseInfo();
-        List<LottoTicket> manualLottoTickets = createManualLottoTickets(
-            purchaseInfo.getPurchaseManualCount());
-        LottoTickets lottoTickets = buyLottoTicket(purchaseInfo, manualLottoTickets);
+        LottoTickets lottoTickets = buyLottoTicket(purchaseInfo);
         WinningLottoTicket winningLottoTicket = createWinningLottoTicket();
         LottoResult lottoResult = lottoTickets.calculateLottoResult(winningLottoTicket);
-
         outputView.printLottoResult(lottoResult, purchaseInfo.getPurchaseMoney());
     }
 
     private PurchaseInfo createPurchaseInfo() {
         Money lottoPurchaseMoney = new Money(inputView.inputForLottoMoney());
         int manualLottoCount = inputView.inputForManualLottoCount();
-
-        return new PurchaseInfo(lottoPurchaseMoney, manualLottoCount);
+        List<LottoTicket> manualLottoTickets = createManualLottoTickets(manualLottoCount);
+        return new PurchaseInfo(lottoPurchaseMoney, manualLottoCount, manualLottoTickets);
     }
 
     private List<LottoTicket> createManualLottoTickets(int purchaseManualCount) {
@@ -52,9 +49,8 @@ public class LottoController {
             .collect(Collectors.toList());
     }
 
-    private LottoTickets buyLottoTicket(PurchaseInfo purchaseInfo,
-        List<LottoTicket> manualLottoTickets) {
-        LottoTickets lottoTickets = lottoService.buyTicket(purchaseInfo, manualLottoTickets);
+    private LottoTickets buyLottoTicket(PurchaseInfo purchaseInfo) {
+        LottoTickets lottoTickets = lottoService.buyTicket(purchaseInfo);
         outputView.printAllLottoTickets(purchaseInfo, lottoTickets);
         return lottoTickets;
     }

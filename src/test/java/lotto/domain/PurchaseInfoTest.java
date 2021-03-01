@@ -3,6 +3,7 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.ArrayList;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -14,7 +15,7 @@ class PurchaseInfoTest {
     @DisplayName("구매 정보 생성 테스트")
     @Test
     public void 구매_정보_생성_테스트() {
-        PurchaseInfo purchaseInfo = new PurchaseInfo(new Money(2000), 2);
+        PurchaseInfo purchaseInfo = new PurchaseInfo(new Money(2000), 2, new ArrayList<>());
 
         assertThat(purchaseInfo.getPurchaseMoney()).isEqualTo(new Money(2000));
         assertThat(purchaseInfo.getPurchaseManualCount()).isEqualTo(2);
@@ -25,7 +26,7 @@ class PurchaseInfoTest {
     @ValueSource(ints = {-5, 0})
     void 수동_구매_개수_예외(int testCount) {
 
-        assertThatThrownBy(() -> new PurchaseInfo(new Money(2000), testCount))
+        assertThatThrownBy(() -> new PurchaseInfo(new Money(2000), testCount, new ArrayList<>()))
             .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -33,7 +34,7 @@ class PurchaseInfoTest {
     @ParameterizedTest
     @ValueSource(ints = {5500, 4900, 1234, 2500})
     void 금액단위_안맞으면_예외(int purchaseMoney) {
-        assertThatThrownBy(() -> new PurchaseInfo(new Money(purchaseMoney), 2))
+        assertThatThrownBy(() -> new PurchaseInfo(new Money(purchaseMoney), 2, new ArrayList<>()))
             .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -41,7 +42,7 @@ class PurchaseInfoTest {
     @ParameterizedTest
     @ValueSource(ints = {-1000, -2000, -50000, -150000})
     void 금액이_음수이면_예외(int purchaseMoney) {
-        assertThatThrownBy(() -> new PurchaseInfo(new Money(purchaseMoney), 2))
+        assertThatThrownBy(() -> new PurchaseInfo(new Money(purchaseMoney), 2, new ArrayList<>()))
             .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -49,7 +50,8 @@ class PurchaseInfoTest {
     @ParameterizedTest
     @CsvSource({"2000,3", "10000,11"})
     void 수동_구매_횟수가_전체횟수_초과(int purchaseMoney, int purchaseManualCount) {
-        assertThatThrownBy(() -> new PurchaseInfo(new Money(purchaseMoney), purchaseManualCount))
+        assertThatThrownBy(() -> new PurchaseInfo(new Money(purchaseMoney), purchaseManualCount,
+            new ArrayList<>()))
             .isInstanceOf(IllegalArgumentException.class);
     }
 

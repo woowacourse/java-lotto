@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import lotto.domain.ticket.LottoTicket;
 
 public class PurchaseInfo {
@@ -9,8 +11,10 @@ public class PurchaseInfo {
     private final Money purchaseMoney;
     private final int purchaseManualCount;
     private final int purchaseAutoCount;
+    private final List<LottoTicket> lottoTickets;
 
-    public PurchaseInfo(Money purchaseMoney, int purchaseManualCount) {
+    public PurchaseInfo(Money purchaseMoney, int purchaseManualCount,
+        List<LottoTicket> lottoTickets) {
         validateManualCountLimit(purchaseManualCount);
         validateNoExtraMoney(purchaseMoney);
         validateManualMoneyNotOverTotalMoney(purchaseMoney, purchaseManualCount);
@@ -18,6 +22,7 @@ public class PurchaseInfo {
         this.purchaseMoney = purchaseMoney;
         this.purchaseManualCount = purchaseManualCount;
         this.purchaseAutoCount = calculatePurchaseAutoCount(purchaseMoney, purchaseManualCount);
+        this.lottoTickets = lottoTickets;
     }
 
     private void validateManualCountLimit(int purchaseManualCount) {
@@ -36,7 +41,8 @@ public class PurchaseInfo {
         }
     }
 
-    private void validateManualMoneyNotOverTotalMoney(Money purchaseMoney, int purchaseManualCount) {
+    private void validateManualMoneyNotOverTotalMoney(Money purchaseMoney,
+        int purchaseManualCount) {
         int totalPurchaseCount = calculateTotalPurchaseCount(purchaseMoney);
         int autoPurchaseCount = calculatePurchaseAutoCount(purchaseMoney, purchaseManualCount);
 
@@ -65,5 +71,9 @@ public class PurchaseInfo {
 
     public int getPurchaseAutoCount() {
         return purchaseAutoCount;
+    }
+
+    public List<LottoTicket> getLottoTickets() {
+        return new ArrayList<>(lottoTickets);
     }
 }
