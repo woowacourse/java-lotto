@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -51,7 +50,7 @@ public class Lottos {
 
     public ArrayList<Rank> drawLotto(WinningLotto winningLotto) {
         ArrayList<Rank> wins = new ArrayList<>();
-        for (Lotto lotto: lottoGroup) {
+        for (Lotto lotto : lottoGroup) {
             Rank rank = winningLotto.findRank(lotto);
             wins.add(rank);
         }
