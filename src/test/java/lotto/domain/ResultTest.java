@@ -44,8 +44,6 @@ public class ResultTest {
         lottos.buyLotto(new LottoManualGenerator(), "1, 2, 3, 4, 5, 20");// SECOND
         lottos.buyLotto(new LottoManualGenerator(), "1, 2, 3, 4, 5, 20");//SECOND
 
-        List<Lotto> lottoList = lottos.getLottos();
-
         WinningLotto winningLotto = new WinningLotto(new Lotto("1, 2, 3, 4, 5, 6"), new LottoNumber(20));
 
         List<Result> results = winningLotto.getWinningResult(lottos);

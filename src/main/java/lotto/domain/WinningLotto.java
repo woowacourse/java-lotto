@@ -26,7 +26,6 @@ public class WinningLotto {
                     matchingCount(lotto.getLottoNumbers()),
                     lotto.isBonusMatch(bonusNumber.getLottoNumber())
             ));
-            System.out.println(matchingCount(lotto.getLottoNumbers()));
         }
     }
 
