@@ -31,6 +31,7 @@ public class OutputView {
     public static void displayResult(int matchCount, int prize, int count) {
         if (prize == SECOND_PRIZE) {
             System.out.printf(LOTTO_RESULT_SECOND_MESSAGE, matchCount, prize, count);
+            return;
         }
         System.out.printf(LOTTO_RESULT_MESSAGE, matchCount, prize, count);
     }
