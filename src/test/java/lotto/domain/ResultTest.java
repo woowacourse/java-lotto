@@ -1,10 +1,8 @@
 package lotto.domain;
 
-import lotto.util.LottoGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -40,16 +38,17 @@ public class ResultTest {
     @DisplayName("총 수익을 계산")
     @Test
     void calculateTotalProfit() {
-        Lotto lotto1 = new Lotto(Arrays.asList(1, 2, 3, 20, 21, 40)); // FIFTH
-        Lotto lotto2 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 20)); // SECOND
-        Lotto lotto3 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 20)); // SECOND
+        Lottos lottos = new Lottos();
 
-        LottoGenerator manualLotto = LottoGenerator.of(Arrays.asList(lotto1, lotto2, lotto3));
-        LottoGenerator autoLotto = LottoGenerator.of(0);
+        lottos.buyLotto(new LottoManualGenerator(),"1, 2, 3, 20, 21, 40");// FIFTH
+        lottos.buyLotto(new LottoManualGenerator(), "1, 2, 3, 4, 5, 20");// SECOND
+        lottos.buyLotto(new LottoManualGenerator(), "1, 2, 3, 4, 5, 20");//SECOND
 
-        WinningLotto winningLotto = new WinningLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(20));
+        List<Lotto> lottoList = lottos.getLottos();
 
-        List<Result> results = winningLotto.getWinningResult(manualLotto, autoLotto);
+        WinningLotto winningLotto = new WinningLotto(new Lotto("1, 2, 3, 4, 5, 6"), new LottoNumber(20));
+
+        List<Result> results = winningLotto.getWinningResult(lottos);
 
         float profit = Result.calculateProfit(results);
         assertThat(profit).isEqualTo(60_005_000);

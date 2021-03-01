@@ -26,7 +26,7 @@ public class LottoNumberTest {
         assertThatThrownBy(() -> {
             new LottoNumber(bonusNumber);
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("1~45 사이의 숫자여야 합니다.");
+                .hasMessageContaining("유효하지 않은 로또 번호입니다.");
 
     }
 }

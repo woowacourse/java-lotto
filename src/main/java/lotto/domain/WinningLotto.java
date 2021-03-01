@@ -6,11 +6,11 @@ import java.util.Objects;
 
 public class WinningLotto {
     private final Lotto winningNumbers;
-    private final LottoNumber lottoNumber;
+    private final LottoNumber bonusNumber;
 
-    public WinningLotto(Lotto winningNumbers, LottoNumber lottoNumber) {
+    public WinningLotto(Lotto winningNumbers, LottoNumber bonusNumber) {
         this.winningNumbers = winningNumbers;
-        this.lottoNumber = lottoNumber;
+        this.bonusNumber = bonusNumber;
     }
 
     public List<Result> getWinningResult(Lottos lottos) {
@@ -24,14 +24,15 @@ public class WinningLotto {
         for (Lotto lotto : lottos) {
             results.add(Result.decisionLottoRank(
                     matchingCount(lotto.getLottoNumbers()),
-                    lotto.isBonusMatch(lottoNumber.getLottoNumber())
+                    lotto.isBonusMatch(bonusNumber.getLottoNumber())
             ));
+            System.out.println(matchingCount(lotto.getLottoNumbers()));
         }
     }
 
     private int matchingCount(List<LottoNumber> lottoNumbers) {
         return (int) winningNumbers.getLottoNumbers().stream()
-                .filter(lottoNumbers::contains)
+                .filter(lottoNumber1 -> lottoNumbers.contains(lottoNumber1))
                 .count();
     }
 
@@ -44,13 +45,13 @@ public class WinningLotto {
 
         if (!Objects.equals(winningNumbers, that.winningNumbers))
             return false;
-        return Objects.equals(lottoNumber, that.lottoNumber);
+        return Objects.equals(bonusNumber, that.bonusNumber);
     }
 
     @Override
     public int hashCode() {
         int result = winningNumbers != null ? winningNumbers.hashCode() : 0;
-        result = 31 * result + (lottoNumber != null ? lottoNumber.hashCode() : 0);
+        result = 31 * result + (bonusNumber != null ? bonusNumber.hashCode() : 0);
         return result;
     }
 }

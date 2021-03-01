@@ -11,7 +11,7 @@ public class LottoNumber {
 
     private void validateBonus(int bonus) {
         if (bonus < 1 || bonus > 45) {
-            throw new IllegalArgumentException("1~45 사이의 숫자여야 합니다.");
+            throw new IllegalArgumentException("유효하지 않은 로또 번호입니다.");
         }
     }
 
@@ -32,5 +32,10 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return lottoNumber;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(lottoNumber);
     }
 }
