@@ -2,6 +2,7 @@ package view;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -26,6 +27,10 @@ public class InputView {
     }
 
     public static List<List<Integer>> manualNumbers(final int manualCount) {
+        if (manualCount == 0) {
+            return Collections.emptyList();
+        }
+
         System.out.println(RECEIVE_MANUAL_INPUT_NUMBERS);
         List<List<Integer>> manualNumbers = new ArrayList<>();
         for (int i = 0; i < manualCount; ++i) {

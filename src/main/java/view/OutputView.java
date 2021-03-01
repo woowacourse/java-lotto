@@ -4,7 +4,6 @@ import domain.lotto.LottoNumber;
 import domain.lotto.LottoTicket;
 import domain.lotto.LottoTickets;
 import domain.rank.Rank;
-import domain.Wallet;
 import domain.rank.Ranks;
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -13,19 +12,16 @@ public class OutputView {
 
     private static final String WINNING_STATISTICS_TITLE = "당첨 통계";
     private static final String DIVIDER = "---------";
-    private static final String TICKET_QUANTITY_FORMAT = "수동으로 %d장, 자동으로 %d장을 구매했습니다.";
+    private static final String TICKET_COUNT_FORMAT = "수동으로 %d장, 자동으로 %d장을 구매했습니다.";
     private static final String RANK_RESULT_FORMAT = "%d개 일치 %s(%d원) - %d개";
     private static final String BONUS_BALL_FORMAT = ", 보너스 볼 일치";
 
-    public static void transactionInfo(Wallet wallet) {
-        System.out.println(
-                String.format(TICKET_QUANTITY_FORMAT,
-                        wallet.getManualQuantity(),
-                        wallet.getAutoQuantity())
-        );
-    }
-
     public static void ticketInfo(LottoTickets lottoTickets) {
+        System.out.println(
+                String.format(TICKET_COUNT_FORMAT,
+                        lottoTickets.getManualCount(),
+                        lottoTickets.getAutoCount())
+        );
         lottoTickets.toList()
                 .forEach(ticket -> System.out.println(lottoNumberInfo(ticket)));
     }
