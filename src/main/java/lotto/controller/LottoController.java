@@ -38,10 +38,10 @@ public class LottoController {
     }
 
     public void drawLotto(WinningLotto winningLotto, LottoGroup lottos, Money money) {
-        LottoResult lottoResult = new LottoResult();
-        Map<Rank, Integer> ranks = lottoResult.matchRank(winningLotto, lottos);
+        Map<Rank, Integer> result = lottos.matchRank(winningLotto);
+        LottoResult lottoResult = new LottoResult(result);
         OutputView.displayResultMessage();
-        ranks.forEach((rank, rankCount) -> {
+        lottoResult.getLottoResult().forEach((rank, rankCount) -> {
             OutputView.displayResult(rank.getMatchCount(), rank.getPrize(), rankCount);
         });
         OutputView.displayEarningRate(lottoResult.findEarningRate(money.getMoney()));
