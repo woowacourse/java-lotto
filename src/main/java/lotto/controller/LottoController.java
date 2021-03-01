@@ -22,7 +22,7 @@ public class LottoController {
         OutputView.printBuyLotto(ticket.getManualCount(), ticket.getAutoCount());
         OutputView.printLottoResults(lotteries);
 
-        RatingInfo ratingInfo = lotteries.scratchLotto(buyWinningLotto());
+        final RatingInfo ratingInfo = lotteries.scratchLotto(buyWinningLotto());
         OutputView.printWinningStats(ratingInfo,
             new EarningRate().calculate(ratingInfo, money.getValue()));
     }
@@ -65,7 +65,7 @@ public class LottoController {
 
         OutputView.getMessage(InputView.INPUT_MANUAL_BUY_NUMBERS_MESSAGE);
         for (int i = 0; i < count; i++) {
-            Lotto lotto = manualBuyLotto();
+            final Lotto lotto = manualBuyLotto();
             lotteries.addLottoByManual(lotto);
         }
         return lotteries;

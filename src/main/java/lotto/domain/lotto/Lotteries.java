@@ -23,10 +23,10 @@ public class Lotteries {
     }
 
     public RatingInfo scratchLotto(final WinningLotto winningLotto) {
-        RatingInfo ratingInfo = new RatingInfo();
+        final RatingInfo ratingInfo = new RatingInfo();
         for (final Lotto lotto : lottos) {
-            int match = winningLotto.compareLottoNumber(lotto);
-            boolean hasBonusBall = winningLotto.compareBonusBall(lotto);
+            final int match = winningLotto.compareLottoNumber(lotto);
+            final boolean hasBonusBall = winningLotto.compareBonusBall(lotto);
             ratingInfo.update(Rating.getRating(match, hasBonusBall));
         }
         return ratingInfo;
