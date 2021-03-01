@@ -15,16 +15,16 @@ import lotto.view.OutputView;
 public class LottoController {
 
     public void start() {
-        final Lotteries lotteries = new Lotteries();
         final Money money = getMoney();
         final Ticket ticket = new Ticket(money, manualBuyTicket());
 
-        generateLotto(lotteries, ticket);
+        final Lotteries lotteries = generateLotto(ticket);
         OutputView.printBuyLotto(ticket.getManualCount(), ticket.getAutoCount());
         OutputView.printLottoResults(lotteries);
 
         RatingInfo ratingInfo = lotteries.scratchLotto(buyWinningLotto());
-        OutputView.printWinningStats(ratingInfo, new EarningRate().calculate(ratingInfo, money.getValue()));
+        OutputView.printWinningStats(ratingInfo,
+            new EarningRate().calculate(ratingInfo, money.getValue()));
     }
 
     private Money getMoney() {
@@ -54,17 +54,21 @@ public class LottoController {
         return InputView.getManualTicketCount();
     }
 
-    private void generateLotto(final Lotteries lotteries, final Ticket ticket) {
-        generateManualLottoNumbers(ticket.getManualCount(), lotteries);
+    private Lotteries generateLotto(final Ticket ticket) {
+        final Lotteries lotteries = generateManualLottoNumbers(ticket.getManualCount());
         lotteries.addLottoByTicket(new RandomLottoMachine(), ticket.getAutoCount());
+        return lotteries;
     }
 
-    private void generateManualLottoNumbers(final int count, final Lotteries lotteries) {
+    private Lotteries generateManualLottoNumbers(final int count) {
+        final Lotteries lotteries = new Lotteries();
+
         OutputView.getMessage(InputView.INPUT_MANUAL_BUY_NUMBERS_MESSAGE);
         for (int i = 0; i < count; i++) {
             Lotto lotto = manualBuyLotto();
             lotteries.addLottoByManual(lotto);
         }
+        return lotteries;
     }
 
     private Lotto manualBuyLotto() {
