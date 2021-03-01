@@ -12,13 +12,27 @@ public class Lotteries {
 
     private final List<Lotto> lottos = new ArrayList<>();
 
-    public void addLottoByTicket(final LottoMachine lottoMachine, final int ticketCount) {
+    public Lotteries(final List<Lotto> lottos) {
+        addLottoByManual(lottos);
+    }
+
+    public Lotteries(final LottoMachine lottoMachine, final int ticketCount) {
+        addLottoByTicket(lottoMachine, ticketCount);
+    }
+
+    public Lotteries(final List<Lotto> lottos, final LottoMachine lottoMachine,
+        final int ticketCount) {
+        addLottoByManual(lottos);
+        addLottoByTicket(lottoMachine, ticketCount);
+    }
+
+    private void addLottoByTicket(final LottoMachine lottoMachine, final int ticketCount) {
         for (int i = 0; i < ticketCount; i++) {
             lottos.add(Lotto.from(lottoMachine.generate()));
         }
     }
 
-    public void addLottoByManual(final List<Lotto> lottos) {
+    private void addLottoByManual(final List<Lotto> lottos) {
         this.lottos.addAll(lottos);
     }
 

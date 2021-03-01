@@ -57,22 +57,18 @@ public class LottoController {
     }
 
     private Lotteries generateLotto(final Ticket ticket) {
-        final Lotteries lotteries = generateManualLottoNumbers(ticket.getManualCount());
-        lotteries.addLottoByTicket(new RandomLottoMachine(), ticket.getAutoCount());
-        return lotteries;
+        final List<Lotto> lottos = generateManualLottoNumbers(ticket.getManualCount());
+        return new Lotteries(lottos, new RandomLottoMachine(), ticket.getAutoCount());
     }
 
-    private Lotteries generateManualLottoNumbers(final int count) {
-        final Lotteries lotteries = new Lotteries();
-
+    private List<Lotto> generateManualLottoNumbers(final int count) {
         OutputView.getMessage(InputView.INPUT_MANUAL_BUY_NUMBERS_MESSAGE);
         final List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             final Lotto lotto = manualBuyLotto();
             lottos.add(lotto);
         }
-        lotteries.addLottoByManual(lottos);
-        return lotteries;
+        return lottos;
     }
 
     private Lotto manualBuyLotto() {
