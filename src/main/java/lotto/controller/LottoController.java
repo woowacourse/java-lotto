@@ -9,23 +9,21 @@ public class LottoController {
 
     public void run() {
         Money money = new Money(InputView.requestMoney());
-        Count count = new Count(money.count(), InputView.requestManualCount());
+        Count manualCount = new Count(InputView.requestManualCount());
+        Count autoCount = new Count(money.count() - manualCount.getCount());
         LottoGenerator lottoGenerator = new LottoGenerator();
-        LottoGroup lottos = buyLotto(lottoGenerator, count);
+        LottoGroup lottos = buyLotto(lottoGenerator, manualCount, autoCount);
         WinningLotto winningLotto = checkWinningLotto(lottoGenerator);
         drawLotto(winningLotto, lottos, money);
     }
 
-    private LottoGroup buyLotto(LottoGenerator lottoGenerator, Count count) {
-        int manualCount = count.getManualCount();
-        int autoCount = count.getAutoCount();
-
-        List<String> lottoNumbers = InputView.requestManualLotto(manualCount);
+    private LottoGroup buyLotto(LottoGenerator lottoGenerator, Count manualCount, Count autoCount) {
+        List<String> lottoNumbers = InputView.requestManualLotto(manualCount.getCount());
         LottoGroup manualLotto = lottoGenerator.manualLotto(lottoNumbers);
-        LottoGroup autoLotto = lottoGenerator.autoLotto(autoCount);
+        LottoGroup autoLotto = lottoGenerator.autoLotto(autoCount.getCount());
         LottoGroup lottos = manualLotto.merge(autoLotto);
 
-        OutputView.buyLottoMessage(count.getManualCount(), count.getAutoCount());
+        OutputView.buyLottoMessage(manualCount.getCount(), autoCount.getCount());
         OutputView.printLottos(lottos.getLottoGroup());
         return lottos;
     }
