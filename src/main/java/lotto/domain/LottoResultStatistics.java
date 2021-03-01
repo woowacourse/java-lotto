@@ -22,7 +22,8 @@ public class LottoResultStatistics {
     public static LottoResultStatistics calculateResultStatistics(
             final LottoTickets lottoTickets, final LottoWinner lottoWinner) {
         Map<LottoRank, Integer> lottoResult = setLottoResult();
-        lottoTickets.putLottoResult(lottoResult, lottoWinner);
+        lottoTickets.scanLottoTickets(lottoWinner)
+                .forEach(lottoRank -> lottoResult.computeIfPresent(lottoRank, (LottoRank rank, Integer count) -> ++count));
         return new LottoResultStatistics(lottoResult);
     }
 
@@ -33,9 +34,9 @@ public class LottoResultStatistics {
         return lottoResult;
     }
 
-    public int calculateEarning(final Money money) {
-        int totalReward = Arrays.stream(LottoRank.values())
-                .mapToInt(lottoRank -> this.lottoResult.get(lottoRank) * lottoRank.getReward())
+    public long calculateEarning(final Money money) {
+        long totalReward = Arrays.stream(LottoRank.values())
+                .mapToLong(lottoRank -> this.lottoResult.get(lottoRank) * lottoRank.getReward())
                 .sum();
 
         double paidMoney = money.getMoney();

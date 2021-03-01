@@ -12,7 +12,7 @@ public class LottoBonusNumber extends LottoNumber {
         super(number);
     }
 
-    public static LottoBonusNumber of(String input, LottoTicket lottoWinnerTicket) {
+    public static LottoBonusNumber of(final String input, final LottoTicket lottoWinnerTicket) {
         int number = parseInt(input);
         validateDuplicateBonusNumber(number, lottoWinnerTicket);
         return new LottoBonusNumber(Integer.parseInt(input));

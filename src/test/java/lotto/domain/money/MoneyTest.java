@@ -36,7 +36,7 @@ public class MoneyTest {
 
     @Test
     @DisplayName("돈을 생성할 때 문자열을 넘겨주면 예외가 발생한다.")
-    public void  invalidNumberFormatTest() {
+    public void invalidNumberFormatTest() {
         assertThatThrownBy(() -> {
             new Money("이건문자열이");
         }).isInstanceOf(NumberFormatException.class)

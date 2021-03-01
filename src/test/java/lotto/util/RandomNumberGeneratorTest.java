@@ -1,4 +1,4 @@
-package lotto.domain.lottos.generator;
+package lotto.util;
 
 import lotto.domain.lottos.LottoNumber;
 import org.junit.jupiter.api.BeforeEach;
