@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.domain.ticket.LottoTicket;
 
 public class PurchaseInfo {
+    private static final int AUTO_COUNT_LIMIT = 0;
     private static final int MANUAL_COUNT_LIMIT = 1;
 
     private final Money purchaseMoney;
@@ -12,7 +13,7 @@ public class PurchaseInfo {
     public PurchaseInfo(Money purchaseMoney, int purchaseManualCount) {
         validateManualCountLimit(purchaseManualCount);
         validateNoExtraMoney(purchaseMoney);
-        validateManualCountNotUnderZero(purchaseMoney, purchaseManualCount);
+        validateManualMoneyNotOverTotalMoney(purchaseMoney, purchaseManualCount);
 
         this.purchaseMoney = purchaseMoney;
         this.purchaseManualCount = purchaseManualCount;
@@ -28,18 +29,18 @@ public class PurchaseInfo {
     }
 
     private void validateNoExtraMoney(Money purchaseMoney) {
-        if (purchaseMoney.getMoney() % LottoTicket.PRICE != 0) {
+        if (!purchaseMoney.isZeroRemainderDividedByDivisor(LottoTicket.PRICE)) {
             throw new IllegalArgumentException(
                 String.format("로또는 %d원 단위로 구매해야 있습니다. 입력금액 : %d", LottoTicket.PRICE,
                     purchaseMoney.getMoney()));
         }
     }
 
-    private void validateManualCountNotUnderZero(Money purchaseMoney, int purchaseManualCount) {
+    private void validateManualMoneyNotOverTotalMoney(Money purchaseMoney, int purchaseManualCount) {
         int totalPurchaseCount = calculateTotalPurchaseCount(purchaseMoney);
         int autoPurchaseCount = calculatePurchaseAutoCount(purchaseMoney, purchaseManualCount);
 
-        if (autoPurchaseCount < 0) {
+        if (autoPurchaseCount < AUTO_COUNT_LIMIT) {
             throw new IllegalArgumentException(
                 String.format("수동 구매 개수가 구매 금액을 초과할 수 없습니다. 총 구매가능한 갯수 : %d, 수동 구매 요청 갯수 : %d",
                     totalPurchaseCount, purchaseManualCount));
@@ -47,7 +48,7 @@ public class PurchaseInfo {
     }
 
     public int calculateTotalPurchaseCount(Money purchaseMoney) {
-        return purchaseMoney.getMoney() / LottoTicket.PRICE;
+        return purchaseMoney.dividedBy(LottoTicket.PRICE);
     }
 
     public int calculatePurchaseAutoCount(Money purchaseMoney, int purchaseManualCount) {
