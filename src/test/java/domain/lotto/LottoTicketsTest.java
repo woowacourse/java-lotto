@@ -3,7 +3,6 @@ package domain.lotto;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 
-import domain.rank.Ranks;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;

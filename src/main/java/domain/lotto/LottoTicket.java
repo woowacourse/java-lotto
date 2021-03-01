@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class LottoTicket {
 
-    public static final int LOTTO_TICKET_SIZE = 6;
+    private static final int LOTTO_TICKET_SIZE = 6;
 
     private static final String ERROR_CONTAINS_DUPLICATE = "중복 숫자가 존재합니다.";
     private static final String ERROR_WRONG_SIZE = "로또 숫자의 개수가 6이 아닙니다.";

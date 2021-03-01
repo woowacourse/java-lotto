@@ -21,6 +21,13 @@ class LottoTicketTest {
                 .doesNotThrowAnyException();
     }
 
+    @DisplayName("객체 생성 성공 : 자동 생성")
+    @Test
+    void generate_random_successful() {
+        assertThatCode(LottoTicket::generateRandom)
+                .doesNotThrowAnyException();
+    }
+
     @DisplayName("객체 생성 실패 : 중복된 번호")
     @Test
     void generate_duplicateNumber_exceptionThrown() {
