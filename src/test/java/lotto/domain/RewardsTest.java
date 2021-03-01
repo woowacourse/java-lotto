@@ -7,26 +7,26 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class RewordsTest {
+public class RewardsTest {
 
-    private static Rewords rewords;
+    private static Rewards rewards;
 
     @BeforeEach
     void setUp() {
-        rewords = new Rewords(Arrays.asList(Reword.FIRST, Reword.SECOND, Reword.SECOND));
+        rewards = new Rewards(Arrays.asList(Reward.FIRST, Reward.SECOND, Reward.SECOND));
     }
 
     @DisplayName("포함된 개수 테스트")
     @Test
     void rewordRankCount() {
-        assertThat(rewords.getRankCount(1)).isEqualTo(1);
-        assertThat(rewords.getRankCount(2)).isEqualTo(2);
-        assertThat(rewords.getRankCount(3)).isEqualTo(0);
+        assertThat(rewards.getRankCount(Reward.FIRST)).isEqualTo(1);
+        assertThat(rewards.getRankCount(Reward.SECOND)).isEqualTo(2);
+        assertThat(rewards.getRankCount(Reward.THIRD)).isEqualTo(0);
     }
 
     @DisplayName("수익률 테스트")
     @Test
     void profit() {
-        assertThat(rewords.profit(10_000_000)).isEqualTo(206);
+        assertThat(rewards.profit(10_000_000)).isEqualTo(206);
     }
 }

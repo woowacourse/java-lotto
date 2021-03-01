@@ -1,12 +1,11 @@
 package lotto.controller;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-import lotto.domain.Lotto;
 import lotto.domain.LottoTickets;
 import lotto.domain.Payment;
+import lotto.domain.SelfLottoCount;
 import lotto.domain.WinningLotto;
+import lotto.domain.dto.LottoTicketsDTO;
 import lotto.utils.ParseUtils;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -15,35 +14,36 @@ public class LottoController {
 
     private static final String REGEX = ", ";
 
-    private LottoTickets lottoTickets;
-    private WinningLotto winningLotto;
-    private Payment payment;
-
-    public LottoController() {}
+    public LottoController() {
+    }
 
     public void run() {
-        payment = new Payment(ParseUtils.parseInt(InputView.getInputMoney()));
-        lottoTickets = new LottoTickets(payment.count());
-        showLottoTickets();
-        winningLotto = createWinningLotto();
-        OutputView.printResultMessage(lottoTickets.getResult(winningLotto), payment.getPayment());
+        final Payment payment = new Payment(ParseUtils.parseInt(InputView.getInputMoney()));
+        final SelfLottoCount selfLottoCount = new SelfLottoCount(payment.count(),
+            ParseUtils.parseInt(InputView.getBuySelfLottoCount()));
+        final LottoTickets selfLottoTickets = buySelfLottoTickets(selfLottoCount);
+        final LottoTickets lottoTickets = new LottoTickets(
+            payment.count() - selfLottoCount.getSelfCount(), selfLottoTickets);
+        OutputView.printBuyLottoCountMessage(selfLottoCount.getSelfCount(), payment.count());
+        OutputView.printLottoTicketsMessage(new LottoTicketsDTO(lottoTickets.getLottoTickets()));
+        OutputView.printResultMessage(lottoTickets.getResult(createWinningLotto()), payment);
     }
 
     private WinningLotto createWinningLotto() {
+        OutputView.printWinningLottoMessage();
         String values = InputView.getLottoNumbers();
-        List<Integer> numbers = Arrays.stream(values.split(REGEX))
-            .mapToInt(Integer::parseInt)
-            .boxed()
-            .collect(Collectors.toList());
+        List<Integer> numbers = ParseUtils.parseIntegerList(values, REGEX);
         int bonusNumber = ParseUtils.parseInt(InputView.getBonusBallNumber());
         return new WinningLotto(numbers, bonusNumber);
     }
 
-    private void showLottoTickets() {
-        OutputView.printBuyLottoCountMessage(payment.count());
-        for (Lotto lotto : lottoTickets.getLottoTickets()) {
-            OutputView.printLottoMessage(lotto.getLottoNumbers());
+    private LottoTickets buySelfLottoTickets(SelfLottoCount selfLottoCount) {
+        if (selfLottoCount.getSelfCount() == 0) {
+            return new LottoTickets(0);
         }
-        OutputView.printNewLineMessage();
+        LottoTickets lottoTickets = new LottoTickets(
+            InputView.getSelfLottoNumbers(selfLottoCount.getSelfCount())
+        );
+        return lottoTickets;
     }
 }

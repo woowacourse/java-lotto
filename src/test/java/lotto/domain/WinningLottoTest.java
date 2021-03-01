@@ -30,8 +30,8 @@ public class WinningLottoTest {
     @DisplayName("당첨 등수 반환 테스트")
     @Test
     void match() {
-        Reword reword = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7)
+        Reward reward = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 7)
             .match(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)));
-        assertThat(reword).isEqualTo(Reword.SECOND);
+        assertThat(reward).isEqualTo(Reward.SECOND);
     }
 }

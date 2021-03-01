@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import lotto.exception.DuplicateLottoNumberException;
+import lotto.exception.InvalidLottoSizeException;
 
 public class Lotto {
 
@@ -14,19 +15,22 @@ public class Lotto {
     protected final List<LottoNumber> lottoNumbers;
 
     public Lotto(final List<Integer> numbers) {
-        validateDuplicatedNumber(numbers);
+        validate(numbers);
         lottoNumbers = numberToLottoNumbers(numbers);
     }
 
     private List<LottoNumber> numberToLottoNumbers(List<Integer> numbers) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int number : numbers) {
-            lottoNumbers.add(new LottoNumber(number));
+            lottoNumbers.add(LottoNumber.valueOf(number));
         }
         return lottoNumbers;
     }
 
-    private void validateDuplicatedNumber(final List<Integer> numbers) {
+    private void validate(final List<Integer> numbers) {
+        if (numbers.size() != LOTTO_SIZE) {
+            throw new InvalidLottoSizeException();
+        }
         if (new HashSet<>(numbers).size() != LOTTO_SIZE) {
             throw new DuplicateLottoNumberException();
         }

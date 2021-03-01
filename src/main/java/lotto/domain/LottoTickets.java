@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import lotto.utils.ParseUtils;
 import lotto.utils.RandomUtils;
 
 public class LottoTickets {
@@ -13,38 +14,49 @@ public class LottoTickets {
     private static final int START_LOTTO_NUMBER = 1;
     private static final int END_LOTTO_NUMBER = 45;
     private static final int LOTTO_SIZE = 6;
+    private static final String REGEX = ", ";
     private static final List<Integer> ALL_LOTTO_NUMBERS = IntStream
-        .range(START_LOTTO_NUMBER, END_LOTTO_NUMBER + 1).boxed().collect(Collectors.toList());
+        .range(START_LOTTO_NUMBER, END_LOTTO_NUMBER + 1)
+        .boxed()
+        .collect(Collectors.toList());
 
     private final List<Lotto> lottoTickets;
 
     public LottoTickets(final int buyLottoSize) {
-        this(buyLottoSize, ALL_LOTTO_NUMBERS);
+        lottoTickets = new ArrayList<>();
+        createLottoTickets(buyLottoSize);
     }
 
-    public LottoTickets(final int buyLottoSize, final List<Integer> LottoNumbers) {
-        lottoTickets = createLottoTickets(buyLottoSize, LottoNumbers);
-    }
-
-    private List<Lotto> createLottoTickets(final int buyLottoSize, final List<Integer> LottoNumbers) {
-        List<Lotto> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < buyLottoSize; i++) {
-            lottoTickets
-                .add(new Lotto(RandomUtils.generateRandomNumbers(LottoNumbers, LOTTO_SIZE)));
+    public LottoTickets(final List<String> lottoNumbers) {
+        lottoTickets = new ArrayList<>();
+        for (String lottoNumber : lottoNumbers) {
+            lottoTickets.add(new Lotto(ParseUtils.parseIntegerList(lottoNumber, REGEX)));
         }
-        return lottoTickets;
+    }
+
+    public LottoTickets(final int buyLottoSize, final LottoTickets selfLottoTickets) {
+        lottoTickets = new ArrayList<>(selfLottoTickets.getLottoTickets());
+        createLottoTickets(buyLottoSize);
+    }
+
+    private void createLottoTickets(final int buyLottoSize) {
+        for (int i = 0; i < buyLottoSize; i++) {
+            lottoTickets.add(
+                new Lotto(RandomUtils.generateRandomNumbers(ALL_LOTTO_NUMBERS, LOTTO_SIZE))
+            );
+        }
     }
 
     public List<Lotto> getLottoTickets() {
         return Collections.unmodifiableList(lottoTickets);
     }
 
-    public Rewords getResult(final WinningLotto winningLotto) {
-        List<Reword> rewords = new ArrayList<>();
+    public Rewards getResult(final WinningLotto winningLotto) {
+        List<Reward> rewards = new ArrayList<>();
         for (Lotto lotto : lottoTickets) {
-            rewords.add(winningLotto.match(lotto));
+            rewards.add(winningLotto.match(lotto));
         }
-        return new Rewords(rewords);
+        return new Rewards(rewards);
     }
 
     @Override

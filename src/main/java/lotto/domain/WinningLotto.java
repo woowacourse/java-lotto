@@ -6,14 +6,13 @@ import lotto.exception.DuplicateLottoNumberException;
 
 public class WinningLotto {
 
-    // todo - 컴포지션 사용하기
     private final Lotto lotto;
     private final LottoNumber bonusNumber;
 
     public WinningLotto(final List<Integer> numbers, final int bonusNumber) {
         validateBonusNumber(numbers, bonusNumber);
         lotto = new Lotto(numbers);
-        this.bonusNumber = new LottoNumber(bonusNumber);
+        this.bonusNumber = LottoNumber.valueOf(bonusNumber);
     }
 
     private void validateBonusNumber(final List<Integer> numbers, int bonusNumber) {
@@ -22,12 +21,12 @@ public class WinningLotto {
         }
     }
 
-    public Reword match(final Lotto lotto) {
+    public Reward match(final Lotto lotto) {
         int count = (int) this.lotto.getLottoNumbers().stream()
-            .filter(number -> lotto.isContainsNumber(new LottoNumber(number)))
+            .filter(number -> lotto.isContainsNumber(LottoNumber.valueOf(number)))
             .count();
 
-        return Reword.valueOf(count, lotto.isContainsNumber(bonusNumber));
+        return Reward.valueOf(count, lotto.isContainsNumber(bonusNumber));
     }
 
     @Override

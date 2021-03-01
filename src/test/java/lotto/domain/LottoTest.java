@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import lotto.exception.DuplicateLottoNumberException;
+import lotto.exception.InvalidLottoSizeException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -24,5 +25,17 @@ public class LottoTest {
         assertThatThrownBy(() ->
             new Lotto(Arrays.asList(11, 25, 32, 41, 11, 3))
         ).isInstanceOf(DuplicateLottoNumberException.class);
+    }
+
+    @DisplayName("로또번호 개수 에러 테스트")
+    @Test
+    void lottoSizeException() {
+        assertThatThrownBy(() ->
+            new Lotto(Arrays.asList(11, 25, 32, 41, 11, 3, 7))
+        ).isInstanceOf(InvalidLottoSizeException.class);
+
+        assertThatThrownBy(() ->
+            new Lotto(Arrays.asList(11, 25, 32, 41, 11))
+        ).isInstanceOf(InvalidLottoSizeException.class);
     }
 }

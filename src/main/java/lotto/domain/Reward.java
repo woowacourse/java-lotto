@@ -3,21 +3,23 @@ package lotto.domain;
 import java.util.Arrays;
 import lotto.exception.InvalidLottoHitCountException;
 
-public enum Reword {
+public enum Reward {
 
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 30_000_000),
-    THIRD(5, 1_500_000),
-    FOURTH(4, 50_000),
-    FIFTH(3, 5_000),
-    NONE(0, 0);
+    FIRST(6, 2_000_000_000, false),
+    SECOND(5, 30_000_000, true),
+    THIRD(5, 1_500_000, false),
+    FOURTH(4, 50_000, false),
+    FIFTH(3, 5_000, false),
+    NONE(0, 0, false);
 
     private final int hitCount;
     private final int winningMoney;
+    private final boolean isHitBonus;
 
-    Reword(final int hitCount, final int winningMoney) {
+    Reward(final int hitCount, final int winningMoney, final boolean isHitBonus) {
         this.hitCount = hitCount;
         this.winningMoney = winningMoney;
+        this.isHitBonus = isHitBonus;
     }
 
     public int getHitCount() {
@@ -28,27 +30,19 @@ public enum Reword {
         return winningMoney;
     }
 
-    public static Reword valueOf(final int hitCount, final boolean isHitBonus) {
+    public static Reward valueOf(final int hitCount, final boolean isHitBonus) {
         validateHitCount(hitCount);
 
-        if (hitCount == SECOND.hitCount) {
-            return checkBonusReword(isHitBonus);
-        }
-
         return Arrays.stream(values())
-            .filter(reword -> reword.matchHitCount(hitCount))
+            .filter(reword -> reword.matchHitCount(hitCount, isHitBonus))
             .findFirst()
-            .orElse(Reword.NONE);
+            .orElse(Reward.NONE);
     }
 
-    private static Reword checkBonusReword(final boolean isHitBonus) {
-        if (isHitBonus) {
-            return Reword.SECOND;
+    private boolean matchHitCount(final int hitCount, final boolean isHitBonus) {
+        if (this.isHitBonus) {
+            return hitCount == this.hitCount && isHitBonus;
         }
-        return Reword.THIRD;
-    }
-
-    private boolean matchHitCount(final int hitCount) {
         return hitCount == this.hitCount;
     }
 
