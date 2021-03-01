@@ -41,7 +41,7 @@ public enum LottoRank {
         return this.correctCnt == countOfMatch;
     }
 
-    public Money getTotalPrize(Long countOfLotto) {
+    public Money calculateTotalPrize(Long countOfLotto) {
         return prize.multiply(countOfLotto);
     }
 

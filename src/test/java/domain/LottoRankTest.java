@@ -27,7 +27,7 @@ class LottoRankTest {
     }, delimiter = ':')
     void getTotalPrize(long countOfLotto, LottoRank result) {
         //when
-        Money totalPrize = result.getTotalPrize(countOfLotto);
+        Money totalPrize = result.calculateTotalPrize(countOfLotto);
 
         //then
         Money expected = result.getPrize().multiply(countOfLotto);
