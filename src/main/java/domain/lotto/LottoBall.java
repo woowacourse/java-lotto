@@ -29,6 +29,14 @@ public class LottoBall {
         }
     }
 
+    public static int getMinNumber() {
+        return MIN_NUMBER;
+    }
+
+    public static int getMaxNumber() {
+        return MAX_NUMBER;
+    }
+
     public int getNumber() {
         return number;
     }

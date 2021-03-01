@@ -23,6 +23,10 @@ public class Lotto {
                 .collect(Collectors.toList()));
     }
 
+    public static int getLottoBallsNumber() {
+        return LOTTO_BALLS_NUMBER;
+    }
+
     private void validateLotto(final List<LottoBall> lotto) {
         validateLottoSize(lotto);
         validateDuplicate(lotto);
