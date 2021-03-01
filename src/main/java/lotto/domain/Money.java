@@ -18,6 +18,14 @@ public class Money {
         }
     }
 
+    public int dividedBy(int divisor) {
+        return this.money / divisor;
+    }
+
+    public boolean isZeroRemainderDividedByDivisor(int divisor) {
+        return this.money % divisor == 0;
+    }
+
     public int getMoney() {
         return money;
     }
