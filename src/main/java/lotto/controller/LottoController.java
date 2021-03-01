@@ -39,17 +39,17 @@ public class LottoController {
 
     private Lotto makeManualLotto() {
         String winningInput = LottoView.requestManualNumber();
-        return new Lotto(changeToList(winningInput));
+        return new Lotto(changeStringToList(winningInput));
     }
 
     private WinningLotto makeWinningLotto() {
         String winningInput = LottoView.requestWinningNumber();
-        Lotto winLotto = new Lotto(changeToList(winningInput));
+        Lotto winLotto = new Lotto(changeStringToList(winningInput));
         String bonusInput = LottoView.requestBonusBallNumber();
         return new WinningLotto(winLotto, bonusInput);
     }
 
-    private ArrayList<String> changeToList(String numberInput) {
+    private ArrayList<String> changeStringToList(String numberInput) {
         return Arrays.stream(numberInput.split(DELIMITER))
                 .map(String::trim)
                 .collect(Collectors.toCollection(ArrayList::new));
