@@ -1,6 +1,8 @@
 package view;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -9,25 +11,44 @@ public class InputView {
 
     private static final Scanner SCANNER = new Scanner(System.in);
     private static final String RECEIVE_PRICE_MESSAGE = "구입금액을 입력해 주세요.";
+    private static final String RECEIVE_MANUAL_INPUT_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
+    private static final String RECEIVE_MANUAL_INPUT_NUMBERS = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String RECEIVE_WINNING_NUMBERS_MESSAGE = "지난 당첨 번호를 입력해 주세요.";
     private static final String RECEIVE_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
-    private static final String NULL_ERROR = "null 이 입력되었습니다.";
-    private static final String NOT_INT_ERROR = "정수가 아닙니다.";
+    private static final String ERROR_NULL = "null 이 입력되었습니다.";
+    private static final String ERROR_NOT_INTEGER = "정수가 아닙니다.";
 
-    public static String receivePrice() {
-        return receiveInput(RECEIVE_PRICE_MESSAGE);
+    public static int payment() {
+        return parseToInteger(receiveInput(RECEIVE_PRICE_MESSAGE));
     }
 
-    public static List<Integer> receiveWinningNumbers() {
+    public static int manualCount() {
+        return parseToInteger(receiveInput(RECEIVE_MANUAL_INPUT_COUNT));
+    }
+
+    public static List<List<Integer>> manualNumbers(final int manualCount) {
+        if (manualCount == 0) {
+            return Collections.emptyList();
+        }
+
+        System.out.println(RECEIVE_MANUAL_INPUT_NUMBERS);
+        List<List<Integer>> manualNumbers = new ArrayList<>();
+        for (int i = 0; i < manualCount; ++i) {
+            manualNumbers.add(createNumbers(SCANNER.nextLine().trim()));
+        }
+        return manualNumbers;
+    }
+
+    public static List<Integer> winningNumbers() {
         return receiveNumbers(RECEIVE_WINNING_NUMBERS_MESSAGE);
     }
 
-    public static int receiveBonusNumber() {
+    public static int bonusNumber() {
         return receiveNumber(RECEIVE_BONUS_NUMBER_MESSAGE);
     }
 
     private static int receiveNumber(final String message) {
-        return createNumber(receiveInputNotNull(message));
+        return parseToInteger(receiveInputNotNull(message));
     }
 
     private static List<Integer> receiveNumbers(final String message) {
@@ -42,15 +63,15 @@ public class InputView {
 
     private static void validateNull(final String userInput) {
         if (userInput == null) {
-            throw new IllegalArgumentException(NULL_ERROR);
+            throw new IllegalArgumentException(ERROR_NULL);
         }
     }
 
-    private static int createNumber(final String userInput) {
+    private static int parseToInteger(final String userInput) {
         try {
             return Integer.parseInt(userInput);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(NOT_INT_ERROR);
+            throw new IllegalArgumentException(ERROR_NOT_INTEGER);
         }
     }
 
@@ -58,10 +79,10 @@ public class InputView {
         try {
             return Arrays.stream(userInput.split(","))
                     .map(String::trim)
-                    .map(Integer::new)
+                    .map(Integer::parseInt)
                     .collect(Collectors.toList());
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(NOT_INT_ERROR);
+            throw new IllegalArgumentException(ERROR_NOT_INTEGER);
         }
     }
 

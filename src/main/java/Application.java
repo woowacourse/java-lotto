@@ -1,4 +1,4 @@
-import controller.LottoSystemController;
+import controller.LottoController;
 import view.OutputView;
 
 public class Application {
@@ -17,7 +17,7 @@ public class Application {
     }
 
     private static void start() {
-        LottoSystemController lottoSystemController = new LottoSystemController();
-        lottoSystemController.run();
+        LottoController lottoController = new LottoController();
+        lottoController.run();
     }
 }
