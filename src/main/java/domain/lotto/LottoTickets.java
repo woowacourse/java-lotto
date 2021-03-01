@@ -44,6 +44,10 @@ public class LottoTickets {
         return Collections.unmodifiableList(tickets);
     }
 
+    public int size() {
+        return tickets.size();
+    }
+
     public int getManualCount() {
         return manualCount;
     }
