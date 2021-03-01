@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,9 +18,10 @@ public class LottoTickets {
     }
 
     public LottoTickets merge(LottoTickets otherLottoTickets) {
-        LottoTickets mergedTickets = new LottoTickets(lottoTickets);
-        mergedTickets.addAll(otherLottoTickets);
-        return mergedTickets;
+        final List<LottoTicket> mergedTickets = new ArrayList<>();
+        mergedTickets.addAll(this.lottoTickets);
+        mergedTickets.addAll(otherLottoTickets.lottoTickets);
+        return new LottoTickets(mergedTickets);
     }
 
     public List<LottoTicket> getTickets() {
