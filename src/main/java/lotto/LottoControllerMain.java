@@ -12,7 +12,7 @@ public class LottoControllerMain {
         PurchaseCount purchaseCount = new PurchaseCount(money.totalCountOfPurchaseLotto(), InputView.inputManualPurchaseCount());
 
         Lottos lottos = new Lottos();
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        InputView.inputManualPurChaseMessage();
 
         for (int i = 0; i < purchaseCount.getManualPurchaseCount(); i++) {
             lottos.buyLotto(new LottoManualGenerator(), InputView.inputManualPurchase());
