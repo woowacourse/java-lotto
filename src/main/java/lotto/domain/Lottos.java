@@ -13,14 +13,13 @@ public class Lottos {
         this.lottos = new ArrayList<>();
     }
 
-    public void buyLotto(LottoGenerator lottoGenerator, String manualLotto){
+    public void buyLotto(LottoGenerator lottoGenerator, String manualLotto) {
         this.lottos.add(lottoGenerator.generate(manualLotto));
     }
 
-    public void buyLotto(LottoGenerator lottoGenerator){
+    public void buyLotto(LottoGenerator lottoGenerator) {
         this.lottos.add(lottoGenerator.generate());
     }
-
 
     public List<Lotto> getLottos() {
         return lottos;

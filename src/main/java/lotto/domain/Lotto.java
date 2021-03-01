@@ -7,7 +7,7 @@ import java.util.Objects;
 public class Lotto {
     private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(String lottoNumber){
+    public Lotto(String lottoNumber) {
         this.lottoNumbers = new ArrayList<>();
         String[] lottos = lottoNumber.split(", ");
         for (int i = 0; i < lottos.length; i++) {

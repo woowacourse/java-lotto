@@ -10,11 +10,11 @@ import java.util.stream.Collectors;
 
 public class LottoAutoGenerator implements LottoGenerator {
 
-    private List<LottoNumber> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
-    public LottoAutoGenerator(){
+    public LottoAutoGenerator() {
         this.lottoNumbers = new ArrayList<>();
-        for (int i = 1; i < 45; i++) {
+        for (int i = LOTTO_MINIMUM_NUMBER; i < LOTTO_MAXIMUM_NUMBER; i++) {
             lottoNumbers.add(new LottoNumber(i));
         }
     }
@@ -24,15 +24,10 @@ public class LottoAutoGenerator implements LottoGenerator {
         Collections.shuffle(lottoNumbers);
         return new Lotto(
                 lottoNumbers.stream()
-                    .limit(6)
-                    .sorted(Comparator.comparing(LottoNumber::getLottoNumber))
-                    .collect(Collectors.toList())
+                        .limit(6)
+                        .sorted(Comparator.comparing(LottoNumber::getLottoNumber))
+                        .collect(Collectors.toList())
         );
 
-    }
-
-    @Override
-    public boolean isNotMatchArgs() {
-        return false;
     }
 }

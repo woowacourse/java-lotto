@@ -9,7 +9,7 @@ import java.util.List;
 public class LottoControllerMain {
     public static void main(String[] args) {
         Money money = new Money(InputView.inputMoney());
-        PurchaseCount purchaseCount = new PurchaseCount( money.totalCountOfPurchaseLotto(), InputView.inputManualPurchaseCount());
+        PurchaseCount purchaseCount = new PurchaseCount(money.totalCountOfPurchaseLotto(), InputView.inputManualPurchaseCount());
 
         Lottos lottos = new Lottos();
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");

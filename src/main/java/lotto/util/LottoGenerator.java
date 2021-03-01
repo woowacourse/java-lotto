@@ -9,7 +9,4 @@ public interface LottoGenerator {
 
     Lotto generate(String... varargs);
 
-    boolean isNotMatchArgs();
-
-
 }

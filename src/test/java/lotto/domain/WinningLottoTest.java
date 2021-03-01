@@ -29,7 +29,7 @@ public class WinningLottoTest {
         );
 
         Lottos lottos = new Lottos();
-        lottos.buyLotto(new LottoManualGenerator(),"1, 2, 3, 20, 21, 40");
+        lottos.buyLotto(new LottoManualGenerator(), "1, 2, 3, 20, 21, 40");
         lottos.buyLotto(new LottoManualGenerator(), "1, 2, 20, 25, 29, 45");
 
 

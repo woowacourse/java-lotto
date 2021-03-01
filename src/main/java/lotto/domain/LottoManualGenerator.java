@@ -18,10 +18,4 @@ public class LottoManualGenerator implements LottoGenerator {
 
         return new Lotto(lotto);
     }
-
-
-    @Override
-    public boolean isNotMatchArgs() {
-        return false;
-    }
 }

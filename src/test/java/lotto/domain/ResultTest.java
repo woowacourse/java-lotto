@@ -40,7 +40,7 @@ public class ResultTest {
     void calculateTotalProfit() {
         Lottos lottos = new Lottos();
 
-        lottos.buyLotto(new LottoManualGenerator(),"1, 2, 3, 20, 21, 40");// FIFTH
+        lottos.buyLotto(new LottoManualGenerator(), "1, 2, 3, 20, 21, 40");// FIFTH
         lottos.buyLotto(new LottoManualGenerator(), "1, 2, 3, 4, 5, 20");// SECOND
         lottos.buyLotto(new LottoManualGenerator(), "1, 2, 3, 4, 5, 20");//SECOND
 
