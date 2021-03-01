@@ -5,7 +5,8 @@ import lotto.exception.LottoCustomException;
 import java.util.Objects;
 
 public class Money {
-    private static final int ZERO = 0;
+
+    public static final int ZERO = 0;
     private static final int MONEY_UNIT = 1000;
 
     private final int money;
@@ -15,7 +16,7 @@ public class Money {
         this.money = money;
     }
 
-    public int getTicketCount() {
+    public int getTotalPurchaseCount() {
         return this.money / MONEY_UNIT;
     }
 
@@ -27,13 +28,17 @@ public class Money {
         return money % MONEY_UNIT;
     }
 
+    public boolean exceedsLimit(int inputMoney) {
+        return inputMoney * MONEY_UNIT > money;
+    }
+
     public int getMoney() {
         return money;
     }
 
     private void validateMoneyLimit(final int money) {
         if (money < MONEY_UNIT) {
-            throw new LottoCustomException("입력 금액은 1000원 이상이어야 합니다.");
+            throw new LottoCustomException(String.format("입력 금액은 %d원 이상이어야 합니다.", MONEY_UNIT));
         }
     }
 

@@ -1,21 +1,35 @@
 package lotto.domain;
 
+import lotto.exception.LottoCustomException;
+
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public class LottoTicket {
+public class Lotto {
+    private static final int LOTTO_SIZE = 6;
 
-    protected final Set<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
-    public LottoTicket(final Set<LottoNumber> lottoNumbers) {
+    public Lotto(final Set<LottoNumber> lottoNumbers) {
+        validate(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    public Set<Integer> getLottoNumbers() {
+    private void validate(Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_SIZE) {
+            throw new LottoCustomException(String.format("로또는 총 %d개의 번호로 이루어져야합니다.", LOTTO_SIZE));
+        }
+    }
+
+    public Set<Integer> toSet() {
         Set<Integer> numbers = new HashSet<>();
         lottoNumbers.forEach(lottoNumber -> numbers.add(lottoNumber.getNumber()));
         return numbers;
+    }
+
+    public Set<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 
     public boolean contains(LottoNumber lottoNumber) {
@@ -30,8 +44,8 @@ public class LottoTicket {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        LottoTicket lottoTicket = (LottoTicket) o;
-        return lottoNumbers.equals(lottoTicket.lottoNumbers);
+        Lotto lotto = (Lotto) o;
+        return lottoNumbers.equals(lotto.lottoNumbers);
     }
 
     @Override

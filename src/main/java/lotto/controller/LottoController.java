@@ -17,46 +17,72 @@ public class LottoController {
     }
 
     public void run() {
-        Money money = inputMoney();
-        LottoTickets lottoTickets = buyLottoTickets(money);
+        final Money money = inputMoney();
+        final Purchase purchase = inputManualPurchase(money);
+        final Lottos lottos = createLottos(purchase);
+        final WinningLotto winningLotto = makeWinningLotto();
+        final Map<Rank, Integer> result = LottoResultMachine.confirmResult(lottos, winningLotto);
 
-        WinningTicket winningTicket = makeWinningTicket();
-        Map<WinningResult, Integer> result = LottoResultMachine.confirmResult(lottoTickets, winningTicket);
-
-        OutputView.printProfit(LottoProfit.ofProfit(result, money));
         OutputView.printTotalWinningResult(result);
+        OutputView.printProfit(LottoProfit.ofProfit(result, money));
         manageChange(money);
     }
 
     private Money inputMoney() {
         try {
-            OutputView.printMoneyMessage();
-            Money money = new Money(inputView.inputMoney());
-            OutputView.printNumberOfTickets(money.getTicketCount());
-            return money;
+            return new Money(inputView.inputMoney());
         } catch (LottoCustomException e) {
             OutputView.printErrorMessage(e.getMessage());
             return inputMoney();
         }
     }
 
-    private LottoTickets buyLottoTickets(Money money) {
-        LottoTickets lottoTickets = new LottoTickets();
-        lottoTickets.makeTicketByCount(money.getTicketCount());
-        OutputView.printAllTickets(lottoTickets);
-        return lottoTickets;
-    }
-
-    private WinningTicket makeWinningTicket() {
+    private Purchase inputManualPurchase(Money money) {
         try {
-            OutputView.printWinningNumbersTitle();
-            Set<LottoNumber> winningNumbers = inputView.inputWinningNumbers();
-            OutputView.printBonusNumberTitle();
-            LottoNumber bonusNumber = new LottoNumber(inputView.inputBonusNumber());
-            return new WinningTicket(winningNumbers, bonusNumber);
+            return new Purchase(money, inputView.inputCountOfManualPurchase());
         } catch (LottoCustomException e) {
             OutputView.printErrorMessage(e.getMessage());
-            return makeWinningTicket();
+            return inputManualPurchase(money);
+        }
+    }
+
+    private Lottos createLottos(Purchase purchase) {
+        Lottos lottos = new Lottos();
+        if (purchase.existManualPurchase()) {
+            createManualLottos(lottos, purchase.getManualPurchase());
+        }
+        LottoFactory.createAutoLottos(lottos, purchase.getAutoPurchase());
+        OutputView.printAllTickets(purchase, lottos);
+        return lottos;
+    }
+
+
+    private void createManualLottos(Lottos lottos, int counts) {
+        OutputView.printTitleOfInputManualLotto();
+        for (int i = 0; i < counts; i++) {
+            LottoFactory.createManualLottos(lottos, inputManualNumbers());
+        }
+    }
+
+    private Set<LottoNumber> inputManualNumbers() {
+        try {
+            return inputView.inputLottoNumbers();
+        } catch (LottoCustomException e) {
+            OutputView.printErrorMessage(e.getMessage());
+            return inputManualNumbers();
+        }
+    }
+
+    private WinningLotto makeWinningLotto() {
+        try {
+            OutputView.printTitleOfInputWinningLotto();
+            return new WinningLotto(
+                    LottoFactory.makeLotto(inputView.inputLottoNumbers()),
+                    LottoNumber.from(inputView.inputBonusNumber())
+            );
+        } catch (LottoCustomException e) {
+            OutputView.printErrorMessage(e.getMessage());
+            return makeWinningLotto();
         }
     }
 

@@ -1,33 +1,29 @@
 package lotto.view;
 
-import lotto.domain.LottoProfit;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
-import lotto.domain.WinningResult;
+import lotto.domain.*;
 
 import java.util.Map;
+import java.util.Objects;
 
 public class OutputView {
+    private static final String PURCHASE_INFO_MESSAGE = "수동으로 %d장, 자동으로 %d장을 구매했습니다.";
     private static final String WINNING_INFO_MESSAGE = "%s (%s)원 - %s개";
-    private static final int FAILED = 0;
+    private static final String WINNING_RESULT_MESSAGE = "%d개 일치";
+    private static final String CONTAIN_BONUS_BALL = ", 보너스 볼 일치";
+    private static final int NO_MATCH = 0;
 
     private OutputView() {
     }
 
     public static void printErrorMessage(String message) {
         System.out.println(message);
+        printNewLine();
     }
 
-    public static void printMoneyMessage() {
-        System.out.println("구입금액을 입력해 주세요.");
-    }
-
-    public static void printNumberOfTickets(int counts) {
-        System.out.println(counts + "개를 구매했습니다.");
-    }
-
-    public static void printAllTickets(LottoTickets lottoTickets) {
-        lottoTickets.toList().forEach(OutputView::printTicket);
+    public static void printAllTickets(Purchase purchase, Lottos lottos) {
+        System.out.printf(PURCHASE_INFO_MESSAGE, purchase.getManualPurchase(), purchase.getAutoPurchase());
+        printNewLine();
+        lottos.toList().forEach(OutputView::printTicket);
         printNewLine();
     }
 
@@ -35,19 +31,12 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printBonusNumberTitle() {
-        System.out.println("보너스 볼을 입력해주세요.");
-    }
-
-    public static void printWinningNumbersTitle() {
-        System.out.println("지난 주 당첨 번호를 입력해주세요.");
-    }
-
-    public static void printTotalWinningResult(Map<WinningResult, Integer> winningResult) {
+    public static void printTotalWinningResult(Map<Rank, Integer> winningResult) {
+        printNewLine();
         System.out.println("당첨 통계");
         printSplitLine();
 
-        for (WinningResult result : WinningResult.values()) {
+        for (Rank result : Rank.values()) {
             printWinningResult(result, winningResult);
         }
     }
@@ -66,21 +55,41 @@ public class OutputView {
         System.out.println("---------");
     }
 
-    private static void printTicket(LottoTicket lottoTicket) {
-        System.out.println(lottoTicket.getLottoNumbers());
+    private static void printTicket(Lotto lotto) {
+        System.out.println(lotto.toSet());
     }
 
-    private static void printWinningResult(WinningResult result, Map<WinningResult, Integer> winningResult) {
-        if (result.getHitCount() == FAILED) {
+    private static void printWinningResult(Rank result, Map<Rank, Integer> winningResult) {
+        if (result.getMatchCount() == NO_MATCH) {
             return;
         }
-        System.out.println(String.format(WINNING_INFO_MESSAGE, result.getMessage(), result.getWinnings(), convertNullToZero(winningResult.get(result))));
+
+        System.out.printf(
+                (WINNING_INFO_MESSAGE) + "%n",
+                getWinningResultMessage(result),
+                result.getWinnings(),
+                convertCountNullToZero(winningResult.get(result)));
     }
 
-    private static int convertNullToZero(Integer number) {
-        if (number == null) {
+    private static String getWinningResultMessage(Rank rank) {
+        if (rank.equals(Rank.SECOND_PRIZE)) {
+            return String.format(WINNING_RESULT_MESSAGE + CONTAIN_BONUS_BALL, rank.getMatchCount());
+        }
+        return String.format(WINNING_RESULT_MESSAGE, rank.getMatchCount());
+    }
+
+    private static int convertCountNullToZero(Integer number) {
+        if (Objects.isNull(number)) {
             return 0;
         }
         return number;
+    }
+
+    public static void printTitleOfInputManualLotto() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+    }
+
+    public static void printTitleOfInputWinningLotto() {
+        System.out.println("지난 주 당첨 번호를 입력해주세요.");
     }
 }
