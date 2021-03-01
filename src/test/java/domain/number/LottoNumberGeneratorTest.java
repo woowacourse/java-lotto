@@ -16,7 +16,7 @@ public class LottoNumberGeneratorTest {
         //Given
         final LottoNumberGenerator lottoNumberGenerator = new OrderLottoNumberGenerator();
         //When
-        final List<List<Integer>> lottoNumberBundle = lottoNumberGenerator.createLottoNumberBundle(2);
+        final List<List<Integer>> lottoNumberBundle = lottoNumberGenerator.createBundle(2);
         //Then
         assertThat(lottoNumberBundle).isEqualTo(Arrays.asList(
                 Arrays.asList(1, 2, 3, 4, 5, 6),
@@ -30,7 +30,7 @@ public class LottoNumberGeneratorTest {
         //Given
         final LottoNumberGenerator lottoNumberGenerator = new OrderLottoNumberGenerator();
         //When
-        final List<Integer> lottoNumber = lottoNumberGenerator.createLottoNumber();
+        final List<Integer> lottoNumber = lottoNumberGenerator.create();
         //Then
         assertThat(lottoNumber).isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
@@ -38,16 +38,16 @@ public class LottoNumberGeneratorTest {
     class OrderLottoNumberGenerator implements LottoNumberGenerator {
 
         @Override
-        public List<List<Integer>> createLottoNumberBundle(int quantity) {
+        public List<List<Integer>> createBundle(int quantity) {
             List<List<Integer>> lottoNumberBundle = new ArrayList<>();
             for (int i = 0; i < quantity; i++) {
-                lottoNumberBundle.add(createLottoNumber());
+                lottoNumberBundle.add(create());
             }
             return lottoNumberBundle;
         }
 
         @Override
-        public List<Integer> createLottoNumber() {
+        public List<Integer> create() {
             return Arrays.asList(1, 2, 3, 4, 5, 6);
         }
     }

@@ -10,16 +10,16 @@ public class RandomLottoNumberGenerator implements LottoNumberGenerator {
     private final int EXTRA_BOUND = 1;
 
     @Override
-    public List<List<Integer>> createLottoNumberBundle(final int quantity) {
-        List<List<Integer>> lottoNumberBundle = new ArrayList<>();
+    public List<List<Integer>> createBundle(final int quantity) {
+        final List<List<Integer>> numberBundle = new ArrayList<>();
         for (int i = 0; i < quantity; i++) {
-            lottoNumberBundle.add(createLottoNumber());
+            numberBundle.add(create());
         }
-        return lottoNumberBundle;
+        return numberBundle;
     }
 
     @Override
-    public List<Integer> createLottoNumber() {
+    public List<Integer> create() {
         final IntStream intStream = new Random().ints(MIN_NUMBER, MAX_NUMBER + EXTRA_BOUND);
         return intStream.distinct()
                 .limit(LOTTO_BALLS_IN_LOTTO)

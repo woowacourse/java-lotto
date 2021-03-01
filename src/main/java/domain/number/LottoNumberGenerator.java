@@ -10,7 +10,7 @@ public interface LottoNumberGenerator {
     int MAX_NUMBER = LottoBall.getMaxNumber();
     int LOTTO_BALLS_IN_LOTTO = Lotto.getLottoBallsNumber();
 
-    List<List<Integer>> createLottoNumberBundle(final int quantity);
+    List<List<Integer>> createBundle(final int quantity);
 
-    List<Integer> createLottoNumber();
+    List<Integer> create();
 }
