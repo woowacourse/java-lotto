@@ -11,13 +11,11 @@ import org.junit.jupiter.api.Test;
 
 public class LottoGeneratorTest {
 
-    LottoGenerator lottoGenerator = new LottoGenerator();
-
     @Test
     @DisplayName("금액에 맞는 수의 로또를 만드는지 확인")
     void auto() {
         int count = 3;
-        LottoGroup lottos = lottoGenerator.autoLotto(count);
+        LottoGroup lottos = new AutoGenerator().group(count);
         assertThat(lottos.getLottoGroup().size() == count).isTrue();
     }
 
@@ -28,7 +26,7 @@ public class LottoGeneratorTest {
             "1, 2, 3, 4, 5, 6",
             "7, 8, 9, 10, 11, 12"
         ));
-        LottoGroup lottos = lottoGenerator.manualLotto(input);
+        LottoGroup lottos = new ManualGenerator().group(input);
 
         Lotto one = new Lotto(new HashSet<>(Arrays.asList(
             LottoNumber.of(1),

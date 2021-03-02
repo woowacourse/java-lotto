@@ -11,16 +11,17 @@ public class LottoController {
         Money money = new Money(InputView.requestMoney());
         Count manualCount = new Count(InputView.requestManualCount());
         Count autoCount = new Count(money.count() - manualCount.getCount());
-        LottoGenerator lottoGenerator = new LottoGenerator();
-        LottoGroup lottos = buyLotto(lottoGenerator, manualCount, autoCount);
-        WinningLotto winningLotto = checkWinningLotto(lottoGenerator);
+        ManualGenerator manualGenerator = new ManualGenerator();
+        AutoGenerator autoGenerator = new AutoGenerator();
+        LottoGroup lottos = buyLotto(manualGenerator, autoGenerator, manualCount, autoCount);
+        WinningLotto winningLotto = checkWinningLotto(manualGenerator);
         drawLotto(winningLotto, lottos, money);
     }
 
-    private LottoGroup buyLotto(LottoGenerator lottoGenerator, Count manualCount, Count autoCount) {
+    private LottoGroup buyLotto(ManualGenerator manualGenerator, AutoGenerator autoGenerator, Count manualCount, Count autoCount) {
         List<String> lottoNumbers = InputView.requestManualLotto(manualCount.getCount());
-        LottoGroup manualLotto = lottoGenerator.manualLotto(lottoNumbers);
-        LottoGroup autoLotto = lottoGenerator.autoLotto(autoCount.getCount());
+        LottoGroup manualLotto = manualGenerator.group(lottoNumbers);
+        LottoGroup autoLotto = autoGenerator.group(autoCount.getCount());
         LottoGroup lottos = manualLotto.merge(autoLotto);
 
         OutputView.buyLottoMessage(manualCount.getCount(), autoCount.getCount());
@@ -28,11 +29,11 @@ public class LottoController {
         return lottos;
     }
 
-    private WinningLotto checkWinningLotto(LottoGenerator lottoGenerator) {
+    private WinningLotto checkWinningLotto(ManualGenerator manualGenerator) {
         String winningLottoInput = InputView.requestWinningNumber();
         String bonusBallInput = InputView.requestBonusBall();
         return new WinningLotto(
-            lottoGenerator.generateManual(winningLottoInput),
+            manualGenerator.generate(winningLottoInput),
             LottoNumber.of(bonusBallInput)
         );
     }
