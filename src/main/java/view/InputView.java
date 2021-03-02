@@ -1,9 +1,6 @@
 package view;
 
-import domain.Lotto;
 import domain.LottoNumber;
-import domain.Money;
-import domain.WinningLotto;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,10 +15,9 @@ public class InputView {
     private InputView() {
     }
 
-    public static Money inputPurchaseMoney() {
+    public static int inputPurchaseMoney() {
         System.out.println("구입금액을 입력해 주세요.");
-        int money = Integer.parseInt(SCANNER.nextLine());
-        return Money.createPurchasingLottoMoney(money);
+        return Integer.parseInt(SCANNER.nextLine());
     }
 
     public static int inputPurchasingPassiveLottoNumber() {
@@ -29,34 +25,29 @@ public class InputView {
         return Integer.parseInt(SCANNER.nextLine());
     }
 
-    public static List<Lotto> inputPurchasingPassiveLottos(int numberOfLotto) {
+    public static List<List<LottoNumber>> inputPurchasingPassiveLottos(int numberOfLotto) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        List<Lotto> lottos = Stream.generate(InputView::inputLotto)
+        return Stream.generate(InputView::inputLotto)
                 .limit(numberOfLotto)
                 .collect(Collectors.toList());
-        return lottos;
     }
 
-    public static WinningLotto inputWinningLotto() {
+    public static List<LottoNumber> inputWinningLotto() {
         System.out.println("지난 주 당첨 로또를 입력해주세요.");
-        Lotto lastWinningLotto = inputLotto();
-
-        return new WinningLotto(lastWinningLotto, inputBonusBall());
+        return inputLotto();
     }
 
-    private static Lotto inputLotto() {
+    private static List<LottoNumber> inputLotto() {
         String input = SCANNER.nextLine();
-        List<LottoNumber> lottoNumbers = Arrays.stream(input.split(","))
+        return Arrays.stream(input.split(","))
                 .map(String::trim)
-                .map(Integer::parseInt)
+                .map(Integer::new)
                 .map(LottoNumber::of)
                 .collect(Collectors.toList());
-
-        return new Lotto(lottoNumbers);
     }
 
-    private static LottoNumber inputBonusBall() {
+    public static int inputBonusBall() {
         System.out.println("보너스 볼을 입력해주세요.");
-        return LottoNumber.of(SCANNER.nextInt());
+        return SCANNER.nextInt();
     }
 }
