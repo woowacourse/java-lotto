@@ -9,12 +9,12 @@ import static lotto.lottoticket.ticketnumber.RandomNumbersGenerator.MINIMUM_NUMB
 public class LottoNumber {
     public static final String ERROR_MESSAGE_INVALID_RANGE = String.format("숫자는 %d부터 %d 사이여야 합니다.", MINIMUM_NUMBER, MAXIMUM_NUMBER);
 
-    private static final LottoNumber[] cache;
+    private static final LottoNumber[] CACHE;
 
     static {
-        cache = new LottoNumber[(MAXIMUM_NUMBER - MINIMUM_NUMBER) + 1];
+        CACHE = new LottoNumber[(MAXIMUM_NUMBER - MINIMUM_NUMBER) + 1];
         for (int i = 0; i < MAXIMUM_NUMBER; i++) {
-            cache[i] = new LottoNumber(i + MINIMUM_NUMBER);
+            CACHE[i] = new LottoNumber(i + MINIMUM_NUMBER);
         }
     }
 
@@ -26,7 +26,7 @@ public class LottoNumber {
 
     public static LottoNumber valueOf(String value) {
         try {
-            return cache[makeNumber(value) - MINIMUM_NUMBER];
+            return CACHE[makeNumber(value) - MINIMUM_NUMBER];
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new IllegalArgumentException(ERROR_MESSAGE_INVALID_RANGE);
         }
@@ -34,7 +34,7 @@ public class LottoNumber {
 
     public static LottoNumber of(int number) {
         try {
-            return cache[number - MINIMUM_NUMBER];
+            return CACHE[number - MINIMUM_NUMBER];
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new IllegalArgumentException(ERROR_MESSAGE_INVALID_RANGE);
         }
