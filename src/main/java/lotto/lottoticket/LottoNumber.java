@@ -1,6 +1,7 @@
 package lotto.lottoticket;
 
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 import static lotto.lottoticket.LottoTicketValidation.ERROR_MESSAGE_INVALID_INPUT;
 import static lotto.lottoticket.ticketnumber.RandomNumbersGenerator.MAXIMUM_NUMBER;
@@ -9,13 +10,11 @@ import static lotto.lottoticket.ticketnumber.RandomNumbersGenerator.MINIMUM_NUMB
 public class LottoNumber {
     public static final String ERROR_MESSAGE_INVALID_RANGE = String.format("숫자는 %d부터 %d 사이여야 합니다.", MINIMUM_NUMBER, MAXIMUM_NUMBER);
 
-    private static final LottoNumber[] CACHE;
+    private static final LottoNumber[] CACHE = new LottoNumber[(MAXIMUM_NUMBER - MINIMUM_NUMBER) + 1];
 
     static {
-        CACHE = new LottoNumber[(MAXIMUM_NUMBER - MINIMUM_NUMBER) + 1];
-        for (int i = 0; i < MAXIMUM_NUMBER; i++) {
-            CACHE[i] = new LottoNumber(i + MINIMUM_NUMBER);
-        }
+        IntStream.range(MINIMUM_NUMBER - 1, MAXIMUM_NUMBER)
+                .forEach(index -> CACHE[index] = new LottoNumber(index + 1));
     }
 
     private final int number;
