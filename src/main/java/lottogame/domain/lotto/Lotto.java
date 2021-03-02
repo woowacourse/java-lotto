@@ -3,11 +3,11 @@ package lottogame.domain.lotto;
 import java.util.*;
 
 public class Lotto {
-    private final List<LottoNumber> lotto;
+    private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<LottoNumber> lotto) {
-        validate(lotto);
-        this.lotto = lotto;
+    public Lotto(List<LottoNumber> lottoNumbers) {
+        validate(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
     }
 
     private static void validate(List<LottoNumber> lotto) {
@@ -18,17 +18,17 @@ public class Lotto {
     }
 
     public List<LottoNumber> values() {
-        return new ArrayList<>(lotto);
+        return new ArrayList<>(lottoNumbers);
     }
 
     public int match(Lotto lotto) {
-        return (int) this.lotto.stream()
+        return (int) this.lottoNumbers.stream()
                 .filter(lotto::contains)
                 .count();
     }
 
     public boolean contains(LottoNumber lottonumber) {
-        return lotto.contains(lottonumber);
+        return lottoNumbers.contains(lottonumber);
     }
 
     @Override
@@ -36,11 +36,11 @@ public class Lotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lotto lotto = (Lotto) o;
-        return Objects.equals(this.lotto, lotto.lotto);
+        return Objects.equals(this.lottoNumbers, lotto.lottoNumbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lotto);
+        return Objects.hash(lottoNumbers);
     }
 }
