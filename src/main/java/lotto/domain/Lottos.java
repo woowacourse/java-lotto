@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class Lottos {
@@ -8,7 +9,7 @@ public class Lottos {
     public static final String NUMBER_RANGE_ERROR = "[ERROR] 입력하신 금액으로 구입할 수 없습니다";
     private static int manualCount;
     private static int randomCount;
-    private final ArrayList<Lotto> lottoGroup = new ArrayList<>();
+    private final List<Lotto> lottoGroup = new ArrayList<>();
 
     public Lottos(Money money, String inputManualCount) {
         manualCount = validateManualCount(inputManualCount, money.count());
