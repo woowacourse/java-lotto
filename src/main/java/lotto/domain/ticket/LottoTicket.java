@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.ticket;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -11,7 +11,8 @@ import lotto.domain.number.LottoNumber;
 import lotto.domain.number.LottoNumberFactory;
 
 public class LottoTicket {
-    public static final int SIZE_OF_LOTTO_NUMBERS = 6;
+    private static final int SIZE_OF_LOTTO_NUMBERS = 6;
+    public static final int PRICE = 1000;
 
     private final Set<LottoNumber> lottoNumbers;
 
@@ -28,7 +29,7 @@ public class LottoTicket {
     private void validateLottoNumberCount(List<Integer> numbers) {
         if (numbers.size() != SIZE_OF_LOTTO_NUMBERS) {
             throw new IllegalArgumentException(
-                String.format("로또 번호는 %d개여야 합니다. 현재 개수 : %d", SIZE_OF_LOTTO_NUMBERS, numbers.size())
+                String.format("로또 번호는 %d개 입니다. 현재 개수 : %d", SIZE_OF_LOTTO_NUMBERS, numbers.size())
             );
         }
     }
@@ -46,13 +47,8 @@ public class LottoTicket {
             .count();
     }
 
-    private boolean containsLottoNumber(LottoNumber lottoNumber) {
+    public boolean containsLottoNumber(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
-    }
-
-    public boolean containsAnyNumber(LottoNumber lottoNumber) {
-        return lottoNumbers.stream()
-            .anyMatch(winningNumber -> winningNumber.equals(lottoNumber));
     }
 
     public List<LottoNumber> getLottoNumbers() {

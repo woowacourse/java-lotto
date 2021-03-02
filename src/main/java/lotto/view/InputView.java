@@ -14,7 +14,7 @@ public class InputView {
         this.scanner = scanner;
     }
 
-    public int takeLottoMoney() {
+    public int inputForLottoMoney() {
         System.out.println("구입 금액을 입력해주세요.");
         try {
             return inputDecimal();
@@ -23,12 +23,29 @@ public class InputView {
         }
     }
 
-    public List<Integer> inputWinningNumbers() {
+    public int inputForManualLottoCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        try {
+            return inputDecimal();
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("구입 금액은 숫자여야 합니다.");
+        }
+    }
+
+    public void printForInputManualLottoNumbersMessage() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요");
+    }
+
+    public List<Integer> inputForLottoNumbers() {
+        return inputToIntegerList();
+    }
+
+    public List<Integer> inputForWinningNumbers() {
         System.out.println("지난주 당첨번호를 입력해주세요.");
         return inputToIntegerList();
     }
 
-    public int takeBonusNumber() {
+    public int inputForBonusNumber() {
         System.out.println("보너스 번호를 입력해주세요.");
         return inputDecimal();
     }

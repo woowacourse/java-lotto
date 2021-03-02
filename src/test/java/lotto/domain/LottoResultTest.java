@@ -21,6 +21,6 @@ class LottoResultTest {
 
         LottoResult lottoResult = new LottoResult(lottoResultMap);
 
-        assertThat(lottoResult.calculatePrizeMoney()).isEqualTo(2061765000L);
+        assertThat(lottoResult.getPrizeMoney()).isEqualTo(2061765000L);
     }
 }

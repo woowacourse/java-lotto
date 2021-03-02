@@ -14,7 +14,8 @@ class InputViewTest {
         Scanner scanner = new Scanner(new ByteArrayInputStream("test".getBytes()));
         InputView inputView = new InputView(scanner);
 
-        assertThatThrownBy(inputView::takeLottoMoney).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(inputView::inputForLottoMoney)
+            .isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("당첨 번호가 구분자로 구분되어 있는 숫자인지 확인")
@@ -23,7 +24,7 @@ class InputViewTest {
         Scanner scanner = new Scanner(new ByteArrayInputStream("test,test".getBytes()));
         InputView inputView = new InputView(scanner);
 
-        assertThatThrownBy(inputView::inputWinningNumbers)
+        assertThatThrownBy(inputView::inputForWinningNumbers)
             .isExactlyInstanceOf(IllegalArgumentException.class);
     }
 
