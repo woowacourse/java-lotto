@@ -2,6 +2,7 @@ package lottogame.domain.lotto;
 
 import java.util.Objects;
 import java.util.regex.Pattern;
+import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     private static final Pattern BONUS_NUMBER_PATTERN = Pattern.compile("^[0-9]*$");
@@ -12,10 +13,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
         static final LottoNumber[] CACHE;
 
         static {
-            CACHE = new LottoNumber[(HIGH - LOW) + 1];
-            for (int i = 0; i < CACHE.length; i++) {
-                CACHE[i] = new LottoNumber(i + 1);
-            }
+            CACHE = IntStream.rangeClosed(LOW, HIGH)
+                    .mapToObj(LottoNumber::new)
+                    .toArray(LottoNumber[]::new);
         }
     }
 
