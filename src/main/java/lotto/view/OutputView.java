@@ -2,14 +2,14 @@ package lotto.view;
 
 import java.util.stream.Collectors;
 import lotto.domain.lotto.Lotto;
-import lotto.domain.lotto.LottoRepository;
+import lotto.domain.lotto.Lotteries;
 import lotto.domain.rating.Rating;
 import lotto.domain.rating.RatingInfo;
 
 public class OutputView {
 
     private static final String ENTER = System.lineSeparator();
-    private static final String BUY_LOTTO_MESSAGE = "%d개를 구매했습니다." + ENTER;
+    private static final String BUY_LOTTO_MESSAGE = ENTER + "수동으로 %d장, 자동으로 %d장을 구매했습니다." + ENTER;
     private static final String WINNING_DETAIL_HEADER = ENTER + "당첨 통계" + ENTER + "---------";
     private static final String PRINT_FORMAT = "%d개 일치 (%d원) - %d개" + ENTER;
     private static final String SECOND_PRINT_FORMAT = "%d개 일치, 보너스 볼 일치 (%d원) - %d개" + ENTER;
@@ -22,13 +22,13 @@ public class OutputView {
         System.out.println(message);
     }
 
-    public static void printBuyLotto(final int count) {
-        System.out.printf(BUY_LOTTO_MESSAGE, count);
+    public static void printBuyLotto(final int manualCount, final int autoCount) {
+        System.out.printf(BUY_LOTTO_MESSAGE, manualCount, autoCount);
     }
 
-    public static void printLottoResults(final LottoRepository lottoRepository) {
+    public static void printLottoResults(final Lotteries lotteries) {
         final StringBuilder log = new StringBuilder();
-        for (final Lotto lotto : lottoRepository.toList()) {
+        for (final Lotto lotto : lotteries.toList()) {
             printLottoResult(log, lotto);
         }
         log.append(ENTER);
