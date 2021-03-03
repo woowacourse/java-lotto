@@ -33,11 +33,7 @@ public enum Rank {
         return this.prize;
     }
 
-    @Override
-    public String toString() {
-        if (this == SECOND) {
-            return matchCount + "개 일치, 보너스 볼 일치 (" + prize + "원) - ";
-        }
-        return matchCount + "개 일치 (" + prize + "원) - ";
+    public int getMatchCount() {
+        return this.matchCount;
     }
 }

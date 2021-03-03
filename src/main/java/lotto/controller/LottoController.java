@@ -8,44 +8,42 @@ import lotto.view.*;
 public class LottoController {
 
     public void run() {
-        Money money = payMoney();
-        LottoGroup lottos = buyLotto(money);
-        WinningLotto winningLotto = checkWinningLotto();
+        Money money = new Money(InputView.requestMoney());
+        Count manualCount = new Count(InputView.requestManualCount());
+        Count autoCount = new Count(money.count() - manualCount.getCount());
+        ManualGenerator manualGenerator = new ManualGenerator();
+        AutoGenerator autoGenerator = new AutoGenerator();
+        LottoGroup lottos = buyLotto(manualGenerator, autoGenerator, manualCount, autoCount);
+        WinningLotto winningLotto = checkWinningLotto(manualGenerator);
         drawLotto(winningLotto, lottos, money);
     }
 
-    private Money payMoney() {
-        OutputView.requestMoneyMessage();
-        return new Money(InputView.requestInput());
-    }
+    private LottoGroup buyLotto(ManualGenerator manualGenerator, AutoGenerator autoGenerator, Count manualCount, Count autoCount) {
+        List<String> lottoNumbers = InputView.requestManualLotto(manualCount.getCount());
+        LottoGroup manualLotto = manualGenerator.group(lottoNumbers);
+        LottoGroup autoLotto = autoGenerator.group(autoCount.getCount());
+        LottoGroup lottos = manualLotto.merge(autoLotto);
 
-    private LottoGroup buyLotto(Money money) {
-        Seller seller = new Seller();
-        int count = money.count();
-        LottoGroup lottos = seller.sell(count);
-        OutputView.buyLottoMessage(count);
+        OutputView.buyLottoMessage(manualCount.getCount(), autoCount.getCount());
         OutputView.printLottos(lottos.getLottoGroup());
         return lottos;
     }
 
-    private WinningLotto checkWinningLotto() {
-        OutputView.requestWinningNumberMessage();
-        String winningLottoInput = InputView.requestInput();
-        OutputView.requestBonusBallNumberMessage();
-        String bonusBallInput = InputView.requestInput();
-        LottoGenerator lottoGenerator = new LottoGenerator();
+    private WinningLotto checkWinningLotto(ManualGenerator manualGenerator) {
+        String winningLottoInput = InputView.requestWinningNumber();
+        String bonusBallInput = InputView.requestBonusBall();
         return new WinningLotto(
-            new Lotto(lottoGenerator.generateManual(winningLottoInput)),
+            manualGenerator.generate(winningLottoInput),
             LottoNumber.of(bonusBallInput)
         );
     }
 
     public void drawLotto(WinningLotto winningLotto, LottoGroup lottos, Money money) {
-        LottoResult lottoResult = new LottoResult();
-        Map<Rank, Integer> ranks = lottoResult.matchRank(winningLotto, lottos);
+        Map<Rank, Integer> result = lottos.matchRank(winningLotto);
+        LottoResult lottoResult = new LottoResult(result);
         OutputView.displayResultMessage();
-        ranks.forEach((rank, rankCount) -> {
-            OutputView.displayResult(rank, rankCount);
+        lottoResult.getLottoResult().forEach((rank, rankCount) -> {
+            OutputView.displayResult(rank.getMatchCount(), rank.getPrize(), rankCount);
         });
         OutputView.displayEarningRate(lottoResult.findEarningRate(money.getMoney()));
     }

@@ -9,13 +9,13 @@ public class Money {
     private final int money;
 
     public Money(String input) {
-        int inputMoney = changeToInt(input);
-        validateRange(inputMoney);
-        validateUnit(inputMoney);
-        this.money = inputMoney;
+        int number = validateNumber(input);
+        validateRange(number);
+        validateUnit(number);
+        this.money = number;
     }
 
-    private int changeToInt(String input) {
+    private int validateNumber(String input) {
         try {
             return Integer.parseInt(input);
         } catch (Exception e) {

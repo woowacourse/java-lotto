@@ -7,12 +7,12 @@ public class WinningLotto {
     private final LottoNumber bonusBall;
 
     public WinningLotto(Lotto lotto, LottoNumber bonusBall) {
-        validateDuplicate(lotto, bonusBall);
+        validateBonusBall(lotto, bonusBall);
         this.winLotto = lotto;
         this.bonusBall = bonusBall;
     }
 
-    public void validateDuplicate(Lotto lotto, LottoNumber bonusBall) {
+    public void validateBonusBall(Lotto lotto, LottoNumber bonusBall) {
         if (lotto.isContain(bonusBall)) {
             throw new IllegalArgumentException(DUPLICATED_NUMBER_ERROR);
         }
