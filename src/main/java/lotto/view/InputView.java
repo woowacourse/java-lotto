@@ -1,11 +1,5 @@
 package lotto.view;
 
-import lotto.lottogame.LottoCount;
-import lotto.lottogame.ManualLottoCount;
-import lotto.lottoticket.BonusBall;
-import lotto.lottoticket.WinnerTicket;
-import lotto.money.Money;
-
 import java.util.Scanner;
 
 public class InputView {
@@ -20,26 +14,26 @@ public class InputView {
     private InputView() {
     }
 
-    public static Money inputMoney() {
+    public static String inputMoney() {
         System.out.println(ENTER_PURCHASE_MONEY_MESSAGE);
-        return new Money(scanner.nextLine());
+        return scanner.nextLine();
     }
 
-    public static WinnerTicket inputWinnerTicket() {
+    public static String inputWinnerTicket() {
         System.out.println();
         System.out.println(ENTER_WINNER_TICKET_MESSAGE);
-        return new WinnerTicket(scanner.nextLine());
+        return scanner.nextLine();
     }
 
-    public static BonusBall inputBonusBall(WinnerTicket winnerTicket) {
+    public static String inputBonusBall() {
         System.out.println(ENTER_BONUS_BALL_MESSAGE);
-        return new BonusBall(scanner.nextLine(), winnerTicket);
+        return scanner.nextLine();
     }
 
-    public static ManualLottoCount inputManualLottoCount(LottoCount lottoCount) {
+    public static String inputManualLottoCount() {
         System.out.println();
         System.out.println(ENTER_MANUAL_LOTTO_COUNT);
-        return new ManualLottoCount(scanner.nextLine(), lottoCount);
+        return scanner.nextLine();
     }
 
     public static String inputTicket() {

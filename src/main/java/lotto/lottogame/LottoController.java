@@ -16,8 +16,8 @@ public class LottoController {
     public void run() {
         Money money = generateMoney();
         LottoCount lottoCount = new LottoCount(money.divideMoney(LOTTO_PRICE));
-        WinnerTicket winnerTicket = generateWinnerTicket();
         LottoGame lottoGame = new LottoGame(generateTickets(lottoCount));
+        WinnerTicket winnerTicket = generateWinnerTicket();
         lottoGame.calculateStatistics(winnerTicket, generateBonusBall(winnerTicket));
         LottoGameResult lottoGameResult = lottoGame.createResult(money);
         OutputView.noticeStatistics(lottoGameResult.getStatistics(), lottoGameResult.getProfit());
@@ -35,6 +35,26 @@ public class LottoController {
         return lottoTickets;
     }
 
+    private Money generateMoney() {
+        try {
+            String inputMoney = InputView.inputMoney();
+            return new Money(inputMoney);
+        } catch (IllegalArgumentException e) {
+            OutputView.printError(e);
+            return generateMoney();
+        }
+    }
+
+    private WinnerTicket generateWinnerTicket() {
+        try {
+            String inputWinnerTicket = InputView.inputWinnerTicket();
+            return new WinnerTicket(inputWinnerTicket);
+        } catch (IllegalArgumentException e) {
+            OutputView.printError(e);
+            return generateWinnerTicket();
+        }
+    }
+
     private LottoTickets generateManualLottoTickets(ManualLottoCount manualLottoCount) {
         try {
             return new LottoTickets(manualLottoCount, generateManualNumbers());
@@ -46,7 +66,8 @@ public class LottoController {
 
     private NumbersGenerator generateManualNumbers() {
         try {
-            return () -> LottoTicketMaker.makeLottoNumbers(InputView.inputTicket());
+            String inputNumbers = InputView.inputTicket();
+            return () -> LottoTicketMaker.makeLottoNumbers(inputNumbers);
         } catch (IllegalArgumentException e) {
             OutputView.printError(e);
             return generateManualNumbers();
@@ -55,34 +76,18 @@ public class LottoController {
 
     private ManualLottoCount generateManualLottoCount(LottoCount lottoCount) {
         try {
-            return InputView.inputManualLottoCount(lottoCount);
+            String inputManualLottoCount = InputView.inputManualLottoCount();
+            return new ManualLottoCount(inputManualLottoCount, lottoCount);
         } catch (IllegalArgumentException e) {
             OutputView.printError(e);
             return generateManualLottoCount(lottoCount);
         }
     }
 
-    private Money generateMoney() {
-        try {
-            return InputView.inputMoney();
-        } catch (IllegalArgumentException e) {
-            OutputView.printError(e);
-            return generateMoney();
-        }
-    }
-
-    private WinnerTicket generateWinnerTicket() {
-        try {
-            return InputView.inputWinnerTicket();
-        } catch (IllegalArgumentException e) {
-            OutputView.printError(e);
-            return generateWinnerTicket();
-        }
-    }
-
     private BonusBall generateBonusBall(WinnerTicket winnerTicket) {
         try {
-            return InputView.inputBonusBall(winnerTicket);
+            String inputBonusBall = InputView.inputBonusBall();
+            return new BonusBall(inputBonusBall, winnerTicket);
         } catch (IllegalArgumentException e) {
             OutputView.printError(e);
             return generateBonusBall(winnerTicket);
