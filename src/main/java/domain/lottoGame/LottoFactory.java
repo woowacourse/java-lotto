@@ -1,4 +1,6 @@
-package domain;
+package domain.lottoGame;
+
+import domain.lottoGame.shuffleStrategy.ShuffleStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +12,7 @@ public class LottoFactory {
 
     static {
         CANDIDATES_NUMBERS = IntStream.rangeClosed(LottoNumber.NUMBER_MIN, LottoNumber.NUMBER_MAX)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::from)
                 .collect(Collectors.toList());
     }
 

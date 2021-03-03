@@ -1,10 +1,12 @@
-package domain;
+package domain.dto;
 
-public class LottoResult {
+import domain.lottoGame.LottoWinningTable;
+
+public class GameResult {
     private final LottoWinningTable winningTable;
     private final double earningRate;
 
-    public LottoResult(LottoWinningTable winningTable, double earningRate) {
+    public GameResult(LottoWinningTable winningTable, double earningRate) {
         this.winningTable = winningTable;
         this.earningRate = earningRate;
     }

@@ -1,12 +1,10 @@
-package domain;
+package domain.lottoGame;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private static final int PRICE = 1000;
-
     private final LottoNumbers lottoNumbers;
 
     public Lotto(final LottoNumbers lottoNumbers) {
@@ -15,16 +13,8 @@ public class Lotto {
 
     public Lotto(final int[] numbers) {
         this(new LottoNumbers(Arrays.stream(numbers)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::from)
                 .collect(Collectors.toList())));
-    }
-
-    public static int getNumberOfAvailablePurchases(Money money) {
-        return money.divide(PRICE);
-    }
-
-    public static Money getPurchasedAmount(int purchaseCount) {
-        return new Money(PRICE * purchaseCount);
     }
 
     public boolean contains(LottoNumber lottoNumber) {

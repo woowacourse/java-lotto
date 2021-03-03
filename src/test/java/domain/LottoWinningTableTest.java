@@ -1,5 +1,7 @@
 package domain;
 
+import domain.lottoGame.LottoRank;
+import domain.lottoGame.LottoWinningTable;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
