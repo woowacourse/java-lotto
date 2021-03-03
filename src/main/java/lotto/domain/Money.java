@@ -56,4 +56,8 @@ public class Money {
     public int count() {
         return money / THOUSAND;
     }
+
+    public int getLeftCount(String manualCount) {
+        return count() - Integer.parseInt(manualCount);
+    }
 }

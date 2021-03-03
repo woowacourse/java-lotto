@@ -3,14 +3,9 @@ package lotto.controller;
 import lotto.domain.*;
 import lotto.view.LottoView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.stream.Collectors;
+import java.util.*;
 
 public class LottoController {
-    private static final String DELIMITER = ",";
     private static Lottos lottos;
 
     public void startLotto() {
@@ -32,27 +27,23 @@ public class LottoController {
         String manualCount = LottoView.requestManualLottoCount();
         lottos = new Lottos(money, manualCount);
         LottoView.displayManualNumberMessage();
+        List<Lotto> manualLottos = new ArrayList<>();
         for (int i = 0; i < Integer.parseInt(manualCount); i++) {
-            lottos.addManualLotto(makeManualLotto());
+            manualLottos.add(makeManualLotto());
         }
+        lottos.generateManualLotto(manualLottos);
     }
 
-    private Lotto makeManualLotto() {
-        String winningInput = LottoView.requestManualNumber();
-        return new Lotto(changeStringToList(winningInput));
+    public Lotto makeManualLotto() {
+        String manualNumberInput = LottoView.requestManualNumber();
+        return Lotto.changeStringToLotto(manualNumberInput);
     }
 
     private WinningLotto makeWinningLotto() {
         String winningInput = LottoView.requestWinningNumber();
-        Lotto winLotto = new Lotto(changeStringToList(winningInput));
+        Lotto winLotto = Lotto.changeStringToLotto(winningInput);
         String bonusInput = LottoView.requestBonusBallNumber();
         return new WinningLotto(winLotto, bonusInput);
-    }
-
-    private ArrayList<String> changeStringToList(String numberInput) {
-        return Arrays.stream(numberInput.split(DELIMITER))
-                .map(String::trim)
-                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     private Map<Rank, Integer> countEachRank(WinningLotto winningLotto) {
