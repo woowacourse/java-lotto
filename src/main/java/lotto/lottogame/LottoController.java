@@ -16,11 +16,11 @@ public class LottoController {
     public void run() {
         Money money = generateMoney();
         LottoCount lottoCount = new LottoCount(money.divideMoney(LOTTO_PRICE));
-        LottoGame lottoGame = new LottoGame(generateTickets(lottoCount));
         WinnerTicket winnerTicket = generateWinnerTicket();
-        OutputView.noticeStatistics(
-                lottoGame.calculateStatistics(winnerTicket, generateBonusBall(winnerTicket)),
-                lottoGame.calculateResult(money));
+        LottoGame lottoGame = new LottoGame(generateTickets(lottoCount));
+        lottoGame.calculateStatistics(winnerTicket, generateBonusBall(winnerTicket));
+        LottoGameResult lottoGameResult = lottoGame.createResult(money);
+        OutputView.noticeStatistics(lottoGameResult.getStatistics(), lottoGameResult.getProfit());
     }
 
     private LottoTickets generateTickets(LottoCount lottoCount) {

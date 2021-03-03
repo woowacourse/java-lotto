@@ -4,7 +4,6 @@ import lotto.lottoticket.BonusBall;
 import lotto.lottoticket.LottoTickets;
 import lotto.lottoticket.WinnerTicket;
 import lotto.money.Money;
-import lotto.money.PrizeMoney;
 import lotto.ranking.Statistics;
 
 public class LottoGame {
@@ -15,12 +14,11 @@ public class LottoGame {
         this.lottoTickets = lottoTickets;
     }
 
-    public Statistics calculateStatistics(WinnerTicket winnerTicket, BonusBall bonusBall) {
+    public void calculateStatistics(WinnerTicket winnerTicket, BonusBall bonusBall) {
         statistics.calculateStatistics(lottoTickets.makeResult(winnerTicket, bonusBall));
-        return statistics;
     }
 
-    public Double calculateResult(Money money) {
-        return new PrizeMoney(statistics).calculateProfit(money);
+    public LottoGameResult createResult(Money money) {
+        return new LottoGameResult(statistics, money);
     }
 }
