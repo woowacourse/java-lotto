@@ -1,7 +1,6 @@
 package lottogame.domain.lotto;
 
 import lottogame.domain.stats.Rank;
-import lottogame.domain.stats.LottoResults;
 import lottogame.utils.ManualLottoGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -41,13 +40,12 @@ class LottosTest {
         manualLottoGenerator = new ManualLottoGenerator("1, 2, 5, 20, 21, 22");
         WinningLotto winningLotto = new WinningLotto(manualLottoGenerator.generateLotto(), LottoNumber.of(25));
         EnumMap<Rank, Integer> results = new EnumMap<>(Rank.class);
-        results.put(Rank.NOT_FOUND, 0);
+        results.put(Rank.NOT_FOUND, 2);
         results.put(Rank.FIFTH, 2);
         results.put(Rank.FOURTH, 0);
         results.put(Rank.THIRD, 0);
         results.put(Rank.SECOND, 0);
         results.put(Rank.FIRST, 0);
-        LottoResults exectedlottoResults = new LottoResults(results);
-        assertEquals(exectedlottoResults, lottos.matchLottos(winningLotto));
+        assertEquals(results, lottos.matchLottos(winningLotto));
     }
 }

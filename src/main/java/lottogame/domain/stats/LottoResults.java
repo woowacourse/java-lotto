@@ -3,23 +3,21 @@ package lottogame.domain.stats;
 import java.util.*;
 
 public class LottoResults {
-    private final Map<Rank, Integer> lottoResults;
+    private final Map<Rank, Integer> results;
+    private final Yield yield;
 
-    public LottoResults(Map<Rank, Integer> lottoResults) {
-        lottoResults.remove(Rank.NOT_FOUND);
-        this.lottoResults = lottoResults;
+    public LottoResults(Map<Rank, Integer> results, Yield yield) {
+        results.remove(Rank.NOT_FOUND);
+        this.results = results;
+        this.yield = yield;
     }
 
     public Map<Rank, Integer> values() {
-        return new EnumMap<>(this.lottoResults);
+        return new EnumMap<>(this.results);
     }
 
-    public Money totalPrizeMoney() {
-        int prizeMoney = Arrays.stream(Rank.values())
-                .filter(Rank::isFound)
-                .mapToInt(rank -> lottoResults.get(rank) * rank.getMoney())
-                .sum();
-        return Money.of(prizeMoney);
+    public float yield() {
+        return yield.value();
     }
 
     @Override
@@ -27,11 +25,11 @@ public class LottoResults {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoResults that = (LottoResults) o;
-        return Objects.equals(lottoResults, that.lottoResults);
+        return Objects.equals(results, that.results) && Objects.equals(yield, that.yield);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoResults);
+        return Objects.hash(results, yield);
     }
 }

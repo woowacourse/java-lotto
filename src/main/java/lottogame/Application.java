@@ -4,7 +4,6 @@ import lottogame.domain.lotto.*;
 import lottogame.domain.stats.Money;
 import lottogame.domain.stats.Quantity;
 import lottogame.domain.stats.LottoResults;
-import lottogame.domain.stats.Yield;
 import lottogame.utils.AutoLottoGenerator;
 import lottogame.utils.LottoGenerator;
 import lottogame.utils.ManualLottoGenerator;
@@ -17,26 +16,21 @@ import java.util.List;
 public class Application {
     public static void main(String[] args) {
         Money money = Money.of(InputView.scanMoney());
-        Lottos myLottos = buyLottos(money);
-        WinningLotto winningLotto = confirmWinningLotto();
-        LottoGame lottoGame = new LottoGame(myLottos, winningLotto);
-        summarize(lottoGame, money);
-    }
-
-    private static void summarize(LottoGame lottoGame, Money money) {
-        LottoResults lottoResults = lottoGame.results();
-        Yield yield = Yield.of(lottoResults.totalPrizeMoney(), money);
-        OutputView.printSummary(lottoResults.values(), yield.value());
-    }
-
-    private static WinningLotto confirmWinningLotto() {
-        ManualLottoGenerator manualLottoGenerator = new ManualLottoGenerator(InputView.scanWinningLotto());
-        LottoNumber bonusNumber = LottoNumber.of(InputView.scanBonusNumber());
-        return new WinningLotto(manualLottoGenerator.generateLotto(), bonusNumber);
-    }
-
-    private static Lottos buyLottos(Money money) {
         Quantity manualQuantity = Quantity.of(InputView.scanManualQuantity());
+        LottoGame lottoGame = new LottoGame(buyLottos(money, manualQuantity));
+        WinningLotto winningLotto = new WinningLotto(
+                confirmWinningLotto(InputView.scanWinningLotto()),
+                LottoNumber.of(InputView.scanBonusNumber()));
+        LottoResults lottoResults = lottoGame.results(winningLotto, money);
+        OutputView.printSummary(lottoResults.values(), lottoResults.yield());
+    }
+
+    private static Lotto confirmWinningLotto(String winningLotto) {
+        ManualLottoGenerator manualLottoGenerator = new ManualLottoGenerator(winningLotto);
+        return manualLottoGenerator.generateLotto();
+    }
+
+    private static Lottos buyLottos(Money money, Quantity manualQuantity) {
         Quantity autoQuantity = Quantity.from(money, manualQuantity);
         Lottos lottos = createLottos(manualQuantity, autoQuantity);
         OutputView.printLottoQuantity(manualQuantity.value(), autoQuantity.value());

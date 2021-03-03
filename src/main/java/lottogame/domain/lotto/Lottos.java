@@ -1,7 +1,6 @@
 package lottogame.domain.lotto;
 
 import lottogame.domain.stats.Rank;
-import lottogame.domain.stats.LottoResults;
 
 import java.util.*;
 
@@ -16,7 +15,7 @@ public class Lottos {
         return new ArrayList<>(lottos);
     }
 
-    public LottoResults matchLottos(WinningLotto winningLotto) {
+    public Map<Rank, Integer> matchLottos(WinningLotto winningLotto) {
         Map<Rank, Integer> results = new EnumMap<>(Rank.class);
         Arrays.stream(Rank.values()).forEach(rank -> results.put(rank, 0));
         for (Lotto lotto : lottos) {
@@ -25,7 +24,7 @@ public class Lottos {
             Rank rank = Rank.of(count, bonus);
             results.put(rank, results.get(rank) + 1);
         }
-        return new LottoResults(results);
+        return results;
     }
 
     @Override

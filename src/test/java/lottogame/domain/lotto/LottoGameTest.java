@@ -1,7 +1,9 @@
 package lottogame.domain.lotto;
 
 import lottogame.domain.stats.LottoResults;
+import lottogame.domain.stats.Money;
 import lottogame.domain.stats.Rank;
+import lottogame.domain.stats.Yield;
 import lottogame.utils.ManualLottoGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -15,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class LottoGameTest {
     private ManualLottoGenerator manualLottoGenerator;
     private LottoGame lottoGame;
+    private WinningLotto winningLotto;
 
     @BeforeEach
     void setUp() {
@@ -24,8 +27,8 @@ class LottoGameTest {
                 "1, 2, 3, 4, 5, 7", "1, 2, 3, 4, 5, 44"));
         Lottos lottos = new Lottos(manualLottoGenerator.generateLottos());
         manualLottoGenerator = new ManualLottoGenerator("1, 2, 5, 20, 21, 22");
-        WinningLotto winningLotto = new WinningLotto(manualLottoGenerator.generateLotto(), LottoNumber.of(25));
-        lottoGame = new LottoGame(lottos, winningLotto);
+        winningLotto = new WinningLotto(manualLottoGenerator.generateLotto(), LottoNumber.of(25));
+        lottoGame = new LottoGame(lottos);
     }
 
     @Test
@@ -37,8 +40,7 @@ class LottoGameTest {
                 "1, 2, 3, 4, 5, 7", "1, 2, 3, 4, 5, 44"));
         Lottos newLottos = new Lottos(manualLottoGenerator.generateLottos());
         manualLottoGenerator = new ManualLottoGenerator("1, 2, 5, 20, 21, 22");
-        WinningLotto newWinningLotto = new WinningLotto(manualLottoGenerator.generateLotto(), LottoNumber.of(25));
-        LottoGame newLottoGame = new LottoGame(newLottos, newWinningLotto);
+        LottoGame newLottoGame = new LottoGame(newLottos);
         assertEquals(newLottoGame, lottoGame);
     }
 
@@ -52,7 +54,7 @@ class LottoGameTest {
         results.put(Rank.THIRD, 0);
         results.put(Rank.SECOND, 0);
         results.put(Rank.FIRST, 0);
-        LottoResults exectedlottoResults = new LottoResults(results);
-        assertEquals(exectedlottoResults, lottoGame.results());
+        LottoResults exectedlottoResults = new LottoResults(results, Yield.of(Money.of(10000), Money.of(4000)));
+        assertEquals(exectedlottoResults, lottoGame.results(winningLotto, Money.of(4000)));
     }
 }

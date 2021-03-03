@@ -20,7 +20,7 @@ class LottoResultsTest {
         results.put(Rank.THIRD, 0);
         results.put(Rank.SECOND, 1);
         results.put(Rank.FIRST, 0);
-        lottoResults = new LottoResults(results);
+        lottoResults = new LottoResults(results, Yield.of(Money.of(30025000), Money.of(10000)));
     }
 
     @Test
@@ -33,17 +33,10 @@ class LottoResultsTest {
         newResults.put(Rank.THIRD, 0);
         newResults.put(Rank.SECOND, 1);
         newResults.put(Rank.FIRST, 0);
-        LottoResults newLottoResults = new LottoResults(newResults);
+        LottoResults newLottoResults = new LottoResults(newResults, Yield.of(Money.of(30025000), Money.of(10000)));
         assertEquals(newLottoResults, lottoResults);
         newResults.put(Rank.FIFTH, newResults.get(Rank.FIFTH) - 2);
-        newLottoResults = new LottoResults(newResults);
+        newLottoResults = new LottoResults(newResults, Yield.of(Money.of(30025000), Money.of(10000)));
         assertNotEquals(newLottoResults, lottoResults);
-    }
-
-    @Test
-    @DisplayName("총 상금을 잘 계산하는지 확인")
-    void totalPrizeMoney() {
-        Money expectedMoney = Money.of(Rank.FIFTH.getMoney() * 5 + Rank.SECOND.getMoney());
-        assertEquals(expectedMoney, lottoResults.totalPrizeMoney());
     }
 }
