@@ -1,14 +1,17 @@
 package lotto.domain;
 
+import lotto.view.LottoView;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 public class Lottos {
     public static final String NUMBER_TYPE_ERROR = "[ERROR] 숫자만 입력할 수 있습니다";
     public static final String NUMBER_RANGE_ERROR = "[ERROR] 입력하신 금액으로 구입할 수 없습니다";
-    private static int manualCount;
-    private static int randomCount;
+    private final int manualCount;
+    private final int randomCount;
     private final List<Lotto> lottoGroup = new ArrayList<>();
 
     public Lottos(Money money, String inputManualCount) {
@@ -66,8 +69,8 @@ public class Lottos {
         return displayFormat;
     }
 
-    public void addManualLotto(Lotto lotto) {
-        lottoGroup.add(lotto);
+    public void generateManualLotto(List<Lotto> manualLottos) {
+        lottoGroup.addAll(manualLottos);
     }
 
     public int getManualCount() {

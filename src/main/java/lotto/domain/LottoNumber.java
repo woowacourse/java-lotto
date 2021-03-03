@@ -5,16 +5,16 @@ public class LottoNumber {
     public static final String NUMBER_RANGE_ERROR = "[ERROR] 숫자를 1 ~ 45 사이로 입력해주세요";
     public static final int MAXIMUM_NUMBER = 45;
     public static final int MINIMUM_NUMBER = 1;
-    private int number;
+    private final int number;
 
     public LottoNumber(String input) {
-        validateNumberType(input);
+        number = validateNumberType(input);
         validateNumberRange();
     }
 
-    private void validateNumberType(String input) {
+    private int validateNumberType(String input) {
         try {
-            number = Integer.parseInt(input);
+            return Integer.parseInt(input);
         } catch (Exception e) {
             throw new IllegalArgumentException(NUMBER_TYPE_ERROR);
         }
