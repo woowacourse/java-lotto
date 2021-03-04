@@ -30,7 +30,8 @@ public class LottoController {
         String manualCount = LottoView.requestManualLottoCount();
         lottos = new Lottos(money, manualCount);
         LottoView.displayManualNumberMessage();
-        lottos.generateManualLottos(manualCount);
+        String manualNumberInput = LottoView.requestManualNumber();
+        lottos.generateManualLottos(manualCount, manualNumberInput);
     }
 
     private WinningLotto makeWinningLotto() {

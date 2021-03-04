@@ -68,17 +68,12 @@ public class Lottos {
         return displayFormat;
     }
 
-    public void generateManualLottos(String manualCount) {
+    public void generateManualLottos(String manualCount, String manualNumberInput) {
         List<Lotto> manualLottos = new ArrayList<>();
         for (int i = 0; i < Integer.parseInt(manualCount); i++) {
-            manualLottos.add(makeManualLotto());
+            manualLottos.add(Lotto.changeStringToLotto(manualNumberInput));
         }
         lottoGroup.addAll(manualLottos);
-    }
-
-    private Lotto makeManualLotto() {
-        String manualNumberInput = LottoView.requestManualNumber();
-        return Lotto.changeStringToLotto(manualNumberInput);
     }
 
     public int getManualCount() {
