@@ -2,7 +2,9 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * LottoTicket.java
@@ -33,19 +35,17 @@ public class LottoTicket {
 
     public static LottoTicket valueOf(List<Integer> lottoNumbers) {
         isValidNumberCountOrThrow(lottoNumbers);
-        List<LottoNumber> lottoNumbersList = new ArrayList<>();
-        lottoNumbers.stream()
+        validateDuplicationLottoNumber(lottoNumbers);
+
+        return lottoNumbers.stream()
                 .map(LottoNumber::from)
-                .filter(lottoNumber -> isNoneDuplicationNumberOrThrow(lottoNumbersList, lottoNumber))
-                .forEach(lottoNumbersList::add);
-        return new LottoTicket(lottoNumbersList);
+                .collect(Collectors.collectingAndThen(Collectors.toList(), LottoTicket::new));
     }
 
-    private static boolean isNoneDuplicationNumberOrThrow(List<LottoNumber> lottoNumbers, LottoNumber lottoNumber) {
-        if (lottoNumbers.contains(lottoNumber)) {
+    private static void validateDuplicationLottoNumber(List<Integer> lottoNumbers) {
+        if (new HashSet<>(lottoNumbers).size() != lottoNumbers.size()) {
             throw new IllegalArgumentException(ERROR_INVALID_DUPLICATION_NUMBER);
         }
-        return true;
     }
 
     private static boolean isValidNumberCountOrThrow(List<Integer> lottoNumbers) {
