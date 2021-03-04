@@ -22,7 +22,7 @@ public class LottoController {
         outputView.printLottoTicket(lottoTickets);
 
         WinningNumbers winningNumber = Repeater.repeatFunctionOnError(this::createWinningNumber);
-        LottoResult lottoResult = LottoResult.of(winningNumber, lottoTickets);
+        LottoResult lottoResult = lottoTickets.generateLottoResult(winningNumber);
         outputView.printLottoResultStatistics(lottoResult.result());
 
         Profit profit = Profit.of(investedMoney, lottoResult.getReward());

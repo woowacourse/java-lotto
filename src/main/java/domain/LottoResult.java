@@ -13,30 +13,11 @@ import java.util.Map;
  * @author Daeun Lee, github.com/da-nyee
  */
 public class LottoResult {
-    private static final Integer INITIAL_VALUE_ONE = 1;
 
     private final Map<Rank, Integer> resultStatisticsMap;
 
-    private LottoResult(Map<Rank, Integer> resultStatisticsMap) {
+    public LottoResult(Map<Rank, Integer> resultStatisticsMap) {
         this.resultStatisticsMap = Collections.unmodifiableMap(resultStatisticsMap);
-    }
-
-    public static LottoResult of(WinningNumbers winningNumbers, LottoTickets lottoTickets) {
-        Map<Rank, Integer> resultStatisticsMap = new HashMap<>();
-        for (LottoTicket lottoTicket : lottoTickets.lottoTickets()) {
-            Rank rank = winningNumbers.calculateRank(lottoTicket);
-            addCount(resultStatisticsMap, rank);
-        }
-        return new LottoResult(resultStatisticsMap);
-    }
-
-    private static void addCount(Map<Rank, Integer> resultStatisticsMap, Rank rank) {
-        if (resultStatisticsMap.containsKey(rank)) {
-            int count = resultStatisticsMap.get(rank);
-            resultStatisticsMap.put(rank, count + 1);
-            return;
-        }
-        resultStatisticsMap.put(rank, INITIAL_VALUE_ONE);
     }
 
     public Map<Rank, Integer> result() {

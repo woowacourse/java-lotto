@@ -28,24 +28,10 @@ public class LottoResultTest {
         ));
     }
 
-    @DisplayName("일치하는 번호 개수에 따른 통계값을 구한다.")
-    @Test
-    public void calculateStatistics() {
-        LottoResult lottoResult = LottoResult.of(winningNumbers, lottoTickets);
-        Map<Rank, Integer> lottoStatisticsMap = lottoResult.result();
-        assertThat(lottoStatisticsMap).isEqualTo(new HashMap<Rank, Integer>() {
-            {
-                put(Rank.FIRST, 1);
-                put(Rank.SECOND, 2);
-                put(Rank.NOTHING, 1);
-            }
-        });
-    }
-
     @DisplayName("상금을 계산한다.")
     @Test
     public void calculateRewardTest() {
-        LottoResult lottoResult = LottoResult.of(winningNumbers, lottoTickets);
+        LottoResult lottoResult = lottoTickets.generateLottoResult(winningNumbers);
         Money reward = lottoResult.getReward();
         assertThat(reward.toLong()).isEqualTo(2_060_000_000);
     }
