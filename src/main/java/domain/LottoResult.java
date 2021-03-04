@@ -21,9 +21,9 @@ public class LottoResult {
         this.resultStatisticsMap = Collections.unmodifiableMap(resultStatisticsMap);
     }
 
-    public static LottoResult of(WinningNumbers winningNumbers, List<LottoTicket> lottoTickets) {
+    public static LottoResult of(WinningNumbers winningNumbers, LottoTickets lottoTickets) {
         Map<Rank, Integer> resultStatisticsMap = new HashMap<>();
-        for (LottoTicket lottoTicket : lottoTickets) {
+        for (LottoTicket lottoTicket : lottoTickets.lottoTickets()) {
             Rank rank = winningNumbers.calculateRank(lottoTicket);
             addCount(resultStatisticsMap, rank);
         }

@@ -1,17 +1,10 @@
 package controller;
 
-import domain.LottoTicket;
-import domain.Money;
-import domain.WinningNumbers;
-import domain.LottoResult;
-import domain.Profit;
-import domain.LottoNumber;
-import domain.LottoPurchaseManager;
+import domain.*;
 import view.InputView;
 import view.OutputView;
 import util.Repeater;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoController {
@@ -24,7 +17,7 @@ public class LottoController {
         LottoPurchaseManager lottoPurchaseManager = createLottoPurchaseManager();
         Money investedMoney = lottoPurchaseManager.remainBudget();
 
-        List<LottoTicket> lottoTickets = buyLottosManually(lottoPurchaseManager);
+        LottoTickets lottoTickets = buyLottosManually(lottoPurchaseManager);
         lottoTickets.addAll(buyLottosAutomatically(lottoPurchaseManager));
         outputView.printLottoTicket(lottoTickets);
 
@@ -40,14 +33,14 @@ public class LottoController {
         return LottoPurchaseManager.from(Repeater.repeatFunctionOnError(() -> Money.from(inputView.scanBudget())));
     }
 
-    private List<LottoTicket> buyLottosManually(LottoPurchaseManager lottoPurchaseManager) {
+    private LottoTickets buyLottosManually(LottoPurchaseManager lottoPurchaseManager) {
         int quantity = Repeater.repeatFunctionOnError(inputView::scanManualLottoQuantity);
         if (!lottoPurchaseManager.canAfford(quantity)) {
             outputView.printNotEnoughBudget();
             return buyLottosManually(lottoPurchaseManager);
         }
 
-        List<LottoTicket> lottoTickets = new ArrayList<>();
+        LottoTickets lottoTickets = new LottoTickets();
         outputView.requestLottoNumbersMessage();
         for (int i = 0; i < quantity; i++) {
             lottoTickets.add(Repeater.repeatFunctionOnError(() -> {
@@ -58,8 +51,8 @@ public class LottoController {
         return lottoTickets;
     }
 
-    private List<LottoTicket> buyLottosAutomatically(LottoPurchaseManager lottoPurchaseManager) {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
+    private LottoTickets buyLottosAutomatically(LottoPurchaseManager lottoPurchaseManager) {
+        LottoTickets lottoTickets = new LottoTickets();
         while (lottoPurchaseManager.canAfford(ONE_TICKET_OF_LOTTO)) {
             lottoTickets.add(lottoPurchaseManager.buyAutomatically());
         }

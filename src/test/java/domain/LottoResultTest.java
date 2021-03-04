@@ -13,19 +13,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoResultTest {
     private WinningNumbers winningNumbers;
-    private List<LottoTicket> lottoTickets;
+    private LottoTickets lottoTickets;
 
     @BeforeEach
     public void setUp() {
         winningNumbers = WinningNumbers.of(
                 LottoTicket.valueOf(Arrays.asList(1, 2, 3, 4, 5, 6)),
                 LottoNumber.from(7));
-        lottoTickets = Arrays.asList(
+        lottoTickets = LottoTickets.of(Arrays.asList(
                 LottoTicket.valueOf(Arrays.asList(1, 2, 3, 4, 5, 6)),
                 LottoTicket.valueOf(Arrays.asList(1, 2, 3, 4, 5, 7)),
                 LottoTicket.valueOf(Arrays.asList(1, 2, 3, 4, 6, 7)),
                 LottoTicket.valueOf(Arrays.asList(9, 10, 11, 12, 13, 14))
-        );
+        ));
     }
 
     @DisplayName("일치하는 번호 개수에 따른 통계값을 구한다.")

@@ -1,9 +1,6 @@
 package view;
 
-import domain.LottoNumber;
-import domain.LottoTicket;
-import domain.Profit;
-import domain.Rank;
+import domain.*;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -36,8 +33,8 @@ public class OutputView {
         System.out.println(e.getMessage());
     }
 
-    public void printLottoTicket(List<LottoTicket> lottoTickets) {
-        for (LottoTicket lottoTicket : lottoTickets) {
+    public void printLottoTicket(LottoTickets lottoTickets) {
+        for (LottoTicket lottoTicket : lottoTickets.lottoTickets()) {
             String numbers = lottoTicket.numbers().stream()
                     .map(LottoNumber::toString)
                     .collect(Collectors.joining(COMMA_WITH_BLANK));
