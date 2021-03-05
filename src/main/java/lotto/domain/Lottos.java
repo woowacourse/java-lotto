@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.view.LottoView;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -68,12 +66,10 @@ public class Lottos {
         return displayFormat;
     }
 
-    public void generateManualLottos(String manualCount, String manualNumberInput) {
-        List<Lotto> manualLottos = new ArrayList<>();
-        for (int i = 0; i < Integer.parseInt(manualCount); i++) {
-            manualLottos.add(Lotto.changeStringToLotto(manualNumberInput));
+    public void generateManualLotto(List<String> manualNumberInput) {
+        for(String manualNumber: manualNumberInput) {
+            lottoGroup.add(Lotto.changeStringToLotto(manualNumber));
         }
-        lottoGroup.addAll(manualLottos);
     }
 
     public int getManualCount() {
