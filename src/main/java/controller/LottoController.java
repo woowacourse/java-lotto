@@ -34,7 +34,7 @@ public class LottoController {
 
     private static Lottos generatePassiveLottos(final int numberOfPassiveLotto) {
         OutputView.printInputPassiveLottos();
-        List<Lotto> lottos = Stream.generate(() -> InputView.inputPurchasingPassiveLotto())
+        List<Lotto> lottos = Stream.generate(InputView::inputPurchasingPassiveLotto)
                 .map(LottoController::writeValueAsLotto)
                 .limit(numberOfPassiveLotto)
                 .collect(Collectors.toList());
