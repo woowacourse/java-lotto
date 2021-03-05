@@ -12,13 +12,12 @@ public class LottoController {
 
     public static void main(String[] args) {
         Money purchaseMoney = Money.createPurchasingLottoMoney(InputView.inputPurchaseMoney());
-        int numberOfTotalLotto = Lotto.calculateLottoNumber(purchaseMoney);
-        int numberOfPassiveLotto = InputView.inputPurchasingPassiveLottoNumber();
-        int numberOfAutoLotto = numberOfTotalLotto - numberOfPassiveLotto;
-        Lottos lottos = generatePassiveLottos(numberOfPassiveLotto);
-        lottos.addAll(LottoFactory.generateAutoLottos(new DefaultShuffleStrategy(), numberOfAutoLotto));
+        LottoCounter lottoCounter = LottoCounter.of(Lotto.calculateLottoNumber(purchaseMoney),
+                InputView.inputPurchasingPassiveLottoNumber());
+        Lottos lottos = generatePassiveLottos(lottoCounter.getNumberOfManualLotto());
+        lottos.addAll(LottoFactory.generateAutoLottos(new DefaultShuffleStrategy(), lottoCounter.getNumberOfAutoLotto()));
 
-        OutputView.printNumberOfPurchaseLotto(numberOfPassiveLotto, numberOfAutoLotto);
+        OutputView.printNumberOfPurchaseLotto(lottoCounter.getNumberOfManualLotto(), lottoCounter.getNumberOfAutoLotto());
         OutputView.printAllLottos(lottos);
 
         WinningLotto winningLotto = new WinningLotto(
