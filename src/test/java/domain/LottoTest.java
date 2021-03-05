@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -38,7 +39,7 @@ class LottoTest {
         int[] lottoNumbers = new int[]{1, 1, 3, 4, 5, 6};
 
         //when //then
-        assertThatThrownBy(() -> new Lotto(lottoNumbers))
+        assertThatThrownBy(() -> createLotto(lottoNumbers))
                 .isExactlyInstanceOf(IllegalArgumentException.class);
     }
 
@@ -47,7 +48,7 @@ class LottoTest {
     @MethodSource
     void generateIfLottoNumbersLengthNotSatisfied(int[] lottoNumbers) {
         //when //then
-        assertThatThrownBy(() -> new Lotto(lottoNumbers))
+        assertThatThrownBy(() -> createLotto(lottoNumbers))
                 .isExactlyInstanceOf(IllegalArgumentException.class);
     }
 
@@ -79,7 +80,7 @@ class LottoTest {
     }, delimiter = ':')
     void contains(int lottoNumberValue, boolean expected) {
         //given
-        Lotto lotto = new Lotto(new int[]{1, 2, 3, 4, 5, 6});
+        Lotto lotto = createLotto(new int[]{1, 2, 3, 4, 5, 6});
         LottoNumber lottoNumber = LottoNumber.of(lottoNumberValue);
 
         //when
@@ -94,8 +95,8 @@ class LottoTest {
     @MethodSource
     void findMatchCount(int[] lottoNumbers, int expected) {
         //given
-        Lotto lotto = new Lotto(new int[]{1, 2, 3, 4, 5, 6});
-        Lotto targetLotto = new Lotto(lottoNumbers);
+        Lotto lotto = createLotto(new int[]{1, 2, 3, 4, 5, 6});
+        Lotto targetLotto = createLotto(lottoNumbers);
 
         //when
         int actual = lotto.findMatchCount(targetLotto);
@@ -113,6 +114,13 @@ class LottoTest {
                 Arguments.of(new int[]{1, 2, 7, 8, 9, 10}, 2),
                 Arguments.of(new int[]{1, 7, 8, 9, 10, 11}, 1),
                 Arguments.of(new int[]{7, 8, 9, 10, 11, 12}, 0)
+        );
+    }
+
+    private Lotto createLotto(int[] lottoNumbers) {
+        return new Lotto(Arrays.stream(lottoNumbers)
+                .mapToObj(LottoNumber::of)
+                .collect(Collectors.toList())
         );
     }
 }

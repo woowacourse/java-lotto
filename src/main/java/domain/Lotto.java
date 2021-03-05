@@ -1,7 +1,6 @@
 package domain;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Lotto {
     protected static final int PRICE = 1_000;
@@ -13,12 +12,6 @@ public class Lotto {
         validateLottoNumbers(lottoNumbers);
         Collections.sort(lottoNumbers);
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
-    }
-
-    protected Lotto(int[] lottoNumbers) {
-        this(Arrays.stream(lottoNumbers)
-                .mapToObj(LottoNumber::of)
-                .collect(Collectors.toList()));
     }
 
     private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {

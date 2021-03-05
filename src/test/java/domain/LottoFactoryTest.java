@@ -34,8 +34,8 @@ class LottoFactoryTest {
     void generatePassiveLotto() {
         //given
         List<Lotto> lottoValues = Arrays.asList(
-                new Lotto(new int[]{1, 2, 3, 4, 5, 6}),
-                new Lotto(new int[]{1, 2, 3, 4, 5, 7})
+                createLotto(new int[]{1, 2, 3, 4, 5, 6}),
+                createLotto(new int[]{1, 2, 3, 4, 5, 7})
         );
 
         //when
@@ -43,7 +43,16 @@ class LottoFactoryTest {
 
         //then
         assertThat(lottos.getLottos())
-                .containsExactly(new Lotto(new int[]{1, 2, 3, 4, 5, 6}),
-                        new Lotto(new int[]{1, 2, 3, 4, 5, 7}));
+                .containsExactly(
+                        createLotto(new int[]{1, 2, 3, 4, 5, 6}),
+                        createLotto(new int[]{1, 2, 3, 4, 5, 7})
+                );
+    }
+
+    private Lotto createLotto(int[] lottoNumbers) {
+        return new Lotto(Arrays.stream(lottoNumbers)
+                .mapToObj(LottoNumber::of)
+                .collect(Collectors.toList())
+        );
     }
 }

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -17,9 +18,9 @@ class LottosTest {
     @BeforeEach
     void setUp() {
         lottoGroup = Arrays.asList(
-                new Lotto(new int[]{1, 2, 3, 4, 5, 6}),
-                new Lotto(new int[]{7, 8, 9, 10, 11, 12}),
-                new Lotto(new int[]{13, 14, 15, 16, 17, 18})
+                createLotto(new int[]{1, 2, 3, 4, 5, 6}),
+                createLotto(new int[]{7, 8, 9, 10, 11, 12}),
+                createLotto(new int[]{13, 14, 15, 16, 17, 18})
         );
 
         lottos = new Lottos(lottoGroup);
@@ -39,7 +40,7 @@ class LottosTest {
     @Test
     void getLottoResults() {
         //given
-        Lotto lotto = new Lotto(new int[]{1, 2, 3, 4, 5, 6});
+        Lotto lotto = createLotto(new int[]{1, 2, 3, 4, 5, 6});
         WinningLotto winningLotto = new WinningLotto(lotto, LottoNumber.of(7));
 
         //when
@@ -55,8 +56,8 @@ class LottosTest {
     @Test
     void addAll() {
         //given
-        Lottos lottos = new Lottos(Arrays.asList(new Lotto(new int[]{1, 2, 3, 4, 5, 6})));
-        Lottos additionalLottos = new Lottos(Arrays.asList(new Lotto(new int[]{7, 8, 9, 10, 11, 12})));
+        Lottos lottos = new Lottos(Arrays.asList(createLotto(new int[]{1, 2, 3, 4, 5, 6})));
+        Lottos additionalLottos = new Lottos(Arrays.asList(createLotto(new int[]{7, 8, 9, 10, 11, 12})));
 
         //when
         lottos.addAll(additionalLottos);
@@ -64,7 +65,14 @@ class LottosTest {
         //then
         assertThat(lottos.getLottos().size()).isEqualTo(2);
         assertThat(lottos.getLottos())
-                .containsExactly(new Lotto(new int[]{1, 2, 3, 4, 5, 6}),
-                        new Lotto(new int[]{7, 8, 9, 10, 11, 12}));
+                .containsExactly(createLotto(new int[]{1, 2, 3, 4, 5, 6}),
+                        createLotto(new int[]{7, 8, 9, 10, 11, 12}));
+    }
+
+    private Lotto createLotto(int[] lottoNumbers) {
+        return new Lotto(Arrays.stream(lottoNumbers)
+                .mapToObj(LottoNumber::of)
+                .collect(Collectors.toList())
+        );
     }
 }
