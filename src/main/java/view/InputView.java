@@ -1,12 +1,9 @@
 package view;
 
-import domain.LottoNumber;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class InputView {
 
@@ -25,24 +22,20 @@ public class InputView {
         return Integer.parseInt(SCANNER.nextLine());
     }
 
-    public static List<List<LottoNumber>> inputPurchasingPassiveLottos(int numberOfLotto) {
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        return Stream.generate(InputView::inputLotto)
-                .limit(numberOfLotto)
-                .collect(Collectors.toList());
+    public static List<Integer> inputPurchasingPassiveLotto() {
+        return inputLotto();
     }
 
-    public static List<LottoNumber> inputWinningLotto() {
+    public static List<Integer> inputWinningLotto() {
         System.out.println("지난 주 당첨 로또를 입력해주세요.");
         return inputLotto();
     }
 
-    private static List<LottoNumber> inputLotto() {
+    private static List<Integer> inputLotto() {
         String input = SCANNER.nextLine();
         return Arrays.stream(input.split(","))
                 .map(String::trim)
                 .map(Integer::new)
-                .map(LottoNumber::of)
                 .collect(Collectors.toList());
     }
 
