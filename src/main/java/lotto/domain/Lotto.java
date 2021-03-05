@@ -16,7 +16,7 @@ public class Lotto {
         this.lottoNumbers = changeToLottoNumber(nums);
     }
 
-    public static Lotto changeStringToLotto(String numberInput) {
+    public static Lotto from(String numberInput) {
         return new Lotto(Arrays.stream(numberInput.split(DELIMITER))
                 .map(String::trim)
                 .collect(Collectors.toCollection(ArrayList::new)));

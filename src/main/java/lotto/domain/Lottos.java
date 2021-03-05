@@ -49,8 +49,8 @@ public class Lottos {
         }
     }
 
-    public ArrayList<Rank> drawLotto(WinningLotto winningLotto) {
-        ArrayList<Rank> wins = new ArrayList<>();
+    public List<Rank> drawLotto(WinningLotto winningLotto) {
+        List<Rank> wins = new ArrayList<>();
         for (Lotto lotto : lottoGroup) {
             Rank rank = winningLotto.findRank(lotto);
             wins.add(rank);
@@ -68,7 +68,7 @@ public class Lottos {
 
     public void generateManualLotto(List<String> manualNumberInput) {
         for(String manualNumber: manualNumberInput) {
-            lottoGroup.add(Lotto.changeStringToLotto(manualNumber));
+            lottoGroup.add(Lotto.from(manualNumber));
         }
     }
 

@@ -43,13 +43,13 @@ public class LottoController {
 
     private WinningLotto makeWinningLotto() {
         String winningInput = LottoView.requestWinningNumber();
-        Lotto winLotto = Lotto.changeStringToLotto(winningInput);
+        Lotto winLotto = Lotto.from(winningInput);
         String bonusInput = LottoView.requestBonusBallNumber();
         return new WinningLotto(winLotto, bonusInput);
     }
 
     private Map<Rank, Integer> countEachRank(WinningLotto winningLotto) {
-        ArrayList<Rank> wins = lottos.drawLotto(winningLotto);
+        List<Rank> wins = lottos.drawLotto(winningLotto);
         Map<Rank, Integer> countByRank = new TreeMap<>();
         for (int i = 1; i < Rank.values().length; i++) {
             Rank rank = Rank.values()[i];
