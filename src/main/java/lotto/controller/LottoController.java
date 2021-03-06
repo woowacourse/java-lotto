@@ -18,8 +18,8 @@ public class LottoController {
     }
 
     private void startLotto(Money money) {
-        String manualCount = makeAllLotto(money);
-        LottoView.displayLottoCount(money.count(), money.getLeftCount(manualCount));
+        int manualCount = makeAllLotto(money);
+        LottoView.displayLottoCount(manualCount, money.getLeftCount(manualCount));
         LottoView.displayLottoGroup(lottos);
     }
 
@@ -31,11 +31,11 @@ public class LottoController {
         LottoView.displayEarningRate(result.findEarningRate(money));
     }
 
-    private String makeAllLotto(Money money) {
+    private int makeAllLotto(Money money) {
         String manualCount = LottoView.requestManualLottoCount();
         lottos = new Lottos(money, manualCount);
         lottos.generateManualLotto(makeManualLottos(manualCount));
-        return manualCount;
+        return Integer.parseInt(manualCount);
     }
 
     private List<String> makeManualLottos(String manualCount) {

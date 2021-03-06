@@ -63,6 +63,9 @@ public class LottoView {
     }
 
     public static void displayResult(Rank rank, int count) {
+        if (rank == Rank.LOSE) {
+            return;
+        }
         System.out.printf(findMessage(rank), rank.getMatchCount(), rank.getPrize(), count);
     }
 

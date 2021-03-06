@@ -3,12 +3,8 @@ package lotto.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static lotto.domain.Money.MONEY_RANGE_ERROR;
 import static lotto.domain.Money.MONEY_UNIT_ERROR;
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class MoneyTest {
@@ -42,13 +38,13 @@ public class MoneyTest {
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(MONEY_UNIT_ERROR);
     }
-
-    @Test
-    @DisplayName("수익률 계산")
-    void calculateEarnings() {
-        Map<Rank, Integer> sampleCount = new HashMap<>();
-        sampleCount.put(Rank.FIFTH, 1);
-        Money money = new Money("14000");
-        assertThat(money.findEarningRate(sampleCount)).isEqualTo("0.36");
-    }
+//
+//    @Test
+//    @DisplayName("수익률 계산")
+//    void calculateEarnings() {
+//        Map<Rank, Integer> sampleCount = new HashMap<>();
+//        sampleCount.put(Rank.FIFTH, 1);
+//        Money money = new Money("14000");
+//        assertThat(money.findEarningRate(sampleCount)).isEqualTo("0.36");
+//    }
 }

@@ -40,8 +40,8 @@ public class Money {
         return money / THOUSAND;
     }
 
-    public int getLeftCount(String manualCount) {
-        return count() - Integer.parseInt(manualCount);
+    public int getLeftCount(int manualCount) {
+        return count() - manualCount;
     }
 
     public int getMoney() {

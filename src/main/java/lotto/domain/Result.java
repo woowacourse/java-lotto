@@ -9,8 +9,9 @@ public class Result {
     private static final Map<Rank, Integer> countByRank = new TreeMap<>();
 
     public Result(List<Rank> wins) {
-        for (Rank rank: Rank.values()) {
-            int rankCount = (int) wins.stream().filter(win -> win == rank).count();
+        for (Rank rank : Rank.values()) {
+            int rankCount = (int) wins.stream()
+                    .filter(win -> win != Rank.LOSE && win == rank).count();
             countByRank.put(rank, rankCount);
         }
     }
