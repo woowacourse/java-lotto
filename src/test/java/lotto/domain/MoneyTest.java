@@ -38,13 +38,4 @@ public class MoneyTest {
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(MONEY_UNIT_ERROR);
     }
-//
-//    @Test
-//    @DisplayName("수익률 계산")
-//    void calculateEarnings() {
-//        Map<Rank, Integer> sampleCount = new HashMap<>();
-//        sampleCount.put(Rank.FIFTH, 1);
-//        Money money = new Money("14000");
-//        assertThat(money.findEarningRate(sampleCount)).isEqualTo("0.36");
-//    }
 }
