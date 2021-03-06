@@ -6,14 +6,12 @@ import java.util.List;
 public class Lottos {
     public static final String NUMBER_TYPE_ERROR = "숫자만 입력할 수 있습니다";
     public static final String NUMBER_RANGE_ERROR = "입력하신 금액으로 구입할 수 없습니다";
-    private final int manualCount;
-    private final int randomCount;
     private final List<Lotto> lottoGroup = new ArrayList<>();
 
     public Lottos(Money money, String inputManualCount) {
-        manualCount = validateManualCount(inputManualCount, money.count());
-        randomCount = money.count() - manualCount;
-        generateLottoGroup(randomCount);
+        int manualCount = validateManualCount(inputManualCount, money.count());
+        int randomCount = money.count() - manualCount;
+        lottoGroup.addAll(generateLottoGroup(randomCount));
     }
 
     private int validateManualCount(String inputManual, int totalCount) {
@@ -36,12 +34,13 @@ public class Lottos {
         }
     }
 
-    private void generateLottoGroup(int count) {
+    private List<Lotto> generateLottoGroup(int count) {
         LottoGenerator lottoGenerator = new LottoGenerator();
+        List<Lotto> generatedLottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            Lotto generatedLotto = new Lotto(lottoGenerator.generateLottoNums());
-            lottoGroup.add(generatedLotto);
+            generatedLottos.add(new Lotto(lottoGenerator.generateLottoNums()));
         }
+        return generatedLottos;
     }
 
     public Result drawLotto(WinningLotto winningLotto) {
@@ -65,13 +64,5 @@ public class Lottos {
         for(String manualNumber: manualNumberInput) {
             lottoGroup.add(Lotto.from(manualNumber));
         }
-    }
-
-    public boolean isManualCount(int count) {
-        return manualCount == count;
-    }
-
-    public boolean isRandomCount(int count) {
-        return randomCount == count;
     }
 }
