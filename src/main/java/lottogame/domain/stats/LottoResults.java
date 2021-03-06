@@ -1,41 +1,35 @@
 package lottogame.domain.stats;
 
-import lottogame.domain.Money;
-import lottogame.domain.Rank;
-
 import java.util.*;
 
 public class LottoResults {
-    private Map<Rank, Integer> result = new HashMap<>();
-    private int totalWinningAmount = 0;
-    private float profit;
+    private final Map<Rank, Integer> results;
+    private final Yield yield;
 
-    public LottoResults() {
-        for (Rank rank : Rank.values()) {
-            if (rank.isNotFound()) {
-                continue;
-            }
-            result.put(rank, 0);
-        }
-    }
-
-    public void add(Rank rank) {
-        if (rank.isNotFound()) {
-            return;
-        }
-        result.put(rank, result.get(rank) + 1);
-        totalWinningAmount += rank.getMoney();
+    public LottoResults(Map<Rank, Integer> results, Yield yield) {
+        results.remove(Rank.NOT_FOUND);
+        this.results = results;
+        this.yield = yield;
     }
 
     public Map<Rank, Integer> values() {
-        return this.result;
+        return new EnumMap<>(this.results);
     }
 
-    public void calculateProfit(Money money) {
-        profit = (float) totalWinningAmount / money.getMoney();
+    public float yield() {
+        return yield.value();
     }
 
-    public float getProfit() {
-        return this.profit;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoResults that = (LottoResults) o;
+        return Objects.equals(results, that.results) && Objects.equals(yield, that.yield);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(results, yield);
     }
 }

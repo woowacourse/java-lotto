@@ -1,60 +1,29 @@
 package lottogame.domain.lotto;
 
-import lottogame.utils.InvalidWinningLottoException;
-import lottogame.utils.RedundantNumbersException;
-
-import java.util.*;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
 public class WinningLotto {
-    private static final String DELIMITER = ", ";
-    private static final Pattern NUMBER_PATTERN = Pattern.compile("^(\\d{1,2},\\s){5}\\d{1,2}$");
-    private static final Pattern BONUS_NUMBER_PATTERN = Pattern.compile("^[0-9]*$");
     private final Lotto lotto;
     private final LottoNumber bonusNumber;
 
-    public WinningLotto(String numbers, String bonusNumber) {
-        List<LottoNumber> lotto = split(numbers);
-        validateBonusNumber(bonusNumber);
-        this.bonusNumber = new LottoNumber(Integer.parseInt(bonusNumber));
-        isDuplicate(lotto, this.bonusNumber);
-        this.lotto = new Lotto(lotto);
+    public WinningLotto(Lotto lotto, LottoNumber bonusNumber) {
+        validate(lotto, bonusNumber);
+        this.lotto = lotto;
+        this.bonusNumber = bonusNumber;
     }
 
-    private List<LottoNumber> split(String numbers) {
-        validateInput(numbers);
-        String[] lotto = numbers.split(DELIMITER);
-        return Arrays.stream(lotto)
-                .map(number -> new LottoNumber(Integer.parseInt(number)))
-                .collect(Collectors.toList());
-    }
-
-    private void validateInput(String numbers) {
-        if (!NUMBER_PATTERN.matcher(numbers).matches()) {
-            throw new InvalidWinningLottoException();
+    private void validate(Lotto lotto, LottoNumber bonusNumber) {
+        if (lotto.contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스번호는 로또번호와 달라야 합니다.");
         }
     }
 
-    private void validateBonusNumber(String bonusNumber) {
-        if (!BONUS_NUMBER_PATTERN.matcher(bonusNumber).matches()) {
-            throw new InvalidWinningLottoException();
-        }
-    }
-
-    private void isDuplicate(List<LottoNumber> lotto, LottoNumber bonusNumber) {
-        Set<LottoNumber> numbers = new HashSet<>(lotto);
-        if (numbers.size() != lotto.size() || lotto.contains(bonusNumber)) {
-            throw new RedundantNumbersException();
-        }
-    }
-
-    public LottoNumber getBonusBall() {
-        return this.bonusNumber;
-    }
-
-    public Lotto values() {
+    public Lotto lotto() {
         return lotto;
+    }
+
+    public LottoNumber bonusNumber() {
+        return bonusNumber;
     }
 
     @Override

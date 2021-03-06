@@ -1,48 +1,67 @@
 package lottogame.domain.lotto;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class LottoTest {
     private Lotto lotto;
 
     @BeforeEach
     void setUp() {
-        List<Integer> randomValues = Arrays.asList(8, 21, 23, 41, 42, 43);
-        lotto = new Lotto(makeLottoNumberList(randomValues));
+        List<LottoNumber> lottoNumbers = Arrays.asList(
+                LottoNumber.of(8), LottoNumber.of(21),
+                LottoNumber.of(23), LottoNumber.of(41),
+                LottoNumber.of(42), LottoNumber.of(43));
+        lotto = new Lotto(lottoNumbers);
     }
 
     @Test
-    void 객체_생성() {
-        assertThat(lotto).isEqualTo(new Lotto(makeLottoNumberList(Arrays.asList(8, 21, 23, 41, 42, 43))));
-    }
-
-    @ParameterizedTest
-    @CsvSource(value = {"8, 21, 23, 41, 42, 43:7:6",
-            "3, 5, 11, 16, 32, 38:8:0",
-            "7, 11, 16, 35, 36, 44:5:0",
-            "1, 8, 11, 31, 41, 42:3:3"}, delimiter = ':')
-    void 일치하는_번호_갯수(String numbers, String bonus, int matchCount) {
-        WinningLotto winningLotto = new WinningLotto(numbers, bonus);
-        assertThat(lotto.match(winningLotto.values())).isEqualTo(matchCount);
+    @DisplayName("같은 값을 가지면 같은 객체인지 확인")
+    void constructor1() {
+        List<LottoNumber> newLottoNumbers = Arrays.asList(
+                LottoNumber.of(8), LottoNumber.of(21),
+                LottoNumber.of(23), LottoNumber.of(41),
+                LottoNumber.of(42), LottoNumber.of(43));
+        Lotto newLotto = new Lotto(newLottoNumbers);
+        assertEquals(newLotto, lotto);
     }
 
     @Test
-    void 보너스가_포함되었는지_테스트() {
-        Lotto lotto = new Lotto(makeLottoNumberList(Arrays.asList(1, 2, 3, 4, 5, 7)));
-        WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6", "7");
-        assertThat(lotto.containsBonus(winningLotto)).isTrue();
+    @DisplayName("중복되는 숫자가 있으면 예외가 발행하는지 확인")
+    void constructor2() {
+        List<LottoNumber> newLottoNumbers = Arrays.asList(
+                LottoNumber.of(8), LottoNumber.of(21),
+                LottoNumber.of(23), LottoNumber.of(41),
+                LottoNumber.of(42), LottoNumber.of(42));
+        assertThatThrownBy(() -> new Lotto(newLottoNumbers))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("로또번호는 서로 달라야합니다.");
     }
 
-    List<LottoNumber> makeLottoNumberList(List<Integer> numbers) {
-        return numbers.stream().map(number -> new LottoNumber(number)).collect(Collectors.toList());
+    @Test
+    @DisplayName("로또를 다른 로또와 잘 비교하는지 확인")
+    void match() {
+        List<LottoNumber> newLottoNumbers = Arrays.asList(
+                LottoNumber.of(8), LottoNumber.of(21),
+                LottoNumber.of(23), LottoNumber.of(1),
+                LottoNumber.of(2), LottoNumber.of(3));
+        Lotto newLotto = new Lotto(newLottoNumbers);
+        assertEquals(3, lotto.match(newLotto));
+    }
+
+    @Test
+    @DisplayName("로또가 로또번호를 포함하는지 확인")
+    void contains() {
+        assertTrue(lotto.contains(LottoNumber.of(8)));
+        assertFalse(lotto.contains(LottoNumber.of(7)));
     }
 }

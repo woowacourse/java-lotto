@@ -1,32 +1,34 @@
 package lottogame.domain.lotto;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Lotto {
-    private final List<LottoNumber> numbers;
+    private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<LottoNumber> values) {
-        numbers = values;
+    public Lotto(List<LottoNumber> lottoNumbers) {
+        validate(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
+    }
+
+    private static void validate(List<LottoNumber> lotto) {
+        Set<LottoNumber> numbers = new HashSet<>(lotto);
+        if (numbers.size() != lotto.size()) {
+            throw new IllegalArgumentException("로또번호는 서로 달라야합니다.");
+        }
     }
 
     public List<LottoNumber> values() {
-        return new ArrayList<>(numbers);
+        return new ArrayList<>(lottoNumbers);
     }
 
-    public int match(Lotto winningLotto) {
-        return (int) numbers.stream()
-                .filter(number -> winningLotto.contains(number))
+    public int match(Lotto lotto) {
+        return (int) this.lottoNumbers.stream()
+                .filter(lotto::contains)
                 .count();
     }
 
     public boolean contains(LottoNumber lottonumber) {
-        return numbers.contains(lottonumber);
-    }
-
-    public boolean containsBonus(WinningLotto winningLotto) {
-        return numbers.contains(winningLotto.getBonusBall());
+        return lottoNumbers.contains(lottonumber);
     }
 
     @Override
@@ -34,11 +36,11 @@ public class Lotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lotto lotto = (Lotto) o;
-        return Objects.equals(numbers, lotto.numbers);
+        return Objects.equals(this.lottoNumbers, lotto.lottoNumbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numbers);
+        return Objects.hash(lottoNumbers);
     }
 }

@@ -1,33 +1,45 @@
 package lottogame.domain.lotto;
 
-import lottogame.domain.Money;
 import lottogame.domain.stats.LottoResults;
+import lottogame.domain.stats.Money;
+import lottogame.domain.stats.Rank;
+import lottogame.domain.stats.Yield;
 
-import java.util.List;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.Objects;
 
 public class LottoGame {
-    private final Lottos lottos;
-    private final Money money;
+    private Lottos lottos;
 
-    public LottoGame(Money money) {
-        LottoGenerator.generate();
-        List<Lotto> lottoGroup = LottoGenerator.makeLottos(money.lottoQuantity());
-        this.lottos = new Lottos(lottoGroup);
-        this.money = money;
-    }
-
-    public LottoGame(Lottos lottos, Money money) {
+    public LottoGame(Lottos lottos) {
         this.lottos = lottos;
-        this.money = money;
     }
 
-    public LottoResults Results(WinningLotto winningLotto) {
-        LottoResults lottoResults = lottos.matchLottos(winningLotto);
-        lottoResults.calculateProfit(money);
-        return lottoResults;
+    public LottoResults results(WinningLotto winningLotto, Money money) {
+        Map<Rank, Integer> results = lottos.matchLottos(winningLotto);
+        Yield yield = Yield.of(totalPrizeMoney(results), money);
+        return new LottoResults(results, yield);
     }
 
-    public Lottos lottos() {
-        return lottos;
+    public Money totalPrizeMoney(Map<Rank, Integer> results) {
+        int prizeMoney = Arrays.stream(Rank.values())
+                .filter(Rank::isFound)
+                .mapToInt(rank -> results.get(rank) * rank.getMoney())
+                .sum();
+        return Money.of(prizeMoney);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoGame lottoGame = (LottoGame) o;
+        return Objects.equals(lottos, lottoGame.lottos);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottos);
     }
 }

@@ -1,17 +1,17 @@
-package lottogame.domain;
+package lottogame.domain.stats;
 
 import java.util.Arrays;
 
 public enum Rank {
+    NOT_FOUND(0, 0),
     FIFTH(3, 5_000),
     FOURTH(4, 50_000),
     THIRD(5, 1_500_000),
     SECOND(5, 30_000_000),
-    FIRST(6, 2_000_000_000),
-    NOT_FOUND(0, 0);
+    FIRST(6, 2_000_000_000);
 
-    private int count;
-    private int money;
+    private final int count;
+    private final int money;
 
     Rank(int count, int money) {
         this.count = count;
@@ -38,11 +38,11 @@ public enum Rank {
         return this.count == count;
     }
 
-    public boolean isNotFound() {
-        return this.equals(NOT_FOUND);
-    }
-
     public boolean isSecond() {
         return this.equals(SECOND);
+    }
+
+    public boolean isFound() {
+        return !this.equals(NOT_FOUND);
     }
 }
