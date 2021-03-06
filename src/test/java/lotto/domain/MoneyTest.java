@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static lotto.domain.Money.MONEY_RANGE_ERROR;
 import static lotto.domain.Money.MONEY_UNIT_ERROR;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class MoneyTest {
@@ -37,5 +38,12 @@ public class MoneyTest {
             new Money(falseMoney);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(MONEY_UNIT_ERROR);
+    }
+
+    @Test
+    @DisplayName("자동로또 개수가 잘 계산되는지 확인")
+    void getLeftCount() {
+        Money money = new Money("14000");
+        assertThat(money.getLeftCount(3)).isEqualTo(11);
     }
 }
