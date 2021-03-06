@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class Lottos {
     public static final String NUMBER_TYPE_ERROR = "[ERROR] 숫자만 입력할 수 있습니다";
@@ -15,10 +14,6 @@ public class Lottos {
         manualCount = validateManualCount(inputManualCount, money.count());
         randomCount = money.count() - manualCount;
         generateLottoGroup(randomCount);
-    }
-
-    public static String findResult(Map<Rank, Integer> countByRank) {
-        return Money.findEarningRate(countByRank);
     }
 
     private int validateManualCount(String inputManual, int totalCount) {
@@ -49,13 +44,13 @@ public class Lottos {
         }
     }
 
-    public List<Rank> drawLotto(WinningLotto winningLotto) {
+    public Result drawLotto(WinningLotto winningLotto) {
         List<Rank> wins = new ArrayList<>();
         for (Lotto lotto : lottoGroup) {
             Rank rank = winningLotto.findRank(lotto);
             wins.add(rank);
         }
-        return wins;
+        return new Result(wins);
     }
 
     public ArrayList<ArrayList<Integer>> changeFormat() {
@@ -70,14 +65,6 @@ public class Lottos {
         for(String manualNumber: manualNumberInput) {
             lottoGroup.add(Lotto.from(manualNumber));
         }
-    }
-
-    public int getManualCount() {
-        return manualCount;
-    }
-
-    public int getRandomCount() {
-        return randomCount;
     }
 
     public boolean isManualCount(int count) {

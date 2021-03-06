@@ -11,31 +11,37 @@ import java.util.TreeMap;
 public class LottoController {
     private static Lottos lottos;
 
-    public void startLotto() {
+    public void run() {
         Money money = new Money(LottoView.requestMoney());
-        makeAllLotto(money);
-        LottoView.displayLottoCount(lottos.getManualCount(), lottos.getRandomCount());
+        startLotto(money);
+        endLotto(money);
+    }
+
+    private void startLotto(Money money) {
+        String manualCount = makeAllLotto(money);
+        LottoView.displayLottoCount(money.count(), money.getLeftCount(manualCount));
         LottoView.displayLottoGroup(lottos);
     }
 
-    public void endLotto() {
+    private void endLotto(Money money) {
         WinningLotto winningLotto = makeWinningLotto();
         LottoView.displayResultMessage();
-        Map<Rank, Integer> countByRank = countEachRank(winningLotto);
-        countByRank.forEach(LottoView::displayResult);
-        LottoView.displayEarningRate(Lottos.findResult(countByRank));
+        Result result = lottos.drawLotto(winningLotto);
+        result.getCountByRank().forEach(LottoView::displayResult);
+        LottoView.displayEarningRate(result.findEarningRate(money));
     }
 
-    private void makeAllLotto(Money money) {
+    private String makeAllLotto(Money money) {
         String manualCount = LottoView.requestManualLottoCount();
         lottos = new Lottos(money, manualCount);
-        lottos.generateManualLotto(makeManualLottos(Integer.parseInt(manualCount)));
+        lottos.generateManualLotto(makeManualLottos(manualCount));
+        return manualCount;
     }
 
-    private List<String> makeManualLottos(int manualCount) {
+    private List<String> makeManualLottos(String manualCount) {
         LottoView.displayManualNumberMessage();
         List<String> manualLottoNumbers = new ArrayList<>();
-        for (int i = 0; i < manualCount; i++) {
+        for (int i = 0; i < Integer.parseInt(manualCount); i++) {
             manualLottoNumbers.add(LottoView.requestManualNumber());
         }
         return manualLottoNumbers;
@@ -46,16 +52,5 @@ public class LottoController {
         Lotto winLotto = Lotto.from(winningInput);
         String bonusInput = LottoView.requestBonusBallNumber();
         return new WinningLotto(winLotto, bonusInput);
-    }
-
-    private Map<Rank, Integer> countEachRank(WinningLotto winningLotto) {
-        List<Rank> wins = lottos.drawLotto(winningLotto);
-        Map<Rank, Integer> countByRank = new TreeMap<>();
-        for (int i = 1; i < Rank.values().length; i++) {
-            Rank rank = Rank.values()[i];
-            int rankCount = (int) wins.stream().filter(win -> win == rank).count();
-            countByRank.put(rank, rankCount);
-        }
-        return countByRank;
     }
 }

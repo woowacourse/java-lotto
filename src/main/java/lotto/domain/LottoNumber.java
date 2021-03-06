@@ -3,8 +3,8 @@ package lotto.domain;
 public class LottoNumber {
     public static final String NUMBER_TYPE_ERROR = "[ERROR] 숫자만 입력할 수 있습니다";
     public static final String NUMBER_RANGE_ERROR = "[ERROR] 숫자를 1 ~ 45 사이로 입력해주세요";
-    public static final int MAXIMUM_NUMBER = 45;
-    public static final int MINIMUM_NUMBER = 1;
+    private static final int MAXIMUM_NUMBER = 45;
+    private static final int MINIMUM_NUMBER = 1;
     private final int number;
 
     public LottoNumber(String input) {
