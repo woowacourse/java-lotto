@@ -4,7 +4,7 @@ package domain;
  * LottoNumberRepository.java
  * 로또 넘버들을 한 데에 모아 생성해놓은 클래스
  *
- * @author Kimun Kim, github.com/tributetothemoon스
+ * @author Kimun Kim, github.com/tributetothemoon
  * @author Daeun Lee, github.com/da-nyee
  */
 import java.util.ArrayList;
@@ -22,8 +22,7 @@ public class LottoNumberRepository {
 
     static {
         IntStream.rangeClosed(MINIMUM_NUMBER, MAXIMUM_NUMBER)
-                .mapToObj(Integer::toString)
-                .map(LottoNumber::new)
+                .mapToObj(LottoNumber::from)
                 .forEach(lottoNumbers::add);
     }
 

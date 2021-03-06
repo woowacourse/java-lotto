@@ -9,18 +9,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTicketTest {
-    @DisplayName("로또 번호 생성을 테스트한다.")
+    @DisplayName("로또 티켓 생성을 테스트한다.")
     @Test
     public void createLottoTicketTest() {
-        LottoTicket lottoTicket = LottoTicket.valueOf(Arrays.asList("1", "2", "3", "4", "5", "6"));
+        LottoTicket lottoTicket = LottoTicket.valueOf(Arrays.asList(1, 2, 3, 4, 5, 6));
 
         assertThat(lottoTicket.numbers().containsAll(Arrays.asList(
-                new LottoNumber("1"),
-                new LottoNumber("2"),
-                new LottoNumber("3"),
-                new LottoNumber("4"),
-                new LottoNumber("5"),
-                new LottoNumber("6")
+                LottoNumber.from(1),
+                LottoNumber.from(2),
+                LottoNumber.from(3),
+                LottoNumber.from(4),
+                LottoNumber.from(5),
+                LottoNumber.from(6)
         ))).isTrue();
     }
 
@@ -35,7 +35,7 @@ public class LottoTicketTest {
     @Test
     public void validLottoTicketTest() {
         assertThatThrownBy(() -> LottoTicket.valueOf(
-                Arrays.asList("1", "2", "3", "4", "5", "5")))
+                Arrays.asList(1, 2, 3, 4, 5, 5)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -43,7 +43,7 @@ public class LottoTicketTest {
     @Test
     public void validateLottoNumberCount() {
         assertThatThrownBy(() -> LottoTicket.valueOf(
-                Arrays.asList("1", "2", "3", "4")))
+                Arrays.asList(1, 2, 3, 4)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -6,32 +6,26 @@ import java.util.Objects;
  * Money.java
  * 로또 프로그램 내에서 통용되는 돈을 뜻하는 클래스
  *
- * @author Kimun Kim, github.com/tributetothemoon스
+ * @author Kimun Kim, github.com/tributetothemoon
  * @author Daeun Lee, github.com/da-nyee
  */
 public class Money {
-    private static final String ERROR_INVALID_INPUT_FORMAT = "[ERROR] 금액은 숫자만 입력해주세요.";
     private static final String ERROR_NEGATIVE_NUMBER = "[ERROR] 양수만 입력해주세요.";
-    private static final String LONG_REGULAR_EXPRESSION = "^-?[0-9]+$";
+    private static final String ERROR_INVALID_SUBTRACTION = "[ERROR] 뺼셈이 불가능합니다. (금액은 0원 이하로 떨어질 수 없습니다)";
     private static final long ZERO = 0;
 
     private final long money;
 
-    public Money(String input) {
-        validateInputFormat(input);
-        long money = Long.parseLong(input);
-        validatePositiveNumber(money);
+    private Money(long money) {
         this.money = money;
     }
 
-    private void validateInputFormat(String input) {
-        if (input.matches(LONG_REGULAR_EXPRESSION)) {
-            return;
-        }
-        throw new IllegalArgumentException(ERROR_INVALID_INPUT_FORMAT);
+    public static Money from(long money) {
+        validatePositiveNumber(money);
+        return new Money(money);
     }
 
-    private void validatePositiveNumber(long input) {
+    private static void validatePositiveNumber(long input) {
         if (input < ZERO) {
             throw new IllegalArgumentException(ERROR_NEGATIVE_NUMBER);
         }
@@ -39,6 +33,19 @@ public class Money {
 
     public long toLong() {
         return money;
+    }
+
+
+    public Money subtract(Money money) {
+        long value = this.money - money.toLong();
+        if (value < ZERO) {
+            throw new IllegalArgumentException(ERROR_INVALID_SUBTRACTION);
+        }
+        return new Money(value);
+    }
+
+    public Money multiply(int multiplicand) {
+        return new Money(this.money * multiplicand);
     }
 
     @Override
@@ -53,4 +60,5 @@ public class Money {
     public int hashCode() {
         return Objects.hash(money);
     }
+
 }

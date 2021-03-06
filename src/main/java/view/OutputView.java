@@ -16,6 +16,9 @@ public class OutputView {
     private static final String STATISTICS_FORMAT = "%d개 일치 (%d원)- %d개";
     private static final String STATISTICS_BONUS_FORMAT = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
     private static final String MESSAGE_PROFIT_FORMAT = "총 수익률은 %.2f입니다.";
+    private static final String MESSAGE_REQUEST_MANUAL_NUMBER = "수동으로 구매할 번호를 입력해 주세요.";
+    private static final String ERROR_NOT_ENOUGH_BUDGET = "[ERROR] 보유 금액이 충분하지 않습니다.";
+    private static final int ZERO = 0;
 
     private static OutputView instance;
 
@@ -43,14 +46,20 @@ public class OutputView {
         System.out.println();
     }
 
-    public void printStatistics(Statistics statistics) {
-        Map<Rank, Integer> result = statistics.result();
+    public void printLottoResultStatistics(Map<Rank, Integer> lottoResult) {
         List<Rank> ranks = Arrays.asList(Rank.values());
         Collections.reverse(ranks);
         System.out.print(MESSAGE_STATISTICS);
-        for (Rank rank: ranks) {
-            printMatchCount(rank, result.get(rank));
+        for (Rank rank : ranks) {
+            printMatchCount(rank, getValueOfKeyOrReturnZero(lottoResult, rank));
         }
+    }
+    
+    private int getValueOfKeyOrReturnZero(Map<Rank, Integer> lottoResult, Rank key) {
+        if (lottoResult.containsKey(key)) {
+            return lottoResult.get(key);
+        }
+        return ZERO;
     }
 
     private void printMatchCount(Rank rank, long count) {
@@ -66,5 +75,13 @@ public class OutputView {
 
     public void printProfit(Profit profit) {
         System.out.printf((MESSAGE_PROFIT_FORMAT) + "%n", profit.toDouble());
+    }
+
+    public void printNotEnoughBudget() {
+        printError(new IllegalArgumentException(ERROR_NOT_ENOUGH_BUDGET));
+    }
+
+    public void requestLottoNumbersMessage() {
+        System.out.println(MESSAGE_REQUEST_MANUAL_NUMBER);
     }
 }

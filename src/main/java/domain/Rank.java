@@ -6,33 +6,31 @@ import java.util.Arrays;
  * Rank.java
  * 로또 등수를 정의한 enum 클래스
  *
- * @author Kimun Kim, github.com/tributetothemoon스
+ * @author Kimun Kim, github.com/tributetothemoon
  * @author Daeun Lee, github.com/da-nyee
  */
 public enum Rank {
-    FIRST(6, new Money("2000000000")),
-    SECOND(5, new Money("30000000")),
-    THIRD(5, new Money("1500000")),
-    FOURTH(4, new Money("50000")),
-    FIFTH(3, new Money("5000")),
-    NOTHING(0, new Money("0"));
+    FIRST(6, false, Money.from(2_000_000_000)),
+    SECOND(5, true, Money.from(30_000_000)),
+    THIRD(5, false, Money.from(1_500_000)),
+    FOURTH(4, false, Money.from(50_000)),
+    FIFTH(3, false, Money.from(5_000)),
+    NOTHING(0, false, Money.from(0));
 
-    private static final long FIVE = 5;
+    private final long count;
+    private final boolean hasBonusBallMatch;
+    private final Money reward;
 
-    long count;
-    Money reward;
-
-    Rank(long count, Money reward) {
+    Rank(long count, boolean hasBonusBallMatch, Money reward) {
         this.count = count;
         this.reward = reward;
+        this.hasBonusBallMatch = hasBonusBallMatch;
     }
 
-    public static Rank from(long count, boolean bonusBallMatch) {
-        if (bonusBallMatch && count == FIVE) {
-            return Rank.SECOND;
-        }
+    public static Rank from(long count, boolean hasBonusBallMatch) {
         return Arrays.stream(Rank.values())
                 .filter(item -> item.getCount() == count)
+                .filter(item -> item.hasBonusBallMatch == hasBonusBallMatch)
                 .findAny()
                 .orElse(NOTHING);
     }
