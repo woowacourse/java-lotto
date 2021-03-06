@@ -12,9 +12,14 @@ public class LottoController {
     private static Lottos lottos;
 
     public void run() {
-        Money money = new Money(LottoView.requestMoney());
-        startLotto(money);
-        endLotto(money);
+        try {
+            Money money = new Money(LottoView.requestMoney());
+            startLotto(money);
+            endLotto(money);
+        } catch (IllegalArgumentException e) {
+            LottoView.displayErrorMessage(e.getMessage());
+            run();
+        }
     }
 
     private void startLotto(Money money) {

@@ -1,9 +1,9 @@
 package lotto.domain;
 
 public class Money {
-    public static final String MONEY_INT_ERROR = "[ERROR] 숫자만 입력할 수 있습니다";
-    public static final String MONEY_RANGE_ERROR = "[ERROR] 금액을 1000원 이상 입력해주세요";
-    public static final String MONEY_UNIT_ERROR = "[ERROR] 금액을 1000단위로 입력해주세요";
+    public static final String MONEY_INT_ERROR = "숫자만 입력할 수 있습니다";
+    public static final String MONEY_RANGE_ERROR = "금액을 1000원 이상 입력해주세요";
+    public static final String MONEY_UNIT_ERROR = "금액을 1000단위로 입력해주세요";
     private static final int THOUSAND = 1000;
     private static int money;
 
