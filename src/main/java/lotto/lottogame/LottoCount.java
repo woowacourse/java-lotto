@@ -1,7 +1,5 @@
 package lotto.lottogame;
 
-import lotto.money.Money;
-
 import java.util.Objects;
 
 public class LottoCount {
@@ -9,22 +7,26 @@ public class LottoCount {
     public static final int ONE_COUNT = 1;
     public static final int LOTTO_PRICE = 1000;
 
-    private final int lottoCount;
+    private int lottoCount;
 
-    public LottoCount(Money money) {
-        this(money.divideMoney(LOTTO_PRICE));
+    public LottoCount(int value) {
+        this.lottoCount = value;
     }
 
-    private LottoCount(int lottoCount) {
-        this.lottoCount = lottoCount;
+    public static LottoCount valueOf(LottoCount lottoCount) {
+        return new LottoCount(lottoCount.lottoCount);
     }
 
-    public boolean isGreaterThanZero() {
-        return this.lottoCount > ZERO;
+    public boolean isBiggerThanZeroWithDecreasing() {
+        return this.lottoCount-- > ZERO;
     }
 
-    public LottoCount decreaseOne() {
-        return new LottoCount(lottoCount - ONE_COUNT);
+    public boolean isSmallerThan(int manualLottoCount) {
+        return lottoCount < manualLottoCount;
+    }
+
+    public int subtractCount(int manualLottoCount) {
+        return lottoCount - manualLottoCount;
     }
 
     public int getLottoCount() {

@@ -8,12 +8,11 @@ public class BonusBall {
     private final LottoNumber bonusBall;
 
     public BonusBall(String value, WinnerTicket winnerTicket) {
-        LottoTicketValidation.validateNumber(value);
         this.bonusBall = makeValidateNumber(value, winnerTicket);
     }
 
     private LottoNumber makeValidateNumber(String value, WinnerTicket winnerTicket) {
-        LottoNumber lottoNumber = new LottoNumber(Integer.parseInt(value.trim()));
+        LottoNumber lottoNumber = LottoNumber.valueOf(value);
         if (winnerTicket.containsSameNumber(lottoNumber)) {
             throw new IllegalArgumentException(ERROR_MESSAGE_DUPLICATED);
         }

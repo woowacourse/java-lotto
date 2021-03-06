@@ -12,10 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 public class OutputView {
-    private static final String ENTER_PURCHASE_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
-    private static final String COMPLETE_PURCHASE_MESSAGE = "개를 구매했습니다.";
-    private static final String ENTER_WINNER_TICKET_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
-    private static final String ENTER_BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
+    public static final String NOTICE_LOTTO_COUNT = "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
     private static final String STATISTICS_TITLE = "당첨 통계";
     private static final String STATISTICS_DIVIDER = "---------";
 
@@ -26,12 +23,9 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void enterPurchaseMoney() {
-        System.out.println(ENTER_PURCHASE_MONEY_MESSAGE);
-    }
-
-    public static void noticeLottoCount(LottoCount lottoCount) {
-        System.out.println(lottoCount.getLottoCount() + COMPLETE_PURCHASE_MESSAGE);
+    public static void noticeLottoCount(LottoCount manualLottoCount, LottoCount autoLottoCount) {
+        System.out.println();
+        System.out.printf(NOTICE_LOTTO_COUNT, manualLottoCount.getLottoCount(), autoLottoCount.getLottoCount());
     }
 
     public static void showTickets(LottoTickets lottoTickets) {
@@ -40,29 +34,21 @@ public class OutputView {
         }
     }
 
-    public static void enterWinnerTicket() {
-        System.out.println();
-        System.out.println(ENTER_WINNER_TICKET_MESSAGE);
-    }
-
-    public static void enterBonusBall() {
-        System.out.println(ENTER_BONUS_BALL_MESSAGE);
-    }
-
-    public static void noticeStatistics(Statistics statistics) {
+    public static void noticeStatistics(Statistics statistics, Double profit) {
         System.out.println();
         System.out.println(STATISTICS_TITLE);
         System.out.println(STATISTICS_DIVIDER);
-        printRankings(statistics);
+        printRankings(statistics, profit);
     }
 
-    private static void printRankings(Statistics statistics) {
+    private static void printRankings(Statistics statistics, Double profit) {
         Map<Ranking, Integer> result = statistics.getStatistics();
         List<Ranking> rankings = Arrays.asList(Ranking.values());
         Collections.reverse(rankings);
         for (Ranking ranking : rankings) {
             printEachRanking(result, ranking);
         }
+        showProfit(profit);
     }
 
     private static void printEachRanking(Map<Ranking, Integer> result, Ranking ranking) {
