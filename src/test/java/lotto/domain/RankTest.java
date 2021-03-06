@@ -14,7 +14,7 @@ public class RankTest {
     })
     @DisplayName("등수가 맞게 나오는지 확인")
     void isRightRank(int match, boolean bonusMatch, Rank expected) {
-        Rank rank = Rank.makeRankByMatch(match, bonusMatch);
+        final Rank rank = Rank.makeRankByMatch(match, bonusMatch);
         assertThat(rank).isEqualTo(expected);
     }
 }
