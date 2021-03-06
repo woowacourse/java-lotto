@@ -9,12 +9,12 @@ public class LottoNumber {
     private static final int MINIMUM_NUMBER = 1;
     private final int number;
 
-    public LottoNumber(String input) {
+    public LottoNumber(final String input) {
         number = validateNumberType(input);
         validateNumberRange();
     }
 
-    private int validateNumberType(String input) {
+    private int validateNumberType(final String input) {
         try {
             return Integer.parseInt(input);
         } catch (Exception e) {
@@ -28,7 +28,7 @@ public class LottoNumber {
         }
     }
 
-    public boolean isContain(Lotto winLotto) {
+    public boolean isContain(final Lotto winLotto) {
         return winLotto.isContainNum(number);
     }
 

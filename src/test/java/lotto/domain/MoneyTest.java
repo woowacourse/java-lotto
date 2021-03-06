@@ -11,9 +11,9 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class MoneyTest {
 
     @Test
-    @DisplayName("구입금액이_숫자인지_확인")
+    @DisplayName("구입금액이 숫자인지 확인")
     void validateMoneyType() {
-        String falseMoney = "로또값";
+        final String falseMoney = "로또값";
         assertThatThrownBy(() -> {
             new Money(falseMoney);
         }).isInstanceOf(IllegalArgumentException.class)
@@ -23,7 +23,7 @@ public class MoneyTest {
     @Test
     @DisplayName("구입금액이 1000이상인지 확인")
     void validateMoneyRange() {
-        String falseMoney = "500";
+        final String falseMoney = "500";
         assertThatThrownBy(() -> {
             new Money(falseMoney);
         }).isInstanceOf(IllegalArgumentException.class)
@@ -33,7 +33,7 @@ public class MoneyTest {
     @Test
     @DisplayName("구입금액이 1000단위인지 확인")
     void validateMoneyUnit() {
-        String falseMoney = "1500";
+        final String falseMoney = "1500";
         assertThatThrownBy(() -> {
             new Money(falseMoney);
         }).isInstanceOf(IllegalArgumentException.class)
@@ -43,7 +43,7 @@ public class MoneyTest {
     @Test
     @DisplayName("자동로또 개수가 잘 계산되는지 확인")
     void getLeftCount() {
-        Money money = new Money("14000");
+        final Money money = new Money("14000");
         assertThat(money.getLeftCount(3)).isEqualTo(11);
     }
 }

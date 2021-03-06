@@ -22,8 +22,8 @@ public class ResultTest {
     @Test
     @DisplayName("수익률 계산 확인")
     void findEarningRate() {
-        Money sampleMoney = new Money("14000");
-        Result result = new Result(sampleWins);
+        final Money sampleMoney = new Money("14000");
+        final Result result = new Result(sampleWins);
         assertThat(result.findEarningRate(sampleMoney)).isEqualTo("0.36");
     }
 }

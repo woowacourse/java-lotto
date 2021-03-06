@@ -8,19 +8,19 @@ public class Lottos {
     public static final String NUMBER_RANGE_ERROR = "입력하신 금액으로 구입할 수 없습니다";
     private final List<Lotto> lottoGroup = new ArrayList<>();
 
-    public Lottos(Money money, String inputManualCount) {
-        int manualCount = validateManualCount(inputManualCount, money.count());
-        int randomCount = money.count() - manualCount;
+    public Lottos(final Money money, final String inputManualCount) {
+        final int manualCount = validateManualCount(inputManualCount, money.count());
+        final int randomCount = money.count() - manualCount;
         lottoGroup.addAll(generateLottoGroup(randomCount));
     }
 
-    private int validateManualCount(String inputManual, int totalCount) {
-        int manualCount = validateType(inputManual);
+    private int validateManualCount(final String inputManual, final int totalCount) {
+        final int manualCount = validateType(inputManual);
         validateRange(manualCount, totalCount);
         return manualCount;
     }
 
-    private int validateType(String inputManual) {
+    private int validateType(final String inputManual) {
         try {
             return Integer.parseInt(inputManual);
         } catch (Exception e) {
@@ -28,40 +28,40 @@ public class Lottos {
         }
     }
 
-    private void validateRange(int manualCount, int totalCount) {
+    private void validateRange(final int manualCount, final int totalCount) {
         if (manualCount < 0 || manualCount > totalCount) {
             throw new IllegalArgumentException(NUMBER_RANGE_ERROR);
         }
     }
 
-    private List<Lotto> generateLottoGroup(int count) {
-        LottoGenerator lottoGenerator = new LottoGenerator();
-        List<Lotto> generatedLottos = new ArrayList<>();
+    private List<Lotto> generateLottoGroup(final int count) {
+        final LottoGenerator lottoGenerator = new LottoGenerator();
+        final List<Lotto> generatedLottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             generatedLottos.add(new Lotto(lottoGenerator.generateLottoNums()));
         }
         return generatedLottos;
     }
 
-    public Result drawLotto(WinningLotto winningLotto) {
-        List<Rank> wins = new ArrayList<>();
-        for (Lotto lotto : lottoGroup) {
-            Rank rank = winningLotto.findRank(lotto);
+    public Result drawLotto(final WinningLotto winningLotto) {
+        final List<Rank> wins = new ArrayList<>();
+        for (final Lotto lotto : lottoGroup) {
+            final Rank rank = winningLotto.findRank(lotto);
             wins.add(rank);
         }
         return new Result(wins);
     }
 
     public ArrayList<ArrayList<Integer>> changeFormat() {
-        ArrayList<ArrayList<Integer>> displayFormat = new ArrayList<>();
-        for (Lotto lotto : lottoGroup) {
+        final ArrayList<ArrayList<Integer>> displayFormat = new ArrayList<>();
+        for (final Lotto lotto : lottoGroup) {
             displayFormat.add(lotto.changeToList());
         }
         return displayFormat;
     }
 
-    public void generateManualLotto(List<String> manualNumberInput) {
-        for(String manualNumber: manualNumberInput) {
+    public void generateManualLotto(final List<String> manualNumberInput) {
+        for (final String manualNumber : manualNumberInput) {
             lottoGroup.add(Lotto.from(manualNumber));
         }
     }

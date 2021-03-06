@@ -19,7 +19,7 @@ public class BonusBallTest {
 
     @BeforeEach
     void setUp() {
-        ArrayList<String> winningLotto = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "6"));
+        final ArrayList<String> winningLotto = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "6"));
         winLotto = new Lotto(winningLotto);
     }
 
@@ -53,10 +53,10 @@ public class BonusBallTest {
     @Test
     @DisplayName("보너스볼 맞는지 확인")
     void isBonusBall() {
-        BonusBall bonusBall = new BonusBall(winLotto, SAMPLE_BONUSBALL);
-        ArrayList<String> numbers = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "7"));
-        Lotto lotto = new Lotto(numbers);
-        boolean expected = bonusBall.hasBonusBall(lotto);
+        final BonusBall bonusBall = new BonusBall(winLotto, SAMPLE_BONUSBALL);
+        final ArrayList<String> numbers = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "7"));
+        final Lotto lotto = new Lotto(numbers);
+        final boolean expected = bonusBall.hasBonusBall(lotto);
         assertThat(expected).isEqualTo(true);
     }
 }

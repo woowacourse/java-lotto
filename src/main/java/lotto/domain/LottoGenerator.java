@@ -16,10 +16,10 @@ public class LottoGenerator {
 
     public ArrayList<String> generateLottoNums() {
         Collections.shuffle(nums);
-        ArrayList<String> generatedLotto = new ArrayList<>();
-        List<Integer> generatedNumber = nums.subList(0, 6);
+        final ArrayList<String> generatedLotto = new ArrayList<>();
+        final List<Integer> generatedNumber = nums.subList(0, 6);
         Collections.sort(generatedNumber);
-        for (int num : generatedNumber) {
+        for (final int num : generatedNumber) {
             generatedLotto.add(Integer.toString(num));
         }
         return generatedLotto;

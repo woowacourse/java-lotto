@@ -9,7 +9,7 @@ public class LottoGeneratorTest {
     @Test
     @DisplayName("자동로또를 잘 생성하는지 확인")
     void generateLottoNums() {
-        LottoGenerator lottoGenerator = new LottoGenerator();
+        final LottoGenerator lottoGenerator = new LottoGenerator();
         assertThatCode(lottoGenerator::generateLottoNums)
                 .doesNotThrowAnyException();
     }

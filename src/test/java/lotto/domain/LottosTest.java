@@ -7,7 +7,8 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottosTest {
     private static Lottos lottos;
@@ -22,7 +23,7 @@ public class LottosTest {
     @Test
     @DisplayName("Lottos가 잘 생성되는지 확인")
     void create() {
-        String manualCount = "3";
+        final String manualCount = "3";
         assertThatCode(() -> new Lottos(money, manualCount))
                 .doesNotThrowAnyException();
     }
@@ -30,7 +31,7 @@ public class LottosTest {
     @Test
     @DisplayName("수동로또 개수의 타입이 다를 때 오류를 잘 내는지 확인")
     void validateType() {
-        String wrongType = "test";
+        final String wrongType = "test";
         assertThatThrownBy(() -> {
             new Lottos(money, wrongType);
         }).isInstanceOf(IllegalArgumentException.class)
@@ -40,7 +41,7 @@ public class LottosTest {
     @Test
     @DisplayName("수동로또 개수 범위가 다를 때 오류를 잘 내는지 확인")
     void validateRange() {
-        String wrongNumber = "4";
+        final String wrongNumber = "4";
         assertThatThrownBy(() -> {
             new Lottos(money, wrongNumber);
         }).isInstanceOf(IllegalArgumentException.class)
@@ -50,7 +51,7 @@ public class LottosTest {
     @Test
     @DisplayName("수동로또가 잘 생성되는지 확인")
     void generateManualLotto() {
-        List<String> sampleInput = Arrays.asList("1, 2, 3, 4, 5, 6");
+        final List<String> sampleInput = Arrays.asList("1, 2, 3, 4, 5, 6");
         assertThatCode(() -> lottos.generateManualLotto(sampleInput))
                 .doesNotThrowAnyException();
     }

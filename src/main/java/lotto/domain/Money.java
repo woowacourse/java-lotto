@@ -7,15 +7,15 @@ public class Money {
     private static final int THOUSAND = 1000;
     private static int money;
 
-    public Money(String input) {
-        int inputMoney = changeToInt(input);
+    public Money(final String input) {
+        final int inputMoney = changeToInt(input);
         validateRange(inputMoney);
         validateUnit(inputMoney);
         money = inputMoney;
     }
 
-    private int changeToInt(String input) {
-        int money;
+    private int changeToInt(final String input) {
+        final int money;
         try {
             money = Integer.parseInt(input);
         } catch (Exception e) {
@@ -24,13 +24,13 @@ public class Money {
         return money;
     }
 
-    private void validateRange(int money) {
+    private void validateRange(final int money) {
         if (money < THOUSAND) {
             throw new IllegalArgumentException(MONEY_RANGE_ERROR);
         }
     }
 
-    private void validateUnit(int money) {
+    private void validateUnit(final int money) {
         if (money % THOUSAND != 0) {
             throw new IllegalArgumentException(MONEY_UNIT_ERROR);
         }
@@ -40,7 +40,7 @@ public class Money {
         return money / THOUSAND;
     }
 
-    public int getLeftCount(int manualCount) {
+    public int getLeftCount(final int manualCount) {
         return count() - manualCount;
     }
 

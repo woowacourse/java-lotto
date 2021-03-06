@@ -46,9 +46,9 @@ public class LottoTest {
     @Test
     @DisplayName("입력받은 숫자들로 로또가 잘 생성되는지 확인")
     void from() {
-        Lotto expected = new Lotto(new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "6")));
-        String sampleWithBlank = "1, 2, 3, 4, 5, 6";
-        String sampleWithoutBlank = "1,2,3,4,5,6";
+        final Lotto expected = new Lotto(new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "6")));
+        final String sampleWithBlank = "1, 2, 3, 4, 5, 6";
+        final String sampleWithoutBlank = "1,2,3,4,5,6";
         assertThat(Lotto.from(sampleWithBlank)).isEqualTo(expected);
         assertThat(Lotto.from(sampleWithoutBlank)).isEqualTo(expected);
     }

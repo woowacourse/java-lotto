@@ -29,7 +29,7 @@ public class WinningLottoTest {
     @Test
     @DisplayName("몇등에 당첨인지 확인")
     void findRank() {
-        Rank rank = winningLotto.findRank(generatedLotto);
+        final Rank rank = winningLotto.findRank(generatedLotto);
         assertThat(rank).isEqualTo(Rank.SECOND);
     }
 }

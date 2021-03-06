@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class LottoView {
+    public static final String RESTART_MESSAGE = "로또를 처음부터 다시 시작합니다.";
     private static final Scanner SCANNER = new Scanner(System.in);
     private static final String ERROR_MARK = "[ERROR] ";
     private static final String NEWLINE = System.getProperty("line.separator");
@@ -20,7 +21,6 @@ public class LottoView {
     private static final String EARNING_RATE_MESSAGE = "총 수익률은 %s입니다.";
     private static final String INPUT_MANUAL_COUNT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String INPUT_MANUAL_NUMBER_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
-    public static final String RESTART_MESSAGE = "로또를 처음부터 다시 시작합니다.";
 
     public static String requestMoney() {
         System.out.println(INPUT_MONEY_MESSAGE);
@@ -40,12 +40,12 @@ public class LottoView {
         return SCANNER.nextLine();
     }
 
-    public static void displayLottoCount(int manualCount, int randomCount) {
+    public static void displayLottoCount(final int manualCount, final int randomCount) {
         System.out.printf(NEWLINE + LOTTO_COUNT_MESSAGE + NEWLINE, manualCount, randomCount);
     }
 
-    public static void displayLottoGroup(Lottos lottos) {
-        for (ArrayList<Integer> lotto : lottos.changeFormat()) {
+    public static void displayLottoGroup(final Lottos lottos) {
+        for (final ArrayList<Integer> lotto : lottos.changeFormat()) {
             System.out.print(lotto + NEWLINE);
         }
     }
@@ -64,21 +64,21 @@ public class LottoView {
         System.out.println(NEWLINE + RESULT_TITLE_MESSAGE);
     }
 
-    public static void displayResult(Rank rank, int count) {
+    public static void displayResult(final Rank rank, final int count) {
         if (rank == Rank.LOSE) {
             return;
         }
         System.out.printf(findMessage(rank), rank.getMatchCount(), rank.getPrize(), count);
     }
 
-    private static String findMessage(Rank rank) {
+    private static String findMessage(final Rank rank) {
         if (rank == Rank.SECOND) {
             return SECOND_RANK_RESULT_MESSAGE + NEWLINE;
         }
         return LOTTO_RESULT_MESSSAGE + NEWLINE;
     }
 
-    public static void displayEarningRate(String earningRate) {
+    public static void displayEarningRate(final String earningRate) {
         System.out.printf(EARNING_RATE_MESSAGE, earningRate);
     }
 

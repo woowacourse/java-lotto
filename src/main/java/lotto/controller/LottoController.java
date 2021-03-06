@@ -5,15 +5,13 @@ import lotto.view.LottoView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 public class LottoController {
     private static Lottos lottos;
 
     public void run() {
         try {
-            Money money = new Money(LottoView.requestMoney());
+            final Money money = new Money(LottoView.requestMoney());
             startLotto(money);
             endLotto(money);
         } catch (IllegalArgumentException e) {
@@ -22,30 +20,30 @@ public class LottoController {
         }
     }
 
-    private void startLotto(Money money) {
-        int manualCount = makeAllLotto(money);
+    private void startLotto(final Money money) {
+        final int manualCount = makeAllLotto(money);
         LottoView.displayLottoCount(manualCount, money.getLeftCount(manualCount));
         LottoView.displayLottoGroup(lottos);
     }
 
-    private void endLotto(Money money) {
-        WinningLotto winningLotto = makeWinningLotto();
+    private void endLotto(final Money money) {
+        final WinningLotto winningLotto = makeWinningLotto();
         LottoView.displayResultMessage();
-        Result result = lottos.drawLotto(winningLotto);
+        final Result result = lottos.drawLotto(winningLotto);
         result.getCountByRank().forEach(LottoView::displayResult);
         LottoView.displayEarningRate(result.findEarningRate(money));
     }
 
-    private int makeAllLotto(Money money) {
-        String manualCount = LottoView.requestManualLottoCount();
+    private int makeAllLotto(final Money money) {
+        final String manualCount = LottoView.requestManualLottoCount();
         lottos = new Lottos(money, manualCount);
         lottos.generateManualLotto(makeManualLottos(manualCount));
         return Integer.parseInt(manualCount);
     }
 
-    private List<String> makeManualLottos(String manualCount) {
+    private List<String> makeManualLottos(final String manualCount) {
         LottoView.displayManualNumberMessage();
-        List<String> manualLottoNumbers = new ArrayList<>();
+        final List<String> manualLottoNumbers = new ArrayList<>();
         for (int i = 0; i < Integer.parseInt(manualCount); i++) {
             manualLottoNumbers.add(LottoView.requestManualNumber());
         }
@@ -53,9 +51,9 @@ public class LottoController {
     }
 
     private WinningLotto makeWinningLotto() {
-        String winningInput = LottoView.requestWinningNumber();
-        Lotto winLotto = Lotto.from(winningInput);
-        String bonusInput = LottoView.requestBonusBallNumber();
+        final String winningInput = LottoView.requestWinningNumber();
+        final Lotto winLotto = Lotto.from(winningInput);
+        final String bonusInput = LottoView.requestBonusBallNumber();
         return new WinningLotto(winLotto, bonusInput);
     }
 }

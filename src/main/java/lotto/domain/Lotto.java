@@ -10,48 +10,48 @@ public class Lotto {
     private static final int LOTTO_NUMBER_LIMIT = 6;
     private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(ArrayList<String> nums) {
+    public Lotto(final ArrayList<String> nums) {
         validateCount(nums);
         validateDuplicate(nums);
         this.lottoNumbers = changeToLottoNumber(nums);
     }
 
-    public static Lotto from(String numberInput) {
+    public static Lotto from(final String numberInput) {
         return new Lotto(Arrays.stream(numberInput.split(DELIMITER))
                 .map(String::trim)
                 .collect(Collectors.toCollection(ArrayList::new)));
     }
 
-    private void validateCount(ArrayList<String> nums) {
+    private void validateCount(final ArrayList<String> nums) {
         if (nums.size() != LOTTO_NUMBER_LIMIT) {
             throw new IllegalArgumentException(NUMBER_COUNT_ERROR);
         }
     }
 
-    private void validateDuplicate(ArrayList<String> nums) {
-        Set<String> numbers = new HashSet<>(nums);
+    private void validateDuplicate(final ArrayList<String> nums) {
+        final Set<String> numbers = new HashSet<>(nums);
         if (nums.size() != numbers.size()) {
             throw new IllegalArgumentException(NUMBER_DUPLICATE_ERROR);
         }
     }
 
-    private ArrayList<LottoNumber> changeToLottoNumber(ArrayList<String> nums) {
-        ArrayList<LottoNumber> changedNums = new ArrayList<>();
-        for (String num : nums) {
+    private ArrayList<LottoNumber> changeToLottoNumber(final ArrayList<String> nums) {
+        final ArrayList<LottoNumber> changedNums = new ArrayList<>();
+        for (final String num : nums) {
             changedNums.add(new LottoNumber(num));
         }
         return changedNums;
     }
 
     public ArrayList<Integer> changeToList() {
-        ArrayList<Integer> changedNums = new ArrayList<>();
-        for (LottoNumber num : this.lottoNumbers) {
+        final ArrayList<Integer> changedNums = new ArrayList<>();
+        for (final LottoNumber num : this.lottoNumbers) {
             changedNums.add(num.getNumber());
         }
         return changedNums;
     }
 
-    public boolean isContainNum(int number) {
+    public boolean isContainNum(final int number) {
         return changeToList().contains(number);
     }
 
