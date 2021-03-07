@@ -15,7 +15,7 @@ public enum LottoRank {
 
     LottoRank(int correctCnt, long prize) {
         this.correctCnt = correctCnt;
-        this.prize = new Money(prize);
+        this.prize = Money.valueOf(prize);
     }
 
     public static LottoRank isMatch(int correctCnt, boolean isBonusMatch) {
@@ -39,6 +39,10 @@ public enum LottoRank {
 
     private boolean matchCount(int countOfMatch) {
         return this.correctCnt == countOfMatch;
+    }
+
+    public Money calculateTotalPrize(Long countOfLotto) {
+        return prize.multiply(countOfLotto);
     }
 
     public Money getPrize() {

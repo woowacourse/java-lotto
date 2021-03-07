@@ -14,38 +14,49 @@ class MoneyTest {
     @Test
     void generate() {
         //given
-        int moneyValue = 1000;
+        int moneyValue = 1_000;
 
         //when
-        Money money = new Money(moneyValue);
+        Money money = Money.createPurchasingLottoMoney(moneyValue);
 
         //then
         assertThat(money).isNotNull();
     }
 
     @DisplayName("Money 값으로 음수가 입력되는 경우")
-    @Test
-    void generateMoneyWithNegativeValue() {
-        //given
-        int moneyValue = -1;
-
+    @ParameterizedTest
+    @ValueSource(ints = {
+            -1, -2, -3, -4, -100, -1_000
+    })
+    void generateMoneyWithNegativeValue(int moneyValue) {
         //when //then
-        assertThatThrownBy(() -> {
-            new Money(moneyValue);
-        }).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> Money.createPurchasingLottoMoney(moneyValue))
+                .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("Money 값으로 로또 가격의 정수배가 아닌 값이 입력되는 경우")
+    @ParameterizedTest
+    @ValueSource(ints = {
+            1, 1_001, 1111, 12345
+    })
+    void generateMoneyWithNotMultipleOfLottoPrice(int moneyValue) {
+        //when //then
+        assertThatThrownBy(() -> Money.createPurchasingLottoMoney(moneyValue))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
 
     @DisplayName("구입금액을 특정 값으로 나눈 값을 반환하는 기능")
     @Test
     void divide() {
         //given
-        Money money = new Money(1_000L);
+        Money money = Money.createPurchasingLottoMoney(5000L);
 
         //when
-        long number = money.divide(1_000L);
+        long number = money.divide(1000L);
 
         //then
-        assertThat(number).isEqualTo(1);
+        assertThat(number).isEqualTo(5);
     }
 
     @DisplayName("구입금액을 0이나 음수로 나눈 값을 반환하는 기능")
@@ -55,7 +66,7 @@ class MoneyTest {
     })
     void divide(long value) {
         //given
-        Money money = new Money(1_000);
+        Money money = Money.createPurchasingLottoMoney(1000L);
 
         //when //then
         assertThatThrownBy(() -> money.divide(value))
@@ -66,36 +77,36 @@ class MoneyTest {
     @Test
     void add() {
         //given
-        Money firstMoney = new Money(1L);
-        Money secondMoney = new Money(2L);
+        Money firstMoney = Money.createPurchasingLottoMoney(1_000L);
+        Money secondMoney = Money.createPurchasingLottoMoney(2_000L);
 
         //when
         Money sumMoney = firstMoney.add(secondMoney);
 
         //then
-        assertThat(sumMoney).isEqualTo(new Money(3L));
+        assertThat(sumMoney).isEqualTo(Money.valueOf(3_000L));
     }
 
     @DisplayName("돈을 곱하는 기능")
     @Test
     void multiply() {
         //given
-        Money money = new Money(2L);
+        Money money = Money.createPurchasingLottoMoney(1_000L);
         long multipliedNumber = 3L;
 
         //when
         Money result = money.multiply(multipliedNumber);
 
         //then
-        assertThat(result).isEqualTo(new Money(6L));
+        assertThat(result).isEqualTo(Money.valueOf(3_000L));
     }
 
     @DisplayName("수익율을 계산하는 기능")
     @Test
     void calculateEarningRate() {
         //given
-        Money usedMoney = new Money(14_000L);
-        Money winningMoney = new Money(5_000L);
+        Money usedMoney = Money.createPurchasingLottoMoney(14_000L);
+        Money winningMoney = Money.valueOf(5_000L);
 
         //when
         double earningRate = winningMoney.calculateEarningRate(usedMoney);

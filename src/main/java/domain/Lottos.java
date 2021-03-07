@@ -28,4 +28,8 @@ public class Lottos {
     public List<Lotto> getLottos() {
         return new ArrayList<>(lottos);
     }
+
+    public void addAll(Lottos additoryLottos) {
+        this.lottos.addAll(additoryLottos.lottos);
+    }
 }

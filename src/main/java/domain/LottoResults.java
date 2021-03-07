@@ -12,13 +12,13 @@ public class LottoResults {
     }
 
     public Money getTotalWinningMoney() {
-        Money total = new Money(0);
+        Money totalMoney = Money.ZERO;
         for (LottoRank lottoRank : lottoResults.keySet()) {
-            Money money = lottoRank.getPrize().multiply(lottoResults.get(lottoRank));
-            total = total.add(money);
+            Money totalPrize = lottoRank.calculateTotalPrize(lottoResults.get(lottoRank));
+            totalMoney = totalMoney.add(totalPrize);
         }
 
-        return total;
+        return totalMoney;
     }
 
     public Map<LottoRank, Long> getValues() {

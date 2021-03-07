@@ -17,7 +17,7 @@ class LottoNumberTest {
         int bonusBallValue = 7;
 
         //when
-        LottoNumber lottoNumber = new LottoNumber(bonusBallValue);
+        LottoNumber lottoNumber = LottoNumber.of(bonusBallValue);
 
         //then
         assertThat(lottoNumber).isNotNull();
@@ -31,6 +31,6 @@ class LottoNumberTest {
     void generateWithLottoNumberNotInRange(int lottoNumberValue) {
         //when //then
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoNumber(lottoNumberValue));
+                .isThrownBy(() -> LottoNumber.of(lottoNumberValue));
     }
 }

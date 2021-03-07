@@ -38,6 +38,6 @@ class LottoResultsTest {
         Money totalMoney = lottoResults.getTotalWinningMoney();
 
         //then
-        assertThat(totalMoney).isEqualTo(new Money(2_120_000_000));
+        assertThat(totalMoney).isEqualTo(Money.valueOf(2_120_000_000));
     }
 }

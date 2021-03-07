@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -17,9 +18,9 @@ class LottosTest {
     @BeforeEach
     void setUp() {
         lottoGroup = Arrays.asList(
-                new Lotto(new int[]{1, 2, 3, 4, 5, 6}),
-                new Lotto(new int[]{7, 8, 9, 10, 11, 12}),
-                new Lotto(new int[]{13, 14, 15, 16, 17, 18})
+                createLotto(new int[]{1, 2, 3, 4, 5, 6}),
+                createLotto(new int[]{7, 8, 9, 10, 11, 12}),
+                createLotto(new int[]{13, 14, 15, 16, 17, 18})
         );
 
         lottos = new Lottos(lottoGroup);
@@ -39,15 +40,39 @@ class LottosTest {
     @Test
     void getLottoResults() {
         //given
-        Lotto lotto = new Lotto(new int[]{1, 2, 3, 4, 5, 6});
-        WinningLotto winningLotto = new WinningLotto(lotto, new LottoNumber(7));
+        Lotto lotto = createLotto(new int[]{1, 2, 3, 4, 5, 6});
+        WinningLotto winningLotto = new WinningLotto(lotto, LottoNumber.of(7));
 
         //when
         LottoResults results = lottos.getLottoResults(winningLotto);
 
         //then
-//        assertThat(results).hasSize(6);
-//        assertThat(results.get(LottoRank.FIRST)).isEqualTo(1L);
-//        assertThat(results.get(LottoRank.MISS)).isEqualTo(2L);
+        assertThat(results.getValues()).hasSize(6);
+        assertThat(results.getValues().get(LottoRank.FIRST)).isEqualTo(1L);
+        assertThat(results.getValues().get(LottoRank.MISS)).isEqualTo(2L);
+    }
+
+    @DisplayName("Lottos에 다른 Lottos를 추가하는 기능")
+    @Test
+    void addAll() {
+        //given
+        Lottos lottos = new Lottos(Arrays.asList(createLotto(new int[]{1, 2, 3, 4, 5, 6})));
+        Lottos additionalLottos = new Lottos(Arrays.asList(createLotto(new int[]{7, 8, 9, 10, 11, 12})));
+
+        //when
+        lottos.addAll(additionalLottos);
+
+        //then
+        assertThat(lottos.getLottos().size()).isEqualTo(2);
+        assertThat(lottos.getLottos())
+                .containsExactly(createLotto(new int[]{1, 2, 3, 4, 5, 6}),
+                        createLotto(new int[]{7, 8, 9, 10, 11, 12}));
+    }
+
+    private Lotto createLotto(int[] lottoNumbers) {
+        return new Lotto(Arrays.stream(lottoNumbers)
+                .mapToObj(LottoNumber::of)
+                .collect(Collectors.toList())
+        );
     }
 }

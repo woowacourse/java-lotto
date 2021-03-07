@@ -22,7 +22,7 @@ public class WinningLotto {
         return LottoRank.isMatch(findMatchCount(targetLotto), isBonusBallMatch(targetLotto));
     }
 
-    private int findMatchCount(Lotto targetLotto) { //todo: private 변경 !
+    private int findMatchCount(Lotto targetLotto) {
         return lotto.findMatchCount(targetLotto);
     }
 
