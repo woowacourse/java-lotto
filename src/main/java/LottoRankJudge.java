@@ -12,12 +12,8 @@ public class LottoRankJudge {
 
     public LottoRank judge(List<Integer> lottoNumbers) {
         long count = getMatchedCountAboutWinningNumbers(lottoNumbers);
-
-        if (isSecondPrize(lottoNumbers, count)) {
-            return LottoRank.SECOND;
-        }
-
-        return LottoRank.FIRST;
+        boolean bonusMatch = isBonusMatch(lottoNumbers);
+        return LottoRank.of(count, bonusMatch);
     }
 
     private long getMatchedCountAboutWinningNumbers(List<Integer> lottoNumbers) {
@@ -26,7 +22,7 @@ public class LottoRankJudge {
             .count();
     }
 
-    private boolean isSecondPrize(List<Integer> lottoNumbers, long count) {
-        return count == 5 && lottoNumbers.contains(bonusNumber);
+    private boolean isBonusMatch(List<Integer> lottoNumbers) {
+        return lottoNumbers.contains(bonusNumber);
     }
 }
