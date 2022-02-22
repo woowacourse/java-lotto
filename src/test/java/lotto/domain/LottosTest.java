@@ -19,6 +19,6 @@ public class LottosTest {
         Lottos lottos = new Lottos();
         lottos.purchase(new Money(10000));
 
-        assertThat(lottos.matchSize(10)).isTrue();
+        assertThat(lottos.getLottos().size()).isEqualTo(10);
     }
 }

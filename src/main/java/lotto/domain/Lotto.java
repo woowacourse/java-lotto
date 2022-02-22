@@ -27,6 +27,10 @@ public class Lotto {
         this.numbers = new ArrayList<>(numbers);
     }
 
+    public List<Integer> getNumbers() {
+        return Collections.unmodifiableList(numbers);
+    }
+
     private void validateNumberSix(List<Integer> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(ERROR_NUMBER_SIX_MESSAGE);
