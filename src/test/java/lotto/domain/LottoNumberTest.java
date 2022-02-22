@@ -20,7 +20,7 @@ class LottoNumberTest {
 
     @Test
     @DisplayName("최대값 초과로 생성할 시 예외를 발생시킨다.")
-    public void throwsExceptionWhenBiggerThanMaxNumber() {
+    void throwsExceptionWhenBiggerThanMaxNumber() {
         // given
         int maxValue = 45 + 1;
         // then
@@ -31,7 +31,7 @@ class LottoNumberTest {
 
     @Test
     @DisplayName("최소값 미만으로 생성할 시 예외를 발생시킨다.")
-    public void throwsExceptionWhenLowerThanMinNumber() {
+    void throwsExceptionWhenLowerThanMinNumber() {
         // given
         int minValue = 1 - 1;
         // then

@@ -7,11 +7,11 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class NumberGeneratorTest {
+class NumberGeneratorTest {
 
     @Test
     @DisplayName("랜덤으로 번호를 생성한다.")
-    public void createRandomNumber() {
+    void createRandomNumber() {
         // given
         NumberGenerator numberGenerator = new RandomNumberGenerator(1, 45);
         // when
@@ -22,7 +22,7 @@ public class NumberGeneratorTest {
 
     @Test
     @DisplayName("번호는 0 이상 45 이하의 값을 생성한다.")
-    public void testRandomNumberRange() {
+    void testRandomNumberRange() {
         // given
         NumberGenerator numberGenerator = new RandomNumberGenerator(1, 45);
         // when

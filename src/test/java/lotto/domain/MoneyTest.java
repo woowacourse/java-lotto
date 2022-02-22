@@ -4,7 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class MoneyTest {
+class MoneyTest {
 
     @Test
     @DisplayName("천원 단위의 돈을 생성한다.")
@@ -27,7 +27,7 @@ public class MoneyTest {
 
     @Test
     @DisplayName("음수의 금액을 생성할 수 없다.")
-    public void throwsExceptionWithNegativeAmount() {
+    void throwsExceptionWithNegativeAmount() {
         // given
         int amount = -1000;
         // then
