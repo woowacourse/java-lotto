@@ -17,6 +17,7 @@ public class InputView {
 
     private static final Scanner scanner = new Scanner(System.in);
 
+<<<<<<< HEAD
     private static final InputView inputView = new InputView();
 
     private InputView() {
@@ -36,6 +37,11 @@ public class InputView {
     public int inputPurchaseAmount() {
         System.out.println(PURCHASE_AMOUNT_INPUT_MESSAGE);
         return Integer.parseInt(input());
+=======
+    public static int inputPurchaseAmount() {
+        System.out.println(PURCHASE_AMOUNT_INPUT_MESSAGE);
+        return Integer.parseInt(scanner.nextLine());
+>>>>>>> 1f14e05 (feat: Money 객체 생성)
     }
 
     public List<Integer> inputWinningNumber() {
@@ -56,8 +62,14 @@ public class InputView {
                 .collect(Collectors.toList());
     }
 
+<<<<<<< HEAD
     public int inputBonusBall() {
         System.out.println(BONUS_BALL_INPUT_MESSAGE);
         return Integer.parseInt(input());
+=======
+    public static int inputBonusBall(){
+        System.out.println(BONUS_BALL_INPUT_MESSAGE);
+        return Integer.parseInt(scanner.nextLine());
+>>>>>>> 1f14e05 (feat: Money 객체 생성)
     }
 }
