@@ -1,5 +1,6 @@
 package dto;
 
+<<<<<<< HEAD
 import domain.Lotto.Lotto;
 
 import java.util.ArrayList;
@@ -17,6 +18,22 @@ public class LottosDto {
     }
 
     public static LottosDto from(List<Lotto> lottos) {
+=======
+import domain.Lotto;
+import domain.LottoNumber;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class LottosDto {
+    List<LottoDto> lottoDtos;
+
+    public LottosDto(List<LottoDto> lottoDtos) {
+        this.lottoDtos = lottoDtos;
+    }
+
+    public static LottosDto from(List<Lotto> lottos){
+>>>>>>> f80fb84 (feat: DTO 추가)
         List<LottoDto> lottoDtos = new ArrayList<>();
         for (Lotto lotto : lottos) {
             LottoDto lottoDto = LottoDto.from(lotto.getLotto());
@@ -24,6 +41,7 @@ public class LottosDto {
         }
         return new LottosDto(lottoDtos);
     }
+<<<<<<< HEAD
 
     public int getQuantity() {
         return quantity;
@@ -32,4 +50,6 @@ public class LottosDto {
     public List<LottoDto> getLottoDtos() {
         return Collections.unmodifiableList(lottoDtos);
     }
+=======
+>>>>>>> f80fb84 (feat: DTO 추가)
 }

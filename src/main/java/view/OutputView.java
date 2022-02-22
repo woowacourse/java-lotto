@@ -1,5 +1,6 @@
 package view;
 
+<<<<<<< HEAD
 import dto.LottoDto;
 import dto.LottosDto;
 import dto.RankDto;
@@ -57,5 +58,10 @@ public class OutputView {
 
     private void printIncomeRate(RanksDto ranksdto) {
         System.out.printf((INCOME_RATE_FORMAT), ranksdto.getIncomeRate());
+=======
+public class OutputView {
+    public static void printPurchasedLotto(){
+
+>>>>>>> f80fb84 (feat: DTO 추가)
     }
 }

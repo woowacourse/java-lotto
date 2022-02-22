@@ -1,13 +1,19 @@
 package dto;
 
+<<<<<<< HEAD
 import domain.Lotto.LottoNumber;
 
 import java.util.ArrayList;
 import java.util.Collections;
+=======
+import domain.LottoNumber;
+
+>>>>>>> f80fb84 (feat: DTO 추가)
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoDto {
+<<<<<<< HEAD
 
     private final List<Integer> lottoNumber;
 
@@ -25,4 +31,18 @@ public class LottoDto {
     public List<Integer> getLottoNumber() {
         return Collections.unmodifiableList(lottoNumber);
     }
+=======
+    private List<Integer> lottoNumber;
+
+    public LottoDto(List<Integer> lottoNumber) {
+        this.lottoNumber = lottoNumber;
+    }
+
+    public static LottoDto from(List<LottoNumber> lottoNumbers){
+        List<Integer> numbers = lottoNumbers.stream()
+                .map(LottoNumber::number)
+                .collect(Collectors.toUnmodifiableList());
+        return new LottoDto(numbers);
+    }
+>>>>>>> f80fb84 (feat: DTO 추가)
 }
