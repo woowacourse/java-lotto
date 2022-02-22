@@ -7,9 +7,12 @@ public class Lotto {
 
     private static final int LOTTO_SIZE = 6;
 
+    private final List<Number> numbers;
+
     public Lotto(List<Number> numbers) {
         validateSize(numbers);
         validateDuplicateNumbers(numbers);
+        this.numbers = numbers;
     }
 
     private void validateSize(List<Number> numbers) {
@@ -23,4 +26,11 @@ public class Lotto {
             throw new IllegalArgumentException("로또 번호는 중복될 수 없다.");
         }
     }
+
+    public int countMatchNumbers(Lotto lotto) {
+        return (int)lotto.numbers.stream()
+            .filter(this.numbers::contains)
+            .count();
+    }
+
 }
