@@ -3,14 +3,11 @@ package domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoNumberTest {
-
     @ParameterizedTest(name = "1 ~ 45 사이 로또 넘버 생성 : {0}")
     @ValueSource(ints = {1, 45})
     void createLottoNumber(int number) {
@@ -38,5 +35,4 @@ public class LottoNumberTest {
         // then
         assertThat(lottoNumber1).isEqualTo(lottoNumber2);
     }
-
 }
