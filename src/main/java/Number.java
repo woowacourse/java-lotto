@@ -6,7 +6,8 @@ public class Number {
 
     private final int value;
 
-    public Number(final int number) {
+    public Number(final String text) {
+        int number = toInt(text);
         validateValueRange(number);
         this.value = number;
     }
@@ -14,6 +15,14 @@ public class Number {
     private void validateValueRange(final int number) {
         if (MIN_VALUE > number || number > MAX_VALUE) {
             throw new IllegalArgumentException(ERROR_MESSAGE);
+        }
+    }
+
+    private int toInt(final String text) {
+        try {
+            return Integer.parseInt(text);
+        } catch (NumberFormatException exception) {
+            throw new IllegalArgumentException("숫자여야 합니다.");
         }
     }
 
