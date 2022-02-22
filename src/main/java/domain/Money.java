@@ -26,6 +26,11 @@ public class Money {
         }
     }
 
+    public int calculateCounts() {
+        
+        return this.money / 1_000;
+    }
+
 
     @Override
     public boolean equals(final Object object) {
