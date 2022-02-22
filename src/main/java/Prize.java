@@ -2,7 +2,7 @@ import java.math.BigInteger;
 import java.util.Objects;
 
 public class Prize {
-    public static final Prize ZERO_PRIZE = new Prize(BigInteger.ZERO);
+    public static final Prize ZERO = new Prize(BigInteger.ZERO);
 
     private final BigInteger amount;
 
@@ -16,6 +16,10 @@ public class Prize {
 
     public Prize add(Prize prize) {
         return new Prize(this.amount.add(prize.amount));
+    }
+
+    public Prize multiply(int factor) {
+        return new Prize(this.amount.multiply(BigInteger.valueOf(factor)));
     }
 
     @Override

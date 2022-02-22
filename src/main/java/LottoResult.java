@@ -1,4 +1,3 @@
-import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,16 +10,16 @@ public class LottoResult {
                 LottoRank.FIFTH, 0, LottoRank.NOTHING, 0));
     }
 
-    public BigInteger getTotalPrizeAmount() {
-        BigInteger sumPrizeAmount = BigInteger.ZERO;
+    public Prize getTotalPrizeAmount() {
+        Prize sumPrizeAmount = Prize.ZERO;
         for (LottoRank lottoRank : resultMap.keySet()) {
-            sumPrizeAmount = sumPrizeAmount.add(BigInteger.valueOf(getTotalPrizeByRank(lottoRank)));
+            sumPrizeAmount = sumPrizeAmount.add(getTotalPrizeByRank(lottoRank));
         }
         return sumPrizeAmount;
     }
 
-    private int getTotalPrizeByRank(LottoRank lottoRank) {
-        return getCountByRank(lottoRank) * lottoRank.getPrizeAmount();
+    private Prize getTotalPrizeByRank(LottoRank lottoRank) {
+        return lottoRank.getPrize().multiply(getCountByRank(lottoRank));
     }
 
     public int getCountByRank(LottoRank rank) {

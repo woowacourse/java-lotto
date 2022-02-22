@@ -44,3 +44,7 @@
 - 통계 내는 역할하는 애
 - 통계 데이터를 전달하는 dto
 - 로또 기계 -> 전체적인 흐름제어
+
+
+## 시간되면 한번 고민
+- Prize.multiply에 매개변수 타입이 Integer 말고 Wrapper Class로 변경

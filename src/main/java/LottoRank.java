@@ -2,23 +2,23 @@ import java.util.function.BiFunction;
 import java.util.stream.Stream;
 
 public enum LottoRank {
-    FIRST(2_000_000_000, LottoRank::isFirstPrize),
-    SECOND(30_000_000, LottoRank::isSecondPrize),
-    THIRD(1_500_000, LottoRank::isThirdPrize),
-    FOURTH(50_000, LottoRank::isFourthPrize),
-    FIFTH(5_000, LottoRank::isFifthPrize),
-    NOTHING(0, LottoRank::isNothingPrize);
+    FIRST(new Prize(2_000_000_000), LottoRank::isFirstPrize),
+    SECOND(new Prize(30_000_000), LottoRank::isSecondPrize),
+    THIRD(new Prize(1_500_000), LottoRank::isThirdPrize),
+    FOURTH(new Prize(50_000), LottoRank::isFourthPrize),
+    FIFTH(new Prize(5_000), LottoRank::isFifthPrize),
+    NOTHING(Prize.ZERO, LottoRank::isNothingPrize);
 
-    private final int prizeAmount;
+    private final Prize prize;
     private final BiFunction<Long, Boolean, Boolean> predicate;
 
-    LottoRank(int prizeAmount, BiFunction<Long, Boolean, Boolean> predicate) {
-        this.prizeAmount = prizeAmount;
+    LottoRank(Prize prize, BiFunction<Long, Boolean, Boolean> predicate) {
+        this.prize = prize;
         this.predicate = predicate;
     }
 
-    public int getPrizeAmount() {
-        return this.prizeAmount;
+    public Prize getPrize() {
+        return prize;
     }
 
     private boolean isMatched(long matchCount, boolean bonusMatch) {
