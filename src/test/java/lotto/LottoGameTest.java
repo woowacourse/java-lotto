@@ -24,4 +24,12 @@ class LottoGameTest {
 
         assertThat(yield).isCloseTo(0.35f, Percentage.withPercentage(99));
     }
+
+    @Test
+    @DisplayName("로또 구입 금액 입력시 몇 장의 로또 생성하는지 확인")
+    void generateLottosTest() {
+        int numberOfLottos = LottoGame.buyLottos(14000);
+
+        assertThat(numberOfLottos).isEqualTo(14);
+    }
 }

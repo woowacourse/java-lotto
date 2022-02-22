@@ -3,6 +3,7 @@ package lotto.model;
 import java.util.List;
 
 public class LottoGame {
+    private static final int LOTTO_PRICE = 1000;
 
     private final LottoMatcher lottoMatcher;
 
@@ -20,5 +21,9 @@ public class LottoGame {
                 .map(entry -> entry.getKey().getMoney() * entry.getValue())
                 .mapToLong(i -> i)
                 .sum();
+    }
+
+    public static int buyLottos(int money) {
+        return money / LOTTO_PRICE;
     }
 }
