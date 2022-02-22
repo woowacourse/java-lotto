@@ -1,10 +1,11 @@
+package domain;
+
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.Test;
-
 /**
- * - **구입 금액을 입력받는다.** (Payment)
+ * - **구입 금액을 입력받는다.** ()
  *     - [ 예외 ] 구입 금액은 `1000원 단위` 로 나눠져야한다.
  *     - [ 예외 ] 문자가 아니어야 한다.
  *     - [ 예외 ] 빈 문자열이 아니어야 한다.
