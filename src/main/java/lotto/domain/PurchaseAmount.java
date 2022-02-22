@@ -1,9 +1,8 @@
 package lotto.domain;
 
-import java.util.regex.Pattern;
+import static lotto.util.regex.NumberRegex.NATURAL_NUMBER_REGEX;
 
 public class PurchaseAmount {
-    private static final Pattern NATURAL_NUMBER_REGEX = Pattern.compile("^[1-9][0-9]*$");
     public static final String INVALID_PURCHASE_AMOUNT_EXCEPTION_MESSAGE = "구매 금액은 1000의 양의 배수여야 합니다.";
 
     private final int amount;

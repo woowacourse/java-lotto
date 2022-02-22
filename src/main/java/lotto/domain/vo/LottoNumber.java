@@ -1,7 +1,8 @@
 package lotto.domain.vo;
 
 import java.util.Arrays;
-import java.util.regex.Pattern;
+
+import static lotto.util.regex.NumberRegex.NATURAL_NUMBER_REGEX;
 
 public enum LottoNumber {
     ONE(1), TWO(2), THREE(3), FOUR(4), FIVE(5),
@@ -14,7 +15,6 @@ public enum LottoNumber {
     THIRTY_SIX(36), THIRTY_SEVEN(37), THIRTY_EIGHT(38), THIRTY_NINE(39), FORTY(40),
     FORTY_ONE(41), FORTY_TWO(42), FORTY_THREE(43), FORTY_FOUR(44), FORTY_FIVE(45);
 
-    private static final Pattern LOTTO_NUMBER_REGEX = Pattern.compile("^[0-9]");
     private static final String INVALID_LOTTO_NUMBER_EXCEPTION_MESSAGE = "로또 번호는 1 ~ 45 사이의 자연수여야합니다.";
 
     private final int number;
@@ -32,7 +32,7 @@ public enum LottoNumber {
     }
 
     private static void validateNotNegativeInteger(final String value) {
-        if (!LOTTO_NUMBER_REGEX.matcher(value).matches()) {
+        if (!NATURAL_NUMBER_REGEX.matcher(value).matches()) {
             throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_EXCEPTION_MESSAGE);
         }
     }
