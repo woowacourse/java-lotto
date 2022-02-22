@@ -9,7 +9,7 @@ public class TicketsTest {
     @Test()
     @DisplayName("구입금액 만큼 로또티켓을 구입")
     void buyTicketsByAuto() {
-        Tickets tickets = Tickets.buyTicketsByAuto(10);
+        Tickets tickets = Tickets.buyTicketsByAuto(new Money("10000"));
         assertThat(tickets.getTickets().size()).isEqualTo(10);
     }
 }
