@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
@@ -5,6 +7,17 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         this.numbers = numbers;
+    }
+
+    public static Lotto generateNumber() {
+        List<Integer> lottoRange = new ArrayList<>();
+        for(int i=1;i<=45;i++) {
+            lottoRange.add(i);
+        }
+        Collections.shuffle(lottoRange);
+        List<Integer> numbers = lottoRange.subList(0,5);
+        Collections.sort(numbers);
+        return new Lotto(numbers);
     }
 
     public int match(List<Integer> winningNumber) {
