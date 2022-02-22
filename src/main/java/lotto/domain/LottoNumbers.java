@@ -19,13 +19,6 @@ public class LottoNumbers {
         values = sortAscendingLottoNumbers(numberValues);
     }
 
-    private List<LottoNumber> sortAscendingLottoNumbers(final List<String> numberValues) {
-        return numberValues.stream()
-                .sorted()
-                .map(LottoNumber::new)
-                .collect(Collectors.toUnmodifiableList());
-    }
-
     private void validateDuplication(final List<String> numberValues) {
         final Set<String> checkedNumberValues = new HashSet<>();
         for (String numberValue : numberValues) {
@@ -38,6 +31,13 @@ public class LottoNumbers {
         if (numberValues.size() != VALID_LOTTO_NUMBERS_COUNT) {
             throw new IllegalArgumentException(LOTTO_NUMBERS_COUNT_EXCEPTION_MESSAGE);
         }
+    }
+
+    private List<LottoNumber> sortAscendingLottoNumbers(final List<String> numberValues) {
+        return numberValues.stream()
+                .sorted()
+                .map(LottoNumber::new)
+                .collect(Collectors.toUnmodifiableList());
     }
 
     private void checkDuplication(Set<String> checkedNumberValues, String numberValue) {
