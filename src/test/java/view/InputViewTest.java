@@ -74,4 +74,21 @@ class InputViewTest {
 		//then
 		assertThat(out.toString()).isEqualTo("지난 주 당첨 번호를 입력해 주세요." + System.lineSeparator());
 	}
+
+	@Test
+	void 보너스볼_입력(){
+		//given
+		OutputStream out = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(out));
+
+		String input = "11";
+		InputStream in = new ByteArrayInputStream(input.getBytes());
+		System.setIn(in);
+
+		//when
+		InputView.inputBonusNumber();
+
+		//then
+		assertThat(out.toString()).isEqualTo("보너스 볼을 입력해 주세요." + System.lineSeparator());
+	}
 }
