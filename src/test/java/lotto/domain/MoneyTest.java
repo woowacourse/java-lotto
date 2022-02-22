@@ -13,4 +13,11 @@ public class MoneyTest {
         final Money money = new Money(3500);
         assertThat(money.calculateLottoCount()).isEqualTo(3);
     }
+
+    @DisplayName("기준보다 낮은 금액 입력시 에러를 발생한다.")
+    @Test
+    void createMoneyExceptionByLowerThanStandard() {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new Money(10));
+    }
 }
