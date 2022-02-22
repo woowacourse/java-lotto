@@ -5,12 +5,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static domain.LottoNumberConst.*;
+
 public class LottoNumbersGenerator {
 
     private static final List<LottoNumber> numbers;
 
     static {
-        numbers = IntStream.rangeClosed(1, 45)
+        numbers = IntStream.rangeClosed(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER)
                 .mapToObj(LottoNumber::from)
                 .collect(Collectors.toList());
     }

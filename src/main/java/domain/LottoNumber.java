@@ -2,10 +2,10 @@ package domain;
 
 import java.util.Objects;
 
+import static domain.LottoNumberConst.*;
+
 public class LottoNumber implements Comparable<LottoNumber> {
 
-    private static final int MINIMUM_LOTTO_NUMBER = 1;
-    private static final int MAXIMUM_LOTTO_NUMBER = 45;
     private static final String INVALID_LOTTO_NUMBER_RANGE = "번호는 1부터 45 사이여야 합니다.";
 
     private final int number;
@@ -24,7 +24,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public int getNumber() {
         return number;
     }
-
 
     @Override
     public boolean equals(Object o) {
