@@ -10,36 +10,37 @@ public class PurchaseAmount {
 
     private final int purchaseAmount;
 
-    public PurchaseAmount(String purchaseAmount) {
+    public PurchaseAmount(final String purchaseAmount) {
         checkValidValue(purchaseAmount);
         this.purchaseAmount = Integer.parseInt(purchaseAmount);
     }
 
-    private void checkValidValue(String value) {
+    private void checkValidValue(final String value) {
         if (isBlank(value) || isNumber(value)) {
             throw new IllegalArgumentException(ERROR_PREFIX + ERROR_ONLY_NUMBER);
         }
-        if (isNegative(value)) {
-            throw new IllegalArgumentException(ERROR_PREFIX + ERROR_ONLY_NATURAL_NUMBER);
-        }
-        if (isDivideLottoPrice(value)) {
-            throw new IllegalArgumentException(ERROR_PREFIX + ERROR_LOTTO_PRICE);
-        }
+        int number = Integer.parseInt(value);
+        checkNegative(number);
+        checkDivideLottoPrice(number);
     }
 
-    private boolean isBlank(String value) {
+    private boolean isBlank(final String value) {
         return value == null || value.isEmpty();
     }
 
-    private boolean isNumber(String value) {
+    private boolean isNumber(final String value) {
         return value.matches(NUMBER_MATCHES);
     }
 
-    private boolean isNegative(String value) {
-        return Integer.parseInt(value) < 0;
+    private void checkNegative(final int value) {
+        if (value < 0) {
+            throw new IllegalArgumentException(ERROR_PREFIX + ERROR_ONLY_NATURAL_NUMBER);
+        }
     }
 
-    private boolean isDivideLottoPrice(String value) {
-        return (Integer.parseInt(value) % LOTTO_PRICE) == 0;
+    private void checkDivideLottoPrice(final int value) {
+        if ((value % LOTTO_PRICE) == 0) {
+            throw new IllegalArgumentException(ERROR_PREFIX + ERROR_LOTTO_PRICE);
+        }
     }
 }
