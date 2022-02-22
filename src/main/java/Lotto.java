@@ -9,7 +9,9 @@ public class Lotto {
 
     private List<Integer> lottoNumbers;
 
-    public Lotto() {}
+    public Lotto() {
+        this.lottoNumbers = generateNumber();
+    }
 
     public Lotto(List<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;

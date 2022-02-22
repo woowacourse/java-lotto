@@ -6,17 +6,17 @@ import java.util.Set;
 
 public class LottoGame {
 
-    private List<Lotto> lottos;
-    private Lottos lottos2;
+    //    private List<Lotto> lottos;
+    private Lottos lottos;
     private Map<Integer, Integer> convertReward;
     private Map<Integer, Integer> results;
 
+//    public LottoGame() {
+//
+//    }
+
     public LottoGame() {
-
-    }
-
-    public LottoGame(List<Lotto> lottos) {
-        this.lottos = lottos;
+        //.lottos = lottos;
 
         convertReward = new HashMap<>();
         convertReward.put(1, 2000000000);
@@ -29,31 +29,37 @@ public class LottoGame {
 
     }
 
+    public LottoGame(List<Lotto> lottos) {
+        this.lottos = new Lottos(lottos);
+    }
+
     public List<Lotto> buyLotto(int money) {
 
-        lottos = new ArrayList<Lotto>();
+        //lottos = new ArrayList<Lotto>();
 
         int lottoAmount = money / 1000;
 
-        for (int i = 0; i < lottoAmount; ++i) {
-            lottos.add(new Lotto());
-        }
-        return this.lottos;
+        lottos = new Lottos(lottoAmount);
+
+//        for (int i = 0; i < lottoAmount; ++i) {
+//            lottos.getLottos().add(new Lotto());
+//        }
+        return lottos.getLottos();
     }
 
     public double getYield(List<Integer> winningNumbers, Integer bonusNumber) {
 
-                lottos2 = new Lottos(lottos);
+        //lottos2 = new Lottos(lottos);
 
-                results = lottos2.compareAllLotto(winningNumbers, bonusNumber);
+        results = lottos.compareAllLotto(winningNumbers, bonusNumber);
 
-                Set<Integer> winningRankings = results.keySet();
-                int prize = 0;
-                for (Integer winningRanking : winningRankings) {
-                    prize += results.get(winningRanking) * convertReward.get(winningRanking);
+        Set<Integer> winningRankings = results.keySet();
+        int prize = 0;
+        for (Integer winningRanking : winningRankings) {
+            prize += results.get(winningRanking) * convertReward.get(winningRanking);
         }
         System.out.println("@@@@@prize: " + prize);
-        return prize / (1000 * lottos2.getSize());
+        return prize / (1000 * lottos.getSize());
     }
 
     public Map<Integer, Integer> getResults() {
@@ -61,9 +67,8 @@ public class LottoGame {
     }
 
     public Lottos getLottos() {
-        return lottos2;
+        return lottos;
     }
-
 
 
 }

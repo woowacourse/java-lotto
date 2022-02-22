@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ public class Lottos {
 
     public Lottos(int lottoAmount) {
         //this.lottoAmount = lottoAmount;
+        lottos = new ArrayList<>();
         for (int i = 0; i<lottoAmount; ++i) {
             lottos.add(new Lotto());
         }

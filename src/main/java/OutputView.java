@@ -18,7 +18,7 @@ public class OutputView {
 
 
 
-    private static final String MESSAGE_YIELD = "총 수익률은 %lf입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+    private static final String MESSAGE_YIELD = "총 수익률은 %f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
 //    생성된 로또 번호와 개수 출력하는 기능
     public static void printLottosInformations(Lottos lottos) {
@@ -26,7 +26,12 @@ public class OutputView {
         System.out.printf(MESSAGE_LOTTOS_NUMBER, lottos.getLottos().size());
 
         for (Lotto lotto : lottos.getLottos()) {
-            System.out.println("[" + String.join(NUMBER_DELIMITER, (CharSequence) lotto.getLottoNumbers()) + "]");
+            System.out.println();
+            for (Integer number : lotto.getLottoNumbers()) {
+                System.out.printf("%d, ",number);
+            }
+            System.out.println();
+            //System.out.println("[" + String.join(NUMBER_DELIMITER, lotto.getLottoNumbers()) + "]");
         }
     }
 
