@@ -29,4 +29,12 @@ public class LottoWinningNumberTest {
         List<String> winningNumbers = LottoWinningNumber.split("1, 2, 3, 4");
         assertThat(winningNumbers).isEqualTo(Arrays.asList("1","2","3","4"));
     }
+
+    @ParameterizedTest
+    @ValueSource(strings ={"azpi, ++, greeanlawn","1dksl,-1","1, 2, as"})
+    @DisplayName("당첨 번호가 숫자가 아닌 경우 검증")
+    void validateInputLottoWinningNumberIsInt(String numbers) {
+        assertThatThrownBy(() -> new LottoWinningNumber(numbers))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
