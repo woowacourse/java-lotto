@@ -1,12 +1,14 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 public class LottoTest {
@@ -33,14 +35,31 @@ public class LottoTest {
                 .withMessage("[ERROR] 로또 넘버는 중복될 수 없습니다.");
     }
 
-    @Test
-    void containBonusNumber() {
-        final List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
+    @Nested
+    @DisplayName("번호를 포함하는지 확인할 수 있다.")
+    class ContainNumber {
 
-        final LottoNumber lottoNumber = new LottoNumber(1);
-        final Lotto lotto = new Lotto(lottoNumbers);
-        assertTrue(lotto.containNumber(lottoNumber));
+        private Lotto lotto;
+
+        @BeforeEach
+        void setUp() {
+            lotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
+                    .map(LottoNumber::new)
+                    .collect(Collectors.toList()));
+        }
+
+        @DisplayName("보너스 넘버를 포함하는 경우")
+        @Test
+        void containNumberTrue() {
+            final LottoNumber lottoNumber = new LottoNumber(1);
+            assertTrue(lotto.containNumber(lottoNumber));
+        }
+
+        @DisplayName("보너스 넘버를 포함하지 않는 경우")
+        @Test
+        void containNumberFalse() {
+            final LottoNumber lottoNumber = new LottoNumber(7);
+            assertFalse(lotto.containNumber(lottoNumber));
+        }
     }
 }
