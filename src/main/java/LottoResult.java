@@ -14,9 +14,13 @@ public class LottoResult {
     public BigInteger getTotalPrizeAmount() {
         BigInteger sumPrizeAmount = BigInteger.ZERO;
         for (LottoRank lottoRank : resultMap.keySet()) {
-            sumPrizeAmount = sumPrizeAmount.add(BigInteger.valueOf(resultMap.get(lottoRank) * lottoRank.getPrizeAmount()));
+            sumPrizeAmount = sumPrizeAmount.add(BigInteger.valueOf(getTotalPrizeByRank(lottoRank)));
         }
         return sumPrizeAmount;
+    }
+
+    private int getTotalPrizeByRank(LottoRank lottoRank) {
+        return getCountByRank(lottoRank) * lottoRank.getPrizeAmount();
     }
 
     public int getCountByRank(LottoRank rank) {
