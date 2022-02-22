@@ -4,7 +4,7 @@
 
 ## 코딩 전 설계
 
-<img src="class-diagram.png" width="768px">
+<img src="class diagram - 2.png" width="768px">
 
 <br>
 
