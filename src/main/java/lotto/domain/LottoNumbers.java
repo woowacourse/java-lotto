@@ -21,6 +21,11 @@ public class LottoNumbers {
         values = sortAscendingLottoNumbers(numberValues);
     }
 
+    public LottoNumbers(final Set<LottoNumber> lottoValues) {
+        this.values = lottoValues.stream()
+                .collect(Collectors.toUnmodifiableList());
+    }
+
     private void validateDuplication(final List<String> numberValues) {
         final Set<String> checkedNumberValues = new HashSet<>();
         for (String numberValue : numberValues) {
