@@ -37,4 +37,17 @@ public class WinningLottoTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageMatching("보너스 번호는 로또 번호와 중복될 수 없습니다.");
     }
+
+    @Test
+    @DisplayName("Lotto 를 전달받아 Rank를 반환한다")
+    void getRankByLotto() {
+        // given
+        WinningLotto winningLotto = new WinningLotto(lotto, bonusNumber);
+
+        // when
+        Rank rank = winningLotto.getRankByLotto(lotto);
+
+        // then
+        assertThat(rank).isEqualTo(Rank.FIRST);
+    }
 }
