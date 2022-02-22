@@ -4,13 +4,15 @@
 
 ### 구입 금액
 
+---
+
 - 구입 금액을 입력받는다.
 
-| 항목           | 설명                                                 |
-| -------------- | ---------------------------------------------------- |
-| 숫자 유무      | 숫자가 아닐 경우 `IllegalArgumentException`          |
-| 양수 유무      | 양수가 아닐 경우 `IlligalArgumentException`          |
-| 천원 단위 유무 | 천원 단위 숫자가 아닐경우 `IlligalArgumentException` |
+| 항목           | 설명                                               |
+| -------------- | -------------------------------------------------- |
+| 숫자 유무      | 숫자가 아닐 경우 `IllegalArgumentException`        |
+| 양수 유무      | 양수가 아닐 경우 `IllegalArgumentException`        |
+| 천원 미만 여부 | 천원 미만을 투입할 경우 `IllegalArgumentException` |
 
 ### 로또 번호
 
