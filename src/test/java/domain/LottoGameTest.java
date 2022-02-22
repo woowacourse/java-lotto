@@ -1,3 +1,5 @@
+package domain;
+
 import static org.assertj.core.api.AssertionsForClassTypes.*;
 
 import java.util.Arrays;
