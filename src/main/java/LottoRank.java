@@ -10,9 +10,9 @@ public enum LottoRank {
     NOTHING(Prize.ZERO, LottoRank::isNothingPrize);
 
     private final Prize prize;
-    private final BiFunction<Long, Boolean, Boolean> predicate;
+    private final BiFunction<Integer, Boolean, Boolean> predicate;
 
-    LottoRank(Prize prize, BiFunction<Long, Boolean, Boolean> predicate) {
+    LottoRank(Prize prize, BiFunction<Integer, Boolean, Boolean> predicate) {
         this.prize = prize;
         this.predicate = predicate;
     }
@@ -21,42 +21,42 @@ public enum LottoRank {
         return prize;
     }
 
-    private boolean isMatched(long matchCount, boolean bonusMatch) {
+    private boolean isMatched(int matchCount, boolean bonusMatch) {
         return predicate.apply(matchCount, bonusMatch);
     }
 
-    public static LottoRank of(long matchCount, boolean bonusMatch) {
+    public static LottoRank of(Integer matchCount, boolean bonusMatch) {
         return findLottoRank(matchCount, bonusMatch);
     }
 
-    private static LottoRank findLottoRank(long matchCount, boolean bonusMatch) {
+    private static LottoRank findLottoRank(Integer matchCount, boolean bonusMatch) {
         return Stream.of(values())
             .filter(rank -> rank.isMatched(matchCount, bonusMatch))
             .findFirst()
             .orElseThrow(() -> new IllegalArgumentException("일치 갯수는 0이상 6이하이여야 합니다."));
     }
 
-    private static boolean isFirstPrize(long matchCount, boolean bonusMatch) {
+    private static boolean isFirstPrize(Integer matchCount, boolean bonusMatch) {
         return matchCount == 6;
     }
 
-    private static boolean isSecondPrize(long matchCount, boolean bonusMatch) {
+    private static boolean isSecondPrize(Integer matchCount, boolean bonusMatch) {
         return matchCount == 5 && bonusMatch;
     }
 
-    private static boolean isThirdPrize(long matchCount, boolean bonusMatch) {
+    private static boolean isThirdPrize(Integer matchCount, boolean bonusMatch) {
         return matchCount == 5 && !bonusMatch;
     }
 
-    private static boolean isFourthPrize(long matchCount, boolean bonusMatch) {
+    private static boolean isFourthPrize(Integer matchCount, boolean bonusMatch) {
         return matchCount == 4;
     }
 
-    private static boolean isFifthPrize(long matchCount, boolean bonusMatch) {
+    private static boolean isFifthPrize(Integer matchCount, boolean bonusMatch) {
         return matchCount == 3;
     }
 
-    private static boolean isNothingPrize(long matchCount, boolean bonusMatch) {
+    private static boolean isNothingPrize(Integer matchCount, boolean bonusMatch) {
         return 0 <= matchCount && matchCount < 3;
     }
 }

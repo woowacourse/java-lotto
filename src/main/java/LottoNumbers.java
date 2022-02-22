@@ -12,7 +12,9 @@ public class LottoNumbers {
         return lottoNumbers.contains(bonusNumber);
     }
 
-    public Stream<Integer> stream() {
-        return lottoNumbers.stream();
+    public int getMatchedNumberCountWith(LottoNumbers otherLottoNumbers) {
+        return (int) this.lottoNumbers.stream()
+                .filter(number -> otherLottoNumbers.contains(number))
+                .count();
     }
 }

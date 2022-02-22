@@ -9,15 +9,13 @@ public class LottoRankJudge {
     }
 
     public LottoRank judge(LottoNumbers lottoNumbers) {
-        long count = getMatchedCountAboutWinningNumbers(lottoNumbers);
+        int count = getMatchedCountAboutWinningNumbers(lottoNumbers);
         boolean bonusMatch = isBonusMatch(lottoNumbers);
         return LottoRank.of(count, bonusMatch);
     }
 
-    private long getMatchedCountAboutWinningNumbers(LottoNumbers lottoNumbers) {
-        return winningNumbers.stream()
-            .filter(winningNumber -> lottoNumbers.contains(winningNumber))
-            .count();
+    private int getMatchedCountAboutWinningNumbers(LottoNumbers lottoNumbers) {
+        return winningNumbers.getMatchedNumberCountWith(lottoNumbers);
     }
 
     private boolean isBonusMatch(LottoNumbers lottoNumbers) {
