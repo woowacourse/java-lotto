@@ -1,12 +1,27 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class RandomLottoMachine {
 
-    public static Set<Integer> createRandomLottoNumbers() {
-        return new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+    private static final List<Integer> lottoNumbers = new ArrayList<>();
+
+    static {
+        IntStream.rangeClosed(1, 45)
+                .forEach(lottoNumbers::add);
+    }
+
+    public static List<Integer> createRandomLottoNumbers() {
+        Collections.shuffle(lottoNumbers);
+        return IntStream.rangeClosed(0, 5)
+                .boxed()
+                .map(lottoNumbers::get)
+                .sorted()
+                .collect(Collectors.toList());
     }
 }
