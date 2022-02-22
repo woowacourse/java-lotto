@@ -10,9 +10,9 @@ public class InputView {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static String inputPurchaseAmount() {
+    public static int inputPurchaseAmount() {
         System.out.println(PURCHASE_AMOUNT_INPUT_MESSAGE);
-        return scanner.nextLine();
+        return Integer.parseInt(scanner.nextLine());
     }
 
     public static String inputWinningNumber() {
@@ -20,8 +20,8 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static String inputBonusBall(){
+    public static int inputBonusBall(){
         System.out.println(BONUS_BALL_INPUT_MESSAGE);
-        return scanner.nextLine();
+        return Integer.parseInt(scanner.nextLine());
     }
 }
