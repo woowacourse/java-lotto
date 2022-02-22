@@ -9,6 +9,7 @@ public class LottoGame {
     private List<Lotto> lottos;
     private Lottos lottos2;
     private Map<Integer, Integer> convertReward;
+    private Map<Integer, Integer> results;
 
     public LottoGame() {
 
@@ -44,7 +45,7 @@ public class LottoGame {
 
         lottos2 = new Lottos(lottos);
 
-        Map<Integer, Integer> results = lottos2.compareAllLotto(winningNumbers, bonusNumber);
+        results = lottos2.compareAllLotto(winningNumbers, bonusNumber);
 
         Set<Integer> winningRankings = results.keySet();
         int prize = 0;
@@ -53,6 +54,10 @@ public class LottoGame {
         }
         System.out.println("@@@@@prize: " + prize);
         return prize / (1000 * lottos2.getSize());
+    }
+
+    public Map<Integer, Integer> getResults() {
+        return results;
     }
 
 
