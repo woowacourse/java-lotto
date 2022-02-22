@@ -21,7 +21,7 @@ public class Lotto {
 
     private void validateRangeOfNumber(int number) {
         if (number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER) {
-            throw new IllegalArgumentException("로또 번호는 1이상 45이 이하이어야 한다.");
+            throw new IllegalArgumentException("로또 번호는 1이상 45이하이어야 한다.");
         }
     }
 

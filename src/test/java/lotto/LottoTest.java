@@ -32,6 +32,6 @@ class LottoTest {
 
         assertThatIllegalArgumentException()
             .isThrownBy(() -> new Lotto(numbers))
-            .withMessageMatching("로또 번호는 1이상 45이 이하이어야 한다.");
+            .withMessageMatching("로또 번호는 1이상 45이하이어야 한다.");
     }
 }
