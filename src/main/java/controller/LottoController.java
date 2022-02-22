@@ -1,6 +1,8 @@
 package controller;
 
 import static validator.LottoNumberValidators.validateAndParseNumber;
+import static validator.LottoNumberValidators.validateNoDuplicateInList;
+import static validator.LottoNumberValidators.validateNoDuplicates;
 
 import domain.LottoGame;
 import java.util.Arrays;
@@ -21,7 +23,10 @@ public class LottoController {
         if (nums.size() != 6) {
             throw new IllegalArgumentException("6개의 당첨 번호를 입력해야 합니다.");
         }
+        validateNoDuplicates(nums);
+
         int bonusNumber = InputView.requestBonusNumber();
+        validateNoDuplicateInList(bonusNumber, nums);
     }
 
     private void initLottoGame() {
