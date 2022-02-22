@@ -44,5 +44,12 @@ public class LottoDto {
                 .collect(Collectors.toUnmodifiableList());
         return new LottoDto(numbers);
     }
+<<<<<<< HEAD
 >>>>>>> f80fb84 (feat: DTO 추가)
+=======
+
+    public List<Integer> getLottoNumber() {
+        return lottoNumber;
+    }
+>>>>>>> 7a351e9 (docs: 기능 구현 목록 수정)
 }

@@ -1,6 +1,7 @@
 package view;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import dto.LottoDto;
 import dto.LottosDto;
 import dto.RankDto;
@@ -63,5 +64,20 @@ public class OutputView {
     public static void printPurchasedLotto(){
 
 >>>>>>> f80fb84 (feat: DTO 추가)
+=======
+import dto.LottoDto;
+import dto.LottosDto;
+
+public class OutputView {
+    public static void printPurchasedLotto(LottosDto lottosDto){
+        System.out.println(String.format("%s개를 구매했습니다.",lottosDto.getQuantity()));
+        for (LottoDto lottoDto : lottosDto.getLottoDtos()) {
+            printLottoNumbers(lottoDto);
+        }
+    }
+    
+    public static void printLottoNumbers(LottoDto lottoDto){
+        System.out.println(lottoDto.getLottoNumber());
+>>>>>>> 7a351e9 (docs: 기능 구현 목록 수정)
     }
 }
