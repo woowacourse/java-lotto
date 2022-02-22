@@ -1,10 +1,17 @@
 package domain;
 
+<<<<<<< HEAD
 import domain.Lotto.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import utils.ExceptionMessage;
+=======
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+>>>>>>> 5d27d71 (feat: LottoNumber 객체 생성)
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -16,7 +23,11 @@ public class LottoNumberTest {
     void 로또_넘버_0_예외_테스트(int lottoNumber) {
         assertThatThrownBy(() -> new LottoNumber(lottoNumber))
                 .isInstanceOf(IllegalArgumentException.class)
+<<<<<<< HEAD
                 .hasMessage(ExceptionMessage.LOTTO_NUMBER_OUT_OF_BOUND);
+=======
+                .hasMessage(LottoNumber.LOTTO_NUMBER_OUT_OF_BOUND);
+>>>>>>> 5d27d71 (feat: LottoNumber 객체 생성)
 
     }
 }
