@@ -14,7 +14,13 @@ public enum LottoRank {
 
     public static LottoRank of(long matchCount, boolean bonusMatch) {
         checkMatchCount(matchCount);
-        if (isSecondPrize(matchCount, bonusMatch)) {
+        return findLottoRank(matchCount, bonusMatch);
+    }
+
+    private static LottoRank findLottoRank(long matchCount, boolean bonusMatch) {
+        if (isFirstPrize(matchCount)) {
+            return LottoRank.FIRST;
+        } else if (isSecondPrize(matchCount, bonusMatch)) {
             return LottoRank.SECOND;
         } else if (isThirdPrize(matchCount, bonusMatch)) {
             return LottoRank.THIRD;
@@ -22,16 +28,19 @@ public enum LottoRank {
             return LottoRank.FOURTH;
         } else if (isFifthPrize(matchCount)) {
             return LottoRank.FIFTH;
-        } else if (isNothingPrize(matchCount)) {
-            return LottoRank.NOTHING;
         }
-        return LottoRank.FIRST;
+        return LottoRank.NOTHING;
     }
 
+
     private static void checkMatchCount(long matchCount) {
-        if (matchCount < 0) {
+        if (matchCount < 0 || matchCount > 6) {
             throw new IllegalArgumentException("일치 갯수는 0이상 6이하이여야 합니다.");
         }
+    }
+
+    private static boolean isFirstPrize(long matchCount) {
+        return matchCount == 6;
     }
 
     private static boolean isSecondPrize(long matchCount, boolean bonusMatch) {
@@ -49,8 +58,4 @@ public enum LottoRank {
     private static boolean isFifthPrize(long matchCount) {
         return matchCount == 3;
 }
-
-    private static boolean isNothingPrize(long matchCount) {
-        return matchCount <= 2;
-    }
 }
