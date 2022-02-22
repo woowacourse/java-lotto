@@ -10,7 +10,37 @@ public class WinnerLotto {
         this.bonus = bonus;
     }
 
-    public int countMatchNumbers(Lotto lotto) {
-        return winner.countMatchNumbers(lotto);
+    public Rank findRank(Lotto lotto) {
+        if (winner.countMatchNumbers(lotto) == 6) {
+            return Rank.FIRST;
+        }
+
+        if (winner.countMatchNumbers(lotto) == 2) {
+            if (lotto.containsNumber(bonus)) {
+                return Rank.FIFTH;
+            }
+        }
+
+        if (winner.countMatchNumbers(lotto) == 3) {
+            if (lotto.containsNumber(bonus)) {
+                return Rank.FOURTH;
+            }
+            return Rank.FIFTH;
+        }
+
+        if (winner.countMatchNumbers(lotto) == 4) {
+            if (lotto.containsNumber(bonus)) {
+                return Rank.THIRD;
+            }
+            return Rank.FOURTH;
+        }
+
+        if (winner.countMatchNumbers(lotto) == 5) {
+            if (lotto.containsNumber(bonus)) {
+                return Rank.SECOND;
+            }
+            return Rank.THIRD;
+        }
+        return Rank.NONE;
     }
 }
