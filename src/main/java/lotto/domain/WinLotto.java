@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class WinLotto {
 
@@ -14,10 +12,14 @@ public class WinLotto {
     }
 
     private void checkDuplicateWinNumbers(final List<Integer> winNumbers) {
-        final Set<Integer> winNumberSet = new HashSet<>(winNumbers);
-
-        if (winNumbers.size() != winNumberSet.size()) {
+        if (winNumbers.size() != calculateDistinctSize(winNumbers)) {
             throw new IllegalArgumentException("[ERROR] 중복된 당첨 번호가 존재합니다.");
         }
+    }
+
+    private long calculateDistinctSize(List<Integer> winNumbers) {
+        return winNumbers.stream()
+                .distinct()
+                .count();
     }
 }
