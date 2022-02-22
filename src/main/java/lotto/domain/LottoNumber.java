@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,7 +23,13 @@ public enum LottoNumber {
         this.number = number;
     }
 
-    public static List<LottoNumber> getLottoNumbers() {
+    public static List<LottoNumber> shuffleLottoNumbers() {
+        List<LottoNumber> lottoNumbers = LottoNumber.getLottoNumbers();
+        Collections.shuffle(lottoNumbers);
+        return lottoNumbers;
+    }
+
+    private static List<LottoNumber> getLottoNumbers() {
         return Arrays.stream(LottoNumber.values()).collect(Collectors.toList());
     }
 }
