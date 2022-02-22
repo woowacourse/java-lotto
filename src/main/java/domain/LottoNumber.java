@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Objects;
+
 public class LottoNumber {
 
 	private static final int MINIMUM_VALUE = 1;
@@ -17,5 +19,20 @@ public class LottoNumber {
 		if (value < MINIMUM_VALUE || value > MAXIMUM_VALUE) {
 			throw new IllegalArgumentException(ERROR_MESSAGE_NOT_IN_RANGE);
 		}
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		LottoNumber that = (LottoNumber)o;
+		return value == that.value;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(value);
 	}
 }
