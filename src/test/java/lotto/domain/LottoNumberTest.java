@@ -11,8 +11,8 @@ public class LottoNumberTest {
     @DisplayName("1 ~ 45 숫자가 아닌 경우 예외 발생")
     @ValueSource(ints = {-1, 0, 46})
     @ParameterizedTest
-    void numberRangeException(int number) {
+    void numberRangeException(int inputNumber) {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new LottoNumber(number));
+                .isThrownBy(() -> new LottoNumber(inputNumber));
     }
 }
