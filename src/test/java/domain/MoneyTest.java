@@ -36,4 +36,6 @@ class MoneyTest {
 
         assertThat(actual).isEqualTo(3);
     }
+    
+    //todo: 포맷 검사 추가
 }
