@@ -13,8 +13,11 @@ public class Lotto {
             .collect(Collectors.toList());
 
     public Lotto() {
-        Collections.sort(allNumbers);
-        this.numbers = allNumbers.subList(0, 6);
+        Collections.shuffle(allNumbers);
+        List<Integer> lottoNums = allNumbers.subList(0, 6);
+        Collections.sort(lottoNums);
+
+        this.numbers = lottoNums;
     }
 
     public List<Integer> getNumbers() {

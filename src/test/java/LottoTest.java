@@ -10,4 +10,10 @@ public class LottoTest {
         Lotto lotto = new Lotto();
         assertThat(lotto.getNumbers().size()).isEqualTo(6);
     }
+
+    @Test
+    void numbers_isSortedAsc() {
+        Lotto lotto = new Lotto();
+        assertThat(lotto.getNumbers()).isSorted();
+    }
 }
