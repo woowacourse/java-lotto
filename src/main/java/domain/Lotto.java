@@ -4,20 +4,19 @@ import java.util.List;
 
 public class Lotto {
 
-	private final List<Integer> lotto;
+	private final List<Number> lotto;
 
-	public Lotto(List<Integer> lotto) {
+	public Lotto(List<Number> lotto) {
 		checkLottoNumber(lotto);
 		this.lotto = lotto;
 	}
 
-	private void checkLottoNumber(List<Integer> lotto) {
-		checkLottoRange(lotto);
+	private void checkLottoNumber(List<Number> lotto) {
 		checkLottoNumberSize(lotto);
 		checkDuplicate(lotto);
 	}
 
-	private void checkDuplicate(List<Integer> lotto) {
+	private void checkDuplicate(List<Number> lotto) {
 		boolean duplicated = lotto.stream()
 			.distinct()
 			.count() != lotto.size();
@@ -27,16 +26,13 @@ public class Lotto {
 		}
 	}
 
-	private void checkLottoNumberSize(List<Integer> lotto) {
+	private void checkLottoNumberSize(List<Number> lotto) {
 		if (lotto.size() != 6) {
 			throw new IllegalArgumentException("로또 번호는 6개의 숫자여야 합니다");
 		}
 	}
 
-	private void checkLottoRange(List<Integer> lotto) {
-		boolean isOutOfRange = lotto.stream().anyMatch(number -> number < 1 || number > 45);
-		if (isOutOfRange) {
-			throw new IllegalArgumentException("로또 번호는 1 ~ 45의 숫자여야 합니다");
-		}
+	public boolean isContain(Number number) {
+		return lotto.contains(number);
 	}
 }
