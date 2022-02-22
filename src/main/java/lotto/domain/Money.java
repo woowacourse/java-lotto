@@ -8,7 +8,7 @@ public class Money {
     private static final String REGEX_FOR_NATURAL_NUMBER = "^[1-9][0-9]*$";
     private static final int UNIT_SIZE = 1000;
 
-    private final long money;
+    private final int money;
 
     public Money(String input) {
         checkNaturalNumber(input);
@@ -34,5 +34,9 @@ public class Money {
 
     private boolean isCorrectUnit(String input) {
         return Integer.parseInt(input) % UNIT_SIZE == 0;
+    }
+
+    public int getMoney() {
+        return money;
     }
 }
