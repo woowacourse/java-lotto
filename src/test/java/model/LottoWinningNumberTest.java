@@ -37,4 +37,12 @@ public class LottoWinningNumberTest {
         assertThatThrownBy(() -> new LottoWinningNumber(numbers))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"46, 1, 2","0, 45"})
+    @DisplayName("당첨 번호가 범위 밖인 경우")
+    void validateWinningNumberOutOfRange(String numbers) {
+        assertThatThrownBy(() -> new LottoWinningNumber(numbers))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
