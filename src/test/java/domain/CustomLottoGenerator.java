@@ -1,18 +1,19 @@
 package domain;
 
+import java.util.Iterator;
 import java.util.List;
 
 public class CustomLottoGenerator implements LottoGenerator {
 
-	private List<Integer> numbers;
+	private Iterator<List<Integer>> numbers;
 
-	public void initNumbers(List<Integer> numbers) {
-		this.numbers = numbers;
+	public void initNumbers(List<List<Integer>> numbers) {
+		this.numbers = numbers.iterator();
 	}
 
 	@Override
 	public List<Integer> generate() {
-		return this.numbers;
+		return this.numbers.next();
 	}
 
 }

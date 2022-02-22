@@ -17,7 +17,7 @@ class LottoTest {
 	@Test
 	void initTest() {
 		List<Integer> numbers = Arrays.asList(1,2,3,4,5,6);
-		customLottoGenerator.initNumbers(numbers);
+		customLottoGenerator.initNumbers(Arrays.asList(numbers));
 
 		assertDoesNotThrow(() -> new Lotto(customLottoGenerator));
 	}
@@ -26,12 +26,12 @@ class LottoTest {
 	@Test
 	void countTest() {
 		List<Integer> numbers = Arrays.asList(1,2,3,4,5,6);
-		customLottoGenerator.initNumbers(numbers);
+		customLottoGenerator.initNumbers(Arrays.asList(numbers));
 
 		 Lotto lotto = new Lotto(customLottoGenerator);
 
 		 Balls answer = new Balls(numbers);
 
-		 assertThat(lotto.countMatches(answer, new Ball(7))).isEqualTo(Rank.FIRST_GRADE);
+		 assertThat(lotto.getRank(answer, new Ball(7))).isEqualTo(Rank.FIRST_GRADE);
 	}
 }
