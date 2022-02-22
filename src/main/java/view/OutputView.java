@@ -23,7 +23,6 @@ public class OutputView {
     }
 
     private static String formatLottoNumbers(Lotto lotto) {
-
         String lottoNumFormat = lotto.getNumbers()
                 .stream()
                 .map(Object::toString)
