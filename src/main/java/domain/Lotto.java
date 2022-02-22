@@ -42,7 +42,7 @@ public class Lotto {
                 .size();
     }
 
-    private boolean containsLottoNumber(LottoNumber lottoNumber) {
+    public boolean containsLottoNumber(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
 }

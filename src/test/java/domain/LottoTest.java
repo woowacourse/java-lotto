@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class LottoTest {
     private List<LottoNumber> lottoNumbers;
@@ -21,7 +22,8 @@ public class LottoTest {
         }
     }
 
-    @ParameterizedTest(name = "6개 LottoNumber 를 전달 받아 Lotto 생성")
+    @Test
+    @DisplayName("6개 LottoNumber 를 전달 받아 Lotto 생성")
     void createLotto() {
         // given
         Lotto lotto = new Lotto(lottoNumbers);
@@ -67,5 +69,19 @@ public class LottoTest {
 
         // then
         assertThat(lotto.getSameNumberCount(anotherLotto)).isEqualTo(5);
+    }
+
+    @ParameterizedTest(name = "포함 여부를 확인할 숫자 : {0}")
+    @CsvSource(value = {"1,true", "6,true", "7,false"})
+    @DisplayName("Lotto에 LottoNumber를 전달하여 포함 여부 확인")
+    void lottoContainsLottoNumberTest(int lottoNumber, boolean expected) {
+        // given
+        LottoNumber lottoNumber1 = new LottoNumber(lottoNumber);
+
+        // when
+        Lotto lotto = new Lotto(lottoNumbers);
+
+        // then
+        assertThat(lotto.containsLottoNumber(lottoNumber1)).isEqualTo(expected);
     }
 }
