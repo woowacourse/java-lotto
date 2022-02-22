@@ -15,7 +15,18 @@ public class WinLottoTest {
         final List<Integer> duplicateNumbers = Arrays.asList(1, 1, 1, 1, 1, 1);
 
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new WinLotto(duplicateNumbers))
+                .isThrownBy(() -> new WinLotto(duplicateNumbers, 5))
                 .withMessage("[ERROR] 중복된 당첨 번호가 존재합니다.");
+    }
+
+    @DisplayName("보너스 볼과 당첨 번호가 중복되는 경우 에러 발생")
+    @Test
+    void duplicateBonusBallNumber() {
+        final List<Integer> winNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        final int duplicateBonusNumber = 1;
+
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new WinLotto(winNumbers, duplicateBonusNumber))
+                .withMessage("[ERROR] 보너스 볼이 당첨 번호와 중복됩니다.");
     }
 }
