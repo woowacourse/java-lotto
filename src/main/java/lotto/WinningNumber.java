@@ -44,4 +44,8 @@ public class WinningNumber {
     public Set<LottoNumber> getNumbers() {
         return numbers;
     }
+
+    public boolean contains(LottoNumber number) {
+        return numbers.contains(number);
+    }
 }

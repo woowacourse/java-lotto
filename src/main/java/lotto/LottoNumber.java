@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.util.StringToIntConverter;
+
 import java.util.Objects;
 
 public class LottoNumber {
@@ -8,6 +10,10 @@ public class LottoNumber {
     private static final int UPPER_BOUND = 45;
 
     private final int number;
+
+    public LottoNumber(String input) {
+        this(StringToIntConverter.toInt(input));
+    }
 
     public LottoNumber(int number) {
         validateRange(number);
