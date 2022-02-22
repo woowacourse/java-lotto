@@ -10,7 +10,7 @@ public class Lottos {
 	public Lottos(int price) {
 		int count = price / 1000;
 		while (count-- > 0) {
-			this.lottos.add(new Lotto());
+			this.lottos.add(new Lotto(new RandomLottoNumberGenerator()));
 		}
 	}
 
