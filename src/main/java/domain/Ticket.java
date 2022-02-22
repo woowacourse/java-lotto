@@ -1,15 +1,21 @@
 package domain;
 
-import java.util.List;
+import java.util.Set;
 
 public class Ticket {
-    private final List<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
     public Ticket(LottoNumbersGenerator lottoNumbersGenerator) {
         this.lottoNumbers = lottoNumbersGenerator.generate();
     }
 
-    public List<LottoNumber> getLottoNumbers() {
+    public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
+    }
+
+    public int getSameLottoNumberCount(Set<LottoNumber> lottoNumbers) {
+        return (int)lottoNumbers.stream()
+            .filter(this.lottoNumbers::contains)
+            .count();
     }
 }

@@ -2,7 +2,6 @@ package domain;
 
 import java.util.Arrays;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class TicketTest {
@@ -40,5 +39,43 @@ public class TicketTest {
             new LottoNumber(3),
             new LottoNumber(17))
         );
+    }
+
+    @Test
+    void 일치한_로또번호_개수확인_6개일치() {
+        Ticket ticket = new Ticket(() -> Set.of(new LottoNumber(40),
+            new LottoNumber(39),
+            new LottoNumber(19),
+            new LottoNumber(23),
+            new LottoNumber(3),
+            new LottoNumber(17)));
+
+        Set<LottoNumber> lottoNumbers = Set.of(new LottoNumber(40),
+            new LottoNumber(39),
+            new LottoNumber(19),
+            new LottoNumber(23),
+            new LottoNumber(3),
+            new LottoNumber(17));
+
+        assertThat(ticket.getSameLottoNumberCount(lottoNumbers)).isEqualTo(6);
+    }
+
+    @Test
+    void 일치한_로또번호_개수확인_1개일치() {
+        Ticket ticket = new Ticket(() -> Set.of(new LottoNumber(40),
+            new LottoNumber(39),
+            new LottoNumber(19),
+            new LottoNumber(23),
+            new LottoNumber(3),
+            new LottoNumber(17)));
+
+        Set<LottoNumber> lottoNumbers = Set.of(new LottoNumber(1),
+            new LottoNumber(43),
+            new LottoNumber(24),
+            new LottoNumber(14),
+            new LottoNumber(9),
+            new LottoNumber(40));
+
+        assertThat(ticket.getSameLottoNumberCount(lottoNumbers)).isEqualTo(1);
     }
 }
