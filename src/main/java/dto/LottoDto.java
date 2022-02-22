@@ -18,4 +18,8 @@ public class LottoDto {
                 .collect(Collectors.toUnmodifiableList());
         return new LottoDto(numbers);
     }
+
+    public List<Integer> getLottoNumber() {
+        return lottoNumber;
+    }
 }

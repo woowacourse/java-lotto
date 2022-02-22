@@ -7,10 +7,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottosDto {
+    int quantity;
     List<LottoDto> lottoDtos;
 
     public LottosDto(List<LottoDto> lottoDtos) {
         this.lottoDtos = lottoDtos;
+        this.quantity = lottoDtos.size();
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public List<LottoDto> getLottoDtos() {
+        return lottoDtos;
     }
 
     public static LottosDto from(List<Lotto> lottos){
