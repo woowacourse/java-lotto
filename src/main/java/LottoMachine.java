@@ -7,10 +7,10 @@ public class LottoMachine {
         this.lottoRankJudge = lottoRankJudge;
     }
 
-    public LottoResult getResult(List<List<Integer>> lottoNumbersList) {
+    public LottoResult summarize(List<LottoNumbers> lottoNumbersList) {
         LottoResult result = new LottoResult();
 
-        for (List<Integer> lottoNumbers : lottoNumbersList) {
+        for (LottoNumbers lottoNumbers : lottoNumbersList) {
             LottoRank rank = lottoRankJudge.judge(lottoNumbers);
             result.add(rank);
         }

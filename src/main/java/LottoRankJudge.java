@@ -1,28 +1,26 @@
-import java.util.List;
-
 public class LottoRankJudge {
 
-    private final List<Integer> winningNumbers;
+    private final LottoNumbers winningNumbers;
     private final Integer bonusNumber;
 
-    public LottoRankJudge(List<Integer> winningNumbers, int bonusNumber) {
+    public LottoRankJudge(LottoNumbers winningNumbers, int bonusNumber) {
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
     }
 
-    public LottoRank judge(List<Integer> lottoNumbers) {
+    public LottoRank judge(LottoNumbers lottoNumbers) {
         long count = getMatchedCountAboutWinningNumbers(lottoNumbers);
         boolean bonusMatch = isBonusMatch(lottoNumbers);
         return LottoRank.of(count, bonusMatch);
     }
 
-    private long getMatchedCountAboutWinningNumbers(List<Integer> lottoNumbers) {
+    private long getMatchedCountAboutWinningNumbers(LottoNumbers lottoNumbers) {
         return winningNumbers.stream()
             .filter(winningNumber -> lottoNumbers.contains(winningNumber))
             .count();
     }
 
-    private boolean isBonusMatch(List<Integer> lottoNumbers) {
+    private boolean isBonusMatch(LottoNumbers lottoNumbers) {
         return lottoNumbers.contains(bonusNumber);
     }
 }
