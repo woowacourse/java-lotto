@@ -15,7 +15,7 @@ public class ResultView {
         System.out.println(size + PURCHASE_RESULT_MESSAGE);
         for (Lotto lotto : lottos) {
             String numbers = lotto.getNumbers().stream()
-                    .map(integer -> Integer.toString(integer))
+                    .map(lottoNumber -> Integer.toString(lottoNumber.get()))
                     .collect(Collectors.joining(PURCHASE_RESULT_DELIMITER));
             System.out.printf(PURCHASE_RESULT_PRINT_MESSAGE, numbers);
         }
