@@ -34,5 +34,4 @@ public class Balls {
 	public boolean contains(Ball ball) {
 		return balls.contains(ball);
 	}
-
 }

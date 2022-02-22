@@ -12,7 +12,7 @@ public class Ball {
 	}
 
 	private void validateNumberIsInRange(int number) {
-		if(number < 1 || number > 45) {
+		if (number < 1 || number > 45) {
 			throw new IllegalArgumentException("숫자의 범위는 1부터 45까지여야 합니다.");
 		}
 	}
