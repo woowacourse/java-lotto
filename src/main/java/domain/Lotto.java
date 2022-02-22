@@ -9,6 +9,10 @@ public class Lotto {
 		this.numbers = lottoNumbersGenerator.generate();
 	}
 
+	public List<Integer> getNumbers() {
+		return numbers;
+	}
+
 	public int getNumbersSize() {
 		return this.numbers.size();
 	}
