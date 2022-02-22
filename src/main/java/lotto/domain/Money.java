@@ -27,4 +27,8 @@ public class Money {
             throw new IllegalArgumentException("금액은 천원 단위여야 합니다.");
         }
     }
+
+    public int count() {
+        return this.amount / UNIT;
+    }
 }

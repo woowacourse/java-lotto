@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
 
@@ -13,6 +14,15 @@ public class LottoTicket {
     public LottoTicket(List<LottoNumber> numbers) {
         validate(numbers);
         this.numbers = new ArrayList<>(numbers);
+    }
+
+    public static LottoTicket createTicket(NumberGenerator generator) {
+        return new LottoTicket(
+            generator.generate(COUNT)
+                .stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList())
+        );
     }
 
     private void validate(List<LottoNumber> numbers) {
