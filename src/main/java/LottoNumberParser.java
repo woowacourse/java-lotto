@@ -6,11 +6,17 @@ public class LottoNumberParser {
 
     private static final int LOTTO_NUMBER_LENGTH = 6;
     private static final String REGEX_DELIMITER = ",";
+    private static final String REGEX = "^\\s*[0-9]{1,2}\\s*(\\s*,\\s*[0-9]{1,2}\\s*){5}$";
 
     static final String INVALID_LOTTO_NUMBER_LENGTH_MESSAGE = "당첨 번호는 6개여야 합니다.";
     static final String DUPLICATED_LOTTO_NUMBER_MESSAGE = "중복된 당첨 번호는 허용하지 않습니다.";
 
     public List<Integer> parse(String numbers) {
+
+        if (!numbers.matches(REGEX)) {
+            throw new IllegalArgumentException("당첨 번호는 반드시 숫자여야 합니다.");
+        }
+
         List<String> tokens = splitNumbers(numbers);
         List<String> trimNumbers = trimNumbers(tokens);
         List<Integer> intNumbers = toInts(trimNumbers);
@@ -64,7 +70,7 @@ public class LottoNumberParser {
 
     private boolean hasInvalidNumberRange(List<Integer> numbers) {
         return numbers.stream()
-                .anyMatch(this::isInvalidRange);
+            .anyMatch(this::isInvalidRange);
     }
 
     private boolean isInvalidRange(Integer number) {
@@ -72,12 +78,8 @@ public class LottoNumberParser {
     }
 
     private List<Integer> toInts(List<String> numbers) {
-        try {
-            return numbers.stream()
-                    .map(Integer::valueOf)
-                    .collect(toList());
-        } catch (NumberFormatException exception) {
-            throw new IllegalArgumentException("당첨 번호는 반드시 숫자여야 합니다.", exception);
-        }
+        return numbers.stream()
+            .map(Integer::valueOf)
+            .collect(toList());
     }
 }
