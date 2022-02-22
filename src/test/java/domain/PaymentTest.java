@@ -1,5 +1,6 @@
 package domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -66,5 +67,10 @@ public class PaymentTest {
 	void 구입금액_10만원_초과_실패() {
 		assertThatThrownBy(() -> new Payment("110000"))
 			.isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@Test
+	void 로또_생성_횟수() {
+		assertThat(new Payment("14000").calculateLottoCount()).isEqualTo(14);
 	}
 }

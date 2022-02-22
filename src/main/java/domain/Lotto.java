@@ -1,6 +1,8 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Lotto {
@@ -10,6 +12,7 @@ public class Lotto {
 	public Lotto(List<LottoNumber> lottoNumbers) {
 		checkLottoSize(lottoNumbers);
 		checkDuplicatedLottoNumber(lottoNumbers);
+		Collections.sort(lottoNumbers);
 		this.lotto = lottoNumbers;
 	}
 
@@ -43,5 +46,10 @@ public class Lotto {
 
 	public boolean isContain(LottoNumber lottoNumber) {
 		return lotto.contains(lottoNumber);
+	}
+
+	@Override
+	public String toString() {
+		return "추첨된 번호는 " + lotto + " 입니다.";
 	}
 }

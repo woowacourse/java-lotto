@@ -22,6 +22,10 @@ public class Payment {
 		return changeInt;
 	}
 
+	public int calculateLottoCount() {
+		return payment / LOTTO_PRICE;
+	}
+
 	private void checkPaymentLimit(int payment) {
 		if (payment > PAYMENT_LIMIT_PRICE) {
 			throw new IllegalArgumentException("로또는 한사람 당 10만원씩만 살 수 있습니다. ");
