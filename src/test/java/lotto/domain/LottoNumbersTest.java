@@ -31,4 +31,10 @@ public class LottoNumbersTest {
     void correct2() {
         assertThatNoException().isThrownBy(() -> new LottoNumbers("1,  8  ,3,4 ,5 ,6"));
     }
+
+    @Test
+    @DisplayName("공백 + 중복인 경우")
+    void incorrect3() {
+        assertThatThrownBy(() -> new LottoNumbers("1,  3,3  ,4,5,6")).isInstanceOf(IllegalArgumentException.class);
+    }
 }

@@ -6,13 +6,18 @@ import java.util.stream.Collectors;
 
 public class LottoNumbers {
     public static final String DELIMITER = ",";
+    public static final String BLANK = " ";
 
     private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers(String input) {
-        String[] stringArr = input.split(DELIMITER);
+        String[] stringArr = reduceBlank(input).split(DELIMITER);
         validateDuplicate(stringArr);
         this.lottoNumbers = convertIntArrToIntegerList(stringArr);
+    }
+
+    private String reduceBlank(String input) {
+        return input.replaceAll(BLANK, "");
     }
 
     private void validateDuplicate(String[] arr) {

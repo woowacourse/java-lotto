@@ -10,7 +10,7 @@ public class LottoNumber {
     private int number;
 
     public LottoNumber(String input) {
-        int number = convertToInt(input.trim());
+        int number = convertToInt(input);
         validateNumber(number);
         this.number = number;
     }
