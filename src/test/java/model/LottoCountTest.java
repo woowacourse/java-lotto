@@ -13,7 +13,15 @@ public class LottoCountTest {
     @NullAndEmptySource
     @ValueSource(strings ={"","  ","\t","\n"})
     @DisplayName("투입 금액 공백 검증")
-    public void validateLottoNumber(String number) {
+    void validateLottoNumber(String number) {
+        assertThatThrownBy(() -> new LottoCount(number))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings ={"azpi","++","greeanlawn","1dksl","-1"})
+    @DisplayName("투입 금액이 숫자가 아닌 경우 검증")
+    void validateInputMoneyIsNumber(String number){
         assertThatThrownBy(() -> new LottoCount(number))
                 .isInstanceOf(IllegalArgumentException.class);
     }
