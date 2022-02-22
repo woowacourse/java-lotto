@@ -12,7 +12,7 @@ public class WinnerLottoTest {
     void countEqualsLottoNumbers() {
         WinnerLotto winner =
             new WinnerLotto(new Lotto(List.of(number(1), number(2), number(3), number(4), number(5), number(6))),
-                number(1));
+                number(11));
         Lotto lotto = new Lotto(List.of(number(1), number(2), number(3), number(4), number(5), number(6)));
 
         assertThat(winner.findRank(lotto)).isEqualTo(Rank.FIRST);
