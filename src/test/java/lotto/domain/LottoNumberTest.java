@@ -1,8 +1,9 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -13,6 +14,14 @@ public class LottoNumberTest {
     @ParameterizedTest
     void numberRangeException(int inputNumber) {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new LottoNumber(inputNumber));
+                .isThrownBy(() -> new LottoNumber(inputNumber))
+                .withMessage("[ERROR] 입력값이 1 이상 45 이하여야 합니다.");
+    }
+
+    @Test
+    void equalsAndHashCode() {
+        assertThat(new LottoNumber(1))
+                .isEqualTo(new LottoNumber(1))
+                .hasSameHashCodeAs(new LottoNumber(1));
     }
 }
