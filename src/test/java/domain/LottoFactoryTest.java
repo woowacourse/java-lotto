@@ -1,30 +1,21 @@
 package domain;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottoFactoryTest {
 
-	private static final LottoFactory lottoFactory = new LottoFactory();
+	private LottoFactory lottoFactory;
 
 	@Test
-	@DisplayName("로또 팩토리는 랜덤한 숫자를 생성한다.")
-	void generateRandomNumber() {
-		//given
-		//when
-		List<Integer> lotto = lottoFactory.generateLotto();
-		//then
-		lotto.forEach(lottoNumber -> assertTrue(lottoNumber >= 1 && lottoNumber <= 45));
-	}
+	@DisplayName("구입한 금액 만큼 로또 발급")
+	void generateLottoByMoney() {
+		String purchaseMoney = "14000";
+		Money money = Money.from(purchaseMoney);
 
-	@Test
-	@DisplayName("로또 팩토리는 랜덤한 숫자 6개를 뽑는다.")
-	void generateNumbers() {
-		assertThat(lottoFactory.generateLotto().size()).isEqualTo(6);
+		lottoFactory = new LottoFactory(money);
+		assertThat(lottoFactory.generateLottoByMoney().size()).isEqualTo(Integer.parseInt(purchaseMoney) / 1000);
 	}
 }
