@@ -23,3 +23,5 @@ public class LottoNumber {
         return this.number;
     }
 }
+
+//숫자입력 -> lottoNumber생성 -> 리스트로 추가 -> WinningLotto생성
