@@ -10,12 +10,20 @@ public class LottoGame {
 	public static final int LOTTO_NUMBER_SIZE = 6;
 	public static final int LOTTO_PRICE = 1000;
 
-	public List<Lotto> purchaseLottos(int money) {
-		int lottoCount = money / LOTTO_PRICE;
+	private final List<Lotto> lottos;
+
+	public LottoGame(int money) {
+		this.lottos = purchaseLottos(money);
+	}
+
+	private List<Lotto> purchaseLottos(int money) {
+		final int lottoCount = money / LOTTO_PRICE;
 		List<Lotto> lottos = new ArrayList<>();
+
 		for (int i = 0; i < lottoCount; i++) {
 			lottos.add(createLotto());
 		}
+
 		return lottos;
 	}
 
