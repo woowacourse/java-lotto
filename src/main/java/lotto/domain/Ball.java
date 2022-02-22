@@ -4,7 +4,7 @@ import lotto.util.Creatable;
 import lotto.util.Random;
 
 public class Ball {
-    private static final String NUMBER_MATCHES = "^[0-9]*";
+    private static final String NUMBER_MATCHES = "[0-9]+";
     public static final int MINIMUM_NUMBER = 1;
     public static final int MAXIMUM_NUMBER = 45;
     private static final String ERROR_PREFIX = "[ERROR] ";
@@ -23,7 +23,7 @@ public class Ball {
     }
 
     private void checkValidValue(final String value) {
-        if (isBlank(value) || isNotNumber(value)) {
+        if (isBlank(value) || !isNumber(value)) {
             throw new IllegalArgumentException(ERROR_PREFIX + ERROR_ONLY_NUMBER);
         }
         int number = Integer.parseInt(value);
@@ -34,7 +34,7 @@ public class Ball {
         return number == null || number.isEmpty();
     }
 
-    private boolean isNotNumber(final String value) {
+    private boolean isNumber(final String value) {
         return value.matches(NUMBER_MATCHES);
     }
 

@@ -1,14 +1,21 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Lotto {
     private static final int LOTTO_COUNT = 6;
 
     private final List<Ball> lotto = new ArrayList<>();
+
+    public Lotto() {
+        this(selectNumbers());
+    }
 
     public Lotto(final List<String> numbers) {
         checkValidNumbers(numbers);
@@ -18,13 +25,29 @@ public class Lotto {
         }
     }
 
+    private static List<String> selectNumbers() {
+        List<Integer> lottoNumbers = getTotalLottoNumbers();
+        Collections.shuffle(lottoNumbers);
+
+        List<Integer> selectedIntNumbers = lottoNumbers.subList(0,6);
+        return selectedIntNumbers.stream()
+                .map(Object::toString)
+                .collect(Collectors.toList());
+    }
+
+    private static List<Integer> getTotalLottoNumbers() {
+        return IntStream.range(1, 46)
+                .boxed()
+                .collect(Collectors.toList());
+    }
+
     private void checkValidNumbers(final List<String> numbers) {
         checkDuplicatedNumber(numbers);
         checkLottoCount(numbers);
     }
 
     private void checkLottoCount(List<String> numbers) {
-        if (numbers.size() > LOTTO_COUNT) {
+        if (numbers.size() != LOTTO_COUNT) {
             throw new IllegalArgumentException();
         }
     }
