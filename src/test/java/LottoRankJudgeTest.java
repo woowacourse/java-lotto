@@ -14,13 +14,13 @@ public class LottoRankJudgeTest {
 
     @BeforeEach
     void setUp() {
-        lottoRankJudge = new LottoRankJudge(new LottoNumbers(1, 2, 3, 4, 5, 6), 7);
+        lottoRankJudge = new LottoRankJudge(LottoNumbers.withSixNumbers(1, 2, 3, 4, 5, 6), 7);
     }
 
     @Test
     @DisplayName("1등 판독 테스트")
     void firstPrize() {
-        LottoNumbers lottoNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
+        LottoNumbers lottoNumbers = LottoNumbers.withSixNumbers(1, 2, 3, 4, 5, 6);
         LottoRank rank = lottoRankJudge.judge(lottoNumbers);
         assertThat(rank).isEqualTo(LottoRank.FIRST);
     }
@@ -28,7 +28,7 @@ public class LottoRankJudgeTest {
     @Test
     @DisplayName("2등 판독 테스트")
     void secondPrize() {
-        LottoNumbers lottoNumbers = new LottoNumbers(1, 2, 3, 4, 5, 7);
+        LottoNumbers lottoNumbers = LottoNumbers.withSixNumbers(1, 2, 3, 4, 5, 7);
         LottoRank rank = lottoRankJudge.judge(lottoNumbers);
         assertThat(rank).isEqualTo(LottoRank.SECOND);
     }
@@ -36,7 +36,7 @@ public class LottoRankJudgeTest {
     @Test
     @DisplayName("3등 판독 테스트")
     void thirdPrize() {
-        LottoNumbers lottoNumbers = new LottoNumbers(1, 2, 3, 4, 5, 8);
+        LottoNumbers lottoNumbers = LottoNumbers.withSixNumbers(1, 2, 3, 4, 5, 8);
         LottoRank rank = lottoRankJudge.judge(lottoNumbers);
         assertThat(rank).isEqualTo(LottoRank.THIRD);
     }
@@ -44,7 +44,7 @@ public class LottoRankJudgeTest {
     @Test
     @DisplayName("4등 판독 테스트")
     void fourthPrize() {
-        LottoNumbers lottoNumbers = new LottoNumbers(1, 2, 3, 4, 8, 9);
+        LottoNumbers lottoNumbers = LottoNumbers.withSixNumbers(1, 2, 3, 4, 8, 9);
         LottoRank rank = lottoRankJudge.judge(lottoNumbers);
         assertThat(rank).isEqualTo(LottoRank.FOURTH);
     }
@@ -52,7 +52,7 @@ public class LottoRankJudgeTest {
     @Test
     @DisplayName("5등 판독 테스트")
     void fifthPrize() {
-        LottoNumbers lottoNumbers = new LottoNumbers(1, 2, 3, 8, 9, 10);
+        LottoNumbers lottoNumbers = LottoNumbers.withSixNumbers(1, 2, 3, 8, 9, 10);
         LottoRank rank = lottoRankJudge.judge(lottoNumbers);
         assertThat(rank).isEqualTo(LottoRank.FIFTH);
     }
@@ -67,8 +67,8 @@ public class LottoRankJudgeTest {
 
     private static Stream<Arguments> provideLottoNumbersList() {
         return Stream.of(
-            Arguments.of(new LottoNumbers(1, 2, 8, 9, 10, 11)),
-            Arguments.of(new LottoNumbers(1, 2, 7, 9, 10, 11))
+            Arguments.of(LottoNumbers.withSixNumbers(1, 2, 8, 9, 10, 11)),
+            Arguments.of(LottoNumbers.withSixNumbers(1, 2, 7, 9, 10, 11))
         );
     }
 }

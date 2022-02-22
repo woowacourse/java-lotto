@@ -8,8 +8,8 @@ public class LottoNumbersTest {
     @Test
     @DisplayName("일치하는 숫자 갯수 구하기 테스트")
     void getMatchedNumberCountTest() {
-        LottoNumbers lottoNumbers = new LottoNumbers(1, 2, 3, 4, 5, 6);
-        LottoNumbers winnerNumbers = new LottoNumbers(1, 10, 100, 1000, 10000, 6);
+        LottoNumbers lottoNumbers = LottoNumbers.withSixNumbers(1, 2, 3, 4, 5, 6);
+        LottoNumbers winnerNumbers = LottoNumbers.withSixNumbers(1, 10, 100, 1000, 10000, 6);
         int count = lottoNumbers.getMatchedNumberCountWith(winnerNumbers);
         assertThat(count).isEqualTo(2);
     }
