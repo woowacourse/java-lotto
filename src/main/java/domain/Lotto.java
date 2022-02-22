@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
-	List<Integer> numbers = new ArrayList<>();
+	List<LottoNumber> numbers = new ArrayList<>();
 
 	public Lotto() {
 		for (int i = 1; i <= 6; i++) {
-			numbers.add(i);
+			numbers.add(LottoNumber.from(i));
 		}
 	}
 
@@ -16,7 +16,4 @@ public class Lotto {
 		return 6;
 	}
 
-	public List<Integer> getNumbers() {
-		return this.numbers;
-	}
 }
