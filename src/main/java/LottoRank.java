@@ -3,7 +3,8 @@ public enum LottoRank {
     SECOND(30_000_000),
     THIRD(1_500_000),
     FOURTH(50_000),
-    FIFTH(5_000);
+    FIFTH(5_000),
+    NOTHING(0);
 
     private int prizeAmount;
 
@@ -20,6 +21,8 @@ public enum LottoRank {
             return LottoRank.FOURTH;
         } else if (isFifthPrize(matchCount)) {
             return LottoRank.FIFTH;
+        } else if (isNothingPrize(matchCount)) {
+            return LottoRank.NOTHING;
         }
         return LottoRank.FIRST;
     }
@@ -38,5 +41,9 @@ public enum LottoRank {
 
     private static boolean isFifthPrize(long matchCount) {
         return matchCount == 3;
+    }
+
+    private static boolean isNothingPrize(long matchCount) {
+        return matchCount <= 2;
     }
 }
