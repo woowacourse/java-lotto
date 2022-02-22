@@ -18,6 +18,14 @@ public class Money {
         return new Money(amount);
     }
 
+    public boolean isPurchasable(int amount) {
+        return this.amount >= amount;
+    }
+
+    public int getPurchasableNumber(int amount) {
+        return this.amount / amount;
+    }
+
     private void validateAmount(int amount) {
         if (amount % MINIMUM_AMOUNT != 0) {
             throw new IllegalArgumentException(MONEY_MUST_BE_DIVIDABLE_BY_TEN);
@@ -36,4 +44,5 @@ public class Money {
     public int hashCode() {
         return Objects.hash(amount);
     }
+
 }
