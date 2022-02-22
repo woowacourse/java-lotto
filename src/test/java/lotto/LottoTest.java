@@ -25,4 +25,13 @@ class LottoTest {
         assertThat(new Lotto(numbers)).isNotNull();
     }
 
+    @Test
+    @DisplayName("로또 번호는 1이상 45이하가 아니면 예외가 발생한다.")
+    void throwExceptionWhenOutOfRange() {
+        List<Integer> numbers = List.of(-1, 46, 3, 4, 5, 7);
+
+        assertThatIllegalArgumentException()
+            .isThrownBy(() -> new Lotto(numbers))
+            .withMessageMatching("로또 번호는 1이상 45이 이하이어야 한다.");
+    }
 }
