@@ -1,7 +1,9 @@
 package domain;
 
+import java.util.Objects;
+
 public class LottoNumber {
-    private int lottoNumber;
+    private int number;
     
     public LottoNumber(int number) {
         checkLottoNumberRange(number);
