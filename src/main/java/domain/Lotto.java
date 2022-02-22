@@ -13,7 +13,6 @@ public class Lotto {
 	}
 
 	public int getNumbersSize() {
-		return 6;
+		return this.numbers.size();
 	}
-
 }

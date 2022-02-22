@@ -11,5 +11,4 @@ public class LottoTest {
 		Lotto lotto = new Lotto();
 		assertThat(lotto.getNumbersSize()).isEqualTo(6);
 	}
-
 }
