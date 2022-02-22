@@ -19,8 +19,6 @@ public class OutputView {
                .map(OutputView::formatLottoNumbers)
                .forEach(builder::append);
 
-        builder.append(lineSeparator);
-
         print(builder.toString());
     }
 
@@ -31,7 +29,7 @@ public class OutputView {
                 .map(Object::toString)
                 .collect(Collectors.joining(", "));
 
-        return "[" + lottoNumFormat + "]";
+        return "[" + lottoNumFormat + "]" + lineSeparator;
     }
 
     private static void print(String value) {
