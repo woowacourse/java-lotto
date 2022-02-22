@@ -16,4 +16,8 @@ public class Money {
             throw new IllegalArgumentException(ERROR_NEGATIVE_INPUT_MESSAGE);
         }
     }
+
+    public int divideBy(int amount) {
+        return money / amount;
+    }
 }
