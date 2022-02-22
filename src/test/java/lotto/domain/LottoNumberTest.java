@@ -14,7 +14,7 @@ class LottoNumberTest {
         // given
         final String expectedExceptionMessage = "로또 번호는 1 ~ 45 사이의 자연수여야합니다.";
         // when then
-        assertThatThrownBy(() -> new LottoNumber(value))
+        assertThatThrownBy(() -> LottoNumber.from(value))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(expectedExceptionMessage);
     }

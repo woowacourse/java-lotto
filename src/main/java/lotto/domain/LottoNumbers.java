@@ -36,7 +36,7 @@ public class LottoNumbers {
     private List<LottoNumber> sortAscendingLottoNumbers(final List<String> numberValues) {
         return numberValues.stream()
                 .sorted()
-                .map(LottoNumber::new)
+                .map(LottoNumber::from)
                 .collect(Collectors.toUnmodifiableList());
     }
 

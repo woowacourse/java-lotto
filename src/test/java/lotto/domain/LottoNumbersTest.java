@@ -30,7 +30,7 @@ class LottoNumbersTest {
         final LottoNumbers lottoNumbers = new LottoNumbers(numbers);
         final List<String> otherNumbers = Arrays.asList("2", "3", "6", "7", "4", "5");
         final LottoNumbers otherLottoNumbers = new LottoNumbers(otherNumbers);
-        final LottoNumber expectedFirstLottoNumber = new LottoNumber("2");
+        final LottoNumber expectedFirstLottoNumber = LottoNumber.from("2");
         //when
         final LottoNumber actualFirstLottoNumber = lottoNumbers.getValues().get(0);
         //then
