@@ -22,4 +22,16 @@ public class WinLottoTest {
                 .isThrownBy(() -> new WinLotto(new Lotto(winNumbers), duplicateBonusLottoNumber))
                 .withMessage("[ERROR] 보너스 볼이 당첨 번호와 중복됩니다.");
     }
+
+    @Test
+    void calculateMatchNumber() {
+        final List<LottoNumber> winNumbers = Stream.of(1, 2, 3, 4, 5, 6)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+
+        final LottoNumber bonusLottoNumber = new LottoNumber(7);
+
+        WinLotto winLotto = new WinLotto(new Lotto(winNumbers), bonusLottoNumber);
+        assertThat(winLotto.matchResult(new Lotto(winNumbers))).isEqualTo(Rank.FIRST);
+    }
 }

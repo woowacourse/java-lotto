@@ -16,4 +16,10 @@ public class WinLotto {
             throw new IllegalArgumentException("[ERROR] 보너스 볼이 당첨 번호와 중복됩니다.");
         }
     }
+
+    public Rank matchResult(final Lotto lotto) {
+        final int hitCounts = lotto.match(winLotto);
+        final boolean isBonus = lotto.containNumber(bonusNumber);
+        return Rank.calculateCurrentRank(hitCounts, isBonus);
+    }
 }
