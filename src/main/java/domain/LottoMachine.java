@@ -19,7 +19,15 @@ public class LottoMachine {
 
 	}
 
-	public Lotto createAutoLotto() {
+	public Lottos createLottos(int lottoCount) {
+		List<Lotto> lottos = new ArrayList<>();
+		for (int count = 0; count < lottoCount; count++) {
+			lottos.add(createAutoLotto());
+		}
+		return new Lottos(lottos);
+	}
+
+	private Lotto createAutoLotto() {
 		Collections.shuffle(lottoBucket);
 		return new Lotto(lottoBucket.stream()
 			.limit(6)
@@ -27,6 +35,6 @@ public class LottoMachine {
 	}
 
 	public void print() {
-		System.out.println(createAutoLotto());
+		System.out.println(createLottos(2));
 	}
 }

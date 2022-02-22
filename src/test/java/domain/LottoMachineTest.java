@@ -11,6 +11,6 @@ public class LottoMachineTest {
 
 	@Test
 	void 로또_발행(){
-		assertThat(new LottoMachine().createAutoLotto()).isInstanceOf(Lotto.class);
+		assertThat(new LottoMachine().createLottos(2)).isInstanceOf(Lottos.class);
 	}
 }
