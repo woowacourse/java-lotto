@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
-public class MoneyTest {
+class MoneyTest {
 
     @Test
     @DisplayName("10 단위가 아니면 예외 발생")

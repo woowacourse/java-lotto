@@ -6,7 +6,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
-public class LottoNumberTest {
+class LottoNumberTest {
 
     @ParameterizedTest
     @ValueSource(ints = {0, 46})

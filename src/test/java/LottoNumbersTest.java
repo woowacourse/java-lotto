@@ -12,7 +12,7 @@ import java.util.stream.IntStream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class LottoNumbersTest {
+class LottoNumbersTest {
 
     @ParameterizedTest
     @ValueSource(ints = {5, 7})
