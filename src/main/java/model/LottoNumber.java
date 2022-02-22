@@ -8,6 +8,10 @@ public class LottoNumber {
         this.number = checkNumber(generatedNumber);
     }
 
+    public LottoNumber(int number) {
+        this.number = number;
+    }
+
     private int checkNumber(int number) {
         if (isNotCorrectNumber(number)) {
             throw new RuntimeException();
