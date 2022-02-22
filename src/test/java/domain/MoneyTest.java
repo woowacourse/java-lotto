@@ -36,6 +36,13 @@ class MoneyTest {
 
         assertThat(actual).isEqualTo(3);
     }
-    
-    //todo: 포맷 검사 추가
+
+    @DisplayName("구입금액에 맞는 로또 발급 갯수 반환을 확인한다.")
+    @Test
+    void calculateCounts() {
+        final Money money = new Money("3500");
+        final int actual = money.calculateCounts();
+
+        assertThat(actual).isEqualTo(3);
+    }
 }
