@@ -11,6 +11,14 @@ public class LottoMatcher {
         this.bonusNumber = bonusNumber;
     }
 
+    public ResultMap getWinningResult(List<Lotto> lottos) {
+        ResultMap resultMap = new ResultMap();
+        lottos.forEach(lotto -> {
+            resultMap.getResult().put(match(lotto), resultMap.getResult().get(match(lotto)) + 1);
+        });
+        return resultMap;
+    }
+
     public int matchWinningNumbers(Lotto lotto) {
         return lotto.match(winningNumbers);
     }
