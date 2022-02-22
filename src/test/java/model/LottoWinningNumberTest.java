@@ -23,13 +23,6 @@ public class LottoWinningNumberTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @Test
-    @DisplayName("당첨 번호 문자열 split 검증")
-    void validateSplitInputLottoWinningNumber() {
-        List<String> winningNumbers = LottoWinningNumber.split("1, 2, 3, 4");
-        assertThat(winningNumbers).isEqualTo(Arrays.asList("1","2","3","4"));
-    }
-
     @ParameterizedTest
     @ValueSource(strings ={"azpi, ++, greeanlawn","1dksl,-1","1, 2, as"})
     @DisplayName("당첨 번호가 숫자가 아닌 경우 검증")
@@ -44,5 +37,13 @@ public class LottoWinningNumberTest {
     void validateWinningNumberOutOfRange(String numbers) {
         assertThatThrownBy(() -> new LottoWinningNumber(numbers))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("당첨 번호 숫자로 변경 및 저장")
+    void saveLottoNumber() {
+        LottoWinningNumber lottoWinningNumber = new LottoWinningNumber("1, 2, 3");
+        List<Integer> winningNumbers = lottoWinningNumber.getWinningNumbers();
+        assertThat(winningNumbers).isEqualTo(Arrays.asList(1,2,3));
     }
 }

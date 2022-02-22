@@ -1,17 +1,22 @@
 package model;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoWinningNumber {
     private static final String REGEX_NUMBER = "[0-9]+";
     private static final int LOTTO_MIN_NUMBER = 1;
     private static final int LOTTO_MAX_NUMBER = 45;
 
+    private List<Integer> winningNumbers;
+
     public LottoWinningNumber(String numbers) {
         validateInputNumbersBlank(numbers);
         validateNumbersConsistOfInt(numbers);
         validateNumberOutOfRange(numbers);
+        this.winningNumbers = makeWinningNumbers(split(numbers));
     }
 
     private void validateInputNumbersBlank(String number) {
@@ -20,7 +25,7 @@ public class LottoWinningNumber {
         }
     }
 
-    public static List<String> split(String numbers) {
+    private List<String> split(String numbers) {
         return Arrays.asList(numbers.replace(" ", "").split(","));
     }
 
@@ -40,5 +45,15 @@ public class LottoWinningNumber {
         if (count > 0) {
             throw new IllegalArgumentException();
         }
+    }
+
+    private List<Integer> makeWinningNumbers(List<String> numbers) {
+        return numbers.stream()
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+    }
+
+    public List<Integer> getWinningNumbers() {
+        return winningNumbers;
     }
 }
