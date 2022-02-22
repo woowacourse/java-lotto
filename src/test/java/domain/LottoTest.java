@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,10 +26,8 @@ public class LottoTest {
         // given
         Lotto lotto = new Lotto(lottoNumbers);
 
-        // when
-
-        // then
-        assertThat(Objects.isNull(lotto)).isFalse();
+        // when & then
+        assertThat(lotto).isNotNull();
     }
 
     @Test
