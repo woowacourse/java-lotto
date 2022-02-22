@@ -1,7 +1,6 @@
 import static java.util.stream.Collectors.toList;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 public class LottoNumberParser {
 
@@ -15,18 +14,9 @@ public class LottoNumberParser {
         List<String> tokens = splitNumbers(numbers);
         List<String> trimNumbers = trimNumbers(tokens);
         checkLottoNumber(trimNumbers);
-        return toInts(trimNumbers);
-    }
-
-    private List<Integer> toInts(List<String> trimNumbers) {
-        return trimNumbers.stream()
-                .map(Integer::valueOf)
-                .collect(toList());
-    }
-
-    private void checkLottoNumber(List<String> tokens) {
-        checkLottoNumberLength(tokens);
-        checkDuplicatedLottoNumber(tokens);
+        List<Integer> intNumbers = toInts(trimNumbers);
+        checkLottoNumberRange(intNumbers);
+        return intNumbers;
     }
 
     private List<String> splitNumbers(String numbers) {
@@ -35,8 +25,13 @@ public class LottoNumberParser {
 
     private List<String> trimNumbers(List<String> numbers) {
         return numbers.stream()
-                .map(String::trim)
-                .collect(toList());
+            .map(String::trim)
+            .collect(toList());
+    }
+
+    private void checkLottoNumber(List<String> tokens) {
+        checkLottoNumberLength(tokens);
+        checkDuplicatedLottoNumber(tokens);
     }
 
     private void checkLottoNumberLength(List<String> tokens) {
@@ -57,7 +52,28 @@ public class LottoNumberParser {
 
     private long getDistinctSize(List<String> result) {
         return result.stream()
-                .distinct()
-                .count();
+            .distinct()
+            .count();
+    }
+
+    private List<Integer> toInts(List<String> trimNumbers) {
+        return trimNumbers.stream()
+                .map(Integer::valueOf)
+                .collect(toList());
+    }
+
+    private void checkLottoNumberRange(List<Integer> numbers) {
+        if (hasInvalidNumberRange(numbers)) {
+            throw new IllegalArgumentException("당첨 번호는 1 ~ 45사이의 숫자만 가능합니다.");
+        }
+    }
+
+    private boolean hasInvalidNumberRange(List<Integer> numbers) {
+        return numbers.stream()
+            .anyMatch(this::isInvalidRange);
+    }
+
+    private boolean isInvalidRange(Integer number) {
+        return number < 1 || number > 45;
     }
 }

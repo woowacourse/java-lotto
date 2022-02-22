@@ -43,4 +43,13 @@ public class LottoNumberParserTest {
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage(LottoNumberParser.DUPLICATED_LOTTO_NUMBER_MESSAGE);
     }
+
+    @ParameterizedTest(name = "잘못된 범위의 당첨 번호 분리 실패 : 입력값 - {0}")
+    @DisplayName("잘못된 범위의 당첨 번호 분리 실패")
+    @ValueSource(strings = {"1, 2, 3, 4, 5, 46", "0, 1, 2, 3, 4, 5"})
+    void failSplitWithInvalidRangeLottoNumber(String numbers) {
+        assertThatThrownBy(() -> parser.parse(numbers))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("당첨 번호는 1 ~ 45사이의 숫자만 가능합니다.");
+    }
 }
