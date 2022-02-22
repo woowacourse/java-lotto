@@ -2,12 +2,12 @@ package lotto.domain;
 
 import java.util.Arrays;
 
-public class LottoNumbers {
+public class WinningNumbers {
 
     public static final String DELIMITER = ",";
     public static final String 중복된_번호는_사용할_수_없습니다 = "중복된 번호는 사용할 수 없습니다.";
 
-    public LottoNumbers(String input) {
+    public WinningNumbers(String input) {
         int[] intArr = convertStringArrToIntArr(input.split(DELIMITER));
         validateDuplicate(intArr);
     }
@@ -36,5 +36,4 @@ public class LottoNumbers {
         }
         return intArr;
     }
-
 }
