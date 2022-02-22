@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,5 +31,16 @@ public class LottoTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new Lotto(lottoNumbers))
                 .withMessage("[ERROR] 로또 넘버는 중복될 수 없습니다.");
+    }
+
+    @Test
+    void containBonusNumber() {
+        final List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 4, 5, 6)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+
+        final LottoNumber lottoNumber = new LottoNumber(1);
+        final Lotto lotto = new Lotto(lottoNumbers);
+        assertTrue(lotto.containNumber(lottoNumber));
     }
 }

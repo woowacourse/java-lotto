@@ -31,4 +31,8 @@ public class Lotto {
                 .distinct()
                 .count();
     }
+
+    public boolean containNumber(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
 }
