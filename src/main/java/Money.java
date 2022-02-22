@@ -13,4 +13,8 @@ public class Money {
     public int generateCount() {
         return money / UNIT;
     }
+
+    public int getMoney() {
+        return money;
+    }
 }
