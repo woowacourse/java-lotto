@@ -3,23 +3,12 @@ package model;
 public class LottoCount {
     private static final String REGEX_NUMBER = "[0-9]+";
     private static final int UNIT = 1000;
-    private int money;
+    private int count;
 
-    public LottoCount(String number) {
-        validateInsertMoneyBlank(number);
-        validateInputMoneyNumber(number);
-        this.money = makeMoneyToNumber(number);
-    }
-
-    private int makeMoneyToNumber(String number) {
-        validateThousandUnitInputMoney(number);
-        return Integer.parseInt(number);
-    }
-
-    private void validateThousandUnitInputMoney(String number) {
-        if (Integer.parseInt(number) % UNIT != 0) {
-            throw new IllegalArgumentException();
-        }
+    public LottoCount(String money) {
+        validateInsertMoneyBlank(money);
+        validateInputMoneyNumber(money);
+        this.count = makeMoneyToNumber(money);
     }
 
     private void validateInputMoneyNumber(String number) {
@@ -34,8 +23,19 @@ public class LottoCount {
         }
     }
 
-    public int getMoney() {
-        return money;
+    private int makeMoneyToNumber(String money) {
+        validateThousandUnitInputMoney(money);
+        return Integer.parseInt(money) / UNIT;
+    }
+
+    private void validateThousandUnitInputMoney(String money) {
+        if (Integer.parseInt(money) % UNIT != 0) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public int getCount() {
+        return count;
     }
 }
 

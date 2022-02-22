@@ -39,7 +39,7 @@ public class LottoCountTest {
     @Test
     @DisplayName("투입 금액이 천원 단위 경우")
     void validateThousandUnitInputMoney() {
-        LottoCount lottoCount = new LottoCount("1000");
-        assertThat(lottoCount.getMoney()).isEqualTo(1000);
+        LottoCount lottoCount = new LottoCount("10000");
+        assertThat(lottoCount.getCount()).isEqualTo(10);
     }
 }
