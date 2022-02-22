@@ -15,14 +15,14 @@ public class Ticket {
         this.ticket = ticket;
     }
 
-    public Ticket getTicketByAuto() {
+    public static Ticket getTicketByAuto() {
         List<LottoNumber> ticket = IntStream.range(0, PICKUP_COUNT)
                 .mapToObj(shuffleLottoNumbers()::get)
                 .collect(Collectors.toList());
         return new Ticket(ticket);
     }
 
-    private List<LottoNumber> shuffleLottoNumbers() {
+    private static List<LottoNumber> shuffleLottoNumbers() {
         List<LottoNumber> lottoNumbers = LottoNumber.getLottoNumbers();
         Collections.shuffle(lottoNumbers);
         return lottoNumbers;
