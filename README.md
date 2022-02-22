@@ -9,10 +9,11 @@
 ## 🎱 구현해야 하는 기능
 
 ### 📌 구입 금액
-- [ ] 구입 금액을 입력한다.
-  - [ ] (예외) 숫자가 아닐 경우 `Illegalargumentexception` 에러를 발생시킨다.
-  - [ ] (예외) 양수가 아닐 경우 `Illegalargumentexception` 에러를 발생시킨다.
-  - [ ] (예외) 1,000원 단위로 나뉘지 않을 경우 `Illegalargumentexception` 에러를 발생시킨다.
+- [x] 구입 금액을 입력한다.
+  - [x] (예외) 빈값 또는 null 일 경우 `Illegalargumentexception` 에러를 발생시킨다.
+  - [x] (예외) 숫자가 아닐 경우 `Illegalargumentexception` 에러를 발생시킨다.
+  - [x] (예외) 양수가 아닐 경우 `Illegalargumentexception` 에러를 발생시킨다.
+  - [x] (예외) 1,000원 단위로 나뉘지 않을 경우 `Illegalargumentexception` 에러를 발생시킨다.
 
 ### 📌 로또 구매
 - [ ] 몇 개가 구매가능한지 출력한다.
