@@ -37,4 +37,16 @@ class LottoNumbersTest {
         assertThat(lottoNumbers).isEqualTo(otherLottoNumbers);
         assertThat(actualFirstLottoNumber).isEqualTo(expectedFirstLottoNumber);
     }
+
+    @Test
+    @DisplayName("로또 한 줄에서의 숫자 개수가 6개가 아니면 예외를 발생시킨다.")
+    void create_ExceptionByNotSixCountOfNumbers() {
+        //given
+        final List<String> invalidCountNumbers = Arrays.asList("1", "2", "3", "4", "5");
+        final String expectedExceptionMessage = "로또 숫자는 한 줄에 6개여야 합니다.";
+        //when then
+        assertThatThrownBy(() -> new LottoNumbers(invalidCountNumbers))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(expectedExceptionMessage);
+    }
 }

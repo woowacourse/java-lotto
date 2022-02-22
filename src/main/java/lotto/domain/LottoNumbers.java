@@ -8,11 +8,14 @@ import java.util.stream.Collectors;
 
 public class LottoNumbers {
     private static final String DUPLICATED_LOTTO_NUMBERS_EXCEPTION_MESSAGE = "같은 줄 로또 번호 간에 중복이 존재합니다.";
+    private static final String LOTTO_NUMBERS_COUNT_EXCEPTION_MESSAGE = "로또 숫자는 한 줄에 6개여야 합니다.";
+    private static final int VALID_LOTTO_NUMBERS_COUNT = 6;
 
     private final List<LottoNumber> values;
 
     public LottoNumbers(final List<String> numberValues) {
         validateDuplication(numberValues);
+        validateCountOfNumbers(numberValues);
         values = sortAscendingLottoNumbers(numberValues);
     }
 
@@ -28,6 +31,12 @@ public class LottoNumbers {
         for (String numberValue : numberValues) {
             checkDuplication(checkedNumberValues, numberValue);
             checkedNumberValues.add(numberValue);
+        }
+    }
+
+    private void validateCountOfNumbers(final List<String> numberValues) {
+        if (numberValues.size() != VALID_LOTTO_NUMBERS_COUNT) {
+            throw new IllegalArgumentException(LOTTO_NUMBERS_COUNT_EXCEPTION_MESSAGE);
         }
     }
 
