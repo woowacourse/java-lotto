@@ -10,12 +10,12 @@ public class Money {
     }
 
     private void checkLowerThanStandard(final int amount) {
-        if (amount < 1000) {
+        if (amount < Lotto.LOTTO_PURCHASE_MONEY) {
             throw new IllegalArgumentException("[ERROR] 로또를 구매할 수 없는 금액입니다.");
         }
     }
 
     public int calculateLottoCount() {
-        return amount / 1000;
+        return amount / Lotto.LOTTO_PURCHASE_MONEY;
     }
 }

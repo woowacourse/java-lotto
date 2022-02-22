@@ -18,7 +18,7 @@ public class LottoResult {
 
         final int purchaseMoney = rankResults.entrySet().stream()
                 .map(Entry::getValue)
-                .reduce(0, Integer::sum) * 1000;
+                .reduce(0, Integer::sum) * Lotto.LOTTO_PURCHASE_MONEY;
 
         return totalReward / (double) purchaseMoney;
     }
