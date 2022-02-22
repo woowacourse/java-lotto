@@ -19,4 +19,16 @@ public class LottoNumbersTest {
     void correct() {
         assertThatNoException().isThrownBy(() -> new LottoNumbers("1,2,3,4,5,6"));
     }
+
+    @Test
+    @DisplayName("문자열이 포함된 경우")
+    void incorrect2() {
+        assertThatThrownBy(() -> new LottoNumbers("1,aa,3,4,5,6")).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("공백이 포함된 경우")
+    void correct2() {
+        assertThatNoException().isThrownBy(() -> new LottoNumbers("1,  8  ,3,4 ,5 ,6"));
+    }
 }
