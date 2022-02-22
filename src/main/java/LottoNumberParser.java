@@ -13,9 +13,8 @@ public class LottoNumberParser {
     public List<Integer> parse(String numbers) {
         List<String> tokens = splitNumbers(numbers);
         List<String> trimNumbers = trimNumbers(tokens);
-        checkLottoNumber(trimNumbers);
         List<Integer> intNumbers = toInts(trimNumbers);
-        checkLottoNumberRange(intNumbers);
+        checkLottoNumber(intNumbers);
         return intNumbers;
     }
 
@@ -29,37 +28,32 @@ public class LottoNumberParser {
             .collect(toList());
     }
 
-    private void checkLottoNumber(List<String> tokens) {
-        checkLottoNumberLength(tokens);
-        checkDuplicatedLottoNumber(tokens);
+    private void checkLottoNumber(List<Integer> numbers) {
+        checkLottoNumberLength(numbers);
+        checkDuplicatedLottoNumber(numbers);
+        checkLottoNumberRange(numbers);
     }
 
-    private void checkLottoNumberLength(List<String> tokens) {
-        if (tokens.size() != LOTTO_NUMBER_LENGTH) {
+    private void checkLottoNumberLength(List<Integer> numbers) {
+        if (numbers.size() != LOTTO_NUMBER_LENGTH) {
             throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_LENGTH_MESSAGE);
         }
     }
 
-    private void checkDuplicatedLottoNumber(List<String> result) {
-        if (hasDuplicatedNumber(result)) {
+    private void checkDuplicatedLottoNumber(List<Integer> numbers) {
+        if (hasDuplicatedNumber(numbers)) {
             throw new IllegalArgumentException(DUPLICATED_LOTTO_NUMBER_MESSAGE);
         }
     }
 
-    private boolean hasDuplicatedNumber(List<String> result) {
-        return getDistinctSize(result) != result.size();
+    private boolean hasDuplicatedNumber(List<Integer> numbers) {
+        return getDistinctSize(numbers) != numbers.size();
     }
 
-    private long getDistinctSize(List<String> result) {
-        return result.stream()
+    private long getDistinctSize(List<Integer> numbers) {
+        return numbers.stream()
             .distinct()
             .count();
-    }
-
-    private List<Integer> toInts(List<String> trimNumbers) {
-        return trimNumbers.stream()
-                .map(Integer::valueOf)
-                .collect(toList());
     }
 
     private void checkLottoNumberRange(List<Integer> numbers) {
@@ -70,10 +64,20 @@ public class LottoNumberParser {
 
     private boolean hasInvalidNumberRange(List<Integer> numbers) {
         return numbers.stream()
-            .anyMatch(this::isInvalidRange);
+                .anyMatch(this::isInvalidRange);
     }
 
     private boolean isInvalidRange(Integer number) {
         return number < 1 || number > 45;
+    }
+
+    private List<Integer> toInts(List<String> numbers) {
+        try {
+            return numbers.stream()
+                    .map(Integer::valueOf)
+                    .collect(toList());
+        } catch (NumberFormatException exception) {
+            throw new IllegalArgumentException("당첨 번호는 반드시 숫자여야 합니다.", exception);
+        }
     }
 }

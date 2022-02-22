@@ -17,6 +17,14 @@ public class LottoNumberParserTest {
     }
 
     @Test
+    @DisplayName("로또 당첨 번호 숫자가 아닌 경우")
+    void winningNumberNotNumericValue() {
+        assertThatThrownBy(() -> parser.parse("a,b,c,d,e,f"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("당첨 번호는 반드시 숫자여야 합니다.");
+    }
+
+    @Test
     @DisplayName("로또 당첨 번호 분리")
     void splitWinningNumber() {
         assertThat(parser.parse("1,2,3,4,5,6")).contains(1, 2, 3, 4, 5, 6);
