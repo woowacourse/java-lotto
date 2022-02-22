@@ -13,6 +13,7 @@ public enum LottoRank {
     }
 
     public static LottoRank of(long matchCount, boolean bonusMatch) {
+        checkMatchCount(matchCount);
         if (isSecondPrize(matchCount, bonusMatch)) {
             return LottoRank.SECOND;
         } else if (isThirdPrize(matchCount, bonusMatch)) {
@@ -25,6 +26,12 @@ public enum LottoRank {
             return LottoRank.NOTHING;
         }
         return LottoRank.FIRST;
+    }
+
+    private static void checkMatchCount(long matchCount) {
+        if (matchCount < 0) {
+            throw new IllegalArgumentException("일치 갯수는 0이상 6이하이여야 합니다.");
+        }
     }
 
     private static boolean isSecondPrize(long matchCount, boolean bonusMatch) {

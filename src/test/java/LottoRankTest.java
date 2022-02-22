@@ -12,5 +12,4 @@ public class LottoRankTest {
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("일치 갯수는 0이상 6이하이여야 합니다.");
     }
-
 }
