@@ -11,11 +11,15 @@ public class LottoMatcher {
         this.bonusNumber = bonusNumber;
     }
 
-    public int match(Lotto lotto) {
+    public int matchWinningNumbers(Lotto lotto) {
         return lotto.match(winningNumbers);
     }
 
     public boolean matchBonus(Lotto lotto) {
         return lotto.matchBonusNumber(bonusNumber);
+    }
+
+    public Rank match(Lotto lotto) {
+        return Rank.parse(matchWinningNumbers(lotto), matchBonus(lotto));
     }
 }

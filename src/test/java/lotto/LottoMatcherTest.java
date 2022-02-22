@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.model.Lotto;
 import lotto.model.LottoMatcher;
+import lotto.model.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +17,7 @@ class LottoMatcherTest {
     void matchNumber() {
         Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
         LottoMatcher matcher = new LottoMatcher(Arrays.asList(1,2,3,4,44,45), 6);
-        int actual = matcher.match(lotto);
+        int actual = matcher.matchWinningNumbers(lotto);
 
         assertThat(actual).isEqualTo(4);
     }
@@ -29,5 +30,25 @@ class LottoMatcherTest {
         boolean actual = matcher.matchBonus(lotto);
 
         assertThat(actual).isTrue();
+    }
+
+    @Test
+    @DisplayName("2등 당첨 여부를 확인한다")
+    void rankTest() {
+        Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
+        LottoMatcher matcher = new LottoMatcher(Arrays.asList(1,2,3,4,5,45), 6);
+        Rank rank = matcher.match(lotto);
+
+        assertThat(rank).isEqualTo(Rank.SECOND);
+    }
+
+    @Test
+    @DisplayName("3등 당첨 여부를 확인한다")
+    void rankFirstTest() {
+        Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,5,44));
+        LottoMatcher matcher = new LottoMatcher(Arrays.asList(1,2,3,4,5,6), 45);
+        Rank rank = matcher.match(lotto);
+
+        assertThat(rank).isEqualTo(Rank.THIRD);
     }
 }
