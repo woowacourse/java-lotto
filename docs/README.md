@@ -47,15 +47,15 @@
   - 중복되지 않는 번호 6개
   - 7개 이상부터 예외
   - 로또 번호를 정렬한다.
+  - 로또 번호와 당첨 번호를 비교한다
+  - 로또 번호에 보너스 번호가 포함되어 있는지 판별한다.
 - LottoNumberGenerator
   - 1부터 45 사이의 모든 LottoNumber를 가진다.
   - LottoNumbers를 반환한다.
 - LottoNumber
   - 1부터 45 사이의 숫자여야 한다.
-- WinningNumbers
-  - LottoNumbers 하나, LottoNumber 하나
-  - 중복이 발생하면 예외
 - WinningStat
   - 번호 일치 개수를 enum으로 가지고 있는다.
   - 수익률 계산
-    
+- LottoRank
+  - 로또 번호가 몇 개를 맞췄는 지와 보너스 여부를 받아 랭크를 반환한다. 

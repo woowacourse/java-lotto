@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -35,7 +36,17 @@ public class LottoNumbers {
         }
     }
 
+    public int compareNumbers(LottoNumbers lottoNumbers) {
+        List<LottoNumber> temp = new ArrayList<>(numbers);
+        temp.retainAll(lottoNumbers.numbers);
+        return temp.size();
+    }
+
     public List<LottoNumber> getLottoNumbers() {
         return Collections.unmodifiableList(numbers);
+    }
+
+    public boolean contains(LottoNumber bonusNumber) {
+        return numbers.contains(bonusNumber);
     }
 }
