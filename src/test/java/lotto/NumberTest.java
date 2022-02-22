@@ -24,4 +24,9 @@ public class NumberTest {
         assertThat(new Number(number)).isNotNull();
     }
 
+    @Test
+    @DisplayName("숫자가 같으면 동등한 객체이다.")
+    void equalsNumber() {
+        assertThat(new Number(1)).isEqualTo(new Number(1));
+    }
 }

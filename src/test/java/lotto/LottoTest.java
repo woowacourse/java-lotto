@@ -35,6 +35,16 @@ class LottoTest {
             .withMessageMatching("로또 번호는 6자리 이어야 한다.");
     }
 
+    @Test
+    @DisplayName("로또 번호가 중복될 경우 예외가 발생한다.")
+    void throwExceptionWhenDuplicateNumbers() {
+        List<Number> numbers = List.of(number(1), number(1), number(3), number(4), number(5), number(6));
+
+        assertThatIllegalArgumentException()
+            .isThrownBy(() -> new Lotto(numbers))
+            .withMessageMatching("로또 번호는 중복될 수 없다.");
+    }
+
     private Number number(int number) {
         return new Number(number);
     }
