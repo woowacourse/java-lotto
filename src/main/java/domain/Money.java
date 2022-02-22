@@ -7,9 +7,13 @@ public class Money {
 
     private int amount;
 
-    public Money(int amount){
+    public Money(int amount) {
         validateAmount(amount);
         this.amount = amount;
+    }
+
+    public int determineQuantity() {
+        return amount / MINIMUM_PURCHASE_AMOUNT;
     }
 
     private void validateAmount(int amount) {
