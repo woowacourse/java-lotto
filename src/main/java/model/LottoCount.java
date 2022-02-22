@@ -1,6 +1,7 @@
 package model;
 
 public class LottoCount {
+    private static final int ZERO = 0;
     private static final String REGEX_NUMBER = "[0-9]+";
     private static final int UNIT = 1000;
     private int count;
@@ -32,6 +33,14 @@ public class LottoCount {
         if (Integer.parseInt(money) % UNIT != 0) {
             throw new IllegalArgumentException();
         }
+    }
+
+    public boolean isZero() {
+        return count == ZERO;
+    }
+
+    public void makeLotto() {
+        count--;
     }
 
     public int getCount() {

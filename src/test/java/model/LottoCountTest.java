@@ -13,7 +13,7 @@ public class LottoCountTest {
 
     @ParameterizedTest
     @NullAndEmptySource
-    @ValueSource(strings ={"","  ","\t","\n"})
+    @ValueSource(strings = {"", "  ", "\t", "\n"})
     @DisplayName("투입 금액 공백 검증")
     void validateLottoNumber(String number) {
         assertThatThrownBy(() -> new LottoCount(number))
@@ -21,7 +21,7 @@ public class LottoCountTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings ={"azpi","++","greeanlawn","1dksl","-1"})
+    @ValueSource(strings = {"azpi", "++", "greeanlawn", "1dksl", "-1"})
     @DisplayName("투입 금액이 숫자가 아닌 경우 검증")
     void validateInputMoneyIsNumber(String number) {
         assertThatThrownBy(() -> new LottoCount(number))
@@ -29,7 +29,7 @@ public class LottoCountTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"100","1001","100001"})
+    @ValueSource(strings = {"100", "1001", "100001"})
     @DisplayName("투입 금액이 천원 단위가 아닌 경우인")
     void validateNotThousandUnitInputMoney(String number) {
         assertThatThrownBy(() -> new LottoCount(number))
@@ -41,5 +41,23 @@ public class LottoCountTest {
     void validateThousandUnitInputMoney() {
         LottoCount lottoCount = new LottoCount("10000");
         assertThat(lottoCount.getCount()).isEqualTo(10);
+    }
+
+    @Test
+    @DisplayName("로또 생성 중단")
+    void checkLottoCountIsZero() {
+        LottoCount lottoCount = new LottoCount("1000");
+        lottoCount.makeLotto();
+
+        assertThat(lottoCount.isZero()).isTrue();
+    }
+
+    @Test
+    @DisplayName("로또 생성 횟수 차감")
+    void checkLottoCountReduce() {
+        LottoCount lottoCount = new LottoCount("100000");
+        lottoCount.makeLotto();
+
+        assertThat(lottoCount.getCount()).isEqualTo(99);
     }
 }
