@@ -9,8 +9,8 @@ public enum LottoRank {
     FIFTH(5_000, LottoRank::isFifthPrize),
     NOTHING(0, LottoRank::isNothingPrize);
 
-    private int prizeAmount;
-    private BiFunction<Long, Boolean, Boolean> predicate;
+    private final int prizeAmount;
+    private final BiFunction<Long, Boolean, Boolean> predicate;
 
     LottoRank(int prizeAmount, BiFunction<Long, Boolean, Boolean> predicate) {
         this.prizeAmount = prizeAmount;
@@ -54,5 +54,9 @@ public enum LottoRank {
 
     private static boolean isNothingPrize(long matchCount, boolean bonusMatch) {
         return 0 <= matchCount && matchCount < 3;
+    }
+
+    public int getPrizeAmount() {
+        return this.prizeAmount;
     }
 }
