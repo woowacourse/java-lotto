@@ -2,11 +2,11 @@ package domain;
 
 import java.util.List;
 
-public class Lotto {
+public class Lottery {
 
 	private final List<Integer> numbers;
 
-	public Lotto(List<Integer> numbers) {
+	public Lottery(List<Integer> numbers) {
 		validateNumbers(numbers);
 		this.numbers = numbers;
 	}
