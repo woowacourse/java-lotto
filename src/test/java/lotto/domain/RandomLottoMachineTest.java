@@ -18,6 +18,7 @@ public class RandomLottoMachineTest {
         assertThat(randomLottoNumbers.size()).isEqualTo(6);
     }
 
+    @DisplayName("랜덤 생성한 로또 번호 범위는 1~45사이여야 한다.")
     @Test
     void randomNumbersRange() {
         final List<Integer> randomLottoNumbers = RandomLottoMachine.createRandomLottoNumbers();
