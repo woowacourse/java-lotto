@@ -1,45 +1,38 @@
+import java.util.function.BiFunction;
+import java.util.stream.Stream;
+
 public enum LottoRank {
-    FIRST(2_000_000_000),
-    SECOND(30_000_000),
-    THIRD(1_500_000),
-    FOURTH(50_000),
-    FIFTH(5_000),
-    NOTHING(0);
+    FIRST(2_000_000_000, LottoRank::isFirstPrize),
+    SECOND(30_000_000, LottoRank::isSecondPrize),
+    THIRD(1_500_000, LottoRank::isThirdPrize),
+    FOURTH(50_000, LottoRank::isFourthPrize),
+    FIFTH(5_000, LottoRank::isFifthPrize),
+    NOTHING(0, LottoRank::isNothingPrize);
 
     private int prizeAmount;
+    private BiFunction<Long, Boolean, Boolean> predicate;
 
-    LottoRank(int prizeAmount) {
+    LottoRank(int prizeAmount, BiFunction<Long, Boolean, Boolean> predicate) {
         this.prizeAmount = prizeAmount;
+        this.predicate = predicate;
+    }
+
+    private boolean isMatched(long matchCount, boolean bonusMatch) {
+        return predicate.apply(matchCount, bonusMatch);
     }
 
     public static LottoRank of(long matchCount, boolean bonusMatch) {
-        checkMatchCount(matchCount);
         return findLottoRank(matchCount, bonusMatch);
     }
 
     private static LottoRank findLottoRank(long matchCount, boolean bonusMatch) {
-        if (isFirstPrize(matchCount)) {
-            return LottoRank.FIRST;
-        } else if (isSecondPrize(matchCount, bonusMatch)) {
-            return LottoRank.SECOND;
-        } else if (isThirdPrize(matchCount, bonusMatch)) {
-            return LottoRank.THIRD;
-        } else if (isFourthPrize(matchCount)) {
-            return LottoRank.FOURTH;
-        } else if (isFifthPrize(matchCount)) {
-            return LottoRank.FIFTH;
-        }
-        return LottoRank.NOTHING;
+        return Stream.of(values())
+            .filter(rank -> rank.isMatched(matchCount, bonusMatch))
+            .findFirst()
+            .orElseThrow(() -> new IllegalArgumentException("일치 갯수는 0이상 6이하이여야 합니다."));
     }
 
-
-    private static void checkMatchCount(long matchCount) {
-        if (matchCount < 0 || matchCount > 6) {
-            throw new IllegalArgumentException("일치 갯수는 0이상 6이하이여야 합니다.");
-        }
-    }
-
-    private static boolean isFirstPrize(long matchCount) {
+    private static boolean isFirstPrize(long matchCount, boolean bonusMatch) {
         return matchCount == 6;
     }
 
@@ -51,11 +44,15 @@ public enum LottoRank {
         return matchCount == 5 && !bonusMatch;
     }
 
-    private static boolean isFourthPrize(long matchCount) {
+    private static boolean isFourthPrize(long matchCount, boolean bonusMatch) {
         return matchCount == 4;
     }
 
-    private static boolean isFifthPrize(long matchCount) {
+    private static boolean isFifthPrize(long matchCount, boolean bonusMatch) {
         return matchCount == 3;
-}
+    }
+
+    private static boolean isNothingPrize(long matchCount, boolean bonusMatch) {
+        return 0 <= matchCount && matchCount < 3;
+    }
 }
