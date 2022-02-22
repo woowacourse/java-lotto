@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.util.Creatable;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -35,8 +36,8 @@ public class BallTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"0", "46"})
-    @DisplayName("1에서 45 사이의 값이 아닌 값을 입력했을 경우")
-    void incorrectInputRange1To45(String input) {
+    @DisplayName("1에서 45 사이의 문자열 값이 아닌 값을 입력했을 경우")
+    void incorrectStringInputRange1To45(String input) {
         assertThatThrownBy(() -> {
             Ball ball = new Ball(input);
         }).isInstanceOf(IllegalArgumentException.class);

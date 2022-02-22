@@ -35,6 +35,4 @@ public class LottoTest {
             Lotto lotto = new Lotto(numbers);
         }).isInstanceOf(IllegalArgumentException.class);
     }
-
-    // TODO: 자동 로또 생성 추가
 }

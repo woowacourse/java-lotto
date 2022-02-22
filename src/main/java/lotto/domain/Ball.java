@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.util.Creatable;
+import lotto.util.Random;
+
 public class Ball {
     private static final String NUMBER_MATCHES = "^[0-9]*";
     public static final int MINIMUM_NUMBER = 1;
@@ -10,30 +13,34 @@ public class Ball {
 
     private final int number;
 
+    public Ball() {
+        this.number = new Random().createRandomNumber();
+    }
+
     public Ball(String number) {
         checkValidValue(number);
         this.number = Integer.parseInt(number);
     }
 
     private void checkValidValue(final String value) {
-        if (isBlank(value) || isNumber(value)) {
+        if (isBlank(value) || isNotNumber(value)) {
             throw new IllegalArgumentException(ERROR_PREFIX + ERROR_ONLY_NUMBER);
         }
         int number = Integer.parseInt(value);
         checkLottoNumber(number);
     }
 
-    private void checkLottoNumber(final int number) {
-        if (number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER) {
-            throw new IllegalArgumentException(ERROR_PREFIX + ERROR_LOTTO_NUMBER);
-        }
-    }
-
     private boolean isBlank(final String number) {
         return number == null || number.isEmpty();
     }
 
-    private boolean isNumber(final String value) {
+    private boolean isNotNumber(final String value) {
         return value.matches(NUMBER_MATCHES);
+    }
+
+    private void checkLottoNumber(final int number) {
+        if (number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER) {
+            throw new IllegalArgumentException(ERROR_PREFIX + ERROR_LOTTO_NUMBER);
+        }
     }
 }
