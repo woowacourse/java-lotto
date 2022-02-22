@@ -10,12 +10,10 @@ public class LottoResult {
                 LottoRank.FIFTH, 0, LottoRank.NOTHING, 0));
     }
 
-    public Prize getTotalPrizeAmount() {
-        Prize sumPrizeAmount = Prize.ZERO;
-        for (LottoRank lottoRank : resultMap.keySet()) {
-            sumPrizeAmount = sumPrizeAmount.add(getTotalPrizeByRank(lottoRank));
-        }
-        return sumPrizeAmount;
+    public Prize getTotalPrize() {
+        return resultMap.keySet().stream()
+            .map(this::getTotalPrizeByRank)
+            .reduce(Prize.ZERO, Prize::add);
     }
 
     private Prize getTotalPrizeByRank(LottoRank lottoRank) {

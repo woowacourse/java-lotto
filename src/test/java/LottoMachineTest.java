@@ -35,7 +35,7 @@ public class LottoMachineTest {
     void summarizeOnlyOneFirstRankLotto() {
         LottoResult lottoResult = lottoMachine.summarize(List.of(FIRST_PRIZE_LOTTO_NUMBERS));
 
-        assertThat(lottoResult.getTotalPrizeAmount()).isEqualTo(FIRST_PRIZE);
+        assertThat(lottoResult.getTotalPrize()).isEqualTo(FIRST_PRIZE);
         assertThat(lottoResult.getCountByRank(LottoRank.FIRST)).isEqualTo(1);
     }
 
@@ -49,7 +49,7 @@ public class LottoMachineTest {
 
         Prize expectedPrize = FIRST_PRIZE.add(FIRST_PRIZE).add(SECOND_PRIZE).add(THIRD_PRIZE)
             .add(THIRD_PRIZE);
-        assertThat(result.getTotalPrizeAmount()).isEqualTo(expectedPrize);
+        assertThat(result.getTotalPrize()).isEqualTo(expectedPrize);
         assertThat(result.getCountByRank(LottoRank.FIRST)).isEqualTo(2);
         assertThat(result.getCountByRank(LottoRank.SECOND)).isEqualTo(1);
         assertThat(result.getCountByRank(LottoRank.THIRD)).isEqualTo(2);
