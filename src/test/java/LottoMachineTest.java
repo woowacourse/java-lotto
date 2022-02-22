@@ -1,8 +1,12 @@
-import domain.LottoMachine;
-import domain.LottoTickets;
-import domain.Money;
+import domain.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -16,7 +20,7 @@ class LottoMachineTest {
         LottoMachine lottoMachine = new LottoMachine();
 
         assertThatThrownBy(() -> {
-            lottoMachine.purchaseLottoTickets(Money.from(900));
+            lottoMachine.purchaseLottoTickets(Money.from(900), new FixedNumberGenerator());
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -25,7 +29,34 @@ class LottoMachineTest {
     void createLottoTicketsByAmount() {
         LottoMachine lottoMachine = new LottoMachine();
 
-        LottoTickets lottoTickets = lottoMachine.purchaseLottoTickets(Money.from(10000));
+        LottoTickets lottoTickets = lottoMachine.purchaseLottoTickets(Money.from(10000), new FixedNumberGenerator());
         assertThat(lottoTickets.size()).isEqualTo(10);
+    }
+
+    @Test
+    void calculateWinningStat() {
+        LottoMachine lottoMachine = new LottoMachine();
+
+        lottoMachine.purchaseLottoTickets(Money.from(2000), new FixedNumberGenerator());
+
+        List<LottoNumber> inputWinningNumbers = IntStream.of(2, 1, 4, 3, 5, 6)
+                .mapToObj(LottoNumber::from)
+                .collect(Collectors.toList());
+
+        LottoNumbers winningNumbers = new LottoNumbers(inputWinningNumbers);
+        WinningStat winningStat = lottoMachine.createWinningStat(winningNumbers, LottoNumber.from(7));
+
+        Map<LottoRank, Integer> result = winningStat.getStat();
+        assertThat(result.get(LottoRank.FIRST)).isEqualTo(2);
+    }
+
+    static class FixedNumberGenerator implements NumberGenerator {
+
+        @Override
+        public List<LottoNumber> generate() {
+            return IntStream.of(1, 2, 3, 4, 5, 6)
+                    .mapToObj(LottoNumber::from)
+                    .collect(Collectors.toList());
+        }
     }
 }

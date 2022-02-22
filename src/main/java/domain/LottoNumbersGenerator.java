@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 
 import static domain.LottoNumberConst.*;
 
-public class LottoNumbersGenerator {
+public class LottoNumbersGenerator implements NumberGenerator {
 
     private static final List<LottoNumber> numbers;
 
@@ -17,7 +17,8 @@ public class LottoNumbersGenerator {
                 .collect(Collectors.toList());
     }
 
-    public static List<LottoNumber> generate() {
+    @Override
+    public List<LottoNumber> generate() {
         Collections.shuffle(numbers);
         return numbers.stream()
                 .limit(6)

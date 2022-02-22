@@ -2,6 +2,7 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class LottoMachine {
 
@@ -10,13 +11,13 @@ public class LottoMachine {
 
     private LottoTickets lottoTickets;
 
-    public LottoTickets purchaseLottoTickets(Money amount) {
+    public LottoTickets purchaseLottoTickets(Money amount, NumberGenerator numberGenerator) {
         validateInsertAmount(amount);
         int size = amount.getPurchasableNumber(LOTTO_TICKET_PRICE);
 
         List<LottoTicket> purchasedTickets = new ArrayList<>();
         for (int i = 0; i < size; i++) {
-            purchasedTickets.add(new LottoTicket(LottoNumbersGenerator.generate()));
+            purchasedTickets.add(new LottoTicket(numberGenerator.generate()));
         }
 
         lottoTickets = new LottoTickets(purchasedTickets);
@@ -27,5 +28,10 @@ public class LottoMachine {
         if (!amount.isPurchasable(LOTTO_TICKET_PRICE)) {
             throw new IllegalArgumentException(INVALID_INSERT_AMOUNT);
         }
+    }
+
+    public WinningStat createWinningStat(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
+        Map<LottoRank, Integer> ranks = lottoTickets.createRanks(winningNumbers, bonusNumber);
+        return new WinningStat(ranks);
     }
 }
