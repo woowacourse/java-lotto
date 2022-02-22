@@ -1,7 +1,6 @@
 package view;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -41,5 +40,4 @@ class InputViewTest {
 		//then
 		assertThatThrownBy(InputView::inputMoney).isInstanceOf(Exception.class);
 	}
-
 }
