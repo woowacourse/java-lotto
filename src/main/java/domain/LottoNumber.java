@@ -2,7 +2,7 @@ package domain;
 
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 	private int lottoNumber;
 
 	public LottoNumber(String lottoNumber) {
@@ -10,6 +10,13 @@ public class LottoNumber {
 		if (this.lottoNumber < 1 || this.lottoNumber > 45) {
 			throw new IllegalArgumentException("로또 범위를 벗어난 숫자입니다.");
 		}
+	}
+
+	public LottoNumber(int lottoNumber) {
+		if (lottoNumber < 1 || lottoNumber > 45) {
+			throw new IllegalArgumentException("로또 범위를 벗어난 숫자입니다.");
+		}
+		this.lottoNumber = lottoNumber;
 	}
 
 	@Override
@@ -25,5 +32,15 @@ public class LottoNumber {
 	@Override
 	public int hashCode() {
 		return Objects.hash(lottoNumber);
+	}
+
+	@Override
+	public String toString() {
+		return String.valueOf(lottoNumber);
+	}
+
+	@Override
+	public int compareTo(LottoNumber o) {
+		return this.lottoNumber - o.lottoNumber;
 	}
 }
