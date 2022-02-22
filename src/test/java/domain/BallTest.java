@@ -25,4 +25,12 @@ public class BallTest {
 		assertDoesNotThrow(() -> new Ball(number));
 	}
 
+	@DisplayName("숫자 비교 기능 테스트")
+	@Test
+	void equalsNumberTest() {
+		Ball ball = new Ball(40);
+		Ball ball2 = new Ball(40);
+		assertThat(ball.equals(ball2)).isTrue();
+	}
+
 }
