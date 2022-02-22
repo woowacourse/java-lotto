@@ -2,11 +2,11 @@ package domain;
 
 import java.util.List;
 
-public class Lotto {
+public class Ticket {
 	private final Balls balls;
 
-	public Lotto(LottoGenerator lottoGenerator) {
-		final List<Integer> numbers = lottoGenerator.generate();
+	public Ticket(TicketGenerator ticketGenerator) {
+		final List<Integer> numbers = ticketGenerator.generate();
 		this.balls = new Balls(numbers);
 	}
 

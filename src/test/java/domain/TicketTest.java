@@ -9,29 +9,29 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class LottoTest {
+class TicketTest {
 
-	private final CustomLottoGenerator customLottoGenerator = new CustomLottoGenerator();
+	private final CustomTicketGenerator customTicketGenerator = new CustomTicketGenerator();
 
 	@DisplayName("로또 생성 테스트")
 	@Test
 	void initTest() {
 		List<Integer> numbers = Arrays.asList(1,2,3,4,5,6);
-		customLottoGenerator.initNumbers(Arrays.asList(numbers));
+		customTicketGenerator.initNumbers(Arrays.asList(numbers));
 
-		assertDoesNotThrow(() -> new Lotto(customLottoGenerator));
+		assertDoesNotThrow(() -> new Ticket(customTicketGenerator));
 	}
 
 	@DisplayName("당첨번호와 일치 갯수 확인 테스트")
 	@Test
 	void countTest() {
 		List<Integer> numbers = Arrays.asList(1,2,3,4,5,6);
-		customLottoGenerator.initNumbers(Arrays.asList(numbers));
+		customTicketGenerator.initNumbers(Arrays.asList(numbers));
 
-		 Lotto lotto = new Lotto(customLottoGenerator);
+		 Ticket ticket = new Ticket(customTicketGenerator);
 
 		 Balls answer = new Balls(numbers);
 
-		 assertThat(lotto.getRank(answer, new Ball(7))).isEqualTo(Rank.FIRST_GRADE);
+		 assertThat(ticket.getRank(answer, new Ball(7))).isEqualTo(Rank.FIRST_GRADE);
 	}
 }

@@ -10,32 +10,32 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LottosTest {
+public class TicketsTest {
 
-	private final CustomLottoGenerator customLottoGenerator = new CustomLottoGenerator();
+	private final CustomTicketGenerator customTicketGenerator = new CustomTicketGenerator();
 
 	@DisplayName("로또목록 생성 테스트")
 	@Test
 	void initTest() {
-		assertDoesNotThrow(() -> new Lottos(14, new RandomLottoGenerator()));
+		assertDoesNotThrow(() -> new Tickets(14, new RandomTicketGenerator()));
 	}
 
 	@DisplayName("")
 	@Test
 	void getRanksTest() {
 		List<List<Integer>> numbers = new ArrayList<>();
-		numbers.add(Arrays.asList(1,2,3,8,9,10));
-		numbers.add(Arrays.asList(1,2,3,8,9,45));
-		numbers.add(Arrays.asList(11,12,13,14,15,16));
-		customLottoGenerator.initNumbers(numbers);
+		numbers.add(Arrays.asList(1, 2, 3, 8, 9, 10));
+		numbers.add(Arrays.asList(1, 2, 3, 8, 9, 45));
+		numbers.add(Arrays.asList(11, 12, 13, 14, 15, 16));
+		customTicketGenerator.initNumbers(numbers);
 
-		Lottos lottos = new Lottos(3, customLottoGenerator);
+		Tickets tickets = new Tickets(3, customTicketGenerator);
 
-		List<Integer> answerNumbers = Arrays.asList(1,2,3,8,9,10);
+		List<Integer> answerNumbers = Arrays.asList(1, 2, 3, 8, 9, 10);
 		Balls answerBalls = new Balls(answerNumbers);
 		Ball bonusBall = new Ball(45);
 
-		List<Rank> actual = lottos.getRanks(answerBalls, bonusBall);
+		List<Rank> actual = tickets.getRanks(answerBalls, bonusBall);
 		List<Rank> expected = Arrays.asList(Rank.FIRST_GRADE, Rank.SECOND_GRADE, Rank.FAIL_GRADE);
 
 		assertThat(actual).isEqualTo(expected);
