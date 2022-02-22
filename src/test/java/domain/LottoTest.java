@@ -1,20 +1,27 @@
 package domain;
 
+<<<<<<< HEAD
 import domain.Lotto.Lotto;
 import domain.Lotto.LottoNumber;
 import domain.Lotto.WinningLotto;
 import domain.LottoGenerator.LottoGenerator;
 import domain.LottoGenerator.ManualLottoGenerator;
 import org.junit.jupiter.api.BeforeEach;
+=======
+>>>>>>> 20a623d (feat: 로또 구매 기능 구현)
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+<<<<<<< HEAD
 import utils.ExceptionMessage;
+=======
+>>>>>>> 20a623d (feat: 로또 구매 기능 구현)
 
 import java.util.ArrayList;
 import java.util.List;
 
+<<<<<<< HEAD
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -42,6 +49,14 @@ public class LottoTest {
 
     @ParameterizedTest
     @ValueSource(ints = {5, 7})
+=======
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+public class LottoTest {
+
+    @ParameterizedTest
+    @ValueSource(ints = {5,7})
+>>>>>>> 20a623d (feat: 로또 구매 기능 구현)
     @DisplayName("Lotto의 size가 6이 아닐 경우 예외를 발생한다.")
     public void lotto_사이즈_5일경우(int lastIndex) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
@@ -50,6 +65,7 @@ public class LottoTest {
         }
         assertThatThrownBy(() -> new Lotto(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
+<<<<<<< HEAD
                 .hasMessage(ExceptionMessage.LOTTO_SIZE_IS_NOT_SIX);
     }
 
@@ -69,5 +85,8 @@ public class LottoTest {
         Result actual = lotto.judge(winningLotto);
         Result expected = new Result(5, true);
         assertThat(actual).isEqualTo(expected);
+=======
+                .hasMessage(Lotto.LOTTO_SIZE_IS_NOT_SIX);
+>>>>>>> 20a623d (feat: 로또 구매 기능 구현)
     }
 }

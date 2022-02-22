@@ -18,4 +18,8 @@ public class LottoNumber {
             throw new IllegalArgumentException(LOTTO_NUMBER_OUT_OF_BOUND);
         }
     }
+
+    public int number(){
+        return this.number;
+    }
 }
