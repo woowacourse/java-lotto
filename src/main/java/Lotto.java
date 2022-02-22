@@ -38,6 +38,10 @@ public class Lotto {
 
         }
 
+        if (sameCount == 6) {
+            return 1;
+        }
+
         if (sameCount == 5 && lottoNumbers.contains(bonusNumber)) {
             return 2;
         }
@@ -46,11 +50,15 @@ public class Lotto {
             return 3;
         }
 
-        if (sameCount < 3) {
-            return -1;
+        if (sameCount == 4) {
+            return 4;
         }
 
-        return 7 - sameCount;
+        if (sameCount == 3) {
+            return 5;
+        }
+        return -1;
+
     }
 
 }

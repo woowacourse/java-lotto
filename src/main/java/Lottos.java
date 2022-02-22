@@ -30,4 +30,8 @@ public class Lottos {
 
         return results;
     }
+
+    public int getSize() {
+        return lottos.size();
+    }
 }
