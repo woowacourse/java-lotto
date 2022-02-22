@@ -45,6 +45,24 @@ class LottoTest {
             .withMessageMatching("로또 번호는 중복될 수 없다.");
     }
 
+    @Test
+    @DisplayName("보너스 숫자가 포함되어있는지 확인한다.")
+    void checkContainsBonusNumber() {
+        Number bonus = new Number(7);
+        Lotto lotto = new Lotto(List.of(number(1), number(2), number(3), number(4), number(5), number(7)));
+
+        assertThat(lotto.containsNumber(bonus)).isTrue();
+    }
+
+    @Test
+    @DisplayName("보너스 숫자가 없는지 확인한다.")
+    void checkNotContainsBonusNumber() {
+        Number bonus = new Number(6);
+        Lotto lotto = new Lotto(List.of(number(1), number(2), number(3), number(4), number(5), number(7)));
+
+        assertThat(lotto.containsNumber(bonus)).isFalse();
+    }
+
     private Number number(int number) {
         return new Number(number);
     }
