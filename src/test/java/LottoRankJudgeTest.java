@@ -21,4 +21,12 @@ public class LottoRankJudgeTest {
         LottoRank rank = lottoRankJudge.judge(List.of(1, 2, 3, 4, 5, 7));
         assertThat(rank).isEqualTo(LottoRank.SECOND);
     }
+
+    @Test
+    @DisplayName("3등 판독 테스트")
+    void thirdPrize() {
+        LottoRankJudge lottoRankJudge = new LottoRankJudge(List.of(1, 2, 3, 4, 5, 6), 7);
+        LottoRank rank = lottoRankJudge.judge(List.of(1, 2, 3, 4, 5, 8));
+        assertThat(rank).isEqualTo(LottoRank.THIRD);
+    }
 }

@@ -1,5 +1,5 @@
 public enum LottoRank {
-    FIRST(20_0000_0000), SECOND(3000_0000);
+    FIRST(2_000_000_000), SECOND(30_000_000), THIRD(1_500_000);
 
     private int prizeAmount;
 
