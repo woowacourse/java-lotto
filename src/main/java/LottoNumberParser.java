@@ -6,27 +6,58 @@ import java.util.stream.Stream;
 public class LottoNumberParser {
 
     private static final int LOTTO_NUMBER_LENGTH = 6;
+    private static final String REGEX_DELIMITER = ",";
 
     static final String INVALID_LOTTO_NUMBER_LENGTH_MESSAGE = "당첨 번호는 6개여야 합니다.";
     static final String DUPLICATED_LOTTO_NUMBER_MESSAGE = "중복된 당첨 번호는 허용하지 않습니다.";
 
     public List<Integer> parse(String numbers) {
-        String[] tokens = numbers.split(", ");
-        checkLottoNumberLength(tokens);
-        List<Integer> result = Stream.of(tokens).map(Integer::valueOf).collect(toList());
-        checkDuplicatedLottoNumber(result);
-        return result;
+        List<String> tokens = splitNumbers(numbers);
+        List<String> trimNumbers = trimNumbers(tokens);
+        checkLottoNumber(trimNumbers);
+        return toInts(trimNumbers);
     }
 
-    private void checkLottoNumberLength(String[] tokens) {
-        if (tokens.length != LOTTO_NUMBER_LENGTH) {
+    private List<Integer> toInts(List<String> trimNumbers) {
+        return trimNumbers.stream()
+                .map(Integer::valueOf)
+                .collect(toList());
+    }
+
+    private void checkLottoNumber(List<String> tokens) {
+        checkLottoNumberLength(tokens);
+        checkDuplicatedLottoNumber(tokens);
+    }
+
+    private List<String> splitNumbers(String numbers) {
+        return List.of(numbers.split(REGEX_DELIMITER));
+    }
+
+    private List<String> trimNumbers(List<String> numbers) {
+        return numbers.stream()
+                .map(String::trim)
+                .collect(toList());
+    }
+
+    private void checkLottoNumberLength(List<String> tokens) {
+        if (tokens.size() != LOTTO_NUMBER_LENGTH) {
             throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_LENGTH_MESSAGE);
         }
     }
 
-    private void checkDuplicatedLottoNumber(List<Integer> result) {
-        if (result.stream().distinct().count() != result.size()) {
+    private void checkDuplicatedLottoNumber(List<String> result) {
+        if (hasDuplicatedNumber(result)) {
             throw new IllegalArgumentException(DUPLICATED_LOTTO_NUMBER_MESSAGE);
         }
+    }
+
+    private boolean hasDuplicatedNumber(List<String> result) {
+        return getDistinctSize(result) != result.size();
+    }
+
+    private long getDistinctSize(List<String> result) {
+        return result.stream()
+                .distinct()
+                .count();
     }
 }
