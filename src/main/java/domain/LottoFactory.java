@@ -23,6 +23,13 @@ public class LottoFactory {
                 .collect(Collectors.toList());
     }
 
+    public static List<LottoNumber> generateWinningLotto(List<String> winningNumbers){
+        return winningNumbers.stream()
+                .map(Integer::parseInt)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+    }
+
     private static List<Integer> makeBoundary() {
         List<Integer> numbers = new ArrayList<>();
         for (int i = MINIMUM_LOTTO_NUMBER; i <= MAXIMUM_LOTTO_NUMBER ; i++) {
