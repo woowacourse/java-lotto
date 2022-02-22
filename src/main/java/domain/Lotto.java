@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
     private static final int LOTTO_SIZE = 6;
@@ -32,5 +33,16 @@ public class Lotto {
         return lottoNumbers.size() != lottoNumbers.stream()
                 .distinct()
                 .count();
+    }
+
+    public int getSameNumberCount(Lotto anotherLotto) {
+        return lottoNumbers.stream()
+                .filter(lottoNumber -> anotherLotto.containsLottoNumber(lottoNumber))
+                .collect(Collectors.toList())
+                .size();
+    }
+
+    private boolean containsLottoNumber(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 }

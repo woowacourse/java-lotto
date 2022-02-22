@@ -34,11 +34,11 @@
     - [X] LottoNumber
         - [X] 유효성 검사 - 1 ~ 45 사이의 정수값으로 생성
         - [X] 동등성 검사를 위한 equals & hashCode 재정의
-    - [ ] Lotto
+    - [X] Lotto
         - [X] 유효성 검사
             - [X] 생성자에 전달된 List<Lotto> 의 길이가 6인지 검사
             - [X] 생성자에서 전달받은 List 에 중복되는 LottoNumber 가 포함되어있는지 검사
-        - [ ] 다른 Lotto 와 비교하여 일치하는 LottoNumber 의 개수를 반환한다.
+        - [X] 다른 Lotto 와 비교하여 일치하는 LottoNumber 의 개수를 반환한다.
     - [ ] Lottos
         - [ ] 유효성 검사
             - [ ] 비어있는 Lotto 가 전달 되었는지 검사

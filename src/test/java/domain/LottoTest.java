@@ -56,4 +56,19 @@ public class LottoTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageMatching("숫자는 중복될 수 없습니다.");
     }
+
+    @Test
+    @DisplayName("Lotto는 다른 Lotto 객체를 전달 받아 같은 숫자의 수를 반환할 수 있다")
+    void lottoReturnsNumberOfSameNumberCount() {
+        // given
+        Lotto lotto = new Lotto(lottoNumbers);
+
+        // when
+        List<LottoNumber> newLottoNumbers = new ArrayList<>(lottoNumbers);
+        newLottoNumbers.set(0, new LottoNumber(7));
+        Lotto anotherLotto = new Lotto(newLottoNumbers);
+
+        // then
+        assertThat(lotto.getSameNumberCount(anotherLotto)).isEqualTo(5);
+    }
 }
