@@ -9,6 +9,10 @@ public class LottoNumber {
         validateLottoNumberRange(this.number);
     }
 
+    public LottoNumber(final int inputNumber) {
+        this.number = inputNumber;
+    }
+
 
     private void validateLottoNumberFormat(final String number) {
         if (!number.matches("^[1-9]([0-9]*)$")) {

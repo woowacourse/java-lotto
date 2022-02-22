@@ -15,11 +15,14 @@ public class LottoNumbers {
                 .collect(Collectors.toList());
     }
 
+    public LottoNumbers(final List<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
+    }
+
     private List<String> splitInput(final String inputNumbers) {
-        List<String> splitNumbers = Arrays.stream(inputNumbers.split(",", -1))
+        return Arrays.stream(inputNumbers.split(",", -1))
                 .map(String::trim)
                 .collect(Collectors.toList());
-        return splitNumbers;
     }
 
     private void validateInput(final List<String> numbers) {
