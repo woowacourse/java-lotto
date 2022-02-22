@@ -11,7 +11,7 @@ public class Money {
 
     private void checkLowerThanStandard(final int amount) {
         if (amount < 1000) {
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException("[ERROR] 로또를 구매할 수 없는 금액입니다.");
         }
     }
 

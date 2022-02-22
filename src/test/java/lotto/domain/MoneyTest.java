@@ -18,6 +18,7 @@ public class MoneyTest {
     @Test
     void createMoneyExceptionByLowerThanStandard() {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new Money(10));
+                .isThrownBy(() -> new Money(10))
+                .withMessage("[ERROR] 로또를 구매할 수 없는 금액입니다.");
     }
 }
