@@ -21,7 +21,7 @@ public class LottoNumberParserTest {
     void winningNumberNotNumericValue() {
         assertThatThrownBy(() -> parser.parse("a,b,c,d,e,f"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("당첨 번호는 반드시 숫자여야 합니다.");
+                .hasMessage(LottoNumberParser.INVALID_LOTTO_NUMBER_FORMAT_MESSAGE);
     }
 
     @Test
@@ -41,7 +41,7 @@ public class LottoNumberParserTest {
     void splitWinningNumberUnderSix(String numbers) {
         assertThatThrownBy(() -> parser.parse(numbers))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(LottoNumberParser.INVALID_LOTTO_NUMBER_LENGTH_MESSAGE);
+                .hasMessage(LottoNumberParser.INVALID_LOTTO_NUMBER_FORMAT_MESSAGE);
     }
 
     @Test
@@ -58,6 +58,6 @@ public class LottoNumberParserTest {
     void failSplitWithInvalidRangeLottoNumber(String numbers) {
         assertThatThrownBy(() -> parser.parse(numbers))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("당첨 번호는 1 ~ 45사이의 숫자만 가능합니다.");
+            .hasMessage(LottoNumberParser.INVALID_LOTTO_NUMBER_RANGE_MESSAGE);
     }
 }
