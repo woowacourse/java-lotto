@@ -1,7 +1,7 @@
 package lotto.domain;
 
 class Money {
-    private static int money;
+    private int money;
 
     public Money(String input) {
         isNumberFormat(input);
