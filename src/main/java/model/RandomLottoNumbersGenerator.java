@@ -8,14 +8,14 @@ import java.util.stream.Collectors;
 public class RandomLottoNumbersGenerator {
     private static final int LOTTO_SIZE = 6;
 
-    public List<Integer> pickSixNumbers() {
+    public static List<Integer> pickSixNumbers() {
         List<Integer> shuffledNumbers = shuffleLottoNumbers();
         return shuffledNumbers.stream()
                 .limit(LOTTO_SIZE)
                 .collect(Collectors.toList());
     }
 
-    private List<Integer> shuffleLottoNumbers() {
+    private static List<Integer> shuffleLottoNumbers() {
         ArrayList<Integer> randomNumbers = new ArrayList<>();
         randomNumbers.addAll(LottoNumbers.getLottoNumbers());
         Collections.shuffle(randomNumbers);
