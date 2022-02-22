@@ -14,4 +14,8 @@ public class WinningNumbers {
     public boolean match(int number) {
         return winningNumbers.contains(number);
     }
+
+    public boolean matchBonusNumber(Lotto lotto) {
+        return lotto.contains(this.bonusNumber);
+    }
 }

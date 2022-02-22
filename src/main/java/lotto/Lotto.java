@@ -25,6 +25,16 @@ public class Lotto {
         Collections.sort(numbers);
     }
 
+    public int match(WinningNumbers winningNumbers) {
+        return (int) numbers.stream()
+                .filter(winningNumbers::match)
+                .count();
+    }
+
+    public boolean contains(int number) {
+        return numbers.contains(number);
+    }
+
     public List<Integer> getNumbers() {
         return numbers;
     }
