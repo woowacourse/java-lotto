@@ -26,8 +26,7 @@ public class Player {
         return lottos;
     }
 
-
-
-
-
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
 }
