@@ -15,6 +15,10 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
+    public List<Integer> getLottoNumbers() {
+        return this.lottoNumbers;
+    }
+
 
     public List<Integer> generateNumber() {
 
