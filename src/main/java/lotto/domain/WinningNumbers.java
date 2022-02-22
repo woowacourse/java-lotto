@@ -18,6 +18,15 @@ public class WinningNumbers {
 
     public Ranking calculatePrize(LottoNumbers otherLottoNumbers) {
         int cnt = lottoNumbers.calculateSameCount(otherLottoNumbers);
+
+        if (cnt == 5 && otherLottoNumbers.isContain(bonusNumber.getNumber())) {
+            return Ranking.SECOND;
+        }
+
+        if (cnt == 5) {
+            return Ranking.THIRD;
+        }
+
         return Ranking.findRankingByCnt(cnt);
     }
 

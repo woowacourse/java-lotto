@@ -36,4 +36,63 @@ public class WinningNumbersTest {
         assertThat(winningNumbers.calculatePrize(myLotto)).isEqualTo(Ranking.FIRST);
     }
 
+    @Test
+    @DisplayName("2등 당첨 결과 반환")
+    void secondPrize() {
+        // given
+        LottoNumbers lottoNumbers = new LottoNumbers("1,2,3,4,5,6");
+        BonusNumber bonusNumber = new BonusNumber("7");
+        WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers, bonusNumber);
+
+        // when
+        LottoNumbers myLotto = new LottoNumbers("1,2,3,4,5,7");
+
+        //then
+        assertThat(winningNumbers.calculatePrize(myLotto)).isEqualTo(Ranking.SECOND);
+    }
+
+    @Test
+    @DisplayName("3등 당첨 결과 반환")
+    void thirdPrize() {
+        // given
+        LottoNumbers lottoNumbers = new LottoNumbers("1,2,3,4,5,6");
+        BonusNumber bonusNumber = new BonusNumber("7");
+        WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers, bonusNumber);
+
+        // when
+        LottoNumbers myLotto = new LottoNumbers("1,2,3,4,5,8");
+
+        //then
+        assertThat(winningNumbers.calculatePrize(myLotto)).isEqualTo(Ranking.THIRD);
+    }
+
+    @Test
+    @DisplayName("4등 당첨 결과 반환")
+    void fourthPrize() {
+        // given
+        LottoNumbers lottoNumbers = new LottoNumbers("1,2,3,4,5,6");
+        BonusNumber bonusNumber = new BonusNumber("7");
+        WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers, bonusNumber);
+
+        // when
+        LottoNumbers myLotto = new LottoNumbers("1,2,3,4,8,9");
+
+        //then
+        assertThat(winningNumbers.calculatePrize(myLotto)).isEqualTo(Ranking.FOURTH);
+    }
+
+    @Test
+    @DisplayName("5등 당첨 결과 반환")
+    void fifthPrize() {
+        // given
+        LottoNumbers lottoNumbers = new LottoNumbers("1,2,3,4,5,6");
+        BonusNumber bonusNumber = new BonusNumber("7");
+        WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers, bonusNumber);
+
+        // when
+        LottoNumbers myLotto = new LottoNumbers("1,2,3,8,9,10");
+
+        //then
+        assertThat(winningNumbers.calculatePrize(myLotto)).isEqualTo(Ranking.FIFTH);
+    }
 }
