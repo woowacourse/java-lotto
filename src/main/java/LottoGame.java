@@ -60,5 +60,10 @@ public class LottoGame {
         return results;
     }
 
+    public Lottos getLottos() {
+        return lottos2;
+    }
+
+
 
 }

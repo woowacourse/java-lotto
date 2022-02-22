@@ -21,7 +21,7 @@ public class OutputView {
     private static final String MESSAGE_YIELD = "총 수익률은 %lf입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
 
 //    생성된 로또 번호와 개수 출력하는 기능
-    public void printLottosInformations(Lottos lottos) {
+    public static void printLottosInformations(Lottos lottos) {
 
         System.out.printf(MESSAGE_LOTTOS_NUMBER, lottos.getLottos().size());
 
@@ -30,7 +30,7 @@ public class OutputView {
         }
     }
 
-    public void printWinningStatistic(Map<Integer, Integer> results) {
+    public static void printWinningStatistic(Map<Integer, Integer> results) {
         System.out.println(MESSAGE_WINNING_STATISTIC);
         System.out.println(SEPERATOR_LINE);
         for (int i = 0; i<MESSAGE_WINNING_RANKING.length; ++i) {
@@ -38,7 +38,7 @@ public class OutputView {
         }
     }
 
-    public void printYield(double yield) {
+    public static void printYield(double yield) {
         System.out.printf(MESSAGE_YIELD, yield);
     }
 }

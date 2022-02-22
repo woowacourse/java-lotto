@@ -8,14 +8,14 @@ public class InputView {
     private final static String QUESTION_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
     private final static String QUESTION_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
 
-    Scanner scanner = new Scanner(System.in);
+    private static Scanner scanner = new Scanner(System.in);
 
-    public int askMoneyInput() {
+    public static int askMoneyInput() {
         System.out.println(QUESTION_MONEY_INPUT);
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public List<Integer> askWinningNumbers() {
+    public static List<Integer> askWinningNumbers() {
         System.out.println(QUESTION_WINNING_NUMBERS);
         String[] numbers = scanner.nextLine().split(", ");
 
@@ -26,7 +26,7 @@ public class InputView {
         return winningNumbers;
     }
 
-    public int askBonusNumber() {
+    public static int askBonusNumber() {
         System.out.println(QUESTION_BONUS_NUMBER);
 
         return Integer.parseInt(scanner.nextLine());
