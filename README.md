@@ -76,17 +76,17 @@
 
 ## 💻 구조
 
-- controller
-  - 메인 컨트롤러
-- domain
-  - LottoNumber
-  - LottoNumbers
-  - WinLottoNumbers
-  - LottoResult
-- view
-  - InputView
-  - OutputView
-- validator
+- [ ] controller
+  - [ ] 메인 컨트롤러
+- [ ] domain
+  - [x] LottoNumber
+  - [ ] LottoNumbers
+  - [ ] WinLottoNumbers
+  - [ ] LottoResult
+- [ ] view
+  - [x] InputView
+  - [ ] OutputView
+- [ ] validator
 
 ## 💕 페어코딩 협의사항
 
