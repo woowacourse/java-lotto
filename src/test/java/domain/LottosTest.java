@@ -12,4 +12,5 @@ public class LottosTest {
 	void initTest() {
 		assertDoesNotThrow(() -> new Lottos(14));
 	}
+
 }

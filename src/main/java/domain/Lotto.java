@@ -9,4 +9,8 @@ public class Lotto {
 		final List<Integer> numbers = lottoGenerator.generate();
 		this.balls = new Balls(numbers);
 	}
+
+	public int countMatches(Balls balls) {
+		return balls.countMatches(this.balls);
+	}
 }

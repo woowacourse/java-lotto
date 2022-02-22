@@ -20,5 +20,18 @@ class LottoTest {
 		customLottoGenerator.initNumbers(numbers);
 
 		assertDoesNotThrow(() -> new Lotto(customLottoGenerator));
-	 }
+	}
+
+	@DisplayName("당첨번호와 일치 갯수 확인 테스트")
+	@Test
+	void countTest() {
+		List<Integer> numbers = Arrays.asList(1,2,3,4,5,6);
+		customLottoGenerator.initNumbers(numbers);
+
+		 Lotto lotto = new Lotto(customLottoGenerator);
+
+		 Balls answer = new Balls(numbers);
+
+		 assertThat(lotto.countMatches(answer)).isEqualTo(6);
+	}
 }

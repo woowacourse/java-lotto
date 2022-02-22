@@ -34,4 +34,11 @@ public class Balls {
 	public boolean contains(Ball ball) {
 		return balls.contains(ball);
 	}
+
+	public int countMatches(Balls answer) {
+		return (int)this.balls.stream()
+			.filter(answer::contains)
+			.count();
+	}
+
 }

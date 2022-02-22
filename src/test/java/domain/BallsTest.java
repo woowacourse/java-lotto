@@ -43,4 +43,16 @@ class BallsTest {
 		Ball ball = new Ball(1);
 		assertThat(balls.contains(ball)).isTrue();
 	}
+
+	@DisplayName("당첨 번호와 일치 개수 확인")
+	@Test
+	void countMatches() {
+		List<Integer> numbers = Arrays.asList(1,2,3,4,5,6);
+		Balls balls = new Balls(numbers);
+
+		List<Integer> numbers2 = Arrays.asList(2,3,4,6,29,30);
+		Balls answer = new Balls(numbers2);
+
+		assertThat(balls.countMatches(answer)).isEqualTo(4);
+	}
 }
