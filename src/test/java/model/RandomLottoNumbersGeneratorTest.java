@@ -1,5 +1,6 @@
 package model;
 
+import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,7 @@ public class RandomLottoNumbersGeneratorTest {
     @DisplayName("랜덤 숫자 리스트 사이즈 검증")
     void validateLottoNumbersSize() {
          RandomLottoNumbersGenerator randomLottoNumbersGenerator = new RandomLottoNumbersGenerator();
-         List<Integer> lottoNumbers = randomLottoNumbersGenerator.pickSixNumbers(Arrays.asList(1,2,3,4,5,6,7,8,9,10));
-         assertThat(lottoNumbers).isEqualTo(Arrays.asList(1,2,3,4,5,6));
+         List<Integer> lottoNumbers = randomLottoNumbersGenerator.pickSixNumbers();
+         assertThat(lottoNumbers.size()).isEqualTo(6);
     }
 }
