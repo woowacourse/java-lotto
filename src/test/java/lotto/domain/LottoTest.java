@@ -20,4 +20,15 @@ public class LottoTest {
                 .isThrownBy(() -> new Lotto(lottoNumbers))
                 .withMessage("[ERROR] 로또 넘버는 6개가 입력되어야 합니다.");
     }
+
+    @DisplayName("구매 로또가 중복될 경우 예외가 발생해야 한다.")
+    @Test
+    void duplicateLottoException() {
+        final List<LottoNumber> lottoNumbers = Stream.of(1, 1, 1, 1, 1, 1)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new Lotto(lottoNumbers))
+                .withMessage("[ERROR] 로또 넘버는 중복될 수 없습니다.");
+    }
 }
