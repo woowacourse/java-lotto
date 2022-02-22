@@ -27,6 +27,6 @@ public class LottoResult {
     }
 
     public void add(LottoRank rank) {
-        resultMap.put(rank, 1);
+        resultMap.put(rank, getCountByRank(rank) + 1);
     }
 }
