@@ -8,14 +8,15 @@ import java.util.stream.IntStream;
 
 public class RandomLottoMachine {
 
-    private static final List<Integer> lottoNumbers = new ArrayList<>();
+    private static final List<LottoNumber> lottoNumbers = new ArrayList<>();
 
     static {
-        IntStream.rangeClosed(1, 45)
+        IntStream.rangeClosed(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER)
+                .mapToObj(LottoNumber::new)
                 .forEach(lottoNumbers::add);
     }
 
-    public static List<Integer> createRandomLottoNumbers() {
+    public static List<LottoNumber> createRandomLottoNumbers() {
         Collections.shuffle(lottoNumbers);
         return IntStream.rangeClosed(0, 5)
                 .boxed()

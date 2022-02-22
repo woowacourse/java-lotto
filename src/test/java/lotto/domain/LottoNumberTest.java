@@ -19,6 +19,13 @@ public class LottoNumberTest {
     }
 
     @Test
+    void comparable() {
+        final LottoNumber lowerLottoNumber = new LottoNumber(2);
+        final LottoNumber largerLottoNumber = new LottoNumber(20);
+        assertThat(lowerLottoNumber).isLessThan(largerLottoNumber);
+    }
+
+    @Test
     void equalsAndHashCode() {
         assertThat(new LottoNumber(1))
                 .isEqualTo(new LottoNumber(1))
