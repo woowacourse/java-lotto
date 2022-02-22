@@ -4,6 +4,9 @@ public class Money {
     private final int money;
 
     public Money(int money) {
+        if(money < UNIT ){
+            throw new IllegalArgumentException();
+        }
         this.money = money;
     }
 
