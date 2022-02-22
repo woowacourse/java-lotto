@@ -20,8 +20,9 @@
 - [ ] 살 수 있는 만큼 로또들을 생성한다.
   - [ ] 숫자 6개를 생성하여 로또를 생성한다.
     - [ ] 1~45의 랜덤 숫자를 생성한다.
-        - [ ] (예외) 숫자가 아닐 경우 `Illegalargumentexception` 에러를 발생시킨다.
-        - [ ] (예외) 양수가 아닐 경우 `Illegalargumentexception` 에러를 발생시킨다.
+        - [x] (예외) 빈값 또는 null 일 경우 `Illegalargumentexception` 에러를 발생시킨다.
+        - [x] (예외) 숫자가 아닐 경우 `Illegalargumentexception` 에러를 발생시킨다.
+        - [x] (예외) 1~45가 아닐 경우 `Illegalargumentexception` 에러를 발생시킨다.
 
 ### 📌 지난주 로또 번호
 - [ ] 지난 주 당첨 번호 6개를 생성한다.
