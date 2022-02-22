@@ -17,6 +17,10 @@ public enum LottoRank {
         this.predicate = predicate;
     }
 
+    public int getPrizeAmount() {
+        return this.prizeAmount;
+    }
+
     private boolean isMatched(long matchCount, boolean bonusMatch) {
         return predicate.apply(matchCount, bonusMatch);
     }
@@ -54,9 +58,5 @@ public enum LottoRank {
 
     private static boolean isNothingPrize(long matchCount, boolean bonusMatch) {
         return 0 <= matchCount && matchCount < 3;
-    }
-
-    public int getPrizeAmount() {
-        return this.prizeAmount;
     }
 }
