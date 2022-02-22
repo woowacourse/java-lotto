@@ -10,7 +10,9 @@ public class Lotto {
 		this.balls = new Balls(numbers);
 	}
 
-	public int countMatches(Balls balls) {
-		return balls.countMatches(this.balls);
+	public Rank countMatches(Balls balls, Ball bonusBall) {
+		int matchCount = balls.countMatches(this.balls);
+		boolean bonusBallMatched = balls.contains(bonusBall);
+		return Rank.of(matchCount, bonusBallMatched);
 	}
 }

@@ -32,6 +32,6 @@ class LottoTest {
 
 		 Balls answer = new Balls(numbers);
 
-		 assertThat(lotto.countMatches(answer)).isEqualTo(6);
+		 assertThat(lotto.countMatches(answer, new Ball(7))).isEqualTo(Rank.FIRST_GRADE);
 	}
 }
