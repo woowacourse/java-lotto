@@ -1,0 +1,31 @@
+import java.util.Arrays;
+
+public enum Rank {
+    FIRST(6, 2_000_000_000, false),
+    SECOND(5, 30_000_000, true),
+    THIRD(5, 1_500_000, false),
+    FOURTH(4, 50_000, false),
+    FIFTH(3, 5000, false),
+    SIXTH(0, 0, false);
+
+    private final int count;
+    private final int winningPrice;
+    private final boolean hasBonusBall;
+
+    Rank(int count, int winningPrice, boolean hasBonusBall) {
+        this.count = count;
+        this.winningPrice = winningPrice;
+        this.hasBonusBall = hasBonusBall;
+    }
+
+    public static Rank valueOf(int count, boolean hasBonusBall) {
+        if (count == 5 && hasBonusBall) {
+            return Rank.SECOND;
+        }
+        return Arrays.stream(values())
+                .filter(rank -> rank.count == count)
+                .filter(rank -> !rank.hasBonusBall)
+                .findFirst()
+                .orElse(SIXTH);
+    }
+}
