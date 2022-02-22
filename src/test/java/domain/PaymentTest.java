@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.Test;
+
 /**
  * - **구입 금액을 입력받는다.** ()
  *     - [ 예외 ] 구입 금액은 `1000원 단위` 로 나눠져야한다.
@@ -17,7 +18,7 @@ public class PaymentTest {
 	@Test
 	void division() {
 		//given, when
-		assertThatThrownBy(() -> new Payment(2500))
+		assertThatThrownBy(() -> new Payment("2500"))
 			.isInstanceOf(IllegalArgumentException.class);
 		//then
 	}
@@ -25,7 +26,7 @@ public class PaymentTest {
 	@Test
 	void division2() {
 		//given, when
-		assertThatCode(() -> new Payment(3000))
+		assertThatCode(() -> new Payment("3000"))
 			.doesNotThrowAnyException();
 		//then
 	}
@@ -35,7 +36,7 @@ public class PaymentTest {
 	@Test
 	void 음수인_경우() {
 		//given, when
-		assertThatThrownBy(() -> new Payment(-1000))
+		assertThatThrownBy(() -> new Payment("-1000"))
 			.isInstanceOf(IllegalArgumentException.class);
 		//then
 	}
@@ -63,7 +64,7 @@ public class PaymentTest {
 	// *     - [ 예외 ] 구입 금액은 `10만원을 초과할 수 없다.`
 	@Test
 	void 구입금액_10만원_초과_실패() {
-		assertThatThrownBy(() -> new Payment(110000))
+		assertThatThrownBy(() -> new Payment("110000"))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 }

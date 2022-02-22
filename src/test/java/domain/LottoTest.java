@@ -4,10 +4,12 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 public class LottoTest {
+
 	@Test
 	void 개수_성공() {
 		assertThatCode(() -> new Lotto(Arrays.asList(new LottoNumber("1"),

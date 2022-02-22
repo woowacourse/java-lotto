@@ -5,15 +5,21 @@ public class Payment {
 	private static final int PAYMENT_LIMIT_PRICE = 100000;
 	private int payment;
 
-	public Payment(int payment) {
-		checkDivideByLottoPrice(payment);
-		checkNegative(payment);
-		checkPaymentLimit(payment);
-		this.payment = payment;
+	public Payment(String payment) {
+		this.payment = toInt(payment);
 	}
 
-	public Payment(String payment) {
-		this.payment = Integer.parseInt(payment);
+	//Todo: 팩토리 메서드 공부 한 후, 적용에 대해 의견 나누기
+	// public static Payment create(String payment) {
+	// 	return new Payment(Integer.parseInt(payment));
+	// }
+
+	private int toInt(String payment) {
+		int changeInt = Integer.parseInt(payment);
+		checkDivideByLottoPrice(changeInt);
+		checkNegative(changeInt);
+		checkPaymentLimit(changeInt);
+		return changeInt;
 	}
 
 	private void checkPaymentLimit(int payment) {
