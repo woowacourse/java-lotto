@@ -62,4 +62,17 @@ public class LottoTest {
             assertFalse(lotto.containNumber(lottoNumber));
         }
     }
+
+    @Test
+    void matchLotto() {
+        final Lotto lotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 6)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList()));
+
+        final Lotto compareLotto = new Lotto(Stream.of(1, 2, 3, 4, 5, 7)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList()));
+
+        assertThat(lotto.match(compareLotto)).isEqualTo(5);
+    }
 }

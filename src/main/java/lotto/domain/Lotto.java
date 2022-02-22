@@ -26,13 +26,19 @@ public class Lotto {
         }
     }
 
-    private long calculateDistinctSize(List<LottoNumber> lottoNumbers) {
+    private long calculateDistinctSize(final List<LottoNumber> lottoNumbers) {
         return lottoNumbers.stream()
                 .distinct()
                 .count();
     }
 
-    public boolean containNumber(LottoNumber lottoNumber) {
+    public boolean containNumber(final LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
+    }
+
+    public long match(final Lotto compareLotto) {
+        return lottoNumbers.stream()
+                .filter(compareLotto::containNumber)
+                .count();
     }
 }
