@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoNumbersTest {
@@ -19,5 +20,21 @@ class LottoNumbersTest {
         assertThatThrownBy(() -> new LottoNumbers(duplicatedNumberValues))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(expectedExceptionMessage);
+    }
+
+    @Test
+    @DisplayName("로또 숫자들을 오름차순으로 정렬한다.")
+    void create_SortingAscending() {
+        //given
+        final List<String> numbers = Arrays.asList("7", "4", "5", "3", "6", "2");
+        final LottoNumbers lottoNumbers = new LottoNumbers(numbers);
+        final List<String> otherNumbers = Arrays.asList("2", "3", "6", "7", "4", "5");
+        final LottoNumbers otherLottoNumbers = new LottoNumbers(otherNumbers);
+        final LottoNumber expectedFirstLottoNumber = new LottoNumber("2");
+        //when
+        final LottoNumber actualFirstLottoNumber = lottoNumbers.getValues().get(0);
+        //then
+        assertThat(lottoNumbers).isEqualTo(otherLottoNumbers);
+        assertThat(actualFirstLottoNumber).isEqualTo(expectedFirstLottoNumber);
     }
 }
