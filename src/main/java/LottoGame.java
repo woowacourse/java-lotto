@@ -43,14 +43,14 @@ public class LottoGame {
 
     public double getYield(List<Integer> winningNumbers, Integer bonusNumber) {
 
-        lottos2 = new Lottos(lottos);
+                lottos2 = new Lottos(lottos);
 
-        results = lottos2.compareAllLotto(winningNumbers, bonusNumber);
+                results = lottos2.compareAllLotto(winningNumbers, bonusNumber);
 
-        Set<Integer> winningRankings = results.keySet();
-        int prize = 0;
-        for (Integer winningRanking : winningRankings) {
-            prize += results.get(winningRanking) * convertReward.get(winningRanking);
+                Set<Integer> winningRankings = results.keySet();
+                int prize = 0;
+                for (Integer winningRanking : winningRankings) {
+                    prize += results.get(winningRanking) * convertReward.get(winningRanking);
         }
         System.out.println("@@@@@prize: " + prize);
         return prize / (1000 * lottos2.getSize());
