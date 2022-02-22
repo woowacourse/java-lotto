@@ -36,9 +36,9 @@
 
 ### 객체 설계
 - Money
-  - 1000 이상인지 검증
   - 10 단위인지 검증
 - LottoMachine
+  - 1000 이상인지 검증
   - 금액에 맞게 Lotto 생성
   - 모든 로또와 당첨 번호를 비교해 WinningStat 반환
 - Lotto
