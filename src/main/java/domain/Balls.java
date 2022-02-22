@@ -30,4 +30,9 @@ public class Balls {
 			throw new IllegalArgumentException("숫자 요소는 6개여야 합니다.");
 		}
 	}
+
+	public boolean contains(Ball ball) {
+		return balls.contains(ball);
+	}
+
 }

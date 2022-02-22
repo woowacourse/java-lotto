@@ -6,6 +6,9 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.*;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -31,4 +34,13 @@ class BallsTest {
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 
+	@DisplayName("볼 포함 여부 확인 테스트")
+	@Test
+	void containsTest() {
+		List<Integer> numbers = Arrays.asList(1,2,3,4,5,6);
+		Balls balls = new Balls(numbers);
+
+		Ball ball = new Ball(1);
+		assertThat(balls.contains(ball)).isTrue();
+	}
 }
