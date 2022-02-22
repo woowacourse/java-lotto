@@ -6,6 +6,18 @@
 
 ### 입력
 
+- 인아웃풋 test :ps://choichumji.tistory.com/118
+
+```text
+        String input = "1 + 2 k 3";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in); // 
+        
+        OutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+        Out.toString();
+```
+
 - [ ] 로또 구입 금액을 입력받는다.
     - [ ] [예외처리] 숫자가 아닐 경우
     - [ ] [예외처리] 1000 미만의 값일 경우
