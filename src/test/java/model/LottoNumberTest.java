@@ -1,5 +1,7 @@
 package model;
 
+import static model.LottoNumber.INVALID_LOTTO_NUMBER_RANGE;
+import static model.LottoNumber.NOT_NUMBER_OF_LOTTO;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
@@ -13,7 +15,8 @@ public class LottoNumberTest {
     void notNumber(String input) {
         // then
         assertThatThrownBy(() -> new LottoNumber(input))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(NOT_NUMBER_OF_LOTTO);
     }
 
     @ParameterizedTest
@@ -22,7 +25,8 @@ public class LottoNumberTest {
     void notInRange(String input) {
         // then
         assertThatThrownBy(() -> new LottoNumber(input))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(INVALID_LOTTO_NUMBER_RANGE);
     }
 
     @ParameterizedTest

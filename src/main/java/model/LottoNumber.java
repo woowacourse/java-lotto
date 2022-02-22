@@ -5,6 +5,8 @@ import java.util.Objects;
 public class LottoNumber {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
+    public static final String NOT_NUMBER_OF_LOTTO = "[ERROR] 로또 번호는 숫자여야 합니다.";
+    public static final String INVALID_LOTTO_NUMBER_RANGE = "[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.";
 
     private final int number;
 
@@ -17,13 +19,13 @@ public class LottoNumber {
         try {
             return Integer.parseInt(numberString);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[ERROR] 로또 번호는 숫자여야 합니다.");
+            throw new IllegalArgumentException(NOT_NUMBER_OF_LOTTO);
         }
     }
 
     private void validateRange() {
         if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
-            throw new IllegalArgumentException("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
+            throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_RANGE);
         }
     }
 

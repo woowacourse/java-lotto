@@ -1,5 +1,7 @@
 package model;
 
+import static model.LottoTicket.INVALID_LOTTO_NUMBER_COUNT;
+import static model.LottoTicket.LOTTO_NUMBER_DUPLICATED;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.ArrayList;
@@ -26,7 +28,9 @@ public class LottoTicketTest {
         // when
 
         // then
-        assertThatThrownBy(() -> new LottoTicket(lottoNumbers)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(LOTTO_NUMBER_DUPLICATED);
     }
 
     @ParameterizedTest
@@ -38,7 +42,9 @@ public class LottoTicketTest {
         // when
 
         // then
-        assertThatThrownBy(() -> new LottoTicket(lottoNumbers)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(INVALID_LOTTO_NUMBER_COUNT);
     }
 
     @Test
