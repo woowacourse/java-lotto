@@ -1,7 +1,7 @@
 package lotto.domain;
 
 public class BonusNumber extends LottoNumber {
-    public BonusNumber(int number) {
+    public BonusNumber(final String number) {
         super(number);
     }
 }

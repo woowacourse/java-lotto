@@ -11,7 +11,7 @@ public class WinningNumbersTest {
     void test() {
         // given
         LottoNumbers lottoNumbers = new LottoNumbers("1,2,3,4,5,6");
-        BonusNumber bonusNumber = new BonusNumber(1);
+        BonusNumber bonusNumber = new BonusNumber("1");
 
         // when
 
