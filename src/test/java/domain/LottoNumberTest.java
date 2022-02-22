@@ -3,6 +3,7 @@ package domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -27,6 +28,7 @@ public class LottoNumberTest {
     }
 
     @Test
+    @DisplayName("LottoNumber 동등성 테스트 - 같은 숫자면 같은 객체 취급")
     void lottoNumberEqualityTest() {
         // given & when
         LottoNumber lottoNumber1 = new LottoNumber(1);
