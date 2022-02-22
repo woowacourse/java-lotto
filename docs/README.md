@@ -29,6 +29,9 @@
 #### Lotto
 - 6개의 LottoNumber 를 저장하고 있다.
 
+#### Lottos
+- 다수의 Lotto 들을 생성하고 관리한다.
+
 #### LottoNumber
 - 로또 숫자 하나를 의미한다.
 
