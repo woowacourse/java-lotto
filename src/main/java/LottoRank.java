@@ -41,7 +41,7 @@ public enum LottoRank {
 
     private static boolean isFifthPrize(long matchCount) {
         return matchCount == 3;
-    }
+}
 
     private static boolean isNothingPrize(long matchCount) {
         return matchCount <= 2;
