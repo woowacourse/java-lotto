@@ -6,6 +6,7 @@ public class InputView {
 
     private final static String QUESTION_MONEY_INPUT = "구매금액을 입력해 주세요.";
     private final static String QUESTION_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
+    private final static String QUESTION_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
 
     Scanner scanner = new Scanner(System.in);
 
@@ -23,6 +24,12 @@ public class InputView {
             winningNumbers.add(Integer.parseInt(number));
         }
         return winningNumbers;
+    }
+
+    public int askBonusNumber() {
+        System.out.println(QUESTION_BONUS_NUMBER);
+
+        return Integer.parseInt(scanner.nextLine());
     }
 }
 
