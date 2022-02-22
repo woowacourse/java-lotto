@@ -27,4 +27,6 @@ class MoneyTest {
         assertThatThrownBy(() -> new Money(inputMoney))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+    
+    //todo: 포맷 검사 추가
 }
