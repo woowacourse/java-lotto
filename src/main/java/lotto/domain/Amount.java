@@ -2,7 +2,7 @@ package lotto.domain;
 
 public class Amount {
     private static final int DIVISOR = 1000;
-    private static final String NUMBER_REGAX = "[0-9]";
+    private static final String NUMBER_REGAX = "^[0-9]*$";
     private static final String NOT_NUMBER_ERROR = "금액은 숫자만 등록 가능합니다.";
     private static final String NOT_NATURAL_NUMBER_ERROR = "금액은 0 이상이어야 합니다.";
     private static final String NOT_DIVISIBLE_NUMBER_ERROR = "금액은 " + DIVISOR + "단위여야 합니다.";
@@ -37,5 +37,9 @@ public class Amount {
         if (amount % DIVISOR != 0) {
             throw new IllegalArgumentException(NOT_DIVISIBLE_NUMBER_ERROR);
         }
+    }
+
+    public int calculateLottoCount() {
+        return amount / DIVISOR;
     }
 }
