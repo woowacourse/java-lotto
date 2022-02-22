@@ -40,7 +40,7 @@ class PurchaseAmountTest {
         String input = "notNumber";
         assertThatThrownBy(() -> new PurchaseAmount(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("구입 금액은 숫자여야합니다");
+                .hasMessage("입력값은 숫자여야합니다");
     }
 
     @ParameterizedTest

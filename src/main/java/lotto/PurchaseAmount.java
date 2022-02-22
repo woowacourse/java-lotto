@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.util.StringToIntConverter;
+
 public class PurchaseAmount {
 
     private static final int TICKET_PRICE = 1000;
@@ -7,25 +9,9 @@ public class PurchaseAmount {
     private final int amount;
 
     public PurchaseAmount(String input) {
-        validateNullOrBlank(input);
-        validateNumberFormat(input);
-        final int inputAmount = Integer.parseInt(input);
+        final int inputAmount = StringToIntConverter.toInt(input);
         validateMinimumAmount(inputAmount);
         amount = calculateActualAmount(inputAmount);
-    }
-
-    private void validateNullOrBlank(String input) {
-        if (input == null || input.isBlank()) {
-            throw new IllegalArgumentException("구입 금액은 공백일 수 없습니다");
-        }
-    }
-
-    private void validateNumberFormat(String input) {
-        try {
-            Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("구입 금액은 숫자여야합니다");
-        }
     }
 
     private void validateMinimumAmount(final int amount) {

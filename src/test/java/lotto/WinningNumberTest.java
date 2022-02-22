@@ -57,4 +57,13 @@ class WinningNumberTest {
         assertThatThrownBy(() -> new WinningNumber(input))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("당첨번호가 숫자가 아닌 경우 예외를 발생시킨다")
+    void throwExceptionWhenInputIsNotNumber() {
+        String input = "notNumber";
+        assertThatThrownBy(() -> new WinningNumber(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("입력값은 숫자여야합니다");
+    }
 }

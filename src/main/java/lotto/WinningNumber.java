@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.util.StringToIntConverter;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -29,7 +31,7 @@ public class WinningNumber {
 
     private void addWinningNumbers(String[] inputNumbers) {
         for (String number : inputNumbers) {
-            numbers.add(new LottoNumber(Integer.parseInt(number)));
+            numbers.add(new LottoNumber(StringToIntConverter.toInt(number)));
         }
     }
 
