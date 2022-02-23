@@ -15,8 +15,12 @@ public class Lottos {
         final Map<Rank, Integer> resultMap = Rank.initResultMap();
         lottos.stream()
                 .map(winLotto::matchResult)
-                .forEach(result -> resultMap.replace(result, resultMap.get(result) + 1));
+                .forEach(result -> rankCountUp(resultMap, result));
         return new LottoResult(resultMap);
+    }
+
+    private Integer rankCountUp(Map<Rank, Integer> resultMap, Rank result) {
+        return resultMap.replace(result, resultMap.get(result) + 1);
     }
 
     public List<Lotto> getLottos() {
