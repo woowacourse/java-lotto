@@ -3,7 +3,6 @@ package domain;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.*;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -25,13 +24,5 @@ class LottoNumberTest {
 		assertThatThrownBy(() ->
 			LottoNumber.createByInput(lottoNumberValue))
 			.isInstanceOf(IllegalArgumentException.class);
-	}
-
-	@Test
-	@DisplayName("로또 넘버를 랜덤으로 발생시키는 경우")
-	void createRandomLottoNumber() {
-		LottoNumber lottoNumber = LottoNumber.createByRandom();
-
-		assertThat(lottoNumber).isNotNull();
 	}
 }

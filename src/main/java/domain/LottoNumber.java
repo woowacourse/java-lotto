@@ -1,7 +1,6 @@
 package domain;
 
 import java.util.Objects;
-import java.util.Random;
 
 public class LottoNumber {
 
@@ -29,11 +28,16 @@ public class LottoNumber {
 		return new LottoNumber(randomValue);
 	}
 
-	private void validateInRange(int value) {
-		if (value < MINIMUM_VALUE || value > MAXIMUM_VALUE) {
-			throw new IllegalArgumentException(ERROR_MESSAGE_NOT_IN_RANGE);
-		}
-	}
+    private void validateInRange(int value) {
+        if (value < MINIMUM_VALUE || value > MAXIMUM_VALUE) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_NOT_IN_RANGE);
+        }
+    }
+
+    @Override
+    public int compareTo(LottoNumber other) {
+        return this.value - other.value;
+    }
 
 	@Override
 	public boolean equals(Object o) {
