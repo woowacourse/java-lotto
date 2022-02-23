@@ -33,6 +33,32 @@ public class InputView {
     }
 }
 
+/*
+public enum Lotto_Ranking_Info {
+    FIRST_REWARD(6, 0, 2000000000),
+    SECOND_REWARD(5, 1, 30000000),
+    THIRD_REWARD(5, 0, 1500000),
+    FORTH_REWARD(4, 0, 50000),
+    FIFTH_REWARD(3, 0, 5000),
+    NO_REWARD(-1, 0, 0);
+
+    private final int matchedNumberCount;
+    private final boolean bonusNumberMatched;
+    private final int rank;
+
+    Lotto_Ranking_Info (int matchedNumberCount, boolean bonusNumberMatched, int prize) {
+        this.matchedNumberCount = matchedNumberCount;
+        this.bonusNumberMatched = bonusNumberMatched;
+        this.rank = prize;
+    }
+
+    public int convertToPrize(int matchedNumberCount, boolean bonusNumberMatched) {
+
+    }
+
+}
+*/
+
 
 //    구입금액을 입력해 주세요.
 //        14000
