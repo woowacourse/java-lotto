@@ -1,5 +1,6 @@
 import controller.LottoController;
 import dto.LottosDto;
+import dto.RankDto;
 import view.InputView;
 import view.OutputView;
 
@@ -17,6 +18,8 @@ public class Application {
         int bonusBall = InputView.inputBonusBall();
         lottoController.determineWinningNumber(winningNumber,bonusBall);
 
-        lottoController.calculateRank();
+        List<RankDto> rankDtos = lottoController.calculateRank();
+
+        OutputView.printRank(rankDtos);
     }
 }
