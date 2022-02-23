@@ -1,3 +1,5 @@
+package lotto.domain;
+
 public class Money {
 
     private static final int DIVIDED_STANDARD = 1000;

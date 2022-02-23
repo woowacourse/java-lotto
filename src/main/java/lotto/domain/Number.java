@@ -1,3 +1,5 @@
+package lotto.domain;
+
 import java.util.Objects;
 
 public class Number {

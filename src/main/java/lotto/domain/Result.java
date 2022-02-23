@@ -1,3 +1,5 @@
+package lotto.domain;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,7 +26,7 @@ public class Result {
     }
 
     public double getRateOfProfit(Money money) {
-        long total = 0l;
+        long total = 0L;
         for (Map.Entry<WinningPrice, Integer> entry : result.entrySet()) {
             total += (long)entry.getKey().getPrice() * entry.getValue();
         }
