@@ -35,10 +35,18 @@ public class InputValidationTest {
                 .hasMessageContaining("로또 번호는 6개의 번호를 입력해줘야 합니다.");
     }
 
+    @DisplayName("로또 번호가 숫자가 아닌경우 예외가 발생한다.")
+    @ParameterizedTest(name = "{index} {displayName} numbers={0}")
+    @ValueSource(strings = {"12, 안녕, 43, 12, 1, 3", "12, 4, 1, qwe, 4, 5"})
+    void checkNonNumbers_throwIllegalException(final String numbers) {
+        assertThatThrownBy(() -> InputValidation.validateWinningNumber(numbers))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("로또 번호는 숫자만 입력해줘야 합니다.");
+    }
+
     /**
      * + validateWinningNumber()
      * - checkNumberRange()
-     * - checkNumOfNumber()
      * - checkDuplicateNumber()
      * + validateBonusNumber()
      * - checkNumberRange()
