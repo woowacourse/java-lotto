@@ -8,6 +8,9 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.params.ParameterizedTest.ARGUMENTS_PLACEHOLDER;
 import static org.junit.jupiter.params.ParameterizedTest.DISPLAY_NAME_PLACEHOLDER;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -37,5 +40,23 @@ public class LottoNumberTest {
         LottoNumber cachedLottoNum = LottoNumber.of(10);
 
         assertThat(newLottoNum).isEqualTo(cachedLottoNum);
+    }
+
+    @Test
+    void compareTo_sortsByAscending() {
+        List<LottoNumber> lottoNumbers = createLottoNumbersOf(15, 35, 25, 5, 45);
+
+        List<Integer> sortedNums = lottoNumbers.stream()
+                .map(LottoNumber::getNumber)
+                .collect(Collectors.toList());
+
+        assertThat(sortedNums).isSorted();
+    }
+
+    private List<LottoNumber> createLottoNumbersOf(int... nums) {
+        return Arrays.stream(nums).boxed()
+                .map(LottoNumber::of)
+                .sorted()
+                .collect(Collectors.toList());
     }
 }
