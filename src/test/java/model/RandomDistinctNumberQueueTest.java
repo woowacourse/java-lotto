@@ -17,19 +17,17 @@ public class RandomDistinctNumberQueueTest {
     @ParameterizedTest
     @MethodSource("provideRangeAndSizeAndExpectedSet")
     @DisplayName("랜덤 값 생성하기")
-    void createRandomNumbers(int start, int end, int size, Set<Integer> expectedSet) {
-        NumberQueue randomNumberQueue = new RandomDistinctNumberQueue(start, end);
-        Set<Integer> numberSet = randomNumberQueue.get(size);
-
-        assertThat(numberSet).hasSize(size);
-        assertThat(numberSet).isEqualTo(expectedSet);
+    void createRandomNumbers(int start, int end, LottoNumbers expect) {
+        LottoNumbersGenerator generator = new RandomLottoNumbersGenerator(start, end);
+        LottoNumbers lottoNumbers = generator.createLottoNumbers();
+        assertThat(lottoNumbers).isEqualTo(expect);
     }
 
     private static Stream<Arguments> provideRangeAndSizeAndExpectedSet() {
         return Stream.of(
-            Arguments.of(1, 6, 6, Set.of(1, 2, 3, 4, 5, 6)),
-            Arguments.of(10, 12, 3, Set.of(10, 11, 12)),
-            Arguments.of(6, 10, 5, Set.of(6, 7, 8, 9, 10))
+            Arguments.of(1, 6, LottoNumbers.withSixNumbers(1, 2, 3, 4, 5, 6)),
+            Arguments.of(10, 15, LottoNumbers.withSixNumbers(10, 11, 12, 13, 14, 15)),
+            Arguments.of(6, 11, LottoNumbers.withSixNumbers(6, 7, 8, 9, 10, 11))
         );
     }
 }
