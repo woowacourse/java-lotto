@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class LottoTicketTest {
+class WinningResultTest {
 
 	@Test
 	@DisplayName("1등 당첨 결과 확인")
@@ -26,7 +26,7 @@ class LottoTicketTest {
 		LottoTicket lottoTicket = new LottoTicket(List.of(myLotto));
 
 		// when
-		WinningResult winningResult = lottoTicket.confirmWinningResult(winningNumbers);
+		WinningResult winningResult = WinningResult.createWinningResult(lottoTicket, winningNumbers);
 
 		// then
 		assertThat(winningResult.getWinningResult().get(LottoRank.FIRST)).isEqualTo(1);
@@ -47,7 +47,7 @@ class LottoTicketTest {
 		LottoTicket lottoTicket = new LottoTicket(List.of(myLotto));
 
 		// when
-		WinningResult winningResult = lottoTicket.confirmWinningResult(winningNumbers);
+		WinningResult winningResult = WinningResult.createWinningResult(lottoTicket, winningNumbers);
 
 		// then
 		assertThat(winningResult.getWinningResult().get(LottoRank.SECOND)).isEqualTo(1);
@@ -68,7 +68,7 @@ class LottoTicketTest {
 		LottoTicket lottoTicket = new LottoTicket(List.of(myLotto));
 
 		// when
-		WinningResult winningResult = lottoTicket.confirmWinningResult(winningNumbers);
+		WinningResult winningResult = WinningResult.createWinningResult(lottoTicket, winningNumbers);
 
 		// then
 		assertThat(winningResult.getWinningResult().get(LottoRank.THIRD)).isEqualTo(1);

@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoTicket {
@@ -7,17 +9,10 @@ public class LottoTicket {
 	private final List<Lotto> lottoTicket;
 
 	public LottoTicket(List<Lotto> lottoTicket) {
-		this.lottoTicket = lottoTicket;
+		this.lottoTicket = new ArrayList<>(lottoTicket);
 	}
 
-	public WinningResult confirmWinningResult(WinningNumbers winningNumbers) {
-		WinningResult winningResult = WinningResult.initializeWinningResult();
-		Lotto winningNumber = winningNumbers.getWinningNumbers();
-		Number bonusNumber = winningNumbers.getBonusNumber();
-		for (Lotto lotto : lottoTicket) {
-			LottoRank rank = lotto.confirmWinningResult(winningNumber, bonusNumber);
-			winningResult.addResult(rank);
-		}
-		return winningResult;
+	public List<Lotto> getLottoTicket() {
+		return Collections.unmodifiableList(lottoTicket);
 	}
 }
