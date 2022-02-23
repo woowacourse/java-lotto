@@ -29,8 +29,6 @@ public class PurchasedLotto {
         return finalResult;
     }
 
-
-
     public float calculateEarningRate() {
         long totalPrice = finalResult.totalPrize();
 

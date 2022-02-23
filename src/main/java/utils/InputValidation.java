@@ -32,9 +32,9 @@ public class InputValidation {
         return numbers;
     }
 
-    private static int checkNonInteger(String price, String message) {
+    private static int checkNonInteger(String number, String message) {
         try {
-            return Integer.parseInt(price);
+            return Integer.parseInt(number);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(message);
         }
@@ -76,7 +76,10 @@ public class InputValidation {
         if (uniqueNumber.size() != 6) {
             throw new IllegalArgumentException(ERROR_DUPLICATE_NUMBER);
         }
-
     }
 
+    public static void validateBonusNumber(String bonus) {
+        int bonusNumber = checkNonInteger(bonus, ERROR_BALL_NON_INTEGER);
+        checkNumberRange(bonusNumber);
+    }
 }

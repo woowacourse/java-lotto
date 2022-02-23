@@ -1,8 +1,12 @@
 package utils;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
@@ -62,12 +66,22 @@ public class InputValidationTest {
                 .hasMessageContaining("로또 번호는 중복되면 안 됩니다.");
     }
 
-    /**
-     * + validateWinningNumber()
-     * - checkDuplicateNumber()
-     * + validateBonusNumber()
-     * - checkNumberRange()
-     * - checkDuplicateNumber()
-     */
+    @DisplayName("보너스 번호가 숫자가 아닌 경우 예외가 발생한다.")
+    @ParameterizedTest(name = "{index} {displayName} bonus={0}")
+    @ValueSource(strings = {"보너스", "넘버"})
+    void checkBonusNonInteger_throwIllegalException(final String bonus) {
+        assertThatThrownBy(() -> InputValidation.validateBonusNumber(bonus))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("로또 번호는 숫자만 입력해줘야 합니다.");
+    }
+
+    @DisplayName("보너스 번호가 범위를 벗어난 경우 예외가 발생한다.")
+    @ParameterizedTest(name = "{index} {displayName} bonus={0}")
+    @ValueSource(strings = {"0", "-1", "46"})
+    void checkBonusOutRange_throwIllegalException(final String bonus) {
+        assertThatThrownBy(() -> InputValidation.validateBonusNumber(bonus))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("로또 번호는 1에서 45 사이의 값을 입력해줘야 합니다.");
+    }
 
 }
