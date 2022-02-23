@@ -24,15 +24,6 @@ public class LottoNumberValidatorTest {
                 .doesNotThrowAnyException();
     }
 
-    @ParameterizedTest
-    @DisplayName("로또 번호가 1 ~ 45 사이에 있지 않은 경우 테스트")
-    @ValueSource(ints = {0, 46})
-    void checkInvalidLottoNumberRangeTest(int invalidLottoNumber) {
-        assertThatThrownBy(() -> lottoNumberValidator.validate(invalidLottoNumber))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("당첨 번호는 1 ~ 45사이의 숫자만 가능합니다.");
-    }
-
     @Test
     @DisplayName("로또 번호 리스트가 1 ~ 45 사이에 있는 경우 테스트")
     void checkValidLottoNumbersRangeTest() {
@@ -46,13 +37,5 @@ public class LottoNumberValidatorTest {
         assertThatThrownBy(() -> lottoNumberValidator.validate(List.of(1, 2, 3, 0, 5, 46)))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("당첨 번호는 1 ~ 45사이의 숫자만 가능합니다.");
-    }
-
-    @Test
-    @DisplayName("중복된 당첨 번호 분리 실패")
-    void checkDuplicatedLottoNumbers() {
-        assertThatThrownBy(() -> lottoNumberValidator.validate(List.of(1, 2, 3, 3, 4, 5)))
-            .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("중복된 당첨 번호는 허용하지 않습니다.");
     }
 }

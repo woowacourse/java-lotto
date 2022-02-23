@@ -1,9 +1,18 @@
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import exception.DuplicatedLottoNumbersException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottoNumbersTest {
+
+    @Test
+    @DisplayName("중복된 로또 번호를 가질 수 없음")
+    void checkDuplicatedLottoNumbers() {
+        assertThatThrownBy(() -> LottoNumbers.withSixNumbers(1, 2, 3, 3, 4, 5))
+            .isInstanceOf(DuplicatedLottoNumbersException.class);
+    }
 
     @Test
     @DisplayName("일치하는 숫자 갯수 구하기 테스트")
