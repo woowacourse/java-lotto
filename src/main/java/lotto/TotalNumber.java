@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.Set;
+
 public class TotalNumber {
 
     private final WinningNumber winningNumber;
@@ -16,4 +18,11 @@ public class TotalNumber {
             throw new IllegalArgumentException();
         }
     }
+
+    public Set<LottoNumber> getWinningAndBonusNumber() {
+        Set<LottoNumber> totalNumbers = new java.util.HashSet<>(Set.copyOf(winningNumber.getNumbers()));
+        totalNumbers.add(bonusNumber);
+        return totalNumbers;
+    }
+
 }
