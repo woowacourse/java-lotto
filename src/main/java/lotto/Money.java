@@ -36,4 +36,8 @@ public class Money {
         }
         return new Money(amount);
     }
+
+    public double rate(int numerator) {
+        return (double) numerator / this.amount;
+    }
 }
