@@ -18,6 +18,6 @@ public class Amount {
     }
 
     public int calculate() {
-        return this.price / 1000;
+        return this.price / PRICE_CRITERION;
     }
 }
