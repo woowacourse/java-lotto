@@ -18,7 +18,8 @@ public class LottoController {
 
     public void start() {
         money = getMoney();
-        lottos=new Lottos(money);
+        lottos = new Lottos(money);
+        outputView.printPurchasedLotto(lottos);
     }
 
     private Money getMoney() {
