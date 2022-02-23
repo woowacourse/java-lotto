@@ -5,9 +5,11 @@ import java.util.List;
 
 public class Lottos {
     private List<Lotto> lottos;
+    private LottoResult result;
 
     public Lottos(Money money) {
         this.lottos = new ArrayList<>();
+        this.result = new LottoResult();
         purchaseLotto(money);
     }
 
@@ -24,4 +26,12 @@ public class Lottos {
     public int getLottosSize() {
         return lottos.size();
     }
+
+    public LottoResult getResult(WinningLotto winningLotto) {
+        for (Lotto lotto : lottos) {
+            result.add(winningLotto.findLottoRank(lotto.getPickedNumbers()));
+        }
+        return result;
+    }
+
 }
