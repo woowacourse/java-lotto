@@ -1,6 +1,5 @@
 package lotto.service;
 
-import lotto.domain.credit.Credit;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -8,9 +7,10 @@ import java.util.Map;
 
 import lotto.domain.ball.Ball;
 import lotto.domain.ball.Balls;
-import lotto.domain.ticket.generator.RandomTicketGenerator;
+import lotto.domain.credit.Credit;
 import lotto.domain.rank.Rank;
 import lotto.domain.ticket.Tickets;
+import lotto.domain.ticket.generator.RandomTicketGenerator;
 import lotto.dto.AnalysisDto;
 
 public class LottoService {
@@ -58,4 +58,5 @@ public class LottoService {
 
 		return (double) total / payment;
 	}
+
 }

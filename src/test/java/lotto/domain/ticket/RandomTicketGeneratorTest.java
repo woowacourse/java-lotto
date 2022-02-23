@@ -1,12 +1,13 @@
 package lotto.domain.ticket;
 
-import lotto.domain.ticket.generator.RandomTicketGenerator;
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.*;
+
+import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import lotto.domain.ticket.generator.RandomTicketGenerator;
 
 class RandomTicketGeneratorTest {
 
@@ -17,4 +18,5 @@ class RandomTicketGeneratorTest {
 
 		assertThat(numbers.size()).isEqualTo(6);
 	}
+
 }

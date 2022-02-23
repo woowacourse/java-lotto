@@ -46,4 +46,5 @@ public class Balls {
 			.map(Ball::getNumber)
 			.collect(Collectors.toUnmodifiableList());
 	}
+
 }

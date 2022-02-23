@@ -10,6 +10,7 @@ import lotto.domain.ticket.Tickets;
 import lotto.dto.AnalysisDto;
 
 public class OutputView {
+
 	private static final String COUNT_MESSAGE = "개를 구매했습니다.";
 	private static final String ANALYSIS_TITLE = "당첨 통계";
 	private static final String DIVIDING_LINE = "---------";
@@ -61,4 +62,5 @@ public class OutputView {
 		double rate = analysisDto.getRate();
 		System.out.printf(PROFIT_RATE_MESSAGE_FORMAT, rate);
 	}
+
 }

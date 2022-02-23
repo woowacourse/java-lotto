@@ -3,16 +3,17 @@ package lotto.domain.ticket;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.*;
 
-import lotto.domain.ball.Ball;
-import lotto.domain.ball.Balls;
-import lotto.domain.rank.Rank;
-import lotto.domain.ticket.generator.RandomTicketGenerator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import lotto.domain.ball.Ball;
+import lotto.domain.ball.Balls;
+import lotto.domain.rank.Rank;
+import lotto.domain.ticket.generator.RandomTicketGenerator;
 
 class TicketsTest {
 
@@ -44,4 +45,5 @@ class TicketsTest {
 
 		assertThat(actual).isEqualTo(expected);
 	}
+
 }

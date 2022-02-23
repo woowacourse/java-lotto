@@ -3,6 +3,7 @@ package lotto.domain.ball;
 import java.util.Objects;
 
 public class Ball {
+
 	private final int number;
 
 	public Ball(int number) {
@@ -18,12 +19,14 @@ public class Ball {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o)
+	public boolean equals(Object object) {
+		if (this == object) {
 			return true;
-		if (o == null || getClass() != o.getClass())
+		}
+		if (object == null || getClass() != object.getClass()) {
 			return false;
-		Ball ball = (Ball)o;
+		}
+		Ball ball = (Ball)object;
 		return number == ball.number;
 	}
 
@@ -35,4 +38,5 @@ public class Ball {
 	public int getNumber() {
 		return this.number;
 	}
+
 }

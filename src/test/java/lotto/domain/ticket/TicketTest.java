@@ -3,14 +3,15 @@ package lotto.domain.ticket;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.*;
 
-import lotto.domain.ball.Ball;
-import lotto.domain.ball.Balls;
-import lotto.domain.rank.Rank;
 import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import lotto.domain.ball.Ball;
+import lotto.domain.ball.Balls;
+import lotto.domain.rank.Rank;
 
 class TicketTest {
 
@@ -37,4 +38,5 @@ class TicketTest {
 
 		assertThat(ticket.getRank(answer, new Ball(7))).isEqualTo(Rank.FIRST_GRADE);
 	}
+
 }

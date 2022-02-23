@@ -5,6 +5,7 @@ import java.util.Map;
 import lotto.domain.rank.Rank;
 
 public class AnalysisDto {
+
 	private final Map<Rank, Integer> rankCounts;
 	private final double rate;
 
@@ -20,4 +21,5 @@ public class AnalysisDto {
 	public double getRate() {
 		return rate;
 	}
+
 }

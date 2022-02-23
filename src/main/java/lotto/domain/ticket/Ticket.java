@@ -1,12 +1,14 @@
 package lotto.domain.ticket;
 
+import java.util.List;
+
 import lotto.domain.ball.Ball;
 import lotto.domain.ball.Balls;
 import lotto.domain.rank.Rank;
 import lotto.domain.ticket.generator.TicketGenerator;
-import java.util.List;
 
 public class Ticket {
+
 	private final Balls balls;
 
 	public Ticket(TicketGenerator ticketGenerator) {
@@ -23,4 +25,5 @@ public class Ticket {
 	public List<Integer> getBallNumbers() {
 		return balls.getBallNumbers();
 	}
+
 }

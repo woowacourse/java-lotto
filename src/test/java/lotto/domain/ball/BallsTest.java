@@ -2,8 +2,6 @@ package lotto.domain.ball;
 
 import static org.assertj.core.api.Assertions.*;
 
-import lotto.domain.ball.Ball;
-import lotto.domain.ball.Balls;
 import java.util.Arrays;
 import java.util.List;
 
@@ -52,4 +50,5 @@ class BallsTest {
 
 		assertThat(balls.countMatches(answer)).isEqualTo(4);
 	}
+
 }

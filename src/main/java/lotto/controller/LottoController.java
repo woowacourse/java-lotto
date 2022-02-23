@@ -9,6 +9,7 @@ import lotto.view.input.InputView;
 import lotto.view.output.OutputView;
 
 public class LottoController {
+
 	private final LottoService lottoService = new LottoService();
 
 	public void run() {
@@ -32,4 +33,5 @@ public class LottoController {
 		AnalysisDto analysisDto = lottoService.generateAnalysis(answer, number);
 		OutputView.printAnalysis(analysisDto);
 	}
+
 }

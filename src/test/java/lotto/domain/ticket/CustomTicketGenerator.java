@@ -1,8 +1,9 @@
 package lotto.domain.ticket;
 
-import lotto.domain.ticket.generator.TicketGenerator;
 import java.util.Iterator;
 import java.util.List;
+
+import lotto.domain.ticket.generator.TicketGenerator;
 
 class CustomTicketGenerator implements TicketGenerator {
 
@@ -16,4 +17,5 @@ class CustomTicketGenerator implements TicketGenerator {
 	public List<Integer> generate() {
 		return this.numbers.next();
 	}
+
 }

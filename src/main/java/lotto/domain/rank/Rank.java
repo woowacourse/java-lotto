@@ -3,6 +3,7 @@ package lotto.domain.rank;
 import java.util.Arrays;
 
 public enum Rank {
+
 	FIFTH_GRADE(3, false, 5_000L),
 	FOURTH_GRADE(4, false, 50_000L),
 	THIRD_GRADE(5, false, 1_500_000L),
@@ -23,7 +24,7 @@ public enum Rank {
 		return Arrays.stream(Rank.values())
 			.filter(rank -> rank.matches(matchCount, bonusBallMatched))
 			.findFirst()
-			.orElseGet(() -> null);
+			.orElseGet(null);
 	}
 
 	private boolean matches(int matchCount, boolean bonusBallMatched) {
@@ -41,4 +42,5 @@ public enum Rank {
 	public int getMatchCount() {
 		return matchCount;
 	}
+
 }

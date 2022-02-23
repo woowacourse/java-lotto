@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class RandomTicketGenerator implements TicketGenerator {
+
 	private static final List<Integer> numbers = IntStream.range(1, 46)
 		.boxed()
 		.collect(Collectors.toList());
@@ -17,4 +18,5 @@ public class RandomTicketGenerator implements TicketGenerator {
 		Collections.sort(lottoNumbers);
 		return lottoNumbers;
 	}
+
 }

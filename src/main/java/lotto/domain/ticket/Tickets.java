@@ -1,13 +1,14 @@
 package lotto.domain.ticket;
 
-import lotto.domain.ball.Ball;
-import lotto.domain.ball.Balls;
-import lotto.domain.rank.Rank;
-import lotto.domain.ticket.generator.TicketGenerator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+
+import lotto.domain.ball.Ball;
+import lotto.domain.ball.Balls;
+import lotto.domain.rank.Rank;
+import lotto.domain.ticket.generator.TicketGenerator;
 
 public class Tickets {
 
@@ -41,4 +42,5 @@ public class Tickets {
 	public List<Ticket> getTickets() {
 		return new ArrayList<>(tickets);
 	}
+
 }
