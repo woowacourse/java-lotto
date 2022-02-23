@@ -14,12 +14,12 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-
-    public void generateLottos(int count) {
+    public static Lottos generateLottos(int count) {
+        List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             lottos.add(Lotto.generateNumber());
         }
-        new Lottos(lottos);
+        return new Lottos(lottos);
     }
 
     public int size() {

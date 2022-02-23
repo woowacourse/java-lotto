@@ -1,20 +1,17 @@
-import domain.Lottos;
-import domain.Money;
-import domain.Statistic;
-import domain.WinningNumber;
+import domain.*;
 import view.InputView;
 import view.OutputView;
 
 public class LottoMachine {
 
     private Money money;
-    private Lottos lottos = new Lottos();
+    private Lottos lottos;
     private WinningNumber winningNumber;
 
     public void start() {
 
         int lottoCount = inputMoney();
-        lottos.generateLottos(lottoCount);
+        lottos = Lottos.generateLottos(lottoCount);
         OutputView.printLottos(lottos);
         int bonusBall = inputWinningNumber();
         getStatistics(bonusBall);
