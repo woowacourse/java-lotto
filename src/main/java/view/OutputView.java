@@ -39,7 +39,7 @@ public class OutputView {
 			.map(String::valueOf)
 			.collect(Collectors.toUnmodifiableList());
 
-		return START_SIGN + String.join(",",ticketBalls) + END_SIGN;
+		return START_SIGN + String.join(",", ticketBalls) + END_SIGN;
 	}
 
 	public static void printAnalysis(AnalysisDto analysisDto) {
@@ -57,7 +57,6 @@ public class OutputView {
 			message += String.format("(%d원) - %d개", rank.getPrize(), count);
 			System.out.println(message);
 		}
-
 
 		double rate = analysisDto.getRate();
 		System.out.printf(PROFIT_RATE_MESSAGE_FORMAT, rate);

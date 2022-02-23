@@ -3,7 +3,7 @@ package domain;
 import java.util.Iterator;
 import java.util.List;
 
-public class CustomTicketGenerator implements TicketGenerator {
+class CustomTicketGenerator implements TicketGenerator {
 
 	private Iterator<List<Integer>> numbers;
 
@@ -15,5 +15,4 @@ public class CustomTicketGenerator implements TicketGenerator {
 	public List<Integer> generate() {
 		return this.numbers.next();
 	}
-
 }

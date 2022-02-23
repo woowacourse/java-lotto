@@ -12,9 +12,8 @@ class RandomTicketGeneratorTest {
 	@DisplayName("렌덤 로또 번호 생성 테스트")
 	@Test
 	void generate() {
-		List<Integer> numbers =  (new RandomTicketGenerator()).generate();
+		List<Integer> numbers = (new RandomTicketGenerator()).generate();
 
 		assertThat(numbers.size()).isEqualTo(6);
 	}
-
 }

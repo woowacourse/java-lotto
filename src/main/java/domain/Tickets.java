@@ -2,6 +2,7 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Tickets {
@@ -25,7 +26,7 @@ public class Tickets {
 	public List<Rank> getRanks(Balls answer, Ball bonusBall) {
 		return tickets.stream()
 			.map(ticket -> ticket.getRank(answer, bonusBall))
-			.filter(rank -> rank != null)
+			.filter(Objects::nonNull)
 			.collect(Collectors.toUnmodifiableList());
 	}
 

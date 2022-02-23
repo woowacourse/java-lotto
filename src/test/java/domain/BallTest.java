@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class BallTest {
+class BallTest {
 
 	@DisplayName("볼은 1~45 범위의 숫자여야 한다.")
 	@ParameterizedTest
@@ -32,5 +32,4 @@ public class BallTest {
 		Ball ball2 = new Ball(40);
 		assertThat(ball.equals(ball2)).isTrue();
 	}
-
 }

@@ -10,7 +10,7 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class TicketsTest {
+class TicketsTest {
 
 	private final CustomTicketGenerator customTicketGenerator = new CustomTicketGenerator();
 

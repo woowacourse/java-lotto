@@ -9,7 +9,6 @@ public enum Rank {
 	SECOND_GRADE(5, true, 30_000_000L),
 	FIRST_GRADE(6, false, 3_000_000_000L);
 
-
 	private final int matchCount;
 	private final boolean bonusBallMatched;
 	private final Long prize;

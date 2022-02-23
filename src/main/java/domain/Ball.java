@@ -35,5 +35,4 @@ public class Ball {
 	public int getNumber() {
 		return this.number;
 	}
-
 }
