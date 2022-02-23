@@ -1,20 +1,20 @@
 package lotto.domain;
 
 public enum Rank {
-    RANK_1(6, 0, 2000000000),
-    RANK_2(5, 1, 30000000),
-    RANK_3(5, 0, 1500000),
-    RANK_4(4, 0, 50000),
-    RANK_5(3, 0, 5000);
+    RANK_1(6, false, 2000000000),
+    RANK_2(5, true, 30000000),
+    RANK_3(5, false, 1500000),
+    RANK_4(4, false, 50000),
+    RANK_5(3, false, 5000);
 
     private final int winningNumbersMatchCount;
-    private final int bonusNumberMatchCount;
+    private final boolean bonusNumberMatch;
     private final long prize;
     private int count;
 
-    Rank(int winningNumbersMatchCount, int bonusNumberMatchCount, long prize) {
+    Rank(int winningNumbersMatchCount, boolean bonusNumberMatch, long prize) {
         this.winningNumbersMatchCount = winningNumbersMatchCount;
-        this.bonusNumberMatchCount = bonusNumberMatchCount;
+        this.bonusNumberMatch = bonusNumberMatch;
         this.prize = prize;
         this.count = 0;
     }
