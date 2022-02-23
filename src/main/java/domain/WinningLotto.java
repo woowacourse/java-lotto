@@ -21,7 +21,7 @@ public class WinningLotto {
 
     public Rank getRankByLotto(Lotto otherLotto) {
         int sameNumberCount = lotto.getSameNumberCount(otherLotto);
-        
+
         if (sameNumberCount == 5 && otherLotto.containsLottoNumber(bonusNumber)) {
             return Rank.SECOND;
         }
@@ -31,5 +31,13 @@ public class WinningLotto {
         }
 
         return Rank.of(sameNumberCount);
+    }
+
+    @Override
+    public String toString() {
+        return "WinningLotto{" +
+                "lotto=" + lotto +
+                ", bonusNumber=" + bonusNumber +
+                '}';
     }
 }
