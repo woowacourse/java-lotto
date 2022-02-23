@@ -3,17 +3,17 @@ package model;
 import java.util.List;
 
 public class LottoMachine {
-    private final LottoRankJudge lottoRankJudge;
+    private final WinningLottoNumbers winningLottoNumbers;
 
-    public LottoMachine(LottoRankJudge lottoRankJudge) {
-        this.lottoRankJudge = lottoRankJudge;
+    public LottoMachine(WinningLottoNumbers winningLottoNumbers) {
+        this.winningLottoNumbers = winningLottoNumbers;
     }
 
     public LottoResult summarize(List<LottoNumbers> lottoNumbersList) {
         LottoResult result = new LottoResult();
 
         for (LottoNumbers lottoNumbers : lottoNumbersList) {
-            LottoRank rank = lottoRankJudge.judge(lottoNumbers);
+            LottoRank rank = winningLottoNumbers.judge(lottoNumbers);
             result.add(rank);
         }
 

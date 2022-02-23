@@ -13,4 +13,18 @@ public class WinningLottoNumbers {
         this.lottoNumbers = lottoNumbers;
         this.bonusNumber = bonusNumber;
     }
+
+    public LottoRank judge(LottoNumbers lottoNumbers) {
+        int count = getMatchedCountAboutWinningNumbers(lottoNumbers);
+        boolean bonusMatch = isBonusMatch(lottoNumbers);
+        return LottoRank.of(count, bonusMatch);
+    }
+
+    private int getMatchedCountAboutWinningNumbers(LottoNumbers lottoNumbers) {
+        return this.lottoNumbers.getMatchedNumberCountWith(lottoNumbers);
+    }
+
+    private boolean isBonusMatch(LottoNumbers lottoNumbers) {
+        return lottoNumbers.contains(bonusNumber);
+    }
 }
