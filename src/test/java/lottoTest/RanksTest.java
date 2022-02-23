@@ -24,12 +24,4 @@ class RanksTest {
         assertThat(statistics.get(Rank.MATCH_THREE_NUMBERS)).isEqualTo(0);
         assertThat(statistics.get(Rank.MATCH_ZERO_NUMBERS)).isEqualTo(0);
     }
-
-    @Test
-    void 당첨_수익률_계산_기능_테스트() {
-        List<Rank> result = List.of(Rank.MATCH_THREE_NUMBERS, Rank.MATCH_FOUR_NUMBERS);
-        Ranks ranks = new Ranks(result);
-
-        assertThat(ranks.getLottoYield(14000)).isEqualTo(Math.round((55000 / (double) 14000) * 100) / 100.0);
-    }
 }
