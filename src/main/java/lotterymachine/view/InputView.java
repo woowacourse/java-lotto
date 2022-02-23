@@ -36,6 +36,23 @@ public class InputView {
         }
     }
 
+    public static int getBonusNumber(List<Integer> numbers) {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        try{
+            int bonusNumber = toInt(scanner.nextLine());
+            validateBonusNumber(numbers, bonusNumber);
+            return bonusNumber;
+        }catch (NumberFormatException numberFormatException) {
+            return getBonusNumber(numbers);
+        }
+    }
+
+    private static void validateBonusNumber(List<Integer> numbers, int bonusNumber) {
+        if (numbers.contains(bonusNumber)) {
+            throw new RuntimeException(DUPLICATE_BONUS_NUMBER.getMessage());
+        }
+    }
+
     private static int toInt(String input) {
         try {
             return Integer.parseInt(input);
