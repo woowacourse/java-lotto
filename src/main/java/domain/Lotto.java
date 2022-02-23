@@ -41,4 +41,8 @@ public class Lotto {
     public double getYield(WinningNumbers winningNumbers) {
         return tickets.getYield(amount, winningNumbers);
     }
+
+    public Tickets getTickets() {
+        return tickets;
+    }
 }
