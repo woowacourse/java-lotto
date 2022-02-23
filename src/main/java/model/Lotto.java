@@ -8,4 +8,8 @@ public class Lotto {
     public Lotto() {
         this.numbers = RandomLottoNumbersGenerator.pickSixNumbers();
     }
+
+    public LottoDTO getLottoDTO(){
+        return new LottoDTO(numbers);
+    }
 }

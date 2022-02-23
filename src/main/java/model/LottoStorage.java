@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoStorage {
     private List<Lotto> lottoStorage;
@@ -18,5 +19,11 @@ public class LottoStorage {
             lottoCount.makeLotto();
         }
         return lottos;
+    }
+
+    public List<LottoDTO> getLottoStorageDTO() {
+        List<LottoDTO> lottoDTOS = new ArrayList<>();
+        lottoStorage.forEach(lotto -> lottoDTOS.add(lotto.getLottoDTO()));
+        return lottoDTOS;
     }
 }
