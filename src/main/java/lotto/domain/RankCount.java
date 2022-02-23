@@ -8,17 +8,17 @@ public class RankCount {
 
     private final Map<Rank, Integer> rankCount;
 
-    public RankCount(Tickets tickets, WinningNumbers winningNumbers, BonusNumber bonusNumber) {
+    public RankCount(Lottos lottos, WinningNumbers winningNumbers, BonusNumber bonusNumber) {
         Map<Rank, Integer> rankCount = new HashMap<>();
         Arrays.stream(Rank.values())
                 .forEach(rank -> rankCount.put(rank, 0));
         this.rankCount = rankCount;
-        parseRank(tickets, winningNumbers, bonusNumber);
+        parseRank(lottos, winningNumbers, bonusNumber);
     }
 
-    private void parseRank(Tickets tickets, WinningNumbers winningNumbers, BonusNumber bonusNumber) {
-        for (Ticket ticket : tickets.getTickets()) {
-            increaseCount(ticket.getRank(winningNumbers, bonusNumber));
+    private void parseRank(Lottos lottos, WinningNumbers winningNumbers, BonusNumber bonusNumber) {
+        for (Lotto lotto : lottos.getTickets()) {
+            increaseCount(lotto.getRank(winningNumbers, bonusNumber));
         }
     }
 

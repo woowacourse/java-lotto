@@ -4,7 +4,7 @@ import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class TicketTest {
+public class LottoTest {
 
     @Test
     void getRank() {
@@ -22,7 +22,7 @@ public class TicketTest {
                 LottoNumber.NUMBER_45);
         WinningNumbers winningNumbersInstance = new WinningNumbers("1,2,3,4,5,45");
         BonusNumber bonusNumber = new BonusNumber("6", winningNumbers);
-        Ticket ticket = new Ticket(lottoTicket);
-        Assertions.assertThat(ticket.getRank(winningNumbersInstance, bonusNumber)).isEqualTo(Rank.RANK_2);
+        Lotto lotto = new Lotto(lottoTicket);
+        Assertions.assertThat(lotto.getRank(winningNumbersInstance, bonusNumber)).isEqualTo(Rank.RANK_2);
     }
 }

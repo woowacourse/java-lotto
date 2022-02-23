@@ -1,23 +1,21 @@
 package lotto.domain;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
-public class Ticket {
+public class Lotto {
 
-    private final List<LottoNumber> ticket;
+    private final List<LottoNumber> lotto;
 
-    public Ticket(List<LottoNumber> ticket) {
-        this.ticket = ticket;
+    public Lotto(List<LottoNumber> lotto) {
+        this.lotto = lotto;
     }
 
     private int getWinningNumbersMatchCount(WinningNumbers winningNumbers) {
-        return winningNumbers.getMatchCount(ticket);
+        return winningNumbers.getMatchCount(lotto);
     }
 
     private boolean isBonusNumberMatch(BonusNumber bonusNumber) {
-        return bonusNumber.isMatch(ticket);
+        return bonusNumber.isMatch(lotto);
     }
 
     public Rank getRank(WinningNumbers winningNumbers, BonusNumber bonusNumber) {
