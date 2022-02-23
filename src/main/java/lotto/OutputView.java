@@ -17,10 +17,40 @@ public class OutputView {
     public static void printRanks(List<Rank> ranks) {
         System.out.println("당첨 통계");
         System.out.println("---------");
+
+        for (Rank rank : orderedRanks()) {
+            printRank(ranks, rank);
+        }
+    }
+
+    private static void printRank(List<Rank> ranks, Rank rank) {
+        if (rank == Rank.SECOND) {
+            printSecondRank(ranks, rank);
+            return;
+        }
+        printOtherRank(ranks, rank);
     }
 
     public static void printRate(Rate rate) {
         System.out.println(MessageFormat.format("총 수익률은 {0}입니다.", rate.getRate().toString()));
+    }
+
+    private static void printSecondRank(List<Rank> ranks, Rank rank) {
+        int matchCount = rank.getMatchCount();
+        long reward = rank.getReward().getMoney();
+        int rewardCount = findRewardCount(rank, ranks);
+        System.out.printf("%d개 일치, 보너스 볼 일치(%d원) - %d개%n", matchCount, reward, rewardCount);
+    }
+
+    private static void printOtherRank(List<Rank> ranks, Rank rank) {
+        int matchCount = rank.getMatchCount();
+        long reward = rank.getReward().getMoney();
+        int rewardCount = findRewardCount(rank, ranks);
+        System.out.printf("%d개 일치 (%d원)- %d개%n", matchCount, reward, rewardCount);
+    }
+
+    private static List<Rank> orderedRanks() {
+        return List.of(Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST);
     }
 
     private static void printLottosSize(List<Lotto> lottos) {
@@ -40,5 +70,9 @@ public class OutputView {
         return numbers.stream()
             .map(number -> String.valueOf(number.getNumber()))
             .collect(Collectors.joining(DELIMITER));
+    }
+
+    private static int findRewardCount(Rank rank, List<Rank> ranks) {
+        return rank.findRewardCount(ranks);
     }
 }

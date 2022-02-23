@@ -28,6 +28,10 @@ public class Money {
         return new Rate(calculateRate(money));
     }
 
+    public long getMoney() {
+        return money;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

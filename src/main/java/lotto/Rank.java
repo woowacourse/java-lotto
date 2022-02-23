@@ -62,4 +62,22 @@ public enum Rank {
     private static boolean isNotSecond(Rank rank) {
         return rank != Rank.SECOND;
     }
+
+    public int findRewardCount(List<Rank> ranks) {
+        int count = 0;
+        for (Rank rank : ranks) {
+            if (rank == this) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public int getMatchCount() {
+        return this.matchCount;
+    }
+
+    public Money getReward() {
+        return this.reward;
+    }
 }
