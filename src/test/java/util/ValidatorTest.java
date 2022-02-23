@@ -39,4 +39,12 @@ public class ValidatorTest {
             Validator.validateWinningNumberInput(winningNumbers);
         });
     }
+
+    @Test
+    public void validateIntegerTest() {
+        String input = "a";
+        assertThatThrownBy(() -> {
+            Validator.validateInteger(input);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
 }
