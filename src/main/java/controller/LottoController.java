@@ -5,6 +5,7 @@ import java.util.List;
 import model.LottoTicket;
 import model.LottoTicketFactory;
 import model.Money;
+import model.WinningNumbers;
 import view.InputView;
 import view.OutputView;
 
@@ -15,6 +16,8 @@ public class LottoController {
 
         List<LottoTicket> lottoTickets = purchaseLottoTickets(inputMoney);
         OutputView.printPurchasedTickets(lottoTickets);
+
+        WinningNumbers winningNumbers = inputWinningNumbers();
     }
 
     private Money inputMoney() {
@@ -23,6 +26,15 @@ public class LottoController {
         } catch (IOException | IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
             return inputMoney();
+        }
+    }
+
+    private WinningNumbers inputWinningNumbers() {
+        try {
+            return WinningNumbers.of(InputView.inputWinningNumbers(), InputView.inputBonusBall());
+        } catch (IOException | IllegalArgumentException e) {
+            OutputView.printErrorMessage(e.getMessage());
+            return inputWinningNumbers();
         }
     }
 
