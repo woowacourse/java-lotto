@@ -15,7 +15,7 @@ public class LottoNumbersTest {
     void createLotto_makeRightLotto() {
         Integer[] numbersArray = {1, 2, 3, 4, 5, 6};
         List<Integer> numbers = Arrays.asList(numbersArray);
-        LottoNumbers lotto = new LottoNumbers(numbers);
+        Lotto lotto = new Lotto(numbers);
 
         assertThat(lotto.getLottoNumbers().size()).isEqualTo(6);
     }
