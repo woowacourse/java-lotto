@@ -6,13 +6,27 @@ public class Amount {
 
     private final int price;
 
-    public Amount(int price) {
+    private Amount(int price) {
         validateCriterion(price);
         this.price = price;
     }
 
     private void validateCriterion(int price) {
         if (price < PRICE_CRITERION) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public static Amount create(String value) {
+        int price = translateInteger(value);
+
+        return new Amount(price);
+    }
+
+    private static int translateInteger(String value) {
+        try {
+            return Integer.parseInt(value);
+        } catch(NumberFormatException e) {
             throw new IllegalArgumentException();
         }
     }

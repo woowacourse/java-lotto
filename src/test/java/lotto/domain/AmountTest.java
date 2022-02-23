@@ -12,7 +12,7 @@ public class AmountTest {
     @Test
     void 로또_티켓_정상_발급() {
         // given
-        Amount amount = new Amount(14000);
+        Amount amount = Amount.create("14000");
 
         // when
         int count = amount.calculate();
@@ -25,7 +25,7 @@ public class AmountTest {
     @Test
     void 로또_티켓_금액_부족() {
         // given & when & then
-        assertThatThrownBy(() -> new Amount(500))
+        assertThatThrownBy(() -> Amount.create("500"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -33,7 +33,7 @@ public class AmountTest {
     @Test
     void 가능한_금액_만큼_반환() {
         // given
-        Amount amount = new Amount(14500);
+        Amount amount = Amount.create("14500");
 
         // when
         int count = amount.calculate();
@@ -46,7 +46,7 @@ public class AmountTest {
     @Test
     void 음수인경우_테스트() {
         // given & when & then
-        assertThatThrownBy(() -> new Amount(-1))
+        assertThatThrownBy(() -> Amount.create("-1"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
