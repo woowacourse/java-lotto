@@ -1,7 +1,7 @@
 package domain;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class PrizeResult {
 
@@ -27,6 +27,16 @@ public class PrizeResult {
             totalPrice += winnerPrice.getPrize() * prizeResult.get(winnerPrice);
         }
         return totalPrice;
+    }
+
+    public Map<WinnerPrice, Integer> getPrizeResult() {
+        return Collections.unmodifiableMap(prizeResult);
+    }
+
+    public List<WinnerPrice> validWinnerPrices() {
+        return prizeResult.keySet().stream()
+                .filter(winnerPrice -> winnerPrice != WinnerPrice.FAIL)
+                .collect(Collectors.toList());
     }
 
 }

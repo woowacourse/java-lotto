@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 public enum WinnerPrice {
 
     FIRST(2000000000, 6),
-    SECOND(30000000, 100),
+    SECOND(30000000, -1),
     THIRD(1500000, 5),
     FOURTH(50000, 4),
     FIFTH(5000, 3),
@@ -38,4 +38,7 @@ public enum WinnerPrice {
         return prize;
     }
 
+    public int getMatched() {
+        return matched;
+    }
 }
