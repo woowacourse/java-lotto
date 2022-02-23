@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Lottery {
@@ -10,6 +11,7 @@ public class Lottery {
 		validateNumbers(numbers);
 		this.numbers = numbers;
 	}
+
 
 	private void validateNumbers(List<Integer> numbers) {
 		validateSize(numbers.size());
@@ -31,5 +33,15 @@ public class Lottery {
 		if(1 > numbers || numbers > 45) {
 			throw new IllegalArgumentException("로또의 각 번호는 1~45 사이여야 합니다");
 		}
+	}
+
+	public int countSameNumber(final Lottery lottery) {
+		final List<Integer> differences = new ArrayList<>(this.numbers);
+		differences.removeAll(lottery.numbers);
+		return 6 - differences.size();
+	}
+
+	public boolean contains(final int number) {
+		return numbers.contains(number);
 	}
 }

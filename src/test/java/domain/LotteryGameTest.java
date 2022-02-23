@@ -50,7 +50,4 @@ public class LotteryGameTest {
 				.hasMessageContaining("로또의 각 번호는 1~45 사이여야 합니다");
 		}
 	}
-
-
-
 }
