@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoNumbersGenerator {
+public class RandomLottoNumberGenerator implements LottoNumberGenerator {
 
     private static final int MINIMUM_VALUE = 1;
     private static final int MAXIMUM_VALUE = 45;
@@ -21,7 +21,8 @@ public class LottoNumbersGenerator {
             .collect(Collectors.toList());
     }
 
-    public static List<LottoNumber> generate() {
+    @Override
+    public List<LottoNumber> generate() {
         Collections.shuffle(lottoNumbers);
 
         final List<LottoNumber> pickedNumbers = new ArrayList<>();
