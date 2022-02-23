@@ -13,7 +13,11 @@ public class InputView {
     }
 
     public static List<Number> inputNumbers() {
+        String input = SCANNER.nextLine();
         return Collections.emptyList();
     }
 
+    public static Number inputNumber() {
+        return new Number(SCANNER.nextInt());
+    }
 }

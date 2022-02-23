@@ -10,5 +10,6 @@ public class LottoController {
         Lottos lottos = new Lottos(store.buyLottos());
 
         List<Number> winnerNumbers = InputView.inputNumbers();
+        Number bonusNumber = InputView.inputNumber();
     }
 }
