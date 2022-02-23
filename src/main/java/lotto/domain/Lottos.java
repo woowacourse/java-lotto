@@ -13,7 +13,7 @@ public class Lottos {
 
     private void purchaseLotto(Money money) {
         for (int i = 0; i < getLottoCount(money); i++) {
-            lottos.add(new Lotto());
+            lottos.add(new Lotto(new PickedNumbers()));
         }
     }
 
