@@ -24,8 +24,8 @@ public class LottoNumbersGeneratorTest {
         protected LottoNumbers createLottoNumbers() {
             Set<Integer> lottoNumbers = numbers[index++];
             Iterator<Integer> iterator = lottoNumbers.iterator();
-            return LottoNumbers.withSixNumbers(iterator.next(), iterator.next(), iterator.next(),
-                iterator.next(), iterator.next(), iterator.next());
+            return new LottoNumbers(List.of(iterator.next(), iterator.next(), iterator.next(), iterator.next(),
+                    iterator.next(), iterator.next()));
         }
     }
 
@@ -37,9 +37,9 @@ public class LottoNumbersGeneratorTest {
         List<LottoNumbers> lottoNumbersList = lottoNumbersGenerator.generate(3);
         assertThat(lottoNumbersList).hasSize(3);
         assertThat(lottoNumbersList).contains(
-                LottoNumbers.withSixNumbers(1,2,3,4,5,6),
-                LottoNumbers.withSixNumbers(7,8,9,10,11,12),
-                LottoNumbers.withSixNumbers(13,14,15,16,17,18)
+                new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)),
+                new LottoNumbers(List.of(7, 8, 9, 10, 11, 12)),
+                new LottoNumbers(List.of(13, 14, 15, 16, 17, 18))
         );
     }
 }

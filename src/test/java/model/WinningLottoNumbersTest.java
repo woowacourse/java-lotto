@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import exception.DuplicatedLottoNumbersException;
+import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -19,7 +20,7 @@ public class WinningLottoNumbersTest {
 
     @BeforeEach
     void setUp() {
-        winningLottoNumbers = new WinningLottoNumbers(LottoNumbers.withSixNumbers(1, 2, 3, 4, 5, 6),
+        winningLottoNumbers = new WinningLottoNumbers(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)),
             new LottoNumber(7));
     }
 
@@ -27,7 +28,7 @@ public class WinningLottoNumbersTest {
     @Test
     @DisplayName("당첨번호와 보너스 번호 정상적으로 생성")
     void createValidWinningLottoNumbers() {
-        LottoNumbers lottoNumbers = LottoNumbers.withSixNumbers(1, 2, 3, 4, 5, 6);
+        LottoNumbers lottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
         LottoNumber bonusNumber = new LottoNumber(7);
         assertThatCode(() -> new WinningLottoNumbers(lottoNumbers, bonusNumber))
             .doesNotThrowAnyException();
@@ -36,7 +37,7 @@ public class WinningLottoNumbersTest {
     @Test
     @DisplayName("당첨번호와 보너스 번호 중복 생성 예외 발생")
     void duplicatedWinningLottoNumbers() {
-        LottoNumbers lottoNumbers = LottoNumbers.withSixNumbers(1, 2, 3, 4, 5, 6);
+        LottoNumbers lottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
         LottoNumber bonusNumber = new LottoNumber(1);
         assertThatThrownBy(() -> new WinningLottoNumbers(lottoNumbers, bonusNumber))
             .isInstanceOf(DuplicatedLottoNumbersException.class);
@@ -45,7 +46,7 @@ public class WinningLottoNumbersTest {
     @Test
     @DisplayName("1등 판독 테스트")
     void firstPrize() {
-        LottoNumbers lottoNumbers = LottoNumbers.withSixNumbers(1, 2, 3, 4, 5, 6);
+        LottoNumbers lottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
         LottoRank rank = winningLottoNumbers.judge(lottoNumbers);
         assertThat(rank).isEqualTo(LottoRank.FIRST);
     }
@@ -53,7 +54,7 @@ public class WinningLottoNumbersTest {
     @Test
     @DisplayName("2등 판독 테스트")
     void secondPrize() {
-        LottoNumbers lottoNumbers = LottoNumbers.withSixNumbers(1, 2, 3, 4, 5, 7);
+        LottoNumbers lottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 7));
         LottoRank rank = winningLottoNumbers.judge(lottoNumbers);
         assertThat(rank).isEqualTo(LottoRank.SECOND);
     }
@@ -61,7 +62,7 @@ public class WinningLottoNumbersTest {
     @Test
     @DisplayName("3등 판독 테스트")
     void thirdPrize() {
-        LottoNumbers lottoNumbers = LottoNumbers.withSixNumbers(1, 2, 3, 4, 5, 8);
+        LottoNumbers lottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 8));
         LottoRank rank = winningLottoNumbers.judge(lottoNumbers);
         assertThat(rank).isEqualTo(LottoRank.THIRD);
     }
@@ -69,7 +70,7 @@ public class WinningLottoNumbersTest {
     @Test
     @DisplayName("4등 판독 테스트")
     void fourthPrize() {
-        LottoNumbers lottoNumbers = LottoNumbers.withSixNumbers(1, 2, 3, 4, 8, 9);
+        LottoNumbers lottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 8, 9));
         LottoRank rank = winningLottoNumbers.judge(lottoNumbers);
         assertThat(rank).isEqualTo(LottoRank.FOURTH);
     }
@@ -77,7 +78,7 @@ public class WinningLottoNumbersTest {
     @Test
     @DisplayName("5등 판독 테스트")
     void fifthPrize() {
-        LottoNumbers lottoNumbers = LottoNumbers.withSixNumbers(1, 2, 3, 8, 9, 10);
+        LottoNumbers lottoNumbers = new LottoNumbers(List.of(1, 2, 3, 8, 9, 10));
         LottoRank rank = winningLottoNumbers.judge(lottoNumbers);
         assertThat(rank).isEqualTo(LottoRank.FIFTH);
     }
@@ -92,8 +93,8 @@ public class WinningLottoNumbersTest {
 
     private static Stream<Arguments> provideLottoNumbersList() {
         return Stream.of(
-            Arguments.of(LottoNumbers.withSixNumbers(1, 2, 8, 9, 10, 11)),
-            Arguments.of(LottoNumbers.withSixNumbers(1, 2, 7, 9, 10, 11))
+            Arguments.of(new LottoNumbers(List.of(1, 2, 8, 9, 10, 11))),
+            Arguments.of(new LottoNumbers(List.of(1, 2, 7, 9, 10, 11)))
         );
     }
 }

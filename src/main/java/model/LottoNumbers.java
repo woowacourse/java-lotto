@@ -44,11 +44,6 @@ public class LottoNumbers {
             .count();
     }
 
-    public static LottoNumbers withSixNumbers(int first, int second, int third, int fourth,
-        int fifth, int sixth) {
-        return new LottoNumbers(List.of(first, second, third, fourth, fifth, sixth));
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
