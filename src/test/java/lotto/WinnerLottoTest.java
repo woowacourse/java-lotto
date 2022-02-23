@@ -1,11 +1,11 @@
 package lotto;
 
-import static org.assertj.core.api.Assertions.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.*;
 
 public class WinnerLottoTest {
     private static final Number BONUS = new Number(7);
@@ -81,6 +81,14 @@ public class WinnerLottoTest {
         Lotto lotto = new Lotto(List.of(number(1), number(2), number(8), number(9), number(10), number(11)));
 
         assertThat(WINNER_LOTTO.findRank(lotto)).isEqualTo(Rank.NONE);
+    }
+
+    @Test
+    @DisplayName("보너스볼은 당첨 번호와 중복되면 예외를 발생한다.")
+    void throwExceptionWhenDuplicated() {
+        assertThatIllegalArgumentException()
+            .isThrownBy(() -> new WinnerLotto(new Lotto(givenNumbers(1, 2, 3, 4, 5, 6)), new Number(6)))
+            .withMessageMatching("보너스볼은 당첨번호와 중복될 수 없다.");
     }
 
     private Number number(int number) {
