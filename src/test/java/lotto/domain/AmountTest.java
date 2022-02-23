@@ -41,4 +41,12 @@ public class AmountTest {
         // then
         assertThat(count).isEqualTo(14);
     }
+
+    @DisplayName("구입금액이 음수인 경우 예외를 던진다.")
+    @Test
+    void 음수인경우_테스트() {
+        // given & when & then
+        assertThatThrownBy(() -> new Amount(-1))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
