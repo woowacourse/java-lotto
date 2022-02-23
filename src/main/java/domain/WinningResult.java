@@ -42,4 +42,12 @@ public class WinningResult {
 	public EnumMap<LottoRank, Integer> getWinningResult() {
 		return winningResult;
 	}
+
+	public double getRateOfProfit(Money money) {
+		long profit = winningResult.entrySet()
+			.stream()
+			.mapToLong(result -> result.getKey().getAmount() * result.getValue())
+			.sum();
+		return (double)profit / (double)money.getMoney();
+	}
 }
