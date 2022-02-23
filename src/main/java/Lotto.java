@@ -16,7 +16,7 @@ public class Lotto {
             lottoRange.add(i);
         }
         Collections.shuffle(lottoRange);
-        List<Integer> numbers = lottoRange.subList(0, 5);
+        List<Integer> numbers = lottoRange.subList(0, 6);
         Collections.sort(numbers);
         return new Lotto(numbers);
     }
