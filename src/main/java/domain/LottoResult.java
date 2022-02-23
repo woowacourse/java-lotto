@@ -21,7 +21,7 @@ public class LottoResult {
 	public Map<Rank, Integer> countRank() {
 		Map<Rank, Integer> rankCounts = new LinkedHashMap<>();
 		Arrays.asList(Rank.values()).stream()
-			.filter(Rank::isNotNothing)
+			.filter(rank -> !rank.isNothing())
 			.forEach(rank -> rankCounts.put(rank, count(rank)));
 		return rankCounts;
 	}

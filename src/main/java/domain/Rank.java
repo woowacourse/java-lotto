@@ -28,8 +28,12 @@ public enum Rank {
 			.orElse(NOTHING);
 	}
 
-	public static boolean isNotNothing(Rank rank) {
-		return rank != Rank.NOTHING;
+	public boolean isNothing() {
+		return this == Rank.NOTHING;
+	}
+
+	public boolean isBonus() {
+		return this.bonus;
 	}
 
 	public int getMoney() {
