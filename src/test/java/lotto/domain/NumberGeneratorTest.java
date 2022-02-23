@@ -13,7 +13,7 @@ class NumberGeneratorTest {
     @DisplayName("랜덤으로 번호를 생성한다.")
     void createRandomNumber() {
         // given
-        NumberGenerator numberGenerator = new RandomNumberGenerator(1, 45);
+        NumberGenerator numberGenerator = new RandomNumberGenerator(LottoNumber.MIN, LottoNumber.MAX);
         // when
         List<Integer> numbers = numberGenerator.generate(6);
         // then
@@ -24,7 +24,7 @@ class NumberGeneratorTest {
     @DisplayName("번호는 0 이상 45 이하의 값을 생성한다.")
     void testRandomNumberRange() {
         // given
-        NumberGenerator numberGenerator = new RandomNumberGenerator(1, 45);
+        NumberGenerator numberGenerator = new RandomNumberGenerator(LottoNumber.MIN, LottoNumber.MAX);
         // when
         List<Integer> numbers = numberGenerator.generate(6);
         // then

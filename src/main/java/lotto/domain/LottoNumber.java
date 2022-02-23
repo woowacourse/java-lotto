@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class LottoNumber {
 
-    private static final int MAX = 45;
-    private static final int MIN = 1;
+    public static final int MIN = 1;
+    public static final int MAX = 45;
 
     private final int number;
 
@@ -16,7 +16,7 @@ public class LottoNumber {
 
     private void validate(int number) {
         if (!isInLottoRange(number)) {
-            throw new IllegalArgumentException("로또 숫자는 1~45 사이의 숫자여야 합니다.");
+            throw new IllegalArgumentException(String.format("로또 숫자는 %d~%d 사이의 숫자여야 합니다.", MIN, MAX));
         }
     }
 

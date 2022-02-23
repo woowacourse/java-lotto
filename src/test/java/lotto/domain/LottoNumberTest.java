@@ -22,7 +22,7 @@ class LottoNumberTest {
     @DisplayName("최대값 초과로 생성할 시 예외를 발생시킨다.")
     void throwsExceptionWhenBiggerThanMaxNumber() {
         // given
-        int maxValue = 45 + 1;
+        int maxValue = LottoNumber.MAX + 1;
         // then
         assertThatThrownBy(() -> new LottoNumber(maxValue))
             .isInstanceOf(IllegalArgumentException.class)
@@ -33,7 +33,7 @@ class LottoNumberTest {
     @DisplayName("최소값 미만으로 생성할 시 예외를 발생시킨다.")
     void throwsExceptionWhenLowerThanMinNumber() {
         // given
-        int minValue = 1 - 1;
+        int minValue = LottoNumber.MIN - 1;
         // then
         assertThatThrownBy(() -> new LottoNumber(minValue))
             .isInstanceOf(IllegalArgumentException.class)

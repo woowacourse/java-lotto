@@ -11,7 +11,7 @@ class LottoTicketsTest {
     void createLottoTickets() {
         // given
         Money money = new Money(3000);
-        RandomNumberGenerator generator = new RandomNumberGenerator(0, 45);
+        RandomNumberGenerator generator = new RandomNumberGenerator(LottoNumber.MIN, LottoNumber.MAX);
         // when
         LottoTickets lottoTickets = LottoTickets.buy(generator, money);
         // then
