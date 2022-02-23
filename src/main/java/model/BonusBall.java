@@ -8,10 +8,13 @@ public class BonusBall {
     private static final String BONUS_BALL_NUMBER_ERROR_MESSAGE = "[Error]: 보너스 볼은 숫자여야 합니다.";
     private static final String BONUS_BALL_RANGE_ERROR_MESSAGE = "[Error]: 보너스 볼은 1~45의 숫자만 입력해주세요.";
 
+    private final int number;
+
     public BonusBall(String number) {
         validateInputNumberBlank(number);
         validateInputBonusNumber(number);
         validateInputBonusNumberOutOfRange(number);
+        this.number = makeBonusBallToNumber(number);
     }
 
     private void validateInputNumberBlank(String number) {
@@ -30,5 +33,13 @@ public class BonusBall {
         if (Integer.parseInt(number) < LOTTO_MIN_NUMBER || Integer.parseInt(number) > LOTTO_MAX_NUMBER) {
             throw new IllegalArgumentException(BONUS_BALL_RANGE_ERROR_MESSAGE);
         }
+    }
+
+    private int makeBonusBallToNumber(String number) {
+        return Integer.parseInt(number);
+    }
+
+    public int getNumber() {
+        return number;
     }
 }
