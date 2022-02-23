@@ -1,8 +1,9 @@
 package domain;
 
+import utils.ExceptionMessage;
+
 public class Money {
 
-    public static final String NOT_ENOUGH_MONEY = "구입 금액은 1000원 미만일 수 없습니다.";
     private static final int MINIMUM_PURCHASE_AMOUNT = 1000;
 
     private int amount;
@@ -18,7 +19,7 @@ public class Money {
 
     private void validateAmount(int amount) {
         if (amount < MINIMUM_PURCHASE_AMOUNT) {
-            throw new IllegalArgumentException(NOT_ENOUGH_MONEY);
+            throw new IllegalArgumentException(ExceptionMessage.NOT_ENOUGH_MONEY);
         }
     }
 }

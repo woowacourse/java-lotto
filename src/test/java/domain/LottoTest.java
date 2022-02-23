@@ -14,9 +14,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import utils.ExceptionMessage;
 =======
 >>>>>>> 20a623d (feat: 로또 구매 기능 구현)
+=======
+import utils.ExceptionMessage;
+>>>>>>> d722001 (refactor: 예외 메세지 별도 클래스로 분리)
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +70,7 @@ public class LottoTest {
         assertThatThrownBy(() -> new Lotto(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
 <<<<<<< HEAD
+<<<<<<< HEAD
                 .hasMessage(ExceptionMessage.LOTTO_SIZE_IS_NOT_SIX);
     }
 
@@ -88,5 +93,8 @@ public class LottoTest {
 =======
                 .hasMessage(Lotto.LOTTO_SIZE_IS_NOT_SIX);
 >>>>>>> 20a623d (feat: 로또 구매 기능 구현)
+=======
+                .hasMessage(ExceptionMessage.LOTTO_SIZE_IS_NOT_SIX);
+>>>>>>> d722001 (refactor: 예외 메세지 별도 클래스로 분리)
     }
 }

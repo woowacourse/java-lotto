@@ -11,7 +11,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+<<<<<<< HEAD
 >>>>>>> 5d27d71 (feat: LottoNumber 객체 생성)
+=======
+import utils.ExceptionMessage;
+>>>>>>> d722001 (refactor: 예외 메세지 별도 클래스로 분리)
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -24,10 +28,14 @@ public class LottoNumberTest {
         assertThatThrownBy(() -> new LottoNumber(lottoNumber))
                 .isInstanceOf(IllegalArgumentException.class)
 <<<<<<< HEAD
+<<<<<<< HEAD
                 .hasMessage(ExceptionMessage.LOTTO_NUMBER_OUT_OF_BOUND);
 =======
                 .hasMessage(LottoNumber.LOTTO_NUMBER_OUT_OF_BOUND);
 >>>>>>> 5d27d71 (feat: LottoNumber 객체 생성)
+=======
+                .hasMessage(ExceptionMessage.LOTTO_NUMBER_OUT_OF_BOUND);
+>>>>>>> d722001 (refactor: 예외 메세지 별도 클래스로 분리)
 
     }
 }
