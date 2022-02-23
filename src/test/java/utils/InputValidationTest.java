@@ -44,6 +44,15 @@ public class InputValidationTest {
                 .hasMessageContaining("로또 번호는 숫자만 입력해줘야 합니다.");
     }
 
+    @DisplayName("로또 번호가 범위를 벗어난 경우 예외가 발생한다.")
+    @ParameterizedTest(name = "{index} {displayName} numbers={0}")
+    @ValueSource(strings = {"1, 2, 3, 55, 43, 45", "-1, 2, 3, 4, 5, 6", "0, 2, 3, 4, 5, 6"})
+    void checkNumberRange_throwIllegalException(final String numbers) {
+        assertThatThrownBy(() -> InputValidation.validateWinningNumber(numbers))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("로또 번호는 1에서 45 사이의 값을 입력해줘야 합니다.");
+    }
+
     /**
      * + validateWinningNumber()
      * - checkNumberRange()
