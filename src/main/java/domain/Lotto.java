@@ -20,19 +20,25 @@ public class Lotto {
     private final List<LottoNumber> chosenNumbers;
 
     public Lotto() {
-        Collections.shuffle(allLottoNumbers);
-        List<LottoNumber> lottoNums = new ArrayList<>(allLottoNumbers.subList(0, 6));
-        Collections.sort(lottoNums);
-
-        this.chosenNumbers = lottoNums;
+        List<LottoNumber> lottoNums = generateRandomLottoNumbers();
+        this.chosenNumbers = getSortedLottoNumbers(lottoNums);
     }
 
     public Lotto(List<LottoNumber> lottoNums) {
         if (lottoNums.size() != LOTTO_NUMBERS_SIZE) {
             throw new RuntimeException();
         }
+        this.chosenNumbers = getSortedLottoNumbers(lottoNums);
+    }
+
+    private List<LottoNumber> generateRandomLottoNumbers() {
+        Collections.shuffle(allLottoNumbers);
+        return new ArrayList<>(allLottoNumbers.subList(0, LOTTO_NUMBERS_SIZE));
+    }
+
+    private List<LottoNumber> getSortedLottoNumbers(List<LottoNumber> lottoNums) {
         Collections.sort(lottoNums);
-        this.chosenNumbers = lottoNums;
+        return lottoNums;
     }
 
     public List<LottoNumber> getChosenNumbers() {
