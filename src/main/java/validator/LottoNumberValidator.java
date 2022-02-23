@@ -1,16 +1,8 @@
 package validator;
 
-import java.util.Arrays;
-import java.util.List;
+public class LottoNumberValidator {
 
-public class WinningNumberValidator {
-
-    public static void validate(String winningNumbers) {
-        List<String> numbers = Arrays.asList(winningNumbers.split(","));
-        numbers.forEach(number -> checkCorrectNumber(number.trim()));
-    }
-
-    private static void checkCorrectNumber(String number) {
+    public static void validate(String number) {
         int parsedNumber;
         try {
             parsedNumber = Integer.parseInt(number);
