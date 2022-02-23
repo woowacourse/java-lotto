@@ -11,9 +11,9 @@ public enum LottoRank {
     FAILED(0, 0);
 
     private final int winningNumberCount;
-    private final int prizeMoney;
+    private final long prizeMoney;
 
-    LottoRank(int winningNumberCount, int prizeMoney) {
+    LottoRank(int winningNumberCount, long prizeMoney) {
         this.winningNumberCount = winningNumberCount;
         this.prizeMoney = prizeMoney;
     }
@@ -29,7 +29,7 @@ public enum LottoRank {
                 .orElseGet(() -> FAILED);
     }
 
-    public int getPrizeMoney() {
+    public long getPrizeMoney() {
         return prizeMoney;
     }
 }
