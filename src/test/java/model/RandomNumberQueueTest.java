@@ -13,15 +13,17 @@ public class RandomNumberQueueTest {
     @Test
     @DisplayName("랜덤 값 생성하기")
     void createRandomNumbers() {
-        RandomNumberQueue randomNumberQueue = new RandomNumberQueue(1, 5);
+        NumberQueue randomNumberQueue = new RandomNumberQueue(1, 1000);
         Set<Integer> randomNumbers = new HashSet<>();
-        while(randomNumberQueue.hasNext()) {
+
+        while (randomNumberQueue.hasNext()) {
             int randomNumber = randomNumberQueue.get();
-            if (randomNumbers.contains(randomNumber)){
+            if (randomNumbers.contains(randomNumber)) {
                 fail("이미 있는 원소");
             }
             randomNumbers.add(randomNumber);
         }
-        assertThat(randomNumbers).hasSize(5);
+
+        assertThat(randomNumbers).hasSize(1000);
     }
 }
