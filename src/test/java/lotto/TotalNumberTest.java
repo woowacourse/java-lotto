@@ -3,6 +3,8 @@ package lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -29,8 +31,13 @@ class TotalNumberTest {
 
         TotalNumber totalNumber = new TotalNumber(winningNumber, bonusNumber);
         Set<LottoNumber> result = totalNumber.getWinningAndBonusNumber();
+        Set<LottoNumber> expected = initExpected();
 
-        assertThat(result).containsExactly(
+        assertThat(result).isEqualTo(expected);
+    }
+
+    private HashSet<LottoNumber> initExpected() {
+        return new HashSet<>(List.of(
                 new LottoNumber(1),
                 new LottoNumber(2),
                 new LottoNumber(3),
@@ -38,6 +45,6 @@ class TotalNumberTest {
                 new LottoNumber(5),
                 new LottoNumber(6),
                 new LottoNumber(7)
-        );
+        ));
     }
 }

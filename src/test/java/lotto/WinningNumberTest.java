@@ -19,14 +19,7 @@ class WinningNumberTest {
     void makeWinningNumber() {
         String input = "1, 2, 3, 4, 5, 6";
 
-        Set<LottoNumber> expected = new HashSet<>(List.of(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)
-        ));
+        Set<LottoNumber> expected = initExpected();
 
         WinningNumber winningNumber = new WinningNumber(input);
 
@@ -65,5 +58,16 @@ class WinningNumberTest {
         assertThatThrownBy(() -> new WinningNumber(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("입력값은 숫자여야합니다");
+    }
+
+    private HashSet<LottoNumber> initExpected() {
+        return new HashSet<>(List.of(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6)
+        ));
     }
 }

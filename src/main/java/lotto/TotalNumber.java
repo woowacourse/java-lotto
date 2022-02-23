@@ -24,4 +24,8 @@ public class TotalNumber {
         totalNumbers.add(bonusNumber);
         return totalNumbers;
     }
+
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
+    }
 }
