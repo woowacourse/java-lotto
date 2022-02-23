@@ -91,4 +91,13 @@ class LottoMatcherTest {
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("지난 주 당첨 번호 개수는 6개로 입력해주세요.");
     }
+
+    @Test
+    @DisplayName("지난 주 당첨 번호 개수가 6개 초과인 경우 예외 처리")
+    void validateRangeWinningNumbersTest() {
+        assertThatThrownBy(() -> {
+            new LottoMatcher(Arrays.asList(1, 2, 3, 4, 55, 6), 45);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("당첨 번호의 범위는 1 ~ 45 사이로 입력해주세요.");
+    }
 }
