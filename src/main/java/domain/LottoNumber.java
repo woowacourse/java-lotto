@@ -2,31 +2,23 @@ package domain;
 
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
-	private static final String ERROR_MESSAGE_NOT_IN_RANGE = "유효한 로또 번호가 아닙니다.";
+    private static final String ERROR_MESSAGE_NOT_IN_RANGE = "유효한 로또 번호가 아닙니다.";
 
-	private static final int MINIMUM_VALUE = 1;
-	private static final int MAXIMUM_VALUE = 45;
-	private static final int BOUND_OF_RANDOM = 45;
-	private static final int START_OF_RANDOM = 1;
+    private static final int MINIMUM_VALUE = 1;
+    private static final int MAXIMUM_VALUE = 45;
 
-	private final int value;
+    private final int value;
 
-	private LottoNumber(int value) {
-		validateInRange(value);
-		this.value = value;
-	}
+    private LottoNumber(int value) {
+        validateInRange(value);
+        this.value = value;
+    }
 
-	public static LottoNumber createByInput(int value) {
-		return new LottoNumber(value);
-	}
-
-	public static LottoNumber createByRandom() {
-		Random random = new Random();
-		int randomValue = random.nextInt(BOUND_OF_RANDOM) + START_OF_RANDOM;
-		return new LottoNumber(randomValue);
-	}
+    public static LottoNumber createByInput(int value) {
+        return new LottoNumber(value);
+    }
 
     private void validateInRange(int value) {
         if (value < MINIMUM_VALUE || value > MAXIMUM_VALUE) {
@@ -39,18 +31,18 @@ public class LottoNumber {
         return this.value - other.value;
     }
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
-		LottoNumber that = (LottoNumber)o;
-		return value == that.value;
-	}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        LottoNumber that = (LottoNumber)o;
+        return value == that.value;
+    }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(value);
-	}
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
 }
