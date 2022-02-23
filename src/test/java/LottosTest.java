@@ -23,7 +23,8 @@ public class LottosTest {
 		nowLotto.add(new Lotto(() -> new ArrayList<Integer>(Arrays.asList(19, 20, 21, 22, 23, 24))));
 		nowLotto.add(new Lotto(() -> new ArrayList<Integer>(Arrays.asList(25, 26, 27, 28, 29, 30))));
 		lottos = new Lottos(nowLotto);
-		answerLotto = new AnswerLotto(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 43, 44, 45)), 31);
+		answerLotto = new AnswerLotto(
+			new AnswerLottoNumbers(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 43, 44, 45))), new BonusNumber(31));
 	}
 
 	@Test
@@ -53,6 +54,7 @@ public class LottosTest {
 	@ParameterizedTest
 	@ValueSource(ints = {0, 1234, 5678})
 	void validatePrice(int price) {
-		assertThatThrownBy(() -> Lottos.of(price, new RandomLottoNumberGenerator())).isInstanceOf(IllegalArgumentException.class);
+		assertThatThrownBy(() -> Lottos.of(price, new RandomLottoNumberGenerator())).isInstanceOf(
+			IllegalArgumentException.class);
 	}
 }

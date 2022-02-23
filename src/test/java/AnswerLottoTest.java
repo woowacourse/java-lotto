@@ -1,4 +1,6 @@
 import domain.AnswerLotto;
+import domain.AnswerLottoNumbers;
+import domain.BonusNumber;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -14,21 +16,21 @@ public class AnswerLottoTest {
 	@Test
 	void countOfNumbersMustBeSix() {
 		List<Integer> input = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
-		assertThatThrownBy(() -> new AnswerLotto(input, 8))
+		assertThatThrownBy(() -> new AnswerLotto(new AnswerLottoNumbers(input), new BonusNumber(8)))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@Test
 	void numberMoreThanUpperBound() {
 		List<Integer> input = new ArrayList<>(Arrays.asList(46, 47, 48, 49, 50, 51));
-		assertThatThrownBy(() -> new AnswerLotto(input, 8))
+		assertThatThrownBy(() -> new AnswerLotto(new AnswerLottoNumbers(input), new BonusNumber(8)))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@Test
 	void numberLowerThanLowerBound() {
 		List<Integer> input = new ArrayList<>(Arrays.asList(0, -1, -2, -3, -4, -5));
-		assertThatThrownBy(() -> new AnswerLotto(input, 8))
+		assertThatThrownBy(() -> new AnswerLotto(new AnswerLottoNumbers(input), new BonusNumber(8)))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 
@@ -36,21 +38,21 @@ public class AnswerLottoTest {
 	@ValueSource(ints = {-1, 0, 46})
 	void bonusNumberInRange(int bonusNumber) {
 		List<Integer> numbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-		assertThatThrownBy(() -> new AnswerLotto(numbers, bonusNumber))
+		assertThatThrownBy(() -> new AnswerLotto(new AnswerLottoNumbers(numbers), new BonusNumber(bonusNumber)))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@Test
 	void duplicateInNumbers() {
 		List<Integer> numbers = new ArrayList<>(Arrays.asList(1, 2, 3, 3, 5, 6));
-		assertThatThrownBy(() -> new AnswerLotto(numbers, 7))
+		assertThatThrownBy(() -> new AnswerLotto(new AnswerLottoNumbers(numbers), new BonusNumber(7)))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@Test
 	void duplicateInBonusNumber() {
 		List<Integer> numbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-		assertThatThrownBy(() -> new AnswerLotto(numbers, 6))
+		assertThatThrownBy(() -> new AnswerLotto(new AnswerLottoNumbers(numbers), new BonusNumber(6)))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 }

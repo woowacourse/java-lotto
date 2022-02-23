@@ -1,6 +1,8 @@
 import static org.assertj.core.api.Assertions.assertThat;
 
 import domain.AnswerLotto;
+import domain.AnswerLottoNumbers;
+import domain.BonusNumber;
 import domain.Lotto;
 
 import java.util.ArrayList;
@@ -16,7 +18,8 @@ public class LottoTest {
 
 	@BeforeAll
 	static void initAnswerLotto() {
-		answerLotto = new AnswerLotto(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 6)), 7);
+		answerLotto = new AnswerLotto(new AnswerLottoNumbers(new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 6))),
+			new BonusNumber(7));
 	}
 
 	@Test

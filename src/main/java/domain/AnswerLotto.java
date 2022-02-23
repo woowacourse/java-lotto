@@ -1,63 +1,27 @@
 package domain;
 
-import java.util.HashSet;
 import java.util.List;
 
 public class AnswerLotto {
-	private List<Integer> numbers;
-	private int bonusNumber;
+	private AnswerLottoNumbers numbers;
+	private BonusNumber bonusNumber;
 
-	public AnswerLotto(List<Integer> numbers, int bonusNumber) {
-		validateInput(numbers, bonusNumber);
-		this.numbers = numbers;
+	public AnswerLotto(AnswerLottoNumbers lottoNumbers, BonusNumber bonusNumber) {
+		validateBonusNumberInNumbers(lottoNumbers, bonusNumber);
+		this.numbers = lottoNumbers;
 		this.bonusNumber = bonusNumber;
 	}
 
 	public List<Integer> getNumbers() {
-		return numbers;
+		return this.numbers.getAnswerLottoNumbers();
 	}
 
 	public int getBonusNumber() {
-		return bonusNumber;
+		return this.bonusNumber.getNumber();
 	}
 
-	private void validateInput(List<Integer> numbers, int bonusNumber) {
-		validateLength(numbers);
-		validateNumbers(numbers);
-		validateBonusNumber(bonusNumber);
-		validateDuplicateInNumbers(numbers);
-		validateBonusNumberInNumbers(numbers, bonusNumber);
-	}
-
-	private void validateLength(List<Integer> numbers) {
-		if (numbers.size() != 6) {
-			throw new IllegalArgumentException("[ERROR] 6개의 숫자만 허용됩니다.");
-		}
-	}
-
-	private void validateNumbers(List<Integer> numbers) {
-		int upperCount = (int) numbers.stream().filter(number -> number > 45).count();
-		int lowerCount = (int) numbers.stream().filter(number -> number < 1).count();
-
-		if (upperCount > 0 || lowerCount > 0) {
-			throw new IllegalArgumentException("[ERROR] 1이상 45 이하의 숫자만 허용됩니다.");
-		}
-	}
-
-	private void validateBonusNumber(int bonusNumber) {
-		if (bonusNumber < 1 || bonusNumber > 45) {
-			throw new IllegalArgumentException("[ERROR] 1이상 45 이하의 숫자만 허용됩니다.");
-		}
-	}
-
-	private void validateDuplicateInNumbers(List<Integer> numbers) {
-		if (numbers.size() != new HashSet<Integer>(numbers).size()) {
-			throw new IllegalArgumentException("[ERROR] 지난 주 당첨 번호 숫자들은 중복일 수 없습니다.");
-		}
-	}
-
-	private void validateBonusNumberInNumbers(List<Integer> numbers, int bonusNumber) {
-		if (numbers.contains(bonusNumber)) {
+	private void validateBonusNumberInNumbers(AnswerLottoNumbers numbers, BonusNumber bonusNumber) {
+		if (numbers.isExists(bonusNumber)) {
 			throw new IllegalArgumentException("[ERROR] 보너스 번호는 지난 주 당첨 번호 숫자들과 중복일 수 없습니다");
 		}
 	}

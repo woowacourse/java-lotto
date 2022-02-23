@@ -1,6 +1,8 @@
 package controller;
 
 import domain.AnswerLotto;
+import domain.BonusNumber;
+import domain.AnswerLottoNumbers;
 import domain.Lottos;
 import domain.RandomLottoNumberGenerator;
 import view.InputView;
@@ -12,12 +14,18 @@ public class LottoGameController {
 		try {
 			Lottos lottos = Lottos.of(InputView.inputMoney(), new RandomLottoNumberGenerator());
 			OutputView.printLottos(lottos);
-			AnswerLotto answerLotto = new AnswerLotto(InputView.inputAnsNumbers(), InputView.inputBonusNumber());
+			AnswerLotto answerLotto = initAnswerLotto();
 			OutputView.printStatistics(lottos.generateEachCount(answerLotto));
 			OutputView.printProfitRatio(lottos.generateProfitRatio(answerLotto));
 		}
 		catch (IllegalArgumentException e) {
 			OutputView.printErrorMessage(e.getMessage());
 		}
+	}
+
+	private static AnswerLotto initAnswerLotto() {
+		AnswerLottoNumbers lottoNumbers = new AnswerLottoNumbers(InputView.inputAnsNumbers());
+		BonusNumber bonusNumber = new BonusNumber(InputView.inputBonusNumber());
+		return new AnswerLotto(lottoNumbers, bonusNumber);
 	}
 }
