@@ -31,4 +31,8 @@ public class LottoNumbers {
             throw new IllegalArgumentException("중복값을 입력할 수 없습니다.");
         }
     }
+
+    public int size() {
+        return this.lottoNumbers.size();
+    }
 }

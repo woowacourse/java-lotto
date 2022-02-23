@@ -25,5 +25,24 @@ public class LottoNumber {
             throw new IllegalArgumentException("로또 번호가 유효한 범위(1-45)가 아닙니다.");
         }
     }
+
+    @Override
+    public boolean equals(final Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+
+        final LottoNumber that = (LottoNumber) object;
+
+        return number == that.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return number;
+    }
 }
 
