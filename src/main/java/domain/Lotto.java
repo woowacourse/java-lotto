@@ -2,7 +2,7 @@ package domain;
 
 public class Lotto {
     public static final int LOTTO_PRICE = 1000;
-    private int amount;
+    private final int amount;
 
     public Lotto(int amount) {
         checkAmountPositive(amount);

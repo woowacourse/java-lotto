@@ -1,8 +1,8 @@
 package domain;
 
-import java.util.List;
+import java.util.Set;
 
 @FunctionalInterface
 public interface LottoNumbersGenerator {
-    List<LottoNumber> generate();
+    Set<LottoNumber> generate();
 }

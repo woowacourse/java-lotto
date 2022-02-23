@@ -1,15 +1,15 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import utils.RandomNumberGenerator;
 
 public class RandomLottoNumbersGenerator implements LottoNumbersGenerator {
     @Override
-    public List<LottoNumber> generate() {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
+    public Set<LottoNumber> generate() {
+        Set<LottoNumber> lottoNumbers = new HashSet<>();
+        while (lottoNumbers.size() != 6) {
             lottoNumbers.add(RandomNumberGenerator.generate());
         }
         return lottoNumbers;

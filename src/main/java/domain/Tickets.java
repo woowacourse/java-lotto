@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Tickets {
-    private List<Ticket> tickets = new ArrayList<>();
+    private final List<Ticket> tickets = new ArrayList<>();
 
     public Tickets(int count) {
         LottoNumbersGenerator lottoNumbersGenerator = new RandomLottoNumbersGenerator();
