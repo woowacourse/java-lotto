@@ -51,7 +51,7 @@
 - [x] 구입 금액을 저장한다.
 - [x] 구입 금액/ 1000 의 개수를 생성한다.
 - [ ] 결과값 개수만큼 로또를 랜덤으로 생성한다.
-    - [ ] 로또 생성에는 `Collections.shuffle()`을 활용한다.
+    - [x] 로또 생성에는 `Collections.shuffle()`을 활용한다.
 - [ ] 생성된 로또마다
     - [ ] 지난주 당첨 번호와 일치하는 번호의 개수를 저장한다.
     - [ ] 보너스 볼이 존재하는지 여부를 저장한다.
@@ -89,6 +89,9 @@
 - [ ] view
   - [x] InputView
   - [ ] OutputView
+- [ ] utils
+  - [ ] Constants
+  - [x] LottoNumberGenerator
 - [ ] validator
   - [x] LottoNumbersValidator
   - [x] LottoNumberValidator
