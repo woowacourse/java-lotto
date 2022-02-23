@@ -3,7 +3,8 @@ package lotto;
 public class Controller {
 
     public static void run() {
-        InputView inputView = new InputView();
-        Money.from(inputView.askMoneyAmount());
+        Money money = Money.from(InputView.askMoneyAmount());
+        int purchaseCount = Lotto.countAvailableTickets(money);
+        ResultView.showPurchaseCount(purchaseCount);
     }
 }
