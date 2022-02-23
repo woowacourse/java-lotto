@@ -9,18 +9,18 @@ import lotto.exception.WinningNumbersException;
 
 public class LottoReceiver {
 
-    private static final String WINNING_NUMBERS_DELIMITER = ",";
-    private static final int WINNING_NUMBERS_SIZE = 6;
+    private static final String INPUT_NUMBERS_DELIMITER = ",";
+    private static final int LOTTO_SIZE = 6;
 
     public static List<LottoNumber> receive(String input) {
-        List<String> seperatedInput = splitInput(input);
-        checkSize(seperatedInput);
-        checkDuplication(seperatedInput);
-        return convertToLottoNumbers(seperatedInput);
+        List<String> separatedInput = splitInput(input);
+        checkSize(separatedInput);
+        checkDuplication(separatedInput);
+        return convertToLottoNumbers(separatedInput);
     }
 
     private static List<String> splitInput(String input) {
-        return Arrays.stream(input.split(WINNING_NUMBERS_DELIMITER))
+        return Arrays.stream(input.split(INPUT_NUMBERS_DELIMITER))
                 .map(String::trim)
                 .collect(Collectors.toList());
     }
@@ -32,7 +32,7 @@ public class LottoReceiver {
     }
 
     private static boolean isCorrectSize(List<String> numbers) {
-        return numbers.size() == WINNING_NUMBERS_SIZE;
+        return numbers.size() == LOTTO_SIZE;
     }
 
     private static void checkDuplication(List<String> numbers) {
