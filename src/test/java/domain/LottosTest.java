@@ -9,15 +9,15 @@ import org.junit.jupiter.api.Test;
 public class LottosTest {
 
     @Test
-    void lottos_createTheSameNumberOfLottosAsLottoCount() {
-        Lottos lottos = new Lottos(5);
+    void of_createTheSameNumberOfLottosAsLottoCount() {
+        Lottos lottos = Lottos.of(5);
 
         assertThat(lottos.getLottos().size()).isEqualTo(5);
     }
 
     @Test
-    void lottos_eachLottoIsDifferent() {
-        Lottos lottos = new Lottos(20);
+    void of_eachLottoIsDifferent() {
+        Lottos lottos = Lottos.of(20);
 
         Set<Lotto> noDuplicateLottoSet = new HashSet<>(lottos.getLottos());
         assertThat(noDuplicateLottoSet.size())
