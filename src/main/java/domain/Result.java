@@ -11,6 +11,13 @@ public class Result {
         this.isHitBonusBall = isHitBonusBall;
     }
 
+    public boolean compare(Rank rank) {
+        if (rank.getCriteria() == 5) {
+            return this.hitCount == rank.getCriteria() && this.isHitBonusBall == rank.getHitBonusBall();
+        }
+        return this.hitCount == rank.getCriteria();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

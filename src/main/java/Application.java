@@ -16,5 +16,7 @@ public class Application {
         List<String> winningNumber = InputView.inputWinningNumber();
         int bonusBall = InputView.inputBonusBall();
         lottoController.determineWinningNumber(winningNumber,bonusBall);
+
+        lottoController.calculateRank();
     }
 }
