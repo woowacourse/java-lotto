@@ -17,7 +17,7 @@ public class InputView {
     }
 
     private static int convertToInt(String input) {
-        if (pattern.matcher(input).matches()) {
+        if (!pattern.matcher(input).matches()) {
             throw new IllegalArgumentException(INPUT_MONEY_ONLY_NUMBER_MESSAGE);
         }
         return Integer.parseInt(input);
