@@ -12,27 +12,25 @@ public class LottoGameTest {
     void buyLottoTest() {
         LottoGame lottoGame = new LottoGame();
 
-        assertThat(lottoGame.buyLotto(new Money(14000)).size()).isEqualTo(14);
+        assertThat(lottoGame.buyLotto(new Money(14000)).getSize()).isEqualTo(14);
     }
 
     @Test
     @DisplayName("수익률 계산하는 기능 테스트")
     void calculateYield() {
 
-
-        Lotto lotto1 = new Lotto(Arrays.asList(1,2,3,4,5,6));
-        Lotto lotto2 = new Lotto(Arrays.asList(4,5,6,7,8,9));
-        Lotto lotto3 = new Lotto(Arrays.asList(11,12,13,14,15,16));
-
+        Lotto lotto1 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto lotto2 = new Lotto(Arrays.asList(4, 5, 6, 7, 8, 9));
+        Lotto lotto3 = new Lotto(Arrays.asList(11, 12, 13, 14, 15, 16));
 
         Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3));
         LottoGame lottoGame = new LottoGame(Arrays.asList(lotto1, lotto2, lotto3));
 
-        List<Integer> winningNumbers = Arrays.asList(1,2,3,4,5,6);
+        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         int bonusNumber = 9;
         double yield = lottoGame.getYield(winningNumbers, bonusNumber);
 
-        assertThat(yield).isEqualTo(2000005000/3000);
+        assertThat(yield).isEqualTo(2000005000 / 3000);
 
 //        3개 일치 (5000원)- 1개
 //        4개 일치 (50000원)- 0개

@@ -1,17 +1,19 @@
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 public class LottoGame {
 
     //    private List<Lotto> lottos;
+    private static final int LOTTO_PRICE = 1000;
+
     private Lottos lottos;
     private Map<Integer, Integer> convertReward;
     private Map<Integer, Integer> results;
-
-
 
 //    public LottoGame() {
 //
@@ -24,32 +26,36 @@ public class LottoGame {
     public LottoGame() {
         //.lottos = lottos;
 
-        convertReward =new HashMap<>();
-        convertReward.put(1,2000000000);
-        convertReward.put(2,30000000);
-        convertReward.put(3,1500000);
-        convertReward.put(4,50000);
-        convertReward.put(5,5000);
-        convertReward.put(-1,0);
+        convertReward = new HashMap<>();
+        convertReward.put(1, 2000000000);
+        convertReward.put(2, 30000000);
+        convertReward.put(3, 1500000);
+        convertReward.put(4, 50000);
+        convertReward.put(5, 5000);
+        convertReward.put(-1, 0);
 
     }
 
     public LottoGame(List<Lotto> lottos) {
+        convertReward = new HashMap<>();
+        convertReward.put(1, 2000000000);
+        convertReward.put(2, 30000000);
+        convertReward.put(3, 1500000);
+        convertReward.put(4, 50000);
+        convertReward.put(5, 5000);
+        convertReward.put(-1, 0);
+
         this.lottos = new Lottos(lottos);
     }
 
-    public List<Lotto> buyLotto(Money money) {
+    public Lottos buyLotto(Money money) {
 
-        //lottos = new ArrayList<Lotto>();
-
-        int lottoAmount = money.money() / 1000;
+        int lottoAmount = money.money() / LOTTO_PRICE;
 
         lottos = new Lottos(lottoAmount);
 
-//        for (int i = 0; i < lottoAmount; ++i) {
-//            lottos.getLottos().add(new Lotto());
-//        }
-        return lottos.getLottos();
+        return lottos;
+
     }
 
     public double getYield(List<Integer> winningNumbers, Integer bonusNumber) {
