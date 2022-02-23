@@ -1,9 +1,11 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class PurchaseAmountTest {
@@ -19,5 +21,20 @@ class PurchaseAmountTest {
                 () -> PurchaseAmount.fromPurchaseAmountAndLottoPrice(invalidValue, lottoPrice))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(expectedExceptionMessage);
+    }
+
+    @Test
+    @DisplayName("총 수익을 받아 수익률을 반환한다.")
+    void getProfitRate() {
+        //given
+        final int anyLottoPrice = 1000;
+        final PurchaseAmount purchaseAmount =
+                PurchaseAmount.fromPurchaseAmountAndLottoPrice("2000", anyLottoPrice);
+        final long totalProfit = 4000000000L;
+        final double expected = (double) totalProfit / 2000;
+        //when
+        final double actual = purchaseAmount.getProfitRate(totalProfit);
+        //then
+        assertThat(actual).isEqualTo(expected);
     }
 }

@@ -33,4 +33,8 @@ public class PurchaseAmount {
     public int getCountOfLottoNumbers(final int lottoPrice) {
         return amount / lottoPrice;
     }
+
+    public double getProfitRate(final long totalProfit) {
+        return (double) totalProfit / amount;
+    }
 }
