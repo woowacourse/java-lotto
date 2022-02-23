@@ -58,4 +58,13 @@ public class LottoWinningNumberTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[Error]: 당첨 번호는 6개의 숫자여야 합니다.");
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2,1,3,4,5", "1,2,3,4,5,5"})
+    @DisplayName("당첨 번호에 중복이 있는지 검증")
+    void validateWinningNumberReduplication(String numbers) {
+        assertThatThrownBy(() -> new LottoWinningNumber(numbers))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[Error]: 당첨 번호는 중복이 있으면 안됩니다");
+    }
 }

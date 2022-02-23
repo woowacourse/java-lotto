@@ -13,6 +13,7 @@ public class LottoWinningNumber {
     private static final String WINNING_NUMBER_RANGE_ERROR_MESSAGE = "[Error]: 당첨 번호는 1~45 숫자여야 합니다.";
     private static final String WINNING_NUMBER_SIZE_ERROR_MESSAGE = "[Error]: 당첨 번호는 6개의 숫자여야 합니다.";
     private static final int WINNING_NUMBER_SIZE = 6;
+    private static final String WINNING_NUMBER_REDUPLICATION_ERROR_MESSAGE = "[Error]: 당첨 번호는 중복이 있으면 안됩니다";
 
     private final List<Integer> winningNumbers;
 
@@ -21,6 +22,7 @@ public class LottoWinningNumber {
         validateNumbersConsistOfInt(numbers);
         validateNumberOutOfRange(numbers);
         validateNumberSize(numbers);
+        validateNumberReduplication(numbers);
         this.winningNumbers = makeWinningNumbers(split(numbers));
     }
 
@@ -55,6 +57,14 @@ public class LottoWinningNumber {
     private void validateNumberSize(String numbers) {
         if (split(numbers).size() != WINNING_NUMBER_SIZE) {
             throw new IllegalArgumentException(WINNING_NUMBER_SIZE_ERROR_MESSAGE);
+        }
+    }
+
+    private void validateNumberReduplication(String numbers) {
+        long count = split(numbers).stream().distinct().count();
+
+        if (count != split(numbers).size()) {
+            throw new IllegalArgumentException(WINNING_NUMBER_REDUPLICATION_ERROR_MESSAGE);
         }
     }
 
