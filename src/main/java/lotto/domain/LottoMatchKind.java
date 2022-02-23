@@ -30,4 +30,16 @@ public enum LottoMatchKind {
     public long getProfit(final int countOfMatchedLottoNumbers) {
         return winningAmount * countOfMatchedLottoNumbers;
     }
+
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public boolean hasSameNumberWithBonus() {
+        return bonus;
+    }
+
+    public int getWinningAmount() {
+        return (int) winningAmount;
+    }
 }

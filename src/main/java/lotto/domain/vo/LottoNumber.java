@@ -42,4 +42,8 @@ public enum LottoNumber {
         return others.stream()
                 .anyMatch(other -> other == this);
     }
+
+    public int getValue() {
+        return this.number;
+    }
 }
