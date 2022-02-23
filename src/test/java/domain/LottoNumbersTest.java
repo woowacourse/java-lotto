@@ -1,5 +1,6 @@
 package domain;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
@@ -22,8 +23,29 @@ class LottoNumbersTest {
 
     @DisplayName("지난 주 당첨 번호 입력시 숫자가 아닌 경우 예외를 발생시킨다.")
     @Test
-    void input_lottoNumbers_() {
+    void input_lottoNumbers_format() {
         assertThatThrownBy(() -> new LottoNumbers("1, a, 3, 4, 5, 6"))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("발급 로또와 당첨 로또를 비교한 뒤 당첨 갯수 반환을 확인한다.")
+    @Test
+    void compare_LottoNumbers() {
+        final LottoNumbers lottoNumbers = new LottoNumbers("1,2,3,4,5,6");
+        final LottoNumbers winNumbers = new LottoNumbers("1,2,3,4,5,7");
+        final int winCount = lottoNumbers.compare(winNumbers);
+
+        assertThat(winCount).isEqualTo(5);
+    }
+
+    @DisplayName("발급 로또와 보너스 번호를 비교하여 포함여부를 확인한다.")
+    @Test
+    void compare_bonusNumbers() {
+        final LottoNumbers lottoNumbers = new LottoNumbers("1,2,3,4,5,6");
+        final LottoNumber bonusNumber = new LottoNumber("6");
+
+        final boolean hasBonus = lottoNumbers.compareBonus(bonusNumber);
+
+        assertThat(hasBonus).isTrue();
     }
 }

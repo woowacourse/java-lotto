@@ -14,7 +14,11 @@ class LottoFactoryTest {
 
     @BeforeEach
     void setUp() {
-        lottoFactory = new LottoFactory();
+        final LottoNumbers winNumbers = new LottoNumbers("1, 2, 3, 4, 5, 6");
+        final LottoNumber bonusNumber = new LottoNumber("7");
+        final Money money = new Money("2500");
+
+        lottoFactory = new LottoFactory(money, winNumbers, bonusNumber);
     }
 
     @DisplayName("구입 금액을 로또 발급 갯수로 반환을 확인한다.")
@@ -42,5 +46,12 @@ class LottoFactoryTest {
         final List<LottoNumbers> lottoTickets = lottoFactory.getLottoTickets();
 
         assertThat(lottoTickets.size()).isEqualTo(2);
+    }
+
+    @Test
+    void create_bonus_number() {
+        lottoFactory.generateAutoLottoNumbers();
+        lottoFactory.getLottoTickets();
+        lottoFactory.compare();
     }
 }
