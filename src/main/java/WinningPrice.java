@@ -6,7 +6,8 @@ public enum WinningPrice {
     FiveAndBonus(5,true,30_000_000),
     Five(5,false, 1_500_000),
     Four(4, false,50_000),
-    Three(3, false,5_000);
+    Three(3, false,5_000),
+    Fail(0, false, 0);
 
     private final int count;
     private final boolean containBonus;
@@ -19,11 +20,16 @@ public enum WinningPrice {
     }
 
     public static WinningPrice of(int count, boolean containBonus) {
+        if (count == 5 && containBonus) {
+            return WinningPrice.FiveAndBonus;
+        }
+        if (count == 5 && !containBonus) {
+            return WinningPrice.Five;
+        }
         return Arrays.stream(values())
             .filter(it -> it.count == count)
-            .filter(it -> it.containBonus == containBonus)
             .findAny()
-            .orElseThrow(IllegalArgumentException::new);
+            .orElse(WinningPrice.Fail);
     }
 
     public int getPrice() {

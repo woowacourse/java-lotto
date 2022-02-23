@@ -71,7 +71,7 @@ public class Lotto {
                 count++;
             }
         }
-        if (numbers.contains(bonusNumber)) {
+        if (count == 5 && numbers.contains(bonusNumber)) {
             containsBonus = true;
         }
 
