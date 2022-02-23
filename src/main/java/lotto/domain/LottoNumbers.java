@@ -22,7 +22,8 @@ public class LottoNumbers {
     }
 
     public LottoNumbers(final Set<LottoNumber> lottoValues) {
-        this.values = lottoValues.stream()
+        values = lottoValues.stream()
+                .sorted()
                 .collect(Collectors.toUnmodifiableList());
     }
 
