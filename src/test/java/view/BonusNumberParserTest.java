@@ -7,15 +7,17 @@ import model.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class BonusNumberParserTest {
 
-    @Test
+    @ParameterizedTest
+    @CsvSource({"1, 1", "24, 24", "42, 42"})
     @DisplayName("정상적인 보너스 번호 입력 처리")
-    void parse() {
+    void parse(String text, int actual) {
         BonusNumberParser parser = new BonusNumberParser();
-        assertThat(parser.parse("45")).isEqualTo(45);
+        assertThat(parser.parse(text)).isEqualTo(actual);
     }
 
     @ParameterizedTest
