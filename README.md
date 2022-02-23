@@ -76,6 +76,11 @@
    총 수익률은 0.35입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)
 ```
 
+## ✅ TODO
+
+- [x] 인풋 검증 클래스 구현
+- [ ] 상수로 변환 해야됨
+
 ## 💻 구조
 
 - [ ] controller
@@ -92,11 +97,13 @@
 - [ ] utils
   - [ ] Constants
   - [x] LottoNumberGenerator
+  - [x] Separator
 - [ ] validator
+  - [ ] InputValidator
   - [x] LottoNumbersValidator
-  - [x] LottoNumberValidator
+  - [ ] LottoNumberValidator
   - [x] MoneyValidator
-
+  - [x] WinLottoNumbersValidator
 
 ## 💕 페어코딩 협의사항
 

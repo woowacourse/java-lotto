@@ -20,6 +20,7 @@ public class MainController {
         OutputView.printLottoTickets(lottoTickets);
 
         // lotto numbers
+
         // bonus number
         // result
     }

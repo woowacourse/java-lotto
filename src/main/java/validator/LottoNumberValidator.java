@@ -1,7 +1,7 @@
 package validator;
 
 public class LottoNumberValidator {
-    public static void validate(int number){
+    public static void validate(int number) {
         isRightNumberRange(number);
     }
 

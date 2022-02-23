@@ -2,7 +2,6 @@ package domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -13,7 +12,7 @@ class WinLottoNumbersTest {
 
     @BeforeEach
     void 당첨번호_생성() {
-        winLottoNumbers = WinLottoNumbers.ofString("1, 2, 3, 4, 5, 6");
+        winLottoNumbers = WinLottoNumbers.of("1, 2, 3, 4, 5, 6", 10);
     }
 
     @ParameterizedTest

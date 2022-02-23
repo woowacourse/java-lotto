@@ -1,7 +1,5 @@
 package view;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 import domain.LottoNumbers;
@@ -22,8 +20,8 @@ class OutputViewTest {
         System.setOut(new PrintStream(out));
 
         List<LottoNumbers> lottoTickets = new ArrayList<>();
-        lottoTickets.add(new LottoNumbers(Arrays.asList(1,2,3,4,5,6)));
-        lottoTickets.add(new LottoNumbers(Arrays.asList(7,8,9,10,11,12)));
+        lottoTickets.add(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        lottoTickets.add(new LottoNumbers(Arrays.asList(7, 8, 9, 10, 11, 12)));
         OutputView.printLottoTickets(lottoTickets);
 
         assertThat(out.toString()).isEqualTo("2개를 구매했습니다."

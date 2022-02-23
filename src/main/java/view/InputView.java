@@ -9,9 +9,9 @@ public class InputView {
     public static int inputMoney() {
         System.out.println("구입금액을 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
-        try{
+        try {
             return scanner.nextInt();
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new IllegalArgumentException(NUM_ERROR_MESSAGE);
         }
     }
@@ -25,9 +25,9 @@ public class InputView {
     public static int inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
-        try{
+        try {
             return scanner.nextInt();
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new IllegalArgumentException(NUM_ERROR_MESSAGE);
         }
     }

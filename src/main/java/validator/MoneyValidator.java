@@ -2,7 +2,7 @@ package validator;
 
 public class MoneyValidator {
 
-    public static void validate(int money){
+    public static void validate(int money) {
         isOverThousand(money);
         isDivideByThousand(money);
     }

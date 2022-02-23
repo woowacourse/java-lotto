@@ -2,16 +2,20 @@ package validator;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import java.util.Arrays;
+import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("NonAsciiCharacters")
 class WinLottoNumbersValidatorTest {
+    @Test
+    void 로또_번호_중복_확인() {
+        assertThatThrownBy(() -> WinLottoNumbersValidator.validate(Arrays.asList(1, 2, 3, 4, 5, 2)))
+                .isInstanceOf(Exception.class);
+    }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"1, 2, 3", "1, 2, 3, 4, 5, 6, ", ", 1, 2, 3, 4, 5, 6", "1, 2, 3, 4, 5, 6, 7"})
-    void 패턴에_맞지_않는_경우_예외처리(String input) {
-        assertThatThrownBy(() -> WinLottoNumbersValidator.validate(input))
+    @Test
+    void 로또_번호와_보너스_중복_확인() {
+        assertThatThrownBy(() -> WinLottoNumbersValidator.validateBonus(Arrays.asList(1, 2, 3, 4, 5, 6), 5))
                 .isInstanceOf(Exception.class);
     }
 }
