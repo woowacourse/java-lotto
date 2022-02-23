@@ -18,7 +18,7 @@
 
 ### 3. 당첨 번호 입력
 - 당첨 번호를 입력한다.
-  - ', '(콤마)로 구분해서 입력한다.
+  - ', ' 또는 ','(콤마)로 구분해서 입력한다.
   - 숫자들이 중복되지 않아야 한다.
   - 1부터 45 사이의 숫자여야 한다.
 - 보너스 볼을 입력한다.
@@ -34,28 +34,29 @@
   - 6개 일치 (2000000000원)
 - 총 수익률을 출력한다.
 
-### 도메인 설계
+### 도메인 책임 설계
 - Money
   - 10 단위인지 검증
 - LottoMachine
   - 1000 이상인지 검증
-  - 금액에 맞게 Lotto 생성
+  - 금액에 맞게 LottoTicket 생성
   - 모든 로또와 당첨 번호를 비교해 WinningStat 반환
-- Lotto
-  - 당첨 번호, 보너스볼로 몇 등인지 반환한다.
-- LottoNumbers
-  - 중복되지 않는 번호 6개
+- LottoTicket
+  - 당첨 번호, 보너스볼로 LottoRank 반환
+- LottoTicketNumbers
+  - LottoTicket이 가지는 중복되지 않는 번호 6개
   - 7개 이상부터 예외
   - 로또 번호를 정렬한다.
   - 로또 번호와 당첨 번호를 비교한다
   - 로또 번호에 보너스 번호가 포함되어 있는지 판별한다.
-- LottoNumberGenerator
-  - 1부터 45 사이의 모든 LottoNumber를 가진다.
+- LottoNumberStrategy
   - LottoNumbers를 반환한다.
+- RandomLottoNumberStrategy
+  - 랜덤으로 LottoNumbers를 반환한다.
 - LottoNumber
   - 1부터 45 사이의 숫자여야 한다.
 - WinningStat
-  - 번호 일치 개수를 enum으로 가지고 있는다.
+  - 구입한 로또의 당첨 통계를 가지고 있다.
   - 수익률 계산
 - LottoRank
-  - 로또 번호가 몇 개를 맞췄는 지와 보너스 여부를 받아 랭크를 반환한다. 
+  - 로또 번호가 몇 개를 맞췄는 지와 보너스 여부를 받아 등수를 반환한다. 
