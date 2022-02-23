@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -9,4 +11,9 @@ public class InputView {
     public static int inputMoney() {
         return SCANNER.nextInt();
     }
+
+    public static List<Number> inputNumbers() {
+        return Collections.emptyList();
+    }
+
 }
