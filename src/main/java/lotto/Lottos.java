@@ -8,16 +8,12 @@ public class Lottos {
 
     private List<Lotto> lottos;
 
-    public void purchase(int amount) {
+    public void purchase(Money money) {
         this.lottos = new ArrayList<>();
 
-        for (int i = 0; i < countTickets(amount); i++) {
+        for (int i = 0; i < money.purchase(PRICE); i++) {
             this.lottos.add(new Lotto());
         }
-    }
-
-    private int countTickets(int amount) {
-        return amount / PRICE;
     }
 
     public List<Lotto> getLottos() {

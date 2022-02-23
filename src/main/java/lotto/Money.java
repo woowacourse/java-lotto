@@ -38,4 +38,8 @@ public class Money {
     public double rate(int numerator) {
         return (double) numerator / this.amount;
     }
+
+    public int purchase(int price) {
+        return this.amount / price;
+    }
 }
