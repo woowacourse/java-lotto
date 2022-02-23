@@ -2,6 +2,8 @@ package lotto.controller;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class InputControllerTest {
@@ -22,13 +24,13 @@ public class InputControllerTest {
 
     @Test
     void 당첨번호_분리_성공() {
-        String value = "1, 2, 3, 4, 5, 6";
+        String value = "1, 2,3, 4, 5,6";
         assertThat(inputController.splitWinningNumbers(value)).contains(1,2,3,4,5,6);
     }
 
     @Test
     void 보너스번호_테스트() {
         String value = "44";
-        assertThat(inputController.toIntBonusNumber(value)).isEqualTo(44);
+        assertThat(inputController.toIntBonusNumber(value, List.of(1,2,3,4,5,6))).isEqualTo(44);
     }
 }

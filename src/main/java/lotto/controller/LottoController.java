@@ -7,6 +7,8 @@ import lotto.util.RandomLottoGenerator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.List;
+
 public class LottoController {
 
     private final InputController inputController;
@@ -21,10 +23,9 @@ public class LottoController {
         insertLottoToLottos(countLotto, lottos);
         ResultView.printResult(lottos);
 
-        WinningLotto winningLotto = new WinningLotto(
-                inputController.splitWinningNumbers(InputView.inputWinningNumbers()),
-                inputController.toIntBonusNumber(InputView.inputBonusNumber())
-        );
+        List<Integer> winningNumbers = inputController.splitWinningNumbers(InputView.inputWinningNumbers());
+        int bonusNumber = inputController.toIntBonusNumber(InputView.inputBonusNumber(), winningNumbers);
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
         winningLotto.checkRank(lottos);
         for (Lotto lotto : lottos.getLottos()) {
