@@ -4,15 +4,16 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class StatisticsTest {
+public class StatisticTest {
 
     @Test
     @DisplayName("수익률이 일치하는지 테스트")
     public void getProfitRate() {
-        LinkedHashMap<Rank, Integer> result = new LinkedHashMap<>();
+        Map<Rank, Integer> result = new LinkedHashMap<>();
         result.put(Rank.FOURTH, 2);
         result.put(Rank.FIFTH, 1);
 
@@ -22,5 +23,15 @@ public class StatisticsTest {
         double profitRate = statistic.getProfitRate(money);
 
         assertThat(profitRate).isEqualTo(realProfitRate);
+    }
+
+    @Test
+    @DisplayName("해당 순위가 당첨되었을 때 통계에 들어갔는지 테스트")
+    public void addTest() {
+
+        Statistic statistic = Statistic.initStatistic();
+        statistic.add(Rank.FIFTH);
+
+        assertThat(statistic.getStatistics().get(Rank.FIFTH)).isEqualTo(1);
     }
 }
