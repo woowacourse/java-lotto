@@ -26,4 +26,8 @@ public class LottoNumbers {
         }
         return count;
     }
+
+    public List<LottoNumber> get() {
+        return lottoNumbers;
+    }
 }
