@@ -12,10 +12,10 @@ public class Statistic {
 
     public double getProfitRate(Money money) {
 
-        double totalWinning = 0;
-        for (Map.Entry<Rank, Integer> rankIntegerEntry : statistics.entrySet()) {
-            totalWinning += rankIntegerEntry.getKey().getWinningPrice() * rankIntegerEntry.getValue();
-        }
+        double totalWinning = statistics.entrySet()
+                .stream()
+                .mapToDouble(rankIntegerEntry -> rankIntegerEntry.getKey().getWinningPrice() * rankIntegerEntry.getValue())
+                .sum();
         return totalWinning / money.getMoney();
     }
 
