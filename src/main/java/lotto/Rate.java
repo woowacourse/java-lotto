@@ -11,6 +11,10 @@ public class Rate {
         this.rate = rate;
     }
 
+    public BigDecimal getRate() {
+        return rate;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
