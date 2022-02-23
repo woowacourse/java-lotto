@@ -18,4 +18,8 @@ public class Lottos {
                 .forEach(result -> resultMap.put(result, resultMap.get(result) + 1));
         return new LottoResult(resultMap);
     }
+
+    public List<Lotto> getLottos() {
+        return List.copyOf(lottos);
+    }
 }
