@@ -25,7 +25,7 @@ public class LottoController {
         OutputView.printLottos(lottos);
 
         List<Number> lastWeekWinningNumbers = getLastWeekWinningNumbers();
-        Number bonusNumber = getBonusNumber(); // Todo : do while
+        Number bonusNumber = getBonusNumber(lastWeekWinningNumbers);
 
         Result result = lottos.getResult(lastWeekWinningNumbers, bonusNumber);
         OutputView.printResult(result);
@@ -34,9 +34,29 @@ public class LottoController {
         OutputView.printRateOfProfit(rateOfProfit);
     }
 
-    private Number getBonusNumber() {
-        String input = InputView.inputBonusNumber();
-        return new Number(input);
+    private Number getBonusNumber(List<Number> numbers) {
+        boolean isDuplicate = false;
+        Number number;
+
+        do {
+            String input = InputView.inputBonusNumber();
+            number = toNumber(input);
+            isDuplicate = numbers.contains(number);
+            if (isDuplicate) {
+                System.out.println("중복입니다");
+            }
+        } while (number == null || isDuplicate);
+
+        return number;
+    }
+
+    private Number toNumber(String input) {
+        try {
+            return new Number(input);
+        } catch (IllegalArgumentException exception) {
+            System.out.println(exception.getMessage());
+        }
+        return null;
     }
 
     private List<Number> getLastWeekWinningNumbers() {
