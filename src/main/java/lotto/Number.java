@@ -16,13 +16,6 @@ public class Number {
     }
 
     @Override
-    public String toString() {
-        return new StringJoiner(", ", Number.class.getSimpleName() + "[", "]")
-            .add("number=" + number)
-            .toString();
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

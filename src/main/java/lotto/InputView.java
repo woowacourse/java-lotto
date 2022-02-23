@@ -20,14 +20,18 @@ public class InputView {
         return validateNumber(input);
     }
 
-    public static List<Number> inputNumbers() {
+    public static List<Number> inputWinnerNumbers() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.")
         String input = SCANNER.nextLine();
         validateBlank(input);
         return convertToNumbers(input);
     }
 
-    public static Number inputNumber() {
-        return new Number(SCANNER.nextInt());
+    public static Number inputBonusNumber() {
+        System.out.println("구입금액을 입력해 주세요.");
+        String input = SCANNER.nextLine();
+        validateBlank(input);
+        return new Number(validateNumber(input));
     }
 
     private static List<Number> convertToNumbers(String input) {

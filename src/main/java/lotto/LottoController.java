@@ -27,11 +27,11 @@ public class LottoController {
     }
 
     private List<Number> winnerNumbers() {
-        return InputView.inputNumbers();
+        return InputView.inputWinnerNumbers();
     }
 
     private Number bonusNumber() {
-        return InputView.inputNumber();
+        return InputView.inputBonusNumber();
     }
 
     private Rate calculateRate(int money, List<Rank> ranks) {
