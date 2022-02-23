@@ -25,7 +25,7 @@ public class LottoTest {
 
         Integer bonusNumber = 11;
         assertThat(lotto.checkWinning(winningNumber, bonusNumber))
-                .isEqualTo(1);
+                .isEqualTo(Rewards.FIRST_REWARD);
     }
 
     @Test
@@ -37,7 +37,8 @@ public class LottoTest {
 
         Integer bonusNumber = 9;
 
-        assertThat(lotto.checkWinning(winningNumber, bonusNumber)).isEqualTo(2);
+        assertThat(lotto.checkWinning(winningNumber, bonusNumber))
+                .isEqualTo(Rewards.SECOND_REWARD);
     }
 
     @Test
@@ -49,7 +50,8 @@ public class LottoTest {
 
         Integer bonusNumber = 12;
 
-        assertThat(lotto.checkWinning(winningNumber, bonusNumber)).isEqualTo(3);
+        assertThat(lotto.checkWinning(winningNumber, bonusNumber))
+                .isEqualTo(Rewards.THIRD_REWARD);
     }
 
     @Test
@@ -61,7 +63,8 @@ public class LottoTest {
 
         Integer bonusNumber = 9;
 
-        assertThat(lotto.checkWinning(winningNumber, bonusNumber)).isEqualTo(-1);
+        assertThat(lotto.checkWinning(winningNumber, bonusNumber))
+                .isEqualTo(Rewards.NO_REWARD);
     }
 
 

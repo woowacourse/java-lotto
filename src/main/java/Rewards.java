@@ -12,7 +12,7 @@ public enum Rewards {
     private final int winningCount;
     private final int bonusCount;
     private final int reward;
-    private final int count;
+    private int count;
 
     Rewards(int ranking, int winningCount, int bonusCount, int reward, int count) {
         this.ranking= ranking;
@@ -31,5 +31,18 @@ public enum Rewards {
 
     public static int getRanking(Rewards rewards) {
         return rewards.ranking;
+    }
+
+    public static void addCount(Rewards rewards) {
+        rewards.count++;
+
+    }
+
+    public static int calculateYield(Rewards rewards) {
+        return rewards.count * rewards.reward;
+    }
+
+    public static int getCount(Rewards rewards) {
+        return rewards.count;
     }
 }

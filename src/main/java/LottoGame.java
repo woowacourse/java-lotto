@@ -1,10 +1,9 @@
-import java.sql.SQLOutput;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoGame {
 
@@ -13,7 +12,6 @@ public class LottoGame {
 
     private Lottos lottos;
     private Map<Integer, Integer> convertReward;
-    private Map<Integer, Integer> results;
 
 //    public LottoGame() {
 //
@@ -59,25 +57,35 @@ public class LottoGame {
     }
 
     public void makeResult(List<Integer> winningNumbers, Integer bonusNumber) {
-
-        results = lottos.compareAllLotto(winningNumbers, bonusNumber);
-
+        lottos.compareAllLotto(winningNumbers, bonusNumber);
     }
 
     public double getYield() {
 
-        Set<Integer> winningRankings = results.keySet();
+
         int prize = 0;
-        for (Integer winningRanking : winningRankings) {
-            prize += results.get(winningRanking) * convertReward.get(winningRanking);
-        }
-        System.out.println("@@@@@prize: " + prize);
+
+        prize = Arrays.stream(Rewards.values()).map(x -> Rewards.calculateYield(x)).reduce(0, Integer::sum);
+
+
+
+        //Integer sum1 = numbers.stream().reduce(0, Integer::sum);
+
+
+
+//
+//        Set<Integer> winningRankings = results.keySet();
+//        int prize = 0;
+//        for (Integer winningRanking : winningRankings) {
+//            prize += results.get(winningRanking) * convertReward.get(winningRanking);
+//        }
+//        System.out.println("@@@@@prize: " + prize);
         return prize / (1000 * lottos.getSize());
     }
-
-    public Map<Integer, Integer> getResults() {
-        return results;
-    }
+//
+//    public R getResults() {
+//        return Rewards;
+//    }
 
     public Lottos getLottos() {
         return lottos;

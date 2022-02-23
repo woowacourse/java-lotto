@@ -27,15 +27,11 @@ public class Lottos {
 
     }
 
-    public Map<Integer, Integer> compareAllLotto(List<Integer> winningNumbers, int bonusNumber) {
-
-        Map<Integer, Integer> results = new HashMap<>();
+    public void compareAllLotto(List<Integer> winningNumbers, int bonusNumber) {
         for (int i = 0; i < lottos.size(); ++i) {
-            int winningRanking = lottos.get(i).checkWinning(winningNumbers, bonusNumber);
-            results.put(winningRanking, results.getOrDefault(winningRanking, 0) + 1);
+            Rewards rewards = lottos.get(i).checkWinning(winningNumbers, bonusNumber);
+            Rewards.addCount(rewards);
         }
-
-        return results;
     }
 
     public int getSize() {
