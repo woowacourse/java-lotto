@@ -27,7 +27,7 @@ public class Money {
     }
 
     public int calculateCounts() {
-        
+
         return this.money / 1_000;
     }
 
@@ -49,5 +49,9 @@ public class Money {
     @Override
     public int hashCode() {
         return money;
+    }
+
+    public double calculateProfit(final int totalWinPrice) {
+        return (double) totalWinPrice / this.money;
     }
 }
