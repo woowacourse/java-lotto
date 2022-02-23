@@ -7,6 +7,14 @@ public class Count {
         this.count = count;
     }
 
+    public boolean isEnd() {
+        return this.count <= 0;
+    }
+
+    public Count decrease() {
+        return new Count(this.count - 1);
+    }
+
     @Override
     public boolean equals(final Object object) {
         if (this == object) {
