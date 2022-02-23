@@ -11,13 +11,8 @@ public class PurchaseMoneyInputView implements InputView<Integer> {
         return Integer.valueOf(userInput);
     }
 
-    @Override
-    public void printMessage() {
-        System.out.println("구입금액을 입력해 주세요.");
-    }
-
     public Integer printInputPurchaseMoneyAndGet() {
-        printMessage();
+        System.out.println("구입금액을 입력해 주세요.");
         try {
             return getUserInputData();
         } catch (IllegalArgumentException e) {

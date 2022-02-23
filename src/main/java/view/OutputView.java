@@ -1,5 +1,5 @@
 package view;
 
-public interface OutputView<P> extends View {
+public interface OutputView<P> {
     void printOutputData(P parameter);
 }

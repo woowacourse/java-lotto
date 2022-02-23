@@ -2,7 +2,7 @@ package view;
 
 import java.util.Scanner;
 
-public interface InputView<T> extends View {
+public interface InputView<T>{
 
     Scanner scanner = new Scanner(System.in);
 
