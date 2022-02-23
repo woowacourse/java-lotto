@@ -20,5 +20,14 @@ public class WinningNumber {
         if (winningNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException(ERROR_DUPLICATE_BONUS);
         }
+        bonus = bonusNumber;
+    }
+
+    public List<LottoNumber> getWinningNumbers() {
+        return winningNumbers;
+    }
+
+    public LottoNumber getBonus() {
+        return bonus;
     }
 }

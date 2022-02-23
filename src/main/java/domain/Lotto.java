@@ -17,18 +17,20 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public WinnerPrice calculateRank(Lotto winningLotto, LottoNumber bonus) {
-        int matched = matchedRegularNumbers(winningLotto);
-        boolean hasBonus = matchedBonusNumber(bonus);
-
+    public WinnerPrice calculateRank(WinningNumber winningNumber) {
+        int matched = matchedRegularNumbers(winningNumber);
+        boolean hasBonus = matchedBonusNumber(winningNumber.getBonus());
         if (checkSecond(matched, hasBonus)) {
             return WinnerPrice.SECOND;
+        }
+        if (matched < 3) {
+            return WinnerPrice.FAIL;
         }
         return WinnerPrice.getWinnerPriceByMatched(matched);
     }
 
-    private int matchedRegularNumbers(Lotto winningLotto) {
-        return winningLotto.getLottoNumbers().stream()
+    private int matchedRegularNumbers(WinningNumber winningNumber) {
+        return winningNumber.getWinningNumbers().stream()
                 .filter(lottoNumber -> lottoNumbers.contains(lottoNumber))
                 .collect(Collectors.toList())
                 .size();

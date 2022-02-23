@@ -11,8 +11,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class PurchasedLottosTest {
 
     PurchasedLotto lottos;
-    Lotto winningLotto;
-    LottoNumber bonus;
+    WinningNumber winningLotto;
     int inputMoney;
 
     @BeforeEach
@@ -26,21 +25,20 @@ public class PurchasedLottosTest {
 
         Integer[] winningNumbersArray = {1, 2, 3, 4, 5, 12};
         List<Integer> winningNumbers = Arrays.asList(winningNumbersArray);
-        winningLotto = new Lotto(winningNumbers);
-
-        bonus = new LottoNumber(6);
+        winningLotto = new WinningNumber(winningNumbers);
+        winningLotto.addBonusNumber(6);
     }
 
     @Test
     void lottos_makeRightTotalPrize() {
-        PrizeResult finalResult = lottos.calculateWinning(winningLotto, bonus);
+        PrizeResult finalResult = lottos.calculateWinning(winningLotto);
 
         assertThat(finalResult.totalPrize()).isEqualTo(2001555000);
     }
 
     @Test
     void lottos_calulateEarningRate() {
-        lottos.calculateWinning(winningLotto, bonus);
+        lottos.calculateWinning(winningLotto);
 
         int prize = 2001555000;
         float expected = (float) prize / inputMoney;

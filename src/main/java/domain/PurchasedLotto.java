@@ -28,10 +28,10 @@ public class PurchasedLotto {
         lottos.add(lotto);
     }
 
-    public PrizeResult calculateWinning(Lotto winningLotto, LottoNumber bonus) {
+    public PrizeResult calculateWinning(WinningNumber winningNumber) {
         lottos.stream()
                 .forEach(lotto -> {
-                    WinnerPrice winnerPrice = lotto.calculateRank(winningLotto, bonus);
+                    WinnerPrice winnerPrice = lotto.calculateRank(winningNumber);
                     finalResult.updatePrizeResult(winnerPrice);
                 });
         return finalResult;

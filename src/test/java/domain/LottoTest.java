@@ -19,16 +19,15 @@ public class LottoTest {
 
         Integer[] winningNumbersArray = {1, 2, 3, 10, 11, 12};
         List<Integer> winningNumbers = Arrays.asList(winningNumbersArray);
-        Lotto winningLotto = new Lotto(winningNumbers);
+        WinningNumber winningLotto = new WinningNumber(winningNumbers);
+        winningLotto.addBonusNumber(45);
 
-        LottoNumber bonus = new LottoNumber(45);
-
-        WinnerPrice winnerPrice = lotto.calculateRank(winningLotto, bonus);
+        WinnerPrice winnerPrice = lotto.calculateRank(winningLotto);
         assertThat(winnerPrice).isEqualTo(WinnerPrice.FIFTH);
     }
 
     @Test
-    @DisplayName("5개 일치와 보너스가 있다면 5등이다.")
+    @DisplayName("5개 일치와 보너스가 있다면 2등이다.")
     void lotto_calculateRightSecondRank() {
         Integer[] numbersArray = {1, 2, 3, 4, 5, 6};
         List<Integer> numbers = Arrays.asList(numbersArray);
@@ -36,11 +35,10 @@ public class LottoTest {
 
         Integer[] winningNumbersArray = {1, 2, 3, 4, 5, 12};
         List<Integer> winningNumbers = Arrays.asList(winningNumbersArray);
-        Lotto winningLotto = new Lotto(winningNumbers);
+        WinningNumber winningLotto = new WinningNumber(winningNumbers);
+        winningLotto.addBonusNumber(6);
 
-        LottoNumber bonus = new LottoNumber(6);
-
-        WinnerPrice winnerPrice = lotto.calculateRank(winningLotto, bonus);
+        WinnerPrice winnerPrice = lotto.calculateRank(winningLotto);
         assertThat(winnerPrice).isEqualTo(WinnerPrice.SECOND);
     }
 
