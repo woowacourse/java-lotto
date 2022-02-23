@@ -15,7 +15,7 @@ class LottoGeneratorTest {
         final int numberOfGenerating = 5;
         final LottoGenerator lottoGenerator = new LottoGenerator();
         //when
-        final List<LottoNumbers> generated = lottoGenerator.generate(numberOfGenerating);
+        final List<LottoNumbers> generated = lottoGenerator.generateLottoNumbersGroup(numberOfGenerating);
         final int actualDistinctCount = (int) generated.stream()
                 .distinct()
                 .count();

@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 public class LottoGenerator {
     private final List<LottoNumber> basicNumbers = Arrays.asList(LottoNumber.values());
 
-    public List<LottoNumbers> generate(final int numberOfGenerating) {
+    public List<LottoNumbers> generateLottoNumbersGroup(final int numberOfGenerating) {
         final Set<LottoNumbers> generatedLottoNumbersGroup = new HashSet<>();
         while (generatedLottoNumbersGroup.size() < numberOfGenerating) {
             generatedLottoNumbersGroup.add(generateLottoNumbers());
