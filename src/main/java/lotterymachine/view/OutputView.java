@@ -32,4 +32,16 @@ public class OutputView {
         }
         return String.format("%d개 일치 (%d원) - %d개%n", lottery.getCountOfMatchingNumbers(), lottery.getWinningPrice(), lottery.getNumberOfMatchingTicket());
     }
+
+    public static void printProfitRate(double calculateProfitRate) {
+        System.out.printf("총 수익률은 %.2f입니다.", calculateProfitRate);
+        System.out.printf("(기준이 1이기 때문에 결과적으로 %s라는 의미임)", extracted(calculateProfitRate));
+    }
+
+    private static String extracted(double calculateProfitRate) {
+        if (calculateProfitRate < 1) {
+            return "손해";
+        }
+        return "이득";
+    }
 }

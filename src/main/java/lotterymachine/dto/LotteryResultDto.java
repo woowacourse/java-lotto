@@ -43,4 +43,8 @@ public class LotteryResultDto {
     public boolean isBonus() {
         return bonus;
     }
+
+    public int sumIncome() {
+        return winningPrice * numberOfMatchingTicket;
+    }
 }

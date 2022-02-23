@@ -22,6 +22,15 @@ public class LotteryMachine {
         int bonusNumber = InputView.getBonusNumber(winningNumbers);
         List<LotteryResultDto> lotteryResult = LotteryResultDto.createList(lotteryTickets.getLotteriesResult(winningNumbers, bonusNumber));
         OutputView.printStatistics(lotteryResult);
+        OutputView.printProfitRate(LotteryCalculator.calculateProfitRate(winningLotteryAmount(lotteryResult), numberOfTickets * 1000));
+    }
+
+    private static int winningLotteryAmount(List<LotteryResultDto> lotteryResult) {
+        int sum = 0;
+        for (LotteryResultDto lotteryResultDto : lotteryResult) {
+            sum += lotteryResultDto.sumIncome();
+        }
+        return sum;
     }
 
     private static List<LotteryTicket> createLotteryTickets(int amount, int numberOfTickets) {
