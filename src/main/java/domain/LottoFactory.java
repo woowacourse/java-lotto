@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 
 public class LottoFactory {
 
@@ -20,9 +21,11 @@ public class LottoFactory {
             autoLottoNumbers.add(new LottoNumber(ThreadLocalRandom.current().nextInt(45) + 1));
         }
 
-        return new LottoNumbers(new ArrayList<>(autoLottoNumbers));
+        return new LottoNumbers(autoLottoNumbers.stream()
+                .sorted()
+                .collect(Collectors.toList()));
     }
-    
+
     public void issueLotto(Count count) {
         lotto.clear();
         while (!count.isEnd()) {
