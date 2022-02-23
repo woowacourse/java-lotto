@@ -1,22 +1,22 @@
 package domain;
 
 public enum Rank {
-    FIRST(6, 0),
-    SECOND(5, 1),
-    THIRD(5, 0),
-    FOURTH(4, 0),
-    FIFTH(3, 0),
-    OTHER(0,0);
+    FIRST(6, false),
+    SECOND(5, true),
+    THIRD(5, false),
+    FOURTH(4, false),
+    FIFTH(3, false),
+    OTHER(0,false);
 
-    private int count;
-    private int bonus;
+    private final int count;
+    private final boolean bonus;
 
-    Rank(int count, int bonus) {
+    Rank(int count, boolean bonus) {
         this.count = count;
         this.bonus = bonus;
     }
 
-    public static Rank value(int count, int bonus) {
+    public static Rank value(int count, boolean bonus) {
         for (Rank rank : Rank.values()) {
             if (rank.count == count && rank.bonus == bonus) {
                 return rank;
