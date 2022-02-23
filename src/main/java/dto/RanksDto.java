@@ -1,5 +1,6 @@
 package dto;
 
+<<<<<<< HEAD
 import domain.Rank;
 <<<<<<< HEAD
 import domain.ResultStatus;
@@ -39,15 +40,24 @@ public class RanksDto {
 =======
 
 import java.util.ArrayList;
+=======
+>>>>>>> 6741479 (feat: 수익률 계산 로직 및 출력 기능 구현)
 import java.util.List;
 
 public class RanksDto {
     private final List<RankDto> rankDtos;
+    private double incomeRate;
 
-    public RanksDto(List<RankDto> rankDtos) {
+    public RanksDto(List<RankDto> rankDtos, double incomeRate) {
         this.rankDtos = rankDtos;
+        this.incomeRate = incomeRate;
     }
 
+    public List<RankDto> getRankDtos() {
+        return rankDtos;
+    }
+
+<<<<<<< HEAD
 //    public static RanksDto from(Rank ranks){
 //        List<RankDto> rankDtos = new ArrayList<>();
 //        for (Rank rank : ranks.values()) {
@@ -56,4 +66,9 @@ public class RanksDto {
 //        return new RanksDto(rankDtos);
 //    }
 >>>>>>> 2821995 (feat: 결과 출력 기능 구현)
+=======
+    public double getIncomeRate() {
+        return incomeRate;
+    }
+>>>>>>> 6741479 (feat: 수익률 계산 로직 및 출력 기능 구현)
 }

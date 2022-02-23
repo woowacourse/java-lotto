@@ -26,6 +26,10 @@ public class Player {
         return lottos;
     }
 
+    public int getMoney() {
+        return money.getAmount();
+    }
+
     public List<Lotto> getLottos() {
         return lottos;
     }
