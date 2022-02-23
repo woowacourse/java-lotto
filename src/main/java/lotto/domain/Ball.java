@@ -1,6 +1,6 @@
 package lotto.domain;
 
-public class Ball {
+public class Ball{
     private static final String NUMBER_MATCHES = "[0-9]+";
     public static final int MINIMUM_NUMBER = 1;
     public static final int MAXIMUM_NUMBER = 45;
@@ -40,5 +40,11 @@ public class Ball {
     @Override
     public String toString() {
         return Integer.toString(number);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        Ball ball = (Ball)obj;
+        return this.number == ball.number;
     }
 }
