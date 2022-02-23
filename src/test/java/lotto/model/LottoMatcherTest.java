@@ -63,14 +63,4 @@ class LottoMatcherTest {
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("보너스 볼 번호가 당첨 번호와 중복입니다.");
     }
-
-    @ParameterizedTest
-    @DisplayName("보너스 볼 번호의 범위가 1~45가 아닌 경우 예외 처리")
-    @ValueSource(ints = {-1, 0, 46})
-    void validateRangeBonusNumberTest(int bonusNumber) {
-        assertThatThrownBy(() -> {
-            new LottoMatcher(Arrays.asList(1, 2, 3, 4, 5, 6), bonusNumber);
-        }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("보너스 볼 번호가 1~45 범위 내에 해당하지 않습니다.");
-    }
 }
