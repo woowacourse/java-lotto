@@ -2,6 +2,7 @@ package domain;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,15 +23,7 @@ class LottoFactoryTest {
     void money_to_counts(String inputMoney, int counts) {
         final Money money = new Money(inputMoney);
 
-        assertThat(lottoFactory.calculateCount(money)).isEqualTo(counts);
-    }
-
-    @DisplayName("개별 로또 번호 생성을 확인한다.")
-    @Test
-    void generate_autoLottoNumber_correct() {
-        final LottoNumber lottoNumber = lottoFactory.generateAutoLottoNumber(4);
-
-        assertThat(lottoNumber).isEqualTo(new LottoNumber(4));
+        assertThat(lottoFactory.calculateCount(money)).isEqualTo(new Count(counts));
     }
 
     @DisplayName("자동 로또 발급시 번호 갯수가 6개인지 확인한다.")
@@ -39,5 +32,15 @@ class LottoFactoryTest {
         final LottoNumbers lottoNumbers = lottoFactory.generateAutoLottoNumbers();
 
         assertThat(lottoNumbers.size()).isEqualTo(6);
+    }
+
+    @DisplayName("구입 금액만큼 발급 받은 로또의 갯수를 확인한다.")
+    @Test
+    void issueLotto_count_correct() {
+        final Count count = lottoFactory.calculateCount(new Money("2500"));
+        lottoFactory.issueLotto(count);
+        final List<LottoNumbers> lottoTickets = lottoFactory.getLottoTickets();
+
+        assertThat(lottoTickets.size()).isEqualTo(2);
     }
 }
