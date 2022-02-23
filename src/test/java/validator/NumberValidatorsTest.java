@@ -9,10 +9,10 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.junit.jupiter.params.ParameterizedTest.ARGUMENTS_PLACEHOLDER;
 import static org.junit.jupiter.params.ParameterizedTest.DISPLAY_NAME_PLACEHOLDER;
-import static validator.LottoNumberValidators.validateAndParseNumber;
-import static validator.LottoNumberValidators.validateLottoNumberRange;
-import static validator.LottoNumberValidators.validateNoDuplicateInList;
-import static validator.LottoNumberValidators.validateNoDuplicates;
+import static validator.NumberValidators.validateAndParseNumber;
+import static validator.NumberValidators.validateLottoNumberRange;
+import static validator.NumberValidators.validateNoDuplicateInList;
+import static validator.NumberValidators.validateNoDuplicates;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class LottoNumberValidatorsTest {
+public class NumberValidatorsTest {
 
     public static final String PARAMETERIZED_TEST_DISPLAY_FORMAT =
             DISPLAY_NAME_PLACEHOLDER + " [" + ARGUMENTS_PLACEHOLDER + "]";

@@ -1,6 +1,6 @@
 package view;
 
-import static validator.LottoNumberValidators.validateAndParseNumber;
+import static validator.NumberValidators.validateAndParseNumber;
 
 import java.util.Scanner;
 

@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class LottoNumberValidators {
+public class NumberValidators {
 
     public static int validateAndParseNumber(String value) {
         try {
@@ -19,7 +19,7 @@ public class LottoNumberValidators {
         }
     }
 
-    public static void validateLottoNumberRange(Integer num) {
+    public static void validateLottoNumberRange(int num) {
         if (num < 1 || num > 45) {
             throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_RANGE_EXCEPTION_MESSAGE);
         }
