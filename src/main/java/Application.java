@@ -32,6 +32,11 @@ public class Application {
         List<String> winningNumber = InputView.inputWinningNumber();
         int bonusBall = InputView.inputBonusBall();
         lottoController.determineWinningNumber(winningNumber,bonusBall);
+<<<<<<< HEAD
 >>>>>>> 6a49a84 (feat: 로또 구매 및 당첨번호 세팅 기능 구현)
+=======
+
+        lottoController.calculateRank();
+>>>>>>> 20bb1bf (feat: 2,3등은 보너스볼과 일치하는 숫자의 갯수를 기준으로, 나머지 등수는 일치하는 숫자의 갯수만으로 등수를 판정하는 로직 구현)
     }
 }
