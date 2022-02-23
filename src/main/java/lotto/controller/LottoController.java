@@ -26,6 +26,8 @@ public class LottoController {
         Ball bonusBall = createBonusBall();
 
         checkDuplicatedNumber(lastWeeksWinningNumber, bonusBall);
+        
+        Output.statisticsTitle();
     }
 
     private Lottos buyLotto() {
