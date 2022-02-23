@@ -16,7 +16,7 @@ public class LottoNumberGeneratorStrategyTest {
 
         IntStream.range(0, 100000)
                 .forEach(i -> {
-                    List<Integer> generatedWinningNumbers = lottoNumberGenerateStrategy.generateWinningNumbers();
+                    List<Integer> generatedWinningNumbers = lottoNumberGenerateStrategy.generateLottoNumbers();
                     assertThat(LottoNumbers.LOTTO_NUMBERS.containsAll(generatedWinningNumbers)).isTrue();
                 });
     }
