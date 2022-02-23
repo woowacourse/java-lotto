@@ -58,4 +58,16 @@ public class RankCalculator {
         Rank rank = Rank.of(size, isBonusBallMatched);
         result.put(rank, result.get(rank) + 1);
     }
+
+    public double calcProfitRatio(int amount) {
+        return Math.round((double) calcProfit() / amount * 100) / 100.0;
+    }
+
+    private int calcProfit() {
+        int profit = 0;
+        for (Rank rank : result.keySet()) {
+            profit += result.get(rank) * rank.getPrize();
+        }
+        return profit;
+    }
 }

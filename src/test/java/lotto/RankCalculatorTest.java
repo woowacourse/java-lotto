@@ -54,6 +54,18 @@ class RankCalculatorTest {
         assertThat(actual).isEqualTo(expected);
     }
 
+    @Test
+    @DisplayName("수익률을 계산해 반환한다")
+    void calcProfit() {
+        List<Set<LottoNumber>> tickets = new ArrayList<>();
+        tickets.add(initTicket(List.of(1, 2, 3, 9, 10, 11)));
+        rankCalculator.calcRank(totalNumber, tickets);
+
+        double profit = rankCalculator.calcProfitRatio(90_000);
+
+        assertThat(profit).isEqualTo(0.06);
+    }
+
     private List<Set<LottoNumber>> initTickets() {
         ArrayList<Set<LottoNumber>> tickets = new ArrayList<>();
         tickets.add(initTicket(List.of(1, 2, 3, 4, 5, 6)));
