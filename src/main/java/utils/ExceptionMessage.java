@@ -1,6 +1,7 @@
 package utils;
 
 public class ExceptionMessage {
+<<<<<<< HEAD
 
     public static final String NOT_ENOUGH_MONEY = "구입 금액은 1000원 미만일 수 없습니다.";
 
@@ -9,4 +10,7 @@ public class ExceptionMessage {
 
     public static final String LOTTO_AND_BONUS_BALL_DUPLICATION = "당첨 번호와 보너스 볼은 중복될 수 없다.";
 
+=======
+    public static final String LOTTO_AND_BONUS_BALL_DUPLICATION = "당첨 번호와 보너스 볼은 중복될 수 없다.";
+>>>>>>> 01f73d4 (feat: Winning Lotto 당첨번호와 보너스볼 간 중복검사)
 }
