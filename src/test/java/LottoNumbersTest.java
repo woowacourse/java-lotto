@@ -1,7 +1,10 @@
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import exception.DuplicatedLottoNumbersException;
+import exception.InvalidRangeLottoNumberException;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,10 +18,24 @@ public class LottoNumbersTest {
     }
 
     @Test
+    @DisplayName("로또 번호 리스트가 1 ~ 45 사이에 있는 경우 테스트")
+    void checkValidLottoNumbersRangeTest() {
+        assertThatCode(() -> LottoNumbers.withSixNumbers(1, 2, 3, 4, 5, 45))
+                .doesNotThrowAnyException();
+    }
+
+    @Test
+    @DisplayName("로또 번호 리스트가 1 ~ 45 사이에 있지 않은 경우 테스트")
+    void checkInvalidLottoNumbersRangeTest() {
+        assertThatThrownBy(() -> LottoNumbers.withSixNumbers(1, 2, 3, 0, 5, 46))
+                .isInstanceOf(InvalidRangeLottoNumberException.class);
+    }
+
+    @Test
     @DisplayName("일치하는 숫자 갯수 구하기 테스트")
     void getMatchedNumberCountTest() {
         LottoNumbers lottoNumbers = LottoNumbers.withSixNumbers(1, 2, 3, 4, 5, 6);
-        LottoNumbers winnerNumbers = LottoNumbers.withSixNumbers(1, 10, 100, 1000, 10000, 6);
+        LottoNumbers winnerNumbers = LottoNumbers.withSixNumbers(1, 10, 20, 30, 40, 6);
         int count = lottoNumbers.getMatchedNumberCountWith(winnerNumbers);
         assertThat(count).isEqualTo(2);
     }

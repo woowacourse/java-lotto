@@ -1,19 +1,18 @@
 import exception.DuplicatedLottoNumbersException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
-    private final List<Integer> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers(List<Integer> lottoNumbers) {
-        validate(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
-    }
-
-    public void validate(List<Integer> numbers) {
-        if (hasDuplicatedNumber(numbers)) {
+        if (hasDuplicatedNumber(lottoNumbers)) {
             throw new DuplicatedLottoNumbersException();
         }
+        this.lottoNumbers = lottoNumbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
     private boolean hasDuplicatedNumber(List<Integer> numbers) {
@@ -26,13 +25,18 @@ public class LottoNumbers {
             .count();
     }
 
-    public boolean contains(Integer bonusNumber) {
-        return lottoNumbers.contains(bonusNumber);
+    public boolean contains(Integer number) {
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            if (lottoNumber.getLottoNumber() == number) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public int getMatchedNumberCountWith(LottoNumbers otherLottoNumbers) {
         return (int) this.lottoNumbers.stream()
-            .filter(number -> otherLottoNumbers.contains(number))
+            .filter(number -> otherLottoNumbers.contains(number.getLottoNumber()))
             .count();
     }
 

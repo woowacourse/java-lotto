@@ -15,4 +15,11 @@ public class LottoNumberTest {
             .isInstanceOf(InvalidRangeLottoNumberException.class);
     }
 
+    @ParameterizedTest
+    @DisplayName("로또 번호가 1 ~ 45 사이에 있는 경우 테스트")
+    @ValueSource(ints = {1, 45})
+    void checkValidLottoNumberRangeTest(int number) {
+        assertThatCode(() -> new LottoNumber(number))
+                .doesNotThrowAnyException();
+    }
 }
