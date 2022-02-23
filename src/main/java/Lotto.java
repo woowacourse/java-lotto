@@ -21,7 +21,7 @@ public class Lotto {
         return new Lotto(numbers);
     }
 
-    public int match(List<Integer> winningNumber) {
+    public int match(WinningNumber winningNumber) {
         int count = 0;
         for (int number : numbers) {
             if (winningNumber.contains(number)) {

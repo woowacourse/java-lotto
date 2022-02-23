@@ -24,8 +24,8 @@ public class Lottos {
         return lottos.size();
     }
 
-    public Map<Rank, Integer> getWinningStatistics(List<Integer> winningNumber, int bonusBall) {
-        Map<Rank, Integer> result = new HashMap<>();
+    public Statistic getWinningStatistics(WinningNumber winningNumber, int bonusBall) {
+        LinkedHashMap<Rank, Integer> result = new LinkedHashMap<>();
         Arrays.stream(Rank.values()).forEach(rank -> result.put(rank, 0));
 
         for (Lotto lotto : lottos) {
@@ -35,7 +35,7 @@ public class Lottos {
             Rank key = Rank.valueOf(matchCount, hasBonusBall);
             result.put(key, result.get(key) + 1);
         }
-        return result;
+        return new Statistic(result);
     }
 
     public List<Lotto> getLottos() {

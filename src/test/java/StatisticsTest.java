@@ -2,6 +2,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -11,7 +12,7 @@ public class StatisticsTest {
     @Test
     @DisplayName("수익률이 일치하는지 테스트")
     public void getProfitRate() {
-        Map<Rank, Integer> result = new HashMap<>();
+        LinkedHashMap<Rank, Integer> result = new LinkedHashMap<>();
         result.put(Rank.FOURTH, 2);
         result.put(Rank.FIFTH, 1);
 

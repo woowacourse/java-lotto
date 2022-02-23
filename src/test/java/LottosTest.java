@@ -22,17 +22,17 @@ public class LottosTest {
     @DisplayName("당첨 번호 통계 테스트")
     public void checkWinningStatisticsTest() {
 
-        List<Integer> winningNumber = List.of(1, 2, 3, 4, 5, 6);
+        WinningNumber winningNumber = new WinningNumber(List.of(1, 2, 3, 4, 5, 6));
         Lotto lotto1 = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         Lotto lotto2 = new Lotto(List.of(1, 2, 3, 10, 11, 12));
         Lotto lotto3 = new Lotto(List.of(13, 14, 15, 16, 17, 18));
 
         Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3));
-        Map<Rank, Integer> winningStatistics = lottos.getWinningStatistics(winningNumber, 23);
+        Statistic winningStatistics = lottos.getWinningStatistics(winningNumber, 23);
 
-        assertThat(winningStatistics.get(Rank.FIRST)).isEqualTo(1);
-        assertThat(winningStatistics.get(Rank.SECOND)).isEqualTo(0);
-        assertThat(winningStatistics.get(Rank.FIFTH)).isEqualTo(1);
+        assertThat(winningStatistics.getStatistics().get(Rank.FIRST)).isEqualTo(1);
+        assertThat(winningStatistics.getStatistics().get(Rank.SECOND)).isEqualTo(0);
+        assertThat(winningStatistics.getStatistics().get(Rank.FIFTH)).isEqualTo(1);
 
     }
 }

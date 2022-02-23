@@ -17,4 +17,8 @@ public class WinningNumber {
             throw new IllegalArgumentException(DUPLICATE_BONUS_BALL_MESSAGE);
         }
     }
+
+    public boolean contains(int number) {
+        return winningNumbers.contains(number);
+    }
 }
