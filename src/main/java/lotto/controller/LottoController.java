@@ -31,6 +31,7 @@ public class LottoController {
         for (Lotto lotto : lottos.getLottos()) {
             System.out.println(lotto.getRank());
         }
+        lottos.countRank();
     }
 
     public void insertLottoToLottos(int countLotto, Lottos lottos) {

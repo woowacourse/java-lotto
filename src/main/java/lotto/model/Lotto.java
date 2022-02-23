@@ -43,6 +43,10 @@ public class Lotto {
         this.rank = Rank.getRank(count, win);
     }
 
+    public boolean isRank(Rank rank) {
+        return this.rank == rank;
+    }
+
     public Rank getRank() {
         return rank;
     }
