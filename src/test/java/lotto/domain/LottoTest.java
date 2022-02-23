@@ -22,7 +22,7 @@ public class LottoTest {
                 LottoNumber.NUMBER_45);
         WinningNumbers winningNumbersInstance = new WinningNumbers("1,2,3,4,5,45");
         BonusNumber bonusNumber = new BonusNumber("6", winningNumbers);
-        Lotto lotto = new Lotto(lottoTicket);
+        Lotto lotto = Lotto.getLottoByManual(lottoTicket);
         Assertions.assertThat(lotto.getRank(winningNumbersInstance, bonusNumber)).isEqualTo(Rank.RANK_2);
     }
 }

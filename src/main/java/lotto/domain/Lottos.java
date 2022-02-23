@@ -18,7 +18,7 @@ public class Lottos {
         int ticketCount = getTicketCount(money);
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < ticketCount; i++) {
-            lottos.add(new Lotto(LottoNumber.getRandomLottoNumbers()));
+            lottos.add(Lotto.getLottoByAuto());
         }
         return new Lottos(lottos);
     }
