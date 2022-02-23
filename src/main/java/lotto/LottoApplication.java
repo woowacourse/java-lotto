@@ -63,11 +63,11 @@ public class LottoApplication {
 
     private static Lotto inputWinLotto() {
         return new Lotto(InputView.inputWinLotto().stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toList()));
     }
 
     private static LottoNumber inputBonusNumber() {
-        return new LottoNumber(InputView.inputBonusNumber());
+        return LottoNumber.valueOf(InputView.inputBonusNumber());
     }
 }

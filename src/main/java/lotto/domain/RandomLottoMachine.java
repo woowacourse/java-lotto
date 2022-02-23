@@ -12,7 +12,7 @@ public class RandomLottoMachine {
 
     static {
         IntStream.rangeClosed(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::valueOf)
                 .forEach(lottoNumbers::add);
     }
 
