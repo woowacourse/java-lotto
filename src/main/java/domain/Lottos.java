@@ -15,7 +15,6 @@ public class Lottos {
 
 	public static Lottos of(int price, LottoNumbersGenerator lottoNumbersGenerator) {
 		validatePrice(price);
-
 		List<Lotto> nowLottos = new ArrayList<>();
 		int count = price / 1000;
 		while (count-- > 0) {

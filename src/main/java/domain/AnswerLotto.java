@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.HashSet;
 import java.util.List;
 
 public class AnswerLotto {
@@ -24,6 +25,8 @@ public class AnswerLotto {
 		validateLength(numbers);
 		validateNumbers(numbers);
 		validateBonusNumber(bonusNumber);
+		validateDuplicateInNumbers(numbers);
+		validateBonusNumberInNumbers(numbers, bonusNumber);
 	}
 
 	private void validateLength(List<Integer> numbers) {
@@ -44,6 +47,18 @@ public class AnswerLotto {
 	private void validateBonusNumber(int bonusNumber) {
 		if (bonusNumber < 1 || bonusNumber > 45) {
 			throw new IllegalArgumentException("[ERROR] 1이상 45 이하의 숫자만 허용됩니다.");
+		}
+	}
+
+	private void validateDuplicateInNumbers(List<Integer> numbers) {
+		if (numbers.size() != new HashSet<Integer>(numbers).size()) {
+			throw new IllegalArgumentException("[ERROR] 지난 주 당첨 번호 숫자들은 중복일 수 없습니다.");
+		}
+	}
+
+	private void validateBonusNumberInNumbers(List<Integer> numbers, int bonusNumber) {
+		if (numbers.contains(bonusNumber)) {
+			throw new IllegalArgumentException("[ERROR] 보너스 번호는 지난 주 당첨 번호 숫자들과 중복일 수 없습니다");
 		}
 	}
 }

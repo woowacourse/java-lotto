@@ -80,5 +80,4 @@ public class LottoTest {
 
 		assertThat(lotto.calculate(answerLotto)).isEqualTo(ResultStatics.SIX);
 	}
-
 }

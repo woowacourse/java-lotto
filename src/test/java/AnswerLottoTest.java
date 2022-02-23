@@ -39,4 +39,18 @@ public class AnswerLottoTest {
 		assertThatThrownBy(() -> new AnswerLotto(numbers, bonusNumber))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
+
+	@Test
+	void duplicateInNumbers() {
+		List<Integer> numbers = new ArrayList<>(Arrays.asList(1, 2, 3, 3, 5, 6));
+		assertThatThrownBy(() -> new AnswerLotto(numbers, 7))
+			.isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@Test
+	void duplicateInBonusNumber() {
+		List<Integer> numbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+		assertThatThrownBy(() -> new AnswerLotto(numbers, 6))
+			.isInstanceOf(IllegalArgumentException.class);
+	}
 }
