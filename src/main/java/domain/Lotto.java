@@ -33,5 +33,8 @@ public class Lotto {
             throw new IllegalArgumentException(ERROR_MESSAGE_NOT_DUPLICATE);
         }
     }
-}
 
+    public boolean hasSameNumber(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
+    }
+}
