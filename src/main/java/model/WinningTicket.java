@@ -22,4 +22,28 @@ public class WinningTicket {
             throw new IllegalArgumentException();
         }
     }
+
+    public List<Integer> winningNumberValues() {
+        return winningNumbers.stream()
+                .map(LottoNumber::value)
+                .collect(Collectors.toList());
+    }
+
+    public Integer bonusNumberValue() {
+        return bonusNumber.value();
+    }
+
+    public int compareMatchCount(LottoTicket lottoTicket) {
+        List<Integer> lottoNumbers = lottoTicket.lottoNumberValues();
+        List<Integer> winningNumbers = this.winningNumberValues();
+
+        return (int) lottoNumbers.stream()
+                .filter(winningNumbers::contains)
+                .count();
+    }
+
+    public boolean matchBonusNumber(LottoTicket lottoTicket) {
+        List<Integer> lottoNumbers = lottoTicket.lottoNumberValues();
+        return lottoNumbers.contains(bonusNumberValue());
+    }
 }

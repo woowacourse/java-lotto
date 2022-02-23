@@ -2,6 +2,8 @@ package model;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.Arrays;
+import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,7 +13,10 @@ class LottoGameTest {
     @DisplayName("생성된 로또 티켓이 저장되는지 확인한다.")
     void checkGenerateTicket() {
         int purchaseMoney = 17000;
-        LottoGame lottoGame = new LottoGame(purchaseMoney);
+        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        int bonusNumber = 7;
+        LottoTickets lottoTickets = new LottoTickets(purchaseMoney, new LottoNumberGenerateStrategy());
+        LottoGame lottoGame = new LottoGame(lottoTickets, winningNumbers, bonusNumber);
         assertThat(lottoGame.getTickets().size()).isEqualTo(purchaseMoney / 1000);
     }
 

@@ -14,4 +14,10 @@ public class LottoTicket {
             lottoNumbers.add(new LottoNumber(generatedNumber));
         }
     }
+
+    public List<Integer> lottoNumberValues() {
+        return lottoNumbers.stream()
+                .map(LottoNumber::value)
+                .collect(Collectors.toList());
+    }
 }
