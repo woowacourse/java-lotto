@@ -1,5 +1,6 @@
 package lotterymachine.model;
 
+import java.util.Collections;
 import java.util.List;
 
 public class LotteryTicket {
@@ -18,5 +19,9 @@ public class LotteryTicket {
 
     public boolean containsNumber(int number) {
         return this.numbers.contains(number);
+    }
+
+    public List<Integer> getNumbers() {
+        return Collections.unmodifiableList(numbers);
     }
 }

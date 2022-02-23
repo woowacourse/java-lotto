@@ -38,11 +38,11 @@ public class InputView {
 
     public static int getBonusNumber(List<Integer> numbers) {
         System.out.println("보너스 볼을 입력해 주세요.");
-        try{
+        try {
             int bonusNumber = toInt(scanner.nextLine());
             validateBonusNumber(numbers, bonusNumber);
             return bonusNumber;
-        }catch (NumberFormatException numberFormatException) {
+        } catch (NumberFormatException numberFormatException) {
             return getBonusNumber(numbers);
         }
     }

@@ -1,5 +1,6 @@
 package lotterymachine.model;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,5 +29,9 @@ public class LotteryTickets {
             return WinningLottery.BONUS_FIVE;
         }
         return WinningLottery.find(matchingCnt);
+    }
+
+    public List<LotteryTicket> getLotteryTickets() {
+        return Collections.unmodifiableList(lotteryTickets);
     }
 }
