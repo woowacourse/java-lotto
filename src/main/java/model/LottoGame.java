@@ -1,7 +1,5 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -24,6 +22,6 @@ public class LottoGame {
     }
 
     public List<LottoTicket> getTickets() {
-        return Collections.unmodifiableList(lottoTickets);
+        return lottoTickets.getTickets();
     }
 }

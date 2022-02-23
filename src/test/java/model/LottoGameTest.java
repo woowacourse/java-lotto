@@ -21,10 +21,9 @@ class LottoGameTest {
        int purchaseMoney = 14000;
        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
        int bonusNumber = 7;
-       GenerateStrategy generateStrategy = (GenerateStrategy) () -> {
-            return Arrays.asList(1,2,3,4,5,6);
-       };
-       LottoGame lottoGame = new LottoGame(purchaseMoney, winningNumbers, bonusNumber, generateStrategy);
+       GenerateStrategy generateStrategy = () -> Arrays.asList(1,2,3,4,5,6);
+       LottoTickets lottoTickets = new LottoTickets(purchaseMoney, generateStrategy);
+       LottoGame lottoGame = new LottoGame(lottoTickets, winningNumbers, bonusNumber);
 
        Assertions.assertThat(lottoGame.prizeResult().get(WinningPrize.FIRST)).isEqualTo(14);
     }
