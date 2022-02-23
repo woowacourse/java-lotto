@@ -24,6 +24,12 @@ public class LottoGame {
                 .sum();
     }
 
+    public static Lottos buyLottos(int money) {
+        int lottoSize = getLottoSize(money);
+
+        return Lottos.generate(lottoSize);
+    }
+
     public static int getLottoSize(int money) {
         validateUnitPrice(money);
         return money / LOTTO_PRICE;
@@ -33,12 +39,6 @@ public class LottoGame {
         if (money % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException(ERROR_NOT_DIVIDED_BY_UNIT_PRICE);
         }
-    }
-
-    public static Lottos buyLottos(int money) {
-        int lottoSize = getLottoSize(money);
-
-        return Lottos.generate(lottoSize);
     }
 
     public LottoResult getWinningResult(Lottos lottos) {

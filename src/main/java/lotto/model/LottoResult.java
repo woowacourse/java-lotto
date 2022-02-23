@@ -17,4 +17,16 @@ public class LottoResult {
     public Integer getOrDefault(Rank rank) {
         return result.getOrDefault(rank, 0);
     }
+
+    public LottoResult generate(Lottos lottos, WinningNumbers winningNumbers, BonusNumber bonusNumber) {
+        lottos.getLottos().forEach(lotto -> {
+            Rank currentRank = match(lotto, winningNumbers, bonusNumber);
+            result.put(currentRank, getOrDefault(currentRank) + 1);
+        });
+        return this;
+    }
+
+    public Rank match(Lotto lotto, WinningNumbers winningNumbers, BonusNumber bonusNumber) {
+        return Rank.parse(lotto.match(winningNumbers),lotto.matchBonusNumber(bonusNumber));
+    }
 }

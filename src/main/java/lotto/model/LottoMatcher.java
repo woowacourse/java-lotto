@@ -15,22 +15,8 @@ public class LottoMatcher {
 
     public LottoResult getWinningResult(Lottos lottos) {
         LottoResult lottoResult = new LottoResult();
-        lottos.getLottos().forEach(lotto -> {
-            lottoResult.getResult().put(match(lotto), lottoResult.getOrDefault(match(lotto)) + 1);
-        });
-        return lottoResult;
-    }
 
-    public int matchWinningNumbers(Lotto lotto) {
-        return lotto.match(winningNumbers);
-    }
-
-    public boolean matchBonus(Lotto lotto) {
-        return lotto.matchBonusNumber(bonusNumber.getNumber());
-    }
-
-    public Rank match(Lotto lotto) {
-        return Rank.parse(matchWinningNumbers(lotto), matchBonus(lotto));
+        return lottoResult.generate(lottos, winningNumbers, bonusNumber);
     }
 
     private void validateDuplicateBonusNumber(List<Integer> winningNumbers, Integer bonusNumber) {

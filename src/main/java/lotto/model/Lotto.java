@@ -27,8 +27,8 @@ public class Lotto {
                 .count();
     }
 
-    public boolean matchBonusNumber(Integer bonusNumber) {
-        return lottoNumbers.contains(bonusNumber);
+    public boolean matchBonusNumber(BonusNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber.getNumber());
     }
 
     public static Lotto generate() {
