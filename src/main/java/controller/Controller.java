@@ -8,11 +8,16 @@ import view.InputView;
 import view.OutputView;
 
 public class Controller {
-
     public void run() {
         Lotto lotto = getLotto();
         printTickets(lotto);
         WinningNumbers winningNumbers = getWinningNumbers();
+        printResult(lotto, winningNumbers);
+    }
+
+    private void printResult(Lotto lotto, WinningNumbers winningNumbers) {
+        OutputView.printResult(lotto.getResult(winningNumbers));
+        OutputView.printYield(lotto.getYield(winningNumbers));
     }
 
     private WinningNumbers getWinningNumbers() {

@@ -1,10 +1,12 @@
 package view;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import domain.LottoNumber;
+import domain.Rank;
 import domain.Ticket;
 import domain.Tickets;
 
@@ -35,5 +37,41 @@ public class OutputView {
 
     public static void printErrorMessage(String message) {
         System.out.println(message);
+    }
+
+    public static void printResult(Map<Rank, Integer> result) {
+        System.out.println("당첨 통계");
+        System.out.println("---------");
+        for (Rank rank : Rank.getRanks()) {
+            System.out.println(rank.getCount()
+                + "개 일치"
+                + getBonus(rank)
+                + "(" + rank.getAmount()
+                + "원) - "
+                + getCount(result, rank)
+                + "개");
+        }
+    }
+
+    private static int getCount(Map<Rank, Integer> result, Rank rank) {
+        if (result.containsKey(rank)) {
+            return result.get(rank);
+        }
+        return 0;
+    }
+
+    private static String getBonus(Rank rank) {
+        if (rank.isBonus()) {
+            return ", 보너스 볼 일치";
+        }
+        return " ";
+    }
+
+    public static void printYield(double yield) {
+        System.out.print("총 수익률은 " + yield + "입니다.");
+        if (yield < 1) {
+            System.out.print("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        }
+        System.out.println();
     }
 }
