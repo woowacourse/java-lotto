@@ -17,10 +17,8 @@ public class LottoController {
         List<Integer> winningNumbers = InputView.inputWinningNumbers();
         Integer bonusNumber = InputView.inputBonusNumber();
         LottoGame lottoGame = new LottoGame(winningNumbers, bonusNumber);
-        ResultMap result = lottoGame.getWinningResult(lottos);
-        ResultView.printResultStatistics(result);
 
-        float yield = lottoGame.calculateYield(money, lottos);
-        ResultView.printYield(yield);
+        ResultView.printResultStatistics(lottoGame.getWinningResult(lottos));
+        ResultView.printYield(lottoGame.calculateYield(money, lottos));
     }
 }
