@@ -10,4 +10,8 @@ public class LottoGame {
         int lottoCount = money / LOTTO_PRICE;
         this.lottos = new Lottos(lottoCount, new RandomLottoNumberGenerator());
     }
+
+    public Lottos getLottos() {
+        return lottos;
+    }
 }
