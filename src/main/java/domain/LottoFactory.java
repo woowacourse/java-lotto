@@ -15,8 +15,8 @@ public class LottoFactory {
     final private List<LottoNumbers> lotto = new ArrayList<>();
     final private List<Integer> winCounts = new ArrayList<>();
     private final Money money;
-    private final LottoNumbers winNumbers;
-    private final LottoNumber bonusNumber;
+    private LottoNumbers winNumbers;
+    private LottoNumber bonusNumber;
 
     public LottoFactory(final Money money, final LottoNumbers winNumbers, final LottoNumber bonusNumber) {
         this.money = money;
@@ -26,8 +26,6 @@ public class LottoFactory {
 
     public LottoFactory(final Money money) {
         this.money = money;
-        this.winNumbers = null;
-        this.bonusNumber = null; //todo: 나중에 처리
     }
 
 //    public Count calculateCount() {
@@ -59,6 +57,16 @@ public class LottoFactory {
         return Collections.unmodifiableList(lotto);
     }
 
+    public SortedMap<WinPrice, Integer> run(final LottoNumbers winNumbers, final LottoNumber bonusNumber) {
+        this.winNumbers = winNumbers;
+        this.bonusNumber = bonusNumber;
+
+        compareAndCount(); // 1. 로또별 당첨갯수 list 채우기
+        return countWin();
+        // final double profit = calculateProfit(winPriceIntegerSortedMap); 3.
+
+    }
+
     public void compareAndCount() {
         for (LottoNumbers autoLottoNumbers : lotto) {
             int winCount = autoLottoNumbers.compare(this.winNumbers);
@@ -70,7 +78,7 @@ public class LottoFactory {
     }
 
     public SortedMap<WinPrice, Integer> countWin() {
-        SortedMap<WinPrice, Integer> rankCounts = new TreeMap<>();
+        SortedMap<WinPrice, Integer> rankCounts = new TreeMap<>(Collections.reverseOrder());
 
         Arrays.stream(WinPrice.values())
                 .forEach(e -> rankCounts.put(e, 0));
@@ -93,6 +101,4 @@ public class LottoFactory {
         }
         return money.calculateProfit(totalWinPrice);
     }
-
-
 }

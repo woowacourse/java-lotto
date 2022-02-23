@@ -4,6 +4,8 @@ import domain.LottoFactory;
 import domain.LottoNumber;
 import domain.LottoNumbers;
 import domain.Money;
+import domain.WinPrice;
+import java.util.SortedMap;
 import view.InputView;
 import view.OutputView;
 
@@ -13,11 +15,10 @@ public class LottoController {
         OutputView.printAutoLotto(lottoFactory.issueLotto());
 
         LottoNumbers winNumbers = getWinNumbers();
-
         LottoNumber bonusNumber = getBonusNumber(winNumbers);
-
-//        lottoFactory.sadf( winNumbers, bonusNumber);
-
+        SortedMap<WinPrice, Integer> rankCounts = lottoFactory.run(winNumbers, bonusNumber);
+        OutputView.printWinStatistics(rankCounts);
+        OutputView.printWinProfit(lottoFactory.calculateProfit(rankCounts));
     }
 
     private LottoNumbers getWinNumbers() {
