@@ -6,6 +6,7 @@ import model.LottoTicket;
 import model.LottoTicketDto;
 import view.LottoTicketOutputView;
 import view.PurchaseMoneyInputView;
+import view.WinningNumberInputView;
 
 public class LottoController {
 
@@ -20,5 +21,7 @@ public class LottoController {
         (new LottoTicketOutputView()).printOutputData(dto);
     }
 
-
+    public List<Integer> getWinningNumbers() {
+        return (new WinningNumberInputView()).printInputWinningNumberAndGet();
+    }
 }
