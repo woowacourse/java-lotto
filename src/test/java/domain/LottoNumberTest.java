@@ -12,7 +12,6 @@ class LottoNumberTest {
     @ValueSource(ints = {1, 24, 45})
     @DisplayName("로또 넘버가 정상적으로 생성되는 경우")
     void createLottoNumber(int lottoNumberValue) {
-        // LottoNumber lottoNumber = LottoNumber.createByInput(lottoNumberValue);
         LottoNumber lottoNumber = new LottoNumber(lottoNumberValue);
         assertThat(lottoNumber).isNotNull();
     }
