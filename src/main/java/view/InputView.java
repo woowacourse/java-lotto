@@ -10,7 +10,7 @@ public class InputView {
     private static final String REQUEST_MESSAGE_INPUT_PURCHASE_MONEY = "구입금액을 입력해 주세요.";
     private static final String ERROR_MESSAGE_TYPE_OF_MONEY = "금액은 숫자가 아닐 수 없습니다.";
     private static final String ERROR_MESSAGE_RANGE_OF_MONEY = "금액은 0이하일 수 없습니다.";
-    private static final String REQUEST_MESSAGE_WINNING_LOTTO_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String REQUEST_MESSAGE_WINNING_LOTTO_NUMBERS = "\n지난 주 당첨 번호를 입력해 주세요.";
     private static final String REQUEST_MESSAGE_INPUT_BONUS_BALL = "보너스 볼을 입력해 주세요.";
     private static final String REGEX_OF_LOTTO_NUMBER = ", ";
     private static final int REGEX_LIMIT = -1;
