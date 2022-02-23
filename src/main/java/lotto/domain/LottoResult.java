@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.Map;
 
 public class LottoResult {
@@ -19,5 +20,9 @@ public class LottoResult {
         }
 
         return (double) totalPrizeMoney / (double) price;
+    }
+
+    public Map<Rank, Integer> getRanks() {
+        return Collections.unmodifiableMap(ranks);
     }
 }
