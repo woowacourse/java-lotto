@@ -27,7 +27,7 @@ public class OutputView {
     }
 
     private static String formatLottoNumbers(Lotto lotto) {
-        String lottoNumFormat = lotto.getNumbers()
+        String lottoNumFormat = lotto.getChosenNumbers()
                 .stream()
                 .map(LottoNumber::getNumber)
                 .map(Object::toString)

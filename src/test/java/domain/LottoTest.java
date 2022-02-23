@@ -11,21 +11,21 @@ import org.junit.jupiter.api.Test;
 public class LottoTest {
 
     @Test
-    void numbers_hasSizeOfSix() {
+    void chosenNumbers_hasSizeOfSix() {
         Lotto lotto = new Lotto();
-        assertThat(lotto.getNumbers().size()).isEqualTo(6);
+        assertThat(lotto.getChosenNumbers().size()).isEqualTo(6);
     }
 
     @Test
-    void numbers_isSortedAsc() {
+    void chosenNumbers_isSortedAsc() {
         Lotto lotto = new Lotto();
-        assertThat(lotto.getNumbers()).isSorted();
+        assertThat(lotto.getChosenNumbers()).isSorted();
     }
 
     @Test
     void manualLotto_passesOnSizeOfSix() {
         Lotto lotto = createNewLotto(1, 2, 3, 4, 5, 6);
-        assertThat(lotto.getNumbers().size()).isEqualTo(6);
+        assertThat(lotto.getChosenNumbers().size()).isEqualTo(6);
     }
 
     @Test
@@ -36,7 +36,7 @@ public class LottoTest {
     @Test
     void manualLotto_isSorted() {
         Lotto lotto = createNewLotto(6, 5, 4, 3, 2, 1);
-        assertThat(lotto.getNumbers()).isSorted();
+        assertThat(lotto.getChosenNumbers()).isSorted();
     }
 
     private Lotto createNewLotto(int... value) {

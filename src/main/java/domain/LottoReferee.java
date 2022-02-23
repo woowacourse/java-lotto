@@ -19,13 +19,13 @@ public class LottoReferee {
     }
 
     private int getMatchCount(Lotto lotto) {
-        return (int) lotto.getNumbers()
+        return (int) lotto.getChosenNumbers()
                 .stream()
                 .filter(winningNumbers::contains)
                 .count();
     }
 
     private boolean containsBonus(Lotto lotto) {
-        return lotto.getNumbers().contains(bonusNumber);
+        return lotto.getChosenNumbers().contains(bonusNumber);
     }
 }

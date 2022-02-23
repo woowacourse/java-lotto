@@ -17,14 +17,14 @@ public class Lotto {
             .map(LottoNumber::of)
             .collect(Collectors.toList());
 
-    private final List<LottoNumber> numbers;
+    private final List<LottoNumber> chosenNumbers;
 
     public Lotto() {
         Collections.shuffle(allLottoNumbers);
         List<LottoNumber> lottoNums = new ArrayList<>(allLottoNumbers.subList(0, 6));
         Collections.sort(lottoNums);
 
-        this.numbers = lottoNums;
+        this.chosenNumbers = lottoNums;
     }
 
     public Lotto(List<LottoNumber> lottoNums) {
@@ -32,15 +32,15 @@ public class Lotto {
             throw new RuntimeException();
         }
         Collections.sort(lottoNums);
-        this.numbers = lottoNums;
+        this.chosenNumbers = lottoNums;
     }
 
-    public List<LottoNumber> getNumbers() {
-        return numbers;
+    public List<LottoNumber> getChosenNumbers() {
+        return chosenNumbers;
     }
 
     @Override
     public String toString() {
-        return "Lotto{" + "numbers=" + numbers + '}';
+        return "Lotto{" + "numbers=" + chosenNumbers + '}';
     }
 }
