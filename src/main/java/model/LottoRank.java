@@ -29,6 +29,10 @@ public enum LottoRank {
                 .orElseGet(() -> FAILED);
     }
 
+    public int getWinningNumberCount() {
+        return winningNumberCount;
+    }
+
     public long getPrizeMoney() {
         return prizeMoney;
     }

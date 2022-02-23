@@ -22,6 +22,8 @@ public class LottoController {
         WinningNumbers winningNumbers = inputWinningNumbers();
 
         WinningStatistics winningStatistics = calculateStatistics(lottoTickets, winningNumbers);
+
+        OutputView.printStatistics(winningStatistics, inputMoney);
     }
 
     private WinningStatistics calculateStatistics(List<LottoTicket> lottoTickets, WinningNumbers winningNumbers) {
