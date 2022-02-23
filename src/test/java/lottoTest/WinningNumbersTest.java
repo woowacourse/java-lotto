@@ -3,6 +3,7 @@ package lottoTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 import lotto.LottoTicket;
 import lotto.Rank;
@@ -14,13 +15,14 @@ import org.junit.jupiter.params.provider.MethodSource;
 @SuppressWarnings("NonAsciiCharacters")
 class WinningNumbersTest {
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "[{index}] 로또 등수: {3}")
     @MethodSource("provideLottoData")
-    void 로또의_당첨_여부를_판단하는_기능_테스트() {
-        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
-        LottoTicket lottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Rank rank = winningNumbers.isWinning(lottoTicket);
-        assertThat(rank).isEqualTo(Rank.MATCH_SIX_NUMBERS);
+    void 로또의_당첨_여부를_판단하는_기능_테스트(List<Integer> winningNumber, int bonusNumber, List<Integer> lottoNumber, Rank rank) {
+        WinningNumbers winningNumbers = new WinningNumbers(winningNumber, bonusNumber);
+        LottoTicket lottoTicket = new LottoTicket(lottoNumber);
+        List<LottoTicket> lottoTickets = List.of(lottoTicket);
+        List<Rank> ranks = winningNumbers.isWinning(lottoTickets);
+        assertThat(ranks.get(0)).isEqualTo(rank);
     }
 
     private static Stream<Arguments> provideLottoData() {

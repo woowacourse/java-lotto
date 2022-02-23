@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class WinningNumbers {
@@ -12,7 +13,11 @@ public class WinningNumbers {
         this.bonusNumber = bonusNumber;
     }
 
-    public Rank isWinning(LottoTicket lottoTicket) {
-        return lottoTicket.compareNumbers(winningNumbers, bonusNumber);
+    public List<Rank> isWinning(List<LottoTicket> lottoTickets) {
+        List<Rank> ranks = new ArrayList<>();
+        for (LottoTicket lottoTicket : lottoTickets) {
+            ranks.add(lottoTicket.compareNumbers(winningNumbers, bonusNumber));
+        }
+        return ranks;
     }
 }
