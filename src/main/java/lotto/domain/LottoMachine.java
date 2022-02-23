@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.*;
 
@@ -13,7 +13,6 @@ public class LottoMachine {
 
     public LottoMachine() {
         numbers = new ArrayList<>();
-
         for (int i = LOTTO_NUMBER_LOWER_BOUND; i < LOTTO_NUMBER_UPPER_BOUND; i++) {
             numbers.add(new LottoNumber(i));
         }
