@@ -12,7 +12,7 @@ public class Lottos {
     }
 
     public LottoResult createResult(final WinLotto winLotto) {
-        final Map<Rank, Integer> resultMap = Rank.initResultMap();
+        final Map<Rank, Integer> resultMap = Rank.createInitResultMap();
         lottos.stream()
                 .map(winLotto::matchResult)
                 .forEach(result -> rankCountUp(resultMap, result));

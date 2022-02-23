@@ -128,6 +128,6 @@ public class RankTest {
         expected.put(Rank.FIFTH, 0);
         expected.put(Rank.NOT_THING, 0);
 
-        assertThat(Rank.initResultMap()).isEqualTo(expected);
+        assertThat(Rank.createInitResultMap()).isEqualTo(expected);
     }
 }

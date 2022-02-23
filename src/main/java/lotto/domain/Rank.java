@@ -37,7 +37,7 @@ public enum Rank {
                 .orElseThrow(() -> new IllegalArgumentException("[ERROR] 해당하는 랭크가 없습니다."));
     }
 
-    public static Map<Rank, Integer> initResultMap() {
+    public static Map<Rank, Integer> createInitResultMap() {
         final Map<Rank, Integer> rankMap = new TreeMap<>(rankRewardDescendingComparator());
         Arrays.stream(values())
                 .forEach(rank -> rankMap.put(rank, defaultCount()));

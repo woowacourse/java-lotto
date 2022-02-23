@@ -11,7 +11,7 @@ public class LottoResultTest {
     @DisplayName("수익률을 계산한다")
     @Test
     void calculateYield() {
-        final Map<Rank, Integer> rankResults = Rank.initResultMap();
+        final Map<Rank, Integer> rankResults = Rank.createInitResultMap();
         rankResults.put(Rank.FIFTH, 1);
         rankResults.put(Rank.NOT_THING, 13);
 
