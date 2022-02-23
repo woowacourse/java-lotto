@@ -13,7 +13,7 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static List<Integer> insertWinningNumbers() {
+    public static List<Integer> inputWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String winningNumbers = scanner.nextLine();
         return convertStringsToIntegers(splitAndTrim(winningNumbers));
@@ -29,5 +29,10 @@ public class InputView {
         return Arrays.stream(winningNumbers.split(","))
                 .map(String::trim)
                 .collect(Collectors.toList());
+    }
+
+    public static Integer inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return scanner.nextInt();
     }
 }
