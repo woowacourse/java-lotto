@@ -4,7 +4,6 @@ import domain.strategy.PurchaseStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class PurchasedLotto {
 
