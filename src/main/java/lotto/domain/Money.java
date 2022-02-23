@@ -1,6 +1,6 @@
 package lotto.domain;
 
-class Money {
+public class Money {
     private int money;
 
     public Money(String input) {
