@@ -32,7 +32,6 @@ public class LottoTicketFactory {
     public List<LottoTicket> createTickets(int money) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         for (int i = 0; i < getAvailableLottoTicketsCount(money); i++) {
-            Collections.shuffle(availableLottoNumbers);
             lottoTickets.add(createTicket());
         }
         return lottoTickets.stream().collect(Collectors.toUnmodifiableList());
@@ -44,6 +43,6 @@ public class LottoTicketFactory {
 
     private LottoTicket createTicket() {
         Collections.shuffle(availableLottoNumbers);
-        return new LottoTicket(availableLottoNumbers.subList(0, 6));
+        return new LottoTicket(new ArrayList<>(availableLottoNumbers.subList(0, 6)));
     }
 }
