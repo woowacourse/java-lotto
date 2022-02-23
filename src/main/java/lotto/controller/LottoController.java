@@ -20,36 +20,34 @@ public class LottoController {
 
     public void start() {
         money = getMoney();
-<<<<<<< HEAD
-        lottos=new Lottos(money);
-        PickedNumbers pickedNumbers=getPickedNumber();
-        BonusNumber bonusNumber=getBonusNumber(pickedNumbers);
+        lottos = new Lottos(money);
+        outputView.printPurchasedLotto(lottos);
+        PickedNumbers pickedNumbers = getPickedNumber();
+        BonusNumber bonusNumber = getBonusNumber(pickedNumbers);
 
     }
 
     private PickedNumbers getPickedNumber() {
-        try{
+        try {
             outputView.printLastWeekWinningMessage();
-            PickedNumbers pickedNumbers=new PickedNumbers(inputView.getInput());
+            PickedNumbers pickedNumbers = new PickedNumbers(inputView.getInput());
             return pickedNumbers;
-        }catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             outputView.printErrorMessage(e.getMessage());
             return getPickedNumber();
         }
     }
+
     private BonusNumber getBonusNumber(PickedNumbers pickedNumbers) {
-        try{
+        try {
             outputView.printLastWeekBonusMessage();
-            BonusNumber bonusNumber=new BonusNumber(inputView.getInput(),pickedNumbers);
+            BonusNumber bonusNumber = new BonusNumber(inputView.getInput(), pickedNumbers);
             return bonusNumber;
-        }catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             outputView.printErrorMessage(e.getMessage());
             return getBonusNumber(pickedNumbers);
         }
-=======
-        lottos = new Lottos(money);
-        outputView.printPurchasedLotto(lottos);
->>>>>>> step1
+
     }
 
     private Money getMoney() {
