@@ -22,9 +22,9 @@ public enum LottoNumber {
 
     private static final int PICKUP_COUNT = 6;
     private static final String REGEX_FOR_NATURAL_NUMBER = "^[1-9][0-9]*$";
-    public static final int MINIMUM_RANGE = 1;
-    public static final int MAXIMUM_RANGE = 45;
-    public static final String LOTTO_NUMBER_PREFIX = "NUMBER_";
+    private static final int MINIMUM_RANGE = 1;
+    private static final int MAXIMUM_RANGE = 45;
+    private static final String LOTTO_NUMBER_PREFIX = "NUMBER_";
 
     private final int number;
 
