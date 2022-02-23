@@ -1,9 +1,11 @@
 import java.util.List;
 
 public class WinningNumber {
+
     private static final String DUPLICATE_BONUS_BALL_MESSAGE = "[ERROR] 보너스 볼은 당첨 번호와 중복될수 없습니다.";
     private static final String WINNING_NUMBER_LENGTH_ONLY_SIX = "[ERROR] 당첨 번호는 6자리여야 합니다.";
     private static final String WINNING_NUMBER_RANGE_MESSAGE = "[ERROR] 당첨 번호는 1부터 45 이내의 숫자여야 합니다.";
+    private static final String WINNING_NUMBER_DUPLICATE_MESSAGE = "[ERROR] 당첨 번호는 중복되지 않는 6개의 숫자여야 합니다.";
 
     private static final int LENGTH_STANDARD = 6;
     private static final int MIN_WINNING_NUMBER = 1;
@@ -13,6 +15,8 @@ public class WinningNumber {
 
     public WinningNumber(List<Integer> winningNumbers) {
         checkWinningNumberLength(winningNumbers);
+        checkAvailableRange(winningNumbers);
+        checkDuplicatedWinningNumber(winningNumbers);
         this.winningNumbers = winningNumbers;
     }
 
@@ -32,10 +36,16 @@ public class WinningNumber {
         }
     }
 
-    public void checkAvailableRange() {
+    private void checkAvailableRange(List<Integer> winningNumbers) {
         winningNumbers.stream().filter(winningNumber -> winningNumber < MIN_WINNING_NUMBER || winningNumber > MAX_WINNING_NUMBER)
-                .forEach(winningNumber -> {
-                    throw new IllegalArgumentException(WINNING_NUMBER_RANGE_MESSAGE);
-                });
+            .forEach(winningNumber -> {
+                throw new IllegalArgumentException(WINNING_NUMBER_RANGE_MESSAGE);
+            });
+    }
+
+    private void checkDuplicatedWinningNumber(List<Integer> winningNumbers) {
+        if (winningNumbers.stream().distinct().count() != winningNumbers.size()) {
+            throw new IllegalArgumentException(WINNING_NUMBER_DUPLICATE_MESSAGE);
+        }
     }
 }
