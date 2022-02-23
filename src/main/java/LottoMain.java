@@ -6,21 +6,31 @@ import model.LottoTickets;
 import model.WinningPrize;
 
 public class LottoMain {
+    public static LottoController controller = new LottoController();
+
     public static void main(String[] args) {
-        LottoController lottoController = new LottoController();
+        LottoTickets lottoTickets = purchaseLottoTickets();
+        settingLottoGame(lottoTickets);
+        printLottoGameResult();
+    }
 
-        int purchaseMoney = lottoController.getPurchaseMoney();
-        LottoTickets lottoTickets = lottoController
-                .createLottoTickets(purchaseMoney, new LottoNumberGenerateStrategy());
-        lottoController.printGeneratedLottoTickets(lottoTickets);
+    private static LottoTickets purchaseLottoTickets() {
+        int purchaseMoney = controller.inputPurchaseMoney();
+        LottoTickets lottoTickets = controller.createLottoTickets(purchaseMoney, new LottoNumberGenerateStrategy());
+        controller.printGeneratedLottoTickets(lottoTickets);
+        return lottoTickets;
+    }
 
-        List<Integer> winningNumbers = lottoController.getWinningNumbers();
-        Integer bonusNumber = lottoController.getBonusNumber();
-        lottoController.initLottoGame(lottoTickets, winningNumbers, bonusNumber);
+    private static void settingLottoGame(LottoTickets lottoTickets) {
+        List<Integer> winningNumbers = controller.inputWinningNumbers();
+        Integer bonusNumber = controller.inputBonusNumber();
+        controller.initLottoGame(lottoTickets, winningNumbers, bonusNumber);
+    }
 
-        Map<WinningPrize, Integer> winningResults = lottoController.winningResults();
-        Double rateOfReturn = lottoController.rateOfReturn();
-        lottoController.printWinningResults(winningResults);
-        lottoController.printRateOfReturn(rateOfReturn);
+    private static void printLottoGameResult() {
+        Map<WinningPrize, Integer> winningResults = controller.winningResults();
+        Double rateOfReturn = controller.rateOfReturn();
+        controller.printWinningResults(winningResults);
+        controller.printRateOfReturn(rateOfReturn);
     }
 }

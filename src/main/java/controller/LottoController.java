@@ -23,7 +23,7 @@ public class LottoController {
     }
 
     public Map<WinningPrize, Integer> winningResults() {
-        return lottoGame.prizeResult();
+        return lottoGame.winningResult();
     }
 
     public Double rateOfReturn() {
@@ -34,8 +34,8 @@ public class LottoController {
         return new LottoTickets(purchaseMoney, generateStrategy);
     }
 
-    public Integer getPurchaseMoney() {
-        return (new PurchaseMoneyInputView()).printInputPurchaseMoneyAndGet();
+    public Integer inputPurchaseMoney() {
+        return (new PurchaseMoneyInputView()).getUserInputData();
     }
 
     public void printGeneratedLottoTickets(LottoTickets lottoTickets) {
@@ -45,12 +45,12 @@ public class LottoController {
         (new LottoTicketOutputView()).printOutputData(dto);
     }
 
-    public List<Integer> getWinningNumbers() {
-        return (new WinningNumberInputView()).printInputWinningNumberAndGet();
+    public List<Integer> inputWinningNumbers() {
+        return (new WinningNumberInputView()).getUserInputData();
     }
 
-    public Integer getBonusNumber() {
-        return (new BonusNumberInputView()).printInputBonusNumberAndGet();
+    public Integer inputBonusNumber() {
+        return (new BonusNumberInputView()).getUserInputData();
     }
 
     public void printWinningResults(Map<WinningPrize, Integer> winningResults) {

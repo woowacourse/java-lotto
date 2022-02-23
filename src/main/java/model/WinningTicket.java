@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class WinningTicket {
+    private static final int TICKET_SIZE = 6;
+
     private final List<LottoNumber> winningNumbers;
     private final LottoNumber bonusNumber;
 
@@ -16,7 +18,7 @@ public class WinningTicket {
     }
 
     private void checkSize(List<Integer> winningNumbers) {
-        if (winningNumbers.size() != 6) {
+        if (winningNumbers.size() != TICKET_SIZE) {
             throw new IllegalArgumentException();
         }
     }

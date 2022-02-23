@@ -25,7 +25,7 @@ class LottoGameTest {
        LottoTickets lottoTickets = new LottoTickets(purchaseMoney, generateStrategy);
        LottoGame lottoGame = new LottoGame(lottoTickets, winningNumbers, bonusNumber);
 
-       Assertions.assertThat(lottoGame.prizeResult().get(WinningPrize.FIRST)).isEqualTo(14);
+       Assertions.assertThat(lottoGame.winningResult().get(WinningPrize.FIRST)).isEqualTo(14);
     }
 
 }

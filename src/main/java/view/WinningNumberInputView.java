@@ -7,28 +7,33 @@ import validator.LottoNumberValidator;
 
 public class WinningNumberInputView implements InputView<List<Integer>> {
 
+    private static final String INPUT_WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호를 입럭해 주세요.";
+
     @Override
     public List<Integer> getUserInputData() {
+        System.out.println(INPUT_WINNING_NUMBER_MESSAGE);
+        try {
+            return inputWinningNumber();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getUserInputData();
+        }
+    }
+
+
+    private List<Integer> inputWinningNumber() {
         String inputData = scanner.nextLine();
-        List<String> strings = Arrays.stream(inputData.split(","))
-                .map(String::trim)
-                .collect(Collectors.toList());
+        List<String> splitInputData = splitInputData(inputData);
+        splitInputData.forEach(LottoNumberValidator::validate);
 
-        strings.forEach(LottoNumberValidator::validate);
-
-        return strings.stream()
+        return splitInputData.stream()
                 .map(Integer::valueOf)
                 .collect(Collectors.toList());
     }
 
-
-    public List<Integer> printInputWinningNumberAndGet() {
-        System.out.println("지난 주 당첨 번호를 입럭해 주세요.");
-        try {
-            return getUserInputData();
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return printInputWinningNumberAndGet();
-        }
+    private List<String> splitInputData(String inputData) {
+        return Arrays.stream(inputData.split(","))
+                .map(String::trim)
+                .collect(Collectors.toList());
     }
 }
