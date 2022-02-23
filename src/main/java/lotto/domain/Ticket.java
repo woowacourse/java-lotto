@@ -25,4 +25,8 @@ public class Ticket {
     public int getWinningNumbersMatchCount(WinningNumbers winningNumbers) {
         return winningNumbers.getMatchCount(ticket);
     }
+
+    public boolean isBonusNumberMatch(BonusNumber bonusNumber) {
+        return bonusNumber.isMatch(ticket);
+    }
 }

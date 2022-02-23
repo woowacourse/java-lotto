@@ -22,6 +22,7 @@ public enum Rank {
     public static void parseRank(Tickets tickets, WinningNumbers winningNumbers, BonusNumber bonusNumber) {
         for(Ticket ticket : tickets.getTickets()) {
             int winningNumberMatchCount = ticket.getWinningNumbersMatchCount(winningNumbers);
+            boolean bonusNumberMatch = ticket.isBonusNumberMatch(bonusNumber);
         }
     }
 }
