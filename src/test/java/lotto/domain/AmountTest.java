@@ -28,4 +28,17 @@ public class AmountTest {
         assertThatThrownBy(() -> new Amount(500))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("거스름돈이 생긴 경우 가능한 티켓 갯수만 반환한다.")
+    @Test
+    void 가능한_금액_만큼_반환() {
+        // given
+        Amount amount = new Amount(14500);
+
+        // when
+        int count = amount.calculate();
+
+        // then
+        assertThat(count).isEqualTo(14);
+    }
 }
