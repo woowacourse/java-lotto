@@ -9,7 +9,7 @@ import lotto.Ranks;
 import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("NonAsciiCharacters")
-public class RanksTest {
+class RanksTest {
 
     @Test
     void 당첨_통계_기능_테스트() {

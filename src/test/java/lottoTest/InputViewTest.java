@@ -1,11 +1,14 @@
 package lottoTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
 import lotto.InputView;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 @SuppressWarnings("NonAsciiCharacters")
 class InputViewTest {
@@ -16,5 +19,20 @@ class InputViewTest {
         List<Integer> result = InputView.splitNumbers("1, 2, 3, 4, 5, 6");
         Integer actualValue = result.get(input);
         assertThat(expected).isEqualTo(actualValue);
+    }
+
+    @Test
+    void 구입_금액이_숫자가_아닌_경우_테스트() {
+        assertThatThrownBy(() -> InputView.toInteger("돈"))
+                .hasMessageContaining("구입 금액은 숫자 형태로 입력해야 합니다.")
+                .isInstanceOf(RuntimeException.class);
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    void 입력이_null_혹은_빈_문자열인_경우_테스트(String input) {
+        assertThatThrownBy(() -> InputView.validateIsNullOrEmpty(input))
+                .hasMessageContaining("입력 null 혹은 빈 문자열 일수 없습니다.")
+                .isInstanceOf(RuntimeException.class);
     }
 }
