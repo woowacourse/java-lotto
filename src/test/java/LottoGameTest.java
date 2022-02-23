@@ -28,7 +28,8 @@ public class LottoGameTest {
 
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         int bonusNumber = 9;
-        double yield = lottoGame.getYield(winningNumbers, bonusNumber);
+        lottoGame.makeResult(winningNumbers, bonusNumber);
+        double yield = lottoGame.getYield();
 
         assertThat(yield).isEqualTo(2000005000 / 3000);
 

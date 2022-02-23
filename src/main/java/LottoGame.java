@@ -58,11 +58,13 @@ public class LottoGame {
 
     }
 
-    public double getYield(List<Integer> winningNumbers, Integer bonusNumber) {
-
-        //lottos2 = new Lottos(lottos);
+    public void makeResult(List<Integer> winningNumbers, Integer bonusNumber) {
 
         results = lottos.compareAllLotto(winningNumbers, bonusNumber);
+
+    }
+
+    public double getYield() {
 
         Set<Integer> winningRankings = results.keySet();
         int prize = 0;
