@@ -1,6 +1,7 @@
 package lotto.domain.vo;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static lotto.util.regex.NumberRegex.NATURAL_NUMBER_REGEX;
 
@@ -35,5 +36,10 @@ public enum LottoNumber {
         if (!NATURAL_NUMBER_REGEX.matcher(value).matches()) {
             throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_EXCEPTION_MESSAGE);
         }
+    }
+
+    public boolean hasSameNumberWith(final List<LottoNumber> others) {
+        return others.stream()
+                .anyMatch(other -> other == this);
     }
 }

@@ -10,4 +10,9 @@ public class TargetLottoNumbers {
         this.targetLottoNumbers = targetLottoNumbers;
         this.bonusLottoNumber = bonusLottoNumber;
     }
+
+    public LottoMatchKind getLottoMatchResult(final LottoNumbers lottoNumbers) {
+        final int matchedCount = lottoNumbers.getMatchCount(targetLottoNumbers);
+        return LottoMatchKind.from(matchedCount, lottoNumbers.hasSameNumberWith(bonusLottoNumber));
+    }
 }

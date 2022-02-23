@@ -3,7 +3,7 @@ package lotto.domain;
 import static lotto.util.regex.NumberRegex.NATURAL_NUMBER_REGEX;
 
 public class PurchaseAmount {
-    public static final String INVALID_PURCHASE_AMOUNT_EXCEPTION_MESSAGE = "구매 금액은 1000의 양의 배수여야 합니다.";
+    private static final String INVALID_PURCHASE_AMOUNT_EXCEPTION_MESSAGE = "구매 금액은 1000의 양의 배수여야 합니다.";
 
     private final int amount;
 
@@ -28,5 +28,9 @@ public class PurchaseAmount {
         if (purchaseAmount % lottoPrice != 0) {
             throw new IllegalArgumentException(INVALID_PURCHASE_AMOUNT_EXCEPTION_MESSAGE);
         }
+    }
+
+    public int getCountOfLottoNumbers(final int lottoPrice) {
+        return amount / lottoPrice;
     }
 }

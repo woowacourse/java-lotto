@@ -4,8 +4,8 @@ import lotto.domain.vo.LottoNumber;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
@@ -58,6 +58,16 @@ public class LottoNumbers {
         if (checkedNumberValues.contains(numberValue)) {
             throw new IllegalArgumentException(DUPLICATED_LOTTO_NUMBERS_EXCEPTION_MESSAGE);
         }
+    }
+
+    public int getMatchCount(final LottoNumbers others) {
+        return (int) values.stream()
+                .filter(targetNumber -> targetNumber.hasSameNumberWith(others.values))
+                .count();
+    }
+
+    public boolean hasSameNumberWith(final LottoNumber lottoNumber) {
+        return lottoNumber.hasSameNumberWith(values);
     }
 
     public List<LottoNumber> getValues() {
