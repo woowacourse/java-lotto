@@ -16,16 +16,12 @@ public class Lotto {
     }
 
     private List<Integer> getRandom6AscendingNumber() {
-        List<Integer> list = numbers.subList(0, 6);
+        List<Integer> list = numbers.stream().limit(6).collect(Collectors.toList());
         Collections.sort(list);
         return list;
     }
 
-    public int getSize() {
-        return pickedNumbers.size();
-    }
-
-    public List<Integer> getPickedNumbers(){
+    public List<Integer> getPickedNumbers() {
         return pickedNumbers;
     }
 }
