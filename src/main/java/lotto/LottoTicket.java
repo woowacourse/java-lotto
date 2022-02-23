@@ -26,4 +26,8 @@ public class LottoTicket {
         }
         return Rank.matchResult(total);
     }
+
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
 }

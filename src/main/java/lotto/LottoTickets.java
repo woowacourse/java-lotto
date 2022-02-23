@@ -5,7 +5,7 @@ import java.util.List;
 
 public class LottoTickets {
 
-    private List<LottoTicket> lottoTickets;
+    private final List<LottoTicket> lottoTickets;
 
     public LottoTickets(int lottoCount) {
         this.lottoTickets = new ArrayList<>();
@@ -28,6 +28,6 @@ public class LottoTickets {
     }
 
     public List<LottoTicket> getLottoTickets() {
-        return lottoTickets;
+        return new ArrayList<>(lottoTickets);
     }
 }
