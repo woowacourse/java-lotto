@@ -1,6 +1,5 @@
 package domain;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,8 +33,9 @@ public class LottoMachine {
                                         LottoTicketNumbers winningNumbers,
                                         LottoNumber bonusNumber) {
         Map<LottoRank, Integer> ranks = new HashMap<>();
-        Arrays.stream(LottoRank.values())
-            .forEach(rank -> ranks.put(rank, DEFAULT_VALUE));
+        for (LottoRank rank : LottoRank.values()) {
+            ranks.put(rank, DEFAULT_VALUE);
+        }
 
         for (LottoTicket lottoTicket : lottoTickets) {
             ranks.merge(lottoTicket.rank(winningNumbers, bonusNumber), INCREASE_VALUE, Integer::sum);
