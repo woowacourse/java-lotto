@@ -48,13 +48,8 @@ public class LottoNumbers {
     }
 
     private int compareLottoNumbers(List<LottoNumber> lottoNumbers) {
-        int size = lottoNumbers.size();
-        int cnt = 0;
-        for (int i = 0; i < size; i++) {
-            if (this.lottoNumbers.get(i).equals(lottoNumbers.get(i))) {
-                cnt++;
-            }
-        }
-        return cnt;
+        return (int) lottoNumbers.stream()
+                .filter(this.lottoNumbers::contains)
+                .count();
     }
 }
