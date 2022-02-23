@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import lotto.domain.LottoNumber;
 import lotto.exception.WinningNumbersException;
 
-public class WinningNumbersReceiver {
+public class LottoReceiver {
 
     private static final String WINNING_NUMBERS_DELIMITER = ",";
     private static final int WINNING_NUMBERS_SIZE = 6;
