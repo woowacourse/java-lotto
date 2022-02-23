@@ -15,7 +15,7 @@ public class LottosTest {
     public void generateLottosTest() {
         int count = 14;
         Lottos lottos = Lottos.generateLottos(count);
-        assertThat(lottos.size()).isEqualTo(14);
+        assertThat(lottos.size()).isEqualTo(count);
     }
 
     @Test
@@ -23,11 +23,11 @@ public class LottosTest {
     public void checkWinningStatisticsTest() {
 
         WinningNumber winningNumber = new WinningNumber(List.of(1, 2, 3, 4, 5, 6));
-        Lotto lotto1 = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        Lotto lotto2 = new Lotto(List.of(1, 2, 3, 10, 11, 12));
-        Lotto lotto3 = new Lotto(List.of(13, 14, 15, 16, 17, 18));
+        Lotto firstLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto fifthLotto = new Lotto(List.of(1, 2, 3, 10, 11, 12));
+        Lotto missLotto = new Lotto(List.of(13, 14, 15, 16, 17, 18));
 
-        Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3));
+        Lottos lottos = new Lottos(Arrays.asList(firstLotto, fifthLotto, missLotto));
         Statistic winningStatistics = lottos.getWinningStatistics(winningNumber, 23);
 
         assertThat(winningStatistics.getStatistics().get(Rank.FIRST)).isEqualTo(1);

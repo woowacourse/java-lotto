@@ -18,8 +18,9 @@ public class StatisticsTest {
 
         Statistic statistic = new Statistic(result);
         Money money = new Money(10_000);
+        double realProfitRate = (Rank.FIFTH.getWinningPrice() + (Rank.FOURTH.getWinningPrice() * 2)) / (double) money.getMoney();
         double profitRate = statistic.getProfitRate(money);
 
-        assertThat(profitRate).isEqualTo(10.5);
+        assertThat(profitRate).isEqualTo(realProfitRate);
     }
 }
