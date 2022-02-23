@@ -15,8 +15,13 @@ import dto.RanksDto;
 =======
 import domain.*;
 import dto.LottosDto;
+<<<<<<< HEAD
 >>>>>>> 6a49a84 (feat: 로또 구매 및 당첨번호 세팅 기능 구현)
+=======
+import dto.RankDto;
+>>>>>>> 2821995 (feat: 결과 출력 기능 구현)
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoController {
@@ -69,15 +74,18 @@ public class LottoController {
         winningLotto = new WinningLotto(lottoNumbers, new LottoNumber(bonusBall));
     }
 
-    public void calculateRank() {
+    public List<RankDto> calculateRank() {
         List<Result> results = player.judgeAll(winningLotto);
         Rank.calculateAllResult(results);
-        for (Rank value : Rank.values()) {
-            System.out.println(value.getCriteria());
-            System.out.println(value.getHitCount());
-            System.out.println(value.getReward());
-            System.out.println("----------");
+        List<RankDto> rankDtos = new ArrayList<>();
+        int rankNumber = 5;
+        for (Rank rank : Rank.values()) {
+            rankDtos.add(RankDto.from(rank,rankNumber--));
         }
+<<<<<<< HEAD
 >>>>>>> 20bb1bf (feat: 2,3등은 보너스볼과 일치하는 숫자의 갯수를 기준으로, 나머지 등수는 일치하는 숫자의 갯수만으로 등수를 판정하는 로직 구현)
+=======
+        return rankDtos;
+>>>>>>> 2821995 (feat: 결과 출력 기능 구현)
     }
 }
