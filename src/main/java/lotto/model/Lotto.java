@@ -10,21 +10,26 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
-    }
-
     public int countMatchingNumber(Lotto lotto) {
         int count =  0;
         for (int number : lotto.numbers) {
-            if (this.numbers.contains(number)) {
-                count++;
-            }
+            count += containNumber(number);
         }
         return count;
+    }
+
+    private int containNumber(int number) {
+        if (this.numbers.contains(number)) {
+            return 1;
+        }
+        return 0;
     }
 
    public boolean winBonusNumber(int number) {
        return numbers.contains(number);
    }
+
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
 }

@@ -21,16 +21,7 @@ public enum Rank {
         this.price = price;
     }
 
-    public int getCount() {
-        return count;
-    }
-
     public static Rank getRank(int count, boolean winBonusNumber) {
-//        for (Rank rank : Rank.values()) {
-//            if (rank.getCount() == count) {
-//                return rank;
-//            }
-//        }
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.count == count)
                 .filter(rank -> rank.winBonusNumber == winBonusNumber)
