@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,7 +21,7 @@ public class LottoGenerator {
 
     public Lotto generate() {
         Collections.shuffle(numbers);
-        return new Lotto(numbers.subList(START_INCLUSIVE, END_EXCLUSIVE));
+        return new Lotto(new ArrayList<>(numbers.subList(START_INCLUSIVE, END_EXCLUSIVE)));
     }
 
     private List<Number> initNumbers() {

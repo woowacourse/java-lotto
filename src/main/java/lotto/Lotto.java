@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class Lotto {
     }
 
     public List<Number> getNumbers() {
+        numbers.sort(Comparator.comparingInt(Number::getNumber));
         return List.copyOf(numbers);
     }
 

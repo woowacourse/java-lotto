@@ -1,7 +1,6 @@
 package lotto;
 
 import java.text.MessageFormat;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -60,7 +59,6 @@ public class OutputView {
     private static void printLottoNumbers(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
             List<Number> numbers = lotto.getNumbers();
-            numbers.sort(Comparator.comparingInt(Number::getNumber));
 
             System.out.println(MessageFormat.format("[{0}]", joinWithDelimiter(numbers)));
         }
