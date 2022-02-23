@@ -1,10 +1,10 @@
 package domain;
 
+import static common.TestUtils.createNewLotto;
 import static constant.LottoConstants.LOTTO_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -74,14 +74,5 @@ public class LottoGameTest {
         List<Lotto> lottosExample = new ArrayList<>();
         Collections.addAll(lottosExample, lottos);
         return lottosExample;
-    }
-
-    private Lotto createNewLotto(int... value) {
-        List<LottoNumber> lottoNumbers = Arrays.stream(value)
-                .boxed()
-                .map(LottoNumber::of)
-                .collect(Collectors.toList());
-
-        return new Lotto(lottoNumbers);
     }
 }

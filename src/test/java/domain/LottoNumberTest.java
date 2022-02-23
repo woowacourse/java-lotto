@@ -1,13 +1,13 @@
 package domain;
 
 import static common.DisplayFormat.PARAMETERIZED_TEST_DISPLAY_FORMAT;
+import static common.TestUtils.createLottoNumbersOf;
 import static constant.ExceptionMessages.INVALID_LOTTO_NUMBER_RANGE_EXCEPTION_MESSAGE;
 import static constant.LottoConstants.MAXIMUM_LOTTO_NUMBER;
 import static constant.LottoConstants.MINIMUM_LOTTO_NUMBER;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
@@ -40,19 +40,12 @@ public class LottoNumberTest {
 
     @Test
     void compareTo_sortsByAscending() {
-        List<LottoNumber> lottoNumbers = createLottoNumbersOf(15, 35, 25, 5, 45);
+        List<LottoNumber> lottoNumbers = createLottoNumbersOf(15, 35, 25, 5, 40, 45);
 
         List<Integer> sortedNums = lottoNumbers.stream()
                 .map(LottoNumber::getNumber)
                 .collect(Collectors.toList());
 
         assertThat(sortedNums).isSorted();
-    }
-
-    private List<LottoNumber> createLottoNumbersOf(int... nums) {
-        return Arrays.stream(nums).boxed()
-                .map(LottoNumber::of)
-                .sorted()
-                .collect(Collectors.toList());
     }
 }

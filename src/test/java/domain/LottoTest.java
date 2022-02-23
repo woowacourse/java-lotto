@@ -1,11 +1,9 @@
 package domain;
 
+import static common.TestUtils.createNewLotto;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 public class LottoTest {
@@ -37,14 +35,5 @@ public class LottoTest {
     void manualLotto_isSorted() {
         Lotto lotto = createNewLotto(6, 5, 4, 3, 2, 1);
         assertThat(lotto.getChosenNumbers()).isSorted();
-    }
-
-    private Lotto createNewLotto(int... value) {
-        List<LottoNumber> lottoNumbers = Arrays.stream(value)
-                .boxed()
-                .map(LottoNumber::of)
-                .collect(Collectors.toList());
-
-        return new Lotto(lottoNumbers);
     }
 }
