@@ -36,4 +36,9 @@ public class Ball {
             throw new IllegalArgumentException(ERROR_PREFIX + ERROR_LOTTO_NUMBER);
         }
     }
+
+    @Override
+    public String toString() {
+        return Integer.toString(number);
+    }
 }

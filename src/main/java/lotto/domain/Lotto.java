@@ -27,14 +27,25 @@ public class Lotto {
         }
     }
 
+    public List<String> getLottoNumbers() {
+        return lotto.stream()
+            .map(Ball::toString)
+            .collect(Collectors.toList());
+    }
+
     private static List<String> selectNumbers() {
         List<Integer> lottoNumbers = getTotalLottoNumbers();
         Collections.shuffle(lottoNumbers);
 
-        List<Integer> selectedIntNumbers = new ArrayList<>(lottoNumbers.subList(0, LOTTO_COUNT));
+        List<Integer> selectedIntNumbers = splitLottoNumbers(lottoNumbers);
         return selectedIntNumbers.stream()
+            .sorted()
             .map(Object::toString)
             .collect(Collectors.toList());
+    }
+
+    private static ArrayList<Integer> splitLottoNumbers(List<Integer> lottoNumbers) {
+        return new ArrayList<>(lottoNumbers.subList(0, LOTTO_COUNT));
     }
 
     private static List<Integer> getTotalLottoNumbers() {
