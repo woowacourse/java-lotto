@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 public interface GenerateStrategy {
-    int generateNumber();
+    List<Integer> generateNumbers();
 }

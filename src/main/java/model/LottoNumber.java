@@ -3,13 +3,8 @@ package model;
 public class LottoNumber {
     private final int number;
 
-    public LottoNumber(GenerateStrategy generateStrategy) {
-        int generatedNumber = generateStrategy.generateNumber();
-        this.number = checkNumber(generatedNumber);
-    }
-
     public LottoNumber(int number) {
-        this.number = number;
+        this.number = checkNumber(number);
     }
 
     private int checkNumber(int number) {

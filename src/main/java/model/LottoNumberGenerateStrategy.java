@@ -7,11 +7,11 @@ import java.util.stream.IntStream;
 
 public class LottoNumberGenerateStrategy implements GenerateStrategy {
     @Override
-    public int generateNumber() {
+    public List<Integer> generateNumbers() {
         List<Integer> numbers = IntStream.range(1, 46).boxed().collect(Collectors.toList());
 
         Collections.shuffle(numbers);
 
-        return numbers.get(0);
+        return numbers.stream().limit(6).collect(Collectors.toList());
     }
 }

@@ -3,15 +3,15 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoTicket {
     private final List<LottoNumber> lottoNumbers;
 
     public LottoTicket(GenerateStrategy generateStrategy) {
+        List<Integer> generatedNumbers = generateStrategy.generateNumbers();
         lottoNumbers = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
-            lottoNumbers.add(new LottoNumber(generateStrategy));
+        for (Integer generatedNumber : generatedNumbers) {
+            lottoNumbers.add(new LottoNumber(generatedNumber));
         }
     }
 }
