@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class Lottos {
 
-	private final List<Lotto> lottos;
+	/*private final List<Lotto> lottos;
 
 	public Lottos(List<Lotto> nowLottos) {
 		this.lottos = nowLottos;
@@ -59,5 +59,5 @@ public class Lottos {
 		if (price % 1000 != 0 || price == 0) {
 			throw new IllegalArgumentException("[ERROR] 1000원으로 나누어 떨어지는 금액을 입력해주세요.");
 		}
-	}
+	}*/
 }
