@@ -17,10 +17,6 @@ public class LottoNumbers {
         this.lottoNumbers = tmpLottoNumbers;
     }
 
-    public static LottoNumbers of(List<Integer> lottoNumbers) {
-        return new LottoNumbers(lottoNumbers);
-    }
-
     public int countSameNumber(WinLottoNumbers winLottoNumbers) {
         int count = 0;
         for (LottoNumber lottoNumber : lottoNumbers) {

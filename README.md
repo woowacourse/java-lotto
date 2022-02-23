@@ -48,7 +48,9 @@
 
 ### 로또 진행
 
-- [ ] 구입 금액 / 1000 의 개수만큼 로또를 생성한다.
+- [x] 구입 금액을 저장한다.
+- [x] 구입 금액/ 1000 의 개수를 생성한다.
+- [ ] 결과값 개수만큼 로또를 랜덤으로 생성한다.
     - [ ] 로또 생성에는 `Collections.shuffle()`을 활용한다.
 - [ ] 생성된 로또마다
     - [ ] 지난주 당첨 번호와 일치하는 번호의 개수를 저장한다.
@@ -80,13 +82,18 @@
   - [ ] 메인 컨트롤러
 - [ ] domain
   - [x] LottoNumber
-  - [ ] LottoNumbers
-  - [ ] WinLottoNumbers
+  - [x] LottoNumbers
+  - [x] WinLottoNumbers
+  - [x] Money
   - [ ] LottoResult
 - [ ] view
   - [x] InputView
   - [ ] OutputView
 - [ ] validator
+  - [x] LottoNumbersValidator
+  - [x] LottoNumberValidator
+  - [x] MoneyValidator
+
 
 ## 💕 페어코딩 협의사항
 
