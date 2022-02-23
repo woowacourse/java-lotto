@@ -18,13 +18,9 @@ public class LottoNumbers {
     }
 
     public int countSameNumber(WinLottoNumbers winLottoNumbers) {
-        int count = 0;
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            if (winLottoNumbers.isInNumber(lottoNumber)) {
-                count++;
-            }
-        }
-        return count;
+        return (int) lottoNumbers.stream()
+            .filter(winLottoNumbers::isInNumber)
+            .count();
     }
 
     public List<LottoNumber> get() {
