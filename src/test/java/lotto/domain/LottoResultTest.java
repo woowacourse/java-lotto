@@ -2,6 +2,7 @@ package lotto.domain;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -17,5 +18,15 @@ class LottoResultTest {
         lottoResult.add(LottoRank.RANK_FIRST);
         lottoResult.add(LottoRank.RANK_SECOND);
         Assertions.assertThat(lottoResult.getResult().get(lottoRank)).isEqualTo(value);
+    }
+
+    @Test
+    @DisplayName("당첨금 총합을 계산하는 기능")
+    void Calculate_Sum_Of_Prize() {
+        LottoResult lottoResult = new LottoResult();
+        lottoResult.add(LottoRank.RANK_THIRD);
+        lottoResult.add(LottoRank.RANK_FOURTH);
+        lottoResult.add(LottoRank.RANK_FIFTH);
+        Assertions.assertThat(lottoResult.sumOfPrize()).isEqualTo(1555000);
     }
 }

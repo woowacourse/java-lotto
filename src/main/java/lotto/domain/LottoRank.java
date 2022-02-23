@@ -27,6 +27,10 @@ public enum LottoRank {
         return isBonused;
     }
 
+    public int getPrizeAmount(){
+        return prizeAmount;
+    }
+
     public static LottoRank valueOf(int sameCount, boolean isUsed) {
         return Arrays.stream(LottoRank.values())
                 .filter(lottoRank -> lottoRank.getCorrectNumber() == sameCount && lottoRank.getIsBonused() == isUsed)

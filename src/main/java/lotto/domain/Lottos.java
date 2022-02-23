@@ -19,6 +19,11 @@ public class Lottos {
         }
     }
 
+    public double getYield(Money money) {
+        return result.sumOfPrize() / money.getMoney();
+    }
+
+
     private int getLottoCount(Money money) {
         return money.getMoney() / 1000;
     }
