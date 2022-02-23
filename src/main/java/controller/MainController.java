@@ -2,6 +2,8 @@ package controller;
 
 import domain.LottoNumbers;
 import domain.Money;
+import domain.Rank;
+import domain.Result;
 import domain.WinLottoNumbers;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +30,17 @@ public class MainController {
         WinLottoNumbers winLottoNumbers = WinLottoNumbers.of(winLottoNumber, bonus);
 
         // result
+        OutputView.printResult(makeResult(lottoTickets, winLottoNumbers));
+    }
 
+    private Result makeResult(List<LottoNumbers> lottoTickets, WinLottoNumbers winLottoNumbers) {
+        Result result = new Result();
+        for (LottoNumbers lottoTicket : lottoTickets) {
+            int matchCount = lottoTicket.countSameNumber(winLottoNumbers);
+            boolean isBonus = lottoTicket.isContainsBonus(winLottoNumbers.getBonus());
+            result.add(Rank.of(matchCount, isBonus));
+        }
+        return result;
     }
 
     private List<LottoNumbers> createLottoTickets(int count) {
