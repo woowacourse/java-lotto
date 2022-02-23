@@ -28,13 +28,11 @@ public class Money {
     }
 
     public static Money from(String input) {
-        int amount = 0;
         try {
-            amount = Integer.parseInt(input);
+            return new Money(Integer.parseInt(input));
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ERROR_TYPE);
         }
-        return new Money(amount);
     }
 
     public double rate(int numerator) {
