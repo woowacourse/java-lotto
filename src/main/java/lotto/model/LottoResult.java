@@ -13,4 +13,8 @@ public class LottoResult {
     public Map<Rank, Integer> getResult() {
         return result;
     }
+
+    public Integer getOrDefault(Rank rank) {
+        return result.getOrDefault(rank, 0);
+    }
 }

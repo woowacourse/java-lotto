@@ -22,7 +22,7 @@ public class ResultView {
         System.out.println("---------");
         Arrays.stream(Rank.values())
                 .filter(rank -> rank != Rank.FAIL)
-                .map(rank -> getOneRankStatus(rank, lottoResult.getResult().getOrDefault(rank, 0)))
+                .map(rank -> getOneRankStatus(rank, lottoResult.getOrDefault(rank)))
                 .forEach(System.out::println);
     }
 

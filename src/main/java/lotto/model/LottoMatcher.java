@@ -15,9 +15,8 @@ public class LottoMatcher {
 
     public LottoResult getWinningResult(Lottos lottos) {
         LottoResult lottoResult = new LottoResult();
-        Integer defaultValue = 0;
         lottos.getLottos().forEach(lotto -> {
-            lottoResult.getResult().put(match(lotto), lottoResult.getResult().getOrDefault(match(lotto), defaultValue) + 1);
+            lottoResult.getResult().put(match(lotto), lottoResult.getOrDefault(match(lotto)) + 1);
         });
         return lottoResult;
     }
