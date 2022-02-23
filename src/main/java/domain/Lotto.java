@@ -3,6 +3,7 @@ package domain;
 import static constant.LottoConstants.LOTTO_NUMBERS_SIZE;
 import static constant.LottoConstants.MAXIMUM_LOTTO_NUMBER;
 import static constant.LottoConstants.MINIMUM_LOTTO_NUMBER;
+import static validator.NumberValidators.validateManualLottoNumbersSize;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,9 +26,7 @@ public class Lotto {
     }
 
     public Lotto(List<LottoNumber> lottoNums) {
-        if (lottoNums.size() != LOTTO_NUMBERS_SIZE) {
-            throw new RuntimeException();
-        }
+        validateManualLottoNumbersSize(lottoNums);
         this.chosenNumbers = getSortedLottoNumbers(lottoNums);
     }
 

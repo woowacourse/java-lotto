@@ -1,11 +1,13 @@
 package validator;
 
 import static constant.ExceptionMessages.DUPLICATE_WINNING_NUMBER_EXCEPTION_MESSAGE;
+import static constant.ExceptionMessages.INVALID_LOTTO_NUMBERS_SIZE_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.INVALID_LOTTO_NUMBER_RANGE_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.INVALID_NUMBER_INPUT_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.INVALID_TOTAL_LOTTO_PRICE_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.INVALID_WINNING_NUMBERS_SIZE_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.NOT_UNIQUE_BONUS_NUMBER_EXCEPTION_MESSAGE;
+import static constant.LottoConstants.LOTTO_NUMBERS_SIZE;
 import static constant.LottoConstants.LOTTO_PRICE;
 import static constant.LottoConstants.MAXIMUM_LOTTO_NUMBER;
 import static constant.LottoConstants.MINIMUM_LOTTO_NUMBER;
@@ -37,6 +39,12 @@ public class NumberValidators {
         }
     }
 
+    public static void validateManualLottoNumbersSize(List<?> list) {
+        if (list.size() != LOTTO_NUMBERS_SIZE) {
+            throw new IllegalArgumentException(INVALID_LOTTO_NUMBERS_SIZE_EXCEPTION_MESSAGE);
+        }
+    }
+
     public static void validateWinningNumbersSize(List<?> list) {
         if (list.size() != WINNING_NUMBERS_SIZE) {
             throw new IllegalArgumentException(INVALID_WINNING_NUMBERS_SIZE_EXCEPTION_MESSAGE);
@@ -57,5 +65,3 @@ public class NumberValidators {
         }
     }
 }
-
-
