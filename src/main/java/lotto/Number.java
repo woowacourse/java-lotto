@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.Objects;
+import java.util.StringJoiner;
 
 public class Number {
 
@@ -12,6 +13,13 @@ public class Number {
     public Number(int number) {
         validateRangeOfNumber(number);
         this.number = number;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", Number.class.getSimpleName() + "[", "]")
+            .add("number=" + number)
+            .toString();
     }
 
     @Override

@@ -1,11 +1,15 @@
 package lotto;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class InputView {
+
+    private static final String DELIMITER = ",";
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
@@ -18,11 +22,20 @@ public class InputView {
 
     public static List<Number> inputNumbers() {
         String input = SCANNER.nextLine();
-        return Collections.emptyList();
+        validateBlank(input);
+        return convertToNumbers(input);
     }
 
     public static Number inputNumber() {
         return new Number(SCANNER.nextInt());
+    }
+
+    private static List<Number> convertToNumbers(String input) {
+        return Arrays.stream(input.split(DELIMITER))
+            .map(String::trim)
+            .map(InputView::validateNumber)
+            .map(Number::new)
+            .collect(Collectors.toList());
     }
 
     private static void validateBlank(String input) {
