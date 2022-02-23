@@ -19,7 +19,7 @@ class LottoNumbersTest {
     @DisplayName("로또 번호 6개 초과시 예외")
     void exceededLottoNumberException(int source) {
         List<LottoNumber> inputLottoNumbers = IntStream.rangeClosed(1, source)
-                .mapToObj(LottoNumber::from)
+                .mapToObj(LottoNumber::create)
                 .collect(Collectors.toList());
 
         assertThatThrownBy(() -> new LottoNumbers(inputLottoNumbers))
@@ -30,7 +30,7 @@ class LottoNumbersTest {
     @DisplayName("로또 번호 중복되면 예외")
     void validateDuplicateLottoNumberException() {
         List<LottoNumber> inputLottoNumbers = IntStream.of(1, 2, 3, 4, 5, 5)
-                .mapToObj(LottoNumber::from)
+                .mapToObj(LottoNumber::create)
                 .collect(Collectors.toList());
 
         assertThatThrownBy(() -> new LottoNumbers(inputLottoNumbers))
@@ -41,7 +41,7 @@ class LottoNumbersTest {
     @DisplayName("로또 번호 정렬")
     void sortLottoNumbers() {
         List<LottoNumber> inputLottoNumbers = IntStream.of(4, 3, 2, 1, 6, 5)
-                .mapToObj(LottoNumber::from)
+                .mapToObj(LottoNumber::create)
                 .collect(Collectors.toList());
 
         LottoNumbers lottoNumbers = new LottoNumbers(inputLottoNumbers);

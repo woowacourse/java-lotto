@@ -13,7 +13,7 @@ import java.util.Map;
 public class OutputView {
 
     private static final String PURCHASED_NUMBER_MESSAGE = "개를 구매했습니다.";
-    private static final String WINNING_STATISTICS = "당첨 통계";
+    private static final String WINNING_STATISTICS = "\n당첨 통계";
     private static final String LINE = "--------";
 
     public static void printPurchasedLottoTicketNumber(int number) {

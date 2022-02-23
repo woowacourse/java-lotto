@@ -19,9 +19,9 @@ public class LottoController {
         OutputView.printPurchasedLottoTickets(lottoTickets);
 
         LottoNumbers winningNumbers = new LottoNumbers(InputView.getWinningNumbers().stream()
-                .map(LottoNumber::from)
+                .map(LottoNumber::create)
                 .collect(Collectors.toList()));
-        LottoNumber bonusNumber = LottoNumber.from(InputView.getBonusNumber());
+        LottoNumber bonusNumber = LottoNumber.createBonus(InputView.getBonusNumber(), winningNumbers);
 
         WinningStat winningStat = lottoMachine.createWinningStat(winningNumbers, bonusNumber);
         OutputView.printWinningStat(winningStat);

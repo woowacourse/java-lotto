@@ -13,7 +13,7 @@ public class RandomLottoNumberStrategy implements LottoNumberStrategy {
 
     static {
         numbers = IntStream.rangeClosed(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER)
-                .mapToObj(LottoNumber::from)
+                .mapToObj(LottoNumber::create)
                 .collect(Collectors.toList());
     }
 
