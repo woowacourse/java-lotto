@@ -3,7 +3,9 @@ package validator;
 import static constant.ExceptionMessages.DUPLICATE_WINNING_NUMBER_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.INVALID_LOTTO_NUMBER_RANGE_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.INVALID_NUMBER_INPUT_EXCEPTION_MESSAGE;
+import static constant.ExceptionMessages.INVALID_TOTAL_LOTTO_PRICE_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.NOT_UNIQUE_BONUS_NUMBER_EXCEPTION_MESSAGE;
+import static constant.LottoConstants.LOTTO_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatNoException;
@@ -13,6 +15,7 @@ import static validator.NumberValidators.validateAndParseNumber;
 import static validator.NumberValidators.validateLottoNumberRange;
 import static validator.NumberValidators.validateNoDuplicateInList;
 import static validator.NumberValidators.validateNoDuplicates;
+import static validator.NumberValidators.validateTotalLottoPriceUnit;
 
 import java.util.Arrays;
 import java.util.List;
@@ -36,6 +39,19 @@ public class NumberValidatorsTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> validateAndParseNumber("!"))
                 .withMessageMatching(INVALID_NUMBER_INPUT_EXCEPTION_MESSAGE);
+    }
+
+    @Test
+    void validateTotalLottoPriceUnit_returnsIntOnPass() {
+        assertThatNoException()
+                .isThrownBy(() -> validateTotalLottoPriceUnit(LOTTO_PRICE * 10));
+    }
+
+    @Test
+    void validateTotalLottoPriceUnit_throwIllegalArgumentExceptionOnFail() {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> validateTotalLottoPriceUnit(LOTTO_PRICE * 10 + 1))
+                .withMessageMatching(INVALID_TOTAL_LOTTO_PRICE_EXCEPTION_MESSAGE);
     }
 
     @ParameterizedTest(name = PARAMETERIZED_TEST_DISPLAY_FORMAT)

@@ -3,7 +3,9 @@ package validator;
 import static constant.ExceptionMessages.DUPLICATE_WINNING_NUMBER_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.INVALID_LOTTO_NUMBER_RANGE_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.INVALID_NUMBER_INPUT_EXCEPTION_MESSAGE;
+import static constant.ExceptionMessages.INVALID_TOTAL_LOTTO_PRICE_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.NOT_UNIQUE_BONUS_NUMBER_EXCEPTION_MESSAGE;
+import static constant.LottoConstants.LOTTO_PRICE;
 
 import java.util.HashSet;
 import java.util.List;
@@ -16,6 +18,12 @@ public class NumberValidators {
             return Integer.parseInt(value);
         } catch (Exception e) {
             throw new IllegalArgumentException(INVALID_NUMBER_INPUT_EXCEPTION_MESSAGE);
+        }
+    }
+
+    public static void validateTotalLottoPriceUnit(int num) {
+        if (num % LOTTO_PRICE > 0 ) {
+            throw new IllegalArgumentException(INVALID_TOTAL_LOTTO_PRICE_EXCEPTION_MESSAGE);
         }
     }
 
