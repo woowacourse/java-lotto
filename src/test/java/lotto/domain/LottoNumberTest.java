@@ -27,8 +27,9 @@ public class LottoNumberTest {
     }
 
     @Test
-    void equalsAndHashCode() {
+    void sameAsAndEqualsAndHashCode() {
         assertThat(LottoNumber.valueOf(1))
+                .isSameAs(LottoNumber.valueOf(1))
                 .isEqualTo(LottoNumber.valueOf(1))
                 .hasSameHashCodeAs(LottoNumber.valueOf(1));
     }
