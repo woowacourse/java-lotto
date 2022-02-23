@@ -2,12 +2,22 @@ package lotto.domain;
 
 public class Amount {
 
-    private int price;
+    private static final int PRICE_CRITERION = 1000;
 
-    public Amount() {
+    private final int price;
+
+    public Amount(int price) {
+        validateCriterion(price);
+        this.price = price;
     }
 
-    public int calculate(int price) {
-        return 14;
+    private void validateCriterion(int price) {
+        if (price < PRICE_CRITERION) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public int calculate() {
+        return this.price / 1000;
     }
 }
