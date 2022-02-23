@@ -1,3 +1,9 @@
+import domain.Lottos;
+import domain.Money;
+import domain.Statistic;
+import domain.WinningNumber;
+import view.InputView;
+import view.OutputView;
 
 public class LottoMachine {
 
