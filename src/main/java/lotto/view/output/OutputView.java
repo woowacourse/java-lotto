@@ -19,7 +19,7 @@ public class OutputView {
 	private static final String START_SIGN = "[";
 	private static final String END_SIGN = "]";
 
-	public static void printTickets(Tickets tickets) {
+	public static void printTickets(final Tickets tickets) {
 		printTicketCount(tickets);
 
 		tickets.getTickets()
@@ -30,12 +30,12 @@ public class OutputView {
 		System.out.println();
 	}
 
-	private static void printTicketCount(Tickets tickets) {
+	private static void printTicketCount(final Tickets tickets) {
 		System.out.println(tickets.getSize() + COUNT_MESSAGE);
 	}
 
-	private static String makeTicketFormat(Ticket ticket) {
-		List<String> ticketBalls = ticket.getBallNumbers()
+	private static String makeTicketFormat(final Ticket ticket) {
+		final List<String> ticketBalls = ticket.getBallNumbers()
 			.stream()
 			.map(String::valueOf)
 			.collect(Collectors.toUnmodifiableList());
@@ -43,14 +43,14 @@ public class OutputView {
 		return START_SIGN + String.join(",", ticketBalls) + END_SIGN;
 	}
 
-	public static void printAnalysis(AnalysisDto analysisDto) {
+	public static void printAnalysis(final AnalysisDto analysisDto) {
 		System.out.println(ANALYSIS_TITLE);
 		System.out.println(DIVIDING_LINE);
 
-		Map<Rank, Integer> rankCounts = analysisDto.getRankCounts();
+		final Map<Rank, Integer> rankCounts = analysisDto.getRankCounts();
 
 		for (Rank rank : rankCounts.keySet()) {
-			int count = rankCounts.get(rank);
+			final int count = rankCounts.get(rank);
 			String message = String.format("%d개 일치", rank.getMatchCount());
 			if (rank.getBonusBallMatched()) {
 				message += ", 보너스 볼 일치";
@@ -59,7 +59,7 @@ public class OutputView {
 			System.out.println(message);
 		}
 
-		double rate = analysisDto.getRate();
+		final double rate = analysisDto.getRate();
 		System.out.printf(PROFIT_RATE_MESSAGE_FORMAT, rate);
 	}
 

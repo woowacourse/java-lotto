@@ -18,12 +18,12 @@ public class LottoService {
 	private Tickets tickets;
 	private Credit credit;
 
-	public void initPayment(int payment) {
+	public void initPayment(final int payment) {
 		this.credit = new Credit(payment);
 	}
 
 	public void generateTickets() {
-		int ticketCount = credit.getQuotient();
+		final int ticketCount = credit.getQuotient();
 		this.tickets = new Tickets(ticketCount, new RandomTicketGenerator());
 	}
 
@@ -31,25 +31,25 @@ public class LottoService {
 		return this.tickets;
 	}
 
-	public AnalysisDto generateAnalysis(List<Integer> answerNumbers, int bonusBall) {
-		List<Rank> ranks = tickets.getRanks(new Balls(answerNumbers), new Ball(bonusBall));
-		Map<Rank, Integer> rankCounts = getRankCount(ranks);
-		double profitRate = getProfitRate(credit.getMoney(), rankCounts);
+	public AnalysisDto generateAnalysis(final List<Integer> answerNumbers, final int bonusBall) {
+		final List<Rank> ranks = tickets.getRanks(new Balls(answerNumbers), new Ball(bonusBall));
+		final Map<Rank, Integer> rankCounts = getRankCount(ranks);
+		final double profitRate = getProfitRate(credit.getMoney(), rankCounts);
 
 		return new AnalysisDto(rankCounts, profitRate);
 	}
 
-	public Map<Rank, Integer> getRankCount(List<Rank> ranks) {
-		Map<Rank, Integer> rankMap = new LinkedHashMap<>();
+	public Map<Rank, Integer> getRankCount(final List<Rank> ranks) {
+		final Map<Rank, Integer> rankMap = new LinkedHashMap<>();
 
 		for (Rank rank : Rank.values()) {
-			int count = Collections.frequency(ranks, rank);
+			final int count = Collections.frequency(ranks, rank);
 			rankMap.put(rank, count);
 		}
 		return rankMap;
 	}
 
-	public double getProfitRate(int payment, Map<Rank, Integer> rankCounts) {
+	public double getProfitRate(final int payment, final Map<Rank, Integer> rankCounts) {
 		long total = 0L;
 
 		for (Rank rank : rankCounts.keySet()) {

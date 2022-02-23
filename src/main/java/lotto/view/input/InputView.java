@@ -21,7 +21,7 @@ public class InputView {
 		return parseNumber(scanner.nextLine());
 	}
 
-	private static int parseNumber(String text) {
+	private static int parseNumber(final String text) {
 		try {
 			return Integer.parseInt(text);
 		} catch (NumberFormatException ex) {
@@ -31,7 +31,7 @@ public class InputView {
 
 	public static List<Integer> getAnswerNumbers() {
 		System.out.println(INPUT_ANSWER_NUMBERS_MESSAGE);
-		String inputValue = scanner.nextLine();
+		final String inputValue = scanner.nextLine();
 		return Arrays.stream(inputValue.split(DELIMITER, -1))
 			.map(String::trim)
 			.map(InputView::parseNumber)

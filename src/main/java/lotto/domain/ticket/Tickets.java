@@ -15,20 +15,20 @@ public class Tickets {
 	private final TicketGenerator ticketGenerator;
 	private final List<Ticket> tickets;
 
-	public Tickets(int count, TicketGenerator ticketGenerator) {
+	public Tickets(final int count, final TicketGenerator ticketGenerator) {
 		this.ticketGenerator = ticketGenerator;
 		this.tickets = generateTickets(count);
 	}
 
-	private List<Ticket> generateTickets(int count) {
-		List<Ticket> tickets = new ArrayList<>();
+	private List<Ticket> generateTickets(final int count) {
+		final List<Ticket> tickets = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
 			tickets.add(new Ticket(ticketGenerator));
 		}
 		return tickets;
 	}
 
-	public List<Rank> getRanks(Balls answer, Ball bonusBall) {
+	public List<Rank> getRanks(final Balls answer, final Ball bonusBall) {
 		return tickets.stream()
 			.map(ticket -> ticket.getRank(answer, bonusBall))
 			.filter(Objects::nonNull)

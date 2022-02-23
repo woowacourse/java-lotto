@@ -9,7 +9,7 @@ class CustomTicketGenerator implements TicketGenerator {
 
 	private Iterator<List<Integer>> numbers;
 
-	public void initNumbers(List<List<Integer>> numbers) {
+	public void initNumbers(final List<List<Integer>> numbers) {
 		this.numbers = numbers.iterator();
 	}
 

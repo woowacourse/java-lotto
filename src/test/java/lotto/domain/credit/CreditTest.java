@@ -2,7 +2,6 @@ package lotto.domain.credit;
 
 import static org.assertj.core.api.Assertions.*;
 
-import lotto.domain.credit.Credit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

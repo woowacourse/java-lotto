@@ -9,7 +9,7 @@ public class AnalysisDto {
 	private final Map<Rank, Integer> rankCounts;
 	private final double rate;
 
-	public AnalysisDto(Map<Rank, Integer> rankCounts, double rate) {
+	public AnalysisDto(final Map<Rank, Integer> rankCounts, final double rate) {
 		this.rankCounts = rankCounts;
 		this.rate = rate;
 	}

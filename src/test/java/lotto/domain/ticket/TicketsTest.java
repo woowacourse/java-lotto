@@ -28,20 +28,20 @@ class TicketsTest {
 	@DisplayName("로또목록 등수 확인 테스트")
 	@Test
 	void getRanksTest() {
-		List<List<Integer>> numbers = new ArrayList<>();
+		final List<List<Integer>> numbers = new ArrayList<>();
 		numbers.add(Arrays.asList(1, 2, 3, 8, 9, 10));
 		numbers.add(Arrays.asList(1, 2, 3, 8, 9, 45));
 		numbers.add(Arrays.asList(11, 12, 13, 14, 15, 16));
 		customTicketGenerator.initNumbers(numbers);
 
-		Tickets tickets = new Tickets(3, customTicketGenerator);
+		final Tickets tickets = new Tickets(3, customTicketGenerator);
 
-		List<Integer> answerNumbers = Arrays.asList(1, 2, 3, 8, 9, 10);
-		Balls answerBalls = new Balls(answerNumbers);
-		Ball bonusBall = new Ball(45);
+		final List<Integer> answerNumbers = Arrays.asList(1, 2, 3, 8, 9, 10);
+		final Balls answerBalls = new Balls(answerNumbers);
+		final Ball bonusBall = new Ball(45);
 
-		List<Rank> actual = tickets.getRanks(answerBalls, bonusBall);
-		List<Rank> expected = Arrays.asList(Rank.FIRST_GRADE, Rank.SECOND_GRADE);
+		final List<Rank> actual = tickets.getRanks(answerBalls, bonusBall);
+		final List<Rank> expected = Arrays.asList(Rank.FIRST_GRADE, Rank.SECOND_GRADE);
 
 		assertThat(actual).isEqualTo(expected);
 	}

@@ -10,27 +10,27 @@ public class Ball {
 
 	private final int number;
 
-	public Ball(int number) {
+	public Ball(final int number) {
 		validateNumberIsInRange(number);
 
 		this.number = number;
 	}
 
-	private void validateNumberIsInRange(int number) {
+	private void validateNumberIsInRange(final int number) {
 		if (number < BALL_RANGE_INCLUSIVE_START || number > BALL_RANGE_INCLUSIVE_END) {
 			throw new IllegalArgumentException(BALL_OUT_OF_RANGE_EXCEPTION_MESSAGE);
 		}
 	}
 
 	@Override
-	public boolean equals(Object object) {
+	public boolean equals(final Object object) {
 		if (this == object) {
 			return true;
 		}
 		if (object == null || getClass() != object.getClass()) {
 			return false;
 		}
-		Ball ball = (Ball)object;
+		final Ball ball = (Ball)object;
 		return number == ball.number;
 	}
 

@@ -11,14 +11,14 @@ public class Ticket {
 
 	private final Balls balls;
 
-	public Ticket(TicketGenerator ticketGenerator) {
+	public Ticket(final TicketGenerator ticketGenerator) {
 		final List<Integer> numbers = ticketGenerator.generate();
 		this.balls = new Balls(numbers);
 	}
 
-	public Rank getRank(Balls answer, Ball bonusBall) {
-		int matchCount = answer.countMatches(this.balls);
-		boolean bonusBallMatched = this.balls.contains(bonusBall);
+	public Rank getRank(final Balls answer, final Ball bonusBall) {
+		final int matchCount = answer.countMatches(this.balls);
+		final boolean bonusBallMatched = this.balls.contains(bonusBall);
 		return Rank.of(matchCount, bonusBallMatched);
 	}
 

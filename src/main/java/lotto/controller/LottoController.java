@@ -18,19 +18,19 @@ public class LottoController {
 	}
 
 	private void announceTickets() {
-		int payment = InputView.getPayment();
+		final int payment = InputView.getPayment();
 		lottoService.initPayment(payment);
 		lottoService.generateTickets();
 
-		Tickets tickets = lottoService.getTickets();
+		final Tickets tickets = lottoService.getTickets();
 		OutputView.printTickets(tickets);
 	}
 
 	private void announceAnalysis() {
-		List<Integer> answer = InputView.getAnswerNumbers();
-		int number = InputView.getBonusBall();
+		final List<Integer> answer = InputView.getAnswerNumbers();
+		final int number = InputView.getBonusBall();
 
-		AnalysisDto analysisDto = lottoService.generateAnalysis(answer, number);
+		final AnalysisDto analysisDto = lottoService.generateAnalysis(answer, number);
 		OutputView.printAnalysis(analysisDto);
 	}
 

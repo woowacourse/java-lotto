@@ -20,7 +20,7 @@ class TicketTest {
 	@DisplayName("로또 생성 테스트")
 	@Test
 	void initTest() {
-		List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+		final List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 		customTicketGenerator.initNumbers(Arrays.asList(numbers));
 
 		assertDoesNotThrow(() -> new Ticket(customTicketGenerator));
@@ -29,12 +29,12 @@ class TicketTest {
 	@DisplayName("당첨번호와 일치 갯수 확인 테스트")
 	@Test
 	void countTest() {
-		List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+		final List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
 		customTicketGenerator.initNumbers(Arrays.asList(numbers));
 
-		Ticket ticket = new Ticket(customTicketGenerator);
+		final Ticket ticket = new Ticket(customTicketGenerator);
 
-		Balls answer = new Balls(numbers);
+		final Balls answer = new Balls(numbers);
 
 		assertThat(ticket.getRank(answer, new Ball(7))).isEqualTo(Rank.FIRST_GRADE);
 	}
