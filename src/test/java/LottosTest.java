@@ -1,14 +1,14 @@
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import domain.AnswerLotto;
-import domain.Lotto;
-import domain.Lottos;
+import domain.*;
 
 import java.util.*;
 
-import domain.ResultStatics;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottosTest {
 	static Lottos lottos;
@@ -28,7 +28,7 @@ public class LottosTest {
 
 	@Test
 	void generateCorrectCountOfLotto() {
-		assertThat(lottos.getLottosSize()).isEqualTo(3);
+		assertThat(lottos.getLottosSize()).isEqualTo(5);
 	}
 
 	@Test
@@ -48,5 +48,11 @@ public class LottosTest {
 	@Test
 	void generateProfitRate() {
 		assertThat(lottos.generateProfitRatio(answerLotto)).isEqualTo(1.0f);
+	}
+
+	@ParameterizedTest
+	@ValueSource(ints = {0, 1234, 5678})
+	void validatePrice(int price) {
+		assertThatThrownBy(() -> Lottos.of(price, new RandomLottoNumberGenerator())).isInstanceOf(IllegalArgumentException.class);
 	}
 }

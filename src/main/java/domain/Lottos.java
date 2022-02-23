@@ -14,6 +14,8 @@ public class Lottos {
 	}
 
 	public static Lottos of(int price, LottoNumbersGenerator lottoNumbersGenerator) {
+		validatePrice(price);
+
 		List<Lotto> nowLottos = new ArrayList<>();
 		int count = price / 1000;
 		while (count-- > 0) {
@@ -52,5 +54,11 @@ public class Lottos {
 			totalPrize += lotto.calculate(answerLotto).getPrice();
 		}
 		return (float) totalPrize / totalPrice;
+	}
+
+	private static void validatePrice(int price) {
+		if (price % 1000 != 0 || price == 0) {
+			throw new IllegalArgumentException("[ERROR] 1000원으로 나누어 떨어지는 금액을 입력해주세요.");
+		}
 	}
 }
