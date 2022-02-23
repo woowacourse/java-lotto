@@ -12,7 +12,7 @@ public class LottoMachine {
     public LottoResult summarize(List<LottoNumbers> lottoNumbersList) {
         LottoResult result = new LottoResult();
         lottoNumbersList.stream()
-            .map(winningLottoNumbers::judge)
+            .map(winningLottoNumbers::getRankBy)
             .forEach(result::add);
         return result;
     }

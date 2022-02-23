@@ -1,5 +1,6 @@
 package model;
 
+import exception.InvalidMatchCountException;
 import java.util.function.BiFunction;
 import java.util.stream.Stream;
 
@@ -28,14 +29,10 @@ public enum LottoRank {
     }
 
     public static LottoRank of(Integer matchCount, boolean bonusMatch) {
-        return findLottoRank(matchCount, bonusMatch);
-    }
-
-    private static LottoRank findLottoRank(Integer matchCount, boolean bonusMatch) {
         return Stream.of(values())
             .filter(rank -> rank.isMatched(matchCount, bonusMatch))
             .findFirst()
-            .orElseThrow(() -> new IllegalArgumentException("일치 갯수는 0이상 6이하이여야 합니다."));
+            .orElseThrow(InvalidMatchCountException::new);
     }
 
     private static boolean isFirstPrize(Integer matchCount, boolean bonusMatch) {

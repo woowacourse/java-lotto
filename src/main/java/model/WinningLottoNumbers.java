@@ -14,7 +14,7 @@ public class WinningLottoNumbers {
         this.bonusNumber = bonusNumber;
     }
 
-    public LottoRank judge(LottoNumbers lottoNumbers) {
+    public LottoRank getRankBy(LottoNumbers lottoNumbers) {
         int count = getMatchedCountAboutWinningNumbers(lottoNumbers);
         boolean bonusMatch = isBonusMatch(lottoNumbers);
         return LottoRank.of(count, bonusMatch);

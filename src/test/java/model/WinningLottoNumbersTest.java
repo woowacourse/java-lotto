@@ -47,7 +47,7 @@ public class WinningLottoNumbersTest {
     @DisplayName("1등 판독 테스트")
     void firstPrize() {
         LottoNumbers lottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
-        LottoRank rank = winningLottoNumbers.judge(lottoNumbers);
+        LottoRank rank = winningLottoNumbers.getRankBy(lottoNumbers);
         assertThat(rank).isEqualTo(LottoRank.FIRST);
     }
 
@@ -55,7 +55,7 @@ public class WinningLottoNumbersTest {
     @DisplayName("2등 판독 테스트")
     void secondPrize() {
         LottoNumbers lottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 7));
-        LottoRank rank = winningLottoNumbers.judge(lottoNumbers);
+        LottoRank rank = winningLottoNumbers.getRankBy(lottoNumbers);
         assertThat(rank).isEqualTo(LottoRank.SECOND);
     }
 
@@ -63,7 +63,7 @@ public class WinningLottoNumbersTest {
     @DisplayName("3등 판독 테스트")
     void thirdPrize() {
         LottoNumbers lottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 8));
-        LottoRank rank = winningLottoNumbers.judge(lottoNumbers);
+        LottoRank rank = winningLottoNumbers.getRankBy(lottoNumbers);
         assertThat(rank).isEqualTo(LottoRank.THIRD);
     }
 
@@ -71,7 +71,7 @@ public class WinningLottoNumbersTest {
     @DisplayName("4등 판독 테스트")
     void fourthPrize() {
         LottoNumbers lottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 8, 9));
-        LottoRank rank = winningLottoNumbers.judge(lottoNumbers);
+        LottoRank rank = winningLottoNumbers.getRankBy(lottoNumbers);
         assertThat(rank).isEqualTo(LottoRank.FOURTH);
     }
 
@@ -79,7 +79,7 @@ public class WinningLottoNumbersTest {
     @DisplayName("5등 판독 테스트")
     void fifthPrize() {
         LottoNumbers lottoNumbers = new LottoNumbers(List.of(1, 2, 3, 8, 9, 10));
-        LottoRank rank = winningLottoNumbers.judge(lottoNumbers);
+        LottoRank rank = winningLottoNumbers.getRankBy(lottoNumbers);
         assertThat(rank).isEqualTo(LottoRank.FIFTH);
     }
 
@@ -87,7 +87,7 @@ public class WinningLottoNumbersTest {
     @MethodSource("provideLottoNumbersList")
     @DisplayName("꽝 판독 테스트")
     void nothingPrize(LottoNumbers lottoNumbers) {
-        LottoRank rank = winningLottoNumbers.judge(lottoNumbers);
+        LottoRank rank = winningLottoNumbers.getRankBy(lottoNumbers);
         assertThat(rank).isEqualTo(LottoRank.NOTHING);
     }
 
