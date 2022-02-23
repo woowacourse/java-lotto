@@ -82,13 +82,13 @@
 ## ✅ TODO
 
 - [x] 인풋 검증 클래스 구현
-- [ ] 셔플 후 sort 사용
+- [x] 셔플 후 sort 사용
 - [ ] 상수로 변환
 
 ## 💻 구조
 
-- [ ] controller
-  - [ ] 메인 컨트롤러
+- [x] controller
+  - [x] 메인 컨트롤러
 - [x] domain
   - [x] LottoNumber
   - [x] LottoNumbers
@@ -96,9 +96,9 @@
   - [x] Money
   - [x] Rank
   - [x] Result
-- [ ] view
+- [x] view
   - [x] InputView
-  - [ ] OutputView
+  - [x] OutputView
 - [ ] utils
   - [ ] Constants
   - [x] LottoNumberGenerator

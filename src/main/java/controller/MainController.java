@@ -12,25 +12,30 @@ import view.InputView;
 import view.OutputView;
 
 public class MainController {
+
     public void run() {
-        // money
         Money money = new Money(InputView.inputMoney());
-
-        // create lotto
         List<LottoNumbers> lottoTickets = createLottoTickets(money.toLottoCount());
-
-        // print lotto
         OutputView.printLottoTickets(lottoTickets);
 
-        // lotto numbers
+        WinLottoNumbers winLottoNumbers = getWinNumbers();
+
+        Result result = makeResult(lottoTickets, winLottoNumbers);
+        printResult(result, money);
+    }
+
+    private List<LottoNumbers> createLottoTickets(int count) {
+        List<LottoNumbers> lottoTickets = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            lottoTickets.add(new LottoNumbers(LottoNumberGenerator.generate()));
+        }
+        return lottoTickets;
+    }
+
+    private WinLottoNumbers getWinNumbers() {
         String winLottoNumber = InputView.inputWinLottoNumbers();
-
-        // bonus number
         int bonus = InputView.inputBonusNumber();
-        WinLottoNumbers winLottoNumbers = WinLottoNumbers.of(winLottoNumber, bonus);
-
-        // result
-        OutputView.printResult(makeResult(lottoTickets, winLottoNumbers));
+        return WinLottoNumbers.of(winLottoNumber, bonus);
     }
 
     private Result makeResult(List<LottoNumbers> lottoTickets, WinLottoNumbers winLottoNumbers) {
@@ -43,11 +48,8 @@ public class MainController {
         return result;
     }
 
-    private List<LottoNumbers> createLottoTickets(int count) {
-        List<LottoNumbers> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            lottoTickets.add(new LottoNumbers(LottoNumberGenerator.generate()));
-        }
-        return lottoTickets;
+    private void printResult(Result result, Money money) {
+        OutputView.printResult(result);
+        OutputView.printProfit((float)result.getPrice()/ (float) money.get());
     }
 }

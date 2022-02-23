@@ -54,4 +54,34 @@ class OutputViewTest {
                 + "5개 일치, 보너스 볼 일치(30000000원)- 0개\n"
                 + "6개 일치 (2000000000원)- 1개\n");
     }
+
+    @Test
+    void 로또_수익률_결과_출력_손해_검사(){
+        OutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+
+        OutputView.printProfit((float) 0.765);
+
+        assertThat(out.toString()).isEqualTo("총 수익률은 0.76입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)\n");
+    }
+
+    @Test
+    void 로또_수익률_결과_출력_이득_검사(){
+        OutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+
+        OutputView.printProfit((float) 1.123);
+
+        assertThat(out.toString()).isEqualTo("총 수익률은 1.12입니다.(기준이 1이기 때문에 결과적으로 손해 아니라는 의미임)\n");
+    }
+
+    @Test
+    void 로또_수익률_결과_출력_이득_1_검사(){
+        OutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+
+        OutputView.printProfit((float) 1);
+
+        assertThat(out.toString()).isEqualTo("총 수익률은 1.00입니다.(기준이 1이기 때문에 결과적으로 손해 아니라는 의미임)\n");
+    }
 }
