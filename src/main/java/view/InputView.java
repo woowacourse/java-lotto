@@ -19,7 +19,7 @@ public class InputView {
     private static final String BONUS_BALL_RANGE_MESSAGE = "[ERROR] 보너스 볼은 1부터 45이내의 숫자여야 합니다.";
     private static final int MIN_BONUS_BALL = 1;
     private static final int MAX_BONUS_BALL = 45;
-    private static final String SPLIT_REGEX = ", ";
+    private static final String DELIMITER = ", ";
 
     public static int askInputMoney() {
         System.out.println(INPUT_MONEY_MESSAGE);
@@ -37,7 +37,7 @@ public class InputView {
     public static WinningNumber askInputWinningNumber() {
         System.out.println(INPUT_WINNING_NUMBER_MESSAGE);
         String input = scanner.nextLine();
-        String[] numbers = input.split(SPLIT_REGEX);
+        String[] numbers = input.split(DELIMITER);
         return new WinningNumber(Arrays.stream(numbers).map(Integer::parseInt).collect(Collectors.toList()));
     }
 

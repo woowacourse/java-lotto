@@ -10,6 +10,9 @@ public class Lotto {
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int LOTTO_START = 0;
     private static final int LOTTO_END = 6;
+    private static final String DELIMITER = ", ";
+    private static final String OPEN_BRACKETS = "[";
+    private static final String CLOSE_BRACKETS = "]";
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
@@ -40,7 +43,7 @@ public class Lotto {
     @Override
     public String toString() {
         String lotto = numbers.stream().map(String::valueOf)
-                .collect(Collectors.joining(", "));
-        return "[" + lotto + "]";
+                .collect(Collectors.joining(DELIMITER));
+        return OPEN_BRACKETS + lotto + CLOSE_BRACKETS;
     }
 }
