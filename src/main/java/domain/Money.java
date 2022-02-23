@@ -1,11 +1,13 @@
 package domain;
 
 import java.util.Objects;
+import validator.MoneyValidator;
 
 public class Money {
     private final int money;
 
     public Money(int money) {
+        MoneyValidator.validate(money);
         this.money = money;
     }
 

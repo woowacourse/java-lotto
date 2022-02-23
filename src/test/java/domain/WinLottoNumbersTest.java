@@ -13,7 +13,7 @@ class WinLottoNumbersTest {
 
     @BeforeEach
     void 당첨번호_생성() {
-        winLottoNumbers = new WinLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        winLottoNumbers = WinLottoNumbers.ofString("1, 2, 3, 4, 5, 6");
     }
 
     @ParameterizedTest

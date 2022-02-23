@@ -1,11 +1,13 @@
 package domain;
 
 import java.util.Objects;
+import validator.LottoNumberValidator;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     private final int number;
 
     public LottoNumber(int number) {
+        LottoNumberValidator.validate(number);
         this.number = number;
     }
 

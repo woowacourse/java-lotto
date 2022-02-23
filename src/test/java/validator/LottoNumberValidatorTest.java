@@ -10,7 +10,7 @@ class LottoNumberValidatorTest {
     @ParameterizedTest
     @ValueSource(ints = {-1, 0, 47})
     void 숫자_범위_에러_처리(int input) {
-        assertThatThrownBy(() -> LottoNumberValidator.isRightNumberRange(input))
+        assertThatThrownBy(() -> LottoNumberValidator.validate(input))
                 .isInstanceOf(Exception.class);
     }
 

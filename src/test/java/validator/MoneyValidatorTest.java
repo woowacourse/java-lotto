@@ -11,12 +11,12 @@ class MoneyValidatorTest {
     @ParameterizedTest
     @ValueSource(ints = {-1, 200, 999})
     void 천_미만_값일_경우_예외처리(int input) {
-        assertThatThrownBy(() -> MoneyValidator.isOverThousand(input)).isInstanceOf(Exception.class);
+        assertThatThrownBy(() -> MoneyValidator.validate(input)).isInstanceOf(Exception.class);
     }
 
     @ParameterizedTest
     @ValueSource(ints = {1500, 2060, 9999})
     void 천으로_나누어_떨어지지_않는_경우_예외처리(int input) {
-        assertThatThrownBy(() -> MoneyValidator.isDivideByThousand(input)).isInstanceOf(Exception.class);
+        assertThatThrownBy(() -> MoneyValidator.validate(input)).isInstanceOf(Exception.class);
     }
 }
