@@ -52,5 +52,8 @@
             - [X] 1000으로 나누어 떨어지지 않는 금액 입력 시 IAE 발생
     - [X] RandomLottoNumberGenerateStrategy
         - [X] 랜덤 번호 7개 생성
+    - [X] TrialNumber
+        - [X] 유효성 검사
+            - [X] 양수가 아닌 값을 전달 받았을 경우 IAE 발생
 - [ ] 총 수익률을 (`당첨금액/로또구입금액`) 계산한다.
 - [ ] 당첨 통계를 출력한다.
