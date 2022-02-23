@@ -24,6 +24,10 @@ public enum WinPrice {
                 .orElseThrow(() -> new RuntimeException("일치하는 값이 없습니다."));
     }
 
+    public int getCount() {
+        return winCount;
+    }
+
     public int getPrice() {
         return winPrice;
     }
