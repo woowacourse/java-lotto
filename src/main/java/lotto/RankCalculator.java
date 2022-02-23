@@ -7,7 +7,10 @@ import java.util.Set;
 
 public class RankCalculator {
 
+    private static final int MINIMUM_RANK_SIZE = 3;
     private static final int INIT_NUMBER = 0;
+    private static final int SECOND_RANK_SIZE = 5;
+    private static final int SECOND_RANK_MATCHED = 6;
 
     private final Map<Rank, Integer> result = new HashMap<>();
 
@@ -25,25 +28,34 @@ public class RankCalculator {
 
     public Map<Rank, Integer> calcRank(TotalNumber totalNumber, List<Set<LottoNumber>> tickets) {
         Set<LottoNumber> winningAndBonusNumber = totalNumber.getWinningAndBonusNumber();
-
         for (Set<LottoNumber> ticket : tickets) {
             ticket.retainAll(winningAndBonusNumber);
-
-            if (ticket.size() < 3) {
-                continue;
-            }
-            if (ticket.size() == 6) {
-                if (ticket.contains(totalNumber.getBonusNumber())) {
-                    result.put(Rank.of(ticket.size() - 1, true),
-                            result.get(Rank.SECOND) + 1);
-                    continue;
-                }
-            }
-
-            result.put(Rank.of(ticket.size(), false),
-                    result.get(Rank.of(ticket.size(), false)) + 1);
+            calcRankForEach(ticket, totalNumber);
         }
-
         return result;
+    }
+
+    private void calcRankForEach(Set<LottoNumber> ticket, TotalNumber totalNumber) {
+        if (isNotRanked(ticket)) {
+            return;
+        }
+        if (isSecondRank(ticket, totalNumber)) {
+            putResult(SECOND_RANK_SIZE, true);
+            return;
+        }
+        putResult(ticket.size(), false);
+    }
+
+    private boolean isNotRanked(Set<LottoNumber> ticket) {
+        return ticket.size() < MINIMUM_RANK_SIZE;
+    }
+
+    private boolean isSecondRank(Set<LottoNumber> ticket, TotalNumber totalNumber) {
+        return ticket.size() == SECOND_RANK_MATCHED && ticket.contains(totalNumber.getBonusNumber());
+    }
+
+    private void putResult(int size, boolean isBonusBallMatched) {
+        Rank rank = Rank.of(size, isBonusBallMatched);
+        result.put(rank, result.get(rank) + 1);
     }
 }

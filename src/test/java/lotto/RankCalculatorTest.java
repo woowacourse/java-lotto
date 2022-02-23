@@ -1,5 +1,6 @@
 package lotto;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -9,44 +10,48 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class RankCalculatorTest {
 
-    @Test
-    @DisplayName("당첨 결과를 구한다")
-    void calcRank() {
-        RankCalculator rankCalculator = new RankCalculator();
-        List<Set<LottoNumber>> tickets = initTickets();
+    private RankCalculator rankCalculator;
+    private TotalNumber totalNumber;
+
+    @BeforeEach
+    void setUp() {
+        rankCalculator = new RankCalculator();
 
         WinningNumber winningNumber = new WinningNumber("1,2,3,4,5,6");
         LottoNumber bonusNumber = new LottoNumber("7");
-        TotalNumber totalNumber = new TotalNumber(winningNumber, bonusNumber);
+        totalNumber = new TotalNumber(winningNumber, bonusNumber);
+    }
 
-        Map<Rank, Integer> result = rankCalculator.calcRank(totalNumber, tickets);
+    @Test
+    @DisplayName("당첨 결과를 구한다")
+    void calcRank() {
+        List<Set<LottoNumber>> tickets = initTickets();
+        Map<Rank, Integer> actual = rankCalculator.calcRank(totalNumber, tickets);
+        Map<Rank, Integer> expected = new HashMap<>();
+        expected.put(Rank.FIRST, 1);
+        expected.put(Rank.SECOND, 1);
+        expected.put(Rank.THIRD, 1);
+        expected.put(Rank.FOURTH, 1);
+        expected.put(Rank.FIFTH, 1);
 
-        assertThat(result.get(Rank.FIRST)).isEqualTo(1);
-        assertThat(result.get(Rank.SECOND)).isEqualTo(1);
-        assertThat(result.get(Rank.THIRD)).isEqualTo(1);
-        assertThat(result.get(Rank.FOURTH)).isEqualTo(1);
-        assertThat(result.get(Rank.FIFTH)).isEqualTo(1);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
     @DisplayName("만약 아무 등수에 해당하지 않는 경우 빈 맵을 반환한다")
     void testCalcRankEdgeCase() {
-        RankCalculator rankCalculator = new RankCalculator();
         List<Set<LottoNumber>> tickets = new ArrayList<>();
         tickets.add(initTicket(List.of(1, 2, 8, 9, 10, 11)));
 
-        WinningNumber winningNumber = new WinningNumber("1,2,3,4,5,6");
-        LottoNumber bonusNumber = new LottoNumber("7");
-        TotalNumber totalNumber = new TotalNumber(winningNumber, bonusNumber);
+        Map<Rank, Integer> actual = rankCalculator.calcRank(totalNumber, tickets);
+        Map<Rank, Integer> expected = new HashMap<>();
+        expected.put(Rank.FIRST, 0);
+        expected.put(Rank.SECOND, 0);
+        expected.put(Rank.THIRD, 0);
+        expected.put(Rank.FOURTH, 0);
+        expected.put(Rank.FIFTH, 0);
 
-
-        Map<Rank, Integer> result = rankCalculator.calcRank(totalNumber, tickets);
-
-        assertThat(result.get(Rank.FIRST)).isEqualTo(0);
-        assertThat(result.get(Rank.SECOND)).isEqualTo(0);
-        assertThat(result.get(Rank.THIRD)).isEqualTo(0);
-        assertThat(result.get(Rank.FOURTH)).isEqualTo(0);
-        assertThat(result.get(Rank.FIFTH)).isEqualTo(0);
+        assertThat(actual).isEqualTo(expected);
     }
 
     private List<Set<LottoNumber>> initTickets() {
@@ -61,11 +66,9 @@ class RankCalculatorTest {
 
     private Set<LottoNumber> initTicket(List<Integer> numbers) {
         Set<LottoNumber> ticket = new HashSet<>();
-
         for (Integer number : numbers) {
             ticket.add(new LottoNumber(number));
         }
-
         return ticket;
     }
 }
