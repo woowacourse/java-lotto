@@ -6,6 +6,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoGenerator {
+    public static final int BONUS_NUMBER_INDEX = 6;
     private final List<LottoNumber> basicNumbers = Arrays.asList(LottoNumber.values());
 
     public List<LottoNumbers> generateLottoNumbersGroup(final int numberOfGenerating) {
@@ -23,5 +24,11 @@ public class LottoGenerator {
                 .limit(6)
                 .collect(Collectors.toUnmodifiableSet());
         return new LottoNumbers(generatedLottoNumbers);
+    }
+
+    public TargetLottoNumbers generateTargetLottoNumbers() {
+        final LottoNumbers targetNumbers = generateLottoNumbers();
+        final LottoNumber bonusNumber = basicNumbers.get(BONUS_NUMBER_INDEX);
+        return new TargetLottoNumbers(targetNumbers, bonusNumber);
     }
 }
