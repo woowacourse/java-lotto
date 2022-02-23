@@ -3,14 +3,13 @@ package domain;
 import domain.strategy.PurchaseStrategy;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class PurchasedLotto {
 
     private List<Lotto> lottos = new ArrayList<>();
-    private Map<WinnerPrice, Integer> finalResult = new HashMap<>();
+    private PrizeResult finalResult = new PrizeResult();
     private int inputMoney;
 
     public PurchasedLotto(int inputMoney) {
@@ -22,26 +21,19 @@ public class PurchasedLotto {
         lottos.add(lotto);
     }
 
-    public Map<WinnerPrice, Integer> calculateWinning(Lotto winningLotto, LottoNumber bonus) {
-        initFinalResult();
+    public PrizeResult calculateWinning(Lotto winningLotto, LottoNumber bonus) {
         lottos.stream()
                 .forEach(lotto -> {
                     WinnerPrice winnerPrice = lotto.calculateRank(winningLotto, bonus);
-                    finalResult.put(winnerPrice, 1);
+                    finalResult.updatePrizeResult(winnerPrice);
                 });
         return finalResult;
     }
 
-    private void initFinalResult() {
-        WinnerPrice.getWinnerPrices().stream()
-                .forEach(winnerPrice -> finalResult.put(winnerPrice, 0));
-    }
+
 
     public float calculateEarningRate() {
-        long totalPrice = 0;
-        for (WinnerPrice winnerPrice : finalResult.keySet()) {
-            totalPrice += winnerPrice.getPrize() * finalResult.get(winnerPrice);
-        }
+        long totalPrice = finalResult.totalPrize();
 
         float earningRate = (float) totalPrice / inputMoney;
         return (float) (Math.floor(earningRate * 100) / 100.0);

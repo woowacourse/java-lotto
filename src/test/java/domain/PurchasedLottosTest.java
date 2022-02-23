@@ -33,15 +33,10 @@ public class PurchasedLottosTest {
     }
 
     @Test
-    void lottos_makeRightResult() {
-        Map<WinnerPrice, Integer> finalResult = lottos.calculateWinning(winningLotto, bonus);
+    void lottos_makeRightTotalPrize() {
+        PrizeResult finalResult = lottos.calculateWinning(winningLotto, bonus);
 
-        assertThat(finalResult.get(WinnerPrice.FIFTH)).isEqualTo(1);
-        assertThat(finalResult.get(WinnerPrice.FOURTH)).isEqualTo(1);
-        assertThat(finalResult.get(WinnerPrice.THIRD)).isEqualTo(1);
-        assertThat(finalResult.get(WinnerPrice.SECOND)).isEqualTo(0);
-        assertThat(finalResult.get(WinnerPrice.FIRST)).isEqualTo(1);
-        assertThat(finalResult.get(WinnerPrice.FAIL)).isEqualTo(0);
+        assertThat(finalResult.totalPrize()).isEqualTo(2001555000);
     }
 
     @Test
