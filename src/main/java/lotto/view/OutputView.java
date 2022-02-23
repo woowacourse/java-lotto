@@ -13,8 +13,8 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void printLottoCount() {
-        System.out.println("14개를 구매했습니다.");
+    public static void printLottoCount(int amount) {
+        System.out.printf("%d개를 구매했습니다.%n", amount);
     }
 
     public static void printLottos(Lottos lottos) {
@@ -29,6 +29,7 @@ public class OutputView {
     }
 
     public static void printResult(Result result) {
+        System.out.printf("%n당첨 통계%n---------%n");
         for (WinningPrice value : WinningPrice.values()) {
             if (value == WinningPrice.Fail) {
                 continue;
