@@ -6,7 +6,7 @@ import java.util.List;
 
 public class LottoNumbers {
 
-    protected final List<LottoNumber> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers(List<Integer> lottoNumbers) {
         List<LottoNumber> tmpLottoNumbers = new ArrayList<>();
