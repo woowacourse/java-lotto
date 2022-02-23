@@ -52,4 +52,24 @@ public class ResultViewTest {
                 .contains("3개 일치 (5000원)- 1개")
                 .contains("4개 일치 (50000원)- 0개");
     }
+
+    @Test
+    @DisplayName("손해인 경우 수익률을 출력한다.")
+    void printMinusYieldTest() {
+        float yield = 0.351312312f;
+        ResultView.printYield(yield);
+
+        assertThat(outputStreamCaptor.toString())
+                .contains("총 수익률은 0.35입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+    }
+
+    @Test
+    @DisplayName("이득인 경우 수익률을 출력한다.")
+    void printPlusYieldTest() {
+        float yield = 1.351312312f;
+        ResultView.printYield(yield);
+
+        assertThat(outputStreamCaptor.toString())
+                .contains("총 수익률은 1.35입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임)");
+    }
 }
