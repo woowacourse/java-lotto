@@ -2,21 +2,21 @@ package view;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static view.LottoNumbersParser.INVALID_LOTTO_NUMBER_FORMAT_MESSAGE;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import view.LottoNumberParser;
 
-public class LottoNumberParserTest {
+public class LottoNumbersParserTest {
 
-    private LottoNumberParser parser;
+    private LottoNumbersParser parser;
 
     @BeforeEach
     void setUp() {
-        parser = new LottoNumberParser();
+        parser = new LottoNumbersParser();
     }
 
     @Test
@@ -24,7 +24,7 @@ public class LottoNumberParserTest {
     void winningNumberNotNumericValue() {
         assertThatThrownBy(() -> parser.parse("a,b,c,d,e,f"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("당첨 번호는 반드시 6개의 숫자여야 합니다.");
+                .hasMessage(INVALID_LOTTO_NUMBER_FORMAT_MESSAGE);
     }
 
     @Test
@@ -44,7 +44,7 @@ public class LottoNumberParserTest {
     void splitWinningNumberUnderSix(String numbers) {
         assertThatThrownBy(() -> parser.parse(numbers))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("당첨 번호는 반드시 6개의 숫자여야 합니다.");
+                .hasMessage(INVALID_LOTTO_NUMBER_FORMAT_MESSAGE);
     }
 
     @ParameterizedTest
@@ -53,6 +53,6 @@ public class LottoNumberParserTest {
     void validateInvalidLottoNumberFormat(String invalidLottoNumbers) {
         assertThatThrownBy(() -> parser.parse(invalidLottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(LottoNumberParser.INVALID_LOTTO_NUMBER_FORMAT_MESSAGE);
+                .hasMessage(INVALID_LOTTO_NUMBER_FORMAT_MESSAGE);
     }
 }
