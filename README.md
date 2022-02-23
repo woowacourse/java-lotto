@@ -49,3 +49,32 @@
 ## 시간되면 한번 고민
 - Prize.multiply에 매개변수 타입이 Integer 말고 Wrapper Class로 변경
 - 로또 번호를 감쌀것인가? vs winningNumbers를 사용해서 보너스넘버도 같이 감쌀것인가?
+
+Validator -> 여러개 생성 
+Validator -> 기본적으로 포맷확인(REGEX)[String], 값 확인(범위, 양수 or 음수, 배수)[머가 될지 모름]
+Validator -> 연결? Generic?  
+
+LottoNumberParser
+ AbValid validator
+ Convertor<LottoNumbers> convertor
+
+ LottoNumbers convert(String value) {
+  validator.validate(value)
+  return convertor.convert(value);
+ }
+
+
+
+
+AbstractValidator
+  List<Validator> validators;
+
+  for (validator : vaidators) {
+    valdator.validate(value);
+  }
+
+LottoNumberValidator extends AbValid 
+  조합 
+
+BonusNumberValidator extends AbValid
+  조합
