@@ -7,19 +7,21 @@ import java.util.stream.Collectors;
 
 public enum Rank {
 
-    FIRST(2000000000, (hitCounts, bonus) -> hitCounts == 6),
-    SECOND(30000000, (hitCounts, bonus) -> hitCounts == 5 && bonus),
-    THIRD(1500000, (hitCounts, bonus) -> hitCounts == 5 && !bonus),
-    FOURTH(50000, (hitCounts, bonus) -> hitCounts == 4),
-    FIFTH(5000, (hitCounts, bonus) -> hitCounts == 3),
-    NOT_THING(0, (hitCounts, bonus) -> hitCounts < 3 && hitCounts >= 0),
+    FIRST(2000000000, 6 ,(hitCounts, bonus) -> hitCounts == 6),
+    SECOND(30000000,5 , (hitCounts, bonus) -> hitCounts == 5 && bonus),
+    THIRD(1500000,5,  (hitCounts, bonus) -> hitCounts == 5 && !bonus),
+    FOURTH(50000,4 , (hitCounts, bonus) -> hitCounts == 4),
+    FIFTH(5000,3 , (hitCounts, bonus) -> hitCounts == 3),
+    NOT_THING(0,0 , (hitCounts, bonus) -> hitCounts < 3 && hitCounts >= 0),
     ;
 
     private final long reward;
+    private final int hitCounts;
     private final BiFunction<Integer, Boolean, Boolean> expression;
 
-    Rank(final long reward, final BiFunction<Integer, Boolean, Boolean> expression) {
+    Rank(final long reward, final int hitCounts, final BiFunction<Integer, Boolean, Boolean> expression) {
         this.reward = reward;
+        this.hitCounts = hitCounts;
         this.expression = expression;
     }
 
@@ -41,5 +43,13 @@ public enum Rank {
 
     private int defaultCount() {
         return 0;
+    }
+
+    public long getReward() {
+        return reward;
+    }
+
+    public int getHitCounts() {
+        return hitCounts;
     }
 }

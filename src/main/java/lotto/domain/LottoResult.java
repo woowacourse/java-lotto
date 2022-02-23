@@ -31,6 +31,10 @@ public class LottoResult {
                 .reduce(0, Integer::sum) * Lotto.LOTTO_PURCHASE_MONEY;
     }
 
+    public Map<Rank, Integer> getRankResults() {
+        return rankResults;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

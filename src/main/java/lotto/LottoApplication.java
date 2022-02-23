@@ -23,6 +23,7 @@ public class LottoApplication {
         OutputView.outputLottos(lottos.getLottos());
 
         final WinLotto winLotto = new WinLotto(inputWinLotto(), inputBonusNumber());
+        OutputView.outputResult(lottos.createResult(winLotto));
     }
 
     private static Lotto inputWinLotto() {
