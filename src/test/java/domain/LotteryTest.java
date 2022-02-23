@@ -8,7 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-public class LotteryGameTest {
+public class LotteryTest {
 
 	@Nested
 	@DisplayName("로또 용지 하나에 포함된 숫자가")
