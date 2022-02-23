@@ -13,9 +13,7 @@ public class Lottos {
     }
 
     public LottoResult createResult(WinLotto winLotto) {
-        final Map<Rank, Integer> resultMap = new HashMap<>();
-        resultMap.put(Rank.FIRST, 0);
-        resultMap.put(Rank.SECOND, 0);
+        Map<Rank, Integer> resultMap = Rank.initResultMap();
         lottos.stream()
                 .map(winLotto::matchResult)
                 .forEach(result -> resultMap.put(result, resultMap.get(result) + 1));

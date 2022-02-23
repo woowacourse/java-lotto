@@ -3,7 +3,12 @@ package lotto.domain;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.function.BiFunction;
+import java.util.function.Function;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import javax.xml.transform.Result;
 
 public enum Rank {
@@ -36,9 +41,11 @@ public enum Rank {
     }
 
     public static Map<Rank, Integer> initResultMap() {
-        Map<Rank, Integer> result = new HashMap<>();
-        Arrays.stream(values())
-                .forEach(rank -> result.put(rank, 0));
-        return result;
+        return Arrays.stream(values())
+                .collect(Collectors.toMap(rank -> rank, Rank::defaultCount));
+    }
+
+    private int defaultCount() {
+        return 0;
     }
 }
