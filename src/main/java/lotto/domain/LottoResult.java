@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 
 public class LottoResult {
 
@@ -28,5 +29,22 @@ public class LottoResult {
         return rankResults.entrySet().stream()
                 .map(Entry::getValue)
                 .reduce(0, Integer::sum) * Lotto.LOTTO_PURCHASE_MONEY;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoResult that = (LottoResult) o;
+        return Objects.equals(rankResults, that.rankResults);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(rankResults);
     }
 }
