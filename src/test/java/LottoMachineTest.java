@@ -28,8 +28,8 @@ class LottoMachineTest {
     void createLottoTicketsByAmount() {
         LottoMachine lottoMachine = new LottoMachine();
 
-        LottoTickets lottoTickets = lottoMachine.purchaseLottoTickets(Money.from(10000), new FixedLottoNumberStrategy());
-        assertThat(lottoTickets.size()).isEqualTo(10);
+        int size = lottoMachine.purchaseLottoTickets(Money.from(10000), new FixedLottoNumberStrategy());
+        assertThat(size).isEqualTo(10);
     }
 
     @Test
