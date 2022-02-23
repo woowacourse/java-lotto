@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import lotto.exception.LottoNumberException;
 
 public enum LottoNumber {
@@ -19,6 +20,7 @@ public enum LottoNumber {
     NUMBER_36(36), NUMBER_37(37), NUMBER_38(38), NUMBER_39(39), NUMBER_40(40),
     NUMBER_41(41), NUMBER_42(42), NUMBER_43(43), NUMBER_44(44), NUMBER_45(45);
 
+    private static final int PICKUP_COUNT = 6;
     private static final String REGEX_FOR_NATURAL_NUMBER = "^[1-9][0-9]*$";
     public static final int MINIMUM_RANGE = 1;
     public static final int MAXIMUM_RANGE = 45;
@@ -30,7 +32,14 @@ public enum LottoNumber {
         this.number = number;
     }
 
-    public static List<LottoNumber> shuffleLottoNumbers() {
+    public static List<LottoNumber> getRandomLottoNumbers() {
+        return IntStream.range(0, PICKUP_COUNT)
+                .mapToObj(LottoNumber.shuffleLottoNumbers()::get)
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
+    private static List<LottoNumber> shuffleLottoNumbers() {
         List<LottoNumber> lottoNumbers = LottoNumber.getLottoNumbers();
         Collections.shuffle(lottoNumbers);
         return lottoNumbers;
@@ -47,7 +56,7 @@ public enum LottoNumber {
     }
 
     private static void checkNaturalNumber(String input) {
-        if(!isNaturalNumber(input)) {
+        if (!isNaturalNumber(input)) {
             throw new LottoNumberException(LottoNumberException.LOTTO_NUMBER_NATURAL_NUMBER_ERROR_MESSAGE);
         }
     }

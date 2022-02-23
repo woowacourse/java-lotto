@@ -18,7 +18,7 @@ public class Tickets {
         int ticketCount = getTicketCount(money);
         List<Ticket> tickets = new ArrayList<>();
         for (int i = 0; i < ticketCount; i++) {
-            tickets.add(Ticket.getTicketByAuto());
+            tickets.add(new Ticket(LottoNumber.getRandomLottoNumbers()));
         }
         return new Tickets(tickets);
     }
