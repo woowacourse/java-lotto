@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Objects;
+
 public class LottoNumber {
 
     public static final String LOTTO_NUMBER_OUT_OF_BOUND = "로또번호는 1~45 사이값으로 생성할 수 있습니다";
@@ -21,6 +23,20 @@ public class LottoNumber {
 
     public int number(){
         return this.number;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumber that = (LottoNumber) o;
+        return number == that.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 }
 
