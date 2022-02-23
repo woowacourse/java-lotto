@@ -9,6 +9,10 @@ public class Ticket {
         this.lottoNumbers = lottoNumbersGenerator.generate();
     }
 
+    public Ticket(Set<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
+    }
+
     public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
@@ -25,5 +29,9 @@ public class Ticket {
             }
         }
         return Rank.value(count, bonus);
+    }
+
+    public boolean contains(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
     }
 }
