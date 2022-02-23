@@ -55,4 +55,8 @@ public class PickedNumbers {
                 .collect(toList())
                 .size();
     }
+
+    public boolean isContainNumber(int targetNumber){
+        return pickedNumbers.contains(targetNumber);
+    }
 }
