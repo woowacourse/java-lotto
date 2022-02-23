@@ -30,5 +30,6 @@ public class Application {
 
         WinningStatistics winningStatistics = lottoGame.calculateWinningStatistics(winningLotto, bonusNumber);
         OutputView.showWinningStatistics(winningStatistics.getWinningStatistics());
+        OutputView.showProfitRate(winningStatistics.calculateProfitRate(purchasedMoney));
     }
 }
