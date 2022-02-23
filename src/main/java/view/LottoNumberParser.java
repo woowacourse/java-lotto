@@ -3,16 +3,16 @@ package view;
 import static java.util.stream.Collectors.toList;
 
 import java.util.List;
-import view.LottoNumberFormatValidator;
 
 public class LottoNumberParser {
-
     private static final String REGEX_DELIMITER = ",";
-
-    private LottoNumberFormatValidator formatValidator = new LottoNumberFormatValidator();
+    private static final String REGEX_LOTTO_NUMBER_FORMAT = "^\\s*[0-9]{1,2}\\s*(\\s*,\\s*[0-9]{1,2}\\s*){5}$";
+    static final String INVALID_LOTTO_NUMBER_FORMAT_MESSAGE = "당첨 번호는 반드시 6개의 숫자여야 합니다.";
 
     public List<Integer> parse(String numbers) {
-        formatValidator.validate(numbers);
+        if (!numbers.matches(REGEX_LOTTO_NUMBER_FORMAT)) {
+            throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_FORMAT_MESSAGE);
+        }
         List<Integer> lottoNumbers = parseToLottoNumbers(numbers);
         return lottoNumbers;
     }

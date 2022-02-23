@@ -46,4 +46,13 @@ public class LottoNumberParserTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("당첨 번호는 반드시 6개의 숫자여야 합니다.");
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"100,200,3,4,5,6", "1,2,3,4,5"})
+    @DisplayName("잘못된 로또 번호 포맷 검증")
+    void validateInvalidLottoNumberFormat(String invalidLottoNumbers) {
+        assertThatThrownBy(() -> parser.parse(invalidLottoNumbers))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(LottoNumberParser.INVALID_LOTTO_NUMBER_FORMAT_MESSAGE);
+    }
 }
