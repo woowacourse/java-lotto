@@ -6,9 +6,10 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private List<LottoNumber> lottoNumbers = new ArrayList<>();
+    private List<LottoNumber> lottoNumbers;
 
     public Lotto(List<Integer> numbers) {
+        lottoNumbers = new ArrayList<>();
         numbers.forEach(number -> lottoNumbers.add(new LottoNumber(number)));
     }
 
@@ -40,5 +41,7 @@ public class Lotto {
     private boolean checkSecond(int matched, boolean hasBonus) {
         return matched == 5 && hasBonus;
     }
+
+
 
 }
