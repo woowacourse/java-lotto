@@ -1,6 +1,8 @@
 package lotto.model;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class LottoMatcher {
     private final List<Integer> winningNumbers;
@@ -11,6 +13,7 @@ public class LottoMatcher {
         validateRangeBonusNumber(bonusNumber);
         validateNumberOfWinningNumbers(winningNumbers);
         validateRangeWinningNumbers(winningNumbers);
+        validateDuplicationWinningNumbers(winningNumbers);
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
     }
@@ -60,5 +63,12 @@ public class LottoMatcher {
                 throw new IllegalArgumentException("당첨 번호의 범위는 1 ~ 45 사이로 입력해주세요.");
             }
         });
+    }
+
+    private void validateDuplicationWinningNumbers(List<Integer> winningNumbers) {
+        Set<Integer> distinct = new HashSet<>(winningNumbers);
+        if (distinct.size() != winningNumbers.size()) {
+            throw new IllegalArgumentException("당첨 번호에 중복이 존재합니다.");
+        }
     }
 }
