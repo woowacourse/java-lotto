@@ -16,7 +16,7 @@ public class LottoWinningNumberTest {
 
     @ParameterizedTest
     @NullAndEmptySource
-    @ValueSource(strings ={"","  ","\t","\n"})
+    @ValueSource(strings = {"", "  ", "\t", "\n"})
     @DisplayName("당첨 번호 입력 공백 검증")
     void validateInputLottoNumberBlank(String numbers) {
         assertThatThrownBy(() -> new LottoWinningNumber(numbers))
@@ -24,7 +24,7 @@ public class LottoWinningNumberTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings ={"azpi, ++, greeanlawn","1dksl,-1","1, 2, as"})
+    @ValueSource(strings = {"azpi, ++, greeanlawn", "1dksl,-1", "1, 2, as"})
     @DisplayName("당첨 번호가 숫자가 아닌 경우 검증")
     void validateInputLottoWinningNumberIsInt(String numbers) {
         assertThatThrownBy(() -> new LottoWinningNumber(numbers))
@@ -32,7 +32,7 @@ public class LottoWinningNumberTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"46, 1, 2","0, 45"})
+    @ValueSource(strings = {"46, 1, 2", "0, 45"})
     @DisplayName("당첨 번호가 범위 밖인 경우")
     void validateWinningNumberOutOfRange(String numbers) {
         assertThatThrownBy(() -> new LottoWinningNumber(numbers))
@@ -42,8 +42,16 @@ public class LottoWinningNumberTest {
     @Test
     @DisplayName("당첨 번호 숫자로 변경 및 저장")
     void saveLottoNumber() {
-        LottoWinningNumber lottoWinningNumber = new LottoWinningNumber("1, 2, 3");
+        LottoWinningNumber lottoWinningNumber = new LottoWinningNumber("1, 2, 3, 4, 5, 6");
         List<Integer> winningNumbers = lottoWinningNumber.getWinningNumbers();
-        assertThat(winningNumbers).isEqualTo(Arrays.asList(1,2,3));
+        assertThat(winningNumbers).isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2,3,4,5", "1,2,3,4,5,6,7"})
+    @DisplayName("당첨 번호 숫자 사이즈가 6개가 아닌 경우")
+    void validateInputLottoWinningNumberSize(String numbers) {
+        assertThatThrownBy(() -> new LottoWinningNumber(numbers))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

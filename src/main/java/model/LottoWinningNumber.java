@@ -15,6 +15,7 @@ public class LottoWinningNumber {
         validateInputNumbersBlank(numbers);
         validateNumbersConsistOfInt(numbers);
         validateNumberOutOfRange(numbers);
+        validateNumberSize(numbers);
         this.winningNumbers = makeWinningNumbers(split(numbers));
     }
 
@@ -42,6 +43,12 @@ public class LottoWinningNumber {
                 .count();
 
         if (count > 0) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private void validateNumberSize(String numbers) {
+        if (split(numbers).size() != 6) {
             throw new IllegalArgumentException();
         }
     }
