@@ -19,16 +19,12 @@ public enum WinningLottery {
 
     public static WinningLottery find(int number) {
         return Arrays.stream(values())
-                .filter(i -> i.getNumber() == number)
+                .filter(value -> value.matchNumber(number))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException(""));
     }
 
-    public int getNumber() {
-        return number;
-    }
-
-    public int getPrice() {
-        return price;
+    private boolean matchNumber(int number) {
+        return this.number == number;
     }
 }
