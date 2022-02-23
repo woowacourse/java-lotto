@@ -23,4 +23,8 @@ public class WinningLotto {
     public List<LottoNumber> getWinningLotto() {
         return winningLotto.getLotto();
     }
+
+    public LottoNumber getBonusBall() {
+        return bonusBall;
+    }
 }
