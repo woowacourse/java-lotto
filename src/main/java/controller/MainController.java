@@ -14,7 +14,7 @@ import view.OutputView;
 public class MainController {
 
     public void run() {
-        Money money = new Money(InputView.inputMoney());
+        Money money = getMoney();
         List<LottoNumbers> lottoTickets = createLottoTickets(money.toLottoCount());
         OutputView.printLottoTickets(lottoTickets);
 
@@ -22,6 +22,15 @@ public class MainController {
 
         Result result = makeResult(lottoTickets, winLottoNumbers);
         printResult(result, money);
+    }
+
+    private Money getMoney() {
+        try {
+            return new Money(InputView.inputMoney());
+        } catch (IllegalArgumentException e) {
+            OutputView.printError(e.getMessage());
+            return getMoney();
+        }
     }
 
     private List<LottoNumbers> createLottoTickets(int count) {
@@ -33,9 +42,14 @@ public class MainController {
     }
 
     private WinLottoNumbers getWinNumbers() {
-        String winLottoNumber = InputView.inputWinLottoNumbers();
-        int bonus = InputView.inputBonusNumber();
-        return WinLottoNumbers.of(winLottoNumber, bonus);
+        try {
+            String winLottoNumber = InputView.inputWinLottoNumbers();
+            int bonus = InputView.inputBonusNumber();
+            return WinLottoNumbers.of(winLottoNumber, bonus);
+        } catch (IllegalArgumentException e) {
+            OutputView.printError(e.getMessage());
+            return getWinNumbers();
+        }
     }
 
     private Result makeResult(List<LottoNumbers> lottoTickets, WinLottoNumbers winLottoNumbers) {
@@ -50,6 +64,6 @@ public class MainController {
 
     private void printResult(Result result, Money money) {
         OutputView.printResult(result);
-        OutputView.printProfit((float)result.getPrice()/ (float) money.get());
+        OutputView.printProfit((float) result.getPrice() / (float) money.get());
     }
 }
