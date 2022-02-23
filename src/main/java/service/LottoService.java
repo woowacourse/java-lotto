@@ -1,5 +1,6 @@
 package service;
 
+import domain.Credit;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -15,14 +16,14 @@ import dto.AnalysisDto;
 public class LottoService {
 
 	private Tickets tickets;
-	private int payment;
+	private Credit credit;
 
 	public void initPayment(int payment) {
-		this.payment = payment;
+		this.credit = new Credit(payment);
 	}
 
 	public void generateTickets() {
-		int ticketCount = this.payment / 1000;
+		int ticketCount = credit.getQuotient();
 		this.tickets = new Tickets(ticketCount, new RandomTicketGenerator());
 	}
 
@@ -33,7 +34,7 @@ public class LottoService {
 	public AnalysisDto generateAnalysis(List<Integer> answerNumbers, int bonusBall) {
 		List<Rank> ranks = tickets.getRanks(new Balls(answerNumbers), new Ball(bonusBall));
 		Map<Rank, Integer> rankCounts = getRankCount(ranks);
-		double profitRate = getProfitRate(payment, rankCounts);
+		double profitRate = getProfitRate(credit.getMoney(), rankCounts);
 
 		return new AnalysisDto(rankCounts, profitRate);
 	}
@@ -55,6 +56,6 @@ public class LottoService {
 			total += rank.getPrize() * rankCounts.get(rank);
 		}
 
-		return total / payment;
+		return (double) total / payment;
 	}
 }
