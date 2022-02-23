@@ -1,5 +1,8 @@
+package model;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
+import model.Prize;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

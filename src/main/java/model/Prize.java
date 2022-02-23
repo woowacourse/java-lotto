@@ -1,3 +1,5 @@
+package model;
+
 import java.math.BigInteger;
 import java.util.Objects;
 
@@ -41,7 +43,7 @@ public class Prize {
 
     @Override
     public String toString() {
-        return "Prize{" +
+        return "model.Prize{" +
                 "amount=" + amount +
                 '}';
     }

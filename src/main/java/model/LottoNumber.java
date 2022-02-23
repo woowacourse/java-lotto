@@ -1,3 +1,5 @@
+package model;
+
 import exception.InvalidRangeLottoNumberException;
 import java.util.Objects;
 

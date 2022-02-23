@@ -1,10 +1,13 @@
+package model;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import exception.DuplicatedLottoNumbersException;
 import exception.InvalidRangeLottoNumberException;
-import java.util.List;
+import model.LottoNumber;
+import model.LottoNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

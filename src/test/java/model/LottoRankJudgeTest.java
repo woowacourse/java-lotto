@@ -1,6 +1,12 @@
+package model;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.stream.Stream;
+import model.LottoNumber;
+import model.LottoNumbers;
+import model.LottoRank;
+import model.LottoRankJudge;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

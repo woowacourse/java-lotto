@@ -1,3 +1,5 @@
+package model;
+
 public class LottoRankJudge {
 
     private final LottoNumbers winningNumbers;

@@ -1,3 +1,5 @@
+package view;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -6,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import view.LottoNumberParser;
 
 public class LottoNumberParserTest {
 
@@ -42,22 +45,5 @@ public class LottoNumberParserTest {
         assertThatThrownBy(() -> parser.parse(numbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("당첨 번호는 반드시 6개의 숫자여야 합니다.");
-    }
-
-    @Test
-    @DisplayName("중복된 당첨 번호 분리 실패")
-    void failSplitWithDuplicateLottoNumber() {
-        assertThatThrownBy(() -> parser.parse("1,2,3,3,4,5"))
-            .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("중복된 당첨 번호는 허용하지 않습니다.");
-    }
-
-    @ParameterizedTest(name = "잘못된 범위의 당첨 번호 분리 실패 : 입력값 - {0}")
-    @DisplayName("잘못된 범위의 당첨 번호 분리 실패")
-    @ValueSource(strings = {"1, 2, 3, 4, 5, 46", "0, 1, 2, 3, 4, 5"})
-    void failSplitWithInvalidRangeLottoNumber(String numbers) {
-        assertThatThrownBy(() -> parser.parse(numbers))
-            .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("당첨 번호는 1 ~ 45사이의 숫자만 가능합니다.");
     }
 }

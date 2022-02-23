@@ -1,3 +1,5 @@
+package model;
+
 import exception.DuplicatedLottoNumbersException;
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,18 +1,19 @@
+package view;
+
 import static java.util.stream.Collectors.toList;
 
 import java.util.List;
+import view.LottoNumberFormatValidator;
 
 public class LottoNumberParser {
 
     private static final String REGEX_DELIMITER = ",";
 
     private LottoNumberFormatValidator formatValidator = new LottoNumberFormatValidator();
-    private LottoNumberValidator lottoNumberValidator = new LottoNumberValidator();
 
     public List<Integer> parse(String numbers) {
         formatValidator.validate(numbers);
         List<Integer> lottoNumbers = parseToLottoNumbers(numbers);
-        lottoNumberValidator.validate(lottoNumbers);
         return lottoNumbers;
     }
 
