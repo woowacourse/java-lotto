@@ -1,4 +1,3 @@
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -34,6 +33,15 @@ public class WinningNumberTest {
 
         assertThatThrownBy(
                 () -> new WinningNumber(List.of(1, 2, 3, 4, 5, 46))
+        ).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("당첨 번호에 중복된 숫자가 있으면 예외 발생")
+    public void checkDuplicatedNumberTest() {
+
+        assertThatThrownBy(
+                () -> new WinningNumber(List.of(1, 1, 3, 4, 5, 46))
         ).isInstanceOf(IllegalArgumentException.class);
     }
 }
