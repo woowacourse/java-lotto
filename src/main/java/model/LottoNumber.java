@@ -4,7 +4,7 @@ import exception.InvalidRangeLottoNumberException;
 import java.util.Objects;
 
 public class LottoNumber {
-    private int lottoNumber;
+    private final int lottoNumber;
 
     public LottoNumber(int number) {
         if (isInvalidRange(number)) {

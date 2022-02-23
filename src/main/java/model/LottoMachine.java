@@ -11,12 +11,9 @@ public class LottoMachine {
 
     public LottoResult summarize(List<LottoNumbers> lottoNumbersList) {
         LottoResult result = new LottoResult();
-
-        for (LottoNumbers lottoNumbers : lottoNumbersList) {
-            LottoRank rank = winningLottoNumbers.judge(lottoNumbers);
-            result.add(rank);
-        }
-
+        lottoNumbersList.stream()
+            .map(winningLottoNumbers::judge)
+            .forEach(result::add);
         return result;
     }
 }
