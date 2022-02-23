@@ -23,14 +23,7 @@ public class InputView {
     public static int askInputMoney() {
         System.out.println(INPUT_MONEY_MESSAGE);
         String input = scanner.nextLine();
-        return convertToInt(input);
-    }
-
-    private static int convertToInt(String input) {
-        if (!onlyNumberPattern.matcher(input).matches()) {
-            throw new IllegalArgumentException(INPUT_MONEY_ONLY_NUMBER_MESSAGE);
-        }
-        return Integer.parseInt(input);
+        return convertToIntMoney(input);
     }
 
     public static WinningNumber askInputWinningNumber() {
@@ -48,6 +41,13 @@ public class InputView {
         int bonusBall = convertToIntBonusBall(input);
         checkBonusBallRange(bonusBall);
         return bonusBall;
+    }
+
+    private static int convertToIntMoney(String input) {
+        if (!onlyNumberPattern.matcher(input).matches()) {
+            throw new IllegalArgumentException(INPUT_MONEY_ONLY_NUMBER_MESSAGE);
+        }
+        return Integer.parseInt(input);
     }
 
     private static int convertToIntBonusBall(String input) {

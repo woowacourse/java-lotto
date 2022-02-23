@@ -10,17 +10,17 @@ public class Money {
         this.money = money;
     }
 
-    private void validateUnit(int money) {
-        if (money < UNIT) {
-            throw new IllegalArgumentException(MIN_UNIT_MESSAGE);
-        }
-    }
-
     public int generateCount() {
         return money / UNIT;
     }
 
     public int getMoney() {
         return money;
+    }
+
+    private void validateUnit(int money) {
+        if (money < UNIT) {
+            throw new IllegalArgumentException(MIN_UNIT_MESSAGE);
+        }
     }
 }
