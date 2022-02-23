@@ -18,7 +18,8 @@ public class LottoNumbers {
     public LottoNumbers(final List<String> numberValues) {
         validateDuplication(numberValues);
         validateCountOfNumbers(numberValues);
-        values = sortAscendingLottoNumbers(numberValues);
+        final List<LottoNumber> mappedLottoNumbers = mapToLottoNumbers(numberValues);
+        this.values = sortAscendingLottoNumbers(mappedLottoNumbers);
     }
 
     public LottoNumbers(final Set<LottoNumber> lottoValues) {
@@ -41,10 +42,15 @@ public class LottoNumbers {
         }
     }
 
-    private List<LottoNumber> sortAscendingLottoNumbers(final List<String> numberValues) {
+    private List<LottoNumber> mapToLottoNumbers(final List<String> numberValues) {
         return numberValues.stream()
-                .sorted()
                 .map(LottoNumber::from)
+                .collect(Collectors.toUnmodifiableList());
+    }
+
+    private List<LottoNumber> sortAscendingLottoNumbers(final List<LottoNumber> lottoNumbers) {
+        return lottoNumbers.stream()
+                .sorted()
                 .collect(Collectors.toUnmodifiableList());
     }
 
