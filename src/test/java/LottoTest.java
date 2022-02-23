@@ -41,6 +41,24 @@ public class LottoTest {
                     .hasMessage("중복은 허용하지 않습니다.");
             }
         }
+
+        @Nested
+        @DisplayName("무작위로 생성하면")
+        class Context_with_random_create {
+
+            @Test
+            @DisplayName("1~45의 숫자 중 중복되지 않은 6개를 가진다.")
+            void it_contains_six_number_1_to_45() {
+                Lotto lotto = new Lotto();
+                int actual = 0;
+                for (int i = 1; i < 46; i++) {
+                    if (lotto.contains(new Number(String.valueOf(i)))) {
+                        actual ++;
+                    }
+                }
+                assertThat(actual).isEqualTo(6);
+            }
+        }
     }
     
     @Nested
