@@ -3,6 +3,8 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -113,5 +115,19 @@ public class RankTest {
                     .isThrownBy(() -> Rank.calculateCurrentRank(-1, false))
                     .withMessage("[ERROR] 해당하는 랭크가 없습니다.");
         }
+    }
+
+    @DisplayName("초기 생성 맵을 생성할 수 있다.")
+    @Test
+    void createRankMap() {
+        final Map<Rank, Integer> expected = new HashMap<>();
+        expected.put(Rank.FIRST, 0);
+        expected.put(Rank.SECOND, 0);
+        expected.put(Rank.THIRD, 0);
+        expected.put(Rank.FOURTH, 0);
+        expected.put(Rank.FIFTH, 0);
+        expected.put(Rank.NOT_THING, 0);
+
+        assertThat(Rank.initResultMap()).isEqualTo(expected);
     }
 }

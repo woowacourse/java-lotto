@@ -1,7 +1,10 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.BiFunction;
+import javax.xml.transform.Result;
 
 public enum Rank {
 
@@ -30,5 +33,12 @@ public enum Rank {
                 .filter(rank -> rank.expression.apply(hitCounts, bonus))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("[ERROR] 해당하는 랭크가 없습니다."));
+    }
+
+    public static Map<Rank, Integer> initResultMap() {
+        Map<Rank, Integer> result = new HashMap<>();
+        Arrays.stream(values())
+                .forEach(rank -> result.put(rank, 0));
+        return result;
     }
 }
