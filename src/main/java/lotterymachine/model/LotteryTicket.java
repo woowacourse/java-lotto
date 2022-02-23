@@ -1,4 +1,4 @@
-package lottertymachine.model;
+package lotterymachine.model;
 
 import java.util.List;
 
