@@ -20,9 +20,8 @@ public class TotalNumber {
     }
 
     public Set<LottoNumber> getWinningAndBonusNumber() {
-        Set<LottoNumber> totalNumbers = new java.util.HashSet<>(Set.copyOf(winningNumber.getNumbers()));
+        Set<LottoNumber> totalNumbers = winningNumber.copy();
         totalNumbers.add(bonusNumber);
         return totalNumbers;
     }
-
 }

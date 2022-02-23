@@ -41,11 +41,15 @@ public class WinningNumber {
         }
     }
 
-    public Set<LottoNumber> getNumbers() {
-        return numbers;
-    }
-
     public boolean contains(LottoNumber number) {
         return numbers.contains(number);
+    }
+
+    public Set<LottoNumber> copy() {
+        return new java.util.HashSet<>(Set.copyOf(numbers));
+    }
+
+    public Set<LottoNumber> getNumbers() {
+        return numbers;
     }
 }
