@@ -17,7 +17,7 @@ public class LottoTest {
         testValues.add(3);
         testValues.add(4);
         Lotto lotto = new Lotto(testValues);
-        assertThat(lotto.getNumbers().size()).isNotEqualTo(RandomNumber.LOTTO_SELECT_NUMBER);
+        assertThat(lotto.getNumbers().size()).isNotEqualTo(LottoNumber.LOTTO_SELECT_NUMBER);
     }
 
     @Test

@@ -3,15 +3,14 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
-public class RandomNumber {
+public class LottoNumber {
 
     public static final int LOTTO_SELECT_NUMBER = 6;
     private static final int LOTTO_MIN_RANGE = 1;
     private static final int LOTTO_MAX_RANGE = 45;
 
-    private RandomNumber() {
+    private LottoNumber() {
 
     }
 

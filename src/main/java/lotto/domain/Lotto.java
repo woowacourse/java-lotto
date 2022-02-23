@@ -16,4 +16,7 @@ public class Lotto {
         return numbers;
     }
 
+    boolean contains(int number) {
+        return numbers.contains(number);
+    }
 }
