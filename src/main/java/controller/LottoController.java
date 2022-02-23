@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import model.LottoTicket;
 import model.LottoTicketDto;
+import view.BonusNumberInputView;
 import view.LottoTicketOutputView;
 import view.PurchaseMoneyInputView;
 import view.WinningNumberInputView;
@@ -23,5 +24,9 @@ public class LottoController {
 
     public List<Integer> getWinningNumbers() {
         return (new WinningNumberInputView()).printInputWinningNumberAndGet();
+    }
+
+    public Integer getBonusNumber() {
+        return (new BonusNumberInputView()).printInputBonusNumberAndGet();
     }
 }
