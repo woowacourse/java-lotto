@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Objects;
 
 public class LottoResult {
@@ -26,9 +25,12 @@ public class LottoResult {
     }
 
     private int calculatePurchaseMoney() {
-        return rankResults.entrySet().stream()
-                .map(Entry::getValue)
-                .reduce(0, Integer::sum) * Lotto.LOTTO_PURCHASE_MONEY;
+        return calculatePurchaseLottoCount() * Lotto.LOTTO_PURCHASE_MONEY;
+    }
+
+    private Integer calculatePurchaseLottoCount() {
+        return rankResults.values().stream()
+                .reduce(0, Integer::sum);
     }
 
     public Map<Rank, Integer> getRankResults() {
