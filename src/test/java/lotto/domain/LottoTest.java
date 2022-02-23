@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
@@ -45,5 +46,15 @@ public class LottoTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new Lotto(lottoNumbers))
                 .withMessage("로또 숫자는 중복되면 안됩니다.");
+    }
+
+    @DisplayName("confirmWinning 메소드 테스트")
+    @Test
+    void confirmWinning_test() {
+        WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers, new LottoNumber(30));
+        Lotto lotto = new Lotto(lottoNumbers);
+        LottoPrize prize = lotto.confirmWinning(winningNumbers);
+
+        assertThat(prize).isEqualTo(LottoPrize.FIRST);
     }
 }

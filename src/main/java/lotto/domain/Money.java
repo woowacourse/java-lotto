@@ -17,7 +17,11 @@ public class Money {
         }
     }
 
-    public int divideBy(int amount) {
-        return money / amount;
+    public int canBuyNumber(Money amount) {
+        return money / amount.money;
+    }
+
+    public int get() {
+        return money;
     }
 }

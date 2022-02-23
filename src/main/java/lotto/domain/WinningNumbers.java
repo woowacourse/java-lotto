@@ -45,4 +45,12 @@ public class WinningNumbers {
             throw new IllegalArgumentException(ERROR_DUPLICATION_BONUS_MESSAGE);
         }
     }
+
+    public boolean containsLottoNumber(LottoNumber number) {
+        return lottoNumbers.contains(number);
+    }
+
+    public boolean equalsBonusNumber(LottoNumber number) {
+        return bonusNumber.equals(number);
+    }
 }

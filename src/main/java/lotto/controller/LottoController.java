@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoResults;
 import lotto.domain.Money;
 import lotto.domain.WinningNumbers;
 import lotto.view.InputView;
@@ -18,6 +19,8 @@ public class LottoController {
         ResultView.printLottos(lottoGame.getLottos());
 
         WinningNumbers winningNumbers = requestWinningNumbers();
+        LottoResults lottoResults = lottoGame.confirmWinnings(winningNumbers);
+        ResultView.printResults(lottoResults);
     }
 
     private WinningNumbers requestWinningNumbers() {

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class LottoGame {
@@ -12,5 +13,9 @@ public class LottoGame {
 
     public List<Lotto> getLottos() {
         return lottos.getLottos();
+    }
+
+    public LottoResults confirmWinnings(WinningNumbers winningNumbers) {
+        return new LottoResults(lottos.confirmWinnings(winningNumbers));
     }
 }

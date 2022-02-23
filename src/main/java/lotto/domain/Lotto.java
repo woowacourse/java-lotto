@@ -38,4 +38,15 @@ public class Lotto {
             throw new IllegalArgumentException(ERROR_DUPLICATION_MESSAGE);
         }
     }
+
+    public LottoPrize confirmWinning(WinningNumbers winningNumbers) {
+        int lottoNumberMatches = (int) numbers.stream()
+                .filter(winningNumbers::containsLottoNumber)
+                .count();
+        int bonusNumberMatches = (int) numbers.stream()
+                .filter(winningNumbers::equalsBonusNumber)
+                .count();
+
+        return LottoPrize.match(lottoNumberMatches, bonusNumberMatches);
+    }
 }
