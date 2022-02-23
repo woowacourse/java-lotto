@@ -14,6 +14,10 @@ public class PurchaseAmount {
         amount = calculateActualAmount(inputAmount);
     }
 
+    public int calcTheNumberOfTicket() {
+        return amount / TICKET_PRICE;
+    }
+
     private void validateMinimumAmount(final int amount) {
         if (amount < TICKET_PRICE) {
             throw new IllegalArgumentException("구입금액은 1000원 이상이어야 합니다");
@@ -27,4 +31,5 @@ public class PurchaseAmount {
     public int getAmount() {
         return amount;
     }
+
 }

@@ -51,4 +51,12 @@ class PurchaseAmountTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("구입 금액은 공백일 수 없습니다");
     }
+
+    @Test
+    @DisplayName("구입 금액만큼 티켓 개수를 반환한다")
+    void testCalcTicketAmount() {
+        PurchaseAmount purchaseAmount = new PurchaseAmount("14500");
+        int count = purchaseAmount.calcTheNumberOfTicket();
+        assertThat(count).isEqualTo(14);
+    }
 }

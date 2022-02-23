@@ -1,6 +1,8 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -20,5 +22,13 @@ public class LottoMachine {
         }
 
         return lottoTicket;
+    }
+
+    public List<Set<LottoNumber>> makeLottoTickets(int count) {
+        ArrayList<Set<LottoNumber>> lottoTickets = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            lottoTickets.add(makeLottoTicket());
+        }
+        return lottoTickets;
     }
 }
