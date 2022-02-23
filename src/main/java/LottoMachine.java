@@ -13,6 +13,8 @@ public class LottoMachine {
         int bonusBall = InputView.askInputBonusBall();
         winningNumber.checkBonusBall(bonusBall);
 
-        OutputView.printStatistics(lottos.getWinningStatistics(winningNumber, bonusBall));
+        Statistic winningStatistics = lottos.getWinningStatistics(winningNumber, bonusBall);
+        OutputView.printStatistics(winningStatistics);
+        OutputView.printProfitRate(winningStatistics, money);
     }
 }
