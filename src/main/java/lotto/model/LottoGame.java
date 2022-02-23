@@ -24,6 +24,13 @@ public class LottoGame {
     }
 
     public static int buyLottos(int money) {
+        validateUnitPrice(money);
         return money / LOTTO_PRICE;
+    }
+
+    private static void validateUnitPrice(int money) {
+        if (money % LOTTO_PRICE != 0) {
+            throw new IllegalArgumentException("거스름돈을 지급하지 않습니다. 금액이 남지 않게 지불해주세요.");
+        }
     }
 }
