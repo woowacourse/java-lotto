@@ -22,9 +22,16 @@ public class BonusBallTest {
     @ParameterizedTest
     @ValueSource(strings = {"-1","asb"})
     @DisplayName("보너스 볼 입력 숫자 검증")
-    void validateBonusBallNumber(String number){
-        assertThatThrownBy(() -> {
-            new BonusBall(number);
-        }).isInstanceOf(IllegalArgumentException.class);
+    void validateBonusBallNumber(String number) {
+        assertThatThrownBy(() -> new BonusBall(number))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"46","0"})
+    @DisplayName("보너스 볼 입력 숫자 범위 검증")
+    void validateBonusBallOutOfRange(String number) {
+        assertThatThrownBy(() -> new BonusBall(number))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
