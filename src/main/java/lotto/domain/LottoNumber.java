@@ -31,6 +31,11 @@ public class LottoNumber {
         return number < LOWER_BOUND || number > UPPER_BOUND;
     }
 
+
+    public int getNumber() {
+        return number;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
