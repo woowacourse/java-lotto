@@ -5,7 +5,6 @@ import domain.Lottos;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class InputView {
@@ -16,8 +15,6 @@ public class InputView {
     private static final String SPLIT_DELIMITER = ", ";
     private static final String MESSAGE_FOR_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
     private static final String ERROR_MESSAGE_PREFIX = "[ERROR] ";
-    private static final Pattern WINNING_LOTTO_PATTERN = Pattern.compile("(., )+.");
-    private static final String ERROR_MESSAGE_FOR_INVALID_INPUT_FORMAT = "6개의 숫자를 ', ' 로 구분해서 입력해주세요. 😆";
 
     public static int scanInputMoney() {
         System.out.println(MESSAGE_TO_GET_INPUT_MONEY);
@@ -35,20 +32,14 @@ public class InputView {
     public static List<Integer> scanWinningNumbers() {
         System.out.print(System.lineSeparator());
         System.out.println(MESSAGE_FOR_WINNING_LOTTO_NUMBERS);
-
         String userInput = SCANNER.nextLine();
-        validateInputFormat(userInput);
 
-        return Arrays.stream(userInput.split(SPLIT_DELIMITER))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
-    }
-
-    private static void validateInputFormat(String userInput) {
-        boolean matches = WINNING_LOTTO_PATTERN.matcher(userInput).matches();
-
-        if (!matches) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_FOR_INVALID_INPUT_FORMAT);
+        try {
+            return Arrays.stream(userInput.split(SPLIT_DELIMITER))
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toList());
+        } catch (NumberFormatException exception) {
+            throw new IllegalArgumentException("숫자만 입력해주세요");
         }
     }
 
