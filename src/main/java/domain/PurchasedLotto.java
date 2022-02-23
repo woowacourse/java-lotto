@@ -1,5 +1,7 @@
 package domain;
 
+import domain.strategy.PurchaseStrategy;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
