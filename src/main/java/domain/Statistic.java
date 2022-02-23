@@ -1,12 +1,11 @@
 package domain;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Statistic {
-    private final LinkedHashMap<Rank, Integer> statistics;
+    private final Map<Rank, Integer> statistics;
 
-    public Statistic(LinkedHashMap<Rank, Integer> statistics) {
+    public Statistic(Map<Rank, Integer> statistics) {
         this.statistics = statistics;
     }
 

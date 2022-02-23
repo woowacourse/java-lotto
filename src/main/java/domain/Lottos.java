@@ -27,18 +27,16 @@ public class Lottos {
     }
 
     public Statistic getWinningStatistics(WinningNumber winningNumber, int bonusBall) {
-        LinkedHashMap<Rank, Integer> statistics = initStatistics();
+        Map<Rank, Integer> statistics = initStatistics();
         lottos.forEach(lotto -> {
-            int matchCount = lotto.getMatchCount(winningNumber);
-            boolean hasBonusBall = lotto.hasBonusBall(bonusBall);
-            Rank key = Rank.valueOf(matchCount, hasBonusBall);
-            statistics.put(key, statistics.get(key) + 1);
+            Rank rank = lotto.match(winningNumber, bonusBall);
+            statistics.put(rank, statistics.get(rank) + 1);
         });
         return new Statistic(statistics);
     }
 
-    private LinkedHashMap<Rank, Integer> initStatistics() {
-        LinkedHashMap<Rank, Integer> result = new LinkedHashMap<>();
+    private Map<Rank, Integer> initStatistics() {
+        Map<Rank, Integer> result = new LinkedHashMap<>();
         Arrays.stream(Rank.values()).forEach(rank -> result.put(rank, 0));
         return result;
     }
