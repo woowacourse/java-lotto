@@ -13,9 +13,9 @@ public class LottoTickets {
     }
 
     private void createLottoTickets(int lottoCount) {
-        LottoNumbers lottoNumbers = new LottoNumbers();
+        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
         for (int i = 0; i < lottoCount; i++) {
-            lottoTickets.add(new LottoTicket(lottoNumbers.getLottoNumbers(6)));
+            lottoTickets.add(new LottoTicket(lottoNumberGenerator.getLottoNumbers(6)));
         }
     }
 
