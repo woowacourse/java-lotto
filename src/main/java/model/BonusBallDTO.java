@@ -1,7 +1,7 @@
 package model;
 
 public class BonusBallDTO {
-    private int number;
+    private final int number;
 
     public BonusBallDTO(int number) {
         this.number = number;

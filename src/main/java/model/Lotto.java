@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Lotto {
+    private static final int CHECKING_BONUS_NUMBER = 5;
+
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
@@ -14,11 +16,32 @@ public class Lotto {
         return new LottoDTO(numbers);
     }
 
-    public void compare(LottoWinningNumberDTO winningNumberDTO) {
+    public void compare(BonusBallDTO bonusBallDTO, LottoWinningNumberDTO winningNumberDTO) {
         List<Integer> winningNumbers = winningNumberDTO.getWinningNumbers();
-        long count = numbers.stream()
-                .filter(winningNumbers::contains).count();
+        long count = compareWithWinningNumber(winningNumbers);
 
+        if (count == CHECKING_BONUS_NUMBER) {
+            compareWithBonusAndStore(bonusBallDTO);
+            return;
+        }
+        storeResult(count);
+    }
+
+    private long compareWithWinningNumber(List<Integer> winningNumbers) {
+        return numbers.stream()
+                .filter(winningNumbers::contains)
+                .count();
+    }
+
+    private void compareWithBonusAndStore(BonusBallDTO bonusBallDTO) {
+        if (numbers.contains(bonusBallDTO.getNumber())) {
+            Statistics.BONUS.addCount();
+            return;
+        }
+        Statistics.FIVE.addCount();
+    }
+
+    private void storeResult(long count) {
         Arrays.stream(Statistics.values())
                 .filter(statistics -> statistics.getMatchNumber() == count)
                 .forEach(Statistics::addCount);

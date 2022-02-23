@@ -27,7 +27,7 @@ public class LottoStorage {
         return lottoDTOS;
     }
 
-    public void compare(LottoWinningNumberDTO winningNumbersDTO) {
-        lottoStorage.forEach(lotto -> lotto.compare(winningNumbersDTO));
+    public void compare(BonusBallDTO bonusBallDTO, LottoWinningNumberDTO winningNumbersDTO) {
+        lottoStorage.forEach(lotto -> lotto.compare(bonusBallDTO, winningNumbersDTO));
     }
 }
