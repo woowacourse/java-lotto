@@ -16,6 +16,9 @@ public class RandomLottoMachine {
                 .forEach(lottoNumbers::add);
     }
 
+    private RandomLottoMachine() {
+    }
+
     public static List<LottoNumber> createRandomLottoNumbers() {
         Collections.shuffle(lottoNumbers);
         return IntStream.rangeClosed(0, 5)
