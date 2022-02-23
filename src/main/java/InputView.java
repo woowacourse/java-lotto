@@ -13,6 +13,9 @@ public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
     public static final String REGEX_NUMBER = "^[0-9]*$";
     private static final Pattern pattern = Pattern.compile(REGEX_NUMBER);
+    private static final String BONUS_BALL_RANGE_MESSAGE = "[ERROR] 보너스 볼은 1부터 45이내의 숫자여야 합니다.";
+    private static final int MIN_BONUS_BALL = 1;
+    private static final int MAX_BONUS_BALL = 45;
 
     public static int askInputMoney() {
         System.out.println(INPUT_MONEY_MESSAGE);
@@ -37,7 +40,9 @@ public class InputView {
     public static int askInputBonusBall() {
         System.out.println(INPUT_BONUS_BALL_MESSAGE);
         String input = scanner.nextLine();
-        return convertToIntBonusBall(input);
+        int bonusBall = convertToIntBonusBall(input);
+        checkBonusBallRange(bonusBall);
+        return bonusBall;
     }
 
     private static int convertToIntBonusBall(String input) {
@@ -45,5 +50,11 @@ public class InputView {
             throw new IllegalArgumentException(INPUT_BONUS_BALL_ONLY_NUMBER_MESSAGE);
         }
         return Integer.parseInt(input);
+    }
+
+    private static void checkBonusBallRange(int bonusBall) {
+        if (bonusBall < MIN_BONUS_BALL || bonusBall > MAX_BONUS_BALL) {
+            throw new IllegalArgumentException(BONUS_BALL_RANGE_MESSAGE);
+        }
     }
 }
