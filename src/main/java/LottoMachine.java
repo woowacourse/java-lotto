@@ -11,5 +11,6 @@ public class LottoMachine {
         lottos.generateLottos(count);
         OutputView.printLottos(lottos);
         List<Integer> winningNumber = InputView.askInputWinningNumber();
+        InputView.askInputBonusBall();
     }
 }
