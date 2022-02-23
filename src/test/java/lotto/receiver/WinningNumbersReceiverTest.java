@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 public class WinningNumbersReceiverTest {
 
     @Test
-    @DisplayName("구입금액을 검증하여 정수로 반환한다.")
+    @DisplayName("당첨 번호를 검증하여 LottoNumber 리스트로 반환한다.")
     void receive() {
         Assertions.assertThat(WinningNumbersReceiver.receive("45, 1, 10, 4, 20, 30"))
                 .containsExactly(LottoNumber.NUMBER_1,
