@@ -6,11 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 
 public class WinLottoNumbersValidator {
-	public static void validate(List<Integer> nums) {
+	public static void validate(List<Integer> nums, int bonus) {
 		isNotDuplicated(nums);
-	}
-
-	public static void validateBonus(List<Integer> nums, int bonus) {
 		isBonusNumberNotDuplicated(nums, bonus);
 	}
 

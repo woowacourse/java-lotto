@@ -9,13 +9,13 @@ import org.junit.jupiter.api.Test;
 class WinLottoNumbersValidatorTest {
     @Test
     void 로또_번호_중복_확인() {
-        assertThatThrownBy(() -> WinLottoNumbersValidator.validate(Arrays.asList(1, 2, 3, 4, 5, 2)))
+        assertThatThrownBy(() -> WinLottoNumbersValidator.validate(Arrays.asList(1, 2, 3, 4, 5, 2), 9))
                 .isInstanceOf(Exception.class);
     }
 
     @Test
     void 로또_번호와_보너스_중복_확인() {
-        assertThatThrownBy(() -> WinLottoNumbersValidator.validateBonus(Arrays.asList(1, 2, 3, 4, 5, 6), 5))
+        assertThatThrownBy(() -> WinLottoNumbersValidator.validate(Arrays.asList(1, 2, 3, 4, 5, 6), 5))
                 .isInstanceOf(Exception.class);
     }
 }
