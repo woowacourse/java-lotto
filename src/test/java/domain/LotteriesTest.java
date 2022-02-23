@@ -9,6 +9,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import domain.generatestrategy.LotteryRandomGeneratorStrategy;
+
 public class LotteriesTest {
 
 	@DisplayName("로또의 개수가 정해진 수 만큼 만들어지는지 확인")
@@ -16,7 +18,7 @@ public class LotteriesTest {
 	@ValueSource(ints = {1, 100, 50})
 	void lotteries_number(final int lotteryNumber){
 		final List<List<Integer>> lotteriesNumber = new ArrayList<>();
-		final LotteryGenerator lotteryGenerator = new LotteryGenerator();
+		final LotteryRandomGeneratorStrategy lotteryGenerator = new LotteryRandomGeneratorStrategy();
 
 		for (int i = 0 ; i < lotteryNumber; i++) {
 			lotteriesNumber.add(lotteryGenerator.getNumbers());

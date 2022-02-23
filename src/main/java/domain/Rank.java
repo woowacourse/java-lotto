@@ -1,6 +1,8 @@
 package domain;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public enum Rank {
 	FIRST(6, 2_000_000_000), SECOND(5, 30_000_000), THIRD(5, 1_500_000),
@@ -32,5 +34,11 @@ public enum Rank {
 			return Rank.THIRD;
 		}
 		return properRank;
+	}
+
+	public static List<Rank> getValues() {
+		return Arrays.stream(values())
+			.filter(rank -> rank != NONE)
+			.collect(Collectors.toList());
 	}
 }
