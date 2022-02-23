@@ -1,18 +1,34 @@
 
 public class LottoMachine {
 
+    private Money money;
+    private Lottos lottos = new Lottos();
+    private WinningNumber winningNumber;
+
     public void start() {
 
-        Money money = new Money(InputView.askInputMoney());
+        int lottoCount = inputMoney();
+        lottos.generateLottos(lottoCount);
+        OutputView.printLottos(lottos);
+        int bonusBall = inputWinningNumber();
+        getStatistics(bonusBall);
+    }
+
+    private int inputMoney() {
+        money = new Money(InputView.askInputMoney());
         int count = money.generateCount();
         OutputView.printCountOfLotto(count);
-        Lottos lottos = new Lottos();
-        lottos.generateLottos(count);
-        OutputView.printLottos(lottos);
-        WinningNumber winningNumber = InputView.askInputWinningNumber();
+        return count;
+    }
+
+    private int inputWinningNumber() {
+        winningNumber = InputView.askInputWinningNumber();
         int bonusBall = InputView.askInputBonusBall();
         winningNumber.checkBonusBall(bonusBall);
+        return bonusBall;
+    }
 
+    private void getStatistics(int bonusBall) {
         Statistic winningStatistics = lottos.getWinningStatistics(winningNumber, bonusBall);
         OutputView.printStatistics(winningStatistics);
         OutputView.printProfitRate(winningStatistics, money);

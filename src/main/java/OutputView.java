@@ -2,6 +2,7 @@ import java.util.Map;
 
 public class OutputView {
 
+    private static final int ZERO = 0;
     private static final String COUNT_MESSAGE = "%d개를 구매했습니다.\n";
     private static final String STATISTIC_RESULT_MESSAGE = "당첨 통계\n---------";
     private static final String WINNING_MESSAGE = "%d개 일치 (%d원)- %d\n";
@@ -22,17 +23,13 @@ public class OutputView {
     public static void printStatistics(Statistic statistic) {
         System.out.println(STATISTIC_RESULT_MESSAGE);
 
-        for (Map.Entry<Rank, Integer> statistics : statistic.getStatistics().entrySet()) {
-            if (statistics.getKey().getCount() == 0) {
-                continue;
-            }
+        statistic.getStatistics().entrySet().stream().filter(statistics -> statistics.getKey().getCount() != ZERO).forEach(statistics -> {
             if (statistics.getKey().hasBonusBall()) {
                 System.out.printf(SECOND_MESSAGE, Rank.SECOND.getCount(), Rank.SECOND.getWinningPrice(), statistics.getValue());
-                continue;
+                return;
             }
-
             System.out.printf(WINNING_MESSAGE, statistics.getKey().getCount(), statistics.getKey().getWinningPrice(), statistics.getValue());
-        }
+        });
     }
 
     public static void printProfitRate(Statistic statistic, Money money) {

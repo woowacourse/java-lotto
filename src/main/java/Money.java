@@ -1,13 +1,18 @@
 public class Money {
 
+    public static final String MIN_UNIT_MESSAGE = "[ERROR] 구입 금액은 1000원 단위이어야 합니다.";
     private static final int UNIT = 1000;
     private final int money;
 
     public Money(int money) {
-        if(money < UNIT ){
-            throw new IllegalArgumentException();
-        }
+        validateUnit(money);
         this.money = money;
+    }
+
+    private void validateUnit(int money) {
+        if (money < UNIT) {
+            throw new IllegalArgumentException(MIN_UNIT_MESSAGE);
+        }
     }
 
     public int generateCount() {

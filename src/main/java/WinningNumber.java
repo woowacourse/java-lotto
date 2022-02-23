@@ -7,7 +7,7 @@ public class WinningNumber {
     private static final int MIN_WINNING_NUMBER = 1;
     private static final int MAX_WINNING_NUMBER = 45;
     private static final String WINNING_NUMBER_RANGE_MESSAGE = "[ERROR] 당첨 번호는 1부터 45 이내의 숫자여야 합니다.";
-    List<Integer> winningNumbers;
+    private final List<Integer> winningNumbers;
 
     public WinningNumber(List<Integer> winningNumbers) {
         checkWinningNumberLength(winningNumbers);

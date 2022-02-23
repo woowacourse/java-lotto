@@ -8,6 +8,7 @@ public enum Rank {
     SECOND(5, 30_000_000, true),
     FIRST(6, 2_000_000_000, false);
 
+    private static final int SECOND_THIRD_RANK_COUNT = 5;
     private final int count;
     private final int winningPrice;
     private final boolean hasBonusBall;
@@ -19,7 +20,7 @@ public enum Rank {
     }
 
     public static Rank valueOf(int count, boolean hasBonusBall) {
-        if (count == 5 && hasBonusBall) {
+        if (count == SECOND_THIRD_RANK_COUNT && hasBonusBall) {
             return Rank.SECOND;
         }
         return Arrays.stream(values())
