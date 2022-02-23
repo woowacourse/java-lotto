@@ -1,28 +1,30 @@
 package domain;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class AnswerLotto {
-	private AnswerLottoNumbers numbers;
-	private BonusNumber bonusNumber;
+	private final List<LottoNumber> answerNumbers;
+	private final LottoNumber bonusLottoNumber;
+	private final String ERROR_DUPLICATE_WITH_BONUS_NUMBER_IN_ANSWER_NUMBERS = "[ERROR] 보너스 번호는 지난 주 당첨 번호 숫자들과 중복일 수 없습니다";
 
-	public AnswerLotto(AnswerLottoNumbers lottoNumbers, BonusNumber bonusNumber) {
-		validateBonusNumberInNumbers(lottoNumbers, bonusNumber);
-		this.numbers = lottoNumbers;
-		this.bonusNumber = bonusNumber;
+	public AnswerLotto(String[] userInput, LottoNumber bonusLottoNumber) {
+		validateBonusNumberInNumbers(userInput, bonusLottoNumber);
+		this.answerNumbers = LottoGenerator.generateAnswerLottoNumbers(userInput);
+		this.bonusLottoNumber = bonusLottoNumber;
 	}
 
-	public List<Integer> getNumbers() {
-		return this.numbers.getAnswerLottoNumbers();
+	public boolean isInAnswerNumbers(LottoNumber lottoNumber) {
+		return this.answerNumbers.contains(lottoNumber);
 	}
 
-	public int getBonusNumber() {
-		return this.bonusNumber.getNumber();
+	public boolean isSameWithBonusNumber(LottoNumber lottoNumber) {
+		return this.bonusLottoNumber.equals(lottoNumber);
 	}
 
-	private void validateBonusNumberInNumbers(AnswerLottoNumbers numbers, BonusNumber bonusNumber) {
-		if (numbers.isExists(bonusNumber)) {
-			throw new IllegalArgumentException("[ERROR] 보너스 번호는 지난 주 당첨 번호 숫자들과 중복일 수 없습니다");
+	private void validateBonusNumberInNumbers(String[] userInput, LottoNumber bonusLottoNumber) {
+		if (Arrays.stream(userInput).anyMatch(num -> num.equals(String.valueOf(bonusLottoNumber.getLottoNumber())))) {
+			throw new IllegalArgumentException(ERROR_DUPLICATE_WITH_BONUS_NUMBER_IN_ANSWER_NUMBERS);
 		}
 	}
 }
