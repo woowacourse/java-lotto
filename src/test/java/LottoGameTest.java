@@ -12,7 +12,7 @@ public class LottoGameTest {
     void buyLottoTest() {
         LottoGame lottoGame = new LottoGame();
 
-        assertThat(lottoGame.buyLotto(14000).size()).isEqualTo(14);
+        assertThat(lottoGame.buyLotto(new Money(14000)).size()).isEqualTo(14);
     }
 
     @Test

@@ -11,6 +11,12 @@ public class LottoGame {
     private Map<Integer, Integer> convertReward;
     private Map<Integer, Integer> results;
 
+
+
+//    public LottoGame() {
+//
+//
+
 //    public LottoGame() {
 //
 //    }
@@ -18,14 +24,13 @@ public class LottoGame {
     public LottoGame() {
         //.lottos = lottos;
 
-        convertReward = new HashMap<>();
-        convertReward.put(1, 2000000000);
-        convertReward.put(2, 30000000);
-        convertReward.put(3, 1500000);
-        convertReward.put(4, 50000);
-        convertReward.put(5, 5000);
-        convertReward.put(-1, 0);
-
+        convertReward =new HashMap<>();
+        convertReward.put(1,2000000000);
+        convertReward.put(2,30000000);
+        convertReward.put(3,1500000);
+        convertReward.put(4,50000);
+        convertReward.put(5,5000);
+        convertReward.put(-1,0);
 
     }
 
@@ -33,11 +38,11 @@ public class LottoGame {
         this.lottos = new Lottos(lottos);
     }
 
-    public List<Lotto> buyLotto(int money) {
+    public List<Lotto> buyLotto(Money money) {
 
         //lottos = new ArrayList<Lotto>();
 
-        int lottoAmount = money / 1000;
+        int lottoAmount = money.money() / 1000;
 
         lottos = new Lottos(lottoAmount);
 

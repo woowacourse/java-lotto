@@ -5,7 +5,7 @@ public class LottoController {
     public static void main(String[] args) {
         LottoGame lottoGame = new LottoGame();
 
-        lottoGame.buyLotto(InputView.askMoneyInput());
+        lottoGame.buyLotto(new Money(InputView.askMoneyInput()));
 
         OutputView.printLottosInformations(lottoGame.getLottos());
 
