@@ -2,7 +2,10 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.RandomLottoMachine;
 import lotto.view.InputView;
@@ -15,11 +18,14 @@ public class LottoApplication {
         final int buyCounts = money.calculateLottoCount();
         OutputView.outputBuyLottoCounts(buyCounts);
 
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < buyCounts; i++) {
-            lottos.add(new Lotto(RandomLottoMachine.createRandomLottoNumbers()));
-        }
-        OutputView.outputLottos(lottos);
+        Lottos lottos = new Lottos(buyRandomLottos(buyCounts));
+        OutputView.outputLottos(lottos.getLottos());
 
+    }
+
+    private static List<Lotto> buyRandomLottos(int buyCounts) {
+        return IntStream.rangeClosed(0, buyCounts)
+                .mapToObj(index -> new Lotto(RandomLottoMachine.createRandomLottoNumbers()))
+                .collect(Collectors.toList());
     }
 }
