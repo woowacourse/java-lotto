@@ -1,6 +1,7 @@
 package model;
 
 import exception.DuplicatedLottoNumbersException;
+import exception.InvalidLottoNumbersSizeException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -11,12 +12,23 @@ public class LottoNumbers {
     private final Set<LottoNumber> lottoNumbers;
 
     public LottoNumbers(List<Integer> lottoNumbers) {
-        if (hasDuplicatedNumber(lottoNumbers)) {
-            throw new DuplicatedLottoNumbersException();
-        }
+        checkLottoNumbers(lottoNumbers);
         this.lottoNumbers = lottoNumbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet());
+    }
+
+    private void checkLottoNumbers(List<Integer> lottoNumbers) {
+        if (hasDuplicatedNumber(lottoNumbers)) {
+            throw new DuplicatedLottoNumbersException();
+        }
+        if (isInvalidSize(lottoNumbers)) {
+            throw new InvalidLottoNumbersSizeException();
+        }
+    }
+
+    private boolean isInvalidSize(List<Integer> lottoNumbers) {
+        return lottoNumbers.size() != 6;
     }
 
     private boolean hasDuplicatedNumber(List<Integer> numbers) {

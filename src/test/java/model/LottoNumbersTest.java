@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import exception.DuplicatedLottoNumbersException;
+import exception.InvalidLottoNumbersSizeException;
 import exception.InvalidRangeLottoNumberException;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -48,5 +49,12 @@ public class LottoNumbersTest {
         LottoNumbers lottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
         assertThat(lottoNumbers.contains(new LottoNumber(4))).isTrue();
         assertThat(lottoNumbers.contains(new LottoNumber(9))).isFalse();
+    }
+
+    @Test
+    @DisplayName("로또 숫자가 6개가 아닌 경우 로또 생성")
+    void invalidLottoNumbersSize() {
+        assertThatThrownBy(() -> new LottoNumbers(List.of(1, 2, 3, 4, 5)))
+                .isInstanceOf(InvalidLottoNumbersSizeException.class);
     }
 }
