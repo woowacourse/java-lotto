@@ -1,7 +1,7 @@
 package lotto.domain;
 
 public class PurchaseAmount {
-    private static final String NUMBER_MATCHES = "^[0-9]*";
+    private static final String NUMBER_MATCHES = "[0-9]+";
     private static final int LOTTO_PRICE  = 1000;
     private static final String ERROR_PREFIX = "[ERROR] ";
     private static final String ERROR_ONLY_NUMBER = "숫자를 입력해주세요!";
@@ -16,7 +16,7 @@ public class PurchaseAmount {
     }
 
     private void checkValidValue(final String value) {
-        if (isBlank(value) || isNumber(value)) {
+        if (isBlank(value) || !isNumber(value)) {
             throw new IllegalArgumentException(ERROR_PREFIX + ERROR_ONLY_NUMBER);
         }
         int number = Integer.parseInt(value);

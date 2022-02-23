@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.util.Creatable;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,7 +11,7 @@ public class BallTest {
 
     @Test
     @DisplayName("Null값을 입력했을 경우")
-    void inputNull() {
+    void input_null() {
         assertThatThrownBy(() -> {
             Ball ball = new Ball(null);
         }).isInstanceOf(IllegalArgumentException.class);
@@ -20,7 +19,7 @@ public class BallTest {
 
     @Test
     @DisplayName("빈값을 입력했을 경우")
-    void inputEmpty() {
+    void input_empty() {
         assertThatThrownBy(() -> {
             Ball ball = new Ball("");
         }).isInstanceOf(IllegalArgumentException.class);
@@ -28,7 +27,7 @@ public class BallTest {
 
     @Test
     @DisplayName("문자를 입력했을 경우")
-    void inputNotNumber() {
+    void input_not_number() {
         assertThatThrownBy(() -> {
             Ball ball = new Ball("ball");
         }).isInstanceOf(IllegalArgumentException.class);
@@ -37,7 +36,7 @@ public class BallTest {
     @ParameterizedTest
     @ValueSource(strings = {"0", "46"})
     @DisplayName("1에서 45 사이의 문자열 값이 아닌 값을 입력했을 경우")
-    void incorrectStringInputRange1To45(String input) {
+    void incorrect_string_input_range_1_to_45(String input) {
         assertThatThrownBy(() -> {
             Ball ball = new Ball(input);
         }).isInstanceOf(IllegalArgumentException.class);

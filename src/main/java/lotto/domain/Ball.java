@@ -1,8 +1,5 @@
 package lotto.domain;
 
-import lotto.util.Creatable;
-import lotto.util.Random;
-
 public class Ball {
     private static final String NUMBER_MATCHES = "[0-9]+";
     public static final int MINIMUM_NUMBER = 1;
@@ -12,10 +9,6 @@ public class Ball {
     private static final String ERROR_LOTTO_NUMBER = "로또 숫자가 아닙니다";
 
     private final int number;
-
-    public Ball() {
-        this.number = new Random().createRandomNumber();
-    }
 
     public Ball(String number) {
         checkValidValue(number);

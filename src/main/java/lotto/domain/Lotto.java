@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lotto {
+    private static final int MINIMUM_NUMBER = 1;
+    private static final int MAXIMUM_NUMBER = 45;
     private static final int LOTTO_COUNT = 6;
 
     private final List<Ball> lotto = new ArrayList<>();
@@ -29,16 +31,16 @@ public class Lotto {
         List<Integer> lottoNumbers = getTotalLottoNumbers();
         Collections.shuffle(lottoNumbers);
 
-        List<Integer> selectedIntNumbers = lottoNumbers.subList(0,6);
+        List<Integer> selectedIntNumbers = new ArrayList<>(lottoNumbers.subList(0, LOTTO_COUNT));
         return selectedIntNumbers.stream()
-                .map(Object::toString)
-                .collect(Collectors.toList());
+            .map(Object::toString)
+            .collect(Collectors.toList());
     }
 
     private static List<Integer> getTotalLottoNumbers() {
-        return IntStream.range(1, 46)
-                .boxed()
-                .collect(Collectors.toList());
+        return IntStream.range(MINIMUM_NUMBER, MAXIMUM_NUMBER + 1)
+            .boxed()
+            .collect(Collectors.toList());
     }
 
     private void checkValidNumbers(final List<String> numbers) {
