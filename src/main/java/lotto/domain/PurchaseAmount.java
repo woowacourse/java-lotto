@@ -2,7 +2,7 @@ package lotto.domain;
 
 public class PurchaseAmount {
     private static final String NUMBER_MATCHES = "[0-9]+";
-    private static final int LOTTO_PRICE  = 1000;
+    private static final int LOTTO_PRICE = 1000;
     private static final String ERROR_PREFIX = "[ERROR] ";
     private static final String ERROR_ONLY_NUMBER = "숫자를 입력해주세요!";
     private static final String ERROR_ONLY_NATURAL_NUMBER = "자연수를 입력해주세요!";
@@ -13,6 +13,10 @@ public class PurchaseAmount {
     public PurchaseAmount(final String purchaseAmount) {
         checkValidValue(purchaseAmount);
         this.purchaseAmount = Integer.parseInt(purchaseAmount);
+    }
+
+    public int getPurchaseAmount() {
+        return purchaseAmount;
     }
 
     private void checkValidValue(final String value) {
