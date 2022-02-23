@@ -35,4 +35,23 @@ public class LottoNumbers {
     public int size() {
         return this.lottoNumbers.size();
     }
+
+    public int compare(final LottoNumbers winNumbers) {
+        int count = 0;
+        for (LottoNumber lottoNumber : this.lottoNumbers) {
+            if (winNumbers.compare(lottoNumber)) {
+                count += 1;
+            }
+        }
+
+        return count;
+    }
+
+    private boolean compare(final LottoNumber lottoNumber) {
+        return this.lottoNumbers.contains(lottoNumber);
+    }
+
+    public boolean compareBonus(final LottoNumber bonusNumber) {
+        return this.lottoNumbers.contains(bonusNumber);
+    }
 }

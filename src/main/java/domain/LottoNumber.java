@@ -13,6 +13,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = inputNumber;
     }
 
+    public static void createBonus(final String s) {
+        //중복검증 거치고, 생성
+        
+    }
+
     private void validateLottoNumberFormat(final String number) {
         if (!number.matches("^[1-9]([0-9]*)$")) {
             throw new IllegalArgumentException("로또 번호가 숫자의 형태가 아닙니다.");
