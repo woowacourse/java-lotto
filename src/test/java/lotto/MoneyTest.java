@@ -2,7 +2,6 @@ package lotto;
 
 import static org.assertj.core.api.Assertions.*;
 import java.math.BigDecimal;
-import lotto.exception.NotEnoughMoneyException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

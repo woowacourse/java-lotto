@@ -1,6 +1,7 @@
 package lotto;
 
-import lotto.exception.NotEnoughMoneyException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Store {
 
@@ -18,12 +19,17 @@ public class Store {
         this.lottoGenerator = lottoGenerator;
     }
 
-    public Lotto buy() {
-        if (canBuy()) {
-            leftMoney = leftMoney.minus(new Money(LOTTO_PRICE));
-            return lottoGenerator.generate();
+    public List<Lotto> buyLottos() {
+        List<Lotto> lottos = new ArrayList<>();
+        while (canBuy()) {
+            lottos.add(buy());
         }
-        throw new NotEnoughMoneyException();
+        return lottos;
+    }
+
+    private Lotto buy() {
+        leftMoney = leftMoney.minus(new Money(LOTTO_PRICE));
+        return lottoGenerator.generate();
     }
 
     private boolean canBuy() {
@@ -41,5 +47,4 @@ public class Store {
             throw new IllegalArgumentException("입력금액은 1,000원 이상이어야 한다.");
         }
     }
-
 }

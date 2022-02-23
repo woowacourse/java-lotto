@@ -1,11 +1,10 @@
 package lotto;
 
-import lotto.exception.NotEnoughMoneyException;
+import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import static org.assertj.core.api.Assertions.*;
 
 public class StoreTest {
 
@@ -37,17 +36,7 @@ public class StoreTest {
     void createLotto() {
         Store store = new Store(1000, new LottoGenerator());
 
-        assertThat(store.buy()).isNotNull();
+        assertThat(store.buyLottos()).hasSize(1);
     }
 
-    @Test
-    @DisplayName("로또를 구입할 금액이 부족하면 예외를 발생한다.")
-    void throwExceptionWhenHasNotMoney() {
-        Store store = new Store(1000, new LottoGenerator());
-        store.buy();
-
-        assertThatThrownBy(store::buy)
-            .isInstanceOf(NotEnoughMoneyException.class)
-            .hasMessageContaining("금액이 부족합니다.");
-    }
 }
