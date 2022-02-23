@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.LottoNumber;
-import lotto.exception.WinningNumbersException;
+import lotto.exception.LottoException;
 
 public class LottoReceiver {
 
@@ -27,7 +27,7 @@ public class LottoReceiver {
 
     private static void checkSize(List<String> numbers) {
         if (!isCorrectSize(numbers)) {
-            throw new WinningNumbersException(WinningNumbersException.WINNING_NUMBERS_SIZE_ERROR_MESSAGE);
+            throw new LottoException(LottoException.WINNING_NUMBERS_SIZE_ERROR_MESSAGE);
         }
     }
 
@@ -37,7 +37,7 @@ public class LottoReceiver {
 
     private static void checkDuplication(List<String> numbers) {
         if (isDuplication(numbers)) {
-            throw new WinningNumbersException(WinningNumbersException.WINNING_NUMBERS_DUPLICATION_ERROR_MESSAGE);
+            throw new LottoException(LottoException.WINNING_NUMBERS_DUPLICATION_ERROR_MESSAGE);
         }
     }
 
