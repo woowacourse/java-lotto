@@ -15,9 +15,8 @@ public class Lottos {
     }
 
     public static Lottos buyLottosByAuto(Money money) {
-        int ticketCount = calculateTotalLottoCount(money);
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < ticketCount; i++) {
+        for (int i = 0; i < calculateTotalLottoCount(money); i++) {
             lottos.add(Lotto.generateLottoByAuto());
         }
         return new Lottos(lottos);
