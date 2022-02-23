@@ -50,7 +50,4 @@ public class PickedNumberTest {
             new PickedNumbers("1,1,3,4,5,6");
         }).isInstanceOf(IllegalArgumentException.class);
     }
-
-
-
 }

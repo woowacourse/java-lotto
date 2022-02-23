@@ -27,7 +27,7 @@ public enum LottoRank {
         return isBonused;
     }
 
-    public int getPrizeAmount(){
+    public int getPrizeAmount() {
         return prizeAmount;
     }
 
