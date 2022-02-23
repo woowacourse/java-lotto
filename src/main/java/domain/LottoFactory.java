@@ -24,9 +24,15 @@ public class LottoFactory {
         this.bonusNumber = bonusNumber;
     }
 
-    public Count calculateCount() {
-        return new Count(money.calculateCounts());
+    public LottoFactory(final Money money) {
+        this.money = money;
+        this.winNumbers = null;
+        this.bonusNumber = null; //todo: 나중에 처리
     }
+
+//    public Count calculateCount() {
+//        return new Count(money.calculateCounts());
+//    }
 
     public LottoNumbers generateAutoLottoNumbers() {
         HashSet<LottoNumber> autoLottoNumbers = new HashSet<>();
@@ -39,12 +45,14 @@ public class LottoFactory {
                 .collect(Collectors.toList()));
     }
 
-    public void issueLotto(Count count) {
+    public List<LottoNumbers> issueLotto() {
+        Count count = new Count(money.calculateCounts());
         lotto.clear();
         while (!count.isEnd()) {
             count = count.decrease();
             lotto.add(generateAutoLottoNumbers());
         }
+        return Collections.unmodifiableList(lotto);
     }
 
     public List<LottoNumbers> getLottoTickets() {
@@ -85,4 +93,6 @@ public class LottoFactory {
         }
         return money.calculateProfit(totalWinPrice);
     }
+
+
 }
