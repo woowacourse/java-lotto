@@ -14,20 +14,20 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static Lottos buyTicketsByAuto(Money money) {
-        int ticketCount = getTicketCount(money);
+    public static Lottos buyLottosByAuto(Money money) {
+        int ticketCount = getTotalLottoCount(money);
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < ticketCount; i++) {
-            lottos.add(Lotto.getLottoByAuto());
+            lottos.add(Lotto.generateLottoByAuto());
         }
         return new Lottos(lottos);
     }
 
-    private static int getTicketCount(Money money) {
+    private static int getTotalLottoCount(Money money) {
         return money.getMoney() / LOTTO_TICKET_PRICE;
     }
 
-    public List<Lotto> getTickets() {
+    public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
     }
 }

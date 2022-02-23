@@ -9,8 +9,8 @@ public class LottosTest {
 
     @Test
     @DisplayName("구입금액 만큼 로또티켓을 구입")
-    void buyTicketsByAuto() {
-        Lottos lottos = Lottos.buyTicketsByAuto(new Money("10000"));
-        assertThat(lottos.getTickets().size()).isEqualTo(10);
+    void buyLottosByAuto() {
+        Lottos lottos = Lottos.buyLottosByAuto(new Money("10000"));
+        assertThat(lottos.getLottos().size()).isEqualTo(10);
     }
 }
