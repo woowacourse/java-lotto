@@ -53,4 +53,27 @@ public class LottoTest {
 		//then
 		assertThat(lotto.toString()).isEqualTo("추첨된 번호는 [1, 2, 3, 4, 5, 6] 입니다.");
 	}
+
+	@Test
+	void 매칭_숫자_계산() {
+		//given
+		Lotto lotto = new Lotto(Arrays.asList(new LottoNumber("7"),
+				new LottoNumber("5"),
+				new LottoNumber("4"),
+				new LottoNumber("3"),
+				new LottoNumber("2"),
+				new LottoNumber("1")));
+		Lotto targetLotto = new Lotto(Arrays.asList(new LottoNumber("6"),
+				new LottoNumber("5"),
+				new LottoNumber("4"),
+				new LottoNumber("3"),
+				new LottoNumber("2"),
+				new LottoNumber("1")));
+
+		//when
+		int count = lotto.calculateMatchCount(targetLotto);
+
+		//then
+		assertThat(count).isEqualTo(5);
+	}
 }

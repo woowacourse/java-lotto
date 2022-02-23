@@ -1,11 +1,10 @@
 package domain;
 
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.*;
 
 public class WinningLottoTest {
 
@@ -33,5 +32,28 @@ public class WinningLottoTest {
 		LottoNumber bonusNumber = new LottoNumber("6");
 		assertThatThrownBy(() -> new WinningLotto(lotto, bonusNumber))
 			.isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@Test
+	void 등수_계산() {
+		//given
+		Lotto lotto = new Lotto(Arrays.asList(new LottoNumber("7"),
+				new LottoNumber("5"),
+				new LottoNumber("4"),
+				new LottoNumber("3"),
+				new LottoNumber("2"),
+				new LottoNumber("1")));
+		WinningLotto winningLotto = new WinningLotto(new Lotto(Arrays.asList(new LottoNumber("6"),
+				new LottoNumber("5"),
+				new LottoNumber("4"),
+				new LottoNumber("3"),
+				new LottoNumber("2"),
+				new LottoNumber("1"))), new LottoNumber("7"));
+
+		//when
+		Rank rank = winningLotto.calculateRank(lotto);
+
+		//then
+		assertThat(rank).isEqualTo(Rank.SECOND);
 	}
 }
