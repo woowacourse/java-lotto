@@ -23,9 +23,9 @@ public class LottoGenerator {
                 .collect(Collectors.toList());
     }
 
-    public List<Lotto> generateLottos(int count) {
-        return IntStream.range(0, count)
+    public Lottos generateLottos(int count) {
+        return new Lottos(IntStream.range(0, count)
                 .mapToObj(i -> generateLotto())
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 }

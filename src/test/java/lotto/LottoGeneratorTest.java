@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.model.Lotto;
 import lotto.model.LottoGenerator;
+import lotto.model.Lottos;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -24,8 +25,8 @@ class LottoGeneratorTest {
     @Test
     @DisplayName("3개의 로또 생성하는지 확인")
     void GenerateLottos() {
-        List<Lotto> lottos = lottoGenerator.generateLottos(3);
+        Lottos lottos = lottoGenerator.generateLottos(3);
 
-        assertThat(lottos.size()).isEqualTo(3);
+        assertThat(lottos.getLottos().size()).isEqualTo(3);
     }
 }

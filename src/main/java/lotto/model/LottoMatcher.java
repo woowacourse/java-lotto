@@ -23,10 +23,10 @@ public class LottoMatcher {
         this.bonusNumber = bonusNumber;
     }
 
-    public ResultMap getWinningResult(List<Lotto> lottos) {
+    public ResultMap getWinningResult(Lottos lottos) {
         ResultMap resultMap = new ResultMap();
         Integer defaultValue = 0;
-        lottos.forEach(lotto -> {
+        lottos.getLottos().forEach(lotto -> {
             resultMap.getResult().put(match(lotto), resultMap.getResult().getOrDefault(match(lotto), defaultValue) + 1);
         });
         return resultMap;

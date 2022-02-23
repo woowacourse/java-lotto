@@ -12,7 +12,7 @@ public class LottoGame {
         this.lottoMatcher = new LottoMatcher(winningNumbers, bonusNumber);
     }
 
-    public float calculateYield(int money, List<Lotto> lottos) {
+    public float calculateYield(int money, Lottos lottos) {
         ResultMap winningResult = lottoMatcher.getWinningResult(lottos);
         return getWinningAmount(winningResult) / (float) money;
     }
@@ -35,14 +35,14 @@ public class LottoGame {
         }
     }
 
-    public static List<Lotto> buyLottos(int money) {
+    public static Lottos buyLottos(int money) {
         int lottoSize = getLottoSize(money);
         LottoGenerator lottoGenerator = new LottoGenerator();
 
         return lottoGenerator.generateLottos(lottoSize);
     }
 
-    public ResultMap getWinningResult(List<Lotto> lottos) {
+    public ResultMap getWinningResult(Lottos lottos) {
         return lottoMatcher.getWinningResult(lottos);
     }
 }
