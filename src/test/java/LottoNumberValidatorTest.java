@@ -39,4 +39,20 @@ public class LottoNumberValidatorTest {
         assertThatCode(() -> lottoNumberValidator.validate(List.of(1, 2, 3, 4, 5, 45)))
                 .doesNotThrowAnyException();
     }
+
+    @Test
+    @DisplayName("로또 번호 리스트가 1 ~ 45 사이에 있지 않은 경우 테스트")
+    void checkInvalidLottoNumbersRangeTest() {
+        assertThatThrownBy(() -> lottoNumberValidator.validate(List.of(1, 2, 3, 0, 5, 46)))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("당첨 번호는 1 ~ 45사이의 숫자만 가능합니다.");
+    }
+
+    @Test
+    @DisplayName("중복된 당첨 번호 분리 실패")
+    void checkDuplicatedLottoNumbers() {
+        assertThatThrownBy(() -> lottoNumberValidator.validate(List.of(1, 2, 3, 3, 4, 5)))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("중복된 당첨 번호는 허용하지 않습니다.");
+    }
 }

@@ -21,7 +21,7 @@ public class LottoNumberParserTest {
     void winningNumberNotNumericValue() {
         assertThatThrownBy(() -> parser.parse("a,b,c,d,e,f"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(LottoNumberParser.INVALID_LOTTO_NUMBER_FORMAT_MESSAGE);
+                .hasMessage("당첨 번호는 반드시 6개의 숫자여야 합니다.");
     }
 
     @Test
@@ -41,7 +41,7 @@ public class LottoNumberParserTest {
     void splitWinningNumberUnderSix(String numbers) {
         assertThatThrownBy(() -> parser.parse(numbers))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(LottoNumberParser.INVALID_LOTTO_NUMBER_FORMAT_MESSAGE);
+                .hasMessage("당첨 번호는 반드시 6개의 숫자여야 합니다.");
     }
 
     @Test
@@ -49,7 +49,7 @@ public class LottoNumberParserTest {
     void failSplitWithDuplicateLottoNumber() {
         assertThatThrownBy(() -> parser.parse("1,2,3,3,4,5"))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage(LottoNumberParser.DUPLICATED_LOTTO_NUMBER_MESSAGE);
+            .hasMessage("중복된 당첨 번호는 허용하지 않습니다.");
     }
 
     @ParameterizedTest(name = "잘못된 범위의 당첨 번호 분리 실패 : 입력값 - {0}")
@@ -58,6 +58,6 @@ public class LottoNumberParserTest {
     void failSplitWithInvalidRangeLottoNumber(String numbers) {
         assertThatThrownBy(() -> parser.parse(numbers))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage(LottoNumberParser.INVALID_LOTTO_NUMBER_RANGE_MESSAGE);
+            .hasMessage("당첨 번호는 1 ~ 45사이의 숫자만 가능합니다.");
     }
 }
