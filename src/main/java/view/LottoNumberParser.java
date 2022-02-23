@@ -13,8 +13,7 @@ public class LottoNumberParser {
         if (!numbers.matches(REGEX_LOTTO_NUMBER_FORMAT)) {
             throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_FORMAT_MESSAGE);
         }
-        List<Integer> lottoNumbers = parseToLottoNumbers(numbers);
-        return lottoNumbers;
+        return parseToLottoNumbers(numbers);
     }
 
     private List<Integer> parseToLottoNumbers(String numbers) {
