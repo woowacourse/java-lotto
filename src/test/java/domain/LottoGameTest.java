@@ -49,6 +49,26 @@ public class LottoGameTest {
         assertThat(actual.get(LottoResult.FIFTH)).isEqualTo(0);
     }
 
+    @Test
+    void calculateProfitRatio_zeroIfNoPrize() {
+        Lottos lottos = new Lottos(getLottosExample(noPrizeLotto));
+        LottoGame game = new LottoGame(lottos, referee);
+
+        float actual = game.calculateProfitRatio();
+
+        assertThat(actual).isEqualTo(0f);
+    }
+
+    @Test
+    void calculateProfitRatio_fifthPrizeEqualsFiveTimesThePrice() {
+        Lottos lottos = new Lottos(getLottosExample(fifthPrizeLotto));
+        LottoGame game = new LottoGame(lottos, referee);
+
+        float actual = game.calculateProfitRatio();
+
+        assertThat(actual).isEqualTo((float) LottoResult.FIFTH.getPrize() / 1000);
+    }
+
     private List<Lotto> getLottosExample(Lotto... lottos) {
         List<Lotto> lottosExample = new ArrayList<>();
         Collections.addAll(lottosExample, lottos);
@@ -64,4 +84,3 @@ public class LottoGameTest {
         return new Lotto(lottoNumbers);
     }
 }
-
