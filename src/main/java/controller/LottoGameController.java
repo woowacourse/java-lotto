@@ -16,6 +16,7 @@ public class LottoGameController {
         initWinningNumber();
         purchasedLotto.calculateWinning(winningNumber);
         OutputView.printFinalStatistic(purchasedLotto.getFinalResult());
+        OutputView.printEarningRate(purchasedLotto.calculateEarningRate());
     }
 
     private void initWinningNumber() {
@@ -31,4 +32,5 @@ public class LottoGameController {
             initBonusNumber();
         }
     }
+
 }

@@ -20,6 +20,8 @@ public class OutputView {
     private static final String STATISTICS_SECOND_PRIZE_MESSAGE = "5개 일치, 보너스 볼 일치 (";
     private static final String STATISTICS_WON_MESSAGE = "원)- ";
     private static final String STATISTICS_COUNT_MESSAGE = "개";
+    private static final String EARNING_RATE_START_MESSAGE = "총 수익률은 ";
+    private static final String EARNING_RATE_END_MESSAGE = "입니다.";
 
 
     public static void printPurchasedLotto(PurchasedLotto purchasedLotto) {
@@ -58,7 +60,8 @@ public class OutputView {
                 + System.lineSeparator());
     }
 
-    /**
-     * 총 수익률은 0.35입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)
-     */
+    public static void printEarningRate(float earningRate) {
+        System.out.println(EARNING_RATE_START_MESSAGE+ earningRate + EARNING_RATE_END_MESSAGE);
+    }
+
 }
