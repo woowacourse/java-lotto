@@ -19,4 +19,13 @@ public class MoneyTest {
     void checkOverInteger() {
         assertThat(new Money((long)Integer.MAX_VALUE + 1)).isNotNull();
     }
+
+    @Test
+    @DisplayName("돈의 합을 구할 수 있다.")
+    void plusMoney() {
+        Money money1 = new Money(2_000_000_000L);
+        Money money2 = new Money(2_000_000_000L);
+
+        assertThat(money1.plus(money2)).isEqualTo(new Money(4_000_000_000L));
+    }
 }
