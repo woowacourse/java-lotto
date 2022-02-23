@@ -2,6 +2,6 @@ package domain;
 
 import java.util.List;
 
-public interface NumberGenerator {
+public interface LottoNumberStrategy {
     List<LottoNumber> generate();
 }

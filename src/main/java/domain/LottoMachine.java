@@ -11,13 +11,13 @@ public class LottoMachine {
 
     private LottoTickets lottoTickets;
 
-    public LottoTickets purchaseLottoTickets(Money amount, NumberGenerator numberGenerator) {
+    public LottoTickets purchaseLottoTickets(Money amount, LottoNumberStrategy lottoNumberStrategy) {
         validateInsertAmount(amount);
         int size = amount.getPurchasableNumber(LOTTO_TICKET_PRICE);
 
         List<LottoTicket> purchasedTickets = new ArrayList<>();
         for (int i = 0; i < size; i++) {
-            purchasedTickets.add(new LottoTicket(numberGenerator.generate()));
+            purchasedTickets.add(new LottoTicket(lottoNumberStrategy.generate()));
         }
 
         lottoTickets = new LottoTickets(purchasedTickets);

@@ -1,12 +1,12 @@
-import domain.LottoNumbersGenerator;
-import domain.NumberGenerator;
+import domain.RandomLottoNumberStrategy;
+import domain.LottoNumberStrategy;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class LottoNumbersGeneratorTest {
 
-    private final NumberGenerator numberGenerator = new LottoNumbersGenerator();
+    private final LottoNumberStrategy numberGenerator = new RandomLottoNumberStrategy();
 
     @Test
     void generatedLottoNumbersSize() {

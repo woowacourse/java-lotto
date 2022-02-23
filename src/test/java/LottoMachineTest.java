@@ -2,7 +2,6 @@ import domain.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -20,7 +19,7 @@ class LottoMachineTest {
         LottoMachine lottoMachine = new LottoMachine();
 
         assertThatThrownBy(() -> {
-            lottoMachine.purchaseLottoTickets(Money.from(900), new FixedNumberGenerator());
+            lottoMachine.purchaseLottoTickets(Money.from(900), new FixedLottoNumberStrategy());
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -29,7 +28,7 @@ class LottoMachineTest {
     void createLottoTicketsByAmount() {
         LottoMachine lottoMachine = new LottoMachine();
 
-        LottoTickets lottoTickets = lottoMachine.purchaseLottoTickets(Money.from(10000), new FixedNumberGenerator());
+        LottoTickets lottoTickets = lottoMachine.purchaseLottoTickets(Money.from(10000), new FixedLottoNumberStrategy());
         assertThat(lottoTickets.size()).isEqualTo(10);
     }
 
@@ -38,7 +37,7 @@ class LottoMachineTest {
     void calculateWinningStat() {
         LottoMachine lottoMachine = new LottoMachine();
 
-        lottoMachine.purchaseLottoTickets(Money.from(2000), new FixedNumberGenerator());
+        lottoMachine.purchaseLottoTickets(Money.from(2000), new FixedLottoNumberStrategy());
 
         List<LottoNumber> inputWinningNumbers = IntStream.of(2, 1, 4, 3, 5, 6)
                 .mapToObj(LottoNumber::from)
@@ -51,7 +50,7 @@ class LottoMachineTest {
         assertThat(result.get(LottoRank.FIRST)).isEqualTo(2);
     }
 
-    static class FixedNumberGenerator implements NumberGenerator {
+    static class FixedLottoNumberStrategy implements LottoNumberStrategy {
 
         @Override
         public List<LottoNumber> generate() {
