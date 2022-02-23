@@ -2,9 +2,6 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-import lotto.domain.Lotto;
 import lotto.utils.Validation;
 import org.junit.jupiter.api.Test;
 
