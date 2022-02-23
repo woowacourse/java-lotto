@@ -2,24 +2,15 @@ package lotto.domain.ball;
 
 import java.util.Objects;
 
-public class Ball {
+import lotto.domain.ball.validator.BallValidator;
 
-	private static final int BALL_RANGE_INCLUSIVE_START = 1;
-	private static final int BALL_RANGE_INCLUSIVE_END = 45;
-	private static final String BALL_OUT_OF_RANGE_EXCEPTION_MESSAGE = "번호의 범위는 1부터 45까지여야 합니다.";
+public class Ball {
 
 	private final int number;
 
 	public Ball(final int number) {
-		validateNumberIsInRange(number);
-
+		BallValidator.validateBallNumber(number);
 		this.number = number;
-	}
-
-	private void validateNumberIsInRange(final int number) {
-		if (number < BALL_RANGE_INCLUSIVE_START || number > BALL_RANGE_INCLUSIVE_END) {
-			throw new IllegalArgumentException(BALL_OUT_OF_RANGE_EXCEPTION_MESSAGE);
-		}
 	}
 
 	@Override
