@@ -1,6 +1,7 @@
 package view;
 
 import java.util.Scanner;
+import validator.InputValidator;
 
 public class InputView {
 
@@ -19,7 +20,9 @@ public class InputView {
     public static String inputWinLottoNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
+        String lottoNumbers = scanner.nextLine();
+        InputValidator.isRightPattern(lottoNumbers);
+        return lottoNumbers;
     }
 
     public static int inputBonusNumber() {
