@@ -7,11 +7,7 @@ public class ResultMap {
     Map<Rank, Integer> result;
 
     public ResultMap() {
-        Map<Rank, Integer> result = new HashMap<>();
-        for (Rank rank : Rank.values()) {
-            result.put(rank, 0);
-        }
-        this.result = result;
+        this.result = new HashMap<>();
     }
 
     public Map<Rank, Integer> getResult() {

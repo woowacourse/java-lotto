@@ -13,8 +13,9 @@ public class LottoMatcher {
 
     public ResultMap getWinningResult(List<Lotto> lottos) {
         ResultMap resultMap = new ResultMap();
+        Integer defaultValue = 0;
         lottos.forEach(lotto -> {
-            resultMap.getResult().put(match(lotto), resultMap.getResult().get(match(lotto)) + 1);
+            resultMap.getResult().put(match(lotto), resultMap.getResult().getOrDefault(match(lotto), defaultValue) + 1);
         });
         return resultMap;
     }
