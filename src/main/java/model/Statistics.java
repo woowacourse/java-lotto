@@ -14,7 +14,7 @@ public enum Statistics {
     Statistics(int matchNumber, int value) {
         this.matchNumber = matchNumber;
         this.value = value;
-    }
+   }
 
     public void addCount() {
         count++;
@@ -26,5 +26,9 @@ public enum Statistics {
 
     public int getMatchNumber() {
         return matchNumber;
+    }
+
+    public int getValue() {
+        return value;
     }
 }
