@@ -34,4 +34,8 @@ public class Amount {
     public int calculate() {
         return this.price / PRICE_CRITERION;
     }
+
+    public int getPrice() {
+        return this.price;
+    }
 }
