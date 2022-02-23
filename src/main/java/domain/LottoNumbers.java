@@ -10,7 +10,7 @@ public class LottoNumbers {
 
     public LottoNumbers(List<Integer> lottoNumbers) {
         List<LottoNumber> tmpLottoNumbers = new ArrayList<>();
-        for (Integer lottoNumber: lottoNumbers) {
+        for (Integer lottoNumber : lottoNumbers) {
             tmpLottoNumbers.add(new LottoNumber(lottoNumber));
         }
         Collections.sort(tmpLottoNumbers);

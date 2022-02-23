@@ -5,7 +5,7 @@ import java.util.List;
 import view.InputView;
 
 public class MainController {
-    public void run(){
+    public void run() {
         // money
         int money = InputView.inputMoney();
 
