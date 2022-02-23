@@ -5,6 +5,8 @@ import lotto.model.LottoMatcher;
 import lotto.model.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 
@@ -60,5 +62,15 @@ class LottoMatcherTest {
             new LottoMatcher(Arrays.asList(1, 2, 3, 4, 5, 6), 6);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("보너스 볼 번호가 당첨 번호와 중복입니다.");
+    }
+
+    @ParameterizedTest
+    @DisplayName("보너스 볼 번호의 범위가 1~45가 아닌 경우 예외 처리")
+    @ValueSource(ints = {-1, 0, 46})
+    void validateRangeBonusNumberTest(int bonusNumber) {
+        assertThatThrownBy(() -> {
+            new LottoMatcher(Arrays.asList(1, 2, 3, 4, 5, 6), bonusNumber);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("보너스 볼 번호가 1~45 범위 내에 해당하지 않습니다.");
     }
 }

@@ -8,6 +8,7 @@ public class LottoMatcher {
 
     public LottoMatcher(List<Integer> winningNumbers, Integer bonusNumber) {
         validateDuplicateBonusNumber(winningNumbers, bonusNumber);
+        validateRangeBonusNumber(bonusNumber);
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
     }
@@ -36,6 +37,12 @@ public class LottoMatcher {
     private void validateDuplicateBonusNumber(List<Integer> winningNumbers, Integer bonusNumber) {
         if (winningNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException("보너스 볼 번호가 당첨 번호와 중복입니다.");
+        }
+    }
+
+    private void validateRangeBonusNumber(Integer bonusNumber) {
+        if (bonusNumber < 1 || bonusNumber > 45) {
+            throw new IllegalArgumentException("보너스 볼 번호가 1~45 범위 내에 해당하지 않습니다.");
         }
     }
 }
