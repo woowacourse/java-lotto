@@ -1,6 +1,6 @@
 package lotto.domain;
 
 public enum BallType {
-    NONE,
+    NORMAL,
     BONUS
 }
