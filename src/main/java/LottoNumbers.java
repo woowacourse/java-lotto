@@ -25,9 +25,9 @@ public class LottoNumbers {
             .count();
     }
 
-    public boolean contains(Integer number) {
+    public boolean contains(LottoNumber number) {
         for (LottoNumber lottoNumber : lottoNumbers) {
-            if (lottoNumber.getLottoNumber() == number) {
+            if (lottoNumber.equals(number)) {
                 return true;
             }
         }
@@ -36,7 +36,7 @@ public class LottoNumbers {
 
     public int getMatchedNumberCountWith(LottoNumbers otherLottoNumbers) {
         return (int) this.lottoNumbers.stream()
-            .filter(number -> otherLottoNumbers.contains(number.getLottoNumber()))
+            .filter(number -> otherLottoNumbers.contains(number))
             .count();
     }
 

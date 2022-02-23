@@ -1,9 +1,9 @@
 public class LottoRankJudge {
 
     private final LottoNumbers winningNumbers;
-    private final Integer bonusNumber;
+    private final LottoNumber bonusNumber;
 
-    public LottoRankJudge(LottoNumbers winningNumbers, int bonusNumber) {
+    public LottoRankJudge(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
     }

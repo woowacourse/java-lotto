@@ -9,7 +9,7 @@ public class LottoMachineTest {
 
     private static final LottoNumbers WINNING_LOTTO_NUMBERS = LottoNumbers
         .withSixNumbers(1, 2, 3, 4, 5, 6);
-    private static final int BONUS = 7;
+    private static final LottoNumber BONUS = new LottoNumber(7);
     private static final LottoNumbers FIRST_PRIZE_LOTTO_NUMBERS = LottoNumbers
         .withSixNumbers(1, 2, 3, 4, 5, 6);
     private static final LottoNumbers SECOND_PRIZE_LOTTO_NUMBERS = LottoNumbers

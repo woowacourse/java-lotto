@@ -1,4 +1,5 @@
 import exception.InvalidRangeLottoNumberException;
+import java.util.Objects;
 
 public class LottoNumber {
     private int lottoNumber;
@@ -14,7 +15,20 @@ public class LottoNumber {
         return 1 > number || number > 45;
     }
 
-    public int getLottoNumber() {
-        return lottoNumber;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoNumber that = (LottoNumber) o;
+        return lottoNumber == that.lottoNumber;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumber);
     }
 }

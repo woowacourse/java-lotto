@@ -44,7 +44,7 @@ public class LottoNumbersTest {
     @DisplayName("로또 번호에 숫자 포함 여부 테스트")
     void contains() {
         LottoNumbers lottoNumbers = LottoNumbers.withSixNumbers(1, 2, 3, 4, 5, 6);
-        assertThat(lottoNumbers.contains(4)).isTrue();
-        assertThat(lottoNumbers.contains(9)).isFalse();
+        assertThat(lottoNumbers.contains(new LottoNumber(4))).isTrue();
+        assertThat(lottoNumbers.contains(new LottoNumber(9))).isFalse();
     }
 }

@@ -14,7 +14,7 @@ public class LottoRankJudgeTest {
 
     @BeforeEach
     void setUp() {
-        lottoRankJudge = new LottoRankJudge(LottoNumbers.withSixNumbers(1, 2, 3, 4, 5, 6), 7);
+        lottoRankJudge = new LottoRankJudge(LottoNumbers.withSixNumbers(1, 2, 3, 4, 5, 6), new LottoNumber(7));
     }
 
     @Test
