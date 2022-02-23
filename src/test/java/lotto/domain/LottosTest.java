@@ -29,7 +29,7 @@ public class LottosTest {
                 .collect(Collectors.toList()));
         final WinLotto winLotto = new WinLotto(new Lotto(createLottoNumbers(1, 2, 3, 4, 5, 6)), new LottoNumber(7));
 
-        final Map<Rank, Integer> resultMap = new HashMap<>();
+        final Map<Rank, Integer> resultMap = Rank.initResultMap();
         resultMap.put(Rank.FIRST, 1);
         resultMap.put(Rank.SECOND, 1);
         final LottoResult expected = new LottoResult(resultMap);
