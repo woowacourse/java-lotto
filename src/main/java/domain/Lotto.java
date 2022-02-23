@@ -54,6 +54,9 @@ public class Lotto {
 		return lotto.contains(lottoNumber);
 	}
 
+	public List<LottoNumber> getLotto() {
+		return lotto;
+	}
 	@Override
 	public String toString() {
 		return "추첨된 번호는 " + lotto + " 입니다.";

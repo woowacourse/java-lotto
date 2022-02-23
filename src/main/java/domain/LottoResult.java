@@ -7,14 +7,20 @@ import java.util.function.Function;
 import static java.util.stream.Collectors.*;
 
 public class LottoResult {
-    private final List<Rank> ranks;
+	private final List<Rank> ranks;
 
-    public LottoResult(List<Rank> ranks) {
-        this.ranks = ranks;
-    }
+	public LottoResult(List<Rank> ranks) {
+		this.ranks = ranks;
+	}
 
-    public Map<Rank, Long> countRank() {
-        return ranks.stream()
-                .collect(groupingBy(Function.identity(), counting()));
-    }
+	public Map<Rank, Long> countRank() {
+		return ranks.stream()
+			.collect(groupingBy(Function.identity(), counting()));
+	}
+
+    public int calculateTotalProfit() {
+		return ranks.stream()
+			.mapToInt(rank -> rank.getMoney())
+			.sum();
+	}
 }

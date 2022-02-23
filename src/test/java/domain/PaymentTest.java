@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.Arrays;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -72,5 +74,19 @@ public class PaymentTest {
 	@Test
 	void 로또_생성_횟수() {
 		assertThat(new Payment("14000").calculateLottoCount()).isEqualTo(14);
+	}
+
+	//- **수익률을 계산한다**
+	//     - (당첨금액 / 투입금액)
+	@Test
+	void 수익률_계산() {
+		List<Rank> lottos = Arrays.asList(Rank.FIFTH, Rank.FOURTH);
+		//when
+		LottoResult lottoResult = new LottoResult(lottos);
+		Payment payment = new Payment("10000");
+
+		double profitRate = payment.calculateProfitRate(lottoResult.calculateTotalProfit());
+
+		assertThat(profitRate).isEqualTo(5.5);
 	}
 }
