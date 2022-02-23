@@ -9,6 +9,7 @@ public enum Rank {
     FIRST(6, 2_000_000_000, false);
 
     private static final int SECOND_THIRD_RANK_COUNT = 5;
+
     private final int count;
     private final int winningPrice;
     private final boolean hasBonusBall;
