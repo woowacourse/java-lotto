@@ -36,5 +36,4 @@ public class LottoNumbersParser extends Parser<List<Integer>>{
                 .map(Integer::valueOf)
                 .collect(toList());
     }
-
 }
