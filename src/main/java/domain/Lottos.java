@@ -1,7 +1,7 @@
 package domain;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +31,7 @@ public class Lottos {
 	}
 
 	public Map<ResultStatics, Integer> generateEachCount(AnswerLotto answerLotto) {
-		Map<ResultStatics, Integer> eachCount = new HashMap<>();
+		Map<ResultStatics, Integer> eachCount = new LinkedHashMap<>();
 
 		for (ResultStatics resultStatic : ResultStatics.values()) {
 			eachCount.put(resultStatic, 0);
@@ -45,11 +45,12 @@ public class Lottos {
 		return eachCount;
 	}
 
-	public float generateProfitRatio(AnswerLotto answerLotto, int price) {
+	public float generateProfitRatio(AnswerLotto answerLotto) {
 		int totalPrize = 0;
+		int totalPrice = this.lottos.size() * 1000;
 		for (Lotto lotto : this.lottos) {
 			totalPrize += lotto.calculate(answerLotto).getPrice();
 		}
-		return (float) totalPrize / price;
+		return (float) totalPrize / totalPrice;
 	}
 }

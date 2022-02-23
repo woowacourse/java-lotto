@@ -41,4 +41,12 @@ public enum ResultStatics {
 	public int getPrice() {
 		return this.price;
 	}
+
+	public int getNumberMatches() {
+		return this.numberMatches;
+	}
+
+	public boolean isHitBonus() {
+		return this.hitBonus;
+	}
 }

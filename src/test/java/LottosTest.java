@@ -47,7 +47,6 @@ public class LottosTest {
 
 	@Test
 	void generateProfitRate() {
-		int price = lottos.getLottosSize() * 1000;
-		assertThat(lottos.generateProfitRatio(answerLotto, price)).isEqualTo(1.0f);
+		assertThat(lottos.generateProfitRatio(answerLotto)).isEqualTo(1.0f);
 	}
 }
