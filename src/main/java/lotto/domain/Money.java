@@ -31,4 +31,8 @@ public class Money {
     public int count() {
         return this.amount / UNIT;
     }
+
+    public int getAmount() {
+        return this.amount;
+    }
 }
