@@ -23,14 +23,13 @@ public class LottoNumber {
     private void validateRange(int number) {
         if (isValidRange(number)) {
             throw new IllegalArgumentException(
-                    "로또 번호는 " + LOWER_BOUND + "~" + UPPER_BOUND + " 사이의 숫자만 가능합니다");
+                    "[ERROR] 로또 번호는 " + LOWER_BOUND + "~" + UPPER_BOUND + " 사이의 숫자만 가능합니다");
         }
     }
 
     private boolean isValidRange(int number) {
         return number < LOWER_BOUND || number > UPPER_BOUND;
     }
-
 
     public int getNumber() {
         return number;

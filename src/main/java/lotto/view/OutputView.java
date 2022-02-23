@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.Rank;
+import lotto.domain.Result;
 
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,7 @@ public class OutputView {
         for (Set<LottoNumber> ticket : tickets) {
             System.out.println(makeTicketsString(ticket));
         }
+        System.out.println();
     }
 
     private static String makeTicketsString(Set<LottoNumber> ticket) {
@@ -28,22 +30,30 @@ public class OutputView {
         return "[" + result + "]";
     }
 
-    public static void printResult(Map<Rank, Integer> result, double profitRatio) {
+    public static void printResult(Result result) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        for (Rank rank : result.keySet()) {
-            int matched = rank.getMatched();
-            int prize = rank.getPrize();
-            Integer count = result.get(rank);
-
-            if (rank == Rank.SECOND) {
-                System.out.println(matched + "개 일치, 보너스 볼 일치 (" + prize + "원) - " + count + "개");
-            }
-            System.out.println(matched + "개 일치 (" + prize + "원) - " + count + "개");
-        }
-        System.out.println("총 수익률은 " + profitRatio + "입니다.");
+        System.out.println(makeResultRankCounterString(result));
+        System.out.println("총 수익률은 " + result.getProfitRatio() + "입니다.");
     }
 
+    private static String makeResultRankCounterString(Result result) {
+        Map<Rank, Integer> rankCounter = result.getRankCounter();
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (Rank rank : rankCounter.keySet()) {
+            addResultString(rank, rankCounter, stringBuilder);
+        }
+        return stringBuilder.toString();
+    }
+
+    private static void addResultString(Rank rank, Map<Rank, Integer> rankCounter, StringBuilder stringBuilder) {
+        stringBuilder.append(rank.getMatched() + "개 일치");
+        if (rank == Rank.SECOND) {
+            stringBuilder.append(", 보너스 볼 일치");
+        }
+        stringBuilder.append(" (" + rank.getPrize() + "원) - " + rankCounter.get(rank) + "개\n");
+    }
 }

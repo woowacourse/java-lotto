@@ -20,7 +20,7 @@ public class PurchaseAmount {
 
     private void validateMinimumAmount(final int amount) {
         if (amount < TICKET_PRICE) {
-            throw new IllegalArgumentException("구입금액은 1000원 이상이어야 합니다");
+            throw new IllegalArgumentException("[ERROR] 구입금액은 1000원 이상이어야 합니다");
         }
     }
 
