@@ -24,15 +24,15 @@ public class WinLottoTest {
                 .withMessage("[ERROR] 보너스 볼이 당첨 번호와 중복됩니다.");
     }
 
+    @DisplayName("로또 맞춘 개수에 다라 랭크를 계산한다.")
     @Test
     void calculateMatchNumber() {
         final List<LottoNumber> winNumbers = Stream.of(1, 2, 3, 4, 5, 6)
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
-
         final LottoNumber bonusLottoNumber = new LottoNumber(7);
+        final WinLotto winLotto = new WinLotto(new Lotto(winNumbers), bonusLottoNumber);
 
-        WinLotto winLotto = new WinLotto(new Lotto(winNumbers), bonusLottoNumber);
         assertThat(winLotto.matchResult(new Lotto(winNumbers))).isEqualTo(Rank.FIRST);
     }
 }

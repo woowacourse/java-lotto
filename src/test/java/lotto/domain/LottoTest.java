@@ -58,6 +58,7 @@ public class LottoTest {
         }
     }
 
+    @DisplayName("로또 맞은 개수를 계산한다.")
     @Test
     void matchLotto() {
         final Lotto lotto = new Lotto(createLottoNumbers(1, 2, 3, 4, 5, 6));
