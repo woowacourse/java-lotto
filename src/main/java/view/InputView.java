@@ -11,12 +11,14 @@ public class InputView {
     private static final String ERROR_MESSAGE_TYPE_OF_MONEY = "금액은 숫자가 아닐 수 없습니다.";
     private static final String ERROR_MESSAGE_RANGE_OF_MONEY = "금액은 0이하일 수 없습니다.";
     private static final String REQUEST_MESSAGE_WINNING_LOTTO_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String REQUEST_MESSAGE_INPUT_BONUS_BALL = "보너스 볼을 입력해 주세요.";
     private static final String REGEX_OF_LOTTO_NUMBER = ", ";
     private static final int REGEX_LIMIT = -1;
     private static final int LOTTO_NUMBERS_SIZE = 6;
     private static final int MINIMUM_VALUE = 0;
 
     private static final Scanner scanner = new Scanner(System.in);
+
 
     private static String getInput() {
         return scanner.nextLine();
@@ -81,5 +83,18 @@ public class InputView {
         return values.stream()
             .map(Integer::parseInt)
             .collect(Collectors.toList());
+    }
+
+    public static int getBonusBall() {
+        System.out.println(REQUEST_MESSAGE_INPUT_BONUS_BALL);
+        String inputBonusBall = getInput();
+        validateBonusBall(inputBonusBall);
+
+        return Integer.parseInt(inputBonusBall);
+    }
+
+    private static void validateBonusBall(String value) {
+        validateNumber(value);
+        validateRange(value);
     }
 }

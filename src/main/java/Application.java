@@ -16,5 +16,6 @@ public class Application {
         OutputView.showPurchasedLottos(lottos);
 
         final List<Integer> winningLottoNumbers = InputView.getWinningLottoNumbers();
+        final int bonusBall = InputView.getBonusBall();
     }
 }
