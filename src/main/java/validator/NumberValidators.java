@@ -6,6 +6,8 @@ import static constant.ExceptionMessages.INVALID_NUMBER_INPUT_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.INVALID_TOTAL_LOTTO_PRICE_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.NOT_UNIQUE_BONUS_NUMBER_EXCEPTION_MESSAGE;
 import static constant.LottoConstants.LOTTO_PRICE;
+import static constant.LottoConstants.MAXIMUM_LOTTO_NUMBER;
+import static constant.LottoConstants.MINIMUM_LOTTO_NUMBER;
 
 import java.util.HashSet;
 import java.util.List;
@@ -28,7 +30,7 @@ public class NumberValidators {
     }
 
     public static void validateLottoNumberRange(int num) {
-        if (num < 1 || num > 45) {
+        if (num < MINIMUM_LOTTO_NUMBER || num > MAXIMUM_LOTTO_NUMBER) {
             throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_RANGE_EXCEPTION_MESSAGE);
         }
     }

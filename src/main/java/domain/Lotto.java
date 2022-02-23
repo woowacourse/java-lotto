@@ -1,6 +1,8 @@
 package domain;
 
 import static constant.LottoConstants.LOTTO_NUMBERS_SIZE;
+import static constant.LottoConstants.MAXIMUM_LOTTO_NUMBER;
+import static constant.LottoConstants.MINIMUM_LOTTO_NUMBER;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,7 +12,7 @@ import java.util.stream.IntStream;
 
 public class Lotto {
 
-    private static final List<LottoNumber> allLottoNumbers = IntStream.range(1, 45)
+    private static final List<LottoNumber> allLottoNumbers = IntStream.range(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER)
             .boxed()
             .map(LottoNumber::of)
             .collect(Collectors.toList());
