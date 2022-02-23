@@ -8,10 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import lotto.domain.Money;
-import lotto.domain.Result;
-import lotto.domain.WinningPrice;
-
 public class ResultTest {
 
     @Nested
@@ -69,7 +65,6 @@ public class ResultTest {
             void it_returns_rate_of_profit(String money, double expected) {
                 Result result = new Result();
                 result.add(WinningPrice.Three);
-
                 assertThat(result.getRateOfProfit(new Money(money))).isEqualTo(expected);
             }
         }

@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import lotto.domain.Lottos;
-
 public class LottosTest {
 
     @Nested

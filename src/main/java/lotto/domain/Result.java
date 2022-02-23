@@ -30,8 +30,7 @@ public class Result {
         for (Map.Entry<WinningPrice, Integer> entry : result.entrySet()) {
             total += (long)entry.getKey().getPrice() * entry.getValue();
         }
-        double rateOfProfit = Math.round((double)total / money.getValue() * 1000) / 1000.0;
 
-        return Double.parseDouble(String.format("%.3f", rateOfProfit));
+        return Math.round((double)total / money.getValue() * 1000) / 1000.0;
     }
 }

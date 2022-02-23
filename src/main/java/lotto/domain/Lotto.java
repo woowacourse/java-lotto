@@ -79,4 +79,8 @@ public class Lotto {
 
         return WinningPrice.of(count, containsBonus);
     }
+
+    public Set<Number> getNumbers() {
+        return numbers;
+    }
 }
