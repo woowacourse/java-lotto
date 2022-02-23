@@ -27,4 +27,10 @@ public class LottoNumber {
         return Objects.hash(getNumber());
     }
 
+    @Override
+    public String toString() {
+        return "LottoNumber{" +
+                "number=" + number +
+                '}';
+    }
 }

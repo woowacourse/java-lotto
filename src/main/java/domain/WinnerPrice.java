@@ -1,6 +1,8 @@
 package domain;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public enum WinnerPrice {
 
@@ -24,6 +26,12 @@ public enum WinnerPrice {
                 .filter(winnerPrice -> winnerPrice.matched == matched)
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException());
+    }
+
+    public static List<WinnerPrice> getWinnerPrices() {
+        return Arrays.stream(WinnerPrice.values())
+                .sequential()
+                .collect(Collectors.toList());
     }
 
 }
