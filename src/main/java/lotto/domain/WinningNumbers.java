@@ -1,19 +1,25 @@
 package lotto.domain;
 
 import java.util.List;
-import lotto.receiver.WinningNumbersReceiver;
+import lotto.receiver.BonusNumberReceiver;
 
 public class WinningNumbers {
 
-    private final List<LottoNumber> winningNumbers;
+    private final Lotto winningLotto;
+    private final LottoNumber bonusNumber;
 
-    public WinningNumbers(String input) {
-        this.winningNumbers = WinningNumbersReceiver.receive(input);
+    public WinningNumbers(String winningNumbersInput, String bonusNumberInput) {
+        this.winningLotto = Lotto.generateLottoByManual(winningNumbersInput);
+        this.bonusNumber = BonusNumberReceiver.receive(bonusNumberInput, winningLotto);
     }
 
-    public int getMatchCount(List<LottoNumber> ticket) {
-        return (int) winningNumbers.stream()
-                .filter(lottoNumber -> ticket.contains(lottoNumber))
+    public int getWinningLottoMatchCount(List<LottoNumber> lotto) {
+        return (int) winningLotto.getLotto().stream()
+                .filter(lotto::contains)
                 .count();
+    }
+
+    public boolean isBonusNumberContainedAt(List<LottoNumber> lotto) {
+        return lotto.contains(bonusNumber);
     }
 }

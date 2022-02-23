@@ -1,19 +1,19 @@
 package lotto.receiver;
 
-import java.util.List;
+import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.exception.BonusNumberException;
 
 public class BonusNumberReceiver {
 
-    public static LottoNumber receive(String input, List<LottoNumber> winningNumbers) {
+    public static LottoNumber receive(String input, Lotto winningNumbers) {
         LottoNumber lottoNumber = LottoNumber.getLottoNumber(input);
-        checkDuplication(lottoNumber, winningNumbers);
+        checkDuplication(winningNumbers, lottoNumber);
         return lottoNumber;
     }
 
-    private static void checkDuplication(LottoNumber lottoNumber, List<LottoNumber> winningNumbers) {
-        if (winningNumbers.contains(lottoNumber)) {
+    private static void checkDuplication(Lotto winningNumbers, LottoNumber lottoNumber) {
+        if (winningNumbers.getLotto().contains(lottoNumber)) {
             throw new BonusNumberException(BonusNumberException.BONUS_NUMBER_DUPLICATION_ERROR_MESSAGE);
         }
     }

@@ -1,34 +1,32 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
+import lotto.receiver.LottoReceiver;
 
 public class Lotto {
 
     private final List<LottoNumber> lotto;
 
     private Lotto(List<LottoNumber> lotto) {
-        this.lotto = lotto;
+        this.lotto = Collections.unmodifiableList(lotto);
     }
 
-    public static Lotto getLottoByAuto() {
+    public static Lotto generateLottoByAuto() {
         return new Lotto(LottoNumber.getRandomLottoNumbers());
     }
 
-    public static Lotto getLottoByManual(List<LottoNumber> lotto) {
-        return new Lotto(lotto);
+    public static Lotto generateLottoByManual(String input) {
+        return new Lotto(LottoReceiver.receive(input));
     }
 
-    private int getWinningNumbersMatchCount(WinningNumbers winningNumbers) {
-        return winningNumbers.getMatchCount(lotto);
-    }
-
-    private boolean isBonusNumberMatch(BonusNumber bonusNumber) {
-        return bonusNumber.isMatch(lotto);
-    }
-
-    public Rank getRank(WinningNumbers winningNumbers, BonusNumber bonusNumber) {
-        int winningNumberMatchCount = getWinningNumbersMatchCount(winningNumbers);
-        boolean bonusNumberMatch = isBonusNumberMatch(bonusNumber);
+    public Rank getRank(WinningNumbers winningNumbers) {
+        int winningNumberMatchCount = winningNumbers.getWinningLottoMatchCount(lotto);
+        boolean bonusNumberMatch = winningNumbers.isBonusNumberContainedAt(lotto);
         return Rank.getRank(winningNumberMatchCount, bonusNumberMatch);
+    }
+
+    public List<LottoNumber> getLotto() {
+        return lotto;
     }
 }
