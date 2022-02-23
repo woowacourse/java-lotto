@@ -23,7 +23,7 @@ public enum Rank {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.matchCount == total)
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("해당 등수가 존재하지 않습니다."));
+                .orElse(Rank.valueOf(Rank.MATCH_ZERO_NUMBERS.name()));
     }
 
     public double calculateTotalReward(Integer count) {
