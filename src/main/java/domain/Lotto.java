@@ -22,6 +22,14 @@ public class Lotto {
         this.numbers = lottoNums;
     }
 
+    public Lotto(List<Integer> lottoNums) {
+        if (lottoNums.size() != 6) {
+            throw new RuntimeException();
+        }
+        Collections.sort(lottoNums);
+        this.numbers = lottoNums;
+    }
+
     public List<Integer> getNumbers() {
         return numbers;
     }
