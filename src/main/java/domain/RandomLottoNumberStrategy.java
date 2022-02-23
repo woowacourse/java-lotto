@@ -9,11 +9,12 @@ import static constant.LottoConstant.*;
 
 public class RandomLottoNumberStrategy implements LottoNumberStrategy {
 
+    private final static List<LottoNumber> lottoNumbers = LottoNumber.getNumbers();
+
     @Override
     public List<LottoNumber> generate() {
-        List<LottoNumber> numbers = LottoNumber.getNumbers();
-        Collections.shuffle(numbers);
-        return numbers.stream()
+        Collections.shuffle(lottoNumbers);
+        return lottoNumbers.stream()
                 .limit(LOTTO_NUMBERS_SIZE)
                 .collect(Collectors.toList());
     }
