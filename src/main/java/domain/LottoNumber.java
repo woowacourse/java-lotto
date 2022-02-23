@@ -33,18 +33,18 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return lottoNumbers.get(number);
     }
 
-    public static List<LottoNumber> getNumbers() {
-        return lottoNumbers.entrySet().stream()
-            .map(Map.Entry::getValue)
-            .collect(Collectors.toList());
-    }
-
     public static LottoNumber createBonus(int inputBonusNumber, LottoTicketNumbers winningNumbers) {
         LottoNumber bonusNumber = LottoNumber.getInstance(inputBonusNumber);
         if (winningNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException(INVALID_BONUS_NUMBER);
         }
         return bonusNumber;
+    }
+
+    public static List<LottoNumber> getNumbers() {
+        return lottoNumbers.entrySet().stream()
+            .map(Map.Entry::getValue)
+            .collect(Collectors.toList());
     }
 
     public int getNumber() {
