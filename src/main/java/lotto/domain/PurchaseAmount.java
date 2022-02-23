@@ -25,7 +25,7 @@ public class PurchaseAmount {
     }
 
     private static void validateMultipleOfPrice(final int purchaseAmount, final int lottoPrice) {
-        if(purchaseAmount%lottoPrice!=0){
+        if (purchaseAmount % lottoPrice != 0) {
             throw new IllegalArgumentException(INVALID_PURCHASE_AMOUNT_EXCEPTION_MESSAGE);
         }
     }
