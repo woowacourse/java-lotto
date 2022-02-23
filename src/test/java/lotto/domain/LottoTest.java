@@ -1,8 +1,5 @@
 package lotto.domain;
 
-import java.util.List;
-import java.util.function.IntPredicate;
-import java.util.stream.IntStream;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
