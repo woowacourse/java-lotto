@@ -2,7 +2,7 @@ package lotto.view;
 
 import lotto.model.Lotto;
 import lotto.model.Rank;
-import lotto.model.ResultMap;
+import lotto.model.LottoResult;
 
 import java.util.*;
 
@@ -16,13 +16,13 @@ public class ResultView {
         printEmptyLine();
     }
 
-    public static void printResultStatistics(ResultMap winningResult) {
+    public static void printResultStatistics(LottoResult lottoResult) {
         printEmptyLine();
         System.out.println("당첨 통계");
         System.out.println("---------");
         Arrays.stream(Rank.values())
                 .filter(rank -> rank != Rank.FAIL)
-                .map(rank -> getOneRankStatus(rank, winningResult.getResult().getOrDefault(rank, 0)))
+                .map(rank -> getOneRankStatus(rank, lottoResult.getResult().getOrDefault(rank, 0)))
                 .forEach(System.out::println);
     }
 

@@ -3,7 +3,7 @@ package lotto.view;
 import lotto.model.Lotto;
 import lotto.model.LottoMatcher;
 import lotto.model.Lottos;
-import lotto.model.ResultMap;
+import lotto.model.LottoResult;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -44,7 +44,7 @@ public class ResultViewTest {
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         int bonusNumber = 7;
         LottoMatcher matcher = new LottoMatcher(winningNumbers, bonusNumber);
-        ResultMap winningResult = matcher.getWinningResult(lottos);
+        LottoResult winningResult = matcher.getWinningResult(lottos);
 
         ResultView.printResultStatistics(winningResult);
 

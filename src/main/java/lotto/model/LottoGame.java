@@ -13,12 +13,12 @@ public class LottoGame {
     }
 
     public float calculateYield(int money, Lottos lottos) {
-        ResultMap winningResult = lottoMatcher.getWinningResult(lottos);
-        return getWinningAmount(winningResult) / (float) money;
+        LottoResult winningResult = lottoMatcher.getWinningResult(lottos);
+        return getTotalWinningMoney(winningResult) / (float) money;
     }
 
-    private Long getWinningAmount(ResultMap rank) {
-        return rank.getResult().entrySet().stream()
+    private Long getTotalWinningMoney(LottoResult lottoResult) {
+        return lottoResult.getResult().entrySet().stream()
                 .map(entry -> entry.getKey().getMoney() * entry.getValue())
                 .mapToLong(i -> i)
                 .sum();
@@ -41,7 +41,7 @@ public class LottoGame {
         return Lottos.generate(lottoSize);
     }
 
-    public ResultMap getWinningResult(Lottos lottos) {
+    public LottoResult getWinningResult(Lottos lottos) {
         return lottoMatcher.getWinningResult(lottos);
     }
 }

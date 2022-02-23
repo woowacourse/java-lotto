@@ -13,13 +13,13 @@ public class LottoMatcher {
         this.bonusNumber = new BonusNumber(bonusNumber);
     }
 
-    public ResultMap getWinningResult(Lottos lottos) {
-        ResultMap resultMap = new ResultMap();
+    public LottoResult getWinningResult(Lottos lottos) {
+        LottoResult lottoResult = new LottoResult();
         Integer defaultValue = 0;
         lottos.getLottos().forEach(lotto -> {
-            resultMap.getResult().put(match(lotto), resultMap.getResult().getOrDefault(match(lotto), defaultValue) + 1);
+            lottoResult.getResult().put(match(lotto), lottoResult.getResult().getOrDefault(match(lotto), defaultValue) + 1);
         });
-        return resultMap;
+        return lottoResult;
     }
 
     public int matchWinningNumbers(Lotto lotto) {

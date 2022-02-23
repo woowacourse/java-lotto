@@ -3,10 +3,10 @@ package lotto.model;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ResultMap {
+public class LottoResult {
     Map<Rank, Integer> result;
 
-    public ResultMap() {
+    public LottoResult() {
         this.result = new HashMap<>();
     }
 
