@@ -3,6 +3,7 @@ package model;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
+import java.util.Set;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,10 +28,16 @@ public class LottoNumbersGeneratorTest {
         public int get() {
             return numbers[index++];
         }
+
+        @Override
+        public Set<Integer> get(int quantity) {
+            return null;
+        }
     }
 
 
     @Test
+    @Disabled
     @DisplayName("입력한 수 만큼 로또 발급 테스트")
     void createLottoNumbersTest() {
         LottoNumbersGenerator lottoNumbersGenerator = new LottoNumbersGenerator(
