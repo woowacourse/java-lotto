@@ -1,6 +1,6 @@
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -8,11 +8,14 @@ public class Lotto {
     private static final String SIZE_ERROR_MESSAGE = "6개의 숫자가 필요합니다.";
     private static final String DUPLICATE_ERROR_MESSAGE = "중복은 허용하지 않습니다.";
 
-    private final Set<Integer> numbers;
+    private final Set<Number> numbers;
 
     public Lotto(List<Integer> numbers) {
         validate(numbers);
-        this.numbers = new HashSet<>(numbers);
+        this.numbers = numbers.stream()
+            .map(String::valueOf)
+            .map(Number::new)
+            .collect(Collectors.toSet());
     }
 
     private void validate(List<Integer> numbers) {
@@ -27,7 +30,7 @@ public class Lotto {
     }
 
     private void validateDuplicate(List<Integer> numbers) {
-        int noDuplicateCount = (int) numbers.stream()
+        int noDuplicateCount = (int)numbers.stream()
             .distinct()
             .count();
 
@@ -36,7 +39,7 @@ public class Lotto {
         }
     }
 
-    public boolean contains(int number) {
+    public boolean contains(Number number) {
         return numbers.contains(number);
     }
 }

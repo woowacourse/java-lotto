@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Number {
 
     private static final int MIN_VALUE = 1;
@@ -28,5 +30,20 @@ public class Number {
 
     public int getValue() {
         return value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object)
+            return true;
+        if (object == null || getClass() != object.getClass())
+            return false;
+        Number number = (Number)object;
+        return value == number.value;
     }
 }

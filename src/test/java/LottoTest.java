@@ -55,7 +55,7 @@ public class LottoTest {
             @DisplayName("true를 반환한다.")
             void it_returns_true() {
                 Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-                assertThat(lotto.contains(1)).isTrue();
+                assertThat(lotto.contains(new Number("1"))).isTrue();
             }
         }
 
@@ -67,7 +67,7 @@ public class LottoTest {
             @DisplayName("false를 반환한다.")
             void it_returns_true() {
                 Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-                assertThat(lotto.contains(7)).isFalse();
+                assertThat(lotto.contains(new Number("7"))).isFalse();
             }
         }
     }
