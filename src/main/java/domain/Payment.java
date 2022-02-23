@@ -17,20 +17,6 @@ public class Payment {
 		return changeInt;
 	}
 
-	public int calculateLottoCount() {
-		return payment / LOTTO_PRICE;
-	}
-
-	public double calculateProfitRate(int totalProfit) {
-		return (double)totalProfit / payment;
-	}
-
-	private void checkPaymentLimit(int payment) {
-		if (payment > PAYMENT_LIMIT_PRICE) {
-			throw new IllegalArgumentException("로또는 한사람 당 10만원씩만 살 수 있습니다. ");
-		}
-	}
-
 	private void checkDivideByLottoPrice(int payment) {
 		if (payment % LOTTO_PRICE != 0) {
 			throw new IllegalArgumentException("1000원 단위로 입력해주세요!");
@@ -43,7 +29,17 @@ public class Payment {
 		}
 	}
 
-	public int getPayment() {
-		return payment;
+	private void checkPaymentLimit(int payment) {
+		if (payment > PAYMENT_LIMIT_PRICE) {
+			throw new IllegalArgumentException("로또는 한사람 당 10만원씩만 살 수 있습니다. ");
+		}
+	}
+
+	public int calculateLottoCount() {
+		return payment / LOTTO_PRICE;
+	}
+
+	public double calculateProfitRate(int totalProfit) {
+		return (double)totalProfit / payment;
 	}
 }

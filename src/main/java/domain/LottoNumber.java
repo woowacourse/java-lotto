@@ -3,20 +3,24 @@ package domain;
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
+	private static final int MIN_BOUND = 1;
+	private static final int MAX_BOUND = 45;
 	private int lottoNumber;
 
 	public LottoNumber(String lottoNumber) {
 		this.lottoNumber = Integer.parseInt(lottoNumber);
-		if (this.lottoNumber < 1 || this.lottoNumber > 45) {
-			throw new IllegalArgumentException("로또 범위를 벗어난 숫자입니다.");
-		}
+		checkRange(this.lottoNumber);
 	}
 
 	public LottoNumber(int lottoNumber) {
-		if (lottoNumber < 1 || lottoNumber > 45) {
+		checkRange(lottoNumber);
+		this.lottoNumber = lottoNumber;
+	}
+
+	private void checkRange(int lottoNumber) {
+		if (lottoNumber < MIN_BOUND || lottoNumber > MAX_BOUND) {
 			throw new IllegalArgumentException("로또 범위를 벗어난 숫자입니다.");
 		}
-		this.lottoNumber = lottoNumber;
 	}
 
 	public int getLottoNumber() {

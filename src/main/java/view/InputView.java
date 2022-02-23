@@ -7,13 +7,6 @@ import domain.LottoNumber;
 import domain.Payment;
 import domain.WinningLotto;
 
-/**
- * 유틸 클래스를 했을 때 이점
- * - 사용성 증가..
- * 객체를 만들면 장점
- * - 입력 받는 곳을 제한할 수 있다!
- */
-
 public class InputView {
 	private static final Scanner scanner = new Scanner(System.in);
 

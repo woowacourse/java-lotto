@@ -8,15 +8,13 @@ import java.util.stream.IntStream;
 
 public class LottoMachine {
 	private static final List<LottoNumber> lottoBucket = new ArrayList<>();
+	private static final int MIN_BOUND = 1;
+	private static final int MAX_BOUND = 45;
 
 	static {
-		IntStream.rangeClosed(1, 45)
+		IntStream.rangeClosed(MIN_BOUND, MAX_BOUND)
 			.mapToObj(LottoNumber::new)
 			.forEach(lottoBucket::add);
-	}
-
-	public LottoMachine() {
-
 	}
 
 	public Lottos createLottos(int lottoCount) {
@@ -32,9 +30,5 @@ public class LottoMachine {
 		return new Lotto(lottoBucket.stream()
 			.limit(6)
 			.collect(Collectors.toList()));
-	}
-
-	public void print() {
-		System.out.println(createLottos(2));
 	}
 }

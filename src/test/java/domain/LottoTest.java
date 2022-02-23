@@ -4,76 +4,62 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class LottoTest {
 
+	private List<LottoNumber> lottos = new ArrayList<>();
+
+	@BeforeEach
+	void setUp() {
+		lottos.add(new LottoNumber(1));
+		lottos.add(new LottoNumber(2));
+		lottos.add(new LottoNumber(3));
+		lottos.add(new LottoNumber(4));
+		lottos.add(new LottoNumber(5));
+	}
+
 	@Test
 	void 개수_성공() {
-		assertThatCode(() -> new Lotto(Arrays.asList(new LottoNumber("1"),
-			new LottoNumber("2"),
-			new LottoNumber("3"),
-			new LottoNumber("4"),
-			new LottoNumber("5"),
-			new LottoNumber("6")))).doesNotThrowAnyException();
+		lottos.add(new LottoNumber(6));
+		assertThatCode(() -> new Lotto(lottos))
+			.doesNotThrowAnyException();
 	}
 
 	@Test
 	void 개수_실패() {
-		assertThatThrownBy(() -> new Lotto(Arrays.asList(new LottoNumber("1"),
-			new LottoNumber("2"),
-			new LottoNumber("3"),
-			new LottoNumber("4"),
-			new LottoNumber("5")))).isInstanceOf(IllegalArgumentException.class);
+		assertThatThrownBy(() -> new Lotto(lottos))
+			.isInstanceOf(IllegalArgumentException.class);
 	}
 
-	//    - [ 예외 ] 숫자 중복 불가
 	@Test
 	void 중복_불가_성공() {
-		assertThatThrownBy(() -> new Lotto(Arrays.asList(new LottoNumber("1"),
-			new LottoNumber("2"),
-			new LottoNumber("3"),
-			new LottoNumber("4"),
-			new LottoNumber("5"),
-			new LottoNumber("5")))).isInstanceOf(IllegalArgumentException.class);
-	}
-
-	@Test
-	void 오름차순으로_정렬() {
-		//given, when
-		Lotto lotto = new Lotto(Arrays.asList(new LottoNumber("6"),
-			new LottoNumber("5"),
-			new LottoNumber("4"),
-			new LottoNumber("3"),
-			new LottoNumber("2"),
-			new LottoNumber("1")));
-		//then
-		assertThat(lotto.toString()).isEqualTo("추첨된 번호는 [1, 2, 3, 4, 5, 6] 입니다.");
+		lottos.add(new LottoNumber(5));
+		assertThatThrownBy(() -> new Lotto(lottos))
+			.isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@Test
 	void 매칭_숫자_계산() {
 		//given
-		Lotto lotto = new Lotto(Arrays.asList(new LottoNumber("7"),
-				new LottoNumber("5"),
-				new LottoNumber("4"),
-				new LottoNumber("3"),
-				new LottoNumber("2"),
-				new LottoNumber("1")));
-		Lotto targetLotto = new Lotto(Arrays.asList(new LottoNumber("6"),
-				new LottoNumber("5"),
-				new LottoNumber("4"),
-				new LottoNumber("3"),
-				new LottoNumber("2"),
-				new LottoNumber("1")));
+		lottos.add(new LottoNumber(6));
+		Lotto lotto = new Lotto(lottos);
+		Lotto targetLotto = Lotto.of(new String[]{"7", "5", "4", "3", "2", "1"});
 
 		//when
 		int count = lotto.calculateMatchCount(targetLotto);
 
 		//then
 		assertThat(count).isEqualTo(5);
+	}
+
+	@AfterEach
+	void clear() {
+		lottos.clear();
 	}
 }
