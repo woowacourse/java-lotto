@@ -1,28 +1,23 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import static constant.LottoConstant.LOTTO_TICKET_PRICE;
 
 public class LottoMachine {
 
     private static final String INVALID_INSERT_AMOUNT = "금액은 1000원 이상이어야 합니다.";
-    private static final int LOTTO_TICKET_PRICE = 1000;
-
-    private LottoTickets lottoTickets;
 
     public List<LottoTicket> purchaseLottoTickets(Money amount, LottoNumberStrategy lottoNumberStrategy) {
         validateInsertAmount(amount);
         int size = amount.getPurchasableNumber(LOTTO_TICKET_PRICE);
 
-        List<LottoTicket> purchasedTickets = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
-            purchasedTickets.add(new LottoTicket(lottoNumberStrategy.generate()));
-        }
-
-        lottoTickets = new LottoTickets(purchasedTickets);
-
-        return purchasedTickets;
+        return IntStream.range(0, size)
+                .mapToObj(index -> new LottoTicket(lottoNumberStrategy.generate()))
+                .collect(Collectors.toList());
     }
 
     private void validateInsertAmount(Money amount) {
@@ -31,7 +26,7 @@ public class LottoMachine {
         }
     }
 
-    public WinningStat createWinningStat(LottoNumbers winningNumbers, LottoNumber bonusNumber) {
+    public WinningStat createWinningStat(LottoTickets lottoTickets, LottoTicketNumbers winningNumbers, LottoNumber bonusNumber) {
         Map<LottoRank, Integer> ranks = lottoTickets.createRanks(winningNumbers, bonusNumber);
         return new WinningStat(ranks);
     }

@@ -2,7 +2,7 @@ package domain;
 
 import java.util.Objects;
 
-import static domain.LottoNumberConst.*;
+import static constant.LottoConstant.*;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
@@ -22,7 +22,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return new LottoNumber(number);
     }
 
-    public static LottoNumber createBonus(int inputBonusNumber, LottoNumbers winningNumbers) {
+    public static LottoNumber createBonus(int inputBonusNumber, LottoTicketNumbers winningNumbers) {
         LottoNumber bonusNumber = LottoNumber.create(inputBonusNumber);
         if (winningNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException(INVALID_BONUS_NUMBER);

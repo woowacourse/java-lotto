@@ -37,14 +37,16 @@ class LottoMachineTest {
     void calculateWinningStat() {
         LottoMachine lottoMachine = new LottoMachine();
 
-        lottoMachine.purchaseLottoTickets(Money.from(2000), new FixedLottoNumberStrategy());
+        List<LottoTicket> lottoTickets = lottoMachine.purchaseLottoTickets(
+                Money.from(2000), new FixedLottoNumberStrategy());
 
         List<LottoNumber> inputWinningNumbers = IntStream.of(2, 1, 4, 3, 5, 6)
                 .mapToObj(LottoNumber::create)
                 .collect(Collectors.toList());
 
-        LottoNumbers winningNumbers = new LottoNumbers(inputWinningNumbers);
-        WinningStat winningStat = lottoMachine.createWinningStat(winningNumbers, LottoNumber.create(7));
+        LottoTicketNumbers winningNumbers = new LottoTicketNumbers(inputWinningNumbers);
+        WinningStat winningStat = lottoMachine.createWinningStat(
+                new LottoTickets(lottoTickets), winningNumbers, LottoNumber.create(7));
 
         Map<LottoRank, Integer> result = winningStat.getStat();
         assertThat(result.get(LottoRank.FIRST)).isEqualTo(2);

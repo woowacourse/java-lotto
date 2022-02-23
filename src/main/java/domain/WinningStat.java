@@ -7,23 +7,24 @@ import java.util.stream.Collectors;
 
 public class WinningStat {
 
-    private final Map<LottoRank, Integer> stats;
+    public static final int DEFAULT_VALUE = 0;
+
+    private final Map<LottoRank, Integer> stat;
 
     public WinningStat(Map<LottoRank, Integer> ranks) {
-        stats = ranks;
+        stat = ranks;
     }
 
     public Map<LottoRank, Integer> getStat() {
-        return stats;
+        return stat;
     }
 
     public double calculateProfit(int ticketPrice) {
+        int num = stat.values().stream()
+                .reduce(DEFAULT_VALUE, Integer::sum);
 
-        int num = stats.values().stream()
-                .reduce(0, Integer::sum);
-
-        List<LottoRank> wonLottoRanks = stats.entrySet().stream()
-                .filter(rank -> rank.getValue() != 0)
+        List<LottoRank> wonLottoRanks = stat.entrySet().stream()
+                .filter(rank -> rank.getValue() != DEFAULT_VALUE)
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toList());
 
@@ -33,7 +34,7 @@ public class WinningStat {
     private long sumPrize(List<LottoRank> wonLottoRanks) {
         return Arrays.stream(LottoRank.values())
                 .filter(wonLottoRanks::contains)
-                .mapToLong(rank -> (long) rank.getPrice() * stats.get(rank))
-                .reduce(0, Long::sum);
+                .mapToLong(rank -> (long) rank.getPrize() * stat.get(rank))
+                .reduce(DEFAULT_VALUE, Long::sum);
     }
 }

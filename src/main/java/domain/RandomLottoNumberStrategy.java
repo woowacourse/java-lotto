@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static domain.LottoNumberConst.*;
+import static constant.LottoConstant.*;
 
 public class RandomLottoNumberStrategy implements LottoNumberStrategy {
 
@@ -21,7 +21,7 @@ public class RandomLottoNumberStrategy implements LottoNumberStrategy {
     public List<LottoNumber> generate() {
         Collections.shuffle(numbers);
         return numbers.stream()
-                .limit(6)
+                .limit(LOTTO_NUMBERS_SIZE)
                 .collect(Collectors.toList());
     }
 }

@@ -10,14 +10,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import static constant.LottoConstant.LOTTO_TICKET_PRICE;
+
 public class OutputView {
 
-    private static final String PURCHASED_NUMBER_MESSAGE = "개를 구매했습니다.";
-    private static final String WINNING_STATISTICS = "\n당첨 통계";
-    private static final String LINE = "--------";
+    public static final String PROFIT_PATTERN = "#.##";
+    public static final String BLANK = "";
 
     public static void printPurchasedLottoTicketNumber(int number) {
-        System.out.println(number + PURCHASED_NUMBER_MESSAGE);
+        System.out.println(number + "개를 구매했습니다.");
     }
 
     public static void printPurchasedLottoTickets(List<LottoTicket> lottoTickets) {
@@ -28,36 +29,38 @@ public class OutputView {
     }
 
     public static void printWinningStat(WinningStat winningStat) {
-        List<LottoRank> lottoRanks = LottoRank.valuesWithoutNothing();
+        List<LottoRank> lottoRanks = LottoRank.valuesWithPrize();
         Collections.reverse(lottoRanks);
 
-        System.out.println(WINNING_STATISTICS);
-        System.out.println(LINE);
-        System.out.print(getStatistics(winningStat.getStat(), lottoRanks).toString());
+        System.out.println("\n당첨 통계");
+        System.out.println("--------");
+        System.out.print(createStatView(winningStat.getStat(), lottoRanks));
         System.out.println("총 수익률은 " + formatProfit(winningStat) + "입니다.");
     }
 
-    private static String formatProfit(WinningStat winningStat) {
-        DecimalFormat profitFormatter = new DecimalFormat("#.##");
-        profitFormatter.setRoundingMode(RoundingMode.DOWN);
-        return profitFormatter.format(winningStat.calculateProfit(1000));
-    }
-
-    private static StringBuilder getStatistics(Map<LottoRank, Integer> statistics, List<LottoRank> lottoRanks) {
+    private static String createStatView(Map<LottoRank, Integer> statistics, List<LottoRank> lottoRanks) {
         StringBuilder stringBuilder = new StringBuilder();
         for (LottoRank lottoRank : lottoRanks) {
             stringBuilder.append(lottoRank.getMatchNumber()).append("개 일치")
                     .append(checkSecond(lottoRank))
-                    .append(" (").append(lottoRank.getPrice()).append(") - ")
+                    .append(" (").append(lottoRank.getPrize()).append(") - ")
                     .append(statistics.get(lottoRank)).append("개\n");
         }
-        return stringBuilder;
+
+        return stringBuilder.toString();
     }
 
     private static String checkSecond(LottoRank lottoRank) {
         if (LottoRank.SECOND == lottoRank) {
             return ", 보너스 볼 일치";
         }
-        return "";
+        return BLANK;
+    }
+
+    private static String formatProfit(WinningStat winningStat) {
+        DecimalFormat profitFormatter = new DecimalFormat(PROFIT_PATTERN);
+        profitFormatter.setRoundingMode(RoundingMode.DOWN);
+
+        return profitFormatter.format(winningStat.calculateProfit(LOTTO_TICKET_PRICE));
     }
 }

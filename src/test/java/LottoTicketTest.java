@@ -30,9 +30,9 @@ class LottoTicketTest {
         List<LottoNumber> inputWinningNumbers = IntStream.of(2, 1, 4, 3, 5, 6)
                 .mapToObj(LottoNumber::create)
                 .collect(Collectors.toList());
-        LottoNumbers lottoNumbers = new LottoNumbers(inputWinningNumbers);
+        LottoTicketNumbers lottoTicketNumbers = new LottoTicketNumbers(inputWinningNumbers);
 
-        LottoRank lottoRank = lottoTicket.rank(lottoNumbers, LottoNumber.create(7));
+        LottoRank lottoRank = lottoTicket.rank(lottoTicketNumbers, LottoNumber.create(7));
 
         assertThat(lottoRank).isEqualTo(LottoRank.FIRST);
     }
@@ -43,9 +43,9 @@ class LottoTicketTest {
         List<LottoNumber> inputWinningNumbers = IntStream.of(2, 1, 4, 3, 5, 7)
                 .mapToObj(LottoNumber::create)
                 .collect(Collectors.toList());
-        LottoNumbers lottoNumbers = new LottoNumbers(inputWinningNumbers);
+        LottoTicketNumbers lottoTicketNumbers = new LottoTicketNumbers(inputWinningNumbers);
 
-        LottoRank lottoRank = lottoTicket.rank(lottoNumbers, LottoNumber.create(8));
+        LottoRank lottoRank = lottoTicket.rank(lottoTicketNumbers, LottoNumber.create(8));
 
         assertThat(lottoRank).isEqualTo(LottoRank.THIRD);
     }
@@ -56,9 +56,9 @@ class LottoTicketTest {
         List<LottoNumber> inputWinningNumbers = IntStream.of(2, 1, 4, 3, 5, 7)
                 .mapToObj(LottoNumber::create)
                 .collect(Collectors.toList());
-        LottoNumbers lottoNumbers = new LottoNumbers(inputWinningNumbers);
+        LottoTicketNumbers lottoTicketNumbers = new LottoTicketNumbers(inputWinningNumbers);
 
-        LottoRank lottoRank = lottoTicket.rank(lottoNumbers, LottoNumber.create(6));
+        LottoRank lottoRank = lottoTicket.rank(lottoTicketNumbers, LottoNumber.create(6));
 
         assertThat(lottoRank).isEqualTo(LottoRank.SECOND);
     }
@@ -69,9 +69,9 @@ class LottoTicketTest {
         List<LottoNumber> inputWinningNumbers = IntStream.of(2, 1, 4, 3, 7, 8)
                 .mapToObj(LottoNumber::create)
                 .collect(Collectors.toList());
-        LottoNumbers lottoNumbers = new LottoNumbers(inputWinningNumbers);
+        LottoTicketNumbers lottoTicketNumbers = new LottoTicketNumbers(inputWinningNumbers);
 
-        LottoRank lottoRank = lottoTicket.rank(lottoNumbers, LottoNumber.create(6));
+        LottoRank lottoRank = lottoTicket.rank(lottoTicketNumbers, LottoNumber.create(6));
 
         assertThat(lottoRank).isEqualTo(LottoRank.FOURTH);
     }
@@ -82,9 +82,9 @@ class LottoTicketTest {
         List<LottoNumber> inputWinningNumbers = IntStream.of(2, 1, 4, 9, 7, 8)
                 .mapToObj(LottoNumber::create)
                 .collect(Collectors.toList());
-        LottoNumbers lottoNumbers = new LottoNumbers(inputWinningNumbers);
+        LottoTicketNumbers lottoTicketNumbers = new LottoTicketNumbers(inputWinningNumbers);
 
-        LottoRank lottoRank = lottoTicket.rank(lottoNumbers, LottoNumber.create(6));
+        LottoRank lottoRank = lottoTicket.rank(lottoTicketNumbers, LottoNumber.create(6));
 
         assertThat(lottoRank).isEqualTo(LottoRank.FIFTH);
     }
@@ -95,9 +95,9 @@ class LottoTicketTest {
         List<LottoNumber> inputWinningNumbers = IntStream.of(2, 1, 10, 9, 7, 8)
                 .mapToObj(LottoNumber::create)
                 .collect(Collectors.toList());
-        LottoNumbers lottoNumbers = new LottoNumbers(inputWinningNumbers);
+        LottoTicketNumbers lottoTicketNumbers = new LottoTicketNumbers(inputWinningNumbers);
 
-        LottoRank lottoRank = lottoTicket.rank(lottoNumbers, LottoNumber.create(6));
+        LottoRank lottoRank = lottoTicket.rank(lottoTicketNumbers, LottoNumber.create(6));
 
         assertThat(lottoRank).isEqualTo(LottoRank.NOTHING);
     }

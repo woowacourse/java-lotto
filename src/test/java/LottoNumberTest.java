@@ -1,5 +1,5 @@
 import domain.LottoNumber;
-import domain.LottoNumbers;
+import domain.LottoTicketNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -36,7 +36,7 @@ class LottoNumberTest {
                 .mapToObj(LottoNumber::create)
                 .collect(Collectors.toList());
 
-        assertThatThrownBy(() -> LottoNumber.createBonus(6, new LottoNumbers(inputLottoNumbers)))
+        assertThatThrownBy(() -> LottoNumber.createBonus(6, new LottoTicketNumbers(inputLottoNumbers)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

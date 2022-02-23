@@ -1,5 +1,5 @@
 import domain.LottoNumber;
-import domain.LottoNumbers;
+import domain.LottoTicketNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,7 +12,7 @@ import java.util.stream.IntStream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class LottoNumbersTest {
+class LottoTicketNumbersTest {
 
     @ParameterizedTest
     @ValueSource(ints = {5, 7})
@@ -22,7 +22,7 @@ class LottoNumbersTest {
                 .mapToObj(LottoNumber::create)
                 .collect(Collectors.toList());
 
-        assertThatThrownBy(() -> new LottoNumbers(inputLottoNumbers))
+        assertThatThrownBy(() -> new LottoTicketNumbers(inputLottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -33,7 +33,7 @@ class LottoNumbersTest {
                 .mapToObj(LottoNumber::create)
                 .collect(Collectors.toList());
 
-        assertThatThrownBy(() -> new LottoNumbers(inputLottoNumbers))
+        assertThatThrownBy(() -> new LottoTicketNumbers(inputLottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -44,9 +44,9 @@ class LottoNumbersTest {
                 .mapToObj(LottoNumber::create)
                 .collect(Collectors.toList());
 
-        LottoNumbers lottoNumbers = new LottoNumbers(inputLottoNumbers);
+        LottoTicketNumbers lottoTicketNumbers = new LottoTicketNumbers(inputLottoNumbers);
 
-        int[] lottoNumbersSorted = lottoNumbers.getLottoNumbers().stream()
+        int[] lottoNumbersSorted = lottoTicketNumbers.getLottoNumbers().stream()
                 .mapToInt(LottoNumber::getNumber)
                 .toArray();
 

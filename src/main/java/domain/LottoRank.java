@@ -1,7 +1,6 @@
 package domain;
 
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,11 +14,11 @@ public enum LottoRank {
     NOTHING(0, 0);
 
     private final int matchNumber;
-    private final int price;
+    private final int prize;
 
-    LottoRank(int matchNumber, int price) {
+    LottoRank(int matchNumber, int prize) {
         this.matchNumber = matchNumber;
-        this.price = price;
+        this.prize = prize;
     }
 
     public static LottoRank valueOf(int count, boolean bonus) {
@@ -33,6 +32,12 @@ public enum LottoRank {
                 .orElse(NOTHING);
     }
 
+    public static List<LottoRank> valuesWithPrize() {
+        return Arrays.stream(LottoRank.values())
+                .filter(rank -> rank != NOTHING)
+                .collect(Collectors.toList());
+    }
+
     private static LottoRank checkSecondOrThird(boolean bonus) {
         if (bonus) {
             return LottoRank.SECOND;
@@ -40,14 +45,8 @@ public enum LottoRank {
         return LottoRank.THIRD;
     }
 
-    public int getPrice() {
-        return price;
-    }
-
-    public static List<LottoRank> valuesWithoutNothing() {
-        return Arrays.stream(LottoRank.values())
-                .filter(rank -> rank != NOTHING)
-                .collect(Collectors.toList());
+    public int getPrize() {
+        return prize;
     }
 
     public int getMatchNumber() {

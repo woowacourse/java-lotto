@@ -13,25 +13,27 @@ public class LottoController {
     private final LottoNumberStrategy lottoNumberStrategy = new RandomLottoNumberStrategy();
 
     public void run() {
-        purchaseLottoTickets();
-        createResult();
+        LottoTickets lottoTickets = purchaseLottoTickets();
+        createResult(lottoTickets);
     }
 
-    private void purchaseLottoTickets() {
+    private LottoTickets purchaseLottoTickets() {
         Money money = Money.from(InputView.getMoney());
         List<LottoTicket> lottoTickets = lottoMachine.purchaseLottoTickets(money, lottoNumberStrategy);
 
         OutputView.printPurchasedLottoTicketNumber(lottoTickets.size());
         OutputView.printPurchasedLottoTickets(lottoTickets);
+
+        return new LottoTickets(lottoTickets);
     }
 
-    private void createResult() {
-        LottoNumbers winningNumbers = new LottoNumbers(InputView.getWinningNumbers().stream()
+    private void createResult(LottoTickets lottoTickets) {
+        LottoTicketNumbers winningNumbers = new LottoTicketNumbers(InputView.getWinningNumbers().stream()
                 .map(LottoNumber::create)
                 .collect(Collectors.toList()));
         LottoNumber bonusNumber = LottoNumber.createBonus(InputView.getBonusNumber(), winningNumbers);
 
-        WinningStat winningStat = lottoMachine.createWinningStat(winningNumbers, bonusNumber);
+        WinningStat winningStat = lottoMachine.createWinningStat(lottoTickets, winningNumbers, bonusNumber);
         OutputView.printWinningStat(winningStat);
     }
 }
