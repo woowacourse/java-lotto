@@ -10,7 +10,14 @@ public class Ticket {
     }
 
     public Ticket(Set<LottoNumber> lottoNumbers) {
+        checkTicketSize(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
+    }
+
+    private void checkTicketSize(Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != 6) {
+            throw new IllegalArgumentException("로또 번호는 6자리여야합니다");
+        }
     }
 
     public Set<LottoNumber> getLottoNumbers() {
