@@ -28,9 +28,9 @@ public class LottoController {
     }
 
     private Lottos initCustomerLottos() {
-        int money = InputView.requestUserMoney();
-        int lottosBought = money / LOTTO_PRICE;
-        Lottos lottos = Lottos.of(lottosBought);
+        int totalLottoPrice = InputView.requestTotalLottoPrice();
+        int lottoCount = totalLottoPrice / LOTTO_PRICE;
+        Lottos lottos = Lottos.of(lottoCount);
         OutputView.printPurchaseInfo(lottos.getLottos());
         return lottos;
     }
