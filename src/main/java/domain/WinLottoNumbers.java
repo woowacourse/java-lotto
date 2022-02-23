@@ -15,6 +15,7 @@ public class WinLottoNumbers extends LottoNumbers {
     public static WinLottoNumbers of(String lottoNumbersText, int bonus) {
         List<Integer> numbers = Separator.separateNumbers(lottoNumbersText);
         WinLottoNumbersValidator.validate(numbers);
+        WinLottoNumbersValidator.validateBonus(numbers,bonus);
         return new WinLottoNumbers(numbers, bonus);
     }
 
