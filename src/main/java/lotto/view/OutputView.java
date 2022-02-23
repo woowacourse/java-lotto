@@ -1,6 +1,8 @@
 package lotto.view;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoRank;
+import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 
 public class OutputView {
@@ -10,10 +12,6 @@ public class OutputView {
 
     public void printErrorMessage(String e) {
         System.out.println(e);
-    }
-
-    public void printMoneyAmount(int money) {
-        System.out.println(money);
     }
 
     public void printLastWeekWinningMessage() {
@@ -29,5 +27,28 @@ public class OutputView {
         for (Lotto lotto : lottos.getLottos()) {
             System.out.println(lotto.getPickedNumbers());
         }
+    }
+
+    public void printResult(LottoResult result) {
+        System.out.println("당첨 통계");
+        System.out.println("---------");
+        for (LottoRank lottoRank : result.getResult().keySet()) {
+            String message = String.format("%d개 일치%s(%d원) - %d개", lottoRank.getCorrectNumber(),
+                    getBonusMessage(lottoRank.getIsBonused()), lottoRank.getPrizeAmount(),
+                    result.getResult().get(lottoRank));
+            System.out.println(message);
+        }
+    }
+
+    private String getBonusMessage(boolean isBonused) {
+        if (isBonused) {
+            return ", 보너스 볼 일치";
+        }
+        return " ";
+    }
+
+    public void printYield(double yield) {
+        System.out.println(String.format("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", yield));
+
     }
 }

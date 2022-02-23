@@ -1,9 +1,11 @@
 package lotto.controller;
 
 import lotto.domain.BonusNumber;
+import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.PickedNumbers;
+import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -24,6 +26,10 @@ public class LottoController {
         outputView.printPurchasedLotto(lottos);
         PickedNumbers pickedNumbers = getPickedNumber();
         BonusNumber bonusNumber = getBonusNumber(pickedNumbers);
+        WinningLotto winningLotto = new WinningLotto(pickedNumbers, bonusNumber);
+        LottoResult result = lottos.getResult(winningLotto);
+        outputView.printResult(result);
+        outputView.printYield(lottos.getYield(money));
 
     }
 

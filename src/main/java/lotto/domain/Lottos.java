@@ -34,7 +34,10 @@ public class Lottos {
 
     public LottoResult getResult(WinningLotto winningLotto) {
         for (Lotto lotto : lottos) {
-            result.add(winningLotto.findLottoRank(lotto.getPickedNumbers()));
+            LottoRank lottoRank = winningLotto.findLottoRank(lotto.getPickedNumbers());
+            if (lottoRank != null) {
+                result.add(lottoRank);
+            }
         }
         return result;
     }

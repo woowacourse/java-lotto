@@ -1,16 +1,18 @@
 package lotto.domain;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class LottoResult {
     private HashMap<LottoRank, Integer> result;
 
 
     public LottoResult() {
-        this.result = new HashMap<>();
+        this.result = new LinkedHashMap<>();
         for (LottoRank lottoRank : LottoRank.values()) {
             result.put(lottoRank, 0);
         }
+
     }
 
     public void add(LottoRank lottoRank) {
