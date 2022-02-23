@@ -1,3 +1,5 @@
+import java.util.List;
+
 import domain.LottoGame;
 import domain.Lottos;
 import view.InputView;
@@ -12,5 +14,7 @@ public class Application {
 
         Lottos lottos = lottoGame.getLottos();
         OutputView.showPurchasedLottos(lottos);
+
+        final List<Integer> winningLottoNumbers = InputView.getWinningLottoNumbers();
     }
 }
