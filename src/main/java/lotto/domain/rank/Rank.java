@@ -24,7 +24,7 @@ public enum Rank {
 		return Arrays.stream(Rank.values())
 			.filter(rank -> rank.matches(matchCount, bonusBallMatched))
 			.findFirst()
-			.orElseGet(null);
+			.orElseGet(() -> null);
 	}
 
 	private boolean matches(int matchCount, boolean bonusBallMatched) {

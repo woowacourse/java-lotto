@@ -5,6 +5,10 @@ import java.util.stream.Collectors;
 
 public class Balls {
 
+	private static final int BALLS_DEFAULT_SIZE = 6;
+	private static final String BALLS_NULL_POINTER_EXCEPTION_MESSAGE = "숫자 요소는 NULL이 아니어야 합니다.";
+	private static final String BALLS_OUT_OF_SIZE_EXCEPTION_MESSAGE = "숫자 요소는 6개여야 합니다.";
+
 	private final List<Ball> balls;
 
 	public Balls(final List<Integer> numbers) {
@@ -21,13 +25,13 @@ public class Balls {
 
 	private void validateNull(final List<Integer> numbers) {
 		if (numbers == null) {
-			throw new IllegalArgumentException("숫자 요소는 6개여야 합니다.");
+			throw new IllegalArgumentException(BALLS_NULL_POINTER_EXCEPTION_MESSAGE);
 		}
 	}
 
 	private void validateSize(final List<Integer> numbers) {
-		if (numbers.size() != 6) {
-			throw new IllegalArgumentException("숫자 요소는 6개여야 합니다.");
+		if (numbers.size() != BALLS_DEFAULT_SIZE) {
+			throw new IllegalArgumentException(BALLS_OUT_OF_SIZE_EXCEPTION_MESSAGE);
 		}
 	}
 

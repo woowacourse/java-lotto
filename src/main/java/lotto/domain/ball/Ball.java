@@ -4,6 +4,10 @@ import java.util.Objects;
 
 public class Ball {
 
+	private static final int BALL_RANGE_INCLUSIVE_START = 1;
+	private static final int BALL_RANGE_INCLUSIVE_END = 45;
+	private static final String BALL_OUT_OF_RANGE_EXCEPTION_MESSAGE = "번호의 범위는 1부터 45까지여야 합니다.";
+
 	private final int number;
 
 	public Ball(int number) {
@@ -13,8 +17,8 @@ public class Ball {
 	}
 
 	private void validateNumberIsInRange(int number) {
-		if (number < 1 || number > 45) {
-			throw new IllegalArgumentException("숫자의 범위는 1부터 45까지여야 합니다.");
+		if (number < BALL_RANGE_INCLUSIVE_START || number > BALL_RANGE_INCLUSIVE_END) {
+			throw new IllegalArgumentException(BALL_OUT_OF_RANGE_EXCEPTION_MESSAGE);
 		}
 	}
 
