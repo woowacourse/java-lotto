@@ -73,4 +73,22 @@ class LottoMatcherTest {
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("보너스 볼 번호가 1~45 범위 내에 해당하지 않습니다.");
     }
+
+    @Test
+    @DisplayName("지난 주 당첨 번호 개수가 6개 미만인 경우 예외 처리")
+    void validateNumberOfWinningNumbersUnder6Test() {
+        assertThatThrownBy(() -> {
+            new LottoMatcher(Arrays.asList(1, 2, 3, 4, 5), 45);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("지난 주 당첨 번호 개수는 6개로 입력해주세요.");
+    }
+
+    @Test
+    @DisplayName("지난 주 당첨 번호 개수가 6개 초과인 경우 예외 처리")
+    void validateNumberOfWinningNumbersOver6Test() {
+        assertThatThrownBy(() -> {
+            new LottoMatcher(Arrays.asList(1, 2, 3, 4, 5, 6, 7), 45);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("지난 주 당첨 번호 개수는 6개로 입력해주세요.");
+    }
 }
