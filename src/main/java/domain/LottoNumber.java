@@ -1,6 +1,6 @@
 package domain;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     private final int number;
 
     public LottoNumber(final String inputNumber) {
@@ -13,7 +13,6 @@ public class LottoNumber {
         this.number = inputNumber;
     }
 
-
     private void validateLottoNumberFormat(final String number) {
         if (!number.matches("^[1-9]([0-9]*)$")) {
             throw new IllegalArgumentException("로또 번호가 숫자의 형태가 아닙니다.");
@@ -24,6 +23,11 @@ public class LottoNumber {
         if (number < 1 || number > 45) {
             throw new IllegalArgumentException("로또 번호가 유효한 범위(1-45)가 아닙니다.");
         }
+    }
+
+    @Override
+    public int compareTo(final LottoNumber otherLottoNumber) {
+        return this.number - otherLottoNumber.number;
     }
 
     @Override
