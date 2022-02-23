@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
@@ -28,5 +29,9 @@ public class Lotto {
         if (lottoNumbers.contains(lottoNumber)) {
             throw new IllegalArgumentException();
         }
+    }
+
+    public List<Integer> getLottoNumbers() {
+        return Collections.unmodifiableList(lottoNumbers);
     }
 }

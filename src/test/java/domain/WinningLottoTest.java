@@ -1,5 +1,6 @@
 package domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
@@ -25,5 +26,35 @@ public class WinningLottoTest {
         assertDoesNotThrow(() -> {
             new WinningLotto(winningNumbers, bonusNumber);
         });
+    }
+
+    @Test
+    public void countFirstLottoRank() {
+        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        int bonusNumber = 7;
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoRank rank = winningLotto.countLottoRank(lotto);
+        assertThat(rank).isEqualTo(LottoRank.RANK_1);
+    }
+
+    @Test
+    public void countSecondLottoRank() {
+        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        int bonusNumber = 7;
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7));
+        LottoRank rank = winningLotto.countLottoRank(lotto);
+        assertThat(rank).isEqualTo(LottoRank.RANK_2);
+    }
+
+    @Test
+    public void countNoLottoRank() {
+        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        int bonusNumber = 7;
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+        Lotto lotto = new Lotto(Arrays.asList(5, 6, 7, 8, 9, 10));
+        LottoRank rank = winningLotto.countLottoRank(lotto);
+        assertThat(rank).isEqualTo(LottoRank.RANK_NOTHING);
     }
 }
