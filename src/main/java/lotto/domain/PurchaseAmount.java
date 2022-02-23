@@ -20,7 +20,7 @@ public class PurchaseAmount {
             throw new IllegalArgumentException(ERROR_PREFIX + ERROR_ONLY_NUMBER);
         }
         int number = Integer.parseInt(value);
-        checkNegative(number);
+        checkNaturalNumber(number);
         checkDivideLottoPrice(number);
     }
 
@@ -32,14 +32,14 @@ public class PurchaseAmount {
         return value.matches(NUMBER_MATCHES);
     }
 
-    private void checkNegative(final int value) {
-        if (value < 0) {
+    private void checkNaturalNumber(final int value) {
+        if (value <= 0) {
             throw new IllegalArgumentException(ERROR_PREFIX + ERROR_ONLY_NATURAL_NUMBER);
         }
     }
 
     private void checkDivideLottoPrice(final int value) {
-        if ((value % LOTTO_PRICE) == 0) {
+        if ((value % LOTTO_PRICE) != 0) {
             throw new IllegalArgumentException(ERROR_PREFIX + ERROR_LOTTO_PRICE);
         }
     }
