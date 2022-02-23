@@ -36,6 +36,7 @@ public class PrizeResult {
     public List<WinnerPrice> validWinnerPrices() {
         return prizeResult.keySet().stream()
                 .filter(winnerPrice -> winnerPrice != WinnerPrice.FAIL)
+                .sorted(Comparator.comparing(WinnerPrice::getPrize))
                 .collect(Collectors.toList());
     }
 
