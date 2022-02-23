@@ -5,6 +5,7 @@ import static constant.LottoConstants.LOTTO_PRICE;
 import static constant.LottoConstants.WINNING_NUMBERS_SIZE;
 import static validator.NumberValidators.validateNoDuplicateInList;
 import static validator.NumberValidators.validateNoDuplicates;
+import static validator.NumberValidators.validateTotalLottoPriceUnit;
 
 import domain.LottoGame;
 import domain.LottoNumber;
@@ -31,8 +32,8 @@ public class LottoController {
 
     private Lottos initCustomerLottos() {
         int totalLottoPrice = InputView.requestTotalLottoPrice();
-        int lottoCount = totalLottoPrice / LOTTO_PRICE;
-        Lottos lottos = Lottos.of(lottoCount);
+        validateTotalLottoPriceUnit(totalLottoPrice);
+        Lottos lottos = Lottos.of(totalLottoPrice / LOTTO_PRICE);
         OutputView.printPurchaseInfo(lottos.getLottos());
         return lottos;
     }
