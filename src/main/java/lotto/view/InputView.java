@@ -14,6 +14,6 @@ public class InputView {
     }
 
     public String getMoneyInput(){
-        return "";
+        return scanner.nextLine();
     }
 }
