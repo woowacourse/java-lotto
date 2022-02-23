@@ -23,4 +23,8 @@ public enum Statistics {
     public int getCount() {
         return count;
     }
+
+    public int getMatchNumber() {
+        return matchNumber;
+    }
 }

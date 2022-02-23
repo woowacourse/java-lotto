@@ -16,6 +16,7 @@ public class LottoController {
         makeLottos();
         storeWinningNumber();
         storeBonusBall();
+        compareLottoWithWinningNumber();
     }
 
     private void makeLottos() {
@@ -47,5 +48,9 @@ public class LottoController {
             outputView.printErrorMessage(e.getMessage());
             storeBonusBall();
         }
+    }
+
+    private void compareLottoWithWinningNumber() {
+        lottoStorage.compare(lottoWinningNumber.getWinningNumbersDTO());
     }
 }

@@ -15,7 +15,7 @@ public class LottoStorage {
         List<Lotto> lottos = new ArrayList<>();
 
         while (!lottoCount.isZero()) {
-            lottos.add(new Lotto());
+            lottos.add(new Lotto(RandomLottoNumbersGenerator.pickSixNumbers()));
             lottoCount.makeLotto();
         }
         return lottos;
@@ -25,5 +25,9 @@ public class LottoStorage {
         List<LottoDTO> lottoDTOS = new ArrayList<>();
         lottoStorage.forEach(lotto -> lottoDTOS.add(lotto.getLottoDTO()));
         return lottoDTOS;
+    }
+
+    public void compare(LottoWinningNumberDTO winningNumbersDTO) {
+        lottoStorage.forEach(lotto -> lotto.compare(winningNumbersDTO));
     }
 }
