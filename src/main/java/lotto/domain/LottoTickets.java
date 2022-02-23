@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -17,5 +18,9 @@ public class LottoTickets {
             .mapToObj(x -> LottoTicket.createTicket(generator))
             .collect(Collectors.toList());
         return new LottoTickets(tickets);
+    }
+
+    public List<LottoTicket> getTickets() {
+        return Collections.unmodifiableList(tickets);
     }
 }
