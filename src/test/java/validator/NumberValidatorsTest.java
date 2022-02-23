@@ -5,6 +5,7 @@ import static constant.ExceptionMessages.DUPLICATE_WINNING_NUMBER_EXCEPTION_MESS
 import static constant.ExceptionMessages.INVALID_LOTTO_NUMBER_RANGE_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.INVALID_NUMBER_INPUT_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.INVALID_TOTAL_LOTTO_PRICE_EXCEPTION_MESSAGE;
+import static constant.ExceptionMessages.INVALID_WINNING_NUMBERS_SIZE_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.NOT_UNIQUE_BONUS_NUMBER_EXCEPTION_MESSAGE;
 import static constant.LottoConstants.LOTTO_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,6 +16,7 @@ import static validator.NumberValidators.validateLottoNumberRange;
 import static validator.NumberValidators.validateNoDuplicateInList;
 import static validator.NumberValidators.validateNoDuplicates;
 import static validator.NumberValidators.validateTotalLottoPriceUnit;
+import static validator.NumberValidators.validateWinningNumbersSize;
 
 import java.util.Arrays;
 import java.util.List;
@@ -63,6 +65,23 @@ public class NumberValidatorsTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> validateLottoNumberRange(value))
                 .withMessageMatching(INVALID_LOTTO_NUMBER_RANGE_EXCEPTION_MESSAGE);
+    }
+
+    @Test
+    void validateWinningNumbersSize_passOnSameListSize() {
+        List<Integer> nums = Arrays.asList(1, 2, 3, 4, 5, 6);
+
+        assertThatNoException()
+                .isThrownBy(() -> validateWinningNumbersSize(nums));
+    }
+
+    @Test
+    void validateWinningNumbersSize_throwsIllegalExceptionOnDifferentListSize() {
+        List<Integer> nums = Arrays.asList(1, 2, 3, 4, 5);
+
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> validateWinningNumbersSize(nums))
+                .withMessageMatching(INVALID_WINNING_NUMBERS_SIZE_EXCEPTION_MESSAGE);
     }
 
     @Test

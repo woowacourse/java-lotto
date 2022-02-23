@@ -1,11 +1,10 @@
 package controller;
 
-import static constant.ExceptionMessages.INVALID_WINNING_NUMBERS_SIZE_EXCEPTION_MESSAGE;
 import static constant.LottoConstants.LOTTO_PRICE;
-import static constant.LottoConstants.WINNING_NUMBERS_SIZE;
 import static validator.NumberValidators.validateNoDuplicateInList;
 import static validator.NumberValidators.validateNoDuplicates;
 import static validator.NumberValidators.validateTotalLottoPriceUnit;
+import static validator.NumberValidators.validateWinningNumbersSize;
 
 import domain.LottoGame;
 import domain.LottoNumber;
@@ -50,9 +49,7 @@ public class LottoController {
                 .map(NumberValidators::validateAndParseNumber)
                 .map(LottoNumber::of)
                 .collect(Collectors.toList());
-        if (winningNumbers.size() != WINNING_NUMBERS_SIZE) {
-            throw new IllegalArgumentException(INVALID_WINNING_NUMBERS_SIZE_EXCEPTION_MESSAGE);
-        }
+        validateWinningNumbersSize(winningNumbers);
         validateNoDuplicates(winningNumbers.stream().map(LottoNumber::getNumber).collect(Collectors.toList()));
 
         return winningNumbers;
