@@ -12,6 +12,14 @@ public class AnswerLotto {
 		this.bonusNumber = bonusNumber;
 	}
 
+	public List<Integer> getNumbers() {
+		return numbers;
+	}
+
+	public int getBonusNumber() {
+		return bonusNumber;
+	}
+
 	private void validateInput(List<Integer> numbers, int bonusNumber) {
 		validateLength(numbers);
 		validateNumbers(numbers);
@@ -22,7 +30,6 @@ public class AnswerLotto {
 		if (numbers.size() != 6) {
 			throw new IllegalArgumentException("[ERROR] 6개의 숫자만 허용됩니다.");
 		}
-
 	}
 
 	private void validateNumbers(List<Integer> numbers) {

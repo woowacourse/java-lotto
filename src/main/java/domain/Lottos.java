@@ -5,12 +5,12 @@ import java.util.List;
 
 public class Lottos {
 
-	private final List<Lotto> lottos = new ArrayList<>();
+	private List<Lotto> lottos = new ArrayList<>();
 
-	public Lottos(int price) {
+	public Lottos(int price, LottoNumbersGenerator lottoNumbersGenerator) {
 		int count = price / 1000;
 		while (count-- > 0) {
-			this.lottos.add(new Lotto(new RandomLottoNumberGenerator()));
+			this.lottos.add(new Lotto(lottoNumbersGenerator));
 		}
 	}
 

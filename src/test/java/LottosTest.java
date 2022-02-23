@@ -1,13 +1,14 @@
 import static org.assertj.core.api.Assertions.assertThat;
 
 import domain.Lottos;
+import domain.RandomLottoNumberGenerator;
 import org.junit.jupiter.api.Test;
 
 public class LottosTest {
 
 	@Test
 	void generateCorrectCountOfLotto() {
-		Lottos lottos = new Lottos(12000);
+		Lottos lottos = new Lottos(12000, new RandomLottoNumberGenerator());
 		assertThat(lottos.getLottosSize()).isEqualTo(12);
 	}
 }
