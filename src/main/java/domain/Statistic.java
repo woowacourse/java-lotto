@@ -16,9 +16,10 @@ public class Statistic {
         this.statistics = statistics;
     }
 
-    public static Statistic initStatistic(){
+    public static Statistic initStatistic() {
         return new Statistic();
     }
+
     public void add(Rank rank) {
         statistics.put(rank, statistics.get(rank) + 1);
     }

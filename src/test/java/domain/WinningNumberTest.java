@@ -22,7 +22,6 @@ public class WinningNumberTest {
     @DisplayName("당첨 번호에 보너스 볼이 있으면 예외 발생")
     public void checkBonusBallInWinningNumbersTest() {
         winningNumber = new WinningNumber(List.of(1, 2, 3, 4, 5, 6));
-
         int bonusBall = 3;
         assertThatThrownBy(
                 () -> winningNumber.checkBonusBall(bonusBall)

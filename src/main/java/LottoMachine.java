@@ -9,7 +9,6 @@ public class LottoMachine {
     private WinningNumber winningNumber;
 
     public void start() {
-
         int lottoCount = inputMoney();
         lottos = Lottos.generateLottos(lottoCount);
         OutputView.printLottos(lottos);
