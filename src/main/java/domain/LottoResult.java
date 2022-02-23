@@ -23,9 +23,16 @@ public enum LottoResult {
     public static LottoResult of(int matchCount, boolean hasBonus) {
         return Arrays.stream(LottoResult.values())
                 .filter(result -> result.hasSameMatchCount(matchCount))
-                .filter(result -> !result.equals(THIRD) || !hasBonus)
+                .filter(result -> filterOnFiveMatchCount(matchCount, hasBonus, result))
                 .findFirst()
                 .orElse(null);
+    }
+
+    private static boolean filterOnFiveMatchCount(int matchCount, boolean hasBonus, LottoResult result) {
+        if (matchCount != 5) {
+            return true;
+        }
+        return result.getHasBonus() == hasBonus;
     }
 
     public int getMatchCount() {
