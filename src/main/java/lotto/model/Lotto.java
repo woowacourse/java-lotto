@@ -15,7 +15,7 @@ public class Lotto {
         return lottoNumbers.size();
     }
 
-    public int match(List<Integer> winningNumbers) {
+    public int match(WinningNumbers winningNumbers) {
         return (int) lottoNumbers.stream()
                 .filter(winningNumbers::contains)
                 .count();
