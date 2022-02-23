@@ -19,4 +19,8 @@ public class WinningLotto {
             throw new IllegalArgumentException(ExceptionMessage.LOTTO_AND_BONUS_BALL_DUPLICATION);
         }
     }
+
+    public List<LottoNumber> getWinningLotto() {
+        return winningLotto.getLotto();
+    }
 }

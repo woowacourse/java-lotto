@@ -58,6 +58,7 @@ class PlayerTest {
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -75,5 +76,22 @@ class PlayerTest {
         int expected = 15;
         assertThat(actual.size()).isEqualTo(expected);
     }
+<<<<<<< HEAD
 >>>>>>> 20a623d (feat: 로또 구매 기능 구현)
+=======
+
+    @Test
+    @DisplayName("Player의 모든 로또에 대해 당첨 번호와 비교한다.")
+    void judgeAll() {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (int i = 1; i <= 6; i++) {
+            lottoNumbers.add(new LottoNumber(i));
+        }
+        WinningLotto winningLotto = new WinningLotto(lottoNumbers, new LottoNumber(7));
+        List<Integer> actual = player.judgeAll(winningLotto);
+        int expected = 15;
+
+        assertThat(actual.size()).isEqualTo(expected);
+    }
+>>>>>>> 6996318 (feat: 로또 판정 로직 및 전체 판정 구현)
 }

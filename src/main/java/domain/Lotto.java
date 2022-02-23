@@ -24,4 +24,15 @@ public class Lotto {
     public List<LottoNumber> getLotto() {
         return lotto;
     }
+
+    public int judge(WinningLotto winningLotto){
+        List<LottoNumber> winningNumbers = winningLotto.getWinningLotto();
+        int hitCount = 0;
+        for(LottoNumber lottoNumber : lotto){
+            if(winningNumbers.contains(lottoNumber)){
+                hitCount++;
+            }
+        }
+        return hitCount;
+    }
 }

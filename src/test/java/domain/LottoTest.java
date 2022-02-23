@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -54,6 +55,9 @@ public class LottoTest {
     @ParameterizedTest
     @ValueSource(ints = {5, 7})
 =======
+=======
+import static org.assertj.core.api.Assertions.assertThat;
+>>>>>>> 6996318 (feat: 로또 판정 로직 및 전체 판정 구현)
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
@@ -96,5 +100,20 @@ public class LottoTest {
 =======
                 .hasMessage(ExceptionMessage.LOTTO_SIZE_IS_NOT_SIX);
 >>>>>>> d722001 (refactor: 예외 메세지 별도 클래스로 분리)
+    }
+
+    @Test
+    @DisplayName("Lotto의 숫자들과 당첨숫자를 비교하여 일치하는 갯수를 반환한다.")
+    void judge() {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (int i = 1; i <= 6; i++) {
+            lottoNumbers.add(new LottoNumber(i));
+        }
+        Lotto lotto = new Lotto(lottoNumbers);
+        WinningLotto winningLotto = new WinningLotto(lottoNumbers, new LottoNumber(7));
+
+        int actual = lotto.judge(winningLotto);
+        int expected = 6;
+        assertThat(actual).isEqualTo(expected);
     }
 }
