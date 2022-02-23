@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class LottoMachine {
 
     public void start() {
@@ -8,5 +10,6 @@ public class LottoMachine {
         Lottos lottos = new Lottos();
         lottos.generateLottos(count);
         OutputView.printLottos(lottos);
+        List<Integer> winningNumber = InputView.askInputWinningNumber();
     }
 }

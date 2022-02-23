@@ -1,5 +1,8 @@
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class InputView {
     public static final String INPUT_MONEY_ONLY_NUMBER_MESSAGE = "[ERROR] 금액은 숫자로만 입력해주세요.";
@@ -23,9 +26,11 @@ public class InputView {
         return Integer.parseInt(input);
     }
 
-    public static String askInputWinningNumber() {
+    public static List<Integer> askInputWinningNumber() {
         System.out.println(INPUT_WINNING_NUMBER_MESSAGE);
-        return scanner.nextLine();
+        String input = scanner.nextLine();
+        String[] numbers = input.split(", ");
+        return Arrays.stream(numbers).map(Integer::parseInt).collect(Collectors.toList());
     }
 
     public static String askInputBonusBall() {
