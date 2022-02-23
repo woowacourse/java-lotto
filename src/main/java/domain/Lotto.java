@@ -25,14 +25,17 @@ public class Lotto {
         return lotto;
     }
 
-    public int judge(WinningLotto winningLotto){
+    public Result judge(WinningLotto winningLotto){
         List<LottoNumber> winningNumbers = winningLotto.getWinningLotto();
         int hitCount = 0;
         for(LottoNumber lottoNumber : lotto){
-            if(winningNumbers.contains(lottoNumber)){
-                hitCount++;
-            }
+            hitCount += lottoNumber.checkHit(winningNumbers);
         }
-        return hitCount;
+        boolean isHitBonusBall = judgeBonusBall(winningLotto.getBonusBall());
+        return new Result(hitCount,isHitBonusBall);
+    }
+
+    private boolean judgeBonusBall(LottoNumber bonusBall){
+        return lotto.contains(bonusBall);
     }
 }

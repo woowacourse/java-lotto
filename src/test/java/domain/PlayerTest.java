@@ -30,7 +30,7 @@ class PlayerTest {
             lottoNumbers.add(new LottoNumber(i));
         }
         WinningLotto winningLotto = new WinningLotto(lottoNumbers, new LottoNumber(7));
-        List<Integer> actual = player.judgeAll(winningLotto);
+        List<Result> actual = player.judgeAll(winningLotto);
         int expected = 15;
 
         assertThat(actual.size()).isEqualTo(expected);

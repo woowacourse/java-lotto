@@ -2,6 +2,7 @@ package domain;
 
 import utils.ExceptionMessage;
 
+import java.util.List;
 import java.util.Objects;
 
 public class LottoNumber {
@@ -24,6 +25,13 @@ public class LottoNumber {
 
     public int number(){
         return this.number;
+    }
+
+    public int checkHit(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.contains(this)) {
+            return 1;
+        }
+        return 0;
     }
 
     @Override

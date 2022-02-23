@@ -1,5 +1,6 @@
 package domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,6 +14,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
+    private List<LottoNumber> lottoNumbers;
+    private Lotto lotto;
+    private List<LottoNumber> winningNumbers;
+
+    @BeforeEach
+    void setUp() {
+        lottoNumbers = new ArrayList<>();
+        for (int i = 1; i <= 6; i++) {
+            lottoNumbers.add(new LottoNumber(i));
+        }
+        lotto = new Lotto(lottoNumbers);
+
+        winningNumbers = new ArrayList<>();
+        for (int i = 2; i <= 7; i++) {
+            winningNumbers.add(new LottoNumber(i));
+        }
+    }
 
     @ParameterizedTest
     @ValueSource(ints = {5,7})
@@ -28,17 +46,20 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("Lotto의 숫자들과 당첨숫자를 비교하여 일치하는 갯수를 반환한다.")
-    void judge() {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (int i = 1; i <= 6; i++) {
-            lottoNumbers.add(new LottoNumber(i));
-        }
-        Lotto lotto = new Lotto(lottoNumbers);
-        WinningLotto winningLotto = new WinningLotto(lottoNumbers, new LottoNumber(7));
+    @DisplayName("Lotto의 숫자들과 당첨숫자를 비교하여 결과를 반환한다.")
+    void judge_보너스볼_불일치() {
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, new LottoNumber(10));
+        Result actual = lotto.judge(winningLotto);
+        Result expected = new Result(5,false);
+        assertThat(actual).isEqualTo(expected);
+    }
 
-        int actual = lotto.judge(winningLotto);
-        int expected = 6;
+    @Test
+    @DisplayName("Lotto의 숫자들과 당첨숫자를 비교하여 결과를 반환한다.")
+    void judge_보너스볼_일치() {
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, new LottoNumber(1));
+        Result actual = lotto.judge(winningLotto);
+        Result expected = new Result(5,true);
         assertThat(actual).isEqualTo(expected);
     }
 }
