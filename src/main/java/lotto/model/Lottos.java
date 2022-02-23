@@ -3,6 +3,7 @@ package lotto.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Lottos {
 
@@ -26,6 +27,10 @@ public class Lottos {
         return lottos.size();
     }
 
+    public Map<Rank, Integer> getRankCount() {
+        return rankCount;
+    }
+
     public void calculateRanks(List<Integer> numbers, int bonusNumber) {
         lottos.forEach(lotto -> lotto.calculateRank(numbers, bonusNumber));
     }
@@ -34,5 +39,17 @@ public class Lottos {
         lottos.forEach(lotto -> {
             rankCount.put(lotto.getRank(), rankCount.get(lotto.getRank()) + 1);
         });
+    }
+
+    public Integer getRankCounts(Rank rank) {
+        return rankCount.get(rank);
+    }
+
+    public double getRevenue() {
+        int sum = 0;
+        for (Rank rank : Rank.values()) {
+            sum += rank.getPrice() * getRankCounts(rank);
+        }
+        return ((double)sum/(lottos.size() * 1000));
     }
 }

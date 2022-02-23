@@ -28,10 +28,9 @@ public class LottoController {
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
         winningLotto.checkRank(lottos);
-        for (Lotto lotto : lottos.getLottos()) {
-            System.out.println(lotto.getRank());
-        }
+
         lottos.countRank();
+        ResultView.printTotalResult(lottos);
     }
 
     public void insertLottoToLottos(int countLotto, Lottos lottos) {
