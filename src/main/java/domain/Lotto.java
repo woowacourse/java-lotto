@@ -35,4 +35,11 @@ public class Lotto {
 	public boolean isContain(Number number) {
 		return lotto.contains(number);
 	}
+
+	public LottoRank confirmWinningResult(Lotto winningNumbers, Number bonusNumber) {
+		int count = (int)lotto.stream()
+			.filter(winningNumbers::isContain)
+			.count();
+		return LottoRank.findRank(count, lotto.contains(bonusNumber));
+	}
 }

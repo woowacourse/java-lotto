@@ -19,7 +19,7 @@ public class LottoFactory {
 			.collect(Collectors.toList()));
 	}
 
-	public List<Lotto> generateLottoByMoney(Money money) {
+	public List<Lotto> generateLottoTicket(Money money) {
 		int count = 1;
 		List<Lotto> lottoTicket = new ArrayList<>();
 		while (money.isPossibleToPurchase(count++ * 1000)) {

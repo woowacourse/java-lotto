@@ -16,6 +16,6 @@ public class LottoFactoryTest {
 		Money money = Money.from(purchaseMoney);
 
 		lottoFactory = new LottoFactory();
-		assertThat(lottoFactory.generateLottoByMoney(money).size()).isEqualTo(Integer.parseInt(purchaseMoney) / 1000);
+		assertThat(lottoFactory.generateLottoTicket(money).size()).isEqualTo(Integer.parseInt(purchaseMoney) / 1000);
 	}
 }
