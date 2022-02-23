@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import utils.LottoNumberGenerator;
 import view.InputView;
+import view.OutputView;
 
 public class MainController {
     public void run() {
@@ -16,7 +17,7 @@ public class MainController {
         List<LottoNumbers> lottoTickets = createLottoTickets(money.toLottoCount());
 
         // print lotto
-        // OutputView.printLottoTickets();
+        OutputView.printLottoTickets(lottoTickets);
 
         // lotto numbers
         // bonus number
@@ -24,10 +25,10 @@ public class MainController {
     }
 
     private List<LottoNumbers> createLottoTickets(int count) {
-        List<LottoNumbers> lottoNumbers = new ArrayList<>();
+        List<LottoNumbers> lottoTickets = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            lottoNumbers.add(new LottoNumbers(LottoNumberGenerator.generate()));
+            lottoTickets.add(new LottoNumbers(LottoNumberGenerator.generate()));
         }
-        return lottoNumbers;
+        return lottoTickets;
     }
 }

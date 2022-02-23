@@ -3,10 +3,17 @@ package view;
 import java.util.Scanner;
 
 public class InputView {
+
+    public static final String NUM_ERROR_MESSAGE = "숫자를 입력해주세요.";
+
     public static int inputMoney() {
         System.out.println("구입금액을 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt();
+        try{
+            return scanner.nextInt();
+        } catch (Exception e){
+            throw new IllegalArgumentException(NUM_ERROR_MESSAGE);
+        }
     }
 
     public static String inputWinLottoNumbers() {
@@ -18,6 +25,10 @@ public class InputView {
     public static int inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt();
+        try{
+            return scanner.nextInt();
+        } catch (Exception e){
+            throw new IllegalArgumentException(NUM_ERROR_MESSAGE);
+        }
     }
 }
