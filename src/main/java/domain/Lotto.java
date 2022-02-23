@@ -1,13 +1,15 @@
 package domain;
 
 public class Lotto {
-    public static final int LOTTO_PRICE = 1000;
+    private static final int LOTTO_PRICE = 1000;
     private final int amount;
+    private final Tickets tickets;
 
     public Lotto(int amount) {
         checkAmountPositive(amount);
         checkAmountDivisible(amount);
         this.amount = amount;
+        this.tickets = Tickets.of(getTicketCount(), new RandomLottoNumbersGenerator());
     }
 
     private void checkAmountPositive(int amount) {
@@ -29,4 +31,5 @@ public class Lotto {
     public int getTicketCount() {
         return amount / 1000;
     }
+
 }
