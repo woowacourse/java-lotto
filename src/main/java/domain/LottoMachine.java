@@ -11,7 +11,7 @@ public class LottoMachine {
 
     private LottoTickets lottoTickets;
 
-    public int purchaseLottoTickets(Money amount, LottoNumberStrategy lottoNumberStrategy) {
+    public List<LottoTicket> purchaseLottoTickets(Money amount, LottoNumberStrategy lottoNumberStrategy) {
         validateInsertAmount(amount);
         int size = amount.getPurchasableNumber(LOTTO_TICKET_PRICE);
 
@@ -22,7 +22,7 @@ public class LottoMachine {
 
         lottoTickets = new LottoTickets(purchasedTickets);
 
-        return size;
+        return purchasedTickets;
     }
 
     private void validateInsertAmount(Money amount) {
