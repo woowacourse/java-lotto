@@ -13,9 +13,17 @@ public class Ticket {
         return lottoNumbers;
     }
 
-    public int getSameLottoNumberCount(Set<LottoNumber> lottoNumbers) {
-        return (int)lottoNumbers.stream()
+    public Rank getRank(Set<LottoNumber> winNumbers, LottoNumber bonusNumber) {
+        int count = (int)winNumbers.stream()
             .filter(this.lottoNumbers::contains)
             .count();
+
+        int bonus = 0;
+        if (count == 5) {
+            if (this.lottoNumbers.contains(bonusNumber)) {
+                bonus++;
+            }
+        }
+        return Rank.value(count, bonus);
     }
 }
