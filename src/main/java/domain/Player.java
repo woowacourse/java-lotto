@@ -29,4 +29,12 @@ public class Player {
     public List<Lotto> getLottos() {
         return lottos;
     }
+
+    public List<Integer> judgeAll(WinningLotto winningLotto){
+        List<Integer> result = new ArrayList<>();
+        for (Lotto lotto : lottos) {
+            result.add(lotto.judge(winningLotto));
+        }
+        return result;
+    }
 }
