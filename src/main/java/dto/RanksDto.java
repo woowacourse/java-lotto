@@ -1,22 +1,21 @@
 package dto;
 
-import domain.Rank;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class RanksDto {
     private final List<RankDto> rankDtos;
+    private double incomeRate;
 
-    public RanksDto(List<RankDto> rankDtos) {
+    public RanksDto(List<RankDto> rankDtos, double incomeRate) {
         this.rankDtos = rankDtos;
+        this.incomeRate = incomeRate;
     }
 
-//    public static RanksDto from(Rank ranks){
-//        List<RankDto> rankDtos = new ArrayList<>();
-//        for (Rank rank : ranks.values()) {
-//            rankDtos.add(RankDto.from(rank));
-//        }
-//        return new RanksDto(rankDtos);
-//    }
+    public List<RankDto> getRankDtos() {
+        return rankDtos;
+    }
+
+    public double getIncomeRate() {
+        return incomeRate;
+    }
 }

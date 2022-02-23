@@ -13,6 +13,10 @@ public class Money {
         this.amount = amount;
     }
 
+    public int getAmount() {
+        return amount;
+    }
+
     public int determineQuantity() {
         return amount / MINIMUM_PURCHASE_AMOUNT;
     }
