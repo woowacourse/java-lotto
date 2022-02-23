@@ -13,7 +13,9 @@ public class LottoController {
         System.out.println("구입금액을 입력해 주세요.");
         LottoTickets lottoTickets = lottoMachine.purchase(scanner.nextLine());
         System.out.println(lottoTickets.totalCount() + "개를 구매했습니다.");
-
         System.out.println(lottoTickets.getTicketsInfo());
+
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+
     }
 }
