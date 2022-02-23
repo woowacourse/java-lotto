@@ -30,7 +30,7 @@ public class Lotto {
         return new Lotto(numbers);
     }
 
-    public int match(WinningNumber winningNumber) {
+    public int getMatchCount(WinningNumber winningNumber) {
         return (int) numbers.stream().mapToInt(number -> number).filter(winningNumber::contains).count();
 
     }

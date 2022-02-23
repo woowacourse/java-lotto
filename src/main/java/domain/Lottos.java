@@ -29,7 +29,7 @@ public class Lottos {
     public Statistic getWinningStatistics(WinningNumber winningNumber, int bonusBall) {
         LinkedHashMap<Rank, Integer> statistics = initStatistics();
         lottos.forEach(lotto -> {
-            int matchCount = lotto.match(winningNumber);
+            int matchCount = lotto.getMatchCount(winningNumber);
             boolean hasBonusBall = lotto.hasBonusBall(bonusBall);
             Rank key = Rank.valueOf(matchCount, hasBonusBall);
             statistics.put(key, statistics.get(key) + 1);

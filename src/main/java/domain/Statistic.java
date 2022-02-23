@@ -11,7 +11,6 @@ public class Statistic {
     }
 
     public double getProfitRate(Money money) {
-
         double totalWinning = statistics.entrySet()
                 .stream()
                 .mapToDouble(rankIntegerEntry -> rankIntegerEntry.getKey().getWinningPrice() * rankIntegerEntry.getValue())

@@ -15,7 +15,7 @@ public class LottoTest {
     public void checkMatchNumber() {
         WinningNumber winningNumber = new WinningNumber(List.of(1, 2, 3, 4, 5, 6));
         Lotto allMatchLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        int count = allMatchLotto.match(winningNumber);
+        int count = allMatchLotto.getMatchCount(winningNumber);
 
         assertThat(count).isEqualTo(6);
     }
