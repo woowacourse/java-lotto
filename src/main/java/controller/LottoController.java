@@ -29,7 +29,7 @@ public class LottoController {
 
     private void createResult(List<LottoTicket> lottoTickets) {
         LottoTicketNumbers winningNumbers = new LottoTicketNumbers(InputView.getWinningNumbers().stream()
-                .map(LottoNumber::create)
+                .map(LottoNumber::getInstance)
                 .collect(Collectors.toList()));
         LottoNumber bonusNumber = LottoNumber.createBonus(InputView.getBonusNumber(), winningNumbers);
 

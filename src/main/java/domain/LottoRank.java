@@ -32,17 +32,17 @@ public enum LottoRank {
                 .orElse(NOTHING);
     }
 
-    public static List<LottoRank> valuesWithPrize() {
-        return Arrays.stream(LottoRank.values())
-                .filter(rank -> rank != NOTHING)
-                .collect(Collectors.toList());
-    }
-
     private static LottoRank checkSecondOrThird(boolean bonus) {
         if (bonus) {
             return LottoRank.SECOND;
         }
         return LottoRank.THIRD;
+    }
+
+    public static List<LottoRank> valuesWithPrize() {
+        return Arrays.stream(LottoRank.values())
+                .filter(rank -> rank != NOTHING)
+                .collect(Collectors.toList());
     }
 
     public int getPrize() {
