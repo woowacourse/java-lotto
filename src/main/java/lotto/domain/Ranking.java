@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public enum Ranking {
     FIRST(2000000000, 6, false),
@@ -24,5 +25,15 @@ public enum Ranking {
                 .filter(ranking -> ranking.count == cnt && ranking.hasBonusNumber == hasBonusNumber)
                 .findAny()
                 .orElseThrow(IllegalArgumentException::new);
+    }
+
+    public static Ranking[] sortByPrize() {
+        Ranking[] arr = Ranking.values();
+        Arrays.sort(arr, Comparator.comparingInt(a -> a.prize));
+        return arr;
+    }
+
+    public long calculate(Integer count) {
+        return (long) prize * count;
     }
 }
