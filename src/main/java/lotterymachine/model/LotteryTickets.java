@@ -1,7 +1,6 @@
 package lotterymachine.model;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,15 +12,18 @@ public class LotteryTickets {
     }
 
     public Map<WinningLottery, Integer> getLotteriesResult(List<Integer> numbers, int bonusNumber) {
-        Map<WinningLottery, Integer> winningLotteries = new HashMap<>();
+        Map<WinningLottery, Integer> lotteriesResult = WinningLottery.getWinningLotteries();
         for (LotteryTicket lotteryTicket : lotteryTickets) {
             int matchingNumbers = lotteryTicket.countMatchingNumbers(numbers);
             boolean containsBonus = lotteryTicket.containsNumber(bonusNumber);
             WinningLottery winningLottery = findWinningLottery(containsBonus, matchingNumbers);
-            int value = winningLotteries.getOrDefault(winningLottery, 0);
-            winningLotteries.put(winningLottery, value + 1);
+            addWinningLottery(lotteriesResult, winningLottery);
         }
-        return winningLotteries;
+        return lotteriesResult;
+    }
+
+    public List<LotteryTicket> getLotteryTickets() {
+        return Collections.unmodifiableList(lotteryTickets);
     }
 
     private WinningLottery findWinningLottery(boolean bonus, int matchingCnt) {
@@ -31,7 +33,10 @@ public class LotteryTickets {
         return WinningLottery.find(matchingCnt);
     }
 
-    public List<LotteryTicket> getLotteryTickets() {
-        return Collections.unmodifiableList(lotteryTickets);
+    private void addWinningLottery(Map<WinningLottery, Integer> lotteriesResult, WinningLottery winningLottery) {
+        if (winningLottery != null) {
+            int value = lotteriesResult.getOrDefault(winningLottery, 0);
+            lotteriesResult.put(winningLottery, value + 1);
+        }
     }
 }

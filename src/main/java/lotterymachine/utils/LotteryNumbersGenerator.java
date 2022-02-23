@@ -8,7 +8,7 @@ import static lotterymachine.utils.LotteryRule.*;
 
 public class LotteryNumbersGenerator {
     public static List<Integer> generate() {
-         return ThreadLocalRandom.current().ints(MINIMUM_NUMBER.getNumber(), MAXIMUM_NUMBER.getNumber())
+         return ThreadLocalRandom.current().ints(MINIMUM.getNumber(), MAXIMUM.getNumber())
                  .distinct().limit(TICKET_SIZE.getNumber()).boxed().collect(Collectors.toList());
     }
 }

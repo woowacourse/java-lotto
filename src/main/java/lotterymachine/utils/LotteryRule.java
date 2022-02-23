@@ -1,8 +1,8 @@
 package lotterymachine.utils;
 
 public enum LotteryRule {
-    MINIMUM_NUMBER(1),
-    MAXIMUM_NUMBER(46),
+    MINIMUM(1),
+    MAXIMUM(45),
     TICKET_SIZE(6);
 
     private final int number;
@@ -12,7 +12,7 @@ public enum LotteryRule {
     }
 
     public static boolean checkRange(int number) {
-        return number < MINIMUM_NUMBER.number || number > MAXIMUM_NUMBER.number;
+        return number >= MINIMUM.number && number <= MAXIMUM.number;
     }
 
     public int getNumber() {

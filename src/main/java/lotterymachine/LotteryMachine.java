@@ -1,5 +1,6 @@
 package lotterymachine;
 
+import lotterymachine.dto.LotteryResultDto;
 import lotterymachine.model.LotteryTicket;
 import lotterymachine.model.LotteryTickets;
 import lotterymachine.utils.LotteryCalculator;
@@ -17,7 +18,10 @@ public class LotteryMachine {
         OutputView.printNumberOfTicket(numberOfTickets);
         LotteryTickets lotteryTickets = new LotteryTickets(createLotteryTickets(amount, numberOfTickets));
         OutputView.printLotteryTickets(lotteryTickets.getLotteryTickets());
-
+        List<Integer> winningNumbers = InputView.getWinningLotteryNumbers();
+        int bonusNumber = InputView.getBonusNumber(winningNumbers);
+        List<LotteryResultDto> lotteryResult = LotteryResultDto.createList(lotteryTickets.getLotteriesResult(winningNumbers, bonusNumber));
+        OutputView.printStatistics(lotteryResult);
     }
 
     private static List<LotteryTicket> createLotteryTickets(int amount, int numberOfTickets) {
