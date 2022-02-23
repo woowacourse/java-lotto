@@ -6,27 +6,23 @@ import java.util.stream.IntStream;
 
 public class Ticket {
 
-    private static final int PICKUP_COUNT = 6;
-
     private final List<LottoNumber> ticket;
 
-    private Ticket(List<LottoNumber> ticket) {
+    public Ticket(List<LottoNumber> ticket) {
         this.ticket = ticket;
     }
 
-    public static Ticket getTicketByAuto() {
-        List<LottoNumber> ticket = IntStream.range(0, PICKUP_COUNT)
-                .mapToObj(LottoNumber.shuffleLottoNumbers()::get)
-                .sorted()
-                .collect(Collectors.toList());
-        return new Ticket(ticket);
-    }
-
-    public int getWinningNumbersMatchCount(WinningNumbers winningNumbers) {
+    private int getWinningNumbersMatchCount(WinningNumbers winningNumbers) {
         return winningNumbers.getMatchCount(ticket);
     }
 
-    public boolean isBonusNumberMatch(BonusNumber bonusNumber) {
+    private boolean isBonusNumberMatch(BonusNumber bonusNumber) {
         return bonusNumber.isMatch(ticket);
+    }
+
+    public Rank getRank(WinningNumbers winningNumbers, BonusNumber bonusNumber) {
+        int winningNumberMatchCount = getWinningNumbersMatchCount(winningNumbers);
+        boolean bonusNumberMatch = isBonusNumberMatch(bonusNumber);
+        return Rank.getRank(winningNumberMatchCount, bonusNumberMatch);
     }
 }
