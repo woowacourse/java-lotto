@@ -1,7 +1,9 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import lotto.domain.generator.LottoNumberGenerator;
 
 public class LottoTickets {
@@ -36,5 +38,16 @@ public class LottoTickets {
         }
 
         return ticketsInfo;
+    }
+
+    public LottoResult determine(WinningNumbers winningNumbers) {
+        Map<Rank, Integer> ranks = new HashMap<>();
+
+        for (LottoTicket lottoTicket : lottoTickets) {
+            Rank rank = winningNumbers.compareLottoTicket(lottoTicket);
+            ranks.put(rank, ranks.getOrDefault(rank, 0) + 1);
+        }
+
+        return new LottoResult(ranks);
     }
 }
