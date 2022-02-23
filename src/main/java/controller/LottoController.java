@@ -2,10 +2,12 @@ package controller;
 
 import java.io.IOException;
 import java.util.List;
+import model.LottoRank;
 import model.LottoTicket;
 import model.LottoTicketFactory;
 import model.Money;
 import model.WinningNumbers;
+import model.WinningStatistics;
 import view.InputView;
 import view.OutputView;
 
@@ -18,6 +20,21 @@ public class LottoController {
         OutputView.printPurchasedTickets(lottoTickets);
 
         WinningNumbers winningNumbers = inputWinningNumbers();
+
+        WinningStatistics winningStatistics = calculateStatistics(lottoTickets, winningNumbers);
+    }
+
+    private WinningStatistics calculateStatistics(List<LottoTicket> lottoTickets, WinningNumbers winningNumbers) {
+        WinningStatistics winningStatistics = new WinningStatistics();
+
+        for (LottoTicket lottoTicket : lottoTickets) {
+            LottoRank lottoRank = LottoRank.getRank(
+                    winningNumbers.countContaining(lottoTicket),
+                    winningNumbers.containBonusBall(lottoTicket)
+            );
+            winningStatistics.put(lottoRank);
+        }
+        return winningStatistics;
     }
 
     private Money inputMoney() {

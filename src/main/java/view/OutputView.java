@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import model.LottoNumber;
 import model.LottoTicket;
+import model.WinningStatistics;
 
 public class OutputView {
 
@@ -23,5 +24,13 @@ public class OutputView {
                 .map(LottoNumber::toString)
                 .collect(Collectors.toUnmodifiableList());
         System.out.printf("[%s]%n", String.join(", ", lottoNumbers));
+    }
+
+    public static void printStatistics(WinningStatistics winningStatistics) {
+        /**
+         * 당첨 통계
+         * ---------
+         */
+        System.out.println("");
     }
 }
