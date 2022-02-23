@@ -11,19 +11,19 @@ public enum Rank {
     RANK_5(3, false, 5000),
     RANK_OUT(0, false, 0);
 
-    private final int winningNumbersMatchCount;
+    private final int winningLottoMatchCount;
     private final boolean bonusNumberMatch;
     private final long prize;
 
-    Rank(int winningNumbersMatchCount, boolean bonusNumberMatch, long prize) {
-        this.winningNumbersMatchCount = winningNumbersMatchCount;
+    Rank(int winningLottoMatchCount, boolean bonusNumberMatch, long prize) {
+        this.winningLottoMatchCount = winningLottoMatchCount;
         this.bonusNumberMatch = bonusNumberMatch;
         this.prize = prize;
     }
 
     public static Rank getRank(int winningNumbersMatchCount, boolean bonusNumberMatch) {
         return Arrays.stream(Rank.values())
-                .filter(rank -> rank.winningNumbersMatchCount == winningNumbersMatchCount)
+                .filter(rank -> rank.winningLottoMatchCount == winningNumbersMatchCount)
                 .filter(rank -> rank.bonusNumberMatch == bonusNumberMatch)
                 .findFirst()
                 .orElse(RANK_OUT);
