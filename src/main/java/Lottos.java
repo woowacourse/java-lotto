@@ -37,4 +37,8 @@ public class Lottos {
         }
         return result;
     }
+
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
 }

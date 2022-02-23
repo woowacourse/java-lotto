@@ -5,4 +5,11 @@ public class OutputView {
     public static void printCountOfLotto(int count) {
         System.out.printf(COUNT_MESSAGE, count);
     }
+
+    public static void printLottos(Lottos lottos) {
+        for (Lotto lotto : lottos.getLottos()) {
+            System.out.println(lotto);
+        }
+        System.out.println();
+    }
 }
