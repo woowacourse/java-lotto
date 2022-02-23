@@ -1,5 +1,6 @@
 package domain;
 
+import static constant.LottoConstants.LOTTO_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
@@ -66,7 +67,7 @@ public class LottoGameTest {
 
         float actual = game.calculateProfitRatio();
 
-        assertThat(actual).isEqualTo((float) LottoResult.FIFTH.getPrize() / 1000);
+        assertThat(actual).isEqualTo((float) LottoResult.FIFTH.getPrize() / LOTTO_PRICE);
     }
 
     private List<Lotto> getLottosExample(Lotto... lottos) {

@@ -1,5 +1,7 @@
 package domain;
 
+import static constant.LottoConstants.LOTTO_NUMBERS_SIZE;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -24,7 +26,7 @@ public class Lotto {
     }
 
     public Lotto(List<LottoNumber> lottoNums) {
-        if (lottoNums.size() != 6) {
+        if (lottoNums.size() != LOTTO_NUMBERS_SIZE) {
             throw new RuntimeException();
         }
         Collections.sort(lottoNums);

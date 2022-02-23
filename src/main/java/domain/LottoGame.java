@@ -1,5 +1,7 @@
 package domain;
 
+import static constant.LottoConstants.LOTTO_PRICE;
+
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
@@ -50,6 +52,6 @@ public class LottoGame {
     }
 
     private int getLottoPrice() {
-        return lottos.getLottos().size() * 1000;
+        return lottos.getLottos().size() * LOTTO_PRICE;
     }
 }

@@ -1,5 +1,8 @@
 package controller;
 
+import static constant.ExceptionMessages.INVALID_WINNING_NUMBERS_SIZE_EXCEPTION_MESSAGE;
+import static constant.LottoConstants.LOTTO_PRICE;
+import static constant.LottoConstants.WINNING_NUMBERS_SIZE;
 import static validator.LottoNumberValidators.validateNoDuplicateInList;
 import static validator.LottoNumberValidators.validateNoDuplicates;
 
@@ -26,7 +29,7 @@ public class LottoController {
 
     private Lottos initCustomerLottos() {
         int money = InputView.requestUserMoney();
-        int lottosBought = money / 1000;
+        int lottosBought = money / LOTTO_PRICE;
         Lottos lottos = Lottos.of(lottosBought);
         OutputView.printPurchaseInfo(lottos.getLottos());
         return lottos;
@@ -44,8 +47,8 @@ public class LottoController {
                 .map(LottoNumberValidators::validateAndParseNumber)
                 .map(LottoNumber::of)
                 .collect(Collectors.toList());
-        if (winningNumbers.size() != 6) {
-            throw new IllegalArgumentException("6개의 당첨 번호를 입력해야 합니다.");
+        if (winningNumbers.size() != WINNING_NUMBERS_SIZE) {
+            throw new IllegalArgumentException(INVALID_WINNING_NUMBERS_SIZE_EXCEPTION_MESSAGE);
         }
         validateNoDuplicates(winningNumbers.stream().map(LottoNumber::getNumber).collect(Collectors.toList()));
 
