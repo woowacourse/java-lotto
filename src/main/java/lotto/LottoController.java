@@ -6,19 +6,37 @@ public class LottoController {
 
     public void run() {
         int money = InputView.inputMoney();
-        Store store = new Store(money, new LottoGenerator());
-        Lottos lottos = new Lottos(store.buyLottos());
 
-        // OutputView.printAmountOfLottos(lottos.amount());
-        List<Number> winnerNumbers = InputView.inputNumbers();
-        Number bonusNumber = InputView.inputNumber();
+        Lottos lottos = new Lottos(buyLottos(money));
+        OutputView.printAmountOfLottos(lottos.amount());
 
-        WinnerLotto winnerLotto = new WinnerLotto(new Lotto(winnerNumbers), bonusNumber);
-        List<Rank> ranks = lottos.matchRanks(winnerLotto);
+        List<Rank> ranks = lottos.matchRanks(createWinnerLotto(winnerNumbers(), bonusNumber()));
         OutputView.printRanks(ranks);
 
-        Money reward = Rank.calculateReward(ranks);
-        Rate rate = reward.divide(new Money(money));
+        Rate rate = calculateRate(money, ranks);
         OutputView.printRate(rate);
     }
+
+    private List<Lotto> buyLottos(int money) {
+        Store store = new Store(money, new LottoGenerator());
+        return store.buyLottos();
+    }
+
+    private WinnerLotto createWinnerLotto(List<Number> winnerNumbers, Number bonusNumber) {
+        return new WinnerLotto(new Lotto(winnerNumbers), bonusNumber);
+    }
+
+    private List<Number> winnerNumbers() {
+        return InputView.inputNumbers();
+    }
+
+    private Number bonusNumber() {
+        return InputView.inputNumber();
+    }
+
+    private Rate calculateRate(int money, List<Rank> ranks) {
+        Money reward = Rank.calculateReward(ranks);
+        return reward.divide(new Money(money));
+    }
+
 }

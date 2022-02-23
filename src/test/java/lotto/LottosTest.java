@@ -47,6 +47,7 @@ public class LottosTest {
     @DisplayName("로또의 개수를 확인한다.")
     void checkAmount() {
         Lottos lottos = new Lottos(List.of(new Lotto(givenNumbers(1, 2, 3, 4, 5, 6))));
+
         assertThat(lottos.amount()).isEqualTo(1);
     }
 
