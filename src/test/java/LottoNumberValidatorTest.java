@@ -1,0 +1,33 @@
+import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
+public class LottoNumberValidatorTest {
+    private static LottoNumberValidator lottoNumberValidator;
+
+    @BeforeEach
+    void setUp() {
+        lottoNumberValidator = new LottoNumberValidator();
+    }
+
+    @ParameterizedTest
+    @DisplayName("로또 번호가 1 ~ 45 사이에 있는 경우 테스트")
+    @ValueSource(ints = {1, 45})
+    void checkValidLottoNumberRangeTest(int lottoNumber) {
+        assertThatCode(() -> lottoNumberValidator.validate(lottoNumber))
+                .doesNotThrowAnyException();
+    }
+
+    @ParameterizedTest
+    @DisplayName("로또 번호가 1 ~ 45 사이에 있지 않은 경우 테스트")
+    @ValueSource(ints = {0, 46})
+    void checkInvalidLottoNumberRangeTest(int invalidLottoNumber) {
+        assertThatThrownBy(() -> lottoNumberValidator.validate(invalidLottoNumber))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("당첨 번호는 1 ~ 45사이의 숫자만 가능합니다.");
+    }
+}
