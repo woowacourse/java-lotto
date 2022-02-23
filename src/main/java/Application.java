@@ -1,5 +1,4 @@
 import controller.LottoController;
-import domain.LottoMachine;
 
 public class Application {
 	public static void main(String[] args) {

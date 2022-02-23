@@ -26,11 +26,11 @@ public class OutputView {
 			.collect(Collectors.joining(", ")));
 	}
 
-	public static void printRankCounts(Map<Rank, Long> ranks) {
+	public static void printRankCounts(Map<Rank, Integer> ranks) {
 		ranks.forEach(OutputView::printRankCount);
 	}
 
-	private static void printRankCount(Rank rank, Long count) {
+	private static void printRankCount(Rank rank, Integer count) {
 		String format = "%d개 일치 (%d)- %d개";
 		System.out.println(String.format(format, rank.getMatch(), rank.getMoney(), count));
 	}
@@ -40,4 +40,3 @@ public class OutputView {
 		System.out.println(String.format(format, profitRate));
 	}
 }
-

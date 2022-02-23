@@ -9,11 +9,6 @@ public class Payment {
 		this.payment = toInt(payment);
 	}
 
-	//Todo: 팩토리 메서드 공부 한 후, 적용에 대해 의견 나누기
-	// public static Payment create(String payment) {
-	// 	return new Payment(Integer.parseInt(payment));
-	// }
-
 	private int toInt(String payment) {
 		int changeInt = Integer.parseInt(payment);
 		checkDivideByLottoPrice(changeInt);

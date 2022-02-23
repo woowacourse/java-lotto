@@ -17,7 +17,7 @@ public class LottoResultTest {
 		List<Rank> lottos = Arrays.asList(Rank.values());
 		//when
 		LottoResult lottoResult = new LottoResult(lottos);
-		Map<Rank, Long> rankCounts = lottoResult.countRank();
+		Map<Rank, Integer> rankCounts = lottoResult.countRank();
 
 		assertThat(rankCounts.get(rank)).isEqualTo(1L);
 	}
