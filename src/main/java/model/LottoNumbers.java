@@ -3,11 +3,12 @@ package model;
 import exception.DuplicatedLottoNumbersException;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
-    private final List<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
     public LottoNumbers(List<Integer> lottoNumbers) {
         if (hasDuplicatedNumber(lottoNumbers)) {
@@ -15,7 +16,7 @@ public class LottoNumbers {
         }
         this.lottoNumbers = lottoNumbers.stream()
                 .map(LottoNumber::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     private boolean hasDuplicatedNumber(List<Integer> numbers) {

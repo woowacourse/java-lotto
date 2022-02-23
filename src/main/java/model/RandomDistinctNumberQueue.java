@@ -26,14 +26,6 @@ public class RandomDistinctNumberQueue implements NumberQueue {
         return list;
     }
 
-    public boolean hasNext() {
-        return false;
-    }
-
-    public int get() {
-        return 1;
-    }
-
     @Override
     public Set<Integer> get(int quantity) {
         shuffle(numberPool);

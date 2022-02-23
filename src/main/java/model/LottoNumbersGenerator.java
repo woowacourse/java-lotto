@@ -1,7 +1,9 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 public class LottoNumbersGenerator {
     private final NumberQueue numberQueue;
@@ -19,11 +21,13 @@ public class LottoNumbersGenerator {
     }
 
     private LottoNumbers createLottoNumbers() {
-        return LottoNumbers.withSixNumbers(nextNumber(), nextNumber(), nextNumber(),
-                nextNumber(), nextNumber(), nextNumber());
+        Set<Integer> lottoNumbers = nextSixNumbers();
+        Iterator<Integer> iterator = lottoNumbers.iterator();
+        return LottoNumbers.withSixNumbers(iterator.next(), iterator.next(), iterator.next(),
+                iterator.next(), iterator.next(), iterator.next());
     }
 
-    private int nextNumber() {
-        return numberQueue.get();
+    private Set<Integer> nextSixNumbers() {
+        return numberQueue.get(6);
     }
 }
