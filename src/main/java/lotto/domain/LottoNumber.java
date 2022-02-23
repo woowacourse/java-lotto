@@ -74,4 +74,9 @@ public enum LottoNumber {
     private static boolean isCorrectRange(int input) {
         return input >= MINIMUM_RANGE && input <= MAXIMUM_RANGE;
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(number);
+    }
 }

@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import java.util.Scanner;
+import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.exception.MoneyException;
 import lotto.view.InputView;
@@ -10,6 +11,9 @@ public class Controller {
 
     public void run(Scanner scanner) {
         Money money = getMoney(scanner);
+        Lottos lottos = Lottos.buyLottosByAuto(money);
+        OutputView.printTotalLottoCount(lottos.getTotalLottoCount());
+        OutputView.printLottos(lottos);
     }
 
     private Money getMoney(Scanner scanner) {

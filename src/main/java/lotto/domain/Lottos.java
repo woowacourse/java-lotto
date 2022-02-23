@@ -15,7 +15,7 @@ public class Lottos {
     }
 
     public static Lottos buyLottosByAuto(Money money) {
-        int ticketCount = getTotalLottoCount(money);
+        int ticketCount = calculateTotalLottoCount(money);
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < ticketCount; i++) {
             lottos.add(Lotto.generateLottoByAuto());
@@ -23,11 +23,15 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    private static int getTotalLottoCount(Money money) {
+    private static int calculateTotalLottoCount(Money money) {
         return money.getMoney() / LOTTO_TICKET_PRICE;
     }
 
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
+    }
+
+    public int getTotalLottoCount() {
+        return lottos.size();
     }
 }
