@@ -14,14 +14,20 @@ public class LottoTicketFactory {
     private final List<LottoNumber> availableLottoNumbers;
 
     private LottoTicketFactory() {
-        availableLottoNumbers = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
-            availableLottoNumbers.add(new LottoNumber(String.valueOf(i)));
-        }
+        availableLottoNumbers = createLottoNumbers();
     }
 
     public static LottoTicketFactory getInstance() {
         return lottoTicketFactory;
+    }
+
+    private List<LottoNumber> createLottoNumbers() {
+        final List<LottoNumber> availableLottoNumbers;
+        availableLottoNumbers = new ArrayList<>();
+        for (int i = 1; i <= 45; i++) {
+            availableLottoNumbers.add(new LottoNumber(String.valueOf(i)));
+        }
+        return availableLottoNumbers;
     }
 
     public List<LottoTicket> createTickets(int money) {
