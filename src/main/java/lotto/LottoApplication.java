@@ -1,6 +1,6 @@
 package lotto;
 
-import static lotto.view.ErrorView.*;
+import static lotto.view.ErrorView.printErrorMessage;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,7 +11,6 @@ import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.RandomLottoMachine;
 import lotto.domain.WinLotto;
-import lotto.view.ErrorView;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
