@@ -5,14 +5,15 @@ import java.util.List;
 public class Lotto {
 
     private List<Integer> numbers;
+    private Rank rank;
 
     public Lotto(List<Integer> numbers) {
         this.numbers = numbers;
     }
 
-    public int countMatchingNumber(Lotto lotto) {
+    public int countMatchingNumber(List<Integer> numbers) {
         int count =  0;
-        for (int number : lotto.numbers) {
+        for (int number : numbers) {
             count += containNumber(number);
         }
         return count;
