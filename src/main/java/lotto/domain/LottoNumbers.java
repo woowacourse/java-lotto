@@ -1,19 +1,37 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
     public static final String DELIMITER = ",";
     public static final String BLANK = " ";
-    private final List<LottoNumber> lottoNumbers;
+    private static final List<LottoNumber> candidateLottoNumbers = new ArrayList<>();
 
+    static {
+        for (int i = 0; i < 45; i++) {
+            candidateLottoNumbers.add(new LottoNumber(Integer.toString(i + 1)));
+        }
+    }
+
+    private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers(String input) {
         String[] stringArr = reduceBlank(input).split(DELIMITER);
         validateDuplicate(stringArr);
         this.lottoNumbers = convertIntArrToIntegerList(stringArr);
+    }
+
+    public LottoNumbers() {
+        this.lottoNumbers = generateRandomLottoNumbers();
+    }
+
+    private List<LottoNumber> generateRandomLottoNumbers() {
+        Collections.shuffle(candidateLottoNumbers);
+        return candidateLottoNumbers.subList(0, 6);
     }
 
     private String reduceBlank(String input) {
