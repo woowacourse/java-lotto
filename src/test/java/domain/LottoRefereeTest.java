@@ -68,7 +68,7 @@ public class LottoRefereeTest {
 
     @ParameterizedTest(name = PARAMETERIZED_TEST_DISPLAY_FORMAT)
     @ValueSource(strings = {"11,12,13,14,15,16", "1,11,12,13,14,15", "1,2,11,12,13,14"})
-    void getLottoResult_noneOnLessThanThreeMatchingNumbers(String value) {
+    void getLottoResult_nullOnLessThanThreeMatchingNumbers(String value) {
         int[] lottoNumbers = Arrays.stream(value.split(","))
                 .map(Integer::parseInt)
                 .mapToInt(i->i)
@@ -76,7 +76,7 @@ public class LottoRefereeTest {
 
         Lotto lotto = createNewLotto(lottoNumbers);
 
-        assertThat(referee.getLottoResult(lotto)).isEqualTo(LottoResult.NONE);
+        assertThat(referee.getLottoResult(lotto)).isEqualTo(null);
     }
 
     private Lotto createNewLotto(int... value) {

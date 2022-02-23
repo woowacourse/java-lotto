@@ -57,6 +57,6 @@ class LottoResultTest {
     void of_noMatchNumbers(int matchCount, boolean hasBonus) {
         LottoResult actual = LottoResult.of(matchCount, hasBonus);
 
-        assertThat(actual).isEqualTo(LottoResult.NONE);
+        assertThat(actual).isEqualTo(null);
     }
 }

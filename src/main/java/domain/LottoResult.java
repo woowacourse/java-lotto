@@ -3,12 +3,12 @@ package domain;
 import java.util.Arrays;
 
 public enum LottoResult {
-    FIRST(6, 2000000000),
-    SECOND(5, 30000000),
-    THIRD(5, 1500000),
-    FOURTH(4, 50000),
+
     FIFTH(3, 5000),
-    NONE(0, 0);
+    FOURTH(4, 50000),
+    THIRD(5, 1500000),
+    SECOND(5, 30000000),
+    FIRST(6, 2000000000);
 
     private final int matchCount;
     private final int prize;
@@ -21,9 +21,13 @@ public enum LottoResult {
     public static LottoResult of(int matchCount, boolean hasBonus) {
         return Arrays.stream(LottoResult.values())
                 .filter(result -> result.hasSameMatchCount(matchCount))
-                .filter(result -> !result.equals(SECOND) || hasBonus)
+                .filter(result -> !result.equals(THIRD) || !hasBonus)
                 .findFirst()
-                .orElse(NONE);
+                .orElse(null);
+    }
+
+    public int getMatchCount() {
+        return this.matchCount;
     }
 
     public int getPrize() {

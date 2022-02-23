@@ -17,9 +17,10 @@ public class LottoGame {
         this.referee = referee;
     }
 
-    public  Map<LottoResult, Integer> getResultStatistics() {
+    public Map<LottoResult, Integer> getResultStatistics() {
         for (Lotto lotto : lottos.getLottos()) {
             LottoResult result = referee.getLottoResult(lotto);
+            if (result == null) continue;
             resultsStatistics.put(result, resultsStatistics.get(result) + 1);
         }
 
