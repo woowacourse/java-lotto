@@ -1,5 +1,7 @@
 package view;
 
+import static utils.Messages.*;
+
 import domain.LottoNumber;
 import domain.LottoNumbers;
 import domain.Rank;
@@ -8,17 +10,11 @@ import java.util.List;
 
 public class OutputView {
 
-    public static final String BUY_MESSAGE = "개를 구매했습니다.";
     public static final String LOTTO_PREFIX = "[";
     public static final String LOTTO_ENDFIX = "]";
     public static final String SEPARATOR = ", ";
     public static final int DELETE_IDX = 2;
-    public static final String RESULT_START_MESSAGE = "당첨 통계" + System.lineSeparator() + "---------";
-    public static final String RESULT_RANK_MESSAGE = "%d개 일치%s(%d원)- %d개" + System.lineSeparator();
-    public static final String SAME_BONUS_MESSAGE = ", 보너스 볼 일치";
-    public static final String PROFIT_MESSAGE =
-            "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해%s라는 의미임)" + System.lineSeparator();
-    public static final String NO_MESSAGE = " 아니";
+
 
     public static void printLottoTickets(List<LottoNumbers> lottoTickets) {
         System.out.println(lottoTickets.size()+ BUY_MESSAGE);
