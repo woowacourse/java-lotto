@@ -13,7 +13,7 @@ public class InputView {
         scanner.close();
     }
 
-    public String getMoneyInput(){
+    public String getInput(){
         return scanner.nextLine();
     }
 }
