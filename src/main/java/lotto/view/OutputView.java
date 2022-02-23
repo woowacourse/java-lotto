@@ -4,9 +4,7 @@ import lotto.domain.LottoNumber;
 import lotto.domain.Rank;
 import lotto.domain.Result;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class OutputView {
@@ -31,29 +29,41 @@ public class OutputView {
     }
 
     public static void printResult(Result result) {
+        printResultTitle();
+        printRankCounter(result);
+        printProfitRatio(result);
+    }
+
+    private static void printResultTitle() {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
-
-        System.out.println(makeResultRankCounterString(result));
-        System.out.println("총 수익률은 " + result.getProfitRatio() + "입니다.");
     }
 
-    private static String makeResultRankCounterString(Result result) {
+    private static void printRankCounter(Result result) {
         Map<Rank, Integer> rankCounter = result.getRankCounter();
+
+        ArrayList<Rank> ranks = new ArrayList<>(rankCounter.keySet());
+        ranks.sort(Comparator.comparing(Rank::getMatched));
+
+        for (Rank rank : ranks) {
+            printEachRank(rank, rankCounter);
+        }
+    }
+
+    private static void printEachRank(Rank rank, Map<Rank, Integer> rankCounter) {
         StringBuilder stringBuilder = new StringBuilder();
 
-        for (Rank rank : rankCounter.keySet()) {
-            addResultString(rank, rankCounter, stringBuilder);
-        }
-        return stringBuilder.toString();
-    }
-
-    private static void addResultString(Rank rank, Map<Rank, Integer> rankCounter, StringBuilder stringBuilder) {
         stringBuilder.append(rank.getMatched() + "개 일치");
         if (rank == Rank.SECOND) {
             stringBuilder.append(", 보너스 볼 일치");
         }
-        stringBuilder.append(" (" + rank.getPrize() + "원) - " + rankCounter.get(rank) + "개\n");
+        stringBuilder.append(" (" + rank.getPrize() + "원) - " + rankCounter.get(rank) + "개");
+
+        System.out.println(stringBuilder);
+    }
+
+    private static void printProfitRatio(Result result) {
+        System.out.println("총 수익률은 " + result.getProfitRatio() + "입니다.");
     }
 }
