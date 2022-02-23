@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
+    private static final int FAILING_CRITERIA = 3;
+
     private List<LottoNumber> lottoNumbers;
 
     public Lotto(List<Integer> numbers) {
@@ -23,7 +25,7 @@ public class Lotto {
         if (checkSecond(matched, hasBonus)) {
             return WinnerPrice.SECOND;
         }
-        if (matched < 3) {
+        if (matched < FAILING_CRITERIA) {
             return WinnerPrice.FAIL;
         }
         return WinnerPrice.getWinnerPriceByMatched(matched);
@@ -41,9 +43,7 @@ public class Lotto {
     }
 
     private boolean checkSecond(int matched, boolean hasBonus) {
-        return matched == 5 && hasBonus;
+        return (matched == WinnerPrice.THIRD.getMatched()) && hasBonus;
     }
-
-
 
 }

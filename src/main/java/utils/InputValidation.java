@@ -7,6 +7,11 @@ import java.util.stream.Collectors;
 
 public class InputValidation {
 
+    private static final int LOTTO_MINIMUN_NUMBER = 1;
+    private static final int LOTTO_MAXIMUN_NUMBER = 45;
+    private static final int LOTTO_SIZE = 6;
+    private static final int LOTTO_PRICE = 1000;
+    private static final String LOTTO_NUMBER_DELIMITER = ", ";
     private static final String ERROR_PRICE_NON_INTEGER = "가격은 정수만 가능합니다.";
     private static final String ERROR_NEGATIVE_INTEGER = "가격은 1000원 이상만 가능합니다.";
     private static final String ERROR_NUM_OF_BALL = "로또 번호는 6개의 번호를 입력해줘야 합니다.";
@@ -22,7 +27,7 @@ public class InputValidation {
     }
 
     public static List<Integer> validateWinningNumber(String inputNumbers) {
-        List<String> splitedNumbers = Arrays.asList(inputNumbers.split(", "));
+        List<String> splitedNumbers = Arrays.asList(inputNumbers.split(LOTTO_NUMBER_DELIMITER));
         checkNumOfNumbers(splitedNumbers);
 
         List<Integer> numbers = checkNonIntegers(splitedNumbers);
@@ -41,13 +46,13 @@ public class InputValidation {
     }
 
     private static void checkUnderMinimumPrice(int price) {
-        if (price < 1000) {
+        if (price < LOTTO_PRICE) {
             throw new IllegalArgumentException(ERROR_NEGATIVE_INTEGER);
         }
     }
 
     private static void checkNumOfNumbers(List<String> numbers) {
-        if (numbers.size() != 6) {
+        if (numbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(ERROR_NUM_OF_BALL);
         }
     }
@@ -64,7 +69,7 @@ public class InputValidation {
     }
 
     private static void checkNumberRange(int number) {
-        if (!(number >= 1 && number <= 45)) {
+        if (!(number >= LOTTO_MINIMUN_NUMBER && number <= LOTTO_MAXIMUN_NUMBER)) {
             throw new IllegalArgumentException(ERROR_NUMBER_OUT_RANGE);
         }
     }
@@ -73,7 +78,7 @@ public class InputValidation {
         Set<Integer> uniqueNumber = numbers.stream()
                 .collect(Collectors.toSet());
 
-        if (uniqueNumber.size() != 6) {
+        if (uniqueNumber.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(ERROR_DUPLICATE_NUMBER);
         }
     }
@@ -84,4 +89,5 @@ public class InputValidation {
 
         return bonusNumber;
     }
+
 }

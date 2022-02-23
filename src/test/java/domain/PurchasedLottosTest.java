@@ -1,6 +1,8 @@
 package domain;
 
+import domain.strategy.CustomPurchaseStrategy;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -30,6 +32,7 @@ public class PurchasedLottosTest {
     }
 
     @Test
+    @DisplayName("옳바른 상금이 계산된다.")
     void lottos_makeRightTotalPrize() {
         PrizeResult finalResult = lottos.calculateWinning(winningLotto);
 
@@ -37,6 +40,7 @@ public class PurchasedLottosTest {
     }
 
     @Test
+    @DisplayName("옳바른 수익률이 계산된다.")
     void lottos_calulateEarningRate() {
         lottos.calculateWinning(winningLotto);
 

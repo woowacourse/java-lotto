@@ -41,4 +41,5 @@ public enum WinnerPrice {
     public int getMatched() {
         return matched;
     }
+
 }

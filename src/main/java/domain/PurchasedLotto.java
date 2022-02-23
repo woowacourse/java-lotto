@@ -8,6 +8,8 @@ import java.util.List;
 
 public class PurchasedLotto {
 
+    private static final int LOTTO_PRICE = 1000;
+
     private List<Lotto> lottos = new ArrayList<>();
     private PrizeResult finalResult = new PrizeResult();
     private int inputMoney;
@@ -18,7 +20,7 @@ public class PurchasedLotto {
     }
 
     private void purchaseMaximunLottos() {
-        for (int i = 0; i < inputMoney/1000; i++) {
+        for (int i = 0; i < inputMoney / LOTTO_PRICE; i++) {
             purchase(new RandomPurchaseStrategy());
         }
     }
@@ -52,7 +54,4 @@ public class PurchasedLotto {
         return finalResult;
     }
 
-    public int getInputMoney() {
-        return inputMoney;
-    }
 }
