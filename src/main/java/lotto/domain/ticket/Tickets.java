@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import lotto.domain.ball.Ball;
-import lotto.domain.ball.Balls;
 import lotto.domain.rank.Rank;
 import lotto.domain.ticket.generator.TicketGenerator;
 
@@ -23,12 +21,14 @@ public class Tickets {
 	private List<Ticket> generateTickets(final int count) {
 		final List<Ticket> tickets = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
-			tickets.add(new Ticket(ticketGenerator));
+			final List<Integer> numbers = ticketGenerator.generate();
+			final Ticket ticket = new Ticket(numbers);
+			tickets.add(ticket);
 		}
 		return tickets;
 	}
 
-	public List<Rank> getRanks(final Balls answer, final Ball bonusBall) {
+	public List<Rank> getRanks(final Ticket answer, final Ball bonusBall) {
 		return tickets.stream()
 			.map(ticket -> ticket.getRank(answer, bonusBall))
 			.filter(Objects::nonNull)

@@ -1,4 +1,4 @@
-package lotto.domain.ticket;
+package lotto.domain.ticket.generator;
 
 import static org.assertj.core.api.Assertions.*;
 

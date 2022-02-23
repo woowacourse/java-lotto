@@ -10,9 +10,8 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import lotto.domain.ball.Ball;
-import lotto.domain.ball.Balls;
 import lotto.domain.rank.Rank;
+import lotto.domain.ticket.generator.CustomTicketGenerator;
 import lotto.domain.ticket.generator.RandomTicketGenerator;
 
 class TicketsTest {
@@ -37,7 +36,7 @@ class TicketsTest {
 		final Tickets tickets = new Tickets(3, customTicketGenerator);
 
 		final List<Integer> answerNumbers = Arrays.asList(1, 2, 3, 8, 9, 10);
-		final Balls answerBalls = new Balls(answerNumbers);
+		final Ticket answerBalls = new Ticket(answerNumbers);
 		final Ball bonusBall = new Ball(45);
 
 		final List<Rank> actual = tickets.getRanks(answerBalls, bonusBall);

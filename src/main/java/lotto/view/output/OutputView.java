@@ -35,7 +35,7 @@ public class OutputView {
 	}
 
 	private static String makeTicketFormat(final Ticket ticket) {
-		final List<String> ticketBalls = ticket.getBallNumbers()
+		final List<String> ticketBalls = ticket.getBalls()
 			.stream()
 			.map(String::valueOf)
 			.collect(Collectors.toUnmodifiableList());

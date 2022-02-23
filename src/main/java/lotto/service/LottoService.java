@@ -5,10 +5,10 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import lotto.domain.ball.Ball;
-import lotto.domain.ball.Balls;
 import lotto.domain.credit.Credit;
 import lotto.domain.rank.Rank;
+import lotto.domain.ticket.Ball;
+import lotto.domain.ticket.Ticket;
 import lotto.domain.ticket.Tickets;
 import lotto.domain.ticket.generator.RandomTicketGenerator;
 import lotto.dto.AnalysisDto;
@@ -32,7 +32,7 @@ public class LottoService {
 	}
 
 	public AnalysisDto generateAnalysis(final List<Integer> answerNumbers, final int bonusBall) {
-		final List<Rank> ranks = tickets.getRanks(new Balls(answerNumbers), new Ball(bonusBall));
+		final List<Rank> ranks = tickets.getRanks(new Ticket(answerNumbers), new Ball(bonusBall));
 		final Map<Rank, Integer> rankCounts = getRankCount(ranks);
 		final double profitRate = getProfitRate(credit.getMoney(), rankCounts);
 

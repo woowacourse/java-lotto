@@ -1,11 +1,9 @@
-package lotto.domain.ticket;
+package lotto.domain.ticket.generator;
 
 import java.util.Iterator;
 import java.util.List;
 
-import lotto.domain.ticket.generator.TicketGenerator;
-
-class CustomTicketGenerator implements TicketGenerator {
+public class CustomTicketGenerator implements TicketGenerator {
 
 	private Iterator<List<Integer>> numbers;
 

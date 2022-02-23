@@ -1,8 +1,8 @@
-package lotto.domain.ball;
+package lotto.domain.ticket;
 
 import java.util.Objects;
 
-import lotto.domain.ball.validator.BallValidator;
+import lotto.domain.ticket.validator.BallValidator;
 
 public class Ball {
 

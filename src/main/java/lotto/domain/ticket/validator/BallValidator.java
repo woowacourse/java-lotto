@@ -1,4 +1,4 @@
-package lotto.domain.ball.validator;
+package lotto.domain.ticket.validator;
 
 public class BallValidator {
 
