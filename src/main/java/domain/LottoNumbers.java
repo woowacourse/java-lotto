@@ -3,13 +3,15 @@ package domain;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import utils.Validator;
 
 public class LottoNumbers {
     private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers(final String inputNumbers) {
+        Validator.checkNullOrEmpty(inputNumbers);
         List<String> splitNumbers = splitInput(inputNumbers);
-        validateInput(splitNumbers);
+        validateDuplication(splitNumbers);
         this.lottoNumbers = splitNumbers.stream()
                 .map(number -> new LottoNumber(number))
                 .collect(Collectors.toList());
@@ -25,7 +27,7 @@ public class LottoNumbers {
                 .collect(Collectors.toList());
     }
 
-    private void validateInput(final List<String> numbers) {
+    private void validateDuplication(final List<String> numbers) {
         long distinctCount = numbers.stream().distinct().count();
         if (distinctCount != numbers.size()) {
             throw new IllegalArgumentException("중복값을 입력할 수 없습니다.");
@@ -53,5 +55,9 @@ public class LottoNumbers {
 
     public boolean compareBonus(final LottoNumber bonusNumber) {
         return this.lottoNumbers.contains(bonusNumber);
+    }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return this.lottoNumbers;
     }
 }

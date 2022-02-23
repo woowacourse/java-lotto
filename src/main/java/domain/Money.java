@@ -1,23 +1,20 @@
 package domain;
 
+import utils.Validator;
+
 public class Money {
 
     private int money;
 
     public Money(final String input) {
-        validateInput(input);
+        validateInputMoney(input);
         this.money = Integer.parseInt(input);
         validateMoney(this.money);
     }
 
-    private void validateInput(final String input) {
-        if (input == null) {
-            throw new IllegalArgumentException("Null을 입력할 수 없습니다.");
-        }
-
-        if (!input.matches("^[1-9]([0-9]*)$")) {
-            throw new IllegalArgumentException("입력한 값이 숫자의 형태가 아닙니다.");
-        }
+    private void validateInputMoney(final String input) {
+        Validator.checkNullOrEmpty(input);
+        Validator.checkFormat(input);
     }
 
     private void validateMoney(final int money) {
@@ -27,7 +24,6 @@ public class Money {
     }
 
     public int calculateCounts() {
-
         return this.money / 1_000;
     }
 
@@ -52,6 +48,6 @@ public class Money {
     }
 
     public double calculateProfit(final int totalWinPrice) {
-        return (double) totalWinPrice / this.money;
+        return (double) totalWinPrice / (calculateCounts() * 1000);
     }
 }

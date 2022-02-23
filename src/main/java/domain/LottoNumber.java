@@ -1,30 +1,26 @@
 package domain;
 
+import utils.Validator;
+
 public class LottoNumber implements Comparable<LottoNumber> {
     private final int number;
 
     public LottoNumber(final String inputNumber) {
-        validateLottoNumberFormat(inputNumber);
+        validateInputLottoNumber(inputNumber);
         this.number = Integer.parseInt(inputNumber);
-        validateLottoNumberRange(this.number);
+        validateLottoNumber(this.number);
+    }
+
+    private void validateInputLottoNumber(final String inputNumber) {
+        Validator.checkNullOrEmpty(inputNumber);
+        Validator.checkFormat(inputNumber);
     }
 
     public LottoNumber(final int inputNumber) {
         this.number = inputNumber;
     }
 
-    public static void createBonus(final String s) {
-        //중복검증 거치고, 생성
-        
-    }
-
-    private void validateLottoNumberFormat(final String number) {
-        if (!number.matches("^[1-9]([0-9]*)$")) {
-            throw new IllegalArgumentException("로또 번호가 숫자의 형태가 아닙니다.");
-        }
-    }
-
-    private void validateLottoNumberRange(final int number) {
+    private void validateLottoNumber(final int number) {
         if (number < 1 || number > 45) {
             throw new IllegalArgumentException("로또 번호가 유효한 범위(1-45)가 아닙니다.");
         }
@@ -52,6 +48,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public int hashCode() {
         return number;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(number);
     }
 }
 
