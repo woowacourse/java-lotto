@@ -4,6 +4,7 @@ import domain.WinningStat;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import view.OutputView;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -29,5 +30,7 @@ class WinningStatTest {
         DecimalFormat df = new DecimalFormat("#.##");
         df.setRoundingMode(RoundingMode.DOWN);
         assertThat(df.format(profit)).isEqualTo("0.35");
+
+        OutputView.printWinningStat(winningStat);
     }
 }

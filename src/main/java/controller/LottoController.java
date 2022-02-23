@@ -2,6 +2,7 @@ package controller;
 
 import domain.*;
 import view.InputView;
+import view.OutputView;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,7 +15,8 @@ public class LottoController {
         Money money = Money.from(InputView.getMoney());
 
         List<LottoTicket> lottoTickets = lottoMachine.purchaseLottoTickets(money, new RandomLottoNumberStrategy());
-        // TODO: 로또 개수 출력, 로또 번호 출력
+        OutputView.printPurchasedLottoTicketNumber(lottoTickets.size());
+        OutputView.printPurchasedLottoTickets(lottoTickets);
 
         LottoNumbers winningNumbers = new LottoNumbers(InputView.getWinningNumbers().stream()
                 .map(LottoNumber::from)
@@ -22,6 +24,6 @@ public class LottoController {
         LottoNumber bonusNumber = LottoNumber.from(InputView.getBonusNumber());
 
         WinningStat winningStat = lottoMachine.createWinningStat(winningNumbers, bonusNumber);
-        // TODO: winningstat 출력
+        OutputView.printWinningStat(winningStat);
     }
 }

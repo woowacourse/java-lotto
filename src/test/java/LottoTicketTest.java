@@ -2,6 +2,7 @@ import domain.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import view.OutputView;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,6 +21,8 @@ class LottoTicketTest {
                 .mapToObj(LottoNumber::from)
                 .collect(Collectors.toList());
         lottoTicket = new LottoTicket(numbers);
+
+        System.out.println(lottoTicket.getTicketNumbers());
     }
 
     @Test
