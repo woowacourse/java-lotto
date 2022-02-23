@@ -6,6 +6,7 @@ import static validator.LottoNumberValidators.validateNoDuplicates;
 import domain.LottoGame;
 import domain.LottoNumber;
 import domain.LottoReferee;
+import domain.Lottos;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,14 +19,25 @@ public class LottoController {
     LottoGame lottoGame;
 
     public void run() {
-        initLottoGame();
-        initLottoReferee();
+        Lottos lottos = initCustomerLottos();
+        LottoReferee referee = initLottoReferee();
+
+        this.lottoGame = new LottoGame(lottos, referee);
     }
 
-    private void initLottoReferee() {
+    private Lottos initCustomerLottos() {
+        int money = InputView.requestUserMoney();
+        int lottosBought = money / 1000;
+        Lottos lottos = new Lottos(lottosBought);
+        OutputView.printPurchaseInfo(lottos.getLottos());
+
+        return lottos;
+    }
+
+    private LottoReferee initLottoReferee() {
         List<LottoNumber> winningNumbers = registerWinningNumbers();
         LottoNumber bonusNumber = registerBonusNumber(winningNumbers);
-        LottoReferee referee = new LottoReferee(winningNumbers, bonusNumber);
+        return new LottoReferee(winningNumbers, bonusNumber);
     }
 
     private List<LottoNumber> registerWinningNumbers() {
@@ -47,12 +59,5 @@ public class LottoController {
         validateNoDuplicateInList(bonusNumber,
                 winningNumbers.stream().map(LottoNumber::getNumber).collect(Collectors.toList()));
         return LottoNumber.of(bonusNumber);
-    }
-
-    private void initLottoGame() {
-        int money = InputView.requestUserMoney();
-        int count = money / 1000;
-        this.lottoGame = LottoGame.create(count);
-        OutputView.printPurchaseInfo(this.lottoGame.getLottos());
     }
 }
