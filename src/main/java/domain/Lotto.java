@@ -3,6 +3,7 @@ package domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
     private final List<Integer> lottoNumbers = new ArrayList<>();
@@ -33,5 +34,13 @@ public class Lotto {
 
     public List<Integer> getLottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
+    }
+
+    @Override
+    public String toString() {
+        List<String> numbersToStrings = lottoNumbers.stream()
+                .map(String::valueOf)
+                .collect(Collectors.toList());
+        return "[" + String.join(", ", numbersToStrings) + "]";
     }
 }
