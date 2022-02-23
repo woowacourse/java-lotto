@@ -15,7 +15,7 @@ public class Lottos {
         Map<Rank, Integer> resultMap = Rank.initResultMap();
         lottos.stream()
                 .map(winLotto::matchResult)
-                .forEach(result -> resultMap.put(result, resultMap.get(result) + 1));
+                .forEach(result -> resultMap.replace(result, resultMap.get(result) + 1));
         return new LottoResult(resultMap);
     }
 

@@ -1,7 +1,9 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
@@ -37,11 +39,17 @@ public enum Rank {
     }
 
     public static Map<Rank, Integer> initResultMap() {
-        return Arrays.stream(values())
-                .collect(Collectors.toMap(rank -> rank, Rank::defaultCount));
+        Map<Rank, Integer> rankMap = new TreeMap<>(rankRewardDescendingComparator());
+        Arrays.stream(values())
+                .forEach(rank -> rankMap.put(rank, defaultCount()));
+        return rankMap;
     }
 
-    private int defaultCount() {
+    private static Comparator<Rank> rankRewardDescendingComparator() {
+        return (o1, o2) -> Long.compare(o1.reward, o2.reward);
+    }
+
+    private static int defaultCount() {
         return 0;
     }
 
