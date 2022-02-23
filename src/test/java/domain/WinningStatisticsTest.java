@@ -35,4 +35,18 @@ class WinningStatisticsTest {
 
         assertThat(statistics.size()).isEqualTo(6);
     }
+
+    @Test
+    @DisplayName("당첨 통계의 수익률 계산 기능")
+    void calculateProfitRate() {
+        List<LottoReward> lottoRewards = new ArrayList<>();
+        lottoRewards.add(LottoReward.FIFTH);
+
+        WinningStatistics winningStatistics = new WinningStatistics(lottoRewards);
+
+        double profitRate = winningStatistics.calculateProfitRate(14000);
+        double expectedAnswer = (double)LottoReward.FIFTH.getPrice() / 14000;
+
+        assertThat(profitRate).isEqualTo(expectedAnswer);
+    }
 }
