@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import utils.ExceptionMessage;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -15,7 +16,7 @@ public class LottoNumberTest {
     void 로또_넘버_0_예외_테스트(int lottoNumber) {
         assertThatThrownBy(() -> new LottoNumber(lottoNumber))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(LottoNumber.LOTTO_NUMBER_OUT_OF_BOUND);
+                .hasMessage(ExceptionMessage.LOTTO_NUMBER_OUT_OF_BOUND);
 
     }
 }

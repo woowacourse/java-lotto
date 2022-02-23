@@ -2,6 +2,7 @@ package domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import utils.ExceptionMessage;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,7 +15,7 @@ class MoneyTest {
         int lessThan1000 = 100;
         assertThatThrownBy(() -> new Money(lessThan1000))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(Money.NOT_ENOUGH_MONEY);
+                .hasMessage(ExceptionMessage.NOT_ENOUGH_MONEY);
     }
 
 }
