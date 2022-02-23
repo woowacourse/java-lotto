@@ -45,4 +45,16 @@ public class LottoTicket {
             throw new IllegalArgumentException(String.format("로또 번호의 개수는 %d 이어야 합니다.", COUNT));
         }
     }
+
+    public int countMatch(LottoTicket other) {
+        return Math.toIntExact(
+            this.numbers.stream()
+            .filter(other::isMatch)
+            .count()
+        );
+    }
+
+    public boolean isMatch(LottoNumber number) {
+        return this.numbers.contains(number);
+    }
 }
