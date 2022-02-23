@@ -8,6 +8,7 @@ public enum Rewards {
     FIFTH_REWARD(5, 3, 0, 5000, 0),
     NO_REWARD(-1, 0, 0, 0, 0);
 
+
     private final int ranking;
     private final int winningCount;
     private final int bonusCount;
@@ -26,6 +27,7 @@ public enum Rewards {
         return Arrays.stream(Rewards.values())
                 .filter(x -> x.winningCount == winningCount && x.bonusCount == bonusCount)
                 .findFirst()
+                //.orElseGet(null);
                 .get();
     }
 

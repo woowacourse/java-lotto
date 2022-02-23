@@ -38,15 +38,25 @@ public class OutputView {
     public static void printWinningStatistic() {
         System.out.println(MESSAGE_WINNING_STATISTIC);
         System.out.println(SEPERATOR_LINE);
-
-        Arrays.stream(Rewards.values())
-                .forEach(x -> System.out.printf(MESSAGE_WINNING_RANKING[Rewards.getRanking(x)-5], Rewards.getCount(x)));
-
-//        for (int i = 0; i < MESSAGE_WINNING_RANKING.length; ++i) {
-//            System.out.printf(MESSAGE_WINNING_RANKING[i], Rewards.values());
+//
+//        int index = 0;
+//
+//        for (Rewards reward : Rewards.values()) {
+//            System.out.printf(MESSAGE_WINNING_RANKING[index++], Rewards.getCount(reward));
 //        }
-    }
 
+        for (int i = 0; i < 5; i++) {
+            System.out.printf(MESSAGE_WINNING_RANKING[i], Rewards.getCount(Rewards.values()[4-i]));
+        }
+//
+//        Arrays.stream(Rewards.values())
+//                .forEach(x -> System.out.printf(MESSAGE_WINNING_RANKING[Rewards.getRanking(x)-5], Rewards.getCount(x)));
+//
+////        for (int i = 0; i < MESSAGE_WINNING_RANKING.length; ++i) {
+////            System.out.printf(MESSAGE_WINNING_RANKING[i], Rewards.values());
+////        }
+//    }
+    }
     public static void printYield(double yield) {
         System.out.printf(MESSAGE_YIELD, yield);
     }
