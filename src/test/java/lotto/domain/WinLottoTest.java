@@ -14,7 +14,7 @@ public class WinLottoTest {
     @Test
     void duplicateBonusBallNumber() {
         final List<LottoNumber> winNumbers = createLottoNumbers(1, 2, 3, 4, 5, 6);
-        final LottoNumber duplicateBonusLottoNumber = new LottoNumber(1);
+        final LottoNumber duplicateBonusLottoNumber = LottoNumber.valueOf(1);
 
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new WinLotto(new Lotto(winNumbers), duplicateBonusLottoNumber))
@@ -25,7 +25,7 @@ public class WinLottoTest {
     @Test
     void calculateMatchNumber() {
         final List<LottoNumber> winNumbers = createLottoNumbers(1, 2, 3, 4, 5, 6);
-        final LottoNumber bonusLottoNumber = new LottoNumber(7);
+        final LottoNumber bonusLottoNumber = LottoNumber.valueOf(7);
         final WinLotto winLotto = new WinLotto(new Lotto(winNumbers), bonusLottoNumber);
 
         assertThat(winLotto.matchResult(new Lotto(winNumbers))).isEqualTo(Rank.FIRST);

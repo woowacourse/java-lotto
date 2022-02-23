@@ -17,7 +17,7 @@ public class LottoTest {
 
     public static List<LottoNumber> createLottoNumbers(int... number) {
         return Arrays.stream(number)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toList());
     }
 
@@ -52,14 +52,14 @@ public class LottoTest {
         @DisplayName("보너스 넘버를 포함하는 경우")
         @Test
         void containNumberTrue() {
-            final LottoNumber lottoNumber = new LottoNumber(1);
+            final LottoNumber lottoNumber = LottoNumber.valueOf(1);
             assertTrue(lotto.containNumber(lottoNumber));
         }
 
         @DisplayName("보너스 넘버를 포함하지 않는 경우")
         @Test
         void containNumberFalse() {
-            final LottoNumber lottoNumber = new LottoNumber(7);
+            final LottoNumber lottoNumber = LottoNumber.valueOf(7);
             assertFalse(lotto.containNumber(lottoNumber));
         }
     }

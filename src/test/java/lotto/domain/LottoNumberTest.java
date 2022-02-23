@@ -15,21 +15,21 @@ public class LottoNumberTest {
     @ParameterizedTest
     void numberRangeException(int inputNumber) {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new LottoNumber(inputNumber))
+                .isThrownBy(() -> LottoNumber.valueOf(inputNumber))
                 .withMessage("[ERROR] 입력값이 1 이상 45 이하여야 합니다.");
     }
 
     @Test
     void comparable() {
-        final LottoNumber lowerLottoNumber = new LottoNumber(2);
-        final LottoNumber largerLottoNumber = new LottoNumber(20);
+        final LottoNumber lowerLottoNumber = LottoNumber.valueOf(2);
+        final LottoNumber largerLottoNumber = LottoNumber.valueOf(20);
         assertThat(lowerLottoNumber).isLessThan(largerLottoNumber);
     }
 
     @Test
     void equalsAndHashCode() {
-        assertThat(new LottoNumber(1))
-                .isEqualTo(new LottoNumber(1))
-                .hasSameHashCodeAs(new LottoNumber(1));
+        assertThat(LottoNumber.valueOf(1))
+                .isEqualTo(LottoNumber.valueOf(1))
+                .hasSameHashCodeAs(LottoNumber.valueOf(1));
     }
 }
