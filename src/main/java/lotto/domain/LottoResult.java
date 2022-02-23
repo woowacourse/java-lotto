@@ -34,7 +34,7 @@ public class LottoResult {
     }
 
     public Map<Rank, Integer> getRankResults() {
-        return rankResults;
+        return Map.copyOf(rankResults);
     }
 
     @Override
