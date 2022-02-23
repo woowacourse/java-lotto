@@ -16,13 +16,11 @@ import view.OutputView;
 
 public class LottoController {
 
-    LottoGame lottoGame;
-
     public void run() {
         Lottos lottos = initCustomerLottos();
         LottoReferee referee = initLottoReferee();
-
-        this.lottoGame = new LottoGame(lottos, referee);
+        LottoGame lottoGame = new LottoGame(lottos, referee);
+        OutputView.printLottoResults(lottoGame.getResultStatistics());
     }
 
     private Lottos initCustomerLottos() {
