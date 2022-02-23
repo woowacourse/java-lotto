@@ -46,7 +46,7 @@ class LottoMachineTest {
 
         LottoTicketNumbers winningNumbers = new LottoTicketNumbers(inputWinningNumbers);
         WinningStat winningStat = lottoMachine.createWinningStat(
-                new LottoTickets(lottoTickets), winningNumbers, LottoNumber.create(7));
+                lottoTickets, winningNumbers, LottoNumber.create(7));
 
         Map<LottoRank, Integer> result = winningStat.getStat();
         assertThat(result.get(LottoRank.FIRST)).isEqualTo(2);

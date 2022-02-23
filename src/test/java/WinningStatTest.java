@@ -30,7 +30,5 @@ class WinningStatTest {
         DecimalFormat df = new DecimalFormat("#.##");
         df.setRoundingMode(RoundingMode.DOWN);
         assertThat(df.format(profit)).isEqualTo("0.35");
-
-        OutputView.printWinningStat(winningStat);
     }
 }

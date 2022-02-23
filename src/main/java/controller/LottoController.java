@@ -13,21 +13,21 @@ public class LottoController {
     private final LottoNumberStrategy lottoNumberStrategy = new RandomLottoNumberStrategy();
 
     public void run() {
-        LottoTickets lottoTickets = purchaseLottoTickets();
+        List<LottoTicket> lottoTickets = purchaseLottoTickets();
         createResult(lottoTickets);
     }
 
-    private LottoTickets purchaseLottoTickets() {
+    private List<LottoTicket> purchaseLottoTickets() {
         Money money = Money.from(InputView.getMoney());
         List<LottoTicket> lottoTickets = lottoMachine.purchaseLottoTickets(money, lottoNumberStrategy);
 
         OutputView.printPurchasedLottoTicketNumber(lottoTickets.size());
         OutputView.printPurchasedLottoTickets(lottoTickets);
 
-        return new LottoTickets(lottoTickets);
+        return lottoTickets;
     }
 
-    private void createResult(LottoTickets lottoTickets) {
+    private void createResult(List<LottoTicket> lottoTickets) {
         LottoTicketNumbers winningNumbers = new LottoTicketNumbers(InputView.getWinningNumbers().stream()
                 .map(LottoNumber::create)
                 .collect(Collectors.toList()));
