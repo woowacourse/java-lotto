@@ -17,13 +17,13 @@ public class InputValidationTest {
                 .hasMessageContaining("가격은 정수만 가능합니다.");
     }
 
-    @DisplayName("음수가 들어오면 예외가 발생한다.")
+    @DisplayName("1000원 이하의 입력 들어오면 예외가 발생한다.")
     @ParameterizedTest(name = "{index} {displayName} price={0}")
-    @ValueSource(strings = {"-10000", "-50000"})
-    void checkNegativePriceInput_throwIllegalException(final String price) {
+    @ValueSource(strings = {"-10000", "-50000", "700", "999"})
+    void checkUnderMinimumPriceInput_throwIllegalException(final String price) {
         assertThatThrownBy(() -> InputValidation.validatePrice(price))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("가격은 0원 이상만 가능합니다.");
+                .hasMessageContaining("가격은 1000원 이상만 가능합니다.");
     }
 
 }
