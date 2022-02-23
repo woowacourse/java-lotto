@@ -25,7 +25,7 @@ public class Tickets {
 	public List<Rank> getRanks(Balls answer, Ball bonusBall) {
 		return tickets.stream()
 			.map(ticket -> ticket.getRank(answer, bonusBall))
+			.filter(rank -> rank != null)
 			.collect(Collectors.toUnmodifiableList());
 	}
-
 }

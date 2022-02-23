@@ -20,7 +20,7 @@ public class TicketsTest {
 		assertDoesNotThrow(() -> new Tickets(14, new RandomTicketGenerator()));
 	}
 
-	@DisplayName("")
+	@DisplayName("로또목록 등수 확인 테스트")
 	@Test
 	void getRanksTest() {
 		List<List<Integer>> numbers = new ArrayList<>();
@@ -36,7 +36,7 @@ public class TicketsTest {
 		Ball bonusBall = new Ball(45);
 
 		List<Rank> actual = tickets.getRanks(answerBalls, bonusBall);
-		List<Rank> expected = Arrays.asList(Rank.FIRST_GRADE, Rank.SECOND_GRADE, Rank.FAIL_GRADE);
+		List<Rank> expected = Arrays.asList(Rank.FIRST_GRADE, Rank.SECOND_GRADE);
 
 		assertThat(actual).isEqualTo(expected);
 	}
