@@ -11,5 +11,11 @@ public class LottoController {
 
         List<Number> winnerNumbers = InputView.inputNumbers();
         Number bonusNumber = InputView.inputNumber();
+
+        WinnerLotto winnerLotto = new WinnerLotto(new Lotto(winnerNumbers), bonusNumber);
+        List<Rank> ranks = lottos.matchRanks(winnerLotto);
+
+        OutputView.printRanks(ranks);
+
     }
 }
