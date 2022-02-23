@@ -33,4 +33,8 @@ public enum Prize {
             .findFirst()
             .get();
     }
+
+    public int pickAmount(int count) {
+        return this.amount * count;
+    }
 }
