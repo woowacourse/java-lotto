@@ -8,14 +8,14 @@ import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class RankCalculatorTest {
+class ResultTest {
 
-    private RankCalculator rankCalculator;
+    private Result result;
     private TotalNumber totalNumber;
 
     @BeforeEach
     void setUp() {
-        rankCalculator = new RankCalculator();
+        result = new Result();
 
         WinningNumber winningNumber = new WinningNumber("1,2,3,4,5,6");
         LottoNumber bonusNumber = new LottoNumber("7");
@@ -26,7 +26,9 @@ class RankCalculatorTest {
     @DisplayName("당첨 결과를 구한다")
     void calcRank() {
         List<Set<LottoNumber>> tickets = initTickets();
-        Map<Rank, Integer> actual = rankCalculator.calcRank(totalNumber, tickets);
+
+        result.countRank(totalNumber, tickets);
+
         Map<Rank, Integer> expected = new HashMap<>();
         expected.put(Rank.FIRST, 1);
         expected.put(Rank.SECOND, 1);
@@ -34,7 +36,7 @@ class RankCalculatorTest {
         expected.put(Rank.FOURTH, 1);
         expected.put(Rank.FIFTH, 1);
 
-        assertThat(actual).isEqualTo(expected);
+        assertThat(result.getRankCounter()).isEqualTo(expected);
     }
 
     @Test
@@ -43,7 +45,8 @@ class RankCalculatorTest {
         List<Set<LottoNumber>> tickets = new ArrayList<>();
         tickets.add(initTicket(List.of(1, 2, 8, 9, 10, 11)));
 
-        Map<Rank, Integer> actual = rankCalculator.calcRank(totalNumber, tickets);
+        result.countRank(totalNumber, tickets);
+
         Map<Rank, Integer> expected = new HashMap<>();
         expected.put(Rank.FIRST, 0);
         expected.put(Rank.SECOND, 0);
@@ -51,7 +54,7 @@ class RankCalculatorTest {
         expected.put(Rank.FOURTH, 0);
         expected.put(Rank.FIFTH, 0);
 
-        assertThat(actual).isEqualTo(expected);
+        assertThat(result.getRankCounter()).isEqualTo(expected);
     }
 
     @Test
@@ -59,11 +62,10 @@ class RankCalculatorTest {
     void calcProfit() {
         List<Set<LottoNumber>> tickets = new ArrayList<>();
         tickets.add(initTicket(List.of(1, 2, 3, 9, 10, 11)));
-        rankCalculator.calcRank(totalNumber, tickets);
+        result.countRank(totalNumber, tickets);
+        result.calcProfitRatio(90_000);
 
-        double profit = rankCalculator.calcProfitRatio(90_000);
-
-        assertThat(profit).isEqualTo(0.06);
+        assertThat(result.getProfitRatio()).isEqualTo(0.06);
     }
 
     private List<Set<LottoNumber>> initTickets() {

@@ -5,34 +5,34 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class RankCalculator {
+public class Result {
 
     private static final int MINIMUM_RANK_SIZE = 3;
     private static final int INIT_NUMBER = 0;
     private static final int SECOND_RANK_SIZE = 5;
     private static final int SECOND_RANK_MATCHED = 6;
 
-    private final Map<Rank, Integer> result = new HashMap<>();
+    private final Map<Rank, Integer> rankCounter = new HashMap<>();
+    private double profitRatio = 0.0;
 
-    public RankCalculator() {
+    public Result() {
         initResult();
     }
 
     private void initResult() {
-        result.put(Rank.FIRST, INIT_NUMBER);
-        result.put(Rank.SECOND, INIT_NUMBER);
-        result.put(Rank.THIRD, INIT_NUMBER);
-        result.put(Rank.FOURTH, INIT_NUMBER);
-        result.put(Rank.FIFTH, INIT_NUMBER);
+        rankCounter.put(Rank.FIRST, INIT_NUMBER);
+        rankCounter.put(Rank.SECOND, INIT_NUMBER);
+        rankCounter.put(Rank.THIRD, INIT_NUMBER);
+        rankCounter.put(Rank.FOURTH, INIT_NUMBER);
+        rankCounter.put(Rank.FIFTH, INIT_NUMBER);
     }
 
-    public Map<Rank, Integer> calcRank(TotalNumber totalNumber, List<Set<LottoNumber>> tickets) {
+    public void countRank(TotalNumber totalNumber, List<Set<LottoNumber>> tickets) {
         Set<LottoNumber> winningAndBonusNumber = totalNumber.getWinningAndBonusNumber();
         for (Set<LottoNumber> ticket : tickets) {
             ticket.retainAll(winningAndBonusNumber);
             calcRankForEach(ticket, totalNumber);
         }
-        return result;
     }
 
     private void calcRankForEach(Set<LottoNumber> ticket, TotalNumber totalNumber) {
@@ -56,18 +56,26 @@ public class RankCalculator {
 
     private void putResult(int size, boolean isBonusBallMatched) {
         Rank rank = Rank.of(size, isBonusBallMatched);
-        result.put(rank, result.get(rank) + 1);
+        rankCounter.put(rank, rankCounter.get(rank) + 1);
     }
 
-    public double calcProfitRatio(int amount) {
-        return Math.round((double) calcProfit() / amount * 100) / 100.0;
+    public void calcProfitRatio(int amount) {
+        profitRatio = Math.round((double) calcProfit() / amount * 100) / 100.0;
     }
 
     private int calcProfit() {
         int profit = 0;
-        for (Rank rank : result.keySet()) {
-            profit += result.get(rank) * rank.getPrize();
+        for (Rank rank : rankCounter.keySet()) {
+            profit += rankCounter.get(rank) * rank.getPrize();
         }
         return profit;
+    }
+
+    public Map<Rank, Integer> getRankCounter() {
+        return rankCounter;
+    }
+
+    public double getProfitRatio() {
+        return profitRatio;
     }
 }
