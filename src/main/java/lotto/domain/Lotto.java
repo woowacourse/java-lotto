@@ -7,4 +7,8 @@ public class Lotto {
     public Lotto(PickedNumbers pickedNumbers) {
         this.pickedNumbers = pickedNumbers;
     }
+
+    public PickedNumbers getPickedNumbers() {
+        return pickedNumbers;
+    }
 }

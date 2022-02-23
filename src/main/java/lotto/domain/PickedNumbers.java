@@ -1,14 +1,15 @@
 package lotto.domain;
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class PickedNumbers {
-    private static final List<Integer> numbers = IntStream.rangeClosed(1, 45).boxed().collect(Collectors.toList());
+    private static final List<Integer> numbers = IntStream.rangeClosed(1, 45).boxed().collect(toList());
     private List<Integer> pickedNumbers;
 
     public PickedNumbers() {
@@ -20,7 +21,7 @@ public class PickedNumbers {
         pickedNumbers = Arrays.stream(input.split(","))
                 .mapToInt(Integer::parseInt)
                 .boxed()
-                .collect(Collectors.toList());
+                .collect(toList());
         validateRange();
         validateDuplicate();
     }
@@ -40,11 +41,18 @@ public class PickedNumbers {
     }
 
     private void generateRandom6AscendingNumber() {
-        pickedNumbers = numbers.stream().limit(6).collect(Collectors.toList());
+        pickedNumbers = numbers.stream().limit(6).collect(toList());
         Collections.sort(pickedNumbers);
     }
 
     public List<Integer> getPickedNumbers() {
         return pickedNumbers;
+    }
+
+    public int findMatchCount(PickedNumbers numbers) {
+        return pickedNumbers.stream()
+                .filter(numbers.getPickedNumbers()::contains)
+                .collect(toList())
+                .size();
     }
 }
