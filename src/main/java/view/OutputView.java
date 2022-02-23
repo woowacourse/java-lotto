@@ -73,6 +73,10 @@ public class OutputView {
         return builder.toString();
     }
 
+    public static void printLottoResults(float profitRatio) {
+        System.out.printf("총 수익률은 %.2f입니다.", profitRatio);
+    }
+
     private static void print(String value) {
         System.out.println(value);
     }

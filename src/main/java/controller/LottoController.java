@@ -21,6 +21,7 @@ public class LottoController {
         LottoReferee referee = initLottoReferee();
         LottoGame lottoGame = new LottoGame(lottos, referee);
         OutputView.printLottoResults(lottoGame.getResultStatistics());
+        OutputView.printLottoResults(lottoGame.calculateProfitRatio());
     }
 
     private Lottos initCustomerLottos() {
@@ -28,7 +29,6 @@ public class LottoController {
         int lottosBought = money / 1000;
         Lottos lottos = Lottos.of(lottosBought);
         OutputView.printPurchaseInfo(lottos.getLottos());
-
         return lottos;
     }
 
