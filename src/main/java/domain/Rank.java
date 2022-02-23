@@ -4,10 +4,10 @@ import java.util.Arrays;
 
 public enum Rank {
     FIRST(6, 2000000000L),
-    SECOND(5, 1500000L),
-    THIRD(5, 50000L),
-    FOURTH(4, 5000L),
-    FIFTH(3, 0L),
+    SECOND(5, 30000000L),
+    THIRD(5, 1500000L),
+    FOURTH(4, 50000L),
+    FIFTH(3, 5000L),
     NO_MATCH(0, 0L);
 
     private final int sameNumberCount;
@@ -27,5 +27,9 @@ public enum Rank {
 
     public boolean isSameNumberCount(int count) {
         return sameNumberCount == count;
+    }
+
+    public long getPrize() {
+        return prize;
     }
 }
