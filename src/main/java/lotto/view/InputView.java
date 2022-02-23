@@ -22,15 +22,23 @@ public class InputView {
 
     public static int inputMoney() {
         System.out.println(INPUT_PURCHASE_MONEY);
-        return Integer.parseInt(scanner.nextLine());
+        try {
+            return Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("[ERROR] 구매금액은 숫자로 입력하세요");
+        }
     }
 
     public static List<Integer> inputWinLotto() {
         System.out.println(INPUT_WIN_LOTTO_NUMBERS);
-        return Arrays.stream(scanner.nextLine().split(INPUT_WIN_LOTTO_NUMBERS_DELIMITER))
-                .map(InputView::removeBlank)
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+        try {
+            return Arrays.stream(scanner.nextLine().split(INPUT_WIN_LOTTO_NUMBERS_DELIMITER))
+                    .map(InputView::removeBlank)
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toList());
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("[ERROR] 로또 번호는 숫자로 입력하세요");
+        }
     }
 
     private static String removeBlank(String input) {
@@ -39,6 +47,10 @@ public class InputView {
 
     public static int inputBonusNumber() {
         System.out.println(INPUT_BONUS_LOTTO_NUMBER);
-        return Integer.parseInt(scanner.nextLine());
+        try {
+            return Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("[ERROR] 보너스 번호는 숫자로 입력하세요");
+        }
     }
 }
