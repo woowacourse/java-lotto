@@ -1,27 +1,22 @@
 package lotto;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.*;
 
 public class LottoMachine {
 
-    private static final int LOTTO_NUMBER_SIZE = 6;
+    private static final int LOTTO_NUMBER_START_INDEX = 0;
+    private static final int LOTTO_NUMBER_END_INDEX = 6;
     private static final int LOTTO_NUMBER_LOWER_BOUND = 1;
     private static final int LOTTO_NUMBER_UPPER_BOUND = 46;
 
-    public Set<LottoNumber> makeLottoTicket() {
-        Set<LottoNumber> lottoTicket = new HashSet<>();
+    private final List<LottoNumber> numbers;
 
-        while (lottoTicket.size() < LOTTO_NUMBER_SIZE) {
-            final LottoNumber lottoNumber = new LottoNumber(
-                    ThreadLocalRandom.current().nextInt(LOTTO_NUMBER_LOWER_BOUND, LOTTO_NUMBER_UPPER_BOUND));
-            lottoTicket.add(lottoNumber);
+    public LottoMachine() {
+        numbers = new ArrayList<>();
+
+        for (int i = LOTTO_NUMBER_LOWER_BOUND; i < LOTTO_NUMBER_UPPER_BOUND; i++) {
+            numbers.add(new LottoNumber(i));
         }
-
-        return lottoTicket;
     }
 
     public List<Set<LottoNumber>> makeLottoTickets(int count) {
@@ -30,5 +25,10 @@ public class LottoMachine {
             lottoTickets.add(makeLottoTicket());
         }
         return lottoTickets;
+    }
+
+    private Set<LottoNumber> makeLottoTicket() {
+        Collections.shuffle(numbers);
+        return new HashSet<>(numbers.subList(LOTTO_NUMBER_START_INDEX, LOTTO_NUMBER_END_INDEX));
     }
 }
