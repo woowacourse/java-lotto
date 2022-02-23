@@ -22,12 +22,12 @@ public class OutputView {
     public static void printStatistics(Statistic statistic) {
         System.out.println(STATISTIC_RESULT_MESSAGE);
 
-        statistic.getStatistics().entrySet().stream().filter(statistics -> statistics.getKey().getCount() != ZERO).forEach(statistics -> {
-            if (statistics.getKey().hasBonusBall()) {
-                System.out.printf(SECOND_MESSAGE, Rank.SECOND.getCount(), Rank.SECOND.getWinningPrice(), statistics.getValue());
+        statistic.getStatistics().keySet().stream().filter(rank -> !rank.equals(Rank.SIXTH)).forEach(rank -> {
+            if(rank.hasBonusBall()){
+                System.out.printf(SECOND_MESSAGE, rank.getCount(), rank.getWinningPrice(), statistic.getStatistics().get(rank));
                 return;
             }
-            System.out.printf(WINNING_MESSAGE, statistics.getKey().getCount(), statistics.getKey().getWinningPrice(), statistics.getValue());
+            System.out.printf(WINNING_MESSAGE, rank.getCount(), rank.getWinningPrice(), statistic.getStatistics().get(rank));
         });
     }
 
