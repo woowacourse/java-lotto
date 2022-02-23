@@ -28,4 +28,12 @@ public class Tickets {
 			.filter(rank -> rank != null)
 			.collect(Collectors.toUnmodifiableList());
 	}
+
+	public int getSize() {
+		return tickets.size();
+	}
+
+	public List<Ticket> getTickets() {
+		return new ArrayList<>(tickets);
+	}
 }

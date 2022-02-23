@@ -30,4 +30,16 @@ public enum Rank {
 	private boolean matches(int matchCount, boolean bonusBallMatched) {
 		return (matchCount == this.matchCount) && (bonusBallMatched == this.bonusBallMatched);
 	}
+
+	public long getPrize() {
+		return prize;
+	}
+
+	public boolean getBonusBallMatched() {
+		return bonusBallMatched;
+	}
+
+	public int getMatchCount() {
+		return matchCount;
+	}
 }

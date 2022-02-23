@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,6 +40,12 @@ public class Balls {
 		return (int)this.balls.stream()
 			.filter(answer::contains)
 			.count();
+	}
+
+	public List<Integer> getBallNumbers() {
+		return balls.stream()
+			.map(Ball::getNumber)
+			.collect(Collectors.toUnmodifiableList());
 	}
 
 }

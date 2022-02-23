@@ -15,4 +15,8 @@ public class Ticket {
 		boolean bonusBallMatched = this.balls.contains(bonusBall);
 		return Rank.of(matchCount, bonusBallMatched);
 	}
+
+	public List<Integer> getBallNumbers() {
+		return balls.getBallNumbers();
+	}
 }
