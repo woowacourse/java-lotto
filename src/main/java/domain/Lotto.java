@@ -23,7 +23,7 @@ public class Lotto {
 	private static List<LottoNumber> toLotto(String[] lottoNumbers) {
 		List<LottoNumber> lotto = new ArrayList<>();
 		for (String number : lottoNumbers) {
-			lotto.add(createLottoNumber(number));
+			lotto.add(createLottoNumber(number.trim()));
 		}
 		return lotto;
 	}
@@ -45,9 +45,9 @@ public class Lotto {
 	}
 
 	public int calculateMatchCount(Lotto targetLotto) {
-		return (int) lotto.stream()
-				.filter(lottoNumber -> targetLotto.isContain(lottoNumber))
-				.count();
+		return (int)lotto.stream()
+			.filter(lottoNumber -> targetLotto.isContain(lottoNumber))
+			.count();
 	}
 
 	public boolean isContain(LottoNumber lottoNumber) {
@@ -57,6 +57,7 @@ public class Lotto {
 	public List<LottoNumber> getLotto() {
 		return lotto;
 	}
+
 	@Override
 	public String toString() {
 		return "추첨된 번호는 " + lotto + " 입니다.";
