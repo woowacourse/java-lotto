@@ -1,5 +1,6 @@
 package lotto.model;
 
+import javax.xml.transform.Result;
 import java.util.List;
 
 public class LottoGame {
@@ -23,7 +24,7 @@ public class LottoGame {
                 .sum();
     }
 
-    public static int buyLottos(int money) {
+    public static int getLottoSize(int money) {
         validateUnitPrice(money);
         return money / LOTTO_PRICE;
     }
@@ -32,5 +33,16 @@ public class LottoGame {
         if (money % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException("거스름돈을 지급하지 않습니다. 금액이 남지 않게 지불해주세요.");
         }
+    }
+
+    public static List<Lotto> buyLottos(int money) {
+        int lottoSize = getLottoSize(money);
+        LottoGenerator lottoGenerator = new LottoGenerator();
+
+        return lottoGenerator.generateLottos(lottoSize);
+    }
+
+    public ResultMap getWinningResult(List<Lotto> lottos) {
+        return lottoMatcher.getWinningResult(lottos);
     }
 }

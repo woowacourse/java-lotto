@@ -13,12 +13,15 @@ public class ResultView {
         lottos.stream()
                 .map(Lotto::getLottoNumbers)
                 .forEach(System.out::println);
+        printEmptyLine();
     }
 
     public static void printResultStatistics(ResultMap winningResult) {
+        printEmptyLine();
         System.out.println("당첨 통계");
         System.out.println("---------");
         Arrays.stream(Rank.values())
+                .filter(rank -> rank != Rank.FAIL)
                 .map(rank -> getOneRankStatus(rank, winningResult.getResult().getOrDefault(rank, 0)))
                 .forEach(System.out::println);
     }
@@ -39,5 +42,9 @@ public class ResultView {
             return String.format("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임)", yield) ;
         }
         return String.format("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", yield);
+    }
+
+    private static void printEmptyLine() {
+        System.out.println();
     }
 }

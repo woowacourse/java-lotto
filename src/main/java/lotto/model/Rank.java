@@ -9,6 +9,7 @@ public enum Rank {
     THIRD(5, 1_500_000),
     SECOND(5, 30_000_000),
     FIRST(6, 2_000_000_000),
+    FAIL(0,0)
     ;
 
     private final int value;
@@ -33,8 +34,6 @@ public enum Rank {
         }
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.value == matchWinningNumbers && rank != Rank.SECOND)
-                .findFirst().orElseThrow(NoSuchElementException::new);
+                .findFirst().orElse(FAIL);
     }
-
-
 }

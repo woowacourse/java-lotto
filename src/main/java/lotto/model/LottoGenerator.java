@@ -10,7 +10,6 @@ public class LottoGenerator {
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int LOTTO_SIZE = 6;
 
-
     public Lotto generateLotto() {
         List<Integer> lottoNumbers = generateSequentialIntegers();
         Collections.shuffle(lottoNumbers);
