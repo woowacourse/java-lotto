@@ -20,7 +20,8 @@ public class LottoWinningNumberTest {
     @DisplayName("당첨 번호 입력 공백 검증")
     void validateInputLottoNumberBlank(String numbers) {
         assertThatThrownBy(() -> new LottoWinningNumber(numbers))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[Error]: 당첨 번호를 입력하세요.");
     }
 
     @ParameterizedTest
@@ -28,7 +29,8 @@ public class LottoWinningNumberTest {
     @DisplayName("당첨 번호가 숫자가 아닌 경우 검증")
     void validateInputLottoWinningNumberIsInt(String numbers) {
         assertThatThrownBy(() -> new LottoWinningNumber(numbers))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[Error]: 당첨 번호는 숫자여야 합니다.");
     }
 
     @ParameterizedTest
@@ -36,7 +38,8 @@ public class LottoWinningNumberTest {
     @DisplayName("당첨 번호가 범위 밖인 경우")
     void validateWinningNumberOutOfRange(String numbers) {
         assertThatThrownBy(() -> new LottoWinningNumber(numbers))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[Error]: 당첨 번호는 1~45 숫자여야 합니다.");
     }
 
     @Test
@@ -52,6 +55,7 @@ public class LottoWinningNumberTest {
     @DisplayName("당첨 번호 숫자 사이즈가 6개가 아닌 경우")
     void validateInputLottoWinningNumberSize(String numbers) {
         assertThatThrownBy(() -> new LottoWinningNumber(numbers))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[Error]: 당첨 번호는 6개의 숫자여야 합니다.");
     }
 }

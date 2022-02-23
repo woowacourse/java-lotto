@@ -8,8 +8,13 @@ public class LottoWinningNumber {
     private static final String REGEX_NUMBER = "[0-9]+";
     private static final int LOTTO_MIN_NUMBER = 1;
     private static final int LOTTO_MAX_NUMBER = 45;
+    private static final String WINNING_NUMBER_ERROR_MESSAGE = "[Error]: 당첨 번호는 숫자여야 합니다.";
+    private static final String WINNING_NUMBER_BLANK_ERROR_MESSAGE = "[Error]: 당첨 번호를 입력하세요.";
+    private static final String WINNING_NUMBER_RANGE_ERROR_MESSAGE = "[Error]: 당첨 번호는 1~45 숫자여야 합니다.";
+    private static final String WINNING_NUMBER_SIZE_ERROR_MESSAGE = "[Error]: 당첨 번호는 6개의 숫자여야 합니다.";
+    private static final int WINNING_NUMBER_SIZE = 6;
 
-    private List<Integer> winningNumbers;
+    private final List<Integer> winningNumbers;
 
     public LottoWinningNumber(String numbers) {
         validateInputNumbersBlank(numbers);
@@ -21,7 +26,7 @@ public class LottoWinningNumber {
 
     private void validateInputNumbersBlank(String number) {
         if (number == null || number.isBlank()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(WINNING_NUMBER_BLANK_ERROR_MESSAGE);
         }
     }
 
@@ -33,7 +38,7 @@ public class LottoWinningNumber {
         String joinNumbers = String.join("", split(numbers));
 
         if (!joinNumbers.matches(REGEX_NUMBER)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(WINNING_NUMBER_ERROR_MESSAGE);
         }
     }
 
@@ -43,13 +48,13 @@ public class LottoWinningNumber {
                 .count();
 
         if (count > 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(WINNING_NUMBER_RANGE_ERROR_MESSAGE);
         }
     }
 
     private void validateNumberSize(String numbers) {
-        if (split(numbers).size() != 6) {
-            throw new IllegalArgumentException();
+        if (split(numbers).size() != WINNING_NUMBER_SIZE) {
+            throw new IllegalArgumentException(WINNING_NUMBER_SIZE_ERROR_MESSAGE);
         }
     }
 
