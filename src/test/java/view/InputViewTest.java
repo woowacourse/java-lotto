@@ -91,4 +91,16 @@ class InputViewTest {
         //then
         assertThat(out.toString()).isEqualTo("보너스 볼을 입력해 주세요." + System.lineSeparator());
     }
+
+
+    @Test
+    void 보너스볼_숫자_아닌_경우() {
+        //given
+        String input = "---!!";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        //then
+        assertThatThrownBy(InputView::inputBonusNumber).isInstanceOf(Exception.class);
+    }
 }
