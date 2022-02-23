@@ -42,6 +42,7 @@ public class PurchasedLotto {
         }
 
         float earningRate = (float) totalPrice / inputMoney;
-        return (float) (Math.floor(earningRate*100)/100.0);
+        return (float) (Math.floor(earningRate * 100) / 100.0);
     }
+
 }

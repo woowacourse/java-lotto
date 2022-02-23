@@ -50,7 +50,7 @@ public class PurchasedLottosTest {
 
         int prize = 2001555000;
         float expected = (float) prize / inputMoney;
-        expected = (float) (Math.floor(expected*100)/100.0);
+        expected = (float) (Math.floor(expected * 100) / 100.0);
 
         assertThat(lottos.calculateEarningRate()).isEqualTo(expected);
     }

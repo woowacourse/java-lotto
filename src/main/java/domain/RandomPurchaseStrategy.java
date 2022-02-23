@@ -15,10 +15,9 @@ public class RandomPurchaseStrategy implements PurchaseStrategy {
         }
         Collections.shuffle(balls);
 
-        return balls.subList(0,6).stream()
+        return balls.subList(0, 6).stream()
                 .sorted()
                 .collect(Collectors.toList());
     }
-
 
 }

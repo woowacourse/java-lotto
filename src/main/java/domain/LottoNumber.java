@@ -33,4 +33,5 @@ public class LottoNumber {
                 "number=" + number +
                 '}';
     }
+
 }

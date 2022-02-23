@@ -37,4 +37,5 @@ public enum WinnerPrice {
     public int getPrize() {
         return prize;
     }
+
 }

@@ -3,7 +3,7 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomPurchaseStrategy implements PurchaseStrategy{
+public class CustomPurchaseStrategy implements PurchaseStrategy {
 
     private List<Integer> customNumbers = new ArrayList<>();
 
