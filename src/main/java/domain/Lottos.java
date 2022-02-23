@@ -9,6 +9,7 @@ public class Lottos {
 		this.lottos = lottos;
 	}
 
+
 	@Override
 	public String toString() {
 		return "Lottos{" +

@@ -13,8 +13,8 @@ public enum Rank {
     FIRST(2000000000, 6, false),
     SECOND(30000000, 5, true),
     THIRD(150000, 5, false),
-    FOUR(50000, 4, false),
-    FIVE(5000, 3, false),
+    FOURTH(50000, 4, false),
+    FIFTH(5000, 3, false),
     NOTHING(0, 0, false);
 
     private final int money;
