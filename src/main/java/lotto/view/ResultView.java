@@ -28,9 +28,9 @@ public class ResultView {
 
     private static String getOneRankStatus(Rank rank, Integer winningCount) {
         if (rank == Rank.SECOND) {
-            return rank.getValue() + "개 일치, 보너스 볼 일치(" + rank.getMoney() + "원)- " + winningCount + "개";
+            return String.format("%d개 일치, 보너스 볼 일치(%d원)- %d개", rank.getValue(), rank.getMoney(), winningCount);
         }
-        return rank.getValue() + "개 일치 (" + rank.getMoney() + "원)- " + winningCount + "개";
+        return String.format("%d개 일치 (%d원)- %d개", rank.getValue(), rank.getMoney(), winningCount);
     }
 
     public static void printYield(float yield) {
