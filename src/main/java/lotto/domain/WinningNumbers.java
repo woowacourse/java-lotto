@@ -10,4 +10,10 @@ public class WinningNumbers {
     public WinningNumbers(String input) {
         this.winningNumbers = WinningNumbersReceiver.receive(input);
     }
+
+    public int getMatchCount(List<LottoNumber> ticket) {
+        return (int) winningNumbers.stream()
+                .filter(lottoNumber -> ticket.contains(lottoNumber))
+                .count();
+    }
 }

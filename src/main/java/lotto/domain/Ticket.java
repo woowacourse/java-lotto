@@ -21,4 +21,8 @@ public class Ticket {
                 .collect(Collectors.toList());
         return new Ticket(ticket);
     }
+
+    public int getWinningNumbersMatchCount(WinningNumbers winningNumbers) {
+        return winningNumbers.getMatchCount(ticket);
+    }
 }
