@@ -67,7 +67,7 @@ public class LottoRefereeTest {
     void getLottoResult_nullOnLessThanThreeMatchingNumbers(String value) {
         int[] lottoNumbers = Arrays.stream(value.split(","))
                 .map(Integer::parseInt)
-                .mapToInt(i->i)
+                .mapToInt(i -> i)
                 .toArray();
 
         Lotto lotto = createNewLotto(lottoNumbers);

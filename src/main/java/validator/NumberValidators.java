@@ -28,7 +28,7 @@ public class NumberValidators {
     }
 
     public static void validateTotalLottoPriceUnit(int num) {
-        if (num % LOTTO_PRICE > 0 ) {
+        if (num % LOTTO_PRICE > 0) {
             throw new IllegalArgumentException(INVALID_TOTAL_LOTTO_PRICE_EXCEPTION_MESSAGE);
         }
     }

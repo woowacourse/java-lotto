@@ -43,7 +43,6 @@ public class LottoGame {
                 .mapToInt(result -> sum(result, resultsStatistics.get(result)))
                 .sum();
 
-
         return (float) totalPrize / getLottoPrice();
     }
 

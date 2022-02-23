@@ -26,6 +26,7 @@ public class LottoReferee {
     }
 
     private boolean containsBonus(Lotto lotto) {
-        return lotto.getChosenNumbers().contains(bonusNumber);
+        return lotto.getChosenNumbers()
+                .contains(bonusNumber);
     }
 }
