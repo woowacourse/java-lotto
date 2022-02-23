@@ -2,6 +2,7 @@ package model;
 
 import exception.DuplicatedLottoNumbersException;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
@@ -45,5 +46,22 @@ public class LottoNumbers {
     public static LottoNumbers withSixNumbers(int first, int second, int third, int fourth,
         int fifth, int sixth) {
         return new LottoNumbers(List.of(first, second, third, fourth, fifth, sixth));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoNumbers that = (LottoNumbers) o;
+        return Objects.equals(lottoNumbers, that.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
     }
 }
