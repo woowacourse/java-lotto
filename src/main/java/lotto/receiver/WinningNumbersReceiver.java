@@ -48,6 +48,7 @@ public class WinningNumbersReceiver {
     private static List<LottoNumber> convertToLottoNumbers(List<String> numbers) {
         return numbers.stream()
                 .map(LottoNumber::getLottoNumber)
+                .sorted()
                 .collect(Collectors.toList());
     }
 }

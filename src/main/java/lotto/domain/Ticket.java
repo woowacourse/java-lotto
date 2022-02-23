@@ -17,6 +17,7 @@ public class Ticket {
     public static Ticket getTicketByAuto() {
         List<LottoNumber> ticket = IntStream.range(0, PICKUP_COUNT)
                 .mapToObj(LottoNumber.shuffleLottoNumbers()::get)
+                .sorted()
                 .collect(Collectors.toList());
         return new Ticket(ticket);
     }
