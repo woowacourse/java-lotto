@@ -25,4 +25,14 @@ class WinningStatisticsTest {
         assertThat(statistics.get(LottoReward.FIRST)).isEqualTo(2);
         assertThat(statistics.get(LottoReward.SECOND)).isEqualTo(1);
     }
+
+    @Test
+    @DisplayName("당첨된 각 로또들의 초기 값 검증")
+    void checkInitStatistics() {
+        WinningStatistics winningStatistics = new WinningStatistics(new ArrayList<>());
+
+        Map<LottoReward, Integer> statistics = winningStatistics.getWinningStatistics();
+
+        assertThat(statistics.size()).isEqualTo(6);
+    }
 }
