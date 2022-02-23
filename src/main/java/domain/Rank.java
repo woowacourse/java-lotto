@@ -1,8 +1,6 @@
 package domain;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public enum Rank {
     FIRST(2000000000, 6),

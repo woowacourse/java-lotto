@@ -28,6 +28,7 @@ public class MainController {
         WinLottoNumbers winLottoNumbers = WinLottoNumbers.of(winLottoNumber, bonus);
 
         // result
+
     }
 
     private List<LottoNumbers> createLottoTickets(int count) {

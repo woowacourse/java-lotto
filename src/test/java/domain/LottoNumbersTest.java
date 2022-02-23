@@ -11,7 +11,7 @@ class LottoNumbersTest {
     private LottoNumbers lottoNumbers;
 
     @BeforeEach
-    void 로또_번호_생성(){
+    void 로또_번호_생성() {
         lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 

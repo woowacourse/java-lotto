@@ -31,7 +31,7 @@ public class LottoNumbers {
         return lottoNumbers;
     }
 
-    public boolean isContainsBonus(LottoNumber bonus){
+    public boolean isContainsBonus(LottoNumber bonus) {
         return lottoNumbers.contains(bonus);
     }
 }
