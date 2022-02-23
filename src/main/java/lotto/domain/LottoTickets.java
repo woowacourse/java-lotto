@@ -22,4 +22,8 @@ public class LottoTickets {
 
         return lottoTickets;
     }
+
+    public int totalCount() {
+        return lottoTickets.size();
+    }
 }
