@@ -56,7 +56,12 @@ public class PickedNumbers {
                 .size();
     }
 
-    public boolean isContainNumber(int targetNumber){
+    public boolean isContainNumber(int targetNumber) {
         return pickedNumbers.contains(targetNumber);
+    }
+
+    @Override
+    public String toString() {
+        return pickedNumbers.toString();
     }
 }

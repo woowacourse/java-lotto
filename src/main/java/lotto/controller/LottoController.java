@@ -20,6 +20,7 @@ public class LottoController {
 
     public void start() {
         money = getMoney();
+<<<<<<< HEAD
         lottos=new Lottos(money);
         PickedNumbers pickedNumbers=getPickedNumber();
         BonusNumber bonusNumber=getBonusNumber(pickedNumbers);
@@ -45,6 +46,10 @@ public class LottoController {
             outputView.printErrorMessage(e.getMessage());
             return getBonusNumber(pickedNumbers);
         }
+=======
+        lottos = new Lottos(money);
+        outputView.printPurchasedLotto(lottos);
+>>>>>>> step1
     }
 
     private Money getMoney() {
