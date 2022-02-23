@@ -11,8 +11,9 @@ public class LottoTest {
     @Test
     @DisplayName("일치하는 번호 개수 확인 테스트")
     public void checkMatchNumber() {
+        WinningNumber winningNumber = new WinningNumber(List.of(1, 2, 3, 4, 5, 6));
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        int winning = lotto.match(List.of(1, 2, 3, 4, 5, 6));
+        int winning = lotto.match(winningNumber);
 
         assertThat(winning).isEqualTo(6);
     }
