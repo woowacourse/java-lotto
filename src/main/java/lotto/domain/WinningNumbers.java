@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import static java.util.stream.Collectors.*;
 import static lotto.domain.BallType.BONUS;
 import static lotto.domain.BallType.NORMAL;
 
@@ -23,5 +24,20 @@ public class WinningNumbers {
         this.winningNumbers = winningNumbers;
     }
 
+    public Rank compareLottoTicket(LottoTicket lottoTicket) {
+        return Rank.of(getCorrectCount(lottoTicket), isBonus(lottoTicket));
+    }
 
+    private int getCorrectCount(LottoTicket lottoTicket) {
+        return winningNumbers.stream()
+                .filter(winningNumber -> winningNumber.isSame(lottoTicket))
+                .collect(toList())
+                .size();
+    }
+
+    private boolean isBonus(LottoTicket lottoTicket) {
+        return winningNumbers.stream()
+                .filter(winningNumber -> winningNumber.isSame(lottoTicket))
+                .anyMatch(WinningNumber::isBonus);
+    }
 }
