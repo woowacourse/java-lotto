@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
@@ -15,5 +16,13 @@ public class Lotto {
 
 	public boolean isHitBonusNumber(AnswerLotto answerLotto) {
 		return this.lottoNumbers.stream().anyMatch(answerLotto::isSameWithBonusNumber);
+	}
+
+	public List<Integer> getNumbers() {
+		List<Integer> numbers = new ArrayList<>();
+		for (LottoNumber lottoNumber : this.lottoNumbers) {
+			numbers.add(lottoNumber.getLottoNumber());
+		}
+		return numbers;
 	}
 }

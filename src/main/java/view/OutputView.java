@@ -1,19 +1,13 @@
 package view;
 
 import domain.Lotto;
-import domain.Lottos;
-
-import domain.ResultStatics;
-import java.util.Map;
+import domain.WinningStatus;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class OutputView {
-
-	public static void printLottos(Lottos lottos) {
-		System.out.println(lottos.getLottosSize() + "개를 구매했습니다.");
-		for (Lotto lotto : lottos.getLottos()) {
-			printLotto(lotto);
-		}
+	public static void printLottoAmount(int price) {
+		System.out.println(price / 1000 + "개를 구매했습니다.");
 	}
 
 	private static void printLotto(Lotto lotto) {
@@ -21,23 +15,24 @@ public class OutputView {
 			"[" + lotto.getNumbers().stream().map(String::valueOf).collect(Collectors.joining(", ")) + "]");
 	}
 
-	public static void printStatistics(Map<ResultStatics, Integer> results) {
+	public static void printStatistics(List<Integer> resultCount) {
 		System.out.println("\n당첨 통계");
 		System.out.println("---------");
-		for (ResultStatics eachResult : results.keySet()) {
-			printEachResult(eachResult, results.get(eachResult));
+		WinningStatus[] winningStatuses = WinningStatus.values();
+		for (int index = 0; index < 5; index++) {
+			printEachResult(winningStatuses[index], resultCount.get(index));
 		}
 	}
 
-	private static void printEachResult(ResultStatics result, int count) {
+	private static void printEachResult(WinningStatus winningStatus, int count) {
 		String bonusDisplay = " ";
-		if (result.getPrice() == 0) {
+		if (winningStatus.getProfit() == 0) {
 			return;
 		}
-		if (result.isHitBonus()) {
+		if (winningStatus.getHitBonus()) {
 			bonusDisplay = ", 보너스 볼 일치";
 		}
-		System.out.println(result.getNumberMatches() + "개 일치" + bonusDisplay + "(" + result.getPrice() + "원) - " + count + "개");
+		System.out.println(winningStatus.getNumberMatches() + "개 일치" + bonusDisplay + "(" + winningStatus.getProfit() + "원) - " + count + "개");
 	}
 
 	public static void printProfitRatio(float ratio) {
