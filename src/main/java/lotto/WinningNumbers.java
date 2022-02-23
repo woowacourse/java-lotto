@@ -6,6 +6,7 @@ public class WinningNumbers {
 
     private static final String ERROR_DUPLICATION_WINNING_NUMBERS = "당첨 번호가 서로 중복되었습니다.";
     private static final String ERROR_NOT_MATCH_NUMBER_COUNT = "당첨 번호는 6개를 입력해주세요.";
+    private static final String ERROR_DUPLICATION_BONUS_NUMBER = "지난주 당첨 번호와 중복되는 숫자입니다.";
 
     private final List<Integer> winningNumbers;
     private final int bonusNumber;
@@ -14,17 +15,25 @@ public class WinningNumbers {
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
 
-        validateIsDuplicatedNumbers();
-        validateNumberCount();
+        validateWinningNumbersDuplication();
+        validateWinningNumbersCount();
+        validateBonusNumberDuplication();
+
     }
 
-    private void validateIsDuplicatedNumbers() {
+    private void validateBonusNumberDuplication() {
+        if (winningNumbers.contains(bonusNumber)) {
+            throw new RuntimeException(ERROR_DUPLICATION_BONUS_NUMBER);
+        }
+    }
+
+    private void validateWinningNumbersDuplication() {
         if (isDuplicate()) {
             throw new RuntimeException(ERROR_DUPLICATION_WINNING_NUMBERS);
         }
     }
 
-    private void validateNumberCount() {
+    private void validateWinningNumbersCount() {
         if (winningNumbers.size() != 6) {
             throw new RuntimeException(ERROR_NOT_MATCH_NUMBER_COUNT);
         }
