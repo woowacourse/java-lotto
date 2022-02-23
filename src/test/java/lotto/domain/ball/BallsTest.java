@@ -1,32 +1,44 @@
 package lotto.domain.ball;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Named;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullSource;
 
 class BallsTest {
 
-	@DisplayName("생성자 매개변수가 null이면 예외 발생")
+	@DisplayName("숫자 요소는 NULL이 아니어야 합니다.")
 	@ParameterizedTest
 	@NullSource
-	void nullExceptionTest(final List<Integer> numbers) {
+	void numbersNullExceptionTest(final List<Integer> numbers) {
 		assertThatThrownBy(() -> new Balls(numbers))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 
-	@DisplayName("볼이 6개인지 테스트")
-	@Test
-	void sizeTest() {
-		final List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
-
+	@DisplayName("숫자 요소는 6개여야 합니다.")
+	@ParameterizedTest
+	@MethodSource("provideForNumbersOutOfSizeExceptionTest")
+	void numbersOutOfSizeExceptionTest(final List<Integer> numbers) {
 		assertThatThrownBy(() -> new Balls(numbers))
 			.isInstanceOf(IllegalArgumentException.class);
+	}
+
+	public static Stream<Arguments> provideForNumbersOutOfSizeExceptionTest() {
+		return Stream.of(
+				Arguments.of(Named.of("요소 5개", Arrays.asList(1, 2, 3, 4, 5))),
+				Arguments.of(Named.of("요소 7개", Arrays.asList(1, 2, 3, 4, 5, 6, 7))),
+				Arguments.of(Named.of("요소 8개", Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8)))
+		);
 	}
 
 	@DisplayName("볼 포함 여부 확인 테스트")
