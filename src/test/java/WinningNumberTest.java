@@ -31,7 +31,9 @@ public class WinningNumberTest {
     @Test
     @DisplayName("당첨 번호에 1부터 45 이외의 숫자가 들어오면 예외 발생")
     public void checkAvailableRangeTest() {
-        WinningNumber winningNumber = new WinningNumber(List.of(1, 2, 3, 4, 5, 46));
-        assertThatThrownBy(winningNumber::checkAvailableRange).isInstanceOf(IllegalArgumentException.class);
+
+        assertThatThrownBy(
+                () -> new WinningNumber(List.of(1, 2, 3, 4, 5, 46))
+        ).isInstanceOf(IllegalArgumentException.class);
     }
 }
