@@ -13,6 +13,17 @@ public class Lottos {
         }
     }
 
+    public Result getResult(List<Number> winningNumbers, Number bonusNumber) {
+        Result result = new Result();
+
+        for (Lotto lotto : lottos) {
+            WinningPrice winningPrice = lotto.getWinningPrice(winningNumbers, bonusNumber);
+            result.add(winningPrice);
+        }
+
+        return result;
+    }
+
     int getCount() {
         return lottos.size();
     }
