@@ -24,7 +24,7 @@ public class Lotto {
     }
 
     Lotto(List<Integer> numbers) {
-        validate(numbers);
+        validateNumbers(numbers);
         this.numbers = numbers.stream()
             .map(String::valueOf)
             .map(Number::new)
@@ -44,18 +44,18 @@ public class Lotto {
         return numbers;
     }
 
-    private void validate(List<Integer> numbers) {
+    public static void validateNumbers(List<Integer> numbers) {
         validateSize(numbers);
         validateDuplicate(numbers);
     }
 
-    private void validateSize(List<Integer> numbers) {
+    private static void validateSize(List<Integer> numbers) {
         if (numbers.size() != SIZE) {
             throw new IllegalArgumentException(SIZE_ERROR_MESSAGE);
         }
     }
 
-    private void validateDuplicate(List<Integer> numbers) {
+    private static void validateDuplicate(List<Integer> numbers) {
         int noDuplicateCount = (int)numbers.stream()
             .distinct()
             .count();
