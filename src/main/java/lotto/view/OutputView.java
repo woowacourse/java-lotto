@@ -35,7 +35,7 @@ public class OutputView {
         return OUTPUT_LOTTO_INFO_PREFIX + getLottoInfos(lotto) + OUTPUT_LOTTO_INFO_SUFFIX;
     }
 
-    private static String getLottoInfos(Lotto lotto) {
+    private static String getLottoInfos(final Lotto lotto) {
         return lotto.getLottoNumbers().stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining(OUTPUT_LOTTO_INFO_DELIMITER));
@@ -49,7 +49,7 @@ public class OutputView {
         printYield(lottoResult.calculateYield());
     }
 
-    private static void printRankResults(LottoResult lottoResult) {
+    private static void printRankResults(final LottoResult lottoResult) {
         lottoResult.getRankResults().entrySet().stream()
                 .filter(rank -> !rank.getKey().isNothing())
                 .forEach(rank -> printRankResult(rank.getKey(), rank.getValue()));

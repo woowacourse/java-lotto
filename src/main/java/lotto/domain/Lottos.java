@@ -11,8 +11,8 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public LottoResult createResult(WinLotto winLotto) {
-        Map<Rank, Integer> resultMap = Rank.initResultMap();
+    public LottoResult createResult(final WinLotto winLotto) {
+        final Map<Rank, Integer> resultMap = Rank.initResultMap();
         lottos.stream()
                 .map(winLotto::matchResult)
                 .forEach(result -> resultMap.replace(result, resultMap.get(result) + 1));

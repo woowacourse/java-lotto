@@ -26,11 +26,11 @@ public enum Rank {
         this.expression = expression;
     }
 
-    public static long calculateMoney(Rank currentRank, long count) {
+    public static long calculateMoney(final Rank currentRank, final long count) {
         return currentRank.reward * count;
     }
 
-    public static Rank calculateCurrentRank(int hitCounts, boolean bonus) {
+    public static Rank calculateCurrentRank(final int hitCounts, final boolean bonus) {
         return Arrays.stream(values())
                 .filter(rank -> rank.expression.apply(hitCounts, bonus))
                 .findFirst()
@@ -38,7 +38,7 @@ public enum Rank {
     }
 
     public static Map<Rank, Integer> initResultMap() {
-        Map<Rank, Integer> rankMap = new TreeMap<>(rankRewardDescendingComparator());
+        final Map<Rank, Integer> rankMap = new TreeMap<>(rankRewardDescendingComparator());
         Arrays.stream(values())
                 .forEach(rank -> rankMap.put(rank, defaultCount()));
         return rankMap;

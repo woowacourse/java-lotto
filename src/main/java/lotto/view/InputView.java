@@ -41,7 +41,7 @@ public class InputView {
         }
     }
 
-    private static String removeBlank(String input) {
+    private static String removeBlank(final String input) {
         return input.replaceAll(INPUT_BLANK, INPUT_NOT_BLANK);
     }
 

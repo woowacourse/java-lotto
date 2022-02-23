@@ -16,7 +16,7 @@ import lotto.view.OutputView;
 
 public class LottoApplication {
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         final Money money = createMoney();
         final int buyCounts = money.calculateLottoCount();
         OutputView.outputBuyLottoCounts(buyCounts);
@@ -37,7 +37,7 @@ public class LottoApplication {
         }
     }
 
-    private static Lottos createLottos(int buyCounts) {
+    private static Lottos createLottos(final int buyCounts) {
         try {
             return new Lottos(buyRandomLottos(buyCounts));
         } catch (IllegalArgumentException e) {
