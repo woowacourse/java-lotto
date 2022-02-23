@@ -1,8 +1,8 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -12,7 +12,6 @@ public class PickedNumbers {
     private List<Integer> pickedNumbers;
 
     public PickedNumbers() {
-        pickedNumbers = new ArrayList<>();
         Collections.shuffle(numbers);
         generateRandom6AscendingNumber();
     }
@@ -22,12 +21,27 @@ public class PickedNumbers {
                 .mapToInt(Integer::parseInt)
                 .boxed()
                 .collect(Collectors.toList());
+        validateRange();
+        validateDuplicate();
+    }
+
+    private void validateDuplicate() {
+        boolean unique = pickedNumbers.stream()
+                .allMatch(new HashSet<>()::add);
+        if (!unique) {
+            throw new IllegalArgumentException("중복값이 있습니다");
+        }
+    }
+
+    private void validateRange() {
+        if (pickedNumbers.stream().anyMatch(i -> i < 1 || i > 45)) {
+            throw new IllegalArgumentException("범위내에 없습니다");
+        }
     }
 
     private void generateRandom6AscendingNumber() {
-        List<Integer> list = numbers.stream().limit(6).collect(Collectors.toList());
-        Collections.sort(list);
-        pickedNumbers = list;
+        pickedNumbers = numbers.stream().limit(6).collect(Collectors.toList());
+        Collections.sort(pickedNumbers);
     }
 
     public List<Integer> getPickedNumbers() {
