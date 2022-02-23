@@ -2,6 +2,7 @@ package lotto.domain.generator;
 
 import static java.util.stream.Collectors.*;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -23,6 +24,6 @@ public class AutoLottoNumberGenerator implements LottoNumberGenerator {
         List<Integer> lottoNumbers = lottoTotalNumbers.subList(LOTTO_NUMBERS_FROM_INDEX, LOTTO_NUMBERS_TO_INDEX);
         Collections.sort(lottoNumbers);
 
-        return lottoNumbers;
+        return new ArrayList<>(lottoNumbers);
     }
 }

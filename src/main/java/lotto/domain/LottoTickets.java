@@ -17,6 +17,7 @@ public class LottoTickets {
 
         for (int i = 0; i < lottoCount; i++) {
             LottoTicket lottoTicket = new LottoTicket(lottoNumberGenerator);
+
             lottoTickets.add(lottoTicket);
         }
 
@@ -25,5 +26,15 @@ public class LottoTickets {
 
     public int totalCount() {
         return lottoTickets.size();
+    }
+
+    public String getTicketsInfo() {
+        String ticketsInfo = "";
+
+        for (LottoTicket lottoTicket : lottoTickets) {
+            ticketsInfo = ticketsInfo + lottoTicket.getLottoNumbers() + "\n";
+        }
+
+        return ticketsInfo;
     }
 }
