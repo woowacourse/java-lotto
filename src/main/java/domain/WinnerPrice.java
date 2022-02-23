@@ -34,4 +34,7 @@ public enum WinnerPrice {
                 .collect(Collectors.toList());
     }
 
+    public int getPrize() {
+        return prize;
+    }
 }

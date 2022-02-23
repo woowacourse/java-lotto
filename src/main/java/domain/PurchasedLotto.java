@@ -8,10 +8,11 @@ import java.util.Map;
 public class PurchasedLotto {
 
     private List<Lotto> lottos = new ArrayList<>();
-    private int totalPrice = 0;
     private Map<WinnerPrice, Integer> finalResult = new HashMap<>();
+    private int inputMoney;
 
-    public PurchasedLotto() {
+    public PurchasedLotto(int inputMoney) {
+        this.inputMoney = inputMoney;
     }
 
     public void purchase(PurchaseStrategy purchaseStrategy) {
@@ -32,5 +33,15 @@ public class PurchasedLotto {
     private void initFinalResult() {
         WinnerPrice.getWinnerPrices().stream()
                 .forEach(winnerPrice -> finalResult.put(winnerPrice, 0));
+    }
+
+    public float calculateEarningRate() {
+        long totalPrice = 0;
+        for (WinnerPrice winnerPrice : finalResult.keySet()) {
+            totalPrice += winnerPrice.getPrize() * finalResult.get(winnerPrice);
+        }
+
+        float earningRate = (float) totalPrice / inputMoney;
+        return (float) (Math.floor(earningRate*100)/100.0);
     }
 }

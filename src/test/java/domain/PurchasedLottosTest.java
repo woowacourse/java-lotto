@@ -14,10 +14,12 @@ public class PurchasedLottosTest {
     PurchasedLotto lottos;
     Lotto winningLotto;
     LottoNumber bonus;
+    int inputMoney;
 
     @BeforeEach
     void init() {
-        lottos = new PurchasedLotto();
+        inputMoney = 1400;
+        lottos = new PurchasedLotto(inputMoney);
         lottos.purchase(new CustomPurchaseStrategy(Arrays.asList(new Integer[]{1, 2, 3, 43, 44, 45})));
         lottos.purchase(new CustomPurchaseStrategy(Arrays.asList(new Integer[]{1, 2, 3, 4, 44, 45})));
         lottos.purchase(new CustomPurchaseStrategy(Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 45})));
@@ -42,9 +44,15 @@ public class PurchasedLottosTest {
         assertThat(finalResult.get(WinnerPrice.FAIL)).isEqualTo(0);
     }
 
+    @Test
+    void lottos_calulateEarningRate() {
+        lottos.calculateWinning(winningLotto, bonus);
 
-    /**
-     * 맞는 결과 Map을 찾아내는지?
-     * 최종 상금 계산이 옳바르게 됐는지?
-     */
+        int prize = 2001555000;
+        float expected = (float) prize / inputMoney;
+        expected = (float) (Math.floor(expected*100)/100.0);
+
+        assertThat(lottos.calculateEarningRate()).isEqualTo(expected);
+    }
+
 }
