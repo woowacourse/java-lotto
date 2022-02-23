@@ -46,4 +46,8 @@ public class Lottos {
 
         return map;
     }
+
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
 }

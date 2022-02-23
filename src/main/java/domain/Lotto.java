@@ -1,7 +1,7 @@
 package domain;
 
+import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Lotto {
     private static final int LOTTO_SIZE = 6;
@@ -13,7 +13,8 @@ public class Lotto {
     public Lotto(List<LottoNumber> lottoNumbers) {
         validateSize(lottoNumbers);
         validateDuplicate(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+
+        this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
     }
 
     private void validateSize(List<LottoNumber> lottoNumbers) {
@@ -36,13 +37,16 @@ public class Lotto {
     }
 
     public int getSameNumberCount(Lotto anotherLotto) {
-        return lottoNumbers.stream()
-                .filter(lottoNumber -> anotherLotto.containsLottoNumber(lottoNumber))
-                .collect(Collectors.toList())
-                .size();
+        return (int) lottoNumbers.stream()
+                .filter(anotherLotto::containsLottoNumber)
+                .count();
     }
 
     public boolean containsLottoNumber(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
+    }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 }
