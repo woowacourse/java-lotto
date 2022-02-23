@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Map;
+
 public class Lotto {
     private static final int LOTTO_PRICE = 1000;
     private final int amount;
@@ -32,4 +34,11 @@ public class Lotto {
         return amount / 1000;
     }
 
+    public Map<Rank, Integer> getResult(WinningNumbers winningNumbers) {
+        return tickets.getResult(winningNumbers);
+    }
+
+    public double getYield(WinningNumbers winningNumbers) {
+        return tickets.getYield(amount, winningNumbers);
+    }
 }

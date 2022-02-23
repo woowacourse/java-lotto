@@ -38,8 +38,16 @@ public class Tickets {
     }
 
     private List<Rank> getRanks(WinningNumbers winningNumbers) {
-       return tickets.stream()
+        return tickets.stream()
             .map(winningNumbers::getTicketRank)
             .collect(Collectors.toList());
+    }
+
+    public double getYield(int amount, WinningNumbers winningNumbers) {
+        List<Rank> ranks = getRanks(winningNumbers);
+        long totalAmount = ranks.stream()
+            .mapToLong(Rank::getAmount)
+            .sum();
+        return Math.floor(((double)totalAmount / amount) * 100)/ 100.0;
     }
 }
