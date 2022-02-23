@@ -29,4 +29,12 @@ public class RankCount {
     public int getCount(Rank rank) {
         return rankCount.get(rank);
     }
+
+    public long getTotalPrize() {
+        long totalPrize = 0;
+        for (Rank rank : Rank.values()) {
+            totalPrize += rank.multiplyPrizeBy(rankCount.get(rank));
+        }
+        return totalPrize;
+    }
 }

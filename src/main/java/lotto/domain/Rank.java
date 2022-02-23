@@ -28,4 +28,8 @@ public enum Rank {
                 .findFirst()
                 .orElse(RANK_OUT);
     }
+
+    public long multiplyPrizeBy(int count) {
+        return prize * count;
+    }
 }
