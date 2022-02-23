@@ -34,6 +34,7 @@ class LottoMachineTest {
     }
 
     @Test
+    @DisplayName("로또 당첨 통계 확인")
     void calculateWinningStat() {
         LottoMachine lottoMachine = new LottoMachine();
 
