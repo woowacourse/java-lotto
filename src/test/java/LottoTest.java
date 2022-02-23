@@ -1,10 +1,14 @@
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class LottoTest {
 
@@ -86,6 +90,32 @@ public class LottoTest {
             void it_returns_true() {
                 Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
                 assertThat(lotto.contains(new Number("7"))).isFalse();
+            }
+        }
+    }
+
+    @Nested
+    @DisplayName("당첨 순위를 알려주는 메소드는")
+    class GetWinningPrice {
+
+        @Nested
+        @DisplayName("당첨번호와 보너스번호가 주어지면")
+        class Context_with_winning_numbers_and_bonus_number {
+
+            @ParameterizedTest
+            @CsvSource(value = {"1|2|3|4|5|6|7|All", "1|2|3|4|5|45|6|FiveAndBonus"}, delimiter = '|')
+            @DisplayName("당첨 순위를 알려준다.")
+            void it_returns_winning_price(String first, String second, String third, String fourth, String fifth, String sixth,
+                String bonus, WinningPrice key
+            ) {
+                Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+
+                List<Number> numbers = Stream.of(first, second, third, fourth, fifth, sixth)
+                    .map(Number::new)
+                    .collect(Collectors.toList());
+                Number bonusNumber = new Number(bonus);
+
+                assertThat(lotto.getWinningPrice(numbers, bonusNumber)).isEqualTo(key);
             }
         }
     }

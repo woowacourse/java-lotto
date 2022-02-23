@@ -62,4 +62,19 @@ public class Lotto {
             throw new IllegalArgumentException(DUPLICATE_ERROR_MESSAGE);
         }
     }
+
+    public WinningPrice getWinningPrice(List<Number> winningNumbers, Number bonusNumber) {
+        int count = 0;
+        boolean containsBonus = false;
+        for (Number number : winningNumbers) {
+            if (numbers.contains(number)) {
+                count++;
+            }
+        }
+        if (numbers.contains(bonusNumber)) {
+            containsBonus = true;
+        }
+
+        return WinningPrice.of(count, containsBonus);
+    }
 }
