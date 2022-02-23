@@ -1,5 +1,6 @@
 package controller;
 
+<<<<<<< HEAD
 import domain.Lotto.Lotto;
 import domain.Lotto.LottoNumber;
 import domain.Lotto.WinningLotto;
@@ -11,10 +12,15 @@ import domain.ResultStatus;
 import domain.player.Player;
 import dto.LottosDto;
 import dto.RanksDto;
+=======
+import domain.*;
+import dto.LottosDto;
+>>>>>>> 6a49a84 (feat: 로또 구매 및 당첨번호 세팅 기능 구현)
 
 import java.util.List;
 
 public class LottoController {
+<<<<<<< HEAD
 
     private Player player;
     private WinningLotto winningLotto;
@@ -41,5 +47,16 @@ public class LottoController {
         double totalIncome = resultStatus.calculateTotalIncome();
         double incomeRate = player.calculateIncomeRate(totalIncome);
         return RanksDto.from(resultStatus, incomeRate);
+=======
+    public LottosDto purchase(int purchaseAmount) {
+        Player player = new Player(new Money(purchaseAmount));
+        List<Lotto> lottos = player.getLottos();
+        return LottosDto.from(lottos);
+    }
+
+    public void determineWinningNumber(List<String> winningNumber, int bonusBall) {
+        List<LottoNumber> lottoNumbers = LottoFactory.generateWinningLotto(winningNumber);
+        WinningLotto winningLotto = new WinningLotto(lottoNumbers, new LottoNumber(bonusBall));
+>>>>>>> 6a49a84 (feat: 로또 구매 및 당첨번호 세팅 기능 구현)
     }
 }
