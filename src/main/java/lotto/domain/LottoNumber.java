@@ -21,10 +21,10 @@ public enum LottoNumber {
     NUMBER_41(41), NUMBER_42(42), NUMBER_43(43), NUMBER_44(44), NUMBER_45(45);
 
     private static final int PICKUP_COUNT = 6;
+    private static final String LOTTO_NUMBER_PREFIX = "NUMBER_";
     private static final String REGEX_FOR_NATURAL_NUMBER = "^[1-9][0-9]*$";
     private static final int MINIMUM_RANGE = 1;
     private static final int MAXIMUM_RANGE = 45;
-    private static final String LOTTO_NUMBER_PREFIX = "NUMBER_";
 
     private final int number;
 
