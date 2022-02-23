@@ -24,7 +24,7 @@ public class LottoNumbers {
     }
 
     public List<LottoNumber> get() {
-        return lottoNumbers;
+        return Collections.unmodifiableList(lottoNumbers);
     }
 
     public boolean isContainsBonus(LottoNumber bonus) {
