@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import lotto.domain.Amount;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoTickets;
 import lotto.domain.WinningNumbers;
@@ -14,13 +15,26 @@ public class LottoController {
         Scanner scanner = new Scanner(System.in);
 
         LottoMachine lottoMachine = new LottoMachine();
-        System.out.println("구입금액을 입력해 주세요.");
-        LottoTickets lottoTickets = lottoMachine.purchase(scanner.nextLine());
+
+        Amount amount = createAmount(scanner);
+
+        LottoTickets lottoTickets = createLottoTickets(lottoMachine, amount);
+
+        WinningNumbers winningNumbers = createWinningNumbers(scanner);
+    }
+
+    private LottoTickets createLottoTickets(LottoMachine lottoMachine, Amount amount) {
+        LottoTickets lottoTickets = lottoMachine.purchase(amount);
+
         System.out.println(lottoTickets.totalCount() + "개를 구매했습니다.");
         System.out.println(lottoTickets.getTicketsInfo());
 
-        WinningNumbers winningNumbers = createWinningNumbers(scanner);
+        return lottoTickets;
+    }
 
+    private Amount createAmount(Scanner scanner) {
+        System.out.println("구입금액을 입력해 주세요.");
+        return Amount.create(scanner.nextLine());
     }
 
     private WinningNumbers createWinningNumbers(Scanner scanner) {
