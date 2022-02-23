@@ -22,6 +22,7 @@ public enum LottoNumber {
     private static final String REGEX_FOR_NATURAL_NUMBER = "^[1-9][0-9]*$";
     public static final int MINIMUM_RANGE = 1;
     public static final int MAXIMUM_RANGE = 45;
+    public static final String LOTTO_NUMBER_PREFIX = "NUMBER_";
 
     private final int number;
 
@@ -42,7 +43,7 @@ public enum LottoNumber {
     public static LottoNumber getLottoNumber(String input) {
         checkNaturalNumber(input);
         checkRange(input);
-        return LottoNumber.valueOf("NUMBER_" + input);
+        return LottoNumber.valueOf(LOTTO_NUMBER_PREFIX + input);
     }
 
     private static void checkNaturalNumber(String input) {
