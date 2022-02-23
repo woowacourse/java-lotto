@@ -7,6 +7,7 @@ public class LottoMatcher {
     private final Integer bonusNumber;
 
     public LottoMatcher(List<Integer> winningNumbers, Integer bonusNumber) {
+        validateDuplicateBonusNumber(winningNumbers, bonusNumber);
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
     }
@@ -30,5 +31,11 @@ public class LottoMatcher {
 
     public Rank match(Lotto lotto) {
         return Rank.parse(matchWinningNumbers(lotto), matchBonus(lotto));
+    }
+
+    private void validateDuplicateBonusNumber(List<Integer> winningNumbers, Integer bonusNumber) {
+        if (winningNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 볼 번호가 당첨 번호와 중복입니다.");
+        }
     }
 }
