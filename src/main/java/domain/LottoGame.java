@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.List;
+
 public class LottoGame {
 
     public static final int LOTTO_PRICE = 1000;
@@ -9,6 +11,11 @@ public class LottoGame {
     public LottoGame(int money) {
         int lottoCount = money / LOTTO_PRICE;
         this.lottos = new Lottos(lottoCount, new RandomLottoNumberGenerator());
+    }
+
+    public WinningStatistics calculateWinningStatistics(WinningLotto winningLotto, LottoNumber bonusNumber) {
+        List<LottoReward> lottoRewards = lottos.calculateLottoReward(winningLotto, bonusNumber);
+        return new WinningStatistics(lottoRewards);
     }
 
     public Lottos getLottos() {
