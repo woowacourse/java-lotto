@@ -41,4 +41,11 @@ public class LottoGeneratorTest {
 		assertThatThrownBy(() -> LottoGenerator.generateAnswerLottoNumbers(sampleInput)).isInstanceOf(
 			IllegalArgumentException.class);
 	}
+
+	@Test
+	void generateAnsNumbersWithDuplicate() {
+		String[] sampleInput = {"1", "2", "3", "3", "4", "5"};
+		assertThatThrownBy(() -> LottoGenerator.generateAnswerLottoNumbers(sampleInput)).isInstanceOf(
+			IllegalArgumentException.class);
+	}
 }
