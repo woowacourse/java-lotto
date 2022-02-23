@@ -21,7 +21,7 @@ class LottoWinningNumbersTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = "1,2,3,4,5,6:6", delimiter = ':')
+    @CsvSource(value = "1,2,3,4,5,6:", delimiter = ':')
     public void 보너스볼_중복_테스트(String value, int number) {
         assertThatThrownBy(() -> new LottoWinningNumbers(value, number))
                 .isInstanceOf(IllegalArgumentException.class);

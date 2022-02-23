@@ -12,8 +12,8 @@ public class LottoWinningNumbers {
     private int bonusNumber;
 
     public LottoWinningNumbers(String numbers, int bonusNumber) {
-        numbers = numbers.replace(" ", "");
-        Validation.checkInputLottoWinningNumbers(numbers);
+//        numbers = numbers.replace(" ", "");
+//        Validation.checkInputLottoWinningNumbers(numbers);
         winningLottoNumbers = new Lotto(createWinningLottoNumbers(numbers, LOTTO_STRING_DELIMITER));
         if (winningLottoNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException();
