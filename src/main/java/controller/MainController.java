@@ -21,7 +21,6 @@ public class MainController {
 
         // lotto numbers
 
-        // bonus number
         // result
     }
 

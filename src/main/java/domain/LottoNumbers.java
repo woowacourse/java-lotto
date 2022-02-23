@@ -30,4 +30,8 @@ public class LottoNumbers {
     public List<LottoNumber> get() {
         return lottoNumbers;
     }
+
+    public boolean isContainsBonus(LottoNumber bonus){
+        return lottoNumbers.contains(bonus);
+    }
 }
