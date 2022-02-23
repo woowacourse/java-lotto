@@ -20,6 +20,10 @@ public class Money {
         return new Money(this.money + money.money);
     }
 
+    public Money minus(Money money) {
+        return new Money(this.money - money.money);
+    }
+
     public Rate divide(Money money) {
         return new Rate(calculateRate(money));
     }
@@ -49,5 +53,9 @@ public class Money {
 
     private BigDecimal calculateRate(Money money) {
         return BigDecimal.valueOf(this.money).divide(BigDecimal.valueOf(money.money), DECIMAL_PLACE, RoundingMode.DOWN);
+    }
+
+    public boolean isGreaterThan(Money money) {
+        return this.money >= money.money;
     }
 }
