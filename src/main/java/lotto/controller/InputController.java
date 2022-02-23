@@ -6,13 +6,14 @@ import java.util.stream.Collectors;
 
 public class InputController {
 
+    public static final int PRICE_PER_LOTTO = 1000;
+
     public int countLotto(String price) {
-        return Integer.parseInt(price) / 1000;
+        return Integer.parseInt(price) / PRICE_PER_LOTTO;
     }
 
     public List<Integer> splitWinningNumbers(String winningNumbers) {
-        String[] s = winningNumbers.split(", ");
-        return Arrays.stream(s)
+        return Arrays.stream(winningNumbers.split(", "))
                 .mapToInt(Integer::parseInt)
                 .boxed()
                 .collect(Collectors.toList());
