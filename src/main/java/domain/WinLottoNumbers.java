@@ -21,4 +21,8 @@ public class WinLottoNumbers extends LottoNumbers {
     public boolean isInNumber(LottoNumber lottoNumber) {
         return super.lottoNumbers.contains(lottoNumber);
     }
+
+    public LottoNumber getBonus(){
+        return bonus;
+    }
 }
