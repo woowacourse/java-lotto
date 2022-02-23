@@ -30,6 +30,10 @@ public class PurchaseAmount {
         }
     }
 
+    public int getPurchaseCount(final int lottoPrice) {
+        return amount / lottoPrice;
+    }
+
     public int getCountOfLottoNumbers(final int lottoPrice) {
         return amount / lottoPrice;
     }
