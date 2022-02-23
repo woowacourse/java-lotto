@@ -21,6 +21,8 @@ public class LottoNumberGenerator {
 
     public List<Integer> getLottoNumbers(int count) {
         shuffleNumbers();
-        return lottoNumbers.subList(0, count);
+        List<Integer> numbers = lottoNumbers.subList(0, count);
+        Collections.sort(numbers);
+        return new ArrayList<>(numbers);
     }
 }
