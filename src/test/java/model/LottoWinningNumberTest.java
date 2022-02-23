@@ -67,4 +67,14 @@ public class LottoWinningNumberTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[Error]: 당첨 번호는 중복이 있으면 안됩니다");
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1","2","3","4"})
+    @DisplayName("보너스 볼이 당첨 번호와 중복되는지 검증")
+    void validateReduplicationWithBonusBall(String number) {
+        LottoWinningNumber lottoWinningNumber = new LottoWinningNumber("1,2,3,4,5,6");
+        assertThatThrownBy(() -> lottoWinningNumber.validateReduplicationWithBonusBall(number))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[Error]: 당첨 번호와 보너스 볼이 중복됩니다.");
+    }
 }

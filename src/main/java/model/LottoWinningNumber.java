@@ -14,6 +14,7 @@ public class LottoWinningNumber {
     private static final String WINNING_NUMBER_SIZE_ERROR_MESSAGE = "[Error]: 당첨 번호는 6개의 숫자여야 합니다.";
     private static final int WINNING_NUMBER_SIZE = 6;
     private static final String WINNING_NUMBER_REDUPLICATION_ERROR_MESSAGE = "[Error]: 당첨 번호는 중복이 있으면 안됩니다";
+    private static final String REDUPLICATION_WITH_BONUS_BALL_ERROR_MESSAGE = "[Error]: 당첨 번호와 보너스 볼이 중복됩니다.";
 
     private final List<Integer> winningNumbers;
 
@@ -72,6 +73,12 @@ public class LottoWinningNumber {
         return numbers.stream()
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
+    }
+
+    public void validateReduplicationWithBonusBall(String number) {
+        if (winningNumbers.contains(Integer.parseInt(number))) {
+            throw new IllegalArgumentException(REDUPLICATION_WITH_BONUS_BALL_ERROR_MESSAGE);
+        }
     }
 
     public List<Integer> getWinningNumbers() {

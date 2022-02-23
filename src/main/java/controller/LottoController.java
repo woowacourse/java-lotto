@@ -1,9 +1,6 @@
 package controller;
 
-import model.BonusBall;
-import model.LottoCount;
-import model.LottoStorage;
-import model.LottoWinningNumber;
+import model.*;
 import view.InputView;
 import view.OutputView;
 
@@ -43,7 +40,9 @@ public class LottoController {
 
     private void storeBonusBall() {
         try {
-            bonusBall = new BonusBall(inputView.inputBonusBall());
+            String input = inputView.inputBonusBall();
+            bonusBall = new BonusBall(input);
+            lottoWinningNumber.validateReduplicationWithBonusBall(input);
         } catch (IllegalArgumentException e) {
             outputView.printErrorMessage(e.getMessage());
             storeBonusBall();
