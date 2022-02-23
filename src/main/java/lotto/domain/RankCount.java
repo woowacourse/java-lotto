@@ -13,10 +13,10 @@ public class RankCount {
         Arrays.stream(Rank.values())
                 .forEach(rank -> rankCount.put(rank, 0));
         this.rankCount = rankCount;
-        parseRank(lottos, winningNumbers);
+        calculateRank(lottos, winningNumbers);
     }
 
-    private void parseRank(Lottos lottos, WinningNumbers winningNumbers) {
+    private void calculateRank(Lottos lottos, WinningNumbers winningNumbers) {
         for (Lotto lotto : lottos.getLottos()) {
             increaseCount(lotto.getRank(winningNumbers));
         }
