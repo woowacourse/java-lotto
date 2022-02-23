@@ -36,4 +36,8 @@ public enum LottoPrize {
     public Money getReward() {
         return reward;
     }
+
+    public int getTotalReward(int number) {
+        return reward.get() * number;
+    }
 }

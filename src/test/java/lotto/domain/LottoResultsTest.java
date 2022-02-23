@@ -32,6 +32,18 @@ class LottoResultsTest {
                 .withMessage("로또 결과 생성자의 인자는 null이면 안됩니다.");
     }
 
+    @DisplayName("getRateReturn 메소드 테스트")
+    @Test
+    void getRateReturn_test() {
+        Map<LottoPrize, Integer> result = new HashMap<>();
+        result.put(LottoPrize.MISS, 9); // 0
+        result.put(LottoPrize.FIFTH, 1); // 5000
+
+        LottoResults lottoResults = new LottoResults(result);
+
+        assertThat(lottoResults.getRateReturn()).isEqualTo(0.5);
+    }
+
     @DisplayName("getPrizeNumber 메소드 테스트")
     @ParameterizedTest(name = DISPLAY_NAME_ARGUMENTS)
     @ValueSource(ints = {1, 2, 3})
