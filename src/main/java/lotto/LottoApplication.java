@@ -37,7 +37,7 @@ public class LottoApplication {
     }
 
     private static List<Lotto> buyRandomLottos(final int buyCounts) {
-        return IntStream.rangeClosed(0, buyCounts)
+        return IntStream.range(0, buyCounts)
                 .mapToObj(index -> new Lotto(RandomLottoMachine.createRandomLottoNumbers()))
                 .collect(Collectors.toList());
     }

@@ -1,7 +1,6 @@
 package lotto.view;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
@@ -15,6 +14,9 @@ public class OutputView {
     private static final String OUTPUT_LOTTO_INFO_DELIMITER = ", ";
     private static final String OUTPUT_RESULT_INFO_MESSAGE = "당첨 통계";
     private static final String OUTPUT_RESULT_DELIMITER = "---------";
+    private static final String OUTPUT_RANK_RESULT_SECOND = "%d개 일치, 보너스 볼 일치(%d원)- %d개\n";
+    private static final String OUTPUT_RANK_RESULT = "%d개 일치 (%d원)- %d개\n";
+    private static final String OUTPUT_LOTTO_RESULT_YIELD = "총 수익률은 %.2f 입니다.\n";
 
     private OutputView() {
     }
@@ -43,14 +45,25 @@ public class OutputView {
         System.out.println(OUTPUT_RESULT_INFO_MESSAGE);
         System.out.println(OUTPUT_RESULT_DELIMITER);
 
-        Map<Rank, Integer> rankResults = lottoResult.getRankResults();
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Rank rank : rankResults.keySet()) {
-            stringBuilder.append(
-                    rank.getHitCounts() + "개 일치 (" + rank.getReward() + "원) - " + rankResults.get(rank) + "개\n");
-        }
+        printRankResults(lottoResult);
+        printYield(lottoResult.calculateYield());
+    }
 
-        stringBuilder.append("총 수익률은 " + lottoResult.calculateYield() + "입니다.");
-        System.out.println(stringBuilder);
+    private static void printRankResults(LottoResult lottoResult) {
+        lottoResult.getRankResults().entrySet().stream()
+                .filter(rank -> !rank.getKey().isNothing())
+                .forEach(rank -> printRankResult(rank.getKey(), rank.getValue()));
+    }
+
+    private static void printRankResult(final Rank rank, final int count) {
+        if (rank == Rank.SECOND) {
+            System.out.printf(OUTPUT_RANK_RESULT_SECOND, rank.getHitCounts(), rank.getReward(), count);
+            return;
+        }
+        System.out.printf(OUTPUT_RANK_RESULT, rank.getHitCounts(), rank.getReward(), count);
+    }
+
+    private static void printYield(final double yield) {
+        System.out.printf(OUTPUT_LOTTO_RESULT_YIELD, yield);
     }
 }
