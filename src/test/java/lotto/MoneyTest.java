@@ -40,7 +40,7 @@ public class MoneyTest {
     public void purchase_amount_2000() {
         Money money = Money.from("2000");
 
-        assertThat(money.purchase(1000)).isEqualTo(2);
+        assertThat(money.countAvailable(1000)).isEqualTo(2);
     }
 
     @DisplayName("3000원치 로또가 3장인지 확인한다")
@@ -48,6 +48,6 @@ public class MoneyTest {
     public void purchase_amount_3000() {
         Money money = Money.from("3000");
 
-        assertThat(money.purchase(1000)).isEqualTo(3);
+        assertThat(money.countAvailable(1000)).isEqualTo(3);
     }
 }

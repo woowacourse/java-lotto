@@ -39,7 +39,7 @@ public class Money {
         return (double) numerator / this.amount;
     }
 
-    public int purchase(int price) {
+    public int countAvailable(int price) {
         return this.amount / price;
     }
 }

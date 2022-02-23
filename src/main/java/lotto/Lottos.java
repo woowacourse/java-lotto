@@ -4,14 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
-    private static final int PRICE = 1000;
 
     private List<Lotto> lottos;
 
-    public void purchase(Money money) {
+    public void purchase(int count) {
         this.lottos = new ArrayList<>();
 
-        for (int i = 0; i < money.purchase(PRICE); i++) {
+        for (int i = 0; i < count; i++) {
             this.lottos.add(new Lotto());
         }
     }
