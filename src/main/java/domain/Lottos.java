@@ -1,7 +1,9 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Lottos {
 
@@ -26,6 +28,21 @@ public class Lottos {
 
 	public int getLottosSize() {
 		return this.lottos.size();
+	}
+
+	public Map<ResultStatics, Integer> generateEachCount(AnswerLotto answerLotto) {
+		Map<ResultStatics, Integer> eachCount = new HashMap<>();
+
+		for (ResultStatics resultStatic : ResultStatics.values()) {
+			eachCount.put(resultStatic, 0);
+		}
+
+		for (Lotto lotto : this.lottos) {
+			ResultStatics resultStatic = lotto.calculate(answerLotto);
+			eachCount.put(resultStatic, eachCount.get(resultStatic) + 1);
+		}
+
+		return eachCount;
 	}
 
 	public float generateProfitRatio(AnswerLotto answerLotto, int price) {

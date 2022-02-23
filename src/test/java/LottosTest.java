@@ -3,9 +3,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import domain.AnswerLotto;
 import domain.Lotto;
 import domain.Lottos;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
+import java.util.*;
+
+import domain.ResultStatics;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -28,6 +29,20 @@ public class LottosTest {
 	@Test
 	void generateCorrectCountOfLotto() {
 		assertThat(lottos.getLottosSize()).isEqualTo(3);
+	}
+
+	@Test
+	void generateEachResultStatics() {
+		Map<ResultStatics, Integer> expected = new HashMap<>();
+
+		for (ResultStatics resultStatic : ResultStatics.values()) {
+			expected.put(resultStatic, 0);
+		}
+
+		expected.put(ResultStatics.NOTHING, 4);
+		expected.put(ResultStatics.THREE, 1);
+
+		assertThat(lottos.generateEachCount(answerLotto)).isEqualTo(expected);
 	}
 
 	@Test
