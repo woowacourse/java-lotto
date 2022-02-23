@@ -42,4 +42,33 @@ public class LottoTest {
             }
         }
     }
+    
+    @Nested
+    @DisplayName("어떤 번호가 포함되었는지 판단하는 메소드는")
+    class Contains {
+
+        @Nested
+        @DisplayName("포함되는 번호가 주어지면")
+        class Context_with_contains_number {
+
+            @Test
+            @DisplayName("true를 반환한다.")
+            void it_returns_true() {
+                Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+                assertThat(lotto.contains(1)).isTrue();
+            }
+        }
+
+        @Nested
+        @DisplayName("포함되지 않는 번호가 주어지면")
+        class Context_with_not_contains_number {
+
+            @Test
+            @DisplayName("false를 반환한다.")
+            void it_returns_true() {
+                Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+                assertThat(lotto.contains(7)).isFalse();
+            }
+        }
+    }
 }
