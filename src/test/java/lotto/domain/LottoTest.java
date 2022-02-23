@@ -15,6 +15,12 @@ import org.junit.jupiter.api.Test;
 
 public class LottoTest {
 
+    public static List<LottoNumber> createLottoNumbers(int... number) {
+        return Arrays.stream(number)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
+    }
+
     @DisplayName("구매 로또 생성시 숫자가 6개가 입력되지 않으면 에러 발생")
     @Test
     void lottoCreateExceptionBySize() {
@@ -67,9 +73,4 @@ public class LottoTest {
         assertThat(lotto.match(compareLotto)).isEqualTo(5);
     }
 
-    private List<LottoNumber> createLottoNumbers(int... number) {
-        return Arrays.stream(number)
-                .mapToObj(LottoNumber::new)
-                .collect(Collectors.toList());
-    }
 }
