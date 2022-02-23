@@ -17,9 +17,10 @@ public class LotteryGame {
 	public LotteryGame(int theNumberOfLottery, LotteryGenerateFamily lotteryGenerator) {
 		this.theNumberOfLottery = theNumberOfLottery;
 		this.lotteryGenerator = lotteryGenerator;
+		createAutoLottery();
 	}
 
-	public void createAutoLottery() {
+	private void createAutoLottery() {
 		final List<List<Integer>> lotteriesNumber = new ArrayList<>();
 		for (int i = 0; i < theNumberOfLottery; i++) {
 			lotteriesNumber.add(lotteryGenerator.getNumbers());
@@ -41,5 +42,9 @@ public class LotteryGame {
 			incomeRate += rankResult.get(rank) * rank.getPrize();
 		}
 		return (double)incomeRate / (theNumberOfLottery * 1000);
+	}
+
+	public List<Lottery> getLotteries() {
+		return lotteries.getLotteries();
 	}
 }

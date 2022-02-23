@@ -23,20 +23,13 @@ public class LotteryGameTest {
 	void createLotteries(final int lotteriesToCreate) {
 		final LotteryGame lotteryGame = new LotteryGame(lotteriesToCreate, new LotteryRandomGeneratorStrategy());
 
-		lotteryGame.createAutoLottery();
-
-		assertThat(lotteryGame).extracting("lotteries")
-			.extracting("lotteries")
-			.asList()
-			.size()
-			.isEqualTo(lotteriesToCreate);
+		assertThat(lotteryGame.getLotteries().size()).isEqualTo(lotteriesToCreate);
 	}
 
 	@Test
 	@DisplayName("등수가 제대로 집계되는지 확인")
 	void testRankingCount() {
 		final LotteryGame lotteryGame = new LotteryGame(6, new LotteryGenerateMock());
-		lotteryGame.createAutoLottery();
 		lotteryGame.createWinningLottery(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 		Map<Rank, Integer> rankResult = lotteryGame.makeWinner();
 		for (Rank rank : rankResult.keySet()) {
@@ -49,7 +42,6 @@ public class LotteryGameTest {
 	@DisplayName("승률이 제대로 집계되는지 확인")
 	void testRankingPercent() {
 		final LotteryGame lotteryGame = new LotteryGame(6, new LotteryGenerateMock());
-		lotteryGame.createAutoLottery();
 		lotteryGame.createWinningLottery(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 		Map<Rank, Integer> rankResult = lotteryGame.makeWinner();
 		double percent = lotteryGame.makeRankingPercent(rankResult);

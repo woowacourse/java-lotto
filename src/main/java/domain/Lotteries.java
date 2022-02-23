@@ -25,12 +25,6 @@ public class Lotteries {
 			Rank rank = winningLottery.getRank(lottery);
 			putCountToWinner(winners, rank);
 		});
-		// List<Rank> ranks = new ArrayList<>();
-		// lotteries.forEach(lottery -> {
-		// 	ranks.add(winningLottery.getRank(lottery));
-		// });
-		// ranks.stream().filter(rank -> rank != Rank.NONE)
-		// 	.forEach(rank -> winners.get(rank) + 1);
 		return winners;
 	}
 
@@ -46,4 +40,6 @@ public class Lotteries {
 			.forEach((rank) -> rankResult.put(rank, 0));
 		return rankResult;
 	}
+
+
 }

@@ -44,4 +44,8 @@ public class Lottery {
 	public boolean contains(final int number) {
 		return numbers.contains(number);
 	}
+
+	public List<Integer> getNumbers() {
+		return numbers;
+	}
 }
