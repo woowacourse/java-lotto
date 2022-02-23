@@ -1,6 +1,7 @@
 package model;
 
 import static java.util.stream.Collectors.toList;
+import static model.LottoNumbers.LOTTO_NUMBER_SIZE;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -21,13 +22,12 @@ public class RandomLottoNumbersGenerator extends LottoNumbersGenerator{
 
     protected LottoNumbers createLottoNumbers() {
         shuffleNumberPool();
-        List<Integer> sixNumbers = nextSixNumbers(createQueueByNumberPool());
-        return new LottoNumbers(List.of(sixNumbers.get(0), sixNumbers.get(1), sixNumbers.get(2), sixNumbers.get(3),
-                sixNumbers.get(4), sixNumbers.get(5)));
+        List<Integer> numbers = getNumbersFrom(createQueueByNumberPool());
+        return new LottoNumbers(numbers);
     }
 
-    private List<Integer> nextSixNumbers(Queue<Integer> queue) {
-        return IntStream.range(0, 6)
+    private List<Integer> getNumbersFrom(Queue<Integer> queue) {
+        return IntStream.range(0, LOTTO_NUMBER_SIZE)
                 .map(i -> queue.remove())
                 .boxed()
                 .collect(toList());

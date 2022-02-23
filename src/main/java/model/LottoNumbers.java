@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
+    static final int LOTTO_NUMBER_SIZE = 6;
 
     private final Set<LottoNumber> lottoNumbers;
 
@@ -28,7 +29,7 @@ public class LottoNumbers {
     }
 
     private boolean isInvalidSize(List<Integer> lottoNumbers) {
-        return lottoNumbers.size() != 6;
+        return lottoNumbers.size() != LOTTO_NUMBER_SIZE;
     }
 
     private boolean hasDuplicatedNumber(List<Integer> numbers) {
