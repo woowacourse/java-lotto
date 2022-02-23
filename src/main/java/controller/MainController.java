@@ -2,6 +2,7 @@ package controller;
 
 import domain.LottoNumbers;
 import domain.Money;
+import domain.WinLottoNumbers;
 import java.util.ArrayList;
 import java.util.List;
 import utils.LottoNumberGenerator;
@@ -20,6 +21,11 @@ public class MainController {
         OutputView.printLottoTickets(lottoTickets);
 
         // lotto numbers
+        String winLottoNumber = InputView.inputWinLottoNumbers();
+
+        // bonus number
+        int bonus = InputView.inputBonusNumber();
+        WinLottoNumbers winLottoNumbers = WinLottoNumbers.of(winLottoNumber, bonus);
 
         // result
     }
