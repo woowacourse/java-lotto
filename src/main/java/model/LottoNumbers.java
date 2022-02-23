@@ -43,12 +43,8 @@ public class LottoNumbers {
     }
 
     public boolean contains(LottoNumber number) {
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            if (lottoNumber.equals(number)) {
-                return true;
-            }
-        }
-        return false;
+        return lottoNumbers.stream()
+                .anyMatch(lottoNumber -> lottoNumber.equals(number));
     }
 
     public int getMatchedNumberCountWith(LottoNumbers otherLottoNumbers) {
