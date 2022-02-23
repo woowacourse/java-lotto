@@ -25,6 +25,11 @@ public class LottoController {
                 inputController.splitWinningNumbers(InputView.inputWinningNumbers()),
                 inputController.toIntBonusNumber(InputView.inputBonusNumber())
         );
+
+        winningLotto.checkRank(lottos);
+        for (Lotto lotto : lottos.getLottos()) {
+            System.out.println(lotto.getRank());
+        }
     }
 
     public void insertLottoToLottos(int countLotto, Lottos lottos) {
@@ -32,5 +37,10 @@ public class LottoController {
             Lotto lotto = RandomLottoGenerator.generate();
             lottos.insert(lotto);
         }
+    }
+
+    public static void main(String[] args) {
+        LottoController lottoController = new LottoController();
+        lottoController.run();
     }
 }

@@ -17,4 +17,18 @@ public class LottoTest {
                 .distinct()
                 .count()).isEqualTo(actual.size());
     }
+
+    @Test
+    void 로또_3등_당첨테스트() {
+        Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,6,8));
+        lotto.calculateRank(Arrays.asList(1,2,3,4,5,6), 7);
+        assertThat(lotto.getRank()).isEqualTo((Rank.THIRD));
+    }
+
+    @Test
+    void 로또_2등_당첨테스트() {
+        Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,6,7));
+        lotto.calculateRank(Arrays.asList(1,2,3,4,5,6), 7);
+        assertThat(lotto.getRank()).isEqualTo(Rank.SECOND);
+    }
 }

@@ -33,4 +33,17 @@ public class Lotto {
     public List<Integer> getNumbers() {
         return numbers;
     }
+
+    public void calculateRank(List<Integer> winningNumbers, int bonusNumber) {
+        int count = countMatchingNumber(winningNumbers);
+        boolean win = false;
+        if(count == 5) {
+            win = winBonusNumber(bonusNumber);
+        }
+        this.rank = Rank.getRank(count, win);
+    }
+
+    public Rank getRank() {
+        return rank;
+    }
 }

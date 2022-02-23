@@ -22,4 +22,8 @@ public class Lottos {
     public int getCount() {
         return lottos.size();
     }
+
+    public void calculateRanks(List<Integer> numbers, int bonusNumber) {
+        lottos.forEach(lotto -> lotto.calculateRank(numbers, bonusNumber));
+    }
 }
