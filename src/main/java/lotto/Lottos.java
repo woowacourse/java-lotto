@@ -23,4 +23,8 @@ public class Lottos {
             .map(winnerLotto::findRank)
             .collect(Collectors.toList());
     }
+
+    public int amount() {
+        return lottos.size();
+    }
 }

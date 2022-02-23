@@ -43,6 +43,13 @@ public class LottosTest {
         assertThat(ranks).containsExactly(Rank.FIRST, Rank.SECOND, Rank.THIRD, Rank.FOURTH, Rank.FIFTH, Rank.NONE);
     }
 
+    @Test
+    @DisplayName("로또의 개수를 확인한다.")
+    void checkAmount() {
+        Lottos lottos = new Lottos(List.of(new Lotto(givenNumbers(1, 2, 3, 4, 5, 6))));
+        assertThat(lottos.amount()).isEqualTo(1);
+    }
+
     private static List<Number> givenNumbers(int... numbers) {
         return Arrays.stream(numbers)
             .mapToObj(Number::new)

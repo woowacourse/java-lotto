@@ -9,6 +9,7 @@ public class LottoController {
         Store store = new Store(money, new LottoGenerator());
         Lottos lottos = new Lottos(store.buyLottos());
 
+        // OutputView.printAmountOfLottos(lottos.amount());
         List<Number> winnerNumbers = InputView.inputNumbers();
         Number bonusNumber = InputView.inputNumber();
 
