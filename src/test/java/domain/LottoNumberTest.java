@@ -1,12 +1,11 @@
 package domain;
 
+import static common.DisplayFormat.PARAMETERIZED_TEST_DISPLAY_FORMAT;
 import static constant.ExceptionMessages.INVALID_LOTTO_NUMBER_RANGE_EXCEPTION_MESSAGE;
 import static constant.LottoConstants.MAXIMUM_LOTTO_NUMBER;
 import static constant.LottoConstants.MINIMUM_LOTTO_NUMBER;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.junit.jupiter.params.ParameterizedTest.ARGUMENTS_PLACEHOLDER;
-import static org.junit.jupiter.params.ParameterizedTest.DISPLAY_NAME_PLACEHOLDER;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,9 +15,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoNumberTest {
-
-    public static final String PARAMETERIZED_TEST_DISPLAY_FORMAT =
-            DISPLAY_NAME_PLACEHOLDER + " [" + ARGUMENTS_PLACEHOLDER + "]";
 
     @Test
     void of_returnsIntOnValidInteger() {

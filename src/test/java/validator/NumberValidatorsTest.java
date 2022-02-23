@@ -1,5 +1,6 @@
 package validator;
 
+import static common.DisplayFormat.PARAMETERIZED_TEST_DISPLAY_FORMAT;
 import static constant.ExceptionMessages.DUPLICATE_WINNING_NUMBER_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.INVALID_LOTTO_NUMBER_RANGE_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.INVALID_NUMBER_INPUT_EXCEPTION_MESSAGE;
@@ -9,8 +10,6 @@ import static constant.LottoConstants.LOTTO_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatNoException;
-import static org.junit.jupiter.params.ParameterizedTest.ARGUMENTS_PLACEHOLDER;
-import static org.junit.jupiter.params.ParameterizedTest.DISPLAY_NAME_PLACEHOLDER;
 import static validator.NumberValidators.validateAndParseNumber;
 import static validator.NumberValidators.validateLottoNumberRange;
 import static validator.NumberValidators.validateNoDuplicateInList;
@@ -24,9 +23,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class NumberValidatorsTest {
-
-    public static final String PARAMETERIZED_TEST_DISPLAY_FORMAT =
-            DISPLAY_NAME_PLACEHOLDER + " [" + ARGUMENTS_PLACEHOLDER + "]";
 
     @Test
     void validateAndParseNumber_returnsIntOnPass() {
