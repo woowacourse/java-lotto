@@ -4,11 +4,11 @@ import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 public enum Rank {
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 30_000_000),
-    THIRD(5, 1_500_000),
-    FOURTH(4, 50000),
     FIFTH(3, 5000),
+    FOURTH(4, 50000),
+    THIRD(5, 1_500_000),
+    SECOND(5, 30_000_000),
+    FIRST(6, 2_000_000_000),
     ;
 
     private final int value;
@@ -17,6 +17,10 @@ public enum Rank {
     Rank(int value, long money) {
         this.value = value;
         this.money = money;
+    }
+
+    public int getValue() {
+        return value;
     }
 
     public long getMoney() {
