@@ -18,4 +18,19 @@ public class PickedNumberTest {
         PickedNumbers pickedNumbers = new PickedNumbers();
         Assertions.assertThat(pickedNumbers.getPickedNumbers().stream().allMatch(i -> i >= 1 && i <= 45)).isTrue();
     }
+
+    @Test
+    @DisplayName("입력받은 당첨번호가 숫자가 아니면 예외처리")
+    void Is_Number_Format() {
+        Assertions.assertThatThrownBy(() -> {
+            PickedNumbers pickedNumbers = new PickedNumbers("1,2,3,a,b,c");
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("입력받은 당첨번호가 6개인지 검증")
+    void Get_6_Input() {
+        PickedNumbers pickedNumbers = new PickedNumbers("1,2,3,4,5,6");
+        Assertions.assertThat(pickedNumbers.getPickedNumbers().stream().count()).isEqualTo(6);
+    }
 }

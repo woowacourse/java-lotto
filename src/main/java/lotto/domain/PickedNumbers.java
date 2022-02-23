@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,15 +12,22 @@ public class PickedNumbers {
     private List<Integer> pickedNumbers;
 
     public PickedNumbers() {
+        pickedNumbers = new ArrayList<>();
         Collections.shuffle(numbers);
-        List<Integer> list = getRandom6AscendingNumber();
-        pickedNumbers = list;
+        generateRandom6AscendingNumber();
     }
 
-    private List<Integer> getRandom6AscendingNumber() {
-        List<Integer> list = pickedNumbers.stream().limit(6).collect(Collectors.toList());
+    public PickedNumbers(String input) {
+        pickedNumbers = Arrays.stream(input.split(","))
+                .mapToInt(Integer::parseInt)
+                .boxed()
+                .collect(Collectors.toList());
+    }
+
+    private void generateRandom6AscendingNumber() {
+        List<Integer> list = numbers.stream().limit(6).collect(Collectors.toList());
         Collections.sort(list);
-        return list;
+        pickedNumbers = list;
     }
 
     public List<Integer> getPickedNumbers() {
