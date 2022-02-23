@@ -22,5 +22,6 @@ public class OutputView {
             System.out.print(lottoNumbers);
             System.out.println(RIGHT_BRACKET);
         }
+        System.out.print(System.lineSeparator());
     }
 }

@@ -15,7 +15,7 @@ public class WinningNumber {
         numbers.forEach(number -> winningNumbers.add(new LottoNumber(number)));
     }
 
-    public void bonus(int number) {
+    public void addBonusNumber(int number) {
         LottoNumber bonusNumber = new LottoNumber(number);
         if (winningNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException(ERROR_DUPLICATE_BONUS);

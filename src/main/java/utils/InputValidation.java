@@ -78,8 +78,10 @@ public class InputValidation {
         }
     }
 
-    public static void validateBonusNumber(String bonus) {
+    public static int validateBonusNumber(String bonus) {
         int bonusNumber = checkNonInteger(bonus, ERROR_BALL_NON_INTEGER);
         checkNumberRange(bonusNumber);
+
+        return bonusNumber;
     }
 }
