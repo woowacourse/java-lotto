@@ -30,4 +30,17 @@ public class LottoResults {
     public int getPrizeNumber(LottoPrize prize) {
         return results.get(prize);
     }
+
+    public double getRateReturn() {
+        int totalSpendMoney = 0;
+        int totalReward = 0;
+
+        for (LottoPrize prize : LottoPrize.values()) {
+            int prizeNumber = results.get(prize);
+            totalSpendMoney += prizeNumber * 1000;
+            totalReward += prize.getTotalReward(prizeNumber);
+        }
+
+        return (double) totalReward / totalSpendMoney;
+    }
 }
