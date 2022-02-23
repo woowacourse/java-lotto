@@ -8,7 +8,7 @@ public class LottoController {
         int money = InputView.inputMoney();
 
         Lottos lottos = new Lottos(buyLottos(money));
-        OutputView.printAmountOfLottos(lottos.amount());
+        OutputView.printLottos(lottos.getLottos());
 
         List<Rank> ranks = lottos.matchRanks(createWinnerLotto(winnerNumbers(), bonusNumber()));
         OutputView.printRanks(ranks);

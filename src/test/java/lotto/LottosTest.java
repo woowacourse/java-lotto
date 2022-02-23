@@ -48,7 +48,7 @@ public class LottosTest {
     void checkAmount() {
         Lottos lottos = new Lottos(List.of(new Lotto(givenNumbers(1, 2, 3, 4, 5, 6))));
 
-        assertThat(lottos.amount()).isEqualTo(1);
+        assertThat(lottos.getLottos().size()).isEqualTo(1);
     }
 
     private static List<Number> givenNumbers(int... numbers) {
