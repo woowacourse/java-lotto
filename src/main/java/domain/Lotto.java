@@ -8,21 +8,22 @@ import java.util.stream.IntStream;
 
 public class Lotto {
 
-    private static final List<Integer> allNumbers = IntStream.range(1, 45)
+    private static final List<LottoNumber> allLottoNumbers = IntStream.range(1, 45)
             .boxed()
+            .map(LottoNumber::of)
             .collect(Collectors.toList());
 
-    private final List<Integer> numbers;
+    private final List<LottoNumber> numbers;
 
     public Lotto() {
-        Collections.shuffle(allNumbers);
-        List<Integer> lottoNums = new ArrayList<>(allNumbers.subList(0, 6));
+        Collections.shuffle(allLottoNumbers);
+        List<LottoNumber> lottoNums = new ArrayList<>(allLottoNumbers.subList(0, 6));
         Collections.sort(lottoNums);
 
         this.numbers = lottoNums;
     }
 
-    public Lotto(List<Integer> lottoNums) {
+    public Lotto(List<LottoNumber> lottoNums) {
         if (lottoNums.size() != 6) {
             throw new RuntimeException();
         }
@@ -30,7 +31,7 @@ public class Lotto {
         this.numbers = lottoNums;
     }
 
-    public List<Integer> getNumbers() {
+    public List<LottoNumber> getNumbers() {
         return numbers;
     }
 

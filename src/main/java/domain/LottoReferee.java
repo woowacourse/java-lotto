@@ -3,10 +3,10 @@ package domain;
 import java.util.List;
 
 public class LottoReferee {
-    private final List<Integer> winningNumbers;
-    private final Integer bonusNumber;
+    private final List<LottoNumber> winningNumbers;
+    private final LottoNumber bonusNumber;
 
-    public LottoReferee(List<Integer> winningNumbers, Integer bonusNumber) {
+    public LottoReferee(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
     }

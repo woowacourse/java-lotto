@@ -1,10 +1,11 @@
 package controller;
 
-import static validator.LottoNumberValidators.validateLottoNumberRange;
 import static validator.LottoNumberValidators.validateNoDuplicateInList;
 import static validator.LottoNumberValidators.validateNoDuplicates;
 
 import domain.LottoGame;
+import domain.LottoNumber;
+import domain.LottoReferee;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,28 +15,44 @@ import view.OutputView;
 
 public class LottoController {
 
+    LottoGame lottoGame;
+
     public void run() {
         initLottoGame();
-        String winningNumbers = InputView.requestWinningNumbers();
-        List<Integer> nums = Arrays.stream(winningNumbers.split(", "))
-                .map(LottoNumberValidators::validateAndParseNumber)
-                .collect(Collectors.toList());
+        initLottoReferee();
+    }
 
-        if (nums.size() != 6) {
+    private void initLottoReferee() {
+        List<LottoNumber> winningNumbers = registerWinningNumbers();
+        LottoNumber bonusNumber = registerBonusNumber(winningNumbers);
+        LottoReferee referee = new LottoReferee(winningNumbers, bonusNumber);
+    }
+
+    private List<LottoNumber> registerWinningNumbers() {
+        String winningNumbersInput = InputView.requestWinningNumbers();
+        List<LottoNumber> winningNumbers = Arrays.stream(winningNumbersInput.split(", "))
+                .map(LottoNumberValidators::validateAndParseNumber)
+                .map(LottoNumber::of)
+                .collect(Collectors.toList());
+        if (winningNumbers.size() != 6) {
             throw new IllegalArgumentException("6개의 당첨 번호를 입력해야 합니다.");
         }
-        nums.forEach(LottoNumberValidators::validateLottoNumberRange);
-        validateNoDuplicates(nums);
+        validateNoDuplicates(winningNumbers.stream().map(LottoNumber::getNumber).collect(Collectors.toList()));
 
+        return winningNumbers;
+    }
+
+    private LottoNumber registerBonusNumber(List<LottoNumber> winningNumbers) {
         int bonusNumber = InputView.requestBonusNumber();
-        validateLottoNumberRange(bonusNumber);
-        validateNoDuplicateInList(bonusNumber, nums);
+        validateNoDuplicateInList(bonusNumber,
+                winningNumbers.stream().map(LottoNumber::getNumber).collect(Collectors.toList()));
+        return LottoNumber.of(bonusNumber);
     }
 
     private void initLottoGame() {
         int money = InputView.requestUserMoney();
-        int count = money/1000;
-        LottoGame lottoGame = LottoGame.create(count);
-        OutputView.printPurchaseInfo(lottoGame.getLottos());
+        int count = money / 1000;
+        this.lottoGame = LottoGame.create(count);
+        OutputView.printPurchaseInfo(this.lottoGame.getLottos());
     }
 }

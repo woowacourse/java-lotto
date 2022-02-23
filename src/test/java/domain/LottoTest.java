@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 public class LottoTest {
@@ -22,18 +24,27 @@ public class LottoTest {
 
     @Test
     void manualLotto_passesOnSizeOfSix() {
-        Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
+        Lotto lotto = createNewLotto(1, 2, 3, 4, 5, 6);
         assertThat(lotto.getNumbers().size()).isEqualTo(6);
     }
 
     @Test
     void manualLotto_failOnSizeNotOfSix() {
-        assertThatThrownBy(() -> new Lotto(Arrays.asList(1,2,3,4,5,6,7)));
+        assertThatThrownBy(() -> createNewLotto(1, 2, 3, 4, 5, 6, 7));
     }
 
     @Test
     void manualLotto_isSorted() {
-        Lotto lotto = new Lotto(Arrays.asList(6,5,4,3,2,1));
+        Lotto lotto = createNewLotto(6, 5, 4, 3, 2, 1);
         assertThat(lotto.getNumbers()).isSorted();
+    }
+
+    private Lotto createNewLotto(int... value) {
+        List<LottoNumber> lottoNumbers = Arrays.stream(value)
+                .boxed()
+                .map(LottoNumber::of)
+                .collect(Collectors.toList());
+
+        return new Lotto(lottoNumbers);
     }
 }

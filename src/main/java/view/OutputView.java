@@ -1,6 +1,7 @@
 package view;
 
 import domain.Lotto;
+import domain.LottoNumber;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,6 +26,7 @@ public class OutputView {
     private static String formatLottoNumbers(Lotto lotto) {
         String lottoNumFormat = lotto.getNumbers()
                 .stream()
+                .map(LottoNumber::getNumber)
                 .map(Object::toString)
                 .collect(Collectors.joining(", "));
 
