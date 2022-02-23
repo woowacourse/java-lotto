@@ -29,7 +29,6 @@ public class AnswerLotto {
 		int upperCount = (int) numbers.stream().filter(number -> number > 45).count();
 		int lowerCount = (int) numbers.stream().filter(number -> number < 1).count();
 
-
 		if (upperCount > 0 || lowerCount > 0) {
 			throw new IllegalArgumentException("[ERROR] 1이상 45 이하의 숫자만 허용됩니다.");
 		}
@@ -40,5 +39,4 @@ public class AnswerLotto {
 			throw new IllegalArgumentException("[ERROR] 1이상 45 이하의 숫자만 허용됩니다.");
 		}
 	}
-
 }

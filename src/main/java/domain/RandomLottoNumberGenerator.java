@@ -16,6 +16,6 @@ public class RandomLottoNumberGenerator implements LottoNumbersGenerator {
 	@Override
 	public List<Integer> generate() {
 		Collections.shuffle(candidates);
-		return candidates.subList(0, 6);
+		return new ArrayList<>(candidates.subList(0, 6));
 	}
 }
