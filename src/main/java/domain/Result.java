@@ -4,7 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Result {
-    private final Map<Rank, Integer> results = new LinkedHashMap();
+    private final LinkedHashMap<Rank, Integer> results = new LinkedHashMap<>();
 
     public void add(Rank rank) {
         results.put(rank, results.getOrDefault(rank, 0) + 1);
