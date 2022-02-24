@@ -3,22 +3,16 @@ package lotto.controller;
 import lotto.model.Lotto;
 import lotto.model.Lottos;
 import lotto.model.WinningLotto;
+import lotto.util.InputValidator;
 import lotto.util.RandomLottoGenerator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.List;
-
 public class LottoController {
 
-    private final InputController inputController;
-
-    public LottoController() {
-        inputController = new InputController();
-    }
-
     public void run() {
-        Lottos lottos = makeLottos();
+        int amount = inputAmount();
+        Lottos lottos = makeLottos(calculateLottoCount(amount));
         ResultView.printResult(lottos);
 
         WinningLotto winningLotto = makeWinningLotto();
@@ -28,11 +22,23 @@ public class LottoController {
         ResultView.printTotalResult(lottos);
     }
 
-    private Lottos makeLottos() {
-        int countLotto = inputController.countLotto(InputView.inputPrice());
+    private int inputAmount() {
+        try {
+            return InputValidator.validatePurchaseAmount(InputView.inputPurchaseAmount());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return inputAmount();
+        }
+    }
+
+    private Lottos makeLottos(int lottoCount) {
         Lottos lottos = new Lottos();
-        insertLottoToLottos(countLotto, lottos);
+        insertLottoToLottos(lottoCount, lottos);
         return lottos;
+    }
+
+    private int calculateLottoCount(int amount) {
+        return amount / Lotto.LOTTO_PRICE;
     }
 
     private void insertLottoToLottos(int countLotto, Lottos lottos) {
@@ -43,8 +49,11 @@ public class LottoController {
     }
 
     private WinningLotto makeWinningLotto() {
-        List<Integer> winningNumbers = inputController.splitWinningNumbers(InputView.inputWinningNumbers());
-        int bonusNumber = inputController.toIntBonusNumber(InputView.inputBonusNumber(), winningNumbers);
-        return new WinningLotto(winningNumbers, bonusNumber);
+        try {
+            return new WinningLotto(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return makeWinningLotto();
+        }
     }
 }
