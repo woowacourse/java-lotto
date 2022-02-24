@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import lotto.domain.Ball;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
+import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 import lotto.domain.PurchaseAmount;
 import lotto.view.Input;
@@ -22,12 +23,12 @@ public class LottoController {
     public void run() {
         Lottos lottos = buyLotto();
 
-        Lotto lastWeeksWinningNumber = createLastWeeksWinningNumber();
+        Lotto winNumber = createWinNumber();
         Ball bonusBall = createBonusBall();
 
-        checkDuplicatedNumber(lastWeeksWinningNumber, bonusBall);
-        
-        Output.statisticsTitle();
+        checkDuplicatedNumber(winNumber, bonusBall);
+
+        showResult(lottos, winNumber, bonusBall);
     }
 
     private Lottos buyLotto() {
@@ -47,9 +48,9 @@ public class LottoController {
         return lottoMachine.getLottoCount(purchaseAmount);
     }
 
-    private Lotto createLastWeeksWinningNumber() {
-        Output.askLastWeeksWinningNumber();
-        List<String> numbers = Arrays.stream(Input.lastWeeksWinningNumbers().split(DELIMITER))
+    private Lotto createWinNumber() {
+        Output.askWinNumber();
+        List<String> numbers = Arrays.stream(Input.winNumber().split(DELIMITER))
             .map(String::trim)
             .collect(Collectors.toList());
         return new Lotto(numbers);
@@ -64,6 +65,14 @@ public class LottoController {
         if (lotto.contains(ball)) {
             throw new IllegalArgumentException(ERROR_PREFIX + ERROR_DUPLICATED_NUMBER);
         }
+    }
+
+    private void showResult(Lottos lottos, Lotto winNumber, Ball bonusBall) {
+        Output.statisticsTitle();
+
+        LottoResult lottoResult = new LottoResult();
+        lottos.addMatchingCount(lottoResult, winNumber, bonusBall);
+        Output.lottoResult(lottoResult);
     }
 
 }

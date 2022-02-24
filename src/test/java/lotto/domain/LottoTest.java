@@ -41,4 +41,27 @@ public class LottoTest {
 
         assertTrue(lotto.contains(bonusBall));
     }
+
+    @Test
+    @DisplayName("로또의 숫자가 모두 일치할때")
+    void calc_same_count() {
+        Lotto lotto = new Lotto(Arrays.asList("1", "2", "3", "4", "5", "6"));
+        Lotto winLotto = new Lotto(Arrays.asList("1", "2", "3", "4", "5", "6"));
+
+        int matchingCount = lotto.getMatchingCount(winLotto);
+
+        assertEquals(matchingCount, 6);
+    }
+
+    @Test
+    @DisplayName("로또의 숫자가 일치하지 않을 때")
+    void calc_same_count_different() {
+        Lotto lotto = new Lotto(Arrays.asList("1", "2", "3", "4", "5", "7"));
+        Lotto winLotto = new Lotto(Arrays.asList("1", "2", "3", "4", "5", "6"));
+
+        int matchingCount = lotto.getMatchingCount(winLotto);
+
+        assertNotEquals(matchingCount, 6);
+    }
+
 }

@@ -40,6 +40,11 @@ public class Lotto {
         return lotto.contains(number);
     }
 
+    public int getMatchingCount(Lotto compareLotto) {
+        return (int) lotto.stream()
+                .filter(compareLotto::contains).count();
+    }
+
     private static List<String> selectNumbers() {
         List<Integer> lottoNumbers = getTotalLottoNumbers();
         Collections.shuffle(lottoNumbers);
@@ -78,4 +83,6 @@ public class Lotto {
             throw new IllegalArgumentException(ERROR_PREFIX + ERROR_DUPLICATED_NUMBER);
         }
     }
+
+
 }

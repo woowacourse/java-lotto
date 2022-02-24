@@ -9,7 +9,7 @@ public class Input {
         return input();
     }
 
-    public static String lastWeeksWinningNumbers() {
+    public static String winNumber() {
         return input();
     }
 
