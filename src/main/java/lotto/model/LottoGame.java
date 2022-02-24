@@ -7,13 +7,11 @@ public class LottoGame {
 
     private final WinningNumbers winningNumbers;
     private final LottoNumber bonusNumber;
-    private final LottoResult lottoResult;
 
     public LottoGame(List<Integer> winningNumbers, Integer bonusNumber) {
         validateDuplicateBonusNumber(winningNumbers, bonusNumber);
         this.winningNumbers = new WinningNumbers(winningNumbers);
         this.bonusNumber = new LottoNumber(bonusNumber);
-        this.lottoResult = new LottoResult();
     }
 
     public static Lottos buyLottos(Money money) {
@@ -27,10 +25,11 @@ public class LottoGame {
     }
 
     public LottoResult generateLottoResult(Lottos lottos) {
+        LottoResult lottoResult = new LottoResult();
         return lottoResult.generate(lottos, winningNumbers, bonusNumber);
     }
 
-    public float calculateYield(Money money) {
+    public float calculateYield(Money money, LottoResult lottoResult) {
         return money.calculatePercentage(getTotalWinningMoney(lottoResult));
     }
 
