@@ -1,7 +1,6 @@
 package lotto.domain;
 
 public class WinningLotto {
-    private static final String ERROR_PREFIX = "[ERROR] ";
     private static final String ERROR_DUPLICATED_NUMBER = "번호가 중복됩니다!";
 
     private final Lotto winningLotto;
@@ -23,7 +22,7 @@ public class WinningLotto {
 
     private void checkDuplicatedNumber(Lotto lotto, Ball ball) {
         if (lotto.contains(ball)) {
-            throw new IllegalArgumentException(ERROR_PREFIX + ERROR_DUPLICATED_NUMBER);
+            throw new IllegalArgumentException(ERROR_DUPLICATED_NUMBER);
         }
     }
 }

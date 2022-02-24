@@ -12,7 +12,6 @@ public class Lotto {
     private static final int MINIMUM_NUMBER = 1;
     private static final int MAXIMUM_NUMBER = 45;
     private static final int LOTTO_COUNT = 6;
-    private static final String ERROR_PREFIX = "[ERROR] ";
     private static final String ERROR_LOTTO_COUNT = LOTTO_COUNT + "개의 숫자를 입력해주세요";
     private static final String ERROR_DUPLICATED_NUMBER = "번호가 중복됩니다!";
 
@@ -73,14 +72,14 @@ public class Lotto {
 
     private void checkLottoCount(List<String> numbers) {
         if (numbers.size() != LOTTO_COUNT) {
-            throw new IllegalArgumentException(ERROR_PREFIX + ERROR_LOTTO_COUNT);
+            throw new IllegalArgumentException(ERROR_LOTTO_COUNT);
         }
     }
 
     private void checkDuplicatedNumber(List<String> numbers) {
         Set<String> distinctNumbers = new HashSet<>(numbers);
         if (distinctNumbers.size() != numbers.size()) {
-            throw new IllegalArgumentException(ERROR_PREFIX + ERROR_DUPLICATED_NUMBER);
+            throw new IllegalArgumentException(ERROR_DUPLICATED_NUMBER);
         }
     }
 }

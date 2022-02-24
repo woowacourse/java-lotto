@@ -17,7 +17,7 @@ public class Ball{
 
     private void checkValidValue(final String value) {
         if (isBlank(value) || !isNumber(value)) {
-            throw new IllegalArgumentException(ERROR_PREFIX + ERROR_ONLY_NUMBER);
+            throw new IllegalArgumentException(ERROR_ONLY_NUMBER);
         }
         int number = Integer.parseInt(value);
         checkLottoNumber(number);
@@ -33,7 +33,7 @@ public class Ball{
 
     private void checkLottoNumber(final int number) {
         if (number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER) {
-            throw new IllegalArgumentException(ERROR_PREFIX + ERROR_LOTTO_NUMBER);
+            throw new IllegalArgumentException(ERROR_LOTTO_NUMBER);
         }
     }
 

@@ -6,6 +6,7 @@ import lotto.domain.Lottos;
 import lotto.domain.Rank;
 
 public class Output {
+    private static final String ERROR_PREFIX = "[ERROR] ";
     private static final String ASK_PURCHASE_AMOUNT = "구입금액을 입력해 주세요.";
     private static final String LOTTO_COUNT = "%d개를 구매했습니다.\n";
     private static final String LOTTO_DELIMITER = ", ";
@@ -20,6 +21,10 @@ public class Output {
     private static final String PROFIT_FORMAT = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)";
     private static final String PROFIT = "이익";
     private static final String LOSS = "손해";
+
+    public static void error(String errorMessage) {
+        System.out.println(ERROR_PREFIX + errorMessage);
+    }
 
     public static void askPurchaseAmount() {
         System.out.println(ASK_PURCHASE_AMOUNT);

@@ -22,11 +22,20 @@ public class LottoController {
 
     public void run() {
         Output.askPurchaseAmount();
-        PurchaseAmount purchaseAmount = new PurchaseAmount(Input.purchaseAmount());
+        PurchaseAmount purchaseAmount = createPurchaseAmount();
 
         Lottos lottos = buyLotto(purchaseAmount);
 
         createLottoResult(lottos, purchaseAmount);
+    }
+
+    private PurchaseAmount createPurchaseAmount() {
+        try {
+            return new PurchaseAmount(Input.purchaseAmount());
+        } catch (IllegalArgumentException error) {
+            Output.error(error.getMessage());
+            return createPurchaseAmount();
+        }
     }
 
     private Lottos buyLotto(PurchaseAmount purchaseAmount) {
@@ -44,22 +53,34 @@ public class LottoController {
     }
 
     private void createLottoResult(Lottos lottos, PurchaseAmount purchaseAmount) {
-        WinningLotto winningLotto = new WinningLotto(createWinNumber(), createBonusBall());
+        Output.askWinNumber();
+        Lotto winLotto = createWinNumber();
+        Output.askBonusBall();
+        WinningLotto winningLotto = createWinningLotto(winLotto);
 
         showResult(lottos, purchaseAmount, winningLotto);
     }
 
     private Lotto createWinNumber() {
-        Output.askWinNumber();
-        List<String> numbers = Arrays.stream(Input.winNumber().split(DELIMITER))
-                .map(String::trim)
-                .collect(Collectors.toList());
-        return new Lotto(numbers);
+        try {
+            List<String> numbers = Arrays.stream(Input.winNumber().split(DELIMITER))
+                    .map(String::trim)
+                    .collect(Collectors.toList());
+            return new Lotto(numbers);
+        } catch (IllegalArgumentException error) {
+            Output.error(error.getMessage());
+            return createWinNumber();
+        }
     }
 
-    private Ball createBonusBall() {
-        Output.askBonusBall();
-        return new Ball(Input.bonusBall());
+    private WinningLotto createWinningLotto(Lotto winLotto) {
+        try {
+            Ball bonusBall = new Ball(Input.bonusBall());
+            return new WinningLotto(winLotto, bonusBall);
+        } catch (IllegalArgumentException error) {
+            Output.error(error.getMessage());
+            return createWinningLotto(winLotto);
+        }
     }
 
     private void showResult(Lottos lottos, PurchaseAmount purchaseAmount, WinningLotto winningLotto) {

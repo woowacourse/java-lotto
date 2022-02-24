@@ -21,7 +21,7 @@ public class PurchaseAmount {
 
     private void checkValidValue(final String value) {
         if (isBlank(value) || !isNumber(value)) {
-            throw new IllegalArgumentException(ERROR_PREFIX + ERROR_ONLY_NUMBER);
+            throw new IllegalArgumentException(ERROR_ONLY_NUMBER);
         }
         int number = Integer.parseInt(value);
         checkNaturalNumber(number);
@@ -38,13 +38,13 @@ public class PurchaseAmount {
 
     private void checkNaturalNumber(final int value) {
         if (value <= 0) {
-            throw new IllegalArgumentException(ERROR_PREFIX + ERROR_ONLY_NATURAL_NUMBER);
+            throw new IllegalArgumentException(ERROR_ONLY_NATURAL_NUMBER);
         }
     }
 
     private void checkDivideLottoPrice(final int value) {
         if ((value % LOTTO_PRICE) != 0) {
-            throw new IllegalArgumentException(ERROR_PREFIX + ERROR_LOTTO_PRICE);
+            throw new IllegalArgumentException(ERROR_LOTTO_PRICE);
         }
     }
 }
