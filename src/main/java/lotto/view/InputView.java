@@ -27,13 +27,13 @@ public class InputView {
 
     private static List<Integer> convertStringsToIntegers(List<String> strings) {
         return strings.stream()
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+            .map(Integer::parseInt)
+            .collect(Collectors.toList());
     }
 
     private static List<String> splitAndTrim(String winningNumbers) {
         return Arrays.stream(winningNumbers.split(","))
-                .map(String::trim)
-                .collect(Collectors.toList());
+            .map(String::trim)
+            .collect(Collectors.toList());
     }
 }

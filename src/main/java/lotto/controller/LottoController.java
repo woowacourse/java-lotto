@@ -8,6 +8,9 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 public class LottoController {
+    private LottoController() {
+    }
+
     public static void runGame() {
         Money money = new Money(InputView.insertMoney());
         Lottos lottos = LottoGame.buyLottos(money);

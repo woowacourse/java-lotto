@@ -1,10 +1,9 @@
 package lotto.model;
 
+import static org.assertj.core.api.Assertions.*;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class MoneyTest {
 
@@ -24,7 +23,7 @@ class MoneyTest {
             Money money = new Money(14001);
             money.getLottoSize();
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("거스름돈을 지급하지 않습니다. 금액이 남지 않게 지불해주세요.");
+            .hasMessageContaining("거스름돈을 지급하지 않습니다. 금액이 남지 않게 지불해주세요.");
     }
 
     @Test
@@ -33,6 +32,6 @@ class MoneyTest {
         assertThatThrownBy(() -> {
             new Money(-14000);
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("구입 금액은 양수여야 합니다.");
+            .hasMessageContaining("구입 금액은 양수여야 합니다.");
     }
 }

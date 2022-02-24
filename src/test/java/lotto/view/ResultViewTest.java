@@ -1,16 +1,20 @@
 package lotto.view;
 
-import lotto.model.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Arrays;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
+import lotto.model.Lotto;
+import lotto.model.LottoNumber;
+import lotto.model.LottoResult;
+import lotto.model.Lottos;
+import lotto.model.WinningNumbers;
 
 public class ResultViewTest {
 
@@ -30,8 +34,8 @@ public class ResultViewTest {
         ResultView.printGeneratedLottos(lottos.getLottos());
 
         assertThat(outputStreamCaptor.toString())
-                .contains("2개를 ")
-                .contains("[1, 2, 5, 7, 33, 41]");
+            .contains("2개를 ")
+            .contains("[1, 2, 5, 7, 33, 41]");
     }
 
     @Test
@@ -43,9 +47,9 @@ public class ResultViewTest {
         ResultView.printResultStatistics(LottoResult.create(lottos, winningNumbers, bonusNumber));
 
         assertThat(outputStreamCaptor.toString())
-                .contains("5개 일치, 보너스 볼 일치(30000000원)- 1개")
-                .contains("3개 일치 (5000원)- 1개")
-                .contains("4개 일치 (50000원)- 0개");
+            .contains("5개 일치, 보너스 볼 일치(30000000원)- 1개")
+            .contains("3개 일치 (5000원)- 1개")
+            .contains("4개 일치 (50000원)- 0개");
     }
 
     @Test
@@ -55,7 +59,7 @@ public class ResultViewTest {
         ResultView.printYield(yield);
 
         assertThat(outputStreamCaptor.toString())
-                .contains("총 수익률은 0.35입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+            .contains("총 수익률은 0.35입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
     }
 
     @Test
@@ -65,6 +69,6 @@ public class ResultViewTest {
         ResultView.printYield(yield);
 
         assertThat(outputStreamCaptor.toString())
-                .contains("총 수익률은 1.35입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임)");
+            .contains("총 수익률은 1.35입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임)");
     }
 }

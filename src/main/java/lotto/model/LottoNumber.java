@@ -26,9 +26,11 @@ public class LottoNumber {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        LottoNumber that = (LottoNumber) o;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        LottoNumber that = (LottoNumber)o;
         return Objects.equals(number, that.number);
     }
 

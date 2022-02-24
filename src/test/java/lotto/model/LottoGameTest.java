@@ -1,14 +1,13 @@
 package lotto.model;
 
-import org.assertj.core.data.Percentage;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.Collections;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import org.assertj.core.data.Percentage;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 class LottoGameTest {
 
@@ -30,6 +29,6 @@ class LottoGameTest {
         assertThatThrownBy(() -> {
             new LottoGame(Arrays.asList(1, 2, 3, 4, 5, 6), 6);
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("보너스 볼 번호가 당첨 번호와 중복입니다.");
+            .hasMessageContaining("보너스 볼 번호가 당첨 번호와 중복입니다.");
     }
 }

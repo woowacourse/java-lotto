@@ -5,7 +5,7 @@ public class Money {
     private static final String ERROR_NOT_DIVIDED_BY_UNIT_PRICE = "거스름돈을 지급하지 않습니다. 금액이 남지 않게 지불해주세요.";
     private static final String ERROR_NOT_POSITIVE = "구입 금액은 양수여야 합니다.";
 
-    private int money;
+    private final int money;
 
     public Money(Integer money) {
         validatePositive(money);
@@ -30,6 +30,6 @@ public class Money {
     }
 
     public float calculatePercentage(Long numerator) {
-        return numerator / (float) money;
+        return numerator / (float)money;
     }
 }

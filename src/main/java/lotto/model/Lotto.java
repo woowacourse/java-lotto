@@ -23,6 +23,19 @@ public class Lotto {
         this.lottoNumbers = convertIntegersToLottoNumbers(lottoNumbers);
     }
 
+    public static Lotto generate() {
+        List<Integer> lottoNumbers = generateSequentialIntegers();
+        Collections.shuffle(lottoNumbers);
+
+        return new Lotto(lottoNumbers.subList(0, LOTTO_SIZE));
+    }
+
+    private static List<Integer> generateSequentialIntegers() {
+        return IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
+            .boxed()
+            .collect(Collectors.toList());
+    }
+
     private void validateNumberOfLottoNumbers(List<Integer> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(ERROR_NOT_MATCH_LOTTO_NUMBER_SIZE);
@@ -38,27 +51,14 @@ public class Lotto {
 
     private List<LottoNumber> convertIntegersToLottoNumbers(List<Integer> integers) {
         return integers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
-    }
-
-    public static Lotto generate() {
-        List<Integer> lottoNumbers = generateSequentialIntegers();
-        Collections.shuffle(lottoNumbers);
-
-        return new Lotto(lottoNumbers.subList(0, LOTTO_SIZE));
-    }
-
-    private static List<Integer> generateSequentialIntegers() {
-        return IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
-                .boxed()
-                .collect(Collectors.toList());
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
     }
 
     public int matchWinningNumbers(WinningNumbers winningNumbers) {
-        return (int) lottoNumbers.stream()
-                .filter(winningNumbers::matchNumber)
-                .count();
+        return (int)lottoNumbers.stream()
+            .filter(winningNumbers::matchNumber)
+            .count();
     }
 
     public boolean matchBonusNumber(LottoNumber bonusNumber) {
@@ -67,8 +67,8 @@ public class Lotto {
 
     public List<Integer> toIntegers() {
         return lottoNumbers.stream()
-                .map(LottoNumber::getNumber)
-                .collect(Collectors.toList());
+            .map(LottoNumber::getNumber)
+            .collect(Collectors.toList());
     }
 
     public boolean matchNumber(Object number) {

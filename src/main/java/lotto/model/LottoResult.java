@@ -19,7 +19,7 @@ public class LottoResult {
     }
 
     private Rank match(Lotto lotto, WinningNumbers winningNumbers, LottoNumber bonusNumber) {
-        return Rank.find(lotto.matchWinningNumbers(winningNumbers),lotto.matchNumber(bonusNumber));
+        return Rank.find(lotto.matchWinningNumbers(winningNumbers), lotto.matchNumber(bonusNumber));
     }
 
     public Integer getRankCount(Rank rank) {
@@ -28,8 +28,8 @@ public class LottoResult {
 
     public Long getTotalWinningMoney() {
         return result.entrySet().stream()
-                .map(entry -> entry.getKey().getMoney() * entry.getValue())
-                .mapToLong(i -> i)
-                .sum();
+            .map(entry -> entry.getKey().getMoney() * entry.getValue())
+            .mapToLong(i -> i)
+            .sum();
     }
 }

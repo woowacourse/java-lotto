@@ -1,19 +1,18 @@
 package lotto.model;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 class LottoTest {
     @Test
     @DisplayName("6개의 랜덤한 로또 번호를 생성하는지 확인")
     void shuffleTest() {
         assertThatCode(Lotto::generate)
-                .doesNotThrowAnyException();
+            .doesNotThrowAnyException();
     }
 
     @Test
@@ -44,7 +43,7 @@ class LottoTest {
         assertThatThrownBy(() -> {
             new Lotto(Arrays.asList(1, 2, 3, 4, 5));
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("로또 번호 개수는 6개로 입력해주세요.");
+            .hasMessageContaining("로또 번호 개수는 6개로 입력해주세요.");
     }
 
     @Test
@@ -53,7 +52,7 @@ class LottoTest {
         assertThatThrownBy(() -> {
             new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("로또 번호 개수는 6개로 입력해주세요.");
+            .hasMessageContaining("로또 번호 개수는 6개로 입력해주세요.");
     }
 
     @Test
@@ -62,7 +61,7 @@ class LottoTest {
         assertThatThrownBy(() -> {
             new Lotto(Arrays.asList(1, 2, 3, 4, 55, 6));
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("볼 번호가 1~45 범위 내에 해당하지 않습니다.");
+            .hasMessageContaining("볼 번호가 1~45 범위 내에 해당하지 않습니다.");
     }
 
     @Test
@@ -71,7 +70,7 @@ class LottoTest {
         assertThatThrownBy(() -> {
             new Lotto(Arrays.asList(1, 2, 3, 3, 4, 6));
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("로또 번호에 중복이 존재합니다.");
+            .hasMessageContaining("로또 번호에 중복이 존재합니다.");
     }
 
     @Test

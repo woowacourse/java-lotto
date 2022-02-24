@@ -23,8 +23,8 @@ public enum Rank {
             return Rank.SECOND;
         }
         return Arrays.stream(Rank.values())
-                .filter(rank -> rank.value == matchWinningNumbers && rank != Rank.SECOND)
-                .findFirst().orElse(FAIL);
+            .filter(rank -> rank.value == matchWinningNumbers && rank != Rank.SECOND)
+            .findFirst().orElse(FAIL);
     }
 
     public int getValue() {
