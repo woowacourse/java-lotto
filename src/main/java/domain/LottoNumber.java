@@ -3,6 +3,7 @@ package domain;
 import static validator.NumberValidators.validateLottoNumberRange;
 
 import java.util.HashMap;
+import java.util.Optional;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
@@ -15,14 +16,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber of(int value) {
-        LottoNumber lottoNumber = getCacheIfExists(value);
-
-        if (lottoNumber != null) {
-            return lottoNumber;
-        }
-
-        validateLottoNumberRange(value);
-        return createNewCache(value);
+        return Optional.ofNullable(getCacheIfExists(value))
+                .orElseGet(() -> createNewCache(value));
     }
 
     private static LottoNumber getCacheIfExists(int num) {
@@ -30,6 +25,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private static LottoNumber createNewCache(int num) {
+        validateLottoNumberRange(num);
         cache.put(num, new LottoNumber(num));
         return cache.get(num);
     }
