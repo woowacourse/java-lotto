@@ -1,10 +1,9 @@
 package lotto.domain;
 
 public class Ball{
-    private static final String NUMBER_MATCHES = "[0-9]+";
+    private static final String NUMBER_MATCHES = "-?[0-9]+";
     public static final int MINIMUM_NUMBER = 1;
     public static final int MAXIMUM_NUMBER = 45;
-    private static final String ERROR_PREFIX = "[ERROR] ";
     private static final String ERROR_ONLY_NUMBER = "숫자를 입력해주세요!";
     private static final String ERROR_LOTTO_NUMBER = "로또 숫자가 아닙니다";
 
