@@ -48,9 +48,9 @@ public class LotteryMachine {
 
     private static void printResult(Count numberOfTickets, List<LotteryResultDto> lotteryResult) {
         OutputView.printStatistics(lotteryResult);
-        int ticketAmount = numberOfTickets.getNumber() * TICKET_PRICE.getNumber();
-        int winningLotteryAmount = getWinningLotteryAmount(lotteryResult);
-        OutputView.printProfitRate(calculateProfitRate(winningLotteryAmount, ticketAmount));
+        Money ticketAmount = new Money(numberOfTickets.getNumber() * TICKET_PRICE.getNumber());
+        Money winningLotteryAmount = new Money(getWinningLotteryAmount(lotteryResult));
+        OutputView.printProfitRate(calculateProfitRate(winningLotteryAmount.getAmount(), ticketAmount.getAmount()));
     }
 
     private static int getWinningLotteryAmount(List<LotteryResultDto> lotteryResult) {
