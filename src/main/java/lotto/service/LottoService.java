@@ -4,7 +4,7 @@ import lotto.domain.LottoMatchKind;
 import lotto.domain.LottoNumbers;
 import lotto.domain.PurchaseAmount;
 import lotto.domain.TargetLottoNumbers;
-import lotto.domain.generator.Generator;
+import lotto.domain.generator.LottoGenerator;
 
 import java.util.Arrays;
 import java.util.EnumMap;
@@ -18,10 +18,10 @@ public class LottoService {
     private final PurchaseAmount purchaseAmount;
     private final Map<LottoMatchKind, Integer> matchResult;
 
-    public LottoService(final Generator generator, final String purchaseAmount) {
+    public LottoService(final LottoGenerator lottoGenerator, final String purchaseAmount) {
         this.purchaseAmount = PurchaseAmount.fromPurchaseAmountAndLottoPrice(purchaseAmount, LOTTO_PRICE);
         lottoNumbersGroup =
-                generator.generateLottoNumbersGroup(this.purchaseAmount.getCountOfLottoNumbers(LOTTO_PRICE));
+                lottoGenerator.generateLottoNumbersGroup(this.purchaseAmount.getCountOfLottoNumbers(LOTTO_PRICE));
         matchResult = new EnumMap<>(LottoMatchKind.class);
         initializeResult(matchResult);
     }

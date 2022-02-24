@@ -10,7 +10,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class CustomLottoGenerator implements Generator {
+public class LottoCustomGenerator implements LottoGenerator {
     private static final String TEST_LOTTO_NUMBERS_COUNT_EXCEED_EXCEPTION_MESSAGE =
             "테스트 시에는 로또 번호들을 39개까지 생성할 수 있습니다.";
     private final List<LottoNumber> lottoNumbers = Arrays.asList(LottoNumber.values());

@@ -3,7 +3,7 @@ package lotto.domain.controller;
 import lotto.domain.LottoMatchKind;
 import lotto.domain.LottoNumbers;
 import lotto.domain.TargetLottoNumbers;
-import lotto.domain.generator.Generator;
+import lotto.domain.generator.LottoGenerator;
 import lotto.domain.vo.LottoNumber;
 import lotto.dto.LottoMatchKindDto;
 import lotto.dto.LottoNumbersDto;
@@ -20,19 +20,19 @@ public class LottoController {
     private final InputView inputView;
     private final OutputView outputView;
 
-    public LottoController(final Generator generator, final InputView inputView, final OutputView outputView) {
+    public LottoController(final LottoGenerator lottoGenerator, final InputView inputView, final OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
-        lottoService = initializeLottoService(generator);
+        lottoService = initializeLottoService(lottoGenerator);
     }
 
-    private LottoService initializeLottoService(final Generator generator) {
+    private LottoService initializeLottoService(final LottoGenerator lottoGenerator) {
         try {
             final String purchaseAmountInput = inputView.inputPurchaseAmount();
-            return new LottoService(generator, purchaseAmountInput);
+            return new LottoService(lottoGenerator, purchaseAmountInput);
         } catch (final Exception e) {
             inputView.printErrorMessage(e.getMessage());
-            return initializeLottoService(generator);
+            return initializeLottoService(lottoGenerator);
         }
     }
 

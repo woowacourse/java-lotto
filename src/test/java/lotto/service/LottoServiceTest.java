@@ -3,8 +3,8 @@ package lotto.service;
 import lotto.domain.LottoMatchKind;
 import lotto.domain.LottoNumbers;
 import lotto.domain.TargetLottoNumbers;
-import lotto.domain.generator.CustomLottoGenerator;
-import lotto.domain.generator.Generator;
+import lotto.domain.generator.LottoCustomGenerator;
+import lotto.domain.generator.LottoGenerator;
 import lotto.domain.vo.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,9 +18,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.entry;
 
 class LottoServiceTest {
-    private final Generator customLottoGenerator = new CustomLottoGenerator();
+    private final LottoGenerator lottoGenerator = new LottoCustomGenerator();
     private final String purchaseAmount = "5000";
-    private final LottoService lottoService = new LottoService(customLottoGenerator, purchaseAmount);
+    private final LottoService lottoService = new LottoService(lottoGenerator, purchaseAmount);
     private final TargetLottoNumbers targetLottoNumbers = new TargetLottoNumbers(
             new LottoNumbers(Arrays.asList("2", "3", "4", "5", "6", "7")), LottoNumber.ONE);
 
