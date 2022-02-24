@@ -1,6 +1,8 @@
 package lotto.model.ticket;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -11,7 +13,7 @@ public class LottoTickets {
 
     private final List<LottoTicket> tickets;
 
-    private LottoTickets(List<LottoTicket> tickets) {
+    public LottoTickets(List<LottoTicket> tickets) {
         this.tickets = tickets;
     }
 
@@ -24,5 +26,9 @@ public class LottoTickets {
 
     public List<LottoTicket> getTickets() {
         return Collections.unmodifiableList(tickets);
+    }
+
+    public Object size() {
+        return tickets.size();
     }
 }

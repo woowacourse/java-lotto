@@ -2,7 +2,7 @@ package lotto.model.ticket.number;
 
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber>{
 
     public static final int MIN = 1;
     public static final int MAX = 45;
@@ -25,6 +25,11 @@ public class LottoNumber {
     }
 
     @Override
+    public int compareTo(LottoNumber o) {
+        return Integer.compare(this.getNumber(), o.getNumber());
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o)
             return true;
@@ -41,5 +46,10 @@ public class LottoNumber {
 
     public int getNumber() {
         return number;
+    }
+
+    @Override
+    public String toString() {
+        return "" + number;
     }
 }
