@@ -6,9 +6,13 @@ public class Money {
 
     private final int amount;
 
-    public Money(int amount) {
+    private Money(int amount) {
         validate(amount);
         this.amount = amount;
+    }
+
+    public static Money of(int money) {
+        return new Money(money);
     }
 
     private void validate(int amount) {

@@ -33,7 +33,7 @@ public class LottoStatisticsTest {
     @DisplayName("수익률을 계산할 수 있다.")
     public void calculateEarningRates() {
         // given
-        Money money = new Money(3000);
+        Money money = Money.of(3000);
         List<LottoRank> ranks = List.of(LottoRank.FIFTH, LottoRank.SIXTH, LottoRank.SIXTH);
         // when
         LottoStatistics statistics = new LottoStatistics(ranks);

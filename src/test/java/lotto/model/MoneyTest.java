@@ -10,7 +10,7 @@ class MoneyTest {
     @DisplayName("천원 단위의 돈을 생성한다.")
     public void createMoney() {
         // given
-        Money money = new Money(1000);
+        Money money = Money.of(1000);
         // then
         Assertions.assertThat(money).isNotNull();
     }
@@ -22,7 +22,7 @@ class MoneyTest {
         int amount = 1500;
         // then
         Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
-            .isThrownBy(() -> new Money(amount));
+            .isThrownBy(() -> Money.of(amount));
     }
 
     @Test
@@ -32,6 +32,6 @@ class MoneyTest {
         int amount = -1000;
         // then
         Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
-            .isThrownBy(() -> new Money(amount));
+            .isThrownBy(() -> Money.of(amount));
     }
 }

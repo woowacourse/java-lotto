@@ -1,4 +1,4 @@
-package lotto.model.utils;
+package lotto.view.utils;
 
 public class IntegerUtils {
 
