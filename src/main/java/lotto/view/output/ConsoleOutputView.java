@@ -30,7 +30,7 @@ public class ConsoleOutputView implements OutputView {
     private void printOneOfLottoNumbersGroup(final LottoNumbersDto lottoNumbers) {
         final StringJoiner result =
                 new StringJoiner(LOTTO_NUMBER_SEPARATOR, LOTTO_NUMBERS_PREFIX, LOTTO_NUMBERS_SUFFIX);
-        final List<Integer> numbers = lottoNumbers.getLottoNumbers();
+        final List<Integer> numbers = lottoNumbers.getNumbers();
         numbers.forEach(number -> result.add(String.valueOf(number)));
         System.out.println(result);
     }
@@ -43,7 +43,7 @@ public class ConsoleOutputView implements OutputView {
 
     private void printEachCountOfWinningByMatchKind(final LottoMatchKindDto winningResult) {
         System.out.printf(findMessageFormatByBonus(winningResult),
-                winningResult.getMatchCount(), winningResult.getWinningAmount(), winningResult.getWinningCount());
+                winningResult.getMatchedCount(), winningResult.getWinningAmount(), winningResult.getWinningCount());
     }
 
     private String findMessageFormatByBonus(LottoMatchKindDto winningResult) {

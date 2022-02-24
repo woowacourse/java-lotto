@@ -19,7 +19,7 @@ public enum LottoMatchKind {
         this.bonus = bonus;
         this.winningAmount = winningAmount;
     }
-
+// TODO : 예외 메시지 상수화
     public static LottoMatchKind from(final int matchCount, final boolean bonus) {
         return Arrays.stream(values())
                 .filter(matchKind -> matchKind.matchCount == matchCount)

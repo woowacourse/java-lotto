@@ -39,32 +39,32 @@ public class LottoController {
     public void run() {
         outputView.printPurchaseCount(lottoService.getCountOfLottoNumbers());
         printLottoNumbersGroup();
-        final WinningNumbers winningNumbers = generateTargetLottoNumbers();
+        final WinningNumbers winningNumbers = generateWinningNumbers();
         printResult(winningNumbers);
     }
 
     private void printLottoNumbersGroup() {
-        final List<LottoNumbersDto> lottoNumbersGroup =
+        final List<LottoNumbersDto> numbersGroup =
                 convertLottoNumbersGroupToDtos(lottoService.getLottoNumbersGroup());
-        outputView.printLottoNumbersGroup(lottoNumbersGroup);
+        outputView.printLottoNumbersGroup(numbersGroup);
     }
 
     private List<LottoNumbersDto> convertLottoNumbersGroupToDtos(
-            final List<LottoNumbers> lottoNumbersGroup) {
-        return lottoNumbersGroup.stream()
+            final List<LottoNumbers> numbersGroup) {
+        return numbersGroup.stream()
                 .map(LottoNumbers::getValues)
                 .map(LottoNumbersDto::new)
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    private WinningNumbers generateTargetLottoNumbers() {
+    private WinningNumbers generateWinningNumbers() {
         try {
-            final LottoNumbers targetLottoNumbers = new LottoNumbers(inputView.inputLastWeekWinningNumbers());
-            final LottoNumber bonusLottoNumber = LottoNumber.from(inputView.inputBonusNumber());
-            return new WinningNumbers(targetLottoNumbers, bonusLottoNumber);
+            final LottoNumbers lastWinningNumbers = new LottoNumbers(inputView.inputLastWeekWinningNumbers());
+            final LottoNumber bonusNumber = LottoNumber.from(inputView.inputBonusNumber());
+            return new WinningNumbers(lastWinningNumbers, bonusNumber);
         } catch (final Exception e) {
             inputView.printErrorMessage(e.getMessage());
-            return generateTargetLottoNumbers();
+            return generateWinningNumbers();
         }
     }
 
