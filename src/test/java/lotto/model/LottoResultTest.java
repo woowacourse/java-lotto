@@ -8,7 +8,7 @@ import java.util.Collections;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LottoResultTest {
+class LottoResultTest {
     @Test
     @DisplayName("2등 당첨 번호를 비교한다")
     void matchNumber() {

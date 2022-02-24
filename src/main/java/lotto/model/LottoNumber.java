@@ -20,7 +20,7 @@ public class LottoNumber {
         }
     }
 
-    public Integer getNumber() {
+    Integer getNumber() {
         return number;
     }
 

@@ -25,11 +25,11 @@ public class Money {
         }
     }
 
-    public int getLottoSize() {
+    int getLottoSize() {
         return money / LOTTO_PRICE;
     }
 
-    public float calculatePercentage(Long numerator) {
+    float calculatePercentage(Long numerator) {
         return numerator / (float)money;
     }
 }

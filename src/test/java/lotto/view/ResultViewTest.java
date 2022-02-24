@@ -16,7 +16,7 @@ import lotto.model.LottoResult;
 import lotto.model.Lottos;
 import lotto.model.WinningNumbers;
 
-public class ResultViewTest {
+class ResultViewTest {
 
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
     private final Lotto lotto1 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7));

@@ -26,7 +26,7 @@ public class LottoResult {
         return result.getOrDefault(rank, 0);
     }
 
-    public Long getTotalWinningMoney() {
+    Long getTotalWinningMoney() {
         return result.entrySet().stream()
             .map(entry -> entry.getKey().getMoney() * entry.getValue())
             .mapToLong(i -> i)

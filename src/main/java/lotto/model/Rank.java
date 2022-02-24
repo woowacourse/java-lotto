@@ -18,7 +18,7 @@ public enum Rank {
         this.money = money;
     }
 
-    public static Rank find(int matchWinningNumbers, boolean matchBonus) {
+    static Rank find(int matchWinningNumbers, boolean matchBonus) {
         if (matchBonus && matchWinningNumbers == SECOND.value) {
             return Rank.SECOND;
         }

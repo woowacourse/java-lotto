@@ -20,11 +20,6 @@ public class InputView {
         return convertStringsToIntegers(splitAndTrim(winningNumbers));
     }
 
-    public static Integer inputBonusNumber() {
-        System.out.println("보너스 볼을 입력해 주세요.");
-        return scanner.nextInt();
-    }
-
     private static List<Integer> convertStringsToIntegers(List<String> strings) {
         return strings.stream()
             .map(Integer::parseInt)
@@ -35,5 +30,10 @@ public class InputView {
         return Arrays.stream(winningNumbers.split(","))
             .map(String::trim)
             .collect(Collectors.toList());
+    }
+
+    public static Integer inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return scanner.nextInt();
     }
 }

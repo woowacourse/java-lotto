@@ -6,7 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class LottoNumberTest {
+class LottoNumberTest {
 
     @ParameterizedTest
     @DisplayName("볼 번호의 범위가 1~45가 아닌 경우 예외 처리")
