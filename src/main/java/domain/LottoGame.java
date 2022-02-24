@@ -53,4 +53,13 @@ public class LottoGame {
     private int getLottoPrice() {
         return lottos.getLottos().size() * LOTTO_PRICE;
     }
+
+    @Override
+    public String toString() {
+        return "LottoGame{" +
+                "lottos=" + lottos +
+                ", referee=" + referee +
+                ", resultsStatistics=" + resultsStatistics +
+                '}';
+    }
 }

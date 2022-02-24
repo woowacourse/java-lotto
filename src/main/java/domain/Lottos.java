@@ -24,4 +24,9 @@ public class Lottos {
     public List<Lotto> getLottos() {
         return lottos;
     }
+
+    @Override
+    public String toString() {
+        return "Lottos{" + "lottos=" + lottos + '}';
+    }
 }

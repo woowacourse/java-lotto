@@ -29,4 +29,12 @@ public class LottoReferee {
         return lotto.getChosenNumbers()
                 .contains(bonusNumber);
     }
+
+    @Override
+    public String toString() {
+        return "LottoReferee{" +
+                "winningNumbers=" + winningNumbers +
+                ", bonusNumber=" + bonusNumber +
+                '}';
+    }
 }
