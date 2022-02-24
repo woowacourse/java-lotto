@@ -38,7 +38,7 @@ public class Lotteries {
 
 	private Map<Rank, Integer> initRankResult() {
 		final Map<Rank, Integer> rankResult = new HashMap<>();
-		Rank.getValues()
+		Rank.valuesWithoutNone()
 			.forEach((rank) -> rankResult.put(rank, 0));
 		return rankResult;
 	}
