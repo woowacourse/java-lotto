@@ -58,9 +58,8 @@ public class InputView {
     }
 
     private static String inputBonusText() {
-        String value = repeatablyInput("보너스 볼을 입력해 주세요.", NUMBER_VALIDATOR::validate,
+        return repeatablyInput("보너스 볼을 입력해 주세요.", NUMBER_VALIDATOR::validate,
             OutputView::printErrorMessage);
-        return value;
     }
 
 }
