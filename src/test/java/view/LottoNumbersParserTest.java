@@ -48,7 +48,7 @@ public class LottoNumbersParserTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"100,200,3,4,5,6", "1,2,3,4,5"})
+    @ValueSource(strings = {"100,200,3,4,5,6", "1,2,3,4,5", "01, 0, 1, 2, 3, 4", "-1, 1, 2, 3, 4, 5", "46, 1, 2, 3, 4, 5"})
     @DisplayName("잘못된 로또 번호 포맷 검증")
     void validateInvalidLottoNumberFormat(String invalidLottoNumbers) {
         assertThatThrownBy(() -> parser.parse(invalidLottoNumbers))
