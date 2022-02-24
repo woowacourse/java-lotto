@@ -1,16 +1,18 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.Map;
 
 public class LottoResults {
 
     private static final String ERROR_NULL_ARGUMENT_MESSAGE = "로또 결과 생성자의 인자는 null이면 안됩니다.";
+    private static final String ERROR_RESULT_SIZE_MESSAGE = "로또 결과가 잘못되었습니다.";
 
     private final Map<LottoPrize, Integer> results;
 
     public LottoResults(Map<LottoPrize, Integer> results) {
         validateNull(results);
-        addMissingKey(results);
+        validMissingKey(results);
 
         this.results = results;
     }
@@ -21,9 +23,12 @@ public class LottoResults {
         }
     }
 
-    private void addMissingKey(Map<LottoPrize, Integer> results) {
-        for (LottoPrize prize : LottoPrize.values()) {
-            results.put(prize, results.getOrDefault(prize, 0));
+    private void validMissingKey(Map<LottoPrize, Integer> results) {
+        int keySize = (int) Arrays.stream(LottoPrize.values())
+                .filter(results::containsKey)
+                .count();
+        if (keySize != LottoPrize.values().length) {
+            throw new IllegalArgumentException(ERROR_RESULT_SIZE_MESSAGE);
         }
     }
 
