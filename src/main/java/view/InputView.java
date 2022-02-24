@@ -9,7 +9,7 @@ public class InputView {
     private static final String SCAN_BONUS_NUMBER_GUIDE = "보너스 볼을 입력해 주세요.";
     private static final Scanner SCANNER = new Scanner(System.in);
 
-    public static String scanMoney() { //TODO: 투입 금액
+    public static String scanMoney() {
         System.out.println(SCAN_MONEY_GUIDE);
         return inputFromUser();
     }
