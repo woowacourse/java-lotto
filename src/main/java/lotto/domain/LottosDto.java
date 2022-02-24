@@ -3,9 +3,9 @@ package lotto.domain;
 import java.util.List;
 
 public class LottosDto {
-    private final List<Lotto> lottos;
+    private final List<ChoiceNumber> lottos;
 
-    public LottosDto(List<Lotto> lottos) {
+    public LottosDto(List<ChoiceNumber> lottos) {
         this.lottos = lottos;
     }
 
@@ -13,7 +13,7 @@ public class LottosDto {
         return new LottosDto(lottos.getLottos());
     }
 
-    public List<Lotto> getLottos() {
+    public List<ChoiceNumber> getLottos() {
         return lottos;
     }
 

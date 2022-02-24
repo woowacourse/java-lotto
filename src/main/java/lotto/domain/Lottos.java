@@ -8,7 +8,7 @@ public class Lottos {
     private static final int UNIT_AMOUNT = 1000;
 
     private Money money;
-    private List<Lotto> lottos;
+    private List<ChoiceNumber> lottos;
     private LottoResult result;
 
     public Lottos(Money money) {
@@ -20,7 +20,7 @@ public class Lottos {
 
     private void purchaseLotto() {
         IntStream.range(0, getLottoCount(money))
-                .forEach(i -> lottos.add(new Lotto(new ChoiceNumber())));
+                .forEach(i -> lottos.add((new ChoiceNumber())));
     }
 
     public double getYield() {
@@ -37,8 +37,8 @@ public class Lottos {
     }
 
     public LottoResult getResult(WinningNumber winningNumber) {
-        for (Lotto lotto : lottos) {
-            LottoRank lottoRank = winningNumber.findLottoRank(lotto.getChoiceNumber());
+        for (ChoiceNumber lotto : lottos) {
+            LottoRank lottoRank = winningNumber.findLottoRank(lotto);
             if (lottoRank != null) {
                 result.add(lottoRank);
             }
@@ -46,7 +46,7 @@ public class Lottos {
         return result;
     }
 
-    public List<Lotto> getLottos() {
+    public List<ChoiceNumber> getLottos() {
         return lottos;
     }
 }

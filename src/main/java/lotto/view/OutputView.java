@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
+import lotto.domain.ChoiceNumber;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoResult;
 import lotto.domain.LottosDto;
@@ -24,8 +24,8 @@ public class OutputView {
 
     public void printPurchasedLotto(LottosDto lottosDto) {
         System.out.println(String.format("%d개를 구매했습니다.", lottosDto.getLottosSize()));
-        for (Lotto lotto : lottosDto.getLottos()) {
-            System.out.println(lotto.getChoiceNumber());
+        for (ChoiceNumber choiceNumber : lottosDto.getLottos()) {
+            System.out.println(choiceNumber);
         }
     }
 
