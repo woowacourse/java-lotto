@@ -2,7 +2,7 @@ package domain;
 
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     private static final String ERROR_MESSAGE_FOR_OUT_OF_RANGE_NUMBER = "1에서 45 사이의 값을 입력해주세요";
     private static final int MINIMUM_LOTTO_NUMBER = 1;
     private static final int MAXIMUM_LOTTO_NUMBER = 45;
@@ -26,6 +26,11 @@ public class LottoNumber {
 
     public int getNumber() {
         return number;
+    }
+
+    @Override
+    public int compareTo(LottoNumber otherLottoNumber) {
+        return Integer.compare(number, otherLottoNumber.number);
     }
 
     @Override
