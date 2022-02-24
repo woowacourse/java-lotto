@@ -76,9 +76,9 @@
 - [ ] `Lottos` 리팩토링
   - [ ] `setupMap` 메소드 리팩토링
   - [ ] `validateNullOrEmpty` 의 에러 메세지 상수화
-- [ ] `LottoNumbers` 리팩토링
-  - [ ] 매직넘버 (1, 45) 상수화
-  - [ ] `IntStream` 의 `rangeClosed` 메소드를 사용하여 개선
+- [X] `LottoNumbers` 리팩토링
+  - [X] 매직넘버 (1, 45) 상수화
+  - [X] `IntStream` 의 `rangeClosed` 메소드를 사용하여 개선
 - [ ] `LottoQuantity` 의 '횟수' 워딩 수정
 - [ ] `WinningLotto` 리팩토링
   - [ ] `getRankByLotto` 메소드의 조건식 개선
