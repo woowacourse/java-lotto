@@ -42,6 +42,12 @@ public class InputView {
 		validateRange(money);
 	}
 
+	private static void validateNumber(String money) {
+		if (!COMPILED_NUMBER_PATTERN.matcher(money).matches()) {
+			throw new IllegalArgumentException(INVALID_INPUT_NUMBER_EXCEPTION.getMessage());
+		}
+	}
+
 	private static void validateRange(String money) {
 		int number = Integer.parseInt(money);
 		if (number < MINIMUM_MONEY || number > MAXIMUM_MONEY) {
@@ -49,18 +55,9 @@ public class InputView {
 		}
 	}
 
-	private static void validateNumber(String money) {
-		if (!COMPILED_NUMBER_PATTERN.matcher(money).matches()) {
-			throw new IllegalArgumentException(INVALID_INPUT_NUMBER_EXCEPTION.getMessage());
-		}
-	}
-
 	public static List<Integer> inputValidLotteryNumber() {
 		final String numbers = inputLotteryNumber();
-		return Arrays.stream(numbers.split(WINNING_NUMBER_DELIMITER))
-			.map(String::trim)
-			.map(Integer::parseInt)
-			.collect(Collectors.toList());
+		return splitNumbers(numbers);
 	}
 
 	private static String inputLotteryNumber() {
@@ -74,6 +71,15 @@ public class InputView {
 			return inputLotteryNumber();
 		}
 	}
+
+	private static List<Integer> splitNumbers(String numbers) {
+		return Arrays.stream(numbers.split(WINNING_NUMBER_DELIMITER))
+			.map(String::trim)
+			.map(Integer::parseInt)
+			.collect(Collectors.toList());
+	}
+
+
 
 	private static void validateWinningNumber(String winningNumber) {
 		if (!COMPILED_WINNING_NUMBER_PATTERN.matcher(winningNumber).matches()) {
