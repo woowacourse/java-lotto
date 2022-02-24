@@ -29,7 +29,7 @@ public enum Rank {
                 .orElse(RANK_OUT);
     }
 
-    public long multiplyPrizeBy(int count) {
+    public long calculateTotalPrize(int count) {
         return prize * count;
     }
 

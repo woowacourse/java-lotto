@@ -45,7 +45,7 @@ public class Controller {
 
     private BonusNumber getBonusNumber(Scanner scanner, WinningLotto winningLotto) {
         try {
-            return new BonusNumber(InputView.inputBonusNumber(scanner),winningLotto);
+            return new BonusNumber(InputView.inputBonusNumber(scanner), winningLotto);
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception.getMessage());
             return getBonusNumber(scanner, winningLotto);
