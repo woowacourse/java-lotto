@@ -17,8 +17,8 @@ class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {0, 46})
     @DisplayName("로또 번호 범위가 아니면 예외")
-    void lottoNumberRangeException(int source) {
-        assertThatThrownBy(() -> LottoNumber.create(source))
+    void lottoNumberRangeException(int number) {
+        assertThatThrownBy(() -> LottoNumber.getInstance(number))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -26,14 +26,14 @@ class LottoNumberTest {
     @ValueSource(ints = {1, 45})
     @DisplayName("로또 번호 범위가 아니면 예외")
     void lottoNumberCreate(int source) {
-        assertDoesNotThrow(() -> LottoNumber.create(source));
+        assertDoesNotThrow(() -> LottoNumber.getInstance(source));
     }
 
     @Test
     @DisplayName("보너스 번호가 당첨 번호와 중복시 예외")
     void bonusNumberDuplicateException() {
         List<LottoNumber> inputLottoNumbers = IntStream.of(1, 2, 3, 4, 5, 6)
-                .mapToObj(LottoNumber::create)
+                .mapToObj(LottoNumber::getInstance)
                 .collect(Collectors.toList());
 
         assertThatThrownBy(() -> LottoNumber.createBonus(6, new LottoTicketNumbers(inputLottoNumbers)))

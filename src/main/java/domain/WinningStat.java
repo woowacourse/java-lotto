@@ -15,10 +15,6 @@ public class WinningStat {
         stat = ranks;
     }
 
-    public Map<LottoRank, Integer> getStat() {
-        return stat;
-    }
-
     public double calculateProfit(int ticketPrice) {
         int num = stat.values().stream()
                 .reduce(DEFAULT_VALUE, Integer::sum);
@@ -36,5 +32,9 @@ public class WinningStat {
                 .filter(wonLottoRanks::contains)
                 .mapToLong(rank -> (long) rank.getPrize() * stat.get(rank))
                 .reduce(DEFAULT_VALUE, Long::sum);
+    }
+
+    public Map<LottoRank, Integer> getStat() {
+        return stat;
     }
 }

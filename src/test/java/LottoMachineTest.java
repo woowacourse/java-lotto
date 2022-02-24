@@ -43,12 +43,12 @@ class LottoMachineTest {
                 Money.from(2000), new FixedLottoNumberStrategy());
 
         List<LottoNumber> inputWinningNumbers = IntStream.of(2, 1, 4, 3, 5, 6)
-                .mapToObj(LottoNumber::create)
+                .mapToObj(LottoNumber::getInstance)
                 .collect(Collectors.toList());
 
         LottoTicketNumbers winningNumbers = new LottoTicketNumbers(inputWinningNumbers);
         WinningStat winningStat = lottoMachine.createWinningStat(
-                lottoTickets, winningNumbers, LottoNumber.create(7));
+                lottoTickets, winningNumbers, LottoNumber.getInstance(7));
 
         Map<LottoRank, Integer> result = winningStat.getStat();
         assertThat(result.get(LottoRank.FIRST)).isEqualTo(2);
@@ -59,7 +59,7 @@ class LottoMachineTest {
         @Override
         public List<LottoNumber> generate() {
             return IntStream.of(1, 2, 3, 4, 5, 6)
-                    .mapToObj(LottoNumber::create)
+                    .mapToObj(LottoNumber::getInstance)
                     .collect(Collectors.toList());
         }
     }
