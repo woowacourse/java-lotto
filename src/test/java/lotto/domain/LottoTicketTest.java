@@ -49,4 +49,15 @@ class LottoTicketTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
             .isThrownBy(() -> new LottoTicket(numbers));
     }
+
+    @Test
+    @DisplayName("로또 번호는 null일ㄹ 수 없다.")
+    void validateNull() {
+        // given
+        List<LottoNumber> numbers = null;
+        // then
+        assertThatThrownBy(() -> new LottoTicket(numbers))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("로또 번호는 null일 수 없습니다.");
+    }
 }
