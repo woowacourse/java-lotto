@@ -66,11 +66,10 @@ public class LottoController {
     }
 
     private LottoNumber registerBonusNumber(List<LottoNumber> winningNumbers) {
-        int bonusNumber = InputView.requestBonusNumber();
+        LottoNumber bonusNumber = LottoNumber.of(InputView.requestBonusNumber());
 
-        validateNoDuplicateInList(bonusNumber,
-                winningNumbers.stream().map(LottoNumber::getNumber).collect(Collectors.toList()));
+        validateNoDuplicateInList(bonusNumber, winningNumbers);
 
-        return LottoNumber.of(bonusNumber);
+        return bonusNumber;
     }
 }

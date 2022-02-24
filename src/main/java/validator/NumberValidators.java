@@ -51,16 +51,19 @@ public class NumberValidators {
         }
     }
 
-    public static void validateNoDuplicates(List<?> values) {
-        Set<?> noDuplicateValues = new HashSet<>(values);
+    public static <T> void validateNoDuplicates(List<T> values) {
+        Set<T> noDuplicateValues = new HashSet<>(values);
 
         if (values.size() != noDuplicateValues.size()) {
             throw new IllegalArgumentException(DUPLICATE_WINNING_NUMBER_EXCEPTION_MESSAGE);
         }
     }
 
-    public static void validateNoDuplicateInList(int target, List<Integer> nums) {
-        if (nums.stream().anyMatch(num -> num == target)) {
+    public static <T> void validateNoDuplicateInList(T target, List<T> values) {
+        boolean targetExistsInList = values.stream()
+                .anyMatch(value -> value == target);
+
+        if (targetExistsInList) {
             throw new IllegalArgumentException(NOT_UNIQUE_BONUS_NUMBER_EXCEPTION_MESSAGE);
         }
     }
