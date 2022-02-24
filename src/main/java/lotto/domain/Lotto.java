@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Lotto {
     private static final int UNIT_AMOUNT = 1000;
@@ -25,12 +26,10 @@ public class Lotto {
     }
 
     public LottoResult computeResult(WinningNumber winningNumber) {
-        for (ChoiceNumber choiceNumber : lotto) {
-            LottoRank lottoRank = winningNumber.findLottoRank(choiceNumber);
-            if (lottoRank != null) {
-                result.add(lottoRank);
-            }
-        }
+        lotto.stream()
+                .map(winningNumber::findLottoRank)
+                .filter(Objects::nonNull)
+                .forEach(result::add);
         return result;
     }
 
