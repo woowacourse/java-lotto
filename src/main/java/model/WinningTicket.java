@@ -18,12 +18,6 @@ public class WinningTicket {
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
-    private void checkSize(List<Integer> winningNumbers) {
-        if (winningNumbers.size() != TICKET_SIZE) {
-            throw new IllegalArgumentException();
-        }
-    }
-
     public List<Integer> winningNumberValues() {
         return winningNumbers.stream()
                 .map(LottoNumber::value)
@@ -50,6 +44,12 @@ public class WinningTicket {
 
     public boolean isSecondWinning(LottoTicket lottoTicket) {
         return compareMatchCount(lottoTicket) == SECOND_WINNING_COUNT &&
-               matchBonusNumber(lottoTicket);
+                matchBonusNumber(lottoTicket);
+    }
+
+    private void checkSize(List<Integer> winningNumbers) {
+        if (winningNumbers.size() != TICKET_SIZE) {
+            throw new IllegalArgumentException();
+        }
     }
 }

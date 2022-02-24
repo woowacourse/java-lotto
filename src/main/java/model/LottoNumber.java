@@ -7,6 +7,10 @@ public class LottoNumber {
         this.number = checkNumber(number);
     }
 
+    public int value() {
+        return number;
+    }
+
     private int checkNumber(int number) {
         if (isNotCorrectNumber(number)) {
             throw new RuntimeException();
@@ -16,9 +20,5 @@ public class LottoNumber {
 
     private boolean isNotCorrectNumber(int number) {
         return !(number <= 45 && number > 0);
-    }
-
-    public int value() {
-        return number;
     }
 }

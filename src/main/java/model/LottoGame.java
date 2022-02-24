@@ -37,6 +37,12 @@ public class LottoGame {
         return result;
     }
 
+    public Double getLottoRateOfReturn() {
+        double totalReturn = calculateTotalReturn();
+        double purchaseMoney = (double) lottoTickets.size() * TICKET_PRICE;
+        return totalReturn / purchaseMoney;
+    }
+
     private LinkedHashMap<WinningPrize, Integer> initWinningCount() {
         return new LinkedHashMap<>() {{
             put(WinningPrize.FIFTH, INIT_COUNT);
@@ -64,12 +70,6 @@ public class LottoGame {
         }
         int count = winningTicket.compareMatchCount(lottoTicket);
         return winningInfo.get(count);
-    }
-
-    public Double getLottoRateOfReturn() {
-        double totalReturn = calculateTotalReturn();
-        double purchaseMoney = (double) lottoTickets.size() * TICKET_PRICE;
-        return totalReturn / purchaseMoney;
     }
 
     private int calculateTotalReturn() {

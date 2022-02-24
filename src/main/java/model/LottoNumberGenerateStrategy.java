@@ -9,9 +9,9 @@ public class LottoNumberGenerateStrategy implements GenerateStrategy {
     @Override
     public List<Integer> generateNumbers() {
         List<Integer> numbers = IntStream.range(1, 46).boxed().collect(Collectors.toList());
-
         Collections.shuffle(numbers);
-
-        return numbers.stream().limit(6).collect(Collectors.toList());
+        return numbers.stream()
+                .limit(6)
+                .collect(Collectors.toList());
     }
 }
