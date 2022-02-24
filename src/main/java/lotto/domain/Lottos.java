@@ -1,25 +1,26 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lottos {
 
-    private List<Lotto> lottos;
+    private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
         validateSize(lottos);
         this.lottos = lottos;
     }
 
-    public List<Rank> matchRanks(WinnerLotto winnerLotto) {
+    public List<Rank> match(WinnerLotto winnerLotto) {
         return lottos.stream()
             .map(winnerLotto::findRank)
             .collect(Collectors.toList());
     }
 
     public List<Lotto> getLottos() {
-        return List.copyOf(lottos);
+        return new ArrayList<>(lottos);
     }
 
     private void validateSize(List<Lotto> lottos) {

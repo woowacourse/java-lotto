@@ -9,27 +9,27 @@ public class Money {
     private static final int MINIMUM_MONEY = 0;
     private static final int DECIMAL_PLACE = 2;
 
-    private final long money;
+    private final long amount;
 
-    public Money(long money) {
-        validatePositive(money);
-        this.money = money;
+    public Money(long amount) {
+        validatePositive(amount);
+        this.amount = amount;
     }
 
     public Money plus(Money money) {
-        return new Money(this.money + money.money);
+        return new Money(this.amount + money.amount);
     }
 
     public Money minus(Money money) {
-        return new Money(this.money - money.money);
+        return new Money(this.amount - money.amount);
     }
 
     public BigDecimal divide(Money money) {
-        return BigDecimal.valueOf(this.money).divide(BigDecimal.valueOf(money.money), DECIMAL_PLACE, RoundingMode.DOWN);
+        return BigDecimal.valueOf(this.amount).divide(BigDecimal.valueOf(money.amount), DECIMAL_PLACE, RoundingMode.DOWN);
     }
 
-    public long getMoney() {
-        return money;
+    public long getAmount() {
+        return amount;
     }
 
     @Override
@@ -41,12 +41,12 @@ public class Money {
             return false;
         }
         Money money1 = (Money)o;
-        return money == money1.money;
+        return amount == money1.amount;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(money);
+        return Objects.hash(amount);
     }
 
     private void validatePositive(long money) {
@@ -56,6 +56,6 @@ public class Money {
     }
 
     public boolean isGreaterThan(Money money) {
-        return this.money >= money.money;
+        return this.amount >= money.amount;
     }
 }

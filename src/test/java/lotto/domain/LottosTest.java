@@ -41,7 +41,7 @@ public class LottosTest {
             new Lotto(givenNumbers(11, 12, 13, 14, 15, 16)))
         );
 
-        List<Rank> ranks = lottos.matchRanks(new WinnerLotto(LOTTO, new Number(7)));
+        List<Rank> ranks = lottos.match(new WinnerLotto(LOTTO, new Number(7)));
 
         assertThat(ranks).containsExactly(Rank.FIRST, Rank.SECOND, Rank.THIRD, Rank.FOURTH, Rank.FIFTH, Rank.NONE);
     }

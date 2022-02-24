@@ -54,7 +54,7 @@ class LottoTest {
         Number bonus = new Number(7);
         Lotto lotto = new Lotto(givenNumbers(1, 2, 3, 4, 5, 7));
 
-        assertThat(lotto.containsNumber(bonus)).isTrue();
+        assertThat(lotto.contains(bonus)).isTrue();
     }
 
     @Test
@@ -63,7 +63,7 @@ class LottoTest {
         Number bonus = new Number(6);
         Lotto lotto = new Lotto(givenNumbers(1, 2, 3, 4, 5, 7));
 
-        assertThat(lotto.containsNumber(bonus)).isFalse();
+        assertThat(lotto.contains(bonus)).isFalse();
     }
 
     private static List<Number> givenNumbers(int... numbers) {

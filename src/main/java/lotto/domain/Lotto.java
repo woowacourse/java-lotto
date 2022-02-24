@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import java.util.Comparator;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import lotto.domain.vo.Number;
@@ -19,17 +19,16 @@ public class Lotto {
 
     public int countMatchNumbers(Lotto lotto) {
         return (int)lotto.numbers.stream()
-            .filter(this.numbers::contains)
+            .filter(this::contains)
             .count();
     }
 
-    public boolean containsNumber(Number number) {
+    public boolean contains(Number number) {
         return numbers.contains(number);
     }
 
     public List<Number> getNumbers() {
-        numbers.sort(Comparator.comparingInt(Number::getNumber));
-        return List.copyOf(numbers);
+        return new ArrayList<>(numbers);
     }
 
     private void validateSize(List<Number> numbers) {

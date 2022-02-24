@@ -2,7 +2,7 @@ package lotto.controller;
 
 import java.util.List;
 import lotto.domain.Lotto;
-import lotto.domain.LottoGenerator;
+import lotto.domain.LottoMachine;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.vo.Number;
@@ -20,7 +20,7 @@ public class LottoController {
         Lottos lottos = new Lottos(buyLottos(money));
         OutputView.printLottos(lottos.getLottos());
 
-        List<Rank> ranks = lottos.matchRanks(createWinnerLotto(winnerNumbers(), bonusNumber()));
+        List<Rank> ranks = lottos.match(createWinnerLotto(winnerNumbers(), bonusNumber()));
         OutputView.printRanks(ranks);
 
         Rate rate = calculateRate(money, ranks);
@@ -28,7 +28,7 @@ public class LottoController {
     }
 
     private List<Lotto> buyLottos(int money) {
-        Store store = new Store(money, new LottoGenerator());
+        Store store = new Store(money);
         return store.buyLottos();
     }
 

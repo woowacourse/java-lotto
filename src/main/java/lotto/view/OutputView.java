@@ -1,6 +1,7 @@
 package lotto.view;
 
 import java.text.MessageFormat;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
@@ -40,14 +41,14 @@ public class OutputView {
 
     private static void printSecondRank(List<Rank> ranks, Rank rank) {
         int matchCount = rank.getMatchCount();
-        long reward = rank.getReward().getMoney();
+        long reward = rank.getReward().getAmount();
         int rewardCount = findRewardCount(rank, ranks);
         System.out.printf("%d개 일치, 보너스 볼 일치(%d원) - %d개%n", matchCount, reward, rewardCount);
     }
 
     private static void printOtherRank(List<Rank> ranks, Rank rank) {
         int matchCount = rank.getMatchCount();
-        long reward = rank.getReward().getMoney();
+        long reward = rank.getReward().getAmount();
         int rewardCount = findRewardCount(rank, ranks);
         System.out.printf("%d개 일치 (%d원)- %d개%n", matchCount, reward, rewardCount);
     }
@@ -63,7 +64,7 @@ public class OutputView {
     private static void printLottoNumbers(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
             List<Number> numbers = lotto.getNumbers();
-
+            numbers.sort(Comparator.comparingInt(Number::getNumber));
             System.out.println(MessageFormat.format("[{0}]", joinWithDelimiter(numbers)));
         }
     }
