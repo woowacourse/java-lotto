@@ -6,7 +6,6 @@ import java.util.Map;
 
 public class WinningResult {
 
-	private static final int INITIAL_RANK_COUNT = 0;
 	private static final int PLUS_COUNT = 1;
 	private final EnumMap<LottoRank, Integer> winningResult;
 
@@ -14,35 +13,21 @@ public class WinningResult {
 		this.winningResult = winningResult;
 	}
 
-	public static WinningResult createWinningResult(final LottoTicket lottoTicket, final WinningNumbers winningNumbers) {
-		EnumMap<LottoRank, Integer> winningResult = initializeWinningResult();
+	public static WinningResult createWinningResult(final LottoTicket lottoTicket,
+		final WinningNumbers winningNumbers) {
+		EnumMap<LottoRank, Integer> winningResult = LottoRank.initializeWinningResult();
 		Lotto winningNumber = winningNumbers.getWinningNumbers();
 		Number bonusNumber = winningNumbers.getBonusNumber();
 
-		addWinningResult(lottoTicket, winningResult, winningNumber, bonusNumber);
-		return new WinningResult(winningResult);
-	}
-
-	public static EnumMap<LottoRank, Integer> initializeWinningResult() {
-		return new EnumMap<>(Map.ofEntries(
-			Map.entry(LottoRank.FIRST, INITIAL_RANK_COUNT),
-			Map.entry(LottoRank.SECOND, INITIAL_RANK_COUNT),
-			Map.entry(LottoRank.THIRD, INITIAL_RANK_COUNT),
-			Map.entry(LottoRank.FOURTH, INITIAL_RANK_COUNT),
-			Map.entry(LottoRank.FIFTH, INITIAL_RANK_COUNT)
-		));
-	}
-
-	private static void addWinningResult(final LottoTicket lottoTicket, final EnumMap<LottoRank, Integer> winningResult,
-		final Lotto winningNumber, final Number bonusNumber) {
 		for (Lotto lotto : lottoTicket.getLottoTicket()) {
 			LottoRank rank = lotto.confirmWinningResult(winningNumber, bonusNumber);
 			addWinningResultCount(winningResult, rank);
 		}
+		return new WinningResult(winningResult);
 	}
 
 	private static void addWinningResultCount(final EnumMap<LottoRank, Integer> winningResult, final LottoRank rank) {
-		if (rank == LottoRank.FAIL) {
+		if (LottoRank.isFail(rank)) {
 			return;
 		}
 		winningResult.put(rank, winningResult.get(rank) + PLUS_COUNT);
