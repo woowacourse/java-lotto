@@ -1,24 +1,27 @@
 package lotto.domain;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 public class LottoResult {
 
+    private static final int FLOOR_STANDARD = 100;
+    private static final double FLOOR_AFTER_TREATMENT = 100.0;
+
     private final Map<Rank, Long> ranks;
 
     public LottoResult(Map<Rank, Long> ranks) {
-        this.ranks = ranks;
+        this.ranks = new HashMap<>(ranks);
     }
 
     public double calculateYield(Money money) {
-        int price = money.getPrice();
-        int totalPrizeMoney = 0;
+        double totalPrizeMoney = ranks.keySet()
+                .stream()
+                .mapToDouble(Rank::getPrizeMoney)
+                .sum();
 
-        for (Rank rank : ranks.keySet()) {
-            totalPrizeMoney += rank.getPrizeMoney();
-        }
-        return Math.floor((double) totalPrizeMoney / price * 100) / 100.0;
+        return Math.floor(totalPrizeMoney / money.getPrice() * FLOOR_STANDARD) / FLOOR_AFTER_TREATMENT;
     }
 
     public Map<Rank, Long> getRanks() {

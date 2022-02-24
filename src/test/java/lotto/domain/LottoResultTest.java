@@ -13,15 +13,13 @@ class LottoResultTest {
     void 수익률_계산_테스트() {
         // given
         Map<Rank, Long> ranks = Map.of(Rank.FIFTH, 1L);
-
         LottoResult lottoResult = new LottoResult(ranks);
-
         Money money = new Money(14000);
 
         // when
         double result = lottoResult.calculateYield(money);
 
         // then
-        assertThat(Math.floor(result * 100) / 100).isEqualTo(0.35);
+        assertThat(result).isEqualTo(0.35);
     }
 }
