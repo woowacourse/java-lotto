@@ -3,6 +3,7 @@ package domain;
 import util.LottoNumbersGenerator;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static constant.ErrorConstant.START_ERROR;
@@ -31,7 +32,7 @@ public class Lottos {
 	}
 
 	public List<Lotto> getLottos() {
-		return this.lottos;
+		return Collections.unmodifiableList(this.lottos);
 	}
 
 	public int getLottosSize() {
@@ -39,7 +40,6 @@ public class Lottos {
 	}
 
 	public ResultDTO generateResult(AnswerLotto answerLotto) {
-
 		ResultDTO results = new ResultDTO();
 		for (Lotto lotto : this.lottos) {
 			results.addResult(lotto.calculate(answerLotto));

@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class AnswerLottoNumbers {
 	}
 
 	public List<Integer> getNumbers() {
-		return this.numbers;
+		return Collections.unmodifiableList(this.numbers);
 	}
 
 	private void validateAllCondition(List<Integer> numbers) {
