@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import java.util.List;
 import lotto.domain.Money;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoResult;
@@ -33,16 +32,14 @@ public class LottoController {
     private Money createMoney() {
         try {
             return new Money(inputView.getMoney());
-        } catch(RuntimeException e) {
+        } catch (RuntimeException e) {
             outputView.printErrorMessage(e.getMessage());
-
             return createMoney();
         }
     }
 
     private LottoTickets createLottoTickets(Money money) {
-        LottoMachine lottoMachine = new LottoMachine();
-        LottoTickets lottoTickets = lottoMachine.purchase(money);
+        LottoTickets lottoTickets = new LottoMachine().purchase(money);
 
         outputView.printTotalCount(lottoTickets.totalCount());
         outputView.printLottoTicketsInfo(lottoTickets);
@@ -52,13 +49,9 @@ public class LottoController {
 
     private WinningNumbers createWinningNumbers() {
         try {
-            List<Integer> winningNumbers = inputView.getNormalWinningNumbers();
-            int bonusNumber = inputView.getBonusNumber();
-
-            return new WinningNumbers(winningNumbers, bonusNumber);
+            return new WinningNumbers(inputView.getNormalWinningNumbers(), inputView.getBonusNumber());
         } catch (RuntimeException e) {
             outputView.printErrorMessage(e.getMessage());
-
             return createWinningNumbers();
         }
     }

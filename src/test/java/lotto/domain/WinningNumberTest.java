@@ -16,7 +16,7 @@ class WinningNumberTest {
 
         // when
         boolean result = winningNumber.isBonus();
-        
+
         // then
         assertThat(result).isTrue();
     }

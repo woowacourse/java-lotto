@@ -18,7 +18,7 @@ public class LottoResult {
         for (Rank rank : ranks.keySet()) {
             totalPrizeMoney += rank.getPrizeMoney();
         }
-        return  Math.floor((double) totalPrizeMoney / price * 100) / 100.0;
+        return Math.floor((double) totalPrizeMoney / price * 100) / 100.0;
     }
 
     public Map<Rank, Integer> getRanks() {
