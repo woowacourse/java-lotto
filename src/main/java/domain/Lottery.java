@@ -3,7 +3,13 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import utils.LotteryMessage;
+
 public class Lottery {
+
+	private static final int LOTTERY_SIZE = 6;
+	private static final int LOTTERY_NUMBER_MIN_RANGE = 1;
+	private static final int LOTTERY_NUMBER_MAX_RANGE = 45;
 
 	private final List<Integer> numbers;
 
@@ -19,8 +25,8 @@ public class Lottery {
 	}
 
 	private void validateSize(int size) {
-		if (size != 6) {
-			throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
+		if (size != LOTTERY_SIZE) {
+			throw new IllegalArgumentException(LotteryMessage.LOTTERY_SIZE_ERROR);
 		}
 	}
 
@@ -30,15 +36,15 @@ public class Lottery {
 
 
 	private void checkNumberRange(final int numbers) {
-		if(1 > numbers || numbers > 45) {
-			throw new IllegalArgumentException("로또의 각 번호는 1~45 사이여야 합니다");
+		if (LOTTERY_NUMBER_MIN_RANGE > numbers || numbers > LOTTERY_NUMBER_MAX_RANGE) {
+			throw new IllegalArgumentException(LotteryMessage.LOTTERY_RANGE_ERROR);
 		}
 	}
 
 	public int countSameNumber(final Lottery lottery) {
 		final List<Integer> differences = new ArrayList<>(this.numbers);
 		differences.removeAll(lottery.numbers);
-		return 6 - differences.size();
+		return LOTTERY_SIZE - differences.size();
 	}
 
 	public boolean contains(final int number) {
