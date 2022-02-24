@@ -13,7 +13,7 @@ public class BonusNumberParser extends Parser<LottoNumber> {
 
     @Override
     protected String regex() {
-        return lottoNumberWithSpacesRegex();
+        return numberWithSpacesRegex();
     }
 
     @Override

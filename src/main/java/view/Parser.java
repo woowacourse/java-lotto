@@ -14,19 +14,12 @@ public abstract class Parser<T> {
     protected static final String REGEX_ZERO_TO_NINE = "[0-9]";
     protected static final String REGEX_ASTERISK = "*";
 
-    protected static String lottoNumberWithSpacesRegex() {
-        return new StringBuilder(REGEX_SPACE)
-                .append(lottoNumberRegex())
-                .append(REGEX_SPACE)
-                .toString();
+    protected static String numberWithSpacesRegex() {
+        return REGEX_SPACE + numberRegex() + REGEX_SPACE;
     }
 
-    protected static String lottoNumberRegex() {
-        return new StringBuilder(REGEX_GROUP_BEGINNING)
-                .append(REGEX_ONE_TO_NINE).append(REGEX_OR)
-                .append(REGEX_TEN_TO_THIRTY_NINE).append(REGEX_OR)
-                .append(REGEX_FORTY_TO_FORTY_FIVE)
-                .append(REGEX_GROUP_END).toString();
+    protected static String numberRegex() {
+        return "[1-9][0-9]*";
     }
 
     protected static String repeatRegex(int repeat) {
