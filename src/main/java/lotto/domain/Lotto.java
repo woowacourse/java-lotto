@@ -13,9 +13,13 @@ public class Lotto {
     private final List<Number> numbers;
 
     public Lotto(List<Number> numbers) {
+        validateNumbers(numbers);
+        this.numbers = numbers;
+    }
+
+    private void validateNumbers(List<Number> numbers) {
         validateSize(numbers);
         validateDuplicateNumbers(numbers);
-        this.numbers = numbers;
     }
 
     private void validateSize(List<Number> numbers) {
