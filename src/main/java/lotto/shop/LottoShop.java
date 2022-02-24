@@ -30,7 +30,7 @@ public class LottoShop implements Shop {
     }
 
     private void purchaseLotto() {
-        try {ㅊ
+        try {
             String inputMoney = inputView.inputMoney();
             outputView.outputTickets(purchaseController.purchase(inputMoney));
         } catch (IllegalArgumentException e) {
