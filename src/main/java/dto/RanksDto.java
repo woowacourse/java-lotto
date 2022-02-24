@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RanksDto {
+
     public static final int RANK_NUMBER = 5;
+
     private final List<RankDto> rankDtos;
     private double incomeRate;
 
