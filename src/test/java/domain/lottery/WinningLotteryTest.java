@@ -5,6 +5,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
@@ -19,7 +20,7 @@ import domain.Rank;
 
 public class WinningLotteryTest {
 
-	final List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+	final List<LotteryNumber> winningNumbers = generateLotteryNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
 
 	@Nested
 	@DisplayName("보너스 볼의")
@@ -28,7 +29,7 @@ public class WinningLotteryTest {
 		@DisplayName("범위가 1~45 이면서 당첨번호와 중복이 없으면 통과")
 		void theNumberOfBonusBall() {
 			assertThatNoException().isThrownBy(() ->
-				WinningLottery.of(winningNumbers, 10)
+				WinningLottery.of(winningNumbers, new LotteryNumber(10))
 			);
 		}
 
@@ -37,7 +38,7 @@ public class WinningLotteryTest {
 		@ValueSource(ints = {0, 46})
 		void invalidBonusBallRange(final int bonusBall) {
 			assertThatThrownBy(() ->
-				WinningLottery.of(winningNumbers, bonusBall)
+				WinningLottery.of(winningNumbers, new LotteryNumber(bonusBall))
 			).isInstanceOf(IllegalArgumentException.class)
 				.hasMessageContaining(INVALID_RANGE_EXCEPTION.getMessage());
 		}
@@ -46,7 +47,7 @@ public class WinningLotteryTest {
 		@DisplayName("중복이 있으면 실패")
 		void duplicatedBonusBallNumber() {
 			assertThatThrownBy(() ->
-				WinningLottery.of(winningNumbers, 1)
+				WinningLottery.of(winningNumbers, new LotteryNumber(1))
 			).isInstanceOf(IllegalArgumentException.class)
 				.hasMessageContaining(DUPLICATE_NUMBER_EXCEPTION.getMessage());
 		}
@@ -57,8 +58,8 @@ public class WinningLotteryTest {
 	@MethodSource("generateParameter")
 	void checkRank(List<Integer> lottoNumbers, Rank rank) {
 		//given
-		WinningLottery winningLottery = WinningLottery.of(winningNumbers, 7);
-		Lottery lottery = Lottery.from(lottoNumbers);
+		WinningLottery winningLottery = WinningLottery.of(winningNumbers, new LotteryNumber(7));
+		Lottery lottery = Lottery.from(generateLotteryNumbers(lottoNumbers));
 		//when
 		//then
 		assertThat(winningLottery.getRank(lottery)).isEqualTo(rank);
@@ -73,5 +74,11 @@ public class WinningLotteryTest {
 			Arguments.of(Arrays.asList(1, 2, 3, 9, 10, 11), Rank.FIFTH),
 			Arguments.of(Arrays.asList(1, 2, 9, 10, 11, 12), Rank.NONE)
 		);
+	}
+
+	private List<LotteryNumber> generateLotteryNumbers(List<Integer> numbers) {
+		return numbers.stream()
+			.map(LotteryNumber::new)
+			.collect(Collectors.toList());
 	}
 }

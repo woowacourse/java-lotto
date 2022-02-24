@@ -8,23 +8,20 @@ import java.util.List;
 public class Lottery {
 
 	private static final int LOTTERY_SIZE = 6;
-	private static final int MIN_LOTTERY_NUMBER = 1;
-	private static final int MAX_LOTTERY_NUMBER = 45;
 
-	private final List<Integer> numbers;
+	private final List<LotteryNumber> numbers;
 
-	private Lottery(final List<Integer> numbers) {
+	private Lottery(final List<LotteryNumber> numbers) {
 		validateNumbers(numbers);
 		this.numbers = numbers;
 	}
 
-	public static Lottery from(final List<Integer> numbers) {
+	public static Lottery from(final List<LotteryNumber> numbers) {
 		return new Lottery(numbers);
 	}
 
-	private void validateNumbers(List<Integer> numbers) {
+	private void validateNumbers(List<LotteryNumber> numbers) {
 		validateSize(numbers.size());
-		validateRange(numbers);
 	}
 
 	private void validateSize(int size) {
@@ -33,27 +30,17 @@ public class Lottery {
 		}
 	}
 
-	private void validateRange(List<Integer> numbers) {
-		numbers.forEach(this::checkNumberRange);
-	}
-
-	private void checkNumberRange(final int numbers) {
-		if (MIN_LOTTERY_NUMBER > numbers || numbers > MAX_LOTTERY_NUMBER) {
-			throw new IllegalArgumentException(INVALID_RANGE_EXCEPTION.getMessage());
-		}
-	}
-
 	public int countSameNumber(final Lottery lottery) {
-		final List<Integer> differences = new ArrayList<>(this.numbers);
+		final List<LotteryNumber> differences = new ArrayList<>(this.numbers);
 		differences.removeAll(lottery.numbers);
 		return LOTTERY_SIZE - differences.size();
 	}
 
-	public boolean contains(final int number) {
+	public boolean contains(final LotteryNumber number) {
 		return numbers.contains(number);
 	}
 
-	public List<Integer> getNumbers() {
+	public List<LotteryNumber> getNumbers() {
 		return numbers;
 	}
 }

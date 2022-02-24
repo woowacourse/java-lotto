@@ -8,34 +8,24 @@ import domain.Rank;
 
 public class WinningLottery {
 
-	private static final int MIN_LOTTERY_NUMBER = 1;
-	private static final int MAX_LOTTERY_NUMBER = 45;
-
 	final Lottery winningNumbers;
-	final int bonusBall;
+	final LotteryNumber bonusBall;
 
-	private WinningLottery(final List<Integer> winningNumbers, final int bonusBall) {
+	private WinningLottery(final List<LotteryNumber> winningNumbers, final LotteryNumber bonusBall) {
 		this.winningNumbers = Lottery.from(winningNumbers);
 		validateBonusBall(winningNumbers, bonusBall);
 		this.bonusBall = bonusBall;
 	}
 
-	public static WinningLottery of(final List<Integer> winningNumbers, final int bonusBall) {
+	public static WinningLottery of(final List<LotteryNumber> winningNumbers, final LotteryNumber bonusBall) {
 		return new WinningLottery(winningNumbers, bonusBall);
 	}
 
-	private void validateBonusBall(final List<Integer> winningNumbers, final int bonusBall) {
-		validateRange(bonusBall);
+	private void validateBonusBall(final List<LotteryNumber> winningNumbers, final LotteryNumber bonusBall) {
 		validateDuplicatedNumber(winningNumbers, bonusBall);
 	}
 
-	private void validateRange(final int bonusBall) {
-		if (MIN_LOTTERY_NUMBER > bonusBall || bonusBall > MAX_LOTTERY_NUMBER) {
-			throw new IllegalArgumentException(INVALID_RANGE_EXCEPTION.getMessage());
-		}
-	}
-
-	private void validateDuplicatedNumber(final List<Integer> winningNumbers, final Integer bonusBall) {
+	private void validateDuplicatedNumber(final List<LotteryNumber> winningNumbers, final LotteryNumber bonusBall) {
 		if(winningNumbers.stream()
 			.anyMatch(winningNumber -> winningNumber.equals(bonusBall))) {
 			throw new IllegalArgumentException(DUPLICATE_NUMBER_EXCEPTION.getMessage());

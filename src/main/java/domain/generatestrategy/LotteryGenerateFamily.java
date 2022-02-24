@@ -2,6 +2,8 @@ package domain.generatestrategy;
 
 import java.util.List;
 
+import domain.lottery.LotteryNumber;
+
 public interface LotteryGenerateFamily {
-	List<Integer> getNumbers();
+	List<LotteryNumber> getNumbers();
 }

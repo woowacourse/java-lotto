@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import domain.lottery.Lottery;
 import domain.Rank;
+import domain.lottery.LotteryNumber;
 
 public class OutputView {
 
@@ -44,8 +45,15 @@ public class OutputView {
 
 	public void printLotteries(List<Lottery> lotteries) {
 		lotteries.forEach((lottery ->
-			System.out.println(lottery.getNumbers().toString())
+			System.out.println(converToLotteryNumbers(lottery.getNumbers()))
 		));
+	}
+
+	private String converToLotteryNumbers(List<LotteryNumber> lotteryNumbers) {
+		return lotteryNumbers.stream()
+			.map(LotteryNumber::getNumber)
+			.collect(Collectors.toList())
+			.toString();
 	}
 
 	public void printException(String message) {

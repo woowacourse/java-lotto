@@ -11,13 +11,13 @@ public class Lotteries {
 
 	private final List<Lottery> lotteries;
 
-	private Lotteries(final List<List<Integer>> lotteriesNumber) {
+	private Lotteries(final List<List<LotteryNumber>> lotteriesNumber) {
 		lotteries = new ArrayList<>();
 		lotteriesNumber.forEach(lotteryNumber ->
 			lotteries.add(Lottery.from(lotteryNumber)));
 	}
 
-	public static Lotteries from(final List<List<Integer>> lotteriesNumber) {
+	public static Lotteries from(final List<List<LotteryNumber>> lotteriesNumber) {
 		return new Lotteries(lotteriesNumber);
 	}
 

@@ -18,7 +18,7 @@ public class LotteriesTest {
 	@ValueSource(ints = {1, 100, 50})
 	void lotteries_number(final int lotteryNumber){
 		//given
-		final List<List<Integer>> lotteriesNumber = new ArrayList<>();
+		final List<List<LotteryNumber>> lotteriesNumber = new ArrayList<>();
 		final LotteryRandomGeneratorStrategy lotteryGenerator = new LotteryRandomGeneratorStrategy();
 		for (int i = 0 ; i < lotteryNumber; i++) {
 			lotteriesNumber.add(lotteryGenerator.getNumbers());
