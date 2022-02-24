@@ -1,3 +1,5 @@
+package domain;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -13,11 +15,11 @@ public class LottoGame {
     private Lottos lottos;
     private Map<Integer, Integer> convertReward;
 
-//    public LottoGame() {
+//    public domain.LottoGame() {
 //
 //
 
-//    public LottoGame() {
+//    public domain.LottoGame() {
 //
 //    }
 
@@ -84,7 +86,7 @@ public class LottoGame {
     }
 //
 //    public R getResults() {
-//        return Rewards;
+//        return domain.Rewards;
 //    }
 
     public Lottos getLottos() {

@@ -1,3 +1,5 @@
+package domain;
+
 public class Money {
 
     private static final String NONE_NUMERIC_ERROR = "[ERROR] 금액은 숫자만 입력이 가능합니다.";

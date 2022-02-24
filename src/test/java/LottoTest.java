@@ -1,6 +1,7 @@
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.ArrayList;
+import domain.Lotto;
+import domain.Rewards;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;

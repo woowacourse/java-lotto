@@ -1,3 +1,5 @@
+package view;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -10,9 +12,9 @@ public class InputView {
 
     private static Scanner scanner = new Scanner(System.in);
 
-    public static int askMoneyInput() {
+    public static String askMoneyInput() {
         System.out.println(QUESTION_MONEY_INPUT);
-        return Integer.parseInt(scanner.nextLine());
+        return scanner.nextLine();
     }
 
     public static List<Integer> askWinningNumbers() {

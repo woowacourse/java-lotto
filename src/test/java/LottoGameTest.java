@@ -1,5 +1,9 @@
 import static org.assertj.core.api.Assertions.assertThat;
 
+import domain.Lotto;
+import domain.LottoGame;
+import domain.Lottos;
+import domain.Money;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;

@@ -1,6 +1,8 @@
-import java.util.Arrays;
-import java.util.Map;
-import java.util.stream.IntStream;
+package view;
+
+import domain.Lotto;
+import domain.Lottos;
+import domain.Rewards;
 
 public class OutputView {
 
@@ -41,19 +43,19 @@ public class OutputView {
 //
 //        int index = 0;
 //
-//        for (Rewards reward : Rewards.values()) {
-//            System.out.printf(MESSAGE_WINNING_RANKING[index++], Rewards.getCount(reward));
+//        for (domain.Rewards reward : domain.Rewards.values()) {
+//            System.out.printf(MESSAGE_WINNING_RANKING[index++], domain.Rewards.getCount(reward));
 //        }
 
         for (int i = 0; i < 5; i++) {
             System.out.printf(MESSAGE_WINNING_RANKING[i], Rewards.getCount(Rewards.values()[4-i]));
         }
 //
-//        Arrays.stream(Rewards.values())
-//                .forEach(x -> System.out.printf(MESSAGE_WINNING_RANKING[Rewards.getRanking(x)-5], Rewards.getCount(x)));
+//        Arrays.stream(domain.Rewards.values())
+//                .forEach(x -> System.out.printf(MESSAGE_WINNING_RANKING[domain.Rewards.getRanking(x)-5], domain.Rewards.getCount(x)));
 //
 ////        for (int i = 0; i < MESSAGE_WINNING_RANKING.length; ++i) {
-////            System.out.printf(MESSAGE_WINNING_RANKING[i], Rewards.values());
+////            System.out.printf(MESSAGE_WINNING_RANKING[i], domain.Rewards.values());
 ////        }
 //    }
     }
