@@ -1,5 +1,6 @@
 package domain.lotto;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,12 +10,13 @@ public class LottoFactory {
     private static final int FROM_INDEX = 0;
 
     public static Lotto createRandomLotto() {
-        Collections.shuffle(LottoBall.BALLS_CACHE);
-        return Lotto.fromBalls(LottoBall.BALLS_CACHE.subList(FROM_INDEX, END_INDEX));
+        List<LottoBall> lottoBalls = new ArrayList<>(LottoBall.BALLS_CACHE.values());
+        Collections.shuffle(lottoBalls);
+        return new Lotto(lottoBalls.subList(FROM_INDEX, END_INDEX));
     }
 
     public static Lotto createLotto(List<Integer> nums) {
-        return Lotto.fromBalls(toBalls(nums));
+        return new Lotto(toBalls(nums));
     }
 
     public static WinLotto createWinLotto(List<Integer> nums, LottoBall bonus) {

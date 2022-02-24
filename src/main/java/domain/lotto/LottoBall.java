@@ -1,18 +1,19 @@
 package domain.lotto;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import utils.Constants;
 import validator.LottoBallValidator;
 
 public class LottoBall implements Comparable<LottoBall> {
-    public static final List<LottoBall> BALLS_CACHE = new ArrayList<>();
+    public static final Map<Integer, LottoBall> BALLS_CACHE = new HashMap<>();
 
     static {
-        BALLS_CACHE.add(null);
         for (int i = Constants.MIN_LOTTO_NUM; i <= Constants.MAX_LOTTO_NUM; i++) {
-            BALLS_CACHE.add(new LottoBall(i));
+            BALLS_CACHE.put(i, new LottoBall(i));
         }
     }
 
