@@ -26,18 +26,6 @@ public class LottoController {
         lottoService = initializeLottoService(generator);
     }
 
-    public void run() {
-        outputView.printPurchaseCount(lottoService.getCountOfLottoNumbers());
-        final List<LottoNumbersDto> lottoNumbersGroup =
-                convertLottoNumbersGroupToDtos(lottoService.getLottoNumbersGroup());
-        outputView.printLottoNumbersGroup(lottoNumbersGroup);
-        final TargetLottoNumbers targetLottoNumbers = generateTargetLottoNumbers();
-        final List<LottoMatchKindDto> results =
-                convertWinningResultsToDtos(lottoService.getMatchResult(targetLottoNumbers));
-        outputView.printCountOfWinningByMatchKind(results);
-        outputView.printProfitRate(lottoService.getProfitRate());
-    }
-
     private LottoService initializeLottoService(final Generator generator) {
         try {
             final String purchaseAmountInput = inputView.inputPurchaseAmount();
@@ -46,6 +34,19 @@ public class LottoController {
             inputView.printErrorMessage(e.getMessage());
             return initializeLottoService(generator);
         }
+    }
+
+    public void run() {
+        outputView.printPurchaseCount(lottoService.getCountOfLottoNumbers());
+        printLottoNumbersGroup();
+        final TargetLottoNumbers targetLottoNumbers = generateTargetLottoNumbers();
+        printResult(targetLottoNumbers);
+    }
+
+    private void printLottoNumbersGroup() {
+        final List<LottoNumbersDto> lottoNumbersGroup =
+                convertLottoNumbersGroupToDtos(lottoService.getLottoNumbersGroup());
+        outputView.printLottoNumbersGroup(lottoNumbersGroup);
     }
 
     private List<LottoNumbersDto> convertLottoNumbersGroupToDtos(
@@ -65,6 +66,13 @@ public class LottoController {
             inputView.printErrorMessage(e.getMessage());
             return generateTargetLottoNumbers();
         }
+    }
+
+    private void printResult(TargetLottoNumbers targetLottoNumbers) {
+        final List<LottoMatchKindDto> results =
+                convertWinningResultsToDtos(lottoService.getMatchResult(targetLottoNumbers));
+        outputView.printCountOfWinningByMatchKind(results);
+        outputView.printProfitRate(lottoService.getProfitRate());
     }
 
     private List<LottoMatchKindDto> convertWinningResultsToDtos(final Map<LottoMatchKind, Integer> results) {
