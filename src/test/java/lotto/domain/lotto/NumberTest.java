@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
-
-import lotto.domain.Number;
 
 public class NumberTest {
 
@@ -38,8 +36,7 @@ public class NumberTest {
             @ValueSource(strings = {"0", "46"})
             @DisplayName("예외가 발생한다.")
             void it_throw_exception(String value) {
-                assertThatThrownBy(() -> new Number(value))
-                    .isInstanceOf(IllegalArgumentException.class)
+                assertThatThrownBy(() -> new Number(value)).isInstanceOf(IllegalArgumentException.class)
                     .hasMessage("1부터 45의 숫자여야 합니다.");
             }
         }
@@ -52,8 +49,7 @@ public class NumberTest {
             @ValueSource(strings = {"a", "%%", "", " "})
             @DisplayName("예외가 발생한다.")
             void it_throw_exception(String value) {
-                assertThatThrownBy(() -> new Number(value))
-                    .isInstanceOf(IllegalArgumentException.class)
+                assertThatThrownBy(() -> new Number(value)).isInstanceOf(IllegalArgumentException.class)
                     .hasMessage("숫자여야 합니다.");
             }
         }

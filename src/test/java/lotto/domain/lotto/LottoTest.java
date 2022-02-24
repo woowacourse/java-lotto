@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.lotto;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -12,8 +12,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import lotto.domain.Lotto;
-import lotto.domain.Number;
 import lotto.domain.WinningPrice;
 
 public class LottoTest {
@@ -63,14 +61,14 @@ public class LottoTest {
                 int actual = 0;
                 for (int i = 1; i < 46; i++) {
                     if (lotto.contains(new Number(String.valueOf(i)))) {
-                        actual ++;
+                        actual++;
                     }
                 }
                 assertThat(actual).isEqualTo(6);
             }
         }
     }
-    
+
     @Nested
     @DisplayName("어떤 번호가 포함되었는지 판단하는 메소드는")
     class Contains {
@@ -111,7 +109,8 @@ public class LottoTest {
             @ParameterizedTest
             @CsvSource(value = {"1|2|3|4|5|6|7|All", "1|2|3|4|5|45|6|FiveAndBonus"}, delimiter = '|')
             @DisplayName("당첨 순위를 알려준다.")
-            void it_returns_winning_price(String first, String second, String third, String fourth, String fifth, String sixth,
+            void it_returns_winning_price(String first, String second, String third, String fourth, String fifth,
+                String sixth,
                 String bonus, WinningPrice key
             ) {
                 Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));

@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.lotto.Lotto;
+
 public class Money {
 
     private static final int MAX_PRICE = 2_000_000_000;
