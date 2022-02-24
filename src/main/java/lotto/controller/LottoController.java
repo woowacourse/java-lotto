@@ -3,6 +3,7 @@ package lotto.controller;
 import lotto.domain.BonusNumber;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
+import lotto.domain.LottosDto;
 import lotto.domain.Money;
 import lotto.domain.ChoiceNumber;
 import lotto.domain.WinningNumber;
@@ -22,9 +23,9 @@ public class LottoController {
     public void start() {
         Money money = initMoney();
         lottos = new Lottos(money);
-        outputView.printPurchasedLotto(lottos);
-        ChoiceNumber choiceNumber = getPickedNumber();
-        BonusNumber bonusNumber = getBonusNumber(choiceNumber);
+        outputView.printPurchasedLotto(LottosDto.from(lottos));
+        ChoiceNumber choiceNumber = initChoiceNumber();
+        BonusNumber bonusNumber = initBonusNumber(choiceNumber);
         WinningNumber winningNumber = new WinningNumber(choiceNumber, bonusNumber);
         LottoResult result = lottos.getResult(winningNumber);
         outputView.printResult(result);
@@ -42,25 +43,25 @@ public class LottoController {
         }
     }
 
-    private ChoiceNumber getPickedNumber() {
+    private ChoiceNumber initChoiceNumber() {
         try {
             outputView.printLastWeekWinningMessage();
             ChoiceNumber choiceNumber = new ChoiceNumber(inputView.getInput());
             return choiceNumber;
         } catch (IllegalArgumentException exception) {
             outputView.printErrorMessage(exception);
-            return getPickedNumber();
+            return initChoiceNumber();
         }
     }
 
-    private BonusNumber getBonusNumber(ChoiceNumber choiceNumber) {
+    private BonusNumber initBonusNumber(ChoiceNumber choiceNumber) {
         try {
             outputView.printLastWeekBonusMessage();
             BonusNumber bonusNumber = new BonusNumber(inputView.getInput(), choiceNumber);
             return bonusNumber;
         } catch (IllegalArgumentException exception) {
             outputView.printErrorMessage(exception);
-            return getBonusNumber(choiceNumber);
+            return initBonusNumber(choiceNumber);
         }
 
     }
