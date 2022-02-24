@@ -1,11 +1,12 @@
 package domain;
 
+import static constant.ErrorConstant.START_ERROR;
 import static constant.LottoConstant.MAX_NUMBER;
 import static constant.LottoConstant.MIN_NUMBER;
 
 public class BonusNumber {
 
-	private static final String NUMBER_IN_RANGE = "[ERROR] 1이상 45 이하의 숫자만 허용됩니다.";
+	private static final String NUMBER_IN_RANGE = START_ERROR + "1이상 45 이하의 숫자만 허용됩니다.";
 
 	private final int bonusNumber;
 

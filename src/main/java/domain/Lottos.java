@@ -5,11 +5,12 @@ import util.LottoNumbersGenerator;
 import java.util.ArrayList;
 import java.util.List;
 
+import static constant.ErrorConstant.START_ERROR;
 import static constant.LottoConstant.PRICE_OF_LOTTO;
 
 public class Lottos {
 
-	private static final String DIVIDE_BY_THOUSAND = "[ERROR] 1000원으로 나누어 떨어지는 금액을 입력해주세요.";
+	private static final String DIVIDE_BY_THOUSAND = START_ERROR + "1000원으로 나누어 떨어지는 금액을 입력해주세요.";
 
 	private final List<Lotto> lottos;
 
