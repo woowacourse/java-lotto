@@ -22,13 +22,12 @@ public enum Rank {
     }
 
     public static Rank of(int count, boolean isBonus) {
-        if (isBonus && count == 5) {
+        if (count == Rank.SECOND.count && isBonus) {
             return Rank.SECOND;
         }
 
         return Arrays.stream(values())
-                .filter(value -> value != Rank.SECOND)
-                .filter(value -> value.count == count)
+                .filter(rank -> rank != Rank.SECOND && rank.count == count)
                 .findFirst()
                 .orElse(NOTTING);
     }
