@@ -6,59 +6,70 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import java.util.List;
+
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class PaymentTest {
 
+	@DisplayName("구입금액이 로또 가격으로 나뉘어 떨어지지 않음")
 	@Test
-	void division() {
+	void division_fail() {
 		assertThatThrownBy(() -> new Payment("2500"))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 
+	@DisplayName("구입금액이 로또 가격으로 나눠지면 성공")
 	@Test
-	void division2() {
+	void division_success() {
 		assertThatCode(() -> new Payment("3000"))
 			.doesNotThrowAnyException();
 	}
 
+	@DisplayName("음수인 경우 실패")
 	@Test
-	void 음수인_경우() {
+	void input_negative() {
 		assertThatThrownBy(() -> new Payment("-1000"))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 
+	@DisplayName("숫자인 경우 성공")
 	@Test
-	void 문자인_경우_성공() {
+	void input_success() {
 		assertThatCode(() -> new Payment("1000"))
 			.doesNotThrowAnyException();
 	}
 
+	@DisplayName("문자인 경우 실패")
 	@Test
-	void 문자인_경우_실패() {
+	void input_fail() {
 		assertThatThrownBy(() -> new Payment("천만원"))
 			.isInstanceOf(NumberFormatException.class);
 	}
 
+	@DisplayName("빈문자열 실패")
 	@Test
-	void 빈문자열_실패() {
+	void input_empty_fail() {
 		assertThatThrownBy(() -> new Payment(""))
 			.isInstanceOf(NumberFormatException.class);
 	}
 
+	@DisplayName("구입금액 10만원 초과 실패")
 	@Test
-	void 구입금액_10만원_초과_실패() {
+	void range_max() {
 		assertThatThrownBy(() -> new Payment("110000"))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 
+	@DisplayName("로또 생성 횟수")
 	@Test
-	void 로또_생성_횟수() {
+	void calculate_lotto_count() {
 		assertThat(new Payment("14000").calculateLottoCount()).isEqualTo(14);
 	}
 
+	@DisplayName("수익률 계산")
 	@Test
-	void 수익률_계산() {
+	void calculate_profit_rate() {
 		List<Rank> lottos = Arrays.asList(Rank.FIFTH, Rank.FOURTH);
 		LottoResult lottoResult = new LottoResult(lottos);
 		Payment payment = new Payment("10000");

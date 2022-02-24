@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottoTest {
@@ -24,28 +25,32 @@ public class LottoTest {
 		lottos.add(new LottoNumber(5));
 	}
 
+	@DisplayName("개수 성공")
 	@Test
-	void 개수_성공() {
+	void lotto_size_success() {
 		lottos.add(new LottoNumber(6));
 		assertThatCode(() -> new Lotto(lottos))
 			.doesNotThrowAnyException();
 	}
 
+	@DisplayName("개수 실패")
 	@Test
-	void 개수_실패() {
+	void lotto_size_fail() {
 		assertThatThrownBy(() -> new Lotto(lottos))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 
+	@DisplayName("중복 금지")
 	@Test
-	void 중복_불가_성공() {
+	void duplicate_fail() {
 		lottos.add(new LottoNumber(5));
 		assertThatThrownBy(() -> new Lotto(lottos))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 
+	@DisplayName("매칭 숫자 계산")
 	@Test
-	void 매칭_숫자_계산() {
+	void calculate_match_count() {
 		//given
 		lottos.add(new LottoNumber(6));
 		Lotto lotto = new Lotto(lottos);

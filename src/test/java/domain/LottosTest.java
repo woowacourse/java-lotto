@@ -5,12 +5,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottosTest {
 
+	@DisplayName("랭크 리스트 생성")
 	@Test
-	void 랭크_리스트_생성() {
+	void calculate_rank_success() {
 		//given
 		List<Lotto> lotto = Arrays.asList(Lotto.of(new String[]{"6", "5", "4", "3", "2", "1"}),
 			Lotto.of(new String[]{"11", "5", "4", "3", "2", "1"}));
