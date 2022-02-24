@@ -7,30 +7,30 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("NonAsciiCharacters")
-class LottoNumbersTest {
-    private LottoNumbers lottoNumbers;
+class LottoTest {
+    private Lotto lotto;
 
     @BeforeEach
     void 로또_번호_생성() {
-        lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        lotto = Lotto.fromNums(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 
     @Test
     void 로또_번호_6개_일치_검사() {
-        WinLottoNumbers winLottoNumbers = WinLottoNumbers.of("1, 2, 3, 4, 5, 6", 10);
+        WinLotto winLottoNumbers = Lotto.toWinLotto(Arrays.asList(1,2,3,4,5,6), LottoBall.from(10));
 
-        int sameNumber = lottoNumbers.countSameNumber(winLottoNumbers);
+        int sameNumber = lotto.countSameNumber(winLottoNumbers);
         assertThat(sameNumber).isEqualTo(6);
     }
 
     @Test
     void 로또_보너스_포함_될때_검사() {
-        assertThat(lottoNumbers.isContainsBonus(new LottoNumber(6)))
+        assertThat(lotto.isIn(LottoBall.from(6)))
                 .isTrue();
     }
 
     @Test
     void 로또_보너스_포함_안될때_검사() {
-        assertThat(lottoNumbers.isContainsBonus(new LottoNumber(10))).isFalse();
+        assertThat(lotto.isIn(LottoBall.from(10))).isFalse();
     }
 }
