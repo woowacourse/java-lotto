@@ -1,14 +1,14 @@
 package lotto.domain;
 
 public class Money {
-    private int money;
+    private int amount;
 
     public Money(String input) {
         isNumberFormat(input);
         int value = Integer.parseInt(input);
         isUnder1000(value);
         isDivideBy1000(value);
-        this.money = value;
+        this.amount = value;
     }
 
     private void isNumberFormat(String input) {
@@ -31,7 +31,7 @@ public class Money {
         }
     }
 
-    public int getMoney() {
-        return money;
+    public int getAmount() {
+        return amount;
     }
 }

@@ -12,7 +12,7 @@ class MoneyTest {
     @DisplayName("금액을 올바르게 입력받는지")
     void Generate_Money() {
         Money a = new Money("10000");
-        assertThat(a.getMoney()).isEqualTo(10000);
+        assertThat(a.getAmount()).isEqualTo(10000);
     }
 
     @Test
