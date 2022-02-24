@@ -15,6 +15,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoNumberTest {
+    private static Stream<Arguments> provideOtherNumbersAndExpected() {
+        return Stream.of(
+                Arguments.of(Arrays.asList("1", "2", "3", "4", "5", "6"), true),
+                Arguments.of(Arrays.asList("2", "3", "4", "5", "6", "7"), false)
+        );
+    }
+
     @ParameterizedTest
     @DisplayName("1부터 45까지의 자연수가 아닌 값으로 객체를 생성할 경우 예외를 발생시킨다.")
     @ValueSource(strings = {"0", "-1", "1.2", "a"})
@@ -39,12 +46,5 @@ class LottoNumberTest {
         final boolean actual = one.hasSameNumberWith(others);
         //then
         assertThat(actual).isEqualTo(expected);
-    }
-
-    private static Stream<Arguments> provideOtherNumbersAndExpected() {
-        return Stream.of(
-                Arguments.of(Arrays.asList("1", "2", "3", "4", "5", "6"), true),
-                Arguments.of(Arrays.asList("2", "3", "4", "5", "6", "7"), false)
-        );
     }
 }

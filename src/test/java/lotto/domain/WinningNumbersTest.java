@@ -15,6 +15,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class WinningNumbersTest {
+    private static Stream<Arguments> provideLottoNumbersAndMatchKind() {
+        return Stream.of(
+                Arguments.of(Arrays.asList("1", "2", "3", "4", "5", "6"), LottoMatchKind.FIVE_BONUS),
+                Arguments.of(Arrays.asList("2", "3", "4", "5", "6", "7"), LottoMatchKind.SIX),
+                Arguments.of(Arrays.asList("3", "4", "5", "6", "7", "8"), LottoMatchKind.FIVE),
+                Arguments.of(Arrays.asList("4", "5", "6", "7", "8", "9"), LottoMatchKind.FOUR),
+                Arguments.of(Arrays.asList("5", "6", "7", "8", "9", "10"), LottoMatchKind.THREE)
+        );
+    }
+
     @Test
     @DisplayName("당첨 번호와 보너스 번호에 중복이 있으면 예외를 발생시킨다.")
     void create_ExceptionByDuplicationOfTargetNumbersAndBonusNumber() {
@@ -41,15 +51,5 @@ class WinningNumbersTest {
         final LottoMatchKind actual = winningNumbers.getLottoMatchResult(lottoNumbers);
         //then
         assertThat(actual).isEqualTo(expected);
-    }
-
-    private static Stream<Arguments> provideLottoNumbersAndMatchKind() {
-        return Stream.of(
-                Arguments.of(Arrays.asList("1", "2", "3", "4", "5", "6"), LottoMatchKind.FIVE_BONUS),
-                Arguments.of(Arrays.asList("2", "3", "4", "5", "6", "7"), LottoMatchKind.SIX),
-                Arguments.of(Arrays.asList("3", "4", "5", "6", "7", "8"), LottoMatchKind.FIVE),
-                Arguments.of(Arrays.asList("4", "5", "6", "7", "8", "9"), LottoMatchKind.FOUR),
-                Arguments.of(Arrays.asList("5", "6", "7", "8", "9", "10"), LottoMatchKind.THREE)
-        );
     }
 }
