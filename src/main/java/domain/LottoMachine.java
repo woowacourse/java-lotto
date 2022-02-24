@@ -12,7 +12,7 @@ public class LottoMachine {
 	private static final int LOTTO_PRICE = 1000;
 	private static final long INIT_TOTAL = 0L;
 
-	private static Tickets tickets;
+	private Tickets tickets;
 	private int payment;
 
 	public void initPayment(int payment) {

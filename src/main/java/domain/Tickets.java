@@ -8,16 +8,13 @@ import java.util.stream.Collectors;
 import domain.strategy.TicketGenerator;
 
 public class Tickets {
-
-	private final TicketGenerator ticketGenerator;
 	private final List<Ticket> tickets;
 
 	public Tickets(int count, TicketGenerator ticketGenerator) {
-		this.ticketGenerator = ticketGenerator;
-		this.tickets = generateTickets(count);
+		this.tickets = generateTickets(count, ticketGenerator);
 	}
 
-	private List<Ticket> generateTickets(int count) {
+	private List<Ticket> generateTickets(int count, TicketGenerator ticketGenerator) {
 		List<Ticket> tickets = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
 			tickets.add(new Ticket(ticketGenerator));
