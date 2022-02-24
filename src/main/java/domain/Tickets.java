@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import domain.strategy.TicketGenerator;
+
 public class Tickets {
 
 	private final TicketGenerator ticketGenerator;

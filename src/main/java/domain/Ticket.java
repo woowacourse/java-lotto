@@ -2,6 +2,8 @@ package domain;
 
 import java.util.List;
 
+import domain.strategy.TicketGenerator;
+
 public class Ticket {
 	private final Balls balls;
 

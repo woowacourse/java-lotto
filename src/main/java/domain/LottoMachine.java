@@ -1,22 +1,18 @@
-package service;
+package domain;
 
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import domain.Ball;
-import domain.Balls;
-import domain.RandomTicketGenerator;
-import domain.Rank;
-import domain.Tickets;
+import domain.strategy.RandomTicketGenerator;
 import dto.AnalysisDto;
 
-public class LottoService {
+public class LottoMachine {
 	private static final int LOTTO_PRICE = 1000;
 	private static final long INIT_TOTAL = 0L;
 
-	private Tickets tickets;
+	private static Tickets tickets;
 	private int payment;
 
 	public void initPayment(int payment) {
@@ -25,11 +21,11 @@ public class LottoService {
 
 	public void generateTickets() {
 		int ticketCount = this.payment / LOTTO_PRICE;
-		this.tickets = new Tickets(ticketCount, new RandomTicketGenerator());
+		tickets = new Tickets(ticketCount, new RandomTicketGenerator());
 	}
 
 	public Tickets getTickets() {
-		return this.tickets;
+		return tickets;
 	}
 
 	public AnalysisDto generateAnalysis(List<Integer> answerNumbers, int bonusBall) {

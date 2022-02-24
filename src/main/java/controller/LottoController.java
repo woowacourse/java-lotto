@@ -4,19 +4,19 @@ import java.util.List;
 
 import domain.Tickets;
 import dto.AnalysisDto;
-import service.LottoService;
+import domain.LottoMachine;
 import view.InputView;
 import view.OutputView;
 
 public class LottoController {
-	private final LottoService lottoService = new LottoService();
+	private final LottoMachine lottoService = new LottoMachine();
 
 	public void run() {
-		announceTickets();
+		generateTickets();
 		announceAnalysis();
 	}
 
-	private void announceTickets() {
+	private void generateTickets() {
 		int payment = InputView.getPayment();
 		lottoService.initPayment(payment);
 		lottoService.generateTickets();
