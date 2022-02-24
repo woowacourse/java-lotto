@@ -9,8 +9,8 @@ public class RandomTicketGenerator implements TicketGenerator {
 
 	private static final int RANDOM_RANGE_INCLUSIVE_START = 1;
 	private static final int RANDOM_RANGE_EXCLUSIVE_END = 46;
-	private static final int NUMBERS_SUBLIST_INCLUSIVE_START_INDEX = 0;
-	private static final int NUMBERS_SUBLIST_EXCLUSIVE_END_INDEX = 6;
+	private static final int SUBLIST_INCLUSIVE_START_INDEX = 0;
+	private static final int SUBLIST_EXCLUSIVE_END_INDEX = 6;
 
 	private final List<Integer> numbers;
 
@@ -23,8 +23,7 @@ public class RandomTicketGenerator implements TicketGenerator {
 	@Override
 	public List<Integer> generate() {
 		Collections.shuffle(numbers);
-		List<Integer> lottoNumbers = numbers.subList(
-				NUMBERS_SUBLIST_INCLUSIVE_START_INDEX, NUMBERS_SUBLIST_EXCLUSIVE_END_INDEX);
+		List<Integer> lottoNumbers = numbers.subList(SUBLIST_INCLUSIVE_START_INDEX, SUBLIST_EXCLUSIVE_END_INDEX);
 		Collections.sort(lottoNumbers);
 		return lottoNumbers;
 	}
