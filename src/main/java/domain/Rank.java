@@ -27,15 +27,22 @@ public enum Rank {
 	}
 
 	public static Rank getRank(final int winningCount, boolean hasBonusBall) {
-		Rank properRank = Arrays.stream(values())
+		Rank rank = getMatchedRank(winningCount);
+		if (isThirdRank(hasBonusBall, rank)) {
+			return Rank.THIRD;
+		}
+		return rank;
+	}
+
+	private static Rank getMatchedRank(final int winningCount) {
+		return Arrays.stream(values())
 			.filter(rank -> rank.getCorrectedBalls() == winningCount)
 			.findFirst()
 			.orElse(Rank.NONE);
+	}
 
-		if (properRank.getCorrectedBalls() == SECOND_AND_THIRD_BALL && !hasBonusBall) {
-			return Rank.THIRD;
-		}
-		return properRank;
+	private static boolean isThirdRank(boolean hasBonusBall, Rank rank) {
+		return rank.getCorrectedBalls() == SECOND_AND_THIRD_BALL && !hasBonusBall;
 	}
 
 	public static List<Rank> valuesWithoutNone() {
