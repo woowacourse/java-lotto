@@ -20,7 +20,7 @@ class WinningNumbersTest {
     void create_ExceptionByDuplicationOfTargetNumbersAndBonusNumber() {
         //given
         final LottoNumbers targetNumbers = new LottoNumbers(Arrays.asList("1", "2", "3", "4", "5", "6"));
-        final LottoNumber bonusNumber = LottoNumber.ONE;
+        final LottoNumber bonusNumber = LottoNumber.from("1");
         final String expectedExceptionMessage = "당첨 번호와 보너스 번호에 중복이 있으면 안됩니다.";
         //when then
         assertThatThrownBy(() -> new WinningNumbers(targetNumbers, bonusNumber))
@@ -34,7 +34,7 @@ class WinningNumbersTest {
     void getLottoMatchResult(final List<String> numbers, final LottoMatchKind expected) {
         //given
         final LottoNumbers targetNumbers = new LottoNumbers(Arrays.asList("2", "3", "4", "5", "6", "7"));
-        final LottoNumber bonusNumber = LottoNumber.ONE;
+        final LottoNumber bonusNumber = LottoNumber.from("1");
         final WinningNumbers winningNumbers = new WinningNumbers(targetNumbers, bonusNumber);
         final LottoNumbers lottoNumbers = new LottoNumbers(numbers);
         //when

@@ -22,7 +22,7 @@ class LottoServiceTest {
     private final String purchaseAmount = "5000";
     private final LottoService lottoService = new LottoService(lottoGenerator, purchaseAmount);
     private final WinningNumbers winningNumbers = new WinningNumbers(
-            new LottoNumbers(Arrays.asList("2", "3", "4", "5", "6", "7")), LottoNumber.ONE);
+            new LottoNumbers(Arrays.asList("2", "3", "4", "5", "6", "7")), LottoNumber.from("1"));
 
     @Test
     @DisplayName("구매 개수를 반환한다.")

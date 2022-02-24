@@ -1,34 +1,35 @@
 package lotto.domain.vo;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static lotto.util.regex.NumberRegex.NATURAL_NUMBER_REGEX;
 
-public enum LottoNumber {
-    ONE(1), TWO(2), THREE(3), FOUR(4), FIVE(5),
-    SIX(6), SEVEN(7), EIGHT(8), NINE(9), TEN(10),
-    ELEVEN(11), TWELVE(12), THIRTEEN(13), FOURTEEN(14), FIFTEEN(15),
-    SIXTEEN(16), SEVENTEEN(17), EIGHTEEN(18), NINETEEN(19), TWENTY(20),
-    TWENTY_ONE(21), TWENTY_TWO(22), TWENTY_THREE(23), TWENTY_FOUR(24), TWENTY_FIVE(25),
-    TWENTY_SIX(26), TWENTY_SEVEN(27), TWENTY_EIGHT(28), TWENTY_NINE(29), THIRTY(30),
-    THIRTY_ONE(31), THIRTY_TWO(32), THIRTY_THREE(33), THIRTY_FOUR(34), THIRTY_FIVE(35),
-    THIRTY_SIX(36), THIRTY_SEVEN(37), THIRTY_EIGHT(38), THIRTY_NINE(39), FORTY(40),
-    FORTY_ONE(41), FORTY_TWO(42), FORTY_THREE(43), FORTY_FOUR(44), FORTY_FIVE(45);
-
+public class LottoNumber implements Comparable<LottoNumber> {
     private static final String INVALID_LOTTO_NUMBER_EXCEPTION_MESSAGE = "로또 번호는 1 ~ 45 사이의 자연수여야합니다.";
+    private static final List<Integer> basicNumbers;
 
     private final int number;
 
-    LottoNumber(final int value) {
+    private LottoNumber(final int value) {
         this.number = value;
+    }
+
+    static {
+        basicNumbers = IntStream.range(0, 45)
+                .map(index -> index + 1)
+                .boxed()
+                .collect(Collectors.toUnmodifiableList());
     }
 
     public static LottoNumber from(final String value) {
         validateNotNegativeInteger(value);
-        return Arrays.stream(values())
-                .filter(number -> number.number == Integer.parseInt(value))
+        return basicNumbers.stream()
+                .filter(number -> number == Integer.parseInt(value))
                 .findAny()
+                .map(LottoNumber::new)
                 .orElseThrow(() -> new IllegalArgumentException(INVALID_LOTTO_NUMBER_EXCEPTION_MESSAGE));
     }
 
@@ -40,10 +41,28 @@ public enum LottoNumber {
 
     public boolean hasSameNumberWith(final List<LottoNumber> others) {
         return others.stream()
-                .anyMatch(other -> other == this);
+                .anyMatch(other -> other.number == number);
     }
 
     public int getValue() {
         return this.number;
+    }
+
+    @Override
+    public int compareTo(final LottoNumber another) {
+        return this.number - another.number;
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumber that = (LottoNumber) o;
+        return number == that.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 }
