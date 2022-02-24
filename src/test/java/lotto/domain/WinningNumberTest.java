@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import static lotto.domain.BallType.BONUS;
-import static lotto.domain.BallType.NORMAL;
+import static lotto.domain.enumeration.BallType.BONUS;
+import static lotto.domain.enumeration.BallType.NORMAL;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 

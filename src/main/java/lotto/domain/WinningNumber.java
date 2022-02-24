@@ -1,6 +1,8 @@
 package lotto.domain;
 
-import static lotto.domain.BallType.BONUS;
+import static lotto.domain.enumeration.BallType.BONUS;
+
+import lotto.domain.enumeration.BallType;
 
 public class WinningNumber {
 

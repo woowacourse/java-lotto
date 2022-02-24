@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lotto.domain.enumeration.Rank;
 import lotto.domain.generator.LottoNumberGenerator;
 
 public class LottoTickets {

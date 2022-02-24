@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.Map;
+import lotto.domain.enumeration.Rank;
 
 public class LottoResult {
 

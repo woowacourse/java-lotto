@@ -1,13 +1,14 @@
 package lotto.domain;
 
 import static java.util.stream.Collectors.*;
-import static lotto.domain.BallType.BONUS;
-import static lotto.domain.BallType.NORMAL;
+import static lotto.domain.enumeration.BallType.BONUS;
+import static lotto.domain.enumeration.BallType.NORMAL;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import lotto.domain.enumeration.Rank;
 
 public class WinningNumbers {
 

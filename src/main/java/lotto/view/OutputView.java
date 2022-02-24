@@ -1,10 +1,10 @@
 package lotto.view;
 
-import static lotto.domain.Rank.*;
+import static lotto.domain.enumeration.Rank.*;
 
 import java.util.List;
 import java.util.Map;
-import lotto.domain.Rank;
+import lotto.domain.enumeration.Rank;
 import lotto.dto.LottoTicketDto;
 import lotto.dto.LottoTicketsDto;
 
