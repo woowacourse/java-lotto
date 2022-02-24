@@ -9,6 +9,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
+import lotto.domain.Profit;
 import lotto.domain.PurchaseAmount;
 import lotto.view.Input;
 import lotto.view.Output;
@@ -21,18 +22,16 @@ public class LottoController {
     private final LottoMachine lottoMachine = new LottoMachine();
 
     public void run() {
-        Lottos lottos = buyLotto();
+        Output.askPurchaseAmount();
+        PurchaseAmount purchaseAmount = new PurchaseAmount(Input.purchaseAmount());
 
-        Lotto winNumber = createWinNumber();
-        Ball bonusBall = createBonusBall();
+        Lottos lottos = buyLotto(purchaseAmount);
 
-        checkDuplicatedNumber(winNumber, bonusBall);
-
-        showResult(lottos, winNumber, bonusBall);
+        createLottoResult(lottos, purchaseAmount);
     }
 
-    private Lottos buyLotto() {
-        int lottoCount = getLottoCount();
+    private Lottos buyLotto(PurchaseAmount purchaseAmount) {
+        int lottoCount = getLottoCount(purchaseAmount);
         Lottos lottos = new Lottos(lottoCount);
 
         Output.lottoCount(lottoCount);
@@ -41,18 +40,35 @@ public class LottoController {
         return lottos;
     }
 
-    private int getLottoCount() {
-        Output.askPurchaseAmount();
-
-        PurchaseAmount purchaseAmount = new PurchaseAmount(Input.purchaseAmount());
+    private int getLottoCount(PurchaseAmount purchaseAmount) {
         return lottoMachine.getLottoCount(purchaseAmount);
+    }
+
+    private void createLottoResult(Lottos lottos, PurchaseAmount purchaseAmount) {
+        Lotto winNumber = createWinNumber();
+        Ball bonusBall = createBonusBall();
+        checkDuplicatedNumber(winNumber, bonusBall);
+
+        showResult(lottos, purchaseAmount, winNumber, bonusBall);
+    }
+
+    private void showResult(Lottos lottos, PurchaseAmount purchaseAmount, Lotto winNumber, Ball bonusBall) {
+        Output.statisticsTitle();
+
+        LottoResult lottoResult = new LottoResult();
+        lottos.addMatchingCount(lottoResult, winNumber, bonusBall);
+        Output.lottoResult(lottoResult);
+
+        Profit profit = new Profit();
+        double profitRate = profit.calculate(lottoResult.getTotalMoney(), purchaseAmount);
+        Output.profitRate(profitRate);
     }
 
     private Lotto createWinNumber() {
         Output.askWinNumber();
         List<String> numbers = Arrays.stream(Input.winNumber().split(DELIMITER))
-            .map(String::trim)
-            .collect(Collectors.toList());
+                .map(String::trim)
+                .collect(Collectors.toList());
         return new Lotto(numbers);
     }
 
@@ -66,13 +82,4 @@ public class LottoController {
             throw new IllegalArgumentException(ERROR_PREFIX + ERROR_DUPLICATED_NUMBER);
         }
     }
-
-    private void showResult(Lottos lottos, Lotto winNumber, Ball bonusBall) {
-        Output.statisticsTitle();
-
-        LottoResult lottoResult = new LottoResult();
-        lottos.addMatchingCount(lottoResult, winNumber, bonusBall);
-        Output.lottoResult(lottoResult);
-    }
-
 }

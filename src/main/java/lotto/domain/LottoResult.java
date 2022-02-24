@@ -21,4 +21,12 @@ public class LottoResult {
     public void increaseRankCount(Rank rank) {
         lottoResult.put(rank, lottoResult.get(rank) + 1);
     }
+
+    public int getTotalMoney() {
+        int totalMoney = 0;
+        for (Rank rank : Rank.values()) {
+            totalMoney += rank.getMoney() * lottoResult.get(rank);
+        }
+        return totalMoney;
+    }
 }

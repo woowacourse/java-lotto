@@ -17,6 +17,9 @@ public class Output {
     private static final int LINE_COUNT = 9;
     private static final String RESULT_FORMAT = "%d개 일치%s(%d원) - %d개\n";
     private static final String BONUS_FORMAT = ", 보너스 볼 일치";
+    private static final String PROFIT_FORMAT = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)";
+    private static final String PROFIT = "이익";
+    private static final String LOSS = "손해";
 
     public static void askPurchaseAmount() {
         System.out.println(ASK_PURCHASE_AMOUNT);
@@ -49,6 +52,16 @@ public class Output {
         for (Rank rank : Rank.getSortedRanks()) {
             printResult(lottoResult.getLottoResult().get(rank), rank);
         }
+    }
+
+    public static void profitRate(final double profitRate) {
+        double splitProfitRate = Math.floor(profitRate * 100) / 100.0;
+
+        String profitOrNot = PROFIT;
+        if (splitProfitRate <= 1) {
+            profitOrNot = LOSS;
+        }
+        System.out.printf(PROFIT_FORMAT, splitProfitRate, profitOrNot);
     }
 
     private static void printResult(int lottoCount, Rank rank) {
