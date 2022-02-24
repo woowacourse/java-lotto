@@ -23,9 +23,9 @@ class OutputViewTest {
         System.setOut(new PrintStream(out));
 
         List<Lotto> lottoTickets = new ArrayList<>();
-        Lotto lotto1 = LottoFactory.createLotto(Arrays.asList(1,2,3,4,5,6));
+        Lotto lotto1 = LottoFactory.createLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         lottoTickets.add(lotto1);
-        Lotto lotto2 = LottoFactory.createLotto(Arrays.asList(7,8,9,10,11,12));
+        Lotto lotto2 = LottoFactory.createLotto(Arrays.asList(7, 8, 9, 10, 11, 12));
         lottoTickets.add(lotto2);
 
         OutputView.printLottoTickets(lottoTickets);

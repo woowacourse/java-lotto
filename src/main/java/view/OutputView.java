@@ -7,13 +7,13 @@ import domain.result.Result;
 import java.util.List;
 
 public class OutputView {
-
     public static final String BUY_MESSAGE = "개를 구매했습니다.";
     public static final String LOTTO_PREFIX = "[";
     public static final String LOTTO_ENDFIX = "]";
     public static final String SEPARATOR = ", ";
     public static final int DELETE_IDX = 2;
-    public static final String RESULT_START_MESSAGE = "당첨 통계" + System.lineSeparator() + "---------";
+    public static final String RESULT_START_MESSAGE =
+            System.lineSeparator() + "당첨 통계" + System.lineSeparator() + "---------";
     public static final String RESULT_RANK_MESSAGE = "%d개 일치%s(%d원)- %d개" + System.lineSeparator();
     public static final String SAME_BONUS_MESSAGE = ", 보너스 볼 일치";
     public static final String PROFIT_MESSAGE =
