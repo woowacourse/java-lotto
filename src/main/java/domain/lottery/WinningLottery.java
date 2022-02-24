@@ -14,10 +14,14 @@ public class WinningLottery {
 	final Lottery winningNumbers;
 	final int bonusBall;
 
-	public WinningLottery(final List<Integer> winningNumbers, final int bonusBall) {
-		this.winningNumbers = new Lottery(winningNumbers);
+	private WinningLottery(final List<Integer> winningNumbers, final int bonusBall) {
+		this.winningNumbers = Lottery.from(winningNumbers);
 		validateBonusBall(winningNumbers, bonusBall);
 		this.bonusBall = bonusBall;
+	}
+
+	public static WinningLottery of(final List<Integer> winningNumbers, final int bonusBall) {
+		return new WinningLottery(winningNumbers, bonusBall);
 	}
 
 	private void validateBonusBall(final List<Integer> winningNumbers, final int bonusBall) {

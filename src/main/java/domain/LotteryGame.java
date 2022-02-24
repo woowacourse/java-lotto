@@ -18,10 +18,14 @@ public class LotteryGame {
 	private LotteryGenerateFamily lotteryGenerator;
 	private WinningLottery winningLottery;
 
-	public LotteryGame(final int inputMoney, LotteryGenerateFamily lotteryGenerator) {
+	private LotteryGame(final int inputMoney, LotteryGenerateFamily lotteryGenerator) {
 		this.theNumberOfLottery = inputMoney / LOTTERY_PRICE;
 		this.lotteryGenerator = lotteryGenerator;
 		createAutoLottery();
+	}
+
+	public static LotteryGame of(final int inputMoney, LotteryGenerateFamily lotteryGenerator) {
+		return new LotteryGame(inputMoney, lotteryGenerator);
 	}
 
 	private void createAutoLottery() {
@@ -29,11 +33,11 @@ public class LotteryGame {
 		for (int i = 0; i < theNumberOfLottery; i++) {
 			lotteriesNumber.add(lotteryGenerator.getNumbers());
 		}
-		lotteries = new Lotteries(lotteriesNumber);
+		lotteries = Lotteries.from(lotteriesNumber);
 	}
 
 	public void createWinningLottery(final List<Integer> winningNumbers, final int bonusBall) {
-		winningLottery = new WinningLottery(winningNumbers, bonusBall);
+		winningLottery = WinningLottery.of(winningNumbers, bonusBall);
 	}
 
 	public Map<Rank, Integer> makeWinner() {

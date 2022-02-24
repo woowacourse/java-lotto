@@ -13,9 +13,13 @@ public class Lottery {
 
 	private final List<Integer> numbers;
 
-	public Lottery(List<Integer> numbers) {
+	private Lottery(final List<Integer> numbers) {
 		validateNumbers(numbers);
 		this.numbers = numbers;
+	}
+
+	public static Lottery from(final List<Integer> numbers) {
+		return new Lottery(numbers);
 	}
 
 	private void validateNumbers(List<Integer> numbers) {

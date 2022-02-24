@@ -28,7 +28,7 @@ public class LotteryGameController {
 
 	private void purchaseLottery() {
 		try {
-			lotteryGame = new LotteryGame(inputMoney(), new LotteryRandomGeneratorStrategy());
+			lotteryGame = LotteryGame.of(inputMoney(), new LotteryRandomGeneratorStrategy());
 		} catch (IllegalArgumentException exception) {
 			outputView.printException(exception.getMessage());
 			purchaseLottery();

@@ -28,7 +28,7 @@ public class WinningLotteryTest {
 		@DisplayName("범위가 1~45 이면서 당첨번호와 중복이 없으면 통과")
 		void theNumberOfBonusBall() {
 			assertThatNoException().isThrownBy(() ->
-				new WinningLottery(winningNumbers, 10)
+				WinningLottery.of(winningNumbers, 10)
 			);
 		}
 
@@ -37,7 +37,7 @@ public class WinningLotteryTest {
 		@ValueSource(ints = {0, 46})
 		void invalidBonusBallRange(final int bonusBall) {
 			assertThatThrownBy(() ->
-				new WinningLottery(winningNumbers, bonusBall)
+				WinningLottery.of(winningNumbers, bonusBall)
 			).isInstanceOf(IllegalArgumentException.class)
 				.hasMessageContaining(INVALID_RANGE_EXCEPTION.getMessage());
 		}
@@ -46,7 +46,7 @@ public class WinningLotteryTest {
 		@DisplayName("중복이 있으면 실패")
 		void duplicatedBonusBallNumber() {
 			assertThatThrownBy(() ->
-				new WinningLottery(winningNumbers, 1)
+				WinningLottery.of(winningNumbers, 1)
 			).isInstanceOf(IllegalArgumentException.class)
 				.hasMessageContaining(DUPLICATE_NUMBER_EXCEPTION.getMessage());
 		}
@@ -57,8 +57,8 @@ public class WinningLotteryTest {
 	@MethodSource("generateParameter")
 	void checkRank(List<Integer> lottoNumbers, Rank rank) {
 		//given
-		WinningLottery winningLottery = new WinningLottery(winningNumbers, 7);
-		Lottery lottery = new Lottery(lottoNumbers);
+		WinningLottery winningLottery = WinningLottery.of(winningNumbers, 7);
+		Lottery lottery = Lottery.from(lottoNumbers);
 		//when
 		//then
 		assertThat(winningLottery.getRank(lottery)).isEqualTo(rank);

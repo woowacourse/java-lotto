@@ -10,7 +10,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import domain.generatestrategy.LotteryRandomGeneratorStrategy;
-import domain.lottery.Lotteries;
 
 public class LotteriesTest {
 
@@ -25,7 +24,7 @@ public class LotteriesTest {
 			lotteriesNumber.add(lotteryGenerator.getNumbers());
 		}
 		//when
-		final Lotteries lotteries = new Lotteries(lotteriesNumber);
+		final Lotteries lotteries = Lotteries.from(lotteriesNumber);
 		//then
 		assertThat(lotteries.getLotteries().size()).isEqualTo(lotteryNumber);
 	}

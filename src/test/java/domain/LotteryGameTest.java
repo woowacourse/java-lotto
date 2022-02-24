@@ -21,7 +21,7 @@ public class LotteryGameTest {
 	@ValueSource(ints = {1000, 100000, 50000})
 	void createLotteries(final int inputMoney) {
 		//given
-		final LotteryGame lotteryGame = new LotteryGame(inputMoney, new LotteryRandomGeneratorStrategy());
+		final LotteryGame lotteryGame = LotteryGame.of(inputMoney, new LotteryRandomGeneratorStrategy());
 		int lotteriesToCreate = inputMoney / 1000;
 		//when
 		//then
@@ -32,7 +32,7 @@ public class LotteryGameTest {
 	@DisplayName("등수가 제대로 집계되는지 확인")
 	void testRankingCount() {
 		//given
-		final LotteryGame lotteryGame = new LotteryGame(6000, new LotteryGenerateMock());
+		final LotteryGame lotteryGame = LotteryGame.of(6000, new LotteryGenerateMock());
 		lotteryGame.createWinningLottery(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 		//when
 		Map<Rank, Integer> rankResult = lotteryGame.makeWinner();
@@ -47,7 +47,7 @@ public class LotteryGameTest {
 	@DisplayName("승률이 제대로 집계되는지 확인")
 	void testRankingPercent() {
 		//given
-		final LotteryGame lotteryGame = new LotteryGame(6000, new LotteryGenerateMock());
+		final LotteryGame lotteryGame = LotteryGame.of(6000, new LotteryGenerateMock());
 		lotteryGame.createWinningLottery(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 		//when
 		Map<Rank, Integer> rankResult = lotteryGame.makeWinner();
