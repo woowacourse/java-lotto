@@ -3,12 +3,13 @@ package lotto.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Lottos {
 
-    private List<Lotto> lottos;
-    private Map<Rank, Integer> rankCount;
+    private static final int PRICE_PER_LOTTO = 1000;
+
+    private final List<Lotto> lottos;
+    private final Map<Rank, Integer> rankCount;
 
     public Lottos() {
         this.lottos = new ArrayList<>();
@@ -19,20 +20,8 @@ public class Lottos {
         lottos.add(lotto);
     }
 
-    public List<Lotto> getLottos() {
-        return lottos;
-    }
-
-    public int getCount() {
-        return lottos.size();
-    }
-
-    public Map<Rank, Integer> getRankCount() {
-        return rankCount;
-    }
-
-    public void calculateRanks(List<Integer> numbers, int bonusNumber) {
-        lottos.forEach(lotto -> lotto.calculateRank(numbers, bonusNumber));
+    public void calculateRanks(List<Integer> winningNumbers, int bonusNumber) {
+        lottos.forEach(lotto -> lotto.calculateRank(winningNumbers, bonusNumber));
     }
 
     public void countRank() {
@@ -41,15 +30,28 @@ public class Lottos {
         });
     }
 
-    public Integer getRankCounts(Rank rank) {
-        return rankCount.get(rank);
+
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
+
+    public Map<Rank, Integer> getRankCount() {
+        return rankCount;
+    }
+
+    public int getLottoCount() {
+        return lottos.size();
     }
 
     public double getRevenue() {
         int sum = 0;
         for (Rank rank : Rank.values()) {
-            sum += rank.getPrice() * getRankCounts(rank);
+            sum += rank.getPrice() * getEachRankCount(rank);
         }
-        return ((double)sum/(lottos.size() * 1000));
+        return ((double)sum / (lottos.size() * PRICE_PER_LOTTO));
+    }
+
+    private Integer getEachRankCount(Rank rank) {
+        return rankCount.get(rank);
     }
 }

@@ -10,7 +10,7 @@ public class InputValidatorTest {
     @Test
     void 가격_검증테스트_음수() {
         Assertions.assertThatThrownBy(() ->
-            InputValidator.validatePrice("-1"))
+                        InputValidator.validatePrice("-1"))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessage("[ERROR] 유효한 입력이 아닙니다.");
     }
@@ -50,16 +50,16 @@ public class InputValidatorTest {
     @Test
     void 보너스번호_검증테스트_중복() {
         Assertions.assertThatThrownBy(() ->
-                        InputValidator.validateBonusNumber("7", List.of(2,3,4,5,6,7)))
+                        InputValidator.validateBonusNumber("7", List.of(2, 3, 4, 5, 6, 7)))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessageContaining("[ERROR]");
     }
 
     @Test
     void 보너스번호_범위테스트() {
-       Assertions.assertThatThrownBy(() ->
-               InputValidator.validateBonusNumber("47", List.of(1,2,3,4,5,6)))
-               .isInstanceOf(RuntimeException.class)
-               .hasMessageContaining("[ERROR]");
+        Assertions.assertThatThrownBy(() ->
+                        InputValidator.validateBonusNumber("47", List.of(1, 2, 3, 4, 5, 6)))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessageContaining("[ERROR]");
     }
 }

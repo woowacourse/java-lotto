@@ -9,10 +9,10 @@ import java.util.stream.IntStream;
 
 public class RandomLottoGenerator {
 
-    public static final int LOTTO_START_NUMBER = 1;
-    public static final int LOTTO_LAST_NUMBER = 45;
-    public static final int LOTTO_START_INDEX = 0;
-    public static final int LOTTO_LAST_INDEX = 6;
+    private static final int LOTTO_START_NUMBER = 1;
+    private static final int LOTTO_LAST_NUMBER = 45;
+    private static final int LOTTO_START_INDEX = 0;
+    private static final int LOTTO_LAST_INDEX = 6;
 
     public static Lotto generate() {
         List<Integer> numberRange = IntStream.rangeClosed(LOTTO_START_NUMBER, LOTTO_LAST_NUMBER)

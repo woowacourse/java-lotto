@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class InputController {
 
-    public static final int PRICE_PER_LOTTO = 1000;
+    private static final int PRICE_PER_LOTTO = 1000;
 
     public int countLotto(String price) {
         InputValidator.validatePrice(price);

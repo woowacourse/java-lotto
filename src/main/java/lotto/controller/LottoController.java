@@ -18,30 +18,33 @@ public class LottoController {
     }
 
     public void run() {
-        int countLotto = inputController.countLotto(InputView.inputPrice());
-        Lottos lottos = new Lottos();
-        insertLottoToLottos(countLotto, lottos);
+        Lottos lottos = makeLottos();
         ResultView.printResult(lottos);
 
-        List<Integer> winningNumbers = inputController.splitWinningNumbers(InputView.inputWinningNumbers());
-        int bonusNumber = inputController.toIntBonusNumber(InputView.inputBonusNumber(), winningNumbers);
-        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+        WinningLotto winningLotto = makeWinningLotto();
 
         winningLotto.checkRank(lottos);
-
         lottos.countRank();
         ResultView.printTotalResult(lottos);
     }
 
-    public void insertLottoToLottos(int countLotto, Lottos lottos) {
+    private Lottos makeLottos() {
+        int countLotto = inputController.countLotto(InputView.inputPrice());
+        Lottos lottos = new Lottos();
+        insertLottoToLottos(countLotto, lottos);
+        return lottos;
+    }
+
+    private void insertLottoToLottos(int countLotto, Lottos lottos) {
         for (int i = 0; i < countLotto; i++) {
             Lotto lotto = RandomLottoGenerator.generate();
             lottos.insert(lotto);
         }
     }
 
-    public static void main(String[] args) {
-        LottoController lottoController = new LottoController();
-        lottoController.run();
+    private WinningLotto makeWinningLotto() {
+        List<Integer> winningNumbers = inputController.splitWinningNumbers(InputView.inputWinningNumbers());
+        int bonusNumber = inputController.toIntBonusNumber(InputView.inputBonusNumber(), winningNumbers);
+        return new WinningLotto(winningNumbers, bonusNumber);
     }
 }

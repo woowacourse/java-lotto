@@ -4,47 +4,34 @@ import java.util.List;
 
 public class Lotto {
 
-    private List<Integer> numbers;
+    private final List<Integer> numbers;
     private Rank rank;
 
     public Lotto(List<Integer> numbers) {
         this.numbers = numbers;
     }
 
-    public int countMatchingNumber(List<Integer> numbers) {
-        int count =  0;
-        for (int number : numbers) {
-            count += containNumber(number);
-        }
-        return count;
-    }
-
-    private int containNumber(int number) {
-        if (this.numbers.contains(number)) {
-            return 1;
-        }
-        return 0;
-    }
-
-   public boolean winBonusNumber(int number) {
-       return numbers.contains(number);
-   }
-
-    public List<Integer> getNumbers() {
-        return numbers;
-    }
-
     public void calculateRank(List<Integer> winningNumbers, int bonusNumber) {
         int count = countMatchingNumber(winningNumbers);
         boolean win = false;
-        if(count == 5) {
-            win = winBonusNumber(bonusNumber);
+        if (count == Rank.SECOND.getCount()) {
+            win = containNumber(bonusNumber);
         }
         this.rank = Rank.getRank(count, win);
     }
 
-    public boolean isRank(Rank rank) {
-        return this.rank == rank;
+    private int countMatchingNumber(List<Integer> winningNumbers) {
+        return (int) winningNumbers.stream()
+                .filter(this::containNumber)
+                .count();
+    }
+
+    private boolean containNumber(int number) {
+        return this.numbers.contains(number);
+    }
+
+    public List<Integer> getNumbers() {
+        return numbers;
     }
 
     public Rank getRank() {
