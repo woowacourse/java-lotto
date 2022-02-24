@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +19,15 @@ public class LottoTickets {
             .mapToObj(x -> LottoTicket.createTicket(generator))
             .collect(Collectors.toList());
         return new LottoTickets(tickets);
+    }
+
+    public LottoStatistics findLottoWinners(WinningTicket winningTicket) {
+        List<LottoRank> wins = new ArrayList<>();
+        for (LottoTicket ticket : tickets) {
+            LottoRank rank = winningTicket.compare(ticket);
+            wins.add(rank);
+        }
+        return new LottoStatistics(wins);
     }
 
     public List<LottoTicket> getTickets() {
