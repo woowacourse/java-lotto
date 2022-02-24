@@ -32,4 +32,8 @@ public class WinningResult {
             winningResult.put(ranking, 0);
         }
     }
+
+    public Map<Ranking, Integer> getWinningResult() {
+        return winningResult;
+    }
 }

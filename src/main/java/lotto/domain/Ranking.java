@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Optional;
 
 public enum Ranking {
     FIRST(2000000000, 6, false),
@@ -20,11 +21,10 @@ public enum Ranking {
         this.hasBonusNumber = hasBonusNumber;
     }
 
-    public static Ranking findRanking(int cnt, boolean hasBonusNumber) {
+    public static Optional<Ranking> findRanking(int cnt, boolean hasBonusNumber) {
         return Arrays.stream(Ranking.values())
                 .filter(ranking -> ranking.count == cnt && ranking.hasBonusNumber == hasBonusNumber)
-                .findAny()
-                .orElseThrow(IllegalArgumentException::new);
+                .findAny();
     }
 
     public static Ranking[] sortByPrize() {
@@ -35,5 +35,17 @@ public enum Ranking {
 
     public long calculate(Integer count) {
         return (long) prize * count;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public int getPrize() {
+        return prize;
+    }
+
+    public boolean getHasBonusBall() {
+        return hasBonusNumber;
     }
 }
