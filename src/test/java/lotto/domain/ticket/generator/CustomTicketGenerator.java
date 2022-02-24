@@ -5,16 +5,16 @@ import java.util.List;
 
 public class CustomTicketGenerator implements TicketGenerator {
 
-	private Iterator<TicketNumbers> ticketIterator;
+    private Iterator<TicketNumbers> ticketIterator;
 
-	public void initNumbers(final List<TicketNumbers> tickets) {
-		this.ticketIterator = tickets.iterator();
-	}
+    public void initNumbers(final List<TicketNumbers> tickets) {
+        this.ticketIterator = tickets.iterator();
+    }
 
-	@Override
-	public List<Integer> generate() {
-		final TicketNumbers ticketNumbers = ticketIterator.next();
-		return ticketNumbers.getNumbers();
-	}
+    @Override
+    public List<Integer> generate() {
+        final TicketNumbers ticketNumbers = ticketIterator.next();
+        return ticketNumbers.getNumbers();
+    }
 
 }

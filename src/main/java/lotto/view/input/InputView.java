@@ -12,46 +12,46 @@ import lotto.view.input.reader.Reader;
 
 public class InputView {
 
-	private final Reader reader;
+    private final Reader reader;
 
-	public InputView(Reader reader) {
-		this.reader = reader;
-	}
+    public InputView(Reader reader) {
+        this.reader = reader;
+    }
 
-	private int parseNumber(final String text, LottoExceptionStatus lottoExceptionStatus) {
-		try {
-			return Integer.parseInt(text);
-		} catch (NumberFormatException ex) {
-			throw new LottoException(lottoExceptionStatus);
-		}
-	}
+    private int parseNumber(final String text, LottoExceptionStatus lottoExceptionStatus) {
+        try {
+            return Integer.parseInt(text);
+        } catch (NumberFormatException ex) {
+            throw new LottoException(lottoExceptionStatus);
+        }
+    }
 
-	public int requestCreditMoney() {
-		return parseCreditMoney(reader.readLine());
-	}
+    public int requestCreditMoney() {
+        return parseCreditMoney(reader.readLine());
+    }
 
-	private int parseCreditMoney(final String inputValue) {
-		return parseNumber(inputValue, CreditMoneyExceptionStatus.MONEY_IS_NOT_NUMERIC);
-	}
+    private int parseCreditMoney(final String inputValue) {
+        return parseNumber(inputValue, CreditMoneyExceptionStatus.MONEY_IS_NOT_NUMERIC);
+    }
 
-	public List<Integer> requestWinningNumbers() {
-		final String inputValue = reader.readLine();
-		return Arrays.stream(inputValue.split(",", -1))
-			.map(String::trim)
-			.map(this::parseWinningNumber)
-			.collect(Collectors.toUnmodifiableList());
-	}
+    public List<Integer> requestWinningNumbers() {
+        final String inputValue = reader.readLine();
+        return Arrays.stream(inputValue.split(",", -1))
+                .map(String::trim)
+                .map(this::parseWinningNumber)
+                .collect(Collectors.toUnmodifiableList());
+    }
 
-	private int parseWinningNumber(final String inputValue) {
-		return parseNumber(inputValue, BallNumberExceptionStatus.BALL_IS_NOT_NUMERIC);
-	}
+    private int parseWinningNumber(final String inputValue) {
+        return parseNumber(inputValue, BallNumberExceptionStatus.BALL_IS_NOT_NUMERIC);
+    }
 
-	public int requestBonusNumber() {
-		return parseBonusNumber(reader.readLine());
-	}
+    public int requestBonusNumber() {
+        return parseBonusNumber(reader.readLine());
+    }
 
-	private int parseBonusNumber(final String inputValue) {
-		return parseNumber(inputValue, BallNumberExceptionStatus.BALL_IS_NOT_NUMERIC);
-	}
+    private int parseBonusNumber(final String inputValue) {
+        return parseNumber(inputValue, BallNumberExceptionStatus.BALL_IS_NOT_NUMERIC);
+    }
 
 }

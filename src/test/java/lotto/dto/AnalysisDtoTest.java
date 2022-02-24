@@ -20,7 +20,10 @@ class AnalysisDtoTest {
     @DisplayName("통계 생성, 당첨 등수별 개수 확인")
     @ParameterizedTest(name = "[{index}] {1}원 : {0}")
     @MethodSource("provideForCalculateTest")
-    void calculateRankCountsTest(final List<Rank> ranks, final int creditMoney, final Map<Rank, Integer> rankCounts, final double profitRate) {
+    void calculateRankCountsTest(final List<Rank> ranks,
+                                 final int creditMoney,
+                                 final Map<Rank, Integer> rankCounts,
+                                 final double profitRate) {
         final AnalysisDto analysis = new AnalysisDto(ranks, creditMoney);
         assertThat(analysis.getRankCounts()).isEqualTo(rankCounts);
     }
@@ -28,7 +31,10 @@ class AnalysisDtoTest {
     @DisplayName("통계 생성, 수익률 계산 결과 확인")
     @ParameterizedTest(name = "[{index}] {1}원 : {0}")
     @MethodSource("provideForCalculateTest")
-    void calculateProfitRateTest(final List<Rank> ranks, final int creditMoney, final Map<Rank, Integer> rankCounts, final double profitRate) {
+    void calculateProfitRateTest(final List<Rank> ranks,
+                                 final int creditMoney,
+                                 final Map<Rank, Integer> rankCounts,
+                                 final double profitRate) {
         final AnalysisDto analysis = new AnalysisDto(ranks, creditMoney);
         assertThat(analysis.getProfitRate()).isEqualTo(profitRate);
     }

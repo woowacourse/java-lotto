@@ -14,28 +14,28 @@ import lotto.dto.WinningTicketDto;
 
 public class LottoService {
 
-	private Tickets tickets;
-	private Credit credit;
+    private Tickets tickets;
+    private Credit credit;
 
-	public void saveCredit(final int creditMoney) {
-		this.credit = new Credit(creditMoney);
-	}
+    public void saveCredit(final int creditMoney) {
+        this.credit = new Credit(creditMoney);
+    }
 
-	public void generateTickets() {
-		final int ticketCount = credit.getQuotient();
-		this.tickets = new Tickets(ticketCount, new RandomTicketGenerator());
-	}
+    public void generateTickets() {
+        final int ticketCount = credit.getQuotient();
+        this.tickets = new Tickets(ticketCount, new RandomTicketGenerator());
+    }
 
-	public AnalysisDto generateAnalysis(final WinningTicketDto winningTicketDto) {
-		final Ticket winningTicket = new Ticket(winningTicketDto.getWinningNumbers());
-		final Ball bonusBall = new Ball(winningTicketDto.getBonusNumber());
+    public AnalysisDto generateAnalysis(final WinningTicketDto winningTicketDto) {
+        final Ticket winningTicket = new Ticket(winningTicketDto.getWinningNumbers());
+        final Ball bonusBall = new Ball(winningTicketDto.getBonusNumber());
 
-		final List<Rank> ranks = tickets.calculateRanks(winningTicket, bonusBall);
-		return new AnalysisDto(ranks, credit.getMoney());
-	}
+        final List<Rank> ranks = tickets.calculateRanks(winningTicket, bonusBall);
+        return new AnalysisDto(ranks, credit.getMoney());
+    }
 
-	public List<TicketDto> getTicketDtos() {
-		return tickets.getTicketDtos();
-	}
+    public List<TicketDto> getTicketDtos() {
+        return tickets.getTicketDtos();
+    }
 
 }
