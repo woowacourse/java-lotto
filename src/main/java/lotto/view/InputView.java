@@ -23,8 +23,8 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static String inputBonusNumber() {
+    public static int inputBonusNumber() {
         System.out.println(INPUT_BONUS_NUMBER_MESSAGE);
-        return scanner.nextLine();
+        return StringUtil.toInt(scanner.nextLine());
     }
 }

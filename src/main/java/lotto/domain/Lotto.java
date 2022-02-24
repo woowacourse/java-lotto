@@ -26,7 +26,6 @@ public class Lotto {
     Lotto(List<Integer> numbers) {
         validateNumbers(numbers);
         this.numbers = numbers.stream()
-                .map(String::valueOf)
                 .map(Number::new)
                 .collect(Collectors.toSet());
     }
@@ -34,7 +33,7 @@ public class Lotto {
     private static List<Number> initLottoNumbers() {
         List<Number> numbers = new ArrayList<>();
         for (int i = Number.MIN_VALUE; i <= Number.MAX_VALUE; i++) {
-            Number number = new Number(String.valueOf(i));
+            Number number = new Number(i);
             numbers.add(number);
         }
         return numbers;
@@ -81,6 +80,6 @@ public class Lotto {
     }
 
     public Set<Number> getNumbers() {
-        return numbers;
+        return Collections.unmodifiableSet(numbers);
     }
 }

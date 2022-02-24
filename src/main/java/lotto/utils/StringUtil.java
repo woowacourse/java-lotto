@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.domain.Number;
-import lotto.view.OutputView;
 
 public class StringUtil {
 
@@ -31,15 +29,6 @@ public class StringUtil {
         return Arrays.stream(text.split(SPLIT_DELIMITER))
                 .map(String::trim)
                 .collect(Collectors.toList());
-    }
-
-    public static Number toNumber(String input) {
-        try {
-            return new Number(input);
-        } catch (IllegalArgumentException exception) {
-            OutputView.printError(exception.getMessage());
-            return null;
-        }
     }
 
     public static int toInt(final String text) {

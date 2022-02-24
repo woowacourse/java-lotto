@@ -58,7 +58,7 @@ public class LottoTest {
                 Lotto lotto = new Lotto();
                 int actual = 0;
                 for (int i = 1; i < 46; i++) {
-                    if (lotto.contains(new Number(String.valueOf(i)))) {
+                    if (lotto.contains(new Number(i))) {
                         actual++;
                     }
                 }
@@ -79,7 +79,7 @@ public class LottoTest {
             @DisplayName("true를 반환한다.")
             void it_returns_true() {
                 Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-                assertThat(lotto.contains(new Number("1"))).isTrue();
+                assertThat(lotto.contains(new Number(1))).isTrue();
             }
         }
 
@@ -91,7 +91,7 @@ public class LottoTest {
             @DisplayName("false를 반환한다.")
             void it_returns_true() {
                 Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-                assertThat(lotto.contains(new Number("7"))).isFalse();
+                assertThat(lotto.contains(new Number(7))).isFalse();
             }
         }
     }
@@ -107,9 +107,9 @@ public class LottoTest {
             @ParameterizedTest
             @CsvSource(value = {"1|2|3|4|5|6|7|All", "1|2|3|4|5|45|6|FiveAndBonus"}, delimiter = '|')
             @DisplayName("당첨 순위를 알려준다.")
-            void it_returns_winning_price(String first, String second, String third, String fourth, String fifth,
-                                          String sixth,
-                                          String bonus, WinningPrice key
+            void it_returns_winning_price(int first, int second, int third, int fourth, int fifth,
+                                          int sixth,
+                                          int bonus, WinningPrice key
             ) {
                 Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
 

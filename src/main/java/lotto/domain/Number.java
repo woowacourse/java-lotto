@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.Objects;
-import lotto.utils.StringUtil;
 
 public class Number {
 
@@ -11,10 +10,9 @@ public class Number {
 
     private final int value;
 
-    public Number(final String text) {
-        int number = StringUtil.toInt(text);
-        validateValueRange(number);
-        this.value = number;
+    public Number(final int value) {
+        validateValueRange(value);
+        this.value = value;
     }
 
     private void validateValueRange(final int number) {
