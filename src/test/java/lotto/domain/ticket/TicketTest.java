@@ -112,29 +112,29 @@ class TicketTest {
 
 	@DisplayName("당첨 등수 확인 테스트")
 	@ParameterizedTest
-	@MethodSource("provideForGetRankTest")
-	void getRankTest(final List<Integer> numbers,
+	@MethodSource("provideForCalculateRankTest")
+	void calculateRankTest(final List<Integer> numbers,
 					 final List<Integer> winningNumbers,
 					 final int bonusNumber,
 					 final Rank expected) {
 		final Ticket ticket = new Ticket((numbers));
 		final Ticket winningTicket = new Ticket(winningNumbers);
 		final Ball bonusBall = new Ball(bonusNumber);
-
-		assertThat(ticket.getRank(winningTicket, bonusBall)).isEqualTo(expected);
+		final Rank rank = ticket.calculateRank(winningTicket, bonusBall).orElse(null);
+		assertThat(rank).isEqualTo(expected);
 	}
 
-	public static Stream<Arguments> provideForGetRankTest() {
+	public static Stream<Arguments> provideForCalculateRankTest() {
 		return Stream.of(
 				Arguments.of(
 						Arrays.asList(1, 2, 3, 4, 5, 6),
 						Arrays.asList(11, 12, 13, 14, 15, 16),
-						16, null
+						17, null
 				),
 				Arguments.of(
 						Arrays.asList(1, 2, 3, 4, 5, 6),
 						Arrays.asList(1, 2, 3, 14, 15, 16),
-						16, Rank.FIFTH_GRADE
+						17, Rank.FIFTH_GRADE
 				),
 				Arguments.of(
 						Arrays.asList(1, 2, 3, 4, 5, 6),

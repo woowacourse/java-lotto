@@ -42,8 +42,8 @@ class TicketsTest {
 
 	@DisplayName("로또 목록 등수 확인 테스트")
 	@ParameterizedTest
-	@MethodSource("provideForGetRanksTest")
-	void getRanksTest(final List<Integer> winningNumbers,
+	@MethodSource("provideForCalculateRanksTest")
+	void calculateRanksTest(final List<Integer> winningNumbers,
 					  final int bonusNumber,
 					  final List<Integer> generatorNumbers,
 					  final int ticketCount,
@@ -53,11 +53,11 @@ class TicketsTest {
 		final Ball bonusBall = new Ball(bonusNumber);
 
 		final Tickets tickets = new Tickets(ticketCount, customTicketGenerator);
-		final List<Rank> actual = tickets.getRanks(winningTicket, bonusBall);
+		final List<Rank> actual = tickets.calculateRanks(winningTicket, bonusBall);
 		assertThat(actual).isEqualTo(expected);
 	}
 
-	public static Stream<Arguments> provideForGetRanksTest() {
+	public static Stream<Arguments> provideForCalculateRanksTest() {
 		return Stream.of(
 				Arguments.of(
 						Arrays.asList(1, 2, 3, 4, 5, 6), 10,
