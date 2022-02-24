@@ -1,5 +1,6 @@
 package domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,13 +12,20 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PlayerTest {
 
+    private static final int BONUS_BALL_NUMBER = 22;
     private final Money money = new Money(15000);
     private final Player player = new Player(money);
+
+
+    @BeforeEach
+    void setUp(){
+        player.purchaseLotto(new AutoLottoGenerator(),LottoFactory.makeBoundary());
+    }
 
     @Test
     @DisplayName("로또를 최대한으로 구매한다.")
     void getNumberOfPurchases(){
-        List<Lotto> actual = player.purchaseLotto();
+        List<Lotto> actual = player.getLottos();
         int expected = 15;
         assertThat(actual.size()).isEqualTo(expected);
     }
@@ -25,11 +33,12 @@ class PlayerTest {
     @Test
     @DisplayName("Player의 모든 로또에 대해 당첨 번호와 비교한다.")
     void judgeAll() {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        List<Integer> lottoNumbers = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
-            lottoNumbers.add(new LottoNumber(i));
+            lottoNumbers.add(i);
         }
-        WinningLotto winningLotto = new WinningLotto(lottoNumbers, new LottoNumber(7));
+        LottoGenerator lottoGenerator = new WinningLottoGenerator();
+        WinningLotto winningLotto = new WinningLotto(lottoGenerator.generateLotto(lottoNumbers), new LottoNumber(BONUS_BALL_NUMBER));
         List<Result> actual = player.judgeAll(winningLotto);
         int expected = 15;
 

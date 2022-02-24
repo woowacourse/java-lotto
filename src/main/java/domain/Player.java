@@ -10,20 +10,18 @@ public class Player {
 
     public Player(Money money){
         this.money = money;
-        this.lottos = purchaseLotto();
+        this.lottos = new ArrayList<>();
     }
 
     private int getNumberOfPurchases(){
         return money.determineQuantity();
     }
 
-    public List<Lotto> purchaseLotto() {
+    public void purchaseLotto(LottoGenerator lottoGenerator, List<Integer> lottoNumbers) {
         int numberOfPurchases = getNumberOfPurchases();
-        List<Lotto> lottos = new ArrayList<>();
         for(int i = 0; i < numberOfPurchases; i++){
-            lottos.add(new Lotto(LottoFactory.generateAutoLotto()));
+            lottos.add(lottoGenerator.generateLotto(lottoNumbers));
         }
-        return lottos;
     }
 
     public List<Result> judgeAll(WinningLotto winningLotto){

@@ -15,13 +15,14 @@ public class LottoController {
 
     public LottosDto purchase(int purchaseAmount) {
         player = new Player(new Money(purchaseAmount));
-        List<Lotto> lottos = player.getLottos();
-        return LottosDto.from(lottos);
+        player.purchaseLotto(new AutoLottoGenerator(), LottoFactory.makeBoundary());
+        return LottosDto.from(player.getLottos());
     }
 
     public void determineWinningNumber(List<String> winningNumber, int bonusBall) {
-        List<LottoNumber> lottoNumbers = LottoFactory.generateWinningLotto(winningNumber);
-        winningLotto = new WinningLotto(lottoNumbers, new LottoNumber(bonusBall));
+        LottoGenerator lottoGenerator = new WinningLottoGenerator();
+        Lotto winningLotto = lottoGenerator.generateLotto(LottoFactory.from(winningNumber));
+        this.winningLotto = new WinningLotto(winningLotto, new LottoNumber(bonusBall));
     }
 
     public List<Result> judgeLottos() {

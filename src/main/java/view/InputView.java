@@ -20,7 +20,7 @@ public class InputView {
         String input = scanner.nextLine();
         InputValidator.validateNull(input);
         InputValidator.validateEmpty(input);
-        return scanner.nextLine();
+        return input;
     }
 
     public static int inputPurchaseAmount() {
