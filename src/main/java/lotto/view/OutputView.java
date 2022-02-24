@@ -3,6 +3,7 @@ package lotto.view;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.stream.Collectors;
+
 import lotto.domain.Lotto;
 import lotto.domain.vo.Number;
 import lotto.domain.Rank;

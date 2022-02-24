@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum Rank {
+
     FIRST(6, new Money(2_000_000_000L)),
     SECOND(5, new Money(30_000_000L)),
     THIRD(5, new Money(1_500_000L)),

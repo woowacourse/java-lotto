@@ -1,6 +1,7 @@
 package lotto.constants;
 
 public enum NumberLimit {
+
     MINIMUM(1),
     MAXIMUM(45);
 

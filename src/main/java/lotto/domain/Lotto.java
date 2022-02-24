@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+
 import lotto.domain.vo.Number;
 
 public class Lotto {
@@ -19,8 +20,8 @@ public class Lotto {
 
     public int countMatchNumbers(Lotto lotto) {
         return (int) lotto.numbers.stream()
-            .filter(this.numbers::contains)
-            .count();
+                .filter(this.numbers::contains)
+                .count();
     }
 
     public boolean containsNumber(Number number) {

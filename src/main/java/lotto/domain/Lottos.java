@@ -20,8 +20,8 @@ public class Lottos {
 
     public List<Rank> matchRanks(WinnerLotto winnerLotto) {
         return lottos.stream()
-            .map(winnerLotto::findRank)
-            .collect(Collectors.toList());
+                .map(winnerLotto::findRank)
+                .collect(Collectors.toList());
     }
 
     public List<Lotto> getLottos() {
