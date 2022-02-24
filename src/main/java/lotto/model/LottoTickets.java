@@ -1,9 +1,10 @@
-package lotto.domain;
+package lotto.model;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import lotto.model.utils.NumberGenerator;
 
 public class LottoTickets {
 

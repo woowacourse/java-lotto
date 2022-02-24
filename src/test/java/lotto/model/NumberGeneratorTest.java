@@ -1,9 +1,11 @@
-package lotto.domain;
+package lotto.model;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import lotto.model.utils.NumberGenerator;
+import lotto.model.utils.RandomNumberGenerator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
