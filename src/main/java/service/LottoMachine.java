@@ -22,7 +22,8 @@ public class LottoMachine {
 			.forEach(lottoBucket::add);
 	}
 
-	private LottoMachine() {}
+	private LottoMachine() {
+	}
 
 	public static LottoMachine getInstance() {
 		return instance;
@@ -40,6 +41,7 @@ public class LottoMachine {
 		Collections.shuffle(lottoBucket);
 		return new Lotto(lottoBucket.stream()
 			.limit(6)
-			.collect(Collectors.toList()));
+			.sorted()
+			.collect(Collectors.toUnmodifiableList()));
 	}
 }

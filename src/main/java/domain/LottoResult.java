@@ -18,7 +18,7 @@ public class LottoResult {
 		Arrays.asList(Rank.values()).stream()
 			.filter(rank -> !rank.isNothing())
 			.forEach(rank -> rankCounts.put(rank, count(rank)));
-		return rankCounts;
+		return Collections.unmodifiableMap(rankCounts);
 	}
 
 	private int count(Rank rank) {

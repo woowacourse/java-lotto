@@ -11,7 +11,6 @@ public class Lotto {
 	public Lotto(List<LottoNumber> lottoNumbers) {
 		checkLottoSize(lottoNumbers);
 		checkDuplicatedLottoNumber(lottoNumbers);
-		Collections.sort(lottoNumbers);
 		this.lotto = lottoNumbers;
 	}
 
@@ -24,7 +23,7 @@ public class Lotto {
 		for (String number : lottoNumbers) {
 			lotto.add(createLottoNumber(number.trim()));
 		}
-		return lotto;
+		return Collections.unmodifiableList(lotto);
 	}
 
 	private static LottoNumber createLottoNumber(String number) {
@@ -54,7 +53,7 @@ public class Lotto {
 	}
 
 	public List<LottoNumber> getLotto() {
-		return lotto;
+		return Collections.unmodifiableList(lotto);
 	}
 
 	@Override
