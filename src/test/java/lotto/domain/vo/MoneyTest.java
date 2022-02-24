@@ -10,7 +10,8 @@ public class MoneyTest {
     @DisplayName("Money 생성자 테스트")
     @Test
     void money_constructor_test() {
-        Money money = new Money(10000);
+        assertThatNoException()
+                .isThrownBy(() -> new Money(10000));
     }
 
     @DisplayName("Money 생성자 음수 입력 예외 테스트")

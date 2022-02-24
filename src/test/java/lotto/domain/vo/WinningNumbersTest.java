@@ -44,7 +44,8 @@ public class WinningNumbersTest {
     @DisplayName("WinningNumbers 당첨 번호 중복 예외 테스트")
     @Test
     void constructor_error_on_winning_number_duplication_test() {
-        lottoNumbers.set(0, new LottoNumber(2));
+        lottoNumbers.set(0, new LottoNumber(45));
+        lottoNumbers.set(1, new LottoNumber(45));
 
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new WinningNumbers(lottoNumbers, bonusNumber))
@@ -54,7 +55,7 @@ public class WinningNumbersTest {
     @DisplayName("WinningNumbers 보너스 번호 중복 예외 테스트")
     @Test
     void constructor_error_on_bonus_number_duplication_test() {
-        bonusNumber = new LottoNumber(1);
+        bonusNumber = new LottoNumber(lottoNumbers.get(0).get());
 
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new WinningNumbers(lottoNumbers, bonusNumber))

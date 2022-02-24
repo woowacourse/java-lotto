@@ -4,7 +4,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import lotto.domain.vo.Lotto;
 import lotto.domain.vo.LottoNumber;
 import lotto.domain.vo.Money;
@@ -17,7 +20,7 @@ public class LottoGameTest {
     @DisplayName("LottoGame 생성자 테스트")
     @Test
     void lottoGame_constructor_test() {
-        assertThatNoException().isThrownBy(() -> new LottoGame());
+        assertThatNoException().isThrownBy(LottoGame::new);
     }
 
     @DisplayName("purchase 메서드 테스트")
@@ -26,9 +29,10 @@ public class LottoGameTest {
         LottoGame lottoGame = new LottoGame();
         lottoGame.purchase(new Money(10000));
 
-        List<Lotto> lottoResults = lottoGame.getLottos();
-
-        assertThat(lottoResults.size()).isEqualTo(10);
+        assertThat(lottoGame)
+                .extracting("lottos")
+                .asList()
+                .hasSize(10);
     }
 
     @DisplayName("confirmWinnings 메서드 테스트")
@@ -44,6 +48,7 @@ public class LottoGameTest {
         LottoGame lottoGame = new LottoGame();
         lottoGame.purchase(new Money(10000));
         WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers, bonusNumber);
-        LottoResults result = lottoGame.confirmWinnings(winningNumbers);
+        assertThat(lottoGame.confirmWinnings(winningNumbers))
+                .isInstanceOf(LottoResults.class);
     }
 }

@@ -20,8 +20,8 @@ public class LottoPrizeTest {
                 LottoPrize.MISS, LottoPrize.FIFTH, LottoPrize.FOURTH,
                 LottoPrize.THIRD, LottoPrize.TWICE, LottoPrize.FIRST
         );
-    }
 
+    }
     @DisplayName("match 메서드 테스트")
     @ParameterizedTest(name = DISPLAY_NAME_ARGUMENTS)
     @MethodSource("matchTestSet")

@@ -42,7 +42,8 @@ public class LottoTest {
     @DisplayName("Lotto 생성자 숫자 중복 예외 테스트")
     @Test
     void lotto_constructor_error_on_duplication_test() {
-        lottoNumbers.set(0, new LottoNumber(2));
+        lottoNumbers.set(0, new LottoNumber(45));
+        lottoNumbers.set(1, new LottoNumber(45));
 
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new Lotto(lottoNumbers))
@@ -52,10 +53,12 @@ public class LottoTest {
     @DisplayName("confirmWinning 메소드 테스트")
     @Test
     void confirmWinning_test() {
-        WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers, new LottoNumber(30));
+        List<LottoNumber> lottoNumbers = new ArrayList<>(this.lottoNumbers);
+        lottoNumbers.set(0, new LottoNumber(45));
+        WinningNumbers winningNumbers = new WinningNumbers(this.lottoNumbers, new LottoNumber(45));
         Lotto lotto = new Lotto(lottoNumbers);
         LottoPrize prize = lotto.confirmWinning(winningNumbers);
 
-        assertThat(prize).isEqualTo(LottoPrize.FIRST);
+        assertThat(prize).isEqualTo(LottoPrize.TWICE);
     }
 }

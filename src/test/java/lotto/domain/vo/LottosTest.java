@@ -15,7 +15,7 @@ public class LottosTest {
     @DisplayName("Lottos 생성자 테스트")
     @Test
     void lottos_constructor_test() {
-        Lottos lottos = new Lottos();
+        assertThatNoException().isThrownBy(Lottos::new);
     }
 
     @DisplayName("purchase 메서드 테스트")
@@ -24,7 +24,10 @@ public class LottosTest {
         Lottos lottos = new Lottos();
         lottos.purchase(new Money(10000));
 
-        assertThat(lottos.getLottos().size()).isEqualTo(10);
+        assertThat(lottos)
+                .extracting("lottos")
+                .asList()
+                .hasSize(10);
     }
 
     @DisplayName("confirmWinnings 메서드 테스트")
