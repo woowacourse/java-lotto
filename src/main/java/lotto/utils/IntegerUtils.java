@@ -2,6 +2,9 @@ package lotto.utils;
 
 public class IntegerUtils {
 
+    private IntegerUtils() {
+    }
+
     public static int parse(String input) {
         try {
             return Integer.parseInt(input);
