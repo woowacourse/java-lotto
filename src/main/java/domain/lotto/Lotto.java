@@ -1,5 +1,6 @@
 package domain.lotto;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -7,11 +8,8 @@ public class Lotto {
     final List<LottoBall> lotto;
 
     Lotto(List<LottoBall> balls) {
+        Collections.sort(balls);
         this.lotto = balls;
-    }
-
-    public static Lotto fromBalls(List<LottoBall> balls) {
-        return new Lotto(balls);
     }
 
     public int countSameNum(WinLotto winLotto) {
