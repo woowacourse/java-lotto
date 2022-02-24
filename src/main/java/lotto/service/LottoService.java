@@ -10,6 +10,7 @@ import lotto.domain.ticket.Tickets;
 import lotto.domain.ticket.generator.RandomTicketGenerator;
 import lotto.dto.AnalysisDto;
 import lotto.dto.TicketDto;
+import lotto.dto.WinningTicketDto;
 
 public class LottoService {
 
@@ -25,8 +26,11 @@ public class LottoService {
 		this.tickets = new Tickets(ticketCount, new RandomTicketGenerator());
 	}
 
-	public AnalysisDto generateAnalysis(final List<Integer> answerNumbers, final int bonusBall) {
-		final List<Rank> ranks = tickets.calculateRanks(new Ticket(answerNumbers), new Ball(bonusBall));
+	public AnalysisDto generateAnalysis(final WinningTicketDto winningTicketDto) {
+		final Ticket winningTicket = new Ticket(winningTicketDto.getWinningNumbers());
+		final Ball bonusBall = new Ball(winningTicketDto.getBonusNumber());
+
+		final List<Rank> ranks = tickets.calculateRanks(winningTicket, bonusBall);
 		return new AnalysisDto(ranks, credit.getMoney());
 	}
 

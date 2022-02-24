@@ -4,6 +4,7 @@ import java.util.List;
 
 import lotto.dto.AnalysisDto;
 import lotto.dto.TicketDto;
+import lotto.dto.WinningTicketDto;
 import lotto.service.LottoService;
 import lotto.view.LottoView;
 
@@ -34,9 +35,8 @@ public class LottoController {
 	}
 
 	public void checkOutAnalysis() {
-		final List<Integer> answer = lottoView.requestWinningNumbers();
-		final int number = lottoView.requestBonusNumber();
-		final AnalysisDto analysisDto = lottoService.generateAnalysis(answer, number);
+		final WinningTicketDto winningTicketDto = lottoView.requestWinningTicket();
+		final AnalysisDto analysisDto = lottoService.generateAnalysis(winningTicketDto);
 		lottoView.announceAnalysis(analysisDto);
 	}
 

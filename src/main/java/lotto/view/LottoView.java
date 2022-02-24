@@ -4,6 +4,7 @@ import java.util.List;
 
 import lotto.dto.AnalysisDto;
 import lotto.dto.TicketDto;
+import lotto.dto.WinningTicketDto;
 import lotto.view.input.InputView;
 import lotto.view.output.OutputView;
 
@@ -22,12 +23,18 @@ public class LottoView {
         return inputView.requestCreditMoney();
     }
 
-    public List<Integer> requestWinningNumbers() {
+    public WinningTicketDto requestWinningTicket() {
+        final List<Integer> winningNumbers = requestWinningNumbers();
+        final int bonusNumber = requestBonusNumber();
+        return new WinningTicketDto(winningNumbers, bonusNumber);
+    }
+
+    private List<Integer> requestWinningNumbers() {
         outputView.printMessageOfRequestWinningNumbers();
         return inputView.requestWinningNumbers();
     }
 
-    public int requestBonusNumber() {
+    private int requestBonusNumber() {
         outputView.printMessageOfRequestBonusNumber();
         return inputView.requestBonusNumber();
     }
