@@ -39,7 +39,7 @@ public class InputView {
         final String inputValue = reader.readLine();
         return Arrays.stream(Delimiter.splitWithComma(appendSpaceBeforeSplit(inputValue)))
                 .map(String::trim)
-                .map(this::parseWinningNumber)
+                .map(this::parseBallNumber)
                 .collect(Collectors.toUnmodifiableList());
     }
 
@@ -47,16 +47,12 @@ public class InputView {
         return Delimiter.appendSpaceBehind(targetString);
     }
 
-    private int parseWinningNumber(final String inputValue) {
+    private int parseBallNumber(final String inputValue) {
         return parseNumber(inputValue, BallNumberExceptionStatus.BALL_IS_NOT_NUMERIC);
     }
 
     public int requestBonusNumber() {
-        return parseBonusNumber(reader.readLine());
-    }
-
-    private int parseBonusNumber(final String inputValue) {
-        return parseNumber(inputValue, BallNumberExceptionStatus.BALL_IS_NOT_NUMERIC);
+        return parseBallNumber(reader.readLine());
     }
 
 }
