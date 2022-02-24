@@ -8,19 +8,24 @@ public class InputView {
     private static final String MESSAGE_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
 
     private static final Scanner scanner = new Scanner(System.in);
+    public static final String WINNING_NUMBER_DELIMITER = ",";
 
     public static String askMoneyAmount() {
         System.out.println(MESSAGE_MONEY_AMOUNT);
         return scanner.nextLine();
     }
 
-    public static String askWinningNumbers() {
+    public static String[] askWinningNumbers() {
         System.out.println(MESSAGE_WINNING_NUMBERS);
-        return scanner.nextLine();
+        return splitByComma(scanner.nextLine());
     }
 
     public static String askBonusNumber() {
         System.out.println(MESSAGE_BONUS_NUMBER);
         return scanner.nextLine();
+    }
+
+    private static String[] splitByComma(String string) {
+        return string.split(WINNING_NUMBER_DELIMITER);
     }
 }
