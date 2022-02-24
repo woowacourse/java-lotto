@@ -16,9 +16,9 @@ public class InputView {
         .lottoValidator();
     private static final StringFormatValidator NUMBER_VALIDATOR = StringFormatValidator
         .numberValidator();
-    private static final Parser<Lotto> LOTTO_CONVERTOR = new LottoParser();
-    private static final Parser<Money> MONEY_CONVERTOR = Parser.moneyParser();
-    private static final Parser<Number> NUMBER_CONVERTOR = Parser.numberParser();
+    private static final Parser<Lotto> LOTTO_PARSER = new LottoParser();
+    private static final Parser<Money> MONEY_PARSER = Parser.moneyParser();
+    private static final Parser<Number> NUMBER_PARSER = Parser.numberParser();
 
     private InputView() {
     }
@@ -28,7 +28,7 @@ public class InputView {
     }
 
     private static Money createMoney() {
-        return MONEY_CONVERTOR.parse(inputMoneyText());
+        return MONEY_PARSER.parse(inputMoneyText());
     }
 
     private static String inputMoneyText() {
@@ -45,7 +45,7 @@ public class InputView {
     }
 
     private static Lotto createLotto() {
-        return LOTTO_CONVERTOR.parse(inputLottoText());
+        return LOTTO_PARSER.parse(inputLottoText());
     }
 
     private static String inputLottoText() {
@@ -54,7 +54,7 @@ public class InputView {
     }
 
     private static Number createBonus() {
-        return NUMBER_CONVERTOR.parse(inputBonusText());
+        return NUMBER_PARSER.parse(inputBonusText());
     }
 
     private static String inputBonusText() {
