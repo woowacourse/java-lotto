@@ -1,22 +1,15 @@
 package lotto.domain.credit;
 
 import lotto.domain.credit.condition.CreditUnit;
-import lotto.exception.LottoException;
-import lotto.exception.credit.CreditMoneyExceptionStatus;
+import lotto.domain.credit.validator.CreditMoneyValidator;
 
 public class Credit {
 
     private final int money;
 
     public Credit(final int money) {
-        validateMoneyIsDivisible(money);
+        CreditMoneyValidator.validateCreditMoney(money);
         this.money = money;
-    }
-
-    private void validateMoneyIsDivisible(final int money) {
-        if (CreditUnit.isNotDivisible(money)) {
-            throw new LottoException(CreditMoneyExceptionStatus.MONEY_IS_NOT_DIVISIBLE);
-        }
     }
 
     public int getQuotient() {
