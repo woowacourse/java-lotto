@@ -1,11 +1,11 @@
 package model.lotto;
 
+import java.util.Arrays;
+import java.util.List;
+
 import model.winningnumber.LottoWinningNumberDTO;
 import model.result.Statistics;
 import model.bonusball.BonusBallDTO;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class Lotto {
     private static final int CHECKING_BONUS_NUMBER = 5;

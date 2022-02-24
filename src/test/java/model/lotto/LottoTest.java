@@ -1,15 +1,15 @@
 package model.lotto;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import model.bonusball.BonusBallDTO;
-import model.lotto.Lotto;
-import model.result.Statistics;
-import model.winningnumber.LottoWinningNumberDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
+import model.bonusball.BonusBallDTO;
+import model.result.Statistics;
+import model.winningnumber.LottoWinningNumberDTO;
 
 public class LottoTest {
 

@@ -1,8 +1,8 @@
 package model.result;
 
-import model.lotto.LottoCount;
-
 import java.util.Arrays;
+
+import model.lotto.LottoCount;
 
 public class RateOfReturn {
     private static final int UNIT = 1000;

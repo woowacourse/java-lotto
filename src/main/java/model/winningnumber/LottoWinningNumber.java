@@ -1,10 +1,10 @@
 package model.winningnumber;
 
-import utils.InputValidateUtils;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import utils.InputValidateUtils;
 
 public class LottoWinningNumber {
     private static final String WINNING_NUMBER_ERROR_MESSAGE = "[Error]: 당첨 번호는 숫자여야 합니다.";
