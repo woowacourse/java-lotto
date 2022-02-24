@@ -35,6 +35,24 @@ public enum Rank {
         return reward;
     }
 
+    public int findRewardCount(List<Rank> ranks) {
+        int count = 0;
+        for (Rank rank : ranks) {
+            if (rank == this) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public int getMatchCount() {
+        return this.matchCount;
+    }
+
+    public Money getReward() {
+        return this.reward;
+    }
+
     private static boolean isSecond(int matchCount, boolean matchBonus) {
         return equalMatchCount(SECOND.matchCount, matchCount) && matchBonus;
     }
@@ -56,23 +74,5 @@ public enum Rank {
 
     private static boolean equalMatchCount(int matchCount, int otherMatchCount) {
         return matchCount == otherMatchCount;
-    }
-
-    public int findRewardCount(List<Rank> ranks) {
-        int count = 0;
-        for (Rank rank : ranks) {
-            if (rank == this) {
-                count++;
-            }
-        }
-        return count;
-    }
-
-    public int getMatchCount() {
-        return this.matchCount;
-    }
-
-    public Money getReward() {
-        return this.reward;
     }
 }
