@@ -13,6 +13,10 @@ public class OutputView {
     private OutputView() {
     }
 
+    public static void printException(Exception exception) {
+        System.out.println(exception.getMessage());
+    }
+
     public static void printLottoCount(int amount) {
         System.out.printf("%d개를 구매했습니다.%n", amount);
     }

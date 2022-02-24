@@ -17,9 +17,9 @@ public class LottoController {
     public void play() {
         Money money = getBuyMoney();
         Lottos lottos = buyLottos(money);
-        Lotto lastWeekWinningNumbers = getLastWeekWinningLotto();
-        Number bonusNumber = getBonusNumber(lastWeekWinningNumbers);
-        Result result = getResult(lottos, lastWeekWinningNumbers, bonusNumber);
+        Lotto lastWeekWinningLotto = getLastWeekWinningLotto();
+        Number bonusNumber = getBonusNumber(lastWeekWinningLotto);
+        Result result = getResult(lottos, lastWeekWinningLotto, bonusNumber);
         getRateofProfit(money, result);
     }
 
@@ -39,7 +39,7 @@ public class LottoController {
         try {
             money = new Money(input);
         } catch (IllegalArgumentException exception) {
-            System.out.println(exception.getMessage());
+            OutputView.printException(exception);
         }
         return money;
     }
@@ -71,7 +71,7 @@ public class LottoController {
         } catch (NumberFormatException exception) {
             System.out.println("숫자를 입력해주세요.");
         } catch (IllegalArgumentException exception) {
-            System.out.println(exception.getMessage());
+            OutputView.printException(exception);
         }
         return lotto;
     }
@@ -99,7 +99,7 @@ public class LottoController {
         try {
             return new Number(input);
         } catch (IllegalArgumentException exception) {
-            System.out.println(exception.getMessage());
+            OutputView.printException(exception);
         }
         return null;
     }
