@@ -51,19 +51,31 @@ public class OutputView {
 		System.out.println(ANALYSIS_TITLE);
 		System.out.println(DIVIDING_LINE);
 
-		Map<Rank, Integer> rankCounts = analysisDto.getRankCounts();
+		printRankCount(analysisDto.getRankCounts());
+		printProfitRate(analysisDto.getRate());
+	}
 
+	private static void printRankCount(Map<Rank, Integer> rankCounts) {
 		for (Rank rank : rankCounts.keySet()) {
 			int count = rankCounts.get(rank);
 			String message = String.format(ANALYSIS_MATCH_COUNT_MESSAGE, rank.getMatchCount());
-			if (rank.getBonusBallMatched()) {
-				message += ANALYSIS_BONUS_BALL_COUNT_MESSAGE;
-			}
+
+			checkBonusBall(rank, message);
+
 			message += String.format(ANALYSIS_PRIZE_COUNT_MESSAGE, rank.getPrize(), count);
 			System.out.println(message);
 		}
+	}
 
-		double rate = analysisDto.getRate();
-		System.out.printf(PROFIT_RATE_MESSAGE_FORMAT, rate);
+	private static String checkBonusBall(Rank rank, String message) {
+		if (rank.getBonusBallMatched()) {
+			message += ANALYSIS_BONUS_BALL_COUNT_MESSAGE;
+		}
+
+		return message;
+	}
+
+	private static void printProfitRate(double profitRate) {
+		System.out.printf(PROFIT_RATE_MESSAGE_FORMAT, profitRate);
 	}
 }
