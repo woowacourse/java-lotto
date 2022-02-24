@@ -26,22 +26,11 @@ public class LottoController {
     public void run() {
         Money money = new Money(inputView.inputMoney());
         LottoTickets lottoTickets = createLottoTickets(money);
-        WinningTicket winningTicket = new WinningTicket(
-            LottoTicket.createWinningTicket(inputView.inputWinningNumber()),
-            new LottoNumber(inputView.inputBonusBall()));
+        WinningTicket winningTicket = getWinningTicket();
 
         StatisticsResult result = getStatisticsResult(money, lottoTickets, winningTicket);
         outputView.outputStatisticsResult(result);
         outputView.outputEarningRate(result.getEarningRate());
-    }
-
-    private StatisticsResult getStatisticsResult(Money money, LottoTickets lottoTickets,
-        WinningTicket winningTicket) {
-        LottoStatistics lottoStatistics = lottoTickets.findLottoWinners(winningTicket);
-        double earningRate = lottoStatistics.calculateEarningRates(money);
-        StatisticsResult result = new StatisticsResult(lottoStatistics.getStatisticsByRank(),
-            earningRate);
-        return result;
     }
 
     private LottoTickets createLottoTickets(Money money) {
@@ -51,5 +40,19 @@ public class LottoController {
             lottoTickets);
         outputView.outputTickets(lottoTicketsResponse);
         return lottoTickets;
+    }
+
+    private WinningTicket getWinningTicket() {
+        return new WinningTicket(
+            LottoTicket.createWinningTicket(inputView.inputWinningNumber()),
+            new LottoNumber(inputView.inputBonusBall()));
+    }
+
+    private StatisticsResult getStatisticsResult(Money money, LottoTickets lottoTickets,
+        WinningTicket winningTicket) {
+        LottoStatistics lottoStatistics = lottoTickets.findLottoWinners(winningTicket);
+        double earningRate = lottoStatistics.calculateEarningRates(money);
+        return new StatisticsResult(lottoStatistics.getStatisticsByRank(),
+            earningRate);
     }
 }
