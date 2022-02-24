@@ -14,8 +14,8 @@ public class LotteryGame {
 	private LotteryGenerateFamily lotteryGenerator;
 	private WinningLottery winningLottery;
 
-	public LotteryGame(int theNumberOfLottery, LotteryGenerateFamily lotteryGenerator) {
-		this.theNumberOfLottery = theNumberOfLottery;
+	public LotteryGame(final int inputMoney, LotteryGenerateFamily lotteryGenerator) {
+		this.theNumberOfLottery = inputMoney / 1000;
 		this.lotteryGenerator = lotteryGenerator;
 		createAutoLottery();
 	}

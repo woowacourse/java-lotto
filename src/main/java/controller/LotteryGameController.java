@@ -14,7 +14,7 @@ public class LotteryGameController {
 	LotteryGame lotteryGame;
 
 	public void startPurchaseLotteries() {
-		lotteryGame = new LotteryGame(inputMoney() / 1000, new LotteryRandomGeneratorStrategy());
+		lotteryGame = new LotteryGame(inputMoney(), new LotteryRandomGeneratorStrategy());
 		lotteryGame.createWinningLottery(inputWinningNumber(), inputBonusBall());
 		OutputView.printLotteries(lotteryGame.getLotteries());
 	}
