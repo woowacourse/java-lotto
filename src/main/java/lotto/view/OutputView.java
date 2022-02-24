@@ -1,5 +1,6 @@
 package lotto.view;
 
+import java.io.PrintStream;
 import java.text.MessageFormat;
 import java.util.Comparator;
 import java.util.List;
@@ -27,34 +28,8 @@ public class OutputView {
         }
     }
 
-    private static void printRank(List<Rank> ranks, Rank rank) {
-        if (rank == Rank.SECOND) {
-            printSecondRank(ranks, rank);
-            return;
-        }
-        printOtherRank(ranks, rank);
-    }
-
     public static void printRate(Rate rate) {
         System.out.println(MessageFormat.format("총 수익률은 {0}입니다.", rate.getRate().toString()));
-    }
-
-    private static void printSecondRank(List<Rank> ranks, Rank rank) {
-        int matchCount = rank.getMatchCount();
-        long reward = rank.getReward().getAmount();
-        int rewardCount = findRewardCount(rank, ranks);
-        System.out.printf("%d개 일치, 보너스 볼 일치(%d원) - %d개%n", matchCount, reward, rewardCount);
-    }
-
-    private static void printOtherRank(List<Rank> ranks, Rank rank) {
-        int matchCount = rank.getMatchCount();
-        long reward = rank.getReward().getAmount();
-        int rewardCount = findRewardCount(rank, ranks);
-        System.out.printf("%d개 일치 (%d원)- %d개%n", matchCount, reward, rewardCount);
-    }
-
-    private static List<Rank> orderedRanks() {
-        return List.of(Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST);
     }
 
     private static void printLottosSize(List<Lotto> lottos) {
@@ -67,6 +42,30 @@ public class OutputView {
             numbers.sort(Comparator.comparingInt(Number::getNumber));
             System.out.println(MessageFormat.format("[{0}]", joinWithDelimiter(numbers)));
         }
+    }
+
+    private static void printRank(List<Rank> ranks, Rank rank) {
+        int matchCount = rank.getMatchCount();
+        long reward = rank.getReward().getAmount();
+        int rewardCount = findRewardCount(rank, ranks);
+
+        if (rank == Rank.SECOND) {
+            printSecondRank(matchCount, reward, rewardCount);
+            return;
+        }
+        printOtherRank(matchCount, reward, rewardCount);
+    }
+
+    private static List<Rank> orderedRanks() {
+        return List.of(Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST);
+    }
+
+    private static void printSecondRank(int matchCount, long reward, int rewardCount) {
+        System.out.printf("%d개 일치, 보너스 볼 일치(%d원) - %d개%n", matchCount, reward, rewardCount);
+    }
+
+    private static PrintStream printOtherRank(int matchCount, long reward, int rewardCount) {
+        return System.out.printf("%d개 일치 (%d원)- %d개%n", matchCount, reward, rewardCount);
     }
 
     private static String joinWithDelimiter(List<Number> numbers) {

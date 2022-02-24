@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import lotto.domain.vo.Money;
 import lotto.domain.vo.Number;
 
 public class InputView {
@@ -13,25 +14,19 @@ public class InputView {
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
-    public static int inputMoney() {
+    public static Money inputMoney() {
         System.out.println("구입금액을 입력해 주세요.");
-        String input = SCANNER.nextLine();
-        validateBlank(input);
-        return validateNumber(input);
+        return new Money(validateNumber(validateBlank(SCANNER.nextLine())));
     }
 
     public static List<Number> inputWinnerNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String input = SCANNER.nextLine();
-        validateBlank(input);
-        return convertToNumbers(input);
+        return convertToNumbers(validateBlank(SCANNER.nextLine()));
     }
 
     public static Number inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        String input = SCANNER.nextLine();
-        validateBlank(input);
-        return new Number(validateNumber(input));
+        return new Number(validateNumber(validateBlank(SCANNER.nextLine())));
     }
 
     private static List<Number> convertToNumbers(String input) {
@@ -42,10 +37,11 @@ public class InputView {
             .collect(Collectors.toList());
     }
 
-    private static void validateBlank(String input) {
+    private static String validateBlank(String input) {
         if (Objects.isNull(input) || input.isBlank()) {
             throw new IllegalArgumentException("입력값은 비어있을 수 없다.");
         }
+        return input;
     }
 
     private static int validateNumber(String input) {
