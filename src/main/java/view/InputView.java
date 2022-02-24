@@ -4,6 +4,9 @@ import java.util.Scanner;
 
 public class InputView {
 
+	public static final String DELIMITER = ",";
+	public static final String SPACE = " ";
+	public static final String BLANK = "";
 	private final Scanner scanner = new Scanner(System.in);
 
 	private String readLine() {
@@ -19,7 +22,7 @@ public class InputView {
 	}
 
 	private String[] removeBlankAndSplitByComma(String userInput) {
-		return userInput.replaceAll(" ", "").split(",");
+		return userInput.replaceAll(SPACE, BLANK).split(DELIMITER);
 	}
 
 	public String requestBonusNumber() {

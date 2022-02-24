@@ -4,6 +4,8 @@ import java.util.Objects;
 
 public class Money {
 
+	public static final String NOT_DIGIT_EXCEPTION_MESSAGE = "구입 금액은 숫자여야 합니다";
+	public static final String UNAVAILABLE_MONEY_EXCEPTION_MESSAGE = "구입 금액은 1000원 단위여야 합니다";
 	private final int money;
 
 	private Money(int money) {
@@ -13,7 +15,7 @@ public class Money {
 
 	private void checkUnit(int money) {
 		if (money % 1000 != 0) {
-			throw new IllegalArgumentException("구입 금액은 1000원 단위여야 합니다");
+			throw new IllegalArgumentException(UNAVAILABLE_MONEY_EXCEPTION_MESSAGE);
 		}
 	}
 
@@ -26,7 +28,7 @@ public class Money {
 		try {
 			Integer.parseInt(userInput);
 		} catch (NumberFormatException exception) {
-			throw new IllegalArgumentException("구입 금액은 숫자여야 합니다");
+			throw new IllegalArgumentException(NOT_DIGIT_EXCEPTION_MESSAGE);
 		}
 	}
 

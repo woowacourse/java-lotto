@@ -12,6 +12,15 @@ import domain.Number;
 
 public class OutputView {
 
+	public static final String SECOND_RANK_RESULT_MESSAGE = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
+	public static final String OTHERS_RANK_RESULT_MESSAGE = "%d개 일치 (%d원) - %d개";
+	public static final String PROFIT_RESULT_MESSAGE = "총 수익률은 %.2f입니다.";
+	public static final String RESULT_TITLE_MESSAGE = "당첨 통계\n---------";
+	public static final String REQUEST_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
+	public static final String PURCHASE_COUNT_MESSAGE = "%d개를 구매했습니다.";
+	public static final String REQUEST_WINNING_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+	public static final String REQUEST_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
+
 	private void printMessage(String message) {
 		System.out.println(message);
 	}
@@ -21,11 +30,11 @@ public class OutputView {
 	}
 
 	public void printRequestMoney() {
-		printMessage("구입금액을 입력해 주세요.");
+		printMessage(REQUEST_MONEY_MESSAGE);
 	}
 
 	public void printPurchasedLottoTicket(List<Lotto> lottoTicket) {
-		printMessage(String.format("%d개를 구매했습니다.", lottoTicket.size()));
+		printMessage(String.format(PURCHASE_COUNT_MESSAGE, lottoTicket.size()));
 		for (Lotto lotto : lottoTicket) {
 			printLottoNumber(sortLottoNumbers(lotto.getLotto()));
 		}
@@ -46,17 +55,16 @@ public class OutputView {
 
 	public void printRequestWinningNumbers() {
 		printNewLine();
-		printMessage("지난 주 당첨 번호를 입력해 주세요.");
+		printMessage(REQUEST_WINNING_NUMBERS_MESSAGE);
 	}
 
 	public void printRequestBonusNumber() {
-		printMessage("보너스 볼을 입력해 주세요.");
+		printMessage(REQUEST_BONUS_NUMBER_MESSAGE);
 	}
 
 	public void printWinningResult(Map<LottoRank, Integer> winningResult) {
 		printNewLine();
-		printMessage("당첨 통계");
-		printMessage("---------");
+		printMessage(RESULT_TITLE_MESSAGE);
 
 		Set<LottoRank> ranks = winningResult.keySet();
 		for (LottoRank rank : ranks) {
@@ -66,12 +74,12 @@ public class OutputView {
 
 	private String createRankMessage(LottoRank rank, int count) {
 		if (rank == LottoRank.SECOND) {
-			return String.format("%d개 일치, 보너스 볼 일치(%d원) - %d개", rank.getMatchCount(), rank.getAmount(), count);
+			return String.format(SECOND_RANK_RESULT_MESSAGE, rank.getMatchCount(), rank.getAmount(), count);
 		}
-		return String.format("%d개 일치 (%d원) - %d개", rank.getMatchCount(), rank.getAmount(), count);
+		return String.format(OTHERS_RANK_RESULT_MESSAGE, rank.getMatchCount(), rank.getAmount(), count);
 	}
 
 	public void printRateOfProfit(double rateOfProfit) {
-		printMessage(String.format("총 수익률은 %.2f입니다.", rateOfProfit));
+		printMessage(String.format(PROFIT_RESULT_MESSAGE, rateOfProfit));
 	}
 }

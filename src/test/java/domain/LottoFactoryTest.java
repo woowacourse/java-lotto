@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 public class LottoFactoryTest {
 
-	private LottoFactory lottoFactory;
+	private static final LottoFactory lottoFactory = new LottoFactory();
 
 	@Test
 	@DisplayName("구입한 금액 만큼 로또 발급")
@@ -15,7 +15,6 @@ public class LottoFactoryTest {
 		String purchaseMoney = "14000";
 		Money money = Money.from(purchaseMoney);
 
-		lottoFactory = new LottoFactory();
 		assertThat(lottoFactory.generateLottoTicket(money).size()).isEqualTo(Integer.parseInt(purchaseMoney) / 1000);
 	}
 }

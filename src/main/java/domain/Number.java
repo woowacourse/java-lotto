@@ -4,6 +4,8 @@ import java.util.Objects;
 
 public class Number {
 
+	public static final int MIN_LOTTO_NUMBER = 1;
+	public static final int MAX_LOTTO_NUMBER = 45;
 	private final int number;
 
 	public Number(int number) {
@@ -17,7 +19,7 @@ public class Number {
 	}
 
 	private void checkNumberRange(int number) {
-		if (number < 1 || number > 45) {
+		if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
 			throw new IllegalArgumentException("번호는 1 ~ 45의 숫자여야 합니다");
 		}
 	}
