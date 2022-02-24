@@ -1,7 +1,7 @@
 package view;
 
-import domain.LottoBall;
 import domain.Lotto;
+import domain.LottoBall;
 import domain.Rank;
 import domain.Result;
 import java.util.List;
@@ -21,7 +21,7 @@ public class OutputView {
     public static final String NO_MESSAGE = " 아니";
 
     public static void printLottoTickets(List<Lotto> lottoTickets) {
-        System.out.println(lottoTickets.size()+ BUY_MESSAGE);
+        System.out.println(lottoTickets.size() + BUY_MESSAGE);
         for (Lotto lotto : lottoTickets) {
             printLottoNumbers(lotto);
         }

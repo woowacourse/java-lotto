@@ -17,7 +17,7 @@ class LottoTest {
 
     @Test
     void 로또_번호_6개_일치_검사() {
-        WinLotto winLottoNumbers = Lotto.toWinLotto(Arrays.asList(1,2,3,4,5,6), LottoBall.from(10));
+        WinLotto winLottoNumbers = Lotto.toWinLotto(Arrays.asList(1, 2, 3, 4, 5, 6), LottoBall.from(10));
 
         int sameNumber = lotto.countSameNumber(winLottoNumbers);
         assertThat(sameNumber).isEqualTo(6);

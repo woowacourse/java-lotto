@@ -39,7 +39,7 @@ class OutputViewTest {
     }
 
     @Test
-    void 로또_당첨결과_출력_검사(){
+    void 로또_당첨결과_출력_검사() {
         OutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
 
@@ -59,7 +59,7 @@ class OutputViewTest {
     }
 
     @Test
-    void 로또_수익률_결과_출력_손해_검사(){
+    void 로또_수익률_결과_출력_손해_검사() {
         OutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
 
@@ -69,7 +69,7 @@ class OutputViewTest {
     }
 
     @Test
-    void 로또_수익률_결과_출력_이득_검사(){
+    void 로또_수익률_결과_출력_이득_검사() {
         OutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
 
@@ -79,7 +79,7 @@ class OutputViewTest {
     }
 
     @Test
-    void 로또_수익률_결과_출력_이득_1_검사(){
+    void 로또_수익률_결과_출력_이득_1_검사() {
         OutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
 

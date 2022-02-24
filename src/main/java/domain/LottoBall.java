@@ -8,7 +8,6 @@ import validator.LottoNumberValidator;
 
 public class LottoBall implements Comparable<LottoBall> {
     public static final List<LottoBall> LOTTO_NUMBERS_CACHE = new ArrayList<>();
-    private final int number;
 
     static {
         LOTTO_NUMBERS_CACHE.add(null);
@@ -16,6 +15,8 @@ public class LottoBall implements Comparable<LottoBall> {
             LOTTO_NUMBERS_CACHE.add(new LottoBall(i));
         }
     }
+
+    private final int number;
 
     private LottoBall(int number) {
         this.number = number;

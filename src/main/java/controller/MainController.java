@@ -1,7 +1,7 @@
 package controller;
 
-import domain.LottoBall;
 import domain.Lotto;
+import domain.LottoBall;
 import domain.Money;
 import domain.Rank;
 import domain.Result;
@@ -51,6 +51,6 @@ public class MainController {
 
     private void printResult(Result result, Money money) {
         OutputView.printResult(result);
-        OutputView.printProfit((float)result.getPrice()/ (float) money.get());
+        OutputView.printProfit((float) result.getPrice() / (float) money.get());
     }
 }

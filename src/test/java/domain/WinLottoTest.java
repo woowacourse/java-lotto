@@ -1,7 +1,6 @@
 package domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.InstanceOfAssertFactories.ARRAY;
 
 import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,7 +13,7 @@ class WinLottoTest {
 
     @BeforeEach
     void 당첨번호_생성() {
-        winLottoNumbers = Lotto.toWinLotto(Arrays.asList(1,2,3,4,5,6), LottoBall.from(10));
+        winLottoNumbers = Lotto.toWinLotto(Arrays.asList(1, 2, 3, 4, 5, 6), LottoBall.from(10));
     }
 
     @ParameterizedTest
