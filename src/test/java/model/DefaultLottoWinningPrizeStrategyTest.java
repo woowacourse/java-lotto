@@ -1,11 +1,9 @@
 package model;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.HashMap;
 import java.util.Map;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -41,8 +39,8 @@ class DefaultLottoWinningPrizeStrategyTest {
     @EnumSource(WinningPrize.class)
     @DisplayName("기본 로또 당첨보상 전략이 보상으로 맞는 숫자 갯수를 도출할 수 있는지 확인한다.")
     void checkWinningPriceToMatchCount(WinningPrize winningPrize) {
-        Map<WinningPrize, Integer> matchCounts = new HashMap<>(){{
-           put(WinningPrize.FIRST, 6);
+        Map<WinningPrize, Integer> matchCounts = new HashMap<>() {{
+            put(WinningPrize.FIRST, 6);
             put(WinningPrize.SECOND, 5);
             put(WinningPrize.THIRD, 5);
             put(WinningPrize.FOURTH, 4);

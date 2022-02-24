@@ -21,7 +21,10 @@ public class LottoGame {
     private final WinningTicket winningTicket;
     private final WinningPrizeStrategy winningPrizeStrategy;
 
-    public LottoGame(LottoTickets lottoTickets, List<Integer> winningNumbers, int bonusNumber, WinningPrizeStrategy winningPrizeStrategy) {
+    public LottoGame(LottoTickets lottoTickets,
+                     List<Integer> winningNumbers,
+                     int bonusNumber,
+                     WinningPrizeStrategy winningPrizeStrategy) {
         this.lottoTickets = lottoTickets;
         winningTicket = new WinningTicket(winningNumbers, bonusNumber);
         this.winningPrizeStrategy = winningPrizeStrategy;

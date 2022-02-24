@@ -2,7 +2,6 @@ package model;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
 public class DefaultLottoWinningPrizeStrategy implements WinningPrizeStrategy {
 
@@ -13,7 +12,7 @@ public class DefaultLottoWinningPrizeStrategy implements WinningPrizeStrategy {
         put(3, WinningPrize.FIFTH);
     }};
 
-    private static final Map<WinningPrize, Integer> WINNING_PRIZE_MATCH_COUNT_INFO = new HashMap<>(){{
+    private static final Map<WinningPrize, Integer> WINNING_PRIZE_MATCH_COUNT_INFO = new HashMap<>() {{
         put(WinningPrize.FIRST, 6);
         put(WinningPrize.SECOND, 5);
         put(WinningPrize.THIRD, 5);
