@@ -69,6 +69,13 @@ public class LottoController {
         }
     }
 
+    private LottoResult getLottoResult(LottoTickets lottoTickets, WinningNumbers winningNumbers) {
+        outputView.printLottoResultMessage();
+
+        LottoResult lottoResult = lottoTickets.determine(winningNumbers);
+
+        return lottoResult;
+    }
 
     private void getYield(Money money, LottoResult lottoResult) {
         Map<Rank, Integer> ranks = lottoResult.getRanks();
@@ -78,13 +85,5 @@ public class LottoController {
         System.out.println("5개 일치, 보너스 볼 일치(30000000원)-" + ranks.getOrDefault(Rank.SECOND, 0) + "개");
         System.out.println("6개 일치 (2000000000원)-" + ranks.getOrDefault(Rank.FIRST, 0) + "개");
         System.out.printf("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", Math.floor(lottoResult.calculateYield(money) * 100) / 100.0);
-    }
-
-    private LottoResult getLottoResult(LottoTickets lottoTickets, WinningNumbers winningNumbers) {
-        System.out.println();
-        System.out.println("당첨 통계");
-        System.out.println("---------");
-        LottoResult lottoResult = lottoTickets.determine(winningNumbers);
-        return lottoResult;
     }
 }
