@@ -5,25 +5,20 @@ import domain.LottoNumber;
 import domain.LottoResult;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class OutputView {
 
-    private static final String lineSeparator = System.lineSeparator();
-
     public static void printPurchaseInfo(List<Lotto> lottos) {
-        StringBuilder builder = new StringBuilder();
+        System.out.printf("%d개를 구매했습니다.\n", lottos.size());
 
-        builder.append(lottos.size())
-                .append("개를 구매했습니다.")
-                .append(lineSeparator);
+        StringBuilder builder = new StringBuilder();
 
         lottos.stream()
                 .map(OutputView::formatLottoNumbers)
                 .forEach(builder::append);
 
-        print(builder.toString());
+        System.out.println(builder);
     }
 
     private static String formatLottoNumbers(Lotto lotto) {
@@ -33,51 +28,24 @@ public class OutputView {
                 .map(Object::toString)
                 .collect(Collectors.joining(", "));
 
-        return "[" + lottoNumFormat + "]" + lineSeparator;
+        return "[" + lottoNumFormat + "]\n";
     }
 
     public static void printLottoResults(Map<LottoResult, Integer> lottoResults) {
-        StringBuilder builder = new StringBuilder();
-
-        builder.append(lineSeparator)
-                .append("당첨 통계")
-                .append(lineSeparator)
-                .append("---------")
-                .append(lineSeparator);
-
-        Set<LottoResult> lottoResultKeys = lottoResults.keySet();
-
-        lottoResultKeys.stream()
-                .map(lottoResult -> formatLottoResult(lottoResult, lottoResults.get(lottoResult)))
-                .forEach(builder::append);
-
-        print(builder.toString());
+        System.out.println("\n당첨 통계\n---------");
+        lottoResults.forEach(OutputView::formatLottoResult);
     }
 
-    private static String formatLottoResult(LottoResult lottoResult, int count) {
-        StringBuilder builder = new StringBuilder();
-        builder.append(lottoResult.getMatchCount())
-                .append("개 일치");
-
-        if (lottoResult.getHasBonus()) {
-            builder.append(", 보너스 볼 일치");
+    private static void formatLottoResult(LottoResult lottoResult, int count) {
+        if (lottoResult.equals(LottoResult.SECOND)) {
+            System.out.printf("%d개 일치, 보너스 볼 일치 (%d원) - %d개\n", lottoResult.getMatchCount(), lottoResult.getPrize(),
+                    count);
+            return;
         }
-
-        builder.append(" (")
-                .append(lottoResult.getPrize())
-                .append("원) - ");
-
-        builder.append(count).append("개")
-                .append(lineSeparator);
-
-        return builder.toString();
+        System.out.printf("%d개 일치 (%d원) - %d개\n", lottoResult.getMatchCount(), lottoResult.getPrize(), count);
     }
 
     public static void printLottoResults(float profitRatio) {
-        System.out.printf("총 수익률은 %.2f입니다.", profitRatio);
-    }
-
-    private static void print(String value) {
-        System.out.println(value);
+        System.out.printf("총 수익률은 %.2f입니다.\n", profitRatio);
     }
 }
