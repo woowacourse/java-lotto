@@ -32,9 +32,9 @@ public class LottosTest {
             .collect(Collectors.toList());
 
         Lottos lottos = new Lottos(3, lottoNumberGenerator);
-        WinningLotto winningLotto = new WinningLotto(winningNumbers);
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, new LottoNumber(2));
 
-        List<LottoReward> lottoRewards = lottos.calculateLottoReward(winningLotto, new LottoNumber(2));
+        List<LottoReward> lottoRewards = lottos.calculateLottoReward(winningLotto);
 
         lottoRewards.forEach(lottoReward -> assertThat(lottoReward).isEqualTo(LottoReward.FIRST));
     }

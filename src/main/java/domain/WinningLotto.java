@@ -8,15 +8,17 @@ public class WinningLotto {
     private static final int PLUS_COUNT = 1;
     private static final int NO_COUNT = 0;
 
-    private final List<LottoNumber> lottoNumbers;
+    private final List<LottoNumber> winningNumbers;
+    private final LottoNumber bonusNumber;
 
-    public WinningLotto(List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+    public WinningLotto(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
+        this.winningNumbers = winningNumbers;
+        this.bonusNumber = bonusNumber;
     }
 
     public int calculateSameLotto(Lotto otherLotto) {
         int matchCount = DEFAULT_COUNT;
-        for (LottoNumber lottoNumber : lottoNumbers) {
+        for (LottoNumber lottoNumber : winningNumbers) {
             matchCount += countNumber(otherLotto, lottoNumber);
         }
         return matchCount;
@@ -27,5 +29,9 @@ public class WinningLotto {
             return PLUS_COUNT;
         }
         return NO_COUNT;
+    }
+
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
     }
 }

@@ -3,7 +3,7 @@ import java.util.stream.Collectors;
 
 import domain.LottoGame;
 import domain.LottoNumber;
-import domain.Lottos;
+import domain.Money;
 import domain.WinningLotto;
 import domain.WinningStatistics;
 import view.InputView;
@@ -12,24 +12,25 @@ import view.OutputView;
 public class Application {
 
     public static void main(String[] args) {
-        final int purchasedMoney = InputView.getPurchaseMoney();
+        final Money purchasedMoney = new Money(InputView.getPurchaseMoney());
+        final LottoGame lottoGame = new LottoGame(purchasedMoney);
+        OutputView.showPurchasedLottos(lottoGame.getLottos());
 
-        LottoGame lottoGame = new LottoGame(purchasedMoney);
-
-        Lottos lottos = lottoGame.getLottos();
-        OutputView.showPurchasedLottos(lottos);
-
-        final List<Integer> winningLottoNumbers = InputView.getWinningLottoNumbers();
-        final int bonusBall = InputView.getBonusBall();
-
-        WinningLotto winningLotto = new WinningLotto(winningLottoNumbers.stream()
-            .map(LottoNumber::new)
-            .collect(Collectors.toList()));
-
-        LottoNumber bonusNumber = new LottoNumber(bonusBall);
-
-        WinningStatistics winningStatistics = lottoGame.calculateWinningStatistics(winningLotto, bonusNumber);
+        final WinningLotto winningLotto = createWinningLotto();
+        final WinningStatistics winningStatistics = lottoGame.calculateWinningStatistics(winningLotto);
         OutputView.showWinningStatistics(winningStatistics.getWinningStatistics());
         OutputView.showProfitRate(winningStatistics.calculateProfitRate(purchasedMoney));
+    }
+
+    private static WinningLotto createWinningLotto() {
+        final List<Integer> winningNumbers = InputView.getWinningLottoNumbers();
+        List<LottoNumber> winningLottoNumbers = winningNumbers.stream()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
+
+        final int bonusNumber = InputView.getBonusBall();
+        LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
+
+        return new WinningLotto(winningLottoNumbers, bonusLottoNumber);
     }
 }

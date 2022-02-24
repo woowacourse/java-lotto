@@ -15,11 +15,11 @@ public class Lottos {
         }
     }
 
-    public List<LottoReward> calculateLottoReward(WinningLotto winningLotto, LottoNumber bonusBall) {
+    public List<LottoReward> calculateLottoReward(WinningLotto winningLotto) {
         List<LottoReward> lottoRewards = new ArrayList<>();
         for (Lotto lotto : lottos) {
             int matchCount = winningLotto.calculateSameLotto(lotto);
-            boolean hasBonus = lotto.hasSameNumber(bonusBall);
+            boolean hasBonus = lotto.hasSameNumber(winningLotto.getBonusNumber());
 
             lottoRewards.add(LottoReward.find(matchCount, hasBonus));
         }
