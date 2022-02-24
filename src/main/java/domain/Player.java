@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Player {
 
-    private Money money;
+    private final Money money;
     private List<Lotto> lottos;
 
     public Player(Money money){
@@ -26,14 +26,6 @@ public class Player {
         return lottos;
     }
 
-    public int getMoney() {
-        return money.getAmount();
-    }
-
-    public List<Lotto> getLottos() {
-        return lottos;
-    }
-
     public List<Result> judgeAll(WinningLotto winningLotto){
         List<Result> result = new ArrayList<>();
         for (Lotto lotto : lottos) {
@@ -44,5 +36,9 @@ public class Player {
 
     public double calculateIncomeRate(double totalIncome) {
         return totalIncome / money.getAmount();
+    }
+
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 }

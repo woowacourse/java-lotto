@@ -23,15 +23,15 @@ public class LottoNumber {
         }
     }
 
-    public int number(){
-        return this.number;
-    }
-
     public int checkHit(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.contains(this)) {
             return 1;
         }
         return 0;
+    }
+
+    public int number(){
+        return this.number;
     }
 
     @Override
@@ -48,5 +48,3 @@ public class LottoNumber {
         return Objects.hash(number);
     }
 }
-
-//숫자입력 -> lottoNumber생성 -> 리스트로 추가 -> WinningLotto생성

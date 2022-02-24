@@ -5,6 +5,7 @@ import utils.ExceptionMessage;
 import java.util.List;
 
 public class WinningLotto {
+
     private Lotto winningLotto;
     private LottoNumber bonusBall;
 

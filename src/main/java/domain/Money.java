@@ -6,15 +6,11 @@ public class Money {
 
     private static final int MINIMUM_PURCHASE_AMOUNT = 1000;
 
-    private int amount;
+    private final int amount;
 
     public Money(int amount) {
         validateAmount(amount);
         this.amount = amount;
-    }
-
-    public int getAmount() {
-        return amount;
     }
 
     public int determineQuantity() {
@@ -25,5 +21,9 @@ public class Money {
         if (amount < MINIMUM_PURCHASE_AMOUNT) {
             throw new IllegalArgumentException(ExceptionMessage.NOT_ENOUGH_MONEY);
         }
+    }
+
+    public int getAmount() {
+        return amount;
     }
 }
