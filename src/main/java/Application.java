@@ -27,9 +27,11 @@ public class Application {
         LottoMachine lottoMachine = new LottoMachine(new RandomLottoNumbersGenerator(1, 45));
         lottoMachine.issueLotto(inputMoney);
         printIssuedLottoNumbers(lottoMachine.getIssuedLottoNumbers());
-        LottoNumbers winningLottoNumbers = inputWithMessage("지난 주 당첨 번호를 입력해 주세요.", LOTTO_NUMBERS_PARSER::parse);
+        LottoNumbers winningLottoNumbers = inputWithMessage("지난 주 당첨 번호를 입력해 주세요.",
+            LOTTO_NUMBERS_PARSER::parse);
         LottoNumber bonusNumber = inputWithMessage("보너스 볼을 입력해 주세요.", BONUS_NUMBER_PARSER::parse);
-        lottoMachine.setWinningLottoNumbers(new WinningLottoNumbers(winningLottoNumbers, bonusNumber));
+        lottoMachine
+            .setWinningLottoNumbers(new WinningLottoNumbers(winningLottoNumbers, bonusNumber));
         LottoResult result = lottoMachine.summarize();
 
         System.out.println("당첨 통계");
@@ -56,11 +58,13 @@ public class Application {
     }
 
     private static void printResult(LottoResult result, Money inputMoney) {
-        System.out.println("3개 일치 (5000원)- "+result.getCountByRank(LottoRank.FIFTH)+"개");
-        System.out.println("4개 일치 (50000원)- "+result.getCountByRank(LottoRank.FOURTH)+"개");
-        System.out.println("5개 일치 (1500000원)- "+result.getCountByRank(LottoRank.THIRD)+"개");
-        System.out.println("5개 일치, 보너스 볼 일치(30000000원)- "+result.getCountByRank(LottoRank.SECOND)+"개");
-        System.out.println("6개 일치 (2000000000원)- "+result.getCountByRank(LottoRank.FIRST)+"개");
-        System.out.println("총 수익률은 "+result.getTotalPrize().divide(inputMoney)+"입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        System.out.println("3개 일치 (5000원)- " + result.getCountByRank(LottoRank.FIFTH) + "개");
+        System.out.println("4개 일치 (50000원)- " + result.getCountByRank(LottoRank.FOURTH) + "개");
+        System.out.println("5개 일치 (1500000원)- " + result.getCountByRank(LottoRank.THIRD) + "개");
+        System.out.println(
+            "5개 일치, 보너스 볼 일치(30000000원)- " + result.getCountByRank(LottoRank.SECOND) + "개");
+        System.out.println("6개 일치 (2000000000원)- " + result.getCountByRank(LottoRank.FIRST) + "개");
+        System.out.println("총 수익률은 " + result.getTotalPrize().divide(inputMoney)
+            + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
     }
 }

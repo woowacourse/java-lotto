@@ -1,6 +1,7 @@
 package model;
 
 import exception.DuplicatedLottoNumbersException;
+import java.util.List;
 
 public class WinningLottoNumbers {
     private final LottoNumbers lottoNumbers;
@@ -26,5 +27,13 @@ public class WinningLottoNumbers {
 
     private boolean isBonusMatch(LottoNumbers lottoNumbers) {
         return lottoNumbers.contains(bonusNumber);
+    }
+
+    public LottoResult summarize(List<LottoNumbers> lottoNumbers, Money inputMoney) {
+        LottoResult result = new LottoResult(inputMoney);
+        lottoNumbers.stream()
+            .map(this::getRankBy)
+            .forEach(result::add);
+        return result;
     }
 }

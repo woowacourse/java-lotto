@@ -13,7 +13,7 @@ public class LottoResultTest {
     @Test
     @DisplayName("당첨결과 금액 총합 계산 테스트")
     void summarizeLottoPrize() {
-        LottoResult lottoResult = new LottoResult();
+        LottoResult lottoResult = new LottoResult(new Money(4000));
         lottoResult.add(LottoRank.FIRST);
         lottoResult.add(LottoRank.FIRST);
         lottoResult.add(LottoRank.SECOND);
@@ -25,7 +25,7 @@ public class LottoResultTest {
     @Test
     @DisplayName("당첨 결과 순위 갯수 조회 테스트")
     void summarizeCountByLottoRank() {
-        LottoResult lottoResult = new LottoResult();
+        LottoResult lottoResult = new LottoResult(new Money(4000));
         lottoResult.add(LottoRank.FIRST);
         lottoResult.add(LottoRank.FIRST);
         lottoResult.add(LottoRank.SECOND);

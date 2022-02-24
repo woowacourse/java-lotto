@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import exception.DuplicatedLottoNumbersException;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,6 +16,19 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 public class WinningLottoNumbersTest {
+
+    private static final LottoNumber BONUS = new LottoNumber(7);
+    private static final LottoNumbers FIRST_PRIZE_LOTTO_NUMBERS = new LottoNumbers(
+        List.of(1, 2, 3, 4, 5, 6));
+    private static final LottoNumbers SECOND_PRIZE_LOTTO_NUMBERS = new LottoNumbers(
+        List.of(1, 2, 3, 4, 5, 7));
+    private static final LottoNumbers THIRD_PRIZE_LOTTO_NUMBERS = new LottoNumbers(
+        List.of(1, 2, 3, 4, 5, 8));
+    private static final LottoNumbers NOTHING_PRIZE_LOTTO_NUMBERS = new LottoNumbers(
+        List.of(1, 2, 9, 11, 12, 13));
+    private static final Money FIRST_PRIZE = LottoRank.FIRST.getPrize();
+    private static final Money SECOND_PRIZE = LottoRank.SECOND.getPrize();
+    private static final Money THIRD_PRIZE = LottoRank.THIRD.getPrize();
 
     private WinningLottoNumbers winningLottoNumbers;
 
@@ -96,5 +110,27 @@ public class WinningLottoNumbersTest {
             Arguments.of(new LottoNumbers(List.of(1, 2, 8, 9, 10, 11))),
             Arguments.of(new LottoNumbers(List.of(1, 2, 7, 9, 10, 11)))
         );
+    }
+
+    @Test
+    @DisplayName("다양한 로또 순위 구하기")
+    void summarize() {
+        LottoResult result = winningLottoNumbers.summarize(
+            List.of(FIRST_PRIZE_LOTTO_NUMBERS, FIRST_PRIZE_LOTTO_NUMBERS,
+                SECOND_PRIZE_LOTTO_NUMBERS, THIRD_PRIZE_LOTTO_NUMBERS, THIRD_PRIZE_LOTTO_NUMBERS,
+                NOTHING_PRIZE_LOTTO_NUMBERS),
+            new Money(5000)
+        );
+
+        Money expectedPrize = FIRST_PRIZE.add(FIRST_PRIZE).add(SECOND_PRIZE).add(THIRD_PRIZE)
+            .add(THIRD_PRIZE);
+        assertThat(result.getTotalPrize()).isEqualTo(expectedPrize);
+        assertThat(result.getProfitRate()).isEqualTo(expectedPrize.divide(new Money(5000)));
+        assertThat(result.getCountByRank(LottoRank.FIRST)).isEqualTo(2);
+        assertThat(result.getCountByRank(LottoRank.SECOND)).isEqualTo(1);
+        assertThat(result.getCountByRank(LottoRank.THIRD)).isEqualTo(2);
+        assertThat(result.getCountByRank(LottoRank.FOURTH)).isEqualTo(0);
+        assertThat(result.getCountByRank(LottoRank.FIFTH)).isEqualTo(0);
+        assertThat(result.getCountByRank(LottoRank.NOTHING)).isEqualTo(1);
     }
 }

@@ -28,7 +28,7 @@ public class LottoMachine {
     }
 
     public LottoResult summarize() {
-        LottoResult result = new LottoResult();
+        LottoResult result = new LottoResult(Money.ZERO);
         issuedLottoNumbers.stream()
                 .map(winningLottoNumbers::getRankBy)
                 .forEach(result::add);
@@ -47,13 +47,5 @@ public class LottoMachine {
 
     public void setWinningLottoNumbers(WinningLottoNumbers winningLottoNumbers) {
         this.winningLottoNumbers = winningLottoNumbers;
-    }
-
-    public void setLottoNumbersGenerator(LottoNumbersGenerator lottoNumbersGenerator) {
-        this.lottoNumbersGenerator = lottoNumbersGenerator;
-    }
-
-    public void setIssuedLottoNumbers(List<LottoNumbers> issuedLottoNumbers) {
-        this.issuedLottoNumbers = issuedLottoNumbers;
     }
 }
