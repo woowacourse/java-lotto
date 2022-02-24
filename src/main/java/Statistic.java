@@ -1,11 +1,11 @@
-import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.EnumMap;
 
 public class Statistic {
 
-    private final LinkedHashMap<Rank, Integer> statistics;
+    private final EnumMap<Rank, Integer> statistics;
 
-    public Statistic(LinkedHashMap<Rank, Integer> statistics) {
+    public Statistic(EnumMap<Rank, Integer> statistics) {
         this.statistics = statistics;
     }
 

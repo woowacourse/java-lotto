@@ -38,7 +38,7 @@
   - [ ] `Date`, `LocalDateTime`의 현재 시간을 구하는 로직에 대해 찾아보기
 - [ ] assertj와 junit의 동시 사용 -> 통일된 라이브러리 사용으로 유지보수성 향상
 - [ ] `LottoTest` : `@ParameterizedTest`를 통해 다양한 케이스의 테스트
-- [ ] `Statistic` : LinkedHashMap -> EnumMap [링크](https://www.baeldung.com/java-enum-map)
+- [x] `Statistic` : LinkedHashMap -> EnumMap [링크](https://www.baeldung.com/java-enum-map)
 - [x] `POSIX new Line` [링크](https://blog.coderifleman.com/2015/04/04/text-files-end-with-a-newline/)
   - 인텔리제이 옵션 (항상 개행) [링크](https://velog.io/@d-h-k/intellij-%ED%8C%8C%EC%9D%BC%EB%81%9D%EC%97%90-%EA%B0%9C%ED%96%89%EC%9D%84-%EC%9E%90%EB%8F%99%EC%9C%BC%EB%A1%9C-%EC%B6%94%EA%B0%80%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95) 
 
@@ -62,3 +62,10 @@
      텍스트 파일은 행의 집합이며 행의 끝은 반드시 개행으로 끝난다.
      ```
    - Intellij 설정 방법 : preference > editor > general > on save > Ensure every saved file ends with a line break 체크 박스 클릭
+2. EnumMap : Enum을 키로 사용하는 Map의 구현
+   - EnumMap은 생성자에 Key Type이 필요하다.
+      ```java
+      EnumMap<Rank, Integer> rankCountMap = new EnumMap<>(Rank.class);
+      ```
+   - 성능 : Enum을 키로 사용할 경우 `모든 키를 미리 알고 있기 때문에 더 빠른 해시 계산`
+   - 기능 : 열거형 순서로 반복된다는 점에서 정렬된 Map(TreeMap, LinkedHashMap에서 유사한 동작)
