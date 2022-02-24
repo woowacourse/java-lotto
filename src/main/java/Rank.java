@@ -2,7 +2,7 @@ import java.util.Arrays;
 
 public enum Rank {
     SIXTH(0, 0, false),
-    FIFTH(3, 5000, false),
+    FIFTH(3, 5_000, false),
     FOURTH(4, 50_000, false),
     THIRD(5, 1_500_000, false),
     SECOND(5, 30_000_000, true),
@@ -25,10 +25,10 @@ public enum Rank {
             return Rank.SECOND;
         }
         return Arrays.stream(values())
-                .filter(rank -> rank.count == count)
-                .filter(rank -> !rank.hasBonusBall)
-                .findFirst()
-                .orElse(SIXTH);
+            .filter(rank -> rank.count == count)
+            .filter(rank -> !rank.hasBonusBall)
+            .findFirst()
+            .orElse(SIXTH);
     }
 
     public int getWinningPrice() {
