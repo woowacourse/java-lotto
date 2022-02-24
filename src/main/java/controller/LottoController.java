@@ -24,29 +24,20 @@ public class LottoController {
         winningLotto = new WinningLotto(lottoNumbers, new LottoNumber(bonusBall));
     }
 
-    public RanksDto makeResult(){
-        List<RankDto> rankDtos = calculateRank();
-        double incomeRate = calculateIncomeRate(rankDtos);
-        return new RanksDto(rankDtos,incomeRate);
+    public List<Result> judgeLottos() {
+        return player.judgeAll(winningLotto);
     }
 
-    private List<RankDto> calculateRank() {
-        List<Result> results = player.judgeAll(winningLotto);
-        Rank.calculateAllResult(results);
+    public RanksDto makeResult(List<Result> judgeLottos) {
+        double totalIncome = Rank.calculateAllResult(judgeLottos);
+        double incomeRate = player.calculateIncomeRate(totalIncome);
+
         List<RankDto> rankDtos = new ArrayList<>();
         int rankNumber = 5;
 
         for (Rank rank : Rank.values()) {
             rankDtos.add(RankDto.from(rank, rankNumber--));
         }
-        return rankDtos;
-    }
-
-    private double calculateIncomeRate(List<RankDto> rankDtos) {
-        double totalIncome = 0;
-        for (RankDto rankDto : rankDtos) {
-            totalIncome += rankDto.getReward() * rankDto.getHitCount();
-        }
-        return totalIncome / player.getMoney();
+        return new RanksDto(rankDtos, incomeRate);
     }
 }

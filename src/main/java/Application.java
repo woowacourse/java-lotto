@@ -1,6 +1,6 @@
 import controller.LottoController;
+import domain.Result;
 import dto.LottosDto;
-import dto.RanksDto;
 import view.InputView;
 import view.OutputView;
 
@@ -10,15 +10,12 @@ public class Application {
     public static void main(String[] args) {
         LottoController lottoController = new LottoController();
 
-        int purchaseAmount = InputView.inputPurchaseAmount();
-        LottosDto lottosDto = lottoController.purchase(purchaseAmount);
+        LottosDto lottosDto = lottoController.purchase(InputView.inputPurchaseAmount());
         OutputView.printPurchasedLotto(lottosDto);
 
-        List<String> winningNumber = InputView.inputWinningNumber();
-        int bonusBall = InputView.inputBonusBall();
-        lottoController.determineWinningNumber(winningNumber,bonusBall);
+        lottoController.determineWinningNumber(InputView.inputWinningNumber(),InputView.inputBonusBall());
 
-        RanksDto result = lottoController.makeResult();
-        OutputView.printResult(result);
+        List<Result> results =lottoController.judgeLottos();
+        OutputView.printResult(lottoController.makeResult(results));
     }
 }
