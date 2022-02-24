@@ -1,5 +1,9 @@
 package domain;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public enum WinningStatus {
 
 	NOTHING(0, 0, false),
@@ -32,33 +36,15 @@ public enum WinningStatus {
 	}
 
 	public static WinningStatus of(int numberMatches, boolean hitBonus) {
-		if (numberMatches == 5) {
-			return withBonus(hitBonus);
+		List<WinningStatus> filteredByNumberMatches = Arrays.stream(WinningStatus.values())
+			.filter(winningStatus -> winningStatus.numberMatches == numberMatches).collect(Collectors.toList());
+		if (filteredByNumberMatches.isEmpty()) {
+			return NOTHING;
 		}
-		if (numberMatches > 5) {
-			return moreThanFive();
+		if (filteredByNumberMatches.size() > 1) {
+			return filteredByNumberMatches.stream().filter(winningStatus -> winningStatus.hitBonus == hitBonus)
+				.findFirst().get();
 		}
-		return lessThanFive(numberMatches);
-	}
-
-	private static WinningStatus withBonus(boolean hitBonus) {
-		if (hitBonus) {
-			return FIVE_AND_BONUS;
-		}
-		return FIVE;
-	}
-
-	private static WinningStatus moreThanFive() {
-		return SIX;
-	}
-
-	private static WinningStatus lessThanFive(int numberMatches) {
-		if (numberMatches == 4) {
-			return FOUR;
-		}
-		if (numberMatches == 3) {
-			return THREE;
-		}
-		return NOTHING;
+		return filteredByNumberMatches.get(0);
 	}
 }
