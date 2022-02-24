@@ -10,11 +10,11 @@ public class LottoFactory {
 
 	private static final int MIN_LOTTO_NUMBER = 1;
 	private static final int MAX_LOTTO_NUMBER = 45;
+	private static final int LOTTO_PRICE = 1000;
+	private static final int MIN_PURCHASE_COUNT = 1;
 	private static final List<Integer> LOTTO_NUMBERS = IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
 		.boxed()
 		.collect(Collectors.toList());
-	private static final int LOTTO_PRICE = 1000;
-	private static final int MIN_PURCHASE_COUNT = 1;
 
 	private Lotto generateLotto() {
 		Collections.shuffle(LOTTO_NUMBERS);

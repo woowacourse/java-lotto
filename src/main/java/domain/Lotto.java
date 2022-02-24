@@ -7,8 +7,8 @@ import java.util.stream.Stream;
 public class Lotto {
 
 	private static final int NUMBER_OF_COUNT_TO_PICK_LOTTO = 6;
-	public static final String DUPLICATE_EXCEPTION_MESSAGE = "중복된 숫자를 입력할 수 없습니다";
-	public static final String WRONG_COUNT_PICK_LOTTO_EXCEPTION_MESSAGE = "로또 번호는 6개의 숫자여야 합니다";
+	private static final String DUPLICATE_EXCEPTION_MESSAGE = "중복된 숫자를 입력할 수 없습니다";
+	private static final String WRONG_COUNT_PICK_LOTTO_EXCEPTION_MESSAGE = "로또 번호는 6개의 숫자여야 합니다";
 	private final List<Number> lotto;
 
 	public Lotto(List<Number> lotto) {
