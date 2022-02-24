@@ -5,8 +5,8 @@ import lotto.view.exception.InvalidFormatException;
 public class StringFormatValidator {
 
     private static final String EMPTY_MESSAGE = "";
-    public static final StringFormatValidator NOT_WORKING_VALIDATOR = new StringFormatValidator(
-        ".*", EMPTY_MESSAGE);
+    static final StringFormatValidator NOT_WORKING_VALIDATOR = new StringFormatValidator(".*",
+        EMPTY_MESSAGE);
 
     static final String INVALID_LOTTO_NUMBER_FORMAT_MESSAGE = "당첨 번호의 형식이 잘못 되었습니다. 예) 1, 2, 3, 4, 5, 6";
     static final String INVALID_BONUS_NUMBER_FORMAT_MESSAGE = "보너스 번호의 형식이 잘못 되었습니다. 예) 35";
