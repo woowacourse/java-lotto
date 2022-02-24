@@ -9,6 +9,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static lotto.util.constants.Lotto.LAST_LOTTO_NUMBER;
+
 public class LottoCustomGenerator implements LottoGenerator {
     private static final int MAX_GENERATING_LOTTO_NUMBERS_COUNT = 39;
     private static final String TEST_LOTTO_NUMBERS_COUNT_EXCEED_EXCEPTION_MESSAGE =
@@ -18,7 +20,7 @@ public class LottoCustomGenerator implements LottoGenerator {
     private final List<LottoNumber> lottoNumbers;
 
     public LottoCustomGenerator() {
-        lottoNumbers = IntStream.range(0, 45)
+        lottoNumbers = IntStream.range(0, LAST_LOTTO_NUMBER)
                 .mapToObj(index -> LottoNumber.from(String.valueOf(index + 1)))
                 .collect(Collectors.toUnmodifiableList());
     }

@@ -5,6 +5,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static lotto.util.constants.Lotto.LAST_LOTTO_NUMBER;
 import static lotto.util.regex.NumberRegex.NATURAL_NUMBER_REGEX;
 
 public class LottoNumber implements Comparable<LottoNumber> {
@@ -18,7 +19,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     static {
-        basicNumbers = IntStream.range(0, 45)
+        basicNumbers = IntStream.range(0, LAST_LOTTO_NUMBER)
                 .map(index -> index + 1)
                 .boxed()
                 .collect(Collectors.toUnmodifiableList());

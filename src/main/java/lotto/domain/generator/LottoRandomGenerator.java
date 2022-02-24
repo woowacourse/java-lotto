@@ -10,13 +10,15 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static lotto.util.constants.Lotto.LAST_LOTTO_NUMBER;
+
 public class LottoRandomGenerator implements LottoGenerator {
     private static final int BONUS_NUMBER_INDEX = 6;
 
     private final List<LottoNumber> basicNumbers;
 
     public LottoRandomGenerator() {
-        basicNumbers = IntStream.range(0, 45)
+        basicNumbers = IntStream.range(0, LAST_LOTTO_NUMBER)
                 .mapToObj(index -> LottoNumber.from(String.valueOf(index + 1)))
                 .collect(Collectors.toList());
     }
