@@ -15,18 +15,18 @@ public class LotteryTest {
 	class CheckNumbersInLotteryTest {
 		@Test
 		@DisplayName("6개이면 올바른 로또이다.")
-		void valid_lottery_number(){
-			assertThatNoException().isThrownBy(() -> {
-				new Lottery(Arrays.asList(1,2,3,4,5,6));
-			});
+		void valid_lottery_number() {
+			assertThatNoException().isThrownBy(() ->
+				new Lottery(Arrays.asList(1, 2, 3, 4, 5, 6))
+			);
 		}
 
 		@Test
 		@DisplayName("6개가 아니면 올바르지 않은 로또이다.")
 		void invalid_lottery_number() {
-			assertThatThrownBy(() -> {
-				new Lottery(Arrays.asList(1,2,3,4,5));
-			}).isInstanceOf(IllegalArgumentException.class)
+			assertThatThrownBy(() ->
+				new Lottery(Arrays.asList(1, 2, 3, 4, 5))
+			).isInstanceOf(IllegalArgumentException.class)
 				.hasMessageContaining("로또 번호는 6개여야 합니다.");
 		}
 	}
@@ -34,7 +34,6 @@ public class LotteryTest {
 	@Nested
 	@DisplayName("로또 용지에 포함되 있는 숫자들이")
 	class CheckNumberRangeTest {
-
 		@Test
 		@DisplayName("1~45 사이이면 통과")
 		void valid_lottery_number_range() {

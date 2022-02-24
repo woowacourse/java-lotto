@@ -17,14 +17,15 @@ public class LotteriesTest {
 	@ParameterizedTest(name = "{index} {displayName} lotteryNumber={0}")
 	@ValueSource(ints = {1, 100, 50})
 	void lotteries_number(final int lotteryNumber){
+		//given
 		final List<List<Integer>> lotteriesNumber = new ArrayList<>();
 		final LotteryRandomGeneratorStrategy lotteryGenerator = new LotteryRandomGeneratorStrategy();
-
 		for (int i = 0 ; i < lotteryNumber; i++) {
 			lotteriesNumber.add(lotteryGenerator.getNumbers());
 		}
+		//when
 		final Lotteries lotteries = new Lotteries(lotteriesNumber);
-
+		//then
 		assertThat(lotteries.getLotteries().size()).isEqualTo(lotteryNumber);
 	}
 }

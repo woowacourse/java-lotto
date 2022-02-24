@@ -3,7 +3,6 @@ package domain;
 import static org.assertj.core.api.AssertionsForClassTypes.*;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 import org.junit.jupiter.api.DisplayName;
@@ -32,9 +31,12 @@ public class LotteryGameTest {
 	@Test
 	@DisplayName("등수가 제대로 집계되는지 확인")
 	void testRankingCount() {
+		//given
 		final LotteryGame lotteryGame = new LotteryGame(6000, new LotteryGenerateMock());
 		lotteryGame.createWinningLottery(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+		//when
 		Map<Rank, Integer> rankResult = lotteryGame.makeWinner();
+		//then
 		for (Rank rank : rankResult.keySet()) {
 			rankResult.get(rank);
 			assertThat(rankResult.get(rank)).isEqualTo(1);
@@ -44,10 +46,13 @@ public class LotteryGameTest {
 	@Test
 	@DisplayName("승률이 제대로 집계되는지 확인")
 	void testRankingPercent() {
+		//given
 		final LotteryGame lotteryGame = new LotteryGame(6000, new LotteryGenerateMock());
 		lotteryGame.createWinningLottery(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+		//when
 		Map<Rank, Integer> rankResult = lotteryGame.makeWinner();
 		double percent = lotteryGame.makeRankingPercent(rankResult);
+		//then
 		assertThat(percent).isEqualTo((double)2031555000 / (6 * 1000));
 	}
 }
