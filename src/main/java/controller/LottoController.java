@@ -28,9 +28,9 @@ public class LottoController {
 		LottoTicket lottoTicket = new LottoTicket(lottoFactory.generateLottoTicket(money));
 		outputView.printPurchasedLottoTicket(lottoTicket.getLottoTicket());
 
-		Lotto winningLotto = Lotto.from(requestWinningLottoInput());
+		Lotto winningNumber = Lotto.from(requestWinningLottoInput());
 		Number bonusNumber = Number.from(requestBonusNumberInput());
-		WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusNumber);
+		WinningNumbers winningNumbers = new WinningNumbers(winningNumber, bonusNumber);
 
 		findWinningResult(lottoTicket, winningNumbers, money);
 	}

@@ -18,6 +18,16 @@ public class LottoFactory {
 		.boxed()
 		.collect(Collectors.toList());
 
+	public List<Lotto> generateLottoTicket(final Money money) {
+		int lottoCount = INITIAL_LOTTO_COUNT;
+		List<Lotto> lottoTicket = new ArrayList<>();
+
+		while (money.isPossibleToPurchase(lottoCount++ * LOTTO_PRICE)) {
+			lottoTicket.add(generateLotto());
+		}
+		return Collections.unmodifiableList(lottoTicket);
+	}
+
 	private Lotto generateLotto() {
 		Collections.shuffle(lottoNumbers);
 		return new Lotto(abstractLottoNumbersAsMuchAsLottoSize().stream()
@@ -27,15 +37,5 @@ public class LottoFactory {
 
 	private List<Integer> abstractLottoNumbersAsMuchAsLottoSize() {
 		return Collections.unmodifiableList(lottoNumbers.subList(INITIAL_INDEX, LOTTO_MAX_SIZE_INDEX));
-	}
-
-	public List<Lotto> generateLottoTicket(final Money money) {
-		int lottoCount = INITIAL_LOTTO_COUNT;
-		List<Lotto> lottoTicket = new ArrayList<>();
-
-		while (money.isPossibleToPurchase(lottoCount++ * LOTTO_PRICE)) {
-			lottoTicket.add(generateLotto());
-		}
-		return Collections.unmodifiableList(lottoTicket);
 	}
 }

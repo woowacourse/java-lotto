@@ -34,4 +34,15 @@ public class MoneyTest {
 		//then
 		assertTrue(money.isPossibleToPurchase(compareMoney));
 	}
+
+	@Test
+	@DisplayName("구매 불가능한지 경계값 확인")
+	void checkIsImPossibleToPurchase() {
+		//given
+		int compareMoney = 4000;
+		//when
+		Money money = Money.from("3000");
+		//then
+		assertFalse(money.isPossibleToPurchase(compareMoney));
+	}
 }
