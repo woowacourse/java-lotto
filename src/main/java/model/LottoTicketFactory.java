@@ -34,7 +34,7 @@ public class LottoTicketFactory {
         for (int i = 0; i < getAvailableLottoTicketsCount(money); i++) {
             lottoTickets.add(createTicket());
         }
-        return lottoTickets.stream().collect(Collectors.toUnmodifiableList());
+        return Collections.unmodifiableList(lottoTickets);
     }
 
     private int getAvailableLottoTicketsCount(int money) {
