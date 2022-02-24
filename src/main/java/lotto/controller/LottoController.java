@@ -23,7 +23,7 @@ public class LottoController {
     public void start() {
         Money money = initMoney();
         lotto = new Lotto(money);
-        outputView.printPurchasedLotto(LottoDto.from(lotto));
+        outputView.printLotto(LottoDto.from(lotto));
         ChoiceNumber choiceNumber = initChoiceNumber();
         BonusNumber bonusNumber = initBonusNumber(choiceNumber);
         WinningNumber winningNumber = new WinningNumber(choiceNumber, bonusNumber);
@@ -34,8 +34,8 @@ public class LottoController {
 
     private Money initMoney() {
         try {
-            outputView.printAskMoneyInputMessage();
-            Money money = new Money(inputView.getInput());
+            String inputValue = inputView.askMoneyInput();
+            Money money = new Money(inputValue);
             return money;
         } catch (IllegalArgumentException exception) {
             outputView.printErrorMessage(exception);
@@ -45,8 +45,8 @@ public class LottoController {
 
     private ChoiceNumber initChoiceNumber() {
         try {
-            outputView.printLastWeekWinningMessage();
-            ChoiceNumber choiceNumber = new ChoiceNumber(inputView.getInput());
+            String inputValue = inputView.askWinningNumbers();
+            ChoiceNumber choiceNumber = new ChoiceNumber(inputValue);
             return choiceNumber;
         } catch (IllegalArgumentException exception) {
             outputView.printErrorMessage(exception);
@@ -56,8 +56,8 @@ public class LottoController {
 
     private BonusNumber initBonusNumber(ChoiceNumber choiceNumber) {
         try {
-            outputView.printLastWeekBonusMessage();
-            BonusNumber bonusNumber = new BonusNumber(inputView.getInput(), choiceNumber);
+            String inputValue = inputView.askBonusNumber();
+            BonusNumber bonusNumber = new BonusNumber(inputValue, choiceNumber);
             return bonusNumber;
         } catch (IllegalArgumentException exception) {
             outputView.printErrorMessage(exception);

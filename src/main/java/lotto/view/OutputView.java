@@ -6,23 +6,11 @@ import lotto.domain.LottoResult;
 import lotto.domain.LottoDto;
 
 public class OutputView {
-    public void printAskMoneyInputMessage() {
-        System.out.println("구입금액을 입력해주세요.");
-    }
-
     public void printErrorMessage(Exception exception) {
         System.out.println(exception.getMessage());
     }
 
-    public void printLastWeekWinningMessage() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-    }
-
-    public void printLastWeekBonusMessage() {
-        System.out.println("보너스 볼을 입력해 주세요.");
-    }
-
-    public void printPurchasedLotto(LottoDto lottoDto) {
+    public void printLotto(LottoDto lottoDto) {
         System.out.println(String.format("%d개를 구매했습니다.", lottoDto.getLottoSize()));
         for (ChoiceNumber choiceNumber : lottoDto.getLotto()) {
             System.out.println(choiceNumber);
