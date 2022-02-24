@@ -41,7 +41,7 @@ public class LottoController {
     private LottoTickets createLottoTickets(Money money) {
         LottoTickets lottoTickets = new LottoMachine().purchase(money);
 
-        outputView.printTotalCount(lottoTickets.totalCount());
+        outputView.printTotalCount(money.calculate());
         outputView.printLottoTicketsInfo(lottoTickets);
 
         return lottoTickets;

@@ -5,9 +5,9 @@ import java.util.Map;
 
 public class LottoResult {
 
-    private final Map<Rank, Integer> ranks;
+    private final Map<Rank, Long> ranks;
 
-    public LottoResult(Map<Rank, Integer> ranks) {
+    public LottoResult(Map<Rank, Long> ranks) {
         this.ranks = ranks;
     }
 
@@ -21,7 +21,7 @@ public class LottoResult {
         return Math.floor((double) totalPrizeMoney / price * 100) / 100.0;
     }
 
-    public Map<Rank, Integer> getRanks() {
+    public Map<Rank, Long> getRanks() {
         return Collections.unmodifiableMap(ranks);
     }
 }

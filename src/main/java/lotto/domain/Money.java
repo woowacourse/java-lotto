@@ -19,10 +19,10 @@ public class Money {
     }
 
     public int calculate() {
-        return this.price / PRICE_CRITERION;
+        return price / PRICE_CRITERION;
     }
 
     public int getPrice() {
-        return this.price;
+        return price;
     }
 }

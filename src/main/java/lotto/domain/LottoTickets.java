@@ -1,14 +1,17 @@
 package lotto.domain;
 
-import java.util.ArrayList;
+import static java.util.function.Function.*;
+import static java.util.stream.Collectors.*;
+
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.IntStream;
 import lotto.domain.generator.LottoNumberGenerator;
 
 public class LottoTickets {
 
+    public static final int LOTTO_COUNT_START_INCLUSIVE = 0;
     private final List<LottoTicket> lottoTickets;
 
     public LottoTickets(int lottoCount, LottoNumberGenerator lottoNumberGenerator) {
@@ -16,28 +19,15 @@ public class LottoTickets {
     }
 
     private List<LottoTicket> generateTickets(int lottoCount, LottoNumberGenerator lottoNumberGenerator) {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-
-        for (int i = 0; i < lottoCount; i++) {
-            LottoTicket lottoTicket = new LottoTicket(lottoNumberGenerator);
-
-            lottoTickets.add(lottoTicket);
-        }
-
-        return lottoTickets;
-    }
-
-    public int totalCount() {
-        return lottoTickets.size();
+        return IntStream.range(LOTTO_COUNT_START_INCLUSIVE, lottoCount)
+                .mapToObj(value -> new LottoTicket(lottoNumberGenerator))
+                .collect(toList());
     }
 
     public LottoResult determine(WinningNumbers winningNumbers) {
-        Map<Rank, Integer> ranks = new HashMap<>();
-
-        for (LottoTicket lottoTicket : lottoTickets) {
-            Rank rank = winningNumbers.compare(lottoTicket);
-            ranks.put(rank, ranks.getOrDefault(rank, 0) + 1);
-        }
+        Map<Rank, Long> ranks = lottoTickets.stream()
+                .map(winningNumbers::compare)
+                .collect(groupingBy(identity(), counting()));
 
         return new LottoResult(ranks);
     }

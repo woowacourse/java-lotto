@@ -12,7 +12,7 @@ class LottoResultTest {
     @Test
     void 수익률_계산_테스트() {
         // given
-        Map<Rank, Integer> ranks = Map.of(Rank.FIFTH, 1);
+        Map<Rank, Long> ranks = Map.of(Rank.FIFTH, 1L);
 
         LottoResult lottoResult = new LottoResult(ranks);
 
