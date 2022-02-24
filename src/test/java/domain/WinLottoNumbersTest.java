@@ -18,14 +18,14 @@ class WinLottoNumbersTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3, 4})
     void 로또_숫자_확인(int input) {
-        assertThat(winLottoNumbers.isInNumber(new LottoNumber(input)))
+        assertThat(winLottoNumbers.isInNumber(LottoNumber.valueOf(input)))
                 .isTrue();
     }
 
     @ParameterizedTest
     @ValueSource(ints = {7, 8, 9, 10})
     void 로또_숫자_포함안될때_검사(int input) {
-        assertThat(winLottoNumbers.isInNumber(new LottoNumber(input)))
+        assertThat(winLottoNumbers.isInNumber(LottoNumber.valueOf(input)))
                 .isFalse();
     }
 }

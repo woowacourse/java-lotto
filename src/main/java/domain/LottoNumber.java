@@ -1,39 +1,42 @@
 package domain;
 
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 import validator.LottoNumberValidator;
 
 public class LottoNumber implements Comparable<LottoNumber> {
+
+    private static final int LOTTO_NUMBER_LOWER_BOUND = 1;
+    private static final int LOTTO_NUMBER_UPPER_BOUND = 45;
+    private static final List<LottoNumber> CACHE = new ArrayList<>();
+
     private final int number;
 
-    public LottoNumber(int number) {
-        LottoNumberValidator.validate(number);
+    static {
+        for (int i = LOTTO_NUMBER_LOWER_BOUND; i <= LOTTO_NUMBER_UPPER_BOUND; i++) {
+            CACHE.add(new LottoNumber(i));
+        }
+    }
+
+    private LottoNumber(final int number) {
         this.number = number;
     }
 
+    public static LottoNumber valueOf(final int number) {
+        LottoNumberValidator.validate(number);
+        return CACHE.get(number - 1);
+    }
+
+    public static List<LottoNumber> values() {
+        return CACHE;
+    }
+
     public int get() {
-        return this.number;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        LottoNumber that = (LottoNumber) o;
-        return number == that.number;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(number);
+        return number;
     }
 
     @Override
     public int compareTo(LottoNumber o) {
-        return java.lang.Integer.compare(number, o.get());
+        return Integer.compare(this.number, o.number);
     }
 }

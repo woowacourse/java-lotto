@@ -13,10 +13,10 @@ public class WinLottoNumbers {
     private WinLottoNumbers(List<Integer> lottoNumbers, int bonus) {
         List<LottoNumber> tmpLottoNumbers = new ArrayList<>();
         for (Integer lottoNumber : lottoNumbers) {
-            tmpLottoNumbers.add(new LottoNumber(lottoNumber));
+            tmpLottoNumbers.add(LottoNumber.valueOf(lottoNumber));
         }
         this.lottoNumbers = tmpLottoNumbers;
-        this.bonus = new LottoNumber(bonus);
+        this.bonus = LottoNumber.valueOf(bonus);
     }
 
     public static WinLottoNumbers of(String lottoNumbersText, int bonus) {
