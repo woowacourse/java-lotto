@@ -3,7 +3,6 @@ package lotto.domain.generator;
 import lotto.domain.LottoNumbers;
 import lotto.domain.vo.LottoNumber;
 
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
