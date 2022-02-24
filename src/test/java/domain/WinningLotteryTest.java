@@ -56,11 +56,8 @@ public class WinningLotteryTest {
 	@ParameterizedTest(name = "{index} {displayName} rank={0}")
 	@MethodSource("generateParameter")
 	void checkRank(List<LotteryNumber> lottoNumbers, Rank rank) {
-		//given
 		WinningLottery winningLottery = new WinningLottery(winningNumbers, new LotteryNumber(7));
 		Lottery lottery = new Lottery(lottoNumbers);
-		//when
-		//then
 		assertThat(winningLottery.getRank(lottery)).isEqualTo(rank);
 	}
 

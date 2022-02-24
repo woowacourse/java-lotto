@@ -16,7 +16,6 @@ public class WinningLottery {
 	}
 
 	private void validateBonusBall(final List<LotteryNumber> winningNumbers, final LotteryNumber bonusBall) {
-		// validateRange(bonusBall);
 		validateDuplicatedNumber(winningNumbers, bonusBall);
 	}
 

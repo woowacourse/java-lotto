@@ -37,7 +37,4 @@ public class LotteryGameController {
 		return InputView.inputValidLotteryNumber();
 	}
 
-	// public void createAutoLotteries() {
-	// 	lotteryGame = new LotteryGame()
-	// }
 }
