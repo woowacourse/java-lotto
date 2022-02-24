@@ -15,7 +15,7 @@ public class LottosDto {
         this.quantity = lottoDtos.size();
     }
 
-    public static LottosDto from(List<Lotto> lottos){
+    public static LottosDto from(List<Lotto> lottos) {
         List<LottoDto> lottoDtos = new ArrayList<>();
         for (Lotto lotto : lottos) {
             LottoDto lottoDto = LottoDto.from(lotto.getLotto());

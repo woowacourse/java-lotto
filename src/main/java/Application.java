@@ -13,9 +13,9 @@ public class Application {
         LottosDto lottosDto = lottoController.purchase(InputView.inputPurchaseAmount());
         OutputView.printPurchasedLotto(lottosDto);
 
-        lottoController.determineWinningNumber(InputView.inputWinningNumber(),InputView.inputBonusBall());
+        lottoController.determineWinningNumber(InputView.inputWinningNumber(), InputView.inputBonusBall());
 
-        List<Result> results =lottoController.judgeLottos();
+        List<Result> results = lottoController.judgeLottos();
         OutputView.printResult(lottoController.makeResult(results));
     }
 }

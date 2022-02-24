@@ -6,7 +6,7 @@ public class Result {
     private final int hitCount;
     private final boolean isHitBonusBall;
 
-    public Result(int hitCount, boolean isHitBonusBall){
+    public Result(int hitCount, boolean isHitBonusBall) {
         this.hitCount = hitCount;
         this.isHitBonusBall = isHitBonusBall;
     }

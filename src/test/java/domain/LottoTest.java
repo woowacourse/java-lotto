@@ -36,7 +36,7 @@ public class LottoTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {5,7})
+    @ValueSource(ints = {5, 7})
     @DisplayName("Lotto의 size가 6이 아닐 경우 예외를 발생한다.")
     public void lotto_사이즈_5일경우(int lastIndex) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
@@ -53,16 +53,16 @@ public class LottoTest {
     void judge_보너스볼_불일치() {
         WinningLotto winningLotto = new WinningLotto(lottoGenerator.generateLotto(winningNumbers), new LottoNumber(10));
         Result actual = lotto.judge(winningLotto);
-        Result expected = new Result(5,false);
+        Result expected = new Result(5, false);
         assertThat(actual).isEqualTo(expected);
     }
 
     @Test
     @DisplayName("Lotto의 숫자들과 당첨숫자를 비교하여 결과를 반환한다.")
-    void judge_보너스볼_일치(){
+    void judge_보너스볼_일치() {
         WinningLotto winningLotto = new WinningLotto(lottoGenerator.generateLotto(winningNumbers), new LottoNumber(1));
         Result actual = lotto.judge(winningLotto);
-        Result expected = new Result(5,true);
+        Result expected = new Result(5, true);
         assertThat(actual).isEqualTo(expected);
     }
 }

@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class PlayerTest {
 
@@ -18,13 +17,13 @@ class PlayerTest {
 
 
     @BeforeEach
-    void setUp(){
-        player.purchaseLotto(new AutoLottoGenerator(),LottoFactory.makeBoundary());
+    void setUp() {
+        player.purchaseLotto(new AutoLottoGenerator(), LottoFactory.makeBoundary());
     }
 
     @Test
     @DisplayName("로또를 최대한으로 구매한다.")
-    void getNumberOfPurchases(){
+    void getNumberOfPurchases() {
         List<Lotto> actual = player.getLottos();
         int expected = 15;
         assertThat(actual.size()).isEqualTo(expected);

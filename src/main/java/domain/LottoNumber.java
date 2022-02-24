@@ -30,7 +30,7 @@ public class LottoNumber {
         return 0;
     }
 
-    public int number(){
+    public int number() {
         return this.number;
     }
 

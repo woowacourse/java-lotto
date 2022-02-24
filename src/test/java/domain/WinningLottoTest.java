@@ -20,7 +20,7 @@ class WinningLottoTest {
             winningNumbers.add(i);
         }
         LottoNumber bonusBall = new LottoNumber(1);
-        assertThatThrownBy(() -> new WinningLotto(lottoGenerator.generateLotto(winningNumbers),bonusBall))
+        assertThatThrownBy(() -> new WinningLotto(lottoGenerator.generateLotto(winningNumbers), bonusBall))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ExceptionMessage.LOTTO_AND_BONUS_BALL_DUPLICATION);
     }

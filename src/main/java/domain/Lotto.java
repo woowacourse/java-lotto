@@ -15,8 +15,8 @@ public class Lotto {
         this.lotto = lotto;
     }
 
-    private void validateLottoSize(List<LottoNumber> lotto){
-        if(lotto.size() != CORRECT_LOTTO_SIZE){
+    private void validateLottoSize(List<LottoNumber> lotto) {
+        if (lotto.size() != CORRECT_LOTTO_SIZE) {
             throw new IllegalArgumentException(ExceptionMessage.LOTTO_SIZE_IS_NOT_SIX);
         }
     }
@@ -25,17 +25,17 @@ public class Lotto {
         return lotto;
     }
 
-    public Result judge(WinningLotto winningLotto){
+    public Result judge(WinningLotto winningLotto) {
         List<LottoNumber> winningNumbers = winningLotto.getWinningLotto();
         int hitCount = 0;
-        for(LottoNumber lottoNumber : lotto){
+        for (LottoNumber lottoNumber : lotto) {
             hitCount += lottoNumber.checkHit(winningNumbers);
         }
         boolean isHitBonusBall = judgeBonusBall(winningLotto.getBonusBall());
-        return new Result(hitCount,isHitBonusBall);
+        return new Result(hitCount, isHitBonusBall);
     }
 
-    private boolean judgeBonusBall(LottoNumber bonusBall){
+    private boolean judgeBonusBall(LottoNumber bonusBall) {
         return lotto.contains(bonusBall);
     }
 }

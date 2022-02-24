@@ -2,10 +2,8 @@ package controller;
 
 import domain.*;
 import dto.LottosDto;
-import dto.RankDto;
 import dto.RanksDto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoController {
