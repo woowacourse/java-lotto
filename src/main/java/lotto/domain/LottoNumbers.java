@@ -7,13 +7,20 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
-    public static final String DELIMITER = ",";
-    public static final String BLANK = " ";
+    private static final int LOTTO_COUNT = 6;
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 45;
+
+    private static final String DELIMITER = ",";
+    private static final String BLANK = " ";
+    static final String DUPLICATE_ERROR = "로또 개수는 중복이 불가능합니다.";
+    static final String COUNT_ERROR = "로또 개수는 " + LOTTO_COUNT + "여야 합니다.";
+
     private static final List<LottoNumber> candidateLottoNumbers = new ArrayList<>();
 
     static {
-        for (int i = 0; i < 45; i++) {
-            candidateLottoNumbers.add(new LottoNumber(Integer.toString(i + 1)));
+        for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
+            candidateLottoNumbers.add(new LottoNumber(Integer.toString(i)));
         }
     }
 
@@ -22,7 +29,14 @@ public class LottoNumbers {
     public LottoNumbers(String input) {
         String[] stringArr = reduceBlank(input).split(DELIMITER);
         validateDuplicate(stringArr);
+        validateLottoCount(stringArr);
         this.lottoNumbers = convertIntArrToIntegerList(stringArr);
+    }
+
+    private void validateLottoCount(String[] array) {
+        if (array.length != LOTTO_COUNT) {
+            throw new IllegalArgumentException(COUNT_ERROR);
+        }
     }
 
     public LottoNumbers() {
@@ -42,7 +56,7 @@ public class LottoNumbers {
         long distinctCount = calDistinctCountFromArray(arr);
 
         if (arr.length != distinctCount) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(DUPLICATE_ERROR);
         }
     }
 
