@@ -21,6 +21,7 @@ public class OutputView {
         for (LottoDto lottoDto : lottosDto.getLottoDtos()) {
             printLottoNumbers(lottoDto);
         }
+        System.out.print(System.lineSeparator());
     }
 
     public static void printLottoNumbers(LottoDto lottoDto) {
@@ -28,6 +29,7 @@ public class OutputView {
     }
 
     public static void printResult(RanksDto ranksDto) {
+        System.out.print(System.lineSeparator());
         System.out.println(RESULT_MESSAGE);
         System.out.println(DELIMITER);
         for (RankDto rankDto : ranksDto.getRankDtos()) {
