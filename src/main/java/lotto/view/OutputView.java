@@ -10,7 +10,13 @@ import lotto.domain.WinningPrice;
 
 public class OutputView {
 
+    private static final String ERROR_MESSAGE = "[ERROR] : %s%n";
+
     private OutputView() {
+    }
+
+    public static void printError(String errorMessage) {
+        System.out.printf(ERROR_MESSAGE, errorMessage);
     }
 
     public static void printInitResult(Lottos lottos) {

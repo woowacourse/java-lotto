@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.Money;
 import lotto.view.InputView;
+import lotto.view.OutputView;
 
 public class MoneyController {
 
@@ -20,7 +21,7 @@ public class MoneyController {
         try {
             return new Money(input);
         } catch (IllegalArgumentException exception) {
-            System.out.println(exception.getMessage());
+            OutputView.printError(exception.getMessage());
             return null;
         }
     }

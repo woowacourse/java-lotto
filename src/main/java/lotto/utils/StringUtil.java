@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.Number;
+import lotto.view.OutputView;
 
 public class StringUtil {
 
@@ -35,7 +36,7 @@ public class StringUtil {
         try {
             return new Number(input);
         } catch (IllegalArgumentException exception) {
-            System.out.println(exception.getMessage());
+            OutputView.printError(exception.getMessage());
             return null;
         }
     }

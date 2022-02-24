@@ -6,6 +6,7 @@ import lotto.domain.Lotto;
 import lotto.domain.Number;
 import lotto.utils.StringUtil;
 import lotto.view.InputView;
+import lotto.view.OutputView;
 
 public class NumberController {
 
@@ -26,7 +27,7 @@ public class NumberController {
             Lotto.validateNumbers(numbers);
             return true;
         } catch (IllegalArgumentException exception) {
-            System.out.println(exception.getMessage());
+            OutputView.printError(exception.getMessage());
             return false;
         }
     }
@@ -54,7 +55,7 @@ public class NumberController {
     private boolean checkDuplicate(List<Number> numbers, Number number) {
         boolean isDuplicate = numbers.contains(number);
         if (isDuplicate) {
-            System.out.println("중복입니다");
+            OutputView.printError("중복입니다");
         }
         return isDuplicate;
     }
