@@ -24,6 +24,7 @@ public class LottoController {
 		Payment payment = createPayment();
 		Lottos lottos = createLottos(payment);
 		WinningLotto winningLotto = createWinningLotto();
+
 		LottoResult lottoResult = createLottoResult(lottos.countRank(winningLotto));
 		calculateTotalProfitRate(payment, lottoResult.calculateTotalProfit());
 	}

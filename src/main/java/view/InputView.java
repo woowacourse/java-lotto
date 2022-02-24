@@ -11,7 +11,6 @@ public class InputView {
 	public static String insertPayment() {
 		OutputView.printGuideMessage("구입금액을 입력해 주세요.");
 		return scanner.nextLine();
-
 	}
 
 	public static String[] insertLotto() {
