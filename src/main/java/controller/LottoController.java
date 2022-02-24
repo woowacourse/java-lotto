@@ -16,12 +16,25 @@ public class LottoController {
     }
 
     public void simulateLotto() {
+        LottoMachine lottoMachine = createLottoMachine();
+        WinningLotto winningLotto = requestWinningLotto();
+        announceResult(lottoMachine, winningLotto);
+    }
+
+    private LottoMachine createLottoMachine() {
         int money = inputController.getMoney();
         LottoMachine lottoMachine = new LottoMachine(money, new ShuffleNumberGenerator());
         OutputView.printPurchasedLotto(lottoMachine.getLottoTicket());
+        return lottoMachine;
+    }
+
+    private WinningLotto requestWinningLotto() {
         List<Integer> winningLottoNumbers = inputController.getWinningLottoNumbers();
         int bonusLottoNumber = inputController.getBonusNumber();
-        WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, bonusLottoNumber);
+        return new WinningLotto(winningLottoNumbers, bonusLottoNumber);
+    }
+
+    private void announceResult(LottoMachine lottoMachine, WinningLotto winningLotto) {
         LottoResult lottoResult = lottoMachine.getResults(winningLotto);
         OutputView.printLottoResult(lottoResult);
         OutputView.printProfitRate(lottoMachine.calculateProfit());
