@@ -12,15 +12,12 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class ResultTest {
+class RankBoardTest {
 
-    private Result result;
     private TotalWinningNumber totalWinningNumber;
 
     @BeforeEach
     void setUp() {
-        result = new Result();
-
         WinningNumber winningNumber = new WinningNumber("1,2,3,4,5,6");
         LottoNumber bonusNumber = new LottoNumber("7");
         totalWinningNumber = new TotalWinningNumber(winningNumber, bonusNumber);
@@ -31,7 +28,7 @@ class ResultTest {
     void calcRank() {
         List<LottoNumbers> tickets = initTickets();
 
-        result.countRank(totalWinningNumber, tickets);
+        RankBoard board = new RankBoard(totalWinningNumber, tickets);
 
         Map<Rank, Integer> expected = new HashMap<>();
         expected.put(Rank.FIRST, 1);
@@ -40,7 +37,7 @@ class ResultTest {
         expected.put(Rank.FOURTH, 1);
         expected.put(Rank.FIFTH, 1);
 
-        assertThat(result.getRankCounter()).isEqualTo(expected);
+        assertThat(board.getBoard()).isEqualTo(expected);
     }
 
     @Test
@@ -49,7 +46,7 @@ class ResultTest {
         List<LottoNumbers> tickets = new ArrayList<>();
         tickets.add(initTicket(List.of(1, 2, 8, 9, 10, 11)));
 
-        result.countRank(totalWinningNumber, tickets);
+        RankBoard board = new RankBoard(totalWinningNumber, tickets);
 
         Map<Rank, Integer> expected = new HashMap<>();
         expected.put(Rank.FIRST, 0);
@@ -58,7 +55,7 @@ class ResultTest {
         expected.put(Rank.FOURTH, 0);
         expected.put(Rank.FIFTH, 0);
 
-        assertThat(result.getRankCounter()).isEqualTo(expected);
+        assertThat(board.getBoard()).isEqualTo(expected);
     }
 
     @Test
@@ -66,10 +63,10 @@ class ResultTest {
     void calcProfit() {
         List<LottoNumbers> tickets = new ArrayList<>();
         tickets.add(initTicket(List.of(1, 2, 3, 9, 10, 11)));
-        result.countRank(totalWinningNumber, tickets);
-        result.calcProfitRatio(90_000);
 
-        assertThat(result.getProfitRatio()).isEqualTo(0.06);
+        RankBoard board = new RankBoard(totalWinningNumber, tickets);
+
+        assertThat(board.calcProfitRatio(90_000)).isEqualTo(0.06);
     }
 
     private List<LottoNumbers> initTickets() {

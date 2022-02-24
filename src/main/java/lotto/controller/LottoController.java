@@ -17,8 +17,9 @@ public class LottoController {
         OutputView.printTickets(lottoTickets);
 
         TotalWinningNumber totalWinningNumber = getTotalNumber();
-        Result result = getResult(purchaseAmount, lottoTickets, totalWinningNumber);
-        OutputView.printResult(result);
+        RankBoard rankBoard = new RankBoard(totalWinningNumber, lottoTickets);
+
+        OutputView.printResult(rankBoard, rankBoard.calcProfitRatio(purchaseAmount.getAmount()));
     }
 
     private PurchaseAmount getPurchaseAmount() {
@@ -66,12 +67,5 @@ public class LottoController {
             System.out.println(e.getMessage());
             return makeTotalNumber(winningNumber);
         }
-    }
-
-    private Result getResult(PurchaseAmount purchaseAmount, List<LottoNumbers> lottoTickets, TotalWinningNumber totalWinningNumber) {
-        Result result = new Result();
-        result.countRank(totalWinningNumber, lottoTickets);
-        result.calcProfitRatio(purchaseAmount.getAmount());
-        return result;
     }
 }
