@@ -43,6 +43,14 @@ public class InputVIewTest {
 	}
 
 	@ParameterizedTest
+	@ValueSource(strings = {"1,2,3,4,5,6", "1-2-3-4-5-6", "1 2 3 4 5 6"})
+	@DisplayName("지난주 당첨 번호 : 입력 형식과 다르게 입력 한 경우 예외 발생")
+	void wrongStandardOfAnswerNumbers(String input) {
+		setInput(input);
+		assertThatThrownBy(InputView::inputAnsNumbers).isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@ParameterizedTest
 	@ValueSource(strings = {"wooteco", "-100"})
 	@DisplayName("보너스 번호 : 0 이상의 정수를 입력하지 않은 경우 예외 발생")
 	void bonusNumberMustBeInteger(String input) {
