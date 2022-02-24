@@ -40,7 +40,14 @@ public class OutputView {
 	}
 
 	public static void printProfitRatio(float ratio) {
-		System.out.println("총 수익률은 " + ratio + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+		String resultStatusMessage = "손실";
+		if (ratio > 1.0f) {
+			resultStatusMessage = "이득";
+		}
+		if (ratio == 1.0f) {
+			resultStatusMessage = "본전";
+		}
+		System.out.println("총 수익률은 " + ratio + "입니다.(기준이 1이기 때문에 결과적으로 " + resultStatusMessage + "이라는 의미임)");
 	}
 
 	public static void printErrorMessage(String message) {
