@@ -15,12 +15,12 @@ public enum Rank {
     private final int prize;
     private final int matchCount;
 
-    Rank(int prize, int matchCount) {
+    Rank(final int prize, final int matchCount) {
         this.prize = prize;
         this.matchCount = matchCount;
     }
 
-    public static Rank of(int matchCount, boolean isBonus) {
+    public static Rank of(final int matchCount, final boolean isBonus) {
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.isMatch(matchCount))
                 .filter(rank -> rank.equals(SECOND) || !isBonus)
@@ -34,7 +34,7 @@ public enum Rank {
                 .collect(Collectors.toList());
     }
 
-    private boolean isMatch(int matchCount) {
+    private boolean isMatch(final int matchCount) {
         return this.matchCount == matchCount;
     }
 

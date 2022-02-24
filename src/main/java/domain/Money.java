@@ -6,7 +6,7 @@ import validator.MoneyValidator;
 public class Money {
     private final int money;
 
-    public Money(int money) {
+    public Money(final int money) {
         MoneyValidator.validate(money);
         this.money = money;
     }

@@ -6,7 +6,7 @@ import java.util.Map;
 public class Result {
     private final LinkedHashMap<Rank, Integer> result = new LinkedHashMap<>();
 
-    public void add(Rank rank) {
+    public void add(final Rank rank) {
         result.put(rank, result.getOrDefault(rank, 0) + 1);
     }
 

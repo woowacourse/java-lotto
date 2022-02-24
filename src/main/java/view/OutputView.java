@@ -20,14 +20,14 @@ public class OutputView {
             "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해%s라는 의미임)" + System.lineSeparator();
     public static final String NO_MESSAGE = " 아니";
 
-    public static void printLottoTickets(List<Lotto> lottoTickets) {
+    public static void printLottoTickets(final List<Lotto> lottoTickets) {
         System.out.println(lottoTickets.size() + BUY_MESSAGE);
         for (Lotto lotto : lottoTickets) {
             printLottoNumbers(lotto);
         }
     }
 
-    private static void printLottoNumbers(Lotto lotto) {
+    private static void printLottoNumbers(final Lotto lotto) {
         StringBuilder result = new StringBuilder(LOTTO_PREFIX);
         for (LottoBall lottoBall : lotto.get()) {
             result.append(lottoBall.get()).append(SEPARATOR);
@@ -36,7 +36,7 @@ public class OutputView {
         System.out.println(result);
     }
 
-    public static void printLottosResult(Result result) {
+    public static void printLottosResult(final Result result) {
         System.out.println(RESULT_START_MESSAGE);
         for (Rank rank : Rank.getWithoutDefault()) {
             System.out.printf(RESULT_RANK_MESSAGE,
@@ -45,19 +45,19 @@ public class OutputView {
         }
     }
 
-    private static String printIfSecond(Rank rank) {
+    private static String printIfSecond(final Rank rank) {
         if (rank.equals(Rank.SECOND)) {
             return SAME_BONUS_MESSAGE;
         }
         return " ";
     }
 
-    public static void printProfit(float profit) {
+    public static void printProfit(final float profit) {
         System.out.printf(PROFIT_MESSAGE,
                 profit, printIfLoss(profit));
     }
 
-    private static Object printIfLoss(float profit) {
+    private static Object printIfLoss(final float profit) {
         if (profit >= 1) {
             return NO_MESSAGE;
         }

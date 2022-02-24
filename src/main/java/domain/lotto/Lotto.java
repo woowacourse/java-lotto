@@ -12,13 +12,13 @@ public class Lotto {
         this.lotto = balls;
     }
 
-    public int countSameNum(WinLotto winLotto) {
+    public int countSameNum(final WinLotto winLotto) {
         return (int) lotto.stream()
                 .filter(winLotto::isIn)
                 .count();
     }
 
-    public boolean isIn(LottoBall ball) {
+    public boolean isIn(final LottoBall ball) {
         return lotto.contains(ball);
     }
 

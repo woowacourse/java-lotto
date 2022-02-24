@@ -72,7 +72,7 @@ class InputViewTest {
         InputView.inputWinLottoNums();
 
         //then
-        assertThat(out.toString()).isEqualTo("지난 주 당첨 번호를 입력해 주세요." + System.lineSeparator());
+        assertThat(out.toString()).isEqualTo("\n지난 주 당첨 번호를 입력해 주세요." + System.lineSeparator());
     }
 
     @Test

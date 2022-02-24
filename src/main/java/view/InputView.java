@@ -14,7 +14,7 @@ public class InputView {
 
     public static int inputMoney() {
         System.out.println(MONEY_INPUT_MESSAGE);
-        Scanner scanner = new Scanner(System.in);
+        final Scanner scanner = new Scanner(System.in);
         try {
             return scanner.nextInt();
         } catch (Exception e) {
@@ -24,15 +24,15 @@ public class InputView {
 
     public static List<Integer> inputWinLottoNums() {
         System.out.println(LOTTO_NUMBER_INPUT_MESSAGE);
-        Scanner scanner = new Scanner(System.in);
-        String lottoNumbers = scanner.nextLine();
+        final Scanner scanner = new Scanner(System.in);
+        final String lottoNumbers = scanner.nextLine();
         InputValidator.isRightPattern(lottoNumbers);
         return Separator.separateNumbers(lottoNumbers);
     }
 
     public static int inputBonusNumber() {
         System.out.println(BONUS_INPUT_MESSAGE);
-        Scanner scanner = new Scanner(System.in);
+        final Scanner scanner = new Scanner(System.in);
         try {
             return scanner.nextInt();
         } catch (Exception e) {

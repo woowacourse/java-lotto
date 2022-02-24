@@ -50,7 +50,7 @@ class OutputViewTest {
 
         OutputView.printLottosResult(result);
 
-        assertThat(out.toString()).isEqualTo("당첨 통계\n"
+        assertThat(out.toString()).isEqualTo("\n당첨 통계\n"
                 + "---------\n"
                 + "3개 일치 (5000원)- 0개\n"
                 + "4개 일치 (50000원)- 0개\n"

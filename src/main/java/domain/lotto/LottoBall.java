@@ -17,11 +17,11 @@ public class LottoBall implements Comparable<LottoBall> {
 
     private final int number;
 
-    private LottoBall(int number) {
+    private LottoBall(final int number) {
         this.number = number;
     }
 
-    public static LottoBall from(int num) {
+    public static LottoBall from(final int num) {
         LottoBallValidator.validate(num);
         return BALLS_CACHE.get(num);
     }

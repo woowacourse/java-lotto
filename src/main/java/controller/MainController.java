@@ -14,11 +14,11 @@ import view.OutputView;
 
 public class MainController {
     public void run() {
-        Money money = makeMoney();
-        List<Lotto> lottoTickets = makeLottos(money.toLottoCount());
-        WinLotto winLottoNumbers = makeWinLotto();
+        final Money money = makeMoney();
+        final List<Lotto> lottoTickets = makeLottos(money.toLottoCount());
+        final WinLotto winLottoNumbers = makeWinLotto();
 
-        Result result = makeResult(lottoTickets, winLottoNumbers);
+        final Result result = makeResult(lottoTickets, winLottoNumbers);
         end(result, money);
     }
 
@@ -26,8 +26,8 @@ public class MainController {
         return new Money(InputView.inputMoney());
     }
 
-    private List<Lotto> makeLottos(int count) {
-        List<Lotto> lottos = new ArrayList<>();
+    private List<Lotto> makeLottos(final int count) {
+        final List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             lottos.add(LottoFactory.createRandomLotto());
         }
@@ -41,8 +41,8 @@ public class MainController {
         return LottoFactory.createWinLotto(winLottoNums, bonus);
     }
 
-    private Result makeResult(List<Lotto> lottos, WinLotto winLotto) {
-        Result result = new Result();
+    private Result makeResult(final List<Lotto> lottos, WinLotto winLotto) {
+        final Result result = new Result();
         for (Lotto lotto : lottos) {
             int matchCount = lotto.countSameNum(winLotto);
             boolean isBonus = lotto.isIn(winLotto.getBonus());
@@ -51,7 +51,7 @@ public class MainController {
         return result;
     }
 
-    private void end(Result result, Money money) {
+    private void end(final Result result, final Money money) {
         OutputView.printLottosResult(result);
         OutputView.printProfit((float) result.getPrize() / (float) money.get());
     }
