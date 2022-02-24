@@ -62,7 +62,7 @@ public class ResultTest {
             @CsvSource(value = {"10000|0.5", "5000|1.0", "50000|0.1", "1000|5.0", "1000000|0.005", "10000000|0.001",
                     "100000000|0.0"}, delimiter = '|')
             @DisplayName("당첨금액의 합과 비교하여 수익률을 반환한다.")
-            void it_returns_rate_of_profit(String money, double expected) {
+            void it_returns_rate_of_profit(int money, double expected) {
                 Result result = new Result();
                 result.add(WinningPrice.Three);
                 assertThat(result.getRateOfProfit(new Money(money))).isEqualTo(expected);

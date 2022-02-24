@@ -10,13 +10,14 @@ public class MoneyController {
         Money money;
 
         do {
-            money = getValidMoney(InputView.inputMoney());
+            money = getValidMoney();
         } while (money == null);
         return money;
     }
 
-    private Money getValidMoney(String input) {
+    private Money getValidMoney() {
         try {
+            int input = InputView.inputMoney();
             return new Money(input);
         } catch (IllegalArgumentException exception) {
             OutputView.printError(exception.getMessage());

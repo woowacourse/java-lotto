@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.utils.StringUtil;
-
 public class Money {
 
     private static final int DIVIDED_STANDARD = 1000;
@@ -13,10 +11,9 @@ public class Money {
 
     private final int value;
 
-    public Money(String text) {
-        int number = StringUtil.toInt(text);
-        validate(number);
-        this.value = number;
+    public Money(int value) {
+        validate(value);
+        this.value = value;
     }
 
     private void validate(int number) {

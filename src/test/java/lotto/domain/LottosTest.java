@@ -20,7 +20,7 @@ public class LottosTest {
             @ParameterizedTest
             @CsvSource(value = {"1000|1", "2000|2"}, delimiter = '|')
             @DisplayName("구입금액에 맞는 개수의 로또를 생성한다.")
-            void It_create_lottos(String value, int expected) {
+            void It_create_lottos(int value, int expected) {
                 Lottos lottos = new Lottos(new Money(value));
 
                 assertThat(lottos.getCount()).isEqualTo(expected);
