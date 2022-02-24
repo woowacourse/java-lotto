@@ -21,6 +21,9 @@ public class ResultView {
     private static final String EMPTY_MESSAGE = "";
     private static final int HUNDRED_FOR_FLOOR = 100;
 
+    private ResultView() {
+    }
+
     public static void printLottos(List<Lotto> lottos) {
         int size = lottos.size();
         System.out.println(size + PURCHASE_RESULT_MESSAGE);

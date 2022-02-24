@@ -18,6 +18,9 @@ public class InputView {
 
     private static final Scanner scanner = new Scanner(System.in);
 
+    private InputView() {
+    }
+
     public static int requestPurchaseMoney() {
         System.out.println(INPUT_MONEY_MESSAGE);
         String input = nextLine();
