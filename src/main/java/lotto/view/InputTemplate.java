@@ -31,7 +31,7 @@ public class InputTemplate {
         if (isRepeatable()) {
             return repeatablyExecute(supplier, errorHandler);
         }
-        throw new IllegalStateException("종료되었습니다!");
+        throw new LottoFinishedException();
     }
 
     public static String repeatablyInput(String message, Consumer<String> consumer,
@@ -56,7 +56,7 @@ public class InputTemplate {
         if (isRepeatable()) {
             return repeatablyInput(message, consumer, errorHandler);
         }
-        throw new IllegalStateException("종료되었습니다!");
+        throw new LottoFinishedException();
     }
 
     private static boolean isRepeatable() {

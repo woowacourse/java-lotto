@@ -19,7 +19,7 @@ public class Application {
         try {
             run();
         } catch (Exception e) {
-            printMessage(e.getMessage());
+            printMessage("종료되었습니다!");
         }
     }
 
