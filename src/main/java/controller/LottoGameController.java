@@ -1,31 +1,39 @@
 package controller;
 
 import domain.AnswerLotto;
-import domain.BonusNumber;
-import domain.AnswerLottoNumbers;
-import domain.Lottos;
-import domain.RandomLottoNumberGenerator;
+import domain.LottoNumber;
+import domain.LottoTickets;
+import domain.StatisticCalculator;
 import view.InputView;
 import view.OutputView;
 
 public class LottoGameController {
-
 	public static void run() {
 		try {
-			Lottos lottos = Lottos.of(InputView.inputMoney(), new RandomLottoNumberGenerator());
-			OutputView.printLottos(lottos);
-			AnswerLotto answerLotto = initAnswerLotto();
-			OutputView.printStatistics(lottos.generateEachCount(answerLotto));
-			OutputView.printProfitRatio(lottos.generateProfitRatio(answerLotto));
-		}
-		catch (IllegalArgumentException e) {
+			StatisticCalculator statisticCalculator = new StatisticCalculator();
+			LottoTickets lottoTickets = generateLottoTickets();
+			OutputView.printLottoTickets(lottoTickets);
+			AnswerLotto answerLotto = generateAnswerLotto();
+			processResults(statisticCalculator, lottoTickets, answerLotto);
+		} catch (IllegalArgumentException e) {
 			OutputView.printErrorMessage(e.getMessage());
 		}
 	}
 
-	private static AnswerLotto initAnswerLotto() {
-		AnswerLottoNumbers lottoNumbers = new AnswerLottoNumbers(InputView.inputAnsNumbers());
-		BonusNumber bonusNumber = new BonusNumber(InputView.inputBonusNumber());
-		return new AnswerLotto(lottoNumbers, bonusNumber);
+	private static LottoTickets generateLottoTickets() {
+		return new LottoTickets(InputView.inputMoney());
+	}
+
+	private static AnswerLotto generateAnswerLotto() {
+		String[] lastWeekAnswerNumbers = InputView.inputAnsNumbers();
+		LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());
+		return new AnswerLotto(lastWeekAnswerNumbers, bonusNumber);
+	}
+
+	private static void processResults(StatisticCalculator statisticCalculator, LottoTickets lottoTickets,
+									   AnswerLotto answerLotto) {
+		statisticCalculator.updateResult(lottoTickets, answerLotto);
+		OutputView.printStatistics(statisticCalculator.getCount());
+		OutputView.printProfitRatio(statisticCalculator.calculateProfitRatio());
 	}
 }
