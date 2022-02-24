@@ -19,7 +19,7 @@ public class LotteryTickets {
             WinningLottery winningLottery = WinningLottery.find(containsBonus, matchingNumbers);
             addWinningLottery(lotteriesResult, winningLottery);
         }
-        return lotteriesResult;
+        return Collections.unmodifiableMap(lotteriesResult);
     }
 
     public List<LotteryTicket> getLotteryTickets() {
