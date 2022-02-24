@@ -9,18 +9,18 @@ public class WinningNumber {
         this.bonusNumber = bonusNumber;
     }
 
-    public int findSameNumbersInPicked(ChoiceNumber choiceNumber) {
-        return winningNumbers.findMatchCount(choiceNumber);
-    }
-
     public LottoRank findLottoRank(ChoiceNumber choiceNumber) {
-        int sameCount = findSameNumbersInPicked(choiceNumber);
+        int sameCount = findSameNumber(choiceNumber);
         boolean isBonused = false;
         if (sameCount == 5) {
             isBonused = choiceNumber.isContainNumber(bonusNumber.getBonusNumber());
         }
 
         return LottoRank.valueOf(sameCount, isBonused);
+    }
+
+    private int findSameNumber(ChoiceNumber choiceNumber) {
+        return winningNumbers.countSameNumber(choiceNumber);
     }
 }
 
