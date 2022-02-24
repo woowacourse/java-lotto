@@ -11,9 +11,9 @@ public class ConsoleOutputView implements OutputView {
     private static final String LOTTO_NUMBER_SEPARATOR = ", ";
     private static final String LOTTO_NUMBERS_PREFIX = "[";
     private static final String LOTTO_NUMBERS_SUFFIX = "]";
-    private static final String WINNING_STATISTICS_MESSAGE = "당첨 통계\n---------";
-    private static final String WINNING_STATISTICS_MESSAGE_FORMAT = "%d 일치 (%d원)- %d\n";
-    private static final String WINNING_STATISTICS_MESSAGE_BONUS_FORMAT = "%d 일치, 보너스 볼 일치(%d원)- %d\n";
+    private static final String WINNING_STATISTICS_MESSAGE = "\n당첨 통계\n---------";
+    private static final String WINNING_STATISTICS_MESSAGE_FORMAT = "%d개 일치 (%d원) - %d개\n";
+    private static final String WINNING_STATISTICS_MESSAGE_BONUS_FORMAT = "%d개 일치, 보너스 볼 일치(%d원) - %d개\n";
     private static final String PROFIT_RATE_MESSAGE_FORMAT = "총 수익률은 %.2f입니다.";
 
     @Override

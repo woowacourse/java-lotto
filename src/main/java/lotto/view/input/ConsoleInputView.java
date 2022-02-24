@@ -38,6 +38,6 @@ public class ConsoleInputView implements InputView {
 
     @Override
     public void printErrorMessage(final String errorMessage) {
-        System.out.println(errorMessage.concat(INPUT_RETRY_MESSAGE));
+        System.out.println(System.lineSeparator() + errorMessage.concat(INPUT_RETRY_MESSAGE));
     }
 }
