@@ -1,8 +1,6 @@
 package lotto.view;
 
-import lotto.exception.LottoException;
-
-public class InvalidFormatException extends LottoException {
+public class InvalidFormatException extends IllegalArgumentException {
 
     public InvalidFormatException(String message) {
         super(message);
