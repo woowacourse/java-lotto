@@ -17,4 +17,14 @@ public class LottoGameTest {
 
         assertThat(lottoGame).isNotNull();
     }
+
+    @Test
+    @DisplayName("로또 구매 금액이 유효하지 않는 경우")
+    void checkInvalidLottoMoney() {
+        int amount = 8800;
+        Money money = new Money(amount);
+
+        assertThatThrownBy(() -> new LottoGame(money))
+            .isInstanceOf(IllegalArgumentException.class);
+    }
 }
