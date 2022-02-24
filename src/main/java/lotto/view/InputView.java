@@ -17,7 +17,7 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static String inputLastWeekWinningNumbers() {
+    public static String inputWinningNumbers() {
         System.out.printf(INPUT_WINNING_NUMBERS_MESSAGE);
         return scanner.nextLine();
     }

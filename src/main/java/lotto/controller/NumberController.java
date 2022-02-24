@@ -17,8 +17,7 @@ public class NumberController {
         List<Integer> integers;
 
         do {
-            String input = InputView.inputLastWeekWinningNumbers();
-            integers = StringUtil.toIntegers(input);
+            integers = StringUtil.toIntegers(InputView.inputWinningNumbers());
             isValid = validateNumbers(integers);
         } while (!isValid);
         return toNumbers(integers);

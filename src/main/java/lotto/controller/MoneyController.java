@@ -7,12 +7,10 @@ import lotto.view.OutputView;
 public class MoneyController {
 
     public Money getBuyMoney() {
-        String input;
         Money money;
 
         do {
-            input = InputView.inputMoney();
-            money = getValidMoney(input);
+            money = getValidMoney(InputView.inputMoney());
         } while (money == null);
         return money;
     }
