@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static view.LottoNumbersParser.INVALID_LOTTO_NUMBER_FORMAT_MESSAGE;
 
+import java.util.List;
+import model.LottoNumbers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,13 +32,13 @@ public class LottoNumbersParserTest {
     @Test
     @DisplayName("로또 당첨 번호 분리")
     void splitWinningNumber() {
-        assertThat(parser.parse("1,2,3,4,5,6")).contains(1, 2, 3, 4, 5, 6);
+        assertThat(parser.parse("1,2,3,4,5,6")).isEqualTo(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
     }
 
     @Test
     @DisplayName("로또 당첨 번호 공백 제거 분리")
     void splitWinningNumberWithTrim() {
-        assertThat(parser.parse("1, 2,3,4 ,5,    6")).contains(1, 2, 3, 4, 5, 6);
+        assertThat(parser.parse("1, 2,3,4 ,5,    6")).isEqualTo(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
     }
 
     @ParameterizedTest(name = "잘못된 길이의 당첨 번호 분리 실패 : 입력값 - {0}")
