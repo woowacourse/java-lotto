@@ -9,8 +9,14 @@ public class Number {
     private final int number;
 
     public Number(int number) {
-        NumberLimit.validateInRange(number);
+        validateRange(number);
         this.number = number;
+    }
+
+    private void validateRange(int number) {
+        if (NumberLimit.checkOutOfRange(number)) {
+            throw new IllegalArgumentException("로또 번호는 1이상 45이하이어야 한다.");
+        }
     }
 
     public int getNumber() {

@@ -10,10 +10,8 @@ public enum NumberLimit {
         this.limit = limit;
     }
 
-    public static void validateInRange(int number) {
-        if (number < MINIMUM.getLimit() || number > MAXIMUM.getLimit()) {
-            throw new IllegalArgumentException("로또 번호는 1이상 45이하이어야 한다.");
-        }
+    public static boolean checkOutOfRange(int number) {
+        return number < MINIMUM.limit || number > MAXIMUM.limit;
     }
 
     public int getLimit() {
