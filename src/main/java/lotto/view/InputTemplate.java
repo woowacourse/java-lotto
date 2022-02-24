@@ -16,45 +16,45 @@ public class InputTemplate {
 
     }
 
-    public static <T> T repeatablyExecute(Supplier<T> supplier,
+    public static <T> T repeatablyExecute(Supplier<T> parser,
         Consumer<LottoException> errorHandler) {
         try {
-            return supplier.get();
+            return parser.get();
         } catch (LottoException e) {
-            return handleLottoException(supplier, errorHandler, e);
+            return handleLottoException(parser, errorHandler, e);
         }
     }
 
-    private static <T> T handleLottoException(Supplier<T> supplier,
+    private static <T> T handleLottoException(Supplier<T> parser,
         Consumer<LottoException> errorHandler, LottoException e) {
         errorHandler.accept(e);
         if (isRepeatable()) {
-            return repeatablyExecute(supplier, errorHandler);
+            return repeatablyExecute(parser, errorHandler);
         }
         throw new LottoFinishedException();
     }
 
-    public static String repeatablyInput(String message, Consumer<String> consumer,
+    public static String repeatablyInput(String message, Consumer<String> validator,
         Consumer<InvalidFormatException> errorHandler) {
         try {
-            return inputWithMessage(message, consumer);
+            return inputWithMessage(message, validator);
         } catch (InvalidFormatException e) {
-            return handleInvalidFormatException(message, consumer, errorHandler, e);
+            return handleInvalidFormatException(message, validator, errorHandler, e);
         }
     }
 
-    private static String inputWithMessage(String message, Consumer<String> consumer) {
+    private static String inputWithMessage(String message, Consumer<String> validator) {
         System.out.println(message);
         String value = SCANNER.nextLine();
-        consumer.accept(value);
+        validator.accept(value);
         return value;
     }
 
-    private static String handleInvalidFormatException(String message, Consumer<String> consumer,
+    private static String handleInvalidFormatException(String message, Consumer<String> validator,
         Consumer<InvalidFormatException> errorHandler, InvalidFormatException e) {
         errorHandler.accept(e);
         if (isRepeatable()) {
-            return repeatablyInput(message, consumer, errorHandler);
+            return repeatablyInput(message, validator, errorHandler);
         }
         throw new LottoFinishedException();
     }
