@@ -11,10 +11,10 @@ public class Money {
         this.price = price;
     }
 
-    private void validateCriterion(int price) {
-        if (price < PRICE_CRITERION) {
-            throw new IllegalArgumentException();
-        }
+    public static Money create(String value) {
+        int price = translateInteger(value);
+
+        return new Money(price);
     }
 
     public int calculate() {
@@ -23,5 +23,19 @@ public class Money {
 
     public int getPrice() {
         return this.price;
+    }
+
+    private static int translateInteger(String value) {
+        try {
+            return Integer.parseInt(value);
+        } catch(NumberFormatException e) {
+            throw new IllegalArgumentException("숫자를 입력해주세요.");
+        }
+    }
+
+    private void validateCriterion(int price) {
+        if (price < PRICE_CRITERION) {
+            throw new IllegalArgumentException("티켓은 1000원 입니다. 1000원 이상 입력해주세요.");
+        }
     }
 }

@@ -13,10 +13,10 @@ public class InputView {
         this.scanner = new Scanner(System.in);
     }
 
-    public int getMoney() {
+    public String getMoney() {
         System.out.println("구입금액을 입력해 주세요.");
-        String input = scanner.nextLine();
-        return Integer.parseInt(input);
+
+        return scanner.nextLine();
     }
 
     public List<Integer> getNormalWinningNumbers() {

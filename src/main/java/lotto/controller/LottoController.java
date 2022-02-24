@@ -32,8 +32,8 @@ public class LottoController {
 
     private Money createMoney() {
         try {
-            return new Money(inputView.getMoney());
-        } catch(RuntimeException e) {
+            return Money.create(inputView.getMoney());
+        } catch(IllegalArgumentException e) {
             outputView.printErrorMessage(e.getMessage());
 
             return createMoney();
