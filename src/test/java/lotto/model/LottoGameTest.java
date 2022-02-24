@@ -1,15 +1,11 @@
 package lotto.model;
 
-import lotto.model.Lotto;
-import lotto.model.LottoGame;
-import lotto.model.Lottos;
 import org.assertj.core.data.Percentage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -22,7 +18,8 @@ class LottoGameTest {
         LottoGame lottoGame = new LottoGame(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
         int money = 14000;
         Lottos lottos = new Lottos(Collections.singletonList(new Lotto(Arrays.asList(1, 2, 3, 11, 12, 13))));
-        float yield = lottoGame.calculateYield(money, lottos);
+        lottoGame.generateLottoResult(lottos);
+        float yield = lottoGame.calculateYield(money);
 
         assertThat(yield).isCloseTo(0.35f, Percentage.withPercentage(99));
     }
@@ -42,5 +39,14 @@ class LottoGameTest {
             LottoGame.getLottoSize(14100);
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("거스름돈을 지급하지 않습니다. 금액이 남지 않게 지불해주세요.");
+    }
+
+    @Test
+    @DisplayName("보너스 볼 번호와 지난주 당첨 번호가 중복된 번호인 경우 예외 처리")
+    void validateDuplicateBonusBallNumberTest() {
+        assertThatThrownBy(() -> {
+            new LottoGame(Arrays.asList(1, 2, 3, 4, 5, 6), 6);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("보너스 볼 번호가 당첨 번호와 중복입니다.");
     }
 }

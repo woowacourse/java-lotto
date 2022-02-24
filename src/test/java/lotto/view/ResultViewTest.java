@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.model.Lotto;
-import lotto.model.LottoMatcher;
-import lotto.model.Lottos;
-import lotto.model.LottoResult;
+import lotto.model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Arrays;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -41,12 +37,11 @@ public class ResultViewTest {
     @Test
     @DisplayName("당첨 통계 출력 확인")
     void printResultStatisticsTest() {
-        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        int bonusNumber = 7;
-        LottoMatcher matcher = new LottoMatcher(winningNumbers, bonusNumber);
-        LottoResult winningResult = matcher.getWinningResult(lottos);
+        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNumber bonusNumber = new LottoNumber(7);
+        LottoResult lottoResult = new LottoResult();
 
-        ResultView.printResultStatistics(winningResult);
+        ResultView.printResultStatistics(lottoResult.generate(lottos, winningNumbers, bonusNumber));
 
         assertThat(outputStreamCaptor.toString())
                 .contains("5개 일치, 보너스 볼 일치(30000000원)- 1개")

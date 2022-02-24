@@ -5,16 +5,21 @@ import java.util.List;
 public class LottoGame {
     private static final int LOTTO_PRICE = 1000;
     private static final String ERROR_NOT_DIVIDED_BY_UNIT_PRICE = "거스름돈을 지급하지 않습니다. 금액이 남지 않게 지불해주세요.";
+    public static final String ERROR_DUPLICATION_BONUS_NUMBER = "보너스 볼 번호가 당첨 번호와 중복입니다.";
 
-    private final LottoMatcher lottoMatcher;
+    private final WinningNumbers winningNumbers;
+    private final LottoNumber bonusNumber;
+    private final LottoResult lottoResult;
 
     public LottoGame(List<Integer> winningNumbers, Integer bonusNumber) {
-        this.lottoMatcher = new LottoMatcher(winningNumbers, bonusNumber);
+        validateDuplicateBonusNumber(winningNumbers, bonusNumber);
+        this.winningNumbers = new WinningNumbers(winningNumbers);
+        this.bonusNumber = new LottoNumber(bonusNumber);
+        this.lottoResult = new LottoResult();
     }
 
-    public float calculateYield(int money, Lottos lottos) {
-        LottoResult winningResult = lottoMatcher.getWinningResult(lottos);
-        return getTotalWinningMoney(winningResult) / (float) money;
+    public float calculateYield(int money) {
+        return getTotalWinningMoney(lottoResult) / (float) money;
     }
 
     private Long getTotalWinningMoney(LottoResult lottoResult) {
@@ -41,7 +46,13 @@ public class LottoGame {
         }
     }
 
-    public LottoResult getWinningResult(Lottos lottos) {
-        return lottoMatcher.getWinningResult(lottos);
+    public LottoResult generateLottoResult(Lottos lottos) {
+        return lottoResult.generate(lottos, winningNumbers, bonusNumber);
+    }
+
+    private void validateDuplicateBonusNumber(List<Integer> winningNumbers, Integer bonusNumber) {
+        if (winningNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException(ERROR_DUPLICATION_BONUS_NUMBER);
+        }
     }
 }
