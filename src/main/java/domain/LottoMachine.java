@@ -36,7 +36,7 @@ public class LottoMachine {
 		return new AnalysisDto(rankCounts, profitRate);
 	}
 
-	public Map<Rank, Integer> getRankCount(List<Rank> ranks) {
+	private Map<Rank, Integer> getRankCount(List<Rank> ranks) {
 		Map<Rank, Integer> rankMap = new LinkedHashMap<>();
 
 		for (Rank rank : Rank.values()) {
@@ -46,7 +46,7 @@ public class LottoMachine {
 		return rankMap;
 	}
 
-	public double getProfitRate(int payment, Map<Rank, Integer> rankCounts) {
+	private double getProfitRate(int payment, Map<Rank, Integer> rankCounts) {
 		long total = INIT_TOTAL;
 
 		for (Rank rank : rankCounts.keySet()) {
