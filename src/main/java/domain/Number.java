@@ -10,17 +10,17 @@ public class Number {
 	private static final String NOT_NUMBER_DIGIT_MESSAGE = "숫자만 입력해야 합니다";
 	private final int number;
 
-	public Number(int number) {
+	public Number(final int number) {
 		checkNumberRange(number);
 		this.number = number;
 	}
 
-	public static Number from(String userInput) {
+	public static Number from(final String userInput) {
 		checkNotDigit(userInput);
 		return new Number(Integer.parseInt(userInput));
 	}
 
-	private static void checkNotDigit(String userInput) {
+	private static void checkNotDigit(final String userInput) {
 		try {
 			Integer.parseInt(userInput);
 		} catch (NumberFormatException exception) {
@@ -28,7 +28,7 @@ public class Number {
 		}
 	}
 
-	private void checkNumberRange(int number) {
+	private void checkNumberRange(final int number) {
 		if (number < FIRST_LOTTO_NUMBER || number > LAST_LOTTO_NUMBER) {
 			throw new IllegalArgumentException(NOT_NUMBER_IN_LOTTO_NUMBER_RANGE_MESSAGE);
 		}

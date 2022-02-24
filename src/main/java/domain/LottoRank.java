@@ -13,13 +13,13 @@ public enum LottoRank {
 	private final int matchCount;
 	private final boolean hasBonusNumber;
 
-	LottoRank(long amount, int matchCount, boolean hasBonusNumber) {
+	LottoRank(final long amount, final int matchCount, final boolean hasBonusNumber) {
 		this.amount = amount;
 		this.matchCount = matchCount;
 		this.hasBonusNumber = hasBonusNumber;
 	}
 
-	public static LottoRank findRank(int count, boolean bonusNumber) {
+	public static LottoRank findRank(final int count, final boolean bonusNumber) {
 		for (LottoRank rank : LottoRank.values()) {
 			if (rank.getMatchCount() == count && rank.isHasBonusNumber() == bonusNumber) {
 				return rank;

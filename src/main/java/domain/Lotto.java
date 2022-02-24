@@ -28,13 +28,13 @@ public class Lotto {
 		checkDuplicateLottoNumber(lotto);
 	}
 
-	private void checkLottoNumberSize(List<Number> lotto) {
+	private void checkLottoNumberSize(final List<Number> lotto) {
 		if (lotto.size() != FIXED_LOTTO_SIZE) {
 			throw new IllegalArgumentException(NOT_LOTTO_FIXED_SIZE_MESSAGE);
 		}
 	}
 
-	private void checkDuplicateLottoNumber(List<Number> lotto) {
+	private void checkDuplicateLottoNumber(final List<Number> lotto) {
 		boolean duplicated = lotto.stream()
 			.distinct()
 			.count() != lotto.size();
@@ -56,6 +56,6 @@ public class Lotto {
 	}
 
 	public List<Number> getLotto() {
-		return Collections.unmodifiableList(lotto);
+		return lotto;
 	}
 }

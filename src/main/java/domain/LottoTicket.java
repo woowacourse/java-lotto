@@ -8,7 +8,7 @@ public class LottoTicket {
 
 	private final List<Lotto> lottoTicket;
 
-	public LottoTicket(List<Lotto> lottoTicket) {
+	public LottoTicket(final List<Lotto> lottoTicket) {
 		this.lottoTicket = new ArrayList<>(lottoTicket);
 	}
 

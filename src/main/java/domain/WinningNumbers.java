@@ -6,13 +6,13 @@ public class WinningNumbers {
 	private final Lotto winningNumbers;
 	private final Number bonusNumber;
 
-	public WinningNumbers(Lotto winningNumbers, Number bonus) {
+	public WinningNumbers(final Lotto winningNumbers, final Number bonus) {
 		checkDuplicateBonusNumber(winningNumbers, bonus);
 		this.winningNumbers = winningNumbers;
 		this.bonusNumber = bonus;
 	}
 
-	private void checkDuplicateBonusNumber(Lotto winningNumbers, Number bonus) {
+	private void checkDuplicateBonusNumber(final Lotto winningNumbers, final Number bonus) {
 		if (winningNumbers.isContain(bonus)) {
 			throw new IllegalArgumentException(DUPLICATE_WINNING_NUMBERS_AND_BONUS_NUMBER_MESSAGE);
 		}

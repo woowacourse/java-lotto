@@ -10,23 +10,23 @@ public class Money {
 	private static final String NOT_MONEY_DIGIT_MESSAGE = "구입 금액은 숫자여야 합니다";
 	private final int money;
 
-	private Money(int money) {
+	private Money(final int money) {
 		checkUnit(money);
 		this.money = money;
 	}
 
-	public static Money from(String userInput) {
+	public static Money from(final String userInput) {
 		checkNotDigit(userInput);
 		return new Money(Integer.parseInt(userInput));
 	}
 
-	private void checkUnit(int money) {
+	private void checkUnit(final int money) {
 		if (money % LOTTO_PRICE != REMAINDER_ZERO) {
 			throw new IllegalArgumentException(NOT_MONEY_UNIT_EQUAL_LOTTO_PRICE_UNIT_MESSAGE);
 		}
 	}
 
-	private static void checkNotDigit(String userInput) {
+	private static void checkNotDigit(final String userInput) {
 		try {
 			Integer.parseInt(userInput);
 		} catch (NumberFormatException exception) {
@@ -34,7 +34,7 @@ public class Money {
 		}
 	}
 
-	public boolean isPossibleToPurchase(int money) {
+	public boolean isPossibleToPurchase(final int money) {
 		return this.money >= money;
 	}
 

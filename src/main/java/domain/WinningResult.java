@@ -10,11 +10,11 @@ public class WinningResult {
 	private static final int PLUS_COUNT = 1;
 	private final EnumMap<LottoRank, Integer> winningResult;
 
-	private WinningResult(EnumMap<LottoRank, Integer> winningResult) {
+	private WinningResult(final EnumMap<LottoRank, Integer> winningResult) {
 		this.winningResult = winningResult;
 	}
 
-	public static WinningResult createWinningResult(LottoTicket lottoTicket, WinningNumbers winningNumbers) {
+	public static WinningResult createWinningResult(final LottoTicket lottoTicket, final WinningNumbers winningNumbers) {
 		EnumMap<LottoRank, Integer> winningResult = initializeWinningResult();
 		Lotto winningNumber = winningNumbers.getWinningNumbers();
 		Number bonusNumber = winningNumbers.getBonusNumber();
@@ -33,22 +33,22 @@ public class WinningResult {
 		));
 	}
 
-	private static void addWinningResult(LottoTicket lottoTicket, EnumMap<LottoRank, Integer> winningResult,
-		Lotto winningNumber, Number bonusNumber) {
+	private static void addWinningResult(final LottoTicket lottoTicket, final EnumMap<LottoRank, Integer> winningResult,
+		final Lotto winningNumber, final Number bonusNumber) {
 		for (Lotto lotto : lottoTicket.getLottoTicket()) {
 			LottoRank rank = lotto.confirmWinningResult(winningNumber, bonusNumber);
 			addWinningResultCount(winningResult, rank);
 		}
 	}
 
-	private static void addWinningResultCount(EnumMap<LottoRank, Integer> winningResult, LottoRank rank) {
+	private static void addWinningResultCount(final EnumMap<LottoRank, Integer> winningResult, final LottoRank rank) {
 		if (rank == LottoRank.FAIL) {
 			return;
 		}
 		winningResult.put(rank, winningResult.get(rank) + PLUS_COUNT);
 	}
 
-	public double getRateOfProfit(Money money) {
+	public double getRateOfProfit(final Money money) {
 		long profit = winningResult.entrySet()
 			.stream()
 			.mapToLong(result -> result.getKey().getAmount() * result.getValue())
