@@ -31,7 +31,7 @@ public class OutputView {
                 .forEach(rank -> System.out.printf((RANK_MESSAGE_FORMAT),
                         rank.toStringWinningNumberCount(), getBonusNumberMessage(rank),
                         rank.toStringPrize(), rankCount.getCount(rank)));
-        System.out.printf((PROFIT_RATE_MASSAGE_FORMAT), profitRate.toStringProfitRate());
+        System.out.printf((PROFIT_RATE_MASSAGE_FORMAT), profitRate.toStringProfitRateUntilSecondDecimal());
     }
 
     private static String getBonusNumberMessage(Rank rank) {

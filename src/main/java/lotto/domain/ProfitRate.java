@@ -8,7 +8,7 @@ public class ProfitRate {
         this.profitRate = (double) totalPrize / (double) money.getMoney();
     }
 
-    public String toStringProfitRate() {
+    public String toStringProfitRateUntilSecondDecimal() {
         return String.valueOf(Math.floor(profitRate * 100) / 100.0);
     }
 }
