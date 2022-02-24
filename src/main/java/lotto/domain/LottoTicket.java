@@ -1,10 +1,12 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.utils.IntegerUtils;
 
 public class LottoTicket {
 
@@ -24,6 +26,12 @@ public class LottoTicket {
                 .map(LottoNumber::new)
                 .collect(Collectors.toList())
         );
+    }
+
+    public static LottoTicket createWinningTicket(String[] numbers) {
+        return new LottoTicket(Arrays.stream(numbers)
+            .map(number -> new LottoNumber(IntegerUtils.parse(number.trim())))
+            .collect(Collectors.toList()));
     }
 
     private void validate(List<LottoNumber> numbers) {
