@@ -7,7 +7,7 @@ public class Money {
 
     private static final int UNIT_AMOUNT = 1000;
 
-    private int amount;
+    private final int amount;
 
     public Money(String input) {
         isNumberFormat(input);

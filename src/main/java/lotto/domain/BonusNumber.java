@@ -9,7 +9,7 @@ public class BonusNumber {
     private static final String ERROR_DUPLICATE_NUMBER = "[ERROR] 보너스 번호가 선택한 숫자들과 중복한 값입니다.";
     private static final String ERROR_NOT_IN_RANGE = "[ERROR] 보너스 번호가 범위내에 없습니다.";
 
-    private int bonusNumber;
+    private final int bonusNumber;
 
     public BonusNumber(String input, ChoiceNumber choiceNumber) {
         bonusNumber = Integer.parseInt(input);

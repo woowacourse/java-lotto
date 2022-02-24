@@ -6,9 +6,9 @@ import java.util.List;
 public class Lotto {
     private static final int UNIT_AMOUNT = 1000;
 
-    private Money money;
-    private List<ChoiceNumber> lotto;
-    private LottoResult result;
+    private final Money money;
+    private final List<ChoiceNumber> lotto;
+    private final LottoResult result;
 
     public Lotto(Money money) {
         this.money = money;

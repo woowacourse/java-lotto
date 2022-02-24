@@ -18,7 +18,7 @@ public class ChoiceNumber {
     private static final int MAX_BOUND = 45;
     private static final int CHOICE_NUMBER_SIZE = 6;
 
-    private List<Integer> choiceNumbers;
+    private final List<Integer> choiceNumbers;
 
     public ChoiceNumber() {
         Collections.shuffle(numbers);
@@ -58,10 +58,9 @@ public class ChoiceNumber {
     }
 
     public int countSameNumber(ChoiceNumber numbers) {
-        return choiceNumbers.stream()
+        return (int) choiceNumbers.stream()
                 .filter(numbers.getChoiceNumbers()::contains)
-                .collect(toList())
-                .size();
+                .count();
     }
 
     public boolean contains(int targetNumber) {
