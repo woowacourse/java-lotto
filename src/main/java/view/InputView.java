@@ -14,7 +14,6 @@ public class InputView {
     private static final String QUESTION_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
     private static final String NUMBER_DELIMITER = ", ";
     private static final String NONE_NUMERIC_ERROR = "[ERROR] 숫자만 입력이 가능합니다.";
-
     private static final Scanner scanner = new Scanner(System.in);
 
     public static String askMoneyInput() {

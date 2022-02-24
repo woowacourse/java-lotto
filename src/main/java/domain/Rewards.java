@@ -3,21 +3,19 @@ package domain;
 import java.util.Arrays;
 
 public enum Rewards {
-    FIRST_REWARD(1, 6, 0, 2000000000,0 ),
-    SECOND_REWARD(2,5, 1,  30000000, 0),
-    THIRD_REWARD(3, 5, 0, 1500000, 0),
-    FORTH_REWARD(4, 4, 0, 50000, 0),
-    FIFTH_REWARD(5, 3, 0, 5000, 0),
-    NO_REWARD(-1, 0, 0, 0, 0);
+    FIRST_REWARD(6, 0, 2000000000, 0),
+    SECOND_REWARD(5, 1, 30000000, 0),
+    THIRD_REWARD(5, 0, 1500000, 0),
+    FORTH_REWARD(4, 0, 50000, 0),
+    FIFTH_REWARD(3, 0, 5000, 0),
+    NO_REWARD(0, 0, 0, 0);
 
-    private final int ranking;
     private final int winningCount;
     private final int bonusCount;
     private final int reward;
     private int count;
 
-    Rewards(int ranking, int winningCount, int bonusCount, int reward, int count) {
-        this.ranking= ranking;
+    Rewards(int winningCount, int bonusCount, int reward, int count) {
         this.winningCount = winningCount;
         this.bonusCount = bonusCount;
         this.reward = reward;
@@ -31,10 +29,6 @@ public enum Rewards {
                 .orElseThrow();
     }
 
-    private static boolean findRanking(Rewards reward, int winningCount, int bonusCount) {
-        return (reward.winningCount == winningCount && reward.bonusCount == bonusCount);
-    }
-
     public static void addCount(Rewards rewards) {
         rewards.count++;
     }
@@ -45,5 +39,9 @@ public enum Rewards {
 
     public static int getCount(Rewards rewards) {
         return rewards.count;
+    }
+
+    private static boolean findRanking(Rewards reward, int winningCount, int bonusCount) {
+        return (reward.winningCount == winningCount && reward.bonusCount == bonusCount);
     }
 }

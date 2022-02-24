@@ -41,11 +41,12 @@ public class OutputView {
         }
     }
 
+    public static void printYield(double yield) {
+        System.out.printf(MESSAGE_YIELD, yield);
+    }
+
     private static int reverseIndex(int index) {
         return 4 - index;
     }
 
-    public static void printYield(double yield) {
-        System.out.printf(MESSAGE_YIELD, yield);
-    }
 }

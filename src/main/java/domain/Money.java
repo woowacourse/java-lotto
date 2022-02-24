@@ -14,15 +14,15 @@ public class Money {
         this.money = money;
     }
 
+    public int money() {
+        return this.money;
+    }
+
     private int isNumeric(String input) {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(NONE_NUMERIC_ERROR);
         }
-    }
-
-    public int money() {
-        return this.money;
     }
 }

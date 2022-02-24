@@ -15,15 +15,6 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    private List<Lotto> generateLottos(int lottoAmount) {
-        lottos = new ArrayList<>();
-
-        for (int i = 0; i < lottoAmount; ++i) {
-            lottos.add(new Lotto());
-        }
-        return lottos;
-    }
-
     public void compareAllLotto(List<Integer> winningNumbers, int bonusNumber) {
         for (Lotto lotto : lottos) {
             Rewards rewards = lotto.checkWinning(winningNumbers, bonusNumber);
@@ -36,6 +27,15 @@ public class Lottos {
     }
 
     public List<Lotto> getLottos() {
+        return lottos;
+    }
+
+    private List<Lotto> generateLottos(int lottoAmount) {
+        lottos = new ArrayList<>();
+
+        for (int i = 0; i < lottoAmount; ++i) {
+            lottos.add(new Lotto());
+        }
         return lottos;
     }
 }
