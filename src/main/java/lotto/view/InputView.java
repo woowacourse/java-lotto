@@ -15,7 +15,7 @@ public class InputView {
 
     public String askMoneyInput() {
         System.out.println(ASK_MONEY_MESSAGE);
-        return scanner.nextLine();
+        return scanner.nextLine().trim();
     }
 
     public String askWinningNumbers() {
@@ -25,7 +25,7 @@ public class InputView {
 
     public String askBonusNumber() {
         System.out.println(ASK_BONUS_BALL_MESSAGE);
-        return scanner.nextLine();
+        return scanner.nextLine().trim();
     }
 
 }
