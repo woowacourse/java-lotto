@@ -12,18 +12,16 @@ public class WinningResult {
         putValues(rankings);
     }
 
-    private void putValues(List<Ranking> rankings) {
-        for (Ranking ranking : rankings) {
-            winningResult.put(ranking, winningResult.get(ranking) + 1);
-        }
-    }
-
     public long calculatePrizeSum() {
         long sum = 0;
         for (Map.Entry<Ranking, Integer> entry : winningResult.entrySet()) {
             sum += entry.getKey().calculate(entry.getValue());
         }
         return sum;
+    }
+
+    public Map<Ranking, Integer> getWinningResult() {
+        return winningResult;
     }
 
     private void initialMap() {
@@ -33,7 +31,9 @@ public class WinningResult {
         }
     }
 
-    public Map<Ranking, Integer> getWinningResult() {
-        return winningResult;
+    private void putValues(List<Ranking> rankings) {
+        for (Ranking ranking : rankings) {
+            winningResult.put(ranking, winningResult.get(ranking) + 1);
+        }
     }
 }

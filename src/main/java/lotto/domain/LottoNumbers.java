@@ -28,46 +28,13 @@ public class LottoNumbers {
 
     public LottoNumbers(String input) {
         String[] stringArr = reduceBlank(input).split(DELIMITER);
-        validateDuplicate(stringArr);
+        validateDuplicateCount(stringArr);
         validateLottoCount(stringArr);
         this.lottoNumbers = convertIntArrToIntegerList(stringArr);
     }
 
-    private void validateLottoCount(String[] array) {
-        if (array.length != LOTTO_COUNT) {
-            throw new IllegalArgumentException(COUNT_ERROR);
-        }
-    }
-
     public LottoNumbers() {
         this.lottoNumbers = generateRandomLottoNumbers();
-    }
-
-    private List<LottoNumber> generateRandomLottoNumbers() {
-        Collections.shuffle(candidateLottoNumbers);
-        return new ArrayList<>(candidateLottoNumbers.subList(0, 6));
-    }
-
-    private String reduceBlank(String input) {
-        return input.replaceAll(BLANK, "");
-    }
-
-    private void validateDuplicate(String[] arr) {
-        long distinctCount = calDistinctCountFromArray(arr);
-
-        if (arr.length != distinctCount) {
-            throw new IllegalArgumentException(DUPLICATE_ERROR);
-        }
-    }
-
-    private long calDistinctCountFromArray(String[] arr) {
-        return Arrays.stream(arr).distinct().count();
-    }
-
-    private List<LottoNumber> convertIntArrToIntegerList(String[] stringArr) {
-        return Arrays.stream(stringArr)
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
     }
 
     public boolean isContain(LottoNumber otherLottoNumber) {
@@ -79,13 +46,46 @@ public class LottoNumbers {
         return otherLottoNumbers.compareLottoNumbers(lottoNumbers);
     }
 
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
+
+    private String reduceBlank(String input) {
+        return input.replaceAll(BLANK, "");
+    }
+
+    private void validateDuplicateCount(String[] arr) {
+        long distinctCount = calDistinctCountFromArray(arr);
+
+        if (arr.length != distinctCount) {
+            throw new IllegalArgumentException(DUPLICATE_ERROR);
+        }
+    }
+
+    private long calDistinctCountFromArray(String[] arr) {
+        return Arrays.stream(arr).distinct().count();
+    }
+
+    private void validateLottoCount(String[] array) {
+        if (array.length != LOTTO_COUNT) {
+            throw new IllegalArgumentException(COUNT_ERROR);
+        }
+    }
+
+    private List<LottoNumber> generateRandomLottoNumbers() {
+        Collections.shuffle(candidateLottoNumbers);
+        return new ArrayList<>(candidateLottoNumbers.subList(0, 6));
+    }
+
+    private List<LottoNumber> convertIntArrToIntegerList(String[] stringArr) {
+        return Arrays.stream(stringArr)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+    }
+
     private int compareLottoNumbers(List<LottoNumber> lottoNumbers) {
         return (int) lottoNumbers.stream()
                 .filter(this.lottoNumbers::contains)
                 .count();
-    }
-
-    public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
     }
 }

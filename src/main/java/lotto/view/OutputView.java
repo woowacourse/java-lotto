@@ -26,11 +26,9 @@ public class OutputView {
     }
 
     public static void printTicket(LottoTickets lottoTickets) {
-        List<LottoNumbers> lottoNumbersList = lottoTickets.getLottoTickets();
-
-        for (LottoNumbers lottoNumbers : lottoNumbersList) {
+        for (LottoNumbers lottoNumbers : lottoTickets.getLottoTickets()) {
             List<LottoNumber> lottoNumberList = lottoNumbers.getLottoNumbers();
-            String sentence = joinList(convertLottoNumberListToIntegerList(lottoNumberList));
+            String sentence = joinList(convertToStringList(lottoNumberList));
             System.out.println(sentence);
         }
     }
@@ -40,7 +38,7 @@ public class OutputView {
         return String.format("%s%s%s", OPEN_BRACKET, str, CLOSE_BRACKET);
     }
 
-    private static List<String> convertLottoNumberListToIntegerList(List<LottoNumber> lottoNumberList) {
+    private static List<String> convertToStringList(List<LottoNumber> lottoNumberList) {
         return lottoNumberList.stream()
                 .sorted(Comparator.comparingInt(LottoNumber::toInt))
                 .map(lottoNumber -> Integer.toString(lottoNumber.toInt()))
@@ -49,15 +47,16 @@ public class OutputView {
 
     public static void printWinningStatistic(WinningResult winningResult) {
         Map<Ranking, Integer> winningResultMap = winningResult.getWinningResult();
+
+        printResultIntro();
+
         StringBuilder stringBuilder = new StringBuilder();
-
-        resultIntro(stringBuilder);
-
         for (Map.Entry<Ranking, Integer> entry : winningResultMap.entrySet()) {
             Ranking ranking = entry.getKey();
             int count = entry.getValue();
             generateResultContent(ranking, count, stringBuilder);
         }
+
         System.out.println(stringBuilder);
     }
 
@@ -73,11 +72,9 @@ public class OutputView {
         stringBuilder.append(str);
     }
 
-    private static void resultIntro(StringBuilder stringBuilder) {
-        stringBuilder.append("당첨 통계")
-                .append(LINE_SEPARATOR)
-                .append("---------")
-                .append(LINE_SEPARATOR);
+    private static void printResultIntro() {
+        System.out.println("당첨 통계");
+        System.out.println("---------");
     }
 
     public static void printProfit(double profit) {
