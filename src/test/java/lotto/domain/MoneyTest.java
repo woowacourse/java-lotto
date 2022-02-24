@@ -16,16 +16,6 @@ class MoneyTest {
     }
 
     @Test
-    @DisplayName("천원으로 나누어 떨어지지 않으면 예외가 발생한다.")
-    void throwsExceptionNotDividableWithThousand() {
-        // given
-        int amount = 1500;
-        // then
-        Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
-            .isThrownBy(() -> new Money(amount));
-    }
-
-    @Test
     @DisplayName("음수의 금액을 생성할 수 없다.")
     void throwsExceptionWithNegativeAmount() {
         // given
@@ -33,5 +23,29 @@ class MoneyTest {
         // then
         Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
             .isThrownBy(() -> new Money(amount));
+    }
+
+    @Test
+    @DisplayName("나누기 연산을 할 수 있다.")
+    public void divideMoneyWithOtherMoney() {
+        // given
+        Money aMoney = new Money(1000);
+        Money bMoney = new Money(100);
+        // when
+        Money dividedMoney = aMoney.divide(bMoney);
+        // then
+        Assertions.assertThat(dividedMoney.getAmount()).isEqualTo(10);
+    }
+
+    @Test
+    @DisplayName("대소를 비교할 수 있다.")
+    public void compareGreaterThanOrEqualToMoney() {
+        // given
+        Money aMoney = Money.wons(100);
+        Money bMoney = Money.wons(101);
+        // when
+        boolean compare = bMoney.isGreatThanOrEqualTo(aMoney);
+        // then
+        Assertions.assertThat(compare).isTrue();
     }
 }

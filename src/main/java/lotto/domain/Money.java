@@ -2,18 +2,15 @@ package lotto.domain;
 
 public class Money {
 
-    private static final int UNIT = 1000;
-
     private final int amount;
 
     public Money(int amount) {
-        validate(amount);
+        validatePositive(amount);
         this.amount = amount;
     }
 
-    private void validate(int amount) {
-        validateUnit(amount);
-        validatePositive(amount);
+    public static Money wons(int amount) {
+        return new Money(amount);
     }
 
     private void validatePositive(int amount) {
@@ -22,14 +19,12 @@ public class Money {
         }
     }
 
-    private void validateUnit(int amount) {
-        if (amount % UNIT != 0) {
-            throw new IllegalArgumentException("금액은 천원 단위여야 합니다.");
-        }
+    public Money divide(Money other) {
+        return Money.wons(this.amount / other.amount);
     }
 
-    public int count() {
-        return this.amount / UNIT;
+    public boolean isGreatThanOrEqualTo(Money other) {
+        return this.amount >= other.amount;
     }
 
     public int getAmount() {
