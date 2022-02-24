@@ -12,21 +12,34 @@ public class BonusNumber {
     private final int bonusNumber;
 
     public BonusNumber(String input, ChoiceNumber choiceNumber) {
+        validateBonusNumber(input, choiceNumber);
         bonusNumber = Integer.parseInt(input);
-
-        validateRange();
-        validateDuplicate(choiceNumber.getChoiceNumbers());
     }
 
-    private void validateDuplicate(List<Integer> pickedNumbers) {
-        if (pickedNumbers.contains(bonusNumber)) {
-            throw new IllegalArgumentException(ERROR_DUPLICATE_NUMBER);
+    private void validateBonusNumber(String input, ChoiceNumber choiceNumber) {
+        isInteger(input);
+        int value = Integer.parseInt(input);
+        isInRange(value);
+        isDuplicate(choiceNumber.getChoiceNumbers());
+    }
+
+    private void isInteger(String text) {
+        try {
+            Integer.parseInt(text);
+        } catch (NumberFormatException exception) {
+            throw new IllegalArgumentException("[ERROR] 보너스 번호는 숫자입니다.");
         }
     }
 
-    private void validateRange() {
-        if (bonusNumber < MIN_BOUND || bonusNumber > MAX_BOUND) {
+    private void isInRange(Integer value) {
+        if (value < MIN_BOUND || value > MAX_BOUND) {
             throw new IllegalArgumentException(ERROR_NOT_IN_RANGE);
+        }
+    }
+
+    private void isDuplicate(List<Integer> pickedNumbers) {
+        if (pickedNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException(ERROR_DUPLICATE_NUMBER);
         }
     }
 
