@@ -11,6 +11,8 @@ public abstract class Parser<T> {
     protected static final String REGEX_ONE_TO_NINE = "[1-9]";
     protected static final String REGEX_TEN_TO_THIRTY_NINE = "[1-3][0-9]";
     protected static final String REGEX_FORTY_TO_FORTY_FIVE = "4[0-5]";
+    protected static final String REGEX_ZERO_TO_NINE = "[0-9]";
+    protected static final String REGEX_ASTERISK = "*";
 
     private final String regex;
     private final String errorMessage;
@@ -41,6 +43,10 @@ public abstract class Parser<T> {
             .append(REGEX_TEN_TO_THIRTY_NINE).append(REGEX_OR)
             .append(REGEX_FORTY_TO_FORTY_FIVE)
             .append(REGEX_GROUP_END).toString();
+    }
+
+    protected static String repeatRegex(int repeat) {
+        return "{" + repeat + "}";
     }
 
     protected abstract T convert(String text);

@@ -17,7 +17,7 @@ public class LottoNumbersParser extends Parser<List<Integer>> {
             .append(REGEX_GROUP_BEGINNING)
             .append(REGEX_SPACE).append(REGEX_COMMA)
             .append(lottoNumberWithSpacesRegex())
-            .append(REGEX_GROUP_END).append("{5}")
+            .append(REGEX_GROUP_END).append(repeatRegex(5))
             .append(REGEX_END)
             .toString();
     }
