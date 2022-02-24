@@ -2,7 +2,8 @@ package view.messages;
 
 public enum OutputViewMessages {
 	RESULT_STATISTICS("당첨 통계\n--------\n"),
-	RETURN_RATE("총 수익률은 %.2f 입니다.");
+	RETURN_RATE("총 수익률은 %.2f 입니다."),
+	EXCEPTION_PREFIX("[ERROR] ");
 
 	private String message;
 

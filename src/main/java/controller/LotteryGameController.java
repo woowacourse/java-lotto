@@ -13,10 +13,28 @@ public class LotteryGameController {
 
 	LotteryGame lotteryGame;
 
-	public void startPurchaseLotteries() {
-		lotteryGame = new LotteryGame(inputMoney(), new LotteryRandomGeneratorStrategy());
-		lotteryGame.createWinningLottery(inputWinningNumber(), inputBonusBall());
+	public void startLotteryGame() {
+		purchaseLottery();
+		createWinningLottery();
 		OutputView.printLotteries(lotteryGame.getLotteries());
+	}
+
+	private void purchaseLottery() {
+		try {
+			lotteryGame = new LotteryGame(inputMoney(), new LotteryRandomGeneratorStrategy());
+		} catch (IllegalArgumentException exception) {
+			OutputView.printException(exception.getMessage());
+			purchaseLottery();
+		}
+	}
+
+	private void createWinningLottery() {
+		try {
+			lotteryGame.createWinningLottery(inputWinningNumber(), inputBonusBall());
+		} catch (IllegalArgumentException exception) {
+			OutputView.printException(exception.getMessage());
+			createWinningLottery();
+		}
 	}
 
 	public void makeResult() {

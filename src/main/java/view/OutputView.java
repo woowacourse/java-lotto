@@ -1,5 +1,7 @@
 package view;
 
+import static view.messages.OutputViewMessages.*;
+
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -7,12 +9,11 @@ import java.util.stream.Collectors;
 
 import domain.lottery.Lottery;
 import domain.Rank;
-import view.messages.OutputViewMessages;
 
 public class OutputView {
 
 	public static void printStatistics(Map<Rank, Integer> ranking, double incomePercent) {
-		System.out.println(OutputViewMessages.RESULT_STATISTICS.getMessage());
+		System.out.println(RESULT_STATISTICS.getMessage());
 		printRanking(ranking);
 		printIncomePercent(incomePercent);
 	}
@@ -29,7 +30,7 @@ public class OutputView {
 	}
 
 	private static String makeRakingMessage(final Rank rank, final int winningCount) {
-		if(rank == Rank.SECOND) {
+		if (rank == Rank.SECOND) {
 			return rank.getCorrectedBalls() + "개 일치, 보너스 볼 일치 (" + rank.getPrize()
 				+ "원) - " + winningCount + "개";
 		}
@@ -38,12 +39,16 @@ public class OutputView {
 	}
 
 	private static void printIncomePercent(final double incomePercent) {
-		System.out.printf(OutputViewMessages.RETURN_RATE.getMessage(), incomePercent);
+		System.out.printf(RETURN_RATE.getMessage(), incomePercent);
 	}
 
 	public static void printLotteries(List<Lottery> lotteries) {
-		lotteries.forEach((lottery -> {
-			System.out.println(lottery.getNumbers().toString());
-		}));
+		lotteries.forEach((lottery ->
+			System.out.println(lottery.getNumbers().toString())
+		));
+	}
+
+	public static void printException(String message) {
+		System.out.println(EXCEPTION_PREFIX.getMessage() + message);
 	}
 }

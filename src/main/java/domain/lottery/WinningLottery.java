@@ -15,8 +15,8 @@ public class WinningLottery {
 	final int bonusBall;
 
 	public WinningLottery(final List<Integer> winningNumbers, final int bonusBall) {
-		validateBonusBall(winningNumbers, bonusBall);
 		this.winningNumbers = new Lottery(winningNumbers);
+		validateBonusBall(winningNumbers, bonusBall);
 		this.bonusBall = bonusBall;
 	}
 
