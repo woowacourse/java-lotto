@@ -60,13 +60,51 @@
 
 ## 리팩토링 To Do List
 
-- [ ] Exception 메세지 마침표 통일
-- [ ] 당첨 통계 출력 부분 리팩토링 (ResultView)
-- [ ] 테스트코드를 Describe-Context-It 패턴을 적용해 개선 (@Nested)
 - [X] `TrialNumber` 를 `LottoQuantity` 로 변경
 - [X] 누락된 `WinningCount` 에 대한 테스트 추가
-- [ ] 테스트코드에서 불필요한 `hasMessageMatching` 을 `hasMessage` 로 변경
+- [ ] ResultView 리팩토링
+    - [ ] `printResult` 메소드 리팩토링
+        - [ ] 출력문 깔끔하게 개선
+        - [ ] 5000원, 50000원 등의 상금도 Rank 에서 받아오도록 개선
+        - [ ] 수익률에 따른 손해, 이익 워딩 변경 필요
+- [ ] `InputMoney` 리팩토링
+  - [ ] 무의미한 `validate` 메소드 제거
 - [ ] `LottoResultDto` 리팩토링
   - [X] `getProfitRatio` 메소드 리팩토링
-  - [ ] 총액 세산 로직 개선
+  - [ ] `from` 메소드 리팩토링
+- [ ] `Lottos` 리팩토링
+  - [ ] `setupMap` 메소드 리팩토링
+  - [ ] `validateNullOrEmpty` 의 에러 메세지 상수화
+- [ ] `LottoNumbers` 리팩토링
+  - [ ] 매직넘버 (1, 45) 상수화
+  - [ ] `IntStream` 의 `rangeClosed` 메소드를 사용하여 개선
+- [ ] `LottoQuantity` 의 '횟수' 워딩 수정
+- [ ] `WinningLotto` 리팩토링
+  - [ ] `getRankByLotto` 메소드의 조건식 개선
+  - [ ] `getRankByLotto` 의 매직넘버 5를 상수화
+- [ ] `WinningCount` 리팩토링
+  - [ ] `getCount` 의 메소드 선언 위치를 아래로 옮겨야 함
+- [ ] `LottoController` 리팩토링
+  - [ ] `generateLotto` 의 메소드가 10줄이 넘어감
+- [ ] 테스트코드에서 불필요한 `hasMessageMatching` 을 `hasMessage` 로 변경
+- [ ] Exception 메세지 마침표 통일
+- [ ] 테스트코드를 Describe-Context-It 패턴을 적용해 개선 (@Nested)
 - [ ] `LottoResultDto` 에 대한 테스트 코드 추가
+- [ ] 모든 클래스의 메소드 선언 순서를 검토할 필요 있음
+  - [ ] 글 처럼 읽히는 순서인지 확인할 필요 있음
+- [ ] 큰 숫자에 Underscore (`_`) 사용하여 가독성 증진
+
+## 고민들
+
+- DTO 가 계산 로직을 가져도 될까?
+- `InputMoney` 에 `getMoney` 를 사용하여 로또 개수를 계산하는 대신, `InputMoney` 에서 직접 로또 개수를 계산해주는 로직을 처리하면 단일책임 위배인가?
+- `WinningLotto` 가 `Rank` 에 대해 알고 있는 것이 좋은 구조일까?
+- `LottoNumberGenerateStrategy` 는 추후 테스트더블을 만들어 테스트하기 편한 구조로 만들기 위해 생성한 인터페이스인데, 의도에 맞게 사용되고 있는가?
+  - 실제 이를 사용하여 테스트를 진행하지 않고 있음.
+- 테스트 픽스쳐를 위한 객체를 깔끔하게 생성하는방법은 무엇일까?
+  > 예시: `LottoTest` 의 `setupLottos` 메소드
+- 에러 메세지까지 상수로 분리해야할까?
+- 로또 숫자 리스트를 담기위해 `LottoNumbers` 라는 클래스 형태로 상수로 분리하는것이 맞을까?
+- 성능을 고려해 원시 for 문을 사용하는 것이 맞을까?
+  - 원시 for 보다 가독성이 보장되는 경우 성능을 조금 포기하고 stream 을 사용하는것이 좋지 않을까?
+- 
