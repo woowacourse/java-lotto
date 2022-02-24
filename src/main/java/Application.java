@@ -22,6 +22,6 @@ public class Application {
 
         LottoGame lottoGame = new LottoGame(lottos, referee);
         printLottoResults(lottoGame.getResultStatistics());
-        printPrizePriceRatio(lottoGame.calculateProfitRatio());
+        printPrizePriceRatio(lottoGame.calculatePrizePriceRatio());
     }
 }

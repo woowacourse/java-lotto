@@ -2,20 +2,16 @@ package domain;
 
 import static constant.LottoConstants.LOTTO_PRICE;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 public class LottoGame {
 
     private final Lottos lottos;
     private final LottoReferee referee;
-    private final TreeMap<LottoResult, Integer> resultsStatistics = Arrays
-            .stream(LottoResult.values())
-            .collect(Collectors.toMap(key -> key, value -> 0, (o1, o2) -> o1, TreeMap::new));
+    private final ResultStatistics resultStatistics = new ResultStatistics();
 
     public LottoGame(Lottos lottos, LottoReferee referee) {
         this.lottos = lottos;
@@ -26,8 +22,8 @@ public class LottoGame {
     private void analyzeLottos() {
         List<LottoResult> results = getLottoResults();
 
-        resultsStatistics.keySet()
-                .forEach(key -> collectResultsByKey(results, key));
+        resultStatistics.getLottoResultKeys()
+                .forEach(key -> resultStatistics.collectAndUpdateStats(results, key));
     }
 
     private List<LottoResult> getLottoResults() {
@@ -37,29 +33,14 @@ public class LottoGame {
                 .collect(Collectors.toList());
     }
 
-    private void collectResultsByKey(List<LottoResult> results, LottoResult key) {
-        int prizeCount = (int) results.stream()
-                .filter(result -> result == key)
-                .count();
-
-        resultsStatistics.put(key, prizeCount);
-    }
-
     public Map<LottoResult, Integer> getResultStatistics() {
-        return Collections.unmodifiableMap(resultsStatistics);
+        return Collections.unmodifiableMap(resultStatistics.getResultStatistics());
     }
 
-    public float calculateProfitRatio() {
-        int totalPrize = resultsStatistics.keySet()
-                .stream()
-                .mapToInt(result -> sumOfLottoResult(result, resultsStatistics.get(result)))
-                .sum();
+    public float calculatePrizePriceRatio() {
+        int totalPrize = resultStatistics.calculateTotalPrize();
 
         return (float) totalPrize / getLottoPrice();
-    }
-
-    private int sumOfLottoResult(LottoResult lottoResult, int count) {
-        return lottoResult.getPrize() * count;
     }
 
     private int getLottoPrice() {
@@ -71,7 +52,7 @@ public class LottoGame {
         return "LottoGame{" +
                 "lottos=" + lottos +
                 ", referee=" + referee +
-                ", resultsStatistics=" + resultsStatistics +
+                ", resultStatistics=" + resultStatistics +
                 '}';
     }
 }
