@@ -5,7 +5,6 @@ import lotto.domain.LottoNumbers;
 import lotto.domain.PurchaseAmount;
 import lotto.domain.TargetLottoNumbers;
 import lotto.domain.generator.Generator;
-import lotto.domain.vo.LottoNumber;
 
 import java.util.Arrays;
 import java.util.EnumMap;
@@ -40,11 +39,8 @@ public class LottoService {
         return lottoNumbersGroup;
     }
 
-    public Map<LottoMatchKind, Integer> getMatchResult(final List<String> targetNumbers, final String bonusNumber) {
-        final LottoNumbers targetLottoNumbers = new LottoNumbers(targetNumbers);
-        final LottoNumber bonusLottoNumber = LottoNumber.from(bonusNumber);
-        final TargetLottoNumbers target = new TargetLottoNumbers(targetLottoNumbers, bonusLottoNumber);
-        return match(target);
+    public Map<LottoMatchKind, Integer> getMatchResult(final TargetLottoNumbers targetLottoNumbers) {
+        return match(targetLottoNumbers);
     }
 
     private Map<LottoMatchKind, Integer> match(final TargetLottoNumbers target) {
