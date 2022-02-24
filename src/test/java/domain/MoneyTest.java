@@ -41,6 +41,7 @@ class MoneyTest {
     @Test
     void calculateCounts() {
         final Money money = new Money("3500");
+
         final int actual = money.calculateCounts();
 
         assertThat(actual).isEqualTo(3);
