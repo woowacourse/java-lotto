@@ -12,26 +12,26 @@ class LottoFactoryTest {
 
     @BeforeEach
     void setUp() {
-        final LottoNumbers winNumbers = new LottoNumbers("1, 2, 3, 4, 5, 6");
+        final Lotto winNumbers = new Lotto("1, 2, 3, 4, 5, 6");
         final LottoNumber bonusNumber = new LottoNumber("7");
         final Money money = new Money("100000000");
 
-        lottoFactory = new LottoFactory(money, winNumbers, bonusNumber);
+        lottoFactory = new LottoFactory(money);
     }
 
     @DisplayName("자동 로또 발급시 번호 갯수가 6개인지 확인한다.")
     @Test
     void autoLottoNumbers_size_correct() {
-        final LottoNumbers lottoNumbers = lottoFactory.generateAutoLottoNumbers();
+        final Lotto lotto = lottoFactory.generateAutoLottoNumbers();
 
-        assertThat(lottoNumbers.size()).isEqualTo(6);
+        assertThat(lotto.size()).isEqualTo(6);
     }
 
     @DisplayName("구입 금액만큼 발급 받은 로또의 갯수를 확인한다.")
     @Test
     void issueLotto_count_correct() {
         lottoFactory.issueLotto();
-        final List<LottoNumbers> lottoTickets = lottoFactory.getLottoTickets();
+        final List<Lotto> lottoTickets = lottoFactory.getLottoTickets();
 
         assertThat(lottoTickets.size()).isEqualTo(100000);
     }
