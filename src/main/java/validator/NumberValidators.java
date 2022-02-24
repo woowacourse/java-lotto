@@ -11,13 +11,14 @@ import static constant.LottoConstants.LOTTO_NUMBERS_SIZE;
 import static constant.LottoConstants.LOTTO_PRICE;
 import static constant.LottoConstants.MAXIMUM_LOTTO_NUMBER;
 import static constant.LottoConstants.MINIMUM_LOTTO_NUMBER;
-import static constant.LottoConstants.WINNING_NUMBERS_SIZE;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class NumberValidators {
+
+    private static final int WINNING_NUMBERS_SIZE = 6;
 
     public static int validateAndParseNumber(String value) {
         try {
