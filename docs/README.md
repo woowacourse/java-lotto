@@ -36,6 +36,8 @@
 - [ ] stream.forEach() 사용에 대한 고민 필요 [링크](https://homoefficio.github.io/2016/06/26/for-loop-%EB%A5%BC-Stream-forEach-%EB%A1%9C-%EB%B0%94%EA%BE%B8%EC%A7%80-%EB%A7%90%EC%95%84%EC%95%BC-%ED%95%A0-3%EA%B0%80%EC%A7%80-%EC%9D%B4%EC%9C%A0/)
 - [ ] `생성자를 통한 초기화`와 `정적 팩토리 메서드를 통한 초기화` 비교
   - [ ] `Date`, `LocalDateTime`의 현재 시간을 구하는 로직에 대해 찾아보기
+  - [ ] 생성자를 통한 초기화
+  - [x] 정적 팩토리 메서드를 통한 초기화
 - [x] assertj와 junit의 동시 사용 -> 통일된 라이브러리 사용으로 유지보수성 향상
 - [x] `LottoTest` : `@ParameterizedTest`를 통해 다양한 케이스의 테스트
 - [x] `Statistic` : LinkedHashMap -> EnumMap [링크](https://www.baeldung.com/java-enum-map)
@@ -73,3 +75,17 @@
    - `@Test`가 아닌 `@Parameterized`를 이용하여 테스트를 진행
    - 파라미터에 들어갈 source를 어떻게 넣어줄 것인가(`@ValueSource`, `@CsvSorcue`등 여러가지가 있다.)
      - 그 중 `@CsvSource`를 사용
+4. `생성자를 통한 초기화`와 `정적 팩토리 메서드를 통한 초기화` 비교
+   - `Date` vs. `LocalDateTime` 
+   - `정적 팩토리 메서드를 통한 초기화` 
+     - 장점
+       1. 이름을 가질 수 있다.
+       2. 호출될 때마다 인스턴스를 새로 생성하지 않아도 된다.
+       3. 반환 타입의 하위 타입 객체를 반환할 수 있는 능력이 있다.
+       4. 입력 매개변수에 따라 매번 다른 클래스의 객체를 반환할 수 있다.
+       
+
+### 참조
+1) Date vs. LocalDateTime : https://jeong-pro.tistory.com/163
+   - 정적 팩토리 메서드(1) : https://devlog-wjdrbs96.tistory.com/256
+   - 정적 팩토리 메서드(2) : https://tecoble.techcourse.co.kr/post/2020-05-26-static-factory-method/
