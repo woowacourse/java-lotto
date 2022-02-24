@@ -1,8 +1,8 @@
-package utils;
+package lotto.utils;
 
 import java.util.Random;
 
-import domain.LottoNumber;
+import lotto.domain.LottoNumber;
 
 public class RandomNumberGenerator {
     private static final Random random;

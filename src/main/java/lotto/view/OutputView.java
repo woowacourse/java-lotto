@@ -1,14 +1,14 @@
-package view;
+package lotto.view;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import domain.LottoNumber;
-import domain.Rank;
-import domain.Ticket;
-import domain.Tickets;
+import lotto.domain.LottoNumber;
+import lotto.domain.Rank;
+import lotto.domain.Ticket;
+import lotto.domain.Tickets;
 
 public class OutputView {
 

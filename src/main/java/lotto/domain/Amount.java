@@ -1,4 +1,4 @@
-package domain;
+package lotto.domain;
 
 public class Amount {
     private static final String REQUEST_UNIT_OF_1000 = "1000원 단위로 입력해주세요.";

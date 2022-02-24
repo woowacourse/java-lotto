@@ -1,4 +1,4 @@
-package domain;
+package lotto.domain;
 
 public class WinningNumbers {
     private static final String REQUEST_NOT_DUPLICATE_NUMBER = "당첨 번호와 보너스 번호가 중복되지 않게 입력해주세요.";

@@ -1,11 +1,11 @@
-package controller;
+package lotto.controller;
 
-import domain.Lotto;
-import domain.LottoNumber;
-import domain.Ticket;
-import domain.WinningNumbers;
-import view.InputView;
-import view.OutputView;
+import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
+import lotto.domain.Ticket;
+import lotto.domain.WinningNumbers;
+import lotto.view.InputView;
+import lotto.view.OutputView;
 
 public class Controller {
     public void run() {
