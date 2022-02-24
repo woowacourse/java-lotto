@@ -22,4 +22,12 @@ public class PrizeInformation {
     public int pickAmount() {
         return this.prize.pickAmount(count);
     }
+
+    public Prize getPrize() {
+        return prize;
+    }
+
+    public int getCount() {
+        return count;
+    }
 }

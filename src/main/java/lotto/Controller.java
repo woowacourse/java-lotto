@@ -5,6 +5,7 @@ import lotto.model.Lotto;
 import lotto.model.Lottos;
 import lotto.model.Money;
 import lotto.model.dto.LottoDTO;
+import lotto.model.dto.PrizeInformationDTO;
 import lotto.model.number.BonusNumber;
 import lotto.model.number.WinningNumbers;
 import lotto.model.prize.MatchResult;
@@ -25,8 +26,8 @@ public class Controller {
         BonusNumber bonusNumber = getBonusNumber(winningNumbers);
 
         List<MatchResult> matchResults = lottos.match(winningNumbers, bonusNumber);
-
         PrizeInformations prizeInformations = PrizeInformations.from(matchResults);
+        ResultView.showPrizeInformation(PrizeInformationDTO.from(prizeInformations));
     }
 
     private static int getPurchaseCount() {

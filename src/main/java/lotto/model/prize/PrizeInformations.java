@@ -30,4 +30,8 @@ public class PrizeInformations {
                 .mapToInt(PrizeInformation::pickAmount)
                 .sum();
     }
+
+    public List<PrizeInformation> getPrizeInformations() {
+        return prizeInformations;
+    }
 }
