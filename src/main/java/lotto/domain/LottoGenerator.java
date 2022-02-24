@@ -13,8 +13,6 @@ public class LottoGenerator {
 
     private static final int START_INCLUSIVE = 0;
     private static final int END_EXCLUSIVE = 6;
-    private static final int MINIMUM_NUMBER = 1;
-    private static final int MAXIMUM_NUMBER = 45;
 
     private final List<Number> numbers;
 
