@@ -14,7 +14,6 @@ public class InputView {
     }
 
     public static String inputWinningLotto(Scanner scanner) {
-        OutputView.printNewLine();
         System.out.println(INPUT_WINNING_LOTTO_MESSAGE);
         return scanner.nextLine();
     }

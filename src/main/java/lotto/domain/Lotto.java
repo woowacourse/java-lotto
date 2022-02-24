@@ -6,10 +6,10 @@ import lotto.receiver.LottoReceiver;
 
 public class Lotto {
 
-    private final List<LottoNumber> lotto;
+    private final List<LottoNumber> lottoNumbers;
 
-    private Lotto(List<LottoNumber> lotto) {
-        this.lotto = Collections.unmodifiableList(lotto);
+    private Lotto(List<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
     }
 
     public static Lotto generateLottoByAuto() {
@@ -20,18 +20,22 @@ public class Lotto {
         return new Lotto(LottoReceiver.receive(input));
     }
 
-    public Rank getRank(WinningNumbers winningNumbers) {
-        int winningNumberMatchCount = winningNumbers.getWinningLottoMatchCount(lotto);
-        boolean bonusNumberMatch = winningNumbers.isBonusNumberContainedAt(lotto);
-        return Rank.getRank(winningNumberMatchCount, bonusNumberMatch);
+    public Rank getRank(WinningLotto winningLotto, BonusNumber bonusNumber) {
+        int matchCount = winningLotto.getMatchCount(this);
+        boolean contains = isContain(bonusNumber.getBonusNumber());
+        return Rank.getRank(matchCount, contains);
     }
 
-    public List<LottoNumber> getLotto() {
-        return lotto;
+    public boolean isContain(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
+    }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 
     @Override
     public String toString() {
-        return lotto.toString();
+        return lottoNumbers.toString();
     }
 }
