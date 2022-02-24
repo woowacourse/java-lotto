@@ -1,6 +1,7 @@
-package lotto.domain;
+package lotto.domain.lottonumber;
 
-import lotto.domain.vo.LottoNumber;
+import lotto.domain.lottonumber.vo.LottoNumber;
+import lotto.domain.matchkind.LottoMatchKind;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

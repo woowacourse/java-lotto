@@ -1,10 +1,10 @@
-package lotto.domain.controller;
+package lotto.controller;
 
-import lotto.domain.LottoMatchKind;
-import lotto.domain.LottoNumbers;
-import lotto.domain.WinningNumbers;
+import lotto.domain.matchkind.LottoMatchKind;
+import lotto.domain.lottonumber.LottoNumbers;
+import lotto.domain.lottonumber.WinningNumbers;
 import lotto.domain.generator.LottoGenerator;
-import lotto.domain.vo.LottoNumber;
+import lotto.domain.lottonumber.vo.LottoNumber;
 import lotto.dto.LottoMatchKindDto;
 import lotto.dto.LottoNumbersDto;
 import lotto.service.LottoService;

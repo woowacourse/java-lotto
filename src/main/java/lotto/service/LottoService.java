@@ -1,9 +1,9 @@
 package lotto.service;
 
-import lotto.domain.LottoMatchKind;
-import lotto.domain.LottoNumbers;
-import lotto.domain.PurchaseAmount;
-import lotto.domain.WinningNumbers;
+import lotto.domain.matchkind.LottoMatchKind;
+import lotto.domain.lottonumber.LottoNumbers;
+import lotto.domain.purchaseamount.PurchaseAmount;
+import lotto.domain.lottonumber.WinningNumbers;
 import lotto.domain.generator.LottoGenerator;
 
 import java.util.Arrays;

@@ -1,11 +1,11 @@
 package lotto.service;
 
-import lotto.domain.LottoMatchKind;
-import lotto.domain.LottoNumbers;
-import lotto.domain.WinningNumbers;
+import lotto.domain.matchkind.LottoMatchKind;
+import lotto.domain.lottonumber.LottoNumbers;
+import lotto.domain.lottonumber.WinningNumbers;
 import lotto.domain.generator.LottoCustomGenerator;
 import lotto.domain.generator.LottoGenerator;
-import lotto.domain.vo.LottoNumber;
+import lotto.domain.lottonumber.vo.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import static lotto.domain.LottoMatchKind.*;
+import static lotto.domain.matchkind.LottoMatchKind.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.entry;
 

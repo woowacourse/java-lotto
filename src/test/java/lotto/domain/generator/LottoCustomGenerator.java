@@ -1,7 +1,7 @@
 package lotto.domain.generator;
 
-import lotto.domain.LottoNumbers;
-import lotto.domain.vo.LottoNumber;
+import lotto.domain.lottonumber.LottoNumbers;
+import lotto.domain.lottonumber.vo.LottoNumber;
 import org.opentest4j.TestAbortedException;
 
 import java.util.List;

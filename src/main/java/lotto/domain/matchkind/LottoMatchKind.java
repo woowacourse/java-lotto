@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.matchkind;
 
 import java.util.Arrays;
 

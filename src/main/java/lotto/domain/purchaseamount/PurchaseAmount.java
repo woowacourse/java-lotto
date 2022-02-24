@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.purchaseamount;
 
 import static lotto.util.regex.NumberRegex.NATURAL_NUMBER_REGEX;
 

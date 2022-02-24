@@ -1,6 +1,6 @@
 package lotto.dto;
 
-import lotto.domain.LottoMatchKind;
+import lotto.domain.matchkind.LottoMatchKind;
 
 public class LottoMatchKindDto {
     private final int matchedCount;

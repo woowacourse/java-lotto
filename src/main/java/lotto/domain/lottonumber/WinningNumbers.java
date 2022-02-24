@@ -1,6 +1,7 @@
-package lotto.domain;
+package lotto.domain.lottonumber;
 
-import lotto.domain.vo.LottoNumber;
+import lotto.domain.matchkind.LottoMatchKind;
+import lotto.domain.lottonumber.vo.LottoNumber;
 
 public class WinningNumbers {
     private static final String TARGET_BONUS_DUPLICATION_EXCEPTION_MESSAGE =
