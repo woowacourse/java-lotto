@@ -1,13 +1,16 @@
 package lotto.view;
 
 import static java.util.stream.Collectors.joining;
+import static lotto.model.Rank.FIFTH;
+import static lotto.model.Rank.FIRST;
+import static lotto.model.Rank.FOURTH;
+import static lotto.model.Rank.SECOND;
+import static lotto.model.Rank.THIRD;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import lotto.model.Lotto;
 import lotto.model.ProfitRate;
-import lotto.model.Rank;
 import lotto.model.Statistic;
 import lotto.model.exception.DuplicatedNumberException;
 import lotto.model.exception.InvalidLottoSizeException;
@@ -27,7 +30,7 @@ public class OutputView {
             InvalidNumberRangeException.class, "로또 번호는 1 ~ 45 사이여야 합니다.");
 
     public static void printLottoes(List<Lotto> lottoNumbersList) {
-        System.out.println(lottoNumbersList.size() + "개를 구매했습니다.");
+        System.out.printf("%d개를 구매했습니다.\n", lottoNumbersList.size());
         for (Lotto numbers : lottoNumbersList) {
             printEachLotto(numbers);
         }
@@ -47,14 +50,13 @@ public class OutputView {
     public static void printStatistic(Statistic result) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.println("3개 일치 (5000원)- " + result.getCountByRank(Rank.FIFTH) + "개");
-        System.out.println("4개 일치 (50000원)- " + result.getCountByRank(Rank.FOURTH) + "개");
-        System.out.println("5개 일치 (1500000원)- " + result.getCountByRank(Rank.THIRD) + "개");
-        System.out.println(
-            "5개 일치, 보너스 볼 일치(30000000원)- " + result.getCountByRank(Rank.SECOND) + "개");
-        System.out.println("6개 일치 (2000000000원)- " + result.getCountByRank(Rank.FIRST) + "개");
-        System.out.println("총 수익률은 " + result.getProfitRate().getDoubleValue()
-            + "입니다.(기준이 1이기 때문에 결과적으로 " + getSummaryWord(result) + "라는 의미임)");
+        System.out.printf("3개 일치 (5000원)- %d개\n", result.getCountByRank(FIFTH));
+        System.out.printf("4개 일치 (50000원)- %d개\n", result.getCountByRank(FOURTH));
+        System.out.printf("5개 일치 (1500000원)- %d개\n", result.getCountByRank(THIRD));
+        System.out.printf("5개 일치, 보너스 볼 일치(30000000원)- %d개\n", result.getCountByRank(SECOND));
+        System.out.printf("6개 일치 (2000000000원)- %d개\n",result.getCountByRank(FIRST));
+        System.out.printf("총 수익률은 %.2f 입니다.(기준이 1이기 떄문에 결과적으로 %s라는 의미임)\n",
+            result.getProfitRate().getDoubleValue(), getSummaryWord(result));
     }
 
     private static String getSummaryWord(Statistic result) {
