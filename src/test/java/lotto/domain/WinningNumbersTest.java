@@ -20,6 +20,31 @@ class WinningNumbersTest {
                 .doesNotThrowAnyException();
     }
 
+    @DisplayName("당첨 번호의 총 개수가 7개가 아닌 경우 예외를 던진다.")
+    @Test
+    void 당첨_번호_개수_확인() {
+        // given
+        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5);
+        int bonusBall = 7;
+
+        // when & then
+        assertThatThrownBy(() -> new WinningNumbers(winningNumbers, bonusBall))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("당첨 번호는 보너스 볼을 포함하여 총 7자리 입니다. 또한 중복될 수 없습니다.");
+    }
+
+    @DisplayName("당첨 번호는 서로 중복되는 경우 예외를 던진다.")
+    @Test
+    void 당첨_번호_중복_확인() {
+        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
+        int bonusBall = 1;
+
+        // when & then
+        assertThatThrownBy(() -> new WinningNumbers(winningNumbers, bonusBall))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("당첨 번호는 보너스 볼을 포함하여 총 7자리 입니다. 또한 중복될 수 없습니다.");
+    }
+
     @DisplayName("LottoTicket 을 기반으로 당첨 정보를 반환한다.")
     @Test
     void 당첨_정보_확인_2등() {

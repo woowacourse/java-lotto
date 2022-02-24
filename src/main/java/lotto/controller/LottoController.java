@@ -58,9 +58,6 @@ public class LottoController {
 
     private LottoResult createLottoResult(LottoTickets lottoTickets, WinningNumbers winningNumbers) {
         outputView.printLottoResultMessage();
-
-        LottoResult lottoResult = lottoTickets.determine(winningNumbers);
-
-        return lottoResult;
+        return lottoTickets.determine(winningNumbers);
     }
 }
