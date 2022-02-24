@@ -11,21 +11,21 @@ public class LottoReferee {
         this.bonusNumber = bonusNumber;
     }
 
-    public LottoResult getLottoResult(Lotto lotto) {
-        int matchCount = getMatchCount(lotto);
-        boolean hasBonus = containsBonus(lotto);
+    public LottoResult getLottoResult(LottoTicket lottoTicket) {
+        int matchCount = getMatchCount(lottoTicket);
+        boolean hasBonus = containsBonus(lottoTicket);
 
         return LottoResult.of(matchCount, hasBonus);
     }
 
-    private int getMatchCount(Lotto lotto) {
-        return (int) lotto.getNumbers()
+    private int getMatchCount(LottoTicket lottoTicket) {
+        return (int) lottoTicket.getNumbers()
                 .stream()
                 .filter(winningNumbers::contains)
                 .count();
     }
 
-    private boolean containsBonus(Lotto lotto) {
-        return lotto.getNumbers().contains(bonusNumber);
+    private boolean containsBonus(LottoTicket lottoTicket) {
+        return lottoTicket.getNumbers().contains(bonusNumber);
     }
 }

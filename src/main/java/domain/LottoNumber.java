@@ -1,6 +1,6 @@
 package domain;
 
-import static validator.LottoNumberValidators.validateLottoNumberRange;
+import static util.LottoNumberValidator.validateLottoNumberRange;
 
 import java.util.ArrayList;
 import java.util.HashMap;

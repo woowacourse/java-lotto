@@ -33,37 +33,37 @@ public class LottoRefereeTest {
 
     @Test
     void getLottoResult_firstOnSixMatchingNumbers() {
-        Lotto lotto = createNewLotto(1, 2, 3, 4, 5, 6);
+        LottoTicket lottoTicket = createNewLotto(1, 2, 3, 4, 5, 6);
 
-        assertThat(referee.getLottoResult(lotto)).isEqualTo(LottoResult.FIRST);
+        assertThat(referee.getLottoResult(lottoTicket)).isEqualTo(LottoResult.FIRST);
     }
 
     @Test
     void getLottoResult_secondOnFiveMatchingNumbersWithBonus() {
-        Lotto lotto = createNewLotto(1, 2, 3, 4, 5, 7);
+        LottoTicket lottoTicket = createNewLotto(1, 2, 3, 4, 5, 7);
 
-        assertThat(referee.getLottoResult(lotto)).isEqualTo(LottoResult.SECOND);
+        assertThat(referee.getLottoResult(lottoTicket)).isEqualTo(LottoResult.SECOND);
     }
 
     @Test
     void getLottoResult_thirdOnFiveMatchingNumbersWithoutBonus() {
-        Lotto lotto = createNewLotto(1, 2, 3, 4, 5, 11);
+        LottoTicket lottoTicket = createNewLotto(1, 2, 3, 4, 5, 11);
 
-        assertThat(referee.getLottoResult(lotto)).isEqualTo(LottoResult.THIRD);
+        assertThat(referee.getLottoResult(lottoTicket)).isEqualTo(LottoResult.THIRD);
     }
 
     @Test
     void getLottoResult_fourthOnFourMatchingNumbers() {
-        Lotto lotto = createNewLotto(1, 2, 3, 4, 11, 12);
+        LottoTicket lottoTicket = createNewLotto(1, 2, 3, 4, 11, 12);
 
-        assertThat(referee.getLottoResult(lotto)).isEqualTo(LottoResult.FOURTH);
+        assertThat(referee.getLottoResult(lottoTicket)).isEqualTo(LottoResult.FOURTH);
     }
 
     @Test
     void getLottoResult_fifthOnThreeMatchingNumbers() {
-        Lotto lotto = createNewLotto(1, 2, 3, 11, 12, 13);
+        LottoTicket lottoTicket = createNewLotto(1, 2, 3, 11, 12, 13);
 
-        assertThat(referee.getLottoResult(lotto)).isEqualTo(LottoResult.FIFTH);
+        assertThat(referee.getLottoResult(lottoTicket)).isEqualTo(LottoResult.FIFTH);
     }
 
     @ParameterizedTest(name = PARAMETERIZED_TEST_DISPLAY_FORMAT)
@@ -74,17 +74,17 @@ public class LottoRefereeTest {
                 .mapToInt(i->i)
                 .toArray();
 
-        Lotto lotto = createNewLotto(lottoNumbers);
+        LottoTicket lottoTicket = createNewLotto(lottoNumbers);
 
-        assertThat(referee.getLottoResult(lotto)).isEqualTo(null);
+        assertThat(referee.getLottoResult(lottoTicket)).isEqualTo(null);
     }
 
-    private Lotto createNewLotto(int... value) {
+    private LottoTicket createNewLotto(int... value) {
         List<LottoNumber> lottoNumbers = Arrays.stream(value)
                 .boxed()
                 .map(LottoNumber::of)
                 .collect(Collectors.toList());
 
-        return new Lotto(lottoNumbers);
+        return LottoTicket.createManualLotto(lottoNumbers);
     }
 }

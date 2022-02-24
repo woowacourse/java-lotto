@@ -15,12 +15,12 @@ import org.junit.jupiter.api.Test;
 public class LottoGameTest {
 
     private static LottoReferee referee;
-    private final Lotto firstPrizeLotto = createNewLotto(1, 2, 3, 4, 5, 6);
-    private final Lotto secondPrizeLotto = createNewLotto(1, 2, 3, 4, 5, 7);
-    private final Lotto thirdPrizeLotto = createNewLotto(1, 2, 3, 4, 5, 16);
-    private final Lotto fourthPrizeLotto = createNewLotto(1, 2, 3, 4, 15, 16);
-    private final Lotto fifthPrizeLotto = createNewLotto(1, 2, 3, 14, 15, 16);
-    private final Lotto noPrizeLotto = createNewLotto(11, 12, 13, 14, 15, 16);
+    private final LottoTicket firstPrizeLottoTicket = createNewLotto(1, 2, 3, 4, 5, 6);
+    private final LottoTicket secondPrizeLottoTicket = createNewLotto(1, 2, 3, 4, 5, 7);
+    private final LottoTicket thirdPrizeLottoTicket = createNewLotto(1, 2, 3, 4, 5, 16);
+    private final LottoTicket fourthPrizeLottoTicket = createNewLotto(1, 2, 3, 4, 15, 16);
+    private final LottoTicket fifthPrizeLottoTicket = createNewLotto(1, 2, 3, 14, 15, 16);
+    private final LottoTicket noPrizeLottoTicket = createNewLotto(11, 12, 13, 14, 15, 16);
 
     @BeforeAll
     static void setup() {
@@ -36,8 +36,8 @@ public class LottoGameTest {
 
     @Test
     void getResultStatistics() {
-        Lottos lottos = new Lottos(getLottosExample(firstPrizeLotto, secondPrizeLotto, noPrizeLotto));
-        LottoGame game = new LottoGame(lottos, referee);
+        LottoTickets lottoTickets = new LottoTickets(getLottosExample(firstPrizeLottoTicket, secondPrizeLottoTicket, noPrizeLottoTicket));
+        LottoGame game = new LottoGame(lottoTickets, referee);
 
         Map<LottoResult, Integer> actual = game.getResultStatistics();
 
@@ -51,8 +51,8 @@ public class LottoGameTest {
 
     @Test
     void calculateProfitRatio_zeroIfNoPrize() {
-        Lottos lottos = new Lottos(getLottosExample(noPrizeLotto));
-        LottoGame game = new LottoGame(lottos, referee);
+        LottoTickets lottoTickets = new LottoTickets(getLottosExample(noPrizeLottoTicket));
+        LottoGame game = new LottoGame(lottoTickets, referee);
 
         float actual = game.calculateProfitRatio();
 
@@ -61,26 +61,26 @@ public class LottoGameTest {
 
     @Test
     void calculateProfitRatio_fifthPrizeEqualsFiveTimesThePrice() {
-        Lottos lottos = new Lottos(getLottosExample(fifthPrizeLotto));
-        LottoGame game = new LottoGame(lottos, referee);
+        LottoTickets lottoTickets = new LottoTickets(getLottosExample(fifthPrizeLottoTicket));
+        LottoGame game = new LottoGame(lottoTickets, referee);
 
         float actual = game.calculateProfitRatio();
 
         assertThat(actual).isEqualTo((float) LottoResult.FIFTH.getPrize() / 1000);
     }
 
-    private List<Lotto> getLottosExample(Lotto... lottos) {
-        List<Lotto> lottosExample = new ArrayList<>();
-        Collections.addAll(lottosExample, lottos);
+    private List<LottoTicket> getLottosExample(LottoTicket... lottoTickets) {
+        List<LottoTicket> lottosExample = new ArrayList<>();
+        Collections.addAll(lottosExample, lottoTickets);
         return lottosExample;
     }
 
-    private Lotto createNewLotto(int... value) {
+    private LottoTicket createNewLotto(int... value) {
         List<LottoNumber> lottoNumbers = Arrays.stream(value)
                 .boxed()
                 .map(LottoNumber::of)
                 .collect(Collectors.toList());
 
-        return new Lotto(lottoNumbers);
+        return LottoTicket.createManualLotto(lottoNumbers);
     }
 }

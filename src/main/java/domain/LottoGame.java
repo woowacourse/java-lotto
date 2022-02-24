@@ -8,21 +8,21 @@ import java.util.stream.Collectors;
 
 public class LottoGame {
 
-    private final Lottos lottos;
+    private final LottoTickets lottoTickets;
     private final LottoReferee referee;
     private final TreeMap<LottoResult, Integer> resultsStatistics = Arrays
             .stream(LottoResult.values())
             .collect(Collectors.toMap(key -> key, value -> 0, (o1, o2) -> o1, TreeMap::new));
 
-    public LottoGame(Lottos lottos, LottoReferee referee) {
-        this.lottos = lottos;
+    public LottoGame(LottoTickets lottoTickets, LottoReferee referee) {
+        this.lottoTickets = lottoTickets;
         this.referee = referee;
         analyzeLottos();
     }
 
     private void analyzeLottos() {
-        for (Lotto lotto : lottos.getLottos()) {
-            LottoResult result = referee.getLottoResult(lotto);
+        for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
+            LottoResult result = referee.getLottoResult(lottoTicket);
             if (result == null) {
                 continue;
             }
@@ -50,6 +50,6 @@ public class LottoGame {
     }
 
     private int getLottoPrice() {
-        return lottos.getLottos().size() * 1000;
+        return lottoTickets.getLottoTickets().size() * 1000;
     }
 }

@@ -1,4 +1,4 @@
-package validator;
+package util;
 
 import static constant.ExceptionMessages.DUPLICATE_WINNING_NUMBER_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.INVALID_LOTTO_NUMBER_RANGE_EXCEPTION_MESSAGE;
@@ -9,13 +9,16 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.junit.jupiter.params.ParameterizedTest.ARGUMENTS_PLACEHOLDER;
 import static org.junit.jupiter.params.ParameterizedTest.DISPLAY_NAME_PLACEHOLDER;
-import static validator.LottoNumberValidators.validateAndParseNumber;
-import static validator.LottoNumberValidators.validateLottoNumberRange;
-import static validator.LottoNumberValidators.validateNoDuplicateInList;
-import static validator.LottoNumberValidators.validateNoDuplicates;
+import static util.LottoNumberValidator.validateAndParseNumber;
+import static util.LottoNumberValidator.validateLottoNumberRange;
+import static util.LottoNumberValidator.validateNoDuplicateInList;
+import static util.LottoNumberValidator.validateNoDuplicates;
 
+import domain.LottoNumber;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -32,7 +35,7 @@ public class LottoNumberValidatorsTest {
     }
 
     @Test
-    void validateAndParseNumber_throwIllegalArgumentExceptionOnFail() {
+    void validateAndParseNumber_throwIllegalArgumentException() {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> validateAndParseNumber("!"))
                 .withMessageMatching(INVALID_NUMBER_INPUT_EXCEPTION_MESSAGE);
@@ -47,7 +50,7 @@ public class LottoNumberValidatorsTest {
 
     @ParameterizedTest(name = PARAMETERIZED_TEST_DISPLAY_FORMAT)
     @ValueSource(ints = {0, 46})
-    void validateLottoNumberRange_throwIllegalArgumentExceptionOnFail(int value) {
+    void validateLottoNumberRange_throwIllegalArgumentException(int value) {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> validateLottoNumberRange(value))
                 .withMessageMatching(INVALID_LOTTO_NUMBER_RANGE_EXCEPTION_MESSAGE);
@@ -55,18 +58,22 @@ public class LottoNumberValidatorsTest {
 
     @Test
     void validateNoDuplicates_passOnNoDuplicates() {
-        List<Integer> nums = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<LottoNumber> lotto = Stream.of(1, 2, 3, 4, 5, 6)
+                .map(LottoNumber::of)
+                .collect(Collectors.toList());
 
         assertThatNoException()
-                .isThrownBy(() -> validateNoDuplicates(nums));
+                .isThrownBy(() -> validateNoDuplicates(lotto));
     }
 
     @Test
     void validateNoDuplicates_throwIllegalArgumentExceptionOnFail() {
-        List<Integer> nums = Arrays.asList(1, 1, 2, 3, 4, 5);
+        List<LottoNumber> lotto = Stream.of(1, 1, 2, 3, 4, 5)
+                .map(LottoNumber::of)
+                .collect(Collectors.toList());
 
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> validateNoDuplicates(nums))
+                .isThrownBy(() -> validateNoDuplicates(lotto))
                 .withMessageMatching(DUPLICATE_WINNING_NUMBER_EXCEPTION_MESSAGE);
     }
 

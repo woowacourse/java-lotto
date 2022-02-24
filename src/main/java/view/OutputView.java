@@ -1,6 +1,6 @@
 package view;
 
-import domain.Lotto;
+import domain.LottoTicket;
 import domain.LottoNumber;
 import domain.LottoResult;
 import java.util.List;
@@ -9,20 +9,20 @@ import java.util.stream.Collectors;
 
 public class OutputView {
 
-    public static void printPurchaseInfo(List<Lotto> lottos) {
-        System.out.printf("%d개를 구매했습니다.\n", lottos.size());
+    public static void printPurchaseInfo(List<LottoTicket> lottoTickets) {
+        System.out.printf("%d개를 구매했습니다.\n", lottoTickets.size());
 
         StringBuilder builder = new StringBuilder();
 
-        lottos.stream()
+        lottoTickets.stream()
                 .map(OutputView::formatLottoNumbers)
                 .forEach(builder::append);
 
         System.out.println(builder);
     }
 
-    private static String formatLottoNumbers(Lotto lotto) {
-        String lottoNumFormat = lotto.getNumbers()
+    private static String formatLottoNumbers(LottoTicket lottoTicket) {
+        String lottoNumFormat = lottoTicket.getNumbers()
                 .stream()
                 .map(LottoNumber::getNumber)
                 .map(Object::toString)
