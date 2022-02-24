@@ -21,9 +21,10 @@ public class Lotto {
 
     public Lotto() {
         Collections.shuffle(NOMINEE_NUMBERS);
-        this.numbers = NOMINEE_NUMBERS.subList(0, NUMBER_COUNT);
-
+        List<Integer> numbers = NOMINEE_NUMBERS.subList(0, NUMBER_COUNT);
         Collections.sort(numbers);
+
+        this.numbers = List.copyOf(numbers);
     }
 
     public static int countAvailableTickets(Money money) {
