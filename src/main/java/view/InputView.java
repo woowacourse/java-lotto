@@ -15,6 +15,7 @@ public class InputView {
     }
 
     public String inputWinningNumbers() {
+        System.out.println();
         System.out.println(INPUT_WINNING_NUMBER_MESSAGE);
         return scanner.nextLine();
     }
