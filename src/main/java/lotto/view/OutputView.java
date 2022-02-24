@@ -1,15 +1,16 @@
-package view;
+package lotto.view;
 
 import static java.lang.System.out;
-import static model.LottoRank.*;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-import model.LottoNumber;
-import model.LottoRank;
-import model.LottoTicket;
-import model.Money;
-import model.WinningStatistics;
+import lotto.model.LottoNumber;
+import lotto.model.LottoRank;
+import lotto.model.LottoTicket;
+import lotto.model.Money;
+import lotto.model.WinningStatistics;
 
 public class OutputView {
 
@@ -24,7 +25,8 @@ public class OutputView {
 
     public static void printStatistics(WinningStatistics winningStatistics, Money inputMoney) {
         out.printf("당첨 통계%n---------%n");
-        for (LottoRank lottoRank : values()) {
+        List<LottoRank> targetLottoRanks = getLottoRanksToPrint();
+        for (LottoRank lottoRank : targetLottoRanks) {
             printWinningResult(winningStatistics, lottoRank);
         }
         printEarningsResult(winningStatistics, inputMoney);
@@ -38,9 +40,9 @@ public class OutputView {
     }
 
     private static void printWinningResult(WinningStatistics winningStatistics, LottoRank lottoRank) {
-        if (lottoRank == THIRD) {
-            out.printf("%s개 일치, 보너스 볼 일치 (%s원) - %s개%n", THIRD.getWinningNumberCount(),
-                    THIRD.getPrizeMoney(), winningStatistics.get(THIRD));
+        if (lottoRank == LottoRank.THIRD) {
+            out.printf("%s개 일치, 보너스 볼 일치 (%s원) - %s개%n", LottoRank.THIRD.getWinningNumberCount(),
+                    LottoRank.THIRD.getPrizeMoney(), winningStatistics.get(LottoRank.THIRD));
             return;
         }
         out.printf("%s개 일치 (%s원) - %s개%n", lottoRank.getWinningNumberCount(), lottoRank.getPrizeMoney(),
@@ -54,5 +56,12 @@ public class OutputView {
             result = String.format("%s(기준이 1이기 때문에 결과적으로 손해라는 의미임)", result);
         }
         out.println(result);
+    }
+
+    private static List<LottoRank> getLottoRanksToPrint() {
+        return Arrays.stream(LottoRank.values())
+                .filter((LottoRank lottoRank) -> lottoRank != LottoRank.FAILED)
+                .sorted(Comparator.reverseOrder())
+                .collect(Collectors.toList());
     }
 }

@@ -1,4 +1,4 @@
-package view;
+package lotto.view;
 
 import static java.lang.System.out;
 

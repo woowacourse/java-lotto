@@ -1,15 +1,15 @@
-package controller;
+package lotto.controller;
 
 import java.io.IOException;
 import java.util.List;
-import model.LottoRank;
-import model.LottoTicket;
-import model.LottoTicketFactory;
-import model.Money;
-import model.WinningNumbers;
-import model.WinningStatistics;
-import view.InputView;
-import view.OutputView;
+import lotto.model.LottoRank;
+import lotto.model.LottoTicket;
+import lotto.model.LottoTicketFactory;
+import lotto.model.Money;
+import lotto.model.WinningNumbers;
+import lotto.model.WinningStatistics;
+import lotto.view.InputView;
+import lotto.view.OutputView;
 
 public class LottoController {
 

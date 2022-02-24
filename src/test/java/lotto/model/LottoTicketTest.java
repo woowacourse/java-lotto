@@ -1,7 +1,7 @@
-package model;
+package lotto.model;
 
-import static model.LottoTicket.INVALID_LOTTO_NUMBER_COUNT;
-import static model.LottoTicket.LOTTO_NUMBER_DUPLICATED;
+import static lotto.model.LottoTicket.INVALID_LOTTO_NUMBER_COUNT;
+import static lotto.model.LottoTicket.LOTTO_NUMBER_DUPLICATED;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.ArrayList;

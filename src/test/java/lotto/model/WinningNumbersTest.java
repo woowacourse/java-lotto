@@ -1,6 +1,6 @@
-package model;
+package lotto.model;
 
-import static model.WinningNumbers.WINNING_NUMBERS_CONTAIN_BONUS_BALL;
+import static lotto.model.WinningNumbers.WINNING_NUMBERS_CONTAIN_BONUS_BALL;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
