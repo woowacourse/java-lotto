@@ -4,7 +4,7 @@ import model.LottoNumber;
 
 public class BonusNumberParser extends Parser<LottoNumber> {
 
-    static final String INVALID_BONUS_NUMBER_FORMAT_MESSAGE = "보너스 번호는 반드시 두자리 양수여야 합니다.";
+    static final String INVALID_BONUS_NUMBER_FORMAT_MESSAGE = "보너스 번호의 형식이 잘못 되었습니다. 예) 35";
 
     public BonusNumberParser() {
         super(lottoNumberWithSpacesRegex(), INVALID_BONUS_NUMBER_FORMAT_MESSAGE);

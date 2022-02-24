@@ -6,7 +6,7 @@ import java.util.List;
 import model.LottoNumbers;
 
 public class LottoNumbersParser extends Parser<LottoNumbers> {
-    static final String INVALID_LOTTO_NUMBER_FORMAT_MESSAGE = "당첨 번호는 반드시 6개의 숫자여야 합니다.";
+    static final String INVALID_LOTTO_NUMBER_FORMAT_MESSAGE = "당첨 번호의 형식이 잘못 되었습니다. 예) 1, 2, 3, 4, 5, 6";
 
     public LottoNumbersParser() {
         super(regex(), INVALID_LOTTO_NUMBER_FORMAT_MESSAGE);

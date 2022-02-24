@@ -1,4 +1,4 @@
-import static view.InputView.inputOnce;
+
 import static view.InputView.inputSelectiveRepeatably;
 import static view.OutputView.printIssuedLottoNumbers;
 import static view.OutputView.printResult;
@@ -14,6 +14,7 @@ import model.WinningLottoNumbers;
 import view.BonusNumberParser;
 import view.LottoNumbersParser;
 import view.MoneyParser;
+import view.OutputView;
 import view.Parser;
 
 public class Application {
@@ -23,16 +24,12 @@ public class Application {
     public static final Parser<LottoNumber> BONUS_NUMBER_PARSER = new BonusNumberParser();
 
     public static void main(String[] args) {
-        Money inputMoney = inputSelectiveRepeatably("구입금액을 입력해 주세요.", MONEY_PARSER::parse, Application::errorHandler);
+        Money inputMoney = inputSelectiveRepeatably("구입금액을 입력해 주세요.", MONEY_PARSER::parse, OutputView::printErrorMessage);
         List<LottoNumbers> issuedLottoNumbers = issueLottoNumbers(inputMoney);
         printIssuedLottoNumbers(issuedLottoNumbers);
         WinningLottoNumbers winningLottoNumbers = createWinningLottoNumbers();
         LottoResult result = winningLottoNumbers.summarize(issuedLottoNumbers, inputMoney);
         printResult(result);
-    }
-
-    private static void errorHandler(Exception e) {
-        System.out.println(e);
     }
 
     private static List<LottoNumbers> issueLottoNumbers(Money inputMoney) {
@@ -41,9 +38,10 @@ public class Application {
     }
 
     private static WinningLottoNumbers createWinningLottoNumbers() {
-        LottoNumbers lottoNumbers = inputOnce("지난 주 당첨 번호를 입력해 주세요.",
-            LOTTO_NUMBERS_PARSER::parse);
-        LottoNumber bonusNumber = inputOnce("보너스 볼을 입력해 주세요.", BONUS_NUMBER_PARSER::parse);
+        LottoNumbers lottoNumbers = inputSelectiveRepeatably("지난 주 당첨 번호를 입력해 주세요.",
+                LOTTO_NUMBERS_PARSER::parse, OutputView::printErrorMessage);
+        LottoNumber bonusNumber = inputSelectiveRepeatably("보너스 볼을 입력해 주세요.", BONUS_NUMBER_PARSER::parse,
+                OutputView::printErrorMessage);
         return new WinningLottoNumbers(lottoNumbers, bonusNumber);
     }
 }
