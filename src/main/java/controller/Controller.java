@@ -56,7 +56,7 @@ public class Controller {
 
     private Lotto getLotto() {
         try {
-            return new Lotto(InputView.requestAmount());
+            return Lotto.from(InputView.requestAmount());
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception.getMessage());
             return getLotto();

@@ -6,8 +6,12 @@ public class Lotto {
     private final Amount amount;
     private final Tickets tickets;
 
-    public Lotto(int amount) {
-        this.amount = new Amount(amount);
+    public static Lotto from(int amount) {
+        return new Lotto(new Amount(amount));
+    }
+
+    private Lotto(Amount amount) {
+        this.amount = amount;
         this.tickets = Tickets.of(getTicketCount(), new RandomLottoNumbersGenerator());
     }
 
