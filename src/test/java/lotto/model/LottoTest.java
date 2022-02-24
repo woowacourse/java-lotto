@@ -73,4 +73,13 @@ class LottoTest {
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("로또 번호에 중복이 존재합니다.");
     }
+
+    @Test
+    @DisplayName("Lotto가 LottoNumber를 포함하는지 확인한다")
+    void matchTest() {
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNumber lottoNumber = new LottoNumber(6);
+
+        assertThat(lotto.matchNumber(lottoNumber)).isTrue();
+    }
 }
