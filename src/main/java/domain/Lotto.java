@@ -27,8 +27,9 @@ public class Lotto {
                 .boxed().collect(Collectors.toList());
         Collections.shuffle(numbers);
         lottoNumbers = numbers.subList(0, 6);
+        Collections.sort(lottoNumbers);
 
-        return numbers.subList(0, 6);
+        return lottoNumbers;
     }
 
     public Rewards checkWinning(List<Integer> winningNumbers, Integer bonusNumber) {
