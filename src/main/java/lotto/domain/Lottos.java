@@ -4,7 +4,7 @@ import static lotto.utils.LottoGenerator.generateLottoNumbers;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,12 +21,8 @@ public class Lottos {
         }
     }
 
-    public List<Lotto> getLottos() {
-        return Collections.unmodifiableList(lottos);
-    }
-
     public Map<LottoPrize, Integer> confirmWinnings(WinningNumbers winningNumbers) {
-        Map<LottoPrize, Integer> result = new HashMap<>();
+        Map<LottoPrize, Integer> result = new EnumMap<>(LottoPrize.class);
         for (LottoPrize prize : LottoPrize.values()) {
             result.put(prize, 0);
         }
@@ -37,5 +33,9 @@ public class Lottos {
         }
 
         return result;
+    }
+
+    public List<Lotto> getLottos() {
+        return Collections.unmodifiableList(lottos);
     }
 }

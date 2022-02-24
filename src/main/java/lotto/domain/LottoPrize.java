@@ -23,8 +23,8 @@ public enum LottoPrize {
 
     public static LottoPrize match(int lottoNumberMatches, int bonusNumberMatches) {
         return Arrays.stream(LottoPrize.values())
-                .filter(prize -> prize.lottoNumberMatches == lottoNumberMatches
-                        && prize.bonusNumberMatches == bonusNumberMatches)
+                .filter(prize -> prize.lottoNumberMatches == lottoNumberMatches)
+                .filter(prize -> !(prize.equals(THIRD)) || prize.bonusNumberMatches == bonusNumberMatches)
                 .findFirst()
                 .orElse(MISS);
     }

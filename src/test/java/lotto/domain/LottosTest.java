@@ -1,9 +1,10 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatNoException;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
@@ -41,7 +42,7 @@ class LottosTest {
     }
 
     private Map<LottoPrize, Integer> initTestMap(Lottos lottos, WinningNumbers winningNumbers) {
-        Map<LottoPrize, Integer> myMap = new HashMap<>();
+        Map<LottoPrize, Integer> myMap = new EnumMap<>(LottoPrize.class);
         for (LottoPrize prize : LottoPrize.values()) {
             myMap.put(prize, 0);
         }

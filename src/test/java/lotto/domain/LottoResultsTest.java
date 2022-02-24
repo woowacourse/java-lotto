@@ -1,8 +1,10 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.assertThatNoException;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,7 +18,7 @@ class LottoResultsTest {
     @DisplayName("LottoResults 생성자는 당첨 결과 맵을 입력받아 값을 초기화한다.")
     @Test
     void constructor() {
-        Map<LottoPrize, Integer> forResult = new HashMap<>();
+        Map<LottoPrize, Integer> forResult = new EnumMap<>(LottoPrize.class);
         for (LottoPrize prize : LottoPrize.values()) {
             forResult.put(prize, 0);
         }
@@ -35,7 +37,7 @@ class LottoResultsTest {
     @DisplayName("getRateReturn 메서드는 당첨 결과에 따른 수익률을 반환한다.")
     @Test
     void getRateReturn() {
-        Map<LottoPrize, Integer> result = new HashMap<>();
+        Map<LottoPrize, Integer> result = new EnumMap<>(LottoPrize.class);
         result.put(LottoPrize.MISS, 9); // 0
         result.put(LottoPrize.FIFTH, 1); // 5000
 
@@ -48,7 +50,7 @@ class LottoResultsTest {
     @ParameterizedTest(name = DISPLAY_NAME_ARGUMENTS)
     @ValueSource(ints = {1, 2, 3})
     void getPrizeNumber(int input) {
-        Map<LottoPrize, Integer> map = new HashMap<>();
+        Map<LottoPrize, Integer> map = new EnumMap<>(LottoPrize.class);
         map.put(LottoPrize.FIRST, input);
 
         LottoResults lottoResults = new LottoResults(map);

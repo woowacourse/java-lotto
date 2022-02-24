@@ -1,10 +1,9 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -26,6 +25,7 @@ class LottoPrizeTest {
                 Arguments.of(2, 0, LottoPrize.MISS),
                 Arguments.of(3, 0, LottoPrize.FIFTH),
                 Arguments.of(4, 0, LottoPrize.FOURTH),
+                Arguments.of(4, 1, LottoPrize.FOURTH),
                 Arguments.of(5, 0, LottoPrize.THIRD),
                 Arguments.of(5, 1, LottoPrize.TWICE),
                 Arguments.of(6, 0, LottoPrize.FIRST)
