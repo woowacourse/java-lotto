@@ -34,8 +34,4 @@ public class Lotto {
         return lottoNumbers.contains(bonus);
     }
 
-    private boolean checkSecond(int matched, boolean hasBonus) { // checkSecond는 두번쨰 체크?느낌이 나서 checkSecondPrize가 좋지 않을까?
-        return (matched == Prize.THIRD.getMatched()) && hasBonus;
-    }
-
 }

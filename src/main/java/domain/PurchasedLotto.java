@@ -11,7 +11,7 @@ public class PurchasedLotto {
     private static final int LOTTO_PRICE = 1000;
 
     private List<Lotto> lottos = new ArrayList<>();
-    private PrizeResult finalResult = new PrizeResult(); // 이것도 prizeResult로 변경은 어떨까
+    private PrizeResult prizeResult = new PrizeResult();
     private int inputMoney;
 
     public PurchasedLotto(int inputMoney) {
@@ -25,24 +25,24 @@ public class PurchasedLotto {
         }
     }
 
-    public void purchase(PurchaseStrategy purchaseStrategy) { // private로 변경 -> test코드는?
+    public void purchase(PurchaseStrategy purchaseStrategy) {
         Lotto lotto = new Lotto(purchaseStrategy.getNumbers());
         lottos.add(lotto);
     }
 
-    public PrizeResult calculateWinning(WinningNumber winningNumber) { // 당첨 계산? -> calculatePrizeResult는 어떨까
+    public PrizeResult calculatePrizeResult(WinningNumber winningNumber) {
         lottos.stream()
                 .forEach(lotto -> {
                     Prize winnerPrice = lotto.calculateRank(winningNumber);
-                    finalResult.updatePrizeResult(winnerPrice);
+                    prizeResult.updatePrizeResult(winnerPrice);
                 });
-        return finalResult;
+        return prizeResult;
     }
 
     public float calculateEarningRate() {
-        long totalPrice = finalResult.totalPrize(); // totalPrize로 변경
+        long totalPrize = prizeResult.totalPrize();
 
-        float earningRate = (float) totalPrice / inputMoney;
+        float earningRate = (float) totalPrize / inputMoney;
         return (float) (Math.floor(earningRate * 100) / 100.0);
     }
 
@@ -50,8 +50,8 @@ public class PurchasedLotto {
         return lottos;
     }
 
-    public PrizeResult getFinalResult() {
-        return finalResult;
+    public PrizeResult getPrizeResult() {
+        return prizeResult;
     }
 
 }

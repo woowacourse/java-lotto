@@ -34,7 +34,7 @@ public class PurchasedLottosTest {
     @Test
     @DisplayName("옳바른 상금이 계산된다.")
     void lottos_makeRightTotalPrize() {
-        PrizeResult finalResult = lottos.calculateWinning(winningLotto);
+        PrizeResult finalResult = lottos.calculatePrizeResult(winningLotto);
 
         assertThat(finalResult.totalPrize()).isEqualTo(2001555000);
     }
@@ -42,7 +42,7 @@ public class PurchasedLottosTest {
     @Test
     @DisplayName("옳바른 수익률이 계산된다.")
     void lottos_calulateEarningRate() {
-        lottos.calculateWinning(winningLotto);
+        lottos.calculatePrizeResult(winningLotto);
 
         int prize = 2001555000;
         float expected = (float) prize / inputMoney;

@@ -46,22 +46,18 @@ public class OutputView {
         }
     }
 
-    private static void printEachStatistic(Prize winnerPrice, Map<Prize, Integer> prizeResult) {
-        if (winnerPrice == Prize.SECOND) {
-            System.out.print(STATISTICS_SECOND_PRIZE_MESSAGE
-                    + winnerPrice.getPrize() + STATISTICS_WON_MESSAGE
-                    + prizeResult.get(winnerPrice) + STATISTICS_COUNT_MESSAGE
-                    + System.lineSeparator());
+    private static void printEachStatistic(Prize winnerPrize, Map<Prize, Integer> prizeResult) {
+        if (winnerPrize == Prize.SECOND) {
+            System.out.print(STATISTICS_SECOND_PRIZE_MESSAGE + winnerPrize.getPrize() + STATISTICS_WON_MESSAGE
+                    + prizeResult.get(winnerPrize) + STATISTICS_COUNT_MESSAGE + System.lineSeparator());
             return;
         }
-        System.out.print(winnerPrice.getMatched() + STATISTICS_PRIZE_MESSAGE
-                + winnerPrice.getPrize() + STATISTICS_WON_MESSAGE
-                + prizeResult.get(winnerPrice) + STATISTICS_COUNT_MESSAGE
-                + System.lineSeparator());
+        System.out.print(winnerPrize.getMatched() + STATISTICS_PRIZE_MESSAGE + winnerPrize.getPrize() + STATISTICS_WON_MESSAGE
+                + prizeResult.get(winnerPrize) + STATISTICS_COUNT_MESSAGE + System.lineSeparator());
     }
 
     public static void printEarningRate(float earningRate) {
-        System.out.println(EARNING_RATE_START_MESSAGE+ earningRate + EARNING_RATE_END_MESSAGE);
+        System.out.println(EARNING_RATE_START_MESSAGE + earningRate + EARNING_RATE_END_MESSAGE);
     }
 
 }
