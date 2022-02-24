@@ -30,17 +30,23 @@ public class LottoController {
             LottoTicket.createWinningTicket(inputView.inputWinningNumber()),
             new LottoNumber(inputView.inputBonusBall()));
 
-        LottoStatistics lottoStatistics = lottoTickets.findLottoWinners(winningTicket);
-        double earningRate = lottoStatistics.calculateEarningRates(money);
-        StatisticsResult result = new StatisticsResult(lottoStatistics.getMap(), earningRate);
+        StatisticsResult result = getStatisticsResult(money, lottoTickets, winningTicket);
         outputView.outputStatisticsResult(result);
         outputView.outputEarningRate(result.getEarningRate());
     }
 
+    private StatisticsResult getStatisticsResult(Money money, LottoTickets lottoTickets,
+        WinningTicket winningTicket) {
+        LottoStatistics lottoStatistics = lottoTickets.findLottoWinners(winningTicket);
+        double earningRate = lottoStatistics.calculateEarningRates(money);
+        StatisticsResult result = new StatisticsResult(lottoStatistics.getStatisticsByRank(),
+            earningRate);
+        return result;
+    }
+
     private LottoTickets createLottoTickets(Money money) {
-        RandomNumberGenerator generator = new RandomNumberGenerator(LottoNumber.MIN,
-            LottoNumber.MAX);
-        LottoTickets lottoTickets = LottoTickets.buy(generator, money);
+        LottoTickets lottoTickets = LottoTickets.buy(new RandomNumberGenerator(LottoNumber.MIN,
+            LottoNumber.MAX), money);
         List<LottoTicketResponse> lottoTicketsResponse = LottoTicketResponse.from(
             lottoTickets);
         outputView.outputTickets(lottoTicketsResponse);

@@ -7,12 +7,12 @@ import java.util.Map;
 
 public class LottoStatistics {
 
-    private final Map<LottoRank, Long> map = new EnumMap<>(LottoRank.class);
+    private final Map<LottoRank, Long> statisticsByRank = new EnumMap<>(LottoRank.class);
 
     public LottoStatistics(List<LottoRank> ranks) {
         for (LottoRank rank : LottoRank.values()) {
             long rankCount = findRankCount(ranks, rank);
-            map.put(rank, rankCount);
+            statisticsByRank.put(rank, rankCount);
         }
     }
 
@@ -23,16 +23,17 @@ public class LottoStatistics {
     }
 
     public long count(LottoRank rank) {
-        return map.get(rank);
+        return statisticsByRank.get(rank);
     }
 
     public double calculateEarningRates(Money money) {
-        long sum = map.entrySet().stream().mapToLong(x -> x.getKey().getPrize() * x.getValue())
+        long sum = statisticsByRank.entrySet().stream()
+            .mapToLong(singleLotto -> singleLotto.getKey().getPrize() * singleLotto.getValue())
             .sum();
         return (double) sum / money.getAmount();
     }
 
-    public Map<LottoRank, Long> getMap() {
-        return Collections.unmodifiableMap(map);
+    public Map<LottoRank, Long> getStatisticsByRank() {
+        return Collections.unmodifiableMap(statisticsByRank);
     }
 }
