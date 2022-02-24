@@ -1,7 +1,6 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public enum Rank {
 
@@ -12,12 +11,21 @@ public enum Rank {
     FIFTH(3, new Money(5_000L)),
     NONE(0, new Money(0L));
 
+    private static final List<Rank> REVERSE_ORDERED_RANKS = initReverseOrderedRanks();
+
     private final int matchCount;
     private final Money reward;
 
     Rank(int matchCount, Money reward) {
         this.matchCount = matchCount;
         this.reward = reward;
+    }
+
+    private static List<Rank> initReverseOrderedRanks() {
+        List<Rank> ranks = new ArrayList<>(List.of(Rank.values()));
+        ranks.remove(Rank.NONE);
+        ranks.sort(Collections.reverseOrder());
+        return ranks;
     }
 
     public static Rank find(int matchCount, boolean matchBonus) {
@@ -80,5 +88,9 @@ public enum Rank {
 
     public Money getReward() {
         return this.reward;
+    }
+
+    public static List<Rank> getReverseOrderedRanks() {
+        return REVERSE_ORDERED_RANKS;
     }
 }

@@ -43,13 +43,9 @@ public class OutputView {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        for (Rank rank : orderedRanks()) {
+        for (Rank rank : Rank.getReverseOrderedRanks()) {
             printRank(ranks, rank);
         }
-    }
-
-    private static List<Rank> orderedRanks() {
-        return List.of(Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST);
     }
 
     private static void printRank(List<Rank> ranks, Rank rank) {

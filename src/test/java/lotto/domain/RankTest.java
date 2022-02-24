@@ -64,4 +64,11 @@ class RankTest {
 
         assertThat(money).isEqualTo(new Money(2_000_000_000L * 100L));
     }
+
+    @Test
+    @DisplayName("None을 제외한 Rank를 거꾸로 정렬하여 반환한다.")
+    void getReverseOrdered() {
+        List<Rank> ranks = Rank.getReverseOrderedRanks();
+        assertThat(ranks).containsExactly(Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST);
+    }
 }
