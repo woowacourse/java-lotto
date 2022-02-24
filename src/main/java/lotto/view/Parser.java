@@ -1,25 +1,38 @@
 package lotto.view;
 
+import lotto.model.Money;
+import lotto.model.Number;
+
 public abstract class Parser<T> {
 
+    private final StringFormatValidator validator;
+
+    protected Parser(StringFormatValidator validator) {
+        this.validator = validator;
+    }
+
     public T parse(String text) {
-        if (!text.matches(regex())) {
-            throw new InvalidFormatException(errorMessage());
-        }
+        validator.validate(text);
         return convert(text);
-    }
-
-    protected static String numberWithSpacesRegex() {
-        return "\\s*" + numberRegex() + "\\s*";
-    }
-
-    protected static String numberRegex() {
-        return "[1-9][0-9]*";
     }
 
     protected abstract T convert(String text);
 
-    protected abstract String regex();
+    public static Parser<Money> moneyParser() {
+        return new Parser<>(StringFormatValidator.moneyValidator()) {
+            @Override
+            protected Money convert(String text) {
+                return new Money(Integer.parseInt(text));
+            }
+        };
+    }
 
-    protected abstract String errorMessage();
+    public static Parser<Number> numberParser() {
+        return new Parser<>(StringFormatValidator.numberValidator()) {
+            @Override
+            protected Number convert(String text) {
+                return new Number(Integer.parseInt(text));
+            }
+        };
+    }
 }

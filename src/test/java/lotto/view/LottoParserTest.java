@@ -1,8 +1,8 @@
 package lotto.view;
 
+import static lotto.view.StringFormatValidator.INVALID_LOTTO_NUMBER_FORMAT_MESSAGE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static lotto.view.LottoParser.INVALID_LOTTO_NUMBER_FORMAT_MESSAGE;
 
 import lotto.exception.InvalidNumberRangeException;
 import java.util.List;

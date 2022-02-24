@@ -1,70 +1,53 @@
 package lotto.view;
 
-import java.util.Scanner;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Supplier;
-import java.util.stream.Stream;
+import static lotto.view.InputTemplate.repeatablyExecute;
+import static lotto.view.InputTemplate.repeatablyInput;
+
+import lotto.model.Lotto;
+import lotto.model.Money;
+import lotto.model.Number;
+import lotto.model.WinnerLotto;
 
 public class InputView {
 
-    private final static Scanner SCANNER = new Scanner(System.in);
+    private static final StringFormatValidator MONEY_VALIDATOR = StringFormatValidator
+        .moneyValidator();
+    private static final StringFormatValidator LOTTO_VALIDATOR = StringFormatValidator
+        .lottoValidator();
+    private static final StringFormatValidator NUMBER_VALIDATOR = StringFormatValidator
+        .numberValidator();
+    private static final Parser<Lotto> LOTTO_CONVERTOR = new LottoParser();
+    private static final Parser<Money> MONEY_CONVERTOR = Parser.moneyParser();
+    private static final Parser<Number> NUMBER_CONVERTOR = Parser.numberParser();
 
-    public static <T> T repeatablyExecute(Supplier<T> supplier, Consumer<Exception> errorHandler) {
-        try {
-            return supplier.get();
-        } catch (Exception e) {
-            return handleException(supplier, errorHandler, e);
-        }
+    private InputView() {
     }
 
-    private static <T> T handleException(Supplier<T> supplier, Consumer<Exception> errorHandler, Exception e) {
-        errorHandler.accept(e);
-        if (isRepeatable()) {
-            return repeatablyExecute(supplier, errorHandler);
-        }
-        throw new IllegalStateException("종료되었습니다!");
+    public static Money createMoney() {
+        return repeatablyExecute(InputView::inputMoney, OutputView::printErrorMessage);
     }
 
-    public static <T> T repeatablyInput(String message, Function<String, T> function,
-        Consumer<Exception> errorHandler) {
-        try {
-            return inputWithMessage(message, function);
-        } catch (Exception e) {
-            return handleException(message, function, errorHandler, e);
-        }
+    private static Money inputMoney() {
+        String value = repeatablyInput("구입금액을 입력해 주세요.", MONEY_VALIDATOR::validate,
+            OutputView::printErrorMessage);
+        return MONEY_CONVERTOR.parse(value);
     }
 
-    private static <T> T inputWithMessage(String message, Function<String, T> function) {
-        System.out.println(message);
-        return function.apply(SCANNER.nextLine());
+    public static WinnerLotto createWinnerLotto() {
+        return repeatablyExecute(() -> new WinnerLotto(inputWinnerLotto(), inputBonus()),
+            OutputView::printErrorMessage);
     }
 
-    private static <T> T handleException(String message, Function<String, T> function,
-        Consumer<Exception> errorHandler,
-        Exception e) {
-        errorHandler.accept(e);
-        if (isRepeatable()) {
-            return repeatablyInput(message, function, errorHandler);
-        }
-        throw new IllegalStateException("종료되었습니다!");
+    private static Lotto inputWinnerLotto() {
+        String value = repeatablyInput("지난 주 당첨 번호를 입력해 주세요.", LOTTO_VALIDATOR::validate,
+            OutputView::printErrorMessage);
+        return LOTTO_CONVERTOR.parse(value);
     }
 
-    private static boolean isRepeatable() {
-        String value = chooseOptions("다시 시도하시려면 Y, 아니면 N", "Y", "N", "y", "n");
-        return value.equals("y") || value.equals("Y");
-    }
-
-    private static String chooseOptions(String message, String... options) {
-        String value = inputWithMessage(message, Function.identity());
-        if (isChoosable(value, options)) {
-            return value;
-        }
-        return chooseOptions(message, options);
-    }
-
-    private static boolean isChoosable(String value, String[] options) {
-        return Stream.of(options).anyMatch(option -> option.equals(value));
+    private static Number inputBonus() {
+        String value = repeatablyInput("보너스 볼을 입력해 주세요.", NUMBER_VALIDATOR::validate,
+            OutputView::printErrorMessage);
+        return NUMBER_CONVERTOR.parse(value);
     }
 
 }

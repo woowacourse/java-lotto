@@ -7,10 +7,12 @@ import lotto.model.Lotto;
 
 public class LottoParser extends Parser<Lotto> {
 
-    static final String INVALID_LOTTO_NUMBER_FORMAT_MESSAGE = "당첨 번호의 형식이 잘못 되었습니다. 예) 1, 2, 3, 4, 5, 6";
+    public LottoParser() {
+        super(StringFormatValidator.lottoValidator());
+    }
 
     @Override
-    protected Lotto convert(String text) {
+    public Lotto convert(String text) {
         List<String> splitNumbers = splitNumbers(text);
         List<String> trimNumbers = trimNumbers(splitNumbers);
         return new Lotto(toInts(trimNumbers));
@@ -30,15 +32,5 @@ public class LottoParser extends Parser<Lotto> {
         return numbers.stream()
             .map(Integer::valueOf)
             .collect(toList());
-    }
-
-    @Override
-    protected String regex() {
-        return "^" + numberWithSpacesRegex() + "(\\s*," + numberWithSpacesRegex() + "){5}$";
-    }
-
-    @Override
-    protected String errorMessage() {
-        return INVALID_LOTTO_NUMBER_FORMAT_MESSAGE;
     }
 }
