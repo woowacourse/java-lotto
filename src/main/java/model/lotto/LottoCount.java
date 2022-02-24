@@ -10,12 +10,14 @@ public class LottoCount {
     private static final String LOTTO_COUNT_BLANK_ERROR_MESSAGE = "[Error]: 금액을 입력해주세요.";
     private static final String LOTTO_COUNT_NUMBER_ERROR_MESSAGE = "[Error]: 금액은 숫자를 입력해주세요.";
     private static final String LOTTO_COUNT_UNIT_ERROR_MESSAGE = "[Error]: 금액은 천원 단위여야 합니다.";
+    private static final String LOTTO_COUNT_LOWER_THAN_THOUSAND = "[Error]: 금액은 1000원 이상이어야 합니다.";
 
     private int count;
 
     public LottoCount(String money) {
         InputValidateUtils.inputBlank(money, LOTTO_COUNT_BLANK_ERROR_MESSAGE);
         InputValidateUtils.inputNumber(money, LOTTO_COUNT_NUMBER_ERROR_MESSAGE);
+        validateInputZero(money);
         this.count = makeMoneyToNumber(money);
     }
 
@@ -27,6 +29,12 @@ public class LottoCount {
     private void validateThousandUnitInputMoney(String money) {
         if (Integer.parseInt(money) % UNIT != 0) {
             throw new IllegalArgumentException(LOTTO_COUNT_UNIT_ERROR_MESSAGE);
+        }
+    }
+
+    private void validateInputZero(String money) {
+        if (Integer.parseInt(money) == 0) {
+            throw new IllegalArgumentException(LOTTO_COUNT_LOWER_THAN_THOUSAND);
         }
     }
 
