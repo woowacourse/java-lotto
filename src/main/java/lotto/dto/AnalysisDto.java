@@ -1,7 +1,7 @@
 package lotto.dto;
 
 import java.util.Collections;
-import java.util.LinkedHashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +18,7 @@ public class AnalysisDto {
     }
 
     private Map<Rank, Integer> calculateRankCounts(final List<Rank> ranks) {
-        final Map<Rank, Integer> rankMap = new LinkedHashMap<>();
+        final Map<Rank, Integer> rankMap = new EnumMap<>(Rank.class);
 
         for (Rank rank : Rank.values()) {
             final int count = Collections.frequency(ranks, rank);
