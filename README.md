@@ -1,6 +1,6 @@
 # java-lotto
 
-로또 미션 저장소
+> 로또 미션 저장소 💰
 
 ## 우아한테크코스 코드리뷰
 
@@ -23,13 +23,11 @@
  * 5개 일치, 보너스 볼 일치(30000000원)
  * 6개 일치 (2000000000원)
 
+## 키워드
 
-**키워드**: 로또번호, 로또티켓, 당첨번호, 보너스번호, 구입금액, 순위, 당첨결과
+로또번호, 로또티켓, 당첨번호, 보너스번호, 구입금액, 순위, 당첨결과
 
+## Contributors
 
-## 질문사항
-
-* 일급컬렉션을 OutputView로 넘겼을 때, getCollection()으로 내부의 컬렉션을 가져와서 print를 해야함
-* 파라미터로 RankBoard와 profitRatio를 넘기는 이유는, profit을 계산하는 책임을 OutputView에 두면 이상해서
-
-WinningNumber가 사실상 LottoNumbers랑 같음, 비즈니스 상 개념적 의미만 다름
+- [@RIANAEH](https://github.com/RIANAEH)
+- [@awesomeo184](https://github.com/awesomeo184)
