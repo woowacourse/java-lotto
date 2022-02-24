@@ -8,17 +8,17 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class PickedNumbers {
+public class ChoiceNumber {
     private static final List<Integer> numbers = IntStream.rangeClosed(1, 45).boxed().collect(toList());
-    private List<Integer> pickedNumbers;
+    private List<Integer> choiceNumbers;
 
-    public PickedNumbers() {
+    public ChoiceNumber() {
         Collections.shuffle(numbers);
         generateRandom6AscendingNumber();
     }
 
-    public PickedNumbers(String input) {
-        pickedNumbers = Arrays.stream(input.split(","))
+    public ChoiceNumber(String input) {
+        choiceNumbers = Arrays.stream(input.split(","))
                 .mapToInt(Integer::parseInt)
                 .boxed()
                 .collect(toList());
@@ -27,7 +27,7 @@ public class PickedNumbers {
     }
 
     private void validateDuplicate() {
-        boolean unique = pickedNumbers.stream()
+        boolean unique = choiceNumbers.stream()
                 .allMatch(new HashSet<>()::add);
         if (!unique) {
             throw new IllegalArgumentException("중복값이 있습니다");
@@ -35,33 +35,33 @@ public class PickedNumbers {
     }
 
     private void validateRange() {
-        if (pickedNumbers.stream().anyMatch(i -> i < 1 || i > 45)) {
+        if (choiceNumbers.stream().anyMatch(i -> i < 1 || i > 45)) {
             throw new IllegalArgumentException("범위내에 없습니다");
         }
     }
 
     private void generateRandom6AscendingNumber() {
-        pickedNumbers = numbers.stream().limit(6).collect(toList());
-        Collections.sort(pickedNumbers);
+        choiceNumbers = numbers.stream().limit(6).collect(toList());
+        Collections.sort(choiceNumbers);
     }
 
-    public List<Integer> getPickedNumbers() {
-        return pickedNumbers;
+    public List<Integer> getChoiceNumbers() {
+        return choiceNumbers;
     }
 
-    public int findMatchCount(PickedNumbers numbers) {
-        return pickedNumbers.stream()
-                .filter(numbers.getPickedNumbers()::contains)
+    public int findMatchCount(ChoiceNumber numbers) {
+        return choiceNumbers.stream()
+                .filter(numbers.getChoiceNumbers()::contains)
                 .collect(toList())
                 .size();
     }
 
     public boolean isContainNumber(int targetNumber) {
-        return pickedNumbers.contains(targetNumber);
+        return choiceNumbers.contains(targetNumber);
     }
 
     @Override
     public String toString() {
-        return pickedNumbers.toString();
+        return choiceNumbers.toString();
     }
 }

@@ -4,8 +4,8 @@ import lotto.domain.BonusNumber;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
-import lotto.domain.PickedNumbers;
-import lotto.domain.WinningLotto;
+import lotto.domain.ChoiceNumber;
+import lotto.domain.WinningNumber;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -21,49 +21,49 @@ public class LottoController {
     }
 
     public void start() {
-        money = getMoney();
+        money = initMoney();
         lottos = new Lottos(money);
         outputView.printPurchasedLotto(lottos);
-        PickedNumbers pickedNumbers = getPickedNumber();
-        BonusNumber bonusNumber = getBonusNumber(pickedNumbers);
-        WinningLotto winningLotto = new WinningLotto(pickedNumbers, bonusNumber);
-        LottoResult result = lottos.getResult(winningLotto);
+        ChoiceNumber choiceNumber = getPickedNumber();
+        BonusNumber bonusNumber = getBonusNumber(choiceNumber);
+        WinningNumber winningNumber = new WinningNumber(choiceNumber, bonusNumber);
+        LottoResult result = lottos.getResult(winningNumber);
         outputView.printResult(result);
         outputView.printYield(lottos.getYield(money));
 
     }
 
-    private PickedNumbers getPickedNumber() {
+    private ChoiceNumber getPickedNumber() {
         try {
             outputView.printLastWeekWinningMessage();
-            PickedNumbers pickedNumbers = new PickedNumbers(inputView.getInput());
-            return pickedNumbers;
-        } catch (IllegalArgumentException e) {
-            outputView.printErrorMessage(e.getMessage());
+            ChoiceNumber choiceNumber = new ChoiceNumber(inputView.getInput());
+            return choiceNumber;
+        } catch (IllegalArgumentException exception) {
+            outputView.printErrorMessage(exception);
             return getPickedNumber();
         }
     }
 
-    private BonusNumber getBonusNumber(PickedNumbers pickedNumbers) {
+    private BonusNumber getBonusNumber(ChoiceNumber choiceNumber) {
         try {
             outputView.printLastWeekBonusMessage();
-            BonusNumber bonusNumber = new BonusNumber(inputView.getInput(), pickedNumbers);
+            BonusNumber bonusNumber = new BonusNumber(inputView.getInput(), choiceNumber);
             return bonusNumber;
-        } catch (IllegalArgumentException e) {
-            outputView.printErrorMessage(e.getMessage());
-            return getBonusNumber(pickedNumbers);
+        } catch (IllegalArgumentException exception) {
+            outputView.printErrorMessage(exception);
+            return getBonusNumber(choiceNumber);
         }
 
     }
 
-    private Money getMoney() {
+    private Money initMoney() {
         try {
             outputView.printAskMoneyInputMessage();
             Money money = new Money(inputView.getInput());
             return money;
-        } catch (IllegalArgumentException e) {
-            outputView.printErrorMessage(e.getMessage());
-            return getMoney();
+        } catch (IllegalArgumentException exception) {
+            outputView.printErrorMessage(exception);
+            return initMoney();
         }
     }
 }

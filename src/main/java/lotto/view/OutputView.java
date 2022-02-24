@@ -10,8 +10,8 @@ public class OutputView {
         System.out.println("구입금액을 입력해주세요.");
     }
 
-    public void printErrorMessage(String e) {
-        System.out.println(e);
+    public void printErrorMessage(Exception exception) {
+        System.out.println(exception.getMessage());
     }
 
     public void printLastWeekWinningMessage() {
@@ -25,7 +25,7 @@ public class OutputView {
     public void printPurchasedLotto(Lottos lottos) {
         System.out.println(String.format("%d개를 구매했습니다.", lottos.getLottosSize()));
         for (Lotto lotto : lottos.getLottos()) {
-            System.out.println(lotto.getPickedNumbers());
+            System.out.println(lotto.getChoiceNumber());
         }
     }
 

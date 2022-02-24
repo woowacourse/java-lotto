@@ -2,13 +2,13 @@ package lotto.domain;
 
 public class Lotto {
 
-    private PickedNumbers pickedNumbers;
+    private ChoiceNumber choiceNumber;
 
-    public Lotto(PickedNumbers pickedNumbers) {
-        this.pickedNumbers = pickedNumbers;
+    public Lotto(ChoiceNumber choiceNumber) {
+        this.choiceNumber = choiceNumber;
     }
 
-    public PickedNumbers getPickedNumbers() {
-        return pickedNumbers;
+    public ChoiceNumber getChoiceNumber() {
+        return choiceNumber;
     }
 }

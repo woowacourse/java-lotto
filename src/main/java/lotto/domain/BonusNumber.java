@@ -5,11 +5,11 @@ import java.util.List;
 public class BonusNumber {
     private int bonusNumber;
 
-    public BonusNumber(String input, PickedNumbers pickedNumbers) {
+    public BonusNumber(String input, ChoiceNumber choiceNumber) {
         bonusNumber = Integer.parseInt(input);
 
         validateRange();
-        validateDuplicate(pickedNumbers.getPickedNumbers());
+        validateDuplicate(choiceNumber.getChoiceNumbers());
     }
 
     private void validateDuplicate(List<Integer> pickedNumbers) {

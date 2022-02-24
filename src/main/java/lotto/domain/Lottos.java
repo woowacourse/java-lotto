@@ -15,7 +15,7 @@ public class Lottos {
 
     private void purchaseLotto(Money money) {
         for (int i = 0; i < getLottoCount(money); i++) {
-            lottos.add(new Lotto(new PickedNumbers()));
+            lottos.add(new Lotto(new ChoiceNumber()));
         }
     }
 
@@ -32,9 +32,9 @@ public class Lottos {
         return lottos.size();
     }
 
-    public LottoResult getResult(WinningLotto winningLotto) {
+    public LottoResult getResult(WinningNumber winningNumber) {
         for (Lotto lotto : lottos) {
-            LottoRank lottoRank = winningLotto.findLottoRank(lotto.getPickedNumbers());
+            LottoRank lottoRank = winningNumber.findLottoRank(lotto.getChoiceNumber());
             if (lottoRank != null) {
                 result.add(lottoRank);
             }
