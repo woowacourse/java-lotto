@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.vo;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -56,6 +56,6 @@ public class Money {
     }
 
     public boolean isGreaterThan(Money money) {
-        return this.amount >= money.amount;
+        return this.amount > money.amount;
     }
 }

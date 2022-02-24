@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.vo;
 
 import static org.assertj.core.api.Assertions.*;
 import java.math.BigDecimal;
@@ -51,7 +51,7 @@ public class MoneyTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1001,true", "1000,true", "999,false"})
+    @CsvSource(value = {"1001,true", "1000,false", "999,false"})
     @DisplayName("돈의 크기를 비교한다.")
     void throwExceptionWhenMinusMoneyIsZero(long money, boolean result) {
         Money money1 = new Money(money);
