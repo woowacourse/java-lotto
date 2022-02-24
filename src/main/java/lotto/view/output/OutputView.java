@@ -13,12 +13,12 @@ import lotto.utils.Delimiter;
 
 public class OutputView {
 
-    private void printMessage(final String message) {
-        System.out.println(message);
+    public void printMessage(final OutputMessage outputMessage) {
+        printMessage(outputMessage.getMessage());
     }
 
-    private void printMessage(final OutputMessage outputMessage) {
-        printMessage(outputMessage.getMessage());
+    private void printMessage(final String message) {
+        System.out.println(message);
     }
 
     public void printTicketCount(final List<TicketDto> ticketDtos) {
@@ -67,30 +67,6 @@ public class OutputView {
             return ANALYSIS_EXTRA_FORMAT.getMessage();
         }
         return ANALYSIS_FORMAT.getMessage();
-    }
-
-    public void printMessageOfRequestCreditMoney() {
-        printMessage(REQUEST_CREDIT_MONEY);
-    }
-
-    public void printMessageOfRequestWinningNumbers() {
-        printMessage(REQUEST_WINNING_NUMBERS);
-    }
-
-    public void printMessageOfRequestBonusNumber() {
-        printMessage(REQUEST_BONUS_NUMBER);
-    }
-
-    public void printTitleOfAnalysis() {
-        printMessage(TITLE_OF_ANALYSIS);
-    }
-
-    public void printDividingLine() {
-        printMessage(DIVIDING_LINE);
-    }
-
-    public void printEmptyLine() {
-        printMessage(EMPTY_STRING);
     }
 
 }

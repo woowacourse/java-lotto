@@ -1,5 +1,7 @@
 package lotto.view;
 
+import static lotto.view.output.OutputMessage.*;
+
 import java.util.List;
 
 import lotto.dto.AnalysisDto;
@@ -19,7 +21,7 @@ public class LottoView {
     }
 
     public int requestCreditMoney() {
-        outputView.printMessageOfRequestCreditMoney();
+        outputView.printMessage(REQUEST_CREDIT_MONEY);
         return inputView.requestCreditMoney();
     }
 
@@ -30,12 +32,12 @@ public class LottoView {
     }
 
     private List<Integer> requestWinningNumbers() {
-        outputView.printMessageOfRequestWinningNumbers();
+        outputView.printMessage(REQUEST_WINNING_NUMBERS);
         return inputView.requestWinningNumbers();
     }
 
     private int requestBonusNumber() {
-        outputView.printMessageOfRequestBonusNumber();
+        outputView.printMessage(REQUEST_BONUS_NUMBER);
         return inputView.requestBonusNumber();
     }
 
@@ -45,9 +47,9 @@ public class LottoView {
     }
 
     public void announceAnalysis(AnalysisDto analysis) {
-        outputView.printEmptyLine();
-        outputView.printTitleOfAnalysis();
-        outputView.printDividingLine();
+        outputView.printMessage(EMPTY_STRING);
+        outputView.printMessage(TITLE_OF_ANALYSIS);
+        outputView.printMessage(DIVIDING_LINE);
         outputView.printAnalysis(analysis);
     }
 
