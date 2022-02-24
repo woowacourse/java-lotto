@@ -22,7 +22,7 @@ class LottoTest {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 44, 45));
 
-        int actual = lotto.match(winningNumbers);
+        int actual = lotto.matchWinningNumbers(winningNumbers);
 
         assertThat(actual).isEqualTo(4);
     }

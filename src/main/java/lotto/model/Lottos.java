@@ -11,13 +11,13 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public List<Lotto> getLottos() {
-        return lottos;
-    }
-
     public static Lottos generate(int count) {
         return new Lottos(IntStream.range(0, count)
                 .mapToObj(i -> Lotto.generate())
                 .collect(Collectors.toList()));
+    }
+
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 }

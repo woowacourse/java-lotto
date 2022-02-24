@@ -10,14 +10,6 @@ public class LottoResult {
         this.result = new HashMap<>();
     }
 
-    public Map<Rank, Integer> getResult() {
-        return result;
-    }
-
-    public Integer getOrDefault(Rank rank) {
-        return result.getOrDefault(rank, 0);
-    }
-
     public LottoResult generate(Lottos lottos, WinningNumbers winningNumbers, LottoNumber bonusNumber) {
         lottos.getLottos().forEach(lotto -> {
             Rank currentRank = match(lotto, winningNumbers, bonusNumber);
@@ -27,6 +19,14 @@ public class LottoResult {
     }
 
     public Rank match(Lotto lotto, WinningNumbers winningNumbers, LottoNumber bonusNumber) {
-        return Rank.parse(lotto.match(winningNumbers),lotto.matchBonusNumber(bonusNumber));
+        return Rank.parse(lotto.matchWinningNumbers(winningNumbers),lotto.matchBonusNumber(bonusNumber));
+    }
+
+    public Integer getOrDefault(Rank rank) {
+        return result.getOrDefault(rank, 0);
+    }
+
+    public Map<Rank, Integer> getResult() {
+        return result;
     }
 }
