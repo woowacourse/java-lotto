@@ -1,5 +1,6 @@
 package lotterymachine.model;
 
+import lotterymachine.dto.Count;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +19,7 @@ public class LotteryTicketsTest {
         LotteryTickets lotteryTickets = new LotteryTickets(List.of(lotteryTicket));
         List<Integer> winningNumbers = Arrays.asList(7, 8, 9, 13, 20, 21);
         int bonusNumber = 30;
-        Map<WinningLottery, Integer> result = lotteryTickets.getLotteriesResult(winningNumbers, bonusNumber);
-        assertThat(result.get(WinningLottery.THREE)).isEqualTo(1);
+        Map<WinningLottery, Count> result = lotteryTickets.getLotteriesResult(winningNumbers, bonusNumber);
+        assertThat(result.get(WinningLottery.THREE).getNumber()).isEqualTo(1);
     }
 }

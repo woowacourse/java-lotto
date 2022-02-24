@@ -1,5 +1,6 @@
 package lotterymachine.model;
 
+import lotterymachine.dto.Count;
 import lotterymachine.dto.Money;
 
 import java.util.Arrays;
@@ -44,10 +45,10 @@ public enum WinningLottery {
         return price;
     }
 
-    public static Map<WinningLottery, Integer> getWinningLotteries() {
-        Map<WinningLottery, Integer> winningLotteries = new EnumMap<>(WinningLottery.class);
+    public static Map<WinningLottery, Count> getWinningLotteries() {
+        Map<WinningLottery, Count> winningLotteries = new EnumMap<>(WinningLottery.class);
         Arrays.stream(values())
-                .forEach(value -> winningLotteries.put(value, INITIAL_NUMBER_OF_MATCHING_TICKET));
+                .forEach(value -> winningLotteries.put(value, new Count(INITIAL_NUMBER_OF_MATCHING_TICKET)));
         return winningLotteries;
     }
 }

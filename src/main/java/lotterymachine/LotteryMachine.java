@@ -6,6 +6,8 @@ import static lotterymachine.utils.LotteryNumbersGenerator.generate;
 import static lotterymachine.utils.LotteryRule.TICKET_PRICE;
 
 import java.util.Collections;
+
+import lotterymachine.dto.Count;
 import lotterymachine.dto.LotteryResultDto;
 import lotterymachine.dto.Money;
 import lotterymachine.model.LotteryTicket;
@@ -19,7 +21,7 @@ import java.util.List;
 public class LotteryMachine {
     public static void main(String[] args) {
         Money amount = new Money(InputView.getAmount());
-        int numberOfTickets = divideByLotteryPrice(amount.getAmount());
+        Count numberOfTickets = new Count(divideByLotteryPrice(amount.getAmount()));
         OutputView.printNumberOfTicket(numberOfTickets);
 
         LotteryTickets lotteryTickets = new LotteryTickets(createLotteryTickets(numberOfTickets));
@@ -30,9 +32,9 @@ public class LotteryMachine {
         printResult(numberOfTickets, lotteryResult);
     }
 
-    private static List<LotteryTicket> createLotteryTickets(int numberOfTickets) {
+    private static List<LotteryTicket> createLotteryTickets(Count numberOfTickets) {
         List<LotteryTicket> lotteryTickets = new ArrayList<>();
-        for (int i = 0; i < numberOfTickets; i++) {
+        for (int i = 0; i < numberOfTickets.getNumber(); i++) {
             lotteryTickets.add(new LotteryTicket(generate()));
         }
         return lotteryTickets;
@@ -44,9 +46,9 @@ public class LotteryMachine {
         return LotteryResultDto.createList(lotteryTickets.getLotteriesResult(winningNumbers, bonusNumber));
     }
 
-    private static void printResult(int numberOfTickets, List<LotteryResultDto> lotteryResult) {
+    private static void printResult(Count numberOfTickets, List<LotteryResultDto> lotteryResult) {
         OutputView.printStatistics(lotteryResult);
-        int ticketAmount = numberOfTickets * TICKET_PRICE.getNumber();
+        int ticketAmount = numberOfTickets.getNumber() * TICKET_PRICE.getNumber();
         int winningLotteryAmount = getWinningLotteryAmount(lotteryResult);
         OutputView.printProfitRate(calculateProfitRate(winningLotteryAmount, ticketAmount));
     }
@@ -54,6 +56,7 @@ public class LotteryMachine {
     private static int getWinningLotteryAmount(List<LotteryResultDto> lotteryResult) {
         return lotteryResult.stream()
                 .map(LotteryResultDto::sumIncome)
+                .map(Money::getAmount)
                 .mapToInt(Integer::intValue)
                 .sum();
     }

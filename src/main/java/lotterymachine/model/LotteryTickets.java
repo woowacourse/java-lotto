@@ -1,5 +1,7 @@
 package lotterymachine.model;
 
+import lotterymachine.dto.Count;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -11,8 +13,8 @@ public class LotteryTickets {
         this.tickets = lotteryTickets;
     }
 
-    public Map<WinningLottery, Integer> getLotteriesResult(List<Integer> numbers, int bonusNumber) {
-        final Map<WinningLottery, Integer> lotteriesResult = WinningLottery.getWinningLotteries();
+    public Map<WinningLottery, Count> getLotteriesResult(List<Integer> numbers, int bonusNumber) {
+        final Map<WinningLottery, Count> lotteriesResult = WinningLottery.getWinningLotteries();
         for (LotteryTicket lotteryTicket : tickets) {
             int matchingNumbers = lotteryTicket.countMatchingNumbers(numbers);
             boolean containsBonus = lotteryTicket.containsNumber(bonusNumber);
@@ -26,9 +28,9 @@ public class LotteryTickets {
         return Collections.unmodifiableList(tickets);
     }
 
-    private void addWinningLottery(Map<WinningLottery, Integer> lotteriesResult, WinningLottery winningLottery) {
+    private void addWinningLottery(Map<WinningLottery, Count> lotteriesResult, WinningLottery winningLottery) {
         if (winningLottery != null) {
-            lotteriesResult.put(winningLottery, lotteriesResult.get(winningLottery) + 1);
+            lotteriesResult.put(winningLottery, lotteriesResult.get(winningLottery).increase());
         }
     }
 }

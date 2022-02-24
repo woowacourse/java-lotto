@@ -1,5 +1,6 @@
 package lotterymachine.view;
 
+import lotterymachine.dto.Count;
 import lotterymachine.dto.LotteryResultDto;
 import lotterymachine.model.LotteryTicket;
 
@@ -7,8 +8,8 @@ import java.util.List;
 
 public class OutputView {
 
-    public static void printNumberOfTicket(int number) {
-        System.out.printf("%d개를 구매했습니다.%n", number);
+    public static void printNumberOfTicket(Count count) {
+        System.out.printf("%d개를 구매했습니다.%n", count.getNumber());
     }
 
     public static void printLotteryTickets(List<LotteryTicket> lotteryTickets) {
@@ -28,9 +29,9 @@ public class OutputView {
 
     private static String getLotteryStatistic(LotteryResultDto lottery) {
         if (lottery.isBonus()) {
-            return String.format("%d개 일치, 보너스 볼 일치 (%d원) - %d개%n", lottery.getCountOfMatchingNumbers(), lottery.getWinningPrice(), lottery.getNumberOfMatchingTicket());
+            return String.format("%d개 일치, 보너스 볼 일치 (%d원) - %d개%n", lottery.getCountOfMatchingNumbers().getNumber(), lottery.getWinningPrice(), lottery.getNumberOfMatchingTicket().getNumber());
         }
-        return String.format("%d개 일치 (%d원) - %d개%n", lottery.getCountOfMatchingNumbers(), lottery.getWinningPrice(), lottery.getNumberOfMatchingTicket());
+        return String.format("%d개 일치 (%d원) - %d개%n", lottery.getCountOfMatchingNumbers().getNumber(), lottery.getWinningPrice(), lottery.getNumberOfMatchingTicket().getNumber());
     }
 
     public static void printProfitRate(double calculateProfitRate) {

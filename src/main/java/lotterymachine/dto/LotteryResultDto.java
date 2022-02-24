@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.Map;
 
 public class LotteryResultDto implements Comparable<LotteryResultDto> {
-    private final int countOfMatchingNumbers;
+    private final Count countOfMatchingNumbers;
     private final Money winningPrice;
-    private final int numberOfMatchingTicket;
+    private final Count numberOfMatchingTicket;
     private boolean bonus;
 
-    public LotteryResultDto(WinningLottery winningLottery, int count) {
-        this.countOfMatchingNumbers = winningLottery.getNumber();
+    public LotteryResultDto(WinningLottery winningLottery, Count count) {
+        this.countOfMatchingNumbers = new Count(winningLottery.getNumber());
         this.winningPrice = new Money(winningLottery.getPrice());
         this.numberOfMatchingTicket = count;
         if (winningLottery.equals(WinningLottery.BONUS_FIVE)) {
@@ -21,14 +21,14 @@ public class LotteryResultDto implements Comparable<LotteryResultDto> {
         }
     }
 
-    public static List<LotteryResultDto> createList(Map<WinningLottery, Integer> lotteryTickets) {
+    public static List<LotteryResultDto> createList(Map<WinningLottery, Count> lotteryTickets) {
         List<LotteryResultDto> winningLotteries = new ArrayList<>();
         lotteryTickets.keySet().forEach(winningLottery -> winningLotteries
                 .add(new LotteryResultDto(winningLottery, lotteryTickets.get(winningLottery))));
         return winningLotteries;
     }
 
-    public int getCountOfMatchingNumbers() {
+    public Count getCountOfMatchingNumbers() {
         return countOfMatchingNumbers;
     }
 
@@ -36,7 +36,7 @@ public class LotteryResultDto implements Comparable<LotteryResultDto> {
         return winningPrice.getAmount();
     }
 
-    public int getNumberOfMatchingTicket() {
+    public Count getNumberOfMatchingTicket() {
         return numberOfMatchingTicket;
     }
 
@@ -44,9 +44,10 @@ public class LotteryResultDto implements Comparable<LotteryResultDto> {
         return bonus;
     }
 
-    public int sumIncome() {
-        return winningPrice.getAmount() * numberOfMatchingTicket;
+    public Money sumIncome() {
+        return new Money(winningPrice.getAmount() * numberOfMatchingTicket.getNumber());
     }
+
     @Override
     public int compareTo(LotteryResultDto o) {
         return this.winningPrice.getAmount() - o.winningPrice.getAmount();
