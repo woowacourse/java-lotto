@@ -13,6 +13,8 @@ import domain.Tickets;
 import dto.AnalysisDto;
 
 public class LottoService {
+	private static final int LOTTO_PRICE = 1000;
+	private static final long INIT_TOTAL = 0L;
 
 	private Tickets tickets;
 	private int payment;
@@ -22,7 +24,7 @@ public class LottoService {
 	}
 
 	public void generateTickets() {
-		int ticketCount = this.payment / 1000;
+		int ticketCount = this.payment / LOTTO_PRICE;
 		this.tickets = new Tickets(ticketCount, new RandomTicketGenerator());
 	}
 
@@ -49,7 +51,7 @@ public class LottoService {
 	}
 
 	public double getProfitRate(int payment, Map<Rank, Integer> rankCounts) {
-		long total = 0L;
+		long total = INIT_TOTAL;
 
 		for (Rank rank : rankCounts.keySet()) {
 			total += rank.getPrize() * rankCounts.get(rank);

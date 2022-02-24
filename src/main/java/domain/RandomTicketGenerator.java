@@ -6,14 +6,19 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class RandomTicketGenerator implements TicketGenerator {
-	private static final List<Integer> numbers = IntStream.range(1, 46)
+	private static final int TOTAL_START_RANDOM = 1;
+	private static final int TOTAL_END_RANGE = 46;
+	private static final int LOTTO_PARSE_START_RANGE = 0;
+	private static final int LOTTO_PARSE_END_RANGE = 6;
+
+	private static final List<Integer> numbers = IntStream.range(TOTAL_START_RANDOM, TOTAL_END_RANGE)
 		.boxed()
 		.collect(Collectors.toList());
 
 	@Override
 	public List<Integer> generate() {
 		Collections.shuffle(numbers);
-		List<Integer> lottoNumbers = numbers.subList(0, 6);
+		List<Integer> lottoNumbers = numbers.subList(LOTTO_PARSE_START_RANGE, LOTTO_PARSE_END_RANGE);
 		Collections.sort(lottoNumbers);
 		return lottoNumbers;
 	}

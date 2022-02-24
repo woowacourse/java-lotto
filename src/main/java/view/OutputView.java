@@ -14,9 +14,14 @@ public class OutputView {
 	private static final String ANALYSIS_TITLE = "당첨 통계";
 	private static final String DIVIDING_LINE = "---------";
 	private static final String PROFIT_RATE_MESSAGE_FORMAT = "총 수익률은 %.2f입니다.";
+	private static final String ANALYSIS_MATCH_COUNT_MESSAGE = "%d개 일치";
+	private static final String ANALYSIS_BONUS_BALL_COUNT_MESSAGE = ", 보너스 볼 일치";
+	private static final String ANALYSIS_PRIZE_COUNT_MESSAGE = "(%d원) - %d개";
 
 	private static final String START_SIGN = "[";
 	private static final String END_SIGN = "]";
+
+	private static final String ORIGIN_TICKET_DELIMITER = ",";
 
 	public static void printTickets(Tickets tickets) {
 		printTicketCount(tickets);
@@ -39,7 +44,7 @@ public class OutputView {
 			.map(String::valueOf)
 			.collect(Collectors.toUnmodifiableList());
 
-		return START_SIGN + String.join(",", ticketBalls) + END_SIGN;
+		return START_SIGN + String.join(ORIGIN_TICKET_DELIMITER, ticketBalls) + END_SIGN;
 	}
 
 	public static void printAnalysis(AnalysisDto analysisDto) {
@@ -50,11 +55,11 @@ public class OutputView {
 
 		for (Rank rank : rankCounts.keySet()) {
 			int count = rankCounts.get(rank);
-			String message = String.format("%d개 일치", rank.getMatchCount());
+			String message = String.format(ANALYSIS_MATCH_COUNT_MESSAGE, rank.getMatchCount());
 			if (rank.getBonusBallMatched()) {
-				message += ", 보너스 볼 일치";
+				message += ANALYSIS_BONUS_BALL_COUNT_MESSAGE;
 			}
-			message += String.format("(%d원) - %d개", rank.getPrize(), count);
+			message += String.format(ANALYSIS_PRIZE_COUNT_MESSAGE, rank.getPrize(), count);
 			System.out.println(message);
 		}
 

@@ -3,6 +3,11 @@ package domain;
 import java.util.Objects;
 
 public class Ball {
+	private static final int START_RANGE = 1;
+	private static final int END_RANGE = 45;
+
+	private static final String RANGE_EXCEPTION = "숫자의 범위는 1부터 45까지여야 합니다.";
+
 	private final int number;
 
 	public Ball(int number) {
@@ -12,8 +17,8 @@ public class Ball {
 	}
 
 	private void validateNumberIsInRange(int number) {
-		if (number < 1 || number > 45) {
-			throw new IllegalArgumentException("숫자의 범위는 1부터 45까지여야 합니다.");
+		if (number < START_RANGE || number > END_RANGE) {
+			throw new IllegalArgumentException(RANGE_EXCEPTION);
 		}
 	}
 

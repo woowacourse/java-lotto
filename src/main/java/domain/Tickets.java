@@ -20,6 +20,7 @@ public class Tickets {
 		for (int i = 0; i < count; i++) {
 			tickets.add(new Ticket(ticketGenerator));
 		}
+
 		return tickets;
 	}
 
