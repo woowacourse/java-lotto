@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class LottosTest {
 
@@ -18,12 +18,12 @@ public class LottosTest {
         class Context_with_money {
 
             @ParameterizedTest
-            @ValueSource(strings = {"1000", "2000"})
+            @CsvSource(value = {"1000|1", "2000|2"}, delimiter = '|')
             @DisplayName("구입금액에 맞는 개수의 로또를 생성한다.")
-            void It_create_lottos(String value) {
+            void It_create_lottos(String value, int expected) {
                 Lottos lottos = new Lottos(new Money(value));
 
-                assertThat(lottos.getCount()).isEqualTo(value);
+                assertThat(lottos.getCount()).isEqualTo(expected);
             }
         }
     }
