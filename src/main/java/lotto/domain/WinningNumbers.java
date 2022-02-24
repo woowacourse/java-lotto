@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class WinningNumbers {
@@ -44,10 +45,10 @@ public class WinningNumbers {
     }
 
     public List<LottoNumber> getWinningNumbers() {
-        return winningNumbers;
+        return new ArrayList<>(winningNumbers);
     }
 
     public LottoNumber getBonusNumber() {
-        return bonusNumber;
+        return new LottoNumber(bonusNumber.getNumber());
     }
 }
