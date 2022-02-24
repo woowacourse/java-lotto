@@ -18,8 +18,8 @@ public class LottoService {
 	private Tickets tickets;
 	private Credit credit;
 
-	public void initPayment(final int payment) {
-		this.credit = new Credit(payment);
+	public void saveCredit(final int creditMoney) {
+		this.credit = new Credit(creditMoney);
 	}
 
 	public void generateTickets() {
@@ -27,16 +27,15 @@ public class LottoService {
 		this.tickets = new Tickets(ticketCount, new RandomTicketGenerator());
 	}
 
-	public Tickets getTickets() {
-		return this.tickets;
-	}
-
 	public AnalysisDto generateAnalysis(final List<Integer> answerNumbers, final int bonusBall) {
 		final List<Rank> ranks = tickets.getRanks(new Ticket(answerNumbers), new Ball(bonusBall));
 		final Map<Rank, Integer> rankCounts = getRankCount(ranks);
 		final double profitRate = getProfitRate(credit.getMoney(), rankCounts);
-
 		return new AnalysisDto(rankCounts, profitRate);
+	}
+
+	public Tickets getTickets() {
+		return this.tickets;
 	}
 
 	public Map<Rank, Integer> getRankCount(final List<Rank> ranks) {

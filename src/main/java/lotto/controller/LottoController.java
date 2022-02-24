@@ -18,10 +18,17 @@ public class LottoController {
 	}
 
 	public void purchaseTickets() {
-		final int payment = lottoView.requestCreditMoney();
-		lottoService.initPayment(payment);
-		lottoService.generateTickets();
+		generateTickets();
+		announceTickets();
+	}
 
+	private void generateTickets() {
+		final int creditMoney = lottoView.requestCreditMoney();
+		lottoService.saveCredit(creditMoney);
+		lottoService.generateTickets();
+	}
+
+	private void announceTickets() {
 		final Tickets tickets = lottoService.getTickets();
 		lottoView.announceTickets(tickets);
 	}
@@ -29,7 +36,6 @@ public class LottoController {
 	public void checkOutAnalysis() {
 		final List<Integer> answer = lottoView.requestWinningNumbers();
 		final int number = lottoView.requestBonusNumber();
-
 		final AnalysisDto analysisDto = lottoService.generateAnalysis(answer, number);
 		lottoView.announceAnalysis(analysisDto);
 	}
