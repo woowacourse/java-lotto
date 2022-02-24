@@ -10,6 +10,8 @@ import lotto.view.OutputView;
 
 public class NumberController {
 
+    private static final String DUPLICATE_NUMBER_MESSAGE = "중복입니다";
+
     public List<Number> getWinningNumbers() {
         boolean isValid = false;
         List<Integer> integers;
@@ -55,7 +57,7 @@ public class NumberController {
     private boolean checkDuplicate(List<Number> numbers, Number number) {
         boolean isDuplicate = numbers.contains(number);
         if (isDuplicate) {
-            OutputView.printError("중복입니다");
+            OutputView.printError(DUPLICATE_NUMBER_MESSAGE);
         }
         return isDuplicate;
     }

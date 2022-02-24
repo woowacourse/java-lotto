@@ -33,7 +33,7 @@ public class Lotto {
 
     private static List<Number> initLottoNumbers() {
         List<Number> numbers = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
+        for (int i = Number.MIN_VALUE; i <= Number.MAX_VALUE; i++) {
             Number number = new Number(String.valueOf(i));
             numbers.add(number);
         }
@@ -73,7 +73,7 @@ public class Lotto {
                 count++;
             }
         }
-        if (count == 5 && numbers.contains(bonusNumber)) {
+        if (count == WinningPrice.Five.getCount() && numbers.contains(bonusNumber)) {
             containsBonus = true;
         }
 

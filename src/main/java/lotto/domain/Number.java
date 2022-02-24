@@ -4,9 +4,10 @@ import java.util.Objects;
 
 public class Number {
 
-    private static final int MIN_VALUE = 1;
-    private static final int MAX_VALUE = 45;
+    public static final int MIN_VALUE = 1;
+    public static final int MAX_VALUE = 45;
     private static final String ERROR_MESSAGE = MIN_VALUE + "부터 " + MAX_VALUE + "의 숫자여야 합니다.";
+    private static final String PARSE_INT_ERROR_MESSAGE = "숫자만 허용됩니다.";
 
     private final int value;
 
@@ -26,7 +27,7 @@ public class Number {
         try {
             return Integer.parseInt(text);
         } catch (NumberFormatException exception) {
-            throw new IllegalArgumentException("숫자여야 합니다.");
+            throw new IllegalArgumentException(PARSE_INT_ERROR_MESSAGE);
         }
     }
 

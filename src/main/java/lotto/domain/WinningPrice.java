@@ -22,10 +22,10 @@ public enum WinningPrice {
     }
 
     public static WinningPrice of(int count, boolean containBonus) {
-        if (count == 5 && containBonus) {
+        if (count == Five.getCount() && containBonus) {
             return WinningPrice.FiveAndBonus;
         }
-        if (count == 5 && !containBonus) {
+        if (count == Five.getCount()) {
             return WinningPrice.Five;
         }
         return Arrays.stream(values())
