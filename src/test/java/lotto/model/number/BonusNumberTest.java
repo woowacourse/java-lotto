@@ -1,4 +1,4 @@
-package lotto;
+package lotto.model.number;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -17,7 +17,8 @@ public class BonusNumberTest {
         for (int i = 1; i <= 6; i++) {
             winningNumbers.add(String.valueOf(i));
         }
-        this.winningNumbers = WinningNumbers.from(winningNumbers.toArray(new String[0]));;
+        this.winningNumbers = WinningNumbers.from(winningNumbers.toArray(new String[0]));
+        ;
     }
 
     @DisplayName("보너스 번호가 숫자가 아니면 예외가 발생한다")

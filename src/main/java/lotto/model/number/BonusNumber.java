@@ -1,4 +1,6 @@
-package lotto;
+package lotto.model.number;
+
+import lotto.model.Lotto;
 
 public class BonusNumber implements LottoNumber {
     private static final String ERROR_TYPE = "[ERROR] 보너스 번호는 숫자로만 입력해주세요";

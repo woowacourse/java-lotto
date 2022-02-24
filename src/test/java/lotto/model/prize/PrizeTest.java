@@ -1,7 +1,8 @@
-package lotto;
+package lotto.model.prize;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.model.Lotto;
 import org.junit.jupiter.api.BeforeEach;
 
 public class PrizeTest {

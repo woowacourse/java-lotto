@@ -1,4 +1,4 @@
-package lotto;
+package lotto.model.number;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 

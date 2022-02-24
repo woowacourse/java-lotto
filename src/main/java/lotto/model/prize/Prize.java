@@ -1,4 +1,4 @@
-package lotto;
+package lotto.model.prize;
 
 import java.util.Arrays;
 
@@ -30,9 +30,9 @@ public enum Prize {
 
     private static Prize getPrizeByCount(MatchResult matchResult) {
         return Arrays.stream(values())
-            .filter(prize -> matchResult.isCount(prize.matchCount))
-            .findFirst()
-            .orElse(NONE);
+                .filter(prize -> matchResult.isCount(prize.matchCount))
+                .findFirst()
+                .orElse(NONE);
     }
 
     public int pickAmount(int count) {

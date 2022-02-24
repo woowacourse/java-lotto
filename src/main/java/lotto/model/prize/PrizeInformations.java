@@ -1,8 +1,9 @@
-package lotto;
+package lotto.model.prize;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.model.Money;
 
 public class PrizeInformations {
     private final List<PrizeInformation> prizeInformations;

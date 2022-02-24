@@ -1,4 +1,8 @@
-package lotto;
+package lotto.model.prize;
+
+import lotto.model.Lotto;
+import lotto.model.number.BonusNumber;
+import lotto.model.number.WinningNumbers;
 
 public class MatchResult {
     private int count;

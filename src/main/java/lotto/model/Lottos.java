@@ -1,8 +1,11 @@
-package lotto;
+package lotto.model;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.model.number.BonusNumber;
+import lotto.model.number.WinningNumbers;
+import lotto.model.prize.MatchResult;
 
 public class Lottos {
 

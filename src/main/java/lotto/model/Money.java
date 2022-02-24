@@ -1,4 +1,4 @@
-package lotto;
+package lotto.model;
 
 public class Money {
     private static final String ERROR_NEGATIVE = "[ERROR] 구매 금액은 0원보다 커야 합니다";

@@ -1,7 +1,8 @@
-package lotto;
+package lotto.model.dto;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.model.Lottos;
 
 public class LottoDTO {
 

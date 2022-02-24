@@ -1,8 +1,8 @@
-package lotto;
+package lotto.model.number;
 
 import java.util.Objects;
 
-public class WinningNumber implements LottoNumber{
+public class WinningNumber implements LottoNumber {
     private static final String ERROR_TYPE = "[ERROR] 당첨 번호는 숫자로만 입력해주세요";
 
     private final int number;

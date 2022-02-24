@@ -1,7 +1,8 @@
-package lotto;
+package lotto.view;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.model.dto.LottoDTO;
 
 public class ResultView {
     private static final String MESSAGE_PURCHASE_COUNT = "개를 구매했습니다.";
