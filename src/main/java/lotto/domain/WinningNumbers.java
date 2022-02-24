@@ -20,15 +20,42 @@ public class WinningNumbers {
         this.winningNumbers = getWinningNumbers(normalWinningNumbers, bonusWinningNumber);
     }
 
+    private void validateNormalWinningNumbers(List<Integer> normalWinningNumbers) {
+        if (normalWinningNumbers.size() != 6) {
+            throw new IllegalArgumentException("당첨 번호는 6개여야 합니다.");
+        }
+    }
+
+    private void validateDuplication(List<Integer> normalWinningNumbers, Integer bonusWinningNumber) {
+        normalWinningNumbers.add(bonusWinningNumber);
+
+        Set<Integer> set = new HashSet<>(normalWinningNumbers);
+
+        if (set.size() < normalWinningNumbers.size()) {
+            throw new IllegalArgumentException("중복된 숫자가 존재할 수 없습니다.");
+        }
+
+        normalWinningNumbers.remove(bonusWinningNumber);
+    }
+
+    private List<WinningNumber> getWinningNumbers(List<Integer> normalWinningNumbers, Integer bonusWinningNumber) {
+        List<WinningNumber> winningNumbers = new ArrayList<>();
+
+        for (Integer normalWinningNumber : normalWinningNumbers) {
+            WinningNumber winningNumber = new WinningNumber(normalWinningNumber, NORMAL);
+            winningNumbers.add(winningNumber);
+        }
+
+        winningNumbers.add(new WinningNumber(bonusWinningNumber, BONUS));
+
+        return winningNumbers;
+    }
+
     public static WinningNumbers create(List<String> normalWinningValues, String bonusWinningValue) {
         List<Integer> normalWinningNumbers = translateIntegerList(normalWinningValues);
         Integer bonusWinningNumber = translateInteger(bonusWinningValue);
 
         return new WinningNumbers(normalWinningNumbers, bonusWinningNumber);
-    }
-
-    public Rank compare(LottoTicket lottoTicket) {
-        return Rank.of(getCorrectCount(lottoTicket), isBonus(lottoTicket));
     }
 
     private static List<Integer> translateIntegerList(List<String> values) {
@@ -49,35 +76,8 @@ public class WinningNumbers {
         }
     }
 
-    private List<WinningNumber> getWinningNumbers(List<Integer> normalWinningNumbers, Integer bonusWinningNumber) {
-        List<WinningNumber> winningNumbers = new ArrayList<>();
-
-        for (Integer normalWinningNumber : normalWinningNumbers) {
-            WinningNumber winningNumber = new WinningNumber(normalWinningNumber, NORMAL);
-            winningNumbers.add(winningNumber);
-        }
-
-        winningNumbers.add(new WinningNumber(bonusWinningNumber, BONUS));
-
-        return winningNumbers;
-    }
-
-    private void validateNormalWinningNumbers(List<Integer> normalWinningNumbers) {
-        if (normalWinningNumbers.size() != 6) {
-            throw new IllegalArgumentException("당첨 번호는 6개여야 합니다.");
-        }
-    }
-
-    private void validateDuplication(List<Integer> normalWinningNumbers, Integer bonusWinningNumber) {
-        normalWinningNumbers.add(bonusWinningNumber);
-
-        Set<Integer> set = new HashSet<>(normalWinningNumbers);
-
-        if (set.size() < normalWinningNumbers.size()) {
-            throw new IllegalArgumentException("중복된 숫자가 존재할 수 없습니다.");
-        }
-
-        normalWinningNumbers.remove(bonusWinningNumber);
+    public Rank compare(LottoTicket lottoTicket) {
+        return Rank.of(getCorrectCount(lottoTicket), isBonus(lottoTicket));
     }
 
     private int getCorrectCount(LottoTicket lottoTicket) {
