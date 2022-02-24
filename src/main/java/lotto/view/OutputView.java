@@ -13,6 +13,9 @@ public class OutputView {
 
     private static final String DELIMITER = ",";
 
+    private OutputView() {
+    }
+
     public static void printLottos(List<Lotto> lottos) {
         printLottosSize(lottos);
         printLottoNumbers(lottos);
