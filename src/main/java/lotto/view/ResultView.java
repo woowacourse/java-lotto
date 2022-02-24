@@ -7,10 +7,12 @@ import lotto.model.dto.PrizeInformationDTO;
 
 public class ResultView {
     private static final String MESSAGE_PURCHASE_COUNT = "개를 구매했습니다.";
-    private static final String LOTTO_FORMAT = "[%s]%n";
+    private static final String FORMAT_LOTTO = "[%s]%n";
     private static final String LOTTO_NUMBER_DELIMITER = ", ";
-    private static final String PRIZE_FORMAT = "%d개 일치 (%d원)- %d개%n";
-    private static final String PRIZE_BONUS_FORMAT = "%d개 일치, 보너스 볼 일치(%d원)- %d개%n";
+    private static final String FORMAT_PRIZE = "%d개 일치 (%d원)- %d개%n";
+    private static final String FORMAT_PRIZE_BONUS = "%d개 일치, 보너스 볼 일치(%d원)- %d개%n";
+    private static final String FORMAT_EARNING_RATE = "총 수익률은 %.2f입니다.";
+
 
     public static void showPurchaseCount(int count) {
         System.out.println();
@@ -19,14 +21,20 @@ public class ResultView {
 
     public static void showLottos(List<LottoDTO> lottos) {
         for (LottoDTO lotto : lottos) {
-            String joinedNumbers = lotto.getNumbers().stream()
-                    .map(String::valueOf)
-                    .collect(Collectors.joining(LOTTO_NUMBER_DELIMITER));
-            System.out.printf(LOTTO_FORMAT, joinedNumbers);
+            showLotto(lotto);
         }
+        System.out.println();
+    }
+
+    private static void showLotto(LottoDTO lotto) {
+        String joinedNumbers = lotto.getNumbers().stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(LOTTO_NUMBER_DELIMITER));
+        System.out.printf(FORMAT_LOTTO, joinedNumbers);
     }
 
     public static void showPrizeInformation(List<PrizeInformationDTO> prizeInformations) {
+        System.out.println();
         for (PrizeInformationDTO prizeInformation : prizeInformations) {
             showOnePrizeInformation(getFormat(prizeInformation), prizeInformation);
         }
@@ -34,9 +42,9 @@ public class ResultView {
 
     private static String getFormat(PrizeInformationDTO prizeInformation) {
         if (prizeInformation.getBonus()) {
-            return PRIZE_BONUS_FORMAT;
+            return FORMAT_PRIZE_BONUS;
         }
-        return PRIZE_FORMAT;
+        return FORMAT_PRIZE;
     }
 
     private static void showOnePrizeInformation(String format, PrizeInformationDTO prizeInformation) {
@@ -44,5 +52,10 @@ public class ResultView {
                 prizeInformation.getMatchingCount(),
                 prizeInformation.getAmount(),
                 prizeInformation.getPrizeCount());
+    }
+
+    public static void showEarningRate(Double earningRate) {
+        System.out.println();
+        System.out.printf(FORMAT_EARNING_RATE, earningRate);
     }
 }
