@@ -8,10 +8,10 @@ public class WinningNumbers {
     private static final String ERROR_NOT_MATCH_NUMBER_COUNT = "당첨 번호는 6개를 입력해주세요.";
     private static final String ERROR_DUPLICATION_BONUS_NUMBER = "지난주 당첨 번호와 중복되는 숫자입니다.";
 
-    private final List<Integer> winningNumbers;
-    private final int bonusNumber;
+    private final List<LottoNumber> winningNumbers;
+    private final LottoNumber bonusNumber;
 
-    public WinningNumbers(List<Integer> winningNumbers, int bonusNumber) {
+    public WinningNumbers(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
 
@@ -43,11 +43,11 @@ public class WinningNumbers {
         return winningNumbers.stream().distinct().count() != winningNumbers.size();
     }
 
-    public List<Integer> getWinningNumbers() {
+    public List<LottoNumber> getWinningNumbers() {
         return winningNumbers;
     }
 
-    public int getBonusNumber() {
+    public LottoNumber getBonusNumber() {
         return bonusNumber;
     }
 }

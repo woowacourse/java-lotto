@@ -6,12 +6,12 @@ import java.util.List;
 
 public class LottoNumberGenerator {
 
-    private final List<Integer> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public LottoNumberGenerator() {
         lottoNumbers = new ArrayList<>();
         for (int i = 1; i <= 45; i++) {
-            lottoNumbers.add(i);
+            lottoNumbers.add(new LottoNumber(i));
         }
     }
 
@@ -19,9 +19,9 @@ public class LottoNumberGenerator {
         Collections.shuffle(lottoNumbers);
     }
 
-    public List<Integer> getLottoNumbers(int count) {
+    public List<LottoNumber> getLottoNumbers(int count) {
         shuffleNumbers();
-        List<Integer> numbers = lottoNumbers.subList(0, count);
+        List<LottoNumber> numbers = lottoNumbers.subList(0, count);
         Collections.sort(numbers);
         return new ArrayList<>(numbers);
     }

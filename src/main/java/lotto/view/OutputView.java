@@ -1,6 +1,9 @@
 package lotto.view;
 
 import java.util.EnumMap;
+import java.util.List;
+import java.util.stream.Collectors;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.Rank;
@@ -12,9 +15,15 @@ public class OutputView {
     public static void displayLottoTickets(LottoTickets lottoTickets) {
         System.out.println(lottoTickets.getLottoTickets().size() + LOTTO_COUNT_FORMAT);
         for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
-            System.out.println(lottoTicket.getNumbers().toString());
+            System.out.println(toIntegerNumbers(lottoTicket.getNumbers()).toString());
         }
         System.out.println();
+    }
+
+    private static List<Integer> toIntegerNumbers(List<LottoNumber> lottoNumbers) {
+        return lottoNumbers.stream()
+                .map(LottoNumber::getNumber)
+                .collect(Collectors.toList());
     }
 
     public static void displayResult(EnumMap<Rank, Integer> statistics, double calculateYield) {
@@ -24,7 +33,7 @@ public class OutputView {
         for (Rank rank : statistics.keySet()) {
             if (rank.getMatchCount() != 0) {
                 System.out.println(
-                        rank.getMatchCount() + "개 일치 (" + rank.getReward() + "원) - " + statistics.get(rank) + "개");
+                        rank.getMatchStatus() + " (" + rank.getReward() + "원) - " + statistics.get(rank) + "개");
             }
         }
         System.out.println("총 수익률은 " + calculateYield + "입니다." + isLoss(calculateYield));

@@ -4,15 +4,15 @@ import java.util.List;
 
 public class LottoTicket {
 
-    private final List<Integer> numbers;
+    private final List<LottoNumber> numbers;
 
-    public LottoTicket(List<Integer> lottoTicket) {
+    public LottoTicket(List<LottoNumber> lottoTicket) {
         this.numbers = lottoTicket;
     }
 
-    public Rank compareNumbers(List<Integer> winningNumbers, int bonusNumber) {
+    public Rank compareNumbers(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
         int total = 0;
-        for (Integer number : numbers) {
+        for (LottoNumber number : numbers) {
             if (winningNumbers.contains(number)) {
                 total++;
             }
@@ -20,14 +20,14 @@ public class LottoTicket {
         return getRank(bonusNumber, total);
     }
 
-    private Rank getRank(int bonusNumber, int total) {
+    private Rank getRank(LottoNumber bonusNumber, int total) {
         if (total == 5 && numbers.contains(bonusNumber)) {
             return Rank.MATCH_FIVE_AND_BONUS_NUMBERS;
         }
         return Rank.matchResult(total);
     }
-
-    public List<Integer> getNumbers() {
+    
+    public List<LottoNumber> getNumbers() {
         return numbers;
     }
 }
