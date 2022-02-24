@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
 import lotto.domain.vo.Number;
 
 public class LottoGenerator {
@@ -20,14 +21,14 @@ public class LottoGenerator {
         this.numbers = initNumbers();
     }
 
+    private List<Number> initNumbers() {
+        return IntStream.rangeClosed(MINIMUM_NUMBER, MAXIMUM_NUMBER)
+                .mapToObj(Number::new)
+                .collect(Collectors.toList());
+    }
+
     public Lotto generate() {
         Collections.shuffle(numbers);
         return new Lotto(new ArrayList<>(numbers.subList(START_INCLUSIVE, END_EXCLUSIVE)));
-    }
-
-    private List<Number> initNumbers() {
-        return IntStream.rangeClosed(MINIMUM_NUMBER, MAXIMUM_NUMBER)
-            .mapToObj(Number::new)
-            .collect(Collectors.toList());
     }
 }

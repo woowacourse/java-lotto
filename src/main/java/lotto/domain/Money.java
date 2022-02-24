@@ -16,6 +16,12 @@ public class Money {
         this.money = money;
     }
 
+    private void validatePositive(long money) {
+        if (money < MINIMUM_MONEY) {
+            throw new IllegalArgumentException("돈은 0이상이어야 한다.");
+        }
+    }
+
     public Money plus(Money money) {
         return new Money(this.money + money.money);
     }
@@ -26,6 +32,10 @@ public class Money {
 
     public BigDecimal divide(Money money) {
         return BigDecimal.valueOf(this.money).divide(BigDecimal.valueOf(money.money), DECIMAL_PLACE, RoundingMode.DOWN);
+    }
+
+    public boolean isGreaterThan(Money money) {
+        return this.money >= money.money;
     }
 
     public long getMoney() {
@@ -40,22 +50,12 @@ public class Money {
         if (!(o instanceof Money)) {
             return false;
         }
-        Money money1 = (Money)o;
+        Money money1 = (Money) o;
         return money == money1.money;
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(money);
-    }
-
-    private void validatePositive(long money) {
-        if (money < MINIMUM_MONEY) {
-            throw new IllegalArgumentException("돈은 0이상이어야 한다.");
-        }
-    }
-
-    public boolean isGreaterThan(Money money) {
-        return this.money >= money.money;
     }
 }

@@ -13,27 +13,14 @@ public class Store {
     private Money leftMoney;
 
     public Store(int money, LottoGenerator lottoGenerator) {
-        validateOverLimit(money);
-        validateUnderLimit(money);
+        validateMoneyRange(money);
         this.leftMoney = new Money(money);
         this.lottoGenerator = lottoGenerator;
     }
 
-    public List<Lotto> buyLottos() {
-        List<Lotto> lottos = new ArrayList<>();
-        while (canBuy()) {
-            lottos.add(buy());
-        }
-        return lottos;
-    }
-
-    private Lotto buy() {
-        leftMoney = leftMoney.minus(new Money(LOTTO_PRICE));
-        return lottoGenerator.generate();
-    }
-
-    private boolean canBuy() {
-        return leftMoney.isGreaterThan(new Money(LOTTO_PRICE));
+    private void validateMoneyRange(int money) {
+        validateOverLimit(money);
+        validateUnderLimit(money);
     }
 
     private void validateOverLimit(int money) {
@@ -46,5 +33,22 @@ public class Store {
         if (money < UNDER_LIMIT_MONEY) {
             throw new IllegalArgumentException("입력금액은 1,000원 이상이어야 한다.");
         }
+    }
+
+    public List<Lotto> buyLottos() {
+        List<Lotto> lottos = new ArrayList<>();
+        while (canBuy()) {
+            lottos.add(buy());
+        }
+        return lottos;
+    }
+
+    private boolean canBuy() {
+        return leftMoney.isGreaterThan(new Money(LOTTO_PRICE));
+    }
+
+    private Lotto buy() {
+        leftMoney = leftMoney.minus(new Money(LOTTO_PRICE));
+        return lottoGenerator.generate();
     }
 }

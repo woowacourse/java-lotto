@@ -14,6 +14,12 @@ public class Number {
         this.number = number;
     }
 
+    private void validateRangeOfNumber(int number) {
+        if (number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER) {
+            throw new IllegalArgumentException("로또 번호는 1이상 45이하이어야 한다.");
+        }
+    }
+
     public int getNumber() {
         return number;
     }
@@ -26,18 +32,12 @@ public class Number {
         if (!(o instanceof Number)) {
             return false;
         }
-        Number number = (Number)o;
+        Number number = (Number) o;
         return this.number == number.number;
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(number);
-    }
-
-    private void validateRangeOfNumber(int number) {
-        if (number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER) {
-            throw new IllegalArgumentException("로또 번호는 1이상 45이하이어야 한다.");
-        }
     }
 }

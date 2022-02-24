@@ -27,16 +27,16 @@ public enum Rank {
         return getRank(countMatchBonus(matchCount, matchBonus));
     }
 
-    public static Money calculateReward(List<Rank> ranks) {
-        Money reward = new Money(0L);
-        for (Rank rank : ranks) {
-            reward = reward.plus(rank.reward);
-        }
-        return reward;
-    }
-
     private static boolean isSecond(int matchCount, boolean matchBonus) {
         return equalMatchCount(Rank.SECOND.matchCount, matchCount) && matchBonus;
+    }
+
+    private static Rank getRank(int matchCount) {
+        return Arrays.stream(Rank.values())
+                .filter(rank -> equalMatchCount(matchCount, rank.matchCount))
+                .filter(Rank::isNotSecond)
+                .findAny()
+                .orElse(Rank.NONE);
     }
 
     private static int countMatchBonus(int matchCount, boolean matchBonus) {
@@ -47,20 +47,20 @@ public enum Rank {
         return matchCount;
     }
 
-    private static Rank getRank(int matchCount) {
-        return Arrays.stream(Rank.values())
-            .filter(rank -> equalMatchCount(matchCount, rank.matchCount))
-            .filter(Rank::isNotSecond)
-            .findAny()
-            .orElse(Rank.NONE);
-    }
-
     private static boolean equalMatchCount(int matchCount, int otherMatchCount) {
         return matchCount == otherMatchCount;
     }
 
     private static boolean isNotSecond(Rank rank) {
         return rank != Rank.SECOND;
+    }
+
+    public static Money calculateReward(List<Rank> ranks) {
+        Money reward = new Money(0L);
+        for (Rank rank : ranks) {
+            reward = reward.plus(rank.reward);
+        }
+        return reward;
     }
 
     public int findRewardCount(List<Rank> ranks) {
