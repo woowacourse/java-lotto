@@ -7,6 +7,8 @@ import java.util.Map;
 
 public class Lotteries {
 
+	private static final int INITIAL_RANKS = 0;
+
 	private final List<Lottery> lotteries;
 
 	public Lotteries(final List<List<Integer>> lotteriesNumber) {
@@ -28,18 +30,17 @@ public class Lotteries {
 		return winners;
 	}
 
+	private Map<Rank, Integer> initRankResult() {
+		final Map<Rank, Integer> rankResult = new HashMap<>();
+		Rank.getValues()
+			.forEach((rank) -> rankResult.put(rank, INITIAL_RANKS));
+		return rankResult;
+	}
+
 	private void putCountToWinner(Map<Rank, Integer> winners, Rank rank) {
 		if (!rank.equals(Rank.NONE)) {
 			winners.put(rank, winners.get(rank) + 1);
 		}
 	}
-
-	private Map<Rank, Integer> initRankResult() {
-		final Map<Rank, Integer> rankResult = new HashMap<>();
-		Rank.getValues()
-			.forEach((rank) -> rankResult.put(rank, 0));
-		return rankResult;
-	}
-
 
 }
