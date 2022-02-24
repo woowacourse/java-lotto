@@ -27,18 +27,26 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber getInstance(int number) {
+        validateNumberRange(number);
+        return lottoNumbers.get(number);
+    }
+
+    private static void validateNumberRange(int number) {
         if (number < MINIMUM_LOTTO_NUMBER || number > MAXIMUM_LOTTO_NUMBER) {
             throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_RANGE);
         }
-        return lottoNumbers.get(number);
     }
 
     public static LottoNumber createBonus(int inputBonusNumber, LottoTicketNumbers winningNumbers) {
         LottoNumber bonusNumber = LottoNumber.getInstance(inputBonusNumber);
+        validateBonusNumber(winningNumbers, bonusNumber);
+        return bonusNumber;
+    }
+
+    private static void validateBonusNumber(LottoTicketNumbers winningNumbers, LottoNumber bonusNumber) {
         if (winningNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException(INVALID_BONUS_NUMBER);
         }
-        return bonusNumber;
     }
 
     public static List<LottoNumber> getNumbers() {
