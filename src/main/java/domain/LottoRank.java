@@ -9,6 +9,8 @@ public enum LottoRank {
     RANK_1(6, 2000000000),
     RANK_NOTHING(0, 0);
 
+    private static final int SECOND_AND_THIRD_RANK_COUNT = 5;
+
     private final int count;
     private final int price;
 
@@ -20,7 +22,7 @@ public enum LottoRank {
     public static LottoRank getRankByCountAndBonus(int count, boolean bonus) {
         for (LottoRank rank : LottoRank.values()) {
             if (rank.count == count) {
-                if (count == 5) {
+                if (count == SECOND_AND_THIRD_RANK_COUNT) {
                     if (bonus) {
                         return RANK_2;
                     }

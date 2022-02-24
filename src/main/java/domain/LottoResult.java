@@ -5,6 +5,8 @@ import java.util.Map;
 
 public class LottoResult {
 
+    private static final int DEFAULT_VALUE = 0;
+
     private final Map<LottoRank, Integer> resultCount;
 
     public LottoResult() {
@@ -13,12 +15,12 @@ public class LottoResult {
             if (rank == LottoRank.RANK_NOTHING) {
                 continue;
             }
-            resultCount.put(rank, 0);
+            resultCount.put(rank, DEFAULT_VALUE);
         }
     }
 
     public long sumTotalPrice() {
-        long totalPrice = 0;
+        long totalPrice = DEFAULT_VALUE;
         for (LottoRank rank : resultCount.keySet()) {
             totalPrice += (long) rank.getPrice() * resultCount.get(rank);
         }

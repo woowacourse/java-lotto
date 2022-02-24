@@ -8,30 +8,34 @@ import java.util.Map;
 
 public class OutputView {
 
+    private static final String PURCHASED_LOTTO_COUNT_SUFFIX = "개를 구매했습니다.";
+    private static final String LOTTO_RESULT_PREFIX = "당첨 통계\n---------";
+    private static final String LOTTO_RESULT_WITH_BONUS_BALL_FORMAT = "%d개 일치, 보너스볼 일치(%d원)- %d개\n";
+    private static final String LOTTO_RESULT_FORMAT = "%d개 일치 (%d원)- %d개\n";
+    private static final String  PROFIT_RATE_RESULT_PREFIX = "총 수익률은 ";
+    private static final String PROFIT_RATE_RESULT_SUFFIX = "입니다.";
+
     public static void printPurchasedLotto(LottoTicket lottoTicket) {
-        System.out.println(lottoTicket.getLottos().size() + "개를 구매했습니다.");
+        System.out.println(lottoTicket.getLottos().size() + PURCHASED_LOTTO_COUNT_SUFFIX);
         for (Lotto lotto : lottoTicket.getLottos()) {
             System.out.println(lotto);
         }
     }
 
     public static void printLottoResult(LottoResult lottoResult) {
-        System.out.println(
-                "당첨 통계\n"
-                + "---------");
+        System.out.println(LOTTO_RESULT_PREFIX);
         Map<LottoRank, Integer> resultCount = lottoResult.getResultCount();
         for (LottoRank rank : resultCount.keySet()) {
             if (rank.equals(LottoRank.RANK_2)) {
-                System.out.printf("%d개 일치, 보너스볼 일치(%d원)- %d개\n",
+                System.out.printf(LOTTO_RESULT_WITH_BONUS_BALL_FORMAT,
                         rank.getCount(), rank.getPrice(), resultCount.get(rank));
                 continue;
             }
-            System.out.printf("%d개 일치 (%d원)- %d개\n", rank.getCount(), rank.getPrice(), resultCount.get(rank));
-
+            System.out.printf(LOTTO_RESULT_FORMAT, rank.getCount(), rank.getPrice(), resultCount.get(rank));
         }
     }
 
     public static void printProfitRate(double calculateProfit) {
-        System.out.println("총 수익률은 " + calculateProfit + "입니다.");
+        System.out.println(PROFIT_RATE_RESULT_PREFIX + calculateProfit + PROFIT_RATE_RESULT_SUFFIX);
     }
 }

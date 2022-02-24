@@ -6,6 +6,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lotto {
+
+    public static final int LOTTO_NUMBER_MAXIMUM = 45;
+    public static final int LOTTO_NUMBER_MINIMUM = 1;
+
+    private static final String DELIMITER = ", ";
+    private static final String PREFIX = "[";
+    private static final String SUFFIX = "]";
+
     private final List<Integer> lottoNumbers = new ArrayList<>();
 
     public Lotto(List<Integer> lottoNumbers) {
@@ -21,7 +29,7 @@ public class Lotto {
     }
 
     private void validateNumberRange(Integer lottoNumber) {
-        if (lottoNumber > 45 || lottoNumber <= 0) {
+        if (lottoNumber > LOTTO_NUMBER_MAXIMUM || lottoNumber < LOTTO_NUMBER_MINIMUM) {
             throw new IllegalArgumentException();
         }
     }
@@ -41,6 +49,6 @@ public class Lotto {
         List<String> numbersToStrings = lottoNumbers.stream()
                 .map(String::valueOf)
                 .collect(Collectors.toList());
-        return "[" + String.join(", ", numbersToStrings) + "]";
+        return PREFIX + String.join(DELIMITER, numbersToStrings) + SUFFIX;
     }
 }

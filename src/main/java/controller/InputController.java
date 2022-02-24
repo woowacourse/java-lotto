@@ -8,6 +8,8 @@ import view.InputView;
 
 public class InputController {
 
+    private static final String LOTTO_NUMBER_INPUT_DELIMITER = ",";
+
     public int getMoney() {
         String inputMoney = InputView.scanMoney();
         Validator.validateInteger(inputMoney);
@@ -17,7 +19,7 @@ public class InputController {
     }
 
     public List<Integer> getWinningLottoNumbers() {
-        String[] inputWinningLottoNumbers = InputView.scanWinningLottoNumbers().split(",");
+        String[] inputWinningLottoNumbers = InputView.scanWinningLottoNumbers().split(LOTTO_NUMBER_INPUT_DELIMITER);
         Validator.validateWinningNumberInput(inputWinningLottoNumbers);
         return Arrays.stream(inputWinningLottoNumbers)
                 .mapToInt(Integer :: parseInt)

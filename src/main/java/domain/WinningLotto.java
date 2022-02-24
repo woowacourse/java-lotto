@@ -4,6 +4,8 @@ import java.util.List;
 
 public class WinningLotto {
 
+    private static final int DEFAULT_VALUE = 0;
+
     private final List<Integer> winningNumbers;
     private final int bonusNumber;
 
@@ -21,7 +23,7 @@ public class WinningLotto {
 
     public LottoRank countLottoRank(Lotto lotto) {
         List<Integer> lottoNumbers = lotto.getLottoNumbers();
-        int count = 0;
+        int count = DEFAULT_VALUE;
         for (Integer lottoNumber : lottoNumbers) {
             if (this.winningNumbers.contains(lottoNumber)) {
                 count++;
