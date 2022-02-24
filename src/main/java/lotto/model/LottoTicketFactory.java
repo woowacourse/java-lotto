@@ -8,37 +8,36 @@ import java.util.stream.IntStream;
 import lotto.model.lottonumbers.LottoTicket;
 
 public class LottoTicketFactory {
-    private static final LottoTicketFactory lottoTicketFactory = new LottoTicketFactory();
-
     private static final int LOTTO_PRICE = 1000;
 
-    private final List<LottoNumber> availableLottoNumbers;
+    private static final List<LottoNumber> availableLottoNumbers;
 
-    private LottoTicketFactory() {
+    static {
         availableLottoNumbers = createLottoNumbers();
     }
 
-    public static LottoTicketFactory getInstance() {
-        return lottoTicketFactory;
+    private LottoTicketFactory() {
+        throw new IllegalStateException("[ERROR] LottoTicketFactory 는 유틸 클래스이므로 인스턴스 생성을 불허 합니다.");
     }
 
-    private List<LottoNumber> createLottoNumbers() {
+    private static List<LottoNumber> createLottoNumbers() {
         return IntStream.rangeClosed(1, 45)
                 .mapToObj(i -> new LottoNumber(String.valueOf(i)))
                 .collect(Collectors.toList());
     }
 
-    public List<LottoTicket> createTickets(int money) {
-        return IntStream.range(0, getAvailableLottoTicketsCount(money))
-                .mapToObj(i -> createTicket())
+    public static List<LottoTicket> createTickets(int money) {
+        int ticketNumbers = getAvailableLottoTicketsCount(money);
+        return IntStream.range(0, ticketNumbers)
+                .mapToObj(i -> createTicketShuffled())
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    private int getAvailableLottoTicketsCount(int money) {
+    private static int getAvailableLottoTicketsCount(int money) {
         return money / LOTTO_PRICE;
     }
 
-    private LottoTicket createTicket() {
+    private static LottoTicket createTicketShuffled() {
         Collections.shuffle(availableLottoNumbers);
         return new LottoTicket(new ArrayList<>(availableLottoNumbers.subList(0, 6)));
     }

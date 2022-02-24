@@ -9,7 +9,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 class LottoTicketFactoryTest {
-    private final LottoTicketFactory lottoTicketFactory = LottoTicketFactory.getInstance();
 
     @ParameterizedTest
     @CsvSource(value = {"7500,7", "8000,8"})
@@ -18,7 +17,7 @@ class LottoTicketFactoryTest {
         // given
 
         // when
-        List<LottoTicket> lottoTickets = lottoTicketFactory.createTickets(money);
+        List<LottoTicket> lottoTickets = LottoTicketFactory.createTickets(money);
 
         // then
         assertThat(lottoTickets.size()).isEqualTo(ticketCount);
