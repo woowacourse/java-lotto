@@ -1,17 +1,15 @@
 package controller;
 
+import java.util.Arrays;
+
 import model.*;
 import view.InputView;
 import view.OutputView;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class LottoController {
     private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
 
-    private LottoCount lottoCount;
     private LottoStorage lottoStorage;
     private LottoWinningNumber lottoWinningNumber;
     private BonusBall bonusBall;
@@ -35,10 +33,8 @@ public class LottoController {
 
     private void makeLottos() {
         try {
-            lottoCount = new LottoCount(inputView.inputMoney());
-
-            storeMoneyInRateOfReturn();
-
+            LottoCount lottoCount = new LottoCount(inputView.inputMoney());
+            storeMoneyInRateOfReturn(lottoCount);
             lottoStorage = new LottoStorage(lottoCount);
             outputView.printLottos(lottoStorage.getLottoStorageDTO());
         } catch (IllegalArgumentException e) {
@@ -47,7 +43,7 @@ public class LottoController {
         }
     }
 
-    private void storeMoneyInRateOfReturn() {
+    private void storeMoneyInRateOfReturn(LottoCount lottoCount) {
         rateOfReturn = new RateOfReturn(lottoCount);
     }
 
