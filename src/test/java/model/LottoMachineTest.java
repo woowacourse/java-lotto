@@ -3,7 +3,6 @@ package model;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
-import model.LottoNumbersGeneratorTest.LottoNumbersGeneratorStub;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -44,29 +43,11 @@ public class LottoMachineTest {
     @Test
     @DisplayName("1등 로또 한개의 결과 구하기")
     void summarizeOnlyOneFirstRankLotto() {
-        LottoResult lottoResult = lottoMachine.summarize(List.of(FIRST_PRIZE_LOTTO_NUMBERS));
+        lottoMachine.issueLotto(new Money(1000));
+        LottoResult lottoResult = lottoMachine.summarize();
 
         assertThat(lottoResult.getTotalPrize()).isEqualTo(FIRST_PRIZE);
         assertThat(lottoResult.getCountByRank(LottoRank.FIRST)).isEqualTo(1);
-    }
-
-    @Test
-    @DisplayName("다양한 로또 순위들의 결과 구하기")
-    void summarizeMultiRankLotto() {
-        LottoResult result = lottoMachine
-            .summarize(List.of(FIRST_PRIZE_LOTTO_NUMBERS, FIRST_PRIZE_LOTTO_NUMBERS,
-                SECOND_PRIZE_LOTTO_NUMBERS, THIRD_PRIZE_LOTTO_NUMBERS,
-                THIRD_PRIZE_LOTTO_NUMBERS, NOTHING_PRIZE_LOTTO_NUMBERS));
-
-        Money expectedPrize = FIRST_PRIZE.add(FIRST_PRIZE).add(SECOND_PRIZE).add(THIRD_PRIZE)
-            .add(THIRD_PRIZE);
-        assertThat(result.getTotalPrize()).isEqualTo(expectedPrize);
-        assertThat(result.getCountByRank(LottoRank.FIRST)).isEqualTo(2);
-        assertThat(result.getCountByRank(LottoRank.SECOND)).isEqualTo(1);
-        assertThat(result.getCountByRank(LottoRank.THIRD)).isEqualTo(2);
-        assertThat(result.getCountByRank(LottoRank.FOURTH)).isEqualTo(0);
-        assertThat(result.getCountByRank(LottoRank.FIFTH)).isEqualTo(0);
-        assertThat(result.getCountByRank(LottoRank.NOTHING)).isEqualTo(1);
     }
 
     @Test

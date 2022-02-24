@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.stream.IntStream;
 
-public class RandomLottoNumbersGenerator extends LottoNumbersGenerator{
+public class RandomLottoNumbersGenerator implements LottoNumbersGenerator{
     private final List<Integer> numberPool;
 
     public RandomLottoNumbersGenerator(int start, int end) {

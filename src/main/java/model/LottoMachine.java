@@ -3,6 +3,8 @@ package model;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoMachine {
     private final static Money LOTTO_PRICE = new Money(1000);
@@ -16,20 +18,22 @@ public class LottoMachine {
         this.issuedLottoNumbers = new ArrayList<>();
     }
 
-    public LottoResult summarize(List<LottoNumbers> lottoNumbersList) {
-        LottoResult result = new LottoResult();
-        lottoNumbersList.stream()
-            .map(winningLottoNumbers::getRankBy)
-            .forEach(result::add);
-        return result;
-    }
-
     public void issueLotto(Money money) {
         BigDecimal shareValue = money.divide(LOTTO_PRICE);
-        issuedLottoNumbers = lottoNumbersGenerator.generate(shareValue.intValue());
+        issuedLottoNumbers = generate(shareValue.intValue());
     }
 
     public LottoResult summarize() {
-        return summarize(issuedLottoNumbers);
+        LottoResult result = new LottoResult();
+        issuedLottoNumbers.stream()
+                .map(winningLottoNumbers::getRankBy)
+                .forEach(result::add);
+        return result;
+    }
+
+    public List<LottoNumbers> generate(int quantity) {
+        return IntStream.range(0, quantity)
+                .mapToObj(i -> lottoNumbersGenerator.createLottoNumbers())
+                .collect(Collectors.toList());
     }
 }
