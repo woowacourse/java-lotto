@@ -25,7 +25,20 @@ public class LottoMachineTest {
 
     @BeforeEach
     void setUp() {
-        lottoMachine = new LottoMachine(new WinningLottoNumbers(WINNING_LOTTO_NUMBERS, BONUS), new LottoNumbersGeneratorStub());
+        lottoMachine = new LottoMachine(new WinningLottoNumbers(WINNING_LOTTO_NUMBERS, BONUS),
+            new LottoNumbersGenerator() {
+                LottoNumbers[] lottoNumbers = {
+                    FIRST_PRIZE_LOTTO_NUMBERS, FIRST_PRIZE_LOTTO_NUMBERS,
+                    SECOND_PRIZE_LOTTO_NUMBERS, THIRD_PRIZE_LOTTO_NUMBERS,
+                    THIRD_PRIZE_LOTTO_NUMBERS, NOTHING_PRIZE_LOTTO_NUMBERS
+                };
+                int index = 0;
+
+                @Override
+                public LottoNumbers createLottoNumbers() {
+                    return lottoNumbers[index++];
+                }
+            });
     }
 
     @Test
@@ -44,6 +57,23 @@ public class LottoMachineTest {
             .summarize(List.of(FIRST_PRIZE_LOTTO_NUMBERS, FIRST_PRIZE_LOTTO_NUMBERS,
                 SECOND_PRIZE_LOTTO_NUMBERS, THIRD_PRIZE_LOTTO_NUMBERS,
                 THIRD_PRIZE_LOTTO_NUMBERS, NOTHING_PRIZE_LOTTO_NUMBERS));
+
+        Money expectedPrize = FIRST_PRIZE.add(FIRST_PRIZE).add(SECOND_PRIZE).add(THIRD_PRIZE)
+            .add(THIRD_PRIZE);
+        assertThat(result.getTotalPrize()).isEqualTo(expectedPrize);
+        assertThat(result.getCountByRank(LottoRank.FIRST)).isEqualTo(2);
+        assertThat(result.getCountByRank(LottoRank.SECOND)).isEqualTo(1);
+        assertThat(result.getCountByRank(LottoRank.THIRD)).isEqualTo(2);
+        assertThat(result.getCountByRank(LottoRank.FOURTH)).isEqualTo(0);
+        assertThat(result.getCountByRank(LottoRank.FIFTH)).isEqualTo(0);
+        assertThat(result.getCountByRank(LottoRank.NOTHING)).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("다양한 로또 순위 구하기")
+    void summarize() {
+        lottoMachine.issueLotto(new Money(6000));
+        LottoResult result = lottoMachine.summarize();
 
         Money expectedPrize = FIRST_PRIZE.add(FIRST_PRIZE).add(SECOND_PRIZE).add(THIRD_PRIZE)
             .add(THIRD_PRIZE);
