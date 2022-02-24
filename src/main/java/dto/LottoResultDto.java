@@ -1,10 +1,10 @@
 package dto;
 
 import domain.Rank;
-import domain.TrialNumber;
-import domain.WinningCount;
 import java.util.Map;
 import java.util.Objects;
+import vo.TrialNumber;
+import vo.WinningCount;
 
 public class LottoResultDto {
     private final Map<Rank, WinningCount> lottoWinningResult;
