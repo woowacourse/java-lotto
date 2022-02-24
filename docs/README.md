@@ -49,7 +49,7 @@
 #### LottoReward
 - 당첨 기준 정보와 금액을 담고있다.
 
-#### LottoResult
+#### WinningStatistics
 - 로또 당첨 결과와 수익률을 담고있다.
 
 #### LottoGame
@@ -57,4 +57,13 @@
 - 로또 당첨 결과를 관리한다.
 
 #### LottoNumbersGenerator
-- 6개의 로또 번호들을 생성하는 책임을 가진다. 
+- 로또 번호를 생성하는 전략의 책임을 가진다.
+
+#### RandomLottoNumberGenerator
+- 6개의 로또 번호들을 랜덤으로 생성하는 책임을 가진다.
+
+#### InputView 
+- 입력에 대한 책임을 가지고 요구조건에 적힌 입력 검증의 책임을 가진다.
+
+#### OutputView
+- 출력에 대한 책임을 가지고 요구조건에 적힌 출력의 형식을 제공하는 책임을 가진다.
