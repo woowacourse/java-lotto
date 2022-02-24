@@ -46,6 +46,8 @@ public enum Rank {
     SECOND(5, 30000000, 0, true),
     FIRST(6, 2000000000, 0);
 
+    private static final int DEFAULT_TOTAL_INCOME = 0;
+
     private int criteria;
     private int reward;
     private int hitCount;
@@ -64,7 +66,7 @@ public enum Rank {
         this.hitBonusBall = hitBonusBall;
     }
 
-    public static double calculateAllResult(List<Result> results){
+    public static double calculateAllResult(List<Result> results) {
         for (Result result : results) {
             calculateResult(result);
         }
@@ -72,7 +74,7 @@ public enum Rank {
     }
 
     private static double calculateTotalIncome() {
-        double totalIncome = 0;
+        double totalIncome = DEFAULT_TOTAL_INCOME;
         for (Rank value : Rank.values()) {
             totalIncome += value.reward * value.hitCount;
         }

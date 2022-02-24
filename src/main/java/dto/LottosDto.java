@@ -20,26 +20,18 @@ public class LottosDto {
     public static LottosDto from(List<Lotto> lottos) {
 =======
 import domain.Lotto;
-import domain.LottoNumber;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class LottosDto {
+
     int quantity;
     List<LottoDto> lottoDtos;
 
     public LottosDto(List<LottoDto> lottoDtos) {
         this.lottoDtos = lottoDtos;
         this.quantity = lottoDtos.size();
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public List<LottoDto> getLottoDtos() {
-        return lottoDtos;
     }
 
     public static LottosDto from(List<Lotto> lottos){
@@ -52,14 +44,22 @@ public class LottosDto {
         return new LottosDto(lottoDtos);
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> e6945bb (style: 코드 포멧팅)
 
     public int getQuantity() {
         return quantity;
     }
 
     public List<LottoDto> getLottoDtos() {
+<<<<<<< HEAD
         return Collections.unmodifiableList(lottoDtos);
     }
 =======
 >>>>>>> f80fb84 (feat: DTO 추가)
+=======
+        return lottoDtos;
+    }
+>>>>>>> e6945bb (style: 코드 포멧팅)
 }

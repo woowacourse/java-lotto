@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 
 public class LottoDto {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     private final List<Integer> lottoNumber;
 
@@ -32,6 +33,9 @@ public class LottoDto {
         return Collections.unmodifiableList(lottoNumber);
     }
 =======
+=======
+
+>>>>>>> e6945bb (style: 코드 포멧팅)
     private List<Integer> lottoNumber;
 
     public LottoDto(List<Integer> lottoNumber) {
