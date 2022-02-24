@@ -42,11 +42,6 @@ public class WinningTicket {
         return lottoNumbers.contains(bonusNumberValue());
     }
 
-    public boolean isSecondWinning(LottoTicket lottoTicket) {
-        return compareMatchCount(lottoTicket) == SECOND_WINNING_COUNT &&
-                matchBonusNumber(lottoTicket);
-    }
-
     private void checkSize(List<Integer> winningNumbers) {
         if (winningNumbers.size() != TICKET_SIZE) {
             throw new IllegalArgumentException();

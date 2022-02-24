@@ -11,12 +11,6 @@ public class LottoGame {
     private static final int WINNING_FLAG = 3;
     private static final int TICKET_PRICE = 1000;
 
-    private final Map<Integer, WinningPrize> winningInfo = new HashMap<>() {{
-        put(6, WinningPrize.FIRST);
-        put(5, WinningPrize.THIRD);
-        put(4, WinningPrize.FOURTH);
-        put(3, WinningPrize.FIFTH);
-    }};
     private final LottoTickets lottoTickets;
     private final WinningTicket winningTicket;
     private final WinningPrizeStrategy winningPrizeStrategy;
