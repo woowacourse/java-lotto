@@ -8,6 +8,7 @@ import lotto.exception.LottoException;
 import lotto.exception.LottoExceptionStatus;
 import lotto.exception.ball.BallNumberExceptionStatus;
 import lotto.exception.credit.CreditMoneyExceptionStatus;
+import lotto.utils.Delimiter;
 import lotto.view.input.reader.Reader;
 
 public class InputView {
@@ -36,10 +37,14 @@ public class InputView {
 
     public List<Integer> requestWinningNumbers() {
         final String inputValue = reader.readLine();
-        return Arrays.stream(inputValue.split(",", -1))
+        return Arrays.stream(Delimiter.splitWithComma(appendSpaceBeforeSplit(inputValue)))
                 .map(String::trim)
                 .map(this::parseWinningNumber)
                 .collect(Collectors.toUnmodifiableList());
+    }
+
+    private String appendSpaceBeforeSplit(final String targetString) {
+        return Delimiter.appendSpaceBehind(targetString);
     }
 
     private int parseWinningNumber(final String inputValue) {
