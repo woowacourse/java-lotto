@@ -2,6 +2,7 @@ package model.lotto;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import model.winningnumber.LottoWinningNumberDTO;
 import model.result.Statistics;
@@ -49,5 +50,18 @@ public class Lotto {
         Arrays.stream(Statistics.values())
                 .filter(statistics -> statistics.getMatchNumber() == count)
                 .forEach(Statistics::addCount);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(numbers, lotto.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
     }
 }

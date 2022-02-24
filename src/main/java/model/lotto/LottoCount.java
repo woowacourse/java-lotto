@@ -2,6 +2,8 @@ package model.lotto;
 
 import utils.InputValidateUtils;
 
+import java.util.Objects;
+
 public class LottoCount {
     private static final int ZERO = 0;
     private static final int UNIT = 1000;
@@ -38,6 +40,19 @@ public class LottoCount {
 
     public int getCount() {
         return count;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoCount that = (LottoCount) o;
+        return count == that.count;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(count);
     }
 }
 

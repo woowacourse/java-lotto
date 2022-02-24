@@ -2,6 +2,8 @@ package model.bonusball;
 
 import utils.InputValidateUtils;
 
+import java.util.Objects;
+
 public class BonusBall {
     private static final String BONUS_BALL_BLANK_ERROR_MESSAGE = "[Error]: 보너스 볼을 입력해주세요.";
     private static final String BONUS_BALL_NUMBER_ERROR_MESSAGE = "[Error]: 보너스 볼은 숫자여야 합니다.";
@@ -28,4 +30,16 @@ public class BonusBall {
         return number;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BonusBall bonusBall = (BonusBall) o;
+        return number == bonusBall.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
+    }
 }

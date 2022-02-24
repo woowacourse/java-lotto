@@ -2,6 +2,7 @@ package model.winningnumber;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import utils.InputValidateUtils;
@@ -74,4 +75,16 @@ public class LottoWinningNumber {
         return winningNumbers;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoWinningNumber that = (LottoWinningNumber) o;
+        return Objects.equals(winningNumbers, that.winningNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(winningNumbers);
+    }
 }
