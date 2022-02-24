@@ -54,12 +54,12 @@ public class LottoController {
 
     private WinningNumbers createWinningNumbers() {
         try {
-            List<Integer> winningNumbers = inputView.getNormalWinningNumbers();
-            int bonusNumber = inputView.getBonusNumber();
+            List<String> winningNumbers = inputView.getNormalWinningNumbers();
+            String bonusNumber = inputView.getBonusNumber();
 
-            return new WinningNumbers(winningNumbers, bonusNumber);
-        } catch (NumberFormatException e) {
-            outputView.printErrorMessage("숫자를 입력해주세요.");
+            return WinningNumbers.create(winningNumbers, bonusNumber);
+        } catch (IllegalArgumentException e) {
+            outputView.printErrorMessage(e.getMessage());
 
             return createWinningNumbers();
         }
