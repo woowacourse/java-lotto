@@ -8,7 +8,7 @@ public enum Rank {
 	FOURTH_GRADE(4, false, 50_000L),
 	THIRD_GRADE(5, false, 1_500_000L),
 	SECOND_GRADE(5, true, 30_000_000L),
-	FIRST_GRADE(6, false, 3_000_000_000L);
+	FIRST_GRADE(6, false, 2_000_000_000L);
 
 	private final int matchCount;
 	private final boolean bonusMatched;
