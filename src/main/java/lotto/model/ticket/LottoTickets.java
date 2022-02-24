@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.model.money.Money;
 import lotto.model.result.LottoRank;
+import lotto.model.result.LottoRanks;
 import lotto.model.utils.NumberGenerator;
 
 public class LottoTickets {
@@ -32,11 +33,11 @@ public class LottoTickets {
         return tickets.size();
     }
 
-    public List<LottoRank> compareResult(WinningTicket winningTicket) {
+    public LottoRanks compareResult(WinningTicket winningTicket) {
         List<LottoRank> lottoRanks = new ArrayList<>();
         for (LottoTicket ticket : tickets) {
             lottoRanks.add(winningTicket.compare(ticket));
         }
-        return lottoRanks;
+        return new LottoRanks(lottoRanks);
     }
 }

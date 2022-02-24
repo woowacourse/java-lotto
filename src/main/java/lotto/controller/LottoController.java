@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lotto.model.money.Money;
 import lotto.model.result.LottoRank;
+import lotto.model.result.LottoRanks;
 import lotto.model.result.LottoStatistics;
 import lotto.model.ticket.LottoTicket;
 import lotto.model.ticket.LottoTickets;
@@ -22,7 +23,7 @@ public class LottoController {
         OutputView.outputTickets(lottoTickets);
         WinningTicket winningTicket = makeWinningTicket();
 
-        List<LottoRank> lottoRanks = lottoTickets.compareResult(winningTicket);
+        LottoRanks lottoRanks = lottoTickets.compareResult(winningTicket);
         LottoStatistics lottoStatistics = new LottoStatistics(lottoRanks);
         OutputView.outputStatistics(lottoStatistics, money);
     }

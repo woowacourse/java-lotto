@@ -4,6 +4,7 @@ import java.util.List;
 
 import lotto.model.money.Money;
 import lotto.model.result.LottoRank;
+import lotto.model.result.LottoRanks;
 import lotto.model.result.LottoStatistics;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -17,7 +18,7 @@ public class LottoStatisticsTest {
         // given
         List<LottoRank> ranks = List.of(LottoRank.values());
         // when
-        LottoStatistics statistics = new LottoStatistics(ranks);
+        LottoStatistics statistics = new LottoStatistics(new LottoRanks(ranks));
         // then
         Assertions.assertThat(statistics).isNotNull();
     }
@@ -28,7 +29,7 @@ public class LottoStatisticsTest {
         // given
         List<LottoRank> ranks = List.of(LottoRank.FIRST, LottoRank.SECOND, LottoRank.SECOND);
         // when
-        LottoStatistics statistics = new LottoStatistics(ranks);
+        LottoStatistics statistics = new LottoStatistics(new LottoRanks(ranks));
         // then
         Assertions.assertThat(statistics.count(LottoRank.SECOND)).isEqualTo(2L);
     }
@@ -39,7 +40,7 @@ public class LottoStatisticsTest {
         Money money = Money.of(3000);
         List<LottoRank> ranks = List.of(LottoRank.FIFTH, LottoRank.SIXTH, LottoRank.SIXTH);
         // when
-        LottoStatistics statistics = new LottoStatistics(ranks);
+        LottoStatistics statistics = new LottoStatistics(new LottoRanks(ranks));
         // then
         Assertions.assertThat(statistics.calculateEarningRates(money)).isEqualTo((double)5000 / 3000);
     }
