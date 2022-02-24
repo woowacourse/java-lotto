@@ -1,6 +1,7 @@
 package lotto.view;
 
 import java.util.Scanner;
+import java.util.stream.Stream;
 import lotto.view.utils.IntegerUtils;
 
 public class InputView {
@@ -12,9 +13,13 @@ public class InputView {
         return IntegerUtils.parse(scanner.nextLine());
     }
 
-    public static int requestWinningNumber() {
+    public static int[] requestWinningNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return IntegerUtils.parse(scanner.nextLine());
+        return Stream.of(scanner
+                .nextLine()
+                .split(", "))
+                .mapToInt(Integer::parseInt)
+                .toArray();
     }
 
     public static int requestBonusBall() {
