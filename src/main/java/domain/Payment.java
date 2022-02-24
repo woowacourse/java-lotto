@@ -9,23 +9,16 @@ public class Payment {
 		this.payment = toInt(payment);
 	}
 
-	private int toInt(String payment) {
-		int changeInt = Integer.parseInt(payment);
-		checkDivideByLottoPrice(changeInt);
-		checkNegative(changeInt);
-		checkPaymentLimit(changeInt);
-		return changeInt;
+	private int toInt(String input) {
+		int payment = Integer.parseInt(input);
+		checkGreaterThanLottoPrice(payment);
+		checkPaymentLimit(payment);
+		return payment;
 	}
 
-	private void checkDivideByLottoPrice(int payment) {
-		if (payment % LOTTO_PRICE != 0) {
-			throw new IllegalArgumentException("1000원 단위로 입력해주세요!");
-		}
-	}
-
-	private void checkNegative(int payment) {
-		if (payment < 0) {
-			throw new IllegalArgumentException("음수는 불가능합니다.");
+	private void checkGreaterThanLottoPrice(int payment) {
+		if (payment < LOTTO_PRICE) {
+			throw new IllegalArgumentException("금액이 로또 가격보다 작습니다.");
 		}
 	}
 

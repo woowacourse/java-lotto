@@ -12,25 +12,18 @@ import org.junit.jupiter.api.Test;
 
 public class PaymentTest {
 
-	@DisplayName("구입금액이 로또 가격으로 나뉘어 떨어지지 않음")
+	@DisplayName("로또 가격보다 작은 경우 실패")
 	@Test
-	void division_fail() {
-		assertThatThrownBy(() -> new Payment("2500"))
+	void input_less_than_lotto_price() {
+		assertThatThrownBy(() -> new Payment("500"))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 
-	@DisplayName("구입금액이 로또 가격으로 나눠지면 성공")
+	@DisplayName("로또 가격보다 크거나 같은 경우 성공")
 	@Test
-	void division_success() {
-		assertThatCode(() -> new Payment("3000"))
-			.doesNotThrowAnyException();
-	}
-
-	@DisplayName("음수인 경우 실패")
-	@Test
-	void input_negative() {
-		assertThatThrownBy(() -> new Payment("-1000"))
-			.isInstanceOf(IllegalArgumentException.class);
+	void input_more_than_lotto_price() {
+		assertThatCode(() -> new Payment("1000"))
+				.doesNotThrowAnyException();
 	}
 
 	@DisplayName("숫자인 경우 성공")
