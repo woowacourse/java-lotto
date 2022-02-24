@@ -7,6 +7,7 @@ import java.util.Set;
 public class Ticket {
     private static final String REQUEST_NON_EMPTY_INPUT = "빈 문자를 입력할 수 없습니다.";
     private static final String REQUEST_NON_DUPLICATED_NUMBER = "중복되지 않은 숫자 6개를 입력해주세요.";
+    public static final String DELIMITER = ", ";
     private final Set<LottoNumber> lottoNumbers;
 
     public Ticket(LottoNumbersGenerator lottoNumbersGenerator) {
@@ -20,7 +21,7 @@ public class Ticket {
 
     public static Ticket of(String winNumbersInput) {
         checkEmpty(winNumbersInput);
-        List<String> splitWinNumbers = List.of(winNumbersInput.split(", ", -1));
+        List<String> splitWinNumbers = List.of(winNumbersInput.split(DELIMITER, -1));
         Set<LottoNumber> winNumbers = new HashSet<>();
         for (String winNumber : splitWinNumbers) {
             addWinLottoNumbers(winNumbers, winNumber);

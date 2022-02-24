@@ -1,6 +1,7 @@
 package domain;
 
 public class WinningNumbers {
+    private static final String REQUEST_NOT_DUPLICATE_NUMBER = "당첨 번호와 보너스 번호가 중복되지 않게 입력해주세요.";
     private final Ticket winTicket;
     private final LottoNumber bonusNumber;
 
@@ -12,7 +13,7 @@ public class WinningNumbers {
 
     private void checkContainsNumber(Ticket winTicket, LottoNumber bonusNumber) {
         if (winTicket.contains(bonusNumber)) {
-            throw new IllegalArgumentException("당첨 번호와 보너스 번호가 중복됩니다.");
+            throw new IllegalArgumentException(REQUEST_NOT_DUPLICATE_NUMBER);
         }
     }
 
@@ -29,6 +30,6 @@ public class WinningNumbers {
     }
 
     private boolean isSecondRank(Ticket ticket, int count) {
-        return count == 5 && ticket.contains(bonusNumber);
+        return count == Rank.SECOND.getCount() && ticket.contains(bonusNumber);
     }
 }

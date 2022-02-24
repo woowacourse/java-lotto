@@ -12,7 +12,9 @@ import domain.Tickets;
 
 public class OutputView {
 
-    public static final String PURCHASE_MESSAGE = "개를 구매했습니다.";
+    private static final String PURCHASE_MESSAGE = "개를 구매했습니다.";
+    private static final String LOSS_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+    private static final String DELIMITER = ", ";
 
     public static void printTicketCount(int ticketCount) {
         System.out.println(ticketCount + PURCHASE_MESSAGE);
@@ -23,7 +25,7 @@ public class OutputView {
         for (Ticket ticket : purchasedTickets) {
             System.out.print("[");
             Set<LottoNumber> lottoNumbers = ticket.getLottoNumbers();
-            System.out.print(String.join(", ", getLottoNumbers(lottoNumbers)));
+            System.out.print(String.join(DELIMITER, getLottoNumbers(lottoNumbers)));
             System.out.println("]");
         }
     }
@@ -70,7 +72,7 @@ public class OutputView {
     public static void printYield(double yield) {
         System.out.print("총 수익률은 " + yield + "입니다.");
         if (yield < 1) {
-            System.out.print("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+            System.out.print(LOSS_MESSAGE);
         }
         System.out.println();
     }

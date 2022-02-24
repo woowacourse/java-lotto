@@ -32,7 +32,7 @@ public class Tickets {
         SortedMap<Rank, Integer> result = new TreeMap<>(Comparator.comparingInt(Rank::getAmount));
 
         for (Rank rank : ranks) {
-            result.merge(rank, 1, (value, puValue) -> value + 1);
+            result.merge(rank, 1, (value, putValue) -> value + 1);
         }
         return result;
     }

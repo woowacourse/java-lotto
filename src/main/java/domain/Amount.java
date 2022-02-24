@@ -1,7 +1,9 @@
 package domain;
 
 public class Amount {
+    private static final String REQUEST_UNIT_OF_1000 = "1000원 단위로 입력해주세요.";
     private static final int LOTTO_PRICE = 1000;
+    private static final String REQUEST_POSITIVE_NUMBER_MESSAGE = "양수를 입력해주세요.";
     private final int amount;
 
     public Amount(int amount) {
@@ -12,13 +14,13 @@ public class Amount {
 
     private void checkAmountPositive(int amount) {
         if (amount <= 0) {
-            throw new IllegalArgumentException("0원 이하는 입력할 수 없습니다.");
+            throw new IllegalArgumentException(REQUEST_POSITIVE_NUMBER_MESSAGE);
         }
     }
 
     private void checkAmountDivisible(int amount) {
         if (isDivisibleLottoPrice(amount)) {
-            throw new IllegalArgumentException("1000원단위로 나누어 떨어지지 않습니다.");
+            throw new IllegalArgumentException(REQUEST_UNIT_OF_1000);
         }
     }
 
