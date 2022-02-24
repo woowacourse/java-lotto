@@ -24,12 +24,17 @@ public class LottoController {
         Money money = initMoney();
         lotto = new Lotto(money);
         outputView.printLotto(LottoDto.from(lotto));
-        ChoiceNumber choiceNumber = initChoiceNumber();
-        BonusNumber bonusNumber = initBonusNumber(choiceNumber);
-        WinningNumber winningNumber = new WinningNumber(choiceNumber, bonusNumber);
+        WinningNumber winningNumber = setWinningNumber();
         LottoResult result = lotto.computeResult(winningNumber);
         outputView.printResult(result);
         outputView.printYield(lotto.getYield());
+    }
+
+    private WinningNumber setWinningNumber() {
+        ChoiceNumber choiceNumber = initChoiceNumber();
+        BonusNumber bonusNumber = initBonusNumber(choiceNumber);
+        WinningNumber winningNumber = new WinningNumber(choiceNumber, bonusNumber);
+        return winningNumber;
     }
 
     private Money initMoney() {
