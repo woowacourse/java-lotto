@@ -69,9 +69,17 @@ class WinningNumbersTest {
 
     @DisplayName("당첨 번호에 중복된 번호가 있는지 검증")
     @Test
-    public void 당첨_번호_중복_확인() {
+    public void 당첨_번호_보너스볼_중복_확인() {
         //given & when & then
         Assertions.assertThatThrownBy(() -> WinningNumbers.create(List.of("1, 2, 3, 4, 5, 6"), "6"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("당첨 번호에 중복된 번호가 있는지 검증")
+    @Test
+    public void 당첨_번호_중복_확인() {
+        //given & when & then
+        Assertions.assertThatThrownBy(() -> WinningNumbers.create(List.of("1, 2, 3, 4, 5, 5"), "6"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
