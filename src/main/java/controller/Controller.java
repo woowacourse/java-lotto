@@ -31,7 +31,7 @@ public class Controller {
 
     private WinningNumbers getWinningNumbers() {
         try {
-            Ticket winTicket = getWinNumbers();
+            Ticket winTicket = getWinTicket();
             LottoNumber bonusNumber = getBonusNumber();
             return new WinningNumbers(winTicket, bonusNumber);
         } catch (IllegalArgumentException exception) {
@@ -40,12 +40,12 @@ public class Controller {
         }
     }
 
-    private Ticket getWinNumbers() {
+    private Ticket getWinTicket() {
         try {
-            return Ticket.of(InputView.requestWinNumbers());
+            return Ticket.from(InputView.requestWinNumbers());
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception.getMessage());
-            return getWinNumbers();
+            return getWinTicket();
         }
     }
 
