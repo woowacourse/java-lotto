@@ -5,6 +5,7 @@ import static lotterymachine.utils.LotteryCalculator.divideByLotteryPrice;
 import static lotterymachine.utils.LotteryNumbersGenerator.generate;
 import static lotterymachine.utils.LotteryRule.TICKET_PRICE;
 
+import java.util.Collections;
 import lotterymachine.dto.LotteryResultDto;
 import lotterymachine.model.LotteryTicket;
 import lotterymachine.model.LotteryTickets;
@@ -24,6 +25,7 @@ public class LotteryMachine {
         OutputView.printLotteryTickets(lotteryTickets.getLotteryTickets());
 
         List<LotteryResultDto> lotteryResult = getLotteryResult(lotteryTickets);
+        Collections.sort(lotteryResult);
         printResult(numberOfTickets, lotteryResult);
     }
 

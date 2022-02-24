@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class LotteryResultDto {
+public class LotteryResultDto implements Comparable<LotteryResultDto> {
     private final int countOfMatchingNumbers;
     private final int winningPrice;
     private final int numberOfMatchingTicket;
@@ -46,5 +46,10 @@ public class LotteryResultDto {
 
     public int sumIncome() {
         return winningPrice * numberOfMatchingTicket;
+    }
+
+    @Override
+    public int compareTo(LotteryResultDto o) {
+        return this.winningPrice - o.winningPrice;
     }
 }
