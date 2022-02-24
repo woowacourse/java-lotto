@@ -70,4 +70,8 @@ public class LottoNumbers {
                 .filter(this.lottoNumbers::contains)
                 .count();
     }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
 }
