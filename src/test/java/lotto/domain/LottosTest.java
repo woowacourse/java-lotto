@@ -11,13 +11,13 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LottosTest {
-    private Lotto winLotto;
-    private Ball bonusBall;
+    private WinningLotto winningLotto;
 
     @BeforeEach
     void before() {
-        winLotto = new Lotto(Arrays.asList("1", "2", "3", "4", "5", "6"));
-        bonusBall = new Ball("7");
+        Lotto winLotto = new Lotto(Arrays.asList("1", "2", "3", "4", "5", "6"));
+        Ball bonusBall = new Ball("7");
+        winningLotto = new WinningLotto(winLotto, bonusBall);
     }
 
     @Test
@@ -34,7 +34,7 @@ public class LottosTest {
         Lottos lottos = new Lottos(List.of(lotto));
         LottoResult lottoResult = new LottoResult();
 
-        lottos.addMatchingCount(lottoResult, winLotto, bonusBall);
+        lottos.addMatchingCount(lottoResult, winningLotto);
 
         assertEquals(lottoResult.getLottoResult().get(Rank.FIRST), 1); // 1
     }
@@ -46,7 +46,7 @@ public class LottosTest {
         Lottos lottos = new Lottos(List.of(lotto));
         LottoResult lottoResult = new LottoResult();
 
-        lottos.addMatchingCount(lottoResult, winLotto, bonusBall);
+        lottos.addMatchingCount(lottoResult, winningLotto);
 
         assertEquals(lottoResult.getLottoResult().get(Rank.SECOND), 1); // 2
     }
@@ -58,7 +58,7 @@ public class LottosTest {
         Lottos lottos = new Lottos(List.of(lotto));
         LottoResult lottoResult = new LottoResult();
 
-        lottos.addMatchingCount(lottoResult, winLotto, bonusBall);
+        lottos.addMatchingCount(lottoResult, winningLotto);
 
         assertEquals(lottoResult.getLottoResult().get(Rank.FOURTH), 1); // 4
     }

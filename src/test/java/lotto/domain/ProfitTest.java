@@ -20,8 +20,9 @@ public class ProfitTest {
 
         Lotto winLotto = new Lotto(Arrays.asList("1", "2", "3", "4", "5", "6"));
         Ball bonusBall = new Ball("7");
+        WinningLotto winningLotto = new WinningLotto(winLotto, bonusBall);
 
-        lottos.addMatchingCount(lottoResult, winLotto, bonusBall);
+        lottos.addMatchingCount(lottoResult, winningLotto);
     }
 
     @Test

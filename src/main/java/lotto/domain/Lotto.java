@@ -83,6 +83,4 @@ public class Lotto {
             throw new IllegalArgumentException(ERROR_PREFIX + ERROR_DUPLICATED_NUMBER);
         }
     }
-
-
 }

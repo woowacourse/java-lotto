@@ -23,10 +23,10 @@ public class Lottos {
         return new ArrayList<>(lottos);
     }
 
-    public void addMatchingCount(LottoResult lottoResult, Lotto winLotto, Ball bonusBall) {
+    public void addMatchingCount(LottoResult lottoResult, WinningLotto winningLotto) {
         for (Lotto lotto : lottos) {
-            int matchingCount = lotto.getMatchingCount(winLotto);
-            boolean isBonus = matchingCount == CHECK_BONUS_COUNT && lotto.contains(bonusBall);
+            int matchingCount = lotto.getMatchingCount(winningLotto.getWinningLotto());
+            boolean isBonus = matchingCount == CHECK_BONUS_COUNT && lotto.contains(winningLotto.getBonusBall());
             lottoResult.increaseRankCount(Rank.getRank(matchingCount, isBonus));
         }
     }
