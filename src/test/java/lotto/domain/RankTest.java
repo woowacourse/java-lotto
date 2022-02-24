@@ -23,14 +23,14 @@ class RankTest {
     }
 
     @Test
-    @DisplayName("매칭한 숫자가 6이면 Second를 반환한다.")
+    @DisplayName("매칭한 숫자가 5개고 보너스볼을 맞추면 Second를 반환한다.")
     void matchCountToRankSecond() {
         assertThat(Rank.find(5, true)).isEqualTo(Rank.SECOND);
     }
 
     @ParameterizedTest
     @CsvSource(value = {"0,false", "0,true", "1,false", "1,true", "2,false"})
-    @DisplayName("매칭한 숫자가 이면 Second를 반환한다.")
+    @DisplayName("매칭한 숫자가 2개 이하면 None을 반환한다.")
     void matchCountToRankNone(int matchCount, boolean matchBonus) {
         assertThat(Rank.find(matchCount, matchBonus)).isEqualTo(Rank.NONE);
     }

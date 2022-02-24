@@ -32,11 +32,10 @@ public class StoreTest {
     }
 
     @Test
-    @DisplayName("로또 한장을 생성한다.")
+    @DisplayName("1000원으로 로또 한장을 구매할 수 있다.")
     void createLotto() {
         Store store = new Store(1000);
 
         assertThat(store.buyLottos()).hasSize(1);
     }
-
 }
