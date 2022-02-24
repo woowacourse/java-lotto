@@ -21,10 +21,11 @@ public enum Ranking {
         this.hasBonusNumber = hasBonusNumber;
     }
 
-    public static Optional<Ranking> findRanking(int cnt, boolean hasBonusNumber) {
+    public static Ranking findRanking(int cnt, boolean hasBonusNumber) {
         return Arrays.stream(Ranking.values())
                 .filter(ranking -> ranking.count == cnt && ranking.hasBonusNumber == hasBonusNumber)
-                .findAny();
+                .findAny()
+                .orElse(null);
     }
 
     public static Ranking[] sortByPrize() {

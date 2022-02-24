@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoTickets {
@@ -25,8 +25,7 @@ public class LottoTickets {
     public WinningResult calculateWinningStatistic(WinningNumbers winningNumbers) {
         List<Ranking> rankings = lottoTickets.stream()
                 .map(winningNumbers::calculateRanking)
-                .filter(Optional::isPresent)
-                .map(Optional::get)
+                .filter(Objects::nonNull)
                 .collect(Collectors.toList());
         return new WinningResult(rankings);
     }
