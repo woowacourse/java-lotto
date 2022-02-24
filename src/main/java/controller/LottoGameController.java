@@ -15,7 +15,7 @@ public class LottoGameController {
 		try {
 			Lottos lottos = initLottos();
 			AnswerLotto answerLotto = initAnswerLotto();
-			printResult(lottos, answerLotto);
+			printResults(lottos.generateResult(answerLotto));
 		} catch (IllegalArgumentException e) {
 			printErrorMessage(e.getMessage());
 		}
@@ -35,8 +35,4 @@ public class LottoGameController {
 		return new AnswerLotto(lottoNumbers, bonusNumber);
 	}
 
-	private static void printResult(Lottos lottos, AnswerLotto answerLotto) {
-		printStatistics(lottos.generateEachCount(answerLotto));
-		printProfitRatio(lottos.generateProfitRatio(answerLotto));
-	}
 }

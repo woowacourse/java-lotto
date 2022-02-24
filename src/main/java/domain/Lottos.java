@@ -3,9 +3,7 @@ package domain;
 import util.LottoNumbersGenerator;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import static constant.LottoConstant.PRICE_OF_LOTTO;
 
@@ -39,28 +37,16 @@ public class Lottos {
 		return this.lottos.size();
 	}
 
-	public Map<ResultStatics, Integer> generateEachCount(AnswerLotto answerLotto) {
-		Map<ResultStatics, Integer> eachCount = new LinkedHashMap<>();
+	public ResultDTO generateResult(AnswerLotto answerLotto) {
 
-		for (ResultStatics resultStatic : ResultStatics.values()) {
-			eachCount.put(resultStatic, 0);
-		}
-
+		ResultDTO results = new ResultDTO();
 		for (Lotto lotto : this.lottos) {
-			ResultStatics resultStatic = lotto.calculate(answerLotto);
-			eachCount.put(resultStatic, eachCount.get(resultStatic) + 1);
+			results.addResult(lotto.calculate(answerLotto));
 		}
 
-		return eachCount;
-	}
+		results.setProfitRate(this.lottos.size() * PRICE_OF_LOTTO);
 
-	public float generateProfitRatio(AnswerLotto answerLotto) {
-		int totalPrize = 0;
-		int totalPrice = this.lottos.size() * PRICE_OF_LOTTO;
-		for (Lotto lotto : this.lottos) {
-			totalPrize += lotto.calculate(answerLotto).getPrice();
-		}
-		return (float) totalPrize / totalPrice;
+		return results;
 	}
 
 	private static void validateMoney(int money) {
