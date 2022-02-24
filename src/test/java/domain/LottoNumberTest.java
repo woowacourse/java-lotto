@@ -19,7 +19,7 @@ public class LottoNumberTest {
         assertThat(lottoNumber.getNumber()).isEqualTo(number);
     }
 
-    @ParameterizedTest(name = "1 ~ 45 범위 외 숫자가 전달되면, IAE를 던진다")
+    @ParameterizedTest(name = "1 ~ 45 범위 외 숫자가 전달되면, IAE를 던진다 : {0}")
     @ValueSource(ints = {-1, 0, 46})
     void createLottoNumberOutOfRangeShouldFail(int number) {
         assertThatThrownBy(() -> new LottoNumber(number))

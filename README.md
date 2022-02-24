@@ -87,6 +87,8 @@
   - [ ] `getCount` 의 메소드 선언 위치를 아래로 옮겨야 함
 - [ ] `LottoController` 리팩토링
   - [ ] `generateLotto` 의 메소드가 10줄이 넘어감
+- [X] `LottoNumber` 리팩토링
+  - [X] 에러메세지에 포함된 숫자를 하드코딩하지 않도록 개선
 - [ ] 테스트코드에서 불필요한 `hasMessageMatching` 을 `hasMessage` 로 변경
 - [ ] Exception 메세지 마침표 통일
 - [ ] 테스트코드를 Describe-Context-It 패턴을 적용해 개선 (@Nested)
@@ -109,3 +111,4 @@
 - 성능을 고려해 원시 for 문을 사용하는 것이 맞을까?
   - 원시 for 보다 가독성이 보장되는 경우 성능을 조금 포기하고 stream 을 사용하는것이 좋지 않을까?
 - 테스트코드의 번수 네이밍을 `actual`, `expected` 를 사용하여 개선하는게 좋지 않을까?
+- 애플리케이션 전반에서 사용되는 `1` 과 `45` 는 별도의 상수로 분리하는 것이 좋지 않을까?
