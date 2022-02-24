@@ -79,6 +79,7 @@ public class LottoController {
     }
 
     private void printResult(Amount amount, WinningResult winningResult) {
+        OutputView.printResultIntro();
         OutputView.printWinningStatistic(winningResult);
         OutputView.printProfit(amount.calculateProfit(winningResult.calculatePrizeSum()));
     }

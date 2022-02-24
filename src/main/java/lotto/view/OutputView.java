@@ -48,8 +48,6 @@ public class OutputView {
     public static void printWinningStatistic(WinningResult winningResult) {
         Map<Ranking, Integer> winningResultMap = winningResult.getWinningResult();
 
-        printResultIntro();
-
         StringBuilder stringBuilder = new StringBuilder();
         for (Map.Entry<Ranking, Integer> entry : winningResultMap.entrySet()) {
             Ranking ranking = entry.getKey();
@@ -72,7 +70,7 @@ public class OutputView {
         stringBuilder.append(str);
     }
 
-    private static void printResultIntro() {
+    public static void printResultIntro() {
         System.out.println("당첨 통계");
         System.out.println("---------");
     }
