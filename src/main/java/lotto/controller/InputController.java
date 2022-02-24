@@ -23,7 +23,6 @@ public class InputController {
     }
 
     public int toIntBonusNumber(String bonusNumber, List<Integer> winningNumbers) throws RuntimeException {
-        InputValidator.validateBonusNumber(bonusNumber, winningNumbers);
-        return Integer.parseInt(bonusNumber);
+        return InputValidator.validateBonusNumber(bonusNumber, winningNumbers);
     }
 }

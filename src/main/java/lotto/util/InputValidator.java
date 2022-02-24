@@ -60,10 +60,11 @@ public class InputValidator {
         }
     }
 
-    public static void validateBonusNumber(String bonusNumber, List<Integer> winningNumbers) throws RuntimeException {
+    public static int validateBonusNumber(String bonusNumber, List<Integer> winningNumbers) throws RuntimeException {
         validateLottoNumber(bonusNumber);
         if (winningNumbers.contains(Integer.parseInt(bonusNumber))) {
             throw new RuntimeException(NUMBER_DUPLICATE_ERROR_MESSAGE);
         }
+        return Integer.parseInt(bonusNumber);
     }
 }

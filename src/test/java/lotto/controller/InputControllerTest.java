@@ -11,13 +11,13 @@ public class InputControllerTest {
     private final InputController inputController = new InputController();
 
     @Test
-    void 입력한_금액을_개수로_변환1() {
+    void 입력한_금액을_로또_개수로_변환1() {
         String value = "10000";
         assertThat(inputController.countLotto(value)).isEqualTo(10);
     }
 
     @Test
-    void 입력한_금액을_개수로_변환2() {
+    void 입력한_금액을_로또_개수로_변환2() {
         String value = "1500";
         assertThat(inputController.countLotto(value)).isEqualTo(1);
     }
