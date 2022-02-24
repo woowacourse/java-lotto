@@ -46,4 +46,21 @@ class LottoTest {
             new Lotto(lottoNumbers))
             .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("Lotto와 WinningLotto의 일치 갯수를 확인하는 경우")
+    void calculateSameLottoNumber() {
+        List<LottoNumber> lottoNumbers = Stream.of(1, 2, 3, 14, 4, 6)
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
+        Lotto lotto = new Lotto(lottoNumbers);
+
+        List<LottoNumber> winningNumbers = Stream.of(1, 2, 13, 15, 16, 17)
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
+        Lotto winningLotto = new Lotto(winningNumbers);
+
+        int matchCount = lotto.calculateSameNumber(winningLotto);
+        assertThat(matchCount).isEqualTo(2);
+    }
 }

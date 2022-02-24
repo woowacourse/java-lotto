@@ -22,8 +22,9 @@ class WinningLottoTest {
             .collect(Collectors.toList());
 
         Lotto purchasedLotto = new Lotto(purchasedLottoNumbers);
-        WinningLotto winningLotto = new WinningLotto(winningNumbers, new LottoNumber(2));
 
-        assertThat(winningLotto.calculateSameLotto(purchasedLotto)).isEqualTo(2);
+        WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumbers), new LottoNumber(2));
+
+        assertThat(winningLotto.calculateMatchCount(purchasedLotto)).isEqualTo(2);
     }
 }

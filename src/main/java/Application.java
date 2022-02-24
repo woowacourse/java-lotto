@@ -1,6 +1,7 @@
 import java.util.List;
 import java.util.stream.Collectors;
 
+import domain.Lotto;
 import domain.LottoGame;
 import domain.LottoNumber;
 import domain.Money;
@@ -27,10 +28,11 @@ public class Application {
         List<LottoNumber> winningLottoNumbers = winningNumbers.stream()
             .map(LottoNumber::new)
             .collect(Collectors.toList());
+        Lotto winningLotto = new Lotto(winningLottoNumbers);
 
         final int bonusNumber = InputView.getBonusBall();
         LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
 
-        return new WinningLotto(winningLottoNumbers, bonusLottoNumber);
+        return new WinningLotto(winningLotto, bonusLottoNumber);
     }
 }
