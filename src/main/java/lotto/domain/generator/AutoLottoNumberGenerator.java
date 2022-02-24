@@ -18,12 +18,12 @@ public class AutoLottoNumberGenerator implements LottoNumberGenerator {
 
     @Override
     public List<Integer> generate() {
-        List<Integer> lottoTotalNumbers = LOTTO_TOTAL_NUMBERS;
+        List<Integer> lottoTotalNumbers = new ArrayList<>(LOTTO_TOTAL_NUMBERS);
         Collections.shuffle(lottoTotalNumbers);
 
         List<Integer> lottoNumbers = lottoTotalNumbers.subList(LOTTO_NUMBERS_FROM_INDEX, LOTTO_NUMBERS_TO_INDEX);
         Collections.sort(lottoNumbers);
 
-        return new ArrayList<>(lottoNumbers);
+        return lottoNumbers;
     }
 }
