@@ -37,7 +37,7 @@ public class InputView {
         String input = scanner.nextLine();
         InputValidator.validateNull(input);
         InputValidator.validateEmpty(input);
-        return scanner.nextLine();
+        return input;
     }
 >>>>>>> 701f681 (refactor: 입력 유효성 검사 static으로 변경 및 적용)
 

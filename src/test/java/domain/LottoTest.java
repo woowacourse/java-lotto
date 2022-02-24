@@ -39,6 +39,7 @@ public class LottoTest {
     private Lotto lotto;
     private List<Integer> winningNumbers;
     private LottoGenerator lottoGenerator;
+<<<<<<< HEAD
 
     @BeforeEach
     void setUp() {
@@ -68,9 +69,13 @@ public class LottoTest {
     private List<LottoNumber> lottoNumbers;
     private Lotto lotto;
     private List<LottoNumber> winningNumbers;
+=======
+>>>>>>> 5b2a52c (refactor: 로또 생성 기능 인터페이스로 분리)
 
     @BeforeEach
     void setUp() {
+        lottoGenerator = new WinningLottoGenerator();
+
         lottoNumbers = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
             lottoNumbers.add(new LottoNumber(i));
@@ -79,7 +84,7 @@ public class LottoTest {
 
         winningNumbers = new ArrayList<>();
         for (int i = 2; i <= 7; i++) {
-            winningNumbers.add(new LottoNumber(i));
+            winningNumbers.add(i);
         }
     }
 
@@ -126,7 +131,7 @@ public class LottoTest {
     @Test
     @DisplayName("Lotto의 숫자들과 당첨숫자를 비교하여 결과를 반환한다.")
     void judge_보너스볼_불일치() {
-        WinningLotto winningLotto = new WinningLotto(winningNumbers, new LottoNumber(10));
+        WinningLotto winningLotto = new WinningLotto(lottoGenerator.generateLotto(winningNumbers), new LottoNumber(10));
         Result actual = lotto.judge(winningLotto);
         Result expected = new Result(5,false);
         assertThat(actual).isEqualTo(expected);
@@ -134,8 +139,8 @@ public class LottoTest {
 
     @Test
     @DisplayName("Lotto의 숫자들과 당첨숫자를 비교하여 결과를 반환한다.")
-    void judge_보너스볼_일치() {
-        WinningLotto winningLotto = new WinningLotto(winningNumbers, new LottoNumber(1));
+    void judge_보너스볼_일치(){
+        WinningLotto winningLotto = new WinningLotto(lottoGenerator.generateLotto(winningNumbers), new LottoNumber(1));
         Result actual = lotto.judge(winningLotto);
         Result expected = new Result(5,true);
         assertThat(actual).isEqualTo(expected);

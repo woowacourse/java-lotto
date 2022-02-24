@@ -9,9 +9,9 @@ public class WinningLotto {
     private Lotto winningLotto;
     private LottoNumber bonusBall;
 
-    public WinningLotto(List<LottoNumber> numbers, LottoNumber bonusBallNumber){
-        validateDuplicate(numbers, bonusBallNumber);
-        winningLotto = new Lotto(numbers);
+    public WinningLotto(Lotto winningLotto, LottoNumber bonusBallNumber){
+        validateDuplicate(winningLotto.getLotto(), bonusBallNumber);
+        this.winningLotto = winningLotto;
         bonusBall = bonusBallNumber;
     }
 
