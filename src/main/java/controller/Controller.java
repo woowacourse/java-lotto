@@ -15,28 +15,28 @@ public class Controller {
         printResult(lotto, winningNumbers);
     }
 
-    private void printResult(Lotto lotto, WinningNumbers winningNumbers) {
-        OutputView.printResult(lotto.getResult(winningNumbers));
-        OutputView.printYield(lotto.getYield(winningNumbers));
+    private Lotto getLotto() {
+        try {
+            return Lotto.from(InputView.requestAmount());
+        } catch (IllegalArgumentException exception) {
+            OutputView.printErrorMessage(exception.getMessage());
+            return getLotto();
+        }
+    }
+
+    private void printTickets(Lotto lotto) {
+        OutputView.printTicketCount(lotto.getTicketCount());
+        OutputView.printTickets(lotto.getTickets());
     }
 
     private WinningNumbers getWinningNumbers() {
-        Ticket winTicket = getWinNumbers();
-        LottoNumber bonusNumber = getBonusNumber();
         try {
+            Ticket winTicket = getWinNumbers();
+            LottoNumber bonusNumber = getBonusNumber();
             return new WinningNumbers(winTicket, bonusNumber);
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception.getMessage());
             return getWinningNumbers();
-        }
-    }
-
-    private LottoNumber getBonusNumber() {
-        try {
-            return new LottoNumber(InputView.requestBonusNumber());
-        } catch (IllegalArgumentException exception) {
-            OutputView.printErrorMessage(exception.getMessage());
-            return getBonusNumber();
         }
     }
 
@@ -49,17 +49,17 @@ public class Controller {
         }
     }
 
-    private void printTickets(Lotto lotto) {
-        OutputView.printTicketCount(lotto.getTicketCount());
-        OutputView.printTickets(lotto.getTickets());
-    }
-
-    private Lotto getLotto() {
+    private LottoNumber getBonusNumber() {
         try {
-            return Lotto.from(InputView.requestAmount());
+            return new LottoNumber(InputView.requestBonusNumber());
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception.getMessage());
-            return getLotto();
+            return getBonusNumber();
         }
+    }
+
+    private void printResult(Lotto lotto, WinningNumbers winningNumbers) {
+        OutputView.printResult(lotto.getResult(winningNumbers));
+        OutputView.printYield(lotto.getYield(winningNumbers));
     }
 }
