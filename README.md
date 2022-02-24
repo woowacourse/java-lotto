@@ -12,9 +12,9 @@
 
 > 우아한테크코스 웹 백엔드 4기, 로또 - OOP 저장소입니다.
 
-<br><br>
-
 <img src="./lotto-operation.gif" alt="java-lotto-operation" width="400px">
+
+<br><br>
 
 ## 코딩 전 설계
 
