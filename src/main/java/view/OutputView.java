@@ -7,11 +7,12 @@ import java.util.stream.Collectors;
 
 import domain.lottery.Lottery;
 import domain.Rank;
+import view.messages.OutputViewMessages;
 
 public class OutputView {
 
 	public static void printStatistics(Map<Rank, Integer> ranking, double incomePercent) {
-		System.out.println("당첨 통계\n--------\n");
+		System.out.println(OutputViewMessages.RESULT_STATISTICS.getMessage());
 		printRanking(ranking);
 		printIncomePercent(incomePercent);
 	}
@@ -37,7 +38,7 @@ public class OutputView {
 	}
 
 	private static void printIncomePercent(final double incomePercent) {
-		System.out.printf("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", incomePercent);
+		System.out.printf(OutputViewMessages.RETURN_RATE.getMessage(), incomePercent);
 	}
 
 	public static void printLotteries(List<Lottery> lotteries) {

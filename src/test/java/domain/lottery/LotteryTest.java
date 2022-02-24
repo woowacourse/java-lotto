@@ -1,5 +1,6 @@
 package domain.lottery;
 
+import static domain.exception.LotteryExceptionMessages.*;
 import static org.assertj.core.api.AssertionsForClassTypes.*;
 
 import java.util.Arrays;
@@ -7,8 +8,6 @@ import java.util.Arrays;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-
-import domain.lottery.Lottery;
 
 public class LotteryTest {
 
@@ -29,7 +28,7 @@ public class LotteryTest {
 			assertThatThrownBy(() ->
 				new Lottery(Arrays.asList(1, 2, 3, 4, 5))
 			).isInstanceOf(IllegalArgumentException.class)
-				.hasMessageContaining("로또 번호는 6개여야 합니다.");
+				.hasMessageContaining(INVALID_SIZE_EXCEPTION.getMessage());
 		}
 	}
 
@@ -48,7 +47,7 @@ public class LotteryTest {
 			assertThatThrownBy(() -> {
 				new Lottery(Arrays.asList(-1, 0, 46, 3, 4, 5));
 			}).isInstanceOf(IllegalArgumentException.class)
-				.hasMessageContaining("로또의 각 번호는 1~45 사이여야 합니다");
+				.hasMessageContaining(INVALID_RANGE_EXCEPTION.getMessage());
 		}
 	}
 }

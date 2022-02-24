@@ -11,13 +11,15 @@ import domain.lottery.WinningLottery;
 
 public class LotteryGame {
 
+	private static final int LOTTERY_PRICE = 1000;
+
 	private final int theNumberOfLottery;
 	private Lotteries lotteries;
 	private LotteryGenerateFamily lotteryGenerator;
 	private WinningLottery winningLottery;
 
 	public LotteryGame(final int inputMoney, LotteryGenerateFamily lotteryGenerator) {
-		this.theNumberOfLottery = inputMoney / 1000;
+		this.theNumberOfLottery = inputMoney / LOTTERY_PRICE;
 		this.lotteryGenerator = lotteryGenerator;
 		createAutoLottery();
 	}
@@ -43,7 +45,7 @@ public class LotteryGame {
 		for (Rank rank : rankResult.keySet()) {
 			incomeRate += rankResult.get(rank) * rank.getPrize();
 		}
-		return (double)incomeRate / (theNumberOfLottery * 1000);
+		return (double)incomeRate / (theNumberOfLottery * LOTTERY_PRICE);
 	}
 
 	public List<Lottery> getLotteries() {

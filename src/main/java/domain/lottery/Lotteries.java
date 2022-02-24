@@ -22,7 +22,7 @@ public class Lotteries {
 	}
 
 	public Map<Rank, Integer> getTheNumberOfWinners(final WinningLottery winningLottery) {
-		Map<Rank,Integer> winners = initRankResult();
+		Map<Rank, Integer> winners = initRankResult();
 		lotteries.forEach(lottery -> {
 			Rank rank = winningLottery.getRank(lottery);
 			putCountToWinner(winners, rank);
@@ -42,6 +42,4 @@ public class Lotteries {
 			.forEach((rank) -> rankResult.put(rank, 0));
 		return rankResult;
 	}
-
-
 }

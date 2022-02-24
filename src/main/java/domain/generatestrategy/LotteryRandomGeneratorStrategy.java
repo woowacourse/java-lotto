@@ -5,14 +5,17 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LotteryRandomGeneratorStrategy implements LotteryGenerateFamily{
+public class LotteryRandomGeneratorStrategy implements LotteryGenerateFamily {
 
-	private static final int MAX_BOUND = 45;
+	private static final int MIN_LOTTERY_NUMBER = 1;
+	private static final int MAX_LOTTERY_NUMBER = 45;
+	private static final int LOTTERY_SIZE = 6;
+
 	private final List<Integer> numbers;
 
 	public LotteryRandomGeneratorStrategy() {
 		numbers = new ArrayList<>();
-		for (int i = 1; i <= MAX_BOUND; i++) {
+		for (int i = MIN_LOTTERY_NUMBER; i <= MAX_LOTTERY_NUMBER; i++) {
 			numbers.add(i);
 		}
 	}
@@ -20,7 +23,7 @@ public class LotteryRandomGeneratorStrategy implements LotteryGenerateFamily{
 	public List<Integer> getNumbers() {
 		Collections.shuffle(numbers);
 		return numbers.stream()
-			.limit(6)
+			.limit(LOTTERY_SIZE)
 			.sorted()
 			.collect(Collectors.toList());
 	}

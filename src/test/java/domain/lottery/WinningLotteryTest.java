@@ -1,5 +1,6 @@
 package domain.lottery;
 
+import static domain.exception.LotteryExceptionMessages.*;
 import static org.assertj.core.api.AssertionsForClassTypes.*;
 
 import java.util.Arrays;
@@ -38,7 +39,7 @@ public class WinningLotteryTest {
 			assertThatThrownBy(() ->
 				new WinningLottery(winningNumbers, bonusBall)
 			).isInstanceOf(IllegalArgumentException.class)
-				.hasMessageContaining("보너스볼의 번호는 1~45 사이여야 합니다");
+				.hasMessageContaining(INVALID_RANGE_EXCEPTION.getMessage());
 		}
 
 		@Test
@@ -47,7 +48,7 @@ public class WinningLotteryTest {
 			assertThatThrownBy(() ->
 				new WinningLottery(winningNumbers, 1)
 			).isInstanceOf(IllegalArgumentException.class)
-				.hasMessageContaining("당첨번호와 보너스볼에 중복된 번호가 있으면 안됩니다.");
+				.hasMessageContaining(DUPLICATE_NUMBER_EXCEPTION.getMessage());
 		}
 	}
 
