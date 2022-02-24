@@ -64,16 +64,11 @@ public class LottoGame {
 
     public double getYield() {
 
-
-        int prize = 0;
-
-        prize = Arrays.stream(Rewards.values()).map(x -> Rewards.calculateYield(x)).reduce(0, Integer::sum);
-
-
+        int prize = Arrays.stream(Rewards.values())
+                .map(x -> Rewards.calculateYield(x))
+                .reduce(0, Integer::sum);
 
         //Integer sum1 = numbers.stream().reduce(0, Integer::sum);
-
-
 
 //
 //        Set<Integer> winningRankings = results.keySet();
@@ -82,6 +77,9 @@ public class LottoGame {
 //            prize += results.get(winningRanking) * convertReward.get(winningRanking);
 //        }
 //        System.out.println("@@@@@prize: " + prize);
+        if (lottos.getSize() == 0) {
+            return 0;
+        }
         return prize / (1000 * lottos.getSize());
     }
 //
