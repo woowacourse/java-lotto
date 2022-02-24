@@ -36,10 +36,6 @@ public class Lotto {
         return this.lotto.contains(lottoNumber);
     }
 
-    public int size() {
-        return this.lotto.size();
-    }
-
     public int compare(final Lotto lotto) {
         int count = INIT_COUNT;
         for (LottoNumber lottoNumber : this.lotto) {

@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LottoTest {
+
     @DisplayName("유효한 로또 번호를 발급을 확인한다.")
     @Test
     void input_lottoNumbers_valid() {
@@ -33,6 +34,7 @@ class LottoTest {
     void compare_LottoNumbers() {
         final Lotto lotto = new Lotto("1,2,3,4,5,6");
         final Lotto winNumbers = new Lotto("1,2,3,4,5,7");
+
         final int winCount = lotto.compare(winNumbers);
 
         assertThat(winCount).isEqualTo(5);

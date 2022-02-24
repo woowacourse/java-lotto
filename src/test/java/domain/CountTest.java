@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class CountTest {
+    
     @DisplayName("로또 발급 횟수 생성을 확인한다.")
     @Test
     void count_create() {
