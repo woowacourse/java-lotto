@@ -18,8 +18,8 @@ public class WinningLottoNumbers {
     public LottoResult summarize(List<LottoNumbers> lottoNumbers, Money inputMoney) {
         LottoResult result = new LottoResult(inputMoney);
         lottoNumbers.stream()
-            .map(this::getRankBy)
-            .forEach(result::add);
+                .map(this::getRankBy)
+                .forEach(result::add);
         return result;
     }
 

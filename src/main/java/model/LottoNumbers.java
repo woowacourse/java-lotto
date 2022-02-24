@@ -38,8 +38,8 @@ public class LottoNumbers {
 
     private long getDistinctSize(List<Integer> numbers) {
         return numbers.stream()
-            .distinct()
-            .count();
+                .distinct()
+                .count();
     }
 
     public boolean contains(LottoNumber number) {
@@ -49,8 +49,8 @@ public class LottoNumbers {
 
     public int getMatchedNumberCountWith(LottoNumbers otherLottoNumbers) {
         return (int) this.lottoNumbers.stream()
-            .filter(number -> otherLottoNumbers.contains(number))
-            .count();
+                .filter(number -> otherLottoNumbers.contains(number))
+                .count();
     }
 
     @Override

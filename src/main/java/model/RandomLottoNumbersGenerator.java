@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.stream.IntStream;
 
-public class RandomLottoNumbersGenerator implements LottoNumbersGenerator{
+public class RandomLottoNumbersGenerator implements LottoNumbersGenerator {
     private final List<Integer> numberPool;
 
     public RandomLottoNumbersGenerator(int start, int end) {
@@ -26,11 +26,8 @@ public class RandomLottoNumbersGenerator implements LottoNumbersGenerator{
         return new LottoNumbers(numbers);
     }
 
-    private List<Integer> getNumbersFrom(Queue<Integer> queue) {
-        return IntStream.range(0, LOTTO_NUMBER_SIZE)
-                .map(i -> queue.remove())
-                .boxed()
-                .collect(toList());
+    private void shuffleNumberPool() {
+        Collections.shuffle(numberPool);
     }
 
     private Queue<Integer> createQueueByNumberPool() {
@@ -38,7 +35,10 @@ public class RandomLottoNumbersGenerator implements LottoNumbersGenerator{
         return queue;
     }
 
-    private void shuffleNumberPool() {
-        Collections.shuffle(numberPool);
+    private List<Integer> getNumbersFrom(Queue<Integer> queue) {
+        return IntStream.range(0, LOTTO_NUMBER_SIZE)
+                .map(i -> queue.remove())
+                .boxed()
+                .collect(toList());
     }
 }

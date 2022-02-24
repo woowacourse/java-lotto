@@ -20,19 +20,11 @@ public enum LottoRank {
         this.predicate = predicate;
     }
 
-    public Money getPrize() {
-        return prize;
-    }
-
-    private boolean isMatched(int matchCount, boolean bonusMatch) {
-        return predicate.apply(matchCount, bonusMatch);
-    }
-
     public static LottoRank of(Integer matchCount, boolean bonusMatch) {
         return Stream.of(values())
-            .filter(rank -> rank.isMatched(matchCount, bonusMatch))
-            .findFirst()
-            .orElseThrow(InvalidMatchCountException::new);
+                .filter(rank -> rank.isMatched(matchCount, bonusMatch))
+                .findFirst()
+                .orElseThrow(InvalidMatchCountException::new);
     }
 
     private static boolean isFirstPrize(Integer matchCount, boolean bonusMatch) {
@@ -57,5 +49,13 @@ public enum LottoRank {
 
     private static boolean isNothingPrize(Integer matchCount, boolean bonusMatch) {
         return 0 <= matchCount && matchCount < 3;
+    }
+
+    public Money getPrize() {
+        return prize;
+    }
+
+    private boolean isMatched(int matchCount, boolean bonusMatch) {
+        return predicate.apply(matchCount, bonusMatch);
     }
 }

@@ -22,31 +22,31 @@ public abstract class Parser<T> {
         this.errorMessage = errorMessage;
     }
 
+    protected static String lottoNumberWithSpacesRegex() {
+        return new StringBuilder(REGEX_SPACE)
+                .append(lottoNumberRegex())
+                .append(REGEX_SPACE)
+                .toString();
+    }
+
+    protected static String lottoNumberRegex() {
+        return new StringBuilder(REGEX_GROUP_BEGINNING)
+                .append(REGEX_ONE_TO_NINE).append(REGEX_OR)
+                .append(REGEX_TEN_TO_THIRTY_NINE).append(REGEX_OR)
+                .append(REGEX_FORTY_TO_FORTY_FIVE)
+                .append(REGEX_GROUP_END).toString();
+    }
+
+    protected static String repeatRegex(int repeat) {
+        return "{" + repeat + "}";
+    }
+
     public T parse(String text) {
         if (!text.matches(regex)) {
             throw new IllegalArgumentException(errorMessage);
         }
 
         return convert(text);
-    }
-
-    protected static String lottoNumberWithSpacesRegex() {
-        return new StringBuilder(REGEX_SPACE)
-            .append(lottoNumberRegex())
-            .append(REGEX_SPACE)
-            .toString();
-    }
-
-    protected static String lottoNumberRegex() {
-        return new StringBuilder(REGEX_GROUP_BEGINNING)
-            .append(REGEX_ONE_TO_NINE).append(REGEX_OR)
-            .append(REGEX_TEN_TO_THIRTY_NINE).append(REGEX_OR)
-            .append(REGEX_FORTY_TO_FORTY_FIVE)
-            .append(REGEX_GROUP_END).toString();
-    }
-
-    protected static String repeatRegex(int repeat) {
-        return "{" + repeat + "}";
     }
 
     protected abstract T convert(String text);

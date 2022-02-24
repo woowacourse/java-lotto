@@ -131,7 +131,6 @@ public class WinningLottoNumbersTest {
 
         Money expectedPrize = FIRST_PRIZE.add(FIRST_PRIZE).add(SECOND_PRIZE).add(THIRD_PRIZE)
             .add(THIRD_PRIZE);
-        assertThat(result.getTotalPrize()).isEqualTo(expectedPrize);
         assertThat(result.getProfitRate()).isEqualTo(expectedPrize.divide(new Money(5000)));
         assertThat(result.getCountByRank(LottoRank.FIRST)).isEqualTo(2);
         assertThat(result.getCountByRank(LottoRank.SECOND)).isEqualTo(1);

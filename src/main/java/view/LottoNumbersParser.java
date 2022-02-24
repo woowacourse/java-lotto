@@ -14,13 +14,13 @@ public class LottoNumbersParser extends Parser<LottoNumbers> {
 
     private static String regex() {
         return new StringBuilder(REGEX_BEGINNING)
-            .append(lottoNumberWithSpacesRegex())
-            .append(REGEX_GROUP_BEGINNING)
-            .append(REGEX_SPACE).append(REGEX_COMMA)
-            .append(lottoNumberWithSpacesRegex())
-            .append(REGEX_GROUP_END).append(repeatRegex(5))
-            .append(REGEX_END)
-            .toString();
+                .append(lottoNumberWithSpacesRegex())
+                .append(REGEX_GROUP_BEGINNING)
+                .append(REGEX_SPACE).append(REGEX_COMMA)
+                .append(lottoNumberWithSpacesRegex())
+                .append(REGEX_GROUP_END).append(repeatRegex(5))
+                .append(REGEX_END)
+                .toString();
     }
 
     @Override

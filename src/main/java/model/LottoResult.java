@@ -15,10 +15,10 @@ public class LottoResult {
                 LottoRank.FIFTH, 0, LottoRank.NOTHING, 0));
     }
 
-    public Money getTotalPrize() {
+    private Money getTotalPrize() {
         return resultMap.keySet().stream()
-            .map(this::getTotalPrizeByRank)
-            .reduce(Money.ZERO, Money::add);
+                .map(this::getTotalPrizeByRank)
+                .reduce(Money.ZERO, Money::add);
     }
 
     private Money getTotalPrizeByRank(LottoRank lottoRank) {

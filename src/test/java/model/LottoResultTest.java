@@ -19,7 +19,7 @@ public class LottoResultTest {
         lottoResult.add(LottoRank.SECOND);
         lottoResult.add(LottoRank.THIRD);
         Money expected = FIRST_PRIZE.multiply(2).add(SECOND_PRIZE).add(THIRD_PRIZE);
-        assertThat(lottoResult.getTotalPrize()).isEqualTo(expected);
+        assertThat(lottoResult.getProfitRate()).isEqualTo(expected.divide(new Money(4000)));
     }
 
     @Test
