@@ -13,7 +13,6 @@ public class LottoResult {
         for (LottoRank lottoRank : LottoRank.values()) {
             result.put(lottoRank, INIT_VALUE);
         }
-
     }
 
     public void add(LottoRank lottoRank) {

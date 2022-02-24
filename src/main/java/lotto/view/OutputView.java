@@ -3,7 +3,7 @@ package lotto.view;
 import lotto.domain.ChoiceNumber;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoResult;
-import lotto.domain.LottosDto;
+import lotto.domain.LottoDto;
 
 public class OutputView {
     public void printAskMoneyInputMessage() {
@@ -22,9 +22,9 @@ public class OutputView {
         System.out.println("보너스 볼을 입력해 주세요.");
     }
 
-    public void printPurchasedLotto(LottosDto lottosDto) {
-        System.out.println(String.format("%d개를 구매했습니다.", lottosDto.getLottosSize()));
-        for (ChoiceNumber choiceNumber : lottosDto.getLottos()) {
+    public void printPurchasedLotto(LottoDto lottoDto) {
+        System.out.println(String.format("%d개를 구매했습니다.", lottoDto.getLottoSize()));
+        for (ChoiceNumber choiceNumber : lottoDto.getLotto()) {
             System.out.println(choiceNumber);
         }
     }

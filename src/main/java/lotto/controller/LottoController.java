@@ -2,8 +2,8 @@ package lotto.controller;
 
 import lotto.domain.BonusNumber;
 import lotto.domain.LottoResult;
-import lotto.domain.Lottos;
-import lotto.domain.LottosDto;
+import lotto.domain.Lotto;
+import lotto.domain.LottoDto;
 import lotto.domain.Money;
 import lotto.domain.ChoiceNumber;
 import lotto.domain.WinningNumber;
@@ -13,7 +13,7 @@ import lotto.view.OutputView;
 public class LottoController {
     private InputView inputView;
     private OutputView outputView;
-    private Lottos lottos;
+    private Lotto lotto;
 
     public LottoController() {
         this.inputView = new InputView();
@@ -22,14 +22,14 @@ public class LottoController {
 
     public void start() {
         Money money = initMoney();
-        lottos = new Lottos(money);
-        outputView.printPurchasedLotto(LottosDto.from(lottos));
+        lotto = new Lotto(money);
+        outputView.printPurchasedLotto(LottoDto.from(lotto));
         ChoiceNumber choiceNumber = initChoiceNumber();
         BonusNumber bonusNumber = initBonusNumber(choiceNumber);
         WinningNumber winningNumber = new WinningNumber(choiceNumber, bonusNumber);
-        LottoResult result = lottos.getResult(winningNumber);
+        LottoResult result = lotto.computeResult(winningNumber);
         outputView.printResult(result);
-        outputView.printYield(lottos.getYield());
+        outputView.printYield(lotto.getYield());
     }
 
     private Money initMoney() {
