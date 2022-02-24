@@ -1,8 +1,8 @@
-package view;
+package view.parser;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static view.LottoNumbersParser.INVALID_LOTTO_NUMBER_FORMAT_MESSAGE;
+import static view.parser.LottoNumbersParser.INVALID_LOTTO_NUMBER_FORMAT_MESSAGE;
 
 import exception.InvalidRangeLottoNumberException;
 import java.util.List;
@@ -12,6 +12,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import view.parser.LottoNumbersParser;
 
 public class LottoNumbersParserTest {
 

@@ -1,10 +1,9 @@
-package view;
+package view.parser;
 
 import model.LottoNumber;
 
 public class BonusNumberParser extends Parser<LottoNumber> {
-
-    static final String INVALID_BONUS_NUMBER_FORMAT_MESSAGE = "보너스 번호의 형식이 잘못 되었습니다. 예) 35";
+    public static final String INVALID_BONUS_NUMBER_FORMAT_MESSAGE = "보너스 번호의 형식이 잘못 되었습니다. 예) 35";
 
     @Override
     protected LottoNumber convert(String text) {

@@ -10,13 +10,13 @@ import model.LottoNumber;
 import model.LottoNumbers;
 import model.LottoResult;
 import model.Money;
-import model.RandomLottoNumbersGenerator;
+import model.generator.RandomLottoNumbersGenerator;
 import model.WinningLottoNumbers;
-import view.BonusNumberParser;
-import view.LottoNumbersParser;
-import view.MoneyParser;
+import view.parser.BonusNumberParser;
+import view.parser.LottoNumbersParser;
+import view.parser.MoneyParser;
 import view.OutputView;
-import view.Parser;
+import view.parser.Parser;
 
 public class Application {
 

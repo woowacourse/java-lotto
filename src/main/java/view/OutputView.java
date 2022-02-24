@@ -14,11 +14,13 @@ import model.LottoResult;
 
 public class OutputView {
 
+    public static final int LOSS = -1;
     private static final Map<Class<? extends Exception>, String> EXCEPTION_MESSAGE_MAP =
         Map.of(DuplicatedLottoNumbersException.class, "중복된 로또 번호는 입력할 수 없습니다.",
             InvalidLottoNumbersSizeException.class, "로또 번호 갯수는 6개여야 합니다.",
             InvalidMatchCountException.class, "일치하는 로또 번호 갯수는 0 ~ 6 사이여야 합니다.",
             InvalidRangeLottoNumberException.class, "로또 번호는 1 ~ 45 사이여야 합니다.");
+    public static final int PRINCIPAL = 1;
 
     public static void printIssuedLottoNumbers(List<LottoNumbers> lottoNumbersList) {
         System.out.println(lottoNumbersList.size() + "개를 구매했습니다.");
@@ -47,10 +49,14 @@ public class OutputView {
     }
 
     private static String getSummaryWord(LottoResult result) {
-        if (result.getProfitRate().compareTo(new BigDecimal(1)) == -1) {
+        if (isProfitRateLoss(result)) {
             return "손해";
         }
         return "이익";
+    }
+
+    private static boolean isProfitRateLoss(LottoResult result) {
+        return result.getProfitRate().compareTo(new BigDecimal(PRINCIPAL)) == LOSS;
     }
 
     public static void printErrorMessage(Exception e) {

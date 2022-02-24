@@ -1,4 +1,4 @@
-package view;
+package view.parser;
 
 import static java.util.stream.Collectors.toList;
 
@@ -10,23 +10,23 @@ public class LottoNumbersParser extends Parser<LottoNumbers> {
 
     @Override
     protected LottoNumbers convert(String text) {
-        List<String> tokens = splitNumbers(text);
-        List<String> trimNumbers = trimNumbers(tokens);
-        List<Integer> intNumbers = toInts(trimNumbers);
-        return new LottoNumbers(intNumbers);
+        List<String> tokens = splitByComma(text);
+        List<String> trimmedTokens = trimEach(tokens);
+        List<Integer> numbers = toIntEach(trimmedTokens);
+        return new LottoNumbers(numbers);
     }
 
-    private List<String> splitNumbers(String numbers) {
+    private List<String> splitByComma(String numbers) {
         return List.of(numbers.split(REGEX_COMMA));
     }
 
-    private List<String> trimNumbers(List<String> numbers) {
+    private List<String> trimEach(List<String> numbers) {
         return numbers.stream()
             .map(String::trim)
             .collect(toList());
     }
 
-    private List<Integer> toInts(List<String> numbers) {
+    private List<Integer> toIntEach(List<String> numbers) {
         return numbers.stream()
             .map(Integer::valueOf)
             .collect(toList());

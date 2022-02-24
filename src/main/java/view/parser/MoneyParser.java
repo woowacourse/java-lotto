@@ -1,4 +1,4 @@
-package view;
+package view.parser;
 
 import model.Money;
 

@@ -1,4 +1,4 @@
-package model;
+package model.generator;
 
 import static java.util.stream.Collectors.toList;
 import static model.LottoNumbers.LOTTO_NUMBER_SIZE;
@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.stream.IntStream;
+import model.LottoNumbers;
 
 public class RandomLottoNumbersGenerator implements LottoNumbersGenerator {
     private final List<Integer> numberPool;
@@ -30,15 +31,15 @@ public class RandomLottoNumbersGenerator implements LottoNumbersGenerator {
         Collections.shuffle(numberPool);
     }
 
-    private Queue<Integer> createQueueByNumberPool() {
-        Queue<Integer> queue = new LinkedList<>(numberPool);
-        return queue;
-    }
-
     private List<Integer> getNumbersFrom(Queue<Integer> queue) {
         return IntStream.range(0, LOTTO_NUMBER_SIZE)
                 .map(i -> queue.remove())
                 .boxed()
                 .collect(toList());
+    }
+
+    private Queue<Integer> createQueueByNumberPool() {
+        Queue<Integer> queue = new LinkedList<>(numberPool);
+        return queue;
     }
 }

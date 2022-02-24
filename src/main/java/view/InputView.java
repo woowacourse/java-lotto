@@ -22,8 +22,8 @@ public class InputView {
         return function.apply(SCANNER.nextLine());
     }
 
-    private static <T> T handleException(String message, Function<String, T> function, Consumer<Exception> errorHandler,
-                              Exception e) {
+    private static <T> T handleException(String message, Function<String, T> function,
+                                         Consumer<Exception> errorHandler, Exception e) {
         errorHandler.accept(e);
         if (isRepeatable()) {
             return inputSelectiveRepeatably(message, function, errorHandler);

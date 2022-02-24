@@ -3,6 +3,7 @@ package model;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import model.generator.LottoNumbersGenerator;
 
 public class LottoMachine {
     private final static Money LOTTO_PRICE = new Money(1000);

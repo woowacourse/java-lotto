@@ -1,10 +1,9 @@
-package view;
+package view.parser;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static view.MoneyParser.INVALID_MONEY_FORMAT_MESSAGE;
+import static view.parser.MoneyParser.INVALID_MONEY_FORMAT_MESSAGE;
 
-import java.math.BigInteger;
 import model.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

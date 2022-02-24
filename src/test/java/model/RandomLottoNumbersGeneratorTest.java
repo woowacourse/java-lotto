@@ -5,6 +5,8 @@ import static org.assertj.core.api.Assertions.fail;
 
 import java.util.List;
 import java.util.stream.Stream;
+import model.generator.LottoNumbersGenerator;
+import model.generator.RandomLottoNumbersGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

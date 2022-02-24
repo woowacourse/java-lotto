@@ -8,7 +8,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
-    static final int LOTTO_NUMBER_SIZE = 6;
+    public static final int LOTTO_NUMBER_SIZE = 6;
 
     private final Set<LottoNumber> lottoNumbers;
 
@@ -53,6 +53,10 @@ public class LottoNumbers {
                 .count();
     }
 
+    public List<Integer> getIntValues() {
+        return lottoNumbers.stream().map(LottoNumber::getIntValue).collect(Collectors.toList());
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -68,9 +72,5 @@ public class LottoNumbers {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
-    }
-
-    public List<Integer> getIntValues() {
-        return lottoNumbers.stream().map(LottoNumber::getIntValue).collect(Collectors.toList());
     }
 }

@@ -5,14 +5,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoResult {
+    private static final int INITIAL_RANK_COUNT = 0;
     private final Money inputMoney;
     private final Map<LottoRank, Integer> resultMap;
 
     public LottoResult(Money inputMoney) {
         this.inputMoney = inputMoney;
-        this.resultMap = new HashMap<>(Map.of(LottoRank.FIRST, 0, LottoRank.SECOND, 0,
-                LottoRank.THIRD, 0, LottoRank.FOURTH, 0,
-                LottoRank.FIFTH, 0, LottoRank.NOTHING, 0));
+        this.resultMap = new HashMap<>(Map.of(LottoRank.FIRST, INITIAL_RANK_COUNT, LottoRank.SECOND, INITIAL_RANK_COUNT,
+                LottoRank.THIRD, INITIAL_RANK_COUNT, LottoRank.FOURTH, INITIAL_RANK_COUNT,
+                LottoRank.FIFTH, INITIAL_RANK_COUNT, LottoRank.NOTHING, INITIAL_RANK_COUNT));
+    }
+
+    public BigDecimal getProfitRate() {
+        return getTotalPrize().divide(inputMoney);
     }
 
     private Money getTotalPrize() {
@@ -31,9 +36,5 @@ public class LottoResult {
 
     public void add(LottoRank rank) {
         resultMap.put(rank, getCountByRank(rank) + 1);
-    }
-
-    public BigDecimal getProfitRate() {
-        return getTotalPrize().divide(inputMoney);
     }
 }

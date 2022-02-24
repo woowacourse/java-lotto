@@ -1,4 +1,4 @@
-package view;
+package view.parser;
 
 public abstract class Parser<T> {
     protected static final String REGEX_BEGINNING = "^";
@@ -7,10 +7,7 @@ public abstract class Parser<T> {
     protected static final String REGEX_GROUP_END = ")";
     protected static final String REGEX_COMMA = ",";
     protected static final String REGEX_SPACE = "\\s*";
-    protected static final String REGEX_OR = "|";
     protected static final String REGEX_ONE_TO_NINE = "[1-9]";
-    protected static final String REGEX_TEN_TO_THIRTY_NINE = "[1-3][0-9]";
-    protected static final String REGEX_FORTY_TO_FORTY_FIVE = "4[0-5]";
     protected static final String REGEX_ZERO_TO_NINE = "[0-9]";
     protected static final String REGEX_ASTERISK = "*";
 
