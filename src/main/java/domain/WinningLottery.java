@@ -2,7 +2,12 @@ package domain;
 
 import java.util.List;
 
+import utils.LotteryMessage;
+
 public class WinningLottery {
+
+	private static final int BONUS_BALL_MIN_RAGE = 1;
+	private static final int BONUS_BALL_MAX_RANGE = 45;
 
 	final Lottery winningNumbers;
 	final int bonusBall;
@@ -19,15 +24,15 @@ public class WinningLottery {
 	}
 
 	private void validateRange(final int bonusBall) {
-		if (0 >= bonusBall || bonusBall >= 46) {
-			throw new IllegalArgumentException("보너스볼의 번호는 1~45 사이여야 합니다");
+		if (BONUS_BALL_MIN_RAGE > bonusBall || bonusBall > BONUS_BALL_MAX_RANGE) {
+			throw new IllegalArgumentException(LotteryMessage.BONUS_BALL_RANGE_ERROR);
 		}
 	}
 
 	private void validateDuplicatedNumber(final List<Integer> winningNumbers, final Integer bonusBall) {
 		if(winningNumbers.stream()
-			.anyMatch(winningNumber -> winningNumber.equals(bonusBall))) {
-			throw new IllegalArgumentException("당첨번호와 보너스볼에 중복된 번호가 있으면 안됩니다.");
+				 .anyMatch(winningNumber -> winningNumber.equals(bonusBall))) {
+			throw new IllegalArgumentException(LotteryMessage.DUPLICATED_WINNING_NUMBER_WITH_BONUS_NUMBER);
 		}
 	}
 
