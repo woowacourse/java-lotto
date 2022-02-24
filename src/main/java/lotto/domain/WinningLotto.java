@@ -17,8 +17,4 @@ public class WinningLotto {
     public boolean isContain(LottoNumber lottoNumber) {
         return winningLotto.isContain(lottoNumber);
     }
-
-    public Lotto getWinningLotto() {
-        return winningLotto;
-    }
 }

@@ -7,8 +7,9 @@ public class LottoTest {
 
     @Test
     void getRank() {
-        WinningNumbers winningNumbersInstance = new WinningNumbers("1,2,3,4,5,45", "6");
-        Lotto lotto = Lotto.generateLottoByManual("1,2,3,4,5,6");
-        Assertions.assertThat(lotto.getRank(winningNumbersInstance)).isEqualTo(Rank.RANK_2);
+        WinningLotto winningLotto = new WinningLotto("1,2,3,4,5,6");
+        BonusNumber bonusNumber = new BonusNumber("7",winningLotto);
+        Lotto lotto = Lotto.generateLottoByManual("1,2,3,4,5,7");
+        Assertions.assertThat(lotto.getRank(winningLotto, bonusNumber)).isEqualTo(Rank.RANK_2);
     }
 }
