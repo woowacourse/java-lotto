@@ -86,6 +86,7 @@ public class LottoController {
         double totalIncome = Rank.calculateAllResult(judgeLottos);
         double incomeRate = player.calculateIncomeRate(totalIncome);
 
+<<<<<<< HEAD
         List<RankDto> rankDtos = new ArrayList<>();
         int rankNumber = 5;
 
@@ -109,5 +110,8 @@ public class LottoController {
 =======
         return new RanksDto(rankDtos, incomeRate);
 >>>>>>> 7eb4fa3 (refactor: 프린트 할 결과물 생성 로직 변경)
+=======
+        return new RanksDto(incomeRate);
+>>>>>>> 2b5d619 (refactor: 결과 리스트 생성 로직 이동)
     }
 }

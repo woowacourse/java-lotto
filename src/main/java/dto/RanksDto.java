@@ -1,6 +1,7 @@
 package dto;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import domain.Rank;
 <<<<<<< HEAD
 import domain.ResultStatus;
@@ -42,15 +43,30 @@ public class RanksDto {
 import java.util.ArrayList;
 =======
 >>>>>>> 6741479 (feat: 수익률 계산 로직 및 출력 기능 구현)
+=======
+import domain.Rank;
+
+import java.util.ArrayList;
+>>>>>>> 2b5d619 (refactor: 결과 리스트 생성 로직 이동)
 import java.util.List;
 
 public class RanksDto {
     private final List<RankDto> rankDtos;
     private double incomeRate;
 
-    public RanksDto(List<RankDto> rankDtos, double incomeRate) {
-        this.rankDtos = rankDtos;
+    public RanksDto(double incomeRate) {
+        this.rankDtos = makeRankDtos();
         this.incomeRate = incomeRate;
+    }
+
+    private List<RankDto> makeRankDtos() {
+        List<RankDto> rankDtos = new ArrayList<>();
+        int rankNumber = 5;
+
+        for (Rank rank : Rank.values()) {
+            rankDtos.add(RankDto.from(rank, rankNumber--));
+        }
+        return rankDtos;
     }
 
     public List<RankDto> getRankDtos() {
