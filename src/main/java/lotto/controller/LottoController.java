@@ -1,4 +1,4 @@
-package lotto.domain.controller;
+package lotto.controller;
 
 import lotto.domain.LottoMatchKind;
 import lotto.domain.LottoNumbers;
