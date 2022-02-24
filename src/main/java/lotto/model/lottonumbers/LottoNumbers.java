@@ -1,6 +1,7 @@
-package lotto.model;
+package lotto.model.lottonumbers;
 
 import java.util.List;
+import lotto.model.LottoNumber;
 
 public abstract class LottoNumbers {
     private static final int LOTTO_NUMBER_COUNT = 6;

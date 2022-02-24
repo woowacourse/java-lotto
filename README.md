@@ -10,7 +10,7 @@
 
 | 항목           | 설명                                               |
 | -------------- | -------------------------------------------------- |
-| 숫자 유무      | 숫자가 아닐 경우 `IllegalArgumentException`        |
+| 숫자 유무      | 숫자가 아닐 경우 `NumberFormatException`           |
 | 양수 유무      | 양수가 아닐 경우 `IllegalArgumentException`        |
 | 천원 미만 여부 | 천원 미만을 투입할 경우 `IllegalArgumentException` |
 

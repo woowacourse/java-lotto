@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import lotto.model.lottonumbers.LottoTicket;
 
 public class LottoTicketFactory {
     private static final LottoTicketFactory lottoTicketFactory = new LottoTicketFactory();

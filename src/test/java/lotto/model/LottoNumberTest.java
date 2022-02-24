@@ -15,7 +15,7 @@ public class LottoNumberTest {
     void notNumber(String input) {
         // then
         assertThatThrownBy(() -> new LottoNumber(input))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(NumberFormatException.class)
                 .hasMessage(NOT_NUMBER_OF_LOTTO);
     }
 

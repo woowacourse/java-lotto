@@ -19,7 +19,7 @@ public class LottoNumber {
         try {
             return Integer.parseInt(numberString);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(NOT_NUMBER_OF_LOTTO);
+            throw new NumberFormatException(NOT_NUMBER_OF_LOTTO);
         }
     }
 

@@ -1,13 +1,15 @@
-package lotto.model;
+package lotto.model.lottonumbers;
 
-import static lotto.model.LottoTicket.INVALID_LOTTO_NUMBER_COUNT;
-import static lotto.model.LottoTicket.LOTTO_NUMBER_DUPLICATED;
+import static lotto.model.lottonumbers.LottoTicket.INVALID_LOTTO_NUMBER_COUNT;
+import static lotto.model.lottonumbers.LottoTicket.LOTTO_NUMBER_DUPLICATED;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
+import lotto.model.LottoNumber;
+import lotto.model.lottonumbers.LottoTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

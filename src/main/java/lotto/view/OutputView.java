@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lotto.model.LottoNumber;
 import lotto.model.LottoRank;
-import lotto.model.LottoTicket;
+import lotto.model.lottonumbers.LottoTicket;
 import lotto.model.Money;
 import lotto.model.WinningStatistics;
 

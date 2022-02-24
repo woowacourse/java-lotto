@@ -1,7 +1,8 @@
-package lotto.model;
+package lotto.model.lottonumbers;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.model.LottoNumber;
 
 public class WinningNumbers extends LottoNumbers {
 
