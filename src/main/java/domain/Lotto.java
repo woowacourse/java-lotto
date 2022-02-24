@@ -1,9 +1,5 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,7 +21,6 @@ public class Lotto {
         return this.lottoNumbers;
     }
 
-
     public List<Integer> generateNumber() {
 
         List<Integer> numbers = IntStream.range(1, 46)
@@ -39,10 +34,10 @@ public class Lotto {
     public Rewards checkWinning(List<Integer> winningNumbers, Integer bonusNumber) {
 
         int winningCount = (int) lottoNumbers.stream()
-                .filter(number -> winningNumbers.contains(number))
+                .filter(winningNumbers::contains)
                 .count();
         int bonusCount = (int) lottoNumbers.stream()
-                .filter(number -> bonusNumber.equals(number))
+                .filter(bonusNumber::equals)
                 .count();
 
         if (winningCount < 3) {
@@ -52,7 +47,6 @@ public class Lotto {
         if (winningCount != 5) {
             bonusCount = 0;
         }
-
         return Rewards.findReward(winningCount, bonusCount);
     }
 }

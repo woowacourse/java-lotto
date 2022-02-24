@@ -11,7 +11,6 @@ public class MoneyTest {
     @Test
     @DisplayName("생성자에 string숫자가 들어간다")
     void make_money() {
-
         Money money = new Money("12000");
 
         assertThat(money.money()).isEqualTo(12000);
