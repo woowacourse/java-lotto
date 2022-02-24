@@ -4,6 +4,8 @@ import util.LottoNumbersGenerator;
 
 import java.util.List;
 
+import static constant.LottoConstant.NUMBER_FOR_BONUS_CHECK;
+
 public class Lotto {
 
 	List<Integer> numbers;
@@ -24,7 +26,7 @@ public class Lotto {
 		int count = (int) answerLotto.getNumbers().stream().filter(num -> this.numbers.contains(num)).count();
 		boolean bonus = false;
 
-		if (count == 5) {
+		if (count == NUMBER_FOR_BONUS_CHECK) {
 			bonus = this.numbers.contains(answerLotto.getBonusNumber());
 		}
 

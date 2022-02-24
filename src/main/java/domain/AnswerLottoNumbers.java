@@ -18,11 +18,11 @@ public class AnswerLottoNumbers {
 		this.numbers = numbers;
 	}
 
-	public boolean isExists(BonusNumber bonusNumber) {
-		return this.numbers.contains(bonusNumber.getNumber());
+	public boolean isExists(int target) {
+		return this.numbers.contains(target);
 	}
 
-	public List<Integer> getAnswerLottoNumbers() {
+	public List<Integer> getNumbers() {
 		return this.numbers;
 	}
 

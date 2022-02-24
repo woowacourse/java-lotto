@@ -13,19 +13,30 @@ public class LottoGameController {
 
 	public static void run() {
 		try {
-			Lottos lottos = Lottos.of(inputMoney(), new RandomLottoNumberGenerator());
-			printLottos(lottos);
+			Lottos lottos = initLottos();
 			AnswerLotto answerLotto = initAnswerLotto();
-			printStatistics(lottos.generateEachCount(answerLotto));
-			printProfitRatio(lottos.generateProfitRatio(answerLotto));
+			printResult(lottos, answerLotto);
 		} catch (IllegalArgumentException e) {
 			printErrorMessage(e.getMessage());
 		}
 	}
 
+	private static Lottos initLottos() {
+		Lottos lottos = Lottos.of(inputMoney(), new RandomLottoNumberGenerator());
+		printLottos(lottos);
+
+		return lottos;
+	}
+
 	private static AnswerLotto initAnswerLotto() {
 		AnswerLottoNumbers lottoNumbers = new AnswerLottoNumbers(inputAnsNumbers());
 		BonusNumber bonusNumber = new BonusNumber(inputBonusNumber());
+
 		return new AnswerLotto(lottoNumbers, bonusNumber);
+	}
+
+	private static void printResult(Lottos lottos, AnswerLotto answerLotto) {
+		printStatistics(lottos.generateEachCount(answerLotto));
+		printProfitRatio(lottos.generateProfitRatio(answerLotto));
 	}
 }

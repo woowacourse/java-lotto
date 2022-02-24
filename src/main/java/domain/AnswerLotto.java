@@ -3,8 +3,11 @@ package domain;
 import java.util.List;
 
 public class AnswerLotto {
-	private AnswerLottoNumbers numbers;
-	private BonusNumber bonusNumber;
+
+	private static final String BONUS_AND_ANSWER_MUST_NOT_DUPLICATED = "[ERROR] 보너스 번호는 지난 주 당첨 번호 숫자들과 중복일 수 없습니다";
+
+	private final AnswerLottoNumbers numbers;
+	private final BonusNumber bonusNumber;
 
 	public AnswerLotto(AnswerLottoNumbers lottoNumbers, BonusNumber bonusNumber) {
 		validateBonusNumberInNumbers(lottoNumbers, bonusNumber);
@@ -13,7 +16,7 @@ public class AnswerLotto {
 	}
 
 	public List<Integer> getNumbers() {
-		return this.numbers.getAnswerLottoNumbers();
+		return this.numbers.getNumbers();
 	}
 
 	public int getBonusNumber() {
@@ -21,8 +24,8 @@ public class AnswerLotto {
 	}
 
 	private void validateBonusNumberInNumbers(AnswerLottoNumbers numbers, BonusNumber bonusNumber) {
-		if (numbers.isExists(bonusNumber)) {
-			throw new IllegalArgumentException("[ERROR] 보너스 번호는 지난 주 당첨 번호 숫자들과 중복일 수 없습니다");
+		if (numbers.isExists(bonusNumber.getNumber())) {
+			throw new IllegalArgumentException(BONUS_AND_ANSWER_MUST_NOT_DUPLICATED);
 		}
 	}
 }

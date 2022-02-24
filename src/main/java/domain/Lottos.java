@@ -7,23 +7,28 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import static constant.LottoConstant.PRICE_OF_LOTTO;
+
 public class Lottos {
 
 	private static final String DIVIDE_BY_THOUSAND = "[ERROR] 1000원으로 나누어 떨어지는 금액을 입력해주세요.";
+
 	private final List<Lotto> lottos;
 
-	public Lottos(List<Lotto> nowLottos) {
-		this.lottos = nowLottos;
+	public Lottos(List<Lotto> lottos) {
+		this.lottos = lottos;
 	}
 
-	public static Lottos of(int price, LottoNumbersGenerator lottoNumbersGenerator) {
-		validatePrice(price);
-		List<Lotto> nowLottos = new ArrayList<>();
-		int count = price / 1000;
+	public static Lottos of(int money, LottoNumbersGenerator lottoNumbersGenerator) {
+		validateMoney(money);
+		int count = money / PRICE_OF_LOTTO;
+
+		List<Lotto> lottos = new ArrayList<>();
 		while (count-- > 0) {
-			nowLottos.add(new Lotto(lottoNumbersGenerator));
+			lottos.add(new Lotto(lottoNumbersGenerator));
 		}
-		return new Lottos(nowLottos);
+
+		return new Lottos(lottos);
 	}
 
 	public List<Lotto> getLottos() {
@@ -51,15 +56,15 @@ public class Lottos {
 
 	public float generateProfitRatio(AnswerLotto answerLotto) {
 		int totalPrize = 0;
-		int totalPrice = this.lottos.size() * 1000;
+		int totalPrice = this.lottos.size() * PRICE_OF_LOTTO;
 		for (Lotto lotto : this.lottos) {
 			totalPrize += lotto.calculate(answerLotto).getPrice();
 		}
 		return (float) totalPrize / totalPrice;
 	}
 
-	private static void validatePrice(int price) {
-		if (price % 1000 != 0 || price == 0) {
+	private static void validateMoney(int money) {
+		if (money % PRICE_OF_LOTTO != 0 || money < PRICE_OF_LOTTO) {
 			throw new IllegalArgumentException(DIVIDE_BY_THOUSAND);
 		}
 	}
