@@ -5,6 +5,8 @@ import java.util.List;
 
 public class LottoTickets {
 
+    private static final int LOTTO_NUMBER_SIZE = 6;
+    
     private final List<LottoTicket> lottoTickets;
 
     public LottoTickets(int lottoCount) {
@@ -23,7 +25,7 @@ public class LottoTickets {
     private void createLottoTickets(int lottoCount) {
         LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
         for (int i = 0; i < lottoCount; i++) {
-            lottoTickets.add(new LottoTicket(lottoNumberGenerator.getLottoNumbers(6)));
+            lottoTickets.add(new LottoTicket(lottoNumberGenerator.getLottoNumbers(LOTTO_NUMBER_SIZE)));
         }
     }
 

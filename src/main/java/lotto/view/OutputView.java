@@ -11,6 +11,12 @@ import lotto.domain.Rank;
 public class OutputView {
 
     private static final String LOTTO_COUNT_FORMAT = "개를 구매했습니다.";
+    private static final String STATISTICS_GUIDE_MESSAGE = "당첨 통계\n---------";
+    private static final String YIELD_FORMAT = "총 수익률은 %.2f입니다.";
+    private static final String STATISTICS_FORMAT = " (%d원) - %d개";
+    private static final String YIELD_GAIN_MESSAGE = "(기준이 1이기 때문에 결과적으로 이득이라는 의미임)";
+    private static final String YIELD_LOSS_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+    private static final int YIELD_STANDARD = 1;
 
     public static void displayLottoTickets(LottoTickets lottoTickets) {
         System.out.println(lottoTickets.getLottoTickets().size() + LOTTO_COUNT_FORMAT);
@@ -28,25 +34,24 @@ public class OutputView {
 
     public static void displayResult(EnumMap<Rank, Integer> statistics, double calculateYield) {
         System.out.println();
-        System.out.println("당첨 통계");
-        System.out.println("---------");
+        System.out.println(STATISTICS_GUIDE_MESSAGE);
         for (Rank rank : statistics.keySet()) {
             displayStatistics(statistics, rank);
         }
-        System.out.println("총 수익률은 " + calculateYield + "입니다." + isLoss(calculateYield));
+        System.out.println(String.format(YIELD_FORMAT, calculateYield) + isLoss(calculateYield));
     }
 
     private static void displayStatistics(EnumMap<Rank, Integer> statistics, Rank rank) {
-        if (rank.getMatchCount() != 0) {
+        if (rank.getMatchCount() != Rank.MATCH_ZERO_NUMBERS.getMatchCount()) {
             System.out.println(
-                    rank.getMatchStatus() + " (" + rank.getReward() + "원) - " + statistics.get(rank) + "개");
+                    rank.getMatchStatus() + String.format(STATISTICS_FORMAT, rank.getReward(), statistics.get(rank)));
         }
     }
 
     private static String isLoss(double calculateYield) {
-        if (calculateYield >= 1) {
-            return "(기준이 1이기 때문에 결과적으로 이득이라는 의미임)";
+        if (calculateYield >= YIELD_STANDARD) {
+            return YIELD_GAIN_MESSAGE;
         }
-        return "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+        return YIELD_LOSS_MESSAGE;
     }
 }

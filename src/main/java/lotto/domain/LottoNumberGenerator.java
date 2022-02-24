@@ -6,11 +6,14 @@ import java.util.List;
 
 public class LottoNumberGenerator {
 
+    private static final int MINIMUM_RANGE = 1;
+    private static final int MAXIMUM_RANGE = 45;
+
     private final List<LottoNumber> lottoNumbers;
 
     public LottoNumberGenerator() {
         lottoNumbers = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
+        for (int i = MINIMUM_RANGE; i <= MAXIMUM_RANGE; i++) {
             lottoNumbers.add(new LottoNumber(i));
         }
     }

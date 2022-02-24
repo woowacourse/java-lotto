@@ -12,6 +12,7 @@ public class InputView {
     private static final String REQUEST_MONEY = "구입금액을 입력해 주세요.";
     private static final String REQUEST_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String REQUEST_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
+    private static final String DELIMITER = ", ";
 
     private static final Scanner scanner = new Scanner(System.in);
 
@@ -37,7 +38,7 @@ public class InputView {
     }
 
     public static List<Integer> splitNumbers(String input) {
-        String[] inputNumbers = input.split(", ");
+        String[] inputNumbers = input.split(DELIMITER);
         return Arrays.stream(inputNumbers)
                 .map(InputView::toInteger)
                 .collect(Collectors.toList());
