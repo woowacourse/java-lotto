@@ -18,6 +18,18 @@ public class Lotto {
         this.numbers = numbers;
     }
 
+    private void validateSize(List<Number> numbers) {
+        if (numbers.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("로또 번호는 6자리 이어야 한다.");
+        }
+    }
+
+    private void validateDuplicateNumbers(List<Number> numbers) {
+        if (new HashSet<>(numbers).size() != numbers.size()) {
+            throw new IllegalArgumentException("로또 번호는 중복될 수 없다.");
+        }
+    }
+
     public int countMatchNumbers(Lotto lotto) {
         return (int) lotto.numbers.stream()
                 .filter(this.numbers::contains)
@@ -31,17 +43,5 @@ public class Lotto {
     public List<Number> getNumbers() {
         numbers.sort(Comparator.comparingInt(Number::getNumber));
         return List.copyOf(numbers);
-    }
-
-    private void validateSize(List<Number> numbers) {
-        if (numbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또 번호는 6자리 이어야 한다.");
-        }
-    }
-
-    private void validateDuplicateNumbers(List<Number> numbers) {
-        if (new HashSet<>(numbers).size() != numbers.size()) {
-            throw new IllegalArgumentException("로또 번호는 중복될 수 없다.");
-        }
     }
 }
