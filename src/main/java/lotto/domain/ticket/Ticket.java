@@ -14,7 +14,11 @@ public class Ticket {
 
 	public Ticket(final List<Integer> numbers) {
 		TicketValidator.validateTicket(numbers);
-		this.balls = numbers.stream()
+		this.balls = generateBalls(numbers);
+	}
+
+	private List<Ball> generateBalls(final List<Integer> numbers) {
+		return numbers.stream()
 				.map(Ball::new)
 				.collect(Collectors.toUnmodifiableList());
 	}
