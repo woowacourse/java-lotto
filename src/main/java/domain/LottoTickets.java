@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTickets {
+	private static final String ERROR_NOT_DIVISIBLE_BY_UNIT_PRICE = "[ERROR] 금액은 1000원 단위로 나누어 떨어져야 합니다.";
+	private static final String ERROR_NOT_POSITIVE = "[ERROR] 금액은 0원일 수 없습니다.";
+	private static final int UNIT_PRICE = 1000;
 	private final List<Lotto> lottoTickets = new ArrayList<>();
 
 	public LottoTickets(int price) {
 		validateDivisibleByThousand(price);
 		validatePositive(price);
-		price /= 1000;
+		price /= UNIT_PRICE;
 		while (price-- > 0) {
 			this.lottoTickets.add(new Lotto());
 		}
@@ -24,14 +27,14 @@ public class LottoTickets {
 	}
 
 	private static void validateDivisibleByThousand(int price) {
-		if (price % 1000 != 0) {
-			throw new IllegalArgumentException("[ERROR] 금액은 1000원 단위로 나누어 떨어져야 합니다.");
+		if (price % UNIT_PRICE != 0) {
+			throw new IllegalArgumentException(ERROR_NOT_DIVISIBLE_BY_UNIT_PRICE);
 		}
 	}
 
 	private static void validatePositive(int price) {
 		if (price == 0) {
-			throw new IllegalArgumentException("[ERROR] 금액은 0원일 수 없습니다.");
+			throw new IllegalArgumentException(ERROR_NOT_POSITIVE);
 		}
 	}
 }

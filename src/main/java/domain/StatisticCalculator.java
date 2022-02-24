@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public class StatisticCalculator {
+	private static final int UNIT_PRICE = 1000;
 	private final Map<WinningStatus, Integer> resultStatistics = new LinkedHashMap<>();
 
 	public StatisticCalculator() {
@@ -26,7 +27,7 @@ public class StatisticCalculator {
 	public float calculateProfitRatio() {
 		int totalPrice =
 			this.resultStatistics.keySet().stream().filter(num -> this.resultStatistics.get(num) > 0).mapToInt(
-				this.resultStatistics::get).sum() * 1000;
+				this.resultStatistics::get).sum() * UNIT_PRICE;
 		int totalPrize = this.resultStatistics.keySet().stream().filter(num -> this.resultStatistics.get(num) > 0)
 			.mapToInt(WinningStatus::getProfit).sum();
 		return (float) totalPrize / totalPrice;

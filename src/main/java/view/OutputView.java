@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class OutputView {
+	private static final String DELIMITER = ", ";
 	public static void printLottoTickets(LottoTickets lottoTickets) {
 		System.out.println(lottoTickets.getLottoTicketsSize() + "개를 구매했습니다.");
 		for (Lotto lotto : lottoTickets.getLottoTickets()) {
@@ -16,14 +17,14 @@ public class OutputView {
 
 	private static void printLotto(Lotto lotto) {
 		System.out.println(
-			"[" + lotto.getNumbers().stream().map(String::valueOf).collect(Collectors.joining(", ")) + "]");
+			"[" + lotto.getNumbers().stream().map(String::valueOf).collect(Collectors.joining(DELIMITER)) + "]");
 	}
 
 	public static void printStatistics(List<Integer> resultCount) {
 		System.out.println("\n당첨 통계");
 		System.out.println("---------");
 		WinningStatus[] winningStatuses = WinningStatus.values();
-		for (int index = 0; index < 6; index++) {
+		for (int index = 0; index < winningStatuses.length; index++) {
 			printEachResult(winningStatuses[index], resultCount.get(index));
 		}
 	}
