@@ -6,6 +6,8 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import utils.LotteryMessage;
+
 public class InputView {
 
 	private static final Scanner scanner = new Scanner(System.in);
@@ -14,6 +16,8 @@ public class InputView {
 	private static final String WINNING_NUMBER_PATTERN = "^([1-9]{1,2}[,][\\s]?){5}[1-9]{1,2}$";
 	private static final Pattern COMPILED_WINNING_NUMBER_PATTERN = Pattern.compile(WINNING_NUMBER_PATTERN);
 	private static final String WINNING_NUMBER_DISTRIBUTOR = ",";
+	private static final int AMOUNT_MIN_RANGE = 1_000;
+	private static final int AMOUNT_MAX_RANGE = 100_000;
 
 	public static int inputValidMoney() {
 		final String money = inputMoney();
@@ -22,7 +26,7 @@ public class InputView {
 
 	private static String inputMoney() {
 		try {
-			System.out.println("구입금액을 입력해 주세요.");
+			System.out.println(LotteryMessage.PURCHASE_AMOUNT);
 			final String money = scanner.nextLine();
 			validateMoney(money);
 			return money;
@@ -39,14 +43,14 @@ public class InputView {
 
 	private static void validateRange(String money) {
 		int number = Integer.parseInt(money);
-		if (number < 1000 || number > 100000) {
-			throw new IllegalArgumentException("구입 금액의 범위는 1000원~100000원 입니다.");
+		if (number < AMOUNT_MIN_RANGE || number > AMOUNT_MAX_RANGE) {
+			throw new IllegalArgumentException(LotteryMessage.PURCHASE_AMOUNT_RANGE_ERROR);
 		}
 	}
 
 	private static void validateNumber(String money) {
 		if (!COMPILED_NUMBER_PATTERN.matcher(money).matches()) {
-			throw new IllegalArgumentException("구입 금액은 숫자여야 합니다.");
+			throw new IllegalArgumentException(LotteryMessage.PURCHASE_AMOUNT_NOT_NUMBER_ERROR);
 		}
 	}
 
@@ -60,7 +64,7 @@ public class InputView {
 
 	private static String inputLotteryNumber() {
 		try {
-			System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+			System.out.println(LotteryMessage.LAST_WEEK_WINNING_NUMBERS);
 			final String winningNumber = scanner.nextLine();
 			validateWinningNumber(winningNumber);
 			return winningNumber;
@@ -72,7 +76,7 @@ public class InputView {
 
 	private static void validateWinningNumber(String winningNumber) {
 		if (!COMPILED_WINNING_NUMBER_PATTERN.matcher(winningNumber).matches()) {
-			throw new IllegalArgumentException("당첨번호는 \"1,2,3,4,5,6\"과 같은 꼴 이어야 합니다");
+			throw new IllegalArgumentException(LotteryMessage.WINNING_NUMBER_FORMAT_ERROR);
 		}
 	}
 
@@ -82,7 +86,7 @@ public class InputView {
 
 	private static String inputBonusNumber() {
 		try {
-			System.out.println("보너스 볼을 입력해 주세요.");
+			System.out.println(LotteryMessage.LAST_WEEK_BONUS_NUMBER);
 			final String bonusNumber = scanner.nextLine();
 			validateNumber(bonusNumber);
 			return bonusNumber;
