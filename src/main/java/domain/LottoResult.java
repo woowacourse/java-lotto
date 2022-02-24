@@ -7,14 +7,7 @@ public class LottoResult {
 
     private static final int DEFAULT_VALUE = 0;
 
-    private final Map<LottoRank, Integer> resultCount;
-
-    public LottoResult() {
-        this.resultCount = new LinkedHashMap<>();
-        for (LottoRank rank : LottoRank.values()) {
-            initLottoRank(rank);
-        }
-    }
+    private final Map<LottoRank, Integer> resultCount = new LinkedHashMap<>();
 
     public long sumTotalPrice() {
         long totalPrice = DEFAULT_VALUE;
@@ -30,16 +23,6 @@ public class LottoResult {
     }
 
     public void putLottoRank(LottoRank rank) {
-        if (rank.equals(LottoRank.RANK_NOTHING)) {
-            return;
-        }
-        resultCount.put(rank, resultCount.get(rank) + 1);
-    }
-
-    private void initLottoRank(LottoRank rank) { //TODO:
-        if (rank == LottoRank.RANK_NOTHING) {
-            return;
-        }
-        resultCount.put(rank, DEFAULT_VALUE);
+        resultCount.put(rank, resultCount.getOrDefault(rank, DEFAULT_VALUE) + 1);
     }
 }
