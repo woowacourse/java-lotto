@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RanksDto {
+    public static final int RANK_NUMBER = 5;
     private final List<RankDto> rankDtos;
     private double incomeRate;
 
@@ -16,7 +17,7 @@ public class RanksDto {
 
     private List<RankDto> makeRankDtos() {
         List<RankDto> rankDtos = new ArrayList<>();
-        int rankNumber = 5;
+        int rankNumber = RANK_NUMBER;
 
         for (Rank rank : Rank.values()) {
             rankDtos.add(RankDto.from(rank, rankNumber--));
