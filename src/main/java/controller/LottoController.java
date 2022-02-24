@@ -8,6 +8,7 @@ import model.LottoGame;
 import model.LottoTicketDto;
 import model.LottoTickets;
 import model.WinningPrize;
+import model.WinningPrizeStrategy;
 import view.BonusNumberInputView;
 import view.LottoTicketOutputView;
 import view.PurchaseMoneyInputView;
@@ -18,8 +19,8 @@ import view.WinningResultOutputView;
 public class LottoController {
     private LottoGame lottoGame;
 
-    public void initLottoGame(LottoTickets lottoTickets, List<Integer> winningNumbers, int bonusNumber) {
-        lottoGame = new LottoGame(lottoTickets, winningNumbers, bonusNumber);
+    public void initLottoGame(LottoTickets lottoTickets, List<Integer> winningNumbers, int bonusNumber, WinningPrizeStrategy winningPrizeStrategy) {
+        lottoGame = new LottoGame(lottoTickets, winningNumbers, bonusNumber, winningPrizeStrategy);
     }
 
     public Map<WinningPrize, Integer> winningResults() {

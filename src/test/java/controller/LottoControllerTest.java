@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import model.GenerateStrategy;
 import model.LottoTickets;
+import model.LottoWinningPrizeStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +22,7 @@ public class LottoControllerTest {
         GenerateStrategy generateStrategy = () -> new ArrayList<>(dummyLottoNumber);
         LottoTickets lottoTickets = new LottoTickets(1000, generateStrategy);
         List<Integer> winningTicket = new ArrayList<>(dummyLottoNumber);
-        controller.initLottoGame(lottoTickets, winningTicket, 7);
+        controller.initLottoGame(lottoTickets, winningTicket, 7, new LottoWinningPrizeStrategy());
         assertThat(Math.round(controller.rateOfReturn())).isEqualTo(2000000);
     }
 

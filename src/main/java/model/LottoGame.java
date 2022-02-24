@@ -19,10 +19,12 @@ public class LottoGame {
     }};
     private final LottoTickets lottoTickets;
     private final WinningTicket winningTicket;
+    private final WinningPrizeStrategy winningPrizeStrategy;
 
-    public LottoGame(LottoTickets lottoTickets, List<Integer> winningNumbers, int bonusNumber) {
+    public LottoGame(LottoTickets lottoTickets, List<Integer> winningNumbers, int bonusNumber, WinningPrizeStrategy winningPrizeStrategy) {
         this.lottoTickets = lottoTickets;
         winningTicket = new WinningTicket(winningNumbers, bonusNumber);
+        this.winningPrizeStrategy = winningPrizeStrategy;
     }
 
     public List<LottoTicket> getTickets() {
@@ -54,7 +56,9 @@ public class LottoGame {
     }
 
     private void countingWinningTicket(Map<WinningPrize, Integer> result, LottoTicket lottoTicket) {
-        WinningPrize winningPrize = compareWin(lottoTicket);
+        int matchCount = winningTicket.compareMatchCount(lottoTicket);
+        boolean matchBonus = winningTicket.matchBonusNumber(lottoTicket);
+        WinningPrize winningPrize = winningPrizeStrategy.winningPrize(matchCount, matchBonus);
         Integer winningPrizeCount = result.get(winningPrize) + COUNT_UNIT;
         result.put(winningPrize, winningPrizeCount);
     }
@@ -62,14 +66,6 @@ public class LottoGame {
     private boolean isWinning(LottoTicket lottoTicket) {
         int count = winningTicket.compareMatchCount(lottoTicket);
         return count >= WINNING_FLAG;
-    }
-
-    private WinningPrize compareWin(LottoTicket lottoTicket) {
-        if (winningTicket.isSecondWinning(lottoTicket)) {
-            return WinningPrize.SECOND;
-        }
-        int count = winningTicket.compareMatchCount(lottoTicket);
-        return winningInfo.get(count);
     }
 
     private int calculateTotalReturn() {
