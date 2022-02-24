@@ -29,33 +29,11 @@ public class LottoService {
 
 	public AnalysisDto generateAnalysis(final List<Integer> answerNumbers, final int bonusBall) {
 		final List<Rank> ranks = tickets.getRanks(new Ticket(answerNumbers), new Ball(bonusBall));
-		final Map<Rank, Integer> rankCounts = getRankCount(ranks);
-		final double profitRate = getProfitRate(credit.getMoney(), rankCounts);
-		return new AnalysisDto(rankCounts, profitRate);
+		return new AnalysisDto(ranks, credit.getMoney());
 	}
 
 	public Tickets getTickets() {
 		return this.tickets;
-	}
-
-	public Map<Rank, Integer> getRankCount(final List<Rank> ranks) {
-		final Map<Rank, Integer> rankMap = new LinkedHashMap<>();
-
-		for (Rank rank : Rank.values()) {
-			final int count = Collections.frequency(ranks, rank);
-			rankMap.put(rank, count);
-		}
-		return rankMap;
-	}
-
-	public double getProfitRate(final int payment, final Map<Rank, Integer> rankCounts) {
-		long total = 0L;
-
-		for (Rank rank : rankCounts.keySet()) {
-			total += rank.getPrize() * rankCounts.get(rank);
-		}
-
-		return (double) total / payment;
 	}
 
 }

@@ -82,7 +82,7 @@ public class OutputView {
 			printMessage(message);
 		}
 
-		final double rate = analysisDto.getRate();
+		final double rate = analysisDto.getProfitRate();
 		final String message = String.format(PROFIT_RAGE_FORMAT.getMessage(), rate);
 		printMessage(message);
 	}
