@@ -4,6 +4,7 @@ import static constant.LottoConstants.LOTTO_PRICE;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
@@ -23,13 +24,25 @@ public class LottoGame {
     }
 
     private void analyzeLottos() {
-        for (Lotto lotto : lottos.getLottos()) {
-            LottoResult result = referee.getLottoResult(lotto);
-            if (result == null) {
-                continue;
-            }
-            resultsStatistics.put(result, resultsStatistics.get(result) + 1);
-        }
+        List<LottoResult> results = getLottoResults();
+
+        resultsStatistics.keySet()
+                .forEach(key -> collectResultsByKey(results, key));
+    }
+
+    private List<LottoResult> getLottoResults() {
+        return lottos.getLottos()
+                .stream()
+                .map(referee::getLottoResult)
+                .collect(Collectors.toList());
+    }
+
+    private void collectResultsByKey(List<LottoResult> results, LottoResult key) {
+        int prizeCount = (int) results.stream()
+                .filter(result -> result == key)
+                .count();
+
+        resultsStatistics.put(key, prizeCount);
     }
 
     public Map<LottoResult, Integer> getResultStatistics() {
