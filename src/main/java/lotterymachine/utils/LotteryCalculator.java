@@ -1,6 +1,6 @@
 package lotterymachine.utils;
 
-import static java.lang.Math.round;
+import static java.lang.Math.floor;
 
 public class LotteryCalculator {
     private static final int LOTTERY_PRICE = 1000;
@@ -11,6 +11,6 @@ public class LotteryCalculator {
     }
 
     public static double calculateProfitRate(double winningLotteryAmount, int amount) {
-        return round(winningLotteryAmount / amount * DECIMAL_PLACE_SAVER)  / DECIMAL_PLACE_SAVER;
+        return floor(winningLotteryAmount / amount * DECIMAL_PLACE_SAVER)  / DECIMAL_PLACE_SAVER;
     }
 }
