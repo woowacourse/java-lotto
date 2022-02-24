@@ -1,0 +1,45 @@
+package lotto.domain;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+public class LottoNumbers {
+
+    private static final int LOTTO_NUMBERS_SIZE = 6;
+
+    private final Set<LottoNumber> numbers;
+
+    public LottoNumbers(List<LottoNumber> numbers) {
+        Set<LottoNumber> lottoNumbers = new HashSet<>(numbers);
+        validateDuplication(lottoNumbers);
+        this.numbers = lottoNumbers;
+    }
+
+    private void validateDuplication(Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
+            throw new IllegalArgumentException("[ERROR] 로또 번호는 중복되지 않은 6개의 숫자여야합니다.");
+        }
+    }
+
+    public List<Integer> intValues() {
+        return numbers.stream()
+                .map(LottoNumber::getNumber)
+                .collect(Collectors.toList());
+    }
+
+    public Set<LottoNumber> getMatchedNumbers(Set<LottoNumber> targetNumbers) {
+        Set<LottoNumber> copyNumbers = new HashSet<>(numbers);
+        copyNumbers.retainAll(targetNumbers);
+        return copyNumbers;
+    }
+
+    public boolean contains(LottoNumber number) {
+        return numbers.contains(number);
+    }
+
+    public Set<LottoNumber> getLottoNumbers() {
+        return numbers;
+    }
+}

@@ -4,14 +4,18 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ResultTest {
 
     private Result result;
-    private TotalNumber totalNumber;
+    private TotalWinningNumber totalWinningNumber;
 
     @BeforeEach
     void setUp() {
@@ -19,15 +23,15 @@ class ResultTest {
 
         WinningNumber winningNumber = new WinningNumber("1,2,3,4,5,6");
         LottoNumber bonusNumber = new LottoNumber("7");
-        totalNumber = new TotalNumber(winningNumber, bonusNumber);
+        totalWinningNumber = new TotalWinningNumber(winningNumber, bonusNumber);
     }
 
     @Test
     @DisplayName("당첨 결과를 구한다")
     void calcRank() {
-        List<Set<LottoNumber>> tickets = initTickets();
+        List<LottoNumbers> tickets = initTickets();
 
-        result.countRank(totalNumber, tickets);
+        result.countRank(totalWinningNumber, tickets);
 
         Map<Rank, Integer> expected = new HashMap<>();
         expected.put(Rank.FIRST, 1);
@@ -42,10 +46,10 @@ class ResultTest {
     @Test
     @DisplayName("만약 아무 등수에 해당하지 않는 경우 빈 맵을 반환한다")
     void testCalcRankEdgeCase() {
-        List<Set<LottoNumber>> tickets = new ArrayList<>();
+        List<LottoNumbers> tickets = new ArrayList<>();
         tickets.add(initTicket(List.of(1, 2, 8, 9, 10, 11)));
 
-        result.countRank(totalNumber, tickets);
+        result.countRank(totalWinningNumber, tickets);
 
         Map<Rank, Integer> expected = new HashMap<>();
         expected.put(Rank.FIRST, 0);
@@ -60,16 +64,16 @@ class ResultTest {
     @Test
     @DisplayName("수익률을 계산해 반환한다")
     void calcProfit() {
-        List<Set<LottoNumber>> tickets = new ArrayList<>();
+        List<LottoNumbers> tickets = new ArrayList<>();
         tickets.add(initTicket(List.of(1, 2, 3, 9, 10, 11)));
-        result.countRank(totalNumber, tickets);
+        result.countRank(totalWinningNumber, tickets);
         result.calcProfitRatio(90_000);
 
         assertThat(result.getProfitRatio()).isEqualTo(0.06);
     }
 
-    private List<Set<LottoNumber>> initTickets() {
-        ArrayList<Set<LottoNumber>> tickets = new ArrayList<>();
+    private List<LottoNumbers> initTickets() {
+        ArrayList<LottoNumbers> tickets = new ArrayList<>();
         tickets.add(initTicket(List.of(1, 2, 3, 4, 5, 6)));
         tickets.add(initTicket(List.of(1, 2, 3, 4, 5, 7)));
         tickets.add(initTicket(List.of(1, 2, 3, 4, 5, 8)));
@@ -78,11 +82,9 @@ class ResultTest {
         return tickets;
     }
 
-    private Set<LottoNumber> initTicket(List<Integer> numbers) {
-        Set<LottoNumber> ticket = new HashSet<>();
-        for (Integer number : numbers) {
-            ticket.add(new LottoNumber(number));
-        }
-        return ticket;
+    private LottoNumbers initTicket(List<Integer> numbers) {
+        return new LottoNumbers(numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList()));
     }
 }

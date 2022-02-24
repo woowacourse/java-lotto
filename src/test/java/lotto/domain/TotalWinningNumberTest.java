@@ -10,7 +10,7 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class TotalNumberTest {
+class TotalWinningNumberTest {
 
     @Test
     @DisplayName("보너스 넘버가 당첨번호와 중복될 경우 예외를 발생시킨다")
@@ -18,7 +18,7 @@ class TotalNumberTest {
         WinningNumber winningNumber = new WinningNumber("1, 2, 3, 4, 5, 6");
         LottoNumber bonusNumber = new LottoNumber("6");
 
-        assertThatThrownBy(() -> new TotalNumber(winningNumber, bonusNumber))
+        assertThatThrownBy(() -> new TotalWinningNumber(winningNumber, bonusNumber))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -29,8 +29,8 @@ class TotalNumberTest {
         WinningNumber winningNumber = new WinningNumber("1, 2, 3, 4, 5, 6");
         LottoNumber bonusNumber = new LottoNumber("7");
 
-        TotalNumber totalNumber = new TotalNumber(winningNumber, bonusNumber);
-        Set<LottoNumber> result = totalNumber.getWinningAndBonusNumber();
+        TotalWinningNumber totalWinningNumber = new TotalWinningNumber(winningNumber, bonusNumber);
+        Set<LottoNumber> result = totalWinningNumber.getWinningAndBonusNumber();
         Set<LottoNumber> expected = initExpected();
 
         assertThat(result).isEqualTo(expected);

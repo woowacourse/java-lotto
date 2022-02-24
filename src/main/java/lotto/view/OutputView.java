@@ -1,10 +1,13 @@
 package lotto.view;
 
-import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
 import lotto.domain.Rank;
 import lotto.domain.Result;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class OutputView {
@@ -13,18 +16,17 @@ public class OutputView {
         System.out.println(count + "개를 구매했습니다.");
     }
 
-    public static void printTickets(List<Set<LottoNumber>> tickets) {
-        for (Set<LottoNumber> ticket : tickets) {
+    public static void printTickets(List<LottoNumbers> tickets) {
+        for (LottoNumbers ticket : tickets) {
             System.out.println(makeTicketsString(ticket));
         }
         System.out.println();
     }
 
-    private static String makeTicketsString(Set<LottoNumber> ticket) {
-        String result = ticket.stream()
-                .map(lottoNumber -> String.valueOf(lottoNumber.getNumber()))
+    private static String makeTicketsString(LottoNumbers ticket) {
+        String result = ticket.intValues().stream()
+                .map(String::valueOf)
                 .collect(Collectors.joining(", "));
-
         return "[" + result + "]";
     }
 

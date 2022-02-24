@@ -5,26 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class WinningNumberTest {
-
-    @Test
-    @DisplayName("당첨번호를 생성한다")
-    void makeWinningNumber() {
-        String input = "1, 2, 3, 4, 5, 6";
-
-        Set<LottoNumber> expected = initExpected();
-
-        WinningNumber winningNumber = new WinningNumber(input);
-
-        assertThat(winningNumber.getNumbers()).isEqualTo(expected);
-    }
 
     @Test
     @DisplayName("당첨번호가 중복될 경우 예외를 발생시킨다")
@@ -58,16 +41,5 @@ class WinningNumberTest {
         assertThatThrownBy(() -> new WinningNumber(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("입력값은 숫자여야합니다");
-    }
-
-    private HashSet<LottoNumber> initExpected() {
-        return new HashSet<>(List.of(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)
-        ));
     }
 }

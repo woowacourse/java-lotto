@@ -2,12 +2,12 @@ package lotto.domain;
 
 import java.util.Set;
 
-public class TotalNumber {
+public class TotalWinningNumber {
 
     private final WinningNumber winningNumber;
     private final LottoNumber bonusNumber;
 
-    public TotalNumber(WinningNumber winningNumber, LottoNumber bonusNumber) {
+    public TotalWinningNumber(WinningNumber winningNumber, LottoNumber bonusNumber) {
         validateDuplication(winningNumber, bonusNumber);
         this.winningNumber = winningNumber;
         this.bonusNumber = bonusNumber;
@@ -20,7 +20,7 @@ public class TotalNumber {
     }
 
     public Set<LottoNumber> getWinningAndBonusNumber() {
-        Set<LottoNumber> totalNumbers = winningNumber.copy();
+        Set<LottoNumber> totalNumbers = winningNumber.toSet();
         totalNumbers.add(bonusNumber);
         return totalNumbers;
     }

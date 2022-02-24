@@ -5,7 +5,6 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.List;
-import java.util.Set;
 
 public class LottoController {
 
@@ -14,11 +13,11 @@ public class LottoController {
         int ticketCount = purchaseAmount.calcTheNumberOfTicket();
         OutputView.printTicketCount(ticketCount);
 
-        List<Set<LottoNumber>> lottoTickets = getTickets(ticketCount);
+        List<LottoNumbers> lottoTickets = getTickets(ticketCount);
         OutputView.printTickets(lottoTickets);
 
-        TotalNumber totalNumber = getTotalNumber();
-        Result result = getResult(purchaseAmount, lottoTickets, totalNumber);
+        TotalWinningNumber totalWinningNumber = getTotalNumber();
+        Result result = getResult(purchaseAmount, lottoTickets, totalWinningNumber);
         OutputView.printResult(result);
     }
 
@@ -31,7 +30,7 @@ public class LottoController {
         }
     }
 
-    private List<Set<LottoNumber>> getTickets(int ticketCount) {
+    private List<LottoNumbers> getTickets(int ticketCount) {
         LottoMachine lottoMachine = new LottoMachine();
         return lottoMachine.makeLottoTickets(ticketCount);
     }
@@ -54,24 +53,24 @@ public class LottoController {
         }
     }
 
-    private TotalNumber getTotalNumber() {
+    private TotalWinningNumber getTotalNumber() {
         WinningNumber winningNumber = getWinningNumber();
         return makeTotalNumber(winningNumber);
     }
 
-    private TotalNumber makeTotalNumber(WinningNumber winningNumber) {
+    private TotalWinningNumber makeTotalNumber(WinningNumber winningNumber) {
         LottoNumber bonusNumber = getBonusNumber();
         try {
-            return new TotalNumber(winningNumber, bonusNumber);
+            return new TotalWinningNumber(winningNumber, bonusNumber);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return makeTotalNumber(winningNumber);
         }
     }
 
-    private Result getResult(PurchaseAmount purchaseAmount, List<Set<LottoNumber>> lottoTickets, TotalNumber totalNumber) {
+    private Result getResult(PurchaseAmount purchaseAmount, List<LottoNumbers> lottoTickets, TotalWinningNumber totalWinningNumber) {
         Result result = new Result();
-        result.countRank(totalNumber, lottoTickets);
+        result.countRank(totalWinningNumber, lottoTickets);
         result.calcProfitRatio(purchaseAmount.getAmount());
         return result;
     }

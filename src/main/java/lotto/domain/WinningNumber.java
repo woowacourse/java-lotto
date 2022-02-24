@@ -4,19 +4,20 @@ import lotto.util.StringToIntConverter;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
+import static java.util.stream.Collectors.toList;
 
 public class WinningNumber {
 
     private static final String DELIMITER = ",";
-    private static final int WINNING_NUMBER_SIZE = 6;
 
-    private final Set<LottoNumber> numbers = new HashSet<>();
+    private final LottoNumbers numbers;
 
     public WinningNumber(String input) {
         String[] inputNumbers = trim(split(input));
-        addWinningNumbers(inputNumbers);
-        validateSize();
+        numbers = new LottoNumbers(getWinnings(inputNumbers));
     }
 
     private String[] split(String input) {
@@ -29,27 +30,18 @@ public class WinningNumber {
                 .toArray(String[]::new);
     }
 
-    private void addWinningNumbers(String[] inputNumbers) {
-        for (String number : inputNumbers) {
-            numbers.add(new LottoNumber(StringToIntConverter.toInt(number)));
-        }
-    }
-
-    private void validateSize() {
-        if (numbers.size() != WINNING_NUMBER_SIZE) {
-            throw new IllegalArgumentException("[ERROR] 당첨 번호는 중복되지 않는 " + WINNING_NUMBER_SIZE + "개의 숫자여야합니다");
-        }
+    private List<LottoNumber> getWinnings(String[] inputNumbers) {
+        return Arrays.stream(inputNumbers)
+                .map(StringToIntConverter::toInt)
+                .map(LottoNumber::new)
+                .collect(toList());
     }
 
     public boolean contains(LottoNumber number) {
         return numbers.contains(number);
     }
 
-    public Set<LottoNumber> copy() {
-        return new java.util.HashSet<>(Set.copyOf(numbers));
-    }
-
-    public Set<LottoNumber> getNumbers() {
-        return numbers;
+    public Set<LottoNumber> toSet() {
+        return new HashSet<>(numbers.getLottoNumbers());
     }
 }

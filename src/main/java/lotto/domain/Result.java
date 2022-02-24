@@ -27,31 +27,30 @@ public class Result {
         rankCounter.put(Rank.FIFTH, INIT_NUMBER);
     }
 
-    public void countRank(TotalNumber totalNumber, List<Set<LottoNumber>> tickets) {
-        Set<LottoNumber> winningAndBonusNumber = totalNumber.getWinningAndBonusNumber();
-        for (Set<LottoNumber> ticket : tickets) {
-            ticket.retainAll(winningAndBonusNumber);
-            calcRankForEach(ticket, totalNumber);
+    public void countRank(TotalWinningNumber totalWinningNumber, List<LottoNumbers> tickets) {
+        Set<LottoNumber> winningAndBonusNumber = totalWinningNumber.getWinningAndBonusNumber();
+        for (LottoNumbers ticket : tickets) {
+            calcRankForEach(ticket.getMatchedNumbers(winningAndBonusNumber), totalWinningNumber);
         }
     }
 
-    private void calcRankForEach(Set<LottoNumber> ticket, TotalNumber totalNumber) {
-        if (isNotRanked(ticket)) {
+    private void calcRankForEach(Set<LottoNumber> matchedNumbers, TotalWinningNumber totalWinningNumber) {
+        if (isNotRanked(matchedNumbers)) {
             return;
         }
-        if (isSecondRank(ticket, totalNumber)) {
+        if (isSecondRank(matchedNumbers, totalWinningNumber)) {
             putResult(SECOND_RANK_SIZE, true);
             return;
         }
-        putResult(ticket.size(), false);
+        putResult(matchedNumbers.size(), false);
     }
 
-    private boolean isNotRanked(Set<LottoNumber> ticket) {
-        return ticket.size() < MINIMUM_RANK_SIZE;
+    private boolean isNotRanked(Set<LottoNumber> matchedNumbers) {
+        return matchedNumbers.size() < MINIMUM_RANK_SIZE;
     }
 
-    private boolean isSecondRank(Set<LottoNumber> ticket, TotalNumber totalNumber) {
-        return ticket.size() == SECOND_RANK_MATCHED && ticket.contains(totalNumber.getBonusNumber());
+    private boolean isSecondRank(Set<LottoNumber> matchedNumbers, TotalWinningNumber totalWinningNumber) {
+        return matchedNumbers.size() == SECOND_RANK_MATCHED && matchedNumbers.contains(totalWinningNumber.getBonusNumber());
     }
 
     private void putResult(int size, boolean isBonusBallMatched) {

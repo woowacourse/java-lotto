@@ -1,6 +1,8 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class LottoMachine {
 
@@ -18,16 +20,16 @@ public class LottoMachine {
         }
     }
 
-    public List<Set<LottoNumber>> makeLottoTickets(int count) {
-        ArrayList<Set<LottoNumber>> lottoTickets = new ArrayList<>();
+    public List<LottoNumbers> makeLottoTickets(int count) {
+        ArrayList<LottoNumbers> lottoTickets = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             lottoTickets.add(makeLottoTicket());
         }
         return lottoTickets;
     }
 
-    private Set<LottoNumber> makeLottoTicket() {
+    private LottoNumbers makeLottoTicket() {
         Collections.shuffle(numbers);
-        return new HashSet<>(numbers.subList(LOTTO_NUMBER_START_INDEX, LOTTO_NUMBER_END_INDEX));
+        return new LottoNumbers(numbers.subList(LOTTO_NUMBER_START_INDEX, LOTTO_NUMBER_END_INDEX));
     }
 }
