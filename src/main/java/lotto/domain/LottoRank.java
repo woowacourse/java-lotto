@@ -9,18 +9,18 @@ public enum LottoRank {
     RANK_SECOND(5, true, 30000000),
     RANK_FIRST(6, false, 2000000000);
 
-    private final int correctNumber;
+    private final int correctCount;
     private final boolean isBonused;
     private final int prizeAmount;
 
     LottoRank(final int correctNumber, final boolean isBonused, final int prizeAmount) {
-        this.correctNumber = correctNumber;
+        this.correctCount = correctNumber;
         this.isBonused = isBonused;
         this.prizeAmount = prizeAmount;
     }
 
     public int getCorrectNumber() {
-        return correctNumber;
+        return correctCount;
     }
 
     public boolean getIsBonused() {
@@ -31,9 +31,9 @@ public enum LottoRank {
         return prizeAmount;
     }
 
-    public static LottoRank valueOf(int sameCount, boolean isUsed) {
+    public static LottoRank valueOf(int targetCorrectCount, boolean isTargetBonused) {
         return Arrays.stream(LottoRank.values())
-                .filter(lottoRank -> lottoRank.getCorrectNumber() == sameCount && lottoRank.getIsBonused() == isUsed)
+                .filter(lottoRank -> lottoRank.getCorrectNumber() == targetCorrectCount && lottoRank.getIsBonused() == isTargetBonused)
                 .findFirst()
                 .orElse(null);
     }

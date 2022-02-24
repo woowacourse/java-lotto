@@ -12,7 +12,6 @@ import lotto.view.OutputView;
 public class LottoController {
     private InputView inputView;
     private OutputView outputView;
-    private Money money;
     private Lottos lottos;
 
     public LottoController() {
@@ -21,16 +20,35 @@ public class LottoController {
     }
 
     public void start() {
-        money = getMoney();
-        lottos = new Lottos(money);
-        outputView.printPurchasedLotto(lottos);
+        Money money = getMoney();
+        purchaseLotto(money);
+        WinningLotto winningLotto = getWinningLotto();
+        outputView.printResult(lottos.getResult(winningLotto));
+        outputView.printYield(lottos.getYield(money));
+        inputView.terminate();
+    }
+
+    private WinningLotto getWinningLotto() {
         PickedNumbers pickedNumbers = getPickedNumber();
         BonusNumber bonusNumber = getBonusNumber(pickedNumbers);
         WinningLotto winningLotto = new WinningLotto(pickedNumbers, bonusNumber);
-        LottoResult result = lottos.getResult(winningLotto);
-        outputView.printResult(result);
-        outputView.printYield(lottos.getYield(money));
+        return winningLotto;
+    }
 
+    private void purchaseLotto(Money money) {
+        lottos = new Lottos(money);
+        outputView.printPurchasedLotto(lottos);
+    }
+
+    private Money getMoney() {
+        try {
+            outputView.printAskMoneyInputMessage();
+            Money money = new Money(inputView.getInput());
+            return money;
+        } catch (IllegalArgumentException e) {
+            outputView.printErrorMessage(e.getMessage());
+            return getMoney();
+        }
     }
 
     private PickedNumbers getPickedNumber() {
@@ -52,18 +70,6 @@ public class LottoController {
         } catch (IllegalArgumentException e) {
             outputView.printErrorMessage(e.getMessage());
             return getBonusNumber(pickedNumbers);
-        }
-
-    }
-
-    private Money getMoney() {
-        try {
-            outputView.printAskMoneyInputMessage();
-            Money money = new Money(inputView.getInput());
-            return money;
-        } catch (IllegalArgumentException e) {
-            outputView.printErrorMessage(e.getMessage());
-            return getMoney();
         }
     }
 }

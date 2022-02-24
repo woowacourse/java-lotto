@@ -1,30 +1,33 @@
 package lotto.domain;
 
+import lotto.Constant;
+
 import java.util.List;
 
 public class BonusNumber {
     private int bonusNumber;
+    private static final String DUPLICATION_ERROR_MESSAGE = "중복값이 있습니다";
+    private static final String NOT_IN_RANGE_MESSAGE = "범위내에 없습니다";
 
     public BonusNumber(String input, PickedNumbers pickedNumbers) {
         bonusNumber = Integer.parseInt(input);
-
         validateRange();
         validateDuplicate(pickedNumbers.getPickedNumbers());
     }
 
+    public int getBonusNumber() {
+        return bonusNumber;
+    }
+
     private void validateDuplicate(List<Integer> pickedNumbers) {
         if (pickedNumbers.contains(bonusNumber)) {
-            throw new IllegalArgumentException("중복값이 있습니다");
+            throw new IllegalArgumentException(DUPLICATION_ERROR_MESSAGE);
         }
     }
 
     private void validateRange() {
-        if (bonusNumber < 1 || bonusNumber > 45) {
-            throw new IllegalArgumentException("범위내에 없습니다");
+        if (bonusNumber < Constant.FIRST_NUM || bonusNumber > Constant.LAST_NUM) {
+            throw new IllegalArgumentException(NOT_IN_RANGE_MESSAGE);
         }
-    }
-
-    public int getBonusNumber() {
-        return bonusNumber;
     }
 }

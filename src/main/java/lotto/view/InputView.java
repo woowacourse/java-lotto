@@ -5,15 +5,15 @@ import java.util.Scanner;
 public class InputView {
     private Scanner scanner;
 
-    public InputView(){
-        this.scanner=new Scanner(System.in);
+    public InputView() {
+        this.scanner = new Scanner(System.in);
     }
 
-    public void terminate(){
+    public String getInput() {
+        return scanner.nextLine().replaceAll(" ", "");
+    }
+
+    public void terminate() {
         scanner.close();
-    }
-
-    public String getInput(){
-        return scanner.nextLine();
     }
 }

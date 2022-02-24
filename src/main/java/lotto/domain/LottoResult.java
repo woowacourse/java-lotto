@@ -6,16 +6,14 @@ import java.util.LinkedHashMap;
 public class LottoResult {
     private HashMap<LottoRank, Integer> result;
 
-
     public LottoResult() {
         this.result = new LinkedHashMap<>();
         for (LottoRank lottoRank : LottoRank.values()) {
             result.put(lottoRank, 0);
         }
-
     }
 
-    public void add(LottoRank lottoRank) {
+    public void addWinningLotto(LottoRank lottoRank) {
         result.put(lottoRank, result.get(lottoRank) + 1);
     }
 

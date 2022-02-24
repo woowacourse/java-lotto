@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.Constant;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,19 +15,8 @@ public class Lottos {
         purchaseLotto(money);
     }
 
-    private void purchaseLotto(Money money) {
-        for (int i = 0; i < getLottoCount(money); i++) {
-            lottos.add(new Lotto(new PickedNumbers()));
-        }
-    }
-
-    public double getYield(Money money) {
-        return result.sumOfPrize() / money.getMoney();
-    }
-
-
-    private int getLottoCount(Money money) {
-        return money.getMoney() / 1000;
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 
     public int getLottosSize() {
@@ -34,15 +25,29 @@ public class Lottos {
 
     public LottoResult getResult(WinningLotto winningLotto) {
         for (Lotto lotto : lottos) {
-            LottoRank lottoRank = winningLotto.findLottoRank(lotto.getPickedNumbers());
-            if (lottoRank != null) {
-                result.add(lottoRank);
-            }
+            checkLottoResult(winningLotto, lotto.getPickedNumbers());
         }
         return result;
     }
 
-    public List<Lotto> getLottos() {
-        return lottos;
+    private void checkLottoResult(WinningLotto winningLotto, PickedNumbers pickedNumbers) {
+        LottoRank lottoRank = winningLotto.findLottoRank(pickedNumbers);
+        if (lottoRank != null) {
+            result.addWinningLotto(lottoRank);
+        }
+    }
+
+    public double getYield(Money money) {
+        return result.sumOfPrize() / money.getMoney();
+    }
+
+    private void purchaseLotto(Money money) {
+        for (int i = 0; i < getLottosCount(money); i++) {
+            lottos.add(new Lotto(new PickedNumbers()));
+        }
+    }
+
+    private int getLottosCount(Money money) {
+        return money.getMoney() / Constant.UNIT_PRICE;
     }
 }

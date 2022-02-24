@@ -3,6 +3,7 @@ package lotto.domain;
 public class WinningLotto {
     private final PickedNumbers winningNumbers;
     private final BonusNumber bonusNumber;
+    private static final int SECOND_OR_THIRD_COUNT = 5;
 
     public WinningLotto(PickedNumbers pickedNumbers, BonusNumber bonusNumber) {
         this.winningNumbers = pickedNumbers;
@@ -14,13 +15,19 @@ public class WinningLotto {
     }
 
     public LottoRank findLottoRank(PickedNumbers pickedNumbers) {
-        int sameCount = findSameNumbersInPicked(pickedNumbers);
+        int correctCount = findSameNumbersInPicked(pickedNumbers);
         boolean isBonused = false;
-        if (sameCount == 5) {
+        if (isSecondOrThird(correctCount)) {
             isBonused = pickedNumbers.isContainNumber(bonusNumber.getBonusNumber());
         }
+        return LottoRank.valueOf(correctCount, isBonused);
+    }
 
-        return LottoRank.valueOf(sameCount, isBonused);
+    private boolean isSecondOrThird(int correctCount) {
+        if (correctCount == SECOND_OR_THIRD_COUNT) {
+            return true;
+        }
+        return false;
     }
 }
 

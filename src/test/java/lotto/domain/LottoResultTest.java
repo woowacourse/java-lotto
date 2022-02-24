@@ -14,9 +14,9 @@ class LottoResultTest {
     @DisplayName("LottoResult에 값이 추가가 되는가?")
     void Add_Rank_To_Result(LottoRank lottoRank, int value) {
         LottoResult lottoResult = new LottoResult();
-        lottoResult.add(LottoRank.RANK_FIRST);
-        lottoResult.add(LottoRank.RANK_FIRST);
-        lottoResult.add(LottoRank.RANK_SECOND);
+        lottoResult.addWinningLotto(LottoRank.RANK_FIRST);
+        lottoResult.addWinningLotto(LottoRank.RANK_FIRST);
+        lottoResult.addWinningLotto(LottoRank.RANK_SECOND);
         Assertions.assertThat(lottoResult.getResult().get(lottoRank)).isEqualTo(value);
     }
 
@@ -24,9 +24,9 @@ class LottoResultTest {
     @DisplayName("당첨금 총합을 계산하는 기능")
     void Calculate_Sum_Of_Prize() {
         LottoResult lottoResult = new LottoResult();
-        lottoResult.add(LottoRank.RANK_THIRD);
-        lottoResult.add(LottoRank.RANK_FOURTH);
-        lottoResult.add(LottoRank.RANK_FIFTH);
+        lottoResult.addWinningLotto(LottoRank.RANK_THIRD);
+        lottoResult.addWinningLotto(LottoRank.RANK_FOURTH);
+        lottoResult.addWinningLotto(LottoRank.RANK_FIFTH);
         Assertions.assertThat(lottoResult.sumOfPrize()).isEqualTo(1555000);
     }
 }
