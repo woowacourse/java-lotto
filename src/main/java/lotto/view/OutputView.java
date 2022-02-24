@@ -84,4 +84,8 @@ public class OutputView {
         String sentence = String.format("총 수익률은 %.2f입니다.", profit);
         System.out.println(sentence);
     }
+
+    public static void printException(Exception exception) {
+        System.out.println(exception.getMessage());
+    }
 }
