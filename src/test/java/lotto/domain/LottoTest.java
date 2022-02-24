@@ -1,20 +1,16 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-
-import lotto.domain.Lotto;
-import lotto.domain.Number;
-import lotto.domain.WinningPrice;
 
 public class LottoTest {
 
@@ -30,12 +26,12 @@ public class LottoTest {
             @DisplayName("예외를 발생시킨다.")
             void it_throw_exception() {
                 assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5)))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage("6개의 숫자가 필요합니다.");
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessage("6개의 숫자가 필요합니다.");
 
                 assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5, 6, 7)))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage("6개의 숫자가 필요합니다.");
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessage("6개의 숫자가 필요합니다.");
             }
         }
 
@@ -47,8 +43,8 @@ public class LottoTest {
             @DisplayName("예외를 발생시킨다.")
             void it_throw_exception() {
                 assertThatThrownBy(() -> new Lotto(List.of(1, 1, 3, 4, 5, 6)))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage("중복은 허용하지 않습니다.");
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessage("중복은 허용하지 않습니다.");
             }
         }
 
@@ -63,14 +59,14 @@ public class LottoTest {
                 int actual = 0;
                 for (int i = 1; i < 46; i++) {
                     if (lotto.contains(new Number(String.valueOf(i)))) {
-                        actual ++;
+                        actual++;
                     }
                 }
                 assertThat(actual).isEqualTo(6);
             }
         }
     }
-    
+
     @Nested
     @DisplayName("어떤 번호가 포함되었는지 판단하는 메소드는")
     class Contains {
@@ -111,14 +107,15 @@ public class LottoTest {
             @ParameterizedTest
             @CsvSource(value = {"1|2|3|4|5|6|7|All", "1|2|3|4|5|45|6|FiveAndBonus"}, delimiter = '|')
             @DisplayName("당첨 순위를 알려준다.")
-            void it_returns_winning_price(String first, String second, String third, String fourth, String fifth, String sixth,
-                String bonus, WinningPrice key
+            void it_returns_winning_price(String first, String second, String third, String fourth, String fifth,
+                                          String sixth,
+                                          String bonus, WinningPrice key
             ) {
                 Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
 
                 List<Number> numbers = Stream.of(first, second, third, fourth, fifth, sixth)
-                    .map(Number::new)
-                    .collect(Collectors.toList());
+                        .map(Number::new)
+                        .collect(Collectors.toList());
                 Number bonusNumber = new Number(bonus);
 
                 assertThat(lotto.getWinningPrice(numbers, bonusNumber)).isEqualTo(key);

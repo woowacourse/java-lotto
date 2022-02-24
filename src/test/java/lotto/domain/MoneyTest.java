@@ -1,14 +1,13 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
-
-import lotto.domain.Money;
 
 public class MoneyTest {
 
@@ -39,8 +38,8 @@ public class MoneyTest {
             @DisplayName("예외를 발생시킨다.")
             void it_throw_exception(String value) {
                 assertThatThrownBy(() -> new Money(value))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage("1000부터 20억의 숫자여야 합니다.");
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessage("1000부터 20억의 숫자여야 합니다.");
             }
         }
 
@@ -53,8 +52,8 @@ public class MoneyTest {
             @DisplayName("예외를 발생시킨다.")
             void it_throw_exception(String value) {
                 assertThatThrownBy(() -> new Money(value))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage("숫자여야 합니다.");
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessage("숫자여야 합니다.");
             }
         }
 
@@ -81,8 +80,8 @@ public class MoneyTest {
             @DisplayName("예외를 발생시킨다.")
             void it_throw_exception(String value) {
                 assertThatThrownBy(() -> new Money(value))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage("1000으로 나누어 떨어져야 합니다.");
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessage("1000으로 나누어 떨어져야 합니다.");
             }
         }
     }

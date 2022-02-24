@@ -28,9 +28,9 @@ public class Result {
     public double getRateOfProfit(Money money) {
         long total = 0L;
         for (Map.Entry<WinningPrice, Integer> entry : result.entrySet()) {
-            total += (long)entry.getKey().getPrice() * entry.getValue();
+            total += (long) entry.getKey().getPrice() * entry.getValue();
         }
 
-        return Math.round((double)total / money.getValue() * 1000) / 1000.0;
+        return Math.round((double) total / money.getValue() * 1000) / 1000.0;
     }
 }

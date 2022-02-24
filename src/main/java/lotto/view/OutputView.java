@@ -1,7 +1,6 @@
 package lotto.view;
 
 import java.util.stream.Collectors;
-
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Number;
@@ -20,9 +19,9 @@ public class OutputView {
     public static void printLottos(Lottos lottos) {
         for (Lotto lotto : lottos.getLottos()) {
             String join = lotto.getNumbers().stream()
-                .map(Number::getValue)
-                .map(String::valueOf)
-                .collect(Collectors.joining(", "));
+                    .map(Number::getValue)
+                    .map(String::valueOf)
+                    .collect(Collectors.joining(", "));
 
             System.out.printf("[%s]%n", join);
         }
@@ -39,7 +38,7 @@ public class OutputView {
                 bonusBallMessage = ", 보너스 볼 일치";
             }
             System.out.printf("%d개 일치%s(%d원) - %d개%n",
-                value.getCount(),  bonusBallMessage, value.getPrice(), result.getCount(value));
+                    value.getCount(), bonusBallMessage, value.getPrice(), result.getCount(value));
         }
     }
 

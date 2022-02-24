@@ -26,13 +26,9 @@ public class Lotto {
     Lotto(List<Integer> numbers) {
         validateNumbers(numbers);
         this.numbers = numbers.stream()
-            .map(String::valueOf)
-            .map(Number::new)
-            .collect(Collectors.toSet());
-    }
-
-    public boolean contains(Number number) {
-        return numbers.contains(number);
+                .map(String::valueOf)
+                .map(Number::new)
+                .collect(Collectors.toSet());
     }
 
     private static List<Number> initLottoNumbers() {
@@ -56,13 +52,17 @@ public class Lotto {
     }
 
     private static void validateDuplicate(List<Integer> numbers) {
-        int noDuplicateCount = (int)numbers.stream()
-            .distinct()
-            .count();
+        int noDuplicateCount = (int) numbers.stream()
+                .distinct()
+                .count();
 
         if (noDuplicateCount != SIZE) {
             throw new IllegalArgumentException(DUPLICATE_ERROR_MESSAGE);
         }
+    }
+
+    public boolean contains(Number number) {
+        return numbers.contains(number);
     }
 
     public WinningPrice getWinningPrice(List<Number> winningNumbers, Number bonusNumber) {

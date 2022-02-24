@@ -41,11 +41,13 @@ public class Number {
 
     @Override
     public boolean equals(Object object) {
-        if (this == object)
+        if (this == object) {
             return true;
-        if (object == null || getClass() != object.getClass())
+        }
+        if (object == null || getClass() != object.getClass()) {
             return false;
-        Number number = (Number)object;
+        }
+        Number number = (Number) object;
         return value == number.value;
     }
 }

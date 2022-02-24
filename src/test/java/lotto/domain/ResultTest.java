@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -60,7 +60,7 @@ public class ResultTest {
 
             @ParameterizedTest
             @CsvSource(value = {"10000|0.5", "5000|1.0", "50000|0.1", "1000|5.0", "1000000|0.005", "10000000|0.001",
-                "100000000|0.0"}, delimiter = '|')
+                    "100000000|0.0"}, delimiter = '|')
             @DisplayName("당첨금액의 합과 비교하여 수익률을 반환한다.")
             void it_returns_rate_of_profit(String money, double expected) {
                 Result result = new Result();

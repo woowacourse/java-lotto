@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
@@ -70,17 +69,17 @@ public class LottoController {
         } while (!isValid);
 
         return numbers.stream()
-            .map(String::valueOf)
-            .map(Number::new)
-            .collect(Collectors.toList());
+                .map(String::valueOf)
+                .map(Number::new)
+                .collect(Collectors.toList());
     }
 
     private List<Integer> toList(String[] splitInput) {
         List<Integer> numbers = new ArrayList<>();
         try {
             numbers = Arrays.stream(splitInput)
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toList());
         } catch (NumberFormatException exception) {
         }
         return numbers;

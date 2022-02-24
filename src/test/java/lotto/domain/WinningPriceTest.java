@@ -6,8 +6,6 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import lotto.domain.WinningPrice;
-
 public class WinningPriceTest {
 
     @Nested
@@ -20,7 +18,7 @@ public class WinningPriceTest {
 
             @ParameterizedTest
             @CsvSource(value = {"6|false|All", "5|true|FiveAndBonus", "5|false|Five", "4|false|Four",
-                "3|false|Three", "3|true|Three", "2|true|Fail", "1|true|Fail", "0|true|Fail"}, delimiter = '|')
+                    "3|false|Three", "3|true|Three", "2|true|Fail", "1|true|Fail", "0|true|Fail"}, delimiter = '|')
             @DisplayName("객체를 반환한다.")
             void it_create_ok(int count, boolean containBonus, WinningPrice expected) {
                 WinningPrice winningPrice = WinningPrice.of(count, containBonus);
