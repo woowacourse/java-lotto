@@ -28,7 +28,7 @@ public class Lottos {
                 .map(winningLotto::getRankByLotto)
                 .forEach(rank -> increaseCountByRank(map, rank));
 
-        return map;
+        return Collections.unmodifiableMap(map);
     }
 
     private void increaseCountByRank(Map<Rank, WinningCount> map, Rank rank) {
