@@ -3,8 +3,6 @@ package lotto.model;
 import java.util.List;
 
 public class LottoGame {
-    private static final int LOTTO_PRICE = 1000;
-    private static final String ERROR_NOT_DIVIDED_BY_UNIT_PRICE = "거스름돈을 지급하지 않습니다. 금액이 남지 않게 지불해주세요.";
     public static final String ERROR_DUPLICATION_BONUS_NUMBER = "보너스 볼 번호가 당첨 번호와 중복입니다.";
 
     private final WinningNumbers winningNumbers;
@@ -18,8 +16,8 @@ public class LottoGame {
         this.lottoResult = new LottoResult();
     }
 
-    public float calculateYield(int money) {
-        return getTotalWinningMoney(lottoResult) / (float) money;
+    public float calculateYield(Money money) {
+        return money.calculatePercentage(getTotalWinningMoney(lottoResult));
     }
 
     private Long getTotalWinningMoney(LottoResult lottoResult) {
@@ -29,21 +27,8 @@ public class LottoGame {
                 .sum();
     }
 
-    public static Lottos buyLottos(int money) {
-        int lottoSize = getLottoSize(money);
-
-        return Lottos.generate(lottoSize);
-    }
-
-    public static int getLottoSize(int money) {
-        validateUnitPrice(money);
-        return money / LOTTO_PRICE;
-    }
-
-    private static void validateUnitPrice(int money) {
-        if (money % LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException(ERROR_NOT_DIVIDED_BY_UNIT_PRICE);
-        }
+    public static Lottos buyLottos(Money money) {
+        return Lottos.generate(money.getLottoSize());
     }
 
     public LottoResult generateLottoResult(Lottos lottos) {
