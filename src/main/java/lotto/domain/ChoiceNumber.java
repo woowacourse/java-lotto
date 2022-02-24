@@ -17,44 +17,57 @@ public class ChoiceNumber {
     private static final int MIN_BOUND = 1;
     private static final int MAX_BOUND = 45;
     private static final int CHOICE_NUMBER_SIZE = 6;
+    private static final String ERROR_NOT_INTEGER = "[ERROR] 번호는 숫자로 입력해주세요";
+    private static final String ERROR_NOT_ENOUGH_NUMBER = "[ERROR] 6개의 숫자를 입력해주세요";
 
     private final List<Integer> choiceNumbers;
 
     public ChoiceNumber() {
         Collections.shuffle(numbers);
-        choiceNumbers = getChoiceSizeNumber();
+        choiceNumbers = collectRightSizeOfNumber();
         Collections.sort(choiceNumbers);
     }
 
     public ChoiceNumber(String input) {
-        choiceNumbers = Arrays.stream(input.split(NUMBER_DELIMITER))
-                .mapToInt(Integer::parseInt)
-                .boxed()
-                .collect(toList());
-        validateRange();
-        validateDuplicate();
+        choiceNumbers = convertToIntList(input);
+        validateChoiceNumber();
     }
 
-    private void validateRange() {
+    private List<Integer> convertToIntList(String input) {
+        try {
+            return Arrays.stream(input.split(NUMBER_DELIMITER))
+                    .mapToInt(eachText -> Integer.parseInt(eachText.trim()))
+                    .boxed()
+                    .collect(toList());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(ERROR_NOT_INTEGER);
+        }
+    }
+
+    private void validateChoiceNumber() {
+        isRightSize();
+        isInRange();
+        isDuplicate();
+    }
+
+    private void isRightSize() {
+        if (choiceNumbers.size() != CHOICE_NUMBER_SIZE) {
+            throw new IllegalArgumentException(ERROR_NOT_ENOUGH_NUMBER);
+        }
+    }
+
+    private void isInRange() {
         if (choiceNumbers.stream().anyMatch(i -> i < MIN_BOUND || i > MAX_BOUND)) {
             throw new IllegalArgumentException(ERROR_NOT_IN_RANGE);
         }
     }
 
-    private void validateDuplicate() {
+    private void isDuplicate() {
         boolean unique = choiceNumbers.stream()
                 .allMatch(new HashSet<>()::add);
         if (!unique) {
             throw new IllegalArgumentException(ERROR_DUPLICATE_NUMBERS);
         }
-    }
-
-    private List<Integer> getChoiceSizeNumber() {
-        return numbers.stream().limit(CHOICE_NUMBER_SIZE).collect(toList());
-    }
-
-    public List<Integer> getChoiceNumbers() {
-        return choiceNumbers;
     }
 
     public int countSameNumber(ChoiceNumber numbers) {
@@ -63,8 +76,16 @@ public class ChoiceNumber {
                 .count();
     }
 
+    private List<Integer> collectRightSizeOfNumber() {
+        return numbers.stream().limit(CHOICE_NUMBER_SIZE).collect(toList());
+    }
+
     public boolean contains(int targetNumber) {
         return choiceNumbers.contains(targetNumber);
+    }
+
+    public List<Integer> getChoiceNumbers() {
+        return choiceNumbers;
     }
 
     @Override
