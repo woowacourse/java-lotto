@@ -21,7 +21,7 @@ public class LottoNumbersGeneratorTest {
         private int index = 0;
 
         @Override
-        protected LottoNumbers createLottoNumbers() {
+        public LottoNumbers createLottoNumbers() {
             Set<Integer> lottoNumbers = numbers[index++];
             Iterator<Integer> iterator = lottoNumbers.iterator();
             return new LottoNumbers(List.of(iterator.next(), iterator.next(), iterator.next(), iterator.next(),

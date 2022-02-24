@@ -2,16 +2,13 @@ package model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import model.LottoRank;
-import model.LottoResult;
-import model.Prize;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottoResultTest {
-    private static final Prize FIRST_PRIZE = LottoRank.FIRST.getPrize();
-    private static final Prize SECOND_PRIZE = LottoRank.SECOND.getPrize();
-    private static final Prize THIRD_PRIZE = LottoRank.THIRD.getPrize();
+    private static final Money FIRST_PRIZE = LottoRank.FIRST.getPrize();
+    private static final Money SECOND_PRIZE = LottoRank.SECOND.getPrize();
+    private static final Money THIRD_PRIZE = LottoRank.THIRD.getPrize();
 
     @Test
     @DisplayName("당첨결과 금액 총합 계산 테스트")
@@ -21,7 +18,7 @@ public class LottoResultTest {
         lottoResult.add(LottoRank.FIRST);
         lottoResult.add(LottoRank.SECOND);
         lottoResult.add(LottoRank.THIRD);
-        Prize expected = FIRST_PRIZE.multiply(2).add(SECOND_PRIZE).add(THIRD_PRIZE);
+        Money expected = FIRST_PRIZE.multiply(2).add(SECOND_PRIZE).add(THIRD_PRIZE);
         assertThat(lottoResult.getTotalPrize()).isEqualTo(expected);
     }
 

@@ -47,6 +47,6 @@
 
 
 ## 시간되면 한번 고민
-- model.Prize.multiply에 매개변수 타입이 Integer 말고 Wrapper Class로 변경
+- model.Money.multiply에 매개변수 타입이 Integer 말고 Wrapper Class로 변경
 - 로또 번호를 감쌀것인가? vs winningNumbers를 사용해서 보너스넘버도 같이 감쌀것인가?
 

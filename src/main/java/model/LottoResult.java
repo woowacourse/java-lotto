@@ -12,13 +12,13 @@ public class LottoResult {
                 LottoRank.FIFTH, 0, LottoRank.NOTHING, 0));
     }
 
-    public Prize getTotalPrize() {
+    public Money getTotalPrize() {
         return resultMap.keySet().stream()
             .map(this::getTotalPrizeByRank)
-            .reduce(Prize.ZERO, Prize::add);
+            .reduce(Money.ZERO, Money::add);
     }
 
-    private Prize getTotalPrizeByRank(LottoRank lottoRank) {
+    private Money getTotalPrizeByRank(LottoRank lottoRank) {
         return lottoRank.getPrize().multiply(getCountByRank(lottoRank));
     }
 

@@ -20,7 +20,7 @@ public class RandomLottoNumbersGenerator extends LottoNumbersGenerator{
         return IntStream.rangeClosed(start, end).boxed().collect(toList());
     }
 
-    protected LottoNumbers createLottoNumbers() {
+    public LottoNumbers createLottoNumbers() {
         shuffleNumberPool();
         List<Integer> numbers = getNumbersFrom(createQueueByNumberPool());
         return new LottoNumbers(numbers);

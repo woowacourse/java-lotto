@@ -3,6 +3,7 @@ package model;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
+import model.LottoNumbersGeneratorTest.LottoNumbersGeneratorStub;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,16 +16,16 @@ public class LottoMachineTest {
     private static final LottoNumbers SECOND_PRIZE_LOTTO_NUMBERS = new LottoNumbers(List.of(1, 2, 3, 4, 5, 7));
     private static final LottoNumbers THIRD_PRIZE_LOTTO_NUMBERS = new LottoNumbers(List.of(1, 2, 3, 4, 5, 8));
     private static final LottoNumbers NOTHING_PRIZE_LOTTO_NUMBERS = new LottoNumbers(List.of(1, 2, 9, 11, 12, 13));
-    private static final Prize FIRST_PRIZE = LottoRank.FIRST.getPrize();
-    private static final Prize SECOND_PRIZE = LottoRank.SECOND.getPrize();
-    private static final Prize THIRD_PRIZE = LottoRank.THIRD.getPrize();
+    private static final Money FIRST_PRIZE = LottoRank.FIRST.getPrize();
+    private static final Money SECOND_PRIZE = LottoRank.SECOND.getPrize();
+    private static final Money THIRD_PRIZE = LottoRank.THIRD.getPrize();
 
 
     private LottoMachine lottoMachine;
 
     @BeforeEach
     void setUp() {
-        lottoMachine = new LottoMachine(new WinningLottoNumbers(WINNING_LOTTO_NUMBERS, BONUS));
+        lottoMachine = new LottoMachine(new WinningLottoNumbers(WINNING_LOTTO_NUMBERS, BONUS), new LottoNumbersGeneratorStub());
     }
 
     @Test
@@ -44,7 +45,7 @@ public class LottoMachineTest {
                 SECOND_PRIZE_LOTTO_NUMBERS, THIRD_PRIZE_LOTTO_NUMBERS,
                 THIRD_PRIZE_LOTTO_NUMBERS, NOTHING_PRIZE_LOTTO_NUMBERS));
 
-        Prize expectedPrize = FIRST_PRIZE.add(FIRST_PRIZE).add(SECOND_PRIZE).add(THIRD_PRIZE)
+        Money expectedPrize = FIRST_PRIZE.add(FIRST_PRIZE).add(SECOND_PRIZE).add(THIRD_PRIZE)
             .add(THIRD_PRIZE);
         assertThat(result.getTotalPrize()).isEqualTo(expectedPrize);
         assertThat(result.getCountByRank(LottoRank.FIRST)).isEqualTo(2);

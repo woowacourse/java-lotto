@@ -13,5 +13,5 @@ public abstract class LottoNumbersGenerator {
                 .collect(Collectors.toList());
     }
 
-    protected abstract LottoNumbers createLottoNumbers();
+    public abstract LottoNumbers createLottoNumbers();
 }

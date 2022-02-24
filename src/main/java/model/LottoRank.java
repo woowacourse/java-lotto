@@ -5,22 +5,22 @@ import java.util.function.BiFunction;
 import java.util.stream.Stream;
 
 public enum LottoRank {
-    FIRST(new Prize(2_000_000_000), LottoRank::isFirstPrize),
-    SECOND(new Prize(30_000_000), LottoRank::isSecondPrize),
-    THIRD(new Prize(1_500_000), LottoRank::isThirdPrize),
-    FOURTH(new Prize(50_000), LottoRank::isFourthPrize),
-    FIFTH(new Prize(5_000), LottoRank::isFifthPrize),
-    NOTHING(Prize.ZERO, LottoRank::isNothingPrize);
+    FIRST(new Money(2_000_000_000), LottoRank::isFirstPrize),
+    SECOND(new Money(30_000_000), LottoRank::isSecondPrize),
+    THIRD(new Money(1_500_000), LottoRank::isThirdPrize),
+    FOURTH(new Money(50_000), LottoRank::isFourthPrize),
+    FIFTH(new Money(5_000), LottoRank::isFifthPrize),
+    NOTHING(Money.ZERO, LottoRank::isNothingPrize);
 
-    private final Prize prize;
+    private final Money prize;
     private final BiFunction<Integer, Boolean, Boolean> predicate;
 
-    LottoRank(Prize prize, BiFunction<Integer, Boolean, Boolean> predicate) {
+    LottoRank(Money prize, BiFunction<Integer, Boolean, Boolean> predicate) {
         this.prize = prize;
         this.predicate = predicate;
     }
 
-    public Prize getPrize() {
+    public Money getPrize() {
         return prize;
     }
 
