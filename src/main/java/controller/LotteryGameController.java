@@ -11,7 +11,12 @@ import view.OutputView;
 
 public class LotteryGameController {
 
-	LotteryGame lotteryGame;
+	private InputView inputView;
+	private LotteryGame lotteryGame;
+
+	public LotteryGameController(InputView inputView) {
+		this.inputView = inputView;
+	}
 
 	public void startLotteryGame() {
 		purchaseLottery();
@@ -44,14 +49,14 @@ public class LotteryGameController {
 	}
 
 	private int inputBonusBall() {
-		return InputView.inputValidBonusNumber();
+		return inputView.inputValidBonusNumber();
 	}
 
 	private int inputMoney() {
-		return InputView.inputValidMoney();
+		return inputView.inputValidMoney();
 	}
 
 	private List<Integer> inputWinningNumber() {
-		return InputView.inputValidLotteryNumber();
+		return inputView.inputValidLotteryNumber();
 	}
 }

@@ -20,12 +20,12 @@ public class InputView {
 	private static final int MINIMUM_MONEY = 1000;
 	private static final int MAXIMUM_MONEY = 100000;
 
-	public static int inputValidMoney() {
+	public int inputValidMoney() {
 		final String money = inputMoney();
 		return Integer.parseInt(money);
 	}
 
-	private static String inputMoney() {
+	private String inputMoney() {
 		try {
 			System.out.println(INPUT_MONEY_MESSAGE.getMessage());
 			final String money = scanner.nextLine();
@@ -37,30 +37,30 @@ public class InputView {
 		}
 	}
 
-	private static void validateMoney(final String money) {
+	private void validateMoney(final String money) {
 		validateNumber(money);
 		validateRange(money);
 	}
 
-	private static void validateNumber(String money) {
+	private void validateNumber(String money) {
 		if (!COMPILED_NUMBER_PATTERN.matcher(money).matches()) {
 			throw new IllegalArgumentException(INVALID_INPUT_NUMBER_EXCEPTION.getMessage());
 		}
 	}
 
-	private static void validateRange(String money) {
+	private void validateRange(String money) {
 		int number = Integer.parseInt(money);
 		if (number < MINIMUM_MONEY || number > MAXIMUM_MONEY) {
 			throw new IllegalArgumentException(INVALID_MONEY_RANGE_EXCEPTION.getMessage());
 		}
 	}
 
-	public static List<Integer> inputValidLotteryNumber() {
+	public List<Integer> inputValidLotteryNumber() {
 		final String numbers = inputLotteryNumber();
 		return splitNumbers(numbers);
 	}
 
-	private static String inputLotteryNumber() {
+	private String inputLotteryNumber() {
 		try {
 			System.out.println(INPUT_WINNING_NUMBER_MESSAGE.getMessage());
 			final String winningNumber = scanner.nextLine();
@@ -72,26 +72,24 @@ public class InputView {
 		}
 	}
 
-	private static List<Integer> splitNumbers(String numbers) {
+	private List<Integer> splitNumbers(String numbers) {
 		return Arrays.stream(numbers.split(WINNING_NUMBER_DELIMITER))
 			.map(String::trim)
 			.map(Integer::parseInt)
 			.collect(Collectors.toList());
 	}
 
-
-
-	private static void validateWinningNumber(String winningNumber) {
+	private void validateWinningNumber(String winningNumber) {
 		if (!COMPILED_WINNING_NUMBER_PATTERN.matcher(winningNumber).matches()) {
 			throw new IllegalArgumentException(INVALID_WINNING_NUMBER_EXCEPTION.getMessage());
 		}
 	}
 
-	public static int inputValidBonusNumber() {
+	public int inputValidBonusNumber() {
 		return Integer.parseInt(inputBonusNumber());
 	}
 
-	private static String inputBonusNumber() {
+	private String inputBonusNumber() {
 		try {
 			System.out.println(INPUT_BONUS_BALL_MESSAGE.getMessage());
 			final String bonusNumber = scanner.nextLine();
