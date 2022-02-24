@@ -33,6 +33,5 @@ public class LottosTest {
         assertThat(winningStatistics.getStatistics().get(Rank.FIRST)).isEqualTo(1);
         assertThat(winningStatistics.getStatistics().get(Rank.SECOND)).isEqualTo(0);
         assertThat(winningStatistics.getStatistics().get(Rank.FIFTH)).isEqualTo(1);
-
     }
 }
