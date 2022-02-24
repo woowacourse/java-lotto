@@ -6,7 +6,9 @@ import java.util.Scanner;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
-import lotto.exception.LottoException;
+import lotto.model.exception.LottoException;
+import lotto.view.exception.InvalidFormatException;
+import lotto.view.exception.LottoFinishedException;
 
 public class InputTemplate {
 

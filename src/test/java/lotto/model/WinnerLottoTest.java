@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import lotto.exception.DuplicatedNumberException;
+import lotto.model.exception.DuplicatedNumberException;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Stream;

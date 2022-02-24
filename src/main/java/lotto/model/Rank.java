@@ -2,7 +2,7 @@ package lotto.model;
 
 import java.util.function.BiFunction;
 import java.util.stream.Stream;
-import lotto.exception.InvalidRankException;
+import lotto.model.exception.InvalidRankException;
 
 public enum Rank {
     FIRST(new Money(2_000_000_000), Rank::isFirstPrize),

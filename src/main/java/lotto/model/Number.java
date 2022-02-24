@@ -1,6 +1,6 @@
 package lotto.model;
 
-import lotto.exception.InvalidNumberRangeException;
+import lotto.model.exception.InvalidNumberRangeException;
 import java.util.Objects;
 
 public class Number {

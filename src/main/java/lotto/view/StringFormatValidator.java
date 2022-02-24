@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.view.exception.InvalidFormatException;
+
 public class StringFormatValidator {
 
     private static final String EMPTY_MESSAGE = "";

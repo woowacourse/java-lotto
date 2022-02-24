@@ -1,6 +1,6 @@
 package lotto.model;
 
-import lotto.exception.DuplicatedNumberException;
+import lotto.model.exception.DuplicatedNumberException;
 import java.util.List;
 
 public class WinnerLotto {

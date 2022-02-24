@@ -3,7 +3,7 @@ package lotto.model;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 
-import lotto.exception.InvalidRankException;
+import lotto.model.exception.InvalidRankException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

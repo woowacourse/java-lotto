@@ -5,8 +5,9 @@ import static lotto.view.StringFormatValidator.INVALID_BONUS_NUMBER_FORMAT_MESSA
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import lotto.exception.InvalidNumberRangeException;
+import lotto.model.exception.InvalidNumberRangeException;
 import lotto.model.Number;
+import lotto.view.exception.InvalidFormatException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;

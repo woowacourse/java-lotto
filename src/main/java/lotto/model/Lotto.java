@@ -1,7 +1,7 @@
 package lotto.model;
 
-import lotto.exception.DuplicatedNumberException;
-import lotto.exception.InvalidLottoSizeException;
+import lotto.model.exception.DuplicatedNumberException;
+import lotto.model.exception.InvalidLottoSizeException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;

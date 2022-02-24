@@ -1,9 +1,9 @@
 package lotto.view;
 
-import lotto.exception.DuplicatedNumberException;
-import lotto.exception.InvalidLottoSizeException;
-import lotto.exception.InvalidRankException;
-import lotto.exception.InvalidNumberRangeException;
+import lotto.model.exception.DuplicatedNumberException;
+import lotto.model.exception.InvalidLottoSizeException;
+import lotto.model.exception.InvalidRankException;
+import lotto.model.exception.InvalidNumberRangeException;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;

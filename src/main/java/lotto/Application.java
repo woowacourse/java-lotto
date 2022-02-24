@@ -12,7 +12,7 @@ import lotto.model.LottoMachine;
 import lotto.model.Money;
 import lotto.model.RandomLottoGenerator;
 import lotto.model.Statistic;
-import lotto.view.LottoFinishedException;
+import lotto.view.exception.LottoFinishedException;
 
 public class Application {
 
