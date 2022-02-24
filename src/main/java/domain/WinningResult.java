@@ -34,7 +34,7 @@ public class WinningResult {
 	private static void addWinningResult(LottoTicket lottoTicket, EnumMap<LottoRank, Integer> winningResult,
 		Lotto winningNumber, Number bonusNumber) {
 		for (Lotto lotto : lottoTicket.getLottoTicket()) {
-			LottoRank rank = lotto.confirmWinningResult(winningNumber, bonusNumber);
+			LottoRank rank = lotto.checkWinningResult(winningNumber, bonusNumber);
 			addWinningResultCount(winningResult, rank);
 		}
 	}
