@@ -13,13 +13,13 @@ public class LottoNumberTest {
     @ValueSource(strings = {"0", "46", "-1"})
     @DisplayName("숫자가 범위 내에 존재하지 않는 경우 예외 발생")
     void incorrect(String number) {
-        assertThatThrownBy(() -> new LottoNumber(number)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> LottoNumber.of(number)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"1", "25", "45"})
     @DisplayName("숫자가 범위 내에서 생성됨")
     void correct(String number) {
-        assertThatNoException().isThrownBy(() -> new LottoNumber(number));
+        assertThatNoException().isThrownBy(() -> LottoNumber.of(number));
     }
 }

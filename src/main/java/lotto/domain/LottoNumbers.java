@@ -20,7 +20,7 @@ public class LottoNumbers {
 
     static {
         for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
-            candidateLottoNumbers.add(new LottoNumber(Integer.toString(i)));
+            candidateLottoNumbers.add(LottoNumber.of(Integer.toString(i)));
         }
     }
 
@@ -79,7 +79,7 @@ public class LottoNumbers {
 
     private List<LottoNumber> convertIntArrToIntegerList(String[] stringArr) {
         return Arrays.stream(stringArr)
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
     }
 
