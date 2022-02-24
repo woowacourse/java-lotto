@@ -1,5 +1,6 @@
 package view;
 
+import controller.dto.WinningStatDto;
 import domain.LottoRank;
 import domain.LottoTicket;
 import domain.WinningStat;
@@ -28,14 +29,14 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printWinningStat(WinningStat winningStat) {
+    public static void printWinningStat(WinningStatDto winningStatDto) {
         List<LottoRank> lottoRanks = LottoRank.valuesWithPrize();
         Collections.reverse(lottoRanks);
 
         System.out.println("\n당첨 통계");
         System.out.println("--------");
-        System.out.print(createStatView(winningStat.getStat(), lottoRanks));
-        System.out.println("총 수익률은 " + formatProfit(winningStat) + "입니다.");
+        System.out.print(createStatView(winningStatDto.getStat(), lottoRanks));
+        System.out.println("총 수익률은 " + formatProfit(winningStatDto.getProfit()) + "입니다.");
     }
 
     private static String createStatView(Map<LottoRank, Integer> statistics, List<LottoRank> lottoRanks) {
@@ -57,10 +58,10 @@ public class OutputView {
         return BLANK;
     }
 
-    private static String formatProfit(WinningStat winningStat) {
+    private static String formatProfit(double profit) {
         DecimalFormat profitFormatter = new DecimalFormat(PROFIT_PATTERN);
         profitFormatter.setRoundingMode(RoundingMode.DOWN);
 
-        return profitFormatter.format(winningStat.calculateProfit(LOTTO_TICKET_PRICE));
+        return profitFormatter.format(profit);
     }
 }

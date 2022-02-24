@@ -1,5 +1,9 @@
 package controller;
 
+import static constant.LottoConstant.*;
+
+import constant.LottoConstant;
+import controller.dto.WinningStatDto;
 import domain.*;
 import view.InputView;
 import view.OutputView;
@@ -34,6 +38,9 @@ public class LottoController {
         LottoNumber bonusNumber = LottoNumber.createBonus(InputView.getBonusNumber(), winningNumbers);
 
         WinningStat winningStat = lottoMachine.createWinningStat(lottoTickets, winningNumbers, bonusNumber);
-        OutputView.printWinningStat(winningStat);
+        WinningStatDto winningStatDto = WinningStatDto.of(winningStat.getStat(),
+            winningStat.calculateProfit(LOTTO_TICKET_PRICE));
+
+        OutputView.printWinningStat(winningStatDto);
     }
 }
