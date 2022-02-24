@@ -17,12 +17,11 @@ public class MoneyController {
     }
 
     private Money getValidMoney(String input) {
-        Money money = null;
         try {
-            money = new Money(input);
+            return new Money(input);
         } catch (IllegalArgumentException exception) {
             System.out.println(exception.getMessage());
+            return null;
         }
-        return money;
     }
 }

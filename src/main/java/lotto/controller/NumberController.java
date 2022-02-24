@@ -6,35 +6,22 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.Number;
+import lotto.utils.StringUtil;
 import lotto.view.InputView;
 
 public class NumberController {
 
     public List<Number> getWinningNumbers() {
         boolean isValid = false;
-        List<Integer> numbers;
+        List<Integer> integers;
 
         do {
             String input = InputView.inputLastWeekWinningNumbers();
-            numbers = toList(input.split(", "));
-            isValid = validateNumbers(numbers);
+            String[] strings = StringUtil.getSplit(input);
+            integers = StringUtil.toIntegers(strings);
+            isValid = validateNumbers(integers);
         } while (!isValid);
-
-        return numbers.stream()
-                .map(String::valueOf)
-                .map(Number::new)
-                .collect(Collectors.toList());
-    }
-
-    private List<Integer> toList(String[] splitInput) {
-        List<Integer> numbers = new ArrayList<>();
-        try {
-            numbers = Arrays.stream(splitInput)
-                    .map(Integer::parseInt)
-                    .collect(Collectors.toList());
-        } catch (NumberFormatException exception) {
-        }
-        return numbers;
+        return toNumbers(integers);
     }
 
     private boolean validateNumbers(List<Integer> numbers) {
@@ -45,6 +32,13 @@ public class NumberController {
             System.out.println(exception.getMessage());
             return false;
         }
+    }
+
+    private List<Number> toNumbers(List<Integer> integers) {
+        return integers.stream()
+                .map(String::valueOf)
+                .map(Number::new)
+                .collect(Collectors.toList());
     }
 
     public Number getBonusNumber(List<Number> numbers) {
