@@ -1,26 +1,20 @@
 package lotto.domain.ticket.generator;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 public class CustomTicketGenerator implements TicketGenerator {
 
-	private static final int TICKET_DEFAULT_SIZE = 6;
+	private Iterator<TicketNumbers> ticketIterator;
 
-	private Iterator<Integer> numbers;
-
-	public void initNumbers(final List<Integer> numbers) {
-		this.numbers = numbers.iterator();
+	public void initNumbers(final List<TicketNumbers> tickets) {
+		this.ticketIterator = tickets.iterator();
 	}
 
 	@Override
 	public List<Integer> generate() {
-		final List<Integer> ticketNumbers = new ArrayList<>();
-		for (int i = 0; i < TICKET_DEFAULT_SIZE; i++) {
-			ticketNumbers.add(numbers.next());
-		}
-		return ticketNumbers;
+		final TicketNumbers ticketNumbers = ticketIterator.next();
+		return ticketNumbers.getNumbers();
 	}
 
 }
