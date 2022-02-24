@@ -6,8 +6,6 @@
 
 - [온라인 코드 리뷰 과정](https://github.com/woowacourse/woowacourse-docs/blob/master/maincourse/README.md)
 
-<span style="background-color:#dcffe4ㅁ"></span>
-
 ### 진행과정
 - [ ] 사용자는 구입금액을 입력한다.
 - [ ] 프로그램은 구입 금액에 해당하는 로또를 발급한다.
