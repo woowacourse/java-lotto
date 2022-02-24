@@ -1,7 +1,9 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import lotto.domain.vo.Number;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,7 +13,7 @@ class LottoTest {
     @Test
     @DisplayName("로또 번호는 6자리 숫자로 생성된다.")
     void createSixSizeNumbers() {
-        List<Number> numbers = List.of(number(1), number(2), number(3), number(4), number(5), number(6));
+        List<Number> numbers = givenNumbers(1, 2, 3, 4, 5, 6);
 
         assertThat(new Lotto(numbers)).isNotNull();
     }
@@ -19,7 +21,7 @@ class LottoTest {
     @Test
     @DisplayName("로또 번호는 5자리 숫자가 전달되면 예외가 발생한다.")
     void throwExceptionWhenFiveSizeNumbers() {
-        List<Number> numbers = List.of(number(1), number(2), number(3), number(4), number(5));
+        List<Number> numbers = givenNumbers(1, 2, 3, 4, 5);
 
         assertThatIllegalArgumentException()
             .isThrownBy(() -> new Lotto(numbers))
@@ -29,7 +31,7 @@ class LottoTest {
     @Test
     @DisplayName("로또 번호는 7자리 숫자가 전달되면 예외가 발생한다.")
     void throwExceptionWhenSevenSizeNumbers() {
-        List<Number> numbers = List.of(number(1), number(2), number(3), number(4), number(5), number(6), number(7));
+        List<Number> numbers = givenNumbers(1, 2, 3, 4, 5, 6, 7);
 
         assertThatIllegalArgumentException()
             .isThrownBy(() -> new Lotto(numbers))
@@ -39,7 +41,7 @@ class LottoTest {
     @Test
     @DisplayName("로또 번호가 중복될 경우 예외가 발생한다.")
     void throwExceptionWhenDuplicateNumbers() {
-        List<Number> numbers = List.of(number(1), number(1), number(3), number(4), number(5), number(6));
+        List<Number> numbers = givenNumbers(1, 2, 3, 4, 5, 5);
 
         assertThatIllegalArgumentException()
             .isThrownBy(() -> new Lotto(numbers))
@@ -50,7 +52,7 @@ class LottoTest {
     @DisplayName("보너스 숫자가 포함되어있는지 확인한다.")
     void checkContainsBonusNumber() {
         Number bonus = new Number(7);
-        Lotto lotto = new Lotto(List.of(number(1), number(2), number(3), number(4), number(5), number(7)));
+        Lotto lotto = new Lotto(givenNumbers(1, 2, 3, 4, 5, 7));
 
         assertThat(lotto.containsNumber(bonus)).isTrue();
     }
@@ -59,12 +61,14 @@ class LottoTest {
     @DisplayName("보너스 숫자가 없는지 확인한다.")
     void checkNotContainsBonusNumber() {
         Number bonus = new Number(6);
-        Lotto lotto = new Lotto(List.of(number(1), number(2), number(3), number(4), number(5), number(7)));
+        Lotto lotto = new Lotto(givenNumbers(1, 2, 3, 4, 5, 7));
 
         assertThat(lotto.containsNumber(bonus)).isFalse();
     }
 
-    private Number number(int number) {
-        return new Number(number);
+    private static List<Number> givenNumbers(int... numbers) {
+        return Arrays.stream(numbers)
+            .mapToObj(Number::new)
+            .collect(Collectors.toList());
     }
 }

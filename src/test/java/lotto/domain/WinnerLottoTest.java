@@ -10,20 +10,19 @@ import org.junit.jupiter.api.Test;
 
 public class WinnerLottoTest {
     private static final Number BONUS = new Number(7);
-    private static final WinnerLotto WINNER_LOTTO = new WinnerLotto(new Lotto(givenNumbers(1, 2, 3, 4, 5, 6)), BONUS);
+    private static final Lotto LOTTO = new Lotto(givenNumbers(1, 2, 3, 4, 5, 6));
+    private static final WinnerLotto WINNER_LOTTO = new WinnerLotto(LOTTO, BONUS);
 
     @Test
     @DisplayName("숫자가 전부 일치하면 1등을 반환한다.")
     void countEqualsLottoNumbers() {
-        Lotto lotto = new Lotto(givenNumbers(1, 2, 3, 4, 5, 6));
-
-        assertThat(WINNER_LOTTO.findRank(lotto)).isEqualTo(Rank.FIRST);
+        assertThat(WINNER_LOTTO.findRank(LOTTO)).isEqualTo(Rank.FIRST);
     }
 
     @Test
     @DisplayName("숫자가 5개 일치하고 보너스 숫자를 포함하면 2등을 반환한다.")
     void containsNumbersAndBonusNumber() {
-        Lotto lotto = new Lotto(List.of(number(1), number(2), number(3), number(4), number(5), number(7)));
+        Lotto lotto = new Lotto(givenNumbers(1, 2, 3, 4, 5, 7));
 
         assertThat(WINNER_LOTTO.findRank(lotto)).isEqualTo(Rank.SECOND);
     }
@@ -31,7 +30,7 @@ public class WinnerLottoTest {
     @Test
     @DisplayName("숫자가 5개 일치하면 3등을 반환한다. (보너스 미포함)")
     void containsNumbersFiveReturnThirdNotContainsBonus() {
-        Lotto lotto = new Lotto(List.of(number(1), number(2), number(3), number(4), number(5), number(9)));
+        Lotto lotto = new Lotto(givenNumbers(1, 2, 3, 4, 5, 9));
 
         assertThat(WINNER_LOTTO.findRank(lotto)).isEqualTo(Rank.THIRD);
     }
@@ -39,7 +38,7 @@ public class WinnerLottoTest {
     @Test
     @DisplayName("숫자가 5개 일치하면 3등을 반환한다. (보너스 포함)")
     void containsNumbersFiveReturnThird() {
-        Lotto lotto = new Lotto(List.of(number(1), number(2), number(3), number(4), number(7), number(9)));
+        Lotto lotto = new Lotto(givenNumbers(1, 2, 3, 4, 7, 9));
 
         assertThat(WINNER_LOTTO.findRank(lotto)).isEqualTo(Rank.THIRD);
     }
@@ -47,7 +46,7 @@ public class WinnerLottoTest {
     @Test
     @DisplayName("숫자가 4개 일치하면 4등을 반환한다. (보너스 미포함)")
     void containsNumbersFourReturnFourthNotContainsBonus() {
-        Lotto lotto = new Lotto(List.of(number(1), number(2), number(3), number(4), number(9), number(10)));
+        Lotto lotto = new Lotto(givenNumbers(1, 2, 3, 4, 9, 10));
 
         assertThat(WINNER_LOTTO.findRank(lotto)).isEqualTo(Rank.FOURTH);
     }
@@ -55,7 +54,7 @@ public class WinnerLottoTest {
     @Test
     @DisplayName("숫자가 4개 일치하면 4등을 반환한다. (보너스 포함)")
     void containsNumbersFourReturnFourth() {
-        Lotto lotto = new Lotto(List.of(number(1), number(2), number(3), number(7), number(9), number(10)));
+        Lotto lotto = new Lotto(givenNumbers(1, 2, 3, 7, 9, 10));
 
         assertThat(WINNER_LOTTO.findRank(lotto)).isEqualTo(Rank.FOURTH);
     }
@@ -63,7 +62,7 @@ public class WinnerLottoTest {
     @Test
     @DisplayName("숫자가 3개 일치하면 5등을 반환한다. (보너스 미포함)")
     void containsNumbersThreeReturnFifthNotContainsBonus() {
-        Lotto lotto = new Lotto(List.of(number(1), number(2), number(3), number(8), number(9), number(10)));
+        Lotto lotto = new Lotto(givenNumbers(1, 2, 3, 8, 9, 10));
 
         assertThat(WINNER_LOTTO.findRank(lotto)).isEqualTo(Rank.FIFTH);
     }
@@ -71,7 +70,7 @@ public class WinnerLottoTest {
     @Test
     @DisplayName("숫자가 3개 일치하면 5등을 반환한다. (보너스 포함)")
     void containsNumbersThreeReturnFifth() {
-        Lotto lotto = new Lotto(List.of(number(1), number(2), number(7), number(8), number(9), number(10)));
+        Lotto lotto = new Lotto(givenNumbers(1, 2, 7, 8, 9, 10));
 
         assertThat(WINNER_LOTTO.findRank(lotto)).isEqualTo(Rank.FIFTH);
     }
@@ -79,7 +78,7 @@ public class WinnerLottoTest {
     @Test
     @DisplayName("숫자가 2개 이하로 일치하면 None을 반환한다.")
     void containsNumbersSecondReturnNone() {
-        Lotto lotto = new Lotto(List.of(number(1), number(2), number(8), number(9), number(10), number(11)));
+        Lotto lotto = new Lotto(givenNumbers(1, 2, 8, 9, 10, 11));
 
         assertThat(WINNER_LOTTO.findRank(lotto)).isEqualTo(Rank.NONE);
     }
@@ -88,12 +87,8 @@ public class WinnerLottoTest {
     @DisplayName("보너스볼은 당첨 번호와 중복되면 예외를 발생한다.")
     void throwExceptionWhenDuplicated() {
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> new WinnerLotto(new Lotto(givenNumbers(1, 2, 3, 4, 5, 6)), new Number(6)))
+            .isThrownBy(() -> new WinnerLotto(LOTTO, new Number(6)))
             .withMessageMatching("보너스볼은 당첨번호와 중복될 수 없다.");
-    }
-
-    private Number number(int number) {
-        return new Number(number);
     }
 
     private static List<Number> givenNumbers(int... numbers) {

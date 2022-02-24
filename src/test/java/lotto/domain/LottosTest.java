@@ -11,10 +11,12 @@ import org.junit.jupiter.api.Test;
 
 public class LottosTest {
 
+    private static final Lotto LOTTO = new Lotto(givenNumbers(1, 2, 3, 4, 5, 6));
+
     @Test
     @DisplayName("로또 개수는 1개 이상이어야 한다.")
     void createLottos() {
-        List<Lotto> lottos = List.of(new Lotto(givenNumbers(1, 2, 3, 4, 5, 6)));
+        List<Lotto> lottos = List.of(LOTTO);
 
         assertThat(new Lottos(lottos)).isNotNull();
     }
@@ -39,7 +41,7 @@ public class LottosTest {
             new Lotto(givenNumbers(11, 12, 13, 14, 15, 16)))
         );
 
-        List<Rank> ranks = lottos.matchRanks(new WinnerLotto(new Lotto(givenNumbers(1, 2, 3, 4, 5, 6)), new Number(7)));
+        List<Rank> ranks = lottos.matchRanks(new WinnerLotto(LOTTO, new Number(7)));
 
         assertThat(ranks).containsExactly(Rank.FIRST, Rank.SECOND, Rank.THIRD, Rank.FOURTH, Rank.FIFTH, Rank.NONE);
     }
@@ -47,7 +49,7 @@ public class LottosTest {
     @Test
     @DisplayName("로또의 개수를 확인한다.")
     void checkAmount() {
-        Lottos lottos = new Lottos(List.of(new Lotto(givenNumbers(1, 2, 3, 4, 5, 6))));
+        Lottos lottos = new Lottos(List.of(LOTTO));
 
         assertThat(lottos.getLottos().size()).isEqualTo(1);
     }
