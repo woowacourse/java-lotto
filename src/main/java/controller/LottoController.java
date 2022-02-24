@@ -3,6 +3,7 @@ package controller;
 import java.util.List;
 
 import domain.Lotto;
+import domain.LottoNumber;
 import domain.Rank;
 import service.LottoMachine;
 import domain.LottoResult;
@@ -20,11 +21,20 @@ public class LottoController {
 	}
 
 	public void run() {
-		Payment payment = InputView.insertPayment();
+		Payment payment = createPayment();
 		Lottos lottos = createLottos(payment);
 		WinningLotto winningLotto = createWinningLotto();
 		LottoResult lottoResult = createLottoResult(calculateRanks(lottos, winningLotto));
 		calculateTotalProfitRate(payment, lottoResult.calculateTotalProfit());
+	}
+
+	private Payment createPayment() {
+		try {
+			return new Payment(InputView.insertPayment());
+		} catch (Exception e) {
+			OutputView.printErrorMessage(e.getMessage());
+			return createPayment();
+		}
 	}
 
 	private Lottos createLottos(Payment payment) {
@@ -36,8 +46,25 @@ public class LottoController {
 	}
 
 	private WinningLotto createWinningLotto() {
-		Lotto lotto = InputView.insertLotto();
-		return InputView.insertBonus(lotto);
+		return new WinningLotto(createLotto(), createBonusNumber());
+	}
+
+	private Lotto createLotto() {
+		try {
+			return Lotto.of(InputView.insertLotto());
+		} catch (Exception e) {
+			OutputView.printErrorMessage(e.getMessage());
+			return createLotto();
+		}
+	}
+
+	private LottoNumber createBonusNumber() {
+		try {
+			return new LottoNumber(InputView.insertBonus());
+		} catch (Exception e) {
+			OutputView.printErrorMessage(e.getMessage());
+			return createBonusNumber();
+		}
 	}
 
 	private List<Rank> calculateRanks(Lottos lottos, WinningLotto winningLotto) {
