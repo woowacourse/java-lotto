@@ -20,7 +20,10 @@ public enum WinningLottery {
         this.price = price;
     }
 
-    public static WinningLottery find(int number) {
+    public static WinningLottery find(boolean bonus, int number) {
+        if (bonus) {
+            return BONUS_FIVE;
+        }
         return Arrays.stream(values())
                 .filter(value -> value.matchNumber(number))
                 .findFirst()
