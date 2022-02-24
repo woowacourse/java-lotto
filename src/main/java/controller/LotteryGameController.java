@@ -12,23 +12,25 @@ import view.OutputView;
 public class LotteryGameController {
 
 	private InputView inputView;
+	private OutputView outputView;
 	private LotteryGame lotteryGame;
 
-	public LotteryGameController(InputView inputView) {
+	public LotteryGameController(InputView inputView, OutputView outputView) {
 		this.inputView = inputView;
+		this.outputView = outputView;
 	}
 
 	public void startLotteryGame() {
 		purchaseLottery();
 		createWinningLottery();
-		OutputView.printLotteries(lotteryGame.getLotteries());
+		outputView.printLotteries(lotteryGame.getLotteries());
 	}
 
 	private void purchaseLottery() {
 		try {
 			lotteryGame = new LotteryGame(inputMoney(), new LotteryRandomGeneratorStrategy());
 		} catch (IllegalArgumentException exception) {
-			OutputView.printException(exception.getMessage());
+			outputView.printException(exception.getMessage());
 			purchaseLottery();
 		}
 	}
@@ -37,7 +39,7 @@ public class LotteryGameController {
 		try {
 			lotteryGame.createWinningLottery(inputWinningNumber(), inputBonusBall());
 		} catch (IllegalArgumentException exception) {
-			OutputView.printException(exception.getMessage());
+			outputView.printException(exception.getMessage());
 			createWinningLottery();
 		}
 	}
@@ -45,7 +47,7 @@ public class LotteryGameController {
 	public void makeResult() {
 		Map<Rank, Integer> ranking = lotteryGame.makeWinner();
 		double incomePercent = lotteryGame.makeReturnRate(ranking);
-		OutputView.printStatistics(ranking, incomePercent);
+		outputView.printStatistics(ranking, incomePercent);
 	}
 
 	private int inputBonusBall() {
