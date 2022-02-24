@@ -1,9 +1,11 @@
 package lotto.model;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 
 import lotto.model.exception.InvalidNumberRangeException;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -23,5 +25,12 @@ public class NumberTest {
     void checkValidLottoNumberRangeTest(int number) {
         assertThatCode(() -> new Number(number))
             .doesNotThrowAnyException();
+    }
+
+    @Test
+    @DisplayName("로또 번호 int형 값으로 반환")
+    void getIntValue() {
+        Number number = new Number(10);
+        assertThat(number.getIntValue()).isEqualTo(10);
     }
 }

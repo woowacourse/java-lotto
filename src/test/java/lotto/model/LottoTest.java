@@ -57,4 +57,12 @@ public class LottoTest {
         assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5)))
             .isInstanceOf(InvalidLottoSizeException.class);
     }
+
+    @Test
+    @DisplayName("로또 int형 숫자 리스트 반환")
+    void getIntValues() {
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        assertThat(lotto.getIntValues()).hasSize(6);
+        assertThat(lotto.getIntValues()).contains(1, 2, 3, 4, 5, 6);
+    }
 }
