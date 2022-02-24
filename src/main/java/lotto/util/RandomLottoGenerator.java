@@ -14,12 +14,14 @@ public class RandomLottoGenerator {
     private static final int LOTTO_START_INDEX = 0;
     private static final int LOTTO_LAST_INDEX = 6;
 
+    private static List<Integer> numberCollection;
+
     public static Lotto generate() {
-        List<Integer> numberRange = IntStream.rangeClosed(LOTTO_START_NUMBER, LOTTO_LAST_NUMBER)
+        numberCollection = IntStream.rangeClosed(LOTTO_START_NUMBER, LOTTO_LAST_NUMBER)
                 .boxed()
                 .collect(Collectors.toList());
-        Collections.shuffle(numberRange);
-        return new Lotto(numberRange.subList(LOTTO_START_INDEX, LOTTO_LAST_INDEX).stream()
+        Collections.shuffle(numberCollection);
+        return new Lotto(numberCollection.subList(LOTTO_START_INDEX, LOTTO_LAST_INDEX).stream()
                 .sorted()
                 .collect(Collectors.toList()));
     }

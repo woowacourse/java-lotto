@@ -13,12 +13,17 @@ public class InputValidator {
     private static final String RANGE_ERROR_MESSAGE = "[ERROR] 숫자의 범위가 잘못되었습니다.";
 
     private static final String NUMBER_REGEX = "\\d+";
+    private static final int PRICE_PER_LOTTO = 1000;
 
     public static int validatePrice(String price) throws RuntimeException {
-        if (!Pattern.matches(NUMBER_REGEX, price)) {
+        if (!Pattern.matches(NUMBER_REGEX, price) || isLessThanLottoPrice(Integer.parseInt(price))) {
             throw new RuntimeException(PRICE_ERROR_MESSAGE);
         }
         return Integer.parseInt(price);
+    }
+
+    private static boolean isLessThanLottoPrice(int price) {
+        return price < PRICE_PER_LOTTO;
     }
 
     public static String[] validateWinningNumbers(String winningNumbers) throws RuntimeException {
