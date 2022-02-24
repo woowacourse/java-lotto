@@ -2,7 +2,6 @@ package dto;
 
 import domain.Rank;
 import java.util.Map;
-import java.util.Objects;
 import vo.TrialNumber;
 import vo.WinningCount;
 
@@ -34,24 +33,6 @@ public class LottoResultDto {
 
     public double getProfitRatio() {
         return profitRatio;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) {
-            return true;
-        }
-        if (object == null || getClass() != object.getClass()) {
-            return false;
-        }
-        LottoResultDto that = (LottoResultDto) object;
-        return Double.compare(that.profitRatio, profitRatio) == 0 && Objects.equals(lottoWinningResult,
-                that.lottoWinningResult);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(lottoWinningResult, profitRatio);
     }
 
     @Override
