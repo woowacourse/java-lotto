@@ -5,15 +5,15 @@ import java.math.BigInteger;
 import java.util.Objects;
 
 public class Money {
-    public static final Money ZERO = new Money(BigInteger.ZERO);
+    public static final Money ZERO = new Money(BigDecimal.ZERO);
 
-    private final BigInteger amount;
+    private final BigDecimal amount;
 
     public Money(int amount) {
-        this.amount = BigInteger.valueOf(amount);
+        this.amount = BigDecimal.valueOf(amount);
     }
 
-    private Money(BigInteger amount) {
+    private Money(BigDecimal amount) {
         this.amount = amount;
     }
 
@@ -22,11 +22,11 @@ public class Money {
     }
 
     public Money multiply(int factor) {
-        return new Money(this.amount.multiply(BigInteger.valueOf(factor)));
+        return new Money(this.amount.multiply(BigDecimal.valueOf(factor)));
     }
 
     public BigDecimal divide(Money money) {
-        return new BigDecimal(this.amount.divide(money.amount));
+        return this.amount.divide(money.amount);
     }
 
     @Override
@@ -37,8 +37,8 @@ public class Money {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Money prize = (Money) o;
-        return Objects.equals(amount, prize.amount);
+        Money money = (Money) o;
+        return Objects.equals(amount, money.amount);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class Money {
 
     @Override
     public String toString() {
-        return "model.Prize{" +
+        return "model.Money{" +
                 "amount=" + amount +
                 '}';
     }
