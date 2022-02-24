@@ -10,8 +10,7 @@ import domain.Rank;
 public class OutputView {
 	private static final String ERROR_MESSAGE = "[ERROR] ";
 
-	private OutputView() {
-	}
+	private OutputView() {}
 
 	public static void printGuideMessage(String message) {
 		System.out.println(message);

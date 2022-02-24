@@ -1,7 +1,7 @@
 package controller;
 
 import domain.Lotto;
-import domain.LottoMachine;
+import service.LottoMachine;
 import domain.LottoResult;
 import domain.Lottos;
 import domain.Payment;
@@ -10,16 +10,20 @@ import view.InputView;
 import view.OutputView;
 
 public class LottoController {
-	private final InputView inputView = new InputView();
+	private final LottoMachine lottoMachine;
+
+	public LottoController(LottoMachine lottoMachine) {
+		this.lottoMachine = lottoMachine;
+	}
 
 	public void run() {
-		Payment payment = inputView.insertPayment();
+		Payment payment = InputView.insertPayment();
 		int lottoCount = payment.calculateLottoCount();
 		OutputView.printLottoCount(lottoCount);
-		Lottos lottos = new LottoMachine().createLottos(lottoCount);
+		Lottos lottos = lottoMachine.createLottos(lottoCount);
 		OutputView.printLottos(lottos);
-		Lotto lotto = inputView.insertLotto();
-		WinningLotto winningLotto = inputView.insertBonus(lotto);
+		Lotto lotto = InputView.insertLotto();
+		WinningLotto winningLotto = InputView.insertBonus(lotto);
 		LottoResult lottoResult = new LottoResult(lottos.calculateRank(winningLotto));
 		OutputView.printRankCounts(lottoResult.countRank());
 		double profitRate = payment.calculateProfitRate(lottoResult.calculateTotalProfit());

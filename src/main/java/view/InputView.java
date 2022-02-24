@@ -10,7 +10,9 @@ import domain.WinningLotto;
 public class InputView {
 	private static final Scanner scanner = new Scanner(System.in);
 
-	public Payment insertPayment() {
+	private InputView() {}
+
+	public static Payment insertPayment() {
 		try {
 			OutputView.printGuideMessage("구입금액을 입력해 주세요.");
 			return new Payment(scanner.nextLine());
@@ -20,7 +22,7 @@ public class InputView {
 		}
 	}
 
-	public Lotto insertLotto() {
+	public static Lotto insertLotto() {
 		try {
 			OutputView.printGuideMessage("지난 주 당첨 번호를 입력해 주세요.");
 			String inputValue = scanner.nextLine();
@@ -32,7 +34,7 @@ public class InputView {
 		}
 	}
 
-	public WinningLotto insertBonus(Lotto lotto) {
+	public static WinningLotto insertBonus(Lotto lotto) {
 		try {
 			OutputView.printGuideMessage("보너스 볼을 입력해 주세요.");
 			return new WinningLotto(lotto, new LottoNumber(scanner.nextLine()));

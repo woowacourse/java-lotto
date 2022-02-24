@@ -1,4 +1,4 @@
-package domain;
+package service;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,7 +6,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import domain.Lotto;
+import domain.LottoNumber;
+import domain.Lottos;
+
 public class LottoMachine {
+	private static final LottoMachine instance = new LottoMachine();
 	private static final List<LottoNumber> lottoBucket = new ArrayList<>();
 	private static final int MIN_BOUND = 1;
 	private static final int MAX_BOUND = 45;
@@ -15,6 +20,12 @@ public class LottoMachine {
 		IntStream.rangeClosed(MIN_BOUND, MAX_BOUND)
 			.mapToObj(LottoNumber::new)
 			.forEach(lottoBucket::add);
+	}
+
+	private LottoMachine() {}
+
+	public static LottoMachine getInstance() {
+		return instance;
 	}
 
 	public Lottos createLottos(int lottoCount) {
