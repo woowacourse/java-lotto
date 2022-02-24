@@ -7,7 +7,7 @@ public class LottoNumber {
     private static final int MAX = 45;
 
     private static final String NUMBER_RANGE_ERROR = "로또 숫자는 " + MIN + " 이상 " + MAX + " 이하의 숫자만 가능합니다.";
-    public static final String TYPE_ERROR = "로또 번호는 숫자만 가능합니다.";
+    private static final String TYPE_ERROR = "로또 번호는 숫자만 가능합니다.";
 
     private final int number;
 

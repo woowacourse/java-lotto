@@ -11,12 +11,12 @@ import lotto.domain.Ranking;
 import lotto.domain.WinningResult;
 
 public class OutputView {
-    public static final String OPEN_BRACKET = "[";
-    public static final String CLOSE_BRACKET = "]";
-    public static final String BLANK = " ";
-    public static final String DELIMITER = ",";
-    public static final String TICKET_PURCHASE_SENTENCE = "개를 구매했습니다.";
-    public static final String LINE_SEPARATOR = System.lineSeparator();
+    private static final String OPEN_BRACKET = "[";
+    private static final String CLOSE_BRACKET = "]";
+    private static final String BLANK = " ";
+    private static final String DELIMITER = ",";
+    private static final String TICKET_PURCHASE_SENTENCE = "개를 구매했습니다.";
+    private static final String LINE_SEPARATOR = System.lineSeparator();
 
     private OutputView() {
     }
