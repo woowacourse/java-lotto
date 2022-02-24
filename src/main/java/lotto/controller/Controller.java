@@ -3,6 +3,7 @@ package lotto.controller;
 import java.util.Scanner;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
+import lotto.domain.ProfitRate;
 import lotto.domain.RankCount;
 import lotto.domain.WinningNumbers;
 import lotto.view.InputView;
@@ -18,6 +19,8 @@ public class Controller {
         WinningNumbers winningNumbers = getWinningNumbers(scanner);
         RankCount rankCount = new RankCount(lottos, winningNumbers);
         OutputView.printWinningStatistic(rankCount);
+        ProfitRate profitRate = new ProfitRate(rankCount.getTotalPrize(), money);
+        OutputView.printProfitRate(profitRate);
     }
 
     private Money getMoney(Scanner scanner) {
