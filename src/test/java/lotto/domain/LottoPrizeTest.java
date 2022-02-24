@@ -32,12 +32,17 @@ public class LottoPrizeTest {
 
     private static Stream<Arguments> matchTestSet() {
         return Stream.of(
+                Arguments.of(0, 0, LottoPrize.MISS),
+                Arguments.of(1, 0, LottoPrize.MISS),
                 Arguments.of(2, 0, LottoPrize.MISS),
                 Arguments.of(3, 0, LottoPrize.FIFTH),
+                Arguments.of(3, 1, LottoPrize.FIFTH),
                 Arguments.of(4, 0, LottoPrize.FOURTH),
+                Arguments.of(4, 1, LottoPrize.FOURTH),
                 Arguments.of(5, 0, LottoPrize.THIRD),
                 Arguments.of(5, 1, LottoPrize.TWICE),
-                Arguments.of(6, 0, LottoPrize.FIRST)
-        );
+                Arguments.of(6, 0, LottoPrize.FIRST),
+                Arguments.of(6, 1, LottoPrize.FIRST)
+                );
     }
 }

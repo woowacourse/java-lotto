@@ -13,7 +13,8 @@ public class LottoNumberTest {
     public static final String DISPLAY_NAME_ARGUMENTS = "{displayName} : {arguments}";
 
     @DisplayName("Number 생성자 테스트")
-    @Test
+    @ParameterizedTest(name = DISPLAY_NAME_ARGUMENTS)
+    @ValueSource(ints = {1, 45})
     void constructor_test() {
         assertThatNoException()
                 .isThrownBy(() -> new LottoNumber(30));
