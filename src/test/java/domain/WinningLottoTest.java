@@ -1,12 +1,19 @@
 package domain;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import domain.Lotto.LottoNumber;
 import domain.Lotto.WinningLotto;
 import domain.LottoGenerator.LottoGenerator;
 import domain.LottoGenerator.ManualLottoGenerator;
 =======
 >>>>>>> 01f73d4 (feat: Winning Lotto 당첨번호와 보너스볼 간 중복검사)
+=======
+import domain.Lotto.LottoNumber;
+import domain.Lotto.WinningLotto;
+import domain.LottoGenerator.LottoGenerator;
+import domain.LottoGenerator.WinningLottoGenerator;
+>>>>>>> d5f0ef8 (refactor: 패키지 분리)
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import utils.ExceptionMessage;

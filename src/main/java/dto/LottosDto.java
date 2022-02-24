@@ -1,6 +1,7 @@
 package dto;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import domain.Lotto.Lotto;
 
 import java.util.ArrayList;
@@ -20,6 +21,9 @@ public class LottosDto {
     public static LottosDto from(List<Lotto> lottos) {
 =======
 import domain.Lotto;
+=======
+import domain.Lotto.Lotto;
+>>>>>>> d5f0ef8 (refactor: 패키지 분리)
 
 import java.util.ArrayList;
 import java.util.List;

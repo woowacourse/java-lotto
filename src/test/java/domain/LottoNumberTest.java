@@ -1,6 +1,9 @@
 package domain;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> d5f0ef8 (refactor: 패키지 분리)
 import domain.Lotto.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

@@ -14,6 +14,14 @@ import dto.LottosDto;
 import dto.RanksDto;
 =======
 import domain.*;
+import domain.Lotto.Lotto;
+import domain.Lotto.LottoNumberFactory;
+import domain.Lotto.LottoNumber;
+import domain.Lotto.WinningLotto;
+import domain.LottoGenerator.LottoGenerator;
+import domain.LottoGenerator.WinningLottoGenerator;
+import domain.player.Money;
+import domain.player.Player;
 import dto.LottosDto;
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -67,7 +75,7 @@ public class LottoController {
 >>>>>>> 20bb1bf (feat: 2,3등은 보너스볼과 일치하는 숫자의 갯수를 기준으로, 나머지 등수는 일치하는 숫자의 갯수만으로 등수를 판정하는 로직 구현)
     public LottosDto purchase(int purchaseAmount) {
         player = new Player(new Money(purchaseAmount));
-        player.purchaseLotto(new AutoLottoGenerator(), LottoFactory.makeBoundary());
+        player.purchaseLotto(new AutoLottoGenerator(), LottoNumberFactory.makeBoundary());
         return LottosDto.from(player.getLottos());
     }
 
@@ -81,7 +89,7 @@ public class LottoController {
         winningLotto = new WinningLotto(lottoNumbers, new LottoNumber(bonusBall));
 =======
         LottoGenerator lottoGenerator = new WinningLottoGenerator();
-        Lotto winningLotto = lottoGenerator.generateLotto(LottoFactory.from(winningNumber));
+        Lotto winningLotto = lottoGenerator.generateLotto(LottoNumberFactory.from(winningNumber));
         this.winningLotto = new WinningLotto(winningLotto, new LottoNumber(bonusBall));
 >>>>>>> 5b2a52c (refactor: 로또 생성 기능 인터페이스로 분리)
     }

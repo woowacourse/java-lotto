@@ -2,12 +2,22 @@ package domain;
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import domain.Lotto.Lotto;
 import domain.Lotto.LottoNumber;
 import domain.Lotto.WinningLotto;
 import domain.LottoGenerator.AutoLottoGenerator;
 import domain.LottoGenerator.LottoGenerator;
 import domain.LottoGenerator.ManualLottoGenerator;
+=======
+import domain.Lotto.Lotto;
+import domain.Lotto.LottoNumberFactory;
+import domain.Lotto.LottoNumber;
+import domain.Lotto.WinningLotto;
+import domain.LottoGenerator.LottoGenerator;
+import domain.LottoGenerator.WinningLottoGenerator;
+import domain.player.Money;
+>>>>>>> d5f0ef8 (refactor: 패키지 분리)
 import domain.player.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -80,7 +90,7 @@ class PlayerTest {
 
     @BeforeEach
     void setUp() {
-        player.purchaseLotto(new AutoLottoGenerator(), LottoFactory.makeBoundary());
+        player.purchaseLotto(new AutoLottoGenerator(), LottoNumberFactory.makeBoundary());
     }
 
     @Test

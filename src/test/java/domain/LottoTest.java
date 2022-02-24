@@ -2,11 +2,18 @@ package domain;
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> d5f0ef8 (refactor: 패키지 분리)
 import domain.Lotto.Lotto;
 import domain.Lotto.LottoNumber;
 import domain.Lotto.WinningLotto;
 import domain.LottoGenerator.LottoGenerator;
+<<<<<<< HEAD
 import domain.LottoGenerator.ManualLottoGenerator;
+=======
+import domain.LottoGenerator.WinningLottoGenerator;
+>>>>>>> d5f0ef8 (refactor: 패키지 분리)
 import org.junit.jupiter.api.BeforeEach;
 =======
 >>>>>>> 20a623d (feat: 로또 구매 기능 구현)

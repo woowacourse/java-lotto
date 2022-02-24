@@ -1,12 +1,16 @@
 package dto;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import domain.Lotto.LottoNumber;
 
 import java.util.ArrayList;
 import java.util.Collections;
 =======
 import domain.LottoNumber;
+=======
+import domain.Lotto.LottoNumber;
+>>>>>>> d5f0ef8 (refactor: 패키지 분리)
 
 >>>>>>> f80fb84 (feat: DTO 추가)
 import java.util.List;
