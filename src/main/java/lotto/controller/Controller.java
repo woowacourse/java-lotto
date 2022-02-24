@@ -13,14 +13,12 @@ public class Controller {
 
     public void run(Scanner scanner) {
         Money money = getMoney(scanner);
-        Lottos lottos = Lottos.buyLottosByAuto(money);
-        OutputView.printTotalLottoCount(lottos.getTotalLottoCount());
+        Lottos lottos = Lottos.buyLottosByAuto(getMoney(scanner));
         OutputView.printLottos(lottos);
         WinningNumbers winningNumbers = getWinningNumbers(scanner);
         RankCount rankCount = new RankCount(lottos, winningNumbers);
-        OutputView.printWinningStatistic(rankCount);
         ProfitRate profitRate = new ProfitRate(rankCount.getTotalPrize(), money);
-        OutputView.printProfitRate(profitRate);
+        OutputView.printWinningStatistic(rankCount, profitRate);
     }
 
     private Money getMoney(Scanner scanner) {

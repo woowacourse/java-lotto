@@ -19,21 +19,19 @@ public class OutputView {
         System.out.println(message);
     }
 
-    public static void printTotalLottoCount(int totalLottoCount) {
-        System.out.println(totalLottoCount + TOTAL_LOTTO_COUNT_MESSAGE);
-    }
-
     public static void printLottos(Lottos lottos) {
+        System.out.println(lottos.getTotalLottoCount() + TOTAL_LOTTO_COUNT_MESSAGE);
         lottos.getLottos().forEach(System.out::println);
     }
 
-    public static void printWinningStatistic(RankCount rankCount) {
+    public static void printWinningStatistic(RankCount rankCount, ProfitRate profitRate) {
         System.out.println(WINNING_STATISTIC_TITLE);
         Arrays.stream(Rank.values())
                 .filter(rank -> !rank.equals(Rank.RANK_OUT))
                 .forEach(rank -> System.out.printf((RANK_MESSAGE_FORMAT),
-                        rank.toStringWinningNumberCount(), getBonusNumberMessage(rank), rank.toStringPrize(),
-                        rankCount.getCount(rank)));
+                        rank.toStringWinningNumberCount(), getBonusNumberMessage(rank),
+                        rank.toStringPrize(), rankCount.getCount(rank)));
+        System.out.printf((PROFIT_RATE_MASSAGE_FORMAT), profitRate.toStringProfitRate());
     }
 
     private static String getBonusNumberMessage(Rank rank) {
@@ -41,10 +39,6 @@ public class OutputView {
             return BONUS_NUMBER_MATCH_MESSAGE;
         }
         return BONUS_NUMBER_MISMATCH_MESSAGE;
-    }
-
-    public static void printProfitRate(ProfitRate profitRate) {
-        System.out.printf((PROFIT_RATE_MASSAGE_FORMAT), profitRate.toStringProfitRate());
     }
 
     public static void printNewLine() {
