@@ -37,7 +37,7 @@ public enum WinningStatus {
 	}
 
 	public static WinningStatus of(int numberMatches, boolean hitBonus) {
-		List<WinningStatus> filteredByNumberMatches = Arrays.stream(WinningStatus.values())
+		List<WinningStatus> filteredByNumberMatches = WinningStatus.getValues().stream()
 			.filter(winningStatus -> winningStatus.numberMatches == numberMatches).collect(Collectors.toList());
 		if (filteredByNumberMatches.isEmpty()) {
 			return NOTHING;
