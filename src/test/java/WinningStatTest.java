@@ -1,7 +1,5 @@
 import domain.LottoRank;
-import domain.Money;
 import domain.WinningStat;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import view.OutputView;
@@ -12,6 +10,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import static constant.LottoConstant.LOTTO_TICKET_PRICE;
 import static org.assertj.core.api.Assertions.*;
 
 class WinningStatTest {
@@ -31,6 +30,6 @@ class WinningStatTest {
         df.setRoundingMode(RoundingMode.DOWN);
         assertThat(df.format(profit)).isEqualTo("0.35");
 
-        OutputView.printWinningStat(winningStat);
+        OutputView.printWinningStat(winningStat, winningStat.calculateProfit(LOTTO_TICKET_PRICE));
     }
 }

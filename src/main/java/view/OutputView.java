@@ -10,8 +10,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import static constant.LottoConstant.LOTTO_TICKET_PRICE;
-
 public class OutputView {
 
     public static final String PROFIT_PATTERN = "#.##";
@@ -28,14 +26,14 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printWinningStat(WinningStat winningStat) {
+    public static void printWinningStat(WinningStat winningStat, double profit) {
         List<LottoRank> lottoRanks = LottoRank.valuesWithPrize();
         Collections.reverse(lottoRanks);
 
         System.out.println("\n당첨 통계");
         System.out.println("--------");
         System.out.print(createStatView(winningStat.getStat(), lottoRanks));
-        System.out.println("총 수익률은 " + formatProfit(winningStat) + "입니다.");
+        System.out.println("총 수익률은 " + formatProfit(profit) + "입니다.");
     }
 
     private static String createStatView(Map<LottoRank, Integer> statistics, List<LottoRank> lottoRanks) {
@@ -57,10 +55,9 @@ public class OutputView {
         return BLANK;
     }
 
-    private static String formatProfit(WinningStat winningStat) {
+    private static String formatProfit(double profit) {
         DecimalFormat profitFormatter = new DecimalFormat(PROFIT_PATTERN);
         profitFormatter.setRoundingMode(RoundingMode.DOWN);
-
-        return profitFormatter.format(winningStat.calculateProfit(LOTTO_TICKET_PRICE));
+        return profitFormatter.format(profit);
     }
 }

@@ -8,11 +8,11 @@ import static constant.LottoConstant.*;
 
 public class RandomLottoNumberStrategy implements LottoNumberStrategy {
 
+    private static final List<LottoNumber> numbers = LottoNumber.getNumbers();
+
     @Override
     public List<LottoNumber> generate() {
-        List<LottoNumber> numbers = LottoNumber.getNumbers();
         Collections.shuffle(numbers);
-
         return numbers.stream()
                 .limit(LOTTO_NUMBERS_SIZE)
                 .collect(Collectors.toList());

@@ -7,6 +7,8 @@ import view.OutputView;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static constant.LottoConstant.LOTTO_TICKET_PRICE;
+
 public class LottoController {
 
     private final LottoMachine lottoMachine = new LottoMachine();
@@ -31,9 +33,10 @@ public class LottoController {
         LottoTicketNumbers winningNumbers = new LottoTicketNumbers(InputView.getWinningNumbers().stream()
                 .map(LottoNumber::getInstance)
                 .collect(Collectors.toList()));
+        System.out.println(winningNumbers.getLottoNumbers().stream().map(LottoNumber::getNumber).collect(Collectors.toList()));
         LottoNumber bonusNumber = LottoNumber.createBonus(InputView.getBonusNumber(), winningNumbers);
 
         WinningStat winningStat = lottoMachine.createWinningStat(lottoTickets, winningNumbers, bonusNumber);
-        OutputView.printWinningStat(winningStat);
+        OutputView.printWinningStat(winningStat, winningStat.calculateProfit(LOTTO_TICKET_PRICE));
     }
 }
