@@ -15,7 +15,6 @@ class MoneyTest {
     @Test
     void input_money_valid() {
         final Money money = new Money("14000");
-
         assertThat(money).isEqualTo(new Money("14000"));
     }
 
