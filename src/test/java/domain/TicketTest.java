@@ -3,25 +3,24 @@ package domain;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Set;
+import java.util.stream.Stream;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class TicketTest {
-    private Ticket ticket;
 
-    @BeforeEach
-    void initialize() {
-        ticket = new Ticket(() -> Set.of(new LottoNumber(1),
+    @Test
+    void 티켓생성() {
+        Ticket ticket = new Ticket(() -> Set.of(new LottoNumber(1),
             new LottoNumber(2),
             new LottoNumber(3),
             new LottoNumber(4),
             new LottoNumber(5),
             new LottoNumber(6)));
-    }
-
-    @Test
-    void 티켓생성() {
         assertThat(ticket.getLottoNumbers()).isEqualTo(Set.of(new LottoNumber(1),
             new LottoNumber(2),
             new LottoNumber(3),
@@ -58,39 +57,21 @@ public class TicketTest {
             .doesNotThrowAnyException();
     }
 
-    @Test
-    void 입력받은_문자열로_로또번호_5개입력() {
-        assertThatThrownBy(() -> Ticket.of("1, 2, 3, 4, 5"))
+    @ParameterizedTest(name = "{index}: {1}")
+    @MethodSource("parameters")
+    @DisplayName("로또 번호 입력 테스트")
+    void 로또번호입력(String input, String testName) {
+        assertThatThrownBy(() -> Ticket.of(input))
             .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @Test
-    void 입력받은_문자열로_로또번호_7개입력() {
-        assertThatThrownBy(() -> Ticket.of("1, 2, 3, 4, 5, 6, 7"))
-            .isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
-    void 입력받은_문자열로_로또번호_문자열() {
-        assertThatThrownBy(() -> Ticket.of("1, 2, 3, 4, a, 6"))
-            .isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
-    void 입력받은_문자열로_로또번호_중복() {
-        assertThatThrownBy(() -> Ticket.of("1, 2, 3, 4, 5, 5"))
-            .isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
-    void 입력받은_문자열로_로또번호_마지막구분자() {
-        assertThatThrownBy(() -> Ticket.of("1, 2, 3, 4, 5, 6, "))
-            .isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
-    void 입력받은_문자열로_로또번호_널() {
-        assertThatThrownBy(() -> Ticket.of(null))
-            .isInstanceOf(IllegalArgumentException.class);
+    static Stream<Arguments> parameters() {
+        return Stream.of(
+            Arguments.of("1, 2, 3, 4, 5", "5개입력"),
+            Arguments.of("1, 2, 3, 4, 5, 6, 7", "7개입력"),
+            Arguments.of("1, 2, 3, 4, 5, a", "문자 개입력"),
+            Arguments.of("1, 2, 3, 4, 5, 5", "중복 번호 입력"),
+            Arguments.of("1, 2, 3, 4, 5, 6, ", "마지막에 구분자 추가"),
+            Arguments.of(null, "널 입력"));
     }
 }
