@@ -10,7 +10,7 @@ public class WinningResult {
 	private final EnumMap<LottoRank, Integer> winningResult;
 
 	private WinningResult(EnumMap<LottoRank, Integer> winningResult) {
-		this.winningResult = winningResult;
+		this.winningResult = new EnumMap<>(winningResult);
 	}
 
 	public static WinningResult createWinningResult(LottoTicket lottoTicket, WinningNumbers winningNumbers) {

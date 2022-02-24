@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -12,6 +14,7 @@ public class Lotto {
 	private final List<Number> lotto;
 
 	public Lotto(List<Number> lotto) {
+		lotto = new ArrayList<>(lotto);
 		checkLottoNumber(lotto);
 		this.lotto = lotto;
 	}
@@ -55,6 +58,6 @@ public class Lotto {
 	}
 
 	public List<Number> getLotto() {
-		return lotto;
+		return Collections.unmodifiableList(lotto);
 	}
 }
