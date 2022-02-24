@@ -13,6 +13,14 @@ public class DefaultLottoWinningPrizeStrategy implements WinningPrizeStrategy {
         put(3, WinningPrize.FIFTH);
     }};
 
+    private static final Map<WinningPrize, Integer> WINNING_PRIZE_MATCH_COUNT_INFO = new HashMap<>(){{
+        put(WinningPrize.FIRST, 6);
+        put(WinningPrize.SECOND, 5);
+        put(WinningPrize.THIRD, 5);
+        put(WinningPrize.FOURTH, 4);
+        put(WinningPrize.FIFTH, 3);
+    }};
+
     @Override
     public WinningPrize winningPrize(int matchCount, boolean matchBonus) {
         if (matchCount == 5 && matchBonus) {
@@ -23,12 +31,16 @@ public class DefaultLottoWinningPrizeStrategy implements WinningPrizeStrategy {
 
     @Override
     public int matchCount(WinningPrize winningPrize) {
+        return WINNING_PRIZE_MATCH_COUNT_INFO.get(winningPrize);
+        /*if (winningPrize.equals(WinningPrize.SECOND)) {
+            return 5;
+        }
         return MATCH_COUNT_WINNING_PRIZE_INFO.entrySet()
                 .stream()
                 .filter(entry -> entry.getValue().equals(winningPrize))
                 .map(Entry::getKey)
                 .findAny()
-                .orElse(0);
+                .orElse(0);*/
     }
 
     @Override
