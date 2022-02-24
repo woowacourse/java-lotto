@@ -1,12 +1,9 @@
 package controller;
 
-import domain.InputMoney;
 import domain.Lotto;
 import domain.LottoNumber;
 import domain.Lottos;
 import domain.Rank;
-import domain.TrialNumber;
-import domain.WinningCount;
 import domain.WinningLotto;
 import domain.strategy.LottoNumberGenerateStrategy;
 import domain.strategy.RandomLottoNumberGenerateStrategy;
@@ -17,6 +14,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import view.InputView;
 import view.ResultView;
+import vo.InputMoney;
+import vo.TrialNumber;
+import vo.WinningCount;
 
 public class LottoController {
     private static final int LOTTO_PRICE = 1000;
@@ -33,6 +33,15 @@ public class LottoController {
         WinningLotto winningLotto = setupWinningLotto();
         Map<Rank, WinningCount> map = autoLottos.getResultByWinningLotto(winningLotto);
         ResultView.printResult(LottoResultDto.from(map, trialNumber));
+    }
+
+    private InputMoney getInputMoney() {
+        try {
+            return new InputMoney(InputView.scanInputMoney());
+        } catch (IllegalArgumentException exception) {
+            InputView.printException(exception);
+            return getInputMoney();
+        }
     }
 
     private TrialNumber getTrialNumberByInputMoney(InputMoney inputMoney) {
@@ -88,15 +97,6 @@ public class LottoController {
         } catch (IllegalArgumentException exception) {
             InputView.printException(exception);
             return generateBonusNumber();
-        }
-    }
-
-    private InputMoney getInputMoney() {
-        try {
-            return new InputMoney(InputView.scanInputMoney());
-        } catch (IllegalArgumentException exception) {
-            InputView.printException(exception);
-            return getInputMoney();
         }
     }
 }
