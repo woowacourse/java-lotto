@@ -7,21 +7,26 @@ import java.util.stream.Collectors;
 
 public class StringUtil {
 
+    private static final String SPLIT_DELIMITER = ",";
+
     private StringUtil() {
     }
 
-    public static String[] getSplit(String text) {
-        return text.split(", ");
-    }
-
-    public static List<Integer> toIntegers(String[] strings) {
+    public static List<Integer> toIntegers(String text) {
+        List<String> strings = getSplit(text);
         List<Integer> numbers = new ArrayList<>();
         try {
-            numbers = Arrays.stream(strings)
+            numbers = strings.stream()
                     .map(Integer::parseInt)
                     .collect(Collectors.toList());
         } catch (NumberFormatException exception) {
         }
         return numbers;
+    }
+
+    private static List<String> getSplit(String text) {
+        return Arrays.stream(text.split(SPLIT_DELIMITER))
+                .map(String::trim)
+                .collect(Collectors.toList());
     }
 }

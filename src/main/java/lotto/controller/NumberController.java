@@ -17,8 +17,7 @@ public class NumberController {
 
         do {
             String input = InputView.inputLastWeekWinningNumbers();
-            String[] strings = StringUtil.getSplit(input);
-            integers = StringUtil.toIntegers(strings);
+            integers = StringUtil.toIntegers(input);
             isValid = validateNumbers(integers);
         } while (!isValid);
         return toNumbers(integers);
@@ -62,7 +61,7 @@ public class NumberController {
             return new Number(input);
         } catch (IllegalArgumentException exception) {
             System.out.println(exception.getMessage());
+            return null;
         }
-        return null;
     }
 }
