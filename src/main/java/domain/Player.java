@@ -41,4 +41,8 @@ public class Player {
         }
         return result;
     }
+
+    public double calculateIncomeRate(double totalIncome) {
+        return totalIncome / money.getAmount();
+    }
 }
