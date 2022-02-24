@@ -43,5 +43,4 @@ class LottoNumberTest {
                 Arguments.of(Arrays.asList(TWO, THREE, FOUR, FIVE, SIX, SEVEN), false)
         );
     }
-
 }

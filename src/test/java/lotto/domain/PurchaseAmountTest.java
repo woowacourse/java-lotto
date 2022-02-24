@@ -12,6 +12,7 @@ class PurchaseAmountTest {
     private final int lottoPrice = 1000;
     private final PurchaseAmount purchaseAmount =
             PurchaseAmount.fromPurchaseAmountAndLottoPrice("2000", lottoPrice);
+
     @ParameterizedTest
     @DisplayName("1000의 양의 배수가 아닌 값으로 생성할 경우 예외를 발생시킨다.")
     @ValueSource(strings = {"abc", "1004", "-1000", "12.334"})
