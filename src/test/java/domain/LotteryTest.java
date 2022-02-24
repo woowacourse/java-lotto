@@ -27,7 +27,7 @@ public class LotteryTest {
 			assertThatThrownBy(() -> {
 				new Lottery(Arrays.asList(1,2,3,4,5));
 			}).isInstanceOf(IllegalArgumentException.class)
-				.hasMessageContaining("로또 번호는 6개여야 합니다.");
+				.hasMessageContaining("로또번호는 6개여야 합니다.");
 		}
 	}
 
@@ -47,7 +47,7 @@ public class LotteryTest {
 			assertThatThrownBy(() -> {
 				new Lottery(Arrays.asList(-1, 0, 46, 3, 4, 5));
 			}).isInstanceOf(IllegalArgumentException.class)
-				.hasMessageContaining("로또의 각 번호는 1~45 사이여야 합니다");
+				.hasMessageContaining("각 로또번호는 1~45 사이여야 합니다");
 		}
 	}
 }

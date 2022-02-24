@@ -26,7 +26,7 @@ public class InputView {
 
 	private static String inputMoney() {
 		try {
-			System.out.println(LotteryMessage.PURCHASE_AMOUNT);
+			System.out.println(LotteryMessage.INPUT_PURCHASE_AMOUNT);
 			final String money = scanner.nextLine();
 			validateMoney(money);
 			return money;
