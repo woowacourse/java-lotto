@@ -35,9 +35,15 @@ public class LottoTicket {
     }
 
     private void validate(List<LottoNumber> numbers) {
+        validateNull(numbers);
         validateLength(numbers);
         validateDistinct(numbers);
-        validateNull(numbers);
+    }
+
+    private void validateNull(List<LottoNumber> numbers) {
+        if (numbers == null) {
+            throw new IllegalArgumentException("로또 번호는 null일 수 없습니다.");
+        }
     }
 
     private void validateDistinct(List<LottoNumber> numbers) {
@@ -48,12 +54,6 @@ public class LottoTicket {
 
     private boolean isDistinct(List<LottoNumber> numbers) {
         return new HashSet<>(numbers).size() == COUNT;
-    }
-
-    private void validateNull(List<LottoNumber> numbers) {
-        if (numbers == null) {
-            throw new IllegalArgumentException("로또 번호는 null일 수 없습니다.");
-        }
     }
 
     private void validateLength(List<LottoNumber> numbers) {

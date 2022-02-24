@@ -51,7 +51,7 @@ class LottoTicketTest {
     }
 
     @Test
-    @DisplayName("로또 번호는 null일ㄹ 수 없다.")
+    @DisplayName("로또 번호는 null일 수 없다.")
     void validateNull() {
         // given
         List<LottoNumber> numbers = null;
