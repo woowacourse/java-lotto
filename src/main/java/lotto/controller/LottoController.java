@@ -2,6 +2,7 @@ package lotto.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.function.Supplier;
 import lotto.model.LottoRank;
 import lotto.model.lottonumbers.LottoTicket;
 import lotto.model.LottoTicketFactory;
@@ -40,24 +41,30 @@ public class LottoController {
     }
 
     private Money inputMoney() {
-        try {
-            return new Money(InputView.inputMoney());
-        } catch (IOException | IllegalArgumentException e) {
-            OutputView.printErrorMessage(e.getMessage());
-            return inputMoney();
-        }
+        IndividualInput<Money> input = () -> new Money(InputView.inputMoney());
+        return commonInputProcess(input);
     }
 
     private WinningNumbers inputWinningNumbers() {
+        IndividualInput<WinningNumbers> input =
+                () -> WinningNumbers.of(InputView.inputWinningNumbers(), InputView.inputBonusBall());
+        return commonInputProcess(input);
+    }
+
+    private <T> T commonInputProcess(IndividualInput<T> individualInputs) {
         try {
-            return WinningNumbers.of(InputView.inputWinningNumbers(), InputView.inputBonusBall());
+            return individualInputs.get();
         } catch (IOException | IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
-            return inputWinningNumbers();
+            return commonInputProcess(individualInputs);
         }
     }
 
     private List<LottoTicket> purchaseLottoTickets(Money inputMoney) {
         return LottoTicketFactory.createTickets(inputMoney.getAmount());
+    }
+
+    private interface IndividualInput<T> {
+        T get() throws IOException, IllegalArgumentException;
     }
 }
