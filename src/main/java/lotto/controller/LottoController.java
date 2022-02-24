@@ -32,12 +32,12 @@ public class LottoController {
         return store.buyLottos();
     }
 
-    private WinnerLotto createWinnerLotto(List<Number> winnerNumbers, Number bonusNumber) {
-        return new WinnerLotto(new Lotto(winnerNumbers), bonusNumber);
+    private WinnerLotto createWinnerLotto(Lotto winnerNumbers, Number bonusNumber) {
+        return new WinnerLotto(winnerNumbers, bonusNumber);
     }
 
-    private List<Number> winnerNumbers() {
-        return InputView.inputWinnerNumbers();
+    private Lotto winnerNumbers() {
+        return new Lotto(InputView.inputWinnerNumbers());
     }
 
     private Number bonusNumber() {
