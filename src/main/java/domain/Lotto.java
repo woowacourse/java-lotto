@@ -11,7 +11,7 @@ public class Lotto {
 	}
 
 	public int calculateInAnswerNumbers(AnswerLotto answerLotto) {
-		return (int) this.lottoNumbers.stream().map(answerLotto::isInAnswerNumbers).count();
+		return this.lottoNumbers.stream().mapToInt(answerLotto::isInAnswerNumbers).sum();
 	}
 
 	public boolean isHitBonusNumber(AnswerLotto answerLotto) {
