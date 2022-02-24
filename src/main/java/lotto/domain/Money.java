@@ -3,7 +3,7 @@ package lotto.domain;
 public class Money {
     private static final String ERROR_NOT_INTEGER = "[ERROR] 금액은 숫자로 입력해주세요.";
     private static final String ERROR_SHORT_MONEY = "[ERROR] 최소 금액은 1000원입니다.";
-    private static final String ERROR_NOT_UNIT = "거스름돈이 발생하는 경우에 대한 예외처리";
+    private static final String ERROR_NOT_UNIT = "[ERROR] 금액을 1000원 단위로 입력해주세요";
 
     private static final int UNIT_AMOUNT = 1000;
 
