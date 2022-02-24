@@ -1,9 +1,9 @@
-package lotto.domain;
+package lotto.utils;
 
 import java.util.Set;
 import java.util.TreeSet;
 
-import lotto.utils.RandomNumberGenerator;
+import lotto.domain.LottoNumber;
 
 public class RandomLottoNumbersGenerator implements LottoNumbersGenerator {
     private static final int LOTTO_SIZE = 6;

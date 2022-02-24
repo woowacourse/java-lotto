@@ -9,6 +9,8 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import lotto.utils.RandomLottoNumbersGenerator;
+
 public class TicketsTest {
 
     @Test

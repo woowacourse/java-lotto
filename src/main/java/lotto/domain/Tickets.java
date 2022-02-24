@@ -8,6 +8,8 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
+import lotto.utils.LottoNumbersGenerator;
+
 public class Tickets {
     private final List<Ticket> tickets;
 

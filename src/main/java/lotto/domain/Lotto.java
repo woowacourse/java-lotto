@@ -2,6 +2,8 @@ package lotto.domain;
 
 import java.util.Map;
 
+import lotto.utils.RandomLottoNumbersGenerator;
+
 public class Lotto {
     private final Amount amount;
     private final Tickets tickets;
