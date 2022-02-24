@@ -58,8 +58,8 @@ public class LottoController {
             int bonusNumber = inputView.getBonusNumber();
 
             return new WinningNumbers(winningNumbers, bonusNumber);
-        } catch (RuntimeException e) {
-            outputView.printErrorMessage(e.getMessage());
+        } catch (NumberFormatException e) {
+            outputView.printErrorMessage("숫자를 입력해주세요.");
 
             return createWinningNumbers();
         }
