@@ -9,13 +9,11 @@ public class Store {
     private static final int UNDER_LIMIT_MONEY = 1_000;
     private static final long LOTTO_PRICE = 1_000L;
 
-    private final LottoGenerator lottoGenerator;
     private Money leftMoney;
 
-    public Store(int money, LottoGenerator lottoGenerator) {
+    public Store(int money) {
         validateMoneyRange(money);
         this.leftMoney = new Money(money);
-        this.lottoGenerator = lottoGenerator;
     }
 
     private void validateMoneyRange(int money) {
@@ -49,6 +47,6 @@ public class Store {
 
     private Lotto buy() {
         leftMoney = leftMoney.minus(new Money(LOTTO_PRICE));
-        return lottoGenerator.generate();
+        return LottoGenerator.generate();
     }
 }

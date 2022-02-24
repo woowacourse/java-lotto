@@ -29,7 +29,7 @@ public class LottoController {
     }
 
     private List<Lotto> buyLottos(int money) {
-        Store store = new Store(money, new LottoGenerator());
+        Store store = new Store(money);
         return store.buyLottos();
     }
 

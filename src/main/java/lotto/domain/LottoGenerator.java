@@ -13,21 +13,19 @@ public class LottoGenerator {
 
     private static final int START_INCLUSIVE = 0;
     private static final int END_EXCLUSIVE = 6;
+    private static final List<Number> NUMBERS = initNumbers();
 
-    private final List<Number> numbers;
-
-    public LottoGenerator() {
-        this.numbers = initNumbers();
+    private LottoGenerator() {
     }
 
-    private List<Number> initNumbers() {
+    private static List<Number> initNumbers() {
         return IntStream.rangeClosed(NumberLimit.MINIMUM.getLimit(), NumberLimit.MAXIMUM.getLimit())
                 .mapToObj(Number::new)
                 .collect(Collectors.toList());
     }
 
-    public Lotto generate() {
-        Collections.shuffle(numbers);
-        return new Lotto(new ArrayList<>(numbers.subList(START_INCLUSIVE, END_EXCLUSIVE)));
+    public static Lotto generate() {
+        Collections.shuffle(NUMBERS);
+        return new Lotto(new ArrayList<>(NUMBERS.subList(START_INCLUSIVE, END_EXCLUSIVE)));
     }
 }
