@@ -8,21 +8,6 @@ import model.LottoNumbers;
 public class LottoNumbersParser extends Parser<LottoNumbers> {
     static final String INVALID_LOTTO_NUMBER_FORMAT_MESSAGE = "당첨 번호의 형식이 잘못 되었습니다. 예) 1, 2, 3, 4, 5, 6";
 
-    public LottoNumbersParser() {
-        super(regex(), INVALID_LOTTO_NUMBER_FORMAT_MESSAGE);
-    }
-
-    private static String regex() {
-        return new StringBuilder(REGEX_BEGINNING)
-                .append(lottoNumberWithSpacesRegex())
-                .append(REGEX_GROUP_BEGINNING)
-                .append(REGEX_SPACE).append(REGEX_COMMA)
-                .append(lottoNumberWithSpacesRegex())
-                .append(REGEX_GROUP_END).append(repeatRegex(5))
-                .append(REGEX_END)
-                .toString();
-    }
-
     @Override
     protected LottoNumbers convert(String text) {
         List<String> tokens = splitNumbers(text);
@@ -37,13 +22,30 @@ public class LottoNumbersParser extends Parser<LottoNumbers> {
 
     private List<String> trimNumbers(List<String> numbers) {
         return numbers.stream()
-                .map(String::trim)
-                .collect(toList());
+            .map(String::trim)
+            .collect(toList());
     }
 
     private List<Integer> toInts(List<String> numbers) {
         return numbers.stream()
-                .map(Integer::valueOf)
-                .collect(toList());
+            .map(Integer::valueOf)
+            .collect(toList());
+    }
+
+    @Override
+    protected String regex() {
+        return new StringBuilder(REGEX_BEGINNING)
+            .append(lottoNumberWithSpacesRegex())
+            .append(REGEX_GROUP_BEGINNING)
+            .append(REGEX_SPACE).append(REGEX_COMMA)
+            .append(lottoNumberWithSpacesRegex())
+            .append(REGEX_GROUP_END).append(repeatRegex(5))
+            .append(REGEX_END)
+            .toString();
+    }
+
+    @Override
+    protected String errorMessage() {
+        return INVALID_LOTTO_NUMBER_FORMAT_MESSAGE;
     }
 }

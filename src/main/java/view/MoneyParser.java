@@ -8,12 +8,18 @@ public class MoneyParser extends Parser<Money> {
     private static final String MONEY_REGEX = REGEX_BEGINNING + REGEX_ONE_TO_NINE + REGEX_ZERO_TO_NINE
             + REGEX_ASTERISK + REGEX_ZERO + repeatRegex(3) + REGEX_END;
 
-    public MoneyParser() {
-        super(MONEY_REGEX, INVALID_MONEY_FORMAT_MESSAGE);
-    }
-
     @Override
     protected Money convert(String text) {
         return new Money(Integer.parseInt(text));
+    }
+
+    @Override
+    protected String regex() {
+        return MONEY_REGEX;
+    }
+
+    @Override
+    protected String errorMessage() {
+        return INVALID_MONEY_FORMAT_MESSAGE;
     }
 }

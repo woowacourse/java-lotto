@@ -14,14 +14,6 @@ public abstract class Parser<T> {
     protected static final String REGEX_ZERO_TO_NINE = "[0-9]";
     protected static final String REGEX_ASTERISK = "*";
 
-    private final String regex;
-    private final String errorMessage;
-
-    public Parser(String regex, String errorMessage) {
-        this.regex = regex;
-        this.errorMessage = errorMessage;
-    }
-
     protected static String lottoNumberWithSpacesRegex() {
         return new StringBuilder(REGEX_SPACE)
                 .append(lottoNumberRegex())
@@ -42,12 +34,16 @@ public abstract class Parser<T> {
     }
 
     public T parse(String text) {
-        if (!text.matches(regex)) {
-            throw new IllegalArgumentException(errorMessage);
+        if (!text.matches(regex())) {
+            throw new IllegalArgumentException(errorMessage());
         }
 
         return convert(text);
     }
 
     protected abstract T convert(String text);
+
+    protected abstract String regex();
+
+    protected abstract String errorMessage();
 }

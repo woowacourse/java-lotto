@@ -1,5 +1,6 @@
 
 import static view.InputView.inputSelectiveRepeatably;
+import static view.OutputView.printErrorMessage;
 import static view.OutputView.printIssuedLottoNumbers;
 import static view.OutputView.printResult;
 
@@ -24,7 +25,16 @@ public class Application {
     public static final Parser<LottoNumber> BONUS_NUMBER_PARSER = new BonusNumberParser();
 
     public static void main(String[] args) {
-        Money inputMoney = inputSelectiveRepeatably("구입금액을 입력해 주세요.", MONEY_PARSER::parse, OutputView::printErrorMessage);
+        try {
+            run();
+        } catch(Exception e) {
+            printErrorMessage(e);
+        }
+    }
+
+    private static void run() {
+        Money inputMoney = inputSelectiveRepeatably("구입금액을 입력해 주세요.", MONEY_PARSER::parse,
+            OutputView::printErrorMessage);
         List<LottoNumbers> issuedLottoNumbers = issueLottoNumbers(inputMoney);
         printIssuedLottoNumbers(issuedLottoNumbers);
         WinningLottoNumbers winningLottoNumbers = createWinningLottoNumbers();
