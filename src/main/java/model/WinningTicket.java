@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 public class WinningTicket {
     private static final int TICKET_SIZE = 6;
+    private static final int SECOND_WINNING_COUNT = 5;
 
     private final List<LottoNumber> winningNumbers;
     private final LottoNumber bonusNumber;
@@ -45,5 +46,10 @@ public class WinningTicket {
     public boolean matchBonusNumber(LottoTicket lottoTicket) {
         List<Integer> lottoNumbers = lottoTicket.lottoNumberValues();
         return lottoNumbers.contains(bonusNumberValue());
+    }
+
+    public boolean isSecondWinning(LottoTicket lottoTicket) {
+        return compareMatchCount(lottoTicket) == SECOND_WINNING_COUNT &&
+               matchBonusNumber(lottoTicket);
     }
 }

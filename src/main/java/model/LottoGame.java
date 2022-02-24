@@ -9,7 +9,6 @@ public class LottoGame {
     private static final int INIT_COUNT = 0;
     private static final int COUNT_UNIT = 1;
     private static final int WINNING_FLAG = 3;
-    private static final int SECOND_WINNING_COUNT = 5;
     private static final int TICKET_PRICE = 1000;
 
     private final Map<Integer, WinningPrize> winningInfo = new HashMap<>() {{
@@ -60,11 +59,10 @@ public class LottoGame {
     }
 
     private WinningPrize compareWin(LottoTicket lottoTicket) {
-        int count = winningTicket.compareMatchCount(lottoTicket);
-        if (count == SECOND_WINNING_COUNT && winningTicket.matchBonusNumber(lottoTicket)) {
+        if (winningTicket.isSecondWinning(lottoTicket)) {
             return WinningPrize.SECOND;
         }
-
+        int count = winningTicket.compareMatchCount(lottoTicket);
         return winningInfo.get(count);
     }
 
