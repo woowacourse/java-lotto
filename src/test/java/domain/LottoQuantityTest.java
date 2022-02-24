@@ -1,10 +1,10 @@
 package domain;
 
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoQuantityTest {
     @ParameterizedTest(name = "LottoAmount 에 양의 정수를 전달하면 객체가 생성됨 - {0}")
@@ -25,6 +25,6 @@ public class LottoQuantityTest {
     void createLottoQuantityWithNegativeOrZeroShouldFail(int lottoQuantity) {
         assertThatThrownBy(() -> new LottoQuantity(lottoQuantity))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageMatching("횟수는 1 보다 작을 수 없습니다.");
+                .hasMessageMatching("개수는 1 보다 작을 수 없습니다.");
     }
 }
