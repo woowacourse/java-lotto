@@ -27,10 +27,21 @@ class LottoRankTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"6, false, 2_000_000_000", "5, true, 30_000_000", "5, false, 1_500_000", "4, false, 50_000",
-            "3, false, 5_000", "2, false, 0"})
+    @CsvSource(value = {
+            "6 - true - 2_000_000_000",
+            "6 - false - 2_000_000_000",
+            "5 - true - 30_000_000",
+            "5 - false - 1_500_000",
+            "4 - true - 50_000",
+            "4 - false - 50_000",
+            "3 - false - 5_000",
+            "2 - false - 0"
+    }, delimiterString = " - "
+    )
     @DisplayName("등수에 맞는 상금을 반환한다")
     void returnPrize(int winningNumberCount, boolean containsBonusBall, int expected) {
-        assertThat(LottoRank.getRank(winningNumberCount, containsBonusBall).getPrizeMoney()).isEqualTo(expected);
+        assertThat(LottoRank.getRank(winningNumberCount, containsBonusBall)
+                .getPrizeMoney())
+                .isEqualTo(expected);
     }
 }
