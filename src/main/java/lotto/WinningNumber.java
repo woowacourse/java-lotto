@@ -14,7 +14,7 @@ public class WinningNumber implements LottoNumber{
 
     public static WinningNumber from(String input) {
         try {
-            return new WinningNumber(Integer.parseInt(input));
+            return new WinningNumber(Integer.parseInt(input.trim()));
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ERROR_TYPE);
         }
