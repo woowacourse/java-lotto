@@ -1,5 +1,6 @@
 package lotto.model.result;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -12,7 +13,7 @@ public class LottoStatistics {
 
     public LottoStatistics(List<LottoRank> ranks) {
         this.lottoRankCountMap = ranks.stream()
-            .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 
     public long count(LottoRank rank) {

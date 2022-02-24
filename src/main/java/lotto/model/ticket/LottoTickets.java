@@ -14,7 +14,7 @@ public class LottoTickets {
     private final List<LottoTicket> tickets;
 
     public LottoTickets(List<LottoTicket> tickets) {
-        this.tickets = tickets;
+        this.tickets = new ArrayList<>(tickets);
     }
 
     public static LottoTickets buy(NumberGenerator generator, Money money) {

@@ -21,6 +21,7 @@ public class LottoController {
                 .buy(new RandomNumberGenerator(LottoNumber.MIN, LottoNumber.MAX), money);
         OutputView.outputTickets(lottoTickets);
         WinningTicket winningTicket = makeWinningTicket();
+
         List<LottoRank> lottoRanks = lottoTickets.compareResult(winningTicket);
         LottoStatistics lottoStatistics = new LottoStatistics(lottoRanks);
         OutputView.outputStatistics(lottoStatistics, money);
