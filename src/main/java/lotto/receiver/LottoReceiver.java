@@ -47,7 +47,7 @@ public class LottoReceiver {
 
     private static List<LottoNumber> convertToLottoNumbers(List<String> numbers) {
         return numbers.stream()
-                .map(LottoNumber::getLottoNumber)
+                .map(LottoNumber::getByString)
                 .sorted()
                 .collect(Collectors.toList());
     }

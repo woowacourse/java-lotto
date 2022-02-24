@@ -49,7 +49,7 @@ public enum LottoNumber {
         return Arrays.stream(LottoNumber.values()).collect(Collectors.toList());
     }
 
-    public static LottoNumber getLottoNumber(String input) {
+    public static LottoNumber getByString(String input) {
         checkNaturalNumber(input);
         checkRange(input);
         return LottoNumber.valueOf(LOTTO_NUMBER_PREFIX + input);

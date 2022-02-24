@@ -7,7 +7,7 @@ import lotto.exception.BonusNumberException;
 public class BonusNumberReceiver {
 
     public static LottoNumber receive(String input, Lotto winningNumbers) {
-        LottoNumber lottoNumber = LottoNumber.getLottoNumber(input);
+        LottoNumber lottoNumber = LottoNumber.getByString(input);
         checkDuplication(winningNumbers, lottoNumber);
         return lottoNumber;
     }
