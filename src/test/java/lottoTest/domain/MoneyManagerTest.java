@@ -1,12 +1,12 @@
-package lottoTest;
+package lottoTest.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
-import lotto.MoneyManager;
-import lotto.Rank;
-import lotto.Ranks;
+import lotto.domain.MoneyManager;
+import lotto.domain.Rank;
+import lotto.domain.Ranks;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;

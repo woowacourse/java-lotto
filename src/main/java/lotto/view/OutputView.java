@@ -1,6 +1,9 @@
-package lotto;
+package lotto.view;
 
 import java.util.EnumMap;
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
+import lotto.domain.Rank;
 
 public class OutputView {
 

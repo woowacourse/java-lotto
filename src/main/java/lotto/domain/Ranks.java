@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.EnumMap;
 import java.util.List;
@@ -19,7 +19,7 @@ public class Ranks {
         }
         return total;
     }
-    
+
     private EnumMap<Rank, Integer> initializeState() {
         EnumMap<Rank, Integer> temp = new EnumMap<>(Rank.class);
         for (Rank rank : Rank.values()) {
