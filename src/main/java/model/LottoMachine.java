@@ -8,9 +8,13 @@ import java.util.stream.IntStream;
 
 public class LottoMachine {
     private final static Money LOTTO_PRICE = new Money(1000);
-    private final WinningLottoNumbers winningLottoNumbers;
-    private final LottoNumbersGenerator lottoNumbersGenerator;
+    private WinningLottoNumbers winningLottoNumbers;
+    private LottoNumbersGenerator lottoNumbersGenerator;
     private List<LottoNumbers> issuedLottoNumbers;
+
+    public LottoMachine(LottoNumbersGenerator lottoNumbersGenerator) {
+        this.lottoNumbersGenerator = lottoNumbersGenerator;
+    }
 
     public LottoMachine(WinningLottoNumbers winningLottoNumbers, LottoNumbersGenerator lottoNumbersGenerator) {
         this.winningLottoNumbers = winningLottoNumbers;
@@ -35,5 +39,21 @@ public class LottoMachine {
         return IntStream.range(0, quantity)
                 .mapToObj(i -> lottoNumbersGenerator.createLottoNumbers())
                 .collect(Collectors.toList());
+    }
+
+    public List<LottoNumbers> getIssuedLottoNumbers() {
+        return issuedLottoNumbers;
+    }
+
+    public void setWinningLottoNumbers(WinningLottoNumbers winningLottoNumbers) {
+        this.winningLottoNumbers = winningLottoNumbers;
+    }
+
+    public void setLottoNumbersGenerator(LottoNumbersGenerator lottoNumbersGenerator) {
+        this.lottoNumbersGenerator = lottoNumbersGenerator;
+    }
+
+    public void setIssuedLottoNumbers(List<LottoNumbers> issuedLottoNumbers) {
+        this.issuedLottoNumbers = issuedLottoNumbers;
     }
 }

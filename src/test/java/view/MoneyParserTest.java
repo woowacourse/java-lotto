@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static view.MoneyParser.INVALID_MONEY_FORMAT_MESSAGE;
 
 import java.math.BigInteger;
+import model.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -16,8 +17,8 @@ public class MoneyParserTest {
     @DisplayName("정상적인 금액 입력")
     void parse() {
         MoneyParser parser = new MoneyParser();
-        BigInteger value = parser.parse("10000");
-        assertThat(value).isEqualTo(new BigInteger("10000"));
+        Money value = parser.parse("10000");
+        assertThat(value).isEqualTo(new Money(10000));
     }
 
     @ParameterizedTest

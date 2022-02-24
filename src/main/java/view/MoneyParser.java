@@ -1,8 +1,9 @@
 package view;
 
 import java.math.BigInteger;
+import model.Money;
 
-public class MoneyParser extends Parser<BigInteger> {
+public class MoneyParser extends Parser<Money> {
     private static final String REGEX_ZERO = "0";
     private static final String MONEY_REGEX = REGEX_BEGINNING + REGEX_ONE_TO_NINE + REGEX_ZERO_TO_NINE
             + REGEX_ASTERISK + REGEX_ZERO + repeatRegex(3) + REGEX_END;
@@ -13,7 +14,7 @@ public class MoneyParser extends Parser<BigInteger> {
     }
 
     @Override
-    protected BigInteger convert(String text) {
-        return new BigInteger(text);
+    protected Money convert(String text) {
+        return new Money(Integer.parseInt(text));
     }
 }
