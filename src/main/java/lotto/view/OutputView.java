@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import lotto.model.Lotto;
+import lotto.model.ProfitRate;
 import lotto.model.Rank;
 import lotto.model.Statistic;
 import lotto.model.exception.DuplicatedNumberException;
@@ -52,17 +53,18 @@ public class OutputView {
         System.out.println(
             "5개 일치, 보너스 볼 일치(30000000원)- " + result.getCountByRank(Rank.SECOND) + "개");
         System.out.println("6개 일치 (2000000000원)- " + result.getCountByRank(Rank.FIRST) + "개");
-        System.out.println("총 수익률은 " + result.getProfitRate()
+        System.out.println("총 수익률은 " + result.getProfitRate().getDoubleValue()
             + "입니다.(기준이 1이기 때문에 결과적으로 " + getSummaryWord(result) + "라는 의미임)");
     }
 
     private static String getSummaryWord(Statistic result) {
-        if (result.getProfitRate().compareTo(BigDecimal.ONE) == -1) {
+        ProfitRate profitRate = result.getProfitRate();
+        if (profitRate.isLoss()) {
             return "손해";
-        } else if (result.getProfitRate().compareTo(BigDecimal.ONE) == 0) {
-            return "본전";
+        } else if (profitRate.isProfit()) {
+            return "이익";
         }
-        return "이익";
+        return "본전";
     }
 
     public static void printErrorMessage(Exception e) {

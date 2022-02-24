@@ -2,6 +2,7 @@ package lotto.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.math.BigDecimal;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +22,8 @@ public class StatisticTest {
         statistic.addRank(Rank.THIRD);
 
         Money expected = FIRST_PRIZE.multiply(2).plus(SECOND_PRIZE).plus(THIRD_PRIZE);
-        assertThat(statistic.getProfitRate()).isEqualTo(expected.divide(new Money(4000)));
+        BigDecimal actualProfitRate = expected.divide(new Money(4000));
+        assertThat(statistic.getProfitRate()).isEqualTo(new ProfitRate(actualProfitRate));
         assertThat(statistic.getCountByRank(Rank.FIRST)).isEqualTo(2);
         assertThat(statistic.getCountByRank(Rank.SECOND)).isEqualTo(1);
         assertThat(statistic.getCountByRank(Rank.THIRD)).isEqualTo(1);

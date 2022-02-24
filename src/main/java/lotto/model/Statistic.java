@@ -26,8 +26,9 @@ public class Statistic {
         rankMap.put(rank, getCountByRank(rank) + 1);
     }
 
-    public BigDecimal getProfitRate() {
-        return totalPrize().divide(inputMoney);
+    public ProfitRate getProfitRate() {
+        BigDecimal rate = totalPrize().divide(inputMoney);
+        return new ProfitRate(rate);
     }
 
     private Money totalPrize() {
