@@ -14,7 +14,17 @@ public class ResultView {
                 "5개 일치, 보너스 볼 일치(30000000원) - " + lottoResultDto.getWinningCountByRank(Rank.SECOND).getCount() + "개");
         System.out.println(
                 "6개 일치 (2000000000원) - " + lottoResultDto.getWinningCountByRank(Rank.FIRST).getCount() + "개");
-        System.out.println("총 수익률은 " + lottoResultDto.getProfitRatio() + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        System.out.println(
+                "총 수익률은 " + lottoResultDto.getProfitRatio() + "입니다.(기준이 1이기 때문에 결과적으로 " + getWinOrLoseByLottoResultDto(
+                        lottoResultDto) + "라는 의미임)");
+    }
+
+    private static String getWinOrLoseByLottoResultDto(LottoResultDto lottoResultDto) {
+        if (lottoResultDto.getProfitRatio() > 1) {
+            return "이익";
+        }
+
+        return "손해";
     }
 }
 
