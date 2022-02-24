@@ -22,7 +22,7 @@ public class NumberValidators {
 
     public static int validateAndParseNumber(String value) {
         try {
-            return Integer.parseInt(value);
+            return Integer.parseInt(value.trim());
         } catch (Exception e) {
             throw new IllegalArgumentException(INVALID_NUMBER_INPUT_EXCEPTION_MESSAGE);
         }

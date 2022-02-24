@@ -34,6 +34,13 @@ public class NumberValidatorsTest {
         assertThat(parsedValue).isEqualTo(10);
     }
 
+    @ParameterizedTest(name = PARAMETERIZED_TEST_DISPLAY_FORMAT)
+    @ValueSource(strings = {"10 ", " 10", "  10  "})
+    void validateAndParseNumber_passesOnNumberWithBlank(String value) {
+        int parsedValue = validateAndParseNumber(value);
+        assertThat(parsedValue).isEqualTo(10);
+    }
+
     @Test
     void validateAndParseNumber_throwIllegalArgumentExceptionOnFail() {
         assertThatExceptionOfType(IllegalArgumentException.class)
