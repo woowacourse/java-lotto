@@ -24,20 +24,20 @@ public class WinningNumbers {
         this.winningNumbers = winningNumbers;
     }
 
-    public Rank compareLottoTicket(LottoTicket lottoTicket) {
+    public Rank compare(LottoTicket lottoTicket) {
         return Rank.of(getCorrectCount(lottoTicket), isBonus(lottoTicket));
     }
 
     private int getCorrectCount(LottoTicket lottoTicket) {
         return winningNumbers.stream()
-                .filter(winningNumber -> winningNumber.isSame(lottoTicket))
+                .filter(lottoTicket::isSame)
                 .collect(toList())
                 .size();
     }
 
     private boolean isBonus(LottoTicket lottoTicket) {
         return winningNumbers.stream()
-                .filter(winningNumber -> winningNumber.isSame(lottoTicket))
+                .filter(lottoTicket::isSame)
                 .anyMatch(WinningNumber::isBonus);
     }
 }

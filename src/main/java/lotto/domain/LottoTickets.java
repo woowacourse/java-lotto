@@ -44,7 +44,7 @@ public class LottoTickets {
         Map<Rank, Integer> ranks = new HashMap<>();
 
         for (LottoTicket lottoTicket : lottoTickets) {
-            Rank rank = winningNumbers.compareLottoTicket(lottoTicket);
+            Rank rank = winningNumbers.compare(lottoTicket);
             ranks.put(rank, ranks.getOrDefault(rank, 0) + 1);
         }
 

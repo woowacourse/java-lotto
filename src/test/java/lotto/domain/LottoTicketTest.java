@@ -30,4 +30,18 @@ class LottoTicketTest {
         assertThatThrownBy(() -> lottoNumbers.add(0))
                 .isInstanceOf(UnsupportedOperationException.class);
     }
+
+    @DisplayName("LottoTicket을 기반으로 당첨 번호가 존재하는지 유무를 반환한다.")
+    @Test
+    void 당첨_번호_인지_확인() {
+        // given
+        LottoTicket lottoTicket = new LottoTicket(() -> List.of(1, 2, 3, 4, 5, 6));
+        WinningNumber winningNumber = new WinningNumber(1, BallType.BONUS);
+
+        // when
+        boolean result = lottoTicket.isSame(winningNumber);
+
+        // then
+        assertThat(result).isTrue();
+    }
 }

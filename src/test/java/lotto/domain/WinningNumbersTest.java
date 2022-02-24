@@ -28,7 +28,7 @@ class WinningNumbersTest {
         LottoTicket lottoTicket = new LottoTicket(() -> List.of(1, 2, 3, 4, 7, 8));
 
         // when
-        Rank rank = winningNumbers.compareLottoTicket(lottoTicket);
+        Rank rank = winningNumbers.compare(lottoTicket);
 
         // then
         assertThat(rank).isEqualTo(Rank.SECOND);
@@ -42,7 +42,7 @@ class WinningNumbersTest {
         LottoTicket lottoTicket = new LottoTicket(() -> List.of(1, 2, 3, 4, 5, 8));
 
         // when
-        Rank rank = winningNumbers.compareLottoTicket(lottoTicket);
+        Rank rank = winningNumbers.compare(lottoTicket);
 
         // then
         assertThat(rank).isEqualTo(Rank.THIRD);

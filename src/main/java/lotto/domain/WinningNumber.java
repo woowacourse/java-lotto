@@ -2,8 +2,6 @@ package lotto.domain;
 
 import static lotto.domain.BallType.BONUS;
 
-import java.util.List;
-
 public class WinningNumber {
 
     private final int winningNumber;
@@ -18,9 +16,7 @@ public class WinningNumber {
         return this.ballType == BONUS;
     }
 
-    public boolean isSame(LottoTicket lottoTicket) {
-        List<Integer> lottoNumbers = lottoTicket.getLottoNumbers();
-
-        return lottoNumbers.contains(winningNumber);
+    public int getWinningNumber() {
+        return winningNumber;
     }
 }
