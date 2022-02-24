@@ -11,36 +11,36 @@ public enum Rank {
 	FIRST_GRADE(6, false, 3_000_000_000L);
 
 	private final int matchCount;
-	private final boolean bonusBallMatched;
-	private final Long prize;
+	private final boolean bonusMatched;
+	private final long prizeMoney;
 
-	Rank(final int matchCount, final boolean bonusBallMatched, final Long prize) {
+	Rank(final int matchCount, final boolean bonusMatched, final long prizeMoney) {
 		this.matchCount = matchCount;
-		this.bonusBallMatched = bonusBallMatched;
-		this.prize = prize;
+		this.bonusMatched = bonusMatched;
+		this.prizeMoney = prizeMoney;
 	}
 
-	public static Rank of(final int matchCount, final boolean bonusBallMatched) {
+	public static Rank of(final int matchCount, final boolean bonusMatched) {
 		return Arrays.stream(Rank.values())
-			.filter(rank -> rank.matches(matchCount, bonusBallMatched))
+			.filter(rank -> rank.matches(matchCount, bonusMatched))
 			.findFirst()
 			.orElseGet(() -> null);
 	}
 
-	private boolean matches(final int matchCount, final boolean bonusBallMatched) {
-		return (matchCount == this.matchCount) && (bonusBallMatched == this.bonusBallMatched);
-	}
-
-	public long getPrize() {
-		return prize;
-	}
-
-	public boolean getBonusBallMatched() {
-		return bonusBallMatched;
+	private boolean matches(final int matchCount, final boolean bonusMatched) {
+		return (matchCount == this.matchCount) && (bonusMatched == this.bonusMatched);
 	}
 
 	public int getMatchCount() {
 		return matchCount;
+	}
+
+	public boolean getBonusMatched() {
+		return bonusMatched;
+	}
+
+	public long getPrizeMoney() {
+		return prizeMoney;
 	}
 
 }

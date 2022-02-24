@@ -75,10 +75,10 @@ public class OutputView {
 		for (Rank rank : rankCounts.keySet()) {
 			final int count = rankCounts.get(rank);
 			String message = String.format("%d개 일치", rank.getMatchCount());
-			if (rank.getBonusBallMatched()) {
+			if (rank.getBonusMatched()) {
 				message += ", 보너스 볼 일치";
 			}
-			message += String.format("(%d원) - %d개", rank.getPrize(), count);
+			message += String.format("(%d원) - %d개", rank.getPrizeMoney(), count);
 			printMessage(message);
 		}
 

@@ -29,7 +29,7 @@ public class AnalysisDto {
 
 	private double calculateProfitRate(final List<Rank> ranks, final int creditMoney) {
 		long total = ranks.stream()
-				.mapToLong(Rank::getPrize)
+				.mapToLong(Rank::getPrizeMoney)
 				.sum();
 		return (double) total / creditMoney;
 	}
