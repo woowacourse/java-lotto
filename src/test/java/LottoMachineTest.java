@@ -28,7 +28,9 @@ class LottoMachineTest {
     void createLottoTicketsByAmount() {
         LottoMachine lottoMachine = new LottoMachine();
 
-         List<LottoTicket> lottoTickets = lottoMachine.purchaseLottoTickets(Money.from(10000), new FixedLottoNumberStrategy());
+        List<LottoTicket> lottoTickets = lottoMachine.purchaseLottoTickets(
+                Money.from(10000), new FixedLottoNumberStrategy());
+
         assertThat(lottoTickets.size()).isEqualTo(10);
     }
 
@@ -46,7 +48,7 @@ class LottoMachineTest {
 
         LottoTicketNumbers winningNumbers = new LottoTicketNumbers(inputWinningNumbers);
         WinningStat winningStat = lottoMachine.createWinningStat(
-                new LottoTickets(lottoTickets), winningNumbers, LottoNumber.create(7));
+                lottoTickets, winningNumbers, LottoNumber.create(7));
 
         Map<LottoRank, Integer> result = winningStat.getStat();
         assertThat(result.get(LottoRank.FIRST)).isEqualTo(2);
