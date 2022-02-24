@@ -32,11 +32,11 @@ public class Amount {
     }
 
     private void validateAmount(int amount) {
-        validateNatural(amount);
+        validateMinAmount(amount);
         validateDivisible(amount);
     }
 
-    private void validateNatural(int amount) {
+    private void validateMinAmount(int amount) {
         if (amount < MIN_COST) {
             throw new IllegalArgumentException(NOT_NATURAL_NUMBER_ERROR);
         }
