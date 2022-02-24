@@ -1,9 +1,10 @@
 package lotto.domain;
 
+import static org.assertj.core.api.Assertions.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +12,7 @@ public class WinningTicketTest {
 
     @Test
     @DisplayName("당첨번호를 생성한다.")
-    public void createWinningTicket() {
+    void createWinningTicket() {
         // given
         List<LottoNumber> numbers = new ArrayList<>(
             List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
@@ -20,14 +21,14 @@ public class WinningTicketTest {
         LottoTicket lottoTicket = new LottoTicket(numbers);
         LottoNumber bonusball = new LottoNumber(7);
         // then
-        Assertions.assertThatCode(() -> new WinningTicket(lottoTicket, bonusball))
+        assertThatCode(() -> new WinningTicket(lottoTicket, bonusball))
             .doesNotThrowAnyException();
 
     }
 
     @Test
     @DisplayName("당첨번호와 로또번호를 비교할 수 있다.")
-    public void compareWinningTicketWithLottoTicket() {
+    void compareWinningTicketWithLottoTicket() {
         // given
         List<LottoNumber> numbers = new ArrayList<>(
             List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
@@ -39,7 +40,6 @@ public class WinningTicketTest {
         // when
         LottoRank result = winningTicket.compare(lottoTicket);
         // then
-        Assertions.assertThat(result).isEqualTo(LottoRank.FIRST);
+        assertThat(result).isEqualTo(LottoRank.FIRST);
     }
-
 }

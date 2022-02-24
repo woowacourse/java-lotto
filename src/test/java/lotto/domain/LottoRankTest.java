@@ -6,7 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-public class LottoRankTest {
+class LottoRankTest {
 
     @DisplayName("규칙에따라 로또 순위를 생성한다.")
     @ParameterizedTest
@@ -18,7 +18,7 @@ public class LottoRankTest {
         "3,false,FIFTH",
         "0,false,SIXTH"
     })
-    public void findRank(int matchCount, boolean isBonusBall, LottoRank expected) {
+    void findRank(int matchCount, boolean isBonusBall, LottoRank expected) {
         LottoRank rank = LottoRank.find(matchCount, isBonusBall);
         assertThat(rank).isEqualTo(expected);
     }
@@ -33,7 +33,7 @@ public class LottoRankTest {
         "2,true",
     })
     @DisplayName("맞은 갯수가 3개 미만이면 6위이다.")
-    public void findRAnkWhenOneMatch(int matchCount, boolean isBonusBall) {
+    void findRAnkWhenOneMatch(int matchCount, boolean isBonusBall) {
         // when
         LottoRank rank = LottoRank.find(matchCount, isBonusBall);
         // then

@@ -1,6 +1,7 @@
 package lotto.domain;
 
-import org.assertj.core.api.Assertions;
+import static org.assertj.core.api.Assertions.*;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -8,11 +9,11 @@ class MoneyTest {
 
     @Test
     @DisplayName("천원 단위의 돈을 생성한다.")
-    public void createMoney() {
+    void createMoney() {
         // given
         Money money = new Money(1000);
         // then
-        Assertions.assertThat(money).isNotNull();
+        assertThat(money).isNotNull();
     }
 
     @Test
@@ -21,7 +22,7 @@ class MoneyTest {
         // given
         int amount = 1500;
         // then
-        Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+        assertThatExceptionOfType(IllegalArgumentException.class)
             .isThrownBy(() -> new Money(amount));
     }
 
@@ -31,7 +32,7 @@ class MoneyTest {
         // given
         int amount = -1000;
         // then
-        Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+        assertThatExceptionOfType(IllegalArgumentException.class)
             .isThrownBy(() -> new Money(amount));
     }
 }
