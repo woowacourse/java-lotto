@@ -23,7 +23,7 @@ public class OutputView {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        for (Rank rank : orderedRanks()) {
+        for (Rank rank : List.of(Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST)) {
             printRank(ranks, rank);
         }
     }
@@ -54,10 +54,6 @@ public class OutputView {
             return;
         }
         printOtherRank(matchCount, reward, rewardCount);
-    }
-
-    private static List<Rank> orderedRanks() {
-        return List.of(Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST);
     }
 
     private static void printSecondRank(int matchCount, long reward, int rewardCount) {
