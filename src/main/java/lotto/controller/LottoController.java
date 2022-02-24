@@ -12,14 +12,14 @@ public class LottoController {
     private Lottos lottos;
     private LottoWinningNumbers lottoWinningNumbers;
 
-    public LottoController(){
+    public LottoController() {
     }
 
     public void printLottos() {
         OutputView.printLottos(lottos);
     }
 
-    public void inputLottoMoney(int money) {
+    public void inputLottoMoney(final int money) {
         lottos = new Lottos(money);
     }
 
@@ -31,34 +31,45 @@ public class LottoController {
     }
 
     private String inputLottoWinningNumbers() {
-        String value = InputView.inputLottoWinningNumbers();
-        value = value.replace(" ", "");
+        String value = removeBlank(InputView.inputLottoWinningNumbers());
         Validation.checkInputLottoWinningNumbers(value);
+
         return value;
+    }
+
+    private String removeBlank(final String value) {
+        return value.replace(" ", "");
     }
 
     public int inputBonusNumber() {
         String bonusNumber = InputView.inputBonusNumber();
         Validation.checkValidateInt(bonusNumber);
+
         return Integer.parseInt(bonusNumber);
     }
 
     public void calculateRanks() {
         lottoWinningNumbers.initWinningResult();
+
         for (Lotto lotto : lottos.getLottos()) {
             lottoWinningNumbers.calculateWinning(lotto);
         }
+    }
+
+    public double calculateProfit(final int money) {
+        return (double) lottoWinningNumbers.calculateWinningMoney() / money;
     }
 
     public void printWinningResult() {
         OutputView.printWinningResult(lottoWinningNumbers);
     }
 
-    public double calculateProfit(int money) {
-        return (double) lottoWinningNumbers.calculateWinningMoney() / money;
-    }
-
-    public void printProfit(double profit) {
+    public void printProfit(final double profit) {
         OutputView.printProfit(profit);
+        if (profit >= 1){
+            OutputView.printWinningLottoProfit();
+            return;
+        }
+        OutputView.printWinningLottoLoss();
     }
 }

@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public enum Rank {
     FIRST(6, 2000000000),
-    SECOND(5,30000000),
+    SECOND(5, 30000000),
     THIRD(5, 1500000),
     FOURTH(4, 50000),
     FIFTH(3, 5000),
@@ -13,16 +13,16 @@ public enum Rank {
     private int matchCount;
     private int money;
 
-    Rank(int matchCount, int money) {
+    Rank(final int matchCount, final int money) {
         this.matchCount = matchCount;
         this.money = money;
     }
 
-    public static Rank matchRank(int matchCount, boolean hasBonusNumber) {
-        if (matchCount == 5 && hasBonusNumber){
+    public static Rank matchRank(final int matchCount, final boolean hasBonusNumber) {
+        if (matchCount == 5 && hasBonusNumber) {
             return Rank.SECOND;
         }
-        if (matchCount == 5 && !hasBonusNumber){
+        if (matchCount == 5 && !hasBonusNumber) {
             return Rank.THIRD;
         }
         return Arrays.stream(Rank.values())
@@ -31,7 +31,7 @@ public enum Rank {
                 .orElse(NO_MATCH);
     }
 
-    private boolean isSameMatchCount(int matchCount) {
+    private boolean isSameMatchCount(final int matchCount) {
         return this.matchCount == matchCount;
     }
 

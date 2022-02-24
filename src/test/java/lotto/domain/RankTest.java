@@ -15,5 +15,4 @@ public class RankTest {
         assertThat(Rank.matchRank(3,false) == Rank.FIFTH).isTrue();
         assertThat(Rank.matchRank(1,false) == Rank.NO_MATCH).isTrue();
     }
-
 }

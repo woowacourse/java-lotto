@@ -1,9 +1,10 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 import lotto.utils.Validation;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -11,26 +12,29 @@ public class LottoTest {
 
     @Test
     public void 로또번호_개수_검증() {
-        List<Integer> testValues = new ArrayList<>();
-        testValues.add(1);
-        testValues.add(2);
-        testValues.add(3);
-        testValues.add(4);
-        Lotto lotto = new Lotto(testValues);
-        assertThat(lotto.getNumbers().size()).isNotEqualTo(LottoNumber.LOTTO_SELECT_NUMBER);
+        assertThatThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4)))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(Validation.ERROR_CREATE_LOTTO);
     }
 
     @Test
     public void 로또번호_중복_검증() {
-        List<Integer> testValues = new ArrayList<>();
-        testValues.add(1);
-        testValues.add(2);
-        testValues.add(3);
-        testValues.add(4);
-        testValues.add(5);
-        testValues.add(5);
-        assertThatThrownBy(() -> new Lotto(testValues))
+        assertThatThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5, 5)))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(Validation.ERROR_DUPLICATE_NUMBER);
+                .hasMessage(Validation.ERROR_CREATE_LOTTO);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {1,2,3,4,5,6})
+    public void 로또번호_체크_성공(int value){
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThat(lotto.contains(value)).isTrue();
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {-1, 0, 7})
+    public void 로또번호_체크_실패(int value){
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThat(lotto.contains(value)).isFalse();
     }
 }

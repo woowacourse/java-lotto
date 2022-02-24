@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import java.util.Arrays;
+import lotto.utils.Validation;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -21,9 +24,19 @@ class LottoWinningNumbersTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = "1,2,3,4,5,6:", delimiter = ':')
+    @CsvSource(value = "1,2,3,4,5,6:6", delimiter = ':')
     public void 보너스볼_중복_테스트(String value, int number) {
         assertThatThrownBy(() -> new LottoWinningNumbers(value, number))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    public void 당첨결과_계산_테스트() {
+        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers("1,2,3,4,5,6", 7);
+        lottoWinningNumbers.calculateWinning(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+
+        assertThat(lottoWinningNumbers.getRankCount(Rank.FIRST)).isEqualTo(1);
+        assertThat(lottoWinningNumbers.getRankCount(Rank.SECOND)).isEqualTo(0);
+        assertThat(lottoWinningNumbers.getRankCount(Rank.THIRD)).isEqualTo(0);
     }
 }

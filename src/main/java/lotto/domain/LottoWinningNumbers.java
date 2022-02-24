@@ -8,42 +8,33 @@ import lotto.utils.Validation;
 
 public class LottoWinningNumbers {
 
-    public static final String LOTTO_STRING_DELIMITER = ",";
-    private final Lotto winningLottoNumbers;
+    public static final String LOTTO_DELIMITER = ",";
+    private final Lotto winningLotto;
     private int bonusNumber;
     private HashMap<Rank, Integer> winningResult;
 
-    public LottoWinningNumbers(String numbers, int bonusNumber) {
+    public LottoWinningNumbers(final String numbers, final int bonusNumber) {
         initWinningResult();
-        winningLottoNumbers = new Lotto(createWinningLottoNumbers(numbers));
-        if (winningLottoNumbers.contains(bonusNumber)) {
-            throw new IllegalArgumentException();
-        }
+        this.winningLotto = new Lotto(createWinningLottoNumbers(numbers));
+        Validation.checkBonusNumber(winningLotto, bonusNumber);
         this.bonusNumber = bonusNumber;
     }
 
-    private List<Integer> createWinningLottoNumbers(String numbers) {
-        return Arrays.stream(numbers.split(LOTTO_STRING_DELIMITER))
+    private List<Integer> createWinningLottoNumbers(final String numbers) {
+        return Arrays.stream(numbers.split(LOTTO_DELIMITER))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
 
-    public Lotto getWinningLottoNumbers() {
-        return winningLottoNumbers;
-    }
-
-    public int getBonusNumber() {
-        return bonusNumber;
-    }
-
-    public void calculateWinning(Lotto lotto) {
-        int matchCount = (int) winningLottoNumbers.getNumbers()
+    public void calculateWinning(final Lotto lotto) {
+        int matchCount = (int) winningLotto.getNumbers()
                 .stream()
                 .filter(number -> lotto.getNumbers().contains(number))
                 .count();
         boolean hasBonusNumber = lotto.getNumbers().contains(bonusNumber);
         Rank rank = Rank.matchRank(matchCount, hasBonusNumber);
-        winningResult.put(rank, winningResult.get(rank)+1);
+
+        winningResult.put(rank, winningResult.get(rank) + 1);
     }
 
     public void initWinningResult() {
@@ -54,14 +45,12 @@ public class LottoWinningNumbers {
     }
 
     public int calculateWinningMoney() {
-        int sum = 0;
-        for (Rank rank : Rank.values()) {
-            sum += winningResult.get(rank) * rank.getMoney();
-        }
-        return sum;
+        return Arrays.stream(Rank.values())
+                .mapToInt(rank -> winningResult.get(rank) * rank.getMoney())
+                .sum();
     }
 
-    public int getRankCount(Rank rank){
+    public int getRankCount(final Rank rank) {
         return winningResult.get(rank);
     }
 }

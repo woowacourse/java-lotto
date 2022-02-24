@@ -8,7 +8,7 @@ public class Money {
 
     private final int money;
 
-    public Money(String money) {
+    public Money(final String money) {
         Validation.checkInputMoney(money);
         this.money = Integer.parseInt(money);
     }

@@ -19,7 +19,7 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    boolean contains(int number) {
+    public boolean contains(final int number) {
         return lottoNumbers.contains(number);
     }
 }
