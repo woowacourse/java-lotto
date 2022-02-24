@@ -1,8 +1,9 @@
-package lotto;
+package lotto.domain;
 
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import lotto.domain.vo.Number;
 
 public class Lotto {
 

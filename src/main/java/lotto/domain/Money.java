@@ -1,8 +1,9 @@
-package lotto;
+package lotto.domain;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Objects;
+import lotto.controller.Rate;
 
 public class Money {
 

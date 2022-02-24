@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain.vo;
 
 import java.util.Objects;
 
@@ -26,8 +26,8 @@ public class Number {
         if (!(o instanceof Number)) {
             return false;
         }
-        Number number1 = (Number)o;
-        return number == number1.number;
+        Number number = (Number)o;
+        return this.number == number.number;
     }
 
     @Override
