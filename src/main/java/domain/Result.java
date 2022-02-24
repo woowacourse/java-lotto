@@ -3,6 +3,9 @@ package domain;
 import java.util.Objects;
 
 public class Result {
+
+    private static final int HIT_FIVE_RANK = 5;
+
     private final int hitCount;
     private final boolean isHitBonusBall;
 
@@ -12,7 +15,7 @@ public class Result {
     }
 
     public boolean compare(Rank rank) {
-        if (rank.getCriteria() == 5) {
+        if (rank.getCriteria() == HIT_FIVE_RANK) {
             return this.hitCount == rank.getCriteria() && this.isHitBonusBall == rank.getHitBonusBall();
         }
         return this.hitCount == rank.getCriteria();
