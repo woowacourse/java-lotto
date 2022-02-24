@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 public class LottoNumberTest {
 
     @ParameterizedTest(name = "로또 번호를 불러 올 때 자연수가 아닌 경우 예외 발생 - case : {0}")
-    @ValueSource(strings = {"-1", "0", "A"})
+    @ValueSource(strings = {"-6", "0"})
     void checkNaturalNumber(String input) {
         Assertions.assertThatThrownBy(() -> LottoNumber.findByNumber(Integer.parseInt(input)))
                 .isInstanceOf(LottoNumberException.class)

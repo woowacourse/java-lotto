@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import lotto.receiver.validator.LottoNumberValidator;
 
 public enum LottoNumber {
 
@@ -45,6 +46,7 @@ public enum LottoNumber {
     }
 
     public static LottoNumber findByNumber(int number) {
+        LottoNumberValidator.validate(String.valueOf(number));
         return LottoNumber.valueOf(LOTTO_NUMBER_PREFIX + number);
     }
 
