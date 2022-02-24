@@ -15,9 +15,9 @@ public class RandomLottoNumberGenerator implements LottoNumberGenerator {
     private static final List<LottoNumber> lottoNumbers;
 
     static {
-        lottoNumbers = IntStream.range(MINIMUM_VALUE, MAXIMUM_VALUE)
+        lottoNumbers = IntStream.rangeClosed(MINIMUM_VALUE, MAXIMUM_VALUE)
             .boxed()
-            .map(LottoNumber::new)
+            .map(LottoNumber::valueOf)
             .collect(Collectors.toList());
     }
 

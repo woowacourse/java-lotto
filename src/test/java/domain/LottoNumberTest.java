@@ -12,7 +12,7 @@ class LottoNumberTest {
     @ValueSource(ints = {1, 24, 45})
     @DisplayName("로또 넘버가 정상적으로 생성되는 경우")
     void createLottoNumber(int lottoNumberValue) {
-        LottoNumber lottoNumber = new LottoNumber(lottoNumberValue);
+        LottoNumber lottoNumber = LottoNumber.valueOf(lottoNumberValue);
         assertThat(lottoNumber).isNotNull();
     }
 
@@ -20,8 +20,6 @@ class LottoNumberTest {
     @ValueSource(ints = {-1, 0, 46})
     @DisplayName("로또 넘버가 유효범위를 벗어나는 경우")
     void createLottoNumberNotInRange(int lottoNumberValue) {
-        assertThatThrownBy(() ->
-            new LottoNumber(lottoNumberValue))
-            .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> LottoNumber.valueOf(lottoNumberValue)).isInstanceOf(IllegalArgumentException.class);
     }
 }

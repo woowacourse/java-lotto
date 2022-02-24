@@ -24,15 +24,15 @@ public class LottosTest {
     @DisplayName("보유하고 있는 로또들과 당첨 로또의 매칭 결과를 계산")
     void calculateLottoMatchResult() {
         List<LottoNumber> winningNumbers = Stream.of(12, 23, 6, 44, 17, 16)
-            .map(LottoNumber::new)
+            .map(LottoNumber::valueOf)
             .collect(Collectors.toList());
 
         LottoNumberGenerator lottoNumberGenerator = () -> Stream.of(12, 23, 6, 44, 17, 16)
-            .map(LottoNumber::new)
+            .map(LottoNumber::valueOf)
             .collect(Collectors.toList());
 
         Lottos lottos = new Lottos(3, lottoNumberGenerator);
-        WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumbers), new LottoNumber(2));
+        WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumbers), LottoNumber.valueOf(2));
 
         List<LottoReward> lottoRewards = lottos.calculateLottoReward(winningLotto);
 

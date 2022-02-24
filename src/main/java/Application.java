@@ -26,12 +26,12 @@ public class Application {
     private static WinningLotto createWinningLotto() {
         final List<Integer> winningNumbers = InputView.getWinningLottoNumbers();
         List<LottoNumber> winningLottoNumbers = winningNumbers.stream()
-            .map(LottoNumber::new)
+            .map(LottoNumber::valueOf)
             .collect(Collectors.toList());
         Lotto winningLotto = new Lotto(winningLottoNumbers);
 
         final int bonusNumber = InputView.getBonusBall();
-        LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
+        LottoNumber bonusLottoNumber = LottoNumber.valueOf(bonusNumber);
 
         return new WinningLotto(winningLotto, bonusLottoNumber);
     }
