@@ -15,7 +15,7 @@ public class WinningResult {
     public long calculatePrizeSum() {
         long sum = 0;
         for (Map.Entry<Ranking, Integer> entry : winningResult.entrySet()) {
-            sum += entry.getKey().calculate(entry.getValue());
+            sum += entry.getKey().multiple(entry.getValue());
         }
         return sum;
     }

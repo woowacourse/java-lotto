@@ -34,7 +34,7 @@ public enum Ranking {
         return arr;
     }
 
-    public long calculate(Integer count) {
+    public long multiple(Integer count) {
         return (long) prize * count;
     }
 
