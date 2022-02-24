@@ -34,20 +34,38 @@ public class Lotto {
 
     public Rewards checkWinning(List<Integer> winningNumbers, Integer bonusNumber) {
 
-        int winningCount = (int) lottoNumbers.stream()
+        int winningCount = countWinningNumbers(winningNumbers);
+        int bonusCount = countBonusNumber(bonusNumber);
+
+        winningCount = checkNoReward(winningCount);
+        bonusCount = checkSecondPrize(winningCount, bonusCount);
+
+        return Rewards.findReward(winningCount, bonusCount);
+    }
+
+    private int countWinningNumbers(List<Integer> winningNumbers) {
+        return (int) lottoNumbers.stream()
                 .filter(winningNumbers::contains)
                 .count();
-        int bonusCount = (int) lottoNumbers.stream()
+    }
+
+    private int countBonusNumber(Integer bonusNumber) {
+        return (int) lottoNumbers.stream()
                 .filter(bonusNumber::equals)
                 .count();
+    }
 
+    private int checkNoReward(Integer winningCount) {
         if (winningCount < 3) {
-            winningCount = 0;
+            return 0;
         }
+        return winningCount;
+    }
 
+    private int checkSecondPrize(Integer winningCount, Integer bonusCount) {
         if (winningCount != 5) {
-            bonusCount = 0;
+            return 0;
         }
-        return Rewards.findReward(winningCount, bonusCount);
+        return bonusCount;
     }
 }
