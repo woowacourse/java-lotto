@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
+    public static final int PRICE = 1000;
+
     private static final int SIZE = 6;
     private static final String SIZE_ERROR_MESSAGE = "6개의 숫자가 필요합니다.";
     private static final String DUPLICATE_ERROR_MESSAGE = "중복은 허용하지 않습니다.";

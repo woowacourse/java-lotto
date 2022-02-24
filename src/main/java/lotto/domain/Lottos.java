@@ -7,11 +7,13 @@ public class Lottos {
 
     private final List<Lotto> lottos;
 
-    public Lottos(int amount) {
+    public Lottos(Money money) {
         this.lottos = new ArrayList<>();
-        while (amount-- > 0) {
+        int amount = money.getValue();
+        while (amount >= 1000) {
             Lotto lotto = new Lotto();
             lottos.add(lotto);
+            amount -= 1000;
         }
     }
 
@@ -26,7 +28,7 @@ public class Lottos {
         return result;
     }
 
-    int getCount() {
+    public int getCount() {
         return lottos.size();
     }
 

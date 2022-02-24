@@ -17,21 +17,38 @@ public class LottoController {
 
     public void play() {
         Money money = getBuyMoney();
-
-        int amount = money.getValue() / 1000;
-        OutputView.printLottoCount(amount);
-
-        Lottos lottos = new Lottos(amount);
-        OutputView.printLottos(lottos);
-
+        Lottos lottos = buyLottos(money);
+        // 지난 주 당첨 번호 입력
+        // getLastWeekWinningNumbers();
         List<Number> lastWeekWinningNumbers = getLastWeekWinningNumbers();
+        // 보너스 번호 입력
         Number bonusNumber = getBonusNumber(lastWeekWinningNumbers);
-
+        // 결과 출력
+        // Result result = resultOfLottos(lastWeekWinningNumbers, bonusNumber, lottos);
         Result result = lottos.getResult(lastWeekWinningNumbers, bonusNumber);
         OutputView.printResult(result);
-
+        // 수익률 출력
+        // getRateOfProfit(result, money);
         double rateOfProfit = result.getRateOfProfit(money);
         OutputView.printRateOfProfit(rateOfProfit);
+    }
+
+    private Money getBuyMoney() {
+        String input;
+        Money money;
+
+        do {
+            input = InputView.inputMoney();
+            money = getValidMoney(input);
+        } while (money == null);
+        return money;
+    }
+
+    private Lottos buyLottos(Money money) {
+        Lottos lottos = new Lottos(money);
+        OutputView.printLottoCount(lottos.getCount());
+        OutputView.printLottos(lottos);
+        return lottos;
     }
 
     private Number getBonusNumber(List<Number> numbers) {
@@ -94,17 +111,6 @@ public class LottoController {
             System.out.println(exception.getMessage());
             return false;
         }
-    }
-
-    private Money getBuyMoney() {
-        String input;
-        Money money;
-
-        do {
-            input = InputView.inputMoney();
-            money = getValidMoney(input);
-        } while (money == null);
-        return money;
     }
 
     private Money getValidMoney(String input) {
