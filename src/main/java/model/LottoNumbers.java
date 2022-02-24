@@ -69,4 +69,8 @@ public class LottoNumbers {
     public int hashCode() {
         return Objects.hash(lottoNumbers);
     }
+
+    public List<Integer> getIntValues() {
+        return lottoNumbers.stream().map(LottoNumber::getIntValue).collect(Collectors.toList());
+    }
 }
