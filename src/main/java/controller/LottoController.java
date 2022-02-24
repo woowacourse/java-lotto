@@ -1,33 +1,30 @@
 package controller;
 
+import domain.Lotto;
 import domain.LottoFactory;
 import domain.LottoNumber;
-import domain.LottoNumbers;
 import domain.Money;
-import domain.WinPrice;
+import domain.RankPrice;
 import java.util.SortedMap;
 import view.InputView;
 import view.OutputView;
 
 public class LottoController {
+
+    private static final String ERROR_MESSAGE = "[ERROR] ";
+    private static final String ERROR_BONUS_NUMBER_CONTAIN_MESSAGE = "지난주 당첨번호와 보너스가 중복일 수 없습니다.";
+
     public void start() {
         final LottoFactory lottoFactory = new LottoFactory(getMoney());
-        OutputView.printAutoLotto(lottoFactory.issueLotto());
+        OutputView.printLotto(lottoFactory.issueLotto());
 
-        LottoNumbers winNumbers = getWinNumbers();
-        LottoNumber bonusNumber = getBonusNumber(winNumbers);
-        SortedMap<WinPrice, Integer> rankCounts = lottoFactory.run(winNumbers, bonusNumber);
+        Lotto lastWinLotto = getWinLotto();
+        LottoNumber bonusNumber = getBonusNumber(lastWinLotto);
+
+        SortedMap<RankPrice, Integer> rankCounts = lottoFactory.run(lastWinLotto, bonusNumber);
+
         OutputView.printWinStatistics(rankCounts);
         OutputView.printWinProfit(lottoFactory.calculateProfit(rankCounts));
-    }
-
-    private LottoNumbers getWinNumbers() {
-        try {
-            return new LottoNumbers(InputView.getWinNumbers());
-        } catch (IllegalArgumentException e) {
-            System.out.println("[ERROR] " + e.getMessage());
-            return getWinNumbers();
-        }
     }
 
     private Money getMoney() {
@@ -35,25 +32,34 @@ public class LottoController {
             Money money = new Money(InputView.getMoney());
             return money;
         } catch (IllegalArgumentException e) {
-            System.out.println("[ERROR] " + e.getMessage());
+            System.out.println(ERROR_MESSAGE + e.getMessage());
             return getMoney();
         }
     }
 
-    private LottoNumber getBonusNumber(final LottoNumbers lottoNumbers) {
+    private Lotto getWinLotto() {
         try {
-            LottoNumber bonusNumber = new LottoNumber(InputView.getBonusNumber());
-            if (isBonusDuplicated(lottoNumbers, bonusNumber)) {
-                throw new IllegalArgumentException("지난주 당첨번호와 보너스가 중복일 수 없습니다.");
-            }
-            return bonusNumber;
+            return new Lotto(InputView.getWinLotto());
         } catch (IllegalArgumentException e) {
-            System.out.println("[ERROR] " + e.getMessage());
-            return getBonusNumber(lottoNumbers);
+            System.out.println(ERROR_MESSAGE + e.getMessage());
+            return getWinLotto();
         }
     }
 
-    private boolean isBonusDuplicated(final LottoNumbers lottoNumbers, final LottoNumber bonusNumber) {
-        return lottoNumbers.compareBonus(bonusNumber);
+    private LottoNumber getBonusNumber(final Lotto lotto) {
+        try {
+            LottoNumber bonusNumber = new LottoNumber(InputView.getBonusNumber());
+            if (isBonusNumberContain(lotto, bonusNumber)) {
+                throw new IllegalArgumentException(ERROR_BONUS_NUMBER_CONTAIN_MESSAGE);
+            }
+            return bonusNumber;
+        } catch (IllegalArgumentException e) {
+            System.out.println(ERROR_MESSAGE + e.getMessage());
+            return getBonusNumber(lotto);
+        }
+    }
+
+    private boolean isBonusNumberContain(final Lotto lotto, final LottoNumber bonusNumber) {
+        return lotto.isContainNumber(bonusNumber);
     }
 }

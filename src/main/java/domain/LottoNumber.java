@@ -3,12 +3,18 @@ package domain;
 import utils.Validator;
 
 public class LottoNumber implements Comparable<LottoNumber> {
+
+    private static final int LOTTO_NUMBER_MIN = 1;
+    private static final int LOTTO_NUMBER_MAX = 45;
+    private static final String LOTTO_NUMBER_RANGE_MESSAGE =
+            "로또 번호가 유효한 범위(" + LOTTO_NUMBER_MIN + "-" + LOTTO_NUMBER_MAX + ")가 아닙니다.";
+
     private final int number;
 
     public LottoNumber(final String inputNumber) {
         validateInputLottoNumber(inputNumber);
         this.number = Integer.parseInt(inputNumber);
-        validateLottoNumber(this.number);
+        validateLottoNumberRange(this.number);
     }
 
     private void validateInputLottoNumber(final String inputNumber) {
@@ -20,9 +26,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = inputNumber;
     }
 
-    private void validateLottoNumber(final int number) {
-        if (number < 1 || number > 45) {
-            throw new IllegalArgumentException("로또 번호가 유효한 범위(1-45)가 아닙니다.");
+    private void validateLottoNumberRange(final int number) {
+        if (number < LOTTO_NUMBER_MIN || number > LOTTO_NUMBER_MAX) {
+            throw new IllegalArgumentException(LOTTO_NUMBER_RANGE_MESSAGE);
         }
     }
 

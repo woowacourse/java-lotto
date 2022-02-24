@@ -1,6 +1,10 @@
 package domain;
 
 public class Count {
+
+    private static final int COUNT_END_NUMBER = 0;
+    private static final int COUNT_DECREASE_UNIT = 1;
+
     private final int count;
 
     public Count(final int count) {
@@ -8,11 +12,11 @@ public class Count {
     }
 
     public boolean isEnd() {
-        return this.count <= 0;
+        return this.count <= COUNT_END_NUMBER;
     }
 
     public Count decrease() {
-        return new Count(this.count - 1);
+        return new Count(this.count - COUNT_DECREASE_UNIT);
     }
 
     @Override

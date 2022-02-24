@@ -12,92 +12,110 @@ import java.util.stream.Collectors;
 
 public class LottoFactory {
 
-    final private List<LottoNumbers> lotto = new ArrayList<>();
-    final private List<Integer> winCounts = new ArrayList<>();
-    private final Money money;
-    private LottoNumbers winNumbers;
-    private LottoNumber bonusNumber;
+    private static final int LOTTO_SIZE = 6;
+    private static final int SECOND_RANK_UNIT = 2;
+    private static final int RANK_COUNT_UNIT = 1;
+    private static final int RANK_COUNT_INIT_NUMBER = 0;
+    private static final int LOTTO_NUMBER_MAX = 45;
+    private static final int LOTTO_NUMBER_UNIT_TO_CORRECT = 1;
+    private static final int INIT_WIN_PRICE = 0;
 
-    public LottoFactory(final Money money, final LottoNumbers winNumbers, final LottoNumber bonusNumber) {
-        this.money = money;
-        this.winNumbers = winNumbers;
-        this.bonusNumber = bonusNumber;
-    }
+    final private List<Lotto> issuedLotto = new ArrayList<>();
+    final private List<Integer> winCountsOfIssuedLotto = new ArrayList<>();
+    private final Money money;
+    private Lotto lastWinLotto;
+    private LottoNumber bonusNumber;
 
     public LottoFactory(final Money money) {
         this.money = money;
     }
 
-//    public Count calculateCount() {
-//        return new Count(money.calculateCounts());
-//    }
+    public List<Lotto> issueLotto() {
+        issuedLotto.clear();
+        winCountsOfIssuedLotto.clear();
+        generateLotto(money.calculateCounts());
+        return Collections.unmodifiableList(issuedLotto);
+    }
 
-    public LottoNumbers generateAutoLottoNumbers() {
-        HashSet<LottoNumber> autoLottoNumbers = new HashSet<>();
-        while (autoLottoNumbers.size() < 6) {
-            autoLottoNumbers.add(new LottoNumber(ThreadLocalRandom.current().nextInt(45) + 1));
+    private void generateLotto(int number) {
+        Count count = new Count(number);
+        while (!count.isEnd()) {
+            count = count.decrease();
+            issuedLotto.add(generateAutoLottoNumbers());
         }
+    }
 
-        return new LottoNumbers(autoLottoNumbers.stream()
+    public Lotto generateAutoLottoNumbers() {
+        HashSet<LottoNumber> autoLottoNumbers = new HashSet<>();
+        while (autoLottoNumbers.size() < LOTTO_SIZE) {
+            autoLottoNumbers.add(
+                    new LottoNumber(
+                            ThreadLocalRandom.current().nextInt(LOTTO_NUMBER_MAX) + LOTTO_NUMBER_UNIT_TO_CORRECT));
+        }
+        return new Lotto(autoLottoNumbers.stream()
                 .sorted()
                 .collect(Collectors.toList()));
     }
 
-    public List<LottoNumbers> issueLotto() {
-        Count count = new Count(money.calculateCounts());
-        lotto.clear();
-        while (!count.isEnd()) {
-            count = count.decrease();
-            lotto.add(generateAutoLottoNumbers());
-        }
-        return Collections.unmodifiableList(lotto);
+
+    public List<Lotto> getLottoTickets() {
+        return Collections.unmodifiableList(issuedLotto);
     }
 
-    public List<LottoNumbers> getLottoTickets() {
-        return Collections.unmodifiableList(lotto);
-    }
-
-    public SortedMap<WinPrice, Integer> run(final LottoNumbers winNumbers, final LottoNumber bonusNumber) {
-        this.winNumbers = winNumbers;
+    public SortedMap<RankPrice, Integer> run(final Lotto lastWinLotto, final LottoNumber bonusNumber) {
+        this.lastWinLotto = lastWinLotto;
         this.bonusNumber = bonusNumber;
-
-        compareAndCount(); // 1. 로또별 당첨갯수 list 채우기
-        return countWin();
-        // final double profit = calculateProfit(winPriceIntegerSortedMap); 3.
-
+        return extractRankCount();
     }
 
-    public void compareAndCount() {
-        for (LottoNumbers autoLottoNumbers : lotto) {
-            int winCount = autoLottoNumbers.compare(this.winNumbers);
-            if (winCount == 5 && autoLottoNumbers.compareBonus(bonusNumber)) {
-                winCount += 2; // todo: 포장하기
-            }
-            winCounts.add(winCount);
+    public SortedMap<RankPrice, Integer> extractRankCount() {
+        for (Lotto lotto : issuedLotto) {
+            winCountsOfIssuedLotto.add(getWinCount(lotto));
+        }
+        return processRankCount();
+    }
+
+    private int getWinCount(final Lotto lotto) {
+        int winCount = lotto.compare(this.lastWinLotto);
+        if (isSecondRank(lotto, winCount)) {
+            winCount += SECOND_RANK_UNIT; // todo: 포장하기
+        }
+        return winCount;
+    }
+
+    private boolean isSecondRank(final Lotto lotto, final int winCount) {
+        return winCount == RankPrice.THIRD.getCount() && lotto.isContainNumber(bonusNumber);
+    }
+
+    public SortedMap<RankPrice, Integer> processRankCount() {
+        SortedMap<RankPrice, Integer> rankCount = new TreeMap<>(Collections.reverseOrder());
+        initRank(rankCount);
+        countRank(rankCount);
+        return rankCount;
+    }
+
+    private void initRank(final SortedMap<RankPrice, Integer> rankCount) {
+        Arrays.stream(RankPrice.values())
+                .forEach(e -> rankCount.put(e, RANK_COUNT_INIT_NUMBER));
+    }
+
+    private void countRank(final SortedMap<RankPrice, Integer> rankCount) {
+        for (Integer winCount : winCountsOfIssuedLotto) {
+            countOverFifthRank(rankCount, winCount);
         }
     }
 
-    public SortedMap<WinPrice, Integer> countWin() {
-        SortedMap<WinPrice, Integer> rankCounts = new TreeMap<>(Collections.reverseOrder());
-
-        Arrays.stream(WinPrice.values())
-                .forEach(e -> rankCounts.put(e, 0));
-
-        for (Integer winCount : winCounts) {
-            if (winCount >= 3) {
-                final WinPrice winPrice = WinPrice.findByCount(winCount);
-                rankCounts.put(winPrice, rankCounts.get(winPrice) + 1);
-            }
+    private void countOverFifthRank(final SortedMap<RankPrice, Integer> rankCount, final Integer winCount) {
+        if (winCount >= RankPrice.FIFTH.getCount()) {
+            final RankPrice rankPrice = RankPrice.findByCount(winCount);
+            rankCount.put(rankPrice, rankCount.get(rankPrice) + RANK_COUNT_UNIT);
         }
-
-        return rankCounts;
     }
 
-    public double calculateProfit(final SortedMap<WinPrice, Integer> rankCounts) {
-        int totalWinPrice = 0;
-
-        for (WinPrice winPrice : rankCounts.keySet()) {
-            totalWinPrice += winPrice.getPrice() * rankCounts.get(winPrice);
+    public double calculateProfit(final SortedMap<RankPrice, Integer> rankCounts) {
+        int totalWinPrice = INIT_WIN_PRICE;
+        for (RankPrice rankPrice : rankCounts.keySet()) {
+            totalWinPrice += rankPrice.getPrice() * rankCounts.get(rankPrice);
         }
         return money.calculateProfit(totalWinPrice);
     }

@@ -14,8 +14,8 @@ public class InputView {
         return getInput();
     }
 
-    public static String getWinNumbers() {
-        OutputView.printWinNumbersInstruction();
+    public static String getWinLotto() {
+        OutputView.printWinLottoInstruction();
         return getInput();
     }
 
