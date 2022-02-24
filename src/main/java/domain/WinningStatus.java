@@ -36,7 +36,7 @@ public enum WinningStatus {
 			return withBonus(hitBonus);
 		}
 		if (numberMatches > 5) {
-			return moreThanFive(numberMatches);
+			return moreThanFive();
 		}
 		return lessThanFive(numberMatches);
 	}
@@ -48,7 +48,7 @@ public enum WinningStatus {
 		return FIVE;
 	}
 
-	private static WinningStatus moreThanFive(int numberMatches) {
+	private static WinningStatus moreThanFive() {
 		return SIX;
 	}
 
