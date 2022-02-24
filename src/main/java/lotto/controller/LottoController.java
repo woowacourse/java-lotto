@@ -18,19 +18,10 @@ public class LottoController {
     public void play() {
         Money money = getBuyMoney();
         Lottos lottos = buyLottos(money);
-        // 지난 주 당첨 번호 입력
-        // getLastWeekWinningNumbers();
         List<Number> lastWeekWinningNumbers = getLastWeekWinningNumbers();
-        // 보너스 번호 입력
         Number bonusNumber = getBonusNumber(lastWeekWinningNumbers);
-        // 결과 출력
-        // Result result = resultOfLottos(lastWeekWinningNumbers, bonusNumber, lottos);
-        Result result = lottos.getResult(lastWeekWinningNumbers, bonusNumber);
-        OutputView.printResult(result);
-        // 수익률 출력
-        // getRateOfProfit(result, money);
-        double rateOfProfit = result.getRateOfProfit(money);
-        OutputView.printRateOfProfit(rateOfProfit);
+        Result result = getResult(lottos, lastWeekWinningNumbers, bonusNumber);
+        getRateofProfit(money, result);
     }
 
     private Money getBuyMoney() {
@@ -44,36 +35,21 @@ public class LottoController {
         return money;
     }
 
+    private Money getValidMoney(String input) {
+        Money money = null;
+        try {
+            money = new Money(input);
+        } catch (IllegalArgumentException exception) {
+            System.out.println(exception.getMessage());
+        }
+        return money;
+    }
+
     private Lottos buyLottos(Money money) {
         Lottos lottos = new Lottos(money);
         OutputView.printLottoCount(lottos.getCount());
         OutputView.printLottos(lottos);
         return lottos;
-    }
-
-    private Number getBonusNumber(List<Number> numbers) {
-        boolean isDuplicate = false;
-        Number number;
-
-        do {
-            String input = InputView.inputBonusNumber();
-            number = toNumber(input);
-            isDuplicate = numbers.contains(number);
-            if (isDuplicate) {
-                System.out.println("중복입니다");
-            }
-        } while (number == null || isDuplicate);
-
-        return number;
-    }
-
-    private Number toNumber(String input) {
-        try {
-            return new Number(input);
-        } catch (IllegalArgumentException exception) {
-            System.out.println(exception.getMessage());
-        }
-        return null;
     }
 
     private List<Number> getLastWeekWinningNumbers() {
@@ -113,13 +89,39 @@ public class LottoController {
         }
     }
 
-    private Money getValidMoney(String input) {
-        Money money = null;
+    private Number getBonusNumber(List<Number> numbers) {
+        boolean isDuplicate = false;
+        Number number;
+
+        do {
+            String input = InputView.inputBonusNumber();
+            number = toNumber(input);
+            isDuplicate = numbers.contains(number);
+            if (isDuplicate) {
+                System.out.println("중복입니다");
+            }
+        } while (number == null || isDuplicate);
+
+        return number;
+    }
+
+    private Number toNumber(String input) {
         try {
-            money = new Money(input);
+            return new Number(input);
         } catch (IllegalArgumentException exception) {
             System.out.println(exception.getMessage());
         }
-        return money;
+        return null;
+    }
+
+    private Result getResult(Lottos lottos, List<Number> lastWeekWinningNumbers, Number bonusNumber) {
+        Result result = lottos.getResult(lastWeekWinningNumbers, bonusNumber);
+        OutputView.printResult(result);
+        return result;
+    }
+
+    private void getRateofProfit(Money money, Result result) {
+        double rateOfProfit = result.getRateOfProfit(money);
+        OutputView.printRateOfProfit(rateOfProfit);
     }
 }
