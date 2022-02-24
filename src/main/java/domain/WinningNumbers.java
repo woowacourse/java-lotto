@@ -6,12 +6,12 @@ public class WinningNumbers {
     private final LottoNumber bonusNumber;
 
     public WinningNumbers(Ticket winTicket, LottoNumber bonusNumber) {
-        checkContainsNumber(winTicket, bonusNumber);
+        checkDuplicatedNumber(winTicket, bonusNumber);
         this.winTicket = winTicket;
         this.bonusNumber = bonusNumber;
     }
 
-    private void checkContainsNumber(Ticket winTicket, LottoNumber bonusNumber) {
+    private void checkDuplicatedNumber(Ticket winTicket, LottoNumber bonusNumber) {
         if (winTicket.contains(bonusNumber)) {
             throw new IllegalArgumentException(REQUEST_NOT_DUPLICATE_NUMBER);
         }

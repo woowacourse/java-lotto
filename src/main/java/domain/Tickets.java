@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
@@ -29,8 +28,7 @@ public class Tickets {
 
     public Map<Rank, Integer> getResult(WinningNumbers winningNumbers) {
         List<Rank> ranks = getRanks(winningNumbers);
-        SortedMap<Rank, Integer> result = new TreeMap<>(Comparator.comparingInt(Rank::getAmount));
-
+        Map<Rank, Integer> result = new TreeMap<>(Comparator.comparingInt(Rank::getAmount));
         for (Rank rank : ranks) {
             result.merge(rank, 1, (value, putValue) -> value + 1);
         }
@@ -39,15 +37,15 @@ public class Tickets {
 
     private List<Rank> getRanks(WinningNumbers winningNumbers) {
         return tickets.stream()
-            .map(winningNumbers::getTicketRank)
-            .collect(Collectors.toList());
+                .map(winningNumbers::getTicketRank)
+                .collect(Collectors.toList());
     }
 
     public double getYield(Amount amount, WinningNumbers winningNumbers) {
         List<Rank> ranks = getRanks(winningNumbers);
-        long totalAmount = ranks.stream()
-            .mapToLong(Rank::getAmount)
-            .sum();
-        return Math.floor((amount.getYield(totalAmount) * 100))/ 100.0;
+        long profit = ranks.stream()
+                .mapToLong(Rank::getAmount)
+                .sum();
+        return Math.floor((amount.getYield(profit) * 100)) / 100.0;
     }
 }
