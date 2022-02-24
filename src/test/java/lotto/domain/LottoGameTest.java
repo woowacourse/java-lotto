@@ -5,6 +5,10 @@ import static org.assertj.core.api.Assertions.assertThatNoException;
 
 import java.util.ArrayList;
 import java.util.List;
+import lotto.domain.vo.Lotto;
+import lotto.domain.vo.LottoNumber;
+import lotto.domain.vo.Money;
+import lotto.domain.vo.WinningNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

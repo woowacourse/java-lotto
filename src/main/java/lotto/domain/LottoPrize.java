@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import lotto.domain.vo.Money;
 
 public enum LottoPrize {
 

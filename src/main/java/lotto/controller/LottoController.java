@@ -3,10 +3,10 @@ package lotto.controller;
 import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.LottoGame;
-import lotto.domain.LottoNumber;
+import lotto.domain.vo.LottoNumber;
 import lotto.domain.LottoResults;
-import lotto.domain.Money;
-import lotto.domain.WinningNumbers;
+import lotto.domain.vo.Money;
+import lotto.domain.vo.WinningNumbers;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 

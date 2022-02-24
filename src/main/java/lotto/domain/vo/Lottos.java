@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.vo;
 
 import static lotto.utils.LottoGenerator.generateLottoNumbers;
 
@@ -7,6 +7,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lotto.domain.LottoPrize;
+import lotto.utils.LottoGenerator;
 
 public class Lottos {
 

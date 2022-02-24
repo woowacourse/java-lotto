@@ -2,6 +2,10 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
+import lotto.domain.vo.Lotto;
+import lotto.domain.vo.Lottos;
+import lotto.domain.vo.Money;
+import lotto.domain.vo.WinningNumbers;
 
 public class LottoGame {
 
