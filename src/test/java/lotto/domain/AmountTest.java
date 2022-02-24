@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 public class AmountTest {
     @ParameterizedTest
-    @ValueSource(strings = {"0", "1100", "-1", "aaa"})
+    @ValueSource(strings = {"", "    ", "0", "1100", "-1", "aaa"})
     @DisplayName("올바르지 않은 금액")
     void failed(String input) {
         assertThatThrownBy(() -> new Amount(input))
