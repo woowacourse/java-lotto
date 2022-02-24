@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,7 +17,7 @@ public class LottoController {
     public void play() {
         Money money = getBuyMoney();
         Lottos lottos = buyLottos(money);
-        List<Number> lastWeekWinningNumbers = getLastWeekWinningNumbers();
+        Lotto lastWeekWinningNumbers = getLastWeekWinningLotto();
         Number bonusNumber = getBonusNumber(lastWeekWinningNumbers);
         Result result = getResult(lottos, lastWeekWinningNumbers, bonusNumber);
         getRateofProfit(money, result);
@@ -52,49 +51,45 @@ public class LottoController {
         return lottos;
     }
 
-    private List<Number> getLastWeekWinningNumbers() {
-        boolean isValid = false;
-        List<Integer> numbers;
+    private Lotto getLastWeekWinningLotto() {
+        boolean lottoIsNull = true;
+        Lotto lotto;
 
         do {
             String input = InputView.inputLastWeekWinningNumbers();
-            numbers = toList(input.split(", "));
-            isValid = validateNumbers(numbers);
-        } while (!isValid);
+            lotto = toLotto(input.split(", "));
+            lottoIsNull = (lotto == null);
+        } while (lottoIsNull);
 
-        return numbers.stream().map(Number::new).collect(Collectors.toList());
+        return lotto;
+    }
+
+    private Lotto toLotto(String[] splitInput) {
+        Lotto lotto = null;
+        try {
+            lotto = new Lotto(toList(splitInput));
+        } catch (NumberFormatException exception) {
+            System.out.println("숫자를 입력해주세요.");
+        } catch (IllegalArgumentException exception) {
+            System.out.println(exception.getMessage());
+        }
+        return lotto;
     }
 
     private List<Integer> toList(String[] splitInput) {
-        List<Integer> numbers = new ArrayList<>();
-        try {
-            numbers = Arrays.stream(splitInput).map(Integer::parseInt).collect(Collectors.toList());
-        } catch (NumberFormatException exception) {
-        }
-        return numbers;
+        return Arrays.stream(splitInput)
+            .map(Integer::parseInt)
+            .collect(Collectors.toList());
     }
 
-    private boolean validateNumbers(List<Integer> numbers) {
-        try {
-            Lotto.validateNumbers(numbers);
-            return true;
-        } catch (IllegalArgumentException exception) {
-            System.out.println(exception.getMessage());
-            return false;
-        }
-    }
-
-    private Number getBonusNumber(List<Number> numbers) {
+    private Number getBonusNumber(Lotto lotto) {
         boolean isDuplicate = false;
         Number number;
 
         do {
             String input = InputView.inputBonusNumber();
             number = toNumber(input);
-            isDuplicate = numbers.contains(number);
-            if (isDuplicate) {
-                System.out.println("중복입니다");
-            }
+            isDuplicate = lotto.contains(number);
         } while (number == null || isDuplicate);
 
         return number;
@@ -109,7 +104,7 @@ public class LottoController {
         return null;
     }
 
-    private Result getResult(Lottos lottos, List<Number> lastWeekWinningNumbers, Number bonusNumber) {
+    private Result getResult(Lottos lottos, Lotto lastWeekWinningNumbers, Number bonusNumber) {
         Result result = lottos.getResult(lastWeekWinningNumbers, bonusNumber);
         OutputView.printResult(result);
         return result;

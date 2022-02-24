@@ -35,7 +35,7 @@ public class Lotto {
         this.numbers = new HashSet<>(LOTTO_NUMBERS.subList(SUB_LIST_FROM_INDEX, SIZE));
     }
 
-    Lotto(List<Integer> numbers) {
+    public Lotto(List<Integer> numbers) {
         validateNumbers(numbers);
         this.numbers = numbers.stream().map(Number::new).collect(Collectors.toSet());
     }
@@ -63,10 +63,10 @@ public class Lotto {
         }
     }
 
-    public WinningPrice getWinningPrice(List<Number> winningNumbers, Number bonusNumber) {
+    public WinningPrice getWinningPrice(Lotto lotto, Number bonusNumber) {
         int count = 0;
         boolean containsBonus = false;
-        for (Number number : winningNumbers) {
+        for (Number number : lotto.getNumbers()) {
             if (numbers.contains(number)) {
                 count++;
             }

@@ -109,18 +109,16 @@ public class LottoTest {
             @ParameterizedTest
             @CsvSource(value = {"1|2|3|4|5|6|7|All", "1|2|3|4|5|45|6|FiveAndBonus"}, delimiter = '|')
             @DisplayName("당첨 순위를 알려준다.")
-            void it_returns_winning_price(String first, String second, String third, String fourth, String fifth,
-                String sixth,
-                String bonus, WinningPrice key
+            void it_returns_winning_price(int first, int second, int third, int fourth, int fifth,
+                int sixth,
+                int bonus, WinningPrice key
             ) {
                 Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
 
-                List<Number> numbers = Stream.of(first, second, third, fourth, fifth, sixth)
-                    .map(Number::new)
-                    .collect(Collectors.toList());
+                Lotto winningLotto = new Lotto(List.of(first, second, third, fourth, fifth, sixth));
                 Number bonusNumber = new Number(bonus);
 
-                assertThat(lotto.getWinningPrice(numbers, bonusNumber)).isEqualTo(key);
+                assertThat(lotto.getWinningPrice(winningLotto, bonusNumber)).isEqualTo(key);
             }
         }
     }

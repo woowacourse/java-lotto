@@ -21,7 +21,7 @@ public class Lottos {
         }
     }
 
-    public Result getResult(List<Number> winningNumbers, Number bonusNumber) {
+    public Result getResult(Lotto winningNumbers, Number bonusNumber) {
         Result result = new Result();
 
         for (Lotto lotto : lottos) {
