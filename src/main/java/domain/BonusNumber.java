@@ -1,6 +1,7 @@
 package domain;
 
 public class BonusNumber {
+	private static final String NUMBER_IN_RANGE = "[ERROR] 1이상 45 이하의 숫자만 허용됩니다.";
 	private final int bonusNumber;
 
 	public BonusNumber(int userInput) {
@@ -10,7 +11,7 @@ public class BonusNumber {
 
 	private void validateBonusNumber(int bonusNumber) {
 		if (bonusNumber < 1 || bonusNumber > 45) {
-			throw new IllegalArgumentException("[ERROR] 1이상 45 이하의 숫자만 허용됩니다.");
+			throw new IllegalArgumentException(NUMBER_IN_RANGE);
 		}
 	}
 

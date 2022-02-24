@@ -7,6 +7,7 @@ import java.util.Map;
 
 public class Lottos {
 
+	private static final String DIVIDE_BY_THOUSAND = "[ERROR] 1000원으로 나누어 떨어지는 금액을 입력해주세요.";
 	private final List<Lotto> lottos;
 
 	public Lottos(List<Lotto> nowLottos) {
@@ -57,7 +58,7 @@ public class Lottos {
 
 	private static void validatePrice(int price) {
 		if (price % 1000 != 0 || price == 0) {
-			throw new IllegalArgumentException("[ERROR] 1000원으로 나누어 떨어지는 금액을 입력해주세요.");
+			throw new IllegalArgumentException(DIVIDE_BY_THOUSAND);
 		}
 	}
 }

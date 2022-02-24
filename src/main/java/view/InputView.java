@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 public class InputView {
 	private static final String NUMBER_REGEX = "^[0-9]+$";
+	private static final String MUST_BE_INTEGER = "[ERROR] 입력은 반드시 숫자여야 합니다.";
+	private static final String MUST_NOT_EMPTY = "[ERROR] 입력은 빈 입력일 수 없습니다.";
 
 	public static int inputMoney() {
 		System.out.println("구입금액을 입력해 주세요.");
@@ -46,13 +48,14 @@ public class InputView {
 
 	private static void validateAllNumber(String userInput) {
 		if (!userInput.matches(NUMBER_REGEX)) {
-			throw new IllegalArgumentException("[ERROR] 입력은 반드시 숫자여야 합니다.");
+			throw new IllegalArgumentException(MUST_BE_INTEGER);
+
 		}
 	}
 
 	private static void validateEmpty(String userInput) {
 		if (userInput.isEmpty()) {
-			throw new IllegalArgumentException("[ERROR] 입력은 빈 입력일 수 없습니다.");
+			throw new IllegalArgumentException(MUST_NOT_EMPTY);
 		}
 	}
 }
