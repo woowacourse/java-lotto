@@ -13,7 +13,7 @@ public class Ticket {
 	}
 
 	public Rank getRank(Balls answer, Ball bonusBall) {
-		int matchCount = answer.countMatches(this.balls);
+		int matchCount = balls.countMatches(answer);
 		boolean bonusBallMatched = this.balls.contains(bonusBall);
 
 		return Rank.of(matchCount, bonusBallMatched);
