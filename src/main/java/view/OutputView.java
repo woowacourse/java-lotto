@@ -12,14 +12,14 @@ import domain.Number;
 
 public class OutputView {
 
-	public static final String SECOND_RANK_RESULT_MESSAGE = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
-	public static final String OTHERS_RANK_RESULT_MESSAGE = "%d개 일치 (%d원) - %d개";
-	public static final String PROFIT_RESULT_MESSAGE = "총 수익률은 %.2f입니다.";
-	public static final String RESULT_TITLE_MESSAGE = "당첨 통계\n---------";
-	public static final String REQUEST_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
-	public static final String PURCHASE_COUNT_MESSAGE = "%d개를 구매했습니다.";
-	public static final String REQUEST_WINNING_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
-	public static final String REQUEST_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
+	private static final String SECOND_RANK_RESULT_MESSAGE = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
+	private static final String OTHERS_RANK_RESULT_MESSAGE = "%d개 일치 (%d원) - %d개";
+	private static final String PROFIT_RESULT_MESSAGE = "총 수익률은 %.2f입니다.";
+	private static final String RESULT_TITLE_MESSAGE = "당첨 통계\n---------";
+	private static final String REQUEST_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
+	private static final String PURCHASE_COUNT_MESSAGE = "%d개를 구매했습니다.";
+	private static final String REQUEST_WINNING_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+	private static final String REQUEST_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
 
 	private void printMessage(String message) {
 		System.out.println(message);
