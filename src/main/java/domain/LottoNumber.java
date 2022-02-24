@@ -30,11 +30,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private static LottoNumber createNewCache(int num) {
-        LottoNumber lottoNumber = new LottoNumber(num);
-
-        cache.put(num, lottoNumber);
-
-        return lottoNumber;
+        cache.put(num, new LottoNumber(num));
+        return cache.get(num);
     }
 
     public int getNumber() {

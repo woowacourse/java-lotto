@@ -10,6 +10,8 @@ public enum LottoResult {
     SECOND(5, 30000000, true),
     FIRST(6, 2000000000, false);
 
+    private static final int MATCH_COUNT_FIVE = 5;
+
     private final int matchCount;
     private final int prize;
     private final boolean hasBonus;
@@ -29,7 +31,7 @@ public enum LottoResult {
     }
 
     private static boolean filterOnFiveMatchCount(int matchCount, boolean hasBonus, LottoResult result) {
-        if (matchCount != 5) {
+        if (matchCount != MATCH_COUNT_FIVE) {
             return true;
         }
         return result.getHasBonus() == hasBonus;
