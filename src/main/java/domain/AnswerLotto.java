@@ -1,6 +1,5 @@
 package domain;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class AnswerLotto {
@@ -8,10 +7,10 @@ public class AnswerLotto {
 	private final List<LottoNumber> answerNumbers;
 	private final LottoNumber bonusLottoNumber;
 
-	public AnswerLotto(String[] userInput, LottoNumber bonusLottoNumber) {
-		this.answerNumbers = LottoGenerator.generateAnswerLottoNumbers(userInput);
+	public AnswerLotto(List<Integer> answerNumbers, LottoNumber bonusLottoNumber) {
+		this.answerNumbers = LottoGenerator.generateAnswerLottoNumbers(answerNumbers);
 		this.bonusLottoNumber = bonusLottoNumber;
-		validateBonusNumberInNumbers(userInput, bonusLottoNumber);
+		validateBonusNumberInNumbers();
 	}
 
 	public int isInAnswerNumbers(LottoNumber lottoNumber) {
@@ -25,8 +24,8 @@ public class AnswerLotto {
 		return this.bonusLottoNumber.equals(lottoNumber);
 	}
 
-	private void validateBonusNumberInNumbers(String[] userInput, LottoNumber bonusLottoNumber) {
-		if (Arrays.stream(userInput).anyMatch(num -> num.equals(String.valueOf(bonusLottoNumber.getLottoNumber())))) {
+	private void validateBonusNumberInNumbers() {
+		if (this.answerNumbers.contains(this.bonusLottoNumber)) {
 			throw new IllegalArgumentException(ERROR_DUPLICATE_WITH_BONUS_NUMBER_IN_ANSWER_NUMBERS);
 		}
 	}

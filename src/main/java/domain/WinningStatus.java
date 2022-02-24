@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -46,5 +47,16 @@ public enum WinningStatus {
 				.findFirst().get();
 		}
 		return filteredByNumberMatches.get(0);
+	}
+
+	public static List<WinningStatus> getValues() {
+		List<WinningStatus> winningStatuses = new ArrayList<>();
+		winningStatuses.add(NOTHING);
+		winningStatuses.add(THREE);
+		winningStatuses.add(FOUR);
+		winningStatuses.add(FIVE);
+		winningStatuses.add(FIVE_AND_BONUS);
+		winningStatuses.add(SIX);
+		return winningStatuses;
 	}
 }

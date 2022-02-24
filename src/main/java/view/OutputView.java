@@ -23,9 +23,9 @@ public class OutputView {
 	public static void printStatistics(List<Integer> resultCount) {
 		System.out.println("\n당첨 통계");
 		System.out.println("---------");
-		WinningStatus[] winningStatuses = WinningStatus.values();
-		for (int index = 0; index < winningStatuses.length; index++) {
-			printEachResult(winningStatuses[index], resultCount.get(index));
+		List<WinningStatus> winningStatuses = WinningStatus.getValues();
+		for (int index = 0; index < winningStatuses.size(); index++) {
+			printEachResult(winningStatuses.get(index), resultCount.get(index));
 		}
 	}
 

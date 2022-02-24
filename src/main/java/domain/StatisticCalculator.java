@@ -10,7 +10,7 @@ public class StatisticCalculator {
 	private final Map<WinningStatus, Integer> resultStatistics = new LinkedHashMap<>();
 
 	public StatisticCalculator() {
-		for (WinningStatus winningStatus : WinningStatus.values()) {
+		for (WinningStatus winningStatus : WinningStatus.getValues()) {
 			this.resultStatistics.put(winningStatus, 0);
 		}
 	}

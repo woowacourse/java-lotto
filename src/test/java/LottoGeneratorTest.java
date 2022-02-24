@@ -3,6 +3,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import domain.LottoGenerator;
 import domain.LottoNumber;
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
@@ -16,35 +17,65 @@ public class LottoGeneratorTest {
 
 	@Test
 	void generateAnsNumbersMoreThanFortyFive() {
-		String[] sampleInput = {"1", "2", "3", "4", "5", "46"};
+		List<Integer> sampleInput = new ArrayList<>();
+		sampleInput.add(1);
+		sampleInput.add(2);
+		sampleInput.add(3);
+		sampleInput.add(4);
+		sampleInput.add(5);
+		sampleInput.add(46);
 		assertThatThrownBy(() -> LottoGenerator.generateAnswerLottoNumbers(sampleInput)).isInstanceOf(
 			IllegalArgumentException.class);
 	}
 
 	@Test
 	void generateAnsNumbersLessThanOne() {
-		String[] sampleInput = {"0", "2", "3", "4", "5", "6"};
+		List<Integer> sampleInput = new ArrayList<>();
+		sampleInput.add(0);
+		sampleInput.add(2);
+		sampleInput.add(3);
+		sampleInput.add(4);
+		sampleInput.add(5);
+		sampleInput.add(6);
 		assertThatThrownBy(() -> LottoGenerator.generateAnswerLottoNumbers(sampleInput)).isInstanceOf(
 			IllegalArgumentException.class);
 	}
 
 	@Test
 	void generateAnsNumbersSizeMoreThanSix() {
-		String[] sampleInput = {"1", "2", "3", "4", "5", "6", "7"};
+		List<Integer> sampleInput = new ArrayList<>();
+		sampleInput.add(1);
+		sampleInput.add(2);
+		sampleInput.add(3);
+		sampleInput.add(4);
+		sampleInput.add(5);
+		sampleInput.add(6);
+		sampleInput.add(7);
 		assertThatThrownBy(() -> LottoGenerator.generateAnswerLottoNumbers(sampleInput)).isInstanceOf(
 			IllegalArgumentException.class);
 	}
 
 	@Test
 	void generateAnsNumbersSizeLessThanSix() {
-		String[] sampleInput = {"1", "2", "3", "4", "5"};
+		List<Integer> sampleInput = new ArrayList<>();
+		sampleInput.add(1);
+		sampleInput.add(2);
+		sampleInput.add(3);
+		sampleInput.add(4);
+		sampleInput.add(5);
 		assertThatThrownBy(() -> LottoGenerator.generateAnswerLottoNumbers(sampleInput)).isInstanceOf(
 			IllegalArgumentException.class);
 	}
 
 	@Test
 	void generateAnsNumbersWithDuplicate() {
-		String[] sampleInput = {"1", "2", "3", "3", "4", "5"};
+		List<Integer> sampleInput = new ArrayList<>();
+		sampleInput.add(1);
+		sampleInput.add(2);
+		sampleInput.add(3);
+		sampleInput.add(3);
+		sampleInput.add(4);
+		sampleInput.add(5);
 		assertThatThrownBy(() -> LottoGenerator.generateAnswerLottoNumbers(sampleInput)).isInstanceOf(
 			IllegalArgumentException.class);
 	}

@@ -1,15 +1,28 @@
 import domain.AnswerLotto;
 import domain.LottoNumber;
+import java.util.ArrayList;
+import java.util.List;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class AnswerLottoTest {
+	static final List<Integer> sampleInput = new ArrayList<>();
+
+	@BeforeAll
+	static void setSampleInput() {
+		sampleInput.add(1);
+		sampleInput.add(2);
+		sampleInput.add(3);
+		sampleInput.add(4);
+		sampleInput.add(5);
+		sampleInput.add(6);
+	}
 
 	@Test
 	void duplicateInBonusNumber() {
-		String[] sampleInput = {"1", "2", "3", "4", "5", "6"};
 		LottoNumber sampleBonusNumber = new LottoNumber(1);
 		assertThatThrownBy(() -> new AnswerLotto(sampleInput, sampleBonusNumber))
 			.isInstanceOf(IllegalArgumentException.class);
@@ -17,7 +30,6 @@ public class AnswerLottoTest {
 
 	@Test
 	void lottoNumberInAnswerNumbers() {
-		String[] sampleInput = {"1", "2", "3", "4", "5", "6"};
 		LottoNumber sampleBonusNumber = new LottoNumber(7);
 		LottoNumber lottoNumber = new LottoNumber(1);
 		assertThat(new AnswerLotto(sampleInput, sampleBonusNumber).isInAnswerNumbers(lottoNumber)).isEqualTo(1);
@@ -25,7 +37,6 @@ public class AnswerLottoTest {
 
 	@Test
 	void lottoNumberNotInAnswerNumbers() {
-		String[] sampleInput = {"1", "2", "3", "4", "5", "6"};
 		LottoNumber sampleBonusNumber = new LottoNumber(7);
 		LottoNumber lottoNumber = new LottoNumber(8);
 		assertThat(new AnswerLotto(sampleInput, sampleBonusNumber).isInAnswerNumbers(lottoNumber)).isEqualTo(0);
@@ -33,7 +44,6 @@ public class AnswerLottoTest {
 
 	@Test
 	void lottoNumberEqualsBonusNumber() {
-		String[] sampleInput = {"1", "2", "3", "4", "5", "6"};
 		LottoNumber sampleBonusNumber = new LottoNumber(7);
 		LottoNumber lottoNumber = new LottoNumber(7);
 		assertThat(new AnswerLotto(sampleInput, sampleBonusNumber).isSameWithBonusNumber(lottoNumber)).isTrue();
@@ -41,7 +51,6 @@ public class AnswerLottoTest {
 
 	@Test
 	void lottoNumberNotEqualsBonusNumber() {
-		String[] sampleInput = {"1", "2", "3", "4", "5", "6"};
 		LottoNumber sampleBonusNumber = new LottoNumber(7);
 		LottoNumber lottoNumber = new LottoNumber(6);
 		assertThat(new AnswerLotto(sampleInput, sampleBonusNumber).isSameWithBonusNumber(lottoNumber)).isFalse();

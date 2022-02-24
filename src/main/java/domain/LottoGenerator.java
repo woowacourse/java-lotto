@@ -1,7 +1,6 @@
 package domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -25,30 +24,32 @@ public class LottoGenerator {
 		return new ArrayList<>(candidates.subList(START_INDEX, END_INDEX));
 	}
 
-	public static List<LottoNumber> generateAnswerLottoNumbers(String[] userInput) {
+	public static List<LottoNumber> generateAnswerLottoNumbers(List<Integer> userInput) {
 		validateSizeSix(userInput);
 		validateInRange(userInput);
 		validateDuplicate(userInput);
-		return Arrays.stream(userInput).mapToInt(Integer::parseInt).mapToObj(LottoNumber::new)
-			.collect(Collectors.toList());
+		List<LottoNumber> lottoNumbers = new ArrayList<>();
+		for (int eachNum : userInput) {
+			lottoNumbers.add(new LottoNumber(eachNum));
+		}
+		return lottoNumbers;
 	}
 
-	private static void validateInRange(String[] userInput) {
-		int count = (int) Arrays.stream(userInput).mapToInt(Integer::parseInt)
-			.filter(num -> num < LOWER_BOUND || num > UPPER_BOUND).count();
+	private static void validateInRange(List<Integer> userInput) {
+		int count = (int) userInput.stream().filter(num -> num < LOWER_BOUND || num > UPPER_BOUND).count();
 		if (count > 0) {
 			throw new IllegalArgumentException(ERROR_NOT_IN_RANGE);
 		}
 	}
 
-	private static void validateSizeSix(String[] userInput) {
-		if (userInput.length != 6) {
+	private static void validateSizeSix(List<Integer> userInput) {
+		if (userInput.size() != 6) {
 			throw new IllegalArgumentException(ERROR_NOT_CORRECT_SIZE);
 		}
 	}
 
-	private static void validateDuplicate(String[] userInput) {
-		if (userInput.length != new HashSet<String>(List.of(userInput)).size()) {
+	private static void validateDuplicate(List<Integer> userInput) {
+		if (userInput.size() != new HashSet<Integer>(userInput).size()) {
 			throw new IllegalArgumentException(ERROR_DUPLICATE_DETECT);
 		}
 	}

@@ -1,5 +1,7 @@
 package view;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
@@ -19,7 +21,7 @@ public class InputView {
 		return inputSingleNumber();
 	}
 
-	public static String[] inputAnsNumbers() {
+	public static List<Integer> inputAnsNumbers() {
 		System.out.println("\n지난 주 당첨 번호를 구분자(, ) 기준으로 입력해 주세요.");
 		return inputMultipleNumber();
 	}
@@ -36,14 +38,16 @@ public class InputView {
 		return Integer.parseInt(userInput);
 	}
 
-	private static String[] inputMultipleNumber() {
+	private static List<Integer> inputMultipleNumber() {
 		String userInput = inputLine();
 		validateEmpty(userInput);
+		List<Integer> multipleNumbers = new ArrayList<>();
 		String[] parsedUserInput = userInput.split(DELIMITER);
 		for (String eachInput : parsedUserInput) {
 			validateAllNumber(eachInput);
+			multipleNumbers.add(Integer.parseInt(eachInput));
 		}
-		return parsedUserInput;
+		return multipleNumbers;
 	}
 
 	private static void validateAllNumber(String userInput) {

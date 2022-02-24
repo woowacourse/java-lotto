@@ -4,6 +4,7 @@ import domain.AnswerLotto;
 import domain.LottoNumber;
 import domain.LottoTickets;
 import domain.StatisticCalculator;
+import java.util.List;
 import view.InputView;
 import view.OutputView;
 
@@ -25,7 +26,7 @@ public class LottoGameController {
 	}
 
 	private static AnswerLotto generateAnswerLotto() {
-		String[] lastWeekAnswerNumbers = InputView.inputAnsNumbers();
+		List<Integer> lastWeekAnswerNumbers = InputView.inputAnsNumbers();
 		LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());
 		return new AnswerLotto(lastWeekAnswerNumbers, bonusNumber);
 	}
