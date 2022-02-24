@@ -8,6 +8,7 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
+@DisplayName("중복된 로또 번호가 존재하면 예외를 발생시키는지 테스트한다.")
 class WinningNumberTest {
 
     @Test

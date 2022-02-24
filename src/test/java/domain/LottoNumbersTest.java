@@ -8,6 +8,7 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+@DisplayName("로또를 옳바르게 생성하는지 테스트한다.")
 public class LottoNumbersTest {
 
     @Test

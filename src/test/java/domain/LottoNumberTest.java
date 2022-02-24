@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+@DisplayName("로또 넘버 객체의 동일성을 보장하는지 테스트한다.")
 public class LottoNumberTest {
 
     @Test
