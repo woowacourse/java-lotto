@@ -10,6 +10,7 @@ import lotto.view.OutputView;
 public class StringUtil {
 
     private static final String SPLIT_DELIMITER = ",";
+    private static final String PARSE_INT_ERROR_MESSAGE = "숫자만 허용됩니다.";
 
     private StringUtil() {
     }
@@ -38,6 +39,14 @@ public class StringUtil {
         } catch (IllegalArgumentException exception) {
             OutputView.printError(exception.getMessage());
             return null;
+        }
+    }
+
+    public static int toInt(final String text) {
+        try {
+            return Integer.parseInt(text);
+        } catch (NumberFormatException exception) {
+            throw new IllegalArgumentException(PARSE_INT_ERROR_MESSAGE);
         }
     }
 }

@@ -53,7 +53,7 @@ public class MoneyTest {
             void it_throw_exception(String value) {
                 assertThatThrownBy(() -> new Money(value))
                         .isInstanceOf(IllegalArgumentException.class)
-                        .hasMessage("숫자여야 합니다.");
+                        .hasMessage("숫자만 허용됩니다.");
             }
         }
 
