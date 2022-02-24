@@ -31,3 +31,5 @@
 
 * 일급컬렉션을 OutputView로 넘겼을 때, getCollection()으로 내부의 컬렉션을 가져와서 print를 해야함
 * 파라미터로 RankBoard와 profitRatio를 넘기는 이유는, profit을 계산하는 책임을 OutputView에 두면 이상해서
+
+WinningNumber가 사실상 LottoNumbers랑 같음, 비즈니스 상 개념적 의미만 다름
