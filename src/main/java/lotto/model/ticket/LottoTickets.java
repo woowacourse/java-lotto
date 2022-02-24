@@ -2,11 +2,11 @@ package lotto.model.ticket;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.model.money.Money;
+import lotto.model.result.LottoRank;
 import lotto.model.utils.NumberGenerator;
 
 public class LottoTickets {
@@ -30,5 +30,13 @@ public class LottoTickets {
 
     public Object size() {
         return tickets.size();
+    }
+
+    public List<LottoRank> compareResult(WinningTicket winningTicket) {
+        List<LottoRank> lottoRanks = new ArrayList<>();
+        for (LottoTicket ticket : tickets) {
+            lottoRanks.add(winningTicket.compare(ticket));
+        }
+        return lottoRanks;
     }
 }

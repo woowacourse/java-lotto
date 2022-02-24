@@ -8,19 +8,24 @@ import lotto.model.money.Money;
 
 public class LottoStatistics {
 
-    private final Map<LottoRank, Long> map;
+    private final Map<LottoRank, Long> lottoRankCountMap;
 
     public LottoStatistics(List<LottoRank> ranks) {
-        this.map = ranks.stream()
+        this.lottoRankCountMap = ranks.stream()
             .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 
     public long count(LottoRank rank) {
-        return map.get(rank);
+        if (lottoRankCountMap.get(rank) != null) {
+            return lottoRankCountMap.get(rank);
+        }
+        return 0;
     }
 
     public double calculateEarningRates(Money money) {
-        long sum = map.entrySet().stream().mapToLong(x -> x.getKey().getPrize() * x.getValue()).sum();
+        long sum = lottoRankCountMap.entrySet().stream()
+                .mapToLong(x -> x.getKey().getPrize() * x.getValue())
+                .sum();
         return (double) sum / money.getAmount();
     }
 }

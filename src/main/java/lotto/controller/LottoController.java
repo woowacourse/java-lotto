@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.model.money.Money;
+import lotto.model.result.LottoRank;
+import lotto.model.result.LottoStatistics;
 import lotto.model.ticket.LottoTicket;
 import lotto.model.ticket.LottoTickets;
 import lotto.model.ticket.WinningTicket;
@@ -19,6 +21,9 @@ public class LottoController {
                 .buy(new RandomNumberGenerator(LottoNumber.MIN, LottoNumber.MAX), money);
         OutputView.outputTickets(lottoTickets);
         WinningTicket winningTicket = makeWinningTicket();
+        List<LottoRank> lottoRanks = lottoTickets.compareResult(winningTicket);
+        LottoStatistics lottoStatistics = new LottoStatistics(lottoRanks);
+        OutputView.outputStatistics(lottoStatistics, money);
     }
 
     private WinningTicket makeWinningTicket() {

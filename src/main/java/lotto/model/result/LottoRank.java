@@ -42,4 +42,8 @@ public enum LottoRank {
     public int getPrize() {
         return this.prize;
     }
+
+    public int getMatchCount() {
+        return matchCount;
+    }
 }
