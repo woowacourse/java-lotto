@@ -17,9 +17,7 @@ public class RandomTicketGenerator implements TicketGenerator {
     private final List<Integer> numbers;
 
     public RandomTicketGenerator() {
-        final int inclusive_start = BallNumberRange.getInclusiveRangeStart();
-        final int exclusive_end = BallNumberRange.getExclusiveRangeEnd();
-        this.numbers = IntStream.range(inclusive_start, exclusive_end)
+        this.numbers = BallNumberRange.getBallNumbers()
                 .boxed()
                 .collect(Collectors.toList());
     }
