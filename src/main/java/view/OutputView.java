@@ -14,11 +14,13 @@ public class OutputView {
     private static final String LOTTO_RESULT_FORMAT = "%d개 일치 (%d원)- %d개\n";
     private static final String  PROFIT_RATE_RESULT_PREFIX = "총 수익률은 ";
     private static final String PROFIT_RATE_RESULT_SUFFIX = "입니다.";
+    private static final String PREFIX = "[";
+    private static final String SUFFIX = "]";
 
     public static void printPurchasedLotto(LottoTicket lottoTicket) {
         System.out.println(lottoTicket.getLottos().size() + PURCHASED_LOTTO_COUNT_SUFFIX);
         for (Lotto lotto : lottoTicket.getLottos()) {
-            System.out.println(lotto);
+            System.out.println(PREFIX + lotto + SUFFIX);
         }
     }
 

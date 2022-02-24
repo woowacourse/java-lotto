@@ -1,7 +1,6 @@
 package domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,8 +10,6 @@ public class Lotto {
     public static final int LOTTO_NUMBER_MINIMUM = 1;
 
     private static final String DELIMITER = ", ";
-    private static final String PREFIX = "[";
-    private static final String SUFFIX = "]";
 
     private final List<Integer> lottoNumbers = new ArrayList<>();
 
@@ -40,21 +37,16 @@ public class Lotto {
         }
     }
 
-    public List<Integer> getLottoNumbers() {
-        return Collections.unmodifiableList(lottoNumbers);
-    }
-
     @Override
     public String toString() {
-        List<String> numbersToStrings = lottoNumbers.stream()
+        return lottoNumbers.stream()
                 .map(String::valueOf)
-                .collect(Collectors.toList());
-        return PREFIX + String.join(DELIMITER, numbersToStrings) + SUFFIX;
+                .collect(Collectors.joining(DELIMITER));
     }
 
-    public int countSameNumbers(List<Integer> winningNumbers) {
+    public int countSameNumbers(List<Integer> numbers) {
         return (int) lottoNumbers.stream()
-                .filter(winningNumbers::contains)
+                .filter(numbers::contains)
                 .count();
     }
 
