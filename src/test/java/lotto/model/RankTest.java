@@ -20,6 +20,6 @@ public class RankTest {
     @DisplayName("일치 갯수가 6 초과되는 값으로 생성 시 예외 발생")
     void createByOverSixMatchCount() {
         assertThatThrownBy(() -> Rank.of(7, false))
-                .isInstanceOf(InvalidRankException.class);
+            .isInstanceOf(InvalidRankException.class);
     }
 }

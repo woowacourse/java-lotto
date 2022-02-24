@@ -22,6 +22,6 @@ public class NumberTest {
     @ValueSource(ints = {1, 45})
     void checkValidLottoNumberRangeTest(int number) {
         assertThatCode(() -> new Number(number))
-                .doesNotThrowAnyException();
+            .doesNotThrowAnyException();
     }
 }

@@ -1,6 +1,6 @@
 package lotto.view;
 
-import static lotto.view.StringFormatValidator.ALWAYS_POSITIVE_VALIDATOR;
+import static lotto.view.StringFormatValidator.NOT_WORKING_VALIDATOR;
 
 import java.util.Scanner;
 import java.util.function.Consumer;
@@ -12,7 +12,12 @@ public class InputTemplate {
 
     private final static Scanner SCANNER = new Scanner(System.in);
 
-    public static <T> T repeatablyExecute(Supplier<T> supplier, Consumer<LottoException> errorHandler) {
+    private InputTemplate() {
+
+    }
+
+    public static <T> T repeatablyExecute(Supplier<T> supplier,
+        Consumer<LottoException> errorHandler) {
         try {
             return supplier.get();
         } catch (LottoException e) {
@@ -20,7 +25,8 @@ public class InputTemplate {
         }
     }
 
-    private static <T> T handleLottoException(Supplier<T> supplier, Consumer<LottoException> errorHandler, LottoException e) {
+    private static <T> T handleLottoException(Supplier<T> supplier,
+        Consumer<LottoException> errorHandler, LottoException e) {
         errorHandler.accept(e);
         if (isRepeatable()) {
             return repeatablyExecute(supplier, errorHandler);
@@ -28,7 +34,8 @@ public class InputTemplate {
         throw new IllegalStateException("종료되었습니다!");
     }
 
-    public static String repeatablyInput(String message, Consumer<String> consumer, Consumer<InvalidFormatException> errorHandler) {
+    public static String repeatablyInput(String message, Consumer<String> consumer,
+        Consumer<InvalidFormatException> errorHandler) {
         try {
             return inputWithMessage(message, consumer);
         } catch (InvalidFormatException e) {
@@ -43,7 +50,8 @@ public class InputTemplate {
         return value;
     }
 
-    private static String handleInvalidFormatException(String message, Consumer<String> consumer, Consumer<InvalidFormatException> errorHandler, InvalidFormatException e) {
+    private static String handleInvalidFormatException(String message, Consumer<String> consumer,
+        Consumer<InvalidFormatException> errorHandler, InvalidFormatException e) {
         errorHandler.accept(e);
         if (isRepeatable()) {
             return repeatablyInput(message, consumer, errorHandler);
@@ -57,7 +65,7 @@ public class InputTemplate {
     }
 
     private static String chooseOptions(String message, String... options) {
-        String value = inputWithMessage(message, ALWAYS_POSITIVE_VALIDATOR::validate);
+        String value = inputWithMessage(message, NOT_WORKING_VALIDATOR::validate);
         if (isChoosable(value, options)) {
             return value;
         }

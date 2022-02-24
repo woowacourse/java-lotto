@@ -24,17 +24,18 @@ public class Lotto {
         if (hasDuplicatedNumber(numbers)) {
             throw new DuplicatedNumberException();
         }
+
         if (isInvalidSize(numbers)) {
             throw new InvalidLottoSizeException();
         }
     }
 
-    private boolean isInvalidSize(List<Integer> numbers) {
-        return numbers.size() != LOTTO_SIZE;
-    }
-
     private boolean hasDuplicatedNumber(List<Integer> numbers) {
         return getDistinctSize(numbers) != numbers.size();
+    }
+
+    private boolean isInvalidSize(List<Integer> numbers) {
+        return numbers.size() != LOTTO_SIZE;
     }
 
     private long getDistinctSize(List<Integer> numbers) {
@@ -72,6 +73,8 @@ public class Lotto {
     }
 
     public List<Integer> getIntValues() {
-        return numbers.stream().map(Number::getIntValue).collect(Collectors.toList());
+        return numbers.stream()
+            .map(Number::getIntValue)
+            .collect(Collectors.toList());
     }
 }

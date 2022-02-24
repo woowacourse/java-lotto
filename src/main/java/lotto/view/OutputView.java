@@ -14,6 +14,10 @@ import lotto.model.Rank;
 
 public class OutputView {
 
+    private OutputView() {
+
+    }
+
     private static final Map<Class<? extends Exception>, String> EXCEPTION_MESSAGE_MAP =
         Map.of(DuplicatedNumberException.class, "중복된 로또 번호는 입력할 수 없습니다.",
             InvalidLottoSizeException.class, "로또 번호 갯수는 6개여야 합니다.",
@@ -28,9 +32,14 @@ public class OutputView {
     }
 
     private static void printEachLotto(Lotto numbers) {
-        String lottoNumbersText = numbers.getIntValues().stream().sorted().map(String::valueOf)
+        System.out.println(formattedLottoText(numbers.getIntValues()));
+    }
+
+    private static String formattedLottoText(List<Integer> numbers) {
+        return numbers.stream()
+            .sorted()
+            .map(String::valueOf)
             .collect(Collectors.joining(", ", "[", "]"));
-        System.out.println(lottoNumbersText);
     }
 
     public static void printResult(Statistic result) {

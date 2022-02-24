@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class StatisticTest {
+
     private static final Money FIRST_PRIZE = Rank.FIRST.getPrize();
     private static final Money SECOND_PRIZE = Rank.SECOND.getPrize();
     private static final Money THIRD_PRIZE = Rank.THIRD.getPrize();

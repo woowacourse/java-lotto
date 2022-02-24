@@ -11,7 +11,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 public class StringFormatValidatorTest {
 
     @ParameterizedTest
-    @ValueSource(strings = {"1,2,3,4,5", "01, 0, 1, 2, 3, 4", "-1, 1, 2, 3, 4, 5", "1,2,3,4,5,6,7", "a,b,c,d,e,f"})
+    @ValueSource(strings = {"1,2,3,4,5", "01, 0, 1, 2, 3, 4", "-1, 1, 2, 3, 4, 5", "1,2,3,4,5,6,7",
+        "a,b,c,d,e,f"})
     @DisplayName("잘못된 로또 번호 포맷 검증")
     void validateInvalidLottoNumberFormat(String text) {
         StringFormatValidator lottoValidator = StringFormatValidator.lottoValidator();

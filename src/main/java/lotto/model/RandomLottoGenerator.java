@@ -10,6 +10,7 @@ import java.util.Queue;
 import java.util.stream.IntStream;
 
 public class RandomLottoGenerator implements LottoGenerator {
+
     private final List<Integer> numberPool;
 
     public RandomLottoGenerator(int start, int end) {
@@ -37,8 +38,8 @@ public class RandomLottoGenerator implements LottoGenerator {
 
     private List<Integer> numbers(Queue<Integer> queue) {
         return IntStream.range(0, LOTTO_SIZE)
-                .map(i -> queue.remove())
-                .boxed()
-                .collect(toList());
+            .map(i -> queue.remove())
+            .boxed()
+            .collect(toList());
     }
 }

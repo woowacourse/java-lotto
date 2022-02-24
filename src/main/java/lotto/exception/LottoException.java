@@ -1,6 +1,6 @@
 package lotto.exception;
 
-public class LottoException extends RuntimeException{
+public class LottoException extends RuntimeException {
 
     public LottoException() {
     }

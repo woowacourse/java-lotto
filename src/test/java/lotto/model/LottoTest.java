@@ -24,14 +24,14 @@ public class LottoTest {
     @DisplayName("로또 번호 리스트가 1 ~ 45 사이에 있는 경우 테스트")
     void checkValidLottoNumbersRangeTest() {
         assertThatCode(() -> new Lotto(List.of(1, 2, 3, 4, 5, 45)))
-                .doesNotThrowAnyException();
+            .doesNotThrowAnyException();
     }
 
     @Test
     @DisplayName("로또 번호 리스트가 1 ~ 45 사이에 있지 않은 경우 테스트")
     void checkInvalidLottoNumbersRangeTest() {
         assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 0, 5, 46)))
-                .isInstanceOf(InvalidNumberRangeException.class);
+            .isInstanceOf(InvalidNumberRangeException.class);
     }
 
     @Test
@@ -55,6 +55,6 @@ public class LottoTest {
     @DisplayName("로또 숫자가 6개가 아닌 경우 로또 생성")
     void invalidLottoNumbersSize() {
         assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5)))
-                .isInstanceOf(InvalidLottoSizeException.class);
+            .isInstanceOf(InvalidLottoSizeException.class);
     }
 }
