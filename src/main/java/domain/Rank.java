@@ -1,6 +1,8 @@
 package domain;
 
 import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public enum Rank {
 	NOTHING(0, 0, false),
@@ -28,8 +30,16 @@ public enum Rank {
 			.orElse(NOTHING);
 	}
 
+	public static Map<Rank, Integer> getMap() {
+		final Map<Rank, Integer> rankMap = new LinkedHashMap<>();
+		Arrays.stream(values())
+			.filter(rank -> !rank.equals(NOTHING))
+			.forEach(rank -> rankMap.put(rank, 0));
+		return rankMap;
+	}
+
 	public boolean isNothing() {
-		return this == Rank.NOTHING;
+		return this.equals(NOTHING);
 	}
 
 	public boolean isBonus() {

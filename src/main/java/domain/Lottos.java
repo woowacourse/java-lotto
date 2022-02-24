@@ -2,7 +2,7 @@ package domain;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 public class Lottos {
 	private final List<Lotto> lottos;
@@ -11,10 +11,14 @@ public class Lottos {
 		this.lottos = lottos;
 	}
 
-	public List<Rank> calculateRank(WinningLotto winningLotto) {
-		return lottos.stream()
+	public Map<Rank, Integer> countRank(WinningLotto winningLotto) {
+		Map<Rank, Integer> rankCounts = Rank.getMap();
+
+		lottos.stream()
 			.map(lotto -> winningLotto.calculateRank(lotto))
-			.collect(Collectors.toUnmodifiableList());
+			.filter(rank -> !rank.isNothing())
+			.forEach(rank -> rankCounts.replace(rank, rankCounts.get(rank) + 1));
+		return Collections.unmodifiableMap(rankCounts);
 	}
 
 	public List<Lotto> getLottos() {

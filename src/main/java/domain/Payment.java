@@ -3,7 +3,7 @@ package domain;
 public class Payment {
 	private static final int LOTTO_PRICE = 1000;
 	private static final int PAYMENT_LIMIT_PRICE = 100000;
-	private int payment;
+	private final int payment;
 
 	public Payment(String payment) {
 		this.payment = toInt(payment);

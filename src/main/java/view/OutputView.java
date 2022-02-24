@@ -4,13 +4,15 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import domain.Lotto;
+import domain.LottoResult;
 import domain.Lottos;
 import domain.Rank;
 
 public class OutputView {
 	private static final String ERROR_MESSAGE = "[ERROR] ";
 
-	private OutputView() {}
+	private OutputView() {
+	}
 
 	public static void printGuideMessage(String message) {
 		System.out.println(message);
@@ -37,7 +39,8 @@ public class OutputView {
 			.collect(Collectors.joining(", "))));
 	}
 
-	public static void printRankCounts(Map<Rank, Integer> ranks) {
+	public static void printRankCounts(LottoResult lottoResult) {
+		Map<Rank, Integer> ranks = lottoResult.getRanks();
 		System.out.println("\n당첨 통계\n---------");
 		ranks.forEach(OutputView::printRankCount);
 	}

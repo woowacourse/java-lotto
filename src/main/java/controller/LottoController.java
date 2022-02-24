@@ -1,6 +1,6 @@
 package controller;
 
-import java.util.List;
+import java.util.Map;
 
 import domain.Lotto;
 import domain.LottoNumber;
@@ -24,7 +24,7 @@ public class LottoController {
 		Payment payment = createPayment();
 		Lottos lottos = createLottos(payment);
 		WinningLotto winningLotto = createWinningLotto();
-		LottoResult lottoResult = createLottoResult(calculateRanks(lottos, winningLotto));
+		LottoResult lottoResult = createLottoResult(lottos.countRank(winningLotto));
 		calculateTotalProfitRate(payment, lottoResult.calculateTotalProfit());
 	}
 
@@ -67,13 +67,9 @@ public class LottoController {
 		}
 	}
 
-	private List<Rank> calculateRanks(Lottos lottos, WinningLotto winningLotto) {
-		return lottos.calculateRank(winningLotto);
-	}
-
-	private LottoResult createLottoResult(List<Rank> ranks) {
+	private LottoResult createLottoResult(Map<Rank, Integer> ranks) {
 		LottoResult lottoResult = new LottoResult(ranks);
-		OutputView.printRankCounts(lottoResult.countRank());
+		OutputView.printRankCounts(lottoResult);
 		return lottoResult;
 	}
 
