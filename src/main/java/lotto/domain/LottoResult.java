@@ -4,13 +4,14 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class LottoResult {
+    private static final int INIT_VALUE = 0;
     private HashMap<LottoRank, Integer> result;
 
 
     public LottoResult() {
         this.result = new LinkedHashMap<>();
         for (LottoRank lottoRank : LottoRank.values()) {
-            result.put(lottoRank, 0);
+            result.put(lottoRank, INIT_VALUE);
         }
 
     }

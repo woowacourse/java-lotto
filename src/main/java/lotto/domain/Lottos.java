@@ -2,8 +2,11 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class Lottos {
+    private static final int UNIT_AMOUNT = 1000;
+
     private Money money;
     private List<Lotto> lottos;
     private LottoResult result;
@@ -16,9 +19,8 @@ public class Lottos {
     }
 
     private void purchaseLotto() {
-        for (int i = 0; i < getLottoCount(money); i++) {
-            lottos.add(new Lotto(new ChoiceNumber()));
-        }
+        IntStream.range(0, getLottoCount(money))
+                .forEach(i -> lottos.add(new Lotto(new ChoiceNumber())));
     }
 
     public double getYield() {
@@ -27,7 +29,7 @@ public class Lottos {
 
 
     private int getLottoCount(Money money) {
-        return money.getAmount() / 1000;
+        return money.getAmount() / UNIT_AMOUNT;
     }
 
     public int getLottosSize() {
