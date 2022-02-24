@@ -11,10 +11,11 @@ public class RandomLottoNumberGenerateStrategy implements LottoNumberGenerateStr
 
     @Override
     public List<Integer> generateLottoNumbers() {
-        List<Integer> modifiableLottoNumbers = new ArrayList<>(LottoNumbers.LOTTO_NUMBERS);
-        Collections.shuffle(modifiableLottoNumbers);
+        List<Integer> lottoNumbers = new ArrayList<>(LottoNumbers.LOTTO_NUMBERS);
+        Collections.shuffle(lottoNumbers);
+        List<Integer> shuffled = lottoNumbers.subList(RANDOM_LOTTO_NUMBER_START_INDEX, RANDOM_LOTTO_NUMBER_END_INDEX);
+        Collections.sort(shuffled);
 
-        return Collections.unmodifiableList(
-                modifiableLottoNumbers.subList(RANDOM_LOTTO_NUMBER_START_INDEX, RANDOM_LOTTO_NUMBER_END_INDEX));
+        return Collections.unmodifiableList(shuffled);
     }
 }
