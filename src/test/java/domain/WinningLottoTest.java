@@ -31,10 +31,8 @@ public class WinningLottoTest {
 		//given
 		WinningLotto winningLotto = new WinningLotto(Lotto.of(new String[] {"9", "5", "4", "3", "2", "1"}),
 			new LottoNumber("6"));
-
 		//when
 		Rank rank = winningLotto.calculateRank(lotto);
-
 		//then
 		assertThat(rank).isEqualTo(Rank.SECOND);
 	}

@@ -26,4 +26,19 @@ public class LottosTest {
 		//then
 		assertThat(ranks).containsAnyOf(entry(Rank.FIFTH, 1), entry(Rank.THIRD, 1));
 	}
+
+	@DisplayName("아무것도 맞지 않을 경우를 미포함 한 결과가 출력 되는지")
+	@Test
+	void nothing_count_rank_success() {
+		//given
+		List<Lotto> lotto = Arrays.asList(Lotto.of(new String[]{"6", "5", "4", "3", "2", "1"}),
+			Lotto.of(new String[]{"8", "9", "10", "11", "12", "13"}));
+		Lotto winningLotto = Lotto.of(new String[]{"6", "5", "4", "3", "2", "1"});
+		LottoNumber bonusNumber = new LottoNumber("7");
+		Lottos lottos = new Lottos(lotto);
+		//when
+		Map<Rank,Integer> ranks = lottos.countRank(new WinningLotto(winningLotto, bonusNumber));
+		//then
+		assertThat(ranks).containsAnyOf(entry(Rank.FIRST, 1));
+	}
 }
