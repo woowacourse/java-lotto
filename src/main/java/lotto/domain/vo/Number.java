@@ -1,23 +1,16 @@
 package lotto.domain.vo;
 
+import lotto.constants.NumberLimit;
+
 import java.util.Objects;
 
 public class Number {
 
-    private static final int MINIMUM_NUMBER = 1;
-    private static final int MAXIMUM_NUMBER = 45;
-
     private final int number;
 
     public Number(int number) {
-        validateRangeOfNumber(number);
+        NumberLimit.validateInRange(number);
         this.number = number;
-    }
-
-    private void validateRangeOfNumber(int number) {
-        if (number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER) {
-            throw new IllegalArgumentException("로또 번호는 1이상 45이하이어야 한다.");
-        }
     }
 
     public int getNumber() {

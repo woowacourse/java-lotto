@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import lotto.constants.NumberLimit;
 import lotto.domain.vo.Number;
 
 public class LottoGenerator {
@@ -22,7 +23,7 @@ public class LottoGenerator {
     }
 
     private List<Number> initNumbers() {
-        return IntStream.rangeClosed(MINIMUM_NUMBER, MAXIMUM_NUMBER)
+        return IntStream.rangeClosed(NumberLimit.MINIMUM.getLimit(), NumberLimit.MAXIMUM.getLimit())
                 .mapToObj(Number::new)
                 .collect(Collectors.toList());
     }
