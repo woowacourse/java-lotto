@@ -3,7 +3,7 @@ package view;
 import domain.Lotto;
 import domain.PrizeResult;
 import domain.PurchasedLotto;
-import domain.WinnerPrice;
+import domain.Prize;
 
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -40,14 +40,14 @@ public class OutputView {
     public static void printFinalStatistic(PrizeResult result) {
         System.out.println(System.lineSeparator() + WINNING_STATISTIC);
         System.out.println(OUTLINE);
-        Map<WinnerPrice, Integer> prizeResult = result.getPrizeResult();
-        for (WinnerPrice winnerPrice : result.validWinnerPrices()) {
+        Map<Prize, Integer> prizeResult = result.getPrizeResult();
+        for (Prize winnerPrice : result.validWinnerPrices()) {
             printEachStatistic(winnerPrice, prizeResult);
         }
     }
 
-    private static void printEachStatistic(WinnerPrice winnerPrice, Map<WinnerPrice, Integer> prizeResult) {
-        if (winnerPrice == WinnerPrice.SECOND) {
+    private static void printEachStatistic(Prize winnerPrice, Map<Prize, Integer> prizeResult) {
+        if (winnerPrice == Prize.SECOND) {
             System.out.print(STATISTICS_SECOND_PRIZE_MESSAGE
                     + winnerPrice.getPrize() + STATISTICS_WON_MESSAGE
                     + prizeResult.get(winnerPrice) + STATISTICS_COUNT_MESSAGE

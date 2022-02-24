@@ -22,8 +22,8 @@ public class LottoTest {
         WinningNumber winningLotto = new WinningNumber(winningNumbers);
         winningLotto.addBonusNumber(45);
 
-        WinnerPrice winnerPrice = lotto.calculateRank(winningLotto);
-        assertThat(winnerPrice).isEqualTo(WinnerPrice.FIFTH);
+        Prize winnerPrice = lotto.calculateRank(winningLotto);
+        assertThat(winnerPrice).isEqualTo(Prize.FIFTH);
     }
 
     @Test
@@ -38,8 +38,8 @@ public class LottoTest {
         WinningNumber winningLotto = new WinningNumber(winningNumbers);
         winningLotto.addBonusNumber(6);
 
-        WinnerPrice winnerPrice = lotto.calculateRank(winningLotto);
-        assertThat(winnerPrice).isEqualTo(WinnerPrice.SECOND);
+        Prize winnerPrice = lotto.calculateRank(winningLotto);
+        assertThat(winnerPrice).isEqualTo(Prize.SECOND);
     }
 
 }

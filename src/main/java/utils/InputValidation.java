@@ -19,25 +19,25 @@ public class InputValidation {
     private static final String ERROR_NUMBER_OUT_RANGE = "로또 번호는 1에서 45 사이의 값을 입력해줘야 합니다.";
     private static final String ERROR_DUPLICATE_NUMBER = "로또 번호는 중복되면 안 됩니다.";
 
-    public static int validatePrice(String inputPrice) {
-        int price = checkNonInteger(inputPrice, ERROR_PRICE_NON_INTEGER);
+    public static int validatePrice(final String inputPrice) {
+        final int price = checkNonInteger(inputPrice, ERROR_PRICE_NON_INTEGER);
         checkUnderMinimumPrice(price);
 
         return price;
     }
 
-    public static List<Integer> validateWinningNumber(String inputNumbers) {
-        List<String> splitedNumbers = Arrays.asList(inputNumbers.split(LOTTO_NUMBER_DELIMITER));
+    public static List<Integer> validateWinningNumber(final String inputNumbers) {
+        final List<String> splitedNumbers = Arrays.asList(inputNumbers.split(LOTTO_NUMBER_DELIMITER));
         checkNumOfNumbers(splitedNumbers);
 
-        List<Integer> numbers = checkNonIntegers(splitedNumbers);
+        final List<Integer> numbers = checkNonIntegers(splitedNumbers);
         checkNumbersRange(numbers);
         checkDuplicateNumber(numbers);
 
         return numbers;
     }
 
-    private static int checkNonInteger(String number, String message) {
+    private static int checkNonInteger(final String number, final String message) {
         try {
             return Integer.parseInt(number);
         } catch (NumberFormatException e) {
@@ -45,36 +45,36 @@ public class InputValidation {
         }
     }
 
-    private static void checkUnderMinimumPrice(int price) {
+    private static void checkUnderMinimumPrice(final int price) {
         if (price < LOTTO_PRICE) {
             throw new IllegalArgumentException(ERROR_NEGATIVE_INTEGER);
         }
     }
 
-    private static void checkNumOfNumbers(List<String> numbers) {
+    private static void checkNumOfNumbers(final List<String> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(ERROR_NUM_OF_BALL);
         }
     }
 
-    private static List<Integer> checkNonIntegers(List<String> numbers) {
+    private static List<Integer> checkNonIntegers(final List<String> numbers) {
         return numbers.stream()
                 .map(number -> checkNonInteger(number, ERROR_BALL_NON_INTEGER))
                 .collect(Collectors.toList());
     }
 
-    private static void checkNumbersRange(List<Integer> numbers) {
+    private static void checkNumbersRange(final List<Integer> numbers) {
         numbers.stream()
                 .forEach(number -> checkNumberRange(number));
     }
 
-    private static void checkNumberRange(int number) {
+    private static void checkNumberRange(final int number) {
         if (!(number >= LOTTO_MINIMUN_NUMBER && number <= LOTTO_MAXIMUN_NUMBER)) {
             throw new IllegalArgumentException(ERROR_NUMBER_OUT_RANGE);
         }
     }
 
-    private static void checkDuplicateNumber(List<Integer> numbers) {
+    private static void checkDuplicateNumber(final List<Integer> numbers) {
         Set<Integer> uniqueNumber = numbers.stream()
                 .collect(Collectors.toSet());
 
@@ -83,8 +83,8 @@ public class InputValidation {
         }
     }
 
-    public static int validateBonusNumber(String bonus) {
-        int bonusNumber = checkNonInteger(bonus, ERROR_BALL_NON_INTEGER);
+    public static int validateBonusNumber(final String bonus) {
+        final int bonusNumber = checkNonInteger(bonus, ERROR_BALL_NON_INTEGER);
         checkNumberRange(bonusNumber);
 
         return bonusNumber;

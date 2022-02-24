@@ -6,8 +6,6 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private static final int FAILING_CRITERIA = 3;
-
     private List<LottoNumber> lottoNumbers;
 
     public Lotto(List<Integer> numbers) {
@@ -19,16 +17,10 @@ public class Lotto {
         return lottoNumbers;
     }
 
-    public WinnerPrice calculateRank(WinningNumber winningNumber) {
+    public Prize calculateRank(WinningNumber winningNumber) {
         int matched = matchedRegularNumbers(winningNumber);
         boolean hasBonus = matchedBonusNumber(winningNumber.getBonus());
-        if (checkSecond(matched, hasBonus)) {
-            return WinnerPrice.SECOND;
-        }
-        if (matched < FAILING_CRITERIA) {
-            return WinnerPrice.FAIL;
-        }
-        return WinnerPrice.getWinnerPriceByMatched(matched);
+        return Prize.getWinnerPrizeByMatched(matched, hasBonus);
     }
 
     private int matchedRegularNumbers(WinningNumber winningNumber) {
@@ -42,8 +34,8 @@ public class Lotto {
         return lottoNumbers.contains(bonus);
     }
 
-    private boolean checkSecond(int matched, boolean hasBonus) {
-        return (matched == WinnerPrice.THIRD.getMatched()) && hasBonus;
+    private boolean checkSecond(int matched, boolean hasBonus) { // checkSecond는 두번쨰 체크?느낌이 나서 checkSecondPrize가 좋지 않을까?
+        return (matched == Prize.THIRD.getMatched()) && hasBonus;
     }
 
 }
