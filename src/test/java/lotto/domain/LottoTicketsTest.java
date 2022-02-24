@@ -7,6 +7,7 @@ import lotto.domain.generator.LottoNumberGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+@SuppressWarnings("NonAsciiCharacters")
 class LottoTicketsTest {
 
     @DisplayName("로또 티켓의 갯수를 반환한다.")

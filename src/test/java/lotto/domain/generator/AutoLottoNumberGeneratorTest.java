@@ -6,6 +6,7 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+@SuppressWarnings("NonAsciiCharacters")
 class AutoLottoNumberGeneratorTest {
 
     @DisplayName("생성된 숫자는 6자리임을 보장한다.")

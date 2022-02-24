@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+@SuppressWarnings("NonAsciiCharacters")
 class LottoMachineTest {
 
     @DisplayName("구입 금액을 기반으로 로또 티켓을 자동 발급한다.")

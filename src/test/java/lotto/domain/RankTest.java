@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+@SuppressWarnings("NonAsciiCharacters")
 class RankTest {
 
     @DisplayName("보너스 볼을 포함하여 5개를 맞춘 경우 2등이어야한다.")
