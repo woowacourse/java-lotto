@@ -24,7 +24,7 @@ class LottoNumberTest {
 
     @ParameterizedTest
     @ValueSource(ints = {1, 45})
-    @DisplayName("로또 번호 범위가 아니면 예외")
+    @DisplayName("로또 번호 정상 생성")
     void lottoNumberCreate(int source) {
         assertDoesNotThrow(() -> LottoNumber.getInstance(source));
     }
