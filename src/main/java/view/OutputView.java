@@ -48,11 +48,11 @@ public class OutputView {
     }
 
     private static String getEarningsRateResult(WinningStatistics winningStatistics, Money inputMoney) {
-        double earingsRate = winningStatistics.getEarningsRate(inputMoney.getAmount());
-        String result = String.format("총 수익률은 %.2f입니다.", earingsRate);
-        if (earingsRate >= 1) {
+        double earningsRate = winningStatistics.getEarningsRate(inputMoney.getAmount());
+        String result = String.format("총 수익률은 %.2f 입니다.", earningsRate);
+        if (earningsRate >= 1) {
             return result;
         }
-        return "%s(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+        return String.format("%s(기준이 1이기 때문에 결과적으로 손해라는 의미임)", result);
     }
 }
