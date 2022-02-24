@@ -1,4 +1,4 @@
-package lotto.utils;
+package lotto.domain.vo.generator;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,12 +22,12 @@ public class LottoGenerator {
     private LottoGenerator() {
     }
 
-    public static List<LottoNumber> generateLottoNumbers() {
+    public static Lotto generate() {
         List<LottoNumber> numbers = new ArrayList<>(INIT_LOTTO_NUMBERS);
         Collections.shuffle(numbers);
         List<LottoNumber> lottoNumbers = numbers.subList(FROM_LOTTO_INDEX, TO_LOTTO_INDEX);
         Collections.sort(lottoNumbers);
 
-        return lottoNumbers;
+        return new Lotto(lottoNumbers);
     }
 }

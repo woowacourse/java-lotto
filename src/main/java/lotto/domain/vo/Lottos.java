@@ -1,14 +1,12 @@
 package lotto.domain.vo;
 
-import static lotto.utils.LottoGenerator.generateLottoNumbers;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import lotto.domain.LottoPrize;
-import lotto.utils.LottoGenerator;
+import lotto.domain.vo.generator.LottoGenerator;
 
 public class Lottos {
 
@@ -19,7 +17,7 @@ public class Lottos {
     public void purchase(Money money) {
         int purchaseNumber = money.canBuyNumber(LOTTO_PRICE);
         for (int i = 0; i < purchaseNumber; i++) {
-            lottos.add(new Lotto(generateLottoNumbers()));
+            lottos.add(LottoGenerator.generate());
         }
     }
 
