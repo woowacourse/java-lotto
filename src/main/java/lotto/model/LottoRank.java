@@ -4,6 +4,7 @@ import static java.util.List.of;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 
 public enum LottoRank {
     FIRST(6, of(true, false), 2_000_000_000),
@@ -25,11 +26,15 @@ public enum LottoRank {
 
     public static LottoRank getRank(int winningNumberCount, boolean containsBonusBall) {
         return Arrays.stream(values())
-                .filter((LottoRank lottoRank) ->
-                        lottoRank.winningNumberCount == winningNumberCount
-                                && lottoRank.bonusBallBooleans.contains(containsBonusBall))
+                .filter(classifyRank(winningNumberCount, containsBonusBall))
                 .findFirst()
                 .orElseGet(() -> FAILED);
+    }
+
+    private static Predicate<LottoRank> classifyRank(int winningNumberCount, boolean containsBonusBall) {
+        return (LottoRank lottoRank) ->
+                lottoRank.winningNumberCount == winningNumberCount
+                        && lottoRank.bonusBallBooleans.contains(containsBonusBall);
     }
 
     public int getWinningNumberCount() {
