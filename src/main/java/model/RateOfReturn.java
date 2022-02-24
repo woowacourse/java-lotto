@@ -16,6 +16,6 @@ public class RateOfReturn {
         Arrays.stream(Statistics.values())
                 .forEach(statistics -> sumMoneyOfReturns += (statistics.getCount() * statistics.getValue()));
 
-        return Math.floor((sumMoneyOfReturns / (double) money) * 100) / 100;
+        return (sumMoneyOfReturns / (double) money);
     }
 }
