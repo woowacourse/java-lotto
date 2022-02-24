@@ -1,6 +1,6 @@
 package lotto.controller;
 
-import lotto.model.Money;
+import lotto.model.money.Money;
 import lotto.view.InputView;
 
 public class LottoController {

@@ -5,6 +5,8 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import lotto.model.ticket.LottoTicket;
+import lotto.model.ticket.number.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

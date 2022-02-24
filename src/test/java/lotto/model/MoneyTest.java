@@ -1,5 +1,6 @@
 package lotto.model;
 
+import lotto.model.money.Money;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

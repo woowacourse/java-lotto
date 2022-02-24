@@ -1,4 +1,4 @@
-package lotto.model;
+package lotto.model.ticket.number;
 
 import java.util.Objects;
 

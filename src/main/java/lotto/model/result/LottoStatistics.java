@@ -1,9 +1,10 @@
-package lotto.model;
+package lotto.model.result;
 
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import lotto.model.money.Money;
 
 public class LottoStatistics {
 

@@ -1,10 +1,11 @@
-package lotto.model;
+package lotto.model.ticket;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.model.ticket.number.LottoNumber;
 import lotto.model.utils.NumberGenerator;
 
 public class LottoTicket {
