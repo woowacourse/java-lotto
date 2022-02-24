@@ -1,11 +1,14 @@
 package model;
 
+import static model.WinningNumbers.WINNING_NUMBERS_CONTAIN_BONUS_BALL;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -63,7 +66,18 @@ class WinningNumbersTest {
         assertThat(result).isEqualTo(expected);
     }
 
-//    @Test
-//    @DisplayName("당첨 번호와 보너스 볼은 중복될 수 없다.")
+    @Test
+    @DisplayName("당첨 번호와 보너스 볼은 중복될 수 없다.")
+    void winningNumbersContainBonusBall() {
+        // given
+        List<String> winnings = IntStream.rangeClosed(1, 6)
+                .mapToObj(String::valueOf)
+                .collect(Collectors.toList());
+        String bonusBallString = "1";
 
+        // then
+        assertThatThrownBy(() -> WinningNumbers.of(winnings, bonusBallString))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(WINNING_NUMBERS_CONTAIN_BONUS_BALL);
+    }
 }
