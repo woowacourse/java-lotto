@@ -5,6 +5,8 @@ import java.util.Map;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.Rank;
+import lotto.dto.LottoTicketDto;
+import lotto.dto.LottoTicketsDto;
 
 public class OutputView {
 
@@ -16,14 +18,14 @@ public class OutputView {
         System.out.println(totalCount + "개를 구매했습니다.");
     }
 
-    public void printLottoTicketsInfo(LottoTickets lottoTickets) {
+    public void printLottoTicketsInfo(LottoTicketsDto lottoTickets) {
         System.out.println(getTicketsInfo(lottoTickets.getLottoTickets()));
     }
 
-    private String getTicketsInfo(List<LottoTicket> lottoTickets) {
+    private String getTicketsInfo(List<LottoTicketDto> lottoTickets) {
         String ticketsInfo = "";
 
-        for (LottoTicket lottoTicket : lottoTickets) {
+        for (LottoTicketDto lottoTicket : lottoTickets) {
             ticketsInfo = ticketsInfo + lottoTicket.getLottoNumbers() + "\n";
         }
 

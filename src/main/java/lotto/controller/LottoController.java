@@ -6,6 +6,7 @@ import lotto.domain.LottoMachine;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTickets;
 import lotto.domain.WinningNumbers;
+import lotto.dto.LottoTicketsDto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -43,9 +44,10 @@ public class LottoController {
     private LottoTickets createLottoTickets(Money money) {
         LottoMachine lottoMachine = new LottoMachine();
         LottoTickets lottoTickets = lottoMachine.purchase(money);
+        LottoTicketsDto lottoTicketsDto = new LottoTicketsDto(lottoTickets);
 
         outputView.printTotalCount(lottoTickets.totalCount());
-        outputView.printLottoTicketsInfo(lottoTickets);
+        outputView.printLottoTicketsInfo(lottoTicketsDto);
 
         return lottoTickets;
     }
