@@ -10,6 +10,10 @@ import lotto.model.ticket.number.LottoNumber;
 
 public class OutputView {
 
+    //인스턴스화 방지
+    private OutputView() {
+    }
+
     public static void outputTickets(LottoTickets lottoTickets) {
         System.out.printf("%d개를 구매했습니다.%n", lottoTickets.size());
         List<LottoTicket> tickets = lottoTickets.getTickets();
