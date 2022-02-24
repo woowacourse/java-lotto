@@ -23,31 +23,44 @@ public class InputView {
     private InputView() {
     }
 
-    public static Money createMoney() {
-        return repeatablyExecute(InputView::inputMoney, OutputView::printErrorMessage);
+    public static Money inputMoney() {
+        return repeatablyExecute(InputView::createMoney, OutputView::printErrorMessage);
     }
 
-    private static Money inputMoney() {
-        String value = repeatablyInput("구입금액을 입력해 주세요.", MONEY_VALIDATOR::validate,
-            OutputView::printErrorMessage);
-        return MONEY_CONVERTOR.parse(value);
+    private static Money createMoney() {
+        return MONEY_CONVERTOR.parse(inputMoneyText());
     }
 
-    public static WinnerLotto createWinnerLotto() {
-        return repeatablyExecute(() -> new WinnerLotto(inputWinnerLotto(), inputBonus()),
+    private static String inputMoneyText() {
+        return repeatablyInput("구입금액을 입력해 주세요.", MONEY_VALIDATOR::validate,
             OutputView::printErrorMessage);
     }
 
-    private static Lotto inputWinnerLotto() {
-        String value = repeatablyInput("지난 주 당첨 번호를 입력해 주세요.", LOTTO_VALIDATOR::validate,
-            OutputView::printErrorMessage);
-        return LOTTO_CONVERTOR.parse(value);
+    public static WinnerLotto inputWinnerLotto() {
+        return repeatablyExecute(InputView::createWinnerLotto, OutputView::printErrorMessage);
     }
 
-    private static Number inputBonus() {
+    private static WinnerLotto createWinnerLotto() {
+        return new WinnerLotto(createLotto(), createBonus());
+    }
+
+    private static Lotto createLotto() {
+        return LOTTO_CONVERTOR.parse(inputLottoText());
+    }
+
+    private static String inputLottoText() {
+        return repeatablyInput("지난 주 당첨 번호를 입력해 주세요.", LOTTO_VALIDATOR::validate,
+                OutputView::printErrorMessage);
+    }
+
+    private static Number createBonus() {
+        return NUMBER_CONVERTOR.parse(inputBonusText());
+    }
+
+    private static String inputBonusText() {
         String value = repeatablyInput("보너스 볼을 입력해 주세요.", NUMBER_VALIDATOR::validate,
             OutputView::printErrorMessage);
-        return NUMBER_CONVERTOR.parse(value);
+        return value;
     }
 
 }

@@ -25,7 +25,7 @@ public class OutputView {
             InvalidRankException.class, "일치하는 로또 번호 갯수는 0 ~ 6 사이여야 합니다.",
             InvalidNumberRangeException.class, "로또 번호는 1 ~ 45 사이여야 합니다.");
 
-    public static void printIssuedLottoes(List<Lotto> lottoNumbersList) {
+    public static void printLottoes(List<Lotto> lottoNumbersList) {
         System.out.println(lottoNumbersList.size() + "개를 구매했습니다.");
         for (Lotto numbers : lottoNumbersList) {
             printEachLotto(numbers);
@@ -43,7 +43,7 @@ public class OutputView {
             .collect(joining(", ", "[", "]"));
     }
 
-    public static void printResult(Statistic result) {
+    public static void printStatistic(Statistic result) {
         System.out.println("당첨 통계");
         System.out.println("---------");
         System.out.println("3개 일치 (5000원)- " + result.getCountByRank(Rank.FIFTH) + "개");

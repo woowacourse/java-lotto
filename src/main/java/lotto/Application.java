@@ -1,17 +1,19 @@
 package lotto;
 
-import static lotto.view.InputView.createMoney;
-import static lotto.view.InputView.createWinnerLotto;
-import static lotto.view.OutputView.printIssuedLottoes;
+import static lotto.view.InputView.inputMoney;
+import static lotto.view.InputView.inputWinnerLotto;
+import static lotto.view.OutputView.printLottoes;
 import static lotto.view.OutputView.printMessage;
-import static lotto.view.OutputView.printResult;
+import static lotto.view.OutputView.printStatistic;
 
 import java.util.List;
 import lotto.model.Lotto;
+import lotto.model.LottoGenerator;
 import lotto.model.LottoMachine;
 import lotto.model.Money;
 import lotto.model.RandomLottoGenerator;
 import lotto.model.Statistic;
+import lotto.model.WinnerLotto;
 import lotto.view.exception.LottoFinishedException;
 
 public class Application {
@@ -25,15 +27,24 @@ public class Application {
     }
 
     private static void run() {
-        Money money = createMoney();
-        List<Lotto> lottoes = issueLottoNumbers(money);
-        printIssuedLottoes(lottoes);
-        Statistic statistic = createWinnerLotto().summarize(lottoes, money);
-        printResult(statistic);
+        Money inputMoney = inputMoney();
+        List<Lotto> lottoes = issueLottoes(inputMoney);
+        printLottoes(lottoes);
+        WinnerLotto winnerLotto = inputWinnerLotto();
+        Statistic statistic = winnerLotto.summarize(lottoes, inputMoney);
+        printStatistic(statistic);
     }
 
-    private static List<Lotto> issueLottoNumbers(Money inputMoney) {
-        LottoMachine lottoMachine = new LottoMachine(new RandomLottoGenerator(1, 45));
-        return lottoMachine.issueLotto(inputMoney);
+    private static List<Lotto> issueLottoes(Money inputMoney) {
+        return lottoMachine().issueLotto(inputMoney);
     }
+
+    private static LottoMachine lottoMachine() {
+        return new LottoMachine(lottoGenerator());
+    }
+
+    private static LottoGenerator lottoGenerator() {
+        return new RandomLottoGenerator(1, 45);
+    }
+
 }
