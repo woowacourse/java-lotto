@@ -11,8 +11,8 @@ public class LottoResult {
         this.ranks = ranks;
     }
 
-    public double calculateYield(Amount amount) {
-        int price = amount.getPrice();
+    public double calculateYield(Money money) {
+        int price = money.getPrice();
         int totalPrizeMoney = 0;
 
         for (Rank rank : ranks.keySet()) {

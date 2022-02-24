@@ -14,7 +14,7 @@ class LottoMachineTest {
         LottoMachine lottoMachine = new LottoMachine();
 
         // when & then
-        assertThatCode(() -> lottoMachine.purchase(Amount.create("14000")))
+        assertThatCode(() -> lottoMachine.purchase(new Money(14000)))
                 .doesNotThrowAnyException();
     }
 }

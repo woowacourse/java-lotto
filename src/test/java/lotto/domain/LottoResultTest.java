@@ -2,7 +2,6 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,10 +16,10 @@ class LottoResultTest {
 
         LottoResult lottoResult = new LottoResult(ranks);
 
-        Amount amount = Amount.create("14000");
+        Money money = new Money(14000);
 
         // when
-        double result = lottoResult.calculateYield(amount);
+        double result = lottoResult.calculateYield(money);
 
         // then
         assertThat(Math.floor(result * 100) / 100).isEqualTo(0.35);

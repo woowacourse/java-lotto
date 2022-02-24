@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import lotto.domain.Amount;
+import lotto.domain.Money;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTickets;
@@ -19,9 +19,9 @@ public class LottoController {
 
         LottoMachine lottoMachine = new LottoMachine();
 
-        Amount amount = createAmount(scanner);
+        Money money = createMoney(scanner);
 
-        LottoTickets lottoTickets = createLottoTickets(lottoMachine, amount);
+        LottoTickets lottoTickets = createLottoTickets(lottoMachine, money);
 
         WinningNumbers winningNumbers = createWinningNumbers(scanner);
 
@@ -36,11 +36,11 @@ public class LottoController {
         System.out.println("5개 일치 (1500000원)-" + ranks.getOrDefault(Rank.THIRD, 0) + "개");
         System.out.println("5개 일치, 보너스 볼 일치(30000000원)-" + ranks.getOrDefault(Rank.SECOND, 0) + "개");
         System.out.println("6개 일치 (2000000000원)-" + ranks.getOrDefault(Rank.FIRST, 0) + "개");
-        System.out.printf("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", Math.floor(lottoResult.calculateYield(amount) * 100) / 100.0);
+        System.out.printf("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", Math.floor(lottoResult.calculateYield(money) * 100) / 100.0);
     }
 
-    private LottoTickets createLottoTickets(LottoMachine lottoMachine, Amount amount) {
-        LottoTickets lottoTickets = lottoMachine.purchase(amount);
+    private LottoTickets createLottoTickets(LottoMachine lottoMachine, Money money) {
+        LottoTickets lottoTickets = lottoMachine.purchase(money);
 
         System.out.println(lottoTickets.totalCount() + "개를 구매했습니다.");
         System.out.println(lottoTickets.getTicketsInfo());
@@ -48,9 +48,9 @@ public class LottoController {
         return lottoTickets;
     }
 
-    private Amount createAmount(Scanner scanner) {
+    private Money createMoney(Scanner scanner) {
         System.out.println("구입금액을 입력해 주세요.");
-        return Amount.create(scanner.nextLine());
+        return new Money(scanner.nextInt());
     }
 
     private WinningNumbers createWinningNumbers(Scanner scanner) {
