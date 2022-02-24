@@ -68,3 +68,14 @@
 ### Controller
 
 * `LottoController`: Lotto를 제어하기 위한 Controller이다. domain과 view사이에 위치하여 제어를 진행한다.
+
+## Domain 사이의 협력
+
+### 로또 구매 및 로또 번호 자동 생성 과정
+![](https://user-images.githubusercontent.com/59357153/155471963-8f9de359-d8e4-4c35-9311-5622980726dc.png)
+
+### 당첨 번호 및 보너스볼 등록 과정
+![](https://user-images.githubusercontent.com/59357153/155472031-f79b29b6-09ee-4315-a160-3ed66d8e92e4.png)
+
+### 당첨 결과 및 통계 과정
+![](https://user-images.githubusercontent.com/59357153/155472179-1f21639e-f48e-48eb-ae7a-b99532d6c6da.png)
