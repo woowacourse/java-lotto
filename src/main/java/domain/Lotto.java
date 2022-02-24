@@ -19,6 +19,10 @@ public class Lotto {
         return amount.getAmountDividedByLottoPrice();
     }
 
+    public Tickets getTickets() {
+        return tickets;
+    }
+
     public Map<Rank, Integer> getResult(WinningNumbers winningNumbers) {
         return tickets.getResult(winningNumbers);
     }
@@ -27,7 +31,4 @@ public class Lotto {
         return tickets.getYield(amount, winningNumbers);
     }
 
-    public Tickets getTickets() {
-        return tickets;
-    }
 }
