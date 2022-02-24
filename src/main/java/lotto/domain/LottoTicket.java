@@ -11,13 +11,10 @@ public class LottoTicket {
     }
 
     public Rank compareNumbers(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
-        int total = 0;
-        for (LottoNumber number : numbers) {
-            if (winningNumbers.contains(number)) {
-                total++;
-            }
-        }
-        return getRank(bonusNumber, total);
+        int totalMatchNumber = (int) numbers.stream()
+                .filter(winningNumbers::contains)
+                .count();
+        return getRank(bonusNumber, totalMatchNumber);
     }
 
     private Rank getRank(LottoNumber bonusNumber, int total) {
@@ -26,7 +23,7 @@ public class LottoTicket {
         }
         return Rank.matchResult(total);
     }
-    
+
     public List<LottoNumber> getNumbers() {
         return numbers;
     }

@@ -31,12 +31,16 @@ public class OutputView {
         System.out.println("당첨 통계");
         System.out.println("---------");
         for (Rank rank : statistics.keySet()) {
-            if (rank.getMatchCount() != 0) {
-                System.out.println(
-                        rank.getMatchStatus() + " (" + rank.getReward() + "원) - " + statistics.get(rank) + "개");
-            }
+            displayStatistics(statistics, rank);
         }
         System.out.println("총 수익률은 " + calculateYield + "입니다." + isLoss(calculateYield));
+    }
+
+    private static void displayStatistics(EnumMap<Rank, Integer> statistics, Rank rank) {
+        if (rank.getMatchCount() != 0) {
+            System.out.println(
+                    rank.getMatchStatus() + " (" + rank.getReward() + "원) - " + statistics.get(rank) + "개");
+        }
     }
 
     private static String isLoss(double calculateYield) {
