@@ -4,12 +4,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+import lotto.exception.LottoException;
+import lotto.exception.ticket.TicketNumbersExceptionStatus;
+
 public class TicketValidator {
 
     private static final int TICKET_DEFAULT_SIZE = 6;
-    private static final String TICKET_NULL_POINTER_EXCEPTION_MESSAGE = "숫자 요소는 NULL이 아니어야 합니다.";
-    private static final String TICKET_OUT_OF_SIZE_EXCEPTION_MESSAGE = "숫자 요소는 6개여야 합니다.";
-    private static final String TICKET_NUMBERS_DUPLICATED_EXCEPTION_MESSAGE = "숫자 요소는 중복될 수 없습니다.";
 
     private static final TicketValidator INSTANCE = new TicketValidator();
 
@@ -24,19 +24,19 @@ public class TicketValidator {
 
     private void validateTicketIsNull(final List<Integer> numbers) {
         if (Objects.isNull(numbers)) {
-            throw new IllegalArgumentException(TICKET_NULL_POINTER_EXCEPTION_MESSAGE);
+            throw new LottoException(TicketNumbersExceptionStatus.NUMBERS_IS_NULL);
         }
     }
 
     private void validateTicketIsOutOfSize(final List<Integer> numbers) {
         if (numbers.size() != TICKET_DEFAULT_SIZE) {
-            throw new IllegalArgumentException(TICKET_OUT_OF_SIZE_EXCEPTION_MESSAGE);
+            throw new LottoException(TicketNumbersExceptionStatus.NUMBERS_OUT_OF_SIZE);
         }
     }
 
     private void validateNumbersDuplicated(final List<Integer> numbers) {
         if (isNumberDuplicated(numbers)) {
-            throw new IllegalArgumentException(TICKET_NUMBERS_DUPLICATED_EXCEPTION_MESSAGE);
+            throw new LottoException(TicketNumbersExceptionStatus.NUMBERS_DUPLICATED);
         }
     }
 

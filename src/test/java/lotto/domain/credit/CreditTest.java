@@ -2,6 +2,8 @@ package lotto.domain.credit;
 
 import static org.assertj.core.api.Assertions.*;
 
+import lotto.exception.LottoException;
+import lotto.exception.credit.CreditMoneyExceptionStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +14,8 @@ class CreditTest {
     void moneyIsDivisibleExceptionTest() {
         final int money = 1410;
         assertThatThrownBy(() -> new Credit(money))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(LottoException.class)
+                .hasMessageContaining(CreditMoneyExceptionStatus.MONEY_IS_NOT_DIVISIBLE.getMessage());
 
     }
 

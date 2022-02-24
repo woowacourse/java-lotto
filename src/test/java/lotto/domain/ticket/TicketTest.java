@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import lotto.domain.rank.Rank;
+import lotto.exception.LottoException;
+import lotto.exception.ticket.TicketNumbersExceptionStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -21,7 +23,8 @@ class TicketTest {
 	@NullSource
 	void ticketNullExceptionTest(final List<Integer> numbers) {
 		assertThatThrownBy(() -> new Ticket(numbers))
-			.isInstanceOf(IllegalArgumentException.class);
+				.isInstanceOf(LottoException.class)
+				.hasMessageContaining(TicketNumbersExceptionStatus.NUMBERS_IS_NULL.getMessage());
 	}
 
 	@DisplayName("숫자 요소는 6개여야 합니다.")
@@ -29,7 +32,8 @@ class TicketTest {
 	@MethodSource("provideForNumbersOutOfSizeExceptionTest")
 	void ticketOutOfSizeExceptionTest(final List<Integer> numbers) {
 		assertThatThrownBy(() -> new Ticket(numbers))
-				.isInstanceOf(IllegalArgumentException.class);
+				.isInstanceOf(LottoException.class)
+				.hasMessageContaining(TicketNumbersExceptionStatus.NUMBERS_OUT_OF_SIZE.getMessage());
 	}
 
 	public static Stream<Arguments> provideForNumbersOutOfSizeExceptionTest() {
@@ -45,7 +49,8 @@ class TicketTest {
 	@MethodSource("provideForNumbersDuplicatedExceptionTest")
 	void ticketNumbersDuplicatedExceptionTest(final List<Integer> numbers) {
 		assertThatThrownBy(() -> new Ticket(numbers))
-				.isInstanceOf(IllegalArgumentException.class);
+				.isInstanceOf(LottoException.class)
+				.hasMessageContaining(TicketNumbersExceptionStatus.NUMBERS_DUPLICATED.getMessage());
 	}
 
 	public static Stream<Arguments> provideForNumbersDuplicatedExceptionTest() {

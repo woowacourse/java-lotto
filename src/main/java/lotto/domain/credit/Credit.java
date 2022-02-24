@@ -1,9 +1,11 @@
 package lotto.domain.credit;
 
+import lotto.exception.LottoException;
+import lotto.exception.credit.CreditMoneyExceptionStatus;
+
 public class Credit {
 
     private static final int CREDIT_BASE_UNIT = 1000;
-    private static final String CREDIT_NOT_DIVISIBLE_EXCEPTION_MESSAGE = "구입 금액은 1000으로 나누어 떨어져야 합니다.";
 
     private final int money;
 
@@ -14,7 +16,7 @@ public class Credit {
 
     private void validateMoneyIsDivisible(final int money) {
         if (money % CREDIT_BASE_UNIT != 0) {
-            throw new IllegalArgumentException(CREDIT_NOT_DIVISIBLE_EXCEPTION_MESSAGE);
+            throw new LottoException(CreditMoneyExceptionStatus.MONEY_IS_NOT_DIVISIBLE);
         }
     }
 

@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
+import lotto.exception.LottoException;
+import lotto.exception.ball.BallNumberExceptionStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -16,7 +18,8 @@ class BallTest {
     @ValueSource(ints = {-2, -1, 0, 46, 47, 48})
     void rangeOutExceptionTest(final int number) {
         assertThatThrownBy(() -> new Ball(number))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(LottoException.class)
+                .hasMessageContaining(BallNumberExceptionStatus.BALL_IS_NOT_IN_RANGE.getMessage());
     }
 
     @DisplayName("생성자 기능 테스트")

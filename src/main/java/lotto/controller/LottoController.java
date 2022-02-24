@@ -18,7 +18,7 @@ public class LottoController {
 	}
 
 	private void announceTickets() {
-		final int payment = InputView.getPayment();
+		final int payment = InputView.requestCreditMoney();
 		lottoService.initPayment(payment);
 		lottoService.generateTickets();
 
@@ -27,8 +27,8 @@ public class LottoController {
 	}
 
 	private void announceAnalysis() {
-		final List<Integer> answer = InputView.getAnswerNumbers();
-		final int number = InputView.getBonusBall();
+		final List<Integer> answer = InputView.requestWinningNumbers();
+		final int number = InputView.requestBonusNumber();
 
 		final AnalysisDto analysisDto = lottoService.generateAnalysis(answer, number);
 		OutputView.printAnalysis(analysisDto);
