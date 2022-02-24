@@ -4,12 +4,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+import lotto.domain.ticket.condition.TicketSize;
 import lotto.exception.LottoException;
 import lotto.exception.ticket.TicketNumbersExceptionStatus;
 
 public class TicketValidator {
-
-    private static final int TICKET_DEFAULT_SIZE = 6;
 
     private static final TicketValidator INSTANCE = new TicketValidator();
 
@@ -29,7 +28,7 @@ public class TicketValidator {
     }
 
     private void validateTicketIsOutOfSize(final List<Integer> numbers) {
-        if (numbers.size() != TICKET_DEFAULT_SIZE) {
+        if (TicketSize.DEFAULT_SIZE.doesNotMatch(numbers.size())) {
             throw new LottoException(TicketNumbersExceptionStatus.NUMBERS_OUT_OF_SIZE);
         }
     }
