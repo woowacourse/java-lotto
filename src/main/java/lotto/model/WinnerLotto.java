@@ -1,7 +1,7 @@
 package lotto.model;
 
-import lotto.model.exception.DuplicatedNumberException;
 import java.util.List;
+import lotto.model.exception.DuplicatedNumberException;
 
 public class WinnerLotto {
 
@@ -17,11 +17,11 @@ public class WinnerLotto {
     }
 
     public Statistic summarize(List<Lotto> lottoes, Money inputMoney) {
-        Statistic result = new Statistic(inputMoney);
-        lottoes.stream()
-            .map(this::getRankBy)
-            .forEach(result::addRank);
-        return result;
+        Statistic statistic = new Statistic(inputMoney);
+        for (Lotto lotto : lottoes) {
+            statistic.addRank(getRankBy(lotto));
+        }
+        return statistic;
     }
 
     private Rank getRankBy(Lotto lotto) {
