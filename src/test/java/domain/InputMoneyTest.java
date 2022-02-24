@@ -20,11 +20,19 @@ public class InputMoneyTest {
         assertThat(inputMoney.getMoney()).isEqualTo(money);
     }
 
-    @ParameterizedTest(name = "{0}원 입력 시, IAE 발생")
-    @ValueSource(ints = {999, -1, 0, 1111})
-    void createInputMoneyWithInvalidMoneyShouldFail(int money) {
-        assertThatThrownBy(() -> new InputMoney(money))
+    @ParameterizedTest(name = "1000 보다 작은 숫자 전달 시 IAE 발생 - {0}")
+    @ValueSource(ints = {-1000, 0, 1, 999})
+    void createInputMoneyWithSmallerThan1000ShouldFail(int input) {
+        assertThatThrownBy(() -> new InputMoney(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageMatching("금액은 1000원 이상, 1000원 단위로 입력해주세요");
+                .hasMessage("1000 보다 작은 금액을 입력할 수 없습니다.");
+    }
+
+    @ParameterizedTest(name = "1000 으로 나누어 떨어지지 않는 숫자 전달 시 IAE 발생 - {0}")
+    @ValueSource(ints = {1500, 2001})
+    void createInputMoneyWithNotMultipleOf1000ShouldFail(int input) {
+        assertThatThrownBy(() -> new InputMoney(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("1000으로 나누어 떨어지지 않는 금액을 입력할 수 없습니다.");
     }
 }

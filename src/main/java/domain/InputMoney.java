@@ -3,26 +3,30 @@ package domain;
 import java.util.Objects;
 
 public class InputMoney {
-    private static final String ERROR_MESSAGE_FOR_INVALID_INPUT_MONEY = "금액은 1000원 이상, 1000원 단위로 입력해주세요";
-    private static final int MINIMUM_MONEY = 1000;
+    public static final String ERROR_MESSAGE_FOR_MINIMUM_NUMBER = "1000 보다 작은 금액을 입력할 수 없습니다.";
+    public static final String ERROR_MESSAGE_FOR_MULTIPLE_OF_UNIT = "1000으로 나누어 떨어지지 않는 금액을 입력할 수 없습니다.";
+    private static final int MINIMUM_INPUT_MONEY = 1000;
     private static final int INPUT_MONEY_UNIT = 1000;
     private static final int REMAIN = 0;
 
     private final int money;
 
     public InputMoney(int money) {
-        validate(money);
+        validateMinimum(money);
+        validateMultiple(money);
         this.money = money;
     }
 
-    private void validate(int money) {
-        if (isInvalidInputMoney(money)) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_FOR_INVALID_INPUT_MONEY);
+    private void validateMinimum(int money) {
+        if (money < MINIMUM_INPUT_MONEY) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_FOR_MINIMUM_NUMBER);
         }
     }
 
-    private boolean isInvalidInputMoney(int money) {
-        return money < MINIMUM_MONEY || money % INPUT_MONEY_UNIT != REMAIN;
+    private void validateMultiple(int money) {
+        if (money % INPUT_MONEY_UNIT != REMAIN) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_FOR_MULTIPLE_OF_UNIT);
+        }
     }
 
     public int getMoney() {
