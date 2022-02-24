@@ -16,16 +16,18 @@ import dto.RanksDto;
 import domain.*;
 import dto.LottosDto;
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 6a49a84 (feat: 로또 구매 및 당첨번호 세팅 기능 구현)
 =======
 import dto.RankDto;
 <<<<<<< HEAD
 >>>>>>> 2821995 (feat: 결과 출력 기능 구현)
 =======
+=======
+>>>>>>> 94c4d43 (style: 코드 포멧팅)
 import dto.RanksDto;
 >>>>>>> 6741479 (feat: 수익률 계산 로직 및 출력 기능 구현)
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoController {

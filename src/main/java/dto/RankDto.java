@@ -21,10 +21,14 @@ public class RankDto {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     static RankDto from(Rank rank, int hitCount) {
         return new RankDto(rank.getRankNumber(), rank.getCriteria(), rank.getReward(), hitCount);
 =======
     public static RankDto from(Rank rank, int rankNumber){
+=======
+    public static RankDto from(Rank rank, int rankNumber) {
+>>>>>>> 94c4d43 (style: 코드 포멧팅)
         return new RankDto(rankNumber, rank.getCriteria(), rank.getReward(), rank.getHitCount());
 >>>>>>> 2821995 (feat: 결과 출력 기능 구현)
     }

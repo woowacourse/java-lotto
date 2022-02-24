@@ -42,7 +42,7 @@ public class LottoDto {
         this.lottoNumber = lottoNumber;
     }
 
-    public static LottoDto from(List<LottoNumber> lottoNumbers){
+    public static LottoDto from(List<LottoNumber> lottoNumbers) {
         List<Integer> numbers = lottoNumbers.stream()
                 .map(LottoNumber::number)
                 .collect(Collectors.toUnmodifiableList());

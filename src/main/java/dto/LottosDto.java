@@ -34,8 +34,12 @@ public class LottosDto {
         this.quantity = lottoDtos.size();
     }
 
+<<<<<<< HEAD
     public static LottosDto from(List<Lotto> lottos){
 >>>>>>> f80fb84 (feat: DTO 추가)
+=======
+    public static LottosDto from(List<Lotto> lottos) {
+>>>>>>> 94c4d43 (style: 코드 포멧팅)
         List<LottoDto> lottoDtos = new ArrayList<>();
         for (Lotto lotto : lottos) {
             LottoDto lottoDto = LottoDto.from(lotto.getLotto());

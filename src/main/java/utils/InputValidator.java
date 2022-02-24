@@ -7,6 +7,7 @@ public class InputValidator {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     public static void validateNull(String purchaseAmount) {
         if (purchaseAmount == null) {
 =======
@@ -16,6 +17,10 @@ public class InputValidator {
 >>>>>>> 701f681 (refactor: 입력 유효성 검사 static으로 변경 및 적용)
         if(purchaseAmount == null){
 >>>>>>> 1f14e05 (feat: Money 객체 생성)
+=======
+    public static void validateNull(String purchaseAmount) {
+        if (purchaseAmount == null) {
+>>>>>>> 94c4d43 (style: 코드 포멧팅)
             throw new NullPointerException(INPUT_IS_NULL);
         }
     }

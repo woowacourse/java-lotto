@@ -16,8 +16,12 @@ public class Result {
     private final int hitCount;
     private final boolean isHitBonusBall;
 
+<<<<<<< HEAD
     public Result(int hitCount, boolean isHitBonusBall){
 >>>>>>> ed345ef (feat: 보너스볼 판정 로직 및 Result 객체 구현)
+=======
+    public Result(int hitCount, boolean isHitBonusBall) {
+>>>>>>> 94c4d43 (style: 코드 포멧팅)
         this.hitCount = hitCount;
         this.isHitBonusBall = isHitBonusBall;
     }

@@ -33,6 +33,7 @@ public class Application {
         OutputView.printPurchasedLotto(lottosDto);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         List<String> winningNumber = InputView.inputWinningNumber();
         int bonusBall = InputView.inputBonusBall();
         lottoController.determineWinningNumber(winningNumber,bonusBall);
@@ -55,8 +56,11 @@ public class Application {
 >>>>>>> 6741479 (feat: 수익률 계산 로직 및 출력 기능 구현)
 =======
         lottoController.determineWinningNumber(InputView.inputWinningNumber(),InputView.inputBonusBall());
+=======
+        lottoController.determineWinningNumber(InputView.inputWinningNumber(), InputView.inputBonusBall());
+>>>>>>> 94c4d43 (style: 코드 포멧팅)
 
-        List<Result> results =lottoController.judgeLottos();
+        List<Result> results = lottoController.judgeLottos();
         OutputView.printResult(lottoController.makeResult(results));
 >>>>>>> 7eb4fa3 (refactor: 프린트 할 결과물 생성 로직 변경)
     }
