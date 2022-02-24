@@ -1,18 +1,25 @@
 package lotto.domain;
 
 import java.util.Collections;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class LottoStatistics {
 
-    private final Map<LottoRank, Long> map;
+    private final Map<LottoRank, Long> map = new EnumMap<>(LottoRank.class);
 
     public LottoStatistics(List<LottoRank> ranks) {
-        this.map = ranks.stream()
-            .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        for (LottoRank rank : LottoRank.values()) {
+            long rankCount = findRankCount(ranks, rank);
+            map.put(rank, rankCount);
+        }
+    }
+
+    private long findRankCount(List<LottoRank> ranks, LottoRank rank) {
+        return ranks.stream()
+            .filter(win -> win != LottoRank.SIXTH && win == rank)
+            .count();
     }
 
     public long count(LottoRank rank) {
@@ -20,7 +27,8 @@ public class LottoStatistics {
     }
 
     public double calculateEarningRates(Money money) {
-        long sum = map.entrySet().stream().mapToLong(x -> x.getKey().getPrize() * x.getValue()).sum();
+        long sum = map.entrySet().stream().mapToLong(x -> x.getKey().getPrize() * x.getValue())
+            .sum();
         return (double) sum / money.getAmount();
     }
 

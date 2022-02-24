@@ -3,23 +3,21 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum LottoRank {
-    FIRST(2_000_000_000, 6, false),
-    SECOND(30_000_000, 5, true),
-    THIRD(1_500_000, 5, false),
-    FOURTH(50_000, 4, false),
-    FIFTH(5_000, 3, false),
-    SIXTH(0, 0, false);
+    SIXTH(0, 0),
+    FIFTH(5_000, 3),
+    FOURTH(50_000, 4),
+    THIRD(1_500_000, 5),
+    SECOND(30_000_000, 5),
+    FIRST(2_000_000_000, 6);
 
     private static final int SPECIAL_CASE = 5;
 
     private final int prize;
     private final int matchCount;
-    private final boolean isBonus;
 
-    LottoRank(int prize, int matchCount, boolean isBonus) {
+    LottoRank(int prize, int matchCount) {
         this.prize = prize;
         this.matchCount = matchCount;
-        this.isBonus = isBonus;
     }
 
     public static LottoRank find(int matchCount, boolean isBonusBall) {
