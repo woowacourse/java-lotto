@@ -40,12 +40,21 @@ public class LotteryGame {
 		return lotteries.getTheNumberOfWinners(winningLottery);
 	}
 
-	public double makeRankingPercent(final Map<Rank, Integer> rankResult) {
-		int incomeRate = 0;
+	public double makeReturnRate(final Map<Rank, Integer> rankResult) {
+		int totalReturn = getTotalReturn(rankResult);
+		return calculateReturnRate(totalReturn);
+	}
+
+	private int getTotalReturn(Map<Rank, Integer> rankResult) {
+		int totalReturn = 0;
 		for (Rank rank : rankResult.keySet()) {
-			incomeRate += rankResult.get(rank) * rank.getPrize();
+			totalReturn += rankResult.get(rank) * rank.getPrize();
 		}
-		return (double)incomeRate / (theNumberOfLottery * LOTTERY_PRICE);
+		return totalReturn;
+	}
+
+	private double calculateReturnRate(final double totalReturn) {
+		return totalReturn / (theNumberOfLottery * LOTTERY_PRICE);
 	}
 
 	public List<Lottery> getLotteries() {

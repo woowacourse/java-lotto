@@ -51,7 +51,7 @@ public class LotteryGameTest {
 		lotteryGame.createWinningLottery(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 		//when
 		Map<Rank, Integer> rankResult = lotteryGame.makeWinner();
-		double percent = lotteryGame.makeRankingPercent(rankResult);
+		double percent = lotteryGame.makeReturnRate(rankResult);
 		//then
 		assertThat(percent).isEqualTo((double)2031555000 / (6 * 1000));
 	}

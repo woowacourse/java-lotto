@@ -21,7 +21,7 @@ public class LotteryGameController {
 
 	public void makeResult() {
 		Map<Rank, Integer> ranking = lotteryGame.makeWinner();
-		double incomePercent = lotteryGame.makeRankingPercent(ranking);
+		double incomePercent = lotteryGame.makeReturnRate(ranking);
 		OutputView.printStatistics(ranking, incomePercent);
 	}
 
