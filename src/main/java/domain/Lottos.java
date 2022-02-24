@@ -10,7 +10,7 @@ public class Lottos {
 		this.lottos = lottos;
 	}
 
-	public List<Rank> calculateRank(WinningLotto winningLotto){
+	public List<Rank> calculateRank(WinningLotto winningLotto) {
 		return lottos.stream()
 			.map(lotto -> winningLotto.calculateRank(lotto))
 			.collect(Collectors.toUnmodifiableList());
