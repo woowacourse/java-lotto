@@ -78,21 +78,21 @@ public class LottoController {
         winningLotto = new WinningLotto(lottoNumbers, new LottoNumber(bonusBall));
     }
 
-    public RanksDto makeResult(){
-        List<RankDto> rankDtos = calculateRank();
-        double incomeRate = calculateIncomeRate(rankDtos);
-        return new RanksDto(rankDtos,incomeRate);
+    public List<Result> judgeLottos() {
+        return player.judgeAll(winningLotto);
     }
 
-    private List<RankDto> calculateRank() {
-        List<Result> results = player.judgeAll(winningLotto);
-        Rank.calculateAllResult(results);
+    public RanksDto makeResult(List<Result> judgeLottos) {
+        double totalIncome = Rank.calculateAllResult(judgeLottos);
+        double incomeRate = player.calculateIncomeRate(totalIncome);
+
         List<RankDto> rankDtos = new ArrayList<>();
         int rankNumber = 5;
 
         for (Rank rank : Rank.values()) {
             rankDtos.add(RankDto.from(rank, rankNumber--));
         }
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> 20bb1bf (feat: 2,3등은 보너스볼과 일치하는 숫자의 갯수를 기준으로, 나머지 등수는 일치하는 숫자의 갯수만으로 등수를 판정하는 로직 구현)
 =======
@@ -106,5 +106,8 @@ public class LottoController {
             totalIncome += rankDto.getReward() * rankDto.getHitCount();
         }
         return totalIncome / player.getMoney();
+=======
+        return new RanksDto(rankDtos, incomeRate);
+>>>>>>> 7eb4fa3 (refactor: 프린트 할 결과물 생성 로직 변경)
     }
 }

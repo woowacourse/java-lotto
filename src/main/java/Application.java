@@ -1,10 +1,13 @@
 import controller.LottoController;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import domain.Result;
 =======
 >>>>>>> 6a49a84 (feat: 로또 구매 및 당첨번호 세팅 기능 구현)
+=======
+import domain.Result;
+>>>>>>> 7eb4fa3 (refactor: 프린트 할 결과물 생성 로직 변경)
 import dto.LottosDto;
-import dto.RanksDto;
 import view.InputView;
 import view.OutputView;
 
@@ -26,10 +29,10 @@ public class Application {
 =======
         LottoController lottoController = new LottoController();
 
-        int purchaseAmount = InputView.inputPurchaseAmount();
-        LottosDto lottosDto = lottoController.purchase(purchaseAmount);
+        LottosDto lottosDto = lottoController.purchase(InputView.inputPurchaseAmount());
         OutputView.printPurchasedLotto(lottosDto);
 
+<<<<<<< HEAD
         List<String> winningNumber = InputView.inputWinningNumber();
         int bonusBall = InputView.inputBonusBall();
         lottoController.determineWinningNumber(winningNumber,bonusBall);
@@ -50,5 +53,11 @@ public class Application {
         RanksDto result = lottoController.makeResult();
         OutputView.printResult(result);
 >>>>>>> 6741479 (feat: 수익률 계산 로직 및 출력 기능 구현)
+=======
+        lottoController.determineWinningNumber(InputView.inputWinningNumber(),InputView.inputBonusBall());
+
+        List<Result> results =lottoController.judgeLottos();
+        OutputView.printResult(lottoController.makeResult(results));
+>>>>>>> 7eb4fa3 (refactor: 프린트 할 결과물 생성 로직 변경)
     }
 }
