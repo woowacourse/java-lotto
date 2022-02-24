@@ -32,6 +32,10 @@ public class LottoService {
                 .forEach(lottoMatchKind -> result.put(lottoMatchKind, 0));
     }
 
+    public int getCountOfLottoNumbers() {
+        return purchaseAmount.getCountOfLottoNumbers(LOTTO_PRICE);
+    }
+
     public Map<LottoMatchKind, Integer> getMatchResult(final List<String> targetNumbers, final String bonusNumber) {
         final LottoNumbers targetLottoNumbers = new LottoNumbers(targetNumbers);
         final LottoNumber bonusLottoNumber = LottoNumber.from(bonusNumber);

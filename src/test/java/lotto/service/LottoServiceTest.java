@@ -22,9 +22,15 @@ class LottoServiceTest {
     private final List<String> targetNumbers = Arrays.asList("2", "3", "4", "5", "6", "7");
     private final String bonusNumber = "1";
 
-    @BeforeEach
-    void setUp() {
-
+    @Test
+    @DisplayName("구매 개수를 반환한다.")
+    void getCountOfLottoNumbers() {
+        //
+        final int expected = 5;
+        //when
+        final int actual = lottoService.getCountOfLottoNumbers();
+        //then
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
