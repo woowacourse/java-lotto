@@ -11,25 +11,34 @@ import lotto.domain.LottoResult;
 import lotto.domain.LottoTickets;
 import lotto.domain.Rank;
 import lotto.domain.WinningNumbers;
+import lotto.view.InputView;
+import lotto.view.OutputView;
 
 public class LottoController {
 
-    public void run() {
-        Scanner scanner = new Scanner(System.in);
+    private final InputView inputView;
+    private final OutputView outputView;
 
+    public LottoController(InputView inputView, OutputView outputView) {
+        this.inputView = inputView;
+        this.outputView = outputView;
+    }
+
+    public void run() {
         LottoMachine lottoMachine = new LottoMachine();
 
-        Money money = createMoney(scanner);
+        Money money = createMoney();
 
         LottoTickets lottoTickets = createLottoTickets(lottoMachine, money);
 
-        WinningNumbers winningNumbers = createWinningNumbers(scanner);
+        WinningNumbers winningNumbers = createWinningNumbers(new Scanner(System.in));
 
-        System.out.println();
-        System.out.println("당첨 통계");
-        System.out.println("---------");
-        LottoResult lottoResult = lottoTickets.determine(winningNumbers);
+        LottoResult lottoResult = getLottoResult(lottoTickets, winningNumbers);
 
+        getYield(money, lottoResult);
+    }
+
+    private void getYield(Money money, LottoResult lottoResult) {
         Map<Rank, Integer> ranks = lottoResult.getRanks();
         System.out.println("3개 일치 (5000원)-" + ranks.getOrDefault(Rank.FIFTH, 0) + "개");
         System.out.println("4개 일치 (50000원)-" + ranks.getOrDefault(Rank.FORTH, 0) + "개");
@@ -37,6 +46,14 @@ public class LottoController {
         System.out.println("5개 일치, 보너스 볼 일치(30000000원)-" + ranks.getOrDefault(Rank.SECOND, 0) + "개");
         System.out.println("6개 일치 (2000000000원)-" + ranks.getOrDefault(Rank.FIRST, 0) + "개");
         System.out.printf("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", Math.floor(lottoResult.calculateYield(money) * 100) / 100.0);
+    }
+
+    private LottoResult getLottoResult(LottoTickets lottoTickets, WinningNumbers winningNumbers) {
+        System.out.println();
+        System.out.println("당첨 통계");
+        System.out.println("---------");
+        LottoResult lottoResult = lottoTickets.determine(winningNumbers);
+        return lottoResult;
     }
 
     private LottoTickets createLottoTickets(LottoMachine lottoMachine, Money money) {
@@ -48,9 +65,14 @@ public class LottoController {
         return lottoTickets;
     }
 
-    private Money createMoney(Scanner scanner) {
-        System.out.println("구입금액을 입력해 주세요.");
-        return new Money(scanner.nextInt());
+    private Money createMoney() {
+        try {
+            return new Money(inputView.getMoney());
+        } catch(RuntimeException e) {
+            outputView.printErrorMessage(e.getMessage());
+
+            return createMoney();
+        }
     }
 
     private WinningNumbers createWinningNumbers(Scanner scanner) {
