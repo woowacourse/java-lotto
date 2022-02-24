@@ -1,7 +1,7 @@
 # 🚀 로또 1단계 - 자동
 
 ## 페어 프로그래밍 규칙
-* Java Style Guide: 우아한테크코스의 자바 스타일 가이드
+* Java Style Guide: [우아한테크코스의 자바 스타일 가이드](https://github.com/woowacourse/woowacourse-docs/tree/master/styleguide/java)
 * TDD를 적극 도입한다.
 * 비즈니스 로직에서 null을 허용하지 않는다.
 * 교대는 10분마다 진행한다.
@@ -59,3 +59,12 @@
 
 * `LottoResult`: 로또 수익률 계산의 책임을 가지는 객체이다.
   * [x] 구입 금액이 주어지면 수익률을 계산하여 반환한다.
+
+### View
+
+* `InputView`: 입력의 책임을 가지고 있다.
+* `OutputView`: 출력에 대한 책임을 가지고 있다. 출력 양식에 맞춰 문자열을 가공하고 출력한다.
+
+### Controller
+
+* `LottoController`: Lotto를 제어하기 위한 Controller이다. domain과 view사이에 위치하여 제어를 진행한다.
