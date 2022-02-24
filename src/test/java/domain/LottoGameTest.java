@@ -10,7 +10,8 @@ public class LottoGameTest {
     @Test
     @DisplayName("로또 게임을 생성하는 경우")
     void createLottoGame() {
-        int money = 5000;
+        int amount = 5000;
+        Money money = new Money(amount);
 
         LottoGame lottoGame = new LottoGame(money);
 
