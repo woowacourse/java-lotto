@@ -9,7 +9,7 @@ import view.InputView;
 import view.OutputView;
 
 public class LottoController {
-	private final LottoMachine lottoService = new LottoMachine();
+	private LottoMachine lottoMachine;
 
 	public void run() {
 		generateTickets();
@@ -18,10 +18,10 @@ public class LottoController {
 
 	private void generateTickets() {
 		int payment = InputView.getPayment();
-		lottoService.initPayment(payment);
-		lottoService.generateTickets();
+		lottoMachine = new LottoMachine(payment);
+		lottoMachine.generateTickets();
 
-		Tickets tickets = lottoService.getTickets();
+		Tickets tickets = lottoMachine.getTickets();
 		OutputView.printTickets(tickets);
 	}
 
@@ -29,7 +29,7 @@ public class LottoController {
 		List<Integer> answer = InputView.getAnswerNumbers();
 		int number = InputView.getBonusBall();
 
-		AnalysisDto analysisDto = lottoService.generateAnalysis(answer, number);
+		AnalysisDto analysisDto = lottoMachine.generateAnalysis(answer, number);
 		OutputView.printAnalysis(analysisDto);
 	}
 }

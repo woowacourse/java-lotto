@@ -13,9 +13,9 @@ public class LottoMachine {
 	private static final long INIT_TOTAL = 0L;
 
 	private Tickets tickets;
-	private int payment;
+	private final int payment;
 
-	public void initPayment(int payment) {
+	public LottoMachine(int payment) {
 		this.payment = payment;
 	}
 
