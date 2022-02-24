@@ -18,9 +18,9 @@ public class LotteryGeneratorTest {
 	@Test
 	@DisplayName("생성된 6개의 수가 고유한지 확인")
 	void checkDuplicatedNumber() {
-		final List<Integer> numbers = lotteryGenerator.getNumbers();
+		final List<LotteryNumber> numbers = lotteryGenerator.getNumbers();
 
-		final List<Integer> uniqueNumbers = numbers.stream()
+		final List<LotteryNumber> uniqueNumbers = numbers.stream()
 			.distinct()
 			.collect(Collectors.toList());
 
@@ -30,9 +30,9 @@ public class LotteryGeneratorTest {
 	@Test
 	@DisplayName("생성된 6개의 수가 정렬되어 있는지 확인")
 	void checkSortedNumber() {
-		final List<Integer> numbers = lotteryGenerator.getNumbers();
+		final List<LotteryNumber> numbers = lotteryGenerator.getNumbers();
 
-		final List<Integer> sortedNumbers = numbers.stream()
+		final List<LotteryNumber> sortedNumbers = numbers.stream()
 			.sorted()
 			.collect(Collectors.toList());
 

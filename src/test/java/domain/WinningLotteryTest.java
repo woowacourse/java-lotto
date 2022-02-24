@@ -14,9 +14,11 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import utils.Parser;
+
 public class WinningLotteryTest {
 
-	final List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+	final List<LotteryNumber> winningNumbers = Parser.toLotteryNumberList(Arrays.asList(1, 2, 3, 4, 5, 6));
 
 	@Nested
 	@DisplayName("보너스 볼의")
@@ -26,7 +28,7 @@ public class WinningLotteryTest {
 		@DisplayName("범위가 1~45 이면서 당첨번호와 중복이 없으면 통과")
 		void theNumberOfBonusBall() {
 			assertThatNoException().isThrownBy(() -> {
-				new WinningLottery(winningNumbers, 10);
+				new WinningLottery(winningNumbers, new LotteryNumber(10));
 			});
 		}
 
@@ -35,16 +37,16 @@ public class WinningLotteryTest {
 		@ValueSource(ints = {0, 46})
 		void invalidBonusBallRange(final int bonusBall) {
 			assertThatThrownBy(() -> {
-				new WinningLottery(winningNumbers, bonusBall);
+				new WinningLottery(winningNumbers, new LotteryNumber(bonusBall));
 			}).isInstanceOf(IllegalArgumentException.class)
-				.hasMessageContaining("보너스볼의 번호는 1~45 사이여야 합니다");
+				.hasMessageContaining("각 로또번호는 1~45 사이여야 합니다");
 		}
 
 		@Test
 		@DisplayName("중복이 있으면 실패")
 		void duplicatedBonusBallNumber() {
 			assertThatThrownBy(() -> {
-				new WinningLottery(winningNumbers, 1);
+				new WinningLottery(winningNumbers, new LotteryNumber(1));
 			}).isInstanceOf(IllegalArgumentException.class)
 				.hasMessageContaining("당첨번호와 보너스볼에 중복된 번호가 있으면 안됩니다.");
 		}
@@ -53,9 +55,9 @@ public class WinningLotteryTest {
 	@DisplayName("당첨번호, 보너스와 입력된 로또 번호를 비교해 올바른 등수를 확인")
 	@ParameterizedTest(name = "{index} {displayName} rank={0}")
 	@MethodSource("generateParameter")
-	void checkRank(List<Integer> lottoNumbers, Rank rank) {
+	void checkRank(List<LotteryNumber> lottoNumbers, Rank rank) {
 		//given
-		WinningLottery winningLottery = new WinningLottery(winningNumbers, 7);
+		WinningLottery winningLottery = new WinningLottery(winningNumbers, new LotteryNumber(7));
 		Lottery lottery = new Lottery(lottoNumbers);
 		//when
 		//then
@@ -64,12 +66,12 @@ public class WinningLotteryTest {
 
 	static Stream<Arguments> generateParameter() {
 		return Stream.of(
-			Arguments.of(Arrays.asList(1,2,3,4,5,6), Rank.FIRST),
-			Arguments.of(Arrays.asList(1,2,3,4,5,7), Rank.SECOND),
-			Arguments.of(Arrays.asList(1,2,3,4,5,8), Rank.THIRD),
-			Arguments.of(Arrays.asList(1,2,3,4,9,10), Rank.FOURTH),
-			Arguments.of(Arrays.asList(1,2,3,9,10,11), Rank.FIFTH),
-			Arguments.of(Arrays.asList(1,2,9,10,11,12), Rank.NONE)
+			Arguments.of(Parser.toLotteryNumberList(Arrays.asList(1,2,3,4,5,6)), Rank.FIRST),
+			Arguments.of(Parser.toLotteryNumberList(Arrays.asList(1,2,3,4,5,7)), Rank.SECOND),
+			Arguments.of(Parser.toLotteryNumberList(Arrays.asList(1,2,3,4,5,8)), Rank.THIRD),
+			Arguments.of(Parser.toLotteryNumberList(Arrays.asList(1,2,3,4,9,10)), Rank.FOURTH),
+			Arguments.of(Parser.toLotteryNumberList(Arrays.asList(1,2,3,9,10,11)), Rank.FIFTH),
+			Arguments.of(Parser.toLotteryNumberList(Arrays.asList(1,2,9,10,11,12)), Rank.NONE)
 		);
 	}
 }

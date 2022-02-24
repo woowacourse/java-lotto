@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import domain.LotteryNumber;
+
 public class LotteryRandomGeneratorStrategy implements LotteryGenerateFamily{
 
 	private static final int MAX_BOUND = 45;
@@ -17,11 +19,12 @@ public class LotteryRandomGeneratorStrategy implements LotteryGenerateFamily{
 		}
 	}
 
-	public List<Integer> getNumbers() {
+	public List<LotteryNumber> getNumbers() {
 		Collections.shuffle(numbers);
 		return numbers.stream()
 			.limit(6)
 			.sorted()
+			.map(LotteryNumber::new)
 			.collect(Collectors.toList());
 	}
 }

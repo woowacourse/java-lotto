@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import domain.Lottery;
+import domain.LotteryNumber;
 import domain.Rank;
 import utils.LotteryMessage;
 
@@ -33,8 +34,15 @@ public class OutputView {
 	}
 
 	public static void printLotteries(List<Lottery> lotteries) {
-		lotteries.forEach((lottery -> {
-			System.out.println(lottery.getNumbers().toString());
-		}));
+		lotteries.forEach(lottery -> printLotteryNumbers(lottery.getNumbers()));
+	}
+
+	private static void printLotteryNumbers(final List<LotteryNumber> lotteryNumbers) {
+		 String output =  lotteryNumbers.stream()
+			.map(LotteryNumber::getLotteryNumber)
+			.collect(Collectors.toList())
+			.toString();
+
+		System.out.println(output);
 	}
 }

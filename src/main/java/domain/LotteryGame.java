@@ -3,6 +3,7 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import domain.generatestrategy.LotteryGenerateFamily;
 
@@ -22,15 +23,18 @@ public class LotteryGame {
 	}
 
 	private void createAutoLottery() {
-		final List<List<Integer>> lotteriesNumber = new ArrayList<>();
+		final List<List<LotteryNumber>> lotteriesNumber = new ArrayList<>();
 		for (int i = 0; i < theNumberOfLottery; i++) {
 			lotteriesNumber.add(lotteryGenerator.getNumbers());
 		}
 		lotteries = new Lotteries(lotteriesNumber);
 	}
 
-	public void createWinningLottery(final List<Integer> winningNumbers, final int bonusBall) {
-		winningLottery = new WinningLottery(winningNumbers, bonusBall);
+	public void createWinningLottery(final List<Integer> winningNumbers, final Integer bonusBall) {
+		final List<LotteryNumber> winningLotteryNumbers = winningNumbers.stream()
+			.map(LotteryNumber::new)
+			.collect(Collectors.toList());
+		winningLottery = new WinningLottery(winningLotteryNumbers, new LotteryNumber(bonusBall));
 	}
 
 	public Map<Rank, Integer> makeWinner() {

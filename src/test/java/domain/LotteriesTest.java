@@ -17,7 +17,7 @@ public class LotteriesTest {
 	@ParameterizedTest(name = "{index} {displayName} lotteryNumber={0}")
 	@ValueSource(ints = {1, 100, 50})
 	void lotteries_number(final int lotteryNumber){
-		final List<List<Integer>> lotteriesNumber = new ArrayList<>();
+		final List<List<LotteryNumber>> lotteriesNumber = new ArrayList<>();
 		final LotteryRandomGeneratorStrategy lotteryGenerator = new LotteryRandomGeneratorStrategy();
 
 		for (int i = 0 ; i < lotteryNumber; i++) {
