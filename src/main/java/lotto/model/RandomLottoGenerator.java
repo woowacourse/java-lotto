@@ -24,6 +24,7 @@ public class RandomLottoGenerator implements LottoGenerator {
             .collect(toUnmodifiableList());
     }
 
+    @Override
     public Lotto createLotto() {
         List<Integer> shuffledList = shuffleNumberList();
         Queue<Integer> queue = queueFromShuffledList(shuffledList);
