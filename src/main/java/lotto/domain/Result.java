@@ -7,6 +7,7 @@ public class Result {
 
     private static final int INIT_COUNT = 0;
     private static final int ADD_NUMBER = 1;
+    private static final double ROUND_OFF_NUMBER = 1e3;
 
     private final Map<WinningPrice, Integer> result;
 
@@ -31,6 +32,6 @@ public class Result {
             total += (long)entry.getKey().getPrice() * entry.getValue();
         }
 
-        return Math.round((double)total / money.getValue() * 1000) / 1000.0;
+        return Math.round((double)total / money.getValue() * ROUND_OFF_NUMBER) / ROUND_OFF_NUMBER;
     }
 }

@@ -10,10 +10,10 @@ public class Lottos {
     public Lottos(Money money) {
         this.lottos = new ArrayList<>();
         int amount = money.getValue();
-        while (amount >= 1000) {
+        while (amount >= Lotto.PRICE) {
             Lotto lotto = new Lotto();
             lottos.add(lotto);
-            amount -= 1000;
+            amount -= Lotto.PRICE;
         }
     }
 

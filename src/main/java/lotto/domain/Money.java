@@ -2,13 +2,12 @@ package lotto.domain;
 
 public class Money {
 
-    private static final int DIVIDED_STANDARD = 1000;
-    private static final int MIN_VALUE = 1000;
-    private static final int MAX_VALUE = 2_000_000_000;
+    private static final int MAX_PRICE = 2_000_000_000;
     private static final int REMAINDER = 0;
+
     private static final String TO_INT_ERROR_MESSAGE = "숫자여야 합니다.";
-    private static final String VALUE_RANGE_ERROR_MESSAGE = "1000부터 20억의 숫자여야 합니다.";
-    private static final String VALUE_DIVIDED_BY_ERROR_MESSAGE = "1000으로 나누어 떨어져야 합니다.";
+    private static final String VALUE_RANGE_ERROR_MESSAGE = String.format("%d부터 20억의 숫자여야 합니다.", Lotto.PRICE);
+    private static final String VALUE_DIVIDED_BY_ERROR_MESSAGE = String.format("%d으로 나누어 떨어져야 합니다.", Lotto.PRICE);
 
     private final int value;
 
@@ -28,17 +27,17 @@ public class Money {
 
     private void validate(int number) {
         validateValueRange(number);
-        validateDividedBy(number);
+        validateDividedByLottoPrice(number);
     }
 
     private void validateValueRange(int number) {
-        if (MIN_VALUE > number || number > MAX_VALUE) {
+        if (Lotto.PRICE > number || number > MAX_PRICE) {
             throw new IllegalArgumentException(VALUE_RANGE_ERROR_MESSAGE);
         }
     }
 
-    private void validateDividedBy(int number) {
-        if (number % DIVIDED_STANDARD != REMAINDER) {
+    private void validateDividedByLottoPrice(int number) {
+        if (number % Lotto.PRICE != REMAINDER) {
             throw new IllegalArgumentException(VALUE_DIVIDED_BY_ERROR_MESSAGE);
         }
     }

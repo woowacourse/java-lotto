@@ -12,11 +12,12 @@ public class Lotto {
     public static final int PRICE = 1000;
 
     private static final int SIZE = 6;
+    private static final int SUB_LIST_FROM_INDEX = 0;
+
+    private static final List<Number> LOTTO_NUMBERS = new ArrayList<>();
+
     private static final String SIZE_ERROR_MESSAGE = "6개의 숫자가 필요합니다.";
     private static final String DUPLICATE_ERROR_MESSAGE = "중복은 허용하지 않습니다.";
-    private static final List<Number> LOTTO_NUMBERS = new ArrayList<>();
-    private static final int SUB_LIST_FROM_INDEX = 0;
-    private static final int SUB_LIST_TO_INDEX = 6;
 
     private final Set<Number> numbers;
 
@@ -29,7 +30,7 @@ public class Lotto {
 
     public Lotto() {
         Collections.shuffle(LOTTO_NUMBERS);
-        this.numbers = new HashSet<>(LOTTO_NUMBERS.subList(SUB_LIST_FROM_INDEX, SUB_LIST_TO_INDEX));
+        this.numbers = new HashSet<>(LOTTO_NUMBERS.subList(SUB_LIST_FROM_INDEX, SIZE));
     }
 
     Lotto(List<Integer> numbers) {
