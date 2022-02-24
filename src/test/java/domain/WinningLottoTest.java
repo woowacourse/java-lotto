@@ -27,4 +27,31 @@ class WinningLottoTest {
 
         assertThat(winningLotto.calculateMatchCount(purchasedLotto)).isEqualTo(2);
     }
+
+    @Test
+    @DisplayName("당첨번호와 보너스 번호가 중복된 경우")
+    void checkDuplicateNumber() {
+        List<LottoNumber> winningNumbers = Stream.of(12, 23, 6, 44, 17, 16)
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
+        Lotto winningLotto = new Lotto(winningNumbers);
+
+        LottoNumber bonusNumber = new LottoNumber(12);
+
+        assertThatThrownBy(() -> new WinningLotto(winningLotto, bonusNumber))
+            .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("당첨번호와 보너스 번호가 유효한 경우")
+    void checkValidDuplicateNumber() {
+        List<LottoNumber> winningNumbers = Stream.of(12, 23, 6, 44, 17, 16)
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
+        Lotto winningLotto = new Lotto(winningNumbers);
+
+        LottoNumber bonusNumber = new LottoNumber(13);
+
+        assertThat(new WinningLotto(winningLotto, bonusNumber)).isNotNull();
+    }
 }
