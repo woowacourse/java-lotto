@@ -3,7 +3,6 @@ package lotto.domain;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Objects;
-import lotto.controller.Rate;
 
 public class Money {
 
@@ -25,8 +24,8 @@ public class Money {
         return new Money(this.money - money.money);
     }
 
-    public Rate divide(Money money) {
-        return new Rate(calculateRate(money));
+    public BigDecimal divide(Money money) {
+        return BigDecimal.valueOf(this.money).divide(BigDecimal.valueOf(money.money), DECIMAL_PLACE, RoundingMode.DOWN);
     }
 
     public long getMoney() {
@@ -54,10 +53,6 @@ public class Money {
         if (money < MINIMUM_MONEY) {
             throw new IllegalArgumentException("돈은 0이상이어야 한다.");
         }
-    }
-
-    private BigDecimal calculateRate(Money money) {
-        return BigDecimal.valueOf(this.money).divide(BigDecimal.valueOf(money.money), DECIMAL_PLACE, RoundingMode.DOWN);
     }
 
     public boolean isGreaterThan(Money money) {

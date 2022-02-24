@@ -48,7 +48,7 @@ public class MoneyTest {
         Money totalMoney = new Money(50_000L);
         Money money = new Money(3_000L);
 
-        assertThat(totalMoney.divide(money)).isEqualTo(new Rate(BigDecimal.valueOf(16.66)));
+        assertThat(totalMoney.divide(money)).isEqualTo(BigDecimal.valueOf(16.66));
     }
 
     @ParameterizedTest

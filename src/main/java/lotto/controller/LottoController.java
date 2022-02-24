@@ -46,7 +46,7 @@ public class LottoController {
 
     private Rate calculateRate(int money, List<Rank> ranks) {
         Money reward = Rank.calculateReward(ranks);
-        return reward.divide(new Money(money));
+        return new Rate(reward.divide(new Money(money)));
     }
 
 }
