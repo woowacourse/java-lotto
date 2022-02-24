@@ -15,7 +15,6 @@ public class WinningNumbers {
 
     private WinningNumbers(List<Integer> normalWinningNumbers, Integer bonusWinningNumber) {
         validateNormalWinningNumbers(normalWinningNumbers);
-        validateBonusWinningNumber(bonusWinningNumber);
         validateDuplication(normalWinningNumbers, bonusWinningNumber);
 
         this.winningNumbers = getWinningNumbers(normalWinningNumbers, bonusWinningNumber);
@@ -66,20 +65,6 @@ public class WinningNumbers {
     private void validateNormalWinningNumbers(List<Integer> normalWinningNumbers) {
         if (normalWinningNumbers.size() != 6) {
             throw new IllegalArgumentException("당첨 번호는 6개여야 합니다.");
-        }
-
-        for (Integer normalWinningNumber : normalWinningNumbers) {
-            checkNumberBoundary(normalWinningNumber);
-        }
-    }
-
-    private void validateBonusWinningNumber(Integer bonusWinningNumber) {
-        checkNumberBoundary(bonusWinningNumber);
-    }
-
-    private void checkNumberBoundary(Integer number) {
-        if (number < 1 || number > 45) {
-            throw new IllegalArgumentException("1~45의 숫자이어야 합니다.");
         }
     }
 

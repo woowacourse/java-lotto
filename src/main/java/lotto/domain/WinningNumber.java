@@ -8,6 +8,8 @@ public class WinningNumber {
     private final BallType ballType;
 
     public WinningNumber(int winningNumber, BallType ballType) {
+        checkNumberBoundary(winningNumber);
+
         this.winningNumber = winningNumber;
         this.ballType = ballType;
     }
@@ -18,5 +20,11 @@ public class WinningNumber {
 
     public int getWinningNumber() {
         return winningNumber;
+    }
+
+    private void checkNumberBoundary(Integer number) {
+        if (number < 1 || number > 45) {
+            throw new IllegalArgumentException("1~45의 숫자이어야 합니다.");
+        }
     }
 }
