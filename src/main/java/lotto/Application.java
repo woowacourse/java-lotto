@@ -11,5 +11,11 @@ public class Application {
         lottoController.inputLottoMoney(moneyController.getMoney());
         lottoController.printLottos();
         lottoController.createLottoWinningNumbers();
+
+        lottoController.calculateRanks();
+        lottoController.printWinningResult();
+
+        double profit = lottoController.calculateProfit(moneyController.getMoney());
+        lottoController.printProfit(profit);
     }
 }
