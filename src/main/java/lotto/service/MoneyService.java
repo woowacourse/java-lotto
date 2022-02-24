@@ -15,4 +15,7 @@ public class MoneyService {
         moneyRepository.save(money);
     }
 
+    public Money inquire() {
+        return moneyRepository.get();
+    }
 }
