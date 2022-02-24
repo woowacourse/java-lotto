@@ -17,44 +17,19 @@ public class InputTemplate {
     }
 
     public static <T> T repeatablyExecute(Supplier<T> parser,
-        Consumer<LottoException> errorHandler) {
+        Consumer<LottoException> exceptionHandler) {
         try {
             return parser.get();
         } catch (LottoException e) {
-            return handleLottoException(parser, errorHandler, e);
+            return handleLottoException(parser, exceptionHandler, e);
         }
     }
 
     private static <T> T handleLottoException(Supplier<T> parser,
-        Consumer<LottoException> errorHandler, LottoException e) {
-        errorHandler.accept(e);
+        Consumer<LottoException> exceptionHandler, LottoException e) {
+        exceptionHandler.accept(e);
         if (isRepeatable()) {
-            return repeatablyExecute(parser, errorHandler);
-        }
-        throw new LottoFinishedException();
-    }
-
-    public static String repeatablyInput(String message, Consumer<String> validator,
-        Consumer<InvalidFormatException> errorHandler) {
-        try {
-            return inputWithMessage(message, validator);
-        } catch (InvalidFormatException e) {
-            return handleInvalidFormatException(message, validator, errorHandler, e);
-        }
-    }
-
-    private static String inputWithMessage(String message, Consumer<String> validator) {
-        System.out.println(message);
-        String value = SCANNER.nextLine();
-        validator.accept(value);
-        return value;
-    }
-
-    private static String handleInvalidFormatException(String message, Consumer<String> validator,
-        Consumer<InvalidFormatException> errorHandler, InvalidFormatException e) {
-        errorHandler.accept(e);
-        if (isRepeatable()) {
-            return repeatablyInput(message, validator, errorHandler);
+            return repeatablyExecute(parser, exceptionHandler);
         }
         throw new LottoFinishedException();
     }
@@ -72,8 +47,33 @@ public class InputTemplate {
         return chooseOptions(message, options);
     }
 
+    private static String inputWithMessage(String message, Consumer<String> validator) {
+        System.out.println(message);
+        String value = SCANNER.nextLine();
+        validator.accept(value);
+        return value;
+    }
+
     private static boolean isChoosable(String value, String[] options) {
         return Stream.of(options).anyMatch(option -> option.equals(value));
+    }
+
+    public static String repeatablyInput(String message, Consumer<String> validator,
+        Consumer<InvalidFormatException> errorHandler) {
+        try {
+            return inputWithMessage(message, validator);
+        } catch (InvalidFormatException e) {
+            return handleInvalidFormatException(message, validator, errorHandler, e);
+        }
+    }
+
+    private static String handleInvalidFormatException(String message, Consumer<String> validator,
+        Consumer<InvalidFormatException> errorHandler, InvalidFormatException e) {
+        errorHandler.accept(e);
+        if (isRepeatable()) {
+            return repeatablyInput(message, validator, errorHandler);
+        }
+        throw new LottoFinishedException();
     }
 
 }
