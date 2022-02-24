@@ -6,7 +6,7 @@ public class Money {
 
     private final int price;
 
-    public Money(int price) {
+    private Money(int price) {
         validateCriterion(price);
         this.price = price;
     }

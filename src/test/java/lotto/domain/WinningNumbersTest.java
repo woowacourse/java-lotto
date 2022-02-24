@@ -2,21 +2,27 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.Arrays;
 import java.util.List;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class WinningNumbersTest {
 
+    private static final String SEPARATOR = ", ";
+
     @DisplayName("당첨 번호 개수 만큼 당첨 번호를 생성한다.")
     @Test
     void 당첨_번호_생성_확인() {
         // given
-        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
-        int bonusBall = 7;
+        String numbers = "1, 2, 3, 4, 5, 6";
+        List<String> normalWinningNumbers = Arrays.asList(numbers.split(SEPARATOR));
+
+        String bonusBall = "7";
 
         // when & then
-        assertThatCode(() -> new WinningNumbers(winningNumbers, bonusBall))
+        assertThatCode(() -> WinningNumbers.create(normalWinningNumbers, bonusBall))
                 .doesNotThrowAnyException();
     }
 
@@ -24,11 +30,18 @@ class WinningNumbersTest {
     @Test
     void 당첨_정보_확인_2등() {
         // given
-        WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 7);
+        String numbers = "1, 2, 3, 4, 5, 6";
+        List<String> normalWinningNumbers = Arrays.asList(numbers.split(SEPARATOR));
+
+        String bonusBall = "7";
+
+        WinningNumbers winningNumbers = WinningNumbers.create(normalWinningNumbers, bonusBall);
         LottoTicket lottoTicket = new LottoTicket(() -> List.of(1, 2, 3, 4, 7, 8));
 
         // when
         Rank rank = winningNumbers.compare(lottoTicket);
+
+        System.out.println("rank = " + rank);
 
         // then
         assertThat(rank).isEqualTo(Rank.SECOND);
@@ -46,5 +59,13 @@ class WinningNumbersTest {
 
         // then
         assertThat(rank).isEqualTo(Rank.THIRD);
+    }
+
+    @DisplayName("당첨 번호에 중복된 번호가 있는지 검증")
+    @Test
+    public void 당첨_번호_중복_확인() {
+        //given & when & then
+        Assertions.assertThatThrownBy(() -> WinningNumbers.create(List.of("1, 2, 3, 4, 5, 6"), "6"))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

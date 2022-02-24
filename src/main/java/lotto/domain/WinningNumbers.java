@@ -13,7 +13,7 @@ public class WinningNumbers {
 
     private final List<WinningNumber> winningNumbers;
 
-    public WinningNumbers(List<Integer> normalWinningNumbers, Integer bonusWinningNumber) {
+    private WinningNumbers(List<Integer> normalWinningNumbers, Integer bonusWinningNumber) {
         validateNormalWinningNumbers(normalWinningNumbers);
         validateBonusWinningNumber(bonusWinningNumber);
         validateDuplication(normalWinningNumbers, bonusWinningNumber);

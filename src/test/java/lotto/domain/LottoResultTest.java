@@ -16,7 +16,7 @@ class LottoResultTest {
 
         LottoResult lottoResult = new LottoResult(ranks);
 
-        Money money = new Money(14000);
+        Money money = Money.create("14000");
 
         // when
         double result = lottoResult.calculateYield(money);
