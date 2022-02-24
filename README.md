@@ -25,3 +25,9 @@
 
 
 **키워드**: 로또번호, 로또티켓, 당첨번호, 보너스번호, 구입금액, 순위, 당첨결과
+
+
+## 질문사항
+
+* 일급컬렉션을 OutputView로 넘겼을 때, getCollection()으로 내부의 컬렉션을 가져와서 print를 해야함
+* 파라미터로 RankBoard와 profitRatio를 넘기는 이유는, profit을 계산하는 책임을 OutputView에 두면 이상해서
