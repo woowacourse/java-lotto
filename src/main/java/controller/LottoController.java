@@ -19,6 +19,8 @@ import view.OutputView;
 
 public class LottoController {
 
+    public static final String WINNING_NUMBERS_DELIMITER = ", ";
+
     public void run() {
         Lottos lottos = initCustomerLottos();
         LottoReferee referee = initLottoReferee();
@@ -32,27 +34,35 @@ public class LottoController {
     private Lottos initCustomerLottos() {
         int totalLottoPrice = InputView.requestTotalLottoPrice();
         validateTotalLottoPriceUnit(totalLottoPrice);
+
         Lottos lottos = Lottos.of(totalLottoPrice / LOTTO_PRICE);
+
         OutputView.printPurchaseInfo(lottos.getLottos());
+
         return lottos;
     }
 
     private LottoReferee initLottoReferee() {
         List<LottoNumber> winningNumbers = registerWinningNumbers();
         LottoNumber bonusNumber = registerBonusNumber(winningNumbers);
+
         return new LottoReferee(winningNumbers, bonusNumber);
     }
 
     private List<LottoNumber> registerWinningNumbers() {
-        String winningNumbersInput = InputView.requestWinningNumbers();
-        List<LottoNumber> winningNumbers = Arrays.stream(winningNumbersInput.split(", "))
+        List<LottoNumber> winningNumbers = getWinningNumbers(InputView.requestWinningNumbers());
+
+        validateWinningNumbersSize(winningNumbers);
+        validateNoDuplicates(winningNumbers);
+
+        return winningNumbers;
+    }
+
+    private List<LottoNumber> getWinningNumbers(String winningNumbersInput) {
+        return Arrays.stream(winningNumbersInput.split(WINNING_NUMBERS_DELIMITER))
                 .map(NumberValidators::validateAndParseNumber)
                 .map(LottoNumber::of)
                 .collect(Collectors.toList());
-        validateWinningNumbersSize(winningNumbers);
-        validateNoDuplicates(winningNumbers.stream().map(LottoNumber::getNumber).collect(Collectors.toList()));
-
-        return winningNumbers;
     }
 
     private LottoNumber registerBonusNumber(List<LottoNumber> winningNumbers) {
@@ -60,6 +70,7 @@ public class LottoController {
 
         validateNoDuplicateInList(bonusNumber,
                 winningNumbers.stream().map(LottoNumber::getNumber).collect(Collectors.toList()));
+
         return LottoNumber.of(bonusNumber);
     }
 }

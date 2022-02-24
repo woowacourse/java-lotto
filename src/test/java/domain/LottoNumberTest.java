@@ -8,6 +8,7 @@ import static constant.LottoConstants.MINIMUM_LOTTO_NUMBER;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
@@ -36,6 +37,15 @@ public class LottoNumberTest {
         LottoNumber cachedLottoNum = LottoNumber.of(10);
 
         assertThat(newLottoNum).isEqualTo(cachedLottoNum);
+    }
+
+    @Test
+    void equalsAndHashCodeNotNeeded_noDuplicatesOnUsingCache() {
+        List<LottoNumber> sameLottoNumbers = createLottoNumbersOf(11, 11, 11, 11);
+
+        HashSet<LottoNumber> noDuplicateLottoNumbers = new HashSet<>(sameLottoNumbers);
+
+        assertThat(noDuplicateLottoNumbers.size()).isEqualTo(1);
     }
 
     @Test

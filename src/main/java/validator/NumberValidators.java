@@ -51,10 +51,10 @@ public class NumberValidators {
         }
     }
 
-    public static void validateNoDuplicates(List<Integer> nums) {
-        Set<Integer> numsSet = new HashSet<>(nums);
+    public static void validateNoDuplicates(List<?> values) {
+        Set<?> noDuplicateValues = new HashSet<>(values);
 
-        if (nums.size() != numsSet.size()) {
+        if (values.size() != noDuplicateValues.size()) {
             throw new IllegalArgumentException(DUPLICATE_WINNING_NUMBER_EXCEPTION_MESSAGE);
         }
     }
