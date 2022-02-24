@@ -16,7 +16,7 @@ public class Lotto {
     private static final int WINNING_COUNT_LIMIT = 3;
     private static final int SECOND_PRIZE_CONDITION = 5;
     private static final int NO_MEANING_COUNT = 0;
-    
+
     private List<Integer> lottoNumbers;
 
     public Lotto() {

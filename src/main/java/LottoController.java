@@ -13,10 +13,9 @@ public class LottoController {
 
         OutputView.printLottosInformations(lottoGame.getLottos());
 
-        List<Integer> winningNumbers = InputView.askWinningNumbers();
-        int bonusNumber = InputView.askBonusNumber();
+        List<Integer> lottoNumbers = InputView.askLottoNumbers();
 
-        lottoGame.makeResult(winningNumbers, bonusNumber);
+        lottoGame.makeResult(lottoNumbers.subList(0, 6), lottoNumbers.get(6));
         OutputView.printWinningStatistic();
         OutputView.printYield(lottoGame.getYield());
     }

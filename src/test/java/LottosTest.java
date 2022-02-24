@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 public class LottosTest {
 
     @Test
-    @DisplayName("또로첨 당등 1 갯수 확인하는 기능")
+    @DisplayName("로또 당첨 1등 성공")
     void compareAllLottoTest1() {
         Lotto lotto1 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         Lotto lotto2 = new Lotto(Arrays.asList(1, 2, 3, 7, 8, 9));
