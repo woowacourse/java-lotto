@@ -21,11 +21,9 @@ public class LottoNumber {
         return lottoNumbers.subList(0, LOTTO_SIZE);
     }
 
-    private static List<Integer> setRangeLottoNumber(final List<Integer> values) {
+    private static void setRangeLottoNumber(final List<Integer> values) {
         for (int i = LOTTO_MIN_RANGE; i <= LOTTO_MAX_RANGE; i++) {
             values.add(i);
         }
-
-        return values;
     }
 }
