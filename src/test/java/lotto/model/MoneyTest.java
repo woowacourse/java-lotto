@@ -26,4 +26,13 @@ class MoneyTest {
         }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("거스름돈을 지급하지 않습니다. 금액이 남지 않게 지불해주세요.");
     }
+
+    @Test
+    @DisplayName("로또 구입 금액을 음수로 입력시 예외를 던진다")
+    void validatePositiveTest() {
+        assertThatThrownBy(() -> {
+            new Money(-14000);
+        }).isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("구입 금액은 양수여야 합니다.");
+    }
 }
