@@ -11,7 +11,7 @@ public class OutputView {
 
     private static final String NEW_LINE = System.getProperty("line.separator");
 
-    public void outputTickets(List<LottoTicketResponse> responses) {
+    public void outputTickets(final List<LottoTicketResponse> responses) {
         System.out.printf("%d개를 구매했습니다." + NEW_LINE, responses.size());
         for (LottoTicketResponse response : responses) {
             outputTicket(response);
@@ -48,7 +48,7 @@ public class OutputView {
         return "%d개 일치 (%d원)- %d개" + NEW_LINE;
     }
 
-    public void outputEarningRate(double earningRate) {
+    public void outputEarningRate(final double earningRate) {
         System.out.printf("총 수익률은 %.2f입니다.", earningRate);
     }
 }
