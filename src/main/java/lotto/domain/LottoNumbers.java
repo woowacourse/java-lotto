@@ -31,7 +31,7 @@ public class LottoNumbers {
 
     private List<LottoNumber> generateRandomLottoNumbers() {
         Collections.shuffle(candidateLottoNumbers);
-        return candidateLottoNumbers.subList(0, 6);
+        return new ArrayList<>(candidateLottoNumbers.subList(0, 6));
     }
 
     private String reduceBlank(String input) {
