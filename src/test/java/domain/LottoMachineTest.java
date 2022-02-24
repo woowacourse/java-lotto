@@ -5,10 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Test;
-<<<<<<< HEAD
-=======
 import util.LottoNumberGenerator;
->>>>>>> 543f606... feat: 로또 당첨 결과 출력 기능 구현
 import util.ShuffleNumberGenerator;
 
 public class LottoMachineTest {

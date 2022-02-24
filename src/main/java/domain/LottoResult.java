@@ -31,6 +31,9 @@ public class LottoResult {
     }
 
     public void putLottoRank(LottoRank rank) {
+        if (rank.equals(LottoRank.RANK_NOTHING)) {
+            return;
+        }
         resultCount.put(rank, resultCount.get(rank) + 1);
     }
 }
