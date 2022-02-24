@@ -6,5 +6,7 @@ public class Controller {
         Money money = Money.from(InputView.askMoneyAmount());
         int purchaseCount = Lotto.countAvailableTickets(money);
         ResultView.showPurchaseCount(purchaseCount);
+        Lottos lottos = Lottos.purchase(purchaseCount);
+        ResultView.showLottos(LottoDTO.from(lottos));
     }
 }

@@ -7,12 +7,18 @@ public class Lottos {
 
     private List<Lotto> lottos;
 
-    public void purchase(int count) {
-        this.lottos = new ArrayList<>();
+    private Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
+    }
+
+    public static Lottos purchase(int count) {
+        List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {
-            this.lottos.add(new Lotto());
+            lottos.add(new Lotto());
         }
+
+        return new Lottos(lottos);
     }
 
     public List<Lotto> getLottos() {
