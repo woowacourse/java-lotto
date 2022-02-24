@@ -28,6 +28,7 @@ public class LottoGenerator {
 	public static List<LottoNumber> generateAnswerLottoNumbers(String[] userInput) {
 		validateSizeSix(userInput);
 		validateInRange(userInput);
+		validateDuplicate(userInput);
 		return Arrays.stream(userInput).mapToInt(Integer::parseInt).mapToObj(LottoNumber::new)
 			.collect(Collectors.toList());
 	}
