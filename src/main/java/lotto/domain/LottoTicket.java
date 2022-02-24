@@ -6,8 +6,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import lotto.domain.generator.NumberGenerator;
+
 public class LottoTicket {
 
+    public static final int PRICE = 1000;
     private static final int COUNT = 6;
 
     private final List<LottoNumber> numbers;
@@ -57,6 +60,10 @@ public class LottoTicket {
 
     public boolean isMatch(LottoNumber number) {
         return this.numbers.contains(number);
+    }
+
+    public boolean contains(LottoNumber bonusBall) {
+        return numbers.contains(bonusBall);
     }
 
     public List<LottoNumber> getNumbers() {

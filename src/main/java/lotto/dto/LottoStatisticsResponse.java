@@ -1,23 +1,38 @@
-package lotto.domain;
+package lotto.dto;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class LottoStatistics {
+import lotto.domain.LottoRank;
+import lotto.domain.Money;
 
-    private final Map<LottoRank, Long> rankCountMap;
+public class LottoStatisticsResponse {
+
+    private final Map<LottoWinningResponse, Long> responseCountMap;
     private final int money;
 
-    public LottoStatistics(List<LottoRank> ranks, Money money) {
-        this.rankCountMap = ranks.stream()
-            .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+    public LottoStatisticsResponse(List<LottoRank> ranks, Money money) {
+        this.responseCountMap = createEmptyMap();
+        mergeRanks(ranks);
         this.money = money.getAmount();
     }
 
-    public Map<LottoRank, Long> getRankCountMap() {
-        return rankCountMap;
+    private Map<LottoWinningResponse, Long> createEmptyMap() {
+        return Arrays.stream(LottoRank.values())
+            .map(LottoWinningResponse::from)
+            .collect(Collectors.toMap(rank -> rank, rank -> 0L));
+    }
+
+    private void mergeRanks(List<LottoRank> ranks) {
+        ranks.stream()
+            .map(LottoWinningResponse::from)
+            .forEach((rank) -> responseCountMap.merge(rank, 1L, Long::sum));
+    }
+
+    public Map<LottoWinningResponse, Long> getResponseCountMap() {
+        return responseCountMap;
     }
 
     public int getMoney() {
