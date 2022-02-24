@@ -9,8 +9,10 @@ import lotto.dto.StatisticsResult;
 
 public class OutputView {
 
+    private static final String NEW_LINE = System.getProperty("line.separator");
+
     public void outputTickets(List<LottoTicketResponse> responses) {
-        System.out.printf("%d개를 구매했습니다.%n", responses.size());
+        System.out.printf("%d개를 구매했습니다." + NEW_LINE, responses.size());
         for (LottoTicketResponse response : responses) {
             outputTicket(response);
         }
@@ -23,14 +25,13 @@ public class OutputView {
 
     public void outputStatisticsResult(StatisticsResult statisticsResult) {
         displayStatisticsPrompt();
-        Map<LottoRank, Long> result = statisticsResult.getMap();
+        Map<LottoRank, Long> result = statisticsResult.getStatisticsByRank();
         result.forEach(this::displayStatisticsByRank);
         System.out.println();
     }
 
     public void displayStatisticsPrompt() {
-        System.out.println("\n당첨 통계");
-        System.out.println("---------");
+        System.out.println(NEW_LINE + "당첨 통계" + NEW_LINE + "---------");
     }
 
     public void displayStatisticsByRank(final LottoRank rank, final long count) {
@@ -42,9 +43,9 @@ public class OutputView {
 
     private String findMessage(final LottoRank rank) {
         if (rank == LottoRank.SECOND) {
-            return "%d개 일치, 보너스 볼 일치 (%d)원- %d개\n";
+            return "%d개 일치, 보너스 볼 일치 (%d)원- %d개" + NEW_LINE;
         }
-        return "%d개 일치 (%d원)- %d개\n";
+        return "%d개 일치 (%d원)- %d개" + NEW_LINE;
     }
 
     public void outputEarningRate(double earningRate) {
