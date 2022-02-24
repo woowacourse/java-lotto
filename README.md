@@ -58,6 +58,16 @@
 * `LottoResult`: 로또 수익률 계산의 책임을 가지는 객체이다.
     * [x] 구입 금액이 주어지면 수익률을 계산하여 반환한다.
 
+---
+
+<img width="1072" alt="스크린샷 2022-02-24 오후 3 31 50" src="https://user-images.githubusercontent.com/57028386/155471056-d2ccd89f-1e4f-483a-a4f8-1ea320c9d4b3.png">
+
+<img width="983" alt="스크린샷 2022-02-24 오후 3 31 54" src="https://user-images.githubusercontent.com/57028386/155471018-9c88c6a1-2187-44ae-8582-523050c954e9.png">
+
+<img width="1016" alt="스크린샷 2022-02-24 오후 3 31 57" src="https://user-images.githubusercontent.com/57028386/155471029-de368896-ec51-4b48-9d72-524d36423161.png">
+
+---
+
 ## 우아한테크코스 코드리뷰
 
 - [온라인 코드 리뷰 과정](https://github.com/woowacourse/woowacourse-docs/blob/master/maincourse/README.md)
