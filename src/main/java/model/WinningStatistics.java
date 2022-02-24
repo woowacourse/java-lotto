@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Arrays;
 import java.util.EnumMap;
 
 public class WinningStatistics {
@@ -8,9 +9,8 @@ public class WinningStatistics {
 
     public WinningStatistics() {
         winningStatistics = new EnumMap<>(LottoRank.class);
-        for (LottoRank lottoRank : LottoRank.values()) {
-            winningStatistics.put(lottoRank, 0);
-        }
+        Arrays.stream(LottoRank.values())
+                .forEach(lottoRank -> winningStatistics.put(lottoRank, 0));
     }
 
     public void put(LottoRank lottoRank) {

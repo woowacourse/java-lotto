@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoTicketFactory {
     private static final LottoTicketFactory lottoTicketFactory = new LottoTicketFactory();
@@ -21,20 +22,15 @@ public class LottoTicketFactory {
     }
 
     private List<LottoNumber> createLottoNumbers() {
-        final List<LottoNumber> availableLottoNumbers;
-        availableLottoNumbers = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
-            availableLottoNumbers.add(new LottoNumber(String.valueOf(i)));
-        }
-        return availableLottoNumbers;
+        return IntStream.rangeClosed(1, 45)
+                .mapToObj(i -> new LottoNumber(String.valueOf(i)))
+                .collect(Collectors.toList());
     }
 
     public List<LottoTicket> createTickets(int money) {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < getAvailableLottoTicketsCount(money); i++) {
-            lottoTickets.add(createTicket());
-        }
-        return Collections.unmodifiableList(lottoTickets);
+        return IntStream.range(0, getAvailableLottoTicketsCount(money))
+                .mapToObj(i -> createTicket())
+                .collect(Collectors.toUnmodifiableList());
     }
 
     private int getAvailableLottoTicketsCount(int money) {

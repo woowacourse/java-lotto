@@ -1,7 +1,7 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class WinningNumbers extends LottoNumbers {
 
@@ -19,12 +19,9 @@ public class WinningNumbers extends LottoNumbers {
             throw new IllegalArgumentException(WINNING_NUMBERS_CONTAIN_BONUS_BALL);
         }
 
-        List<LottoNumber> winningNumbers = new ArrayList<>();
-        LottoNumber bonusBall = new LottoNumber(bonusBallString);
-        for (String lottoNumberString : lottoNumberStrings) {
-            winningNumbers.add(new LottoNumber(lottoNumberString));
-        }
-        return new WinningNumbers(winningNumbers, bonusBall);
+        return new WinningNumbers(lottoNumberStrings.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList()), new LottoNumber(bonusBallString));
     }
 
     public int countContaining(LottoTicket lottoTicket) {
