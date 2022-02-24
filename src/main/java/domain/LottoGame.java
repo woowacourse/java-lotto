@@ -6,6 +6,9 @@ import java.util.List;
 public class LottoGame {
 
     private static final int LOTTO_PRICE = 1000;
+    private static final int EMPTY = 0;
+    private static final int NO_YIELD = 0;
+    private static final int SUM_BASE = 0;
 
     private Lottos lottos;
 
@@ -27,14 +30,14 @@ public class LottoGame {
     }
 
     public double getYield() {
-        if (lottos.getSize() == 0) {
-            return 0;
+        if (lottos.getSize() == EMPTY) {
+            return NO_YIELD;
         }
 
         int prize = Arrays.stream(Rewards.values())
                 .map(Rewards::calculateYield)
-                .reduce(0, Integer::sum);
-        return (float) prize / (1000 * lottos.getSize());
+                .reduce(SUM_BASE, Integer::sum);
+        return (float) prize / (LOTTO_PRICE * lottos.getSize());
     }
 
     public Lottos getLottos() {
