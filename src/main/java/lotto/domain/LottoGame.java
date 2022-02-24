@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoGame {
@@ -12,7 +12,7 @@ public class LottoGame {
     }
 
     public List<Lotto> getLottos() {
-        return lottos.getLottos();
+        return Collections.unmodifiableList(lottos.getLottos());
     }
 
     public LottoResults confirmWinnings(WinningNumbers winningNumbers) {

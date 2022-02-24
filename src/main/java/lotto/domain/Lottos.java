@@ -36,6 +36,6 @@ public class Lottos {
             result.put(prize, result.get(prize) + 1);
         }
 
-        return result;
+        return Collections.unmodifiableMap(result);
     }
 }
