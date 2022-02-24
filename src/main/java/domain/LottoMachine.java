@@ -1,5 +1,7 @@
 package domain;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import util.LottoNumberGenerator;
 
 public class LottoMachine {
@@ -18,9 +20,15 @@ public class LottoMachine {
     }
 
     public double calculateProfit() {
-        return Math.floor( //TODO
-                (lottoResult.sumTotalPrice() / (double) money) * SECOND_DECIMAL_DIGIT
-        ) / (double) SECOND_DECIMAL_DIGIT;
+        DecimalFormat decimalFormat = decimalFormatSetting();
+        double profitRate = lottoResult.sumTotalPrice() / (double) money;
+        return Double.parseDouble(decimalFormat.format(profitRate));
+    }
+
+    private DecimalFormat decimalFormatSetting() {
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        decimalFormat.setRoundingMode(RoundingMode.FLOOR);
+        return decimalFormat;
     }
 
     public void putLotto(LottoRank rank) {
