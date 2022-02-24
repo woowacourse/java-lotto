@@ -6,7 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 @SuppressWarnings("NonAsciiCharacters")
-class LottoNumberValidatorTest {
+class LottoBallValidatorTest {
     @ParameterizedTest
     @ValueSource(ints = {-1, 0, 47})
     void 숫자_범위_에러_처리(int input) {

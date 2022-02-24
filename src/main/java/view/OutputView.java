@@ -1,7 +1,7 @@
 package view;
 
-import domain.LottoNumber;
-import domain.LottoNumbers;
+import domain.LottoBall;
+import domain.Lotto;
 import domain.Rank;
 import domain.Result;
 import java.util.List;
@@ -20,17 +20,17 @@ public class OutputView {
             "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해%s라는 의미임)" + System.lineSeparator();
     public static final String NO_MESSAGE = " 아니";
 
-    public static void printLottoTickets(List<LottoNumbers> lottoTickets) {
+    public static void printLottoTickets(List<Lotto> lottoTickets) {
         System.out.println(lottoTickets.size()+ BUY_MESSAGE);
-        for (LottoNumbers lottoNumbers : lottoTickets) {
-            printLottoNumbers(lottoNumbers);
+        for (Lotto lotto : lottoTickets) {
+            printLottoNumbers(lotto);
         }
     }
 
-    private static void printLottoNumbers(LottoNumbers lottoNumbers) {
+    private static void printLottoNumbers(Lotto lotto) {
         StringBuilder result = new StringBuilder(LOTTO_PREFIX);
-        for (LottoNumber lottoNumber : lottoNumbers.get()) {
-            result.append(lottoNumber.get()).append(SEPARATOR);
+        for (LottoBall lottoBall : lotto.get()) {
+            result.append(lottoBall.get()).append(SEPARATOR);
         }
         result.delete(result.length() - DELETE_IDX, result.length()).append(LOTTO_ENDFIX);
         System.out.println(result);

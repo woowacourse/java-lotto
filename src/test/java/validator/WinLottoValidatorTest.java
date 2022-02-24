@@ -6,7 +6,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("NonAsciiCharacters")
-class WinLottoNumbersValidatorTest {
+class WinLottoValidatorTest {
     @Test
     void 로또_번호_중복_확인() {
         assertThatThrownBy(() -> WinLottoNumbersValidator.validate(Arrays.asList(1, 2, 3, 4, 5, 2)))

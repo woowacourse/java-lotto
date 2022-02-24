@@ -2,7 +2,7 @@ package view;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import domain.LottoNumbers;
+import domain.Lotto;
 import domain.Rank;
 import domain.Result;
 import java.io.ByteArrayOutputStream;
@@ -21,9 +21,12 @@ class OutputViewTest {
         OutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
 
-        List<LottoNumbers> lottoTickets = new ArrayList<>();
-        lottoTickets.add(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        lottoTickets.add(new LottoNumbers(Arrays.asList(7, 8, 9, 10, 11, 12)));
+        List<Lotto> lottoTickets = new ArrayList<>();
+        Lotto lotto1 = Lotto.fromNums(Arrays.asList(1, 2, 3, 4, 5, 6));
+        lottoTickets.add(lotto1);
+        Lotto lotto2 = Lotto.fromNums(Arrays.asList(7, 8, 9, 10, 11, 12));
+        lottoTickets.add(lotto2);
+
         OutputView.printLottoTickets(lottoTickets);
 
         assertThat(out.toString()).isEqualTo("2개를 구매했습니다."

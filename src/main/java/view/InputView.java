@@ -1,6 +1,8 @@
 package view;
 
+import java.util.List;
 import java.util.Scanner;
+import utils.Separator;
 import validator.InputValidator;
 
 public class InputView {
@@ -20,12 +22,12 @@ public class InputView {
         }
     }
 
-    public static String inputWinLottoNumbers() {
+    public static List<Integer> inputWinLottoNumbers() {
         System.out.println(LOTTO_NUMBER_INPUT_MESSAGE);
         Scanner scanner = new Scanner(System.in);
         String lottoNumbers = scanner.nextLine();
         InputValidator.isRightPattern(lottoNumbers);
-        return lottoNumbers;
+        return Separator.separateNumbers(lottoNumbers);
     }
 
     public static int inputBonusNumber() {
