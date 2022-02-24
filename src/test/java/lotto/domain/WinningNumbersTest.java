@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class WinningNumbersTest {
+class WinningNumbersTest {
 
     List<LottoNumber> lottoNumbers;
     LottoNumber bonusNumber;
@@ -24,16 +24,16 @@ public class WinningNumbersTest {
         bonusNumber = new LottoNumber(30);
     }
 
-    @DisplayName("WinningNumbers 생성자 테스트")
+    @DisplayName("WinningNumbers 생성자는 당첨 번호와 보너스 번호를 입력받아 값을 초기화한다.")
     @Test
-    void constructor_test() {
+    void constructor() {
         assertThatNoException()
                 .isThrownBy(() -> new WinningNumbers(lottoNumbers, bonusNumber));
     }
 
-    @DisplayName("WinningNumbers 생성자 6개가 아닌 숫자 입력 예외 테스트")
+    @DisplayName("WinningNumbers 생성자는 6개가 아닌 숫자를 입력하면 예외가 발생한다.")
     @Test
-    void constructor_error_winning_number_not_six_test() {
+    void constructor_errorWinningNumberNotSix() {
         lottoNumbers.add(new LottoNumber(7));
 
         assertThatExceptionOfType(IllegalArgumentException.class)
@@ -41,9 +41,9 @@ public class WinningNumbersTest {
                 .withMessage("로또 숫자는 6개여야 합니다.");
     }
 
-    @DisplayName("WinningNumbers 당첨 번호 중복 예외 테스트")
+    @DisplayName("WinningNumbers 생성자는 입력된 당첨 번호가 중복될 경우 예외가 발생한다.")
     @Test
-    void constructor_error_on_winning_number_duplication_test() {
+    void constructor_errorOnWinningNumberDuplication() {
         lottoNumbers.set(0, new LottoNumber(2));
 
         assertThatExceptionOfType(IllegalArgumentException.class)
@@ -51,9 +51,9 @@ public class WinningNumbersTest {
                 .withMessage("로또 숫자는 중복되면 안됩니다.");
     }
 
-    @DisplayName("WinningNumbers 보너스 번호 중복 예외 테스트")
+    @DisplayName("WinningNumbers 생성자는 보너스 번호가 당첨 번호와 중복될 경우 예외가 발생한다.")
     @Test
-    void constructor_error_on_bonus_number_duplication_test() {
+    void constructor_errorOnBonusNumberDuplication() {
         bonusNumber = new LottoNumber(1);
 
         assertThatExceptionOfType(IllegalArgumentException.class)

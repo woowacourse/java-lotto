@@ -8,17 +8,17 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LottoGameTest {
+class LottoGameTest {
 
-    @DisplayName("LottoGame 생성자 테스트")
+    @DisplayName("LottoGame 생성자는 인자를 입력받지 않는다.")
     @Test
-    void lottoGame_constructor_test() {
-        assertThatNoException().isThrownBy(() -> new LottoGame());
+    void constructor() {
+        assertThatNoException().isThrownBy(LottoGame::new);
     }
 
-    @DisplayName("purchase 메서드 테스트")
+    @DisplayName("purchase 메서드는 입력한 money만큼의 Lotto를 구매하여 Lottos에 추가한다")
     @Test
-    void purchase_test() {
+    void purchase() {
         LottoGame lottoGame = new LottoGame();
         lottoGame.purchase(new Money(10000));
 
@@ -27,9 +27,9 @@ public class LottoGameTest {
         assertThat(lottoResults.size()).isEqualTo(10);
     }
 
-    @DisplayName("confirmWinnings 메서드 테스트")
+    @DisplayName("confirmWinnings 메서드는 당첨 번호를 입력받아 당첨 결과인 LottoResults를 반환한다.")
     @Test
-    void confirmWinnings_test() {
+    void confirmWinnings() {
         List<LottoNumber> lottoNumbers;
         LottoNumber bonusNumber = new LottoNumber(30);
         lottoNumbers = new ArrayList<>();
@@ -40,6 +40,6 @@ public class LottoGameTest {
         LottoGame lottoGame = new LottoGame();
         lottoGame.purchase(new Money(10000));
         WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers, bonusNumber);
-        LottoResults result = lottoGame.confirmWinnings(winningNumbers);
+        assertThat(lottoGame.confirmWinnings(winningNumbers)).isInstanceOf(LottoResults.class);
     }
 }

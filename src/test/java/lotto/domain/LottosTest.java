@@ -9,26 +9,26 @@ import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LottosTest {
+class LottosTest {
 
-    @DisplayName("Lottos 생성자 테스트")
+    @DisplayName("Lottos 생성자는 인자를 받지 않는다.")
     @Test
-    void lottos_constructor_test() {
-        Lottos lottos = new Lottos();
+    void constructor() {
+        assertThatNoException().isThrownBy(Lottos::new);
     }
 
-    @DisplayName("purchase 메서드 테스트")
+    @DisplayName("purchase 메서드는 입력한 Money 만큼의 로또를 생성하여 저장한다.")
     @Test
-    void purchase_test() {
+    void purchase() {
         Lottos lottos = new Lottos();
         lottos.purchase(new Money(10000));
 
         assertThat(lottos.getLottos().size()).isEqualTo(10);
     }
 
-    @DisplayName("confirmWinnings 메서드 테스트")
+    @DisplayName("confirmWinnings 메서드는 WinningNumbers를 입력받아 당첨결과를 맵으로 반환한다.")
     @Test
-    void confirmWinnings_test() {
+    void confirmWinnings() {
         Lottos lottos = new Lottos();
         lottos.purchase(new Money(10000));
 
@@ -51,6 +51,7 @@ public class LottosTest {
             LottoPrize prize = lotto.confirmWinning(winningNumbers);
             myMap.put(prize, myMap.get(prize) + 1);
         }
+
         return myMap;
     }
 
@@ -61,7 +62,6 @@ public class LottosTest {
         for (int i = 1; i <= 6; i++) {
             lottoNumbers.add(new LottoNumber(i));
         }
-        WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers, bonusNumber);
-        return winningNumbers;
+        return new WinningNumbers(lottoNumbers, bonusNumber);
     }
 }

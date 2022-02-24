@@ -9,13 +9,13 @@ class MoneyTest {
 
     @DisplayName("Money 생성자는 음수가 아닌 정수를 입력받아 amount 값을 초기화한다.")
     @Test
-    void money_constructor() {
+    void constructor() {
         assertThatNoException().isThrownBy(() -> new Money(10000));
     }
 
     @DisplayName("Money 생성자는 음수를 입력받으면 예외가 발생한다.")
     @Test
-    void money_constructorErrorOnNegative() {
+    void constructor_ErrorOnNegative() {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new Money(-1000))
                 .withMessage("금액은 음수를 입력하면 안됩니다.");

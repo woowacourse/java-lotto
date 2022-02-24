@@ -9,23 +9,14 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-public class LottoPrizeTest {
+class LottoPrizeTest {
 
     public static final String DISPLAY_NAME_ARGUMENTS = "{displayName} : {arguments}";
 
-    @DisplayName("LottoPrize 생성자 테스트")
-    @Test
-    void LottoPrize_constructor_test() {
-        assertThat(LottoPrize.values()).contains(
-                LottoPrize.MISS, LottoPrize.FIFTH, LottoPrize.FOURTH,
-                LottoPrize.THIRD, LottoPrize.TWICE, LottoPrize.FIRST
-        );
-    }
-
-    @DisplayName("match 메서드 테스트")
+    @DisplayName("match 메서드는 로또 번호의 일치 횟수에 맞는 LottoPrize를 반환한다.")
     @ParameterizedTest(name = DISPLAY_NAME_ARGUMENTS)
     @MethodSource("matchTestSet")
-    void match_test(int lottoNumberMatches, int bonusNumberMatches, LottoPrize result) {
+    void match(int lottoNumberMatches, int bonusNumberMatches, LottoPrize result) {
         LottoPrize lottoPrize = LottoPrize.match(lottoNumberMatches, bonusNumberMatches);
         assertThat(lottoPrize).isEqualTo(result);
     }
