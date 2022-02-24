@@ -1,21 +1,15 @@
 package controller;
 
-import domain.InputMoney;
-import domain.Lotto;
-import domain.LottoNumber;
-import domain.Lottos;
-import domain.Rank;
-import domain.TrialNumber;
-import domain.WinningCount;
-import domain.WinningLotto;
+import domain.*;
 import domain.strategy.LottoNumberGenerateStrategy;
 import dto.LottoResultDto;
+import view.InputView;
+import view.ResultView;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import view.InputView;
-import view.ResultView;
 
 public class LottoController {
     private static final int LOTTO_PRICE = 1000;
@@ -26,25 +20,25 @@ public class LottoController {
     }
 
     public void start() {
-        InputMoney inputmoney = getInputMoney();
-        TrialNumber trialNumber = getTrialNumberByInputMoney(inputmoney);
-        InputView.printTrialNumber(trialNumber.getTrialNumber());
+        InputMoney inputMoney = getInputMoney();
+        LottoQuantity lottoQuantity = getLottoQuantityByInputMoney(inputMoney);
+        InputView.printLottoQuantity(lottoQuantity.getLottoQuantity());
 
-        Lottos autoLottos = getRandomLottos(trialNumber);
+        Lottos autoLottos = getRandomLottos(lottoQuantity);
         InputView.printLottos(autoLottos);
 
         WinningLotto winningLotto = setupWinningLotto();
         Map<Rank, WinningCount> map = autoLottos.getResultByWinningLotto(winningLotto);
-        ResultView.printResult(LottoResultDto.from(map, trialNumber));
+        ResultView.printResult(LottoResultDto.from(map, lottoQuantity));
     }
 
-    private TrialNumber getTrialNumberByInputMoney(InputMoney inputMoney) {
-        return new TrialNumber(inputMoney.getMoney() / LOTTO_PRICE);
+    private LottoQuantity getLottoQuantityByInputMoney(InputMoney inputMoney) {
+        return new LottoQuantity(inputMoney.getMoney() / LOTTO_PRICE);
     }
 
-    private Lottos getRandomLottos(TrialNumber trialNumber) {
+    private Lottos getRandomLottos(LottoQuantity lottoQuantity) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < trialNumber.getTrialNumber(); i++) {
+        for (int i = 0; i < lottoQuantity.getLottoQuantity(); i++) {
             lottos.add(new Lotto(getLottoNumbers()));
         }
 
@@ -86,8 +80,7 @@ public class LottoController {
 
     private LottoNumber generateBonusNumber() {
         try {
-            int bonusNumberValue = InputView.scanBonusNumber();
-            return new LottoNumber(bonusNumberValue);
+            return new LottoNumber(InputView.scanBonusNumber());
         } catch (IllegalArgumentException exception) {
             InputView.printException(exception);
             return generateBonusNumber();

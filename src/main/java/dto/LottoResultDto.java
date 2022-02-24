@@ -1,8 +1,9 @@
 package dto;
 
+import domain.LottoQuantity;
 import domain.Rank;
-import domain.TrialNumber;
 import domain.WinningCount;
+
 import java.util.Map;
 import java.util.Objects;
 
@@ -15,17 +16,17 @@ public class LottoResultDto {
         this.profitRatio = profitRatio;
     }
 
-    public static LottoResultDto from(Map<Rank, WinningCount> lottoWinningResult, TrialNumber trialNumber) {
+    public static LottoResultDto from(Map<Rank, WinningCount> lottoWinningResult, LottoQuantity lottoQuantity) {
         Long totalPrize = lottoWinningResult.entrySet()
                 .stream()
                 .map((entrySet) -> entrySet.getKey().getPrize() * entrySet.getValue().getCount())
                 .reduce(0L, Long::sum);
 
-        return new LottoResultDto(lottoWinningResult, getProfitRatio(totalPrize, trialNumber));
+        return new LottoResultDto(lottoWinningResult, getProfitRatio(totalPrize, lottoQuantity));
     }
 
-    private static double getProfitRatio(long totalPrize, TrialNumber trialNumber) {
-        return Math.round(totalPrize / (trialNumber.getTrialNumber() * 1000.0) * 100) / 100.0;
+    private static double getProfitRatio(long totalPrize, LottoQuantity lottoQuantity) {
+        return Math.round(totalPrize / (lottoQuantity.getLottoQuantity() * 1000.0) * 100) / 100.0;
     }
 
     public WinningCount getWinningCountByRank(Rank rank) {

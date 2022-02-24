@@ -52,7 +52,7 @@
             - [X] 1000으로 나누어 떨어지지 않는 금액 입력 시 IAE 발생
     - [X] RandomLottoNumberGenerateStrategy
         - [X] 랜덤 번호 7개 생성
-    - [X] TrialNumber
+    - [X] LottoQuantity
         - [X] 유효성 검사
             - [X] 양수가 아닌 값을 전달 받았을 경우 IAE 발생
 - [X] 총 수익률을 (`당첨금액/로또구입금액`) 계산한다.
@@ -62,4 +62,5 @@
 
 - [ ] Exception 메세지 마침표 통일
 - [ ] 당첨 통계 출력 부분 리팩토링 (ResultView)
-- 
+- [ ] 테스트코드를 Describe-Context-It 패턴을 적용해 개선 (@Nested)
+- [X] `TrialNumber` 를 `LottoQuantity` 로 변경
