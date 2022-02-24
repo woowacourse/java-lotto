@@ -5,17 +5,21 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import lotto.domain.ticket.condition.BallNumberRange;
+import lotto.domain.ticket.condition.TicketSize;
+
 public class RandomTicketGenerator implements TicketGenerator {
 
-    private static final int RANDOM_RANGE_INCLUSIVE_START = 1;
-    private static final int RANDOM_RANGE_EXCLUSIVE_END = 46;
     private static final int SUBLIST_INCLUSIVE_START_INDEX = 0;
-    private static final int SUBLIST_EXCLUSIVE_END_INDEX = 6;
+    private static final int SUBLIST_EXCLUSIVE_END_INDEX =
+            SUBLIST_INCLUSIVE_START_INDEX + TicketSize.DEFAULT_SIZE.getSize();
 
     private final List<Integer> numbers;
 
     public RandomTicketGenerator() {
-        this.numbers = IntStream.range(RANDOM_RANGE_INCLUSIVE_START, RANDOM_RANGE_EXCLUSIVE_END)
+        final int inclusive_start = BallNumberRange.getInclusiveRangeStart();
+        final int exclusive_end = BallNumberRange.getExclusiveRangeEnd();
+        this.numbers = IntStream.range(inclusive_start, exclusive_end)
                 .boxed()
                 .collect(Collectors.toList());
     }

@@ -2,8 +2,8 @@ package lotto.domain.ticket.condition;
 
 public enum BallNumberRange {
 
-    RANGE_INCLUSIVE_START(1),
-    RANGE_INCLUSIVE_END(45);
+    INCLUSIVE_RANGE_START(1),
+    INCLUSIVE_RANGE_END(45);
 
     private final int number;
 
@@ -12,7 +12,15 @@ public enum BallNumberRange {
     }
 
     public static boolean isOutOfRange(final int ballNumber) {
-        return (ballNumber < RANGE_INCLUSIVE_START.number) || (RANGE_INCLUSIVE_END.number < ballNumber);
+        return (ballNumber < INCLUSIVE_RANGE_START.number) || (INCLUSIVE_RANGE_END.number < ballNumber);
+    }
+
+    public static int getInclusiveRangeStart() {
+        return INCLUSIVE_RANGE_START.number;
+    }
+
+    public static int getExclusiveRangeEnd() {
+        return INCLUSIVE_RANGE_END.number + 1;
     }
 
 }

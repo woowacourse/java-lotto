@@ -14,4 +14,8 @@ public enum TicketSize {
         return ticketSize != DEFAULT_SIZE.size;
     }
 
+    public int getSize() {
+        return DEFAULT_SIZE.size;
+    }
+
 }
