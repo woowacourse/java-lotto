@@ -18,8 +18,7 @@ class WinningNumbersTest {
     @Test
     void 당첨_번호_생성_확인() {
         // given
-        String numbers = "1, 2, 3, 4, 5, 6";
-        List<String> normalWinningNumbers = Arrays.asList(numbers.split(SEPARATOR));
+        List<String> normalWinningNumbers = getStrings("1, 2, 3, 4, 5, 6");
 
         String bonusBall = "7";
 
@@ -32,8 +31,7 @@ class WinningNumbersTest {
     @Test
     void 당첨_정보_확인_2등() {
         // given
-        String numbers = "1, 2, 3, 4, 5, 6";
-        List<String> normalWinningNumbers = Arrays.asList(numbers.split(SEPARATOR));
+        List<String> normalWinningNumbers = getStrings("1, 2, 3, 4, 5, 6");
 
         String bonusBall = "7";
 
@@ -53,8 +51,7 @@ class WinningNumbersTest {
     @Test
     void 당첨_정보_확인_3등() {
         // given
-        String numbers = "1, 2, 3, 4, 5, 6";
-        List<String> normalWinningNumbers = Arrays.asList(numbers.split(SEPARATOR));
+        List<String> normalWinningNumbers = getStrings("1, 2, 3, 4, 5, 6");
 
         String bonusBall = "7";
 
@@ -88,13 +85,17 @@ class WinningNumbersTest {
     @Test
     public void 정수_아닌_입력_테스트() {
         // given
-        String numbers = "일, 이, 삼, 사, 오, 육";
-        List<String> normalWinningNumbers = Arrays.asList(numbers.split(SEPARATOR));
+        List<String> normalWinningNumbers = getStrings("일, 이, 삼, 사, 오, 육");
 
         String bonusBall = "칠";
 
         // when & then
         Assertions.assertThatThrownBy(() -> WinningNumbers.create(normalWinningNumbers, bonusBall))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    private List<String> getStrings(String numbers) {
+        List<String> normalWinningNumbers = Arrays.asList(numbers.split(SEPARATOR));
+        return normalWinningNumbers;
     }
 }
