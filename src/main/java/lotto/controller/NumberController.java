@@ -1,7 +1,5 @@
 package lotto.controller;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
@@ -46,22 +44,18 @@ public class NumberController {
 
         do {
             String input = InputView.inputBonusNumber();
-            number = toNumber(input);
-            isDuplicate = numbers.contains(number);
-            if (isDuplicate) {
-                System.out.println("중복입니다");
-            }
+            number = StringUtil.toNumber(input);
+            isDuplicate = checkDuplicate(numbers, number);
         } while (number == null || isDuplicate);
 
         return number;
     }
 
-    private Number toNumber(String input) {
-        try {
-            return new Number(input);
-        } catch (IllegalArgumentException exception) {
-            System.out.println(exception.getMessage());
-            return null;
+    private boolean checkDuplicate(List<Number> numbers, Number number) {
+        boolean isDuplicate = numbers.contains(number);
+        if (isDuplicate) {
+            System.out.println("중복입니다");
         }
+        return isDuplicate;
     }
 }
