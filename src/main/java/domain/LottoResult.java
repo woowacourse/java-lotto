@@ -12,10 +12,7 @@ public class LottoResult {
     public LottoResult() {
         this.resultCount = new LinkedHashMap<>();
         for (LottoRank rank : LottoRank.values()) {
-            if (rank == LottoRank.RANK_NOTHING) {
-                continue;
-            }
-            resultCount.put(rank, DEFAULT_VALUE);
+            initLottoRank(rank);
         }
     }
 
@@ -37,5 +34,12 @@ public class LottoResult {
             return;
         }
         resultCount.put(rank, resultCount.get(rank) + 1);
+    }
+
+    private void initLottoRank(LottoRank rank) { //TODO:
+        if (rank == LottoRank.RANK_NOTHING) {
+            return;
+        }
+        resultCount.put(rank, DEFAULT_VALUE);
     }
 }

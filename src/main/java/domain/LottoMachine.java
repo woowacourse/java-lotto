@@ -18,7 +18,7 @@ public class LottoMachine {
     }
 
     public double calculateProfit() {
-        return Math.floor(
+        return Math.floor( //TODO
                 (lottoResult.sumTotalPrice() / (double) money) * SECOND_DECIMAL_DIGIT
         ) / (double) SECOND_DECIMAL_DIGIT;
     }

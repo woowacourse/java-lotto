@@ -1,37 +1,33 @@
 package domain;
 
+import java.util.Arrays;
+
 public enum LottoRank {
 
-    RANK_5(3, 5000),
-    RANK_4(4, 50000),
-    RANK_3(5, 1500000),
-    RANK_2(5, 30000000),
-    RANK_1(6, 2000000000),
-    RANK_NOTHING(0, 0);
+    RANK_5(3, false, 5000),
+    RANK_4(4, false, 50000),
+    RANK_3(5, false, 1500000),
+    RANK_2(5, true, 30000000),
+    RANK_1(6, false, 2000000000),
+    RANK_NOTHING(0, false,0);
 
     private static final int SECOND_AND_THIRD_RANK_COUNT = 5;
 
     private final int count;
+    private final boolean bonus;
     private final int price;
 
-    LottoRank(int count, int price) {
+    LottoRank(int count, boolean bonus, int price) {
         this.count = count;
+        this.bonus = bonus;
         this.price = price;
     }
 
     public static LottoRank getRankByCountAndBonus(int count, boolean bonus) {
-        for (LottoRank rank : LottoRank.values()) {
-            if (rank.count == count) {
-                if (count == SECOND_AND_THIRD_RANK_COUNT) {
-                    if (bonus) {
-                        return RANK_2;
-                    }
-                    return RANK_3;
-                }
-                return rank;
-            }
-        }
-        return RANK_NOTHING;
+        return Arrays.stream(values())
+                .filter(lottoRank -> lottoRank.matchRankAndBonus(count, bonus))
+                .findFirst()
+                .orElse(RANK_NOTHING);
     }
 
     public int getPrice() {
@@ -40,5 +36,9 @@ public enum LottoRank {
 
     public int getCount() {
         return count;
+    }
+
+    private boolean matchRankAndBonus(int count, boolean bonus) {
+        return this.count == count && this.bonus == bonus;
     }
 }

@@ -23,13 +23,16 @@ public class WinningLotto {
 
     public LottoRank countLottoRank(Lotto lotto) {
         List<Integer> lottoNumbers = lotto.getLottoNumbers();
-        int count = DEFAULT_VALUE;
-        for (Integer lottoNumber : lottoNumbers) {
-            if (this.winningNumbers.contains(lottoNumber)) {
-                count++;
-            }
-        }
+        int count = (int) lottoNumbers.stream()
+                .filter(this.winningNumbers::contains)
+                .count();
+        return LottoRank.getRankByCountAndBonus(count, checkBonus(lottoNumbers, count));
+    }
 
-        return LottoRank.getRankByCountAndBonus(count, lottoNumbers.contains(bonusNumber));
+    private boolean checkBonus(List<Integer> lottoNumbers, int count) {
+        if (count == 5) {
+            return lottoNumbers.contains(bonusNumber);
+        }
+        return false;
     }
 }

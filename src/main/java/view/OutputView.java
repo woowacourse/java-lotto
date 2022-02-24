@@ -26,16 +26,20 @@ public class OutputView {
         System.out.println(LOTTO_RESULT_PREFIX);
         Map<LottoRank, Integer> resultCount = lottoResult.getResultCount();
         for (LottoRank rank : resultCount.keySet()) {
-            if (rank.equals(LottoRank.RANK_2)) {
-                System.out.printf(LOTTO_RESULT_WITH_BONUS_BALL_FORMAT,
-                        rank.getCount(), rank.getPrice(), resultCount.get(rank));
-                continue;
-            }
-            System.out.printf(LOTTO_RESULT_FORMAT, rank.getCount(), rank.getPrice(), resultCount.get(rank));
+            printLottoResultByRank(resultCount, rank);
         }
     }
 
     public static void printProfitRate(double calculateProfit) {
         System.out.println(PROFIT_RATE_RESULT_PREFIX + calculateProfit + PROFIT_RATE_RESULT_SUFFIX);
+    }
+
+    private static void printLottoResultByRank(Map<LottoRank, Integer> resultCount, LottoRank rank) {
+        if (rank.equals(LottoRank.RANK_2)) {
+            System.out.printf(LOTTO_RESULT_WITH_BONUS_BALL_FORMAT,
+                    rank.getCount(), rank.getPrice(), resultCount.get(rank));
+            return;
+        }
+        System.out.printf(LOTTO_RESULT_FORMAT, rank.getCount(), rank.getPrice(), resultCount.get(rank));
     }
 }
