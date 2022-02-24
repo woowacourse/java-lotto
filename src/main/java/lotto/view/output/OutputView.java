@@ -1,5 +1,7 @@
 package lotto.view.output;
 
+import static lotto.view.output.OutputMessage.*;
+
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -12,43 +14,62 @@ import lotto.dto.AnalysisDto;
 
 public class OutputView {
 
-	private static final String COUNT_MESSAGE = "개를 구매했습니다.";
-	private static final String ANALYSIS_TITLE = "당첨 통계";
-	private static final String DIVIDING_LINE = "---------";
-	private static final String PROFIT_RATE_MESSAGE_FORMAT = "총 수익률은 %.2f입니다.";
+	private void printMessage(final String message) {
+		System.out.println(message);
+	}
 
-	private static final String START_SIGN = "[";
-	private static final String END_SIGN = "]";
+	private void printMessage(final OutputMessage outputMessage) {
+		printMessage(outputMessage.getMessage());
+	}
 
-	public static void printTickets(final Tickets tickets) {
-		printTicketCount(tickets);
+	public void printMessageOfRequestCreditMoney() {
+		printMessage(REQUEST_CREDIT_MONEY);
+	}
 
+	public void printMessageOfRequestWinningNumbers() {
+		printMessage(REQUEST_WINNING_NUMBERS);
+	}
+
+	public void printMessageOfRequestBonusNumber() {
+		printMessage(REQUEST_BONUS_NUMBER);
+	}
+
+	public void printTitleOfAnalysis() {
+		printMessage(TITLE_OF_ANALYSIS);
+	}
+
+	public void printDividingLine() {
+		printMessage(DIVIDING_LINE);
+	}
+
+	public void printEmptyLine() {
+		printMessage(EMPTY_STRING);
+	}
+
+	public void printTicketCount(final Tickets tickets) {
+		final int ticketCount = tickets.getTicketsCount();
+		final String message = String.format(TICKET_COUNT_FORMAT.getMessage(), ticketCount);
+		printMessage(message);
+	}
+
+	public void printTickets(final Tickets tickets) {
 		tickets.getTickets()
 			.stream()
-			.map(OutputView::makeTicketFormat)
-			.forEach(System.out::println);
-
-		System.out.println();
+			.map(this::makeTicketFormat)
+			.forEach(this::printMessage);
 	}
 
-	private static void printTicketCount(final Tickets tickets) {
-		System.out.println(tickets.getTicketsCount() + COUNT_MESSAGE);
-	}
-
-	private static String makeTicketFormat(final Ticket ticket) {
+	private String makeTicketFormat(final Ticket ticket) {
 		final List<String> ticketBalls = ticket.getBalls()
 			.stream()
 			.map(Ball::getBallNumber)
 			.map(String::valueOf)
 			.collect(Collectors.toUnmodifiableList());
 
-		return START_SIGN + String.join(",", ticketBalls) + END_SIGN;
+		return "[" + String.join(",", ticketBalls) + "]";
 	}
 
-	public static void printAnalysis(final AnalysisDto analysisDto) {
-		System.out.println(ANALYSIS_TITLE);
-		System.out.println(DIVIDING_LINE);
-
+	public void printAnalysis(final AnalysisDto analysisDto) {
 		final Map<Rank, Integer> rankCounts = analysisDto.getRankCounts();
 
 		for (Rank rank : rankCounts.keySet()) {
@@ -58,11 +79,12 @@ public class OutputView {
 				message += ", 보너스 볼 일치";
 			}
 			message += String.format("(%d원) - %d개", rank.getPrize(), count);
-			System.out.println(message);
+			printMessage(message);
 		}
 
 		final double rate = analysisDto.getRate();
-		System.out.printf(PROFIT_RATE_MESSAGE_FORMAT, rate);
+		final String message = String.format(PROFIT_RAGE_FORMAT.getMessage(), rate);
+		printMessage(message);
 	}
 
 }

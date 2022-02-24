@@ -8,19 +8,17 @@ import lotto.exception.LottoException;
 import lotto.exception.LottoExceptionStatus;
 import lotto.exception.ball.BallNumberExceptionStatus;
 import lotto.exception.credit.CreditMoneyExceptionStatus;
-import lotto.view.input.reader.ConsoleReader;
 import lotto.view.input.reader.Reader;
 
 public class InputView {
 
-	private static final String MESSAGE_OF_REQUEST_CREDIT_MONEY = "구입금액을 입력해 주세요.";
-	private static final String MESSAGE_OF_REQUEST_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
-	private static final String MESSAGE_OF_REQUEST_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
-	private static final String DELIMITER = ",";
+	private final Reader reader;
 
-	private static final Reader reader = new ConsoleReader();
+	public InputView(Reader reader) {
+		this.reader = reader;
+	}
 
-	private static int parseNumber(final String text, LottoExceptionStatus lottoExceptionStatus) {
+	private int parseNumber(final String text, LottoExceptionStatus lottoExceptionStatus) {
 		try {
 			return Integer.parseInt(text);
 		} catch (NumberFormatException ex) {
@@ -28,34 +26,31 @@ public class InputView {
 		}
 	}
 
-	public static int requestCreditMoney() {
-		System.out.println(MESSAGE_OF_REQUEST_CREDIT_MONEY);
+	public int requestCreditMoney() {
 		return parseCreditMoney(reader.readLine());
 	}
 
-	private static int parseCreditMoney(final String inputValue) {
+	private int parseCreditMoney(final String inputValue) {
 		return parseNumber(inputValue, CreditMoneyExceptionStatus.MONEY_IS_NOT_NUMERIC);
 	}
 
-	public static List<Integer> requestWinningNumbers() {
-		System.out.println(MESSAGE_OF_REQUEST_WINNING_NUMBERS);
+	public List<Integer> requestWinningNumbers() {
 		final String inputValue = reader.readLine();
-		return Arrays.stream(inputValue.split(DELIMITER, -1))
+		return Arrays.stream(inputValue.split(",", -1))
 			.map(String::trim)
-			.map(InputView::parseWinningNumber)
+			.map(this::parseWinningNumber)
 			.collect(Collectors.toUnmodifiableList());
 	}
 
-	private static int parseWinningNumber(final String inputValue) {
+	private int parseWinningNumber(final String inputValue) {
 		return parseNumber(inputValue, BallNumberExceptionStatus.BALL_IS_NOT_NUMERIC);
 	}
 
-	public static int requestBonusNumber() {
-		System.out.println(MESSAGE_OF_REQUEST_BONUS_NUMBER);
+	public int requestBonusNumber() {
 		return parseBonusNumber(reader.readLine());
 	}
 
-	private static int parseBonusNumber(final String inputValue) {
+	private int parseBonusNumber(final String inputValue) {
 		return parseNumber(inputValue, BallNumberExceptionStatus.BALL_IS_NOT_NUMERIC);
 	}
 

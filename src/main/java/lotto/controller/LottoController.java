@@ -5,12 +5,25 @@ import java.util.List;
 import lotto.domain.ticket.Tickets;
 import lotto.dto.AnalysisDto;
 import lotto.service.LottoService;
+import lotto.view.View;
 import lotto.view.input.InputView;
+import lotto.view.input.reader.ConsoleReader;
+import lotto.view.input.reader.Reader;
 import lotto.view.output.OutputView;
 
 public class LottoController {
 
-	private final LottoService lottoService = new LottoService();
+	private final View view;
+	private final LottoService lottoService;
+
+	public LottoController() {
+		final Reader reader = new ConsoleReader();
+		final InputView inputView = new InputView(reader);
+		final OutputView outputView = new OutputView();
+
+		this.view = new View(inputView, outputView);
+		this.lottoService = new LottoService();
+	}
 
 	public void run() {
 		announceTickets();
@@ -18,20 +31,20 @@ public class LottoController {
 	}
 
 	private void announceTickets() {
-		final int payment = InputView.requestCreditMoney();
+		final int payment = view.requestCreditMoney();
 		lottoService.initPayment(payment);
 		lottoService.generateTickets();
 
 		final Tickets tickets = lottoService.getTickets();
-		OutputView.printTickets(tickets);
+		view.announceTickets(tickets);
 	}
 
 	private void announceAnalysis() {
-		final List<Integer> answer = InputView.requestWinningNumbers();
-		final int number = InputView.requestBonusNumber();
+		final List<Integer> answer = view.requestWinningNumbers();
+		final int number = view.requestBonusNumber();
 
 		final AnalysisDto analysisDto = lottoService.generateAnalysis(answer, number);
-		OutputView.printAnalysis(analysisDto);
+		view.announceAnalysis(analysisDto);
 	}
 
 }
