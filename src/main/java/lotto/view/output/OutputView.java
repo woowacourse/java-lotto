@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import lotto.domain.rank.Rank;
+import lotto.domain.ticket.Ball;
 import lotto.domain.ticket.Ticket;
 import lotto.domain.ticket.Tickets;
 import lotto.dto.AnalysisDto;
@@ -37,6 +38,7 @@ public class OutputView {
 	private static String makeTicketFormat(final Ticket ticket) {
 		final List<String> ticketBalls = ticket.getBalls()
 			.stream()
+			.map(Ball::getBallNumber)
 			.map(String::valueOf)
 			.collect(Collectors.toUnmodifiableList());
 

@@ -13,6 +13,10 @@ public class Ball {
 		this.number = number;
 	}
 
+	public int getBallNumber() {
+		return this.number;
+	}
+
 	@Override
 	public boolean equals(final Object object) {
 		if (this == object) {
@@ -28,10 +32,6 @@ public class Ball {
 	@Override
 	public int hashCode() {
 		return Objects.hash(number);
-	}
-
-	public int getNumber() {
-		return this.number;
 	}
 
 }
