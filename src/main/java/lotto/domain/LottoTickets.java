@@ -11,7 +11,7 @@ import lotto.domain.generator.LottoNumberGenerator;
 
 public class LottoTickets {
 
-    public static final int LOTTO_COUNT_START_INCLUSIVE = 0;
+    private static final int LOTTO_COUNT_START_INCLUSIVE = 0;
     private final List<LottoTicket> lottoTickets;
 
     public LottoTickets(int lottoCount, LottoNumberGenerator lottoNumberGenerator) {
