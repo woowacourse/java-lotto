@@ -22,9 +22,10 @@ public class LottoMachine {
         this.issuedLottoNumbers = new ArrayList<>();
     }
 
-    public void issueLotto(Money money) {
+    public List<LottoNumbers> issueLotto(Money money) {
         BigDecimal shareValue = money.divide(LOTTO_PRICE);
         issuedLottoNumbers = generate(shareValue.intValue());
+        return issuedLottoNumbers;
     }
 
     public List<LottoNumbers> generate(int quantity) {
