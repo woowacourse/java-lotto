@@ -4,28 +4,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
+    private Money money;
     private List<Lotto> lottos;
     private LottoResult result;
 
     public Lottos(Money money) {
+        this.money = money;
         this.lottos = new ArrayList<>();
         this.result = new LottoResult();
-        purchaseLotto(money);
+        purchaseLotto();
     }
 
-    private void purchaseLotto(Money money) {
+    private void purchaseLotto() {
         for (int i = 0; i < getLottoCount(money); i++) {
             lottos.add(new Lotto(new ChoiceNumber()));
         }
     }
 
-    public double getYield(Money money) {
-        return result.sumOfPrize() / money.getMoney();
+    public double getYield() {
+        return result.sumOfPrize() / money.getAmount();
     }
 
 
     private int getLottoCount(Money money) {
-        return money.getMoney() / 1000;
+        return money.getAmount() / 1000;
     }
 
     public int getLottosSize() {

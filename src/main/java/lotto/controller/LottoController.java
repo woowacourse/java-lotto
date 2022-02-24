@@ -12,7 +12,6 @@ import lotto.view.OutputView;
 public class LottoController {
     private InputView inputView;
     private OutputView outputView;
-    private Money money;
     private Lottos lottos;
 
     public LottoController() {
@@ -21,7 +20,7 @@ public class LottoController {
     }
 
     public void start() {
-        money = initMoney();
+        Money money = initMoney();
         lottos = new Lottos(money);
         outputView.printPurchasedLotto(lottos);
         ChoiceNumber choiceNumber = getPickedNumber();
@@ -29,8 +28,18 @@ public class LottoController {
         WinningNumber winningNumber = new WinningNumber(choiceNumber, bonusNumber);
         LottoResult result = lottos.getResult(winningNumber);
         outputView.printResult(result);
-        outputView.printYield(lottos.getYield(money));
+        outputView.printYield(lottos.getYield());
+    }
 
+    private Money initMoney() {
+        try {
+            outputView.printAskMoneyInputMessage();
+            Money money = new Money(inputView.getInput());
+            return money;
+        } catch (IllegalArgumentException exception) {
+            outputView.printErrorMessage(exception);
+            return initMoney();
+        }
     }
 
     private ChoiceNumber getPickedNumber() {
@@ -54,16 +63,5 @@ public class LottoController {
             return getBonusNumber(choiceNumber);
         }
 
-    }
-
-    private Money initMoney() {
-        try {
-            outputView.printAskMoneyInputMessage();
-            Money money = new Money(inputView.getInput());
-            return money;
-        } catch (IllegalArgumentException exception) {
-            outputView.printErrorMessage(exception);
-            return initMoney();
-        }
     }
 }
