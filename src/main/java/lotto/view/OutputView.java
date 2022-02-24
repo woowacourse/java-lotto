@@ -20,14 +20,14 @@ public class OutputView {
             InvalidRankException.class, "일치하는 로또 번호 갯수는 0 ~ 6 사이여야 합니다.",
             InvalidNumberRangeException.class, "로또 번호는 1 ~ 45 사이여야 합니다.");
 
-    public static void printIssuedLottoNumbers(List<Lotto> lottoNumbersList) {
+    public static void printIssuedLottoes(List<Lotto> lottoNumbersList) {
         System.out.println(lottoNumbersList.size() + "개를 구매했습니다.");
         for (Lotto numbers : lottoNumbersList) {
-            printEachLottoNumbers(numbers);
+            printEachLotto(numbers);
         }
     }
 
-    private static void printEachLottoNumbers(Lotto numbers) {
+    private static void printEachLotto(Lotto numbers) {
         String lottoNumbersText = numbers.getIntValues().stream().sorted().map(String::valueOf)
             .collect(Collectors.joining(", ", "[", "]"));
         System.out.println(lottoNumbersText);
@@ -47,20 +47,26 @@ public class OutputView {
     }
 
     private static String getSummaryWord(Statistic result) {
-        if (result.getProfitRate().compareTo(new BigDecimal(1)) == -1) {
+        if (result.getProfitRate().compareTo(BigDecimal.ONE) == -1) {
             return "손해";
+        } else if (result.getProfitRate().compareTo(BigDecimal.ONE) == 0) {
+            return "본전";
         }
         return "이익";
     }
 
     public static void printErrorMessage(Exception e) {
-        System.out.println("[ERROR] " + getErrorMessage(e));
+        printMessage(errorMessage(e));
     }
 
-    private static String getErrorMessage(Exception e) {
+    private static String errorMessage(Exception e) {
         if (EXCEPTION_MESSAGE_MAP.containsKey(e.getClass())) {
             return EXCEPTION_MESSAGE_MAP.get(e.getClass());
         }
         return e.getMessage();
+    }
+
+    public static void printMessage(String message) {
+        System.out.println(message);
     }
 }

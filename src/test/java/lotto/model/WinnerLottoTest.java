@@ -15,7 +15,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-public class WinningLottoTest {
+public class WinnerLottoTest {
 
     private static final Number BONUS = new Number(7);
     private static final Lotto WINNING_LOTTO = new Lotto(List.of(1, 2, 3, 4, 5, 6));
@@ -38,11 +38,11 @@ public class WinningLottoTest {
     private static final Money FIFTH_RANK_PRIZE = Rank.FIFTH.getPrize();
     private static final Money THOUSAND_MONEY = new Money(1000);
 
-    private WinningLotto winningLotto;
+    private WinnerLotto winnerLotto;
 
     @BeforeEach
     void setUp() {
-        winningLotto = new WinningLotto(WINNING_LOTTO, BONUS);
+        winnerLotto = new WinnerLotto(WINNING_LOTTO, BONUS);
     }
 
 
@@ -51,7 +51,7 @@ public class WinningLottoTest {
     void createValidWinningLottoNumbers() {
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         Number bonus = new Number(7);
-        assertThatCode(() -> new WinningLotto(lotto, bonus)).doesNotThrowAnyException();
+        assertThatCode(() -> new WinnerLotto(lotto, bonus)).doesNotThrowAnyException();
     }
 
     @Test
@@ -59,14 +59,14 @@ public class WinningLottoTest {
     void duplicatedWinningLottoNumbers() {
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         Number bonus = new Number(1);
-        assertThatThrownBy(() -> new WinningLotto(lotto, bonus))
+        assertThatThrownBy(() -> new WinnerLotto(lotto, bonus))
             .isInstanceOf(DuplicatedNumberException.class);
     }
 
     @Test
     @DisplayName("1등 판독 테스트")
     void firstPrize() {
-        Statistic statistic = winningLotto.summarize(List.of(FIRST_RANK_LOTTO), THOUSAND_MONEY);
+        Statistic statistic = winnerLotto.summarize(List.of(FIRST_RANK_LOTTO), THOUSAND_MONEY);
         assertThat(statistic.getProfitRate()).isEqualTo(FIRST_RANK_PRIZE.divide(THOUSAND_MONEY));
         assertThat(statistic.getCountByRank(Rank.FIRST)).isEqualTo(1);
     }
@@ -74,7 +74,7 @@ public class WinningLottoTest {
     @Test
     @DisplayName("2등 판독 테스트")
     void secondPrize() {
-        Statistic result = winningLotto.summarize(List.of(SECOND_RANK_LOTTO), THOUSAND_MONEY);
+        Statistic result = winnerLotto.summarize(List.of(SECOND_RANK_LOTTO), THOUSAND_MONEY);
         assertThat(result.getProfitRate()).isEqualTo(SECOND_RANK_PRIZE.divide(THOUSAND_MONEY));
         assertThat(result.getCountByRank(Rank.SECOND)).isEqualTo(1);
     }
@@ -82,7 +82,7 @@ public class WinningLottoTest {
     @Test
     @DisplayName("3등 판독 테스트")
     void thirdPrize() {
-        Statistic result = winningLotto.summarize(List.of(THIRD_RANK_LOTTO), THOUSAND_MONEY);
+        Statistic result = winnerLotto.summarize(List.of(THIRD_RANK_LOTTO), THOUSAND_MONEY);
         assertThat(result.getProfitRate()).isEqualTo(THIRD_RANK_PRIZE.divide(THOUSAND_MONEY));
         assertThat(result.getCountByRank(Rank.THIRD)).isEqualTo(1);
     }
@@ -90,7 +90,7 @@ public class WinningLottoTest {
     @Test
     @DisplayName("4등 판독 테스트")
     void fourthPrize() {
-        Statistic result = winningLotto.summarize(List.of(FOURTH_RANK_LOTTO), THOUSAND_MONEY);
+        Statistic result = winnerLotto.summarize(List.of(FOURTH_RANK_LOTTO), THOUSAND_MONEY);
         assertThat(result.getProfitRate()).isEqualTo(FOURTH_RANK_PRIZE.divide(THOUSAND_MONEY));
         assertThat(result.getCountByRank(Rank.FOURTH)).isEqualTo(1);
     }
@@ -98,7 +98,7 @@ public class WinningLottoTest {
     @Test
     @DisplayName("5등 판독 테스트")
     void fifthPrize() {
-        Statistic result = winningLotto.summarize(List.of(FIFTH_RANK_LOTTO), THOUSAND_MONEY);
+        Statistic result = winnerLotto.summarize(List.of(FIFTH_RANK_LOTTO), THOUSAND_MONEY);
         assertThat(result.getProfitRate()).isEqualTo(FIFTH_RANK_PRIZE.divide(THOUSAND_MONEY));
         assertThat(result.getCountByRank(Rank.FIFTH)).isEqualTo(1);
     }
@@ -107,7 +107,7 @@ public class WinningLottoTest {
     @MethodSource("provideLottoNumbersList")
     @DisplayName("꽝 판독 테스트")
     void nothingPrize(Lotto lottoNumbers) {
-        Statistic result = winningLotto.summarize(List.of(lottoNumbers), THOUSAND_MONEY);
+        Statistic result = winnerLotto.summarize(List.of(lottoNumbers), THOUSAND_MONEY);
         assertThat(result.getProfitRate()).isEqualTo(new BigDecimal(0));
         assertThat(result.getCountByRank(Rank.NOTHING)).isEqualTo(1);
     }
@@ -122,7 +122,7 @@ public class WinningLottoTest {
     @Test
     @DisplayName("다양한 로또 순위 구하기")
     void summarize() {
-        Statistic result = winningLotto.summarize(
+        Statistic result = winnerLotto.summarize(
             List.of(FIRST_RANK_LOTTO, FIRST_RANK_LOTTO,
                 SECOND_RANK_LOTTO, THIRD_RANK_LOTTO,
                 THIRD_RANK_LOTTO, NOTHING_RANK_LOTTO),

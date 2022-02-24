@@ -27,7 +27,7 @@ public class MoneyParserTest {
     void invalidMoneyFormat(String text) {
         MoneyParser parser = new MoneyParser();
         assertThatThrownBy(() -> parser.parse(text))
-            .isInstanceOf(IllegalArgumentException.class)
+            .isInstanceOf(InvalidFormatException.class)
             .hasMessage(INVALID_MONEY_FORMAT_MESSAGE);
     }
 

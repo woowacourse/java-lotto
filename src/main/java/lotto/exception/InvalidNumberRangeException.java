@@ -1,4 +1,4 @@
 package lotto.exception;
 
-public class InvalidNumberRangeException extends IllegalArgumentException {
+public class InvalidNumberRangeException extends LottoException {
 }

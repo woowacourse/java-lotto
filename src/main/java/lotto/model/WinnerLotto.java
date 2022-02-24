@@ -3,16 +3,16 @@ package lotto.model;
 import lotto.exception.DuplicatedNumberException;
 import java.util.List;
 
-public class WinningLotto {
+public class WinnerLotto {
 
-    private final Lotto winningLotto;
+    private final Lotto winnerLotto;
     private final Number bonus;
 
-    public WinningLotto(Lotto winningLotto, Number bonus) {
-        if (winningLotto.contains(bonus)) {
+    public WinnerLotto(Lotto winnerLotto, Number bonus) {
+        if (winnerLotto.contains(bonus)) {
             throw new DuplicatedNumberException();
         }
-        this.winningLotto = winningLotto;
+        this.winnerLotto = winnerLotto;
         this.bonus = bonus;
     }
 
@@ -29,7 +29,7 @@ public class WinningLotto {
     }
 
     private int matchedCount(Lotto lottoNumbers) {
-        return this.winningLotto.getMatchedCount(lottoNumbers);
+        return this.winnerLotto.getMatchedCount(lottoNumbers);
     }
 
     private boolean isBonusMatched(Lotto lottoNumbers) {

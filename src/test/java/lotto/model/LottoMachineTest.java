@@ -5,11 +5,13 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottoMachineTest {
 
     @Test
+    @DisplayName("로또 발급 테스트")
     void issueLottoNumbers() {
         final AtomicInteger count = new AtomicInteger(0);
         final Lotto[] lottoes = new Lotto[]{

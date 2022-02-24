@@ -4,9 +4,8 @@ public abstract class Parser<T> {
 
     public T parse(String text) {
         if (!text.matches(regex())) {
-            throw new IllegalArgumentException(errorMessage());
+            throw new InvalidFormatException(errorMessage());
         }
-
         return convert(text);
     }
 

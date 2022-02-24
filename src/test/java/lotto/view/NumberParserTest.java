@@ -27,7 +27,7 @@ public class NumberParserTest {
     void invalidParse(String text) {
         NumberParser parser = new NumberParser();
         assertThatThrownBy(() -> parser.parse(text))
-            .isInstanceOf(IllegalArgumentException.class)
+            .isInstanceOf(InvalidFormatException.class)
             .hasMessage(INVALID_BONUS_NUMBER_FORMAT_MESSAGE);
     }
 

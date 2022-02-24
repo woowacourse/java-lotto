@@ -1,5 +1,5 @@
 package lotto.exception;
 
-public class DuplicatedNumberException extends IllegalArgumentException {
+public class DuplicatedNumberException extends LottoException {
 
 }

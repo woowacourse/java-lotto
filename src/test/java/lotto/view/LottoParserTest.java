@@ -26,7 +26,7 @@ public class LottoParserTest {
     @DisplayName("로또 당첨 번호 숫자가 아닌 경우")
     void winningNumberNotNumericValue() {
         assertThatThrownBy(() -> parser.parse("a,b,c,d,e,f"))
-            .isInstanceOf(IllegalArgumentException.class)
+            .isInstanceOf(InvalidFormatException.class)
             .hasMessage(INVALID_LOTTO_NUMBER_FORMAT_MESSAGE);
     }
 
@@ -48,7 +48,7 @@ public class LottoParserTest {
     @DisplayName("잘못된 로또 번호 포맷 검증")
     void validateInvalidLottoNumberFormat(String invalidLottoNumbers) {
         assertThatThrownBy(() -> parser.parse(invalidLottoNumbers))
-            .isInstanceOf(IllegalArgumentException.class)
+            .isInstanceOf(InvalidFormatException.class)
             .hasMessage(INVALID_LOTTO_NUMBER_FORMAT_MESSAGE);
     }
 
