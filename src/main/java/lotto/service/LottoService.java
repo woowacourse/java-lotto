@@ -46,6 +46,7 @@ public class LottoService {
     private Map<LottoMatchKind, Integer> match(final TargetLottoNumbers target) {
         lottoNumbersGroup.stream()
                 .map(target::getLottoMatchResult)
+                .filter(lottoMatchKind -> lottoMatchKind != LottoMatchKind.LOWER_THAN_THREE)
                 .forEach(lottoMatchKind -> matchResult.put(lottoMatchKind, matchResult.get(lottoMatchKind) + 1));
         return matchResult;
     }

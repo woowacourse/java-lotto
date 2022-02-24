@@ -55,7 +55,7 @@ class LottoServiceTest {
     void getMatchResult() {
         final Map<LottoMatchKind, Integer> actual = lottoService.getMatchResult(targetLottoNumbers);
         assertThat(actual).containsExactly(
-                entry(THREE, 1), entry(FOUR, 1), entry(FIVE, 1), entry(FIVE_BONUS, 1), entry(SIX, 1));
+                entry(LOWER_THAN_THREE, 0), entry(THREE, 1), entry(FOUR, 1), entry(FIVE, 1), entry(FIVE_BONUS, 1), entry(SIX, 1));
     }
 
     @Test
