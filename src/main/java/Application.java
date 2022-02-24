@@ -2,6 +2,7 @@ import static view.InputView.requestBonusNumber;
 import static view.InputView.requestTotalLottoPrice;
 import static view.InputView.requestWinningNumbers;
 import static view.OutputView.printLottoResults;
+import static view.OutputView.printPrizePriceRatio;
 import static view.OutputView.printPurchaseInfo;
 
 import controller.LottoController;
@@ -21,6 +22,6 @@ public class Application {
 
         LottoGame lottoGame = new LottoGame(lottos, referee);
         printLottoResults(lottoGame.getResultStatistics());
-        printLottoResults(lottoGame.calculateProfitRatio());
+        printPrizePriceRatio(lottoGame.calculateProfitRatio());
     }
 }

@@ -74,8 +74,8 @@ public class OutputView {
         return BLANK_SPACE;
     }
 
-    public static void printLottoResults(float prizePrizeRatio) {
-        print(format(PRIZE_PRICE_RATIO_TEXT_FORMAT, prizePrizeRatio));
+    public static void printPrizePriceRatio(float prizePriceRatio) {
+        print(format(PRIZE_PRICE_RATIO_TEXT_FORMAT, prizePriceRatio));
     }
 
     private static <T> String format(String stringFormat, T value) {
