@@ -7,10 +7,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import lotto.domain.rank.Rank;
-import lotto.domain.ticket.Ball;
-import lotto.domain.ticket.Ticket;
-import lotto.domain.ticket.Tickets;
 import lotto.dto.AnalysisDto;
+import lotto.dto.TicketDto;
 
 public class OutputView {
 
@@ -46,23 +44,21 @@ public class OutputView {
 		printMessage(EMPTY_STRING);
 	}
 
-	public void printTicketCount(final Tickets tickets) {
-		final int ticketCount = tickets.getTicketsCount();
+	public void printTicketCount(final List<TicketDto> ticketDtos) {
+		final int ticketCount = ticketDtos.size();
 		final String message = String.format(TICKET_COUNT_FORMAT.getMessage(), ticketCount);
 		printMessage(message);
 	}
 
-	public void printTickets(final Tickets tickets) {
-		tickets.getTickets()
-			.stream()
+	public void printTickets(final List<TicketDto> ticketDtos) {
+		ticketDtos.stream()
 			.map(this::makeTicketFormat)
 			.forEach(this::printMessage);
 	}
 
-	private String makeTicketFormat(final Ticket ticket) {
-		final List<String> ticketBalls = ticket.getBalls()
+	private String makeTicketFormat(final TicketDto ticketDto) {
+		final List<String> ticketBalls = ticketDto.getBallNumbers()
 			.stream()
-			.map(Ball::getBallNumber)
 			.map(String::valueOf)
 			.collect(Collectors.toUnmodifiableList());
 

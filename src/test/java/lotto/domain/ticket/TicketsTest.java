@@ -13,6 +13,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import lotto.domain.rank.Rank;
 import lotto.domain.ticket.generator.CustomTicketGenerator;
+import lotto.dto.TicketDto;
 
 class TicketsTest {
 
@@ -24,7 +25,8 @@ class TicketsTest {
 	void generateTicketsSizeCheckTest(final List<Integer> generatorNumbers, final int ticketCount) {
 		customTicketGenerator.initNumbers(generatorNumbers);
 		final Tickets tickets = new Tickets(ticketCount, customTicketGenerator);
-		assertThat(tickets.getTicketsCount()).isEqualTo(ticketCount);
+		final List<TicketDto> ticketDtos = tickets.getTicketDtos();
+		assertThat(ticketDtos.size()).isEqualTo(ticketCount);
 	}
 
 	public static Stream<Arguments> provideForGenerateTest() {

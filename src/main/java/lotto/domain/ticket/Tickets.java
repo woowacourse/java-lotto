@@ -2,12 +2,12 @@ package lotto.domain.ticket;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import lotto.domain.rank.Rank;
 import lotto.domain.ticket.generator.TicketGenerator;
+import lotto.dto.TicketDto;
 
 public class Tickets {
 
@@ -35,12 +35,10 @@ public class Tickets {
 				.collect(Collectors.toUnmodifiableList());
 	}
 
-	public int getTicketsCount() {
-		return tickets.size();
-	}
-
-	public List<Ticket> getTickets() {
-		return new ArrayList<>(tickets);
+	public List<TicketDto> getTicketDtos() {
+		return tickets.stream()
+				.map(TicketDto::toDto)
+				.collect(Collectors.toUnmodifiableList());
 	}
 
 }

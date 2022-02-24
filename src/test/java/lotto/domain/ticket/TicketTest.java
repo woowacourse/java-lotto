@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import lotto.domain.rank.Rank;
@@ -85,7 +86,10 @@ class TicketTest {
 	void countMatches(final List<Integer> numbers, final List<Integer> winningNumbers, final int matchCount) {
 		final Ticket ticket = new Ticket((numbers));
 		final Ticket winningTicket = new Ticket(winningNumbers);
-		final List<Ball> winningBalls = winningTicket.getBalls();
+		final List<Integer> winningBallNumbers = winningTicket.getBallNumbers();
+		final List<Ball> winningBalls = winningBallNumbers.stream()
+				.map(Ball::new)
+				.collect(Collectors.toUnmodifiableList());
 
 		assertThat(ticket.countMatches(winningBalls)).isEqualTo(matchCount);
 	}

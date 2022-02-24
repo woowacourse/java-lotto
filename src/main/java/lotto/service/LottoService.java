@@ -1,9 +1,6 @@
 package lotto.service;
 
-import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import lotto.domain.credit.Credit;
 import lotto.domain.rank.Rank;
@@ -12,6 +9,7 @@ import lotto.domain.ticket.Ticket;
 import lotto.domain.ticket.Tickets;
 import lotto.domain.ticket.generator.RandomTicketGenerator;
 import lotto.dto.AnalysisDto;
+import lotto.dto.TicketDto;
 
 public class LottoService {
 
@@ -32,8 +30,8 @@ public class LottoService {
 		return new AnalysisDto(ranks, credit.getMoney());
 	}
 
-	public Tickets getTickets() {
-		return this.tickets;
+	public List<TicketDto> getTicketDtos() {
+		return tickets.getTicketDtos();
 	}
 
 }

@@ -39,8 +39,10 @@ public class Ticket {
 		return Rank.of(matchCount, bonusBallMatched);
 	}
 
-	public List<Ball> getBalls() {
-		return new ArrayList<>(balls);
+	public List<Integer> getBallNumbers() {
+		return balls.stream()
+				.map(Ball::getBallNumber)
+				.collect(Collectors.toUnmodifiableList());
 	}
 
 }

@@ -2,8 +2,8 @@ package lotto.view;
 
 import java.util.List;
 
-import lotto.domain.ticket.Tickets;
 import lotto.dto.AnalysisDto;
+import lotto.dto.TicketDto;
 import lotto.view.input.InputView;
 import lotto.view.output.OutputView;
 
@@ -32,9 +32,9 @@ public class LottoView {
         return inputView.requestBonusNumber();
     }
 
-    public void announceTickets(Tickets tickets) {
-        outputView.printTicketCount(tickets);
-        outputView.printTickets(tickets);
+    public void announceTickets(List<TicketDto> ticketDtos) {
+        outputView.printTicketCount(ticketDtos);
+        outputView.printTickets(ticketDtos);
     }
 
     public void announceAnalysis(AnalysisDto analysis) {
