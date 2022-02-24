@@ -18,7 +18,7 @@ public class LottoResult {
         return result.getOrDefault(rank, 0);
     }
 
-    public LottoResult generate(Lottos lottos, WinningNumbers winningNumbers, BonusNumber bonusNumber) {
+    public LottoResult generate(Lottos lottos, WinningNumbers winningNumbers, LottoNumber bonusNumber) {
         lottos.getLottos().forEach(lotto -> {
             Rank currentRank = match(lotto, winningNumbers, bonusNumber);
             result.put(currentRank, getOrDefault(currentRank) + 1);
@@ -26,7 +26,7 @@ public class LottoResult {
         return this;
     }
 
-    public Rank match(Lotto lotto, WinningNumbers winningNumbers, BonusNumber bonusNumber) {
+    public Rank match(Lotto lotto, WinningNumbers winningNumbers, LottoNumber bonusNumber) {
         return Rank.parse(lotto.match(winningNumbers),lotto.matchBonusNumber(bonusNumber));
     }
 }

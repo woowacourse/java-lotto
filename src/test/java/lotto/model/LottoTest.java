@@ -31,7 +31,7 @@ class LottoTest {
     @DisplayName("보너스 번호 당첨 여부를 확인한다")
     void matchBonusNumberTest() {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        BonusNumber bonusNumber = new BonusNumber(6);
+        LottoNumber bonusNumber = new LottoNumber(6);
 
         boolean actual = lotto.matchBonusNumber(bonusNumber);
 
