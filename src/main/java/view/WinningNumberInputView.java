@@ -8,6 +8,7 @@ import validator.LottoNumberValidator;
 public class WinningNumberInputView implements InputView<List<Integer>> {
 
     private static final String INPUT_WINNING_NUMBER_MESSAGE = "지난 주 당첨 번호를 입럭해 주세요.";
+    private static final String SEPARATOR = ",";
 
     @Override
     public List<Integer> getUserInputData() {
@@ -31,8 +32,8 @@ public class WinningNumberInputView implements InputView<List<Integer>> {
                 .collect(Collectors.toList());
     }
 
-    private List<String> splitInputData(String inputData) {
-        return Arrays.stream(inputData.split(","))
+    private List<String> splitInputData(final String inputData) {
+        return Arrays.stream(inputData.split(SEPARATOR))
                 .map(String::trim)
                 .collect(Collectors.toList());
     }

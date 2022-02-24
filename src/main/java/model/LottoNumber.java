@@ -1,9 +1,12 @@
 package model;
 
 public class LottoNumber {
+    private static final int MIN_LOTTO_NUMBER = 1;
+    private static final int MAX_LOTTO_NUMBER = 45;
+
     private final int number;
 
-    public LottoNumber(int number) {
+    public LottoNumber(final int number) {
         this.number = checkNumber(number);
     }
 
@@ -14,11 +17,11 @@ public class LottoNumber {
         return number;
     }
 
-    private boolean isNotCorrectNumber(int number) {
-        return !(number <= 45 && number > 0);
+    private boolean isNotCorrectNumber(final int number) {
+        return number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER;
     }
 
-    public int value() {
+    public int getNumber() {
         return number;
     }
 }

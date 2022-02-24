@@ -1,36 +1,14 @@
+import controller.InputController;
 import controller.LottoController;
-import java.util.List;
-import java.util.Map;
+import controller.OutputController;
 import model.LottoNumberGenerateStrategy;
-import model.LottoTickets;
-import model.WinningPrize;
 
 public class LottoMain {
-    public static LottoController controller = new LottoController();
 
     public static void main(String[] args) {
-        LottoTickets lottoTickets = purchaseLottoTickets();
-        settingLottoGame(lottoTickets);
-        printLottoGameResult();
-    }
-
-    private static LottoTickets purchaseLottoTickets() {
-        int purchaseMoney = controller.inputPurchaseMoney();
-        LottoTickets lottoTickets = controller.createLottoTickets(purchaseMoney, new LottoNumberGenerateStrategy());
-        controller.printGeneratedLottoTickets(lottoTickets);
-        return lottoTickets;
-    }
-
-    private static void settingLottoGame(LottoTickets lottoTickets) {
-        List<Integer> winningNumbers = controller.inputWinningNumbers();
-        Integer bonusNumber = controller.inputBonusNumber();
-        controller.initLottoGame(lottoTickets, winningNumbers, bonusNumber);
-    }
-
-    private static void printLottoGameResult() {
-        Map<WinningPrize, Integer> winningResults = controller.winningResults();
-        Double rateOfReturn = controller.rateOfReturn();
-        controller.printWinningResults(winningResults);
-        controller.printRateOfReturn(rateOfReturn);
+        final LottoController LottoController = new LottoController(new LottoNumberGenerateStrategy(),
+                new InputController(), new OutputController());
+        LottoController.runGame();
     }
 }
+

@@ -7,7 +7,7 @@ public class LottoNumberValidator {
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int MIN_LOTTO_NUMBER = 1;
 
-    public static void validate(String number) {
+    public static void validate(final String number) {
         int parsedNumber;
         try {
             parsedNumber = Integer.parseInt(number);
@@ -20,7 +20,7 @@ public class LottoNumberValidator {
         }
     }
 
-    private static boolean isNotCorrectNumber(int number) {
+    private static boolean isNotCorrectNumber(final int number) {
         return !(number <= MAX_LOTTO_NUMBER && number >= MIN_LOTTO_NUMBER);
     }
 }

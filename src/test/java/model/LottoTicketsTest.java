@@ -17,7 +17,7 @@ class LottoTicketsTest {
         int purchaseMoney = 17000;
         GenerateStrategy generateStrategy = () -> new ArrayList<>(dummyLottoNumber);
         LottoTickets lottoTickets = new LottoTickets(purchaseMoney, generateStrategy);
-        lottoTickets.getTickets()
-                .forEach(lottoTicket -> assertThat(lottoTicket.lottoNumberValues()).isEqualTo(dummyLottoNumber));
+        lottoTickets.tickets()
+                .forEach(lottoTicket -> assertThat(lottoTicket.lottoNumbers()).isEqualTo(dummyLottoNumber));
     }
 }
