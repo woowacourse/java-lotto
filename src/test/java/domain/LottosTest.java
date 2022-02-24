@@ -1,4 +1,5 @@
-import domain.*;
+package domain;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -8,6 +9,7 @@ import util.RandomLottoNumberGenerator;
 
 import java.util.*;
 
+import static domain.CommonLogic.generateNumberList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -64,10 +66,6 @@ public class LottosTest {
 	@DisplayName("올바른 수익률을 산출하였는지 확인")
 	void correctProfitRate() {
 		assertThat(resultDTO.getProfitRate()).isEqualTo(1.0f);
-	}
-
-	static List<Integer> generateNumberList(int n1, int n2, int n3, int n4, int n5, int n6) {
-		return Arrays.asList(n1, n2, n3, n4, n5, n6);
 	}
 
 }

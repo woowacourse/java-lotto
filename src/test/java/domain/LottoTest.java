@@ -1,10 +1,9 @@
-import domain.*;
+package domain;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.List;
-
+import static domain.CommonLogic.generateNumberList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
@@ -79,7 +78,4 @@ public class LottoTest {
 		assertThat(lotto.calculate(answerLotto)).isEqualTo(ResultStatics.SIX);
 	}
 
-	static List<Integer> generateNumberList(int n1, int n2, int n3, int n4, int n5, int n6) {
-		return Arrays.asList(n1, n2, n3, n4, n5, n6);
-	}
 }
