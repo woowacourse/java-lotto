@@ -15,18 +15,6 @@ public class LottoTickets {
         this.lottoTickets = generateTickets(lottoCount, lottoNumberGenerator);
     }
 
-    private List<LottoTicket> generateTickets(int lottoCount, LottoNumberGenerator lottoNumberGenerator) {
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-
-        for (int i = 0; i < lottoCount; i++) {
-            LottoTicket lottoTicket = new LottoTicket(lottoNumberGenerator);
-
-            lottoTickets.add(lottoTicket);
-        }
-
-        return lottoTickets;
-    }
-
     public int totalCount() {
         return lottoTickets.size();
     }
@@ -44,5 +32,17 @@ public class LottoTickets {
 
     public List<LottoTicket> getLottoTickets() {
         return Collections.unmodifiableList(lottoTickets);
+    }
+
+    private List<LottoTicket> generateTickets(int lottoCount, LottoNumberGenerator lottoNumberGenerator) {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+
+        for (int i = 0; i < lottoCount; i++) {
+            LottoTicket lottoTicket = new LottoTicket(lottoNumberGenerator);
+
+            lottoTickets.add(lottoTicket);
+        }
+
+        return lottoTickets;
     }
 }
