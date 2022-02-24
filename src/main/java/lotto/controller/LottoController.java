@@ -25,17 +25,35 @@ public class LottoController {
     }
 
     public void run() {
-        LottoMachine lottoMachine = new LottoMachine();
-
         Money money = createMoney();
 
-        LottoTickets lottoTickets = createLottoTickets(lottoMachine, money);
+        LottoTickets lottoTickets = createLottoTickets(money);
 
         WinningNumbers winningNumbers = createWinningNumbers(new Scanner(System.in));
 
         LottoResult lottoResult = getLottoResult(lottoTickets, winningNumbers);
 
         getYield(money, lottoResult);
+    }
+
+    private Money createMoney() {
+        try {
+            return new Money(inputView.getMoney());
+        } catch(RuntimeException e) {
+            outputView.printErrorMessage(e.getMessage());
+
+            return createMoney();
+        }
+    }
+
+    private LottoTickets createLottoTickets(Money money) {
+        LottoMachine lottoMachine = new LottoMachine();
+        LottoTickets lottoTickets = lottoMachine.purchase(money);
+
+        outputView.printTotalCount(lottoTickets.totalCount());
+        outputView.printLottoTicketsInfo(lottoTickets);
+
+        return lottoTickets;
     }
 
     private void getYield(Money money, LottoResult lottoResult) {
@@ -54,25 +72,6 @@ public class LottoController {
         System.out.println("---------");
         LottoResult lottoResult = lottoTickets.determine(winningNumbers);
         return lottoResult;
-    }
-
-    private LottoTickets createLottoTickets(LottoMachine lottoMachine, Money money) {
-        LottoTickets lottoTickets = lottoMachine.purchase(money);
-
-        System.out.println(lottoTickets.totalCount() + "개를 구매했습니다.");
-        System.out.println(lottoTickets.getTicketsInfo());
-
-        return lottoTickets;
-    }
-
-    private Money createMoney() {
-        try {
-            return new Money(inputView.getMoney());
-        } catch(RuntimeException e) {
-            outputView.printErrorMessage(e.getMessage());
-
-            return createMoney();
-        }
     }
 
     private WinningNumbers createWinningNumbers(Scanner scanner) {

@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,16 +31,6 @@ public class LottoTickets {
         return lottoTickets.size();
     }
 
-    public String getTicketsInfo() {
-        String ticketsInfo = "";
-
-        for (LottoTicket lottoTicket : lottoTickets) {
-            ticketsInfo = ticketsInfo + lottoTicket.getLottoNumbers() + "\n";
-        }
-
-        return ticketsInfo;
-    }
-
     public LottoResult determine(WinningNumbers winningNumbers) {
         Map<Rank, Integer> ranks = new HashMap<>();
 
@@ -49,5 +40,9 @@ public class LottoTickets {
         }
 
         return new LottoResult(ranks);
+    }
+
+    public List<LottoTicket> getLottoTickets() {
+        return Collections.unmodifiableList(lottoTickets);
     }
 }
