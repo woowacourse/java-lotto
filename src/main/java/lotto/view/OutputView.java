@@ -22,14 +22,14 @@ public class OutputView {
         System.out.println("---------");
         for (LottoRank lottoRank : result.getResult().keySet()) {
             String message = String.format("%d개 일치%s(%d원) - %d개", lottoRank.getCorrectNumber(),
-                    getBonusMessage(lottoRank.getIsBonused()), lottoRank.getPrizeAmount(),
+                    getBonusMessage(lottoRank), lottoRank.getPrizeAmount(),
                     result.getResult().get(lottoRank));
             System.out.println(message);
         }
     }
 
-    private String getBonusMessage(boolean isBonused) {
-        if (isBonused) {
+    private String getBonusMessage(LottoRank lottoRank) {
+        if (lottoRank == LottoRank.RANK_SECOND) {
             return ", 보너스 볼 일치";
         }
         return " ";

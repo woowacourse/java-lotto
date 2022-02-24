@@ -64,7 +64,7 @@ public class ChoiceNumber {
                 .size();
     }
 
-    public boolean isContainNumber(int targetNumber) {
+    public boolean contains(int targetNumber) {
         return choiceNumbers.contains(targetNumber);
     }
 

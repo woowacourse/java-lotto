@@ -10,16 +10,17 @@ public class WinningNumber {
     }
 
     public LottoRank findLottoRank(ChoiceNumber choiceNumber) {
-        int sameCount = findSameNumber(choiceNumber);
-        boolean isBonused = false;
-        if (sameCount == 5) {
-            isBonused = choiceNumber.isContainNumber(bonusNumber.getBonusNumber());
-        }
+        int sameCount = findSameValueWith(choiceNumber);
+        boolean isBonus = containsBonusNumber(choiceNumber);
 
-        return LottoRank.valueOf(sameCount, isBonused);
+        return LottoRank.valueOf(sameCount, isBonus);
     }
 
-    private int findSameNumber(ChoiceNumber choiceNumber) {
+    private boolean containsBonusNumber(ChoiceNumber choiceNumber) {
+        return choiceNumber.contains(bonusNumber.getBonusNumber());
+    }
+
+    private int findSameValueWith(ChoiceNumber choiceNumber) {
         return winningNumbers.countSameNumber(choiceNumber);
     }
 }

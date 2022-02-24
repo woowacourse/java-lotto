@@ -25,8 +25,8 @@ public class Lotto {
     }
 
     public LottoResult computeResult(WinningNumber winningNumber) {
-        for (ChoiceNumber lotto : lotto) {
-            LottoRank lottoRank = winningNumber.findLottoRank(lotto);
+        for (ChoiceNumber choiceNumber : lotto) {
+            LottoRank lottoRank = winningNumber.findLottoRank(choiceNumber);
             if (lottoRank != null) {
                 result.add(lottoRank);
             }
