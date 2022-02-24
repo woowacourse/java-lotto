@@ -17,7 +17,7 @@ class LottoTicketTest {
                 .doesNotThrowAnyException();
     }
 
-    @DisplayName("Getter로 꺼내오는 리스트를 변경할 경우 예외를 던진다.")
+    @DisplayName("getter 로 꺼내오는 리스트를 변경할 경우 예외를 던진다.")
     @Test
     void 로또_티켓_불변_검증() {
         // given
@@ -31,7 +31,7 @@ class LottoTicketTest {
                 .isInstanceOf(UnsupportedOperationException.class);
     }
 
-    @DisplayName("LottoTicket을 기반으로 당첨 번호가 존재하는지 유무를 반환한다.")
+    @DisplayName("로또 티켓에 당첨 번호가 존재하는지 유무를 반환한다.")
     @Test
     void 당첨_번호_인지_확인() {
         // given
