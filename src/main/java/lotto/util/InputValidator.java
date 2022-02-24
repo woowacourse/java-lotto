@@ -14,31 +14,31 @@ public class InputValidator {
 
     private static final String NUMBER_REGEX = "\\d+";
 
-    public static int validatePrice(String price) {
+    public static int validatePrice(String price) throws RuntimeException {
         if (!Pattern.matches(NUMBER_REGEX, price)) {
             throw new RuntimeException(PRICE_ERROR_MESSAGE);
         }
         return Integer.parseInt(price);
     }
 
-    public static String[] validateWinningNumbers(String winningNumbers) {
+    public static String[] validateWinningNumbers(String winningNumbers) throws RuntimeException {
         String[] splitWinningNumbers = winningNumbers.split(",");
 
         validateLength(splitWinningNumbers);
         for (String number : splitWinningNumbers) {
-            validateNumber(number);
+            validateLottoNumber(number);
         }
         validateDuplicate(splitWinningNumbers);
         return splitWinningNumbers;
     }
 
-    private static void validateLength(String[] winningNumbers) {
+    private static void validateLength(String[] winningNumbers) throws RuntimeException {
         if (winningNumbers.length != 6) {
             throw new RuntimeException(LENGTH_ERROR_MESSAGE);
         }
     }
 
-    private static void validateNumber(String number) {
+    private static void validateLottoNumber(String number) throws RuntimeException {
         try {
             String trimNumber = number.trim();
             validateRange(Integer.parseInt(trimNumber));
@@ -47,21 +47,21 @@ public class InputValidator {
         }
     }
 
-    private static void validateRange(int number) {
+    private static void validateRange(int number) throws RuntimeException {
         if (number < 1 || number > 45) {
             throw new RuntimeException(RANGE_ERROR_MESSAGE);
         }
     }
 
-    private static void validateDuplicate(String[] winningNumbers) {
+    private static void validateDuplicate(String[] winningNumbers) throws RuntimeException {
         long count = Arrays.stream(winningNumbers).distinct().count();
         if (count != winningNumbers.length) {
             throw new RuntimeException(NUMBER_DUPLICATE_ERROR_MESSAGE);
         }
     }
 
-    public static void validateBonusNumber(String bonusNumber, List<Integer> winningNumbers) {
-        validateNumber(bonusNumber);
+    public static void validateBonusNumber(String bonusNumber, List<Integer> winningNumbers) throws RuntimeException {
+        validateLottoNumber(bonusNumber);
         if (winningNumbers.contains(Integer.parseInt(bonusNumber))) {
             throw new RuntimeException(NUMBER_DUPLICATE_ERROR_MESSAGE);
         }

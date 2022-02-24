@@ -17,18 +17,18 @@ public class LottoController {
         inputController = new InputController();
     }
 
-    public void run() {
-        Lottos lottos = makeLottos();
-        ResultView.printResult(lottos);
+    public void run() throws RuntimeException {
+            Lottos lottos = makeLottos();
+            ResultView.printResult(lottos);
 
-        WinningLotto winningLotto = makeWinningLotto();
+            WinningLotto winningLotto = makeWinningLotto();
 
-        winningLotto.checkRank(lottos);
-        lottos.countRank();
-        ResultView.printTotalResult(lottos);
+            winningLotto.checkRank(lottos);
+            lottos.countRank();
+            ResultView.printTotalResult(lottos);
     }
 
-    private Lottos makeLottos() {
+    private Lottos makeLottos() throws RuntimeException {
         int countLotto = inputController.countLotto(InputView.inputPrice());
         Lottos lottos = new Lottos();
         insertLottoToLottos(countLotto, lottos);
@@ -42,7 +42,7 @@ public class LottoController {
         }
     }
 
-    private WinningLotto makeWinningLotto() {
+    private WinningLotto makeWinningLotto() throws RuntimeException {
         List<Integer> winningNumbers = inputController.splitWinningNumbers(InputView.inputWinningNumbers());
         int bonusNumber = inputController.toIntBonusNumber(InputView.inputBonusNumber(), winningNumbers);
         return new WinningLotto(winningNumbers, bonusNumber);
