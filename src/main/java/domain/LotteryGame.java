@@ -29,11 +29,16 @@ public class LotteryGame {
 	}
 
 	private void createAutoLottery() {
+		final List<List<Integer>> lotteriesNumber = createLotteriesNumber();
+		lotteries = Lotteries.from(lotteriesNumber);
+	}
+
+	private List<List<Integer>> createLotteriesNumber() {
 		final List<List<Integer>> lotteriesNumber = new ArrayList<>();
 		for (int i = 0; i < theNumberOfLottery; i++) {
 			lotteriesNumber.add(lotteryGenerator.getNumbers());
 		}
-		lotteries = Lotteries.from(lotteriesNumber);
+		return lotteriesNumber;
 	}
 
 	public void createWinningLottery(final List<Integer> winningNumbers, final int bonusBall) {
