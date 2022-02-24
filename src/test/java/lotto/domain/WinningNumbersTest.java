@@ -83,4 +83,18 @@ class WinningNumbersTest {
         Assertions.assertThatThrownBy(() -> WinningNumbers.create(List.of("1, 2, 3, 4, 5, 5"), "6"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("정수가 아닌 입력에 대한 테스트")
+    @Test
+    public void 정수_아닌_입력_테스트() {
+        // given
+        String numbers = "일, 이, 삼, 사, 오, 육";
+        List<String> normalWinningNumbers = Arrays.asList(numbers.split(SEPARATOR));
+
+        String bonusBall = "칠";
+
+        // when & then
+        Assertions.assertThatThrownBy(() -> WinningNumbers.create(normalWinningNumbers, bonusBall))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
