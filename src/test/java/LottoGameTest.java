@@ -31,6 +31,6 @@ public class LottoGameTest {
         lottoGame.makeResult(winningNumbers, bonusNumber);
         double yield = lottoGame.getYield();
 
-        assertThat(yield).isEqualTo(2000005000 / 3000);
+        assertThat(yield).isEqualTo((float) 2000005000 / (float) 3000);
     }
 }
