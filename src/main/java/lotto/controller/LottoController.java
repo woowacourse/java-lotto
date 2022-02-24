@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.controller.dto.LottoTicketsDto;
 import lotto.domain.Money;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoResult;
@@ -42,7 +43,7 @@ public class LottoController {
         LottoTickets lottoTickets = new LottoMachine().purchase(money);
 
         outputView.printTotalCount(money.calculate());
-        outputView.printLottoTicketsInfo(lottoTickets);
+        outputView.printLottoTicketsInfo(new LottoTicketsDto(lottoTickets));
 
         return lottoTickets;
     }
