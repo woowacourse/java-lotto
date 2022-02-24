@@ -1,9 +1,11 @@
-package domain;
+package domain.lottery;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import domain.Rank;
 
 public class Lotteries {
 

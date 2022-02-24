@@ -1,6 +1,9 @@
-package domain;
+package domain.lottery;
 
 import java.util.List;
+
+import domain.Rank;
+import domain.lottery.Lottery;
 
 public class WinningLottery {
 

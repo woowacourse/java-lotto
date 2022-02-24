@@ -1,4 +1,4 @@
-package domain;
+package domain.lottery;
 
 import static org.assertj.core.api.AssertionsForClassTypes.*;
 
@@ -7,6 +7,8 @@ import java.util.Arrays;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+
+import domain.lottery.Lottery;
 
 public class LotteryTest {
 

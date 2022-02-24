@@ -20,7 +20,7 @@ public class LotteryGameController {
 	}
 
 	public void makeResult() {
-		Map<Rank,Integer> ranking = lotteryGame.makeWinner();
+		Map<Rank, Integer> ranking = lotteryGame.makeWinner();
 		double incomePercent = lotteryGame.makeRankingPercent(ranking);
 		OutputView.printStatistics(ranking, incomePercent);
 	}
@@ -36,8 +36,4 @@ public class LotteryGameController {
 	private List<Integer> inputWinningNumber() {
 		return InputView.inputValidLotteryNumber();
 	}
-
-	// public void createAutoLotteries() {
-	// 	lotteryGame = new LotteryGame()
-	// }
 }
