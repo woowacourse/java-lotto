@@ -92,6 +92,7 @@ public class WinningNumbers {
             throw new IllegalArgumentException("중복된 숫자가 존재할 수 없습니다.");
         }
 
+        normalWinningNumbers.remove(bonusWinningNumber);
     }
 
     private int getCorrectCount(LottoTicket lottoTicket) {

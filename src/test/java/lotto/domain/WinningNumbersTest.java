@@ -51,7 +51,12 @@ class WinningNumbersTest {
     @Test
     void 당첨_정보_확인_3등() {
         // given
-        WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 7);
+        String numbers = "1, 2, 3, 4, 5, 6";
+        List<String> normalWinningNumbers = Arrays.asList(numbers.split(SEPARATOR));
+
+        String bonusBall = "7";
+
+        WinningNumbers winningNumbers = WinningNumbers.create(normalWinningNumbers, bonusBall);
         LottoTicket lottoTicket = new LottoTicket(() -> List.of(1, 2, 3, 4, 5, 8));
 
         // when
