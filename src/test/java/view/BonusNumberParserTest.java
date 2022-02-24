@@ -17,7 +17,7 @@ public class BonusNumberParserTest {
     @DisplayName("정상적인 보너스 번호 입력 처리")
     void parse(String text, int actual) {
         BonusNumberParser parser = new BonusNumberParser();
-        assertThat(parser.parse(text)).isEqualTo(actual);
+        assertThat(parser.parse(text)).isEqualTo(new LottoNumber(actual));
     }
 
     @ParameterizedTest
