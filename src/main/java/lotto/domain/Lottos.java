@@ -1,12 +1,13 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Lottos {
 
-    private static final int LOTTO_TICKET_PRICE = 1000;
+    private static final int LOTTO_PRICE = 1000;
 
     private final List<Lotto> lottos;
 
@@ -15,15 +16,14 @@ public class Lottos {
     }
 
     public static Lottos buyLottosByAuto(Money money) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < calculateTotalLottoCount(money); i++) {
-            lottos.add(Lotto.generateLottoByAuto());
-        }
+        List<Lotto> lottos = IntStream.range(0, calculateTotalLottoCount(money))
+                .mapToObj(integer -> Lotto.generateLottoByAuto())
+                .collect(Collectors.toList());
         return new Lottos(lottos);
     }
 
     private static int calculateTotalLottoCount(Money money) {
-        return money.getMoney() / LOTTO_TICKET_PRICE;
+        return money.getMoney() / LOTTO_PRICE;
     }
 
     public List<Lotto> getLottos() {
