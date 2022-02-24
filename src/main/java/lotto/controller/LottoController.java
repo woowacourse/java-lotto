@@ -29,7 +29,7 @@ public class LottoController {
 
         LottoTickets lottoTickets = createLottoTickets(money);
 
-        WinningNumbers winningNumbers = createWinningNumbers(new Scanner(System.in));
+        WinningNumbers winningNumbers = createWinningNumbers();
 
         LottoResult lottoResult = getLottoResult(lottoTickets, winningNumbers);
 
@@ -56,6 +56,20 @@ public class LottoController {
         return lottoTickets;
     }
 
+    private WinningNumbers createWinningNumbers() {
+        try {
+            List<Integer> winningNumbers = inputView.getNormalWinningNumbers();
+            int bonusNumber = inputView.getBonusNumber();
+
+            return new WinningNumbers(winningNumbers, bonusNumber);
+        } catch (RuntimeException e) {
+            outputView.printErrorMessage(e.getMessage());
+
+            return createWinningNumbers();
+        }
+    }
+
+
     private void getYield(Money money, LottoResult lottoResult) {
         Map<Rank, Integer> ranks = lottoResult.getRanks();
         System.out.println("3개 일치 (5000원)-" + ranks.getOrDefault(Rank.FIFTH, 0) + "개");
@@ -72,21 +86,5 @@ public class LottoController {
         System.out.println("---------");
         LottoResult lottoResult = lottoTickets.determine(winningNumbers);
         return lottoResult;
-    }
-
-    private WinningNumbers createWinningNumbers(Scanner scanner) {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String inputWinningNumbers = scanner.nextLine();
-        String[] splitWinningNumbers = inputWinningNumbers.split(", ");
-
-        List<Integer> winningNumbers = Arrays.stream(splitWinningNumbers)
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
-
-        System.out.println("보너스 볼을 입력해 주세요.");
-
-        int bonusNumber = scanner.nextInt();
-
-        return new WinningNumbers(winningNumbers, bonusNumber);
     }
 }
