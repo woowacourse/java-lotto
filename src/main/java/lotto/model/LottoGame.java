@@ -25,18 +25,10 @@ public class LottoGame {
     }
 
     public LottoResult generateLottoResult(Lottos lottos) {
-        LottoResult lottoResult = new LottoResult();
-        return lottoResult.generate(lottos, winningNumbers, bonusNumber);
+        return LottoResult.create(lottos, winningNumbers, bonusNumber);
     }
 
     public float calculateYield(Money money, LottoResult lottoResult) {
-        return money.calculatePercentage(getTotalWinningMoney(lottoResult));
-    }
-
-    private Long getTotalWinningMoney(LottoResult lottoResult) {
-        return lottoResult.getResult().entrySet().stream()
-                .map(entry -> entry.getKey().getMoney() * entry.getValue())
-                .mapToLong(i -> i)
-                .sum();
+        return money.calculatePercentage(lottoResult.getTotalWinningMoney());
     }
 }

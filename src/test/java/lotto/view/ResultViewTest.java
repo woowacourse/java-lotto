@@ -39,9 +39,8 @@ public class ResultViewTest {
     void printResultStatisticsTest() {
         WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumber bonusNumber = new LottoNumber(7);
-        LottoResult lottoResult = new LottoResult();
 
-        ResultView.printResultStatistics(lottoResult.generate(lottos, winningNumbers, bonusNumber));
+        ResultView.printResultStatistics(LottoResult.create(lottos, winningNumbers, bonusNumber));
 
         assertThat(outputStreamCaptor.toString())
                 .contains("5개 일치, 보너스 볼 일치(30000000원)- 1개")

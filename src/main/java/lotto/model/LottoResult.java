@@ -4,29 +4,32 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoResult {
-    Map<Rank, Integer> result;
+    private final Map<Rank, Integer> result = new HashMap<>();
 
-    public LottoResult() {
-        this.result = new HashMap<>();
+    private LottoResult() {
     }
 
-    public LottoResult generate(Lottos lottos, WinningNumbers winningNumbers, LottoNumber bonusNumber) {
+    public static LottoResult create(Lottos lottos, WinningNumbers winningNumbers, LottoNumber bonusNumber) {
+        LottoResult lottoResult = new LottoResult();
         lottos.getLottos().forEach(lotto -> {
-            Rank currentRank = match(lotto, winningNumbers, bonusNumber);
-            result.put(currentRank, getOrDefault(currentRank) + 1);
+            Rank currentRank = lottoResult.match(lotto, winningNumbers, bonusNumber);
+            lottoResult.result.put(currentRank, lottoResult.getRankCount(currentRank) + 1);
         });
-        return this;
+        return lottoResult;
     }
 
-    public Rank match(Lotto lotto, WinningNumbers winningNumbers, LottoNumber bonusNumber) {
+    private Rank match(Lotto lotto, WinningNumbers winningNumbers, LottoNumber bonusNumber) {
         return Rank.find(lotto.matchWinningNumbers(winningNumbers),lotto.matchNumber(bonusNumber));
     }
 
-    public Integer getOrDefault(Rank rank) {
+    public Integer getRankCount(Rank rank) {
         return result.getOrDefault(rank, 0);
     }
 
-    public Map<Rank, Integer> getResult() {
-        return result;
+    public Long getTotalWinningMoney() {
+        return result.entrySet().stream()
+                .map(entry -> entry.getKey().getMoney() * entry.getValue())
+                .mapToLong(i -> i)
+                .sum();
     }
 }
