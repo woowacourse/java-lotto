@@ -12,7 +12,6 @@ import view.InputView;
 import view.OutputView;
 
 public class LottoController {
-
     public void run() {
         Money inputMoney = inputMoney();
 

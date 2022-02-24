@@ -13,11 +13,10 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 class WinningNumbersTest {
-
     @ParameterizedTest
     @CsvSource(value = {"1, 2, 3, 4, 5, 6:30:1, 2, 3, 4, 5, 7:5",
             "1, 2, 3, 4, 5, 6:30:7, 8, 9, 10, 11, 12:0"}, delimiter = ':')
-    @DisplayName("countContaining은 로또 티켓의 당첨 번호 개수를 반환한다")
+    @DisplayName("countContaining 은 로또 티켓의 당첨 번호 개수를 반환한다")
     void returnWinningNumberCount(String winningNumbersString, String bonusBallString, String ticketNumbersString,
                                   int expected) {
         // given
@@ -43,7 +42,7 @@ class WinningNumbersTest {
     @ParameterizedTest
     @CsvSource(value = {"1, 2, 3, 4, 5, 6:30:1, 2, 3, 4, 5, 30:true",
             "1, 2, 3, 4, 5, 6:30:1, 2, 3, 4, 5, 29:false"}, delimiter = ':')
-    @DisplayName("보너스 볼을 포함하면 true를 반환한다")
+    @DisplayName("보너스 볼을 포함하면 true 를 반환한다")
     void bonusBallContaining(String winningNumbersString, String bonusBallString, String ticketNumbersString,
                              boolean expected) {
         // given

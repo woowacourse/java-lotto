@@ -6,7 +6,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class WinningStatisticsTest {
-
     @Test
     @DisplayName("당첨 등수가 나오면 해당 등수의 개수를 +1 한다")
     void putLottoRank() {

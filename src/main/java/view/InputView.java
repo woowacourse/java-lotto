@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class InputView {
-
     private static final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
     private InputView() {

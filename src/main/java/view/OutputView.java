@@ -12,7 +12,6 @@ import model.Money;
 import model.WinningStatistics;
 
 public class OutputView {
-
     public static void printErrorMessage(String message) {
         out.println(message);
     }

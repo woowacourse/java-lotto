@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.EnumMap;
 
 public class WinningStatistics {
-
     private final EnumMap<LottoRank, Integer> winningStatistics;
 
     public WinningStatistics() {
