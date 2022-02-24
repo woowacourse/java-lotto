@@ -13,6 +13,6 @@ public class ErrorView {
     }
 
     public void error(String message) {
-        errorClient.error(PREFIX + message);
+        errorClient.error(PREFIX + message + "\n");
     }
 }
