@@ -66,3 +66,7 @@
 - [X] `TrialNumber` 를 `LottoQuantity` 로 변경
 - [X] 누락된 `WinningCount` 에 대한 테스트 추가
 - [ ] 테스트코드에서 불필요한 `hasMessageMatching` 을 `hasMessage` 로 변경
+- [ ] `LottoResultDto` 리팩토링
+  - [X] `getProfitRatio` 메소드 리팩토링
+  - [ ] 총액 세산 로직 개선
+- [ ] `LottoResultDto` 에 대한 테스트 코드 추가
