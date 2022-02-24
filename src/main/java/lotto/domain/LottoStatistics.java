@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -21,5 +22,9 @@ public class LottoStatistics {
     public double calculateEarningRates(Money money) {
         long sum = map.entrySet().stream().mapToLong(x -> x.getKey().getPrize() * x.getValue()).sum();
         return (double) sum / money.getAmount();
+    }
+
+    public Map<LottoRank, Long> getMap() {
+        return Collections.unmodifiableMap(map);
     }
 }
