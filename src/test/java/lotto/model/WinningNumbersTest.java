@@ -9,21 +9,21 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class WinningNumbersTest {
     @Test
-    @DisplayName("지난 주 당첨 번호 개수가 6개 미만인 경우 예외 처리")
+    @DisplayName("로또 번호 개수가 6개 미만인 경우 예외 처리")
     void validateNumberOfWinningNumbersUnder6Test() {
         assertThatThrownBy(() -> {
             new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5));
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("지난 주 당첨 번호 개수는 6개로 입력해주세요.");
+                .hasMessageContaining("로또 번호 개수는 6개로 입력해주세요.");
     }
 
     @Test
-    @DisplayName("지난 주 당첨 번호 개수가 6개 초과인 경우 예외 처리")
+    @DisplayName("로또 번호 개수가 6개 초과인 경우 예외 처리")
     void validateNumberOfWinningNumbersOver6Test() {
         assertThatThrownBy(() -> {
             new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("지난 주 당첨 번호 개수는 6개로 입력해주세요.");
+                .hasMessageContaining("로또 번호 개수는 6개로 입력해주세요.");
     }
 
     @Test
@@ -41,6 +41,6 @@ class WinningNumbersTest {
         assertThatThrownBy(() -> {
             new WinningNumbers(Arrays.asList(1, 2, 3, 3, 4, 6));
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("당첨 번호에 중복이 존재합니다.");
+                .hasMessageContaining("로또 번호에 중복이 존재합니다.");
     }
 }

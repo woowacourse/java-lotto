@@ -1,7 +1,9 @@
 package lotto.model;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -9,19 +11,28 @@ public class Lotto {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int LOTTO_SIZE = 6;
-    private static final String ERROR_NOT_MATCH_WINNING_NUMBER_SIZE = "지난 주 당첨 번호 개수는 6개로 입력해주세요.";
+    private static final String ERROR_NOT_MATCH_LOTTO_NUMBER_SIZE = "로또 번호 개수는 6개로 입력해주세요.";
+    private static final String ERROR_DUPLICATION_LOTTO_NUMBERS = "로또 번호에 중복이 존재합니다.";
 
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<Integer> lottoNumbers) {
         validateNumberOfLottoNumbers(lottoNumbers);
+        validateDuplicationWinningNumbers(lottoNumbers);
         Collections.sort(lottoNumbers);
         this.lottoNumbers = convertIntegersToLottoNumbers(lottoNumbers);
     }
 
     private void validateNumberOfLottoNumbers(List<Integer> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException(ERROR_NOT_MATCH_WINNING_NUMBER_SIZE);
+            throw new IllegalArgumentException(ERROR_NOT_MATCH_LOTTO_NUMBER_SIZE);
+        }
+    }
+
+    private void validateDuplicationWinningNumbers(List<Integer> winningNumbers) {
+        Set<Integer> distinct = new HashSet<>(winningNumbers);
+        if (distinct.size() != winningNumbers.size()) {
+            throw new IllegalArgumentException(ERROR_DUPLICATION_LOTTO_NUMBERS);
         }
     }
 
@@ -58,5 +69,9 @@ public class Lotto {
         return lottoNumbers.stream()
                 .map(LottoNumber::getNumber)
                 .collect(Collectors.toList());
+    }
+
+    public boolean matchNumber(Object number) {
+        return lottoNumbers.contains(number);
     }
 }
