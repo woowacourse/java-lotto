@@ -13,8 +13,8 @@ public enum Rank {
     private final int sameNumberCount;
     private final long prize;
 
-    Rank(int rank, long prize) {
-        this.sameNumberCount = rank;
+    Rank(int sameNumberCount, long prize) {
+        this.sameNumberCount = sameNumberCount;
         this.prize = prize;
     }
 
@@ -31,5 +31,9 @@ public enum Rank {
 
     public long getPrize() {
         return prize;
+    }
+
+    public int getSameNumberCount() {
+        return sameNumberCount;
     }
 }
