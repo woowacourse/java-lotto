@@ -1,13 +1,17 @@
 package view;
 
 import domain.Lotto;
+import domain.LottoTickets;
 import domain.WinningStatus;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class OutputView {
-	public static void printLottoAmount(int price) {
-		System.out.println(price / 1000 + "개를 구매했습니다.");
+	public static void printLottoTickets(LottoTickets lottoTickets) {
+		System.out.println(lottoTickets.getLottoTicketsSize() + "개를 구매했습니다.");
+		for (Lotto lotto : lottoTickets.getLottoTickets()) {
+			printLotto(lotto);
+		}
 	}
 
 	private static void printLotto(Lotto lotto) {
@@ -19,7 +23,7 @@ public class OutputView {
 		System.out.println("\n당첨 통계");
 		System.out.println("---------");
 		WinningStatus[] winningStatuses = WinningStatus.values();
-		for (int index = 0; index < 5; index++) {
+		for (int index = 0; index < 6; index++) {
 			printEachResult(winningStatuses[index], resultCount.get(index));
 		}
 	}
