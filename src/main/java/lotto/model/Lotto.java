@@ -9,6 +9,7 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         this.numbers = numbers;
+        this.rank = Rank.LOSER;
     }
 
     public void calculateRank(List<Integer> winningNumbers, int bonusNumber) {
