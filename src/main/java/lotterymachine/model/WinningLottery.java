@@ -1,5 +1,7 @@
 package lotterymachine.model;
 
+import lotterymachine.dto.Money;
+
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.Map;

@@ -8,13 +8,13 @@ import java.util.Map;
 
 public class LotteryResultDto implements Comparable<LotteryResultDto> {
     private final int countOfMatchingNumbers;
-    private final int winningPrice;
+    private final Money winningPrice;
     private final int numberOfMatchingTicket;
     private boolean bonus;
 
     public LotteryResultDto(WinningLottery winningLottery, int count) {
         this.countOfMatchingNumbers = winningLottery.getNumber();
-        this.winningPrice = winningLottery.getPrice();
+        this.winningPrice = new Money(winningLottery.getPrice());
         this.numberOfMatchingTicket = count;
         if (winningLottery.equals(WinningLottery.BONUS_FIVE)) {
             this.bonus = true;
@@ -33,7 +33,7 @@ public class LotteryResultDto implements Comparable<LotteryResultDto> {
     }
 
     public int getWinningPrice() {
-        return winningPrice;
+        return winningPrice.getAmount();
     }
 
     public int getNumberOfMatchingTicket() {
@@ -45,11 +45,10 @@ public class LotteryResultDto implements Comparable<LotteryResultDto> {
     }
 
     public int sumIncome() {
-        return winningPrice * numberOfMatchingTicket;
+        return winningPrice.getAmount() * numberOfMatchingTicket;
     }
-
     @Override
     public int compareTo(LotteryResultDto o) {
-        return this.winningPrice - o.winningPrice;
+        return this.winningPrice.getAmount() - o.winningPrice.getAmount();
     }
 }

@@ -7,6 +7,7 @@ import static lotterymachine.utils.LotteryRule.TICKET_PRICE;
 
 import java.util.Collections;
 import lotterymachine.dto.LotteryResultDto;
+import lotterymachine.dto.Money;
 import lotterymachine.model.LotteryTicket;
 import lotterymachine.model.LotteryTickets;
 import lotterymachine.view.InputView;
@@ -17,8 +18,8 @@ import java.util.List;
 
 public class LotteryMachine {
     public static void main(String[] args) {
-        int amount = InputView.getAmount();
-        int numberOfTickets = divideByLotteryPrice(amount);
+        Money amount = new Money(InputView.getAmount());
+        int numberOfTickets = divideByLotteryPrice(amount.getAmount());
         OutputView.printNumberOfTicket(numberOfTickets);
 
         LotteryTickets lotteryTickets = new LotteryTickets(createLotteryTickets(numberOfTickets));
