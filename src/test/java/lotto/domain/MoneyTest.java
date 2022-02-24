@@ -11,23 +11,23 @@ class MoneyTest {
     @Test
     @DisplayName("금액을 올바르게 입력받는지")
     void Generate_Money() {
-        Money a = new Money("10000");
-        assertThat(a.getAmount()).isEqualTo(10000);
+        Money money = new Money("10000");
+        assertThat(money.getAmount()).isEqualTo(10000);
     }
 
     @Test
     @DisplayName("숫자가 아닌 입력에 대한 예외처리")
     void Not_Number() {
         assertThatThrownBy(() -> {
-            Money a = new Money("a");
+            new Money("a");
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    @DisplayName("1000원 미만인 입력 금액에 대한 예외처리")
-    void Under_1000() {
+    @DisplayName("단위 금액 미만인 입력 금액에 대한 예외처리")
+    void Under_Unit_Amount() {
         assertThatThrownBy(() -> {
-            Money a = new Money("800");
+            new Money("800");
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -35,7 +35,7 @@ class MoneyTest {
     @DisplayName("거스름돈이 발생하는 경우에 대한 예외처리")
     void Not_Divided_By_1000() {
         assertThatThrownBy(() -> {
-            Money a = new Money("2500");
+            new Money("2500");
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }

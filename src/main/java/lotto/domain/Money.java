@@ -5,13 +5,15 @@ public class Money {
     private static final String ERROR_SHORT_MONEY = "[ERROR] 최소 금액은 1000원입니다.";
     private static final String ERROR_NOT_UNIT = "거스름돈이 발생하는 경우에 대한 예외처리";
 
+    private static final int UNIT_AMOUNT = 1000;
+
     private int amount;
 
     public Money(String input) {
         isNumberFormat(input);
         int value = Integer.parseInt(input);
         isShortMoney(value);
-        isDivideBy1000(value);
+        isDivideByUnitAmount(value);
         this.amount = value;
     }
 
@@ -24,13 +26,13 @@ public class Money {
     }
 
     private void isShortMoney(int value) {
-        if (value < 1000) {
+        if (value < UNIT_AMOUNT) {
             throw new IllegalArgumentException(ERROR_SHORT_MONEY);
         }
     }
 
-    private void isDivideBy1000(int value) {
-        if (value % 1000 != 0) {
+    private void isDivideByUnitAmount(int value) {
+        if (value % UNIT_AMOUNT != 0) {
             throw new IllegalArgumentException(ERROR_NOT_UNIT);
         }
     }

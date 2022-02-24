@@ -57,7 +57,7 @@ public class ChoiceNumber {
         return choiceNumbers;
     }
 
-    public int findMatchCount(ChoiceNumber numbers) {
+    public int countSameNumber(ChoiceNumber numbers) {
         return choiceNumbers.stream()
                 .filter(numbers.getChoiceNumbers()::contains)
                 .collect(toList())
