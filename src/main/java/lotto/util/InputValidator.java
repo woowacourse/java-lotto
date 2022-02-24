@@ -13,6 +13,7 @@ public class InputValidator {
     private static final String RANGE_ERROR_MESSAGE = "[ERROR] 숫자의 범위가 잘못되었습니다.";
 
     private static final String NUMBER_REGEX = "\\d+";
+
     private static final int PRICE_PER_LOTTO = 1000;
 
     public static int validatePrice(String price) throws RuntimeException {

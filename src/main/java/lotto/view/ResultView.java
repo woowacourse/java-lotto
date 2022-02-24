@@ -50,7 +50,8 @@ public class ResultView {
         if (!rank.equals(Rank.LOSER)) {
             message.append(rank.getCount()).append(COUNT_CORRESPOND_MESSAGE);
             message.append(printBonusNumber(rank));
-            message.append(PRICE_OPEN_BRACKET).append(rank.getPrice()).append(PRICE_CLOSE_BRACKET).append(integer).append(COUNT_MESSAGE);
+            message.append(PRICE_OPEN_BRACKET).append(rank.getPrice()).append(PRICE_CLOSE_BRACKET).append(integer)
+                    .append(COUNT_MESSAGE);
         }
         return message.toString();
     }

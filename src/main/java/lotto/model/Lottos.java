@@ -47,7 +47,7 @@ public class Lottos {
         for (Rank rank : Rank.values()) {
             sum += rank.getPrice() * getEachRankCount(rank);
         }
-        return ((double)sum / (lottos.size() * PRICE_PER_LOTTO));
+        return ((double) sum / (lottos.size() * PRICE_PER_LOTTO));
     }
 
     private Integer getEachRankCount(Rank rank) {

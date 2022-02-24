@@ -1,12 +1,11 @@
 package lotto.util;
 
-import lotto.model.Lotto;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import lotto.model.Lotto;
+import org.junit.jupiter.api.Test;
 
 public class RandomLottoGeneratorTest {
 
