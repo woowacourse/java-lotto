@@ -2,7 +2,12 @@ package controller;
 
 import java.util.Arrays;
 
-import model.*;
+import model.bonusball.BonusBall;
+import model.lotto.LottoCount;
+import model.lotto.LottoStorage;
+import model.result.RateOfReturn;
+import model.result.Statistics;
+import model.winningnumber.LottoWinningNumber;
 import view.InputView;
 import view.OutputView;
 

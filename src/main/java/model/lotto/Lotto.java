@@ -1,4 +1,8 @@
-package model;
+package model.lotto;
+
+import model.winningnumber.LottoWinningNumberDTO;
+import model.result.Statistics;
+import model.bonusball.BonusBallDTO;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,8 +1,10 @@
-package model;
+package model.lotto;
+
+import model.winningnumber.LottoWinningNumberDTO;
+import model.bonusball.BonusBallDTO;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoStorage {
     private List<Lotto> lottoStorage;

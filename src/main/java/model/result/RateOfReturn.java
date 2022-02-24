@@ -1,4 +1,6 @@
-package model;
+package model.result;
+
+import model.lotto.LottoCount;
 
 import java.util.Arrays;
 

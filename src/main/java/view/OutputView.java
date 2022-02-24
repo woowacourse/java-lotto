@@ -1,6 +1,6 @@
 package view;
 
-import model.LottoDTO;
+import model.lotto.LottoDTO;
 
 import java.util.List;
 

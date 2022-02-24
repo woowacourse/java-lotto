@@ -1,4 +1,4 @@
-package model;
+package model.result;
 
 public enum Statistics {
     THREE(3, 5000),

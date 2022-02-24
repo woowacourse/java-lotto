@@ -1,4 +1,4 @@
-package model;
+package model.bonusball;
 
 import utils.InputValidateUtils;
 

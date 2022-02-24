@@ -1,4 +1,4 @@
-package model;
+package model.bonusball;
 
 public class BonusBallDTO {
     private final int number;
