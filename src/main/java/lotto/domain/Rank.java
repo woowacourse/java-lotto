@@ -33,7 +33,7 @@ public enum Rank {
         return prize * count;
     }
 
-    public String getWinningLottoMatchCountToString() {
+    public String toStringWinningNumberCount() {
         return String.valueOf(winningLottoMatchCount);
     }
 
@@ -41,7 +41,7 @@ public enum Rank {
         return bonusNumberMatch;
     }
 
-    public String getPrizeToString() {
+    public String toStringPrize() {
         return String.valueOf(prize);
     }
 }

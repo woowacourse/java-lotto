@@ -32,7 +32,7 @@ public class OutputView {
         Arrays.stream(Rank.values())
                 .filter(rank -> !rank.equals(Rank.RANK_OUT))
                 .forEach(rank -> System.out.printf((RANK_MESSAGE_FORMAT),
-                        rank.getWinningLottoMatchCountToString(), getBonusNumberMessage(rank), rank.getPrizeToString(),
+                        rank.toStringWinningNumberCount(), getBonusNumberMessage(rank), rank.toStringPrize(),
                         rankCount.getCount(rank)));
     }
 
