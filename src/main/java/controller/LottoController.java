@@ -9,6 +9,7 @@ import domain.TrialNumber;
 import domain.WinningCount;
 import domain.WinningLotto;
 import domain.strategy.LottoNumberGenerateStrategy;
+import domain.strategy.RandomLottoNumberGenerateStrategy;
 import dto.LottoResultDto;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,11 +20,7 @@ import view.ResultView;
 
 public class LottoController {
     private static final int LOTTO_PRICE = 1000;
-    private final LottoNumberGenerateStrategy lottoNumberGenerator;
-
-    public LottoController(LottoNumberGenerateStrategy lottoNumberGenerator) {
-        this.lottoNumberGenerator = lottoNumberGenerator;
-    }
+    private static final LottoNumberGenerateStrategy lottoNumberGenerator = new RandomLottoNumberGenerateStrategy();
 
     public void start() {
         InputMoney inputmoney = getInputMoney();
