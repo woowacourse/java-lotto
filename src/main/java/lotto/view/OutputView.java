@@ -3,6 +3,7 @@ package lotto.view;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
+import lotto.domain.Money;
 import lotto.domain.Number;
 import lotto.domain.Result;
 import lotto.domain.WinningPrice;
@@ -12,11 +13,16 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void printLottoCount(int amount) {
-        System.out.printf("%d개를 구매했습니다.%n", amount);
+    public static void printInitResult(Lottos lottos) {
+        printLottoCount(lottos);
+        printLottos(lottos);
     }
 
-    public static void printLottos(Lottos lottos) {
+    private static void printLottoCount(Lottos lottos) {
+        System.out.printf("%d개를 구매했습니다.%n", lottos.getCount());
+    }
+
+    private static void printLottos(Lottos lottos) {
         for (Lotto lotto : lottos.getLottos()) {
             String join = lotto.getNumbers().stream()
                     .map(Number::getValue)
@@ -27,7 +33,12 @@ public class OutputView {
         }
     }
 
-    public static void printResult(Result result) {
+    public static void printPlayResult(Result result, Money money) {
+        printMatchResult(result);
+        printRateOfProfit(result, money);
+    }
+
+    private static void printMatchResult(Result result) {
         System.out.printf("%n당첨 통계%n---------%n");
         for (WinningPrice value : WinningPrice.values()) {
             if (value == WinningPrice.Fail) {
@@ -42,8 +53,10 @@ public class OutputView {
         }
     }
 
-    public static void printRateOfProfit(double rateOfProfit) {
+    private static void printRateOfProfit(Result result, Money money) {
+        double rateOfProfit = result.getRateOfProfit(money);
         String suffix = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+
         if (rateOfProfit == 1) {
             suffix = "(본전)";
         }

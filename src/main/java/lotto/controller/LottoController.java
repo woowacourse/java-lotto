@@ -19,20 +19,13 @@ public class LottoController {
 
     public void play() {
         Money money = moneyController.getBuyMoney();
-
-        int amount = money.getValue() / 1000;
-        OutputView.printLottoCount(amount);
-
-        Lottos lottos = new Lottos(amount);
-        OutputView.printLottos(lottos);
+        Lottos lottos = new Lottos(money);
+        OutputView.printInitResult(lottos);
 
         List<Number> winningNumbers = numberController.getWinningNumbers();
         Number bonusNumber = numberController.getBonusNumber(winningNumbers);
 
         Result result = lottos.getResult(winningNumbers, bonusNumber);
-        OutputView.printResult(result);
-
-        double rateOfProfit = result.getRateOfProfit(money);
-        OutputView.printRateOfProfit(rateOfProfit);
+        OutputView.printPlayResult(result, money);
     }
 }

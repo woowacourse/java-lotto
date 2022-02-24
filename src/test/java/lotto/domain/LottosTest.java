@@ -18,10 +18,10 @@ public class LottosTest {
         class Context_with_money {
 
             @ParameterizedTest
-            @ValueSource(ints = {1, 2})
+            @ValueSource(strings = {"1000", "2000"})
             @DisplayName("구입금액에 맞는 개수의 로또를 생성한다.")
-            void It_create_lottos(int value) {
-                Lottos lottos = new Lottos(value);
+            void It_create_lottos(String value) {
+                Lottos lottos = new Lottos(new Money(value));
 
                 assertThat(lottos.getCount()).isEqualTo(value);
             }

@@ -5,9 +5,13 @@ import java.util.List;
 
 public class Lottos {
 
+    private static final int PRICE = 1000;
+
     private final List<Lotto> lottos;
 
-    public Lottos(int amount) {
+    public Lottos(Money money) {
+        int amount = money.getValue() / PRICE;
+
         this.lottos = new ArrayList<>();
         while (amount-- > 0) {
             Lotto lotto = new Lotto();
@@ -26,7 +30,7 @@ public class Lottos {
         return result;
     }
 
-    int getCount() {
+    public int getCount() {
         return lottos.size();
     }
 
