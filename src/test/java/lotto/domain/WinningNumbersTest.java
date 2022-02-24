@@ -36,7 +36,7 @@ public class WinningNumbersTest {
     void firstPrize() {
         LottoNumbers myLotto = new LottoNumbers("1,2,3,4,5,6");
 
-        assertThat(winningNumbers.calculatePrize(myLotto)).isEqualTo(Ranking.FIRST);
+        assertThat(winningNumbers.calculateRanking(myLotto).get()).isEqualTo(Ranking.FIRST);
     }
 
     @Test
@@ -44,7 +44,7 @@ public class WinningNumbersTest {
     void secondPrize() {
         LottoNumbers myLotto = new LottoNumbers("1,2,3,4,5,7");
 
-        assertThat(winningNumbers.calculatePrize(myLotto)).isEqualTo(Ranking.SECOND);
+        assertThat(winningNumbers.calculateRanking(myLotto).get()).isEqualTo(Ranking.SECOND);
     }
 
     @Test
@@ -52,7 +52,7 @@ public class WinningNumbersTest {
     void thirdPrize() {
         LottoNumbers myLotto = new LottoNumbers("1,2,3,4,5,8");
 
-        assertThat(winningNumbers.calculatePrize(myLotto)).isEqualTo(Ranking.THIRD);
+        assertThat(winningNumbers.calculateRanking(myLotto).get()).isEqualTo(Ranking.THIRD);
     }
 
     @Test
@@ -60,7 +60,7 @@ public class WinningNumbersTest {
     void fourthPrize() {
         LottoNumbers myLotto = new LottoNumbers("1,2,3,4,8,9");
 
-        assertThat(winningNumbers.calculatePrize(myLotto)).isEqualTo(Ranking.FOURTH);
+        assertThat(winningNumbers.calculateRanking(myLotto).get()).isEqualTo(Ranking.FOURTH);
     }
 
     @Test
@@ -68,6 +68,6 @@ public class WinningNumbersTest {
     void fifthPrize() {
         LottoNumbers myLotto = new LottoNumbers("1,2,3,8,9,10");
 
-        assertThat(winningNumbers.calculatePrize(myLotto)).isEqualTo(Ranking.FIFTH);
+        assertThat(winningNumbers.calculateRanking(myLotto).get()).isEqualTo(Ranking.FIFTH);
     }
 }
