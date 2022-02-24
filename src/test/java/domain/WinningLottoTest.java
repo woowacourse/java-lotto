@@ -49,6 +49,36 @@ public class WinningLottoTest {
     }
 
     @Test
+    public void countThirdLottoRank() {
+        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        int bonusNumber = 7;
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 8));
+        LottoRank rank = winningLotto.countLottoRank(lotto);
+        assertThat(rank).isEqualTo(LottoRank.RANK_3);
+    }
+
+    @Test
+    public void countFourthLottoRank() {
+        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        int bonusNumber = 7;
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 7, 8));
+        LottoRank rank = winningLotto.countLottoRank(lotto);
+        assertThat(rank).isEqualTo(LottoRank.RANK_4);
+    }
+
+    @Test
+    public void countFifthLottoRank() {
+        List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        int bonusNumber = 7;
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 10, 11, 12));
+        LottoRank rank = winningLotto.countLottoRank(lotto);
+        assertThat(rank).isEqualTo(LottoRank.RANK_5);
+    }
+
+    @Test
     public void countNoLottoRank() {
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         int bonusNumber = 7;
