@@ -54,15 +54,15 @@ public class WinningTicketTest {
     public void throwsExceptionWhenBonusBallDuplicated() {
         // given
         List<LottoNumber> lottoNumbers = new ArrayList<>();
-        lottoNumbers.add(new LottoNumber(1));
-        lottoNumbers.add(new LottoNumber(2));
-        lottoNumbers.add(new LottoNumber(3));
-        lottoNumbers.add(new LottoNumber(4));
-        lottoNumbers.add(new LottoNumber(5));
-        lottoNumbers.add(new LottoNumber(6));
+        lottoNumbers.add(LottoNumber.from(1));
+        lottoNumbers.add(LottoNumber.from(2));
+        lottoNumbers.add(LottoNumber.from(3));
+        lottoNumbers.add(LottoNumber.from(4));
+        lottoNumbers.add(LottoNumber.from(5));
+        lottoNumbers.add(LottoNumber.from(6));
 
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
-        LottoNumber bonusBall = new LottoNumber(5);
+        LottoNumber bonusBall = LottoNumber.from(5);
 
         // then
         assertThatThrownBy(() -> new WinningTicket(lottoTicket, bonusBall))

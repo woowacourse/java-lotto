@@ -23,9 +23,9 @@ class LottoNumberTest {
     @DisplayName("최대값 초과로 생성할 시 예외를 발생시킨다.")
     void throwsExceptionWhenBiggerThanMaxNumber() {
         // given
-        int maxValue = LottoNumber.MAX + 1;
+        int maxValue = LottoNumber.MAX_LOTTO_NUMBER + 1;
         // then
-        assertThatThrownBy(() -> new LottoNumber(maxValue))
+        assertThatThrownBy(() -> LottoNumber.from(maxValue))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining("로또 숫자는 1~45 사이의 숫자여야 합니다.");
     }
@@ -34,9 +34,9 @@ class LottoNumberTest {
     @DisplayName("최소값 미만으로 생성할 시 예외를 발생시킨다.")
     void throwsExceptionWhenLowerThanMinNumber() {
         // given
-        int minValue = LottoNumber.MIN - 1;
+        int minValue = LottoNumber.MIN_LOTTO_NUMBER - 1;
         // then
-        assertThatThrownBy(() -> new LottoNumber(minValue))
+        assertThatThrownBy(() -> LottoNumber.from(minValue))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining("로또 숫자는 1~45 사이의 숫자여야 합니다.");
     }

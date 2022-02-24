@@ -18,7 +18,7 @@ public class LottoController {
     public void run() {
         Money money = Money.of(InputView.requestMoney());
         LottoTickets lottoTickets = LottoTickets
-                .buy(new RandomNumberGenerator(LottoNumber.MIN, LottoNumber.MAX), money);
+                .buy(new RandomNumberGenerator(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER), money);
         OutputView.outputTickets(lottoTickets);
         WinningTicket winningTicket = makeWinningTicket();
 
@@ -33,7 +33,7 @@ public class LottoController {
 
         return new WinningTicket(
                 new LottoTicket(Arrays.stream(winningNumbers)
-                        .mapToObj(LottoNumber::new)
+                        .mapToObj(LottoNumber::from)
                         .collect(Collectors.toList())),
                 new LottoNumber(bonusBall));
     }
