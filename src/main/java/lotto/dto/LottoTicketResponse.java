@@ -5,27 +5,23 @@ import java.util.stream.Collectors;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
 
 public class LottoTicketResponse {
 
-    private List<Integer> lottoTicketResponse;
+    private List<Integer> numbers;
 
-    public LottoTicketResponse(List<Integer> lottoTicketResponse) {
-        this.lottoTicketResponse = lottoTicketResponse;
+    private LottoTicketResponse(List<Integer> numbers) {
+        this.numbers = numbers;
     }
 
-    public static List<LottoTicketResponse> from(LottoTickets lottoTickets) {
-        List<LottoTicket> tickets = lottoTickets.getTickets();
-        return tickets.stream().map(
-            ticket -> new LottoTicketResponse(ticket.getNumbers()
-                .stream()
-                .map(LottoNumber::getNumber)
-                .collect(Collectors.toList()))
-        ).collect(Collectors.toList());
+    public static LottoTicketResponse from(LottoTicket lottoTicket) {
+        return new LottoTicketResponse(lottoTicket.getNumbers()
+            .stream()
+            .map(LottoNumber::getNumber)
+            .collect(Collectors.toList()));
     }
 
-    public List<Integer> getLottoTicketResponse() {
-        return lottoTicketResponse;
+    public List<Integer> getNumbers() {
+        return numbers;
     }
 }
