@@ -46,4 +46,8 @@ public class OutputView {
         }
         return "%d개 일치 (%d원)- %d개\n";
     }
+
+    public void outputEarningRate(double earningRate) {
+        System.out.printf("총 수익률은 %.2f입니다.", earningRate);
+    }
 }
