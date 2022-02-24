@@ -6,6 +6,8 @@ import java.util.Map;
 
 public class WinningResult {
 
+	private static final int INITIAL_RANK_COUNT = 0;
+	private static final int PLUS_COUNT = 1;
 	private final EnumMap<LottoRank, Integer> winningResult;
 
 	private WinningResult(EnumMap<LottoRank, Integer> winningResult) {
@@ -23,11 +25,11 @@ public class WinningResult {
 
 	public static EnumMap<LottoRank, Integer> initializeWinningResult() {
 		return new EnumMap<>(Map.ofEntries(
-			Map.entry(LottoRank.FIRST, 0),
-			Map.entry(LottoRank.SECOND, 0),
-			Map.entry(LottoRank.THIRD, 0),
-			Map.entry(LottoRank.FOURTH, 0),
-			Map.entry(LottoRank.FIFTH, 0)
+			Map.entry(LottoRank.FIRST, INITIAL_RANK_COUNT),
+			Map.entry(LottoRank.SECOND, INITIAL_RANK_COUNT),
+			Map.entry(LottoRank.THIRD, INITIAL_RANK_COUNT),
+			Map.entry(LottoRank.FOURTH, INITIAL_RANK_COUNT),
+			Map.entry(LottoRank.FIFTH, INITIAL_RANK_COUNT)
 		));
 	}
 
@@ -43,7 +45,7 @@ public class WinningResult {
 		if (rank == LottoRank.FAIL) {
 			return;
 		}
-		winningResult.put(rank, winningResult.get(rank) + 1);
+		winningResult.put(rank, winningResult.get(rank) + PLUS_COUNT);
 	}
 
 	public double getRateOfProfit(Money money) {

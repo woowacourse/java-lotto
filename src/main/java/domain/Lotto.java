@@ -1,50 +1,54 @@
 package domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Lotto {
 
+	private static final String DUPLICATION_NUMBERS_MESSAGE = "중복된 숫자를 입력할 수 없습니다";
+	private static final String NOT_LOTTO_FIXED_SIZE_MESSAGE = "로또 번호는 6개의 숫자여야 합니다";
+	private static final int FIXED_LOTTO_SIZE = 6;
 	private final List<Number> lotto;
 
-	public Lotto(List<Number> lotto) {
+	public Lotto(final List<Number> lotto) {
 		checkLottoNumber(lotto);
 		this.lotto = lotto;
 	}
 
-	public static Lotto from(String[] userInput) {
+	public static Lotto from(final String[] userInput) {
 		return new Lotto(Stream.of(userInput)
 			.map(Number::from)
 			.collect(Collectors.toList()));
 	}
 
-	private void checkLottoNumber(List<Number> lotto) {
+	private void checkLottoNumber(final List<Number> lotto) {
 		checkLottoNumberSize(lotto);
-		checkDuplicate(lotto);
+		checkDuplicateLottoNumber(lotto);
 	}
 
-	private void checkDuplicate(List<Number> lotto) {
+	private void checkLottoNumberSize(List<Number> lotto) {
+		if (lotto.size() != FIXED_LOTTO_SIZE) {
+			throw new IllegalArgumentException(NOT_LOTTO_FIXED_SIZE_MESSAGE);
+		}
+	}
+
+	private void checkDuplicateLottoNumber(List<Number> lotto) {
 		boolean duplicated = lotto.stream()
 			.distinct()
 			.count() != lotto.size();
 
 		if (duplicated) {
-			throw new IllegalArgumentException("중복된 숫자를 입력할 수 없습니다");
+			throw new IllegalArgumentException(DUPLICATION_NUMBERS_MESSAGE);
 		}
 	}
 
-	private void checkLottoNumberSize(List<Number> lotto) {
-		if (lotto.size() != 6) {
-			throw new IllegalArgumentException("로또 번호는 6개의 숫자여야 합니다");
-		}
-	}
-
-	public boolean isContain(Number number) {
+	public boolean isContain(final Number number) {
 		return lotto.contains(number);
 	}
 
-	public LottoRank confirmWinningResult(Lotto winningNumbers, Number bonusNumber) {
+	public LottoRank confirmWinningResult(final Lotto winningNumbers, final Number bonusNumber) {
 		int count = (int)lotto.stream()
 			.filter(winningNumbers::isContain)
 			.count();
@@ -52,6 +56,6 @@ public class Lotto {
 	}
 
 	public List<Number> getLotto() {
-		return lotto;
+		return Collections.unmodifiableList(lotto);
 	}
 }

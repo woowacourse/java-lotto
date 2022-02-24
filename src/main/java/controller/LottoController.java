@@ -23,17 +23,16 @@ public class LottoController {
 	}
 
 	public void run() {
-		Money money = Money.from(requestMoneyInput());
+		final Money money = Money.from(requestMoneyInput());
 
 		LottoTicket lottoTicket = new LottoTicket(lottoFactory.generateLottoTicket(money));
 		outputView.printPurchasedLottoTicket(lottoTicket.getLottoTicket());
 
 		Lotto winningLotto = Lotto.from(requestWinningLottoInput());
 		Number bonusNumber = Number.from(requestBonusNumberInput());
-
 		WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusNumber);
 
-		findWinningResult(money, lottoTicket, winningNumbers);
+		findWinningResult(lottoTicket, winningNumbers, money);
 	}
 
 	private String requestMoneyInput() {
@@ -51,7 +50,7 @@ public class LottoController {
 		return inputView.requestBonusNumber();
 	}
 
-	private void findWinningResult(Money money, LottoTicket lottoTicket, WinningNumbers winningNumbers) {
+	private void findWinningResult(LottoTicket lottoTicket, WinningNumbers winningNumbers, Money money) {
 		WinningResult winningResult = WinningResult.createWinningResult(lottoTicket, winningNumbers);
 		outputView.printWinningResult(winningResult.getWinningResult());
 		outputView.printRateOfProfit(winningResult.getRateOfProfit(money));

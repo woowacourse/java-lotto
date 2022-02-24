@@ -4,6 +4,10 @@ import java.util.Objects;
 
 public class Number {
 
+	private static final int FIRST_LOTTO_NUMBER = 1;
+	private static final int LAST_LOTTO_NUMBER = 45;
+	private static final String NOT_NUMBER_IN_LOTTO_NUMBER_RANGE_MESSAGE = "번호는 1 ~ 45의 숫자여야 합니다";
+	private static final String NOT_NUMBER_DIGIT_MESSAGE = "숫자만 입력해야 합니다";
 	private final int number;
 
 	public Number(int number) {
@@ -16,17 +20,17 @@ public class Number {
 		return new Number(Integer.parseInt(userInput));
 	}
 
-	private void checkNumberRange(int number) {
-		if (number < 1 || number > 45) {
-			throw new IllegalArgumentException("번호는 1 ~ 45의 숫자여야 합니다");
-		}
-	}
-
 	private static void checkNotDigit(String userInput) {
 		try {
 			Integer.parseInt(userInput);
 		} catch (NumberFormatException exception) {
-			throw new IllegalArgumentException("숫자만 입력해야 합니다");
+			throw new IllegalArgumentException(NOT_NUMBER_DIGIT_MESSAGE);
+		}
+	}
+
+	private void checkNumberRange(int number) {
+		if (number < FIRST_LOTTO_NUMBER || number > LAST_LOTTO_NUMBER) {
+			throw new IllegalArgumentException(NOT_NUMBER_IN_LOTTO_NUMBER_RANGE_MESSAGE);
 		}
 	}
 
