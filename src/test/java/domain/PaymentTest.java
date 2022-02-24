@@ -12,17 +12,17 @@ import org.junit.jupiter.api.Test;
 
 public class PaymentTest {
 
-	@DisplayName("구입금액이 로또 가격으로 나뉘어 떨어지지 않음")
+	@DisplayName("구입 금액이 1000원 미만")
 	@Test
-	void division_fail() {
-		assertThatThrownBy(() -> new Payment("2500"))
+	void range_fail() {
+		assertThatThrownBy(() -> new Payment("999"))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 
-	@DisplayName("구입금액이 로또 가격으로 나눠지면 성공")
+	@DisplayName("구입 금액이 1000원 이상 성공")
 	@Test
-	void division_success() {
-		assertThatCode(() -> new Payment("3000"))
+	void range_success() {
+		assertThatCode(() -> new Payment("1001"))
 			.doesNotThrowAnyException();
 	}
 

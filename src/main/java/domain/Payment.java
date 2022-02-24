@@ -11,15 +11,15 @@ public class Payment {
 
 	private int toInt(String payment) {
 		int changeInt = Integer.parseInt(payment);
-		checkDivideByLottoPrice(changeInt);
+		checkMinLottoPrice(changeInt);
 		checkNegative(changeInt);
 		checkPaymentLimit(changeInt);
 		return changeInt;
 	}
 
-	private void checkDivideByLottoPrice(int payment) {
-		if (payment % LOTTO_PRICE != 0) {
-			throw new IllegalArgumentException("1000원 단위로 입력해주세요!");
+	private void checkMinLottoPrice(int payment) {
+		if (payment < LOTTO_PRICE) {
+			throw new IllegalArgumentException("1000원 이상 입력해주세요!");
 		}
 	}
 
