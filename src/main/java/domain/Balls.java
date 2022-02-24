@@ -5,30 +5,22 @@ import java.util.stream.Collectors;
 
 public class Balls {
 	private static final int SIZE = 6;
-
 	private static final String SIZE_EXCEPTION = "숫자 요소는 6개여야 합니다.";
 
 	private final List<Ball> balls;
 
 	public Balls(final List<Integer> numbers) {
-		this.validateNumbers(numbers);
+		validateNumbers(numbers);
 		this.balls = numbers.stream()
 			.map(Ball::new)
 			.collect(Collectors.toUnmodifiableList());
 	}
 
 	private void validateNumbers(final List<Integer> numbers) {
-		this.validateNull(numbers);
-		this.validateSize(numbers);
-	}
-
-	private void validateNull(final List<Integer> numbers) {
 		if (numbers == null) {
 			throw new IllegalArgumentException(SIZE_EXCEPTION);
 		}
-	}
 
-	private void validateSize(final List<Integer> numbers) {
 		if (numbers.size() != SIZE) {
 			throw new IllegalArgumentException(SIZE_EXCEPTION);
 		}
