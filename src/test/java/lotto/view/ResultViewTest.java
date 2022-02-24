@@ -15,6 +15,7 @@ import lotto.model.LottoNumber;
 import lotto.model.LottoResult;
 import lotto.model.Lottos;
 import lotto.model.WinningNumbers;
+import lotto.model.Yield;
 
 class ResultViewTest {
 
@@ -55,7 +56,7 @@ class ResultViewTest {
     @Test
     @DisplayName("손해인 경우 수익률을 출력한다.")
     void printMinusYieldTest() {
-        float yield = 0.351312312f;
+        Yield yield = new Yield(0.351312312f);
         ResultView.printYield(yield);
 
         assertThat(outputStreamCaptor.toString())
@@ -65,10 +66,10 @@ class ResultViewTest {
     @Test
     @DisplayName("이득인 경우 수익률을 출력한다.")
     void printPlusYieldTest() {
-        float yield = 1.351312312f;
+        Yield yield = new Yield(1.00f);
         ResultView.printYield(yield);
 
         assertThat(outputStreamCaptor.toString())
-            .contains("총 수익률은 1.35입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임)");
+            .contains("총 수익률은 1.00입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임)");
     }
 }

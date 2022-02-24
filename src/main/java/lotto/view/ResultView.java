@@ -6,6 +6,7 @@ import java.util.List;
 import lotto.model.Lotto;
 import lotto.model.LottoResult;
 import lotto.model.Rank;
+import lotto.model.Yield;
 
 public class ResultView {
     public static void printGeneratedLottos(List<Lotto> lottos) {
@@ -33,15 +34,15 @@ public class ResultView {
         return String.format("%d개 일치 (%d원)- %d개", rank.getValue(), rank.getMoney(), winningCount);
     }
 
-    public static void printYield(float yield) {
+    public static void printYield(Yield yield) {
         System.out.println(getYieldStatus(yield));
     }
 
-    private static String getYieldStatus(float yield) {
-        if (yield >= 1) {
-            return String.format("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임)", yield);
+    private static String getYieldStatus(Yield yield) {
+        if (yield.isGain()) {
+            return String.format("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 이득이라는 의미임)", yield.getYield());
         }
-        return String.format("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", yield);
+        return String.format("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", yield.getYield());
     }
 
     private static void printEmptyLine() {

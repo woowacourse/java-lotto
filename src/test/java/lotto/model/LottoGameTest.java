@@ -18,9 +18,9 @@ class LottoGameTest {
         Money money = new Money(14000);
         Lottos lottos = new Lottos(Collections.singletonList(new Lotto(Arrays.asList(1, 2, 3, 11, 12, 13))));
         LottoResult lottoResult = lottoGame.generateLottoResult(lottos);
-        float yield = lottoGame.calculateYield(money, lottoResult);
+        Yield yield = lottoGame.calculateYield(money, lottoResult);
 
-        assertThat(yield).isCloseTo(0.35f, Percentage.withPercentage(99));
+        assertThat(yield.getYield()).isCloseTo(0.35f, Percentage.withPercentage(99));
     }
 
     @Test
