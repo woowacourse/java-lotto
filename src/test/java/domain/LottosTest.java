@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class LottosTest {
 	static Lottos lottos;
 	static AnswerLotto answerLotto;
-	static ResultDTO resultDTO;
+	static Result result;
 
 	@BeforeAll
 	static void setUp() {
@@ -30,7 +30,7 @@ public class LottosTest {
 		answerLotto = new AnswerLotto(
 			new AnswerLottoNumbers(generateNumberList(1, 2, 3, 43, 44, 45)), new BonusNumber(31));
 
-		resultDTO = lottos.generateResult(answerLotto);
+		result = lottos.generateResult(answerLotto);
 	}
 
 	@Test
@@ -59,13 +59,13 @@ public class LottosTest {
 		expected.put(ResultStatics.NOTHING, 4);
 		expected.put(ResultStatics.THREE, 1);
 
-		assertThat(resultDTO.getResults()).isEqualTo(expected);
+		assertThat(result.getResults()).isEqualTo(expected);
 	}
 
 	@Test
 	@DisplayName("올바른 수익률을 산출하였는지 확인")
 	void correctProfitRate() {
-		assertThat(resultDTO.getProfitRate()).isEqualTo(1.0f);
+		assertThat(result.getProfitRate()).isEqualTo(1.0f);
 	}
 
 }

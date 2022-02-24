@@ -3,11 +3,11 @@ package domain;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ResultDTO {
+public class Result {
 	private Map<ResultStatics, Integer> results;
 	private float profitRate = 0;
 
-	public ResultDTO() {
+	public Result() {
 		results = new HashMap<>();
 		for (ResultStatics resultStatics : ResultStatics.values()) {
 			results.put(resultStatics, 0);

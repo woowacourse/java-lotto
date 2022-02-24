@@ -2,7 +2,7 @@ package view;
 
 import domain.Lotto;
 import domain.Lottos;
-import domain.ResultDTO;
+import domain.Result;
 import domain.ResultStatics;
 
 import java.util.Map;
@@ -26,12 +26,12 @@ public class OutputView {
 			"[" + lotto.getNumbers().stream().map(String::valueOf).collect(Collectors.joining(", ")) + "]");
 	}
 
-	public static void printResults(ResultDTO resultDTO) {
+	public static void printResults(Result result) {
 		System.out.println("\n당첨 통계");
 		System.out.println("---------");
 
-		printResult(resultDTO.getResults());
-		printProfitRatio(resultDTO.getProfitRate());
+		printResult(result.getResults());
+		printProfitRatio(result.getProfitRate());
 	}
 
 	private static void printResult(Map<ResultStatics, Integer> result) {

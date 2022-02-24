@@ -39,8 +39,8 @@ public class Lottos {
 		return this.lottos.size();
 	}
 
-	public ResultDTO generateResult(AnswerLotto answerLotto) {
-		ResultDTO results = new ResultDTO();
+	public Result generateResult(AnswerLotto answerLotto) {
+		Result results = new Result();
 		for (Lotto lotto : this.lottos) {
 			results.addResult(lotto.calculate(answerLotto));
 		}
