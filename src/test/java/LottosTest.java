@@ -3,9 +3,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class LottosTest {
 
@@ -15,7 +14,8 @@ public class LottosTest {
         int count = 14;
         Lottos lottos = new Lottos();
         lottos.generateLottos(count);
-        assertThat(lottos.size()).isEqualTo(14);
+
+        assertEquals(lottos.size(), 14);
     }
 
     @Test
@@ -30,8 +30,8 @@ public class LottosTest {
         Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3));
         Statistic winningStatistics = lottos.getWinningStatistics(winningNumber, 23);
 
-        assertThat(winningStatistics.getStatistics().get(Rank.FIRST)).isEqualTo(1);
-        assertThat(winningStatistics.getStatistics().get(Rank.SECOND)).isEqualTo(0);
-        assertThat(winningStatistics.getStatistics().get(Rank.FIFTH)).isEqualTo(1);
+        assertEquals(winningStatistics.getStatistics().get(Rank.FIRST), 1);
+        assertEquals(winningStatistics.getStatistics().get(Rank.SECOND), 0);
+        assertEquals(winningStatistics.getStatistics().get(Rank.FIFTH), 1);
     }
 }

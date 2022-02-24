@@ -36,7 +36,7 @@
 - [ ] stream.forEach() 사용에 대한 고민 필요 [링크](https://homoefficio.github.io/2016/06/26/for-loop-%EB%A5%BC-Stream-forEach-%EB%A1%9C-%EB%B0%94%EA%BE%B8%EC%A7%80-%EB%A7%90%EC%95%84%EC%95%BC-%ED%95%A0-3%EA%B0%80%EC%A7%80-%EC%9D%B4%EC%9C%A0/)
 - [ ] `생성자를 통한 초기화`와 `정적 팩토리 메서드를 통한 초기화` 비교
   - [ ] `Date`, `LocalDateTime`의 현재 시간을 구하는 로직에 대해 찾아보기
-- [ ] assertj와 junit의 동시 사용 -> 통일된 라이브러리 사용으로 유지보수성 향상
+- [x] assertj와 junit의 동시 사용 -> 통일된 라이브러리 사용으로 유지보수성 향상
 - [x] `LottoTest` : `@ParameterizedTest`를 통해 다양한 케이스의 테스트
 - [x] `Statistic` : LinkedHashMap -> EnumMap [링크](https://www.baeldung.com/java-enum-map)
 - [x] `POSIX new Line` [링크](https://blog.coderifleman.com/2015/04/04/text-files-end-with-a-newline/)

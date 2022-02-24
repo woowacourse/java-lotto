@@ -3,7 +3,7 @@ import java.util.EnumMap;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class StatisticsTest {
 
@@ -18,6 +18,6 @@ public class StatisticsTest {
         Money money = new Money(10_000);
         double profitRate = statistic.getProfitRate(money);
 
-        assertThat(profitRate).isEqualTo(10.5);
+        assertEquals(profitRate, 10.5);
     }
 }
