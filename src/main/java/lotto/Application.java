@@ -12,13 +12,14 @@ import lotto.model.LottoMachine;
 import lotto.model.Money;
 import lotto.model.RandomLottoGenerator;
 import lotto.model.Statistic;
+import lotto.view.LottoFinishedException;
 
 public class Application {
 
     public static void main(String[] args) {
         try {
             run();
-        } catch (Exception e) {
+        } catch (LottoFinishedException e) {
             printMessage("종료되었습니다!");
         }
     }
