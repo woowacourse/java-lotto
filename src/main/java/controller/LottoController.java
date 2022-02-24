@@ -32,12 +32,6 @@ public class LottoController {
         double totalIncome = Rank.calculateAllResult(judgeLottos);
         double incomeRate = player.calculateIncomeRate(totalIncome);
 
-        List<RankDto> rankDtos = new ArrayList<>();
-        int rankNumber = 5;
-
-        for (Rank rank : Rank.values()) {
-            rankDtos.add(RankDto.from(rank, rankNumber--));
-        }
-        return new RanksDto(rankDtos, incomeRate);
+        return new RanksDto(incomeRate);
     }
 }
