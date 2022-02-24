@@ -26,9 +26,13 @@ public enum Rewards {
 
     public static Rewards findReward(int winningCount, int bonusCount) {
         return Arrays.stream(Rewards.values())
-                .filter(x -> x.winningCount == winningCount && x.bonusCount == bonusCount)
+                .filter(reward -> findRanking(reward, winningCount, bonusCount))
                 .findFirst()
-                .get();
+                .orElseThrow();
+    }
+
+    private static boolean findRanking(Rewards reward, int winningCount, int bonusCount) {
+        return (reward.winningCount == winningCount && reward.bonusCount == bonusCount);
     }
 
     public static void addCount(Rewards rewards) {
