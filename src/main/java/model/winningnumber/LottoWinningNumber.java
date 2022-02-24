@@ -22,7 +22,6 @@ public class LottoWinningNumber {
         InputValidateUtils.inputBlank(numbers, WINNING_NUMBER_BLANK_ERROR_MESSAGE);
         InputValidateUtils.inputNumber(makeNumbersToString(numbers), WINNING_NUMBER_ERROR_MESSAGE);
         validateNumberOutOfRange(numbers);
-
         validateNumberSize(numbers);
         validateNumberReduplication(numbers);
         this.winningNumbers = makeWinningNumbers(split(numbers));

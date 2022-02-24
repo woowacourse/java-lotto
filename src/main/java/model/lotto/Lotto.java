@@ -17,10 +17,6 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public LottoDTO getLottoDTO() {
-        return new LottoDTO(numbers);
-    }
-
     public void compare(BonusBallDTO bonusBallDTO, LottoWinningNumberDTO winningNumberDTO) {
         List<Integer> winningNumbers = winningNumberDTO.getWinningNumbers();
         long count = compareWithWinningNumber(winningNumbers);
@@ -50,6 +46,10 @@ public class Lotto {
         Arrays.stream(Statistics.values())
                 .filter(statistics -> statistics.getMatchNumber() == count)
                 .forEach(Statistics::addCount);
+    }
+
+    public LottoDTO getLottoDTO() {
+        return new LottoDTO(numbers);
     }
 
     @Override

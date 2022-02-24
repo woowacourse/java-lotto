@@ -28,14 +28,6 @@ public class LottoController {
         showResult();
     }
 
-    private void showResult() {
-        outputView.printResultMessage();
-        Arrays.stream(Statistics.values())
-                        .forEach(statistics -> outputView.printResult(statistics.getMatchNumber(), statistics.getValue(), statistics.getCount(),
-                                Statistics.BONUS.getValue()));
-        outputView.printRateOfReturn(rateOfReturn.getRateOfReturn());
-    }
-
     private void makeLottos() {
         try {
             LottoCount lottoCount = new LottoCount(inputView.inputMoney());
@@ -74,5 +66,15 @@ public class LottoController {
 
     private void compareLottoWithWinningNumber() {
         lottoStorage.compare(bonusBall.getBonusBallDTO(), lottoWinningNumber.getWinningNumbersDTO());
+    }
+
+    private void showResult() {
+        outputView.printResultMessage();
+
+        Arrays.stream(Statistics.values())
+                .forEach(statistics -> outputView.printResult(statistics.getMatchNumber(), statistics.getValue(), statistics.getCount(),
+                        Statistics.BONUS.getValue()));
+
+        outputView.printRateOfReturn(rateOfReturn.getRateOfReturn());
     }
 }
