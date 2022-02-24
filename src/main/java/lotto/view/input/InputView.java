@@ -8,4 +8,6 @@ public interface InputView {
     List<String> inputLastWeekWinningNumbers();
 
     String inputBonusNumber();
+
+    void printErrorMessage(final String errorMessage);
 }
