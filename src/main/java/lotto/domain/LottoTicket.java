@@ -12,11 +12,11 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumberGenerator.generate();
     }
 
-    public List<Integer> getLottoNumbers() {
-        return Collections.unmodifiableList(lottoNumbers);
-    }
-
     public boolean isSame(WinningNumber winningNumber) {
         return lottoNumbers.contains(winningNumber.getWinningNumber());
+    }
+
+    public List<Integer> getLottoNumbers() {
+        return Collections.unmodifiableList(lottoNumbers);
     }
 }
