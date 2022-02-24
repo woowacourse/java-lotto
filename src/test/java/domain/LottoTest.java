@@ -39,4 +39,28 @@ public class LottoTest {
             Lotto lotto = new Lotto(lottoNumber);
         }).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void countSameNumbersTest() {
+        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<Integer> targetNumbers = Arrays.asList(2, 3, 4, 5, 7, 9);
+        Lotto lotto = new Lotto(lottoNumbers);
+        assertThat(lotto.countSameNumbers(targetNumbers)).isEqualTo(4);
+    }
+
+    @Test
+    void checkBonusInLottoNumbersTest() {
+        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Lotto lotto = new Lotto(lottoNumbers);
+        int bonusNumber = 6;
+        assertThat(lotto.checkBonus(bonusNumber)).isEqualTo(true);
+    }
+
+    @Test
+    void checkBonusNotInLottoNumbersTest() {
+        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Lotto lotto = new Lotto(lottoNumbers);
+        int bonusNumber = 10;
+        assertThat(lotto.checkBonus(bonusNumber)).isEqualTo(false);
+    }
 }

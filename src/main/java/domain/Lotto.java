@@ -51,4 +51,14 @@ public class Lotto {
                 .collect(Collectors.toList());
         return PREFIX + String.join(DELIMITER, numbersToStrings) + SUFFIX;
     }
+
+    public int countSameNumbers(List<Integer> winningNumbers) {
+        return (int) lottoNumbers.stream()
+                .filter(winningNumbers::contains)
+                .count();
+    }
+
+    public boolean checkBonus(int bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
+    }
 }

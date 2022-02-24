@@ -5,6 +5,7 @@ import java.util.List;
 public class WinningLotto {
 
     private static final int DEFAULT_VALUE = 0;
+    private static final int SECOND_AND_THIRD_RANK_COUNT = 5;
 
     private final List<Integer> winningNumbers;
     private final int bonusNumber;
@@ -22,17 +23,11 @@ public class WinningLotto {
     }
 
     public LottoRank countLottoRank(Lotto lotto) {
-        List<Integer> lottoNumbers = lotto.getLottoNumbers();
-        int count = (int) lottoNumbers.stream()
-                .filter(this.winningNumbers::contains)
-                .count();
-        return LottoRank.getRankByCountAndBonus(count, checkBonus(lottoNumbers, count));
-    }
-
-    private boolean checkBonus(List<Integer> lottoNumbers, int count) {
-        if (count == 5) {
-            return lottoNumbers.contains(bonusNumber);
+        int count = lotto.countSameNumbers(winningNumbers);
+        boolean bonus = false;
+        if (count == SECOND_AND_THIRD_RANK_COUNT) {
+            bonus = lotto.checkBonus(bonusNumber);
         }
-        return false;
+        return LottoRank.getRankByCountAndBonus(count, bonus);
     }
 }
