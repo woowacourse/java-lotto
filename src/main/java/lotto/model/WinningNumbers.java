@@ -18,7 +18,6 @@ public class WinningNumbers {
     public WinningNumbers(List<Integer> winningNumbers) {
         validateNumberOfWinningNumbers(winningNumbers);
         validateDuplicationWinningNumbers(winningNumbers);
-        validateRangeWinningNumbers(winningNumbers);
         this.winningNumbers = convertIntegersToLottoNumbers(winningNumbers);
     }
 
@@ -32,14 +31,6 @@ public class WinningNumbers {
         if (winningNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(ERROR_NOT_MATCH_WINNING_NUMBER_SIZE);
         }
-    }
-
-    private void validateRangeWinningNumbers(List<Integer> winningNumbers) {
-        winningNumbers.forEach(number -> {
-            if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
-                throw new IllegalArgumentException(ERROR_OUT_OF_RANGE_WINNING_NUMBERS);
-            }
-        });
     }
 
     private void validateDuplicationWinningNumbers(List<Integer> winningNumbers) {

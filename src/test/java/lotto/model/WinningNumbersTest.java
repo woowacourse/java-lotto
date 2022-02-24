@@ -32,7 +32,7 @@ class WinningNumbersTest {
         assertThatThrownBy(() -> {
             new WinningNumbers(Arrays.asList(1, 2, 3, 4, 55, 6));
         }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("당첨 번호의 범위는 1 ~ 45 사이로 입력해주세요.");
+                    .hasMessageContaining("볼 번호가 1~45 범위 내에 해당하지 않습니다.");
     }
 
     @Test

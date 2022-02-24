@@ -6,14 +6,14 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 
 class LottoTest {
     @Test
     @DisplayName("6개의 랜덤한 로또 번호를 생성하는지 확인")
     void shuffleTest() {
-        Lotto lotto = Lotto.generate();
-
-        assertThat(lotto.getSize()).isEqualTo(6);
+        assertThatCode(Lotto::generate)
+                .doesNotThrowAnyException();
     }
 
     @Test
