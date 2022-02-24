@@ -1,10 +1,9 @@
 package view;
 
-import java.util.Map;
-import java.util.Map.Entry;
-import model.WinningPrize;
+import java.util.List;
+import model.WinningResultDto;
 
-public class WinningResultOutputView implements OutputView<Map<WinningPrize, Integer>> {
+public class WinningResultOutputView implements OutputView<List<WinningResultDto>> {
 
     private static final String WINNING_STATISTICS_MESSAGE = "당첨 통계";
     private static final String DIVISION_LINE = "---------";
@@ -17,26 +16,29 @@ public class WinningResultOutputView implements OutputView<Map<WinningPrize, Int
     private static final String COUNTING_UNIT = "개";
 
     @Override
-    public void printOutputData(Map<WinningPrize, Integer> winningResult) {
+    public void printOutputData(List<WinningResultDto> winningResults) {
         System.out.println(WINNING_STATISTICS_MESSAGE);
         System.out.println(DIVISION_LINE);
-        winningResult.entrySet()
-                .forEach(this::printWinningResult);
+        winningResults.forEach(this::printWinningResult);
     }
 
-    private void printWinningResult(Entry<WinningPrize, Integer> winningPrizeInfo) {
-        WinningPrize winningPrize = winningPrizeInfo.getKey();
-        String winningMessage = makeWinningMessage(winningPrizeInfo, winningPrize);
+    private void printWinningResult(WinningResultDto winningResult) {
+        String winningMessage = makeWinningMessage(
+                winningResult.getMatchCount(),
+                winningResult.isMatchBonus(),
+                winningResult.getPrizeMoney(),
+                winningResult.getTicketCount()
+        );
         System.out.println(winningMessage);
     }
 
-    private String makeWinningMessage(Entry<WinningPrize, Integer> winningPrizeInfo, WinningPrize winningPrize) {
-        String winningMessage = winningPrize.getMatchCount() + MATCH_COUNT_MESSAGE;
-        if (winningPrize.isMatchBonus()) {
+    private String makeWinningMessage(int matchCount, boolean matchBonus, int prizeMoney, int ticketCount) {
+        String winningMessage = matchCount + MATCH_COUNT_MESSAGE;
+        if (matchBonus) {
             winningMessage += MATCH_BONUS_NUMBER_MESSAGE;
         }
-        winningMessage += LEFT_PRICE_COVER + winningPrize.getPrizeMoney() + MONEY_UNIT + RIGHT_PRICE_COVER + SEPARATOR
-                + winningPrizeInfo.getValue() + COUNTING_UNIT;
+        winningMessage += LEFT_PRICE_COVER + prizeMoney + MONEY_UNIT + RIGHT_PRICE_COVER + SEPARATOR
+                + ticketCount + COUNTING_UNIT;
         return winningMessage;
     }
 }

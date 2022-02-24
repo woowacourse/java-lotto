@@ -31,7 +31,7 @@ public class LottoGame {
         return lottoTickets.getTickets();
     }
 
-    public Map<WinningPrize, Integer> winningResult() {
+    public Map<WinningPrize, Integer> winningResults() {
         Map<WinningPrize, Integer> result = initWinningCount();
         lottoTickets.getTickets().stream()
                 .filter(this::isWinning)
@@ -43,6 +43,14 @@ public class LottoGame {
         double totalReturn = calculateTotalReturn();
         double purchaseMoney = (double) lottoTickets.size() * TICKET_PRICE;
         return totalReturn / purchaseMoney;
+    }
+
+    public int matchCount(WinningPrize winningPrize) {
+        return winningPrizeStrategy.matchCount(winningPrize);
+    }
+
+    public boolean matchBonus(WinningPrize winningPrize) {
+        return winningPrizeStrategy.matchBonus(winningPrize);
     }
 
     private LinkedHashMap<WinningPrize, Integer> initWinningCount() {
@@ -69,7 +77,7 @@ public class LottoGame {
     }
 
     private int calculateTotalReturn() {
-        Map<WinningPrize, Integer> winningPrizeResult = winningResult();
+        Map<WinningPrize, Integer> winningPrizeResult = winningResults();
         return winningPrizeResult.entrySet().stream()
                 .mapToInt(entry -> entry.getKey().getPrizeMoney() * entry.getValue())
                 .sum();

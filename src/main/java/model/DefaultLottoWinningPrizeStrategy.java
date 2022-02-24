@@ -3,9 +3,8 @@ package model;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Optional;
 
-public class LottoWinningPrizeStrategy implements WinningPrizeStrategy {
+public class DefaultLottoWinningPrizeStrategy implements WinningPrizeStrategy {
 
     private static final Map<Integer, WinningPrize> MATCH_COUNT_WINNING_PRIZE_INFO = new HashMap<>() {{
         put(6, WinningPrize.FIRST);

@@ -2,6 +2,7 @@ package controller;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
 import model.GenerateStrategy;
 import model.LottoGame;
@@ -9,6 +10,7 @@ import model.LottoTicketDto;
 import model.LottoTickets;
 import model.WinningPrize;
 import model.WinningPrizeStrategy;
+import model.WinningResultDto;
 import view.BonusNumberInputView;
 import view.LottoTicketOutputView;
 import view.PurchaseMoneyInputView;
@@ -19,12 +21,15 @@ import view.WinningResultOutputView;
 public class LottoController {
     private LottoGame lottoGame;
 
-    public void initLottoGame(LottoTickets lottoTickets, List<Integer> winningNumbers, int bonusNumber, WinningPrizeStrategy winningPrizeStrategy) {
+    public void initLottoGame(LottoTickets lottoTickets,
+                              List<Integer> winningNumbers,
+                              int bonusNumber,
+                              WinningPrizeStrategy winningPrizeStrategy) {
         lottoGame = new LottoGame(lottoTickets, winningNumbers, bonusNumber, winningPrizeStrategy);
     }
 
     public Map<WinningPrize, Integer> winningResults() {
-        return lottoGame.winningResult();
+        return lottoGame.winningResults();
     }
 
     public Double rateOfReturn() {
@@ -55,7 +60,20 @@ public class LottoController {
     }
 
     public void printWinningResults(Map<WinningPrize, Integer> winningResults) {
-        (new WinningResultOutputView()).printOutputData(winningResults);
+        List<WinningResultDto> winningResultDtos = winningResults.entrySet().stream()
+                .map(this::toWinningResultDto)
+                .collect(Collectors.toList());
+        (new WinningResultOutputView()).printOutputData(winningResultDtos);
+    }
+
+    private WinningResultDto toWinningResultDto(Entry<WinningPrize, Integer> entry) {
+        return new WinningResultDto
+                (
+                        lottoGame.matchCount(entry.getKey()),
+                        lottoGame.matchBonus(entry.getKey()),
+                        entry.getKey().getPrizeMoney(),
+                        entry.getValue()
+                );
     }
 
     public void printRateOfReturn(Double rateOfReturn) {

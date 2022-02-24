@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Map;
 import model.LottoNumberGenerateStrategy;
 import model.LottoTickets;
-import model.LottoWinningPrizeStrategy;
+import model.DefaultLottoWinningPrizeStrategy;
 import model.WinningPrize;
 
 public class LottoMain {
@@ -25,7 +25,7 @@ public class LottoMain {
     private static void settingLottoGame(LottoTickets lottoTickets) {
         List<Integer> winningNumbers = controller.inputWinningNumbers();
         Integer bonusNumber = controller.inputBonusNumber();
-        controller.initLottoGame(lottoTickets, winningNumbers, bonusNumber, new LottoWinningPrizeStrategy());
+        controller.initLottoGame(lottoTickets, winningNumbers, bonusNumber, new DefaultLottoWinningPrizeStrategy());
     }
 
     private static void printLottoGameResult() {
