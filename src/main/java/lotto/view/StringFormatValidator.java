@@ -46,6 +46,6 @@ public class StringFormatValidator {
     }
 
     public static StringFormatValidator moneyValidator() {
-        return new StringFormatValidator("^[1-9][0-9]*0{3}$", INVALID_MONEY_FORMAT_MESSAGE);
+        return new StringFormatValidator("^\\s*[1-9][0-9]*0{3}\\s*$", INVALID_MONEY_FORMAT_MESSAGE);
     }
 }

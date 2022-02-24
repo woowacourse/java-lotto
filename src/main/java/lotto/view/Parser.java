@@ -22,7 +22,7 @@ public abstract class Parser<T> {
         return new Parser<>(StringFormatValidator.moneyValidator()) {
             @Override
             protected Money convert(String text) {
-                return new Money(Integer.parseInt(text));
+                return new Money(Integer.parseInt(text.trim()));
             }
         };
     }
@@ -31,7 +31,7 @@ public abstract class Parser<T> {
         return new Parser<>(StringFormatValidator.numberValidator()) {
             @Override
             protected Number convert(String text) {
-                return new Number(Integer.parseInt(text));
+                return new Number(Integer.parseInt(text.trim()));
             }
         };
     }

@@ -21,6 +21,13 @@ public class MoneyParserTest {
         assertThat(value).isEqualTo(new Money(10000));
     }
 
+    @Test
+    @DisplayName("앞뒤로 공백이 있는 금액 입력")
+    void parseHasSpaceText() {
+        Money value = moneyParser().parse("    1000  ");
+        assertThat(value).isEqualTo(new Money(1000));
+    }
+
     @ParameterizedTest
     @ValueSource(strings = {"111", "-1", "numbers", "1111004"})
     @DisplayName("비정상적인 금액 형식 입력")

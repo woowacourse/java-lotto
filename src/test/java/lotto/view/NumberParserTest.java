@@ -16,7 +16,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 public class NumberParserTest {
 
     @ParameterizedTest
-    @CsvSource({"1, 1", "24, 24", "42, 42"})
+    @CsvSource({"1, 1", "24, 24", "42, 42", "   43    , 43"})
     @DisplayName("정상적인 숫자 입력 처리")
     void parse(String text, int actual) {
         assertThat(numberParser().parse(text)).isEqualTo(new Number(actual));
