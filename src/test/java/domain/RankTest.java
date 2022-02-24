@@ -2,6 +2,7 @@ package domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import domain.result.Rank;
 import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("NonAsciiCharacters")
@@ -28,6 +29,6 @@ class RankTest {
     @Test
     void of_테스트_꼴등() {
         Rank rank = Rank.of(1, true);
-        assertThat(rank).isEqualTo(Rank.DEFAULT);
+        assertThat(rank).isEqualTo(Rank.NONE);
     }
 }

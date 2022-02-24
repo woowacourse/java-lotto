@@ -22,7 +22,7 @@ public class InputView {
         }
     }
 
-    public static List<Integer> inputWinLottoNumbers() {
+    public static List<Integer> inputWinLottoNums() {
         System.out.println(LOTTO_NUMBER_INPUT_MESSAGE);
         Scanner scanner = new Scanner(System.in);
         String lottoNumbers = scanner.nextLine();

@@ -1,9 +1,9 @@
 package view;
 
-import domain.Lotto;
-import domain.LottoBall;
-import domain.Rank;
-import domain.Result;
+import domain.lotto.Lotto;
+import domain.lotto.LottoBall;
+import domain.result.Rank;
+import domain.result.Result;
 import java.util.List;
 
 public class OutputView {
@@ -36,12 +36,12 @@ public class OutputView {
         System.out.println(result);
     }
 
-    public static void printResult(Result result) {
+    public static void printLottosResult(Result result) {
         System.out.println(RESULT_START_MESSAGE);
         for (Rank rank : Rank.getWithoutDefault()) {
             System.out.printf(RESULT_RANK_MESSAGE,
                     rank.getMatchCount(), printIfSecond(rank),
-                    rank.getPrizeMoney(), result.getRankCount(rank));
+                    rank.getPrize(), result.getRankCount(rank));
         }
     }
 

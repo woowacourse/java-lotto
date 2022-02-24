@@ -2,6 +2,9 @@ package domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import domain.lotto.Lotto;
+import domain.lotto.LottoBall;
+import domain.lotto.WinLotto;
 import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,7 +22,7 @@ class LottoTest {
     void 로또_번호_6개_일치_검사() {
         WinLotto winLottoNumbers = Lotto.toWinLotto(Arrays.asList(1, 2, 3, 4, 5, 6), LottoBall.from(10));
 
-        int sameNumber = lotto.countSameNumber(winLottoNumbers);
+        int sameNumber = lotto.countSameNum(winLottoNumbers);
         assertThat(sameNumber).isEqualTo(6);
     }
 

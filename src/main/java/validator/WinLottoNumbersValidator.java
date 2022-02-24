@@ -13,10 +13,10 @@ public class WinLottoNumbersValidator {
     }
 
     public static void validateBonus(List<Integer> nums, int bonus) {
-        isNumberNotDuplicated(nums, bonus);
+        isNumNotDuplicated(nums, bonus);
     }
 
-    private static void isNumberNotDuplicated(List<Integer> nums, int bonus) {
+    private static void isNumNotDuplicated(List<Integer> nums, int bonus) {
         if (nums.contains(bonus)) {
             throw new IllegalArgumentException(BONUS_DUPLICATED_ERROR_MESSAGE);
         }

@@ -69,7 +69,7 @@ class InputViewTest {
         System.setIn(in);
 
         //when
-        InputView.inputWinLottoNumbers();
+        InputView.inputWinLottoNums();
 
         //then
         assertThat(out.toString()).isEqualTo("지난 주 당첨 번호를 입력해 주세요." + System.lineSeparator());

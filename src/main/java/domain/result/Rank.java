@@ -1,22 +1,22 @@
-package domain;
+package domain.result;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public enum Rank {
-    DEFAULT(0, 0),
+    NONE(0, 0),
     FIFTH(5000, 3),
     FOURTH(50000, 4),
     THIRD(1500000, 5),
     SECOND(30000000, 5),
     FIRST(2000000000, 6);
 
-    private final int prizeMoney;
+    private final int prize;
     private final int matchCount;
 
-    Rank(int prizeMoney, int matchCount) {
-        this.prizeMoney = prizeMoney;
+    Rank(int prize, int matchCount) {
+        this.prize = prize;
         this.matchCount = matchCount;
     }
 
@@ -25,12 +25,12 @@ public enum Rank {
                 .filter(rank -> rank.isMatch(matchCount))
                 .filter(rank -> rank.equals(SECOND) || !isBonus)
                 .findFirst()
-                .orElse(DEFAULT);
+                .orElse(NONE);
     }
 
     public static List<Rank> getWithoutDefault() {
         return Arrays.stream(Rank.values())
-                .filter(rank -> !rank.equals(DEFAULT))
+                .filter(rank -> !rank.equals(NONE))
                 .collect(Collectors.toList());
     }
 
@@ -38,8 +38,8 @@ public enum Rank {
         return this.matchCount == matchCount;
     }
 
-    public int getPrizeMoney() {
-        return prizeMoney;
+    public int getPrize() {
+        return prize;
     }
 
     public int getMatchCount() {

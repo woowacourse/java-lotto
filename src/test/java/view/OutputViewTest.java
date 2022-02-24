@@ -2,9 +2,9 @@ package view;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import domain.Lotto;
-import domain.Rank;
-import domain.Result;
+import domain.lotto.Lotto;
+import domain.result.Rank;
+import domain.result.Result;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
@@ -47,7 +47,7 @@ class OutputViewTest {
         result.add(Rank.FIRST);
         result.add(Rank.THIRD);
 
-        OutputView.printResult(result);
+        OutputView.printLottosResult(result);
 
         assertThat(out.toString()).isEqualTo("당첨 통계\n"
                 + "---------\n"

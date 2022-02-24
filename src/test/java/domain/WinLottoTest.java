@@ -2,6 +2,9 @@ package domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import domain.lotto.Lotto;
+import domain.lotto.LottoBall;
+import domain.lotto.WinLotto;
 import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;

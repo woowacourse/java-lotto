@@ -2,6 +2,8 @@ package domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import domain.result.Rank;
+import domain.result.Result;
 import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("NonAsciiCharacters")
@@ -31,7 +33,7 @@ class ResultTest {
         result.add(Rank.of(1, false));
         result.add(Rank.of(0, false));
 
-        assertThat(result.get().get(Rank.DEFAULT)).isEqualTo(3);
+        assertThat(result.get().get(Rank.NONE)).isEqualTo(3);
     }
 
     @Test
@@ -40,7 +42,7 @@ class ResultTest {
         result.add(Rank.of(6, false));
         result.add(Rank.of(6, false));
 
-        assertThat(result.getPrice()).isEqualTo(4000000000L);
+        assertThat(result.getPrize()).isEqualTo(4000000000L);
     }
 
     @Test
@@ -50,6 +52,6 @@ class ResultTest {
         result.add(Rank.of(1, false));
         result.add(Rank.of(2, false));
 
-        assertThat(result.getPrice()).isEqualTo(0);
+        assertThat(result.getPrize()).isEqualTo(0);
     }
 }
