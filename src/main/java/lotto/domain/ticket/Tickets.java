@@ -3,6 +3,7 @@ package lotto.domain.ticket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import lotto.domain.rank.Rank;
@@ -26,11 +27,12 @@ public class Tickets {
 		return tickets;
 	}
 
-	public List<Rank> getRanks(final Ticket answer, final Ball bonusBall) {
+	public List<Rank> calculateRanks(final Ticket answer, final Ball bonusBall) {
 		return tickets.stream()
-			.map(ticket -> ticket.getRank(answer, bonusBall))
-			.filter(Objects::nonNull)
-			.collect(Collectors.toUnmodifiableList());
+				.map(ticket -> ticket.calculateRank(answer, bonusBall))
+				.filter(Optional::isPresent)
+				.map(Optional::get)
+				.collect(Collectors.toUnmodifiableList());
 	}
 
 	public int getTicketsCount() {

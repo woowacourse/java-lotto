@@ -28,7 +28,7 @@ public class LottoService {
 	}
 
 	public AnalysisDto generateAnalysis(final List<Integer> answerNumbers, final int bonusBall) {
-		final List<Rank> ranks = tickets.getRanks(new Ticket(answerNumbers), new Ball(bonusBall));
+		final List<Rank> ranks = tickets.calculateRanks(new Ticket(answerNumbers), new Ball(bonusBall));
 		return new AnalysisDto(ranks, credit.getMoney());
 	}
 

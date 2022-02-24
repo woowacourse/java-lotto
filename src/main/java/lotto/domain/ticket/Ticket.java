@@ -2,6 +2,7 @@ package lotto.domain.ticket;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import lotto.domain.rank.Rank;
@@ -28,7 +29,7 @@ public class Ticket {
 				.count();
 	}
 
-	public Rank getRank(final Ticket ticket, final Ball bonusBall) {
+	public Optional<Rank> calculateRank(final Ticket ticket, final Ball bonusBall) {
 		final int matchCount = ticket.countMatches(this.balls);
 		final boolean bonusBallMatched = this.balls.contains(bonusBall);
 		return Rank.of(matchCount, bonusBallMatched);
