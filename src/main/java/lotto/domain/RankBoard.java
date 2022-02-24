@@ -14,9 +14,9 @@ public class RankBoard {
 
     private final Map<Rank, Integer> board = new HashMap<>();
 
-    public RankBoard(TotalWinningNumber totalWinningNumber, List<LottoNumbers> tickets) {
+    public RankBoard(WinningLotto winningLotto, List<Lotto> tickets) {
         initResult();
-        countRank(totalWinningNumber, tickets);
+        countRank(winningLotto, tickets);
     }
 
     private void initResult() {
@@ -27,18 +27,18 @@ public class RankBoard {
         board.put(Rank.FIFTH, INIT_NUMBER);
     }
 
-    private void countRank(TotalWinningNumber totalWinningNumber, List<LottoNumbers> tickets) {
-        Set<LottoNumber> winningAndBonusNumber = totalWinningNumber.getWinningAndBonusNumber();
-        for (LottoNumbers ticket : tickets) {
-            calcRankForEach(ticket.getMatchedNumbers(winningAndBonusNumber), totalWinningNumber);
+    private void countRank(WinningLotto winningLotto, List<Lotto> tickets) {
+        Set<LottoNumber> winningAndBonusNumber = winningLotto.getWinningAndBonusNumber();
+        for (Lotto ticket : tickets) {
+            calcRankForEach(ticket.getMatchedNumbers(winningAndBonusNumber), winningLotto);
         }
     }
 
-    private void calcRankForEach(Set<LottoNumber> matchedNumbers, TotalWinningNumber totalWinningNumber) {
+    private void calcRankForEach(Set<LottoNumber> matchedNumbers, WinningLotto winningLotto) {
         if (isNotRanked(matchedNumbers)) {
             return;
         }
-        if (isSecondRank(matchedNumbers, totalWinningNumber)) {
+        if (isSecondRank(matchedNumbers, winningLotto)) {
             putResult(SECOND_RANK_SIZE, true);
             return;
         }
@@ -49,8 +49,8 @@ public class RankBoard {
         return matchedNumbers.size() < MINIMUM_RANK_SIZE;
     }
 
-    private boolean isSecondRank(Set<LottoNumber> matchedNumbers, TotalWinningNumber totalWinningNumber) {
-        return matchedNumbers.size() == SECOND_RANK_MATCHED && matchedNumbers.contains(totalWinningNumber.getBonusNumber());
+    private boolean isSecondRank(Set<LottoNumber> matchedNumbers, WinningLotto winningLotto) {
+        return matchedNumbers.size() == SECOND_RANK_MATCHED && matchedNumbers.contains(winningLotto.getBonusNumber());
     }
 
     private void putResult(int size, boolean isBonusBallMatched) {

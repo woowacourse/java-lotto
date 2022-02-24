@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.util.IntToLottoConverter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,21 +15,21 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class RankBoardTest {
 
-    private TotalWinningNumber totalWinningNumber;
+    private WinningLotto winningLotto;
 
     @BeforeEach
     void setUp() {
-        WinningNumber winningNumber = new WinningNumber("1,2,3,4,5,6");
-        LottoNumber bonusNumber = new LottoNumber("7");
-        totalWinningNumber = new TotalWinningNumber(winningNumber, bonusNumber);
+        Lotto winningNumbers = IntToLottoConverter.toLotto(List.of(1,2,3,4,5,6));
+        LottoNumber bonusNumber = new LottoNumber(7);
+        winningLotto = new WinningLotto(winningNumbers, bonusNumber);
     }
 
     @Test
     @DisplayName("당첨 결과를 구한다")
     void calcRank() {
-        List<LottoNumbers> tickets = initTickets();
+        List<Lotto> tickets = initTickets();
 
-        RankBoard board = new RankBoard(totalWinningNumber, tickets);
+        RankBoard board = new RankBoard(winningLotto, tickets);
 
         Map<Rank, Integer> expected = new HashMap<>();
         expected.put(Rank.FIRST, 1);
@@ -43,10 +44,10 @@ class RankBoardTest {
     @Test
     @DisplayName("만약 아무 등수에 해당하지 않는 경우 빈 맵을 반환한다")
     void testCalcRankEdgeCase() {
-        List<LottoNumbers> tickets = new ArrayList<>();
+        List<Lotto> tickets = new ArrayList<>();
         tickets.add(initTicket(List.of(1, 2, 8, 9, 10, 11)));
 
-        RankBoard board = new RankBoard(totalWinningNumber, tickets);
+        RankBoard board = new RankBoard(winningLotto, tickets);
 
         Map<Rank, Integer> expected = new HashMap<>();
         expected.put(Rank.FIRST, 0);
@@ -61,16 +62,16 @@ class RankBoardTest {
     @Test
     @DisplayName("수익률을 계산해 반환한다")
     void calcProfit() {
-        List<LottoNumbers> tickets = new ArrayList<>();
+        List<Lotto> tickets = new ArrayList<>();
         tickets.add(initTicket(List.of(1, 2, 3, 9, 10, 11)));
 
-        RankBoard board = new RankBoard(totalWinningNumber, tickets);
+        RankBoard board = new RankBoard(winningLotto, tickets);
 
         assertThat(board.calcProfitRatio(90_000)).isEqualTo(0.06);
     }
 
-    private List<LottoNumbers> initTickets() {
-        ArrayList<LottoNumbers> tickets = new ArrayList<>();
+    private List<Lotto> initTickets() {
+        ArrayList<Lotto> tickets = new ArrayList<>();
         tickets.add(initTicket(List.of(1, 2, 3, 4, 5, 6)));
         tickets.add(initTicket(List.of(1, 2, 3, 4, 5, 7)));
         tickets.add(initTicket(List.of(1, 2, 3, 4, 5, 8)));
@@ -79,8 +80,8 @@ class RankBoardTest {
         return tickets;
     }
 
-    private LottoNumbers initTicket(List<Integer> numbers) {
-        return new LottoNumbers(numbers.stream()
+    private Lotto initTicket(List<Integer> numbers) {
+        return new Lotto(numbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList()));
     }

@@ -1,6 +1,31 @@
 package lotto.util;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class StringToIntConverter {
+
+    private static final String DELIMITER = ",";
+
+    private StringToIntConverter() {
+    }
+
+    public static List<Integer> toInts(String input) {
+        return Arrays.stream(trim(split(input)))
+                .map(StringToIntConverter::toInt)
+                .collect(Collectors.toList());
+    }
+
+    private static String[] split(String input) {
+        return input.split(DELIMITER);
+    }
+
+    private static String[] trim(String[] numbers) {
+        return Arrays.stream(numbers)
+                .map(String::trim)
+                .toArray(String[]::new);
+    }
 
     public static int toInt(String input) {
         validateNullOrBlank(input);
@@ -10,7 +35,7 @@ public class StringToIntConverter {
 
     private static void validateNullOrBlank(String input) {
         if (input == null || input.isBlank()) {
-            throw new IllegalArgumentException("구입 금액은 공백일 수 없습니다");
+            throw new IllegalArgumentException("입력값은 공백일 수 없습니다");
         }
     }
 

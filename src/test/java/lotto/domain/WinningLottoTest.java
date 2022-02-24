@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.util.IntToLottoConverter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -10,15 +11,15 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class TotalWinningNumberTest {
+class WinningLottoTest {
 
     @Test
     @DisplayName("보너스 넘버가 당첨번호와 중복될 경우 예외를 발생시킨다")
     void throwExceptionWhenDuplicate() {
-        WinningNumber winningNumber = new WinningNumber("1, 2, 3, 4, 5, 6");
-        LottoNumber bonusNumber = new LottoNumber("6");
+        Lotto winningNumbers = IntToLottoConverter.toLotto(List.of(1, 2, 3, 4, 5, 6));
+        LottoNumber bonusNumber = new LottoNumber(6);
 
-        assertThatThrownBy(() -> new TotalWinningNumber(winningNumber, bonusNumber))
+        assertThatThrownBy(() -> new WinningLotto(winningNumbers, bonusNumber))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -26,11 +27,11 @@ class TotalWinningNumberTest {
     @Test
     @DisplayName("당첨 번호와 보너스 번호를 가진 set을 반환한다")
     void makeWinningAndBonusNumbers() {
-        WinningNumber winningNumber = new WinningNumber("1, 2, 3, 4, 5, 6");
-        LottoNumber bonusNumber = new LottoNumber("7");
+        Lotto winningNumbers = IntToLottoConverter.toLotto(List.of(1, 2, 3, 4, 5, 6));
+        LottoNumber bonusNumber = new LottoNumber(7);
 
-        TotalWinningNumber totalWinningNumber = new TotalWinningNumber(winningNumber, bonusNumber);
-        Set<LottoNumber> result = totalWinningNumber.getWinningAndBonusNumber();
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+        Set<LottoNumber> result = winningLotto.getWinningAndBonusNumber();
         Set<LottoNumber> expected = initExpected();
 
         assertThat(result).isEqualTo(expected);

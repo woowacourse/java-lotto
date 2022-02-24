@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoNumbers;
+import lotto.domain.Lotto;
 import lotto.domain.Rank;
 import lotto.domain.RankBoard;
 
@@ -16,14 +16,14 @@ public class OutputView {
         System.out.println(count + "개를 구매했습니다.");
     }
 
-    public static void printTickets(List<LottoNumbers> tickets) {
-        for (LottoNumbers ticket : tickets) {
+    public static void printTickets(List<Lotto> tickets) {
+        for (Lotto ticket : tickets) {
             System.out.println(makeTicketsString(ticket));
         }
         System.out.println();
     }
 
-    private static String makeTicketsString(LottoNumbers ticket) {
+    private static String makeTicketsString(Lotto ticket) {
         String result = ticket.intValues().stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining(", "));
@@ -44,7 +44,7 @@ public class OutputView {
 
     private static void printRankCounter(RankBoard rankBoard) {
         ArrayList<Rank> ranks = new ArrayList<>(Arrays.asList(Rank.values()));
-        ranks.sort(Comparator.comparing(Rank::getMatched));
+        ranks.sort(Comparator.comparing(Rank::getPrize));
         for (Rank rank : ranks) {
             printEachRank(rank, rankBoard);
         }

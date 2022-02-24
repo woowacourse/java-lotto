@@ -20,16 +20,16 @@ public class LottoMachine {
         }
     }
 
-    public List<LottoNumbers> makeLottoTickets(int count) {
-        ArrayList<LottoNumbers> lottoTickets = new ArrayList<>();
+    public List<Lotto> makeLottoTickets(int count) {
+        ArrayList<Lotto> lottoTickets = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             lottoTickets.add(makeLottoTicket());
         }
         return lottoTickets;
     }
 
-    private LottoNumbers makeLottoTicket() {
+    private Lotto makeLottoTicket() {
         Collections.shuffle(numbers);
-        return new LottoNumbers(numbers.subList(LOTTO_NUMBER_START_INDEX, LOTTO_NUMBER_END_INDEX));
+        return new Lotto(numbers.subList(LOTTO_NUMBER_START_INDEX, LOTTO_NUMBER_END_INDEX));
     }
 }

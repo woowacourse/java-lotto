@@ -2,25 +2,25 @@ package lotto.domain;
 
 import java.util.Set;
 
-public class TotalWinningNumber {
+public class WinningLotto {
 
-    private final WinningNumber winningNumber;
+    private final Lotto winningNumbers;
     private final LottoNumber bonusNumber;
 
-    public TotalWinningNumber(WinningNumber winningNumber, LottoNumber bonusNumber) {
-        validateDuplication(winningNumber, bonusNumber);
-        this.winningNumber = winningNumber;
+    public WinningLotto(Lotto winningNumbers, LottoNumber bonusNumber) {
+        validateDuplication(winningNumbers, bonusNumber);
+        this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
     }
 
-    private void validateDuplication(WinningNumber winningNumber, LottoNumber bonusNumber) {
+    private void validateDuplication(Lotto winningNumber, LottoNumber bonusNumber) {
         if (winningNumber.contains(bonusNumber)) {
             throw new IllegalArgumentException("[ERROR] 보너스 볼은 당첨 번호와 중복될 수 없습니다.");
         }
     }
 
     public Set<LottoNumber> getWinningAndBonusNumber() {
-        Set<LottoNumber> totalNumbers = winningNumber.toSet();
+        Set<LottoNumber> totalNumbers = winningNumbers.getLottoNumbers();
         totalNumbers.add(bonusNumber);
         return totalNumbers;
     }

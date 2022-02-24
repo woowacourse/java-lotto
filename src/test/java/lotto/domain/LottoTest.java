@@ -7,7 +7,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class LottoNumbersTest {
+class LottoTest {
 
     @Test
     @DisplayName("중복되거나 6개의 숫자가 아닌 경우 예외를 발생시킨다")
@@ -22,7 +22,7 @@ class LottoNumbersTest {
                 new LottoNumber(5)
         );
 
-        assertThatThrownBy(() -> new LottoNumbers(numbers))
+        assertThatThrownBy(() -> new Lotto(numbers))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

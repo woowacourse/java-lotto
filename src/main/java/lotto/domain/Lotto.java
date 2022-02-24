@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class LottoNumbers {
+public class Lotto {
 
     private static final int LOTTO_NUMBERS_SIZE = 6;
 
     private final Set<LottoNumber> numbers;
 
-    public LottoNumbers(List<LottoNumber> numbers) {
+    public Lotto(List<LottoNumber> numbers) {
         Set<LottoNumber> lottoNumbers = new HashSet<>(numbers);
         validateDuplication(lottoNumbers);
         this.numbers = lottoNumbers;
@@ -37,6 +37,10 @@ public class LottoNumbers {
 
     public boolean contains(LottoNumber number) {
         return numbers.contains(number);
+    }
+
+    public Set<LottoNumber> toSet() {
+        return new HashSet<>(numbers);
     }
 
     public Set<LottoNumber> getLottoNumbers() {

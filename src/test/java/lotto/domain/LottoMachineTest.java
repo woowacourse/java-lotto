@@ -13,7 +13,7 @@ class LottoMachineTest {
     @DisplayName("로또 티켓을 여러개 생성한다")
     void makeLottoTickets() {
         LottoMachine lottoMachine = new LottoMachine();
-        List<LottoNumbers> lottoTickets = lottoMachine.makeLottoTickets(14);
+        List<Lotto> lottoTickets = lottoMachine.makeLottoTickets(14);
         assertThat(lottoTickets.size()).isEqualTo(14);
     }
 }

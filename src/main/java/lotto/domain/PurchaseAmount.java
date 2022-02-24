@@ -1,17 +1,14 @@
 package lotto.domain;
 
-import lotto.util.StringToIntConverter;
-
 public class PurchaseAmount {
 
     private static final int TICKET_PRICE = 1000;
 
     private final int amount;
 
-    public PurchaseAmount(String input) {
-        final int inputAmount = StringToIntConverter.toInt(input);
-        validateMinimumAmount(inputAmount);
-        amount = calculateActualAmount(inputAmount);
+    public PurchaseAmount(int amount) {
+        validateMinimumAmount(amount);
+        this.amount = calculateActualAmount(amount);
     }
 
     public int calcTheNumberOfTicket() {

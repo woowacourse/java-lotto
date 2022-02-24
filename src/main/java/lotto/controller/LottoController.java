@@ -1,6 +1,8 @@
 package lotto.controller;
 
 import lotto.domain.*;
+import lotto.util.IntToLottoConverter;
+import lotto.util.StringToIntConverter;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -13,59 +15,60 @@ public class LottoController {
         int ticketCount = purchaseAmount.calcTheNumberOfTicket();
         OutputView.printTicketCount(ticketCount);
 
-        List<LottoNumbers> lottoTickets = getTickets(ticketCount);
+        List<Lotto> lottoTickets = getTickets(ticketCount);
         OutputView.printTickets(lottoTickets);
 
-        TotalWinningNumber totalWinningNumber = getTotalNumber();
-        RankBoard rankBoard = new RankBoard(totalWinningNumber, lottoTickets);
+        WinningLotto winningLotto = getTotalNumber();
+        RankBoard rankBoard = new RankBoard(winningLotto, lottoTickets);
 
         OutputView.printResult(rankBoard, rankBoard.calcProfitRatio(purchaseAmount.getAmount()));
     }
 
     private PurchaseAmount getPurchaseAmount() {
         try {
-            return new PurchaseAmount(InputView.getAmount());
+            return new PurchaseAmount(StringToIntConverter.toInt(InputView.getAmount()));
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return getPurchaseAmount();
         }
     }
 
-    private List<LottoNumbers> getTickets(int ticketCount) {
+    private List<Lotto> getTickets(int ticketCount) {
         LottoMachine lottoMachine = new LottoMachine();
         return lottoMachine.makeLottoTickets(ticketCount);
     }
 
-    private WinningNumber getWinningNumber() {
+    private WinningLotto getTotalNumber() {
+        Lotto winningNumber = getWinningNumber();
+        return makeWinningLotto(winningNumber);
+    }
+
+    private Lotto getWinningNumber() {
         try {
-            return new WinningNumber(InputView.getWinningNumber());
+            List<Integer> input = StringToIntConverter.toInts(InputView.getWinningNumber());
+            return IntToLottoConverter.toLotto(input);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return getWinningNumber();
         }
     }
 
-    private LottoNumber getBonusNumber() {
+    private WinningLotto makeWinningLotto(Lotto winningNumber) {
+        LottoNumber bonusNumber = getBonusNumber();
         try {
-            return new LottoNumber(InputView.getBonusNumber());
+            return new WinningLotto(winningNumber, bonusNumber);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return getBonusNumber();
+            return makeWinningLotto(winningNumber);
         }
     }
 
-    private TotalWinningNumber getTotalNumber() {
-        WinningNumber winningNumber = getWinningNumber();
-        return makeTotalNumber(winningNumber);
-    }
-
-    private TotalWinningNumber makeTotalNumber(WinningNumber winningNumber) {
-        LottoNumber bonusNumber = getBonusNumber();
+    private LottoNumber getBonusNumber() {
         try {
-            return new TotalWinningNumber(winningNumber, bonusNumber);
+            return new LottoNumber(StringToIntConverter.toInt(InputView.getBonusNumber()));
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return makeTotalNumber(winningNumber);
+            return getBonusNumber();
         }
     }
 }
