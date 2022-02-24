@@ -7,7 +7,7 @@ public class Money {
     private static final int LOTTO_PRICE = 1_000;
     private static final String ERROR_LOWER_THAN_LOTTO_PRICE_MESSAGE = "원 미만은 입력할 수 없습니다.";
 
-    private int money;
+    private final int money;
 
     public Money(final String input) {
         validateInputMoney(input);

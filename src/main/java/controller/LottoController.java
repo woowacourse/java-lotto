@@ -29,8 +29,7 @@ public class LottoController {
 
     private Money getMoney() {
         try {
-            Money money = new Money(InputView.getMoney());
-            return money;
+            return new Money(InputView.getMoney());
         } catch (IllegalArgumentException e) {
             System.out.println(ERROR_MESSAGE + e.getMessage());
             return getMoney();

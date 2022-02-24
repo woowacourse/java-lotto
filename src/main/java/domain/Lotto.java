@@ -7,8 +7,8 @@ import utils.Validator;
 
 public class Lotto {
 
-    private static final String INPUTNUMBER_DELIMITER = ",";
-    private static final int INPUTNUMBER_SPLIT_OPTION = -1;
+    private static final String INPUT_NUMBER_DELIMITER = ",";
+    private static final int INPUT_NUMBER_SPLIT_OPTION = -1;
     private static final int INIT_COUNT = 0;
     private static final int COUNT_INCREASE_UNIT = 1;
     private final List<LottoNumber> lotto;
@@ -18,7 +18,7 @@ public class Lotto {
         List<String> splitNumbers = splitInput(inputLotto);
         Validator.checkDuplication(splitNumbers);
         this.lotto = splitNumbers.stream()
-                .map(number -> new LottoNumber(number))
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 
@@ -27,7 +27,7 @@ public class Lotto {
     }
 
     private List<String> splitInput(final String inputNumbers) {
-        return Arrays.stream(inputNumbers.split(INPUTNUMBER_DELIMITER, INPUTNUMBER_SPLIT_OPTION))
+        return Arrays.stream(inputNumbers.split(INPUT_NUMBER_DELIMITER, INPUT_NUMBER_SPLIT_OPTION))
                 .map(String::trim)
                 .collect(Collectors.toList());
     }
