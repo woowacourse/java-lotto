@@ -1,8 +1,11 @@
 package domain;
 
+import util.LottoNumbersGenerator;
+
 import java.util.List;
 
 public class Lotto {
+
 	List<Integer> numbers;
 
 	public Lotto(LottoNumbersGenerator lottoNumbersGenerator) {

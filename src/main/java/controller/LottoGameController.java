@@ -4,7 +4,7 @@ import domain.AnswerLotto;
 import domain.BonusNumber;
 import domain.AnswerLottoNumbers;
 import domain.Lottos;
-import domain.RandomLottoNumberGenerator;
+import util.RandomLottoNumberGenerator;
 
 import static view.InputView.*;
 import static view.OutputView.*;

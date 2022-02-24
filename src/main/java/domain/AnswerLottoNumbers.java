@@ -3,33 +3,38 @@ package domain;
 import java.util.HashSet;
 import java.util.List;
 
+import static constant.LottoConstant.*;
+
 public class AnswerLottoNumbers {
-	private static final String MUST_NOT_DUPLICATED = "[ERROR] 지난 주 당첨 번호 숫자들은 중복일 수 없습니다.";
+
 	private static final String NUMBER_IN_RANGE = "[ERROR] 1이상 45 이하의 숫자만 허용됩니다.";
-	private static final String COUNT_MUST_BE_SIX = "[ERROR] 6개의 숫자만 허용됩니다.";
+	private static final String NUMBER_OF_NUMBERS_IS_NOT_CORRECT = "[ERROR] " + NUMBER_OF_NUMBERS + "개의 숫자만 허용됩니다.";
+	private static final String NUMBERS_MUST_NOT_DUPLICATED = "[ERROR] 지난 주 당첨 번호 숫자들은 중복일 수 없습니다.";
 
-	private final List<Integer> lottoNumbers;
+	private final List<Integer> numbers;
 
-	public AnswerLottoNumbers(List<Integer> userInput) {
-		validateInput(userInput);
-		this.lottoNumbers = userInput;
+	public AnswerLottoNumbers(List<Integer> numbers) {
+		validateAllCondition(numbers);
+		this.numbers = numbers;
 	}
 
-	private void validateInput(List<Integer> numbers) {
+	public boolean isExists(BonusNumber bonusNumber) {
+		return this.numbers.contains(bonusNumber.getNumber());
+	}
+
+	public List<Integer> getAnswerLottoNumbers() {
+		return this.numbers;
+	}
+
+	private void validateAllCondition(List<Integer> numbers) {
 		validateLength(numbers);
 		validateNumbers(numbers);
 		validateDuplicateInNumbers(numbers);
 	}
 
-	private void validateDuplicateInNumbers(List<Integer> numbers) {
-		if (numbers.size() != new HashSet<>(numbers).size()) {
-			throw new IllegalArgumentException(MUST_NOT_DUPLICATED);
-		}
-	}
-
 	private void validateNumbers(List<Integer> numbers) {
-		int upperCount = (int) numbers.stream().filter(number -> number > 45).count();
-		int lowerCount = (int) numbers.stream().filter(number -> number < 1).count();
+		int upperCount = (int) numbers.stream().filter(number -> number > MAX_NUMBER).count();
+		int lowerCount = (int) numbers.stream().filter(number -> number < MIN_NUMBER).count();
 
 		if (upperCount > 0 || lowerCount > 0) {
 			throw new IllegalArgumentException(NUMBER_IN_RANGE);
@@ -37,16 +42,16 @@ public class AnswerLottoNumbers {
 	}
 
 	private void validateLength(List<Integer> numbers) {
-		if (numbers.size() != 6) {
-			throw new IllegalArgumentException(COUNT_MUST_BE_SIX);
+		if (numbers.size() != NUMBER_OF_NUMBERS) {
+			throw new IllegalArgumentException(NUMBER_OF_NUMBERS_IS_NOT_CORRECT);
 		}
 	}
 
-	public List<Integer> getAnswerLottoNumbers() {
-		return this.lottoNumbers;
-	}
-
-	public boolean isExists(BonusNumber bonusNumber) {
-		return this.lottoNumbers.contains(bonusNumber.getNumber());
+	private void validateDuplicateInNumbers(List<Integer> numbers) {
+		if (numbers.size() != new HashSet<>(numbers).size()) {
+			throw new IllegalArgumentException(NUMBERS_MUST_NOT_DUPLICATED);
+		}
 	}
 }
+
+

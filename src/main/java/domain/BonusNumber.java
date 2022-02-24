@@ -1,7 +1,12 @@
 package domain;
 
+import static constant.LottoConstant.MAX_NUMBER;
+import static constant.LottoConstant.MIN_NUMBER;
+
 public class BonusNumber {
+
 	private static final String NUMBER_IN_RANGE = "[ERROR] 1이상 45 이하의 숫자만 허용됩니다.";
+
 	private final int bonusNumber;
 
 	public BonusNumber(int userInput) {
@@ -10,7 +15,7 @@ public class BonusNumber {
 	}
 
 	private void validateBonusNumber(int bonusNumber) {
-		if (bonusNumber < 1 || bonusNumber > 45) {
+		if (bonusNumber < MIN_NUMBER || bonusNumber > MAX_NUMBER) {
 			throw new IllegalArgumentException(NUMBER_IN_RANGE);
 		}
 	}
