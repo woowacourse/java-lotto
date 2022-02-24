@@ -11,13 +11,11 @@ public class InputController {
     private static final int PRICE_PER_LOTTO = 1000;
 
     public int countLotto(String price) {
-        InputValidator.validatePrice(price);
-        return Integer.parseInt(price) / PRICE_PER_LOTTO;
+        return InputValidator.validatePrice(price) / PRICE_PER_LOTTO;
     }
 
     public List<Integer> splitWinningNumbers(String winningNumbers) {
-        InputValidator.validateWinningNumbers(winningNumbers);
-        return Arrays.stream(winningNumbers.split(","))
+        return Arrays.stream(InputValidator.validateWinningNumbers(winningNumbers))
                 .map(String::trim)
                 .mapToInt(Integer::parseInt)
                 .boxed()

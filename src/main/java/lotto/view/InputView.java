@@ -12,16 +12,16 @@ public class InputView {
 
     public static String inputPrice() {
         System.out.println(INPUT_PRICE_MESSAGE);
-        return input.nextLine();
+        return input.nextLine().trim();
     }
 
     public static String inputWinningNumbers() {
         System.out.println(INPUT_WINNING_NUMBERS_MESSAGE);
-        return input.nextLine();
+        return input.nextLine().trim();
     }
 
     public static String inputBonusNumber() {
         System.out.println(INPUT_BONUS_NUMBER_MESSAGE);
-        return input.nextLine();
+        return input.nextLine().trim();
     }
 }

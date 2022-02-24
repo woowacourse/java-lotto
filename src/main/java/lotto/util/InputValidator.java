@@ -12,15 +12,16 @@ public class InputValidator {
     private static final String NOT_NUMBER_ERROR_MESSAGE = "[ERROR] 문자가 입력되었습니다.";
     private static final String RANGE_ERROR_MESSAGE = "[ERROR] 숫자의 범위가 잘못되었습니다.";
 
-    private static final String REGEX = "\\d+";
+    private static final String NUMBER_REGEX = "\\d+";
 
-    public static void validatePrice(String price) {
-        if (!Pattern.matches(REGEX, price)) {
+    public static int validatePrice(String price) {
+        if (!Pattern.matches(NUMBER_REGEX, price)) {
             throw new RuntimeException(PRICE_ERROR_MESSAGE);
         }
+        return Integer.parseInt(price);
     }
 
-    public static void validateWinningNumbers(String winningNumbers) {
+    public static String[] validateWinningNumbers(String winningNumbers) {
         String[] splitWinningNumbers = winningNumbers.split(",");
 
         validateLength(splitWinningNumbers);
@@ -28,6 +29,7 @@ public class InputValidator {
             validateNumber(number);
         }
         validateDuplicate(splitWinningNumbers);
+        return splitWinningNumbers;
     }
 
     private static void validateLength(String[] winningNumbers) {
