@@ -62,7 +62,7 @@ public class LottoController {
             isValid = validateNumbers(numbers);
         } while (!isValid);
 
-        return numbers.stream().map(String::valueOf).map(Number::new).collect(Collectors.toList());
+        return numbers.stream().map(Number::new).collect(Collectors.toList());
     }
 
     private List<Integer> toList(String[] splitInput) {

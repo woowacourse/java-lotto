@@ -37,7 +37,7 @@ public class Lotto {
 
     Lotto(List<Integer> numbers) {
         validateNumbers(numbers);
-        this.numbers = numbers.stream().map(String::valueOf).map(Number::new).collect(Collectors.toSet());
+        this.numbers = numbers.stream().map(Number::new).collect(Collectors.toSet());
     }
 
     public boolean contains(Number number) {
