@@ -7,12 +7,12 @@ import lotto.dto.AnalysisDto;
 import lotto.view.input.InputView;
 import lotto.view.output.OutputView;
 
-public class View {
+public class LottoView {
 
     private final InputView inputView;
     private final OutputView outputView;
 
-    public View(InputView inputView, OutputView outputView) {
+    public LottoView(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
     }
