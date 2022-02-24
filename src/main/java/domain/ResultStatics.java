@@ -19,31 +19,31 @@ public enum ResultStatics {
 		this.hitBonus = hitBonus;
 	}
 
-	public static ResultStatics of(int count, boolean hitBonus) {
-		if (count == 3) {
+	public static ResultStatics of(int numberMatches, boolean hitBonus) {
+		if (numberMatches == 3) {
 			return THREE;
 		}
-		if (count == 4) {
+		if (numberMatches == 4) {
 			return FOUR;
 		}
-		if (count == 5 && !hitBonus) {
+		if (numberMatches == 5 && !hitBonus) {
 			return FIVE;
 		}
-		if (count == 5 && hitBonus) {
+		if (numberMatches == 5 && hitBonus) {
 			return FIVE_AND_BONUS;
 		}
-		if (count == 6) {
+		if (numberMatches == 6) {
 			return SIX;
 		}
 		return NOTHING;
 	}
 
-	public int getPrice() {
-		return this.price;
-	}
-
 	public int getNumberMatches() {
 		return this.numberMatches;
+	}
+
+	public int getPrice() {
+		return this.price;
 	}
 
 	public boolean isHitBonus() {
