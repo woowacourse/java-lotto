@@ -13,6 +13,7 @@ import java.util.Map;
 
 public class LottoService {
     private static final int LOTTO_PRICE = 1000;
+    private static final int INITIAL_MATCH_COUNT = 0;
 
     private final List<LottoNumbers> lottoNumbersGroup;
     private final PurchaseAmount purchaseAmount;
@@ -28,7 +29,7 @@ public class LottoService {
 
     private void initializeResult(final Map<LottoMatchKind, Integer> result) {
         Arrays.stream(LottoMatchKind.values())
-                .forEach(lottoMatchKind -> result.put(lottoMatchKind, 0));
+                .forEach(lottoMatchKind -> result.put(lottoMatchKind, INITIAL_MATCH_COUNT));
     }
 
     public int getCountOfLottoNumbers() {
