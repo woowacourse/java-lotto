@@ -1,27 +1,24 @@
 package lotto.view;
 
 import java.util.Scanner;
+import lotto.view.utils.IntegerUtils;
 
 public class InputView {
 
-    private final Scanner scanner;
+    private static final Scanner scanner = new Scanner(System.in);
 
-    public InputView(Scanner scanner) {
-        this.scanner = scanner;
-    }
-
-    public String inputMoney() {
+    public int requestMoney() {
         System.out.println("구입금액을 입력해 주세요.");
-        return scanner.nextLine();
+        return IntegerUtils.parse(scanner.nextLine());
     }
 
-    public String inputWinningNumber() {
+    public int requestWinningNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return scanner.nextLine();
+        return IntegerUtils.parse(scanner.nextLine());
     }
 
-    public String inputBonusBall() {
+    public int requestBonusBall() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return scanner.nextLine();
+        return IntegerUtils.parse(scanner.nextLine());
     }
 }
