@@ -1,6 +1,6 @@
 package lotto.view;
 
-import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toUnmodifiableList;
 
 import java.util.List;
 import lotto.model.Lotto;
@@ -25,12 +25,12 @@ public class LottoParser extends Parser<Lotto> {
     private List<String> trimNumbers(List<String> numbers) {
         return numbers.stream()
             .map(String::trim)
-            .collect(toList());
+            .collect(toUnmodifiableList());
     }
 
     private List<Integer> toInts(List<String> numbers) {
         return numbers.stream()
             .map(Integer::valueOf)
-            .collect(toList());
+            .collect(toUnmodifiableList());
     }
 }

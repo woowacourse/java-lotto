@@ -1,7 +1,8 @@
 package lotto.model;
 
+import static java.util.stream.Collectors.toUnmodifiableList;
+
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoMachine {
@@ -16,7 +17,7 @@ public class LottoMachine {
     public List<Lotto> issueLotto(Money money) {
         return IntStream.range(0, quantity(money))
             .mapToObj(i -> lottoGenerator.createLotto())
-            .collect(Collectors.toList());
+            .collect(toUnmodifiableList());
     }
 
     private int quantity(Money money) {

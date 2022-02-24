@@ -1,8 +1,9 @@
 package lotto.model;
 
-import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toUnmodifiableList;
 import static lotto.model.Lotto.LOTTO_SIZE;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -18,28 +19,32 @@ public class RandomLottoGenerator implements LottoGenerator {
     }
 
     private List<Integer> createNumberPool(int start, int end) {
-        return IntStream.rangeClosed(start, end).boxed().collect(toList());
+        return IntStream.rangeClosed(start, end)
+            .boxed()
+            .collect(toUnmodifiableList());
     }
 
     public Lotto createLotto() {
-        shuffleNumberPool();
-        Queue<Integer> queue = queueFromNumberPool();
+        List<Integer> shuffledList = shuffleNumberList();
+        Queue<Integer> queue = queueFromShuffledList(shuffledList);
         List<Integer> numbers = numbers(queue);
         return new Lotto(numbers);
     }
 
-    private void shuffleNumberPool() {
-        Collections.shuffle(numberPool);
+    private List<Integer> shuffleNumberList() {
+        List<Integer> listForShuffle = new ArrayList<>(numberPool);
+        Collections.shuffle(listForShuffle);
+        return listForShuffle;
     }
 
-    private Queue<Integer> queueFromNumberPool() {
-        return new LinkedList<>(numberPool);
+    private Queue<Integer> queueFromShuffledList(List<Integer> shuffledList) {
+        return new LinkedList<>(shuffledList);
     }
 
     private List<Integer> numbers(Queue<Integer> queue) {
         return IntStream.range(0, LOTTO_SIZE)
             .map(i -> queue.remove())
             .boxed()
-            .collect(toList());
+            .collect(toUnmodifiableList());
     }
 }

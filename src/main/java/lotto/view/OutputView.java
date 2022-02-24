@@ -1,16 +1,17 @@
 package lotto.view;
 
-import lotto.model.exception.DuplicatedNumberException;
-import lotto.model.exception.InvalidLottoSizeException;
-import lotto.model.exception.InvalidRankException;
-import lotto.model.exception.InvalidNumberRangeException;
+import static java.util.stream.Collectors.joining;
+
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-import lotto.model.Statistic;
 import lotto.model.Lotto;
 import lotto.model.Rank;
+import lotto.model.Statistic;
+import lotto.model.exception.DuplicatedNumberException;
+import lotto.model.exception.InvalidLottoSizeException;
+import lotto.model.exception.InvalidNumberRangeException;
+import lotto.model.exception.InvalidRankException;
 
 public class OutputView {
 
@@ -39,7 +40,7 @@ public class OutputView {
         return numbers.stream()
             .sorted()
             .map(String::valueOf)
-            .collect(Collectors.joining(", ", "[", "]"));
+            .collect(joining(", ", "[", "]"));
     }
 
     public static void printResult(Statistic result) {

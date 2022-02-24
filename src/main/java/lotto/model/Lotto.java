@@ -1,11 +1,13 @@
 package lotto.model;
 
-import lotto.model.exception.DuplicatedNumberException;
-import lotto.model.exception.InvalidLottoSizeException;
+import static java.util.stream.Collectors.toUnmodifiableSet;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
+import lotto.model.exception.DuplicatedNumberException;
+import lotto.model.exception.InvalidLottoSizeException;
 
 public class Lotto {
 
@@ -17,7 +19,7 @@ public class Lotto {
         checkNumbers(numbers);
         this.numbers = numbers.stream()
             .map(Number::new)
-            .collect(Collectors.toSet());
+            .collect(toUnmodifiableSet());
     }
 
     private void checkNumbers(List<Integer> numbers) {
