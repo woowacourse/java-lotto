@@ -72,7 +72,8 @@ public class OutputView {
 
 	private String createRankMessage(final LottoRank rank, final int count) {
 		if (rank == LottoRank.SECOND) {
-			return String.format(NOTIFICATION_WINNING_RANK_RESULT_WITH_BONUS_BALL, rank.getMatchCount(), rank.getAmount(), count);
+			return String.format(NOTIFICATION_WINNING_RANK_RESULT_WITH_BONUS_BALL, rank.getMatchCount(),
+				rank.getAmount(), count);
 		}
 		return String.format(NOTIFICATION_WINNING_RANK_RESULT, rank.getMatchCount(), rank.getAmount(), count);
 	}

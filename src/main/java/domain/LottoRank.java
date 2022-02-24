@@ -24,7 +24,7 @@ public enum LottoRank {
 	}
 
 	public static LottoRank findRank(final int count, final boolean bonusNumber) {
-		for (LottoRank rank : LottoRank.values()) {
+		for (LottoRank rank : values()) {
 			if (rank.getMatchCount() == count && rank.isHasBonusNumber() == bonusNumber) {
 				return rank;
 			}
@@ -35,7 +35,7 @@ public enum LottoRank {
 	public static EnumMap<LottoRank, Integer> initializeWinningResult() {
 		EnumMap<LottoRank, Integer> rankMap = new EnumMap<>(LottoRank.class);
 		Arrays.stream(values())
-			.filter(LottoRank::isFail)
+			.filter(value -> !isFail(value))
 			.forEach(value -> rankMap.put(value, INITIAL_COUNT));
 		return rankMap;
 	}
@@ -55,4 +55,5 @@ public enum LottoRank {
 	public boolean isHasBonusNumber() {
 		return hasBonusNumber;
 	}
+
 }
