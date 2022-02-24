@@ -41,7 +41,7 @@ public class InputView {
     }
 
     private static void checkBoundary(int number) {
-        if (number > 1 && number < 46) {
+        if (number < 1 || number > 45) {
             throw new IllegalArgumentException(OUT_OF_RANGE_ERROR);
         }
     }
