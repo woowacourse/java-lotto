@@ -3,7 +3,7 @@ package lotto.service;
 import lotto.domain.LottoMatchKind;
 import lotto.domain.LottoNumbers;
 import lotto.domain.PurchaseAmount;
-import lotto.domain.TargetLottoNumbers;
+import lotto.domain.WinningNumbers;
 import lotto.domain.generator.LottoGenerator;
 
 import java.util.Arrays;
@@ -39,11 +39,11 @@ public class LottoService {
         return lottoNumbersGroup;
     }
 
-    public Map<LottoMatchKind, Integer> getMatchResult(final TargetLottoNumbers targetLottoNumbers) {
-        return match(targetLottoNumbers);
+    public Map<LottoMatchKind, Integer> getMatchResult(final WinningNumbers winningNumbers) {
+        return match(winningNumbers);
     }
 
-    private Map<LottoMatchKind, Integer> match(final TargetLottoNumbers target) {
+    private Map<LottoMatchKind, Integer> match(final WinningNumbers target) {
         lottoNumbersGroup.stream()
                 .map(target::getLottoMatchResult)
                 .filter(lottoMatchKind -> lottoMatchKind != LottoMatchKind.LOWER_THAN_THREE)

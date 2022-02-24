@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class TargetLottoNumbersTest {
+class WinningNumbersTest {
     @Test
     @DisplayName("당첨 번호와 보너스 번호에 중복이 있으면 예외를 발생시킨다.")
     void create_ExceptionByDuplicationOfTargetNumbersAndBonusNumber() {
@@ -23,7 +23,7 @@ class TargetLottoNumbersTest {
         final LottoNumber bonusNumber = LottoNumber.ONE;
         final String expectedExceptionMessage = "당첨 번호와 보너스 번호에 중복이 있으면 안됩니다.";
         //when then
-        assertThatThrownBy(() -> new TargetLottoNumbers(targetNumbers, bonusNumber))
+        assertThatThrownBy(() -> new WinningNumbers(targetNumbers, bonusNumber))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(expectedExceptionMessage);
     }
@@ -35,10 +35,10 @@ class TargetLottoNumbersTest {
         //given
         final LottoNumbers targetNumbers = new LottoNumbers(Arrays.asList("2", "3", "4", "5", "6", "7"));
         final LottoNumber bonusNumber = LottoNumber.ONE;
-        final TargetLottoNumbers targetLottoNumbers = new TargetLottoNumbers(targetNumbers, bonusNumber);
+        final WinningNumbers winningNumbers = new WinningNumbers(targetNumbers, bonusNumber);
         final LottoNumbers lottoNumbers = new LottoNumbers(numbers);
         //when
-        final LottoMatchKind actual = targetLottoNumbers.getLottoMatchResult(lottoNumbers);
+        final LottoMatchKind actual = winningNumbers.getLottoMatchResult(lottoNumbers);
         //then
         assertThat(actual).isEqualTo(expected);
     }

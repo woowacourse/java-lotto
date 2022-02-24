@@ -2,7 +2,7 @@ package lotto.domain.controller;
 
 import lotto.domain.LottoMatchKind;
 import lotto.domain.LottoNumbers;
-import lotto.domain.TargetLottoNumbers;
+import lotto.domain.WinningNumbers;
 import lotto.domain.generator.LottoGenerator;
 import lotto.domain.vo.LottoNumber;
 import lotto.dto.LottoMatchKindDto;
@@ -39,8 +39,8 @@ public class LottoController {
     public void run() {
         outputView.printPurchaseCount(lottoService.getCountOfLottoNumbers());
         printLottoNumbersGroup();
-        final TargetLottoNumbers targetLottoNumbers = generateTargetLottoNumbers();
-        printResult(targetLottoNumbers);
+        final WinningNumbers winningNumbers = generateTargetLottoNumbers();
+        printResult(winningNumbers);
     }
 
     private void printLottoNumbersGroup() {
@@ -57,20 +57,20 @@ public class LottoController {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    private TargetLottoNumbers generateTargetLottoNumbers() {
+    private WinningNumbers generateTargetLottoNumbers() {
         try {
             final LottoNumbers targetLottoNumbers = new LottoNumbers(inputView.inputLastWeekWinningNumbers());
             final LottoNumber bonusLottoNumber = LottoNumber.from(inputView.inputBonusNumber());
-            return new TargetLottoNumbers(targetLottoNumbers, bonusLottoNumber);
+            return new WinningNumbers(targetLottoNumbers, bonusLottoNumber);
         } catch (final Exception e) {
             inputView.printErrorMessage(e.getMessage());
             return generateTargetLottoNumbers();
         }
     }
 
-    private void printResult(TargetLottoNumbers targetLottoNumbers) {
+    private void printResult(WinningNumbers winningNumbers) {
         final List<LottoMatchKindDto> results =
-                convertWinningResultsToDtos(lottoService.getMatchResult(targetLottoNumbers));
+                convertWinningResultsToDtos(lottoService.getMatchResult(winningNumbers));
         outputView.printCountOfWinningByMatchKind(results);
         outputView.printProfitRate(lottoService.getProfitRate());
     }

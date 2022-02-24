@@ -2,7 +2,7 @@ package lotto.service;
 
 import lotto.domain.LottoMatchKind;
 import lotto.domain.LottoNumbers;
-import lotto.domain.TargetLottoNumbers;
+import lotto.domain.WinningNumbers;
 import lotto.domain.generator.LottoCustomGenerator;
 import lotto.domain.generator.LottoGenerator;
 import lotto.domain.vo.LottoNumber;
@@ -21,7 +21,7 @@ class LottoServiceTest {
     private final LottoGenerator lottoGenerator = new LottoCustomGenerator();
     private final String purchaseAmount = "5000";
     private final LottoService lottoService = new LottoService(lottoGenerator, purchaseAmount);
-    private final TargetLottoNumbers targetLottoNumbers = new TargetLottoNumbers(
+    private final WinningNumbers winningNumbers = new WinningNumbers(
             new LottoNumbers(Arrays.asList("2", "3", "4", "5", "6", "7")), LottoNumber.ONE);
 
     @Test
@@ -53,7 +53,7 @@ class LottoServiceTest {
     @Test
     @DisplayName("당첨 결과를 반환한다.")
     void getMatchResult() {
-        final Map<LottoMatchKind, Integer> actual = lottoService.getMatchResult(targetLottoNumbers);
+        final Map<LottoMatchKind, Integer> actual = lottoService.getMatchResult(winningNumbers);
         assertThat(actual).containsExactly(
                 entry(LOWER_THAN_THREE, 0), entry(THREE, 1), entry(FOUR, 1), entry(FIVE, 1), entry(FIVE_BONUS, 1), entry(SIX, 1));
     }
@@ -62,7 +62,7 @@ class LottoServiceTest {
     @DisplayName("수익률을 반환한다.")
     void getProfitRate() {
         //given
-        lottoService.getMatchResult(targetLottoNumbers);
+        lottoService.getMatchResult(winningNumbers);
         final double expected = 2031555000 / (double) 5000;
         //when
         final double actual = lottoService.getProfitRate();
