@@ -1,4 +1,4 @@
-package lotto.domain.credit;
+package lotto.domain.credit.condition;
 
 public enum CreditUnit {
 

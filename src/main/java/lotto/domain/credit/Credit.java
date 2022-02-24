@@ -1,5 +1,6 @@
 package lotto.domain.credit;
 
+import lotto.domain.credit.condition.CreditUnit;
 import lotto.exception.LottoException;
 import lotto.exception.credit.CreditMoneyExceptionStatus;
 
