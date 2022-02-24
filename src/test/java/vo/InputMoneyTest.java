@@ -20,8 +20,9 @@ public class InputMoneyTest {
         assertThat(inputMoney.getMoney()).isEqualTo(money);
     }
 
-    @ParameterizedTest(name = "{0}원 입력 시, IAE 발생")
+    @ParameterizedTest(name = "{0}원 입력 시")
     @ValueSource(ints = {999, -1, 0, 1111})
+    @DisplayName("잘못된 로또 구입 금액 입력 시, IAE 발생")
     void createInputMoneyWithInvalidMoneyShouldFail(int money) {
         assertThatThrownBy(() -> new InputMoney(money))
                 .isInstanceOf(IllegalArgumentException.class)

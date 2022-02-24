@@ -42,8 +42,9 @@ public class LottosTest {
         assertThat(validLottos).isNotNull();
     }
 
-    @ParameterizedTest(name = "Lottos 생성자에 {0} 가 전달됐을 때, IAE 발생")
+    @ParameterizedTest(name = "{0} 을 전달했을 때")
     @NullAndEmptySource
+    @DisplayName("Lottos 생성자에 null또는 빈 값이 전달됐을 때, IAE 발생")
     void createLottosWithNullAndEmptyShouldFail(List<Lotto> lottos) {
         assertThatThrownBy(() -> new Lottos(lottos))
                 .isInstanceOf(IllegalArgumentException.class)

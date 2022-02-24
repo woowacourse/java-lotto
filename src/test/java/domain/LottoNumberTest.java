@@ -9,8 +9,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoNumberTest {
-    @ParameterizedTest(name = "1 ~ 45 사이 로또 넘버 생성 : {0}")
+    @ParameterizedTest(name = "{0} 로 생성")
     @ValueSource(ints = {1, 45})
+    @DisplayName("1 ~ 45 사이 로또 넘버 생성")
     void createLottoNumber(int number) {
         // given & when
         LottoNumber lottoNumber = new LottoNumber(number);
@@ -19,8 +20,9 @@ public class LottoNumberTest {
         assertThat(lottoNumber.getNumber()).isEqualTo(number);
     }
 
-    @ParameterizedTest(name = "1 ~ 45 범위 외 숫자가 전달되면, IAE를 던진다")
+    @ParameterizedTest(name = "{0} 을 전달했을 때")
     @ValueSource(ints = {-1, 0, 46})
+    @DisplayName("1 ~ 45 범위 외 숫자가 전달되면, IAE를 던진다")
     void createLottoNumberOutOfRangeShouldFail(int number) {
         assertThatThrownBy(() -> new LottoNumber(number))
                 .isInstanceOf(IllegalArgumentException.class)

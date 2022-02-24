@@ -18,8 +18,9 @@ class WinningCountTest {
                 .hasMessage("[ERROR] 당첨 횟수는 음수일 수 없습니다.");
     }
 
-    @ParameterizedTest(name = "0 또는 양수로 WinningCount생성 시 오류가 없어야 함 - {0}")
+    @ParameterizedTest(name = "{0} 로 생성할 때")
     @ValueSource(ints = {0, 1})
+    @DisplayName("0 또는 양수로 WinningCount생성 시 오류가 없어야 함")
     void creatingWinningCountWithZeroOrPositiveIntShouldSuccess(int count) {
         assertThatCode(() -> new WinningCount(count))
                 .doesNotThrowAnyException();
