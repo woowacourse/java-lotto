@@ -37,8 +37,12 @@ public class OutputView {
         System.out.println(SEPERATOR_LINE);
 
         for (int i = 0; i < 5; i++) {
-            System.out.printf(MESSAGE_WINNING_RANKING[i], Rewards.getCount(Rewards.values()[4 - i]));
+            System.out.printf(MESSAGE_WINNING_RANKING[i], Rewards.getCount(Rewards.values()[reverseIndex(i)]));
         }
+    }
+
+    private static int reverseIndex(int index) {
+        return 4 - index;
     }
 
     public static void printYield(double yield) {
