@@ -1,6 +1,14 @@
 package controller;
 
 import domain.*;
+import domain.Lotto.Lotto;
+import domain.Lotto.LottoNumberFactory;
+import domain.Lotto.LottoNumber;
+import domain.Lotto.WinningLotto;
+import domain.LottoGenerator.LottoGenerator;
+import domain.LottoGenerator.WinningLottoGenerator;
+import domain.player.Money;
+import domain.player.Player;
 import dto.LottosDto;
 import dto.RanksDto;
 
@@ -13,13 +21,13 @@ public class LottoController {
 
     public LottosDto purchase(int purchaseAmount) {
         player = new Player(new Money(purchaseAmount));
-        player.purchaseLotto(new AutoLottoGenerator(), LottoFactory.makeBoundary());
+        player.purchaseLotto(new AutoLottoGenerator(), LottoNumberFactory.makeBoundary());
         return LottosDto.from(player.getLottos());
     }
 
     public void determineWinningNumber(List<String> winningNumber, int bonusBall) {
         LottoGenerator lottoGenerator = new WinningLottoGenerator();
-        Lotto winningLotto = lottoGenerator.generateLotto(LottoFactory.from(winningNumber));
+        Lotto winningLotto = lottoGenerator.generateLotto(LottoNumberFactory.from(winningNumber));
         this.winningLotto = new WinningLotto(winningLotto, new LottoNumber(bonusBall));
     }
 

@@ -1,4 +1,6 @@
-package domain;
+package domain.LottoGenerator;
+
+import domain.Lotto.Lotto;
 
 import java.util.List;
 

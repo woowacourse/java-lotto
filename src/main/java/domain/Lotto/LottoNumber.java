@@ -1,4 +1,4 @@
-package domain;
+package domain.Lotto;
 
 import utils.ExceptionMessage;
 

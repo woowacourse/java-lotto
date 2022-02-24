@@ -1,5 +1,9 @@
 package domain;
 
+import domain.Lotto.Lotto;
+import domain.Lotto.LottoNumberFactory;
+import domain.LottoGenerator.AutoLottoGenerator;
+import domain.LottoGenerator.WinningLottoGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,18 +15,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoGeneratorTest {
 
     @Test
-    @DisplayName("생성된 로또의 길이가 6인지 확인한다.")
+    @DisplayName("AutoLottoGenerator에서 생성된 로또의 길이가 6인지 확인한다.")
     void generateAutoLotto() {
-        Lotto actual = new AutoLottoGenerator().generateLotto(LottoFactory.makeBoundary());
+        Lotto actual = new AutoLottoGenerator().generateLotto(LottoNumberFactory.makeBoundary());
         int expected = 6;
         assertThat(actual.getLotto().size()).isEqualTo(expected);
     }
 
     @Test
-    @DisplayName("입력된 문자열 리스트의 길이와 변환된 LottoNumber 리스트의 길이가 같은지 확인한다.")
+    @DisplayName("WinningLottoGenerator에서 생성된 로또의 길이가 6인지 확인한다.")
     void generateWinningLotto() {
         List<String> lottoNumbers = Arrays.asList("1", "2", "3", "4", "5", "6");
-        Lotto actual = new WinningLottoGenerator().generateLotto(LottoFactory.from(lottoNumbers));
+        Lotto actual = new WinningLottoGenerator().generateLotto(LottoNumberFactory.from(lottoNumbers));
         int expected = 6;
         assertThat(actual.getLotto().size()).isEqualTo(expected);
     }

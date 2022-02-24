@@ -1,5 +1,13 @@
 package domain;
 
+import domain.Lotto.Lotto;
+import domain.Lotto.LottoNumberFactory;
+import domain.Lotto.LottoNumber;
+import domain.Lotto.WinningLotto;
+import domain.LottoGenerator.LottoGenerator;
+import domain.LottoGenerator.WinningLottoGenerator;
+import domain.player.Money;
+import domain.player.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,7 +26,7 @@ class PlayerTest {
 
     @BeforeEach
     void setUp() {
-        player.purchaseLotto(new AutoLottoGenerator(), LottoFactory.makeBoundary());
+        player.purchaseLotto(new AutoLottoGenerator(), LottoNumberFactory.makeBoundary());
     }
 
     @Test

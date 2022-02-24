@@ -1,5 +1,7 @@
-package domain;
+package domain.Lotto;
 
+import domain.Lotto.Lotto;
+import domain.Lotto.LottoNumber;
 import utils.ExceptionMessage;
 
 import java.util.List;

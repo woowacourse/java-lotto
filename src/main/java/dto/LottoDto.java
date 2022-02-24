@@ -1,6 +1,6 @@
 package dto;
 
-import domain.LottoNumber;
+import domain.Lotto.LottoNumber;
 
 import java.util.List;
 import java.util.stream.Collectors;

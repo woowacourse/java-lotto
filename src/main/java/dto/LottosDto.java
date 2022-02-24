@@ -1,6 +1,6 @@
 package dto;
 
-import domain.Lotto;
+import domain.Lotto.Lotto;
 
 import java.util.ArrayList;
 import java.util.List;

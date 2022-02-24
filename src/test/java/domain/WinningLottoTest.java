@@ -1,5 +1,9 @@
 package domain;
 
+import domain.Lotto.LottoNumber;
+import domain.Lotto.WinningLotto;
+import domain.LottoGenerator.LottoGenerator;
+import domain.LottoGenerator.WinningLottoGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import utils.ExceptionMessage;

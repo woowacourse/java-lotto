@@ -1,4 +1,9 @@
-package domain;
+package domain.player;
+
+import domain.Lotto.Lotto;
+import domain.Lotto.WinningLotto;
+import domain.LottoGenerator.LottoGenerator;
+import domain.Result;
 
 import java.util.ArrayList;
 import java.util.List;
