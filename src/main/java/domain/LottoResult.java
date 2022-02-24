@@ -4,13 +4,13 @@ import java.util.Arrays;
 
 public enum LottoResult {
 
-    FIFTH(3, 5000, false),
-    FOURTH(4, 50000, false),
-    THIRD(5, 1500000, false),
-    SECOND(5, 30000000, true),
-    FIRST(6, 2000000000, false);
+    FIFTH(3, 5_000, false),
+    FOURTH(4, 50_000, false),
+    THIRD(5, 1_500_000, false),
+    SECOND(5, 30_000_000, true),
+    FIRST(6, 2_000_000_000, false);
 
-    private static final int MATCH_COUNT_FIVE = 5;
+    private static final int SECOND_AND_THIRD_MATCH_COUNT = 5;
 
     private final int matchCount;
     private final int prize;
@@ -31,7 +31,7 @@ public enum LottoResult {
     }
 
     private static boolean filterOnFiveMatchCount(int matchCount, boolean hasBonus, LottoResult result) {
-        if (matchCount != MATCH_COUNT_FIVE) {
+        if (matchCount != SECOND_AND_THIRD_MATCH_COUNT) {
             return true;
         }
         return result.getHasBonus() == hasBonus;
