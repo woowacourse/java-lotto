@@ -15,11 +15,11 @@ public class RankBoard {
     private final Map<Rank, Integer> board = new HashMap<>();
 
     public RankBoard(WinningLotto winningLotto, List<Lotto> tickets) {
-        initResult();
+        initBoard();
         countRank(winningLotto, tickets);
     }
 
-    private void initResult() {
+    private void initBoard() {
         board.put(Rank.FIRST, INIT_NUMBER);
         board.put(Rank.SECOND, INIT_NUMBER);
         board.put(Rank.THIRD, INIT_NUMBER);
@@ -30,19 +30,19 @@ public class RankBoard {
     private void countRank(WinningLotto winningLotto, List<Lotto> tickets) {
         Set<LottoNumber> winningAndBonusNumber = winningLotto.getWinningAndBonusNumber();
         for (Lotto ticket : tickets) {
-            calcRankForEach(ticket.getMatchedNumbers(winningAndBonusNumber), winningLotto);
+            countRankForEach(ticket.getMatchedNumbers(winningAndBonusNumber), winningLotto);
         }
     }
 
-    private void calcRankForEach(Set<LottoNumber> matchedNumbers, WinningLotto winningLotto) {
+    private void countRankForEach(Set<LottoNumber> matchedNumbers, WinningLotto winningLotto) {
         if (isNotRanked(matchedNumbers)) {
             return;
         }
         if (isSecondRank(matchedNumbers, winningLotto)) {
-            putResult(SECOND_RANK_SIZE, true);
+            writeBoard(SECOND_RANK_SIZE, true);
             return;
         }
-        putResult(matchedNumbers.size(), false);
+        writeBoard(matchedNumbers.size(), false);
     }
 
     private boolean isNotRanked(Set<LottoNumber> matchedNumbers) {
@@ -53,7 +53,7 @@ public class RankBoard {
         return matchedNumbers.size() == SECOND_RANK_MATCHED && matchedNumbers.contains(winningLotto.getBonusNumber());
     }
 
-    private void putResult(int size, boolean isBonusBallMatched) {
+    private void writeBoard(int size, boolean isBonusBallMatched) {
         Rank rank = Rank.of(size, isBonusBallMatched);
         board.put(rank, board.get(rank) + 1);
     }

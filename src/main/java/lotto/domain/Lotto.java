@@ -39,10 +39,6 @@ public class Lotto {
         return numbers.contains(number);
     }
 
-    public Set<LottoNumber> toSet() {
-        return new HashSet<>(numbers);
-    }
-
     public Set<LottoNumber> getLottoNumbers() {
         return numbers;
     }
