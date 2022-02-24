@@ -49,6 +49,13 @@ public class LottoBall implements Comparable<LottoBall> {
     }
 
     @Override
+    public String toString() {
+        return "LottoBall{" +
+                "number=" + number +
+                '}';
+    }
+
+    @Override
     public int compareTo(LottoBall o) {
         return java.lang.Integer.compare(number, o.get());
     }

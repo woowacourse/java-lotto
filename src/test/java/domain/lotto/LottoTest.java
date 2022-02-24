@@ -1,10 +1,7 @@
-package domain;
+package domain.lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import domain.lotto.Lotto;
-import domain.lotto.LottoBall;
-import domain.lotto.WinLotto;
 import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,14 +12,16 @@ class LottoTest {
 
     @BeforeEach
     void 로또_번호_생성() {
-        lotto = Lotto.fromNums(Arrays.asList(1, 2, 3, 4, 5, 6));
+        lotto = LottoFactory.createLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 
     @Test
     void 로또_번호_6개_일치_검사() {
-        WinLotto winLottoNumbers = Lotto.toWinLotto(Arrays.asList(1, 2, 3, 4, 5, 6), LottoBall.from(10));
+        WinLotto winLotto = LottoFactory.createWinLotto(
+                Arrays.asList(1, 2, 3, 4, 5, 6), LottoBall.from(10)
+        );
 
-        int sameNumber = lotto.countSameNum(winLottoNumbers);
+        int sameNumber = lotto.countSameNum(winLotto);
         assertThat(sameNumber).isEqualTo(6);
     }
 

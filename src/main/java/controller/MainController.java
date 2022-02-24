@@ -3,12 +3,12 @@ package controller;
 import domain.Money;
 import domain.lotto.Lotto;
 import domain.lotto.LottoBall;
+import domain.lotto.LottoFactory;
 import domain.lotto.WinLotto;
 import domain.result.Rank;
 import domain.result.Result;
 import java.util.ArrayList;
 import java.util.List;
-import utils.LottoRandomGenerator;
 import view.InputView;
 import view.OutputView;
 
@@ -29,7 +29,7 @@ public class MainController {
     private List<Lotto> makeLottos(int count) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            lottos.add(Lotto.fromBalls(LottoRandomGenerator.generate()));
+            lottos.add(LottoFactory.createRandomLotto());
         }
         OutputView.printLottoTickets(lottos);
         return lottos;
@@ -38,7 +38,7 @@ public class MainController {
     private WinLotto makeWinLotto() {
         List<Integer> winLottoNums = InputView.inputWinLottoNums();
         LottoBall bonus = LottoBall.from(InputView.inputBonusNumber());
-        return Lotto.toWinLotto(winLottoNums, bonus);
+        return LottoFactory.createWinLotto(winLottoNums, bonus);
     }
 
     private Result makeResult(List<Lotto> lottos, WinLotto winLotto) {

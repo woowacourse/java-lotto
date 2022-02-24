@@ -1,8 +1,7 @@
-package domain;
+package domain.lotto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import domain.lotto.LottoBall;
 import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("NonAsciiCharacters")

@@ -87,7 +87,7 @@
 - [x] 숫자를 로또 공 객체로 변환
 - [x] 1~45 로또 공 객체를 캐싱해 성능 개선
 - [x] 이름 변경
-- [ ] LottoRandomGenerator 제거
+- [x] LottoRandomGenerator 제거, LottoFactory 생성
 - [ ] DTO 생성 고민
 
 ## 💻 구조

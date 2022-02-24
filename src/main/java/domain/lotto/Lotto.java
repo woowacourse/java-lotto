@@ -1,7 +1,7 @@
 package domain.lotto;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
 public class Lotto {
     final List<LottoBall> lotto;
@@ -10,17 +10,8 @@ public class Lotto {
         this.lotto = balls;
     }
 
-    public static Lotto fromNums(List<Integer> lottoNumbers) {
-        List<LottoBall> tmpLottoBalls = toBalls(lottoNumbers);
-        return new Lotto(tmpLottoBalls);
-    }
-
     public static Lotto fromBalls(List<LottoBall> balls) {
         return new Lotto(balls);
-    }
-
-    public static WinLotto toWinLotto(List<Integer> lottoNums, LottoBall bonus) {
-        return new WinLotto(toBalls(lottoNums), bonus);
     }
 
     public int countSameNum(WinLotto winLotto) {
@@ -33,14 +24,31 @@ public class Lotto {
         return lotto.contains(ball);
     }
 
-    private static List<LottoBall> toBalls(List<Integer> lottoNums) {
-        return lottoNums.stream()
-                .map(LottoBall::from)
-                .sorted()
-                .collect(Collectors.toList());
-    }
-
     public List<LottoBall> get() {
         return lotto;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Lotto lotto1 = (Lotto) o;
+        return Objects.equals(lotto, lotto1.lotto);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lotto);
+    }
+
+    @Override
+    public String toString() {
+        return "Lotto{" +
+                "lotto=" + lotto +
+                '}';
     }
 }

@@ -1,9 +1,7 @@
-package domain;
+package domain.result;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import domain.result.Rank;
-import domain.result.Result;
 import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("NonAsciiCharacters")
