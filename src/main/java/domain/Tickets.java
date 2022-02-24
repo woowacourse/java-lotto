@@ -43,11 +43,11 @@ public class Tickets {
             .collect(Collectors.toList());
     }
 
-    public double getYield(int amount, WinningNumbers winningNumbers) {
+    public double getYield(Amount amount, WinningNumbers winningNumbers) {
         List<Rank> ranks = getRanks(winningNumbers);
         long totalAmount = ranks.stream()
             .mapToLong(Rank::getAmount)
             .sum();
-        return Math.floor(((double)totalAmount / amount) * 100)/ 100.0;
+        return Math.floor((amount.getYield(totalAmount) * 100))/ 100.0;
     }
 }

@@ -42,7 +42,7 @@ public class TicketsTest {
 
         Tickets tickets = new Tickets(Arrays.asList(ticket1, ticket2, ticket3));
 
-        assertThat(tickets.getYield(3000, winningNumbers)).isEqualTo(0);
+        assertThat(tickets.getYield(new Amount(3000), winningNumbers)).isEqualTo(0);
     }
 
     @Test
@@ -55,7 +55,7 @@ public class TicketsTest {
 
         Tickets tickets = new Tickets(Arrays.asList(ticket1, ticket2, ticket3));
 
-        assertThat(tickets.getYield(3000, winningNumbers)).isEqualTo(1000);
+        assertThat(tickets.getYield(new Amount(3000), winningNumbers)).isEqualTo(1000);
     }
 
     @Test
@@ -82,7 +82,7 @@ public class TicketsTest {
             ticket8, ticket9, ticket10, ticket11,
             ticket12, ticket13, ticket14));
 
-        assertThat(tickets.getYield(14000, winningNumbers)).isEqualTo(0.35);
+        assertThat(tickets.getYield(new Amount(14000), winningNumbers)).isEqualTo(0.35);
     }
 
     @Test
@@ -95,7 +95,7 @@ public class TicketsTest {
 
         Tickets tickets = new Tickets(Arrays.asList(ticket1, ticket2, ticket3));
 
-        assertThat(tickets.getYield(3000, winningNumbers)).isEqualTo(2000000);
+        assertThat(tickets.getYield(new Amount(3000), winningNumbers)).isEqualTo(2000000);
     }
 
     @Test
@@ -122,7 +122,7 @@ public class TicketsTest {
             ticket8, ticket9, ticket10, ticket11,
             ticket12, ticket13, ticket14));
 
-        assertThat(tickets.getYield(14000, winningNumbers)).isEqualTo(2000000);
+        assertThat(tickets.getYield(new Amount(14000), winningNumbers)).isEqualTo(2000000);
     }
 
 
