@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import repository.LottoNumberRepository;
 import view.InputView;
 import view.ResultView;
 import vo.InputMoney;
@@ -60,7 +61,7 @@ public class LottoController {
     private List<LottoNumber> getLottoNumbers() {
         return lottoNumberGenerator.generateLottoNumbers()
                 .stream()
-                .map(LottoNumber::new)
+                .map(LottoNumberRepository::getLottoNumberByInt)
                 .collect(Collectors.toList());
     }
 
@@ -81,7 +82,7 @@ public class LottoController {
             List<Integer> winningNumberValues = InputView.scanWinningNumbers();
 
             List<LottoNumber> lottoNumbers = winningNumberValues.stream()
-                    .map(LottoNumber::new)
+                    .map(LottoNumberRepository::getLottoNumberByInt)
                     .collect(Collectors.toList());
             return new Lotto(lottoNumbers);
         } catch (IllegalArgumentException exception) {
@@ -93,7 +94,7 @@ public class LottoController {
     private LottoNumber generateBonusNumber() {
         try {
             int bonusNumberValue = InputView.scanBonusNumber();
-            return new LottoNumber(bonusNumberValue);
+            return LottoNumberRepository.getLottoNumberByInt(bonusNumberValue);
         } catch (IllegalArgumentException exception) {
             InputView.printException(exception);
             return generateBonusNumber();
