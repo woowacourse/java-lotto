@@ -14,16 +14,21 @@ public class StatisticCalculator {
 		}
 	}
 
-	public void updateResult(Lotto lotto, AnswerLotto answerLotto) {
-		WinningStatus winningStatus = WinningStatus.of(lotto.calculateInAnswerNumbers(answerLotto),
-			lotto.isHitBonusNumber(answerLotto));
-		int count = this.resultStatistics.get(winningStatus);
-		this.resultStatistics.put(winningStatus, count + 1);
+	public void updateResult(LottoTickets lottoTickets, AnswerLotto answerLotto) {
+		for (Lotto lotto : lottoTickets.getLottoTickets()) {
+			WinningStatus winningStatus = WinningStatus.of(lotto.calculateInAnswerNumbers(answerLotto),
+				lotto.isHitBonusNumber(answerLotto));
+			int count = this.resultStatistics.get(winningStatus);
+			this.resultStatistics.put(winningStatus, count + 1);
+		}
 	}
 
 	public float calculateProfitRatio() {
-		int totalPrice = this.resultStatistics.values().stream().mapToInt(num -> num).sum() * 1000;
-		int totalPrize = this.resultStatistics.keySet().stream().mapToInt(WinningStatus::getProfit).sum();
+		int totalPrice =
+			this.resultStatistics.keySet().stream().filter(num -> this.resultStatistics.get(num) > 0).mapToInt(
+				this.resultStatistics::get).sum() * 1000;
+		int totalPrize = this.resultStatistics.keySet().stream().filter(num -> this.resultStatistics.get(num) > 0)
+			.mapToInt(WinningStatus::getProfit).sum();
 		return (float) totalPrize / totalPrice;
 	}
 
