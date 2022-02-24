@@ -11,44 +11,25 @@ import org.junit.jupiter.api.Test;
 
 class WinningNumbersTest {
 
-    List<LottoNumber> lottoNumbers;
-    LottoNumber bonusNumber;
+    private Lotto winningLotto;
+    private LottoNumber bonusNumber;
 
     @BeforeEach
     void setup() {
-        lottoNumbers = new ArrayList<>();
+        List<LottoNumber> winningNumbers = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
-            lottoNumbers.add(new LottoNumber(i));
+            winningNumbers.add(new LottoNumber(i));
         }
 
         bonusNumber = new LottoNumber(30);
+        winningLotto = new Lotto(winningNumbers);
     }
 
     @DisplayName("WinningNumbers 생성자는 당첨 번호와 보너스 번호를 입력받아 값을 초기화한다.")
     @Test
     void constructor() {
         assertThatNoException()
-                .isThrownBy(() -> new WinningNumbers(lottoNumbers, bonusNumber));
-    }
-
-    @DisplayName("WinningNumbers 생성자는 6개가 아닌 숫자를 입력하면 예외가 발생한다.")
-    @Test
-    void constructor_errorWinningNumberNotSix() {
-        lottoNumbers.add(new LottoNumber(7));
-
-        assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new WinningNumbers(lottoNumbers, bonusNumber))
-                .withMessage("로또 숫자는 6개여야 합니다.");
-    }
-
-    @DisplayName("WinningNumbers 생성자는 입력된 당첨 번호가 중복될 경우 예외가 발생한다.")
-    @Test
-    void constructor_errorOnWinningNumberDuplication() {
-        lottoNumbers.set(0, new LottoNumber(2));
-
-        assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new WinningNumbers(lottoNumbers, bonusNumber))
-                .withMessage("로또 숫자는 중복되면 안됩니다.");
+                .isThrownBy(() -> new WinningNumbers(winningLotto, bonusNumber));
     }
 
     @DisplayName("WinningNumbers 생성자는 보너스 번호가 당첨 번호와 중복될 경우 예외가 발생한다.")
@@ -57,7 +38,7 @@ class WinningNumbersTest {
         bonusNumber = new LottoNumber(1);
 
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new WinningNumbers(lottoNumbers, bonusNumber))
+                .isThrownBy(() -> new WinningNumbers(winningLotto, bonusNumber))
                 .withMessage("보너스 숫자는 로또 숫자와 중복되면 안됩니다.");
     }
 }

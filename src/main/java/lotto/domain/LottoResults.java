@@ -27,10 +27,6 @@ public class LottoResults {
         }
     }
 
-    public int getPrizeNumber(LottoPrize prize) {
-        return results.get(prize);
-    }
-
     public double getRateReturn() {
         int totalSpendMoney = 0;
         int totalReward = 0;
@@ -41,6 +37,14 @@ public class LottoResults {
             totalReward += prize.getTotalReward(prizeNumber);
         }
 
+        if (totalSpendMoney == 0) {
+            return 0;
+        }
+
         return (double) totalReward / totalSpendMoney;
+    }
+
+    public int getPrizeNumber(LottoPrize prize) {
+        return results.get(prize);
     }
 }

@@ -2,6 +2,7 @@ package lotto.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoResults;
@@ -30,6 +31,6 @@ public class LottoController {
         }
         LottoNumber bonusNumber = new LottoNumber(InputView.requestBonusNumber());
 
-        return new WinningNumbers(lottoNumbers, bonusNumber);
+        return new WinningNumbers(new Lotto(lottoNumbers), bonusNumber);
     }
 }

@@ -62,6 +62,6 @@ class LottosTest {
         for (int i = 1; i <= 6; i++) {
             lottoNumbers.add(new LottoNumber(i));
         }
-        return new WinningNumbers(lottoNumbers, bonusNumber);
+        return new WinningNumbers(new Lotto(lottoNumbers), bonusNumber);
     }
 }

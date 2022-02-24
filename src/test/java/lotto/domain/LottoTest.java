@@ -38,7 +38,7 @@ class LottoTest {
                 .withMessage("로또 숫자는 6개여야 합니다.");
     }
 
-    @DisplayName("Lotto 생성자는 인자로 중복된 숫자를 입력하면 예외가 발생한다.")
+    @DisplayName("Lotto 생성자는 인자로 중복된 숫자를 입력하면 예외를 발생한다.")
     @Test
     void constructor_errorOnDuplication() {
         lottoNumbers.set(0, new LottoNumber(2));
@@ -48,10 +48,10 @@ class LottoTest {
                 .withMessage("로또 숫자는 중복되면 안됩니다.");
     }
 
-    @DisplayName("confirmWinning 메서드는 WinnigNumbers를 입력받아 당첨된 결과를 LottoPrize로 반환한다.")
+    @DisplayName("confirmWinning 메서드는 WinnigNumbers를 입력받아 당첨을 확인한다.")
     @Test
     void confirmWinning() {
-        WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers, new LottoNumber(30));
+        WinningNumbers winningNumbers = new WinningNumbers(new Lotto(lottoNumbers), new LottoNumber(30));
         Lotto lotto = new Lotto(lottoNumbers);
         LottoPrize prize = lotto.confirmWinning(winningNumbers);
 
