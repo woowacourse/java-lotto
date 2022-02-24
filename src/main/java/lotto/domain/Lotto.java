@@ -14,11 +14,18 @@ public class Lotto {
     private static final int SIZE = 6;
     private static final String SIZE_ERROR_MESSAGE = "6개의 숫자가 필요합니다.";
     private static final String DUPLICATE_ERROR_MESSAGE = "중복은 허용하지 않습니다.";
-    private static final List<Number> LOTTO_NUMBERS = initLottoNumbers();
+    private static final List<Number> LOTTO_NUMBERS = new ArrayList<>();
     private static final int SUB_LIST_FROM_INDEX = 0;
     private static final int SUB_LIST_TO_INDEX = 6;
 
     private final Set<Number> numbers;
+
+    static {
+        for (int i = Number.MIN_VALUE; i <= Number.MAX_VALUE; i++) {
+            Number number = new Number(String.valueOf(i));
+            LOTTO_NUMBERS.add(number);
+        }
+    }
 
     public Lotto() {
         Collections.shuffle(LOTTO_NUMBERS);
@@ -35,15 +42,6 @@ public class Lotto {
 
     public boolean contains(Number number) {
         return numbers.contains(number);
-    }
-
-    private static List<Number> initLottoNumbers() {
-        List<Number> numbers = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
-            Number number = new Number(String.valueOf(i));
-            numbers.add(number);
-        }
-        return numbers;
     }
 
     public static void validateNumbers(List<Integer> numbers) {
