@@ -1,5 +1,7 @@
 package lotto.model;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,14 +20,14 @@ public class WinningTicketTest {
     public void createWinningTicket() {
         // given
         List<LottoNumber> numbers = new ArrayList<>(
-            List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))
+                List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                        new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))
         );
         LottoTicket lottoTicket = new LottoTicket(numbers);
         LottoNumber bonusball = new LottoNumber(7);
         // then
         Assertions.assertThatCode(() -> new WinningTicket(lottoTicket, bonusball))
-            .doesNotThrowAnyException();
+                .doesNotThrowAnyException();
 
     }
 
@@ -34,8 +36,8 @@ public class WinningTicketTest {
     public void compareWinningTicketWithLottoTicket() {
         // given
         List<LottoNumber> numbers = new ArrayList<>(
-            List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))
+                List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                        new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))
         );
         LottoTicket lottoTicket = new LottoTicket(numbers);
         LottoNumber bonusball = new LottoNumber(7);
@@ -46,4 +48,25 @@ public class WinningTicketTest {
         Assertions.assertThat(result).isEqualTo(LottoRank.FIRST);
     }
 
+
+    @Test
+    @DisplayName("보너스볼과 당첨 번호가 중복되면 예외를 발생시킨다.")
+    public void throwsExceptionWhenBonusBallDuplicated() {
+        // given
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        lottoNumbers.add(new LottoNumber(1));
+        lottoNumbers.add(new LottoNumber(2));
+        lottoNumbers.add(new LottoNumber(3));
+        lottoNumbers.add(new LottoNumber(4));
+        lottoNumbers.add(new LottoNumber(5));
+        lottoNumbers.add(new LottoNumber(6));
+
+        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+        LottoNumber bonusBall = new LottoNumber(5);
+
+        // then
+        assertThatThrownBy(() -> new WinningTicket(lottoTicket, bonusBall))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR]");
+    }
 }

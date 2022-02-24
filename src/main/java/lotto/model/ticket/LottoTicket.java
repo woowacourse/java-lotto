@@ -53,12 +53,12 @@ public class LottoTicket {
     public int countMatch(LottoTicket other) {
         return Math.toIntExact(
             this.numbers.stream()
-            .filter(other::isMatch)
+            .filter(other::containsNumber)
             .count()
         );
     }
 
-    public boolean isMatch(LottoNumber number) {
+    public boolean containsNumber(LottoNumber number) {
         return this.numbers.contains(number);
     }
 
