@@ -10,15 +10,13 @@ import lotto.domain.ticket.generator.TicketGenerator;
 
 public class Tickets {
 
-	private final TicketGenerator ticketGenerator;
 	private final List<Ticket> tickets;
 
 	public Tickets(final int count, final TicketGenerator ticketGenerator) {
-		this.ticketGenerator = ticketGenerator;
-		this.tickets = generateTickets(count);
+		this.tickets = generateTickets(count, ticketGenerator);
 	}
 
-	private List<Ticket> generateTickets(final int count) {
+	private List<Ticket> generateTickets(final int count, final TicketGenerator ticketGenerator) {
 		final List<Ticket> tickets = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
 			final List<Integer> numbers = ticketGenerator.generate();
@@ -35,7 +33,7 @@ public class Tickets {
 			.collect(Collectors.toUnmodifiableList());
 	}
 
-	public int getSize() {
+	public int getTicketsCount() {
 		return tickets.size();
 	}
 

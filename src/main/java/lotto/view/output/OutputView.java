@@ -31,7 +31,7 @@ public class OutputView {
 	}
 
 	private static void printTicketCount(final Tickets tickets) {
-		System.out.println(tickets.getSize() + COUNT_MESSAGE);
+		System.out.println(tickets.getTicketsCount() + COUNT_MESSAGE);
 	}
 
 	private static String makeTicketFormat(final Ticket ticket) {

@@ -1,48 +1,79 @@
 package lotto.domain.ticket;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import lotto.domain.rank.Rank;
 import lotto.domain.ticket.generator.CustomTicketGenerator;
-import lotto.domain.ticket.generator.RandomTicketGenerator;
 
 class TicketsTest {
 
 	private final CustomTicketGenerator customTicketGenerator = new CustomTicketGenerator();
 
-	@DisplayName("로또목록 생성 테스트")
-	@Test
-	void initTest() {
-		assertDoesNotThrow(() -> new Tickets(14, new RandomTicketGenerator()));
+	@DisplayName("로또 목록 생성, 개수 일치 확인 테스트")
+	@ParameterizedTest
+	@MethodSource("provideForGenerateTest")
+	void generateTicketsSizeCheckTest(final List<Integer> generatorNumbers, final int ticketCount) {
+		customTicketGenerator.initNumbers(generatorNumbers);
+		final Tickets tickets = new Tickets(ticketCount, customTicketGenerator);
+		assertThat(tickets.getTicketsCount()).isEqualTo(ticketCount);
 	}
 
-	@DisplayName("로또목록 등수 확인 테스트")
-	@Test
-	void getRanksTest() {
-		final List<List<Integer>> numbers = new ArrayList<>();
-		numbers.add(Arrays.asList(1, 2, 3, 8, 9, 10));
-		numbers.add(Arrays.asList(1, 2, 3, 8, 9, 45));
-		numbers.add(Arrays.asList(11, 12, 13, 14, 15, 16));
-		customTicketGenerator.initNumbers(numbers);
+	public static Stream<Arguments> provideForGenerateTest() {
+		return Stream.of(
+				Arguments.of(
+						Arrays.asList(
+								1, 2, 3, 4, 5, 6,
+								1, 2, 3, 4, 5, 10,
+								1, 2, 3, 6, 7, 15,
+								11, 12, 13, 14, 15, 16
+						), 4
+				)
+		);
+	}
 
-		final Tickets tickets = new Tickets(3, customTicketGenerator);
+	@DisplayName("로또 목록 등수 확인 테스트")
+	@ParameterizedTest
+	@MethodSource("provideForGetRanksTest")
+	void getRanksTest(final List<Integer> winningNumbers,
+					  final int bonusNumber,
+					  final List<Integer> generatorNumbers,
+					  final int ticketCount,
+					  final List<Rank> expected) {
+		customTicketGenerator.initNumbers(generatorNumbers);
+		final Ticket winningTicket = new Ticket(winningNumbers);
+		final Ball bonusBall = new Ball(bonusNumber);
 
-		final List<Integer> answerNumbers = Arrays.asList(1, 2, 3, 8, 9, 10);
-		final Ticket answerBalls = new Ticket(answerNumbers);
-		final Ball bonusBall = new Ball(45);
-
-		final List<Rank> actual = tickets.getRanks(answerBalls, bonusBall);
-		final List<Rank> expected = Arrays.asList(Rank.FIRST_GRADE, Rank.SECOND_GRADE);
-
+		final Tickets tickets = new Tickets(ticketCount, customTicketGenerator);
+		final List<Rank> actual = tickets.getRanks(winningTicket, bonusBall);
 		assertThat(actual).isEqualTo(expected);
+	}
+
+	public static Stream<Arguments> provideForGetRanksTest() {
+		return Stream.of(
+				Arguments.of(
+						Arrays.asList(1, 2, 3, 4, 5, 6), 10,
+						Arrays.asList(
+								1, 2, 3, 4, 5, 6,
+								1, 2, 3, 4, 5, 10,
+								1, 2, 3, 6, 7, 15,
+								11, 12, 13, 14, 15, 16
+						), 4,
+						Arrays.asList(
+								Rank.FIRST_GRADE,
+								Rank.SECOND_GRADE,
+								Rank.FOURTH_GRADE
+						)
+				)
+		);
 	}
 
 }
