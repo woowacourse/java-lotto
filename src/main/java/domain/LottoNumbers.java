@@ -8,13 +8,9 @@ public class LottoNumbers {
 
     private final List<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(List<Integer> lottoNumbers) {
-        List<LottoNumber> tmpLottoNumbers = new ArrayList<>();
-        for (Integer lottoNumber : lottoNumbers) {
-            tmpLottoNumbers.add(new LottoNumber(lottoNumber));
-        }
-        Collections.sort(tmpLottoNumbers);
-        this.lottoNumbers = tmpLottoNumbers;
+    public LottoNumbers(List<LottoNumber> lottoNumbers) {
+        Collections.sort(lottoNumbers);
+        this.lottoNumbers =  new ArrayList<>(lottoNumbers);
     }
 
     public int countSameNumber(WinLottoNumbers winLottoNumbers) {
