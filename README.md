@@ -64,3 +64,5 @@
 - [ ] 당첨 통계 출력 부분 리팩토링 (ResultView)
 - [ ] 테스트코드를 Describe-Context-It 패턴을 적용해 개선 (@Nested)
 - [X] `TrialNumber` 를 `LottoQuantity` 로 변경
+- [X] 누락된 `WinningCount` 에 대한 테스트 추가
+- [ ] 테스트코드에서 불필요한 `hasMessageMatching` 을 `hasMessage` 로 변경
