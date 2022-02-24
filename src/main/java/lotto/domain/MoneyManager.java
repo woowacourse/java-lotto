@@ -33,6 +33,6 @@ public class MoneyManager {
     }
 
     public double calculateYield(double total) {
-        return Math.round((total / (double) inputMoney) * 100) / 100.0;
+        return total / (double) inputMoney;
     }
 }

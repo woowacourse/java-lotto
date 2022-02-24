@@ -42,7 +42,6 @@ class MoneyManagerTest {
         List<Rank> result = List.of(Rank.MATCH_THREE_NUMBERS, Rank.MATCH_FOUR_NUMBERS);
         Ranks ranks = new Ranks(result);
         MoneyManager moneyManager = new MoneyManager(14000);
-        assertThat(moneyManager.calculateYield(ranks.getLottoTotalReward())).isEqualTo(
-                Math.round((55000 / (double) 14000) * 100) / 100.0);
+        assertThat(moneyManager.calculateYield(ranks.getLottoTotalReward())).isEqualTo(55000 / (double) 14000);
     }
 }
