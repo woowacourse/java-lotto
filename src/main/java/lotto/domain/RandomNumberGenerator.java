@@ -21,6 +21,8 @@ public class RandomNumberGenerator implements NumberGenerator {
             .boxed()
             .collect(Collectors.toList());
         Collections.shuffle(numbers);
-        return numbers.subList(0, size);
+        List<Integer> randomNumbers = numbers.subList(0, size);
+        Collections.sort(randomNumbers);
+        return randomNumbers;
     }
 }
