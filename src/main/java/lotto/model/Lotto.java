@@ -2,6 +2,7 @@ package lotto.model;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -10,11 +11,17 @@ public class Lotto {
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int LOTTO_SIZE = 6;
 
-    private final List<Integer> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<Integer> lottoNumbers) {
         Collections.sort(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = convertIntegersToLottoNumbers(lottoNumbers);
+    }
+
+    private List<LottoNumber> convertIntegersToLottoNumbers(List<Integer> integers) {
+        return integers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
     public int getSize() {
@@ -28,7 +35,7 @@ public class Lotto {
     }
 
     public boolean matchBonusNumber(LottoNumber bonusNumber) {
-        return lottoNumbers.contains(bonusNumber.getNumber());
+        return lottoNumbers.contains(bonusNumber);
     }
 
     public static Lotto generate() {
@@ -44,7 +51,9 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
-    public List<Integer> getLottoNumbers() {
-        return lottoNumbers;
+    public List<Integer> toIntegers() {
+        return lottoNumbers.stream()
+                .map(LottoNumber::getNumber)
+                .collect(Collectors.toList());
     }
 }

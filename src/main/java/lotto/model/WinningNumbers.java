@@ -3,6 +3,7 @@ package lotto.model;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class WinningNumbers {
     private static final String ERROR_NOT_MATCH_WINNING_NUMBER_SIZE = "지난 주 당첨 번호 개수는 6개로 입력해주세요.";
@@ -12,13 +13,19 @@ public class WinningNumbers {
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int LOTTO_SIZE = 6;
 
-    private final List<Integer> winningNumbers;
+    private final List<LottoNumber> winningNumbers;
 
     public WinningNumbers(List<Integer> winningNumbers) {
         validateNumberOfWinningNumbers(winningNumbers);
         validateDuplicationWinningNumbers(winningNumbers);
         validateRangeWinningNumbers(winningNumbers);
-        this.winningNumbers = winningNumbers;
+        this.winningNumbers = convertIntegersToLottoNumbers(winningNumbers);
+    }
+
+    private List<LottoNumber> convertIntegersToLottoNumbers(List<Integer> integers) {
+        return integers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
     private void validateNumberOfWinningNumbers(List<Integer> winningNumbers) {
