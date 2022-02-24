@@ -3,8 +3,8 @@ package domain;
 import static constant.LottoConstants.LOTTO_PRICE;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
@@ -33,20 +33,19 @@ public class LottoGame {
     }
 
     public Map<LottoResult, Integer> getResultStatistics() {
-        return resultsStatistics;
+        return Collections.unmodifiableMap(resultsStatistics);
     }
 
     public float calculateProfitRatio() {
-        Set<LottoResult> lottoResultKeys = resultsStatistics.keySet();
-
-        int totalPrize = lottoResultKeys.stream()
-                .mapToInt(result -> sum(result, resultsStatistics.get(result)))
+        int totalPrize = resultsStatistics.keySet()
+                .stream()
+                .mapToInt(result -> sumOfLottoResult(result, resultsStatistics.get(result)))
                 .sum();
 
         return (float) totalPrize / getLottoPrice();
     }
 
-    private int sum(LottoResult lottoResult, int count) {
+    private int sumOfLottoResult(LottoResult lottoResult, int count) {
         return lottoResult.getPrize() * count;
     }
 

@@ -25,9 +25,9 @@ public class Lotto {
         this.chosenNumbers = getSortedLottoNumbers(lottoNums);
     }
 
-    public Lotto(List<LottoNumber> lottoNums) {
-        validateManualLottoNumbersSize(lottoNums);
-        this.chosenNumbers = getSortedLottoNumbers(lottoNums);
+    public Lotto(List<LottoNumber> lottoNumbers) {
+        validateManualLottoNumbersSize(lottoNumbers);
+        this.chosenNumbers = getSortedLottoNumbers(lottoNumbers);
     }
 
     private List<LottoNumber> generateRandomLottoNumbers() {
@@ -35,9 +35,9 @@ public class Lotto {
         return new ArrayList<>(allLottoNumbers.subList(0, LOTTO_NUMBERS_SIZE));
     }
 
-    private List<LottoNumber> getSortedLottoNumbers(List<LottoNumber> lottoNums) {
-        Collections.sort(lottoNums);
-        return lottoNums;
+    private List<LottoNumber> getSortedLottoNumbers(List<LottoNumber> lottoNumbers) {
+        Collections.sort(lottoNumbers);
+        return Collections.unmodifiableList(lottoNumbers);
     }
 
     public List<LottoNumber> getChosenNumbers() {
