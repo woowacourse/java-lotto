@@ -13,7 +13,7 @@ public class InputView {
     private static final String QUESTION_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String QUESTION_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
     private static final String NUMBER_DELIMITER = ", ";
-    private static final String NONE_NUMERIC_ERROR = "[ERROR] 금액은 숫자만 입력이 가능합니다.";
+    private static final String NONE_NUMERIC_ERROR = "[ERROR] 숫자만 입력이 가능합니다.";
 
     private static final Scanner scanner = new Scanner(System.in);
 
@@ -28,6 +28,11 @@ public class InputView {
         return covertNumbersToInteger(numbers);
     }
 
+    public static int askBonusNumber() {
+        System.out.println(QUESTION_BONUS_NUMBER);
+        return checkAndConvertInteger(scanner.nextLine());
+    }
+
     private static List<Integer> covertNumbersToInteger(List<String> numbers) {
         return numbers.stream()
                 .map(InputView::checkAndConvertInteger)
@@ -40,10 +45,5 @@ public class InputView {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(NONE_NUMERIC_ERROR);
         }
-    }
-
-    public static int askBonusNumber() {
-        System.out.println(QUESTION_BONUS_NUMBER);
-        return Integer.parseInt(scanner.nextLine());
     }
 }
