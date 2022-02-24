@@ -27,14 +27,6 @@ public class LottoMachine {
         issuedLottoNumbers = generate(shareValue.intValue());
     }
 
-    public LottoResult summarize() {
-        LottoResult result = new LottoResult(Money.ZERO);
-        issuedLottoNumbers.stream()
-                .map(winningLottoNumbers::getRankBy)
-                .forEach(result::add);
-        return result;
-    }
-
     public List<LottoNumbers> generate(int quantity) {
         return IntStream.range(0, quantity)
                 .mapToObj(i -> lottoNumbersGenerator.createLottoNumbers())
@@ -43,9 +35,5 @@ public class LottoMachine {
 
     public List<LottoNumbers> getIssuedLottoNumbers() {
         return issuedLottoNumbers;
-    }
-
-    public void setWinningLottoNumbers(WinningLottoNumbers winningLottoNumbers) {
-        this.winningLottoNumbers = winningLottoNumbers;
     }
 }

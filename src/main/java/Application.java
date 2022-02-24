@@ -30,9 +30,8 @@ public class Application {
         LottoNumbers winningLottoNumbers = inputWithMessage("지난 주 당첨 번호를 입력해 주세요.",
             LOTTO_NUMBERS_PARSER::parse);
         LottoNumber bonusNumber = inputWithMessage("보너스 볼을 입력해 주세요.", BONUS_NUMBER_PARSER::parse);
-        lottoMachine
-            .setWinningLottoNumbers(new WinningLottoNumbers(winningLottoNumbers, bonusNumber));
-        LottoResult result = lottoMachine.summarize();
+        WinningLottoNumbers winningLotto = new WinningLottoNumbers(winningLottoNumbers, bonusNumber);
+        LottoResult result = winningLotto.summarize(lottoMachine.getIssuedLottoNumbers(), inputMoney);
 
         System.out.println("당첨 통계");
         System.out.println("---------");

@@ -15,7 +15,15 @@ public class WinningLottoNumbers {
         this.bonusNumber = bonusNumber;
     }
 
-    public LottoRank getRankBy(LottoNumbers lottoNumbers) {
+    public LottoResult summarize(List<LottoNumbers> lottoNumbers, Money inputMoney) {
+        LottoResult result = new LottoResult(inputMoney);
+        lottoNumbers.stream()
+            .map(this::getRankBy)
+            .forEach(result::add);
+        return result;
+    }
+
+    private LottoRank getRankBy(LottoNumbers lottoNumbers) {
         int count = getMatchedCountAboutWinningNumbers(lottoNumbers);
         boolean bonusMatch = isBonusMatch(lottoNumbers);
         return LottoRank.of(count, bonusMatch);
@@ -27,13 +35,5 @@ public class WinningLottoNumbers {
 
     private boolean isBonusMatch(LottoNumbers lottoNumbers) {
         return lottoNumbers.contains(bonusNumber);
-    }
-
-    public LottoResult summarize(List<LottoNumbers> lottoNumbers, Money inputMoney) {
-        LottoResult result = new LottoResult(inputMoney);
-        lottoNumbers.stream()
-            .map(this::getRankBy)
-            .forEach(result::add);
-        return result;
     }
 }
