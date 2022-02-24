@@ -5,27 +5,27 @@ import domain.BonusNumber;
 import domain.AnswerLottoNumbers;
 import domain.Lottos;
 import domain.RandomLottoNumberGenerator;
-import view.InputView;
-import view.OutputView;
+
+import static view.InputView.*;
+import static view.OutputView.*;
 
 public class LottoGameController {
 
 	public static void run() {
 		try {
-			Lottos lottos = Lottos.of(InputView.inputMoney(), new RandomLottoNumberGenerator());
-			OutputView.printLottos(lottos);
+			Lottos lottos = Lottos.of(inputMoney(), new RandomLottoNumberGenerator());
+			printLottos(lottos);
 			AnswerLotto answerLotto = initAnswerLotto();
-			OutputView.printStatistics(lottos.generateEachCount(answerLotto));
-			OutputView.printProfitRatio(lottos.generateProfitRatio(answerLotto));
-		}
-		catch (IllegalArgumentException e) {
-			OutputView.printErrorMessage(e.getMessage());
+			printStatistics(lottos.generateEachCount(answerLotto));
+			printProfitRatio(lottos.generateProfitRatio(answerLotto));
+		} catch (IllegalArgumentException e) {
+			printErrorMessage(e.getMessage());
 		}
 	}
 
 	private static AnswerLotto initAnswerLotto() {
-		AnswerLottoNumbers lottoNumbers = new AnswerLottoNumbers(InputView.inputAnsNumbers());
-		BonusNumber bonusNumber = new BonusNumber(InputView.inputBonusNumber());
+		AnswerLottoNumbers lottoNumbers = new AnswerLottoNumbers(inputAnsNumbers());
+		BonusNumber bonusNumber = new BonusNumber(inputBonusNumber());
 		return new AnswerLotto(lottoNumbers, bonusNumber);
 	}
 }
