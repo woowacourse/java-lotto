@@ -1,12 +1,22 @@
 package lotto;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import java.util.List;
+import java.util.stream.Collectors;
+import org.junit.jupiter.api.BeforeEach;
 
 public class PrizeTest {
+    private Lotto lotto;
+    private List<String> lottoNumbers;
 
+    @BeforeEach
+    public void initializeLotto() {
+        lotto = new Lotto();
+        lottoNumbers = lotto.getNumbers().stream()
+                .map(String::valueOf)
+                .collect(Collectors.toList());
+    }
+
+    /*
     @DisplayName("3개가 일치하면 5등을 반환한다")
     @Test
     void match_3_fifth() {
@@ -36,4 +46,5 @@ public class PrizeTest {
     void match_5_bonus_second() {
         assertThat(Prize.getPrize(5, true)).isEqualTo(Prize.SECOND);
     }
+     */
 }

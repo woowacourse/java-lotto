@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lottos {
 
@@ -19,6 +20,12 @@ public class Lottos {
         }
 
         return new Lottos(lottos);
+    }
+
+    public List<MatchResult> match(WinningNumbers winningNumbers, BonusNumber bonusNumber) {
+        return this.lottos.stream()
+                .map(lotto -> MatchResult.of(lotto, winningNumbers, bonusNumber))
+                .collect(Collectors.toList());
     }
 
     public List<Lotto> getLottos() {

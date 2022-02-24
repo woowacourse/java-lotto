@@ -13,11 +13,11 @@ public class BonusNumberTest {
 
     @BeforeEach
     public void initializeStandardNumbers() {
-        List<WinningNumber> winningNumbers = new ArrayList<>();
+        List<String> winningNumbers = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
-            winningNumbers.add(WinningNumber.from(String.valueOf(i)));
+            winningNumbers.add(String.valueOf(i));
         }
-        this.winningNumbers = new WinningNumbers(winningNumbers);
+        this.winningNumbers = WinningNumbers.from(winningNumbers.toArray(new String[0]));;
     }
 
     @DisplayName("보너스 번호가 숫자가 아니면 예외가 발생한다")

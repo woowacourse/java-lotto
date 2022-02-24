@@ -1,6 +1,8 @@
 package lotto;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class WinningNumbers {
     private static final String ERROR_SIZE = "[ERROR] 당첨 번호는 6개여야 합니다";
@@ -9,7 +11,7 @@ public class WinningNumbers {
 
     private final List<WinningNumber> winningNumbers;
 
-    public WinningNumbers(List<WinningNumber> winningNumbers) {
+    private WinningNumbers(List<WinningNumber> winningNumbers) {
         validate(winningNumbers);
         this.winningNumbers = winningNumbers;
     }
@@ -29,6 +31,13 @@ public class WinningNumbers {
         if (getDistinctCount(winningNumbers) != winningNumbers.size()) {
             throw new IllegalArgumentException(ERROR_DUPLICATE);
         }
+    }
+
+    public static WinningNumbers from(String[] inputs) {
+        List<WinningNumber> winningNumbers = Arrays.stream(inputs)
+                .map(WinningNumber::from)
+                .collect(Collectors.toList());
+        return new WinningNumbers(winningNumbers);
     }
 
     private int getDistinctCount(List<WinningNumber> winningNumbers) {
