@@ -3,6 +3,7 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
+import java.util.Set;
 import lotto.domain.generator.AutoLottoNumberGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,10 +25,10 @@ class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(new AutoLottoNumberGenerator());
 
         // when
-        List<LottoNumber> lottoNumbers = lottoTicket.getLottoNumbers();
+        Set<LottoNumber> lottoNumbers = lottoTicket.getLottoNumbers();
 
         // then
-        assertThatThrownBy(() -> lottoNumbers.add(new LottoNumber(0)))
+        assertThatThrownBy(() -> lottoNumbers.add(new LottoNumber(1)))
                 .isInstanceOf(UnsupportedOperationException.class);
     }
 
@@ -36,10 +37,10 @@ class LottoTicketTest {
     void 당첨_번호_인지_확인() {
         // given
         LottoTicket lottoTicket = new LottoTicket(() -> List.of(1, 2, 3, 4, 5, 6));
-        WinningNumber winningNumber = new WinningNumber(1, BallType.BONUS);
+        LottoNumber lottoNumber = new LottoNumber(1);
 
         // when
-        boolean result = lottoTicket.isSame(winningNumber);
+        boolean result = lottoTicket.isSame(lottoNumber);
 
         // then
         assertThat(result).isTrue();

@@ -1,11 +1,13 @@
 package lotto.controller;
 
 import lotto.controller.dto.LottoTicketsDto;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
 import lotto.domain.Money;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTickets;
-import lotto.domain.WinningNumbers;
+import lotto.domain.WinningNumber;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -23,9 +25,9 @@ public class LottoController {
         Money money = createMoney();
 
         LottoTickets lottoTickets = createLottoTickets(money);
-        WinningNumbers winningNumbers = createWinningNumbers();
+        WinningNumber winningNumber = createWinningNumbers();
 
-        LottoResult lottoResult = createLottoResult(lottoTickets, winningNumbers);
+        LottoResult lottoResult = createLottoResult(lottoTickets, winningNumber);
 
         outputView.printYield(lottoResult.getRanks(), lottoResult.calculateYield(money));
     }
@@ -48,17 +50,18 @@ public class LottoController {
         return lottoTickets;
     }
 
-    private WinningNumbers createWinningNumbers() {
+    private WinningNumber createWinningNumbers() {
         try {
-            return new WinningNumbers(inputView.getNormalWinningNumbers(), inputView.getBonusNumber());
+            return new WinningNumber(new LottoTicket(inputView.getNormalWinningNumbers()),
+                    new LottoNumber(inputView.getBonusNumber()));
         } catch (RuntimeException e) {
             outputView.printErrorMessage(e.getMessage());
             return createWinningNumbers();
         }
     }
 
-    private LottoResult createLottoResult(LottoTickets lottoTickets, WinningNumbers winningNumbers) {
+    private LottoResult createLottoResult(LottoTickets lottoTickets, WinningNumber winningNumber) {
         outputView.printLottoResultMessage();
-        return lottoTickets.determine(winningNumbers);
+        return lottoTickets.determine(winningNumber);
     }
 }

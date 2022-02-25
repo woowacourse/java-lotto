@@ -1,40 +1,36 @@
 package lotto.domain;
 
-import static lotto.domain.BallType.BONUS;
-import static lotto.domain.BallType.NORMAL;
-
-import java.util.Objects;
-
 public class WinningNumber {
 
-    private static final String WINNING_NUMBER_RANGE_ERROR_MESSAGE = "당첨 번호의 범위는 1 ~ 45 사이입니다.";
-    private static final int START_NUMBER = 1;
-    private static final int END_NUMBER = 45;
+    private static final String DUPLICATED_WINNING_NUMBER_ERROR_MESSAGE = "로또 번호는 중복될 수 없습니다.";
 
-    private final int winningNumber;
-    private final BallType ballType;
+    private final LottoTicket lottoNumbers;
+    private final LottoNumber bonusNumber;
 
-    public WinningNumber(int winningNumber, BallType ballType) {
-        validateNumberRange(winningNumber);
-        this.winningNumber = winningNumber;
-        this.ballType = ballType;
+    public WinningNumber(LottoTicket lottoNumbers, LottoNumber bonusNumber) {
+        this.lottoNumbers = lottoNumbers;
+        validateDuplicateBonusNumber(lottoNumbers, bonusNumber);
+        this.bonusNumber = bonusNumber;
     }
 
-    public WinningNumber(int winningNumber) {
-        this(winningNumber, NORMAL);
-    }
-
-    private void validateNumberRange(int winningNumber) {
-        if (winningNumber < START_NUMBER || winningNumber > END_NUMBER) {
-            throw new IllegalArgumentException(WINNING_NUMBER_RANGE_ERROR_MESSAGE);
+    private void validateDuplicateBonusNumber(LottoTicket lottoNumbers, LottoNumber bonusNumber) {
+        if (lottoNumbers.isSame(bonusNumber)) {
+            throw new IllegalArgumentException(DUPLICATED_WINNING_NUMBER_ERROR_MESSAGE);
         }
     }
 
-    public boolean isBonus() {
-        return ballType == BONUS;
+    public Rank compare(LottoTicket lottoTicket) {
+        if (lottoTicket.isSame(bonusNumber)) {
+            return Rank.of(getCorrectCount(lottoTicket) + 1, true);
+        }
+
+        return Rank.of(getCorrectCount(lottoTicket), false);
     }
 
-    public int getWinningNumber() {
-        return winningNumber;
+    private int getCorrectCount(LottoTicket lottoTicket) {
+        return (int) lottoNumbers.getLottoNumbers()
+                .stream()
+                .filter(lottoTicket::isSame)
+                .count();
     }
 }

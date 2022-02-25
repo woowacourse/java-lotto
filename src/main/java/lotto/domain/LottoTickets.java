@@ -24,9 +24,9 @@ public class LottoTickets {
                 .collect(toList());
     }
 
-    public LottoResult determine(WinningNumbers winningNumbers) {
+    public LottoResult determine(WinningNumber winningNumber) {
         Map<Rank, Long> ranks = lottoTickets.stream()
-                .map(winningNumbers::compare)
+                .map(winningNumber::compare)
                 .collect(groupingBy(identity(), counting()));
 
         return new LottoResult(ranks);

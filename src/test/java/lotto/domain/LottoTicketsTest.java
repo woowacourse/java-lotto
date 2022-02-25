@@ -28,10 +28,10 @@ class LottoTicketsTest {
     void 당첨_번호_판별() {
         // given
         LottoTickets lottoTickets = new LottoTickets(1, () -> List.of(1, 2, 3, 4, 5, 6));
-        WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 7);
+        WinningNumber winningNumber = new WinningNumber(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), new LottoNumber(7));
 
         // when
-        LottoResult lottoResult = lottoTickets.determine(winningNumbers);
+        LottoResult lottoResult = lottoTickets.determine(winningNumber);
 
         // then
         assertThat(lottoResult.getRanks().get(Rank.FIRST)).isEqualTo(1);
