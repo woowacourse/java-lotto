@@ -5,7 +5,7 @@ import validator.MoneyValidator;
 public class Money {
 
     private final int money;
-    private final int UNIT = 1000;
+    private final int MONEY_UNIT = 1000;
 
     public Money(int money) {
         MoneyValidator.validate(money);
@@ -13,7 +13,7 @@ public class Money {
     }
 
     public int toLottoCount() {
-        return money / UNIT;
+        return money / MONEY_UNIT;
     }
 
     public int get() {
