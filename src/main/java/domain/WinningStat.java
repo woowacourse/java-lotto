@@ -1,7 +1,7 @@
 package domain;
 
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.Map;
 
 public class WinningStat {
@@ -15,7 +15,7 @@ public class WinningStat {
 	}
 
 	public Map<LottoRank, Integer> getStat() {
-		return new HashMap<>(stat);
+		return Collections.unmodifiableMap(stat);
 	}
 
 	public double calculateProfit(int ticketPrice) {

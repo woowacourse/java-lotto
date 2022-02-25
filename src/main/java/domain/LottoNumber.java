@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,9 +51,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static List<LottoNumber> getNumbers() {
-        return lottoNumbers.entrySet().stream()
-            .map(Map.Entry::getValue)
-            .collect(Collectors.toList());
+        return new ArrayList<>(lottoNumbers.values());
     }
 
     public int getNumber() {
