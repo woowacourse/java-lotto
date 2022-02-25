@@ -1,5 +1,6 @@
 package lotterymachine.model;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -7,8 +8,8 @@ import java.util.Map;
 public class LotteryTickets {
     private final List<LotteryTicket> tickets;
 
-    public LotteryTickets(List<LotteryTicket> lotteryTickets) {
-        this.tickets = lotteryTickets;
+    public LotteryTickets() {
+        tickets = new ArrayList<>();
     }
 
     public Map<WinningLottery, Integer> getLotteriesResult(List<Integer> numbers, int bonusNumber) {
@@ -30,5 +31,9 @@ public class LotteryTickets {
         if (winningLottery != null) {
             lotteriesResult.put(winningLottery, lotteriesResult.get(winningLottery) + 1);
         }
+    }
+
+    public void add(List<Integer> numbers) {
+        tickets.add(new LotteryTicket(numbers));
     }
 }

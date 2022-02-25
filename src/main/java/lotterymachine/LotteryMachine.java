@@ -21,12 +21,12 @@ public class LotteryMachine {
         int numberOfTickets = divideByLotteryPrice(amount);
         OutputView.printNumberOfTicket(numberOfTickets);
 
-        LotteryTickets lotteryTickets = new LotteryTickets(createLotteryTickets(numberOfTickets));
-        OutputView.printLotteryTickets(lotteryTickets.getLotteryTickets());
-
-        List<LotteryResultDto> lotteryResult = getLotteryResult(lotteryTickets);
-        Collections.sort(lotteryResult);
-        printResult(numberOfTickets, lotteryResult);
+//        LotteryTickets lotteryTickets = new LotteryTickets(createLotteryTickets(numberOfTickets));
+//        OutputView.printLotteryTickets(lotteryTickets.getLotteryTickets());
+//
+//        List<LotteryResultDto> lotteryResult = getLotteryResult(lotteryTickets);
+//        Collections.sort(lotteryResult);
+//        printResult(numberOfTickets, lotteryResult);
     }
 
     private static List<LotteryTicket> createLotteryTickets(int numberOfTickets) {
