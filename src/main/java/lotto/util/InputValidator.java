@@ -10,7 +10,7 @@ public class InputValidator {
 
     private static final String NUMBER_REGEX = "\\d+";
 
-    public static Money validateMoney(String money) {
+    public static Money validateMoney(String money) throws RuntimeException {
         if (!Pattern.matches(NUMBER_REGEX, money)) {
             throw new RuntimeException(MONEY_ERROR_MESSAGE);
         }
