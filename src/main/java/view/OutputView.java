@@ -27,7 +27,7 @@ public class OutputView {
     public static void printLotto(final List<Lotto> issuedLotto) {
         System.out.println(issuedLotto.size() + PURCHASE_MESSAGE);
         for (Lotto lotto : issuedLotto) {
-            System.out.println(lotto.getLotto());
+            System.out.println(lotto.toDto());
         }
     }
 
@@ -53,15 +53,15 @@ public class OutputView {
         final RankPrice rankPrice = rankCount.getKey();
         if (rankPrice == RankPrice.SECOND) {
             System.out.println(
-                    (rankPrice.getCount() - SECOND_RANK_UNIT) + SECOND_RANK_CORRECT_MESSAGE + rankPrice.getPrice()
-                            + RANK_PRICE_MESSAGE
-                            + rankCount.getValue()
-                            + RANK_COUNT_MESSAGE);
+                (rankPrice.getCount() - SECOND_RANK_UNIT) + SECOND_RANK_CORRECT_MESSAGE + rankPrice.getPrice()
+                    + RANK_PRICE_MESSAGE
+                    + rankCount.getValue()
+                    + RANK_COUNT_MESSAGE);
             return;
         }
         System.out.println(
-                rankPrice.getCount() + RANK_CORRECT_MESSAGE + rankPrice.getPrice() + RANK_PRICE_MESSAGE
-                        + rankCount.getValue() + RANK_COUNT_MESSAGE);
+            rankPrice.getCount() + RANK_CORRECT_MESSAGE + rankPrice.getPrice() + RANK_PRICE_MESSAGE
+                + rankCount.getValue() + RANK_COUNT_MESSAGE);
     }
 
     public static void printWinProfit(final double calculateProfit) {

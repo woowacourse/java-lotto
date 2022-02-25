@@ -1,5 +1,6 @@
 package domain;
 
+import dto.LottoNumberDto;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -46,7 +47,9 @@ public class Lotto {
         return count;
     }
 
-    public List<LottoNumber> getLotto() {
-        return this.lotto;
+    public List<LottoNumberDto> toDto() {
+        return this.lotto.stream()
+            .map(LottoNumberDto::from)
+            .collect(Collectors.toList());
     }
 }
