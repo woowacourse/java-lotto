@@ -59,4 +59,10 @@ public class MoneyTest {
 
         assertThat(money1.isGreaterThan(money2)).isEqualTo(result);
     }
+
+    @Test
+    @DisplayName("돈을 나눌 때 나머지가 있는지 확인한다.")
+    void hasRemainder() {
+        assertThat(new Money(1000L).hasRemainder(new Money(300L))).isTrue();
+    }
 }

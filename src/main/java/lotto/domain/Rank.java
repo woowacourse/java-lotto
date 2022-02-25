@@ -10,7 +10,7 @@ public enum Rank {
     THIRD(5, new Money(1_500_000L)),
     FOURTH(4, new Money(50_000L)),
     FIFTH(3, new Money(5_000L)),
-    NONE(0, new Money(0L));
+    NONE(0, Money.ZERO);
 
     private final int matchCount;
     private final Money reward;
@@ -28,7 +28,7 @@ public enum Rank {
     }
 
     public static Money calculateReward(List<Rank> ranks) {
-        Money reward = new Money(0L);
+        Money reward = Money.ZERO;
         for (Rank rank : ranks) {
             reward = reward.plus(rank.reward);
         }

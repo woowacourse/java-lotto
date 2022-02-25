@@ -13,7 +13,7 @@ public class StoreTest {
     @DisplayName("입력금액은 1,000원 미만이면 예외가 발생한다.")
     void throwExceptionWhenUnderThousands() {
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> new Store(new Money(999)))
+            .isThrownBy(() -> new Store(new Money(999L)))
             .withMessage("입력금액은 1,000원 이상이어야 한다.");
     }
 
@@ -27,8 +27,16 @@ public class StoreTest {
     @Test
     @DisplayName("1000원으로 로또 한장을 구매할 수 있다.")
     void createLotto() {
-        Store store = new Store(new Money(1000));
+        Store store = new Store(new Money(1000L));
 
         assertThat(store.buyLottos()).hasSize(1);
+    }
+
+    @Test
+    @DisplayName("입력금액이 1000원 단위가 아니면 예외를 발생한다.")
+    void throwExceptionWhenHasRemainder() {
+        assertThatIllegalArgumentException()
+            .isThrownBy(() -> new Store(new Money(1100L)))
+            .withMessage("입력금액은 1,000원 단위어야 한다.");
     }
 }

@@ -13,6 +13,7 @@ public class Store {
 
     public Store(Money money) {
         validateUnderLimit(money);
+        validateUnderThousands(money);
         this.leftMoney = money;
     }
 
@@ -36,6 +37,12 @@ public class Store {
     private void validateUnderLimit(Money money) {
         if (UNDER_LIMIT_MONEY.isGreaterThan(money)) {
             throw new IllegalArgumentException("입력금액은 1,000원 이상이어야 한다.");
+        }
+    }
+
+    private void validateUnderThousands(Money money) {
+        if (money.hasRemainder(LOTTO_PRICE)) {
+            throw new IllegalArgumentException("입력금액은 1,000원 단위어야 한다.");
         }
     }
 }

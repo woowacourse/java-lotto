@@ -6,6 +6,8 @@ import java.util.Objects;
 
 public class Money {
 
+    public static final Money ZERO = new Money(0L);
+
     private static final int MINIMUM_MONEY = 0;
     private static final int DECIMAL_PLACE = 2;
 
@@ -26,6 +28,14 @@ public class Money {
 
     public BigDecimal divide(Money money) {
         return BigDecimal.valueOf(this.amount).divide(BigDecimal.valueOf(money.amount), DECIMAL_PLACE, RoundingMode.DOWN);
+    }
+
+    public boolean isGreaterThan(Money money) {
+        return this.amount > money.amount;
+    }
+
+    public boolean hasRemainder(Money money) {
+        return this.amount % money.amount > ZERO.amount;
     }
 
     public long getAmount() {
@@ -53,9 +63,5 @@ public class Money {
         if (money < MINIMUM_MONEY) {
             throw new IllegalArgumentException("돈은 0이상이어야 한다.");
         }
-    }
-
-    public boolean isGreaterThan(Money money) {
-        return this.amount > money.amount;
     }
 }
