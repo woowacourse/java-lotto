@@ -21,6 +21,14 @@ public class LottoTest {
                 .collect(Collectors.toList());
     }
 
+    @DisplayName("LottoNumbers가 null이 들어오는 경우 에러 발생")
+    @Test
+    void nullLottoNumubersException() {
+        assertThatExceptionOfType(NullPointerException.class)
+                .isThrownBy(() -> new Lotto(null))
+                .withMessage("[ERROR] Lotto는 null로 생성할 수 없습니다.");
+    }
+
     @DisplayName("구매 로또 생성시 숫자가 6개가 입력되지 않으면 에러 발생")
     @Test
     void lottoCreateExceptionBySize() {

@@ -10,7 +10,7 @@ public class Lottos {
     private final List<Lotto> lottos;
 
     public Lottos(final List<Lotto> lottos) {
-        Objects.requireNonNull(lottos, "[ERROR] Lotto는 null로 생성할 수 없습니다.");
+        Objects.requireNonNull(lottos, "[ERROR] Lottos는 null로 생성할 수 없습니다.");
         this.lottos = new ArrayList<>(lottos);
     }
 

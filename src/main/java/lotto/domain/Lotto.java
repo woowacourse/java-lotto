@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -12,9 +14,10 @@ public class Lotto {
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(final List<LottoNumber> lottoNumbers) {
-        checkNumberSize(lottoNumbers);
-        checkDuplicateNumber(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+        Objects.requireNonNull(lottoNumbers, "[ERROR] Lotto는 null로 생성할 수 없습니다.");
+        this.lottoNumbers = new ArrayList<>(lottoNumbers);
+        checkNumberSize(this.lottoNumbers);
+        checkDuplicateNumber(this.lottoNumbers);
     }
 
     private void checkNumberSize(final List<LottoNumber> lottoNumbers) {

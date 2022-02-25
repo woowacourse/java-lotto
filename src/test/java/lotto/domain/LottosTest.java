@@ -24,7 +24,7 @@ public class LottosTest {
     void nullLottosException() {
         assertThatExceptionOfType(NullPointerException.class)
                 .isThrownBy(() -> new Lottos(null))
-                .withMessage("[ERROR] Lotto는 null로 생성할 수 없습니다.");
+                .withMessage("[ERROR] Lottos는 null로 생성할 수 없습니다.");
     }
 
     @DisplayName("LottoResult 로또 결과 객체를 계산하여 반환할 수 있다.")
