@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
+    private static final int LOTTO_PRICE = 1000;
     private static final int CHECK_BONUS_COUNT = 5;
 
     private final List<Lotto> lottos;
@@ -13,6 +14,10 @@ public class Lottos {
         for (int i = 0; i < count; i++) {
             lottos.add(new Lotto());
         }
+    }
+
+    public Lottos(PurchaseAmount purchaseAmount) {
+        this(purchaseAmount.getPurchaseAmount() / LOTTO_PRICE);
     }
 
     public Lottos(List<Lotto> lottos) {

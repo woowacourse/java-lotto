@@ -30,15 +30,16 @@ public class Output {
         System.out.println(ASK_PURCHASE_AMOUNT);
     }
 
-    public static void lottoCount(int lottoCount) {
-        System.out.printf(LOTTO_COUNT, lottoCount);
-    }
-
     public static void lottos(Lottos lottos) {
+        lottoCount(lottos.getLottos().size());
         for (Lotto lotto : lottos.getLottos()) {
             String numbers = String.join(LOTTO_DELIMITER, lotto.getLottoNumbers());
             System.out.printf(LOTTO_FORMAT,numbers);
         }
+    }
+
+    public static void lottoCount(int lottoCount) {
+        System.out.printf(LOTTO_COUNT, lottoCount);
     }
 
     public static void askWinNumber() {
