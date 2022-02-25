@@ -1,12 +1,11 @@
 package lotto.service;
 
-import lotto.domain.matchkind.LottoMatchKind;
-import lotto.domain.lottonumber.LottoNumbers;
-import lotto.domain.purchaseamount.PurchaseAmount;
-import lotto.domain.lottonumber.WinningNumbers;
 import lotto.domain.generator.LottoGenerator;
+import lotto.domain.lottonumber.LottoNumbers;
+import lotto.domain.lottonumber.WinningNumbers;
+import lotto.domain.matchkind.LottoMatchKind;
+import lotto.domain.purchaseamount.PurchaseAmount;
 
-import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -28,8 +27,9 @@ public class LottoService {
     }
 
     private void initializeResult(final Map<LottoMatchKind, Integer> result) {
-        Arrays.stream(LottoMatchKind.values())
-                .forEach(lottoMatchKind -> result.put(lottoMatchKind, INITIAL_MATCH_COUNT));
+        for (LottoMatchKind matchKind : LottoMatchKind.values()) {
+            result.put(matchKind, INITIAL_MATCH_COUNT);
+        }
     }
 
     public int getCountOfLottoNumbers() {
