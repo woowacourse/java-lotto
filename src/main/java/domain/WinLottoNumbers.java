@@ -23,7 +23,7 @@ public class WinLottoNumbers {
     }
 
     public static WinLottoNumbers of(String lottoNumbersText, int bonus) {
-        List<Integer> numbers = Separator.separateNumbers(lottoNumbersText);
+        List<Integer> numbers = Separator.splitStringToListInt(lottoNumbersText);
         validate(numbers, bonus);
         return new WinLottoNumbers(numbers, bonus);
     }

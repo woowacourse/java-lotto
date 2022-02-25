@@ -5,13 +5,13 @@ import java.util.List;
 
 public class Separator {
 
-    public static final String REGEX = ", ";
+    private static final String REGEX = ", ";
 
-    public static List<Integer> separateNumbers(String numbersText) {
-        List<Integer> nums = new ArrayList<>();
-        for (String s : numbersText.split(REGEX)) {
-            nums.add(Integer.parseInt(s));
+    public static List<Integer> splitStringToListInt(String input) {
+        List<Integer> numbers = new ArrayList<>();
+        for (String number : input.split(REGEX)) {
+            numbers.add(Integer.parseInt(number));
         }
-        return nums;
+        return numbers;
     }
 }
