@@ -23,6 +23,17 @@ class LottoNumberTest {
         );
     }
 
+    @Test
+    @DisplayName("1부터 45까지의 자연수를 입력받아 로또 객체를 생성한다.")
+    void create_lottoNumber_from() {
+        //given
+        final int expectedLottoNumber = 3;
+        //when
+        final int actualLottoNumber = LottoNumber.from("3").getValue();
+        //then
+        assertThat(actualLottoNumber).isEqualTo(expectedLottoNumber);
+    }
+
     @ParameterizedTest
     @DisplayName("1부터 45까지의 자연수가 아닌 값으로 객체를 생성할 경우 예외를 발생시킨다.")
     @ValueSource(strings = {"0", "-1", "1.2", "a", "46"})
@@ -33,17 +44,6 @@ class LottoNumberTest {
         assertThatThrownBy(() -> LottoNumber.from(value))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(expectedExceptionMessage);
-    }
-
-    @Test
-    @DisplayName("1부터 45까지의 자연수를 입력받아 로또 객체를 생성한다.")
-    void create_lottoNumber_from() {
-        //given
-        final int expectedLottoNumber = 3;
-        //when
-        final int actualLottoNumber = LottoNumber.from("3").getValue();
-        //then
-        assertThat(actualLottoNumber).isEqualTo(expectedLottoNumber);
     }
 
     @ParameterizedTest
