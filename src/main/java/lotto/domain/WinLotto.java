@@ -20,7 +20,7 @@ public class WinLotto {
     }
 
     public Rank matchResult(final Lotto lotto) {
-        final int hitCounts = lotto.match(winLotto);
+        final int hitCounts = lotto.matchingCounts(winLotto);
         final boolean isBonus = lotto.containNumber(bonusNumber);
         return Rank.calculateCurrentRank(hitCounts, isBonus);
     }
