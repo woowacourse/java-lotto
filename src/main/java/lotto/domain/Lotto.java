@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.StringJoiner;
 import lotto.domain.vo.Number;
 
 public class Lotto {
@@ -41,5 +42,10 @@ public class Lotto {
         if (new HashSet<>(numbers).size() != numbers.size()) {
             throw new IllegalArgumentException("로또 번호는 중복될 수 없다.");
         }
+    }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
     }
 }

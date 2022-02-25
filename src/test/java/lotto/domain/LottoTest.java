@@ -4,11 +4,13 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import lotto.domain.vo.Number;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class LottoTest {
 
@@ -20,21 +22,10 @@ class LottoTest {
         assertThat(new Lotto(numbers)).isNotNull();
     }
 
-    @Test
-    @DisplayName("로또 번호는 5자리 숫자가 전달되면 예외가 발생한다.")
-    void throwExceptionWhenFiveSizeNumbers() {
-        List<Number> numbers = givenNumbers(1, 2, 3, 4, 5);
-
-        assertThatIllegalArgumentException()
-            .isThrownBy(() -> new Lotto(numbers))
-            .withMessageMatching("로또 번호는 6자리 이어야 한다.");
-    }
-
-    @Test
-    @DisplayName("로또 번호는 7자리 숫자가 전달되면 예외가 발생한다.")
-    void throwExceptionWhenSevenSizeNumbers() {
-        List<Number> numbers = givenNumbers(1, 2, 3, 4, 5, 6, 7);
-
+    @ParameterizedTest(name = "잘못된 로또 번호 : {0}")
+    @MethodSource("getNumbers")
+    @DisplayName("맞춘 번호에 따라 등수를 반환한다.")
+    void findRank(List<Number> numbers) {
         assertThatIllegalArgumentException()
             .isThrownBy(() -> new Lotto(numbers))
             .withMessageMatching("로또 번호는 6자리 이어야 한다.");
@@ -75,5 +66,12 @@ class LottoTest {
         return Arrays.stream(numbers)
             .mapToObj(Number::new)
             .collect(Collectors.toList());
+    }
+
+    private static Stream<List<Number>> getNumbers() {
+        return Stream.of(
+            givenNumbers(1, 2, 3, 4, 5),
+            givenNumbers(1, 2, 3, 4, 5, 6, 7)
+        );
     }
 }
