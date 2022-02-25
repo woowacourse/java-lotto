@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -8,7 +9,8 @@ public class LottoResult {
     private final Map<Rank, Integer> rankResults;
 
     public LottoResult(final Map<Rank, Integer> rankResults) {
-        this.rankResults = rankResults;
+        Objects.requireNonNull(rankResults, "[ERROR] LottoResult는 null로 생성할 수 없습니다.");
+        this.rankResults = new HashMap<>(rankResults);
     }
 
     public double calculateYield() {
