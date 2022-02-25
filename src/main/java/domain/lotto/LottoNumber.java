@@ -3,15 +3,16 @@ package domain.lotto;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import utils.Constants;
 
 public class LottoNumber implements Comparable<LottoNumber> {
-    public static final Map<Integer, LottoNumber> LOTTO_NUMBER_CACHE = new HashMap<>();
+    public static final int MIN_LOTTO_NUM = 1;
+    public static final int MAX_LOTTO_NUM = 45;
     public static final String LOTTO_NUM_RANGE_ERROR_MESSAGE = "로또 번호는 1에서 45사이의 수여야 합니다.";
+    public static final Map<Integer, LottoNumber> LOTTO_NUMBER_CACHE = new HashMap<>();
 
 
     static {
-        for (int i = Constants.MIN_LOTTO_NUM; i <= Constants.MAX_LOTTO_NUM; i++) {
+        for (int i = MIN_LOTTO_NUM; i <= MAX_LOTTO_NUM; i++) {
             LOTTO_NUMBER_CACHE.put(i, new LottoNumber(i));
         }
     }
@@ -28,7 +29,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private static void validate(final int number) {
-        if (number < Constants.MIN_LOTTO_NUM || number > Constants.MAX_LOTTO_NUM) {
+        if (number < MIN_LOTTO_NUM || number > MAX_LOTTO_NUM) {
             throw new IllegalArgumentException(LOTTO_NUM_RANGE_ERROR_MESSAGE);
         }
     }
