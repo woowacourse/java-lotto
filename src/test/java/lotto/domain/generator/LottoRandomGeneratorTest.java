@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoRandomGeneratorTest {
     @Test
-    @DisplayName("숫자 값을 입력받아, 6개의 로또 번호들을 값만큼 중복없이 생성해 반환한다.")
+    @DisplayName("숫자 값을 입력받아, 입력받은 값만큼의 로또 개수를 서로 중복없이 생성해 반환한다.")
     void generate() {
         //given
         final int numberOfGenerating = 5;
