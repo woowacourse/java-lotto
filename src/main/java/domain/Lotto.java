@@ -23,7 +23,7 @@ public class Lotto {
 			.anyMatch(answerLotto::isSameWithBonusNumber);
 	}
 
-	public List<Integer> getNumbers() {
+	public List<Integer> getLottoNumbers() {
 		List<Integer> numbers = new ArrayList<>();
 		for (LottoNumber lottoNumber : this.lottoNumbers) {
 			numbers.add(lottoNumber.getLottoNumber());

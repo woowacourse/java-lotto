@@ -17,7 +17,10 @@ public class OutputView {
 
 	private static void printLotto(Lotto lotto) {
 		System.out.println(
-			"[" + lotto.getNumbers().stream().map(String::valueOf).collect(Collectors.joining(DELIMITER)) + "]");
+			"[" + lotto.getLottoNumbers()
+				.stream()
+				.map(String::valueOf)
+				.collect(Collectors.joining(DELIMITER)) + "]");
 	}
 
 	public static void printStatistics(List<Integer> resultCount) {
