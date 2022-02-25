@@ -1,6 +1,7 @@
 package lotto.dto;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -10,29 +11,38 @@ import lotto.domain.Money;
 
 public class LottoStatisticsResponse {
 
-    private final Map<LottoWinningResponse, Long> responseCountMap;
+    private final List<LottoWinningResponse> winningResponses;
     private final int money;
 
     public LottoStatisticsResponse(List<LottoRank> ranks, Money money) {
-        this.responseCountMap = createEmptyMap();
-        mergeRanks(ranks);
+        this.winningResponses = toWinningResponses(ranks);
         this.money = money.getAmount();
     }
 
-    private Map<LottoWinningResponse, Long> createEmptyMap() {
+    private List<LottoWinningResponse> toWinningResponses(List<LottoRank> ranks) {
+        Map<LottoRank, Integer> frequencyMap = countFrequency(ranks);
+        return frequencyMap.entrySet()
+            .stream()
+            .map(LottoWinningResponse::from)
+            .collect(Collectors.toList());
+    }
+
+    private Map<LottoRank, Integer> countFrequency(List<LottoRank> ranks) {
+        return ignoreFailedRank().stream()
+            .collect(Collectors.toMap(
+                rank -> rank,
+                rank -> Collections.frequency(ranks, rank))
+            );
+    }
+
+    private List<LottoRank> ignoreFailedRank() {
         return Arrays.stream(LottoRank.values())
-            .map(LottoWinningResponse::from)
-            .collect(Collectors.toMap(rank -> rank, rank -> 0L));
+            .filter(x -> x != LottoRank.SIXTH)
+            .collect(Collectors.toList());
     }
 
-    private void mergeRanks(List<LottoRank> ranks) {
-        ranks.stream()
-            .map(LottoWinningResponse::from)
-            .forEach((rank) -> responseCountMap.merge(rank, 1L, Long::sum));
-    }
-
-    public Map<LottoWinningResponse, Long> getResponseCountMap() {
-        return responseCountMap;
+    public List<LottoWinningResponse> getWinningResponses() {
+        return winningResponses;
     }
 
     public int getMoney() {

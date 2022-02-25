@@ -1,7 +1,6 @@
 package lotto.view;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import lotto.client.OutputClient;
@@ -45,17 +44,18 @@ public class OutputView {
     }
 
     private void outputMatches(LottoStatisticsResponse statistics) {
-        Map<LottoWinningResponse, Long> responseCountMap = statistics.getResponseCountMap();
-        responseCountMap.entrySet()
-            .forEach(entry -> client.output(formatWinningResponse(entry) + "\n"));
+        List<LottoWinningResponse> responses = statistics.getWinningResponses();
+        responses.stream()
+            .sorted()
+            .forEach(response -> client.output(formatWinningResponse(response) + "\n"));
     }
 
-    private String formatWinningResponse(Map.Entry<LottoWinningResponse, Long> entry) {
+    private String formatWinningResponse(LottoWinningResponse response) {
         String format = "%d개 일치 (%d원)- %d개";
-        if (entry.getKey().isSecondPlace()) {
+        if (response.isSecondPlace()) {
             format = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
         }
-        return String.format(format, entry.getKey().getMatchCount(), entry.getKey().getPrize(), entry.getValue());
+        return String.format(format, response.getMatchCount(), response.getPrize(), response.getTicketCount());
     }
 
     private void outputProfit(LottoStatisticsResponse statistics) {
@@ -63,11 +63,15 @@ public class OutputView {
     }
 
     private double calculateProfit(LottoStatisticsResponse statistics) {
-        Map<LottoWinningResponse, Long> rankCountMap = statistics.getResponseCountMap();
+        List<LottoWinningResponse> responses = statistics.getWinningResponses();
         int money = statistics.getMoney();
-        long sum = rankCountMap.entrySet().stream()
-            .mapToLong(x -> x.getKey().getPrize() * x.getValue())
+        long sum = responses.stream()
+            .mapToLong(this::calculateProfitPerWinning)
             .sum();
-        return (double) sum / money;
+        return (double)sum / money;
+    }
+
+    private long calculateProfitPerWinning(LottoWinningResponse response) {
+        return (long) response.getPrize() * response.getTicketCount();
     }
 }

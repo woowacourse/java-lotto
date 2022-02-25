@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import lotto.config.ControllerConfig;
 import lotto.dto.LottoStatisticsResponse;
+import lotto.dto.LottoWinningResponse;
 
 class WinningControllerTest {
 
@@ -27,11 +28,11 @@ class WinningControllerTest {
         Assertions.assertAll(
             () -> assertThat(lottoStatisticsResponse.getMoney()).isEqualTo(3000),
             () -> assertThat(
-            lottoStatisticsResponse.getResponseCountMap().values()
-                .stream()
-                .mapToLong(l -> l)
-                .sum()
-            ).isEqualTo(3)
+                lottoStatisticsResponse.getWinningResponses()
+                    .stream()
+                    .mapToInt(LottoWinningResponse::getTicketCount)
+                    .sum()
+            ).isLessThanOrEqualTo(3)
         );
 
         // then
