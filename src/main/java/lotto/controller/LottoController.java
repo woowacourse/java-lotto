@@ -6,11 +6,10 @@ import java.util.stream.Collectors;
 
 import lotto.domain.Ball;
 import lotto.domain.Lotto;
-import lotto.domain.LottoMachine;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 import lotto.domain.Profit;
-import lotto.domain.PurchaseAmount;
+import lotto.domain.Payment;
 import lotto.domain.WinningLotto;
 
 import static lotto.view.Input.*;
@@ -21,25 +20,25 @@ public class LottoController {
     private static final String DELIMITER = ",";
 
     public static void run() {
-        printRequestPurchaseAmount();
-        PurchaseAmount purchaseAmount = createPurchaseAmount();
+        printRequestPayment();
+        Payment payment = createPayment();
 
-        Lottos lottos = buyLotto(purchaseAmount);
+        Lottos lottos = buyLotto(payment);
 
-        showLottoResult(lottos, purchaseAmount);
+        showLottoResult(lottos, payment);
     }
 
-    private static PurchaseAmount createPurchaseAmount() {
+    private static Payment createPayment() {
         try {
-            return new PurchaseAmount(inputPurchaseAmount());
+            return new Payment(inputPayment());
         } catch (IllegalArgumentException error) {
             printErrorMessage(error.getMessage());
-            return createPurchaseAmount();
+            return createPayment();
         }
     }
 
-    private static Lottos buyLotto(PurchaseAmount purchaseAmount) {
-        int lottoCount = getLottoCount(purchaseAmount);
+    private static Lottos buyLotto(Payment payment) {
+        int lottoCount = getLottoCount(payment);
         Lottos lottos = new Lottos(lottoCount);
 
         printLottoCount(lottoCount);
@@ -48,17 +47,17 @@ public class LottoController {
         return lottos;
     }
 
-    private static int getLottoCount(PurchaseAmount purchaseAmount) {
-        return purchaseAmount.getPurchaseAmount() / LOTTO_PRICE;
+    private static int getLottoCount(Payment payment) {
+        return payment.getPayment() / LOTTO_PRICE;
     }
 
-    private static void showLottoResult(Lottos lottos, PurchaseAmount purchaseAmount) {
+    private static void showLottoResult(Lottos lottos, Payment payment) {
         requestWinNumber();
         Lotto winLotto = createWinNumber();
         requestBonusBall();
         WinningLotto winningLotto = createWinningLotto(winLotto);
 
-        showResult(lottos, purchaseAmount, winningLotto);
+        showResult(lottos, payment, winningLotto);
     }
 
     private static Lotto createWinNumber() {
@@ -83,7 +82,7 @@ public class LottoController {
         }
     }
 
-    private static void showResult(Lottos lottos, PurchaseAmount purchaseAmount, WinningLotto winningLotto) {
+    private static void showResult(Lottos lottos, Payment payment, WinningLotto winningLotto) {
         printStatisticsTitle();
 
         LottoResult lottoResult = new LottoResult();
@@ -91,7 +90,7 @@ public class LottoController {
         printLottoResult(lottoResult);
 
         Profit profit = new Profit();
-        double profitRate = profit.calculateRate(lottoResult.getTotalMoney(), purchaseAmount);
+        double profitRate = profit.calculateRate(lottoResult.getTotalMoney(), payment);
         printProfitRate(profitRate);
     }
 }

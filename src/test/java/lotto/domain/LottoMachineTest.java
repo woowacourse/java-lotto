@@ -11,7 +11,7 @@ public class LottoMachineTest {
     @DisplayName("입력 금액에 맞는 로또 개수 반환")
     void get_lotto_count() {
         LottoMachine lottoMachine = new LottoMachine();
-        int count = lottoMachine.getLottoCount(new PurchaseAmount("9000"));
+        int count = lottoMachine.getLottoCount(new Payment("9000"));
 
         assertEquals(count, 9);
     }

@@ -26,7 +26,7 @@ public class Output {
         System.out.println(ERROR_PREFIX + errorMessage);
     }
 
-    public static void printRequestPurchaseAmount() {
+    public static void printRequestPayment() {
         System.out.println(REQUEST_PURCHASE_AMOUNT);
     }
 

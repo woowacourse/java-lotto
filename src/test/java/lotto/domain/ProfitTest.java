@@ -30,9 +30,9 @@ public class ProfitTest {
     void calculate_profit() {
         Profit profit = new Profit();
 
-        PurchaseAmount purchaseAmount = new PurchaseAmount("3000");
+        Payment payment = new Payment("3000");
         int totalMoney = lottoResult.getTotalMoney();
 
-        assertEquals(profit.calculateRate(totalMoney, purchaseAmount), 676683.333, 0.01);
+        assertEquals(profit.calculateRate(totalMoney, payment), 676683.333, 0.01);
     }
 }

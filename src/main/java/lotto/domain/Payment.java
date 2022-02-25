@@ -1,24 +1,24 @@
 package lotto.domain;
 
-public class PurchaseAmount {
+public class Payment {
     private static final String NUMBER_MATCHES = "-?[0-9]+";
     private static final int LOTTO_PRICE = 1000;
     private static final String ERROR_ONLY_NUMBER = "숫자를 입력해주세요!";
     private static final String ERROR_ONLY_NATURAL_NUMBER = "자연수를 입력해주세요!";
     private static final String ERROR_LOTTO_PRICE = "1,000원 단위로 입력해주세요!";
 
-    private final int purchaseAmount;
+    private final int payment;
 
-    public PurchaseAmount(final String purchaseAmount) {
-        validatePurchaseAmount(purchaseAmount);
-        this.purchaseAmount = Integer.parseInt(purchaseAmount);
+    public Payment(final String payment) {
+        validatePayment(payment);
+        this.payment = Integer.parseInt(payment);
     }
 
-    public int getPurchaseAmount() {
-        return purchaseAmount;
+    public int getPayment() {
+        return payment;
     }
 
-    private void validatePurchaseAmount(final String value) {
+    private void validatePayment(final String value) {
         if (isBlank(value) || !isNumber(value)) {
             throw new IllegalArgumentException(ERROR_ONLY_NUMBER);
         }
