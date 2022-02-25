@@ -36,12 +36,12 @@ public enum LottoNumber {
     }
 
     private static List<LottoNumber> shuffleLottoNumbers() {
-        List<LottoNumber> lottoNumbers = LottoNumber.getLottoNumbers();
+        List<LottoNumber> lottoNumbers = LottoNumber.getAllLottoNumbers();
         Collections.shuffle(lottoNumbers);
         return lottoNumbers;
     }
 
-    private static List<LottoNumber> getLottoNumbers() {
+    private static List<LottoNumber> getAllLottoNumbers() {
         return Arrays.stream(LottoNumber.values()).collect(Collectors.toList());
     }
 
