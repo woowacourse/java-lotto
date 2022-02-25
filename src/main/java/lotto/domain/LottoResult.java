@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class LottoResult {
     private static final int DEFAULT_COUNT = 0;
+    private static final int CHECK_BONUS_COUNT = 5;
 
     private final Map<Rank, Integer> lottoResult = new HashMap<>();
 
@@ -18,7 +19,15 @@ public class LottoResult {
         return lottoResult;
     }
 
-    public void increaseRankCount(Rank rank) {
+    public void match(Lottos lottos, WinningLotto winningLotto) {
+        for (Lotto lotto : lottos.getLottos()) {
+            int matchingCount = lotto.compareTo(winningLotto.getWinningLotto());
+            boolean bonus = matchingCount == CHECK_BONUS_COUNT && lotto.contains(winningLotto.getBonusBall());
+            increaseRankCount(Rank.getRank(matchingCount, bonus));
+        }
+    }
+
+    private void increaseRankCount(Rank rank) {
         lottoResult.put(rank, lottoResult.get(rank) + 1);
     }
 

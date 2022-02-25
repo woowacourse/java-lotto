@@ -8,7 +8,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class Lotto {
+public class Lotto implements Comparable<Lotto> {
     private static final int MINIMUM_NUMBER = 1;
     private static final int MAXIMUM_NUMBER = 45;
     private static final int LOTTO_COUNT = 6;
@@ -37,12 +37,6 @@ public class Lotto {
 
     public boolean contains(Ball number) {
         return lotto.contains(number);
-    }
-
-    public int getMatchingCount(Lotto compareLotto) {
-        return (int) lotto.stream()
-                .filter(compareLotto::contains)
-                .count();
     }
 
     private static List<String> selectNumbers() {
@@ -82,5 +76,12 @@ public class Lotto {
         if (numbers.size() != LOTTO_COUNT) {
             throw new IllegalArgumentException(ERROR_LOTTO_COUNT);
         }
+    }
+
+    @Override
+    public int compareTo(final Lotto otherLotto) {
+        return (int) lotto.stream()
+                .filter(otherLotto::contains)
+                .count();
     }
 }

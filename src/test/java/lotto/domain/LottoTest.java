@@ -48,7 +48,7 @@ public class LottoTest {
         Lotto lotto = new Lotto(Arrays.asList("1", "2", "3", "4", "5", "6"));
         Lotto winLotto = new Lotto(Arrays.asList("1", "2", "3", "4", "5", "6"));
 
-        int matchingCount = lotto.getMatchingCount(winLotto);
+        int matchingCount = lotto.compareTo(winLotto);
 
         assertEquals(matchingCount, 6);
     }
@@ -59,7 +59,7 @@ public class LottoTest {
         Lotto lotto = new Lotto(Arrays.asList("1", "2", "3", "4", "5", "7"));
         Lotto winLotto = new Lotto(Arrays.asList("1", "2", "3", "4", "5", "6"));
 
-        int matchingCount = lotto.getMatchingCount(winLotto);
+        int matchingCount = lotto.compareTo(winLotto);
 
         assertNotEquals(matchingCount, 6);
     }

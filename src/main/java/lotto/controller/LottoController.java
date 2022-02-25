@@ -24,7 +24,8 @@ public class LottoController {
 
         Lottos lottos = buyLotto(payment);
 
-        showLottoResult(lottos, payment);
+        WinningLotto winningLotto = getWinningLotto();
+        showResult(lottos, payment, winningLotto);
     }
 
     private static Payment createPayment() {
@@ -46,13 +47,11 @@ public class LottoController {
         return lottos;
     }
 
-    private static void showLottoResult(Lottos lottos, Payment payment) {
-        requestWinNumber();
+    private static WinningLotto getWinningLotto() {
+        printRequestWinNumber();
         Lotto winLotto = createWinNumber();
-        requestBonusBall();
-        WinningLotto winningLotto = createWinningLotto(winLotto);
-
-        showResult(lottos, payment, winningLotto);
+        printRequestBonusBall();
+        return createWinningLotto(winLotto);
     }
 
     private static Lotto createWinNumber() {
@@ -81,9 +80,13 @@ public class LottoController {
         printStatisticsTitle();
 
         LottoResult lottoResult = new LottoResult();
-        lottos.addMatchingCount(lottoResult, winningLotto);
+        lottoResult.match(lottos, winningLotto);
         printLottoResult(lottoResult);
 
+        showProfitRate(payment, lottoResult);
+    }
+
+    private static void showProfitRate(Payment payment, LottoResult lottoResult) {
         Profit profit = new Profit();
         double profitRate = profit.calculateRate(lottoResult.getTotalMoney(), payment);
         printProfitRate(profitRate);

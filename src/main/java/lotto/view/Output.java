@@ -19,7 +19,7 @@ public class Output {
     private static final String RESULT_FORMAT = "%d개 일치%s(%d원) - %d개\n";
     private static final String BONUS_FORMAT = ", 보너스 볼 일치";
     private static final String PROFIT_FORMAT = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)";
-    private static final String PROFIT = "이익";
+    private static final String PROFIT = "이익이";
     private static final String LOSS = "손해";
 
     public static void printErrorMessage(String errorMessage) {
@@ -41,11 +41,11 @@ public class Output {
         }
     }
 
-    public static void requestWinNumber() {
+    public static void printRequestWinNumber() {
         System.out.println(REQUEST_WIN_NUMBER);
     }
 
-    public static void requestBonusBall() {
+    public static void printRequestBonusBall() {
         System.out.println(REQUEST_BONUS_BALL);
     }
 
