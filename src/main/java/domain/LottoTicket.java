@@ -15,6 +15,6 @@ public class LottoTicket {
     }
 
     public List<Lotto> getLottos() {
-        return Collections.unmodifiableList(lottos);
+        return List.copyOf(lottos);
     }
 }

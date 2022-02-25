@@ -1,8 +1,9 @@
 package domain;
 
+import util.LottoNumberGenerator;
+
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
-import util.LottoNumberGenerator;
 
 public class LottoMachine {
 
