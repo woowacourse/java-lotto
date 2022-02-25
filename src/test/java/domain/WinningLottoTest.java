@@ -13,12 +13,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class LottoRefereeTest {
+public class WinningLottoTest {
 
     public static final String PARAMETERIZED_TEST_DISPLAY_FORMAT =
             DISPLAY_NAME_PLACEHOLDER + " [" + ARGUMENTS_PLACEHOLDER + "]";
 
-    private static LottoReferee referee;
+    private static WinningLotto referee;
 
     @BeforeAll
     static void setUp() {
@@ -28,7 +28,7 @@ public class LottoRefereeTest {
                 .collect(Collectors.toList());
         LottoNumber bonusNumber = LottoNumber.of(7);
 
-        referee = new LottoReferee(winningNumbers, bonusNumber);
+        referee = new WinningLotto(winningNumbers, bonusNumber);
     }
 
     @Test

@@ -9,12 +9,12 @@ import java.util.stream.Collectors;
 public class LottoGame {
 
     private final LottoTickets lottoTickets;
-    private final LottoReferee referee;
-    private final TreeMap<LottoResult, Integer> resultsStatistics = Arrays
+    private final WinningLotto referee;
+    private final Map<LottoResult, Integer> resultsStatistics = Arrays
             .stream(LottoResult.values())
             .collect(Collectors.toMap(key -> key, value -> 0, (o1, o2) -> o1, TreeMap::new));
 
-    public LottoGame(LottoTickets lottoTickets, LottoReferee referee) {
+    public LottoGame(LottoTickets lottoTickets, WinningLotto referee) {
         this.lottoTickets = lottoTickets;
         this.referee = referee;
         analyzeLottos();

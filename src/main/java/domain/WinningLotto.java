@@ -2,11 +2,11 @@ package domain;
 
 import java.util.List;
 
-public class LottoReferee {
+public class WinningLotto {
     private final List<LottoNumber> winningNumbers;
     private final LottoNumber bonusNumber;
 
-    public LottoReferee(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
+    public WinningLotto(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
     }

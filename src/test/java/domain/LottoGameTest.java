@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 
 public class LottoGameTest {
 
-    private static LottoReferee referee;
+    private static WinningLotto referee;
     private final LottoTicket firstPrizeLottoTicket = createNewLotto(1, 2, 3, 4, 5, 6);
     private final LottoTicket secondPrizeLottoTicket = createNewLotto(1, 2, 3, 4, 5, 7);
     private final LottoTicket thirdPrizeLottoTicket = createNewLotto(1, 2, 3, 4, 5, 16);
@@ -31,7 +31,7 @@ public class LottoGameTest {
 
         LottoNumber bonusNumber = LottoNumber.of(7);
 
-        referee = new LottoReferee(winningNumbers, bonusNumber);
+        referee = new WinningLotto(winningNumbers, bonusNumber);
     }
 
     @Test

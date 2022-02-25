@@ -5,7 +5,7 @@ import static util.LottoNumberValidator.validateNoDuplicates;
 
 import domain.LottoGame;
 import domain.LottoNumber;
-import domain.LottoReferee;
+import domain.WinningLotto;
 import domain.LottoTickets;
 
 import java.util.Arrays;
@@ -23,7 +23,7 @@ public class LottoController {
 
     public void run() {
         LottoTickets lottoTickets = initCustomerLottos();
-        LottoReferee referee = initLottoReferee();
+        WinningLotto referee = initLottoReferee();
         LottoGame lottoGame = new LottoGame(lottoTickets, referee);
         OutputView.printLottoResults(lottoGame.getResultStatistics());
         OutputView.printLottoResults(lottoGame.calculateProfitRatio());
@@ -36,10 +36,10 @@ public class LottoController {
         return lottoTickets;
     }
 
-    private LottoReferee initLottoReferee() {
+    private WinningLotto initLottoReferee() {
         List<LottoNumber> winningNumbers = registerWinningNumbers();
         LottoNumber bonusNumber = registerBonusNumber(winningNumbers);
-        return new LottoReferee(winningNumbers, bonusNumber);
+        return new WinningLotto(winningNumbers, bonusNumber);
     }
 
     private List<LottoNumber> registerWinningNumbers() {
