@@ -26,6 +26,15 @@ public class LottoTickets {
 		return new ArrayList<>(this.lottoTickets);
 	}
 
+	public List<WinningStatus> calculateAllLottoResult(AnswerLotto answerLotto) {
+		List<WinningStatus> allLottoResults = new ArrayList<>();
+		for (Lotto lotto : this.lottoTickets) {
+			allLottoResults.add(WinningStatus.of(lotto.calculateInAnswerNumbers(answerLotto),
+				lotto.isHitBonusNumber(answerLotto)));
+		}
+		return allLottoResults;
+	}
+
 	private void validateDivisibleByThousand(int price) {
 		if (price % UNIT_PRICE != 0) {
 			throw new IllegalArgumentException(ERROR_NOT_DIVISIBLE_BY_UNIT_PRICE);

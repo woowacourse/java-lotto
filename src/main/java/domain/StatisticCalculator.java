@@ -16,9 +16,7 @@ public class StatisticCalculator {
 	}
 
 	public void updateResult(LottoTickets lottoTickets, AnswerLotto answerLotto) {
-		for (Lotto lotto : lottoTickets.getLottoTickets()) {
-			WinningStatus winningStatus = WinningStatus.of(lotto.calculateInAnswerNumbers(answerLotto),
-				lotto.isHitBonusNumber(answerLotto));
+		for (WinningStatus winningStatus : lottoTickets.calculateAllLottoResult(answerLotto)) {
 			int count = this.resultStatistics.get(winningStatus);
 			this.resultStatistics.put(winningStatus, count + 1);
 		}
