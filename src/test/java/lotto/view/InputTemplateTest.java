@@ -6,8 +6,6 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lotto.model.exception.LottoException;
@@ -18,94 +16,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class InputTemplateTest {
-
-    abstract class Mock {
-
-        private int time = 0;
-
-        protected void call() {
-            time++;
-        }
-
-        protected int calledTime() {
-            return time;
-        }
-
-        public void verifyCalledOnce() {
-            assertThat(calledTime() == 1).isTrue();
-        }
-
-        public void verifyCalledTimes(int time) {
-            assertThat(calledTime()).isEqualTo(time);
-        }
-
-        public void verifyIsNotCalled() {
-            assertThat(calledTime()).isEqualTo(0);
-        }
-    }
-
-    class MockSupplier extends Mock {
-
-        public Object get() {
-            call();
-            return new Object();
-        }
-
-        public Object throwLottoException() {
-            call();
-            throw new LottoException() {
-            };
-        }
-
-        public Object throwRuntimeException(String message) {
-            call();
-            throw new RuntimeException(message);
-        }
-    }
-
-    class MockConsumer extends Mock {
-
-        private List<Object> values = new ArrayList<>();
-
-        public void accept(Object o) {
-            values.add(o);
-            call();
-        }
-
-        public void throwInvalidFormatException(Object o, String message) {
-            values.add(o);
-            call();
-            throw new InvalidFormatException(message);
-        }
-
-        public void throwRuntimeException(Object o, String message) {
-            values.add(o);
-            call();
-            throw new RuntimeException(message);
-        }
-
-        public void verifyCalledOnce(Class<?> cls) {
-            verifyCalledOnce();
-            assertThat(cls).isAssignableFrom(values.get(0).getClass());
-        }
-
-        public void verifyCalledOnce(Object value) {
-            verifyCalledOnce();
-            assertThat(values.get(0)).isEqualTo(value);
-        }
-
-        public void verifyCalledTimes(int time, Class<?> cls) {
-            verifyCalledTimes(time);
-            for (Object value : values) {
-                assertThat(cls).isAssignableFrom(value.getClass());
-            }
-        }
-
-        public void verifyCalledTimes(int time, Object... values) {
-            verifyCalledTimes(time);
-            assertThat(this.values).containsExactlyInAnyOrder(values);
-        }
-    }
 
     private static final String MESSAGE = "message";
     private static final String INPUT_TEXT = "text";
