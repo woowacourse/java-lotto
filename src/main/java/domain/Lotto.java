@@ -30,6 +30,12 @@ public class Lotto {
 		checkDuplicate(lotto);
 	}
 
+	private void checkLottoNumberSize(List<Number> lotto) {
+		if (lotto.size() != NUMBER_OF_COUNT_TO_PICK_LOTTO) {
+			throw new IllegalArgumentException(WRONG_COUNT_PICK_LOTTO_EXCEPTION_MESSAGE);
+		}
+	}
+
 	private void checkDuplicate(List<Number> lotto) {
 		boolean duplicated = lotto.stream()
 			.distinct()
@@ -40,21 +46,15 @@ public class Lotto {
 		}
 	}
 
-	private void checkLottoNumberSize(List<Number> lotto) {
-		if (lotto.size() != NUMBER_OF_COUNT_TO_PICK_LOTTO) {
-			throw new IllegalArgumentException(WRONG_COUNT_PICK_LOTTO_EXCEPTION_MESSAGE);
-		}
-	}
-
-	public boolean isContain(Number number) {
-		return lotto.contains(number);
-	}
-
 	public LottoRank checkWinningResult(Lotto winningNumbers, Number bonusNumber) {
 		int count = (int)lotto.stream()
 			.filter(winningNumbers::isContain)
 			.count();
 		return LottoRank.findRank(count, lotto.contains(bonusNumber));
+	}
+
+	public boolean isContain(Number number) {
+		return lotto.contains(number);
 	}
 
 	public List<Number> getLotto() {

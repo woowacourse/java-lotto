@@ -16,6 +16,16 @@ public class LottoFactory {
 		.boxed()
 		.collect(Collectors.toList());
 
+	public List<Lotto> generateLottoTicket(Money money) {
+		int purchaseCount = MIN_PURCHASE_COUNT;
+		List<Lotto> lottoTicket = new ArrayList<>();
+		while (money.isPossibleToPurchase(calculatePurchasePrice(purchaseCount))) {
+			lottoTicket.add(generateLotto());
+			++purchaseCount;
+		}
+		return lottoTicket;
+	}
+
 	private Lotto generateLotto() {
 		Collections.shuffle(LOTTO_NUMBERS);
 		return new Lotto(pickLottoNumbers().stream()
@@ -25,16 +35,6 @@ public class LottoFactory {
 
 	private List<Integer> pickLottoNumbers() {
 		return LOTTO_NUMBERS.subList(0, 6);
-	}
-
-	public List<Lotto> generateLottoTicket(Money money) {
-		int purchaseCount = MIN_PURCHASE_COUNT;
-		List<Lotto> lottoTicket = new ArrayList<>();
-		while (money.isPossibleToPurchase(calculatePurchasePrice(purchaseCount))) {
-			lottoTicket.add(generateLotto());
-			++purchaseCount;
-		}
-		return lottoTicket;
 	}
 
 	private int calculatePurchasePrice(int purchaseCount) {

@@ -21,11 +21,15 @@ public enum LottoRank {
 
 	public static LottoRank findRank(int count, boolean bonusNumber) {
 		for (LottoRank rank : LottoRank.values()) {
-			if (rank.getMatchCount() == count && rank.isHasBonusNumber() == bonusNumber) {
+			if (rank.getMatchCount() == count && rank.hasBonusNumber() == bonusNumber) {
 				return rank;
 			}
 		}
 		return FAIL;
+	}
+
+	public boolean hasBonusNumber() {
+		return hasBonusNumber;
 	}
 
 	public long getAmount() {
@@ -34,9 +38,5 @@ public enum LottoRank {
 
 	public int getMatchCount() {
 		return matchCount;
-	}
-
-	public boolean isHasBonusNumber() {
-		return hasBonusNumber;
 	}
 }
