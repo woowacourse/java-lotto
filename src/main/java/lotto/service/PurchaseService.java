@@ -33,7 +33,7 @@ public class PurchaseService {
     }
 
     private int createPurchasableCount(Money money) {
-        return money.divide(Money.wons(LottoTicket.PRICE)).getAmount();
+        return money.divide(Money.from(LottoTicket.PRICE)).getAmount();
     }
 
     private List<LottoTicket> createTickets(NumberGenerator generator, int ticketCount) {

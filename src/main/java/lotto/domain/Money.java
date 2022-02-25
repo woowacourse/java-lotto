@@ -11,7 +11,7 @@ public class Money {
         this.amount = amount;
     }
 
-    public static Money wons(int amount) {
+    public static Money from(int amount) {
         return new Money(amount);
     }
 
@@ -22,7 +22,7 @@ public class Money {
     }
 
     public Money divide(Money other) {
-        return Money.wons(this.amount / other.amount);
+        return Money.from(this.amount / other.amount);
     }
 
     public boolean isGreatThanOrEqualTo(Money other) {

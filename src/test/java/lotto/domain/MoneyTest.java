@@ -41,8 +41,8 @@ class MoneyTest {
     @DisplayName("대소를 비교할 수 있다.")
     public void compareGreaterThanOrEqualToMoney() {
         // given
-        Money aMoney = Money.wons(100);
-        Money bMoney = Money.wons(101);
+        Money aMoney = Money.from(100);
+        Money bMoney = Money.from(101);
         // when
         boolean compare = bMoney.isGreatThanOrEqualTo(aMoney);
         // then
