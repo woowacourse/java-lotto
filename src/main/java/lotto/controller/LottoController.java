@@ -14,24 +14,24 @@ import lotto.view.OutputView;
 
 public class LottoController {
 
+    private Money money;
+    private Lottos lottos;
+    private Lotto lastWeekWinningLotto;
+    private Number bonusNumber;
+
+
     public void play() {
-        Money money = getBuyMoney();
-        Lottos lottos = buyLottos(money);
-        Lotto lastWeekWinningLotto = getLastWeekWinningLotto();
-        Number bonusNumber = getBonusNumber(lastWeekWinningLotto);
-        Result result = getResult(lottos, lastWeekWinningLotto, bonusNumber);
-        getRateofProfit(money, result);
+        requestMoney();
+        buyLottos();
+        requestLastWeekWinningLotto();
+        checkTheLottoResult();
     }
 
-    private Money getBuyMoney() {
-        Money money;
-
+    private void requestMoney() {
         do {
             String input = InputView.inputMoney();
             money = toMoney(input);
         } while (money == null);
-
-        return money;
     }
 
     private Money toMoney(String input) {
@@ -46,22 +46,18 @@ public class LottoController {
         return money;
     }
 
-    private Lottos buyLottos(Money money) {
-        Lottos lottos = new Lottos(money);
+    private void buyLottos() {
+        lottos = new Lottos(money);
         OutputView.printLottoCount(lottos.getCount());
         OutputView.printLottos(lottos);
-        return lottos;
     }
 
-    private Lotto getLastWeekWinningLotto() {
-        Lotto lotto;
-
+    private void requestLastWeekWinningLotto() {
         do {
             String input = InputView.inputLastWeekWinningNumbers();
-            lotto = toLotto(input.split(", "));
-        } while (lotto == null);
-
-        return lotto;
+            lastWeekWinningLotto = toLotto(input.split(", "));
+            requestBonusNumber();
+        } while (lastWeekWinningLotto == null);
     }
 
     private Lotto toLotto(String[] splitInput) {
@@ -84,15 +80,11 @@ public class LottoController {
             .collect(Collectors.toList());
     }
 
-    private Number getBonusNumber(Lotto lotto) {
-        Number number;
-
+    private void requestBonusNumber() {
         do {
             String input = InputView.inputBonusNumber();
-            number = toNumber(input, lotto);
-        } while (number == null);
-
-        return number;
+            bonusNumber = toNumber(input, lastWeekWinningLotto);
+        } while (bonusNumber == null);
     }
 
     private Number toNumber(String input, Lotto lotto) {
@@ -113,14 +105,9 @@ public class LottoController {
         }
     }
 
-    private Result getResult(Lottos lottos, Lotto lastWeekWinningNumbers, Number bonusNumber) {
-        Result result = lottos.getResult(lastWeekWinningNumbers, bonusNumber);
+    private void checkTheLottoResult() {
+        Result result = lottos.getResult(lastWeekWinningLotto, bonusNumber);
         OutputView.printResult(result);
-        return result;
-    }
-
-    private void getRateofProfit(Money money, Result result) {
-        double rateOfProfit = result.getRateOfProfit(money);
-        OutputView.printRateOfProfit(rateOfProfit);
+        OutputView.printRateOfProfit(result.getRateOfProfit(money));
     }
 }
