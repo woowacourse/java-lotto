@@ -26,13 +26,13 @@ public class LottoTickets {
 		return new ArrayList<>(this.lottoTickets);
 	}
 
-	private static void validateDivisibleByThousand(int price) {
+	private void validateDivisibleByThousand(int price) {
 		if (price % UNIT_PRICE != 0) {
 			throw new IllegalArgumentException(ERROR_NOT_DIVISIBLE_BY_UNIT_PRICE);
 		}
 	}
 
-	private static void validatePositive(int price) {
+	private void validatePositive(int price) {
 		if (price == 0) {
 			throw new IllegalArgumentException(ERROR_NOT_POSITIVE);
 		}
