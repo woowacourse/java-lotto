@@ -8,10 +8,6 @@ public class WinningCount {
 
     private final int count;
 
-    public int getCount() {
-        return count;
-    }
-
     public WinningCount(int count) {
         validate(count);
         this.count = count;
@@ -21,6 +17,10 @@ public class WinningCount {
         if (count < MINIMUM_WINNING_COUNT) {
             throw new IllegalArgumentException(ERROR_MESSAGE_FOR_MINUS_WINNING_COUNT);
         }
+    }
+
+    public int getCount() {
+        return count;
     }
 
     @Override
