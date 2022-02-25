@@ -1,39 +1,33 @@
 package controller;
 
+import static util.LottoResultHandler.getLottoResultDto;
+
 import domain.Lotto;
 import domain.LottoNumber;
 import domain.Lottos;
-import domain.Rank;
 import domain.WinningLotto;
-import domain.strategy.LottoNumberGenerateStrategy;
-import domain.strategy.RandomLottoNumberGenerateStrategy;
-import dto.LottoResultDto;
 import factory.LottoFactory;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import repository.LottoNumberRepository;
 import view.InputView;
 import view.ResultView;
 import vo.InputMoney;
-import vo.TrialNumber;
-import vo.WinningCount;
+import vo.NumberOfLottos;
 
 public class LottoController {
-    private static final int LOTTO_PRICE = 1000;
-    private static final LottoNumberGenerateStrategy lottoNumberGenerator = new RandomLottoNumberGenerateStrategy();
+    public static final int LOTTO_PRICE = 1000;
 
     public void start() {
         InputMoney inputmoney = getInputMoney();
-        TrialNumber trialNumber = getTrialNumberByInputMoney(inputmoney);
-        InputView.printTrialNumber(trialNumber.getTrialNumber());
+        NumberOfLottos numberOfLottos = getNumberOfLottosByInputMoney(inputmoney);
+        InputView.printTrialNumber(numberOfLottos.getNumberOfLottos());
 
-        Lottos autoLottos = LottoFactory.createAutoLottosByQuantity(trialNumber.getTrialNumber());
+        Lottos autoLottos = LottoFactory.createAutoLottosByQuantity(numberOfLottos.getNumberOfLottos());
         InputView.printLottos(autoLottos);
 
         WinningLotto winningLotto = setupWinningLotto();
-        Map<Rank, WinningCount> map = autoLottos.getResultByWinningLotto(winningLotto);
-        ResultView.printResult(LottoResultDto.from(map, trialNumber));
+        ResultView.printResult(getLottoResultDto(winningLotto, autoLottos));
     }
 
     private InputMoney getInputMoney() {
@@ -45,8 +39,8 @@ public class LottoController {
         }
     }
 
-    private TrialNumber getTrialNumberByInputMoney(InputMoney inputMoney) {
-        return new TrialNumber(inputMoney.getMoney() / LOTTO_PRICE);
+    private NumberOfLottos getNumberOfLottosByInputMoney(InputMoney inputMoney) {
+        return new NumberOfLottos(inputMoney.getMoney() / LOTTO_PRICE);
     }
 
     private WinningLotto setupWinningLotto() {

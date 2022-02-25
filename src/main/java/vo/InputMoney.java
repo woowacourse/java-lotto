@@ -1,8 +1,8 @@
 package vo;
 
+import static controller.LottoController.LOTTO_PRICE;
+
 public class InputMoney {
-    private static final int MINIMUM_MONEY = 1000;
-    private static final int INPUT_MONEY_UNIT = 1000;
     private static final int REMAIN = 0;
     private static final String ERROR_MESSAGE_FOR_INVALID_INPUT_MONEY = "금액은 1000원 이상, 1000원 단위로 입력해주세요";
 
@@ -20,7 +20,7 @@ public class InputMoney {
     }
 
     private boolean isInvalidInputMoney(int money) {
-        return money < MINIMUM_MONEY || money % INPUT_MONEY_UNIT != REMAIN;
+        return money < LOTTO_PRICE || money % LOTTO_PRICE != REMAIN;
     }
 
     public int getMoney() {
