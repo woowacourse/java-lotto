@@ -32,11 +32,12 @@ public class LottoFactory {
     }
 
     private static Lotto createSingleAutoLotto() {
-        Collections.shuffle(lottoNumbers);
         return new Lotto(getLottoNumbers());
     }
 
     private static List<LottoNumber> getLottoNumbers() {
+        Collections.shuffle(lottoNumbers);
+
         return lottoNumbers.stream()
                 .limit(6)
                 .sorted()
