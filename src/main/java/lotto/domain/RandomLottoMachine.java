@@ -21,7 +21,7 @@ public class RandomLottoMachine {
 
     public static List<LottoNumber> createRandomLottoNumbers() {
         Collections.shuffle(LOTTO_NUMBERS);
-        return IntStream.rangeClosed(0, 5)
+        return IntStream.range(0, Lotto.LOTTO_NUMBER_SIZE_STANDARD)
                 .boxed()
                 .map(LOTTO_NUMBERS::get)
                 .sorted()

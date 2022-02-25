@@ -7,7 +7,7 @@ public class Lotto {
 
     public static final int LOTTO_PURCHASE_MONEY = 1000;
 
-    private static final int LOTTO_NUMBER_SIZE_STANDARD = 6;
+    public static final int LOTTO_NUMBER_SIZE_STANDARD = 6;
 
     private final List<LottoNumber> lottoNumbers;
 
