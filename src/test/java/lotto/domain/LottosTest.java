@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -36,7 +37,7 @@ public class LottosTest {
             new Lotto(givenNumbers(1, 2, 3, 4, 5, 6)),
             new Lotto(givenNumbers(1, 2, 3, 4, 5, 7)),
             new Lotto(givenNumbers(1, 2, 3, 4, 5, 8)),
-            new Lotto(givenNumbers(1, 2, 3, 7, 9, 10)),
+            new Lotto(givenNumbers(1, 2, 3, 4, 9, 10)),
             new Lotto(givenNumbers(1, 2, 3, 9, 10, 11)),
             new Lotto(givenNumbers(11, 12, 13, 14, 15, 16)))
         );
@@ -44,6 +45,18 @@ public class LottosTest {
         List<Rank> ranks = lottos.match(new WinnerLotto(LOTTO, new Number(7)));
 
         assertThat(ranks).containsExactly(Rank.FIRST, Rank.SECOND, Rank.THIRD, Rank.FOURTH, Rank.FIFTH, Rank.NONE);
+    }
+
+    @Test
+    @DisplayName("외부에서 생성된 로또가 변경되어도 생성된 로또에 영향을 주지 않는다.")
+    void immutabilityLottos() {
+        List<Lotto> lottos = new ArrayList<>();
+        lottos.add(LOTTO);
+
+        Lottos newLottos = new Lottos(lottos);
+        lottos.add(LOTTO);
+
+        assertThat(newLottos.getLottos()).hasSize(1);
     }
 
     @Test

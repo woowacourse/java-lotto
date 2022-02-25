@@ -20,8 +20,8 @@ public class LottoMachine {
         return new Lotto(shuffleNumbers().subList(START_INCLUSIVE, END_EXCLUSIVE));
     }
 
-    private static ArrayList<Number> shuffleNumbers() {
-        ArrayList<Number> numbers = new ArrayList<>(LottoMachine.NUMBERS);
+    private static List<Number> shuffleNumbers() {
+        List<Number> numbers = new ArrayList<>(LottoMachine.NUMBERS);
         Collections.shuffle(numbers);
         return numbers;
     }

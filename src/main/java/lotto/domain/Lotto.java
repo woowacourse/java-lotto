@@ -14,7 +14,7 @@ public class Lotto {
     public Lotto(List<Number> numbers) {
         validateSize(numbers);
         validateDuplicateNumbers(numbers);
-        this.numbers = numbers;
+        this.numbers = new ArrayList<>(numbers);
     }
 
     public int countMatchNumbers(Lotto lotto) {
