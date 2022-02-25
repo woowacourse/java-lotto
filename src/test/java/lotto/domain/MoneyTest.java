@@ -14,7 +14,7 @@ public class MoneyTest {
         Money money = new Money(14000);
 
         // when
-        int count = money.calculate();
+        int count = money.calculateTicketCount();
 
         // then
         assertThat(count).isEqualTo(14);
@@ -36,7 +36,7 @@ public class MoneyTest {
         Money money = new Money(14500);
 
         // when
-        int count = money.calculate();
+        int count = money.calculateTicketCount();
 
         // then
         assertThat(count).isEqualTo(14);

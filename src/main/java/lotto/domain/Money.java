@@ -18,7 +18,7 @@ public class Money {
         }
     }
 
-    public int calculate() {
+    public int calculateTicketCount() {
         return price / PRICE_CRITERION;
     }
 

@@ -42,7 +42,7 @@ public class LottoController {
     private LottoTickets createLottoTickets(Money money) {
         LottoTickets lottoTickets = new LottoMachine().purchase(money);
 
-        outputView.printTotalCount(money.calculate());
+        outputView.printTotalCount(money.calculateTicketCount());
         outputView.printLottoTicketsInfo(new LottoTicketsDto(lottoTickets));
 
         return lottoTickets;
