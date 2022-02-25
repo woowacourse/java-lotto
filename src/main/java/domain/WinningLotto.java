@@ -20,17 +20,10 @@ public class WinningLotto {
     }
 
     public Rank getRankByLotto(Lotto otherLotto) {
-        int sameNumberCount = lotto.getSameNumberCount(otherLotto);
+        long sameNumberCount = lotto.getSameNumberCount(otherLotto);
+        boolean containsBonusNumber = otherLotto.containsLottoNumber(bonusNumber);
 
-        if (sameNumberCount == 5 && otherLotto.containsLottoNumber(bonusNumber)) {
-            return Rank.SECOND;
-        }
-
-        if (sameNumberCount == 5 && !otherLotto.containsLottoNumber(bonusNumber)) {
-            return Rank.THIRD;
-        }
-
-        return Rank.of(sameNumberCount);
+        return Rank.of(sameNumberCount, containsBonusNumber);
     }
 
     @Override
