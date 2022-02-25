@@ -40,7 +40,7 @@ public class LottoMachine {
 	private Lotto createAutoLotto() {
 		Collections.shuffle(LOTTO_BUCKET);
 		return new Lotto(LOTTO_BUCKET.stream()
-			.limit(6)
+			.limit(Lotto.LOTTO_SIZE)
 			.sorted()
 			.collect(Collectors.toUnmodifiableList()));
 	}
