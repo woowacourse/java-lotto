@@ -22,8 +22,7 @@ public class LottoController {
         List<Rank> ranks = lottos.match(createWinnerLotto(winnerNumbers(), bonusNumber()));
         OutputView.printRanks(ranks);
 
-        Rate rate = calculateRate(inputMoney, ranks);
-        OutputView.printRate(rate);
+        OutputView.printRate(Rank.calculateReward(ranks).divide(inputMoney));
     }
 
     private List<Lotto> buyLottos(Money money) {
@@ -41,11 +40,6 @@ public class LottoController {
 
     private Number bonusNumber() {
         return InputView.inputBonusNumber();
-    }
-
-    private Rate calculateRate(Money money, List<Rank> ranks) {
-        Money reward = Rank.calculateReward(ranks);
-        return new Rate(reward.divide(money));
     }
 
 }

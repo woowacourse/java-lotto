@@ -1,6 +1,7 @@
 package lotto.view;
 
 import java.io.PrintStream;
+import java.math.BigDecimal;
 import java.text.MessageFormat;
 import java.util.Comparator;
 import java.util.List;
@@ -8,7 +9,6 @@ import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.vo.Number;
 import lotto.domain.Rank;
-import lotto.controller.Rate;
 
 public class OutputView {
 
@@ -28,8 +28,8 @@ public class OutputView {
         }
     }
 
-    public static void printRate(Rate rate) {
-        System.out.println(MessageFormat.format("총 수익률은 {0}입니다.", rate.getRate().toString()));
+    public static void printRate(BigDecimal rate) {
+        System.out.println(MessageFormat.format("총 수익률은 {0}입니다.", rate.toString()));
     }
 
     private static void printLottosSize(List<Lotto> lottos) {
