@@ -11,6 +11,8 @@ import lotto.model.utils.NumberGenerator;
 public class LottoTicket {
 
     private static final int COUNT = 6;
+    public static final String LOTTO_NUMBER_NOT_DUPLICATED_MESSAGE = "로또 번호는 중복될 수 없습니다.";
+    public static final String LOTTO_NUMBER_COUNT_MESSAGE = "로또 번호의 개수는 %d 이어야 합니다.";
 
     private final List<LottoNumber> numbers;
 
@@ -36,7 +38,7 @@ public class LottoTicket {
 
     private void validateDistinct(List<LottoNumber> numbers) {
         if (!isDistinct(numbers)) {
-            throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
+            throw new IllegalArgumentException(LOTTO_NUMBER_NOT_DUPLICATED_MESSAGE);
         }
     }
 
@@ -46,7 +48,7 @@ public class LottoTicket {
 
     private void validateLength(List<LottoNumber> numbers) {
         if (numbers.size() != COUNT) {
-            throw new IllegalArgumentException(String.format("로또 번호의 개수는 %d 이어야 합니다.", COUNT));
+            throw new IllegalArgumentException(String.format(LOTTO_NUMBER_COUNT_MESSAGE, COUNT));
         }
     }
 

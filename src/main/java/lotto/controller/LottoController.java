@@ -1,6 +1,8 @@
 package lotto.controller;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 import lotto.model.money.Money;
 import lotto.model.result.LottoRanks;
@@ -28,12 +30,13 @@ public class LottoController {
     }
 
     private WinningTicket makeWinningTicket() {
-        int[] winningNumbers = InputView.requestWinningNumber();
+        List<Integer> winningNumbers = InputView.requestWinningNumber();
         int bonusBall = InputView.requestBonusBall();
 
         return new WinningTicket(
-                new LottoTicket(Arrays.stream(winningNumbers)
-                        .mapToObj(LottoNumber::from)
+                new LottoTicket(winningNumbers
+                        .stream()
+                        .map(LottoNumber::from)
                         .collect(Collectors.toList())),
                 new LottoNumber(bonusBall));
     }

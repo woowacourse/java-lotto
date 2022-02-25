@@ -5,6 +5,7 @@ import lotto.model.result.LottoRank;
 
 public class WinningTicket {
 
+    public static final String LOTTO_NUMBER_DUPLICATED_WITH_BONUS_BALL_MESSAGE = "[ERROR] 보너스 볼은 당첨 번호와 중복되어서는 안됩니다";
     private LottoTicket winningTicket;
     private LottoNumber bonusBall;
 
@@ -16,7 +17,7 @@ public class WinningTicket {
 
     private void validateDuplicated(LottoTicket lottoTicket, LottoNumber bonusBall) {
         if (lottoTicket.containsNumber(bonusBall)) {
-            throw new IllegalArgumentException("[ERROR] 보너스 볼은 당첨 번호와 중복되어서는 안됩니다");
+            throw new IllegalArgumentException(LOTTO_NUMBER_DUPLICATED_WITH_BONUS_BALL_MESSAGE);
         }
     }
 

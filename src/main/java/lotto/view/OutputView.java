@@ -10,12 +10,18 @@ import lotto.model.ticket.number.LottoNumber;
 
 public class OutputView {
 
+    public static final String BUY_COUNT_MESSAGE = "%d개를 구매했습니다.\n";
+    public static final String MATCH_COUNT_MESSAGE = "%d개 일치 (%d원)- %d개%n";
+    public static final String EARNING_RATE_MESSAGE = "총 수익률은 %.2f입니다.";
+    public static final String OUTPUT_TITLE = "당첨 통계";
+    public static final String OUTPUT_LINE = "---------";
+
     //인스턴스화 방지
     private OutputView() {
     }
 
     public static void outputTickets(LottoTickets lottoTickets) {
-        System.out.printf("%d개를 구매했습니다.%n", lottoTickets.size());
+        System.out.printf(BUY_COUNT_MESSAGE, lottoTickets.size());
         List<LottoTicket> tickets = lottoTickets.getTickets();
         for (LottoTicket ticket : tickets) {
             outputTicket(ticket);
@@ -34,14 +40,14 @@ public class OutputView {
     }
 
     private static void outputConsoleFormat() {
-        System.out.println("당첨 통계");
-        System.out.println("---------");
+        System.out.println(OUTPUT_TITLE);
+        System.out.println(OUTPUT_LINE);
     }
 
     private static void outputStatisticsResult(LottoStatistics lottoStatistics, Money money) {
         for (LottoRank value : LottoRank.values()) {
-            System.out.printf("%d개 일치 (%d원)- %d개%n", value.getMatchCount(), value.getPrize(), lottoStatistics.count(value));
+            System.out.printf(MATCH_COUNT_MESSAGE, value.getMatchCount(), value.getPrize(), lottoStatistics.count(value));
         }
-        System.out.printf("총 수익률은 %.2f입니다.", lottoStatistics.calculateEarningRates(money));
+        System.out.printf(EARNING_RATE_MESSAGE, lottoStatistics.calculateEarningRates(money));
     }
 }
