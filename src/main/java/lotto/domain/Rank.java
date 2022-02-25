@@ -8,11 +8,11 @@ import java.util.function.BiPredicate;
 
 public enum Rank {
 
-    FIRST(2000000000, 6, (hitCounts, bonus) -> hitCounts == 6),
-    SECOND(30000000, 5, (hitCounts, bonus) -> hitCounts == 5 && bonus),
-    THIRD(1500000, 5, (hitCounts, bonus) -> hitCounts == 5 && !bonus),
-    FOURTH(50000, 4, (hitCounts, bonus) -> hitCounts == 4),
-    FIFTH(5000, 3, (hitCounts, bonus) -> hitCounts == 3),
+    FIRST(2_000_000_000, 6, (hitCounts, bonus) -> hitCounts == 6),
+    SECOND(30_000_000, 5, (hitCounts, bonus) -> hitCounts == 5 && bonus),
+    THIRD(1_500_000, 5, (hitCounts, bonus) -> hitCounts == 5 && !bonus),
+    FOURTH(50_000, 4, (hitCounts, bonus) -> hitCounts == 4),
+    FIFTH(5_000, 3, (hitCounts, bonus) -> hitCounts == 3),
     NOT_THING(0, 0, (hitCounts, bonus) -> hitCounts < 3 && hitCounts >= 0),
     ;
 
