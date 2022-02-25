@@ -23,13 +23,6 @@ public class LottoNumber {
         }
     }
 
-    public int checkHit(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.contains(this)) {
-            return 1;
-        }
-        return 0;
-    }
-
     public int getNumber() {
         return this.number;
     }

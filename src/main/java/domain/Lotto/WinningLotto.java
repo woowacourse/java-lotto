@@ -1,20 +1,27 @@
 package domain.Lotto;
 
-import domain.Lotto.Lotto;
-import domain.Lotto.LottoNumber;
 import utils.ExceptionMessage;
 
 import java.util.List;
 
 public class WinningLotto {
 
-    private Lotto winningLotto;
-    private LottoNumber bonusBall;
+    private final Lotto winningLotto;
+    private final LottoNumber bonusBall;
 
     public WinningLotto(Lotto winningLotto, LottoNumber bonusBallNumber) {
         validateDuplicate(winningLotto.getLotto(), bonusBallNumber);
         this.winningLotto = winningLotto;
         bonusBall = bonusBallNumber;
+    }
+
+    public boolean isContainLottoNumber(LottoNumber lottoNumber) {
+        List<LottoNumber> winningLottoNumbers = winningLotto.getLotto();
+        return winningLottoNumbers.contains(lottoNumber);
+    }
+
+    public boolean isContainBonusBall(List<LottoNumber> lottoNumbers) {
+        return lottoNumbers.contains(bonusBall);
     }
 
     public void validateDuplicate(List<LottoNumber> numbers, LottoNumber bonusBallNumber) {

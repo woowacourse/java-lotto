@@ -25,17 +25,12 @@ public class Lotto {
     }
 
     public Result judge(WinningLotto winningLotto) {
-        List<LottoNumber> winningNumbers = winningLotto.getWinningLotto();
-        int hitCount = 0;
-        for (LottoNumber lottoNumber : lotto) {
-            hitCount += lottoNumber.checkHit(winningNumbers);
-        }
-        boolean isHitBonusBall = judgeBonusBall(winningLotto.getBonusBall());
-        return new Result(hitCount, isHitBonusBall);
-    }
+        int hitCount = (int) lotto.stream()
+                .filter(winningLotto::isContainLottoNumber)
+                .count();
 
-    private boolean judgeBonusBall(LottoNumber bonusBall) {
-        return lotto.contains(bonusBall);
+        boolean isHitBonusBall = winningLotto.isContainBonusBall(lotto);
+        return new Result(hitCount, isHitBonusBall);
     }
 
     public List<LottoNumber> getLotto() {
