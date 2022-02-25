@@ -13,11 +13,20 @@ public class Controller {
 
     public void run() {
         Money money = getMoney();
+        Lottos lottos = buyLottos(money);
+        WinningLotto winningLotto = getWinningLotto();
+        BonusNumber bonusNumber = getBonusNumber(winningLotto);
+        getWinningStatistic(money, lottos, winningLotto, bonusNumber);
+    }
+
+    private Lottos buyLottos(Money money) {
         Lottos lottos = Lottos.buyLottosByAuto(money);
         OutputView.printLottos(lottos);
         OutputView.printNewLine();
-        WinningLotto winningLotto = getWinningLotto();
-        BonusNumber bonusNumber = getBonusNumber(winningLotto);
+        return lottos;
+    }
+
+    private void getWinningStatistic(Money money, Lottos lottos, WinningLotto winningLotto, BonusNumber bonusNumber) {
         OutputView.printNewLine();
         RankCount rankCount = new RankCount(lottos, winningLotto, bonusNumber);
         ProfitRate profitRate = new ProfitRate(rankCount.getTotalPrize(), money);
