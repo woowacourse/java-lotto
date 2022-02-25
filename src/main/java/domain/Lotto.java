@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -10,16 +11,18 @@ public class Lotto {
 
     private static final String DELIMITER = ", ";
 
-    private final List<Integer> lottoNumbers;
+    private final List<Integer> lottoNumbers = new ArrayList<>();
 
     public Lotto(List<Integer> lottoNumbers) {
-        validateLottoNumbers(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+        for (Integer lottoNumber : lottoNumbers) {
+            validateLottoNumbers(lottoNumber);
+            this.lottoNumbers.add(lottoNumber);
+        }
     }
 
-    private void validateLottoNumbers(List<Integer> lottoNumbers) {
-        lottoNumbers.forEach(this::validateNumberRange);
-        lottoNumbers.forEach(this::validateDuplicatedNumber);
+    private void validateLottoNumbers(Integer number) {
+        validateNumberRange(number);
+        validateDuplicatedNumber(number);
     }
 
     private void validateNumberRange(Integer lottoNumber) {
