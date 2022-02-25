@@ -2,8 +2,8 @@ package lotto.client;
 
 public class ConsoleOutputClient implements OutputClient {
 
-	@Override
-	public void output(String message) {
-		System.out.print(message);
-	}
+    @Override
+    public void output(String message) {
+        System.out.print(message);
+    }
 }
