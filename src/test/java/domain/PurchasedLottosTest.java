@@ -10,7 +10,6 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-@DisplayName("상금과 수익률을 올바르게 계산하는지 테스트한다.")
 public class PurchasedLottosTest {
 
     PurchasedLotto lottos;
