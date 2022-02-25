@@ -19,8 +19,12 @@ public class Input {
         return input();
     }
 
-    public static String inputBonusBall() {
-        return input();
+    public static int inputBonusBall(final Entering entering) {
+        String bonusBall = entering.enter();
+        if (isBlank(bonusBall) || !isNumber(bonusBall)) {
+            throw new IllegalArgumentException(ERROR_ONLY_NUMBER);
+        }
+        return Integer.parseInt(bonusBall);
     }
 
     private static String input() {

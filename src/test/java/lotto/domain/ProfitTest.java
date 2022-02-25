@@ -13,13 +13,13 @@ public class ProfitTest {
 
     @BeforeEach
     void init() {
-        Lotto lotto1 = new Lotto(Arrays.asList("1", "2", "3", "4", "5", "6"));
-        Lotto lotto2 = new Lotto(Arrays.asList("2", "3", "4", "5", "6", "7"));
-        Lotto lotto3 = new Lotto(Arrays.asList("3", "4", "5", "6", "7", "8"));
+        Lotto lotto1 = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto lotto2 = new Lotto(Arrays.asList(2, 3, 4, 5, 6, 7));
+        Lotto lotto3 = new Lotto(Arrays.asList(3, 4, 5, 6, 7, 8));
         Lottos lottos = new Lottos(Arrays.asList(lotto1, lotto2, lotto3));
 
-        Lotto winLotto = new Lotto(Arrays.asList("1", "2", "3", "4", "5", "6"));
-        Ball bonusBall = new Ball("7");
+        Lotto winLotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Ball bonusBall = new Ball(7);
         WinningLotto winningLotto = new WinningLotto(winLotto, bonusBall);
 
         lottoResult.match(lottos, winningLotto);

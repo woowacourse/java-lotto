@@ -59,8 +59,9 @@ public class LottoController {
 
     private static Lotto createWinNumber() {
         try {
-            List<String> numbers = Arrays.stream(inputWinNumber().split(DELIMITER))
+            List<Integer> numbers = Arrays.stream(inputWinNumber().split(DELIMITER))
                     .map(String::trim)
+                    .map(Integer::parseInt)
                     .collect(Collectors.toList());
             return new Lotto(numbers);
         } catch (IllegalArgumentException error) {
@@ -71,7 +72,7 @@ public class LottoController {
 
     private static WinningLotto createWinningLotto(Lotto winLotto) {
         try {
-            Ball bonusBall = new Ball(inputBonusBall());
+            Ball bonusBall = new Ball(inputBonusBall(entering));
             return new WinningLotto(winLotto, bonusBall);
         } catch (IllegalArgumentException error) {
             printErrorMessage(error.getMessage());
