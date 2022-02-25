@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
-@DisplayName("옳바르지 않은 입력값이 들어올시 예외를 발생시킨다.")
+@DisplayName("올바르지 않은 입력값이 들어올 시 예외를 발생시킨다.")
 public class InputValidationTest {
 
     @Nested

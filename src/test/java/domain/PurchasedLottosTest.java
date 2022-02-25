@@ -10,7 +10,7 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-@DisplayName("상금과 수익률을 옳바르게 계산하는지 테스트한다.")
+@DisplayName("상금과 수익률을 올바르게 계산하는지 테스트한다.")
 public class PurchasedLottosTest {
 
     PurchasedLotto lottos;
@@ -33,7 +33,7 @@ public class PurchasedLottosTest {
     }
 
     @Test
-    @DisplayName("옳바른 상금이 계산된다.")
+    @DisplayName("올바른 상금이 계산된다.")
     void lottos_makeRightTotalPrize() {
         PrizeResult finalResult = lottos.calculatePrizeResult(winningLotto);
 
@@ -41,8 +41,8 @@ public class PurchasedLottosTest {
     }
 
     @Test
-    @DisplayName("옳바른 수익률이 계산된다.")
-    void lottos_calulateEarningRate() {
+    @DisplayName("올바른 수익률이 계산된다.")
+    void lottos_calculateEarningRate() {
         lottos.calculatePrizeResult(winningLotto);
 
         int prize = 2001555000;

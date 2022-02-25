@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 
 public class InputValidation {
 
-    private static final int LOTTO_MINIMUN_NUMBER = 1;
-    private static final int LOTTO_MAXIMUN_NUMBER = 45;
+    private static final int LOTTO_MINIMUM_NUMBER = 1;
+    private static final int LOTTO_MAXIMUM_NUMBER = 45;
     private static final int LOTTO_SIZE = 6;
     private static final int LOTTO_PRICE = 1000;
     private static final String LOTTO_NUMBER_DELIMITER = ", ";
@@ -27,10 +27,10 @@ public class InputValidation {
     }
 
     public static List<Integer> validateWinningNumber(final String inputNumbers) {
-        final List<String> splitedNumbers = Arrays.asList(inputNumbers.split(LOTTO_NUMBER_DELIMITER));
-        checkNumOfNumbers(splitedNumbers);
+        final List<String> splitNumbers = Arrays.asList(inputNumbers.split(LOTTO_NUMBER_DELIMITER));
+        checkNumOfNumbers(splitNumbers);
 
-        final List<Integer> numbers = checkNonIntegers(splitedNumbers);
+        final List<Integer> numbers = checkNonIntegers(splitNumbers);
         checkNumbersRange(numbers);
         checkDuplicateNumber(numbers);
 
@@ -69,7 +69,7 @@ public class InputValidation {
     }
 
     private static void checkNumberRange(final int number) {
-        if (!(number >= LOTTO_MINIMUN_NUMBER && number <= LOTTO_MAXIMUN_NUMBER)) {
+        if (!(number >= LOTTO_MINIMUM_NUMBER && number <= LOTTO_MAXIMUM_NUMBER)) {
             throw new IllegalArgumentException(ERROR_NUMBER_OUT_RANGE);
         }
     }
