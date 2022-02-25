@@ -74,49 +74,31 @@ public class LottoService {
     }
 
     private SortedMap<RankPrice, Integer> extractRankCount(final List<Lotto> issuedLotto) {
-        final List<MatchedCount> matchedCountsOfIssuedLottos = new ArrayList<>();
+        SortedMap<RankPrice, Integer> rankCount = new TreeMap<>(Collections.reverseOrder());
+        initRank(rankCount);
+
         for (Lotto lotto : issuedLotto) {
-            matchedCountsOfIssuedLottos.add(getMatchedCount(lotto));
+            final MatchedCount matchedCount = getMatchedCount(lotto);
+
+            if (matchedCount.isInRank()) {
+                boolean isBonusMatched = false;
+                if (lotto.isContainNumber(bonusNumber)) {
+                    isBonusMatched = true;
+                }
+                final RankPrice rankPrice = matchedCount.findRankPrice(isBonusMatched);
+                rankCount.put(rankPrice, rankCount.get(rankPrice) + RANK_COUNT_UNIT);
+            }
         }
-        return processRankCount(matchedCountsOfIssuedLottos);
+        return rankCount;
     }
 
     private MatchedCount getMatchedCount(final Lotto lotto) {
-        MatchedCount matchedCount = new MatchedCount(lotto.compare(this.lastWinLotto));
-        if (isSecondRank(lotto, matchedCount)) {
-            matchedCount = matchedCount.convertToSecondRankCount();
-        }
-        return matchedCount;
-    }
-
-    private boolean isSecondRank(final Lotto lotto, final MatchedCount matchedCount) {
-        return matchedCount.isThirdRankCount() && lotto.isContainNumber(bonusNumber);
-    }
-
-    private SortedMap<RankPrice, Integer> processRankCount(final List<MatchedCount> matchedCountsOfIssuedLottos) {
-        SortedMap<RankPrice, Integer> rankCount = new TreeMap<>(Collections.reverseOrder());
-        initRank(rankCount);
-        countRank(rankCount, matchedCountsOfIssuedLottos);
-        return rankCount;
+        return new MatchedCount(lotto.compare(this.lastWinLotto));
     }
 
     private void initRank(final SortedMap<RankPrice, Integer> rankCount) {
         Arrays.stream(RankPrice.values())
             .forEach(e -> rankCount.put(e, RANK_COUNT_INIT_NUMBER));
-    }
-
-    private void countRank(final SortedMap<RankPrice, Integer> rankCount,
-                           final List<MatchedCount> matchedCountsOfIssuedLottos) {
-        for (MatchedCount matchedCount : matchedCountsOfIssuedLottos) {
-            countOverFifthRank(rankCount, matchedCount);
-        }
-    }
-
-    private void countOverFifthRank(final SortedMap<RankPrice, Integer> rankCount, final MatchedCount matchedCount) {
-        if (matchedCount.isInRank()) {
-            final RankPrice rankPrice = matchedCount.findRankPrice();
-            rankCount.put(rankPrice, rankCount.get(rankPrice) + RANK_COUNT_UNIT);
-        }
     }
 
     public double calculateProfit(final SortedMap<RankPrice, Integer> rankCounts) {

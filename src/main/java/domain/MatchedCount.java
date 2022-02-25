@@ -10,19 +10,11 @@ public class MatchedCount {
         this.count = count;
     }
 
-    public boolean isThirdRankCount() {
-        return this.count == RankPrice.THIRD.getCount();
-    }
-
-    public MatchedCount convertToSecondRankCount() {
-        return new MatchedCount(this.count + SECOND_RANK_UNIT);
-    }
-
     public boolean isInRank() {
         return this.count >= RankPrice.FIFTH.getCount();
     }
 
-    public RankPrice findRankPrice() {
-        return RankPrice.findByCount(this.count);
+    public RankPrice findRankPrice(final boolean isBonusMatched) {
+        return RankPrice.findByCount(this.count, isBonusMatched);
     }
 }
