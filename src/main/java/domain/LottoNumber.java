@@ -35,6 +35,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
 		return LOTTO_NUMBERS.get(number);
 	}
 
+	public static List<LottoNumber> ofList() {
+		return new ArrayList<>(LOTTO_NUMBERS.values());
+	}
+
 	private static void checkRange(int lottoNumber) {
 		if (lottoNumber < MIN_BOUND || lottoNumber > MAX_BOUND) {
 			throw new IllegalArgumentException("로또 범위를 벗어난 숫자입니다.");
@@ -43,10 +47,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
 	public int getLottoNumber() {
 		return lottoNumber;
-	}
-
-	public static List<LottoNumber> ofList() {
-		return new ArrayList<>(LOTTO_NUMBERS.values());
 	}
 
 	@Override

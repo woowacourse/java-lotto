@@ -23,7 +23,7 @@ public class LottoResult {
 	}
 
 	private int calculateRankProfit(Rank rank, int count) {
-		return rank.getMoney() * count;
+		return rank.calculateMoney(count);
 	}
 
 	public Map<Rank, Integer> getRanks() {

@@ -42,6 +42,10 @@ public enum Rank {
 		return this.equals(NOTHING);
 	}
 
+	public int calculateMoney(int count) {
+		return this.money * count;
+	}
+
 	public boolean isBonus() {
 		return this.bonus;
 	}
