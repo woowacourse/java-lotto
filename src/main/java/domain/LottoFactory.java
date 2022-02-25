@@ -74,7 +74,7 @@ public class LottoFactory {
     }
 
     private WinCount getWinCount(final Lotto lotto) {
-        WinCount winCount = new WinCount(lotto.compare(this.lastWinLotto));
+        WinCount winCount = new WinCount(lotto.compare(this.lastWinLotto), false);
         if (isSecondRank(lotto, winCount)) {
             winCount = winCount.convertToSecondRankCount();
         }

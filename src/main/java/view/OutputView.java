@@ -13,7 +13,6 @@ public class OutputView {
     private static final String INPUT_WIN_LOTTO_INSTRUCTION = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String INPUT_BONUS_INSTRUCTION = "보너스 볼을 입력해 주세요.";
     private static final String WIN_STATISTICS_RESULT_MESSAGE = "당첨 통계\n---------";
-    private static final int SECOND_RANK_UNIT = 2;
     private static final String SECOND_RANK_CORRECT_MESSAGE = "개 일치, 보너스 볼 일치(";
     private static final String RANK_PRICE_MESSAGE = "원)- ";
     private static final String RANK_COUNT_MESSAGE = "개";
@@ -53,7 +52,7 @@ public class OutputView {
         final RankPrice rankPrice = rankCount.getKey();
         if (rankPrice == RankPrice.SECOND) {
             System.out.println(
-                    (rankPrice.getCount() - SECOND_RANK_UNIT) + SECOND_RANK_CORRECT_MESSAGE + rankPrice.getPrice()
+                    rankPrice.getCount() + SECOND_RANK_CORRECT_MESSAGE + rankPrice.getPrice()
                             + RANK_PRICE_MESSAGE
                             + rankCount.getValue()
                             + RANK_COUNT_MESSAGE);
