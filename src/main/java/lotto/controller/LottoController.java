@@ -16,7 +16,6 @@ import static lotto.view.Input.*;
 import static lotto.view.Output.*;
 
 public class LottoController {
-    private static final int LOTTO_PRICE = 1000;
     private static final String DELIMITER = ",";
 
     public static void run() {
@@ -38,17 +37,13 @@ public class LottoController {
     }
 
     private static Lottos buyLotto(Payment payment) {
-        int lottoCount = getLottoCount(payment);
+        int lottoCount = payment.getLottoCount();
         Lottos lottos = new Lottos(lottoCount);
 
         printLottoCount(lottoCount);
         printLottos(lottos);
 
         return lottos;
-    }
-
-    private static int getLottoCount(Payment payment) {
-        return payment.getPayment() / LOTTO_PRICE;
     }
 
     private static void showLottoResult(Lottos lottos, Payment payment) {
