@@ -15,7 +15,7 @@ public class InputValidation {
     private static final String LOTTO_NUMBER_DELIMITER = ", ";
     private static final String ERROR_PRICE_NON_INTEGER = "가격은 정수만 가능합니다.";
     private static final String ERROR_NEGATIVE_INTEGER = "가격은 1000원 이상만 가능합니다.";
-    private static final String ERROR_NUM_OF_BALL = "로또 번호는 6개의 번호를 입력해줘야 합니다.";
+    private static final String ERROR_NUM_OF_BALLS = "로또 번호는 6개의 번호를 입력해줘야 합니다.";
     private static final String ERROR_BALL_NON_INTEGER = "로또 번호는 숫자만 입력해줘야 합니다.";
     private static final String ERROR_NUMBER_OUT_RANGE = "로또 번호는 1에서 45 사이의 값을 입력해줘야 합니다.";
     private static final String ERROR_DUPLICATE_NUMBER = "로또 번호는 중복되면 안 됩니다.";
@@ -29,7 +29,7 @@ public class InputValidation {
 
     public static List<Integer> validateWinningNumber(final String inputNumbers) {
         final List<String> splitNumbers = Arrays.asList(inputNumbers.split(LOTTO_NUMBER_DELIMITER));
-        checkNumOfNumbers(splitNumbers);
+        checkNumOfBalls(splitNumbers);
 
         final List<Integer> numbers = checkNonIntegers(splitNumbers);
         checkNumbersRange(numbers);
@@ -52,9 +52,9 @@ public class InputValidation {
         }
     }
 
-    private static void checkNumOfNumbers(final List<String> numbers) {
+    private static void checkNumOfBalls(final List<String> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException(ERROR_NUM_OF_BALL);
+            throw new IllegalArgumentException(ERROR_NUM_OF_BALLS);
         }
     }
 
@@ -70,7 +70,7 @@ public class InputValidation {
     }
 
     private static void checkNumberRange(final int number) {
-        if (!(number >= LOTTO_MINIMUM_NUMBER && number <= LOTTO_MAXIMUM_NUMBER)) {
+        if (number < LOTTO_MINIMUM_NUMBER || LOTTO_MAXIMUM_NUMBER < number) {
             throw new IllegalArgumentException(ERROR_NUMBER_OUT_RANGE);
         }
     }
