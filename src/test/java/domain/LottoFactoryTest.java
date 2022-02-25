@@ -8,7 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LottoFactoryTest {
-    
+
     LottoFactory lottoFactory;
 
     @BeforeEach
@@ -22,7 +22,7 @@ class LottoFactoryTest {
     @Test
     void issueLotto_count_correct() {
         lottoFactory.issueLotto();
-        final List<Lotto> lottoTickets = lottoFactory.getLotto();
+        final List<Lotto> lottoTickets = lottoFactory.issueLotto();
 
         assertThat(lottoTickets.size()).isEqualTo(100000);
     }
