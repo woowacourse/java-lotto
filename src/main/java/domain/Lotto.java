@@ -13,6 +13,7 @@ public class Lotto {
     private static final int COUNT_INCREASE_UNIT = 1;
     public static final String ERROR_LOTTO_SIZE_MESSAGE = "입력받은 로또 개수가 6개가 아닙니다.";
     public static final int LOTTO_SIZE = 6;
+
     private final List<LottoNumber> lotto;
 
     public Lotto(final String inputLotto) {
@@ -48,9 +49,14 @@ public class Lotto {
     public int compare(final Lotto lotto) {
         int count = INIT_COUNT;
         for (LottoNumber lottoNumber : this.lotto) {
-            if (lotto.isContainNumber(lottoNumber)) {
-                count += COUNT_INCREASE_UNIT;
-            }
+            count = countIncrease(lotto, count, lottoNumber);
+        }
+        return count;
+    }
+
+    private int countIncrease(Lotto lotto, int count, LottoNumber lottoNumber) {
+        if (lotto.isContainNumber(lottoNumber)) {
+            count += COUNT_INCREASE_UNIT;
         }
         return count;
     }
