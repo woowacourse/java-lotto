@@ -3,11 +3,10 @@ package domain;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private Set<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
     public Lotto(List<Integer> numbers) {
         lottoNumbers = new HashSet<>();
@@ -27,10 +26,8 @@ public class Lotto {
     }
 
     private int matchedRegularNumbers(WinningNumber winningNumber) {
-        return winningNumber.getWinningNumbers().stream()
-                .filter(lottoNumber -> lottoNumbers.contains(lottoNumber))
-                .collect(Collectors.toList())
-                .size();
+        return (int) winningNumber.getWinningNumbers().stream()
+                .filter(lottoNumbers::contains).count();
     }
 
     private boolean hasMatchedNumber(LottoNumber bonus) {

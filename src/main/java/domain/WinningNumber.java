@@ -10,7 +10,7 @@ public class WinningNumber {
     private static final String ERROR_DUPLICATE_NUMBER = "로또 번호는 중복되면 안 됩니다.";
     private static final String ERROR_DUPLICATE_BONUS = "보너스 번호가 당첨 번호와 중복됩니다.";
 
-    private Set<LottoNumber> winningNumbers;
+    private final Set<LottoNumber> winningNumbers;
     private LottoNumber bonus;
 
     public WinningNumber(List<Integer> numbers) {
