@@ -22,7 +22,7 @@ public class Lotto {
     }
 
     public Lotto(final List<String> numbers) {
-        checkValidNumbers(numbers);
+        validateLotto(numbers);
 
         for (String number : numbers) {
             this.lotto.add(new Ball(number));
@@ -41,7 +41,8 @@ public class Lotto {
 
     public int getMatchingCount(Lotto compareLotto) {
         return (int) lotto.stream()
-                .filter(compareLotto::contains).count();
+                .filter(compareLotto::contains)
+                .count();
     }
 
     private static List<String> selectNumbers() {
@@ -65,21 +66,21 @@ public class Lotto {
             .collect(Collectors.toList());
     }
 
-    private void checkValidNumbers(final List<String> numbers) {
-        checkDuplicatedNumber(numbers);
-        checkLottoCount(numbers);
+    private void validateLotto(final List<String> numbers) {
+        validateDuplicatedNumber(numbers);
+        validateLottoCount(numbers);
     }
 
-    private void checkLottoCount(List<String> numbers) {
-        if (numbers.size() != LOTTO_COUNT) {
-            throw new IllegalArgumentException(ERROR_LOTTO_COUNT);
-        }
-    }
-
-    private void checkDuplicatedNumber(List<String> numbers) {
+    private void validateDuplicatedNumber(List<String> numbers) {
         Set<String> distinctNumbers = new HashSet<>(numbers);
         if (distinctNumbers.size() != numbers.size()) {
             throw new IllegalArgumentException(ERROR_DUPLICATED_NUMBER);
+        }
+    }
+
+    private void validateLottoCount(List<String> numbers) {
+        if (numbers.size() != LOTTO_COUNT) {
+            throw new IllegalArgumentException(ERROR_LOTTO_COUNT);
         }
     }
 }

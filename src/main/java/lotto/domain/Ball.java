@@ -10,16 +10,16 @@ public class Ball{
     private final int number;
 
     public Ball(String number) {
-        checkValidValue(number);
+        validateBall(number);
         this.number = Integer.parseInt(number);
     }
 
-    private void checkValidValue(final String value) {
+    private void validateBall(final String value) {
         if (isBlank(value) || !isNumber(value)) {
             throw new IllegalArgumentException(ERROR_ONLY_NUMBER);
         }
         int number = Integer.parseInt(value);
-        checkLottoNumber(number);
+        validateLottoNumber(number);
     }
 
     private boolean isBlank(final String number) {
@@ -30,8 +30,9 @@ public class Ball{
         return value.matches(NUMBER_MATCHES);
     }
 
-    private void checkLottoNumber(final int number) {
+    private void validateLottoNumber(final int number) {
         if (number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER) {
+            // TODO: 예외 처리 별도 객체 생성
             throw new IllegalArgumentException(ERROR_LOTTO_NUMBER);
         }
     }

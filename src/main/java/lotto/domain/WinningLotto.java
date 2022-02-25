@@ -7,7 +7,7 @@ public class WinningLotto {
     private final Ball bonusBall;
 
     public WinningLotto(Lotto winningLotto, Ball bonusBall) {
-        checkDuplicatedNumber(winningLotto, bonusBall);
+        validateDuplicatedNumber(winningLotto, bonusBall);
         this.winningLotto = winningLotto;
         this.bonusBall = bonusBall;
     }
@@ -20,7 +20,7 @@ public class WinningLotto {
         return bonusBall;
     }
 
-    private void checkDuplicatedNumber(Lotto lotto, Ball ball) {
+    private void validateDuplicatedNumber(Lotto lotto, Ball ball) {
         if (lotto.contains(ball)) {
             throw new IllegalArgumentException(ERROR_DUPLICATED_NUMBER);
         }

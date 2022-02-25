@@ -9,10 +9,7 @@ public class Lottos {
     private final List<Lotto> lottos;
 
     public Lottos(int count) {
-        lottos = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            lottos.add(new Lotto());
-        }
+        this(createRandomLottos(count));
     }
 
     public Lottos(List<Lotto> lottos) {
@@ -29,5 +26,13 @@ public class Lottos {
             boolean isBonus = matchingCount == CHECK_BONUS_COUNT && lotto.contains(winningLotto.getBonusBall());
             lottoResult.increaseRankCount(Rank.getRank(matchingCount, isBonus));
         }
+    }
+
+    private static List<Lotto> createRandomLottos(int count) {
+        List<Lotto> randomLottos = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            randomLottos.add(new Lotto());
+        }
+        return randomLottos;
     }
 }

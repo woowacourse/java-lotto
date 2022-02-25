@@ -10,7 +10,7 @@ public class PurchaseAmount {
     private final int purchaseAmount;
 
     public PurchaseAmount(final String purchaseAmount) {
-        checkValidValue(purchaseAmount);
+        validatePurchaseAmount(purchaseAmount);
         this.purchaseAmount = Integer.parseInt(purchaseAmount);
     }
 
@@ -18,13 +18,13 @@ public class PurchaseAmount {
         return purchaseAmount;
     }
 
-    private void checkValidValue(final String value) {
+    private void validatePurchaseAmount(final String value) {
         if (isBlank(value) || !isNumber(value)) {
             throw new IllegalArgumentException(ERROR_ONLY_NUMBER);
         }
         int number = Integer.parseInt(value);
-        checkNaturalNumber(number);
-        checkDivideLottoPrice(number);
+        validateNaturalNumber(number);
+        validatePurchaseLotto(number);
     }
 
     private boolean isBlank(final String value) {
@@ -35,13 +35,13 @@ public class PurchaseAmount {
         return value.matches(NUMBER_MATCHES);
     }
 
-    private void checkNaturalNumber(final int value) {
+    private void validateNaturalNumber(final int value) {
         if (value <= 0) {
             throw new IllegalArgumentException(ERROR_ONLY_NATURAL_NUMBER);
         }
     }
 
-    private void checkDivideLottoPrice(final int value) {
+    private void validatePurchaseLotto(final int value) {
         if ((value % LOTTO_PRICE) != 0) {
             throw new IllegalArgumentException(ERROR_LOTTO_PRICE);
         }

@@ -25,7 +25,7 @@ public class LottoTest {
     @Test
     @DisplayName("로또 생성 시 Ball 숫자 중복")
     void ball_duplicated() {
-        List<String> numbers = new ArrayList<>(Arrays.asList("1", "2", "2"));
+        List<String> numbers = new ArrayList<>(Arrays.asList("1", "2", "2", "4", "5", "6"));
 
         assertThatThrownBy(() -> {
             Lotto lotto = new Lotto(numbers);
@@ -43,7 +43,7 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("로또의 숫자가 모두 일치할때")
+    @DisplayName("로또의 숫자가 모두 일치할 때")
     void calc_same_count() {
         Lotto lotto = new Lotto(Arrays.asList("1", "2", "3", "4", "5", "6"));
         Lotto winLotto = new Lotto(Arrays.asList("1", "2", "3", "4", "5", "6"));

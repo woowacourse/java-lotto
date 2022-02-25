@@ -5,15 +5,15 @@ import java.util.Scanner;
 public class Input {
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static String purchaseAmount() {
+    public static String inputPurchaseAmount() {
         return input();
     }
 
-    public static String winNumber() {
+    public static String inputWinNumber() {
         return input();
     }
 
-    public static String bonusBall() {
+    public static String inputBonusBall() {
         return input();
     }
 
