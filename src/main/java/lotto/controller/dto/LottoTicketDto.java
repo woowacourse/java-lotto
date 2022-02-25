@@ -1,8 +1,10 @@
 package lotto.controller.dto;
 
-import java.util.ArrayList;
+import static java.util.stream.Collectors.*;
+
 import java.util.Collections;
 import java.util.List;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 
 public class LottoTicketDto {
@@ -10,7 +12,11 @@ public class LottoTicketDto {
     private final List<Integer> lottoNumbers;
 
     public LottoTicketDto(LottoTicket lottoTicket) {
-        this.lottoNumbers = new ArrayList<>(lottoTicket.getLottoNumbers());
+        this.lottoNumbers = lottoTicket.getLottoNumbers()
+                .stream()
+                .map(LottoNumber::getLottoNumber)
+                .sorted()
+                .collect(toList());
     }
 
     public List<Integer> getLottoNumbers() {

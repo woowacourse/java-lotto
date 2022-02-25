@@ -21,9 +21,6 @@ public class AutoLottoNumberGenerator implements LottoNumberGenerator {
         List<Integer> lottoTotalNumbers = new ArrayList<>(LOTTO_TOTAL_NUMBERS);
         Collections.shuffle(lottoTotalNumbers);
 
-        List<Integer> lottoNumbers = lottoTotalNumbers.subList(LOTTO_NUMBERS_FROM_INDEX, LOTTO_NUMBERS_TO_INDEX);
-        Collections.sort(lottoNumbers);
-
-        return lottoNumbers;
+        return lottoTotalNumbers.subList(LOTTO_NUMBERS_FROM_INDEX, LOTTO_NUMBERS_TO_INDEX);
     }
 }

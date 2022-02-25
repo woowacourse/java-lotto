@@ -21,8 +21,8 @@ public class LottoNumber {
         }
     }
 
-    public LottoNumber getLottoNumber() {
-        return new LottoNumber(lottoNumber);
+    public int getLottoNumber() {
+        return lottoNumber;
     }
 
     @Override

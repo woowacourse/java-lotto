@@ -24,10 +24,10 @@ class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(new AutoLottoNumberGenerator());
 
         // when
-        List<Integer> lottoNumbers = lottoTicket.getLottoNumbers();
+        List<LottoNumber> lottoNumbers = lottoTicket.getLottoNumbers();
 
         // then
-        assertThatThrownBy(() -> lottoNumbers.add(0))
+        assertThatThrownBy(() -> lottoNumbers.add(new LottoNumber(0)))
                 .isInstanceOf(UnsupportedOperationException.class);
     }
 
