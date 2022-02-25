@@ -23,7 +23,7 @@ public class ResultTest {
             void it_create_ok() {
                 Result result = new Result();
 
-                for (WinningPrice value : WinningPrice.values()) {
+                for (LottoRankings value : LottoRankings.values()) {
                     assertThat(result.getCount(value)).isEqualTo(0);
                 }
             }
@@ -43,9 +43,9 @@ public class ResultTest {
             void it_add_count() {
                 Result result = new Result();
 
-                result.add(WinningPrice.All);
+                result.add(LottoRankings.All);
 
-                assertThat(result.getCount(WinningPrice.All)).isEqualTo(1);
+                assertThat(result.getCount(LottoRankings.All)).isEqualTo(1);
             }
         }
     }
@@ -64,7 +64,7 @@ public class ResultTest {
             @DisplayName("당첨금액의 합과 비교하여 수익률을 반환한다.")
             void it_returns_rate_of_profit(String money, double expected) {
                 Result result = new Result();
-                result.add(WinningPrice.Three);
+                result.add(LottoRankings.Three);
                 assertThat(result.getRateOfProfit(new Money(money))).isEqualTo(expected);
             }
         }

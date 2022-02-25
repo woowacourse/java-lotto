@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import lotto.domain.WinningPrice;
+import lotto.domain.LottoRankings;
 
 public class Lotto {
 
@@ -63,7 +63,7 @@ public class Lotto {
         }
     }
 
-    public WinningPrice getWinningPrice(Lotto lotto, Number bonusNumber) {
+    public LottoRankings getWinningPrice(Lotto lotto, Number bonusNumber) {
         int count = 0;
         boolean containsBonus = false;
         for (Number number : lotto.getNumbers()) {
@@ -75,7 +75,7 @@ public class Lotto {
             containsBonus = true;
         }
 
-        return WinningPrice.of(count, containsBonus);
+        return LottoRankings.of(count, containsBonus);
     }
 
     public Set<Number> getNumbers() {

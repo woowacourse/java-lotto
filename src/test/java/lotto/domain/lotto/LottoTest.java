@@ -3,8 +3,6 @@ package lotto.domain.lotto;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -12,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import lotto.domain.WinningPrice;
+import lotto.domain.LottoRankings;
 
 public class LottoTest {
 
@@ -100,7 +98,7 @@ public class LottoTest {
 
     @Nested
     @DisplayName("당첨 순위를 알려주는 메소드는")
-    class GetWinningPrice {
+    class GetLottoRankings {
 
         @Nested
         @DisplayName("당첨번호와 보너스번호가 주어지면")
@@ -111,7 +109,7 @@ public class LottoTest {
             @DisplayName("당첨 순위를 알려준다.")
             void it_returns_winning_price(int first, int second, int third, int fourth, int fifth,
                 int sixth,
-                int bonus, WinningPrice key
+                int bonus, LottoRankings key
             ) {
                 Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
 
