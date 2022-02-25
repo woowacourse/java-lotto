@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.function.BiFunction;
+import java.util.function.BiPredicate;
 
 public enum Rank {
 
@@ -18,9 +19,9 @@ public enum Rank {
 
     private final long reward;
     private final int hitCounts;
-    private final BiFunction<Integer, Boolean, Boolean> expression;
+    private final BiPredicate<Integer, Boolean> expression;
 
-    Rank(final long reward, final int hitCounts, final BiFunction<Integer, Boolean, Boolean> expression) {
+    Rank(final long reward, final int hitCounts, final BiPredicate<Integer, Boolean> expression) {
         this.reward = reward;
         this.hitCounts = hitCounts;
         this.expression = expression;
@@ -32,7 +33,7 @@ public enum Rank {
 
     public static Rank calculateCurrentRank(final int hitCounts, final boolean bonus) {
         return Arrays.stream(values())
-                .filter(rank -> rank.expression.apply(hitCounts, bonus))
+                .filter(rank -> rank.expression.test(hitCounts, bonus))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("[ERROR] 해당하는 랭크가 없습니다."));
     }
