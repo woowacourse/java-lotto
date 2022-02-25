@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoNumbers {
+public class LottoTicket {
 
     private final List<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(List<LottoNumber> lottoNumbers) {
+    public LottoTicket(List<LottoNumber> lottoNumbers) {
         Collections.sort(lottoNumbers);
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }

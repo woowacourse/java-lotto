@@ -3,7 +3,7 @@ package view;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import domain.LottoNumber;
-import domain.LottoNumbers;
+import domain.LottoTicket;
 import domain.Rank;
 import domain.Result;
 
@@ -24,12 +24,12 @@ class OutputViewTest {
         OutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
 
-        List<LottoNumbers> lottoTickets = new ArrayList<>();
-        lottoTickets.add(new LottoNumbers(
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        lottoTickets.add(new LottoTicket(
             Arrays.asList(LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
                 LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6))));
 
-        lottoTickets.add(new LottoNumbers(
+        lottoTickets.add(new LottoTicket(
             Arrays.asList(LottoNumber.valueOf(7), LottoNumber.valueOf(8), LottoNumber.valueOf(9),
                 LottoNumber.valueOf(10), LottoNumber.valueOf(11), LottoNumber.valueOf(12))));
 

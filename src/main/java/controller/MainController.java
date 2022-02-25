@@ -1,6 +1,6 @@
 package controller;
 
-import domain.LottoNumbers;
+import domain.LottoTicket;
 import domain.Money;
 import domain.Rank;
 import domain.Result;
@@ -15,7 +15,7 @@ public class MainController {
 
     public void run() {
         Money money = getMoney();
-        List<LottoNumbers> lottoTickets = createLottoTickets(money.toLottoCount());
+        List<LottoTicket> lottoTickets = createLottoTickets(money.toLottoCount());
         OutputView.printLottoTickets(lottoTickets);
 
         WinLottoNumbers winLottoNumbers = getWinNumbers();
@@ -33,10 +33,10 @@ public class MainController {
         }
     }
 
-    private List<LottoNumbers> createLottoTickets(int count) {
-        List<LottoNumbers> lottoTickets = new ArrayList<>();
+    private List<LottoTicket> createLottoTickets(int count) {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            lottoTickets.add(new LottoNumbers(LottoNumberGenerator.generate()));
+            lottoTickets.add(new LottoTicket(LottoNumberGenerator.generate()));
         }
         return lottoTickets;
     }
@@ -52,9 +52,9 @@ public class MainController {
         }
     }
 
-    private Result makeResult(List<LottoNumbers> lottoTickets, WinLottoNumbers winLottoNumbers) {
+    private Result makeResult(List<LottoTicket> lottoTickets, WinLottoNumbers winLottoNumbers) {
         Result result = new Result();
-        for (LottoNumbers lottoTicket : lottoTickets) {
+        for (LottoTicket lottoTicket : lottoTickets) {
             int matchCount = winLottoNumbers.countSameNumber(lottoTicket);
             boolean isBonus = winLottoNumbers.isContainsBonus(lottoTicket);
             result.add(Rank.of(matchCount, isBonus));

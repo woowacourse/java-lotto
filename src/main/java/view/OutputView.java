@@ -3,7 +3,7 @@ package view;
 import static utils.Messages.*;
 
 import domain.LottoNumber;
-import domain.LottoNumbers;
+import domain.LottoTicket;
 import domain.Rank;
 import domain.Result;
 
@@ -20,16 +20,16 @@ public class OutputView {
         System.out.println(ERROR_PREFIX + message);
     }
 
-    public static void printLottoTickets(List<LottoNumbers> lottoTickets) {
+    public static void printLottoTickets(List<LottoTicket> lottoTickets) {
         System.out.println(lottoTickets.size() + BUY_MESSAGE);
-        for (LottoNumbers lottoNumbers : lottoTickets) {
-            printLottoNumbers(lottoNumbers);
+        for (LottoTicket lottoTicket : lottoTickets) {
+            printLottoTicket(lottoTicket);
         }
     }
 
-    private static void printLottoNumbers(LottoNumbers lottoNumbers) {
+    private static void printLottoTicket(LottoTicket lottoTicket) {
         StringBuilder result = new StringBuilder(LOTTO_PREFIX);
-        for (LottoNumber lottoNumber : lottoNumbers.get()) {
+        for (LottoNumber lottoNumber : lottoTicket.get()) {
             result.append(lottoNumber.get()).append(SEPARATOR);
         }
         result.delete(result.length() - DELETE_IDX, result.length()).append(LOTTO_ENDFIX);

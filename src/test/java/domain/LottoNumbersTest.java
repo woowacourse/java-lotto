@@ -13,18 +13,18 @@ import org.junit.jupiter.params.provider.ValueSource;
 @SuppressWarnings("NonAsciiCharacters")
 class LottoNumbersTest {
 
-    private LottoNumbers lottoNumbers;
+    private LottoTicket lottoTicket;
 
     @BeforeEach
     void 로또_번호_생성() {
-        lottoNumbers = new LottoNumbers(
+        lottoTicket = new LottoTicket(
             Arrays.asList(LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
                 LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6)));
     }
 
     @Test
     void get_불변_확인() {
-        List<LottoNumber> lottoNumbers = this.lottoNumbers.get();
+        List<LottoNumber> lottoNumbers = this.lottoTicket.get();
         assertThatThrownBy(() -> lottoNumbers.add(LottoNumber.valueOf(1))).isInstanceOf(
             Exception.class);
     }
@@ -32,12 +32,12 @@ class LottoNumbersTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3})
     void contains_있는지_확인(int value) {
-        assertThat(lottoNumbers.contains(LottoNumber.valueOf(value))).isTrue();
+        assertThat(lottoTicket.contains(LottoNumber.valueOf(value))).isTrue();
     }
 
     @ParameterizedTest
     @ValueSource(ints = {9, 10, 11})
     void contains_없는지_확인(int value) {
-        assertThat(lottoNumbers.contains(LottoNumber.valueOf(value))).isFalse();
+        assertThat(lottoTicket.contains(LottoNumber.valueOf(value))).isFalse();
     }
 }
