@@ -17,14 +17,6 @@ public class StoreTest {
             .withMessage("입력금액은 1,000원 이상이어야 한다.");
     }
 
-    @Test
-    @DisplayName("입력금액은 10,0000원 넘으면 예외가 발생한다.")
-    void throwExceptionWhenOver100Thousands() {
-        assertThatIllegalArgumentException()
-            .isThrownBy(() -> new Store(new Money(100_001)))
-            .withMessage("입력금액은 100,000원을 넘을 수 없다.");
-    }
-
     @ParameterizedTest
     @ValueSource(ints = {1_000, 100_000})
     @DisplayName("입력금액을 전달하면 Store가 생성된다.")
