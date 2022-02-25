@@ -15,12 +15,12 @@ public class MoneyReceiverTest {
         Assertions.assertThat(MoneyReceiver.receive("14000")).isEqualTo(14000);
     }
 
-    @ParameterizedTest(name = "자연수가 아닐 경우 예외 발생 - case : {0}")
-    @ValueSource(strings = {"1.2", "test", "-300", "0", "0123", "00000"})
-    void checkNaturalNumber(String input) {
+    @ParameterizedTest(name = "음수가 입력될 경우 예외 발생 - case : {0}")
+    @ValueSource(strings = {"-1", "-1200", "-3000"})
+    void checkPositive(String input) {
         Assertions.assertThatThrownBy(() -> MoneyReceiver.receive(input))
                 .isInstanceOf(MoneyException.class)
-                .hasMessage("구입금액은 자연수만 가능합니다.");
+                .hasMessage("구입금액이 음수일 수 없습니다.");
     }
 
     @ParameterizedTest(name = "1000원 단위가 아닐 경우 예외 발생 - case : {0}")

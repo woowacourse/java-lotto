@@ -45,7 +45,7 @@ public enum LottoNumber {
     }
 
     public static LottoNumber findByNumber(int number) {
-        LottoNumberValidator.validate(String.valueOf(number));
+        LottoNumberValidator.validate(number);
         return LottoNumber.valueOf(LOTTO_NUMBER_PREFIX + number);
     }
 

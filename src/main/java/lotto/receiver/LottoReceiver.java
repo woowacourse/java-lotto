@@ -14,8 +14,10 @@ public class LottoReceiver {
     public static List<LottoNumber> receive(String input) {
         List<String> separatedInput = splitInput(input);
         LottoValidator.validate(separatedInput);
-        return convertToLottoNumbers(separatedInput);
+        List<Integer> numbers = parseInput(separatedInput);
+        return convertToLottoNumbers(numbers);
     }
+
 
     private static List<String> splitInput(String input) {
         return Arrays.stream(input.split(INPUT_NUMBERS_DELIMITER))
@@ -23,10 +25,15 @@ public class LottoReceiver {
                 .collect(Collectors.toList());
     }
 
-    private static List<LottoNumber> convertToLottoNumbers(List<String> numbers) {
+    private static List<Integer> parseInput(List<String> separatedInput) {
+        return separatedInput.stream()
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+    }
+
+    private static List<LottoNumber> convertToLottoNumbers(List<Integer> numbers) {
         numbers.forEach(LottoNumberValidator::validate);
         return numbers.stream()
-                .map(Integer::parseInt)
                 .map(LottoNumber::findByNumber)
                 .sorted()
                 .collect(Collectors.toList());

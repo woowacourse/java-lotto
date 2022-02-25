@@ -1,35 +1,29 @@
 package lotto.receiver.validator;
 
-import java.util.regex.Pattern;
 import lotto.exception.MoneyException;
 
 public class MoneyValidator {
 
-    private static final String REGEX_FOR_NATURAL_NUMBER = "^[1-9][0-9]*$";
     private static final int UNIT_SIZE = 1000;
 
-    public static void validate(String input) {
-        checkNaturalNumber(input);
+    public static void validate(int input) {
+        checkPositive(input);
         checkUnit(input);
     }
 
-    private static void checkNaturalNumber(String input) {
-        if (!isNaturalNumber(input)) {
-            throw new MoneyException(MoneyException.MONEY_ONLY_NATURAL_NUMBER_ERROR_MESSAGE);
+    private static void checkPositive(int input) {
+        if (input < 0) {
+            throw new MoneyException(MoneyException.MONEY_ONLY_POSITIVE_NUMBER_ERROR_MESSAGE);
         }
     }
 
-    private static boolean isNaturalNumber(String input) {
-        return Pattern.compile(REGEX_FOR_NATURAL_NUMBER).matcher(input).find();
-    }
-
-    private static void checkUnit(String input) {
+    private static void checkUnit(int input) {
         if (!isCorrectUnit(input)) {
             throw new MoneyException(MoneyException.MONEY_UNIT_ERROR_MESSAGE);
         }
     }
 
-    private static boolean isCorrectUnit(String input) {
-        return Integer.parseInt(input) % UNIT_SIZE == 0;
+    private static boolean isCorrectUnit(int input) {
+        return input % UNIT_SIZE == 0;
     }
 }

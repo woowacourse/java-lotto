@@ -27,7 +27,7 @@ public class Controller {
     private Money getMoney() {
         try {
             return new Money(InputView.inputMoney());
-        } catch (IllegalArgumentException exception) {
+        } catch (Exception exception) {
             OutputView.printErrorMessage(exception.getMessage());
             return getMoney();
         }
@@ -36,7 +36,7 @@ public class Controller {
     private WinningLotto getWinningLotto() {
         try {
             return new WinningLotto(InputView.inputWinningLotto());
-        } catch (IllegalArgumentException exception) {
+        } catch (Exception exception) {
             OutputView.printErrorMessage(exception.getMessage());
             return getWinningLotto();
         }
@@ -45,7 +45,7 @@ public class Controller {
     private BonusNumber getBonusNumber(WinningLotto winningLotto) {
         try {
             return new BonusNumber(InputView.inputBonusNumber(), winningLotto);
-        } catch (IllegalArgumentException exception) {
+        } catch (Exception exception) {
             OutputView.printErrorMessage(exception.getMessage());
             return getBonusNumber(winningLotto);
         }
