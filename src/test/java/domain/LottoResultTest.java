@@ -17,11 +17,12 @@ public class LottoResultTest {
 	@Test
 	void count_ranks() {
 		//given
-		Map<Rank,Integer> ranks = Rank.getMap();
+		Map<Rank, Integer> ranks = Rank.getMap();
 		ranks.replace(Rank.FIFTH, 4);
 		//when
+		Payment payment = new Payment(20000);
 		LottoResult result = new LottoResult(ranks);
 		//then
-		assertThat(result.calculateTotalProfit()).isEqualTo(20000);
+		assertThat(result.calculateProfitRate(payment)).isEqualTo(1.0);
 	}
 }

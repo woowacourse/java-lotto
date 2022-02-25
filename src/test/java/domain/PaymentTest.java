@@ -78,7 +78,7 @@ public class PaymentTest {
 		LottoResult lottoResult = new LottoResult(ranks);
 		Payment payment = new Payment("10000");
 
-		double profitRate = payment.calculateProfitRate(lottoResult.calculateTotalProfit());
+		double profitRate = lottoResult.calculateProfitRate(payment);
 
 		assertThat(profitRate).isEqualTo(2.0);
 	}

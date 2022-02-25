@@ -48,7 +48,7 @@ public class Payment {
 		return payment / LOTTO_PRICE;
 	}
 
-	public double calculateProfitRate(int totalProfit) {
-		return (double)totalProfit / payment;
+	public double calculateDivision(int divisionValue) {
+		return (double)divisionValue / payment;
 	}
 }

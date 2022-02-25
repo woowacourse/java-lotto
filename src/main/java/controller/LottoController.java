@@ -24,9 +24,8 @@ public class LottoController {
 		Payment payment = createPayment();
 		Lottos lottos = createLottos(payment);
 		WinningLotto winningLotto = createWinningLotto();
-
 		LottoResult lottoResult = createLottoResult(lottos.countRank(winningLotto));
-		calculateTotalProfitRate(payment, lottoResult.calculateTotalProfit());
+		calculateTotalProfitRate(lottoResult, payment);
 	}
 
 	private Payment createPayment() {
@@ -74,8 +73,8 @@ public class LottoController {
 		return lottoResult;
 	}
 
-	private void calculateTotalProfitRate(Payment payment, int totalProfit) {
-		double profitRate = payment.calculateProfitRate(totalProfit);
+	private void calculateTotalProfitRate(LottoResult lottoResult, Payment payment) {
+		double profitRate = lottoResult.calculateProfitRate(payment);
 		OutputView.printProfitRate(profitRate);
 	}
 }

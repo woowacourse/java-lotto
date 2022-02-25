@@ -10,7 +10,11 @@ public class LottoResult {
 		this.ranks = ranks;
 	}
 
-	public int calculateTotalProfit() {
+	public double calculateProfitRate(Payment payment) {
+		return payment.calculateDivision(calculateTotalProfit());
+	}
+
+	private int calculateTotalProfit() {
 		return ranks.entrySet()
 			.stream()
 			.mapToInt(entry -> calculateRankProfit(entry.getKey(), entry.getValue()))
