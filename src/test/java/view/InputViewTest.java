@@ -9,6 +9,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 @SuppressWarnings("NonAsciiCharacters")
 class InputViewTest {
@@ -59,7 +61,7 @@ class InputViewTest {
     }
 
     @Test
-    void 당첨_번호_입력() {
+    void 당첨_번호_입력_정상작동() {
         //given
         OutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
@@ -73,6 +75,20 @@ class InputViewTest {
 
         //then
         assertThat(out.toString()).isEqualTo("\n지난 주 당첨 번호를 입력해 주세요." + System.lineSeparator());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1, 2, 3", "1, 2, 3, 4, 5, 6, ", ", 1, 2, 3, 4, 5, 6", "1, 2, 3, 4, 5, 6, 7"})
+    void 당첨_번호_패턴에_맞지_않는_경우_예외처리(String input) {
+        //given
+        OutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        assertThatThrownBy(InputView::inputWinLottoNums)
+                .isInstanceOf(Exception.class);
     }
 
     @Test
