@@ -6,11 +6,11 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.model.LottoNumber;
-import lotto.model.LottoRank;
-import lotto.model.Money;
-import lotto.model.WinningStatistics;
-import lotto.model.lottonumbers.LottoTicket;
+import lotto.domain.LottoNumber;
+import lotto.domain.LottoRank;
+import lotto.domain.Money;
+import lotto.domain.WinningStatistics;
+import lotto.domain.lottonumbers.LottoTicket;
 
 public class OutputView {
 

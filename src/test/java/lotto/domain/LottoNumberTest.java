@@ -1,7 +1,7 @@
-package lotto.model;
+package lotto.domain;
 
-import static lotto.model.LottoNumber.INVALID_LOTTO_NUMBER_RANGE;
-import static lotto.model.LottoNumber.NOT_NUMBER_OF_LOTTO;
+import static lotto.domain.LottoNumber.INVALID_LOTTO_NUMBER_RANGE;
+import static lotto.domain.LottoNumber.NOT_NUMBER_OF_LOTTO;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;

@@ -1,15 +1,13 @@
-package lotto.model.lottonumbers;
+package lotto.domain.lottonumbers;
 
-import static lotto.model.lottonumbers.WinningNumbers.WINNING_NUMBERS_CONTAIN_BONUS_BALL;
+import static lotto.domain.lottonumbers.WinningNumbers.WINNING_NUMBERS_CONTAIN_BONUS_BALL;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import lotto.model.LottoNumber;
-import lotto.model.lottonumbers.LottoTicket;
-import lotto.model.lottonumbers.WinningNumbers;
+import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

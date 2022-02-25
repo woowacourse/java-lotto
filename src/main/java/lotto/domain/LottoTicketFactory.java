@@ -1,11 +1,11 @@
-package lotto.model;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import lotto.model.lottonumbers.LottoTicket;
+import lotto.domain.lottonumbers.LottoTicket;
 
 public class LottoTicketFactory {
     private static final int LOTTO_PRICE = 1000;

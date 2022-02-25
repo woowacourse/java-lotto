@@ -1,8 +1,8 @@
-package lotto.model.lottonumbers;
+package lotto.domain.lottonumbers;
 
 import java.util.Collections;
 import java.util.List;
-import lotto.model.LottoNumber;
+import lotto.domain.LottoNumber;
 
 public class LottoTicket extends LottoNumbers {
     public LottoTicket(List<LottoNumber> lottoNumbers) {

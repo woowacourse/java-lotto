@@ -2,12 +2,12 @@ package lotto.controller;
 
 import java.io.IOException;
 import java.util.List;
-import lotto.model.LottoRank;
-import lotto.model.LottoTicketFactory;
-import lotto.model.Money;
-import lotto.model.WinningStatistics;
-import lotto.model.lottonumbers.LottoTicket;
-import lotto.model.lottonumbers.WinningNumbers;
+import lotto.domain.LottoRank;
+import lotto.domain.LottoTicketFactory;
+import lotto.domain.Money;
+import lotto.domain.WinningStatistics;
+import lotto.domain.lottonumbers.LottoTicket;
+import lotto.domain.lottonumbers.WinningNumbers;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 

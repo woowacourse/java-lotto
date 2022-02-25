@@ -1,7 +1,7 @@
-package lotto.model;
+package lotto.domain;
 
-import static lotto.model.Money.NOT_ENOUGH_MONEY;
-import static lotto.model.Money.NOT_NUMBER;
+import static lotto.domain.Money.NOT_ENOUGH_MONEY;
+import static lotto.domain.Money.NOT_NUMBER;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
