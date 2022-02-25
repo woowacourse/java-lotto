@@ -9,9 +9,7 @@ public enum LottoRank {
     RANK_3(5, false, 1500000),
     RANK_2(5, true, 30000000),
     RANK_1(6, false, 2000000000),
-    RANK_NOTHING(0, false,0);
-
-    private static final int SECOND_AND_THIRD_RANK_COUNT = 5;
+    RANK_NOTHING(0, false, 0);
 
     private final int count;
     private final boolean bonus;

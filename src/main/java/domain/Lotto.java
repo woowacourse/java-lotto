@@ -40,10 +40,6 @@ public class Lotto {
         }
     }
 
-    public List<Integer> getLottoNumbers() {
-        return Collections.unmodifiableList(lottoNumbers);
-    }
-
     @Override
     public String toString() {
         List<String> numbersToStrings = lottoNumbers.stream()

@@ -3,6 +3,7 @@ package controller;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
 import util.Validator;
 import view.InputView;
 
@@ -22,7 +23,7 @@ public class InputController {
         String[] inputWinningLottoNumbers = InputView.scanWinningLottoNumbers().split(LOTTO_NUMBER_INPUT_DELIMITER);
         Validator.validateWinningNumberInput(inputWinningLottoNumbers);
         return Arrays.stream(inputWinningLottoNumbers)
-                .mapToInt(Integer :: parseInt)
+                .mapToInt(Integer::parseInt)
                 .boxed()
                 .collect(Collectors.toList());
     }

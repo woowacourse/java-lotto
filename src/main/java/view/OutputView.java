@@ -4,6 +4,7 @@ import domain.Lotto;
 import domain.LottoRank;
 import domain.LottoResult;
 import domain.LottoTicket;
+
 import java.util.Map;
 
 public class OutputView {
@@ -12,7 +13,7 @@ public class OutputView {
     private static final String LOTTO_RESULT_PREFIX = "당첨 통계\n---------";
     private static final String LOTTO_RESULT_WITH_BONUS_BALL_FORMAT = "%d개 일치, 보너스볼 일치(%d원)- %d개\n";
     private static final String LOTTO_RESULT_FORMAT = "%d개 일치 (%d원)- %d개\n";
-    private static final String  PROFIT_RATE_RESULT_PREFIX = "총 수익률은 ";
+    private static final String PROFIT_RATE_RESULT_PREFIX = "총 수익률은 ";
     private static final String PROFIT_RATE_RESULT_SUFFIX = "입니다.";
 
     public static void printPurchasedLotto(LottoTicket lottoTicket) {
