@@ -47,7 +47,7 @@ public class OutputView {
     private static void printRank(List<Rank> ranks, Rank rank) {
         int matchCount = rank.getMatchCount();
         long reward = rank.getReward().getAmount();
-        int rewardCount = findRewardCount(rank, ranks);
+        int rewardCount = rank.findRewardCount(ranks);
 
         if (rank == Rank.SECOND) {
             printSecondRank(matchCount, reward, rewardCount);
@@ -56,21 +56,17 @@ public class OutputView {
         printOtherRank(matchCount, reward, rewardCount);
     }
 
-    private static void printSecondRank(int matchCount, long reward, int rewardCount) {
-        System.out.printf("%d개 일치, 보너스 볼 일치(%d원) - %d개%n", matchCount, reward, rewardCount);
-    }
-
-    private static PrintStream printOtherRank(int matchCount, long reward, int rewardCount) {
-        return System.out.printf("%d개 일치 (%d원)- %d개%n", matchCount, reward, rewardCount);
-    }
-
     private static String joinWithDelimiter(List<Number> numbers) {
         return numbers.stream()
             .map(number -> String.valueOf(number.getNumber()))
             .collect(Collectors.joining(DELIMITER));
     }
 
-    private static int findRewardCount(Rank rank, List<Rank> ranks) {
-        return rank.findRewardCount(ranks);
+    private static void printSecondRank(int matchCount, long reward, int rewardCount) {
+        System.out.printf("%d개 일치, 보너스 볼 일치(%d원) - %d개%n", matchCount, reward, rewardCount);
+    }
+
+    private static PrintStream printOtherRank(int matchCount, long reward, int rewardCount) {
+        return System.out.printf("%d개 일치 (%d원)- %d개%n", matchCount, reward, rewardCount);
     }
 }

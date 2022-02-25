@@ -26,13 +26,13 @@ public class Store {
         return lottos;
     }
 
+    private boolean canBuy() {
+        return leftMoney.isGreaterThan(LOTTO_PRICE) || leftMoney.equals(LOTTO_PRICE);
+    }
+
     private Lotto buy() {
         leftMoney = leftMoney.minus(LOTTO_PRICE);
         return LottoMachine.generate();
-    }
-
-    private boolean canBuy() {
-        return leftMoney.isGreaterThan(LOTTO_PRICE) || leftMoney.equals(LOTTO_PRICE);
     }
 
     private void validateOverLimit(Money money) {
