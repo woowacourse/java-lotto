@@ -3,20 +3,21 @@ package lotto.util;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
+import lotto.model.Money;
 import org.junit.jupiter.api.Test;
 
 public class InputValidatorTest {
 
     @Test
     void 가격_검증_테스트_정상() {
-        int price = InputValidator.validatePrice("10000");
-        assertThat(price).isEqualTo(10);
+        Money money = InputValidator.validateMoney("10000");
+        assertThat(money.getBuyingLottoCount()).isEqualTo(10);
     }
 
     @Test
     void 가격_검증_테스트_음수() {
         assertThatThrownBy(() ->
-                InputValidator.validatePrice("-1"))
+                InputValidator.validateMoney("-1"))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessage("[ERROR] 유효한 입력이 아닙니다.");
     }
@@ -24,7 +25,7 @@ public class InputValidatorTest {
     @Test
     void 가격_검증_테스트_문자() {
         assertThatThrownBy(() ->
-                InputValidator.validatePrice("L"))
+                InputValidator.validateMoney("L"))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessage("[ERROR] 유효한 입력이 아닙니다.");
     }

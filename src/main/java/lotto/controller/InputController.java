@@ -9,8 +9,8 @@ import lotto.util.InputValidator;
 
 public class InputController {
 
-    public Lottos makeLottos(String price) throws RuntimeException {
-        return new Lottos(InputValidator.validatePrice(price));
+    public Lottos makeLottos(String money) throws RuntimeException {
+        return new Lottos(InputValidator.validateMoney(money));
     }
 
     public WinningLotto makeWinningLotto(String winningNumbers, String bonusNumber) {

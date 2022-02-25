@@ -14,9 +14,9 @@ public class Lottos {
     private final List<Lotto> lottos;
     private final Map<Rank, Integer> rankCount;
 
-    public Lottos(int countLotto) {
+    public Lottos(Money money) {
         this.lottos = new ArrayList<>();
-        insertLottoToLottos(countLotto);
+        insertLottoToLottos(money.getBuyingLottoCount());
         rankCount = initMap();
     }
 

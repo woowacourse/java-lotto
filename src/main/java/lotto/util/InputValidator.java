@@ -1,27 +1,21 @@
 package lotto.util;
 
 import java.util.regex.Pattern;
+import lotto.model.Money;
 
 public class InputValidator {
 
-    private static final String PRICE_ERROR_MESSAGE = "[ERROR] 유효한 입력이 아닙니다.";
+    private static final String MONEY_ERROR_MESSAGE = "[ERROR] 유효한 입력이 아닙니다.";
     private static final String NOT_NUMBER_ERROR_MESSAGE = "[ERROR] 문자가 입력되었습니다.";
 
     private static final String NUMBER_REGEX = "\\d+";
 
-    private static final int PRICE_PER_LOTTO = 1000;
-
-    public static int validatePrice(String price) throws RuntimeException {
-        if (!Pattern.matches(NUMBER_REGEX, price) || isLessThanLottoPrice(Integer.parseInt(price))) {
-            throw new RuntimeException(PRICE_ERROR_MESSAGE);
+    public static Money validateMoney(String money) {
+        if (!Pattern.matches(NUMBER_REGEX, money)) {
+            throw new RuntimeException(MONEY_ERROR_MESSAGE);
         }
-        return Integer.parseInt(price) / PRICE_PER_LOTTO;
+        return new Money(Integer.parseInt(money));
     }
-
-    private static boolean isLessThanLottoPrice(int price) {
-        return price < PRICE_PER_LOTTO;
-    }
-
 
     public static String[] validateLottoNumbers(String numbers) throws RuntimeException {
         String[] splitNumbers = numbers.split(",");
