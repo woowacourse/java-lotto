@@ -1,7 +1,5 @@
 package vo;
 
-import java.util.Objects;
-
 public class InputMoney {
     private static final int MINIMUM_MONEY = 1000;
     private static final int INPUT_MONEY_UNIT = 1000;
@@ -27,23 +25,6 @@ public class InputMoney {
 
     public int getMoney() {
         return money;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) {
-            return true;
-        }
-        if (object == null || getClass() != object.getClass()) {
-            return false;
-        }
-        InputMoney that = (InputMoney) object;
-        return money == that.money;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(money);
     }
 
     @Override
