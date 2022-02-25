@@ -22,7 +22,7 @@ public class StatisticCalculator {
 		}
 	}
 
-	public float calculateProfitRatio() {
+	public double calculateProfitRatio() {
 		int totalPrice =
 			this.resultStatistics
 				.keySet()
@@ -32,7 +32,7 @@ public class StatisticCalculator {
 				.sum() * UNIT_PRICE;
 		int totalPrize = this.resultStatistics.keySet().stream().filter(num -> this.resultStatistics.get(num) > 0)
 			.mapToInt(WinningStatus::getProfit).sum();
-		return (float) totalPrize / totalPrice;
+		return totalPrize / totalPrice;
 	}
 
 	public List<Integer> getCount() {

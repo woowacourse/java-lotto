@@ -43,12 +43,12 @@ public class OutputView {
 		System.out.println(winningStatus.getNumberMatches() + "개 일치" + bonusDisplay + "(" + winningStatus.getProfit() + "원) - " + count + "개");
 	}
 
-	public static void printProfitRatio(float ratio) {
+	public static void printProfitRatio(double ratio) {
 		String resultStatusMessage = "손실";
-		if (ratio > 1.0f) {
+		if (ratio > 1.0) {
 			resultStatusMessage = "이득";
 		}
-		if (ratio == 1.0f) {
+		if (ratio == 1.0) {
 			resultStatusMessage = "본전";
 		}
 		System.out.println("총 수익률은 " + ratio + "입니다.(기준이 1이기 때문에 결과적으로 " + resultStatusMessage + "이라는 의미임)");
