@@ -14,7 +14,6 @@ public class Money {
         this.money = money;
     }
 
-
     private void validate(int money) {
         isOverThousand(money);
         isDivideByThousand(money);
@@ -38,5 +37,9 @@ public class Money {
 
     public int get() {
         return money;
+    }
+
+    public float getProfit(long price) {
+        return (float) price / (float) money;
     }
 }

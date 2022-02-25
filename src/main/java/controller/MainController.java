@@ -64,6 +64,6 @@ public class MainController {
 
     private void printResult(Result result, Money money) {
         OutputView.printResult(result);
-        OutputView.printProfit((float) result.getPrice() / (float) money.get());
+        OutputView.printProfit(money.getProfit(result.getPrice()));
     }
 }
