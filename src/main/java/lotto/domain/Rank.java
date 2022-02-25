@@ -22,9 +22,11 @@ public enum Rank {
     }
 
     public static Rank getRank(int winningNumbersMatchCount, boolean bonusNumberMatch) {
+        if (winningNumbersMatchCount == 5 && bonusNumberMatch == true) {
+            return RANK_2;
+        }
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.winningLottoMatchCount == winningNumbersMatchCount)
-                .filter(rank -> rank.bonusNumberMatch == bonusNumberMatch)
                 .findFirst()
                 .orElse(RANK_OUT);
     }
