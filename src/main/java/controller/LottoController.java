@@ -5,6 +5,7 @@ import domain.LottoFactory;
 import domain.LottoNumber;
 import domain.Money;
 import domain.RankPrice;
+import java.util.List;
 import java.util.SortedMap;
 import view.InputView;
 import view.OutputView;
@@ -16,12 +17,13 @@ public class LottoController {
 
     public void start() {
         final LottoFactory lottoFactory = new LottoFactory(getMoney());
-        OutputView.printLotto(lottoFactory.issueLotto());
+        final List<Lotto> issuedLotto = lottoFactory.issueLotto();
+        OutputView.printLotto(issuedLotto);
 
         Lotto lastWinLotto = getWinLotto();
         LottoNumber bonusNumber = getBonusNumber(lastWinLotto);
 
-        SortedMap<RankPrice, Integer> rankCounts = lottoFactory.run(lastWinLotto, bonusNumber);
+        SortedMap<RankPrice, Integer> rankCounts = lottoFactory.run(lastWinLotto, bonusNumber, issuedLotto);
 
         OutputView.printWinStatistics(rankCounts);
         OutputView.printWinProfit(lottoFactory.calculateProfit(rankCounts));

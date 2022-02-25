@@ -1,7 +1,5 @@
 package domain;
 
-import utils.Validator;
-
 public class Money {
 
     private static final int LOTTO_PRICE = 1_000;
@@ -10,14 +8,8 @@ public class Money {
     private final int money;
 
     public Money(final String input) {
-        validateInputMoney(input);
         this.money = Integer.parseInt(input);
         validateMoneyRange(this.money);
-    }
-
-    private void validateInputMoney(final String input) {
-        Validator.checkNullOrEmpty(input);
-        Validator.checkFormat(input);
     }
 
     private void validateMoneyRange(final int money) {
@@ -28,6 +20,10 @@ public class Money {
 
     public int calculateCounts() {
         return this.money / LOTTO_PRICE;
+    }
+
+    public double calculateProfit(final int totalWinPrice) {
+        return (double) totalWinPrice / (calculateCounts() * LOTTO_PRICE);
     }
 
     @Override
@@ -47,9 +43,5 @@ public class Money {
     @Override
     public int hashCode() {
         return money;
-    }
-
-    public double calculateProfit(final int totalWinPrice) {
-        return (double) totalWinPrice / (calculateCounts() * LOTTO_PRICE);
     }
 }
