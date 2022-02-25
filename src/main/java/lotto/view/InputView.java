@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class InputView {
@@ -22,11 +23,11 @@ public class InputView {
         return reader.readLine();
     }
 
-    public static List<String> inputWinningNumbers() throws IOException {
+    public static Set<String> inputWinningNumbers() throws IOException {
         out.println("지난 주 당첨 번호를 입력해 주세요.");
         return Arrays.stream(reader.readLine().split(",", -1))
                 .map(String::trim)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     public static String inputBonusBall() throws IOException {

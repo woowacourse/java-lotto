@@ -18,23 +18,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 public class LottoTicketTest {
-    @Test
-    @DisplayName("로또 티켓의 번호가 중복이 있을시 예외가 발생한다.")
-    void lottoTicketDuplicationException() {
-        // given
-        Set<LottoNumber> lottoNumbers = new HashSet<>();
-        for (int i = 1; i <= 6; i++) {
-            lottoNumbers.add(new LottoNumber(String.valueOf(i)));
-        }
-        lottoNumbers.add(new LottoNumber("5"));
-
-        // when
-
-        // then
-        assertThatThrownBy(() -> new LottoTicket(lottoNumbers))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(LOTTO_NUMBER_DUPLICATED);
-    }
 
     @ParameterizedTest
     @MethodSource("provideInvalidNumbers")

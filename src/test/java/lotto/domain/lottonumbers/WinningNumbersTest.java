@@ -1,10 +1,10 @@
 package lotto.domain.lottonumbers;
 
 import static lotto.domain.lottonumbers.WinningNumbers.WINNING_NUMBERS_CONTAIN_BONUS_BALL;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -17,16 +17,23 @@ import org.junit.jupiter.params.provider.CsvSource;
 class WinningNumbersTest {
 
     @ParameterizedTest
-    @CsvSource(value = {"1, 2, 3, 4, 5, 6:30:1, 2, 3, 4, 5, 7:5",
-            "1, 2, 3, 4, 5, 6:30:7, 8, 9, 10, 11, 12:0"}, delimiter = ':')
-    @DisplayName("countContaining은 로또 티켓의 당첨 번호 개수를 반환한다")
-    void returnWinningNumberCount(String winningNumbersString, String bonusBallString, String ticketNumbersString,
-                                  int expected) {
+    @CsvSource(value = {
+            "1, 2, 3, 4, 5, 6  ::  30  ::  1, 2, 3, 4, 5, 7  ::  5",
+            "1, 2, 3, 4, 5, 6  ::  30  ::  7, 8, 9, 10, 11, 12  ::  0"
+    }, delimiterString = "  ::  ")
+    @DisplayName("countContaining 은 로또 티켓의 당첨 번호 개수를 반환한다")
+    void returnWinningNumberCount(
+            String winningNumbersString,
+            String bonusBallString,
+            String ticketNumbersString,
+            int expected
+    ) {
         // given
-        List<String> winnings = Arrays
+        Set<String> winnings = Arrays
                 .stream(winningNumbersString.split(",", -1))
                 .map(String::trim)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
+
         WinningNumbers winningNumbers = WinningNumbers.of(winnings, bonusBallString);
 
         Set<LottoNumber> lottoNumbers = Arrays.stream(ticketNumbersString.split(","))
@@ -43,16 +50,23 @@ class WinningNumbersTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"1, 2, 3, 4, 5, 6:30:1, 2, 3, 4, 5, 30:true",
-            "1, 2, 3, 4, 5, 6:30:1, 2, 3, 4, 5, 29:false"}, delimiter = ':')
+    @CsvSource(value = {
+            "1, 2, 3, 4, 5, 6  ::  30  ::  1, 2, 3, 4, 5, 30  ::  true",
+            "1, 2, 3, 4, 5, 6  ::  30  ::  1, 2, 3, 4, 5, 29  ::  false"
+    }, delimiterString = "  ::  ")
     @DisplayName("보너스 볼을 포함하면 true를 반환한다")
-    void bonusBallContaining(String winningNumbersString, String bonusBallString, String ticketNumbersString,
-                             boolean expected) {
+    void bonusBallContaining(
+            String winningNumbersString,
+            String bonusBallString,
+            String ticketNumbersString,
+            boolean expected
+    ) {
         // given
-        List<String> winnings = Arrays
+        Set<String> winnings = Arrays
                 .stream(winningNumbersString.split(",", -1))
                 .map(String::trim)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
+
         WinningNumbers winningNumbers = WinningNumbers.of(winnings, bonusBallString);
 
         Set<LottoNumber> lottoNumbers = Arrays.stream(ticketNumbersString.split(",", -1))
@@ -72,12 +86,13 @@ class WinningNumbersTest {
     @DisplayName("당첨 번호와 보너스 볼은 중복될 수 없다.")
     void winningNumbersContainBonusBall() {
         // given
-        List<String> winnings = IntStream.rangeClosed(1, 6)
+        Set<String> winnings = IntStream.rangeClosed(1, 6)
                 .mapToObj(String::valueOf)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
+
         String bonusBallString = "1";
 
-        // then
+        // when & then
         assertThatThrownBy(() -> WinningNumbers.of(winnings, bonusBallString))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(WINNING_NUMBERS_CONTAIN_BONUS_BALL);

@@ -16,7 +16,7 @@ public class WinningNumbers extends LottoNumbers {
         this.bonusBall = bonusBall;
     }
 
-    public static WinningNumbers of(List<String> lottoNumberStrings, String bonusBallString) {
+    public static WinningNumbers of(Set<String> lottoNumberStrings, String bonusBallString) {
         if (lottoNumberStrings.contains(bonusBallString)) {
             throw new IllegalArgumentException(WINNING_NUMBERS_CONTAIN_BONUS_BALL);
         }
