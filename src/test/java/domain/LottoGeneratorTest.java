@@ -35,12 +35,17 @@ class LottoGeneratorTest {
     @DisplayName("WinningLottoGenerator에서 생성된 로또의 길이가 6인지 확인한다.")
     void generateWinningLotto() {
 <<<<<<< HEAD
+<<<<<<< HEAD
         List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         Lotto actual = new ManualLottoGenerator().generateLotto(lottoNumbers);
 =======
         List<String> lottoNumbers = Arrays.asList("1", "2", "3", "4", "5", "6");
         Lotto actual = new WinningLottoGenerator().generateLotto(LottoNumberFactory.from(lottoNumbers));
 >>>>>>> d5f0ef8 (refactor: 패키지 분리)
+=======
+        List<Integer> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        Lotto actual = new WinningLottoGenerator().generateLotto(lottoNumbers);
+>>>>>>> dbac179 (refactor : List<String>을 List<Integer> 로 변환해주는 역할 View에 위임)
         int expected = 6;
         assertThat(actual.getLotto().size()).isEqualTo(expected);
     }

@@ -16,10 +16,4 @@ public class LottoNumberFactory {
         }
         return numbers;
     }
-
-    public static List<Integer> from(List<String> numberValues) {
-        return numberValues.stream()
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
-    }
 }

@@ -80,6 +80,7 @@ public class LottoController {
         return LottosDto.from(player.getLottos());
     }
 
+<<<<<<< HEAD
     public void determineWinningNumber(List<String> winningNumber, int bonusBall) {
 <<<<<<< HEAD
         List<LottoNumber> lottoNumbers = LottoFactory.generateWinningLotto(winningNumber);
@@ -89,8 +90,11 @@ public class LottoController {
 =======
         winningLotto = new WinningLotto(lottoNumbers, new LottoNumber(bonusBall));
 =======
+=======
+    public void determineWinningNumber(List<Integer> winningNumbers, int bonusBall) {
+>>>>>>> dbac179 (refactor : List<String>을 List<Integer> 로 변환해주는 역할 View에 위임)
         LottoGenerator lottoGenerator = new WinningLottoGenerator();
-        Lotto winningLotto = lottoGenerator.generateLotto(LottoNumberFactory.from(winningNumber));
+        Lotto winningLotto = lottoGenerator.generateLotto(winningNumbers);
         this.winningLotto = new WinningLotto(winningLotto, new LottoNumber(bonusBall));
 >>>>>>> 5b2a52c (refactor: 로또 생성 기능 인터페이스로 분리)
     }

@@ -81,27 +81,41 @@ public class InputView {
 >>>>>>> 701f681 (refactor: 입력 유효성 검사 static으로 변경 및 적용)
     }
 
+<<<<<<< HEAD
     private List<String> toStrings(String stringArray) {
 =======
     public static List<String> inputWinningNumber() {
+=======
+    public static List<Integer> inputWinningNumber() {
+>>>>>>> dbac179 (refactor : List<String>을 List<Integer> 로 변환해주는 역할 View에 위임)
         System.out.println(WINNING_NUMBER_INPUT_MESSAGE);
-        return toStringList(input());
+        List<String> numberValues = toStrings(input());
+        return toNumbers(numberValues);
     }
 
+<<<<<<< HEAD
     private static List<String> toStringList(String stringArray) {
 >>>>>>> 31d7c6e (feat: WinningLotto 객체 생성)
+=======
+    private static List<String> toStrings(String stringArray) {
+>>>>>>> dbac179 (refactor : List<String>을 List<Integer> 로 변환해주는 역할 View에 위임)
         return Arrays.stream(stringArray.split(DELIMITER))
                 .map(String::trim)
                 .collect(Collectors.toList());
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     private List<Integer> toNumbers(List<String> numberValues) {
+=======
+    private static List<Integer> toNumbers(List<String> numberValues) {
+>>>>>>> dbac179 (refactor : List<String>을 List<Integer> 로 변환해주는 역할 View에 위임)
         return numberValues.stream()
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     public int inputBonusBall() {
         System.out.println(BONUS_BALL_INPUT_MESSAGE);
@@ -109,6 +123,8 @@ public class InputView {
 =======
     public static int inputBonusBall(){
 =======
+=======
+>>>>>>> dbac179 (refactor : List<String>을 List<Integer> 로 변환해주는 역할 View에 위임)
     public static int inputBonusBall() {
 >>>>>>> 31d7c6e (feat: WinningLotto 객체 생성)
         System.out.println(BONUS_BALL_INPUT_MESSAGE);
