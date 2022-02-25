@@ -12,7 +12,7 @@ public class Lotto {
 	public Lotto(List<LottoNumber> lottoNumbers) {
 		checkLottoSize(lottoNumbers);
 		checkDuplicatedLottoNumber(lottoNumbers);
-		this.lotto = lottoNumbers;
+		this.lotto = new ArrayList<>(lottoNumbers);
 	}
 
 	public static Lotto of(String[] lottoNumbers) {
@@ -22,13 +22,10 @@ public class Lotto {
 	private static List<LottoNumber> toLotto(String[] lottoNumbers) {
 		List<LottoNumber> lotto = new ArrayList<>();
 		for (String number : lottoNumbers) {
-			lotto.add(createLottoNumber(number.trim()));
+			int lottoNumber = Integer.parseInt(number.trim());
+			lotto.add(LottoNumber.of(lottoNumber));
 		}
 		return Collections.unmodifiableList(lotto);
-	}
-
-	private static LottoNumber createLottoNumber(String number) {
-		return new LottoNumber(number);
 	}
 
 	private void checkLottoSize(List<LottoNumber> lottoNumbers) {

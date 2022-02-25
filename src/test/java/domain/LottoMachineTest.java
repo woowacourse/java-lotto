@@ -12,8 +12,7 @@ public class LottoMachineTest {
 	@DisplayName("로또를 발행한다")
 	@Test
 	void createLotto() {
-		assertThat(LottoMachine.getInstance()
-			.createLottos(2))
+		assertThat(new LottoMachine().createLottos(2))
 			.isInstanceOf(Lottos.class);
 	}
 }

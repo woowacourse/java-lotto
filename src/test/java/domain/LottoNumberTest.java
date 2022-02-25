@@ -38,4 +38,11 @@ public class LottoNumberTest {
 		assertThatThrownBy(() -> new LottoNumber(number))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
+
+	@Test
+	void factory() {
+		assertThatThrownBy(() -> LottoNumber.of(50))
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessage("로또 범위를 벗어난 숫자입니다.");
+	}
 }

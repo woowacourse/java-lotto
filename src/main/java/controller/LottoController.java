@@ -60,7 +60,7 @@ public class LottoController {
 
 	private LottoNumber createBonusNumber() {
 		try {
-			return new LottoNumber(InputView.insertBonus());
+			return LottoNumber.of(InputView.insertBonus());
 		} catch (Exception e) {
 			OutputView.printErrorMessage(e.getMessage());
 			return createBonusNumber();

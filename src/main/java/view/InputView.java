@@ -24,8 +24,13 @@ public class InputView {
 		}
 	}
 
-	public static String insertBonus() {
-		OutputView.printGuideMessage("보너스 볼을 입력해 주세요.");
-		return scanner.nextLine();
+	public static int insertBonus() {
+		try {
+			OutputView.printGuideMessage("보너스 볼을 입력해 주세요.");
+			return Integer.parseInt(scanner.nextLine());
+		} catch (Exception e) {
+			OutputView.printErrorMessage(e.getMessage());
+			return insertBonus();
+		}
 	}
 }
