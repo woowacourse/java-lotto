@@ -5,6 +5,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoNumberTest {
 
@@ -29,17 +31,11 @@ public class LottoNumberTest {
 			.isInstanceOf(NumberFormatException.class);
 	}
 
-	@DisplayName("범위 불만족 최대")
-	@Test
-	void range_max() {
-		assertThatThrownBy(() -> new LottoNumber("46"))
-			.isInstanceOf(IllegalArgumentException.class);
-	}
-
-	@DisplayName("범위 불만족 최소")
-	@Test
-	void range_min() {
-		assertThatThrownBy(() -> new LottoNumber("0"))
+	@DisplayName("범위 불만족 최대/최소")
+	@ParameterizedTest
+	@ValueSource(strings = {"0,46"})
+	void range(String number) {
+		assertThatThrownBy(() -> new LottoNumber(number))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 }

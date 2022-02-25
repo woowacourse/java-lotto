@@ -11,8 +11,8 @@ public class Payment {
 
 	private int toInt(String payment) {
 		int changeInt = Integer.parseInt(payment);
-		checkMinLottoPrice(changeInt);
 		checkNegative(changeInt);
+		checkMinLottoPrice(changeInt);
 		checkPaymentLimit(changeInt);
 		return changeInt;
 	}
@@ -31,7 +31,7 @@ public class Payment {
 
 	private void checkPaymentLimit(int payment) {
 		if (payment > PAYMENT_LIMIT_PRICE) {
-			throw new IllegalArgumentException("로또는 한사람 당 10만원씩만 살 수 있습니다. ");
+			throw new IllegalArgumentException("로또는 한사람 당 10만원씩만 살 수 있습니다.");
 		}
 	}
 

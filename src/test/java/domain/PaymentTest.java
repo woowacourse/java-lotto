@@ -15,7 +15,8 @@ public class PaymentTest {
 	@Test
 	void range_fail() {
 		assertThatThrownBy(() -> new Payment("999"))
-			.isInstanceOf(IllegalArgumentException.class);
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessage("1000원 이상 입력해주세요!");
 	}
 
 	@DisplayName("구입 금액이 1000원 이상 성공")
@@ -29,7 +30,8 @@ public class PaymentTest {
 	@Test
 	void input_negative() {
 		assertThatThrownBy(() -> new Payment("-1000"))
-			.isInstanceOf(IllegalArgumentException.class);
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessage("음수는 불가능합니다.");
 	}
 
 	@DisplayName("숫자인 경우 성공")
@@ -50,14 +52,16 @@ public class PaymentTest {
 	@Test
 	void input_empty_fail() {
 		assertThatThrownBy(() -> new Payment(""))
-			.isInstanceOf(NumberFormatException.class);
+			.isInstanceOf(NumberFormatException.class)
+			.hasMessage("For input string: \"\"");
 	}
 
 	@DisplayName("구입금액 10만원 초과 실패")
 	@Test
 	void range_max() {
-		assertThatThrownBy(() -> new Payment("110000"))
-			.isInstanceOf(IllegalArgumentException.class);
+		assertThatThrownBy(() -> new Payment("100001"))
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessage("로또는 한사람 당 10만원씩만 살 수 있습니다.");
 	}
 
 	@DisplayName("로또 생성 횟수")
@@ -69,7 +73,7 @@ public class PaymentTest {
 	@DisplayName("수익률 계산")
 	@Test
 	void calculate_profit_rate() {
-		Map<Rank,Integer> ranks = Rank.getMap();
+		Map<Rank, Integer> ranks = Rank.getMap();
 		ranks.replace(Rank.FIFTH, 4);
 		LottoResult lottoResult = new LottoResult(ranks);
 		Payment payment = new Payment("10000");
