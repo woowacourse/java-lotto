@@ -6,6 +6,7 @@ import domain.Lotto.Lotto;
 
 import java.util.ArrayList;
 import java.util.Collections;
+<<<<<<< HEAD
 import java.util.List;
 
 public class LottosDto {
@@ -26,6 +27,8 @@ import domain.Lotto.Lotto;
 >>>>>>> d5f0ef8 (refactor: 패키지 분리)
 
 import java.util.ArrayList;
+=======
+>>>>>>> 3158ddf (refactor : 일급 컬렉션의 List 불변 객체로 만들기)
 import java.util.List;
 
 public class LottosDto {
@@ -62,12 +65,16 @@ public class LottosDto {
 
     public List<LottoDto> getLottoDtos() {
 <<<<<<< HEAD
+<<<<<<< HEAD
         return Collections.unmodifiableList(lottoDtos);
     }
 =======
 >>>>>>> f80fb84 (feat: DTO 추가)
 =======
         return lottoDtos;
+=======
+        return Collections.unmodifiableList(lottoDtos);
+>>>>>>> 3158ddf (refactor : 일급 컬렉션의 List 불변 객체로 만들기)
     }
 >>>>>>> e6945bb (style: 코드 포멧팅)
 }

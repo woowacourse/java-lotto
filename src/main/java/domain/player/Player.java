@@ -7,9 +7,13 @@ import domain.Result;
 
 import java.util.ArrayList;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import java.util.Collections;
 =======
 >>>>>>> d5f0ef8 (refactor: 패키지 분리)
+=======
+import java.util.Collections;
+>>>>>>> 3158ddf (refactor : 일급 컬렉션의 List 불변 객체로 만들기)
 import java.util.List;
 
 public class Player {
@@ -76,7 +80,11 @@ public class Player {
     }
 
     public List<Lotto> getLottos() {
+<<<<<<< HEAD
         return lottos;
 >>>>>>> d5f0ef8 (refactor: 패키지 분리)
+=======
+        return Collections.unmodifiableList(lottos);
+>>>>>>> 3158ddf (refactor : 일급 컬렉션의 List 불변 객체로 만들기)
     }
 }

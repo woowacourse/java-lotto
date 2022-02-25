@@ -4,10 +4,14 @@ import domain.Result;
 import utils.ExceptionMessage;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Collections;
 =======
 >>>>>>> d5f0ef8 (refactor: 패키지 분리)
+=======
+import java.util.Collections;
+>>>>>>> 3158ddf (refactor : 일급 컬렉션의 List 불변 객체로 만들기)
 import java.util.List;
 
 public class Lotto {
@@ -32,6 +36,7 @@ public class Lotto {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     public Result judge(WinningLotto winningLotto) {
         int hitCount = (int) lotto.stream()
                 .filter(winningLotto::isContainLottoNumber)
@@ -48,6 +53,8 @@ public class Lotto {
         return lotto;
     }
 
+=======
+>>>>>>> 3158ddf (refactor : 일급 컬렉션의 List 불변 객체로 만들기)
     public Result judge(WinningLotto winningLotto) {
         List<LottoNumber> winningNumbers = winningLotto.getWinningLotto();
         int hitCount = 0;
@@ -61,5 +68,9 @@ public class Lotto {
     private boolean judgeBonusBall(LottoNumber bonusBall) {
         return lotto.contains(bonusBall);
 >>>>>>> d5f0ef8 (refactor: 패키지 분리)
+    }
+
+    public List<LottoNumber> getLotto() {
+        return Collections.unmodifiableList(lotto);
     }
 }

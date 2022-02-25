@@ -67,7 +67,7 @@ public class LottoNumber {
         return 0;
     }
 
-    public int number() {
+    public int getNumber() {
         return this.number;
     }
 

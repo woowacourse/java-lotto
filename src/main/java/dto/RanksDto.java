@@ -8,6 +8,7 @@ import domain.ResultStatus;
 
 import java.util.ArrayList;
 import java.util.Collections;
+<<<<<<< HEAD
 import java.util.List;
 import java.util.Map;
 
@@ -48,6 +49,8 @@ import domain.Rank;
 
 import java.util.ArrayList;
 >>>>>>> 2b5d619 (refactor: 결과 리스트 생성 로직 이동)
+=======
+>>>>>>> 3158ddf (refactor : 일급 컬렉션의 List 불변 객체로 만들기)
 import java.util.List;
 
 public class RanksDto {
@@ -73,7 +76,7 @@ public class RanksDto {
     }
 
     public List<RankDto> getRankDtos() {
-        return rankDtos;
+        return Collections.unmodifiableList(rankDtos);
     }
 
 <<<<<<< HEAD

@@ -4,6 +4,7 @@ package dto;
 <<<<<<< HEAD
 import domain.Lotto.LottoNumber;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Collections;
 =======
@@ -13,6 +14,9 @@ import domain.Lotto.LottoNumber;
 >>>>>>> d5f0ef8 (refactor: 패키지 분리)
 
 >>>>>>> f80fb84 (feat: DTO 추가)
+=======
+import java.util.Collections;
+>>>>>>> 3158ddf (refactor : 일급 컬렉션의 List 불변 객체로 만들기)
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,7 +52,7 @@ public class LottoDto {
 
     public static LottoDto from(List<LottoNumber> lottoNumbers) {
         List<Integer> numbers = lottoNumbers.stream()
-                .map(LottoNumber::number)
+                .map(LottoNumber::getNumber)
                 .collect(Collectors.toUnmodifiableList());
         return new LottoDto(numbers);
     }
@@ -57,7 +61,7 @@ public class LottoDto {
 =======
 
     public List<Integer> getLottoNumber() {
-        return lottoNumber;
+        return Collections.unmodifiableList(lottoNumber);
     }
 >>>>>>> 7a351e9 (docs: 기능 구현 목록 수정)
 }
