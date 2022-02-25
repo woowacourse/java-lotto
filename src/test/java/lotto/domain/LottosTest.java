@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static lotto.domain.LottoTest.createLottoNumbers;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -20,6 +21,14 @@ public class LottosTest {
                         createLottoNumbers(2, 3, 4, 5, 6, 7))
                 .map(Lotto::new)
                 .collect(Collectors.toList()));
+    }
+
+    @DisplayName("null로 객체생성하면 예외 발생")
+    @Test
+    void nullLottosException() {
+        assertThatExceptionOfType(NullPointerException.class)
+                .isThrownBy(() -> new Lottos(null))
+                .withMessage("[ERROR] Lotto는 null로 생성할 수 없습니다.");
     }
 
     @DisplayName("LottoResult 로또 결과 객체를 계산하여 반환할 수 있다.")

@@ -1,14 +1,17 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class Lottos {
 
     private final List<Lotto> lottos;
 
     public Lottos(final List<Lotto> lottos) {
-        this.lottos = lottos;
+        Objects.requireNonNull(lottos, "[ERROR] Lotto는 null로 생성할 수 없습니다.");
+        this.lottos = new ArrayList<>(lottos);
     }
 
     public LottoResult createResult(final WinLotto winLotto) {
