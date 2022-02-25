@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Objects;
+
 public class LottoPurchaseCounts {
 
     private final int manualCount;
@@ -16,5 +18,22 @@ public class LottoPurchaseCounts {
         if (count < 0) {
             throw new IllegalArgumentException("[ERROR] 구매 갯수는 음수가 들어올 수 없습니다.");
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoPurchaseCounts that = (LottoPurchaseCounts) o;
+        return manualCount == that.manualCount && automaticCount == that.automaticCount;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(manualCount, automaticCount);
     }
 }

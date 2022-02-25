@@ -32,4 +32,19 @@ public class MoneyTest {
                 .isThrownBy(() -> money.calculatePurchaseCounts(manualCounts))
                 .withMessage("[ERROR] 보유 금액보다 많은 로또를 구매할 수 없습니다.");
     }
+
+    @DisplayName("수동 로또 구매 수량 입력 시 총 구매 수량 객체를 반환한다")
+    @Test
+    void calculatePurchaseCounts() {
+        // given
+        final Money money = new Money(5000);
+        final int manualCounts = 3;
+        final LottoPurchaseCounts expected = new LottoPurchaseCounts(3, 2);
+
+        // when
+        final LottoPurchaseCounts result = money.calculatePurchaseCounts(manualCounts);
+
+        // then
+        assertThat(result).isEqualTo(expected);
+    }
 }

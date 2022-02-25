@@ -19,9 +19,10 @@ public class Money {
         return amount / Lotto.LOTTO_PURCHASE_MONEY;
     }
 
-    public void calculatePurchaseCounts(final int manualCounts) {
+    public LottoPurchaseCounts calculatePurchaseCounts(final int manualCounts) {
         if (calculateLottoCount() < manualCounts) {
             throw new IllegalArgumentException("[ERROR] 보유 금액보다 많은 로또를 구매할 수 없습니다.");
         }
+        return new LottoPurchaseCounts(manualCounts, calculateLottoCount() - manualCounts);
     }
 }
