@@ -29,11 +29,13 @@
   - [ ] `VO`에 대한 학습 필요 [링크](https://tecoble.techcourse.co.kr/post/2020-06-11-value-object/)
 - [ ] `WinningNumber`에 존재하는 검증 로직이 `Lotto`에도 있어야함
   - [ ] 이때 검증 로직의 중복 해결 방법
-- [ ] `WinningNumber` 검증 로직 중 코드 개선
-  - [ ] `filter` -> `anyMatch`
+- [x] `WinningNumber` 검증 로직 중 코드 개선
+  - [x] <s>`filter` -> `anyMatch`</s>
+  - [x] for-loop와 메서드 분리를 통해 가독성 개선
 - [ ] `생성자 체이닝`에 대한 학습 [링크](https://www.baeldung.com/java-chain-constructors)
-- [ ] `Lottos`에서 불변 객체로 수정
-- [ ] stream.forEach() 사용에 대한 고민 필요 [링크](https://homoefficio.github.io/2016/06/26/for-loop-%EB%A5%BC-Stream-forEach-%EB%A1%9C-%EB%B0%94%EA%BE%B8%EC%A7%80-%EB%A7%90%EC%95%84%EC%95%BC-%ED%95%A0-3%EA%B0%80%EC%A7%80-%EC%9D%B4%EC%9C%A0/)
+- [x] `Lottos`에서 불변 객체로 수정
+- [x] stream.forEach() 사용에 대한 고민 필요 [링크](https://homoefficio.github.io/2016/06/26/for-loop-%EB%A5%BC-Stream-forEach-%EB%A1%9C-%EB%B0%94%EA%BE%B8%EC%A7%80-%EB%A7%90%EC%95%84%EC%95%BC-%ED%95%A0-3%EA%B0%80%EC%A7%80-%EC%9D%B4%EC%9C%A0/)
+  - 무분별한 Stream forEach 사용이 아닌 가독성과 성능을 고민하여 적절한 선택 필요 
 - [ ] `생성자를 통한 초기화`와 `정적 팩토리 메서드를 통한 초기화` 비교
   - [ ] `Date`, `LocalDateTime`의 현재 시간을 구하는 로직에 대해 찾아보기
   - [ ] 생성자를 통한 초기화
@@ -83,9 +85,12 @@
        2. 호출될 때마다 인스턴스를 새로 생성하지 않아도 된다.
        3. 반환 타입의 하위 타입 객체를 반환할 수 있는 능력이 있다.
        4. 입력 매개변수에 따라 매번 다른 클래스의 객체를 반환할 수 있다.
-       
+5. Stream forEach() 사용에 대한 고민
+   - Stream을 사용했을 때 기존 `for-loop`이 아닌 `forEach()`를 사용할 때 오버헤드가 발생한다.
+   - 가독성 면에 서도 `stream`이 `forEach()`, 'range', `lamda`를 중첩하여 사용할 경우 더 불편할 수 있다.
 
 ### 참조
 1) Date vs. LocalDateTime : https://jeong-pro.tistory.com/163
    - 정적 팩토리 메서드(1) : https://devlog-wjdrbs96.tistory.com/256
    - 정적 팩토리 메서드(2) : https://tecoble.techcourse.co.kr/post/2020-05-26-static-factory-method/
+2) forEach() vs. for-loop : https://homoefficio.github.io/2016/06/26/for-loop-%EB%A5%BC-Stream-forEach-%EB%A1%9C-%EB%B0%94%EA%BE%B8%EC%A7%80-%EB%A7%90%EC%95%84%EC%95%BC-%ED%95%A0-3%EA%B0%80%EC%A7%80-%EC%9D%B4%EC%9C%A0/

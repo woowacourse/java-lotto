@@ -37,14 +37,20 @@ public class WinningNumber {
     }
 
     private void checkAvailableRange(List<Integer> winningNumbers) {
-        winningNumbers.stream().filter(winningNumber -> winningNumber < MIN_WINNING_NUMBER || winningNumber > MAX_WINNING_NUMBER)
-            .forEach(winningNumber -> {
-                throw new IllegalArgumentException(WINNING_NUMBER_RANGE_MESSAGE);
-            });
+        for (int winningNumber : winningNumbers) {
+            isValidRange(winningNumber);
+        }
+    }
+
+    private void isValidRange(int winningNumber) {
+        if (winningNumber < MIN_WINNING_NUMBER || winningNumber > MAX_WINNING_NUMBER) {
+            throw new IllegalArgumentException(WINNING_NUMBER_RANGE_MESSAGE);
+        }
     }
 
     private void checkDuplicatedWinningNumber(List<Integer> winningNumbers) {
-        if (winningNumbers.stream().distinct().count() != winningNumbers.size()) {
+        int duplicatedCount = (int) winningNumbers.stream().distinct().count();
+        if (duplicatedCount != winningNumbers.size()) {
             throw new IllegalArgumentException(WINNING_NUMBER_DUPLICATE_MESSAGE);
         }
     }

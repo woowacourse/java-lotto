@@ -22,7 +22,7 @@ public class Lottos {
 
     public Statistic getWinningStatistics(WinningNumber winningNumber, int bonusBall) {
         EnumMap<Rank, Integer> rankCountMap = new EnumMap<>(Rank.class);
-        Arrays.stream(Rank.values()).forEach(rank -> rankCountMap.put(rank, 0));
+        initRankCountMap(rankCountMap);
 
         for (Lotto lotto : lottos) {
             int matchCount = lotto.match(winningNumber);
@@ -31,6 +31,12 @@ public class Lottos {
             rankCountMap.put(key, rankCountMap.get(key) + 1);
         }
         return new Statistic(rankCountMap);
+    }
+
+    private void initRankCountMap(EnumMap<Rank, Integer> rankCountMap) {
+        for (Rank rank : Rank.values()) {
+            rankCountMap.put(rank, 0);
+        }
     }
 
     public List<Lotto> getLottos() {

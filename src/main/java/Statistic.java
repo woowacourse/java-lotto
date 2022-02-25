@@ -17,7 +17,7 @@ public class Statistic {
         return totalWinning / money.getMoney();
     }
 
-    public Map<Rank, Integer> getStatistics() {
+    public EnumMap<Rank, Integer> getStatistics() {
         return statistics;
     }
 }
