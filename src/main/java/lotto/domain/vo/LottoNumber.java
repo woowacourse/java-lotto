@@ -12,17 +12,17 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private static final String INVALID_LOTTO_NUMBER_EXCEPTION_MESSAGE = "로또 번호는 1 ~ 45 사이의 자연수여야합니다.";
     private static final List<Integer> basicNumbers;
 
-    private final int number;
-
-    private LottoNumber(final int value) {
-        this.number = value;
-    }
-
     static {
         basicNumbers = IntStream.range(0, LAST_LOTTO_NUMBER)
                 .map(index -> index + 1)
                 .boxed()
                 .collect(Collectors.toUnmodifiableList());
+    }
+
+    private final int number;
+
+    private LottoNumber(final int value) {
+        this.number = value;
     }
 
     public static LottoNumber from(final String value) {
