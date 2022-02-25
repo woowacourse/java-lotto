@@ -36,7 +36,7 @@ class PurchaseAmountTest {
     @DisplayName("구입 금액만큼 티켓 개수를 반환한다")
     void testCalcTicketAmount() {
         PurchaseAmount purchaseAmount = new PurchaseAmount(14500);
-        int count = purchaseAmount.calcTheNumberOfTicket();
+        int count = purchaseAmount.calculateTheNumberOfTickets();
         assertThat(count).isEqualTo(14);
     }
 }

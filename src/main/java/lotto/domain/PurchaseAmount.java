@@ -11,7 +11,7 @@ public class PurchaseAmount {
         this.amount = calculateActualAmount(amount);
     }
 
-    public int calcTheNumberOfTicket() {
+    public int calculateTheNumberOfTickets() {
         return amount / TICKET_PRICE;
     }
 

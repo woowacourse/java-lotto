@@ -58,11 +58,11 @@ public class RankBoard {
         board.put(rank, board.get(rank) + 1);
     }
 
-    public double calcProfitRatio(int amount) {
-        return Math.round((double) calcProfit() / amount * 100) / 100.0;
+    public double calculateProfitRatio(int amount) {
+        return Math.round((double) calculateProfit() / amount * 100) / 100.0;
     }
 
-    private int calcProfit() {
+    private int calculateProfit() {
         int profit = 0;
         for (Rank rank : board.keySet()) {
             profit += board.get(rank) * rank.getPrize();

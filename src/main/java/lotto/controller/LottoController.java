@@ -12,7 +12,7 @@ public class LottoController {
 
     public void run() {
         PurchaseAmount purchaseAmount = getPurchaseAmount();
-        int ticketCount = purchaseAmount.calcTheNumberOfTicket();
+        int ticketCount = purchaseAmount.calculateTheNumberOfTickets();
         OutputView.printTicketCount(ticketCount);
 
         List<Lotto> lottoTickets = getTickets(ticketCount);
@@ -21,7 +21,7 @@ public class LottoController {
         WinningLotto winningLotto = getTotalNumber();
         RankBoard rankBoard = new RankBoard(winningLotto, lottoTickets);
 
-        OutputView.printResult(rankBoard, rankBoard.calcProfitRatio(purchaseAmount.getAmount()));
+        OutputView.printResult(rankBoard, rankBoard.calculateProfitRatio(purchaseAmount.getAmount()));
     }
 
     private PurchaseAmount getPurchaseAmount() {

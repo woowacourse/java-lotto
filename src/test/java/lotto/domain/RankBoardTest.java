@@ -67,7 +67,7 @@ class RankBoardTest {
 
         RankBoard board = new RankBoard(winningLotto, tickets);
 
-        assertThat(board.calcProfitRatio(90_000)).isEqualTo(0.06);
+        assertThat(board.calculateProfitRatio(90_000)).isEqualTo(0.06);
     }
 
     private List<Lotto> initTickets() {
