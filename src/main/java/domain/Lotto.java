@@ -37,8 +37,8 @@ public class Lotto {
                 .count();
     }
 
-    public int getSameNumberCount(Lotto anotherLotto) {
-        return (int) lottoNumbers.stream()
+    public long getSameNumberCount(Lotto anotherLotto) {
+        return lottoNumbers.stream()
                 .filter(anotherLotto::containsLottoNumber)
                 .count();
     }
