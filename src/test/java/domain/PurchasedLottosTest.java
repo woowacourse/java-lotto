@@ -31,24 +31,24 @@ public class PurchasedLottosTest {
         winningLotto.addBonusNumber(6);
     }
 
-    @Test
-    @DisplayName("올바른 상금이 계산된다.")
-    void lottos_makeRightTotalPrize() {
-        PrizeResult finalResult = lottos.calculatePrizeResult(winningLotto);
+//    @Test
+//    @DisplayName("올바른 상금이 계산된다.")
+//    void lottos_makeRightTotalPrize() {
+//        PrizeResult finalResult = lottos.calculatePrizeResult(winningLotto);
+//
+//        assertThat(finalResult.totalPrize()).isEqualTo(2001555000);
+//    }
 
-        assertThat(finalResult.totalPrize()).isEqualTo(2001555000);
-    }
-
-    @Test
-    @DisplayName("올바른 수익률이 계산된다.")
-    void lottos_calculateEarningRate() {
-        lottos.calculatePrizeResult(winningLotto);
-
-        int prize = 2001555000;
-        float expected = (float) prize / inputMoney;
-        expected = (float) (Math.floor(expected * 100) / 100.0);
-
-        assertThat(lottos.calculateEarningRate()).isEqualTo(expected);
-    }
+//    @Test
+//    @DisplayName("올바른 수익률이 계산된다.")
+//    void lottos_calculateEarningRate() {
+//        lottos.calculatePrizeResult(winningLotto);
+//
+//        int prize = 2001555000;
+//        float expected = (float) prize / inputMoney;
+//        expected = (float) (Math.floor(expected * 100) / 100.0);
+//
+//        assertThat(lottos.calculateEarningRate()).isEqualTo(expected);
+//    }
 
 }

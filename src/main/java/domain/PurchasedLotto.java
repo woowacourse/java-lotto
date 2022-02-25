@@ -10,16 +10,15 @@ public class PurchasedLotto {
 
     private static final int LOTTO_PRICE = 1000;
 
-    private List<Lotto> lottos = new ArrayList<>();
-    private PrizeResult prizeResult = new PrizeResult();
-    private int inputMoney;
+    private final List<Lotto> lottos = new ArrayList<>();
+    private final int inputMoney;
 
     public PurchasedLotto(int inputMoney) {
         this.inputMoney = inputMoney;
-        purchaseMaximunLottos();
+        purchaseMaximumLottos();
     }
 
-    private void purchaseMaximunLottos() {
+    private void purchaseMaximumLottos() {
         for (int i = 0; i < inputMoney / LOTTO_PRICE; i++) {
             purchase(new RandomPurchaseStrategy());
         }
@@ -30,28 +29,12 @@ public class PurchasedLotto {
         lottos.add(lotto);
     }
 
-    public PrizeResult calculatePrizeResult(WinningNumber winningNumber) {
-        lottos.stream()
-                .forEach(lotto -> {
-                    Prize winnerPrice = lotto.calculateRank(winningNumber);
-                    prizeResult.updatePrizeResult(winnerPrice);
-                });
-        return prizeResult;
-    }
-
-    public float calculateEarningRate() {
-        long totalPrize = prizeResult.totalPrize();
-
-        float earningRate = (float) totalPrize / inputMoney;
-        return (float) (Math.floor(earningRate * 100) / 100.0);
+    public PrizeResult prizeResult(WinningNumber winningNumber) {
+        return new PrizeResult(inputMoney, lottos, winningNumber);
     }
 
     public List<Lotto> getLottos() {
         return lottos;
-    }
-
-    public PrizeResult getPrizeResult() {
-        return prizeResult;
     }
 
 }
