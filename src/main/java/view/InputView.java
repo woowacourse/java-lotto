@@ -4,6 +4,7 @@ import java.util.Scanner;
 import utils.Validator;
 
 public class InputView {
+    
     private static final Scanner SCANNER = new Scanner(System.in);
 
     private static String getInput() {

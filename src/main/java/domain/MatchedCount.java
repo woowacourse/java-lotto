@@ -2,8 +2,6 @@ package domain;
 
 public class MatchedCount {
 
-    private static final int SECOND_RANK_UNIT = 2;
-
     private final int count;
 
     public MatchedCount(final int count) {

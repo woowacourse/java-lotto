@@ -10,7 +10,6 @@ public enum RankPrice {
     FOURTH(4, false, 50000),
     FIFTH(3, false, 5000);
 
-
     private static final String ERROR_INVALID_WIN_COUNT_MESSAGE = "일치하는 값이 없습니다.";
 
     private final int matchedCount;

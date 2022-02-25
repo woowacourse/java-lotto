@@ -3,6 +3,7 @@ package dto;
 import domain.LottoNumber;
 
 public class LottoNumberDto {
+    
     private final int number;
 
     public LottoNumberDto(final int number) {
