@@ -14,13 +14,13 @@ public class InputController {
     }
 
     public WinningLotto makeWinningLotto(String winningNumbers, String bonusNumber) {
-        List<Integer> lottoNumbers = splitWinningLotto(winningNumbers);
+        List<Integer> lottoNumbers = splitWinningNumbers(winningNumbers);
         int lottoBonusNumber = toIntBonusNumber(bonusNumber);
         return new WinningLotto(lottoNumbers, lottoBonusNumber);
     }
 
-    private List<Integer> splitWinningLotto(String winningNumbers) {
-        String[] splitNumbers = winningNumbers.split(",");
+    private List<Integer> splitWinningNumbers(String winningNumbers) {
+        String[] splitNumbers = InputValidator.validateLottoNumbers(winningNumbers);
         return Arrays.stream(splitNumbers)
                 .map(String::trim)
                 .mapToInt(Integer::parseInt)
@@ -29,6 +29,6 @@ public class InputController {
     }
 
     private int toIntBonusNumber(String bonusNumber) {
-        return Integer.parseInt(bonusNumber);
+        return InputValidator.validateNumber(bonusNumber);
     }
 }

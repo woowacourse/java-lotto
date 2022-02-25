@@ -17,7 +17,8 @@ public class LottoController {
         Lottos lottos = inputController.makeLottos(InputView.inputPrice());
         ResultView.printResult(lottos);
 
-        WinningLotto winningLotto = inputController.makeWinningLotto(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
+        WinningLotto winningLotto = inputController.makeWinningLotto(InputView.inputWinningNumbers(),
+                InputView.inputBonusNumber());
 
         winningLotto.checkRank(lottos);
         lottos.countRank();

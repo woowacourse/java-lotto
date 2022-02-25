@@ -4,6 +4,9 @@ import java.util.List;
 
 public class WinningLotto {
 
+    private static final String LOTTO_ERROR_MESSAGE = "[ERROR] 잘못된 로또 번호입니다.";
+    private static final String BONUS_NUMBER_ERROR_MESSAGE = "[ERROR] 잘못된 보너스 번호입니다.";
+
     private final List<Integer> winningNumbers;
     private final int bonusNumber;
 
@@ -14,13 +17,9 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
-    public void checkRank(Lottos lottos) {
-        lottos.calculateRanks(winningNumbers, bonusNumber);
-    }
-
     private void validateWinningNumbers(List<Integer> numbers) {
         if (!isValidLength(numbers) || !isValidRange(numbers) || isDuplicate(numbers)) {
-            throw new RuntimeException();
+            throw new RuntimeException(LOTTO_ERROR_MESSAGE);
         }
     }
 
@@ -41,9 +40,13 @@ public class WinningLotto {
         return numbers.size() != numbers.stream().distinct().count();
     }
 
-    public void validateBonusNumber(List<Integer> winningNumbers, int bonusNumber) throws RuntimeException {
+    private void validateBonusNumber(List<Integer> winningNumbers, int bonusNumber) throws RuntimeException {
         if (winningNumbers.contains(bonusNumber)) {
-            throw new RuntimeException();
+            throw new RuntimeException(BONUS_NUMBER_ERROR_MESSAGE);
         }
+    }
+
+    public void checkRank(Lottos lottos) {
+        lottos.calculateRanks(winningNumbers, bonusNumber);
     }
 }

@@ -1,6 +1,7 @@
 package lotto.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,6 +12,37 @@ import org.junit.jupiter.api.Test;
 public class LottoTest {
 
     private Lotto lotto;
+
+    @Test
+    void 로또_생성_테스트_정상() {
+        lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThat(lotto).isInstanceOf(Lotto.class);
+    }
+
+
+    @Test
+    void 로또_생성_테스트_길이() {
+        assertThatThrownBy(() ->
+                lotto = new Lotto(Arrays.asList(1, 2, 3, 4)))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessageContaining("[ERROR]");
+    }
+
+    @Test
+    void 로또_생성_테스트_범위() {
+        assertThatThrownBy(() ->
+                lotto = new Lotto(Arrays.asList(1, 2, 3, 4, -1, 0)))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessageContaining("[ERROR]");
+    }
+
+    @Test
+    void 로또_생성_테스트_중복() {
+        assertThatThrownBy(() ->
+                lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 4)))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessageContaining("[ERROR]");
+    }
 
     @BeforeEach
     void init() {

@@ -5,10 +5,7 @@ import java.util.regex.Pattern;
 public class InputValidator {
 
     private static final String PRICE_ERROR_MESSAGE = "[ERROR] 유효한 입력이 아닙니다.";
-    private static final String LENGTH_ERROR_MESSAGE = "[ERROR] 6개의 숫자가 입력되지 않았습니다.";
-    private static final String NUMBER_DUPLICATE_ERROR_MESSAGE = "[ERROR] 중복된 숫자가 존재합니다.";
     private static final String NOT_NUMBER_ERROR_MESSAGE = "[ERROR] 문자가 입력되었습니다.";
-    private static final String RANGE_ERROR_MESSAGE = "[ERROR] 숫자의 범위가 잘못되었습니다.";
 
     private static final String NUMBER_REGEX = "\\d+";
 
@@ -26,15 +23,18 @@ public class InputValidator {
     }
 
 
-    private static void validateLottoNumbers(String[] numbers) throws RuntimeException {
-        for (String number : numbers) {
-            validateLottoNumber(number);
+    public static String[] validateLottoNumbers(String numbers) throws RuntimeException {
+        String[] splitNumbers = numbers.split(",");
+        for (String number : splitNumbers) {
+            validateNumber(number);
         }
+        return splitNumbers;
     }
 
-    private static void validateLottoNumber(String number) throws RuntimeException {
+    public static int validateNumber(String number) throws RuntimeException {
         try {
             String trimNumber = number.trim();
+            return Integer.parseInt(trimNumber);
         } catch (NumberFormatException e) {
             throw new RuntimeException(NOT_NUMBER_ERROR_MESSAGE);
         }

@@ -18,7 +18,7 @@ public class InputControllerTest {
     }
 
     @Test
-    void 당첨로_만들기_테스트() {
+    void 당첨로또_만들기_테스트() {
         String winningNumbers = "1,2,3,4,5,6";
         String bonusNumber = "7";
         WinningLotto winningLotto = inputController.makeWinningLotto(winningNumbers, bonusNumber);
