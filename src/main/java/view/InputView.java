@@ -2,6 +2,8 @@ package view;
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+import domain.Lotto.WinningLotto;
+import domain.player.Money;
 import utils.InputValidator;
 
 =======

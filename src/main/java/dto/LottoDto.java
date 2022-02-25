@@ -57,7 +57,7 @@ public class LottoDto {
         this.lottoNumber = new ArrayList<>(lottoNumber);
     }
 
-    public static LottoDto from(List<LottoNumber> lottoNumbers) {
+    static LottoDto from(List<LottoNumber> lottoNumbers) {
         List<Integer> numbers = lottoNumbers.stream()
                 .map(LottoNumber::getNumber)
                 .collect(Collectors.toUnmodifiableList());

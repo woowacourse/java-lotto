@@ -26,6 +26,7 @@ public class RankDto {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     static RankDto from(Rank rank, int hitCount) {
         return new RankDto(rank.getRankNumber(), rank.getCriteria(), rank.getReward(), hitCount);
 =======
@@ -33,6 +34,9 @@ public class RankDto {
 =======
     public static RankDto from(Rank rank, int rankNumber) {
 >>>>>>> 94c4d43 (style: 코드 포멧팅)
+=======
+    static RankDto from(Rank rank, int rankNumber) {
+>>>>>>> 85490e6 (refactor : 메서드 접근지정자 default로 변경)
         return new RankDto(rankNumber, rank.getCriteria(), rank.getReward(), rank.getHitCount());
 >>>>>>> 2821995 (feat: 결과 출력 기능 구현)
     }
