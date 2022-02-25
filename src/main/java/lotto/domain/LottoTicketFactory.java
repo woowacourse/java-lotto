@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -39,6 +39,6 @@ public class LottoTicketFactory {
 
     private static LottoTicket createTicketShuffled() {
         Collections.shuffle(availableLottoNumbers);
-        return new LottoTicket(new ArrayList<>(availableLottoNumbers.subList(0, 6)));
+        return new LottoTicket(new HashSet<>(availableLottoNumbers.subList(0, 6)));
     }
 }

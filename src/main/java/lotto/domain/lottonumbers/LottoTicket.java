@@ -2,15 +2,16 @@ package lotto.domain.lottonumbers;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import lotto.domain.LottoNumber;
 
 public class LottoTicket extends LottoNumbers {
-    public LottoTicket(List<LottoNumber> lottoNumbers) {
+    public LottoTicket(Set<LottoNumber> lottoNumbers) {
         super(lottoNumbers);
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return Collections.unmodifiableList(lottoNumbers);
+    public Set<LottoNumber> getLottoNumbers() {
+        return Collections.unmodifiableSet(lottoNumbers);
     }
 
     public boolean contains(LottoNumber lottoNumber) {

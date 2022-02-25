@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.domain.LottoNumber;
@@ -28,10 +29,10 @@ class WinningNumbersTest {
                 .collect(Collectors.toList());
         WinningNumbers winningNumbers = WinningNumbers.of(winnings, bonusBallString);
 
-        List<LottoNumber> lottoNumbers = Arrays.stream(ticketNumbersString.split(",", -1))
+        Set<LottoNumber> lottoNumbers = Arrays.stream(ticketNumbersString.split(","))
                 .map(String::trim)
                 .map(LottoNumber::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
         // when
@@ -54,10 +55,10 @@ class WinningNumbersTest {
                 .collect(Collectors.toList());
         WinningNumbers winningNumbers = WinningNumbers.of(winnings, bonusBallString);
 
-        List<LottoNumber> lottoNumbers = Arrays.stream(ticketNumbersString.split(",", -1))
+        Set<LottoNumber> lottoNumbers = Arrays.stream(ticketNumbersString.split(",", -1))
                 .map(String::trim)
                 .map(LottoNumber::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
         // when

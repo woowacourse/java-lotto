@@ -1,6 +1,7 @@
 package lotto.domain.lottonumbers;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import lotto.domain.LottoNumber;
 
@@ -10,7 +11,7 @@ public class WinningNumbers extends LottoNumbers {
 
     private final LottoNumber bonusBall;
 
-    private WinningNumbers(List<LottoNumber> lottoNumbers, LottoNumber bonusBall) {
+    private WinningNumbers(Set<LottoNumber> lottoNumbers, LottoNumber bonusBall) {
         super(lottoNumbers);
         this.bonusBall = bonusBall;
     }
@@ -20,9 +21,13 @@ public class WinningNumbers extends LottoNumbers {
             throw new IllegalArgumentException(WINNING_NUMBERS_CONTAIN_BONUS_BALL);
         }
 
-        return new WinningNumbers(lottoNumberStrings.stream()
+        Set<LottoNumber> lottoNumbers = lottoNumberStrings.stream()
                 .map(LottoNumber::new)
-                .collect(Collectors.toList()), new LottoNumber(bonusBallString));
+                .collect(Collectors.toSet());
+
+        LottoNumber lottoNumber = new LottoNumber(bonusBallString);
+
+        return new WinningNumbers(lottoNumbers, lottoNumber);
     }
 
     public int countContaining(LottoTicket lottoTicket) {
