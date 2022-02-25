@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import domain.LottoNumber;
 import util.Validator;
 import view.InputView;
 
@@ -19,18 +20,18 @@ public class InputController {
         return money;
     }
 
-    public List<Integer> getWinningLottoNumbers() {
+    public List<LottoNumber> getWinningLottoNumbers() {
         String[] inputWinningLottoNumbers = InputView.scanWinningLottoNumbers().split(LOTTO_NUMBER_INPUT_DELIMITER);
         Validator.validateWinningNumberInput(inputWinningLottoNumbers);
         return Arrays.stream(inputWinningLottoNumbers)
                 .mapToInt(Integer::parseInt)
-                .boxed()
+                .mapToObj(LottoNumber::of)
                 .collect(Collectors.toList());
     }
 
-    public int getBonusNumber() {
+    public LottoNumber getBonusNumber() {
         String inputBonusNumber = InputView.scanBonusNumber();
         Validator.validateInteger(inputBonusNumber);
-        return Integer.parseInt(inputBonusNumber);
+        return LottoNumber.of(Integer.parseInt(inputBonusNumber));
     }
 }

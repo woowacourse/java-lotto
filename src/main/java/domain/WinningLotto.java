@@ -4,20 +4,19 @@ import java.util.List;
 
 public class WinningLotto {
 
-    private static final int DEFAULT_VALUE = 0;
     private static final int SECOND_AND_THIRD_RANK_COUNT = 5;
     public static final boolean DEFAULT_BONUS_CHECK = false;
 
-    private final List<Integer> winningNumbers;
-    private final int bonusNumber;
+    private final List<LottoNumber> winningNumbers;
+    private final LottoNumber bonusNumber;
 
-    public WinningLotto(List<Integer> winningNumbers, int bonusNumber) {
+    public WinningLotto(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
         validateDuplicatedNumber(winningNumbers, bonusNumber);
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
     }
 
-    private void validateDuplicatedNumber(List<Integer> winningNumbers, int bonusNumber) {
+    private void validateDuplicatedNumber(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
         if (winningNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException();
         }

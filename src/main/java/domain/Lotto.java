@@ -1,41 +1,25 @@
 package domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
-
-    public static final int LOTTO_NUMBER_MAXIMUM = 45;
-    public static final int LOTTO_NUMBER_MINIMUM = 1;
 
     private static final String DELIMITER = ", ";
     private static final String PREFIX = "[";
     private static final String SUFFIX = "]";
 
-    private final List<Integer> lottoNumbers = new ArrayList<>();
+    private final List<LottoNumber> lottoNumbers = new ArrayList<>();
 
-    public Lotto(List<Integer> lottoNumbers) {
-        for (Integer lottoNumber : lottoNumbers) {
-            validateLottoNumber(lottoNumber);
-            this.lottoNumbers.add(lottoNumber);
-        }
+    public Lotto(List<LottoNumber> lottoNumbers) {
+        validateDuplicatedNumber(lottoNumbers);
+        this.lottoNumbers.addAll(lottoNumbers);
     }
 
-    private void validateLottoNumber(Integer lottoNumber) {
-        validateNumberRange(lottoNumber);
-        validateDuplicatedNumber(lottoNumber);
-    }
-
-    private void validateNumberRange(Integer lottoNumber) {
-        if (lottoNumber > LOTTO_NUMBER_MAXIMUM || lottoNumber < LOTTO_NUMBER_MINIMUM) {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    private void validateDuplicatedNumber(Integer lottoNumber) {
-        if (lottoNumbers.contains(lottoNumber)) {
+    private void validateDuplicatedNumber(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != Set.copyOf(lottoNumbers).size()) {
             throw new IllegalArgumentException();
         }
     }
@@ -48,13 +32,13 @@ public class Lotto {
         return PREFIX + String.join(DELIMITER, numbersToStrings) + SUFFIX;
     }
 
-    public int countSameNumbers(List<Integer> winningNumbers) {
+    public int countSameNumbers(List<LottoNumber> winningNumbers) {
         return (int) lottoNumbers.stream()
                 .filter(winningNumbers::contains)
                 .count();
     }
 
-    public boolean checkBonus(int bonusNumber) {
+    public boolean checkBonus(LottoNumber bonusNumber) {
         return lottoNumbers.contains(bonusNumber);
     }
 }

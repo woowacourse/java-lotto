@@ -1,11 +1,13 @@
 package controller;
 
 import domain.LottoMachine;
+import domain.LottoNumber;
 import domain.LottoResult;
 import domain.WinningLotto;
-import java.util.List;
 import util.ShuffleNumberGenerator;
 import view.OutputView;
+
+import java.util.List;
 
 public class LottoController {
 
@@ -29,8 +31,8 @@ public class LottoController {
     }
 
     private WinningLotto requestWinningLotto() {
-        List<Integer> winningLottoNumbers = inputController.getWinningLottoNumbers();
-        int bonusLottoNumber = inputController.getBonusNumber();
+        List<LottoNumber> winningLottoNumbers = inputController.getWinningLottoNumbers();
+        LottoNumber bonusLottoNumber = inputController.getBonusNumber();
         return new WinningLotto(winningLottoNumbers, bonusLottoNumber);
     }
 
