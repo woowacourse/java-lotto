@@ -37,7 +37,7 @@ public class Lottos {
         return map;
     }
 
-    public void calculateRanks(List<Integer> winningNumbers, int bonusNumber) {
+    public void calculateRanks(List<Integer> winningNumbers, BonusNumber bonusNumber) {
         lottos.forEach(lotto -> lotto.calculateRank(winningNumbers, bonusNumber));
     }
 

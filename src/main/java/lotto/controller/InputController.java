@@ -3,6 +3,7 @@ package lotto.controller;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.model.BonusNumber;
 import lotto.model.Lottos;
 import lotto.model.WinningLotto;
 import lotto.util.InputValidator;
@@ -15,7 +16,7 @@ public class InputController {
 
     public WinningLotto makeWinningLotto(String winningNumbers, String bonusNumber) {
         List<Integer> lottoNumbers = splitWinningNumbers(winningNumbers);
-        int lottoBonusNumber = toIntBonusNumber(bonusNumber);
+        BonusNumber lottoBonusNumber = new BonusNumber(toIntBonusNumber(bonusNumber));
         return new WinningLotto(lottoNumbers, lottoBonusNumber);
     }
 

@@ -38,11 +38,11 @@ public class Lotto {
         return numbers.size() != numbers.stream().distinct().count();
     }
 
-    public Rank calculateRank(List<Integer> winningNumbers, int bonusNumber) {
+    public Rank calculateRank(List<Integer> winningNumbers, BonusNumber bonusNumber) {
         int count = countMatchingNumber(winningNumbers);
         boolean win = false;
         if (count == Rank.SECOND.getCount()) {
-            win = containNumber(bonusNumber);
+            win = containNumber(bonusNumber.getBonusNumber());
         }
         return this.rank = Rank.getRank(count, win);
     }

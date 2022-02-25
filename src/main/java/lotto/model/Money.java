@@ -6,7 +6,6 @@ public class Money {
 
     private static final String PRICE_ERROR_MESSAGE = "[ERROR] 유효한 입력이 아닙니다.";
 
-
     private int money;
 
     public Money(int money) {
