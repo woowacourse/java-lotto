@@ -47,10 +47,10 @@ public class LottoFactory {
     }
 
     private Lotto generateAutoLotto() {
-        return getAutoLottoFrom(getAutoLottoNumbers());
+        return getAutoLottoFrom(generateAutoLottoNumbers());
     }
 
-    private HashSet<LottoNumber> getAutoLottoNumbers() {
+    private HashSet<LottoNumber> generateAutoLottoNumbers() {
         HashSet<LottoNumber> autoLottoNumbers = new HashSet<>();
         while (autoLottoNumbers.size() < LOTTO_SIZE) {
             autoLottoNumbers.add(
