@@ -12,6 +12,13 @@ public class Lottos {
     public Lottos(final List<Lotto> lottos) {
         Objects.requireNonNull(lottos, "[ERROR] Lottos는 null로 생성할 수 없습니다.");
         this.lottos = new ArrayList<>(lottos);
+        checkLottosIsEmpty(this.lottos);
+    }
+
+    private void checkLottosIsEmpty(List<Lotto> lottos) {
+        if (lottos.isEmpty()) {
+            throw new IllegalArgumentException("[ERROR] Lottos는 lotto가 1개이상으로 생성되어야 합니다.");
+        }
     }
 
     public LottoResult createResult(final WinLotto winLotto) {
