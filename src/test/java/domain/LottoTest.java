@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoTest {
 
@@ -21,6 +23,15 @@ class LottoTest {
         assertThatThrownBy(() -> new Lotto("1, 1, 3, 4, 5, 6"))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining("중복값을 입력할 수 없습니다.");
+    }
+
+    @DisplayName("로또 번호가 6개가 아니면 예외를 발생시킨다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"1, 2, 3, 4, 5, 6, 7", "1, 2, 3, 4, 5"})
+    void input_lottoNumbers_invalid_count(final String lottonumbers) {
+        assertThatThrownBy(() -> new Lotto(lottonumbers))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("로또 번호 6개를 입력해주세요.");
     }
 
     @DisplayName("지난 주 당첨 번호 입력시 숫자가 아닌 경우 예외를 발생시킨다.")
