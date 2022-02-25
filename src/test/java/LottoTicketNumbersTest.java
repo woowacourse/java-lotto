@@ -52,4 +52,23 @@ class LottoTicketNumbersTest {
 
         assertThat(lottoNumbersSorted).isSorted();
     }
+
+    @Test
+    @DisplayName("로또 번호 중복 개수 구하기")
+    void countDuplicateNumbersTest() {
+        List<LottoNumber> inputLottoNumbers1 = IntStream.of(4, 3, 2, 1, 6, 5)
+            .mapToObj(LottoNumber::getInstance)
+            .collect(Collectors.toList());
+
+        LottoTicketNumbers lottoTicketNumbers1 = new LottoTicketNumbers(inputLottoNumbers1);
+
+        List<LottoNumber> inputLottoNumbers2 = IntStream.of(4, 3, 2, 1, 6, 5)
+            .mapToObj(LottoNumber::getInstance)
+            .collect(Collectors.toList());
+
+        LottoTicketNumbers lottoTicketNumbers2 = new LottoTicketNumbers(inputLottoNumbers2);
+
+        assertThat(lottoTicketNumbers1.countDuplicateNumbers(lottoTicketNumbers2))
+            .isEqualTo(6);
+    }
 }
