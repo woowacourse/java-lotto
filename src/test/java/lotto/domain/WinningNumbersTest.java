@@ -15,13 +15,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class WinningNumbersTest {
-    private static Stream<Arguments> provideLottoNumbersAndMatchKind() {
+    private static Stream<Arguments> provideWinningLottoNumbersAndMatchKind() {
         return Stream.of(
                 Arguments.of(Arrays.asList("1", "2", "3", "4", "5", "6"), LottoMatchKind.FIVE_BONUS),
                 Arguments.of(Arrays.asList("2", "3", "4", "5", "6", "7"), LottoMatchKind.SIX),
                 Arguments.of(Arrays.asList("3", "4", "5", "6", "7", "8"), LottoMatchKind.FIVE),
                 Arguments.of(Arrays.asList("4", "5", "6", "7", "8", "9"), LottoMatchKind.FOUR),
                 Arguments.of(Arrays.asList("5", "6", "7", "8", "9", "10"), LottoMatchKind.THREE)
+        );
+    }
+
+    private static Stream<Arguments> provideBlankLottoNumbersAndMatchKind() {
+        return Stream.of(
+                Arguments.of(Arrays.asList("40", "41", "42", "43", "44", "45"), LottoMatchKind.BLANK),
+                Arguments.of(Arrays.asList("4", "5", "6", "7", "8", "1"), LottoMatchKind.BLANK),
+                Arguments.of(Arrays.asList("5", "6", "7", "8", "9", "1"), LottoMatchKind.BLANK),
+                Arguments.of(Arrays.asList("6", "7", "8", "9", "10", "1"), LottoMatchKind.BLANK),
+                Arguments.of(Arrays.asList("7", "8", "9", "10", "11", "1"), LottoMatchKind.BLANK)
         );
     }
 
@@ -40,8 +50,8 @@ class WinningNumbersTest {
 
     @ParameterizedTest
     @DisplayName("로또 숫자 6개를 받아 당첨 번호와 보너스 번호를 비교해 당첨 종류를 반환한다.")
-    @MethodSource("provideLottoNumbersAndMatchKind")
-    void getLottoMatchResult(final List<String> numbers, final LottoMatchKind expected) {
+    @MethodSource({"provideWinningLottoNumbersAndMatchKind", "provideBlankLottoNumbersAndMatchKind"})
+    void getWinningLottoMatchResult(final List<String> numbers, final LottoMatchKind expected) {
         //given
         final LottoNumbers targetNumbers = new LottoNumbers(Arrays.asList("2", "3", "4", "5", "6", "7"));
         final LottoNumber bonusNumber = LottoNumber.from("1");

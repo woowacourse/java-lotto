@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum LottoMatchKind {
-    LOWER_THAN_THREE(0, false, 0),
+    BLANK(0, false, 0),
     THREE(3, false, 5000),
     FOUR(4, false, 50000),
     FIVE(5, false, 1500000),

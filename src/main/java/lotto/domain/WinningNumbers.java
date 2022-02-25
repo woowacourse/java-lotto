@@ -3,9 +3,10 @@ package lotto.domain;
 import lotto.domain.vo.LottoNumber;
 
 public class WinningNumbers {
+    public static final int WINNING_WITH_BONUS_MATCH_COUNTS = 5;
+    public static final int WINNING_MINIMUM_MATCH_COUNTS = 3;
     private static final String TARGET_BONUS_DUPLICATION_EXCEPTION_MESSAGE =
             "당첨 번호와 보너스 번호에 중복이 있으면 안됩니다.";
-
     private final LottoNumbers lastWinningNumbers;
     private final LottoNumber bonusNumber;
 
@@ -23,9 +24,16 @@ public class WinningNumbers {
 
     public LottoMatchKind getLottoMatchResult(final LottoNumbers numbers) {
         final int matchedCount = numbers.getMatchCount(lastWinningNumbers);
-        if (matchedCount < 3) {
-            return LottoMatchKind.LOWER_THAN_THREE;
+        if (getBlankMatchResult(numbers, matchedCount)) {
+            return LottoMatchKind.BLANK;
         }
         return LottoMatchKind.from(matchedCount, numbers.hasSameNumberWith(bonusNumber));
+    }
+
+    private boolean getBlankMatchResult(LottoNumbers numbers, int matchedCount) {
+        if (matchedCount < WINNING_MINIMUM_MATCH_COUNTS) {
+            return true;
+        }
+        return numbers.hasSameNumberWith(bonusNumber) && matchedCount != WINNING_WITH_BONUS_MATCH_COUNTS;
     }
 }
