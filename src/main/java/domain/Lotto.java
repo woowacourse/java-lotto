@@ -16,6 +16,7 @@ public class Lotto {
     public Lotto(List<Integer> numbers) {
         validateSize(numbers);
         validateDuplicate(numbers);
+        Collections.sort(numbers);
         this.numbers = new ArrayList<>(numbers);
     }
 
@@ -48,7 +49,6 @@ public class Lotto {
         }
         Collections.shuffle(lottoRange);
         List<Integer> numbers = lottoRange.subList(LOTTO_START, LOTTO_END);
-        Collections.sort(numbers);
         return new Lotto(numbers);
     }
 
