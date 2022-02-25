@@ -70,7 +70,7 @@ public class LottoTest {
         final Lotto lotto = new Lotto(createLottoNumbers(1, 2, 3, 4, 5, 6));
         final Lotto compareLotto = new Lotto(createLottoNumbers(1, 2, 3, 4, 5, 7));
 
-        assertThat(lotto.match(compareLotto)).isEqualTo(5);
+        assertThat(lotto.calculateMatchCount(compareLotto)).isEqualTo(5);
     }
 
 }
