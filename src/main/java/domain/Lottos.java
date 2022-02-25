@@ -1,53 +1,31 @@
 package domain;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
-import vo.WinningCount;
 
 public class Lottos {
+    private static final String ERROR_MESSAGE_FOR_NULL_OR_EMPTY_LIST = "Lotto 목록이 비었습니다";
     private final List<Lotto> lottos;
 
     public Lottos(final List<Lotto> lottos) {
+        validateNull(lottos);
         final List<Lotto> unmodifiableLottos = Collections.unmodifiableList(lottos);
-        validateNullOrEmpty(lottos);
+        validateEmpty(lottos);
 
         this.lottos = unmodifiableLottos;
     }
 
-    private void validateNullOrEmpty(List<Lotto> lottos) {
-        if (Objects.isNull(lottos) || lottos.isEmpty()) {
-            throw new IllegalArgumentException("Lotto 목록이 비었습니다");
+    private void validateNull(List<Lotto> lottos) {
+        if (Objects.isNull(lottos)) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_FOR_NULL_OR_EMPTY_LIST);
         }
     }
 
-    public Map<Rank, WinningCount> getResultByWinningLotto(WinningLotto winningLotto) {
-        Map<Rank, WinningCount> map = setupMap();
-
-        lottos.stream()
-                .map(winningLotto::getRankByLotto)
-                .forEach(rank -> increaseCountByRank(map, rank));
-
-        return Collections.unmodifiableMap(map);
-    }
-
-    private void increaseCountByRank(Map<Rank, WinningCount> map, Rank rank) {
-        int count = map.get(rank).getCount() + 1;
-        map.put(rank, new WinningCount(count));
-    }
-
-    private Map<Rank, WinningCount> setupMap() {
-        Map<Rank, WinningCount> map = new HashMap<>();
-        map.put(Rank.FIRST, new WinningCount(0));
-        map.put(Rank.SECOND, new WinningCount(0));
-        map.put(Rank.THIRD, new WinningCount(0));
-        map.put(Rank.FOURTH, new WinningCount(0));
-        map.put(Rank.FIFTH, new WinningCount(0));
-        map.put(Rank.NO_MATCH, new WinningCount(0));
-
-        return map;
+    private void validateEmpty(List<Lotto> lottos) {
+        if (lottos.isEmpty()) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_FOR_NULL_OR_EMPTY_LIST);
+        }
     }
 
     public List<Lotto> getLottos() {
