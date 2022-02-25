@@ -63,18 +63,18 @@ public class Lotto {
 =======
 >>>>>>> 3158ddf (refactor : 일급 컬렉션의 List 불변 객체로 만들기)
     public Result judge(WinningLotto winningLotto) {
-        List<LottoNumber> winningNumbers = winningLotto.getWinningLotto();
-        int hitCount = 0;
-        for (LottoNumber lottoNumber : lotto) {
-            hitCount += lottoNumber.checkHit(winningNumbers);
-        }
-        boolean isHitBonusBall = judgeBonusBall(winningLotto.getBonusBall());
-        return new Result(hitCount, isHitBonusBall);
-    }
+        int hitCount = (int) lotto.stream()
+                .filter(winningLotto::isContainLottoNumber)
+                .count();
 
+<<<<<<< HEAD
     private boolean judgeBonusBall(LottoNumber bonusBall) {
         return lotto.contains(bonusBall);
 >>>>>>> d5f0ef8 (refactor: 패키지 분리)
+=======
+        boolean isHitBonusBall = winningLotto.isContainBonusBall(lotto);
+        return new Result(hitCount, isHitBonusBall);
+>>>>>>> c348e4d (refactor : 당첨 로또와 사용자 로또 비교하는 메서드와, 보너스볼과 사용자 로또 비교해주는 메서드 위치 변경)
     }
 
     public List<LottoNumber> getLotto() {
