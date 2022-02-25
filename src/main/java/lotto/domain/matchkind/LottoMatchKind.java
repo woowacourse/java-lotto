@@ -10,8 +10,6 @@ public enum LottoMatchKind {
     FIVE_BONUS(5, true, 30000000),
     SIX(6, false, 2000000000);
 
-    private static final String MATCH_KIND_NOT_FOUND_EXCEPTION_MESSAGE = "존재하지 않는 당첨 종류가 발생했습니다.";
-
     private final int matchCount;
     private final boolean bonusNumberHit;
     private final long winningAmount;
@@ -27,7 +25,7 @@ public enum LottoMatchKind {
                 .filter(matchKind -> matchKind.matchCount == matchCount)
                 .filter(matchKind -> matchKind.bonusNumberHit == bonus)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(MATCH_KIND_NOT_FOUND_EXCEPTION_MESSAGE));
+                .orElse(LOWER_THAN_THREE);
     }
 
     public long getProfit(final int countOfMatchedLottoNumbers) {
