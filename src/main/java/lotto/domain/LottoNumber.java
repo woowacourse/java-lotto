@@ -1,8 +1,8 @@
 package lotto.domain;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
@@ -10,11 +10,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 45;
 
-    public static final LottoNumber[] LOTTO_NUMBER_CACHE = new LottoNumber[MAX_LOTTO_NUMBER + 1];
+    public static final Map<Integer, LottoNumber> LOTTO_NUMBER_CACHE;
 
     static {
-        IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
-                .forEach(number -> LOTTO_NUMBER_CACHE[number] =  new LottoNumber(number));
+        LOTTO_NUMBER_CACHE = IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
+                .boxed()
+                .collect(Collectors.toMap(number -> number, LottoNumber::new));
     }
 
     private final int number;
@@ -27,7 +28,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException("[ERROR] 입력값이 1 이상 45 이하여야 합니다.");
         }
-        return LOTTO_NUMBER_CACHE[number];
+        return LOTTO_NUMBER_CACHE.get(number);
     }
 
     public int getNumber() {
