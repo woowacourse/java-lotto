@@ -22,4 +22,14 @@ public class MoneyTest {
                 .isThrownBy(() -> new Money(10))
                 .withMessage("[ERROR] 로또를 구매할 수 없는 금액입니다.");
     }
+
+    @DisplayName("보유금액보다 많은 로또 구매시 예러를 바랫ㅇ한다.")
+    @Test
+    void buyLottoExceptionByLackMoney() {
+        final Money money = new Money(3000);
+        final int manualCounts = 5;
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> money.calculatePurchaseCounts(manualCounts))
+                .withMessage("[ERROR] 보유 금액보다 많은 로또를 구매할 수 없습니다.");
+    }
 }
