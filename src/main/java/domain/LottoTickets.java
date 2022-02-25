@@ -12,8 +12,8 @@ public class LottoTickets {
 	public LottoTickets(int price) {
 		validateDivisibleByThousand(price);
 		validatePositive(price);
-		price /= UNIT_PRICE;
-		while (price-- > 0) {
+		int sizeOfLottoTickets = price / UNIT_PRICE;
+		for (int nowSizeOfLottoTickets = 0; nowSizeOfLottoTickets < sizeOfLottoTickets; nowSizeOfLottoTickets++) {
 			this.lottoTickets.add(new Lotto());
 		}
 	}
