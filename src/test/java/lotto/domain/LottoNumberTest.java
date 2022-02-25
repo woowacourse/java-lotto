@@ -13,7 +13,7 @@ class LottoNumberTest {
         // given
         int value = 10;
         // when
-        LottoNumber number = new LottoNumber(value);
+        LottoNumber number = LottoNumber.from(value);
         // then
         assertThat(number).isNotNull();
     }
@@ -24,7 +24,7 @@ class LottoNumberTest {
         // given
         int maxValue = LottoNumber.MAX + 1;
         // then
-        assertThatThrownBy(() -> new LottoNumber(maxValue))
+        assertThatThrownBy(() -> LottoNumber.from(maxValue))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining("로또 숫자는 1~45 사이의 숫자여야 합니다.");
     }
@@ -35,7 +35,7 @@ class LottoNumberTest {
         // given
         int minValue = LottoNumber.MIN - 1;
         // then
-        assertThatThrownBy(() -> new LottoNumber(minValue))
+        assertThatThrownBy(() -> LottoNumber.from(minValue))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining("로또 숫자는 1~45 사이의 숫자여야 합니다.");
     }

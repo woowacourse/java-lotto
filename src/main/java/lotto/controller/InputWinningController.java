@@ -33,7 +33,7 @@ public class InputWinningController implements WinningController {
     }
 
     private LottoNumber createLottoNumberFromInput(String inputBonusBall) {
-        return new LottoNumber(IntegerUtils.parse(inputBonusBall));
+        return LottoNumber.from(IntegerUtils.parse(inputBonusBall));
     }
 
     private LottoTicket createTicketFromInput(String inputWinningNumber) {
