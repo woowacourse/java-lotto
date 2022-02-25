@@ -7,9 +7,11 @@ import java.util.Map;
 
 public class LotteryTickets {
     private final List<LotteryTicket> tickets;
+    private final TicketCount ticketCount;
 
-    public LotteryTickets() {
+    public LotteryTickets(int count) {
         tickets = new ArrayList<>();
+        ticketCount = new TicketCount(count);
     }
 
     public Map<WinningLottery, Integer> getLotteriesResult(List<Integer> numbers, int bonusNumber) {
@@ -28,6 +30,9 @@ public class LotteryTickets {
     }
 
     public void add(List<Integer> numbers) {
-        tickets.add(new LotteryTicket(numbers));
+        while(ticketCount.isExistCount()) {
+            tickets.add(new LotteryTicket(numbers));
+            ticketCount.subtract();
+        }
     }
 }

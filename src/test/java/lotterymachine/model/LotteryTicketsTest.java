@@ -13,7 +13,7 @@ public class LotteryTicketsTest {
     @Test
     @DisplayName("6개의 숫자 리스트를 입력 받아 로또 티켓을 추가한다.")
     void add() {
-        LotteryTickets lotteryTickets = new LotteryTickets();
+        LotteryTickets lotteryTickets = new LotteryTickets(1);
         List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
 
         lotteryTickets.add(numbers);
@@ -22,9 +22,20 @@ public class LotteryTicketsTest {
     }
 
     @Test
+    @DisplayName("티켓 개수보다 초과로 add할 시, 추가되지 않는다.")
+    void overCount() {
+        LotteryTickets lotteryTickets = new LotteryTickets(0);
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
+
+        lotteryTickets.add(numbers);
+
+        assertThat(lotteryTickets.getLotteryTickets().size()).isEqualTo(0);
+    }
+
+    @Test
     @DisplayName("당첨번호와 비교하여 로또 1등인 결과를 조회한다.")
     void findResult() {
-        LotteryTickets lotteryTickets = new LotteryTickets();
+        LotteryTickets lotteryTickets = new LotteryTickets(1);
         List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
         lotteryTickets.add(numbers);
         int bonusNumber = 30;
