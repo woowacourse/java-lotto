@@ -10,20 +10,14 @@ public class LottoNumbers {
 
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
         Collections.sort(lottoNumbers);
-        this.lottoNumbers =  new ArrayList<>(lottoNumbers);
-    }
-
-    public int countSameNumber(WinLottoNumbers winLottoNumbers) {
-        return (int) lottoNumbers.stream()
-            .filter(winLottoNumbers::isInNumber)
-            .count();
+        this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
     public List<LottoNumber> get() {
         return Collections.unmodifiableList(lottoNumbers);
     }
 
-    public boolean isContainsBonus(LottoNumber bonus) {
+    public boolean contains(LottoNumber bonus) {
         return lottoNumbers.contains(bonus);
     }
 }

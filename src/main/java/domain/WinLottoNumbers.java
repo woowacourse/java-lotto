@@ -50,7 +50,13 @@ public class WinLottoNumbers {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    public LottoNumber getBonus() {
-        return bonus;
+    public int countSameNumber(LottoNumbers lottoNumbers) {
+        return (int) this.lottoNumbers.stream()
+            .filter(lottoNumbers::contains)
+            .count();
+    }
+
+    public boolean isContainsBonus(LottoNumbers lottoNumbers) {
+        return lottoNumbers.contains(bonus);
     }
 }

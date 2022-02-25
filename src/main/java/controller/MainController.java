@@ -55,8 +55,8 @@ public class MainController {
     private Result makeResult(List<LottoNumbers> lottoTickets, WinLottoNumbers winLottoNumbers) {
         Result result = new Result();
         for (LottoNumbers lottoTicket : lottoTickets) {
-            int matchCount = lottoTicket.countSameNumber(winLottoNumbers);
-            boolean isBonus = lottoTicket.isContainsBonus(winLottoNumbers.getBonus());
+            int matchCount = winLottoNumbers.countSameNumber(lottoTicket);
+            boolean isBonus = winLottoNumbers.isContainsBonus(lottoTicket);
             result.add(Rank.of(matchCount, isBonus));
         }
         return result;
