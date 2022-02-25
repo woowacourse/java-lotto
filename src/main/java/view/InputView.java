@@ -3,7 +3,7 @@ package view;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
-import utils.Separator;
+import utils.Util;
 
 public class InputView {
     public static final String NUM_ERROR_MESSAGE = "숫자를 입력해주세요.";
@@ -29,7 +29,7 @@ public class InputView {
         final Scanner scanner = new Scanner(System.in);
         final String lottoNumbers = scanner.nextLine();
         validateLottoNums(lottoNumbers);
-        return Separator.separateNumbers(lottoNumbers);
+        return Util.separateNumbers(lottoNumbers);
     }
 
     public static int inputBonusNumber() {

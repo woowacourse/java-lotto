@@ -2,13 +2,14 @@ package controller;
 
 import domain.Money;
 import domain.lotto.Lotto;
-import domain.lotto.LottoNumber;
 import domain.lotto.LottoFactory;
+import domain.lotto.LottoNumber;
 import domain.lotto.WinNumbers;
 import domain.result.Result;
 import java.util.ArrayList;
 import java.util.List;
 import utils.NumsGenerator;
+import utils.Util;
 import view.InputView;
 import view.OutputView;
 
@@ -19,7 +20,7 @@ public class MainController {
         final WinNumbers winNumbers = makeWinNums();
 
         final Result result = new Result(lottoTickets, winNumbers);
-        runOutputView(result, money);
+        end(result, money);
     }
 
     private Money makeMoney() {
@@ -41,8 +42,8 @@ public class MainController {
         return LottoFactory.createWinNums(NumsGenerator.generate(winLottoRawNums), bonus);
     }
 
-    private void runOutputView(final Result result, final Money money) {
+    private void end(final Result result, final Money money) {
         OutputView.printLottosResult(result);
-        OutputView.printProfit((float) result.getPrize() / (float) money.get());
+        OutputView.printProfit(Util.getProfit((float) result.getPrize(), (float) money.get()));
     }
 }

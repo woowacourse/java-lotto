@@ -20,9 +20,11 @@ import utils.NumsGenerator;
 @SuppressWarnings("NonAsciiCharacters")
 class OutputViewTest {
     private WinNumbers winNumbers;
+
     @BeforeEach
     void setup() {
-        winNumbers = LottoFactory.createWinNums(NumsGenerator.generate(Arrays.asList(1,2,3,4,5,6)), LottoNumber.from(10));
+        winNumbers = LottoFactory.createWinNums(NumsGenerator.generate(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                LottoNumber.from(10));
     }
 
     @Test
@@ -53,8 +55,8 @@ class OutputViewTest {
         System.setOut(new PrintStream(out));
 
         //given
-        Lotto lotto1 = LottoFactory.createLotto(NumsGenerator.generate(Arrays.asList(1,2,3,4,5,6)));
-        Lotto lotto3 = LottoFactory.createLotto(NumsGenerator.generate(Arrays.asList(1,2,3,4,5,9)));
+        Lotto lotto1 = LottoFactory.createLotto(NumsGenerator.generate(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        Lotto lotto3 = LottoFactory.createLotto(NumsGenerator.generate(Arrays.asList(1, 2, 3, 4, 5, 9)));
 
         //when
         Result result = new Result(Arrays.asList(lotto1, lotto3), winNumbers);
