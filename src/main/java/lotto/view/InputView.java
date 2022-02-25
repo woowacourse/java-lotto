@@ -52,13 +52,11 @@ public class InputView {
     }
 
     private static int validateNumber(String input) {
-        if (isNumeric(input)) {
+        try {
             return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("입력값은 숫자이어야 한다.");
         }
-        throw new IllegalArgumentException("구입금액은 숫자이어야 한다.");
     }
 
-    private static boolean isNumeric(String value) {
-        return value.chars().allMatch(Character::isDigit);
-    }
 }
