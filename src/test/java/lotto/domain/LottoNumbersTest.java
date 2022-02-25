@@ -28,6 +28,21 @@ class LottoNumbersTest {
     }
 
     @Test
+    @DisplayName("로또 번호들을 입력받아 로또 한 개가 올바르게 생성되는지 확인한다.")
+    void create_lottoNumbers() {
+        //given
+        final List<String> correctNumberValues = Arrays.asList("1", "2", "3", "4", "5", "6");
+        //when
+        LottoNumbers lottoNumbers = new LottoNumbers(correctNumberValues);
+        List<LottoNumber> actualLottoNumberValues = lottoNumbers.getValues();
+        //then
+        assertThat(actualLottoNumberValues).containsExactly(
+                LottoNumber.from("1"), LottoNumber.from("2"), LottoNumber.from("3"),
+                LottoNumber.from("4"), LottoNumber.from("5"), LottoNumber.from("6")
+        );
+    }
+
+    @Test
     @DisplayName("로또 번호들 간에 중복이 있으면 예외를 발생시킨다.")
     void create_ExceptionByDuplicatedLottoNumbers() {
         //given
