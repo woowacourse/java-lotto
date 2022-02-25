@@ -41,7 +41,7 @@ public class Lotto {
         return new ArrayList<>(numbers);
     }
 
-    public static Lotto generateNumber() {
+    public static Lotto generateLottoNumber() {
         List<Integer> lottoRange = new ArrayList<>();
         for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
             lottoRange.add(i);
