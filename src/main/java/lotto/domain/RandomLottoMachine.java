@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,12 +7,12 @@ import java.util.stream.IntStream;
 
 public class RandomLottoMachine {
 
-    private static final List<LottoNumber> lottoNumbers = new ArrayList<>();
+    private static final List<LottoNumber> lottoNumbers;
 
     static {
-        IntStream.rangeClosed(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER)
+        lottoNumbers = IntStream.rangeClosed(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER)
                 .mapToObj(LottoNumber::valueOf)
-                .forEach(lottoNumbers::add);
+                .collect(Collectors.toList());
     }
 
     public static List<LottoNumber> createRandomLottoNumbers() {
