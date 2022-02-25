@@ -7,6 +7,7 @@ public class LottoPurchaseCounts {
 
     public LottoPurchaseCounts(final int manualCount, final int automaticCount) {
         checkNegativeCount(manualCount);
+        checkNegativeCount(automaticCount);
         this.manualCount = manualCount;
         this.automaticCount = automaticCount;
     }

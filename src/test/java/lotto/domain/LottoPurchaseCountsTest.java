@@ -16,4 +16,14 @@ class LottoPurchaseCountsTest {
                 .isThrownBy(() -> new LottoPurchaseCounts(manualCount, automaticCount))
                 .withMessage("[ERROR] 구매 갯수는 음수가 들어올 수 없습니다.");
     }
+
+    @DisplayName("자동 구매 갯수가 음수인 경우 예외가 발생한다.")
+    @Test
+    void createExceptionByNegativeAutomaticCounts() {
+        final int manualCount = 5;
+        final int automaticCount = -1;
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new LottoPurchaseCounts(manualCount, automaticCount))
+                .withMessage("[ERROR] 구매 갯수는 음수가 들어올 수 없습니다.");
+    }
 }
