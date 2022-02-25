@@ -19,9 +19,15 @@ public class LottoGameController {
         OutputView.printEarningRate(purchasedLotto.calculateEarningRate());
     }
 
-    private void initWinningNumber() {
-        winningNumber = new WinningNumber(InputView.inputWinningLottoNumbers());
-        initBonusNumber();
+    private WinningNumber initWinningNumber() {
+        try {
+            winningNumber = new WinningNumber(InputView.inputWinningLottoNumbers());
+            initBonusNumber();
+            return winningNumber;
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return initWinningNumber();
+        }
     }
 
     private void initBonusNumber() {

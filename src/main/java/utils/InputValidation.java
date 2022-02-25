@@ -1,15 +1,11 @@
 package utils;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class InputValidation {
 
-    private static final int LOTTO_MINIMUM_NUMBER = 1;
-    private static final int LOTTO_MAXIMUM_NUMBER = 45;
     private static final int LOTTO_SIZE = 6;
     private static final int LOTTO_PRICE = 1000;
     private static final String LOTTO_NUMBER_DELIMITER = ", ";
@@ -17,8 +13,6 @@ public class InputValidation {
     private static final String ERROR_NEGATIVE_INTEGER = "가격은 1000원 이상만 가능합니다.";
     private static final String ERROR_NUM_OF_BALLS = "로또 번호는 6개의 번호를 입력해줘야 합니다.";
     private static final String ERROR_BALL_NON_INTEGER = "로또 번호는 숫자만 입력해줘야 합니다.";
-    private static final String ERROR_NUMBER_OUT_RANGE = "로또 번호는 1에서 45 사이의 값을 입력해줘야 합니다.";
-    private static final String ERROR_DUPLICATE_NUMBER = "로또 번호는 중복되면 안 됩니다.";
 
     public static int validatePrice(final String inputPrice) {
         final int price = checkNonInteger(inputPrice, ERROR_PRICE_NON_INTEGER);
@@ -31,11 +25,7 @@ public class InputValidation {
         final List<String> splitNumbers = Arrays.asList(inputNumbers.split(LOTTO_NUMBER_DELIMITER));
         checkNumOfBalls(splitNumbers);
 
-        final List<Integer> numbers = checkNonIntegers(splitNumbers);
-        checkNumbersRange(numbers);
-        checkDuplicateNumber(numbers);
-
-        return numbers;
+        return checkNonIntegers(splitNumbers);
     }
 
     private static int checkNonInteger(final String number, final String message) {
@@ -64,30 +54,8 @@ public class InputValidation {
                 .collect(Collectors.toList());
     }
 
-    private static void checkNumbersRange(final List<Integer> numbers) {
-        numbers.stream()
-                .forEach(number -> checkNumberRange(number));
-    }
-
-    private static void checkNumberRange(final int number) {
-        if (number < LOTTO_MINIMUM_NUMBER || LOTTO_MAXIMUM_NUMBER < number) {
-            throw new IllegalArgumentException(ERROR_NUMBER_OUT_RANGE);
-        }
-    }
-
-    private static void checkDuplicateNumber(final List<Integer> numbers) {
-        Set<Integer> uniqueNumber = new HashSet<>(numbers);
-
-        if (uniqueNumber.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException(ERROR_DUPLICATE_NUMBER);
-        }
-    }
-
     public static int validateBonusNumber(final String bonus) {
-        final int bonusNumber = checkNonInteger(bonus, ERROR_BALL_NON_INTEGER);
-        checkNumberRange(bonusNumber);
-
-        return bonusNumber;
+        return checkNonInteger(bonus, ERROR_BALL_NON_INTEGER);
     }
 
 }

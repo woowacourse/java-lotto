@@ -4,10 +4,21 @@ import java.util.Objects;
 
 public class LottoNumber {
 
+    private static final int MINIMUM_NUMBER = 1;
+    private static final int MAXIMUM_NUMBER = 45;
+    private static final String ERROR_NUMBER_OUT_RANGE = "로또 번호는 1에서 45 사이의 값을 입력해줘야 합니다.";
+
     private int number;
 
     public LottoNumber(int number) {
+        checkNumberRange(number);
         this.number = number;
+    }
+
+    private static void checkNumberRange(final int number) {
+        if (number < MINIMUM_NUMBER || MAXIMUM_NUMBER < number) {
+            throw new IllegalArgumentException(ERROR_NUMBER_OUT_RANGE);
+        }
     }
 
     public int getNumber() {

@@ -1,25 +1,28 @@
 package domain;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private List<LottoNumber> lottoNumbers;
+    private Set<LottoNumber> lottoNumbers;
 
     public Lotto(List<Integer> numbers) {
-        lottoNumbers = new ArrayList<>();
-        numbers.forEach(number -> lottoNumbers.add(new LottoNumber(number)));
+        lottoNumbers = new HashSet<>();
+        for (Integer number : numbers) {
+            lottoNumbers.add(new LottoNumber(number));
+        }
     }
 
-    public List<LottoNumber> getLottoNumbers() {
+    public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
 
     public Prize calculateRank(WinningNumber winningNumber) {
         int matched = matchedRegularNumbers(winningNumber);
-        boolean hasBonus = matchedBonusNumber(winningNumber.getBonus());
+        boolean hasBonus = hasMatchedNumber(winningNumber.getBonus());
         return Prize.getWinnerPrizeByMatched(matched, hasBonus);
     }
 
@@ -30,7 +33,7 @@ public class Lotto {
                 .size();
     }
 
-    private boolean matchedBonusNumber(LottoNumber bonus) {
+    private boolean hasMatchedNumber(LottoNumber bonus) {
         return lottoNumbers.contains(bonus);
     }
 

@@ -1,13 +1,10 @@
 package domain.strategy;
 
-import domain.strategy.PurchaseStrategy;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class CustomPurchaseStrategy implements PurchaseStrategy {
 
-    private List<Integer> customNumbers = new ArrayList<>();
+    private List<Integer> customNumbers;
 
     public CustomPurchaseStrategy(List<Integer> customNumbers) {
         this.customNumbers = customNumbers;
