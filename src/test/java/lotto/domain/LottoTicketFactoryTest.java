@@ -13,11 +13,11 @@ class LottoTicketFactoryTest {
     @ParameterizedTest
     @CsvSource(value = {"7500,7", "8000,8"})
     @DisplayName("천원 당 한 장의 로또를 구매할 수 있다.")
-    void purchaseLotto(int money, int ticketCount) {
+    void purchaseLotto(String money, int ticketCount) {
         // given
 
         // when
-        List<LottoTicket> lottoTickets = LottoTicketFactory.createTickets(money);
+        List<LottoTicket> lottoTickets = LottoTicketFactory.createTickets(new TryMoney(money));
 
         // then
         assertThat(lottoTickets.size()).isEqualTo(ticketCount);

@@ -10,8 +10,13 @@ public class LottoNumber {
 
     private final int number;
 
-    public LottoNumber(String numberString) {
-        number = convertStringToInt(numberString);
+    public LottoNumber(int number) {
+        this.number = number;
+        validateRange();
+    }
+
+    public LottoNumber(String number) {
+        this.number = convertStringToInt(number);
         validateRange();
     }
 

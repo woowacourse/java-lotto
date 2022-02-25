@@ -22,19 +22,19 @@ public class LottoTicketFactory {
 
     private static List<LottoNumber> createLottoNumbers() {
         return IntStream.rangeClosed(1, 45)
-                .mapToObj(i -> new LottoNumber(String.valueOf(i)))
+                .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 
-    public static List<LottoTicket> createTickets(int money) {
-        int ticketNumbers = getAvailableLottoTicketsCount(money);
+    public static List<LottoTicket> createTickets(TryMoney tryMoney) {
+        int ticketNumbers = getAvailableLottoTicketsCount(tryMoney);
         return IntStream.range(0, ticketNumbers)
                 .mapToObj(i -> createTicketShuffled())
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    private static int getAvailableLottoTicketsCount(int money) {
-        return money / LOTTO_PRICE;
+    private static int getAvailableLottoTicketsCount(TryMoney tryMoney) {
+        return tryMoney.amount() / LOTTO_PRICE;
     }
 
     private static LottoTicket createTicketShuffled() {

@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class Money {
+public class TryMoney {
     static final String NOT_NUMBER = "[ERROR] 구입금액은 숫자여야 합니다.";
     static final String NOT_ENOUGH_MONEY = "[ERROR] 로또를 구매하려면 최소 천원 이상 투입해야 합니다.";
 
@@ -10,12 +10,12 @@ public class Money {
 
     private final int amount;
 
-    public Money(String moneyString) {
+    public TryMoney(String moneyString) {
         this.amount = convertStringToInt(moneyString);
         validateEnoughAmount();
     }
 
-    public int getAmount() {
+    public int amount() {
         return amount;
     }
 
@@ -41,8 +41,8 @@ public class Money {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Money money = (Money) o;
-        return amount == money.amount;
+        TryMoney tryMoney = (TryMoney) o;
+        return amount == tryMoney.amount;
     }
 
     @Override

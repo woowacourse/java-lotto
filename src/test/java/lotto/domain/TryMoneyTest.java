@@ -1,13 +1,13 @@
 package lotto.domain;
 
-import static lotto.domain.Money.NOT_ENOUGH_MONEY;
-import static lotto.domain.Money.NOT_NUMBER;
+import static lotto.domain.TryMoney.NOT_ENOUGH_MONEY;
+import static lotto.domain.TryMoney.NOT_NUMBER;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class MoneyTest {
+class TryMoneyTest {
     @Test
     @DisplayName("로또는 최소 천원이 있어야 구매할 수 있다.")
     void underLottoTicketPrice() {
@@ -15,7 +15,7 @@ class MoneyTest {
         String notEnoughMoney = "999";
 
         // then
-        assertThatThrownBy(() -> new Money(notEnoughMoney))
+        assertThatThrownBy(() -> new TryMoney(notEnoughMoney))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(NOT_ENOUGH_MONEY);
     }
@@ -27,7 +27,7 @@ class MoneyTest {
         String notNumberString = "abc";
 
         // then
-        assertThatThrownBy(() -> new Money(notNumberString))
+        assertThatThrownBy(() -> new TryMoney(notNumberString))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(NOT_NUMBER);
     }

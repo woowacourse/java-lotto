@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoRank;
-import lotto.domain.Money;
+import lotto.domain.TryMoney;
 import lotto.domain.WinningStatistics;
 import lotto.domain.lottonumbers.LottoTicket;
 
@@ -23,13 +23,13 @@ public class OutputView {
         lottoTickets.forEach(OutputView::printLottoNumbers);
     }
 
-    public static void printStatistics(WinningStatistics winningStatistics, Money inputMoney) {
+    public static void printStatistics(WinningStatistics winningStatistics, TryMoney inputTryMoney) {
         out.printf("당첨 통계%n---------%n");
         List<LottoRank> targetLottoRanks = getLottoRanksToPrint();
         for (LottoRank lottoRank : targetLottoRanks) {
             printWinningResult(winningStatistics, lottoRank);
         }
-        printEarningsResult(winningStatistics, inputMoney);
+        printEarningsResult(winningStatistics, inputTryMoney);
     }
 
     private static void printLottoNumbers(LottoTicket lottoTicket) {
@@ -49,8 +49,8 @@ public class OutputView {
                 winningStatistics.get(lottoRank));
     }
 
-    private static void printEarningsResult(WinningStatistics winningStatistics, Money inputMoney) {
-        double earningsRate = winningStatistics.getEarningsRate(inputMoney.getAmount());
+    private static void printEarningsResult(WinningStatistics winningStatistics, TryMoney inputTryMoney) {
+        double earningsRate = winningStatistics.getEarningsRate(inputTryMoney.amount());
         String result = String.format("총 수익률은 %.2f 입니다.", earningsRate);
         if (earningsRate < 1) {
             result = String.format("%s(기준이 1이기 때문에 결과적으로 손해라는 의미임)", result);
