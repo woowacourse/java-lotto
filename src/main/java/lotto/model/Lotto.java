@@ -12,13 +12,13 @@ public class Lotto {
         this.rank = Rank.LOSER;
     }
 
-    public void calculateRank(List<Integer> winningNumbers, int bonusNumber) {
+    public Rank calculateRank(List<Integer> winningNumbers, int bonusNumber) {
         int count = countMatchingNumber(winningNumbers);
         boolean win = false;
         if (count == Rank.SECOND.getCount()) {
             win = containNumber(bonusNumber);
         }
-        this.rank = Rank.getRank(count, win);
+        return this.rank = Rank.getRank(count, win);
     }
 
     private int countMatchingNumber(List<Integer> winningNumbers) {

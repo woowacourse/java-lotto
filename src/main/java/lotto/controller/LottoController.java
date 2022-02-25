@@ -1,10 +1,8 @@
 package lotto.controller;
 
 import java.util.List;
-import lotto.model.Lotto;
 import lotto.model.Lottos;
 import lotto.model.WinningLotto;
-import lotto.util.RandomLottoGenerator;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -29,17 +27,16 @@ public class LottoController {
 
     private Lottos makeLottos() throws RuntimeException {
         int countLotto = inputController.countLotto(InputView.inputPrice());
-        Lottos lottos = new Lottos();
-        insertLottoToLottos(countLotto, lottos);
+        Lottos lottos = new Lottos(countLotto);
         return lottos;
     }
 
-    private void insertLottoToLottos(int countLotto, Lottos lottos) {
-        for (int i = 0; i < countLotto; i++) {
-            Lotto lotto = RandomLottoGenerator.generate();
-            lottos.insert(lotto);
-        }
-    }
+//    private void insertLottoToLottos(int countLotto, Lottos lottos) {
+//        for (int i = 0; i < countLotto; i++) {
+//            Lotto lotto = RandomLottoGenerator.generate();
+//            lottos.insert(lotto);
+//        }
+//    }
 
     private WinningLotto makeWinningLotto() throws RuntimeException {
         List<Integer> winningNumbers = inputController.splitWinningNumbers(InputView.inputWinningNumbers());

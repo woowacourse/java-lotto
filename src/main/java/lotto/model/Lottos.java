@@ -3,6 +3,7 @@ package lotto.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import lotto.util.RandomLottoGenerator;
 
 public class Lottos {
 
@@ -11,9 +12,17 @@ public class Lottos {
     private final List<Lotto> lottos;
     private final Map<Rank, Integer> rankCount;
 
-    public Lottos() {
+    public Lottos(int countLotto) {
         this.lottos = new ArrayList<>();
+        insertLottoToLottos(countLotto);
         rankCount = Rank.initMap();
+    }
+
+    private void insertLottoToLottos(int countLotto) {
+        for (int i = 0; i < countLotto; i++) {
+            Lotto lotto = RandomLottoGenerator.generate();
+            insert(lotto);
+        }
     }
 
     public void insert(Lotto lotto) {
