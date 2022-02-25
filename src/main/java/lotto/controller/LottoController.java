@@ -22,9 +22,9 @@ public class LottoController {
 
     public void play() {
         requestMoney();
-        buyLottos();
+        printbuyLottos();
         requestLastWeekWinningLotto();
-        checkTheLottoResult();
+        printLottoResult();
     }
 
     private void requestMoney() {
@@ -46,7 +46,7 @@ public class LottoController {
         return money;
     }
 
-    private void buyLottos() {
+    private void printbuyLottos() {
         lottos = new Lottos(money);
         OutputView.printLottoCount(lottos.getCount());
         OutputView.printLottos(lottos);
@@ -105,7 +105,7 @@ public class LottoController {
         }
     }
 
-    private void checkTheLottoResult() {
+    private void printLottoResult() {
         Result result = lottos.getResult(lastWeekWinningLotto, bonusNumber);
         OutputView.printResult(result);
         OutputView.printRateOfProfit(result.getRateOfProfit(money));
