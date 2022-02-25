@@ -10,6 +10,22 @@ import org.junit.jupiter.api.Test;
 
 public class WinLottoTest {
 
+    @DisplayName("우승 번호가 null이 들어오는 경우 에러 발생")
+    @Test
+    void nullWinNumuberException() {
+        final LottoNumber bonus = LottoNumber.valueOf(1);
+        assertThatExceptionOfType(NullPointerException.class)
+                .isThrownBy(() -> new WinLotto(null, bonus));
+    }
+
+    @DisplayName("보너스 번호가 null이 들어오는 경우 에러 발생")
+    @Test
+    void nullBonusNumberException() {
+        final List<LottoNumber> winNumbers = createLottoNumbers(1, 2, 3, 4, 5, 6);
+        assertThatExceptionOfType(NullPointerException.class)
+                .isThrownBy(() -> new WinLotto(new Lotto(winNumbers), null));
+    }
+
     @DisplayName("보너스 볼과 당첨 번호가 중복되는 경우 에러 발생")
     @Test
     void duplicateBonusBallNumber() {

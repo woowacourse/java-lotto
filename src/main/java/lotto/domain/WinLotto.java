@@ -1,14 +1,16 @@
 package lotto.domain;
 
+import java.util.Objects;
+
 public class WinLotto {
 
     private final Lotto winLotto;
     private final LottoNumber bonusNumber;
 
     public WinLotto(final Lotto winLotto, final LottoNumber bonusNumber) {
-        checkDuplicateBonusNumber(winLotto, bonusNumber);
-        this.winLotto = winLotto;
-        this.bonusNumber = bonusNumber;
+        this.winLotto = Objects.requireNonNull(winLotto, "[ERROR] 우승 번호는 null이 들어올 수 없습니다.");
+        this.bonusNumber = Objects.requireNonNull(bonusNumber, "[ERROR] 보너스 번호는 null이 들어올 수 없습니다.");
+        checkDuplicateBonusNumber(this.winLotto, this.bonusNumber);
     }
 
     private void checkDuplicateBonusNumber(final Lotto winLotto, final LottoNumber bonusNumber) {
