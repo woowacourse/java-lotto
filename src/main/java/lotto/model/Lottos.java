@@ -51,8 +51,8 @@ public class Lottos {
         return lottos;
     }
 
-    public Map<Rank, Integer> getRankCount() {
-        return rankCount;
+    public Integer getCount(Rank rank) {
+        return rankCount.get(rank);
     }
 
     public int getLottoCount() {

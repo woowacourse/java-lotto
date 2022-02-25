@@ -30,7 +30,7 @@ public class LottosTest {
         lottos.insert(lotto2);
         lottos.calculateRanks(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
         lottos.countRank();
-        assertThat(lottos.getRankCount().get(Rank.FIRST)).isEqualTo(1);
+        assertThat(lottos.getCount(Rank.FIRST)).isEqualTo(1);
     }
 
     @Test

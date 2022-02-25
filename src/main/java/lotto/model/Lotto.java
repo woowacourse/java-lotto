@@ -8,6 +8,7 @@ public class Lotto {
     private Rank rank;
 
     public Lotto(List<Integer> numbers) {
+        validateLottoNumbers(numbers);
         this.numbers = numbers;
         this.rank = Rank.LOSER;
     }
@@ -29,6 +30,29 @@ public class Lotto {
 
     private boolean containNumber(int number) {
         return this.numbers.contains(number);
+    }
+
+    private void validateLottoNumbers(List<Integer> numbers) {
+        if (!isValidLength(numbers) || !isValidRange(numbers) || isDuplicate(numbers)) {
+            throw new RuntimeException();
+        }
+    }
+
+    private boolean isValidLength(List<Integer> numbers) {
+        return numbers.size() == 6;
+    }
+
+    private boolean isValidRange(List<Integer> numbers) {
+        for (int number : numbers) {
+            if (number < 1 || number > 45) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean isDuplicate(List<Integer> numbers) {
+        return numbers.size() != numbers.stream().distinct().count();
     }
 
     public List<Integer> getNumbers() {

@@ -39,9 +39,9 @@ public class ResultView {
     public static void printTotalResult(Lottos lottos) {
         System.out.println();
         System.out.println(STATISTICS_MESSAGE);
-        lottos.getRankCount().forEach((rank, integer) -> {
-            System.out.print(printRank(rank, integer));
-        });
+        for (Rank rank : Rank.values()) {
+            System.out.print(printRank(rank, lottos.getCount(rank)));
+        }
         printRevenue(lottos);
     }
 

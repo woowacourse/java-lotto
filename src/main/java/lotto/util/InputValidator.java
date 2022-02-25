@@ -1,9 +1,6 @@
 package lotto.util;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class InputValidator {
 
@@ -28,25 +25,6 @@ public class InputValidator {
         return price < PRICE_PER_LOTTO;
     }
 
-    public static List<Integer> validateWinningNumbers(String winningNumbers) throws RuntimeException {
-        String[] splitWinningNumbers = winningNumbers.split(",");
-
-        validateLength(splitWinningNumbers);
-        validateLottoNumbers(splitWinningNumbers);
-        validateDuplicate(splitWinningNumbers);
-
-        return Arrays.stream(splitWinningNumbers)
-                .map(String::trim)
-                .mapToInt(Integer::parseInt)
-                .boxed()
-                .collect(Collectors.toList());
-    }
-
-    private static void validateLength(String[] winningNumbers) throws RuntimeException {
-        if (winningNumbers.length != 6) {
-            throw new RuntimeException(LENGTH_ERROR_MESSAGE);
-        }
-    }
 
     private static void validateLottoNumbers(String[] numbers) throws RuntimeException {
         for (String number : numbers) {
@@ -57,30 +35,8 @@ public class InputValidator {
     private static void validateLottoNumber(String number) throws RuntimeException {
         try {
             String trimNumber = number.trim();
-            validateRange(Integer.parseInt(trimNumber));
         } catch (NumberFormatException e) {
             throw new RuntimeException(NOT_NUMBER_ERROR_MESSAGE);
         }
-    }
-
-    private static void validateRange(int number) throws RuntimeException {
-        if (number < 1 || number > 45) {
-            throw new RuntimeException(RANGE_ERROR_MESSAGE);
-        }
-    }
-
-    private static void validateDuplicate(String[] winningNumbers) throws RuntimeException {
-        long count = Arrays.stream(winningNumbers).distinct().count();
-        if (count != winningNumbers.length) {
-            throw new RuntimeException(NUMBER_DUPLICATE_ERROR_MESSAGE);
-        }
-    }
-
-    public static int validateBonusNumber(String bonusNumber, List<Integer> winningNumbers) throws RuntimeException {
-        validateLottoNumber(bonusNumber);
-        if (winningNumbers.contains(Integer.parseInt(bonusNumber))) {
-            throw new RuntimeException(NUMBER_DUPLICATE_ERROR_MESSAGE);
-        }
-        return Integer.parseInt(bonusNumber);
     }
 }
