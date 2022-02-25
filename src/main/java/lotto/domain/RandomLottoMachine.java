@@ -1,7 +1,9 @@
 package lotto.domain;
 
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -15,12 +17,12 @@ public class RandomLottoMachine {
                 .collect(Collectors.toList());
     }
 
-    public static List<LottoNumber> createRandomLottoNumbers() {
+    public static Set<LottoNumber> createRandomLottoNumbers() {
         Collections.shuffle(lottoNumbers);
         return IntStream.rangeClosed(0, 5)
                 .boxed()
                 .map(lottoNumbers::get)
                 .sorted()
-                .collect(Collectors.toList());
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 }

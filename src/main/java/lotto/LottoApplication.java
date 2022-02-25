@@ -64,7 +64,7 @@ public class LottoApplication {
     private static Lotto inputWinLotto() {
         return new Lotto(InputView.inputWinLotto().stream()
                 .map(LottoNumber::valueOf)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toSet()));
     }
 
     private static LottoNumber inputBonusNumber() {

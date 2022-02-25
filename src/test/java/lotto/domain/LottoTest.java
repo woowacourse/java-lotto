@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -15,16 +16,16 @@ import org.junit.jupiter.api.Test;
 
 public class LottoTest {
 
-    public static List<LottoNumber> createLottoNumbers(int... number) {
+    public static Set<LottoNumber> createLottoNumbers(int... number) {
         return Arrays.stream(number)
                 .mapToObj(LottoNumber::valueOf)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     @DisplayName("구매 로또 생성시 숫자가 6개가 입력되지 않으면 에러 발생")
     @Test
     void lottoCreateExceptionBySize() {
-        final List<LottoNumber> lottoNumbers = createLottoNumbers(1, 2, 3, 4, 5);
+        final Set<LottoNumber> lottoNumbers = createLottoNumbers(1, 2, 3, 4, 5);
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new Lotto(lottoNumbers))
                 .withMessage("[ERROR] 로또 넘버는 6개가 입력되어야 합니다.");
@@ -35,7 +36,7 @@ public class LottoTest {
     void duplicateLottoException() {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new Lotto(createLottoNumbers(1, 1, 1, 1, 1, 1)))
-                .withMessage("[ERROR] 로또 넘버는 중복될 수 없습니다.");
+                .withMessage("[ERROR] 로또 넘버는 6개가 입력되어야 합니다.");
     }
 
     @Nested

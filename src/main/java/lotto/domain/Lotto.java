@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -9,30 +10,17 @@ public class Lotto {
 
     private static final int LOTTO_NUMBER_SIZE_STANDARD = 6;
 
-    private final List<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
-    public Lotto(final List<LottoNumber> lottoNumbers) {
+    public Lotto(final Set<LottoNumber> lottoNumbers) {
         checkNumberSize(lottoNumbers);
-        checkDuplicateNumber(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
-    private void checkNumberSize(final List<LottoNumber> lottoNumbers) {
+    private void checkNumberSize(final Set<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_SIZE_STANDARD) {
             throw new IllegalArgumentException("[ERROR] 로또 넘버는 6개가 입력되어야 합니다.");
         }
-    }
-
-    private void checkDuplicateNumber(final List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != calculateDistinctSize(lottoNumbers)) {
-            throw new IllegalArgumentException("[ERROR] 로또 넘버는 중복될 수 없습니다.");
-        }
-    }
-
-    private long calculateDistinctSize(final List<LottoNumber> lottoNumbers) {
-        return lottoNumbers.stream()
-                .distinct()
-                .count();
     }
 
     public boolean containNumber(final LottoNumber lottoNumber) {
