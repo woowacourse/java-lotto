@@ -7,6 +7,7 @@ import java.util.Map;
 public class WinningResult {
 
 	private static final int DEFAULT_RANK_COUNT = 0;
+
 	private final EnumMap<LottoRank, Integer> winningResult;
 
 	private WinningResult(EnumMap<LottoRank, Integer> winningResult) {

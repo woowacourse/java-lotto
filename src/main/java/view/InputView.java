@@ -7,6 +7,7 @@ public class InputView {
 	private static final String DELIMITER = ",";
 	private static final String SPACE = " ";
 	private static final String BLANK = "";
+
 	private final Scanner scanner = new Scanner(System.in);
 
 	private String readLine() {
