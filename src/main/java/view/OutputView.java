@@ -2,6 +2,8 @@ package view;
 
 import domain.*;
 
+import java.util.stream.Collectors;
+
 public class OutputView {
 
     private static final int ZERO = 0;
@@ -10,6 +12,9 @@ public class OutputView {
     private static final String WINNING_MESSAGE = "%d개 일치 (%d원)- %d\n";
     private static final String SECOND_MESSAGE = "%d개 일치, 보너스 볼 일치 (%d원)- %d개\n";
     private static final String PROFIT_RATE_MESSAGE = "총 수익률은 %.2f입니다.\n";
+    private static final String DELIMITER = ", ";
+    private static final String OPEN_BRACKETS = "[";
+    private static final String CLOSE_BRACKETS = "]";
 
     public static void printCountOfLotto(int count) {
         System.out.printf(COUNT_MESSAGE, count);
@@ -17,9 +22,18 @@ public class OutputView {
 
     public static void printLottos(Lottos lottos) {
         for (Lotto lotto : lottos.getLottos()) {
-            System.out.println(lotto);
+            printLotto(lotto);
         }
         System.out.println();
+    }
+
+    private static void printLotto(Lotto lotto) {
+        String LottoNumbers = lotto.getLotto()
+                .stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(DELIMITER));
+
+        System.out.println(OPEN_BRACKETS + LottoNumbers + CLOSE_BRACKETS);
     }
 
     public static void printStatistics(Statistic statistic) {

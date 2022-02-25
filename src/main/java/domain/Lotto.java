@@ -3,20 +3,21 @@ package domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Lotto {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int LOTTO_START = 0;
     private static final int LOTTO_END = 6;
-    private static final String DELIMITER = ", ";
-    private static final String OPEN_BRACKETS = "[";
-    private static final String CLOSE_BRACKETS = "]";
+
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
         this.numbers = numbers;
+    }
+
+    public List<Integer> getLotto() {
+        return numbers;
     }
 
     public static Lotto generateNumber() {
@@ -45,11 +46,4 @@ public class Lotto {
         return numbers.contains(bonusBall);
     }
 
-
-    @Override
-    public String toString() {
-        String lotto = numbers.stream().map(String::valueOf)
-                .collect(Collectors.joining(DELIMITER));
-        return OPEN_BRACKETS + lotto + CLOSE_BRACKETS;
-    }
 }
