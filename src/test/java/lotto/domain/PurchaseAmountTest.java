@@ -19,7 +19,6 @@ class PurchaseAmountTest {
     void create_exceptionByInvalidPurchaseAmountValue(final String invalidValue) {
         //given
         final String expectedExceptionMessage = "구매 금액은 1000의 양의 배수여야 합니다.";
-        final int lottoPrice = 1000;
         //when then
         assertThatThrownBy(
                 () -> PurchaseAmount.fromPurchaseAmountAndLottoPrice(invalidValue, lottoPrice))
