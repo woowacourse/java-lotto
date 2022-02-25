@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 public class MoneyReceiverTest {
 
     @Test
-    @DisplayName("구입금액을 검증하여 정수로 반환한다.")
+    @DisplayName("입력된 구입금액을 검증하여 정수로 반환")
     void receive() {
         Assertions.assertThat(MoneyReceiver.receive("14000")).isEqualTo(14000);
     }
