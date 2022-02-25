@@ -1,6 +1,7 @@
 package utils;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -75,8 +76,7 @@ public class InputValidation {
     }
 
     private static void checkDuplicateNumber(final List<Integer> numbers) {
-        Set<Integer> uniqueNumber = numbers.stream()
-                .collect(Collectors.toSet());
+        Set<Integer> uniqueNumber = new HashSet<>(numbers);
 
         if (uniqueNumber.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(ERROR_DUPLICATE_NUMBER);
