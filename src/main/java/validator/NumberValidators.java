@@ -6,6 +6,7 @@ import static constant.ExceptionMessages.INVALID_LOTTO_NUMBER_RANGE_EXCEPTION_ME
 import static constant.ExceptionMessages.INVALID_NUMBER_INPUT_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.INVALID_TOTAL_LOTTO_PRICE_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.INVALID_WINNING_NUMBERS_SIZE_EXCEPTION_MESSAGE;
+import static constant.ExceptionMessages.NEGATIVE_NUMBER_INPUT_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.NOT_UNIQUE_BONUS_NUMBER_EXCEPTION_MESSAGE;
 import static constant.LottoConstants.LOTTO_NUMBERS_SIZE;
 import static constant.LottoConstants.LOTTO_PRICE;
@@ -29,8 +30,15 @@ public class NumberValidators {
     }
 
     public static void validateTotalLottoPriceUnit(int num) {
+        validateNotNegative(num);
         if (num % LOTTO_PRICE > 0) {
             throw new IllegalArgumentException(INVALID_TOTAL_LOTTO_PRICE_EXCEPTION_MESSAGE);
+        }
+    }
+
+    private static void validateNotNegative(int num) {
+        if (num < 0) {
+            throw new IllegalArgumentException(NEGATIVE_NUMBER_INPUT_EXCEPTION_MESSAGE);
         }
     }
 

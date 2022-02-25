@@ -7,6 +7,7 @@ import static constant.ExceptionMessages.INVALID_LOTTO_NUMBER_RANGE_EXCEPTION_ME
 import static constant.ExceptionMessages.INVALID_NUMBER_INPUT_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.INVALID_TOTAL_LOTTO_PRICE_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.INVALID_WINNING_NUMBERS_SIZE_EXCEPTION_MESSAGE;
+import static constant.ExceptionMessages.NEGATIVE_NUMBER_INPUT_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.NOT_UNIQUE_BONUS_NUMBER_EXCEPTION_MESSAGE;
 import static constant.LottoConstants.LOTTO_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -55,7 +56,14 @@ public class NumberValidatorsTest {
     }
 
     @Test
-    void validateTotalLottoPriceUnit_throwIllegalArgumentExceptionOnFail() {
+    void validateTotalLottoPriceUnit_failOnNegativeNumberInput() {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> validateTotalLottoPriceUnit(LOTTO_PRICE * -10))
+                .withMessageMatching(NEGATIVE_NUMBER_INPUT_EXCEPTION_MESSAGE);
+    }
+
+    @Test
+    void validateTotalLottoPriceUnit_failIfChangesExist() {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> validateTotalLottoPriceUnit(LOTTO_PRICE * 10 + 1))
                 .withMessageMatching(INVALID_TOTAL_LOTTO_PRICE_EXCEPTION_MESSAGE);
