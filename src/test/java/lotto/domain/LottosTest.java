@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottosTest {
@@ -21,11 +22,7 @@ public class LottosTest {
                 .collect(Collectors.toList()));
     }
 
-    @Test
-    void constructor() {
-        assertThat(lottos).isInstanceOf(Lottos.class);
-    }
-
+    @DisplayName("LottoResult 로또 결과 객체를 계산하여 반환할 수 있다.")
     @Test
     void createLottoResult() {
         // given

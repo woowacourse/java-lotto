@@ -19,6 +19,7 @@ public class LottoNumberTest {
                 .withMessage("[ERROR] 입력값이 1 이상 45 이하여야 합니다.");
     }
 
+    @DisplayName("LottoNumber vo는 number숫자 크기로 오름차순 비교가 되어야한다.")
     @Test
     void comparable() {
         final LottoNumber lowerLottoNumber = LottoNumber.valueOf(2);
@@ -26,6 +27,7 @@ public class LottoNumberTest {
         assertThat(lowerLottoNumber).isLessThan(largerLottoNumber);
     }
 
+    @DisplayName("캐싱으로 인한 LottoNumber는 항상 동일성, 동등성을 보장해야한다.")
     @Test
     void sameAsAndEqualsAndHashCode() {
         assertThat(LottoNumber.valueOf(1))
