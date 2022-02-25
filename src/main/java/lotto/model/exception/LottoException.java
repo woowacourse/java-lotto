@@ -1,7 +1,5 @@
 package lotto.model.exception;
 
-public class LottoException extends RuntimeException {
+public abstract class LottoException extends RuntimeException {
 
-    public LottoException() {
-    }
 }

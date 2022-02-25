@@ -1,8 +1,5 @@
 package lotto.view;
 
-import static lotto.view.InputTemplate.repeatablyExecute;
-import static lotto.view.InputTemplate.repeatablyInput;
-
 import lotto.model.Lotto;
 import lotto.model.Money;
 import lotto.model.Number;
@@ -19,12 +16,13 @@ public class InputView {
     private static final Parser<Lotto> LOTTO_PARSER = new LottoParser();
     private static final Parser<Money> MONEY_PARSER = Parser.moneyParser();
     private static final Parser<Number> NUMBER_PARSER = Parser.numberParser();
+    private static final InputTemplate inputTemplate = new InputTemplate(System.in, System.out);
 
     private InputView() {
     }
 
     public static Money inputMoney() {
-        return repeatablyExecute(InputView::createMoney, OutputView::printErrorMessage);
+        return inputTemplate.repeatablyExecute(InputView::createMoney, OutputView::printErrorMessage);
     }
 
     private static Money createMoney() {
@@ -32,12 +30,12 @@ public class InputView {
     }
 
     private static String inputMoneyText() {
-        return repeatablyInput("구입금액을 입력해 주세요.", MONEY_VALIDATOR::validate,
+        return inputTemplate.repeatablyInput("구입금액을 입력해 주세요.", MONEY_VALIDATOR::validate,
             OutputView::printErrorMessage);
     }
 
     public static WinnerLotto inputWinnerLotto() {
-        return repeatablyExecute(InputView::createWinnerLotto, OutputView::printErrorMessage);
+        return inputTemplate.repeatablyExecute(InputView::createWinnerLotto, OutputView::printErrorMessage);
     }
 
     private static WinnerLotto createWinnerLotto() {
@@ -49,7 +47,7 @@ public class InputView {
     }
 
     private static String inputLottoText() {
-        return repeatablyInput("지난 주 당첨 번호를 입력해 주세요.", LOTTO_VALIDATOR::validate,
+        return inputTemplate.repeatablyInput("지난 주 당첨 번호를 입력해 주세요.", LOTTO_VALIDATOR::validate,
                 OutputView::printErrorMessage);
     }
 
@@ -58,7 +56,7 @@ public class InputView {
     }
 
     private static String inputBonusText() {
-        return repeatablyInput("보너스 볼을 입력해 주세요.", NUMBER_VALIDATOR::validate,
+        return inputTemplate.repeatablyInput("보너스 볼을 입력해 주세요.", NUMBER_VALIDATOR::validate,
             OutputView::printErrorMessage);
     }
 
