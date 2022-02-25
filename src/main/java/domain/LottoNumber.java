@@ -7,8 +7,6 @@ import java.util.Optional;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
-    private static final HashMap<Integer, LottoNumber> cache = new HashMap<>();
-
     private final int number;
 
     private LottoNumber(int value) {
@@ -16,18 +14,23 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber of(int value) {
-        return Optional.ofNullable(getCacheIfExists(value))
-                .orElseGet(() -> createNewCache(value));
+        return Optional.ofNullable(LottoNumberCache.getCacheIfExists(value))
+                .orElseGet(() -> LottoNumberCache.createNewCache(value));
     }
 
-    private static LottoNumber getCacheIfExists(int num) {
-        return cache.get(num);
-    }
+    private static class LottoNumberCache {
 
-    private static LottoNumber createNewCache(int num) {
-        validateLottoNumberRange(num);
-        cache.put(num, new LottoNumber(num));
-        return cache.get(num);
+        static final HashMap<Integer, LottoNumber> cache = new HashMap<>();
+
+        static LottoNumber getCacheIfExists(int num) {
+            return cache.get(num);
+        }
+
+        static LottoNumber createNewCache(int num) {
+            validateLottoNumberRange(num);
+            cache.put(num, new LottoNumber(num));
+            return cache.get(num);
+        }
     }
 
     public int getNumber() {
