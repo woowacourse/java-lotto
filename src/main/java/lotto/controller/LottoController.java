@@ -5,7 +5,7 @@ import java.util.List;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoTicketFactory;
 import lotto.domain.TryMoney;
-import lotto.domain.WinningStatistics;
+import lotto.domain.WinningStats;
 import lotto.domain.lottonumbers.LottoTicket;
 import lotto.domain.lottonumbers.WinningNumbers;
 import lotto.view.InputView;
@@ -21,22 +21,22 @@ public class LottoController {
 
         WinningNumbers winningNumbers = inputWinningNumbers();
 
-        WinningStatistics winningStatistics = calculateStatistics(lottoTickets, winningNumbers);
+        WinningStats winningStats = calculateStatistics(lottoTickets, winningNumbers);
 
-        OutputView.printStatistics(winningStatistics, inputTryMoney);
+        OutputView.printStatistics(winningStats, inputTryMoney);
     }
 
-    private WinningStatistics calculateStatistics(List<LottoTicket> lottoTickets, WinningNumbers winningNumbers) {
-        WinningStatistics winningStatistics = new WinningStatistics();
+    private WinningStats calculateStatistics(List<LottoTicket> lottoTickets, WinningNumbers winningNumbers) {
+        WinningStats winningStats = new WinningStats();
 
         for (LottoTicket lottoTicket : lottoTickets) {
             LottoRank lottoRank = LottoRank.getRank(
                     winningNumbers.countContaining(lottoTicket),
                     winningNumbers.containBonusBall(lottoTicket)
             );
-            winningStatistics.put(lottoRank);
+            winningStats.put(lottoRank);
         }
-        return winningStatistics;
+        return winningStats;
     }
 
     private TryMoney inputMoney() {

@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoRank;
 import lotto.domain.TryMoney;
-import lotto.domain.WinningStatistics;
+import lotto.domain.WinningStats;
 import lotto.domain.lottonumbers.LottoTicket;
 
 public class OutputView {
@@ -23,13 +23,13 @@ public class OutputView {
         lottoTickets.forEach(OutputView::printLottoNumbers);
     }
 
-    public static void printStatistics(WinningStatistics winningStatistics, TryMoney inputTryMoney) {
+    public static void printStatistics(WinningStats winningStats, TryMoney inputTryMoney) {
         out.printf("당첨 통계%n---------%n");
         List<LottoRank> targetLottoRanks = getLottoRanksToPrint();
         for (LottoRank lottoRank : targetLottoRanks) {
-            printWinningResult(winningStatistics, lottoRank);
+            printWinningResult(winningStats, lottoRank);
         }
-        printEarningsResult(winningStatistics, inputTryMoney);
+        printEarningsResult(winningStats, inputTryMoney);
     }
 
     private static void printLottoNumbers(LottoTicket lottoTicket) {
@@ -39,18 +39,18 @@ public class OutputView {
         out.printf("[%s]%n", String.join(", ", lottoNumbers));
     }
 
-    private static void printWinningResult(WinningStatistics winningStatistics, LottoRank lottoRank) {
+    private static void printWinningResult(WinningStats winningStats, LottoRank lottoRank) {
         if (lottoRank == LottoRank.THIRD) {
             out.printf("%s개 일치, 보너스 볼 일치 (%s원) - %s개%n", LottoRank.THIRD.getWinningNumberCount(),
-                    LottoRank.THIRD.getPrizeMoney(), winningStatistics.get(LottoRank.THIRD));
+                    LottoRank.THIRD.getPrizeMoney(), winningStats.get(LottoRank.THIRD));
             return;
         }
         out.printf("%s개 일치 (%s원) - %s개%n", lottoRank.getWinningNumberCount(), lottoRank.getPrizeMoney(),
-                winningStatistics.get(lottoRank));
+                winningStats.get(lottoRank));
     }
 
-    private static void printEarningsResult(WinningStatistics winningStatistics, TryMoney inputTryMoney) {
-        double earningsRate = winningStatistics.getEarningsRate(inputTryMoney.amount());
+    private static void printEarningsResult(WinningStats winningStats, TryMoney inputTryMoney) {
+        double earningsRate = winningStats.getEarningsRate(inputTryMoney.amount());
         String result = String.format("총 수익률은 %.2f 입니다.", earningsRate);
         if (earningsRate < 1) {
             result = String.format("%s(기준이 1이기 때문에 결과적으로 손해라는 의미임)", result);

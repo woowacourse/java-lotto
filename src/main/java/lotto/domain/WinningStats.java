@@ -3,11 +3,11 @@ package lotto.domain;
 import java.util.Arrays;
 import java.util.EnumMap;
 
-public class WinningStatistics {
+public class WinningStats {
 
     private final EnumMap<LottoRank, Integer> winningStatistics;
 
-    public WinningStatistics() {
+    public WinningStats() {
         winningStatistics = new EnumMap<>(LottoRank.class);
         Arrays.stream(LottoRank.values())
                 .forEach(lottoRank -> winningStatistics.put(lottoRank, 0));
