@@ -18,16 +18,16 @@ public class LottoTicket {
 
     public LottoTicket(List<LottoNumber> numbers) {
         validate(numbers);
-        Collections.sort(numbers);
         this.numbers = new ArrayList<>(numbers);
     }
 
-    public static LottoTicket createTicket(NumberGenerator generator) {
+    public static LottoTicket createSortedTicket(NumberGenerator generator) {
         return new LottoTicket(
-            generator.generate(COUNT)
-                .stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList())
+                generator.generate(COUNT)
+                        .stream()
+                        .map(LottoNumber::new)
+                        .sorted()
+                        .collect(Collectors.toList())
         );
     }
 
@@ -54,9 +54,9 @@ public class LottoTicket {
 
     public int countMatch(LottoTicket other) {
         return Math.toIntExact(
-            this.numbers.stream()
-            .filter(other::containsNumber)
-            .count()
+                this.numbers.stream()
+                        .filter(other::containsNumber)
+                        .count()
         );
     }
 

@@ -20,7 +20,7 @@ public class LottoTickets {
 
     public static LottoTickets buy(NumberGenerator generator, Money money) {
         List<LottoTicket> tickets = IntStream.range(0, money.count())
-            .mapToObj(x -> LottoTicket.createTicket(generator))
+            .mapToObj(x -> LottoTicket.createSortedTicket(generator))
             .collect(Collectors.toList());
         return new LottoTickets(tickets);
     }
