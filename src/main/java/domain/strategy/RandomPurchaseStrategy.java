@@ -7,14 +7,14 @@ import java.util.stream.Collectors;
 
 public class RandomPurchaseStrategy implements PurchaseStrategy {
 
-    private static final int MINIMUN_NUMBER = 1;
-    private static final int MAXIMUN_NUMBER = 45;
+    private static final int MINIMUM_NUMBER = 1;
+    private static final int MAXIMUM_NUMBER = 45;
 
 
     @Override
     public List<Integer> getNumbers() {
         List<Integer> balls = new ArrayList<>();
-        for (int i = MINIMUN_NUMBER; i <= MAXIMUN_NUMBER; i++) {
+        for (int i = MINIMUM_NUMBER; i <= MAXIMUM_NUMBER; i++) {
             balls.add(i);
         }
         Collections.shuffle(balls);
