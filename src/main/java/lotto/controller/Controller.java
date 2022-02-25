@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import java.util.Scanner;
 import lotto.domain.BonusNumber;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
@@ -12,43 +11,43 @@ import lotto.view.OutputView;
 
 public class Controller {
 
-    public void run(Scanner scanner) {
-        Money money = getMoney(scanner);
+    public void run() {
+        Money money = getMoney();
         Lottos lottos = Lottos.buyLottosByAuto(money);
         OutputView.printLottos(lottos);
         OutputView.printNewLine();
-        WinningLotto winningLotto = getWinningLotto(scanner);
-        BonusNumber bonusNumber = getBonusNumber(scanner, winningLotto);
+        WinningLotto winningLotto = getWinningLotto();
+        BonusNumber bonusNumber = getBonusNumber(winningLotto);
         OutputView.printNewLine();
         RankCount rankCount = new RankCount(lottos, winningLotto, bonusNumber);
         ProfitRate profitRate = new ProfitRate(rankCount.getTotalPrize(), money);
         OutputView.printWinningStatistic(rankCount, profitRate);
     }
 
-    private Money getMoney(Scanner scanner) {
+    private Money getMoney() {
         try {
-            return new Money(InputView.inputMoney(scanner));
+            return new Money(InputView.inputMoney());
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception.getMessage());
-            return getMoney(scanner);
+            return getMoney();
         }
     }
 
-    private WinningLotto getWinningLotto(Scanner scanner) {
+    private WinningLotto getWinningLotto() {
         try {
-            return new WinningLotto(InputView.inputWinningLotto(scanner));
+            return new WinningLotto(InputView.inputWinningLotto());
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception.getMessage());
-            return getWinningLotto(scanner);
+            return getWinningLotto();
         }
     }
 
-    private BonusNumber getBonusNumber(Scanner scanner, WinningLotto winningLotto) {
+    private BonusNumber getBonusNumber(WinningLotto winningLotto) {
         try {
-            return new BonusNumber(InputView.inputBonusNumber(scanner), winningLotto);
+            return new BonusNumber(InputView.inputBonusNumber(), winningLotto);
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception.getMessage());
-            return getBonusNumber(scanner, winningLotto);
+            return getBonusNumber(winningLotto);
         }
     }
 }
