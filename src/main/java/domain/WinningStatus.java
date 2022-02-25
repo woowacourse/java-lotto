@@ -1,7 +1,6 @@
 package domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,14 +36,12 @@ public enum WinningStatus {
 	}
 
 	public static WinningStatus of(int numberMatches, boolean hitBonus) {
-		List<WinningStatus> filteredByNumberMatches = WinningStatus.getValues().stream()
-			.filter(winningStatus -> winningStatus.numberMatches == numberMatches).collect(Collectors.toList());
+		List<WinningStatus> filteredByNumberMatches = generatedByNumberMatch(numberMatches);
 		if (filteredByNumberMatches.isEmpty()) {
 			return NOTHING;
 		}
 		if (filteredByNumberMatches.size() > 1) {
-			return filteredByNumberMatches.stream().filter(winningStatus -> winningStatus.hitBonus == hitBonus)
-				.findFirst().get();
+			return generatedByHitBonus(filteredByNumberMatches, hitBonus);
 		}
 		return filteredByNumberMatches.get(0);
 	}
@@ -58,5 +55,20 @@ public enum WinningStatus {
 		winningStatuses.add(FIVE_AND_BONUS);
 		winningStatuses.add(SIX);
 		return winningStatuses;
+	}
+
+	private static List<WinningStatus> generatedByNumberMatch(int numberMatches) {
+		return WinningStatus.getValues()
+			.stream()
+			.filter(winningStatus -> winningStatus.numberMatches == numberMatches)
+			.collect(Collectors.toList());
+	}
+
+	private static WinningStatus generatedByHitBonus(List<WinningStatus> filteredByNumberMatches, boolean hitBonus) {
+		return filteredByNumberMatches
+			.stream()
+			.filter(winningStatus -> winningStatus.hitBonus == hitBonus)
+			.findFirst()
+			.get();
 	}
 }

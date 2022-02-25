@@ -11,11 +11,16 @@ public class Lotto {
 	}
 
 	public int calculateInAnswerNumbers(AnswerLotto answerLotto) {
-		return this.lottoNumbers.stream().mapToInt(answerLotto::isInAnswerNumbers).sum();
+		return this.lottoNumbers
+			.stream()
+			.mapToInt(answerLotto::isInAnswerNumbers)
+			.sum();
 	}
 
 	public boolean isHitBonusNumber(AnswerLotto answerLotto) {
-		return this.lottoNumbers.stream().anyMatch(answerLotto::isSameWithBonusNumber);
+		return this.lottoNumbers
+			.stream()
+			.anyMatch(answerLotto::isSameWithBonusNumber);
 	}
 
 	public List<Integer> getNumbers() {
