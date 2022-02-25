@@ -30,13 +30,15 @@ public class LottoController {
 		announceWinningResult(money, winningResult);
 	}
 
-	private void announceWinningResult(Money money, WinningResult winningResult) {
-		outputView.printWinningResult(winningResult.getWinningResult());
-		outputView.printRateOfProfit(winningResult.getRateOfProfit(money));
+	private Money insertMoney() {
+		outputView.printRequestMoney();
+		return Money.from(inputView.requestMoney());
 	}
 
-	private WinningResult checkWinningResult(LottoTicket lottoTicket, WinningNumbers winningNumbers) {
-		return WinningResult.createWinningResult(lottoTicket, winningNumbers);
+	private LottoTicket buyLottoTicket(Money money) {
+		LottoTicket lottoTicket = new LottoTicket(lottoFactory.generateLottoTicket(money));
+		outputView.printPurchasedLottoTicket(lottoTicket.getLottoTicket());
+		return lottoTicket;
 	}
 
 	private WinningNumbers generateWinningNumbers() {
@@ -49,14 +51,12 @@ public class LottoController {
 		return new WinningNumbers(winningLotto, bonusNumber);
 	}
 
-	private LottoTicket buyLottoTicket(Money money) {
-		LottoTicket lottoTicket = new LottoTicket(lottoFactory.generateLottoTicket(money));
-		outputView.printPurchasedLottoTicket(lottoTicket.getLottoTicket());
-		return lottoTicket;
+	private WinningResult checkWinningResult(LottoTicket lottoTicket, WinningNumbers winningNumbers) {
+		return WinningResult.createWinningResult(lottoTicket, winningNumbers);
 	}
 
-	private Money insertMoney() {
-		outputView.printRequestMoney();
-		return Money.from(inputView.requestMoney());
+	private void announceWinningResult(Money money, WinningResult winningResult) {
+		outputView.printWinningResult(winningResult.getWinningResult());
+		outputView.printRateOfProfit(winningResult.getRateOfProfit(money));
 	}
 }
