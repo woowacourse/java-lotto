@@ -66,6 +66,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     @Override
     public String toString() {
-        return "" + number;
+        return String.valueOf(number);
     }
 }
