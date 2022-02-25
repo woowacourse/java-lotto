@@ -17,7 +17,7 @@ public class WinCount {
     }
 
     public WinCount convertToSecondRankCount() {
-        return new WinCount(this.count, this.bonus);
+        return new WinCount(this.count, true);
     }
 
     public boolean isInRank() {
