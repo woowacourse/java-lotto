@@ -8,6 +8,9 @@ import java.util.stream.Collectors;
 
 public class TestUtils {
 
+    private TestUtils() {
+    }
+
     public static Lotto createNewLotto(int... value) {
         return new Lotto(createLottoNumbersOf(value));
     }

@@ -22,6 +22,9 @@ public class OutputView {
     private static final String LOTTO_RESULTS_COUNT_TEXT_FORMAT = "%d개";
     private static final String PRIZE_PRICE_RATIO_TEXT_FORMAT = "총 수익률은 %.2f입니다.";
 
+    private OutputView() {
+    }
+
     public static void printPurchaseInfo(List<Lotto> lottos) {
         StringBuilder builder = new StringBuilder();
 

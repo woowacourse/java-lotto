@@ -12,6 +12,9 @@ public class InputView {
 
     private static final Scanner scanner = new Scanner(System.in);
 
+    private InputView() {
+    }
+
     public static int requestTotalLottoPrice() {
         print(REQUEST_TOTAL_LOTTO_PRICE_INPUT_MESSAGE);
         return validateAndParseNumber(readline());

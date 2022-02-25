@@ -1,7 +1,5 @@
 package domain;
 
-import static constant.LottoConstants.LOTTO_PRICE;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;

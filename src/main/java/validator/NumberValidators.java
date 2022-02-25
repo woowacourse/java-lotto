@@ -21,6 +21,9 @@ public class NumberValidators {
 
     private static final int WINNING_NUMBERS_SIZE = 6;
 
+    private NumberValidators() {
+    }
+
     public static int validateAndParseNumber(String value) {
         try {
             return Integer.parseInt(value.trim());
