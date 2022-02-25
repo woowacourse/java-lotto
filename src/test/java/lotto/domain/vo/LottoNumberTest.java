@@ -1,6 +1,7 @@
 package lotto.domain.vo;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -32,6 +33,17 @@ class LottoNumberTest {
         assertThatThrownBy(() -> LottoNumber.from(value))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(expectedExceptionMessage);
+    }
+
+    @Test
+    @DisplayName("1부터 45까지의 자연수를 입력받아 로또 객체를 생성한다.")
+    void create_lottoNumber_from() {
+        //given
+        final int expectedLottoNumber = 3;
+        //when
+        final int actualLottoNumber = LottoNumber.from("3").getValue();
+        //then
+        assertThat(actualLottoNumber).isEqualTo(expectedLottoNumber);
     }
 
     @ParameterizedTest
