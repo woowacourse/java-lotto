@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class LottoTest {
 
     @Test
-    @DisplayName("로또 생성 시 Ball 객체 6개 생성")
+    @DisplayName("로또 생성 시 Ball 객체가 6개인지 체크")
     void ball_count() {
         List<String> numbers = new ArrayList<>(Arrays.asList("1", "2", "3"));
 
@@ -25,7 +25,7 @@ public class LottoTest {
     @Test
     @DisplayName("로또 생성 시 Ball 숫자 중복")
     void ball_duplicated() {
-        List<String> numbers = new ArrayList<>(Arrays.asList("1", "2", "2"));
+        List<String> numbers = new ArrayList<>(Arrays.asList("1", "2", "2", "3", "4", "5"));
 
         assertThatThrownBy(() -> {
             Lotto lotto = new Lotto(numbers);
@@ -33,35 +33,23 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("보너스볼 중복")
-    void bonus_ball_duplicated() {
-        List<String> numbers = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "6"));
-        Lotto lotto = new Lotto(numbers);
-        Ball bonusBall = new Ball("1");
-
-        assertTrue(lotto.contains(bonusBall));
-    }
-
-    @Test
-    @DisplayName("로또의 숫자가 모두 일치할때")
+    @DisplayName("로또의 숫자가 모두 일치할때 1등 반환")
     void calc_same_count() {
         Lotto lotto = new Lotto(Arrays.asList("1", "2", "3", "4", "5", "6"));
         Lotto winLotto = new Lotto(Arrays.asList("1", "2", "3", "4", "5", "6"));
+        Ball bonusBall = new Ball("7");
 
-        int matchingCount = lotto.getMatchingCount(winLotto);
-
-        assertEquals(matchingCount, 6);
+        assertEquals(Rank.FIRST, lotto.getRank(new WinningLotto(winLotto, bonusBall)));
     }
 
     @Test
-    @DisplayName("로또의 숫자가 일치하지 않을 때")
+    @DisplayName("로또의 숫자가 5개 일치하고 보너스볼이 일치할 때 2등 반환")
     void calc_same_count_different() {
         Lotto lotto = new Lotto(Arrays.asList("1", "2", "3", "4", "5", "7"));
         Lotto winLotto = new Lotto(Arrays.asList("1", "2", "3", "4", "5", "6"));
+        Ball bonusBall = new Ball("7");
 
-        int matchingCount = lotto.getMatchingCount(winLotto);
-
-        assertNotEquals(matchingCount, 6);
+        assertEquals(Rank.SECOND, lotto.getRank(new WinningLotto(winLotto, bonusBall)));
     }
 
 }

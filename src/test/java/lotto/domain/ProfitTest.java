@@ -22,7 +22,7 @@ public class ProfitTest {
         Ball bonusBall = new Ball("7");
         WinningLotto winningLotto = new WinningLotto(winLotto, bonusBall);
 
-        lottos.addMatchingCount(lottoResult, winningLotto);
+        lottoResult.addMatchingCount(lottos, winningLotto);
     }
 
     @Test
@@ -31,7 +31,7 @@ public class ProfitTest {
         Profit profit = new Profit();
 
         PurchaseAmount purchaseAmount = new PurchaseAmount("3000");
-        int totalMoney = lottoResult.getTotalMoney(); // 2030050000
+        int totalMoney = lottoResult.getTotalMoney();
 
         assertEquals(profit.calculate(totalMoney, purchaseAmount), 676683.333, 0.01);
     }

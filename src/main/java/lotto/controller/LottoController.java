@@ -62,11 +62,11 @@ public class LottoController {
         Output.statisticsTitle();
 
         LottoResult lottoResult = new LottoResult();
-        lottos.addMatchingCount(lottoResult, winningLotto);
+        lottoResult.addMatchingCount(lottos, winningLotto);
         Output.lottoResult(lottoResult);
 
         Profit profit = new Profit();
-        double profitRate = profit.calculate(lottoResult.getTotalMoney(),purchaseAmount);
+        double profitRate = profit.calculate(lottoResult.getTotalMoney(), purchaseAmount);
         Output.profitRate(profitRate);
     }
 }

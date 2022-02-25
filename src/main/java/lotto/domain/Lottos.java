@@ -5,7 +5,6 @@ import java.util.List;
 
 public class Lottos {
     private static final int LOTTO_PRICE = 1000;
-    private static final int CHECK_BONUS_COUNT = 5;
 
     private final List<Lotto> lottos;
 
@@ -26,13 +25,5 @@ public class Lottos {
 
     public List<Lotto> getLottos() {
         return new ArrayList<>(lottos);
-    }
-
-    public void addMatchingCount(LottoResult lottoResult, WinningLotto winningLotto) {
-        for (Lotto lotto : lottos) {
-            int matchingCount = lotto.getMatchingCount(winningLotto.getWinningLotto());
-            boolean isBonus = matchingCount == CHECK_BONUS_COUNT && lotto.contains(winningLotto.getBonusBall());
-            lottoResult.increaseRankCount(Rank.getRank(matchingCount, isBonus));
-        }
     }
 }

@@ -18,8 +18,11 @@ public class LottoResult {
         return lottoResult;
     }
 
-    public void increaseRankCount(Rank rank) {
-        lottoResult.put(rank, lottoResult.get(rank) + 1);
+    public void addMatchingCount(Lottos lottos, WinningLotto winningLotto) {
+        for (Lotto lotto : lottos.getLottos()) {
+            Rank rank = lotto.getRank(winningLotto);
+            lottoResult.put(rank, lottoResult.get(rank) + 1);
+        }
     }
 
     public int getTotalMoney() {
