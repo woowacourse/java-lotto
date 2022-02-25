@@ -10,11 +10,12 @@ public class Lotto {
 
     private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<LottoNumber> lottoNumbers) {
-        validateSize(lottoNumbers);
-        validateDuplicate(lottoNumbers);
+    public Lotto(final List<LottoNumber> lottoNumbers) {
+        final List<LottoNumber> unmodifiableLottoNumbers = Collections.unmodifiableList(lottoNumbers);
+        validateSize(unmodifiableLottoNumbers);
+        validateDuplicate(unmodifiableLottoNumbers);
 
-        this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
+        this.lottoNumbers = unmodifiableLottoNumbers;
     }
 
     private void validateSize(List<LottoNumber> lottoNumbers) {

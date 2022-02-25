@@ -10,9 +10,11 @@ import vo.WinningCount;
 public class Lottos {
     private final List<Lotto> lottos;
 
-    public Lottos(List<Lotto> lottos) {
+    public Lottos(final List<Lotto> lottos) {
+        final List<Lotto> unmodifiableLottos = Collections.unmodifiableList(lottos);
         validateNullOrEmpty(lottos);
-        this.lottos = Collections.unmodifiableList(lottos);
+
+        this.lottos = unmodifiableLottos;
     }
 
     private void validateNullOrEmpty(List<Lotto> lottos) {
