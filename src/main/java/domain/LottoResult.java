@@ -13,7 +13,7 @@ public class LottoResult {
     public long sumTotalPrice() {
         long totalPrice = DEFAULT_VALUE;
         for (LottoRank rank : resultCount.keySet()) {
-            totalPrice += (long) rank.getPrice() * resultCount.get(rank);
+            totalPrice += rank.getPrice() * resultCount.get(rank);
         }
 
         return totalPrice;

@@ -13,9 +13,9 @@ public enum LottoRank {
 
     private final int count;
     private final boolean bonus;
-    private final int price;
+    private final long price;
 
-    LottoRank(int count, boolean bonus, int price) {
+    LottoRank(int count, boolean bonus, long price) {
         this.count = count;
         this.bonus = bonus;
         this.price = price;
@@ -28,7 +28,7 @@ public enum LottoRank {
                 .orElse(RANK_NOTHING);
     }
 
-    public int getPrice() {
+    public long getPrice() {
         return price;
     }
 
