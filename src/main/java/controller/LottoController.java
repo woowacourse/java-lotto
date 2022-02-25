@@ -26,9 +26,9 @@ public class LottoController {
         return LottosDto.from(player.getLottos());
     }
 
-    public void determineWinningNumber(List<String> winningNumber, int bonusBall) {
+    public void determineWinningNumber(List<Integer> winningNumbers, int bonusBall) {
         LottoGenerator lottoGenerator = new WinningLottoGenerator();
-        Lotto winningLotto = lottoGenerator.generateLotto(LottoNumberFactory.from(winningNumber));
+        Lotto winningLotto = lottoGenerator.generateLotto(winningNumbers);
         this.winningLotto = new WinningLotto(winningLotto, new LottoNumber(bonusBall));
     }
 
