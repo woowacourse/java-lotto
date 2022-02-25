@@ -13,12 +13,9 @@ public class Validator {
     }
 
     public static boolean isValidRange(List<Integer> numbers) {
-        for (int number : numbers) {
-            if (number < 1 || number > 45) {
-                return false;
-            }
-        }
-        return true;
+        return (numbers.size() == numbers.stream()
+                .filter(Validator::isValidRange)
+                .count());
     }
 
     public static boolean isDuplicate(List<Integer> numbers) {
