@@ -23,6 +23,7 @@ public class LottoRandomGenerator implements LottoGenerator {
                 .collect(Collectors.toList());
     }
 
+    @Override
     public List<LottoNumbers> generateLottoNumbersGroup(final int numberOfGenerating) {
         final Set<LottoNumbers> generatedNumbersGroup = new HashSet<>();
         while (generatedNumbersGroup.size() < numberOfGenerating) {
