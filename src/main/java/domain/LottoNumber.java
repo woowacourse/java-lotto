@@ -21,14 +21,13 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
 	private final int lottoNumber;
 
-	public LottoNumber(String lottoNumber) {
-		this.lottoNumber = Integer.parseInt(lottoNumber);
-		checkRange(this.lottoNumber);
-	}
-
 	public LottoNumber(int lottoNumber) {
 		checkRange(lottoNumber);
 		this.lottoNumber = lottoNumber;
+	}
+
+	public LottoNumber(String lottoNumber) {
+		this(Integer.parseInt(lottoNumber));
 	}
 
 	public static LottoNumber of(int number) {
@@ -72,6 +71,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
 	@Override
 	public int compareTo(LottoNumber o) {
-		return this.lottoNumber - o.lottoNumber;
+		return Integer.compare(this.lottoNumber, o.lottoNumber);
 	}
 }

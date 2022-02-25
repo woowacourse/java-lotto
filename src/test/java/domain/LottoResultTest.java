@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoResultTest {
 
@@ -24,5 +25,13 @@ public class LottoResultTest {
 		LottoResult result = new LottoResult(ranks);
 		//then
 		assertThat(result.calculateProfitRate(payment)).isEqualTo(1.0);
+	}
+
+	@DisplayName("생성값이 null 일 경우")
+	@Test
+	void make_null() {
+		assertThatThrownBy(() -> new LottoResult(null))
+			.isInstanceOf(NullPointerException.class)
+			.hasMessage(null);
 	}
 }

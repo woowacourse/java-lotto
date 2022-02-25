@@ -2,12 +2,13 @@ package domain;
 
 import java.util.Collections;
 import java.util.Map;
+import java.util.Objects;
 
 public class LottoResult {
 	private final Map<Rank, Integer> ranks;
 
-	public LottoResult(Map<Rank, Integer> ranks) {
-		this.ranks = ranks;
+	public LottoResult(final Map<Rank, Integer> ranks) {
+		this.ranks = Objects.requireNonNull(ranks);
 	}
 
 	public double calculateProfitRate(Payment payment) {
