@@ -38,13 +38,9 @@ public class Lotto {
     }
 
     public int compare(final Lotto lotto) {
-        int count = INIT_COUNT;
-        for (LottoNumber lottoNumber : this.lotto) {
-            if (lotto.isContainNumber(lottoNumber)) {
-                count += COUNT_INCREASE_UNIT;
-            }
-        }
-        return count;
+        return (int) this.lotto.stream()
+            .filter(lottoNumber -> lotto.isContainNumber(lottoNumber))
+            .count();
     }
 
     public List<LottoNumberDto> toDto() {
