@@ -12,9 +12,9 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class PurchasedLottosTest {
 
-    PurchasedLotto lottos;
-    WinningNumber winningLotto;
-    int inputMoney;
+    private PurchasedLotto lottos;
+    private WinningNumber winningLotto;
+    private int inputMoney;
 
     @BeforeEach
     void init() {
