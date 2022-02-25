@@ -13,11 +13,11 @@ public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
-        this.numbers = numbers;
+        this.numbers = new ArrayList<>(numbers);
     }
 
     public List<Integer> getLotto() {
-        return numbers;
+        return new ArrayList<>(numbers);
     }
 
     public static Lotto generateNumber() {

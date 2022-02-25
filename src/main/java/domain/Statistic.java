@@ -13,7 +13,7 @@ public class Statistic {
     }
 
     public Statistic(Map<Rank, Integer> statistics) {
-        this.statistics = statistics;
+        this.statistics = new LinkedHashMap<>(statistics);
     }
 
     public static Statistic initStatistic() {

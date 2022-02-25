@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -21,7 +22,7 @@ public class WinningNumber {
         checkWinningNumberLength(winningNumbers);
         checkAvailableRange(winningNumbers);
         checkDuplicatedNumber(winningNumbers);
-        this.winningNumbers = winningNumbers;
+        this.winningNumbers = new ArrayList<>(winningNumbers);
         this.bonusBall = bonusBall;
     }
 
@@ -55,7 +56,7 @@ public class WinningNumber {
         }
     }
 
-    public boolean isBonusBallMatch(List<Integer> lotto){
+    public boolean isBonusBallMatch(List<Integer> lotto) {
         return lotto.contains(bonusBall);
     }
 }
