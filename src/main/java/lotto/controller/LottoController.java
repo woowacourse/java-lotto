@@ -1,6 +1,5 @@
 package lotto.controller;
 
-import java.util.List;
 import lotto.model.Lottos;
 import lotto.model.WinningLotto;
 import lotto.view.InputView;
@@ -15,32 +14,13 @@ public class LottoController {
     }
 
     public void run() throws RuntimeException {
-        Lottos lottos = makeLottos();
+        Lottos lottos = inputController.makeLottos(InputView.inputPrice());
         ResultView.printResult(lottos);
 
-        WinningLotto winningLotto = makeWinningLotto();
+        WinningLotto winningLotto = inputController.makeWinningLotto(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
 
         winningLotto.checkRank(lottos);
         lottos.countRank();
         ResultView.printTotalResult(lottos);
-    }
-
-    private Lottos makeLottos() throws RuntimeException {
-        int countLotto = inputController.countLotto(InputView.inputPrice());
-        Lottos lottos = new Lottos(countLotto);
-        return lottos;
-    }
-
-//    private void insertLottoToLottos(int countLotto, Lottos lottos) {
-//        for (int i = 0; i < countLotto; i++) {
-//            Lotto lotto = RandomLottoGenerator.generate();
-//            lottos.insert(lotto);
-//        }
-//    }
-
-    private WinningLotto makeWinningLotto() throws RuntimeException {
-        List<Integer> winningNumbers = inputController.splitWinningNumbers(InputView.inputWinningNumbers());
-        int bonusNumber = inputController.toIntBonusNumber(InputView.inputBonusNumber(), winningNumbers);
-        return new WinningLotto(winningNumbers, bonusNumber);
     }
 }

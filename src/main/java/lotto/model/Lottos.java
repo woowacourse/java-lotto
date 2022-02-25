@@ -1,6 +1,8 @@
 package lotto.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import lotto.util.RandomLottoGenerator;
@@ -15,7 +17,7 @@ public class Lottos {
     public Lottos(int countLotto) {
         this.lottos = new ArrayList<>();
         insertLottoToLottos(countLotto);
-        rankCount = Rank.initMap();
+        rankCount = initMap();
     }
 
     private void insertLottoToLottos(int countLotto) {
@@ -27,6 +29,12 @@ public class Lottos {
 
     public void insert(Lotto lotto) {
         lottos.add(lotto);
+    }
+
+    private Map<Rank, Integer> initMap() {
+        Map<Rank, Integer> map = new LinkedHashMap<>();
+        Arrays.stream(Rank.values()).forEach(rank -> map.put(rank, 0));
+        return map;
     }
 
     public void calculateRanks(List<Integer> winningNumbers, int bonusNumber) {

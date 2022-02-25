@@ -1,27 +1,19 @@
 package lotto.controller;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
+import lotto.model.Lottos;
+import lotto.model.WinningLotto;
 import lotto.util.InputValidator;
 
 public class InputController {
 
-    private static final int PRICE_PER_LOTTO = 1000;
-
-    public int countLotto(String price) throws RuntimeException {
-        return InputValidator.validatePrice(price) / PRICE_PER_LOTTO;
+    public Lottos makeLottos(String price) throws RuntimeException {
+        return new Lottos(InputValidator.validatePrice(price));
     }
 
-    public List<Integer> splitWinningNumbers(String winningNumbers) throws RuntimeException {
-        return Arrays.stream(InputValidator.validateWinningNumbers(winningNumbers))
-                .map(String::trim)
-                .mapToInt(Integer::parseInt)
-                .boxed()
-                .collect(Collectors.toList());
-    }
-
-    public int toIntBonusNumber(String bonusNumber, List<Integer> winningNumbers) throws RuntimeException {
-        return InputValidator.validateBonusNumber(bonusNumber, winningNumbers);
+    public WinningLotto makeWinningLotto(String winningNumbers, String bonusNumber) {
+        List<Integer> lottoNumbers = InputValidator.validateWinningNumbers(winningNumbers);
+        int lottoBonusNumber = InputValidator.validateBonusNumber(bonusNumber, lottoNumbers);
+        return new WinningLotto(lottoNumbers, lottoBonusNumber);
     }
 }

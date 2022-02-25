@@ -1,9 +1,6 @@
 package lotto.model;
 
-
 import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 public enum Rank {
     LOSER(0, false, 0),
@@ -12,8 +9,6 @@ public enum Rank {
     THIRD(5, false, 1_500_000),
     SECOND(5, true, 30_000_000),
     FIRST(6, false, 2_000_000_000);
-
-    private static final int DEFAULT_COUNT = 0;
 
     private final int count;
     private final boolean winBonusNumber;
@@ -43,11 +38,5 @@ public enum Rank {
                 .filter(rank -> rank.winBonusNumber == winBonusNumber)
                 .findFirst()
                 .orElse(LOSER);
-    }
-
-    public static Map<Rank, Integer> initMap() {
-        Map<Rank, Integer> map = new LinkedHashMap<>();
-        Arrays.stream(Rank.values()).forEach(rank -> map.put(rank, DEFAULT_COUNT));
-        return map;
     }
 }

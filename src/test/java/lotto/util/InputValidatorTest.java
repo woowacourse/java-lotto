@@ -1,8 +1,9 @@
 package lotto.util;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
+import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +12,7 @@ public class InputValidatorTest {
     @Test
     void 가격_검증_테스트_정상() {
         int price = InputValidator.validatePrice("10000");
-        assertThat(price).isEqualTo(10000);
+        assertThat(price).isEqualTo(10);
     }
 
     @Test
@@ -32,8 +33,8 @@ public class InputValidatorTest {
 
     @Test
     void 당첨번호_검증_테스트_정상() {
-        String[] splitWinningNumbers = InputValidator.validateWinningNumbers("1,2,3,4,5,6");
-        assertThat(splitWinningNumbers).contains("1", "2", "3", "4", "5", "6");
+        List<Integer> splitWinningNumbers = InputValidator.validateWinningNumbers("1,2,3,4,5,6");
+        assertThat(splitWinningNumbers).contains(1,2,3,4,5,6);
     }
 
     @Test

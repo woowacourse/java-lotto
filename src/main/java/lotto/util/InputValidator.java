@@ -3,6 +3,7 @@ package lotto.util;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class InputValidator {
 
@@ -20,27 +21,36 @@ public class InputValidator {
         if (!Pattern.matches(NUMBER_REGEX, price) || isLessThanLottoPrice(Integer.parseInt(price))) {
             throw new RuntimeException(PRICE_ERROR_MESSAGE);
         }
-        return Integer.parseInt(price);
+        return Integer.parseInt(price) / PRICE_PER_LOTTO;
     }
 
     private static boolean isLessThanLottoPrice(int price) {
         return price < PRICE_PER_LOTTO;
     }
 
-    public static String[] validateWinningNumbers(String winningNumbers) throws RuntimeException {
+    public static List<Integer> validateWinningNumbers(String winningNumbers) throws RuntimeException {
         String[] splitWinningNumbers = winningNumbers.split(",");
 
         validateLength(splitWinningNumbers);
-        for (String number : splitWinningNumbers) {
-            validateLottoNumber(number);
-        }
+        validateLottoNumbers(splitWinningNumbers);
         validateDuplicate(splitWinningNumbers);
-        return splitWinningNumbers;
+
+        return Arrays.stream(splitWinningNumbers)
+                .map(String::trim)
+                .mapToInt(Integer::parseInt)
+                .boxed()
+                .collect(Collectors.toList());
     }
 
     private static void validateLength(String[] winningNumbers) throws RuntimeException {
         if (winningNumbers.length != 6) {
             throw new RuntimeException(LENGTH_ERROR_MESSAGE);
+        }
+    }
+
+    private static void validateLottoNumbers(String[] numbers) throws RuntimeException {
+        for (String number : numbers) {
+            validateLottoNumber(number);
         }
     }
 
