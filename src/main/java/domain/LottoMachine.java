@@ -31,10 +31,6 @@ public class LottoMachine {
         return decimalFormat;
     }
 
-    public void putLotto(LottoRank rank) {
-        this.lottoResult.putLottoRank(rank);
-    }
-
     public LottoResult getResults(WinningLotto winningLotto) {
         for (Lotto lotto : lottoTicket.getLottos()) {
             lottoResult.putLottoRank(winningLotto.countLottoRank(lotto));

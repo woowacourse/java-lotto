@@ -27,10 +27,11 @@ public class LottoMachineTest {
 
     @Test
     public void calculateFifthWinningProfit() {
-        int money = 14000;
-        LottoMachine lottoMachine = new LottoMachine(money, new ShuffleNumberGenerator());
-        lottoMachine.putLotto(LottoRank.RANK_5);
-        assertThat(lottoMachine.calculateProfit()).isEqualTo(0.35);
+        int money = 1000;
+        LottoMachine lottoMachine = new LottoMachine(money, new AlwaysSameSixNumberGenerator());
+        WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 10, 11, 12), 45);
+        lottoMachine.getResults(winningLotto);
+        assertThat(lottoMachine.calculateProfit()).isEqualTo(5.00);
     }
 
     @Test
