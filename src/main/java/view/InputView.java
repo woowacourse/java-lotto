@@ -13,6 +13,10 @@ public class InputView {
 
     private static final Scanner scanner = new Scanner(System.in);
 
+    private InputView() {
+        throw new AssertionError();
+    }
+
     public static int getMoney() {
         System.out.println("구입금액을 입력해 주세요.");
         return getNumber();

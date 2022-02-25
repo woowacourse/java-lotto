@@ -15,6 +15,10 @@ public class OutputView {
     public static final String PROFIT_PATTERN = "#.##";
     public static final String BLANK = "";
 
+    private OutputView() {
+        throw new AssertionError();
+    }
+
     public static void printPurchasedLottoTicketNumber(int number) {
         System.out.println(number + "개를 구매했습니다.");
     }
