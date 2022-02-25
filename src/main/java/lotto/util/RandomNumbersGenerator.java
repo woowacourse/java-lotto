@@ -4,9 +4,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import lotto.model.Lotto;
 
-public class RandomLottoGenerator {
+public class RandomNumbersGenerator implements RandomUtil {
 
     private static final int LOTTO_START_NUMBER = 1;
     private static final int LOTTO_LAST_NUMBER = 45;
@@ -15,13 +14,13 @@ public class RandomLottoGenerator {
 
     private static List<Integer> numberCollection;
 
-    public static Lotto generate() {
+    public List<Integer> generate() {
         numberCollection = IntStream.rangeClosed(LOTTO_START_NUMBER, LOTTO_LAST_NUMBER)
                 .boxed()
                 .collect(Collectors.toList());
         Collections.shuffle(numberCollection);
-        return new Lotto(numberCollection.subList(LOTTO_START_INDEX, LOTTO_LAST_INDEX).stream()
+        return numberCollection.subList(LOTTO_START_INDEX, LOTTO_LAST_INDEX).stream()
                 .sorted()
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
     }
 }

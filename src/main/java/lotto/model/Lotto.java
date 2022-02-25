@@ -1,6 +1,8 @@
 package lotto.model;
 
 import java.util.List;
+import lotto.model.validator.Validator;
+import lotto.util.RandomUtil;
 
 public class Lotto {
 
@@ -9,7 +11,8 @@ public class Lotto {
     private final List<Integer> numbers;
     private Rank rank;
 
-    public Lotto(List<Integer> numbers) {
+    public Lotto(RandomUtil randomNumbersGenerator) {
+        List<Integer> numbers = randomNumbersGenerator.generate();
         validateLottoNumbers(numbers);
         this.numbers = numbers;
         this.rank = Rank.LOSER;

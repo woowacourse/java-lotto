@@ -1,18 +1,18 @@
-package lotto.model;
+package lotto.model.validator;
 
 import java.util.List;
 
-class Validator {
+public class Validator {
 
-    static boolean isValidRange(int number) {
+    public static boolean isValidRange(int number) {
         return number >= 1 && number <= 45;
     }
 
-    static boolean isValidLength(List<Integer> numbers) {
+    public static boolean isValidLength(List<Integer> numbers) {
         return numbers.size() == 6;
     }
 
-    static boolean isValidRange(List<Integer> numbers) {
+    public static boolean isValidRange(List<Integer> numbers) {
         for (int number : numbers) {
             if (number < 1 || number > 45) {
                 return false;
@@ -21,7 +21,7 @@ class Validator {
         return true;
     }
 
-    static boolean isDuplicate(List<Integer> numbers) {
+    public static boolean isDuplicate(List<Integer> numbers) {
         return numbers.size() != numbers.stream().distinct().count();
     }
 }

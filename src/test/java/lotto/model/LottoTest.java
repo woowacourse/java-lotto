@@ -15,7 +15,7 @@ public class LottoTest {
 
     @Test
     void 로또_생성_테스트_정상() {
-        lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        lotto = new Lotto(() -> Arrays.asList(1, 2, 3, 4, 5, 6));
         assertThat(lotto).isInstanceOf(Lotto.class);
     }
 
@@ -23,7 +23,7 @@ public class LottoTest {
     @Test
     void 로또_생성_테스트_길이() {
         assertThatThrownBy(() ->
-                lotto = new Lotto(Arrays.asList(1, 2, 3, 4)))
+                lotto = new Lotto(() -> Arrays.asList(1, 2, 3, 4)))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessageContaining("[ERROR]");
     }
@@ -31,7 +31,7 @@ public class LottoTest {
     @Test
     void 로또_생성_테스트_범위() {
         assertThatThrownBy(() ->
-                lotto = new Lotto(Arrays.asList(1, 2, 3, 4, -1, 0)))
+                lotto = new Lotto(() -> Arrays.asList(1, 2, 3, 4, -1, 0)))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessageContaining("[ERROR]");
     }
@@ -39,14 +39,14 @@ public class LottoTest {
     @Test
     void 로또_생성_테스트_중복() {
         assertThatThrownBy(() ->
-                lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 4)))
+                lotto = new Lotto(() -> Arrays.asList(1, 2, 3, 4, 4)))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessageContaining("[ERROR]");
     }
 
     @BeforeEach
     void init() {
-        lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        lotto = new Lotto(() -> Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 
     @Test

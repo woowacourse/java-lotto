@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import lotto.util.RandomLottoGenerator;
+import lotto.util.RandomNumbersGenerator;
 
 public class Lottos {
 
@@ -22,8 +22,7 @@ public class Lottos {
 
     private void insertLottoToLottos(int countLotto) {
         for (int i = 0; i < countLotto; i++) {
-            Lotto lotto = RandomLottoGenerator.generate();
-            insert(lotto);
+            insert(new Lotto(new RandomNumbersGenerator()));
         }
     }
 
