@@ -24,8 +24,8 @@ public class LottoController {
     }
 
     private void generateTickets() {
-        final int creditMoney = lottoView.requestCreditMoney();
-        lottoService.saveCredit(creditMoney);
+        final int money = lottoView.requestMoney();
+        lottoService.saveCredit(money);
         lottoService.generateTickets();
     }
 

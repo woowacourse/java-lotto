@@ -21,10 +21,10 @@ class AnalysisDtoTest {
     @ParameterizedTest(name = "[{index}] {1}원 : {0}")
     @MethodSource("provideForCalculateTest")
     void calculateRankCountsTest(final List<Rank> ranks,
-                                 final int creditMoney,
+                                 final int money,
                                  final Map<Rank, Integer> rankCounts,
                                  final double profitRate) {
-        final AnalysisDto analysis = new AnalysisDto(ranks, creditMoney);
+        final AnalysisDto analysis = new AnalysisDto(ranks, money);
         assertThat(analysis.getRankCounts()).isEqualTo(rankCounts);
     }
 
@@ -32,10 +32,10 @@ class AnalysisDtoTest {
     @ParameterizedTest(name = "[{index}] {1}원 : {0}")
     @MethodSource("provideForCalculateTest")
     void calculateProfitRateTest(final List<Rank> ranks,
-                                 final int creditMoney,
+                                 final int money,
                                  final Map<Rank, Integer> rankCounts,
                                  final double profitRate) {
-        final AnalysisDto analysis = new AnalysisDto(ranks, creditMoney);
+        final AnalysisDto analysis = new AnalysisDto(ranks, money);
         assertThat(analysis.getProfitRate()).isEqualTo(profitRate);
     }
 

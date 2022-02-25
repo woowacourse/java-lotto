@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import lotto.exception.LottoException;
 import lotto.exception.LottoExceptionStatus;
 import lotto.exception.ball.BallNumberExceptionStatus;
-import lotto.exception.credit.CreditMoneyExceptionStatus;
+import lotto.exception.money.MoneyExceptionStatus;
 import lotto.utils.Delimiter;
 import lotto.view.input.reader.Reader;
 
@@ -27,12 +27,12 @@ public class InputView {
         }
     }
 
-    public int requestCreditMoney() {
-        return parseCreditMoney(reader.readLine());
+    public int requestMoney() {
+        return parseMoney(reader.readLine());
     }
 
-    private int parseCreditMoney(final String inputValue) {
-        return parseNumber(inputValue, CreditMoneyExceptionStatus.MONEY_IS_NOT_NUMERIC);
+    private int parseMoney(final String inputValue) {
+        return parseNumber(inputValue, MoneyExceptionStatus.MONEY_IS_NOT_NUMERIC);
     }
 
     public List<Integer> requestWinningNumbers() {

@@ -20,9 +20,9 @@ public class LottoView {
         this.outputView = outputView;
     }
 
-    public int requestCreditMoney() {
+    public int requestMoney() {
         outputView.printMessage(REQUEST_CREDIT_MONEY);
-        return inputView.requestCreditMoney();
+        return inputView.requestMoney();
     }
 
     public WinningTicketDto requestWinningTicket() {

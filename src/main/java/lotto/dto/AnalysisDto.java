@@ -12,9 +12,9 @@ public class AnalysisDto {
     private final Map<Rank, Integer> rankCounts;
     private final double profitRate;
 
-    public AnalysisDto(final List<Rank> ranks, final int creditMoney) {
+    public AnalysisDto(final List<Rank> ranks, final int money) {
         this.rankCounts = calculateRankCounts(ranks);
-        this.profitRate = calculateProfitRate(ranks, creditMoney);
+        this.profitRate = calculateProfitRate(ranks, money);
     }
 
     private Map<Rank, Integer> calculateRankCounts(final List<Rank> ranks) {
@@ -27,11 +27,11 @@ public class AnalysisDto {
         return rankMap;
     }
 
-    private double calculateProfitRate(final List<Rank> ranks, final int creditMoney) {
+    private double calculateProfitRate(final List<Rank> ranks, final int money) {
         long total = ranks.stream()
                 .mapToLong(Rank::getPrizeMoney)
                 .sum();
-        return (double) total / creditMoney;
+        return (double) total / money;
     }
 
     public Map<Rank, Integer> getRankCounts() {

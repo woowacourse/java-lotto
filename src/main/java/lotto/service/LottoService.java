@@ -2,7 +2,7 @@ package lotto.service;
 
 import java.util.List;
 
-import lotto.domain.credit.Credit;
+import lotto.domain.money.Money;
 import lotto.domain.rank.Rank;
 import lotto.domain.ticket.Ball;
 import lotto.domain.ticket.Ticket;
@@ -15,10 +15,10 @@ import lotto.dto.WinningTicketDto;
 public class LottoService {
 
     private Tickets tickets;
-    private Credit credit;
+    private Money credit;
 
-    public void saveCredit(final int creditMoney) {
-        this.credit = new Credit(creditMoney);
+    public void saveCredit(final int money) {
+        this.credit = new Money(money);
     }
 
     public void generateTickets() {
