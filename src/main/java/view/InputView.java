@@ -1,6 +1,7 @@
 package view;
 
 import java.util.Scanner;
+import utils.Validator;
 
 public class InputView {
     private static final Scanner SCANNER = new Scanner(System.in);
@@ -11,16 +12,24 @@ public class InputView {
 
     public static String getMoney() {
         OutputView.printMoneyInstruction();
-        return getInput();
+        final String input = getInput();
+        Validator.checkNullOrEmpty(input);
+        Validator.checkFormat(input);
+        return input;
     }
 
     public static String getWinLotto() {
         OutputView.printWinLottoInstruction();
-        return getInput();
+        final String input = getInput();
+        Validator.checkNullOrEmpty(input);
+        return input;
     }
 
     public static String getBonusNumber() {
         OutputView.printBonusInstruction();
-        return getInput();
+        final String input = getInput();
+        Validator.checkNullOrEmpty(input);
+        Validator.checkFormat(input);
+        return input;
     }
 }

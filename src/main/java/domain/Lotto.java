@@ -11,15 +11,15 @@ public class Lotto {
     private static final int INPUT_NUMBER_SPLIT_OPTION = -1;
     private static final int INIT_COUNT = 0;
     private static final int COUNT_INCREASE_UNIT = 1;
+
     private final List<LottoNumber> lotto;
 
     public Lotto(final String inputLotto) {
-        Validator.checkNullOrEmpty(inputLotto);
         List<String> splitNumbers = splitInput(inputLotto);
         Validator.checkDuplication(splitNumbers);
         this.lotto = splitNumbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
     }
 
     public Lotto(final List<LottoNumber> lotto) {
@@ -28,8 +28,8 @@ public class Lotto {
 
     private List<String> splitInput(final String inputNumbers) {
         return Arrays.stream(inputNumbers.split(INPUT_NUMBER_DELIMITER, INPUT_NUMBER_SPLIT_OPTION))
-                .map(String::trim)
-                .collect(Collectors.toList());
+            .map(String::trim)
+            .collect(Collectors.toList());
     }
 
     public boolean isContainNumber(final LottoNumber lottoNumber) {

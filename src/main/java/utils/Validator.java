@@ -23,8 +23,8 @@ public class Validator {
 
     public static void checkDuplication(final List<String> numbers) {
         long distinctCount = numbers.stream()
-                .distinct()
-                .count();
+            .distinct()
+            .count();
         if (distinctCount != numbers.size()) {
             throw new IllegalArgumentException(ERROR_DUPLICATION_MESSAGE);
         }
