@@ -3,6 +3,7 @@ package factory;
 import static java.util.stream.Collectors.toList;
 
 import domain.Lotto;
+import domain.LottoNumber;
 import domain.Lottos;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,10 +33,14 @@ public class LottoFactory {
 
     private static Lotto createSingleAutoLotto() {
         Collections.shuffle(lottoNumbers);
-        return new Lotto(lottoNumbers.stream()
+        return new Lotto(getLottoNumbers());
+    }
+
+    private static List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers.stream()
                 .limit(6)
                 .sorted()
                 .map(LottoNumberRepository::getLottoNumberByInt)
-                .collect(toList()));
+                .collect(toList());
     }
 }
