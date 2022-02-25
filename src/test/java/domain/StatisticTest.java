@@ -13,13 +13,13 @@ public class StatisticTest {
     @Test
     @DisplayName("수익률이 일치하는지 테스트")
     public void getProfitRate() {
+        double realProfitRate = 10.5;
         Map<Rank, Integer> result = new LinkedHashMap<>();
         result.put(Rank.FOURTH, 2);
         result.put(Rank.FIFTH, 1);
 
         Statistic statistic = new Statistic(result);
         Money money = new Money(10_000);
-        double realProfitRate = (Rank.FIFTH.getWinningPrice() + (Rank.FOURTH.getWinningPrice() * 2)) / (double) money.getMoney();
         double profitRate = statistic.getProfitRate(money);
 
         assertThat(profitRate).isEqualTo(realProfitRate);

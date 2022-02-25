@@ -1,8 +1,7 @@
 package view;
 
-import domain.WinningNumber;
-
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -34,11 +33,13 @@ public class InputView {
         return Integer.parseInt(input);
     }
 
-    public static WinningNumber askInputWinningNumber() {
+    public static List<Integer> askInputWinningNumber() {
         System.out.println(INPUT_WINNING_NUMBER_MESSAGE);
         String input = scanner.nextLine();
         String[] numbers = input.split(DELIMITER);
-        return new WinningNumber(Arrays.stream(numbers).map(Integer::parseInt).collect(Collectors.toList()));
+        return Arrays.stream(numbers)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 
     public static int askInputBonusBall() {

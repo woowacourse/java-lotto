@@ -12,16 +12,20 @@ public class WinningNumber {
     private static final int LENGTH_STANDARD = 6;
     private static final int MIN_WINNING_NUMBER = 1;
     private static final int MAX_WINNING_NUMBER = 45;
-    private final List<Integer> winningNumbers;
 
-    public WinningNumber(List<Integer> winningNumbers) {
+    private final List<Integer> winningNumbers;
+    private final Integer bonusBall;
+
+    public WinningNumber(List<Integer> winningNumbers, int bonusBall) {
+        checkBonusBall(winningNumbers, bonusBall);
         checkWinningNumberLength(winningNumbers);
         checkAvailableRange(winningNumbers);
         checkDuplicatedNumber(winningNumbers);
         this.winningNumbers = winningNumbers;
+        this.bonusBall = bonusBall;
     }
 
-    public void checkBonusBall(int bonusBall) {
+    private void checkBonusBall(List<Integer> winningNumbers, int bonusBall) {
         if (winningNumbers.contains(bonusBall)) {
             throw new IllegalArgumentException(DUPLICATE_BONUS_BALL_MESSAGE);
         }
@@ -35,7 +39,6 @@ public class WinningNumber {
         if (winningNumbers.size() != LENGTH_STANDARD) {
             throw new IllegalArgumentException(WINNING_NUMBER_LENGTH_ONLY_SIX);
         }
-
     }
 
     private void checkAvailableRange(List<Integer> winningNumbers) {
@@ -50,6 +53,9 @@ public class WinningNumber {
         if (numberSet.size() != winningNumbers.size()) {
             throw new IllegalArgumentException(WINNING_NUMBER_DUPLICATED_MESSAGE);
         }
+    }
 
+    public boolean isBonusBallMatch(List<Integer> lotto){
+        return lotto.contains(bonusBall);
     }
 }

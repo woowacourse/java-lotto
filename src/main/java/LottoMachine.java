@@ -2,36 +2,33 @@ import domain.*;
 import view.InputView;
 import view.OutputView;
 
+import java.util.List;
+
 public class LottoMachine {
 
-    private Money money;
-    private Lottos lottos;
-    private WinningNumber winningNumber;
-
     public void start() {
-        int lottoCount = inputMoney();
-        lottos = Lottos.generateLottos(lottoCount);
+        Money money = new Money(InputView.askInputMoney());
+        int lottoCount = money.generateCount();
+        OutputView.printCountOfLotto(lottoCount);
+        Lottos lottos = createLottos(lottoCount);
+        WinningNumber winningNumber = inputWinningNumber();
+        getStatistics(lottos, winningNumber, money);
+    }
+
+    private Lottos createLottos(int lottoCount) {
+        Lottos lottos = Lottos.generateLottos(lottoCount);
         OutputView.printLottos(lottos);
-        int bonusBall = inputWinningNumber();
-        getStatistics(bonusBall);
+        return lottos;
     }
 
-    private int inputMoney() {
-        money = new Money(InputView.askInputMoney());
-        int count = money.generateCount();
-        OutputView.printCountOfLotto(count);
-        return count;
-    }
-
-    private int inputWinningNumber() {
-        winningNumber = InputView.askInputWinningNumber();
+    private WinningNumber inputWinningNumber() {
+        List<Integer> winningNumber = InputView.askInputWinningNumber();
         int bonusBall = InputView.askInputBonusBall();
-        winningNumber.checkBonusBall(bonusBall);
-        return bonusBall;
+        return new WinningNumber(winningNumber, bonusBall);
     }
 
-    private void getStatistics(int bonusBall) {
-        Statistic winningStatistics = lottos.getWinningStatistics(winningNumber, bonusBall);
+    private void getStatistics(Lottos lottos, WinningNumber winningNumber, Money money) {
+        Statistic winningStatistics = lottos.getWinningStatistics(winningNumber);
         OutputView.printStatistics(winningStatistics);
         OutputView.printProfitRate(winningStatistics, money);
     }

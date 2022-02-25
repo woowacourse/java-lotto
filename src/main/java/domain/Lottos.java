@@ -26,10 +26,10 @@ public class Lottos {
         return lottos.size();
     }
 
-    public Statistic getWinningStatistics(WinningNumber winningNumber, int bonusBall) {
+    public Statistic getWinningStatistics(WinningNumber winningNumber) {
         Statistic statistic = Statistic.initStatistic();
         lottos.forEach(lotto -> {
-            Rank rank = lotto.match(winningNumber, bonusBall);
+            Rank rank = lotto.match(winningNumber);
             statistic.add(rank);
         });
         return statistic;

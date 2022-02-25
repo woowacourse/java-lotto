@@ -31,19 +31,15 @@ public class Lotto {
         return new Lotto(numbers);
     }
 
-    public Rank match(WinningNumber winningNumber, int bonusBall) {
+    public Rank match(WinningNumber winningNumber) {
         int matchCount = getMatchCount(winningNumber);
-        boolean hasBonusBall = hasBonusBall(bonusBall);
+        boolean hasBonusBall = winningNumber.isBonusBallMatch(numbers);
         return Rank.valueOf(matchCount, hasBonusBall);
     }
 
     private int getMatchCount(WinningNumber winningNumber) {
         return (int) numbers.stream().mapToInt(number -> number).filter(winningNumber::contains).count();
 
-    }
-
-    private boolean hasBonusBall(int bonusBall) {
-        return numbers.contains(bonusBall);
     }
 
 }

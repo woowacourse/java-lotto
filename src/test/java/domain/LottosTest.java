@@ -22,13 +22,13 @@ public class LottosTest {
     @DisplayName("당첨 번호 통계 테스트")
     public void checkWinningStatisticsTest() {
 
-        WinningNumber winningNumber = new WinningNumber(List.of(1, 2, 3, 4, 5, 6));
+        WinningNumber winningNumber = new WinningNumber(List.of(1, 2, 3, 4, 5, 6), 7);
         Lotto firstLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         Lotto fifthLotto = new Lotto(List.of(1, 2, 3, 10, 11, 12));
         Lotto missLotto = new Lotto(List.of(13, 14, 15, 16, 17, 18));
 
         Lottos lottos = new Lottos(Arrays.asList(firstLotto, fifthLotto, missLotto));
-        Statistic winningStatistics = lottos.getWinningStatistics(winningNumber, 23);
+        Statistic winningStatistics = lottos.getWinningStatistics(winningNumber);
 
         assertThat(winningStatistics.getStatistics().get(Rank.FIRST)).isEqualTo(1);
         assertThat(winningStatistics.getStatistics().get(Rank.SECOND)).isEqualTo(0);
