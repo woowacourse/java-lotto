@@ -3,6 +3,7 @@ package dto;
 import domain.Lotto.Lotto;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottosDto {
@@ -29,6 +30,6 @@ public class LottosDto {
     }
 
     public List<LottoDto> getLottoDtos() {
-        return lottoDtos;
+        return Collections.unmodifiableList(lottoDtos);
     }
 }

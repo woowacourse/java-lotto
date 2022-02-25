@@ -3,6 +3,7 @@ package domain.Lotto;
 import domain.Result;
 import utils.ExceptionMessage;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
@@ -22,10 +23,6 @@ public class Lotto {
         }
     }
 
-    public List<LottoNumber> getLotto() {
-        return lotto;
-    }
-
     public Result judge(WinningLotto winningLotto) {
         List<LottoNumber> winningNumbers = winningLotto.getWinningLotto();
         int hitCount = 0;
@@ -38,5 +35,9 @@ public class Lotto {
 
     private boolean judgeBonusBall(LottoNumber bonusBall) {
         return lotto.contains(bonusBall);
+    }
+
+    public List<LottoNumber> getLotto() {
+        return Collections.unmodifiableList(lotto);
     }
 }

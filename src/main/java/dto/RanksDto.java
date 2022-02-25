@@ -3,6 +3,7 @@ package dto;
 import domain.Rank;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class RanksDto {
@@ -28,7 +29,7 @@ public class RanksDto {
     }
 
     public List<RankDto> getRankDtos() {
-        return rankDtos;
+        return Collections.unmodifiableList(rankDtos);
     }
 
     public double getIncomeRate() {

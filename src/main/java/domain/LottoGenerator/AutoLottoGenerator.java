@@ -19,7 +19,7 @@ public class AutoLottoGenerator implements LottoGenerator {
         List<LottoNumber> lottoNumbers = numbers.stream()
                 .limit(LOTTO_SIZE)
                 .map(LottoNumber::new)
-                .sorted(Comparator.comparing(LottoNumber::number))
+                .sorted(Comparator.comparing(LottoNumber::getNumber))
                 .collect(Collectors.toList());
 
         return new Lotto(lottoNumbers);

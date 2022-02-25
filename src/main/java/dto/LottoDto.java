@@ -2,6 +2,7 @@ package dto;
 
 import domain.Lotto.LottoNumber;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,12 +16,12 @@ public class LottoDto {
 
     public static LottoDto from(List<LottoNumber> lottoNumbers) {
         List<Integer> numbers = lottoNumbers.stream()
-                .map(LottoNumber::number)
+                .map(LottoNumber::getNumber)
                 .collect(Collectors.toUnmodifiableList());
         return new LottoDto(numbers);
     }
 
     public List<Integer> getLottoNumber() {
-        return lottoNumber;
+        return Collections.unmodifiableList(lottoNumber);
     }
 }
