@@ -17,7 +17,7 @@ public class OutputView {
     private static final String RANK_PRICE_MESSAGE = "원)- ";
     private static final String RANK_COUNT_MESSAGE = "개";
     private static final String RANK_CORRECT_MESSAGE = "개 일치 (";
-    private static final String WIN_PROFIT_RESULT_MESSAGE = "총 수익률은 %.2f입니다. (기준이 1 이기 때문에 결과적으로 손해라는 의미임)";
+    private static final String WIN_PROFIT_RESULT_MESSAGE = "총 수익률은 %.2f입니다. (기준이 1 이기 때문에 결과적으로 %s라는 의미임)";
 
     public static void printMoneyInstruction() {
         System.out.println(INPUT_MONEY_INSTRUCTION);
@@ -64,6 +64,10 @@ public class OutputView {
     }
 
     public static void printWinProfit(final double calculateProfit) {
-        System.out.println(String.format(WIN_PROFIT_RESULT_MESSAGE, calculateProfit));
+        String profitResultMessage = "손해";
+        if (calculateProfit >= 1) {
+            profitResultMessage = "이익";
+        }
+        System.out.println(String.format(WIN_PROFIT_RESULT_MESSAGE, calculateProfit, profitResultMessage));
     }
 }
