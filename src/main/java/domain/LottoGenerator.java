@@ -2,8 +2,8 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -54,7 +54,7 @@ public class LottoGenerator {
 	}
 
 	private static void validateDuplicate(List<Integer> userInput) {
-		if (userInput.size() != new HashSet<Integer>(userInput).size()) {
+		if (userInput.size() != Set.of(userInput).size()) {
 			throw new IllegalArgumentException(ERROR_DUPLICATE_DETECT);
 		}
 	}
