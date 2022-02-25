@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class NumbersGenerator {
+public class NumsGenerator {
     private static final int END_INDEX = 6;
     private static final int FROM_INDEX = 0;
 

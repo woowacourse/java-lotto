@@ -8,11 +8,11 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("NonAsciiCharacters")
-class NumbersGeneratorTest {
+class NumsGeneratorTest {
 
     @Test
     void generateByRandom_숫자범위_검사() {
-        List<LottoNumber> lottoNumbers = NumbersGenerator.generateByRandom();
+        List<LottoNumber> lottoNumbers = NumsGenerator.generateByRandom();
         assertThat(lottoNumbers.listIterator().next())
                 .isLessThanOrEqualTo(LottoNumber.from(45))
                 .isGreaterThanOrEqualTo(LottoNumber.from(1));
@@ -20,14 +20,14 @@ class NumbersGeneratorTest {
 
     @Test
     void generateByRandom_개수검사() {
-        List<LottoNumber> lottoNumbers = NumbersGenerator.generateByRandom();
+        List<LottoNumber> lottoNumbers = NumsGenerator.generateByRandom();
         assertThat(lottoNumbers.size())
                 .isEqualTo(6);
     }
 
     @Test
     void generate_개수검사() {
-        assertThat(NumbersGenerator.generate(Arrays.asList(1, 2, 3, 4, 5, 6)))
+        assertThat(NumsGenerator.generate(Arrays.asList(1, 2, 3, 4, 5, 6)))
                 .isEqualTo(Arrays.asList(
                                 LottoNumber.from(1),
                                 LottoNumber.from(2),

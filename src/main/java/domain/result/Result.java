@@ -1,12 +1,22 @@
 package domain.result;
 
+import domain.lotto.Lotto;
+import domain.lotto.WinNumbers;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Result {
     private final LinkedHashMap<Rank, Integer> result = new LinkedHashMap<>();
 
-    public void add(final Rank rank) {
+    public Result(List<Lotto> lottos, WinNumbers winNumbers) {
+        for (Lotto lotto : lottos) {
+            Rank rank = Rank.of(lotto.countSameNum(winNumbers), lotto.contains(winNumbers.getBonus()));
+            add(rank);
+        }
+    }
+
+    private void add(final Rank rank) {
         result.put(rank, result.getOrDefault(rank, 0) + 1);
     }
 

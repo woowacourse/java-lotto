@@ -7,7 +7,7 @@ public class LottoFactory {
         return new Lotto(lottoNumbers);
     }
 
-    public static WinNumbers createWinLotto(final List<LottoNumber> lottoNumbers, LottoNumber bonus) {
+    public static WinNumbers createWinNums(final List<LottoNumber> lottoNumbers, LottoNumber bonus) {
         return new WinNumbers(createLotto(lottoNumbers), bonus);
     }
 }

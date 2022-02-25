@@ -4,7 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import domain.lotto.Lotto;
 import domain.lotto.LottoFactory;
-import domain.result.Rank;
+import domain.lotto.LottoNumber;
+import domain.lotto.WinNumbers;
 import domain.result.Result;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
@@ -12,11 +13,17 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import utils.NumbersGenerator;
+import utils.NumsGenerator;
 
 @SuppressWarnings("NonAsciiCharacters")
 class OutputViewTest {
+    private WinNumbers winNumbers;
+    @BeforeEach
+    void setup() {
+        winNumbers = LottoFactory.createWinNums(NumsGenerator.generate(Arrays.asList(1,2,3,4,5,6)), LottoNumber.from(10));
+    }
 
     @Test
     void 로또_티켓_검사() {
@@ -24,9 +31,9 @@ class OutputViewTest {
         System.setOut(new PrintStream(out));
 
         List<Lotto> lottoTickets = new ArrayList<>();
-        Lotto lotto1 = LottoFactory.createLotto(NumbersGenerator.generate(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        Lotto lotto1 = LottoFactory.createLotto(NumsGenerator.generate(Arrays.asList(1, 2, 3, 4, 5, 6)));
         lottoTickets.add(lotto1);
-        Lotto lotto2 = LottoFactory.createLotto(NumbersGenerator.generate(Arrays.asList(7, 8, 9, 10, 11, 12)));
+        Lotto lotto2 = LottoFactory.createLotto(NumsGenerator.generate(Arrays.asList(7, 8, 9, 10, 11, 12)));
         lottoTickets.add(lotto2);
 
         OutputView.printLottoTickets(lottoTickets);
@@ -45,9 +52,12 @@ class OutputViewTest {
         OutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
 
-        Result result = new Result();
-        result.add(Rank.FIRST);
-        result.add(Rank.THIRD);
+        //given
+        Lotto lotto1 = LottoFactory.createLotto(NumsGenerator.generate(Arrays.asList(1,2,3,4,5,6)));
+        Lotto lotto3 = LottoFactory.createLotto(NumsGenerator.generate(Arrays.asList(1,2,3,4,5,9)));
+
+        //when
+        Result result = new Result(Arrays.asList(lotto1, lotto3), winNumbers);
 
         OutputView.printLottosResult(result);
 

@@ -5,11 +5,10 @@ import domain.lotto.Lotto;
 import domain.lotto.LottoNumber;
 import domain.lotto.LottoFactory;
 import domain.lotto.WinNumbers;
-import domain.result.Rank;
 import domain.result.Result;
 import java.util.ArrayList;
 import java.util.List;
-import utils.NumbersGenerator;
+import utils.NumsGenerator;
 import view.InputView;
 import view.OutputView;
 
@@ -17,10 +16,10 @@ public class MainController {
     public void run() {
         final Money money = makeMoney();
         final List<Lotto> lottoTickets = makeLottos(money.toLottoCount());
-        final WinNumbers winNumbers = makeWinLotto();
+        final WinNumbers winNumbers = makeWinNums();
 
-        final Result result = makeResult(lottoTickets, winNumbers);
-        end(result, money);
+        final Result result = new Result(lottoTickets, winNumbers);
+        runOutputView(result, money);
     }
 
     private Money makeMoney() {
@@ -30,29 +29,19 @@ public class MainController {
     private List<Lotto> makeLottos(final int count) {
         final List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            lottos.add(LottoFactory.createLotto(NumbersGenerator.generateByRandom()));
+            lottos.add(LottoFactory.createLotto(NumsGenerator.generateByRandom()));
         }
         OutputView.printLottoTickets(lottos);
         return lottos;
     }
 
-    private WinNumbers makeWinLotto() {
+    private WinNumbers makeWinNums() {
         List<Integer> winLottoRawNums = InputView.inputWinLottoNums();
         LottoNumber bonus = LottoNumber.from(InputView.inputBonusNumber());
-        return LottoFactory.createWinLotto(NumbersGenerator.generate(winLottoRawNums), bonus);
+        return LottoFactory.createWinNums(NumsGenerator.generate(winLottoRawNums), bonus);
     }
 
-    private Result makeResult(final List<Lotto> lottos, WinNumbers winNumbers) {
-        final Result result = new Result();
-        for (Lotto lotto : lottos) {
-            int matchCount = lotto.countSameNum(winNumbers);
-            boolean isBonus = lotto.contains(winNumbers.getBonus());
-            result.add(Rank.of(matchCount, isBonus));
-        }
-        return result;
-    }
-
-    private void end(final Result result, final Money money) {
+    private void runOutputView(final Result result, final Money money) {
         OutputView.printLottosResult(result);
         OutputView.printProfit((float) result.getPrize() / (float) money.get());
     }
