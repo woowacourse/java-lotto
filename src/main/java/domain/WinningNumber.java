@@ -43,10 +43,15 @@ public class WinningNumber {
     }
 
     private void checkAvailableRange(List<Integer> winningNumbers) {
-        winningNumbers.stream().filter(winningNumber -> winningNumber < MIN_WINNING_NUMBER || winningNumber > MAX_WINNING_NUMBER)
-                .forEach(winningNumber -> {
-                    throw new IllegalArgumentException(WINNING_NUMBER_RANGE_MESSAGE);
-                });
+        if (isOutOfRange(winningNumbers)) {
+            throw new IllegalArgumentException(WINNING_NUMBER_RANGE_MESSAGE);
+
+        }
+    }
+
+    private boolean isOutOfRange(List<Integer> winningNumbers) {
+        return winningNumbers.stream()
+                .anyMatch(winningNumber -> winningNumber < MIN_WINNING_NUMBER || winningNumber > MAX_WINNING_NUMBER);
     }
 
     private void checkDuplicatedNumber(List<Integer> winningNumbers) {
