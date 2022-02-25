@@ -4,7 +4,6 @@ import lotto.domain.LottoMatchKind;
 import lotto.domain.LottoNumbers;
 import lotto.domain.WinningNumbers;
 import lotto.domain.generator.LottoGenerator;
-import lotto.domain.vo.LottoNumber;
 import lotto.dto.LottoMatchKindDto;
 import lotto.dto.LottoNumbersDto;
 import lotto.service.LottoService;
@@ -59,9 +58,9 @@ public class LottoController {
 
     private WinningNumbers generateWinningNumbers() {
         try {
-            final LottoNumbers lastWinningNumbers = new LottoNumbers(inputView.inputLastWeekWinningNumbers());
-            final LottoNumber bonusNumber = LottoNumber.from(inputView.inputBonusNumber());
-            return new WinningNumbers(lastWinningNumbers, bonusNumber);
+            List<String> lastWeekWinningNumbers = inputView.inputLastWeekWinningNumbers();
+            String bonusNumber = inputView.inputBonusNumber();
+            return lottoService.generateWinningNumbers(lastWeekWinningNumbers, bonusNumber);
         } catch (final Exception e) {
             inputView.printErrorMessage(e.getMessage());
             return generateWinningNumbers();
