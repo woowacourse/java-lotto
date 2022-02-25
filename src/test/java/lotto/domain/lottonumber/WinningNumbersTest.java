@@ -51,7 +51,10 @@ class WinningNumbersTest {
                 Arguments.of(Arrays.asList("3", "4", "5", "6", "7", "8"), LottoMatchKind.FIVE),
                 Arguments.of(Arrays.asList("4", "5", "6", "7", "8", "9"), LottoMatchKind.FOUR),
                 Arguments.of(Arrays.asList("5", "6", "7", "8", "9", "10"), LottoMatchKind.THREE),
-                Arguments.of(Arrays.asList("6", "7", "8", "9", "10", "1"), LottoMatchKind.LOWER_THAN_THREE)
+                Arguments.of(Arrays.asList("7", "8", "9", "10", "11", "12"), LottoMatchKind.LOWER_THAN_THREE),
+                Arguments.of(Arrays.asList("8", "9", "10", "11", "12", "13"), LottoMatchKind.LOWER_THAN_THREE),
+                Arguments.of(Arrays.asList("9", "10", "11", "12", "13", "14"), LottoMatchKind.LOWER_THAN_THREE),
+                Arguments.of(Arrays.asList("10", "11", "12", "13", "14", "15"), LottoMatchKind.LOWER_THAN_THREE)
         );
     }
 }
