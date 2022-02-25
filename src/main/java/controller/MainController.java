@@ -9,6 +9,7 @@ import domain.result.Rank;
 import domain.result.Result;
 import java.util.ArrayList;
 import java.util.List;
+import utils.NumbersGenerator;
 import view.InputView;
 import view.OutputView;
 
@@ -29,16 +30,16 @@ public class MainController {
     private List<Lotto> makeLottos(final int count) {
         final List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            lottos.add(LottoFactory.createRandomLotto());
+            lottos.add(LottoFactory.createLotto(NumbersGenerator.generateByRandom()));
         }
         OutputView.printLottoTickets(lottos);
         return lottos;
     }
 
     private WinNumbers makeWinLotto() {
-        List<Integer> winLottoNums = InputView.inputWinLottoNums();
+        List<Integer> winLottoRawNums = InputView.inputWinLottoNums();
         LottoNumber bonus = LottoNumber.from(InputView.inputBonusNumber());
-        return LottoFactory.createWinLotto(winLottoNums, bonus);
+        return LottoFactory.createWinLotto(NumbersGenerator.generate(winLottoRawNums), bonus);
     }
 
     private Result makeResult(final List<Lotto> lottos, WinNumbers winNumbers) {

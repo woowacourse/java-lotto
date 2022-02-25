@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Test;
+import utils.NumbersGenerator;
 
 @SuppressWarnings("NonAsciiCharacters")
 class OutputViewTest {
@@ -23,9 +24,9 @@ class OutputViewTest {
         System.setOut(new PrintStream(out));
 
         List<Lotto> lottoTickets = new ArrayList<>();
-        Lotto lotto1 = LottoFactory.createLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto lotto1 = LottoFactory.createLotto(NumbersGenerator.generate(Arrays.asList(1, 2, 3, 4, 5, 6)));
         lottoTickets.add(lotto1);
-        Lotto lotto2 = LottoFactory.createLotto(Arrays.asList(7, 8, 9, 10, 11, 12));
+        Lotto lotto2 = LottoFactory.createLotto(NumbersGenerator.generate(Arrays.asList(7, 8, 9, 10, 11, 12)));
         lottoTickets.add(lotto2);
 
         OutputView.printLottoTickets(lottoTickets);
