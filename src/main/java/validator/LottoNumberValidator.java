@@ -2,7 +2,7 @@ package validator;
 
 import utils.Constants;
 
-public class LottoBallValidator {
+public class LottoNumberValidator {
 
     public static final String LOTTO_NUM_RANGE_ERROR_MESSAGE = "로또 번호는 1에서 45사이의 수여야 합니다.";
 

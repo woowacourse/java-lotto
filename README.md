@@ -62,6 +62,7 @@
     - [x] 총 수익률을 계산한다.
 
 ### 로또 통계 출력
+
 - [x] 구매한 로또내역을 출력한다.
 - [x] 3개부터 6개까지 일치하는 로또의 개수를 출력한다.
 - [x] 수익률과 손해여부를 출력한다.
@@ -88,32 +89,46 @@
 - [x] 1~45 로또 공 객체를 캐싱해 성능 개선
 - [x] 이름 변경
 - [x] LottoRandomGenerator 제거, LottoFactory 생성
-- [ ] DTO 생성 고민
+
+1차 피드백
+
+- [x] view에서 도메인로직을 호출할 가능성이 있는지 확인
+    - [x] 만약 없으면 DTO ㄴㄴ, 있으면 DTO
+- [x] LottoNumber로 바꾸기
+- [ ] shuffle 결과값에 대한 Test 코드 : 반환된 로또 숫자범위, 로또게임에 맞는 개수가 반환 여브 테스트
+- [ ] 상속구조로 고민하기 🤔 꼭 써야된다 안써야된다 라기 보다는 어떤 장점이 있을지 고민해보시면 좋을것 같아요.
+  - [ ] winLotto를 6개 숫자가 있는 Lotto, 보너스볼이 포함된 새로운 객체로 만들기
+- [ ] Result : add 쓰는 대신 생성자 안에서 반복문
+- [ ] Constants 클래스 제거
+- [ ] Validator로 빠졌을때 어떤 이점이 있을까요? 🤔 : 없음... 내부에 넣자!
+- [ ] 커스텀 예외 -> 2단계 때 도전!
+- [ ] Controller에서 확인이 필요한 로직을 도메인에 넣기
+    - [ ] 옮긴 로직의 테스트코드 작성
 
 ## 💻 구조
 
 - [x] controller
-  - [x] 메인 컨트롤러
+    - [x] 메인 컨트롤러
 - [x] domain
-  - [x] LottoNumber
-  - [x] LottoNumbers
-  - [x] WinLottoNumbers
-  - [x] Money
-  - [x] Rank
-  - [x] Result
+    - [x] LottoNumber
+    - [x] LottoNumbers
+    - [x] WinLottoNumbers
+    - [x] Money
+    - [x] Rank
+    - [x] Result
 - [x] view
-  - [x] InputView
-  - [x] OutputView
+    - [x] InputView
+    - [x] OutputView
 - [x] utils
-  - [x] Constants
-  - [x] LottoNumberGenerator
-  - [x] Separator
+    - [x] Constants
+    - [x] LottoNumberGenerator
+    - [x] Separator
 - [x] validator
-  - [x] InputValidator
-  - [x] LottoNumbersValidator
-  - [x] LottoNumberValidator
-  - [x] MoneyValidator
-  - [x] WinLottoNumbersValidator
+    - [x] InputValidator
+    - [x] LottoNumbersValidator
+    - [x] LottoNumberValidator
+    - [x] MoneyValidator
+    - [x] WinLottoNumbersValidator
 
 ## 💕 페어코딩 협의사항
 

@@ -2,7 +2,7 @@ package controller;
 
 import domain.Money;
 import domain.lotto.Lotto;
-import domain.lotto.LottoBall;
+import domain.lotto.LottoNumber;
 import domain.lotto.LottoFactory;
 import domain.lotto.WinLotto;
 import domain.result.Rank;
@@ -16,9 +16,9 @@ public class MainController {
     public void run() {
         final Money money = makeMoney();
         final List<Lotto> lottoTickets = makeLottos(money.toLottoCount());
-        final WinLotto winLottoNumbers = makeWinLotto();
+        final WinLotto winLotto = makeWinLotto();
 
-        final Result result = makeResult(lottoTickets, winLottoNumbers);
+        final Result result = makeResult(lottoTickets, winLotto);
         end(result, money);
     }
 
@@ -37,7 +37,7 @@ public class MainController {
 
     private WinLotto makeWinLotto() {
         List<Integer> winLottoNums = InputView.inputWinLottoNums();
-        LottoBall bonus = LottoBall.from(InputView.inputBonusNumber());
+        LottoNumber bonus = LottoNumber.from(InputView.inputBonusNumber());
         return LottoFactory.createWinLotto(winLottoNums, bonus);
     }
 

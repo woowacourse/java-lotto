@@ -1,7 +1,7 @@
 package view;
 
 import domain.lotto.Lotto;
-import domain.lotto.LottoBall;
+import domain.lotto.LottoNumber;
 import domain.result.Rank;
 import domain.result.Result;
 import java.util.List;
@@ -29,8 +29,8 @@ public class OutputView {
 
     private static void printLottoNumbers(final Lotto lotto) {
         StringBuilder result = new StringBuilder(LOTTO_PREFIX);
-        for (LottoBall lottoBall : lotto.get()) {
-            result.append(lottoBall.get()).append(SEPARATOR);
+        for (LottoNumber lottoNumber : lotto.get()) {
+            result.append(lottoNumber.get()).append(SEPARATOR);
         }
         result.delete(result.length() - DELETE_IDX, result.length()).append(LOTTO_ENDFIX);
         System.out.println(result);

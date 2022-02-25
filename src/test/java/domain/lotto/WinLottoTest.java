@@ -13,20 +13,20 @@ class WinLottoTest {
 
     @BeforeEach
     void 당첨번호_생성() {
-        winLottoNumbers = LottoFactory.createWinLotto(Arrays.asList(1, 2, 3, 4, 5, 6), LottoBall.from(10));
+        winLottoNumbers = LottoFactory.createWinLotto(Arrays.asList(1, 2, 3, 4, 5, 6), LottoNumber.from(10));
     }
 
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3, 4})
     void 로또_숫자_확인(int input) {
-        assertThat(winLottoNumbers.isIn(LottoBall.from(input)))
+        assertThat(winLottoNumbers.isIn(LottoNumber.from(input)))
                 .isTrue();
     }
 
     @ParameterizedTest
     @ValueSource(ints = {7, 8, 9, 10})
     void 로또_숫자_포함안될때_검사(int input) {
-        assertThat(winLottoNumbers.isIn(LottoBall.from(input)))
+        assertThat(winLottoNumbers.isIn(LottoNumber.from(input)))
                 .isFalse();
     }
 }

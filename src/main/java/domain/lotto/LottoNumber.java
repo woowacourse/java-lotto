@@ -4,26 +4,26 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import utils.Constants;
-import validator.LottoBallValidator;
+import validator.LottoNumberValidator;
 
-public class LottoBall implements Comparable<LottoBall> {
-    public static final Map<Integer, LottoBall> BALLS_CACHE = new HashMap<>();
+public class LottoNumber implements Comparable<LottoNumber> {
+    public static final Map<Integer, LottoNumber> LOTTO_NUMBER_CACHE = new HashMap<>();
 
     static {
         for (int i = Constants.MIN_LOTTO_NUM; i <= Constants.MAX_LOTTO_NUM; i++) {
-            BALLS_CACHE.put(i, new LottoBall(i));
+            LOTTO_NUMBER_CACHE.put(i, new LottoNumber(i));
         }
     }
 
     private final int number;
 
-    private LottoBall(final int number) {
+    private LottoNumber(final int number) {
         this.number = number;
     }
 
-    public static LottoBall from(final int num) {
-        LottoBallValidator.validate(num);
-        return BALLS_CACHE.get(num);
+    public static LottoNumber from(final int num) {
+        LottoNumberValidator.validate(num);
+        return LOTTO_NUMBER_CACHE.get(num);
     }
 
     public int get() {
@@ -38,7 +38,7 @@ public class LottoBall implements Comparable<LottoBall> {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        LottoBall that = (LottoBall) o;
+        LottoNumber that = (LottoNumber) o;
         return number == that.number;
     }
 
@@ -49,13 +49,13 @@ public class LottoBall implements Comparable<LottoBall> {
 
     @Override
     public String toString() {
-        return "LottoBall{" +
+        return "LottoNumber{" +
                 "number=" + number +
                 '}';
     }
 
     @Override
-    public int compareTo(LottoBall o) {
+    public int compareTo(LottoNumber o) {
         return java.lang.Integer.compare(number, o.get());
     }
 }

@@ -18,7 +18,7 @@ class LottoTest {
     @Test
     void 로또_번호_6개_일치_검사() {
         WinLotto winLotto = LottoFactory.createWinLotto(
-                Arrays.asList(1, 2, 3, 4, 5, 6), LottoBall.from(10)
+                Arrays.asList(1, 2, 3, 4, 5, 6), LottoNumber.from(10)
         );
 
         int sameNumber = lotto.countSameNum(winLotto);
@@ -27,12 +27,12 @@ class LottoTest {
 
     @Test
     void 로또_보너스_포함_될때_검사() {
-        assertThat(lotto.isIn(LottoBall.from(6)))
+        assertThat(lotto.isIn(LottoNumber.from(6)))
                 .isTrue();
     }
 
     @Test
     void 로또_보너스_포함_안될때_검사() {
-        assertThat(lotto.isIn(LottoBall.from(10))).isFalse();
+        assertThat(lotto.isIn(LottoNumber.from(10))).isFalse();
     }
 }

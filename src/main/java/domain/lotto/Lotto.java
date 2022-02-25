@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Objects;
 
 public class Lotto {
-    final List<LottoBall> lotto;
+    final List<LottoNumber> lotto;
 
-    Lotto(List<LottoBall> balls) {
+    Lotto(List<LottoNumber> balls) {
         Collections.sort(balls);
         this.lotto = balls;
     }
@@ -18,11 +18,11 @@ public class Lotto {
                 .count();
     }
 
-    public boolean isIn(final LottoBall ball) {
+    public boolean isIn(final LottoNumber ball) {
         return lotto.contains(ball);
     }
 
-    public List<LottoBall> get() {
+    public List<LottoNumber> get() {
         return lotto;
     }
 
