@@ -1,19 +1,19 @@
 package domain;
 
 import java.util.Arrays;
-import java.util.LinkedHashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 public class Statistic {
     private final Map<Rank, Integer> statistics;
 
     private Statistic() {
-        statistics = new LinkedHashMap<>();
+        statistics = new EnumMap<>(Rank.class);
         Arrays.stream(Rank.values()).forEach(rank -> statistics.put(rank, 0));
     }
 
     public Statistic(Map<Rank, Integer> statistics) {
-        this.statistics = new LinkedHashMap<>(statistics);
+        this.statistics = new EnumMap<>(statistics);
     }
 
     public static Statistic initStatistic() {
