@@ -20,7 +20,7 @@ import java.util.List;
 
 public class LotteryMachine {
     public static void main(String[] args) {
-        Money amount = new Money(InputView.getAmount());
+        Money amount = InputView.getAmount();
         Count numberOfTickets = new Count(divideByLotteryPrice(amount.getAmount()));
         OutputView.printNumberOfTicket(numberOfTickets);
 
