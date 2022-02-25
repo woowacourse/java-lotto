@@ -23,7 +23,7 @@ public class MoneyTest {
                 .withMessage("[ERROR] 로또를 구매할 수 없는 금액입니다.");
     }
 
-    @DisplayName("보유금액보다 많은 로또 구매시 예러를 바랫ㅇ한다.")
+    @DisplayName("보유금액보다 많은 로또 구매시 예러를 발생한다.")
     @Test
     void buyLottoExceptionByLackMoney() {
         final Money money = new Money(3000);
