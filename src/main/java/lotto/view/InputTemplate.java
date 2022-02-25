@@ -51,9 +51,7 @@ public class InputTemplate {
 
     private String inputWithMessage(String message, Consumer<String> validator) {
         printStream.println(message);
-        String value = scanner.nextLine();
-        validator.accept(value);
-        return value;
+        return scanner.nextLine();
     }
 
     private boolean isChoosable(String value, String[] options) {
@@ -67,7 +65,9 @@ public class InputTemplate {
     public String repeatablyInput(String message, Consumer<String> validator,
         Consumer<InvalidFormatException> exceptionHandler) {
         try {
-            return inputWithMessage(message, validator);
+            String value = inputWithMessage(message, validator);
+            validator.accept(value);
+            return value;
         } catch (InvalidFormatException e) {
             exceptionHandler.accept(e);
             return selectivelyRepeat(() -> repeatablyInput(message, validator, exceptionHandler));
