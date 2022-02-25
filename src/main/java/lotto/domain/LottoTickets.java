@@ -10,8 +10,7 @@ public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
 
     public LottoTickets(int lottoCount) {
-        this.lottoTickets = new ArrayList<>();
-        createLottoTickets(lottoCount);
+        this.lottoTickets = createLottoTickets(lottoCount);
     }
 
     public List<Rank> getRanksWithWinningNumbers(WinningNumbers winningNumbers) {
@@ -22,11 +21,13 @@ public class LottoTickets {
         return ranks;
     }
 
-    private void createLottoTickets(int lottoCount) {
+    private List<LottoTicket> createLottoTickets(int lottoCount) {
         LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
+        ArrayList<LottoTicket> lottoTickets = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
             lottoTickets.add(new LottoTicket(lottoNumberGenerator.getLottoNumbers(LOTTO_NUMBER_SIZE)));
         }
+        return lottoTickets;
     }
 
     public List<LottoTicket> getLottoTickets() {
