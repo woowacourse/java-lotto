@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import model.LottoNumberGenerator.GenerateStrategy;
+import model.lottotickets.LottoTickets;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -20,6 +22,6 @@ class LottoTicketsTest {
         final LottoTickets lottoTickets = new LottoTickets(purchaseCount, generateStrategy);
 
         lottoTickets.tickets()
-                .forEach(lottoTicket -> assertThat(lottoTicket.lottoNumbers()).isEqualTo(dummyLottoNumber));
+                .forEach(lottoTicket -> assertThat(lottoTicket).isEqualTo(dummyLottoNumber));
     }
 }

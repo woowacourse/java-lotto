@@ -1,4 +1,4 @@
-package model;
+package model.lottotickets;
 
 import java.util.List;
 

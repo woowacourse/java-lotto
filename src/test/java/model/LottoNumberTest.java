@@ -3,6 +3,7 @@ package model;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import model.lottotickets.vo.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -21,6 +22,6 @@ public class LottoNumberTest {
     void generateNumber_Test() {
         final LottoNumber lottoNumber = new LottoNumber(4);
 
-        assertThat(lottoNumber.getNumber()).isEqualTo(4);
+        assertThat(lottoNumber.get()).isEqualTo(4);
     }
 }

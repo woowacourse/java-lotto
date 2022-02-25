@@ -7,6 +7,7 @@ import view.PurchaseMoneyInputView;
 import view.WinningNumberInputView;
 
 public class InputController {
+
     public Integer inputMoney() {
         return (new PurchaseMoneyInputView()).getUserInputData();
     }

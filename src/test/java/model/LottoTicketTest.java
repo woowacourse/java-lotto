@@ -3,6 +3,8 @@ package model;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
+import model.LottoNumberGenerator.GenerateStrategy;
+import model.lottotickets.LottoTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

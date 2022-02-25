@@ -1,4 +1,6 @@
-package model;
+package model.lottotickets.vo;
+
+import java.util.List;
 
 public class LottoNumber {
     private static final int MIN_LOTTO_NUMBER = 1;
@@ -21,7 +23,15 @@ public class LottoNumber {
         return number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER;
     }
 
-    public int getNumber() {
+    public boolean contain(final List<Integer> otherNumbers) {
+        return otherNumbers.contains(number);
+    }
+
+    public boolean contain(final int otherNumber) {
+        return number == otherNumber;
+    }
+
+    public int get() {
         return number;
     }
 }

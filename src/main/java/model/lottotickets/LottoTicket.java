@@ -1,7 +1,11 @@
-package model;
+package model.lottotickets;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import model.LottoNumberGenerator.GenerateStrategy;
+import model.lottotickets.vo.LottoNumber;
+import model.winning.Rank;
 
 public class LottoTicket {
     private final List<LottoNumber> lottoNumbers;
@@ -15,24 +19,23 @@ public class LottoTicket {
 
     public List<Integer> lottoNumbers() {
         return lottoNumbers.stream()
-                .map(LottoNumber::getNumber)
+                .map(LottoNumber::get)
                 .collect(Collectors.toList());
     }
 
-    public WinningRank findRank(final List<Integer> winningNumbers, final int bonusNumber) {
-        return WinningRank.valueOf(countMatch(winningNumbers), hasBonus(bonusNumber));
+    public Rank selectRank(final List<Integer> winningNumbers, final int bonusNumber) {
+        return Rank.valueOf(countMatch(winningNumbers), hasBonus(bonusNumber));
     }
 
 
     private int countMatch(final List<Integer> winningNumbers) {
-        List<Integer> lottoNumbers = lottoNumbers();
-        return (int) winningNumbers.stream()
-                .filter(lottoNumbers::contains)
+        return (int) lottoNumbers.stream()
+                .filter(lottoNumber -> lottoNumber.contain(winningNumbers))
                 .count();
     }
 
     private boolean hasBonus(final int bonusNumber) {
-        List<Integer> lottoNumbers = lottoNumbers();
-        return lottoNumbers.contains(bonusNumber);
+        return lottoNumbers.stream()
+                .anyMatch(lottoNumber -> lottoNumber.contain(bonusNumber));
     }
 }

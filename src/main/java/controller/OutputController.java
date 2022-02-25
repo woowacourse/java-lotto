@@ -3,8 +3,8 @@ package controller;
 import java.util.List;
 import java.util.Map;
 
-import model.LottoTicketDto;
-import model.WinningRank;
+import model.lottotickets.LottoTicketDto;
+import model.winning.Rank;
 import view.LottoTicketOutputView;
 import view.RateOfReturnOutputView;
 import view.WinningResultOutputView;
@@ -15,7 +15,7 @@ public class OutputController {
         (new LottoTicketOutputView()).printOutputData(dto);
     }
 
-    public void printWinningResults(final Map<WinningRank, Integer> result) {
+    public void printWinningResults(final Map<Rank, Integer> result) {
         (new WinningResultOutputView()).printOutputData(result);
     }
 

@@ -3,28 +3,27 @@ package controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import model.GenerateStrategy;
-import model.LottoGame;
-import model.LottoTicket;
-import model.LottoTicketDto;
+import model.LottoNumberGenerator.GenerateStrategy;
+import model.LottoMachine;
+import model.lottotickets.LottoTicketDto;
 
-public class LottoController {
-    private final LottoGame lottoGame;
+public class machineController {
+    private final LottoMachine lottoMachine;
     private final GenerateStrategy generateStrategy;
 
     private final InputController inputController;
     private final OutputController outputController;
 
-    public LottoController(GenerateStrategy generateStrategy, InputController inputController,
-                           OutputController outputController) {
+    public machineController(GenerateStrategy generateStrategy, InputController inputController,
+                             OutputController outputController) {
         this.generateStrategy = generateStrategy;
-        this.lottoGame = new LottoGame();
+        this.lottoMachine = new LottoMachine();
 
         this.inputController = inputController;
         this.outputController = outputController;
     }
 
-    public void runGame() {
+    public void runMachine() {
         insertMoney();
         purchaseLottoTickets();
         settingLottoWinningNumbers();
@@ -33,19 +32,19 @@ public class LottoController {
 
     private void insertMoney() {
         int money = inputController.inputMoney();
-        lottoGame.insertMoney(money);
+        lottoMachine.insertMoney(money);
     }
 
     private void purchaseLottoTickets() {
-        lottoGame.purchaseLottoTickets(generateStrategy);
+        lottoMachine.purchaseLottoTickets(generateStrategy);
 
-        List<LottoTicketDto> dto = convertToDto(lottoGame.lottoTickets());
+        List<LottoTicketDto> dto = convertToDto(lottoMachine.lottoTickets());
         outputController.printPurchasedLottoTickets(dto);
     }
 
-    private List<LottoTicketDto> convertToDto(final List<LottoTicket> lottoTickets) {
+    private List<LottoTicketDto> convertToDto(final List<List<Integer>> lottoTickets) {
         return lottoTickets.stream()
-                .map(lottoTicket -> new LottoTicketDto(lottoTicket.lottoNumbers()))
+                .map(LottoTicketDto::new)
                 .collect(Collectors.toList());
     }
 
@@ -53,11 +52,11 @@ public class LottoController {
         final List<Integer> winningNumbers = inputController.inputWinningNumbers();
         final int bonusNumber = inputController.inputBonusNumber();
 
-        lottoGame.insertWinningNumbers(winningNumbers, bonusNumber);
+        lottoMachine.insertWinningNumbers(winningNumbers, bonusNumber);
     }
 
     private void showLottoGameResult() {
-        outputController.printWinningResults(lottoGame.winningResult());
-        outputController.printRateOfReturn(lottoGame.lottoRateOfReturn());
+        outputController.printWinningResults(lottoMachine.winningResult());
+        outputController.printRateOfReturn(lottoMachine.lottoRateOfReturn());
     }
 }

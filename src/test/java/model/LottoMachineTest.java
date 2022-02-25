@@ -5,22 +5,24 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.Arrays;
 import java.util.List;
 
+import model.LottoNumberGenerator.GenerateStrategy;
+import model.winning.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class LottoGameTest {
+class LottoMachineTest {
 
-    private final LottoGame lottoGame = new LottoGame();
+    private final LottoMachine lottoMachine = new LottoMachine();
     private final int purchaseMoney = 17000;
     private final GenerateStrategy generateStrategy = () -> Arrays.asList(1, 2, 3, 4, 5, 6);
 
     @Test
     @DisplayName("생성된 로또 티켓이 저장되는지 확인한다.")
     void checkGenerateLottoTicket() {
-        lottoGame.insertMoney(purchaseMoney);
-        lottoGame.purchaseLottoTickets(generateStrategy);
+        lottoMachine.insertMoney(purchaseMoney);
+        lottoMachine.purchaseLottoTickets(generateStrategy);
 
-        assertThat(lottoGame.lottoTickets().size()).isEqualTo(purchaseMoney / 1000);
+        assertThat(lottoMachine.lottoTickets().size()).isEqualTo(purchaseMoney / 1000);
     }
 
     @Test
@@ -29,10 +31,10 @@ class LottoGameTest {
         final List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         final int bonusNumber = 7;
 
-        lottoGame.insertMoney(purchaseMoney);
-        lottoGame.purchaseLottoTickets(generateStrategy);
-        lottoGame.insertWinningNumbers(winningNumbers, bonusNumber);
+        lottoMachine.insertMoney(purchaseMoney);
+        lottoMachine.purchaseLottoTickets(generateStrategy);
+        lottoMachine.insertWinningNumbers(winningNumbers, bonusNumber);
 
-        assertThat(lottoGame.winningResult().get(WinningRank.FIRST)).isEqualTo(17);
+        assertThat(lottoMachine.winningResult().get(Rank.FIRST)).isEqualTo(17);
     }
 }

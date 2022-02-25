@@ -2,10 +2,11 @@ package model;
 
 import static org.assertj.core.api.Assertions.*;
 
+import model.winning.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class WinningRankTest {
+class RankTest {
 
     @Test
     @DisplayName("순위를 정상적으로 선정하는지 확인한다.")
@@ -13,6 +14,6 @@ class WinningRankTest {
         final int matchCount = 5;
         final boolean hasBonusNumber = true;
 
-        assertThat(WinningRank.valueOf(matchCount, hasBonusNumber)).isEqualTo(WinningRank.SECOND);
+        assertThat(Rank.valueOf(matchCount, hasBonusNumber)).isEqualTo(Rank.SECOND);
     }
 }

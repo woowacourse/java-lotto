@@ -1,15 +1,15 @@
-package model;
+package model.winning;
 
 import java.util.Map;
 
-public class WinningStatistics {
-    private final Map<WinningRank, Integer> statistics;
+public class Statistics {
+    private final Map<Rank, Integer> statistics;
 
-    public WinningStatistics(final Map<WinningRank, Integer> statistics) {
+    public Statistics(final Map<Rank, Integer> statistics) {
         this.statistics = statistics;
     }
 
-    public Map<WinningRank, Integer> getStatistics() {
+    public Map<Rank, Integer> getStatistics() {
         return statistics;
     }
 

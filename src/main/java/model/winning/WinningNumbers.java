@@ -1,10 +1,8 @@
-package model;
+package model.winning;
 
-import java.util.Arrays;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
+import model.lottotickets.vo.LottoNumber;
 
 public class WinningNumbers {
     private static final int TICKET_SIZE = 6;
@@ -27,22 +25,11 @@ public class WinningNumbers {
         }
     }
 
-    public WinningStatistics winningResult(final LottoTickets lottoTickets) {
-        Map<WinningRank, Integer> result = new LinkedHashMap<>();
-        Arrays.stream(WinningRank.values()).forEach(winningRank -> result.put(winningRank, 0));
-
-        for (LottoTicket lottoTicket : lottoTickets.tickets()) {
-            WinningRank key = lottoTicket.findRank(winningNumbers(), bonusNumber());
-            result.put(key, result.get(key) + 1);
-        }
-        return new WinningStatistics(result);
+    public Integer bonusNumber() {
+        return bonusNumber.get();
     }
 
-    private Integer bonusNumber() {
-        return bonusNumber.getNumber();
-    }
-
-    private List<Integer> winningNumbers() {
-        return winningNumbers.stream().map(LottoNumber::getNumber).collect(Collectors.toList());
+    public List<Integer> winningNumbers() {
+        return winningNumbers.stream().map(LottoNumber::get).collect(Collectors.toList());
     }
 }

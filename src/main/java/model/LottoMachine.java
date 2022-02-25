@@ -3,11 +3,18 @@ package model;
 import java.util.List;
 import java.util.Map;
 
-public class LottoGame {
+import model.LottoNumberGenerator.GenerateStrategy;
+import model.lottotickets.LottoTickets;
+import model.money.Money;
+import model.winning.WinningNumbers;
+import model.winning.Rank;
+import model.winning.Statistics;
+
+public class LottoMachine {
     private Money money;
     private LottoTickets lottoTickets;
     private WinningNumbers winningNumbers;
-    private WinningStatistics statistics;
+    private Statistics statistics;
 
     public void insertMoney(final int money) {
         this.money = new Money(money);
@@ -18,7 +25,7 @@ public class LottoGame {
         lottoTickets = new LottoTickets(purchaseCount, generateStrategy);
     }
 
-    public List<LottoTicket> lottoTickets() {
+    public List<List<Integer>> lottoTickets() {
         return lottoTickets.tickets();
     }
 
@@ -26,8 +33,8 @@ public class LottoGame {
         this.winningNumbers = new WinningNumbers(winningNumbers, bonusNumber);
     }
 
-    public Map<WinningRank, Integer> winningResult() {
-        statistics = winningNumbers.winningResult(lottoTickets);
+    public Map<Rank, Integer> winningResult() {
+        statistics = lottoTickets.winningResult(winningNumbers.winningNumbers(), winningNumbers.bonusNumber());
         return statistics.getStatistics();
     }
 

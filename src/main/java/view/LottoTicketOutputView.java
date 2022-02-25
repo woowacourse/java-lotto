@@ -3,7 +3,7 @@ package view;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import model.LottoTicketDto;
+import model.lottotickets.LottoTicketDto;
 
 public class LottoTicketOutputView implements OutputView<List<LottoTicketDto>> {
 
