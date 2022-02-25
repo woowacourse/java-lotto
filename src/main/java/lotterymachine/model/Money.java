@@ -1,4 +1,4 @@
-package lotterymachine.dto;
+package lotterymachine.model;
 
 public class Money {
     private final int amount;

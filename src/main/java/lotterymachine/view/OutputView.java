@@ -1,6 +1,6 @@
 package lotterymachine.view;
 
-import lotterymachine.dto.Count;
+import lotterymachine.model.Count;
 import lotterymachine.dto.LotteryResultDto;
 import lotterymachine.model.LotteryTicket;
 

@@ -1,4 +1,4 @@
-package lotterymachine.dto;
+package lotterymachine.model;
 
 public class Count {
     private int number;

@@ -1,5 +1,7 @@
 package lotterymachine.dto;
 
+import lotterymachine.model.Count;
+import lotterymachine.model.Money;
 import lotterymachine.model.WinningLottery;
 
 import java.util.ArrayList;

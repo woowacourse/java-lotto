@@ -7,9 +7,9 @@ import static lotterymachine.utils.LotteryRule.TICKET_PRICE;
 
 import java.util.Collections;
 
-import lotterymachine.dto.Count;
+import lotterymachine.model.Count;
 import lotterymachine.dto.LotteryResultDto;
-import lotterymachine.dto.Money;
+import lotterymachine.model.Money;
 import lotterymachine.model.LotteryTicket;
 import lotterymachine.model.LotteryTickets;
 import lotterymachine.view.InputView;

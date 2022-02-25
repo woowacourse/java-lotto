@@ -1,7 +1,5 @@
 package lotterymachine.model;
 
-import lotterymachine.dto.Count;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
