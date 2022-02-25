@@ -16,7 +16,7 @@ public class RankDto {
         this.hitCount = hitCount;
     }
 
-    public static RankDto from(Rank rank, int rankNumber) {
+    static RankDto from(Rank rank, int rankNumber) {
         return new RankDto(rankNumber, rank.getCriteria(), rank.getReward(), rank.getHitCount());
     }
 
