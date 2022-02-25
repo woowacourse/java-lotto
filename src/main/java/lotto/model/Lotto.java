@@ -16,26 +16,9 @@ public class Lotto {
     }
 
     private void validateLottoNumbers(List<Integer> numbers) {
-        if (!isValidLength(numbers) || !isValidRange(numbers) || isDuplicate(numbers)) {
+        if (!Validator.isValidLength(numbers) || !Validator.isValidRange(numbers) || Validator.isDuplicate(numbers)) {
             throw new RuntimeException(LOTTO_ERROR_MESSAGE);
         }
-    }
-
-    private boolean isValidLength(List<Integer> numbers) {
-        return numbers.size() == 6;
-    }
-
-    private boolean isValidRange(List<Integer> numbers) {
-        for (int number : numbers) {
-            if (number < 1 || number > 45) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private boolean isDuplicate(List<Integer> numbers) {
-        return numbers.size() != numbers.stream().distinct().count();
     }
 
     public Rank calculateRank(List<Integer> winningNumbers, BonusNumber bonusNumber) {

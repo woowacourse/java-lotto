@@ -14,13 +14,9 @@ public class BonusNumber {
     }
 
     private void validateBonusNumber(int bonusNumber) {
-        if (!isValidRange(bonusNumber)) {
+        if (!Validator.isValidRange(bonusNumber)) {
             throw new RuntimeException(BONUS_NUMBER_ERROR_MESSAGE);
         }
-    }
-
-    private boolean isValidRange(int bonusNumber) {
-        return bonusNumber >= 1 && bonusNumber <= 45;
     }
 
     public void hasDuplicateNumber(List<Integer> winningNumbers) {
