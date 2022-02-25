@@ -34,6 +34,7 @@ public class LottoFactory {
         Collections.shuffle(lottoNumbers);
         return new Lotto(lottoNumbers.stream()
                 .limit(6)
+                .sorted()
                 .map(LottoNumberRepository::getLottoNumberByInt)
                 .collect(toList()));
     }
