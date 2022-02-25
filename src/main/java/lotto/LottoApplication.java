@@ -17,32 +17,32 @@ import lotto.view.OutputView;
 public class LottoApplication {
 
     public static void main(final String[] args) {
-        final Money money = createMoney();
+        final Money money = payMoney();
         final int buyCounts = money.calculateLottoCount();
         OutputView.outputBuyLottoCounts(buyCounts);
 
-        final Lottos lottos = createLottos(buyCounts);
+        final Lottos lottos = buyLottos(buyCounts);
         OutputView.outputLottos(lottos.getLottos());
 
-        final WinLotto winLotto = createWinLotto();
+        final WinLotto winLotto = revealWinLotto();
         OutputView.outputResult(lottos.createResult(winLotto));
     }
 
-    private static Money createMoney() {
+    private static Money payMoney() {
         try {
             return new Money(InputView.inputMoney());
         } catch (IllegalArgumentException e) {
             printErrorMessage(e);
-            return createMoney();
+            return payMoney();
         }
     }
 
-    private static Lottos createLottos(final int buyCounts) {
+    private static Lottos buyLottos(final int buyCounts) {
         try {
             return new Lottos(buyRandomLottos(buyCounts));
         } catch (IllegalArgumentException e) {
             printErrorMessage(e);
-            return createLottos(buyCounts);
+            return buyLottos(buyCounts);
         }
     }
 
@@ -52,12 +52,12 @@ public class LottoApplication {
                 .collect(Collectors.toList());
     }
 
-    private static WinLotto createWinLotto() {
+    private static WinLotto revealWinLotto() {
         try {
             return new WinLotto(inputWinLotto(), inputBonusNumber());
         } catch (IllegalArgumentException e) {
             printErrorMessage(e);
-            return createWinLotto();
+            return revealWinLotto();
         }
     }
 
