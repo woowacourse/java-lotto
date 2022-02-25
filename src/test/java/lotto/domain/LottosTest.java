@@ -7,18 +7,14 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottosTest {
 
-    private Lottos lottos;
-
-    @BeforeEach
-    void setUp() {
-        lottos = new Lottos(Stream.of(createLottoNumbers(1, 2, 3, 4, 5, 6),
-                        createLottoNumbers(2, 3, 4, 5, 6, 7))
+    private static Lottos createLottos() {
+        return new Lottos(Stream.of(createLottoNumbers(1, 2, 3, 4, 5, 6),
+                createLottoNumbers(2, 3, 4, 5, 6, 7))
                 .map(Lotto::new)
                 .collect(Collectors.toList()));
     }
@@ -36,6 +32,7 @@ public class LottosTest {
     void createLottoResult() {
         // given
         final WinLotto winLotto = new WinLotto(new Lotto(createLottoNumbers(1, 2, 3, 4, 5, 6)), LottoNumber.valueOf(7));
+        final Lottos lottos = createLottos();
 
         final Map<Rank, Integer> resultMap = Rank.createInitResultMap();
         resultMap.put(Rank.FIRST, 1);
