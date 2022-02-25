@@ -8,7 +8,7 @@ import domain.WinningLotto;
 import domain.strategy.LottoNumberGenerateStrategy;
 import domain.strategy.RandomLottoNumberGenerateStrategy;
 import dto.LottoResultDto;
-import java.util.ArrayList;
+import factory.LottoFactory;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -28,7 +28,7 @@ public class LottoController {
         TrialNumber trialNumber = getTrialNumberByInputMoney(inputmoney);
         InputView.printTrialNumber(trialNumber.getTrialNumber());
 
-        Lottos autoLottos = getRandomLottos(trialNumber);
+        Lottos autoLottos = LottoFactory.createAutoLottosByQuantity(trialNumber.getTrialNumber());
         InputView.printLottos(autoLottos);
 
         WinningLotto winningLotto = setupWinningLotto();
@@ -47,22 +47,6 @@ public class LottoController {
 
     private TrialNumber getTrialNumberByInputMoney(InputMoney inputMoney) {
         return new TrialNumber(inputMoney.getMoney() / LOTTO_PRICE);
-    }
-
-    private Lottos getRandomLottos(TrialNumber trialNumber) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < trialNumber.getTrialNumber(); i++) {
-            lottos.add(new Lotto(getLottoNumbers()));
-        }
-
-        return new Lottos(lottos);
-    }
-
-    private List<LottoNumber> getLottoNumbers() {
-        return lottoNumberGenerator.generateLottoNumbers()
-                .stream()
-                .map(LottoNumberRepository::getLottoNumberByInt)
-                .collect(Collectors.toList());
     }
 
     private WinningLotto setupWinningLotto() {
