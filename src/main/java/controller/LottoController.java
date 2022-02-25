@@ -40,6 +40,6 @@ public class LottoController {
         double totalIncome = Rank.calculateAllResult(judgeLottos);
         double incomeRate = player.calculateIncomeRate(totalIncome);
 
-        return new RanksDto(incomeRate);
+        return RanksDto.from(incomeRate);
     }
 }

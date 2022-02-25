@@ -2,16 +2,17 @@ package dto;
 
 import domain.Lotto.LottoNumber;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoDto {
 
-    private List<Integer> lottoNumber;
+    private final List<Integer> lottoNumber;
 
-    public LottoDto(List<Integer> lottoNumber) {
-        this.lottoNumber = lottoNumber;
+    private LottoDto(List<Integer> lottoNumber) {
+        this.lottoNumber = new ArrayList<>(lottoNumber);
     }
 
     public static LottoDto from(List<LottoNumber> lottoNumbers) {

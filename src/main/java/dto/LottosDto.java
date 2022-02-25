@@ -8,11 +8,11 @@ import java.util.List;
 
 public class LottosDto {
 
-    int quantity;
-    List<LottoDto> lottoDtos;
+    private final int quantity;
+    private final List<LottoDto> lottoDtos;
 
-    public LottosDto(List<LottoDto> lottoDtos) {
-        this.lottoDtos = lottoDtos;
+    private LottosDto(List<LottoDto> lottoDtos) {
+        this.lottoDtos = new ArrayList<>(lottoDtos);
         this.quantity = lottoDtos.size();
     }
 

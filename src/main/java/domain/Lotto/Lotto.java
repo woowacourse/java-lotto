@@ -3,6 +3,7 @@ package domain.Lotto;
 import domain.Result;
 import utils.ExceptionMessage;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -14,7 +15,7 @@ public class Lotto {
 
     public Lotto(List<LottoNumber> lotto) {
         validateLottoSize(lotto);
-        this.lotto = lotto;
+        this.lotto = new ArrayList<>(lotto);
     }
 
     private void validateLottoSize(List<LottoNumber> lotto) {
