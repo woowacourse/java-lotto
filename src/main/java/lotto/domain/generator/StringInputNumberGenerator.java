@@ -8,7 +8,7 @@ import lotto.utils.IntegerUtils;
 
 public class StringInputNumberGenerator implements NumberGenerator {
 
-    private static final String DELIMITER = ", ";
+    private static final String DELIMITER = ",";
 
     private List<Integer> numbers;
 
@@ -18,7 +18,7 @@ public class StringInputNumberGenerator implements NumberGenerator {
 
     private List<Integer> toIntNumbers(String input) {
         return Arrays.stream(input.split(DELIMITER))
-            .map(IntegerUtils::parse)
+            .map(str -> IntegerUtils.parse(str.trim()))
             .collect(Collectors.toList());
     }
 
