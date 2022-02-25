@@ -17,20 +17,14 @@ public class LotteryTickets {
         for (LotteryTicket lotteryTicket : tickets) {
             int matchingNumbers = lotteryTicket.countMatchingNumbers(numbers);
             boolean containsBonus = lotteryTicket.containsNumber(bonusNumber);
-            WinningLottery winningLottery = WinningLottery.find(containsBonus, matchingNumbers);
-            addWinningLottery(lotteriesResult, winningLottery);
+            WinningLottery winningLottery = WinningLottery.find(matchingNumbers, containsBonus);
+            lotteriesResult.put(winningLottery, lotteriesResult.getOrDefault(winningLottery, 0) + 1);
         }
         return Collections.unmodifiableMap(lotteriesResult);
     }
 
     public List<LotteryTicket> getLotteryTickets() {
         return Collections.unmodifiableList(tickets);
-    }
-
-    private void addWinningLottery(Map<WinningLottery, Integer> lotteriesResult, WinningLottery winningLottery) {
-        if (winningLottery != null) {
-            lotteriesResult.put(winningLottery, lotteriesResult.get(winningLottery) + 1);
-        }
     }
 
     public void add(List<Integer> numbers) {

@@ -5,33 +5,33 @@ import java.util.EnumMap;
 import java.util.Map;
 
 public enum WinningLottery {
-    THREE(3, 5000),
-    FOUR(4, 50000),
-    FIVE(5, 150000),
-    BONUS_FIVE(5, 30000000),
-    SIX(6, 2000000000);
+    ZERO(0, 0, false),
+    THREE(3, 5000, false),
+    FOUR(4, 50000, false),
+    FIVE(5, 150000, false),
+    BONUS_FIVE(5, 30000000, true),
+    SIX(6, 2000000000, false);
 
     private static final int INITIAL_NUMBER_OF_MATCHING_TICKET = 0;
     private final int number;
     private final int price;
+    private final boolean bonus;
 
-    WinningLottery(int number, int price) {
+    WinningLottery(int number, int price, boolean bonus) {
         this.number = number;
         this.price = price;
+        this.bonus = bonus;
     }
 
-    public static WinningLottery find(boolean bonus, int number) {
-        if (bonus) {
-            return BONUS_FIVE;
-        }
+    public static WinningLottery find(int number, boolean bonus) {
         return Arrays.stream(values())
-                .filter(value -> value.matchNumber(number))
+                .filter(value -> value.matchWinningLottery(number, bonus))
                 .findFirst()
-                .orElse(null);
+                .orElse(WinningLottery.ZERO);
     }
 
-    private boolean matchNumber(int number) {
-        return this.number == number;
+    private boolean matchWinningLottery(int number, boolean bonus) {
+        return this.number == number && this.bonus == bonus;
     }
 
     public int getNumber() {
