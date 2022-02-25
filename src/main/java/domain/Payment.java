@@ -5,15 +5,24 @@ public class Payment {
 	private static final int PAYMENT_LIMIT_PRICE = 100000;
 	private final int payment;
 
+	public Payment(int payment) {
+		checkPayment(payment);
+		this.payment = payment;
+	}
+
 	public Payment(String payment) {
 		this.payment = toInt(payment);
+		checkPayment(this.payment);
+	}
+
+	private void checkPayment(int payment) {
+		checkNegative(payment);
+		checkMinLottoPrice(payment);
+		checkPaymentLimit(payment);
 	}
 
 	private int toInt(String payment) {
 		int changeInt = Integer.parseInt(payment);
-		checkNegative(changeInt);
-		checkMinLottoPrice(changeInt);
-		checkPaymentLimit(changeInt);
 		return changeInt;
 	}
 
