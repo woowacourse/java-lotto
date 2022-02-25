@@ -47,12 +47,20 @@ public class LottoFactory {
     }
 
     private Lotto generateAutoLotto() {
+        return getAutoLottoFrom(getAutoLottoNumbers());
+    }
+
+    private HashSet<LottoNumber> getAutoLottoNumbers() {
         HashSet<LottoNumber> autoLottoNumbers = new HashSet<>();
         while (autoLottoNumbers.size() < LOTTO_SIZE) {
             autoLottoNumbers.add(
                 new LottoNumber(
                     ThreadLocalRandom.current().nextInt(LOTTO_NUMBER_MAX) + LOTTO_NUMBER_UNIT_TO_CORRECT));
         }
+        return autoLottoNumbers;
+    }
+
+    private Lotto getAutoLottoFrom(final HashSet<LottoNumber> autoLottoNumbers) {
         return new Lotto(autoLottoNumbers.stream()
             .sorted()
             .collect(Collectors.toList()));
