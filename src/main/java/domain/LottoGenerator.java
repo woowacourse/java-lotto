@@ -16,7 +16,7 @@ public class LottoGenerator {
 	private static final String ERROR_NOT_CORRECT_SIZE = "[ERROR] 지난 주 당첨 번호는 반드시 6개여야 합니다.";
 	private static final String ERROR_DUPLICATE_DETECT = "[ERROR] 지난 주 당첨 번호는 중복일 수 없습니다.";
 
-	private static final ArrayList<LottoNumber> candidates = (ArrayList<LottoNumber>) IntStream
+	private static final List<LottoNumber> candidates = IntStream
 		.range(LOWER_BOUND, UPPER_BOUND + 1)
 		.mapToObj(LottoNumber::new)
 		.collect(Collectors.toList());
