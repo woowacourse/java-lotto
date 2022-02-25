@@ -5,6 +5,9 @@ package dto;
 import domain.Lotto.LottoNumber;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 1b78799 (refactor : Dto 생성자 private 으로 접근지정자 변경)
 import java.util.ArrayList;
 import java.util.Collections;
 =======
@@ -43,11 +46,15 @@ public class LottoDto {
 =======
 =======
 
+<<<<<<< HEAD
 >>>>>>> e6945bb (style: 코드 포멧팅)
     private List<Integer> lottoNumber;
+=======
+    private final List<Integer> lottoNumber;
+>>>>>>> 1b78799 (refactor : Dto 생성자 private 으로 접근지정자 변경)
 
-    public LottoDto(List<Integer> lottoNumber) {
-        this.lottoNumber = lottoNumber;
+    private LottoDto(List<Integer> lottoNumber) {
+        this.lottoNumber = new ArrayList<>(lottoNumber);
     }
 
     public static LottoDto from(List<LottoNumber> lottoNumbers) {

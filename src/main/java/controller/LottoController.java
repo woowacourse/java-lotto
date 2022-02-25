@@ -104,6 +104,7 @@ public class LottoController {
         double incomeRate = player.calculateIncomeRate(totalIncome);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         List<RankDto> rankDtos = new ArrayList<>();
         int rankNumber = 5;
 
@@ -130,5 +131,8 @@ public class LottoController {
 =======
         return new RanksDto(incomeRate);
 >>>>>>> 2b5d619 (refactor: 결과 리스트 생성 로직 이동)
+=======
+        return RanksDto.from(incomeRate);
+>>>>>>> 1b78799 (refactor : Dto 생성자 private 으로 접근지정자 변경)
     }
 }

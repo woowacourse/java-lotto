@@ -10,10 +10,14 @@ public class RankDto {
     private final int hitCount;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     private RankDto(int rankNumber, int criteria, int reward, int hitCount) {
 =======
     public RankDto(int rankNumber, int criteria, int reward, int hitCount) {
 >>>>>>> 2821995 (feat: 결과 출력 기능 구현)
+=======
+    private RankDto(int rankNumber, int criteria, int reward, int hitCount) {
+>>>>>>> 1b78799 (refactor : Dto 생성자 private 으로 접근지정자 변경)
         this.rankNumber = rankNumber;
         this.criteria = criteria;
         this.reward = reward;

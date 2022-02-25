@@ -5,6 +5,9 @@ import utils.ExceptionMessage;
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 1b78799 (refactor : Dto 생성자 private 으로 접근지정자 변경)
 import java.util.ArrayList;
 import java.util.Collections;
 =======
@@ -23,10 +26,14 @@ public class Lotto {
     public Lotto(List<LottoNumber> lotto) {
         validateLottoSize(lotto);
 <<<<<<< HEAD
+<<<<<<< HEAD
         this.lotto = new ArrayList<>(lotto);
 =======
         this.lotto = lotto;
 >>>>>>> d5f0ef8 (refactor: 패키지 분리)
+=======
+        this.lotto = new ArrayList<>(lotto);
+>>>>>>> 1b78799 (refactor : Dto 생성자 private 으로 접근지정자 변경)
     }
 
     private void validateLottoSize(List<LottoNumber> lotto) {
