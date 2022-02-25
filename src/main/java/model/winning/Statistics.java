@@ -13,7 +13,7 @@ public class Statistics {
         return statistics;
     }
 
-    public Double getLottoRateOfReturn(final int money) {
+    public Double getRateOfReturn(final int money) {
         double totalReturn = calculateTotalReturn();
         return totalReturn / (double) money;
     }

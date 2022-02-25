@@ -1,11 +1,11 @@
-package model.LottoNumberGenerator;
+package model.lottonumbergenerator;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoNumberGenerateStrategy implements GenerateStrategy {
+public class LottoNumberGenerator implements Generator {
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
     public static final int MAX_SIZE = 6;

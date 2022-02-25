@@ -1,4 +1,4 @@
-package model;
+package model.lottotickets;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -6,8 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import model.LottoNumberGenerator.GenerateStrategy;
-import model.lottotickets.LottoTickets;
+import model.lottonumbergenerator.Generator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -18,8 +17,8 @@ class LottoTicketsTest {
     @DisplayName("로또 티켓이 정상적으로 생성됐는지 검사한다.")
     void createLottoTicketsTest() {
         final int purchaseCount = 3;
-        final GenerateStrategy generateStrategy = () -> new ArrayList<>(dummyLottoNumber);
-        final LottoTickets lottoTickets = new LottoTickets(purchaseCount, generateStrategy);
+        final Generator generator = () -> new ArrayList<>(dummyLottoNumber);
+        final LottoTickets lottoTickets = new LottoTickets(purchaseCount, generator);
 
         lottoTickets.tickets()
                 .forEach(lottoTicket -> assertThat(lottoTicket).isEqualTo(dummyLottoNumber));

@@ -7,17 +7,17 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import model.LottoNumberGenerator.GenerateStrategy;
+import model.lottonumbergenerator.Generator;
 import model.winning.Rank;
 import model.winning.Statistics;
 
 public class LottoTickets {
     private final List<LottoTicket> lottoTickets;
 
-    public LottoTickets(final int purchaseCount, final GenerateStrategy generateStrategy) {
+    public LottoTickets(final int purchaseCount, final Generator generator) {
         lottoTickets = IntStream
                 .rangeClosed(1, purchaseCount)
-                .mapToObj(index -> new LottoTicket(generateStrategy))
+                .mapToObj(index -> new LottoTicket(generator))
                 .collect(Collectors.toList());
     }
 

@@ -3,20 +3,20 @@ package controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import model.LottoNumberGenerator.GenerateStrategy;
+import model.lottonumbergenerator.Generator;
 import model.LottoMachine;
 import model.lottotickets.LottoTicketDto;
 
-public class machineController {
+public class MachineController {
     private final LottoMachine lottoMachine;
-    private final GenerateStrategy generateStrategy;
+    private final Generator generator;
 
     private final InputController inputController;
     private final OutputController outputController;
 
-    public machineController(GenerateStrategy generateStrategy, InputController inputController,
+    public MachineController(Generator generator, InputController inputController,
                              OutputController outputController) {
-        this.generateStrategy = generateStrategy;
+        this.generator = generator;
         this.lottoMachine = new LottoMachine();
 
         this.inputController = inputController;
@@ -36,7 +36,7 @@ public class machineController {
     }
 
     private void purchaseLottoTickets() {
-        lottoMachine.purchaseLottoTickets(generateStrategy);
+        lottoMachine.purchaseLottoTickets(generator);
 
         List<LottoTicketDto> dto = convertToDto(lottoMachine.lottoTickets());
         outputController.printPurchasedLottoTickets(dto);
@@ -57,6 +57,6 @@ public class machineController {
 
     private void showLottoGameResult() {
         outputController.printWinningResults(lottoMachine.winningResult());
-        outputController.printRateOfReturn(lottoMachine.lottoRateOfReturn());
+        outputController.printRateOfReturn(lottoMachine.rateOfReturn());
     }
 }

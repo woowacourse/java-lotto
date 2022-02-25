@@ -3,7 +3,7 @@ package model;
 import java.util.List;
 import java.util.Map;
 
-import model.LottoNumberGenerator.GenerateStrategy;
+import model.lottonumbergenerator.Generator;
 import model.lottotickets.LottoTickets;
 import model.money.Money;
 import model.winning.WinningNumbers;
@@ -20,9 +20,9 @@ public class LottoMachine {
         this.money = new Money(money);
     }
 
-    public void purchaseLottoTickets(final GenerateStrategy generateStrategy) {
+    public void purchaseLottoTickets(final Generator generator) {
         final int purchaseCount = money.generatePurchaseCount();
-        lottoTickets = new LottoTickets(purchaseCount, generateStrategy);
+        lottoTickets = new LottoTickets(purchaseCount, generator);
     }
 
     public List<List<Integer>> lottoTickets() {
@@ -38,7 +38,7 @@ public class LottoMachine {
         return statistics.getStatistics();
     }
 
-    public Double lottoRateOfReturn() {
-        return statistics.getLottoRateOfReturn(money.getMoney());
+    public Double rateOfReturn() {
+        return statistics.getRateOfReturn(money.getMoney());
     }
 }

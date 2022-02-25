@@ -3,15 +3,15 @@ package model.lottotickets;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import model.LottoNumberGenerator.GenerateStrategy;
+import model.lottonumbergenerator.Generator;
 import model.lottotickets.vo.LottoNumber;
 import model.winning.Rank;
 
 public class LottoTicket {
     private final List<LottoNumber> lottoNumbers;
 
-    public LottoTicket(final GenerateStrategy generateStrategy) {
-        List<Integer> generatedNumbers = generateStrategy.generateNumbers();
+    public LottoTicket(final Generator generator) {
+        List<Integer> generatedNumbers = generator.generateNumbers();
         lottoNumbers = generatedNumbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
