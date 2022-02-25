@@ -2,6 +2,8 @@ package lotto.controller;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.Map;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,10 +26,12 @@ class WinningControllerTest {
 
         Assertions.assertAll(
             () -> assertThat(lottoStatisticsResponse.getMoney()).isEqualTo(3000),
-            () -> assertThat(lottoStatisticsResponse.getResponseCountMap().values()
+            () -> assertThat(
+            lottoStatisticsResponse.getResponseCountMap().values()
                 .stream()
                 .mapToLong(l -> l)
-                .sum()).isEqualTo(3)
+                .sum()
+            ).isEqualTo(3)
         );
 
         // then

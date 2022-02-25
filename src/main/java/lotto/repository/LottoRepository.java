@@ -10,7 +10,7 @@ public class LottoRepository {
     private static List<LottoTicket> tickets = new ArrayList<>();
 
     public void save(List<LottoTicket> other) {
-        tickets.addAll(other);
+        tickets = other;
     }
 
     public List<LottoTicket> get() {
