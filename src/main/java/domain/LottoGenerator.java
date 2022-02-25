@@ -38,11 +38,9 @@ public class LottoGenerator {
 	}
 
 	private static void validateInRange(List<Integer> userInput) {
-		int count = (int) userInput
+		if (userInput
 			.stream()
-			.filter(num -> num < LOWER_BOUND || num > UPPER_BOUND)
-			.count();
-		if (count > 0) {
+			.anyMatch(num -> num < LOWER_BOUND || num > UPPER_BOUND)) {
 			throw new IllegalArgumentException(ERROR_NOT_IN_RANGE);
 		}
 	}
