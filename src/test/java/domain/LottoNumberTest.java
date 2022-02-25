@@ -18,9 +18,10 @@ class LottoNumberTest {
 
     @DisplayName("로또 번호가 유효하지 않는 경우 예외를 발생시킨다.")
     @ParameterizedTest
-    @ValueSource(strings = {"0", "46", "a", "-1"})
+    @ValueSource(strings = {"0", "46", "-1"})
     void input_lottoNumber_invalid(final String number) {
         assertThatThrownBy(() -> new LottoNumber(number))
-                .isInstanceOf(IllegalArgumentException.class);
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("로또 번호가 유효한 범위");
     }
 }

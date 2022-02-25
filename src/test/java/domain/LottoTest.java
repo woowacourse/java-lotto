@@ -19,14 +19,15 @@ class LottoTest {
     @Test
     void input_lottoNumbers_duplicated() {
         assertThatThrownBy(() -> new Lotto("1, 1, 3, 4, 5, 6"))
-                .isInstanceOf(IllegalArgumentException.class);
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("중복값을 입력할 수 없습니다.");
     }
 
     @DisplayName("지난 주 당첨 번호 입력시 숫자가 아닌 경우 예외를 발생시킨다.")
     @Test
     void input_lottoNumbers_format() {
         assertThatThrownBy(() -> new Lotto("1, a, 3, 4, 5, 6"))
-                .isInstanceOf(IllegalArgumentException.class);
+            .isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("발급 로또와 당첨 로또를 비교한 뒤 당첨 갯수 반환을 확인한다.")
