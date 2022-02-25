@@ -13,7 +13,7 @@ public class ShuffleNumberGenerator implements LottoNumberGenerator {
     private static final int LOTTO_NUMBER_MAXIMUM = 45;
     private static final int LOTTO_NUMBER_LENGTH = 6;
 
-    private final List<Integer> candidateNumber = IntStream.range(LOTTO_NUMBER_MINIMUM, LOTTO_NUMBER_MAXIMUM + 1)
+    private final List<Integer> candidateNumber = IntStream.rangeClosed(LOTTO_NUMBER_MINIMUM, LOTTO_NUMBER_MAXIMUM)
             .boxed()
             .collect(Collectors.toList());
 
