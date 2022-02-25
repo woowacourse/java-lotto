@@ -19,8 +19,8 @@ public class LottoFactory {
         return new Lotto(toBalls(nums));
     }
 
-    public static WinLotto createWinLotto(final List<Integer> nums, LottoNumber bonus) {
-        return new WinLotto(toBalls(nums), bonus);
+    public static WinNumbers createWinLotto(final List<Integer> nums, LottoNumber bonus) {
+        return new WinNumbers(createLotto(nums), bonus);
     }
 
     private static List<LottoNumber> toBalls(final List<Integer> lottoNums) {

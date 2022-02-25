@@ -4,7 +4,7 @@ import domain.Money;
 import domain.lotto.Lotto;
 import domain.lotto.LottoNumber;
 import domain.lotto.LottoFactory;
-import domain.lotto.WinLotto;
+import domain.lotto.WinNumbers;
 import domain.result.Rank;
 import domain.result.Result;
 import java.util.ArrayList;
@@ -16,9 +16,9 @@ public class MainController {
     public void run() {
         final Money money = makeMoney();
         final List<Lotto> lottoTickets = makeLottos(money.toLottoCount());
-        final WinLotto winLotto = makeWinLotto();
+        final WinNumbers winNumbers = makeWinLotto();
 
-        final Result result = makeResult(lottoTickets, winLotto);
+        final Result result = makeResult(lottoTickets, winNumbers);
         end(result, money);
     }
 
@@ -35,17 +35,17 @@ public class MainController {
         return lottos;
     }
 
-    private WinLotto makeWinLotto() {
+    private WinNumbers makeWinLotto() {
         List<Integer> winLottoNums = InputView.inputWinLottoNums();
         LottoNumber bonus = LottoNumber.from(InputView.inputBonusNumber());
         return LottoFactory.createWinLotto(winLottoNums, bonus);
     }
 
-    private Result makeResult(final List<Lotto> lottos, WinLotto winLotto) {
+    private Result makeResult(final List<Lotto> lottos, WinNumbers winNumbers) {
         final Result result = new Result();
         for (Lotto lotto : lottos) {
-            int matchCount = lotto.countSameNum(winLotto);
-            boolean isBonus = lotto.isIn(winLotto.getBonus());
+            int matchCount = lotto.countSameNum(winNumbers);
+            boolean isBonus = lotto.contains(winNumbers.getBonus());
             result.add(Rank.of(matchCount, isBonus));
         }
         return result;

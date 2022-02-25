@@ -34,8 +34,9 @@ class LottoFactoryTest {
 
     @Test
     void 당첨번호_생성_값_확인() {
-        WinLotto winLotto = LottoFactory.createWinLotto(nums, LottoNumber.from(10));
-        assertThat(winLotto)
+        WinNumbers winNumbers = LottoFactory.createWinLotto(nums, LottoNumber.from(10));
+        assertThat(winNumbers)
+                .extracting("lotto")
                 .extracting("lotto")
                 .isEqualTo(Arrays.asList(
                         LottoNumber.from(1),
@@ -49,8 +50,8 @@ class LottoFactoryTest {
 
     @Test
     void 당첨번호_생성_보너스_확인() {
-        WinLotto winLotto = LottoFactory.createWinLotto(nums, LottoNumber.from(10));
-        assertThat(winLotto.getBonus())
+        WinNumbers winNumbers = LottoFactory.createWinLotto(nums, LottoNumber.from(10));
+        assertThat(winNumbers.getBonus())
                 .isEqualTo(LottoNumber.from(10));
     }
 }
