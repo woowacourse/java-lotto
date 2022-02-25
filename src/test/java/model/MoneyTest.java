@@ -10,7 +10,7 @@ class MoneyTest {
     @Test
     @DisplayName("로또를 구매하는 돈이 저장되는지 확인한다.")
     void generateMoney_Test() {
-        Money money = new Money(14000);
+        final Money money = new Money(14000);
 
         assertThat(money.getMoney()).isEqualTo(14000);
     }

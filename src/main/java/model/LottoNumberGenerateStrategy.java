@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumberGenerateStrategy implements GenerateStrategy {
-
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
     public static final int MAX_SIZE = 6;

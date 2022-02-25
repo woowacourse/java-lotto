@@ -3,9 +3,8 @@ package model;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
-
 import java.util.List;
-import org.assertj.core.api.Assertions;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -34,6 +33,6 @@ class LottoGameTest {
         lottoGame.purchaseLottoTickets(generateStrategy);
         lottoGame.insertWinningNumbers(winningNumbers, bonusNumber);
 
-        Assertions.assertThat(lottoGame.winningResult().get(WinningRank.FIRST)).isEqualTo(17);
+        assertThat(lottoGame.winningResult().get(WinningRank.FIRST)).isEqualTo(17);
     }
 }

@@ -10,7 +10,7 @@ public class LottoNumber {
         this.number = checkNumber(number);
     }
 
-    private int checkNumber(int number) {
+    private int checkNumber(final int number) {
         if (isNotCorrectNumber(number)) {
             throw new RuntimeException();
         }

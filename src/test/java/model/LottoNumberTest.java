@@ -19,7 +19,7 @@ public class LottoNumberTest {
     @Test
     @DisplayName("로또 번호가 저장되는지 확인한다.")
     void generateNumber_Test() {
-        LottoNumber lottoNumber = new LottoNumber(4);
+        final LottoNumber lottoNumber = new LottoNumber(4);
 
         assertThat(lottoNumber.getNumber()).isEqualTo(4);
     }

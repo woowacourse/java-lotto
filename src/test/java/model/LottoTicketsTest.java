@@ -15,10 +15,10 @@ class LottoTicketsTest {
     @Test
     @DisplayName("로또 티켓이 정상적으로 생성됐는지 검사한다.")
     void createLottoTicketsTest() {
-        int purchaseCount = 3;
-        GenerateStrategy generateStrategy = () -> new ArrayList<>(dummyLottoNumber);
+        final int purchaseCount = 3;
+        final GenerateStrategy generateStrategy = () -> new ArrayList<>(dummyLottoNumber);
+        final LottoTickets lottoTickets = new LottoTickets(purchaseCount, generateStrategy);
 
-        LottoTickets lottoTickets = new LottoTickets(purchaseCount, generateStrategy);
         lottoTickets.tickets()
                 .forEach(lottoTicket -> assertThat(lottoTicket.lottoNumbers()).isEqualTo(dummyLottoNumber));
     }
