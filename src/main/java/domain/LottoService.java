@@ -10,7 +10,7 @@ import java.util.TreeMap;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
-public class LottoFactory {
+public class LottoService {
 
     private static final int LOTTO_SIZE = 6;
     private static final int RANK_COUNT_UNIT = 1;
@@ -23,7 +23,7 @@ public class LottoFactory {
     private Lotto lastWinLotto;
     private LottoNumber bonusNumber;
 
-    public LottoFactory(final Money money) {
+    public LottoService(final Money money) {
         this.money = money;
     }
 
@@ -74,29 +74,29 @@ public class LottoFactory {
     }
 
     private SortedMap<RankPrice, Integer> extractRankCount(final List<Lotto> issuedLotto) {
-        final List<WinCount> winCountsOfIssuedLotto = new ArrayList<>();
+        final List<MatchedCount> matchedCountsOfIssuedLottos = new ArrayList<>();
         for (Lotto lotto : issuedLotto) {
-            winCountsOfIssuedLotto.add(getWinCount(lotto));
+            matchedCountsOfIssuedLottos.add(getMatchedCount(lotto));
         }
-        return processRankCount(winCountsOfIssuedLotto);
+        return processRankCount(matchedCountsOfIssuedLottos);
     }
 
-    private WinCount getWinCount(final Lotto lotto) {
-        WinCount winCount = new WinCount(lotto.compare(this.lastWinLotto));
-        if (isSecondRank(lotto, winCount)) {
-            winCount = winCount.convertToSecondRankCount();
+    private MatchedCount getMatchedCount(final Lotto lotto) {
+        MatchedCount matchedCount = new MatchedCount(lotto.compare(this.lastWinLotto));
+        if (isSecondRank(lotto, matchedCount)) {
+            matchedCount = matchedCount.convertToSecondRankCount();
         }
-        return winCount;
+        return matchedCount;
     }
 
-    private boolean isSecondRank(final Lotto lotto, final WinCount winCount) {
-        return winCount.isThirdRankCount() && lotto.isContainNumber(bonusNumber);
+    private boolean isSecondRank(final Lotto lotto, final MatchedCount matchedCount) {
+        return matchedCount.isThirdRankCount() && lotto.isContainNumber(bonusNumber);
     }
 
-    private SortedMap<RankPrice, Integer> processRankCount(final List<WinCount> winCountsOfIssuedLotto) {
+    private SortedMap<RankPrice, Integer> processRankCount(final List<MatchedCount> matchedCountsOfIssuedLottos) {
         SortedMap<RankPrice, Integer> rankCount = new TreeMap<>(Collections.reverseOrder());
         initRank(rankCount);
-        countRank(rankCount, winCountsOfIssuedLotto);
+        countRank(rankCount, matchedCountsOfIssuedLottos);
         return rankCount;
     }
 
@@ -106,15 +106,15 @@ public class LottoFactory {
     }
 
     private void countRank(final SortedMap<RankPrice, Integer> rankCount,
-                           final List<WinCount> winCountsOfIssuedLotto) {
-        for (WinCount winCount : winCountsOfIssuedLotto) {
-            countOverFifthRank(rankCount, winCount);
+                           final List<MatchedCount> matchedCountsOfIssuedLottos) {
+        for (MatchedCount matchedCount : matchedCountsOfIssuedLottos) {
+            countOverFifthRank(rankCount, matchedCount);
         }
     }
 
-    private void countOverFifthRank(final SortedMap<RankPrice, Integer> rankCount, final WinCount winCount) {
-        if (winCount.isInRank()) {
-            final RankPrice rankPrice = winCount.findRankPrice();
+    private void countOverFifthRank(final SortedMap<RankPrice, Integer> rankCount, final MatchedCount matchedCount) {
+        if (matchedCount.isInRank()) {
+            final RankPrice rankPrice = matchedCount.findRankPrice();
             rankCount.put(rankPrice, rankCount.get(rankPrice) + RANK_COUNT_UNIT);
         }
     }

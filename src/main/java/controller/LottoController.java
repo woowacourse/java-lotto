@@ -1,8 +1,8 @@
 package controller;
 
 import domain.Lotto;
-import domain.LottoFactory;
 import domain.LottoNumber;
+import domain.LottoService;
 import domain.Money;
 import domain.RankPrice;
 import java.util.List;
@@ -15,18 +15,23 @@ public class LottoController {
     private static final String ERROR_MESSAGE = "[ERROR] ";
     private static final String ERROR_BONUS_NUMBER_CONTAIN_MESSAGE = "지난주 당첨번호와 보너스가 중복일 수 없습니다.";
 
+    final LottoService lottoService;
+
+    public LottoController() {
+        lottoService = new LottoService(getMoney());
+    }
+
     public void start() {
-        final LottoFactory lottoFactory = new LottoFactory(getMoney());
-        final List<Lotto> issuedLotto = lottoFactory.issueLotto();
+        final List<Lotto> issuedLotto = lottoService.issueLotto();
         OutputView.printLotto(issuedLotto);
 
         Lotto lastWinLotto = getWinLotto();
         LottoNumber bonusNumber = getBonusNumber(lastWinLotto);
 
-        SortedMap<RankPrice, Integer> rankCounts = lottoFactory.run(lastWinLotto, bonusNumber, issuedLotto);
+        SortedMap<RankPrice, Integer> rankCounts = lottoService.run(lastWinLotto, bonusNumber, issuedLotto);
 
         OutputView.printWinStatistics(rankCounts);
-        OutputView.printWinProfit(lottoFactory.calculateProfit(rankCounts));
+        OutputView.printWinProfit(lottoService.calculateProfit(rankCounts));
     }
 
     private Money getMoney() {

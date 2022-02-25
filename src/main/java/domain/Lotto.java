@@ -46,7 +46,7 @@ public class Lotto {
 
     public int compare(final Lotto lotto) {
         return (int) this.lotto.stream()
-            .filter(lottoNumber -> lotto.isContainNumber(lottoNumber))
+            .filter(lotto::isContainNumber)
             .count();
     }
 

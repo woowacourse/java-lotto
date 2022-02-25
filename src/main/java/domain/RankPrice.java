@@ -12,23 +12,23 @@ public enum RankPrice {
 
     private static final String ERROR_INVALID_WIN_COUNT_MESSAGE = "일치하는 값이 없습니다.";
 
-    private final int winCount;
+    private final int matchedCount;
     private final int winPrice;
 
-    RankPrice(final int winCount, final int winPrice) {
-        this.winCount = winCount;
+    RankPrice(final int matchedCount, final int winPrice) {
+        this.matchedCount = matchedCount;
         this.winPrice = winPrice;
     }
 
-    public static RankPrice findByCount(final int winCount) {
+    public static RankPrice findByCount(final int matchedCount) {
         return Arrays.stream(RankPrice.values())
-                .filter(winPrice -> winPrice.winCount == winCount)
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException(ERROR_INVALID_WIN_COUNT_MESSAGE));
+            .filter(winPrice -> winPrice.matchedCount == matchedCount)
+            .findFirst()
+            .orElseThrow(() -> new RuntimeException(ERROR_INVALID_WIN_COUNT_MESSAGE));
     }
 
     public int getCount() {
-        return winCount;
+        return matchedCount;
     }
 
     public int getPrice() {
