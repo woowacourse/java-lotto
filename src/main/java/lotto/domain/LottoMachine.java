@@ -4,7 +4,7 @@ import lotto.domain.generator.AutoLottoNumberGenerator;
 
 public class LottoMachine {
 
-    public LottoTickets purchase(Money money) {
+    public LottoTickets issue(Money money) {
         return new LottoTickets(money.calculateTicketCount(), new AutoLottoNumberGenerator());
     }
 }
