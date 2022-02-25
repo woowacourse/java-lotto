@@ -22,7 +22,7 @@ public class ProfitTest {
         Ball bonusBall = new Ball("7");
         WinningLotto winningLotto = new WinningLotto(winLotto, bonusBall);
 
-        lottos.addMatchingCount(lottoResult, winningLotto);
+        lottoResult.match(lottos, winningLotto);
     }
 
     @Test
@@ -30,7 +30,7 @@ public class ProfitTest {
     void calculate_profit() {
         Profit profit = new Profit();
 
-        Payment payment = new Payment("3000");
+        Payment payment = new Payment(3000);
         int totalMoney = lottoResult.getTotalMoney();
 
         assertEquals(profit.calculateRate(totalMoney, payment), 676683.333, 0.01);

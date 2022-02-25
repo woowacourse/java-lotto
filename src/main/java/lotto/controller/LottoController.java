@@ -11,11 +11,14 @@ import lotto.domain.Lottos;
 import lotto.domain.Profit;
 import lotto.domain.Payment;
 import lotto.domain.WinningLotto;
+import lotto.view.Entering;
+import lotto.view.KeyEnter;
 
 import static lotto.view.Input.*;
 import static lotto.view.Output.*;
 
 public class LottoController {
+    private static final Entering entering = new KeyEnter();
     private static final String DELIMITER = ",";
 
     public static void run() {
@@ -30,7 +33,7 @@ public class LottoController {
 
     private static Payment createPayment() {
         try {
-            return new Payment(inputPayment());
+            return new Payment(inputPayment(entering));
         } catch (IllegalArgumentException error) {
             printErrorMessage(error.getMessage());
             return createPayment();
