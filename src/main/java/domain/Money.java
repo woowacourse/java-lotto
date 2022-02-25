@@ -4,20 +4,14 @@ import java.util.Objects;
 
 public class Money {
 
-	private static final String NOT_DIGIT_EXCEPTION_MESSAGE = "구입 금액은 숫자여야 합니다";
 	private static final String UNAVAILABLE_MONEY_EXCEPTION_MESSAGE = "구입 금액은 1000원 단위여야 합니다";
 	private static final int LOTTO_PRICE = 1000;
 
 	private final int money;
 
-	private Money(int money) {
+	public Money(int money) {
 		checkUnitOfMoney(money);
 		this.money = money;
-	}
-
-	public static Money from(String userInput) {
-		checkNotDigit(userInput);
-		return new Money(Integer.parseInt(userInput));
 	}
 
 	private void checkUnitOfMoney(int money) {
@@ -28,14 +22,6 @@ public class Money {
 
 	private boolean isValidMoney(int money) {
 		return money % LOTTO_PRICE == 0;
-	}
-
-	private static void checkNotDigit(String userInput) {
-		try {
-			Integer.parseInt(userInput);
-		} catch (NumberFormatException exception) {
-			throw new IllegalArgumentException(NOT_DIGIT_EXCEPTION_MESSAGE);
-		}
 	}
 
 	public boolean isPossibleToPurchase(int purchasePrice) {

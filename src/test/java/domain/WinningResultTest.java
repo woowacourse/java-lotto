@@ -86,7 +86,7 @@ class WinningResultTest {
 		Number bonusNumber = new Number(39);
 		WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusNumber);
 		LottoTicket lottoTicket = new LottoTicket(List.of(myLotto));
-		Money money = Money.from("1000");
+		Money money = new Money(1000);
 
 		// when
 		WinningResult winningResult = WinningResult.createWinningResult(lottoTicket, winningNumbers);
@@ -107,7 +107,7 @@ class WinningResultTest {
 		Number bonusNumber = new Number(39);
 		WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusNumber);
 		LottoTicket lottoTicket = new LottoTicket(List.of(myLotto));
-		Money money = Money.from("1000");
+		Money money = new Money(1000);
 
 		// when
 		WinningResult winningResult = WinningResult.createWinningResult(lottoTicket, winningNumbers);

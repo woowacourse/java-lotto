@@ -32,7 +32,7 @@ public class LottoController {
 
 	private Money insertMoney() {
 		outputView.printRequestMoney();
-		return Money.from(inputView.requestMoney());
+		return new Money(inputView.requestMoney());
 	}
 
 	private LottoTicket buyLottoTicket(Money money) {
@@ -46,7 +46,7 @@ public class LottoController {
 		Lotto winningLotto = Lotto.from(inputView.requestWinningNumbers());
 
 		outputView.printRequestBonusNumber();
-		Number bonusNumber = Number.from(inputView.requestBonusNumber());
+		Number bonusNumber = new Number(inputView.requestBonusNumber());
 
 		return new WinningNumbers(winningLotto, bonusNumber);
 	}

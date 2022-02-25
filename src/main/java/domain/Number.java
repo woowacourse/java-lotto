@@ -7,7 +7,6 @@ public class Number {
 	private static final int MIN_LOTTO_NUMBER = 1;
 	private static final int MAX_LOTTO_NUMBER = 45;
 	private static final String OUT_OF_RANGE_EXCEPTION_MESSAGE = "번호는 1 ~ 45의 숫자여야 합니다";
-	private static final String NOT_DIGIT_EXCEPTION_MESSAGE = "숫자만 입력해야 합니다";
 
 	private final int number;
 
@@ -16,22 +15,9 @@ public class Number {
 		this.number = number;
 	}
 
-	public static Number from(String userInput) {
-		checkNotDigit(userInput);
-		return new Number(Integer.parseInt(userInput));
-	}
-
 	private void checkNumberRange(int number) {
 		if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
 			throw new IllegalArgumentException(OUT_OF_RANGE_EXCEPTION_MESSAGE);
-		}
-	}
-
-	private static void checkNotDigit(String userInput) {
-		try {
-			Integer.parseInt(userInput);
-		} catch (NumberFormatException exception) {
-			throw new IllegalArgumentException(NOT_DIGIT_EXCEPTION_MESSAGE);
 		}
 	}
 

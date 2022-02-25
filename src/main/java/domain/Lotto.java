@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Lotto {
 
@@ -20,9 +19,9 @@ public class Lotto {
 		this.lotto = lotto;
 	}
 
-	public static Lotto from(String[] userInput) {
-		return new Lotto(Stream.of(userInput)
-			.map(Number::from)
+	public static Lotto from(List<Integer> userInput) {
+		return new Lotto(userInput.stream()
+			.map(Number::new)
 			.collect(Collectors.toList()));
 	}
 
