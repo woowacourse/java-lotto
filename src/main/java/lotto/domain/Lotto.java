@@ -27,14 +27,14 @@ public class Lotto {
     Lotto(List<Integer> numbers) {
         validateNumbers(numbers);
         this.numbers = numbers.stream()
-                .map(Number::new)
+                .map(Number::getInstance)
                 .collect(Collectors.toSet());
     }
 
     private static List<Number> initLottoNumbers() {
         List<Number> numbers = new ArrayList<>();
         for (int i = Number.MIN_VALUE; i <= Number.MAX_VALUE; i++) {
-            Number number = new Number(i);
+            Number number = Number.getInstance(i);
             numbers.add(number);
         }
         return numbers;

@@ -39,7 +39,7 @@ public class NumberController {
     private List<Number> toNumbers(List<Integer> integers) {
         try {
             return integers.stream()
-                    .map(Number::new)
+                    .map(Number::getInstance)
                     .collect(Collectors.toList());
         } catch (IllegalArgumentException exception) {
             OutputView.printError(exception.getMessage());
@@ -59,7 +59,7 @@ public class NumberController {
 
     private Optional<Number> getValidNumber(List<Number> numbers) {
         try {
-            Number number = new Number(InputView.inputBonusNumber());
+            Number number = Number.getInstance(InputView.inputBonusNumber());
             checkDuplicate(numbers, number);
             return Optional.of(number);
         } catch (IllegalArgumentException exception) {

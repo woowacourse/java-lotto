@@ -23,7 +23,7 @@ public class NumberTest {
             @CsvSource(value = {"1|1", "45|45"}, delimiter = '|')
             @DisplayName("객체가 생성한다.")
             void it_create_ok(int value, int expected) {
-                Number number = new Number(value);
+                Number number = Number.getInstance(value);
 
                 assertThat(number.getValue()).isEqualTo(expected);
             }
@@ -37,7 +37,7 @@ public class NumberTest {
             @ValueSource(strings = {"0", "46"})
             @DisplayName("예외가 발생한다.")
             void it_throw_exception(int value) {
-                assertThatThrownBy(() -> new Number(value))
+                assertThatThrownBy(() -> Number.getInstance(value))
                         .isInstanceOf(IllegalArgumentException.class)
                         .hasMessage("1부터 45의 숫자여야 합니다.");
             }

@@ -61,7 +61,7 @@ public class LottoTest {
                 Lotto lotto = new Lotto();
                 int actual = 0;
                 for (int i = 1; i < 46; i++) {
-                    if (lotto.contains(new Number(i))) {
+                    if (lotto.contains(Number.getInstance(i))) {
                         actual++;
                     }
                 }
@@ -82,7 +82,7 @@ public class LottoTest {
             @DisplayName("true를 반환한다.")
             void it_returns_true() {
                 Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-                assertThat(lotto.contains(new Number(1))).isTrue();
+                assertThat(lotto.contains(Number.getInstance(1))).isTrue();
             }
         }
 
@@ -94,7 +94,7 @@ public class LottoTest {
             @DisplayName("false를 반환한다.")
             void it_returns_true() {
                 Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-                assertThat(lotto.contains(new Number(7))).isFalse();
+                assertThat(lotto.contains(Number.getInstance(7))).isFalse();
             }
         }
     }
@@ -115,9 +115,9 @@ public class LottoTest {
                 Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
 
                 List<Number> numbers = integers.stream()
-                        .map(Number::new)
+                        .map(Number::getInstance)
                         .collect(Collectors.toList());
-                Number bonusNumber = new Number(bonus);
+                Number bonusNumber = Number.getInstance(bonus);
 
                 assertThat(lotto.getWinningPrice(numbers, bonusNumber).get()).isEqualTo(key);
             }
