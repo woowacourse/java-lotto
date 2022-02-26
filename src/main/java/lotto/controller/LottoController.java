@@ -15,11 +15,11 @@ import lotto.view.Entering;
 import lotto.view.KeyEnter;
 
 import static lotto.view.Input.*;
+import static lotto.view.Input.inputWinNumber;
 import static lotto.view.Output.*;
 
 public class LottoController {
     private static final Entering entering = new KeyEnter();
-    private static final String DELIMITER = ",";
 
     public static void run() {
         printRequestPayment();
@@ -59,11 +59,7 @@ public class LottoController {
 
     private static Lotto createWinNumber() {
         try {
-            List<Integer> numbers = Arrays.stream(inputWinNumber().split(DELIMITER))
-                    .map(String::trim)
-                    .map(Integer::parseInt)
-                    .collect(Collectors.toList());
-            return new Lotto(numbers);
+            return new Lotto(inputWinNumber(entering));
         } catch (IllegalArgumentException error) {
             printErrorMessage(error.getMessage());
             return createWinNumber();
