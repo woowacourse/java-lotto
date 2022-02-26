@@ -2,15 +2,15 @@ package domain;
 
 import java.util.Map;
 
-public class Lotto {
+public class LottoMachine {
     private final Amount amount;
     private final Tickets tickets;
 
-    public static Lotto from(int amount) {
-        return new Lotto(new Amount(amount));
+    public static LottoMachine from(int amount) {
+        return new LottoMachine(new Amount(amount));
     }
 
-    private Lotto(Amount amount) {
+    private LottoMachine(Amount amount) {
         this.amount = amount;
         this.tickets = Tickets.of(getTicketCount(), new RandomLottoNumbersGenerator());
     }
