@@ -4,7 +4,6 @@ import java.util.List;
 import model.WinningResultDto;
 
 public class WinningResultOutputView implements OutputView<List<WinningResultDto>> {
-
     private static final String WINNING_STATISTICS_MESSAGE = "당첨 통계";
     private static final String DIVISION_LINE = "---------";
     private static final String MATCH_COUNT_MESSAGE = "개 일치";

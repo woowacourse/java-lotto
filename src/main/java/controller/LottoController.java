@@ -41,12 +41,8 @@ public class LottoController {
     }
 
     public void printGeneratedLottoTickets(LottoTickets lottoTickets) {
-        List<LottoTicketDto> dto = lottoTickets.getTickets()
-                .stream()
-                .map(lottoTicket -> new LottoTicketDto(lottoTicket.lottoNumberValues()))
-                .collect(Collectors.toList());
-
-        viewContainer.getLottoTicketOutputView().showOutputData(dto);
+        List<LottoTicketDto> dtos = toLottoTicketDtos(lottoTickets);
+        viewContainer.getLottoTicketOutputView().showOutputData(dtos);
     }
 
     public Set<Integer> inputWinningNumbers() {
@@ -86,5 +82,12 @@ public class LottoController {
                         winningPrize.getPrizeMoney(),
                         count
                 );
+    }
+
+    private List<LottoTicketDto> toLottoTicketDtos(LottoTickets lottoTickets) {
+        return lottoTickets.getTickets()
+                .stream()
+                .map(lottoTicket -> new LottoTicketDto(lottoTicket.lottoNumberValues()))
+                .collect(Collectors.toList());
     }
 }
