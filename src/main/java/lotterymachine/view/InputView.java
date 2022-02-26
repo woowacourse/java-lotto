@@ -1,6 +1,5 @@
 package lotterymachine.view;
 
-import lotterymachine.model.Money;
 import lotterymachine.utils.LotteryRule;
 
 import java.util.Arrays;
@@ -15,12 +14,12 @@ public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
     private static final String NUMBER_DELIMITER = ",";
 
-    public static Money getAmount() {
+    public static int getAmount() {
         System.out.println("구입금액을 입력해 주세요.");
         try {
             int amount = toInt(scanner.nextLine());
             validatePurchasable(amount);
-            return new Money(amount);
+            return amount;
         } catch (RuntimeException runtimeException) {
             System.out.println(runtimeException.getMessage());
             return getAmount();

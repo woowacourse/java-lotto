@@ -1,7 +1,6 @@
 package lotterymachine;
 
 import static lotterymachine.utils.LotteryCalculator.calculateProfitRate;
-import static lotterymachine.utils.LotteryCalculator.divideByLotteryPrice;
 import static lotterymachine.utils.LotteryNumbersGenerator.generate;
 
 import java.util.Collections;
@@ -20,9 +19,9 @@ import java.util.List;
 
 public class LotteryMachine {
     public static void main(String[] args) {
-        Money amount = InputView.getAmount();
-        Count numberOfTickets = divideByLotteryPrice(amount);
-        OutputView.printNumberOfTicket(numberOfTickets);
+        Money amount = Money.from(InputView.getAmount());
+        Count numberOfTickets = Count.calculateNumberOfTickets(amount.getAmount());
+        OutputView.printNumberOfTicket(numberOfTickets.getNumber());
 
         LotteryTickets lotteryTickets = new LotteryTickets(createLotteryTickets(numberOfTickets));
         OutputView.printLotteryTickets(lotteryTickets.getLotteryTickets());

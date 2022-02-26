@@ -11,7 +11,6 @@ public class Money {
         return new Money(amount);
     }
 
-
     public double divide(Money money) {
         return (double) this.amount / money.amount;
     }

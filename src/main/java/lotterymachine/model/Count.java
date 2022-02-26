@@ -7,8 +7,8 @@ public class Count {
         this.number = number;
     }
 
-    public static Count from(int number) {
-        return new Count(number);
+    public static Count calculateNumberOfTickets(int amount) {
+        return new Count(amount / 1000);
     }
 
     public int getNumber() {

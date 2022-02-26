@@ -11,10 +11,6 @@ public class LotteryCalculator {
     private static final int LOTTERY_PRICE = 1000;
     private static final double DECIMAL_PLACE_SAVER = 100.0;
 
-    public static Count divideByLotteryPrice(Money amount) {
-        return Count.from(amount.getAmount() / LOTTERY_PRICE);
-    }
-
     public static double calculateProfitRate(Money winningLotteryAmount, Money amount) {
         return floor(winningLotteryAmount.divide(amount) * DECIMAL_PLACE_SAVER)  / DECIMAL_PLACE_SAVER;
     }

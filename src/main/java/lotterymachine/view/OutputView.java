@@ -1,6 +1,5 @@
 package lotterymachine.view;
 
-import lotterymachine.model.Count;
 import lotterymachine.dto.LotteryResultDto;
 import lotterymachine.model.LotteryTicket;
 
@@ -8,8 +7,8 @@ import java.util.List;
 
 public class OutputView {
 
-    public static void printNumberOfTicket(Count count) {
-        System.out.printf("%d개를 구매했습니다.%n", count.getNumber());
+    public static void printNumberOfTicket(int number) {
+        System.out.printf("%d개를 구매했습니다.%n", number);
     }
 
     public static void printLotteryTickets(List<LotteryTicket> lotteryTickets) {
