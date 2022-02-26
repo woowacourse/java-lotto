@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lotto.domain.generator.CustomLottoGenerator;
 import lotto.domain.vo.Lotto;
 import lotto.domain.vo.LottoNumber;
 import lotto.domain.vo.Money;
@@ -27,12 +28,16 @@ public class LottoGameTest {
     @Test
     void purchase_test() {
         LottoGame lottoGame = new LottoGame();
-        lottoGame.purchase(new Money(10000));
+        lottoGame.purchase(new Money(10000), new CustomLottoGenerator());
+        List<Lotto> lottos = lottoGame.getLottos();
 
-        assertThat(lottoGame)
-                .extracting("lottos")
-                .asList()
-                .hasSize(10);
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (int i = 1; i <= 6; i++) {
+            lottoNumbers.add(new LottoNumber(i));
+        }
+
+        assertThat(lottos).hasSize(10);
+        assertThat(lottos).allSatisfy(lotto -> lotto.getNumbers().containsAll(lottoNumbers));
     }
 
     @DisplayName("confirmWinnings 메서드 테스트")
@@ -46,9 +51,10 @@ public class LottoGameTest {
         }
 
         LottoGame lottoGame = new LottoGame();
-        lottoGame.purchase(new Money(10000));
+        lottoGame.purchase(new Money(10000), new CustomLottoGenerator());
         WinningNumbers winningNumbers = new WinningNumbers(new Lotto(lottoNumbers), bonusNumber);
-        assertThat(lottoGame.confirmWinnings(winningNumbers))
-                .isInstanceOf(LottoResults.class);
+        LottoResults results = lottoGame.confirmWinnings(winningNumbers);
+        assertThat(results).isInstanceOf(LottoResults.class);
+        assertThat(results.getPrizeNumber(LottoPrize.FIRST)).isEqualTo(10);
     }
 }

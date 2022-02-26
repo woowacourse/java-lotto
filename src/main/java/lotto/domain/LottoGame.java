@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import lotto.domain.generator.Generator;
 import lotto.domain.generator.LottoGenerator;
 import lotto.domain.vo.Lotto;
 import lotto.domain.vo.Lottos;
@@ -15,11 +16,11 @@ public class LottoGame {
 
     private Lottos lottos = new Lottos(new ArrayList<>());
 
-    public void purchase(Money money) {
+    public void purchase(Money money, Generator lottoGenerator) {
         int countOfPurchase = money.canBuyNumber(LOTTO_PRICE);
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < countOfPurchase; i++) {
-            lottos.add(LottoGenerator.generate());
+            lottos.add(lottoGenerator.generate());
         }
         this.lottos = new Lottos(lottos);
     }

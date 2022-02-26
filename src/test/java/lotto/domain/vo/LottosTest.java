@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import lotto.domain.LottoPrize;
+import lotto.domain.generator.CustomLottoGenerator;
+import lotto.domain.generator.Generator;
 import lotto.domain.generator.LottoGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,7 +19,8 @@ public class LottosTest {
     @Test
     void lottos_constructor_test() {
         List<Lotto> randomLottos = new ArrayList<>();
-        randomLottos.add(LottoGenerator.generate());
+        Generator lottoGenerator = new CustomLottoGenerator();
+        randomLottos.add(lottoGenerator.generate());
         Lottos lottos = new Lottos(randomLottos);
 
         assertThat(lottos)
@@ -29,8 +32,9 @@ public class LottosTest {
     @DisplayName("confirmWinnings 메서드 테스트")
     @Test
     void confirmWinnings_test() {
+        Generator lottoGenerator = new CustomLottoGenerator();
         Lottos lottos = new Lottos(new ArrayList<>(){{
-            add(LottoGenerator.generate());
+            add(lottoGenerator.generate());
         }});
 
         WinningNumbers winningNumbers = getWinningNumbers();
