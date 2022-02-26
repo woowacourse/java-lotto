@@ -11,6 +11,7 @@ public enum Rank {
     FIFTH(5_000, 3, false),
     NOTHING(0, 0, false);
 
+    public static final int SECOND_PRICE_COUNT = 5;
     private final int prizeMoney;
     private final int count;
     private final boolean isBonus;
@@ -22,7 +23,7 @@ public enum Rank {
     }
 
     public static Rank of(int count, boolean isBonus) {
-        if (isBonus && count == 5) {
+        if (isBonus && count == SECOND_PRICE_COUNT) {
             return Rank.SECOND;
         }
 

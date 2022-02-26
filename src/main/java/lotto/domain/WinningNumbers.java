@@ -12,6 +12,7 @@ import lotto.domain.enumeration.Rank;
 
 public class WinningNumbers {
 
+    public static final int WINNING_NUMBER_SIZE = 6;
     private final List<WinningNumber> winningNumbers;
 
     private WinningNumbers(List<Integer> normalWinningNumbers, Integer bonusWinningNumber) {
@@ -22,7 +23,7 @@ public class WinningNumbers {
     }
 
     private void validateNormalWinningNumbers(List<Integer> normalWinningNumbers) {
-        if (normalWinningNumbers.size() != 6) {
+        if (normalWinningNumbers.size() != WINNING_NUMBER_SIZE) {
             throw new IllegalArgumentException("당첨 번호는 6개여야 합니다.");
         }
     }
