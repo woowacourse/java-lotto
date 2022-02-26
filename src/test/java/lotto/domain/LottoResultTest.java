@@ -23,10 +23,15 @@ class LottoResultTest {
     @Test
     @DisplayName("당첨금 총합을 계산하는 기능")
     void Calculate_Sum_Of_Prize() {
+        int thirdPrizeAmount = LottoRank.RANK_THIRD.getPrizeAmount();
+        int fourthPrizeAmount = LottoRank.RANK_FOURTH.getPrizeAmount();
+        int fifthPrizeAmount = LottoRank.RANK_FIFTH.getPrizeAmount();
+        int totalAmount = thirdPrizeAmount + fourthPrizeAmount + fifthPrizeAmount;
+
         LottoResult lottoResult = new LottoResult();
         lottoResult.add(LottoRank.RANK_THIRD);
         lottoResult.add(LottoRank.RANK_FOURTH);
         lottoResult.add(LottoRank.RANK_FIFTH);
-        Assertions.assertThat(lottoResult.sumOfPrize()).isEqualTo(1555000);
+        Assertions.assertThat(lottoResult.sumOfPrize()).isEqualTo(totalAmount);
     }
 }
