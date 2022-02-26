@@ -32,9 +32,7 @@ public class Lotto {
     }
 
     private int countMatchingNumber(LottoNumbers winningNumbers) {
-        return (int) winningNumbers.getLottoNumbers().stream()
-                .filter(this::containNumber)
-                .count();
+        return numbers.countMatchingNumber(winningNumbers);
     }
 
     private boolean containNumber(LottoNumber number) {

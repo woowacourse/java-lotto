@@ -1,5 +1,7 @@
 package lotto.model.number;
 
+import java.util.Objects;
+
 public class LottoNumber {
 
     private static final String NUMBER_RANGE_ERROR_MESSAGE = "[ERROR] 유효한 숫자가 아닙니다.";
@@ -21,5 +23,22 @@ public class LottoNumber {
 
     public int getLottoNumber() {
         return number;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoNumber that = (LottoNumber) o;
+        return number == that.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 }

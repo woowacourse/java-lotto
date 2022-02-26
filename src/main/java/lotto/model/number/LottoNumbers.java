@@ -1,6 +1,7 @@
 package lotto.model.number;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
@@ -29,6 +30,21 @@ public class LottoNumbers {
                 .map(LottoNumber::getLottoNumber)
                 .distinct()
                 .count();
+    }
+
+    public int countMatchingNumber(LottoNumbers winningNumbers) {
+        return (int) winningNumbers.lottoNumbers.stream()
+                .filter(number -> containNumber(number))
+                .count();
+    }
+
+    public boolean containNumber(LottoNumber number) {
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            if (lottoNumber.equals(number)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public List<LottoNumber> getLottoNumbers() {
