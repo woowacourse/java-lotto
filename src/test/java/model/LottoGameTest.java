@@ -3,6 +3,7 @@ package model;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -31,7 +32,7 @@ class LottoGameTest {
         int purchaseMoney = 14000;
         List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         int bonusNumber = 7;
-        GenerateStrategy generateStrategy = () -> Arrays.asList(1, 2, 3, 4, 5, 6);
+        GenerateStrategy generateStrategy = () -> new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoTickets lottoTickets = new LottoTickets(purchaseMoney, generateStrategy);
         LottoGame lottoGame = new LottoGame
                 (

@@ -1,23 +1,25 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
-    private final List<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
     public LottoTicket(GenerateStrategy generateStrategy) {
-        List<Integer> generatedNumbers = generateStrategy.generateNumbers();
-        lottoNumbers = new ArrayList<>();
+        Set<Integer> generatedNumbers = generateStrategy.generateNumbers();
+        lottoNumbers = new HashSet<>();
         for (Integer generatedNumber : generatedNumbers) {
             lottoNumbers.add(new LottoNumber(generatedNumber));
         }
     }
 
-    public List<Integer> lottoNumberValues() {
+    public Set<Integer> lottoNumberValues() {
         return lottoNumbers.stream()
                 .map(LottoNumber::value)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 }

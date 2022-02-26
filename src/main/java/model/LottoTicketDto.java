@@ -1,15 +1,15 @@
 package model;
 
-import java.util.List;
+import java.util.Set;
 
 public class LottoTicketDto {
-    private final List<Integer> lottoNumbers;
+    private final Set<Integer> lottoNumbers;
 
-    public LottoTicketDto(List<Integer> lottoNumbers) {
+    public LottoTicketDto(Set<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public List<Integer> getLottoNumbers() {
+    public Set<Integer> getLottoNumbers() {
         return lottoNumbers;
     }
 }
