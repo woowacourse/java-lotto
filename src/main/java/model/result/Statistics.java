@@ -14,10 +14,11 @@ public enum Statistics {
     Statistics(int matchNumber, int value) {
         this.matchNumber = matchNumber;
         this.value = value;
+        this.count = 0;
    }
 
     public void addCount() {
-        count++;
+        this.count++;
     }
 
     public int getCount() {
