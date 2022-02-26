@@ -72,8 +72,8 @@ public class Lotto {
                 count++;
             }
         }
-        if (count == WinningPrice.Five.getCount() && numbers.contains(bonusNumber)) {
-            containsBonus = true;
+        if (count == WinningPrice.Five.getCount()) {
+            containsBonus = numbers.contains(bonusNumber);
         }
 
         return WinningPrice.of(count, containsBonus);

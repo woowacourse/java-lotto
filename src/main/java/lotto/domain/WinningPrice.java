@@ -22,14 +22,9 @@ public enum WinningPrice {
     }
 
     public static WinningPrice of(int count, boolean containBonus) {
-        if (count == Five.getCount() && containBonus) {
-            return WinningPrice.FiveAndBonus;
-        }
-        if (count == Five.getCount()) {
-            return WinningPrice.Five;
-        }
         return Arrays.stream(values())
                 .filter(it -> it.count == count)
+                .filter(it -> it.containBonus == containBonus)
                 .findAny()
                 .orElse(WinningPrice.Fail);
     }
