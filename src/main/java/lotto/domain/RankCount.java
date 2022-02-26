@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 public class RankCount {
@@ -9,10 +9,7 @@ public class RankCount {
     private final Map<Rank, Integer> rankCount;
 
     public RankCount(Lottos lottos, WinningLotto winningLotto, BonusNumber bonusNumber) {
-        Map<Rank, Integer> rankCount = new HashMap<>();
-        Arrays.stream(Rank.values())
-                .forEach(rank -> rankCount.put(rank, 0));
-        this.rankCount = rankCount;
+        this.rankCount = new EnumMap<Rank, Integer>(Rank.class);
         calculateRankCount(lottos, winningLotto, bonusNumber);
     }
 
@@ -23,16 +20,17 @@ public class RankCount {
     }
 
     private void increaseCount(Rank rank) {
-        rankCount.put(rank, rankCount.get(rank) + 1);
-    }
-
-    public int getCount(Rank rank) {
-        return rankCount.get(rank);
+        rankCount.putIfAbsent(rank, 0);
+        rankCount.computeIfPresent(rank, (key, value) -> value + 1);
     }
 
     public long getTotalPrize() {
         return Arrays.stream(Rank.values())
-                .mapToLong(rank -> rank.calculateTotalPrize(rankCount.get(rank)))
+                .mapToLong(rank -> rank.calculateTotalPrize(rankCount.getOrDefault(rank, 0)))
                 .sum();
+    }
+
+    public int getCount(Rank rank) {
+        return rankCount.getOrDefault(rank,0);
     }
 }
