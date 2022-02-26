@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 
+import lotto.dto.TicketsDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -23,8 +24,8 @@ class TicketsTest {
         customTicketGenerator.initNumbers(generatedTickets);
         final Tickets tickets = new Tickets(ticketCount, customTicketGenerator);
 
-        final List<TicketDto> ticketDtos = tickets.getTicketDtos();
-        assertThat(ticketDtos.size()).isEqualTo(ticketCount);
+        final TicketsDto ticketDtos = TicketsDto.toDto(tickets);
+        assertThat(ticketDtos.getSize()).isEqualTo(ticketCount);
     }
 
     @DisplayName("당첨 등수 확인 테스트")

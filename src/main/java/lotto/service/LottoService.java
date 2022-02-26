@@ -10,6 +10,7 @@ import lotto.domain.ticket.Tickets;
 import lotto.domain.ticket.generator.RandomTicketGenerator;
 import lotto.dto.AnalysisDto;
 import lotto.dto.TicketDto;
+import lotto.dto.TicketsDto;
 import lotto.dto.WinningTicketDto;
 
 public class LottoService {
@@ -34,8 +35,8 @@ public class LottoService {
         return new AnalysisDto(ranks, credit.getMoney());
     }
 
-    public List<TicketDto> getTicketDtos() {
-        return tickets.getTicketDtos();
+    public TicketsDto getTicketDtos() {
+        return TicketsDto.toDto(tickets);
     }
 
 }

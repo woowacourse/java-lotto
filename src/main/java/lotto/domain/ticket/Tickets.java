@@ -34,10 +34,8 @@ public class Tickets {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public List<TicketDto> getTicketDtos() {
-        return tickets.stream()
-                .map(TicketDto::toDto)
-                .collect(Collectors.toUnmodifiableList());
+    public List<Ticket> getTickets() {
+        return new ArrayList<>(tickets);
     }
 
 }
