@@ -12,11 +12,9 @@ public class WinningResult {
     }
 
     public long calculatePrizeSum() {
-        long sum = 0;
-        for (Map.Entry<Ranking, Integer> entry : winningResult.entrySet()) {
-            sum += entry.getKey().multiple(entry.getValue());
-        }
-        return sum;
+        return winningResult.entrySet().stream()
+                .mapToLong(entry -> entry.getKey().multiple(entry.getValue()))
+                .sum();
     }
 
     public Map<Ranking, Integer> getWinningResult() {
