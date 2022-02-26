@@ -1,9 +1,9 @@
 package lotto.domain.generator;
 
-import lotto.domain.lottonumber.LottoNumbers;
+import lotto.domain.lottonumber.Lotto;
 
 import java.util.List;
 
 public interface LottoGenerator {
-    List<LottoNumbers> generateLottoNumbersGroup(final int numberOfGenerating);
+    List<Lotto> generateLottos(final int numberOfGenerating);
 }

@@ -8,20 +8,20 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class LottoNumbers {
+public class Lotto {
     private static final String DUPLICATED_LOTTO_NUMBERS_EXCEPTION_MESSAGE = "같은 줄 로또 번호 간에 중복이 존재합니다.";
     private static final String LOTTO_NUMBERS_COUNT_EXCEPTION_MESSAGE = "로또 숫자는 한 줄에 6개여야 합니다.";
     private static final int VALID_LOTTO_NUMBERS_COUNT = 6;
 
     private final List<LottoNumber> values;
 
-    public LottoNumbers(final Set<LottoNumber> numbers) {
+    public Lotto(final Set<LottoNumber> numbers) {
         values = numbers.stream()
                 .sorted()
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public LottoNumbers(final List<String> numbers) {
+    public Lotto(final List<String> numbers) {
         validateDuplication(numbers);
         validateCountOfNumbers(numbers);
         final List<LottoNumber> mappedLottoNumbers = mapToLottoNumbers(numbers);
@@ -60,7 +60,7 @@ public class LottoNumbers {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public int getMatchCount(final LottoNumbers others) {
+    public int getMatchCount(final Lotto others) {
         return (int) values.stream()
                 .filter(targetNumber -> targetNumber.hasSameNumberWith(others.values))
                 .count();
@@ -78,7 +78,7 @@ public class LottoNumbers {
     public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoNumbers that = (LottoNumbers) o;
+        Lotto that = (Lotto) o;
         return Objects.equals(values, that.values);
     }
 

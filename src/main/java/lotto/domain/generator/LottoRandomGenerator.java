@@ -1,6 +1,6 @@
 package lotto.domain.generator;
 
-import lotto.domain.lottonumber.LottoNumbers;
+import lotto.domain.lottonumber.Lotto;
 import lotto.domain.lottonumber.vo.LottoNumber;
 
 import java.util.Collections;
@@ -23,8 +23,8 @@ public class LottoRandomGenerator implements LottoGenerator {
                 .collect(Collectors.toList());
     }
 
-    public List<LottoNumbers> generateLottoNumbersGroup(final int numberOfGenerating) {
-        final Set<LottoNumbers> generatedNumbersGroup = new HashSet<>();
+    public List<Lotto> generateLottos(final int numberOfGenerating) {
+        final Set<Lotto> generatedNumbersGroup = new HashSet<>();
         while (generatedNumbersGroup.size() < numberOfGenerating) {
             generatedNumbersGroup.add(generateNumbers());
         }
@@ -32,11 +32,11 @@ public class LottoRandomGenerator implements LottoGenerator {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    private LottoNumbers generateNumbers() {
+    private Lotto generateNumbers() {
         Collections.shuffle(basicNumbers);
         final Set<LottoNumber> generatedNumbers = basicNumbers.stream()
                 .limit(BONUS_NUMBER_INDEX)
                 .collect(Collectors.toUnmodifiableSet());
-        return new LottoNumbers(generatedNumbers);
+        return new Lotto(generatedNumbers);
     }
 }

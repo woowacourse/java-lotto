@@ -1,7 +1,7 @@
 package lotto.service;
 
 import lotto.domain.matchkind.LottoMatchKind;
-import lotto.domain.lottonumber.LottoNumbers;
+import lotto.domain.lottonumber.Lotto;
 import lotto.domain.lottonumber.WinningNumbers;
 import lotto.domain.generator.LottoCustomGenerator;
 import lotto.domain.generator.LottoGenerator;
@@ -22,7 +22,7 @@ class LottoServiceTest {
     private final String purchaseAmount = "5000";
     private final LottoService lottoService = new LottoService(lottoGenerator, purchaseAmount);
     private final WinningNumbers winningNumbers = new WinningNumbers(
-            new LottoNumbers(Arrays.asList("2", "3", "4", "5", "6", "7")), LottoNumber.from("1"));
+            new Lotto(Arrays.asList("2", "3", "4", "5", "6", "7")), LottoNumber.from("1"));
 
     @Test
     @DisplayName("구매 개수를 반환한다.")
@@ -38,14 +38,14 @@ class LottoServiceTest {
     @DisplayName("구매한 모든 로또 숫자들을 반환한다.")
     void getLottoNumbersGroup() {
         //given
-        final LottoNumbers first = new LottoNumbers(Arrays.asList("1", "2", "3", "4", "5", "6"));
-        final LottoNumbers second = new LottoNumbers(Arrays.asList("2", "3", "4", "5", "6", "7"));
-        final LottoNumbers third = new LottoNumbers(Arrays.asList("3", "4", "5", "6", "7", "8"));
-        final LottoNumbers fourth = new LottoNumbers(Arrays.asList("4", "5", "6", "7", "8", "9"));
-        final LottoNumbers fifth = new LottoNumbers(Arrays.asList("5", "6", "7", "8", "9", "10"));
-        final List<LottoNumbers> expected = Arrays.asList(first, second, third, fourth, fifth);
+        final Lotto first = new Lotto(Arrays.asList("1", "2", "3", "4", "5", "6"));
+        final Lotto second = new Lotto(Arrays.asList("2", "3", "4", "5", "6", "7"));
+        final Lotto third = new Lotto(Arrays.asList("3", "4", "5", "6", "7", "8"));
+        final Lotto fourth = new Lotto(Arrays.asList("4", "5", "6", "7", "8", "9"));
+        final Lotto fifth = new Lotto(Arrays.asList("5", "6", "7", "8", "9", "10"));
+        final List<Lotto> expected = Arrays.asList(first, second, third, fourth, fifth);
         //when
-        final List<LottoNumbers> actual = lottoService.getLottoNumbersGroup();
+        final List<Lotto> actual = lottoService.getLottos();
         //then
         assertThat(actual).isEqualTo(expected);
     }

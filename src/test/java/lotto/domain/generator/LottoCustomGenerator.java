@@ -1,6 +1,6 @@
 package lotto.domain.generator;
 
-import lotto.domain.lottonumber.LottoNumbers;
+import lotto.domain.lottonumber.Lotto;
 import lotto.domain.lottonumber.vo.LottoNumber;
 import org.opentest4j.TestAbortedException;
 
@@ -26,7 +26,7 @@ public class LottoCustomGenerator implements LottoGenerator {
     }
 
     @Override
-    public List<LottoNumbers> generateLottoNumbersGroup(int numberOfGenerating) {
+    public List<Lotto> generateLottos(int numberOfGenerating) {
         if (numberOfGenerating > MAX_GENERATING_LOTTO_NUMBERS_COUNT) {
             throw new TestAbortedException(TEST_LOTTO_NUMBERS_COUNT_EXCEED_EXCEPTION_MESSAGE);
         }
@@ -35,10 +35,10 @@ public class LottoCustomGenerator implements LottoGenerator {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    private LottoNumbers generateLottoNumbers(final int firstValue) {
+    private Lotto generateLottoNumbers(final int firstValue) {
         final Set<LottoNumber> numbers = IntStream.range(firstValue, firstValue + SIZE_OF_EACH_LOTTO_NUMBERS)
                 .mapToObj(lottoNumbers::get)
                 .collect(Collectors.toUnmodifiableSet());
-        return new LottoNumbers(numbers);
+        return new Lotto(numbers);
     }
 }

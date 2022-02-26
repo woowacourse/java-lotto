@@ -1,6 +1,6 @@
 package lotto.domain.generator;
 
-import lotto.domain.lottonumber.LottoNumbers;
+import lotto.domain.lottonumber.Lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +16,7 @@ class LottoRandomGeneratorTest {
         final int numberOfGenerating = 5;
         final LottoGenerator lottoRandomGenerator = new LottoRandomGenerator();
         //when
-        final List<LottoNumbers> generated = lottoRandomGenerator.generateLottoNumbersGroup(numberOfGenerating);
+        final List<Lotto> generated = lottoRandomGenerator.generateLottos(numberOfGenerating);
         final int actualDistinctCount = (int) generated.stream()
                 .distinct()
                 .count();

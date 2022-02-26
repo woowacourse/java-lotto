@@ -1,7 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.matchkind.LottoMatchKind;
-import lotto.domain.lottonumber.LottoNumbers;
+import lotto.domain.lottonumber.Lotto;
 import lotto.domain.lottonumber.WinningNumbers;
 import lotto.domain.generator.LottoGenerator;
 import lotto.domain.lottonumber.vo.LottoNumber;
@@ -45,21 +45,21 @@ public class LottoController {
 
     private void printLottoNumbersGroup() {
         final List<LottoNumbersDto> numbersGroup =
-                convertLottoNumbersGroupToDtos(lottoService.getLottoNumbersGroup());
+                convertLottoNumbersGroupToDtos(lottoService.getLottos());
         outputView.printLottoNumbersGroup(numbersGroup);
     }
 
     private List<LottoNumbersDto> convertLottoNumbersGroupToDtos(
-            final List<LottoNumbers> numbersGroup) {
+            final List<Lotto> numbersGroup) {
         return numbersGroup.stream()
-                .map(LottoNumbers::getValues)
+                .map(Lotto::getValues)
                 .map(LottoNumbersDto::new)
                 .collect(Collectors.toUnmodifiableList());
     }
 
     private WinningNumbers generateWinningNumbers() {
         try {
-            final LottoNumbers lastWinningNumbers = new LottoNumbers(inputView.inputLastWeekWinningNumbers());
+            final Lotto lastWinningNumbers = new Lotto(inputView.inputLastWeekWinningNumbers());
             final LottoNumber bonusNumber = LottoNumber.from(inputView.inputBonusNumber());
             return new WinningNumbers(lastWinningNumbers, bonusNumber);
         } catch (final Exception e) {
