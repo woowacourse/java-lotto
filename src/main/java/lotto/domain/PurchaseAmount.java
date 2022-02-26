@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class TryMoney {
+public class PurchaseAmount {
     static final String NOT_NUMBER = "[ERROR] 구입금액은 숫자여야 합니다.";
     static final String NOT_ENOUGH_MONEY = "[ERROR] 로또를 구매하려면 최소 천원 이상 투입해야 합니다.";
 
@@ -10,27 +10,32 @@ public class TryMoney {
 
     private final int amount;
 
-    public TryMoney(String moneyString) {
-        this.amount = convertStringToInt(moneyString);
-        validateEnoughAmount();
+    public PurchaseAmount(String moneyString) {
+        isNumber(moneyString);
+        amount = Integer.parseInt(moneyString);
+        isEnoughAmount();
     }
 
     public int amount() {
         return amount;
     }
 
-    private int convertStringToInt(String moneyString) {
+    private void isNumber(String moneyString) {
         try {
-            return Integer.parseInt(moneyString);
+            Integer.parseInt(moneyString);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(NOT_NUMBER);
         }
     }
 
-    private void validateEnoughAmount() {
-        if (this.amount < LOTTO_PRICE) {
+    private void isEnoughAmount() {
+        if (amount < LOTTO_PRICE) {
             throw new IllegalArgumentException(NOT_ENOUGH_MONEY);
         }
+    }
+
+    public int getAvailableTicketNumber(int lottoTicketPrice) {
+        return amount / lottoTicketPrice;
     }
 
     @Override
@@ -41,12 +46,19 @@ public class TryMoney {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        TryMoney tryMoney = (TryMoney) o;
-        return amount == tryMoney.amount;
+        PurchaseAmount purchaseAmount = (PurchaseAmount) o;
+        return amount == purchaseAmount.amount;
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(amount);
+    }
+
+    @Override
+    public String toString() {
+        return "PurchaseAmount{" +
+                "amount=" + amount +
+                '}';
     }
 }

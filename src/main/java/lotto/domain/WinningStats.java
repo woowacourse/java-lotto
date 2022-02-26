@@ -21,9 +21,8 @@ public class WinningStats {
         return winningStatistics.get(lottoRank);
     }
 
-    public double getEarningsRate(int money) {
-        long totalPrize = getTotalPrize();
-        return totalPrize / (double)money;
+    public double getEarningsRate(PurchaseAmount money) {
+        return getTotalPrize() / (double)money.amount();
     }
 
     long getTotalPrize() {

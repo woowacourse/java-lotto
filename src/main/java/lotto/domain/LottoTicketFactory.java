@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 import lotto.domain.lottonumbers.LottoTicket;
 
 public class LottoTicketFactory {
-    private static final int LOTTO_PRICE = 1000;
+    private static final int LOTTO_TICKET_PRICE = 1000;
 
     private static final List<LottoNumber> availableLottoNumbers;
 
@@ -26,15 +26,11 @@ public class LottoTicketFactory {
                 .collect(Collectors.toList());
     }
 
-    public static List<LottoTicket> createTickets(TryMoney tryMoney) {
-        int ticketNumbers = getAvailableLottoTicketsCount(tryMoney);
-        return IntStream.range(0, ticketNumbers)
+    public static List<LottoTicket> createTickets(PurchaseAmount money) {
+        int availableTicketNumber = money.getAvailableTicketNumber(LOTTO_TICKET_PRICE);
+        return IntStream.range(0, availableTicketNumber)
                 .mapToObj(i -> createTicketShuffled())
                 .collect(Collectors.toUnmodifiableList());
-    }
-
-    private static int getAvailableLottoTicketsCount(TryMoney tryMoney) {
-        return tryMoney.amount() / LOTTO_PRICE;
     }
 
     private static LottoTicket createTicketShuffled() {

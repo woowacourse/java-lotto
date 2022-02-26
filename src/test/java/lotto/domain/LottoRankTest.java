@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoRankTest {
+
     @ParameterizedTest
     @CsvSource(value = {"true, true", "false, false"})
     @DisplayName("보너스 볼을 포함하면 2등이고 포함하지 않으면 3등이다.")

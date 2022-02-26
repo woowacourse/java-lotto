@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoTicketFactory;
-import lotto.domain.TryMoney;
+import lotto.domain.PurchaseAmount;
 import lotto.domain.WinningStats;
 import lotto.domain.lottonumbers.LottoTicket;
 import lotto.domain.lottonumbers.WinningNumbers;
@@ -14,16 +14,16 @@ import lotto.view.OutputView;
 public class LottoController {
 
     public void run() {
-        TryMoney inputTryMoney = inputMoney();
+        PurchaseAmount purchaseAmount = inputMoney();
 
-        List<LottoTicket> lottoTickets = purchaseLottoTickets(inputTryMoney);
+        List<LottoTicket> lottoTickets = purchaseLottoTickets(purchaseAmount);
         OutputView.printPurchasedTickets(lottoTickets);
 
         WinningNumbers winningNumbers = inputWinningNumbers();
 
         WinningStats winningStats = calculateStatistics(lottoTickets, winningNumbers);
 
-        OutputView.printStatistics(winningStats, inputTryMoney);
+        OutputView.printStatistics(winningStats, purchaseAmount);
     }
 
     private WinningStats calculateStatistics(List<LottoTicket> lottoTickets, WinningNumbers winningNumbers) {
@@ -39,8 +39,8 @@ public class LottoController {
         return winningStats;
     }
 
-    private TryMoney inputMoney() {
-        IndividualInput<TryMoney> input = () -> new TryMoney(InputView.inputMoney());
+    private PurchaseAmount inputMoney() {
+        IndividualInput<PurchaseAmount> input = () -> new PurchaseAmount(InputView.inputMoney());
         return commonInputProcess(input);
     }
 
@@ -59,8 +59,8 @@ public class LottoController {
         }
     }
 
-    private List<LottoTicket> purchaseLottoTickets(TryMoney inputTryTryMoney) {
-        return LottoTicketFactory.createTickets(inputTryTryMoney);
+    private List<LottoTicket> purchaseLottoTickets(PurchaseAmount purchaseAmount) {
+        return LottoTicketFactory.createTickets(purchaseAmount);
     }
 
     private interface IndividualInput<T> {

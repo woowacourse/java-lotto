@@ -17,7 +17,7 @@ class LottoTicketFactoryTest {
         // given
 
         // when
-        List<LottoTicket> lottoTickets = LottoTicketFactory.createTickets(new TryMoney(money));
+        List<LottoTicket> lottoTickets = LottoTicketFactory.createTickets(new PurchaseAmount(money));
 
         // then
         assertThat(lottoTickets.size()).isEqualTo(ticketCount);
