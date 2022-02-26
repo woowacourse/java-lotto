@@ -22,8 +22,12 @@ public class LottoGenerator {
 		.collect(Collectors.toList());
 
 	public static List<LottoNumber> generateRandomLottoNumbers() {
+		List<LottoNumber> lottoNumbers = new ArrayList<>();
 		Collections.shuffle(candidates);
-		return new ArrayList<>(candidates.subList(START_INDEX, END_INDEX));
+		for (int index = START_INDEX; index < END_INDEX; index++) {
+			lottoNumbers.add(candidates.get(index));
+		}
+		return lottoNumbers;
 	}
 
 	public static List<LottoNumber> generateAnswerLottoNumbers(List<Integer> userInput) {
