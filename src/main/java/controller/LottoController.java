@@ -5,7 +5,10 @@ import static validator.NumberValidators.validateNoDuplicateInList;
 import static validator.NumberValidators.validateNoDuplicates;
 import static validator.NumberValidators.validateTotalLottoPriceUnit;
 import static validator.NumberValidators.validateLottoNumbersSize;
+import static view.InputView.requestManualLottoCount;
+import static view.InputView.requestManualLottos;
 
+import domain.Lotto;
 import domain.LottoNumber;
 import domain.LottoReferee;
 import domain.Lottos;
@@ -21,7 +24,18 @@ public class LottoController {
     public Lottos initCustomerLottos(int totalLottoPrice) {
         validateTotalLottoPriceUnit(totalLottoPrice);
 
-        return Lottos.of(totalLottoPrice / LOTTO_PRICE);
+        int totalLottosCount = totalLottoPrice / LOTTO_PRICE;
+        int manualLottosCount = requestManualLottoCount();
+
+        List<Lotto> manualLottos = requestManualLottos(manualLottosCount).stream()
+                .map(this::getValidLottoNumbers)
+                .map(Lotto::new)
+                .collect(Collectors.toList());
+
+        Lottos lottos = new Lottos(manualLottos);
+        lottos.createAndAddLottos(totalLottosCount - manualLottosCount);
+
+        return lottos;
     }
 
     public LottoReferee initLottoReferee(String winningNumbersInput, int bonusBallValue) {
