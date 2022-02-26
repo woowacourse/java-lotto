@@ -12,16 +12,16 @@ public class MoneyTest {
     @Test
     @DisplayName("돈을 생성하는 기능")
     void createMoney() {
-        Money money = new Money(1000);
+        LottoMoney lottoMoney = new LottoMoney(1000);
 
-        assertThat(money).isNotNull();
+        assertThat(lottoMoney).isNotNull();
     }
 
     @ParameterizedTest
     @ValueSource(ints = {-100, 0})
     @DisplayName("돈을 생성하지 못하는 경우")
     void createInvalidMoney(int amount) {
-        assertThatThrownBy(() -> new Money(amount))
+        assertThatThrownBy(() -> new LottoMoney(amount))
             .isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -21,7 +21,7 @@ public class WinningStatistics {
         }
     }
 
-    public double calculateProfitRate(Money money) {
+    public double calculateProfitRate(LottoMoney lottoMoney) {
         double profit = DEFAULT_VALUE;
 
         for (LottoReward lottoReward : statistics.keySet()) {
@@ -29,7 +29,7 @@ public class WinningStatistics {
             profit += rewardCount * lottoReward.getPrice();
         }
 
-        return profit / money.getAmount();
+        return profit / lottoMoney.getAmount();
     }
 
     public Map<LottoReward, Integer> getWinningStatistics() {
