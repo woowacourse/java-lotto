@@ -15,30 +15,34 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
-    private Money purchaseAmount;
+    private static final int LOTTO_PRICE = 1000;
 
     public void run() {
-        Lottos lottos = buyLotto();
+        Money purchaseAmount = payForLotto();
+        Lottos lottos = buyLotto(purchaseAmount);
         WinningLotto winningLotto = pickLastWeekWinningNumbers();
-        calculateLottoResult(lottos, winningLotto);
+        calculateLottoResult(purchaseAmount, lottos, winningLotto);
     }
 
-    private Lottos buyLotto() {
+    private Money payForLotto() {
         OutputView.printPurchaseAmountRequest();
         try {
-            purchaseAmount = new Money(convertPurchaseAmount(InputView.inputPurchaseAmount()));
-            Lottos lottos = new Lottos(purchaseAmount);
-            OutputView.printLottos(lottos);
-            return lottos;
+            return new Money(convertPurchaseAmount(InputView.inputPurchaseAmount()));
         } catch (IllegalArgumentException error) {
             OutputView.printErrorMessage(error.getMessage());
-            return buyLotto();
+            return payForLotto();
         }
     }
 
     private int convertPurchaseAmount(String purchaseAmount) {
         NumberValidator.validateNumber(purchaseAmount);
-        return Integer.parseInt(purchaseAmount);
+        return Integer.parseInt(purchaseAmount) / LOTTO_PRICE * LOTTO_PRICE;
+    }
+
+    private Lottos buyLotto(Money purchaseAmount) {
+        Lottos lottos = new Lottos(purchaseAmount);
+        OutputView.printLottos(lottos);
+        return lottos;
     }
 
     private WinningLotto pickLastWeekWinningNumbers() {
@@ -82,7 +86,7 @@ public class LottoController {
         return Integer.parseInt(bonusBallNumber);
     }
 
-    private void calculateLottoResult(Lottos lottos, WinningLotto winningLotto) {
+    private void calculateLottoResult(Money purchaseAmount, Lottos lottos, WinningLotto winningLotto) {
         OutputView.printStatisticsTitle();
 
         LottoResult lottoResult = new LottoResult();
