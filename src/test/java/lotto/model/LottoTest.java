@@ -5,6 +5,10 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import java.util.List;
+import lotto.model.lotto.Lotto;
+import lotto.model.number.BonusNumber;
+import lotto.model.number.LottoNumber;
+import lotto.model.number.LottoNumbers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,7 +22,7 @@ public class LottoTest {
         List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                 new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
         LottoNumbers lottoNumbers1 = new LottoNumbers(lottoNumbers);
-        lotto = new Lotto((x, y) -> lottoNumbers1);
+        lotto = new Lotto((minimumNumber, maximumNumber, lottoLength) -> lottoNumbers1);
         assertThat(lotto).isInstanceOf(Lotto.class);
     }
 
@@ -27,7 +31,7 @@ public class LottoTest {
         List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                 new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
         LottoNumbers lottoNumbers1 = new LottoNumbers(lottoNumbers);
-        lotto = new Lotto((x,y) -> lottoNumbers1);
+        lotto = new Lotto((minimumNumber, maximumNumber, lottoLength) -> lottoNumbers1);
     }
 
     @Test

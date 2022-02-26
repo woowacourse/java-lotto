@@ -3,6 +3,7 @@ package lotto.model;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import lotto.model.number.BonusNumber;
 import org.junit.jupiter.api.Test;
 
 public class BonusNumberTest {

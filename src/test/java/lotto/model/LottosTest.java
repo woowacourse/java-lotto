@@ -4,6 +4,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import java.util.List;
+import lotto.model.lotto.Lotto;
+import lotto.model.lotto.Lottos;
+import lotto.model.number.BonusNumber;
+import lotto.model.number.LottoNumber;
+import lotto.model.number.LottoNumbers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,8 +23,8 @@ public class LottosTest {
         List<LottoNumber> numbers2 = Arrays.asList(new LottoNumber(3),new LottoNumber(4),new LottoNumber(5),new LottoNumber(6),new LottoNumber(7),new LottoNumber(8));
         LottoNumbers lottoNumbers1 = new LottoNumbers(numbers1);
         LottoNumbers lottoNumbers2 = new LottoNumbers(numbers2);
-        lotto1 = new Lotto((minimumNumber, maximumNumber) -> lottoNumbers1);
-        lotto2 = new Lotto((x,y) -> lottoNumbers2);
+        lotto1 = new Lotto((minimumNumber, maximumNumber, lottoLength) -> lottoNumbers1);
+        lotto2 = new Lotto((minimumNumber, maximumNumber, lottoLength) -> lottoNumbers2);
         lottos = new Lottos(new Money(0));
     }
 

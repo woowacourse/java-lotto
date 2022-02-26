@@ -1,11 +1,10 @@
 package lotto.view;
 
-import java.util.List;
 import java.util.stream.Collectors;
-import lotto.model.Lotto;
-import lotto.model.LottoNumber;
-import lotto.model.Lottos;
 import lotto.model.Rank;
+import lotto.model.lotto.Lotto;
+import lotto.model.lotto.Lottos;
+import lotto.model.number.LottoNumber;
 
 public class ResultView {
 

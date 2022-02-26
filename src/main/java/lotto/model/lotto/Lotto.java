@@ -1,18 +1,23 @@
-package lotto.model;
+package lotto.model.lotto;
 
 import java.util.stream.Collectors;
-import lotto.util.LottoUtil;
+import lotto.model.Rank;
+import lotto.model.number.BonusNumber;
+import lotto.model.number.LottoNumber;
+import lotto.model.number.LottoNumbers;
 
 public class Lotto {
 
     private static final int LOTTO_START_NUMBER = 1;
     private static final int LOTTO_LAST_NUMBER = 45;
+    private static final int LOTTO_LENGTH = 6;
 
     private final LottoNumbers numbers;
     private Rank rank;
 
-    public Lotto(LottoUtil randomNumbersGenerator) {
-        this.numbers = randomNumbersGenerator.generateLottoNumbers(LOTTO_START_NUMBER, LOTTO_LAST_NUMBER);
+    public Lotto(LottoGenerator autoLottoNumbersGenerator) {
+        this.numbers = autoLottoNumbersGenerator.generateLottoNumbers(LOTTO_START_NUMBER, LOTTO_LAST_NUMBER,
+                LOTTO_LENGTH);
         this.rank = Rank.LOSER;
     }
 

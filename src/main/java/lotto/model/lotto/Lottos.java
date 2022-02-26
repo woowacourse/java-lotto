@@ -1,11 +1,14 @@
-package lotto.model;
+package lotto.model.lotto;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import lotto.util.LottoNumbersGenerator;
+import lotto.model.Money;
+import lotto.model.Rank;
+import lotto.model.number.BonusNumber;
+import lotto.model.number.LottoNumbers;
 
 public class Lottos {
 
@@ -22,7 +25,7 @@ public class Lottos {
 
     private void insertLottoToLottos(int countLotto) {
         for (int i = 0; i < countLotto; i++) {
-            insert(new Lotto(new LottoNumbersGenerator()));
+            insert(new Lotto(new AutoLottoNumbersGenerator()));
         }
     }
 

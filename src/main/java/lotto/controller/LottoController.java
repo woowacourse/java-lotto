@@ -2,11 +2,11 @@ package lotto.controller;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
-import lotto.model.BonusNumber;
-import lotto.model.LottoNumber;
-import lotto.model.LottoNumbers;
-import lotto.model.Lottos;
-import lotto.model.WinningLotto;
+import lotto.model.lotto.Lottos;
+import lotto.model.lotto.WinningLotto;
+import lotto.model.number.BonusNumber;
+import lotto.model.number.LottoNumber;
+import lotto.model.number.LottoNumbers;
 import lotto.util.InputValidator;
 import lotto.view.InputView;
 import lotto.view.ResultView;

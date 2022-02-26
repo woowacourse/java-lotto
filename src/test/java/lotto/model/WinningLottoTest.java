@@ -5,6 +5,10 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import java.util.List;
+import lotto.model.lotto.WinningLotto;
+import lotto.model.number.BonusNumber;
+import lotto.model.number.LottoNumber;
+import lotto.model.number.LottoNumbers;
 import org.junit.jupiter.api.Test;
 
 public class WinningLottoTest {

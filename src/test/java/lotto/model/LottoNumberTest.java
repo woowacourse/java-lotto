@@ -3,8 +3,7 @@ package lotto.model;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.util.ArrayList;
-import java.util.List;
+import lotto.model.number.LottoNumber;
 import org.junit.jupiter.api.Test;
 
 public class LottoNumberTest {

@@ -1,6 +1,9 @@
-package lotto.model;
+package lotto.model.lotto;
 
 import java.util.stream.Collectors;
+import lotto.model.number.BonusNumber;
+import lotto.model.number.LottoNumber;
+import lotto.model.number.LottoNumbers;
 
 public class WinningLotto {
 
