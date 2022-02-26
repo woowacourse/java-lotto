@@ -2,6 +2,7 @@ package lotto.domain.vo;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 public class WinningNumbers {
@@ -52,5 +53,31 @@ public class WinningNumbers {
 
     public boolean equalsBonusNumber(LottoNumber number) {
         return bonusNumber.equals(number);
+    }
+
+    @Override
+    public String toString() {
+        return "WinningNumbers{" +
+                "lottoNumbers=" + lottoNumbers +
+                ", bonusNumber=" + bonusNumber +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        WinningNumbers that = (WinningNumbers) o;
+        return Objects.equals(lottoNumbers, that.lottoNumbers) && Objects
+                .equals(bonusNumber, that.bonusNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers, bonusNumber);
     }
 }

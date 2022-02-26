@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import lotto.domain.LottoPrize;
 import lotto.domain.generator.LottoGenerator;
 
@@ -37,5 +38,29 @@ public class Lottos {
         }
 
         return Collections.unmodifiableMap(result);
+    }
+
+    @Override
+    public String toString() {
+        return "Lottos{" +
+                "lottos=" + lottos +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Lottos lottos1 = (Lottos) o;
+        return Objects.equals(lottos, lottos1.lottos);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottos);
     }
 }
