@@ -11,19 +11,13 @@ public class Payment {
 	}
 
 	public Payment(String payment) {
-		this.payment = toInt(payment);
-		checkPayment(this.payment);
+		this(Integer.parseInt(payment));
 	}
 
 	private void checkPayment(int payment) {
 		checkNegative(payment);
 		checkMinLottoPrice(payment);
 		checkPaymentLimit(payment);
-	}
-
-	private int toInt(String payment) {
-		int changeInt = Integer.parseInt(payment);
-		return changeInt;
 	}
 
 	private void checkMinLottoPrice(int payment) {
