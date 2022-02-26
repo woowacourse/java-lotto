@@ -15,7 +15,7 @@ public enum LotteryRule {
         return number >= MINIMUM.number && number <= MAXIMUM.number;
     }
 
-    public int getNumber() {
-        return number;
+    public static boolean isLotteryTicketSize(int size) {
+        return size == TICKET_SIZE.number;
     }
 }

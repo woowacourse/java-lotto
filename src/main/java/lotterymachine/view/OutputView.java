@@ -23,7 +23,7 @@ public class OutputView {
     public static void printWinningLotteryResults(Map<WinningLottery, Integer> lotteryTicketResults) {
         System.out.println("당첨 통계\n" +
                 "---------");
-        for (WinningLottery winningLottery: lotteryTicketResults.keySet()) {
+        for (WinningLottery winningLottery : lotteryTicketResults.keySet()) {
             printWinningLotteryResult(winningLottery, lotteryTicketResults.get(winningLottery));
         }
     }

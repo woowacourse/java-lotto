@@ -1,6 +1,8 @@
 package lotterymachine.model;
 
 import java.util.Arrays;
+import java.util.EnumMap;
+import java.util.Map;
 
 public enum WinningLottery {
     ZERO(0, 0, false),
@@ -39,5 +41,12 @@ public enum WinningLottery {
 
     public int getPrice() {
         return price;
+    }
+
+    public static Map<WinningLottery, Integer> getWinningLotteries() {
+        Map<WinningLottery, Integer> winningLotteries = new EnumMap<>(WinningLottery.class);
+        Arrays.stream(values())
+                .forEach(value -> winningLotteries.put(value, INITIAL_NUMBER_OF_MATCHING_TICKET));
+        return winningLotteries;
     }
 }

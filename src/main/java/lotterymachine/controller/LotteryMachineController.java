@@ -2,6 +2,7 @@ package lotterymachine.controller;
 
 import lotterymachine.model.LotteryTicket;
 import lotterymachine.model.LotteryTickets;
+import lotterymachine.model.WinningLotteryNumbers;
 import lotterymachine.model.WinningLottery;
 import lotterymachine.utils.LotteryNumbersGenerator;
 
@@ -21,8 +22,8 @@ public class LotteryMachineController {
         }
     }
 
-    public Map<WinningLottery, Integer> getLotteryTicketResult(List<Integer> numbers, int bonusNumber) {
-        return lotteryTickets.getLotteriesResult(numbers, bonusNumber);
+    public Map<WinningLottery, Integer> getLotteryTicketResult(WinningLotteryNumbers winningLotteryNumbers) {
+        return lotteryTickets.getLotteriesResult(winningLotteryNumbers);
     }
 
     public List<LotteryTicket> getLotteryTickets() {
@@ -31,7 +32,7 @@ public class LotteryMachineController {
 
     public int totalProfit(Map<WinningLottery, Integer> lotteryTicketResult) {
         int sum = 0;
-        for (WinningLottery winningLottery: lotteryTicketResult.keySet()) {
+        for (WinningLottery winningLottery : lotteryTicketResult.keySet()) {
             sum += winningLottery.getPrice() * lotteryTicketResult.get(winningLottery);
         }
         return sum;

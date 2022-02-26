@@ -1,13 +1,11 @@
 package lotterymachine.view;
 
-import lotterymachine.utils.LotteryRule;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-import static lotterymachine.utils.LotteryRule.*;
 import static lotterymachine.view.ErrorMessage.*;
 
 public class InputView {
@@ -28,30 +26,20 @@ public class InputView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         try {
             String[] input = scanner.nextLine().split(NUMBER_DELIMITER);
-            List<Integer> numbers = toIntegers(input);
-            validateWinningLotteryNumbers(numbers);
-            return numbers;
+            return toIntegers(input);
         } catch (RuntimeException runtimeException) {
             System.out.println(runtimeException.getMessage());
             return getWinningLotteryNumbers();
         }
     }
 
-    public static int getBonusNumber(List<Integer> numbers) {
+    public static int getBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         try {
-            int bonusNumber = toInt(scanner.nextLine());
-            validateBonusNumber(numbers, bonusNumber);
-            return bonusNumber;
+            return toInt(scanner.nextLine());
         } catch (RuntimeException runtimeException) {
             System.out.println(runtimeException.getMessage());
-            return getBonusNumber(numbers);
-        }
-    }
-
-    private static void validateBonusNumber(List<Integer> numbers, int bonusNumber) {
-        if (numbers.contains(bonusNumber)) {
-            throw new RuntimeException(DUPLICATE_BONUS_NUMBER.getMessage());
+            return getBonusNumber();
         }
     }
 
@@ -68,30 +56,5 @@ public class InputView {
                 .map(String::trim)
                 .map(InputView::toInt)
                 .collect(Collectors.toList());
-    }
-
-    private static void validateWinningLotteryNumbers(List<Integer> numbers) {
-        validateNumbers(numbers);
-        validateSize(numbers);
-        validateDuplication(numbers);
-    }
-
-    private static void validateNumbers(List<Integer> numbers) {
-        numbers.stream()
-                .filter(LotteryRule::isRangeOfNumber)
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException(OUT_OF_RANGE.getMessage()));
-    }
-
-    private static void validateSize(List<Integer> numbers) {
-        if (numbers.size() != TICKET_SIZE.getNumber()) {
-            throw new RuntimeException(INVALID_SIZE.getMessage());
-        }
-    }
-
-    private static void validateDuplication(List<Integer> input) {
-        if (input.stream().distinct().count() != input.size()) {
-            throw new RuntimeException(DUPLICATE_NUMBER.getMessage());
-        }
     }
 }

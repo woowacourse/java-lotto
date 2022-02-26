@@ -35,13 +35,18 @@ public class LotteryTicketsTest {
     @Test
     @DisplayName("당첨번호와 비교하여 로또 1등인 결과를 조회한다.")
     void findResult() {
-        LotteryTickets lotteryTickets = new LotteryTickets(1);
-        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
-        lotteryTickets.add(numbers);
+        LotteryTickets lotteryTickets = new LotteryTickets(2);
+        List<Integer> numbers1 = List.of(1, 2, 3, 4, 5, 6);
+        List<Integer> numbers2 = List.of(1, 2, 3, 7, 8, 9);
+        lotteryTickets.add(numbers1);
+        lotteryTickets.add(numbers2);
         int bonusNumber = 30;
-
-        Map<WinningLottery, Integer> result = lotteryTickets.getLotteriesResult(numbers, bonusNumber);
-
+        WinningLotteryNumbers winningLotteryNumbers = new WinningLotteryNumbers(numbers1, bonusNumber);
+        Map<WinningLottery, Integer> result = lotteryTickets.getLotteriesResult(winningLotteryNumbers);
+        for (WinningLottery winningLottery : result.keySet()) {
+            System.out.println(result.get(winningLottery));
+        }
+        assertThat(lotteryTickets.getLotteryTickets().size()).isEqualTo(2);
         assertThat(result.get(WinningLottery.SIX)).isEqualTo(1);
     }
 }
