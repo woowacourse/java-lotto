@@ -34,12 +34,16 @@ public class LottoMachine {
                 .collect(Collectors.toList());
     }
 
-    private static Lottos addRandomLottos(final List<Lotto> lottos, final PurchaseLottoCounts purchaseCounts) {
-        if (!purchaseCounts.isManualSize(lottos.size())) {
+    private static Lottos addRandomLottos(final List<Lotto> manuallottos, final PurchaseLottoCounts purchaseCounts) {
+        checkManualLottoSize(manuallottos, purchaseCounts);
+        manuallottos.addAll(createRandomLottosByAutomaticCounts(purchaseCounts.getAutomaticCount()));
+        return new Lottos(manuallottos);
+    }
+
+    private static void checkManualLottoSize(List<Lotto> manuallottos, PurchaseLottoCounts purchaseCounts) {
+        if (!purchaseCounts.isManualSize(manuallottos.size())) {
             throw new IllegalArgumentException("[ERROR] 수동 로또 번호 갯수가 입력된 수동 구매 갯수와 다릅니다.");
         }
-        lottos.addAll(createRandomLottosByAutomaticCounts(purchaseCounts.getAutomaticCount()));
-        return new Lottos(lottos);
     }
 
     private static List<Lotto> createRandomLottosByAutomaticCounts(final int automaticLottoCounts) {
