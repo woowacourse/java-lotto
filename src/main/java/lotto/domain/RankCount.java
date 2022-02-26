@@ -9,18 +9,18 @@ public class RankCount {
     private final Map<Rank, Integer> rankCount;
 
     public RankCount(Lottos lottos, WinningLotto winningLotto, BonusNumber bonusNumber) {
+        this.rankCount = calculateRankCount(lottos, winningLotto, bonusNumber);
+    }
+
+    private Map<Rank, Integer> calculateRankCount(Lottos lottos, WinningLotto winningLotto, BonusNumber bonusNumber) {
         Map<Rank, Integer> rankCount = new EnumMap<>(Rank.class);
-        this.rankCount = rankCount;
-        calculateRankCount(lottos, winningLotto, bonusNumber);
-    }
-
-    private void calculateRankCount(Lottos lottos, WinningLotto winningLotto, BonusNumber bonusNumber) {
         for (Lotto lotto : lottos.getLottos()) {
-            increaseCount(lotto.getRank(winningLotto, bonusNumber));
+            increaseCount(rankCount, lotto.getRank(winningLotto, bonusNumber));
         }
+        return rankCount;
     }
 
-    private void increaseCount(Rank rank) {
+    private void increaseCount(Map<Rank, Integer> rankCount, Rank rank) {
         rankCount.putIfAbsent(rank, 0);
         rankCount.computeIfPresent(rank, (key, value) -> value + 1);
     }
