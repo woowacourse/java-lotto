@@ -1,6 +1,5 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import utils.LotteryMessage;
@@ -23,9 +22,9 @@ public class Lottery {
 	}
 
 	public int countSameNumber(final Lottery lottery) {
-		final List<LotteryNumber> differences = new ArrayList<>(this.numbers);
-		differences.removeAll(lottery.numbers);
-		return LOTTERY_SIZE - differences.size();
+		return (int)numbers.stream()
+			.filter(lottery::contains)
+			.count();
 	}
 
 	public boolean contains(final LotteryNumber number) {
