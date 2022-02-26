@@ -13,12 +13,12 @@ import org.junit.jupiter.api.Test;
 
 public class LottoMachineTest {
 
-    @DisplayName("로또 번호 6개를 생성할 수 있다.")
+    @DisplayName("랜덤한 로또 번호를 생성할 수 있다.")
     @Test
     void createRandomLottoNumbers() {
-        final Lotto randomLotto = LottoMachine.createRandomLotto();
+        final Lottos lottos = LottoMachine.buyLotto(new ArrayList<>(), 1);
 
-        assertThat(randomLotto.getLottoNumbers()).hasSize(6);
+        assertThat(lottos.getLottos()).hasSize(1);
     }
 
     @DisplayName("남은 번호로 랜덤 로또 생성 요청 시 음수가 들어오면 예외가 발생한다.")

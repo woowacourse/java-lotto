@@ -47,7 +47,7 @@ public class LottoMachine {
         }
     }
 
-    public static Lotto createRandomLotto() {
+    private static Lotto createRandomLotto() {
         return new Lotto(createRandomLottoNumbers());
     }
 
