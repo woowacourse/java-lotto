@@ -4,49 +4,53 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/*
+ * 지난 주 당첨 번호를 List<LottoNumber>로 저장하는 일급 컬렉션 Class
+ */
 public class WinningNumbers {
     private static final String ERROR_SIZE = "[ERROR] 당첨 번호는 6개여야 합니다";
     private static final String ERROR_DUPLICATE = "[ERROR] 당첨 번호는 중복되면 안됩니다";
     private static final int WINNING_NUMBERS_SIZE = 6;
 
-    private final List<WinningNumber> winningNumbers;
+    private final List<LottoNumber> winningNumbers;
 
-    private WinningNumbers(List<WinningNumber> winningNumbers) {
+    private WinningNumbers(List<LottoNumber> winningNumbers) {
         validate(winningNumbers);
-        this.winningNumbers = winningNumbers;
+        this.winningNumbers = List.copyOf(winningNumbers);
     }
 
-    private void validate(List<WinningNumber> winningNumbers) {
+    private void validate(List<LottoNumber> winningNumbers) {
         checkSize(winningNumbers);
         checkDuplicate(winningNumbers);
     }
 
-    private void checkSize(List<WinningNumber> winningNumbers) {
+    private void checkSize(List<LottoNumber> winningNumbers) {
         if (winningNumbers.size() != WINNING_NUMBERS_SIZE) {
             throw new IllegalArgumentException(ERROR_SIZE);
         }
     }
 
-    private void checkDuplicate(List<WinningNumber> winningNumbers) {
+    private void checkDuplicate(List<LottoNumber> winningNumbers) {
         if (getDistinctCount(winningNumbers) != winningNumbers.size()) {
             throw new IllegalArgumentException(ERROR_DUPLICATE);
         }
     }
 
     public static WinningNumbers from(String[] inputs) {
-        List<WinningNumber> winningNumbers = Arrays.stream(inputs)
-                .map(WinningNumber::from)
+        List<LottoNumber> winningNumbers = Arrays.stream(inputs)
+                .map(LottoNumber::from)
                 .collect(Collectors.toList());
         return new WinningNumbers(winningNumbers);
     }
 
-    private int getDistinctCount(List<WinningNumber> winningNumbers) {
+    private int getDistinctCount(List<LottoNumber> winningNumbers) {
         return (int) winningNumbers.stream()
                 .distinct()
                 .count();
     }
 
-    public boolean match(int number) {
-        return winningNumbers.stream().anyMatch(winningNumber -> winningNumber.match(number));
+    public boolean match(LottoNumber number) {
+        return winningNumbers.stream()
+                .anyMatch(winningNumber -> winningNumber.equals(number));
     }
 }

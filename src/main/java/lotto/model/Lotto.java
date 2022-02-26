@@ -3,29 +3,29 @@ package lotto.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import lotto.model.number.LottoNumber;
 import lotto.model.number.WinningNumbers;
 
+/*
+ * 자동 로또 한 장을 의미하는 Class
+ */
 public class Lotto {
-    private static final List<Integer> NOMINEE_NUMBERS = new ArrayList<>();
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 45;
     private static final int NUMBER_COUNT = 6;
     private static final int PRICE = 1000;
 
-    static {
-        for (int number = MIN_NUMBER; number <= MAX_NUMBER; number++) {
-            NOMINEE_NUMBERS.add(number);
-        }
-    }
-
-    private List<Integer> numbers;
+    private List<LottoNumber> numbers;
 
     public Lotto() {
-        Collections.shuffle(NOMINEE_NUMBERS);
-        List<Integer> numbers = NOMINEE_NUMBERS.subList(0, NUMBER_COUNT);
+        drawNumbers();
         Collections.sort(numbers);
-
         this.numbers = List.copyOf(numbers);
+    }
+
+    private void drawNumbers() {
+        numbers = new ArrayList<>();
+        for (int i = 0; i < NUMBER_COUNT; i++) {
+            numbers.add(LottoNumber.draw());
+        }
     }
 
     public static int countAvailableTickets(Money money) {
@@ -38,11 +38,11 @@ public class Lotto {
                 .count();
     }
 
-    public boolean contains(int number) {
+    public boolean contains(LottoNumber number) {
         return numbers.contains(number);
     }
 
-    public List<Integer> getNumbers() {
+    public List<LottoNumber> getNumbers() {
         return numbers;
     }
 }

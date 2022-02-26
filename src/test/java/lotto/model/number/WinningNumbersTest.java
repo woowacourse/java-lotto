@@ -24,9 +24,8 @@ public class WinningNumbersTest {
     @Test
     public void size_7_exception() {
         standardNumbers.add("7");
-        assertThatThrownBy(() -> {
-            WinningNumbers.from(standardNumbers.toArray(new String[0]));
-        }).isInstanceOf(IllegalArgumentException.class)
+        assertThatThrownBy(() -> WinningNumbers.from(standardNumbers.toArray(new String[0])))
+                .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 당첨 번호는 6개여야 합니다");
     }
 
@@ -34,9 +33,8 @@ public class WinningNumbersTest {
     @Test
     public void size_5_exception() {
         standardNumbers.remove(0);
-        assertThatThrownBy(() -> {
-            WinningNumbers.from(standardNumbers.toArray(new String[0]));
-        }).isInstanceOf(IllegalArgumentException.class)
+        assertThatThrownBy(() -> WinningNumbers.from(standardNumbers.toArray(new String[0])))
+                .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 당첨 번호는 6개여야 합니다");
     }
 
@@ -48,9 +46,8 @@ public class WinningNumbersTest {
         standardNumbers.remove(standardNumbers.indexOf(duplicatedNumber) + 1);
         standardNumbers.add(duplicatedNumber);
 
-        assertThatThrownBy(() -> {
-            WinningNumbers.from(standardNumbers.toArray(new String[0]));
-        }).isInstanceOf(IllegalArgumentException.class)
+        assertThatThrownBy(() -> WinningNumbers.from(standardNumbers.toArray(new String[0])))
+                .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 당첨 번호는 중복되면 안됩니다");
     }
 
@@ -58,13 +55,13 @@ public class WinningNumbersTest {
     @Test
     public void match_true() {
         WinningNumbers winningNumbers = WinningNumbers.from(standardNumbers.toArray(new String[0]));
-        assertThat(winningNumbers.match(1)).isTrue();
+        assertThat(winningNumbers.match(LottoNumber.from("1"))).isTrue();
     }
 
     @DisplayName("당첨된 번호에 포함된 숫자가 아닐 때 false를 반환한다")
     @Test
     public void match_false() {
         WinningNumbers winningNumbers = WinningNumbers.from(standardNumbers.toArray(new String[0]));
-        assertThat(winningNumbers.match(7)).isFalse();
+        assertThat(winningNumbers.match(LottoNumber.from("7"))).isFalse();
     }
 }
