@@ -94,9 +94,15 @@ public class LottoController {
     public void determineWinningNumber(List<Integer> winningNumbers, int bonusBall) {
 >>>>>>> dbac179 (refactor : List<String>을 List<Integer> 로 변환해주는 역할 View에 위임)
         LottoGenerator lottoGenerator = new WinningLottoGenerator();
+<<<<<<< HEAD
         Lotto winningLotto = lottoGenerator.generateLotto(winningNumbers);
         this.winningLotto = new WinningLotto(winningLotto, new LottoNumber(bonusBall));
 >>>>>>> 5b2a52c (refactor: 로또 생성 기능 인터페이스로 분리)
+=======
+        Lotto winningLotto = lottoGenerator.generateWinningLotto(winningNumbers);
+
+        this.winningLotto = new WinningLotto(winningLotto, LottoNumber.valueOf(bonusBall));
+>>>>>>> 8185971 (feat : 반복되는 LottoNumber 인스턴스 캐싱하기)
     }
 
     public List<Result> judgeLottos() {

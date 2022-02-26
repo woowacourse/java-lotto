@@ -49,6 +49,7 @@ class WinningLottoTest {
         LottoNumber bonusBall = new LottoNumber(1);
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         assertThatThrownBy(() -> new WinningLotto(winningNumbers,bonusBall))
 >>>>>>> 01f73d4 (feat: Winning Lotto 당첨번호와 보너스볼 간 중복검사)
 =======
@@ -57,6 +58,9 @@ class WinningLottoTest {
 =======
         assertThatThrownBy(() -> new WinningLotto(lottoGenerator.generateLotto(winningNumbers), bonusBall))
 >>>>>>> 94c4d43 (style: 코드 포멧팅)
+=======
+        assertThatThrownBy(() -> new WinningLotto(lottoGenerator.generateWinningLotto(winningNumbers), bonusBall))
+>>>>>>> 8185971 (feat : 반복되는 LottoNumber 인스턴스 캐싱하기)
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ExceptionMessage.LOTTO_AND_BONUS_BALL_DUPLICATION);
     }

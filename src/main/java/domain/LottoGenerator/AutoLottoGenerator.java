@@ -4,9 +4,13 @@ import domain.Lotto.Lotto;
 import domain.Lotto.LottoNumber;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import java.util.ArrayList;
 =======
 >>>>>>> d5f0ef8 (refactor: 패키지 분리)
+=======
+import java.util.ArrayList;
+>>>>>>> 8185971 (feat : 반복되는 LottoNumber 인스턴스 캐싱하기)
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -22,6 +26,7 @@ public class AutoLottoGenerator implements LottoGenerator {
 
     @Override
 <<<<<<< HEAD
+<<<<<<< HEAD
     public Lotto generateLotto() {
         List<LottoNumber> lottoNumbers = new ArrayList<>(LottoNumber.values());
         Collections.shuffle(lottoNumbers);
@@ -35,14 +40,27 @@ public class AutoLottoGenerator implements LottoGenerator {
 =======
     public Lotto generateLotto(List<Integer> numbers) {
         Collections.shuffle(numbers);
+=======
+    public Lotto generateLotto() {
+        List<LottoNumber> lottoNumbers = new ArrayList<>(LottoNumber.values());
+        Collections.shuffle(lottoNumbers);
+>>>>>>> 8185971 (feat : 반복되는 LottoNumber 인스턴스 캐싱하기)
 
-        List<LottoNumber> lottoNumbers = numbers.stream()
+        List<LottoNumber> collect = lottoNumbers.stream()
                 .limit(LOTTO_SIZE)
-                .map(LottoNumber::new)
                 .sorted(Comparator.comparing(LottoNumber::getNumber))
                 .collect(Collectors.toList());
 
+<<<<<<< HEAD
         return new Lotto(lottoNumbers);
 >>>>>>> d5f0ef8 (refactor: 패키지 분리)
+=======
+        return new Lotto(collect);
+    }
+
+    @Override
+    public Lotto generateWinningLotto(List<Integer> numbers) {
+        return null;
+>>>>>>> 8185971 (feat : 반복되는 LottoNumber 인스턴스 캐싱하기)
     }
 }

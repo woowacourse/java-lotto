@@ -11,9 +11,10 @@ import domain.LottoGenerator.LottoGenerator;
 import domain.LottoGenerator.ManualLottoGenerator;
 =======
 import domain.Lotto.Lotto;
-import domain.Lotto.LottoNumberFactory;
 import domain.Lotto.LottoNumber;
+import domain.Lotto.LottoNumberFactory;
 import domain.Lotto.WinningLotto;
+import domain.LottoGenerator.AutoLottoGenerator;
 import domain.LottoGenerator.LottoGenerator;
 import domain.LottoGenerator.WinningLottoGenerator;
 import domain.player.Money;
@@ -112,7 +113,7 @@ class PlayerTest {
             lottoNumbers.add(i);
         }
         LottoGenerator lottoGenerator = new WinningLottoGenerator();
-        WinningLotto winningLotto = new WinningLotto(lottoGenerator.generateLotto(lottoNumbers), new LottoNumber(BONUS_BALL_NUMBER));
+        WinningLotto winningLotto = new WinningLotto(lottoGenerator.generateLotto(), new LottoNumber(BONUS_BALL_NUMBER));
         List<Result> actual = player.judgeAll(winningLotto);
         int expected = 15;
 

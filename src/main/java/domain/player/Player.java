@@ -55,7 +55,7 @@ public class Player {
     public void purchaseLotto(LottoGenerator lottoGenerator, List<Integer> lottoNumbers) {
         int numberOfPurchases = getNumberOfPurchases();
         for (int i = 0; i < numberOfPurchases; i++) {
-            lottos.add(lottoGenerator.generateLotto(lottoNumbers));
+            lottos.add(lottoGenerator.generateLotto());
         }
     }
 
