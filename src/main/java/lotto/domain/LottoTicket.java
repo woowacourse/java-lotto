@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class LottoTicket {
 
@@ -11,7 +12,7 @@ public class LottoTicket {
         this.numbers = lottoTicket;
     }
 
-    public Rank compareNumbers(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
+    public Rank compareNumbers(Set<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
         int totalMatchNumber = (int) numbers.stream()
                 .filter(winningNumbers::contains)
                 .count();

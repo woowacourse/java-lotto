@@ -1,7 +1,8 @@
 package lotto.domain;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class WinningNumbers {
 
@@ -10,14 +11,14 @@ public class WinningNumbers {
     private static final String ERROR_DUPLICATION_BONUS_NUMBER = "지난주 당첨 번호와 중복되는 숫자입니다.";
     private static final int LOTTO_NUMBER_SIZE = 6;
 
-    private final List<LottoNumber> winningNumbers;
+    private final Set<LottoNumber> winningNumbers;
     private final LottoNumber bonusNumber;
 
     public WinningNumbers(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
-        this.winningNumbers = winningNumbers;
+        this.winningNumbers = new HashSet<>(winningNumbers);
         this.bonusNumber = bonusNumber;
 
-        validateWinningNumbersDuplication();
+        validateWinningNumbersDuplication(winningNumbers.size());
         validateWinningNumbersCount();
         validateBonusNumberDuplication();
     }
@@ -28,8 +29,8 @@ public class WinningNumbers {
         }
     }
 
-    private void validateWinningNumbersDuplication() {
-        if (isDuplicate()) {
+    private void validateWinningNumbersDuplication(int inputNumbersSize) {
+        if (this.winningNumbers.size() != inputNumbersSize) {
             throw new RuntimeException(ERROR_DUPLICATION_WINNING_NUMBERS);
         }
     }
@@ -40,12 +41,8 @@ public class WinningNumbers {
         }
     }
 
-    private boolean isDuplicate() {
-        return winningNumbers.stream().distinct().count() != winningNumbers.size();
-    }
-
-    public List<LottoNumber> getWinningNumbers() {
-        return new ArrayList<>(winningNumbers);
+    public Set<LottoNumber> getWinningNumbers() {
+        return new HashSet<>(winningNumbers);
     }
 
     public LottoNumber getBonusNumber() {
