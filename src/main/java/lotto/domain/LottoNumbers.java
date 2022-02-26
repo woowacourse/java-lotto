@@ -1,10 +1,12 @@
 package lotto.domain;
 
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoNumbers {
     private static final int LOTTO_COUNT = 6;
@@ -37,7 +39,7 @@ public class LottoNumbers {
 
     private List<LottoNumber> generateRandomLottoNumbers() {
         Collections.shuffle(candidateLottoNumbers);
-        return new ArrayList<>(candidateLottoNumbers.subList(0, LOTTO_COUNT));
+        return List.copyOf(candidateLottoNumbers.subList(0, LOTTO_COUNT));
     }
 
     private void validateLottoNumbers(String[] stringArr) {
@@ -68,7 +70,7 @@ public class LottoNumbers {
     private List<LottoNumber> convertStringArrToIntegerList(String[] array) {
         return Arrays.stream(array)
                 .map(string -> LottoNumber.of(Integer.parseInt(string)))
-                .collect(Collectors.toList());
+                .collect(collectingAndThen(toList(), Collections::unmodifiableList));
     }
 
     public boolean contains(LottoNumber otherLottoNumber) {
