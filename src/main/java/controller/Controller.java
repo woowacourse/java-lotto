@@ -9,18 +9,18 @@ import view.OutputView;
 
 public class Controller {
     public void run() {
-        LottoMachine lotto = getLotto();
-        printTickets(lotto);
+        LottoMachine lottoMachine = createLotto();
+        printTickets(lottoMachine);
         WinningNumbers winningNumbers = getWinningNumbers();
-        printResult(lotto, winningNumbers);
+        printResult(lottoMachine, winningNumbers);
     }
 
-    private LottoMachine getLotto() {
+    private LottoMachine createLotto() {
         try {
             return LottoMachine.from(InputView.requestAmount());
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception.getMessage());
-            return getLotto();
+            return createLotto();
         }
     }
 
