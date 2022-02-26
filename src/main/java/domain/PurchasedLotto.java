@@ -16,10 +16,10 @@ public class PurchasedLotto {
 
     public PurchasedLotto(int inputMoney) {
         this.inputMoney = inputMoney;
-        purchaseMaximunLottos();
+        purchaseMaximumLottos();
     }
 
-    private void purchaseMaximunLottos() {
+    private void purchaseMaximumLottos() {
         for (int i = 0; i < inputMoney / LOTTO_PRICE; i++) {
             purchase(new RandomPurchaseStrategy());
         }
@@ -31,8 +31,7 @@ public class PurchasedLotto {
     }
 
     public PrizeResult calculatePrizeResult(WinningNumber winningNumber) {
-        lottos.stream()
-                .forEach(lotto -> {
+        lottos.forEach(lotto -> {
                     Prize winnerPrice = lotto.calculateRank(winningNumber);
                     prizeResult.updatePrizeResult(winnerPrice);
                 });
