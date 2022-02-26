@@ -21,7 +21,7 @@ public enum WinningLottery {
     }
 
     public static WinningLottery find(boolean bonus, int number) {
-        if (bonus) {
+        if (number == BONUS_FIVE.number && bonus) {
             return BONUS_FIVE;
         }
         return Arrays.stream(values())
