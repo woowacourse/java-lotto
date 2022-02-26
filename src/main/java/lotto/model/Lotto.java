@@ -1,12 +1,10 @@
 package lotto.model;
 
-import java.util.ArrayList;
-import java.util.List;
 import lotto.model.number.LottoNumber;
 import lotto.model.number.LottoNumbers;
 
 /*
- * 자동 로또 한 장을 의미하는 Class
+ * 로또 한 장을 의미하는 Class
  */
 public class Lotto {
     private static final String ERROR_UNIT = "[ERROR] 구매 금액은 1000원 단위로 입력하세요";

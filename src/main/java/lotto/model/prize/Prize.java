@@ -2,6 +2,9 @@ package lotto.model.prize;
 
 import java.util.Arrays;
 
+/*
+ * 등수별 상금과 매칭 정보를 가지는 Enum Class
+ */
 public enum Prize {
     FIRST(6, 2_000_000_000, false),
     SECOND(5, 30_000_000, true),
