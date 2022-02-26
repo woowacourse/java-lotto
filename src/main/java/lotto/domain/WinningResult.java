@@ -1,14 +1,13 @@
 package lotto.domain;
 
-import java.util.LinkedHashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
 public class WinningResult {
-    private final Map<Ranking, Integer> winningResult = new LinkedHashMap<>();
+    private final Map<Ranking, Integer> winningResult = new EnumMap<>(Ranking.class);
 
     public WinningResult(List<Ranking> rankings) {
-        initialMap();
         putValues(rankings);
     }
 
@@ -24,16 +23,9 @@ public class WinningResult {
         return winningResult;
     }
 
-    private void initialMap() {
-        Ranking[] rankings = Ranking.sortByPrize();
-        for (Ranking ranking : rankings) {
-            winningResult.put(ranking, 0);
-        }
-    }
-
     private void putValues(List<Ranking> rankings) {
         for (Ranking ranking : rankings) {
-            winningResult.put(ranking, winningResult.get(ranking) + 1);
+            winningResult.put(ranking, winningResult.getOrDefault(ranking, 0) + 1);
         }
     }
 }

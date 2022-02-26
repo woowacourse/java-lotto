@@ -46,16 +46,21 @@ public class OutputView {
     }
 
     public static void printWinningStatistic(WinningResult winningResult) {
-        Map<Ranking, Integer> winningResultMap = winningResult.getWinningResult();
-
         StringBuilder stringBuilder = new StringBuilder();
-        for (Map.Entry<Ranking, Integer> entry : winningResultMap.entrySet()) {
+        for (Map.Entry<Ranking, Integer> entry : getWinningResultEntryList(winningResult)) {
             Ranking ranking = entry.getKey();
             int count = entry.getValue();
             generateResultContent(ranking, count, stringBuilder);
         }
 
         System.out.println(stringBuilder);
+    }
+
+    private static List<Map.Entry<Ranking, Integer>> getWinningResultEntryList(WinningResult winningResult) {
+        return winningResult.getWinningResult().entrySet()
+                .stream()
+                .sorted(Comparator.comparingInt(a -> a.getKey().getPrize()))
+                .collect(Collectors.toList());
     }
 
     private static void generateResultContent(Ranking ranking, int count, StringBuilder stringBuilder) {
