@@ -1,7 +1,9 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -19,8 +21,11 @@ public class RandomLottoMachine {
     }
 
     public static Lottos buyLotto(final List<Lotto> manualLottos, final int automaticLottoCounts) {
+        Objects.requireNonNull(manualLottos, "[ERROR] 수동 구매 로또는 null이 들어올 수 없습니다.");
+        final List<Lotto> lottos = new ArrayList<>(manualLottos);
         checkNegativeAutomaticLottoCounts(automaticLottoCounts);
-        return null;
+
+        return new Lottos(lottos);
     }
 
     private static void checkNegativeAutomaticLottoCounts(int automaticLottoCounts) {
