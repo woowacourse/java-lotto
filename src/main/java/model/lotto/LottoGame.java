@@ -1,6 +1,7 @@
 package model.lotto;
 
 import java.util.Arrays;
+import java.util.List;
 
 import model.bonusball.BonusBall;
 import model.result.RateOfReturn;
@@ -27,7 +28,7 @@ public class LottoGame {
         rateOfReturn = new RateOfReturn(lottoCount);
     }
 
-    public void storeWinningNumber(String input) {
+    public void storeWinningNumber(List<String> input) {
         lottoWinningNumber = new LottoWinningNumber(input);
     }
 

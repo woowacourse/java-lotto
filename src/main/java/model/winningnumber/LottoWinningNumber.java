@@ -1,6 +1,5 @@
 package model.winningnumber;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -19,38 +18,40 @@ public class LottoWinningNumber {
 
     private final Set<Integer> winningNumbers;
 
-    public LottoWinningNumber(String numbers) {
-        InputValidateUtils.inputBlank(numbers, WINNING_NUMBER_BLANK_ERROR_MESSAGE);
+    public LottoWinningNumber(List<String> numbers) {
+        inputBlank(numbers);
         InputValidateUtils.inputNumber(makeNumbersToString(numbers), WINNING_NUMBER_ERROR_MESSAGE);
         validateNumberOutOfRange(numbers);
         validateNumberSize(numbers);
         validateNumberReduplication(numbers);
-        this.winningNumbers = makeWinningNumbers(split(numbers));
+        this.winningNumbers = makeWinningNumbers(numbers);
     }
 
-    private List<String> split(String numbers) {
-        return Arrays.asList(numbers.replace(" ", "").split(","));
+    private void inputBlank(List<String> numbers) {
+        if (numbers == null || numbers.stream().anyMatch(String::isBlank)) {
+            throw new IllegalArgumentException(WINNING_NUMBER_BLANK_ERROR_MESSAGE);
+        }
     }
 
-    private String makeNumbersToString(String numbers) {
-        return String.join("", split(numbers));
+    private String makeNumbersToString(List<String> numbers) {
+        return String.join("", numbers);
     }
 
-    private void validateNumberOutOfRange(String numbers) {
-        split(numbers)
-                .forEach(number -> InputValidateUtils.inputOutOfRange(number, WINNING_NUMBER_RANGE_ERROR_MESSAGE));
+    private void validateNumberOutOfRange(List<String> numbers) {
+                numbers.forEach(number ->
+                        InputValidateUtils.inputOutOfRange(number, WINNING_NUMBER_RANGE_ERROR_MESSAGE));
     }
 
-    private void validateNumberSize(String numbers) {
-        if (split(numbers).size() != WINNING_NUMBER_SIZE) {
+    private void validateNumberSize(List<String> numbers) {
+        if (numbers.size() != WINNING_NUMBER_SIZE) {
             throw new IllegalArgumentException(WINNING_NUMBER_SIZE_ERROR_MESSAGE);
         }
     }
 
-    private void validateNumberReduplication(String numbers) {
-        long count = split(numbers).stream().distinct().count();
+    private void validateNumberReduplication(List<String> numbers) {
+        long count = numbers.stream().distinct().count();
 
-        if (count != split(numbers).size()) {
+        if (count != numbers.size()) {
             throw new IllegalArgumentException(WINNING_NUMBER_REDUPLICATION_ERROR_MESSAGE);
         }
     }
