@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
+
 import java.math.BigDecimal;
 
 import lotto.domain.vo.Money;
@@ -15,14 +16,14 @@ public class MoneyTest {
     @DisplayName("돈은 0이상이어야 한다.")
     void throwExceptionWhenNegative() {
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> new Money(-1L))
-            .withMessageMatching("돈은 0이상이어야 한다.");
+                .isThrownBy(() -> new Money(-1L))
+                .withMessageMatching("돈은 0이상이어야 한다.");
     }
 
     @Test
     @DisplayName("돈은 int의 범위를 넘어설 수 있다.")
     void checkOverInteger() {
-        assertThat(new Money((long)Integer.MAX_VALUE + 1)).isNotNull();
+        assertThat(new Money((long) Integer.MAX_VALUE + 1)).isNotNull();
     }
 
     @Test
