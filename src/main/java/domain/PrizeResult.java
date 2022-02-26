@@ -13,7 +13,7 @@ public class PrizeResult {
     }
 
     private void initFinalResult() {
-        Prize.getWinnerPrices().stream()
+        Prize.getWinnerPrices()
                 .forEach(winnerPrice -> prizeResult.put(winnerPrice, 0));
     }
 
