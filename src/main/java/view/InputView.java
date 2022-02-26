@@ -7,6 +7,8 @@ import static view.OutputView.print;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class InputView {
 
@@ -31,15 +33,15 @@ public class InputView {
         return validateAndParseNumber(readline());
     }
 
-    public static List<String> requestManualLottos(int count) {
-        print(REQUEST_MANUAL_LOTTOS_INPUT_MESSAGE);
-
-        List<String> lottos = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            lottos.add(readline());
+    public static List<String> requestManualLottos(int manualCount) {
+        if (manualCount == 0) {
+            return new ArrayList<>();
         }
 
-        return lottos;
+        print(REQUEST_MANUAL_LOTTOS_INPUT_MESSAGE);
+        return Stream.generate(InputView::readline)
+                .limit(manualCount)
+                .collect(Collectors.toList());
     }
 
     public static String requestWinningNumbers() {

@@ -20,24 +20,18 @@ import validator.NumberValidators;
 
 public class LottoController {
 
-    public static final String LOTTO_NUMBERS_DELIMITER = ", ";
+    private static final String LOTTO_NUMBERS_DELIMITER = ", ";
 
-    public Lottos initCustomerLottos(int totalLottoPrice) {
+    public Lottos initCustomerLottos(int totalLottoPrice, int manualCount) {
         validateTotalLottoPriceUnit(totalLottoPrice);
-
         int totalCount = totalLottoPrice / LOTTO_PRICE;
-        int manualCount = requestManualLottoCount();
-        validateManualLottosCount(manualCount, totalCount);
 
+        validateManualLottosCount(manualCount, totalCount);
         return initManualAndRandomLottos(totalCount, manualCount);
     }
 
     private Lottos initManualAndRandomLottos(int totalCount, int manualCount) {
         int randomCount = totalCount - manualCount;
-
-        if (manualCount == 0) {
-            return Lottos.ofRandom(randomCount);
-        }
 
         List<Lotto> manualLottos = getValidManualLottos(requestManualLottos(manualCount));
         return Lottos.of(manualLottos, randomCount);

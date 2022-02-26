@@ -1,4 +1,5 @@
 import static view.InputView.requestBonusNumber;
+import static view.InputView.requestManualLottoCount;
 import static view.InputView.requestTotalLottoPrice;
 import static view.InputView.requestWinningNumbers;
 import static view.OutputView.printLottoResults;
@@ -15,7 +16,7 @@ public class Application {
     private static final LottoController controller = new LottoController();
 
     public static void main(String[] args) {
-        Lottos lottos = controller.initCustomerLottos(requestTotalLottoPrice());
+        Lottos lottos = controller.initCustomerLottos(requestTotalLottoPrice(), requestManualLottoCount());
         printPurchaseInfo(lottos);
 
         LottoReferee referee = controller.initLottoReferee(requestWinningNumbers(), requestBonusNumber());

@@ -24,13 +24,6 @@ public class Lottos {
         return new Lottos(lottos, manuals.size(), randomCount);
     }
 
-    public static Lottos ofRandom(int randomCount) {
-        List<Lotto> lottos = randomLottosStream(randomCount)
-                .collect(Collectors.toList());
-
-        return new Lottos(lottos, 0, randomCount);
-    }
-
     private static Stream<Lotto> randomLottosStream(int randomCount) {
         return Stream.generate(Lotto::new)
                 .limit(randomCount);

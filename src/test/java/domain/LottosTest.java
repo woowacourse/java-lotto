@@ -60,15 +60,6 @@ public class LottosTest {
     }
 
     @Test
-    void ofRandom_createsTheSameNumberOfLottosAsRandomCount() {
-        Lottos lottos = Lottos.ofRandom(RANDOM_LOTTOS_COUNT);
-
-        assertThat(lottos.getLottos().size()).isEqualTo(RANDOM_LOTTOS_COUNT);
-        assertThat(lottos.getManuals()).isEqualTo(0);
-        assertThat(lottos.getRandoms()).isEqualTo(RANDOM_LOTTOS_COUNT);
-    }
-
-    @Test
     void getLottos_throwsExceptionOnDirectModification() {
         Lottos lottos = Lottos.of(manualLottos, RANDOM_LOTTOS_COUNT);
 
