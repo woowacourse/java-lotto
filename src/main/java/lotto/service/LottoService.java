@@ -1,13 +1,15 @@
 package lotto.service;
 
-import lotto.domain.WinningResult;
+import lotto.domain.winningresult.WinningResult;
 import lotto.domain.generator.LottoGenerator;
 import lotto.domain.lottonumber.Lotto;
 import lotto.domain.lottonumber.Lottos;
 import lotto.domain.lottonumber.WinningNumbers;
+import lotto.domain.matchkind.LottoMatchKind;
 import lotto.domain.purchaseamount.PurchaseAmount;
 
 import java.util.List;
+import java.util.Map;
 
 public class LottoService {
     private static final int LOTTO_PRICE = 1000;
@@ -31,6 +33,7 @@ public class LottoService {
     }
 
     public WinningResult getMatchResult(final WinningNumbers winningNumbers) {
-        return lottos.match(winningNumbers, purchaseAmount);
+        final Map<LottoMatchKind, Integer> winningNumberByMatchKind = lottos.match(winningNumbers);
+        return new WinningResult(winningNumberByMatchKind, purchaseAmount);
     }
 }

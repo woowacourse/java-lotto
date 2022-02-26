@@ -1,11 +1,9 @@
 package lotto.domain.lottonumber;
 
-import lotto.domain.WinningResult;
 import lotto.domain.generator.LottoCustomGenerator;
 import lotto.domain.generator.LottoGenerator;
 import lotto.domain.lottonumber.vo.LottoNumber;
 import lotto.domain.matchkind.LottoMatchKind;
-import lotto.domain.purchaseamount.PurchaseAmount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -40,17 +38,15 @@ class LottosTest {
     @DisplayName("당첨 번호와 구매 금액을 받아 당첨 결과를 반환한다.")
     void getWinningResult() {
         //given
-        final PurchaseAmount purchaseAmount = PurchaseAmount.fromPurchaseAmountAndLottoPrice("5000", 1000);
-        final Map<LottoMatchKind, Integer> expectedMatchNumberByMatchKind = Map.of(
+        final Map<LottoMatchKind, Integer> expected = Map.of(
                 LottoMatchKind.LOWER_THAN_THREE, 0,
                 LottoMatchKind.THREE, 1,
                 LottoMatchKind.FOUR, 1,
                 LottoMatchKind.FIVE, 1,
                 LottoMatchKind.FIVE_BONUS, 1,
                 LottoMatchKind.SIX, 1);
-        final WinningResult expected = new WinningResult(expectedMatchNumberByMatchKind, purchaseAmount);
         //when
-        final WinningResult actual = lottos.match(winningNumbers, purchaseAmount);
+        final Map<LottoMatchKind, Integer> actual = lottos.match(winningNumbers);
         //then
         assertThat(actual).isEqualTo(expected);
     }

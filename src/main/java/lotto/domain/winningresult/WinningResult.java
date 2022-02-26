@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.winningresult;
 
 import lotto.domain.matchkind.LottoMatchKind;
 import lotto.domain.purchaseamount.PurchaseAmount;

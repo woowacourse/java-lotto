@@ -1,8 +1,6 @@
 package lotto.domain.lottonumber;
 
-import lotto.domain.WinningResult;
 import lotto.domain.matchkind.LottoMatchKind;
-import lotto.domain.purchaseamount.PurchaseAmount;
 
 import java.util.EnumMap;
 import java.util.List;
@@ -17,11 +15,11 @@ public class Lottos {
         this.values = values;
     }
 
-    public WinningResult match(final WinningNumbers winningNumbers, final PurchaseAmount purchaseAmount) {
+    public Map<LottoMatchKind, Integer> match(final WinningNumbers winningNumbers) {
         final Map<LottoMatchKind, Integer> matchResult = new EnumMap<>(LottoMatchKind.class);
         initializeResult(matchResult);
         match(matchResult, winningNumbers);
-        return new WinningResult(matchResult, purchaseAmount);
+        return matchResult;
     }
 
     private void initializeResult(final Map<LottoMatchKind, Integer> result) {
