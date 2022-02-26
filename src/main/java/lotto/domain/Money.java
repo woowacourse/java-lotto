@@ -24,7 +24,7 @@ public class Money {
         return new PurchaseLottoCounts(manualCounts, calculateLottoCount() - manualCounts);
     }
 
-    private void checkCanPurchaseLotto(int manualCounts) {
+    private void checkCanPurchaseLotto(final int manualCounts) {
         if (calculateLottoCount() < manualCounts) {
             throw new IllegalArgumentException("[ERROR] 보유 금액보다 많은 로또를 구매할 수 없습니다.");
         }

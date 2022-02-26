@@ -35,13 +35,13 @@ public class LottoMachine {
                 .collect(Collectors.toList());
     }
 
-    private static void checkNegativeAutomaticLottoCounts(int automaticLottoCounts) {
+    private static void checkNegativeAutomaticLottoCounts(final int automaticLottoCounts) {
         if (automaticLottoCounts < 0) {
             throw new IllegalArgumentException("[ERROR] 랜덤 로또 구매 갯수는 음수가 들어올 수 없습니다.");
         }
     }
 
-    private static List<Lotto> createRandomLottosByAutomaticCounts(int automaticLottoCounts) {
+    private static List<Lotto> createRandomLottosByAutomaticCounts(final int automaticLottoCounts) {
         return IntStream.range(0, automaticLottoCounts)
                 .mapToObj(count -> createRandomLotto())
                 .collect(Collectors.toList());

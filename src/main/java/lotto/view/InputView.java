@@ -42,7 +42,7 @@ public class InputView {
         }
     }
 
-    public static List<List<Integer>> inputManualLottos(int counts) {
+    public static List<List<Integer>> inputManualLottos(final int counts) {
         System.out.println(INPUT_PURCHASE_MANUAL_LOTTO_NUMBERS);
         return IntStream.range(0, counts)
                 .mapToObj(index -> inputManualLotto())
