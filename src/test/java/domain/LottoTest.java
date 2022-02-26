@@ -90,4 +90,20 @@ public class LottoTest {
                 () -> new Lotto(LottoNumberGenerator.of(1, 1, 3, 4, 5, 46))
         ).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("1부터 6사이의 로또 생성시 일치 테스트")
+    void generateOneToSixLottoNumberTest() {
+        Lotto lotto = Lotto.generateLottoNumber(1, 6);
+        Lotto actual = new Lotto(LottoNumberGenerator.of(1, 2, 3, 4, 5, 6));
+        assertThat(lotto).isEqualTo(actual);
+    }
+
+    @Test
+    @DisplayName("5부터 10사이의 로또 생성시 일치 테스트")
+    void generateFiveToTenLottoNumberTest() {
+        Lotto lotto = Lotto.generateLottoNumber(5, 10);
+        Lotto actual = new Lotto(LottoNumberGenerator.of(5, 6, 7, 8, 9, 10));
+        assertThat(lotto).isEqualTo(actual);
+    }
 }

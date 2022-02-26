@@ -10,7 +10,11 @@ public enum Rank {
     SECOND(5, 30_000_000, true),
     FIRST(6, 2_000_000_000, false);
 
+    private static final int MIN_COUNT_NUMBER = 0;
     private static final int SECOND_THIRD_RANK_COUNT = 5;
+    private static final int MAX_COUNT_NUMBER = 5;
+    private static final String COUNT_RANGE_ERROR_MESSAGE = "[ERROR] 일치하는 개수는 0~6사이여야 합니다.";
+
     private final int count;
     private final int winningPrice;
     private final boolean hasBonusBall;
@@ -22,6 +26,7 @@ public enum Rank {
     }
 
     public static Rank valueOf(int count, boolean hasBonusBall) {
+        validateCountRange(count);
         if (count == SECOND_THIRD_RANK_COUNT && hasBonusBall) {
             return Rank.SECOND;
         }
@@ -30,6 +35,12 @@ public enum Rank {
                 .filter(rank -> !rank.hasBonusBall)
                 .findFirst()
                 .orElse(SIXTH);
+    }
+
+    private static void validateCountRange(int count) {
+        if (count < MIN_COUNT_NUMBER || count > MAX_COUNT_NUMBER) {
+            throw new IllegalArgumentException(COUNT_RANGE_ERROR_MESSAGE);
+        }
     }
 
     public int getWinningPrice() {

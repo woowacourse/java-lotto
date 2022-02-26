@@ -3,6 +3,8 @@ package domain;
 import java.util.*;
 
 public class Lottos {
+    private static final int MIN_LOTTO_NUMBER = 1;
+    private static final int MAX_LOTTO_NUMBER = 45;
 
     private final List<Lotto> lottos;
 
@@ -13,7 +15,7 @@ public class Lottos {
     public static Lottos generateLottos(int count) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            lottos.add(Lotto.generateLottoNumber());
+            lottos.add(Lotto.generateLottoNumber(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER));
         }
         return new Lottos(lottos);
     }
