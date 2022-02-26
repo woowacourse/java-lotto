@@ -13,7 +13,7 @@ class WinningResultTest {
 
     @Test
     @DisplayName("수익률을 반환한다.")
-    void a() {
+    void getProfitRate() {
         //given
         final Map<LottoMatchKind, Integer> winningNumberByMatchKind = Map.of(
                 LottoMatchKind.LOWER_THAN_THREE, 0,
