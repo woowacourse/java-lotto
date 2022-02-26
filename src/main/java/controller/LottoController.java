@@ -12,6 +12,7 @@ import domain.LottoCountsDto;
 import domain.LottoNumber;
 import domain.LottoReferee;
 import domain.Lottos;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,11 +33,15 @@ public class LottoController {
     }
 
     public Lottos initLottos(List<String> manualsString, LottoCountsDto countsDto) {
-        List<Lotto> manualLottos = getValidManualLottos(manualsString);
+        List<Lotto> manualLottos = getValidManuals(manualsString);
         return Lottos.of(manualLottos, countsDto);
     }
 
-    private List<Lotto> getValidManualLottos(List<String> manualStrings) {
+    private List<Lotto> getValidManuals(List<String> manualStrings) {
+        if (manualStrings == null) {
+            return new ArrayList<>();
+        }
+
         return manualStrings
                 .stream()
                 .map(this::getValidLottoNumbers)

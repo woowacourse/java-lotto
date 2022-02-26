@@ -12,6 +12,7 @@ import domain.LottoCountsDto;
 import domain.LottoGame;
 import domain.LottoReferee;
 import domain.Lottos;
+import java.util.List;
 
 public class Application {
 
@@ -19,7 +20,9 @@ public class Application {
 
     public static void main(String[] args) {
         LottoCountsDto countsDto = controller.initCountsDto(requestTotalPrice(), requestManualsCount());
-        Lottos lottos = controller.initLottos(requestManualsNumbers(countsDto), countsDto);
+        List<String> manualsNumbers = requestManualsNumbers(countsDto.getManuals());
+
+        Lottos lottos = controller.initLottos(manualsNumbers, countsDto);
         printPurchaseInfo(lottos);
 
         LottoReferee referee = controller.initLottoReferee(requestWinningNumbers(), requestBonusNumber());

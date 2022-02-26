@@ -30,7 +30,7 @@ public class OutputView {
         StringBuilder builder = new StringBuilder();
 
         builder.append(format(BOUGHT_MANUALS_COUNT_TEXT_FORMAT, lottos.getManuals()))
-                .append(format(BOUGHT_RANDOM_COUNT_TEXT_FORMAT,  lottos.getRandoms()));
+                .append(format(BOUGHT_RANDOM_COUNT_TEXT_FORMAT, lottos.getRandoms()));
         lottos.getLottos()
                 .stream()
                 .map(OutputView::formatChosenLottoNumbers)
