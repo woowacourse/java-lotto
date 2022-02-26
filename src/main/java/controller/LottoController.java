@@ -5,7 +5,9 @@ import domain.LottoFactory;
 import domain.LottoNumber;
 import domain.Money;
 import domain.RankPrize;
+
 import java.util.SortedMap;
+
 import view.InputView;
 import view.OutputView;
 

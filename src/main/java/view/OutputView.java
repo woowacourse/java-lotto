@@ -2,6 +2,7 @@ package view;
 
 import domain.Lotto;
 import domain.RankPrize;
+
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.SortedMap;

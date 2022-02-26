@@ -10,7 +10,8 @@ import static utils.Validator.ERROR_FORMAT_MESSAGE;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class LottoTest {
+class
+LottoTest {
 
     @DisplayName("유효한 로또 번호를 발급을 확인한다.")
     @Test
