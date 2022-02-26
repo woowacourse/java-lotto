@@ -1,19 +1,18 @@
 package lotto.model;
 
-import java.util.List;
 import java.util.stream.Collectors;
-import lotto.util.RandomUtil;
+import lotto.util.LottoUtil;
 
 public class Lotto {
 
-    private static final String LOTTO_ERROR_MESSAGE = "[ERROR] 잘못된 로또 번호입니다.";
+    private static final int LOTTO_START_NUMBER = 1;
+    private static final int LOTTO_LAST_NUMBER = 45;
 
     private final LottoNumbers numbers;
     private Rank rank;
 
-    public Lotto(RandomUtil randomNumbersGenerator) {
-        LottoNumbers numbers = randomNumbersGenerator.generate();
-        this.numbers = numbers;
+    public Lotto(LottoUtil randomNumbersGenerator) {
+        this.numbers = randomNumbersGenerator.generateLottoNumbers(LOTTO_START_NUMBER, LOTTO_LAST_NUMBER);
         this.rank = Rank.LOSER;
     }
 

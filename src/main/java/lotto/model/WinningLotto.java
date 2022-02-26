@@ -4,25 +4,24 @@ import java.util.stream.Collectors;
 
 public class WinningLotto {
 
-    private static final String LOTTO_ERROR_MESSAGE = "[ERROR] 잘못된 로또 번호입니다.";
-    private static final String BONUS_NUMBER_ERROR_MESSAGE = "[ERROR] 잘못된 보너스 번호입니다.";
+    private static final String DUPLICATED_NUMBER_ERROR_MESSAGE = "[ERROR] 중복된 번호가 존재합니다.";
 
     private final LottoNumbers winningNumbers;
     private final BonusNumber bonusNumber;
 
     public WinningLotto(LottoNumbers winningNumbers, BonusNumber bonusNumber) {
         this.winningNumbers = winningNumbers;
-        hasDuplicateNumber(bonusNumber);
+        checkDuplicateNumber(bonusNumber);
         this.bonusNumber = bonusNumber;
     }
 
-    public void hasDuplicateNumber(BonusNumber number) {
+    public void checkDuplicateNumber(BonusNumber number) {
         if ((winningNumbers.getLottoNumbers().stream()
                 .mapToInt(LottoNumber::getLottoNumber)
                 .boxed()
                 .collect(Collectors.toList()))
                 .contains(number.getLottoNumber())) {
-            throw new RuntimeException(BONUS_NUMBER_ERROR_MESSAGE);
+            throw new RuntimeException(DUPLICATED_NUMBER_ERROR_MESSAGE);
         }
     }
 

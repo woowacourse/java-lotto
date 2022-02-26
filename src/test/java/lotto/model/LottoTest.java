@@ -18,7 +18,7 @@ public class LottoTest {
         List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                 new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
         LottoNumbers lottoNumbers1 = new LottoNumbers(lottoNumbers);
-        lotto = new Lotto(() -> lottoNumbers1);
+        lotto = new Lotto((x, y) -> lottoNumbers1);
         assertThat(lotto).isInstanceOf(Lotto.class);
     }
 
@@ -27,7 +27,7 @@ public class LottoTest {
         List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                 new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
         LottoNumbers lottoNumbers1 = new LottoNumbers(lottoNumbers);
-        lotto = new Lotto(() -> lottoNumbers1);
+        lotto = new Lotto((x,y) -> lottoNumbers1);
     }
 
     @Test

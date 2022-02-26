@@ -10,11 +10,11 @@ import org.junit.jupiter.api.Test;
 
 public class RandomLottoGeneratorTest {
 
-    RandomUtil randomLottoGenerator = new RandomNumbersGenerator();
+    LottoUtil randomLottoGenerator = new LottoNumbersGenerator();
 
     @Test
     void 중복_테스트() {
-        LottoNumbers numbers = randomLottoGenerator.generate();
+        LottoNumbers numbers = randomLottoGenerator.generateLottoNumbers(1,45);
         List<Integer> actual = numbers.getLottoNumbers().stream()
                 .map(LottoNumber::getLottoNumber)
                 .distinct()
@@ -24,7 +24,7 @@ public class RandomLottoGeneratorTest {
 
     @Test
     void 범위_테스트() {
-        LottoNumbers numbers = randomLottoGenerator.generate();
+        LottoNumbers numbers = randomLottoGenerator.generateLottoNumbers(1,45);
         numbers.getLottoNumbers().forEach(number -> {
             assertThat(number.getLottoNumber()).isGreaterThan(0).isLessThan(46);
         });
