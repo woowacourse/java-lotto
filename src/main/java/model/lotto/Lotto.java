@@ -19,7 +19,7 @@ public class Lotto {
     }
 
     public void compare(BonusBallDTO bonusBallDTO, LottoWinningNumberDTO winningNumberDTO) {
-        List<Integer> winningNumbers = winningNumberDTO.getWinningNumbers();
+        Set<Integer> winningNumbers = winningNumberDTO.getWinningNumbers();
         long count = compareWithWinningNumber(winningNumbers);
 
         if (count == CHECKING_BONUS_NUMBER) {
@@ -29,7 +29,7 @@ public class Lotto {
         storeResult(count);
     }
 
-    private long compareWithWinningNumber(List<Integer> winningNumbers) {
+    private long compareWithWinningNumber(Set<Integer> winningNumbers) {
         return numbers.stream()
                 .filter(winningNumbers::contains)
                 .count();

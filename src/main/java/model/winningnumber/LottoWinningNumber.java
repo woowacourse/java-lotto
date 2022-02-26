@@ -3,6 +3,7 @@ package model.winningnumber;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import utils.InputValidateUtils;
@@ -16,7 +17,7 @@ public class LottoWinningNumber {
     private static final String REDUPLICATION_WITH_BONUS_BALL_ERROR_MESSAGE = "[Error]: 당첨 번호와 보너스 볼이 중복됩니다.";
     private static final int WINNING_NUMBER_SIZE = 6;
 
-    private final List<Integer> winningNumbers;
+    private final Set<Integer> winningNumbers;
 
     public LottoWinningNumber(String numbers) {
         InputValidateUtils.inputBlank(numbers, WINNING_NUMBER_BLANK_ERROR_MESSAGE);
@@ -54,10 +55,10 @@ public class LottoWinningNumber {
         }
     }
 
-    private List<Integer> makeWinningNumbers(List<String> numbers) {
+    private Set<Integer> makeWinningNumbers(List<String> numbers) {
         return numbers.stream()
                 .map(Integer::parseInt)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     public void validateReduplicationWithBonusBall(String number) {
@@ -70,7 +71,7 @@ public class LottoWinningNumber {
         return new LottoWinningNumberDTO(this.winningNumbers);
     }
 
-    public List<Integer> getWinningNumbers() {
+    public Set<Integer> getWinningNumbers() {
         return winningNumbers;
     }
 

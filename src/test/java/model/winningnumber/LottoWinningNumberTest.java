@@ -1,7 +1,9 @@
 package model.winningnumber;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import model.winningnumber.LottoWinningNumber;
 import org.junit.jupiter.api.DisplayName;
@@ -47,8 +49,8 @@ public class LottoWinningNumberTest {
     @DisplayName("당첨 번호 숫자로 변경 및 저장")
     void saveLottoNumber() {
         LottoWinningNumber lottoWinningNumber = new LottoWinningNumber("1, 2, 3, 4, 5, 6");
-        List<Integer> winningNumbers = lottoWinningNumber.getWinningNumbers();
-        assertThat(winningNumbers).isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Set<Integer> winningNumbers = lottoWinningNumber.getWinningNumbers();
+        assertThat(winningNumbers).isEqualTo(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
 
     @ParameterizedTest

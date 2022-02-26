@@ -1,16 +1,18 @@
 package model.winningnumber;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
 
 public class LottoWinningNumberDTO {
-    private final List<Integer> winningNumbers;
+    private final Set<Integer> winningNumbers;
 
-    public LottoWinningNumberDTO(List<Integer> winningNumbers) {
-        this.winningNumbers = new ArrayList<>(winningNumbers);
+    public LottoWinningNumberDTO(Set<Integer> winningNumbers) {
+        this.winningNumbers = new HashSet<>(winningNumbers);
     }
 
-    public List<Integer> getWinningNumbers() {
-        return winningNumbers;
+    public Set<Integer> getWinningNumbers() {
+        return Collections.unmodifiableSet(winningNumbers);
     }
 }
