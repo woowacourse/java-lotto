@@ -16,11 +16,11 @@ public class WinningNumbers {
 
     public Ranking calculateRanking(LottoNumbers otherLottoNumbers) {
         int cnt = lottoNumbers.calculateSameCount(otherLottoNumbers);
-        return Ranking.findRanking(cnt, otherLottoNumbers.isContain(bonusNumber));
+        return Ranking.findRanking(cnt, otherLottoNumbers.contains(bonusNumber));
     }
 
     private void validateDuplicateNumber(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
-        if (lottoNumbers.isContain(bonusNumber)) {
+        if (lottoNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException(DUPLICATE_ERROR);
         }
     }

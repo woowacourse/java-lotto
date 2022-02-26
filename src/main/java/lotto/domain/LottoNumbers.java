@@ -36,7 +36,7 @@ public class LottoNumbers {
         this.lottoNumbers = generateRandomLottoNumbers();
     }
 
-    public boolean isContain(LottoNumber otherLottoNumber) {
+    public boolean contains(LottoNumber otherLottoNumber) {
         return lottoNumbers.stream()
                 .anyMatch(lottoNumber -> lottoNumber.equals(otherLottoNumber));
     }
