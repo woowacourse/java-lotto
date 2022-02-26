@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.List;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoPurchaseCounts;
 import lotto.domain.Lottos;
@@ -43,8 +44,8 @@ public class LottoApplication {
 
     private static Lottos buyLotto(final LottoPurchaseCounts counts) {
         try {
-            return LottoMachine
-                    .buyLotto(InputView.inputManualLottos(counts.getManualCount()), counts.getAutomaticCount());
+            final List<List<Integer>> manualLottos = InputView.inputManualLottos(counts.getManualCount());
+            return LottoMachine.buyLotto(manualLottos, counts.getAutomaticCount());
         } catch (IllegalArgumentException e) {
             ErrorView.printErrorMessage(e);
             return buyLotto(counts);
