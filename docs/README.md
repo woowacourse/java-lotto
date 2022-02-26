@@ -31,7 +31,6 @@
   * [x] 생성된 숫자는 6자리임을 보장한다.
   * [x] 생성된 숫자는 1 ~ 45의 범위를 가진다.
   * [x] Collection.shuffle() 메소드를 활용한다.
-  * [x] Collection.sort() 메소드를 활용해 정렬하여 생성해준다.
 
 * `LottoTickets`: 로또 생성 갯수와 생성 전략을 받아 로또 티켓 리스트를 관리하는 일급 컬렉션이다.
   * [x] 로또 생성 갯수와 생성 전략을 받아 로또 티켓 리스트를 생성한다.
@@ -63,15 +62,20 @@
 
 ### Controller
 
-* `LottoController`: Lotto를 제어하기 위한 Controller이다. domain과 view사이에 위치하여 제어를 진행한다.
+* `LottoController`: Lotto를 제어하기 위한 Controller이다. view에서 데이터를 요청하면 domain을 적절히 가공하여 반환한다.
+
+### Console
+
+* `LottoRunner`: console 환경에서 view, controller의 의존성을 관리하기 위한 객체이다. 
+작성한 순서에 따라 view와 controller 사이에 데이터를 주고 받으며 통신한다.
 
 ## Domain 사이의 협력
 
 ### 로또 구매 및 로또 번호 자동 생성 과정
-![](https://user-images.githubusercontent.com/59357153/155471963-8f9de359-d8e4-4c35-9311-5622980726dc.png)
+![image](https://user-images.githubusercontent.com/59357153/155840805-f200b9ba-c436-49bc-b13e-d619522cc507.png)
 
 ### 당첨 번호 및 보너스볼 등록 과정
-![](https://user-images.githubusercontent.com/59357153/155472031-f79b29b6-09ee-4315-a160-3ed66d8e92e4.png)
+![image](https://user-images.githubusercontent.com/59357153/155840810-7952fb32-24c8-4b30-b7d4-36cd536f4e54.png)
 
 ### 당첨 결과 및 통계 과정
-![](https://user-images.githubusercontent.com/59357153/155472179-1f21639e-f48e-48eb-ae7a-b99532d6c6da.png)
+![image](https://user-images.githubusercontent.com/59357153/155840839-f49c22cb-2621-414b-8157-36363035feb2.png)
