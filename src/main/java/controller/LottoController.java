@@ -26,7 +26,7 @@ public class LottoController {
 		Money money = insertMoney();
 		LottoTicket lottoTicket = buyLottoTicket(money);
 		WinningNumbers winningNumbers = generateWinningNumbers();
-		WinningResult winningResult = checkWinningResult(lottoTicket, winningNumbers);
+		WinningResult winningResult = new WinningResult(lottoTicket.checkLottoTicketWinningResult(winningNumbers));
 		announceWinningResult(money, winningResult);
 	}
 
@@ -49,10 +49,6 @@ public class LottoController {
 		Number bonusNumber = new Number(inputView.requestBonusNumber());
 
 		return new WinningNumbers(winningLotto, bonusNumber);
-	}
-
-	private WinningResult checkWinningResult(LottoTicket lottoTicket, WinningNumbers winningNumbers) {
-		return WinningResult.createWinningResult(lottoTicket, winningNumbers);
 	}
 
 	private void announceWinningResult(Money money, WinningResult winningResult) {
