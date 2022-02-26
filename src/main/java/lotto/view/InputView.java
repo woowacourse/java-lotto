@@ -35,7 +35,11 @@ public class InputView {
 
     public static int inputPurchaseManualCount() {
         System.out.println(INPUT_PURCHASE_MANUAL_LOTTO_COUNT);
-        return Integer.parseInt(scanner.nextLine());
+        try {
+            return Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("[ERROR] 구매금액은 숫자로 입력하세요");
+        }
     }
 
     public static List<List<Integer>> inputManualLottos(int counts) {
