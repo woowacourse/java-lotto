@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class InputView {
 
-    private static final String ERROR_NON_INTEGER_FORMAT = "구입 금액은 숫자 형태로 입력해야 합니다.";
+    private static final String ERROR_NON_INTEGER_FORMAT = "숫자 형태로 입력해야 합니다.";
     private static final String ERROR_NULL_OR_EMPTY = "입력 null 혹은 빈 문자열 일수 없습니다.";
     private static final String REQUEST_MONEY = "구입금액을 입력해 주세요.";
     private static final String REQUEST_WINNING_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";

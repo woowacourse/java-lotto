@@ -22,10 +22,10 @@ class InputViewTest {
     }
 
     @Test
-    void 구입_금액이_숫자가_아닌_경우_테스트() {
+    void 입력이_숫자가_아닌_경우_테스트() {
         assertThatThrownBy(() -> InputView.toInteger("돈"))
                 .isInstanceOf(RuntimeException.class)
-                .hasMessageContaining("구입 금액은 숫자 형태로 입력해야 합니다.");
+                .hasMessageContaining("숫자 형태로 입력해야 합니다.");
     }
 
     @ParameterizedTest
