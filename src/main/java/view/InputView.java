@@ -9,11 +9,11 @@ import java.util.regex.Pattern;
 public class InputView {
 
     private static final String WIN_LOTTO_NUMBER_REGEX = "^[\\d]+, [\\d]+, [\\d]+, [\\d]+, [\\d]+, [\\d]+$";
-
+    private static Scanner scanner;
 
     public static int inputMoney() {
         System.out.println(MONEY_INPUT_MESSAGE);
-        Scanner scanner = new Scanner(System.in);
+        scanner = new Scanner(System.in);
         try {
             return scanner.nextInt();
         } catch (Exception e) {
@@ -23,7 +23,7 @@ public class InputView {
 
     public static String inputWinLottoNumbers() {
         System.out.println(LOTTO_NUMBER_INPUT_MESSAGE);
-        Scanner scanner = new Scanner(System.in);
+        scanner = new Scanner(System.in);
         String lottoNumbers = scanner.nextLine();
         validatePattern(lottoNumbers);
         return lottoNumbers;
@@ -31,7 +31,7 @@ public class InputView {
 
     public static int inputBonusNumber() {
         System.out.println(BONUS_INPUT_MESSAGE);
-        Scanner scanner = new Scanner(System.in);
+        scanner = new Scanner(System.in);
         try {
             return scanner.nextInt();
         } catch (Exception e) {
