@@ -4,6 +4,7 @@ import static common.DisplayFormat.PARAMETERIZED_TEST_DISPLAY_FORMAT;
 import static constant.ExceptionMessages.DUPLICATE_WINNING_NUMBER_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.INVALID_LOTTO_NUMBERS_SIZE_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.INVALID_LOTTO_NUMBER_RANGE_EXCEPTION_MESSAGE;
+import static constant.ExceptionMessages.INVALID_MANUAL_LOTTOS_COUNT_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.INVALID_NUMBER_INPUT_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.INVALID_TOTAL_LOTTO_PRICE_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.NEGATIVE_NUMBER_INPUT_EXCEPTION_MESSAGE;
@@ -14,9 +15,9 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 import static validator.NumberValidators.validateAndParseNumber;
 import static validator.NumberValidators.validateLottoNumberRange;
+import static validator.NumberValidators.validateManualLottosCount;
 import static validator.NumberValidators.validateNoDuplicateInList;
 import static validator.NumberValidators.validateNoDuplicates;
-import static validator.NumberValidators.validateNotNegative;
 import static validator.NumberValidators.validateTotalLottoPriceUnit;
 import static validator.NumberValidators.validateLottoNumbersSize;
 
@@ -75,23 +76,36 @@ public class NumberValidatorsTest {
     }
 
     @Test
-    void validateNotNegative_passesOnPositiveNumberInput() {
+    void validateManualLottosCount_passesOnPositiveNumberOverTotalInput() {
         assertThatNoException()
-                .isThrownBy(() -> validateNotNegative(10));
+                .isThrownBy(() -> validateManualLottosCount(10, 20));
     }
 
     @Test
-    void validateNotNegative_passesOnZeroInput() {
+    void validateManualLottosCount_passesInZeroInputs() {
         assertThatNoException()
-                .isThrownBy(() -> validateNotNegative(0));
+                .isThrownBy(() -> validateManualLottosCount(0, 20));
+        assertThatNoException()
+                .isThrownBy(() -> validateManualLottosCount(0, 0));
     }
 
     @Test
-    void validateNotNegative_failOnNegativeNumberInput() {
+    void validateManualLottosCount_failOnNegativeNumberInput() {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> validateNotNegative(-10))
+                .isThrownBy(() -> validateManualLottosCount(-10, 20))
+                .withMessageMatching(NEGATIVE_NUMBER_INPUT_EXCEPTION_MESSAGE);
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> validateManualLottosCount(-30, -20))
                 .withMessageMatching(NEGATIVE_NUMBER_INPUT_EXCEPTION_MESSAGE);
     }
+
+    @Test
+    void validateManualLottosCount_failIfManualsIsOverTotal() {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> validateManualLottosCount(20, 10))
+                .withMessageMatching(INVALID_MANUAL_LOTTOS_COUNT_EXCEPTION_MESSAGE);
+    }
+
 
     @ParameterizedTest(name = PARAMETERIZED_TEST_DISPLAY_FORMAT)
     @ValueSource(ints = {1, 20, 45})

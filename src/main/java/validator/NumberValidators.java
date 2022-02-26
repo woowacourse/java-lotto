@@ -3,6 +3,7 @@ package validator;
 import static constant.ExceptionMessages.DUPLICATE_WINNING_NUMBER_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.INVALID_LOTTO_NUMBERS_SIZE_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.INVALID_LOTTO_NUMBER_RANGE_EXCEPTION_MESSAGE;
+import static constant.ExceptionMessages.INVALID_MANUAL_LOTTOS_COUNT_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.INVALID_NUMBER_INPUT_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.INVALID_TOTAL_LOTTO_PRICE_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.NEGATIVE_NUMBER_INPUT_EXCEPTION_MESSAGE;
@@ -36,7 +37,15 @@ public class NumberValidators {
         }
     }
 
-    public static void validateNotNegative(int num) {
+    public static void validateManualLottosCount(int manualsCount, int totalCount) {
+        validateNotNegative(manualsCount);
+        validateNotNegative(totalCount);
+        if (manualsCount > totalCount) {
+            throw new IllegalArgumentException(INVALID_MANUAL_LOTTOS_COUNT_EXCEPTION_MESSAGE);
+        }
+    }
+
+    private static void validateNotNegative(int num) {
         if (num < 0) {
             throw new IllegalArgumentException(NEGATIVE_NUMBER_INPUT_EXCEPTION_MESSAGE);
         }
