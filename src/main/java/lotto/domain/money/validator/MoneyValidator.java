@@ -12,7 +12,14 @@ public class MoneyValidator {
     }
 
     public static void validateCreditMoney(final int money) {
+        INSTANCE.validateMoneyIsZero(money);
         INSTANCE.validateMoneyIsDivisible(money);
+    }
+
+    private void validateMoneyIsZero(final int money) {
+        if (money == 0) {
+            throw new LottoException(MoneyExceptionStatus.MONEY_IS_ZERO);
+        }
     }
 
     private void validateMoneyIsDivisible(final int money) {
