@@ -23,7 +23,7 @@ public class Player {
         return money.determineQuantity();
     }
 
-    public void purchaseLotto(LottoGenerator lottoGenerator, List<Integer> lottoNumbers) {
+    public void purchaseLotto(LottoGenerator lottoGenerator) {
         int numberOfPurchases = getNumberOfPurchases();
         for (int i = 0; i < numberOfPurchases; i++) {
             lottos.add(lottoGenerator.generateLotto());

@@ -2,7 +2,6 @@ package controller;
 
 import domain.*;
 import domain.Lotto.Lotto;
-import domain.Lotto.LottoNumberFactory;
 import domain.Lotto.LottoNumber;
 import domain.Lotto.WinningLotto;
 import domain.LottoGenerator.AutoLottoGenerator;
@@ -22,7 +21,7 @@ public class LottoController {
 
     public LottosDto purchase(int purchaseAmount) {
         player = new Player(new Money(purchaseAmount));
-        player.purchaseLotto(new AutoLottoGenerator(), LottoNumberFactory.makeBoundary());
+        player.purchaseLotto(new AutoLottoGenerator());
         return LottosDto.from(player.getLottos());
     }
 

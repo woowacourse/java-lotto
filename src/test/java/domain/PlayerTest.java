@@ -2,7 +2,6 @@ package domain;
 
 import domain.Lotto.Lotto;
 import domain.Lotto.LottoNumber;
-import domain.Lotto.LottoNumberFactory;
 import domain.Lotto.WinningLotto;
 import domain.LottoGenerator.AutoLottoGenerator;
 import domain.LottoGenerator.LottoGenerator;
@@ -27,7 +26,7 @@ class PlayerTest {
 
     @BeforeEach
     void setUp() {
-        player.purchaseLotto(new AutoLottoGenerator(), LottoNumberFactory.makeBoundary());
+        player.purchaseLotto(new AutoLottoGenerator());
     }
 
     @Test
