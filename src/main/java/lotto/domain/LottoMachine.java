@@ -23,6 +23,7 @@ public class LottoMachine {
     public static Lottos buyLotto(final List<List<Integer>> manualNumbers, final PurchaseLottoCounts purchaseCounts) {
         Objects.requireNonNull(manualNumbers, "[ERROR] 수동 구매 로또는 null이 들어올 수 없습니다.");
         final List<Lotto> lottos = createLottos(new ArrayList<>(manualNumbers));
+        Objects.requireNonNull(purchaseCounts, "[ERROR] 로또 구매 갯수는 null이 들어올 수 없습니다.");
 
         return addRandomLottos(lottos, purchaseCounts);
     }

@@ -24,11 +24,20 @@ public class LottoMachineTest {
 
     @DisplayName("수동 구매 로또가 null이 들어오면 예외가 발생한다.")
     @Test
-    void createLottoExceptionByNull() {
+    void createLottoExceptionByNumbersIsNull() {
         final PurchaseLottoCounts counts = new PurchaseLottoCounts(0, 1);
         assertThatExceptionOfType(NullPointerException.class)
                 .isThrownBy(() -> LottoMachine.buyLotto(null, counts))
                 .withMessage("[ERROR] 수동 구매 로또는 null이 들어올 수 없습니다.");
+    }
+
+    @DisplayName("구매 갯수가 null이 들어오면 예외가 발생한다.")
+    @Test
+    void createLottoExceptionByCountsIsNull() {
+        final List<List<Integer>> manualLottos = new ArrayList<>();
+        assertThatExceptionOfType(NullPointerException.class)
+                .isThrownBy(() -> LottoMachine.buyLotto(manualLottos, null))
+                .withMessage("[ERROR] 로또 구매 갯수는 null이 들어올 수 없습니다.");
     }
 
     @DisplayName("로또 구매 뭉치가 수동구매 로또 갯수와 다르면 예외가 발생한다.")
