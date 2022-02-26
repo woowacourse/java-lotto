@@ -38,7 +38,7 @@ public class OutputView {
     }
 
     private String getBonusMessage(LottoRank lottoRank) {
-        if (lottoRank == LottoRank.RANK_SECOND) {
+        if (lottoRank == LottoRank.SECOND) {
             return BONUS_BALL_MESSAGE;
         }
         return EMPTY_STRING;
