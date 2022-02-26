@@ -29,11 +29,9 @@ public class ProfitTest {
     @Test
     @DisplayName("수익률 계산")
     void calculate_profit() {
-        Profit profit = new Profit();
-
         PurchaseAmount purchaseAmount = new PurchaseAmount("3000");
-        int totalMoney = lottoResult.getTotalMoney();
+        Profit profit = lottoResult.getProfit();
 
-        assertEquals(profit.calculate(totalMoney, purchaseAmount), 676683.333, 0.01);
+        assertEquals(profit.calculateProfitRate(purchaseAmount), 676683.333, 0.01);
     }
 }

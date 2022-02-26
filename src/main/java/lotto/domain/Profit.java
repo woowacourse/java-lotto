@@ -2,11 +2,13 @@ package lotto.domain;
 
 public class Profit {
 
-    private double profitRate = 0;
+    private int profit;
 
-    public double calculate(int totalMoney, PurchaseAmount purchaseAmount) {
-        int money = purchaseAmount.getPurchaseAmount();
-        profitRate = (double) totalMoney / money;
-        return profitRate;
+    public Profit(int profit) {
+        this.profit = profit;
+    }
+
+    public double calculateProfitRate(PurchaseAmount purchaseAmount) {
+        return (double) profit / purchaseAmount.getPurchaseAmount();
     }
 }

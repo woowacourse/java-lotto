@@ -84,8 +84,8 @@ public class LottoController {
         lottoResult.addMatchingCount(lottos, winningLotto);
         OutputView.printLottosResult(lottoResult);
 
-        Profit profit = new Profit();
-        double profitRate = profit.calculate(lottoResult.getTotalMoney(), purchaseAmount);
+        Profit profit = lottoResult.getProfit();
+        double profitRate = profit.calculateProfitRate(purchaseAmount);
         OutputView.printProfitRate(profitRate);
     }
 }

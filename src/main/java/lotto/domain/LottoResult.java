@@ -25,11 +25,11 @@ public class LottoResult {
         }
     }
 
-    public int getTotalMoney() {
+    public Profit getProfit() {
         int totalMoney = 0;
         for (Rank rank : Rank.values()) {
             totalMoney += rank.getMoney() * lottoResult.get(rank);
         }
-        return totalMoney;
+        return new Profit(totalMoney);
     }
 }
