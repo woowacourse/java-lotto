@@ -1,4 +1,4 @@
-package view;
+package view.outputview;
 
 import java.util.List;
 import model.WinningResultDto;
@@ -16,7 +16,7 @@ public class WinningResultOutputView implements OutputView<List<WinningResultDto
     private static final String COUNTING_UNIT = "개";
 
     @Override
-    public void printOutputData(List<WinningResultDto> winningResults) {
+    public void showOutputData(List<WinningResultDto> winningResults) {
         System.out.println(WINNING_STATISTICS_MESSAGE);
         System.out.println(DIVISION_LINE);
         winningResults.forEach(this::printWinningResult);

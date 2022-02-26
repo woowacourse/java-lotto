@@ -11,12 +11,12 @@ import model.LottoTickets;
 import model.WinningPrize;
 import model.WinningPrizeStrategy;
 import model.WinningResultDto;
-import view.BonusNumberInputView;
-import view.LottoTicketOutputView;
-import view.PurchaseMoneyInputView;
-import view.RateOfReturnOutputView;
-import view.WinningNumberInputView;
-import view.WinningResultOutputView;
+import view.inputview.BonusNumberInputView;
+import view.outputview.LottoTicketOutputView;
+import view.inputview.PurchaseMoneyInputView;
+import view.outputview.RateOfReturnOutputView;
+import view.inputview.WinningNumberInputView;
+import view.outputview.WinningResultOutputView;
 
 public class LottoController {
     private LottoGame lottoGame;
@@ -50,7 +50,7 @@ public class LottoController {
                 .map(lottoTicket -> new LottoTicketDto(lottoTicket.lottoNumberValues()))
                 .collect(Collectors.toList());
 
-        (new LottoTicketOutputView()).printOutputData(dto);
+        (new LottoTicketOutputView()).showOutputData(dto);
     }
 
     public List<Integer> inputWinningNumbers() {
@@ -64,7 +64,7 @@ public class LottoController {
     public void printWinningResults(Map<WinningPrize, Integer> winningResults) {
         List<WinningResultDto> winningResultDtos = toWinningResultDtos(winningResults);
 
-        (new WinningResultOutputView()).printOutputData(winningResultDtos);
+        (new WinningResultOutputView()).showOutputData(winningResultDtos);
     }
 
     private List<WinningResultDto> toWinningResultDtos(Map<WinningPrize, Integer> winningResults) {
@@ -89,6 +89,6 @@ public class LottoController {
     }
 
     public void printRateOfReturn(Double rateOfReturn) {
-        (new RateOfReturnOutputView()).printOutputData(rateOfReturn);
+        (new RateOfReturnOutputView()).showOutputData(rateOfReturn);
     }
 }

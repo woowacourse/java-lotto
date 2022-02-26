@@ -1,4 +1,4 @@
-package view;
+package view.outputview;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,7 +12,7 @@ public class LottoTicketOutputView implements OutputView<List<LottoTicketDto>> {
     private static final String LIST_JOINING_DELIMITER = ", ";
 
     @Override
-    public void printOutputData(List<LottoTicketDto> lottoTickets) {
+    public void showOutputData(List<LottoTicketDto> lottoTickets) {
         System.out.println(lottoTickets.size() + PURCHASE_COUNT_MESSAGE);
         lottoTickets.forEach(lottoTicket -> System.out.println(toLottoTicketPrintForm(lottoTicket)));
     }

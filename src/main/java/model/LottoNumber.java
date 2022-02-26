@@ -4,21 +4,21 @@ public class LottoNumber {
     private final int number;
 
     public LottoNumber(int number) {
-        this.number = checkNumber(number);
+        checkNumber(number);
+        this.number = number;
     }
 
     public int value() {
         return number;
     }
 
-    private int checkNumber(int number) {
-        if (isNotCorrectNumber(number)) {
+    private void checkNumber(int number) {
+        if (isNotInRangeNumber(number)) {
             throw new RuntimeException();
         }
-        return number;
     }
 
-    private boolean isNotCorrectNumber(int number) {
+    private boolean isNotInRangeNumber(int number) {
         return !(number <= 45 && number > 0);
     }
 }

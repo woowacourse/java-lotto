@@ -1,4 +1,4 @@
-package view;
+package view.outputview;
 
 public class RateOfReturnOutputView implements OutputView<Double> {
 
@@ -7,7 +7,7 @@ public class RateOfReturnOutputView implements OutputView<Double> {
     private static final String TOTAL_RETURN_END_MESSAGE = "입니다.";
 
     @Override
-    public void printOutputData(Double rateOfReturn) {
+    public void showOutputData(Double rateOfReturn) {
         System.out.println(TOTAL_RETURN_MESSAGE + String.format(RATE_FORMAT, rateOfReturn) + TOTAL_RETURN_END_MESSAGE);
     }
 }
