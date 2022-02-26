@@ -20,8 +20,6 @@ class LottoTicketTest {
                 .mapToObj(LottoNumber::getInstance)
                 .collect(Collectors.toList());
         lottoTicket = new LottoTicket(numbers);
-
-        System.out.println(lottoTicket.getTicketNumbers());
     }
 
     @Test

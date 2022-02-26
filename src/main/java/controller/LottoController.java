@@ -33,7 +33,6 @@ public class LottoController {
         LottoTicketNumbers winningNumbers = new LottoTicketNumbers(InputView.getWinningNumbers().stream()
                 .map(LottoNumber::getInstance)
                 .collect(Collectors.toList()));
-        System.out.println(winningNumbers.getLottoNumbers().stream().map(LottoNumber::getNumber).collect(Collectors.toList()));
         LottoNumber bonusNumber = LottoNumber.createBonus(InputView.getBonusNumber(), winningNumbers);
 
         WinningStat winningStat = lottoMachine.createWinningStat(lottoTickets, winningNumbers, bonusNumber);
