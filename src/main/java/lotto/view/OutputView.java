@@ -11,9 +11,9 @@ import lotto.dto.LottoTicketsDto;
 
 public class OutputView {
 
-    public static final String LOTTO_PREFIX = "[";
-    public static final String SEPARATOR = ", ";
-    public static final String LOTTO_SUFFIX = "]\n";
+    private static final String LOTTO_PREFIX = "[";
+    private static final String SEPARATOR = ", ";
+    private static final String LOTTO_SUFFIX = "]\n";
 
     public void printErrorMessage(String errorMessage) {
         System.out.println("[ERROR] " + errorMessage);
