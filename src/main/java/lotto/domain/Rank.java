@@ -26,7 +26,7 @@ public enum Rank {
             return Rank.SECOND;
         }
 
-        return getRank(countMatchBonus(matchCount, matchBonus));
+        return getRank(matchCount);
     }
 
     private static boolean isSecond(int matchCount, boolean matchBonus) {
@@ -39,14 +39,6 @@ public enum Rank {
                 .filter(Rank::isNotSecond)
                 .findAny()
                 .orElse(Rank.NONE);
-    }
-
-    private static int countMatchBonus(int matchCount, boolean matchBonus) {
-        if (matchBonus) {
-            matchCount++;
-        }
-
-        return matchCount;
     }
 
     private static boolean equalMatchCount(int matchCount, int otherMatchCount) {

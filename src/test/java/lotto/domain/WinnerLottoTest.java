@@ -41,41 +41,17 @@ public class WinnerLottoTest {
     }
 
     @Test
-    @DisplayName("당첨 숫자가 4개 일치하고 보너스 숫자를 포함하면 3등을 반환한다.")
-    void containsNumbersFiveReturnThird() {
-        Lotto lotto = new Lotto(givenNumbers(1, 2, 3, 4, 7, 9));
-
-        assertThat(WINNER_LOTTO.findRank(lotto)).isEqualTo(Rank.THIRD);
-    }
-
-    @Test
-    @DisplayName("당첨 번호가 4개 일치하고 보너스 숫자를 포함하지 않으면 4등을 반환한다.")
-    void containsNumbersFourReturnFourthNotContainsBonus() {
-        Lotto lotto = new Lotto(givenNumbers(1, 2, 3, 4, 9, 10));
-
-        assertThat(WINNER_LOTTO.findRank(lotto)).isEqualTo(Rank.FOURTH);
-    }
-
-    @Test
-    @DisplayName("당첨 번호가 3개 일치하고 보너스 숫자를 포함하면 4등을 반환한다.")
+    @DisplayName("당첨 번호가 4개 일치하면 4등을 반환한다.")
     void containsNumbersFourReturnFourth() {
-        Lotto lotto = new Lotto(givenNumbers(1, 2, 3, 7, 9, 10));
+        Lotto lotto = new Lotto(givenNumbers(1, 2, 3, 4, 7, 10));
 
         assertThat(WINNER_LOTTO.findRank(lotto)).isEqualTo(Rank.FOURTH);
     }
 
     @Test
-    @DisplayName("당첨 번호가 3개 일치하고 보너스 숫자를 포함하지 않으면 5등을 반환한다.")
-    void containsNumbersThreeReturnFifthNotContainsBonus() {
-        Lotto lotto = new Lotto(givenNumbers(1, 2, 3, 8, 9, 10));
-
-        assertThat(WINNER_LOTTO.findRank(lotto)).isEqualTo(Rank.FIFTH);
-    }
-
-    @Test
-    @DisplayName("당첨 번호가 2개 일치하고 보너스 숫자를 포함하면 5등을 반환한다.")
+    @DisplayName("당첨 번호가 3개 일치하면 5등을 반환한다.")
     void containsNumbersThreeReturnFifth() {
-        Lotto lotto = new Lotto(givenNumbers(1, 2, 7, 8, 9, 10));
+        Lotto lotto = new Lotto(givenNumbers(1, 2, 3, 8, 9, 10));
 
         assertThat(WINNER_LOTTO.findRank(lotto)).isEqualTo(Rank.FIFTH);
     }
