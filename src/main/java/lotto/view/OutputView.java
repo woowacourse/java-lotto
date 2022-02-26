@@ -7,6 +7,7 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.Rank;
+import lotto.domain.Statistics;
 
 public class OutputView {
 
@@ -26,25 +27,31 @@ public class OutputView {
         System.out.println();
     }
 
+    public static void displayLottoResult(Statistics statistics) {
+        displayStatistics(statistics.getStatistics());
+        displayYield(statistics.getYield());
+    }
+
     private static List<Integer> toIntegerNumbers(List<LottoNumber> lottoNumbers) {
         return lottoNumbers.stream()
                 .map(LottoNumber::getNumber)
                 .collect(Collectors.toList());
     }
 
-    public static void displayResult(EnumMap<Rank, Integer> statistics, double calculateYield) {
+    private static void displayStatistics(EnumMap<Rank, Integer> statistics) {
         System.out.println();
         System.out.println(STATISTICS_GUIDE_MESSAGE);
-        for (Rank rank : statistics.keySet()) {
-            displayStatistics(statistics, rank);
-        }
+        statistics.forEach(OutputView::displayRankResult);
+    }
+
+    private static void displayYield(double calculateYield) {
         System.out.println(String.format(YIELD_FORMAT, calculateYield) + isLoss(calculateYield));
     }
 
-    private static void displayStatistics(EnumMap<Rank, Integer> statistics, Rank rank) {
+    private static void displayRankResult(Rank rank, Integer count) {
         if (rank.getMatchCount() != Rank.MATCH_ZERO_NUMBERS.getMatchCount()) {
             System.out.println(
-                    rank.getMatchStatus() + String.format(STATISTICS_FORMAT, rank.getReward(), statistics.get(rank)));
+                    rank.getMatchStatus() + String.format(STATISTICS_FORMAT, rank.getReward(), count));
         }
     }
 
