@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import lotto.receiver.LottoReceiver;
 
@@ -22,17 +21,19 @@ public class Lotto {
     }
 
     public Rank getRank(WinningLotto winningLotto, BonusNumber bonusNumber) {
-        int matchCount = winningLotto.getMatchCount(this);
+        int matchCount = getMatchCount(winningLotto.getWinningLotto());
         boolean contains = isContain(bonusNumber.getBonusNumber());
         return Rank.getRank(matchCount, contains);
     }
 
-    public boolean isContain(LottoNumber bonusNumber) {
-        return lottoNumbers.contains(bonusNumber);
+    private int getMatchCount(Lotto lotto) {
+        return (int) lottoNumbers.stream()
+                .filter(lotto.lottoNumbers::contains)
+                .count();
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return Collections.unmodifiableList(lottoNumbers);
+    public boolean isContain(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
     }
 
     @Override
