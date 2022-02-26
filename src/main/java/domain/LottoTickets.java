@@ -12,9 +12,9 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
-    public static LottoTickets purchaseBy(int money) {
+    public static LottoTickets purchaseBy(UserBalance userBalance) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        int lottoCount = money / LOTTO_PRICE;
+        int lottoCount = userBalance.getUserBalance() / LOTTO_PRICE;
 
         for (int i = 0; i < lottoCount; i++) {
             lottoTickets.add(LottoTicket.createAutoLotto());
