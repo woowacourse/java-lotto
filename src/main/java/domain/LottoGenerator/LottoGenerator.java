@@ -5,5 +5,7 @@ import domain.Lotto.Lotto;
 import java.util.List;
 
 public interface LottoGenerator {
-    Lotto generateLotto(List<Integer> lottoNumbers);
+    Lotto generateLotto();
+
+    Lotto generateWinningLotto(List<Integer> numbers);
 }

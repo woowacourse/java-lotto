@@ -28,8 +28,9 @@ public class LottoController {
 
     public void determineWinningNumber(List<Integer> winningNumbers, int bonusBall) {
         LottoGenerator lottoGenerator = new WinningLottoGenerator();
-        Lotto winningLotto = lottoGenerator.generateLotto(winningNumbers);
-        this.winningLotto = new WinningLotto(winningLotto, new LottoNumber(bonusBall));
+        Lotto winningLotto = lottoGenerator.generateWinningLotto(winningNumbers);
+
+        this.winningLotto = new WinningLotto(winningLotto, LottoNumber.valueOf(bonusBall));
     }
 
     public List<Result> judgeLottos() {

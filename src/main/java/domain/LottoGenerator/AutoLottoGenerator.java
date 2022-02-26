@@ -3,6 +3,7 @@ package domain.LottoGenerator;
 import domain.Lotto.Lotto;
 import domain.Lotto.LottoNumber;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -13,15 +14,20 @@ public class AutoLottoGenerator implements LottoGenerator {
     private static final int LOTTO_SIZE = 6;
 
     @Override
-    public Lotto generateLotto(List<Integer> numbers) {
-        Collections.shuffle(numbers);
+    public Lotto generateLotto() {
+        List<LottoNumber> lottoNumbers = new ArrayList<>(LottoNumber.values());
+        Collections.shuffle(lottoNumbers);
 
-        List<LottoNumber> lottoNumbers = numbers.stream()
+        List<LottoNumber> collect = lottoNumbers.stream()
                 .limit(LOTTO_SIZE)
-                .map(LottoNumber::new)
                 .sorted(Comparator.comparing(LottoNumber::getNumber))
                 .collect(Collectors.toList());
 
-        return new Lotto(lottoNumbers);
+        return new Lotto(collect);
+    }
+
+    @Override
+    public Lotto generateWinningLotto(List<Integer> numbers) {
+        return null;
     }
 }

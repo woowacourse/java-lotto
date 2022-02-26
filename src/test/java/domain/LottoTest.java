@@ -56,7 +56,7 @@ public class LottoTest {
     @Test
     @DisplayName("Lotto의 숫자들과 당첨숫자를 비교하여 결과를 반환한다.")
     void judge_보너스볼_불일치() {
-        WinningLotto winningLotto = new WinningLotto(lottoGenerator.generateLotto(winningNumbers), new LottoNumber(10));
+        WinningLotto winningLotto = new WinningLotto(lottoGenerator.generateWinningLotto(winningNumbers), new LottoNumber(10));
         Result actual = lotto.judge(winningLotto);
         Result expected = new Result(5, false);
         assertThat(actual).isEqualTo(expected);
@@ -65,7 +65,7 @@ public class LottoTest {
     @Test
     @DisplayName("Lotto의 숫자들과 당첨숫자를 비교하여 결과를 반환한다.")
     void judge_보너스볼_일치() {
-        WinningLotto winningLotto = new WinningLotto(lottoGenerator.generateLotto(winningNumbers), new LottoNumber(1));
+        WinningLotto winningLotto = new WinningLotto(lottoGenerator.generateWinningLotto(winningNumbers), new LottoNumber(1));
         Result actual = lotto.judge(winningLotto);
         Result expected = new Result(5, true);
         assertThat(actual).isEqualTo(expected);
