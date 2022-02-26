@@ -7,7 +7,7 @@ public class Amount {
 
     public Amount(int amount) {
         checkAmountPositive(amount);
-        checkAmountDivisible(amount);
+        checkAmountLottoPriceUnit(amount);
         this.amount = amount;
     }
 
@@ -17,7 +17,7 @@ public class Amount {
         }
     }
 
-    private void checkAmountDivisible(int amount) {
+    private void checkAmountLottoPriceUnit(int amount) {
         if (isDivisibleLottoPrice(amount)) {
             throw new IllegalArgumentException(REQUEST_UNIT_OF_LOTTO_PRICE);
         }
