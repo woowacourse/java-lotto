@@ -27,13 +27,13 @@ public class Lotto {
 
     private void validateNumberRange(Integer lottoNumber) {
         if (lottoNumber > LOTTO_NUMBER_MAXIMUM || lottoNumber < LOTTO_NUMBER_MINIMUM) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(String.valueOf(lottoNumber));
         }
     }
 
     private void validateDuplicatedNumber(Integer lottoNumber) {
         if (lottoNumbers.contains(lottoNumber)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(String.valueOf(lottoNumbers));
         }
     }
 
