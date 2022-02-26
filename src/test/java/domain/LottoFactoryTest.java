@@ -2,7 +2,8 @@ package domain;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import java.util.List;
+import java.util.*;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,5 +28,18 @@ class LottoFactoryTest {
         final List<Lotto> lottoTickets = lottoFactory.getLotto();
 
         assertThat(lottoTickets.size()).isEqualTo(100000);
+    }
+
+    @DisplayName("각각 로또들의 등수에 따라 받을 수 있는 총 상금의 합을 확인한다.")
+    @Test
+    void total_prize_correct() {
+        SortedMap<RankPrize, Integer> rankCounts = new TreeMap<>();
+        rankCounts.put(RankPrize.FOURTH, 1);
+        rankCounts.put(RankPrize.SECOND, 1);
+        rankCounts.put(RankPrize.THIRD, 1);
+
+        int result = lottoFactory.calculatePrize(rankCounts);
+
+        assertThat(result).isEqualTo(31550000);
     }
 }

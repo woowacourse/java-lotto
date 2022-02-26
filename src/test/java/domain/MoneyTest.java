@@ -1,7 +1,6 @@
 package domain;
 
-import static domain.Money.ERROR_LOWER_THAN_LOTTO_PRICE_MESSAGE;
-import static domain.Money.LOTTO_PRICE;
+import static domain.Money.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static utils.Validator.ERROR_FORMAT_MESSAGE;
@@ -20,6 +19,16 @@ class MoneyTest {
     void input_money_valid() {
         final Money money = new Money("1000");
         assertThat(money).isEqualTo(new Money("1000"));
+    }
+
+    @DisplayName("수익률이 정상적으로 계산되는지 확인한다.")
+    @Test
+    void name() {
+        final Money money = new Money("10000");
+
+        final double profit = money.calculateProfit(5000);
+
+        assertThat(profit).isEqualTo(0.5);
     }
 
     @DisplayName("로또 구입 금액 입력이 null 혹은 빈값인 경우 예외를 발생시킨다.")
@@ -54,4 +63,5 @@ class MoneyTest {
 
         assertThat(actual).isEqualTo(3);
     }
+
 }

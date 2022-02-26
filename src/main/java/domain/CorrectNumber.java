@@ -11,7 +11,7 @@ public class CorrectNumber {
     }
 
     public boolean isThirdRankCount() {
-        return this.count == RankPrice.THIRD.getCount();
+        return this.count == RankPrize.THIRD.getCount();
     }
 
     public CorrectNumber convertToSecondRankCount() {
@@ -19,10 +19,10 @@ public class CorrectNumber {
     }
 
     public boolean isInRank() {
-        return this.count >= RankPrice.FIFTH.getCount();
+        return this.count >= RankPrize.FIFTH.getCount();
     }
 
-    public RankPrice findRankPrice() {
-        return RankPrice.findByCount(this.count, this.bonus);
+    public RankPrize findRankPrize() {
+        return RankPrize.findByCount(this.count, this.bonus);
     }
 }
