@@ -1,6 +1,6 @@
 package lotto.domain;
 
-public class Ball{
+public class Ball {
     public static final int MINIMUM_NUMBER = 1;
     public static final int MAXIMUM_NUMBER = 45;
     private static final String ERROR_LOTTO_NUMBER = "로또 숫자가 아닙니다";
@@ -17,11 +17,6 @@ public class Ball{
             // TODO: 예외 처리 별도 객체 생성
             throw new IllegalArgumentException(ERROR_LOTTO_NUMBER);
         }
-    }
-
-    @Override
-    public String toString() {
-        return Integer.toString(number);
     }
 
     @Override
