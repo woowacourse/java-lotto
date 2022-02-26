@@ -2,10 +2,10 @@ package controller;
 
 import java.io.IOException;
 import java.util.List;
+import model.LottoPurchasingMoney;
 import model.LottoRank;
 import model.LottoTicket;
 import model.LottoTicketFactory;
-import model.Money;
 import model.WinningNumbers;
 import model.WinningStatistics;
 import view.InputView;
@@ -13,16 +13,16 @@ import view.OutputView;
 
 public class LottoController {
     public void run() {
-        Money inputMoney = inputMoney();
+        LottoPurchasingMoney inputLottoPurchasingMoney = inputMoney();
 
-        List<LottoTicket> lottoTickets = purchaseLottoTickets(inputMoney);
+        List<LottoTicket> lottoTickets = purchaseLottoTickets(inputLottoPurchasingMoney);
         OutputView.printPurchasedTickets(lottoTickets);
 
         WinningNumbers winningNumbers = inputWinningNumbers();
 
         WinningStatistics winningStatistics = calculateStatistics(lottoTickets, winningNumbers);
 
-        OutputView.printStatistics(winningStatistics, inputMoney);
+        OutputView.printStatistics(winningStatistics, inputLottoPurchasingMoney);
     }
 
     private WinningStatistics calculateStatistics(List<LottoTicket> lottoTickets, WinningNumbers winningNumbers) {
@@ -38,9 +38,9 @@ public class LottoController {
         return winningStatistics;
     }
 
-    private Money inputMoney() {
+    private LottoPurchasingMoney inputMoney() {
         try {
-            return new Money(InputView.inputMoney());
+            return new LottoPurchasingMoney(InputView.inputMoney());
         } catch (IOException | IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
             return inputMoney();
@@ -56,8 +56,8 @@ public class LottoController {
         }
     }
 
-    private List<LottoTicket> purchaseLottoTickets(Money inputMoney) {
+    private List<LottoTicket> purchaseLottoTickets(LottoPurchasingMoney inputLottoPurchasingMoney) {
         LottoTicketFactory ticketFactory = LottoTicketFactory.getInstance();
-        return ticketFactory.createTickets(inputMoney.getAmount());
+        return ticketFactory.createTickets(inputLottoPurchasingMoney.getAmount());
     }
 }

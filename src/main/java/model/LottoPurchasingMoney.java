@@ -2,14 +2,14 @@ package model;
 
 import java.util.Objects;
 
-public class Money {
+public class LottoPurchasingMoney {
     static final String NOT_ENOUGH_MONEY = "[ERROR] 로또를 구매하려면 최소 천원 이상 투입해야 합니다.";
 
     private static final int LOTTO_PRICE = 1000;
 
     private final int amount;
 
-    public Money(int amount) {
+    public LottoPurchasingMoney(int amount) {
         validateEnough(amount);
         this.amount = amount;
     }
@@ -32,8 +32,8 @@ public class Money {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Money money = (Money) o;
-        return amount == money.amount;
+        LottoPurchasingMoney lottoPurchasingMoney = (LottoPurchasingMoney) o;
+        return amount == lottoPurchasingMoney.amount;
     }
 
     @Override

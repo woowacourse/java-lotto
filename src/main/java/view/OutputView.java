@@ -1,14 +1,15 @@
 package view;
 
 import static java.lang.System.out;
-import static model.LottoRank.*;
+import static model.LottoRank.SECOND;
+import static model.LottoRank.values;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import model.LottoNumber;
+import model.LottoPurchasingMoney;
 import model.LottoRank;
 import model.LottoTicket;
-import model.Money;
 import model.WinningStatistics;
 
 public class OutputView {
@@ -21,12 +22,12 @@ public class OutputView {
         lottoTickets.forEach(OutputView::printLottoNumbers);
     }
 
-    public static void printStatistics(WinningStatistics winningStatistics, Money inputMoney) {
+    public static void printStatistics(WinningStatistics winningStatistics, LottoPurchasingMoney inputLottoPurchasingMoney) {
         out.printf("당첨 통계%n---------%n");
         for (LottoRank lottoRank : values()) {
             printWinningResult(winningStatistics, lottoRank);
         }
-        printEarningsResult(winningStatistics, inputMoney);
+        printEarningsResult(winningStatistics, inputLottoPurchasingMoney);
     }
 
     private static void printLottoNumbers(LottoTicket lottoTicket) {
@@ -46,7 +47,7 @@ public class OutputView {
                 winningStatistics.get(lottoRank));
     }
 
-    private static void printEarningsResult(WinningStatistics winningStatistics, Money inputMoney) {
+    private static void printEarningsResult(WinningStatistics winningStatistics, LottoPurchasingMoney inputMoney) {
         double earningsRate = winningStatistics.getEarningsRate(inputMoney.getAmount());
         String result = String.format("총 수익률은 %.2f 입니다.", earningsRate);
         if (earningsRate < 1) {
