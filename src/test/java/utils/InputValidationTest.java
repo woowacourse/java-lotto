@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
-@DisplayName("옳바르지 않은 입력값이 들어올시 예외를 발생시킨다.")
+@DisplayName("올바르지 않은 입력값이 들어올시 예외를 발생시킨다.")
 public class InputValidationTest {
 
     @Nested
@@ -33,59 +33,22 @@ public class InputValidationTest {
         }
     }
 
-    @Nested
-    @DisplayName("로또 넘버 입력 테스트")
-    class WinningLottoTest {
-
-        @DisplayName("입력된 번호가 6개가 아니면 예외가 발생한다.")
-        @ParameterizedTest(name = "{index} {displayName} numbers={0}")
-        @ValueSource(strings = {"12, 40, 43, 12,", "12, 4, 1, 2, 4, 5, 6"})
-        void checkNumOfNumbers_throwIllegalException(final String numbers) {
-            assertThatThrownBy(() -> InputValidation.validateWinningNumber(numbers))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining("로또 번호는 6개의 번호를 입력해줘야 합니다.");
-        }
-
-        @DisplayName("로또 번호가 숫자가 아닌경우 예외가 발생한다.")
-        @ParameterizedTest(name = "{index} {displayName} numbers={0}")
-        @ValueSource(strings = {"12, 안녕, 43, 12, 1, 3", "12, 4, 1, qwe, 4, 5"})
-        void checkNonNumbers_throwIllegalException(final String numbers) {
-            assertThatThrownBy(() -> InputValidation.validateWinningNumber(numbers))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining("로또 번호는 숫자만 입력해줘야 합니다.");
-        }
-
-        @DisplayName("로또 번호가 중복된 경우 예외가 발생한다.")
-        @ParameterizedTest(name = "{index} {displayName} numbers={0}")
-        @ValueSource(strings = {"1, 1, 3, 4, 43, 45", "1, 2, 3, 4, 6, 6"})
-        void checkDuplicateNumber_throwIllegalException(final String numbers) {
-            assertThatThrownBy(() -> InputValidation.validateWinningNumber(numbers))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining("로또 번호는 중복되면 안 됩니다.");
-        }
+    @DisplayName("로또에 숫자가 아닌 입력이 들어왔을 때 예외 발생")
+    @ParameterizedTest(name ="{displayName} input={0} ")
+    @ValueSource(strings = {"12, 안녕, 43, 12, 1, 3", "12, 4, 1, qwe, 4, 5"})
+    void checkNonNumbers_throwIllegalException(final String numbers) {
+        assertThatThrownBy(() -> InputValidation.validateWinningNumber(numbers))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("로또 번호는 숫자만 입력해줘야 합니다.");
     }
 
-    @Nested
-    @DisplayName("보너스 번호 테스트")
-    class BonusTest {
-
-        @DisplayName("보너스 번호가 숫자가 아닌 경우 예외가 발생한다.")
-        @ParameterizedTest(name = "{index} {displayName} bonus={0}")
-        @ValueSource(strings = {"보너스", "넘버"})
-        void checkBonusNonInteger_throwIllegalException(final String bonus) {
-            assertThatThrownBy(() -> InputValidation.validateBonusNumber(bonus))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining("로또 번호는 숫자만 입력해줘야 합니다.");
-        }
-
-        @DisplayName("보너스 번호가 범위를 벗어난 경우 예외가 발생한다.")
-        @ParameterizedTest(name = "{index} {displayName} bonus={0}")
-        @ValueSource(strings = {"0", "-1", "46"})
-        void checkBonusOutRange_throwIllegalException(final String bonus) {
-            assertThatThrownBy(() -> InputValidation.validateBonusNumber(bonus))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining("로또 번호는 1에서 45 사이의 값을 입력해줘야 합니다.");
-        }
+    @DisplayName("보너스로 숫자가 아닌 입력이 들어왔을 때 예외 발생")
+    @ParameterizedTest(name = "{displayName} input={0}")
+    @ValueSource(strings = {"보너스", ".", "bonus", "0.8"})
+    void checkBonusNonInteger_throwIllegalException(final String bonus) {
+        assertThatThrownBy(() -> InputValidation.validateBonusNumber(bonus))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("로또 번호는 숫자만 입력해줘야 합니다.");
     }
 
 }
