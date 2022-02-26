@@ -9,8 +9,8 @@ public class WinningLotto {
     private Lotto lotto;
     private LottoBall bonusBall;
 
-    public WinningLotto(List<Integer> numbers, int bonus) {
-        this.lotto = new Lotto(numbers);
+    public WinningLotto(Lotto lotto, int bonus) {
+        this.lotto = lotto;
         this.bonusBall = new LottoBall(bonus);
         if (lotto.hasBall(bonusBall)) {
             throw new IllegalArgumentException(ERROR_DUPLICATE_BONUS);
