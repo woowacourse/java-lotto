@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import domain.generatestrategy.LotteryGenerateFamily;
 import domain.lottery.LotteryNumber;
+import domain.lottery.LotteryNumberGenerator;
 
 public class LotteryGenerateMock implements LotteryGenerateFamily {
 
@@ -16,12 +17,12 @@ public class LotteryGenerateMock implements LotteryGenerateFamily {
 
 	public LotteryGenerateMock() {
 		lotteriesNumber = new ArrayList<>();
-		lotteriesNumber.add(generateLotteryNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
-		lotteriesNumber.add(generateLotteryNumbers(Arrays.asList(1, 2, 3, 4, 5, 7)));
-		lotteriesNumber.add(generateLotteryNumbers(Arrays.asList(1, 2, 3, 4, 5, 9)));
-		lotteriesNumber.add(generateLotteryNumbers(Arrays.asList(1, 2, 3, 4, 9, 10)));
-		lotteriesNumber.add(generateLotteryNumbers(Arrays.asList(1, 2, 3, 8, 9, 10)));
-		lotteriesNumber.add(generateLotteryNumbers(Arrays.asList(1, 2, 10, 11, 12, 13)));
+		lotteriesNumber.add(LotteryNumberGenerator.generateLotteryNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
+		lotteriesNumber.add(LotteryNumberGenerator.generateLotteryNumbers(Arrays.asList(1, 2, 3, 4, 5, 7)));
+		lotteriesNumber.add(LotteryNumberGenerator.generateLotteryNumbers(Arrays.asList(1, 2, 3, 4, 5, 9)));
+		lotteriesNumber.add(LotteryNumberGenerator.generateLotteryNumbers(Arrays.asList(1, 2, 3, 4, 9, 10)));
+		lotteriesNumber.add(LotteryNumberGenerator.generateLotteryNumbers(Arrays.asList(1, 2, 3, 8, 9, 10)));
+		lotteriesNumber.add(LotteryNumberGenerator.generateLotteryNumbers(Arrays.asList(1, 2, 10, 11, 12, 13)));
 		index = 0;
 	}
 
@@ -31,11 +32,5 @@ public class LotteryGenerateMock implements LotteryGenerateFamily {
 			return lotteriesNumber.get(index++);
 		}
 		return Collections.emptyList();
-	}
-
-	private List<LotteryNumber> generateLotteryNumbers(List<Integer> numbers) {
-		return numbers.stream()
-			.map(LotteryNumber::new)
-			.collect(Collectors.toList());
 	}
 }

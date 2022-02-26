@@ -49,17 +49,12 @@ public class LotteriesTest {
 		final Lotteries lotteries = Lotteries.from(lotteriesNumbers);
 		//when
 		Map<Rank, Integer> rankResult = lotteries.getTheNumberOfWinners(
-			WinningLottery.of(generateLotteryNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), new LotteryNumber(7)));
+			WinningLottery.of(LotteryNumberGenerator.generateLotteryNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)),
+				new LotteryNumber(7)));
 		//then
 		for (Rank rank : rankResult.keySet()) {
 			rankResult.get(rank);
 			assertThat(rankResult.get(rank)).isEqualTo(1);
 		}
-	}
-
-	private List<LotteryNumber> generateLotteryNumbers(List<Integer> numbers) {
-		return numbers.stream()
-			.map(LotteryNumber::new)
-			.collect(Collectors.toList());
 	}
 }

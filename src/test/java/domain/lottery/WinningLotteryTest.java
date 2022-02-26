@@ -20,7 +20,8 @@ import domain.Rank;
 
 public class WinningLotteryTest {
 
-	final List<LotteryNumber> winningNumbers = generateLotteryNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+	final List<LotteryNumber> winningNumbers = LotteryNumberGenerator.generateLotteryNumbers(
+		Arrays.asList(1, 2, 3, 4, 5, 6));
 
 	@Nested
 	@DisplayName("보너스 볼의")
@@ -59,7 +60,7 @@ public class WinningLotteryTest {
 	void checkRank(List<Integer> lottoNumbers, Rank rank) {
 		//given
 		WinningLottery winningLottery = WinningLottery.of(winningNumbers, new LotteryNumber(7));
-		Lottery lottery = Lottery.from(generateLotteryNumbers(lottoNumbers));
+		Lottery lottery = Lottery.from(LotteryNumberGenerator.generateLotteryNumbers(lottoNumbers));
 		//when
 		//then
 		assertThat(winningLottery.getRank(lottery)).isEqualTo(rank);
@@ -74,11 +75,5 @@ public class WinningLotteryTest {
 			Arguments.of(Arrays.asList(1, 2, 3, 9, 10, 11), Rank.FIFTH),
 			Arguments.of(Arrays.asList(1, 2, 9, 10, 11, 12), Rank.NONE)
 		);
-	}
-
-	private List<LotteryNumber> generateLotteryNumbers(List<Integer> numbers) {
-		return numbers.stream()
-			.map(LotteryNumber::new)
-			.collect(Collectors.toList());
 	}
 }
