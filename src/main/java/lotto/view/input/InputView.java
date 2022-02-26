@@ -8,8 +8,8 @@ import lotto.exception.LottoException;
 import lotto.exception.LottoExceptionStatus;
 import lotto.exception.ball.BallNumberExceptionStatus;
 import lotto.exception.money.MoneyExceptionStatus;
-import lotto.utils.Delimiter;
 import lotto.view.input.reader.Reader;
+import lotto.view.utils.Delimiter;
 
 public class InputView {
 

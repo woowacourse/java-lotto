@@ -10,7 +10,7 @@ import lotto.domain.rank.Rank;
 import lotto.dto.AnalysisDto;
 import lotto.dto.TicketDto;
 import lotto.dto.TicketsDto;
-import lotto.utils.Delimiter;
+import lotto.view.utils.Delimiter;
 
 public class OutputView {
 
