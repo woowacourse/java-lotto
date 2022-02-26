@@ -7,14 +7,14 @@ import org.junit.jupiter.api.Test;
 
 public class MoneyTest {
 
-    @DisplayName("Money 생성자 테스트")
+    @DisplayName("입력한 숫자로 Money 객체를 생성한다")
     @Test
     void money_constructor_test() {
         assertThatNoException()
                 .isThrownBy(() -> new Money(10000));
     }
 
-    @DisplayName("Money 생성자 음수 입력 예외 테스트")
+    @DisplayName("음수를 입력했을 때 IllegalArgumentException 예외가 발생한다")
     @Test
     void money_constructor_error_on_negative_test() {
         assertThatExceptionOfType(IllegalArgumentException.class)

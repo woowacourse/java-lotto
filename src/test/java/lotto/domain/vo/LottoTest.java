@@ -23,13 +23,13 @@ public class LottoTest {
         }
     }
 
-    @DisplayName("Lotto 생성자 테스트")
+    @DisplayName("로또 번호를 가진 Lotto 객체를 생성한다")
     @Test
     void lotto_constructor_test() {
         assertThatNoException().isThrownBy(() -> new Lotto(lottoNumbers));
     }
 
-    @DisplayName("Lotto 생성자 null 입력 예외 테스트")
+    @DisplayName("null 입력 시 IllegalArgumentException 예외가 발생한다")
     @Test
     void lotto_constructor_error_null_test() {
         assertThatExceptionOfType(IllegalArgumentException.class)
@@ -37,7 +37,7 @@ public class LottoTest {
                 .withMessage("로또 숫자가 없습니다.");
     }
 
-    @DisplayName("Lotto 생성자 6개가 아닌 숫자 입력 예외 테스트")
+    @DisplayName("6개가 아닌 숫자를 입력 시 IllegalArgumentException 예외가 발생한다")
     @Test
     void lotto_constructor_error_not_six_test() {
         lottoNumbers.add(new LottoNumber(7));
@@ -47,7 +47,7 @@ public class LottoTest {
                 .withMessage("로또 숫자는 6개여야 합니다.");
     }
 
-    @DisplayName("Lotto 생성자 숫자 중복 예외 테스트")
+    @DisplayName("로또 번호가 중복되면 IllegalArgumentException 예외가 발생한다")
     @Test
     void lotto_constructor_error_on_duplication_test() {
         lottoNumbers.set(0, new LottoNumber(45));
@@ -58,7 +58,7 @@ public class LottoTest {
                 .withMessage("로또 숫자는 중복되면 안됩니다.");
     }
 
-    @DisplayName("confirmWinning 메소드 테스트")
+    @DisplayName("confirmWinning 당첨 등수를 반환한다")
     @Test
     void confirmWinning_test() {
         List<LottoNumber> lottoNumbers = new ArrayList<>(this.lottoNumbers);

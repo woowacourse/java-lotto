@@ -24,14 +24,14 @@ public class WinningNumbersTest {
         bonusNumber = new LottoNumber(30);
     }
 
-    @DisplayName("WinningNumbers 생성자 테스트")
+    @DisplayName("당첨 번호와 보너스 번호를 가진 WinningNumbers 객체를 생성한다")
     @Test
     void constructor_test() {
         assertThatNoException()
                 .isThrownBy(() -> new WinningNumbers(new Lotto(lottoNumbers), bonusNumber));
     }
 
-    @DisplayName("WinningNumbers 생성자 6개가 아닌 숫자 입력 예외 테스트")
+    @DisplayName("6개가 아닌 당첨 번호가 입력되면 IllegalArgumentException 예외가 발생한다")
     @Test
     void constructor_error_winning_number_not_six_test() {
         lottoNumbers.add(new LottoNumber(7));
@@ -41,7 +41,7 @@ public class WinningNumbersTest {
                 .withMessage("로또 숫자는 6개여야 합니다.");
     }
 
-    @DisplayName("WinningNumbers 당첨 번호 중복 예외 테스트")
+    @DisplayName("당첨 번호가 중복되면 IllegalArgumentException 예외가 발생한다")
     @Test
     void constructor_error_on_winning_number_duplication_test() {
         lottoNumbers.set(0, new LottoNumber(45));
@@ -52,7 +52,7 @@ public class WinningNumbersTest {
                 .withMessage("로또 숫자는 중복되면 안됩니다.");
     }
 
-    @DisplayName("WinningNumbers 보너스 번호 중복 예외 테스트")
+    @DisplayName("당첨 번호와 보너스 번호가 중복되면 IllegalArgumentException 예외가 발생한다")
     @Test
     void constructor_error_on_bonus_number_duplication_test() {
         bonusNumber = new LottoNumber(lottoNumbers.get(0).get());

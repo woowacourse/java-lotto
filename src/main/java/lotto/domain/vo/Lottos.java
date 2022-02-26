@@ -9,10 +9,20 @@ import lotto.domain.LottoPrize;
 
 public class Lottos {
 
+    private static final String ERROR_NULL_MESSAGE = "null로 Lottos를 생성할 수 없습니다.";
+
     private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
+        validateNull(lottos);
+
         this.lottos = lottos;
+    }
+
+    private void validateNull(List<Lotto> lottos) {
+        if (lottos == null) {
+            throw new NullPointerException(ERROR_NULL_MESSAGE);
+        }
     }
 
     public List<Lotto> getLottos() {

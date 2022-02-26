@@ -25,7 +25,7 @@ class LottoResultsTest {
         }
     }
 
-    @DisplayName("LottoResults 생성자 테스트")
+    @DisplayName("당첨 등수와 당첨 등수의 수를 가진 LottoResults 객체를 생성한다")
     @Test
     void lottoResults_constructor_test() {
         Map<LottoPrize, Integer> forResult = new HashMap<>();
@@ -36,7 +36,7 @@ class LottoResultsTest {
         assertThatNoException().isThrownBy(() -> new LottoResults(forResult, LOTTO_PRICE));
     }
 
-    @DisplayName("LottoResults null 입력 예외 테스트")
+    @DisplayName("null을 입력 시 NullPointerException 예외가 발생한다")
     @Test
     void lottoResults_constructor_error_on_null_test() {
         assertThatExceptionOfType(NullPointerException.class)
@@ -44,7 +44,7 @@ class LottoResultsTest {
                 .withMessage("로또 결과 생성자의 인자는 null이면 안됩니다.");
     }
 
-    @DisplayName("LottoResults 등수 누락 입력 예외 테스트")
+    @DisplayName("파라미터의 Map에 당첨 등수가 누락된 경우 IllegalArgumentException 예외가 발생한다")
     @Test
     void lottoResults_constructor_error_on_key_test() {
         Map<LottoPrize, Integer> result = new HashMap<>(INIT_RESULT);
@@ -55,7 +55,7 @@ class LottoResultsTest {
                 .withMessage("로또 결과가 잘못되었습니다.");
     }
 
-    @DisplayName("getRateReturn 메소드 테스트")
+    @DisplayName("getRateReturn 당첨 결과를 계산하여 수익률을 반환한다")
     @Test
     void getRateReturn_test() {
         Map<LottoPrize, Integer> result = new HashMap<>(INIT_RESULT);
@@ -67,7 +67,7 @@ class LottoResultsTest {
         assertThat(lottoResults.getRateReturn()).isEqualTo(0.5);
     }
 
-    @DisplayName("getPrizeNumber 메소드 테스트")
+    @DisplayName("getPrizeNumber 등수를 몇번 당첨되었는지 반환한다")
     @ParameterizedTest(name = DISPLAY_NAME_ARGUMENTS)
     @ValueSource(ints = {1, 2, 3})
     void getPrizeNumber_constructor_test(int input) {

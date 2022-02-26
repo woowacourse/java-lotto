@@ -11,7 +11,7 @@ public class LottoNumberTest {
 
     public static final String DISPLAY_NAME_ARGUMENTS = "{displayName} : {arguments}";
 
-    @DisplayName("Number 생성자 테스트")
+    @DisplayName("1 ~ 45 숫자로 LottoNumber 객체를 생성한다")
     @ParameterizedTest(name = DISPLAY_NAME_ARGUMENTS)
     @ValueSource(ints = {1, 45})
     void constructor_test(int input) {
@@ -19,7 +19,7 @@ public class LottoNumberTest {
                 .isThrownBy(() -> new LottoNumber(input));
     }
 
-    @DisplayName("Number 생성자 범위 예외 테스트")
+    @DisplayName("1 ~ 45 외 숫자 입력 시 IllegalArgumentException 예외를 발생시킨다")
     @ParameterizedTest(name = DISPLAY_NAME_ARGUMENTS)
     @ValueSource(ints = {0, 46})
     void constructor_range_exception_test(int input) {

@@ -18,13 +18,13 @@ import org.junit.jupiter.api.Test;
 
 public class LottoGameTest {
 
-    @DisplayName("LottoGame 생성자 테스트")
+    @DisplayName("로또를 구매하고 당첨 확인을 하는 LottoGame 객체를 생성한다")
     @Test
     void lottoGame_constructor_test() {
         assertThatNoException().isThrownBy(LottoGame::new);
     }
 
-    @DisplayName("purchase 메서드 테스트")
+    @DisplayName("주어진 Money로 구매할 수 있는 최대한의 로또를 구매한다")
     @Test
     void purchase_test() {
         LottoGame lottoGame = new LottoGame();
@@ -40,7 +40,7 @@ public class LottoGameTest {
         assertThat(lottos).allSatisfy(lotto -> lotto.getNumbers().containsAll(lottoNumbers));
     }
 
-    @DisplayName("confirmWinnings 메서드 테스트")
+    @DisplayName("당첨 결과를 계산하여 결과를 반환한다")
     @Test
     void confirmWinnings_test() {
         List<LottoNumber> lottoNumbers;
@@ -54,6 +54,7 @@ public class LottoGameTest {
         lottoGame.purchase(new Money(10000), new CustomLottoGenerator());
         WinningNumbers winningNumbers = new WinningNumbers(new Lotto(lottoNumbers), bonusNumber);
         LottoResults results = lottoGame.confirmWinnings(winningNumbers);
+
         assertThat(results).isInstanceOf(LottoResults.class);
         assertThat(results.getPrizeNumber(LottoPrize.FIRST)).isEqualTo(10);
     }
