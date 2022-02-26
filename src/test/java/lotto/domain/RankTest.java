@@ -10,6 +10,6 @@ class RankTest {
     @Test
     @DisplayName("숫자 입력 시 랭크 반환")
     void insert_number_get_rank() {
-        assertEquals(Rank.getRank(4, false), Rank.FOURTH);
+        assertEquals(Rank.getInstance(4, false), Rank.FOURTH);
     }
 }

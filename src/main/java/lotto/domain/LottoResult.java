@@ -26,10 +26,14 @@ public class LottoResult {
     }
 
     public Profit getProfit() {
-        int totalMoney = 0;
+        Money totalMoney = new Money(0);
+
         for (Rank rank : Rank.values()) {
-            totalMoney += rank.getMoney() * lottoResult.get(rank);
+            Money money = rank.getMoney();
+            money.mulitply(lottoResult.get(rank));
+            totalMoney.add(money.getMoney());
         }
+
         return new Profit(totalMoney);
     }
 }

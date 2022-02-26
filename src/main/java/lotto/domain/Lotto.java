@@ -75,13 +75,14 @@ public class Lotto {
     public Rank getRank(WinningLotto winningLotto) {
         int matchingCount = getMatchingCount(winningLotto.getWinningLotto());
         if (matchingCount == CHECK_BONUS_COUNT && lotto.contains(winningLotto.getBonusBall())) {
-            return Rank.getRank(matchingCount, true);
+            return Rank.getInstance(matchingCount, true);
         }
-        return Rank.getRank(matchingCount, false);
+        return Rank.getInstance(matchingCount, false);
     }
 
     private int getMatchingCount(Lotto compareLotto) {
         return (int)lotto.stream()
-            .filter(compareLotto::contains).count();
+            .filter(compareLotto::contains)
+            .count();
     }
 }
