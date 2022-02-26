@@ -10,9 +10,10 @@ public class Lottos {
     private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
-        this.lottos = Collections.unmodifiableList(lottos);
+        this.lottos = lottos;
     }
 
+    // TODO: should be deleted
     public static Lottos of(int lottoCount) {
         List<Lotto> lottos = Stream.generate(Lotto::new)
                 .limit(lottoCount)
@@ -21,8 +22,14 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
+    public void createAndAddLottos(int lottoCount) {
+        Stream.generate(Lotto::new)
+                .limit(lottoCount)
+                .forEach(lottos::add);
+    }
+
     public List<Lotto> getLottos() {
-        return lottos;
+        return Collections.unmodifiableList(lottos);
     }
 
     @Override
