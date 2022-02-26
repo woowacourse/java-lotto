@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -13,15 +15,14 @@ public class Number {
     private static final List<Number> cache;
 
     static {
-        cache = IntStream.rangeClosed(1, 45)
+        cache = IntStream.rangeClosed(MIN_VALUE, MAX_VALUE)
                 .mapToObj(Number::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toUnmodifiableList());
     }
 
     private final int value;
 
     private Number(final int value) {
-        validateValueRange(value);
         this.value = value;
     }
 
@@ -34,6 +35,12 @@ public class Number {
         if (MIN_VALUE > number || number > MAX_VALUE) {
             throw new IllegalArgumentException(ERROR_MESSAGE);
         }
+    }
+
+    public static List<Number> getRandomNumbers(int size) {
+        List<Number> numbers = new ArrayList<>(cache);
+        Collections.shuffle(numbers);
+        return numbers.subList(0, size);
     }
 
     public int getValue() {
