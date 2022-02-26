@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.LottoNumber;
-import lotto.receiver.validator.LottoNumberValidator;
 import lotto.receiver.validator.LottoValidator;
 
 public class LottoReceiver {
@@ -32,7 +31,6 @@ public class LottoReceiver {
     }
 
     private static List<LottoNumber> convertToLottoNumbers(List<Integer> numbers) {
-        numbers.forEach(LottoNumberValidator::validate);
         return numbers.stream()
                 .map(LottoNumber::findByNumber)
                 .sorted()

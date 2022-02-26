@@ -27,6 +27,11 @@ public enum LottoNumber {
         this.number = number;
     }
 
+    public static LottoNumber findByNumber(int number) {
+        LottoNumberValidator.validate(number);
+        return LottoNumber.valueOf(LOTTO_NUMBER_PREFIX + number);
+    }
+
     public static List<LottoNumber> getRandomLottoNumbers() {
         return shuffleLottoNumbers().stream()
                 .limit(PICKUP_COUNT)
@@ -42,11 +47,6 @@ public enum LottoNumber {
 
     private static List<LottoNumber> getAllLottoNumbers() {
         return Arrays.stream(LottoNumber.values()).collect(Collectors.toList());
-    }
-
-    public static LottoNumber findByNumber(int number) {
-        LottoNumberValidator.validate(number);
-        return LottoNumber.valueOf(LOTTO_NUMBER_PREFIX + number);
     }
 
     @Override
