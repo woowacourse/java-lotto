@@ -14,7 +14,7 @@ public class LottoResultDto {
 
     public LottoResultDto(Map<Rank, Long> ranks, double yield) {
         this.ranks = Arrays.stream(Rank.values())
-                .filter(rank -> rank != Rank.NOTTING)
+                .filter(rank -> rank != Rank.NOTHING)
                 .map(rank -> new RankDto(rank, ranks.getOrDefault(rank, 0L)))
                 .collect(toList());
         this.yield = yield;

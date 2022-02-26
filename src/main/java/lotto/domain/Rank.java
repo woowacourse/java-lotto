@@ -9,7 +9,7 @@ public enum Rank {
     THIRD(1_500_000, 5, false),
     FORTH(50_000, 4, false),
     FIFTH(5_000, 3, false),
-    NOTTING(0, 0, false);
+    NOTHING(0, 0, false);
 
     private final int prizeMoney;
     private final int count;
@@ -29,7 +29,7 @@ public enum Rank {
         return Arrays.stream(values())
                 .filter(rank -> rank != Rank.SECOND && rank.count == count)
                 .findFirst()
-                .orElse(NOTTING);
+                .orElse(NOTHING);
     }
 
     public int getPrizeMoney() {
