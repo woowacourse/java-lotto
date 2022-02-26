@@ -17,14 +17,14 @@ public class Lotto {
         return lottoBalls;
     }
 
-    public Prize calculateRank(WinningNumber winningNumber) {
-        int matched = matchedRegularNumbers(winningNumber);
-        boolean hasBonus = matchedBonusNumber(winningNumber.getBonus());
+    public Prize calculateRank(WinningLotto winningLotto) {
+        int matched = matchedRegularNumbers(winningLotto);
+        boolean hasBonus = matchedBonusNumber(winningLotto.getBonus());
         return Prize.getWinnerPrizeByMatched(matched, hasBonus);
     }
 
-    private int matchedRegularNumbers(WinningNumber winningNumber) {
-        return winningNumber.getWinningNumbers().stream()
+    private int matchedRegularNumbers(WinningLotto winningLotto) {
+        return winningLotto.getWinningNumbers().stream()
                 .filter(lottoBall -> lottoBalls.contains(lottoBall))
                 .collect(Collectors.toList())
                 .size();

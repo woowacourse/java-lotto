@@ -14,7 +14,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class PurchasedLottosTest {
 
     PurchasedLotto lottos;
-    WinningNumber winningLotto;
+    WinningLotto winningLotto;
     int inputMoney;
 
     @BeforeEach
@@ -28,7 +28,7 @@ public class PurchasedLottosTest {
 
         Integer[] winningNumbersArray = {1, 2, 3, 4, 5, 12};
         List<Integer> winningNumbers = Arrays.asList(winningNumbersArray);
-        winningLotto = new WinningNumber(winningNumbers);
+        winningLotto = new WinningLotto(winningNumbers);
         winningLotto.addBonusNumber(6);
     }
 

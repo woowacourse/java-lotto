@@ -35,7 +35,7 @@ public class InputValidationTest {
 
     @Nested
     @DisplayName("로또 넘버 입력 테스트")
-    class WinningNumberTest {
+    class WinningLottoTest {
 
         @DisplayName("입력된 번호가 6개가 아니면 예외가 발생한다.")
         @ParameterizedTest(name = "{index} {displayName} numbers={0}")
