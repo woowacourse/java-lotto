@@ -4,7 +4,7 @@ import static constant.LottoConstants.LOTTO_PRICE;
 import static validator.NumberValidators.validateNoDuplicateInList;
 import static validator.NumberValidators.validateNoDuplicates;
 import static validator.NumberValidators.validateTotalLottoPriceUnit;
-import static validator.NumberValidators.validateWinningNumbersSize;
+import static validator.NumberValidators.validateLottoNumbersSize;
 
 import domain.LottoNumber;
 import domain.LottoReferee;
@@ -16,7 +16,7 @@ import validator.NumberValidators;
 
 public class LottoController {
 
-    public static final String WINNING_NUMBERS_DELIMITER = ", ";
+    public static final String LOTTO_NUMBERS_DELIMITER = ", ";
 
     public Lottos initCustomerLottos(int totalLottoPrice) {
         validateTotalLottoPriceUnit(totalLottoPrice);
@@ -32,19 +32,11 @@ public class LottoController {
     }
 
     private List<LottoNumber> registerWinningNumbers(String winningNumbersInput) {
-        List<LottoNumber> winningNumbers = getWinningNumbers(winningNumbersInput);
+        List<LottoNumber> winningNumbers = getValidLottoNumbers(winningNumbersInput);
 
-        validateWinningNumbersSize(winningNumbers);
         validateNoDuplicates(winningNumbers);
 
         return winningNumbers;
-    }
-
-    private List<LottoNumber> getWinningNumbers(String winningNumbersInput) {
-        return Arrays.stream(winningNumbersInput.split(WINNING_NUMBERS_DELIMITER))
-                .map(NumberValidators::validateAndParseNumber)
-                .map(LottoNumber::of)
-                .collect(Collectors.toList());
     }
 
     private LottoNumber registerBonusNumber(List<LottoNumber> winningNumbers, int bonusBallValue) {
@@ -53,5 +45,20 @@ public class LottoController {
         validateNoDuplicateInList(bonusNumber, winningNumbers);
 
         return bonusNumber;
+    }
+
+    private List<LottoNumber> getValidLottoNumbers(String lottoNumbersInput) {
+        List<LottoNumber> lottoNumbers = parseLottoNumbers(lottoNumbersInput);
+
+        validateLottoNumbersSize(lottoNumbers);
+
+        return lottoNumbers;
+    }
+
+    private List<LottoNumber> parseLottoNumbers(String lottoNumbersInput) {
+        return Arrays.stream(lottoNumbersInput.split(LOTTO_NUMBERS_DELIMITER))
+                .map(NumberValidators::validateAndParseNumber)
+                .map(LottoNumber::of)
+                .collect(Collectors.toList());
     }
 }
