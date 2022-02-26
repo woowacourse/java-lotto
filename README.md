@@ -80,12 +80,14 @@
     - 돈이 부족한 것은 입력에서 금액을 음수/문자로 입력하는 등 예외를 발생시킬 상황은 아니라고 생각하게 되었고, 로또의 수가 0개라면 당첨이 될 수 없기 때문에 당첨 번호를 입력받거나 결과를 출력하지 않았다.
 - [x] `Lottos`에서 `purchase()`의 과정이 자연스러울까?
     - `Lottos`를 만들고 그곳에서 구매를 하는 것 vs 구매를 하여 그것으로 `Lottos`를 만드는 것 무엇이 자연스러울까?
-    - 기존 Lottos의 `purchase()`는 Lottos에 새로운 Lotto를 추가하는 방식이다. 지금 다시 생각해보니 이것은 setter나 add와 같이 Lottos의 상태를 변경하게 되어
-      불변해야하는 조건을 만족하지 않는 것 같다.
+    - 기존 Lottos의 `purchase()`는 Lottos에 새로운 Lotto를 추가하는 방식이다. 지금 다시 생각해보니 이것은 setter나 add와 같이 Lottos의 상태를 변경하게 되어 불변해야하는
+      조건을 만족하지 않는 것 같다.
     - 그래서 Lottos의 `purchase()`를 사용하는 LottoGame에서 `List<Lotto>`를 만들고 이것을 이용하여 Lottos를 만드는 것이 더 적절한 것 같다.
     - 수정 하면서 Lottos가 가지던 로또의 가격 상수를 LottoGame이 가지게 되었다. 이것도 Lottos가 아닌 LottoGame이 가지는 것이 더 자연스러운 것 같다.
         - LottoResults의 수익률 계산을 하는 코드에서 로또의 가격을 하드코딩했다. 이 코드를 LottoGame이 가진 로또 가격을 주어 수정했다.
-- [ ] `LottoGenerator`에서 사용하는 상수는 다른 클래스가 가져야 할 상수가 아닐까?
+- [x] `LottoGenerator`에서 사용하는 상수는 다른 클래스가 가져야 할 상수가 아닐까?
+    - 이미 더 적절한 곳에 상수로 정의되어있지만 private이기 때문에 사용하지 못했었다. 이것을 사용하기위해 getter를 사용할까 생각했었는데 Integer.MAX_VALUE처럼 public 상수를
+      사용하도록 수정했다.
 - [ ] `WinningNumber`의 `validateLottoNumbersDuplication`은 `Lotto`에서 체크하고 있는 validate와 다른가?
 - [ ] `WinningNumber`의 `List<LottoNumber>`는 이미 있는 일급 컬렉션을 사용해보면 어떨까?
 - [ ] `LottoPrize`에서 `checkMatches`의 조건 분기를 합칠 수 있지 않을까?

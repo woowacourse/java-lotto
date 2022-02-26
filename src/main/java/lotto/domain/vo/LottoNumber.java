@@ -6,8 +6,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final String ERROR_NUMBERS_RANGE_MESSAGE = "로또 숫자 범위는 1 ~ 45입니다.";
 
-    private static final int LOTTO_MAXIMUM = 45;
-    private static final int LOTTO_MINIMUM = 1;
+    public static final int MAX_VALUE = 45;
+    public static final int MIN_VALUE = 1;
 
     private final int number;
 
@@ -18,7 +18,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private void validateRange(int number) {
-        if (number < LOTTO_MINIMUM || LOTTO_MAXIMUM < number) {
+        if (number < MIN_VALUE || MAX_VALUE < number) {
             throw new IllegalArgumentException(ERROR_NUMBERS_RANGE_MESSAGE);
         }
     }

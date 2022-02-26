@@ -11,8 +11,6 @@ public class WinningNumbers {
     private static final String ERROR_DUPLICATION_LOTTO_MESSAGE = "로또 숫자는 중복되면 안됩니다.";
     private static final String ERROR_DUPLICATION_BONUS_MESSAGE = "보너스 숫자는 로또 숫자와 중복되면 안됩니다.";
 
-    private static final int LOTTO_SIZE = 6;
-
     private final List<LottoNumber> lottoNumbers;
     private final LottoNumber bonusNumber;
 
@@ -26,7 +24,7 @@ public class WinningNumbers {
     }
 
     private void validateNumberSix(List<LottoNumber> numbers) {
-        if (numbers.size() != LOTTO_SIZE) {
+        if (numbers.size() != Lotto.LOTTO_SIZE) {
             throw new IllegalArgumentException(ERROR_NUMBER_SIX_MESSAGE);
         }
     }
