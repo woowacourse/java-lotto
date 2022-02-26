@@ -30,11 +30,11 @@ public class LottoTest {
             void it_throw_exception() {
                 assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5)))
                     .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage("6개의 숫자가 필요합니다.");
+                    .hasMessage("중복되지 않은 6개의 숫자가 필요합니다.");
 
                 assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5, 6, 7)))
                     .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage("6개의 숫자가 필요합니다.");
+                    .hasMessage("중복되지 않은 6개의 숫자가 필요합니다.");
             }
         }
 
@@ -47,7 +47,7 @@ public class LottoTest {
             void it_throw_exception() {
                 assertThatThrownBy(() -> new Lotto(List.of(1, 1, 3, 4, 5, 6)))
                     .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage("중복은 허용하지 않습니다.");
+                    .hasMessage("중복되지 않은 6개의 숫자가 필요합니다.");
             }
         }
 
