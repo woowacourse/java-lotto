@@ -60,6 +60,6 @@ class RankTest {
         Rank rank = Rank.of(2, true);
 
         // when & then
-        assertThat(rank).isEqualTo(Rank.NOTTING);
+        assertThat(rank).isEqualTo(Rank.NOTHING);
     }
 }
