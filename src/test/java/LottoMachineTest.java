@@ -1,4 +1,5 @@
 import domain.*;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -15,13 +16,22 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoMachineTest {
 
+    private static LottoNumberStrategy strategy;
+
+    @BeforeAll
+    static void lottoNumbersInit() {
+        strategy = () -> IntStream.of(1, 2, 3, 4, 5, 6)
+                .mapToObj(LottoNumber::getInstance)
+                .collect(Collectors.toList());
+    }
+
     @Test
     @DisplayName("입력 금액이 1000원 미만일 때 예외")
     void insertAmountBelowThousand() {
         LottoMachine lottoMachine = new LottoMachine();
 
         assertThatThrownBy(() -> {
-            lottoMachine.purchaseLottoTickets(Money.from(900), new FixedLottoNumberStrategy());
+            lottoMachine.purchaseLottoTickets(Money.from(900), strategy);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -31,8 +41,7 @@ class LottoMachineTest {
     void createLottoTicketsByAmount(int amount) {
         LottoMachine lottoMachine = new LottoMachine();
 
-        List<LottoTicket> lottoTickets = lottoMachine.purchaseLottoTickets(
-                Money.from(amount), new FixedLottoNumberStrategy());
+        List<LottoTicket> lottoTickets = lottoMachine.purchaseLottoTickets(Money.from(amount), strategy);
 
         assertThat(lottoTickets.size()).isEqualTo(10);
     }
@@ -42,8 +51,7 @@ class LottoMachineTest {
     void calculateWinningStat() {
         LottoMachine lottoMachine = new LottoMachine();
 
-        List<LottoTicket> lottoTickets = lottoMachine.purchaseLottoTickets(
-                Money.from(2000), new FixedLottoNumberStrategy());
+        List<LottoTicket> lottoTickets = lottoMachine.purchaseLottoTickets(Money.from(2000), strategy);
 
         List<LottoNumber> inputWinningNumbers = IntStream.of(2, 1, 4, 3, 5, 6)
                 .mapToObj(LottoNumber::getInstance)
@@ -55,15 +63,5 @@ class LottoMachineTest {
 
         Map<LottoRank, Integer> result = winningStat.getStat();
         assertThat(result.get(LottoRank.FIRST)).isEqualTo(2);
-    }
-
-    static class FixedLottoNumberStrategy implements LottoNumberStrategy {
-
-        @Override
-        public List<LottoNumber> generate() {
-            return IntStream.of(1, 2, 3, 4, 5, 6)
-                    .mapToObj(LottoNumber::getInstance)
-                    .collect(Collectors.toList());
-        }
     }
 }
