@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import rule.LottoRule;
 import utils.InputValidateUtils;
 
 public class LottoWinningNumber {
@@ -13,7 +14,6 @@ public class LottoWinningNumber {
 	private static final String WINNING_NUMBER_SIZE_ERROR_MESSAGE = "[Error]: 당첨 번호는 6개의 숫자여야 합니다.";
 	private static final String WINNING_NUMBER_REDUPLICATION_ERROR_MESSAGE = "[Error]: 당첨 번호는 중복이 있으면 안됩니다";
 	private static final String REDUPLICATION_WITH_BONUS_BALL_ERROR_MESSAGE = "[Error]: 당첨 번호와 보너스 볼이 중복됩니다.";
-	private static final int WINNING_NUMBER_SIZE = 6;
 
 	private final List<Integer> winningNumbers;
 
@@ -41,7 +41,7 @@ public class LottoWinningNumber {
 	}
 
 	private void validateNumberSize(String numbers) {
-		if (split(numbers).size() != WINNING_NUMBER_SIZE) {
+		if (split(numbers).size() != LottoRule.LOTTO_SIZE) {
 			throw new IllegalArgumentException(WINNING_NUMBER_SIZE_ERROR_MESSAGE);
 		}
 	}
