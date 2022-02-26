@@ -21,16 +21,16 @@ public class LottoCount {
 	// 	this.count = makeMoneyToNumber2(money);
 	// }
 
-	private int makeMoneyToNumber2(int money) {
-		validateThousandUnitInputMoney2(money);
-		return money / UNIT;
-	}
+	// private int makeMoneyToNumber2(int money) {
+	// 	validateThousandUnitInputMoney2(money);
+	// 	return money / UNIT;
+	// }
 
-	private void validateThousandUnitInputMoney2(int money) {
-		if (money % UNIT != 0 || money == 0) {
-			throw new IllegalArgumentException(LOTTO_COUNT_UNIT_ERROR_MESSAGE);
-		}
-	}
+	// private void validateThousandUnitInputMoney2(int money) {
+	// 	if (money % UNIT != 0 || money == 0) {
+	// 		throw new IllegalArgumentException(LOTTO_COUNT_UNIT_ERROR_MESSAGE);
+	// 	}
+	// }
 
 	private int makeMoneyToNumber(String money) {
 		validateThousandUnitInputMoney(money);
@@ -47,7 +47,7 @@ public class LottoCount {
 		return count == ZERO;
 	}
 
-	public void makeLotto() {
+	public void reduceCountOfRemain() {
 		count--;
 	}
 

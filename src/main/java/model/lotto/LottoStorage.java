@@ -18,7 +18,7 @@ public class LottoStorage {
 
 		while (!lottoCount.isZero()) {
 			lottos.add(new Lotto(RandomLottoNumbersGenerator.pickSixNumbers()));
-			lottoCount.makeLotto();
+			lottoCount.reduceCountOfRemain();
 		}
 		return lottos;
 	}
@@ -29,7 +29,7 @@ public class LottoStorage {
 		return lottoDTOS;
 	}
 
-	public void compare(BonusBallDTO bonusBallDTO, LottoWinningNumberDTO winningNumbersDTO) {
-		lottoStorage.forEach(lotto -> lotto.compare(bonusBallDTO, winningNumbersDTO));
+	public void checkWithWinningNumberAndBonus(BonusBallDTO bonusBallDTO, LottoWinningNumberDTO winningNumbersDTO) {
+		lottoStorage.forEach(lotto -> lotto.checkWithWinningNumberAndBonus(bonusBallDTO, winningNumbersDTO));
 	}
 }

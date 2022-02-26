@@ -58,7 +58,7 @@ public class LottoCountTest {
 	@DisplayName("로또 생성 중단")
 	void checkLottoCountIsZero() {
 		LottoCount lottoCount = new LottoCount("1000");
-		lottoCount.makeLotto();
+		lottoCount.reduceCountOfRemain();
 
 		assertThat(lottoCount.isZero()).isTrue();
 	}
@@ -67,7 +67,7 @@ public class LottoCountTest {
 	@DisplayName("로또 생성 횟수 차감")
 	void checkLottoCountReduce() {
 		LottoCount lottoCount = new LottoCount("100000");
-		lottoCount.makeLotto();
+		lottoCount.reduceCountOfRemain();
 
 		assertThat(lottoCount.getCount()).isEqualTo(99);
 	}

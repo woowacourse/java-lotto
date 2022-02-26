@@ -77,7 +77,8 @@ public class LottoController {
 	}
 
 	private void compareLottoWithWinningNumber() {
-		lottoStorage.compare(bonusBall.getBonusBallDTO(), lottoWinningNumber.getWinningNumbersDTO());
+		lottoStorage.checkWithWinningNumberAndBonus(bonusBall.getBonusBallDTO(),
+			lottoWinningNumber.getWinningNumbersDTO());
 	}
 
 	private void showResult() {
