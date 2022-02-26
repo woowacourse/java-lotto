@@ -54,8 +54,8 @@ public class LottoController {
 
     private WinningNumbers createWinningNumbers() {
         try {
-            List<String> winningNumbers = inputView.getNormalWinningNumbers();
-            String bonusNumber = inputView.getBonusNumber();
+            List<Integer> winningNumbers = inputView.getNormalWinningNumbers();
+            int bonusNumber = inputView.getBonusNumber();
 
             return WinningNumbers.create(winningNumbers, bonusNumber);
         } catch (IllegalArgumentException e) {

@@ -2,7 +2,6 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.Arrays;
 import java.util.List;
 import lotto.domain.enumeration.Rank;
 import lotto.domain.vo.LottoNumber;
@@ -19,9 +18,9 @@ class WinningNumbersTest {
     @Test
     void 당첨_번호_생성_확인() {
         // given
-        List<String> normalWinningNumbers = getStrings("1, 2, 3, 4, 5, 6");
+        List<Integer> normalWinningNumbers = List.of(1, 2, 3, 4, 5, 6);
 
-        String bonusBall = "7";
+        int bonusBall = 7;
 
         // when & then
         assertThatCode(() -> WinningNumbers.create(normalWinningNumbers, bonusBall))
@@ -32,11 +31,12 @@ class WinningNumbersTest {
     @Test
     void 당첨_정보_확인_2등() {
         // given
-        List<String> normalWinningNumbers = getStrings("1, 2, 3, 4, 5, 6");
+        List<Integer> normalWinningNumbers = List.of(1, 2, 3, 4, 5, 6);
 
-        String bonusBall = "7";
+        int bonusBall = 7;
 
         WinningNumbers winningNumbers = WinningNumbers.create(normalWinningNumbers, bonusBall);
+
         LottoTicket lottoTicket = new LottoTicket(() -> List.of(
                 new LottoNumber(1), new LottoNumber(2),
                 new LottoNumber(3), new LottoNumber(4),
@@ -55,11 +55,12 @@ class WinningNumbersTest {
     @Test
     void 당첨_정보_확인_3등() {
         // given
-        List<String> normalWinningNumbers = getStrings("1, 2, 3, 4, 5, 6");
+        List<Integer> normalWinningNumbers = List.of(1, 2, 3, 4, 5, 6);
 
-        String bonusBall = "7";
+        int bonusBall = 7;
 
         WinningNumbers winningNumbers = WinningNumbers.create(normalWinningNumbers, bonusBall);
+
         LottoTicket lottoTicket = new LottoTicket(() -> List.of(
                 new LottoNumber(1), new LottoNumber(2),
                 new LottoNumber(3), new LottoNumber(4),
@@ -76,7 +77,7 @@ class WinningNumbersTest {
     @Test
     public void 당첨_번호_보너스볼_중복_확인() {
         //given & when & then
-        Assertions.assertThatThrownBy(() -> WinningNumbers.create(List.of("1, 2, 3, 4, 5, 6"), "6"))
+        Assertions.assertThatThrownBy(() -> WinningNumbers.create(List.of(1, 2, 3, 4, 5, 6), 6))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -84,25 +85,7 @@ class WinningNumbersTest {
     @Test
     public void 당첨_번호_중복_확인() {
         //given & when & then
-        Assertions.assertThatThrownBy(() -> WinningNumbers.create(List.of("1, 2, 3, 4, 5, 5"), "6"))
+        Assertions.assertThatThrownBy(() -> WinningNumbers.create(List.of(1, 2, 3, 4, 5, 5), 6))
                 .isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @DisplayName("정수가 아닌 입력에 대한 테스트")
-    @Test
-    public void 정수_아닌_입력_테스트() {
-        // given
-        List<String> normalWinningNumbers = getStrings("일, 이, 삼, 사, 오, 육");
-
-        String bonusBall = "칠";
-
-        // when & then
-        Assertions.assertThatThrownBy(() -> WinningNumbers.create(normalWinningNumbers, bonusBall))
-                .isInstanceOf(IllegalArgumentException.class);
-    }
-
-    private List<String> getStrings(String numbers) {
-        List<String> normalWinningNumbers = Arrays.asList(numbers.split(SEPARATOR));
-        return normalWinningNumbers;
     }
 }

@@ -53,29 +53,8 @@ public class WinningNumbers {
         return winningNumbers;
     }
 
-    public static WinningNumbers create(List<String> normalWinningValues, String bonusWinningValue) {
-        List<Integer> normalWinningNumbers = translateIntegerList(normalWinningValues);
-        Integer bonusWinningNumber = translateInteger(bonusWinningValue);
-
+    public static WinningNumbers create(List<Integer> normalWinningNumbers, Integer bonusWinningNumber) {
         return new WinningNumbers(normalWinningNumbers, bonusWinningNumber);
-    }
-
-    private static List<Integer> translateIntegerList(List<String> values) {
-        try {
-            return values.stream()
-                    .map(Integer::parseInt)
-                    .collect(toList());
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("정수여야 합니다. 형식을 확인해주세요.");
-        }
-    }
-
-    private static Integer translateInteger(String value) {
-        try {
-            return Integer.parseInt(value);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("정수여야 합니다.");
-        }
     }
 
     public Rank compare(LottoTicket lottoTicket) {
