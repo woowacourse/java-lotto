@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 
 import lotto.domain.rank.Rank;
 import lotto.domain.ticket.generator.TicketGenerator;
-import lotto.dto.TicketDto;
 
 public class Tickets {
 
