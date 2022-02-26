@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 public class InputView {
 
     private static final String INPUT_PURCHASE_MONEY = "구매금액을 입력해 주세요.";
+    private static final String INPUT_PURCHASE_MANUAL_LOTTO_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String INPUT_WIN_LOTTO_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String INPUT_BONUS_LOTTO_NUMBER = "보너스 볼을 입력해 주세요.";
 
@@ -27,6 +28,11 @@ public class InputView {
         } catch (NumberFormatException e) {
             throw new NumberFormatException("[ERROR] 구매금액은 숫자로 입력하세요");
         }
+    }
+
+    public static int inputPurchaseManualCount() {
+        System.out.println(INPUT_PURCHASE_MANUAL_LOTTO_COUNT);
+        return Integer.parseInt(scanner.nextLine());
     }
 
     public static List<Integer> inputWinLotto() {

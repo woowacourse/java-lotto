@@ -20,6 +20,14 @@ public class LottoPurchaseCounts {
         }
     }
 
+    public int getManualCount() {
+        return manualCount;
+    }
+
+    public int getAutomaticCount() {
+        return automaticCount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
