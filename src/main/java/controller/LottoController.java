@@ -45,9 +45,11 @@ public class LottoController {
     }
 
     public void printGeneratedLottoTickets(LottoTickets lottoTickets) {
-        List<LottoTicketDto> dto = lottoTickets.getTickets().stream()
+        List<LottoTicketDto> dto = lottoTickets.getTickets()
+                .stream()
                 .map(lottoTicket -> new LottoTicketDto(lottoTicket.lottoNumberValues()))
                 .collect(Collectors.toList());
+
         (new LottoTicketOutputView()).printOutputData(dto);
     }
 
@@ -60,9 +62,11 @@ public class LottoController {
     }
 
     public void printWinningResults(Map<WinningPrize, Integer> winningResults) {
-        List<WinningResultDto> winningResultDtos = winningResults.entrySet().stream()
+        List<WinningResultDto> winningResultDtos = winningResults.entrySet()
+                .stream()
                 .map(this::toWinningResultDto)
                 .collect(Collectors.toList());
+
         (new WinningResultOutputView()).printOutputData(winningResultDtos);
     }
 
