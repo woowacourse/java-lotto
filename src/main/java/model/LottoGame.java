@@ -3,6 +3,7 @@ package model;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class LottoGame {
     private static final int INIT_COUNT = 0;
@@ -15,7 +16,7 @@ public class LottoGame {
     private final WinningPrizeStrategy winningPrizeStrategy;
 
     public LottoGame(LottoTickets lottoTickets,
-                     List<Integer> winningNumbers,
+                     Set<Integer> winningNumbers,
                      int bonusNumber,
                      WinningPrizeStrategy winningPrizeStrategy) {
         this.lottoTickets = lottoTickets;

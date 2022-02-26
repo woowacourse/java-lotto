@@ -2,6 +2,7 @@ package controller;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import model.GenerateStrategy;
@@ -22,7 +23,7 @@ public class LottoController {
     private LottoGame lottoGame;
 
     public void initLottoGame(LottoTickets lottoTickets,
-                              List<Integer> winningNumbers,
+                              Set<Integer> winningNumbers,
                               int bonusNumber,
                               WinningPrizeStrategy winningPrizeStrategy) {
         lottoGame = new LottoGame(lottoTickets, winningNumbers, bonusNumber, winningPrizeStrategy);
@@ -53,7 +54,7 @@ public class LottoController {
         (new LottoTicketOutputView()).showOutputData(dto);
     }
 
-    public List<Integer> inputWinningNumbers() {
+    public Set<Integer> inputWinningNumbers() {
         return (new WinningNumberInputView()).getUserInputData();
     }
 

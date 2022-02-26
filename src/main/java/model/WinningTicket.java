@@ -8,14 +8,14 @@ public class WinningTicket {
     private static final int TICKET_SIZE = 6;
     private static final int SECOND_WINNING_COUNT = 5;
 
-    private final List<LottoNumber> winningNumbers;
+    private final Set<LottoNumber> winningNumbers;
     private final LottoNumber bonusNumber;
 
-    public WinningTicket(List<Integer> winningNumbers, int bonusNumber) {
+    public WinningTicket(Set<Integer> winningNumbers, int bonusNumber) {
         checkSize(winningNumbers);
         this.winningNumbers = winningNumbers.stream()
                 .map(LottoNumber::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
@@ -43,7 +43,7 @@ public class WinningTicket {
         return lottoNumbers.contains(bonusNumberValue());
     }
 
-    private void checkSize(List<Integer> winningNumbers) {
+    private void checkSize(Set<Integer> winningNumbers) {
         if (winningNumbers.size() != TICKET_SIZE) {
             throw new IllegalArgumentException();
         }

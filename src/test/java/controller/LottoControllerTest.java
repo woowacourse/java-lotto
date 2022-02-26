@@ -23,7 +23,7 @@ public class LottoControllerTest {
     void initLottoTicketTest() {
         GenerateStrategy generateStrategy = () -> new HashSet<>(dummyLottoNumber);
         LottoTickets lottoTickets = new LottoTickets(1000, generateStrategy);
-        List<Integer> winningTicket = new ArrayList<>(dummyLottoNumber);
+        Set<Integer> winningTicket = new HashSet<>(dummyLottoNumber);
         controller.initLottoGame(lottoTickets, winningTicket, 7, new DefaultLottoWinningPrizeStrategy());
         assertThat(Math.round(controller.rateOfReturn())).isEqualTo(2000000);
     }
