@@ -13,24 +13,10 @@ public class LottoGameController {
     public void run() {
         purchasedLotto = new PurchasedLotto(InputView.inputPrice());
         OutputView.printPurchasedLotto(purchasedLotto);
-        initWinningNumber();
+        winningLotto = new WinningLotto(InputView.inputWinningLottoNumbers(), InputView.inputBonus());
         purchasedLotto.calculatePrizeResult(winningLotto);
         OutputView.printFinalStatistic(purchasedLotto.getPrizeResult());
         OutputView.printEarningRate(purchasedLotto.calculateEarningRate());
-    }
-
-    private void initWinningNumber() {
-        winningLotto = new WinningLotto(InputView.inputWinningLottoNumbers());
-        initBonusNumber();
-    }
-
-    private void initBonusNumber() {
-        try {
-            winningLotto.addBonusNumber(InputView.inputBonus());
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            initBonusNumber();
-        }
     }
 
 }

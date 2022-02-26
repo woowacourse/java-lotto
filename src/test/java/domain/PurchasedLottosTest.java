@@ -27,8 +27,7 @@ public class PurchasedLottosTest {
         lottos.purchase(new CustomPurchaseStrategy(List.of(1, 2, 3, 4, 5, 12)));
 
         List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 12);
-        winningLotto = new WinningLotto(winningNumbers);
-        winningLotto.addBonusNumber(6);
+        winningLotto = new WinningLotto(winningNumbers, 6);
     }
 
     @Test

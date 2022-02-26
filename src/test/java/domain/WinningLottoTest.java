@@ -14,13 +14,8 @@ class WinningLottoTest {
     @Test
     @DisplayName("보너스 번호를 이미 갖고 있을 시 예외가 발생한다.")
     void checkBonusDuplicate_throwIllegalException() {
-        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
-        WinningLotto lotto = new WinningLotto(numbers);
-        int bonus = 3;
-
-        assertThatThrownBy(() -> lotto.addBonusNumber(bonus))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("보너스 번호가 당첨 번호와 중복됩니다.");
+        assertThatThrownBy(() -> new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 3))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
 }

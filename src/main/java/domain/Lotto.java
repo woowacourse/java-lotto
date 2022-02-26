@@ -13,25 +13,19 @@ public class Lotto {
         numbers.forEach(number -> lottoBalls.add(new LottoBall(number)));
     }
 
-    public List<LottoBall> getLottoNumbers() {
-        return lottoBalls;
+    public boolean hasBall(LottoBall lottoBall) {
+        return lottoBalls.contains(lottoBall);
     }
 
-    public Prize calculateRank(WinningLotto winningLotto) {
-        int matched = matchedRegularNumbers(winningLotto);
-        boolean hasBonus = matchedBonusNumber(winningLotto.getBonus());
-        return Prize.getWinnerPrizeByMatched(matched, hasBonus);
-    }
-
-    private int matchedRegularNumbers(WinningLotto winningLotto) {
-        return winningLotto.getWinningNumbers().stream()
-                .filter(lottoBall -> lottoBalls.contains(lottoBall))
+    public int matchedEachOther(Lotto lotto) {
+        return lottoBalls.stream()
+                .filter(lotto::hasBall)
                 .collect(Collectors.toList())
                 .size();
     }
 
-    private boolean matchedBonusNumber(LottoBall bonus) {
-        return lottoBalls.contains(bonus);
+    public List<LottoBall> getLottoNumbers() {
+        return lottoBalls;
     }
 
 }

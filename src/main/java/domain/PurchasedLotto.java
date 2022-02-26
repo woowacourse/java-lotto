@@ -32,7 +32,7 @@ public class PurchasedLotto {
 
     public PrizeResult calculatePrizeResult(WinningLotto winningLotto) {
         lottos.forEach(lotto -> {
-                    Prize winnerPrice = lotto.calculateRank(winningLotto);
+                    Prize winnerPrice = winningLotto.calculateRank(lotto);
                     prizeResult.updatePrizeResult(winnerPrice);
                 });
         return prizeResult;
