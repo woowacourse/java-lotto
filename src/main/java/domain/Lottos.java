@@ -4,6 +4,7 @@ import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
 
 import java.util.Collections;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +16,7 @@ public class Lottos {
 	}
 
 	public Map<Rank, Long> countRank(WinningLotto winningLotto) {
-		Map<Rank, Long> ranks = Rank.getMap();
+		EnumMap<Rank, Long> ranks = Rank.getMap();
 
 		lottos.stream()
 			.map(lotto -> winningLotto.calculateRank(lotto))
