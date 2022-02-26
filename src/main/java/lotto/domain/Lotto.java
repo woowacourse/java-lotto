@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lotto implements Comparable<Lotto> {
+    private static final List<Integer> lottoTotalNumbers = new ArrayList<>();
     private static final int MINIMUM_NUMBER = 1;
     private static final int MAXIMUM_NUMBER = 45;
     private static final int LOTTO_COUNT = 6;
@@ -16,6 +17,12 @@ public class Lotto implements Comparable<Lotto> {
     private static final String ERROR_DUPLICATED_NUMBER = "번호가 중복됩니다!";
 
     private final List<Ball> lotto = new ArrayList<>();
+
+    static {
+        lottoTotalNumbers.addAll(IntStream.range(MINIMUM_NUMBER, MAXIMUM_NUMBER + 1)
+                .boxed()
+                .collect(Collectors.toList()));
+    }
 
     public Lotto() {
         this(selectNumbers());
@@ -40,7 +47,7 @@ public class Lotto implements Comparable<Lotto> {
     }
 
     private static List<Integer> selectNumbers() {
-        List<Integer> lottoNumbers = getTotalLottoNumbers();
+        List<Integer> lottoNumbers = lottoTotalNumbers;
         Collections.shuffle(lottoNumbers);
 
         List<Integer> selectedIntNumbers = splitLottoNumbers(lottoNumbers);
@@ -51,12 +58,6 @@ public class Lotto implements Comparable<Lotto> {
 
     private static ArrayList<Integer> splitLottoNumbers(List<Integer> lottoNumbers) {
         return new ArrayList<>(lottoNumbers.subList(0, LOTTO_COUNT));
-    }
-
-    private static List<Integer> getTotalLottoNumbers() {
-        return IntStream.range(MINIMUM_NUMBER, MAXIMUM_NUMBER + 1)
-            .boxed()
-            .collect(Collectors.toList());
     }
 
     private void validateLotto(final List<Integer> numbers) {
