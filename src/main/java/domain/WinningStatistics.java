@@ -24,9 +24,9 @@ public class WinningStatistics {
 
     public double calculateProfitRate() {
         final int totalPrize = calculateTotalPrize();
-        final int purchasedMoney = calculatePurchasedMoney();
+        final int purchasedMoneyCount = calculatePurchasedMoneyCount();
 
-        return totalPrize / ((double)purchasedMoney * LottoMoney.LOTTO_PRICE);
+        return totalPrize / ((double)purchasedMoneyCount * LottoMoney.LOTTO_PRICE);
     }
 
     private int calculateTotalPrize() {
@@ -35,7 +35,7 @@ public class WinningStatistics {
             .reduce(DEFAULT_VALUE, Integer::sum);
     }
 
-    private int calculatePurchasedMoney() {
+    private int calculatePurchasedMoneyCount() {
         return statisticsResult.values().stream()
             .reduce(DEFAULT_VALUE, Integer::sum);
     }
