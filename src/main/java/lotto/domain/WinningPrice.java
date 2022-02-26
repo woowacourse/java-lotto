@@ -1,10 +1,10 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 public enum WinningPrice {
 
-    Fail(0, false, 0),
     Three(3, false, 5_000),
     Four(4, false, 50_000),
     Five(5, false, 1_500_000),
@@ -21,12 +21,11 @@ public enum WinningPrice {
         this.price = price;
     }
 
-    public static WinningPrice of(int count, boolean containBonus) {
+    public static Optional<WinningPrice> of(int count, boolean containBonus) {
         return Arrays.stream(values())
                 .filter(it -> it.count == count)
                 .filter(it -> it.containBonus == containBonus)
-                .findAny()
-                .orElse(WinningPrice.Fail);
+                .findAny();
     }
 
     public int getPrice() {

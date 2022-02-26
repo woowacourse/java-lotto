@@ -13,7 +13,7 @@ public class OutputView {
     private static final String ERROR_MESSAGE = "[ERROR] : %s%n";
     private static final String LOTTO_COUNT_MESSAGE = "%d개를 구매했습니다.%n";
     private static final String LOTTO_MESSAGE_FORMAT = "[%s]%n";
-    private static final String MATCH_RESULT_MESSAGE_PREFIX = "%n당첨 통계%n---------%n";
+    private static final String MATCH_RESULT_MESSAGE_PREFIX = "%n당첨 통계%n---------";
     private static final String NO_BONUS_BALL = " ";
     private static final String BONUS_BALL_MESSAGE = ", 보너스 볼 일치";
     private static final String MATCH_RESULT_MESSAGE = "%d개 일치%s(%d원) - %d개%n";
@@ -55,18 +55,23 @@ public class OutputView {
     }
 
     private static void printMatchResult(Result result) {
-        System.out.printf(MATCH_RESULT_MESSAGE_PREFIX);
+        System.out.println(MATCH_RESULT_MESSAGE_PREFIX);
+
         for (WinningPrice value : WinningPrice.values()) {
-            if (value == WinningPrice.Fail) {
-                continue;
-            }
-            String bonusBallMessage = NO_BONUS_BALL;
-            if (value.isContainBonus()) {
-                bonusBallMessage = BONUS_BALL_MESSAGE;
-            }
+            String bonusBallMessage = getBonusBallMessage(value);
+
             System.out.printf(MATCH_RESULT_MESSAGE,
                     value.getCount(), bonusBallMessage, value.getPrice(), result.getCount(value));
         }
+    }
+
+    private static String getBonusBallMessage(WinningPrice value) {
+        String bonusBallMessage = NO_BONUS_BALL;
+        if (value.isContainBonus()) {
+            bonusBallMessage = BONUS_BALL_MESSAGE;
+        }
+
+        return bonusBallMessage;
     }
 
     private static void printRateOfProfit(Result result, Money money) {

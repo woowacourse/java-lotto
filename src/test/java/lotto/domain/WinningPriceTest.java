@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Optional;
 import java.util.stream.Stream;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -23,11 +24,11 @@ public class WinningPriceTest {
 
             @ParameterizedTest
             @MethodSource("provideSource")
-            @DisplayName("객체를 반환한다.")
+            @DisplayName("Optional 객체를 반환한다.")
             void it_create_ok(int count, boolean containBonus, WinningPrice expected) {
-                WinningPrice winningPrice = WinningPrice.of(count, containBonus);
+                Optional<WinningPrice> winningPrice = WinningPrice.of(count, containBonus);
 
-                Assertions.assertThat(winningPrice).isEqualTo(expected);
+                Assertions.assertThat(winningPrice.get()).isEqualTo(expected);
             }
 
             Stream<Arguments> provideSource() {
@@ -36,11 +37,7 @@ public class WinningPriceTest {
                         Arguments.of(5, true, WinningPrice.FiveAndBonus),
                         Arguments.of(5, false, WinningPrice.Five),
                         Arguments.of(4, false, WinningPrice.Four),
-                        Arguments.of(3, false, WinningPrice.Three),
-                        Arguments.of(3, true, WinningPrice.Fail),
-                        Arguments.of(2, true, WinningPrice.Fail),
-                        Arguments.of(1, true, WinningPrice.Fail),
-                        Arguments.of(0, true, WinningPrice.Fail)
+                        Arguments.of(3, false, WinningPrice.Three)
                 );
             }
         }

@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 public class Lottos {
 
@@ -24,8 +25,8 @@ public class Lottos {
         Result result = new Result();
 
         for (Lotto lotto : lottos) {
-            WinningPrice winningPrice = lotto.getWinningPrice(winningNumbers, bonusNumber);
-            result.add(winningPrice);
+            Optional<WinningPrice> winningPrice = lotto.getWinningPrice(winningNumbers, bonusNumber);
+             winningPrice.ifPresent(result::add);
         }
 
         return result;

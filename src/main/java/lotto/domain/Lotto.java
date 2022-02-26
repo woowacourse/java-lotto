@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -64,7 +65,7 @@ public class Lotto {
         return numbers.contains(number);
     }
 
-    public WinningPrice getWinningPrice(List<Number> winningNumbers, Number bonusNumber) {
+    public Optional<WinningPrice> getWinningPrice(List<Number> winningNumbers, Number bonusNumber) {
         int count = getCount(winningNumbers);
         boolean containsBonus = false;
 

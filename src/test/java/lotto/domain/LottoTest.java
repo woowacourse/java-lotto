@@ -119,7 +119,7 @@ public class LottoTest {
                         .collect(Collectors.toList());
                 Number bonusNumber = new Number(bonus);
 
-                assertThat(lotto.getWinningPrice(numbers, bonusNumber)).isEqualTo(key);
+                assertThat(lotto.getWinningPrice(numbers, bonusNumber).get()).isEqualTo(key);
             }
 
             Stream<Arguments> provideSource() {
@@ -128,8 +128,7 @@ public class LottoTest {
                         Arguments.of(List.of(1, 2, 3, 4, 5, 45), 6, WinningPrice.FiveAndBonus),
                         Arguments.of(List.of(1, 2, 3, 4, 5, 44), 45, WinningPrice.Five),
                         Arguments.of(List.of(1, 2, 3, 4, 43, 44), 45, WinningPrice.Four),
-                        Arguments.of(List.of(1, 2, 3, 42, 43, 44), 45, WinningPrice.Three),
-                        Arguments.of(List.of(1, 2, 41, 42, 43, 44), 45, WinningPrice.Fail)
+                        Arguments.of(List.of(1, 2, 3, 42, 43, 44), 45, WinningPrice.Three)
                 );
             }
         }
