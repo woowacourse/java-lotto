@@ -3,11 +3,10 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class Number {
+public class Number implements Comparable<Number> {
 
     public static final int MIN_VALUE = 1;
     public static final int MAX_VALUE = 45;
@@ -48,19 +47,7 @@ public class Number {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(value);
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) {
-            return true;
-        }
-        if (object == null || getClass() != object.getClass()) {
-            return false;
-        }
-        Number number = (Number) object;
-        return value == number.value;
+    public int compareTo(Number o) {
+        return value - o.value;
     }
 }
