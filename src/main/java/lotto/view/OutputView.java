@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import lotto.domain.Lotto;
-import lotto.domain.vo.Number;
+import lotto.domain.vo.LottoNumber;
 import lotto.domain.Rank;
 import lotto.controller.Rate;
 
@@ -29,13 +29,13 @@ public class OutputView {
 
     private static void printLottoNumbers(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
-            List<Number> numbers = lotto.getNumbers();
+            List<LottoNumber> numbers = lotto.getNumbers();
 
             System.out.println(MessageFormat.format("[{0}]", joinWithDelimiter(numbers)));
         }
     }
 
-    private static String joinWithDelimiter(List<Number> numbers) {
+    private static String joinWithDelimiter(List<LottoNumber> numbers) {
         return numbers.stream()
                 .map(number -> String.valueOf(number.getNumber()))
                 .collect(Collectors.joining(DELIMITER));

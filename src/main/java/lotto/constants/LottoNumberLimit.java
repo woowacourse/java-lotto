@@ -1,13 +1,13 @@
 package lotto.constants;
 
-public enum NumberLimit {
+public enum LottoNumberLimit {
 
     MINIMUM(1),
     MAXIMUM(45);
 
     private int limit;
 
-    NumberLimit(int limit) {
+    LottoNumberLimit(int limit) {
         this.limit = limit;
     }
 

@@ -1,20 +1,20 @@
 package lotto.domain.vo;
 
-import lotto.constants.NumberLimit;
+import lotto.constants.LottoNumberLimit;
 
 import java.util.Objects;
 
-public class Number {
+public class LottoNumber {
 
     private final int number;
 
-    public Number(int number) {
+    public LottoNumber(int number) {
         validateRange(number);
         this.number = number;
     }
 
     private void validateRange(int number) {
-        if (NumberLimit.checkOutOfRange(number)) {
+        if (LottoNumberLimit.checkOutOfRange(number)) {
             throw new IllegalArgumentException("로또 번호는 1이상 45이하이어야 한다.");
         }
     }
@@ -28,10 +28,10 @@ public class Number {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Number)) {
+        if (!(o instanceof LottoNumber)) {
             return false;
         }
-        Number number = (Number) o;
+        LottoNumber number = (LottoNumber) o;
         return this.number == number.number;
     }
 
