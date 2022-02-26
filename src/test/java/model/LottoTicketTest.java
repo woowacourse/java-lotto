@@ -2,12 +2,14 @@ package model;
 
 import static model.LottoTicket.INVALID_LOTTO_NUMBER_COUNT;
 import static model.LottoTicket.LOTTO_NUMBER_DUPLICATED;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -21,9 +23,9 @@ public class LottoTicketTest {
         // given
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
-            lottoNumbers.add(new LottoNumber(i));
+            lottoNumbers.add(LottoNumber.valueOf(i));
         }
-        lottoNumbers.add(new LottoNumber(5));
+        lottoNumbers.add(LottoNumber.valueOf(5));
 
         // when
 
@@ -53,7 +55,7 @@ public class LottoTicketTest {
         // given
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
-            lottoNumbers.add(new LottoNumber(i));
+            lottoNumbers.add(LottoNumber.valueOf(i));
         }
 
         // when
@@ -63,16 +65,12 @@ public class LottoTicketTest {
     }
 
     private static Stream<Arguments> provideInvalidNumbers() {
-        List<LottoNumber> under6Numbers = new ArrayList<>();
-        List<LottoNumber> over6Numbers = new ArrayList<>();
-
-        for (int i = 1; i <= 5; i++) {
-            under6Numbers.add(new LottoNumber(i));
-        }
-
-        for (int i = 1; i <= 7; i++) {
-            over6Numbers.add(new LottoNumber(i));
-        }
+        List<LottoNumber> under6Numbers = IntStream.rangeClosed(1, 5)
+                .mapToObj(LottoNumber::valueOf)
+                .collect(Collectors.toUnmodifiableList());
+        List<LottoNumber> over6Numbers = IntStream.rangeClosed(1, 7)
+                .mapToObj(LottoNumber::valueOf)
+                .collect(Collectors.toUnmodifiableList());
 
         return Stream.of(
                 Arguments.of(under6Numbers),

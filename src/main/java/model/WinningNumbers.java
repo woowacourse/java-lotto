@@ -19,8 +19,8 @@ public class WinningNumbers extends LottoNumbers {
         }
 
         return new WinningNumbers(lottoNumbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList()), new LottoNumber(bonusBallNumber));
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toList()),LottoNumber.valueOf(bonusBallNumber));
     }
 
     public int countContaining(LottoTicket lottoTicket) {

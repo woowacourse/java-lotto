@@ -1,7 +1,8 @@
 package model;
 
 import static model.WinningNumbers.WINNING_NUMBERS_CONTAIN_BONUS_BALL;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,7 +26,7 @@ class WinningNumbersTest {
         WinningNumbers winningNumbers = WinningNumbers.of(winnings, bonusBallNumber);
 
         List<LottoNumber> lottoNumbers = ticketNumbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
@@ -46,7 +47,7 @@ class WinningNumbersTest {
         WinningNumbers winningNumbers = WinningNumbers.of(winnings, bonusBallNumber);
 
         List<LottoNumber> lottoNumbers = ticketNumbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
