@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -81,4 +82,12 @@ public class LottoTest {
         assertThat(lotto.matchingCounts(compareLotto)).isEqualTo(5);
     }
 
+    @DisplayName("로또 번호를 Integer로 받아 생성할 수 있다.")
+    @Test
+    void createByIntegerNumbers() {
+        final List<Integer> numbers = Stream.of(1, 2, 3, 4, 5, 6)
+                .collect(Collectors.toList());
+
+        assertThat(Lotto.from(numbers)).isInstanceOf(Lotto.class);
+    }
 }
