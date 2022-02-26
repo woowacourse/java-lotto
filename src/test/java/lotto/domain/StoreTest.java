@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,16 +13,16 @@ public class StoreTest {
     @DisplayName("입력금액은 1,000원 미만이면 예외가 발생한다.")
     void throwExceptionWhenUnderThousands() {
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> new Store(999))
-            .withMessage("입력금액은 1,000원 이상이어야 한다.");
+                .isThrownBy(() -> new Store(999))
+                .withMessage("입력금액은 1,000 이상이어야 한다.");
     }
 
     @Test
-    @DisplayName("입력금액은 10,0000원 넘으면 예외가 발생한다.")
+    @DisplayName("입력금액은 100,000원 넘으면 예외가 발생한다.")
     void throwExceptionWhenOver100Thousands() {
         assertThatIllegalArgumentException()
-            .isThrownBy(() -> new Store(100_001))
-            .withMessage("입력금액은 100,000원을 넘을 수 없다.");
+                .isThrownBy(() -> new Store(100_001))
+                .withMessage("입력금액은 100,000을 넘을 수 없다.");
     }
 
     @ParameterizedTest
