@@ -23,7 +23,8 @@ class LottoTicketNumbersTest {
                 .collect(Collectors.toList());
 
         assertThatThrownBy(() -> new LottoTicketNumbers(inputLottoNumbers))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("로또 번호는 6자리");
     }
 
     @Test
@@ -34,7 +35,8 @@ class LottoTicketNumbersTest {
                 .collect(Collectors.toList());
 
         assertThatThrownBy(() -> new LottoTicketNumbers(inputLottoNumbers))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("로또 번호는 중복");
     }
 
     @Test

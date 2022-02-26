@@ -31,9 +31,9 @@ class LottoMachineTest {
     void insertAmountBelowThousand() {
         LottoMachine lottoMachine = new LottoMachine();
 
-        assertThatThrownBy(() -> {
-            lottoMachine.purchaseLottoTickets(Money.from(900), strategy);
-        }).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> lottoMachine.purchaseLottoTickets(Money.from(900), strategy))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("금액은 1000원 이상");
     }
 
     @ParameterizedTest
