@@ -10,7 +10,7 @@ public class InputView {
     }
 
     public static String inputMoney() {
-        System.out.println("구입금액을 입력해 주세요.");
+        System.out.println("구입금액을 입력해 주세요.(1000원 ~ 20억원)");
         return scanner.nextLine();
     }
 
