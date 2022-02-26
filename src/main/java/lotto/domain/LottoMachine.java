@@ -20,13 +20,19 @@ public class LottoMachine {
     private LottoMachine() {
     }
 
-    public static Lottos buyLotto(final List<Lotto> manualLottos, final int automaticLottoCounts) {
-        Objects.requireNonNull(manualLottos, "[ERROR] 수동 구매 로또는 null이 들어올 수 없습니다.");
-        final List<Lotto> lottos = new ArrayList<>(manualLottos);
+    public static Lottos buyLotto(final List<List<Integer>> manualLottoNumbers, final int automaticLottoCounts) {
+        Objects.requireNonNull(manualLottoNumbers, "[ERROR] 수동 구매 로또는 null이 들어올 수 없습니다.");
+        final List<Lotto> lottos = createLottos(new ArrayList<>(manualLottoNumbers));
         checkNegativeAutomaticLottoCounts(automaticLottoCounts);
 
         lottos.addAll(createRandomLottosByAutomaticCounts(automaticLottoCounts));
         return new Lottos(lottos);
+    }
+
+    private static List<Lotto> createLottos(final List<List<Integer>> manualLottoNumbers) {
+        return manualLottoNumbers.stream()
+                .map(Lotto::from)
+                .collect(Collectors.toList());
     }
 
     private static List<Lotto> createRandomLottosByAutomaticCounts(int automaticLottoCounts) {

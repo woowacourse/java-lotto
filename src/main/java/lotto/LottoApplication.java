@@ -15,8 +15,8 @@ public class LottoApplication {
         final LottoPurchaseCounts purchaseCounts = money.calculatePurchaseCounts(InputView.inputPurchaseManualCount());
         OutputView.outputBuyLottoCounts(purchaseCounts);
 
-        final Lottos manualLottos = Lottos.from(InputView.inputManualLottos(purchaseCounts.getManualCount()));
-        final Lottos lottos = LottoMachine.buyLotto(manualLottos.getLottos(), purchaseCounts.getAutomaticCount());
+        final Lottos lottos = LottoMachine.buyLotto(InputView.inputManualLottos(purchaseCounts.getManualCount()),
+                purchaseCounts.getAutomaticCount());
         OutputView.outputLottos(lottos.getLottos());
 
         final WinLotto winLotto = WinLotto.of(InputView.inputWinLotto(), InputView.inputBonusNumber());
