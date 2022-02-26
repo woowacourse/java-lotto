@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
 
@@ -9,7 +10,7 @@ public class RankCount {
     private final Map<Rank, Integer> rankCount;
 
     public RankCount(Lottos lottos, WinningLotto winningLotto, BonusNumber bonusNumber) {
-        this.rankCount = calculateRankCount(lottos, winningLotto, bonusNumber);
+        this.rankCount = Collections.unmodifiableMap(calculateRankCount(lottos, winningLotto, bonusNumber));
     }
 
     private Map<Rank, Integer> calculateRankCount(Lottos lottos, WinningLotto winningLotto, BonusNumber bonusNumber) {
