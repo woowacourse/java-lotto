@@ -1,14 +1,17 @@
 package lotto.domain.lotto;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import lotto.domain.LottoRanking;
 
@@ -66,7 +69,22 @@ public class LottoTest {
             }
         }
     }
-
+    
+    @Nested
+    @DisplayName("숫자와 구분자로 이루어진 문자열을 로또로 바꾸는 기능은")
+    class Of {
+        @Nested
+        @DisplayName("', '로 구분한 숫자가 주어지면")
+        class Context_with_delimiter {
+            @ParameterizedTest
+            @ValueSource(strings = {"1, 2, 3, 4, 5, 6"})
+            @DisplayName("구분된 숫자 6개로 객체를 반환한다.")
+            void it_returns_lotto(String input) {
+                assertDoesNotThrow(() -> Lotto.of(input));
+            }
+        }
+    }
+    
     @Nested
     @DisplayName("어떤 번호가 포함되었는지 판단하는 메소드는")
     class Contains {

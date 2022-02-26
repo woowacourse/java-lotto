@@ -1,6 +1,7 @@
 package lotto.domain.lotto;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -20,6 +21,7 @@ public class Lotto {
 
     private static final String SIZE_ERROR_MESSAGE = "6개의 숫자가 필요합니다.";
     private static final String DUPLICATE_ERROR_MESSAGE = "중복은 허용하지 않습니다.";
+    private static final String TEXT_DELIMITER = ", ";
 
     private final Set<Number> numbers;
 
@@ -38,6 +40,21 @@ public class Lotto {
     public Lotto(List<Integer> numbers) {
         validateNumbers(numbers);
         this.numbers = numbers.stream().map(Number::new).collect(Collectors.toSet());
+    }
+
+    public static Lotto of(String text) {
+        String[] splitText = text.split(TEXT_DELIMITER);
+        return new Lotto(toNumberList(splitText));
+    }
+
+    private static List<Integer> toNumberList(String[] splitText) {
+        try {
+            return Arrays.stream(splitText)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+        } catch (NumberFormatException exception) {
+            throw new IllegalArgumentException("숫자를 입력해주세요.");
+        }
     }
 
     public boolean contains(Number number) {
