@@ -1,7 +1,9 @@
 package lotto.model.result;
 
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.function.Function;
+import java.util.function.ToLongFunction;
 import java.util.stream.Collectors;
 import lotto.model.money.Money;
 
@@ -23,8 +25,12 @@ public class LottoStatistics {
 
     public double calculateEarningRates(Money money) {
         long sum = lottoRankCounter.entrySet().stream()
-                .mapToLong(x -> x.getKey().getPrize() * x.getValue())
+                .mapToLong(calculateWinningPrize())
                 .sum();
         return (double) sum / money.getAmount();
+    }
+
+    private ToLongFunction<Entry<LottoRank, Long>> calculateWinningPrize() {
+        return entry -> entry.getKey().getPrize() * entry.getValue();
     }
 }
