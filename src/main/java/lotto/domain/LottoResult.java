@@ -15,11 +15,12 @@ public class LottoResult {
 
     public double calculateYield(LottoPurchaseMoney lottoPurchaseMoney) {
         int price = lottoPurchaseMoney.getPrice();
-        int totalPrizeMoney = 0;
 
-        for (Rank rank : ranks.keySet()) {
-            totalPrizeMoney += rank.getPrizeMoney();
-        }
+        int totalPrizeMoney = ranks.keySet()
+                .stream()
+                .mapToInt(Rank::getPrizeMoney)
+                .sum();
+
         return  Math.floor((double) totalPrizeMoney / price * 100) / 100.0;
     }
 
