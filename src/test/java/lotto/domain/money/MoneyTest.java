@@ -12,6 +12,15 @@ import lotto.exception.money.MoneyExceptionStatus;
 
 class MoneyTest {
 
+    @DisplayName("구입 금액은 0원이 될 수 없습니다.")
+    @ParameterizedTest(name = "[{index}] 구입 금액 : {0}")
+    @ValueSource(ints = {0})
+    void moneyIsZeroExceptionTest(final int money) {
+        assertThatThrownBy(() -> new Money(money))
+                .isInstanceOf(LottoException.class)
+                .hasMessageContaining(MoneyExceptionStatus.MONEY_IS_ZERO.getMessage());
+    }
+
     @DisplayName("구입 금액은 1000으로 나누어 떨어져야 한다.")
     @ParameterizedTest(name = "[{index}] 구입 금액 : {0}")
     @ValueSource(ints = {100, 1100, 200001})
