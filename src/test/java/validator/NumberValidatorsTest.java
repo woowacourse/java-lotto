@@ -16,6 +16,7 @@ import static validator.NumberValidators.validateAndParseNumber;
 import static validator.NumberValidators.validateLottoNumberRange;
 import static validator.NumberValidators.validateNoDuplicateInList;
 import static validator.NumberValidators.validateNoDuplicates;
+import static validator.NumberValidators.validateNotNegative;
 import static validator.NumberValidators.validateTotalLottoPriceUnit;
 import static validator.NumberValidators.validateLottoNumbersSize;
 
@@ -48,9 +49,15 @@ public class NumberValidatorsTest {
     }
 
     @Test
-    void validateTotalLottoPriceUnit_returnsIntOnPass() {
+    void validateTotalLottoPriceUnit_passesOnPositiveNumberInput() {
         assertThatNoException()
                 .isThrownBy(() -> validateTotalLottoPriceUnit(LOTTO_PRICE * 10));
+    }
+
+    @Test
+    void validateTotalLottoPriceUnit_passesOnZeroInput() {
+        assertThatNoException()
+                .isThrownBy(() -> validateTotalLottoPriceUnit(0));
     }
 
     @Test
@@ -65,6 +72,25 @@ public class NumberValidatorsTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> validateTotalLottoPriceUnit(LOTTO_PRICE * 10 + 1))
                 .withMessageMatching(INVALID_TOTAL_LOTTO_PRICE_EXCEPTION_MESSAGE);
+    }
+
+    @Test
+    void validateNotNegative_passesOnPositiveNumberInput() {
+        assertThatNoException()
+                .isThrownBy(() -> validateNotNegative(10));
+    }
+
+    @Test
+    void validateNotNegative_passesOnZeroInput() {
+        assertThatNoException()
+                .isThrownBy(() -> validateNotNegative(0));
+    }
+
+    @Test
+    void validateNotNegative_failOnNegativeNumberInput() {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> validateNotNegative(-10))
+                .withMessageMatching(NEGATIVE_NUMBER_INPUT_EXCEPTION_MESSAGE);
     }
 
     @ParameterizedTest(name = PARAMETERIZED_TEST_DISPLAY_FORMAT)

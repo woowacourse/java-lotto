@@ -3,6 +3,7 @@ package controller;
 import static domain.LottoGame.LOTTO_PRICE;
 import static validator.NumberValidators.validateNoDuplicateInList;
 import static validator.NumberValidators.validateNoDuplicates;
+import static validator.NumberValidators.validateNotNegative;
 import static validator.NumberValidators.validateTotalLottoPriceUnit;
 import static validator.NumberValidators.validateLottoNumbersSize;
 import static view.InputView.requestManualLottoCount;
@@ -26,6 +27,7 @@ public class LottoController {
 
         int totalCount = totalLottoPrice / LOTTO_PRICE;
         int manualCount = requestManualLottoCount();
+        validateNotNegative(manualCount);
 
         return initManualAndRandomLottos(totalCount, manualCount);
     }
@@ -33,7 +35,7 @@ public class LottoController {
     private Lottos initManualAndRandomLottos(int totalCount, int manualCount) {
         int randomCount = totalCount - manualCount;
 
-        if (manualCount <= 0) {
+        if (manualCount == 0) {
             return Lottos.ofRandom(randomCount);
         }
 

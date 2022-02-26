@@ -36,7 +36,7 @@ public class NumberValidators {
         }
     }
 
-    private static void validateNotNegative(int num) {
+    public static void validateNotNegative(int num) {
         if (num < 0) {
             throw new IllegalArgumentException(NEGATIVE_NUMBER_INPUT_EXCEPTION_MESSAGE);
         }
