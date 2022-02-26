@@ -3,6 +3,7 @@ package domain;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class WinningStat {
@@ -32,6 +33,19 @@ public class WinningStat {
                 .filter(wonLottoRanks::contains)
                 .mapToLong(rank -> (long) rank.getPrize() * stat.get(rank))
                 .reduce(DEFAULT_VALUE, Long::sum);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WinningStat that = (WinningStat) o;
+        return stat.equals(that.stat);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(stat);
     }
 
     public Map<LottoRank, Integer> getStat() {
