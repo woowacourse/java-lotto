@@ -21,7 +21,7 @@ class LottosTest {
 
     @Test
     @DisplayName("구매한 모든 로또 숫자들을 반환한다.")
-    void getLottos() {
+    void getLottos_Test() {
         final Lotto first = new Lotto(Arrays.asList("1", "2", "3", "4", "5", "6"));
         final Lotto second = new Lotto(Arrays.asList("2", "3", "4", "5", "6", "7"));
         final Lotto third = new Lotto(Arrays.asList("3", "4", "5", "6", "7", "8"));
@@ -36,7 +36,7 @@ class LottosTest {
 
     @Test
     @DisplayName("당첨 번호와 구매 금액을 받아 당첨 결과를 반환한다.")
-    void getWinningResult() {
+    void getWinningResult_Test() {
         //given
         final Map<LottoMatchKind, Integer> expected = Map.of(
                 LottoMatchKind.LOWER_THAN_THREE, 0,

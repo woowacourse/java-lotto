@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class WinningNumbersTest {
     @Test
     @DisplayName("당첨 번호와 보너스 번호에 중복이 있으면 예외를 발생시킨다.")
-    void create_ExceptionByDuplicationOfTargetNumbersAndBonusNumber() {
+    void create_exceptionByDuplicationOfTargetNumbersAndBonusNumber_Test() {
         //given
         final Lotto targetNumbers = new Lotto(Arrays.asList("1", "2", "3", "4", "5", "6"));
         final LottoNumber bonusNumber = LottoNumber.from("1");
@@ -32,7 +32,7 @@ class WinningNumbersTest {
     @ParameterizedTest
     @DisplayName("로또 숫자 6개를 받아 당첨 번호와 보너스 번호를 비교해 당첨 종류를 반환한다.")
     @MethodSource("provideLottoNumbersAndMatchKind")
-    void getLottoMatchResult(final List<String> numbers, final LottoMatchKind expected) {
+    void getLottoMatchResult_Test(final List<String> numbers, final LottoMatchKind expected) {
         //given
         final Lotto targetNumbers = new Lotto(Arrays.asList("1", "2", "3", "4", "5", "6"));
         final LottoNumber bonusNumber = LottoNumber.from("45");

@@ -18,7 +18,7 @@ class LottoNumberTest {
     @ParameterizedTest
     @DisplayName("1부터 45까지의 자연수가 아닌 값으로 객체를 생성할 경우 예외를 발생시킨다.")
     @ValueSource(strings = {"0", "-1", "1.2", "a", "46"})
-    void create_exceptionByInvalidValue(final String value) {
+    void create_exceptionByInvalidValue_Test(final String value) {
         // given
         final String expectedExceptionMessage = "로또 번호는 1 ~ 45 사이의 자연수여야합니다.";
         // when then
@@ -30,7 +30,7 @@ class LottoNumberTest {
     @ParameterizedTest
     @DisplayName("로또 숫자들을 받아 같은 값이 있는지 확인한다.")
     @MethodSource("provideOtherNumbersAndExpected")
-    void hasSameNumberWith(final List<String> otherNumbers, final boolean expected) {
+    void hasSameNumberWith_Test(final List<String> otherNumbers, final boolean expected) {
         //when
         final LottoNumber one = LottoNumber.from("1");
         final List<LottoNumber> others = otherNumbers.stream()

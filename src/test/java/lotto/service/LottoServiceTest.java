@@ -26,7 +26,7 @@ class LottoServiceTest {
 
     @Test
     @DisplayName("구매 개수를 반환한다.")
-    void getCountOfLottoNumbers() {
+    void getCountOfLottoNumbers_Test() {
         final int expected = 5;
         //when
         final int actual = lottoService.getCountOfLottoNumbers();
@@ -36,7 +36,7 @@ class LottoServiceTest {
 
     @Test
     @DisplayName("구매한 모든 로또 숫자들을 반환한다.")
-    void getLottoNumbersGroup() {
+    void getLottoNumbersGroup_Test() {
         //given
         final Lotto first = new Lotto(Arrays.asList("1", "2", "3", "4", "5", "6"));
         final Lotto second = new Lotto(Arrays.asList("2", "3", "4", "5", "6", "7"));
@@ -52,7 +52,7 @@ class LottoServiceTest {
 
     @Test
     @DisplayName("당첨 결과를 반환한다.")
-    void getMatchResult() {
+    void getMatchResult_Test() {
         final Map<LottoMatchKind, Integer> actual = lottoService.getMatchResult(winningNumbers)
                 .getWinningNumberByKind();
         assertThat(actual).containsExactly(
@@ -63,7 +63,7 @@ class LottoServiceTest {
 
     @Test
     @DisplayName("수익률을 반환한다.")
-    void getProfitRate() {
+    void getProfitRate_Test() {
         //given
         final double expected = 2031555000 / (double) 5000;
         //when

@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class WinningResultTest {
     @Test
     @DisplayName("수익률을 반환한다.")
-    void getProfitRate() {
+    void getProfitRate_Test() {
         //given
         final Map<LottoMatchKind, Integer> winningNumberByMatchKind = Map.of(
                 LottoMatchKind.LOWER_THAN_THREE, 0,

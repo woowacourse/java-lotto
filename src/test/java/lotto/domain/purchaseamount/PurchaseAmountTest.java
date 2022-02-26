@@ -16,7 +16,7 @@ class PurchaseAmountTest {
     @ParameterizedTest
     @DisplayName("1000의 양의 배수가 아닌 값으로 생성할 경우 예외를 발생시킨다.")
     @ValueSource(strings = {"abc", "1004", "-1000", "12.334"})
-    void create_exceptionByInvalidPurchaseAmountValue(final String invalidValue) {
+    void create_exceptionByInvalidPurchaseAmountValue_Test(final String invalidValue) {
         //given
         final String expectedExceptionMessage = "구매 금액은 1000의 양의 배수여야 합니다.";
         final int lottoPrice = 1000;
@@ -29,7 +29,7 @@ class PurchaseAmountTest {
 
     @Test
     @DisplayName("로또 가격을 받아 구매 개수를 반환한다.")
-    void getPurchaseCount() {
+    void getPurchaseCount_Test() {
         //given
         final int expected = 2;
         //when
@@ -40,7 +40,7 @@ class PurchaseAmountTest {
 
     @Test
     @DisplayName("총 수익을 받아 수익률을 반환한다.")
-    void getProfitRate() {
+    void getProfitRate_Test() {
         //given
         final long totalProfit = 4000000000L;
         final double expected = (double) totalProfit / 2000;

@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class LottoTest {
     @Test
     @DisplayName("로또 번호들 간에 중복이 있으면 예외를 발생시킨다.")
-    void create_ExceptionByDuplicatedLottoNumbers() {
+    void create_exceptionByDuplicatedLottoNumbers_Test() {
         //given
         final List<String> duplicatedNumberValues = Arrays.asList("1", "1", "2", "3", "4", "5");
         final String expectedExceptionMessage = "같은 줄 로또 번호 간에 중복이 존재합니다.";
@@ -29,7 +29,7 @@ class LottoTest {
 
     @Test
     @DisplayName("로또 숫자들을 오름차순으로 정렬한다.")
-    void create_SortingAscending() {
+    void create_sortingAscending_Test() {
         //given
         final List<String> numbers = Arrays.asList("7", "4", "5", "3", "6", "2");
         final Lotto lotto = new Lotto(numbers);
@@ -45,7 +45,7 @@ class LottoTest {
 
     @Test
     @DisplayName("로또 한 줄에서의 숫자 개수가 6개가 아니면 예외를 발생시킨다.")
-    void create_ExceptionByNotSixCountOfNumbers() {
+    void create_exceptionByNotSixCountOfNumbers_Test() {
         //given
         final List<String> invalidCountNumbers = Arrays.asList("1", "2", "3", "4", "5");
         final String expectedExceptionMessage = "로또 숫자는 한 줄에 6개여야 합니다.";
@@ -58,7 +58,7 @@ class LottoTest {
     @ParameterizedTest
     @DisplayName("보너스 숫자를 제외하고, 당첨된 숫자의 개수를 반환한다.")
     @MethodSource("provideOtherNumbersAndExpected")
-    void getMatchNumbersCount(final List<String> otherNumbers, final int expected) {
+    void getMatchNumbersCount_Test(final List<String> otherNumbers, final int expected) {
         //given
         final Lotto target = new Lotto(Arrays.asList("1", "2", "3", "4", "5", "6"));
         final Lotto otherLottoNumbers = new Lotto(otherNumbers);
