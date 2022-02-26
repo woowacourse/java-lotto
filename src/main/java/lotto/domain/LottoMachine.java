@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.generator.AutoLottoNumberGenerator;
+import lotto.domain.vo.LottoPurchaseMoney;
 
 public class LottoMachine {
 

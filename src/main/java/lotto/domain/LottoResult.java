@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Collections;
 import java.util.Map;
 import lotto.domain.enumeration.Rank;
+import lotto.domain.vo.LottoPurchaseMoney;
 
 public class LottoResult {
 
