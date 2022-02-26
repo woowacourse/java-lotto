@@ -20,7 +20,7 @@ public class LottoNumbers {
 
     static {
         for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
-            candidateLottoNumbers.add(LottoNumber.of(Integer.toString(i)));
+            candidateLottoNumbers.add(LottoNumber.of(i));
         }
     }
 
@@ -30,7 +30,7 @@ public class LottoNumbers {
         String[] stringArr = reduceBlank(input).split(DELIMITER);
         validateDuplicateCount(stringArr);
         validateLottoCount(stringArr);
-        this.lottoNumbers = convertIntArrToIntegerList(stringArr);
+        this.lottoNumbers = convertStringArrToIntegerList(stringArr);
     }
 
     public LottoNumbers() {
@@ -77,9 +77,9 @@ public class LottoNumbers {
         return new ArrayList<>(candidateLottoNumbers.subList(0, 6));
     }
 
-    private List<LottoNumber> convertIntArrToIntegerList(String[] stringArr) {
-        return Arrays.stream(stringArr)
-                .map(LottoNumber::of)
+    private List<LottoNumber> convertStringArrToIntegerList(String[] array) {
+        return Arrays.stream(array)
+                .map(string -> LottoNumber.of(Integer.parseInt(string)))
                 .collect(Collectors.toList());
     }
 

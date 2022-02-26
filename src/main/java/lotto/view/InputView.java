@@ -3,6 +3,8 @@ package lotto.view;
 import java.util.Scanner;
 
 public class InputView {
+    private static final String TYPE_ERROR = "로또 번호는 숫자만 가능합니다.";
+
     private static final Scanner scanner = new Scanner(System.in);
 
     private InputView() {
@@ -18,8 +20,18 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public static String inputBonusBall() {
+    public static int inputBonusBall() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return scanner.nextLine();
+        String input = scanner.nextLine();
+        return convertToInt(input);
     }
+
+    private static int convertToInt(String input) {
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(TYPE_ERROR);
+        }
+    }
+
 }

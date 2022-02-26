@@ -13,7 +13,7 @@ public class WinningNumbersTest {
     @BeforeEach
     void setUp() {
         LottoNumbers lottoNumbers = new LottoNumbers("1,2,3,4,5,6");
-        LottoNumber bonusNumber = LottoNumber.of("7");
+        LottoNumber bonusNumber = LottoNumber.of(7);
         winningNumbers = new WinningNumbers(lottoNumbers, bonusNumber);
     }
 
@@ -22,7 +22,7 @@ public class WinningNumbersTest {
     void test() {
         // given
         LottoNumbers lottoNumbers = new LottoNumbers("1,2,3,4,5,6");
-        LottoNumber bonusNumber = LottoNumber.of("1");
+        LottoNumber bonusNumber = LottoNumber.of(1);
 
         // when
 
