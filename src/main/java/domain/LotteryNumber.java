@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Objects;
+
 import utils.LotteryMessage;
 
 public class LotteryNumber implements Comparable<LotteryNumber> {
@@ -38,4 +40,8 @@ public class LotteryNumber implements Comparable<LotteryNumber> {
 		return ((LotteryNumber)obj).lotteryNumber == this.lotteryNumber;
 	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(lotteryNumber);
+	}
 }
