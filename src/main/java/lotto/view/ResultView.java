@@ -1,6 +1,9 @@
 package lotto.view;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import lotto.model.Lotto;
+import lotto.model.LottoNumber;
 import lotto.model.Lottos;
 import lotto.model.Rank;
 
@@ -33,7 +36,10 @@ public class ResultView {
     }
 
     private static void printBuyingLotto(Lotto lotto) {
-        System.out.println(lotto.getNumbers());
+        System.out.println(lotto.getNumbers().stream()
+                .mapToInt(LottoNumber::getLottoNumber)
+                .boxed()
+                .collect(Collectors.toList()));
     }
 
     public static void printTotalResult(Lottos lottos) {

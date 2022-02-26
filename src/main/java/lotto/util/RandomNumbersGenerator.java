@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import lotto.model.LottoNumber;
 
 public class RandomNumbersGenerator implements RandomUtil {
 
@@ -14,13 +15,14 @@ public class RandomNumbersGenerator implements RandomUtil {
 
     private static List<Integer> numberCollection;
 
-    public List<Integer> generate() {
+    public List<LottoNumber> generate() {
         numberCollection = IntStream.rangeClosed(LOTTO_START_NUMBER, LOTTO_LAST_NUMBER)
                 .boxed()
                 .collect(Collectors.toList());
         Collections.shuffle(numberCollection);
         return numberCollection.subList(LOTTO_START_INDEX, LOTTO_LAST_INDEX).stream()
                 .sorted()
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 }

@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.model.BonusNumber;
+import lotto.model.LottoNumber;
 import lotto.model.Lottos;
 import lotto.model.WinningLotto;
 import lotto.util.InputValidator;
@@ -29,17 +30,18 @@ public class LottoController {
     }
 
     private WinningLotto makeWinningLotto(String winningNumbers, String bonusNumber) {
-        List<Integer> lottoNumbers = splitWinningNumbers(winningNumbers);
+        List<LottoNumber> lottoNumbers = splitWinningNumbers(winningNumbers);
         BonusNumber lottoBonusNumber = new BonusNumber(toIntBonusNumber(bonusNumber));
         return new WinningLotto(lottoNumbers, lottoBonusNumber);
     }
 
-    private List<Integer> splitWinningNumbers(String winningNumbers) throws RuntimeException {
+    private List<LottoNumber> splitWinningNumbers(String winningNumbers) throws RuntimeException {
         String[] splitNumbers = InputValidator.validateLottoNumbers(winningNumbers);
         return Arrays.stream(splitNumbers)
                 .map(String::trim)
                 .mapToInt(Integer::parseInt)
                 .boxed()
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 

@@ -17,21 +17,6 @@
 5. 등수를 계산한다.
 6. 통계를 저장하고 출력한다.
 
-* model(domain)
-    * Lotto
-    * Lottos - 일급컬렉션
-    * WinningLotto
-    * Rank
-
-* controller
-    * LottoController
-* util
-    * RandomGenerator
-    * InputValidator
-
-* view
-    * InputView
-    * ResultView
 
 
 
