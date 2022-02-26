@@ -73,17 +73,17 @@ class LottoTest {
     }
 
     @ParameterizedTest
-    @MethodSource("lottoNumbersAndMatchCount")
+    @MethodSource("numbersAndMatchCount")
     @DisplayName("일치하는 숫자의 개수를 반환한다.")
-    void countMatchNumbers(List<Number> lottoNumbers, int matchCount) {
+    void countMatchNumbers(List<Number> numbers, int matchCount) {
         Lotto lotto = new Lotto(givenNumbers(1, 2, 3, 4, 5, 7));
-        Lotto anotherLotto = new Lotto(lottoNumbers);
+        Lotto anotherLotto = new Lotto(numbers);
 
         assertThat(lotto.countMatchNumbers(anotherLotto))
                 .isEqualTo(matchCount);
     }
 
-    private static Stream<Arguments> lottoNumbersAndMatchCount() {
+    private static Stream<Arguments> numbersAndMatchCount() {
         return Stream.of(
                 Arguments.of(givenNumbers(1, 2, 3, 4, 5, 7), 6),
                 Arguments.of(givenNumbers(1, 2, 3, 4, 5, 10), 5),
