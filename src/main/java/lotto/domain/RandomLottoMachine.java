@@ -18,7 +18,11 @@ public class RandomLottoMachine {
     private RandomLottoMachine() {
     }
 
-    public static List<LottoNumber> createRandomLottoNumbers() {
+    public static Lotto createRandomLotto() {
+        return new Lotto(createRandomLottoNumbers());
+    }
+
+    private static List<LottoNumber> createRandomLottoNumbers() {
         Collections.shuffle(LOTTO_NUMBERS);
         return IntStream.range(0, Lotto.LOTTO_NUMBER_SIZE_STANDARD)
                 .boxed()
