@@ -1,7 +1,9 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import lotto.domain.generator.LottoGenerator;
 import lotto.domain.vo.Lotto;
 import lotto.domain.vo.Lottos;
 import lotto.domain.vo.Money;
@@ -9,10 +11,17 @@ import lotto.domain.vo.WinningNumbers;
 
 public class LottoGame {
 
-    private final Lottos lottos = new Lottos();
+    private static final Money LOTTO_PRICE = new Money(1000);
+
+    private Lottos lottos = new Lottos(new ArrayList<>());
 
     public void purchase(Money money) {
-        lottos.purchase(money);
+        int countOfPurchase = money.canBuyNumber(LOTTO_PRICE);
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < countOfPurchase; i++) {
+            lottos.add(LottoGenerator.generate());
+        }
+        this.lottos = new Lottos(lottos);
     }
 
     public List<Lotto> getLottos() {
@@ -20,7 +29,7 @@ public class LottoGame {
     }
 
     public LottoResults confirmWinnings(WinningNumbers winningNumbers) {
-        return new LottoResults(lottos.confirmWinnings(winningNumbers));
+        return new LottoResults(lottos.confirmWinnings(winningNumbers), LOTTO_PRICE);
     }
 
     public boolean hasLottoTickets() {

@@ -29,6 +29,14 @@ public class LottoTest {
         assertThatNoException().isThrownBy(() -> new Lotto(lottoNumbers));
     }
 
+    @DisplayName("Lotto 생성자 null 입력 예외 테스트")
+    @Test
+    void lotto_constructor_error_null_test() {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new Lotto(null))
+                .withMessage("로또 숫자가 없습니다.");
+    }
+
     @DisplayName("Lotto 생성자 6개가 아닌 숫자 입력 예외 테스트")
     @Test
     void lotto_constructor_error_not_six_test() {

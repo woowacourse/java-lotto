@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import lotto.domain.LottoPrize;
+import lotto.domain.generator.LottoGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,26 +16,22 @@ public class LottosTest {
     @DisplayName("Lottos 생성자 테스트")
     @Test
     void lottos_constructor_test() {
-        assertThatNoException().isThrownBy(Lottos::new);
-    }
-
-    @DisplayName("purchase 메서드 테스트")
-    @Test
-    void purchase_test() {
-        Lottos lottos = new Lottos();
-        lottos.purchase(new Money(10000));
+        List<Lotto> randomLottos = new ArrayList<>();
+        randomLottos.add(LottoGenerator.generate());
+        Lottos lottos = new Lottos(randomLottos);
 
         assertThat(lottos)
                 .extracting("lottos")
                 .asList()
-                .hasSize(10);
+                .hasSize(1);
     }
 
     @DisplayName("confirmWinnings 메서드 테스트")
     @Test
     void confirmWinnings_test() {
-        Lottos lottos = new Lottos();
-        lottos.purchase(new Money(10000));
+        Lottos lottos = new Lottos(new ArrayList<>(){{
+            add(LottoGenerator.generate());
+        }});
 
         WinningNumbers winningNumbers = getWinningNumbers();
 

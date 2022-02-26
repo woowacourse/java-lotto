@@ -1,6 +1,5 @@
 package lotto.domain.vo;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -10,22 +9,30 @@ import lotto.domain.LottoPrize;
 
 public class Lotto {
 
+    private static final String ERROR_NULL_MESSAGE = "로또 숫자가 없습니다.";
     private static final String ERROR_NUMBER_SIX_MESSAGE = "로또 숫자는 6개여야 합니다.";
     private static final String ERROR_DUPLICATION_MESSAGE = "로또 숫자는 중복되면 안됩니다.";
 
     private static final int LOTTO_SIZE = 6;
 
-    private final List<LottoNumber> numbers = new ArrayList<>();
+    private final List<LottoNumber> numbers;
 
     public Lotto(List<LottoNumber> numbers) {
+        validateNull(numbers);
         validateNumberSix(numbers);
         validateDuplication(numbers);
 
-        this.numbers.addAll(numbers);
+        this.numbers = numbers;
     }
 
     public List<LottoNumber> getNumbers() {
         return Collections.unmodifiableList(numbers);
+    }
+
+    private void validateNull(List<LottoNumber> numbers) {
+        if (numbers == null) {
+            throw new IllegalArgumentException(ERROR_NULL_MESSAGE);
+        }
     }
 
     private void validateNumberSix(List<LottoNumber> numbers) {

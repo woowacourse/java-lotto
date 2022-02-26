@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.Arrays;
 import java.util.Map;
+import lotto.domain.vo.Money;
 
 public class LottoResults {
 
@@ -9,12 +10,14 @@ public class LottoResults {
     private static final String ERROR_RESULT_SIZE_MESSAGE = "로또 결과가 잘못되었습니다.";
 
     private final Map<LottoPrize, Integer> results;
+    private final Money lottoPrice;
 
-    public LottoResults(Map<LottoPrize, Integer> results) {
+    public LottoResults(Map<LottoPrize, Integer> results, Money lottoPrice) {
         validateNull(results);
         validMissingKey(results);
 
         this.results = results;
+        this.lottoPrice = lottoPrice;
     }
 
     private void validateNull(Map<LottoPrize, Integer> results) {
@@ -42,7 +45,7 @@ public class LottoResults {
 
         for (LottoPrize prize : LottoPrize.values()) {
             int prizeNumber = results.get(prize);
-            totalSpendMoney += prizeNumber * 1000;
+            totalSpendMoney += prizeNumber * lottoPrice.get();
             totalReward += prize.getTotalReward(prizeNumber);
         }
 

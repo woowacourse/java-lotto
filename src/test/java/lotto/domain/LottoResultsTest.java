@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import lotto.domain.vo.Money;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,6 +16,7 @@ class LottoResultsTest {
     public static final String DISPLAY_NAME_ARGUMENTS = "{displayName} : {arguments}";
 
     private static final Map<LottoPrize, Integer> INIT_RESULT = new HashMap<>();
+    private static final Money LOTTO_PRICE = new Money(1000);
 
     @BeforeEach
     void setup() {
@@ -31,14 +33,14 @@ class LottoResultsTest {
             forResult.put(prize, 0);
         }
 
-        assertThatNoException().isThrownBy(() -> new LottoResults(forResult));
+        assertThatNoException().isThrownBy(() -> new LottoResults(forResult, LOTTO_PRICE));
     }
 
     @DisplayName("LottoResults null 입력 예외 테스트")
     @Test
     void lottoResults_constructor_error_on_null_test() {
         assertThatExceptionOfType(NullPointerException.class)
-                .isThrownBy(() -> new LottoResults(null))
+                .isThrownBy(() -> new LottoResults(null, LOTTO_PRICE))
                 .withMessage("로또 결과 생성자의 인자는 null이면 안됩니다.");
     }
 
@@ -49,7 +51,7 @@ class LottoResultsTest {
         result.remove(LottoPrize.FIFTH);
 
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new LottoResults(result))
+                .isThrownBy(() -> new LottoResults(result, LOTTO_PRICE))
                 .withMessage("로또 결과가 잘못되었습니다.");
     }
 
@@ -60,7 +62,7 @@ class LottoResultsTest {
         result.put(LottoPrize.MISS, 9); // 0
         result.put(LottoPrize.FIFTH, 1); // 5000
 
-        LottoResults lottoResults = new LottoResults(result);
+        LottoResults lottoResults = new LottoResults(result, LOTTO_PRICE);
 
         assertThat(lottoResults.getRateReturn()).isEqualTo(0.5);
     }
@@ -72,7 +74,7 @@ class LottoResultsTest {
         Map<LottoPrize, Integer> result = new HashMap<>(INIT_RESULT);
         result.put(LottoPrize.FIRST, input);
 
-        LottoResults lottoResults = new LottoResults(result);
+        LottoResults lottoResults = new LottoResults(result, LOTTO_PRICE);
 
         assertThat(lottoResults.getPrizeNumber(LottoPrize.FIRST)).isEqualTo(input);
     }

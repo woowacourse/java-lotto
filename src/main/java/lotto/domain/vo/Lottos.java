@@ -1,25 +1,18 @@
 package lotto.domain.vo;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import lotto.domain.LottoPrize;
-import lotto.domain.generator.LottoGenerator;
 
 public class Lottos {
 
-    private static final Money LOTTO_PRICE = new Money(1000);
+    private final List<Lotto> lottos;
 
-    private final List<Lotto> lottos = new ArrayList<>();
-
-    public void purchase(Money money) {
-        int purchaseNumber = money.canBuyNumber(LOTTO_PRICE);
-        for (int i = 0; i < purchaseNumber; i++) {
-            lottos.add(LottoGenerator.generate());
-        }
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
     public List<Lotto> getLottos() {
