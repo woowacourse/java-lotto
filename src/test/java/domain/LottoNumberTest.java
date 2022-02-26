@@ -1,36 +1,46 @@
 package domain;
 
-import static constant.ExceptionMessages.INVALID_LOTTO_NUMBER_RANGE_EXCEPTION_MESSAGE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.junit.jupiter.params.ParameterizedTest.DISPLAY_NAME_PLACEHOLDER;
 import static org.junit.jupiter.params.ParameterizedTest.ARGUMENTS_PLACEHOLDER;
 
 import java.util.List;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoNumberTest {
 
-    public static final String PARAMETERIZED_TEST_DISPLAY_FORMAT =
-            DISPLAY_NAME_PLACEHOLDER + " [" + ARGUMENTS_PLACEHOLDER + "]";
+    @DisplayName("생성된 LottoNumber 내부에 정확한 값이 들어있는지 확인")
+    @ParameterizedTest(name = DISPLAY_NAME_PLACEHOLDER + " [" + ARGUMENTS_PLACEHOLDER + "]")
+    @ValueSource(ints = {1, 20, 45})
+    void of_ValidInteger_ReturnsInt(int number) {
+        LottoNumber lottoNumber = LottoNumber.of(number);
 
-    @Test
-    void of_ValidInteger_ReturnsInt() {
-        LottoNumber lottoNumber = LottoNumber.of(1);
-
-        assertThat(lottoNumber.getNumber()).isEqualTo(1);
+        assertThat(lottoNumber.getNumber()).isEqualTo(number);
     }
 
-    @ParameterizedTest(name = PARAMETERIZED_TEST_DISPLAY_FORMAT)
+    @DisplayName("범위 내 숫자 주입 시 생성 성공")
+    @ParameterizedTest(name = DISPLAY_NAME_PLACEHOLDER + " [" + ARGUMENTS_PLACEHOLDER + "]")
+    @ValueSource(ints = {1, 20, 45})
+    void of_ValidRangeInput_Successful(int number) {
+        assertThatNoException()
+                .isThrownBy(() -> LottoNumber.of(number));
+    }
+
+    @DisplayName("범위 외 숫자 주입 시 생성 실패")
+    @ParameterizedTest(name = DISPLAY_NAME_PLACEHOLDER + " [" + ARGUMENTS_PLACEHOLDER + "]")
     @ValueSource(ints = {0, 46})
     void of_InvalidRangeInput_ThrowsIllegalArgumentException(int number) {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> LottoNumber.of(number))
-                .withMessageMatching(INVALID_LOTTO_NUMBER_RANGE_EXCEPTION_MESSAGE);
+                .withMessageMatching("1과 45 사이의 숫자를 입력해야 합니다.");
     }
 
+    @DisplayName("모든 로또 번호가 존재하는지 확인")
     @Test
     void getAllLottoNumbers_ContainsAllNumbers_True() {
         List<LottoNumber> allLottoNumbers = LottoNumber.getAllLottoNumbers();
