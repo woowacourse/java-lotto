@@ -9,7 +9,7 @@ import lotto.domain.vo.LottoNumber;
 
 public class InputView {
 
-    private static final String SEPARATOR = ", ";
+    private static final String SEPARATOR = ",";
 
     private final Scanner scanner;
 
@@ -28,7 +28,7 @@ public class InputView {
 
         String inputWinningNumbers = scanner.nextLine();
 
-        List<String> strings = Arrays.asList(inputWinningNumbers.split(SEPARATOR));
+        List<String> strings = Arrays.asList(inputWinningNumbers.replace(" ", "").split(SEPARATOR));
 
         return translateLottoNumberList(strings);
     }
