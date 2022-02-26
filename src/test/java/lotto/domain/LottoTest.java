@@ -55,8 +55,8 @@ class LottoTest {
     }
 
     @Test
-    @DisplayName("보너스 숫자가 포함되어있는지 확인한다.")
-    void checkContainsBonusNumber() {
+    @DisplayName("숫자가 포함 되어있는지 확인한다.")
+    void checkContainsNumber() {
         Number bonus = new Number(7);
         Lotto lotto = new Lotto(givenNumbers(1, 2, 3, 4, 5, 7));
 
@@ -64,8 +64,8 @@ class LottoTest {
     }
 
     @Test
-    @DisplayName("보너스 숫자가 없는지 확인한다.")
-    void checkNotContainsBonusNumber() {
+    @DisplayName("숫자가 미포함 되었는지 확인한다.")
+    void checkNotContainsNumber() {
         Number bonus = new Number(6);
         Lotto lotto = new Lotto(givenNumbers(1, 2, 3, 4, 5, 7));
 
