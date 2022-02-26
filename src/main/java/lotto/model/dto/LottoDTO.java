@@ -14,12 +14,12 @@ public class LottoDTO {
 
     public static List<LottoDTO> from(Lottos lottos) {
         return lottos.getLottos().stream()
-                .map(lotto -> new LottoDTO(getValuesFrom(lotto)))
+                .map(LottoDTO::from)
                 .collect(Collectors.toList());
     }
 
-    private static List<Integer> getValuesFrom(Lotto lotto) {
-        return lotto.getNumbers().getValues();
+    private static LottoDTO from(Lotto lotto) {
+        return new LottoDTO(lotto.getNumbers().getValues());
     }
 
     public List<Integer> getNumbers() {
