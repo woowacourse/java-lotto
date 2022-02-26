@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.validator.LottoNumberValidator;
+import lotto.exception.LottoNumberException;
 
 public enum LottoNumber {
 
@@ -28,8 +28,11 @@ public enum LottoNumber {
     }
 
     public static LottoNumber findByNumber(int number) {
-        LottoNumberValidator.validate(number);
-        return LottoNumber.valueOf(LOTTO_NUMBER_PREFIX + number);
+        try {
+            return LottoNumber.valueOf(LOTTO_NUMBER_PREFIX + number);
+        } catch (IllegalArgumentException illegalArgumentException) {
+            throw new LottoNumberException(LottoNumberException.LOTTO_NUMBER_RANGE_ERROR_MESSAGE);
+        }
     }
 
     public static List<LottoNumber> getRandomLottoNumbers() {
