@@ -1,34 +1,37 @@
 
 public class LottoMachine {
 
-    private Money money;
-    private Lottos lottos;
-    private WinningNumber winningNumber;
-
     public void start() {
-        int lottoCount = inputMoney();
-        lottos = Lottos.generateLottos(lottoCount);
+        Money money = new Money(InputView.askInputMoney());
+        int lottoCount = calculateCount(money);
+        Lottos lottos = getnerateLottos(lottoCount);
+
+        WinningNumber winningNumber = InputView.askInputWinningNumber();
+        LottoNumber bonusBall = inputBonusBall(winningNumber);
+
+        Statistic winningStatistics = lottos.getWinningStatistics(winningNumber, bonusBall);
+        printTotalStatistic(money, winningStatistics);
+    }
+
+    private int calculateCount(Money money) {
+        int lottoCount = money.generateCount();
+        OutputView.printCountOfLotto(lottoCount);
+        return lottoCount;
+    }
+
+    private Lottos getnerateLottos(int lottoCount) {
+        Lottos lottos = Lottos.generateLottos(lottoCount);
         OutputView.printLottos(lottos);
-        LottoNumber bonusBall = inputWinningNumber();
-        getStatistics(bonusBall);
+        return lottos;
     }
 
-    private int inputMoney() {
-        money = new Money(InputView.askInputMoney());
-        int count = money.generateCount();
-        OutputView.printCountOfLotto(count);
-        return count;
-    }
-
-    private LottoNumber inputWinningNumber() {
-        winningNumber = InputView.askInputWinningNumber();
+    private LottoNumber inputBonusBall(WinningNumber winningNumber) {
         LottoNumber bonusBall = InputView.askInputBonusBall();
         winningNumber.checkBonusBall(bonusBall);
         return bonusBall;
     }
 
-    private void getStatistics(LottoNumber bonusBall) {
-        Statistic winningStatistics = lottos.getWinningStatistics(winningNumber, bonusBall);
+    private void printTotalStatistic(Money money, Statistic winningStatistics) {
         OutputView.printStatistics(winningStatistics);
         OutputView.printProfitRate(winningStatistics, money);
     }

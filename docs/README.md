@@ -22,7 +22,7 @@
 ### 1차 피드백 기반 추가 변경 사항
 - [x] convertToInt() 메서드 중복 제거
   - convertToInt(String Input) -> convertToInt(String input, String errorMessage)
-- [ ] `LottoMachine` : Controller이며 상태를 가지고 있음
+- [x] `LottoMachine` : Controller이며 상태를 가지고 있음
   - [ ] 객체 인스턴스를 여러 스레드에서 동시 사용할 경우 발생하는 문제점
   - [ ] 인스턴스 변수들이 가변이기에 발생하는 문제점
 - [x] `InputView`, `Lotto`, `Statistics` 모두 로또의 범위가 `1 ~ 45`라는 것을 알고 있어야한다.
