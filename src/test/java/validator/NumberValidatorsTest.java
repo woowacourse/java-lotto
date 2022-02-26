@@ -8,7 +8,7 @@ import static constant.ExceptionMessages.INVALID_NUMBER_INPUT_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.INVALID_TOTAL_LOTTO_PRICE_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.NEGATIVE_NUMBER_INPUT_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.NOT_UNIQUE_BONUS_NUMBER_EXCEPTION_MESSAGE;
-import static constant.LottoConstants.LOTTO_PRICE;
+import static domain.LottoGame.LOTTO_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatNoException;

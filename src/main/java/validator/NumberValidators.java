@@ -7,10 +7,10 @@ import static constant.ExceptionMessages.INVALID_NUMBER_INPUT_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.INVALID_TOTAL_LOTTO_PRICE_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.NEGATIVE_NUMBER_INPUT_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.NOT_UNIQUE_BONUS_NUMBER_EXCEPTION_MESSAGE;
-import static constant.LottoConstants.LOTTO_NUMBERS_SIZE;
-import static constant.LottoConstants.LOTTO_PRICE;
-import static constant.LottoConstants.MAXIMUM_LOTTO_NUMBER;
-import static constant.LottoConstants.MINIMUM_LOTTO_NUMBER;
+import static domain.Lotto.LOTTO_NUMBERS_SIZE;
+import static domain.Lotto.MAXIMUM_LOTTO_NUMBER;
+import static domain.Lotto.MINIMUM_LOTTO_NUMBER;
+import static domain.LottoGame.LOTTO_PRICE;
 
 import java.util.HashSet;
 import java.util.List;

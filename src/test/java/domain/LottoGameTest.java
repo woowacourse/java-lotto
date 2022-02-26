@@ -1,7 +1,7 @@
 package domain;
 
 import static common.TestUtils.createNewLotto;
-import static constant.LottoConstants.LOTTO_PRICE;
+import static domain.LottoGame.LOTTO_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;

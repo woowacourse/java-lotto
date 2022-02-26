@@ -3,8 +3,8 @@ package domain;
 import static common.DisplayFormat.PARAMETERIZED_TEST_DISPLAY_FORMAT;
 import static common.TestUtils.createLottoNumbersOf;
 import static constant.ExceptionMessages.INVALID_LOTTO_NUMBER_RANGE_EXCEPTION_MESSAGE;
-import static constant.LottoConstants.MAXIMUM_LOTTO_NUMBER;
-import static constant.LottoConstants.MINIMUM_LOTTO_NUMBER;
+import static domain.Lotto.MAXIMUM_LOTTO_NUMBER;
+import static domain.Lotto.MINIMUM_LOTTO_NUMBER;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 

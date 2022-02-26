@@ -1,6 +1,6 @@
 package controller;
 
-import static constant.LottoConstants.LOTTO_PRICE;
+import static domain.LottoGame.LOTTO_PRICE;
 import static validator.NumberValidators.validateNoDuplicateInList;
 import static validator.NumberValidators.validateNoDuplicates;
 import static validator.NumberValidators.validateTotalLottoPriceUnit;
