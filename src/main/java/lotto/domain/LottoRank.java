@@ -1,29 +1,47 @@
 package lotto.domain;
 
-import static java.util.List.of;
-
 import java.util.Arrays;
-import java.util.List;
 import java.util.function.Predicate;
 
 public enum LottoRank {
-    FIRST(6, of(true, false), 2_000_000_000),
-    SECOND(5, of(true), 30_000_000),
-    THIRD(5, of(false), 1_500_000),
-    FOURTH(4, of(true, false), 50_000),
-    FIFTH(3, of(true, false), 5_000),
-    FAILED(0, of(true, false), 0);
 
-    private final int winningNumberCount;
-    private final List<Boolean> bonusBallBooleans;
+    FIRST(6, BonusBallState.EITHER, 2_000_000_000),
+    SECOND(5, BonusBallState.INCLUDE, 30_000_000),
+    THIRD(5, BonusBallState.DOES_NOT_INCLUDE, 1_500_000),
+    FOURTH(4, BonusBallState.EITHER, 50_000),
+    FIFTH(3, BonusBallState.EITHER, 5_000),
+    FAILED(0, BonusBallState.EITHER, 0);
+
+    private final int winningNumberMatchCount;
+    private final BonusBallState bonusBallState;
     private final long prizeMoney;
 
-    LottoRank(int winningNumberCount, List<Boolean> bonusBallBooleans, long prizeMoney) {
-        this.winningNumberCount = winningNumberCount;
-        this.bonusBallBooleans = bonusBallBooleans;
+    LottoRank(int winningNumberMatchCount, BonusBallState bonusBallState, long prizeMoney) {
+        this.winningNumberMatchCount = winningNumberMatchCount;
+        this.bonusBallState = bonusBallState;
         this.prizeMoney = prizeMoney;
     }
 
+    public enum BonusBallState {
+        INCLUDE(true),
+        DOES_NOT_INCLUDE(false),
+        EITHER(true, false);
+
+        private final Boolean[] bonusBallIncludeStates;
+
+        BonusBallState(Boolean... bonusBallIncludeStates) {
+            this.bonusBallIncludeStates = bonusBallIncludeStates;
+        }
+
+        public boolean contains(boolean containsBonusBall) {
+            for (Boolean bonusBallIncludeState : bonusBallIncludeStates) {
+                if (bonusBallIncludeState == containsBonusBall) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
     public static LottoRank getRank(int winningNumberCount, boolean containsBonusBall) {
         return Arrays.stream(values())
                 .filter(classifyRank(winningNumberCount, containsBonusBall))
@@ -33,12 +51,12 @@ public enum LottoRank {
 
     private static Predicate<LottoRank> classifyRank(int winningNumberCount, boolean containsBonusBall) {
         return (LottoRank lottoRank) ->
-                lottoRank.winningNumberCount == winningNumberCount
-                        && lottoRank.bonusBallBooleans.contains(containsBonusBall);
+                lottoRank.winningNumberMatchCount == winningNumberCount
+                        && lottoRank.bonusBallState.contains(containsBonusBall);
     }
 
-    public int getWinningNumberCount() {
-        return winningNumberCount;
+    public int getWinningNumberMatchCount() {
+        return winningNumberMatchCount;
     }
 
     public long getPrizeMoney() {

@@ -41,11 +41,11 @@ public class OutputView {
 
     private static void printWinningResult(WinningStats winningStats, LottoRank lottoRank) {
         if (lottoRank == LottoRank.THIRD) {
-            out.printf("%s개 일치, 보너스 볼 일치 (%s원) - %s개%n", LottoRank.THIRD.getWinningNumberCount(),
+            out.printf("%s개 일치, 보너스 볼 일치 (%s원) - %s개%n", LottoRank.THIRD.getWinningNumberMatchCount(),
                     LottoRank.THIRD.getPrizeMoney(), winningStats.get(LottoRank.THIRD));
             return;
         }
-        out.printf("%s개 일치 (%s원) - %s개%n", lottoRank.getWinningNumberCount(), lottoRank.getPrizeMoney(),
+        out.printf("%s개 일치 (%s원) - %s개%n", lottoRank.getWinningNumberMatchCount(), lottoRank.getPrizeMoney(),
                 winningStats.get(lottoRank));
     }
 
