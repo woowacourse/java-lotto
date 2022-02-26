@@ -30,7 +30,7 @@ class WinningNumberTest {
         // when & then
         assertThatThrownBy(() -> new WinningNumber(new LottoTicket(winningNumbers), new LottoNumber(bonusBall)))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("로또 번호는 중복될 수 없습니다.");
+                .hasMessageContaining("번호의 갯수가 적절하지 않습니다. 또한 중복될 수 없습니다.");
     }
 
     @DisplayName("당첨 번호는 서로 중복되는 경우 예외를 던진다.")
