@@ -32,11 +32,11 @@ public class OutputView {
 
 	private String makeRakingMessage(final Rank rank, final int winningCount) {
 		if (rank == Rank.SECOND) {
-			return rank.getCorrectedBalls() + "개 일치, 보너스 볼 일치 (" + rank.getPrize()
-				+ "원) - " + winningCount + "개";
+			return String.format(RANKING_SECOND_MESSAGE.getMessage(),
+				rank.getCorrectedBalls(), rank.getPrize(), winningCount);
 		}
-		return rank.getCorrectedBalls() + "개 일치 (" + rank.getPrize()
-			+ "원) - " + winningCount + "개";
+		return String.format(RANKING_MESSAGE.getMessage(),
+			rank.getCorrectedBalls(), rank.getPrize(), winningCount);
 	}
 
 	private void printIncomePercent(final double incomePercent) {
@@ -45,11 +45,11 @@ public class OutputView {
 
 	public void printLotteries(List<Lottery> lotteries) {
 		lotteries.forEach((lottery ->
-			System.out.println(converToLotteryNumbers(lottery.getNumbers()))
+			System.out.println(convertToLotteryNumbers(lottery.getNumbers()))
 		));
 	}
 
-	private String converToLotteryNumbers(List<LotteryNumber> lotteryNumbers) {
+	private String convertToLotteryNumbers(List<LotteryNumber> lotteryNumbers) {
 		return lotteryNumbers.stream()
 			.map(LotteryNumber::getNumber)
 			.collect(Collectors.toList())
