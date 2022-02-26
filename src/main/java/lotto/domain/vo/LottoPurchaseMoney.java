@@ -9,14 +9,11 @@ public class LottoPurchaseMoney {
     private final int price;
 
     private LottoPurchaseMoney(int price) {
-        validateCriterion(price);
         this.price = price;
     }
 
-    public static LottoPurchaseMoney create(String value) {
-        int price = translateInteger(value);
-
-        return new LottoPurchaseMoney(price);
+    public static LottoPurchaseMoney create(int money) {
+        return new LottoPurchaseMoney(money);
     }
 
     public int calculate() {
@@ -25,14 +22,6 @@ public class LottoPurchaseMoney {
 
     public int getPrice() {
         return this.price;
-    }
-
-    private static int translateInteger(String value) {
-        try {
-            return Integer.parseInt(value);
-        } catch(NumberFormatException e) {
-            throw new IllegalArgumentException("숫자를 입력해주세요.");
-        }
     }
 
     private void validateCriterion(int price) {

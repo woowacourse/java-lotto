@@ -19,7 +19,7 @@ class LottoResultTest {
 
         LottoResult lottoResult = new LottoResult(ranks);
 
-        LottoPurchaseMoney lottoPurchaseMoney = LottoPurchaseMoney.create("14000");
+        LottoPurchaseMoney lottoPurchaseMoney = LottoPurchaseMoney.create(14000);
 
         // when
         double result = lottoResult.calculateYield(lottoPurchaseMoney);

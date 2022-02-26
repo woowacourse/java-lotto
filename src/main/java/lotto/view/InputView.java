@@ -14,10 +14,18 @@ public class InputView {
         this.scanner = new Scanner(System.in);
     }
 
-    public String getMoney() {
+    public int getMoney() {
         System.out.println("구입금액을 입력해 주세요.");
 
-        return scanner.nextLine();
+        return translateInteger(scanner.nextLine());
+    }
+
+    private int translateInteger(String value) {
+        try {
+            return Integer.parseInt(value);
+        } catch(NumberFormatException e) {
+            throw new IllegalArgumentException("숫자를 입력해주세요.");
+        }
     }
 
     public List<String> getNormalWinningNumbers() {

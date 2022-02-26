@@ -13,7 +13,7 @@ public class LottoPurchaseMoneyTest {
     @Test
     void 로또_티켓_정상_발급() {
         // given
-        LottoPurchaseMoney lottoPurchaseMoney = LottoPurchaseMoney.create("14000");
+        LottoPurchaseMoney lottoPurchaseMoney = LottoPurchaseMoney.create(14000);
 
         // when
         int count = lottoPurchaseMoney.calculate();
@@ -26,7 +26,7 @@ public class LottoPurchaseMoneyTest {
     @Test
     void 로또_티켓_금액_부족() {
         // given & when & then
-        assertThatThrownBy(() -> LottoPurchaseMoney.create("500"))
+        assertThatThrownBy(() -> LottoPurchaseMoney.create(500))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -34,7 +34,7 @@ public class LottoPurchaseMoneyTest {
     @Test
     void 가능한_금액_만큼_반환() {
         // given
-        LottoPurchaseMoney lottoPurchaseMoney = LottoPurchaseMoney.create("14500");
+        LottoPurchaseMoney lottoPurchaseMoney = LottoPurchaseMoney.create(14500);
 
         // when
         int count = lottoPurchaseMoney.calculate();
@@ -47,7 +47,7 @@ public class LottoPurchaseMoneyTest {
     @Test
     void 음수인경우_테스트() {
         // given & when & then
-        assertThatThrownBy(() -> LottoPurchaseMoney.create("-1"))
+        assertThatThrownBy(() -> LottoPurchaseMoney.create(-1))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
