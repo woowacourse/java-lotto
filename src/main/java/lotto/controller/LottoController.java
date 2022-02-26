@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import lotto.domain.lotto.Lotto;
+import lotto.domain.lotto.LottoWinningNumber;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.Money;
 import lotto.domain.lotto.Number;
@@ -16,8 +17,7 @@ public class LottoController {
 
     private Money money;
     private Lottos lottos;
-    private Lotto lastWeekWinningLotto;
-    private Number bonusNumber;
+    private LottoWinningNumber lottoWinningNumber;
 
 
     public void play() {
@@ -53,11 +53,40 @@ public class LottoController {
     }
 
     private void requestLastWeekWinningLotto() {
+        Lotto winningLotto = requestWinningLotto();
+        Number bonusNumber;
+        do {
+            String input = InputView.inputBonusNumber();
+            bonusNumber = getValidNumber(input);
+            lottoWinningNumber = getValidLottoWinningNumber(winningLotto, bonusNumber);
+        } while (bonusNumber == null || lottoWinningNumber == null);
+    }
+
+    private Lotto requestWinningLotto() {
+        Lotto winningLotto;
         do {
             String input = InputView.inputLastWeekWinningNumbers();
-            lastWeekWinningLotto = toLotto(input.split(", "));
-            requestBonusNumber();
-        } while (lastWeekWinningLotto == null);
+            winningLotto = toLotto(input.split(", "));
+        } while (winningLotto == null);
+        return winningLotto;
+    }
+
+    private Number getValidNumber(String input) {
+        try {
+            return new Number(input);
+        } catch (IllegalArgumentException exception) {
+            OutputView.printException(exception);
+        }
+        return null;
+    }
+
+    private LottoWinningNumber getValidLottoWinningNumber(Lotto winningLotto, Number bonusNumber) {
+        try {
+            return new LottoWinningNumber(winningLotto, bonusNumber);
+        } catch (IllegalArgumentException exception) {
+            OutputView.printException(exception);
+        }
+        return null;
     }
 
     private Lotto toLotto(String[] splitInput) {
@@ -80,33 +109,8 @@ public class LottoController {
             .collect(Collectors.toList());
     }
 
-    private void requestBonusNumber() {
-        do {
-            String input = InputView.inputBonusNumber();
-            bonusNumber = toNumber(input, lastWeekWinningLotto);
-        } while (bonusNumber == null);
-    }
-
-    private Number toNumber(String input, Lotto lotto) {
-        try {
-            Number number = new Number(input);
-            validateDuplicate(lotto, number);
-            return number;
-        } catch (IllegalArgumentException exception) {
-            OutputView.printException(exception);
-        }
-
-        return null;
-    }
-
-    private void validateDuplicate(Lotto lotto, Number number) {
-        if (lotto.contains(number)) {
-            throw new IllegalArgumentException("당첨 번호와 중복입니다.");
-        }
-    }
-
     private void printLottoResult() {
-        Result result = lottos.getResult(lastWeekWinningLotto, bonusNumber);
+        Result result = lottos.getResult(lottoWinningNumber);
         OutputView.printResult(result);
         OutputView.printRateOfProfit(result.getRateOfProfit(money));
     }

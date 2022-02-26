@@ -21,12 +21,11 @@ public class Lottos {
         }
     }
 
-    public Result getResult(Lotto winningNumbers, Number bonusNumber) {
+    public Result getResult(LottoWinningNumber winningNumbers) {
         Result result = new Result();
 
         for (Lotto lotto : lottos) {
-            LottoRanking lottoRanking = lotto.getWinningPrice(winningNumbers, bonusNumber);
-            result.add(lottoRanking);
+            result.add(winningNumbers.getLottoRanking(lotto));
         }
 
         return result;
