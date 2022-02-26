@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static lotto.util.constants.Lotto.LAST_LOTTO_NUMBER;
-import static lotto.util.regex.NumberRegex.NATURAL_NUMBER_REGEX;
+import static lotto.util.regex.NumberRegex.isNaturalNumber;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     private static final String INVALID_LOTTO_NUMBER_EXCEPTION_MESSAGE = "로또 번호는 1 ~ 45 사이의 자연수여야합니다.";
@@ -35,7 +35,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private static void validateNotNegativeInteger(final String value) {
-        if (!NATURAL_NUMBER_REGEX.matcher(value).matches()) {
+        if (!isNaturalNumber(value)) {
             throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_EXCEPTION_MESSAGE);
         }
     }

@@ -1,6 +1,6 @@
 package lotto.domain.purchaseamount;
 
-import static lotto.util.regex.NumberRegex.NATURAL_NUMBER_REGEX;
+import static lotto.util.regex.NumberRegex.isNaturalNumber;
 
 public class PurchaseAmount {
     private static final String INVALID_PURCHASE_AMOUNT_EXCEPTION_MESSAGE = "구매 금액은 1000의 양의 배수여야 합니다.";
@@ -19,7 +19,7 @@ public class PurchaseAmount {
     }
 
     private static void validateNaturalNumber(final String value) {
-        if (!NATURAL_NUMBER_REGEX.matcher(value).matches()) {
+        if (!isNaturalNumber(value)) {
             throw new IllegalArgumentException(INVALID_PURCHASE_AMOUNT_EXCEPTION_MESSAGE);
         }
     }
