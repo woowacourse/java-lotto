@@ -8,14 +8,14 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 import lotto.domain.Profit;
-import lotto.domain.PurchaseAmount;
+import lotto.domain.Money;
 import lotto.domain.WinningLotto;
 import lotto.validator.NumberValidator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
-    private PurchaseAmount purchaseAmount;
+    private Money purchaseAmount;
 
     public void run() {
         Lottos lottos = buyLotto();
@@ -26,7 +26,7 @@ public class LottoController {
     private Lottos buyLotto() {
         OutputView.printPurchaseAmountRequest();
         try {
-            purchaseAmount = new PurchaseAmount(InputView.inputPurchaseAmount());
+            purchaseAmount = new Money(convertPurchaseAmount(InputView.inputPurchaseAmount()));
             Lottos lottos = new Lottos(purchaseAmount);
             OutputView.printLottos(lottos);
             return lottos;
@@ -34,6 +34,11 @@ public class LottoController {
             OutputView.printErrorMessage(error.getMessage());
             return buyLotto();
         }
+    }
+
+    private int convertPurchaseAmount(String purchaseAmount) {
+        NumberValidator.validateNumber(purchaseAmount);
+        return Integer.parseInt(purchaseAmount);
     }
 
     private WinningLotto pickLastWeekWinningNumbers() {

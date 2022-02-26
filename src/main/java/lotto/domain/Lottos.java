@@ -15,8 +15,8 @@ public class Lottos {
         }
     }
 
-    public Lottos(PurchaseAmount purchaseAmount) {
-        this(purchaseAmount.getPurchaseAmount() / LOTTO_PRICE);
+    public Lottos(Money purchaseAmount) {
+        this(purchaseAmount.getMoney() / LOTTO_PRICE);
     }
 
     public Lottos(List<Lotto> lottos) {

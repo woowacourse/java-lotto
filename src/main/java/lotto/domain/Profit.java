@@ -8,7 +8,7 @@ public class Profit {
         this.profit = profit;
     }
 
-    public double calculateProfitRate(PurchaseAmount purchaseAmount) {
-        return (double) profit / purchaseAmount.getPurchaseAmount();
+    public double calculateProfitRate(Money purchaseAmount) {
+        return (double) profit / purchaseAmount.getMoney();
     }
 }
