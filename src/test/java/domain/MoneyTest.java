@@ -2,9 +2,12 @@ package domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 public class MoneyTest {
 
@@ -25,5 +28,12 @@ public class MoneyTest {
         int inputMoney = 10;
         assertThatThrownBy(() -> new Money(inputMoney))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {1000, 1001, 1500, 1999, 2222})
+    @DisplayName("경계값 테스트")
+    public void boundaryValueTest(int inputMoney) {
+        assertDoesNotThrow(() -> new Money(inputMoney));
     }
 }
