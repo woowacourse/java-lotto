@@ -27,9 +27,9 @@ public class LottoController {
         int totalCount = totalLottoPrice / LOTTO_PRICE;
 
         validateManualLottosCount(manualsCount, totalCount);
-        int randomCount = totalCount - manualsCount;
+        int autosCount = totalCount - manualsCount;
 
-        return new LottoCountsDto(manualsCount, randomCount);
+        return new LottoCountsDto(manualsCount, autosCount);
     }
 
     public Lottos initLottos(List<String> manualsString, LottoCountsDto countsDto) {

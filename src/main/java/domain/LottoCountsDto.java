@@ -3,26 +3,26 @@ package domain;
 public class LottoCountsDto {
 
     private final int manuals;
-    private final int randoms;
+    private final int autos;
 
     public LottoCountsDto(int manuals, int randoms) {
         this.manuals = manuals;
-        this.randoms = randoms;
+        this.autos = randoms;
     }
 
     public int getManuals() {
         return manuals;
     }
 
-    public int getRandoms() {
-        return randoms;
+    public int getAutos() {
+        return autos;
     }
 
     @Override
     public String toString() {
         return "LottoCountsDto{" +
                 "manuals=" + manuals +
-                ", randoms=" + randoms +
+                ", randoms=" + autos +
                 '}';
     }
 }

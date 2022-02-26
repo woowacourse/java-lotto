@@ -7,6 +7,9 @@ import java.util.Optional;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
+    public static final int MINIMUM_NUMBER = 1;
+    public static final int MAXIMUM_NUMBER = 45;
+
     private final int number;
 
     private LottoNumber(int value) {

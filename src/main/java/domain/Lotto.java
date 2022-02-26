@@ -1,5 +1,7 @@
 package domain;
 
+import static domain.LottoNumber.MAXIMUM_NUMBER;
+import static domain.LottoNumber.MINIMUM_NUMBER;
 import static validator.NumberValidators.validateLottoNumbersSize;
 
 import java.util.ArrayList;
@@ -10,10 +12,8 @@ import java.util.stream.IntStream;
 
 public class Lotto {
 
-    public static final int MINIMUM_LOTTO_NUMBER = 1;
-    public static final int MAXIMUM_LOTTO_NUMBER = 45;
     public static final int LOTTO_NUMBERS_SIZE = 6;
-    private static final List<LottoNumber> allLottoNumbers = IntStream.range(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER)
+    private static final List<LottoNumber> allLottoNumbers = IntStream.range(MINIMUM_NUMBER, MAXIMUM_NUMBER)
             .boxed()
             .map(LottoNumber::of)
             .collect(Collectors.toList());

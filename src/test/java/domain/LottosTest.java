@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 public class LottosTest {
 
     private static final int MANUAL_LOTTOS_COUNT = 3;
-    private static final int RANDOM_LOTTOS_COUNT = 5;
+    private static final int AUTOS_COUNT = 5;
     private static final List<Lotto> manualLottos = new ArrayList<>();
 
     @BeforeAll
@@ -26,16 +26,16 @@ public class LottosTest {
 
     @Test
     void of_createsTheSameNumberOfLottosAsManualLottosSizeAndRandomCount() {
-        Lottos lottos = Lottos.of(manualLottos, RANDOM_LOTTOS_COUNT);
+        Lottos lottos = Lottos.of(manualLottos, AUTOS_COUNT);
 
-        assertThat(lottos.getLottos().size()).isEqualTo(MANUAL_LOTTOS_COUNT + RANDOM_LOTTOS_COUNT);
+        assertThat(lottos.getLottos().size()).isEqualTo(MANUAL_LOTTOS_COUNT + AUTOS_COUNT);
         assertThat(lottos.getManuals()).isEqualTo(MANUAL_LOTTOS_COUNT);
-        assertThat(lottos.getRandoms()).isEqualTo(RANDOM_LOTTOS_COUNT);
+        assertThat(lottos.getAutos()).isEqualTo(AUTOS_COUNT);
     }
 
     @Test
     void of_allNewLottosAreDifferent() {
-        Lottos lottos = Lottos.of(manualLottos, RANDOM_LOTTOS_COUNT);
+        Lottos lottos = Lottos.of(manualLottos, AUTOS_COUNT);
 
         Set<Lotto> noDuplicateLottoSet = new HashSet<>(lottos.getLottos());
         assertThat(noDuplicateLottoSet.size())
@@ -44,11 +44,11 @@ public class LottosTest {
 
     @Test
     void of_passesOnRandomOnly() {
-        Lottos lottos = Lottos.of(new ArrayList<>(), RANDOM_LOTTOS_COUNT);
+        Lottos lottos = Lottos.of(new ArrayList<>(), AUTOS_COUNT);
 
-        assertThat(lottos.getLottos().size()).isEqualTo(RANDOM_LOTTOS_COUNT);
+        assertThat(lottos.getLottos().size()).isEqualTo(AUTOS_COUNT);
         assertThat(lottos.getManuals()).isEqualTo(0);
-        assertThat(lottos.getRandoms()).isEqualTo(RANDOM_LOTTOS_COUNT);
+        assertThat(lottos.getAutos()).isEqualTo(AUTOS_COUNT);
     }
 
     @Test
@@ -56,12 +56,12 @@ public class LottosTest {
         Lottos lottos = Lottos.of(manualLottos, 0);
         assertThat(lottos.getLottos().size()).isEqualTo(MANUAL_LOTTOS_COUNT);
         assertThat(lottos.getManuals()).isEqualTo(MANUAL_LOTTOS_COUNT);
-        assertThat(lottos.getRandoms()).isEqualTo(0);
+        assertThat(lottos.getAutos()).isEqualTo(0);
     }
 
     @Test
     void getLottos_throwsExceptionOnDirectModification() {
-        Lottos lottos = Lottos.of(manualLottos, RANDOM_LOTTOS_COUNT);
+        Lottos lottos = Lottos.of(manualLottos, AUTOS_COUNT);
 
         Lotto newLotto = createNewLotto(1, 2, 3, 4, 5, 6);
 

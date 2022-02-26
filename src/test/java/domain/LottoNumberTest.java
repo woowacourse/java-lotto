@@ -3,8 +3,8 @@ package domain;
 import static common.DisplayFormat.PARAMETERIZED_TEST_DISPLAY_FORMAT;
 import static common.TestUtils.createLottoNumbersOf;
 import static constant.ExceptionMessages.INVALID_LOTTO_NUMBER_RANGE_EXCEPTION_MESSAGE;
-import static domain.Lotto.MAXIMUM_LOTTO_NUMBER;
-import static domain.Lotto.MINIMUM_LOTTO_NUMBER;
+import static domain.LottoNumber.MAXIMUM_NUMBER;
+import static domain.LottoNumber.MINIMUM_NUMBER;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
@@ -24,7 +24,7 @@ public class LottoNumberTest {
     }
 
     @ParameterizedTest(name = PARAMETERIZED_TEST_DISPLAY_FORMAT)
-    @ValueSource(ints = {MINIMUM_LOTTO_NUMBER - 1, MAXIMUM_LOTTO_NUMBER + 1})
+    @ValueSource(ints = {MINIMUM_NUMBER - 1, MAXIMUM_NUMBER + 1})
     void of_failsOnInvalidRangeInteger(int value) {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> LottoNumber.of(value))

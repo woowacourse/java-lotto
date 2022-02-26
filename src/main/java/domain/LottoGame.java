@@ -23,7 +23,7 @@ public class LottoGame {
         List<LottoResult> results = getLottoResults();
 
         resultStatistics.getLottoResultKeys()
-                .forEach(key -> resultStatistics.collectAndUpdateStats(results, key));
+                .forEach(key -> resultStatistics.updateStats(results, key));
     }
 
     private List<LottoResult> getLottoResults() {
@@ -44,7 +44,11 @@ public class LottoGame {
     }
 
     private int getLottoPrice() {
-        return lottos.getLottos().size() * LOTTO_PRICE;
+        return getLottosSize() * LOTTO_PRICE;
+    }
+
+    private int getLottosSize() {
+        return lottos.getLottos().size();
     }
 
     @Override

@@ -9,9 +9,9 @@ import static constant.ExceptionMessages.INVALID_TOTAL_LOTTO_PRICE_EXCEPTION_MES
 import static constant.ExceptionMessages.NEGATIVE_NUMBER_INPUT_EXCEPTION_MESSAGE;
 import static constant.ExceptionMessages.NOT_UNIQUE_BONUS_NUMBER_EXCEPTION_MESSAGE;
 import static domain.Lotto.LOTTO_NUMBERS_SIZE;
-import static domain.Lotto.MAXIMUM_LOTTO_NUMBER;
-import static domain.Lotto.MINIMUM_LOTTO_NUMBER;
 import static domain.LottoGame.LOTTO_PRICE;
+import static domain.LottoNumber.MAXIMUM_NUMBER;
+import static domain.LottoNumber.MINIMUM_NUMBER;
 
 import java.util.HashSet;
 import java.util.List;
@@ -52,7 +52,7 @@ public class NumberValidators {
     }
 
     public static void validateLottoNumberRange(int num) {
-        if (num < MINIMUM_LOTTO_NUMBER || num > MAXIMUM_LOTTO_NUMBER) {
+        if (num < MINIMUM_NUMBER || num > MAXIMUM_NUMBER) {
             throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_RANGE_EXCEPTION_MESSAGE);
         }
     }

@@ -8,25 +8,25 @@ import java.util.stream.Stream;
 public class Lottos {
 
     private final List<Lotto> lottos;
-    private final LottoCountsDto lottoCountsDto;
+    private final LottoCountsDto countsDto;
 
-    private Lottos(List<Lotto> lottos, LottoCountsDto lottoCountsDto) {
+    private Lottos(List<Lotto> lottos, LottoCountsDto countsDto) {
         this.lottos = lottos;
-        this.lottoCountsDto = lottoCountsDto;
+        this.countsDto = countsDto;
     }
 
     public static Lottos of(List<Lotto> manuals, LottoCountsDto lottoCountsDto) {
-        int randomCount = lottoCountsDto.getRandoms();
+        int autosCount = lottoCountsDto.getAutos();
 
-        List<Lotto> lottos = Stream.concat(manuals.stream(), randomLottosStream(randomCount))
+        List<Lotto> lottos = Stream.concat(manuals.stream(), autosStream(autosCount))
                 .collect(Collectors.toList());
 
         return new Lottos(lottos, lottoCountsDto);
     }
 
-    private static Stream<Lotto> randomLottosStream(int randomCount) {
+    private static Stream<Lotto> autosStream(int autosCount) {
         return Stream.generate(Lotto::new)
-                .limit(randomCount);
+                .limit(autosCount);
     }
 
     public List<Lotto> getLottos() {
@@ -34,11 +34,11 @@ public class Lottos {
     }
 
     public int getManuals() {
-        return lottoCountsDto.getManuals();
+        return countsDto.getManuals();
     }
 
-    public int getRandoms() {
-        return lottoCountsDto.getRandoms();
+    public int getAutos() {
+        return countsDto.getAutos();
     }
 
     @Override

@@ -29,13 +29,13 @@ class ResultStatisticsTest {
     }
 
     @Test
-    void updateLottoResult_updatesStatsWithEachLottoResult() {
+    void updateStats_updatesStatsWithEachLottoResult() {
         List<LottoResult> results = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             results.add(LottoResult.FIRST);
         }
 
-        resultStatistics.collectAndUpdateStats(results, LottoResult.FIRST);
+        resultStatistics.updateStats(results, LottoResult.FIRST);
 
         Map<LottoResult, Integer> actual = resultStatistics.getResultStatistics();
         assertThat(actual.get(LottoResult.FIRST)).isEqualTo(3);
@@ -43,13 +43,13 @@ class ResultStatisticsTest {
     }
 
     @Test
-    void updateLottoResult_doesNotUpdatesStatsOnLottoResultNotMatching() {
+    void updateStats_doesNotUpdatesStatsOnLottoResultNotMatching() {
         List<LottoResult> results = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             results.add(LottoResult.SECOND);
         }
 
-        resultStatistics.collectAndUpdateStats(results, LottoResult.FIRST);
+        resultStatistics.updateStats(results, LottoResult.FIRST);
 
         Map<LottoResult, Integer> actual = resultStatistics.getResultStatistics();
         assertThat(actual.get(LottoResult.FIRST)).isEqualTo(0);

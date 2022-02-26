@@ -18,7 +18,7 @@ public class ResultStatistics {
         return Collections.unmodifiableSet(resultStatistics.keySet());
     }
 
-    public void collectAndUpdateStats(List<LottoResult> results, LottoResult key) {
+    public void updateStats(List<LottoResult> results, LottoResult key) {
         resultStatistics.put(key, collectPrizeCount(results, key));
     }
 
@@ -31,11 +31,11 @@ public class ResultStatistics {
     public int calculateTotalPrize() {
         return resultStatistics.keySet()
                 .stream()
-                .mapToInt(result -> sumOfLottoResult(result, resultStatistics.get(result)))
+                .mapToInt(result -> sumOfRankPrize(result, resultStatistics.get(result)))
                 .sum();
     }
 
-    private int sumOfLottoResult(LottoResult lottoResult, int count) {
+    private int sumOfRankPrize(LottoResult lottoResult, int count) {
         return lottoResult.getPrize() * count;
     }
 
