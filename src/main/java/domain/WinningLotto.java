@@ -17,7 +17,7 @@ public class WinningLotto {
         }
     }
 
-    public Prize calculateRank(Lotto lotto) {
+    public Prize calculatePrize(Lotto lotto) {
         int matched = lotto.matchedEachOther(this.lotto);
         boolean hasBonus = lotto.hasBall(bonusBall);
         return Prize.getWinnerPrizeByMatched(matched, hasBonus);
