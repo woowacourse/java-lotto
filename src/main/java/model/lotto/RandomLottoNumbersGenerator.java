@@ -1,27 +1,30 @@
 package model.lotto;
 
-import model.lotto.LottoNumbers;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class RandomLottoNumbersGenerator {
-    private static final int LOTTO_SIZE = 6;
+	private static final List<Integer> lottoNumbers = new ArrayList<>();
+	private static final int LOTTO_SIZE = 6;
+	private static final int LOTTO_MIN_NUMBER = 1;
+	private static final int LOTTO_MAX_NUMBER = 45;
 
-    public static List<Integer> pickSixNumbers() {
-        List<Integer> shuffledNumbers = shuffleLottoNumbers();
-        return shuffledNumbers.stream()
-                .limit(LOTTO_SIZE)
-                .collect(Collectors.toList());
-    }
+	static {
+		IntStream.range(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER).forEach(lottoNumbers::add);
+	}
 
-    private static List<Integer> shuffleLottoNumbers() {
-        ArrayList<Integer> randomNumbers = new ArrayList<>();
-        randomNumbers.addAll(LottoNumbers.getLottoNumbers());
-        Collections.shuffle(randomNumbers);
-        return randomNumbers;
-    }
+	public static List<Integer> pickSixNumbers() {
+		List<Integer> shuffledNumbers = shuffleLottoNumbers();
+		return shuffledNumbers.stream()
+			.limit(LOTTO_SIZE)
+			.collect(Collectors.toList());
+	}
+
+	private static List<Integer> shuffleLottoNumbers() {
+		Collections.shuffle(lottoNumbers);
+		return lottoNumbers;
+	}
 }
-
