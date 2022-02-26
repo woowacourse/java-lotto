@@ -13,7 +13,7 @@ public class LottoNumber {
     private final int number;
 
     static {
-        IntStream.range(MIN, MAX)
+        IntStream.range(MIN, MAX + 1)
                 .forEach(i -> cacheLottoNumber[i] = new LottoNumber(i));
     }
 
