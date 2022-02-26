@@ -34,8 +34,12 @@ public enum LottoRanking {
             .orElse(LottoRanking.Fail);
     }
 
-    public int getPrice() {
+    public long getPrice() {
         return price;
+    }
+
+    public long multiply(int count) {
+        return (long) price * count;
     }
 
     public int getCount() {

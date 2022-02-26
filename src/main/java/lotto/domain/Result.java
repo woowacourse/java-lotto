@@ -29,7 +29,8 @@ public class Result {
     public double getRateOfProfit(Money money) {
         long total = 0L;
         for (Map.Entry<LottoRanking, Integer> entry : result.entrySet()) {
-            total += (long)entry.getKey().getPrice() * entry.getValue();
+            total += entry.getKey()
+                .multiply(entry.getValue());
         }
 
         return Math.round((double)total / money.getValue() * ROUND_OFF_NUMBER) / ROUND_OFF_NUMBER;
