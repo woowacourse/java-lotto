@@ -3,6 +3,7 @@ package lotto.model.number;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.model.Lotto;
 
 /*
  * 지난 주 당첨 번호를 List<LottoNumber>로 저장하는 일급 컬렉션 Class
@@ -49,8 +50,14 @@ public class WinningNumbers {
                 .count();
     }
 
-    public boolean match(LottoNumber number) {
+    public boolean contains(LottoNumber number) {
         return winningNumbers.stream()
                 .anyMatch(winningNumber -> winningNumber.equals(number));
+    }
+
+    public int match(Lotto lotto) {
+        return (int) winningNumbers.stream()
+                .filter(lotto::contains)
+                .count();
     }
 }

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import lotto.model.number.LottoNumber;
-import lotto.model.number.WinningNumbers;
 
 /*
  * 자동 로또 한 장을 의미하는 Class
@@ -30,12 +29,6 @@ public class Lotto {
 
     public static int countAvailableTickets(Money money) {
         return money.countAvailable(PRICE);
-    }
-
-    public int match(WinningNumbers winningNumbers) {
-        return (int) numbers.stream()
-                .filter(winningNumbers::match)
-                .count();
     }
 
     public boolean contains(LottoNumber number) {

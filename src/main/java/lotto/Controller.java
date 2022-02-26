@@ -4,9 +4,10 @@ import java.util.List;
 import lotto.model.Lotto;
 import lotto.model.Lottos;
 import lotto.model.Money;
+import lotto.model.WinningLotto;
 import lotto.model.dto.LottoDTO;
 import lotto.model.dto.PrizeInformationDTO;
-import lotto.model.number.BonusNumber;
+import lotto.model.number.LottoNumber;
 import lotto.model.number.WinningNumbers;
 import lotto.model.prize.MatchResult;
 import lotto.model.prize.PrizeInformations;
@@ -16,20 +17,17 @@ import lotto.view.ResultView;
 public class Controller {
 
     public static void run() {
-        Money money = Money.from(InputView.askMoneyAmount());
-
-        Lottos lottos = purchaseLottos(money);
-
-        WinningNumbers winningNumbers = getWinningNumbers();
-        PrizeInformations prizeInformations =
-                getPrize(lottos, winningNumbers, getBonusNumber(winningNumbers));
-
+        Money money = askMoneyAmount();
+        PrizeInformations prizeInformations = getPrize(purchaseLottos(money), getWinningLotto());
         ResultView.showEarningRate(prizeInformations.calculateEarningRate(money));
     }
 
-    private static PrizeInformations getPrize(
-            Lottos lottos, WinningNumbers winningNumbers, BonusNumber bonusNumber) {
-        List<MatchResult> matchResults = lottos.match(winningNumbers, bonusNumber);
+    private static Money askMoneyAmount() {
+        return Money.from(InputView.askMoneyAmount());
+    }
+
+    private static PrizeInformations getPrize(Lottos lottos, WinningLotto winningLotto) {
+        List<MatchResult> matchResults = lottos.match(winningLotto);
 
         return getPrizeInformations(matchResults);
     }
@@ -61,16 +59,20 @@ public class Controller {
         return lottos;
     }
 
+    private static WinningLotto getWinningLotto() {
+        return new WinningLotto(getWinningNumbers(), getBonusNumber());
+    }
+
     private static WinningNumbers getWinningNumbers() {
         String[] winningNumbersInput = InputView.askWinningNumbers();
 
         return WinningNumbers.from(winningNumbersInput);
     }
 
-    private static BonusNumber getBonusNumber(WinningNumbers winningNumbers) {
+    private static LottoNumber getBonusNumber() {
         String bonusNumberInput = InputView.askBonusNumber();
 
-        return BonusNumber.from(bonusNumberInput, winningNumbers);
+        return LottoNumber.from(bonusNumberInput);
     }
 
 }

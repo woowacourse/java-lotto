@@ -1,20 +1,15 @@
 package lotto.model.prize;
 
-import lotto.model.Lotto;
-import lotto.model.number.BonusNumber;
-import lotto.model.number.WinningNumbers;
-
+/*
+ * 당첨 번호와 구입한 로또의 대조 결과를 담는 Class
+ */
 public class MatchResult {
     private int count;
     private boolean bonus;
 
-    private MatchResult(int count, boolean bonus) {
+    public MatchResult(int count, boolean bonus) {
         this.count = count;
         this.bonus = bonus;
-    }
-
-    public static MatchResult of(Lotto lotto, WinningNumbers winningNumbers, BonusNumber bonusNumber) {
-        return new MatchResult(lotto.match(winningNumbers), bonusNumber.match(lotto));
     }
 
     public boolean isCount(int count) {

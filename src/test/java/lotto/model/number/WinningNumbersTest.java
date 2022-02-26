@@ -55,13 +55,13 @@ public class WinningNumbersTest {
     @Test
     public void match_true() {
         WinningNumbers winningNumbers = WinningNumbers.from(standardNumbers.toArray(new String[0]));
-        assertThat(winningNumbers.match(LottoNumber.from("1"))).isTrue();
+        assertThat(winningNumbers.contains(LottoNumber.from("1"))).isTrue();
     }
 
     @DisplayName("당첨된 번호에 포함된 숫자가 아닐 때 false를 반환한다")
     @Test
     public void match_false() {
         WinningNumbers winningNumbers = WinningNumbers.from(standardNumbers.toArray(new String[0]));
-        assertThat(winningNumbers.match(LottoNumber.from("7"))).isFalse();
+        assertThat(winningNumbers.contains(LottoNumber.from("7"))).isFalse();
     }
 }

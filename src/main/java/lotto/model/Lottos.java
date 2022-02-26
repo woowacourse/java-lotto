@@ -3,10 +3,11 @@ package lotto.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.model.number.BonusNumber;
-import lotto.model.number.WinningNumbers;
 import lotto.model.prize.MatchResult;
 
+/*
+ * 구입한 로또들을 담는 일급 컬렉션 Class
+ */
 public class Lottos {
 
     private List<Lotto> lottos;
@@ -25,9 +26,9 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public List<MatchResult> match(WinningNumbers winningNumbers, BonusNumber bonusNumber) {
+    public List<MatchResult> match(WinningLotto winningLotto) {
         return this.lottos.stream()
-                .map(lotto -> MatchResult.of(lotto, winningNumbers, bonusNumber))
+                .map(winningLotto::match)
                 .collect(Collectors.toList());
     }
 

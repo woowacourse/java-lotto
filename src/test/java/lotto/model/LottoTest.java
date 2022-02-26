@@ -1,15 +1,13 @@
-package lotto;
+package lotto.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
-import lotto.model.Lotto;
 import lotto.model.number.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottoTest {
-
     @DisplayName("6개의 숫자를 생성한다")
     @Test
     void generate_six_number() {
