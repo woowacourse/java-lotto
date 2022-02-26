@@ -1,43 +1,45 @@
 package view;
 
 import java.util.Scanner;
-import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 public class InputView {
     private final static Scanner SCANNER = new Scanner(System.in);
 
-    public static <T> T inputSelectiveRepeatably(String message, Function<String, T> function,
-                                                 Consumer<Exception> errorHandler) {
-        try {
-            return inputOnce(message, function);
-        } catch (Exception e) {
-            return handleException(message, function, errorHandler, e);
-        }
-    }
-
-    private static <T> T inputOnce(String message, Function<String, T> function) {
+    public static <T> T inputWithMessage(String message, Function<String, T> function) {
         System.out.println(message);
         return function.apply(SCANNER.nextLine());
     }
 
-    private static <T> T handleException(String message, Function<String, T> function,
-                                         Consumer<Exception> errorHandler, Exception e) {
-        errorHandler.accept(e);
-        if (isRepeatable()) {
-            return inputSelectiveRepeatably(message, function, errorHandler);
+    public static <T> T getUntilValid(Supplier<T> supplier) {
+        T t;
+        do {
+            t = getFromSupplier(supplier);
+        } while(t == null && isRepeatable());
+        return t;
+    }
+
+    private static <T> T getFromSupplier(Supplier<T> supplier) {
+        try {
+            return supplier.get();
+        } catch (Exception e) {
+            OutputView.printErrorMessage(e);
+            return null;
         }
-        throw new IllegalStateException("종료되었습니다!");
     }
 
     private static boolean isRepeatable() {
         String value = inputSelectBox("다시 시도하시려면 Y, 아니면 N", "Y", "N", "y", "n");
-        return value.equals("y") || value.equals("Y");
+        if (value.equals("y") || value.equals("Y")) {
+            return true;
+        }
+        throw new IllegalStateException("시스템을 종료합니다.");
     }
 
     private static String inputSelectBox(String message, String... options) {
-        String value = inputOnce(message, Function.identity());
+        String value = inputWithMessage(message, Function.identity());
 
         if (isIncludedInOptions(value, options)) {
             return value;
@@ -48,5 +50,4 @@ public class InputView {
     private static boolean isIncludedInOptions(String value, String[] options) {
         return Stream.of(options).anyMatch(option -> option.equals(value));
     }
-
 }

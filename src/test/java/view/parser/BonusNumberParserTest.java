@@ -18,7 +18,7 @@ public class BonusNumberParserTest {
     @DisplayName("정상적인 숫자 입력 처리")
     void parse(String text, int actual) {
         BonusNumberParser parser = new BonusNumberParser();
-        assertThat(parser.parse(text)).isEqualTo(new LottoNumber(actual));
+        assertThat(parser.parse(text)).isEqualTo(actual);
     }
 
     @ParameterizedTest
@@ -29,14 +29,5 @@ public class BonusNumberParserTest {
         assertThatThrownBy(() -> parser.parse(text))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(INVALID_BONUS_NUMBER_FORMAT_MESSAGE);
-    }
-
-    @ParameterizedTest
-    @CsvSource({"46", "100"})
-    @DisplayName("비정상적인 로또 번호 입력 처리")
-    void invalidLottoNumberParse(String text) {
-        BonusNumberParser parser = new BonusNumberParser();
-        assertThatThrownBy(() ->parser.parse(text))
-                .isInstanceOf(InvalidRangeLottoNumberException.class);
     }
 }

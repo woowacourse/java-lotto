@@ -16,8 +16,8 @@ public class MoneyParserTest {
     @DisplayName("정상적인 금액 입력")
     void parse() {
         MoneyParser parser = new MoneyParser();
-        Money value = parser.parse("10000");
-        assertThat(value).isEqualTo(new Money(10000));
+        int value = parser.parse("10000");
+        assertThat(value).isEqualTo(10000);
     }
 
     @ParameterizedTest

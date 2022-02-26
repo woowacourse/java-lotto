@@ -1,5 +1,6 @@
 
-import static view.InputView.inputSelectiveRepeatably;
+import static view.InputView.getUntilValid;
+import static view.InputView.inputWithMessage;
 import static view.OutputView.printErrorMessage;
 import static view.OutputView.printIssuedLottoNumbers;
 import static view.OutputView.printResult;
@@ -12,17 +13,17 @@ import model.LottoResult;
 import model.Money;
 import model.generator.RandomLottoNumbersGenerator;
 import model.WinningLottoNumbers;
+import view.InputView;
 import view.parser.BonusNumberParser;
 import view.parser.LottoNumbersParser;
 import view.parser.MoneyParser;
-import view.OutputView;
 import view.parser.Parser;
 
 public class Application {
 
-    public static final Parser<Money> MONEY_PARSER = new MoneyParser();
-    public static final Parser<LottoNumbers> LOTTO_NUMBERS_PARSER = new LottoNumbersParser();
-    public static final Parser<LottoNumber> BONUS_NUMBER_PARSER = new BonusNumberParser();
+    public static final Parser<Integer> MONEY_PARSER = new MoneyParser();
+    public static final Parser<List<Integer>> LOTTO_NUMBERS_PARSER = new LottoNumbersParser();
+    public static final Parser<Integer> BONUS_NUMBER_PARSER = new BonusNumberParser();
 
     public static void main(String[] args) {
         try {
@@ -33,13 +34,20 @@ public class Application {
     }
 
     private static void run() {
-        Money inputMoney = inputSelectiveRepeatably("구입금액을 입력해 주세요.", MONEY_PARSER::parse,
-            OutputView::printErrorMessage);
+        Money inputMoney = getUntilValid(Application::getMoneyFromUser);
+
         List<LottoNumbers> issuedLottoNumbers = issueLottoNumbers(inputMoney);
         printIssuedLottoNumbers(issuedLottoNumbers);
-        WinningLottoNumbers winningLottoNumbers = createWinningLottoNumbers();
+
+        WinningLottoNumbers winningLottoNumbers = getUntilValid(Application::getWinningLottoNumbersFromUser);
         LottoResult result = winningLottoNumbers.summarize(issuedLottoNumbers, inputMoney);
         printResult(result);
+    }
+
+    private static Money getMoneyFromUser() {
+        int moneyAmount = InputView.inputWithMessage("구입금액을 입력해 주세요.", MONEY_PARSER::parse);
+        Money inputMoney = new Money(moneyAmount);
+        return inputMoney;
     }
 
     private static List<LottoNumbers> issueLottoNumbers(Money inputMoney) {
@@ -47,11 +55,10 @@ public class Application {
         return lottoMachine.issueLotto(inputMoney);
     }
 
-    private static WinningLottoNumbers createWinningLottoNumbers() {
-        LottoNumbers lottoNumbers = inputSelectiveRepeatably("지난 주 당첨 번호를 입력해 주세요.",
-                LOTTO_NUMBERS_PARSER::parse, OutputView::printErrorMessage);
-        LottoNumber bonusNumber = inputSelectiveRepeatably("보너스 볼을 입력해 주세요.", BONUS_NUMBER_PARSER::parse,
-                OutputView::printErrorMessage);
-        return new WinningLottoNumbers(lottoNumbers, bonusNumber);
+    private static WinningLottoNumbers getWinningLottoNumbersFromUser() {
+        List<Integer> inputLottoNumbers = inputWithMessage("지난 주 당첨 번호를 입력해 주세요.",
+                LOTTO_NUMBERS_PARSER::parse);
+        int bonusNumber = inputWithMessage("보너스 볼을 입력해 주세요.", BONUS_NUMBER_PARSER::parse);
+        return new WinningLottoNumbers(new LottoNumbers(inputLottoNumbers), new LottoNumber(bonusNumber));
     }
 }

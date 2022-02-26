@@ -1,13 +1,11 @@
 package view.parser;
 
-import model.LottoNumber;
-
-public class BonusNumberParser extends Parser<LottoNumber> {
+public class BonusNumberParser extends Parser<Integer> {
     public static final String INVALID_BONUS_NUMBER_FORMAT_MESSAGE = "보너스 번호의 형식이 잘못 되었습니다. 예) 35";
 
     @Override
-    protected LottoNumber convert(String text) {
-        return new LottoNumber(Integer.parseInt(text.trim()));
+    protected Integer convert(String text) {
+        return Integer.parseInt(text.trim());
     }
 
     @Override

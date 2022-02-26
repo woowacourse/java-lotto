@@ -34,13 +34,13 @@ public class LottoNumbersParserTest {
     @Test
     @DisplayName("로또 당첨 번호 분리")
     void splitWinningNumber() {
-        assertThat(parser.parse("1,2,3,4,5,6")).isEqualTo(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
+        assertThat(parser.parse("1,2,3,4,5,6")).isEqualTo(List.of(1, 2, 3, 4, 5, 6));
     }
 
     @Test
     @DisplayName("로또 당첨 번호 공백 제거 분리")
     void splitWinningNumberWithTrim() {
-        assertThat(parser.parse("1, 2,3,4 ,5,    6")).isEqualTo(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
+        assertThat(parser.parse("1, 2,3,4 ,5,    6")).isEqualTo(List.of(1, 2, 3, 4, 5, 6));
     }
 
     @ParameterizedTest
@@ -50,13 +50,5 @@ public class LottoNumbersParserTest {
         assertThatThrownBy(() -> parser.parse(invalidLottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(INVALID_LOTTO_NUMBER_FORMAT_MESSAGE);
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"100,200,3,4,5,6", "46, 1, 2, 3, 4, 5"})
-    @DisplayName("잘못된 로또 번호 범위 검증")
-    void validateInvalidLottoNumberRange(String invalidLottoNumbers) {
-        assertThatThrownBy(() -> parser.parse(invalidLottoNumbers))
-                .isInstanceOf(InvalidRangeLottoNumberException.class);
     }
 }

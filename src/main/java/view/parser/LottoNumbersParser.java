@@ -3,17 +3,15 @@ package view.parser;
 import static java.util.stream.Collectors.toList;
 
 import java.util.List;
-import model.LottoNumbers;
 
-public class LottoNumbersParser extends Parser<LottoNumbers> {
+public class LottoNumbersParser extends Parser<List<Integer>> {
     static final String INVALID_LOTTO_NUMBER_FORMAT_MESSAGE = "당첨 번호의 형식이 잘못 되었습니다. 예) 1, 2, 3, 4, 5, 6";
 
     @Override
-    protected LottoNumbers convert(String text) {
+    protected List<Integer> convert(String text) {
         List<String> tokens = splitByComma(text);
         List<String> trimmedTokens = trimEach(tokens);
-        List<Integer> numbers = toIntEach(trimmedTokens);
-        return new LottoNumbers(numbers);
+        return toIntEach(trimmedTokens);
     }
 
     private List<String> splitByComma(String numbers) {
