@@ -76,4 +76,11 @@ public class Lotto {
     public Set<Number> getNumbers() {
         return Collections.unmodifiableSet(numbers);
     }
+
+    @Override
+    public String toString() {
+        return "Lotto{" +
+                "numbers=" + numbers +
+                '}';
+    }
 }

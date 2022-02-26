@@ -35,4 +35,11 @@ public class Result {
 
         return Math.round((double) total / money.getValue() * DECIMAL_PLACE) / DECIMAL_PLACE;
     }
+
+    @Override
+    public String toString() {
+        return "Result{" +
+                "result=" + result +
+                '}';
+    }
 }
