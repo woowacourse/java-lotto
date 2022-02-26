@@ -26,7 +26,7 @@ public enum LottoRank {
         return Arrays.stream(values())
                 .filter(lottoRank -> lottoRank.winningNumberCount == winningNumberCount)
                 .findFirst()
-                .orElseGet(() -> FAILED);
+                .orElse(FAILED);
     }
 
     public int getWinningNumberCount() {
