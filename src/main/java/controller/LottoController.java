@@ -2,8 +2,8 @@ package controller;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.stream.Collectors;
+
 import model.GenerateStrategy;
 import model.LottoGame;
 import model.LottoTicketDto;
@@ -62,21 +62,29 @@ public class LottoController {
     }
 
     public void printWinningResults(Map<WinningPrize, Integer> winningResults) {
-        List<WinningResultDto> winningResultDtos = winningResults.entrySet()
-                .stream()
-                .map(this::toWinningResultDto)
-                .collect(Collectors.toList());
+        List<WinningResultDto> winningResultDtos = toWinningResultDtos(winningResults);
 
         (new WinningResultOutputView()).printOutputData(winningResultDtos);
     }
 
-    private WinningResultDto toWinningResultDto(Entry<WinningPrize, Integer> entry) {
+    private List<WinningResultDto> toWinningResultDtos(Map<WinningPrize, Integer> winningResults) {
+        return winningResults.entrySet()
+                .stream()
+                .map(countOfWinningPrize ->
+                        toWinningResultDto(
+                                countOfWinningPrize.getKey(),
+                                countOfWinningPrize.getValue()
+                        )
+                ).collect(Collectors.toList());
+    }
+
+    private WinningResultDto toWinningResultDto(WinningPrize winningPrize, Integer count) {
         return new WinningResultDto
                 (
-                        lottoGame.matchCount(entry.getKey()),
-                        lottoGame.matchBonus(entry.getKey()),
-                        entry.getKey().getPrizeMoney(),
-                        entry.getValue()
+                        lottoGame.matchCount(winningPrize),
+                        lottoGame.matchBonus(winningPrize),
+                        winningPrize.getPrizeMoney(),
+                        count
                 );
     }
 

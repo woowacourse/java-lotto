@@ -8,19 +8,21 @@ public class LottoNumberValidator {
     private static final int MIN_LOTTO_NUMBER = 1;
 
     public static void validate(String number) {
-        int parsedNumber;
-        try {
-            parsedNumber = Integer.parseInt(number);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(NOT_INTEGER_ERROR_MESSAGE);
-        }
-
-        if (isNotCorrectNumber(parsedNumber)) {
+        int parsedNumber = parse(number);
+        if (isNotInRangeNumber(parsedNumber)) {
             throw new IllegalArgumentException(LOTTO_NUMBER_RANGE_ERROR_MESSAGE);
         }
     }
 
-    private static boolean isNotCorrectNumber(int number) {
+    private static int parse(String number) {
+        try {
+            return Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(NOT_INTEGER_ERROR_MESSAGE);
+        }
+    }
+
+    private static boolean isNotInRangeNumber(int number) {
         return !(number <= MAX_LOTTO_NUMBER && number >= MIN_LOTTO_NUMBER);
     }
 }
