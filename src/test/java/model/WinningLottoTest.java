@@ -4,7 +4,6 @@ import static model.WinningLotto.WINNING_NUMBERS_CONTAIN_BONUS_BALL;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -21,7 +20,7 @@ class WinningLottoTest {
     @DisplayName("로또 티켓의 당첨 번호 개수를 반환한다")
     void returnWinningNumberCount(List<Integer> numbers, int expected) {
         // given
-        List<Integer> winnings = Arrays.asList(1,2,3,4,5,6);
+        List<Integer> winnings = List.of(1,2,3,4,5,6);
         int bonusBallNumber = 7;
         WinningLotto winningLotto = WinningLotto.of(winnings, bonusBallNumber);
 
@@ -42,7 +41,7 @@ class WinningLottoTest {
     @DisplayName("보너스 볼을 포함하면 true 를 반환한다")
     void bonusBallContaining(List<Integer> numbers, boolean expected) {
         // given
-        List<Integer> winnings = Arrays.asList(1,2,3,4,5,6);
+        List<Integer> winnings = List.of(1,2,3,4,5,6);
         int bonusBallNumber = 7;
         WinningLotto winningLotto = WinningLotto.of(winnings, bonusBallNumber);
 
@@ -52,10 +51,10 @@ class WinningLottoTest {
         Lotto lotto = Lotto.from(lottoNumbers);
 
         // when
-        boolean actual = winningLotto.containBonusBall(lotto);
+        boolean result = winningLotto.containBonusBall(lotto);
 
         // then
-        assertThat(actual).isEqualTo(expected);
+        assertThat(result).isEqualTo(expected);
     }
 
     @Test
@@ -75,15 +74,15 @@ class WinningLottoTest {
 
     private static Stream<Arguments> provideTicketForCountMatching() {
         return Stream.of(
-                Arguments.of(Arrays.asList(1,2,3,4,5,6), 6),
-                Arguments.of(Arrays.asList(7,8,9,10,11,12), 0)
+                Arguments.of(List.of(1,2,3,4,5,6), 6),
+                Arguments.of(List.of(7,8,9,10,11,12), 0)
         );
     }
 
     private static Stream<Arguments> provideTicketForBonusBall() {
         return Stream.of(
-                Arguments.of(Arrays.asList(1,2,3,4,5,6), false),
-                Arguments.of(Arrays.asList(7,8,9,10,11,12), true)
+                Arguments.of(List.of(1,2,3,4,5,6), false),
+                Arguments.of(List.of(7,8,9,10,11,12), true)
         );
     }
 }
