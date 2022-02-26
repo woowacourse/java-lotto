@@ -5,10 +5,13 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import lotto.domain.vo.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class WinnerLottoTest {
     private static final LottoNumber BONUS = new LottoNumber(7);
@@ -77,12 +80,21 @@ public class WinnerLottoTest {
         assertThat(WINNER_LOTTO.findRank(lotto)).isEqualTo(Rank.FIFTH);
     }
 
-    @Test
+    @ParameterizedTest
+    @MethodSource("lottoNumbers")
     @DisplayName("당첨 번호가 2개 이하로 일치하면 None을 반환한다.")
-    void containsNumbersSecondReturnNone() {
-        Lotto lotto = new Lotto(givenNumbers(1, 2, 8, 9, 10, 11));
+    void containsNumbersBelowSecondReturnNone(List<LottoNumber> lottoNumbers) {
+        Lotto lotto = new Lotto(lottoNumbers);
 
         assertThat(WINNER_LOTTO.findRank(lotto)).isEqualTo(Rank.NONE);
+    }
+
+    private static Stream<List<LottoNumber>> lottoNumbers() {
+        return Stream.of(
+                givenNumbers(1, 2, 8, 9, 10, 11),
+                givenNumbers(1, 8, 9, 10, 11, 12),
+                givenNumbers(8, 9, 10, 11, 12, 13)
+        );
     }
 
     @Test
