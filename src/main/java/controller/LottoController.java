@@ -1,65 +1,52 @@
 package controller;
 
-import static util.LottoNumberValidator.validateNoDuplicateInList;
-import static util.LottoNumberValidator.validateNoDuplicates;
-
 import domain.LottoGame;
 import domain.LottoNumber;
+import domain.LottoTicket;
+import domain.UserBalance;
 import domain.WinningLotto;
 import domain.LottoTickets;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 
-import util.LottoNumberValidator;
 import view.InputView;
 import view.OutputView;
 
 public class LottoController {
-
-    public static final String REGEX = ", ";
-    public static final String INVALID_SIZE_EXCEPTION_MESSAGE = "6개의 당첨 번호를 입력해야 합니다.";
+    public static final String DELIMITER = ", ";
 
     public void run() {
-        LottoTickets lottoTickets = initCustomerLottos();
-        WinningLotto referee = initLottoReferee();
-        LottoGame lottoGame = new LottoGame(lottoTickets, referee);
+        UserBalance userBalance = new UserBalance(InputView.requestUserBalance());
+        LottoTickets lottoTickets = initCustomerLottoTickets(userBalance);
+        WinningLotto winningLotto = initWinningLotto();
+        LottoGame lottoGame = new LottoGame(lottoTickets, winningLotto);
         OutputView.printLottoResults(lottoGame.getResultStatistics());
-        OutputView.printLottoResults(lottoGame.calculateProfitRatio());
+        OutputView.printProfitRatio(lottoGame.calculateProfitRatio(userBalance.getUserBalance()));
     }
 
-    private LottoTickets initCustomerLottos() {
-        int money = InputView.requestUserMoney();
-        LottoTickets lottoTickets = LottoTickets.purchaseBy(money);
+    private LottoTickets initCustomerLottoTickets(UserBalance userBalance) {
+        LottoTickets lottoTickets = LottoTickets.purchaseBy(userBalance);
         OutputView.printPurchaseInfo(lottoTickets.getLottoTickets());
         return lottoTickets;
     }
 
-    private WinningLotto initLottoReferee() {
-        List<LottoNumber> winningNumbers = registerWinningNumbers();
-        LottoNumber bonusNumber = registerBonusNumber(winningNumbers);
+    private WinningLotto initWinningLotto() {
+        LottoTicket winningNumbers = registerWinningNumbers();
+        LottoNumber bonusNumber = registerBonusNumber();
         return new WinningLotto(winningNumbers, bonusNumber);
     }
 
-    private List<LottoNumber> registerWinningNumbers() {
+    private LottoTicket registerWinningNumbers() {
         String winningNumbersInput = InputView.requestWinningNumbers();
-        List<LottoNumber> winningNumbers = Arrays.stream(winningNumbersInput.split(REGEX))
-                .map(LottoNumberValidator::validateAndParseNumber)
-                .map(LottoNumber::of)
-                .collect(Collectors.toList());
-        if (winningNumbers.size() != 6) {
-            throw new IllegalArgumentException(INVALID_SIZE_EXCEPTION_MESSAGE);
-        }
-        validateNoDuplicates(winningNumbers);
 
-        return winningNumbers;
+        return LottoTicket.createManualLotto(Arrays.stream(winningNumbersInput.split(DELIMITER))
+                .map(LottoNumber::of)
+                .collect(Collectors.toList()));
     }
 
-    private LottoNumber registerBonusNumber(List<LottoNumber> winningNumbers) {
-        int bonusNumber = InputView.requestBonusNumber();
-        validateNoDuplicateInList(bonusNumber,
-                winningNumbers.stream().map(LottoNumber::getNumber).collect(Collectors.toList()));
-        return LottoNumber.of(bonusNumber);
+    private LottoNumber registerBonusNumber() {
+        String bonusNumberInput = InputView.requestBonusNumber();
+        return LottoNumber.of(bonusNumberInput);
     }
 }

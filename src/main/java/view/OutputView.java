@@ -15,20 +15,20 @@ public class OutputView {
         StringBuilder builder = new StringBuilder();
 
         lottoTickets.stream()
+                .map(LottoTicket::getNumbers)
                 .map(OutputView::formatLottoNumbers)
                 .forEach(builder::append);
 
         System.out.println(builder);
     }
 
-    private static String formatLottoNumbers(LottoTicket lottoTicket) {
-        String lottoNumFormat = lottoTicket.getNumbers()
-                .stream()
+    private static String formatLottoNumbers(List<LottoNumber> lottoNumbers) {
+        String lottoNumberFormat = lottoNumbers.stream()
                 .map(LottoNumber::getNumber)
                 .map(Object::toString)
                 .collect(Collectors.joining(", "));
 
-        return "[" + lottoNumFormat + "]\n";
+        return "[" + lottoNumberFormat + "]\n";
     }
 
     public static void printLottoResults(Map<LottoResult, Integer> lottoResults) {
@@ -45,7 +45,7 @@ public class OutputView {
         System.out.printf("%d개 일치 (%d원) - %d개\n", lottoResult.getMatchCount(), lottoResult.getPrize(), count);
     }
 
-    public static void printLottoResults(float profitRatio) {
+    public static void printProfitRatio(float profitRatio) {
         System.out.printf("총 수익률은 %.2f입니다.\n", profitRatio);
     }
 }
