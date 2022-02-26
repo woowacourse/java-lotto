@@ -2,15 +2,11 @@ import domain.LottoRank;
 import domain.WinningStat;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import view.OutputView;
 
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import static constant.LottoConstant.LOTTO_TICKET_PRICE;
 import static org.assertj.core.api.Assertions.*;
 
 class WinningStatTest {
@@ -24,12 +20,8 @@ class WinningStatTest {
         rankInfo.put(LottoRank.FIFTH, 1);
         rankInfo.put(LottoRank.NOTHING, 13);
         WinningStat winningStat = new WinningStat(rankInfo);
-
         double profit = winningStat.calculateProfit(1000);
-        DecimalFormat df = new DecimalFormat("#.##");
-        df.setRoundingMode(RoundingMode.DOWN);
-        assertThat(df.format(profit)).isEqualTo("0.35");
 
-        OutputView.printWinningStat(winningStat, winningStat.calculateProfit(LOTTO_TICKET_PRICE));
+        assertThat(String.format("%.2f", profit)).isEqualTo("0.36");
     }
 }

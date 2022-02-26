@@ -3,16 +3,14 @@ package view;
 import domain.LottoRank;
 import domain.LottoTicket;
 import domain.WinningStat;
+import util.ProfitFormatter;
 
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 public class OutputView {
 
-    public static final String PROFIT_PATTERN = "#.##";
     public static final String BLANK = "";
 
     private OutputView() {
@@ -37,7 +35,7 @@ public class OutputView {
         System.out.println("\n당첨 통계");
         System.out.println("--------");
         System.out.print(createStatView(winningStat.getStat(), lottoRanks));
-        System.out.println("총 수익률은 " + formatProfit(profit) + "입니다.");
+        System.out.println("총 수익률은 " + ProfitFormatter.apply(profit) + "입니다.");
     }
 
     private static String createStatView(Map<LottoRank, Integer> statistics, List<LottoRank> lottoRanks) {
@@ -57,11 +55,5 @@ public class OutputView {
             return ", 보너스 볼 일치";
         }
         return BLANK;
-    }
-
-    private static String formatProfit(double profit) {
-        DecimalFormat profitFormatter = new DecimalFormat(PROFIT_PATTERN);
-        profitFormatter.setRoundingMode(RoundingMode.DOWN);
-        return profitFormatter.format(profit);
     }
 }
