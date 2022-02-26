@@ -4,6 +4,9 @@ import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class ChoiceNumberTest {
     @Test
@@ -35,6 +38,15 @@ public class ChoiceNumberTest {
         assertThat(choiceNumber.getChoiceNumbers().stream().count()).isEqualTo(6);
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2,3,4,5", "1,2,3,4,5,6,7"})
+    @DisplayName("입력받은 당첨번호가 6개가 아니라면 예외처리하는가?")
+    void No_6_Input_Numbers(String input) {
+        assertThatThrownBy(() -> {
+            new ChoiceNumber(input);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
     @Test
     @DisplayName("입력받은 당첨번호가 모두 범위내에 있는지")
     void All_Numbers_In_Range() {
@@ -49,5 +61,15 @@ public class ChoiceNumberTest {
         assertThatThrownBy(() -> {
             new ChoiceNumber("1,1,3,4,5,6");
         }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
+    @DisplayName("겹치는 숫자가 몇개인지 잘 찾아낼 수 있는지")
+    @CsvSource(value = {"1,2,3,4,5,6:6", "1,2,3,4,5,7:5", "1,2,3,4,7,8:4",
+            "1,2,3,7,8,9:3", "1,2,7,8,9,10:2", "1,7,8,9,10,11:1", "7,8,9,10,11,12:0"}, delimiter = ':')
+    void Count_Same_Number(String input, int correctNumber) {
+        ChoiceNumber choiceNumber = new ChoiceNumber("1,2,3,4,5,6");
+        ChoiceNumber comparisonNumber = new ChoiceNumber(input);
+        assertThat(choiceNumber.countSameNumber(comparisonNumber)).isEqualTo(correctNumber);
     }
 }
