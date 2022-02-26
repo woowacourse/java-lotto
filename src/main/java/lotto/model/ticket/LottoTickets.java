@@ -25,19 +25,19 @@ public class LottoTickets {
         return new LottoTickets(tickets);
     }
 
-    public List<LottoTicket> getTickets() {
-        return Collections.unmodifiableList(tickets);
-    }
-
-    public Object size() {
-        return tickets.size();
-    }
-
     public LottoRanks compareResult(WinningTicket winningTicket) {
         List<LottoRank> lottoRanks = new ArrayList<>();
         for (LottoTicket ticket : tickets) {
             lottoRanks.add(winningTicket.compare(ticket));
         }
         return new LottoRanks(lottoRanks);
+    }
+
+    public List<LottoTicket> getTickets() {
+        return Collections.unmodifiableList(tickets);
+    }
+
+    public int size() {
+        return tickets.size();
     }
 }

@@ -67,6 +67,6 @@ public class WinningTicketTest {
         // then
         assertThatThrownBy(() -> new WinningTicket(lottoTicket, bonusBall))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[ERROR]");
+                .hasMessageContaining("보너스 볼은 당첨 번호와 중복되어서는 안됩니다");
     }
 }
