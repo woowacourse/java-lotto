@@ -6,8 +6,8 @@ public class LottoMoney {
     private static final String ERROR_MESSAGE_LOTTO_MONEY_DIGITS = "로또 구매 금액은 1000원 단위여야 합니다.";
 
     private static final int MINIMUM_AMOUNT = 0;
-    private static final int LOTTO_PRICE = 1000;
     private static final int REMINDER_STANDARD = 0;
+    public static final int LOTTO_PRICE = 1000;
 
     private final int amount;
 

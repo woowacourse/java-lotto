@@ -21,7 +21,7 @@ public class Application {
         final WinningLotto winningLotto = createWinningLotto();
         final WinningStatistics winningStatistics = lottoGame.calculateWinningStatistics(winningLotto);
         OutputView.showWinningStatistics(winningStatistics.getWinningStatistics());
-        OutputView.showProfitRate(winningStatistics.calculateProfitRate(lottoMoney));
+        OutputView.showProfitRate(winningStatistics.calculateProfitRate());
     }
 
     private static WinningLotto createWinningLotto() {

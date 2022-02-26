@@ -27,6 +27,10 @@ public enum LottoReward {
             .orElse(NONE);
     }
 
+    public static int prizeMoney(LottoReward reward, int lottoCount) {
+        return reward.price * lottoCount;
+    }
+
     public int getPrice() {
         return price;
     }

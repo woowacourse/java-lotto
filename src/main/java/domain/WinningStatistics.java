@@ -11,29 +11,36 @@ public class WinningStatistics {
     private static final int DEFAULT_VALUE = 0;
     private static final int PLUS_COUNT = 1;
 
-    private final Map<LottoReward, Integer> statistics;
+    private final Map<LottoReward, Integer> statisticsResult;
 
     public WinningStatistics(List<LottoReward> lottoRewards) {
-        statistics = new EnumMap<>(LottoReward.class);
-        Arrays.stream(LottoReward.values()).forEach(lottoReward -> statistics.put(lottoReward, DEFAULT_VALUE));
+        statisticsResult = new EnumMap<>(LottoReward.class);
+        Arrays.stream(LottoReward.values()).forEach(lottoReward -> statisticsResult.put(lottoReward, DEFAULT_VALUE));
 
         for (LottoReward lottoReward : lottoRewards) {
-            statistics.replace(lottoReward, statistics.get(lottoReward) + PLUS_COUNT);
+            statisticsResult.replace(lottoReward, statisticsResult.get(lottoReward) + PLUS_COUNT);
         }
     }
 
-    public double calculateProfitRate(LottoMoney lottoMoney) {
-        double profit = DEFAULT_VALUE;
+    public double calculateProfitRate() {
+        final int totalPrize = calculateTotalPrize();
+        final int purchasedMoney = calculatePurchasedMoney();
 
-        for (LottoReward lottoReward : statistics.keySet()) {
-            int rewardCount = statistics.get(lottoReward);
-            profit += rewardCount * lottoReward.getPrice();
-        }
+        return totalPrize / ((double)purchasedMoney * LottoMoney.LOTTO_PRICE);
+    }
 
-        return profit / lottoMoney.getAmount();
+    private int calculateTotalPrize() {
+        return statisticsResult.entrySet().stream()
+            .map(result -> LottoReward.prizeMoney(result.getKey(), result.getValue()))
+            .reduce(DEFAULT_VALUE, Integer::sum);
+    }
+
+    private int calculatePurchasedMoney() {
+        return statisticsResult.values().stream()
+            .reduce(DEFAULT_VALUE, Integer::sum);
     }
 
     public Map<LottoReward, Integer> getWinningStatistics() {
-        return Collections.unmodifiableMap(statistics);
+        return Collections.unmodifiableMap(statisticsResult);
     }
 }
