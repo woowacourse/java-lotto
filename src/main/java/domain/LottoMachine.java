@@ -6,13 +6,13 @@ public class LottoMachine {
     private final Amount amount;
     private final Tickets tickets;
 
-    public static LottoMachine from(int amount) {
-        return new LottoMachine(new Amount(amount));
+    public static LottoMachine from(int amount, LottoNumbersGenerator lottoNumbersGenerator) {
+        return new LottoMachine(new Amount(amount), lottoNumbersGenerator);
     }
 
-    private LottoMachine(Amount amount) {
+    private LottoMachine(Amount amount, LottoNumbersGenerator lottoNumbersGenerator) {
         this.amount = amount;
-        this.tickets = Tickets.of(getTicketCount(), new RandomLottoNumbersGenerator());
+        this.tickets = Tickets.of(getTicketCount(), lottoNumbersGenerator);
     }
 
     public int getTicketCount() {

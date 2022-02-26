@@ -2,6 +2,7 @@ package controller;
 
 import domain.LottoMachine;
 import domain.LottoNumber;
+import domain.RandomLottoNumbersGenerator;
 import domain.Ticket;
 import domain.WinningNumbers;
 import view.InputView;
@@ -17,7 +18,7 @@ public class Controller {
 
     private LottoMachine createLotto() {
         try {
-            return LottoMachine.from(InputView.requestAmount());
+            return LottoMachine.from(InputView.requestAmount(), new RandomLottoNumbersGenerator());
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception.getMessage());
             return createLotto();
