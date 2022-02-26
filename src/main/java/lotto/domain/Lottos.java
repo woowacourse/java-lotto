@@ -19,9 +19,9 @@ public class Lottos {
     }
 
     public List<Rank> matchRanks(WinnerLotto winnerLotto) {
-        return lottos.stream()
+        return List.copyOf(lottos.stream()
                 .map(winnerLotto::findRank)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
     public List<Lotto> getLottos() {
