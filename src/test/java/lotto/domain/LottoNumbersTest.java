@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import static lotto.domain.LottoNumbers.COUNT_ERROR;
-import static lotto.domain.LottoNumbers.DUPLICATE_ERROR;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -14,14 +12,14 @@ public class LottoNumbersTest {
     @DisplayName("중복된 숫자로 생성시 예외 발생")
     void incorrect() {
         assertThatThrownBy(() -> new LottoNumbers("2,2,3,4,5,6")).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(DUPLICATE_ERROR);
+                .hasMessageContaining("로또 개수는 중복이 불가능합니다.");
     }
 
     @Test
     @DisplayName("숫자가 6개 미만")
     void incorrect4() {
         assertThatThrownBy(() -> new LottoNumbers("2,5,6")).isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(COUNT_ERROR);
+                .hasMessageContaining("로또 개수는 6개로 제한됩니다.");
     }
 
     @Test

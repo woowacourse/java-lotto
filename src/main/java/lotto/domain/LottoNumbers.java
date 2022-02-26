@@ -13,8 +13,8 @@ public class LottoNumbers {
 
     private static final String DELIMITER = ",";
     private static final String BLANK = " ";
-    static final String DUPLICATE_ERROR = "로또 개수는 중복이 불가능합니다.";
-    static final String COUNT_ERROR = "로또 개수는 " + LOTTO_COUNT + "여야 합니다.";
+    private static final String DUPLICATE_ERROR = "로또 개수는 중복이 불가능합니다.";
+    private static final String COUNT_ERROR = "로또 개수는 " + LOTTO_COUNT + "개로 제한됩니다.";
 
     private static final List<LottoNumber> candidateLottoNumbers = new ArrayList<>();
 
