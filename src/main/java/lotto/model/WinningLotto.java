@@ -9,7 +9,7 @@ public class WinningLotto {
     private final List<Integer> winningNumbers;
     private final int bonusNumber;
 
-    public WinningLotto(List<String> winningNumbers, String bonusNumber) {
+    public WinningLotto(List<Integer> winningNumbers, int bonusNumber) {
         InputValidator.validateContain(winningNumbers, bonusNumber);
         this.winningNumbers = InputValidator.validateLotto(winningNumbers);
         this.bonusNumber = InputValidator.validateBonusNumber(bonusNumber);
