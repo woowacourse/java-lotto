@@ -45,24 +45,24 @@ public class ChoiceNumber {
     }
 
     private void validateChoiceNumber() {
-        isRightSize();
-        isInRange();
-        isDuplicate();
+        checkSize();
+        checkNumbersRange();
+        checkDuplicateNumbers();
     }
 
-    private void isRightSize() {
+    private void checkSize() {
         if (choiceNumbers.size() != CHOICE_NUMBER_SIZE) {
             throw new IllegalArgumentException(ERROR_NOT_ENOUGH_NUMBER);
         }
     }
 
-    private void isInRange() {
+    private void checkNumbersRange() {
         if (choiceNumbers.stream().anyMatch(i -> i < MIN_BOUND || i > MAX_BOUND)) {
             throw new IllegalArgumentException(ERROR_NOT_IN_RANGE);
         }
     }
 
-    private void isDuplicate() {
+    private void checkDuplicateNumbers() {
         boolean unique = choiceNumbers.stream()
                 .allMatch(new HashSet<>()::add);
         if (!unique) {

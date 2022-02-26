@@ -10,28 +10,31 @@ public class Money {
     private final int amount;
 
     public Money(String input) {
-        isNumberFormat(input);
-        int value = Integer.parseInt(input);
-        isShortMoney(value);
-        isDivideByUnitAmount(value);
+        int value = convertToInt(input);
+        validateAmount(value);
         this.amount = value;
     }
 
-    private void isNumberFormat(String input) {
+    private void validateAmount(int value) {
+        checkShortMoney(value);
+        checkDivideByUnitAmount(value);
+    }
+
+    private int convertToInt(String input) {
         try {
-            Integer.parseInt(input);
+            return Integer.parseInt(input);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ERROR_NOT_INTEGER);
         }
     }
 
-    private void isShortMoney(int value) {
+    private void checkShortMoney(int value) {
         if (value < UNIT_AMOUNT) {
             throw new IllegalArgumentException(ERROR_SHORT_MONEY);
         }
     }
 
-    private void isDivideByUnitAmount(int value) {
+    private void checkDivideByUnitAmount(int value) {
         if (value % UNIT_AMOUNT != 0) {
             throw new IllegalArgumentException(ERROR_NOT_UNIT);
         }
