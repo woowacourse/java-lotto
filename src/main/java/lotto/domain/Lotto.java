@@ -65,18 +65,24 @@ public class Lotto {
     }
 
     public WinningPrice getWinningPrice(List<Number> winningNumbers, Number bonusNumber) {
-        int count = 0;
+        int count = getCount(winningNumbers);
         boolean containsBonus = false;
-        for (Number number : winningNumbers) {
-            if (numbers.contains(number)) {
-                count++;
-            }
-        }
+
         if (count == WinningPrice.Five.getCount()) {
             containsBonus = numbers.contains(bonusNumber);
         }
 
         return WinningPrice.of(count, containsBonus);
+    }
+
+    private int getCount(List<Number> winningNumbers) {
+        int count = 0;
+        for (Number number : winningNumbers) {
+            if (numbers.contains(number)) {
+                count++;
+            }
+        }
+        return count;
     }
 
     public Set<Number> getNumbers() {
