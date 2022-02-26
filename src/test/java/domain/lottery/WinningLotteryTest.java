@@ -20,7 +20,7 @@ import domain.Rank;
 
 public class WinningLotteryTest {
 
-	final List<LotteryNumber> winningNumbers = LotteryNumberGenerator.generateLotteryNumbers(
+	private final List<LotteryNumber> winningNumbers = LotteryNumberGenerator.generateLotteryNumbers(
 		Arrays.asList(1, 2, 3, 4, 5, 6));
 
 	@Nested
