@@ -63,4 +63,3 @@ public class LottoCount {
         return Objects.hash(count);
     }
 }
-
