@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import model.DefaultLottoWinningPrizeStrategy;
 import model.GenerateStrategy;
@@ -19,7 +20,7 @@ public class LottoControllerTest {
     @Test
     @DisplayName("로또 티켓이 정상적으로 작동하는지 확인한다.")
     void initLottoTicketTest() {
-        GenerateStrategy generateStrategy = () -> new ArrayList<>(dummyLottoNumber);
+        GenerateStrategy generateStrategy = () -> new HashSet<>(dummyLottoNumber);
         LottoTickets lottoTickets = new LottoTickets(1000, generateStrategy);
         List<Integer> winningTicket = new ArrayList<>(dummyLottoNumber);
         controller.initLottoGame(lottoTickets, winningTicket, 7, new DefaultLottoWinningPrizeStrategy());
@@ -29,7 +30,7 @@ public class LottoControllerTest {
     @Test
     @DisplayName("로또 티켓이 잘 생성되는지 확인한다.")
     void createLottoTicketsTest() {
-        GenerateStrategy generateStrategy = () -> new ArrayList<>(dummyLottoNumber);
+        GenerateStrategy generateStrategy = () -> new HashSet<>(dummyLottoNumber);
         LottoTickets lottoTickets = controller.createLottoTickets(17000, generateStrategy);
 
         lottoTickets.getTickets()
