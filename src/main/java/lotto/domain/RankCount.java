@@ -9,7 +9,8 @@ public class RankCount {
     private final Map<Rank, Integer> rankCount;
 
     public RankCount(Lottos lottos, WinningLotto winningLotto, BonusNumber bonusNumber) {
-        this.rankCount = new EnumMap<Rank, Integer>(Rank.class);
+        Map<Rank, Integer> rankCount = new EnumMap<>(Rank.class);
+        this.rankCount = rankCount;
         calculateRankCount(lottos, winningLotto, bonusNumber);
     }
 
@@ -31,6 +32,6 @@ public class RankCount {
     }
 
     public int getCount(Rank rank) {
-        return rankCount.getOrDefault(rank,0);
+        return rankCount.getOrDefault(rank, 0);
     }
 }
