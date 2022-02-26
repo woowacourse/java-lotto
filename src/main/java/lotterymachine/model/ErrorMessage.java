@@ -1,4 +1,4 @@
-package lotterymachine.view;
+package lotterymachine.model;
 
 public enum ErrorMessage {
     IS_NOT_NUMBER("숫자만 입력할 수 있습니다."),

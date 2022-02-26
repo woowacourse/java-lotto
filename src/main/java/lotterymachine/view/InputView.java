@@ -8,7 +8,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import static lotterymachine.utils.LotteryRule.*;
-import static lotterymachine.view.ErrorMessage.*;
+import static lotterymachine.model.ErrorMessage.*;
 
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
@@ -16,14 +16,7 @@ public class InputView {
 
     public static int getAmount() {
         System.out.println("구입금액을 입력해 주세요.");
-        try {
-            int amount = toInt(scanner.nextLine());
-            validatePurchasable(amount);
-            return amount;
-        } catch (RuntimeException runtimeException) {
-            System.out.println(runtimeException.getMessage());
-            return getAmount();
-        }
+        return toInt(scanner.nextLine());
     }
 
     public static List<Integer> getWinningLotteryNumbers() {
@@ -51,12 +44,6 @@ public class InputView {
         }
     }
 
-    private static void validatePurchasable(int number) {
-        if (number < TICKET_PRICE.getNumber()) {
-            throw new IllegalArgumentException(NOT_PURCHASABLE.getMessage());
-        }
-    }
-
     private static void validateBonusNumber(List<Integer> numbers, int bonusNumber) {
         if (numbers.contains(bonusNumber)) {
             throw new RuntimeException(DUPLICATE_BONUS_NUMBER.getMessage());
@@ -67,7 +54,7 @@ public class InputView {
         try {
             return Integer.parseInt(input);
         } catch (RuntimeException runtimeException) {
-            throw new RuntimeException(IS_NOT_NUMBER.getMessage());
+            throw new IllegalArgumentException(IS_NOT_NUMBER.getMessage());
         }
     }
 

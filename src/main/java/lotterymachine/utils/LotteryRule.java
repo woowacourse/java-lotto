@@ -3,8 +3,7 @@ package lotterymachine.utils;
 public enum LotteryRule {
     MINIMUM(1),
     MAXIMUM(45),
-    TICKET_SIZE(6),
-    TICKET_PRICE(1000);
+    TICKET_SIZE(6);
 
     private final int number;
 

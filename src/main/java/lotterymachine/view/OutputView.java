@@ -44,4 +44,8 @@ public class OutputView {
         }
         return "이득";
     }
+
+    public static void printException(String message) {
+        System.out.println(message);
+    }
 }
