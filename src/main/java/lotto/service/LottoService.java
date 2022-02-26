@@ -4,12 +4,10 @@ import java.util.List;
 
 import lotto.domain.money.Money;
 import lotto.domain.rank.Rank;
-import lotto.domain.ticket.Ball;
-import lotto.domain.ticket.Ticket;
 import lotto.domain.ticket.Tickets;
+import lotto.domain.ticket.WinningTicket;
 import lotto.domain.ticket.generator.RandomTicketGenerator;
 import lotto.dto.AnalysisDto;
-import lotto.dto.TicketDto;
 import lotto.dto.TicketsDto;
 import lotto.dto.WinningTicketDto;
 
@@ -28,10 +26,8 @@ public class LottoService {
     }
 
     public AnalysisDto generateAnalysis(final WinningTicketDto winningTicketDto) {
-        final Ticket winningTicket = new Ticket(winningTicketDto.getWinningNumbers());
-        final Ball bonusBall = new Ball(winningTicketDto.getBonusNumber());
-
-        final List<Rank> ranks = tickets.calculateRanks(winningTicket, bonusBall);
+        final WinningTicket winningTicket = winningTicketDto.toWinningTicket();
+        final List<Rank> ranks = winningTicket.calculateRanks(tickets);
         return new AnalysisDto(ranks, credit.getMoney());
     }
 

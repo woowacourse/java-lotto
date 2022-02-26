@@ -19,7 +19,6 @@ public class AnalysisDto {
 
     private Map<Rank, Integer> calculateRankCounts(final List<Rank> ranks) {
         final Map<Rank, Integer> rankMap = new EnumMap<>(Rank.class);
-
         for (Rank rank : Rank.values()) {
             final int count = Collections.frequency(ranks, rank);
             rankMap.put(rank, count);

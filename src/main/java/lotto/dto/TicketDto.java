@@ -12,12 +12,16 @@ public class TicketDto {
         this.ballNumbers = ballNumbers;
     }
 
-    public List<Integer> getBallNumbers() {
-        return this.ballNumbers;
-    }
-
     public static TicketDto toDto(Ticket ticket) {
         return new TicketDto(ticket.getBallNumbers());
+    }
+
+    public Ticket toTicket() {
+        return new Ticket(ballNumbers);
+    }
+
+    public List<Integer> getBallNumbers() {
+        return this.ballNumbers;
     }
 
 }
