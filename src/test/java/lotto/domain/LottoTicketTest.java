@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
@@ -50,5 +51,33 @@ class LottoTicketTest {
 
         // then
         assertThat(result).isTrue();
+    }
+
+    @DisplayName("로또 티켓의 개수가 6개인지 확인한다.")
+    @Test
+    void 당첨_번호_개수_확인() {
+        // given
+        List<LottoNumber> lottoNumbers = getLottoNumbers(List.of(1, 2, 3, 4, 5, 6, 7));
+
+        // when & then
+        assertThatThrownBy(() -> new LottoTicket(() -> lottoNumbers))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("로또 번호 중복을 검증한다.")
+    @Test
+    void 당첨_번호_중복_확인() {
+        // given
+        List<LottoNumber> lottoNumbers = getLottoNumbers(List.of(1, 2, 3, 4, 5, 5));
+
+        // when & then
+        assertThatThrownBy(() -> new LottoTicket(() -> lottoNumbers))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    private List<LottoNumber> getLottoNumbers(List<Integer> values) {
+        return values.stream()
+                .map(LottoNumber::new)
+                .collect(toList());
     }
 }
