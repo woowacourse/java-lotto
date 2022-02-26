@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DefaultLottoWinningPrizeStrategy implements WinningPrizeStrategy {
+    private static final int SECOND_PRIZE_MATCH_COUNT = 5;
 
     private static final Map<Integer, WinningPrize> MATCH_COUNT_WINNING_PRIZE_INFO = new HashMap<>() {{
         put(6, WinningPrize.FIRST);
@@ -22,7 +23,7 @@ public class DefaultLottoWinningPrizeStrategy implements WinningPrizeStrategy {
 
     @Override
     public WinningPrize winningPrize(int matchCount, boolean matchBonus) {
-        if (matchCount == 5 && matchBonus) {
+        if (matchCount == SECOND_PRIZE_MATCH_COUNT && matchBonus) {
             return WinningPrize.SECOND;
         }
         return MATCH_COUNT_WINNING_PRIZE_INFO.get(matchCount);

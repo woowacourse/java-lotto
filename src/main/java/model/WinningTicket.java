@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 
 public class WinningTicket {
     private static final int TICKET_SIZE = 6;
-    private static final int SECOND_WINNING_COUNT = 5;
 
     private final Set<LottoNumber> winningNumbers;
     private final LottoNumber bonusNumber;
