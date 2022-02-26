@@ -37,9 +37,9 @@ public class OutputView {
     }
 
     private static void printWinningResult(WinningStatistics winningStatistics, LottoRank lottoRank) {
-        if (lottoRank == THIRD) {
-            out.printf("%s개 일치, 보너스 볼 일치 (%s원) - %s개%n", THIRD.getWinningNumberCount(),
-                    THIRD.getPrizeMoney(), winningStatistics.get(THIRD));
+        if (lottoRank == SECOND) {
+            out.printf("%s개 일치, 보너스 볼 일치 (%s원) - %s개%n", SECOND.getWinningNumberCount(),
+                    SECOND.getPrizeMoney(), winningStatistics.get(SECOND));
             return;
         }
         out.printf("%s개 일치 (%s원) - %s개%n", lottoRank.getWinningNumberCount(), lottoRank.getPrizeMoney(),
