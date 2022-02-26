@@ -3,6 +3,7 @@ package lotto.domain.generator;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
+import lotto.domain.vo.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +17,7 @@ class AutoLottoNumberGeneratorTest {
         LottoNumberGenerator lottoNumberGenerator = new AutoLottoNumberGenerator();
 
         // when
-        List<Integer> lottoNumbers = lottoNumberGenerator.generate();
+        List<LottoNumber> lottoNumbers = lottoNumberGenerator.generate();
 
         // then
         assertThat(lottoNumbers.size()).isEqualTo(6);
@@ -29,7 +30,7 @@ class AutoLottoNumberGeneratorTest {
         LottoNumberGenerator lottoNumberGenerator = new AutoLottoNumberGenerator();
 
         // when
-        List<Integer> lottoNumbers = lottoNumberGenerator.generate();
+        List<LottoNumber> lottoNumbers = lottoNumberGenerator.generate();
 
         // then
         assertThat(lottoNumbers).isNotIn(0, 46);

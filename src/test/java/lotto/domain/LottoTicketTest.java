@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.List;
 import lotto.domain.enumeration.BallType;
 import lotto.domain.generator.AutoLottoNumberGenerator;
+import lotto.domain.vo.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -26,10 +27,10 @@ class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(new AutoLottoNumberGenerator());
 
         // when
-        List<Integer> lottoNumbers = lottoTicket.getLottoNumbers();
+        List<LottoNumber> lottoNumbers = lottoTicket.getLottoNumbers();
 
         // then
-        assertThatThrownBy(() -> lottoNumbers.add(0))
+        assertThatThrownBy(() -> lottoNumbers.add(new LottoNumber(0)))
                 .isInstanceOf(UnsupportedOperationException.class);
     }
 
@@ -37,7 +38,11 @@ class LottoTicketTest {
     @Test
     void 당첨_번호_인지_확인() {
         // given
-        LottoTicket lottoTicket = new LottoTicket(() -> List.of(1, 2, 3, 4, 5, 6));
+        LottoTicket lottoTicket = new LottoTicket(() -> List.of(
+                new LottoNumber(1), new LottoNumber(2),
+                new LottoNumber(3), new LottoNumber(4),
+                new LottoNumber(5), new LottoNumber(6)));
+
         WinningNumber winningNumber = new WinningNumber(1, BallType.BONUS);
 
         // when
