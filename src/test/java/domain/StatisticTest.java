@@ -3,7 +3,7 @@ package domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.LinkedHashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -14,7 +14,7 @@ public class StatisticTest {
     @DisplayName("수익률이 일치하는지 테스트")
     public void getProfitRate() {
         double realProfitRate = 10.5;
-        Map<Rank, Integer> result = new LinkedHashMap<>();
+        Map<Rank, Integer> result = new EnumMap<>(Rank.class);
         result.put(Rank.FOURTH, 2);
         result.put(Rank.FIFTH, 1);
 

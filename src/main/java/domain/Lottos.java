@@ -22,7 +22,7 @@ public class Lottos {
         return lottos.size();
     }
 
-    public Statistic getWinningStatistics(WinningNumber winningNumber) {
+    public Statistic getWinningStatistics(WinningLotto winningNumber) {
         Statistic statistic = Statistic.initStatistic();
         lottos.forEach(lotto -> {
             Rank rank = lotto.match(winningNumber);

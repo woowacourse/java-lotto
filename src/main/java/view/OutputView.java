@@ -16,6 +16,8 @@ public class OutputView {
     private static final String OPEN_BRACKETS = "[";
     private static final String CLOSE_BRACKETS = "]";
 
+    private OutputView() { }
+
     public static void printCountOfLotto(int count) {
         System.out.printf(COUNT_MESSAGE, count);
     }
@@ -30,6 +32,7 @@ public class OutputView {
     private static void printLotto(Lotto lotto) {
         String LottoNumbers = lotto.getLotto()
                 .stream()
+                .map(LottoNumber::getLottoNumber)
                 .map(String::valueOf)
                 .collect(Collectors.joining(DELIMITER));
 
@@ -39,13 +42,17 @@ public class OutputView {
     public static void printStatistics(Statistic statistic) {
         System.out.println(STATISTIC_RESULT_MESSAGE);
 
-        statistic.getStatistics().entrySet().stream().filter(statistics -> statistics.getKey().getCount() != ZERO).forEach(statistics -> {
-            if (statistics.getKey().hasBonusBall()) {
-                System.out.printf(SECOND_MESSAGE, Rank.SECOND.getCount(), Rank.SECOND.getWinningPrice(), statistics.getValue());
-                return;
-            }
-            System.out.printf(WINNING_MESSAGE, statistics.getKey().getCount(), statistics.getKey().getWinningPrice(), statistics.getValue());
-        });
+        statistic.getStatistics()
+                .entrySet()
+                .stream()
+                .filter(statistics -> statistics.getKey().getCount() != ZERO)
+                .forEach(statistics -> {
+                    if (statistics.getKey().hasBonusBall()) {
+                        System.out.printf(SECOND_MESSAGE, Rank.SECOND.getCount(), Rank.SECOND.getWinningPrice(), statistics.getValue());
+                        return;
+                    }
+                    System.out.printf(WINNING_MESSAGE, statistics.getKey().getCount(), statistics.getKey().getWinningPrice(), statistics.getValue());
+                });
     }
 
     public static void printProfitRate(Statistic statistic, Money money) {

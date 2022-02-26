@@ -2,8 +2,6 @@ import domain.*;
 import view.InputView;
 import view.OutputView;
 
-import java.util.List;
-
 public class LottoMachine {
 
     public void start() {
@@ -11,7 +9,7 @@ public class LottoMachine {
         int lottoCount = money.generateCount();
         OutputView.printCountOfLotto(lottoCount);
         Lottos lottos = createLottos(lottoCount);
-        WinningNumber winningNumber = inputWinningNumber();
+        WinningLotto winningNumber = inputWinningNumber();
         getStatistics(lottos, winningNumber, money);
     }
 
@@ -21,13 +19,13 @@ public class LottoMachine {
         return lottos;
     }
 
-    private WinningNumber inputWinningNumber() {
-        List<Integer> winningNumber = InputView.askInputWinningNumber();
-        int bonusBall = InputView.askInputBonusBall();
-        return new WinningNumber(winningNumber, bonusBall);
+    private WinningLotto inputWinningNumber() {
+        Lotto winningNumber = InputView.askInputWinningNumber();
+        LottoNumber bonusBall = InputView.askInputBonusBall();
+        return new WinningLotto(winningNumber, bonusBall);
     }
 
-    private void getStatistics(Lottos lottos, WinningNumber winningNumber, Money money) {
+    private void getStatistics(Lottos lottos, WinningLotto winningNumber, Money money) {
         Statistic winningStatistics = lottos.getWinningStatistics(winningNumber);
         OutputView.printStatistics(winningStatistics);
         OutputView.printProfitRate(winningStatistics, money);
