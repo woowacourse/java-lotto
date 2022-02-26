@@ -10,12 +10,11 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-@SuppressWarnings("NonAsciiCharacters")
 class WinningNumbersTest {
 
     @DisplayName("당첨 번호 개수 만큼 당첨 번호를 생성한다.")
     @Test
-    void 당첨_번호_생성_확인() {
+    void checkNormalCase() {
         // given
         List<LottoNumber> normalWinningNumbers = getLottoNumbers(List.of(1, 2, 3, 4, 5, 6));
 
@@ -28,7 +27,7 @@ class WinningNumbersTest {
 
     @DisplayName("LottoTicket 을 기반으로 당첨 정보를 반환한다.")
     @Test
-    void 당첨_정보_확인_2등() {
+    void checkSecondPlace() {
         // given
         List<LottoNumber> normalWinningNumbers = getLottoNumbers(List.of(1, 2, 3, 4, 5, 6));
 
@@ -49,7 +48,7 @@ class WinningNumbersTest {
 
     @DisplayName("LottoTicket 을 기반으로 당첨 정보를 반환한다.")
     @Test
-    void 당첨_정보_확인_3등() {
+    void checkThirdPlace() {
         // given
         List<LottoNumber> normalWinningNumbers = getLottoNumbers(List.of(1, 2, 3, 4, 5, 6));
 
@@ -68,7 +67,7 @@ class WinningNumbersTest {
 
     @DisplayName("당첨 번호에 중복된 번호가 있는지 검증")
     @Test
-    public void 당첨_번호_보너스볼_중복_확인() {
+    public void checkBonusBallDuplication() {
         // given
         List<LottoNumber> normalWinningNumber = getLottoNumbers(List.of(1, 2, 3, 4, 5, 6));
 
@@ -81,7 +80,7 @@ class WinningNumbersTest {
 
     @DisplayName("당첨 번호에 중복된 번호가 있는지 검증")
     @Test
-    public void 당첨_번호_중복_확인() {
+    public void checkNormalNumberDuplication() {
         // given
         List<LottoNumber> normalWinningNumber = getLottoNumbers(List.of(1, 2, 3, 4, 5, 5));
 

@@ -7,12 +7,11 @@ import lotto.domain.vo.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-@SuppressWarnings("NonAsciiCharacters")
 class AutoLottoTicketGeneratorTest {
 
     @DisplayName("생성된 숫자는 6자리임을 보장한다.")
     @Test
-    void 로또_번호_갯수_확인() {
+    void checkLottoNumberCount() {
         // given
         LottoTicketGenerator lottoTicketGenerator = new AutoLottoTicketGenerator();
 
@@ -25,7 +24,7 @@ class AutoLottoTicketGeneratorTest {
 
     @DisplayName("생성된 숫자는 1 ~ 45의 범위를 가진다.")
     @Test
-    void 로또_번호_범위_확인() {
+    void checkLottoNumberBoundary() {
         // given
         LottoTicketGenerator lottoTicketGenerator = new AutoLottoTicketGenerator();
 
