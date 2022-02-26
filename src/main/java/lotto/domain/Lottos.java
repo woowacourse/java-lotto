@@ -21,6 +21,10 @@ public class Lottos {
         }
     }
 
+    Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
+    }
+
     public Result getResult(WinningNumbers winningNumbers) {
         Result result = new Result();
 
