@@ -88,4 +88,23 @@ public class LottoNumbers {
                 .filter(this.lottoNumbers::contains)
                 .count();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof LottoNumbers)) {
+            return false;
+        }
+
+        LottoNumbers that = (LottoNumbers) o;
+
+        return lottoNumbers.containsAll(that.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return lottoNumbers != null ? lottoNumbers.hashCode() : 0;
+    }
 }

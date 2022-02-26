@@ -47,4 +47,23 @@ public class LottoAmount {
             throw new IllegalArgumentException(NOT_DIVISIBLE_NUMBER_ERROR);
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof LottoAmount)) {
+            return false;
+        }
+
+        LottoAmount that = (LottoAmount) o;
+
+        return amount == that.amount;
+    }
+
+    @Override
+    public int hashCode() {
+        return amount;
+    }
 }
