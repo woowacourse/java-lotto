@@ -62,7 +62,7 @@ public class LottosTest {
         for (int i = 1; i <= 6; i++) {
             lottoNumbers.add(new LottoNumber(i));
         }
-        WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers, bonusNumber);
+        WinningNumbers winningNumbers = new WinningNumbers(new Lotto(lottoNumbers), bonusNumber);
         return winningNumbers;
     }
 }

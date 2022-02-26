@@ -28,7 +28,7 @@ public class WinningNumbersTest {
     @Test
     void constructor_test() {
         assertThatNoException()
-                .isThrownBy(() -> new WinningNumbers(lottoNumbers, bonusNumber));
+                .isThrownBy(() -> new WinningNumbers(new Lotto(lottoNumbers), bonusNumber));
     }
 
     @DisplayName("WinningNumbers 생성자 6개가 아닌 숫자 입력 예외 테스트")
@@ -37,7 +37,7 @@ public class WinningNumbersTest {
         lottoNumbers.add(new LottoNumber(7));
 
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new WinningNumbers(lottoNumbers, bonusNumber))
+                .isThrownBy(() -> new WinningNumbers(new Lotto(lottoNumbers), bonusNumber))
                 .withMessage("로또 숫자는 6개여야 합니다.");
     }
 
@@ -48,7 +48,7 @@ public class WinningNumbersTest {
         lottoNumbers.set(1, new LottoNumber(45));
 
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new WinningNumbers(lottoNumbers, bonusNumber))
+                .isThrownBy(() -> new WinningNumbers(new Lotto(lottoNumbers), bonusNumber))
                 .withMessage("로또 숫자는 중복되면 안됩니다.");
     }
 
@@ -58,7 +58,7 @@ public class WinningNumbersTest {
         bonusNumber = new LottoNumber(lottoNumbers.get(0).get());
 
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new WinningNumbers(lottoNumbers, bonusNumber))
+                .isThrownBy(() -> new WinningNumbers(new Lotto(lottoNumbers), bonusNumber))
                 .withMessage("보너스 숫자는 로또 숫자와 중복되면 안됩니다.");
     }
 }

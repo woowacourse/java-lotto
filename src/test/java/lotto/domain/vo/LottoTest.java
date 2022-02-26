@@ -63,7 +63,7 @@ public class LottoTest {
     void confirmWinning_test() {
         List<LottoNumber> lottoNumbers = new ArrayList<>(this.lottoNumbers);
         lottoNumbers.set(0, new LottoNumber(45));
-        WinningNumbers winningNumbers = new WinningNumbers(this.lottoNumbers, new LottoNumber(45));
+        WinningNumbers winningNumbers = new WinningNumbers(new Lotto(this.lottoNumbers), new LottoNumber(45));
         Lotto lotto = new Lotto(lottoNumbers);
         LottoPrize prize = lotto.confirmWinning(winningNumbers);
 
