@@ -38,15 +38,11 @@ public class LottoTicket {
 		));
 	}
 
-	private static void addWinningResultCount(EnumMap<LottoRank, Integer> winningResult, LottoRank rank) {
-		if (rank == LottoRank.FAIL) {
+	private static void addWinningResultCount(EnumMap<LottoRank, Integer> winningResult, LottoRank lottoRank) {
+		if (lottoRank == LottoRank.FAIL) {
 			return;
 		}
-		winningResult.put(rank, increaseCount(winningResult, rank));
-	}
-
-	private static int increaseCount(EnumMap<LottoRank, Integer> winningResult, LottoRank rank) {
-		return winningResult.get(rank) + 1;
+		winningResult.compute(lottoRank, (rank, count) -> count + 1);
 	}
 
 	public List<Lotto> getLottoTicket() {
