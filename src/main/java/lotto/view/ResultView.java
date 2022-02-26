@@ -29,7 +29,7 @@ public class ResultView {
         System.out.println(size + PURCHASE_RESULT_MESSAGE);
         for (Lotto lotto : lottos) {
             String numbers = lotto.getNumbers().stream()
-                    .map(lottoNumber -> Integer.toString(lottoNumber.get()))
+                    .map(lottoNumber -> Integer.toString(lottoNumber.getNumber()))
                     .collect(Collectors.joining(PURCHASE_RESULT_DELIMITER));
             System.out.printf(PURCHASE_RESULT_PRINT_MESSAGE, numbers);
         }
@@ -53,9 +53,9 @@ public class ResultView {
         }
         if (prize == LottoPrize.TWICE) {
             return String
-                    .format(LOTTO_RESULT_TWICE_MESSAGE, prize.getLottoNumberMatches(), prize.getReward().get(), number);
+                    .format(LOTTO_RESULT_TWICE_MESSAGE, prize.getLottoNumberMatches(), prize.getReward().getAmount(), number);
         }
         return String
-                .format(LOTTO_RESULT_DEFAULT_MESSAGE, prize.getLottoNumberMatches(), prize.getReward().get(), number);
+                .format(LOTTO_RESULT_DEFAULT_MESSAGE, prize.getLottoNumberMatches(), prize.getReward().getAmount(), number);
     }
 }

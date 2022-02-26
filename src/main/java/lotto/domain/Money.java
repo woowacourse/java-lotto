@@ -23,7 +23,7 @@ public class Money {
         return this.amount / itemMoney.amount;
     }
 
-    public int get() {
+    public int getAmount() {
         return amount;
     }
 

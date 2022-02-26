@@ -47,8 +47,8 @@ public class Lotto {
         return LottoPrize.match(lottoNumberMatches, bonusNumberMatches);
     }
 
-    public boolean contains(LottoNumber target){
-        if (target == null){
+    public boolean contains(LottoNumber target) {
+        if (target == null) {
             throw new NullPointerException(ERROR_NULL_MESSAGE);
         }
         return numbers.contains(target);

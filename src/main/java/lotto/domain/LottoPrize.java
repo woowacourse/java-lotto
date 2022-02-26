@@ -5,11 +5,11 @@ import java.util.Arrays;
 public enum LottoPrize {
 
     MISS(0, 0, new Money(0)),
-    FIFTH(3, 0, new Money(5000)),
-    FOURTH(4, 0, new Money(50000)),
-    THIRD(5, 0, new Money(1500000)),
-    TWICE(5, 1, new Money(30000000)),
-    FIRST(6, 0, new Money(2000000000));
+    FIFTH(3, 0, new Money(5_000)),
+    FOURTH(4, 0, new Money(50_000)),
+    THIRD(5, 0, new Money(1_500_000)),
+    TWICE(5, 1, new Money(30_000_000)),
+    FIRST(6, 0, new Money(2_000_000_000));
 
     private final int lottoNumberMatches;
     private final int bonusNumberMatches;
@@ -38,6 +38,6 @@ public enum LottoPrize {
     }
 
     public int getTotalReward(int number) {
-        return reward.get() * number;
+        return reward.getAmount() * number;
     }
 }

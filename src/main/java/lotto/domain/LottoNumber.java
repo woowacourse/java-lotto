@@ -23,7 +23,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
     }
 
-    public int get() {
+    public int getNumber() {
         return number;
     }
 
