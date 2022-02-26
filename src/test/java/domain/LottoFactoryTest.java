@@ -7,17 +7,17 @@ import org.junit.jupiter.api.Test;
 
 public class LottoFactoryTest {
 
-	private static final LottoFactory lottoFactory = new LottoFactory();
+    private static final LottoFactory lottoFactory = new LottoFactory();
 
-	@Test
-	@DisplayName("구입한 금액 만큼 로또 발급")
-	void generateLottoByMoney() {
-		final int purchaseMoney = 14000;
-		final int expectedPurchaseCount = 14;
+    @Test
+    @DisplayName("구입한 금액 만큼 로또 발급")
+    void generateLottoByMoney() {
+        final int purchaseMoney = 14000;
+        final int expectedPurchaseCount = 14;
 
-		final Money money = new Money(purchaseMoney);
-		final int actual = lottoFactory.generateLottoTicket(money).size();
+        final Money money = new Money(purchaseMoney);
+        final int actual = lottoFactory.generateLottoTicket(money).size();
 
-		assertThat(actual).isEqualTo(expectedPurchaseCount);
-	}
+        assertThat(actual).isEqualTo(expectedPurchaseCount);
+    }
 }

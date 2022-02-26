@@ -12,74 +12,74 @@ import domain.Number;
 
 public class OutputView {
 
-	private static final String SECOND_RANK_RESULT_MESSAGE = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
-	private static final String OTHERS_RANK_RESULT_MESSAGE = "%d개 일치 (%d원) - %d개";
-	private static final String PROFIT_RESULT_MESSAGE = "총 수익률은 %.2f입니다.";
-	private static final String RESULT_TITLE_MESSAGE = "당첨 통계\n---------";
-	private static final String REQUEST_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
-	private static final String PURCHASE_COUNT_MESSAGE = "%d개를 구매했습니다.";
-	private static final String REQUEST_WINNING_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
-	private static final String REQUEST_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
+    private static final String SECOND_RANK_RESULT_MESSAGE = "%d개 일치, 보너스 볼 일치(%d원) - %d개";
+    private static final String OTHERS_RANK_RESULT_MESSAGE = "%d개 일치 (%d원) - %d개";
+    private static final String PROFIT_RESULT_MESSAGE = "총 수익률은 %.2f입니다.";
+    private static final String RESULT_TITLE_MESSAGE = "당첨 통계\n---------";
+    private static final String REQUEST_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
+    private static final String PURCHASE_COUNT_MESSAGE = "%d개를 구매했습니다.";
+    private static final String REQUEST_WINNING_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String REQUEST_BONUS_NUMBER_MESSAGE = "보너스 볼을 입력해 주세요.";
 
-	private void printMessage(String message) {
-		System.out.println(message);
-	}
+    private void printMessage(String message) {
+        System.out.println(message);
+    }
 
-	private void printNewLine() {
-		System.out.println();
-	}
+    private void printNewLine() {
+        System.out.println();
+    }
 
-	public void printRequestMoney() {
-		printMessage(REQUEST_MONEY_MESSAGE);
-	}
+    public void printRequestMoney() {
+        printMessage(REQUEST_MONEY_MESSAGE);
+    }
 
-	public void printPurchasedLottoTicket(List<Lotto> lottoTicket) {
-		printMessage(String.format(PURCHASE_COUNT_MESSAGE, lottoTicket.size()));
-		for (Lotto lotto : lottoTicket) {
-			printLottoNumber(sortLottoNumbers(lotto.getLotto()));
-		}
-	}
+    public void printPurchasedLottoTicket(List<Lotto> lottoTicket) {
+        printMessage(String.format(PURCHASE_COUNT_MESSAGE, lottoTicket.size()));
+        for (Lotto lotto : lottoTicket) {
+            printLottoNumber(sortLottoNumbers(lotto.getLotto()));
+        }
+    }
 
-	private List<Number> sortLottoNumbers(List<Number> lotto) {
-		lotto.sort(Comparator.comparingInt(Number::getNumber));
-		return lotto;
-	}
+    private List<Number> sortLottoNumbers(List<Number> lotto) {
+        lotto.sort(Comparator.comparingInt(Number::getNumber));
+        return lotto;
+    }
 
-	private void printLottoNumber(List<Number> lottoNumbers) {
-		int[] printingLottoNumbers = lottoNumbers.stream()
-			.mapToInt(Number::getNumber)
-			.toArray();
+    private void printLottoNumber(List<Number> lottoNumbers) {
+        int[] printingLottoNumbers = lottoNumbers.stream()
+                .mapToInt(Number::getNumber)
+                .toArray();
 
-		printMessage(Arrays.toString(printingLottoNumbers));
-	}
+        printMessage(Arrays.toString(printingLottoNumbers));
+    }
 
-	public void printRequestWinningNumbers() {
-		printNewLine();
-		printMessage(REQUEST_WINNING_NUMBERS_MESSAGE);
-	}
+    public void printRequestWinningNumbers() {
+        printNewLine();
+        printMessage(REQUEST_WINNING_NUMBERS_MESSAGE);
+    }
 
-	public void printRequestBonusNumber() {
-		printMessage(REQUEST_BONUS_NUMBER_MESSAGE);
-	}
+    public void printRequestBonusNumber() {
+        printMessage(REQUEST_BONUS_NUMBER_MESSAGE);
+    }
 
-	public void printWinningResult(Map<LottoRank, Integer> winningResult) {
-		printNewLine();
-		printMessage(RESULT_TITLE_MESSAGE);
+    public void printWinningResult(Map<LottoRank, Integer> winningResult) {
+        printNewLine();
+        printMessage(RESULT_TITLE_MESSAGE);
 
-		Set<LottoRank> ranks = winningResult.keySet();
-		for (LottoRank rank : ranks) {
-			printMessage(createRankMessage(rank, winningResult.get(rank)));
-		}
-	}
+        Set<LottoRank> ranks = winningResult.keySet();
+        for (LottoRank rank : ranks) {
+            printMessage(createRankMessage(rank, winningResult.get(rank)));
+        }
+    }
 
-	private String createRankMessage(LottoRank rank, int count) {
-		if (rank == LottoRank.SECOND) {
-			return String.format(SECOND_RANK_RESULT_MESSAGE, rank.getMatchCount(), rank.getAmount(), count);
-		}
-		return String.format(OTHERS_RANK_RESULT_MESSAGE, rank.getMatchCount(), rank.getAmount(), count);
-	}
+    private String createRankMessage(LottoRank rank, int count) {
+        if (rank == LottoRank.SECOND) {
+            return String.format(SECOND_RANK_RESULT_MESSAGE, rank.getMatchCount(), rank.getAmount(), count);
+        }
+        return String.format(OTHERS_RANK_RESULT_MESSAGE, rank.getMatchCount(), rank.getAmount(), count);
+    }
 
-	public void printRateOfProfit(double rateOfProfit) {
-		printMessage(String.format(PROFIT_RESULT_MESSAGE, rateOfProfit));
-	}
+    public void printRateOfProfit(double rateOfProfit) {
+        printMessage(String.format(PROFIT_RESULT_MESSAGE, rateOfProfit));
+    }
 }
