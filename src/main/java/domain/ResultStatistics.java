@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
@@ -14,11 +13,12 @@ public class ResultStatistics {
             .stream(LottoResult.values())
             .collect(Collectors.toMap(key -> key, value -> 0, (o1, o2) -> o1, TreeMap::new));
 
-    public Set<LottoResult> getLottoResultKeys() {
-        return Collections.unmodifiableSet(resultStatistics.keySet());
+    public ResultStatistics(List<LottoResult> results) {
+        resultStatistics.keySet()
+                .forEach(key -> setPrizeCountStats(results, key));
     }
 
-    public void updateStats(List<LottoResult> results, LottoResult key) {
+    private void setPrizeCountStats(List<LottoResult> results, LottoResult key) {
         resultStatistics.put(key, collectPrizeCount(results, key));
     }
 

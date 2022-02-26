@@ -11,19 +11,12 @@ public class LottoGame {
 
     private final Lottos lottos;
     private final LottoReferee referee;
-    private final ResultStatistics resultStatistics = new ResultStatistics();
+    private final ResultStatistics resultStatistics;
 
     public LottoGame(Lottos lottos, LottoReferee referee) {
         this.lottos = lottos;
         this.referee = referee;
-        analyzeLottos();
-    }
-
-    private void analyzeLottos() {
-        List<LottoResult> results = getLottoResults();
-
-        resultStatistics.getLottoResultKeys()
-                .forEach(key -> resultStatistics.updateStats(results, key));
+        this.resultStatistics =  new ResultStatistics(getLottoResults());
     }
 
     private List<LottoResult> getLottoResults() {
