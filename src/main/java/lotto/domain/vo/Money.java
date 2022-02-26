@@ -9,37 +9,37 @@ public class Money {
     private static final int MINIMUM_MONEY = 0;
     private static final int DECIMAL_PLACE = 2;
 
-    private final long money;
+    private final long number;
 
-    public Money(long money) {
-        validatePositive(money);
-        this.money = money;
+    public Money(long number) {
+        validatePositive(number);
+        this.number = number;
     }
 
-    private void validatePositive(long money) {
-        if (money < MINIMUM_MONEY) {
+    private void validatePositive(long number) {
+        if (number < MINIMUM_MONEY) {
             throw new IllegalArgumentException("돈은 0이상이어야 한다.");
         }
     }
 
     public Money plus(Money money) {
-        return new Money(this.money + money.money);
+        return new Money(this.number + money.number);
     }
 
     public Money minus(Money money) {
-        return new Money(this.money - money.money);
+        return new Money(this.number - money.number);
     }
 
     public BigDecimal divide(Money money) {
-        return BigDecimal.valueOf(this.money).divide(BigDecimal.valueOf(money.money), DECIMAL_PLACE, RoundingMode.DOWN);
+        return BigDecimal.valueOf(this.number).divide(BigDecimal.valueOf(money.number), DECIMAL_PLACE, RoundingMode.DOWN);
     }
 
     public boolean isGreaterThan(Money money) {
-        return this.money >= money.money;
+        return this.number >= money.number;
     }
 
-    public long getMoney() {
-        return money;
+    public long getNumber() {
+        return number;
     }
 
     @Override
@@ -51,11 +51,11 @@ public class Money {
             return false;
         }
         Money money1 = (Money) o;
-        return money == money1.money;
+        return number == money1.number;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(money);
+        return Objects.hash(number);
     }
 }
