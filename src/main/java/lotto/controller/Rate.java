@@ -23,7 +23,7 @@ public class Rate {
         if (!(o instanceof Rate)) {
             return false;
         }
-        Rate rate1 = (Rate)o;
+        Rate rate1 = (Rate) o;
         return Objects.equals(rate, rate1.rate);
     }
 
