@@ -1,7 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.stream.IntStream;
 
 public class LottoNumber {
     private static final int MIN = 1;
@@ -10,14 +9,13 @@ public class LottoNumber {
     private static final String NUMBER_RANGE_ERROR = "로또 숫자는 " + MIN + " 이상 " + MAX + " 이하의 숫자만 가능합니다.";
     private static final String TYPE_ERROR = "로또 번호는 숫자만 가능합니다.";
 
-    private static final List<LottoNumber> lottoNumbers = new ArrayList<>();
+    private static final LottoNumber[] cacheLottoNumber = new LottoNumber[MAX + 1];
 
     private final int number;
 
     static {
-        for (int i = MIN; i <= MAX; i++) {
-            lottoNumbers.add(new LottoNumber(i));
-        }
+        IntStream.range(MIN, MAX)
+                .forEach(i -> cacheLottoNumber[i] = new LottoNumber(i));
     }
 
     private LottoNumber(int number) {
@@ -27,7 +25,7 @@ public class LottoNumber {
     public static LottoNumber of(String input) {
         int number = convertToInt(input);
         validateNumber(number);
-        return lottoNumbers.get(number - 1);
+        return cacheLottoNumber[number];
     }
 
     public int toInt() {
