@@ -1,6 +1,8 @@
 package lotto.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
 import lotto.domain.Number;
@@ -20,7 +22,7 @@ public class NumberController {
             List<Integer> integers = StringUtil.toIntegers(InputView.inputWinningNumbers());
             isValid = validateNumbers(integers);
             numbers = toNumbers(integers);
-        } while (!isValid || numbers == null);
+        } while (!isValid || numbers.isEmpty());
         return numbers;
     }
 
@@ -41,28 +43,28 @@ public class NumberController {
                     .collect(Collectors.toList());
         } catch (IllegalArgumentException exception) {
             OutputView.printError(exception.getMessage());
-            return null;
+            return new ArrayList<>();
         }
     }
 
     public Number getBonusNumber(List<Number> numbers) {
-        Number validNumber;
+        Optional<Number> validNumber;
 
         do {
             validNumber = getValidNumber(numbers);
-        } while (validNumber == null);
+        } while (validNumber.isEmpty());
 
-        return validNumber;
+        return validNumber.get();
     }
 
-    private Number getValidNumber(List<Number> numbers) {
+    private Optional<Number> getValidNumber(List<Number> numbers) {
         try {
             Number number = new Number(InputView.inputBonusNumber());
             checkDuplicate(numbers, number);
-            return number;
+            return Optional.of(number);
         } catch (IllegalArgumentException exception) {
             OutputView.printError(exception.getMessage());
-            return null;
+            return Optional.empty();
         }
     }
 
