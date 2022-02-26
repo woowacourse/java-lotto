@@ -1,6 +1,8 @@
 package lotto.view;
 
 import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,9 +45,16 @@ public class OutputView {
         System.out.println("당첨 통계");
         System.out.println("---------");
 
-        for (Rank rank : Rank.getReverseOrderedRanks()) {
+        for (Rank rank : reverseOrderedRanks()) {
             printRank(ranks, rank);
         }
+    }
+
+    private static List<Rank> reverseOrderedRanks() {
+        List<Rank> ranks = new ArrayList<>(List.of(Rank.values()));
+        ranks.remove(Rank.NONE);
+        ranks.sort(Collections.reverseOrder());
+        return ranks;
     }
 
     private static void printRank(List<Rank> ranks, Rank rank) {
