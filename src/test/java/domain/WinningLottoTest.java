@@ -1,21 +1,31 @@
 package domain;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("중복된 로또 번호가 존재하면 예외를 발생시키는지 테스트한다.")
 class WinningLottoTest {
 
-    @Test
-    @DisplayName("보너스 번호를 이미 갖고 있을 시 예외가 발생한다.")
-    void checkBonusDuplicate_throwIllegalException() {
-        assertThatThrownBy(() -> new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 3))
-                .isInstanceOf(IllegalArgumentException.class);
+    private static Stream<Arguments> lottoAndExpectedPrize() {
+        return Stream.of(
+                Arguments.of(new Lotto(List.of(3, 4, 5, 6, 10, 15)), Prize.FAIL),
+                Arguments.of(new Lotto(List.of(4, 5, 6, 10, 15, 20)), Prize.FIFTH),
+                Arguments.of(new Lotto(List.of(5, 6, 10, 15, 20, 25)), Prize.FOURTH),
+                Arguments.of(new Lotto(List.of(6, 10, 15, 20, 25, 30)), Prize.THIRD),
+                Arguments.of(new Lotto(List.of(10, 15, 20, 25, 30, 40)), Prize.SECOND),
+                Arguments.of(new Lotto(List.of(10, 15, 20, 25, 30, 35)), Prize.FIRST));
+    }
+
+    @ParameterizedTest
+    @MethodSource("lottoAndExpectedPrize")
+    void calculatePrize_rightPrize(Lotto lotto, Prize expected) {
+        WinningLotto winningLotto = new WinningLotto(List.of(10, 15, 20, 25, 30, 35), 40);
+        assertThat(winningLotto.calculatePrize(lotto)).isEqualTo(expected);
     }
 
 }
