@@ -76,21 +76,6 @@ public class Lotto {
         }
     }
 
-    public LottoRanking getWinningPrice(Lotto lotto, Number bonusNumber) {
-        int count = 0;
-        boolean containsBonus = false;
-        for (Number number : lotto.getNumbers()) {
-            if (numbers.contains(number)) {
-                count++;
-            }
-        }
-        if (count == 5 && numbers.contains(bonusNumber)) {
-            containsBonus = true;
-        }
-
-        return LottoRanking.of(count, containsBonus);
-    }
-
     public Set<Number> getNumbers() {
         return numbers;
     }

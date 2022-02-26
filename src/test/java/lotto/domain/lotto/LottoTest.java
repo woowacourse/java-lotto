@@ -113,29 +113,4 @@ public class LottoTest {
             }
         }
     }
-
-    @Nested
-    @DisplayName("당첨 순위를 알려주는 메소드는")
-    class GetLottoRanking {
-
-        @Nested
-        @DisplayName("당첨번호와 보너스번호가 주어지면")
-        class Context_with_winning_numbers_and_bonus_number {
-
-            @ParameterizedTest
-            @CsvSource(value = {"1|2|3|4|5|6|7|All", "1|2|3|4|5|45|6|FiveAndBonus"}, delimiter = '|')
-            @DisplayName("당첨 순위를 알려준다.")
-            void it_returns_winning_price(int first, int second, int third, int fourth, int fifth,
-                int sixth,
-                int bonus, LottoRanking key
-            ) {
-                Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-
-                Lotto winningLotto = new Lotto(List.of(first, second, third, fourth, fifth, sixth));
-                Number bonusNumber = new Number(bonus);
-
-                assertThat(lotto.getWinningPrice(winningLotto, bonusNumber)).isEqualTo(key);
-            }
-        }
-    }
 }
