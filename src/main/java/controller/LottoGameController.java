@@ -11,28 +11,26 @@ import view.OutputView;
 public class LottoGameController {
 	public static void run() {
 		try {
-			StatisticCalculator statisticCalculator = new StatisticCalculator();
-			LottoTickets lottoTickets = generateLottoTickets();
-			OutputView.printLottoTickets(lottoTickets);
-			AnswerLotto answerLotto = generateAnswerLotto();
-			processResults(statisticCalculator, lottoTickets, answerLotto);
+			int money = InputView.inputMoney();
+			LottoTickets lottoTickets = generateLottoTickets(money);
+			List<Integer> lastWeekAnswerNumbers = InputView.inputAnsNumbers();
+			LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());
+			AnswerLotto answerLotto = new AnswerLotto(lastWeekAnswerNumbers, bonusNumber);
+			processResults(lottoTickets, answerLotto);
 		} catch (IllegalArgumentException e) {
 			OutputView.printErrorMessage(e.getMessage());
 		}
 	}
 
-	private static LottoTickets generateLottoTickets() {
-		return new LottoTickets(InputView.inputMoney());
+	private static LottoTickets generateLottoTickets(int money) {
+		LottoTickets lottoTickets = new LottoTickets(money);
+		OutputView.printLottoTickets(lottoTickets);
+		return lottoTickets;
 	}
 
-	private static AnswerLotto generateAnswerLotto() {
-		List<Integer> lastWeekAnswerNumbers = InputView.inputAnsNumbers();
-		LottoNumber bonusNumber = new LottoNumber(InputView.inputBonusNumber());
-		return new AnswerLotto(lastWeekAnswerNumbers, bonusNumber);
-	}
-
-	private static void processResults(StatisticCalculator statisticCalculator, LottoTickets lottoTickets,
+	private static void processResults(LottoTickets lottoTickets,
 									   AnswerLotto answerLotto) {
+		StatisticCalculator statisticCalculator = new StatisticCalculator();
 		statisticCalculator.updateResult(lottoTickets, answerLotto);
 		OutputView.printStatistics(statisticCalculator.getCount());
 		OutputView.printProfitRatio(statisticCalculator.calculateProfitRatio());
