@@ -3,10 +3,10 @@ package lotto.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoResult;
+import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTickets;
 import lotto.domain.MoneyManager;
-import lotto.domain.Ranks;
-import lotto.domain.Statistics;
 import lotto.domain.WinningNumbers;
 
 public class LottoController {
@@ -19,11 +19,12 @@ public class LottoController {
         return getLottoTickets();
     }
 
-    public Statistics matchLottoTickets(List<Integer> lottoNumbers, int lottoNumber) {
+    public LottoResult matchLottoTickets(List<Integer> lottoNumbers, int lottoNumber) {
         WinningNumbers winningNumbers = new WinningNumbers(getWinningNumbers(lottoNumbers),
                 getBonusNumber(lottoNumber));
-        Ranks ranks = new Ranks(lottoTickets.getRanksWithWinningNumbers(winningNumbers));
-        return new Statistics(ranks.getStatistics(), moneyManager.calculateYield(ranks.getLottoTotalReward()));
+        LottoStatistics lottoStatistics = new LottoStatistics(lottoTickets.getRanksWithWinningNumbers(winningNumbers));
+        return new LottoResult(lottoStatistics.getStatistics(),
+                moneyManager.calculateYield(lottoStatistics.getLottoTotalReward()));
     }
 
     private LottoTickets getLottoTickets() {

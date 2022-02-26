@@ -3,11 +3,11 @@ package lotto.domain;
 import java.util.EnumMap;
 import java.util.List;
 
-public class Ranks {
+public class LottoStatistics {
 
     private final EnumMap<Rank, Integer> statistics;
 
-    public Ranks(List<Rank> ranks) {
+    public LottoStatistics(List<Rank> ranks) {
         this.statistics = initializeState();
         createStatistics(ranks);
     }

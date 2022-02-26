@@ -4,9 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
+import lotto.domain.LottoStatistics;
 import lotto.domain.MoneyManager;
 import lotto.domain.Rank;
-import lotto.domain.Ranks;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -40,8 +40,9 @@ class MoneyManagerTest {
     @Test
     void 당첨_수익률_계산_기능_테스트() {
         List<Rank> result = List.of(Rank.FIFTH, Rank.FOURTH);
-        Ranks ranks = new Ranks(result);
+        LottoStatistics lottoStatistics = new LottoStatistics(result);
         MoneyManager moneyManager = new MoneyManager(14000);
-        assertThat(moneyManager.calculateYield(ranks.getLottoTotalReward())).isEqualTo(55000 / (double) 14000);
+        assertThat(moneyManager.calculateYield(lottoStatistics.getLottoTotalReward())).isEqualTo(
+                55000 / (double) 14000);
     }
 }

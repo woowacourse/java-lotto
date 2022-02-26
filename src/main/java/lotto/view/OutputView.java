@@ -4,10 +4,10 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.Rank;
-import lotto.domain.Statistics;
 
 public class OutputView {
 
@@ -27,9 +27,9 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void displayLottoResult(Statistics statistics) {
-        displayStatistics(statistics.getStatistics());
-        displayYield(statistics.getYield());
+    public static void displayLottoResult(LottoResult lottoResult) {
+        displayStatistics(lottoResult.getStatistics());
+        displayYield(lottoResult.getYield());
     }
 
     private static List<Integer> toIntegerNumbers(List<LottoNumber> lottoNumbers) {
