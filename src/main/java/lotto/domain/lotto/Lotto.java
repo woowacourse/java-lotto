@@ -44,7 +44,7 @@ public class Lotto {
         return numbers.contains(number);
     }
 
-    public static void validateNumbers(List<Integer> numbers) {
+    private static void validateNumbers(List<Integer> numbers) {
         validateSize(numbers);
         validateDuplicate(numbers);
     }
