@@ -1,6 +1,7 @@
 package model;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class WinningTicket {
@@ -29,7 +30,7 @@ public class WinningTicket {
     }
 
     public int compareMatchCount(LottoTicket lottoTicket) {
-        List<Integer> lottoNumbers = lottoTicket.lottoNumberValues();
+        Set<Integer> lottoNumbers = lottoTicket.lottoNumberValues();
         List<Integer> winningNumbers = this.winningNumberValues();
 
         return (int) lottoNumbers.stream()
@@ -38,7 +39,7 @@ public class WinningTicket {
     }
 
     public boolean matchBonusNumber(LottoTicket lottoTicket) {
-        List<Integer> lottoNumbers = lottoTicket.lottoNumberValues();
+        Set<Integer> lottoNumbers = lottoTicket.lottoNumberValues();
         return lottoNumbers.contains(bonusNumberValue());
     }
 

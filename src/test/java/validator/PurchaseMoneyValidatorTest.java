@@ -3,16 +3,25 @@ package validator;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class PurchaseMoneyValidatorTest {
+    private static final String NOT_MULTIPLES_OF_1000_ERROR_MESSAGE = "금액을 1,000의 배수로 입력해주세요.";
+    private static final String NOT_INTEGER_ERROR_MESSAGE = "금액을 정수로 입력해주세요.";
 
-    @ParameterizedTest
-    @ValueSource(strings = {"asda", "1700"})
-    @DisplayName("구입 금액을 잘못 입력 시 IllegalArgumentException 오류를 발생한다.")
-    void checkInvalidInput(String input) {
-        assertThatThrownBy(() -> PurchaseMoneyValidator.validate(input))
-                .isInstanceOf(IllegalArgumentException.class);
+    @Test
+    @DisplayName("구입 금액이 정수가 아닐 경우 IllegalArgumentException 오류를 발생한다.")
+    void checkNotIntegerInput() {
+        assertThatThrownBy(() -> PurchaseMoneyValidator.validate("asdas"))
+                .isInstanceOf(IllegalArgumentException.class).hasMessage(NOT_INTEGER_ERROR_MESSAGE);
+    }
+
+    @Test
+    @DisplayName("구입 금액이 1000의 배수가 아닐 경우 IllegalArgumentException 오류를 발생한다.")
+    void checkNotMultiplesOf1000Input() {
+        assertThatThrownBy(() -> PurchaseMoneyValidator.validate("1700"))
+                .isInstanceOf(IllegalArgumentException.class).hasMessage(NOT_MULTIPLES_OF_1000_ERROR_MESSAGE);
     }
 }
