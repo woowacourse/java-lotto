@@ -9,11 +9,11 @@ public class Money {
     private static final int MINIMUM_MONEY = 0;
     private static final int DECIMAL_PLACE = 2;
 
-    private final long number;
+    private final long value;
 
     public Money(long number) {
         validatePositive(number);
-        this.number = number;
+        this.value = number;
     }
 
     private void validatePositive(long number) {
@@ -23,23 +23,23 @@ public class Money {
     }
 
     public Money plus(Money money) {
-        return new Money(this.number + money.number);
+        return new Money(this.value + money.value);
     }
 
     public Money minus(Money money) {
-        return new Money(this.number - money.number);
+        return new Money(this.value - money.value);
     }
 
     public BigDecimal divide(Money money) {
-        return BigDecimal.valueOf(this.number).divide(BigDecimal.valueOf(money.number), DECIMAL_PLACE, RoundingMode.DOWN);
+        return BigDecimal.valueOf(this.value).divide(BigDecimal.valueOf(money.value), DECIMAL_PLACE, RoundingMode.DOWN);
     }
 
     public boolean isGreaterThan(Money money) {
-        return this.number >= money.number;
+        return this.value >= money.value;
     }
 
-    public long getNumber() {
-        return number;
+    public long getValue() {
+        return value;
     }
 
     @Override
@@ -51,11 +51,11 @@ public class Money {
             return false;
         }
         Money money1 = (Money) o;
-        return number == money1.number;
+        return value == money1.value;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(number);
+        return Objects.hash(value);
     }
 }

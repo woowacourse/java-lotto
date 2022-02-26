@@ -67,14 +67,14 @@ public class OutputView {
 
     private static void printSecondRank(List<Rank> ranks, Rank rank) {
         int matchCount = rank.getMatchCount();
-        long reward = rank.getReward().getNumber();
+        long reward = rank.getReward().getValue();
         int rewardCount = findRewardCount(rank, ranks);
         System.out.printf("%d개 일치, 보너스 볼 일치(%d원) - %d개%n", matchCount, reward, rewardCount);
     }
 
     private static void printOtherRank(List<Rank> ranks, Rank rank) {
         int matchCount = rank.getMatchCount();
-        long reward = rank.getReward().getNumber();
+        long reward = rank.getReward().getValue();
         int rewardCount = findRewardCount(rank, ranks);
         System.out.printf("%d개 일치 (%d원)- %d개%n", matchCount, reward, rewardCount);
     }
