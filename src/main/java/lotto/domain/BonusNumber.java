@@ -20,7 +20,7 @@ public class BonusNumber {
         isInteger(input);
         int value = Integer.parseInt(input);
         isInRange(value);
-        isDuplicate(choiceNumber.getChoiceNumbers());
+        isDuplicate(value, choiceNumber.getChoiceNumbers());
     }
 
     private void isInteger(String text) {
@@ -37,8 +37,8 @@ public class BonusNumber {
         }
     }
 
-    private void isDuplicate(List<Integer> pickedNumbers) {
-        if (pickedNumbers.contains(bonusNumber)) {
+    private void isDuplicate(Integer value, List<Integer> pickedNumbers) {
+        if (pickedNumbers.contains(value)) {
             throw new IllegalArgumentException(ERROR_DUPLICATE_NUMBER);
         }
     }
