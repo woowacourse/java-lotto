@@ -13,14 +13,14 @@ public class WinningNumbers extends LottoNumbers {
         this.bonusBall = bonusBall;
     }
 
-    public static WinningNumbers of(List<String> lottoNumberStrings, String bonusBallString) {
-        if (lottoNumberStrings.contains(bonusBallString)) {
+    public static WinningNumbers of(List<Integer> lottoNumbers, int bonusBallNumber) {
+        if (lottoNumbers.contains(bonusBallNumber)) {
             throw new IllegalArgumentException(WINNING_NUMBERS_CONTAIN_BONUS_BALL);
         }
 
-        return new WinningNumbers(lottoNumberStrings.stream()
+        return new WinningNumbers(lottoNumbers.stream()
                 .map(LottoNumber::new)
-                .collect(Collectors.toList()), new LottoNumber(bonusBallString));
+                .collect(Collectors.toList()), new LottoNumber(bonusBallNumber));
     }
 
     public int countContaining(LottoTicket lottoTicket) {

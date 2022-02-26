@@ -21,9 +21,9 @@ public class LottoTicketTest {
         // given
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
-            lottoNumbers.add(new LottoNumber(String.valueOf(i)));
+            lottoNumbers.add(new LottoNumber(i));
         }
-        lottoNumbers.add(new LottoNumber("5"));
+        lottoNumbers.add(new LottoNumber(5));
 
         // when
 
@@ -53,7 +53,7 @@ public class LottoTicketTest {
         // given
         List<LottoNumber> lottoNumbers = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
-            lottoNumbers.add(new LottoNumber(String.valueOf(i)));
+            lottoNumbers.add(new LottoNumber(i));
         }
 
         // when
@@ -67,11 +67,11 @@ public class LottoTicketTest {
         List<LottoNumber> over6Numbers = new ArrayList<>();
 
         for (int i = 1; i <= 5; i++) {
-            under6Numbers.add(new LottoNumber(String.valueOf(i)));
+            under6Numbers.add(new LottoNumber(i));
         }
 
         for (int i = 1; i <= 7; i++) {
-            over6Numbers.add(new LottoNumber(String.valueOf(i)));
+            over6Numbers.add(new LottoNumber(i));
         }
 
         return Stream.of(

@@ -23,7 +23,7 @@ public class LottoTicketFactory {
 
     private List<LottoNumber> createLottoNumbers() {
         return IntStream.rangeClosed(1, 45)
-                .mapToObj(i -> new LottoNumber(String.valueOf(i)))
+                .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 
