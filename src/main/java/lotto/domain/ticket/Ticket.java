@@ -5,7 +5,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import lotto.domain.rank.Rank;
-import lotto.domain.ticket.validator.TicketValidator;
+import lotto.domain.ticket.validation.TicketValidator;
 
 public class Ticket {
 

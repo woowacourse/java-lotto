@@ -1,4 +1,4 @@
-package lotto.domain.ticket.validator;
+package lotto.domain.ticket.validation;
 
 import java.util.List;
 import java.util.Objects;
@@ -16,24 +16,24 @@ public class TicketValidator {
     }
 
     public static void validateTicket(final List<Integer> ballNumbers) {
-        INSTANCE.validateTicketIsNull(ballNumbers);
-        INSTANCE.validateTicketIsOutOfSize(ballNumbers);
-        INSTANCE.validateNumbersDuplicated(ballNumbers);
+        INSTANCE.verifyTicketIsNotNull(ballNumbers);
+        INSTANCE.verifyTicketIsNotOutOfSize(ballNumbers);
+        INSTANCE.verifyNumbersAreNotDuplicated(ballNumbers);
     }
 
-    private void validateTicketIsNull(final List<Integer> ballNumbers) {
+    private void verifyTicketIsNotNull(final List<Integer> ballNumbers) {
         if (Objects.isNull(ballNumbers)) {
             throw new LottoException(TicketNumbersExceptionStatus.NUMBERS_IS_NULL);
         }
     }
 
-    private void validateTicketIsOutOfSize(final List<Integer> ballNumbers) {
+    private void verifyTicketIsNotOutOfSize(final List<Integer> ballNumbers) {
         if (TicketSize.DEFAULT_SIZE.doesNotMatch(ballNumbers.size())) {
             throw new LottoException(TicketNumbersExceptionStatus.NUMBERS_OUT_OF_SIZE);
         }
     }
 
-    private void validateNumbersDuplicated(final List<Integer> ballNumbers) {
+    private void verifyNumbersAreNotDuplicated(final List<Integer> ballNumbers) {
         if (isBallNumberDuplicated(ballNumbers)) {
             throw new LottoException(TicketNumbersExceptionStatus.NUMBERS_DUPLICATED);
         }

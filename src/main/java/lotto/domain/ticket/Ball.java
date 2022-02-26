@@ -2,7 +2,7 @@ package lotto.domain.ticket;
 
 import java.util.Objects;
 
-import lotto.domain.ticket.validator.BallValidator;
+import lotto.domain.ticket.validation.BallValidator;
 
 public class Ball {
 

@@ -1,7 +1,7 @@
 package lotto.domain.money;
 
 import lotto.domain.money.condition.MoneyUnit;
-import lotto.domain.money.validator.MoneyValidator;
+import lotto.domain.money.validation.MoneyValidator;
 
 public class Money {
 

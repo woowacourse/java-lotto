@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.stream.IntStream;
 
 import lotto.domain.ticket.condition.BallNumberRange;
-import lotto.domain.ticket.validator.BallValidator;
+import lotto.domain.ticket.validation.BallValidator;
 
 public class Balls {
 

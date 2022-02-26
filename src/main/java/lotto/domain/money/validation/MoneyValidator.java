@@ -1,4 +1,4 @@
-package lotto.domain.money.validator;
+package lotto.domain.money.validation;
 
 import lotto.domain.money.condition.MoneyUnit;
 import lotto.exception.LottoException;
@@ -12,17 +12,17 @@ public class MoneyValidator {
     }
 
     public static void validateCreditMoney(final int money) {
-        INSTANCE.validateMoneyIsZero(money);
-        INSTANCE.validateMoneyIsDivisible(money);
+        INSTANCE.verifyMoneyIsNotZero(money);
+        INSTANCE.verifyMoneyIsDivisible(money);
     }
 
-    private void validateMoneyIsZero(final int money) {
+    private void verifyMoneyIsNotZero(final int money) {
         if (money == 0) {
             throw new LottoException(MoneyExceptionStatus.MONEY_IS_ZERO);
         }
     }
 
-    private void validateMoneyIsDivisible(final int money) {
+    private void verifyMoneyIsDivisible(final int money) {
         if (MoneyUnit.isNotDivisible(money)) {
             throw new LottoException(MoneyExceptionStatus.MONEY_IS_NOT_DIVISIBLE);
         }

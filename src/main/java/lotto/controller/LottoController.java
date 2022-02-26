@@ -1,9 +1,6 @@
 package lotto.controller;
 
-import java.util.List;
-
 import lotto.dto.AnalysisDto;
-import lotto.dto.TicketDto;
 import lotto.dto.TicketsDto;
 import lotto.dto.WinningTicketDto;
 import lotto.service.LottoService;
