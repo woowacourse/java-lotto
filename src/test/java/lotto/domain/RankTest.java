@@ -4,12 +4,14 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import lotto.domain.vo.Money;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class RankTest {
 
@@ -38,22 +40,20 @@ class RankTest {
         assertThat(Rank.find(matchCount, matchBonus)).isEqualTo(Rank.NONE);
     }
 
-    @Test
-    @DisplayName("1등에 3번 당첨되면 60억을 반환한다.")
-    void getFirstReward() {
-        List<Rank> ranks = List.of(Rank.FIRST, Rank.FIRST, Rank.FIRST, Rank.NONE);
+    @ParameterizedTest
+    @MethodSource("ranks")
+    @DisplayName("당첨 금액의 합을 계산한다.")
+    void getFirstReward(List<Rank> ranks) {
         Money money = Rank.calculateReward(ranks);
-
-        assertThat(money).isEqualTo(new Money(6_000_000_000L));
+        long totalReward = ranks.stream().mapToLong(rank -> rank.getReward().getNumber()).sum();
+        assertThat(money).isEqualTo(new Money(totalReward));
     }
 
-    @Test
-    @DisplayName("2등부터 5등까지 당첨되면 3155만 5천원을 반환한다.")
-    void getOtherReward() {
-        List<Rank> ranks = List.of(Rank.SECOND, Rank.THIRD, Rank.FOURTH, Rank.FIFTH);
-        Money money = Rank.calculateReward(ranks);
-
-        assertThat(money).isEqualTo(new Money(31_555_000L));
+    private static Stream<List<Rank>> ranks() {
+        return Stream.of(
+                List.of(Rank.FIRST, Rank.FIRST, Rank.FIRST, Rank.NONE),
+                List.of(Rank.SECOND, Rank.THIRD, Rank.FOURTH, Rank.FIFTH)
+        );
     }
 
     @Test
