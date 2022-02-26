@@ -15,7 +15,17 @@ public class WinningLotto {
         this.bonusNumber = InputValidator.validateBonusNumber(bonusNumber);
     }
 
-    public void checkRank(Lottos lottos) {
-        lottos.calculateRanks(winningNumbers, bonusNumber);
+    public Rank calculate(List<Integer> numbers) {
+        return Rank.of(countMatchingNumber(numbers), isBonusNumber(numbers));
+    }
+
+    private int countMatchingNumber(List<Integer> numbers) {
+        return (int)numbers.stream()
+            .filter(winningNumbers::contains)
+            .count();
+    }
+
+    private boolean isBonusNumber(List<Integer> numbers) {
+        return numbers.contains(bonusNumber);
     }
 }

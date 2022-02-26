@@ -11,6 +11,9 @@ public class InputValidator {
     private static final String NUMBER_DUPLICATE_ERROR_MESSAGE = "[ERROR] 중복된 숫자가 존재합니다.";
     private static final String RANGE_ERROR_MESSAGE = "[ERROR] 1 ~ 45 사이의 숫자를 입력해주세요.";
 
+    private InputValidator() {
+    }
+
     public static int validatePurchaseAmount(int amount) {
         if (amount < Lotto.LOTTO_PRICE) {
             throw new IllegalArgumentException(LACK_OF_MONEY_ERROR_MESSAGE);
