@@ -10,7 +10,7 @@ public class LottoResult {
 	private final Map<Rank, Long> ranks;
 
 	public LottoResult(final Map<Rank, Long> ranks) {
-		this.ranks = Objects.requireNonNull(ranks);
+		this.ranks = Objects.requireNonNull(ranks,"[ERROR] ranks가 null 입니다.");
 	}
 
 	public static EnumMap<Rank, Long> getRankMap() {
