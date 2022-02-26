@@ -22,4 +22,8 @@ public class LottoGame {
     public LottoResults confirmWinnings(WinningNumbers winningNumbers) {
         return new LottoResults(lottos.confirmWinnings(winningNumbers));
     }
+
+    public boolean hasLottoTickets() {
+        return !lottos.getLottos().isEmpty();
+    }
 }

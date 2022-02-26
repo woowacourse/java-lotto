@@ -18,9 +18,11 @@ public class LottoController {
         lottoGame.purchase(purchaseMoney);
         ResultView.printLottos(lottoGame.getLottos());
 
-        WinningNumbers winningNumbers = requestWinningNumbers();
-        LottoResults lottoResults = lottoGame.confirmWinnings(winningNumbers);
-        ResultView.printResults(lottoResults);
+        if (lottoGame.hasLottoTickets()) {
+            WinningNumbers winningNumbers = requestWinningNumbers();
+            LottoResults lottoResults = lottoGame.confirmWinnings(winningNumbers);
+            ResultView.printResults(lottoResults);
+        }
     }
 
     private WinningNumbers requestWinningNumbers() {
