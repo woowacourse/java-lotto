@@ -18,17 +18,16 @@ public class RandomLottoNumbersGenerator implements LottoNumbersGenerator {
     }
 
     private List<Integer> createNumberPool(int start, int end) {
-        return IntStream.rangeClosed(start, end).boxed().collect(toList());
+        return IntStream
+                .rangeClosed(start, end)
+                .boxed()
+                .collect(toList());
     }
 
     public LottoNumbers createLottoNumbers() {
-        shuffleNumberPool();
-        List<Integer> numbers = getNumbersFrom(createQueueByNumberPool());
-        return new LottoNumbers(numbers);
-    }
-
-    private void shuffleNumberPool() {
         Collections.shuffle(numberPool);
+        List<Integer> numbers = getNumbersFrom(new LinkedList<>(numberPool));
+        return new LottoNumbers(numbers);
     }
 
     private List<Integer> getNumbersFrom(Queue<Integer> queue) {
@@ -36,10 +35,5 @@ public class RandomLottoNumbersGenerator implements LottoNumbersGenerator {
                 .map(i -> queue.remove())
                 .boxed()
                 .collect(toList());
-    }
-
-    private Queue<Integer> createQueueByNumberPool() {
-        Queue<Integer> queue = new LinkedList<>(numberPool);
-        return queue;
     }
 }

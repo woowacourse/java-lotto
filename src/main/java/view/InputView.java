@@ -16,12 +16,12 @@ public class InputView {
     public static <T> T getUntilValid(Supplier<T> supplier) {
         T t;
         do {
-            t = getFromSupplier(supplier);
+            t = getFrom(supplier);
         } while(t == null && isRepeatable());
         return t;
     }
 
-    private static <T> T getFromSupplier(Supplier<T> supplier) {
+    private static <T> T getFrom(Supplier<T> supplier) {
         try {
             return supplier.get();
         } catch (Exception e) {
