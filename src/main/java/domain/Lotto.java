@@ -6,15 +6,15 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private List<LottoNumber> lottoNumbers;
+    private List<LottoBall> lottoBalls;
 
     public Lotto(List<Integer> numbers) {
-        lottoNumbers = new ArrayList<>();
-        numbers.forEach(number -> lottoNumbers.add(new LottoNumber(number)));
+        lottoBalls = new ArrayList<>();
+        numbers.forEach(number -> lottoBalls.add(new LottoBall(number)));
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+    public List<LottoBall> getLottoNumbers() {
+        return lottoBalls;
     }
 
     public Prize calculateRank(WinningNumber winningNumber) {
@@ -25,13 +25,13 @@ public class Lotto {
 
     private int matchedRegularNumbers(WinningNumber winningNumber) {
         return winningNumber.getWinningNumbers().stream()
-                .filter(lottoNumber -> lottoNumbers.contains(lottoNumber))
+                .filter(lottoBall -> lottoBalls.contains(lottoBall))
                 .collect(Collectors.toList())
                 .size();
     }
 
-    private boolean matchedBonusNumber(LottoNumber bonus) {
-        return lottoNumbers.contains(bonus);
+    private boolean matchedBonusNumber(LottoBall bonus) {
+        return lottoBalls.contains(bonus);
     }
 
 }

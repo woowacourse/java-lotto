@@ -31,7 +31,6 @@ public class InputValidation {
         checkNumOfNumbers(splitedNumbers);
 
         final List<Integer> numbers = checkNonIntegers(splitedNumbers);
-        checkNumbersRange(numbers);
         checkDuplicateNumber(numbers);
 
         return numbers;
@@ -61,11 +60,6 @@ public class InputValidation {
         return numbers.stream()
                 .map(number -> checkNonInteger(number, ERROR_BALL_NON_INTEGER))
                 .collect(Collectors.toList());
-    }
-
-    private static void checkNumbersRange(final List<Integer> numbers) {
-        numbers.stream()
-                .forEach(number -> checkNumberRange(number));
     }
 
     private static void checkNumberRange(final int number) {
