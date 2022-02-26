@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.vo.Money;
+
 import java.util.*;
 
 public enum Rank {

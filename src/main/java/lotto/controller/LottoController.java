@@ -3,9 +3,8 @@ package lotto.controller;
 import java.util.List;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoGenerator;
 import lotto.domain.Lottos;
-import lotto.domain.Money;
+import lotto.domain.vo.Money;
 import lotto.domain.vo.Number;
 import lotto.domain.Rank;
 import lotto.domain.Store;
