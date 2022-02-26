@@ -27,7 +27,7 @@ public class InputView {
             validateWinningLotteryNumbers(numbers);
             return numbers;
         } catch (RuntimeException runtimeException) {
-            System.out.println(runtimeException.getMessage());
+            OutputView.printException(runtimeException.getMessage());
             return getWinningLotteryNumbers();
         }
     }
@@ -39,7 +39,7 @@ public class InputView {
             validateBonusNumber(numbers, bonusNumber);
             return bonusNumber;
         } catch (RuntimeException runtimeException) {
-            System.out.println(runtimeException.getMessage());
+            OutputView.printException(runtimeException.getMessage());
             return getBonusNumber(numbers);
         }
     }
