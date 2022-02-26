@@ -30,7 +30,7 @@ public enum LottoNumber {
     public static LottoNumber findByNumber(int number) {
         try {
             return LottoNumber.valueOf(LOTTO_NUMBER_PREFIX + number);
-        } catch (IllegalArgumentException illegalArgumentException) {
+        } catch (IllegalArgumentException exception) {
             throw new LottoNumberException(LottoNumberException.LOTTO_NUMBER_RANGE_ERROR_MESSAGE);
         }
     }

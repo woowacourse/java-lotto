@@ -37,7 +37,7 @@ public class Controller {
         try {
             return Money.generateMoneyByConsole(InputView.inputMoney());
         } catch (IllegalArgumentException exception) {
-            OutputView.printErrorMessage(exception.getMessage());
+            OutputView.printErrorMessage(exception);
             return getMoney();
         }
     }
@@ -46,7 +46,7 @@ public class Controller {
         try {
             return WinningLotto.generateWinningLottoByConsole(InputView.inputWinningLotto());
         } catch (IllegalArgumentException exception) {
-            OutputView.printErrorMessage(exception.getMessage());
+            OutputView.printErrorMessage(exception);
             return getWinningLotto();
         }
     }
@@ -55,7 +55,7 @@ public class Controller {
         try {
             return BonusNumber.generateBonusNumberByConsole(InputView.inputBonusNumber(), winningLotto);
         } catch (IllegalArgumentException exception) {
-            OutputView.printErrorMessage(exception.getMessage());
+            OutputView.printErrorMessage(exception);
             return getBonusNumber(winningLotto);
         }
     }
