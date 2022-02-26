@@ -1,5 +1,8 @@
 package domain;
 
+import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.groupingBy;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -11,14 +14,15 @@ public class Lottos {
 		this.lottos = lottos;
 	}
 
-	public Map<Rank, Integer> countRank(WinningLotto winningLotto) {
-		Map<Rank, Integer> rankCounts = Rank.getMap();
+	public Map<Rank, Long> countRank(WinningLotto winningLotto) {
+		Map<Rank, Long> ranks = Rank.getMap();
 
 		lottos.stream()
 			.map(lotto -> winningLotto.calculateRank(lotto))
 			.filter(rank -> !rank.isNothing())
-			.forEach(rank -> rankCounts.replace(rank, rankCounts.get(rank) + 1));
-		return Collections.unmodifiableMap(rankCounts);
+			.collect(groupingBy(Rank::getRank, counting()))
+			.forEach((key, value) -> ranks.merge(key, value, (v1, v2) -> v2));
+		return ranks;
 	}
 
 	public List<Lotto> getLottos() {

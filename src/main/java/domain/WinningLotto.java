@@ -13,7 +13,7 @@ public class WinningLotto {
 	}
 
 	public Rank calculateRank(Lotto targetLotto) {
-		return Rank.getRank(targetLotto.calculateMatchCount(lotto), hasBonus(targetLotto));
+		return Rank.of(targetLotto.calculateMatchCount(lotto), hasBonus(targetLotto));
 	}
 
 	private boolean hasBonus(Lotto targetLotto) {

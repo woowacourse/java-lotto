@@ -22,7 +22,7 @@ public enum Rank {
 		this.bonus = bonus;
 	}
 
-	public static Rank getRank(int target, boolean bonus) {
+	public static Rank of(int target, boolean bonus) {
 		return Arrays.stream(Rank.values())
 			.filter(rank -> rank.match == target)
 			.filter(rank -> rank.bonus == bonus)
@@ -30,11 +30,11 @@ public enum Rank {
 			.orElse(NOTHING);
 	}
 
-	public static Map<Rank, Integer> getMap() {
-		final Map<Rank, Integer> rankMap = new LinkedHashMap<>();
+	public static Map<Rank, Long> getMap() {
+		final Map<Rank, Long> rankMap = new LinkedHashMap<>();
 		Arrays.stream(values())
 			.filter(rank -> !rank.equals(NOTHING))
-			.forEach(rank -> rankMap.put(rank, 0));
+			.forEach(rank -> rankMap.put(rank, 0L));
 		return rankMap;
 	}
 
@@ -56,5 +56,9 @@ public enum Rank {
 
 	public int getMatch() {
 		return match;
+	}
+
+	public Rank getRank() {
+		return this;
 	}
 }

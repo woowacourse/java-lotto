@@ -40,12 +40,12 @@ public class OutputView {
 	}
 
 	public static void printRankCounts(LottoResult lottoResult) {
-		Map<Rank, Integer> ranks = lottoResult.getRanks();
+		Map<Rank, Long> ranks = lottoResult.getRanks();
 		System.out.println("\n당첨 통계\n---------");
 		ranks.forEach(OutputView::printRankCount);
 	}
 
-	private static void printRankCount(Rank rank, Integer count) {
+	private static void printRankCount(Rank rank, Long count) {
 		String format = "%d개 일치 (%d원)- %d개";
 		if (rank.isBonus()) {
 			format = "%d개 일치, 보너스 볼 일치(%d원)- %d개";

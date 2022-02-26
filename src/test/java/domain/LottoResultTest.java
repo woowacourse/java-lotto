@@ -18,13 +18,19 @@ public class LottoResultTest {
 	@Test
 	void count_ranks() {
 		//given
-		Map<Rank, Integer> ranks = Rank.getMap();
-		ranks.replace(Rank.FIFTH, 4);
+		List<Lotto> lotto = Arrays.asList(Lotto.of(new String[] {"8", "9", "11", "3", "2", "1"}),
+			Lotto.of(new String[] {"8", "9", "11", "3", "2", "1"}));
+		Lotto winningLotto = Lotto.of(new String[] {"6", "5", "4", "3", "2", "1"});
+		LottoNumber bonusNumber = new LottoNumber("7");
+		Lottos lottos = new Lottos(lotto);
 		//when
-		Payment payment = new Payment(20000);
-		LottoResult result = new LottoResult(ranks);
-		//then
-		assertThat(result.calculateProfitRate(payment)).isEqualTo(1.0);
+		Map<Rank, Long> ranks = lottos.countRank(new WinningLotto(winningLotto, bonusNumber));
+		LottoResult lottoResult = new LottoResult(ranks);
+		Payment payment = new Payment("5000");
+
+		double profitRate = lottoResult.calculateProfitRate(payment);
+
+		assertThat(profitRate).isEqualTo(2.0);
 	}
 
 	@DisplayName("생성값이 null 일 경우")

@@ -22,9 +22,9 @@ public class LottosTest {
 		LottoNumber bonusNumber = new LottoNumber("7");
 		Lottos lottos = new Lottos(lotto);
 		//when
-		Map<Rank,Integer> ranks = lottos.countRank(new WinningLotto(winningLotto, bonusNumber));
+		Map<Rank,Long> ranks = lottos.countRank(new WinningLotto(winningLotto, bonusNumber));
 		//then
-		assertThat(ranks).containsAnyOf(entry(Rank.FIFTH, 1), entry(Rank.THIRD, 1));
+		assertThat(ranks).containsAnyOf(entry(Rank.FIFTH, 1L), entry(Rank.THIRD, 1L));
 	}
 
 	@DisplayName("아무것도 맞지 않을 경우를 미포함 한 결과가 출력 되는지")
@@ -37,8 +37,8 @@ public class LottosTest {
 		LottoNumber bonusNumber = new LottoNumber("7");
 		Lottos lottos = new Lottos(lotto);
 		//when
-		Map<Rank,Integer> ranks = lottos.countRank(new WinningLotto(winningLotto, bonusNumber));
+		Map<Rank,Long> ranks = lottos.countRank(new WinningLotto(winningLotto, bonusNumber));
 		//then
-		assertThat(ranks).containsAnyOf(entry(Rank.FIRST, 1));
+		assertThat(ranks).containsAnyOf(entry(Rank.FIRST, 1L));
 	}
 }

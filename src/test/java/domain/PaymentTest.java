@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.jupiter.api.DisplayName;
@@ -73,12 +75,9 @@ public class PaymentTest {
 	@DisplayName("수익률 계산")
 	@Test
 	void calculate_profit_rate() {
-		Map<Rank, Integer> ranks = Rank.getMap();
-		ranks.replace(Rank.FIFTH, 4);
-		LottoResult lottoResult = new LottoResult(ranks);
-		Payment payment = new Payment("10000");
+		Payment payment = new Payment("5000");
 
-		double profitRate = lottoResult.calculateProfitRate(payment);
+		double profitRate = payment.calculateDivision(10000);
 
 		assertThat(profitRate).isEqualTo(2.0);
 	}

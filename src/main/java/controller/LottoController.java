@@ -67,7 +67,7 @@ public class LottoController {
 		}
 	}
 
-	private LottoResult createLottoResult(Map<Rank, Integer> ranks) {
+	private LottoResult createLottoResult(Map<Rank, Long> ranks) {
 		LottoResult lottoResult = new LottoResult(ranks);
 		OutputView.printRankCounts(lottoResult);
 		return lottoResult;
