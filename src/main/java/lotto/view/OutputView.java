@@ -46,7 +46,7 @@ public class OutputView {
 
     public void printYield(LottoResultDto lottoResultDto) {
         printRanksInfo(lottoResultDto);
-        if (lottoResultDto.getYield() < 1) {
+        if (lottoResultDto.getYield() < 1.00) {
             System.out.printf(TOTAL_YIELD_MESSAGE, lottoResultDto.getYield());
             System.out.println(LOSS_MESSAGE);
             return;

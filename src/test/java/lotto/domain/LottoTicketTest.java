@@ -24,7 +24,7 @@ class LottoTicketTest {
         // given & when & then
         assertThatThrownBy(() -> new LottoTicket(List.of(1, 2, 3, 4, 5, 5)))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("로또 번호는 중복될 수 없습니다.");
+                .hasMessageContaining("로또는 6자리이며, 번호는 중복될 수 없습니다.");
     }
 
     @DisplayName("getter 로 꺼내오는 리스트를 변경할 경우 예외를 던진다.")

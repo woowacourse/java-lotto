@@ -20,18 +20,35 @@ public class LottoRunner {
     }
 
     public void run() {
-        int money = inputView.getMoney();
+        int money = createMoney();
         int totalCount = lottoController.createTotalCount(money);
         outputView.printTotalCount(totalCount);
 
         LottoTicketsDto lottoTicketsDto = lottoController.createLottoTickets(money);
         outputView.printLottoTicketsInfo(lottoTicketsDto);
 
-        WinningNumberDto winningNumberDto = lottoController.createWinningNumber(
-                inputView.getNormalNumbers(), inputView.getBonusNumber());
+        WinningNumberDto winningNumberDto = creatWinningNumber();
 
         outputView.printLottoResultMessage();
-        LottoResultDto lottoResultDto = lottoController.createYield(money, winningNumberDto, lottoTicketsDto);
+        LottoResultDto lottoResultDto = lottoController.createLottoResult(money, winningNumberDto, lottoTicketsDto);
         outputView.printYield(lottoResultDto);
+    }
+
+    private int createMoney() {
+        try {
+            return inputView.getMoney();
+        } catch (RuntimeException e) {
+            outputView.printErrorMessage(e.getMessage());
+            return createMoney();
+        }
+    }
+
+    private WinningNumberDto creatWinningNumber() {
+        try {
+            return lottoController.createWinningNumber(inputView.getNormalNumbers(), inputView.getBonusNumber());
+        } catch (RuntimeException e) {
+            outputView.printErrorMessage(e.getMessage());
+            return creatWinningNumber();
+        }
     }
 }

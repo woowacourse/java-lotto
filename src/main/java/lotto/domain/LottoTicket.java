@@ -10,7 +10,7 @@ import lotto.domain.generator.LottoNumberGenerator;
 public class LottoTicket {
 
     private static final int DEFAULT_LOTTO_NUMBERS_SIZE = 6;
-    private static final String DUPLICATED_LOTTO_NUMBERS_ERROR_MESSAGE = "로또 번호는 중복될 수 없습니다.";
+    private static final String DUPLICATED_LOTTO_NUMBERS_ERROR_MESSAGE = "로또는 6자리이며, 번호는 중복될 수 없습니다.";
 
     private final Set<LottoNumber> lottoNumbers;
 

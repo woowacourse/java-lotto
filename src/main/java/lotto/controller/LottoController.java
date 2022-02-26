@@ -26,7 +26,7 @@ public class LottoController {
         return new WinningNumberDto(new WinningNumber(new LottoTicket(normalNumbers), new LottoNumber(bonusNumber)));
     }
 
-    public LottoResultDto createYield(int money, WinningNumberDto winningNumberDto, LottoTicketsDto lottoTicketsDto) {
+    public LottoResultDto createLottoResult(int money, WinningNumberDto winningNumberDto, LottoTicketsDto lottoTicketsDto) {
         WinningNumber winningNumber = winningNumberDto.toWinningNumber();
         LottoTickets lottoTickets = lottoTicketsDto.toLottoTickets();
         LottoResult lottoResult = lottoTickets.determine(winningNumber);
