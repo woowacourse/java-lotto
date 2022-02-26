@@ -7,8 +7,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final String ERROR_MESSAGE_NOT_IN_RANGE = "유효한 로또 번호가 아닙니다.";
 
-    private static final int MINIMUM_VALUE = 1;
-    private static final int MAXIMUM_VALUE = 45;
+    public static final int MINIMUM_VALUE = 1;
+    public static final int MAXIMUM_VALUE = 45;
 
     private static final LottoNumber[] LOTTO_NUMBERS = new LottoNumber[MAXIMUM_VALUE + 1];
 

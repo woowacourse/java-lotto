@@ -12,7 +12,7 @@ public class Lotto {
     private static final String ERROR_MESSAGE_NOT_IN_SIZE = "로또 숫자 갯수는 6개이여야 합니다.";
     private static final String ERROR_MESSAGE_NOT_DUPLICATE = "로또 숫자는 중복일 수 없습니다.";
 
-    private static final int LOTTO_NUMBER_SIZE = 6;
+    public static final int LOTTO_NUMBER_SIZE = 6;
 
     private final List<LottoNumber> lottoNumbers = new ArrayList<>();
 
