@@ -20,7 +20,7 @@ public enum LottoResult {
 
     public static LottoResult of(int matchCount, boolean hasBonus) {
         return Arrays.stream(LottoResult.values())
-                .filter(result -> result.hasSameMatchCount(matchCount))
+                .filter(result -> result.matchCount == matchCount)
                 .filter(result -> !result.equals(THIRD) || !hasBonus)
                 .findFirst()
                 .orElse(null);
@@ -32,9 +32,5 @@ public enum LottoResult {
 
     public int getPrize() {
         return this.prize;
-    }
-
-    private boolean hasSameMatchCount(int matchCount) {
-        return this.matchCount == matchCount;
     }
 }
