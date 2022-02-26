@@ -9,6 +9,7 @@ public class LottoPurchaseMoney {
     private final int price;
 
     private LottoPurchaseMoney(int price) {
+        validateCriterion(price);
         this.price = price;
     }
 
