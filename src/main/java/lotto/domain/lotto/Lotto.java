@@ -62,7 +62,7 @@ public class Lotto {
     public boolean contains(Number number) {
         return numbers.contains(number);
     }
-    
+
     public Set<Number> getNumbers() {
         return numbers;
     }

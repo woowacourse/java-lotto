@@ -15,7 +15,6 @@ public class LottoController {
     private Lottos lottos;
     private LottoWinningNumber lottoWinningNumber;
 
-
     public void play() {
         requestMoney();
         lottos = new Lottos(money);

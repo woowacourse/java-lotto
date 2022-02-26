@@ -21,7 +21,7 @@ public class LottoWinningNumber {
 
     public LottoRanking getLottoRanking(Lotto lotto) {
         boolean containsBonus = false;
-        int count = (int) lotto.getNumbers()
+        int count = (int)lotto.getNumbers()
             .stream()
             .filter(number -> winningLotto.contains(number))
             .count();
