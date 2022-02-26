@@ -19,8 +19,8 @@ public class LottoFactory {
     private static final int LOTTO_NUMBER_UNIT_TO_CORRECT = 1;
     private static final int INIT_WIN_PRICE = 0;
 
-    final private List<Lotto> issuedLotto = new ArrayList<>();
-    final private List<WinCount> winCountsOfIssuedLotto = new ArrayList<>();
+    private final List<Lotto> issuedLotto = new ArrayList<>();
+    private final List<WinCount> winCountsOfIssuedLotto = new ArrayList<>();
     private final Money money;
     private Lotto lastWinLotto;
     private LottoNumber bonusNumber;

@@ -4,8 +4,8 @@ import utils.Validator;
 
 public class Money {
 
-    private static final int LOTTO_PRICE = 1_000;
-    private static final String ERROR_LOWER_THAN_LOTTO_PRICE_MESSAGE = "원 미만은 입력할 수 없습니다.";
+    public static final int LOTTO_PRICE = 1_000;
+    public static final String ERROR_LOWER_THAN_LOTTO_PRICE_MESSAGE = "원 미만은 입력할 수 없습니다.";
 
     private final int money;
 
@@ -30,6 +30,10 @@ public class Money {
         return this.money / LOTTO_PRICE;
     }
 
+    public double calculateProfit(final int totalWinPrice) {
+        return (double) totalWinPrice / (calculateCounts() * LOTTO_PRICE);
+    }
+
     @Override
     public boolean equals(final Object object) {
         if (this == object) {
@@ -49,7 +53,4 @@ public class Money {
         return money;
     }
 
-    public double calculateProfit(final int totalWinPrice) {
-        return (double) totalWinPrice / (calculateCounts() * LOTTO_PRICE);
-    }
 }

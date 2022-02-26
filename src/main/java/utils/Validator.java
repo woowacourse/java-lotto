@@ -4,10 +4,10 @@ import java.util.List;
 
 public class Validator {
 
-    private static final String ERROR_NULL_OR_EMPTY_MESSAGE = "null 또는 빈값을 입력할 수 없습니다.";
+    public static final String ERROR_NULL_OR_EMPTY_MESSAGE = "null 또는 빈값을 입력할 수 없습니다.";
     private static final String POSITIVE_NUMBER_FORMAT = "^[1-9]([0-9]*)$";
-    private static final String ERROR_FORMAT_MESSAGE = "입력한 값이 숫자의 형태가 아닙니다.";
-    private static final String ERROR_DUPLICATION_MESSAGE = "중복값을 입력할 수 없습니다.";
+    public static final String ERROR_FORMAT_MESSAGE = "잘못된 값을 입력하였습니다.";
+    public static final String ERROR_DUPLICATION_MESSAGE = "중복값을 입력할 수 없습니다.";
 
     public static void checkNullOrEmpty(final String inputNumber) {
         if (inputNumber == null || inputNumber.isEmpty()) {
