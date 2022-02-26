@@ -1,13 +1,7 @@
 package controller;
 
-import java.util.Arrays;
-
-import model.bonusball.BonusBall;
-import model.lotto.LottoCount;
+import model.lotto.LottoGame;
 import model.lotto.LottoStorage;
-import model.result.RateOfReturn;
-import model.result.Statistics;
-import model.winningnumber.LottoWinningNumber;
 import view.InputView;
 import view.OutputView;
 
@@ -15,70 +9,48 @@ public class LottoController {
     private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
 
-    private LottoStorage lottoStorage;
-    private LottoWinningNumber lottoWinningNumber;
-    private BonusBall bonusBall;
-    private RateOfReturn rateOfReturn;
-
     public void playGame() {
-        makeLottos();
-        storeWinningNumber();
-        storeBonusBall();
-        compareLottoWithWinningNumber();
-        showResult();
+        LottoGame lottoGame = new LottoGame();
+        LottoStorage lottoStorage = makeLottos(lottoGame);
+        outputView.printLottos(lottoStorage.getLottoStorageDTO());
+        receiveWinningNumbers(lottoGame);
+        receiveBonusBall(lottoGame);
+
+        lottoGame.compareLottoWithWinningNumber();
+
+        sendStatistics(lottoGame);
     }
 
-    private void makeLottos() {
+    private LottoStorage makeLottos(LottoGame lottoGame) {
         try {
-            lottoStorage = initLottos();
-            outputView.printLottos(lottoStorage.getLottoStorageDTO());
+            return lottoGame.makeLottos(inputView.inputMoney());
         } catch (IllegalArgumentException e) {
             outputView.printErrorMessage(e.getMessage());
-            makeLottos();
+            return makeLottos(lottoGame);
         }
     }
 
-    private LottoStorage initLottos() {
-        LottoCount lottoCount = new LottoCount(inputView.inputMoney());
-        storeMoneyInRateOfReturn(lottoCount);
-        return new LottoStorage(lottoCount);
-    }
-
-    private void storeMoneyInRateOfReturn(LottoCount lottoCount) {
-        rateOfReturn = new RateOfReturn(lottoCount);
-    }
-
-    private void storeWinningNumber() {
+    private void receiveWinningNumbers(LottoGame lottoGame) {
         try {
-            lottoWinningNumber = new LottoWinningNumber(inputView.inputWinningNumbers());
+            lottoGame.storeWinningNumber(inputView.inputWinningNumbers());
         } catch (IllegalArgumentException e) {
             outputView.printErrorMessage(e.getMessage());
-            storeWinningNumber();
+            receiveWinningNumbers(lottoGame);
         }
     }
 
-    private void storeBonusBall() {
+    private void receiveBonusBall(LottoGame lottoGame) {
         try {
-            String input = inputView.inputBonusBall();
-            bonusBall = new BonusBall(input);
-            lottoWinningNumber.validateReduplicationWithBonusBall(input);
+            lottoGame.storeBonusBall(inputView.inputBonusBall());
         } catch (IllegalArgumentException e) {
             outputView.printErrorMessage(e.getMessage());
-            storeBonusBall();
+            receiveBonusBall(lottoGame);
         }
     }
 
-    private void compareLottoWithWinningNumber() {
-        lottoStorage.compare(bonusBall.getBonusBallDTO(), lottoWinningNumber.getWinningNumbersDTO());
-    }
-
-    private void showResult() {
+    private void sendStatistics(LottoGame lottoGame) {
         outputView.printResultMessage();
-
-        Arrays.stream(Statistics.values())
-                .forEach(statistics -> outputView.printResult(statistics.getMatchNumber(), statistics.getValue(),
-                        statistics.getCount(), Statistics.BONUS.getValue()));
-
-        outputView.printRateOfReturn(rateOfReturn.getRateOfReturn());
+        double rateOfReturn = lottoGame.showResult();
+        outputView.printRateOfReturn(rateOfReturn);
     }
 }
