@@ -6,10 +6,9 @@ import static validator.NumberValidators.validateNoDuplicateInList;
 import static validator.NumberValidators.validateNoDuplicates;
 import static validator.NumberValidators.validateTotalLottoPriceUnit;
 import static validator.NumberValidators.validateLottoNumbersSize;
-import static view.InputView.requestManualLottoCount;
-import static view.InputView.requestManualLottos;
 
 import domain.Lotto;
+import domain.LottoCountsDto;
 import domain.LottoNumber;
 import domain.LottoReferee;
 import domain.Lottos;
@@ -22,19 +21,19 @@ public class LottoController {
 
     private static final String LOTTO_NUMBERS_DELIMITER = ", ";
 
-    public Lottos initCustomerLottos(int totalLottoPrice, int manualCount) {
+    public LottoCountsDto initCountsDto(int totalLottoPrice, int manualsCount) {
         validateTotalLottoPriceUnit(totalLottoPrice);
         int totalCount = totalLottoPrice / LOTTO_PRICE;
 
-        validateManualLottosCount(manualCount, totalCount);
-        return initManualAndRandomLottos(totalCount, manualCount);
+        validateManualLottosCount(manualsCount, totalCount);
+        int randomCount = totalCount - manualsCount;
+
+        return new LottoCountsDto(manualsCount, randomCount);
     }
 
-    private Lottos initManualAndRandomLottos(int totalCount, int manualCount) {
-        int randomCount = totalCount - manualCount;
-
-        List<Lotto> manualLottos = getValidManualLottos(requestManualLottos(manualCount));
-        return Lottos.of(manualLottos, randomCount);
+    public Lottos initLottos(List<String> manualsString, LottoCountsDto countsDto) {
+        List<Lotto> manualLottos = getValidManualLottos(manualsString);
+        return Lottos.of(manualLottos, countsDto);
     }
 
     private List<Lotto> getValidManualLottos(List<String> manualStrings) {
