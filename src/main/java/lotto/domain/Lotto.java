@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
@@ -20,7 +19,7 @@ public class Lotto {
         this.numbers = new TreeSet<>(randomNumbers);
     }
 
-    Lotto(List<Integer> numbers) {
+    public Lotto(List<Integer> numbers) {
         validateNumbers(numbers);
         this.numbers = numbers.stream()
                 .map(Number::getInstance)
@@ -50,27 +49,6 @@ public class Lotto {
 
     public boolean contains(Number number) {
         return numbers.contains(number);
-    }
-
-    public Optional<WinningPrice> getWinningPrice(List<Number> winningNumbers, Number bonusNumber) {
-        int count = getCount(winningNumbers);
-        boolean containsBonus = false;
-
-        if (count == WinningPrice.Five.getCount()) {
-            containsBonus = numbers.contains(bonusNumber);
-        }
-
-        return WinningPrice.of(count, containsBonus);
-    }
-
-    private int getCount(List<Number> winningNumbers) {
-        int count = 0;
-        for (Number number : winningNumbers) {
-            if (numbers.contains(number)) {
-                count++;
-            }
-        }
-        return count;
     }
 
     public Set<Number> getNumbers() {

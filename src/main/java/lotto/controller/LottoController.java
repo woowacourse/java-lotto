@@ -1,10 +1,9 @@
 package lotto.controller;
 
-import java.util.List;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
-import lotto.domain.Number;
 import lotto.domain.Result;
+import lotto.domain.WinningNumbers;
 import lotto.view.OutputView;
 
 public class LottoController {
@@ -22,10 +21,10 @@ public class LottoController {
         Lottos lottos = new Lottos(money);
         OutputView.printInitResult(lottos);
 
-        List<Number> winningNumbers = numberController.getWinningNumbers();
-        Number bonusNumber = numberController.getBonusNumber(winningNumbers);
+        WinningNumbers winningNumbers = numberController.getWinningNumbers();
+        numberController.getBonusNumber(winningNumbers);
 
-        Result result = lottos.getResult(winningNumbers, bonusNumber);
+        Result result = lottos.getResult(winningNumbers);
         OutputView.printPlayResult(result, money);
     }
 }

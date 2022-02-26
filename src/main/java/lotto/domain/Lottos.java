@@ -21,12 +21,12 @@ public class Lottos {
         }
     }
 
-    public Result getResult(List<Number> winningNumbers, Number bonusNumber) {
+    public Result getResult(WinningNumbers winningNumbers) {
         Result result = new Result();
 
         for (Lotto lotto : lottos) {
-            Optional<WinningPrice> winningPrice = lotto.getWinningPrice(winningNumbers, bonusNumber);
-             winningPrice.ifPresent(result::add);
+            Optional<WinningPrice> winningPrice = winningNumbers.getWinningPrice(lotto);
+            winningPrice.ifPresent(result::add);
         }
 
         return result;
