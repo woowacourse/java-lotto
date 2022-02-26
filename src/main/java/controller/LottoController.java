@@ -59,6 +59,6 @@ public class LottoController {
 
     private List<Lotto> purchaseLottoTickets(LottoPurchasingMoney inputLottoPurchasingMoney) {
         LottoFactory ticketFactory = LottoFactory.getInstance();
-        return ticketFactory.generateLotteries(inputLottoPurchasingMoney.getAmount());
+        return ticketFactory.generateLotteries(inputLottoPurchasingMoney);
     }
 }

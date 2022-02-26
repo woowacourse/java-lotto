@@ -27,14 +27,14 @@ public class LottoFactory {
                 .collect(Collectors.toList());
     }
 
-    public List<Lotto> generateLotteries(int money) {
+    public List<Lotto> generateLotteries(LottoPurchasingMoney money) {
         return IntStream.range(0, getAvailableLottoCount(money))
                 .mapToObj(i -> generateAuto())
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    private int getAvailableLottoCount(int money) {
-        return money / LOTTO_PRICE;
+    private int getAvailableLottoCount(LottoPurchasingMoney money) {
+        return money.getAmount() / LOTTO_PRICE;
     }
 
     private Lotto generateAuto() {

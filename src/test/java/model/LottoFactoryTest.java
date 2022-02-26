@@ -17,7 +17,7 @@ class LottoFactoryTest {
         // given
 
         // when
-        List<Lotto> lotteries = lottoFactory.generateLotteries(money);
+        List<Lotto> lotteries = lottoFactory.generateLotteries(LottoPurchasingMoney.valueOf(money));
 
         // then
         assertThat(lotteries.size()).isEqualTo(ticketCount);
