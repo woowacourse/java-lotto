@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class LottoTickets {
+public class LottoTicket {
     private final List<LottoNumbers> lottoTickets = new ArrayList<>();
 
-    public LottoTickets(int count) {
+    public LottoTicket(int count) {
         generateTickets(count);
     }
 

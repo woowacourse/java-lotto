@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
-import lotto.domain.LottoTickets;
+import lotto.domain.LottoTicket;
 import lotto.domain.Ranking;
 import lotto.domain.WinningResult;
 
@@ -25,8 +25,8 @@ public class OutputView {
         System.out.println(ticketCount + TICKET_PURCHASE_SENTENCE);
     }
 
-    public static void printTicket(LottoTickets lottoTickets) {
-        for (LottoNumbers lottoNumbers : lottoTickets.getLottoTickets()) {
+    public static void printTicket(LottoTicket lottoTicket) {
+        for (LottoNumbers lottoNumbers : lottoTicket.getLottoTickets()) {
             List<LottoNumber> lottoNumberList = lottoNumbers.getLottoNumbers();
             String sentence = joinList(convertToStringList(lottoNumberList));
             System.out.println(sentence);

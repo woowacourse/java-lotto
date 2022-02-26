@@ -3,7 +3,7 @@ package lotto.controller;
 import lotto.domain.LottoAmount;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
-import lotto.domain.LottoTickets;
+import lotto.domain.LottoTicket;
 import lotto.domain.WinningNumbers;
 import lotto.domain.WinningResult;
 import lotto.view.InputView;
@@ -13,11 +13,11 @@ public class LottoController {
     public void start() {
         LottoAmount amount = inputAmount();
 
-        LottoTickets lottoTickets = buyTickets(amount);
+        LottoTicket lottoTicket = buyTickets(amount);
 
         WinningNumbers winningNumbers = createWinningNumbers();
 
-        WinningResult winningResult = getWinningResult(lottoTickets, winningNumbers);
+        WinningResult winningResult = getWinningResult(lottoTicket, winningNumbers);
 
         printResult(amount, winningResult);
     }
@@ -31,13 +31,13 @@ public class LottoController {
         }
     }
 
-    private LottoTickets buyTickets(LottoAmount amount) {
+    private LottoTicket buyTickets(LottoAmount amount) {
         int ticketCount = amount.calculateLottoCount();
         OutputView.printTicketCount(ticketCount);
 
-        LottoTickets lottoTickets = new LottoTickets(ticketCount);
-        OutputView.printTicket(lottoTickets);
-        return lottoTickets;
+        LottoTicket lottoTicket = new LottoTicket(ticketCount);
+        OutputView.printTicket(lottoTicket);
+        return lottoTicket;
     }
 
     private WinningNumbers createWinningNumbers() {
@@ -74,8 +74,8 @@ public class LottoController {
         }
     }
 
-    private WinningResult getWinningResult(LottoTickets lottoTickets, WinningNumbers winningNumbers) {
-        return lottoTickets.calculateWinningStatistic(winningNumbers);
+    private WinningResult getWinningResult(LottoTicket lottoTicket, WinningNumbers winningNumbers) {
+        return lottoTicket.calculateWinningStatistic(winningNumbers);
     }
 
     private void printResult(LottoAmount amount, WinningResult winningResult) {
