@@ -70,7 +70,7 @@ public class LottoNumbers {
 
     private List<LottoNumber> generateRandomLottoNumbers() {
         Collections.shuffle(candidateLottoNumbers);
-        return new ArrayList<>(candidateLottoNumbers.subList(0, 6));
+        return new ArrayList<>(candidateLottoNumbers.subList(0, LOTTO_COUNT));
     }
 
     private List<LottoNumber> convertStringArrToIntegerList(String[] array) {
