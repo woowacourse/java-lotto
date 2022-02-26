@@ -7,7 +7,6 @@ import util.LottoNumberGenerator;
 public class LottoMachine {
 
     private static final int LOTTO_PRICE = 1000;
-    private static final int SECOND_DECIMAL_DIGIT = 100;
 
     private final int money;
     private final LottoResult lottoResult;
