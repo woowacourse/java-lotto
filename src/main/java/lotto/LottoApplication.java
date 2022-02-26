@@ -1,9 +1,5 @@
 package lotto;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
 import lotto.domain.LottoPurchaseCounts;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
@@ -16,19 +12,14 @@ public class LottoApplication {
 
     public static void main(final String[] args) {
         final Money money = new Money(InputView.inputMoney());
-        final LottoPurchaseCounts lottoPurchaseCounts = money
-                .calculatePurchaseCounts(InputView.inputPurchaseManualCount());
-        OutputView.outputBuyLottoCounts(lottoPurchaseCounts);
+        final LottoPurchaseCounts purchaseCounts = money.calculatePurchaseCounts(InputView.inputPurchaseManualCount());
+        OutputView.outputBuyLottoCounts(purchaseCounts);
 
-        final List<Lotto> manualLottos = InputView.inputManualLottos(lottoPurchaseCounts.getManualCount())
-                .stream()
-                .map(Lotto::from)
-                .collect(Collectors.toList());
-
-        final Lottos lottos = RandomLottoMachine.buyLotto(manualLottos, lottoPurchaseCounts.getAutomaticCount());
+        final Lottos manualLottos = Lottos.from(InputView.inputManualLottos(purchaseCounts.getManualCount()));
+        final Lottos lottos = RandomLottoMachine.buyLotto(manualLottos.getLottos(), purchaseCounts.getAutomaticCount());
         OutputView.outputLottos(lottos.getLottos());
-        final WinLotto winLotto = new WinLotto(Lotto.from(InputView.inputWinLotto()),
-                LottoNumber.valueOf(InputView.inputBonusNumber()));
+
+        final WinLotto winLotto = WinLotto.of(InputView.inputWinLotto(), InputView.inputBonusNumber());
         OutputView.outputResult(lottos.createResult(winLotto));
     }
 }

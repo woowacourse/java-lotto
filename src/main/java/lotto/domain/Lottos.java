@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Lottos {
 
@@ -19,6 +20,12 @@ public class Lottos {
         if (lottos.isEmpty()) {
             throw new IllegalArgumentException("[ERROR] Lottos는 lotto가 1개이상으로 생성되어야 합니다.");
         }
+    }
+
+    public static Lottos from(List<List<Integer>> lottos) {
+        return new Lottos(lottos.stream()
+                .map(Lotto::from)
+                .collect(Collectors.toList()));
     }
 
     public LottoResult createResult(final WinLotto winLotto) {

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.List;
 import java.util.Objects;
 
 public class WinLotto {
@@ -17,6 +18,10 @@ public class WinLotto {
         if (winLotto.containNumber(bonusNumber)) {
             throw new IllegalArgumentException("[ERROR] 보너스 볼이 당첨 번호와 중복됩니다.");
         }
+    }
+
+    public static WinLotto of(final List<Integer> winLottoNumbers, final int bonusNumber) {
+        return new WinLotto(Lotto.from(winLottoNumbers), LottoNumber.valueOf(bonusNumber));
     }
 
     public Rank matchResult(final Lotto lotto) {
