@@ -1,10 +1,6 @@
 package domain;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
+import java.util.*;
 
 public class WinningStat {
 
@@ -17,22 +13,14 @@ public class WinningStat {
     }
 
     public double calculateProfit(int ticketPrice) {
+        long totalPrize = Arrays.stream(LottoRank.values())
+                .mapToLong(rank -> (long) rank.getPrize() * stat.get(rank))
+                .reduce(DEFAULT_VALUE, Long::sum);
+
         int num = stat.values().stream()
                 .reduce(DEFAULT_VALUE, Integer::sum);
 
-        List<LottoRank> wonLottoRanks = stat.entrySet().stream()
-                .filter(rank -> rank.getValue() != DEFAULT_VALUE)
-                .map(Map.Entry::getKey)
-                .collect(Collectors.toList());
-
-        return (double) sumPrize(wonLottoRanks) / (num * ticketPrice);
-    }
-
-    private long sumPrize(List<LottoRank> wonLottoRanks) {
-        return Arrays.stream(LottoRank.values())
-                .filter(wonLottoRanks::contains)
-                .mapToLong(rank -> (long) rank.getPrize() * stat.get(rank))
-                .reduce(DEFAULT_VALUE, Long::sum);
+        return (double) totalPrize / (num * ticketPrice);
     }
 
     @Override
@@ -49,6 +37,6 @@ public class WinningStat {
     }
 
     public Map<LottoRank, Integer> getStat() {
-        return stat;
+        return Collections.unmodifiableMap(stat);
     }
 }
