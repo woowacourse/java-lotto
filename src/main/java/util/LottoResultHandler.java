@@ -8,6 +8,7 @@ import domain.Lottos;
 import domain.Rank;
 import domain.WinningLotto;
 import dto.LottoResultDto;
+import java.util.EnumMap;
 import java.util.Map;
 
 public class LottoResultHandler {
@@ -26,7 +27,7 @@ public class LottoResultHandler {
         return lottos.getLottos()
                 .stream()
                 .map(winningLotto::getRankByLotto)
-                .collect(groupingBy(Rank::getThis, counting()));
+                .collect(groupingBy(rank -> rank, () -> new EnumMap<>(Rank.class), counting()));
     }
 
     private static long getTotalReturnByLottoResult(Map<Rank, Long> lottoResult) {

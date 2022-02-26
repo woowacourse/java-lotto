@@ -30,8 +30,4 @@ public enum Rank {
     public long getPrize() {
         return prize;
     }
-
-    public Rank getThis() {
-        return this;
-    }
 }
