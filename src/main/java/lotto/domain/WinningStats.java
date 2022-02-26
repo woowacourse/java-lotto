@@ -1,10 +1,13 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.EnumMap;
 
 public class WinningStats {
 
+    public static final int EARNING_RATE_PRECISIONS = 2;
     private final EnumMap<LottoRank, Integer> winningStatistics;
 
     public WinningStats() {
@@ -22,7 +25,9 @@ public class WinningStats {
     }
 
     public double getEarningsRate(PurchaseAmount money) {
-        return getTotalPrize() / (double)money.amount();
+        BigDecimal totalPrize = new BigDecimal(getTotalPrize());
+        BigDecimal amount = new BigDecimal(money.amount());
+        return totalPrize.divide(amount, EARNING_RATE_PRECISIONS, RoundingMode.HALF_EVEN).doubleValue();
     }
 
     long getTotalPrize() {
