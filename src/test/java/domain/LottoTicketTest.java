@@ -87,7 +87,7 @@ public class LottoTicketTest {
         Lotto winningLotto = new Lotto(Stream.of(1, 5, 9, 11, 15, 34)
                 .map(Number::new)
                 .collect(Collectors.toList()));
-        Number bonusNumber = new Number(31);
+        Number bonusNumber = new Number(35);
 
         WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusNumber);
         LottoTicket lottoTicket = new LottoTicket(List.of(myLotto));
@@ -109,7 +109,7 @@ public class LottoTicketTest {
         Lotto winningLotto = new Lotto(Stream.of(1, 5, 9, 12, 15, 34)
                 .map(Number::new)
                 .collect(Collectors.toList()));
-        Number bonusNumber = new Number(31);
+        Number bonusNumber = new Number(35);
 
         WinningNumbers winningNumbers = new WinningNumbers(winningLotto, bonusNumber);
         LottoTicket lottoTicket = new LottoTicket(List.of(myLotto));
