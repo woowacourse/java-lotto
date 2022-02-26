@@ -17,6 +17,21 @@ public class LottoCount {
 		this.count = makeMoneyToNumber(money);
 	}
 
+	// public LottoCount(int money) {
+	// 	this.count = makeMoneyToNumber2(money);
+	// }
+
+	private int makeMoneyToNumber2(int money) {
+		validateThousandUnitInputMoney2(money);
+		return money / UNIT;
+	}
+
+	private void validateThousandUnitInputMoney2(int money) {
+		if (money % UNIT != 0 || money == 0) {
+			throw new IllegalArgumentException(LOTTO_COUNT_UNIT_ERROR_MESSAGE);
+		}
+	}
+
 	private int makeMoneyToNumber(String money) {
 		validateThousandUnitInputMoney(money);
 		return Integer.parseInt(money) / UNIT;

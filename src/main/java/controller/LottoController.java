@@ -34,11 +34,23 @@ public class LottoController {
 			storeMoneyInRateOfReturn(lottoCount);
 			lottoStorage = new LottoStorage(lottoCount);
 			outputView.printLottos(lottoStorage.getLottoStorageDTO());
-		} catch (IllegalArgumentException e) {
+		} catch (Exception e) {
 			outputView.printErrorMessage(e.getMessage());
 			makeLottos();
 		}
 	}
+
+	/*private void makeLottos2() {
+		try {
+			LottoCount lottoCount = new LottoCount(inputView.inputMoney2());
+			storeMoneyInRateOfReturn(lottoCount);
+			lottoStorage = new LottoStorage(lottoCount);
+			outputView.printLottos(lottoStorage.getLottoStorageDTO());
+		} catch (IllegalArgumentException e) {
+			outputView.printErrorMessage(e.getMessage());
+			makeLottos2();
+		}
+	}*/
 
 	private void storeMoneyInRateOfReturn(LottoCount lottoCount) {
 		rateOfReturn = new RateOfReturn(lottoCount);

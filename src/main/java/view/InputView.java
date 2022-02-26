@@ -14,6 +14,19 @@ public class InputView {
 		return scanner.nextLine();
 	}
 
+	// public int inputMoney2() {
+	// 	System.out.println(INPUT_MONEY_MESSAGE);
+	// 	try {
+	// 		int money = scanner.nextInt();
+	// 		scanner.nextLine();
+	// 		return money;
+	// 	} catch (InputMismatchException e) {
+	// 		System.out.println("[Error]");
+	// 		scanner.nextLine();
+	// 		return inputMoney2();
+	// 	}
+	// }
+
 	public String inputWinningNumbers() {
 		System.out.println(INPUT_WINNING_NUMBER_MESSAGE);
 		return scanner.nextLine();
