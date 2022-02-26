@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import model.DefaultLottoWinningPrizeStrategy;
 import model.GenerateStrategy;
 import model.LottoTickets;
@@ -13,7 +14,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class LottoControllerTest {
-    private static final List<Integer> dummyLottoNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
+    private static final Set<Integer> dummyLottoNumber = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
 
     private final LottoController controller = new LottoController();
 
