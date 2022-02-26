@@ -20,8 +20,16 @@ public class WinningResult {
 		return (double)profit / (double)money.getMoney();
 	}
 
-	private long calculateProfit(Map.Entry<LottoRank, Integer> rank) {
-		return rank.getKey().getAmount() * rank.getValue();
+	private long calculateProfit(Map.Entry<LottoRank, Integer> rankWithCount) {
+		return getAmount(rankWithCount.getKey()) * getCount(rankWithCount);
+	}
+
+	private long getAmount(LottoRank rank) {
+		return rank.getAmount();
+	}
+
+	private int getCount(Map.Entry<LottoRank, Integer> rankWithCount) {
+		return rankWithCount.getValue();
 	}
 
 	public Map<LottoRank, Integer> getWinningResult() {
