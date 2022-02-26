@@ -35,7 +35,9 @@ public class Lotto {
 	}
 
 	private void checkDuplicatedLottoNumber(List<LottoNumber> lottoNumbers) {
-		if (lottoNumbers.stream().distinct().count() != lottoNumbers.size()) {
+		if (lottoNumbers.stream()
+			.distinct()
+			.count() != lottoNumbers.size()) {
 			throw new IllegalArgumentException("6개의 숫자는 모두 달라야합니다.");
 		}
 	}
@@ -52,10 +54,5 @@ public class Lotto {
 
 	public List<LottoNumber> getLotto() {
 		return Collections.unmodifiableList(lotto);
-	}
-
-	@Override
-	public String toString() {
-		return "추첨된 번호는 " + lotto + " 입니다.";
 	}
 }

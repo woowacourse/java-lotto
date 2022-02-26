@@ -22,9 +22,13 @@ public class LottoController {
 
 	public void run() {
 		Payment payment = createPayment();
+
 		Lottos lottos = createLottos(payment);
+
 		WinningLotto winningLotto = createWinningLotto();
+
 		LottoResult lottoResult = createLottoResult(lottos.countRank(winningLotto));
+
 		calculateTotalProfitRate(lottoResult, payment);
 	}
 
