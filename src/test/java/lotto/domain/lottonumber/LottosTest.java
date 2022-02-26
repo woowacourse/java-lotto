@@ -48,8 +48,7 @@ class LottosTest {
                 LottoMatchKind.FIVE, 1,
                 LottoMatchKind.FIVE_BONUS, 1,
                 LottoMatchKind.SIX, 1);
-        final double expectedProfitRate = 2031555000 / (double) 5000;
-        final WinningResult expected = new WinningResult(expectedMatchNumberByMatchKind, expectedProfitRate);
+        final WinningResult expected = new WinningResult(expectedMatchNumberByMatchKind, purchaseAmount);
         //when
         final WinningResult actual = lottos.match(winningNumbers, purchaseAmount);
         //then

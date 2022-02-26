@@ -21,16 +21,7 @@ public class Lottos {
         final Map<LottoMatchKind, Integer> matchResult = new EnumMap<>(LottoMatchKind.class);
         initializeResult(matchResult);
         match(matchResult, winningNumbers);
-        final double profitRate = getTotalProfit(matchResult, purchaseAmount);
-        return new WinningResult(matchResult, profitRate);
-    }
-
-    private double getTotalProfit(Map<LottoMatchKind, Integer> matchResult, final PurchaseAmount purchaseAmount) {
-        final long totalProfit = matchResult.keySet()
-                .stream()
-                .mapToLong(lottoMatchKind -> lottoMatchKind.getProfit(matchResult.get(lottoMatchKind)))
-                .sum();
-        return purchaseAmount.getProfitRate(totalProfit);
+        return new WinningResult(matchResult, purchaseAmount);
     }
 
     private void initializeResult(final Map<LottoMatchKind, Integer> result) {
