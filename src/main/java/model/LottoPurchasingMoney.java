@@ -9,16 +9,20 @@ public class LottoPurchasingMoney {
 
     private final int amount;
 
-    public LottoPurchasingMoney(int amount) {
-        validateEnough(amount);
+    private LottoPurchasingMoney(int amount) {
         this.amount = amount;
+    }
+
+    public static LottoPurchasingMoney valueOf(int amount) {
+        validateEnough(amount);
+        return new LottoPurchasingMoney(amount);
     }
 
     public int getAmount() {
         return amount;
     }
 
-    private void validateEnough(int amount) {
+    private static void validateEnough(int amount) {
         if (amount < LOTTO_PRICE) {
             throw new IllegalArgumentException(NOT_ENOUGH_MONEY);
         }

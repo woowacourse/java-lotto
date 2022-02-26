@@ -40,7 +40,7 @@ public class LottoController {
 
     private LottoPurchasingMoney inputMoney() {
         try {
-            return new LottoPurchasingMoney(InputView.inputMoney());
+            return LottoPurchasingMoney.valueOf(InputView.inputMoney());
         } catch (IOException | IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
             return inputMoney();

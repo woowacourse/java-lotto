@@ -14,7 +14,7 @@ class LottoPurchasingMoneyTest {
         int notEnoughAmount = 999;
 
         // then
-        assertThatThrownBy(() -> new LottoPurchasingMoney(notEnoughAmount))
+        assertThatThrownBy(() -> LottoPurchasingMoney.valueOf(notEnoughAmount))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(NOT_ENOUGH_MONEY);
     }
