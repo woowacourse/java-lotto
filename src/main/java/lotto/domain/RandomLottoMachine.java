@@ -18,6 +18,13 @@ public class RandomLottoMachine {
     private RandomLottoMachine() {
     }
 
+    public static Lottos buyLotto(final List<Lotto> manualLottos, final int automaticLottoCounts) {
+        if (automaticLottoCounts < 0) {
+            throw new IllegalArgumentException("[ERROR] 랜덤 로또 구매 갯수는 음수가 들어올 수 없습니다.");
+        }
+        return null;
+    }
+
     public static Lotto createRandomLotto() {
         return new Lotto(createRandomLottoNumbers());
     }
