@@ -13,7 +13,7 @@ public class OutputView {
 
     public static final String LOTTO_PREFIX = "[";
     public static final String SEPARATOR = ", ";
-    public static final String LOTTO_ENDFIX = "]\n";
+    public static final String LOTTO_SUFFIX = "]\n";
 
     public void printErrorMessage(String errorMessage) {
         System.out.println("[ERROR] " + errorMessage);
@@ -46,7 +46,7 @@ public class OutputView {
         }
 
         ticketsInfo = ticketsInfo.substring(0, ticketsInfo.length()-2);
-        ticketsInfo = ticketsInfo + LOTTO_ENDFIX;
+        ticketsInfo = ticketsInfo + LOTTO_SUFFIX;
 
         return ticketsInfo;
     }
