@@ -14,12 +14,12 @@ public class Lotto {
 
     public static final int LOTTO_NUMBER_SIZE = 6;
 
-    private final List<LottoNumber> lottoNumbers = new ArrayList<>();
+    private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         validateSize(lottoNumbers);
         validateDuplicate(lottoNumbers);
-        this.lottoNumbers.addAll(lottoNumbers);
+        this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
     private void validateSize(List<LottoNumber> lottoNumbers) {

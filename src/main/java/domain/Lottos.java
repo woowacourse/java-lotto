@@ -6,9 +6,10 @@ import java.util.List;
 
 public class Lottos {
 
-    private final List<Lotto> lottos = new ArrayList<>();
+    private final List<Lotto> lottos;
 
     public Lottos(int lottoCount, LottoNumberGenerator lottoNumberGenerator) {
+        lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
             List<LottoNumber> lottoNumbers = lottoNumberGenerator.generate();
             lottos.add(new Lotto(lottoNumbers));

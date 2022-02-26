@@ -11,9 +11,10 @@ public class WinningStatistics {
     private static final int DEFAULT_VALUE = 0;
     private static final int PLUS_COUNT = 1;
 
-    private final Map<LottoReward, Integer> statistics = new EnumMap<>(LottoReward.class);
+    private final Map<LottoReward, Integer> statistics;
 
     public WinningStatistics(List<LottoReward> lottoRewards) {
+        statistics = new EnumMap<>(LottoReward.class);
         Arrays.stream(LottoReward.values()).forEach(lottoReward -> statistics.put(lottoReward, DEFAULT_VALUE));
 
         for (LottoReward lottoReward : lottoRewards) {
