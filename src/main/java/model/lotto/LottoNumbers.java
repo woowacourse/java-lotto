@@ -10,7 +10,8 @@ public class LottoNumbers {
     private static final int LOTTO_MAX_NUMBER = 45;
 
     static {
-        IntStream.range(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER).forEach(lottoNumbers::add);
+        IntStream.range(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
+                .forEach(lottoNumbers::add);
     }
 
     public static List<Integer> getLottoNumbers() {
