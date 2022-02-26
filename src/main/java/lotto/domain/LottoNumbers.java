@@ -12,7 +12,6 @@ public class LottoNumbers {
     private static final int MAX_NUMBER = 45;
 
     private static final String DELIMITER = ",";
-    private static final String BLANK = " ";
     private static final String DUPLICATE_ERROR = "로또 개수는 중복이 불가능합니다.";
     private static final String COUNT_ERROR = "로또 개수는 " + LOTTO_COUNT + "개로 제한됩니다.";
 
@@ -27,7 +26,7 @@ public class LottoNumbers {
     private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers(String input) {
-        String[] stringArr = reduceBlank(input).split(DELIMITER);
+        String[] stringArr = input.split(DELIMITER);
         validateDuplicateCount(stringArr);
         validateLottoCount(stringArr);
         this.lottoNumbers = convertStringArrToIntegerList(stringArr);
@@ -50,9 +49,6 @@ public class LottoNumbers {
         return lottoNumbers;
     }
 
-    private String reduceBlank(String input) {
-        return input.replaceAll(BLANK, "");
-    }
 
     private void validateDuplicateCount(String[] arr) {
         long distinctCount = calDistinctCountFromArray(arr);

@@ -10,9 +10,9 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoAmountTest {
     @ParameterizedTest
-    @ValueSource(strings = {"", "    ", "0", "1100", "-1", "aaa"})
+    @ValueSource(ints = {0, 1100, -1})
     @DisplayName("올바르지 않은 금액")
-    void failed(String input) {
+    void failed(int input) {
         assertThatThrownBy(() -> new LottoAmount(input))
                 .isInstanceOf(IllegalArgumentException.class);
     }
@@ -20,7 +20,7 @@ public class LottoAmountTest {
     @Test
     @DisplayName("구매한 로또 개수 구하기")
     void calculateLottoCount() {
-        LottoAmount amount = new LottoAmount("1000");
+        LottoAmount amount = new LottoAmount(1000);
         assertThat(amount.calculateLottoCount()).isEqualTo(1);
     }
 }
