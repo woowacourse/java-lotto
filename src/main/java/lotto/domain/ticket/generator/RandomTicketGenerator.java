@@ -3,8 +3,8 @@ package lotto.domain.ticket.generator;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
+import lotto.domain.ticket.Ticket;
 import lotto.domain.ticket.condition.BallNumberRange;
 import lotto.domain.ticket.condition.TicketSize;
 
@@ -23,11 +23,10 @@ public class RandomTicketGenerator implements TicketGenerator {
     }
 
     @Override
-    public List<Integer> generate() {
+    public Ticket generateTicket() {
         Collections.shuffle(numbers);
         List<Integer> lottoNumbers = numbers.subList(SUBLIST_INCLUSIVE_START_INDEX, SUBLIST_EXCLUSIVE_END_INDEX);
-        Collections.sort(lottoNumbers);
-        return lottoNumbers;
+        return new Ticket(lottoNumbers);
     }
 
 }

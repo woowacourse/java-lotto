@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
 
+import lotto.domain.ticket.Ticket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -18,15 +19,17 @@ class RandomTicketGeneratorTest {
     @DisplayName("랜덤 생성된 숫자 요소는 6개여야 합니다.")
     @Test
     void sizeTest() {
-        final List<Integer> numbers = ticketGenerator.generate();
-        assertThat(numbers.size()).isEqualTo(TICKET_DEFAULT_SIZE);
+        final Ticket ticket = ticketGenerator.generateTicket();
+        final List<Integer> ballNumbers = ticket.getBallNumbers();
+        assertThat(ballNumbers.size()).isEqualTo(TICKET_DEFAULT_SIZE);
     }
 
     @DisplayName("랜덤 생성된 숫자 요소는 1부터 45까지의 범위에 속해야 합니다.")
     @Test
     void rangeTest() {
-        final List<Integer> numbers = ticketGenerator.generate();
-        numbers.forEach(number -> {
+        final Ticket ticket = ticketGenerator.generateTicket();
+        final List<Integer> ballNumbers = ticket.getBallNumbers();
+        ballNumbers.forEach(number -> {
             assertThat(number).isBetween(TICKET_NUMBER_RANGE_INCLUSIVE_START, TICKET_NUMBER_RANGE_EXCLUSIVE_END);
         });
     }

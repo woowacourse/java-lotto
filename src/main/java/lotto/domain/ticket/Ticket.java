@@ -13,7 +13,13 @@ public class Ticket {
 
     public Ticket(final List<Integer> numbers) {
         TicketValidator.validateTicket(numbers);
-        this.balls = generateBalls(numbers);
+        this.balls = generateBalls(sortNumbers(numbers));
+    }
+
+    private List<Integer> sortNumbers(final List<Integer> numbers) {
+        return numbers.stream()
+                .sorted()
+                .collect(Collectors.toUnmodifiableList());
     }
 
     private List<Ball> generateBalls(final List<Integer> numbers) {

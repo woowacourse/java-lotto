@@ -20,8 +20,7 @@ public class Tickets {
     private List<Ticket> generateTickets(final int count, final TicketGenerator ticketGenerator) {
         final List<Ticket> tickets = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            final List<Integer> numbers = ticketGenerator.generate();
-            final Ticket ticket = new Ticket(numbers);
+            final Ticket ticket = ticketGenerator.generateTicket();
             tickets.add(ticket);
         }
         return tickets;
