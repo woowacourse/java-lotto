@@ -45,14 +45,14 @@ public class Lotto {
     }
 
     public Rank getRank(WinningLotto winningLotto, BonusNumber bonusNumber) {
-        int matchCount = getMatchCount(winningLotto.getWinningLotto());
+        int matchCount = getMatchCount(winningLotto);
         boolean contains = isContain(bonusNumber.getBonusNumber());
         return Rank.getRank(matchCount, contains);
     }
 
-    private int getMatchCount(Lotto lotto) {
+    private int getMatchCount(WinningLotto winningLotto) {
         return (int) lottoNumbers.stream()
-                .filter(lotto.lottoNumbers::contains)
+                .filter(winningLotto.getWinningLotto()::isContain)
                 .count();
     }
 
