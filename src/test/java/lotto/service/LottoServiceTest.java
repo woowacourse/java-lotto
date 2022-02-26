@@ -53,19 +53,22 @@ class LottoServiceTest {
     @Test
     @DisplayName("당첨 결과를 반환한다.")
     void getMatchResult() {
-        final Map<LottoMatchKind, Integer> actual = lottoService.getMatchResult(winningNumbers);
+        final Map<LottoMatchKind, Integer> actual = lottoService.getMatchResult(winningNumbers)
+                .getWinningNumberByKind();
         assertThat(actual).containsExactly(
-                entry(LOWER_THAN_THREE, 0), entry(THREE, 1), entry(FOUR, 1), entry(FIVE, 1), entry(FIVE_BONUS, 1), entry(SIX, 1));
+                entry(LOWER_THAN_THREE, 0), entry(THREE, 1),
+                entry(FOUR, 1), entry(FIVE, 1),
+                entry(FIVE_BONUS, 1), entry(SIX, 1));
     }
 
     @Test
     @DisplayName("수익률을 반환한다.")
     void getProfitRate() {
         //given
-        lottoService.getMatchResult(winningNumbers);
         final double expected = 2031555000 / (double) 5000;
         //when
-        final double actual = lottoService.getProfitRate();
+        final double actual = lottoService.getMatchResult(winningNumbers)
+                .getProfitRate();
         //then
         assertThat(actual).isEqualTo(expected);
     }

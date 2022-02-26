@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.domain.WinningResult;
 import lotto.domain.matchkind.LottoMatchKind;
 import lotto.domain.lottonumber.Lotto;
 import lotto.domain.lottonumber.WinningNumbers;
@@ -69,10 +70,10 @@ public class LottoController {
     }
 
     private void printResult(WinningNumbers winningNumbers) {
-        final List<LottoMatchKindDto> results =
-                convertWinningResultsToDtos(lottoService.getMatchResult(winningNumbers));
-        outputView.printCountOfWinningByMatchKind(results);
-        outputView.printProfitRate(lottoService.getProfitRate());
+        final WinningResult winningResult = lottoService.getMatchResult(winningNumbers);
+        final List<LottoMatchKindDto> winningLogs = convertWinningResultsToDtos(winningResult.getWinningNumberByKind());
+        outputView.printCountOfWinningByMatchKind(winningLogs);
+        outputView.printProfitRate(winningResult.getProfitRate());
     }
 
     private List<LottoMatchKindDto> convertWinningResultsToDtos(final Map<LottoMatchKind, Integer> results) {
