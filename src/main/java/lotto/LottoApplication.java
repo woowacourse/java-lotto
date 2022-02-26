@@ -45,7 +45,7 @@ public class LottoApplication {
     private static Lottos buyLotto(final PurchaseLottoCounts counts) {
         try {
             final List<List<Integer>> manualLottos = InputView.inputManualLottos(counts.getManualCount());
-            return LottoMachine.buyLotto(manualLottos, counts.getAutomaticCount());
+            return LottoMachine.buyLotto(manualLottos, counts);
         } catch (IllegalArgumentException e) {
             ErrorView.printErrorMessage(e);
             return buyLotto(counts);

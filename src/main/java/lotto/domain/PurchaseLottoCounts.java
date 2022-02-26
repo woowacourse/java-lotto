@@ -20,6 +20,10 @@ public class PurchaseLottoCounts {
         }
     }
 
+    public boolean isManualSize(final int size) {
+        return size == manualCount;
+    }
+
     public int getManualCount() {
         return manualCount;
     }

@@ -20,12 +20,11 @@ public class LottoMachine {
     private LottoMachine() {
     }
 
-    public static Lottos buyLotto(final List<List<Integer>> manualLottoNumbers, final int automaticLottoCounts) {
-        Objects.requireNonNull(manualLottoNumbers, "[ERROR] 수동 구매 로또는 null이 들어올 수 없습니다.");
-        final List<Lotto> lottos = createLottos(new ArrayList<>(manualLottoNumbers));
-        checkNegativeAutomaticLottoCounts(automaticLottoCounts);
+    public static Lottos buyLotto(final List<List<Integer>> manualNumbers, final PurchaseLottoCounts purchaseCounts) {
+        Objects.requireNonNull(manualNumbers, "[ERROR] 수동 구매 로또는 null이 들어올 수 없습니다.");
+        final List<Lotto> lottos = createLottos(new ArrayList<>(manualNumbers));
 
-        return createLottosWithRandomLottos(automaticLottoCounts, lottos);
+        return addRandomLottos(lottos, purchaseCounts);
     }
 
     private static List<Lotto> createLottos(final List<List<Integer>> manualLottoNumbers) {
@@ -34,14 +33,11 @@ public class LottoMachine {
                 .collect(Collectors.toList());
     }
 
-    private static void checkNegativeAutomaticLottoCounts(final int automaticLottoCounts) {
-        if (automaticLottoCounts < 0) {
-            throw new IllegalArgumentException("[ERROR] 랜덤 로또 구매 갯수는 음수가 들어올 수 없습니다.");
+    private static Lottos addRandomLottos(final List<Lotto> lottos, final PurchaseLottoCounts purchaseCounts) {
+        if (!purchaseCounts.isManualSize(lottos.size())) {
+            throw new IllegalArgumentException("[ERROR] 수동 로또 번호 갯수가 입력된 수동 구매 갯수와 다릅니다.");
         }
-    }
-
-    private static Lottos createLottosWithRandomLottos(final int automaticLottoCounts, final List<Lotto> lottos) {
-        lottos.addAll(createRandomLottosByAutomaticCounts(automaticLottoCounts));
+        lottos.addAll(createRandomLottosByAutomaticCounts(purchaseCounts.getAutomaticCount()));
         return new Lottos(lottos);
     }
 
