@@ -1,12 +1,12 @@
 package model.lotto;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.IntStream;
 
 public class LottoNumbers {
-    private static final List<Integer> lottoNumbers = new ArrayList<>();
+    private static final Set<Integer> lottoNumbers = new HashSet<>();
     private static final int LOTTO_MIN_NUMBER = 1;
     private static final int LOTTO_MAX_NUMBER = 45;
 
@@ -15,7 +15,7 @@ public class LottoNumbers {
                 .forEach(lottoNumbers::add);
     }
 
-    public static List<Integer> getLottoNumbers() {
-        return Collections.unmodifiableList(lottoNumbers);
+    public static Set<Integer> getLottoNumbers() {
+        return Collections.unmodifiableSet(lottoNumbers);
     }
 }

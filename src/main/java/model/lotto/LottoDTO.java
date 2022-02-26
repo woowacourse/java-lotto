@@ -1,16 +1,15 @@
 package model.lotto;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class LottoDTO {
-    private final List<Integer> numbers;
+    private final Set<Integer> numbers;
 
-    public LottoDTO(List<Integer> numbers) {
-        this.numbers = new ArrayList<>(numbers);
+    public LottoDTO(Set<Integer> numbers) {
+        this.numbers = new HashSet<>(numbers);
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
+    public Set<Integer> getNumbers() {
+        return Collections.unmodifiableSet(numbers);
     }
 }

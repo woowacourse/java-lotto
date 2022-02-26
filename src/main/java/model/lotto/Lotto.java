@@ -3,6 +3,7 @@ package model.lotto;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import model.winningnumber.LottoWinningNumberDTO;
 import model.result.Statistics;
@@ -11,9 +12,9 @@ import model.bonusball.BonusBallDTO;
 public class Lotto {
     private static final int CHECKING_BONUS_NUMBER = 5;
 
-    private final List<Integer> numbers;
+    private final Set<Integer> numbers;
 
-    public Lotto(List<Integer> numbers) {
+    public Lotto(Set<Integer> numbers) {
         this.numbers = numbers;
     }
 
