@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -8,48 +9,45 @@ import java.util.stream.Collectors;
 
 public class LottoGame {
 
+    public static final int ADDITION = 1;
+
     private final LottoTickets lottoTickets;
-    private final WinningLotto referee;
+    private final WinningLotto winningLotto;
     private final Map<LottoResult, Integer> resultsStatistics = Arrays
             .stream(LottoResult.values())
             .collect(Collectors.toMap(key -> key, value -> 0, (o1, o2) -> o1, TreeMap::new));
 
-    public LottoGame(LottoTickets lottoTickets, WinningLotto referee) {
+    public LottoGame(LottoTickets lottoTickets, WinningLotto winningLotto) {
         this.lottoTickets = lottoTickets;
-        this.referee = referee;
-        analyzeLottos();
+        this.winningLotto = winningLotto;
+        analyzeLottoTickets();
     }
 
-    private void analyzeLottos() {
+    private void analyzeLottoTickets() {
         for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
-            LottoResult result = referee.getLottoResult(lottoTicket);
+            LottoResult result = winningLotto.getLottoResult(lottoTicket);
             if (result == null) {
                 continue;
             }
-            resultsStatistics.put(result, resultsStatistics.get(result) + 1);
+            resultsStatistics.put(result, resultsStatistics.get(result) + ADDITION);
         }
     }
 
-    public Map<LottoResult, Integer> getResultStatistics() {
-        return resultsStatistics;
-    }
-
-    public float calculateProfitRatio() {
+    public float calculateProfitRatio(int initialPrice) {
         Set<LottoResult> lottoResultKeys = resultsStatistics.keySet();
 
         int totalPrize = lottoResultKeys.stream()
-                .mapToInt(result -> sum(result, resultsStatistics.get(result)))
+                .mapToInt(result -> multiply(result.getPrize(), resultsStatistics.get(result)))
                 .sum();
 
-
-        return (float) totalPrize / getLottoPrice();
+        return (float) totalPrize / initialPrice;
     }
 
-    private int sum(LottoResult lottoResult, int count) {
-        return lottoResult.getPrize() * count;
+    private int multiply(int prize, int count) {
+        return prize * count;
     }
 
-    private int getLottoPrice() {
-        return lottoTickets.getLottoTickets().size() * 1000;
+    public Map<LottoResult, Integer> getResultStatistics() {
+        return Collections.unmodifiableMap(resultsStatistics);
     }
 }
