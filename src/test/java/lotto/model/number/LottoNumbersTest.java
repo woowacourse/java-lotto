@@ -65,7 +65,7 @@ public class LottoNumbersTest {
         assertThat(lottoNumbers.contains(LottoNumber.from("7"))).isFalse();
     }
 
-    @DisplayName("로또 번호에 포함된 숫자가 아닐 때 false를 반환한다")
+    @DisplayName("숫자 5개가 일치하면 match의 return값은 5이다")
     @Test
     public void match_5() {
         LottoNumbers lottoNumbers = LottoNumbers.from(standardNumbers);
@@ -73,7 +73,7 @@ public class LottoNumbersTest {
         assertThat(lottoNumbers.match(comparingNumbers)).isEqualTo(5);
     }
 
-    @DisplayName("로또 번호에 포함된 숫자가 아닐 때 false를 반환한다")
+    @DisplayName("숫자 3개가 일치하면 match의 return값은 3이다")
     @Test
     public void match_3() {
         LottoNumbers lottoNumbers = LottoNumbers.from(standardNumbers);

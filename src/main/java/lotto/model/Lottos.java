@@ -1,7 +1,9 @@
 package lotto.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.model.number.LottoNumbers;
 import lotto.model.prize.MatchResult;
 
 /*
@@ -15,8 +17,13 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static Lottos purchase(Money money) {
-        return new Lottos(Lotto.purchase(money));
+    public static Lottos purchaseAuto(Money money) {
+        List<Lotto> lottos = new ArrayList<>();
+
+        for (int i = 0; i < Lotto.countAvailableTickets(money); i++) {
+            lottos.add(new Lotto(LottoNumbers.ofRandomNumbers()));
+        }
+        return new Lottos(lottos);
     }
 
     public List<MatchResult> match(WinningLotto winningLotto) {

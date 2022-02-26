@@ -14,20 +14,11 @@ public class Lotto {
 
     private final LottoNumbers numbers;
 
-    public Lotto() {
-        this.numbers = LottoNumbers.ofRandomNumbers();
+    public Lotto(LottoNumbers numbers) {
+        this.numbers = numbers;
     }
 
-    public static List<Lotto> purchase(Money money) {
-        List<Lotto> lottos = new ArrayList<>();
-
-        for (int i = 0; i < countAvailableTickets(money); i++) {
-            lottos.add(new Lotto());
-        }
-        return lottos;
-    }
-
-    private static int countAvailableTickets(Money money) {
+    public static int countAvailableTickets(Money money) {
         checkUnit(money);
         return money.countAvailable(PRICE);
     }

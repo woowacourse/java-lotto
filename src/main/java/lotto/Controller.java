@@ -8,7 +8,6 @@ import lotto.model.dto.LottoDTO;
 import lotto.model.dto.PrizeInformationDTO;
 import lotto.model.number.LottoNumber;
 import lotto.model.number.LottoNumbers;
-import lotto.model.prize.MatchResult;
 import lotto.model.prize.PrizeInformations;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -18,7 +17,7 @@ public class Controller {
     public static void run() {
         Money money = askMoneyAmount();
 
-        Lottos lottos = Lottos.purchase(money);
+        Lottos lottos = Lottos.purchaseAuto(money);
         ResultView.showPurchaseCount(lottos.getSize());
         ResultView.showLottos(LottoDTO.from(lottos));
 
