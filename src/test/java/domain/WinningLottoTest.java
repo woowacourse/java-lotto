@@ -17,15 +17,15 @@ class WinningLottoTest {
         List<LottoNumber> purchasedLottoNumbers = Stream.of(1, 2, 3, 4, 44, 6)
             .map(LottoNumber::valueOf)
             .collect(Collectors.toList());
-        List<LottoNumber> winningNumbers = Stream.of(12, 23, 6, 44, 17, 16)
+        List<LottoNumber> winningNumbers = Stream.of(1, 2, 3, 10, 11, 12)
             .map(LottoNumber::valueOf)
             .collect(Collectors.toList());
 
         Lotto purchasedLotto = new Lotto(purchasedLottoNumbers);
 
-        WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumbers), LottoNumber.valueOf(2));
+        WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumbers), LottoNumber.valueOf(4));
 
-        assertThat(winningLotto.calculateMatchCount(purchasedLotto)).isEqualTo(2);
+        assertThat(winningLotto.calculateMatchResult(purchasedLotto)).isEqualTo(LottoReward.FIFTH);
     }
 
     @Test

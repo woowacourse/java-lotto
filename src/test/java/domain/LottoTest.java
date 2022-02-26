@@ -60,7 +60,7 @@ class LottoTest {
             .collect(Collectors.toList());
         Lotto winningLotto = new Lotto(winningNumbers);
 
-        int matchCount = lotto.calculateSameNumber(winningLotto);
+        int matchCount = lotto.calculateMatchCount(winningLotto);
         assertThat(matchCount).isEqualTo(2);
     }
 }

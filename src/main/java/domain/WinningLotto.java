@@ -19,11 +19,10 @@ public class WinningLotto {
         }
     }
 
-    public int calculateMatchCount(Lotto otherLotto) {
-        return winningLotto.calculateSameNumber(otherLotto);
-    }
+    public LottoReward calculateMatchResult(Lotto lotto) {
+        final int matchCount = lotto.calculateMatchCount(winningLotto);
+        final boolean isBonus = lotto.containsNumber(bonusNumber);
 
-    public LottoNumber getBonusNumber() {
-        return bonusNumber;
+        return LottoReward.find(matchCount, isBonus);
     }
 }
