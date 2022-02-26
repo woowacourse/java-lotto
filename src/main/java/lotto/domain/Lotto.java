@@ -16,27 +16,59 @@ public class Lotto {
     private static final String ERROR_LOTTO_COUNT = LOTTO_COUNT + "개의 숫자를 입력해주세요";
     private static final String ERROR_DUPLICATED_NUMBER = "번호가 중복됩니다!";
 
-    private final List<Ball> lotto = new ArrayList<>();
+    private final List<LottoNumber> lotto;
 
     public Lotto() {
         this(selectNumbers());
     }
 
-    public Lotto(final List<String> numbers) {
-        checkValidNumbers(numbers);
-
-        for (String number : numbers) {
-            this.lotto.add(new Ball(number));
-        }
-    }
-
-    public List<String> getLottoNumbers() {
-        return lotto.stream()
-            .map(Ball::toString)
+    public Lotto(final List<Integer> lottoNumbers) {
+        validateLotto(lottoNumbers);
+        this.lotto = new ArrayList<>(lottoNumbers).stream()
+            .map(lottoNumber -> new LottoNumber(lottoNumber))
             .collect(Collectors.toList());
     }
 
-    public boolean contains(Ball number) {
+    private static List<Integer> selectNumbers() {
+        List<Integer> lottoNumbers = getTotalLottoNumbers();
+        Collections.shuffle(lottoNumbers);
+
+        return lottoNumbers.subList(0, LOTTO_COUNT).stream()
+            .sorted()
+            .collect(Collectors.toList());
+    }
+
+    private static List<Integer> getTotalLottoNumbers() {
+        return IntStream.range(MINIMUM_NUMBER, MAXIMUM_NUMBER + 1)
+            .boxed()
+            .collect(Collectors.toList());
+    }
+
+    private void validateLotto(final List<Integer> lotto) {
+        validateLottoCount(lotto);
+        validateDuplicatedNumber(lotto);
+    }
+
+    private void validateLottoCount(final List<Integer> lotto) {
+        if (lotto.size() != LOTTO_COUNT) {
+            throw new IllegalArgumentException(ERROR_LOTTO_COUNT);
+        }
+    }
+
+    private void validateDuplicatedNumber(final List<Integer> lotto) {
+        Set<Integer> distinctNumbers = new HashSet<>(lotto);
+        if (distinctNumbers.size() != lotto.size()) {
+            throw new IllegalArgumentException(ERROR_DUPLICATED_NUMBER);
+        }
+    }
+
+    public List<Integer> getLottoNumbers() {
+        return lotto.stream()
+            .map(LottoNumber::getLottoNumber)
+            .collect(Collectors.toList());
+    }
+
+    public boolean contains(LottoNumber number) {
         return lotto.contains(number);
     }
 
@@ -51,44 +83,5 @@ public class Lotto {
     private int getMatchingCount(Lotto compareLotto) {
         return (int)lotto.stream()
             .filter(compareLotto::contains).count();
-    }
-
-    private static List<String> selectNumbers() {
-        List<Integer> lottoNumbers = getTotalLottoNumbers();
-        Collections.shuffle(lottoNumbers);
-
-        List<Integer> selectedIntNumbers = splitLottoNumbers(lottoNumbers);
-        return selectedIntNumbers.stream()
-            .sorted()
-            .map(Object::toString)
-            .collect(Collectors.toList());
-    }
-
-    private static ArrayList<Integer> splitLottoNumbers(List<Integer> lottoNumbers) {
-        return new ArrayList<>(lottoNumbers.subList(0, LOTTO_COUNT));
-    }
-
-    private static List<Integer> getTotalLottoNumbers() {
-        return IntStream.range(MINIMUM_NUMBER, MAXIMUM_NUMBER + 1)
-            .boxed()
-            .collect(Collectors.toList());
-    }
-
-    private void checkValidNumbers(final List<String> numbers) {
-        checkDuplicatedNumber(numbers);
-        checkLottoCount(numbers);
-    }
-
-    private void checkLottoCount(List<String> numbers) {
-        if (numbers.size() != LOTTO_COUNT) {
-            throw new IllegalArgumentException(ERROR_LOTTO_COUNT);
-        }
-    }
-
-    private void checkDuplicatedNumber(List<String> numbers) {
-        Set<String> distinctNumbers = new HashSet<>(numbers);
-        if (distinctNumbers.size() != numbers.size()) {
-            throw new IllegalArgumentException(ERROR_DUPLICATED_NUMBER);
-        }
     }
 }

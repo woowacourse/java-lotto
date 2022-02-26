@@ -1,5 +1,7 @@
 package lotto.view;
 
+import java.util.stream.Collectors;
+
 import lotto.domain.Lotto;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
@@ -33,8 +35,10 @@ public class Output {
     public static void lottos(Lottos lottos) {
         lottoCount(lottos.getLottos().size());
         for (Lotto lotto : lottos.getLottos()) {
-            String numbers = String.join(LOTTO_DELIMITER, lotto.getLottoNumbers());
-            System.out.printf(LOTTO_FORMAT,numbers);
+            String numbers = lotto.getLottoNumbers().stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(LOTTO_DELIMITER));
+            System.out.printf(LOTTO_FORMAT, numbers);
         }
     }
 
