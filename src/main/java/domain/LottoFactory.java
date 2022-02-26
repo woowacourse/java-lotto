@@ -13,19 +13,15 @@ public class LottoFactory {
 	private static final int LOTTO_PRICE = 1000;
 	private static final int LOTTO_MAX_SIZE_INDEX = 6;
 	private static final int INITIAL_INDEX = 0;
-	private static final int INITIAL_LOTTO_COUNT = 1;
 	private final List<Integer> lottoNumbers = IntStream.range(FIRST_LOTTO_NUMBER, NEXT_NUMBER_OF_LAST_LOTTO_NUMBER)
 		.boxed()
 		.collect(Collectors.toList());
 
 	public List<Lotto> generateLottoTicket(final Money money) {
-		int lottoCount = INITIAL_LOTTO_COUNT;
-		List<Lotto> lottoTicket = new ArrayList<>();
-
-		while (money.isPossibleToPurchase(lottoCount++ * LOTTO_PRICE)) {
-			lottoTicket.add(generateLotto());
-		}
-		return Collections.unmodifiableList(lottoTicket);
+		int purchaseCount = money.findPurchaseLottoCount(LOTTO_PRICE);
+		return IntStream.range(INITIAL_INDEX, purchaseCount)
+			.mapToObj(index -> generateLotto())
+			.collect(Collectors.toUnmodifiableList());
 	}
 
 	private Lotto generateLotto() {

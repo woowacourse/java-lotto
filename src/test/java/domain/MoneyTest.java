@@ -25,24 +25,14 @@ public class MoneyTest {
 	}
 
 	@Test
-	@DisplayName("구매 가능한지 경계값 확인")
-	void checkIsPossibleToPurchase() {
+	@DisplayName("구매 가능한 개수 확인")
+	void checkFindPurchaseCount() {
 		//given
 		int compareMoney = 3000;
 		//when
+		int lottoPrice = 1000;
 		Money money = Money.from("3000");
 		//then
-		assertTrue(money.isPossibleToPurchase(compareMoney));
-	}
-
-	@Test
-	@DisplayName("구매 불가능한지 경계값 확인")
-	void checkIsImPossibleToPurchase() {
-		//given
-		int compareMoney = 4000;
-		//when
-		Money money = Money.from("3000");
-		//then
-		assertFalse(money.isPossibleToPurchase(compareMoney));
+		assertThat(money.findPurchaseLottoCount(lottoPrice)).isEqualTo(3);
 	}
 }

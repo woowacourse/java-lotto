@@ -34,8 +34,8 @@ public class Money {
 		}
 	}
 
-	public boolean isPossibleToPurchase(final int money) {
-		return this.money >= money;
+	public int findPurchaseLottoCount(int lottoPrice) {
+		return money / lottoPrice;
 	}
 
 	@Override
