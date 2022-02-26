@@ -9,7 +9,8 @@ import lotto.domain.vo.LottoNumber;
 
 public class LottoTicket {
 
-    public static final int LOTTO_TICKET_SIZE = 6;
+    private static final int LOTTO_TICKET_SIZE = 6;
+
     private final List<LottoNumber> lottoNumbers;
 
     public LottoTicket(LottoNumberGenerator lottoNumberGenerator) {
