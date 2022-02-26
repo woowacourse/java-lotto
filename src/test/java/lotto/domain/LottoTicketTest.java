@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
 import lotto.domain.enumeration.BallType;
-import lotto.domain.generator.AutoLottoNumberGenerator;
+import lotto.domain.generator.AutoLottoTicketGenerator;
 import lotto.domain.vo.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,7 @@ class LottoTicketTest {
     @Test
     void 로또_티켓_정상_생성() {
         // given & when & then
-        assertThatCode(() -> new LottoTicket(new AutoLottoNumberGenerator()))
+        assertThatCode(() -> new LottoTicket(new AutoLottoTicketGenerator()))
                 .doesNotThrowAnyException();
     }
 
@@ -24,7 +24,7 @@ class LottoTicketTest {
     @Test
     void 로또_티켓_불변_검증() {
         // given
-        LottoTicket lottoTicket = new LottoTicket(new AutoLottoNumberGenerator());
+        LottoTicket lottoTicket = new LottoTicket(new AutoLottoTicketGenerator());
 
         // when
         List<LottoNumber> lottoNumbers = lottoTicket.getLottoNumbers();

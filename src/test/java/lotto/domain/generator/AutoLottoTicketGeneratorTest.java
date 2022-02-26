@@ -8,16 +8,16 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("NonAsciiCharacters")
-class AutoLottoNumberGeneratorTest {
+class AutoLottoTicketGeneratorTest {
 
     @DisplayName("생성된 숫자는 6자리임을 보장한다.")
     @Test
     void 로또_번호_갯수_확인() {
         // given
-        LottoNumberGenerator lottoNumberGenerator = new AutoLottoNumberGenerator();
+        LottoTicketGenerator lottoTicketGenerator = new AutoLottoTicketGenerator();
 
         // when
-        List<LottoNumber> lottoNumbers = lottoNumberGenerator.generate();
+        List<LottoNumber> lottoNumbers = lottoTicketGenerator.generate();
 
         // then
         assertThat(lottoNumbers.size()).isEqualTo(6);
@@ -27,10 +27,10 @@ class AutoLottoNumberGeneratorTest {
     @Test
     void 로또_번호_범위_확인() {
         // given
-        LottoNumberGenerator lottoNumberGenerator = new AutoLottoNumberGenerator();
+        LottoTicketGenerator lottoTicketGenerator = new AutoLottoTicketGenerator();
 
         // when
-        List<LottoNumber> lottoNumbers = lottoNumberGenerator.generate();
+        List<LottoNumber> lottoNumbers = lottoTicketGenerator.generate();
 
         // then
         assertThat(lottoNumbers).isNotIn(0, 46);

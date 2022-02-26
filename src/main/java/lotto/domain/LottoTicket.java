@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import lotto.domain.generator.LottoNumberGenerator;
+import lotto.domain.generator.LottoTicketGenerator;
 import lotto.domain.vo.LottoNumber;
 
 public class LottoTicket {
@@ -13,10 +13,10 @@ public class LottoTicket {
 
     private final List<LottoNumber> lottoNumbers;
 
-    public LottoTicket(LottoNumberGenerator lottoNumberGenerator) {
-        List<LottoNumber> lottoNumbers = lottoNumberGenerator.generate();
+    public LottoTicket(LottoTicketGenerator lottoTicketGenerator) {
+        List<LottoNumber> lottoNumbers = lottoTicketGenerator.generate();
         validateLottoTicket(lottoNumbers);
-        this.lottoNumbers = lottoNumberGenerator.generate();
+        this.lottoNumbers = lottoTicketGenerator.generate();
     }
 
     private void validateLottoTicket(List<LottoNumber> lottoNumbers) {

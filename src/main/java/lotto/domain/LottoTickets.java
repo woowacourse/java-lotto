@@ -6,14 +6,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import lotto.domain.enumeration.Rank;
-import lotto.domain.generator.LottoNumberGenerator;
+import lotto.domain.generator.LottoTicketGenerator;
 
 public class LottoTickets {
 
     private final List<LottoTicket> lottoTickets;
 
-    public LottoTickets(int lottoCount, LottoNumberGenerator lottoNumberGenerator) {
-        this.lottoTickets = generateTickets(lottoCount, lottoNumberGenerator);
+    public LottoTickets(int lottoCount, LottoTicketGenerator lottoTicketGenerator) {
+        this.lottoTickets = generateTickets(lottoCount, lottoTicketGenerator);
     }
 
     public int totalCount() {
@@ -35,11 +35,11 @@ public class LottoTickets {
         return Collections.unmodifiableList(lottoTickets);
     }
 
-    private List<LottoTicket> generateTickets(int lottoCount, LottoNumberGenerator lottoNumberGenerator) {
+    private List<LottoTicket> generateTickets(int lottoCount, LottoTicketGenerator lottoTicketGenerator) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
 
         for (int i = 0; i < lottoCount; i++) {
-            LottoTicket lottoTicket = new LottoTicket(lottoNumberGenerator);
+            LottoTicket lottoTicket = new LottoTicket(lottoTicketGenerator);
 
             lottoTickets.add(lottoTicket);
         }
