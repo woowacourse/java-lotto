@@ -20,7 +20,7 @@ public class LottoFactory {
     private static final int INIT_WIN_PRICE = 0;
 
     private final List<Lotto> issuedLotto = new ArrayList<>();
-    private final List<WinCount> winCountsOfIssuedLotto = new ArrayList<>();
+    private final List<CorrectNumber> correctNumbersOfIssuedLotto = new ArrayList<>();
     private final Money money;
     private Lotto lastWinLotto;
     private LottoNumber bonusNumber;
@@ -31,7 +31,7 @@ public class LottoFactory {
 
     public List<Lotto> issueLotto() {
         issuedLotto.clear();
-        winCountsOfIssuedLotto.clear();
+        correctNumbersOfIssuedLotto.clear();
         generateLotto(money.calculateCounts());
         return Collections.unmodifiableList(issuedLotto);
     }
@@ -68,21 +68,21 @@ public class LottoFactory {
 
     private SortedMap<RankPrice, Integer> extractRankCount() {
         for (Lotto lotto : issuedLotto) {
-            winCountsOfIssuedLotto.add(getWinCount(lotto));
+            correctNumbersOfIssuedLotto.add(getCorrectNumber(lotto));
         }
         return processRankCount();
     }
 
-    private WinCount getWinCount(final Lotto lotto) {
-        WinCount winCount = new WinCount(lotto.compare(this.lastWinLotto), false);
-        if (isSecondRank(lotto, winCount)) {
-            winCount = winCount.convertToSecondRankCount();
+    private CorrectNumber getCorrectNumber(final Lotto lotto) {
+        CorrectNumber correctNumber = new CorrectNumber(lotto.compare(this.lastWinLotto), false);
+        if (isSecondRank(lotto, correctNumber)) {
+            correctNumber = correctNumber.convertToSecondRankCount();
         }
-        return winCount;
+        return correctNumber;
     }
 
-    private boolean isSecondRank(final Lotto lotto, final WinCount winCount) {
-        return winCount.isThirdRankCount() && lotto.isContainNumber(bonusNumber);
+    private boolean isSecondRank(final Lotto lotto, final CorrectNumber correctNumber) {
+        return correctNumber.isThirdRankCount() && lotto.isContainNumber(bonusNumber);
     }
 
     private SortedMap<RankPrice, Integer> processRankCount() {
@@ -98,14 +98,14 @@ public class LottoFactory {
     }
 
     private void countRank(final SortedMap<RankPrice, Integer> rankCount) {
-        for (WinCount winCount : winCountsOfIssuedLotto) {
-            countOverFifthRank(rankCount, winCount);
+        for (CorrectNumber correctNumber : correctNumbersOfIssuedLotto) {
+            countOverFifthRank(rankCount, correctNumber);
         }
     }
 
-    private void countOverFifthRank(final SortedMap<RankPrice, Integer> rankCount, final WinCount winCount) {
-        if (winCount.isInRank()) {
-            final RankPrice rankPrice = winCount.findRankPrice();
+    private void countOverFifthRank(final SortedMap<RankPrice, Integer> rankCount, final CorrectNumber correctNumber) {
+        if (correctNumber.isInRank()) {
+            final RankPrice rankPrice = correctNumber.findRankPrice();
             rankCount.put(rankPrice, rankCount.get(rankPrice) + RANK_COUNT_UNIT);
         }
     }

@@ -1,13 +1,11 @@
 package domain;
 
-public class WinCount {
-
-    private static final int SECOND_RANK_UNIT = 2;
+public class CorrectNumber {
 
     private final int count;
     private boolean bonus;
 
-    public WinCount(final int count, final boolean bonus) {
+    public CorrectNumber(final int count, final boolean bonus) {
         this.count = count;
         this.bonus = bonus;
     }
@@ -16,8 +14,8 @@ public class WinCount {
         return this.count == RankPrice.THIRD.getCount();
     }
 
-    public WinCount convertToSecondRankCount() {
-        return new WinCount(this.count, true);
+    public CorrectNumber convertToSecondRankCount() {
+        return new CorrectNumber(this.count, true);
     }
 
     public boolean isInRank() {
