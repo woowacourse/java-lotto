@@ -9,8 +9,11 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class LottoTest {
 
@@ -101,24 +104,33 @@ public class LottoTest {
     class GetWinningPrice {
 
         @Nested
+        @TestInstance(Lifecycle.PER_CLASS)
         @DisplayName("당첨번호와 보너스번호가 주어지면")
         class Context_with_winning_numbers_and_bonus_number {
 
             @ParameterizedTest
-            @CsvSource(value = {"1|2|3|4|5|6|7|All", "1|2|3|4|5|45|6|FiveAndBonus"}, delimiter = '|')
+            @MethodSource("provideSource")
             @DisplayName("당첨 순위를 알려준다.")
-            void it_returns_winning_price(int first, int second, int third, int fourth, int fifth,
-                                          int sixth,
-                                          int bonus, WinningPrice key
-            ) {
+            void it_returns_winning_price(List<Integer> integers, int bonus, WinningPrice key) {
                 Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
 
-                List<Number> numbers = Stream.of(first, second, third, fourth, fifth, sixth)
+                List<Number> numbers = integers.stream()
                         .map(Number::new)
                         .collect(Collectors.toList());
                 Number bonusNumber = new Number(bonus);
 
                 assertThat(lotto.getWinningPrice(numbers, bonusNumber)).isEqualTo(key);
+            }
+
+            Stream<Arguments> provideSource() {
+                return Stream.of(
+                        Arguments.of(List.of(1, 2, 3, 4, 5, 6), 7, WinningPrice.All),
+                        Arguments.of(List.of(1, 2, 3, 4, 5, 45), 6, WinningPrice.FiveAndBonus),
+                        Arguments.of(List.of(1, 2, 3, 4, 5, 44), 45, WinningPrice.Five),
+                        Arguments.of(List.of(1, 2, 3, 4, 43, 44), 45, WinningPrice.Four),
+                        Arguments.of(List.of(1, 2, 3, 42, 43, 44), 45, WinningPrice.Three),
+                        Arguments.of(List.of(1, 2, 41, 42, 43, 44), 45, WinningPrice.Fail)
+                );
             }
         }
     }
