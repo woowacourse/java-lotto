@@ -69,7 +69,7 @@ public class OutputView {
         if (rank.isBonus()) {
             bonusText = BONUS_FORMAT;
         }
-        System.out.printf(RESULT_FORMAT, rank.getCount(), bonusText, rank.getMoney(), lottoCount);
+        System.out.printf(RESULT_FORMAT, rank.getCount(), bonusText, rank.getPrizeMoney().getMoney(), lottoCount);
     }
 
     public static void printProfitRate(final double profitRate) {

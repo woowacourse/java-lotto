@@ -29,9 +29,9 @@ public class LottoResult {
         Money totalMoney = new Money(0);
 
         for (Rank rank : Rank.values()) {
-            Money money = rank.getMoney();
-            money.mulitply(lottoResult.get(rank));
-            totalMoney.add(money.getMoney());
+            Money prizeMoney = rank.getPrizeMoney();
+            prizeMoney.mulitply(lottoResult.get(rank));
+            totalMoney.add(prizeMoney.getMoney());
         }
 
         return new Profit(totalMoney);

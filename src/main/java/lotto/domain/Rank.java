@@ -13,12 +13,12 @@ public enum Rank {
     FIFTH(new Money(5_000), 3, false),
     NOTHING(new Money(0), 0, false);
 
-    private final Money money;
+    private final Money prizeMoney;
     private final int count;
     private final boolean isBonus;
 
     Rank(Money money, int count, boolean isBonus) {
-        this.money = money;
+        this.prizeMoney = money;
         this.count = count;
         this.isBonus = isBonus;
     }
@@ -30,8 +30,8 @@ public enum Rank {
             .orElse(NOTHING);
     }
 
-    public Money getMoney() {
-        return this.money;
+    public Money getPrizeMoney() {
+        return this.prizeMoney;
     }
 
     public int getCount() {
@@ -44,7 +44,7 @@ public enum Rank {
 
     public static List<Rank> getSortedRanks() {
         return Arrays.stream(values())
-            .sorted(Comparator.comparing(Rank::getMoney))
+            .sorted(Comparator.comparing(Rank::getPrizeMoney))
             .filter(rank -> rank != NOTHING)
             .collect(Collectors.toList());
     }
