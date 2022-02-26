@@ -30,7 +30,7 @@ public class LotteryTickets {
     }
 
     public void add(List<Integer> numbers) {
-        while(ticketCount.isExistCount()) {
+        if (ticketCount.isExistCount()) {
             tickets.add(new LotteryTicket(numbers));
             ticketCount.subtract();
         }

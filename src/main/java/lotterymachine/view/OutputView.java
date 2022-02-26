@@ -1,9 +1,10 @@
 package lotterymachine.view;
 
-import lotterymachine.dto.LotteryResultDto;
 import lotterymachine.model.LotteryTicket;
+import lotterymachine.model.WinningLottery;
 
 import java.util.List;
+import java.util.Map;
 
 public class OutputView {
 
@@ -19,18 +20,21 @@ public class OutputView {
         System.out.println(stringBuilder);
     }
 
-    public static void printStatistics(List<LotteryResultDto> winningLotteries) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("당첨 통계").append("\n").append("---------").append("\n");
-        winningLotteries.forEach(lottery -> stringBuilder.append(getLotteryStatistic(lottery)));
-        System.out.println(stringBuilder);
+    public static void printWinningLotteryResults(Map<WinningLottery, Integer> lotteryTicketResults) {
+        System.out.println("당첨 통계\n" +
+                "---------");
+        for (WinningLottery winningLottery: lotteryTicketResults.keySet()) {
+            printWinningLotteryResult(winningLottery, lotteryTicketResults.get(winningLottery));
+        }
     }
 
-    private static String getLotteryStatistic(LotteryResultDto lottery) {
-        if (lottery.isBonus()) {
-            return String.format("%d개 일치, 보너스 볼 일치 (%d원) - %d개%n", lottery.getCountOfMatchingNumbers(), lottery.getWinningPrice(), lottery.getNumberOfMatchingTicket());
+    private static void printWinningLotteryResult(WinningLottery winningLottery, int number) {
+        if (winningLottery == WinningLottery.BONUS_FIVE) {
+            System.out.printf("%d개 일치, 보너스 볼 일치(%d원)- %d개%n", winningLottery.getNumber(), winningLottery.getPrice(), number);
         }
-        return String.format("%d개 일치 (%d원) - %d개%n", lottery.getCountOfMatchingNumbers(), lottery.getWinningPrice(), lottery.getNumberOfMatchingTicket());
+        if (winningLottery != WinningLottery.ZERO) {
+            System.out.printf("%d개 일치 (%d원)- %d개%n", winningLottery.getNumber(), winningLottery.getPrice(), number);
+        }
     }
 
     public static void printProfitRate(double calculateProfitRate) {
