@@ -1,9 +1,8 @@
 package domain;
 
 public class Amount {
-    private static final String REQUEST_UNIT_OF_1000 = "1000원 단위로 입력해주세요.";
     private static final int LOTTO_PRICE = 1000;
-    private static final String REQUEST_POSITIVE_NUMBER_MESSAGE = "양수를 입력해주세요.";
+    private static final String REQUEST_UNIT_OF_LOTTO_PRICE = String.format("%d원 단위로 입력해주세요.", LOTTO_PRICE);
     private final int amount;
 
     public Amount(int amount) {
@@ -14,13 +13,13 @@ public class Amount {
 
     private void checkAmountPositive(int amount) {
         if (amount <= 0) {
-            throw new IllegalArgumentException(REQUEST_POSITIVE_NUMBER_MESSAGE);
+            throw new IllegalArgumentException("양수를 입력해주세요.");
         }
     }
 
     private void checkAmountDivisible(int amount) {
         if (isDivisibleLottoPrice(amount)) {
-            throw new IllegalArgumentException(REQUEST_UNIT_OF_1000);
+            throw new IllegalArgumentException(REQUEST_UNIT_OF_LOTTO_PRICE);
         }
     }
 
@@ -33,6 +32,6 @@ public class Amount {
     }
 
     public double getYield(long totalAmount) {
-        return (double)totalAmount / amount;
+        return (double) totalAmount / amount;
     }
 }

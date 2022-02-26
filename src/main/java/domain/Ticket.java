@@ -6,10 +6,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Ticket {
-    private static final String REQUEST_NON_EMPTY_INPUT = "빈 문자를 입력할 수 없습니다.";
-    private static final String REQUEST_NON_DUPLICATED_NUMBER = "중복되지 않은 숫자 6개를 입력해주세요.";
-    public static final String DELIMITER = ", ";
     public static final int LOTTO_SIZE = 6;
+    private static final String REQUEST_NON_DUPLICATED_NUMBER = String.format("중복되지 않은 숫자 %d개를 입력해주세요.", LOTTO_SIZE);
+    public static final String DELIMITER = ", ";
     private final Set<LottoNumber> lottoNumbers;
 
     public Ticket(LottoNumbersGenerator lottoNumbersGenerator) {
@@ -36,7 +35,7 @@ public class Ticket {
 
     private static void checkEmpty(String winNumbers) {
         if (winNumbers == null || winNumbers.isBlank()) {
-            throw new IllegalArgumentException(REQUEST_NON_EMPTY_INPUT);
+            throw new IllegalArgumentException("빈 문자를 입력할 수 없습니다.");
         }
     }
 

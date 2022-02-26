@@ -1,23 +1,20 @@
 package view;
 
+import domain.LottoNumber;
+import domain.Rank;
+import domain.Ticket;
+import domain.Tickets;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import domain.LottoNumber;
-import domain.Rank;
-import domain.Ticket;
-import domain.Tickets;
-
 public class OutputView {
 
-    private static final String PURCHASE_MESSAGE = "개를 구매했습니다.";
-    private static final String LOSS_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     private static final String DELIMITER = ", ";
 
     public static void printTicketCount(int ticketCount) {
-        System.out.println(ticketCount + PURCHASE_MESSAGE);
+        System.out.println(ticketCount + "개를 구매했습니다.");
     }
 
     public static void printTickets(Tickets tickets) {
@@ -32,9 +29,9 @@ public class OutputView {
 
     private static List<String> getLottoNumbers(Set<LottoNumber> lottoNumbers) {
         return lottoNumbers.stream()
-            .map(LottoNumber::getNumber)
-            .map(String::valueOf)
-            .collect(Collectors.toList());
+                .map(LottoNumber::getNumber)
+                .map(String::valueOf)
+                .collect(Collectors.toList());
     }
 
     public static void printErrorMessage(String message) {
@@ -46,12 +43,12 @@ public class OutputView {
         System.out.println("---------");
         for (Rank rank : Rank.getRanks()) {
             System.out.println(rank.getCount()
-                + "개 일치"
-                + getBonus(rank)
-                + "(" + rank.getAmount()
-                + "원) - "
-                + getCount(result, rank)
-                + "개");
+                    + "개 일치"
+                    + getBonus(rank)
+                    + "(" + rank.getAmount()
+                    + "원) - "
+                    + getCount(result, rank)
+                    + "개");
         }
     }
 
@@ -72,7 +69,7 @@ public class OutputView {
     public static void printYield(double yield) {
         System.out.print("총 수익률은 " + yield + "입니다.");
         if (yield < 1) {
-            System.out.print(LOSS_MESSAGE);
+            System.out.print("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
         }
         System.out.println();
     }
