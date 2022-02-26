@@ -10,7 +10,6 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class WinningResultTest {
-
     @Test
     @DisplayName("수익률을 반환한다.")
     void getProfitRate() {
@@ -30,5 +29,4 @@ class WinningResultTest {
         //then
         assertThat(actual).isEqualTo(expected);
     }
-
 }
