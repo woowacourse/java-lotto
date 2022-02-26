@@ -9,22 +9,20 @@ import domain.generatestrategy.LotteryGenerateFamily;
 
 public class LotteryGame {
 
-	private static final int LOTTERY_PRICE = 1000;
-
-	private final int theNumberOfLottery;
+	private final PurchaseAmount purchaseAmount;
 	private final LotteryGenerateFamily lotteryGenerator;
 	private Lotteries lotteries;
 	private WinningLottery winningLottery;
 
-	public LotteryGame(int theNumberOfLottery, LotteryGenerateFamily lotteryGenerator) {
-		this.theNumberOfLottery = theNumberOfLottery;
+	public LotteryGame(final PurchaseAmount purchaseAmount, final LotteryGenerateFamily lotteryGenerator) {
+		this.purchaseAmount = purchaseAmount;
 		this.lotteryGenerator = lotteryGenerator;
 		createAutoLottery();
 	}
 
 	private void createAutoLottery() {
 		final List<List<LotteryNumber>> lotteriesNumber = new ArrayList<>();
-		for (int i = 0; i < theNumberOfLottery; i++) {
+		for (int i = 0; i < purchaseAmount.getPurchasedLotteries(); i++) {
 			lotteriesNumber.add(lotteryGenerator.getNumbers());
 		}
 		lotteries = new Lotteries(lotteriesNumber);
@@ -42,11 +40,11 @@ public class LotteryGame {
 	}
 
 	public double makeRankingPercent(final Map<Rank, Integer> rankResult) {
-		int incomeRate = 0;
+		int earningAmount = 0;
 		for (Rank rank : rankResult.keySet()) {
-			incomeRate += rankResult.get(rank) * rank.getPrize();
+			earningAmount += rankResult.get(rank) * rank.getPrize();
 		}
-		return (double)incomeRate / (theNumberOfLottery * LOTTERY_PRICE);
+		return purchaseAmount.calculateEarningRate(earningAmount);
 	}
 
 	public List<Lottery> getLotteries() {

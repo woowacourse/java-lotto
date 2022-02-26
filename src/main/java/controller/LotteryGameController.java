@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import domain.LotteryGame;
+import domain.PurchaseAmount;
 import domain.Rank;
 import domain.generatestrategy.LotteryRandomGeneratorStrategy;
 import view.InputView;
@@ -14,7 +15,7 @@ public class LotteryGameController {
 	LotteryGame lotteryGame;
 
 	public void startPurchaseLotteries() {
-		lotteryGame = new LotteryGame(inputMoney() / 1000, new LotteryRandomGeneratorStrategy());
+		lotteryGame = new LotteryGame(new PurchaseAmount(inputMoney()), new LotteryRandomGeneratorStrategy());
 		lotteryGame.createWinningLottery(inputWinningNumber(), inputBonusBall());
 		OutputView.printLotteries(lotteryGame.getLotteries());
 	}
