@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.List;
 import lotto.domain.LottoPurchaseCounts;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
@@ -13,8 +14,9 @@ public class LottoApplication {
     public static void main(final String[] args) {
         final Money money = InputConvertor.createMoney();
         final LottoPurchaseCounts lottoPurchaseCounts = money.calculatePurchaseCounts(InputView.inputPurchaseManualCount());
-        OutputView.outputBuyLottoCounts(lottoPurchaseCounts.getAutomaticCount());
+        OutputView.outputBuyLottoCounts(lottoPurchaseCounts);
 
+        List<List<Integer>> manualLottos = InputView.inputManualLottos(lottoPurchaseCounts.getManualCount());
         final Lottos lottos = InputConvertor.createLottos(lottoPurchaseCounts.getAutomaticCount());
         OutputView.outputLottos(lottos.getLottos());
 
