@@ -5,10 +5,15 @@ import static lotto.domain.enumeration.Rank.*;
 import java.util.List;
 import java.util.Map;
 import lotto.domain.enumeration.Rank;
+import lotto.domain.vo.LottoNumber;
 import lotto.dto.LottoTicketDto;
 import lotto.dto.LottoTicketsDto;
 
 public class OutputView {
+
+    public static final String LOTTO_PREFIX = "[";
+    public static final String SEPARATOR = ", ";
+    public static final String LOTTO_ENDFIX = "]\n";
 
     public void printErrorMessage(String errorMessage) {
         System.out.println("[ERROR] " + errorMessage);
@@ -19,15 +24,29 @@ public class OutputView {
     }
 
     public void printLottoTicketsInfo(LottoTicketsDto lottoTickets) {
-        System.out.println(getTicketsInfo(lottoTickets.getLottoTickets()));
+        System.out.println(getLottoTicketsInfo(lottoTickets.getLottoTickets()));
     }
 
-    private String getTicketsInfo(List<LottoTicketDto> lottoTickets) {
+    private String getLottoTicketsInfo(List<LottoTicketDto> lottoTickets) {
         String ticketsInfo = "";
 
         for (LottoTicketDto lottoTicket : lottoTickets) {
-            ticketsInfo = ticketsInfo + lottoTicket.getLottoNumbers() + "\n";
+            List<LottoNumber> lottoNumbers = lottoTicket.getLottoNumbers();
+            ticketsInfo = getLottoTicketInfo(ticketsInfo, lottoNumbers);
         }
+
+        return ticketsInfo;
+    }
+
+    private String getLottoTicketInfo(String ticketsInfo, List<LottoNumber> lottoNumbers) {
+        ticketsInfo = ticketsInfo + LOTTO_PREFIX;
+
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            ticketsInfo = ticketsInfo + lottoNumber.getNumber() + SEPARATOR;
+        }
+
+        ticketsInfo = ticketsInfo.substring(0, ticketsInfo.length()-2);
+        ticketsInfo = ticketsInfo + LOTTO_ENDFIX;
 
         return ticketsInfo;
     }
