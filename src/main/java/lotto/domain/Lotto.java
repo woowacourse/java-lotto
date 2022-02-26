@@ -26,18 +26,18 @@ public class Lotto {
                 .collect(Collectors.toSet());
     }
 
-    public static void validateNumbers(List<Integer> numbers) {
+    private void validateNumbers(List<Integer> numbers) {
         validateSize(numbers);
         validateDuplicate(numbers);
     }
 
-    private static void validateSize(List<Integer> numbers) {
+    private void validateSize(List<Integer> numbers) {
         if (numbers.size() != SIZE) {
             throw new IllegalArgumentException(SIZE_ERROR_MESSAGE);
         }
     }
 
-    private static void validateDuplicate(List<Integer> numbers) {
+    private void validateDuplicate(List<Integer> numbers) {
         int noDuplicateCount = (int) numbers.stream()
                 .distinct()
                 .count();
