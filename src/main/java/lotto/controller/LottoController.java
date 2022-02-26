@@ -11,8 +11,8 @@ import lotto.domain.Profit;
 import lotto.domain.PurchaseAmount;
 import lotto.domain.WinningLotto;
 import lotto.validator.NumberValidator;
-import lotto.view.Input;
-import lotto.view.Output;
+import lotto.view.InputView;
+import lotto.view.OutputView;
 
 public class LottoController {
     private PurchaseAmount purchaseAmount;
@@ -24,14 +24,14 @@ public class LottoController {
     }
 
     private Lottos buyLotto() {
-        Output.askPurchaseAmount();
+        OutputView.printPurchaseAmountRequest();
         try {
-            purchaseAmount = new PurchaseAmount(Input.purchaseAmount());
+            purchaseAmount = new PurchaseAmount(InputView.inputPurchaseAmount());
             Lottos lottos = new Lottos(purchaseAmount);
-            Output.lottos(lottos);
+            OutputView.printLottos(lottos);
             return lottos;
         } catch (IllegalArgumentException error) {
-            Output.error(error.getMessage());
+            OutputView.printErrorMessage(error.getMessage());
             return buyLotto();
         }
     }
@@ -42,11 +42,11 @@ public class LottoController {
     }
 
     private Lotto pickLotto() {
-        Output.askWinNumber();
+        OutputView.printWinningNumberRequest();
         try {
-            return new Lotto(convertLottoNumbers(Input.winNumber()));
+            return new Lotto(convertLottoNumbers(InputView.inputWinningNumber()));
         } catch (IllegalArgumentException error) {
-            Output.error(error.getMessage());
+            OutputView.printErrorMessage(error.getMessage());
             return pickLotto();
         }
     }
@@ -62,12 +62,12 @@ public class LottoController {
     }
 
     private WinningLotto combineBonusBall(Lotto lotto) {
-        Output.askBonusBall();
+        OutputView.printBonusBallRequest();
         try {
-            LottoNumber bonusBall = new LottoNumber(convertBonusBall(Input.bonusBall()));
+            LottoNumber bonusBall = new LottoNumber(convertBonusBall(InputView.inputBonusBall()));
             return new WinningLotto(lotto, bonusBall);
         } catch (IllegalArgumentException error) {
-            Output.error(error.getMessage());
+            OutputView.printErrorMessage(error.getMessage());
             return combineBonusBall(lotto);
         }
     }
@@ -78,14 +78,14 @@ public class LottoController {
     }
 
     private void calculateLottoResult(Lottos lottos, WinningLotto winningLotto) {
-        Output.statisticsTitle();
+        OutputView.printStatisticsTitle();
 
         LottoResult lottoResult = new LottoResult();
         lottoResult.addMatchingCount(lottos, winningLotto);
-        Output.lottoResult(lottoResult);
+        OutputView.printLottosResult(lottoResult);
 
         Profit profit = new Profit();
         double profitRate = profit.calculate(lottoResult.getTotalMoney(), purchaseAmount);
-        Output.profitRate(profitRate);
+        OutputView.printProfitRate(profitRate);
     }
 }

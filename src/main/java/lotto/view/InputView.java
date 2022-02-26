@@ -4,19 +4,19 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class Input {
+public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
     private static final String DELIMITER = ",";
 
-    public static String purchaseAmount() {
+    public static String inputPurchaseAmount() {
         return input();
     }
 
-    public static List<String> winNumber() {
+    public static List<String> inputWinningNumber() {
         return Arrays.asList(input().trim().split(DELIMITER));
     }
 
-    public static String bonusBall() {
+    public static String inputBonusBall() {
         return input();
     }
 

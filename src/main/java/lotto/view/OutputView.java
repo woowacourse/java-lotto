@@ -7,7 +7,7 @@ import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
 import lotto.domain.Rank;
 
-public class Output {
+public class OutputView {
     private static final String ERROR_PREFIX = "[ERROR] ";
     private static final String ASK_PURCHASE_AMOUNT = "구입금액을 입력해 주세요.";
     private static final String LOTTO_COUNT = "%d개를 구매했습니다.\n";
@@ -24,16 +24,20 @@ public class Output {
     private static final String PROFIT = "이익";
     private static final String LOSS = "손해";
 
-    public static void error(String errorMessage) {
+    public static void printErrorMessage(String errorMessage) {
         System.out.println(ERROR_PREFIX + errorMessage);
     }
 
-    public static void askPurchaseAmount() {
+    public static void printPurchaseAmountRequest() {
         System.out.println(ASK_PURCHASE_AMOUNT);
     }
 
-    public static void lottos(Lottos lottos) {
-        lottoCount(lottos.getLottos().size());
+    public static void printLottoCount(int lottoCount) {
+        System.out.printf(LOTTO_COUNT, lottoCount);
+    }
+
+    public static void printLottos(Lottos lottos) {
+        printLottoCount(lottos.getLottos().size());
         for (Lotto lotto : lottos.getLottos()) {
             String numbers = lotto.getLottoNumbers().stream()
                 .map(String::valueOf)
@@ -42,29 +46,33 @@ public class Output {
         }
     }
 
-    public static void lottoCount(int lottoCount) {
-        System.out.printf(LOTTO_COUNT, lottoCount);
-    }
-
-    public static void askWinNumber() {
+    public static void printWinningNumberRequest() {
         System.out.println(WIN_NUMBER);
     }
 
-    public static void askBonusBall() {
+    public static void printBonusBallRequest() {
         System.out.println(BONUS_BALL);
     }
 
-    public static void statisticsTitle() {
+    public static void printStatisticsTitle() {
         System.out.println(STATISTICS_TITLE + TITLE_DIVIDING_LINE.repeat(LINE_COUNT));
     }
 
-    public static void lottoResult(LottoResult lottoResult) {
+    public static void printLottosResult(LottoResult lottoResult) {
         for (Rank rank : Rank.getSortedRanks()) {
-            printResult(lottoResult.getLottoResult().get(rank), rank);
+            printLottoResult(lottoResult.getLottoResult().get(rank), rank);
         }
     }
 
-    public static void profitRate(final double profitRate) {
+    private static void printLottoResult(int lottoCount, Rank rank) {
+        String bonusText = " ";
+        if (rank.getIsBonus()) {
+            bonusText = BONUS_FORMAT;
+        }
+        System.out.printf(RESULT_FORMAT, rank.getCount(), bonusText, rank.getMoney(), lottoCount);
+    }
+
+    public static void printProfitRate(final double profitRate) {
         double splitProfitRate = Math.floor(profitRate * 100) / 100.0;
 
         String profitOrNot = PROFIT;
@@ -72,13 +80,5 @@ public class Output {
             profitOrNot = LOSS;
         }
         System.out.printf(PROFIT_FORMAT, splitProfitRate, profitOrNot);
-    }
-
-    private static void printResult(int lottoCount, Rank rank) {
-        String bonusText = " ";
-        if (rank.getIsBonus()) {
-            bonusText = BONUS_FORMAT;
-        }
-        System.out.printf(RESULT_FORMAT, rank.getCount(), bonusText, rank.getMoney(), lottoCount);
     }
 }
