@@ -25,8 +25,8 @@
 - [ ] `LottoMachine` : Controller이며 상태를 가지고 있음
   - [ ] 객체 인스턴스를 여러 스레드에서 동시 사용할 경우 발생하는 문제점
   - [ ] 인스턴스 변수들이 가변이기에 발생하는 문제점
-- [ ] `InputView`, `Lotto`, `Statistics` 모두 로또의 범위가 `1 ~ 45`라는 것을 알고 있어야한다.
-  - [ ] `VO`에 대한 학습 필요 [링크](https://tecoble.techcourse.co.kr/post/2020-06-11-value-object/)
+- [x] `InputView`, `Lotto`, `Statistics` 모두 로또의 범위가 `1 ~ 45`라는 것을 알고 있어야한다.
+  - [x] `VO`에 대한 학습 필요 [링크](https://tecoble.techcourse.co.kr/post/2020-06-11-value-object/)
 - [ ] `WinningNumber`에 존재하는 검증 로직이 `Lotto`에도 있어야함
   - [ ] 이때 검증 로직의 중복 해결 방법
 - [x] `WinningNumber` 검증 로직 중 코드 개선
@@ -114,6 +114,11 @@
          this.loyaltyCardId = loyaltyCardId;
      }
      ```
+7. VO (Value Object)
+- 도메인에서 한 개 또는 그 이상의 속성들을 묶어서 특정 값을 타나내는 객체를 의미한다.
+- Entity와의 구별
+  1. equals & hash code 메서드를 재정의 : 타입, 내부의 속성 값도 같은 두 객체가 있다면 실제로도 같은 객체로 취급
+  2. 수정자(Setter)가 없는 불변 객체여야한다.
 
      
 ### 참조

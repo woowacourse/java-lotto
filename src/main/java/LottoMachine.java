@@ -9,7 +9,7 @@ public class LottoMachine {
         int lottoCount = inputMoney();
         lottos = Lottos.generateLottos(lottoCount);
         OutputView.printLottos(lottos);
-        int bonusBall = inputWinningNumber();
+        LottoNumber bonusBall = inputWinningNumber();
         getStatistics(bonusBall);
     }
 
@@ -20,14 +20,14 @@ public class LottoMachine {
         return count;
     }
 
-    private int inputWinningNumber() {
+    private LottoNumber inputWinningNumber() {
         winningNumber = InputView.askInputWinningNumber();
-        int bonusBall = InputView.askInputBonusBall();
+        LottoNumber bonusBall = InputView.askInputBonusBall();
         winningNumber.checkBonusBall(bonusBall);
         return bonusBall;
     }
 
-    private void getStatistics(int bonusBall) {
+    private void getStatistics(LottoNumber bonusBall) {
         Statistic winningStatistics = lottos.getWinningStatistics(winningNumber, bonusBall);
         OutputView.printStatistics(winningStatistics);
         OutputView.printProfitRate(winningStatistics, money);

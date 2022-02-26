@@ -20,7 +20,7 @@ public class Lottos {
         return lottos.size();
     }
 
-    public Statistic getWinningStatistics(WinningNumber winningNumber, int bonusBall) {
+    public Statistic getWinningStatistics(WinningNumber winningNumber, LottoNumber bonusBall) {
         EnumMap<Rank, Integer> rankCountMap = new EnumMap<>(Rank.class);
         initRankCountMap(rankCountMap);
 
