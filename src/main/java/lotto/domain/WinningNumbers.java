@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import static java.util.stream.Collectors.*;
 import static lotto.domain.enumeration.BallType.BONUS;
 import static lotto.domain.enumeration.BallType.NORMAL;
 
@@ -9,29 +8,30 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import lotto.domain.enumeration.Rank;
+import lotto.domain.vo.LottoNumber;
 
 public class WinningNumbers {
 
     public static final int WINNING_NUMBER_SIZE = 6;
     private final List<WinningNumber> winningNumbers;
 
-    private WinningNumbers(List<Integer> normalWinningNumbers, Integer bonusWinningNumber) {
+    private WinningNumbers(List<LottoNumber> normalWinningNumbers, LottoNumber bonusWinningNumber) {
         validateNormalWinningNumbers(normalWinningNumbers);
         validateDuplication(normalWinningNumbers, bonusWinningNumber);
 
         this.winningNumbers = getWinningNumbers(normalWinningNumbers, bonusWinningNumber);
     }
 
-    private void validateNormalWinningNumbers(List<Integer> normalWinningNumbers) {
+    private void validateNormalWinningNumbers(List<LottoNumber> normalWinningNumbers) {
         if (normalWinningNumbers.size() != WINNING_NUMBER_SIZE) {
             throw new IllegalArgumentException("당첨 번호는 6개여야 합니다.");
         }
     }
 
-    private void validateDuplication(List<Integer> normalWinningNumbers, Integer bonusWinningNumber) {
+    private void validateDuplication(List<LottoNumber> normalWinningNumbers, LottoNumber bonusWinningNumber) {
         normalWinningNumbers.add(bonusWinningNumber);
 
-        Set<Integer> set = new HashSet<>(normalWinningNumbers);
+        Set<LottoNumber> set = new HashSet<>(normalWinningNumbers);
 
         if (set.size() < normalWinningNumbers.size()) {
             throw new IllegalArgumentException("중복된 숫자가 존재할 수 없습니다.");
@@ -40,10 +40,14 @@ public class WinningNumbers {
         normalWinningNumbers.remove(bonusWinningNumber);
     }
 
-    private List<WinningNumber> getWinningNumbers(List<Integer> normalWinningNumbers, Integer bonusWinningNumber) {
+    public static WinningNumbers create(List<LottoNumber> normalWinningNumbers, LottoNumber bonusWinningNumber) {
+        return new WinningNumbers(normalWinningNumbers, bonusWinningNumber);
+    }
+
+    private List<WinningNumber> getWinningNumbers(List<LottoNumber> normalWinningNumbers, LottoNumber bonusWinningNumber) {
         List<WinningNumber> winningNumbers = new ArrayList<>();
 
-        for (Integer normalWinningNumber : normalWinningNumbers) {
+        for (LottoNumber normalWinningNumber : normalWinningNumbers) {
             WinningNumber winningNumber = new WinningNumber(normalWinningNumber, NORMAL);
             winningNumbers.add(winningNumber);
         }
@@ -51,10 +55,6 @@ public class WinningNumbers {
         winningNumbers.add(new WinningNumber(bonusWinningNumber, BONUS));
 
         return winningNumbers;
-    }
-
-    public static WinningNumbers create(List<Integer> normalWinningNumbers, Integer bonusWinningNumber) {
-        return new WinningNumbers(normalWinningNumbers, bonusWinningNumber);
     }
 
     public Rank compare(LottoTicket lottoTicket) {

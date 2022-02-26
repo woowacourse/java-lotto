@@ -31,7 +31,7 @@ class LottoTicketTest {
 
         // then
         assertThatThrownBy(() -> lottoNumbers.add(new LottoNumber(0)))
-                .isInstanceOf(UnsupportedOperationException.class);
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("LottoTicket을 기반으로 당첨 번호가 존재하는지 유무를 반환한다.")
@@ -43,7 +43,7 @@ class LottoTicketTest {
                 new LottoNumber(3), new LottoNumber(4),
                 new LottoNumber(5), new LottoNumber(6)));
 
-        WinningNumber winningNumber = new WinningNumber(1, BallType.BONUS);
+        WinningNumber winningNumber = new WinningNumber(new LottoNumber(2), BallType.BONUS);
 
         // when
         boolean result = lottoTicket.isSame(winningNumber);

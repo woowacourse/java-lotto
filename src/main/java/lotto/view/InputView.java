@@ -5,6 +5,7 @@ import static java.util.stream.Collectors.toList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import lotto.domain.vo.LottoNumber;
 
 public class InputView {
 
@@ -22,30 +23,33 @@ public class InputView {
         return translateInteger(scanner.nextLine());
     }
 
-    public List<Integer> getNormalWinningNumbers() {
+    public List<LottoNumber> getNormalWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 
         String inputWinningNumbers = scanner.nextLine();
 
         List<String> strings = Arrays.asList(inputWinningNumbers.split(SEPARATOR));
 
-        return translateIntegerList(strings);
+        return translateLottoNumberList(strings);
     }
 
-    private List<Integer> translateIntegerList(List<String> values) {
+    private List<LottoNumber> translateLottoNumberList(List<String> values) {
         try {
             return values.stream()
                     .map(Integer::parseInt)
+                    .map(LottoNumber::new)
                     .collect(toList());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("정수여야 합니다. 형식을 확인해주세요.");
         }
     }
 
-    public int getBonusNumber() {
+    public LottoNumber getBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
 
-        return translateInteger(scanner.nextLine());
+        int value = translateInteger(scanner.nextLine());
+
+        return new LottoNumber(value);
     }
 
     private int translateInteger(String value) {
