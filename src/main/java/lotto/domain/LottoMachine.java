@@ -25,8 +25,7 @@ public class LottoMachine {
         final List<Lotto> lottos = createLottos(new ArrayList<>(manualLottoNumbers));
         checkNegativeAutomaticLottoCounts(automaticLottoCounts);
 
-        lottos.addAll(createRandomLottosByAutomaticCounts(automaticLottoCounts));
-        return new Lottos(lottos);
+        return createLottosWithRandomGenerateLottos(automaticLottoCounts, lottos);
     }
 
     private static List<Lotto> createLottos(final List<List<Integer>> manualLottoNumbers) {
@@ -39,6 +38,11 @@ public class LottoMachine {
         if (automaticLottoCounts < 0) {
             throw new IllegalArgumentException("[ERROR] 랜덤 로또 구매 갯수는 음수가 들어올 수 없습니다.");
         }
+    }
+
+    private static Lottos createLottosWithRandomGenerateLottos(int automaticLottoCounts, List<Lotto> lottos) {
+        lottos.addAll(createRandomLottosByAutomaticCounts(automaticLottoCounts));
+        return new Lottos(lottos);
     }
 
     private static List<Lotto> createRandomLottosByAutomaticCounts(final int automaticLottoCounts) {
