@@ -36,9 +36,9 @@
 - [x] `Lottos`에서 불변 객체로 수정
 - [x] stream.forEach() 사용에 대한 고민 필요 [링크](https://homoefficio.github.io/2016/06/26/for-loop-%EB%A5%BC-Stream-forEach-%EB%A1%9C-%EB%B0%94%EA%BE%B8%EC%A7%80-%EB%A7%90%EC%95%84%EC%95%BC-%ED%95%A0-3%EA%B0%80%EC%A7%80-%EC%9D%B4%EC%9C%A0/)
   - 무분별한 Stream forEach 사용이 아닌 가독성과 성능을 고민하여 적절한 선택 필요 
-- [ ] `생성자를 통한 초기화`와 `정적 팩토리 메서드를 통한 초기화` 비교
-  - [ ] `Date`, `LocalDateTime`의 현재 시간을 구하는 로직에 대해 찾아보기
-  - [ ] 생성자를 통한 초기화
+- [x] `생성자를 통한 초기화`와 `정적 팩토리 메서드를 통한 초기화` 비교
+  - [x] `Date`, `LocalDateTime`의 현재 시간을 구하는 로직에 대해 찾아보기
+  - [x] 생성자를 통한 초기화
   - [x] 정적 팩토리 메서드를 통한 초기화
 - [x] assertj와 junit의 동시 사용 -> 통일된 라이브러리 사용으로 유지보수성 향상
 - [x] `LottoTest` : `@ParameterizedTest`를 통해 다양한 케이스의 테스트
@@ -120,9 +120,17 @@
   1. equals & hash code 메서드를 재정의 : 타입, 내부의 속성 값도 같은 두 객체가 있다면 실제로도 같은 객체로 취급
   2. 수정자(Setter)가 없는 불변 객체여야한다.
 
+8. Date vs. LocalDataTime
+   - Date 
+     - `불변 객체`가 아니다. (set 메서드를 제공)
+   - LocalDateTime 
+     - <b>정적 팩토리 메서드, of() 메서드 내부에서 객체 생성을 한다.</b>
+     - `불변 객체`라는 특징을 가지고 있다.
      
 ### 참조
-1) Date vs. LocalDateTime : https://jeong-pro.tistory.com/163
+1) Date vs. LocalDateTime(1) : https://jeong-pro.tistory.com/163
+   - Date vs. LocalDateTime(2) : https://yhmane.tistory.com/121
+   - LocalDateTime과 정적 팩토리 메서드 간의 관계 : https://hashmap27.tistory.com/
    - 정적 팩토리 메서드(1) : https://devlog-wjdrbs96.tistory.com/256
    - 정적 팩토리 메서드(2) : https://tecoble.techcourse.co.kr/post/2020-05-26-static-factory-method/
 2) forEach() vs. for-loop : https://homoefficio.github.io/2016/06/26/for-loop-%EB%A5%BC-Stream-forEach-%EB%A1%9C-%EB%B0%94%EA%BE%B8%EC%A7%80-%EB%A7%90%EC%95%84%EC%95%BC-%ED%95%A0-3%EA%B0%80%EC%A7%80-%EC%9D%B4%EC%9C%A0/
