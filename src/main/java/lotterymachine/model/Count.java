@@ -7,6 +7,10 @@ public class Count {
         this.number = number;
     }
 
+    public static Count from(int number) {
+        return new Count(number);
+    }
+
     public int getNumber() {
         return number;
     }
