@@ -1,8 +1,8 @@
 package lotterymachine;
 
-import lotterymachine.controller.LotteryMachineController;
-import lotterymachine.model.WinningLotteryNumbers;
-import lotterymachine.model.WinningLottery;
+import lotterymachine.domain.LotteryMachineController;
+import lotterymachine.domain.WinningLotteryNumbers;
+import lotterymachine.domain.WinningLottery;
 import lotterymachine.utils.LotteryCalculator;
 import lotterymachine.view.InputView;
 import lotterymachine.view.OutputView;

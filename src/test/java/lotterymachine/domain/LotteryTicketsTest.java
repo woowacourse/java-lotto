@@ -1,4 +1,4 @@
-package lotterymachine.model;
+package lotterymachine.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

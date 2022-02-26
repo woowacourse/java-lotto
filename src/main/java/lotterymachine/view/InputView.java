@@ -16,8 +16,8 @@ public class InputView {
         System.out.println("구입금액을 입력해 주세요.");
         try {
             return toInt(scanner.nextLine());
-        } catch (RuntimeException runtimeException) {
-            System.out.println(runtimeException.getMessage());
+        } catch (IllegalArgumentException illegalArgumentException) {
+            System.out.println(illegalArgumentException.getMessage());
             return getAmount();
         }
     }
@@ -27,8 +27,8 @@ public class InputView {
         try {
             String[] input = scanner.nextLine().split(NUMBER_DELIMITER);
             return toIntegers(input);
-        } catch (RuntimeException runtimeException) {
-            System.out.println(runtimeException.getMessage());
+        } catch (IllegalArgumentException illegalArgumentException) {
+            System.out.println(illegalArgumentException.getMessage());
             return getWinningLotteryNumbers();
         }
     }
@@ -37,8 +37,8 @@ public class InputView {
         System.out.println("보너스 볼을 입력해 주세요.");
         try {
             return toInt(scanner.nextLine());
-        } catch (RuntimeException runtimeException) {
-            System.out.println(runtimeException.getMessage());
+        } catch (IllegalArgumentException illegalArgumentException) {
+            System.out.println(illegalArgumentException.getMessage());
             return getBonusNumber();
         }
     }
@@ -46,8 +46,8 @@ public class InputView {
     private static int toInt(String input) {
         try {
             return Integer.parseInt(input);
-        } catch (RuntimeException runtimeException) {
-            throw new RuntimeException(IS_NOT_NUMBER.getMessage());
+        } catch (IllegalArgumentException illegalArgumentException) {
+            throw new IllegalArgumentException(IS_NOT_NUMBER.getMessage());
         }
     }
 

@@ -1,4 +1,4 @@
-package lotterymachine.model;
+package lotterymachine.domain;
 
 public class TicketCount {
     private int number;

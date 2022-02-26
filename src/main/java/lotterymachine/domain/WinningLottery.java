@@ -1,4 +1,4 @@
-package lotterymachine.model;
+package lotterymachine.domain;
 
 import java.util.Arrays;
 import java.util.EnumMap;
@@ -6,11 +6,11 @@ import java.util.Map;
 
 public enum WinningLottery {
     ZERO(0, 0, false),
-    THREE(3, 5000, false),
-    FOUR(4, 50000, false),
-    FIVE(5, 150000, false),
-    BONUS_FIVE(5, 30000000, true),
-    SIX(6, 2000000000, false);
+    THREE(3, 5_000, false),
+    FOUR(4, 50_000, false),
+    FIVE(5, 150_000, false),
+    BONUS_FIVE(5, 30_000_000, true),
+    SIX(6, 2_000_000_000, false);
 
     private static final int INITIAL_NUMBER_OF_MATCHING_TICKET = 0;
 

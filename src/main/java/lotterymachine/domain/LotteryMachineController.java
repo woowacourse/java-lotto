@@ -1,9 +1,5 @@
-package lotterymachine.controller;
+package lotterymachine.domain;
 
-import lotterymachine.model.LotteryTicket;
-import lotterymachine.model.LotteryTickets;
-import lotterymachine.model.WinningLotteryNumbers;
-import lotterymachine.model.WinningLottery;
 import lotterymachine.utils.LotteryNumbersGenerator;
 
 import java.util.List;

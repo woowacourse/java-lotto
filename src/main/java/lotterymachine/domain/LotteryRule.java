@@ -1,4 +1,4 @@
-package lotterymachine.utils;
+package lotterymachine.domain;
 
 public enum LotteryRule {
     MINIMUM(1),

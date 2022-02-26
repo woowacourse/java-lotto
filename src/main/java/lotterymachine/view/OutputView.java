@@ -1,7 +1,7 @@
 package lotterymachine.view;
 
-import lotterymachine.model.LotteryTicket;
-import lotterymachine.model.WinningLottery;
+import lotterymachine.domain.LotteryTicket;
+import lotterymachine.domain.WinningLottery;
 
 import java.util.List;
 import java.util.Map;

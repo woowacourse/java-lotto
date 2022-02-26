@@ -1,6 +1,4 @@
-package lotterymachine.model;
-
-import lotterymachine.utils.LotteryRule;
+package lotterymachine.domain;
 
 import java.util.List;
 
@@ -56,7 +54,7 @@ public class WinningLotteryNumbers {
                 .distinct()
                 .count();
         if (numbers != input.size()) {
-            throw new RuntimeException(DUPLICATE_NUMBER.getMessage());
+            throw new IllegalArgumentException(DUPLICATE_NUMBER.getMessage());
         }
     }
 }
