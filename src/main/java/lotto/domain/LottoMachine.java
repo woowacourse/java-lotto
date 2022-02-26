@@ -25,7 +25,7 @@ public class LottoMachine {
         final List<Lotto> lottos = createLottos(new ArrayList<>(manualLottoNumbers));
         checkNegativeAutomaticLottoCounts(automaticLottoCounts);
 
-        return createLottosWithRandomGenerateLottos(automaticLottoCounts, lottos);
+        return createLottosWithRandomLottos(automaticLottoCounts, lottos);
     }
 
     private static List<Lotto> createLottos(final List<List<Integer>> manualLottoNumbers) {
@@ -40,7 +40,7 @@ public class LottoMachine {
         }
     }
 
-    private static Lottos createLottosWithRandomGenerateLottos(int automaticLottoCounts, List<Lotto> lottos) {
+    private static Lottos createLottosWithRandomLottos(final int automaticLottoCounts, final List<Lotto> lottos) {
         lottos.addAll(createRandomLottosByAutomaticCounts(automaticLottoCounts));
         return new Lottos(lottos);
     }
