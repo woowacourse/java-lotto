@@ -1,5 +1,6 @@
 package domain;
 
+import static common.TestUtils.createCountsDto;
 import static common.TestUtils.createNewLotto;
 import static domain.LottoGame.LOTTO_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -16,12 +17,10 @@ import org.junit.jupiter.api.Test;
 public class LottoGameTest {
 
     private static LottoReferee referee;
-    private final Lotto firstPrizeLotto = createNewLotto(1, 2, 3, 4, 5, 6);
-    private final Lotto secondPrizeLotto = createNewLotto(1, 2, 3, 4, 5, 7);
-    private final Lotto thirdPrizeLotto = createNewLotto(1, 2, 3, 4, 5, 16);
-    private final Lotto fourthPrizeLotto = createNewLotto(1, 2, 3, 4, 15, 16);
-    private final Lotto fifthPrizeLotto = createNewLotto(1, 2, 3, 14, 15, 16);
-    private final Lotto noPrizeLotto = createNewLotto(11, 12, 13, 14, 15, 16);
+    private static final Lotto firstPrizeLotto = createNewLotto(1, 2, 3, 4, 5, 6);
+    private static final Lotto secondPrizeLotto = createNewLotto(1, 2, 3, 4, 5, 7);
+    private static final Lotto fifthPrizeLotto = createNewLotto(1, 2, 3, 14, 15, 16);
+    private static final Lotto noPrizeLotto = createNewLotto(11, 12, 13, 14, 15, 16);
 
     @BeforeAll
     static void setup() {
@@ -37,7 +36,8 @@ public class LottoGameTest {
 
     @Test
     void getResultStatistics() {
-        Lottos lottos = Lottos.of(getLottosExample(firstPrizeLotto, secondPrizeLotto, noPrizeLotto), 0);
+        Lottos lottos = Lottos.of(getLottosExample(firstPrizeLotto, secondPrizeLotto, noPrizeLotto),
+                createCountsDto(3, 0));
         LottoGame game = new LottoGame(lottos, referee);
 
         Map<LottoResult, Integer> actual = game.getResultStatistics();
@@ -52,7 +52,7 @@ public class LottoGameTest {
 
     @Test
     void calculatePrizePriceRatio_zeroIfNoPrize() {
-        Lottos lottos = Lottos.of(getLottosExample(noPrizeLotto), 0);
+        Lottos lottos = Lottos.of(getLottosExample(noPrizeLotto), createCountsDto(1, 0));
         LottoGame game = new LottoGame(lottos, referee);
 
         float actual = game.calculatePrizePriceRatio();
@@ -62,7 +62,7 @@ public class LottoGameTest {
 
     @Test
     void calculatePrizePriceRatio_fifthPrizeEqualsFiveTimesThePrice() {
-        Lottos lottos = Lottos.of(getLottosExample(fifthPrizeLotto), 0);
+        Lottos lottos = Lottos.of(getLottosExample(fifthPrizeLotto), createCountsDto(1, 0));
         LottoGame game = new LottoGame(lottos, referee);
 
         float actual = game.calculatePrizePriceRatio();
