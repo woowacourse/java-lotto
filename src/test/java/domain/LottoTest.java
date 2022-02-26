@@ -1,36 +1,77 @@
 package domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import util.LottoNumberGenerator;
+
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
 
-    @Test
-    @DisplayName("일치하는 번호 개수에 따른 순위 확인 테스트")
-    public void checkMatchNumber() {
-        Lotto allMatchLotto = new Lotto(LottoNumberGenerator.of(1, 2, 3, 4, 5, 6));
+    private WinningLotto winningLotto;
+
+    @BeforeEach
+    public void setUp() {
+        Lotto lotto = new Lotto(LottoNumberGenerator.of(1, 2, 3, 4, 5, 6));
         LottoNumber bonusBall = LottoNumber.generateLottoNumber(7);
-        WinningLotto winningNumber = new WinningLotto(allMatchLotto, bonusBall);
-        Rank rank = allMatchLotto.match(winningNumber);
+        winningLotto = new WinningLotto(lotto, bonusBall);
+    }
+
+    @Test
+    @DisplayName("6개 일치 -> 1등 당첨 테스트")
+    public void checkFirstWinTest() {
+        Lotto allMatchLotto = new Lotto(LottoNumberGenerator.of(1, 2, 3, 4, 5, 6));
+        Rank rank = allMatchLotto.match(winningLotto);
 
         assertThat(rank).isEqualTo(Rank.FIRST);
     }
 
     @Test
-    @DisplayName("보너스 볼과 일치할 때 2등 당첨 테스트")
-    public void checkBonusBallMatchTest() {
-        Lotto fiveMatchLotto = new Lotto(LottoNumberGenerator.of(1, 2, 3, 4, 5, 44));
-        Lotto lotto = new Lotto(LottoNumberGenerator.of(1, 2, 3, 4, 5, 6));
-        LottoNumber bonusBall = LottoNumber.generateLottoNumber(44);
-
-        WinningLotto winningNumber = new WinningLotto(lotto, bonusBall);
-        Rank rank = fiveMatchLotto.match(winningNumber);
+    @DisplayName("5개 일치, 보너스 볼 일치 -> 2등 당첨 테스트")
+    public void checkBonusBallMatchSecondWinTest() {
+        Lotto fiveMatchLotto = new Lotto(LottoNumberGenerator.of(1, 2, 3, 4, 5, 7));
+        Rank rank = fiveMatchLotto.match(winningLotto);
 
         assertThat(rank).isEqualTo(Rank.SECOND);
+    }
+
+    @Test
+    @DisplayName("5개일치, 보너스 볼 불일치 -> 3등 당첨 테스트")
+    void checkThirdWinTest() {
+        Lotto fiveMatchLotto = new Lotto(LottoNumberGenerator.of(1, 2, 3, 4, 5, 44));
+        Rank rank = fiveMatchLotto.match(winningLotto);
+
+        assertThat(rank).isEqualTo(Rank.THIRD);
+    }
+
+    @Test
+    @DisplayName("4개 일치 -> 4등 당첨 테스트")
+    void checkFourthWinTest() {
+        Lotto fourMatchLotto = new Lotto(LottoNumberGenerator.of(1, 2, 3, 4, 43, 44));
+        Rank rank = fourMatchLotto.match(winningLotto);
+
+        assertThat(rank).isEqualTo(Rank.FOURTH);
+    }
+
+    @Test
+    @DisplayName("3개 일치 -> 5등 당첨 테스트")
+    void checkFifthWinTest() {
+        Lotto threeMatchLotto = new Lotto(LottoNumberGenerator.of(1, 2, 3, 42, 43, 44));
+        Rank rank = threeMatchLotto.match(winningLotto);
+
+        assertThat(rank).isEqualTo(Rank.FIFTH);
+    }
+
+    @Test
+    @DisplayName("꽝 테스트")
+    void checkNoWinTest() {
+        Lotto noMatchLotto = new Lotto(LottoNumberGenerator.of(1, 2, 41, 42, 43, 44));
+        Rank rank = noMatchLotto.match(winningLotto);
+
+        assertThat(rank).isEqualTo(Rank.SIXTH);
     }
 
     @Test
