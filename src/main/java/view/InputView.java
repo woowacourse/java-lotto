@@ -12,10 +12,8 @@ import java.util.stream.Collectors;
 public class InputView {
 
 	private static final Scanner scanner = new Scanner(System.in);
-	private static final String NUMBER_PATTERN = "^[0-9]*$";
-	private static final Pattern COMPILED_NUMBER_PATTERN = Pattern.compile(NUMBER_PATTERN);
-	private static final String WINNING_NUMBER_PATTERN = "^([1-9]{1,2}[,][\\s]?){5}[1-9]{1,2}$";
-	private static final Pattern COMPILED_WINNING_NUMBER_PATTERN = Pattern.compile(WINNING_NUMBER_PATTERN);
+	private static final Pattern NUMBER_PATTERN = Pattern.compile("^[0-9]*$");
+	private static final Pattern WINNING_NUMBER_PATTERN = Pattern.compile("^([1-9]{1,2}[,][\\s]?){5}[1-9]{1,2}$");
 	private static final String WINNING_NUMBER_DELIMITER = ",";
 	private static final int MINIMUM_MONEY = 1000;
 	private static final int MAXIMUM_MONEY = 100000;
@@ -43,7 +41,7 @@ public class InputView {
 	}
 
 	private void validateNumber(String money) {
-		if (!COMPILED_NUMBER_PATTERN.matcher(money).matches()) {
+		if (!NUMBER_PATTERN.matcher(money).matches()) {
 			throw new IllegalArgumentException(INVALID_INPUT_NUMBER_EXCEPTION.getMessage());
 		}
 	}
@@ -80,7 +78,7 @@ public class InputView {
 	}
 
 	private void validateWinningNumber(String winningNumber) {
-		if (!COMPILED_WINNING_NUMBER_PATTERN.matcher(winningNumber).matches()) {
+		if (!WINNING_NUMBER_PATTERN.matcher(winningNumber).matches()) {
 			throw new IllegalArgumentException(INVALID_WINNING_NUMBER_EXCEPTION.getMessage());
 		}
 	}
