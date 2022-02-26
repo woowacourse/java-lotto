@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import java.util.List;
 import java.util.Set;
@@ -14,8 +15,7 @@ class LottoTicketTest {
     @Test
     void 로또_티켓_정상_생성() {
         // given & when & then
-        assertThatCode(() -> new LottoTicket(new AutoLottoNumberGenerator()))
-                .doesNotThrowAnyException();
+        assertDoesNotThrow(() -> new LottoTicket(new AutoLottoNumberGenerator()));
     }
 
     @DisplayName("로또 번호가 중복이면 예외를 던진다.")

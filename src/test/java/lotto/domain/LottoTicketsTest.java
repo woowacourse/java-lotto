@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import java.util.List;
 import lotto.domain.generator.AutoLottoNumberGenerator;
@@ -19,8 +19,7 @@ class LottoTicketsTest {
         LottoNumberGenerator lottoNumberGenerator = new AutoLottoNumberGenerator();
 
         // when & then
-        assertThatCode(() -> new LottoTickets(lottoCount, lottoNumberGenerator))
-                .doesNotThrowAnyException();
+        assertDoesNotThrow(() -> new LottoTickets(lottoCount, lottoNumberGenerator));
     }
 
     @DisplayName("당첨 번호를 전달 받아 판별하여 로또 결과를 반환한다.")

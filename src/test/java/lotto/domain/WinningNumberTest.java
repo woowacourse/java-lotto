@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -16,8 +17,7 @@ class WinningNumberTest {
         int bonusBall = 7;
 
         // when & then
-        assertThatCode(() -> new WinningNumber(new LottoTicket(winningNumbers), new LottoNumber(bonusBall)))
-                .doesNotThrowAnyException();
+        assertDoesNotThrow(() -> new WinningNumber(new LottoTicket(winningNumbers), new LottoNumber(bonusBall)));
     }
 
     @DisplayName("당첨 번호의 총 개수가 7개가 아닌 경우 예외를 던진다.")

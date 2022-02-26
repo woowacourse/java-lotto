@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,7 +14,6 @@ class LottoMachineTest {
         LottoMachine lottoMachine = new LottoMachine();
 
         // when & then
-        assertThatCode(() -> lottoMachine.issue(new Money(14000)))
-                .doesNotThrowAnyException();
+        assertDoesNotThrow(() -> lottoMachine.issue(new Money(14000)));
     }
 }
