@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import domain.Lottery;
 import domain.LotteryNumber;
 
 public class LotteryRandomGeneratorStrategy implements LotteryGenerateFamily{
@@ -21,12 +22,13 @@ public class LotteryRandomGeneratorStrategy implements LotteryGenerateFamily{
 		}
 	}
 
-	public List<LotteryNumber> getNumbers() {
+	public Lottery getNumbers() {
 		Collections.shuffle(numbers);
-		return numbers.stream()
+		List<LotteryNumber> lotteryNumbers =  numbers.stream()
 			.limit(PROPER_LOTTERY_NUMBERS)
 			.sorted()
 			.map(LotteryNumber::new)
 			.collect(Collectors.toList());
+		return new Lottery(lotteryNumbers);
 	}
 }

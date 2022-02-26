@@ -21,11 +21,11 @@ public class LotteryGame {
 	}
 
 	private void createAutoLottery() {
-		final List<List<LotteryNumber>> lotteriesNumber = new ArrayList<>();
+		final List<Lottery> createdLotteries = new ArrayList<>();
 		for (int i = 0; i < purchaseAmount.getPurchasedLotteries(); i++) {
-			lotteriesNumber.add(lotteryGenerator.getNumbers());
+			createdLotteries.add(lotteryGenerator.getNumbers());
 		}
-		lotteries = new Lotteries(lotteriesNumber);
+		lotteries = new Lotteries(createdLotteries);
 	}
 
 	public void createWinningLottery(final List<Integer> winningNumbers, final Integer bonusBall) {

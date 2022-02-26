@@ -1,10 +1,9 @@
 package domain.generatestrategy;
 
-import java.util.List;
 
-import domain.LotteryNumber;
+import domain.Lottery;
 
 @FunctionalInterface
 public interface LotteryGenerateFamily {
-	List<LotteryNumber> getNumbers();
+	Lottery getNumbers();
 }
