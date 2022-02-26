@@ -25,7 +25,7 @@ public class Lotto {
     }
 
     private void validateNull(List<LottoNumber> numbers) {
-        if( numbers == null ){
+        if (numbers == null) {
             throw new NullPointerException(ERROR_NULL_MESSAGE);
         }
     }
