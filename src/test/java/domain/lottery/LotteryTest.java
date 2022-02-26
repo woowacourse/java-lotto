@@ -6,10 +6,17 @@ import static org.assertj.core.api.AssertionsForClassTypes.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import domain.Rank;
 
 public class LotteryTest {
 
@@ -51,6 +58,30 @@ public class LotteryTest {
 			}).isInstanceOf(IllegalArgumentException.class)
 				.hasMessageContaining(INVALID_RANGE_EXCEPTION.getMessage());
 		}
+	}
+
+	@ParameterizedTest
+	@MethodSource("generateLotteryAndCorrectCount")
+	@DisplayName("로또 두개의 번호들이 몇개가 일치하는지 정확히 반환하면 성공")
+	void correct_same_count(List<Integer> lotteryNumbers, int correctWinningCount){
+		//given
+		final Lottery lottery = Lottery.from(generateLotteryNumbers(Arrays.asList(1,2,3,4,5,6)));
+		final Lottery diffLottery = Lottery.from(generateLotteryNumbers(lotteryNumbers));
+		//when
+		final int winningCount = lottery.countSameNumber(diffLottery);
+		//then
+		assertThat(winningCount).isEqualTo(correctWinningCount);
+	}
+
+	static Stream<Arguments> generateLotteryAndCorrectCount() {
+		return Stream.of(
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), 6),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 7), 5),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 8), 5),
+			Arguments.of(Arrays.asList(1, 2, 3, 4, 9, 10), 4),
+			Arguments.of(Arrays.asList(1, 2, 3, 9, 10, 11), 3),
+			Arguments.of(Arrays.asList(1, 2, 9, 10, 11, 12), 2)
+		);
 	}
 
 	private List<LotteryNumber> generateLotteryNumbers(List<Integer> numbers) {
