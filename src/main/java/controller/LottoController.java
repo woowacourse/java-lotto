@@ -2,11 +2,11 @@ package controller;
 
 import java.io.IOException;
 import java.util.List;
+import model.Lotto;
+import model.LottoFactory;
 import model.LottoPurchasingMoney;
 import model.LottoRank;
-import model.LottoTicket;
-import model.LottoTicketFactory;
-import model.WinningNumbers;
+import model.WinningLotto;
 import model.WinningStatistics;
 import view.InputView;
 import view.OutputView;
@@ -15,23 +15,23 @@ public class LottoController {
     public void run() {
         LottoPurchasingMoney inputLottoPurchasingMoney = inputMoney();
 
-        List<LottoTicket> lottoTickets = purchaseLottoTickets(inputLottoPurchasingMoney);
-        OutputView.printPurchasedTickets(lottoTickets);
+        List<Lotto> lotteries = purchaseLottoTickets(inputLottoPurchasingMoney);
+        OutputView.printPurchasedTickets(lotteries);
 
-        WinningNumbers winningNumbers = inputWinningNumbers();
+        WinningLotto winningLotto = inputWinningNumbers();
 
-        WinningStatistics winningStatistics = calculateStatistics(lottoTickets, winningNumbers);
+        WinningStatistics winningStatistics = calculateStatistics(lotteries, winningLotto);
 
         OutputView.printStatistics(winningStatistics, inputLottoPurchasingMoney);
     }
 
-    private WinningStatistics calculateStatistics(List<LottoTicket> lottoTickets, WinningNumbers winningNumbers) {
+    private WinningStatistics calculateStatistics(List<Lotto> lotteries, WinningLotto winningLotto) {
         WinningStatistics winningStatistics = new WinningStatistics();
 
-        for (LottoTicket lottoTicket : lottoTickets) {
+        for (Lotto lotto : lotteries) {
             LottoRank lottoRank = LottoRank.getRank(
-                    winningNumbers.countContaining(lottoTicket),
-                    winningNumbers.containBonusBall(lottoTicket)
+                    winningLotto.countMatching(lotto),
+                    winningLotto.containBonusBall(lotto)
             );
             winningStatistics.put(lottoRank);
         }
@@ -47,17 +47,17 @@ public class LottoController {
         }
     }
 
-    private WinningNumbers inputWinningNumbers() {
+    private WinningLotto inputWinningNumbers() {
         try {
-            return WinningNumbers.of(InputView.inputWinningNumbers(), InputView.inputBonusBall());
+            return WinningLotto.of(InputView.inputWinningNumbers(), InputView.inputBonusBall());
         } catch (IOException | IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
             return inputWinningNumbers();
         }
     }
 
-    private List<LottoTicket> purchaseLottoTickets(LottoPurchasingMoney inputLottoPurchasingMoney) {
-        LottoTicketFactory ticketFactory = LottoTicketFactory.getInstance();
-        return ticketFactory.createTickets(inputLottoPurchasingMoney.getAmount());
+    private List<Lotto> purchaseLottoTickets(LottoPurchasingMoney inputLottoPurchasingMoney) {
+        LottoFactory ticketFactory = LottoFactory.getInstance();
+        return ticketFactory.generateLotteries(inputLottoPurchasingMoney.getAmount());
     }
 }

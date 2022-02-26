@@ -6,19 +6,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoTicketFactory {
-    private static final LottoTicketFactory lottoTicketFactory = new LottoTicketFactory();
+public class LottoFactory {
+    private static final LottoFactory LOTTO_FACTORY = new LottoFactory();
 
     private static final int LOTTO_PRICE = 1000;
 
     private final List<LottoNumber> lottoNumberPool;
 
-    private LottoTicketFactory() {
+    private LottoFactory() {
         lottoNumberPool = createLottoNumbers();
     }
 
-    public static LottoTicketFactory getInstance() {
-        return lottoTicketFactory;
+    public static LottoFactory getInstance() {
+        return LOTTO_FACTORY;
     }
 
     private List<LottoNumber> createLottoNumbers() {
@@ -27,18 +27,18 @@ public class LottoTicketFactory {
                 .collect(Collectors.toList());
     }
 
-    public List<LottoTicket> createTickets(int money) {
-        return IntStream.range(0, getAvailableLottoTicketsCount(money))
-                .mapToObj(i -> createTicket())
+    public List<Lotto> generateLotteries(int money) {
+        return IntStream.range(0, getAvailableLottoCount(money))
+                .mapToObj(i -> generateAuto())
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    private int getAvailableLottoTicketsCount(int money) {
+    private int getAvailableLottoCount(int money) {
         return money / LOTTO_PRICE;
     }
 
-    private LottoTicket createTicket() {
+    private Lotto generateAuto() {
         Collections.shuffle(lottoNumberPool);
-        return new LottoTicket(new ArrayList<>(lottoNumberPool.subList(0, 6)));
+        return Lotto.from(new ArrayList<>(lottoNumberPool.subList(0, 6)));
     }
 }

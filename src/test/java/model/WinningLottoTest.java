@@ -1,6 +1,6 @@
 package model;
 
-import static model.WinningNumbers.WINNING_NUMBERS_CONTAIN_BONUS_BALL;
+import static model.WinningLotto.WINNING_NUMBERS_CONTAIN_BONUS_BALL;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -15,47 +15,47 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-class WinningNumbersTest {
+class WinningLottoTest {
     @ParameterizedTest
-    @MethodSource("provideTicketForCountContaining")
+    @MethodSource("provideTicketForCountMatching")
     @DisplayName("로또 티켓의 당첨 번호 개수를 반환한다")
-    void returnWinningNumberCount(List<Integer> ticketNumbers, int expected) {
+    void returnWinningNumberCount(List<Integer> numbers, int expected) {
         // given
         List<Integer> winnings = Arrays.asList(1,2,3,4,5,6);
         int bonusBallNumber = 7;
-        WinningNumbers winningNumbers = WinningNumbers.of(winnings, bonusBallNumber);
+        WinningLotto winningLotto = WinningLotto.of(winnings, bonusBallNumber);
 
-        List<LottoNumber> lottoNumbers = ticketNumbers.stream()
+        List<LottoNumber> lottoNumbers = numbers.stream()
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
-        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+        Lotto lotto = Lotto.from(lottoNumbers);
 
         // when
-        int count = winningNumbers.countContaining(lottoTicket);
+        int actual = winningLotto.countMatching(lotto);
 
         // then
-        assertThat(count).isEqualTo(expected);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @ParameterizedTest
     @MethodSource("provideTicketForBonusBall")
     @DisplayName("보너스 볼을 포함하면 true 를 반환한다")
-    void bonusBallContaining(List<Integer> ticketNumbers, boolean expected) {
+    void bonusBallContaining(List<Integer> numbers, boolean expected) {
         // given
         List<Integer> winnings = Arrays.asList(1,2,3,4,5,6);
         int bonusBallNumber = 7;
-        WinningNumbers winningNumbers = WinningNumbers.of(winnings, bonusBallNumber);
+        WinningLotto winningLotto = WinningLotto.of(winnings, bonusBallNumber);
 
-        List<LottoNumber> lottoNumbers = ticketNumbers.stream()
+        List<LottoNumber> lottoNumbers = numbers.stream()
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
-        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+        Lotto lotto = Lotto.from(lottoNumbers);
 
         // when
-        boolean result = winningNumbers.containBonusBall(lottoTicket);
+        boolean actual = winningLotto.containBonusBall(lotto);
 
         // then
-        assertThat(result).isEqualTo(expected);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
@@ -68,12 +68,12 @@ class WinningNumbersTest {
         int bonusBallNumber = 1;
 
         // then
-        assertThatThrownBy(() -> WinningNumbers.of(winnings, bonusBallNumber))
+        assertThatThrownBy(() -> WinningLotto.of(winnings, bonusBallNumber))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(WINNING_NUMBERS_CONTAIN_BONUS_BALL);
     }
 
-    private static Stream<Arguments> provideTicketForCountContaining() {
+    private static Stream<Arguments> provideTicketForCountMatching() {
         return Stream.of(
                 Arguments.of(Arrays.asList(1,2,3,4,5,6), 6),
                 Arguments.of(Arrays.asList(7,8,9,10,11,12), 0)

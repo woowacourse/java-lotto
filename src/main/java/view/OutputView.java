@@ -6,10 +6,10 @@ import static model.LottoRank.values;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import model.Lotto;
 import model.LottoNumber;
 import model.LottoPurchasingMoney;
 import model.LottoRank;
-import model.LottoTicket;
 import model.WinningStatistics;
 
 public class OutputView {
@@ -17,9 +17,9 @@ public class OutputView {
         out.println(message);
     }
 
-    public static void printPurchasedTickets(List<LottoTicket> lottoTickets) {
-        out.printf("%d개를 구매했습니다.%n", lottoTickets.size());
-        lottoTickets.forEach(OutputView::printLottoNumbers);
+    public static void printPurchasedTickets(List<Lotto> lotteries) {
+        out.printf("%d개를 구매했습니다.%n", lotteries.size());
+        lotteries.forEach(OutputView::printLottoNumbers);
     }
 
     public static void printStatistics(WinningStatistics winningStatistics, LottoPurchasingMoney inputLottoPurchasingMoney) {
@@ -30,8 +30,8 @@ public class OutputView {
         printEarningsResult(winningStatistics, inputLottoPurchasingMoney);
     }
 
-    private static void printLottoNumbers(LottoTicket lottoTicket) {
-        List<String> lottoNumbers = lottoTicket.getLottoNumbers().stream()
+    private static void printLottoNumbers(Lotto lotto) {
+        List<String> lottoNumbers = lotto.getLottoNumbers().stream()
                 .map(LottoNumber::toString)
                 .collect(Collectors.toUnmodifiableList());
         out.printf("[%s]%n", String.join(", ", lottoNumbers));
