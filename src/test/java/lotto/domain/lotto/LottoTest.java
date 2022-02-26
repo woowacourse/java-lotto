@@ -58,7 +58,7 @@ public class LottoTest {
             @Test
             @DisplayName("1~45의 숫자 중 중복되지 않은 6개를 가진다.")
             void it_contains_six_number_1_to_45() {
-                Lotto lotto = new Lotto();
+                Lotto lotto = Lotto.auto();
                 int actual = 0;
                 for (int i = 1; i < 46; i++) {
                     if (lotto.contains(new Number(String.valueOf(i)))) {

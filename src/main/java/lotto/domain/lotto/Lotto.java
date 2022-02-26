@@ -3,7 +3,6 @@ package lotto.domain.lotto;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -17,27 +16,26 @@ public class Lotto {
     private static final int SIZE = 6;
     private static final int SUB_LIST_FROM_INDEX = 0;
 
-    private static final List<Number> LOTTO_NUMBERS = new ArrayList<>();
+    private static final List<Integer> LOTTO_NUMBERS = new ArrayList<>();
 
     private static final String TEXT_DELIMITER = ", ";
 
     private final Set<Number> numbers;
 
     static {
-        for (int i = Number.MIN_VALUE; i <= Number.MAX_VALUE; i++) {
-            Number number = new Number(String.valueOf(i));
+        for (int number = Number.MIN_VALUE; number <= Number.MAX_VALUE; number++) {
             LOTTO_NUMBERS.add(number);
         }
-    }
-
-    public Lotto() {
-        Collections.shuffle(LOTTO_NUMBERS);
-        this.numbers = new HashSet<>(LOTTO_NUMBERS.subList(SUB_LIST_FROM_INDEX, SIZE));
     }
 
     public Lotto(List<Integer> numbers) {
         validateNumbers(numbers);
         this.numbers = numbers.stream().map(Number::new).collect(Collectors.toSet());
+    }
+
+    public static Lotto auto() {
+        Collections.shuffle(LOTTO_NUMBERS);
+        return new Lotto(LOTTO_NUMBERS.subList(SUB_LIST_FROM_INDEX, SIZE));
     }
 
     public static Lotto of(String text) {

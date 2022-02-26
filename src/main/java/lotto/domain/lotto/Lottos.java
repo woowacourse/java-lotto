@@ -14,8 +14,7 @@ public class Lottos {
         this.lottos = new ArrayList<>();
         int amount = money.getValue();
         while (amount >= Lotto.PRICE) {
-            Lotto lotto = new Lotto();
-            lottos.add(lotto);
+            lottos.add(Lotto.auto());
             amount -= Lotto.PRICE;
         }
     }
