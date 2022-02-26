@@ -14,8 +14,8 @@ import lotto.view.ResultView;
 public class LottoController {
 
     public void run() throws RuntimeException {
-        Lottos lottos = makeLottos(InputView.inputPrice());
-        ResultView.printResult(lottos);
+        Lottos lottos = makeLottos(InputView.inputMoney());
+        ResultView.printBuyingLottosResult(lottos);
 
         WinningLotto winningLotto = makeWinningLotto(InputView.inputWinningNumbers(),
                 InputView.inputBonusNumber());

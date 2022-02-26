@@ -4,8 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.model.lotto.AutoLottoNumbersGenerator;
-import lotto.model.lotto.LottoGenerator;
+import lotto.model.lotto.generator.AutoLottoNumbersGenerator;
+import lotto.model.lotto.generator.LottoGenerator;
 import lotto.model.number.LottoNumber;
 import lotto.model.number.LottoNumbers;
 import org.junit.jupiter.api.Test;

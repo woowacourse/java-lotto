@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import lotto.model.Money;
 import lotto.model.Rank;
+import lotto.model.lotto.generator.AutoLottoNumbersGenerator;
 import lotto.model.number.BonusNumber;
 import lotto.model.number.LottoNumbers;
 

@@ -19,8 +19,10 @@ public class LottosTest {
 
     @BeforeEach
     void init() {
-        List<LottoNumber> numbers1 = Arrays.asList(new LottoNumber(1),new LottoNumber(2),new LottoNumber(3),new LottoNumber(4),new LottoNumber(5),new LottoNumber(6));
-        List<LottoNumber> numbers2 = Arrays.asList(new LottoNumber(3),new LottoNumber(4),new LottoNumber(5),new LottoNumber(6),new LottoNumber(7),new LottoNumber(8));
+        List<LottoNumber> numbers1 = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+        List<LottoNumber> numbers2 = Arrays.asList(new LottoNumber(3), new LottoNumber(4), new LottoNumber(5),
+                new LottoNumber(6), new LottoNumber(7), new LottoNumber(8));
         LottoNumbers lottoNumbers1 = new LottoNumbers(numbers1);
         LottoNumbers lottoNumbers2 = new LottoNumbers(numbers2);
         lotto1 = new Lotto((minimumNumber, maximumNumber, lottoLength) -> lottoNumbers1);
@@ -36,7 +38,8 @@ public class LottosTest {
 
     @Test
     void 등수_개수_테스트() {
-        List<LottoNumber> winningNumbers = Arrays.asList(new LottoNumber(1),new LottoNumber(2),new LottoNumber(3),new LottoNumber(4),new LottoNumber(5),new LottoNumber(6));
+        List<LottoNumber> winningNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
         LottoNumbers winningNumbers1 = new LottoNumbers(winningNumbers);
         lottos.insert(lotto1);
         lottos.insert(lotto2);
@@ -47,7 +50,8 @@ public class LottosTest {
 
     @Test
     void 수익률_테스트() {
-        List<LottoNumber> winningNumbers = Arrays.asList(new LottoNumber(1),new LottoNumber(2),new LottoNumber(3),new LottoNumber(4),new LottoNumber(5),new LottoNumber(6));
+        List<LottoNumber> winningNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
         LottoNumbers winningNumbers1 = new LottoNumbers(winningNumbers);
         lottos.insert(lotto1); // 1등
         lottos.insert(lotto2); // 4등
