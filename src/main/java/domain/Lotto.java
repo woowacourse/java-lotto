@@ -42,7 +42,7 @@ public class Lotto {
         return copiedNumbers.size();
     }
 
-    public boolean hasSameNumber(LottoNumber lottoNumber) {
+    public boolean containsNumber(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
 

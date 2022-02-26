@@ -19,7 +19,7 @@ public class Lottos {
         List<LottoReward> lottoRewards = new ArrayList<>();
         for (Lotto lotto : lottos) {
             int matchCount = winningLotto.calculateMatchCount(lotto);
-            boolean hasBonus = lotto.hasSameNumber(winningLotto.getBonusNumber());
+            boolean hasBonus = lotto.containsNumber(winningLotto.getBonusNumber());
 
             lottoRewards.add(LottoReward.find(matchCount, hasBonus));
         }

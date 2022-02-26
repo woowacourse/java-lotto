@@ -14,7 +14,7 @@ public class WinningLotto {
     }
 
     private void validateDuplicate(Lotto winningLotto, LottoNumber bonusNumber) {
-        if (winningLotto.hasSameNumber(bonusNumber)) {
+        if (winningLotto.containsNumber(bonusNumber)) {
             throw new IllegalArgumentException(ERROR_MESSAGE_BONUS_NUMBER_DUPLICATE);
         }
     }
