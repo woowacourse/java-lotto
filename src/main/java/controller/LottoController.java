@@ -51,7 +51,7 @@ public class LottoController {
 	}
 
 	private void findWinningResult(LottoTicket lottoTicket, WinningNumbers winningNumbers, Money money) {
-		WinningResult winningResult = WinningResult.createWinningResult(lottoTicket, winningNumbers);
+		WinningResult winningResult = new WinningResult(lottoTicket.findWinningResult(winningNumbers));
 		outputView.printWinningResult(winningResult.getWinningResult());
 		outputView.printRateOfProfit(winningResult.getRateOfProfit(money));
 	}
