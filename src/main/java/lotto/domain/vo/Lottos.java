@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import lotto.domain.LottoPrize;
-import lotto.domain.vo.generator.LottoGenerator;
+import lotto.domain.generator.LottoGenerator;
 
 public class Lottos {
 
