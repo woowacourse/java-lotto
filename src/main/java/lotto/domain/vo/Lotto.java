@@ -53,14 +53,13 @@ public class Lotto {
     }
 
     public LottoPrize confirmWinning(WinningNumbers winningNumbers) {
-        int lottoNumberMatches = (int) numbers.stream()
+        int lottoNumberMatchCount = (int) numbers.stream()
                 .filter(winningNumbers::containsLottoNumber)
                 .count();
-        int bonusNumberMatches = (int) numbers.stream()
-                .filter(winningNumbers::equalsBonusNumber)
-                .count();
+        boolean bonusNumberMatch = numbers.stream()
+                .anyMatch(winningNumbers::equalsBonusNumber);
 
-        return LottoPrize.match(lottoNumberMatches, bonusNumberMatches);
+        return LottoPrize.match(lottoNumberMatchCount, bonusNumberMatch);
     }
 
     @Override

@@ -63,9 +63,9 @@ public class ResultView {
         }
         if (prize == LottoPrize.TWICE) {
             return String
-                    .format(LOTTO_RESULT_TWICE_MESSAGE, prize.getLottoNumberMatches(), prize.getReward().get(), number);
+                    .format(LOTTO_RESULT_TWICE_MESSAGE, prize.getLottoNumberMatchCount(), prize.getReward().get(), number);
         }
         return String
-                .format(LOTTO_RESULT_DEFAULT_MESSAGE, prize.getLottoNumberMatches(), prize.getReward().get(), number);
+                .format(LOTTO_RESULT_DEFAULT_MESSAGE, prize.getLottoNumberMatchCount(), prize.getReward().get(), number);
     }
 }

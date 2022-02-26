@@ -22,27 +22,28 @@ public class LottoPrizeTest {
         );
 
     }
+
     @DisplayName("match 메서드 테스트")
     @ParameterizedTest(name = DISPLAY_NAME_ARGUMENTS)
     @MethodSource("matchTestSet")
-    void match_test(int lottoNumberMatches, int bonusNumberMatches, LottoPrize result) {
-        LottoPrize lottoPrize = LottoPrize.match(lottoNumberMatches, bonusNumberMatches);
+    void match_test(int lottoNumberMatchCount, boolean bonusNumberMatch, LottoPrize result) {
+        LottoPrize lottoPrize = LottoPrize.match(lottoNumberMatchCount, bonusNumberMatch);
         assertThat(lottoPrize).isEqualTo(result);
     }
 
     private static Stream<Arguments> matchTestSet() {
         return Stream.of(
-                Arguments.of(0, 0, LottoPrize.MISS),
-                Arguments.of(1, 0, LottoPrize.MISS),
-                Arguments.of(2, 0, LottoPrize.MISS),
-                Arguments.of(3, 0, LottoPrize.FIFTH),
-                Arguments.of(3, 1, LottoPrize.FIFTH),
-                Arguments.of(4, 0, LottoPrize.FOURTH),
-                Arguments.of(4, 1, LottoPrize.FOURTH),
-                Arguments.of(5, 0, LottoPrize.THIRD),
-                Arguments.of(5, 1, LottoPrize.TWICE),
-                Arguments.of(6, 0, LottoPrize.FIRST),
-                Arguments.of(6, 1, LottoPrize.FIRST)
-                );
+                Arguments.of(0, false, LottoPrize.MISS),
+                Arguments.of(1, false, LottoPrize.MISS),
+                Arguments.of(2, false, LottoPrize.MISS),
+                Arguments.of(3, false, LottoPrize.FIFTH),
+                Arguments.of(3, true, LottoPrize.FIFTH),
+                Arguments.of(4, false, LottoPrize.FOURTH),
+                Arguments.of(4, true, LottoPrize.FOURTH),
+                Arguments.of(5, false, LottoPrize.THIRD),
+                Arguments.of(5, true, LottoPrize.TWICE),
+                Arguments.of(6, false, LottoPrize.FIRST),
+                Arguments.of(6, true, LottoPrize.FIRST)
+        );
     }
 }

@@ -91,7 +91,7 @@
 - [x] `WinningNumber`의 `List<LottoNumber>`는 이미 있는 일급 컬렉션을 사용해보면 어떨까?
     - `WinningNumber`의 `validateLottoNumbersDuplication()`은 `Lotto`에서 체크하고 있는 validate와 다른가?
     - 완전 같은 기능이다. `List<LottoNumber>`를 Lotto 일급 컬렉션을 사용하면 WinningNumber가 하던 일부 검증을 Lotto가 하게된다.
-- [ ] `LottoPrize`에서 `checkMatches`의 조건 분기를 합칠 수 있지 않을까?
+- [x] `LottoPrize`에서 `checkMatches`의 조건 분기를 합칠 수 있지 않을까?
 - [ ] 테스트의 핵심 역할 중 하나는 프로덕션 코드에 대한 명세(문서)라는 것을 고려하며 전체적으로 테스트를 다시 확인해보자!
     - 테스트를 작성할 때 명세는 추상적인 표현보다 구체적인 문장으로 표현하는 게 좋다.
     - 테스트를 보면 해당 코드의 동작, 기능 들을 알 수 있어야 한다.
