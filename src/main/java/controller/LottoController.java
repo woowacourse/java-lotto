@@ -28,13 +28,14 @@ public class LottoController {
     private WinningStatistics calculateStatistics(List<Lotto> lotteries, WinningLotto winningLotto) {
         WinningStatistics winningStatistics = new WinningStatistics();
 
-        for (Lotto lotto : lotteries) {
+        lotteries.forEach(lotto -> {
             LottoRank lottoRank = LottoRank.getRank(
                     winningLotto.countMatching(lotto),
                     winningLotto.containBonusBall(lotto)
             );
             winningStatistics.put(lottoRank);
-        }
+        });
+
         return winningStatistics;
     }
 

@@ -26,10 +26,8 @@ public class WinningStatistics {
     }
 
     long getTotalPrize() {
-        long totalPrize = 0;
-        for (LottoRank lottoRank : winningStatistics.keySet()) {
-            totalPrize += lottoRank.getPrizeMoney() * winningStatistics.get(lottoRank);
-        }
-        return totalPrize;
+        return winningStatistics.keySet().stream()
+                .mapToLong(lottoRank -> lottoRank.getPrizeMoney() * winningStatistics.get(lottoRank))
+                .sum();
     }
 }
