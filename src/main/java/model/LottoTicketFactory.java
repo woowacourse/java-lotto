@@ -11,10 +11,10 @@ public class LottoTicketFactory {
 
     private static final int LOTTO_PRICE = 1000;
 
-    private final List<LottoNumber> availableLottoNumbers;
+    private final List<LottoNumber> lottoNumberPool;
 
     private LottoTicketFactory() {
-        availableLottoNumbers = createLottoNumbers();
+        lottoNumberPool = createLottoNumbers();
     }
 
     public static LottoTicketFactory getInstance() {
@@ -38,7 +38,7 @@ public class LottoTicketFactory {
     }
 
     private LottoTicket createTicket() {
-        Collections.shuffle(availableLottoNumbers);
-        return new LottoTicket(new ArrayList<>(availableLottoNumbers.subList(0, 6)));
+        Collections.shuffle(lottoNumberPool);
+        return new LottoTicket(new ArrayList<>(lottoNumberPool.subList(0, 6)));
     }
 }
