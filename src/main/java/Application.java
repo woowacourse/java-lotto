@@ -16,7 +16,7 @@ public class Application {
 
     public static void main(String[] args) {
         Lottos lottos = controller.initCustomerLottos(requestTotalLottoPrice());
-        printPurchaseInfo(lottos.getLottos());
+        printPurchaseInfo(lottos);
 
         LottoReferee referee = controller.initLottoReferee(requestWinningNumbers(), requestBonusNumber());
 
