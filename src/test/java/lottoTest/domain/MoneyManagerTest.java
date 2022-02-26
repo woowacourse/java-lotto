@@ -29,9 +29,10 @@ class MoneyManagerTest {
                 .hasMessageContaining("구입 금액은 양의 정수 형태로 입력해야 합니다.");
     }
 
-    @Test
-    void 입력이_로또_금액_단위로_나누어_떨어지_않는_경우_테스트() {
-        assertThatThrownBy(() -> new MoneyManager(13500))
+    @ParameterizedTest(name = "[{index}] 구입 금액: {0}")
+    @ValueSource(ints = {999, 1001, 13500})
+    void 입력이_로또_금액_단위로_나누어_떨어지_않는_경우_테스트(int money) {
+        assertThatThrownBy(() -> new MoneyManager(money))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessageContaining("구입 금액은")
                 .hasMessageContaining("단위로 나누어 떨어져야 합니다");
