@@ -1,6 +1,6 @@
 package lotto.domain;
 
-public class Amount {
+public class LottoAmount {
     private static final int MIN_COST = 1000;
     private static final double DECIMAL = 1.0;
     private static final String NOT_NUMBER_ERROR = "금액은 숫자만 등록 가능합니다.";
@@ -9,7 +9,7 @@ public class Amount {
 
     private final int amount;
 
-    public Amount(String input) {
+    public LottoAmount(String input) {
         int amount = convertToInt(input);
         validateAmount(amount);
         this.amount = amount;
