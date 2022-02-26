@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 public class Lottos {
 
-    private List<Lotto> lottos;
+    private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
         validateSize(lottos);

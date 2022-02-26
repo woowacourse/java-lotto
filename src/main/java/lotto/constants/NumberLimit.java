@@ -4,7 +4,7 @@ public enum NumberLimit {
 
     MINIMUM(1), MAXIMUM(45);
 
-    private int limit;
+    private final int limit;
 
     NumberLimit(int limit) {
         this.limit = limit;
