@@ -18,7 +18,9 @@ public class InputView {
     public static Money getAmount() {
         System.out.println("구입금액을 입력해 주세요.");
         try {
-            return new Money(toInt(scanner.nextLine()));
+            int amount = toInt(scanner.nextLine());
+            validatePurchasable(amount);
+            return new Money(amount);
         } catch (RuntimeException runtimeException) {
             System.out.println(runtimeException.getMessage());
             return getAmount();
@@ -47,6 +49,12 @@ public class InputView {
         } catch (RuntimeException runtimeException) {
             System.out.println(runtimeException.getMessage());
             return getBonusNumber(numbers);
+        }
+    }
+
+    private static void validatePurchasable(int number) {
+        if (number < TICKET_PRICE.getNumber()) {
+            throw new IllegalArgumentException(NOT_PURCHASABLE.getMessage());
         }
     }
 
