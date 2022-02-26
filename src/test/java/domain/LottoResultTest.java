@@ -38,6 +38,6 @@ public class LottoResultTest {
 	void make_null() {
 		assertThatThrownBy(() -> new LottoResult(null))
 			.isInstanceOf(NullPointerException.class)
-			.hasMessage(null);
+			.hasMessage("[ERROR] ranks가 null 입니다.");
 	}
 }
