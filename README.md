@@ -2,6 +2,51 @@
 
 로또 미션 저장소
 
+## Participants
+앤지 & 조시
+
+## 리펙토링 목록
+- 뭐하지
+
+
+- 매직넘버
+  - InputView 
+
+
+- final
+  - Money
+    - 한 번 입력받은 돈은 그 값이 바뀌지 않는다.
+
+
+- 생성자
+  - Money
+    - String이 아닌 int로 받는다.
+    - WHY???
+  - Lotto
+    - 생성자가 필요할까?
+    - 아니요 ~_~
+    - 고치자
+  - LottoGame
+    - 생성자 두개가 모두 필요할까?
+    - 아니요 !_!
+    - 고치자
+
+    
+- 역할/ 책임 분리
+  - 로또 구매 시 money to tickets
+    - Money에서
+      - WHY??
+      - LottoGame -> Money야 돈좀 바꿔줘
+      - LottoGenerator를 바꾸는건?
+    - 입력한 금액이 LOTTO_PRICE 보다 적을때?
+      - 구매를 안하셨군요 잘하셨습니다...!
+  - LottoNumber generate 관련
+      - Lotto가 LottoNumber를 생성해야 하나?
+      - Lottos에서 generate하는 것에 관하여
+  - 당첨번호 체크 관련
+    - Lotto가 스스로 당첨번호를 체크할 필요가 있나?
+    - 필요 없으면 Money는 왜 스스로 돈을 바꿔야 하는지?
+
 ## 우아한테크코스 코드리뷰
 
 - [온라인 코드 리뷰 과정](https://github.com/woowacourse/woowacourse-docs/blob/master/maincourse/README.md)
