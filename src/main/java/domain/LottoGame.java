@@ -6,8 +6,8 @@ public class LottoGame {
 
     private final Lottos lottos;
 
-    public LottoGame(final int lottoCounts) {
-        this.lottos = new Lottos(lottoCounts, new RandomLottoNumberGenerator());
+    public LottoGame(final int lottoCounts, LottoNumberGenerator lottoNumberGenerator) {
+        this.lottos = new Lottos(lottoCounts, lottoNumberGenerator);
     }
 
     public WinningStatistics calculateWinningStatistics(WinningLotto winningLotto) {

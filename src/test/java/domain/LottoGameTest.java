@@ -13,7 +13,7 @@ public class LottoGameTest {
         int amount = 5000;
         LottoMoney lottoMoney = new LottoMoney(amount);
 
-        LottoGame lottoGame = new LottoGame(lottoMoney.calculateLottoCount());
+        LottoGame lottoGame = new LottoGame(lottoMoney.calculateLottoCount(), new RandomLottoNumberGenerator());
 
         assertThat(lottoGame).isNotNull();
     }
