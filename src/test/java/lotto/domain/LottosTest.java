@@ -1,6 +1,8 @@
 package lotto.domain;
 
+import static lotto.utils.LottoGenerator.generateLottoNumbers;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
 import java.util.ArrayList;
@@ -12,26 +14,27 @@ import org.junit.jupiter.api.Test;
 
 class LottosTest {
 
-    @DisplayName("Lottos 생성자는 인자를 받지 않는다.")
+    @DisplayName("Lottos 생성자는 Lotto 리스트를 입력받아 값을 초기화한다.")
     @Test
     void constructor() {
-        assertThatNoException().isThrownBy(Lottos::new);
+        List<Lotto> testLottos = getTestLottos();
+
+        assertThatNoException().isThrownBy(() -> new Lottos(testLottos));
     }
 
-    @DisplayName("purchase 메서드는 입력한 Money 만큼의 로또를 생성하여 저장한다.")
+    @DisplayName("Lottos 생성자는 null을 입력받으면 예외를 발생한다.")
     @Test
-    void purchase() {
-        Lottos lottos = new Lottos();
-        lottos.purchase(new Money(10000));
-
-        assertThat(lottos.getLottos().size()).isEqualTo(10);
+    void constructor_errorOnNull() {
+        assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> new Lottos(null))
+                .withMessage("입력된 값이 null이면 안됩니다.");
     }
 
     @DisplayName("confirmWinnings 메서드는 WinningNumbers를 입력받아 당첨결과를 맵으로 반환한다.")
     @Test
     void confirmWinnings() {
-        Lottos lottos = new Lottos();
-        lottos.purchase(new Money(10000));
+        List<Lotto> lottoPurchased = getTestLottos();
+
+        Lottos lottos = new Lottos(lottoPurchased);
 
         WinningNumbers winningNumbers = getWinningNumbers();
 
@@ -39,6 +42,14 @@ class LottosTest {
         Map<LottoPrize, Integer> lottoMatches = lottos.confirmWinnings(winningNumbers);
 
         assertThat(testMap).isEqualTo(lottoMatches);
+    }
+
+    private List<Lotto> getTestLottos() {
+        List<Lotto> lottoPurchased = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            lottoPurchased.add(new Lotto(generateLottoNumbers()));
+        }
+        return lottoPurchased;
     }
 
     private Map<LottoPrize, Integer> initTestMap(Lottos lottos, WinningNumbers winningNumbers) {

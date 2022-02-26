@@ -28,6 +28,13 @@ class LottoTest {
         assertThatNoException().isThrownBy(() -> new Lotto(lottoNumbers));
     }
 
+    @DisplayName("Lotto 생성자는 null을 입력받으면 예외를 발생한다.")
+    @Test
+    void constructor_errorOnNull() {
+        assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> new Lotto(null))
+                .withMessage("입력된 값이 null이면 안됩니다.");
+    }
+
     @DisplayName("Lotto 생성자는 인자로 6개가 아닌 숫자를 입력했을 때 예외가 발생한다.")
     @Test
     void constructor_errorNotSix() {

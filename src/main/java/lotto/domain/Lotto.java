@@ -14,13 +14,20 @@ public class Lotto {
 
     private static final int LOTTO_SIZE = 6;
 
-    private final List<LottoNumber> numbers = new ArrayList<>();
+    private final List<LottoNumber> numbers;
 
     public Lotto(List<LottoNumber> numbers) {
-        validateNumberSix(numbers);
-        validateDuplication(numbers);
+        validateNull(numbers);
+        this.numbers = new ArrayList<>(numbers);
 
-        this.numbers.addAll(numbers);
+        validateNumberSix(this.numbers);
+        validateDuplication(this.numbers);
+    }
+
+    private void validateNull(List<LottoNumber> numbers) {
+        if( numbers == null ){
+            throw new NullPointerException(ERROR_NULL_MESSAGE);
+        }
     }
 
     private void validateNumberSix(List<LottoNumber> numbers) {
