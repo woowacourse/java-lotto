@@ -19,8 +19,6 @@ public class Lotto {
 
     private static final List<Number> LOTTO_NUMBERS = new ArrayList<>();
 
-    private static final String SIZE_ERROR_MESSAGE = "6개의 숫자가 필요합니다.";
-    private static final String DUPLICATE_ERROR_MESSAGE = "중복은 허용하지 않습니다.";
     private static final String TEXT_DELIMITER = ", ";
 
     private final Set<Number> numbers;
@@ -68,7 +66,7 @@ public class Lotto {
 
     private static void validateSize(List<Integer> numbers) {
         if (numbers.size() != SIZE) {
-            throw new IllegalArgumentException(SIZE_ERROR_MESSAGE);
+            throw new IllegalArgumentException("6개의 숫자가 필요합니다.");
         }
     }
 
@@ -76,7 +74,7 @@ public class Lotto {
         int noDuplicateCount = (int)numbers.stream().distinct().count();
 
         if (noDuplicateCount != SIZE) {
-            throw new IllegalArgumentException(DUPLICATE_ERROR_MESSAGE);
+            throw new IllegalArgumentException("중복은 허용하지 않습니다.");
         }
     }
 

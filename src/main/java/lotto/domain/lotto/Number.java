@@ -6,8 +6,6 @@ public class Number {
 
     public static final int MIN_VALUE = 1;
     public static final int MAX_VALUE = 45;
-    private static final String ERROR_MESSAGE = MIN_VALUE + "부터 " + MAX_VALUE + "의 숫자여야 합니다.";
-    private static final String TO_INT_ERROR_MESSAGE = "숫자여야 합니다.";
 
     private final int value;
 
@@ -24,13 +22,13 @@ public class Number {
         try {
             return Integer.parseInt(text);
         } catch (NumberFormatException exception) {
-            throw new IllegalArgumentException(TO_INT_ERROR_MESSAGE);
+            throw new IllegalArgumentException("숫자여야 합니다.");
         }
     }
 
     private void validateValueRange(final int number) {
         if (MIN_VALUE > number || number > MAX_VALUE) {
-            throw new IllegalArgumentException(ERROR_MESSAGE);
+            throw new IllegalArgumentException(MIN_VALUE + "부터 " + MAX_VALUE + "의 숫자여야 합니다.");
         }
     }
 

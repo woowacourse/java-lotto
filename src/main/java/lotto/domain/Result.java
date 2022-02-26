@@ -7,7 +7,6 @@ public class Result {
 
     private static final int INIT_COUNT = 0;
     private static final int ADD_NUMBER = 1;
-    private static final double ROUND_OFF_NUMBER = 1e3;
 
     private final Map<LottoRanking, Integer> result;
 
@@ -27,12 +26,11 @@ public class Result {
     }
 
     public double getRateOfProfit(Money money) {
-        long total = 0L;
+        long totalMoney = 0L;
         for (Map.Entry<LottoRanking, Integer> entry : result.entrySet()) {
-            total += entry.getKey()
+            totalMoney += entry.getKey()
                 .multiply(entry.getValue());
         }
-
-        return Math.round((double)total / money.getValue() * ROUND_OFF_NUMBER) / ROUND_OFF_NUMBER;
+        return money.getRateOfProfit(totalMoney);
     }
 }

@@ -5,7 +5,6 @@ import java.util.List;
 
 import lotto.domain.Money;
 import lotto.domain.Result;
-import lotto.domain.LottoRanking;
 
 public class Lottos {
 
