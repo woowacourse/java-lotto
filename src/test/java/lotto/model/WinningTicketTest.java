@@ -43,7 +43,7 @@ public class WinningTicketTest {
         LottoNumber bonusball = new LottoNumber(7);
         WinningTicket winningTicket = new WinningTicket(lottoTicket, bonusball);
         // when
-        LottoRank result = winningTicket.compare(lottoTicket);
+        LottoRank result = winningTicket.judgeRank(lottoTicket);
         // then
         Assertions.assertThat(result).isEqualTo(LottoRank.FIRST);
     }

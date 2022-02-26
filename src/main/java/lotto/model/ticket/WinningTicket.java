@@ -21,7 +21,7 @@ public class WinningTicket {
         }
     }
 
-    public LottoRank compare(LottoTicket lottoTicket) {
+    public LottoRank judgeRank(LottoTicket lottoTicket) {
         int matchCount = lottoTicket.countMatch(winningTicket);
         boolean isBonusMatch = lottoTicket.containsNumber(bonusBall);
         return LottoRank.find(matchCount, isBonusMatch);
