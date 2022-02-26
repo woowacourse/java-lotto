@@ -16,7 +16,7 @@ public class Lottos {
 	}
 
 	public Map<Rank, Long> countRank(WinningLotto winningLotto) {
-		EnumMap<Rank, Long> ranks = Rank.getMap();
+		EnumMap<Rank, Long> ranks = LottoResult.getRankMap();
 
 		lottos.stream()
 			.map(lotto -> winningLotto.calculateRank(lotto))

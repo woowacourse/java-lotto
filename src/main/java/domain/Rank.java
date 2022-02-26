@@ -1,7 +1,6 @@
 package domain;
 
 import java.util.Arrays;
-import java.util.EnumMap;
 
 public enum Rank {
 	NOTHING(0, 0, false),
@@ -23,23 +22,18 @@ public enum Rank {
 
 	public static Rank of(int target, boolean bonus) {
 		return Arrays.stream(Rank.values())
-			.filter(rank -> rank.match == target)
-			.filter(rank -> rank.bonus == bonus)
+			.filter(rank -> rank.isSameRank(target))
+			.filter(rank -> rank != Rank.THIRD || !bonus)
 			.findFirst()
 			.orElse(NOTHING);
 	}
 
-	public static EnumMap<Rank, Long> getMap() {
-		EnumMap<Rank, Long> ranks = new EnumMap<Rank, Long>(Rank.class);
-
-		Arrays.stream(values())
-			.filter(rank -> !rank.equals(NOTHING))
-			.forEach(rank -> ranks.put(rank, 0L));
-		return ranks;
+	private boolean isSameRank(int matchCount) {
+		return this.match == matchCount;
 	}
 
 	public boolean isNothing() {
-		return this.equals(NOTHING);
+		return this == NOTHING;
 	}
 
 	public int calculateMoney(int count) {
