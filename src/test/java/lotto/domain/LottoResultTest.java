@@ -18,10 +18,10 @@ class LottoResultTest {
 
         LottoResult lottoResult = new LottoResult(ranks);
 
-        Money money = Money.create("14000");
+        LottoPurchaseMoney lottoPurchaseMoney = LottoPurchaseMoney.create("14000");
 
         // when
-        double result = lottoResult.calculateYield(money);
+        double result = lottoResult.calculateYield(lottoPurchaseMoney);
 
         // then
         assertThat(Math.floor(result * 100) / 100).isEqualTo(0.35);

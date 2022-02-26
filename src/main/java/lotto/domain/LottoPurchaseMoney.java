@@ -1,20 +1,20 @@
 package lotto.domain;
 
-public class Money {
+public class LottoPurchaseMoney {
 
     private static final int PRICE_CRITERION = 1000;
 
     private final int price;
 
-    private Money(int price) {
+    private LottoPurchaseMoney(int price) {
         validateCriterion(price);
         this.price = price;
     }
 
-    public static Money create(String value) {
+    public static LottoPurchaseMoney create(String value) {
         int price = translateInteger(value);
 
-        return new Money(price);
+        return new LottoPurchaseMoney(price);
     }
 
     public int calculate() {

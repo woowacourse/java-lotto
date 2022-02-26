@@ -6,16 +6,16 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("NonAsciiCharacters")
-public class MoneyTest {
+public class LottoPurchaseMoneyTest {
 
     @DisplayName("구입 금액을 기반으로 티켓 갯수를 반환한다.")
     @Test
     void 로또_티켓_정상_발급() {
         // given
-        Money money = Money.create("14000");
+        LottoPurchaseMoney lottoPurchaseMoney = LottoPurchaseMoney.create("14000");
 
         // when
-        int count = money.calculate();
+        int count = lottoPurchaseMoney.calculate();
 
         // then
         assertThat(count).isEqualTo(14);
@@ -25,7 +25,7 @@ public class MoneyTest {
     @Test
     void 로또_티켓_금액_부족() {
         // given & when & then
-        assertThatThrownBy(() -> Money.create("500"))
+        assertThatThrownBy(() -> LottoPurchaseMoney.create("500"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -33,10 +33,10 @@ public class MoneyTest {
     @Test
     void 가능한_금액_만큼_반환() {
         // given
-        Money money = Money.create("14500");
+        LottoPurchaseMoney lottoPurchaseMoney = LottoPurchaseMoney.create("14500");
 
         // when
-        int count = money.calculate();
+        int count = lottoPurchaseMoney.calculate();
 
         // then
         assertThat(count).isEqualTo(14);
@@ -46,7 +46,7 @@ public class MoneyTest {
     @Test
     void 음수인경우_테스트() {
         // given & when & then
-        assertThatThrownBy(() -> Money.create("-1"))
+        assertThatThrownBy(() -> LottoPurchaseMoney.create("-1"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

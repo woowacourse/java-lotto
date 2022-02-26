@@ -1,7 +1,7 @@
 package lotto.controller;
 
 import java.util.List;
-import lotto.domain.Money;
+import lotto.domain.LottoPurchaseMoney;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTickets;
@@ -21,19 +21,19 @@ public class LottoController {
     }
 
     public void run() {
-        Money money = createMoney();
+        LottoPurchaseMoney lottoPurchaseMoney = createMoney();
 
-        LottoTickets lottoTickets = createLottoTickets(money);
+        LottoTickets lottoTickets = createLottoTickets(lottoPurchaseMoney);
         WinningNumbers winningNumbers = createWinningNumbers();
 
         LottoResult lottoResult = createLottoResult(lottoTickets, winningNumbers);
 
-        outputView.printYield(lottoResult.getRanks(), lottoResult.calculateYield(money));
+        outputView.printYield(lottoResult.getRanks(), lottoResult.calculateYield(lottoPurchaseMoney));
     }
 
-    private Money createMoney() {
+    private LottoPurchaseMoney createMoney() {
         try {
-            return Money.create(inputView.getMoney());
+            return LottoPurchaseMoney.create(inputView.getMoney());
         } catch(IllegalArgumentException e) {
             outputView.printErrorMessage(e.getMessage());
 
@@ -41,9 +41,9 @@ public class LottoController {
         }
     }
 
-    private LottoTickets createLottoTickets(Money money) {
+    private LottoTickets createLottoTickets(LottoPurchaseMoney lottoPurchaseMoney) {
         LottoMachine lottoMachine = new LottoMachine();
-        LottoTickets lottoTickets = lottoMachine.purchase(money);
+        LottoTickets lottoTickets = lottoMachine.purchase(lottoPurchaseMoney);
         LottoTicketsDto lottoTicketsDto = new LottoTicketsDto(lottoTickets);
 
         outputView.printTotalCount(lottoTickets.totalCount());
