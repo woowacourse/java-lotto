@@ -1,25 +1,13 @@
 import domain.AnswerLotto;
 import domain.LottoNumber;
-import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class AnswerLottoTest {
-	static final List<Integer> sampleInput = new ArrayList<>();
-
-	@BeforeAll
-	static void setSampleInput() {
-		sampleInput.add(1);
-		sampleInput.add(2);
-		sampleInput.add(3);
-		sampleInput.add(4);
-		sampleInput.add(5);
-		sampleInput.add(6);
-	}
+	static final List<Integer> sampleInput = List.of(1,2,3,4,5,6);
 
 	@Test
 	void duplicateInBonusNumber() {
