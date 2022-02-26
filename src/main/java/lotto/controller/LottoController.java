@@ -1,5 +1,9 @@
 package lotto.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 import lotto.model.Lotto;
 import lotto.model.Lottos;
 import lotto.model.WinningLotto;
@@ -12,10 +16,10 @@ public class LottoController {
 
     public void run() {
         int amount = inputAmount();
-        Lottos lottos = makeLottos(calculateLottoCount(amount));
+        Lottos lottos = createLottos(calculateLottoCount(amount));
         ResultView.printResult(lottos);
 
-        WinningLotto winningLotto = makeWinningLotto();
+        WinningLotto winningLotto = createWinningLotto();
 
         winningLotto.checkRank(lottos);
         lottos.countRank();
@@ -31,29 +35,26 @@ public class LottoController {
         }
     }
 
-    private Lottos makeLottos(int lottoCount) {
-        Lottos lottos = new Lottos();
-        insertLottoToLottos(lottoCount, lottos);
-        return lottos;
-    }
-
     private int calculateLottoCount(int amount) {
         return amount / Lotto.LOTTO_PRICE;
     }
 
-    private void insertLottoToLottos(int countLotto, Lottos lottos) {
-        for (int i = 0; i < countLotto; i++) {
-            Lotto lotto = RandomLottoGenerator.generate();
-            lottos.insert(lotto);
-        }
+    private Lottos createLottos(int lottoCount) {
+        return new Lottos(createLotto(lottoCount));
     }
 
-    private WinningLotto makeWinningLotto() {
+    private List<Lotto> createLotto(int lottoCount) {
+        return IntStream.range(0, lottoCount)
+            .mapToObj(i -> RandomLottoGenerator.generate())
+            .collect(Collectors.toList());
+    }
+
+    private WinningLotto createWinningLotto() {
         try {
             return new WinningLotto(InputView.inputWinningNumbers(), InputView.inputBonusNumber());
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return makeWinningLotto();
+            return createWinningLotto();
         }
     }
 }
