@@ -1,5 +1,7 @@
 package domain;
 
+import static domain.exception.MoneyExceptionMessages.*;
+
 public class Money {
 
 	private static final int MINIMUM_MONEY = 1000;
@@ -18,7 +20,7 @@ public class Money {
 
 	private void validateRange(int money) {
 		if (money < MINIMUM_MONEY || money > MAXIMUM_MONEY) {
-			throw new IllegalArgumentException("구입 금액의 범위는 1000원~100000원 입니다.");
+			throw new IllegalArgumentException(INVALID_MONEY_RANGE_EXCEPTION.getMessage());
 		}
 	}
 }
