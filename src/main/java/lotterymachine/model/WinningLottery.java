@@ -1,8 +1,6 @@
 package lotterymachine.model;
 
 import java.util.Arrays;
-import java.util.EnumMap;
-import java.util.Map;
 
 public enum WinningLottery {
     ZERO(0, 0, false),
@@ -13,6 +11,7 @@ public enum WinningLottery {
     SIX(6, 2000000000, false);
 
     private static final int INITIAL_NUMBER_OF_MATCHING_TICKET = 0;
+
     private final int number;
     private final int price;
     private final boolean bonus;

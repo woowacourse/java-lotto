@@ -78,7 +78,7 @@ public class InputView {
 
     private static void validateNumbers(List<Integer> numbers) {
         numbers.stream()
-                .filter(LotteryRule::checkRange)
+                .filter(LotteryRule::isRangeOfNumber)
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException(OUT_OF_RANGE.getMessage()));
     }

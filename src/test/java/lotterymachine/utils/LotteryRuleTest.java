@@ -11,6 +11,6 @@ public class LotteryRuleTest {
     @CsvSource(value = {"45:true", "46:false", "0:false", "1:true"}, delimiter = ':')
     @DisplayName("로또 번호 범위를 체크한다.")
     void checkRange(int number, boolean expected) {
-        assertThat(LotteryRule.checkRange(number)).isEqualTo(expected);
+        assertThat(LotteryRule.isRangeOfNumber(number)).isEqualTo(expected);
     }
 }
