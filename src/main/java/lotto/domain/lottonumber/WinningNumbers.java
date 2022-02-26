@@ -2,26 +2,22 @@ package lotto.domain.lottonumber;
 
 public class WinningNumbers {
 
-    static final String WINNING_NUMBERS_CONTAIN_BONUS_BALL = "[ERROR] 당첨 번호와 보너스 볼은 중복될 수 없습니다.";
+    static final String DUPLICATED_LOTTO_TICKET_AND_BONUS_BALL = "[ERROR] 당첨 번호와 보너스 볼은 중복될 수 없습니다.";
 
     private final LottoTicket lottoTicket;
     private final LottoNumber bonusBall;
 
     public WinningNumbers(String lottoNumberStrings, String bonusBallString) {
-        if (isDuplicated(lottoNumberStrings, bonusBallString)) {
-            throw new IllegalArgumentException(WINNING_NUMBERS_CONTAIN_BONUS_BALL);
-        }
+        lottoTicket = new LottoTicket(lottoNumberStrings);
+        bonusBall = new LottoNumber(bonusBallString);
 
-        this.lottoTicket = new LottoTicket(lottoNumberStrings);
-        this.bonusBall = new LottoNumber(bonusBallString);
+        if (isDuplicated(lottoTicket, bonusBall)) {
+            throw new IllegalArgumentException(DUPLICATED_LOTTO_TICKET_AND_BONUS_BALL);
+        }
     }
 
-    /**
-     * 다시 작성해야 한다 !!
-     * 틀린 메서드다
-     */
-    private boolean isDuplicated(String lottoNumberStrings, String bonusBallString) {
-        return lottoNumberStrings.contains(bonusBallString);
+    private boolean isDuplicated(LottoTicket lottoTicket, LottoNumber bonusBall) {
+        return lottoTicket.lottoNumbers().contains(bonusBall);
     }
 
     public int getMatchCount(LottoTicket lottoTicket) {

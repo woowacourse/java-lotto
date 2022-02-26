@@ -1,12 +1,13 @@
 package lotto.domain.lottonumber;
 
-import static lotto.domain.lottonumber.WinningNumbers.WINNING_NUMBERS_CONTAIN_BONUS_BALL;
+import static lotto.domain.lottonumber.WinningNumbers.DUPLICATED_LOTTO_TICKET_AND_BONUS_BALL;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -47,7 +48,7 @@ class WinningNumbersTest {
             "1, 2, 3, 4, 5, 6  ::  30  ::  1, 2, 3, 4, 5, 30  ::  true",
             "1, 2, 3, 4, 5, 6  ::  30  ::  1, 2, 3, 4, 5, 29  ::  false"
     }, delimiterString = "  ::  ")
-    @DisplayName("보너스 볼을 포함하면 true를 반환한다")
+    @DisplayName("보너스 볼을 포함할 경우 true 를 반환한다")
     void bonusBallContaining(
             String winningNumbersString,
             String bonusBallString,
@@ -77,6 +78,10 @@ class WinningNumbersTest {
         assertThatThrownBy(
                 () -> new WinningNumbers("1, 2, 3, 4, 5, 6", "6"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(WINNING_NUMBERS_CONTAIN_BONUS_BALL);
+                .hasMessage(DUPLICATED_LOTTO_TICKET_AND_BONUS_BALL);
+
+        Assertions.assertDoesNotThrow(
+                ()-> new WinningNumbers("1, 2, 3, 4, 5, 16", "6")
+        );
     }
 }
