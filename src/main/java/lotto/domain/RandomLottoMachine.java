@@ -25,7 +25,14 @@ public class RandomLottoMachine {
         final List<Lotto> lottos = new ArrayList<>(manualLottos);
         checkNegativeAutomaticLottoCounts(automaticLottoCounts);
 
+        lottos.addAll(createRandomLottosByAutomaticCounts(automaticLottoCounts));
         return new Lottos(lottos);
+    }
+
+    private static List<Lotto> createRandomLottosByAutomaticCounts(int automaticLottoCounts) {
+        return IntStream.range(0, automaticLottoCounts)
+                .mapToObj(count -> createRandomLotto())
+                .collect(Collectors.toList());
     }
 
     private static void checkNegativeAutomaticLottoCounts(int automaticLottoCounts) {
