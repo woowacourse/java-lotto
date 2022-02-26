@@ -1,6 +1,8 @@
 package lotto;
 
 import lotto.controller.LottoController;
+import lotto.domain.ticket.generator.RandomTicketGenerator;
+import lotto.domain.ticket.generator.TicketGenerator;
 import lotto.service.LottoService;
 import lotto.view.LottoView;
 import lotto.view.input.InputView;
@@ -14,6 +16,7 @@ public class AppConfig {
 
     public final LottoController lottoController;
     public final LottoService lottoService;
+    public final TicketGenerator ticketGenerator;
     public final LottoView lottoView;
     public final OutputView outputView;
     public final InputView inputView;
@@ -24,7 +27,8 @@ public class AppConfig {
         this.inputView = initInputView(reader);
         this.outputView = initOutputView();
         this.lottoView = initLottoView(inputView, outputView);
-        this.lottoService = initLottoService();
+        this.ticketGenerator = initTicketGenerator();
+        this.lottoService = initLottoService(ticketGenerator);
         this.lottoController = initLottoController(lottoService, lottoView);
     }
 
@@ -48,8 +52,12 @@ public class AppConfig {
         return new LottoView(inputView, outputView);
     }
 
-    private LottoService initLottoService() {
-        return new LottoService();
+    private TicketGenerator initTicketGenerator() {
+        return new RandomTicketGenerator();
+    }
+
+    private LottoService initLottoService(final TicketGenerator ticketGenerator) {
+        return new LottoService(ticketGenerator);
     }
 
     private LottoController initLottoController(final LottoService lottoService, final LottoView lottoView) {
