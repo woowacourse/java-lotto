@@ -33,10 +33,7 @@ public class LottoMachine {
     }
 
     public LottoResult getResults(WinningLotto winningLotto) {
-        for (Lotto lotto : lottoTicket.getLottos()) {
-            lottoResult.putLottoRank(winningLotto.countLottoRank(lotto));
-        }
-        return lottoResult;
+        return lottoTicket.getLottoResult(winningLotto, lottoResult);
     }
 
     public LottoTicket getLottoTicket() {

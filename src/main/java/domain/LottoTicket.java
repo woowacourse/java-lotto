@@ -17,4 +17,12 @@ public class LottoTicket {
     public List<Lotto> getLottos() {
         return List.copyOf(lottos);
     }
+
+    public LottoResult getLottoResult(WinningLotto winningLotto, LottoResult lottoResult) {
+        for (Lotto lotto : lottos) {
+            lottoResult.putLottoRank(winningLotto.countLottoRank(lotto));
+        }
+
+        return lottoResult;
+    }
 }
