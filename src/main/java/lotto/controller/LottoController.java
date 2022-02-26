@@ -18,32 +18,20 @@ public class LottoController {
 
     public void play() {
         requestMoney();
-        printbuyLottos();
+        lottos = new Lottos(money);
+        OutputView.printLottoCount(lottos.getCount());
+        OutputView.printLottos(lottos);
         requestBonusNumber(requestWinningLotto());
         printLottoResult();
     }
 
     private void requestMoney() {
-        do {
-            String input = InputView.inputMoney();
-            money = toMoney(input);
-        } while (money == null);
-    }
-
-    private Money toMoney(String input) {
-        Money money = null;
         try {
+            String input = InputView.inputMoney();
             money = new Money(input);
         } catch (IllegalArgumentException exception) {
             OutputView.printException(exception);
         }
-        return money;
-    }
-
-    private void printbuyLottos() {
-        lottos = new Lottos(money);
-        OutputView.printLottoCount(lottos.getCount());
-        OutputView.printLottos(lottos);
     }
 
     private Lotto requestWinningLotto() {
