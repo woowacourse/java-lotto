@@ -36,7 +36,7 @@ public class ResultView {
     }
 
     private static void printBuyingLotto(Lotto lotto) {
-        System.out.println(lotto.getNumbers().stream()
+        System.out.println(lotto.getNumbers().getLottoNumbers().stream()
                 .mapToInt(LottoNumber::getLottoNumber)
                 .boxed()
                 .collect(Collectors.toList()));

@@ -1,8 +1,7 @@
 package lotto.util;
 
-import java.util.List;
-import lotto.model.LottoNumber;
+import lotto.model.LottoNumbers;
 
 public interface RandomUtil {
-    List<LottoNumber> generate();
+    LottoNumbers generate();
 }

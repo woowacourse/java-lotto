@@ -16,8 +16,10 @@ public class LottosTest {
     void init() {
         List<LottoNumber> numbers1 = Arrays.asList(new LottoNumber(1),new LottoNumber(2),new LottoNumber(3),new LottoNumber(4),new LottoNumber(5),new LottoNumber(6));
         List<LottoNumber> numbers2 = Arrays.asList(new LottoNumber(3),new LottoNumber(4),new LottoNumber(5),new LottoNumber(6),new LottoNumber(7),new LottoNumber(8));
-        lotto1 = new Lotto(() -> numbers1);
-        lotto2 = new Lotto(() -> numbers2);
+        LottoNumbers lottoNumbers1 = new LottoNumbers(numbers1);
+        LottoNumbers lottoNumbers2 = new LottoNumbers(numbers2);
+        lotto1 = new Lotto(() -> lottoNumbers1);
+        lotto2 = new Lotto(() -> lottoNumbers2);
         lottos = new Lottos(new Money(0));
     }
 
@@ -30,9 +32,10 @@ public class LottosTest {
     @Test
     void 등수_개수_테스트() {
         List<LottoNumber> winningNumbers = Arrays.asList(new LottoNumber(1),new LottoNumber(2),new LottoNumber(3),new LottoNumber(4),new LottoNumber(5),new LottoNumber(6));
+        LottoNumbers winningNumbers1 = new LottoNumbers(winningNumbers);
         lottos.insert(lotto1);
         lottos.insert(lotto2);
-        lottos.calculateRanks(winningNumbers, new BonusNumber(7));
+        lottos.calculateRanks(winningNumbers1, new BonusNumber(7));
         lottos.countRank();
         assertThat(lottos.getCount(Rank.FIRST)).isEqualTo(1);
     }
@@ -40,9 +43,10 @@ public class LottosTest {
     @Test
     void 수익률_테스트() {
         List<LottoNumber> winningNumbers = Arrays.asList(new LottoNumber(1),new LottoNumber(2),new LottoNumber(3),new LottoNumber(4),new LottoNumber(5),new LottoNumber(6));
+        LottoNumbers winningNumbers1 = new LottoNumbers(winningNumbers);
         lottos.insert(lotto1); // 1등
         lottos.insert(lotto2); // 4등
-        lottos.calculateRanks(winningNumbers, new BonusNumber(7));
+        lottos.calculateRanks(winningNumbers1, new BonusNumber(7));
         lottos.countRank();
         assertThat(lottos.getRevenue()).isEqualTo((2000000000 + 50000) / 2000);
     }

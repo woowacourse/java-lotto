@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lotto.model.BonusNumber;
 import lotto.model.LottoNumber;
+import lotto.model.LottoNumbers;
 import lotto.model.Lottos;
 import lotto.model.WinningLotto;
 import lotto.util.InputValidator;
@@ -30,19 +31,19 @@ public class LottoController {
     }
 
     private WinningLotto makeWinningLotto(String winningNumbers, String bonusNumber) {
-        List<LottoNumber> lottoNumbers = splitWinningNumbers(winningNumbers);
+        LottoNumbers lottoNumbers = splitWinningNumbers(winningNumbers);
         BonusNumber lottoBonusNumber = new BonusNumber(toIntBonusNumber(bonusNumber));
         return new WinningLotto(lottoNumbers, lottoBonusNumber);
     }
 
-    private List<LottoNumber> splitWinningNumbers(String winningNumbers) throws RuntimeException {
+    private LottoNumbers splitWinningNumbers(String winningNumbers) throws RuntimeException {
         String[] splitNumbers = InputValidator.validateLottoNumbers(winningNumbers);
-        return Arrays.stream(splitNumbers)
+        return new LottoNumbers(Arrays.stream(splitNumbers)
                 .map(String::trim)
                 .mapToInt(Integer::parseInt)
                 .boxed()
                 .map(LottoNumber::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
     private int toIntBonusNumber(String bonusNumber) throws RuntimeException {
