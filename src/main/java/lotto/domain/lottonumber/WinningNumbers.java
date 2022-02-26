@@ -24,9 +24,6 @@ public class WinningNumbers {
 
     public LottoMatchKind getLottoMatchResult(final LottoNumbers numbers) {
         final int matchedCount = numbers.getMatchCount(lastWinningNumbers);
-        if (matchedCount < 3) {
-            return LottoMatchKind.LOWER_THAN_THREE;
-        }
         return LottoMatchKind.from(matchedCount, numbers.hasSameNumberWith(bonusNumber));
     }
 }

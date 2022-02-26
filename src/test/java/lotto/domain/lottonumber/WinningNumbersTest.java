@@ -34,8 +34,8 @@ class WinningNumbersTest {
     @MethodSource("provideLottoNumbersAndMatchKind")
     void getLottoMatchResult(final List<String> numbers, final LottoMatchKind expected) {
         //given
-        final LottoNumbers targetNumbers = new LottoNumbers(Arrays.asList("2", "3", "4", "5", "6", "7"));
-        final LottoNumber bonusNumber = LottoNumber.from("1");
+        final LottoNumbers targetNumbers = new LottoNumbers(Arrays.asList("1", "2", "3", "4", "5", "6"));
+        final LottoNumber bonusNumber = LottoNumber.from("45");
         final WinningNumbers winningNumbers = new WinningNumbers(targetNumbers, bonusNumber);
         final LottoNumbers lottoNumbers = new LottoNumbers(numbers);
         //when
@@ -46,11 +46,14 @@ class WinningNumbersTest {
 
     private static Stream<Arguments> provideLottoNumbersAndMatchKind() {
         return Stream.of(
-                Arguments.of(Arrays.asList("1", "2", "3", "4", "5", "6"), LottoMatchKind.FIVE_BONUS),
-                Arguments.of(Arrays.asList("2", "3", "4", "5", "6", "7"), LottoMatchKind.SIX),
-                Arguments.of(Arrays.asList("3", "4", "5", "6", "7", "8"), LottoMatchKind.FIVE),
-                Arguments.of(Arrays.asList("4", "5", "6", "7", "8", "9"), LottoMatchKind.FOUR),
-                Arguments.of(Arrays.asList("5", "6", "7", "8", "9", "10"), LottoMatchKind.THREE),
+                Arguments.of(Arrays.asList("1", "2", "3", "4", "5", "6"), LottoMatchKind.SIX),
+                Arguments.of(Arrays.asList("2", "3", "4", "5", "6", "45"), LottoMatchKind.FIVE_BONUS),
+                Arguments.of(Arrays.asList("2", "3", "4", "5", "6", "7"), LottoMatchKind.FIVE),
+                Arguments.of(Arrays.asList("3", "4", "5", "6", "7", "45"), LottoMatchKind.FIVE),
+                Arguments.of(Arrays.asList("3", "4", "5", "6", "7", "8"), LottoMatchKind.FOUR),
+                Arguments.of(Arrays.asList("4", "5", "6", "7", "8", "45"), LottoMatchKind.FOUR),
+                Arguments.of(Arrays.asList("4", "5", "6", "7", "8", "9"), LottoMatchKind.THREE),
+                Arguments.of(Arrays.asList("5", "6", "7", "8", "9", "45"), LottoMatchKind.THREE),
                 Arguments.of(Arrays.asList("7", "8", "9", "10", "11", "12"), LottoMatchKind.LOWER_THAN_THREE),
                 Arguments.of(Arrays.asList("8", "9", "10", "11", "12", "13"), LottoMatchKind.LOWER_THAN_THREE),
                 Arguments.of(Arrays.asList("9", "10", "11", "12", "13", "14"), LottoMatchKind.LOWER_THAN_THREE),
