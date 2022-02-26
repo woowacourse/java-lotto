@@ -51,4 +51,15 @@ class LottoTicketNumbersTest {
         assertThat(lottoNumbers).extracting(LottoNumber::getNumber)
                 .containsExactly(1, 2, 3, 4, 5, 6);
     }
+
+    @Test
+    @DisplayName("로또 번호 비교")
+    void countMatchingNumbers() {
+        List<LottoNumber> inputLottoNumbers = IntStream.of(4, 3, 2, 1, 6, 5)
+                .mapToObj(LottoNumber::getInstance)
+                .collect(Collectors.toList());
+        LottoTicketNumbers lottoTicketNumbers = new LottoTicketNumbers(inputLottoNumbers);
+
+        assertThat(lottoTicketNumbers.countDuplicateNumbers(lottoTicketNumbers)).isEqualTo(6);
+    }
 }
