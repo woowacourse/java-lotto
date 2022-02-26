@@ -8,7 +8,7 @@ import lotto.model.WinningLotto;
 import lotto.model.dto.LottoDTO;
 import lotto.model.dto.PrizeInformationDTO;
 import lotto.model.number.LottoNumber;
-import lotto.model.number.WinningNumbers;
+import lotto.model.number.LottoNumbers;
 import lotto.model.prize.MatchResult;
 import lotto.model.prize.PrizeInformations;
 import lotto.view.InputView;
@@ -63,10 +63,10 @@ public class Controller {
         return new WinningLotto(getWinningNumbers(), getBonusNumber());
     }
 
-    private static WinningNumbers getWinningNumbers() {
+    private static LottoNumbers getWinningNumbers() {
         String[] winningNumbersInput = InputView.askWinningNumbers();
 
-        return WinningNumbers.from(winningNumbersInput);
+        return LottoNumbers.from(List.of(winningNumbersInput));
     }
 
     private static LottoNumber getBonusNumber() {

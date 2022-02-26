@@ -1,30 +1,18 @@
 package lotto.model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import lotto.model.number.LottoNumber;
+import lotto.model.number.LottoNumbers;
 
 /*
  * 자동 로또 한 장을 의미하는 Class
  */
 public class Lotto {
-    private static final int NUMBER_COUNT = 6;
     private static final int PRICE = 1000;
 
-    private List<LottoNumber> numbers;
+    private LottoNumbers numbers;
 
     public Lotto() {
-        drawNumbers();
-        Collections.sort(numbers);
-        this.numbers = List.copyOf(numbers);
-    }
-
-    private void drawNumbers() {
-        numbers = new ArrayList<>();
-        for (int i = 0; i < NUMBER_COUNT; i++) {
-            numbers.add(LottoNumber.draw());
-        }
+        this.numbers = LottoNumbers.ofRandomNumbers();
     }
 
     public static int countAvailableTickets(Money money) {
@@ -32,10 +20,14 @@ public class Lotto {
     }
 
     public boolean contains(LottoNumber number) {
-        return numbers.contains(number);
+        return this.numbers.contains(number);
     }
 
-    public List<LottoNumber> getNumbers() {
-        return numbers;
+    public int match(LottoNumbers comparingNumbers) {
+        return this.numbers.match(comparingNumbers);
+    }
+
+    public LottoNumbers getNumbers() {
+        return this.numbers;
     }
 }

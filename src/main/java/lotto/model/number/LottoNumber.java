@@ -43,16 +43,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
     }
 
-    public static LottoNumber draw() {
+    public static List<LottoNumber> draw(int size) {
         Collections.shuffle(NOMINEE_NUMBERS);
-        return NOMINEE_NUMBERS.get(0);
+        return NOMINEE_NUMBERS.subList(0, size);
     }
 
-    public boolean match(int number) {
-        return this.number == number;
-    }
-
-    public int getNumber() {
+    public int getValue() {
         return number;
     }
 

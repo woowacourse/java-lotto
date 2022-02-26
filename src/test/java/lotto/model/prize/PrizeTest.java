@@ -12,9 +12,6 @@ public class PrizeTest {
     @BeforeEach
     public void initializeLotto() {
         lotto = new Lotto();
-        lottoNumbers = lotto.getNumbers().stream()
-                .map(String::valueOf)
-                .collect(Collectors.toList());
     }
 
     /*
