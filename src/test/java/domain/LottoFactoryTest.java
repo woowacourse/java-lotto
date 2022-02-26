@@ -13,11 +13,11 @@ public class LottoFactoryTest {
 	@DisplayName("구입한 금액 만큼 로또 발급")
 	void generateLottoByMoney() {
 		final int purchaseMoney = 14000;
-		final int expected = purchaseMoney / 1000;
+		final int expectedPurchaseCount = 14;
 
 		final Money money = new Money(purchaseMoney);
 		final int actual = lottoFactory.generateLottoTicket(money).size();
 
-		assertThat(actual).isEqualTo(expected);
+		assertThat(actual).isEqualTo(expectedPurchaseCount);
 	}
 }
