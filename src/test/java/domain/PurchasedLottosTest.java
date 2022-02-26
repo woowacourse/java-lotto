@@ -21,13 +21,12 @@ public class PurchasedLottosTest {
     void init() {
         inputMoney = 1400;
         lottos = new PurchasedLotto(inputMoney);
-        lottos.purchase(new CustomPurchaseStrategy(Arrays.asList(new Integer[]{1, 2, 3, 43, 44, 45})));
-        lottos.purchase(new CustomPurchaseStrategy(Arrays.asList(new Integer[]{1, 2, 3, 4, 44, 45})));
-        lottos.purchase(new CustomPurchaseStrategy(Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 45})));
-        lottos.purchase(new CustomPurchaseStrategy(Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 12})));
+        lottos.purchase(new CustomPurchaseStrategy(List.of(1, 2, 3, 43, 44, 45)));
+        lottos.purchase(new CustomPurchaseStrategy(List.of(1, 2, 3, 4, 44, 45)));
+        lottos.purchase(new CustomPurchaseStrategy(List.of(1, 2, 3, 4, 5, 45)));
+        lottos.purchase(new CustomPurchaseStrategy(List.of(1, 2, 3, 4, 5, 12)));
 
-        Integer[] winningNumbersArray = {1, 2, 3, 4, 5, 12};
-        List<Integer> winningNumbers = Arrays.asList(winningNumbersArray);
+        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 12);
         winningLotto = new WinningLotto(winningNumbers);
         winningLotto.addBonusNumber(6);
     }
@@ -42,7 +41,7 @@ public class PurchasedLottosTest {
 
     @Test
     @DisplayName("옳바른 수익률이 계산된다.")
-    void lottos_calulateEarningRate() {
+    void lottos_calculateEarningRate() {
         lottos.calculatePrizeResult(winningLotto);
 
         int prize = 2001555000;

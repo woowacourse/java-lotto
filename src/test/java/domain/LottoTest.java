@@ -14,13 +14,11 @@ public class LottoTest {
     @Test
     @DisplayName("3개 일치시 5등이다.")
     void lotto_calculateRightFifthRank() {
-        Integer[] numbersArray = {1, 2, 3, 4, 5, 6};
-        List<Integer> numbers = Arrays.asList(numbersArray);
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
         Lotto lotto = new Lotto(numbers);
 
-        Integer[] winningNumbersArray = {1, 2, 3, 10, 11, 12};
-        List<Integer> winningNumbers = Arrays.asList(winningNumbersArray);
-        WinningNumber winningLotto = new WinningNumber(winningNumbers);
+        List<Integer> winningNumbers = List.of(1, 2, 3, 10, 11, 12);
+        WinningLotto winningLotto = new WinningLotto(winningNumbers);
         winningLotto.addBonusNumber(45);
 
         Prize winnerPrice = lotto.calculateRank(winningLotto);
@@ -30,13 +28,11 @@ public class LottoTest {
     @Test
     @DisplayName("5개 일치와 보너스가 있다면 2등이다.")
     void lotto_calculateRightSecondRank() {
-        Integer[] numbersArray = {1, 2, 3, 4, 5, 6};
-        List<Integer> numbers = Arrays.asList(numbersArray);
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
         Lotto lotto = new Lotto(numbers);
 
-        Integer[] winningNumbersArray = {1, 2, 3, 4, 5, 12};
-        List<Integer> winningNumbers = Arrays.asList(winningNumbersArray);
-        WinningNumber winningLotto = new WinningNumber(winningNumbers);
+        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 12);
+        WinningLotto winningLotto = new WinningLotto(winningNumbers);
         winningLotto.addBonusNumber(6);
 
         Prize winnerPrice = lotto.calculateRank(winningLotto);

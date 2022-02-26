@@ -14,7 +14,7 @@ class WinningLottoTest {
     @Test
     @DisplayName("보너스 번호를 이미 갖고 있을 시 예외가 발생한다.")
     void checkBonusDuplicate_throwIllegalException() {
-        List<Integer> numbers = Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 6});
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
         WinningLotto lotto = new WinningLotto(numbers);
         int bonus = 3;
 
