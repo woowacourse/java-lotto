@@ -82,10 +82,9 @@ public class WinningNumbers {
     }
 
     private int getCorrectCount(LottoTicket lottoTicket) {
-        return winningNumbers.stream()
+        return (int) winningNumbers.stream()
                 .filter(lottoTicket::isSame)
-                .collect(toList())
-                .size();
+                .count();
     }
 
     private boolean isBonus(LottoTicket lottoTicket) {
