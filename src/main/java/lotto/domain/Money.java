@@ -19,9 +19,9 @@ public class Money {
         return amount / Lotto.LOTTO_PURCHASE_MONEY;
     }
 
-    public LottoPurchaseCounts calculatePurchaseCounts(final int manualCounts) {
+    public PurchaseLottoCounts calculatePurchaseCounts(final int manualCounts) {
         checkCanPurchaseLotto(manualCounts);
-        return new LottoPurchaseCounts(manualCounts, calculateLottoCount() - manualCounts);
+        return new PurchaseLottoCounts(manualCounts, calculateLottoCount() - manualCounts);
     }
 
     private void checkCanPurchaseLotto(int manualCounts) {

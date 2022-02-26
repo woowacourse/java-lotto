@@ -2,12 +2,12 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class LottoPurchaseCounts {
+public class PurchaseLottoCounts {
 
     private final int manualCount;
     private final int automaticCount;
 
-    public LottoPurchaseCounts(final int manualCount, final int automaticCount) {
+    public PurchaseLottoCounts(final int manualCount, final int automaticCount) {
         checkNegativeCount(manualCount);
         checkNegativeCount(automaticCount);
         this.manualCount = manualCount;
@@ -36,7 +36,7 @@ public class LottoPurchaseCounts {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        LottoPurchaseCounts that = (LottoPurchaseCounts) o;
+        PurchaseLottoCounts that = (PurchaseLottoCounts) o;
         return manualCount == that.manualCount && automaticCount == that.automaticCount;
     }
 

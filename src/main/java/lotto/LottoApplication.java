@@ -2,9 +2,9 @@ package lotto;
 
 import java.util.List;
 import lotto.domain.LottoMachine;
-import lotto.domain.LottoPurchaseCounts;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
+import lotto.domain.PurchaseLottoCounts;
 import lotto.domain.WinLotto;
 import lotto.view.ErrorView;
 import lotto.view.InputView;
@@ -14,7 +14,7 @@ public class LottoApplication {
 
     public static void main(final String[] args) {
         final Money money = createMoney();
-        final LottoPurchaseCounts purchaseCounts = createPurchaseCounts(money);
+        final PurchaseLottoCounts purchaseCounts = createPurchaseCounts(money);
         OutputView.outputBuyLottoCounts(purchaseCounts);
 
         final Lottos lottos = buyLotto(purchaseCounts);
@@ -33,7 +33,7 @@ public class LottoApplication {
         }
     }
 
-    private static LottoPurchaseCounts createPurchaseCounts(final Money money) {
+    private static PurchaseLottoCounts createPurchaseCounts(final Money money) {
         try {
             return money.calculatePurchaseCounts(InputView.inputPurchaseManualCount());
         } catch (IllegalArgumentException e) {
@@ -42,7 +42,7 @@ public class LottoApplication {
         }
     }
 
-    private static Lottos buyLotto(final LottoPurchaseCounts counts) {
+    private static Lottos buyLotto(final PurchaseLottoCounts counts) {
         try {
             final List<List<Integer>> manualLottos = InputView.inputManualLottos(counts.getManualCount());
             return LottoMachine.buyLotto(manualLottos, counts.getAutomaticCount());

@@ -39,10 +39,10 @@ public class MoneyTest {
         // given
         final Money money = new Money(5000);
         final int manualCounts = 3;
-        final LottoPurchaseCounts expected = new LottoPurchaseCounts(3, 2);
+        final PurchaseLottoCounts expected = new PurchaseLottoCounts(3, 2);
 
         // when
-        final LottoPurchaseCounts result = money.calculatePurchaseCounts(manualCounts);
+        final PurchaseLottoCounts result = money.calculatePurchaseCounts(manualCounts);
 
         // then
         assertThat(result).isEqualTo(expected);

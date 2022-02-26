@@ -3,8 +3,8 @@ package lotto.view;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.Lotto;
-import lotto.domain.LottoPurchaseCounts;
 import lotto.domain.LottoResult;
+import lotto.domain.PurchaseLottoCounts;
 import lotto.domain.Rank;
 
 public class OutputView {
@@ -22,7 +22,7 @@ public class OutputView {
     private OutputView() {
     }
 
-    public static void outputBuyLottoCounts(final LottoPurchaseCounts counts) {
+    public static void outputBuyLottoCounts(final PurchaseLottoCounts counts) {
         System.out.printf(OUTPUT_BUY_LOTTO_COUNTS, counts.getManualCount(), counts.getAutomaticCount());
     }
 
