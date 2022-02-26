@@ -22,6 +22,7 @@ public class LotteryTicket {
     }
 
     public List<Integer> getNumbers() {
+        Collections.sort(numbers);
         return Collections.unmodifiableList(numbers);
     }
 }

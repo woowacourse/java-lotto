@@ -1,9 +1,6 @@
 package lotterymachine.model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class LotteryTickets {
     private final List<LotteryTicket> tickets;
@@ -15,7 +12,7 @@ public class LotteryTickets {
     }
 
     public Map<WinningLottery, Integer> getLotteriesResult(List<Integer> numbers, int bonusNumber) {
-        final Map<WinningLottery, Integer> lotteriesResult = WinningLottery.getWinningLotteries();
+        final Map<WinningLottery, Integer> lotteriesResult = new EnumMap<>(WinningLottery.class);
         for (LotteryTicket lotteryTicket : tickets) {
             int matchingNumbers = lotteryTicket.countMatchingNumbers(numbers);
             boolean containsBonus = lotteryTicket.containsNumber(bonusNumber);

@@ -10,7 +10,7 @@ public class LotteryPurchase {
     }
 
     private int purchase(int number) {
-        return this.number = number % PER_LOTTERY_TICKET_PRICE;
+        return this.number = number / PER_LOTTERY_TICKET_PRICE;
     }
 
     public int getCount() {
