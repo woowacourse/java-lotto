@@ -46,10 +46,9 @@ class LottoTicketNumbersTest {
 
         LottoTicketNumbers lottoTicketNumbers = new LottoTicketNumbers(inputLottoNumbers);
 
-        int[] lottoNumbersSorted = lottoTicketNumbers.getLottoNumbers().stream()
-                .mapToInt(LottoNumber::getNumber)
-                .toArray();
+        List<LottoNumber> lottoNumbers = lottoTicketNumbers.getLottoNumbers();
 
-        assertThat(lottoNumbersSorted).isSorted();
+        assertThat(lottoNumbers).extracting(LottoNumber::getNumber)
+                .containsExactly(1, 2, 3, 4, 5, 6);
     }
 }
