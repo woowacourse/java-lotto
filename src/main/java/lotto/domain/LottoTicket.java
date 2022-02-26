@@ -19,8 +19,8 @@ public class LottoTicket {
     }
 
     private Rank getRank(LottoNumber bonusNumber, int total) {
-        if (total == Rank.MATCH_FIVE_NUMBERS.getMatchCount() && numbers.contains(bonusNumber)) {
-            return Rank.MATCH_FIVE_AND_BONUS_NUMBERS;
+        if (total == Rank.THIRD.getMatchCount() && numbers.contains(bonusNumber)) {
+            return Rank.SECOND;
         }
         return Rank.matchResult(total);
     }

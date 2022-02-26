@@ -13,15 +13,15 @@ class RanksTest {
 
     @Test
     void 당첨_통계_기능_테스트() {
-        List<Rank> result = List.of(Rank.MATCH_SIX_NUMBERS, Rank.MATCH_FIVE_AND_BONUS_NUMBERS, Rank.MATCH_FIVE_NUMBERS);
+        List<Rank> result = List.of(Rank.FIRST, Rank.SECOND, Rank.THIRD);
         Ranks ranks = new Ranks(result);
         EnumMap<Rank, Integer> statistics = ranks.getStatistics();
 
-        assertThat(statistics.get(Rank.MATCH_SIX_NUMBERS)).isEqualTo(1);
-        assertThat(statistics.get(Rank.MATCH_FIVE_AND_BONUS_NUMBERS)).isEqualTo(1);
-        assertThat(statistics.get(Rank.MATCH_FIVE_NUMBERS)).isEqualTo(1);
-        assertThat(statistics.get(Rank.MATCH_FOUR_NUMBERS)).isEqualTo(0);
-        assertThat(statistics.get(Rank.MATCH_THREE_NUMBERS)).isEqualTo(0);
-        assertThat(statistics.get(Rank.MATCH_ZERO_NUMBERS)).isEqualTo(0);
+        assertThat(statistics.get(Rank.FIRST)).isEqualTo(1);
+        assertThat(statistics.get(Rank.SECOND)).isEqualTo(1);
+        assertThat(statistics.get(Rank.THIRD)).isEqualTo(1);
+        assertThat(statistics.get(Rank.FOURTH)).isEqualTo(0);
+        assertThat(statistics.get(Rank.FIFTH)).isEqualTo(0);
+        assertThat(statistics.get(Rank.MISS)).isEqualTo(0);
     }
 }

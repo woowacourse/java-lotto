@@ -39,7 +39,7 @@ class MoneyManagerTest {
 
     @Test
     void 당첨_수익률_계산_기능_테스트() {
-        List<Rank> result = List.of(Rank.MATCH_THREE_NUMBERS, Rank.MATCH_FOUR_NUMBERS);
+        List<Rank> result = List.of(Rank.FIFTH, Rank.FOURTH);
         Ranks ranks = new Ranks(result);
         MoneyManager moneyManager = new MoneyManager(14000);
         assertThat(moneyManager.calculateYield(ranks.getLottoTotalReward())).isEqualTo(55000 / (double) 14000);

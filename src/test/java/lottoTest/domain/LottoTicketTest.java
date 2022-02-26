@@ -38,13 +38,13 @@ class LottoTicketTest {
         return Stream.of(
                 Arguments.of(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(7),
                         toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                        Rank.MATCH_SIX_NUMBERS),
+                        Rank.FIRST),
                 Arguments.of(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(7),
                         toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 8)),
-                        Rank.MATCH_FIVE_NUMBERS),
+                        Rank.THIRD),
                 Arguments.of(toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(8),
                         toLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 8)),
-                        Rank.MATCH_FIVE_AND_BONUS_NUMBERS)
+                        Rank.SECOND)
         );
     }
 }

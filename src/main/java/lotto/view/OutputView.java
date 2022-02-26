@@ -49,7 +49,7 @@ public class OutputView {
     }
 
     private static void displayRankResult(Rank rank, Integer count) {
-        if (rank.getMatchCount() != Rank.MATCH_ZERO_NUMBERS.getMatchCount()) {
+        if (rank.getMatchCount() != Rank.MISS.getMatchCount()) {
             System.out.println(
                     rank.getMatchStatus() + String.format(STATISTICS_FORMAT, rank.getReward(), count));
         }
