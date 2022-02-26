@@ -13,6 +13,7 @@ import lotto.domain.vo.LottoNumber;
 public class WinningNumbers {
 
     public static final int WINNING_NUMBER_SIZE = 6;
+
     private final List<WinningNumber> winningNumbers;
 
     private WinningNumbers(List<LottoNumber> normalWinningNumbers, LottoNumber bonusWinningNumber) {
