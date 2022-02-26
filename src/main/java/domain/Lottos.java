@@ -9,23 +9,27 @@ public class Lottos {
 
     private final List<Lotto> lottos;
 
-    public Lottos(List<Lotto> lottos) {
+    private Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }
 
-    // TODO: should be deleted
-    public static Lottos ofRandom(int lottoCount) {
-        List<Lotto> lottos = Stream.generate(Lotto::new)
-                .limit(lottoCount)
+    public static Lottos of(List<Lotto> manuals, int randomCount) {
+        List<Lotto> lottos = Stream.concat(manuals.stream(), randomLottosStream(randomCount))
                 .collect(Collectors.toList());
 
         return new Lottos(lottos);
     }
 
-    public void createAndAddLottos(int lottoCount) {
-        Stream.generate(Lotto::new)
-                .limit(lottoCount)
-                .forEach(lottos::add);
+    public static Lottos ofRandom(int randomCount) {
+        List<Lotto> lottos = randomLottosStream(randomCount)
+                .collect(Collectors.toList());
+
+        return new Lottos(lottos);
+    }
+
+    private static Stream<Lotto> randomLottosStream(int randomCount) {
+        return Stream.generate(Lotto::new)
+                .limit(randomCount);
     }
 
     public List<Lotto> getLottos() {

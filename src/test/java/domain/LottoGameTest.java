@@ -37,7 +37,7 @@ public class LottoGameTest {
 
     @Test
     void getResultStatistics() {
-        Lottos lottos = new Lottos(getLottosExample(firstPrizeLotto, secondPrizeLotto, noPrizeLotto));
+        Lottos lottos = Lottos.of(getLottosExample(firstPrizeLotto, secondPrizeLotto, noPrizeLotto), 0);
         LottoGame game = new LottoGame(lottos, referee);
 
         Map<LottoResult, Integer> actual = game.getResultStatistics();
@@ -52,7 +52,7 @@ public class LottoGameTest {
 
     @Test
     void calculatePrizePriceRatio_zeroIfNoPrize() {
-        Lottos lottos = new Lottos(getLottosExample(noPrizeLotto));
+        Lottos lottos = Lottos.of(getLottosExample(noPrizeLotto), 0);
         LottoGame game = new LottoGame(lottos, referee);
 
         float actual = game.calculatePrizePriceRatio();
@@ -62,7 +62,7 @@ public class LottoGameTest {
 
     @Test
     void calculatePrizePriceRatio_fifthPrizeEqualsFiveTimesThePrice() {
-        Lottos lottos = new Lottos(getLottosExample(fifthPrizeLotto));
+        Lottos lottos = Lottos.of(getLottosExample(fifthPrizeLotto), 0);
         LottoGame game = new LottoGame(lottos, referee);
 
         float actual = game.calculatePrizePriceRatio();

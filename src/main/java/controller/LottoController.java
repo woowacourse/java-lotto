@@ -27,25 +27,26 @@ public class LottoController {
         int totalCount = totalLottoPrice / LOTTO_PRICE;
         int manualCount = requestManualLottoCount();
 
-        if (manualCount > 0) {
-            return initManualAndRandomLottos(totalCount, manualCount);
-        }
-
-        return Lottos.ofRandom(totalCount);
+        return initManualAndRandomLottos(totalCount, manualCount);
     }
 
     private Lottos initManualAndRandomLottos(int totalCount, int manualCount) {
         int randomCount = totalCount - manualCount;
 
-        List<Lotto> manualLottos = requestManualLottos(manualCount).stream()
+        if (manualCount <= 0) {
+            return Lottos.ofRandom(randomCount);
+        }
+
+        List<Lotto> manualLottos = getValidManualLottos(requestManualLottos(manualCount));
+        return Lottos.of(manualLottos, randomCount);
+    }
+
+    private List<Lotto> getValidManualLottos(List<String> manualStrings) {
+        return manualStrings
+                .stream()
                 .map(this::getValidLottoNumbers)
                 .map(Lotto::new)
                 .collect(Collectors.toList());
-
-        Lottos lottos = new Lottos(manualLottos);
-        lottos.createAndAddLottos(randomCount);
-
-        return lottos;
     }
 
     public LottoReferee initLottoReferee(String winningNumbersInput, int bonusBallValue) {
