@@ -9,26 +9,26 @@ public class Result {
     private static final int ADD_NUMBER = 1;
     private static final double ROUND_OFF_NUMBER = 1e3;
 
-    private final Map<LottoRankings, Integer> result;
+    private final Map<LottoRanking, Integer> result;
 
     public Result() {
         result = new HashMap<>();
-        for (LottoRankings value : LottoRankings.values()) {
+        for (LottoRanking value : LottoRanking.values()) {
             result.put(value, INIT_COUNT);
         }
     }
 
-    public int getCount(LottoRankings key) {
+    public int getCount(LottoRanking key) {
         return result.get(key);
     }
 
-    public void add(LottoRankings key) {
+    public void add(LottoRanking key) {
         result.put(key, result.get(key) + ADD_NUMBER);
     }
 
     public double getRateOfProfit(Money money) {
         long total = 0L;
-        for (Map.Entry<LottoRankings, Integer> entry : result.entrySet()) {
+        for (Map.Entry<LottoRanking, Integer> entry : result.entrySet()) {
             total += (long)entry.getKey().getPrice() * entry.getValue();
         }
 

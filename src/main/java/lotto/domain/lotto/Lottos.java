@@ -5,7 +5,7 @@ import java.util.List;
 
 import lotto.domain.Money;
 import lotto.domain.Result;
-import lotto.domain.LottoRankings;
+import lotto.domain.LottoRanking;
 
 public class Lottos {
 
@@ -25,8 +25,8 @@ public class Lottos {
         Result result = new Result();
 
         for (Lotto lotto : lottos) {
-            LottoRankings lottoRankings = lotto.getWinningPrice(winningNumbers, bonusNumber);
-            result.add(lottoRankings);
+            LottoRanking lottoRanking = lotto.getWinningPrice(winningNumbers, bonusNumber);
+            result.add(lottoRanking);
         }
 
         return result;

@@ -6,7 +6,7 @@ import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.Lottos;
 import lotto.domain.lotto.Number;
 import lotto.domain.Result;
-import lotto.domain.LottoRankings;
+import lotto.domain.LottoRanking;
 
 public class OutputView {
 
@@ -35,8 +35,8 @@ public class OutputView {
 
     public static void printResult(Result result) {
         System.out.printf("%n당첨 통계%n---------%n");
-        for (LottoRankings value : LottoRankings.values()) {
-            if (value == LottoRankings.Fail) {
+        for (LottoRanking value : LottoRanking.values()) {
+            if (value == LottoRanking.Fail) {
                 continue;
             }
             String bonusBallMessage = " ";

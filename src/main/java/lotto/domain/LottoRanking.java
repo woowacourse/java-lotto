@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.Arrays;
 
-public enum LottoRankings {
+public enum LottoRanking {
 
     Fail(0, false, 0),
     Three(3, false, 5_000),
@@ -15,23 +15,23 @@ public enum LottoRankings {
     private final boolean containBonus;
     private final int price;
 
-    LottoRankings(int count, boolean containBonus, int price) {
+    LottoRanking(int count, boolean containBonus, int price) {
         this.count = count;
         this.containBonus = containBonus;
         this.price = price;
     }
 
-    public static LottoRankings of(int count, boolean containBonus) {
+    public static LottoRanking of(int count, boolean containBonus) {
         if (count == 5 && containBonus) {
-            return LottoRankings.FiveAndBonus;
+            return LottoRanking.FiveAndBonus;
         }
         if (count == 5 && !containBonus) {
-            return LottoRankings.Five;
+            return LottoRanking.Five;
         }
         return Arrays.stream(values())
             .filter(it -> it.count == count)
             .findAny()
-            .orElse(LottoRankings.Fail);
+            .orElse(LottoRanking.Fail);
     }
 
     public int getPrice() {
