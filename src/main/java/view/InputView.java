@@ -26,9 +26,9 @@ public class InputView {
 	}
 
 	private String inputMoney() {
+		System.out.println(INPUT_MONEY_MESSAGE.getMessage());
+		final String money = scanner.nextLine();
 		try {
-			System.out.println(INPUT_MONEY_MESSAGE.getMessage());
-			final String money = scanner.nextLine();
 			validateMoney(money);
 			return money;
 		} catch (IllegalArgumentException exception) {
@@ -61,9 +61,9 @@ public class InputView {
 	}
 
 	private String inputLotteryNumber() {
+		System.out.println(INPUT_WINNING_NUMBER_MESSAGE.getMessage());
+		final String winningNumber = scanner.nextLine();
 		try {
-			System.out.println(INPUT_WINNING_NUMBER_MESSAGE.getMessage());
-			final String winningNumber = scanner.nextLine();
 			validateWinningNumber(winningNumber);
 			return winningNumber;
 		} catch (IllegalArgumentException exception) {
@@ -90,9 +90,9 @@ public class InputView {
 	}
 
 	private String inputBonusNumber() {
+		System.out.println(INPUT_BONUS_BALL_MESSAGE.getMessage());
+		final String bonusNumber = scanner.nextLine();
 		try {
-			System.out.println(INPUT_BONUS_BALL_MESSAGE.getMessage());
-			final String bonusNumber = scanner.nextLine();
 			validateNumber(bonusNumber);
 			return bonusNumber;
 		} catch (IllegalArgumentException exception) {
