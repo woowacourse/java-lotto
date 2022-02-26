@@ -38,7 +38,7 @@ public class LottosTest {
                 new Lotto(givenNumbers(1, 2, 3, 4, 5, 6)),
                 new Lotto(givenNumbers(1, 2, 3, 4, 5, 7)),
                 new Lotto(givenNumbers(1, 2, 3, 4, 5, 8)),
-                new Lotto(givenNumbers(1, 2, 3, 7, 9, 10)),
+                new Lotto(givenNumbers(1, 2, 3, 4, 9, 10)),
                 new Lotto(givenNumbers(1, 2, 3, 9, 10, 11)),
                 new Lotto(givenNumbers(11, 12, 13, 14, 15, 16)))
         );
