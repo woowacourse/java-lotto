@@ -26,7 +26,7 @@ class LottoTicketsTest {
     @Test
     void 당첨_번호_판별() {
         // given
-        LottoTickets lottoTickets = new LottoTickets(1, () -> List.of(1, 2, 3, 4, 5, 6));
+        LottoTickets lottoTickets = new LottoTickets(1, size -> List.of(1, 2, 3, 4, 5, 6));
         WinningNumber winningNumber = new WinningNumber(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)), new LottoNumber(7));
 
         // when

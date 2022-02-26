@@ -9,18 +9,19 @@ import java.util.stream.IntStream;
 
 public class AutoLottoNumberGenerator implements LottoNumberGenerator {
 
-    private static final List<Integer> LOTTO_TOTAL_NUMBERS = IntStream.rangeClosed(1, 45)
+    private static final int START_INCLUSIVE = 1;
+    private static final int END_INCLUSIVE = 45;
+    private static final List<Integer> LOTTO_TOTAL_NUMBERS = IntStream.rangeClosed(START_INCLUSIVE, END_INCLUSIVE)
             .boxed()
             .collect(toList());
 
-    private static final int LOTTO_NUMBERS_FROM_INDEX = 0;
-    private static final int LOTTO_NUMBERS_TO_INDEX = 6;
-
     @Override
-    public List<Integer> generate() {
+    public List<Integer> generate(int size) {
         List<Integer> lottoTotalNumbers = new ArrayList<>(LOTTO_TOTAL_NUMBERS);
         Collections.shuffle(lottoTotalNumbers);
 
-        return lottoTotalNumbers.subList(LOTTO_NUMBERS_FROM_INDEX, LOTTO_NUMBERS_TO_INDEX);
+        return lottoTotalNumbers.stream()
+                .limit(size)
+                .collect(toList());
     }
 }

@@ -15,7 +15,7 @@ public class LottoTicket {
     private final Set<LottoNumber> lottoNumbers;
 
     public LottoTicket(LottoNumberGenerator lottoNumberGenerator) {
-        this(lottoNumberGenerator.generate());
+        this(lottoNumberGenerator.generate(DEFAULT_LOTTO_NUMBERS_SIZE));
     }
 
     public LottoTicket(List<Integer> numbers) {

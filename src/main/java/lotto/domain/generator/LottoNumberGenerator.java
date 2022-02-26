@@ -4,5 +4,5 @@ import java.util.List;
 
 @FunctionalInterface
 public interface LottoNumberGenerator {
-    List<Integer> generate();
+    List<Integer> generate(int size);
 }

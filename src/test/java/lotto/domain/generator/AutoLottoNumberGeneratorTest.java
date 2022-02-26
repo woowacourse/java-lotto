@@ -15,7 +15,7 @@ class AutoLottoNumberGeneratorTest {
         LottoNumberGenerator lottoNumberGenerator = new AutoLottoNumberGenerator();
 
         // when
-        List<Integer> lottoNumbers = lottoNumberGenerator.generate();
+        List<Integer> lottoNumbers = lottoNumberGenerator.generate(6);
 
         // then
         assertThat(lottoNumbers.size()).isEqualTo(6);
@@ -28,7 +28,7 @@ class AutoLottoNumberGeneratorTest {
         LottoNumberGenerator lottoNumberGenerator = new AutoLottoNumberGenerator();
 
         // when
-        List<Integer> lottoNumbers = lottoNumberGenerator.generate();
+        List<Integer> lottoNumbers = lottoNumberGenerator.generate(6);
 
         // then
         assertThat(lottoNumbers).isNotIn(0, 46);
