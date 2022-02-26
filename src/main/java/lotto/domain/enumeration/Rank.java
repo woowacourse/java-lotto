@@ -11,7 +11,8 @@ public enum Rank {
     FIFTH(5_000, 3, false),
     NOTHING(0, 0, false);
 
-    public static final int SECOND_PRICE_COUNT = 5;
+    private static final int SECOND_PRICE_COUNT = 5;
+
     private final int prizeMoney;
     private final int count;
     private final boolean isBonus;
