@@ -9,31 +9,31 @@ import lotto.domain.Rank;
 
 public class OutputView {
     private static final String ERROR_PREFIX = "[ERROR] ";
-    private static final String ASK_PURCHASE_AMOUNT = "구입금액을 입력해 주세요.";
-    private static final String LOTTO_COUNT = "%d개를 구매했습니다.\n";
+    private static final String PURCHASE_AMOUNT_REQUEST_MESSAGE = "구입금액을 입력해 주세요.";
+    private static final String LOTTO_COUNT_MESSAGE = "%d개를 구매했습니다.\n";
     private static final String LOTTO_DELIMITER = ", ";
     private static final String LOTTO_FORMAT = "[%s]\n";
-    private static final String WIN_NUMBER = "\n지난 주 당첨 번호를 입력해 주세요.";
-    private static final String BONUS_BALL = "보너스 볼을 입력해 주세요.";
+    private static final String WINNING_NUMBER_REQUEST_MESSAGE = "\n지난 주 당첨 번호를 입력해 주세요.";
+    private static final String BONUS_BALL_REQUEST_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String STATISTICS_TITLE = "\n당첨 통계\n";
     private static final String TITLE_DIVIDING_LINE = "-";
     private static final int LINE_COUNT = 9;
     private static final String RESULT_FORMAT = "%d개 일치%s(%d원) - %d개\n";
     private static final String BONUS_FORMAT = ", 보너스 볼 일치";
     private static final String PROFIT_FORMAT = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)";
-    private static final String PROFIT = "이익";
-    private static final String LOSS = "손해";
+    private static final String PROFIT_MESSAGE = "이익";
+    private static final String LOSS_MESSAGE = "손해";
 
     public static void printErrorMessage(String errorMessage) {
         System.out.println(ERROR_PREFIX + errorMessage);
     }
 
     public static void printPurchaseAmountRequest() {
-        System.out.println(ASK_PURCHASE_AMOUNT);
+        System.out.println(PURCHASE_AMOUNT_REQUEST_MESSAGE);
     }
 
     public static void printLottoCount(int lottoCount) {
-        System.out.printf(LOTTO_COUNT, lottoCount);
+        System.out.printf(LOTTO_COUNT_MESSAGE, lottoCount);
     }
 
     public static void printLottos(Lottos lottos) {
@@ -47,11 +47,11 @@ public class OutputView {
     }
 
     public static void printWinningNumberRequest() {
-        System.out.println(WIN_NUMBER);
+        System.out.println(WINNING_NUMBER_REQUEST_MESSAGE);
     }
 
     public static void printBonusBallRequest() {
-        System.out.println(BONUS_BALL);
+        System.out.println(BONUS_BALL_REQUEST_MESSAGE);
     }
 
     public static void printStatisticsTitle() {
@@ -73,12 +73,12 @@ public class OutputView {
     }
 
     public static void printProfitRate(final double profitRate) {
-        double splitProfitRate = Math.floor(profitRate * 100) / 100.0;
+        double roundDownProfitRate = Math.floor(profitRate * 100) / 100.0;
 
-        String profitOrNot = PROFIT;
-        if (splitProfitRate <= 1) {
-            profitOrNot = LOSS;
+        if (roundDownProfitRate <= 1) {
+            System.out.printf(PROFIT_FORMAT, roundDownProfitRate, LOSS_MESSAGE);
+            return;
         }
-        System.out.printf(PROFIT_FORMAT, splitProfitRate, profitOrNot);
+        System.out.printf(PROFIT_FORMAT, roundDownProfitRate, PROFIT_MESSAGE);
     }
 }
