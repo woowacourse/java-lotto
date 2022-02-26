@@ -2,7 +2,9 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -27,9 +29,8 @@ public class Lotto {
     }
 
     private void validateDuplicate(List<LottoNumber> lottoNumbers) {
-        List<LottoNumber> deDuplicatedNumbers = lottoNumbers.stream()
-            .distinct()
-            .collect(Collectors.toList());
+        Set<LottoNumber> deDuplicatedNumbers = new HashSet<>(lottoNumbers);
+
         if (deDuplicatedNumbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException(ERROR_MESSAGE_NOT_DUPLICATE);
         }
