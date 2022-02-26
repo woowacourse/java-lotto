@@ -1,6 +1,8 @@
 import domain.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 import java.util.Map;
@@ -23,13 +25,14 @@ class LottoMachineTest {
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(ints = {10000, 10030, 10300, 10500, 10900, 10950})
     @DisplayName("입력 금액에 따라 알맞은 개수의 로또 생성 검증")
-    void createLottoTicketsByAmount() {
+    void createLottoTicketsByAmount(int amount) {
         LottoMachine lottoMachine = new LottoMachine();
 
         List<LottoTicket> lottoTickets = lottoMachine.purchaseLottoTickets(
-                Money.from(10000), new FixedLottoNumberStrategy());
+                Money.from(amount), new FixedLottoNumberStrategy());
 
         assertThat(lottoTickets.size()).isEqualTo(10);
     }
