@@ -1,9 +1,9 @@
 package lotto;
 
+import lotto.domain.LottoMachine;
 import lotto.domain.LottoPurchaseCounts;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
-import lotto.domain.RandomLottoMachine;
 import lotto.domain.WinLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -16,7 +16,7 @@ public class LottoApplication {
         OutputView.outputBuyLottoCounts(purchaseCounts);
 
         final Lottos manualLottos = Lottos.from(InputView.inputManualLottos(purchaseCounts.getManualCount()));
-        final Lottos lottos = RandomLottoMachine.buyLotto(manualLottos.getLottos(), purchaseCounts.getAutomaticCount());
+        final Lottos lottos = LottoMachine.buyLotto(manualLottos.getLottos(), purchaseCounts.getAutomaticCount());
         OutputView.outputLottos(lottos.getLottos());
 
         final WinLotto winLotto = WinLotto.of(InputView.inputWinLotto(), InputView.inputBonusNumber());

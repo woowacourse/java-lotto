@@ -11,12 +11,12 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class RandomLottoMachineTest {
+public class LottoMachineTest {
 
     @DisplayName("로또 번호 6개를 생성할 수 있다.")
     @Test
     void createRandomLottoNumbers() {
-        final Lotto randomLotto = RandomLottoMachine.createRandomLotto();
+        final Lotto randomLotto = LottoMachine.createRandomLotto();
 
         assertThat(randomLotto.getLottoNumbers()).hasSize(6);
     }
@@ -26,7 +26,7 @@ public class RandomLottoMachineTest {
     void createLottoExceptionByNegativeCount() {
         final List<Lotto> automaticNumbers = new ArrayList<>();
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> RandomLottoMachine.buyLotto(automaticNumbers, -1))
+                .isThrownBy(() -> LottoMachine.buyLotto(automaticNumbers, -1))
                 .withMessage("[ERROR] 랜덤 로또 구매 갯수는 음수가 들어올 수 없습니다.");
     }
 
@@ -34,7 +34,7 @@ public class RandomLottoMachineTest {
     @Test
     void createLottoExceptionByNull() {
         assertThatExceptionOfType(NullPointerException.class)
-                .isThrownBy(() -> RandomLottoMachine.buyLotto(null, 0))
+                .isThrownBy(() -> LottoMachine.buyLotto(null, 0))
                 .withMessage("[ERROR] 수동 구매 로또는 null이 들어올 수 없습니다.");
     }
 
@@ -45,7 +45,7 @@ public class RandomLottoMachineTest {
                 createLottoNumbers(2, 3, 4, 5, 6, 7))
                 .map(Lotto::new)
                 .collect(Collectors.toList());
-        final Lottos lottos = RandomLottoMachine.buyLotto(manualLottos, 3);
+        final Lottos lottos = LottoMachine.buyLotto(manualLottos, 3);
 
         assertThat(lottos.getLottos()).hasSize(5);
     }

@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class RandomLottoMachine {
+public class LottoMachine {
 
     private static final List<LottoNumber> LOTTO_NUMBERS;
 
@@ -17,7 +17,7 @@ public class RandomLottoMachine {
                 .collect(Collectors.toList());
     }
 
-    private RandomLottoMachine() {
+    private LottoMachine() {
     }
 
     public static Lottos buyLotto(final List<Lotto> manualLottos, final int automaticLottoCounts) {
