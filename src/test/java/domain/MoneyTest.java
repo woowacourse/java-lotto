@@ -22,4 +22,15 @@ public class MoneyTest {
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage("최소 구입 금액은 1000원 입니다.");
 	}
+
+	@Test
+	@DisplayName("올바른 금액을 입력하면 Money 객체를 생성한다")
+	void createMoneyObject() {
+		final int expectedMoney = 1000;
+
+		final Money money = new Money(1000);
+		final int actual = money.getMoney();
+
+		assertThat(actual).isEqualTo(expectedMoney);
+	}
 }
