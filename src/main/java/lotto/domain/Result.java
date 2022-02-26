@@ -8,7 +8,6 @@ public class Result {
     private static final int INIT_COUNT = 0;
     private static final int ADD_NUMBER = 1;
     private static final long INIT_WINNING_PRICE = 0L;
-    private static final double DECIMAL_PLACE = 1000.0;
 
     private final Map<WinningPrice, Integer> result;
 
@@ -28,12 +27,12 @@ public class Result {
     }
 
     public double getRateOfProfit(Money money) {
-        long total = INIT_WINNING_PRICE;
+        long totalProfit = INIT_WINNING_PRICE;
         for (Map.Entry<WinningPrice, Integer> entry : result.entrySet()) {
-            total += (long) entry.getKey().getPrice() * entry.getValue();
+            totalProfit += (long) entry.getKey().getPrice() * entry.getValue();
         }
 
-        return Math.round((double) total / money.getValue() * DECIMAL_PLACE) / DECIMAL_PLACE;
+        return money.calculateRateOfProfit(totalProfit);
     }
 
     @Override

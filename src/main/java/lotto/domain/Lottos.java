@@ -12,10 +12,10 @@ public class Lottos {
     private final List<Lotto> lottos;
 
     public Lottos(Money money) {
-        int amount = money.getValue() / PRICE;
+        int quantity = money.getAvailableQuantity(PRICE);
 
         this.lottos = new ArrayList<>();
-        while (amount-- > 0) {
+        while (quantity-- > 0) {
             Lotto lotto = new Lotto();
             lottos.add(lotto);
         }
