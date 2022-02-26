@@ -4,8 +4,12 @@ public class WinningLotto {
 
     private final Lotto winningLotto;
 
-    public WinningLotto(String input) {
-        this.winningLotto = Lotto.generateLottoByManual(input);
+    private WinningLotto(Lotto winningLotto) {
+        this.winningLotto = winningLotto;
+    }
+
+    public static WinningLotto generateWinningLottoByConsole(String consoleInput) {
+        return new WinningLotto(Lotto.generateLottoByConsole(consoleInput));
     }
 
     public boolean isContain(LottoNumber lottoNumber) {

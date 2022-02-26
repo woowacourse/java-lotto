@@ -1,13 +1,18 @@
 package lotto.domain;
 
-import lotto.receiver.BonusNumberReceiver;
+import lotto.validator.BonusNumberValidator;
 
 public class BonusNumber {
 
     private final LottoNumber bonusNumber;
 
-    public BonusNumber(String input, WinningLotto winningLotto) {
-        this.bonusNumber = BonusNumberReceiver.receive(input, winningLotto);
+    private BonusNumber(LottoNumber bonusNumber, WinningLotto winningLotto) {
+        BonusNumberValidator.validate(bonusNumber, winningLotto);
+        this.bonusNumber = bonusNumber;
+    }
+
+    public static BonusNumber generateBonusNumberByConsole(String consoleInput, WinningLotto winningLotto) {
+        return new BonusNumber(LottoNumber.findByNumber(Integer.parseInt(consoleInput)), winningLotto);
     }
 
     public LottoNumber getBonusNumber() {

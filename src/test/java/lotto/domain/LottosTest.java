@@ -10,7 +10,7 @@ public class LottosTest {
     @Test
     @DisplayName("구입금액 만큼 로또티켓을 구입")
     void buyLottosByAuto() {
-        Lottos lottos = Lottos.buyLottosByAuto(new Money("10000"));
+        Lottos lottos = Lottos.buyLottosByAuto(Money.generateMoneyByConsole("10000"));
         assertThat(lottos.getLottos().size()).isEqualTo(10);
     }
 }

@@ -1,13 +1,18 @@
 package lotto.domain;
 
-import lotto.receiver.MoneyReceiver;
+import lotto.validator.MoneyValidator;
 
 public class Money {
 
     private final int money;
 
-    public Money(String input) {
-        this.money = MoneyReceiver.receive(input);
+    private Money(int money) {
+        MoneyValidator.validate(money);
+        this.money = money;
+    }
+
+    public static Money generateMoneyByConsole(String consoleInput) {
+        return new Money(Integer.parseInt(consoleInput));
     }
 
     public int getMoney() {
