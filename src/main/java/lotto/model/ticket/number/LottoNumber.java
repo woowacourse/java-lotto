@@ -1,25 +1,29 @@
 package lotto.model.ticket.number;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 45;
-    public static final LottoNumber[] LOTTO_NUMBER_CACHE = new LottoNumber[MAX_LOTTO_NUMBER + 1];
-    public static final String LOTTO_NUMBER_IN_RANGE_MESSAGE = "로또 숫자는 %d~%d 사이의 숫자여야 합니다.";
+    private static final List<LottoNumber> LOTTO_NUMBER_CACHE;
+    private static final String LOTTO_NUMBER_IN_RANGE_MESSAGE = "로또 숫자는 %d~%d 사이의 숫자여야 합니다.";
 
     static {
-        IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
-                .forEach(number -> LOTTO_NUMBER_CACHE[number] = new LottoNumber(number));
+        LOTTO_NUMBER_CACHE = IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
+                .mapToObj(LottoNumber::new).collect(Collectors.toUnmodifiableList());
     }
 
     private final int number;
 
     public static LottoNumber from(int number) {
         validate(number);
-        return LOTTO_NUMBER_CACHE[number];
+        return LOTTO_NUMBER_CACHE.get(number);
     }
 
     public LottoNumber(int number) {

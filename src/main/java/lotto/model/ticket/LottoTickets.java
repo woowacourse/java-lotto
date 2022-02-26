@@ -26,10 +26,9 @@ public class LottoTickets {
     }
 
     public LottoRanks compareResult(WinningTicket winningTicket) {
-        List<LottoRank> lottoRanks = tickets.stream()
+        return new LottoRanks(tickets.stream()
                 .map(winningTicket::judgeRank)
-                .collect(Collectors.toList());
-        return new LottoRanks(lottoRanks);
+                .collect(Collectors.toList()));
     }
 
     public List<LottoTicket> getTickets() {
