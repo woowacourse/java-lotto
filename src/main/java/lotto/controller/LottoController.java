@@ -1,75 +1,64 @@
 package lotto.controller;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoWinningNumbers;
 import lotto.domain.Lottos;
-import lotto.utils.Validation;
+import lotto.dto.Result;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
 
-    private Lottos lottos;
-    private LottoWinningNumbers lottoWinningNumbers;
+    private static final String LOTTO_DELIMITER = ",";
 
-    public LottoController() {
+    public Lottos createLottos(final int count) {
+        return new Lottos(count);
     }
 
-    public void printLottos() {
+    public void printLottos(Lottos lottos) {
         OutputView.printLottos(lottos);
     }
 
-    public void inputLottoMoney(final int money) {
-        lottos = new Lottos(money);
-    }
+    public LottoWinningNumbers createLottoWinningNumbers() {
+        final String numbers = inputLottoWinningNumbers();
+        final Lotto lotto = new Lotto(changeNumbersToLotto(numbers));
+        final LottoNumber bonusNumber = new LottoNumber(inputBonusNumber());
 
-    public void createLottoWinningNumbers() {
-        String value = inputLottoWinningNumbers();
-        int bonusNumber = inputBonusNumber();
-
-        lottoWinningNumbers = new LottoWinningNumbers(value, bonusNumber);
+        return new LottoWinningNumbers(lotto, bonusNumber);
     }
 
     private String inputLottoWinningNumbers() {
-        String value = removeBlank(InputView.inputLottoWinningNumbers());
-        Validation.checkInputLottoWinningNumbers(value);
+        return removeBlank(InputView.inputLottoWinningNumbers());
+    }
 
-        return value;
+    private String inputBonusNumber() {
+        return InputView.inputBonusNumber();
+    }
+
+    private List<LottoNumber> changeNumbersToLotto(String numbers) {
+        return Arrays.stream(numbers.split(LOTTO_DELIMITER))
+                .map((s) -> removeBlank(s))
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
     private String removeBlank(final String value) {
         return value.replace(" ", "");
     }
 
-    public int inputBonusNumber() {
-        String bonusNumber = InputView.inputBonusNumber();
-        Validation.checkValidateInt(bonusNumber);
-
-        return Integer.parseInt(bonusNumber);
-    }
-
-    public void calculateRanks() {
-        lottoWinningNumbers.initWinningResult();
-
+    public Result calculateResult(LottoWinningNumbers lottoWinningNumbers, Lottos lottos) {
+        Result result = new Result();
         for (Lotto lotto : lottos.getLottos()) {
-            lottoWinningNumbers.calculateWinning(lotto);
+            result.calculateWinning(lottoWinningNumbers, lotto);
         }
+        return result;
     }
 
-    public double calculateProfit(final int money) {
-        return (double) lottoWinningNumbers.calculateWinningMoney() / money;
-    }
-
-    public void printWinningResult() {
-        OutputView.printWinningResult(lottoWinningNumbers);
-    }
-
-    public void printProfit(final double profit) {
-        OutputView.printProfit(profit);
-        if (profit >= 1){
-            OutputView.printWinningLottoProfit();
-            return;
-        }
-        OutputView.printWinningLottoLoss();
+    public void printWinningResult(Result result) {
+        OutputView.printWinningResult(result);
     }
 }

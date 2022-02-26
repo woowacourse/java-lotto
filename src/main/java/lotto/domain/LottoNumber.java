@@ -1,31 +1,68 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Objects;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
-    public static final int LOTTO_SIZE = 6;
     public static final int LOTTO_MIN_RANGE = 1;
     public static final int LOTTO_MAX_RANGE = 45;
+    public static final String ERROR_WRONG_LOTTO_NUMBER = "[ERROR] " + LOTTO_MIN_RANGE + "~" + LOTTO_MAX_RANGE + " 사이의 숫자를 입력해주세요..";
 
-    private LottoNumber() {
+    private final int lottoNumber;
+
+    public LottoNumber(final int number) {
+        checkLottoRange(number);
+        this.lottoNumber = number;
     }
 
-    public static List<Integer> createLottoNumbers() {
-        List<Integer> lottoNumbers = new ArrayList<>();
-        setRangeLottoNumber(lottoNumbers);
-        Collections.shuffle(lottoNumbers);
-
-        return lottoNumbers.subList(0, LOTTO_SIZE);
+    public LottoNumber(final String number) {
+        checkValidate(number);
+        this.lottoNumber = Integer.parseInt(number);
     }
 
-    private static List<Integer> setRangeLottoNumber(final List<Integer> values) {
-        for (int i = LOTTO_MIN_RANGE; i <= LOTTO_MAX_RANGE; i++) {
-            values.add(i);
+    private void checkValidate(final String number) {
+        checkValidateInt(number);
+        checkLottoRange(Integer.parseInt(number));
+    }
+
+    private void checkValidateInt(final String number) {
+        try {
+            Integer.parseInt(number);
+        } catch (NumberFormatException exception) {
+            throw new IllegalArgumentException(ERROR_WRONG_LOTTO_NUMBER);
         }
+    }
 
-        return values;
+    private void checkLottoRange(final int number) {
+        if (!(number >= LOTTO_MIN_RANGE && number <= LOTTO_MAX_RANGE)) {
+            throw new IllegalArgumentException(ERROR_WRONG_LOTTO_NUMBER);
+        }
+    }
+
+    public int getLottoNumber() {
+        return lottoNumber;
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return lottoNumber - o.lottoNumber;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoNumber that = (LottoNumber) o;
+        return lottoNumber == that.lottoNumber;
+    }
+
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumber);
     }
 }

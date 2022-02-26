@@ -2,19 +2,16 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.utils.Validation;
 
 public class Lottos {
 
-    private List<Lotto> lottos = new ArrayList<>();
+    private final List<Lotto> lottos = new ArrayList<>();
 
-    public Lottos(final int money) {
-        Validation.checkDivideMoney(money);
-        int count = money / Money.BASIC_LOTTO_MONEY;
-
+    public Lottos(final int count) {
         for (int i = 0; i < count; i++) {
-            lottos.add(new Lotto(LottoNumber.createLottoNumbers()));
+            lottos.add(new Lotto());
         }
+        List.of(lottos);
     }
 
     public List<Lotto> getLottos() {

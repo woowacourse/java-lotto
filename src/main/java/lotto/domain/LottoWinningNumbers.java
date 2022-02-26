@@ -1,56 +1,32 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.stream.Collectors;
-import lotto.utils.Validation;
-
 public class LottoWinningNumbers {
 
-    public static final String LOTTO_DELIMITER = ",";
-    private final Lotto winningLotto;
-    private int bonusNumber;
-    private HashMap<Rank, Integer> winningResult;
+    public static final String ERROR_DUPLICATE_BONUS_NUMBER = "[ERROR] 보너스번호는 로또번호와 중복되지 않아야 합니다.";
 
-    public LottoWinningNumbers(final String numbers, final int bonusNumber) {
-        initWinningResult();
-        this.winningLotto = new Lotto(createWinningLottoNumbers(numbers));
-        Validation.checkBonusNumber(winningLotto, bonusNumber);
+    private final Lotto winningLotto;
+    private LottoNumber bonusNumber;
+
+    public LottoWinningNumbers(final Lotto winningLotto, final LottoNumber bonusNumber) {
+        this.winningLotto = winningLotto;
+        checkDuplicateBonusNumber(bonusNumber);
         this.bonusNumber = bonusNumber;
     }
 
-    private List<Integer> createWinningLottoNumbers(final String numbers) {
-        return Arrays.stream(numbers.split(LOTTO_DELIMITER))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
-    }
-
-    public void calculateWinning(final Lotto lotto) {
-        int matchCount = (int) winningLotto.getNumbers()
+    public int matchCount(Lotto lotto) {
+        return (int) winningLotto.getNumbers()
                 .stream()
-                .filter(number -> lotto.getNumbers().contains(number))
+                .filter(number -> lotto.contains(number))
                 .count();
-        boolean hasBonusNumber = lotto.getNumbers().contains(bonusNumber);
-        Rank rank = Rank.matchRank(matchCount, hasBonusNumber);
-
-        winningResult.put(rank, winningResult.get(rank) + 1);
     }
 
-    public void initWinningResult() {
-        winningResult = new HashMap<>();
-        for (Rank rank : Rank.values()) {
-            winningResult.put(rank, 0);
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
+    }
+
+    private void checkDuplicateBonusNumber(final LottoNumber bonusNumber) {
+        if (winningLotto.contains(bonusNumber)) {
+            throw new IllegalArgumentException(ERROR_DUPLICATE_BONUS_NUMBER);
         }
-    }
-
-    public int calculateWinningMoney() {
-        return Arrays.stream(Rank.values())
-                .mapToInt(rank -> winningResult.get(rank) * rank.getMoney())
-                .sum();
-    }
-
-    public int getRankCount(final Rank rank) {
-        return winningResult.get(rank);
     }
 }

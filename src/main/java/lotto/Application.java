@@ -2,6 +2,10 @@ package lotto;
 
 import lotto.controller.LottoController;
 import lotto.controller.MoneyController;
+import lotto.domain.LottoWinningNumbers;
+import lotto.domain.Lottos;
+import lotto.domain.Money;
+import lotto.dto.Result;
 
 public class Application {
 
@@ -9,14 +13,15 @@ public class Application {
         MoneyController moneyController = new MoneyController();
         LottoController lottoController = new LottoController();
 
-        lottoController.inputLottoMoney(moneyController.getMoney());
-        lottoController.printLottos();
-        lottoController.createLottoWinningNumbers();
+        Money money = moneyController.inputMoney();
+        Lottos lottos = lottoController.createLottos(money.purchasedLottoAmount());
+        lottoController.printLottos(lottos);
+        LottoWinningNumbers winningNumbers = lottoController.createLottoWinningNumbers();
 
-        lottoController.calculateRanks();
-        lottoController.printWinningResult();
+        Result result = lottoController.calculateResult(winningNumbers, lottos);
+        lottoController.printWinningResult(result);
 
-        double profit = lottoController.calculateProfit(moneyController.getMoney());
-        lottoController.printProfit(profit);
+        double profit = moneyController.calculateProfit(result, money);
+        moneyController.printProfit(profit);
     }
 }

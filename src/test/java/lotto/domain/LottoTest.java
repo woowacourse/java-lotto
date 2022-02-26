@@ -1,7 +1,10 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import lotto.utils.Validation;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -12,29 +15,34 @@ public class LottoTest {
 
     @Test
     public void 로또번호_개수_검증() {
-        assertThatThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4)))
+        List<LottoNumber> lottoNumbers = Arrays.asList(1, 2, 3, 4)
+                .stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+        assertThatThrownBy(() -> new Lotto(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(Validation.ERROR_CREATE_LOTTO);
+                .hasMessageContaining("[ERROR]");
     }
 
     @Test
     public void 로또번호_중복_검증() {
-        assertThatThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5, 5)))
+        List<LottoNumber> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 5)
+                .stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+        assertThatThrownBy(() -> new Lotto(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(Validation.ERROR_CREATE_LOTTO);
+                .hasMessageContaining("[ERROR]");
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {1,2,3,4,5,6})
-    public void 로또번호_체크_성공(int value){
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(lotto.contains(value)).isTrue();
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = {-1, 0, 7})
-    public void 로또번호_체크_실패(int value){
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(lotto.contains(value)).isFalse();
+    @ValueSource(ints = {1, 2, 3, 4, 5, 6})
+    public void 로또번호_생성_성공(int number) {
+        List<LottoNumber> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6)
+                .stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+        Lotto lotto = new Lotto(lottoNumbers);
+        assertThat(lotto.contains(new LottoNumber(number))).isTrue();
     }
 }
