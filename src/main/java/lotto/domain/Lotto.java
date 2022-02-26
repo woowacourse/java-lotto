@@ -45,7 +45,6 @@ public class Lotto {
     }
 
     public List<Number> getNumbers() {
-        numbers.sort(Comparator.comparingInt(Number::getNumber));
         return List.copyOf(numbers);
     }
 }

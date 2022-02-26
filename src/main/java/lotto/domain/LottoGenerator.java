@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -25,7 +26,18 @@ public class LottoGenerator {
     }
 
     public static Lotto generate() {
-        Collections.shuffle(NUMBERS);
-        return new Lotto(new ArrayList<>(NUMBERS.subList(START_INCLUSIVE, END_EXCLUSIVE)));
+        List<Number> numbers = subtractNumbers(shuffleNumbers());
+        numbers.sort(Comparator.comparingInt(Number::getNumber));
+        return new Lotto(numbers);
+    }
+
+    private static List<Number> shuffleNumbers() {
+        List<Number> copiedNumbers = new ArrayList<>(NUMBERS);
+        Collections.shuffle(copiedNumbers);
+        return copiedNumbers;
+    }
+
+    private static List<Number> subtractNumbers(List<Number> numbers) {
+        return new ArrayList<>(numbers.subList(START_INCLUSIVE, END_EXCLUSIVE));
     }
 }
