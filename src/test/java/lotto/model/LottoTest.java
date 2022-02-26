@@ -11,7 +11,7 @@ public class LottoTest {
     @DisplayName("구매 금액이 1000원 단위가 아니면 예외 발생")
     @Test
     void unit_exception() {
-        assertThatThrownBy(() -> Lotto.countAvailableTickets(Money.from("1500")))
+        assertThatThrownBy(() -> Lotto.purchase(Money.from("1500")))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 구매 금액은 1000원 단위로 입력하세요");
     }

@@ -1,7 +1,6 @@
 package lotto;
 
 import java.util.List;
-import lotto.model.Lotto;
 import lotto.model.Lottos;
 import lotto.model.Money;
 import lotto.model.WinningLotto;
@@ -18,7 +17,13 @@ public class Controller {
 
     public static void run() {
         Money money = askMoneyAmount();
-        PrizeInformations prizeInformations = getPrize(purchaseLottos(money), getWinningLotto());
+
+        Lottos lottos = Lottos.purchase(money);
+        ResultView.showPurchaseCount(lottos.getSize());
+        ResultView.showLottos(LottoDTO.from(lottos));
+
+        PrizeInformations prizeInformations = PrizeInformations.from(lottos.match(makeWinningLotto()));
+        ResultView.showPrizeInformation(PrizeInformationDTO.from(prizeInformations));
         ResultView.showEarningRate(prizeInformations.calculateEarningRate(money));
     }
 
@@ -26,50 +31,17 @@ public class Controller {
         return Money.from(InputView.askMoneyAmount());
     }
 
-    private static PrizeInformations getPrize(Lottos lottos, WinningLotto winningLotto) {
-        List<MatchResult> matchResults = lottos.match(winningLotto);
-
-        return getPrizeInformations(matchResults);
+    private static WinningLotto makeWinningLotto() {
+        return new WinningLotto(askWinningNumbers(), askBonusNumber());
     }
 
-    private static PrizeInformations getPrizeInformations(List<MatchResult> matchResults) {
-        PrizeInformations prizeInformations = PrizeInformations.from(matchResults);
-        ResultView.showPrizeInformation(PrizeInformationDTO.from(prizeInformations));
-
-        return prizeInformations;
-    }
-
-    private static Lottos purchaseLottos(Money money) {
-        int purchaseCount = getPurchaseCount(money);
-
-        return purchaseLottos(purchaseCount);
-    }
-
-    private static int getPurchaseCount(Money money) {
-        int purchaseCount = Lotto.countAvailableTickets(money);
-        ResultView.showPurchaseCount(purchaseCount);
-
-        return purchaseCount;
-    }
-
-    private static Lottos purchaseLottos(int purchaseCount) {
-        Lottos lottos = Lottos.purchase(purchaseCount);
-        ResultView.showLottos(LottoDTO.from(lottos));
-
-        return lottos;
-    }
-
-    private static WinningLotto getWinningLotto() {
-        return new WinningLotto(getWinningNumbers(), getBonusNumber());
-    }
-
-    private static LottoNumbers getWinningNumbers() {
+    private static LottoNumbers askWinningNumbers() {
         String[] winningNumbersInput = InputView.askWinningNumbers();
 
         return LottoNumbers.from(List.of(winningNumbersInput));
     }
 
-    private static LottoNumber getBonusNumber() {
+    private static LottoNumber askBonusNumber() {
         String bonusNumberInput = InputView.askBonusNumber();
 
         return LottoNumber.from(bonusNumberInput);

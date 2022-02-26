@@ -1,5 +1,7 @@
 package lotto.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import lotto.model.number.LottoNumber;
 import lotto.model.number.LottoNumbers;
 
@@ -10,13 +12,22 @@ public class Lotto {
     private static final String ERROR_UNIT = "[ERROR] 구매 금액은 1000원 단위로 입력하세요";
     private static final int PRICE = 1000;
 
-    private LottoNumbers numbers;
+    private final LottoNumbers numbers;
 
     public Lotto() {
         this.numbers = LottoNumbers.ofRandomNumbers();
     }
 
-    public static int countAvailableTickets(Money money) {
+    public static List<Lotto> purchase(Money money) {
+        List<Lotto> lottos = new ArrayList<>();
+
+        for (int i = 0; i < countAvailableTickets(money); i++) {
+            lottos.add(new Lotto());
+        }
+        return lottos;
+    }
+
+    private static int countAvailableTickets(Money money) {
         checkUnit(money);
         return money.countAvailable(PRICE);
     }
