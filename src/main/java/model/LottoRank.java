@@ -5,12 +5,12 @@ import java.util.function.BiFunction;
 import java.util.stream.Stream;
 
 public enum LottoRank {
-    FIRST(new Money(2_000_000_000), LottoRank::isFirstPrize),
-    SECOND(new Money(30_000_000), LottoRank::isSecondPrize),
-    THIRD(new Money(1_500_000), LottoRank::isThirdPrize),
-    FOURTH(new Money(50_000), LottoRank::isFourthPrize),
-    FIFTH(new Money(5_000), LottoRank::isFifthPrize),
-    NOTHING(Money.ZERO, LottoRank::isNothingPrize);
+    FIRST(new Money(2_000_000_000), (matchCount, bonusMatch) -> matchCount == 6),
+    SECOND(new Money(30_000_000), (matchCount, bonusMatch) -> matchCount == 5 && bonusMatch),
+    THIRD(new Money(1_500_000), (matchCount, bonusMatch) -> matchCount == 5 && !bonusMatch),
+    FOURTH(new Money(50_000), (matchCount, bonusMatch) -> matchCount == 4),
+    FIFTH(new Money(5_000), (matchCount, bonusMatch) -> matchCount == 3),
+    NOTHING(Money.ZERO, (matchCount, bonusMatch) -> 0 <= matchCount && matchCount < 3);
 
     private final Money prize;
     private final BiFunction<Integer, Boolean, Boolean> predicate;
@@ -25,30 +25,6 @@ public enum LottoRank {
                 .filter(rank -> rank.isMatched(matchCount, bonusMatch))
                 .findFirst()
                 .orElseThrow(InvalidMatchCountException::new);
-    }
-
-    private static boolean isFirstPrize(Integer matchCount, boolean bonusMatch) {
-        return matchCount == 6;
-    }
-
-    private static boolean isSecondPrize(Integer matchCount, boolean bonusMatch) {
-        return matchCount == 5 && bonusMatch;
-    }
-
-    private static boolean isThirdPrize(Integer matchCount, boolean bonusMatch) {
-        return matchCount == 5 && !bonusMatch;
-    }
-
-    private static boolean isFourthPrize(Integer matchCount, boolean bonusMatch) {
-        return matchCount == 4;
-    }
-
-    private static boolean isFifthPrize(Integer matchCount, boolean bonusMatch) {
-        return matchCount == 3;
-    }
-
-    private static boolean isNothingPrize(Integer matchCount, boolean bonusMatch) {
-        return 0 <= matchCount && matchCount < 3;
     }
 
     public Money getPrize() {
