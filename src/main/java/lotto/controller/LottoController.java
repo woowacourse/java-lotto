@@ -6,8 +6,8 @@ import lotto.domain.LottoRank;
 import lotto.domain.LottoTicketFactory;
 import lotto.domain.PurchaseAmount;
 import lotto.domain.WinningStats;
-import lotto.domain.lottonumbers.LottoTicket;
-import lotto.domain.lottonumbers.WinningNumbers;
+import lotto.domain.lottonumber.LottoTicket;
+import lotto.domain.lottonumber.WinningNumbers;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -26,13 +26,17 @@ public class LottoController {
         OutputView.printStatistics(winningStats, purchaseAmount);
     }
 
+    private List<LottoTicket> purchaseLottoTickets(PurchaseAmount purchaseAmount) {
+        return LottoTicketFactory.createTickets(purchaseAmount);
+    }
+
     private WinningStats calculateStatistics(List<LottoTicket> lottoTickets, WinningNumbers winningNumbers) {
         WinningStats winningStats = new WinningStats();
 
         for (LottoTicket lottoTicket : lottoTickets) {
             LottoRank lottoRank = LottoRank.getRank(
-                    winningNumbers.countContaining(lottoTicket),
-                    winningNumbers.containBonusBall(lottoTicket)
+                    winningNumbers.getMatchCount(lottoTicket),
+                    winningNumbers.doesMatchBonusBall(lottoTicket)
             );
             winningStats.put(lottoRank);
         }
@@ -46,7 +50,7 @@ public class LottoController {
 
     private WinningNumbers inputWinningNumbers() {
         IndividualInput<WinningNumbers> input =
-                () -> WinningNumbers.of(InputView.inputWinningNumbers(), InputView.inputBonusBall());
+                () -> new WinningNumbers(InputView.inputWinningNumbers(), InputView.inputBonusBall());
         return commonInputProcess(input);
     }
 
@@ -57,10 +61,6 @@ public class LottoController {
             OutputView.printErrorMessage(e.getMessage());
             return commonInputProcess(individualInputs);
         }
-    }
-
-    private List<LottoTicket> purchaseLottoTickets(PurchaseAmount purchaseAmount) {
-        return LottoTicketFactory.createTickets(purchaseAmount);
     }
 
     private interface IndividualInput<T> {

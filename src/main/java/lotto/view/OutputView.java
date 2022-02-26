@@ -6,11 +6,11 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.domain.LottoNumber;
+import lotto.domain.lottonumber.LottoNumber;
 import lotto.domain.LottoRank;
 import lotto.domain.PurchaseAmount;
 import lotto.domain.WinningStats;
-import lotto.domain.lottonumbers.LottoTicket;
+import lotto.domain.lottonumber.LottoTicket;
 
 public class OutputView {
 
@@ -33,7 +33,7 @@ public class OutputView {
     }
 
     private static void printLottoNumbers(LottoTicket lottoTicket) {
-        List<String> lottoNumbers = lottoTicket.getLottoNumbers().stream()
+        List<String> lottoNumbers = lottoTicket.lottoNumbers().stream()
                 .map(LottoNumber::toString)
                 .collect(Collectors.toUnmodifiableList());
         out.printf("[%s]%n", String.join(", ", lottoNumbers));

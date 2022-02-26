@@ -1,7 +1,6 @@
-package lotto.domain;
+package lotto.domain.lottonumber;
 
-import static lotto.domain.LottoNumber.INVALID_LOTTO_NUMBER_RANGE;
-import static lotto.domain.LottoNumber.NOT_NUMBER_OF_LOTTO;
+import static lotto.domain.lottonumber.LottoNumber.*;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
@@ -9,6 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoNumberTest {
+
     @ParameterizedTest
     @ValueSource(strings = {"숫자아님", "aa", "#@"})
     @DisplayName("로또 번호는 숫자여야 한다.")

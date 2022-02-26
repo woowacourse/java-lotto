@@ -1,14 +1,12 @@
-package lotto.domain.lottonumbers;
+package lotto.domain.lottonumber;
 
-import static lotto.domain.lottonumbers.WinningNumbers.WINNING_NUMBERS_CONTAIN_BONUS_BALL;
+import static lotto.domain.lottonumber.WinningNumbers.WINNING_NUMBERS_CONTAIN_BONUS_BALL;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -21,20 +19,15 @@ class WinningNumbersTest {
             "1, 2, 3, 4, 5, 6  ::  30  ::  1, 2, 3, 4, 5, 7  ::  5",
             "1, 2, 3, 4, 5, 6  ::  30  ::  7, 8, 9, 10, 11, 12  ::  0"
     }, delimiterString = "  ::  ")
-    @DisplayName("countContaining 은 로또 티켓의 당첨 번호 개수를 반환한다")
+    @DisplayName("로또 티켓의 당첨 번호에 따른 당첨 개수가 맞는지를 확인한다")
     void returnWinningNumberCount(
             String winningNumbersString,
             String bonusBallString,
             String ticketNumbersString,
-            int expected
+            int numberWinningsExpected
     ) {
         // given
-        Set<String> winnings = Arrays
-                .stream(winningNumbersString.split(",", -1))
-                .map(String::trim)
-                .collect(Collectors.toSet());
-
-        WinningNumbers winningNumbers = WinningNumbers.of(winnings, bonusBallString);
+        WinningNumbers winningNumbers = new WinningNumbers(winningNumbersString, bonusBallString);
 
         Set<LottoNumber> lottoNumbers = Arrays.stream(ticketNumbersString.split(","))
                 .map(String::trim)
@@ -43,10 +36,10 @@ class WinningNumbersTest {
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
         // when
-        int count = winningNumbers.countContaining(lottoTicket);
+        int numberWinningsActual = winningNumbers.getMatchCount(lottoTicket);
 
         // then
-        assertThat(count).isEqualTo(expected);
+        assertThat(numberWinningsActual).isEqualTo(numberWinningsExpected);
     }
 
     @ParameterizedTest
@@ -62,12 +55,7 @@ class WinningNumbersTest {
             boolean expected
     ) {
         // given
-        Set<String> winnings = Arrays
-                .stream(winningNumbersString.split(",", -1))
-                .map(String::trim)
-                .collect(Collectors.toSet());
-
-        WinningNumbers winningNumbers = WinningNumbers.of(winnings, bonusBallString);
+        WinningNumbers winningNumbers = new WinningNumbers(winningNumbersString, bonusBallString);
 
         Set<LottoNumber> lottoNumbers = Arrays.stream(ticketNumbersString.split(",", -1))
                 .map(String::trim)
@@ -76,7 +64,7 @@ class WinningNumbersTest {
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
         // when
-        boolean result = winningNumbers.containBonusBall(lottoTicket);
+        boolean result = winningNumbers.doesMatchBonusBall(lottoTicket);
 
         // then
         assertThat(result).isEqualTo(expected);
@@ -85,15 +73,9 @@ class WinningNumbersTest {
     @Test
     @DisplayName("당첨 번호와 보너스 볼은 중복될 수 없다.")
     void winningNumbersContainBonusBall() {
-        // given
-        Set<String> winnings = IntStream.rangeClosed(1, 6)
-                .mapToObj(String::valueOf)
-                .collect(Collectors.toSet());
-
-        String bonusBallString = "1";
-
-        // when & then
-        assertThatThrownBy(() -> WinningNumbers.of(winnings, bonusBallString))
+        // given & when & then
+        assertThatThrownBy(
+                () -> new WinningNumbers("1, 2, 3, 4, 5, 6", "6"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(WINNING_NUMBERS_CONTAIN_BONUS_BALL);
     }

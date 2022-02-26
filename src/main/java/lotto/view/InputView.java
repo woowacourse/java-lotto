@@ -23,11 +23,9 @@ public class InputView {
         return reader.readLine();
     }
 
-    public static Set<String> inputWinningNumbers() throws IOException {
+    public static String inputWinningNumbers() throws IOException {
         out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return Arrays.stream(reader.readLine().split(",", -1))
-                .map(String::trim)
-                .collect(Collectors.toSet());
+        return reader.readLine();
     }
 
     public static String inputBonusBall() throws IOException {

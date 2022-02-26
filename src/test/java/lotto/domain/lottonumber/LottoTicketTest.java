@@ -1,16 +1,13 @@
-package lotto.domain.lottonumbers;
+package lotto.domain.lottonumber;
 
-import static lotto.domain.lottonumbers.LottoTicket.INVALID_LOTTO_NUMBER_COUNT;
-import static lotto.domain.lottonumbers.LottoTicket.LOTTO_NUMBER_DUPLICATED;
+import static lotto.domain.lottonumber.LottoTicket.INVALID_LOTTO_NUMBER_COUNT;
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import lotto.domain.LottoNumber;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -20,7 +17,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 public class LottoTicketTest {
 
     @ParameterizedTest
-    @MethodSource("provideInvalidNumbers")
+    @MethodSource("provideInvalidLottoNumbers")
     @DisplayName("로또 번호를 리스트로 받을 때 리스트 크기가 6이 아닌 경우 예외가 발생한다.")
     void lottoTicketNot6Numbers(Set<LottoNumber> lottoNumbers) {
         // given & when & then
@@ -42,7 +39,47 @@ public class LottoTicketTest {
         assertThat(new LottoTicket(lottoNumbers)).isNotNull();
     }
 
-    private static Stream<Arguments> provideInvalidNumbers() {
+    @Test
+    @DisplayName("LottoTicket 은 생성시 방어적 복사가 되어야 한다 : Set 생성자")
+    void defensive_copy() {
+        // given
+        Set<LottoNumber> lottoNumberSet = new HashSet<>();
+        lottoNumberSet.add(new LottoNumber(1));
+        lottoNumberSet.add(new LottoNumber(2));
+        lottoNumberSet.add(new LottoNumber(3));
+        lottoNumberSet.add(new LottoNumber(4));
+        lottoNumberSet.add(new LottoNumber(5));
+        lottoNumberSet.add(new LottoNumber(6));
+
+        LottoTicket lottoTicket = new LottoTicket(lottoNumberSet);
+
+        // when
+        lottoNumberSet.add(new LottoNumber(7));
+        Set<LottoNumber> findLottoNumbers = lottoTicket.lottoNumbers();
+
+        // then
+        assertThatThrownBy(() -> findLottoNumbers.add(new LottoNumber(7)))
+                .isInstanceOf(UnsupportedOperationException.class);
+        assertThat(findLottoNumbers.size()).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("LottoTicket 은 생성시 방어적 복사가 되어야 한다 : 문자열 생성자")
+    void defensive_copy2() {
+        // given
+        LottoTicket lottoTicket = new LottoTicket("1, 2, 3, 4, 5, 6");
+
+        // when
+        Set<LottoNumber> findLottoNumbers = lottoTicket.lottoNumbers();
+
+        // then
+
+        assertThatThrownBy(() -> findLottoNumbers.add(new LottoNumber(7)))
+                .isInstanceOf(UnsupportedOperationException.class);
+        assertThat(findLottoNumbers.size()).isEqualTo(6);
+    }
+
+    private static Stream<Arguments> provideInvalidLottoNumbers() {
         Set<LottoNumber> under6Numbers = new HashSet<>();
         Set<LottoNumber> over6Numbers = new HashSet<>();
 
