@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 public class LottosTest {
 
+
     private static final Lotto LOTTO = new Lotto(givenNumbers(1, 2, 3, 4, 5, 6));
 
     @Test
