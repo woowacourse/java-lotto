@@ -14,7 +14,7 @@ public class Lottos {
     }
 
     // TODO: should be deleted
-    public static Lottos of(int lottoCount) {
+    public static Lottos ofRandom(int lottoCount) {
         List<Lotto> lottos = Stream.generate(Lotto::new)
                 .limit(lottoCount)
                 .collect(Collectors.toList());

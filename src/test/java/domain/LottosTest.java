@@ -33,7 +33,6 @@ public class LottosTest {
         assertThat(lottos.getLottos().size()).isEqualTo(LOTTO_COUNT + 5);
     }
 
-
     @Test
     void createAndAddLottos_allNewLottosAreDifferent() {
         lottos.createAndAddLottos(5);

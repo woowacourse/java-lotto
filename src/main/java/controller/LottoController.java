@@ -24,16 +24,26 @@ public class LottoController {
     public Lottos initCustomerLottos(int totalLottoPrice) {
         validateTotalLottoPriceUnit(totalLottoPrice);
 
-        int totalLottosCount = totalLottoPrice / LOTTO_PRICE;
-        int manualLottosCount = requestManualLottoCount();
+        int totalCount = totalLottoPrice / LOTTO_PRICE;
+        int manualCount = requestManualLottoCount();
 
-        List<Lotto> manualLottos = requestManualLottos(manualLottosCount).stream()
+        if (manualCount > 0) {
+            return initManualAndRandomLottos(totalCount, manualCount);
+        }
+
+        return Lottos.ofRandom(totalCount);
+    }
+
+    private Lottos initManualAndRandomLottos(int totalCount, int manualCount) {
+        int randomCount = totalCount - manualCount;
+
+        List<Lotto> manualLottos = requestManualLottos(manualCount).stream()
                 .map(this::getValidLottoNumbers)
                 .map(Lotto::new)
                 .collect(Collectors.toList());
 
         Lottos lottos = new Lottos(manualLottos);
-        lottos.createAndAddLottos(totalLottosCount - manualLottosCount);
+        lottos.createAndAddLottos(randomCount);
 
         return lottos;
     }
