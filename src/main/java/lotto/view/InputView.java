@@ -24,10 +24,10 @@ public class InputView {
     public int getMoney() {
         System.out.println(INPUT_MONEY_MESSAGE);
         String input = scanner.nextLine();
-        return Integer.parseInt(input);
+        return parseInt(input);
     }
 
-    public List<Integer> getNormalWinningNumbers() {
+    public List<Integer> getNormalNumbers() {
         System.out.println(INPUT_NORMAL_WINNING_NUMBER_MESSAGE);
         String[] splitWinningNumbers = scanner.nextLine().split(SPLIT_REGEX, SPLIT_LIMIT);
 

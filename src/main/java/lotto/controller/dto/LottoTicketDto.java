@@ -19,6 +19,10 @@ public class LottoTicketDto {
                 .collect(toList());
     }
 
+    public LottoTicket toLottoTicket() {
+        return new LottoTicket(lottoNumbers);
+    }
+
     public List<Integer> getLottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }

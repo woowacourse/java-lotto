@@ -4,6 +4,7 @@ import static java.util.stream.Collectors.*;
 
 import java.util.Collections;
 import java.util.List;
+import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 
 public class LottoTicketsDto {
@@ -15,6 +16,13 @@ public class LottoTicketsDto {
                 .stream()
                 .map(LottoTicketDto::new)
                 .collect(toList());
+    }
+
+    public LottoTickets toLottoTickets() {
+        List<LottoTicket> lottoTickets = this.lottoTickets.stream()
+                .map(LottoTicketDto::toLottoTicket)
+                .collect(toList());
+        return new LottoTickets(lottoTickets);
     }
 
     public List<LottoTicketDto> getLottoTickets() {

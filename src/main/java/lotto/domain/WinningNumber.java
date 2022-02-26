@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import java.util.Collections;
+import java.util.Set;
+
 public class WinningNumber {
 
     private static final String DUPLICATED_WINNING_NUMBER_ERROR_MESSAGE = "로또 번호는 중복될 수 없습니다.";
@@ -20,11 +23,7 @@ public class WinningNumber {
     }
 
     public Rank compare(LottoTicket lottoTicket) {
-        if (lottoTicket.isSame(bonusNumber)) {
-            return Rank.of(getCorrectCount(lottoTicket) + 1, true);
-        }
-
-        return Rank.of(getCorrectCount(lottoTicket), false);
+        return Rank.of(getCorrectCount(lottoTicket), lottoTicket.isSame(bonusNumber));
     }
 
     private int getCorrectCount(LottoTicket lottoTicket) {
@@ -32,5 +31,13 @@ public class WinningNumber {
                 .stream()
                 .filter(lottoTicket::isSame)
                 .count();
+    }
+
+    public Set<LottoNumber> getLottoNumbers() {
+        return Collections.unmodifiableSet(lottoNumbers.getLottoNumbers());
+    }
+
+    public LottoNumber getBonusNumber() {
+        return new LottoNumber(bonusNumber.getLottoNumber());
     }
 }

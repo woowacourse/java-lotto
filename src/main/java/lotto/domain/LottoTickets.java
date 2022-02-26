@@ -3,6 +3,7 @@ package lotto.domain;
 import static java.util.function.Function.*;
 import static java.util.stream.Collectors.*;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,10 @@ public class LottoTickets {
 
     public LottoTickets(int lottoCount, LottoNumberGenerator lottoNumberGenerator) {
         this.lottoTickets = generateTickets(lottoCount, lottoNumberGenerator);
+    }
+
+    public LottoTickets(List<LottoTicket> lottoTickets) {
+        this.lottoTickets = new ArrayList<>(lottoTickets);
     }
 
     private List<LottoTicket> generateTickets(int lottoCount, LottoNumberGenerator lottoNumberGenerator) {

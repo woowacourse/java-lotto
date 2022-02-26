@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 public class LottoResult {
@@ -12,7 +12,7 @@ public class LottoResult {
     private final Map<Rank, Long> ranks;
 
     public LottoResult(Map<Rank, Long> ranks) {
-        this.ranks = new HashMap<>(ranks);
+        this.ranks = new EnumMap<>(ranks);
     }
 
     public double calculateYield(Money money) {
