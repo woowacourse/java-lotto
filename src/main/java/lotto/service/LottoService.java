@@ -16,25 +16,20 @@ public class LottoService {
     private final TicketGenerator ticketGenerator;
 
     private Tickets tickets;
-    private Money money;
 
     public LottoService(final TicketGenerator ticketGenerator) {
         this.ticketGenerator = ticketGenerator;
     }
 
-    public void saveMoney(final int money) {
-        this.money = new Money(money);
-    }
-
-    public void generateTickets() {
-        final int ticketCount = money.getQuotient();
+    public void generateTickets(final int money) {
+        final int ticketCount = (new Money(money)).getQuotient();
         this.tickets = new Tickets(ticketCount, ticketGenerator);
     }
 
     public AnalysisDto generateAnalysis(final WinningTicketDto winningTicketDto) {
         final WinningTicket winningTicket = winningTicketDto.toWinningTicket();
         final List<Rank> ranks = winningTicket.calculateRanks(tickets);
-        return new AnalysisDto(ranks, money.getMoney());
+        return new AnalysisDto(ranks, tickets.getSize());
     }
 
     public TicketsDto getTicketDtos() {

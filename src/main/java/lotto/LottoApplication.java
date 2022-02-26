@@ -18,6 +18,7 @@ public class LottoApplication {
 
     private void run() {
         lottoController.purchaseTickets();
+        lottoController.showTickets();
         lottoController.checkOutAnalysis();
     }
 

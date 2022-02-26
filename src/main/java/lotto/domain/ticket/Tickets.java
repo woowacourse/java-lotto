@@ -38,4 +38,8 @@ public class Tickets {
         return new ArrayList<>(tickets);
     }
 
+    public int getSize() {
+        return tickets.size();
+    }
+
 }

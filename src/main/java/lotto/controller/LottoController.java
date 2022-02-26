@@ -17,17 +17,11 @@ public class LottoController {
     }
 
     public void purchaseTickets() {
-        generateTickets();
-        announceTickets();
-    }
-
-    private void generateTickets() {
         final int money = lottoView.requestMoney();
-        lottoService.saveMoney(money);
-        lottoService.generateTickets();
+        lottoService.generateTickets(money);
     }
 
-    private void announceTickets() {
+    public void showTickets() {
         final TicketsDto ticketDtos = lottoService.getTicketDtos();
         lottoView.announceTickets(ticketDtos);
     }
