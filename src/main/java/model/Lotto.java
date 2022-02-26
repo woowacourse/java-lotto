@@ -15,6 +15,7 @@ public class Lotto {
     }
 
     public static Lotto from(List<LottoNumber> lottoNumbers) {
+        lottoNumbers = List.copyOf(lottoNumbers);
         validate(lottoNumbers);
         return new Lotto(lottoNumbers);
     }
