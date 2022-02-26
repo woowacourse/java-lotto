@@ -45,7 +45,7 @@ class RankTest {
     @DisplayName("당첨 금액의 합을 계산한다.")
     void getFirstReward(List<Rank> ranks) {
         Money money = Rank.calculateReward(ranks);
-        long totalReward = ranks.stream().mapToLong(rank -> rank.getReward().getValue()).sum();
+        long totalReward = ranks.stream().mapToLong(rank -> rank.getReward().getNumber()).sum();
         assertThat(money).isEqualTo(new Money(totalReward));
     }
 
