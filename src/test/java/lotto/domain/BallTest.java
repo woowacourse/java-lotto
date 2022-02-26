@@ -6,6 +6,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 public class BallTest {
 
@@ -16,5 +18,23 @@ public class BallTest {
         assertThatThrownBy(() -> {
             Ball ball = new Ball(input);
         }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("숫자 비교")
+    void equals() {
+        Ball ball1 = new Ball(1);
+        Ball ball2 = new Ball(1);
+
+        assertEquals(ball1, ball2);
+    }
+
+    @Test
+    @DisplayName("해시코드 비교")
+    void hash_code() {
+        Ball ball1 = new Ball(1);
+        Ball ball2 = new Ball(1);
+
+        assertSame(ball1.hashCode(), ball2.hashCode());
     }
 }
