@@ -2,12 +2,14 @@ package lotto.model.prize;
 
 import java.util.List;
 
+/*
+ * 한 등수에 대한 당첨 정보를 가지는 Class
+ */
 public class PrizeInformation {
     private final Prize prize;
     private final int count;
 
-    //todo: public -> private
-    public PrizeInformation(Prize prize, int count) {
+    private PrizeInformation(Prize prize, int count) {
         this.prize = prize;
         this.count = count;
     }

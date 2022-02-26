@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lotto.model.Money;
 
+/*
+ * 모든 등수에 대한 당첨 정보를 가지는 일급 컬렉션 Class
+ */
 public class PrizeInformations {
     private final List<PrizeInformation> prizeInformations;
 
