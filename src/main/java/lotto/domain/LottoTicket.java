@@ -33,6 +33,13 @@ public class LottoTicket {
         }
     }
 
+    public int getSameNumberCount(LottoTicket lottoTicket) {
+        return (int) lottoTicket.lottoNumbers
+                .stream()
+                .filter(this::isSame)
+                .count();
+    }
+
     public boolean isSame(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }

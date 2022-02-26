@@ -54,4 +54,18 @@ class LottoTicketTest {
         // then
         assertThat(result).isTrue();
     }
+
+    @DisplayName("로또 티켓을 비교하여 서로 맞는 번호의 개수를 반환한다.")
+    @Test
+    void 맞는_번호_갯수_확인() {
+        // given
+        LottoTicket lottoTicket = new LottoTicket(size -> List.of(1, 2, 3, 4, 5, 6));
+        LottoTicket targetLottoTicket = new LottoTicket(size -> List.of(1, 2, 3, 4, 5, 6));
+
+        // when
+        int sameNumberCount = lottoTicket.getSameNumberCount(targetLottoTicket);
+
+        // then
+        assertThat(sameNumberCount).isEqualTo(6);
+    }
 }

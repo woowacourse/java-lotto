@@ -23,14 +23,7 @@ public class WinningNumber {
     }
 
     public Rank compare(LottoTicket lottoTicket) {
-        return Rank.of(getCorrectCount(lottoTicket), lottoTicket.isSame(bonusNumber));
-    }
-
-    private int getCorrectCount(LottoTicket lottoTicket) {
-        return (int) lottoNumbers.getLottoNumbers()
-                .stream()
-                .filter(lottoTicket::isSame)
-                .count();
+        return Rank.of(lottoNumbers.getSameNumberCount(lottoTicket), lottoTicket.isSame(bonusNumber));
     }
 
     public Set<LottoNumber> getLottoNumbers() {
