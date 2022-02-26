@@ -4,7 +4,6 @@ import static java.util.stream.Collectors.*;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import lotto.domain.enumeration.Rank;
 import lotto.domain.vo.LottoNumber;
 import org.assertj.core.api.Assertions;
