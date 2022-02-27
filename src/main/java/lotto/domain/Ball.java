@@ -14,6 +14,10 @@ public class Ball {
         this.number = number;
     }
 
+    public int getNumber() {
+        return this.number;
+    }
+
     private void validateLottoNumber(final Integer number) {
         if (number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER) {
             // TODO: 예외 처리 별도 객체 생성
