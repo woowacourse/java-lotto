@@ -35,11 +35,10 @@ public class LottoGame {
         return prizeResult;
     }
 
-    public float calculateEarningRate() {
+    public double calculateEarningRate() {
         long totalPrize = prizeResult.totalPrize();
-
-        float earningRate = (float) totalPrize / lottos.size();
-        return (float) (Math.floor(earningRate * 100) / 100.0);
+        double earningRate = totalPrize / lottos.size();
+        return Math.floor(earningRate * 100) / 100.0;
     }
 
     public List<Lotto> getLottos() {
