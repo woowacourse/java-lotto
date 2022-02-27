@@ -6,13 +6,11 @@ import java.util.stream.Collectors;
 public class PrizeResult {
 
     private final Map<Rank, Integer> prizeResult;
-    private final float earningRate;
 
-    public PrizeResult(final int inputMoney, List<Lotto> lottos, WinningNumbers winningNumber) {
+    public PrizeResult(List<Lotto> lottos, WinningNumbers winningNumber) {
         this.prizeResult = new HashMap<>();
         initFinalResult();
         calculatePrizeResult(lottos, winningNumber);
-        this.earningRate = calculateEarningRate(inputMoney);
     }
 
     private void initFinalResult() {
@@ -31,7 +29,7 @@ public class PrizeResult {
         prizeResult.put(winnerPrice, prizeResult.get(winnerPrice) + 1);
     }
 
-    private float calculateEarningRate(int inputMoney) {
+    public float earningRate(int inputMoney) {
         final float earningRate = (float) totalPrize() / inputMoney;
         return  (float) (Math.floor(earningRate * 100) / 100.0);
     }
@@ -53,10 +51,6 @@ public class PrizeResult {
 
     public Map<Rank, Integer> getPrizeResult() {
         return Collections.unmodifiableMap(prizeResult);
-    }
-
-    public float getEarningRate() {
-        return earningRate;
     }
 
 }

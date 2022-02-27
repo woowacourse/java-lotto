@@ -14,10 +14,10 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 class PrizeResultTest {
 
     private PrizeResult prizeResult;
+    private final int inputMoney = 3000;
 
     @BeforeEach
     void init() {
-        int inputMoney = 3000;
         List<Lotto> lottos = new ArrayList<>();
         lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
         lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)));
@@ -27,7 +27,7 @@ class PrizeResultTest {
         WinningNumbers winningNumber = new WinningNumbers(Arrays.asList(winningNumbersArray));
         winningNumber.addBonusNumber(6);
 
-        prizeResult = new PrizeResult(inputMoney, lottos, winningNumber);
+        prizeResult = new PrizeResult(lottos, winningNumber);
     }
 
     @Test
@@ -46,7 +46,7 @@ class PrizeResultTest {
     @Test
     @DisplayName("올바른 수익률이 계산된다.")
     void lottos_calculateEarningRate() {
-        float earningRate = prizeResult.getEarningRate();
+        float earningRate = prizeResult.earningRate(inputMoney);
 
         assertThat(earningRate).isEqualTo(10516.66f);
     }

@@ -14,8 +14,8 @@ public class Lottos {
         }
     }
 
-    public PrizeResult prizeResult(int inputMoney, WinningNumbers winningNumber) {
-        return new PrizeResult(inputMoney, lottos, winningNumber);
+    public PrizeResult prizeResult(WinningNumbers winningNumber) {
+        return new PrizeResult(lottos, winningNumber);
     }
 
     public List<Lotto> getLottos() {

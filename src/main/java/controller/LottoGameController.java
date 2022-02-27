@@ -12,10 +12,10 @@ public class LottoGameController {
         OutputView.printPurchasedLotto(purchasedLotto.getLottos());
 
         final WinningNumbers winningNumber = initWinningNumber();
-        final PrizeResult prizeResult = purchasedLotto.prizeResult(inputMoney, winningNumber);
+        final PrizeResult prizeResult = purchasedLotto.prizeResult(winningNumber);
 
         OutputView.printFinalStatistic(prizeResult);
-        OutputView.printEarningRate(prizeResult.getEarningRate());
+        OutputView.printEarningRate(prizeResult.earningRate(inputMoney));
     }
 
     private WinningNumbers initWinningNumber() {
