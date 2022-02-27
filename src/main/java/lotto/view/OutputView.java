@@ -1,7 +1,9 @@
 package lotto.view;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import lotto.domain.Lotto;
-import lotto.domain.LottoWinningNumbers;
 import lotto.domain.Lottos;
 import lotto.domain.Rank;
 import lotto.dto.Result;
@@ -41,19 +43,18 @@ public class OutputView {
         System.out.println();
         System.out.println(EXPLAIN_WINNING_STATISTICS);
         System.out.println(BASIC_LINE);
-        printBasicWinningResult(Rank.FIFTH, reuslt.getRankCount(Rank.FIFTH));
-        printBasicWinningResult(Rank.FOURTH, reuslt.getRankCount(Rank.FOURTH));
-        printBasicWinningResult(Rank.THIRD, reuslt.getRankCount(Rank.THIRD));
-        printSecondResult(Rank.SECOND, reuslt.getRankCount(Rank.SECOND));
-        printBasicWinningResult(Rank.FIRST, reuslt.getRankCount(Rank.FIRST));
+        List<Rank> ranks = Arrays.asList(Rank.values()).subList(0, Rank.values().length - 1);
+        Collections.reverse(ranks);
+        ranks.stream()
+                .forEach(rank -> printRankResult(rank, reuslt.getRankCount(rank)));
     }
 
-    private static void printBasicWinningResult(final Rank rank, final int count) {
+    private static void printRankResult(final Rank rank, final int count) {
+        if (rank == Rank.SECOND) {
+            System.out.println(rank.getMatchCount() + SUFFIX_SAME_BONUS_NUMBER + rank.getMoney() + SUFFIX_WON + count + SUFFIX_COUNT);
+            return;
+        }
         System.out.println(rank.getMatchCount() + SUFFIX_SAME_NUMBER + rank.getMoney() + SUFFIX_WON + count + SUFFIX_COUNT);
-    }
-
-    private static void printSecondResult(final Rank rank, final int count) {
-        System.out.println(rank.getMatchCount() + SUFFIX_SAME_BONUS_NUMBER + rank.getMoney() + SUFFIX_WON + count + SUFFIX_COUNT);
     }
 
     public static void printProfit(final double profit) {
