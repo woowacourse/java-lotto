@@ -8,13 +8,15 @@ public class InputView {
     private static final String INPUT_BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
     private static final String LOTTO_ERROR_PREFIX = "로또 번호는";
     private static final String NOT_NUMBER_ERROR = "숫자로 입력해주세요.";
+    public static final String NOT_INSTANTIATION_ERROR = "InputView 객체를 생성할 수 없습니다.";
     private static final String EMPTY = "";
     private static final String BLANK = " ";
+    public static final String BLANK_AND_DELIMITER_REGEX = "[\\s,]*";
 
     private static final Scanner scanner = new Scanner(System.in);
 
     private InputView() throws InstantiationException {
-        throw new InstantiationException("InputView 객체를 생성할 수 없습니다.");
+        throw new InstantiationException(NOT_INSTANTIATION_ERROR);
     }
 
     public static int inputAmount() {
@@ -39,7 +41,7 @@ public class InputView {
     }
 
     private static String parseWinningNumbers(String input) {
-        String parsedInput = input.replaceAll("[\\s,]*", EMPTY);
+        String parsedInput = input.replaceAll(BLANK_AND_DELIMITER_REGEX, EMPTY);
         try {
             Integer.parseInt(parsedInput);
             return input;
