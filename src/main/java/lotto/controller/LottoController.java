@@ -8,23 +8,14 @@ import lotto.view.OutputView;
 
 public class LottoController {
 
-    private final MoneyController moneyController;
-    private final NumberController numberController;
-
-    public LottoController() {
-        this.moneyController = new MoneyController();
-        this.numberController = new NumberController();
+    public Lottos initLottos(Money money) {
+        final Lottos lottos = new Lottos(money);
+        OutputView.printInitResult(lottos);
+        return lottos;
     }
 
-    public void play() {
-        Money money = moneyController.getBuyMoney();
-        Lottos lottos = new Lottos(money);
-        OutputView.printInitResult(lottos);
-
-        WinningNumbers winningNumbers = numberController.getWinningNumbers();
-        numberController.getBonusNumber(winningNumbers);
-
-        Result result = lottos.getResult(winningNumbers);
+    public void play(Lottos lottos, WinningNumbers winningNumbers, Money money) {
+        final Result result = lottos.getResult(winningNumbers);
         OutputView.printPlayResult(result, money);
     }
 }

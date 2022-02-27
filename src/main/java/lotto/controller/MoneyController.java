@@ -7,7 +7,7 @@ import lotto.view.OutputView;
 
 public class MoneyController {
 
-    public Money getBuyMoney() {
+    public Money getInputMoney() {
         Optional<Money> money;
 
         do {

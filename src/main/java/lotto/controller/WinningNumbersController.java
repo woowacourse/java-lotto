@@ -7,7 +7,7 @@ import lotto.utils.StringUtil;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-public class NumberController {
+public class WinningNumbersController {
 
     public WinningNumbers getWinningNumbers() {
         Optional<WinningNumbers> winningNumbers;
@@ -16,6 +16,9 @@ public class NumberController {
             List<Integer> integers = StringUtil.toIntegers(InputView.inputWinningNumbers());
             winningNumbers = getWinNumbs(integers);
         } while (winningNumbers.isEmpty());
+
+        getBonusNumber(winningNumbers.get());
+
         return winningNumbers.get();
     }
 
@@ -28,7 +31,7 @@ public class NumberController {
         }
     }
 
-    public void getBonusNumber(WinningNumbers numbers) {
+    private void getBonusNumber(WinningNumbers numbers) {
         boolean isValid;
 
         do {
