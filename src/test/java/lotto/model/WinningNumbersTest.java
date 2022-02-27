@@ -16,6 +16,6 @@ class WinningNumbersTest {
         WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumber lottoNumber = new LottoNumber(6);
 
-        assertThat(winningNumbers.matchNumber(lottoNumber)).isTrue();
+        assertThat(winningNumbers.isNumberMatch(lottoNumber)).isTrue();
     }
 }

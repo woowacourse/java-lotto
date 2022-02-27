@@ -33,7 +33,7 @@ class LottoTest {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumber bonusNumber = new LottoNumber(6);
 
-        boolean actual = lotto.matchBonusNumber(bonusNumber);
+        boolean actual = lotto.isBonusNumberMatch(bonusNumber);
 
         assertThat(actual).isTrue();
     }
@@ -80,6 +80,6 @@ class LottoTest {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumber lottoNumber = new LottoNumber(6);
 
-        assertThat(lotto.matchNumber(lottoNumber)).isTrue();
+        assertThat(lotto.isNumberMatch(lottoNumber)).isTrue();
     }
 }

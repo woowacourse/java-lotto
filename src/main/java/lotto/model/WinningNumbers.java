@@ -9,7 +9,7 @@ public class WinningNumbers {
         this.winningNumbers = new Lotto(winningNumbers);
     }
 
-    public boolean matchNumber(Object number) {
-        return winningNumbers.matchNumber(number);
+    public boolean isNumberMatch(Object number) {
+        return winningNumbers.isNumberMatch(number);
     }
 }
