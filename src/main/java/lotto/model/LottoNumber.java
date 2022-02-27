@@ -5,8 +5,8 @@ import java.util.Objects;
 
 public class LottoNumber {
 
-    public static final int LOTTO_NUMBER_LOWER_BOUND = 1;
-    public static final int LOTTO_NUMBER_UPPER_BOUND = 45;
+    static final int LOTTO_NUMBER_LOWER_BOUND = 1;
+    static final int LOTTO_NUMBER_UPPER_BOUND = 45;
 
     private final int number;
 

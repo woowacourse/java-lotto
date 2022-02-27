@@ -1,30 +1,12 @@
 package lotto.view;
 
-import lotto.view.exception.InvalidFormatException;
+import verus.view.StringFormatValidator;
 
-public class StringFormatValidator {
-
-    private static final String EMPTY_MESSAGE = "";
-    static final StringFormatValidator NOT_WORKING_VALIDATOR = new StringFormatValidator(".*",
-        EMPTY_MESSAGE);
+public class StringFormatValidatorFactory {
 
     static final String INVALID_LOTTO_NUMBER_FORMAT_MESSAGE = "당첨 번호의 형식이 잘못 되었습니다. 예) 1, 2, 3, 4, 5, 6";
     static final String INVALID_BONUS_NUMBER_FORMAT_MESSAGE = "보너스 번호의 형식이 잘못 되었습니다. 예) 35";
     static final String INVALID_MONEY_FORMAT_MESSAGE = "금액은 1000의 배수여야 합니다. 예) 10000";
-
-    private final String regex;
-    private final String errorMessage;
-
-    public StringFormatValidator(String regex, String errorMessage) {
-        this.regex = regex;
-        this.errorMessage = errorMessage;
-    }
-
-    public void validate(String text) {
-        if (!text.matches(regex)) {
-            throw new InvalidFormatException(errorMessage);
-        }
-    }
 
     public static StringFormatValidator lottoValidator() {
         return new StringFormatValidator(
@@ -48,4 +30,5 @@ public class StringFormatValidator {
     public static StringFormatValidator moneyValidator() {
         return new StringFormatValidator("^\\s*[1-9][0-9]*0{3}\\s*$", INVALID_MONEY_FORMAT_MESSAGE);
     }
+
 }

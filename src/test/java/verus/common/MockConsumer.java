@@ -1,12 +1,12 @@
-package lotto.view;
+package verus.common;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.view.exception.InvalidFormatException;
+import verus.exception.InvalidFormatException;
 
-class MockConsumer extends Mock {
+public class MockConsumer extends Mock {
 
     private List<Object> values = new ArrayList<>();
 

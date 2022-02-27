@@ -1,21 +1,20 @@
-package lotto.view;
+package verus.common;
 
 import lotto.model.exception.LottoException;
 
-class MockSupplier extends Mock {
+public class MockRunnable extends Mock {
 
-    public Object get() {
+    public void run() {
         call();
-        return new Object();
     }
 
-    public Object throwLottoException() {
+    public void throwLottoException() {
         call();
         throw new LottoException() {
         };
     }
 
-    public Object throwRuntimeException(String message) {
+    public void throwRuntimeException(String message) {
         call();
         throw new RuntimeException(message);
     }

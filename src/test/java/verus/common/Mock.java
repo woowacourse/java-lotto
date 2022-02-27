@@ -1,8 +1,8 @@
-package lotto.view;
+package verus.common;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class Mock {
+public class Mock {
 
     private int time = 0;
 

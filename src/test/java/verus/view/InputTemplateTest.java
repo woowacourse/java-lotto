@@ -1,19 +1,19 @@
-package lotto.view;
+package verus.view;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 
+import verus.common.MockConsumer;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import lotto.model.exception.LottoException;
-import lotto.view.exception.InvalidFormatException;
-import lotto.view.exception.ApplicationFinishedException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import verus.exception.ApplicationFinishedException;
+import verus.exception.InvalidFormatException;
 
 public class InputTemplateTest {
 
@@ -22,76 +22,15 @@ public class InputTemplateTest {
     private static final String REPLY_YES = "y";
     private static final String REPLY_NO = "n";
 
-    private MockSupplier supplier;
     private MockConsumer consumer;
     private MockConsumer exceptionHandler;
     private OutputStream outputStream;
 
     @BeforeEach
     void setUp() {
-        supplier = new MockSupplier();
         consumer = new MockConsumer();
         exceptionHandler = new MockConsumer();
         outputStream = new ByteArrayOutputStream();
-    }
-
-    @Test
-    @DisplayName("정상적으로 Supplier 호출")
-    void executeSupplierOnce() {
-        InputTemplate inputTemplate = inputTemplateWithInputText("");
-
-        assertThatCode(
-            () -> inputTemplate
-                .repeatablyExecute(supplier::get, exceptionHandler::accept, LottoException.class))
-            .doesNotThrowAnyException();
-
-        supplier.verifyCalledOnce();
-        exceptionHandler.verifyIsNotCalled();
-    }
-
-    @Test
-    @DisplayName("LottoException 발생 시 Supplier 와 Consumer 호출")
-    void executeExceptionHandler() {
-        InputTemplate inputTemplate = inputTemplateWithInputText(REPLY_NO);
-
-        assertThatCode(
-            () -> inputTemplate
-                .repeatablyExecute(supplier::throwLottoException, exceptionHandler::accept,
-                    LottoException.class))
-            .isInstanceOf(ApplicationFinishedException.class);
-
-        supplier.verifyCalledOnce();
-        exceptionHandler.verifyCalledOnce(LottoException.class);
-    }
-
-    @Test
-    @DisplayName("LottoException 발생 시 원할 경우 반복해서 Supplier 와 Consumer 호출")
-    void executeSupplierMultiple() {
-        InputTemplate inputTemplate = inputTemplateWithInputText(REPLY_YES, REPLY_YES, REPLY_NO);
-
-        assertThatCode(
-            () -> inputTemplate
-                .repeatablyExecute(supplier::throwLottoException, exceptionHandler::accept,
-                    LottoException.class))
-            .isInstanceOf(ApplicationFinishedException.class);
-
-        supplier.verifyCalledTimes(3);
-        exceptionHandler.verifyCalledTimes(3, LottoException.class);
-    }
-
-    @Test
-    @DisplayName("LottoException 외의 예외 발생 시 반복하지 않고 Consumer 미호출")
-    void notCatchOtherException() {
-        InputTemplate inputTemplate = inputTemplateWithInputText(REPLY_YES, REPLY_YES, REPLY_NO);
-
-        assertThatCode(
-            () -> inputTemplate.repeatablyExecute(() -> supplier.throwRuntimeException(MESSAGE),
-                exceptionHandler::accept, LottoException.class))
-            .isInstanceOf(RuntimeException.class)
-            .hasMessageContaining(MESSAGE);
-
-        supplier.verifyCalledOnce();
-        exceptionHandler.verifyIsNotCalled();
     }
 
     @Test

@@ -5,13 +5,8 @@ import static java.util.stream.Collectors.toUnmodifiableList;
 import java.util.List;
 import lotto.model.Lotto;
 
-public class LottoParser extends Parser<Lotto> {
+public class LottoParser {
 
-    public LottoParser() {
-        super(StringFormatValidator.lottoValidator());
-    }
-
-    @Override
     public Lotto convert(String text) {
         List<String> splitNumbers = splitNumbers(text);
         List<String> trimNumbers = trimNumbers(splitNumbers);

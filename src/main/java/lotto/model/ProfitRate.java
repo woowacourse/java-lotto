@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class ProfitRate {
 
-    public static final BigDecimal PROFIT_PRINCIPAL_RATE = BigDecimal.ONE;
+    static final BigDecimal PROFIT_PRINCIPAL_RATE = BigDecimal.ONE;
     private final BigDecimal rate;
 
     public ProfitRate(BigDecimal rate) {

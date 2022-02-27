@@ -1,4 +1,4 @@
-package lotto.view.exception;
+package verus.exception;
 
 public class InvalidFormatException extends IllegalArgumentException {
 

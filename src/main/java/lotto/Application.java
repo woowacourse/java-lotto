@@ -1,51 +1,15 @@
 package lotto;
 
-import static lotto.model.LottoNumber.LOTTO_NUMBER_LOWER_BOUND;
-import static lotto.model.LottoNumber.LOTTO_NUMBER_UPPER_BOUND;
-import static lotto.view.InputView.inputMoney;
-import static lotto.view.InputView.inputWinnerLotto;
-import static lotto.view.OutputView.printLottoes;
-import static lotto.view.OutputView.printMessage;
-import static lotto.view.OutputView.printStatistic;
-
-import lotto.model.LottoGenerator;
-import lotto.model.LottoMachine;
-import lotto.model.Lottoes;
-import lotto.model.Money;
-import lotto.model.RandomLottoGenerator;
-import lotto.model.Statistic;
-import lotto.model.WinnerLotto;
-import lotto.view.exception.ApplicationFinishedException;
+import lotto.controller.Controller;
+import verus.exception.ApplicationFinishedException;
 
 public class Application {
 
     public static void main(String[] args) {
         try {
-            run();
+            new Controller(System.in, System.out).run();
         } catch (ApplicationFinishedException e) {
-            printMessage("종료되었습니다!");
+            System.out.println("종료되었습니다!");
         }
     }
-
-    private static void run() {
-        Money inputMoney = inputMoney();
-        Lottoes lottoes = issueLottoes(inputMoney);
-        printLottoes(lottoes);
-        WinnerLotto winnerLotto = inputWinnerLotto();
-        Statistic statistic = winnerLotto.summarize(lottoes);
-        printStatistic(statistic);
-    }
-
-    private static Lottoes issueLottoes(Money inputMoney) {
-        return lottoMachine().issueLotto(inputMoney);
-    }
-
-    private static LottoMachine lottoMachine() {
-        return new LottoMachine(lottoGenerator());
-    }
-
-    private static LottoGenerator lottoGenerator() {
-        return new RandomLottoGenerator(LOTTO_NUMBER_LOWER_BOUND, LOTTO_NUMBER_UPPER_BOUND);
-    }
-
 }
