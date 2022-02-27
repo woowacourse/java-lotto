@@ -1,6 +1,7 @@
 package view;
 
 import domain.Lotto;
+import domain.LottoNumber;
 import domain.Lottos;
 import domain.Rewards;
 import java.util.Arrays;
@@ -30,10 +31,10 @@ public class OutputView {
     public static void printLottosInformations(Lottos lottos) {
 
         System.out.printf(MESSAGE_LOTTOS_NUMBER, lottos.getLottos().size());
-
         for (Lotto lotto : lottos.getLottos()) {
             String str = lotto.getLottoNumbers()
                     .stream()
+                    .map(LottoNumber::getNumber)
                     .map(String::valueOf)
                     .collect(Collectors.joining(NUMBER_DELIMITER));
             System.out.printf(LOTTO_NUMBER_FORMAT, str);
