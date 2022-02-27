@@ -3,16 +3,15 @@ package model.result;
 import model.lotto.LottoCount;
 
 public class RateOfReturn {
-    private static final int UNIT = 1000;
-    private final int money;
-    private Profit profit;
+    private final Money money;
+    private final Profit profit;
 
     public RateOfReturn(LottoCount lottoCount) {
-        this.money = lottoCount.getCount() * UNIT;
+        this.money = new Money(lottoCount.getCount());
         this.profit = new Profit();
     }
 
     public double calcRateOfReturn(WinningResult winningResult) {
-        return (profit.sumProfitMoney(winningResult) / (double) money);
+        return (profit.sumProfitMoney(winningResult) / (double) money.getNumber());
     }
 }
