@@ -25,8 +25,8 @@ public enum Prize {
 
     public static Prize getWinnerPrizeByMatched(int matched, boolean bonus) {
         return Arrays.stream(Prize.values())
-                .filter(winnerPrize -> winnerPrize.matched == matched)
-                .filter(winnerPrize -> winnerPrize.bonus == bonus)
+                .filter(prize -> prize.matched == matched)
+                .filter(prize -> prize.bonus == bonus)
                 .findAny()
                 .orElse(FAIL);
     }

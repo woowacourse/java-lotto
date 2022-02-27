@@ -15,10 +15,6 @@ public class Lotto {
         }
     }
 
-    public Set<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
-    }
-
     public Prize calculateRank(WinningNumber winningNumber) {
         int matched = matchedRegularNumbers(winningNumber);
         boolean hasBonus = hasMatchedNumber(winningNumber.getBonus());
@@ -30,8 +26,12 @@ public class Lotto {
                 .filter(lottoNumbers::contains).count();
     }
 
-    private boolean hasMatchedNumber(LottoNumber bonus) {
-        return lottoNumbers.contains(bonus);
+    private boolean hasMatchedNumber(LottoNumber number) {
+        return lottoNumbers.contains(number);
+    }
+
+    public Set<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 
 }

@@ -25,7 +25,7 @@ public class PurchasedLotto {
     }
 
     public void purchase(PurchaseStrategy purchaseStrategy) {
-        Lotto lotto = new Lotto(purchaseStrategy.getNumbers());
+        Lotto lotto = new Lotto(purchaseStrategy.generateNumbers());
         lottos.add(lotto);
     }
 

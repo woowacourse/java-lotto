@@ -11,7 +11,7 @@ public class CustomPurchaseStrategy implements PurchaseStrategy {
     }
 
     @Override
-    public List<Integer> getNumbers() {
+    public List<Integer> generateNumbers() {
         return customNumbers;
     }
 }

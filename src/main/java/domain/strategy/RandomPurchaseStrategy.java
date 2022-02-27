@@ -10,9 +10,8 @@ public class RandomPurchaseStrategy implements PurchaseStrategy {
     private static final int MINIMUM_NUMBER = 1;
     private static final int MAXIMUM_NUMBER = 45;
 
-
     @Override
-    public List<Integer> getNumbers() {
+    public List<Integer> generateNumbers() {
         List<Integer> balls = new ArrayList<>();
         for (int i = MINIMUM_NUMBER; i <= MAXIMUM_NUMBER; i++) {
             balls.add(i);
