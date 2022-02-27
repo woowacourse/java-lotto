@@ -10,8 +10,7 @@ public class Lottos {
 
     public Lottos(int lottoCount, LottoNumberGenerator lottoNumberGenerator) {
         for (int i = 0; i < lottoCount; i++) {
-            List<LottoNumber> lottoNumbers = lottoNumberGenerator.generate();
-            lottos.add(new Lotto(lottoNumbers));
+            lottos.add(LottoFactory.createLotto(lottoNumberGenerator));
         }
     }
 

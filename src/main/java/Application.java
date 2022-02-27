@@ -2,6 +2,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import domain.Lotto;
+import domain.LottoFactory;
 import domain.LottoGame;
 import domain.LottoNumber;
 import domain.LottoGameMoney;
@@ -25,10 +26,7 @@ public class Application {
 
     private static WinningLotto createWinningLotto() {
         final List<Integer> winningNumbers = InputView.getWinningLottoNumbers();
-        List<LottoNumber> winningLottoNumbers = winningNumbers.stream()
-            .map(LottoNumber::valueOf)
-            .collect(Collectors.toList());
-        Lotto winningLotto = new Lotto(winningLottoNumbers);
+        Lotto winningLotto = LottoFactory.createLotto(winningNumbers);
 
         final int bonusNumber = InputView.getBonusBall();
         LottoNumber bonusLottoNumber = LottoNumber.valueOf(bonusNumber);
