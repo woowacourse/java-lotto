@@ -55,14 +55,10 @@ public class Lotto {
             .collect(Collectors.toUnmodifiableList());
     }
 
-    public int getMatchScore(Lotto winningNumbers) {
+    int getMatchScore(Lotto winningNumbers) {
         return (int)lottoNumbers.stream()
             .filter(winningNumbers::isMatchNumber)
             .count();
-    }
-
-    public boolean isMatchBonusNumber(LottoNumber bonusNumber) {
-        return lottoNumbers.contains(bonusNumber);
     }
 
     public List<Integer> toIntegers() {
@@ -71,7 +67,7 @@ public class Lotto {
             .collect(Collectors.toUnmodifiableList());
     }
 
-    public boolean isMatchNumber(LottoNumber number) {
+    boolean isMatchNumber(LottoNumber number) {
         return lottoNumbers.contains(number);
     }
 }
