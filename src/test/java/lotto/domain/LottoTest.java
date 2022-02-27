@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -56,6 +57,17 @@ public class LottoTest {
                     .map(LottoNumber::new)
                     .collect(Collectors.toList());
             assertThatCode(() -> new Lotto(lottoNumbers)).doesNotThrowAnyException();
+        }
+
+        @ParameterizedTest
+        @ValueSource(ints = {1, 2, 3, 4, 5, 6})
+        @DisplayName("입력받은 6개의 숫자를 모두 포함한다.")
+        void contains_lotto_number(int value) {
+            List<LottoNumber> lottoNumbers = Arrays.asList(1, 2, 3, 4, 5, 6)
+                    .stream()
+                    .map(LottoNumber::new)
+                    .collect(Collectors.toList());
+            assertThat(lottoNumbers.contains(new LottoNumber(value))).isTrue();
         }
     }
 }
