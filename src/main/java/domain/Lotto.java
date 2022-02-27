@@ -19,7 +19,7 @@ public class Lotto {
     }
 
     public Rank calculateRank(WinningNumbers winningNumber) {
-        int matched = matchedRegularNumbers(winningNumber);
+        final int matched = matchedRegularNumbers(winningNumber);
         boolean hasBonus = false;
         if (matched == BONUS_CONFIRMATION_CRITERIA) {
             hasBonus = hasMatchedNumber(winningNumber.getBonus());
@@ -32,7 +32,7 @@ public class Lotto {
                 .filter(lottoNumbers::contains).count();
     }
 
-    private boolean hasMatchedNumber(Number number) {
+    private boolean hasMatchedNumber(final Number number) {
         return lottoNumbers.contains(number);
     }
 

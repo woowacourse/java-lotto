@@ -12,7 +12,7 @@ public class RandomPurchaseStrategy implements PurchaseStrategy {
 
     @Override
     public List<Integer> generateNumbers() {
-        List<Integer> balls = new ArrayList<>();
+        final List<Integer> balls = new ArrayList<>();
         for (int i = MINIMUM_NUMBER; i <= MAXIMUM_NUMBER; i++) {
             balls.add(i);
         }

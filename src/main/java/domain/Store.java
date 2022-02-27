@@ -10,8 +10,8 @@ public class Store {
 
     private static final int LOTTO_PRICE = 1000;
 
-    public static Lottos purchaseLottos(int inputMoney) {
-        List<Lotto> lottos = new ArrayList<>();
+    public static Lottos purchaseLottos(final int inputMoney) {
+        final List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < inputMoney / LOTTO_PRICE; i++) {
             purchase(lottos, new RandomPurchaseStrategy());
         }

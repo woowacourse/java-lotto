@@ -56,7 +56,7 @@ public class OutputView {
                 + prizeResult.get(winnerPrize) + STATISTICS_COUNT_MESSAGE + System.lineSeparator());
     }
 
-    public static void printEarningRate(float earningRate) {
+    public static void printEarningRate(final float earningRate) {
         System.out.println(EARNING_RATE_START_MESSAGE + earningRate + EARNING_RATE_END_MESSAGE);
     }
 

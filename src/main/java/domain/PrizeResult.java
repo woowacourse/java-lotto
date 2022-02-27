@@ -8,7 +8,7 @@ public class PrizeResult {
     private final Map<Rank, Integer> prizeResult;
     private final float earningRate;
 
-    public PrizeResult(int inputMoney, List<Lotto> lottos, WinningNumbers winningNumber) {
+    public PrizeResult(final int inputMoney, List<Lotto> lottos, WinningNumbers winningNumber) {
         this.prizeResult = new HashMap<>();
         initFinalResult();
         calculatePrizeResult(lottos, winningNumber);
@@ -22,7 +22,7 @@ public class PrizeResult {
 
     private void calculatePrizeResult(List<Lotto> lottos, WinningNumbers winningNumber) {
         for (Lotto lotto : lottos) {
-            Rank winnerPrice = lotto.calculateRank(winningNumber);
+            final Rank winnerPrice = lotto.calculateRank(winningNumber);
             updatePrizeResult(winnerPrice);
         }
     }
@@ -32,7 +32,7 @@ public class PrizeResult {
     }
 
     private float calculateEarningRate(int inputMoney) {
-        float earningRate = (float) totalPrize() / inputMoney;
+        final float earningRate = (float) totalPrize() / inputMoney;
         return  (float) (Math.floor(earningRate * 100) / 100.0);
     }
 

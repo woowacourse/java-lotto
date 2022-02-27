@@ -42,13 +42,13 @@ public class InputValidation {
         }
     }
 
-    private static void checkNumOfBalls(final List<String> numbers) {
+    private static void checkNumOfBalls(List<String> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(ERROR_NUM_OF_BALLS);
         }
     }
 
-    private static List<Integer> checkNonIntegers(final List<String> numbers) {
+    private static List<Integer> checkNonIntegers(List<String> numbers) {
         return numbers.stream()
                 .map(number -> checkNonInteger(number, ERROR_BALL_NON_INTEGER))
                 .collect(Collectors.toList());

@@ -27,8 +27,8 @@ public class WinningNumbers {
         }
     }
 
-    public void addBonusNumber(int number) {
-        Number bonusNumber = new Number(number);
+    public void addBonusNumber(final int number) {
+        final Number bonusNumber = new Number(number);
         if (winningNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException(ERROR_DUPLICATE_BONUS);
         }

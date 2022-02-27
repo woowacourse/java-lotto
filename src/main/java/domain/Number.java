@@ -15,7 +15,7 @@ public class Number {
         this.number = number;
     }
 
-    private static void checkNumberRange(int number) {
+    private static void checkNumberRange(final int number) {
         if (number < MINIMUM_NUMBER || MAXIMUM_NUMBER < number) {
             throw new IllegalArgumentException(ERROR_NUMBER_OUT_RANGE);
         }

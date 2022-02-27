@@ -23,7 +23,7 @@ public enum Rank {
         this.bonus = bonus;
     }
 
-    public static Rank getWinnerPrizeByMatched(int matched, boolean bonus) {
+    public static Rank getWinnerPrizeByMatched(final int matched, final boolean bonus) {
         return Arrays.stream(Rank.values())
                 .filter(prize -> prize.matched == matched)
                 .filter(prize -> prize.bonus == bonus)
