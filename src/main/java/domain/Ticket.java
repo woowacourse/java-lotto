@@ -8,7 +8,7 @@ public class Ticket {
 	public static final int SIZE = 6;
 	private static final int CONDITION_FOR_CHECK_BONUS_BALL = 5;
 
-	public static final String SIZE_ERROR = "당첨 번호는 6자리여야 합니다.";
+	public static final String SIZE_ERROR = "로또 번호는 6자리여야 합니다.";
 
 	private static final String START_SIGN = "[";
 	private static final String END_SIGN = "]";

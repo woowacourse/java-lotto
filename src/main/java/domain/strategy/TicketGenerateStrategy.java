@@ -2,7 +2,7 @@ package domain.strategy;
 
 import java.util.List;
 
-public interface TicketGenerator {
+public interface TicketGenerateStrategy {
 
 	List<Integer> generate();
 }

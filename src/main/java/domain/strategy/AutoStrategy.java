@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 
 import domain.Ball;
 
-public class RandomTicketGenerator implements TicketGenerator {
+public class AutoStrategy implements TicketGenerateStrategy {
 	private static final int LOTTO_PARSE_START_RANGE = 0;
 	private static final int LOTTO_PARSE_END_RANGE = 6;
 
