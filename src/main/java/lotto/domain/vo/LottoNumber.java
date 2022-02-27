@@ -4,11 +4,11 @@ import lotto.constants.NumberLimit;
 
 import java.util.Objects;
 
-public class Number {
+public class LottoNumber {
 
     private final int number;
 
-    public Number(int number) {
+    public LottoNumber(int number) {
         validateRange(number);
         this.number = number;
     }
@@ -26,10 +26,10 @@ public class Number {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Number)) {
+        if (!(o instanceof LottoNumber)) {
             return false;
         }
-        Number number = (Number) o;
+        LottoNumber number = (LottoNumber) o;
         return this.number == number.number;
     }
 

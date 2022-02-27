@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import lotto.domain.vo.Number;
+import lotto.domain.vo.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -19,7 +19,7 @@ class LottoTest {
     @Test
     @DisplayName("로또 번호는 6자리 숫자로 생성된다.")
     void createSixSizeNumbers() {
-        List<Number> numbers = givenNumbers(1, 2, 3, 4, 5, 6);
+        List<LottoNumber> numbers = givenNumbers(1, 2, 3, 4, 5, 6);
 
         assertThat(new Lotto(numbers)).isNotNull();
     }
@@ -27,7 +27,7 @@ class LottoTest {
     @Test
     @DisplayName("로또 번호는 5자리 숫자가 전달되면 예외가 발생한다.")
     void throwExceptionWhenFiveSizeNumbers() {
-        List<Number> numbers = givenNumbers(1, 2, 3, 4, 5);
+        List<LottoNumber> numbers = givenNumbers(1, 2, 3, 4, 5);
 
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new Lotto(numbers))
@@ -37,7 +37,7 @@ class LottoTest {
     @Test
     @DisplayName("로또 번호는 7자리 숫자가 전달되면 예외가 발생한다.")
     void throwExceptionWhenSevenSizeNumbers() {
-        List<Number> numbers = givenNumbers(1, 2, 3, 4, 5, 6, 7);
+        List<LottoNumber> numbers = givenNumbers(1, 2, 3, 4, 5, 6, 7);
 
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new Lotto(numbers))
@@ -47,7 +47,7 @@ class LottoTest {
     @Test
     @DisplayName("로또 번호가 중복될 경우 예외가 발생한다.")
     void throwExceptionWhenDuplicateNumbers() {
-        List<Number> numbers = givenNumbers(1, 2, 3, 4, 5, 5);
+        List<LottoNumber> numbers = givenNumbers(1, 2, 3, 4, 5, 5);
 
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new Lotto(numbers))
@@ -57,7 +57,7 @@ class LottoTest {
     @Test
     @DisplayName("숫자가 포함 되어있는지 확인한다.")
     void checkContainsNumber() {
-        Number bonus = new Number(7);
+        LottoNumber bonus = new LottoNumber(7);
         Lotto lotto = new Lotto(givenNumbers(1, 2, 3, 4, 5, 7));
 
         assertThat(lotto.containsNumber(bonus)).isTrue();
@@ -66,7 +66,7 @@ class LottoTest {
     @Test
     @DisplayName("숫자가 미포함 되었는지 확인한다.")
     void checkNotContainsNumber() {
-        Number bonus = new Number(6);
+        LottoNumber bonus = new LottoNumber(6);
         Lotto lotto = new Lotto(givenNumbers(1, 2, 3, 4, 5, 7));
 
         assertThat(lotto.containsNumber(bonus)).isFalse();
@@ -75,7 +75,7 @@ class LottoTest {
     @ParameterizedTest
     @MethodSource("numbersAndMatchCount")
     @DisplayName("일치하는 숫자의 개수를 반환한다.")
-    void countMatchNumbers(List<Number> numbers, int matchCount) {
+    void countMatchNumbers(List<LottoNumber> numbers, int matchCount) {
         Lotto lotto = new Lotto(givenNumbers(1, 2, 3, 4, 5, 7));
         Lotto anotherLotto = new Lotto(numbers);
 
@@ -95,9 +95,9 @@ class LottoTest {
         );
     }
 
-    private static List<Number> givenNumbers(int... numbers) {
+    private static List<LottoNumber> givenNumbers(int... numbers) {
         return Arrays.stream(numbers)
-                .mapToObj(Number::new)
+                .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 }

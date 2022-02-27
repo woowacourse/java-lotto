@@ -6,7 +6,7 @@ import java.util.Objects;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-import lotto.domain.vo.Number;
+import lotto.domain.vo.LottoNumber;
 
 public class InputView {
 
@@ -23,26 +23,26 @@ public class InputView {
         return validateNumber(input);
     }
 
-    public static List<Number> inputWinnerNumbers() {
+    public static List<LottoNumber> inputWinnerNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String input = SCANNER.nextLine();
         validateBlank(input);
         return convertToNumbers(input);
     }
 
-    private static List<Number> convertToNumbers(String input) {
+    private static List<LottoNumber> convertToNumbers(String input) {
         return Arrays.stream(input.split(DELIMITER))
                 .map(String::trim)
                 .map(InputView::validateNumber)
-                .map(Number::new)
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 
-    public static Number inputBonusNumber() {
+    public static LottoNumber inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         String input = SCANNER.nextLine();
         validateBlank(input);
-        return new Number(validateNumber(input));
+        return new LottoNumber(validateNumber(input));
     }
 
     private static void validateBlank(String input) {

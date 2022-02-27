@@ -8,36 +8,36 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import lotto.constants.NumberLimit;
-import lotto.domain.vo.Number;
+import lotto.domain.vo.LottoNumber;
 
 public class LottoGenerator {
 
     private static final int START_INCLUSIVE = 0;
     private static final int END_EXCLUSIVE = 6;
-    private static final List<Number> NUMBERS = initNumbers();
+    private static final List<LottoNumber> NUMBERS = initNumbers();
 
     private LottoGenerator() {
     }
 
-    private static List<Number> initNumbers() {
+    private static List<LottoNumber> initNumbers() {
         return IntStream.rangeClosed(NumberLimit.MINIMUM.getLimit(), NumberLimit.MAXIMUM.getLimit())
-                .mapToObj(Number::new)
+                .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 
     public static Lotto generate() {
-        List<Number> numbers = subtractNumbers(shuffleNumbers());
-        numbers.sort(Comparator.comparingInt(Number::getNumber));
+        List<LottoNumber> numbers = subtractNumbers(shuffleNumbers());
+        numbers.sort(Comparator.comparingInt(LottoNumber::getNumber));
         return new Lotto(numbers);
     }
 
-    private static List<Number> shuffleNumbers() {
-        List<Number> copiedNumbers = new ArrayList<>(NUMBERS);
+    private static List<LottoNumber> shuffleNumbers() {
+        List<LottoNumber> copiedNumbers = new ArrayList<>(NUMBERS);
         Collections.shuffle(copiedNumbers);
         return copiedNumbers;
     }
 
-    private static List<Number> subtractNumbers(List<Number> numbers) {
+    private static List<LottoNumber> subtractNumbers(List<LottoNumber> numbers) {
         return new ArrayList<>(numbers.subList(START_INCLUSIVE, END_EXCLUSIVE));
     }
 }
