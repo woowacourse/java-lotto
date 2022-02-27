@@ -29,8 +29,7 @@ public class LottoController {
     private LottoService initializeLottoService(final LottoGenerator lottoGenerator) {
         try {
             final String purchaseAmountInput = inputView.inputPurchaseAmount();
-            final String manualPurchaseCounts = inputView.inputManualPurchaseCounts();
-            return new LottoService(lottoGenerator, purchaseAmountInput, manualPurchaseCounts);
+            return new LottoService(lottoGenerator, purchaseAmountInput);
         } catch (final Exception e) {
             inputView.printErrorMessage(e.getMessage());
             return initializeLottoService(lottoGenerator);
@@ -38,22 +37,23 @@ public class LottoController {
     }
 
     public void run() {
-        generateManualLottoNumbersGroup();
+        int manualCounts = generateManualLottoNumbersGroup();
         generateAutoLottoNumbersGroup();
-        outputView.printPurchaseCount(lottoService.getCountOfManualLottoNumbers(), lottoService.getCountOfLottoNumbers());
+        outputView.printPurchaseCount(manualCounts, lottoService.countOfLottoNumbers());
         printLottoNumbersGroup();
         final WinningNumbers winningNumbers = generateWinningNumbers();
         printResult(winningNumbers);
     }
 
-    private void generateManualLottoNumbersGroup() {
+    private int generateManualLottoNumbersGroup() {
         try {
-            final int manualLottoCounts = lottoService.getCountOfManualLottoNumbers();
+            final String manualPurchaseCounts = inputView.inputManualPurchaseCounts();
+            final int manualLottoCounts = lottoService.countOfManualLottoNumbers(manualPurchaseCounts);
             List<List<String>> manualLottoNumbersGroup = inputByManualLottoNumbersGroup(manualLottoCounts);
-            lottoService.generateManualLottoCounts(manualLottoNumbersGroup);
+            return lottoService.generateManualLottoCounts(manualLottoNumbersGroup);
         } catch (final Exception e) {
             inputView.printErrorMessage(e.getMessage());
-            generateManualLottoNumbersGroup();
+            return generateManualLottoNumbersGroup();
         }
     }
 

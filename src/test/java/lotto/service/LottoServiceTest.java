@@ -22,7 +22,7 @@ class LottoServiceTest {
     private final LottoGenerator lottoGenerator = new LottoCustomGenerator();
     private final String purchaseAmount = "5000";
     private final String manualPurchaseCounts = "2";
-    private final LottoService lottoService = new LottoService(lottoGenerator, purchaseAmount, manualPurchaseCounts);
+    private final LottoService lottoService = new LottoService(lottoGenerator, purchaseAmount);
     private final WinningNumbers winningNumbers = new WinningNumbers(
             new LottoNumbers(Arrays.asList("2", "3", "4", "5", "6", "7")), LottoNumber.from("1"));
 
@@ -41,7 +41,7 @@ class LottoServiceTest {
         //given
         final int expected = 2;
         //when
-        final int actual = lottoService.getCountOfManualLottoNumbers();
+        final int actual = lottoService.countOfManualLottoNumbers(manualPurchaseCounts);
         //then
         assertThat(actual).isEqualTo(expected);
     }
@@ -51,7 +51,7 @@ class LottoServiceTest {
     void getCountOfLottoNumbers() {
         final int expected = 5;
         //when
-        final int actual = lottoService.getCountOfLottoNumbers();
+        final int actual = lottoService.countOfLottoNumbers();
         //then
         assertThat(actual).isEqualTo(expected);
     }

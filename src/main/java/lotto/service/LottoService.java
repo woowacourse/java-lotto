@@ -14,28 +14,28 @@ public class LottoService {
     private List<LottoNumbers> lottoNumbersGroup;
     private final LottoGenerator lottoGenerator;
     private final PurchaseAmount purchaseAmount;
-    private final ManualPurchaseCounts manualPurchaseCounts;
     private final Map<LottoMatchKind, Integer> matchResult;
 
-    public LottoService(final LottoGenerator lottoGenerator, final String purchaseAmount, final String manualCounts) {
+    public LottoService(final LottoGenerator lottoGenerator, final String purchaseAmount) {
         this.lottoGenerator = lottoGenerator;
         this.purchaseAmount = PurchaseAmount.fromPurchaseAmountAndLottoPrice(purchaseAmount, LOTTO_PRICE);
-        this.manualPurchaseCounts =
-                new ManualPurchaseCounts(manualCounts, this.purchaseAmount.getCountOfLottoNumbers(LOTTO_PRICE));
         lottoNumbersGroup= new ArrayList<>();
         matchResult = new EnumMap<>(LottoMatchKind.class);
         initializeResult(matchResult);
     }
 
-    public int getCountOfManualLottoNumbers() {
+    public int countOfManualLottoNumbers(final String manualCounts) {
+        ManualPurchaseCounts manualPurchaseCounts =
+                new ManualPurchaseCounts(manualCounts, purchaseAmount.getCountOfLottoNumbers(LOTTO_PRICE));
         return manualPurchaseCounts.getManualLottoCounts();
     }
 
-    public void generateManualLottoCounts(final List<List<String>> manualLottoNumbersGroup) {
+    public int generateManualLottoCounts(final List<List<String>> manualLottoNumbersGroup) {
         final List<LottoNumbers> manualNumbersGroup = manualLottoNumbersGroup.stream()
                 .map(LottoNumbers::new)
                 .collect(Collectors.toUnmodifiableList());
         lottoNumbersGroup.addAll(manualNumbersGroup);
+        return lottoNumbersGroup.size();
     }
 
     public void generateAutoLottoNumbers() {
@@ -48,7 +48,7 @@ public class LottoService {
                 .forEach(lottoMatchKind -> result.put(lottoMatchKind, INITIAL_MATCH_COUNT));
     }
 
-    public int getCountOfLottoNumbers() {
+    public int countOfLottoNumbers() {
         return purchaseAmount.getCountOfLottoNumbers(LOTTO_PRICE);
     }
 
