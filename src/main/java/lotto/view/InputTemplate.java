@@ -9,7 +9,6 @@ import java.util.Scanner;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
-import lotto.model.exception.LottoException;
 import lotto.view.exception.InvalidFormatException;
 import lotto.view.exception.ApplicationFinishedException;
 
@@ -23,14 +22,23 @@ public class InputTemplate {
         this.printStream = new PrintStream(outputStream);
     }
 
-    public <T> T repeatablyExecute(Supplier<T> supplier,
-        Consumer<LottoException> exceptionHandler) {
+    public <T> T repeatablyExecute(Supplier<T> supplier, Consumer<? super Exception> handler,
+        Class<? extends Exception> cls) {
         try {
             return supplier.get();
-        } catch (LottoException e) {
-            exceptionHandler.accept(e);
-            return selectivelyRepeat(() -> repeatablyExecute(supplier, exceptionHandler));
+        } catch (Exception e) {
+            return handleException(() -> repeatablyExecute(supplier, handler, cls),
+                handler, cls, e);
         }
+    }
+
+    private <T> T handleException(Supplier<T> supplier, Consumer<? super Exception> handler,
+        Class<? extends Exception> cls, Exception thrown) {
+        if (cls.isAssignableFrom(thrown.getClass())) {
+            handler.accept(thrown);
+            return selectivelyRepeat(supplier);
+        }
+        throw new ApplicationFinishedException(thrown);
     }
 
     private <T> T selectivelyRepeat(Supplier<T> supplier) {

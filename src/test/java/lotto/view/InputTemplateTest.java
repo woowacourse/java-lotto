@@ -41,7 +41,8 @@ public class InputTemplateTest {
         InputTemplate inputTemplate = inputTemplateWithInputText("");
 
         assertThatCode(
-            () -> inputTemplate.repeatablyExecute(supplier::get, exceptionHandler::accept))
+            () -> inputTemplate
+                .repeatablyExecute(supplier::get, exceptionHandler::accept, LottoException.class))
             .doesNotThrowAnyException();
 
         supplier.verifyCalledOnce();
@@ -55,7 +56,8 @@ public class InputTemplateTest {
 
         assertThatCode(
             () -> inputTemplate
-                .repeatablyExecute(supplier::throwLottoException, exceptionHandler::accept))
+                .repeatablyExecute(supplier::throwLottoException, exceptionHandler::accept,
+                    LottoException.class))
             .isInstanceOf(ApplicationFinishedException.class);
 
         supplier.verifyCalledOnce();
@@ -69,7 +71,8 @@ public class InputTemplateTest {
 
         assertThatCode(
             () -> inputTemplate
-                .repeatablyExecute(supplier::throwLottoException, exceptionHandler::accept))
+                .repeatablyExecute(supplier::throwLottoException, exceptionHandler::accept,
+                    LottoException.class))
             .isInstanceOf(ApplicationFinishedException.class);
 
         supplier.verifyCalledTimes(3);
@@ -83,9 +86,9 @@ public class InputTemplateTest {
 
         assertThatCode(
             () -> inputTemplate.repeatablyExecute(() -> supplier.throwRuntimeException(MESSAGE),
-                exceptionHandler::accept))
+                exceptionHandler::accept, LottoException.class))
             .isInstanceOf(RuntimeException.class)
-            .hasMessage(MESSAGE);
+            .hasMessageContaining(MESSAGE);
 
         supplier.verifyCalledOnce();
         exceptionHandler.verifyIsNotCalled();
@@ -133,7 +136,7 @@ public class InputTemplateTest {
                 text -> consumer.throwRuntimeException(text, MESSAGE),
                 exceptionHandler::accept))
             .isInstanceOf(RuntimeException.class)
-            .hasMessage(MESSAGE);
+            .hasMessageContaining(MESSAGE);
 
         consumer.verifyCalledOnce(INPUT_TEXT);
         exceptionHandler.verifyIsNotCalled();

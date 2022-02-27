@@ -4,6 +4,7 @@ import lotto.model.Lotto;
 import lotto.model.Money;
 import lotto.model.LottoNumber;
 import lotto.model.WinnerLotto;
+import lotto.model.exception.LottoException;
 
 public class InputView {
 
@@ -22,7 +23,9 @@ public class InputView {
     }
 
     public static Money inputMoney() {
-        return inputTemplate.repeatablyExecute(InputView::createMoney, OutputView::printErrorMessage);
+        return inputTemplate
+            .repeatablyExecute(InputView::createMoney, OutputView::printErrorMessage,
+                LottoException.class);
     }
 
     private static Money createMoney() {
@@ -35,7 +38,9 @@ public class InputView {
     }
 
     public static WinnerLotto inputWinnerLotto() {
-        return inputTemplate.repeatablyExecute(InputView::createWinnerLotto, OutputView::printErrorMessage);
+        return inputTemplate
+            .repeatablyExecute(InputView::createWinnerLotto, OutputView::printErrorMessage,
+                LottoException.class);
     }
 
     private static WinnerLotto createWinnerLotto() {
@@ -48,7 +53,7 @@ public class InputView {
 
     private static String inputLottoText() {
         return inputTemplate.repeatablyInput("지난 주 당첨 번호를 입력해 주세요.", LOTTO_VALIDATOR::validate,
-                OutputView::printErrorMessage);
+            OutputView::printErrorMessage);
     }
 
     private static LottoNumber createBonus() {
