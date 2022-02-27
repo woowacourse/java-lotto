@@ -9,8 +9,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 class LottoResultTest {
 
     @ParameterizedTest
-    @CsvSource(value = {"RANK_FIRST:2", "RANK_SECOND:1", "RANK_THIRD:0", "RANK_FOURTH:0",
-            "RANK_FIFTH:0"}, delimiter = ':')
+    @CsvSource(value = {"FIRST:2", "SECOND:1", "THIRD:0", "FOURTH:0",
+            "FIFTH:0"}, delimiter = ':')
     @DisplayName("LottoResult에 값이 추가가 되는가?")
     void Add_Rank_To_Result(LottoRank lottoRank, int value) {
         LottoResult lottoResult = new LottoResult();
