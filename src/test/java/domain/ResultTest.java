@@ -31,7 +31,7 @@ class ResultTest {
         result.add(Rank.of(1, false));
         result.add(Rank.of(0, false));
 
-        assertThat(result.get().get(Rank.DEFAULT)).isEqualTo(3);
+        assertThat(result.get().get(Rank.NO_PRIZE)).isEqualTo(3);
     }
 
     @Test
