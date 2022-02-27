@@ -21,21 +21,21 @@ public class Lottos {
     }
 
     public Map<Rank, WinningCount> getResultByWinningLotto(WinningLotto winningLotto) {
-        Map<Rank, WinningCount> map = setupMap();
+        Map<Rank, WinningCount> lottoResult = setupLottoResult();
 
         lottos.stream()
                 .map(winningLotto::getRankByLotto)
-                .forEach(rank -> increaseCountByRank(map, rank));
+                .forEach(rank -> increaseCountByRank(lottoResult, rank));
 
-        return map;
+        return lottoResult;
     }
 
-    private void increaseCountByRank(Map<Rank, WinningCount> map, Rank rank) {
-        int count = map.get(rank).getCount() + 1;
-        map.put(rank, new WinningCount(count));
+    private void increaseCountByRank(Map<Rank, WinningCount> lottoResult, Rank rank) {
+        int count = lottoResult.get(rank).getCount() + 1;
+        lottoResult.put(rank, new WinningCount(count));
     }
 
-    private Map<Rank, WinningCount> setupMap() {
+    private Map<Rank, WinningCount> setupLottoResult() {
         Map<Rank, WinningCount> lottoResult = new HashMap<>();
         lottoResult.put(Rank.FIRST, new WinningCount(0));
         lottoResult.put(Rank.SECOND, new WinningCount(0));
