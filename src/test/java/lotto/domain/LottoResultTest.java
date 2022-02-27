@@ -11,7 +11,7 @@ class LottoResultTest {
     @ParameterizedTest
     @CsvSource(value = {"FIRST:2", "SECOND:1", "THIRD:0", "FOURTH:0",
             "FIFTH:0"}, delimiter = ':')
-    @DisplayName("LottoResult에 값이 추가가 되는가?")
+    @DisplayName("LottoResult 에 값이 추가가 되는가?")
     void Add_Rank_To_Result(LottoRank lottoRank, int value) {
         LottoResult lottoResult = new LottoResult();
         lottoResult.add(LottoRank.FIRST);
