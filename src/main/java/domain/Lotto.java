@@ -7,19 +7,19 @@ import java.util.Set;
 
 public class Lotto {
 
-    private final Set<LottoNumber> lottoNumbers;
+    private final Set<Number> lottoNumbers;
 
     public Lotto(List<Integer> numbers) {
         lottoNumbers = new HashSet<>();
         for (Integer number : numbers) {
-            lottoNumbers.add(new LottoNumber(number));
+            lottoNumbers.add(new Number(number));
         }
     }
 
-    public Prize calculateRank(WinningNumber winningNumber) {
+    public Rank calculateRank(WinningNumber winningNumber) {
         int matched = matchedRegularNumbers(winningNumber);
         boolean hasBonus = hasMatchedNumber(winningNumber.getBonus());
-        return Prize.getWinnerPrizeByMatched(matched, hasBonus);
+        return Rank.getWinnerPrizeByMatched(matched, hasBonus);
     }
 
     private int matchedRegularNumbers(WinningNumber winningNumber) {
@@ -27,11 +27,11 @@ public class Lotto {
                 .filter(lottoNumbers::contains).count();
     }
 
-    private boolean hasMatchedNumber(LottoNumber number) {
+    private boolean hasMatchedNumber(Number number) {
         return lottoNumbers.contains(number);
     }
 
-    public Set<LottoNumber> getLottoNumbers() {
+    public Set<Number> getLottoNumbers() {
         return Collections.unmodifiableSet(lottoNumbers);
     }
 

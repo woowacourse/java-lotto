@@ -1,7 +1,7 @@
 package controller;
 
 import domain.PrizeResult;
-import domain.PurchasedLotto;
+import domain.Lottos;
 import domain.WinningNumber;
 import view.InputView;
 import view.OutputView;
@@ -9,7 +9,7 @@ import view.OutputView;
 public class LottoGameController {
 
     public void run() {
-        PurchasedLotto purchasedLotto = new PurchasedLotto(InputView.inputPrice());
+        Lottos purchasedLotto = new Lottos(InputView.inputPrice());
         OutputView.printPurchasedLotto(purchasedLotto.getLottos());
 
         PrizeResult prizeResult = purchasedLotto.prizeResult(initWinningNumber());

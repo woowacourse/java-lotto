@@ -2,7 +2,7 @@ package domain;
 
 import java.util.Objects;
 
-public class LottoNumber {
+public class Number {
 
     private static final int MINIMUM_NUMBER = 1;
     private static final int MAXIMUM_NUMBER = 45;
@@ -10,7 +10,7 @@ public class LottoNumber {
 
     private final int number;
 
-    public LottoNumber(int number) {
+    public Number(int number) {
         checkNumberRange(number);
         this.number = number;
     }
@@ -29,7 +29,7 @@ public class LottoNumber {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoNumber that = (LottoNumber) o;
+        Number that = (Number) o;
         return getNumber() == that.getNumber();
     }
 

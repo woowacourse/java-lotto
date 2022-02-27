@@ -2,7 +2,7 @@ package view;
 
 import domain.Lotto;
 import domain.PrizeResult;
-import domain.Prize;
+import domain.Rank;
 
 import java.util.List;
 import java.util.Map;
@@ -40,14 +40,14 @@ public class OutputView {
     public static void printFinalStatistic(PrizeResult result) {
         System.out.println(System.lineSeparator() + WINNING_STATISTIC);
         System.out.println(OUTLINE);
-        Map<Prize, Integer> prizeResult = result.getPrizeResult();
-        for (Prize winnerPrice : result.sortedPriceKeySet()) {
+        Map<Rank, Integer> prizeResult = result.getPrizeResult();
+        for (Rank winnerPrice : result.sortedPriceKeySet()) {
             printEachStatistic(winnerPrice, prizeResult);
         }
     }
 
-    private static void printEachStatistic(Prize winnerPrize, Map<Prize, Integer> prizeResult) {
-        if (winnerPrize == Prize.SECOND) {
+    private static void printEachStatistic(Rank winnerPrize, Map<Rank, Integer> prizeResult) {
+        if (winnerPrize == Rank.SECOND) {
             System.out.print(STATISTICS_SECOND_PRIZE_MESSAGE + winnerPrize.getPrize() + STATISTICS_WON_MESSAGE
                     + prizeResult.get(winnerPrize) + STATISTICS_COUNT_MESSAGE + System.lineSeparator());
             return;

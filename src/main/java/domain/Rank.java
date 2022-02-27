@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public enum Prize {
+public enum Rank {
 
     FIRST(2000000000, 6, false),
     SECOND(30000000, 5, true),
@@ -17,22 +17,22 @@ public enum Prize {
     private final int matched;
     private final boolean bonus;
 
-    Prize(final int prize, final int matched, final boolean bonus) {
+    Rank(final int prize, final int matched, final boolean bonus) {
         this.prize = prize;
         this.matched = matched;
         this.bonus = bonus;
     }
 
-    public static Prize getWinnerPrizeByMatched(int matched, boolean bonus) {
-        return Arrays.stream(Prize.values())
+    public static Rank getWinnerPrizeByMatched(int matched, boolean bonus) {
+        return Arrays.stream(Rank.values())
                 .filter(prize -> prize.matched == matched)
                 .filter(prize -> prize.bonus == bonus)
                 .findAny()
                 .orElse(FAIL);
     }
 
-    public static List<Prize> getWinnerPrices() {
-        return Arrays.stream(Prize.values())
+    public static List<Rank> getWinnerPrices() {
+        return Arrays.stream(Rank.values())
                 .sequential()
                 .collect(Collectors.toList());
     }
