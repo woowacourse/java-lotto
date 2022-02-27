@@ -26,6 +26,20 @@ public class InputVIewTest {
 		assertThatThrownBy(InputView::inputMoney).isInstanceOf(IllegalArgumentException.class);
 	}
 
+	@Test
+	@DisplayName("수동으로 구매할 로또 수 : 문자를 입력 한 경우 예외 발생")
+	void manualLottoCountMustBeInteger() {
+		setInput("wooteco");
+		assertThatThrownBy(InputView::inputManualLottoCount).isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@Test
+	@DisplayName("수동으로 구매할 로또 수 : 빈 문자를 입력 한 경우 예외 발생")
+	void manualLottoCountMustNotBeEmpty() {
+		setInput("\n");
+		assertThatThrownBy(InputView::inputManualLottoCount).isInstanceOf(IllegalArgumentException.class);
+	}
+
 	@ParameterizedTest
 	@ValueSource(strings = {"wooteco", "-100"})
 	@DisplayName("지난주 당첨번호 : 0이상의 정수를 입력하지 않은 경우 예외 발생")
