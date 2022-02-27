@@ -38,8 +38,9 @@ public class Lotto implements Comparable<Lotto> {
 
     public List<String> getLottoNumbers() {
         return lotto.stream()
-            .map(Ball::toString)
-            .collect(Collectors.toList());
+                .map(Ball::getNumber)
+                .map(String::valueOf)
+                .collect(Collectors.toList());
     }
 
     public boolean contains(Ball number) {
