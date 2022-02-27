@@ -62,7 +62,7 @@ public class OutputView {
     }
 
     private static String getBonus(Rank rank) {
-        if (rank.isBonus()) {
+        if (rank.getBonus()) {
             return ", 보너스 볼 일치";
         }
         return " ";

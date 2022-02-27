@@ -22,13 +22,6 @@ public class WinningNumbers {
     }
 
     private Rank getRank(Ticket ticket, int count) {
-        if (isSecondRank(ticket, count)) {
-            return Rank.SECOND;
-        }
-        return Rank.value(count, false);
-    }
-
-    private boolean isSecondRank(Ticket ticket, int count) {
-        return count == Rank.SECOND.getCount() && ticket.contains(bonusNumber);
+        return Rank.value(count, ticket.contains(bonusNumber));
     }
 }
