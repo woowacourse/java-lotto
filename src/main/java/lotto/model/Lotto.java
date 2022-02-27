@@ -18,7 +18,7 @@ public class Lotto {
         }
     }
 
-    private List<Integer> numbers;
+    private final List<Integer> numbers;
 
     public Lotto() {
         Collections.shuffle(NOMINEE_NUMBERS);
