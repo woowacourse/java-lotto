@@ -7,6 +7,8 @@ import java.util.Set;
 
 public class Lotto {
 
+    private static final int BONUS_CONFIRMATION_CRITERIA = 5;
+
     private final Set<Number> lottoNumbers;
 
     public Lotto(List<Integer> numbers) {
@@ -19,7 +21,7 @@ public class Lotto {
     public Rank calculateRank(WinningNumber winningNumber) {
         int matched = matchedRegularNumbers(winningNumber);
         boolean hasBonus = false;
-        if (matched == 5) {
+        if (matched == BONUS_CONFIRMATION_CRITERIA) {
             hasBonus = hasMatchedNumber(winningNumber.getBonus());
         }
         return Rank.getWinnerPrizeByMatched(matched, hasBonus);
