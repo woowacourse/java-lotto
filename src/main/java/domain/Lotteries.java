@@ -36,7 +36,7 @@ public class Lotteries {
 
 	private void putCountToWinner(Map<Rank, Integer> winners, Rank rank) {
 		if (!rank.equals(Rank.NONE)) {
-			winners.put(rank, winners.get(rank) + 1);
+			winners.merge(rank, 1, Integer::sum);
 		}
 	}
 
