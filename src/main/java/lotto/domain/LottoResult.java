@@ -30,4 +30,11 @@ public class LottoResult {
     public HashMap<LottoRank, Integer> getResult() {
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "LottoResult{" +
+                "result=" + result +
+                '}';
+    }
 }
