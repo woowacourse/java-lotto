@@ -49,6 +49,26 @@ public class Lotto {
         return lottoNumbers;
     }
 
+    private List<Integer> getNumbers() {
+        return this.lottoNumbers
+                .stream()
+                .map(LottoNumber::getNumber)
+                .collect(Collectors.toList());
+    }
+
+    public int countDuplicatedNumber(Lotto winningLotto) {
+        List<Integer> numbers = getNumbers();
+        return (int) winningLotto.lottoNumbers
+                .stream()
+                .map(LottoNumber::getNumber)
+                .filter(numbers::contains)
+                .count();
+    }
+
+    public boolean isBonusNumberContain(LottoNumber bonusNumber) {
+        return getNumbers().contains(bonusNumber.getNumber());
+    }
+
     public Rewards checkWinning(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
 
         int winningCount = countWinningNumbers(winningNumbers);
