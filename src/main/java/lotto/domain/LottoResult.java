@@ -15,7 +15,7 @@ public class LottoResult {
     }
 
     public Map<Rank, Integer> getLottoResult() {
-        return lottoResult;
+        return new HashMap<>(lottoResult);
     }
 
     public void addMatchingCount(Lottos lottos, WinningLotto winningLotto) {
@@ -30,7 +30,7 @@ public class LottoResult {
 
         for (Rank rank : Rank.values()) {
             Money prizeMoney = rank.getPrizeMoney();
-            prizeMoney.mulitply(lottoResult.get(rank));
+            prizeMoney.multiply(lottoResult.get(rank));
             totalMoney.add(prizeMoney.getMoney());
         }
 

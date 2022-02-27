@@ -63,9 +63,9 @@ public class Lotto {
     }
 
     public List<Integer> getLottoNumbers() {
-        return lotto.stream()
+        return new ArrayList<>(lotto.stream()
             .map(LottoNumber::getLottoNumber)
-            .collect(Collectors.toList());
+            .collect(Collectors.toList()));
     }
 
     public boolean contains(LottoNumber number) {

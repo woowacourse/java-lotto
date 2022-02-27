@@ -29,7 +29,7 @@ public class MoneyTest {
     @DisplayName("금액 배수로 저장")
     void multiply_money() {
         Money money = new Money(1000);
-        money.mulitply(17);
+        money.multiply(17);
 
         assertTrue(money.getMoney() == 17000);
     }
