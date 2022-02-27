@@ -43,7 +43,7 @@ public class Lotto implements Comparable<Lotto> {
                 .collect(Collectors.toList());
     }
 
-    public boolean contains(Ball number) {
+    public boolean contains(final Ball number) {
         return lotto.contains(number);
     }
 
@@ -57,7 +57,7 @@ public class Lotto implements Comparable<Lotto> {
             .collect(Collectors.toList());
     }
 
-    private static ArrayList<Integer> splitLottoNumbers(List<Integer> lottoNumbers) {
+    private static ArrayList<Integer> splitLottoNumbers(final List<Integer> lottoNumbers) {
         return new ArrayList<>(lottoNumbers.subList(0, BALL_COUNT));
     }
 
@@ -66,14 +66,14 @@ public class Lotto implements Comparable<Lotto> {
         validateLottoCount(numbers);
     }
 
-    private void validateDuplicatedNumber(List<Integer> numbers) {
+    private void validateDuplicatedNumber(final List<Integer> numbers) {
         Set<Integer> distinctNumbers = new HashSet<>(numbers);
         if (distinctNumbers.size() != numbers.size()) {
             throw new IllegalArgumentException(ERROR_DUPLICATED_NUMBER);
         }
     }
 
-    private void validateLottoCount(List<Integer> numbers) {
+    private void validateLottoCount(final List<Integer> numbers) {
         if (numbers.size() != BALL_COUNT) {
             throw new IllegalArgumentException(ERROR_BALL_COUNT);
         }

@@ -9,7 +9,7 @@ public class Ball {
 
     private final int number;
 
-    public Ball(Integer number) {
+    public Ball(final int number) {
         validateLottoNumber(number);
         this.number = number;
     }
@@ -18,7 +18,7 @@ public class Ball {
         return this.number;
     }
 
-    private void validateLottoNumber(final Integer number) {
+    private void validateLottoNumber(final int number) {
         if (number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER) {
             // TODO: 예외 처리 별도 객체 생성
             throw new IllegalArgumentException(ERROR_LOTTO_NUMBER);
@@ -26,7 +26,7 @@ public class Ball {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }

@@ -19,14 +19,14 @@ public enum Rank {
     private final int count;
     private final boolean bonus;
 
-    Rank(int money, int count, boolean bonus) {
+    Rank (final int money, final int count, final boolean bonus) {
         this.money = money;
         this.count = count;
         this.bonus = bonus;
     }
 
     // TODO: 정적 팩토리 메서드 공부하여 수정
-    public static Rank getRank(int matchingCount, boolean bonus) {
+    public static Rank getRank(final int matchingCount, final boolean bonus) {
         return Arrays.stream(values())
                 .filter(rank -> rank.count == matchingCount && rank.bonus == bonus)
                 .findFirst()

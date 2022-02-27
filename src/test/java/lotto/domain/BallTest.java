@@ -14,7 +14,7 @@ public class BallTest {
     @ParameterizedTest
     @ValueSource(ints = {0, 46})
     @DisplayName("1에서 45 사이의 문자열 값이 아닌 값을 입력했을 경우")
-    void incorrect_string_input_range_1_to_45(int input) {
+    void incorrect_range_1_to_45(int input) {
         assertThatThrownBy(() -> {
             Ball ball = new Ball(input);
         }).isInstanceOf(IllegalArgumentException.class);

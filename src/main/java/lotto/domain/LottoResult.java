@@ -16,10 +16,10 @@ public class LottoResult {
     }
 
     public Map<Rank, Integer> getLottoResult() {
-        return lottoResult;
+        return Map.copyOf(lottoResult);
     }
 
-    public void match(Lottos lottos, WinningLotto winningLotto) {
+    public void match(final Lottos lottos, final WinningLotto winningLotto) {
         for (Lotto lotto : lottos.getLottos()) {
             int matchingCount = lotto.compareTo(winningLotto.getWinningNumbers());
             boolean bonus = matchingCount == CHECK_BONUS_COUNT && lotto.contains(winningLotto.getBonusBall());
@@ -27,7 +27,7 @@ public class LottoResult {
         }
     }
 
-    private void increaseRankCount(Rank rank) {
+    private void increaseRankCount(final Rank rank) {
         lottoResult.put(rank, lottoResult.get(rank) + 1);
     }
 

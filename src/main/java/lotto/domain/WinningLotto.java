@@ -7,7 +7,7 @@ public class WinningLotto {
     private final Lotto winningNumbers;
     private final Ball bonusBall;
 
-    public WinningLotto(Lotto winningNumbers, Ball bonusBall) {
+    public WinningLotto(final Lotto winningNumbers, final Ball bonusBall) {
         validateWinningLotto(winningNumbers, bonusBall);
         this.winningNumbers = winningNumbers;
         this.bonusBall = bonusBall;
@@ -21,18 +21,18 @@ public class WinningLotto {
         return bonusBall;
     }
 
-    private void validateWinningLotto(Lotto winningNumbers, Ball bonusBall) {
+    private void validateWinningLotto(final Lotto winningNumbers, final Ball bonusBall) {
         validateNull(winningNumbers, bonusBall);
         validateDuplicatedNumber(winningNumbers, bonusBall);
     }
 
-    private void validateNull(Lotto lotto, Ball ball) {
+    private void validateNull(final Lotto lotto, final Ball ball) {
         if (lotto == null || ball == null) {
             throw new IllegalArgumentException(ERROR_NULL);
         }
     }
 
-    private void validateDuplicatedNumber(Lotto lotto, Ball ball) {
+    private void validateDuplicatedNumber(final Lotto lotto, final Ball ball) {
         if (lotto.contains(ball)) {
             throw new IllegalArgumentException(ERROR_DUPLICATED_NUMBER);
         }

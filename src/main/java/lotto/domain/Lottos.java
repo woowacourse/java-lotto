@@ -7,11 +7,11 @@ public class Lottos {
 
     private final List<Lotto> lottos;
 
-    public Lottos(int count) {
+    public Lottos(final int count) {
         this(createRandomLottos(count));
     }
 
-    public Lottos(List<Lotto> lottos) {
+    public Lottos(final List<Lotto> lottos) {
         this.lottos = new ArrayList<>(lottos);
     }
 
@@ -19,7 +19,7 @@ public class Lottos {
         return new ArrayList<>(lottos);
     }
 
-    private static List<Lotto> createRandomLottos(int count) {
+    private static List<Lotto> createRandomLottos(final int count) {
         List<Lotto> randomLottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             randomLottos.add(new Lotto());
