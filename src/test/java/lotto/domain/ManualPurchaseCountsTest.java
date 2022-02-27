@@ -40,7 +40,7 @@ class ManualPurchaseCountsTest {
     void create_exceptionByManualCountsOverThanMaximumAllCounts() {
         //given
         final String overCountsThanMaximumAllCounts = "15";
-        final String expectedExceptionMessage = "구입금액으로 구매할 수 있는 개수를 초과한 개수입니다. 다시 입력해주세요.";
+        final String expectedExceptionMessage = "구입금액으로 구매할 수 있는 개수를 초과한 개수입니다.";
         //when then
         assertThatThrownBy(() -> new ManualPurchaseCounts(overCountsThanMaximumAllCounts, allCounts))
                 .isInstanceOf(IllegalArgumentException.class)
