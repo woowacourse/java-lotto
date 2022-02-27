@@ -64,4 +64,23 @@ class LottoTicketTest {
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessageContaining("로또 번호는 null일 수 없습니다.");
     }
+
+
+    @Test
+    @DisplayName("로또 티켓사이에 같은 숫자를 가진 로또 번호 개수가 정확한지 확인")
+    void countMatchByLottoTicket() {
+        // when
+        List<LottoNumber> numbers = new ArrayList<>(
+            List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))
+        );
+        List<LottoNumber> otherNumbers = new ArrayList<>(
+            List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                new LottoNumber(7), new LottoNumber(8), new LottoNumber(9))
+        );
+        LottoTicket lottoTicket = new LottoTicket(numbers);
+        LottoTicket otherTicket = new LottoTicket(otherNumbers);
+        // then
+        assertThat(lottoTicket.countMatch(otherTicket)).isEqualTo(3);
+    }
 }
