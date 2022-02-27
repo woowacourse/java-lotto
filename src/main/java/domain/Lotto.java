@@ -17,7 +17,7 @@ public class Lotto {
     private static final int SECOND_PRIZE_CONDITION = 5;
     private static final int NO_MEANING_COUNT = 0;
 
-    private List<Integer> lottoNumbers;
+    private List<LottoNumber> lottoNumbers;
 
     public Lotto() {
         this.lottoNumbers = generateNumber();
@@ -27,26 +27,29 @@ public class Lotto {
         return new Lotto();
     }
 
-    public Lotto(List<Integer> lottoNumbers) {
+    public Lotto(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public List<Integer> getLottoNumbers() {
+    public List<LottoNumber> getLottoNumbers() {
         return this.lottoNumbers;
     }
 
-    public List<Integer> generateNumber() {
+    public List<LottoNumber> generateNumber() {
 
         List<Integer> numbers = IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
                 .boxed().collect(Collectors.toList());
         Collections.shuffle(numbers);
-        lottoNumbers = numbers.subList(MIN_RANGE, MAX_RANGE);
-        Collections.sort(lottoNumbers);
+        List<Integer> subNumbers = numbers.subList(MIN_RANGE, MAX_RANGE);
+        Collections.sort(subNumbers);
+        lottoNumbers = subNumbers.stream()
+                .map(number -> new LottoNumber(number))
+                .collect(Collectors.toList());
 
         return lottoNumbers;
     }
 
-    public Rewards checkWinning(List<Integer> winningNumbers, Integer bonusNumber) {
+    public Rewards checkWinning(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
 
         int winningCount = countWinningNumbers(winningNumbers);
         int bonusCount = countBonusNumber(bonusNumber);
@@ -57,14 +60,16 @@ public class Lotto {
         return Rewards.findReward(winningCount, bonusCount);
     }
 
-    private int countWinningNumbers(List<Integer> winningNumbers) {
+    private int countWinningNumbers(List<LottoNumber> winningNumbers) {
         return (int) lottoNumbers.stream()
+                .map(LottoNumber::getNumber)
                 .filter(winningNumbers::contains)
                 .count();
     }
 
-    private int countBonusNumber(Integer bonusNumber) {
+    private int countBonusNumber(LottoNumber bonusNumber) {
         return (int) lottoNumbers.stream()
+                .map(LottoNumber::getNumber)
                 .filter(bonusNumber::equals)
                 .count();
     }

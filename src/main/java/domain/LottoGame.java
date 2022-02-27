@@ -2,6 +2,7 @@ package domain;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoGame {
 
@@ -32,8 +33,11 @@ public class LottoGame {
         this.bonusNumber = bonusNumber;
     }
 
-    public void makeResult(List<Integer> winningNumbers, Integer bonusNumber) {
-        lottos.compareAllLotto(winningNumbers, bonusNumber);
+    public void makeResult(List<Integer> notVerifiedWinningNumbers, Integer notVerifiedBonusNumber) {
+        List<LottoNumber> winningNumbers = notVerifiedWinningNumbers.stream()
+                                .map(LottoNumber::new)
+                                .collect(Collectors.toList());
+        lottos.compareAllLotto(winningNumbers, new LottoNumber(notVerifiedBonusNumber));
     }
 
     public double getYield() {

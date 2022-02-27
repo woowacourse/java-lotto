@@ -2,7 +2,6 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class Lottos {
 
@@ -20,7 +19,7 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public void compareAllLotto(List<Integer> winningNumbers, int bonusNumber) {
+    public void compareAllLotto(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
         for (Lotto lotto : lottos) {
             Rewards rewards = lotto.checkWinning(winningNumbers, bonusNumber);
             Rewards.addCount(rewards);
