@@ -5,7 +5,6 @@ import view.InputView;
 import view.OutputView;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static constant.LottoConstant.LOTTO_TICKET_PRICE;
 
@@ -30,9 +29,7 @@ public class LottoController {
     }
 
     private void createResult(List<LottoTicket> lottoTickets) {
-        LottoTicketNumbers winningNumbers = new LottoTicketNumbers(InputView.getWinningNumbers().stream()
-                .map(LottoNumber::getInstance)
-                .collect(Collectors.toList()));
+        LottoTicketNumbers winningNumbers = LottoTicketNumbers.convertToLottoNumber(InputView.getWinningNumbers());
         LottoNumber bonusNumber = LottoNumber.createBonus(InputView.getBonusNumber(), winningNumbers);
 
         WinningStat winningStat = lottoMachine.createWinningStat(lottoTickets, winningNumbers, bonusNumber);

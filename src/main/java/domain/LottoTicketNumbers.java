@@ -3,6 +3,7 @@ package domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static constant.LottoConstant.*;
 
@@ -18,6 +19,12 @@ public class LottoTicketNumbers {
         validateDuplicateLottoNumber(lottoNumbers);
         Collections.sort(lottoNumbers);
         numbers = lottoNumbers;
+    }
+
+    public static LottoTicketNumbers convertToLottoNumber(List<Integer> lottoNumbers) {
+        return new LottoTicketNumbers(lottoNumbers.stream()
+                .map(LottoNumber::getInstance)
+                .collect(Collectors.toList()));
     }
 
     public int countDuplicateNumbers(LottoTicketNumbers lottoTicketNumbers) {
