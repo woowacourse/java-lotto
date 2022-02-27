@@ -2,7 +2,7 @@ package model.lotto;
 
 import java.util.Objects;
 
-import model.exception.LottoCountException;
+import exception.LottoCountException;
 import utils.InputValidateUtils;
 
 public class LottoCount {

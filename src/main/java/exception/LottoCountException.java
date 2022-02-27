@@ -1,4 +1,4 @@
-package model.exception;
+package exception;
 
 public enum LottoCountException {
     BLANK_ERROR("[Error]: 금액을 입력해주세요."),

@@ -1,4 +1,4 @@
-package model.exception;
+package exception;
 
 public enum BonusBallException {
     BLANK_ERROR("[Error]: 보너스 볼을 입력해주세요."),

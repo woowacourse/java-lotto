@@ -1,4 +1,4 @@
-package model.exception;
+package exception;
 
 public enum WinningNumberException {
     NUMBER_ERROR("[Error]: 당첨 번호는 숫자여야 합니다."),

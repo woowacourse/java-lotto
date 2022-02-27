@@ -2,7 +2,7 @@ package model.bonusball;
 
 import java.util.Objects;
 
-import model.exception.BonusBallException;
+import exception.BonusBallException;
 import utils.InputValidateUtils;
 
 public class BonusBall {
