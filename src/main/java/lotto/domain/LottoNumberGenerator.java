@@ -19,13 +19,14 @@ public class LottoNumberGenerator {
     }
 
     public List<LottoNumber> getLottoNumbers(int count) {
-        shuffleNumbers();
-        List<LottoNumber> numbers = lottoNumbers.subList(0, count);
+        List<LottoNumber> numbers = new ArrayList<>(lottoNumbers);
+        shuffleNumbers(numbers);
+        numbers = numbers.subList(0, count);
         Collections.sort(numbers);
-        return new ArrayList<>(numbers);
+        return numbers;
     }
 
-    private void shuffleNumbers() {
-        Collections.shuffle(lottoNumbers);
+    private void shuffleNumbers(List<LottoNumber> numbers) {
+        Collections.shuffle(numbers);
     }
 }
