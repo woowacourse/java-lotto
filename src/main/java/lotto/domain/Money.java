@@ -3,7 +3,6 @@ package lotto.domain;
 import lotto.exception.InvalidException;
 
 public class Money {
-    private static final int BASIC_LOTTO_MONEY = 1000;
 
     private final int money;
 
@@ -26,16 +25,12 @@ public class Money {
     }
 
     private void checkDivideMoney(final int money) {
-        if (!(money >= BASIC_LOTTO_MONEY && money % BASIC_LOTTO_MONEY == 0)) {
+        if (!(money >= Constant.BASIC_LOTTO_MONEY && money % Constant.BASIC_LOTTO_MONEY == 0)) {
             throw new IllegalArgumentException(InvalidException.ERROR_WRONG_INPUT_MONEY);
         }
     }
 
     public int getMoney() {
         return money;
-    }
-
-    public static int getBasicLottoMoney() {
-        return BASIC_LOTTO_MONEY;
     }
 }

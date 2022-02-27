@@ -1,5 +1,8 @@
 package lotto.view;
 
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.function.Predicate;
 import lotto.domain.Lotto;
 import lotto.domain.LottoWinningNumbers;
 import lotto.domain.Lottos;
@@ -32,19 +35,17 @@ public class OutputView {
         System.out.println();
         System.out.println(EXPLAIN_WINNING_STATISTICS);
         System.out.println(BASIC_LINE);
-        printBasicWinningResult(Rank.FIFTH, lottoWinningNumbers.getRankCount(Rank.FIFTH));
-        printBasicWinningResult(Rank.FOURTH, lottoWinningNumbers.getRankCount(Rank.FOURTH));
-        printBasicWinningResult(Rank.THIRD, lottoWinningNumbers.getRankCount(Rank.THIRD));
-        printSecondResult(Rank.SECOND, lottoWinningNumbers.getRankCount(Rank.SECOND));
-        printBasicWinningResult(Rank.FIRST, lottoWinningNumbers.getRankCount(Rank.FIRST));
+        Arrays.stream(Rank.values())
+                .sorted(Comparator.reverseOrder())
+                        .filter(Predicate.not(rank -> rank == Rank.NO_MATCH))
+                                .forEach(rank -> printLottoResult(rank, lottoWinningNumbers));
     }
 
-    private static void printBasicWinningResult(final Rank rank, final int count) {
-        System.out.println(String.format(PRINT_WINNING_STATISTIC, rank.getMatchCount(), rank.getMoney(), count));
-    }
-
-    private static void printSecondResult(final Rank rank, final int count) {
-        System.out.println(String.format(PRINT_SECOND_WINNING_STATISTIC, rank.getMatchCount(), rank.getMoney(), count));
+    private static void printLottoResult(Rank rank, LottoWinningNumbers lottoWinningNumbers) {
+        if (rank == Rank.SECOND){
+            System.out.println(String.format(PRINT_SECOND_WINNING_STATISTIC, rank.getMatchCount(), rank.getMoney(), lottoWinningNumbers.getRankCount(rank)));
+        }
+        System.out.println(String.format(PRINT_WINNING_STATISTIC, rank.getMatchCount(), rank.getMoney(), lottoWinningNumbers.getRankCount(rank)));
     }
 
     public static void printProfit(final double profit) {

@@ -3,8 +3,8 @@ package lotto.controller;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
+import lotto.domain.Constant;
 import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
 import lotto.domain.LottoWinningNumbers;
 import lotto.domain.Lottos;
 import lotto.exception.InvalidException;
@@ -13,7 +13,6 @@ import lotto.view.OutputView;
 
 public class LottoController {
 
-    public static final String LOTTO_DELIMITER = ",";
     private Lottos lottos;
     private LottoWinningNumbers lottoWinningNumbers;
 
@@ -37,61 +36,8 @@ public class LottoController {
 
     private String inputLottoWinningNumbers() {
         String value = removeBlank(InputView.inputLottoWinningNumbers());
-        checkInputLottoWinningNumbers(value);
 
         return value;
-    }
-
-    private static void checkInputLottoWinningNumbers(final String numbers) {
-        checkDelimiterCount(numbers);
-        checkCreateLottoWinningNumbers(numbers);
-        checkNotInteger(numbers);
-        checkIntegerRange(numbers);
-        checkDuplicateNumber(numbers);
-    }
-
-    private static void checkDelimiterCount(final String numbers) {
-        if (numbers.chars()
-                .filter(c -> c == LOTTO_DELIMITER.charAt(0))
-                .count() != LottoNumber.LOTTO_SIZE - 1) {
-            throw new IllegalArgumentException(InvalidException.ERROR_CREATE_LOTTO);
-        }
-    }
-
-    private static void checkCreateLottoWinningNumbers(final String numbers) {
-        try {
-            numbers.split(LOTTO_DELIMITER);
-        } catch (java.lang.Exception e) {
-            throw new IllegalArgumentException(InvalidException.ERROR_CREATE_LOTTO);
-        }
-    }
-
-    private static void checkNotInteger(final String numbers) {
-        String[] values = numbers.split(LOTTO_DELIMITER);
-        try {
-            Arrays.stream(values)
-                    .map(Integer::parseInt)
-                    .collect(Collectors.toList());
-        } catch (java.lang.Exception e) {
-            throw new IllegalArgumentException(InvalidException.ERROR_NOT_INTEGER);
-        }
-    }
-
-    private static void checkIntegerRange(final String numbers) {
-        String[] values = numbers.split(LOTTO_DELIMITER);
-        if (!Arrays.stream(values)
-                .map(Integer::parseInt)
-                .allMatch(number -> LottoNumber.LOTTO_MIN_RANGE <= number
-                        && number <= 45)) {
-            throw new IllegalArgumentException(InvalidException.ERROR_INTEGER_RANGE);
-        }
-    }
-
-    private static void checkDuplicateNumber(final String numbers) {
-        String[] values = numbers.split(LOTTO_DELIMITER);
-        if (LottoNumber.LOTTO_SIZE != Set.copyOf(Arrays.asList(values)).size()) {
-            throw new IllegalArgumentException(InvalidException.ERROR_CREATE_LOTTO);
-        }
     }
 
     private String removeBlank(final String value) {

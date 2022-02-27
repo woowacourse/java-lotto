@@ -10,14 +10,25 @@ public class Lotto {
     final List<Integer> lottoNumbers;
 
     public Lotto(final List<Integer> lottoNumbers) {
-        checkDuplicateNumber(lottoNumbers);
+        checkNumber(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
         Collections.sort(lottoNumbers);
         List.of(lottoNumbers);
     }
 
+    private void checkNumber(final List<Integer> lottoNumbers) {
+        checkNull(lottoNumbers);
+        checkDuplicateNumber(lottoNumbers);
+    }
+
+    private static void checkNull(final List<Integer> numbers) {
+        if (numbers == null) {
+            throw new IllegalArgumentException(InvalidException.ERROR_NULL_BLANK);
+        }
+    }
+
     private static void checkDuplicateNumber(final List<Integer> numbers) {
-        if (LottoNumber.LOTTO_SIZE != Set.copyOf(numbers).size()) {
+        if (Constant.LOTTO_SIZE != Set.copyOf(numbers).size()) {
             throw new IllegalArgumentException(InvalidException.ERROR_CREATE_LOTTO);
         }
     }

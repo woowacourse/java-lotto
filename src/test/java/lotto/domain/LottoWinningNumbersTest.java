@@ -4,6 +4,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -37,5 +38,12 @@ class LottoWinningNumbersTest {
         assertThat(lottoWinningNumbers.getRankCount(Rank.FIRST)).isEqualTo(1);
         assertThat(lottoWinningNumbers.getRankCount(Rank.SECOND)).isEqualTo(0);
         assertThat(lottoWinningNumbers.getRankCount(Rank.THIRD)).isEqualTo(0);
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    void 당첨번호_빈값_검증(String value) {
+        assertThatThrownBy(() -> new LottoWinningNumbers(null,1))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

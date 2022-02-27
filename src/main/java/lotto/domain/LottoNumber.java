@@ -6,10 +6,6 @@ import java.util.List;
 
 public class LottoNumber {
 
-    public static final int LOTTO_SIZE = 6;
-    public static final int LOTTO_MIN_RANGE = 1;
-    public static final int LOTTO_MAX_RANGE = 45;
-
     private LottoNumber() {
     }
 
@@ -18,11 +14,11 @@ public class LottoNumber {
         setRangeLottoNumber(lottoNumbers);
         Collections.shuffle(lottoNumbers);
 
-        return lottoNumbers.subList(0, LOTTO_SIZE);
+        return lottoNumbers.subList(0, Constant.LOTTO_SIZE);
     }
 
     private static void setRangeLottoNumber(final List<Integer> values) {
-        for (int i = LOTTO_MIN_RANGE; i <= LOTTO_MAX_RANGE; i++) {
+        for (int i = Constant.LOTTO_MIN_RANGE; i <= Constant.LOTTO_MAX_RANGE; i++) {
             values.add(i);
         }
     }

@@ -10,7 +10,7 @@ public class Lottos {
 
     public Lottos(final int money) {
         checkDivideMoney(money);
-        int count = money / Money.getBasicLottoMoney();
+        int count = money / Constant.BASIC_LOTTO_MONEY;
 
         for (int i = 0; i < count; i++) {
             lottos.add(new Lotto(LottoNumber.createLottoNumbers()));
@@ -18,7 +18,7 @@ public class Lottos {
     }
 
     private static void checkDivideMoney(final int money) {
-        if (!(money >= Money.getBasicLottoMoney() && money % Money.getBasicLottoMoney() == 0)) {
+        if (!(money >= Constant.BASIC_LOTTO_MONEY && money % Constant.BASIC_LOTTO_MONEY == 0)) {
             throw new IllegalArgumentException(InvalidException.ERROR_WRONG_INPUT_MONEY);
         }
     }

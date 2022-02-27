@@ -4,6 +4,7 @@ import java.util.Arrays;
 import lotto.exception.InvalidException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.*;
@@ -36,5 +37,12 @@ public class LottoTest {
     public void 로또번호_체크_실패(int value){
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         assertThat(lotto.contains(value)).isFalse();
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    void 로또번호_빈값_검증(String value) {
+        assertThatThrownBy(() -> new Lotto(null))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
