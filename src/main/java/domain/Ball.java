@@ -36,7 +36,8 @@ public class Ball {
 		return Objects.hash(number);
 	}
 
-	public int getNumber() {
-		return this.number;
+	@Override
+	public String toString() {
+		return String.valueOf(number);
 	}
 }

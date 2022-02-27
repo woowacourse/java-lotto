@@ -9,6 +9,10 @@ public enum Rank {
 	SECOND_GRADE(5, true, 30_000_000L),
 	FIRST_GRADE(6, false, 3_000_000_000L);
 
+	private static final String MATCH_COUNT_MESSAGE = "%d개 일치";
+	private static final String BONUS_BALL_MESSAGE = ", 보너스 볼 일치";
+	private static final String PRIZE_MESSAGE = "(%d원) - ";
+
 	private final int matchCount;
 	private final boolean bonusBallMatched;
 	private final Long prize;
@@ -34,11 +38,16 @@ public enum Rank {
 		return prize;
 	}
 
-	public boolean getBonusBallMatched() {
-		return bonusBallMatched;
-	}
+	@Override
+	public String toString() {
+		StringBuilder stringBuilder = new StringBuilder(String.format(MATCH_COUNT_MESSAGE, matchCount));
 
-	public int getMatchCount() {
-		return matchCount;
+		if (bonusBallMatched) {
+			stringBuilder.append(BONUS_BALL_MESSAGE);
+		}
+
+		stringBuilder.append(String.format(PRIZE_MESSAGE, prize));
+
+		return stringBuilder.toString();
 	}
 }

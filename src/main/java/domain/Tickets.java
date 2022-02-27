@@ -15,7 +15,7 @@ public class Tickets {
 	}
 
 	public void makeTickets(int count, TicketGenerator ticketGenerator) {
-		for(int i = 0; i < count; i++) {
+		for (int i = 0; i < count; i++) {
 			tickets.add(new Ticket(ticketGenerator.generate()));
 		}
 	}
@@ -33,5 +33,13 @@ public class Tickets {
 
 	public int size() {
 		return tickets.size();
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder stringBuilder = new StringBuilder();
+		tickets.forEach(ticket -> stringBuilder.append(ticket.toString()));
+
+		return stringBuilder.toString();
 	}
 }
