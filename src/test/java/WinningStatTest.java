@@ -22,6 +22,6 @@ class WinningStatTest {
         WinningStat winningStat = new WinningStat(rankInfo);
         double profit = winningStat.calculateProfit(1000);
 
-        assertThat(String.format("%.2f", profit)).isEqualTo("0.36");
+        assertThat(profit).isEqualTo((double) 5000 / 14000);
     }
 }
