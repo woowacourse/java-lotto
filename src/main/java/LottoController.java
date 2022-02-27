@@ -15,7 +15,7 @@ public class LottoController {
 
         List<Integer> lottoNumbers = InputView.askLottoNumbers();
 
-        lottoGame.makeResult(lottoNumbers.subList(0, 6), lottoNumbers.get(6));
+        lottoGame.produceResults();
         OutputView.printWinningStatistic();
         OutputView.printYield(lottoGame.getYield());
     }

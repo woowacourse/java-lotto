@@ -7,7 +7,7 @@ public class LottoRewardLogic {
     private static final int FORTH_REWARD_CONDITION = 4;
     private static final int FIFTH_REWARD_CONDITION = 3;
 
-    public Rewards convertToRank(int matchCount, boolean bonusNumberMatch) {
+    public static Rewards convertToRank(int matchCount, boolean bonusNumberMatch) {
         if (matchCount == FIRST_REWARD_CONDITION) {
             return Rewards.FIRST_REWARD;
         }
