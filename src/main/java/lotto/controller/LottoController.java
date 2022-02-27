@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.BonusNumber;
+import lotto.domain.strategy.LottoBuyStrategy;
 import lotto.domain.LottoResult;
 import lotto.domain.Lotto;
 import lotto.domain.LottoDto;
@@ -13,11 +14,13 @@ import lotto.view.OutputView;
 public class LottoController {
     private final InputView inputView;
     private final OutputView outputView;
+    private final LottoBuyStrategy lottoBuyStrategy;
     private Lotto lotto;
 
-    public LottoController() {
+    public LottoController(LottoBuyStrategy lottoBuyStrategy) {
         this.inputView = new InputView();
         this.outputView = new OutputView();
+        this.lottoBuyStrategy = lottoBuyStrategy;
     }
 
     public void start() {
@@ -38,7 +41,7 @@ public class LottoController {
     }
 
     private void initLotto(Money money) {
-        lotto = new Lotto(money);
+        lotto = new Lotto(money,lottoBuyStrategy);
         outputView.printLotto(LottoDto.from(lotto));
     }
 

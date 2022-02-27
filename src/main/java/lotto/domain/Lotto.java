@@ -1,28 +1,19 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import lotto.domain.strategy.LottoBuyStrategy;
 
 public class Lotto {
-    private static final int UNIT_AMOUNT = 1000;
 
     private final Money money;
     private final List<ChoiceNumber> lotto;
     private final LottoResult result;
 
-    public Lotto(Money money) {
+    public Lotto(Money money, LottoBuyStrategy lottoBuyStrategy) {
         this.money = money;
-        this.lotto = new ArrayList<>();
+        this.lotto = lottoBuyStrategy.buyLotto(money);
         this.result = new LottoResult();
-        buyLotto();
-    }
-
-    private void buyLotto() {
-        int bound = getLottoCount(money);
-        for (int i = 0; i < bound; i++) {
-            lotto.add((new ChoiceNumber()));
-        }
     }
 
     public LottoResult computeResult(WinningNumber winningNumber) {
@@ -35,14 +26,6 @@ public class Lotto {
 
     public double getYield() {
         return result.sumOfPrize() / money.getAmount();
-    }
-
-    private int getLottoCount(Money money) {
-        return money.getAmount() / UNIT_AMOUNT;
-    }
-
-    public int getLottoSize() {
-        return lotto.size();
     }
 
     public List<ChoiceNumber> getLotto() {
