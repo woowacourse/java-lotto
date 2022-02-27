@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.utils.Validation;
+import lotto.exception.InvalidException;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -19,6 +19,6 @@ public class LottosTest {
     public void 로또번호들_생성_실패(int money) {
         assertThatThrownBy(() -> new Lottos(money))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(Validation.ERROR_WRONG_INPUT_MONEY);
+                .hasMessage(InvalidException.ERROR_WRONG_INPUT_MONEY);
     }
 }

@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import lotto.utils.Validation;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;

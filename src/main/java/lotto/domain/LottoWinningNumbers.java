@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.utils.Validation;
+import lotto.exception.InvalidException;
 
 public class LottoWinningNumbers {
 
@@ -16,7 +16,7 @@ public class LottoWinningNumbers {
     public LottoWinningNumbers(final String numbers, final int bonusNumber) {
         initWinningResult();
         this.winningLotto = new Lotto(createWinningLottoNumbers(numbers));
-        Validation.checkBonusNumber(winningLotto, bonusNumber);
+        checkBonusNumber(winningLotto, bonusNumber);
         this.bonusNumber = bonusNumber;
     }
 
@@ -25,6 +25,25 @@ public class LottoWinningNumbers {
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
+
+    private static void checkBonusNumber(final Lotto lotto, final int number) {
+        checkRangeBonusNumber(number);
+        checkDuplicateBonusNumber(lotto, number);
+    }
+
+    private static void checkRangeBonusNumber(final int number) {
+        if (!(number >= LottoNumber.LOTTO_MIN_RANGE
+                && number <= LottoNumber.LOTTO_MAX_RANGE)) {
+            throw new IllegalArgumentException(InvalidException.ERROR_INTEGER_RANGE);
+        }
+    }
+
+    private static void checkDuplicateBonusNumber(final Lotto lotto, final int number) {
+        if (lotto.contains(number)) {
+            throw new IllegalArgumentException(InvalidException.ERROR_DUPLICATE_BONUS_NUMBER);
+        }
+    }
+
     public void calculateWinning(final Lotto lotto) {
         int matchCount = (int) winningLotto.getNumbers()
                 .stream()
