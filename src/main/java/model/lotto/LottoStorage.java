@@ -17,7 +17,7 @@ public class LottoStorage {
 	private List<Lotto> store(LottoCount lottoCount) {
 		List<Lotto> lottos = new ArrayList<>();
 
-		while (!lottoCount.isZero()) {
+		while (lottoCount.haveRemainToMake()) {
 			lottos.add(new Lotto(RandomLottoNumbersGenerator.pickSixNumbers()));
 			lottoCount.reduceCountOfRemain();
 		}

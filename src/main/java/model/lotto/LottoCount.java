@@ -3,7 +3,7 @@ package model.lotto;
 import utils.InputValidateUtils;
 
 public class LottoCount {
-	private static final int ZERO = 0;
+	private static final int STANDARD_CAN_MAKE = 0;
 	private static final int UNIT = 1000;
 	private static final String LOTTO_COUNT_BLANK_ERROR_MESSAGE = "[Error]: 금액을 입력해주세요.";
 	private static final String LOTTO_COUNT_NUMBER_ERROR_MESSAGE = "[Error]: 금액은 숫자를 입력해주세요.";
@@ -28,8 +28,8 @@ public class LottoCount {
 		}
 	}
 
-	public boolean isZero() {
-		return count == ZERO;
+	public boolean haveRemainToMake() {
+		return count > STANDARD_CAN_MAKE;
 	}
 
 	public void reduceCountOfRemain() {

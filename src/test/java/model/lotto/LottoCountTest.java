@@ -60,7 +60,7 @@ public class LottoCountTest {
 		LottoCount lottoCount = new LottoCount("1000");
 		lottoCount.reduceCountOfRemain();
 
-		assertThat(lottoCount.isZero()).isTrue();
+		assertThat(lottoCount.haveRemainToMake()).isFalse();
 	}
 
 	@Test
