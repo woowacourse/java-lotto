@@ -16,7 +16,7 @@ public class Lotto {
 
     public static Lotto generateNumber() {
         List<LottoNumber> lottoRange = new ArrayList<>();
-        for (int number = LottoNumber.getMinLottoNumber(); number <= LottoNumber.getMaxLottoNumber(); number++) {
+        for (int number = LottoNumber.MIN_LOTTO_NUMBER; number <= LottoNumber.MAX_LOTTO_NUMBER; number++) {
             lottoRange.add(LottoNumber.from(number));
         }
         Collections.shuffle(lottoRange);
