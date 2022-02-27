@@ -31,5 +31,7 @@
 
 * 일급컬렉션을 OutputView로 넘겼을 때, getCollection()으로 내부의 컬렉션을 가져와서 print를 해야함
 * 파라미터로 RankBoard와 profitRatio를 넘기는 이유는, profit을 계산하는 책임을 OutputView에 두면 이상해서
+* 픽스처에 정의한 클래스의 이름에 Fixture라는 이름이 들어가야할까?
+  * 이유: 다른 사람이 테스트 코드를 읽을 때, 이게 테스트용 클래스인지 프로덕션 클래스인지 확인하려면 테스트 패키지를 직접 확인해야함
 
 WinningNumber가 사실상 LottoNumbers랑 같음, 비즈니스 상 개념적 의미만 다름

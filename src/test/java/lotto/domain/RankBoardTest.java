@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.fixture.LottoGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,7 +19,7 @@ class RankBoardTest {
 
     @BeforeEach
     void setUp() {
-        Lotto winningNumbers = Lotto.of(List.of(1, 2, 3, 4, 5, 6));
+        Lotto winningNumbers = LottoGenerator.valueOf(1, 2, 3, 4, 5, 6);
         LottoNumber bonusNumber = new LottoNumber(7);
         winningLotto = new WinningLotto(winningNumbers, bonusNumber);
     }
