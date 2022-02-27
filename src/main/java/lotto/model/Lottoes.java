@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Function;
-import java.util.stream.Stream;
 
 public class Lottoes implements Iterable<Lotto>{
 
@@ -19,10 +18,6 @@ public class Lottoes implements Iterable<Lotto>{
 
     public <R> Collection<R> mapAndCollect(Function<Lotto, R> mapper) {
         return lottoes.stream().map(mapper).collect(toUnmodifiableList());
-    }
-
-    public Stream<Lotto> stream() {
-        return lottoes.stream();
     }
 
     public int size() {
