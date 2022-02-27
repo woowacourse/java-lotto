@@ -1,5 +1,6 @@
 package model.winningnumber;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -64,12 +65,8 @@ public class LottoWinningNumber {
         }
     }
 
-    public LottoWinningNumberDTO getWinningNumbersDTO() {
-        return new LottoWinningNumberDTO(this.winningNumbers);
-    }
-
     public Set<Integer> getWinningNumbers() {
-        return winningNumbers;
+        return Collections.unmodifiableSet(winningNumbers);
     }
 
     @Override

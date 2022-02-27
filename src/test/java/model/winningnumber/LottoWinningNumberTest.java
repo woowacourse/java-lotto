@@ -6,11 +6,12 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import model.exception.WinningNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import model.exception.WinningNumberException;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;

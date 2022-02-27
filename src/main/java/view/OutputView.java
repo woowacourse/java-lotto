@@ -18,10 +18,9 @@ public class OutputView {
         printMessage(message);
     }
 
-    public void printLottos(List<LottoDTO> lottoStorageDTO) {
-        printMessage(lottoStorageDTO.size() + PURCHASE_MESSAGE);
-        lottoStorageDTO
-                .forEach(lottoDTO -> System.out.println(lottoDTO.getNumbers()));
+    public void printLottos(List<LottoDTO> lottoStorage) {
+        printMessage(lottoStorage.size() + PURCHASE_MESSAGE);
+        lottoStorage.forEach(lottoDTO -> System.out.println(lottoDTO.getNumbers()));
     }
 
     public void printResultMessage() {

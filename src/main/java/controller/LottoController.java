@@ -13,7 +13,7 @@ public class LottoController {
     public void playGame() {
         LottoGame lottoGame = new LottoGame();
         LottoStorage lottoStorage = makeLottos(lottoGame);
-        outputView.printLottos(lottoStorage.getLottoStorageDTO());
+        outputView.printLottos(lottoStorage.getLottoStorage());
         receiveWinningNumbers(lottoGame);
         receiveBonusBall(lottoGame);
 

@@ -3,10 +3,12 @@ package model.lotto;
 import java.util.List;
 
 import model.bonusball.BonusBall;
+import model.bonusball.BonusBallDTO;
 import model.result.Rank;
 import model.result.RateOfReturn;
 import model.result.WinningResult;
 import model.winningnumber.LottoWinningNumber;
+import model.winningnumber.LottoWinningNumberDTO;
 import view.OutputView;
 
 public class LottoGame {
@@ -38,7 +40,8 @@ public class LottoGame {
     }
 
     public WinningResult calcLottoWithWinningNumber() {
-        return lottoStorage.calcWinningNumber(bonusBall.getBonusBallDTO(), lottoWinningNumber.getWinningNumbersDTO());
+        return lottoStorage.calcWinningNumber(new BonusBallDTO(bonusBall.getNumber()),
+                new LottoWinningNumberDTO(lottoWinningNumber.getWinningNumbers()));
     }
 
     public double showResult(WinningResult winningResult) {

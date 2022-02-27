@@ -19,10 +19,6 @@ public class BonusBall {
         return Integer.parseInt(number);
     }
 
-    public BonusBallDTO getBonusBallDTO() {
-        return new BonusBallDTO(number);
-    }
-
     public int getNumber() {
         return number;
     }

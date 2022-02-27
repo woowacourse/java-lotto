@@ -1,6 +1,7 @@
 package model.lotto;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
@@ -49,8 +50,8 @@ public class Lotto {
                 .forEach(winningResult::addCount);
     }
 
-    public LottoDTO getLottoDTO() {
-        return new LottoDTO(numbers);
+    public Set<Integer> getNumbers() {
+        return Collections.unmodifiableSet(numbers);
     }
 
     @Override

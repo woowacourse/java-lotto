@@ -1,6 +1,7 @@
 package model.lotto;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import model.result.WinningResult;
@@ -24,10 +25,10 @@ public class LottoStorage {
         return lottos;
     }
 
-    public List<LottoDTO> getLottoStorageDTO() {
-        List<LottoDTO> lottoDTOS = new ArrayList<>();
-        lottoStorage.forEach(lotto -> lottoDTOS.add(lotto.getLottoDTO()));
-        return lottoDTOS;
+    public List<LottoDTO> getLottoStorage() {
+        final List<LottoDTO> lottoDTOS = new ArrayList<>();
+        lottoStorage.forEach(lotto -> lottoDTOS.add(new LottoDTO(lotto.getNumbers())));
+        return Collections.unmodifiableList(lottoDTOS);
     }
 
     public WinningResult calcWinningNumber(BonusBallDTO bonusBallDTO, LottoWinningNumberDTO winningNumbersDTO) {
