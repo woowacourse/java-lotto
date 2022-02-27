@@ -16,12 +16,14 @@ public class LottoResult {
     }
 
     public double calculateYield(Money money) {
-        double totalPrizeMoney = ranks.keySet()
+        return Math.floor(getTotalPrizeMoney() / money.getPrice() * FLOOR_STANDARD) / FLOOR_AFTER_TREATMENT;
+    }
+
+    private double getTotalPrizeMoney() {
+        return ranks.keySet()
                 .stream()
                 .mapToDouble(Rank::getPrizeMoney)
                 .sum();
-
-        return Math.floor(totalPrizeMoney / money.getPrice() * FLOOR_STANDARD) / FLOOR_AFTER_TREATMENT;
     }
 
     public Map<Rank, Long> getRanks() {
