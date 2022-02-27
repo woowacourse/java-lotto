@@ -4,11 +4,14 @@ import static utils.Messages.BONUS_DUPLICATED_ERROR_MESSAGE;
 import static utils.Messages.LOTTO_NUMS_DUPLICATED_ERROR_MESSAGE;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import utils.Separator;
+import java.util.stream.Collectors;
 
 public class WinLottoNumbers {
+
+    private static final String REGEX = ", ";
 
     private final List<LottoNumber> lottoNumbers;
     private final LottoNumber bonus;
@@ -24,13 +27,20 @@ public class WinLottoNumbers {
     }
 
     public static WinLottoNumbers of(String lottoNumbersText, int bonus) {
-        List<Integer> numbers = Separator.splitStringToListInt(lottoNumbersText);
+        List<Integer> numbers = splitLottoTextToNumbers(lottoNumbersText);
         return new WinLottoNumbers(numbers, bonus);
     }
 
     private static void validate(List<Integer> numbers, int bonus) {
         isNotDuplicated(numbers);
         isBonusNumberNotDuplicated(numbers, bonus);
+    }
+
+    public static List<Integer> splitLottoTextToNumbers(String input) {
+        return Arrays.stream(input.split(REGEX))
+            .mapToInt(Integer::parseInt)
+            .boxed()
+            .collect(Collectors.toList());
     }
 
     private static void isBonusNumberNotDuplicated(List<Integer> numbers, int bonus) {
