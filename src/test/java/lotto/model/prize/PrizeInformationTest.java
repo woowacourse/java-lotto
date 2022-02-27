@@ -23,9 +23,9 @@ public class PrizeInformationTest {
 		lotto = new Lotto(lottoNumbers);
 	}
 
-    @DisplayName("5등이 3장 당첨됐을때 당첨금은 15000원이다")
-    @Test
-    void pickAmount_5th_3() {
+	@DisplayName("5등이 3장 당첨됐을때 당첨금은 15000원이다")
+	@Test
+	void pickAmount_5th_3() {
 		WinningNumbers winningNumbers = WinningNumbers.from(Arrays.asList("1", "2", "3", "7", "8", "9"));
 		BonusNumber bonusNumber = BonusNumber.from("10", winningNumbers);
 		MatchResult matchResult = MatchResult.of(lotto, winningNumbers, bonusNumber);
@@ -34,14 +34,14 @@ public class PrizeInformationTest {
 			matchResults.add(matchResult);
 		}
 
-        PrizeInformation prizeInformation = PrizeInformation.of(matchResults, Prize.FIFTH);
+		PrizeInformation prizeInformation = PrizeInformation.of(matchResults, Prize.FIFTH);
 
-        assertThat(prizeInformation.pickAmount()).isEqualTo(15000);
-    }
+		assertThat(prizeInformation.pickAmount()).isEqualTo(15000);
+	}
 
-    @DisplayName("5등이 2장 당첨됐을때 당첨금은 10000원이다")
-    @Test
-    void pickAmount_5th_2() {
+	@DisplayName("5등이 2장 당첨됐을때 당첨금은 10000원이다")
+	@Test
+	void pickAmount_5th_2() {
 		WinningNumbers winningNumbers = WinningNumbers.from(Arrays.asList("1", "2", "3", "7", "8", "9"));
 		BonusNumber bonusNumber = BonusNumber.from("10", winningNumbers);
 		MatchResult matchResult = MatchResult.of(lotto, winningNumbers, bonusNumber);
@@ -52,12 +52,12 @@ public class PrizeInformationTest {
 
 		PrizeInformation prizeInformation = PrizeInformation.of(matchResults, Prize.FIFTH);
 
-        assertThat(prizeInformation.pickAmount()).isEqualTo(10000);
-    }
+		assertThat(prizeInformation.pickAmount()).isEqualTo(10000);
+	}
 
-    @DisplayName("4등이 3장 당첨됐을때 당첨금은 150000원이다")
-    @Test
-    void pickAmount_4th_3() {
+	@DisplayName("4등이 3장 당첨됐을때 당첨금은 150000원이다")
+	@Test
+	void pickAmount_4th_3() {
 		WinningNumbers winningNumbers = WinningNumbers.from(Arrays.asList("1", "2", "3", "4", "8", "9"));
 		BonusNumber bonusNumber = BonusNumber.from("10", winningNumbers);
 		MatchResult matchResult = MatchResult.of(lotto, winningNumbers, bonusNumber);
@@ -68,6 +68,6 @@ public class PrizeInformationTest {
 
 		PrizeInformation prizeInformation = PrizeInformation.of(matchResults, Prize.FOURTH);
 
-        assertThat(prizeInformation.pickAmount()).isEqualTo(150000);
-    }
+		assertThat(prizeInformation.pickAmount()).isEqualTo(150000);
+	}
 }
