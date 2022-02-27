@@ -1,25 +1,35 @@
 package domain;
 
 import java.util.List;
-
-import domain.strategy.TicketGenerator;
+import java.util.stream.Collectors;
 
 public class Ticket {
-	private final Balls balls;
+	private final List<Ball> balls;
 
-	public Ticket(TicketGenerator ticketGenerator) {
-		final List<Integer> numbers = ticketGenerator.generate();
-		this.balls = new Balls(numbers);
+	public Ticket(final List<Integer> numbers) {
+		this.balls = makeNumbersToBalls(numbers);
 	}
 
-	public Rank getRank(Balls answer, Ball bonusBall) {
-		int matchCount = balls.countMatches(answer);
-		boolean bonusBallMatched = this.balls.contains(bonusBall);
+	private List<Ball> makeNumbersToBalls(List<Integer> numbers) {
+		return numbers.stream()
+			.map(Ball::new)
+			.collect(Collectors.toUnmodifiableList());
+	}
+
+	public Rank getRank(WinningNumber winningNumber) {
+		int matchCount = countMatch(winningNumber.getWinningBalls());
+		boolean bonusBallMatched = false;
+
+		if(matchCount == 5) {
+			bonusBallMatched = balls.contains(winningNumber.getBonusBall());
+		}
 
 		return Rank.of(matchCount, bonusBallMatched);
 	}
 
-	public List<Integer> getBallNumbers() {
-		return balls.getBallNumbers();
+	private int countMatch(List<Ball> balls) {
+		return (int)balls.stream()
+			.filter(this.balls::contains)
+			.count();
 	}
 }

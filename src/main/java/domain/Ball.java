@@ -12,7 +12,6 @@ public class Ball {
 
 	public Ball(int number) {
 		validateNumberIsInRange(number);
-
 		this.number = number;
 	}
 

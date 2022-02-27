@@ -10,31 +10,28 @@ import domain.strategy.TicketGenerator;
 public class Tickets {
 	private final List<Ticket> tickets;
 
-	public Tickets(int count, TicketGenerator ticketGenerator) {
-		this.tickets = generateTickets(count, ticketGenerator);
+	public Tickets() {
+		this.tickets = new ArrayList<>();
 	}
 
-	private List<Ticket> generateTickets(int count, TicketGenerator ticketGenerator) {
-		List<Ticket> tickets = new ArrayList<>();
-		for (int i = 0; i < count; i++) {
-			tickets.add(new Ticket(ticketGenerator));
+	public void makeTickets(int count, TicketGenerator ticketGenerator) {
+		for(int i = 0; i < count; i++) {
+			tickets.add(new Ticket(ticketGenerator.generate()));
 		}
-
-		return tickets;
 	}
 
-	public List<Rank> getRanks(Balls answer, Ball bonusBall) {
+	public List<Rank> getRanks(WinningNumber winningNumber) {
 		return tickets.stream()
-			.map(ticket -> ticket.getRank(answer, bonusBall))
+			.map(ticket -> ticket.getRank(winningNumber))
 			.filter(Objects::nonNull)
 			.collect(Collectors.toUnmodifiableList());
 	}
 
-	public int getSize() {
-		return tickets.size();
+	public List<Ticket> getTickets() {
+		return tickets;
 	}
 
-	public List<Ticket> getTickets() {
-		return new ArrayList<>(tickets);
+	public int size() {
+		return tickets.size();
 	}
 }

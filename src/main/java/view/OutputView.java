@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import domain.Rank;
 import domain.Ticket;
 import domain.Tickets;
-import dto.AnalysisDto;
 
 public class OutputView {
 	private static final String COUNT_MESSAGE = "개를 구매했습니다.";
@@ -23,59 +22,5 @@ public class OutputView {
 
 	private static final String ORIGIN_TICKET_DELIMITER = ",";
 
-	public static void printTickets(Tickets tickets) {
-		printTicketCount(tickets);
 
-		tickets.getTickets()
-			.stream()
-			.map(OutputView::makeTicketFormat)
-			.forEach(System.out::println);
-
-		System.out.println();
-	}
-
-	private static void printTicketCount(Tickets tickets) {
-		System.out.println(tickets.getSize() + COUNT_MESSAGE);
-	}
-
-	private static String makeTicketFormat(Ticket ticket) {
-		List<String> ticketBalls = ticket.getBallNumbers()
-			.stream()
-			.map(String::valueOf)
-			.collect(Collectors.toUnmodifiableList());
-
-		return START_SIGN + String.join(ORIGIN_TICKET_DELIMITER, ticketBalls) + END_SIGN;
-	}
-
-	public static void printAnalysis(AnalysisDto analysisDto) {
-		System.out.println(ANALYSIS_TITLE);
-		System.out.println(DIVIDING_LINE);
-
-		printRankCount(analysisDto.getRankCounts());
-		printProfitRate(analysisDto.getRate());
-	}
-
-	private static void printRankCount(Map<Rank, Integer> rankCounts) {
-		for (Rank rank : rankCounts.keySet()) {
-			int count = rankCounts.get(rank);
-			String message = String.format(ANALYSIS_MATCH_COUNT_MESSAGE, rank.getMatchCount());
-
-			checkBonusBall(rank, message);
-
-			message += String.format(ANALYSIS_PRIZE_COUNT_MESSAGE, rank.getPrize(), count);
-			System.out.println(message);
-		}
-	}
-
-	private static String checkBonusBall(Rank rank, String message) {
-		if (rank.getBonusBallMatched()) {
-			message += ANALYSIS_BONUS_BALL_COUNT_MESSAGE;
-		}
-
-		return message;
-	}
-
-	private static void printProfitRate(double profitRate) {
-		System.out.printf(PROFIT_RATE_MESSAGE_FORMAT, profitRate);
-	}
 }

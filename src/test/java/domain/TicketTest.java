@@ -11,27 +11,50 @@ import org.junit.jupiter.api.Test;
 
 class TicketTest {
 
-	private final CustomTicketGenerator customTicketGenerator = new CustomTicketGenerator();
-
-	@DisplayName("로또 생성 테스트")
+	@DisplayName("볼들이 생성되는지 테스트")
 	@Test
-	void initTest() {
+	void constructorTest() {
 		List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-		customTicketGenerator.initNumbers(Arrays.asList(numbers));
 
-		assertDoesNotThrow(() -> new Ticket(customTicketGenerator));
+		assertDoesNotThrow(() -> new Ticket(numbers));
 	}
 
-	@DisplayName("당첨번호와 일치 갯수 확인 테스트")
+	@DisplayName("1등일 때 랭크 값 반환 테스트")
 	@Test
-	void countTest() {
+	void getFistRank() {
 		List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-		customTicketGenerator.initNumbers(Arrays.asList(numbers));
+		Ticket ticket = new Ticket(numbers);
 
-		Ticket ticket = new Ticket(customTicketGenerator);
+		List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+		int bonusBall = 7;
+		WinningNumber winningNumber = new WinningNumber(winningNumbers, bonusBall);
 
-		Balls answer = new Balls(numbers);
+		assertThat(ticket.getRank(winningNumber)).isEqualTo(Rank.FIRST_GRADE);
+	}
 
-		assertThat(ticket.getRank(answer, new Ball(7))).isEqualTo(Rank.FIRST_GRADE);
+	@DisplayName("2등일 때 랭크 값 반환 테스트")
+	@Test
+	void getSecondRank() {
+		List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 7);
+		Ticket ticket = new Ticket(numbers);
+
+		List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+		int bonusBall = 7;
+		WinningNumber winningNumber = new WinningNumber(winningNumbers, bonusBall);
+
+		assertThat(ticket.getRank(winningNumber)).isEqualTo(Rank.SECOND_GRADE);
+	}
+
+	@DisplayName("3등일 때 랭크 값 반환 테스트")
+	@Test
+	void getThirdRank() {
+		List<Integer> numbers = Arrays.asList(2, 1, 3, 4, 5, 8);
+		Ticket ticket = new Ticket(numbers);
+
+		List<Integer> winningNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+		int bonusBall = 7;
+		WinningNumber winningNumber = new WinningNumber(winningNumbers, bonusBall);
+
+		assertThat(ticket.getRank(winningNumber)).isEqualTo(Rank.THIRD_GRADE);
 	}
 }

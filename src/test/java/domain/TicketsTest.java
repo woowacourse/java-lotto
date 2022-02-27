@@ -1,44 +1,40 @@
 package domain;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import domain.strategy.RandomTicketGenerator;
-
 class TicketsTest {
+	private SetUpTicketsAndWinningNumber setUpTicketsAndWinningNumber;
 
-	private final CustomTicketGenerator customTicketGenerator = new CustomTicketGenerator();
+	private Tickets tickets;
+	private WinningNumber winningNumber;
 
-	@DisplayName("로또목록 생성 테스트")
+	@BeforeEach
+	void setUp() {
+		setUpTicketsAndWinningNumber = new SetUpTicketsAndWinningNumber();
+		setUpTicketsAndWinningNumber.setUp();
+
+		tickets = setUpTicketsAndWinningNumber.getTickets();
+		winningNumber = setUpTicketsAndWinningNumber.getWinningNumber();
+	}
+
+	@DisplayName("개수에 맞게 로또가 생성되는지 테스트")
 	@Test
-	void initTest() {
-		assertDoesNotThrow(() -> new Tickets(14, new RandomTicketGenerator()));
+	void sizeTest() {
+		assertThat(tickets.getTickets().size()).isEqualTo(14);
 	}
 
 	@DisplayName("로또목록 등수 확인 테스트")
 	@Test
-	void getRanksTest() {
-		List<List<Integer>> numbers = new ArrayList<>();
-		numbers.add(Arrays.asList(1, 2, 3, 8, 9, 10));
-		numbers.add(Arrays.asList(1, 2, 3, 8, 9, 45));
-		numbers.add(Arrays.asList(11, 12, 13, 14, 15, 16));
-		customTicketGenerator.initNumbers(numbers);
-
-		Tickets tickets = new Tickets(3, customTicketGenerator);
-
-		List<Integer> answerNumbers = Arrays.asList(1, 2, 3, 8, 9, 10);
-		Balls answerBalls = new Balls(answerNumbers);
-		Ball bonusBall = new Ball(45);
-
-		List<Rank> actual = tickets.getRanks(answerBalls, bonusBall);
-		List<Rank> expected = Arrays.asList(Rank.FIRST_GRADE, Rank.SECOND_GRADE);
+	void rankTest() {
+		List<Rank> actual = tickets.getRanks(winningNumber);
+		List<Rank> expected = Arrays.asList(Rank.FIFTH_GRADE);
 
 		assertThat(actual).isEqualTo(expected);
 	}

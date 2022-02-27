@@ -16,34 +16,5 @@ public class InputView {
 
 	private static final Scanner scanner = new Scanner(System.in);
 
-	public static int getPayment() {
-		System.out.println(INPUT_PAYMENT_MESSAGE);
 
-		return parseNumber(scanner.nextLine());
-	}
-
-	private static int parseNumber(String text) {
-		try {
-			return Integer.parseInt(text);
-
-		} catch (NumberFormatException ex) {
-			throw new IllegalArgumentException(PAYMENT_IS_NOT_NUMERIC_EXCEPTION);
-		}
-	}
-
-	public static List<Integer> getAnswerNumbers() {
-		System.out.println(INPUT_ANSWER_NUMBERS_MESSAGE);
-		String inputValue = scanner.nextLine();
-
-		return Arrays.stream(inputValue.split(INPUT_ANSWER_DELIMITER, -1))
-			.map(String::trim)
-			.map(InputView::parseNumber)
-			.collect(Collectors.toUnmodifiableList());
-	}
-
-	public static int getBonusBall() {
-		System.out.println(INPUT_BONUS_BALL_MESSAGE);
-
-		return parseNumber(scanner.nextLine());
-	}
 }
