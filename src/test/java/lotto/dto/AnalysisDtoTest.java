@@ -2,7 +2,6 @@ package lotto.dto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -43,7 +42,7 @@ class AnalysisDtoTest {
         return Stream.of(
                 Arguments.of(
                         Named.of("5등 1개",
-                                Arrays.asList(
+                                List.of(
                                         Rank.FIFTH_GRADE
                                 )
                         ), 50000,
@@ -57,7 +56,7 @@ class AnalysisDtoTest {
                 ),
                 Arguments.of(
                         Named.of("2등 1개, 4등 2개, 5등 2개",
-                                Arrays.asList(
+                                List.of(
                                         Rank.FOURTH_GRADE,
                                         Rank.FIFTH_GRADE,
                                         Rank.SECOND_GRADE,

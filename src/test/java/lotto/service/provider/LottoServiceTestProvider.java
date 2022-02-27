@@ -1,6 +1,6 @@
 package lotto.service.provider;
 
-import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -15,23 +15,23 @@ public class LottoServiceTestProvider {
     public static Stream<Arguments> provideForGenerateTicketsTest() {
         return Stream.of(
                 Arguments.of(
-                        Arrays.asList(
-                                new TicketDto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                                new TicketDto(Arrays.asList(1, 2, 3, 4, 5, 7)),
-                                new TicketDto(Arrays.asList(1, 2, 3, 4, 15, 16)),
-                                new TicketDto(Arrays.asList(1, 2, 3, 14, 15, 16)),
-                                new TicketDto(Arrays.asList(1, 2, 13, 14, 15, 16))
+                        List.of(
+                                new TicketDto(List.of(1, 2, 3, 4, 5, 6)),
+                                new TicketDto(List.of(1, 2, 3, 4, 5, 7)),
+                                new TicketDto(List.of(1, 2, 3, 4, 15, 16)),
+                                new TicketDto(List.of(1, 2, 3, 14, 15, 16)),
+                                new TicketDto(List.of(1, 2, 13, 14, 15, 16))
                         ), 5000
                 ),
                 Arguments.of(
-                        Arrays.asList(
-                                new TicketDto(Arrays.asList(1, 2, 3, 14, 15, 16)),
-                                new TicketDto(Arrays.asList(1, 2, 13, 14, 15, 16))
+                        List.of(
+                                new TicketDto(List.of(1, 2, 3, 14, 15, 16)),
+                                new TicketDto(List.of(1, 2, 13, 14, 15, 16))
                         ), 2000
                 ),
                 Arguments.of(
-                        Arrays.asList(
-                                new TicketDto(Arrays.asList(1, 2, 13, 14, 15, 16))
+                        List.of(
+                                new TicketDto(List.of(1, 2, 13, 14, 15, 16))
                         ), 1000
                 )
         );
@@ -40,10 +40,10 @@ public class LottoServiceTestProvider {
     public static Stream<Arguments> provideForGenerateAnalysisTest() {
         return Stream.of(
                 Arguments.of(
-                        Arrays.asList(
-                                new TicketDto(Arrays.asList(1, 2, 13, 14, 15, 16))
+                        List.of(
+                                new TicketDto(List.of(1, 2, 13, 14, 15, 16))
                         ), 1000,
-                        new WinningTicketDto(Arrays.asList(1, 2, 3, 4, 5, 6), 7),
+                        new WinningTicketDto(List.of(1, 2, 3, 4, 5, 6), 7),
                         Map.of(
                                 Rank.FIRST_GRADE, 0,
                                 Rank.SECOND_GRADE, 0,
@@ -53,14 +53,14 @@ public class LottoServiceTestProvider {
                         ), "0.00"
                 ),
                 Arguments.of(
-                        Arrays.asList(
-                                new TicketDto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                                new TicketDto(Arrays.asList(1, 2, 3, 4, 5, 7)),
-                                new TicketDto(Arrays.asList(1, 2, 3, 4, 5, 7)),
-                                new TicketDto(Arrays.asList(1, 2, 3, 14, 15, 16)),
-                                new TicketDto(Arrays.asList(1, 2, 13, 14, 15, 16))
+                        List.of(
+                                new TicketDto(List.of(1, 2, 3, 4, 5, 6)),
+                                new TicketDto(List.of(1, 2, 3, 4, 5, 7)),
+                                new TicketDto(List.of(1, 2, 3, 4, 5, 7)),
+                                new TicketDto(List.of(1, 2, 3, 14, 15, 16)),
+                                new TicketDto(List.of(1, 2, 13, 14, 15, 16))
                         ), 5000,
-                        new WinningTicketDto(Arrays.asList(1, 2, 3, 4, 5, 6), 7),
+                        new WinningTicketDto(List.of(1, 2, 3, 4, 5, 6), 7),
                         Map.of(
                                 Rank.FIRST_GRADE, 1,
                                 Rank.SECOND_GRADE, 2,
@@ -70,12 +70,12 @@ public class LottoServiceTestProvider {
                         ), "412001000.00"
                 ),
                 Arguments.of(
-                        Arrays.asList(
-                                new TicketDto(Arrays.asList(1, 2, 3, 14, 15, 16)),
-                                new TicketDto(Arrays.asList(1, 2, 13, 14, 15, 16)),
-                                new TicketDto(Arrays.asList(10, 11, 12, 15, 16, 18))
+                        List.of(
+                                new TicketDto(List.of(1, 2, 3, 14, 15, 16)),
+                                new TicketDto(List.of(1, 2, 13, 14, 15, 16)),
+                                new TicketDto(List.of(10, 11, 12, 15, 16, 18))
                         ), 3000,
-                        new WinningTicketDto(Arrays.asList(1, 2, 3, 4, 5, 6), 7),
+                        new WinningTicketDto(List.of(1, 2, 3, 4, 5, 6), 7),
                         Map.of(
                                 Rank.FIRST_GRADE, 0,
                                 Rank.SECOND_GRADE, 0,

@@ -4,9 +4,10 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
 
-import lotto.domain.ticket.Ticket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import lotto.domain.ticket.Ticket;
 
 class RandomTicketGeneratorTest {
 
@@ -29,9 +30,9 @@ class RandomTicketGeneratorTest {
     void rangeTest() {
         final Ticket ticket = ticketGenerator.generateTicket();
         final List<Integer> ballNumbers = ticket.getBallNumbers();
-        ballNumbers.forEach(number -> {
-            assertThat(number).isBetween(TICKET_NUMBER_RANGE_INCLUSIVE_START, TICKET_NUMBER_RANGE_EXCLUSIVE_END);
-        });
+        ballNumbers.forEach(number ->
+            assertThat(number).isBetween(TICKET_NUMBER_RANGE_INCLUSIVE_START, TICKET_NUMBER_RANGE_EXCLUSIVE_END)
+        );
     }
 
 }
