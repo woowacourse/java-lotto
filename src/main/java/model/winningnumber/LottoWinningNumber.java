@@ -10,6 +10,7 @@ import utils.InputValidateUtils;
 
 public class LottoWinningNumber {
     private static final int WINNING_NUMBER_SIZE = 6;
+    private static final String CONCAT = "";
 
     private final Set<Integer> winningNumbers;
 
@@ -29,7 +30,7 @@ public class LottoWinningNumber {
     }
 
     private String makeNumbersToString(List<String> numbers) {
-        return String.join("", numbers);
+        return String.join(CONCAT, numbers);
     }
 
     private void validateNumberOutOfRange(List<String> numbers) {

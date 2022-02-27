@@ -6,7 +6,9 @@ import model.exception.LottoCountException;
 import utils.InputValidateUtils;
 
 public class LottoCount {
-    private static final int ZERO = 0;
+    private static final int NON_REMAINDER = 0;
+    private static final int END = 0;
+    private static final int NOTHING = 0;
     private static final int UNIT = 1000;
 
     private int count;
@@ -24,19 +26,19 @@ public class LottoCount {
     }
 
     private void validateThousandUnitInputMoney(String money) {
-        if (Integer.parseInt(money) % UNIT != 0) {
+        if (Integer.parseInt(money) % UNIT != NON_REMAINDER) {
             throw new IllegalArgumentException(LottoCountException.UNIT_ERROR.getMassage());
         }
     }
 
     private void validateInputZero(String money) {
-        if (Integer.parseInt(money) == 0) {
+        if (Integer.parseInt(money) == NOTHING) {
             throw new IllegalArgumentException(LottoCountException.LOWER_THAN_THOUSAND.getMassage());
         }
     }
 
     public boolean isZero() {
-        return count == ZERO;
+        return count == END;
     }
 
     public void makeLotto() {
